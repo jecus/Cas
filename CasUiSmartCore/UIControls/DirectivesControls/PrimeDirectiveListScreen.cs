@@ -1,0 +1,1814 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Windows.Forms;
+using AvControls;
+using CAS.UI.Interfaces;
+using CAS.UI.Management.Dispatchering;
+using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.Auxiliary.Importing;
+using CAS.UI.UIControls.FiltersControls;
+using CAS.UI.UIControls.ForecastControls;
+using CAS.UI.UIControls.PurchaseControls;
+using CAS.UI.UIControls.WorkPakage;
+using CASReports.Builders;
+using CASTerms;
+using SmartCore.Calculations;
+using SmartCore.Entities.Collections;
+using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General;
+using SmartCore.Entities.General.Accessory;
+using SmartCore.Entities.General.Directives;
+using SmartCore.Entities.General.Interfaces;
+using SmartCore.Entities.General.Store;
+using SmartCore.Entities.General.WorkPackage;
+using SmartCore.Filters;
+using SmartCore.Purchase;
+using TempUIExtentions;
+using Point = System.Drawing.Point;
+
+namespace CAS.UI.UIControls.DirectivesControls
+{
+    ///<summary>
+    ///</summary>
+    [ToolboxItem(false)]
+    public partial class PrimeDirectiveListScreen : ScreenControl
+    {
+        #region Fields
+
+        private readonly ADType _adType;
+        private DirectiveType _currentPrimaryDirectiveType;
+        private ICommonCollection<Directive> _initialDirectiveArray = new DirectiveCollection();
+        private ICommonCollection<Directive> _resultDirectiveArray = new CommonCollection<Directive>();
+        private CommonCollection<WorkPackage> _openPubWorkPackages = new CommonCollection<WorkPackage>();
+        private CommonCollection<RequestForQuotation> _openPubQuotations = new CommonCollection<RequestForQuotation>();
+
+        private Aircraft _currentAircraft;
+        private BaseComponent _currentBaseComponent;
+        private Forecast _currentForecast;
+
+        private PrimeDirectiveListView _directivesViewer;
+
+        private CommonFilterCollection _filter;
+
+        private DirectivesReportBuilder _builder;
+        private DirectivesReportBuilderLitAVIA _builderLitAVIA;
+        private DirectivesReportBuilderLitAVIAEng _builderLitAviaEng;
+		private DirectivesAMReportBuilder _amReportBuilder = new DirectivesAMReportBuilder();
+
+		private ContextMenuStrip buttonPrintMenuStrip;
+	    private ToolStripMenuItem itemPrintReportAD;
+	    private ToolStripMenuItem itemPrintReportAMP;
+	    private ToolStripMenuItem itemPrintReportADLitAVIA;
+	    private ToolStripMenuItem itemPrintReportADLitAVIAEng;
+
+
+		private ContextMenuStrip _contextMenuStrip;
+        private ToolStripMenuItem _toolStripMenuItemOpen;
+        private ToolStripMenuItem _toolStripMenuItemComposeWorkPackage;
+        private ToolStripMenuItem _toolStripMenuItemComposeQuotationOrder;
+        private ToolStripMenuItem _toolStripMenuItemCopy;
+        private ToolStripMenuItem _toolStripMenuItemPaste;
+        private ToolStripMenuItem _toolStripMenuItemDelete;
+        private ToolStripMenuItem _toolStripMenuItemHighlight;
+        private ToolStripMenuItem _toolStripMenuItemShowADFile;
+        private ToolStripMenuItem _toolStripMenuItemShowSBFile;
+        private ToolStripMenuItem _toolStripMenuItemShowEOFile;
+        private ToolStripSeparator _toolStripSeparator1;
+        private ToolStripSeparator _toolStripSeparator2;
+        private ToolStripSeparator _toolStripSeparator4;
+        private ToolStripMenuItem _toolStripMenuItemsWorkPackages;
+        private ToolStripMenuItem _toolStripMenuItemQuotations;
+
+        #endregion
+
+        #region Properties
+        /// <summary>
+        /// Контейнер директив
+        /// </summary>
+        private object DirectiveSource
+        {
+            get
+            {
+                if (_currentBaseComponent != null)
+                    return _currentBaseComponent;
+                return CurrentAircraft;
+            }
+        }
+
+        #endregion
+
+        #region Constructors
+
+        #region public PrimeDirectiveListScreen()
+        ///<summary>
+        /// Конструктор по умолчанию
+        ///</summary>
+        public PrimeDirectiveListScreen()
+        {
+            InitializeComponent();
+        }
+        #endregion
+
+        #region public PrimeDirectiveListScreen(BaseDetail baseDetail,PrimaryDirectiveType primaryDirectiveType, ADType adType = ADType.None) : this()
+
+        ///<summary>
+        /// Создаёт экземпляр элемента управления, отображающего список директив
+        ///</summary>
+        ///<param name="baseComponentазовый агрегат, которому принадлежат директивы</param>
+        ///<param name="primaryDirectiveType"></param>
+        ///<param name="adType"></param>
+        public PrimeDirectiveListScreen(BaseComponent baseComponent,DirectiveType primaryDirectiveType, ADType adType = ADType.None)
+            : this()
+        {
+            if (baseComponent == null)
+                throw new ArgumentNullException("baseComponent", "Cannot display null-baseDetail");
+
+	        var parentAircraft = GlobalObjects.AircraftsCore.GetAircraftById(baseComponent.ParentAircraftId);//TODO:(Evgenii Babak) пересмотреть использование ParentAircrafId здесь
+	        var parentStore = GlobalObjects.StoreCore.GetStoreById(baseComponent.ParentStoreId);
+
+			if (parentAircraft != null)
+                CurrentAircraft = parentAircraft;
+			else CurrentStore = parentStore;
+			StatusTitle = baseComponent + " " + primaryDirectiveType.CommonName;
+
+            _currentBaseComponent = baseComponent;
+            _currentPrimaryDirectiveType = primaryDirectiveType;
+            _adType = adType;
+	        _builderLitAVIA = new DirectivesReportBuilderLitAVIA();
+	        _builderLitAviaEng = new DirectivesReportBuilderLitAVIAEng();
+			PrimeDirectiveListView directiveList;
+            if (primaryDirectiveType == DirectiveType.DamagesRequiring)
+            {
+                directiveList = new DamageDirectiveListView();
+                _filter = new CommonFilterCollection(typeof(DamageItem));
+#if KAC
+                _builder = new DirectivesReportBuilderKAC();
+#else
+                _builder = new DirectivesReportBuilder();
+#endif
+                _builder.ReportTitle = _currentPrimaryDirectiveType.CommonName;
+            }
+            else if (primaryDirectiveType == DirectiveType.DeferredItems)
+            {
+                directiveList = new DefferedDirectiveListView();
+                _filter = new CommonFilterCollection(typeof(DeferredItem));
+                _builder = new DeferredListReportBuilder();
+            }
+            else if (primaryDirectiveType == DirectiveType.ModificationStatus)
+            {
+                directiveList = new PrimeDirectiveListView(primaryDirectiveType);
+                buttonDeleteSelected.Visible = false;
+                _filter = new CommonFilterCollection(typeof(Directive));
+#if KAC
+                _builder = new DirectivesReportBuilderKAC();
+#else
+                _builder = new DirectivesReportBuilder();
+#endif
+                _builder.ReportTitle = _currentPrimaryDirectiveType.CommonName;
+            }
+            else if (primaryDirectiveType == DirectiveType.OutOfPhase)
+            {
+                directiveList = new OutOfPhaseDirectiveListView();
+                _filter = new CommonFilterCollection(typeof(Directive));
+#if KAC
+                _builder = new DirectivesReportBuilderKAC();
+#else
+                _builder = new DirectivesReportBuilder();
+#endif
+                _builder.ReportTitle = _currentPrimaryDirectiveType.CommonName;
+            }
+            else
+            {
+                directiveList = new PrimeDirectiveListView(primaryDirectiveType);
+                _filter = new CommonFilterCollection(typeof(Directive));
+#if KAC
+                _builder = new DirectivesReportBuilderKAC();
+                
+                if (primaryDirectiveType == DirectiveType.SB)
+                    _builder.ReportTitle = "SB Status";
+                else if (primaryDirectiveType == DirectiveType.AirworthenessDirectives)
+                    _builder.ReportTitle = adType == ADType.None ? "AD Status" : adType == ADType.Airframe ? "Airframe AD Status" : "Appliance AD \nStatus";
+                else _builder.ReportTitle = _currentPrimaryDirectiveType.CommonName;
+#else
+                _builder = new DirectivesReportBuilder();
+                _builder.ReportTitle = _currentPrimaryDirectiveType.CommonName;
+#endif
+            }
+#if !DEBUG
+            buttonImportExcel.Visible = false;
+            pictureBoxS3.Visible = false;
+#endif
+            InitToolStripMenuItems();
+	        InitPrintToolStripMenuItems();
+			InitListView(directiveList);
+        }
+
+        #endregion
+
+        #region public PrimeDirectiveListScreen(Aircraft currentAircraft, PrimaryDirectiveType primaryDirectiveType, ADType adType = ADType.None)
+
+        ///<summary>
+        /// Создаёт экземпляр элемента управления, отображающего список директив
+        ///</summary>
+        ///<param name="currentAircraft">ВС, которому принадлежат директивы</param>
+        ///<param name="primaryDirectiveType"></param>
+        ///<param name="adType"></param>
+        public PrimeDirectiveListScreen(Aircraft currentAircraft, DirectiveType primaryDirectiveType, ADType adType = ADType.None) : this()
+        {
+            if (currentAircraft == null)
+                throw new ArgumentNullException("currentAircraft");
+            CurrentAircraft = currentAircraft;
+            StatusTitle = currentAircraft.RegistrationNumber + " " + primaryDirectiveType.CommonName;
+
+            _currentAircraft = currentAircraft;
+            _currentPrimaryDirectiveType = primaryDirectiveType;
+            _adType = adType;
+
+            PrimeDirectiveListView directiveList;
+            if (primaryDirectiveType == DirectiveType.DamagesRequiring)
+            {
+                directiveList = new DamageDirectiveListView();
+                _filter = new CommonFilterCollection(typeof(DamageItem));
+#if KAC
+                _builder = new DirectivesReportBuilderKAC();
+#else
+                _builder = new DirectivesReportBuilder();
+#endif
+                _builder.ReportTitle = _currentPrimaryDirectiveType.CommonName;
+            }
+            else if (primaryDirectiveType == DirectiveType.DeferredItems)
+            {
+                directiveList = new DefferedDirectiveListView();
+                _filter = new CommonFilterCollection(typeof(DeferredItem));
+                _builder = new DeferredListReportBuilder();
+            }
+            else if (primaryDirectiveType == DirectiveType.ModificationStatus)
+            {
+                directiveList = new PrimeDirectiveListView(primaryDirectiveType);
+                buttonAddNew.Visible = false;
+                _filter = new CommonFilterCollection(typeof(Directive));
+#if KAC
+                _builder = new DirectivesReportBuilderKAC();
+#else
+                _builder = new DirectivesReportBuilder();
+#endif
+                _builder.ReportTitle = _currentPrimaryDirectiveType.CommonName;
+            }
+            else if (primaryDirectiveType == DirectiveType.OutOfPhase)
+            {
+                directiveList = new OutOfPhaseDirectiveListView();
+                _filter = new CommonFilterCollection(typeof(Directive));
+#if KAC
+                _builder = new DirectivesReportBuilderKAC();
+#else
+                _builder = new DirectivesReportBuilder();
+#endif
+                _builder.ReportTitle = _currentPrimaryDirectiveType.CommonName;
+            }
+            else
+            {
+                directiveList = new PrimeDirectiveListView(primaryDirectiveType);
+                _filter = new CommonFilterCollection(typeof(Directive));
+#if KAC
+                _builder = new DirectivesReportBuilderKAC();
+                if(primaryDirectiveType == DirectiveType.SB)
+                    _builder.ReportTitle = "SB Status";
+                else if(primaryDirectiveType == DirectiveType.AirworthenessDirectives)
+                    _builder.ReportTitle = adType == ADType.None ? "AD Status" : adType == ADType.Airframe ? "Airframe AD Status" : "Appliance AD \nStatus";
+                else _builder.ReportTitle = _currentPrimaryDirectiveType.CommonName;
+#else
+                _builder = new DirectivesReportBuilder();
+                _builder.ReportTitle = _currentPrimaryDirectiveType.CommonName;
+#endif
+            }
+#if !DEBUG
+            buttonImportExcel.Visible = false;
+            pictureBoxS3.Visible = false;
+#endif
+            InitToolStripMenuItems();
+	        InitPrintToolStripMenuItems();
+			InitListView(directiveList);
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Methods
+
+        #region public override void DisposeScreen()
+        public override void DisposeScreen()
+        {
+            if (AnimatedThreadWorker.IsBusy)
+                AnimatedThreadWorker.CancelAsync();
+
+            AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+            AnimatedThreadWorker.RunWorkerCompleted -= AnimatedThreadWorkerRunWorkerCompleted;
+
+            AnimatedThreadWorker.Dispose();
+
+            _resultDirectiveArray.Clear();
+            _resultDirectiveArray = null;
+
+            _initialDirectiveArray.Clear();
+            _initialDirectiveArray = null;
+
+            _openPubWorkPackages.Clear();
+            _openPubWorkPackages = null;
+
+            _openPubQuotations.Clear();
+            _openPubQuotations = null;
+
+            if (_currentForecast != null)
+            {
+                _currentForecast.Dispose();
+                _currentForecast = null;
+            }
+
+            if (_currentForecast != null) _currentForecast.Clear();
+            _currentForecast = null;
+
+            if (_toolStripMenuItemShowADFile != null) _toolStripMenuItemShowADFile.Dispose();
+            if (_toolStripMenuItemShowSBFile != null) _toolStripMenuItemShowSBFile.Dispose();
+            if (_toolStripMenuItemShowEOFile != null) _toolStripMenuItemShowEOFile.Dispose();
+            if (_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
+            if (_toolStripMenuItemComposeWorkPackage != null) _toolStripMenuItemComposeWorkPackage.Dispose();
+            if (_toolStripMenuItemComposeQuotationOrder != null) _toolStripMenuItemComposeQuotationOrder.Dispose();
+            if (_toolStripMenuItemCopy != null) _toolStripMenuItemCopy.Dispose();
+            if (_toolStripMenuItemPaste != null) _toolStripMenuItemPaste.Dispose();
+            if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
+            if (_toolStripMenuItemHighlight != null)
+            {
+                foreach (ToolStripMenuItem ttmi in _toolStripMenuItemHighlight.DropDownItems)
+                {
+                    ttmi.Click -= HighlightItemClick;
+                }
+                _toolStripMenuItemHighlight.DropDownItems.Clear();
+                _toolStripMenuItemHighlight.Dispose();
+            }
+            if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
+            if (_toolStripSeparator2 != null) _toolStripSeparator2.Dispose();
+            if (_toolStripSeparator4 != null) _toolStripSeparator4.Dispose();
+            if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
+            if (_toolStripMenuItemQuotations != null)
+            {
+                foreach (ToolStripMenuItem item in _toolStripMenuItemQuotations.DropDownItems)
+                {
+                    item.Click -= AddToQuotationOrderItemClick;
+                }
+                _toolStripMenuItemQuotations.DropDownItems.Clear();
+                _toolStripMenuItemQuotations.Dispose();
+            }
+            if (_toolStripMenuItemsWorkPackages != null)
+            {
+                foreach (ToolStripMenuItem item in _toolStripMenuItemsWorkPackages.DropDownItems)
+                {
+                    item.Click -= AddToWorkPackageItemClick;
+                }
+                _toolStripMenuItemsWorkPackages.DropDownItems.Clear();
+                _toolStripMenuItemsWorkPackages.Dispose();
+            }
+
+            if (_directivesViewer != null) _directivesViewer.DisposeView();
+
+            Dispose(true);
+        }
+
+        #endregion
+
+        #region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (_currentAircraft != null)
+            {
+                labelTitle.Text = "Date as of: " +
+                    SmartCore.Auxiliary.Convert.GetDateFormat(DateTime.Today) + " Aircraft TSN/CSN: " +
+                    GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(_currentAircraft);
+            }
+            else if (_currentBaseComponent != null)
+            {
+                labelTitle.Text = "Date as of: " +
+                    SmartCore.Auxiliary.Convert.GetDateFormat(DateTime.Today) + " Component TSN/CSN: " +
+                    GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(_currentBaseComponent);
+            }
+            else
+            {
+                labelTitle.Text = "";
+                labelTitle.Status = Statuses.NotActive;
+            }
+            if (_toolStripMenuItemQuotations != null)
+            {
+                foreach (ToolStripMenuItem item in _toolStripMenuItemQuotations.DropDownItems)
+                {
+                    item.Click -= AddToQuotationOrderItemClick;
+                }
+
+                _toolStripMenuItemQuotations.DropDownItems.Clear();
+
+                foreach (RequestForQuotation quotation in _openPubQuotations)
+                {
+                    ToolStripMenuItem item = new ToolStripMenuItem(quotation.Title);
+                    item.Click += AddToQuotationOrderItemClick;
+                    item.Tag = quotation;
+                    _toolStripMenuItemQuotations.DropDownItems.Add(item);
+                }
+            }
+            if (_toolStripMenuItemsWorkPackages != null)
+            {
+                foreach (ToolStripMenuItem item in _toolStripMenuItemsWorkPackages.DropDownItems)
+                {
+                    item.Click -= AddToWorkPackageItemClick;
+                }
+
+                _toolStripMenuItemsWorkPackages.DropDownItems.Clear();
+
+                foreach (WorkPackage workPackage in _openPubWorkPackages)
+                {
+                    ToolStripMenuItem item = new ToolStripMenuItem($"{workPackage.Title} {workPackage.Number}");
+                    item.Click += AddToWorkPackageItemClick;
+                    item.Tag = workPackage;
+                    _toolStripMenuItemsWorkPackages.DropDownItems.Add(item);
+                }
+            }
+
+            _directivesViewer.SetItemsArray(_resultDirectiveArray.ToArray());
+            headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
+            _directivesViewer.Focus();
+        }
+        #endregion
+
+        #region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
+        protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
+        {
+            _initialDirectiveArray.Clear();
+            _resultDirectiveArray.Clear();
+
+            AnimatedThreadWorker.ReportProgress(0, "load directives");
+
+            try
+            {
+                if (_currentForecast == null)
+                {
+                    if (DirectiveSource is BaseComponent)
+                    {
+                        BaseComponent bd = (BaseComponent) DirectiveSource;
+                        if (_currentPrimaryDirectiveType == DirectiveType.DamagesRequiring)
+                            _initialDirectiveArray = GlobalObjects.DirectiveCore.GetDamageItems(bd);
+                        else if (_currentPrimaryDirectiveType == DirectiveType.DeferredItems)
+                            _initialDirectiveArray = GlobalObjects.DirectiveCore.GetDeferredItems(bd);
+                        else _initialDirectiveArray = GlobalObjects.DirectiveCore.GetDirectives(bd, _currentPrimaryDirectiveType);
+                    }
+                    else
+                    {
+                        Aircraft a = (Aircraft) DirectiveSource;
+                        if (_currentPrimaryDirectiveType == DirectiveType.DamagesRequiring)
+                            _initialDirectiveArray = GlobalObjects.DirectiveCore.GetDamageItems(null, a);
+                        else if (_currentPrimaryDirectiveType == DirectiveType.DeferredItems)
+                            _initialDirectiveArray = GlobalObjects.DirectiveCore.GetDeferredItems(null, a);
+                        else _initialDirectiveArray = GlobalObjects.DirectiveCore.GetDirectives(a, _currentPrimaryDirectiveType);
+                    }
+                }
+                else
+                {
+                    AnimatedThreadWorker.ReportProgress(20, "calculation directives");
+
+                    GlobalObjects.AnalystCore.GetDirectives(_currentForecast, _currentPrimaryDirectiveType);
+                    DirectiveCollection dirC = _currentForecast.DirectiveCollections[_currentPrimaryDirectiveType];
+                    foreach (Directive directive in dirC)
+                        _initialDirectiveArray.Add(directive);
+                }
+            }
+            catch (Exception ex)
+            {
+                Program.Provider.Logger.Log("Error while loading directives", ex);
+            }
+            AnimatedThreadWorker.ReportProgress(40, "filter directives");
+            if (_adType != ADType.None)
+            {
+                List<Directive> forDeleting =
+                     _initialDirectiveArray.Where(primaryDirective => primaryDirective.ADType != _adType).ToList();
+
+                foreach (Directive directive in forDeleting)
+                    _initialDirectiveArray.Remove(_initialDirectiveArray.GetItemById(directive.ItemId));
+            }
+
+            #region Калькуляция состояния директив
+
+            AnimatedThreadWorker.ReportProgress(60, "calculation of directives");
+
+            foreach (Directive pd in _initialDirectiveArray)
+            {
+                GlobalObjects.PerformanceCalculator.GetNextPerformance(pd);
+            }
+
+            AnimatedThreadWorker.ReportProgress(70, "filter directives");
+
+            FilterItems(_initialDirectiveArray, _resultDirectiveArray);
+
+            if (AnimatedThreadWorker.CancellationPending)
+            {
+                e.Cancel = true;
+                return;
+            }
+
+
+            if (AnimatedThreadWorker.CancellationPending)
+            {
+                e.Cancel = true;
+                return;
+            }
+            #endregion
+
+            #region Сравнение с рабочими пакетами
+
+            AnimatedThreadWorker.ReportProgress(90, "comparison with the Work Packages");
+
+            //загрузка рабочих пакетов для определения 
+            //перекрытых ими выполнений задач
+            if(_openPubWorkPackages == null)
+                _openPubWorkPackages = new CommonCollection<WorkPackage>();
+
+            _openPubWorkPackages.AddRange(GlobalObjects.WorkPackageCore.GetWorkPackagesLite(CurrentAircraft, WorkPackageStatus.Opened));
+            _openPubWorkPackages.AddRange(GlobalObjects.WorkPackageCore.GetWorkPackagesLite(CurrentAircraft, WorkPackageStatus.Published));
+
+            //сбор всех записей рабочих пакетов для удобства фильтрации
+            List<WorkPackageRecord> openWPRecords = new List<WorkPackageRecord>();
+            foreach (WorkPackage openWorkPackage in _openPubWorkPackages)
+                openWPRecords.AddRange(openWorkPackage.WorkPakageRecords);
+
+            foreach (Directive task in _resultDirectiveArray)
+            {
+                if (task == null || task.NextPerformances == null || task.NextPerformances.Count <= 0)
+                    continue;
+                //Проход по всем след. выполнениям чека и записям в рабочих пакетах
+                //для поиска перекрывающихся выполнений
+                List<NextPerformance> performances = task.NextPerformances;
+                foreach (NextPerformance np in performances)
+                {
+                    //поиск записи в рабочих пакетах по данному чеку
+                    //чей номер группы выполнения (по записи) совпадает с расчитанным
+                    WorkPackageRecord wpr =
+                        openWPRecords.Where(r => r.PerformanceNumFromStart == np.PerformanceNum &&
+                                                 r.WorkPackageItemType == task.SmartCoreObjectType.ItemId &&
+                                                 r.DirectiveId == task.ItemId).FirstOrDefault();
+                    if (wpr != null)
+                        np.BlockedByPackage = _openPubWorkPackages.GetItemById(wpr.WorkPakageId);
+                }
+            }
+
+            if (AnimatedThreadWorker.CancellationPending)
+            {
+                e.Cancel = true;
+                return;
+            }
+            #endregion
+
+            #region Загрузка Котировочных ордеров
+
+            AnimatedThreadWorker.ReportProgress(95, "Load Quotations");
+
+            //загрузка рабочих пакетов для определения 
+            //перекрытых ими выполнений задач
+            if (_openPubQuotations == null) _openPubQuotations = new CommonCollection<RequestForQuotation>();
+
+            _openPubQuotations.Clear();
+            _openPubQuotations.AddRange(GlobalObjects.PurchaseCore.GetRequestForQuotation(CurrentAircraft, new[] { WorkPackageStatus.Opened, WorkPackageStatus.Published }));
+
+            if (AnimatedThreadWorker.CancellationPending)
+            {
+                e.Cancel = true;
+                return;
+            }
+            #endregion
+
+            AnimatedThreadWorker.ReportProgress(100, "Complete");
+        }
+        #endregion
+
+        #region protected override void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
+        private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
+        {
+            _resultDirectiveArray.Clear();
+
+            #region Фильтрация директив
+            AnimatedThreadWorker.ReportProgress(50, "filter directives");
+
+            FilterItems(_initialDirectiveArray, _resultDirectiveArray);
+
+            if (AnimatedThreadWorker.CancellationPending)
+            {
+                e.Cancel = true;
+                return;
+            }
+            #endregion
+
+            AnimatedThreadWorker.ReportProgress(100, "Complete");
+        }
+        #endregion
+
+        #region public override void OnInitCompletion(object sender)
+        /// <summary>
+        /// Метод, вызывается после добавления содежимого на отображатель(вкладку)
+        /// </summary>
+        /// <returns></returns>
+        public override void OnInitCompletion(object sender)
+        {
+            AnimatedThreadWorker.RunWorkerAsync();
+
+            base.OnInitCompletion(sender);
+        }
+        #endregion
+
+        #region private void InitToolStripMenuItems()
+
+        private void InitToolStripMenuItems()
+        {
+            _contextMenuStrip = new ContextMenuStrip();
+            _toolStripMenuItemOpen = new ToolStripMenuItem();
+            _toolStripMenuItemComposeWorkPackage = new ToolStripMenuItem();
+            _toolStripMenuItemsWorkPackages = new ToolStripMenuItem();
+            _toolStripMenuItemComposeQuotationOrder = new ToolStripMenuItem();
+            _toolStripMenuItemQuotations = new ToolStripMenuItem();
+            _toolStripMenuItemCopy = new ToolStripMenuItem();
+            _toolStripMenuItemPaste = new ToolStripMenuItem();
+            _toolStripMenuItemDelete = new ToolStripMenuItem();
+            _toolStripMenuItemHighlight = new ToolStripMenuItem();
+            _toolStripMenuItemShowADFile = new ToolStripMenuItem();
+            _toolStripMenuItemShowSBFile = new ToolStripMenuItem();
+            _toolStripMenuItemShowEOFile = new ToolStripMenuItem();
+            _toolStripSeparator1 = new ToolStripSeparator();
+            _toolStripSeparator2 = new ToolStripSeparator();
+            _toolStripSeparator4 = new ToolStripSeparator();
+            // 
+            // contextMenuStrip
+            // 
+            _contextMenuStrip.Name = "_contextMenuStrip";
+            _contextMenuStrip.Size = new Size(179, 176);
+            // 
+            // toolStripMenuItemView
+            // 
+            _toolStripMenuItemOpen.Text = "Open";
+            _toolStripMenuItemOpen.Click += ToolStripMenuItemOpenClick;
+            // 
+            // toolStripMenuItemHighlight
+            // 
+            _toolStripMenuItemHighlight.Text = "Highlight";
+            // 
+            // _toolStripMenuItemShowADFile
+            // 
+            _toolStripMenuItemShowADFile.Text = "Show AD File";
+            _toolStripMenuItemShowADFile.Click += ToolStripMenuItemShowTaskCardClick;
+            // 
+            // _toolStripMenuItemShowSBFile
+            // 
+            _toolStripMenuItemShowSBFile.Text = "Show SB File";
+            _toolStripMenuItemShowSBFile.Click += ToolStripMenuItemShowTaskCardClick;
+            // 
+            // _toolStripMenuItemShowEOFile
+            // 
+            _toolStripMenuItemShowEOFile.Text = "Show EO File";
+            _toolStripMenuItemShowEOFile.Click += ToolStripMenuItemShowTaskCardClick;
+            //
+            // toolStripMenuItemComposeWorkPackage
+            //
+            _toolStripMenuItemComposeWorkPackage.Text = "Compose a work package";
+            _toolStripMenuItemComposeWorkPackage.Click += ButtonCreateWorkPakageClick;
+            //
+            // _toolStripMenuItemsWorkPackages
+            //
+            _toolStripMenuItemsWorkPackages.Text = "Add to Work package";
+            //
+            // toolStripMenuItemComposeWorkPackage
+            //
+            _toolStripMenuItemComposeQuotationOrder.Text = "Compose quotation order";
+            _toolStripMenuItemComposeQuotationOrder.Click += ToolStripMenuItemComposeQuotationClick;
+            //
+            // toolStripMenuItemComposeWorkPackage
+            //
+            _toolStripMenuItemQuotations.Text = "Add to Quotation Order";
+            // 
+            // toolStripMenuItemDelete
+            // 
+            _toolStripMenuItemDelete.Text = "Delete";
+            _toolStripMenuItemDelete.Click += ButtonDeleteClick;
+            // 
+            // toolStripMenuItemCopy
+            // 
+            _toolStripMenuItemCopy.Text = "Copy";
+            _toolStripMenuItemCopy.Click += CopyItemsClick;
+
+            // 
+            // toolStripMenuItemPaste
+            // 
+            _toolStripMenuItemPaste.Text = "Paste";
+            _toolStripMenuItemPaste.Click += PasteItemsClick;
+
+            _contextMenuStrip.Items.Clear();
+            _toolStripMenuItemsWorkPackages.DropDownItems.Clear();
+            _toolStripMenuItemHighlight.DropDownItems.Clear();
+
+            foreach (Highlight highlight in Highlight.HighlightList)
+            {
+                if (highlight == Highlight.Blue || highlight == Highlight.Yellow || highlight == Highlight.Red)
+                    continue;
+                ToolStripMenuItem item = new ToolStripMenuItem(highlight.FullName);
+                item.Click += HighlightItemClick;
+                item.Tag = highlight;
+                _toolStripMenuItemHighlight.DropDownItems.Add(item);
+            }
+            _contextMenuStrip.Items.AddRange(new ToolStripItem[]
+                                                {
+                                                    _toolStripMenuItemOpen,
+                                                    _toolStripMenuItemShowADFile,
+                                                    _toolStripMenuItemShowSBFile,
+                                                    _toolStripMenuItemShowEOFile,
+                                                    new ToolStripSeparator(),
+                                                    _toolStripMenuItemHighlight,
+                                                    _toolStripSeparator2,
+                                                    _toolStripMenuItemComposeWorkPackage,
+                                                    _toolStripMenuItemsWorkPackages,
+                                                    _toolStripSeparator1,
+                                                    _toolStripMenuItemComposeQuotationOrder,
+                                                    _toolStripMenuItemQuotations,
+                                                    _toolStripSeparator4, 
+                                                    _toolStripMenuItemCopy,
+                                                    _toolStripMenuItemPaste,
+                                                    _toolStripMenuItemDelete
+                                                });
+            _contextMenuStrip.Opening += ContextMenuStripOpen;
+        }
+		#endregion
+
+		#region private void InitPrintToolStripMenuItems()
+
+		private void InitPrintToolStripMenuItems()
+	    {
+		    buttonPrintMenuStrip = new ContextMenuStrip();
+		    itemPrintReportAD = new ToolStripMenuItem { Text = "AD All" };
+		    itemPrintReportAMP = new ToolStripMenuItem { Text = "MP AD, SB, STC & REPAIR" };
+		    itemPrintReportADLitAVIA = new ToolStripMenuItem { Text = "AD LA" };
+		    itemPrintReportADLitAVIAEng = new ToolStripMenuItem { Text = "AD Eng LA" };
+
+
+			if(_currentBaseComponent != null && _currentBaseComponent.BaseComponentType == BaseComponentType.Frame)
+				buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { itemPrintReportAD, itemPrintReportAMP, itemPrintReportADLitAVIA });
+			else if (_currentBaseComponent != null && _currentBaseComponent.BaseComponentType == BaseComponentType.Engine)
+				buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { itemPrintReportAD, itemPrintReportAMP, itemPrintReportADLitAVIAEng });
+			else buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { itemPrintReportAD, itemPrintReportAMP});
+
+			ButtonPrintMenuStrip = buttonPrintMenuStrip;
+	    }
+
+	    #endregion
+
+        #region private void ContextMenuStripOpen(object sender,CancelEventArgs e)
+        /// <summary>
+        /// Проверка на выделение 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ContextMenuStripOpen(object sender, CancelEventArgs e)
+        {
+	        if (_directivesViewer.SelectedItems.Count <= 0)
+	        {
+		        _toolStripMenuItemOpen.Enabled = false;
+				_toolStripMenuItemShowADFile.Enabled = false;
+				_toolStripMenuItemShowSBFile.Enabled = false;
+				_toolStripMenuItemShowEOFile.Enabled = false;
+				_toolStripMenuItemHighlight.Enabled = false;
+				_toolStripMenuItemComposeWorkPackage.Enabled = false;
+				_toolStripMenuItemsWorkPackages.Enabled = false;
+				_toolStripMenuItemComposeQuotationOrder.Enabled = false;
+				_toolStripMenuItemQuotations.Enabled = false;
+                _toolStripMenuItemDelete.Enabled = false;
+
+			}
+            if (_directivesViewer.SelectedItems.Count == 1)
+            {
+                _toolStripMenuItemOpen.Enabled = true;
+
+                BaseEntityObject o = _directivesViewer.SelectedItems[0];
+                IBaseEntityObject parent;
+                if (o is NextPerformance)
+                {
+                    parent = ((NextPerformance)o).Parent;
+                }
+                else if (o is AbstractPerformanceRecord)
+                {
+                    parent = ((AbstractPerformanceRecord)o).Parent;
+                }
+                else parent = o;
+
+                Directive dir = null;
+                if (parent is Directive)
+                {
+                    dir = (Directive)parent;
+                }
+                if(dir != null)
+                {
+                    _toolStripMenuItemShowEOFile.Enabled = dir.EngineeringOrderFile != null;
+                    _toolStripMenuItemShowSBFile.Enabled = dir.ServiceBulletinFile != null;
+                    _toolStripMenuItemShowADFile.Enabled = dir.ADNoFile != null;   
+                }
+            }
+
+	        if (_directivesViewer.SelectedItems.Count > 0)
+	        {
+				_toolStripMenuItemOpen.Enabled = true;
+				_toolStripMenuItemHighlight.Enabled = true;
+				_toolStripMenuItemComposeWorkPackage.Enabled = true;
+				_toolStripMenuItemsWorkPackages.Enabled = true;
+				_toolStripMenuItemComposeQuotationOrder.Enabled = true;
+				_toolStripMenuItemQuotations.Enabled = true;
+				_toolStripMenuItemDelete.Enabled = true;
+			}
+        }
+
+        #endregion
+
+        #region private void HighlightItemClick(object sender, EventArgs e)
+
+        private void HighlightItemClick(object sender, EventArgs e)
+        {
+            for (int i = 0; i < _directivesViewer.SelectedItems.Count; i++)
+            {
+                Highlight highLight = (Highlight)((ToolStripMenuItem)sender).Tag;
+
+                _directivesViewer.SelectedItems[i].Highlight = highLight;
+                _directivesViewer.ItemListView.SelectedItems[i].BackColor = Color.FromArgb(highLight.Color);
+            }
+        }
+
+        #endregion
+
+        #region private void ButtonCreateWorkPakageClick(object sender, EventArgs e)
+
+        private void ButtonCreateWorkPakageClick(object sender, EventArgs e)
+        {
+            if (_directivesViewer.SelectedItems.Count <= 0) return;
+
+            if (MessageBox.Show("Create and save a Work Package?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                List<NextPerformance> wpItems = _directivesViewer.SelectedItems
+                    .Where(i => i.NextPerformances.Count > 0)
+                    .Select(i => i.NextPerformance)
+                    .ToList();
+
+                try
+                {
+					//TODO:(Evgenii Babak) запрещать создавать WP, если агрегат на складе
+					var a = _currentAircraft != null
+								? _currentAircraft
+								: GlobalObjects.AircraftsCore.GetAircraftById(_currentBaseComponent.ParentAircraftId);
+					string message;
+                    var wp = GlobalObjects.WorkPackageCore.AddWorkPakage(wpItems, a, out message);
+                    if (wp == null)
+                    {
+                        MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
+                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    //Добавление нового рабочего пакета в коллекцию открытых рабочих пакетов
+                    _openPubWorkPackages.Add(wp);
+                    //Создание пункта в меню открытых рабочих пакетов
+                    ToolStripMenuItem item = new ToolStripMenuItem(wp.Title);
+                    item.Click += AddToWorkPackageItemClick;
+                    item.Tag = wp;
+                    _toolStripMenuItemsWorkPackages.DropDownItems.Add(item);
+
+                    foreach (NextPerformance nextPerformance in wpItems)
+                    {
+                        nextPerformance.BlockedByPackage = wp;
+                        _directivesViewer.UpdateItemColor(nextPerformance.Parent as Directive);
+                    }
+                    ReferenceEventArgs refArgs = new ReferenceEventArgs();
+                    refArgs.TypeOfReflection = ReflectionTypes.DisplayInNew;
+                    refArgs.DisplayerText = CurrentAircraft != null ? CurrentAircraft.RegistrationNumber + "." + wp.Title : wp.Title;
+                    refArgs.RequestedEntity = new WorkPackageScreen(wp);
+                    InvokeDisplayerRequested(refArgs);
+                }
+                catch (Exception ex)
+                {
+                    Program.Provider.Logger.Log("error while create Work Package", ex);
+                }
+            }
+        }
+        #endregion
+
+        #region private void AddToWorkPackageItemClick(object sender, EventArgs e)
+
+        private void AddToWorkPackageItemClick(object sender, EventArgs e)
+        {
+            if (_directivesViewer.SelectedItems.Count <= 0) return;
+
+            var wp = (WorkPackage)((ToolStripMenuItem)sender).Tag;
+
+            if (MessageBox.Show("Add item to Work Package: " + wp.Title + "?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) ==
+                DialogResult.Yes)
+            {
+                List<NextPerformance> wpItems = _directivesViewer.SelectedItems
+                    .Where(i => i.NextPerformances.Count > 0 )
+                    .Select(i => i.NextPerformance)
+                    .ToList();
+
+                try
+                {
+                    string message;
+					var a = _currentAircraft != null
+								? _currentAircraft
+								: GlobalObjects.AircraftsCore.GetAircraftById(_currentBaseComponent.ParentAircraftId);
+					if (!GlobalObjects.WorkPackageCore.AddToWorkPakage(wpItems, wp.ItemId, a, out message))
+                    {
+                        MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
+                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    foreach (NextPerformance nextPerformance in wpItems)
+                    {
+                        nextPerformance.BlockedByPackage = wp;
+                        _directivesViewer.UpdateItemColor(nextPerformance.Parent as Directive);
+                    }
+
+                    if (MessageBox.Show("Items added successfully. Open work package?", (string)new GlobalTermsProvider()["SystemName"],
+                                         MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2)
+                                        == DialogResult.Yes)
+                    {
+                        ReferenceEventArgs refArgs = new ReferenceEventArgs();
+                        refArgs.TypeOfReflection = ReflectionTypes.DisplayInNew;
+                        refArgs.DisplayerText = CurrentAircraft != null ? CurrentAircraft.RegistrationNumber + "." + wp.Title : wp.Title;
+                        refArgs.RequestedEntity = new WorkPackageScreen(wp);
+                        InvokeDisplayerRequested(refArgs);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Program.Provider.Logger.Log("error while create Work Package", ex);
+                }
+            }
+        }
+
+        #endregion
+
+        #region private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
+        /// <summary>
+        /// Создает закупочный ордер
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
+        {
+            PurchaseManager.ComposeQuotationOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
+        }
+
+        #endregion
+
+        #region private void AddToQuotationOrderItemClick(object sender, EventArgs e)
+
+        private void AddToQuotationOrderItemClick(object sender, EventArgs e)
+        {
+            if (_directivesViewer.SelectedItems.Count <= 0) return;
+
+            RequestForQuotation wp = (RequestForQuotation)((ToolStripMenuItem)sender).Tag;
+
+            PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
+        }
+
+        #endregion
+
+        #region private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
+
+        private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
+        {
+            List<Directive> selected = _directivesViewer.SelectedItems;
+
+            foreach (Directive t in selected)
+            {
+                ReferenceEventArgs refE = new ReferenceEventArgs();
+                string regNumber = "";
+                if (t.ParentBaseComponent.BaseComponentType.ItemId == 4)
+                    regNumber = t.ParentBaseComponent.ToString();
+                else
+                {
+                    if (t.ParentBaseComponent.ParentAircraftId > 0)
+                        regNumber = $"{t.ParentBaseComponent.GetParentAircraftRegNumber()}. {t.ParentBaseComponent}"; 
+				}
+                refE.TypeOfReflection = ReflectionTypes.DisplayInNew;
+                refE.DisplayerText = regNumber + ". " + t.DirectiveType.CommonName + ". " + t.Title;
+                refE.RequestedEntity = new DirectiveScreen(t);
+                InvokeDisplayerRequested(refE);
+            }
+        }
+
+        #endregion
+
+        #region private void ToolStripMenuItemShowTaskCardClick(object sender, EventArgs e)
+
+        private void ToolStripMenuItemShowTaskCardClick(object sender, EventArgs e)
+        {
+            if (_directivesViewer.SelectedItems == null ||
+                _directivesViewer.SelectedItems.Count == 0) return;
+            
+            BaseEntityObject o = _directivesViewer.SelectedItems[0];
+            IBaseEntityObject parent;
+            if (o is NextPerformance)
+            {
+                parent = ((NextPerformance)o).Parent;
+            }
+            else if (o is AbstractPerformanceRecord)
+            {
+                parent = ((AbstractPerformanceRecord)o).Parent;
+            }
+            else parent = o;
+
+            Directive dir = null;
+            if (parent is Directive)
+            {
+                dir = (Directive)parent;
+            }
+
+            AttachedFile attachedFile = null;
+            if (sender == _toolStripMenuItemShowADFile && dir != null)
+                attachedFile = dir.ADNoFile;
+            if (sender == _toolStripMenuItemShowSBFile && dir != null)
+                attachedFile = dir.ServiceBulletinFile;
+            if (sender == _toolStripMenuItemShowEOFile && dir != null)
+                attachedFile = dir.EngineeringOrderFile;
+            if (attachedFile == null)
+            {
+                MessageBox.Show("Not set required File", (string)new GlobalTermsProvider()["SystemName"],
+                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+                                MessageBoxDefaultButton.Button1);
+                return;
+            }
+            try
+            {
+                string message;
+                GlobalObjects.CasEnvironment.OpenFile(attachedFile, out message);
+                if(message != "")
+                {
+                    MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
+                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+                                MessageBoxDefaultButton.Button1);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                string errorDescriptionSctring =
+                    string.Format("Error while Open Attached File for {0}, id {1}. \nFileId {2}", dir, dir.ItemId, attachedFile.ItemId);
+                Program.Provider.Logger.Log(errorDescriptionSctring, ex);
+            }
+        }
+
+        #endregion
+
+        #region private void CopyItemsClick(object sender, EventArgs e)
+
+        private void CopyItemsClick(object sender, EventArgs e)
+        {
+            CopyToClipboard();
+        }
+
+        #endregion
+
+        #region private void PasteItemsClick(object sender, EventArgs e)
+
+        private void PasteItemsClick(object sender, EventArgs e)
+        {
+            GetFromClipboard();
+        }
+
+        #endregion
+
+        #region private void InitListView()
+
+        private void InitListView(PrimeDirectiveListView directiveListView)
+        {
+            _directivesViewer = directiveListView;
+            _directivesViewer.TabIndex = 2;
+            _directivesViewer.ContextMenuStrip = _contextMenuStrip;
+            _directivesViewer.Location = new Point(panel1.Left, panel1.Top);
+            _directivesViewer.Dock = DockStyle.Fill;
+            _directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+            Controls.Add(_directivesViewer);
+            //события 
+            _directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+
+            panel1.Controls.Add(_directivesViewer);
+        }
+
+        #endregion
+
+        #region private void DirectivesViewerSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
+
+        private void DirectivesViewerSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
+        {
+            headerControl.EditButtonEnabled = _directivesViewer.SelectedItems.Count > 0;
+        }
+
+        #endregion
+
+        #region private void HeaderControlButtonReloadClick(object sender, EventArgs e)
+
+        private void HeaderControlButtonReloadClick(object sender, EventArgs e)
+        {
+            AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+            AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+            AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
+
+            AnimatedThreadWorker.RunWorkerAsync();
+        }
+        #endregion
+
+        #region private void HeaderControlButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
+        private void HeaderControlButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+            if (_currentAircraft != null)
+                e.DisplayerText = _currentAircraft.RegistrationNumber + ". " + ReportText + " Report";
+            else if (_currentBaseComponent != null)
+                e.DisplayerText = _currentBaseComponent + ". " + ReportText + " Report";
+            else
+                e.DisplayerText = ReportText + " Report";
+            e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+
+            _builder.DateAsOf = DateTime.Today.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
+            _builder.DirectiveType = _currentPrimaryDirectiveType;
+
+
+	        if (sender == itemPrintReportAMP)
+	        {
+		        _amReportBuilder.ReportedAircraft = CurrentAircraft;
+		        _amReportBuilder.ReportTitle = "SECTION 6 –ADs, SBs, STCs & REPAIRs INSTRUCTIONS FOR CONTINUED AIRWORTHINESS (ICA)";
+		        _amReportBuilder.AddDirectives(_directivesViewer.GetItemsArray());
+		        e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "MP AD, SB, STC & REPAIR";
+		        e.RequestedEntity = new ReportScreen(_amReportBuilder);
+			}
+			else if (sender == itemPrintReportADLitAVIA)
+	        {
+		        _builderLitAVIA.DateAsOf = DateTime.Today.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
+				_builderLitAVIA.ReportedAircraft = CurrentAircraft;
+		        _builderLitAVIA.AddDirectives(_directivesViewer.GetItemsArray());
+		        e.RequestedEntity = new ReportScreen(_builderLitAVIA);
+			}
+	        else if (sender == itemPrintReportADLitAVIAEng)
+	        {
+		        _builderLitAviaEng.DateAsOf = DateTime.Today.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
+		        _builderLitAviaEng.ReportedBaseComponent = _currentBaseComponent;
+		        _builderLitAviaEng.AddDirectives(_directivesViewer.GetItemsArray());
+		        e.RequestedEntity = new ReportScreen(_builderLitAviaEng);
+	        }
+			else if (sender == itemPrintReportAD)
+	        {
+		        if (_currentAircraft != null)
+		        {
+			        _builder.ReportedAircraft = CurrentAircraft;
+			        _builder.FilterSelection = _filter;
+			        _builder.AddDirectives(_directivesViewer.GetItemsArray());
+			        _builder.Forecast = _currentForecast;
+			        e.RequestedEntity = new ReportScreen(_builder);
+		        }
+		        else
+		        {
+			        if (_currentBaseComponent != null)
+			        {
+				        _builder.LifelengthAircraftSinceNew =
+					        GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(CurrentAircraft);
+				        _builder.ReportedBaseComponent = _currentBaseComponent;
+				        _builder.FilterSelection = _filter;
+				        _builder.AddDirectives(_directivesViewer.GetItemsArray());
+				        _builder.Forecast = _currentForecast;
+				        e.RequestedEntity = new ReportScreen(_builder);
+			        }
+			        else
+			        {
+				        e.Cancel = true;
+			        }
+		        }
+			}
+	        else
+	        {
+		        e.Cancel = true;
+	        }
+		}
+        #endregion
+
+        #region private void HeaderControlSaveButtonClick(object sender, System.EventArgs e)
+        private void HeaderControlSaveButtonClick(object sender, System.EventArgs e)
+        {
+            List<Directive> unsaved = _directivesViewer.GetItemsArray().Where(i => i.ItemId <= 0).ToList();
+
+            try
+            {
+                foreach (Directive directive in unsaved)
+                {
+                    GlobalObjects.DirectiveCore.Save(directive);
+                }
+
+                MessageBox.Show("Saving was successful", "Message infomation", MessageBoxButtons.OK,
+                                     MessageBoxIcon.Information);
+
+                headerControl.ShowSaveButton = unsaved.Count(i => i.ItemId <= 0) > 0;
+            }
+            catch (Exception ex)
+            {
+                Program.Provider.Logger.Log("Error while save directive from directives list", ex);
+            }
+        }
+        #endregion
+
+        #region private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
+
+        private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+            e.DisplayerText = CurrentAircraft != null 
+                ? CurrentAircraft.RegistrationNumber 
+                : CurrentStore != null ? CurrentStore.Name : "";
+            if (_currentBaseComponent != null && _currentBaseComponent.BaseComponentType != BaseComponentType.Frame)
+                e.DisplayerText += ". " + _currentBaseComponent;
+            e.DisplayerText += ". " + _currentPrimaryDirectiveType.CommonName + ". New Directive";
+            if (_currentBaseComponent != null)
+            {
+	            var parentAircraft = GlobalObjects.AircraftsCore.GetAircraftById(_currentBaseComponent.ParentAircraftId);//TODO:(Evgenii Babak) пересмотреть использование ParentAircrafId здесь
+				if (_currentPrimaryDirectiveType == DirectiveType.OutOfPhase)
+                    e.RequestedEntity = new OutOfPhaseReferenceScreen(parentAircraft);
+                else if (_currentPrimaryDirectiveType == DirectiveType.DamagesRequiring)
+                    e.RequestedEntity = new DamageDirectiveScreen(parentAircraft);
+                else if (_currentPrimaryDirectiveType == DirectiveType.DeferredItems)
+                    e.RequestedEntity = new DeferredScreen(parentAircraft);
+                else
+                    e.RequestedEntity = new DirectiveScreen(_currentBaseComponent, _currentPrimaryDirectiveType);
+            }
+            else
+            {
+                if (_currentPrimaryDirectiveType == DirectiveType.OutOfPhase)
+                    e.RequestedEntity = new OutOfPhaseReferenceScreen(CurrentAircraft);
+                else if (_currentPrimaryDirectiveType == DirectiveType.DamagesRequiring)
+                    e.RequestedEntity = new DamageDirectiveScreen(CurrentAircraft);
+                else if (_currentPrimaryDirectiveType == DirectiveType.DeferredItems)
+                    e.RequestedEntity = new DeferredScreen(CurrentAircraft);
+                else
+                    e.RequestedEntity = new DirectiveScreen(CurrentAircraft, _currentPrimaryDirectiveType);
+            }
+        }
+
+        #endregion
+
+        #region private void ButtonApplyFilterClick(object sender, EventArgs e)
+
+        private void ButtonApplyFilterClick(object sender, EventArgs e)
+        {
+            CommonFilterForm form = new CommonFilterForm(_filter, _initialDirectiveArray);
+
+            if (form.ShowDialog(this) == DialogResult.OK)
+            {
+                AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+                AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+                AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoFilteringWork;
+
+                AnimatedThreadWorker.RunWorkerAsync();
+            }
+        }
+
+        #endregion
+
+        #region private void ButtonDeleteClick(object sender, EventArgs e)
+
+        private void ButtonDeleteClick(object sender, EventArgs e)
+        {
+            if (_directivesViewer.SelectedItems == null) return;
+
+            List<Directive> directives = _directivesViewer.SelectedItems;
+
+            DialogResult confirmResult =
+                MessageBox.Show(directives.Count == 1
+                        ? "Do you really want to delete directive " + directives[0].Title + "?"
+                        : "Do you really want to delete selected directives? ", "Confirm delete operation",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+
+            if (confirmResult == DialogResult.Yes)
+            {
+                _directivesViewer.ItemListView.BeginUpdate();
+                foreach (Directive directive in directives)
+                {
+                    try
+                    {
+                        GlobalObjects.DirectiveCore.Delete(directive);
+                    }
+                    catch (Exception ex)
+                    {
+                        Program.Provider.Logger.Log("Error while deleting data", ex);
+                        return;
+                    }
+                }
+                _directivesViewer.ItemListView.EndUpdate();
+
+                List<Directive> unsaved = _directivesViewer.GetItemsArray().Where(i => i.ItemId <= 0).ToList();
+
+                if (unsaved.Count > 0)
+                {
+                    if (MessageBox.Show("All unsaved data will be lost. Are you sure you want to save data?",
+                                    (string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.YesNo,
+                                    MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                    {
+                        try
+                        {
+                            foreach (Directive directive in unsaved)
+                            {
+                                GlobalObjects.DirectiveCore.Save(directive);
+                            }
+                            headerControl.ShowSaveButton = unsaved.Count(i => i.ItemId <= 0) > 0;
+                        }
+                        catch (Exception ex)
+                        {
+                            Program.Provider.Logger.Log("Error while save directive from directives list", ex);
+                        }
+                    }
+                }
+                else headerControl.ShowSaveButton = false;
+
+                AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+                AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+                AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
+
+                AnimatedThreadWorker.RunWorkerAsync();
+            }
+        }
+
+        #endregion
+
+        #region private void ButtonImportFromExcelClick(object sender, EventArgs e)
+
+        private void ButtonImportFromExcelClick(object sender, EventArgs e)
+        {
+            var form = new CommonExcelImportForm(typeof(Directive));
+            form.ShowDialog(this);
+        }
+
+        #endregion
+
+        #region private void ForecastMenuClick(object sender, EventArgs e)
+        private void ForecastMenuClick(object sender, EventArgs e)
+        {
+            List<BaseComponent> aircraftBaseComponents;
+            if (_currentForecast != null) _currentForecast.ForecastDatas.Clear();
+
+            switch ((string)sender)
+            {
+                case "No Forecast":
+                    {
+                        _currentForecast = null;
+                        labelDateAsOf.Visible = false;
+                    }
+                    break;
+                case "Today":
+                    {
+                        if (_currentAircraft != null)
+                        {
+                            _currentForecast = new Forecast { Aircraft = _currentAircraft, ForecastDate = DateTime.Today };
+                            //поиск деталей данного самолета 
+                            aircraftBaseComponents = new List<BaseComponent>(GlobalObjects.ComponentCore.GetAicraftBaseComponents(CurrentAircraft.ItemId));
+                            //составление нового массива данных по прогноза
+                            foreach (var baseComponent in aircraftBaseComponents)
+                            {
+                                //определение ресурсов прогноза для каждой базовой детали
+                                ForecastData forecastData =
+                                    new ForecastData(DateTime.Today,
+                                                     baseComponent,
+                                                     GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(baseComponent));
+                                //дабавление в массив
+                                _currentForecast.ForecastDatas.Add(forecastData);
+                            }
+                            ForecastData main = _currentForecast.GetForecastDataFrame() ??
+                                                _currentForecast.ForecastDatas[0];
+
+                            labelDateAsOf.Visible = true;
+                            labelDateAsOf.Text =
+                                "Forecast date: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.ForecastDate) +
+                                 " Aircraft TSN/CSN: " + main.ForecastLifelength +
+                                 "\nAvg. utlz: " + main.AverageUtilization;
+                        }
+                        else if (_currentBaseComponent != null)
+                        {
+                            _currentForecast = new Forecast { Aircraft = _currentAircraft, ForecastDate = DateTime.Today };
+                            ForecastData forecastData =
+                                    new ForecastData(DateTime.Today,
+                                                     _currentBaseComponent,
+                                                     GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(_currentBaseComponent));
+                            _currentForecast.ForecastDatas.Add(forecastData);
+                            labelDateAsOf.Visible = true;
+                            labelDateAsOf.Text =
+                                "Forecast date: " + SmartCore.Auxiliary.Convert.GetDateFormat(forecastData.ForecastDate) +
+                                 " Component TSN/CSN: " + forecastData.ForecastLifelength +
+                                 "\nAvg. utlz: " + forecastData.AverageUtilization;
+                        }
+                    }
+                    break;
+                case "This week":
+                    {
+                        if (_currentAircraft != null)
+                        {
+                            _currentForecast = new Forecast
+                            {
+                                Aircraft = _currentAircraft,
+                                ForecastDate = DateTime.Today.AddDays(7)
+                            };
+                            //поиск деталей данного самолета 
+                            aircraftBaseComponents = new List<BaseComponent>(GlobalObjects.ComponentCore.GetAicraftBaseComponents(CurrentAircraft.ItemId));
+                            //составление нового массива данных по прогноза
+                            foreach (var baseComponent in aircraftBaseComponents)
+                            {
+                                //определение ресурсов прогноза для каждой базовой детали
+                                ForecastData forecastData =
+                                    new ForecastData(DateTime.Today.AddDays(7),
+                                                     baseComponent,
+                                                     GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(baseComponent));
+                                //дабавление в массив
+                                _currentForecast.ForecastDatas.Add(forecastData);
+                            }
+                            ForecastData main = _currentForecast.GetForecastDataFrame() ??
+                                                _currentForecast.ForecastDatas[0];
+
+                            labelDateAsOf.Visible = true;
+                            labelDateAsOf.Text =
+                                "Forecast date: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.ForecastDate) +
+                                 " Aircraft TSN/CSN: " + main.ForecastLifelength +
+                                 "\nAvg. utlz: " + main.AverageUtilization;
+                        }
+                        else if (_currentBaseComponent != null)
+                        {
+                            _currentForecast = new Forecast { Aircraft = _currentAircraft, ForecastDate = DateTime.Today.AddDays(7) };
+                            ForecastData forecastData =
+                                    new ForecastData(DateTime.Today.AddDays(7),
+                                                     _currentBaseComponent,
+                                                     GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(_currentBaseComponent));
+                            _currentForecast.ForecastDatas.Add(forecastData);
+                            labelDateAsOf.Visible = true;
+                            labelDateAsOf.Text =
+                                "Forecast date: " + SmartCore.Auxiliary.Convert.GetDateFormat(forecastData.ForecastDate) +
+                                 " Component TSN/CSN: " + forecastData.ForecastLifelength +
+                                 "\nAvg. utlz: " + forecastData.AverageUtilization;
+                        }
+                    }
+                    break;
+                case "Two weeks":
+                    {
+                        if (_currentAircraft != null)
+                        {
+                            _currentForecast = new Forecast { Aircraft = _currentAircraft, ForecastDate = DateTime.Today.AddDays(14) };
+                            //поиск деталей данного самолета 
+                            aircraftBaseComponents = new List<BaseComponent>(GlobalObjects.ComponentCore.GetAicraftBaseComponents(CurrentAircraft.ItemId));
+                            //составление нового массива данных по прогноза
+                            foreach (var baseComponent in aircraftBaseComponents)
+                            {
+                                //определение ресурсов прогноза для каждой базовой детали
+                                ForecastData forecastData =
+                                    new ForecastData(DateTime.Today.AddDays(14),
+                                                     baseComponent,
+                                                     GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(baseComponent));
+                                //дабавление в массив
+                                _currentForecast.ForecastDatas.Add(forecastData);
+                            }
+                            ForecastData main = _currentForecast.GetForecastDataFrame() ??
+                                                _currentForecast.ForecastDatas[0];
+
+                            labelDateAsOf.Visible = true;
+                            labelDateAsOf.Text =
+                                "Forecast date: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.ForecastDate) +
+                                 " Aircraft TSN/CSN: " + main.ForecastLifelength +
+                                 "\nAvg. utlz: " + main.AverageUtilization;
+                        }
+                        else if (_currentBaseComponent != null)
+                        {
+                            _currentForecast = new Forecast { Aircraft = _currentAircraft, ForecastDate = DateTime.Today.AddDays(14) };
+                            ForecastData forecastData =
+                                    new ForecastData(DateTime.Today.AddDays(14),
+                                                     _currentBaseComponent,
+                                                     GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(_currentBaseComponent));
+                            _currentForecast.ForecastDatas.Add(forecastData);
+                            labelDateAsOf.Visible = true;
+                            labelDateAsOf.Text =
+                                "Forecast date: " + SmartCore.Auxiliary.Convert.GetDateFormat(forecastData.ForecastDate) +
+                                 " Component TSN/CSN: " + forecastData.ForecastLifelength +
+                                 "\nAvg. utlz: " + forecastData.AverageUtilization;
+                        }
+                    }
+                    break;
+                case "Month":
+                    {
+                        if (_currentAircraft != null)
+                        {
+                            _currentForecast = new Forecast { Aircraft = _currentAircraft, ForecastDate = DateTime.Today.AddMonths(1) };
+                            //поиск деталей данного самолета 
+                            aircraftBaseComponents = new List<BaseComponent>(GlobalObjects.ComponentCore.GetAicraftBaseComponents(CurrentAircraft.ItemId));
+                            //составление нового массива данных по прогноза
+                            foreach (var baseComponent in aircraftBaseComponents)
+                            {
+                                //определение ресурсов прогноза для каждой базовой детали
+                                ForecastData forecastData =
+                                    new ForecastData(DateTime.Today.AddMonths(1),
+                                                     baseComponent,
+                                                     GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(baseComponent));
+                                //дабавление в массив
+                                _currentForecast.ForecastDatas.Add(forecastData);
+                            }
+                            ForecastData main = _currentForecast.GetForecastDataFrame() ??
+                                                _currentForecast.ForecastDatas[0];
+
+                            labelDateAsOf.Visible = true;
+                            labelDateAsOf.Text =
+                                "Forecast date: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.ForecastDate) +
+                                 " Aircraft TSN/CSN: " + main.ForecastLifelength +
+                                 "\nAvg. utlz: " + main.AverageUtilization;
+                        }
+                        else if (_currentBaseComponent != null)
+                        {
+                            _currentForecast = new Forecast { Aircraft = _currentAircraft, ForecastDate = DateTime.Today.AddMonths(1) };
+                            ForecastData forecastData =
+                                    new ForecastData(DateTime.Today.AddMonths(1),
+                                                     _currentBaseComponent,
+                                                     GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(_currentBaseComponent));
+                            _currentForecast.ForecastDatas.Add(forecastData);
+                            labelDateAsOf.Visible = true;
+                            labelDateAsOf.Text =
+                                "Forecast date: " + SmartCore.Auxiliary.Convert.GetDateFormat(forecastData.ForecastDate) +
+                                 " Component TSN/CSN: " + forecastData.ForecastLifelength +
+                                 "\nAvg. utlz: " + forecastData.AverageUtilization;
+                        }
+                    }
+                    break;
+                case "Custom":
+                    {
+                        if (_currentAircraft != null)
+                        {
+                            _currentForecast = new Forecast { Aircraft = _currentAircraft };
+                            //поиск деталей данного самолета 
+                            aircraftBaseComponents = new List<BaseComponent>(GlobalObjects.ComponentCore.GetAicraftBaseComponents(CurrentAircraft.ItemId));
+                            //составление нового массива данных по прогноза
+                            foreach (var baseComponent in aircraftBaseComponents)
+                            {
+                                //определение ресурсов прогноза для каждой базовой детали
+                                ForecastData forecastData =
+                                    new ForecastData(DateTime.Today,
+                                                     baseComponent,
+                                                     GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(baseComponent));
+                                //дабавление в массив
+                                _currentForecast.ForecastDatas.Add(forecastData);
+                            }
+                        }
+                        else if (_currentBaseComponent != null)
+                        {
+                            _currentForecast = new Forecast { Aircraft = _currentAircraft };
+                            ForecastData forecastData =
+                                    new ForecastData(DateTime.Today,
+                                                     _currentBaseComponent,
+                                                     GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(_currentBaseComponent));
+                            _currentForecast.ForecastDatas.Add(forecastData);
+                        }
+                        else return;
+
+                        ForecastData main = _currentForecast.GetForecastDataFrame() ?? _currentForecast.ForecastDatas[0];
+                        ForecastCustomsWriteData form = new ForecastCustomsWriteData(_currentForecast);
+                        ForecastCustomsAdvancedForm advancedForm = new ForecastCustomsAdvancedForm(_currentForecast);
+
+                        form.ShowDialog();
+
+                        if (form.DialogResult != DialogResult.OK && form.CallAdvanced)
+                            advancedForm.ShowDialog();
+
+                        if (form.DialogResult == DialogResult.OK || advancedForm.DialogResult == DialogResult.OK)
+                        {
+                            if (main.SelectedForecastType == ForecastType.ForecastByDate)
+                            {
+                                if (CurrentAircraft != null)
+                                    labelDateAsOf.Text =
+                                        "Forecast date: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.ForecastDate) +
+                                         " Aircraft TSN/CSN: " + main.ForecastLifelength +
+                                         "\nAvg. utlz: " + main.AverageUtilization;
+                                else
+                                    labelDateAsOf.Text =
+                                        "Forecast date: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.ForecastDate) +
+                                         " Component TSN/CSN: " + main.ForecastLifelength +
+                                         "\nAvg. utlz: " + main.AverageUtilization;
+                            }
+                            else if (main.SelectedForecastType == ForecastType.ForecastByPeriod)
+                            {
+                                labelDateAsOf.Text =
+                                        "Forecast Period From: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.LowerLimit) +
+                                        " To: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.ForecastDate) +
+                                        "\nAvg. utlz: " + main.AverageUtilization;
+                            }
+                            else if (main.SelectedForecastType == ForecastType.ForecastByCheck)
+                            {
+                                if (main.NextPerformanceByDate)
+                                {
+                                    labelDateAsOf.Text = "Forecast: " + main.NextPerformanceString;
+                                }
+                                else
+                                {
+                                    labelDateAsOf.Text =
+                                        string.Format("Forecast: {0}. {1}",
+                                                       main.CheckName,
+                                                       main.NextPerformance);
+                                }
+                            }
+                        }
+                        else return;
+                    }
+                    break;
+            }
+            //UpdateDirectives();
+            AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+            AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+            AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
+
+            AnimatedThreadWorker.RunWorkerAsync();
+        }
+        #endregion
+
+        #region private void FilterItems(IEnumerable<Directive> initialCollection, ICommonCollection<Directive> resultCollection)
+
+        ///<summary>
+        ///</summary>
+        ///<param name="initialCollection"></param>
+        ///<param name="resultCollection"></param>
+        private void FilterItems(IEnumerable<Directive> initialCollection, ICommonCollection<Directive> resultCollection)
+        {
+            if (_filter == null || _filter.Count == 0)
+            {
+                resultCollection.Clear();
+                resultCollection.AddRange(initialCollection);
+                return;
+            }
+
+            resultCollection.Clear();
+
+            foreach (Directive pd in initialCollection)
+            {
+                //if (pd.MaintenanceCheck != null && pd.MaintenanceCheck.Name == "2C")
+                //{
+                //    pd.MaintenanceCheck.ToString();
+                //}
+                if (_filter.FilterTypeAnd)
+                {
+                    bool acceptable = true;
+                    foreach (ICommonFilter filter in _filter)
+                    {
+                        acceptable = filter.Acceptable(pd); if (!acceptable) break;
+                    }
+                    if (acceptable) resultCollection.Add(pd);
+                }
+                else
+                {
+                    bool acceptable = true;
+                    foreach (ICommonFilter filter in _filter)
+                    {
+                        if (filter.Values == null || filter.Values.Length == 0)
+                            continue;
+                        acceptable = filter.Acceptable(pd); if (acceptable) break;
+                    }
+                    if (acceptable) resultCollection.Add(pd);
+                }
+            }
+        }
+        #endregion
+
+		//TODO:(Evgenii Babak) метод не юзается
+        private void releaseObject(object obj)
+        {
+            try
+            {
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+                obj = null;
+            }
+            catch (Exception ex)
+            {
+                obj = null;
+                MessageBox.Show("Unable to release the object " + ex.ToString());
+            }
+            finally
+            {
+                GC.Collect();
+            }
+        }
+
+        /*
+         *  Копировать - Вставить - Вырезать
+         */
+
+        #region private void CopyToClipboard()
+        private void CopyToClipboard()
+        {
+            // регистрация формата данных либо получаем его, если он уже зарегистрирован
+            DataFormats.Format format = DataFormats.GetFormat(typeof(Directive[]).FullName);
+
+            if (_directivesViewer.SelectedItems == null || _directivesViewer.SelectedItems.Count == 0)
+                return;
+
+            //List<Directive> pds = _directivesViewer.SelectedItems;
+            List<Directive> pds = new List<Directive>();
+	        var selectedItems = _directivesViewer.SelectedItems.ToArray();
+			foreach (Directive directive in selectedItems)
+            {
+                pds.Add(directive.GetCopyUnsaved());
+            }
+
+            if(pds.Count <= 0)
+                return;
+
+            //todo:(EvgeniiBabak) Нужен другой способ проверки сереализуемости объекта
+            using (System.IO.MemoryStream mem = new System.IO.MemoryStream())
+            {
+                BinaryFormatter bin = new BinaryFormatter();
+                try
+                {
+                    bin.Serialize(mem, pds);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Объект не может быть сериализован. \n" + ex);
+                    return;
+                }   
+            }
+            // копирование в буфер обмена
+            IDataObject dataObj = new DataObject();
+            dataObj.SetData(format.Name, false, pds.ToArray());
+            Clipboard.SetDataObject(dataObj, false);
+
+            pds.Clear();
+        }
+        #endregion
+
+        #region private void GetFromClipboard()
+
+        private void GetFromClipboard()
+        {
+            try
+            {
+                string format = typeof (Directive[]).FullName;
+
+                if (string.IsNullOrEmpty(format))
+                    return;
+                if (!Clipboard.ContainsData(format))
+                    return;
+                var pds = (Directive[]) Clipboard.GetData(format);
+                if (pds == null)
+                    return;
+
+                var objectsToPaste = new List<Directive>();
+                var bd = DirectiveSource is BaseComponent ? (BaseComponent)DirectiveSource : GlobalObjects.ComponentCore.GetBaseComponentById(((Aircraft)DirectiveSource).AircraftFrameId);
+                foreach (Directive pd in pds)
+                {
+                    pd.ParentBaseComponent = bd;
+
+                    GlobalObjects.PerformanceCalculator.GetNextPerformance(pd);
+                    _initialDirectiveArray.Add(pd);
+                    _resultDirectiveArray.Add(pd);
+
+                    //pd.Title = pd.Title.Insert(0, "Copy of ");
+	                if (pd.Title != "N/A")
+		                pd.Title += " Copy";
+					else if(!string.IsNullOrEmpty(pd.ServiceBulletinNo))
+						pd.ServiceBulletinNo += " Copy";
+					else pd.EngineeringOrders += " Copy";
+
+					if(bd.BaseComponentType == BaseComponentType.Apu)
+						pd.ADType = ADType.APU;
+					else if (bd.BaseComponentType == BaseComponentType.Engine)
+						pd.ADType = ADType.Engine;
+					else if (bd.BaseComponentType == BaseComponentType.LandingGear)
+						pd.ADType = ADType.LandingGear;
+					else if (bd.BaseComponentType == BaseComponentType.Frame)
+						pd.ADType = ADType.Airframe;
+
+					objectsToPaste.Add(pd);
+                }
+
+                if (objectsToPaste.Count > 0)
+                {
+                    _directivesViewer.InsertItems(objectsToPaste.ToArray());
+                    
+                    headerControl.ShowSaveButton = true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Объект не может быть сериализован. \n" + ex);
+                
+                headerControl.ShowSaveButton = false;
+            }
+            finally
+            {
+                Clipboard.Clear();
+            }
+        }
+        #endregion
+
+        #endregion
+    }
+}

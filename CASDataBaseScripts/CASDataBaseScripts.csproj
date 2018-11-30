@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{183F216E-495A-4536-B38E-90876CE10085}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CASDataBaseScripts</RootNamespace>
+    <AssemblyName>CASDataBaseScripts</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DBScripts\BDScripts1100.sql" />
+    <Content Include="DBScripts\BDScripts1000.sql" />
+    <Content Include="DBScripts\BDScripts0900.sql" />
+    <Content Include="DBScripts\BDScripts0800.sql" />
+    <Content Include="DBScripts\BDScripts0700.sql" />
+    <Content Include="DBScripts\BDScripts0600.sql" />
+    <Content Include="DBScripts\BDScripts0500.sql" />
+    <Content Include="DBScripts\BDScripts0400 .sql" />
+    <Content Include="DBScripts\BDScripts0300.sql" />
+    <Content Include="DBScripts\BDScripts0200.sql" />
+    <Content Include="DBScripts\BDScripts0100.sql" />
+    <Content Include="DBScripts\BDScripts0090.sql" />
+    <Content Include="DBScripts\BDScripts0080.sql" />
+    <Content Include="DBScripts\BDScripts0070.sql" />
+    <Content Include="DBScripts\BDScripts0061.sql" />
+    <Content Include="DBScripts\BDScripts0060.sql" />
+    <Content Include="DBScripts\BDScripts0050.sql" />
+    <Content Include="DBScripts\BDScripts0040.sql" />
+    <Content Include="DBScripts\BDScripts0030.sql" />
+    <Content Include="DBScripts\BDScripts.sql" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

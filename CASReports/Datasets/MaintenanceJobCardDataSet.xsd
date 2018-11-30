@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="MaintenanceJobCardDataSet" targetNamespace="http://tempuri.org/MaintenanceJobCardDataSet.xsd" xmlns:mstns="http://tempuri.org/MaintenanceJobCardDataSet.xsd" xmlns="http://tempuri.org/MaintenanceJobCardDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+        </Connections>
+        <Tables>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="MaintenanceJobCardDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="MaintenanceJobCardDataSet" msprop:Generator_DataSetName="MaintenanceJobCardDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="SummaryTable" msprop:Generator_UserTableName="SummaryTable" msprop:Generator_RowDeletedName="SummaryTableRowDeleted" msprop:Generator_RowChangedName="SummaryTableRowChanged" msprop:Generator_RowClassName="SummaryTableRow" msprop:Generator_RowChangingName="SummaryTableRowChanging" msprop:Generator_RowEvArgName="SummaryTableRowChangeEvent" msprop:Generator_RowEvHandlerName="SummaryTableRowChangeEventHandler" msprop:Generator_TableClassName="SummaryTableDataTable" msprop:Generator_TableVarName="tableSummaryTable" msprop:Generator_RowDeletingName="SummaryTableRowDeleting" msprop:Generator_TablePropName="SummaryTable">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Logotype" msprop:Generator_UserColumnName="Logotype" msprop:Generator_ColumnPropNameInRow="Logotype" msprop:Generator_ColumnVarNameInTable="columnLogotype" msprop:Generator_ColumnPropNameInTable="LogotypeColumn" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="Model" msprop:Generator_UserColumnName="Model" msprop:Generator_ColumnPropNameInRow="Model" msprop:Generator_ColumnVarNameInTable="columnModel" msprop:Generator_ColumnPropNameInTable="ModelColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="RegistrationNumber" msprop:Generator_UserColumnName="RegistrationNumber" msprop:Generator_ColumnPropNameInRow="RegistrationNumber" msprop:Generator_ColumnVarNameInTable="columnRegistrationNumber" msprop:Generator_ColumnPropNameInTable="RegistrationNumberColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="AirlineCardNumber" msprop:Generator_UserColumnName="AirlineCardNumber" msprop:Generator_ColumnPropNameInRow="AirlineCardNumber" msprop:Generator_ColumnVarNameInTable="columnAirlineCardNumber" msprop:Generator_ColumnPropNameInTable="AirlineCardNumberColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Revision" msprop:Generator_UserColumnName="Revision" msprop:Generator_ColumnPropNameInRow="Revision" msprop:Generator_ColumnVarNameInTable="columnRevision" msprop:Generator_ColumnPropNameInTable="RevisionColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Date" msprop:Generator_UserColumnName="Date" msprop:Generator_ColumnPropNameInRow="Date" msprop:Generator_ColumnVarNameInTable="columnDate" msprop:Generator_ColumnPropNameInTable="DateColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="WorkArea" msprop:Generator_UserColumnName="WorkArea" msprop:Generator_ColumnPropNameInRow="WorkArea" msprop:Generator_ColumnVarNameInTable="columnWorkArea" msprop:Generator_ColumnPropNameInTable="WorkAreaColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Interval" msprop:Generator_UserColumnName="Interval" msprop:Generator_ColumnPropNameInRow="Interval" msprop:Generator_ColumnVarNameInTable="columnInterval" msprop:Generator_ColumnPropNameInTable="IntervalColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="ReportFooterCAS" msprop:Generator_UserColumnName="ReportFooterCAS" msprop:Generator_ColumnVarNameInTable="columnReportFooterCAS" msprop:Generator_ColumnPropNameInRow="ReportFooterCAS" msprop:Generator_ColumnPropNameInTable="ReportFooterCASColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="ReportFooterLink" msprop:Generator_UserColumnName="ReportFooterLink" msprop:Generator_ColumnVarNameInTable="columnReportFooterLink" msprop:Generator_ColumnPropNameInRow="ReportFooterLink" msprop:Generator_ColumnPropNameInTable="ReportFooterLinkColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="JobCardTasks" msprop:Generator_UserTableName="JobCardTasks" msprop:Generator_RowDeletedName="JobCardTasksRowDeleted" msprop:Generator_RowChangedName="JobCardTasksRowChanged" msprop:Generator_RowClassName="JobCardTasksRow" msprop:Generator_RowChangingName="JobCardTasksRowChanging" msprop:Generator_RowEvArgName="JobCardTasksRowChangeEvent" msprop:Generator_RowEvHandlerName="JobCardTasksRowChangeEventHandler" msprop:Generator_TableClassName="JobCardTasksDataTable" msprop:Generator_TableVarName="tableJobCardTasks" msprop:Generator_RowDeletingName="JobCardTasksRowDeleting" msprop:Generator_TablePropName="JobCardTasks">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TaskGroup" msprop:Generator_UserColumnName="TaskGroup" msprop:Generator_ColumnPropNameInRow="TaskGroup" msprop:Generator_ColumnVarNameInTable="columnTaskGroup" msprop:Generator_ColumnPropNameInTable="TaskGroupColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="MPDItem" msprop:Generator_UserColumnName="MPDItem" msprop:Generator_ColumnPropNameInRow="MPDItem" msprop:Generator_ColumnVarNameInTable="columnMPDItem" msprop:Generator_ColumnPropNameInTable="MPDItemColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="TaskDescription" msprop:Generator_UserColumnName="TaskDescription" msprop:Generator_ColumnPropNameInRow="TaskDescription" msprop:Generator_ColumnVarNameInTable="columnTaskDescription" msprop:Generator_ColumnPropNameInTable="TaskDescriptionColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="MMRef" msprop:Generator_UserColumnName="MMRef" msprop:Generator_ColumnPropNameInRow="MMRef" msprop:Generator_ColumnVarNameInTable="columnMMRef" msprop:Generator_ColumnPropNameInTable="MMRefColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Zone" msprop:Generator_UserColumnName="Zone" msprop:Generator_ColumnPropNameInRow="Zone" msprop:Generator_ColumnVarNameInTable="columnZone" msprop:Generator_ColumnPropNameInTable="ZoneColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Skill" msprop:Generator_UserColumnName="Skill" msprop:Generator_ColumnPropNameInRow="Skill" msprop:Generator_ColumnVarNameInTable="columnSkill" msprop:Generator_ColumnPropNameInTable="SkillColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ComplianceListDataSet" targetNamespace="http://tempuri.org/ComplianceListDataSet.xsd" xmlns:mstns="http://tempuri.org/ComplianceListDataSet.xsd" xmlns="http://tempuri.org/ComplianceListDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+        </Connections>
+        <Tables>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ComplianceListDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="ComplianceListDataSet" msprop:Generator_DataSetName="ComplianceListDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ComplianceList" msprop:Generator_UserTableName="ComplianceList" msprop:Generator_RowDeletedName="ComplianceListRowDeleted" msprop:Generator_TableClassName="ComplianceListDataTable" msprop:Generator_RowChangedName="ComplianceListRowChanged" msprop:Generator_RowClassName="ComplianceListRow" msprop:Generator_RowChangingName="ComplianceListRowChanging" msprop:Generator_RowEvArgName="ComplianceListRowChangeEvent" msprop:Generator_RowEvHandlerName="ComplianceListRowChangeEventHandler" msprop:Generator_TablePropName="ComplianceList" msprop:Generator_TableVarName="tableComplianceList" msprop:Generator_RowDeletingName="ComplianceListRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msprop:Generator_UserColumnName="ID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInTable="IDColumn" type="xs:int" />
+              <xs:element name="Date" msprop:Generator_UserColumnName="Date" msprop:Generator_ColumnPropNameInRow="Date" msprop:Generator_ColumnVarNameInTable="columnDate" msprop:Generator_ColumnPropNameInTable="DateColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="WorkType" msprop:Generator_UserColumnName="WorkType" msprop:Generator_ColumnPropNameInRow="WorkType" msprop:Generator_ColumnVarNameInTable="columnWorkType" msprop:Generator_ColumnPropNameInTable="WorkTypeColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Lifelength" msprop:Generator_UserColumnName="Lifelength" msprop:Generator_ColumnPropNameInRow="Lifelength" msprop:Generator_ColumnVarNameInTable="columnLifelength" msprop:Generator_ColumnPropNameInTable="LifelengthColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Remarks" msprop:Generator_UserColumnName="Remarks" msprop:Generator_ColumnPropNameInRow="Remarks" msprop:Generator_ColumnVarNameInTable="columnRemarks" msprop:Generator_ColumnPropNameInTable="RemarksColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AdditionalTable" msprop:Generator_UserTableName="AdditionalTable" msprop:Generator_RowDeletedName="AdditionalTableRowDeleted" msprop:Generator_TableClassName="AdditionalTableDataTable" msprop:Generator_RowChangedName="AdditionalTableRowChanged" msprop:Generator_RowClassName="AdditionalTableRow" msprop:Generator_RowChangingName="AdditionalTableRowChanging" msprop:Generator_RowEvArgName="AdditionalTableRowChangeEvent" msprop:Generator_RowEvHandlerName="AdditionalTableRowChangeEventHandler" msprop:Generator_TablePropName="AdditionalTable" msprop:Generator_TableVarName="tableAdditionalTable" msprop:Generator_RowDeletingName="AdditionalTableRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msprop:Generator_UserColumnName="ID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInTable="IDColumn" type="xs:int" />
+              <xs:element name="DateAsOf" msprop:Generator_UserColumnName="DateAsOf" msprop:Generator_ColumnPropNameInRow="DateAsOf" msprop:Generator_ColumnVarNameInTable="columnDateAsOf" msprop:Generator_ColumnPropNameInTable="DateAsOfColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="ReportName" msprop:Generator_UserColumnName="ReportName" msprop:Generator_ColumnPropNameInRow="ReportName" msprop:Generator_ColumnVarNameInTable="columnReportName" msprop:Generator_ColumnPropNameInTable="ReportNameColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="ReportFooter" msprop:Generator_UserColumnName="ReportFooter" msprop:Generator_ColumnPropNameInRow="ReportFooter" msprop:Generator_ColumnVarNameInTable="columnReportFooter" msprop:Generator_ColumnPropNameInTable="ReportFooterColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="WebSite" msprop:Generator_UserColumnName="WebSite" msprop:Generator_ColumnPropNameInRow="WebSite" msprop:Generator_ColumnVarNameInTable="columnWebSite" msprop:Generator_ColumnPropNameInTable="WebSiteColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ComplianceList" />
+      <xs:field xpath="mstns:ID" />
+    </xs:unique>
+    <xs:unique name="AdditionalTable_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:AdditionalTable" />
+      <xs:field xpath="mstns:ID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

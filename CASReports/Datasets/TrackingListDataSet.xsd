@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TrackingListDataSet" targetNamespace="http://tempuri.org/TrackingListDataSet.xsd" xmlns:mstns="http://tempuri.org/TrackingListDataSet.xsd" xmlns="http://tempuri.org/TrackingListDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="TrackingListDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="TrackingListDataSet" msprop:Generator_UserDSName="TrackingListDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="AdditionalDataTAble" msprop:Generator_TableClassName="AdditionalDataTAbleDataTable" msprop:Generator_TableVarName="tableAdditionalDataTAble" msprop:Generator_RowChangedName="AdditionalDataTAbleRowChanged" msprop:Generator_TablePropName="AdditionalDataTAble" msprop:Generator_RowDeletingName="AdditionalDataTAbleRowDeleting" msprop:Generator_RowChangingName="AdditionalDataTAbleRowChanging" msprop:Generator_RowEvHandlerName="AdditionalDataTAbleRowChangeEventHandler" msprop:Generator_RowDeletedName="AdditionalDataTAbleRowDeleted" msprop:Generator_RowClassName="AdditionalDataTAbleRow" msprop:Generator_UserTableName="AdditionalDataTAble" msprop:Generator_RowEvArgName="AdditionalDataTAbleRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ReportHeadertText" msprop:Generator_ColumnVarNameInTable="columnReportHeadertText" msprop:Generator_ColumnPropNameInRow="ReportHeadertText" msprop:Generator_ColumnPropNameInTable="ReportHeadertTextColumn" msprop:Generator_UserColumnName="ReportHeadertText" type="xs:string" minOccurs="0" />
+              <xs:element name="OperatorLogotype" msprop:Generator_ColumnVarNameInTable="columnOperatorLogotype" msprop:Generator_ColumnPropNameInRow="OperatorLogotype" msprop:Generator_ColumnPropNameInTable="OperatorLogotypeColumn" msprop:Generator_UserColumnName="OperatorLogotype" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="FilterSelection" msprop:Generator_ColumnVarNameInTable="columnFilterSelection" msprop:Generator_ColumnPropNameInRow="FilterSelection" msprop:Generator_ColumnPropNameInTable="FilterSelectionColumn" msprop:Generator_UserColumnName="FilterSelection" type="xs:string" minOccurs="0" />
+              <xs:element name="DateAsOf" msprop:Generator_ColumnVarNameInTable="columnDateAsOf" msprop:Generator_ColumnPropNameInRow="DateAsOf" msprop:Generator_ColumnPropNameInTable="DateAsOfColumn" msprop:Generator_UserColumnName="DateAsOf" type="xs:string" minOccurs="0" />
+              <xs:element name="ReportFooter" msprop:Generator_ColumnVarNameInTable="columnReportFooter" msprop:Generator_ColumnPropNameInRow="ReportFooter" msprop:Generator_ColumnPropNameInTable="ReportFooterColumn" msprop:Generator_UserColumnName="ReportFooter" type="xs:string" minOccurs="0" />
+              <xs:element name="ReportFooterPrepared" msprop:Generator_ColumnVarNameInTable="columnReportFooterPrepared" msprop:Generator_ColumnPropNameInRow="ReportFooterPrepared" msprop:Generator_ColumnPropNameInTable="ReportFooterPreparedColumn" msprop:Generator_UserColumnName="ReportFooterPrepared" type="xs:string" minOccurs="0" />
+              <xs:element name="WebSite" msprop:Generator_ColumnVarNameInTable="columnWebSite" msprop:Generator_ColumnPropNameInRow="WebSite" msprop:Generator_ColumnPropNameInTable="WebSiteColumn" msprop:Generator_UserColumnName="WebSite" type="xs:string" minOccurs="0" />
+              <xs:element name="FormName" msprop:Generator_ColumnVarNameInTable="columnFormName" msprop:Generator_ColumnPropNameInRow="FormName" msprop:Generator_ColumnPropNameInTable="FormNameColumn" msprop:Generator_UserColumnName="FormName" type="xs:string" minOccurs="0" />
+              <xs:element name="Released" msprop:Generator_ColumnVarNameInTable="columnReleased" msprop:Generator_ColumnPropNameInRow="Released" msprop:Generator_ColumnPropNameInTable="ReleasedColumn" msprop:Generator_UserColumnName="Released" type="xs:string" minOccurs="0" />
+              <xs:element name="Received" msprop:Generator_ColumnVarNameInTable="columnReceived" msprop:Generator_ColumnPropNameInRow="Received" msprop:Generator_ColumnPropNameInTable="ReceivedColumn" msprop:Generator_UserColumnName="Received" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TrackingDataTable" msprop:Generator_TableClassName="TrackingDataTableDataTable" msprop:Generator_TableVarName="tableTrackingDataTable" msprop:Generator_TablePropName="TrackingDataTable" msprop:Generator_RowDeletingName="TrackingDataTableRowDeleting" msprop:Generator_RowChangingName="TrackingDataTableRowChanging" msprop:Generator_RowEvHandlerName="TrackingDataTableRowChangeEventHandler" msprop:Generator_RowDeletedName="TrackingDataTableRowDeleted" msprop:Generator_UserTableName="TrackingDataTable" msprop:Generator_RowChangedName="TrackingDataTableRowChanged" msprop:Generator_RowEvArgName="TrackingDataTableRowChangeEvent" msprop:Generator_RowClassName="TrackingDataTableRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Date" msprop:Generator_ColumnVarNameInTable="columnDate" msprop:Generator_ColumnPropNameInRow="Date" msprop:Generator_ColumnPropNameInTable="DateColumn" msprop:Generator_UserColumnName="Date" type="xs:string" minOccurs="0" />
+              <xs:element name="FromTo" msprop:Generator_ColumnVarNameInTable="columnFromTo" msprop:Generator_ColumnPropNameInRow="FromTo" msprop:Generator_ColumnPropNameInTable="FromToColumn" msprop:Generator_UserColumnName="FromTo" type="xs:string" minOccurs="0" />
+              <xs:element name="Class" msprop:Generator_ColumnVarNameInTable="columnClass" msprop:Generator_ColumnPropNameInRow="Class" msprop:Generator_ColumnPropNameInTable="ClassColumn" msprop:Generator_UserColumnName="Class" type="xs:string" minOccurs="0" />
+              <xs:element name="Q-ty" msprop:Generator_ColumnVarNameInTable="_columnQ_ty" msprop:Generator_ColumnPropNameInRow="_Q_ty" msprop:Generator_ColumnPropNameInTable="_Q_tyColumn" msprop:Generator_UserColumnName="Q-ty" type="xs:string" minOccurs="0" />
+              <xs:element name="Reason" msprop:Generator_ColumnVarNameInTable="columnReason" msprop:Generator_ColumnPropNameInRow="Reason" msprop:Generator_ColumnPropNameInTable="ReasonColumn" msprop:Generator_UserColumnName="Reason" type="xs:string" minOccurs="0" />
+              <xs:element name="OnOff" msprop:Generator_ColumnVarNameInTable="columnOnOff" msprop:Generator_ColumnPropNameInRow="OnOff" msprop:Generator_ColumnPropNameInTable="OnOffColumn" msprop:Generator_UserColumnName="OnOff" type="xs:string" minOccurs="0" />
+              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description" type="xs:string" minOccurs="0" />
+              <xs:element name="Remark" msprop:Generator_ColumnVarNameInTable="columnRemark" msprop:Generator_ColumnPropNameInRow="Remark" msprop:Generator_ColumnPropNameInTable="RemarkColumn" msprop:Generator_UserColumnName="Remark" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

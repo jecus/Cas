@@ -1,0 +1,2363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{47C45625-5435-4A97-BE6E-C65C23D12BA9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CAS.UI</RootNamespace>
+    <AssemblyName>CAS</AssemblyName>
+    <StartupObject>
+    </StartupObject>
+    <TargetZone>LocalIntranet</TargetZone>
+    <GenerateManifests>false</GenerateManifests>
+    <ApplicationIcon>LTR.ico</ApplicationIcon>
+    <ManifestCertificateThumbprint>C27C09B721D11A3D22093704840E60AF79D2EFB1</ManifestCertificateThumbprint>
+    <ManifestKeyFile>CASUI_TemporaryKey.pfx</ManifestKeyFile>
+    <SignManifests>false</SignManifests>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <SignAssembly>false</SignAssembly>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <PublishUrl>http://localhost/CASUI/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.2</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>false</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\CAS.xml</DocumentationFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;RELEASE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DemoRelease|AnyCPU' ">
+    <OutputPath>bin\DemoRelease\</OutputPath>
+    <DefineConstants>TRACE;DemoRelease</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DemoDebug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DemoDebug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DemoDebug</DefineConstants>
+    <DocumentationFile>bin\Debug\LTRCore.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdministerRelease|AnyCPU' ">
+    <OutputPath>bin\AdministerRelease\</OutputPath>
+    <DefineConstants>AdministerRelease</DefineConstants>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdministerDebug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\AdministerDebug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;AdministerDebug</DefineConstants>
+    <DocumentationFile>bin\Debug\LTRCore.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PartnerDebug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\PartnerDebug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;PartnerDebug</DefineConstants>
+    <DocumentationFile>bin\Debug\LTRCore.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PartnerRelease|AnyCPU' ">
+    <OutputPath>bin\PartnerRelease\</OutputPath>
+    <DefineConstants>TRACE;PartnerRelease</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'TechnicianDebug|AnyCPU' ">
+    <OutputPath>bin\TechnicianDebug\</OutputPath>
+    <DefineConstants>TechnicianDebug</DefineConstants>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'TechnicianRelease|AnyCPU' ">
+    <OutputPath>bin\TechnicianRelease\</OutputPath>
+    <DefineConstants>TRACE;TechnicianRelease</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Orenburg|AnyCPU' ">
+    <OutputPath>bin\Orenburg\</OutputPath>
+    <DefineConstants>TRACE;Orenburg</DefineConstants>
+    <Optimize>true</Optimize>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>bin\Debug\CAS.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DemoRelease|x86' ">
+    <OutputPath>bin\x86\DemoRelease\</OutputPath>
+    <DefineConstants>TRACE;DemoRelease</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DemoDebug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\DemoDebug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DemoDebug</DefineConstants>
+    <DocumentationFile>bin\Debug\LTRCore.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdministerRelease|x86' ">
+    <OutputPath>bin\x86\AdministerRelease\</OutputPath>
+    <DefineConstants>AdministerRelease</DefineConstants>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdministerDebug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\AdministerDebug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;AdministerDebug</DefineConstants>
+    <DocumentationFile>bin\Debug\LTRCore.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PartnerDebug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\PartnerDebug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;PartnerDebug</DefineConstants>
+    <DocumentationFile>bin\Debug\LTRCore.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PartnerRelease|x86' ">
+    <OutputPath>bin\x86\PartnerRelease\</OutputPath>
+    <DefineConstants>TRACE;PartnerRelease</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'TechnicianDebug|x86' ">
+    <OutputPath>bin\x86\TechnicianDebug\</OutputPath>
+    <DefineConstants>TechnicianDebug</DefineConstants>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'TechnicianRelease|x86' ">
+    <OutputPath>bin\x86\TechnicianRelease\</OutputPath>
+    <DefineConstants>TRACE;TechnicianRelease</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Orenburg|x86' ">
+    <OutputPath>bin\x86\Orenburg\</OutputPath>
+    <DefineConstants>TRACE;Orenburg</DefineConstants>
+    <Optimize>true</Optimize>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>bin\Debug\CAS.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;RELEASE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DemoRelease|x64' ">
+    <OutputPath>bin\x64\DemoRelease\</OutputPath>
+    <DefineConstants>TRACE;DemoRelease</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DemoDebug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\DemoDebug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DemoDebug</DefineConstants>
+    <DocumentationFile>bin\Debug\LTRCore.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdministerRelease|x64' ">
+    <OutputPath>bin\x64\AdministerRelease\</OutputPath>
+    <DefineConstants>AdministerRelease</DefineConstants>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdministerDebug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\AdministerDebug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;AdministerDebug</DefineConstants>
+    <DocumentationFile>bin\Debug\LTRCore.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PartnerDebug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\PartnerDebug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;PartnerDebug</DefineConstants>
+    <DocumentationFile>bin\Debug\LTRCore.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PartnerRelease|x64' ">
+    <OutputPath>bin\x64\PartnerRelease\</OutputPath>
+    <DefineConstants>TRACE;PartnerRelease</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'TechnicianDebug|x64' ">
+    <OutputPath>bin\x64\TechnicianDebug\</OutputPath>
+    <DefineConstants>TechnicianDebug</DefineConstants>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'TechnicianRelease|x64' ">
+    <OutputPath>bin\x64\TechnicianRelease\</OutputPath>
+    <DefineConstants>TRACE;TechnicianRelease</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Orenburg|x64' ">
+    <OutputPath>bin\x64\Orenburg\</OutputPath>
+    <DefineConstants>TRACE;Orenburg</DefineConstants>
+    <Optimize>true</Optimize>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CasNetworkObserver, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Resources\CasNetworkObserver.dll</HintPath>
+    </Reference>
+    <Reference Include="CasProtocol, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Resources\CasProtocol.dll</HintPath>
+    </Reference>
+    <Reference Include="Controls, Version=1.0.3565.29126, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\dev\AvalonControls\Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\WINDOWS\assembly\GAC_MSIL\System.Web.Services\2.0.0.0__b03f5f7f11d50a3a\System.Web.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Launcher.cs" />
+    <Compile Include="Logging\ErrorReportSender.cs" />
+    <Compile Include="Logging\FileLogger.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\MailFileLogger.cs" />
+    <Compile Include="Logging\ModeProvider.cs" />
+    <Compile Include="Logging\RethrowableFileLogger.cs" />
+    <Compile Include="Logging\SafeFileLogger.cs" />
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\ComponentChangeControl\DispatcheredComponentChangeScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\ComponentChangeControl\DispatcheredComponentChangeScreen.Designer.cs">
+      <DependentUpon>DispatcheredComponentChangeScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredAirFleetReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredAirFleetReport.Designer.cs">
+      <DependentUpon>DispatcheredAirFleetReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredCompponentChangeReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredCompponentChangeReport.Designer.cs">
+      <DependentUpon>DispatcheredCompponentChangeReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredWorkPackageCoverSheetReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredWorkPackageCoverSheetReport.Designer.cs">
+      <DependentUpon>DispatcheredWorkPackageCoverSheetReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredMonthlyUtilizationReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredMonthlyUtilizationReport.Designer.cs">
+      <DependentUpon>DispatcheredMonthlyUtilizationReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TempDatabaseFileWriter.cs" />
+    <Compile Include="Interfaces\EditObjectControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interfaces\EditObjectControl.Designer.cs">
+      <DependentUpon>EditObjectControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaces\EditObjectDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaces\EditObjectDialog.Designer.cs">
+      <DependentUpon>EditObjectDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DiscrepanciesDisplayerProvider.cs" />
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\AircraftsControls\DispatcheredAircraftGeneralDataScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\AircraftsControls\DispatcheredAircraftGeneralDataScreen.Designer.cs">
+      <DependentUpon>DispatcheredAircraftGeneralDataScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\AircraftTechnicalLogBookControls\DispatcheredATLBFlightsScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\AircraftTechnicalLogBookControls\DispatcheredATLBsScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\BiWeekliesControls\DispatcheredBiWeekliesCollectionScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DirectiveControls\DispatcheredCPCPDirectiveScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DirectiveControls\DispatcheredDamageDirectiveAddingScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DirectiveControls\DispatcheredDamageDirectiveListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DirectiveControls\DispatcheredDamageDirectiveScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DirectiveControls\DispatcheredOutOffPhaseReferencAdding.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DirectiveControls\DispatcheredOutOffPhaseReferenceScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DirectiveControls\DispatcheredСertainDirectivesView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DirectiveControls\DispatcheredCPCPDirectiveAddingScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\EngineeringOrdersDirectives\DispatcheredEngineeringOrderDirectiveAddingScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\EngineeringOrdersDirectives\DispatcheredEngineeringOrderDirectiveScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\MaintenanceStatusControls\DispatcheredJobCardsCollectionScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\MaintenanceStatusControls\DispatcheredSubChecksCollectionScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\ModificationsPerformed\DispatcheredModificationItemAdding.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\ModificationsPerformed\DispatcheredModificationItemScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\ModificationsPerformed\DispatcheredModificationsPerformedListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\MonthlyUtilizationsControls\DispatcheredMonthlyUtilizationScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredShouldBeOnStockReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredShouldBeOnStockReport.Designer.cs">
+      <DependentUpon>DispatcheredShouldBeOnStockReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredATLBReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredATLBReport.Designer.cs">
+      <DependentUpon>DispatcheredATLBReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredWorkPackageReleaseToServiceReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredWorkPackageReleaseToServiceReport.Designer.cs">
+      <DependentUpon>DispatcheredWorkPackageReleaseToServiceReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredEngineeringOrdersReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredEngineeringOrdersReport.Designer.cs">
+      <DependentUpon>DispatcheredEngineeringOrdersReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredWorkPackageReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredWorkPackageReport.Designer.cs">
+      <DependentUpon>DispatcheredWorkPackageReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredWorkPackagesReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredWorkPackagesReport.Designer.cs">
+      <DependentUpon>DispatcheredWorkPackagesReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredModificationItemsReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredModificationItemsReport.Designer.cs">
+      <DependentUpon>DispatcheredModificationItemsReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredEngineeringOrderReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredEngineeringOrderReport.Designer.cs">
+      <DependentUpon>DispatcheredEngineeringOrderReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredMaintenanceJobCardReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredMaintenanceJobCardReport.Designer.cs">
+      <DependentUpon>DispatcheredMaintenanceJobCardReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredMaintenanceStatusReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredMaintenanceStatusReport.Designer.cs">
+      <DependentUpon>DispatcheredMaintenanceStatusReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\OpepatorsControls\DispatcheredOperatorScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\ReferenceAvalonButtonM.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredAircraftGeneralDataReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredAircraftGeneralDataReport.Designer.cs">
+      <DependentUpon>DispatcheredAircraftGeneralDataReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredComplianceListReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredComplianceListReport.Designer.cs">
+      <DependentUpon>DispatcheredComplianceListReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredStoreReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredStoreReport.Designer.cs">
+      <DependentUpon>DispatcheredStoreReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispathceredMaintenanceSubCheckReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispathceredMaintenanceSubCheckReport.Designer.cs">
+      <DependentUpon>DispathceredMaintenanceSubCheckReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\StoresControls\DispatcheredShouldBeOnStockScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\StoresControls\DispatcheredStoreScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\TemplatesControls\DispatcheredTemplateADDirectiveListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\TemplatesControls\DispatcheredTemplateAgingProgramDirectiveListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\TemplatesControls\DispatcheredTemplateAircraftGeneralDataScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\TemplatesControls\DispatcheredTemplateCPCPDirectiveListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\TemplatesControls\DispatcheredTemplateDetailAdding.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\TemplatesControls\DispatcheredTemplateDetailListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\TemplatesControls\DispatcheredTemplateAircraftScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\TemplatesControls\DispatcheredTemplateDetailScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\TemplatesControls\DispatcheredTemplateDirectiveAdding.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\TemplatesControls\DispatcheredTemplateDirectiveListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\TemplatesControls\DispatcheredTemplateDirectiveScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\TemplatesControls\DispatcheredTemplateEngeneeringOrdersDirectiveListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\TemplatesControls\DispatcheredTemplateMaintenanceStatusScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\TemplatesControls\DispatcheredTemplateModificationDirectiveListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\TemplatesControls\DispatcheredTemplateRepairDirectiveListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\TemplatesControls\DispatcheredTemplateSBDirectiveListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\TemplatesControls\DispatcheredTemplateSSIDDirectiveListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\MaintenanceStatusControls\DispatcheredMaintenanceStatusControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\WorkPackages\DispatcheredWorkPackageScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\WorkPackages\DispatcheredWorkPackagesListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\HelpRequestingLink.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\ReferenceAvalonButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\ReferenceLinkLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispathceredDiscrepanciesReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispathceredDiscrepanciesReport.Designer.cs">
+      <DependentUpon>DispathceredDiscrepanciesReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\LicenseDispatcher.cs" />
+    <Compile Include="Management\SystemIcon.cs" />
+    <Compile Include="Messages\CASMessage.cs" />
+    <Compile Include="Messages\MessageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Messages\MessageForm.Designer.cs">
+      <DependentUpon>MessageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="ActiveProgrammer.cs" />
+    <Compile Include="DomrachevSergeyVIPForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DomrachevSergeyVIPForm.Designer.cs">
+      <DependentUpon>DomrachevSergeyVIPForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSF.Designer.cs">
+      <DependentUpon>FormSF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\AircraftsControls\DispatcheredAircraftBaseDetailInfoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\AircraftsControls\DispatcheredAircraftScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\AircraftsControls\AircraftCollectionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftsControls\AircraftGeneralDataControls\OtherControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftsControls\AircraftInfoReference.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\Comparers\DirectiveRecordsComparer.cs" />
+    <Compile Include="UIControls\Auxiliary\Date.cs" />
+    <Compile Include="UIControls\ComplianceControls\TransferRecordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\ComplianceControls\ActualStateRecordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\ComponentChangeReport\ComponentChangeListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\ComponentChangeReport\ComponentChangeScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DetailsControls\DetailCompliancePerformanceControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DetailsControls\DetailCompliancePerformanceListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DetailsControls\DetailAddCompliancePerformanceControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DetailsControls\DetailAddingGeneralInformationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DetailsControls\DetailAddingScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\AbstractDirectiveTextFilterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\AbstractDirectiveTextFilterControl.Designer.cs">
+      <DependentUpon>AbstractDirectiveTextFilterControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\MonthlyUtilizationsControls\AircraftFlightForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\AircraftInformationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\AircraftInformationControl.Designer.cs">
+      <DependentUpon>AircraftInformationControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\ATLBFlightsListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\ATLBFlightsScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\ATLBForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\ATLBsListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\ATLBsScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\ComponentOilControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\ComponentOilControl.Designer.cs">
+      <DependentUpon>ComponentOilControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\ComponentOilListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\ComponentOilListControl.Designer.cs">
+      <DependentUpon>ComponentOilListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\DiscrepanciesListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\DiscrepanciesListControl.Designer.cs">
+      <DependentUpon>DiscrepanciesListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\DiscrepancyControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\DiscrepancyControl.Designer.cs">
+      <DependentUpon>DiscrepancyControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\EngineMonitoringControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\EngineMonitoringControl.Designer.cs">
+      <DependentUpon>EngineMonitoringControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\FlightCrewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\FlightCrewControl.Designer.cs">
+      <DependentUpon>FlightCrewControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\FlightDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\FlightDialog.Designer.cs">
+      <DependentUpon>FlightDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\FlightFluidsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\FlightFluidsControl.Designer.cs">
+      <DependentUpon>FlightFluidsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\FlightGeneralInformationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\FlightGeneralInformationControl.Designer.cs">
+      <DependentUpon>FlightGeneralInformationControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\FlightTimeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\FlightTimeControl.Designer.cs">
+      <DependentUpon>FlightTimeControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\FuelControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\FuelControl.Designer.cs">
+      <DependentUpon>FuelControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\MaintenanceProgramControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\MaintenanceProgramControl.Designer.cs">
+      <DependentUpon>MaintenanceProgramControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\ReleaseToServiceControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\ReleaseToServiceControl.Designer.cs">
+      <DependentUpon>ReleaseToServiceControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\TirePressureControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftTechnicalLogBookControls\TirePressureControl.Designer.cs">
+      <DependentUpon>TirePressureControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\ATAChapterComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\Comparers\ADDirectiveListViewComparer.cs">
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\Comparers\CertainGroupsOrderListViewComparer.cs" />
+    <Compile Include="UIControls\Auxiliary\Comparers\DetailComplianceListViewComparer.cs" />
+    <Compile Include="UIControls\Auxiliary\Comparers\DirectiveComplianceListViewComparer.cs" />
+    <Compile Include="UIControls\Auxiliary\Comparers\ListViewItemsComparer.cs" />
+    <Compile Include="UIControls\Auxiliary\Comparers\TemplateAircraftModelComparer.cs" />
+    <Compile Include="UIControls\Auxiliary\Delimiter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\Delimiter.Designer.cs">
+      <DependentUpon>Delimiter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\ScreenMode.cs" />
+    <Compile Include="UIControls\Auxiliary\SimpleBalloon.cs" />
+    <Compile Include="UIControls\Auxiliary\WindowsFormAttachedFileControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\BiWeekliesReportsControls\BiWeeklyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\ComplianceControls\ComplianceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\ComplianceControls\DetailComplianceListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\DetailsControls\BaseDetailHeaderControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\DetailsControls\BaseDetailLinksFlowLayoutPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\DetailsControls\DetailStoreControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DetailsControls\DetailWarrantyControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DetailsControls\EASAControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\ADDirectiveListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\CPCPDirectiveAddingScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\CPCPDirectiveGeneralInformationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\CPCPDirectiveListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\CPCPDirectiveScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\CPCPDirectiveSummaryInformationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\DamageDirectiveAddingScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\DamageDirectiveGeneralInformationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\DamageDirectiveListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\DamageDirectiveScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\DamageDirectiveSummaryInformationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\DirectiveAddingScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\DirectiveApplicabilityControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\OutOffPhaseReferencAdding.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DiscrepanciesControls\ComposeWorkPackageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\DiscrepanciesControls\ForecastReportOptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\DiscrepanciesControls\ForecastReportOptionsForm.Designer.cs">
+      <DependentUpon>ForecastReportOptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\ATAChapterFilterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\ATAChapterFilterControl.designer.cs">
+      <DependentUpon>ATAChapterFilterControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\AvionicsInventoryFilterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\AvionicsInventoryFilterControl.designer.cs">
+      <DependentUpon>AvionicsInventoryFilterControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\ConditionStatusControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\ConditionStatusControl.designer.cs">
+      <DependentUpon>ConditionStatusControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\DetailConditionFilterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\DetailFilterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\DetailFilterControl.designer.cs">
+      <DependentUpon>DetailFilterControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\DetailFilterSelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\DetailFilterSelection.designer.cs">
+      <DependentUpon>DetailFilterSelection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\DirectiveConditionFilterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\DirectiveDescriptionFilterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\DirectiveFilterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\DirectiveFilterControl.designer.cs">
+      <DependentUpon>DirectiveFilterControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\DirectiveFilterSelectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\DirectiveFilterSelectionForm.designer.cs">
+      <DependentUpon>DirectiveFilterSelectionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\DirectiveOpenessFilterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\DirectiveTitleFilterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\ExtendableDetailFilterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\IFilterControl.cs" />
+    <Compile Include="UIControls\FiltersControls\LandingGearFilterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\LandingGearFilterControl.Designer.cs">
+      <DependentUpon>LandingGearFilterControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\MaintenanceFilterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\MaintenanceFilterControl.Designer.cs">
+      <DependentUpon>MaintenanceFilterControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\PartNoFilterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\PartNoFilterControl.Designer.cs">
+      <DependentUpon>PartNoFilterControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\SerialNoFilterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\SerialNoFilterControl.Designer.cs">
+      <DependentUpon>SerialNoFilterControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\FiltersControls\TemplateDirectiveTitleFilterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\MaintenanceStatusControls\JobCardTabPageControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\MaintenanceStatusControls\MaintenanceJobCardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\MasterListControls\AircraftDocumentsListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\MasterListControls\AircraftDocumentsScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ModificationsPerformed\ModificationItemAdding.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ModificationsPerformed\ModificationItemControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ModificationsPerformed\ModificationItemScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\OutOffPhaseReferenceScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\OutOffPhaseReferenceInformationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\OutOffPhaseReferenceSummary.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\OutOffPhaseReferencesListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\ModificationsPerformed\ModificationsPerformedListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ModificationsPerformed\ModificationsPerformedListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\MonthlyUtilizationsControls\AverageUtilizationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\MonthlyUtilizationsControls\MonthlyUtilizationView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\MonthlyUtilizationsControls\MonthlyUtilizationScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\StoresControls\ConsumablePartAndKitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\StoresControls\StockDetailInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\StoresControls\ShouldBeOnStockListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\StoresControls\ShouldBeOnStockScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\StoresControls\StoreDetailFilterSelectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\StoresControls\StoreDetailFilterSelectionForm.Designer.cs">
+      <DependentUpon>StoreDetailFilterSelectionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\StoresControls\MoveDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\StoresControls\StoreCollectionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\AnimatedBackgroundWorker\AnimatedThreadWorker.cs" />
+    <Compile Include="UIControls\AnimatedBackgroundWorker\StaticWaitFormProvider.cs" />
+    <Compile Include="UIControls\AnimatedBackgroundWorker\WaitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\AnimatedBackgroundWorker\WaitForm.Designer.cs">
+      <DependentUpon>WaitForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\AircraftHeaderControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\AircraftStateItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\BiWeekliesHeaderControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\Comparers\AircraftReferenceStatusImageLinkLabelComparer.cs" />
+    <Compile Include="UIControls\Auxiliary\Comparers\BiWeeklyComparer.cs" />
+    <Compile Include="UIControls\Auxiliary\Comparers\ComparerMethods.cs" />
+    <Compile Include="UIControls\Auxiliary\Comparers\AircraftRegistrationNameComparer.cs" />
+    <Compile Include="UIControls\Auxiliary\Comparers\DirectiveListViewComparer.cs" />
+    <Compile Include="UIControls\Auxiliary\Comparers\EnginePositionSerialNumberComparer.cs" />
+    <Compile Include="UIControls\Auxiliary\Comparers\LandingGearPositionSerialNumberComparer.cs" />
+    <Compile Include="UIControls\Auxiliary\Comparers\ItemDoubleClickEventArgs.cs" />
+    <Compile Include="UIControls\Auxiliary\Comparers\MaintenanceJobCardComparer.cs" />
+    <Compile Include="UIControls\Auxiliary\Comparers\OperatorListItemComparer.cs" />
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DetailsControl\DispatcheredComponentStatusScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DirectiveControls\DispatcheredRepairView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DirectiveControls\DispatcheredADStatusView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DirectiveControls\DispatcheredAgingProgramView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DirectiveControls\DispatcheredCPCPDirectiveListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DirectiveControls\DispatcheredDeferredItemsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DetailsControl\DispatcheredDetailAddingScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DetailsControl\DispatcheredDetailScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DirectiveControls\DispatcheredDirectiveAddingScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DirectiveControls\DispatcheredDirectivesView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\EngineeringOrdersDirectives\DispatcheredEngeneeringOrdersDirectiveListScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DirectiveControls\DispatcheredSBStatusView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DirectiveControls\DispatcheredOutOffPhaseView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DirectiveControls\DispatcheredSSIDStatusView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DirectiveControls\DispatcheredDirectiveScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredADReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredADReport.Designer.cs">
+      <DependentUpon>DispatcheredADReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredDetailListReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredDetailListReport.Designer.cs">
+      <DependentUpon>DispatcheredDetailListReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredDirectiveListReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredDirectiveListReport.Designer.cs">
+      <DependentUpon>DispatcheredDirectiveListReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\HelpRequestingButtonT.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\IApplicationControlRequester.cs" />
+    <Compile Include="UIControls\OpepatorsControls\ReferenceOperatorListItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\ReferenceStatusImageLinkLabel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DiscrepanciesControls\DispatcheredDiscrepanciesScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\DiscrepanciesControls\DispatcheredDiscrepanciesScreen.Designer.cs">
+      <DependentUpon>DispatcheredDiscrepanciesScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\AircraftsControls\DispatcheredAircraftCollectionScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\TemplatesControls\DispatcheredTemplateAircraftCollectionScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\ReferenceSimpleButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\ReferenceUILoginControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\MainControls\DispatcheredUILoginPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\MainControls\DispatcheredUILoginPage.Designer.cs">
+      <DependentUpon>DispatcheredUILoginPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredUIControls\OpepatorsControls\DispatcheredOperatorCollectionScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\Comparers\OperatorNameComparer.cs" />
+    <Compile Include="Management\Dispatchering\RichReferenceButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Screen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screen.Designer.cs">
+      <DependentUpon>Screen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\AircraftsControls\AircraftGeneralDataControls\AircraftControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftsControls\AircraftGeneralDataControls\AircraftGeneralDataScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftsControls\AircraftGeneralDataControls\APUControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftsControls\AircraftGeneralDataControls\LandingGearsControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftsControls\AircraftGeneralDataControls\InteriorConfigurationControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftsControls\AircraftGeneralDataControls\LandingGearControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftsControls\AircraftGeneralDataControls\PerformanceDataControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftsControls\AircraftGeneralDataControls\EngineControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftsControls\AircraftGeneralDataControls\PowerPlantsControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftsControls\BaseDetailControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftsControls\AbstractAircraftInfoReference.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftsControls\AbstractAircraftCollectionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftsControls\AbstractAircraftCollectionControl.Designer.cs">
+      <DependentUpon>AbstractAircraftCollectionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\AircraftsControls\AircraftReferenceStatusImageLinkLabel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftsControls\AircraftScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\AbstractAircraftStateItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftsControls\LandingGearsButtonsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\ActionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\ActionControl.Designer.cs">
+      <DependentUpon>ActionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\Comparers\EnginePositionSerialNumberComparerDesc.cs" />
+    <Compile Include="UIControls\Auxiliary\Comparers\ReferenceAvalonButtonMComparer.cs" />
+    <Compile Include="UIControls\Auxiliary\ContextActionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\ContextActionControl.Designer.cs">
+      <DependentUpon>ContextActionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\HeaderControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\HeaderControl.Designer.cs">
+      <DependentUpon>HeaderControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\InstanceProvider.cs" />
+    <Compile Include="UIControls\Auxiliary\OperatorHeaderControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\QuickSearchControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\SDList.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\SelectedItemsChangeEventArgs.cs" />
+    <Compile Include="UIControls\Auxiliary\SortOrder.cs" />
+    <Compile Include="UIControls\Auxiliary\Comparers\TypeComparers.cs" />
+    <Compile Include="UIControls\Auxiliary\CopyrightControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\CopyrightControl.Designer.cs">
+      <DependentUpon>CopyrightControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\FooterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\FooterControl.Designer.cs">
+      <DependentUpon>FooterControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\TemplateAircraftHeaderControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\TemplateAircraftStateItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\TemplateHeaderControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\BiWeekliesReportsControls\BiWeekliesCollectionScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\BiWeekliesReportsControls\BiWeekliesListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\BiWeekliesReportsControls\BiWeeklyItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\DetailsControls\AddNewComponentControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DetailsControls\DetailListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\ComplianceControls\DirectiveComplianceListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\DirectiveListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\DirectiveListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DetailsControls\DatailLimitationsMaxResourcesControl.cs">
+    </Compile>
+    <Compile Include="UIControls\DetailsControls\DetailParametersControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DetailsControls\InfoViewer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\DetailsControls\DetailSummaryInformationControl.cs">
+    </Compile>
+    <Compile Include="UIControls\DetailsControls\DetailScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DetailsControls\HeaderClickEventArgs.cs" />
+    <Compile Include="UIControls\DetailsControls\DetailListScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\DirectiveParametersControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\DirectiveInformationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DetailsControls\DetailGeneralInformationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\DirectiveScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\DirectiveSummary.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\EngineeringOrdersDirectives\EngineeringOrderDirectiveAddingScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\EngineeringOrdersDirectives\EngineeringOrderDirectiveComplianceDataControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\EngineeringOrdersDirectives\EngineeringOrderDirectiveComplianceTermsControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\EngineeringOrdersDirectives\EngineeringOrderDirectiveDocumentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\EngineeringOrdersDirectives\EngineeringOrderDirectiveRenameDocumentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\EngineeringOrdersDirectives\EngineeringOrderDirectiveGeneralInformationControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\EngineeringOrdersDirectives\EngineeringOrderDirectiveIncorporationPlaceControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\EngineeringOrdersDirectives\EngineeringOrderDirectiveScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\EngineeringOrdersDirectives\EngineeringOrderDirectiveListControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\EngineeringOrdersDirectives\EngineeringOrderDirectiveSpecificNotesDataControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\EngineeringOrdersDirectives\EngineeringOrderDirectiveTaskForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\EngineeringOrdersDirectives\EngineeringOrdersDirectiveListScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\EngineeringOrdersDirectives\EngineeringOrdersDirectiveListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\MaintenanceStatusControls\JoinSubCheckForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\MaintenanceStatusControls\MaintenanceJobCardsCollectionScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\MaintenanceStatusControls\MaintenanceJobCardsListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\MaintenanceStatusControls\MaintenanceComplianceListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\MaintenanceStatusControls\MaintenancePerformanceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\MaintenanceStatusControls\MaintenanceStatusComplianceControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\MaintenanceStatusControls\MaintenanceStatusLimitationsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\MaintenanceStatusControls\MaintenanceStatusSummaryControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\MaintenanceStatusControls\MaintenanceSubCheckForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\MaintenanceStatusControls\MaintenanceSubCheckForm.Designer.cs">
+      <DependentUpon>MaintenanceSubCheckForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\MaintenanceStatusControls\MaintenanceSubChecksCollectionScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\MaintenanceStatusControls\MaintenanceSubChecksListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\OpepatorsControls\OperatorAddingScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\OpepatorsControls\OperatorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\OpepatorsControls\OperatorScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ReferenceControls\OperatorsReference.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\StoresControls\StoreDetailsListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\StoresControls\StoreForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\StoresControls\StoreScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\Forms\TemplateAddBaseDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\Forms\TemplateAddBaseDetailForm.Designer.cs">
+      <DependentUpon>TemplateAddBaseDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\Forms\TemplateAddAircraftForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\Forms\TemplateAddAircraftForm.Designer.cs">
+      <DependentUpon>TemplateAddAircraftForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\Forms\TemplateDetailsAddToDataBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\Forms\TemplateDetailsAddToDataBase.Designer.cs">
+      <DependentUpon>TemplateDetailsAddToDataBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\Forms\TemplateDirectiveFilterSelectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\Forms\TemplateDirectiveFilterSelectionForm.designer.cs">
+      <DependentUpon>TemplateDirectiveFilterSelectionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\Forms\TemplateAircraftAddToDataBaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\Forms\TemplateAircraftAddToDataBaseForm.designer.cs">
+      <DependentUpon>TemplateAircraftAddToDataBaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\Forms\TemplateBaseDetailAddToDataBaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\Forms\TemplateBaseDetailAddToDataBaseForm.designer.cs">
+      <DependentUpon>TemplateBaseDetailAddToDataBaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\Forms\TemplateDetailAddToDataBaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\Forms\TemplateDetailAddToDataBaseForm.designer.cs">
+      <DependentUpon>TemplateDetailAddToDataBaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\Forms\TemplateDetailFilterSelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\Forms\TemplateDetailFilterSelection.designer.cs">
+      <DependentUpon>TemplateDetailFilterSelection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateAddNewComponentControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateAircraftControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateAPUControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateBaseDetailLinksFlowLayoutPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateDetailAdding.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateDirectiveParametersControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateDirectiveGeneralInformationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DiscrepanciesControls\BasedetailDiscrepancies.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DiscrepanciesControls\BasedetailDiscrepancies.Designer.cs">
+      <DependentUpon>BasedetailDiscrepancies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\DiscrepanciesControls\ComponentDiscrepancies.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DiscrepanciesControls\ComponentDiscrepancies.Designer.cs">
+      <DependentUpon>ComponentDiscrepancies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\DiscrepanciesControls\DiscrepanciesListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\DiscrepanciesControls\DirectivesDiscrepanciesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\DiscrepanciesControls\DirectivesDiscrepanciesControl.Designer.cs">
+      <DependentUpon>DirectivesDiscrepanciesControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\DiscrepanciesControls\DiscrepanciesScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\LifelengthViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\LifelengthViewer.designer.cs">
+      <DependentUpon>LifelengthViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\MainControls\UILoginPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\MainControls\UILoginPage.Designer.cs">
+      <DependentUpon>UILoginPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\OpepatorsControls\OperatorCollectionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\OpepatorsControls\OperatorCollectionControl.Designer.cs">
+      <DependentUpon>OperatorCollectionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\AbstractOperatorHeaderControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\AbstractOperatorHeaderControl.Designer.cs">
+      <DependentUpon>AbstractOperatorHeaderControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\OpepatorsControls\OperatorInfoReference.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\OpepatorsControls\OperatorListItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftsControls\AircraftCollectionScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\OpepatorsControls\OperatorsStatistics.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\OpepatorsControls\OperatorsCollectionScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\AircraftsControls\AircraftReferencesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ReferenceControls\ObjectsListStatistics.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ReferenceControls\BiWeeklyReportsReference.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ReferenceControls\DiscrepanciesReference.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ReferenceControls\ExtendableDirectiveFilterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ReferenceControls\ExtendableRichContainer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ReferenceControls\LogBookReference.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ReferenceControls\LogBookReference.Designer.cs">
+      <DependentUpon>LogBookReference.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\ReferenceControls\RichReferenceContainer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ReferenceControls\RichReferenceContainer.Designer.cs">
+      <DependentUpon>RichReferenceContainer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\ReferenceControls\TemplatesReference.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ReferenceControls\UsersReference.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateAircraftCollectionScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateAircraftCollectionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateAircraftInfoReference.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateAircraftReferencesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateAircraftScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateBaseDetailControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateDetailGeneralInformationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateDetailListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateDetailListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateDetailParametersControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateDetailScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateDirectiveListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateDirectiveListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateDirectiveScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateDatailLimitationsMaxResourcesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\WaitingControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\WaitingControl.Designer.cs">
+      <DependentUpon>WaitingControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Events\HelpEvents.cs" />
+    <Compile Include="Interfaces\ControlMode.cs" />
+    <Compile Include="formMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formMain.Designer.cs">
+      <DependentUpon>formMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\LoginControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Auxiliary\LoginControl.Designer.cs">
+      <DependentUpon>LoginControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaces\ExceptionManager.cs" />
+    <Compile Include="Interfaces\IHelpRequester.cs" />
+    <Compile Include="Management\Dispatchering\Dispatcher.cs" />
+    <Compile Include="Management\Dispatchering\DispatcheredMultitabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DispatcheredTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\Dispatchering\DisplayDispatcher.cs" />
+    <Compile Include="Management\Dispatchering\DisplayerEventArgs.cs" />
+    <Compile Include="Management\Dispatchering\HelpDispatcher.cs" />
+    <Compile Include="Interfaces\IDispatcher.cs" />
+    <Compile Include="Interfaces\IDisplayer.cs" />
+    <Compile Include="Interfaces\IDisplayerCollectionProxy.cs" />
+    <Compile Include="Interfaces\IDisplayingEntity.cs" />
+    <Compile Include="Interfaces\IReference.cs" />
+    <Compile Include="Management\Dispatchering\ReflectionTypes.cs" />
+    <Compile Include="Management\Icons.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateAircraftGeneralDataScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateEngineControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateInteriorConfigurationControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateLandingGearControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateLandingGearsButtonsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateLandingGearsControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateMaintenanceLimitationsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplateMaintenanceStatusScreen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplatePerformanceDataControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\TemplatesControls\TemplatePowerPlantsControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\WorkPackages\NonRoutineJobForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\WorkPackages\WorkPackageComparer.cs" />
+    <Compile Include="UIControls\WorkPackages\WorkPackageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\WorkPackages\WorkPackageListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\WorkPackages\WorkPackagesListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\WorkPackages\WorkPackageScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\WorkPackages\WorkPackagesListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DomrachevSergeyVIPForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DomrachevSergeyVIPForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSF.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormSF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaces\EditObjectControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>EditObjectControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredAirFleetReport.resx">
+      <DependentUpon>DispatcheredAirFleetReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredCompponentChangeReport.resx">
+      <DependentUpon>DispatcheredCompponentChangeReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredWorkPackageCoverSheetReport.resx">
+      <DependentUpon>DispatcheredWorkPackageCoverSheetReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredMonthlyUtilizationReport.resx">
+      <DependentUpon>DispatcheredMonthlyUtilizationReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredShouldBeOnStockReport.resx">
+      <DependentUpon>DispatcheredShouldBeOnStockReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredATLBReport.resx">
+      <DependentUpon>DispatcheredATLBReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredWorkPackageReleaseToServiceReport.resx">
+      <DependentUpon>DispatcheredWorkPackageReleaseToServiceReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredEngineeringOrdersReport.resx">
+      <DependentUpon>DispatcheredEngineeringOrdersReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredWorkPackageReport.resx">
+      <DependentUpon>DispatcheredWorkPackageReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredWorkPackagesReport.resx">
+      <DependentUpon>DispatcheredWorkPackagesReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredModificationItemsReport.resx">
+      <DependentUpon>DispatcheredModificationItemsReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredEngineeringOrderReport.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DispatcheredEngineeringOrderReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredMaintenanceJobCardReport.resx">
+      <DependentUpon>DispatcheredMaintenanceJobCardReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredMaintenanceStatusReport.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DispatcheredMaintenanceStatusReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredADReport.resx">
+      <DependentUpon>DispatcheredADReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredAircraftGeneralDataReport.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DispatcheredAircraftGeneralDataReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredComplianceListReport.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DispatcheredComplianceListReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredDetailListReport.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DispatcheredDetailListReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredDirectiveListReport.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DispatcheredDirectiveListReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispatcheredStoreReport.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DispatcheredStoreReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispathceredDiscrepanciesReport.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DispathceredDiscrepanciesReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\Dispatchering\DispatcheredUIControls\OpepatorsControls\DispatcheredOperatorCollectionScreen.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DispatcheredOperatorCollectionScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Management\Dispatchering\DispatcheredUIControls\Reports\DispathceredMaintenanceSubCheckReport.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DispathceredMaintenanceSubCheckReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Messages\MessageForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MessageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screen.resx">
+      <DependentUpon>Screen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\AircraftsControls\AbstractAircraftCollectionControl.resx">
+      <DependentUpon>AbstractAircraftCollectionControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\AircraftTechnicalLogBookControls\AircraftInformationControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AircraftInformationControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\AircraftTechnicalLogBookControls\ComponentOilControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ComponentOilControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\AircraftTechnicalLogBookControls\ComponentOilListControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ComponentOilListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\AircraftTechnicalLogBookControls\DiscrepanciesListControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DiscrepanciesListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\AircraftTechnicalLogBookControls\DiscrepancyControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DiscrepancyControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\AircraftTechnicalLogBookControls\EngineMonitoringControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>EngineMonitoringControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\AircraftTechnicalLogBookControls\FlightCrewControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FlightCrewControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\AircraftTechnicalLogBookControls\FlightDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FlightDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\AircraftTechnicalLogBookControls\FlightFluidsControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FlightFluidsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\AircraftTechnicalLogBookControls\FlightGeneralInformationControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FlightGeneralInformationControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\AircraftTechnicalLogBookControls\FlightTimeControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FlightTimeControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\AircraftTechnicalLogBookControls\FuelControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FuelControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\AircraftTechnicalLogBookControls\MaintenanceProgramControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MaintenanceProgramControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\AircraftTechnicalLogBookControls\ReleaseToServiceControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ReleaseToServiceControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\AircraftTechnicalLogBookControls\TirePressureControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TirePressureControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\AnimatedBackgroundWorker\WaitForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>WaitForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Auxiliary\AbstractAircraftStateItem.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AbstractAircraftStateItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Auxiliary\ContextActionControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ContextActionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Auxiliary\Delimiter.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Delimiter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Auxiliary\HeaderControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>HeaderControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Auxiliary\ActionControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ActionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Auxiliary\CopyrightControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CopyrightControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Auxiliary\FooterControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FooterControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\DiscrepanciesControls\BasedetailDiscrepancies.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>BasedetailDiscrepancies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\DiscrepanciesControls\ComponentDiscrepancies.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ComponentDiscrepancies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\DiscrepanciesControls\DirectivesDiscrepanciesControl.resx">
+      <DependentUpon>DirectivesDiscrepanciesControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Auxiliary\LifelengthViewer.resx">
+      <DependentUpon>LifelengthViewer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\FiltersControls\ConditionStatusControl.resx">
+      <DependentUpon>ConditionStatusControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\FiltersControls\DetailFilterSelection.resx">
+      <DependentUpon>DetailFilterSelection.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\FiltersControls\DirectiveFilterSelectionForm.resx">
+      <DependentUpon>DirectiveFilterSelectionForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\MainControls\UILoginPage.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>UILoginPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Auxiliary\AbstractOperatorHeaderControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AbstractOperatorHeaderControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\MaintenanceStatusControls\MaintenanceSubCheckForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MaintenanceSubCheckForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\MaintenanceStatusControls\MaintenanceSubChecksCollectionScreen.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MaintenanceSubChecksCollectionScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\OpepatorsControls\OperatorInfoReference.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>OperatorInfoReference.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\OpepatorsControls\OperatorsCollectionScreen.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>OperatorsCollectionScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ReferenceControls\ObjectsListStatistics.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ObjectsListStatistics.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ReferenceControls\DiscrepanciesReference.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DiscrepanciesReference.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ReferenceControls\ExtendableDirectiveFilterControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ExtendableDirectiveFilterControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ReferenceControls\ExtendableRichContainer.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ExtendableRichContainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ReferenceControls\LogBookReference.resx">
+      <DependentUpon>LogBookReference.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ReferenceControls\RichReferenceContainer.resx">
+      <DependentUpon>RichReferenceContainer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Auxiliary\WaitingControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>WaitingControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formMain.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>formMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Auxiliary\LoginControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>LoginControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\StoresControls\StoreDetailFilterSelectionForm.resx">
+      <DependentUpon>StoreDetailFilterSelectionForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\StoresControls\StoreForm.resx">
+      <DependentUpon>StoreForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\TemplatesControls\Forms\TemplateAddBaseDetailForm.resx">
+      <DependentUpon>TemplateAddBaseDetailForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\TemplatesControls\Forms\TemplateAddAircraftForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TemplateAddAircraftForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\TemplatesControls\Forms\TemplateDetailsAddToDataBase.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TemplateDetailsAddToDataBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\TemplatesControls\Forms\TemplateDirectiveFilterSelectionForm.resx">
+      <DependentUpon>TemplateDirectiveFilterSelectionForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\TemplatesControls\Forms\TemplateAircraftAddToDataBaseForm.resx">
+      <DependentUpon>TemplateAircraftAddToDataBaseForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\TemplatesControls\Forms\TemplateBaseDetailAddToDataBaseForm.resx">
+      <DependentUpon>TemplateBaseDetailAddToDataBaseForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\TemplatesControls\Forms\TemplateDetailAddToDataBaseForm.resx">
+      <DependentUpon>TemplateDetailAddToDataBaseForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\TemplatesControls\Forms\TemplateDetailFilterSelection.resx">
+      <DependentUpon>TemplateDetailFilterSelection.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AddIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AircraftIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\APUIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EngineIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExitIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LogoutIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ReloadIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ReportIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UsersIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AvalonLogotype.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MenuIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ViewLogIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DiscrepanciesIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OperatorsInfoIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TemplatesIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AboutIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CurrentUserIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DictionariesIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AircraftsIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ComponentStatusIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LoginPageBackground.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LoginPageBottomAircraft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LoginPageTopAircraft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AirplaneStartLogo.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CopyrightAirPlane.png" />
+    <Content Include="Resources\CopyrightBar.png" />
+    <None Include="Resources\LogoutSeparatorLine.png" />
+    <None Include="Resources\CopyrightSeparatorLine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Resources\CloseIcon.png" />
+    <None Include="Resources\ApplyFilterIcon.png" />
+    <None Include="Resources\CancelEdit.png" />
+    <None Include="Resources\LogoutBar.png" />
+    <None Include="Resources\HeaderBar.png" />
+    <None Include="Resources\EditIcon.png" />
+    <None Include="Resources\PrintIcon.png" />
+    <None Include="Resources\HelpIcon.png" />
+    <None Include="Resources\SaveIcon.png" />
+    <None Include="Resources\HeaderBarClicked.png" />
+    <None Include="Resources\Point.png" />
+    <None Include="Resources\PerformDirective.png" />
+    <None Include="Resources\DeleteIcon.png" />
+    <None Include="Resources\LTR.ico" />
+    <Content Include="LTR.ico" />
+    <None Include="Resources\LoginPageTopAircraft.gif" />
+    <None Include="Resources\runner.gif" />
+    <None Include="Resources\EmptyLogotypeIcon.png" />
+    <None Include="Resources\NewOperatorIcon.png" />
+    <None Include="Resources\AddIcon_gray.png" />
+    <None Include="Resources\CancelEdit_gray.png" />
+    <None Include="Resources\CloseIcon_gray.png" />
+    <None Include="Resources\DeleteIcon_gray.png" />
+    <None Include="Resources\EditIcon_gray.png" />
+    <None Include="Resources\HelpIcon_gray.png" />
+    <None Include="Resources\LogoutIcon_gray.png" />
+    <None Include="Resources\PrintIcon_gray.png" />
+    <None Include="Resources\ReloadIcon_gray.png" />
+    <None Include="Resources\SaveIcon_gray.png" />
+    <None Include="Resources\SaveAndAddIcon_gray.png" />
+    <None Include="Resources\SaveAndAddIcon.png" />
+    <None Include="Resources\SearchIcon.png" />
+    <None Include="Resources\PDFIcon.png" />
+    <None Include="Resources\PDFIconGray.png" />
+    <None Include="Resources\BiWeeklyReportsIcon.png" />
+    <None Include="Resources\LoadIcon.png" />
+    <None Include="Resources\LoadIcon_gray.png" />
+    <None Include="Resources\OperatorsIcon.png" />
+    <None Include="Resources\PDFIcon_gif.gif" />
+    <None Include="Resources\PDFIcon_gray_gif.gif" />
+    <None Include="Resources\12.png" />
+    <None Include="Resources\01.png" />
+    <None Include="Resources\02.png" />
+    <None Include="Resources\03.png" />
+    <None Include="Resources\04.png" />
+    <None Include="Resources\05.png" />
+    <None Include="Resources\06.png" />
+    <None Include="Resources\07.png" />
+    <None Include="Resources\08.png" />
+    <None Include="Resources\09.png" />
+    <None Include="Resources\10.png" />
+    <None Include="Resources\11.png" />
+    <None Include="Resources\BlueBackGrey.png" />
+    <None Include="Resources\BlueBack.png" />
+    <None Include="Resources\PDFIconSmall.png" />
+    <None Include="Resources\delimeter_solid_horizontal.png" />
+    <None Include="Resources\delimeter_solid_vertical.png" />
+    <None Include="Resources\delimiter_dotted.png" />
+    <Content Include="Resources\SeparatorLine.png" />
+    <None Include="Resources\ViewIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Auxiliary\Auxiliary.csproj">
+      <Project>{8988CAE1-D7C1-499B-B595-9B544FCCF7FB}</Project>
+      <Name>Auxiliary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CASCore\CASCore.csproj">
+      <Project>{452FBC91-169F-4238-A202-E883B989F246}</Project>
+      <Name>CASCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CASReports\CASReports.csproj">
+      <Project>{0BB37FD2-48B1-4212-8CB8-82461A379AC3}</Project>
+      <Name>CASReports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CASTerms\CASGlobalTerms.csproj">
+      <Project>{0E490CE9-C51F-408C-A6FB-39A8CE185817}</Project>
+      <Name>CASGlobalTerms</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>Клиентский профиль .NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Appearance\" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+</Project>

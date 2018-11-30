@@ -1,0 +1,292 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{560821EE-9178-4D96-8BBC-42DB50FF0DB4}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CasWcfService</RootNamespace>
+    <AssemblyName>CasWcfService</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Microsoft.SqlServer.ConnectionInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Dmf, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Microsoft.SqlServer.Dmf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Microsoft.SqlServer.Management.Sdk.Sfc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Smo, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Microsoft.SqlServer.Smo.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.SmoEnum">
+      <HintPath>..\DLL\Microsoft.SqlServer.SmoEnum.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.SqlEnum, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Microsoft.SqlServer.SqlEnum.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ConnectionSevice\ConnectionService.svc" />
+    <Content Include="ExecutorService\ExecutorService.svc" />
+    <Content Include="LoginService\LoginService.svc" />
+    <Content Include="Service\AccessoryDescriptionService.svc" />
+    <Content Include="Service\AccessoryRequiredService.svc" />
+    <Content Include="Service\ActualStateRecordService.svc" />
+    <Content Include="Service\AGWCategorieService.svc" />
+    <Content Include="Service\AircraftEquipmentService.svc" />
+    <Content Include="Service\AircraftFlightService.svc" />
+    <Content Include="Service\AircraftOtherParameterService.svc" />
+    <Content Include="Service\AircraftService.svc" />
+    <Content Include="Service\AircraftWorkerCategoryService.svc" />
+    <Content Include="Service\AirportCodeService.svc" />
+    <Content Include="Service\AirportService.svc" />
+    <Content Include="Service\ATAChapterService.svc" />
+    <Content Include="Service\ATLBService.svc" />
+    <Content Include="Service\AttachedFileService.svc" />
+    <Content Include="Service\AuditRecordService.svc" />
+    <Content Include="Service\AuditService.svc" />
+    <Content Include="Service\CategoryRecordService.svc" />
+    <Content Include="Service\ComponentDirectiveService.svc" />
+    <Content Include="Service\ComponentLLPCategoryChangeRecordService.svc" />
+    <Content Include="Service\ComponentLLPCategoryDataService.svc" />
+    <Content Include="Service\ComponentOilConditionService.svc" />
+    <Content Include="Service\ComponentService.svc" />
+    <Content Include="Service\ComponentWorkInRegimeParamService.svc" />
+    <Content Include="Service\CorrectiveActionService.svc" />
+    <Content Include="Service\CRSService.svc" />
+    <Content Include="Service\CruiseLevelService.svc" />
+    <Content Include="Service\DamageChartService.svc" />
+    <Content Include="Service\DamageDocumentService.svc" />
+    <Content Include="Service\DamageSectorService.svc" />
+    <Content Include="Service\DefferedCategorieService.svc" />
+    <Content Include="Service\DepartmentService.svc" />
+    <Content Include="Service\DirectiveRecordService.svc" />
+    <Content Include="Service\DirectiveService.svc" />
+    <Content Include="Service\DiscrepancyService.svc" />
+    <Content Include="Service\DocumentService.svc" />
+    <Content Include="Service\DocumentSubTypeService.svc" />
+    <Content Include="Service\EmployeeSubjectService.svc" />
+    <Content Include="Service\EngineAccelerationTimeService.svc" />
+    <Content Include="Service\EngineConditionService.svc" />
+    <Content Include="Service\EngineTimeInRegimeService.svc" />
+    <Content Include="Service\EventCategorieService.svc" />
+    <Content Include="Service\EventClassService.svc" />
+    <Content Include="Service\EventConditionService.svc" />
+    <Content Include="Service\EventService.svc" />
+    <Content Include="Service\EventTypeRiskLevelChangeRecordService.svc" />
+    <Content Include="Service\FlightCargoRecordService.svc" />
+    <Content Include="Service\FlightCrewRecordService.svc" />
+    <Content Include="Service\FlightNumberAircraftModelRelationService.svc" />
+    <Content Include="Service\FlightNumberAirportRelationService.svc" />
+    <Content Include="Service\FlightNumberCrewRecordService.svc" />
+    <Content Include="Service\FlightNumberPeriodService.svc" />
+    <Content Include="Service\FlightNumberService.svc" />
+    <Content Include="Service\FlightNumService.svc" />
+    <Content Include="Service\FlightPassengerRecordService.svc" />
+    <Content Include="Service\FlightPlanOpsRecordsService.svc" />
+    <Content Include="Service\FlightPlanOpsService.svc" />
+    <Content Include="Service\FlightTrackRecordService.svc" />
+    <Content Include="Service\FlightTrackService.svc" />
+    <Content Include="Service\GoodStandartService.svc" />
+    <Content Include="Service\HangarService.svc" />
+    <Content Include="Service\HydraulicConditionService.svc" />
+    <Content Include="Service\InitialOrderRecordService.svc" />
+    <Content Include="Service\InitialOrderService.svc" />
+    <Content Include="Service\ItemFileLinkService.svc" />
+    <Content Include="Service\ItemsRelationService.svc" />
+    <Content Include="Service\JobCardService.svc" />
+    <Content Include="Service\JobCardTaskService.svc" />
+    <Content Include="Service\KitSuppliersRelationService.svc" />
+    <Content Include="Service\KnowledgeModuleService.svc" />
+    <Content Include="Service\LandingGearConditionService.svc" />
+    <Content Include="Service\LicenseRemarkRightService.svc" />
+    <Content Include="Service\LifeLimitCategorieService.svc" />
+    <Content Include="Service\LocationService.svc" />
+    <Content Include="Service\LocationsTypeService.svc" />
+    <Content Include="Service\MaintenanceCheckBindTaskRecordService.svc" />
+    <Content Include="Service\MaintenanceCheckService.svc" />
+    <Content Include="Service\MaintenanceCheckTypeService.svc" />
+    <Content Include="Service\MaintenanceDirectiveService.svc" />
+    <Content Include="Service\MaintenanceProgramChangeRecordService.svc" />
+    <Content Include="Service\ModuleRecordService.svc" />
+    <Content Include="Service\MTOPCheckRecordService.svc" />
+    <Content Include="Service\MTOPCheckService.svc" />
+    <Content Include="Service\NomenclatureService.svc" />
+    <Content Include="Service\NonRoutineJobService.svc" />
+    <Content Include="Service\OperatorService.svc" />
+    <Content Include="Service\ProcedureDocumentReferenceService.svc" />
+    <Content Include="Service\ProcedureService.svc" />
+    <Content Include="Service\ProductCostService.svc" />
+    <Content Include="Service\PurchaseOrderService.svc" />
+    <Content Include="Service\PurchaseRequestRecordService.svc" />
+    <Content Include="Service\QuotationCostService.svc" />
+    <Content Include="Service\ReasonService.svc" />
+    <Content Include="Service\RequestForQuotationRecordService.svc" />
+    <Content Include="Service\RequestForQuotationService.svc" />
+    <Content Include="Service\RequestRecordService.svc" />
+    <Content Include="Service\RequestService.svc" />
+    <Content Include="Service\RestrictionService.svc" />
+    <Content Include="Service\RunUpService.svc" />
+    <Content Include="Service\SchedulePeriodService.svc" />
+    <Content Include="Service\ServiceTypeService.svc" />
+    <Content Include="Service\SmsEventTypeService.svc" />
+    <Content Include="Service\SpecialistCAAService.svc" />
+    <Content Include="Service\SpecialistInstrumentRatingService.svc" />
+    <Content Include="Service\SpecialistLicenseDetailService.svc" />
+    <Content Include="Service\SpecialistLicenseRatingService.svc" />
+    <Content Include="Service\SpecialistLicenseRemarkService.svc" />
+    <Content Include="Service\SpecialistLicenseService.svc" />
+    <Content Include="Service\SpecialistMedicalRecordService.svc" />
+    <Content Include="Service\SpecialistService.svc" />
+    <Content Include="Service\SpecialistTrainingService.svc" />
+    <Content Include="Service\SpecializationService.svc" />
+    <Content Include="Service\StockComponentInfoService.svc" />
+    <Content Include="Service\StoreService.svc" />
+    <Content Include="Service\SupplierDocumentService.svc" />
+    <Content Include="Service\SupplierService.svc" />
+    <Content Include="Service\TransferRecordService.svc" />
+    <Content Include="Service\TripNameService.svc" />
+    <Content Include="Service\UserService.svc" />
+    <Content Include="Service\VehicleService.svc" />
+    <Content Include="Service\WorkOrderRecordService.svc" />
+    <Content Include="Service\WorkOrderService.svc" />
+    <Content Include="Service\WorkPackageRecordService.svc" />
+    <Content Include="Service\WorkPackageService.svc" />
+    <Content Include="Service\WorkPackageSpecialistsService.svc" />
+    <Content Include="Service\WorkShopService.svc" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EFCore\EFCore.csproj">
+      <Project>{6dddaf81-980a-4ebc-bf58-3ca93a059d7f}</Project>
+      <Name>EFCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SmartCore\SmartCore.csproj">
+      <Project>{48b63705-4573-4bb2-b04d-67a406b09ab6}</Project>
+      <Name>SmartCore</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>65461</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:65461/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

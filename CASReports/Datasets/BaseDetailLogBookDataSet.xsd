@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="BaseDetailLogBookDataSet" targetNamespace="http://tempuri.org/BaseDetailLogBookDataSet.xsd" xmlns:mstns="http://tempuri.org/BaseDetailLogBookDataSet.xsd" xmlns="http://tempuri.org/BaseDetailLogBookDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+        </Connections>
+        <Tables>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="BaseDetailLogBookDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="BaseDetailLogBookDataSet" msprop:Generator_DataSetName="BaseDetailLogBookDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="LifelengthIncrements" msprop:Generator_UserTableName="LifelengthIncrements" msprop:Generator_RowDeletedName="LifelengthIncrementsRowDeleted" msprop:Generator_RowChangedName="LifelengthIncrementsRowChanged" msprop:Generator_RowClassName="LifelengthIncrementsRow" msprop:Generator_RowChangingName="LifelengthIncrementsRowChanging" msprop:Generator_RowEvArgName="LifelengthIncrementsRowChangeEvent" msprop:Generator_RowEvHandlerName="LifelengthIncrementsRowChangeEventHandler" msprop:Generator_TableClassName="LifelengthIncrementsDataTable" msprop:Generator_TableVarName="tableLifelengthIncrements" msprop:Generator_RowDeletingName="LifelengthIncrementsRowDeleting" msprop:Generator_TablePropName="LifelengthIncrements">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="LifelengthIncrementID" msprop:Generator_UserColumnName="LifelengthIncrementID" msprop:Generator_ColumnPropNameInRow="LifelengthIncrementID" msprop:Generator_ColumnVarNameInTable="columnLifelengthIncrementID" msprop:Generator_ColumnPropNameInTable="LifelengthIncrementIDColumn" type="xs:int" />
+              <xs:element name="Date" msprop:Generator_UserColumnName="Date" msprop:Generator_ColumnVarNameInTable="columnDate" msprop:Generator_ColumnPropNameInRow="Date" msprop:Generator_ColumnPropNameInTable="DateColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="HRS" msprop:Generator_UserColumnName="HRS" msprop:Generator_ColumnPropNameInRow="HRS" msprop:Generator_ColumnVarNameInTable="columnHRS" msprop:Generator_ColumnPropNameInTable="HRSColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="CYC" msprop:Generator_UserColumnName="CYC" msprop:Generator_ColumnPropNameInRow="CYC" msprop:Generator_ColumnVarNameInTable="columnCYC" msprop:Generator_ColumnPropNameInTable="CYCColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="TSN" msprop:Generator_UserColumnName="TSN" msprop:Generator_ColumnVarNameInTable="columnTSN" msprop:Generator_ColumnPropNameInRow="TSN" msprop:Generator_ColumnPropNameInTable="TSNColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="CSN" msprop:Generator_UserColumnName="CSN" msprop:Generator_ColumnVarNameInTable="columnCSN" msprop:Generator_ColumnPropNameInRow="CSN" msprop:Generator_ColumnPropNameInTable="CSNColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="TSOH" msprop:Generator_UserColumnName="TSOH" msprop:Generator_ColumnVarNameInTable="columnTSOH" msprop:Generator_ColumnPropNameInRow="TSOH" msprop:Generator_ColumnPropNameInTable="TSOHColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="CSOH" msprop:Generator_UserColumnName="CSOH" msprop:Generator_ColumnVarNameInTable="columnCSOH" msprop:Generator_ColumnPropNameInRow="CSOH" msprop:Generator_ColumnPropNameInTable="CSOHColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AdditionalInformation" msprop:Generator_UserTableName="AdditionalInformation" msprop:Generator_RowDeletedName="AdditionalInformationRowDeleted" msprop:Generator_RowChangedName="AdditionalInformationRowChanged" msprop:Generator_RowClassName="AdditionalInformationRow" msprop:Generator_RowChangingName="AdditionalInformationRowChanging" msprop:Generator_RowEvArgName="AdditionalInformationRowChangeEvent" msprop:Generator_RowEvHandlerName="AdditionalInformationRowChangeEventHandler" msprop:Generator_TableClassName="AdditionalInformationDataTable" msprop:Generator_TableVarName="tableAdditionalInformation" msprop:Generator_RowDeletingName="AdditionalInformationRowDeleting" msprop:Generator_TablePropName="AdditionalInformation">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msprop:Generator_UserColumnName="ID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInTable="IDColumn" type="xs:int" />
+              <xs:element name="ReportName" msprop:Generator_UserColumnName="ReportName" msprop:Generator_ColumnPropNameInRow="ReportName" msprop:Generator_ColumnVarNameInTable="columnReportName" msprop:Generator_ColumnPropNameInTable="ReportNameColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="CompanyName" msprop:Generator_UserColumnName="CompanyName" msprop:Generator_ColumnPropNameInRow="CompanyName" msprop:Generator_ColumnVarNameInTable="columnCompanyName" msprop:Generator_ColumnPropNameInTable="CompanyNameColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="StartDate" msprop:Generator_UserColumnName="StartDate" msprop:Generator_ColumnPropNameInRow="StartDate" msprop:Generator_ColumnVarNameInTable="columnStartDate" msprop:Generator_ColumnPropNameInTable="StartDateColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="EndDate" msprop:Generator_UserColumnName="EndDate" msprop:Generator_ColumnPropNameInRow="EndDate" msprop:Generator_ColumnVarNameInTable="columnEndDate" msprop:Generator_ColumnPropNameInTable="EndDateColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Hours" msprop:Generator_UserColumnName="Hours" msprop:Generator_ColumnPropNameInRow="Hours" msprop:Generator_ColumnVarNameInTable="columnHours" msprop:Generator_ColumnPropNameInTable="HoursColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Cycles" msprop:Generator_UserColumnName="Cycles" msprop:Generator_ColumnPropNameInRow="Cycles" msprop:Generator_ColumnVarNameInTable="columnCycles" msprop:Generator_ColumnPropNameInTable="CyclesColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="Days" msprop:Generator_UserColumnName="Days" msprop:Generator_ColumnPropNameInRow="Days" msprop:Generator_ColumnVarNameInTable="columnDays" msprop:Generator_ColumnPropNameInTable="DaysColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="ReportFooterLTR" msprop:Generator_UserColumnName="ReportFooterLTR" msprop:Generator_ColumnVarNameInTable="columnReportFooterLTR" msprop:Generator_ColumnPropNameInRow="ReportFooterLTR" msprop:Generator_ColumnPropNameInTable="ReportFooterLTRColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="WebSite" msprop:Generator_UserColumnName="WebSite" msprop:Generator_ColumnVarNameInTable="columnWebSite" msprop:Generator_ColumnPropNameInRow="WebSite" msprop:Generator_ColumnPropNameInTable="WebSiteColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="LogoType" msprop:Generator_UserColumnName="LogoType" msprop:Generator_ColumnPropNameInRow="LogoType" msprop:Generator_ColumnVarNameInTable="columnLogoType" msprop:Generator_ColumnPropNameInTable="LogoTypeColumn" type="xs:base64Binary" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:LifelengthIncrements" />
+      <xs:field xpath="mstns:LifelengthIncrementID" />
+    </xs:unique>
+    <xs:unique name="AdditionalInformation_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:AdditionalInformation" />
+      <xs:field xpath="mstns:ID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="MaintenenceStatusDataSet" targetNamespace="http://tempuri.org/MaintenenceStatusDataSet.xsd" xmlns:mstns="http://tempuri.org/MaintenenceStatusDataSet.xsd" xmlns="http://tempuri.org/MaintenenceStatusDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="MaintenenceStatusDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="MaintenenceStatusDataSet" msprop:Generator_UserDSName="MaintenenceStatusDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ItemsTable" msprop:Generator_TableClassName="ItemsTableDataTable" msprop:Generator_TableVarName="tableItemsTable" msprop:Generator_TablePropName="ItemsTable" msprop:Generator_RowDeletingName="ItemsTableRowDeleting" msprop:Generator_UserTableName="ItemsTable" msprop:Generator_RowChangingName="ItemsTableRowChanging" msprop:Generator_RowEvHandlerName="ItemsTableRowChangeEventHandler" msprop:Generator_RowDeletedName="ItemsTableRowDeleted" msprop:Generator_RowEvArgName="ItemsTableRowChangeEvent" msprop:Generator_RowChangedName="ItemsTableRowChanged" msprop:Generator_RowClassName="ItemsTableRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CheckName" msprop:Generator_ColumnVarNameInTable="columnCheckName" msprop:Generator_ColumnPropNameInRow="CheckName" msprop:Generator_ColumnPropNameInTable="CheckNameColumn" msprop:Generator_UserColumnName="CheckName" type="xs:string" minOccurs="0" />
+              <xs:element name="CheckType" msprop:Generator_ColumnVarNameInTable="columnCheckType" msprop:Generator_ColumnPropNameInRow="CheckType" msprop:Generator_ColumnPropNameInTable="CheckTypeColumn" msprop:Generator_UserColumnName="CheckType" type="xs:string" minOccurs="0" />
+              <xs:element name="CheckSchedule" msprop:Generator_ColumnVarNameInTable="columnCheckSchedule" msprop:Generator_ColumnPropNameInRow="CheckSchedule" msprop:Generator_ColumnPropNameInTable="CheckScheduleColumn" msprop:Generator_UserColumnName="CheckSchedule" type="xs:string" minOccurs="0" />
+              <xs:element name="ComplianceGroupName" msprop:Generator_ColumnVarNameInTable="columnComplianceGroupName" msprop:Generator_ColumnPropNameInRow="ComplianceGroupName" msprop:Generator_ColumnPropNameInTable="ComplianceGroupNameColumn" msprop:Generator_UserColumnName="ComplianceGroupName" type="xs:string" minOccurs="0" />
+              <xs:element name="CheckDue" msprop:Generator_ColumnVarNameInTable="columnCheckDue" msprop:Generator_ColumnPropNameInRow="CheckDue" msprop:Generator_ColumnPropNameInTable="CheckDueColumn" msprop:Generator_UserColumnName="CheckDue" type="xs:string" minOccurs="0" />
+              <xs:element name="CheckInterval" msprop:Generator_ColumnVarNameInTable="columnCheckInterval" msprop:Generator_ColumnPropNameInRow="CheckInterval" msprop:Generator_ColumnPropNameInTable="CheckIntervalColumn" msprop:Generator_UserColumnName="CheckInterval" type="xs:string" minOccurs="0" />
+              <xs:element name="CheckLast" msprop:Generator_ColumnVarNameInTable="columnCheckLast" msprop:Generator_ColumnPropNameInRow="CheckLast" msprop:Generator_ColumnPropNameInTable="CheckLastColumn" msprop:Generator_UserColumnName="CheckLast" type="xs:string" minOccurs="0" />
+              <xs:element name="CheckUsed" msprop:Generator_ColumnVarNameInTable="columnCheckUsed" msprop:Generator_ColumnPropNameInRow="CheckUsed" msprop:Generator_ColumnPropNameInTable="CheckUsedColumn" msprop:Generator_UserColumnName="CheckUsed" type="xs:string" minOccurs="0" />
+              <xs:element name="CheckNext" msprop:Generator_ColumnVarNameInTable="columnCheckNext" msprop:Generator_ColumnPropNameInRow="CheckNext" msprop:Generator_ColumnPropNameInTable="CheckNextColumn" msprop:Generator_UserColumnName="CheckNext" type="xs:string" minOccurs="0" />
+              <xs:element name="CheckRemain" msprop:Generator_ColumnVarNameInTable="columnCheckRemain" msprop:Generator_ColumnPropNameInRow="CheckRemain" msprop:Generator_ColumnPropNameInTable="CheckRemainColumn" msprop:Generator_UserColumnName="CheckRemain" type="xs:string" minOccurs="0" />
+              <xs:element name="CheckRemarks" msprop:Generator_ColumnVarNameInTable="columnCheckRemarks" msprop:Generator_ColumnPropNameInRow="CheckRemarks" msprop:Generator_ColumnPropNameInTable="CheckRemarksColumn" msprop:Generator_UserColumnName="CheckRemarks" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

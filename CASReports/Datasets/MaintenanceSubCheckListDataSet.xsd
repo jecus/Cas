@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="MaintenanceSubCheckDataSet" targetNamespace="http://tempuri.org/MaintenanceSubCheckDataSet.xsd" xmlns:mstns="http://tempuri.org/MaintenanceSubCheckDataSet.xsd" xmlns="http://tempuri.org/MaintenanceSubCheckDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="MaintenanceSubCheckDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="MaintenanceSubCheckDataSet" msprop:Generator_DataSetName="MaintenanceSubCheckDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="AdditionalInformation" msprop:Generator_UserTableName="AdditionalInformation" msprop:Generator_RowDeletedName="AdditionalInformationRowDeleted" msprop:Generator_RowChangedName="AdditionalInformationRowChanged" msprop:Generator_RowClassName="AdditionalInformationRow" msprop:Generator_RowChangingName="AdditionalInformationRowChanging" msprop:Generator_RowEvArgName="AdditionalInformationRowChangeEvent" msprop:Generator_RowEvHandlerName="AdditionalInformationRowChangeEventHandler" msprop:Generator_TableClassName="AdditionalInformationDataTable" msprop:Generator_TableVarName="tableAdditionalInformation" msprop:Generator_RowDeletingName="AdditionalInformationRowDeleting" msprop:Generator_TablePropName="AdditionalInformation">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ReportFooterPrepared" msprop:Generator_UserColumnName="ReportFooterPrepared" msprop:Generator_ColumnVarNameInTable="columnReportFooterPrepared" msprop:Generator_ColumnPropNameInRow="ReportFooterPrepared" msprop:Generator_ColumnPropNameInTable="ReportFooterPreparedColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="ReportHeader" msprop:Generator_UserColumnName="ReportHeader" msprop:Generator_ColumnVarNameInTable="columnReportHeader" msprop:Generator_ColumnPropNameInRow="ReportHeader" msprop:Generator_ColumnPropNameInTable="ReportHeaderColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="LogotypeWhite" msprop:Generator_UserColumnName="LogotypeWhite" msprop:Generator_ColumnVarNameInTable="columnLogotypeWhite" msprop:Generator_ColumnPropNameInRow="LogotypeWhite" msprop:Generator_ColumnPropNameInTable="LogotypeWhiteColumn" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="ReportFooterCAS" msprop:Generator_UserColumnName="ReportFooterCAS" msprop:Generator_ColumnVarNameInTable="columnReportFooterCAS" msprop:Generator_ColumnPropNameInRow="ReportFooterCAS" msprop:Generator_ColumnPropNameInTable="ReportFooterCASColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="ReportFooterLink" msprop:Generator_UserColumnName="ReportFooterLink" msprop:Generator_ColumnVarNameInTable="columnReportFooterLink" msprop:Generator_ColumnPropNameInRow="ReportFooterLink" msprop:Generator_ColumnPropNameInTable="ReportFooterLinkColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SubCheckInformation" msprop:Generator_UserTableName="SubCheckInformation" msprop:Generator_RowDeletedName="SubCheckInformationRowDeleted" msprop:Generator_RowChangedName="SubCheckInformationRowChanged" msprop:Generator_RowClassName="SubCheckInformationRow" msprop:Generator_RowChangingName="SubCheckInformationRowChanging" msprop:Generator_RowEvArgName="SubCheckInformationRowChangeEvent" msprop:Generator_RowEvHandlerName="SubCheckInformationRowChangeEventHandler" msprop:Generator_TableClassName="SubCheckInformationDataTable" msprop:Generator_TableVarName="tableSubCheckInformation" msprop:Generator_RowDeletingName="SubCheckInformationRowDeleting" msprop:Generator_TablePropName="SubCheckInformation">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="WorkArea" msprop:Generator_UserColumnName="WorkArea" msprop:Generator_ColumnVarNameInTable="columnWorkArea" msprop:Generator_ColumnPropNameInRow="WorkArea" msprop:Generator_ColumnPropNameInTable="WorkAreaColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Rev" msprop:Generator_UserColumnName="Rev" msprop:Generator_ColumnVarNameInTable="columnRev" msprop:Generator_ColumnPropNameInRow="Rev" msprop:Generator_ColumnPropNameInTable="RevColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Title" msprop:Generator_UserColumnName="Title" msprop:Generator_ColumnPropNameInRow="Title" msprop:Generator_ColumnVarNameInTable="columnTitle" msprop:Generator_ColumnPropNameInTable="TitleColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="MansHours" msprop:Generator_UserColumnName="MansHours" msprop:Generator_ColumnPropNameInRow="MansHours" msprop:Generator_ColumnVarNameInTable="columnMansHours" msprop:Generator_ColumnPropNameInTable="MansHoursColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="Cost" msprop:Generator_UserColumnName="Cost" msprop:Generator_ColumnPropNameInRow="Cost" msprop:Generator_ColumnVarNameInTable="columnCost" msprop:Generator_ColumnPropNameInTable="CostColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="Remarks" msprop:Generator_UserColumnName="Remarks" msprop:Generator_ColumnPropNameInRow="Remarks" msprop:Generator_ColumnVarNameInTable="columnRemarks" msprop:Generator_ColumnPropNameInTable="RemarksColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="KitRequired" msprop:Generator_UserColumnName="KitRequired" msprop:Generator_ColumnPropNameInRow="KitRequired" msprop:Generator_ColumnVarNameInTable="columnKitRequired" msprop:Generator_ColumnPropNameInTable="KitRequiredColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="SubCheckName" msprop:Generator_UserColumnName="SubCheckName" msprop:Generator_ColumnPropNameInRow="SubCheckName" msprop:Generator_ColumnVarNameInTable="columnSubCheckName" msprop:Generator_ColumnPropNameInTable="SubCheckNameColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,853 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{48B63705-4573-4BB2-B04D-67A406B09AB6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SmartCore</RootNamespace>
+    <AssemblyName>SmartCore</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'KACRelease|AnyCPU'">
+    <OutputPath>bin\KACRelease\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\SmartCore.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'KACRelease|x86'">
+    <OutputPath>bin\x86\KACRelease\</OutputPath>
+    <DefineConstants>TRACE;KAC</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\x86\Release\SmartCore.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'KACRelease|x64'">
+    <OutputPath>bin\x64\KACRelease\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\x64\Release\SmartCore.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'KACDEBUG|AnyCPU'">
+    <OutputPath>bin\KACDEBUG\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\SmartCore.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'KACDEBUG|x86'">
+    <OutputPath>bin\x86\KACDEBUG\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;KAC</DefineConstants>
+    <Optimize>false</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\x86\Release\SmartCore.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'KACDEBUG|x64'">
+    <OutputPath>bin\x64\KACDEBUG\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\x64\Release\SmartCore.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AQUILINEDEBUG|AnyCPU'">
+    <OutputPath>bin\AQUILINEDEBUG\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AQUILINEDEBUG|x86'">
+    <OutputPath>bin\x86\AQUILINEDEBUG\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;AQUILINE</DefineConstants>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AQUILINEDEBUG|x64'">
+    <OutputPath>bin\x64\AQUILINEDEBUG\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AQUILINERELEASE|AnyCPU'">
+    <OutputPath>bin\AQUILINERELEASE\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AQUILINERELEASE|x86'">
+    <OutputPath>bin\x86\AQUILINERELEASE\</OutputPath>
+    <DefineConstants>TRACE;AQUILINE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AQUILINERELEASE|x64'">
+    <OutputPath>bin\x64\AQUILINERELEASE\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Microsoft.SqlServer.ConnectionInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Microsoft.SqlServer.Management.Sdk.Sfc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Smo, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Microsoft.SqlServer.Smo.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.SqlEnum, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Microsoft.SqlServer.SqlEnum.dll</HintPath>
+    </Reference>
+    <Reference Include="office, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AircraftFlights\AircraftFlightCore.cs" />
+    <Compile Include="AircraftFlights\IAircraftFlightCore.cs" />
+    <Compile Include="Aircrafts\AircraftsCore.cs" />
+    <Compile Include="Aircrafts\IAircraftsCore.cs" />
+    <Compile Include="Analyst\IAnalystCore.cs" />
+    <Compile Include="Audits\AuditCore.cs" />
+    <Compile Include="Audits\IAuditCore.cs" />
+    <Compile Include="Auxiliary\Convert.cs" />
+    <Compile Include="Auxiliary\DateTimeExtend.cs" />
+    <Compile Include="Auxiliary\Extentions\EnumerableExtention.cs" />
+    <Compile Include="Auxiliary\Extentions\IBindedItemExtention.cs" />
+    <Compile Include="Auxiliary\Extentions\ItemsFileLinksExtentions.cs" />
+    <Compile Include="Auxiliary\Extentions\ItemsRelationsCollectionExtention.cs" />
+    <Compile Include="Auxiliary\Logger.cs" />
+    <Compile Include="AverageUtilizations\AverageUtilizationCore.cs" />
+    <Compile Include="AverageUtilizations\IAverageUtilizationCore.cs" />
+    <Compile Include="Calculations\AirFleetForecast.cs" />
+    <Compile Include="Analyst\AnalystCore.cs" />
+    <Compile Include="Analyst\AnalystHelper.cs" />
+    <Compile Include="Calculations\AverageUtilization.cs" />
+    <Compile Include="Calculations\ByteConvertible.cs" />
+    <Compile Include="Calculations\Calculator.cs" />
+    <Compile Include="Calculations\DateTimeDiff.cs" />
+    <Compile Include="Calculations\ComponentDirectiveThreshold.cs" />
+    <Compile Include="Calculations\ComponentThreshold.cs" />
+    <Compile Include="Calculations\DirectiveThreshold.cs" />
+    <Compile Include="Calculations\Enums.cs" />
+    <Compile Include="Calculations\Forecast.cs" />
+    <Compile Include="Calculations\ForecastData.cs" />
+    <Compile Include="Calculations\ICalculator.cs" />
+    <Compile Include="Calculations\Lifelength.cs" />
+    <Compile Include="Calculations\LifelengthFormatter.cs" />
+    <Compile Include="Calculations\MaintenanceCheckThreshold.cs" />
+    <Compile Include="Calculations\MaintenanceDirectiveThreshold.cs" />
+    <Compile Include="Calculations\MaintenanceNextPerformance.cs" />
+    <Compile Include="Calculations\Maintenance\MaintenanceCheckCollectionExtentions.cs" />
+    <Compile Include="Calculations\Maintenance\MaintenanceCheckComplianceGroup.cs" />
+    <Compile Include="Calculations\Maintenance\MaintenanceCheckRecordGroup.cs" />
+    <Compile Include="Calculations\Maintenance\MaintenanceCheckTypeGroup.cs" />
+    <Compile Include="Calculations\MTOP\IMTOPCalculator.cs" />
+    <Compile Include="Calculations\MTOP\MTOPCalculator.cs" />
+    <Compile Include="Calculations\NextPerformance.cs" />
+    <Compile Include="Calculations\PerformanceCalculator\IPerformanceCalculator.cs" />
+    <Compile Include="Calculations\PerformanceCalculator\PerformanceCalculator.cs" />
+    <Compile Include="Calculations\PlanOpsCalculator\IPlanOpsCalculator.cs" />
+    <Compile Include="Calculations\PlanOpsCalculator\PlanOpsCalculator.cs" />
+    <Compile Include="Calculations\RiskIndex.cs" />
+    <Compile Include="Calculations\StockCalculator\IStockCalculator.cs" />
+    <Compile Include="Calculations\StockCalculator\StockCalculator.cs" />
+    <Compile Include="Calculations\Threshold.cs" />
+    <Compile Include="Calculations\TimeSpanFormatter.cs" />
+    <Compile Include="Calculations\TrainingThreshold.cs" />
+    <Compile Include="CasEnvironment.cs" />
+    <Compile Include="Component\ComponentCore.cs" />
+    <Compile Include="Component\IComponentCore.cs" />
+    <Compile Include="Contract\Executor.cs" />
+    <Compile Include="Contract\IExecutor.cs" />
+    <Compile Include="Contract\SerializedSqlParam.cs" />
+    <Compile Include="DataAccesses\AttachedFiles\AttachedFileDTO.cs" />
+    <Compile Include="DataAccesses\AttachedFiles\ItemFileLinkDTO.cs" />
+    <Compile Include="DataAccesses\IFileDTOContainer.cs" />
+    <Compile Include="DataAccesses\ItemsRelation\IItemsRelationsDataAccess.cs" />
+    <Compile Include="DataAccesses\ItemsRelation\ItemsRelationsDataAccess.cs" />
+    <Compile Include="DataAccesses\Kits\KitDTO.cs" />
+    <Compile Include="DataAccesses\NonRoutines\INonRoutineJobDataAccess.cs" />
+    <Compile Include="DataAccesses\NonRoutines\NonRoutineJobDataAccess.cs" />
+    <Compile Include="DataAccesses\NonRoutines\NonRoutineJobDTO.cs" />
+    <Compile Include="DataAccesses\WorkPackageRecords\IWorkPackageRecordsDataAccess.cs" />
+    <Compile Include="DataAccesses\WorkPackageRecords\WorkPackageRecordsDataAccess.cs" />
+    <Compile Include="Directives\DirectiveCore.cs" />
+    <Compile Include="Directives\IDirectiveCore.cs" />
+    <Compile Include="Discrepancies\DiscrepanciesCore.cs" />
+    <Compile Include="Discrepancies\IDiscrepanciesCore.cs" />
+    <Compile Include="Documents\DocumentCore.cs" />
+    <Compile Include="Documents\IDocumentCore.cs" />
+    <Compile Include="DtoHelper\DictionaryConverterDto.cs" />
+    <Compile Include="DtoHelper\GeneralConverterDto.cs" />
+    <Compile Include="Entities\Collections\ActuaStateRecordCollection.cs" />
+    <Compile Include="Entities\Collections\AircraftCollection.cs" />
+    <Compile Include="Entities\Collections\AircraftFlightCollection.cs" />
+    <Compile Include="Entities\Collections\AtaChapterCollection.cs" />
+    <Compile Include="Entities\Collections\BaseComponentCollection.cs" />
+    <Compile Include="Entities\Collections\BaseRecordCollection.cs" />
+    <Compile Include="Entities\Collections\Cas3MaintenanceCheckCollection.cs" />
+    <Compile Include="Entities\Collections\CommonCollection.cs" />
+    <Compile Include="Entities\Collections\CorrectiveActionCollection.cs" />
+    <Compile Include="Entities\Collections\DamageDocumentsCollection.cs" />
+    <Compile Include="Entities\Collections\DefferedCategoriesCollection.cs" />
+    <Compile Include="Entities\Collections\ComponentCollection.cs" />
+    <Compile Include="Entities\Collections\ComponentLLPDataCollection.cs" />
+    <Compile Include="Entities\Collections\DictionatyItemCollection.cs" />
+    <Compile Include="Entities\Collections\DirectiveCollection.cs" />
+    <Compile Include="Entities\Collections\DocumentSubTypeCollection.cs" />
+    <Compile Include="Entities\Collections\FuelTankCondition.cs" />
+    <Compile Include="Entities\Collections\FuelTankConditionCollection.cs" />
+    <Compile Include="Entities\Collections\ICommonCollection.cs" />
+    <Compile Include="Entities\Collections\ICommonCollectionGeneric.cs" />
+    <Compile Include="Entities\Collections\IDictionaryCollection.cs" />
+    <Compile Include="Entities\Collections\IRecordCollection.cs" />
+    <Compile Include="Entities\Collections\IRecordCollectionGeneric.cs" />
+    <Compile Include="Entities\Collections\KitCollection.cs" />
+    <Compile Include="Entities\Collections\LifelengthCollection.cs" />
+    <Compile Include="Calculations\Maintenance\MaintenanceCheckComplianceGroupCollection.cs" />
+    <Compile Include="Calculations\Maintenance\MaintenanceCheckGroupCollection.cs" />
+    <Compile Include="Entities\Collections\MaintenanceExtention.cs" />
+    <Compile Include="Entities\Collections\OperatorCollection.cs" />
+    <Compile Include="Entities\Collections\ReasonCollection.cs" />
+    <Compile Include="Entities\Collections\RunspsCollection.cs" />
+    <Compile Include="Entities\Collections\TransferRecordCollection.cs" />
+    <Compile Include="Entities\Dictionaries\AbstractModel.cs" />
+    <Compile Include="Entities\Dictionaries\ActionType.cs" />
+    <Compile Include="Entities\Dictionaries\AGWCategory.cs" />
+    <Compile Include="Entities\Dictionaries\AircraftModel.cs" />
+    <Compile Include="Entities\Dictionaries\AircraftOtherParameters.cs" />
+    <Compile Include="Entities\Dictionaries\AircraftWorkerCategory.cs" />
+    <Compile Include="Entities\Dictionaries\AirportsCodes.cs" />
+    <Compile Include="Entities\Dictionaries\Airport.cs" />
+    <Compile Include="Entities\Dictionaries\AtaChapter.cs" />
+    <Compile Include="Entities\Dictionaries\AuthenticationType.cs" />
+    <Compile Include="Entities\Dictionaries\BaseComponentType.cs" />
+    <Compile Include="Entities\Dictionaries\BiWeeklie.cs" />
+    <Compile Include="Entities\Dictionaries\CargoType.cs" />
+    <Compile Include="Entities\Dictionaries\ComponentStorePosition.cs" />
+    <Compile Include="Entities\Dictionaries\ConditionState.cs" />
+    <Compile Include="Entities\Dictionaries\ConsequenceFaults.cs" />
+    <Compile Include="Entities\Dictionaries\ConsequenceOPS.cs" />
+    <Compile Include="Entities\Dictionaries\IncoTerm.cs" />
+    <Compile Include="Entities\Dictionaries\OccurrenceType.cs" />
+    <Compile Include="Entities\Dictionaries\CriticalSystemList.cs" />
+    <Compile Include="Entities\Dictionaries\CruiseLevel.cs" />
+    <Compile Include="Entities\Dictionaries\DamageChart.cs" />
+    <Compile Include="Entities\Dictionaries\DataEvent.cs" />
+    <Compile Include="Entities\Dictionaries\DayofWeek.cs" />
+    <Compile Include="Entities\Dictionaries\DeffectConfirm.cs" />
+    <Compile Include="Entities\Dictionaries\DefferedCategory.cs" />
+    <Compile Include="Entities\Dictionaries\DeffeсtPhase.cs" />
+    <Compile Include="Entities\Dictionaries\DeffeсtCategory.cs" />
+    <Compile Include="Entities\Dictionaries\Department.cs" />
+    <Compile Include="Entities\Dictionaries\ComponentModel.cs" />
+    <Compile Include="Entities\Dictionaries\ComponentRecordType.cs" />
+    <Compile Include="Entities\Dictionaries\Dictionary.cs" />
+    <Compile Include="Entities\Dictionaries\DirectiveRecordType.cs" />
+    <Compile Include="Entities\Dictionaries\DirectiveStatus.cs" />
+    <Compile Include="Entities\Dictionaries\DirectiveType.cs" />
+    <Compile Include="Entities\Dictionaries\DirectiveWorkType.cs" />
+    <Compile Include="Entities\Dictionaries\DocumentClass.cs" />
+    <Compile Include="Entities\Dictionaries\DocumentTypes.cs" />
+    <Compile Include="Entities\Dictionaries\Education.cs" />
+    <Compile Include="Entities\Dictionaries\EmployeeLicenceType.cs" />
+    <Compile Include="Entities\Dictionaries\EmployeeSubject.cs" />
+    <Compile Include="Entities\Dictionaries\Enums.cs" />
+    <Compile Include="Entities\Dictionaries\EnvironmentalDamage.cs" />
+    <Compile Include="Entities\Dictionaries\EventCategory.cs" />
+    <Compile Include="Entities\Dictionaries\EventClass.cs" />
+    <Compile Include="Entities\Dictionaries\FailureViolationDeviation.cs" />
+    <Compile Include="Entities\Dictionaries\FamilyStatus.cs" />
+    <Compile Include="Entities\Dictionaries\FlightNum.cs" />
+    <Compile Include="Entities\Dictionaries\FlightRegime.cs" />
+    <Compile Include="Entities\Dictionaries\FlightType.cs" />
+    <Compile Include="Entities\Dictionaries\GoodsClass.cs" />
+    <Compile Include="Entities\Dictionaries\GoodStandart.cs" />
+    <Compile Include="Entities\Dictionaries\Highlight.cs" />
+    <Compile Include="Entities\Dictionaries\HumanDamage.cs" />
+    <Compile Include="Entities\Dictionaries\IDictionaryItem.cs" />
+    <Compile Include="Entities\Dictionaries\IDictionaryTreeItem.cs" />
+    <Compile Include="Entities\Dictionaries\IncidentType.cs" />
+    <Compile Include="Entities\Dictionaries\InitionalReason.cs" />
+    <Compile Include="Entities\Dictionaries\InterruptionType.cs" />
+    <Compile Include="Entities\Dictionaries\IWorkRegime.cs" />
+    <Compile Include="Entities\Dictionaries\KnowledgeModule.cs" />
+    <Compile Include="Entities\Dictionaries\LicenseFunction.cs" />
+    <Compile Include="Entities\Dictionaries\LicenseIcao.cs" />
+    <Compile Include="Entities\Dictionaries\LicenseRemarkRights.cs" />
+    <Compile Include="Entities\Dictionaries\LicenseRestriction.cs" />
+    <Compile Include="Entities\Dictionaries\LicenseRights.cs" />
+    <Compile Include="Entities\Dictionaries\LLPLifeLimitCategory.cs" />
+    <Compile Include="Entities\Dictionaries\LLPLifeLimitCategoryType.cs" />
+    <Compile Include="Entities\Dictionaries\Locations.cs" />
+    <Compile Include="Entities\Dictionaries\LocationsType.cs" />
+    <Compile Include="Entities\Dictionaries\LogicOperations.cs" />
+    <Compile Include="Entities\Dictionaries\MaintenanceCheckScheduleType.cs" />
+    <Compile Include="Entities\Dictionaries\MaintenanceCheckType.cs" />
+    <Compile Include="Entities\Dictionaries\MaintenanceControlProcess.cs" />
+    <Compile Include="Entities\Dictionaries\MaintenanceDirectiveProgram.cs" />
+    <Compile Include="Entities\Dictionaries\MaintenanceDirectiveProgramIndicator.cs" />
+    <Compile Include="Entities\Dictionaries\MaintenanceDirectiveTaskType.cs" />
+    <Compile Include="Entities\Dictionaries\MaintenanceInterval.cs" />
+    <Compile Include="Entities\Dictionaries\MaintenanceJobCardSkill.cs" />
+    <Compile Include="Entities\Dictionaries\ManufactureReg.cs" />
+    <Compile Include="Entities\Dictionaries\Measure.cs" />
+    <Compile Include="Entities\Dictionaries\Citizenship.cs" />
+    <Compile Include="Entities\Dictionaries\MpdCategory.cs" />
+    <Compile Include="Entities\Dictionaries\NDTType .cs" />
+    <Compile Include="Entities\Dictionaries\Nomenclatures.cs" />
+    <Compile Include="Entities\Dictionaries\OpsStatus.cs" />
+    <Compile Include="Entities\Dictionaries\Origin.cs" />
+    <Compile Include="Entities\Dictionaries\PersonnelCategory.cs" />
+    <Compile Include="Entities\Dictionaries\PorProcessType.cs" />
+    <Compile Include="Entities\Dictionaries\PositionType.cs" />
+    <Compile Include="Entities\Dictionaries\Priority.cs" />
+    <Compile Include="Entities\Dictionaries\ProcedureRating.cs" />
+    <Compile Include="Entities\Dictionaries\ProcedureType.cs" />
+    <Compile Include="Entities\Dictionaries\PropertyDamage.cs" />
+    <Compile Include="Entities\Dictionaries\RefDocType.cs" />
+    <Compile Include="Entities\Dictionaries\Regularity.cs" />
+    <Compile Include="Entities\Dictionaries\ReputationDamage.cs" />
+    <Compile Include="Entities\Dictionaries\SchedulePeriods.cs" />
+    <Compile Include="Entities\Dictionaries\ServiceType.cs" />
+    <Compile Include="Entities\Dictionaries\ShipBy.cs" />
+    <Compile Include="Entities\Dictionaries\ShutDownReason.cs" />
+    <Compile Include="Entities\Dictionaries\Skill.cs" />
+    <Compile Include="Entities\Dictionaries\SmartCoreType.cs" />
+    <Compile Include="Entities\Dictionaries\SmsEventArea.cs" />
+    <Compile Include="Entities\Dictionaries\SMSEventStatus.cs" />
+    <Compile Include="Entities\Dictionaries\SmsEventType.cs" />
+    <Compile Include="Entities\Dictionaries\Specialization.cs" />
+    <Compile Include="Entities\Dictionaries\StaticDictionary.cs" />
+    <Compile Include="Entities\Dictionaries\StaticTreeDictionary.cs" />
+    <Compile Include="Entities\Dictionaries\SupplierClass.cs" />
+    <Compile Include="Entities\Dictionaries\TrainingType.cs" />
+    <Compile Include="Entities\Dictionaries\TripName.cs" />
+    <Compile Include="Entities\Dictionaries\TypeOfOperation.cs" />
+    <Compile Include="Entities\Dictionaries\TypeReference.cs" />
+    <Compile Include="Entities\Dictionaries\Urgency.cs" />
+    <Compile Include="Entities\Dictionaries\UtilizationIntervalType.cs" />
+    <Compile Include="Entities\Dictionaries\Сurrency.cs" />
+    <Compile Include="Entities\FileLinkType.cs" />
+    <Compile Include="Entities\General\AbstractPerformanceRecord.cs" />
+    <Compile Include="Entities\General\AbstractRecord.cs" />
+    <Compile Include="Entities\General\Accessory\BaseComponent.cs" />
+    <Compile Include="Entities\General\Accessory\Component.cs" />
+    <Compile Include="Entities\General\Accessory\ComponentDirective.cs" />
+    <Compile Include="Entities\General\Accessory\ComponentLLPCategoryChangeRecord.cs" />
+    <Compile Include="Entities\General\Accessory\ComponentLLPCategoryData.cs" />
+    <Compile Include="Entities\General\Accessory\ComponentWorkInRegimeParams.cs" />
+    <Compile Include="Entities\General\Accessory\Kit.cs" />
+    <Compile Include="Entities\General\Accessory\KitSuppliersRelation.cs" />
+    <Compile Include="Entities\General\Accessory\Product.cs" />
+    <Compile Include="Entities\General\ActualStateRecord.cs" />
+    <Compile Include="Entities\General\Aircraft.cs" />
+    <Compile Include="Entities\General\AircraftEquipments.cs" />
+    <Compile Include="Entities\General\Atlbs\AircraftFlight.cs" />
+    <Compile Include="Entities\General\Atlbs\APUFailureData.cs" />
+    <Compile Include="Entities\General\Atlbs\ATLB.cs" />
+    <Compile Include="Entities\General\Atlbs\CertificateOfReleaseToService.cs" />
+    <Compile Include="Entities\General\Atlbs\ComponentOilCondition.cs" />
+    <Compile Include="Entities\General\Atlbs\CorrectiveAction.cs" />
+    <Compile Include="Entities\General\Atlbs\Discrepancy.cs" />
+    <Compile Include="Entities\General\Atlbs\EngineAccelerationTime.cs" />
+    <Compile Include="Entities\General\Atlbs\EngineCondition.cs" />
+    <Compile Include="Entities\General\Atlbs\EngineFailureData.cs" />
+    <Compile Include="Entities\General\Atlbs\EnginesGeneralCondition.cs" />
+    <Compile Include="Entities\General\Atlbs\EngineTimeInRegime.cs" />
+    <Compile Include="Entities\General\Atlbs\FlightCargoRecord.cs" />
+    <Compile Include="Entities\General\Atlbs\FlightPassengerRecord.cs" />
+    <Compile Include="Entities\General\Atlbs\FluidsCondition.cs" />
+    <Compile Include="Entities\General\Atlbs\HydraulicCondition.cs" />
+    <Compile Include="Entities\General\Atlbs\LandingGearCondition.cs" />
+    <Compile Include="Entities\General\Atlbs\RunUp.cs" />
+    <Compile Include="Entities\General\AttachedFile.cs" />
+    <Compile Include="Entities\General\Attributes\CollectionAttribute.cs" />
+    <Compile Include="Entities\General\Attributes\ExcelImportAttribute.cs" />
+    <Compile Include="Entities\General\Attributes\FilterAttributes.cs" />
+    <Compile Include="Entities\General\Attributes\FormControlAttribute.cs" />
+    <Compile Include="Entities\General\Attributes\ListViewDataAttribute.cs" />
+    <Compile Include="Entities\General\Attributes\SavableAttribute.cs" />
+    <Compile Include="Entities\General\Attributes\ValueAttributes.cs" />
+    <Compile Include="Entities\General\BaseCoreObject.cs" />
+    <Compile Include="Entities\General\BaseSmartCoreObject.cs" />
+    <Compile Include="Entities\General\CasDbUser.cs" />
+    <Compile Include="Entities\General\Commercial\Request.cs" />
+    <Compile Include="Entities\General\Commercial\RequestRecord.cs" />
+    <Compile Include="Entities\General\Commercial\WorkOrder.cs" />
+    <Compile Include="Entities\General\Commercial\WorkOrderRecord.cs" />
+    <Compile Include="Entities\General\DamageDocument.cs" />
+    <Compile Include="Entities\General\Deprecated\EngineeringOrderItem.cs" />
+    <Compile Include="Entities\General\Deprecated\JobCard.cs" />
+    <Compile Include="Entities\General\Deprecated\JobCardTask.cs" />
+    <Compile Include="Entities\General\Deprecated\UsersPermission.cs" />
+    <Compile Include="Entities\General\DirectiveRecord.cs" />
+    <Compile Include="Entities\General\Directives\DamageItem.cs" />
+    <Compile Include="Entities\General\Directives\DamageSector.cs" />
+    <Compile Include="Entities\General\Directives\DeferredItem.cs" />
+    <Compile Include="Entities\General\Directives\Directive.cs" />
+    <Compile Include="Entities\General\Document.cs" />
+    <Compile Include="Entities\General\FlightCrewRecord.cs" />
+    <Compile Include="Entities\General\Hangar\Hangar.cs" />
+    <Compile Include="Entities\General\Interfaces\AbstractAccessory.cs" />
+    <Compile Include="Entities\General\Interfaces\EmployeeWorkPackageFilterParams.cs" />
+    <Compile Include="Entities\General\Interfaces\IEmployeeFilterParams.cs" />
+    <Compile Include="Entities\General\Interfaces\IEmployeeFlightFilterParams.cs" />
+    <Compile Include="Entities\General\Interfaces\IEmployeeWorkPackageFilterParams.cs" />
+    <Compile Include="Entities\General\Interfaces\IFlightNumberParams.cs" />
+    <Compile Include="Entities\General\Interfaces\IFlightFilterParams.cs" />
+    <Compile Include="Entities\General\Interfaces\IFlightPlanOpsRecordsFilterParams.cs" />
+    <Compile Include="Entities\General\Interfaces\IForecastMtopFilterParams.cs" />
+    <Compile Include="Entities\General\Interfaces\IMaintenanceDirectiveFilterParams.cs" />
+    <Compile Include="Entities\General\Interfaces\IOccurenceFilterParams.cs" />
+    <Compile Include="Entities\General\Interfaces\IProcessingFilterParams.cs" />
+    <Compile Include="Entities\General\Interfaces\ITransferRecordFilterParams.cs" />
+    <Compile Include="Entities\General\Interfaces\ITripFilterParams.cs" />
+    <Compile Include="Entities\General\Interfaces\IWorkPackageItemFilterParam.cs" />
+    <Compile Include="Entities\General\Interfaces\IBaseCoreObject.cs" />
+    <Compile Include="Entities\General\Interfaces\IBaseEntityObject.cs" />
+    <Compile Include="Entities\General\Interfaces\IComponentContainer.cs" />
+    <Compile Include="Entities\General\Interfaces\IComponentFilterParams.cs" />
+    <Compile Include="Entities\General\Interfaces\IEngineeringDirective.cs" />
+    <Compile Include="Entities\General\Interfaces\IKitRequired.cs" />
+    <Compile Include="Entities\General\Interfaces\IMathData.cs" />
+    <Compile Include="Entities\General\Interfaces\IPrintSettings.cs" />
+    <Compile Include="Entities\General\Interfaces\IStoreFilterParam.cs" />
+    <Compile Include="Entities\General\Interfaces\ISupplied.cs" />
+    <Compile Include="Entities\General\Mail\MailChats.cs" />
+    <Compile Include="Entities\General\Mail\MailRecords.cs" />
+    <Compile Include="Entities\General\MaintenanceWorkscope\MaintenanceCheck.cs" />
+    <Compile Include="Entities\General\MaintenanceWorkscope\MaintenanceCheckBindTaskRecord.cs" />
+    <Compile Include="Entities\General\MaintenanceWorkscope\MaintenanceCheckRecords.cs" />
+    <Compile Include="Entities\General\MaintenanceWorkscope\MaintenanceDirective.cs" />
+    <Compile Include="Entities\General\MaintenanceWorkscope\MaintenanceProgramChangeRecord.cs" />
+    <Compile Include="Entities\General\MTOP\MTOPCheck.cs" />
+    <Compile Include="Entities\General\MTOP\MTOPCheckRecord.cs" />
+    <Compile Include="Entities\General\MTOP\Phase.cs" />
+    <Compile Include="Entities\General\Operator.cs" />
+    <Compile Include="Entities\General\Personnel\Specialist.cs" />
+    <Compile Include="Entities\General\Personnel\SpecialistCAA.cs" />
+    <Compile Include="Entities\General\Personnel\SpecialistInstrumentRating.cs" />
+    <Compile Include="Entities\General\Personnel\SpecialistLicense.cs" />
+    <Compile Include="Entities\General\Personnel\SpecialistLicenseDetail.cs" />
+    <Compile Include="Entities\General\Personnel\SpecialistLicenseRating.cs" />
+    <Compile Include="Entities\General\Personnel\SpecialistLicenseRemark.cs" />
+    <Compile Include="Entities\General\Personnel\SpecialistMedicalRecord.cs" />
+    <Compile Include="Entities\General\Personnel\SpecialistTraining.cs" />
+    <Compile Include="Entities\General\Personnel\WorkPackageSpecialists.cs" />
+    <Compile Include="Entities\General\Quality\Audit.cs" />
+    <Compile Include="Entities\General\Quality\AuditRecord.cs" />
+    <Compile Include="Entities\General\Quality\Procedure.cs" />
+    <Compile Include="Entities\General\Quality\ProcedureDocumentRelation.cs" />
+    <Compile Include="Entities\General\QuotationCost.cs" />
+    <Compile Include="Entities\General\Schedule\FlightNumber.cs" />
+    <Compile Include="Entities\General\Schedule\FlightNumberAircraftModelRelation.cs" />
+    <Compile Include="Entities\General\Schedule\FlightNumberAirportRelation.cs" />
+    <Compile Include="Entities\General\Schedule\FlightNumberCrewRecord.cs" />
+    <Compile Include="Entities\General\Schedule\FlightNumberPeriod.cs" />
+    <Compile Include="Entities\General\Schedule\FlightNumberPeriodDaySchedule.cs" />
+    <Compile Include="Entities\General\Schedule\FlightPlanOps.cs" />
+    <Compile Include="Entities\General\Schedule\FlightPlanOpsRecords.cs" />
+    <Compile Include="Entities\General\Schedule\FlightTrack.cs" />
+    <Compile Include="Entities\General\Schedule\FlightTrackRecord.cs" />
+    <Compile Include="Entities\General\SMS\Event.cs" />
+    <Compile Include="Entities\General\SMS\EventCondition.cs" />
+    <Compile Include="Entities\General\SMS\EventTypeRiskLevelChangeRecord.cs" />
+    <Compile Include="Entities\General\Store\ProductCost.cs" />
+    <Compile Include="Entities\General\Store\StockComponentInfo.cs" />
+    <Compile Include="Entities\General\Store\Store.cs" />
+    <Compile Include="Entities\General\SupplierDocument.cs" />
+    <Compile Include="Entities\General\Templates\Template.cs" />
+    <Compile Include="Entities\General\Templates\TemplateAircraft.cs" />
+    <Compile Include="Entities\General\Templates\TemplateBaseComponent.cs" />
+    <Compile Include="Entities\General\Templates\TemplateDamageChart.cs" />
+    <Compile Include="Entities\General\Templates\TemplateDefferedCategory.cs" />
+    <Compile Include="Entities\General\Templates\TemplateComponentDirective.cs" />
+    <Compile Include="Entities\General\Templates\TemplateComponent.cs" />
+    <Compile Include="Entities\General\Templates\TemplateDirective.cs" />
+    <Compile Include="Entities\General\Templates\TemplateKit.cs" />
+    <Compile Include="Entities\General\Templates\TemplateLLPLifeLimitCategory.cs" />
+    <Compile Include="Entities\General\Templates\TemplateMaintenanceCheck.cs" />
+    <Compile Include="Entities\General\Templates\TemplateNonRoutineJob.cs" />
+    <Compile Include="Entities\General\TransferRecord.cs" />
+    <Compile Include="Entities\General\Vehicle.cs" />
+    <Compile Include="Entities\General\WorkPackage\NonRoutineJob.cs" />
+    <Compile Include="Entities\General\WorkPackage\WorkPackage.cs" />
+    <Compile Include="Entities\General\WorkPackage\WorkPakageRecord.cs" />
+    <Compile Include="Entities\General\WorkShop\WorkShop.cs" />
+    <Compile Include="Entities\General\WorkStation\WorkStation.cs" />
+    <Compile Include="Entities\IFileContainer.cs" />
+    <Compile Include="Entities\IKeeper.cs" />
+    <Compile Include="Entities\ILoader.cs" />
+    <Compile Include="Entities\IManipulator.cs" />
+    <Compile Include="Entities\INewKeeper.cs" />
+    <Compile Include="Entities\Keeper.cs" />
+    <Compile Include="Entities\Loader.cs" />
+    <Compile Include="Entities\LoadingState.cs" />
+    <Compile Include="Entities\Manipulator.cs" />
+    <Compile Include="Entities\NewKeeper.cs" />
+    <Compile Include="Entities\NewLoader\INewLoader.cs" />
+    <Compile Include="Entities\NewLoader\NewLoader.cs" />
+    <Compile Include="Entities\XlsReader.cs" />
+    <Compile Include="Files\FilesDataAccess.cs" />
+    <Compile Include="Files\FilesSmartCore.cs" />
+    <Compile Include="Files\IFilesDataAccess.cs" />
+    <Compile Include="Files\ItemFileLink.cs" />
+    <Compile Include="Filters\AccessoryCollectionFilter.cs" />
+    <Compile Include="Filters\AccessoryFilter.cs" />
+    <Compile Include="Filters\AccessoryManufacturerFilter.cs" />
+    <Compile Include="Filters\AccessoryPartNumberFilter.cs" />
+    <Compile Include="Filters\AccessorySuppliersFilter.cs" />
+    <Compile Include="Filters\CommonFilter.cs" />
+    <Compile Include="Filters\CommonFilterCollection.cs" />
+    <Compile Include="Filters\CommonFilterGroup.cs" />
+    <Compile Include="Filters\IFilter.cs" />
+    <Compile Include="ICasEnvironment.cs" />
+    <Compile Include="Kits\IKitsCore.cs" />
+    <Compile Include="Kits\KitsCore.cs" />
+    <Compile Include="Maintenance\IMaintenanceCheckCalculator.cs" />
+    <Compile Include="Maintenance\IMaintenanceCore.cs" />
+    <Compile Include="Maintenance\MaintenanceCheckCalculator.cs" />
+    <Compile Include="Maintenance\MaintenanceCore.cs" />
+    <Compile Include="Management\AuthenticationType.cs" />
+    <Compile Include="Management\CasDataTable.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Management\CasUser.cs" />
+    <Compile Include="Management\DatabaseManager.cs" />
+    <Compile Include="Management\DbTypes.cs" />
+    <Compile Include="Management\IDatabaseManager.cs" />
+    <Compile Include="Management\Settings\AssemblySettings.cs" />
+    <Compile Include="Management\Settings\ConnectionSettingsContainer.cs" />
+    <Compile Include="NonRoutineJobs\INonRoutineJobCore.cs" />
+    <Compile Include="NonRoutineJobs\NonRoutineJobCore.cs" />
+    <Compile Include="NonRoutineJobs\NonRoutineJobHelper.cs" />
+    <Compile Include="ObjectCache\CommonDictionariesCache.cs" />
+    <Compile Include="ObjectCache\CommonEntitiesCache.cs" />
+    <Compile Include="ObjectCache\ICommonEntitiesCache.cs" />
+    <Compile Include="Packages\AbstractDirectivePackage.cs" />
+    <Compile Include="Packages\AbstractPackage.cs" />
+    <Compile Include="Packages\AbstractPackageRecord.cs" />
+    <Compile Include="Packages\BaseDirectivePackageRecord.cs" />
+    <Compile Include="Packages\IDirectivePackage.cs" />
+    <Compile Include="Packages\IPackage.cs" />
+    <Compile Include="Packages\IPackageRecord.cs" />
+    <Compile Include="Packages\PackagesCore.cs" />
+    <Compile Include="Personnel\IPersonnelCore.cs" />
+    <Compile Include="Personnel\PersonnelCore.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Purchase\InitionalOrder.cs" />
+    <Compile Include="Purchase\InitionalOrderRecord.cs" />
+    <Compile Include="Purchase\IORQORRelation.cs" />
+    <Compile Include="Purchase\IPurchaseCore.cs" />
+    <Compile Include="Purchase\PurchaseCore.cs" />
+    <Compile Include="Purchase\PurchaseOrder.cs" />
+    <Compile Include="Purchase\PurchaseRequestRecord.cs" />
+    <Compile Include="Purchase\RequestForQuotation.cs" />
+    <Compile Include="Purchase\RequestForQuotationRecord.cs" />
+    <Compile Include="Purchase\Supplier.cs" />
+    <Compile Include="Queries\AttachedFileQueries.cs" />
+    <Compile Include="Queries\BaseComponentQueries.cs" />
+    <Compile Include="Queries\BaseQueries.cs" />
+    <Compile Include="Queries\CorrectiveActionQueries.cs" />
+    <Compile Include="Queries\DbQuery.cs" />
+    <Compile Include="Queries\DefferedItemQueries.cs" />
+    <Compile Include="Queries\ComponentDirectiveQueries.cs" />
+    <Compile Include="Queries\ComponentQueries.cs" />
+    <Compile Include="Queries\DirectiveQueries.cs" />
+    <Compile Include="Queries\ItemFileLinksQueries.cs" />
+    <Compile Include="Queries\MaintenanceDirectiveQueries.cs" />
+    <Compile Include="Queries\ObjectMapper.cs" />
+    <Compile Include="Queries\OperatorQueries.cs" />
+    <Compile Include="Queries\StockComponentInfoQueries.cs" />
+    <Compile Include="Queries\TransferRecordQueries.cs" />
+    <Compile Include="Queries\UsersPermissionQueries.cs" />
+    <Compile Include="RegisterPerformances\IPerformanceCore.cs" />
+    <Compile Include="RegisterPerformances\PerformanceCore.cs" />
+    <Compile Include="Relation\BindedItemsCore.cs" />
+    <Compile Include="Relation\IBindedItem.cs" />
+    <Compile Include="Relation\IBindedItemsCore.cs" />
+    <Compile Include="Relation\ItemsRelation.cs" />
+    <Compile Include="Sms\ISMSCore.cs" />
+    <Compile Include="Sms\SMSCore.cs" />
+    <Compile Include="Stores\IStoreCore.cs" />
+    <Compile Include="Stores\StoreCore.cs" />
+    <Compile Include="TrackCore\FlightTrackCore.cs" />
+    <Compile Include="TrackCore\IFlightTrackCore.cs" />
+    <Compile Include="TransferRec\ITransferRecordCore.cs" />
+    <Compile Include="TransferRec\TransferRecordCore.cs" />
+    <Compile Include="WorkPackages\IWorkPackageCore.cs" />
+    <Compile Include="WorkPackages\WorkPackageCore.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>Клиентский профиль .NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Установщик Windows 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EFCore\EFCore.csproj">
+      <Project>{6dddaf81-980a-4ebc-bf58-3ca93a059d7f}</Project>
+      <Name>EFCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TextProcessing\TextProcessing.csproj">
+      <Project>{C56BB11D-5043-4A8B-8288-A7199B76B570}</Project>
+      <Name>TextProcessing</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Entities\ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

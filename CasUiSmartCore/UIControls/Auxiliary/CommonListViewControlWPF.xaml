@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="CAS.UI.UIControls.Auxiliary.CommonListViewControlWPF"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:calculations="clr-namespace:SmartCore.Calculations;assembly=SmartCore"
+             xmlns:general="clr-namespace:SmartCore.Entities.General;assembly=SmartCore"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="700">
+    <UserControl.Resources>
+        <DataTemplate x:Name="ComboBoxDataTemplate" x:Key="ComboBoxDataTemplate">
+            <ComboBox Name ="ComboBox"/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ListView Name="itemsListView" Grid.Row="0" FontFamily="Verdana" FontSize="13">
+            <!--<ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Name}" FontWeight="Bold"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>-->
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="ATA" Width="300">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate DataType="calculations:NextPerformance">
+                                    <TextBlock Text="{Binding Path=AtaChapter}" TextWrapping="Wrap"></TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate> 
+                        </GridViewColumn> 
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+
+        </ListView>
+        <Label Name="labelTotal" Grid.Row="1" Foreground="#7A7A7A" 
+               FontFamily="Verdana" FontSize="14" FontWeight="Bold"
+               Background="Transparent" HorizontalAlignment="Right" Content="Total:"/>
+    </Grid>
+</UserControl>
