@@ -313,7 +313,6 @@
     <Compile Include="MessageType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GlobalTermsProvider.cs" />
-    <Compile Include="USBKeyDataManager.cs" />
     <Compile Include="USBSerialNumberManager.cs" />
     <Compile Include="WindowsRegistryDataManager.cs" />
   </ItemGroup>

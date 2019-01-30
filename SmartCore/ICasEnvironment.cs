@@ -56,7 +56,7 @@ namespace SmartCore
 		void Disconnect();
 
 		void Connect(String serverName, String userName, String pass, String database);
-		bool ConnectWeb(String ipServer, String userName, String pass);
+
 		UserDTO GetUser(string login, string password);
 
 		void CheckTablesFor(Type type);

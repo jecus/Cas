@@ -47,7 +47,7 @@ namespace SmartCore.Entities
 			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var repo = _casEnvironment.UnitOfWork.GetRepositoryWcf<TOut>();
+			var repo = _casEnvironment.UnitOfWork.GetRepository<TOut>();
 
 			if (repo == null)
 				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
@@ -83,7 +83,7 @@ namespace SmartCore.Entities
 			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var repo = _casEnvironment.UnitOfWork.GetRepositoryWcf<TOut>();
+			var repo = _casEnvironment.UnitOfWork.GetRepository<TOut>();
 
 			if (repo == null)
 				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");

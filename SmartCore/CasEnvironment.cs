@@ -19,6 +19,7 @@ using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
 using EFCore.Filter;
 using EFCore.UnitOfWork;
+using EFCore.UnitOfWork.Providers;
 using Microsoft.SqlServer.Management.Smo;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Hangar;
@@ -176,7 +177,8 @@ namespace SmartCore
 
 	        CurrentUser = user;
 
-	        _unitOfWork = new UnitOfWork(_ipServer, true);
+	        //_unitOfWork = new UnitOfWork(new DatabaseProvider());
+	        _unitOfWork = new UnitOfWork(new WcfProvider(_ipServer));
 	        _newLoader = new NewLoader(this);
 
 	        //_databaseManager.Connect($"{connection.ServerName}\\MSSQLSERVER", connection.UserName, connection.Password);
@@ -191,23 +193,6 @@ namespace SmartCore
 	        //_unitOfWork = new UnitOfWork(connectionString);
 		}
 		#endregion
-
-	    public bool ConnectWeb(String ipServer, String userName, String pass)
-	    {
-			_ipServer = ipServer;
-		    var connection = GetWcfConnection();
-
-		    var user = GetUser(userName, pass);
-		    if (user == null)
-			    return false;
-
-		    CurrentUser = user;
-
-		    _unitOfWork = new UnitOfWork(_ipServer, true);
-		    _newLoader = new NewLoader(this);
-
-		    return true;
-	    }
 
 		public UserDTO GetUser(string login, string password)
 	    {

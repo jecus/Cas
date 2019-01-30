@@ -578,6 +578,9 @@
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\Providers\DatabaseProvider.cs" />
+    <Compile Include="UnitOfWork\Providers\IConnectProvider.cs" />
+    <Compile Include="UnitOfWork\Providers\WcfProvider.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>

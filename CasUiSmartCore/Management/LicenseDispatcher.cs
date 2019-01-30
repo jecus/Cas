@@ -99,76 +99,44 @@ namespace CAS.UI.Management
         #region Methods
         
         #region public static void CheckLicenseInformation()
-        
+
         /// <summary>
         /// Проверить поля ProductKey и ComponyName в USB ключе и реестре
         /// </summary>
         public static void CheckLicenseInformation()
         {
-            timer.Enabled = false;
-            _isUsbKeyFound = false;
-            _isLicenseFound = false;
-            LicenseInformation windowsRegistryLicenseInformation = WindowsRegistryDataManager.GetRegistryInformation();
-            
-            if (windowsRegistryLicenseInformation == null)
-            {
-                CASMessage.Show(MessageType.LicenseInformationNotEqual);
-                Environment.Exit(Environment.ExitCode);
-            }
-            LicenseInformation usbLicenseInformation = USBKeyDataManager.GetUSBKeyData();
-            if (usbLicenseInformation == null)
-            {
-                _isLicenseFound = true;
+	        timer.Enabled = false;
+	        _isUsbKeyFound = false;
+	        _isLicenseFound = false;
+	        var windowsRegistryLicenseInformation = WindowsRegistryDataManager.GetRegistryInformation();
+
+	        if (windowsRegistryLicenseInformation == null)
+	        {
+		        CASMessage.Show(MessageType.LicenseInformationNotEqual);
+		        Environment.Exit(Environment.ExitCode);
+	        }
+
+	        _isLicenseFound = true;
 
 
-                if (DateTime.Now.Date > windowsRegistryLicenseInformation.Expires.Date)
-                {
-                    CASMessage.Show(MessageType.LicenseExpired);
-                    Environment.Exit(Environment.ExitCode);
-                }
+	        if (DateTime.Now.Date > windowsRegistryLicenseInformation.Expires.Date)
+	        {
+		        CASMessage.Show(MessageType.LicenseExpired);
+		        Environment.Exit(Environment.ExitCode);
+	        }
 
-                if (DateTime.Now.Date < windowsRegistryLicenseInformation.Expires.Date && (windowsRegistryLicenseInformation.Expires.Date - DateTime.Now.Date).TotalDays > 90)
-                {
-                    CASMessage.Show(MessageType.LicenseViolation);
-                    Environment.Exit(Environment.ExitCode);
-                }
+	        if (DateTime.Now.Date < windowsRegistryLicenseInformation.Expires.Date &&
+	            (windowsRegistryLicenseInformation.Expires.Date - DateTime.Now.Date).TotalDays > 90)
+	        {
+		        CASMessage.Show(MessageType.LicenseViolation);
+		        Environment.Exit(Environment.ExitCode);
+	        }
 
-                form.Text = new GlobalTermsProvider()["SystemName"] + ". Evaluation copy. Valid till " +
-                            windowsRegistryLicenseInformation.Expires.ToString(
-                                new GlobalTermsProvider()["DateFormat"].ToString());
-            }
-            else
-            {
-                if (usbLicenseInformation.Company!=windowsRegistryLicenseInformation.Company)
-                {
-                    form.Enabled = false; 
-                    if (messageForm!=null)
-                        messageForm.Close();
-                    messageForm = new MessageForm();
+	        form.Text = new GlobalTermsProvider()["SystemName"] + ". Evaluation copy. Valid till " +
+	                    windowsRegistryLicenseInformation.Expires.ToString(
+		                    new GlobalTermsProvider()["DateFormat"].ToString());
 
-                    messageForm.MessageText =
-                        string.Format(new MessageInfoProvider()[MessageType.USBKeyNotValid.ToString()].ToString(),
-                                      windowsRegistryLicenseInformation.Company);
-                    messageForm.Text = MessageType.USBKeyNotValid.ToString();
-                    messageForm.ShowDialog();
-                    form.Enabled = true; 
-                    if (messageForm.IsRetryButtonPushed)
-                    {
-                        CheckLicenseInformation();
-                        return;
-                    }
-                    GlobalObjects.CasEnvironment.Disconnect();
-                    Environment.Exit(Environment.ExitCode);                    
-                }
-                _isUsbKeyFound = true;
-
-                if (messageForm != null)
-                    messageForm.Close();
-                form.Text = new GlobalTermsProvider()["SystemName"] + ". Licensed to " +
-                    windowsRegistryLicenseInformation.Company;
-
-            }
-            timer.Enabled = true;
+	        timer.Enabled = true;
 
         }
 

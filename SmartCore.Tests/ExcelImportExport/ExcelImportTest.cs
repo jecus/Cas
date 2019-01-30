@@ -265,7 +265,7 @@ namespace SmartCore.Tests.ExcelImportExport
 					Password = $"Scat{q}"
 				};
 
-				var repo = env.UnitOfWork.GetRepositoryWcf<UserDTO>();
+				var repo = env.UnitOfWork.GetRepository<UserDTO>();
 				repo.Save(user);
 				q++;
 			}

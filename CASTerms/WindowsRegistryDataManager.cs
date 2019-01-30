@@ -13,7 +13,7 @@ namespace CASTerms
 
         public static LicenseInformation GetRegistryInformation()
         {
-            GlobalTermsProvider termsProvider = new GlobalTermsProvider();
+            var termsProvider = new GlobalTermsProvider();
             try
             {
                 RegistryKey software = Registry.LocalMachine.OpenSubKey("Software");

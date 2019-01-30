@@ -76,7 +76,7 @@ namespace SmartCore.Entities.NewLoader
 			if (!typeof(T).IsSubclassOf(typeof(BaseEntity)))
 				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
 
-			var repo = _casEnvironment.UnitOfWork.GetRepositoryWcf<T>();
+			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
 
 			return repo.GetSelectColumnOnly(filters, selectProperty);
 		}
@@ -89,7 +89,7 @@ namespace SmartCore.Entities.NewLoader
 			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var repo = _casEnvironment.UnitOfWork.GetRepositoryWcf<T>();
+			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
 
 			if (repo == null)
 				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
@@ -113,7 +113,7 @@ namespace SmartCore.Entities.NewLoader
 			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var repo = _casEnvironment.UnitOfWork.GetRepositoryWcf<T>();
+			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
 
 			if (repo == null)
 				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
@@ -136,7 +136,7 @@ namespace SmartCore.Entities.NewLoader
 			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var repo = _casEnvironment.UnitOfWork.GetRepositoryWcf<T>();
+			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
 
 			if (repo == null)
 				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
@@ -159,7 +159,7 @@ namespace SmartCore.Entities.NewLoader
 			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var repo = _casEnvironment.UnitOfWork.GetRepositoryWcf<T>();
+			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
 
 			if (repo == null)
 				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
@@ -186,7 +186,7 @@ namespace SmartCore.Entities.NewLoader
 			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var repo = _casEnvironment.UnitOfWork.GetRepositoryWcf<T>();
+			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
 
 			if (repo == null)
 				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
@@ -232,7 +232,7 @@ namespace SmartCore.Entities.NewLoader
 			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var repo = _casEnvironment.UnitOfWork.GetRepositoryWcf<T>();
+			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
 
 			if (repo == null)
 				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
@@ -259,7 +259,7 @@ namespace SmartCore.Entities.NewLoader
 			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var repo = _casEnvironment.UnitOfWork.GetRepositoryWcf<T>();
+			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
 
 			if (repo == null)
 				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
