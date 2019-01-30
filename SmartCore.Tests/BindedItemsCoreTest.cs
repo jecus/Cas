@@ -30,7 +30,7 @@ namespace SmartCore.Tests
 			var airctaftCore = new AircraftsCore(enviroment.Loader, enviroment.NewKeeper, enviroment.NewLoader);
 			airctaftCore.LoadAllAircrafts();
 			var componentCore = new ComponentCore(enviroment, enviroment.Loader, enviroment.NewLoader, enviroment.NewKeeper, airctaftCore, itemRelationDA);
-			var directiveCore = new DirectiveCore(enviroment.NewKeeper, enviroment.NewLoader, enviroment.Loader, itemRelationDA);
+			var directiveCore = new DirectiveCore(enviroment.NewKeeper, enviroment.NewLoader, enviroment.Keeper, enviroment.Loader, itemRelationDA);
 			var maintenanceCore = new MaintenanceCore(enviroment, enviroment.NewLoader, enviroment.NewKeeper, itemRelationDA, null);
 			var bindedItemCore = new BindedItemsCore(componentCore, directiveCore, maintenanceCore);
 

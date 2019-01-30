@@ -155,6 +155,12 @@ namespace CAS.UI.UIControls.DocumentationControls
 			_animatedThreadWorker.ReportProgress(80, "Loading Suppliers");
 			_suppliers.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<SupplierDTO, Supplier>());
 
+		    var q = _suppliers.Where(i => i.Name == null);
+		    foreach (var supplier in q)
+		    {
+			    GlobalObjects.CasEnvironment.Keeper.Delete(supplier);
+		    }
+
 			_animatedThreadWorker.ReportProgress(100, "Loading complete");
 	    }
 

@@ -27,6 +27,8 @@ using CAS.UI.UIControls.PurchaseControls;
 using CAS.UI.UIControls.SMSControls;
 using CAS.UI.UIControls.WorkPakage;
 using CASTerms;
+using EFCore.DTO.General;
+using EFCore.Filter;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -106,6 +108,10 @@ namespace CAS.UI.UIControls.AircraftsControls
 
             AnimatedThreadWorker.ReportProgress(0, "Check Aircraft");
             GlobalObjects.AircraftsCore.ResetAircraft(CurrentAircraft);
+
+	        var aircraftEquip = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AircraftEquipmentDTO, AircraftEquipments>(new Filter("AircraftId", EFCore.Attributte.FilterType.Equal, CurrentAircraft.ItemId));
+	        CurrentAircraft.AircraftEquipments.Clear();
+	        CurrentAircraft.AircraftEquipments.AddRange(aircraftEquip);
 
 	        if (AnimatedThreadWorker.CancellationPending)
 	        {

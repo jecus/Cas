@@ -5112,9 +5112,9 @@
       <Project>{0BB37FD2-48B1-4212-8CB8-82461A379AC3}</Project>
       <Name>CasReports</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CASTerms\CasGlobalTerms.csproj">
-      <Project>{0E490CE9-C51F-408C-A6FB-39A8CE185817}</Project>
-      <Name>CasGlobalTerms</Name>
+    <ProjectReference Include="..\CASTerms\CASGlobalTerms.csproj">
+      <Project>{0e490ce9-c51f-408c-a6fb-39a8ce185817}</Project>
+      <Name>CASGlobalTerms</Name>
     </ProjectReference>
     <ProjectReference Include="..\EFCore\EFCore.csproj">
       <Project>{6dddaf81-980a-4ebc-bf58-3ca93a059d7f}</Project>

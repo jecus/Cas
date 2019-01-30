@@ -541,8 +541,8 @@ namespace CAS.UI.UIControls.DirectivesControls
 	        directive.Applicability = Applicability;
 
 	        if (checkBoxIsApplicability.Checked)
-		        directive.Applicability = directive.Applicability.Replace("APL", "");
-			else directive.Applicability = directive.Applicability.Replace("N/A", "");
+		        directive.Applicability = directive.Applicability.Replace("APL", "").Trim(); 
+			else directive.Applicability = directive.Applicability.Replace("N/A", "").Trim();
 
 
 			if (fileControlSB.GetChangeStatus())

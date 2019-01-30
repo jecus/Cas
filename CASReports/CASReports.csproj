@@ -2505,9 +2505,9 @@
       <Project>{8988CAE1-D7C1-499B-B595-9B544FCCF7FB}</Project>
       <Name>Auxiliary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CASTerms\CasGlobalTerms.csproj">
-      <Project>{0E490CE9-C51F-408C-A6FB-39A8CE185817}</Project>
-      <Name>CasGlobalTerms</Name>
+    <ProjectReference Include="..\CASTerms\CASGlobalTerms.csproj">
+      <Project>{0e490ce9-c51f-408c-a6fb-39a8ce185817}</Project>
+      <Name>CASGlobalTerms</Name>
     </ProjectReference>
     <ProjectReference Include="..\SmartCore\SmartCore.csproj">
       <Project>{48b63705-4573-4bb2-b04d-67a406b09ab6}</Project>
