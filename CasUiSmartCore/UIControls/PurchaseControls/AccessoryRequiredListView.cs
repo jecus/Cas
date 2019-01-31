@@ -199,7 +199,18 @@ namespace CAS.UI.UIControls.PurchaseControls
 		    return subItems.ToArray();
 	    }
 
-	    #endregion
+		#endregion
+
+		protected override void SetTotalText()
+		{
+
+			var groupByDescription =
+				ListViewItemList.Where(l => l.Tag is AccessoryRequired)
+					.GroupBy(acr => ((AccessoryRequired)acr.Tag).Product);
+
+
+			this.labelTotal.Text = $"Total: {groupByDescription.Count()}/{itemsListView.Items.Count}";
+		}
 
 		#endregion
 	}
