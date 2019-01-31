@@ -21,6 +21,7 @@ namespace SmartCore.Entities.Dictionaries
 
 		private string _shortName;
 
+		[Filter("Short Name", Order = 1)]
 		[TableColumn("Name", 50)]
 		[FormControl(150, "Short Name", 1, Order = 1)]
 		[ListViewData(0.2f, "Short Name", 1)]
@@ -44,6 +45,7 @@ namespace SmartCore.Entities.Dictionaries
 		/// <summary>
 		/// Полное название Категории
 		/// </summary>
+		[Filter("Full Name", Order = 2)]
 		[TableColumn("FullName", 256)]
 		[FormControl(150, "Full Name", 5, Order = 2)]
 		[ListViewData(0.2f, "Full Name", 2)]
@@ -84,6 +86,7 @@ namespace SmartCore.Entities.Dictionaries
 
 		#region public Department Department { get; set; }
 
+		[Filter("Department", Order = 3)]
 		[TableColumn("DepartmentId", 50)]
 		[FormControl(150, "Department", 1, Order = 3)]
 		[ListViewData(0.2f, "Department", 3)]
