@@ -855,7 +855,8 @@ namespace SmartCore.DtoHelper
 				LocationId = document.Location?.ItemId ?? -1,
 				SupplierId = document.Supplier?.ItemId ?? -1,
 				ParentAircraftId = document.ParentAircraftId,
-			};
+                IdNumber = document.IdNumber
+            };
 		}
 
 		public static Document Convert(this DocumentDTO document)
@@ -887,7 +888,8 @@ namespace SmartCore.DtoHelper
 				IssueNumber = document.IssueNumber,
 				Remarks = document.Remarks,
 				ParentAircraftId = document.ParentAircraftId ?? default(int),
-				Supplier = document.Supplier?.Convert(),
+                IdNumber = document.IdNumber,
+                Supplier = document.Supplier?.Convert(),
 				ResponsibleOccupation = document.ResponsibleOccupation?.Convert(),
 				Nomenсlature = document.Nomenсlature?.Convert(),
 				ServiceType = document.ServiceType?.Convert(),

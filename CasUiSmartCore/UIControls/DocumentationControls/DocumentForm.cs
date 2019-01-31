@@ -294,9 +294,10 @@ namespace CAS.UI.UIControls.DocumentationControls
 			checkBoxClosed.Checked = _currentDocument.IsClosed;
 			dateTimePickerRevisionDateFrom.Value = _currentDocument.RevisionDateFrom;
 			textBoxRevNumber.Text = _currentDocument.RevisionNumder;
+            textBoxIdNumber.Text = _currentDocument.IdNumber;
 
 
-		}
+        }
 		#endregion
 
 		#region private void UpdateControls()
@@ -395,9 +396,10 @@ namespace CAS.UI.UIControls.DocumentationControls
 		    _currentDocument.IsClosed = checkBoxClosed.Checked;
 			_currentDocument.Aboard = checkBoxAboard.Checked;
 			_currentDocument.Privy = checkBoxPrivy.Checked;
+            _currentDocument.IdNumber = textBoxIdNumber.Text;
 
 
-		    if (_parent is Aircraft)
+            if (_parent is Aircraft)
 			    _currentDocument.ParentAircraftId = _parent.ItemId;
 
 			_currentDocument.ProlongationWay = comboBoxPrologWay.SelectedValue != null 

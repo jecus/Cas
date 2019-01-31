@@ -149,7 +149,12 @@ namespace EFCore.DTO.General.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("ParentAircraftId");
 
-			HasRequired(i => i.DocumentSubType)
+            Property(i => i.IdNumber)
+                .HasMaxLength(128)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .HasColumnName("IdNumber");
+
+            HasRequired(i => i.DocumentSubType)
 				.WithMany(i => i.DocumentDtos)
 				.HasForeignKey(i => i.SubTypeId);
 

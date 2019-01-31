@@ -38,7 +38,7 @@ namespace SmartCore.Entities.General
         /// Описание документа
         /// </summary>
         [TableColumnAttribute("Description", 1024)]
-        [ListViewData(0.18f, "Description", 4)]
+        [ListViewData(0.18f, "Description", 5)]
 		[Filter("Description:", Order = 1)]
 		public string Description { get; set; }
         #endregion
@@ -99,7 +99,7 @@ namespace SmartCore.Entities.General
 
 		#region public DocumentType DocType { get; set; }
 		[ListViewData(0.18f, "Type", 1)]
-		[Filter("Doc.Type:", Order = 7)]
+		[Filter("Doc.Type:", Order = 8)]
 		public DocumentType DocType
         {
             get { return DocumentType.GetDocumentTypeById(DocTypeId); }
@@ -115,7 +115,7 @@ namespace SmartCore.Entities.General
 		/// </summary>
 		[TableColumnAttribute("SubTypeId")]
 	    [ListViewData(0.18f, "Title", 2)]
-		[Filter("Title:", Order = 5)]
+		[Filter("Title:", Order = 6)]
 		public DocumentSubType DocumentSubType
 	    {
 		    get { return _documentSubType ?? (_documentSubType = DocumentSubType.Unknown); }
@@ -129,8 +129,8 @@ namespace SmartCore.Entities.General
 		/// 
 		/// </summary>
 		[TableColumnAttribute("IssueDateValidFrom")]
-        [ListViewData(0.1f, "Issue", 5)]
-		[Filter("Issue:", Order = 15)]
+        [ListViewData(0.1f, "Issue", 6)]
+		[Filter("Issue:", Order = 16)]
 		public DateTime IssueDateValidFrom { get; set; }
 		#endregion
 
@@ -148,14 +148,14 @@ namespace SmartCore.Entities.General
 		/// </summary>
 		private DateTime _issueDateValidTo;
         [TableColumnAttribute("IssueDateValidTo")]
-		[Filter("ValidTo:", Order = 17)]
+		[Filter("ValidTo:", Order = 18)]
 		public DateTime IssueDateValidTo
         {
             get { return _issueDateValidTo < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : _issueDateValidTo; }
             set { _issueDateValidTo = value; }
         }
         
-        [ListViewData(0.1f, "Valid To", 7)] 
+        [ListViewData(0.1f, "Valid To", 8)] 
         public DateTime? ListViewDateValidTo
         {
             get
@@ -189,8 +189,8 @@ namespace SmartCore.Entities.General
 
 		[Child]
 		[TableColumnAttribute("SupplierId")]
-		[ListViewData(0.12f, "Supplier", 17)]
-		[Filter("Supplier:", Order = 4)]
+		[ListViewData(0.12f, "Supplier", 18)]
+		[Filter("Supplier:", Order = 5)]
 		public Supplier Supplier
 		{
 			get { return _supplier ?? Supplier.Unknown; }
@@ -203,8 +203,8 @@ namespace SmartCore.Entities.General
 		private Specialization _responsibleOccupation;
 
 		[TableColumnAttribute("ResponsibleOccupationId")]
-		[ListViewData(0.1f, "Responsible", 12)]
-		[Filter("Responsible:", Order = 13)]
+		[ListViewData(0.1f, "Responsible", 13)]
+		[Filter("Responsible:", Order = 14)]
 		public Specialization ResponsibleOccupation
 	    {
 		    get { return _responsibleOccupation ?? (_responsibleOccupation = Specialization.Unknown); }
@@ -226,7 +226,7 @@ namespace SmartCore.Entities.General
         /// номер ревизии документа
         /// </summary>
         [TableColumnAttribute("RevNumber")]
-        [ListViewData(0.1f, "Rev.№", 10)]
+        [ListViewData(0.1f, "Rev.№", 11)]
         public string RevisionNumder { get; set; }
 		#endregion
 
@@ -237,7 +237,7 @@ namespace SmartCore.Entities.General
 		/// </summary>
 		private DateTime _revisionDate = DateTime.Today;
         [TableColumnAttribute("RevisionDateFrom")]
-		[Filter("Revision:", Order = 16)]
+		[Filter("Revision:", Order = 17)]
 		public DateTime RevisionDateFrom
         {
             get
@@ -249,7 +249,7 @@ namespace SmartCore.Entities.General
             set { _revisionDate = value; }
         }
 
-        [ListViewData(0.1f, "Rev. Date", 9)]
+        [ListViewData(0.1f, "Rev. Date", 10)]
         public DateTime? ListViewRevisionDate
         {
             get
@@ -264,7 +264,7 @@ namespace SmartCore.Entities.General
 		/// <summary>
 		/// родительский объект данного KIT-а (директива, деталь и т.д.)
 		/// </summary>
-		[Filter("Parent:", Order = 14)]
+		[Filter("Parent:", Order = 15)]
 		public BaseEntityObject Parent
         {
             get { return _parent; }
@@ -317,8 +317,8 @@ namespace SmartCore.Entities.General
 		#region public ProlongationWay ProlongationWay { get; set; }
 
 		[TableColumn("ProlongationWayId")]
-		[ListViewData(0.12f, "Prolongation", 16)]
-		[Filter("Prolongation:", Order = 8)]
+		[ListViewData(0.12f, "Prolongation", 17)]
+		[Filter("Prolongation:", Order = 9)]
 		public ProlongationWay ProlongationWay { get; set; }
 
 		#endregion
@@ -328,8 +328,8 @@ namespace SmartCore.Entities.General
 		private Nomenclatures _nomenсlature;
 
 	    [TableColumn("NomenсlatureId")]
-		[ListViewData(0.1f, "Location", 15)]
-		[Filter("Nomenсlature:", Order = 6)]
+		[ListViewData(0.1f, "Location", 16)]
+		[Filter("Nomenсlature:", Order = 7)]
 		[Child]
 	    public Nomenclatures Nomenсlature
 	    {
@@ -344,8 +344,8 @@ namespace SmartCore.Entities.General
 		private ServiceType _serviceType;
 
 	    [TableColumn("ServiceTypeId")]
-		[ListViewData(0.12f, "Service Type", 13)]
-		[Filter("Service Type:", Order = 9)]
+		[ListViewData(0.12f, "Service Type", 14)]
+		[Filter("Service Type:", Order = 10)]
 		[Child]
 	    public ServiceType ServiceType
 	    {
@@ -360,8 +360,8 @@ namespace SmartCore.Entities.General
 		private Department _department;
 
 		[TableColumn("DepartmentId")]
-		[ListViewData(0.1f, "Department", 11)]
-		[Filter("Department:", Order = 11)]
+		[ListViewData(0.1f, "Department", 12)]
+		[Filter("Department:", Order = 12)]
 		[Child]
 	    public Department Department
 	    {
@@ -383,8 +383,8 @@ namespace SmartCore.Entities.General
 		private DateTime _revisionDateValidTo;
 
 		[TableColumn("RevisionDateValidTo")]
-		[ListViewData(0.10f, "ValidTo", 20)]
-		[Filter("ValidTo:", Order = 18)]
+		[ListViewData(0.10f, "ValidTo", 21)]
+		[Filter("ValidTo:", Order = 19)]
 		public DateTime RevisionDateValidTo
 		{
 			get { return _revisionDateValidTo < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : _revisionDateValidTo; }
@@ -403,7 +403,7 @@ namespace SmartCore.Entities.General
 		#region public bool Aboard { get; set; }
 
 		[TableColumn("Aboard")]
-		[ListViewData(0.1f, "Aboard", 14)]
+		[ListViewData(0.1f, "Aboard", 15)]
 		[Filter("Aboard:", Order = 23)]
 		public bool Aboard { get; set; }
 
@@ -416,7 +416,7 @@ namespace SmartCore.Entities.General
 		#region public int IssueNumber { get; set; }
 
 		[TableColumn("IssueNumber")]
-		[ListViewData(0.1f, "Issue №", 6)]
+		[ListViewData(0.1f, "Issue №", 7)]
 		public string IssueNumber { get; set; }
 
 		#endregion
@@ -424,7 +424,7 @@ namespace SmartCore.Entities.General
 		#region public int Remarks { get; set; }
 
 		[TableColumn("Remarks")]
-		[ListViewData(0.1f, "Remarks", 19)]
+		[ListViewData(0.1f, "Remarks", 20)]
 		[Filter("Remarks:", Order = 3)]
 		public string Remarks { get; set; }
 
@@ -434,8 +434,8 @@ namespace SmartCore.Entities.General
 
 		private Lifelength _revisionRemains;
 
-		[ListViewData(0.10f, "RevisionRemains", 21)]
-		[Filter("ValidTo:", Order = 20)]
+		[ListViewData(0.10f, "RevisionRemains", 22)]
+		[Filter("ValidTo:", Order = 21)]
 		public Lifelength RevisionRemains
 		{
 			get { return _revisionRemains; }
@@ -469,16 +469,22 @@ namespace SmartCore.Entities.General
 
 		public bool HaveFile { get; set; }
 
-		#region Implement of IMathData
-		//Своиства интерфеися IMathData, они содержат вычисления мат аппарата для объектов
-		//у всех директив, деталей чеков и т.д. можно вычислить их текущее сотояние
-		// дату след. выполнения и наработку на которой это выполнение произоидет
+        #region public string IDNumber { get; set; }
+        [Filter("Id №:", Order = 4)]
+        [TableColumnAttribute("IdNumber")]
+        public string IdNumber { get; set; }
+        #endregion
 
-		#region BaseSmartCoreObject LifeLenghtParent { get; }
-		/// <summary>
-		/// Возвращает объект, для которого можно расчитать текущую наработку. Обычно Aircraft, BaseComponent или Component
-		/// </summary>
-		public BaseEntityObject LifeLengthParent
+        #region Implement of IMathData
+        //Своиства интерфеися IMathData, они содержат вычисления мат аппарата для объектов
+        //у всех директив, деталей чеков и т.д. можно вычислить их текущее сотояние
+        // дату след. выполнения и наработку на которой это выполнение произоидет
+
+        #region BaseSmartCoreObject LifeLenghtParent { get; }
+        /// <summary>
+        /// Возвращает объект, для которого можно расчитать текущую наработку. Обычно Aircraft, BaseComponent или Component
+        /// </summary>
+        public BaseEntityObject LifeLengthParent
         {
             get { return null; }
         }
@@ -529,7 +535,7 @@ namespace SmartCore.Entities.General
 		/// <summary>
 		/// Текущее состояние
 		/// </summary>
-		[Filter("Condition:", Order = 12)]
+		[Filter("Condition:", Order = 13)]
 		public ConditionState Condition { get; set; }
         #endregion
 
@@ -537,8 +543,8 @@ namespace SmartCore.Entities.General
         /// <summary>
         /// Статус директивы
         /// </summary>       
-		[ListViewData(0.1f, "Status", 18)]
-		[Filter("Status:", Order = 10)]
+		[ListViewData(0.1f, "Status", 19)]
+		[Filter("Status:", Order = 11)]
 		public DirectiveStatus Status
         {
             get
@@ -563,8 +569,8 @@ namespace SmartCore.Entities.General
 		/// </summary>
 		private Lifelength _remains;
 
-		[ListViewData(0.10f, "Remain", 8)]
-		[Filter("Remains:", Order = 19)]
+		[ListViewData(0.10f, "Remain", 9)]
+		[Filter("Remains:", Order = 20)]
 		public Lifelength Remains
 		{
 			get { return _remains; }

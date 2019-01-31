@@ -98,7 +98,10 @@ namespace EFCore.DTO.General
 		[DataMember]
 		public int? ParentAircraftId { get; set; }
 
-		[DataMember]
+        [DataMember]
+        public string IdNumber { get; set; }
+
+        [DataMember]
 		[Include]
 		public DocumentSubTypeDTO DocumentSubType { get; set; }
 
