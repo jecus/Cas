@@ -20,7 +20,7 @@ namespace CAS.UI.UIControls.ComponentControls
                 components.Dispose();
             }
 
-            comboBoxModel.SelectedIndexChanged -= DictionaryComboProductSelectedIndexChanged;
+            //comboBoxModel.SelectedIndexChanged -= DictionaryComboProductSelectedIndexChanged;
 
             base.Dispose(disposing);
         }

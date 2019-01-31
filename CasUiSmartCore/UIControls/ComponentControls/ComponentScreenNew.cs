@@ -103,27 +103,27 @@ namespace CAS.UI.UIControls.ComponentControls
         /// </summary>
         public override void DisposeScreen()
         {
-            CancelAsync();
+	        CancelAsync();
 
-            if(_performanceControl != null)
-                _performanceControl.CancelAsync();
-            if(_complianceControl != null)
-                _complianceControl.CalcelAsync();
-            
-            AnimatedThreadWorker.Dispose();
+	        if(_performanceControl != null)
+		        _performanceControl.CancelAsync();
+	        if(_complianceControl != null)
+		        _complianceControl.CalcelAsync();
 
-            if (_itemPrintReportHistory != null) _itemPrintReportHistory.Dispose();
-            if (_itemPrintReportRecords != null) _itemPrintReportRecords.Dispose();
-            if (_buttonPrintMenuStrip != null) _buttonPrintMenuStrip.Dispose();
+	        AnimatedThreadWorker.Dispose();
 
-            _currentComponent = null;
+	        if (_itemPrintReportHistory != null) _itemPrintReportHistory.Dispose();
+	        if (_itemPrintReportRecords != null) _itemPrintReportRecords.Dispose();
+	        if (_buttonPrintMenuStrip != null) _buttonPrintMenuStrip.Dispose();
 
-            if (_baseComponentComponents != null)
-                _baseComponentComponents.Clear();
-            _baseComponentComponents = null;
+	        _currentComponent = null;
 
-            Dispose(true);
-        }
+	        if (_baseComponentComponents != null)
+		        _baseComponentComponents.Clear();
+	        _baseComponentComponents = null;
+
+	        Dispose(true);
+		}
 
         #endregion
 
@@ -183,17 +183,25 @@ namespace CAS.UI.UIControls.ComponentControls
             #region Загрузка элементов
 
             AnimatedThreadWorker.ReportProgress(0, "load component");
-
-            try
+			try
             {
                 if (_currentComponent.ItemId > 0)
                 {
                     if (_currentComponent is BaseComponent)
                     {
-                        _currentComponent = GlobalObjects.ComponentCore.GetBaseComponentById(_currentComponent.ItemId);
+	                    if (AnimatedThreadWorker.CancellationPending)
+	                    {
+		                    e.Cancel = true;
+		                    return;
+	                    }
+						_currentComponent = GlobalObjects.ComponentCore.GetBaseComponentById(_currentComponent.ItemId);
 
 	                    var types = new[] {SmartCoreType.BaseComponent.ItemId, SmartCoreType.ComponentDirective.ItemId};
-
+	                    if (AnimatedThreadWorker.CancellationPending)
+	                    {
+		                    e.Cancel = true;
+		                    return;
+	                    }
 						//Загрузка документов
 						var documents = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DocumentDTO,Document>(new Filter("ParentTypeId", types),true);
 
@@ -233,7 +241,12 @@ namespace CAS.UI.UIControls.ComponentControls
 					}
                     else
                     {
-                        _currentComponent = GlobalObjects.ComponentCore.GetComponentById(_currentComponent.ItemId);
+	                    if (AnimatedThreadWorker.CancellationPending)
+	                    {
+		                    e.Cancel = true;
+		                    return;
+	                    }
+						_currentComponent = GlobalObjects.ComponentCore.GetComponentById(_currentComponent.ItemId);
                     }
                 }
             }

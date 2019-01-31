@@ -23,13 +23,13 @@ namespace CAS.UI.UIControls.Auxiliary
 
             if (backgroundWorker.IsBusy)
                 backgroundWorker.CancelAsync();
+            backgroundWorker.Dispose();
+			//while (backgroundWorker.IsBusy)
+			//{
+			//    Thread.Sleep(500);
+			//}
 
-            while (backgroundWorker.IsBusy)
-            {
-                Thread.Sleep(500);
-            }
-
-            backgroundWorker.DoWork -= BackgroundWorkerDoWork;
+			backgroundWorker.DoWork -= BackgroundWorkerDoWork;
             backgroundWorker.ProgressChanged -= BackgroundWorkerProgressChanged;
             backgroundWorker.RunWorkerCompleted -= BackgroundWorkerRunWorkerCompleted;
             backgroundWorker.Dispose();

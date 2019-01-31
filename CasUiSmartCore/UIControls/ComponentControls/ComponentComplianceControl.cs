@@ -78,7 +78,14 @@ namespace CAS.UI.UIControls.ComponentControls
         {
             backgroundWorker.ReportProgress(50);
 
-            Invoke(new Action(() => listViewCompliance.Items.Clear()));
+            try
+            {
+	            Invoke(new Action(() => listViewCompliance.Items.Clear()));
+            }
+            catch (Exception)
+            {
+	           
+            }
 
             if (_currentComponent == null)
             {

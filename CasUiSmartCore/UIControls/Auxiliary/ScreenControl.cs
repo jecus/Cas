@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using AvControls.AvMultitabControl.Auxiliary;
 using CAS.UI.Interfaces;
@@ -20,6 +21,7 @@ namespace CAS.UI.UIControls.Auxiliary
         private BaseEntityObject _current;
 
         protected readonly AnimatedThreadWorker AnimatedThreadWorker = new AnimatedThreadWorker();
+        protected readonly Task Task;
         #endregion
 
         #region Implementation of IReference
@@ -458,7 +460,9 @@ namespace CAS.UI.UIControls.Auxiliary
             InitializeComponent();
             Dock = DockStyle.Fill;
 
-            AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
+
+
+			AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
             AnimatedThreadWorker.RunWorkerCompleted += AnimatedThreadWorkerRunWorkerCompleted;
         }
         #endregion
