@@ -51,7 +51,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
         /// Тип директивы
         /// </summary>
         [TableColumnAttribute("DirectiveTypeId"), ListViewData("Directive Type")]
-        [Filter("Work Type:", Order = 14)]
+        [Filter("Work Type:", Order = 15)]
         public MaintenanceDirectiveTaskType WorkType { get; set; }
 
         #endregion
@@ -146,6 +146,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		public bool IsApplicability { get; set; }
 
 		#endregion
+
 		#region public bool IsOperatorTask { get; set; }
 
 		[TableColumn("IsOperatorTask")]
@@ -160,7 +161,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		/// ATA глава, к которой директива относится
 		/// </summary>
 		[TableColumnAttribute("ATAChapter"), ListViewData("ATA №")]
-        [Filter("ATA Chapter:", Order = 12)]
+        [Filter("ATA Chapter:", Order = 13)]
         public AtaChapter ATAChapter { get; set; }
 
 		#endregion
@@ -373,7 +374,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		/// Программа (CPCP, Structure, System), к которой директива относится
 		/// </summary>
 		[TableColumnAttribute("Program"), ListViewData("Program")]
-		[Filter("Program:", Order = 13)]
+		[Filter("Program:", Order = 14)]
 		public MaintenanceDirectiveProgramType Program
 		{
 			get { return _program ?? MaintenanceDirectiveProgramType.Unknown; }
@@ -521,7 +522,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public int Category { get; set; }
 
 		[TableColumn("Category")]
-		[Filter("Category:", Order = 18)]
+		[Filter("Category:", Order = 19)]
 		public MpdCategory Category
 		{
 			get { return _category ?? MpdCategory.UNK; }
@@ -731,7 +732,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		/// <summary>
 		/// Статус директивы
 		/// </summary>
-		[Filter("Status:", Order = 15)]
+		[Filter("Status:", Order = 16)]
         public DirectiveStatus Status
         {
             get
@@ -908,7 +909,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
         /// <summary>
         /// Возвращает состояние ближайшего выполнения задачи (если оно расчитано) или ConditionState.NotEstimated
         /// </summary>
-        [Filter("Condition:", Order = 16)]
+        [Filter("Condition:", Order = 18)]
         public ConditionState Condition
         {
             get
@@ -1327,6 +1328,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 
 		#region public bool HasKits { get; }
 
+		[Filter("HasKits:", Order = 12)]
 		public bool HasKits { get { return Kits.Count > 0; } }
 
 		#endregion
