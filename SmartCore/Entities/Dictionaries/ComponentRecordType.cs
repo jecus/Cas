@@ -292,14 +292,25 @@ namespace SmartCore.Entities.Dictionaries
 
 		public static ComponentRecordType Task = new ComponentRecordType(56, "Task", "Task", "");
 
-	    #endregion
+        #endregion
 
+        #region public static ComponentRecordType InspectionTest = new ComponentRecordType(57, "Inspection Test", "Inspection Test", "");
 
-		#region public static ComponentRecordType Unknown = new ComponentRecordType(-1, "Unknown", "Unknown", "Unknown");
-		/// <summary> 
-		/// Неизвестный объект
-		/// </summary>
-		public static ComponentRecordType Unknown = new ComponentRecordType(-1, "Unknown", "Unknown", "Unknown");
+        public static ComponentRecordType InspectionTest = new ComponentRecordType(57, "Inspection Test", "Inspection Test", "");
+
+        #endregion
+
+        #region public static ComponentRecordType OperationalCheck = new ComponentRecordType(58, "Operational Check", "Operational Check", "");
+
+        public static ComponentRecordType OperationalCheck = new ComponentRecordType(58, "Operational Check", "Operational Check", "");
+
+        #endregion
+
+        #region public static ComponentRecordType Unknown = new ComponentRecordType(-1, "Unknown", "Unknown", "Unknown");
+        /// <summary> 
+        /// Неизвестный объект
+        /// </summary>
+        public static ComponentRecordType Unknown = new ComponentRecordType(-1, "Unknown", "Unknown", "Unknown");
 		#endregion
 
 		/*

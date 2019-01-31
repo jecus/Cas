@@ -46,6 +46,13 @@ namespace SmartCore.Entities.Dictionaries
         public static MaintenanceControlProcess UNK = new MaintenanceControlProcess(4, "UNK", "Unknown detail type");
         #endregion
 
+        #region public static MaintenanceControlProcess LLP = new MaintenanceControlProcess(5, "LLP", "Life Limit Part ");
+        /// <summary>
+        /// 
+        /// </summary>
+        public static MaintenanceControlProcess LLP = new MaintenanceControlProcess(5, "LLP", "Life Limit Part ");
+        #endregion
+
         /*
          * Свойства 
          */
