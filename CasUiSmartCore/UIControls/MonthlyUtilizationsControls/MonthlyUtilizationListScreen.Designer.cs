@@ -29,16 +29,20 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
+	        this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+			this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
             this.buttonAddNew = new CAS.UI.Management.Dispatchering.RichReferenceButton();
             this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
-            this.labelDateFrom = new System.Windows.Forms.Label();
+            this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
+			this.labelDateFrom = new System.Windows.Forms.Label();
             this.dateTimePickerDateFrom = new System.Windows.Forms.DateTimePicker();
             this.labelDateTo = new System.Windows.Forms.Label();
             this.dateTimePickerDateTo = new System.Windows.Forms.DateTimePicker();
             this.buttonOK = new System.Windows.Forms.Button();
             this.labelAvgUtilization = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            this.pictureBoxSeparatorBD = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSeparatorBD)).BeginInit();
+			this.SuspendLayout();
             // 
             // panel1
             // 
@@ -59,12 +63,39 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
             this.aircraftHeaderControl1.OperatorClickable = true;
             this.aircraftHeaderControl1.NextClickable = true;
             this.aircraftHeaderControl1.PrevClickable = true;
-            //
-            // panelTopContainer
-            //
-            this.panelTopContainer.Controls.Add(this.labelTitle);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanel1.Controls.Add(this.buttonDeleteSelected);
+            this.flowLayoutPanel1.Controls.Add(this.pictureBoxSeparatorBD);
+            this.flowLayoutPanel1.Controls.Add(this.buttonApplyFilter);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(552, 0);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(181, 62);
+            this.flowLayoutPanel1.TabIndex = 3;
+            this.flowLayoutPanel1.WrapContents = false;
+            // 
+            // pictureBoxSeparatorBD
+            // 
+            this.pictureBoxSeparatorBD.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
+            this.pictureBoxSeparatorBD.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pictureBoxSeparatorBD.Location = new System.Drawing.Point(121, 3);
+            this.pictureBoxSeparatorBD.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.pictureBoxSeparatorBD.Name = "pictureBoxSeparatorBD";
+            this.pictureBoxSeparatorBD.Size = new System.Drawing.Size(5, 57);
+            this.pictureBoxSeparatorBD.TabIndex = 24;
+            this.pictureBoxSeparatorBD.TabStop = false;
+			//
+			// panelTopContainer
+			//
+			this.panelTopContainer.Controls.Add(this.labelTitle);
             this.panelTopContainer.Controls.Add(this.buttonAddNew);
-            this.panelTopContainer.Controls.Add(this.buttonDeleteSelected);
+            this.panelTopContainer.Controls.Add(this.flowLayoutPanel1);
             this.panelTopContainer.Controls.Add(this.labelDateFrom);
             this.panelTopContainer.Controls.Add(this.dateTimePickerDateFrom);
             this.panelTopContainer.Controls.Add(this.labelDateTo);
@@ -167,38 +198,66 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
             this.buttonDeleteSelected.Click += ButtonDeleteClick;
             this.buttonDeleteSelected.Icon = CAS.UI.Properties.Resources.DeleteIcon;
             this.buttonDeleteSelected.IconNotEnabled = CAS.UI.Properties.Resources.DeleteIcon_gray;
-            this.buttonDeleteSelected.Location = new System.Drawing.Point(920, 0);
             this.buttonDeleteSelected.PaddingSecondary = new System.Windows.Forms.Padding(4, 0, 0, 0);
-            this.buttonDeleteSelected.Size = new System.Drawing.Size(145, 59);
+            this.buttonDeleteSelected.Size = new System.Drawing.Size(55, 63);
             this.buttonDeleteSelected.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonDeleteSelected.TabIndex = 20;
             this.buttonDeleteSelected.TextAlignMain = System.Drawing.ContentAlignment.BottomCenter;
             this.buttonDeleteSelected.TextAlignSecondary = System.Drawing.ContentAlignment.TopCenter;
-            this.buttonDeleteSelected.TextMain = "Delete";
-            this.buttonDeleteSelected.TextSecondary = "selected";
-            // 
-            // RequestForQuotationListScreen
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.buttonDeleteSelected.TextMain = "";
+            this.buttonDeleteSelected.TextSecondary = "";
+            this.buttonApplyFilter.ToolTipText = "Delete selected";
+			// 
+			// buttonApplyFilter
+			// 
+			this.buttonApplyFilter.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+			this.buttonApplyFilter.ActiveBackgroundImage = null;
+			this.buttonApplyFilter.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonApplyFilter.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonApplyFilter.FontSecondary = new System.Drawing.Font("Verdana", 9.75F);
+			this.buttonApplyFilter.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
+			this.buttonApplyFilter.ForeColorSecondary = System.Drawing.SystemColors.ControlText;
+			this.buttonApplyFilter.Icon = global::CAS.UI.Properties.Resources.ApplyFilterIcon;
+			this.buttonApplyFilter.IconLayout = System.Windows.Forms.ImageLayout.Center;
+			this.buttonApplyFilter.IconNotEnabled = null;
+			this.buttonApplyFilter.Name = "buttonApplyFilter";
+			this.buttonApplyFilter.ShowToolTip = true;
+			this.buttonApplyFilter.Size = new System.Drawing.Size(55, 63);
+			this.buttonApplyFilter.TabIndex = 18;
+			this.buttonApplyFilter.TextAlignMain = System.Drawing.ContentAlignment.MiddleLeft;
+			this.buttonApplyFilter.TextAlignSecondary = System.Drawing.ContentAlignment.MiddleLeft;
+			this.buttonApplyFilter.TextMain = "";
+			this.buttonApplyFilter.TextSecondary = "";
+			this.buttonApplyFilter.ToolTipText = "Apply filter";
+			this.buttonApplyFilter.Click += new System.EventHandler(this.ButtonApplyFilterClick);
+			// 
+			// RequestForQuotationListScreen
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "RequestForQuotationListScreen";
             this.ShowAircraftStatusPanel = false;
-            this.Size = new System.Drawing.Size(917, 590);
-            this.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
+			this.Size = new System.Drawing.Size(917, 590);
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSeparatorBD)).EndInit();
+			this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
-        #endregion
+		#endregion
 
-        private AvControls.StatusImageLink.StatusImageLinkLabel labelTitle;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+		private AvControls.StatusImageLink.StatusImageLinkLabel labelTitle;
         private CAS.UI.Management.Dispatchering.RichReferenceButton buttonAddNew;
         private AvControls.AvButtonT.AvButtonT buttonDeleteSelected;
-        private System.Windows.Forms.Label labelDateFrom;
+        private AvControls.AvButtonT.AvButtonT buttonApplyFilter;
+		private System.Windows.Forms.Label labelDateFrom;
         private System.Windows.Forms.DateTimePicker dateTimePickerDateFrom;
         private System.Windows.Forms.Label labelDateTo;
         private System.Windows.Forms.DateTimePicker dateTimePickerDateTo;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Label labelAvgUtilization;
-    }
+        private System.Windows.Forms.PictureBox pictureBoxSeparatorBD;
+	}
 }

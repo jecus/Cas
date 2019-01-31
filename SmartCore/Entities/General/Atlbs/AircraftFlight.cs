@@ -25,7 +25,7 @@ namespace SmartCore.Entities.General.Atlbs
     [Table("AircraftFlights", "dbo", "ItemId")]
     [Dto(typeof(AircraftFlightDTO))]
 	[Condition("IsDeleted", "0")]
-	public class AircraftFlight: AbstractRecord, IFileContainer, IEmployeeFlightFilterParams
+	public class AircraftFlight: AbstractRecord, IFileContainer, IEmployeeFlightFilterParams, IMounthlyUtilizationFilter
 	{
         /*
          * поля 
@@ -78,6 +78,13 @@ namespace SmartCore.Entities.General.Atlbs
         #endregion
 
 		#region public String FlightNo { get; set; }
+
+		public string ATLB { get{return ParentATLB?.ATLBNo ?? "";} }
+		public string FlightN
+		{
+			get { return FlightNumber?.FullName ?? ""; }
+		}
+
 		/// <summary>
 		/// 
 		/// </summary>
