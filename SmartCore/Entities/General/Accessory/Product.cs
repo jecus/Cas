@@ -432,7 +432,16 @@ namespace SmartCore.Entities.General.Accessory
         }
         #endregion
 
-		public List<QuotationCost> QuatationCosts
+        #region public Reference Reference { get; set; }
+
+        [TableColumn("Reference")]
+        [ListViewData(0.12f, "Reference", 2)]
+        [Filter("Reference:")]
+        public string Reference { get; set; }
+
+        #endregion
+
+        public List<QuotationCost> QuatationCosts
 		{
 			get { return _quatationCosts ??(_quatationCosts = new List<QuotationCost>()); }
 			set { _quatationCosts = value; }

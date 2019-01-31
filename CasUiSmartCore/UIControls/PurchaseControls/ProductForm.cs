@@ -129,6 +129,7 @@ namespace CAS.UI.UIControls.PurchaseControls
             textBoxHTS.Text = _currentItem.HTS;
             textBoxManufacturer.Text = _currentItem.Manufacturer;
             textBoxRemarks.Text = _currentItem.Remarks;
+            textBoxReference.Text = _currentItem.Reference;
             dataGridViewControlSuppliers.SetItemsArray((ICommonCollection) _currentItem.SupplierRelations);
 
             GoodStandart goodStandart;
@@ -244,6 +245,7 @@ namespace CAS.UI.UIControls.PurchaseControls
                 || textBoxManufacturer.Text != _currentItem.Manufacturer
                 || textBoxRemarks.Text != _currentItem.Remarks
                 || textBoxName.Text != _currentItem.Name
+                || textBoxReference.Text != _currentItem.Reference
                 || comboBoxAtaChapter.ATAChapter != _currentItem.ATAChapter
                 || (comboBoxDetailClass.SelectedItem != _currentItem.GoodsClass)
                 || (checkBoxDangerous.Checked != _currentItem.IsDangerous)
@@ -338,6 +340,7 @@ namespace CAS.UI.UIControls.PurchaseControls
             _currentItem.Measure = comboBoxMeasure.SelectedItem as Measure;
             _currentItem.Manufacturer = textBoxManufacturer.Text;
             _currentItem.Name = textBoxName.Text;
+            _currentItem.Reference = textBoxReference.Text;
             _currentItem.Remarks = textBoxRemarks.Text;
             _currentItem.ATAChapter = comboBoxAtaChapter.ATAChapter;
             _currentItem.IsDangerous = checkBoxDangerous.Checked;
@@ -422,6 +425,7 @@ namespace CAS.UI.UIControls.PurchaseControls
                     _currentItem.Manufacturer = textBoxManufacturer.Text;
                     _currentItem.Standart = goodStandart;
                     _currentItem.Name = textBoxName.Text;
+                    _currentItem.Reference = textBoxReference.Text;
                     _currentItem.Remarks = textBoxRemarks.Text;
                     _currentItem.Measure = comboBoxMeasure.SelectedItem as Measure;
 

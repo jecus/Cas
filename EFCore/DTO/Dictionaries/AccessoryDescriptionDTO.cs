@@ -91,8 +91,11 @@ namespace EFCore.DTO.Dictionaries
 	    [DataMember]
 	    public string HTS { get; set; }
 
-		[DataMember]
-		[Include]
+        [DataMember]
+        public string Reference { get; set; }
+
+        [DataMember]
+        [Include]
 	    public ATAChapterDTO ATAChapter { get; set; }
 
 	    [DataMember]

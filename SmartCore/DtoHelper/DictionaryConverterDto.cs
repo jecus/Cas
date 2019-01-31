@@ -285,6 +285,7 @@ namespace SmartCore.DtoHelper
 				IsDangerous = product.IsDangerous,
 				DescRus = product.DescRus,
 				HTS = product.HTS,
+				Reference = product.Reference,
 				SupplierRelations = product.SupplierRelations?.Select(i => i.Convert()) as ICollection<KitSuppliersRelationDTO>,
 			};
 		}
@@ -310,7 +311,8 @@ namespace SmartCore.DtoHelper
 				GoodsClass = productDto.ComponentClass.HasValue ? GoodsClass.Items.GetItemById(productDto.ComponentClass.Value) : GoodsClass.Unknown,
 				IsDangerous = productDto.IsDangerous,
 				DescRus = productDto.DescRus,
-				HTS = productDto.HTS
+				HTS = productDto.HTS,
+				Reference = productDto.Reference
 			};
 
 			if (productDto.SupplierRelations != null)
