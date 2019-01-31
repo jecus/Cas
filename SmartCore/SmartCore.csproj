@@ -611,6 +611,7 @@
     <Compile Include="Entities\General\Interfaces\IFlightPlanOpsRecordsFilterParams.cs" />
     <Compile Include="Entities\General\Interfaces\IForecastMtopFilterParams.cs" />
     <Compile Include="Entities\General\Interfaces\IMaintenanceDirectiveFilterParams.cs" />
+    <Compile Include="Entities\General\Interfaces\IMounthlyUtilizationFilter.cs" />
     <Compile Include="Entities\General\Interfaces\IOccurenceFilterParams.cs" />
     <Compile Include="Entities\General\Interfaces\IProcessingFilterParams.cs" />
     <Compile Include="Entities\General\Interfaces\ITransferRecordFilterParams.cs" />

@@ -9,6 +9,7 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AircraftTechnicalLogBookControls;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.FiltersControls;
 using CASReports.Builders;
 using CASTerms;
 using EFCore.DTO.General;
@@ -33,11 +34,15 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
     {
         #region Fields
 
-        private AircraftFlightCollection _itemsArray = new AircraftFlightCollection();
-        private List<MaintenanceCheck> _maintenanceChecks = new List<MaintenanceCheck>();
+        private AircraftFlightCollection _initialDirectiveArray = new AircraftFlightCollection();
+        private AircraftFlightCollection _resultDirectiveArray = new AircraftFlightCollection();
+
+		private List<MaintenanceCheck> _maintenanceChecks = new List<MaintenanceCheck>();
         private List<WorkPackage> _workPackages = new List<WorkPackage>();
 
-        private MouthlyUtilizationListView _directivesViewer;
+        private CommonFilterCollection _filter = new CommonFilterCollection(typeof(IMounthlyUtilizationFilter));
+
+		private MouthlyUtilizationListView _directivesViewer;
 
         private ContextMenuStrip buttonPrintMenuStrip;
         private ToolStripMenuItem itemPrintReportMonthlyUtilization;
@@ -107,8 +112,8 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
                 AnimatedThreadWorker.CancelAsync();
             AnimatedThreadWorker.Dispose();
 
-            _itemsArray.Clear();
-            _itemsArray = null;
+            _initialDirectiveArray.Clear();
+            _initialDirectiveArray = null;
 
             if (_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
             if(_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
@@ -133,10 +138,10 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
             //вычисление периода в днях
             var periodDays = (dateTimePickerDateTo.Value - dateTimePickerDateFrom.Value).Days;
             //вычисление сред. кол-ва часов в день
-	        var totalHoursClear = GlobalObjects.CasEnvironment.Calculator.GetTotalHours(_itemsArray);
+	        var totalHoursClear = GlobalObjects.CasEnvironment.Calculator.GetTotalHours(_resultDirectiveArray);
 			var avgHoursPerDay = totalHoursClear / periodDays;
             //вычисление сред. кол-ва циклов в день
-	        var totalCycleClear = GlobalObjects.CasEnvironment.Calculator.GetTotalCycles(_itemsArray);
+	        var totalCycleClear = GlobalObjects.CasEnvironment.Calculator.GetTotalCycles(_resultDirectiveArray);
 			var avgCyclesPerDay = (double)totalCycleClear / periodDays;
 			//плановая утилизация
 			var aircraftFrame = GlobalObjects.ComponentCore.GetBaseComponentById(CurrentAircraft.AircraftFrameId);
@@ -168,7 +173,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 
             labelAvgUtilization.Text = "Avg. Utilz. Plan:" + plan.CustomToString() + " Avg. Utilz. Fact per period: " + factPerPeriod;
 
-			_directivesViewer.SetItemsArray(_itemsArray.OrderBy(i => i.TakeOffTime).ToArray());
+			_directivesViewer.SetItemsArray(_resultDirectiveArray.OrderBy(i => i.TakeOffTime).ToArray());
             headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
             _directivesViewer.Focus();
         }
@@ -177,18 +182,18 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
         #region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
         protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
         {
-            _itemsArray.Clear();
+            _initialDirectiveArray.Clear();
 
             AnimatedThreadWorker.ReportProgress(0, "load Fligths");
 
 	        var flights = GlobalObjects.AircraftFlightsCore.GetAircraftFlightsByAircraftId(CurrentAircraft.ItemId);
-	        _itemsArray.AddRange(flights.Where(t => t.FlightDate >= dateTimePickerDateFrom.Value &&
+	        _initialDirectiveArray.AddRange(flights.Where(t => t.FlightDate >= dateTimePickerDateFrom.Value &&
 	                                                t.FlightDate <= dateTimePickerDateTo.Value));
 			//foreach (var t in flights)
 			//         {
 			//             if (t.FlightDate >= dateTimePickerDateFrom.Value && 
 			//                 t.FlightDate <= dateTimePickerDateTo.Value)
-			//                 _itemsArray.Add(t);
+			//                 _initialDirectiveArray.Add(t);
 			//         }
 			_maintenanceChecks = new List<MaintenanceCheck>(GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<MaintenanceCheckDTO, MaintenanceCheck>(new List<Filter>()
 			{
@@ -199,13 +204,38 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 
             AnimatedThreadWorker.ReportProgress(70, "filter Fligths");
 
-            AnimatedThreadWorker.ReportProgress(100, "Complete");
+            FilterItems(_initialDirectiveArray, _resultDirectiveArray);
+
+			AnimatedThreadWorker.ReportProgress(100, "Complete");
         }
-        #endregion
+		#endregion
 
-        #region private void InitToolStripMenuItems()
+		#region private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
 
-        private void InitToolStripMenuItems()
+		private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
+		{
+			_resultDirectiveArray.Clear();
+
+			#region Фильтрация директив
+			AnimatedThreadWorker.ReportProgress(70, "filter directives");
+
+			FilterItems(_initialDirectiveArray, _resultDirectiveArray);
+
+			if (AnimatedThreadWorker.CancellationPending)
+			{
+				e.Cancel = true;
+				return;
+			}
+			#endregion
+
+			AnimatedThreadWorker.ReportProgress(100, "Complete");
+		}
+
+		#endregion
+
+		#region private void InitToolStripMenuItems()
+
+		private void InitToolStripMenuItems()
         {
             _contextMenuStrip = new ContextMenuStrip();
             _toolStripMenuItemOpen = new ToolStripMenuItem();
@@ -430,17 +460,17 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
                     new MonthlyUtilizationBuilderKAC(CurrentAircraft,
                                                   dateTimePickerDateFrom.Value,
                                                   dateTimePickerDateTo.Value,
-                                                  _itemsArray.TotalHoursClear,
-                                                  _itemsArray.TotalCyclesClear);
+                                                  _initialDirectiveArray.TotalHoursClear,
+                                                  _initialDirectiveArray.TotalCyclesClear);
 #else
                 MonthlyUtilizationBuilder reportBuilder = 
                     new MonthlyUtilizationBuilder(CurrentAircraft, 
                                                   dateTimePickerDateFrom.Value, 
                                                   dateTimePickerDateTo.Value, 
-                                                  GlobalObjects.CasEnvironment.Calculator.GetTotalHours(_itemsArray), 
-                                                  GlobalObjects.CasEnvironment.Calculator.GetTotalCycles(_itemsArray));
+                                                  GlobalObjects.CasEnvironment.Calculator.GetTotalHours(_initialDirectiveArray), 
+                                                  GlobalObjects.CasEnvironment.Calculator.GetTotalCycles(_initialDirectiveArray));
 #endif
-                reportBuilder.Flights = _itemsArray.OrderByDescending(f => f.FlightDate.AddMinutes(f.FlightTime.TotalMinutes)).ToList();
+                reportBuilder.Flights = _initialDirectiveArray.OrderByDescending(f => f.FlightDate.AddMinutes(f.FlightTime.TotalMinutes)).ToList();
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
                 e.DisplayerText = CurrentAircraft.RegistrationNumber + " Monthly Utilization Report";
                 e.RequestedEntity = new ReportScreen(reportBuilder);
@@ -542,8 +572,71 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
             AnimatedThreadWorker.RunWorkerAsync();
         }
 
-        #endregion
+		#endregion
 
-        #endregion
-    }
+		#region private void ButtonApplyFilterClick(object sender, EventArgs e)
+
+		private void ButtonApplyFilterClick(object sender, EventArgs e)
+		{
+			CommonFilterForm form = new CommonFilterForm(_filter, _initialDirectiveArray);
+
+			if (form.ShowDialog(this) == DialogResult.OK)
+			{
+				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+				AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoFilteringWork;
+
+				AnimatedThreadWorker.RunWorkerAsync();
+			}
+		}
+		#endregion
+
+		#region private void FilterItems(IEnumerable<Discrepancy> initialCollection, ICommonCollection<Discrepancy> resultCollection)
+
+		///<summary>
+		///</summary>
+		///<param name="initialCollection"></param>
+		///<param name="resultCollection"></param>
+		private void FilterItems(CommonCollection<AircraftFlight> initialCollection, CommonCollection<AircraftFlight> resultCollection)
+		{
+			if (_filter == null || _filter.Count == 0)
+			{
+				resultCollection.Clear();
+				foreach (var flight in initialCollection)
+					resultCollection.Add(flight);
+				return;
+			}
+
+			resultCollection.Clear();
+
+			foreach (var pd in initialCollection)
+			{
+				if (_filter.FilterTypeAnd)
+				{
+					bool acceptable = true;
+					foreach (ICommonFilter filter in _filter)
+					{
+						acceptable = filter.Acceptable(pd); if (!acceptable) break;
+					}
+					if (acceptable) resultCollection.Add(pd);
+				}
+				else
+				{
+					bool acceptable = true;
+					foreach (ICommonFilter filter in _filter)
+					{
+						if (filter.Values == null || filter.Values.Length == 0)
+							continue;
+						acceptable = filter.Acceptable(pd); if (acceptable) break;
+					}
+					if (acceptable) resultCollection.Add(pd);
+				}
+			}
+		}
+		#endregion
+
+		#endregion
+
+
+	}
 }
