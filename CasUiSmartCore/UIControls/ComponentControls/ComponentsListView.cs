@@ -75,8 +75,11 @@ namespace CAS.UI.UIControls.ComponentControls
 
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.3f), Text = "Description" };
             ColumnHeaderList.Add(columnHeader);
-            //3
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Serial No" };
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "Work Type" };
+            ColumnHeaderList.Add(columnHeader);
+			//3
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Serial No" };
             ColumnHeaderList.Add(columnHeader);
 			//4
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "MPD Item" };
@@ -97,8 +100,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Inst. date" };
             ColumnHeaderList.Add(columnHeader);
             //8
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "Work Type" };
-            ColumnHeaderList.Add(columnHeader);
+
             //9
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Life limit/1st. Perf" };
             ColumnHeaderList.Add(columnHeader);
@@ -318,6 +320,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = ata.ToString(), Tag = ata });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = partNumber, Tag = partNumber});
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = description, Tag = description });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = workType, Tag = workType });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = serialNumber, Tag = serialNumber });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = mpdString, Tag = mpdString });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = position, Tag = position });
@@ -331,7 +334,6 @@ namespace CAS.UI.UIControls.ComponentControls
 					? SmartCore.Auxiliary.Convert.GetDateFormat(transferDate) : "",
                 Tag = transferDate 
             });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = workType, Tag = workType });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = firstPerformance.ToString(), Tag = firstPerformance });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = repeatInterval.ToString(), Tag = repeatInterval });
 			subItems.Add(new ListViewItem.ListViewSubItem
