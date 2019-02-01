@@ -441,6 +441,22 @@ namespace SmartCore.Entities.General.Accessory
 
         #endregion
 
+        #region public AttachedFile AttachedFile { get; set; }
+
+        private AttachedFile _attachedFile;
+
+        public AttachedFile AttachedFile
+        {
+            get { return _attachedFile ?? (Files.GetFileByFileLinkType(FileLinkType.ProductFile)); }
+            set
+            {
+                _attachedFile = value;
+                Files.SetFileByFileLinkType(SmartCoreObjectType.ItemId, value, FileLinkType.ProductFile);
+            }
+        }
+
+        #endregion
+
         public List<QuotationCost> QuatationCosts
 		{
 			get { return _quatationCosts ??(_quatationCosts = new List<QuotationCost>()); }

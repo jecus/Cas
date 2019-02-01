@@ -62,6 +62,8 @@ namespace CAS.UI.UIControls.PurchaseControls
             this.textBoxHTS = new System.Windows.Forms.TextBox();
             this.labelReference = new System.Windows.Forms.Label();
             this.textBoxReference = new System.Windows.Forms.TextBox();
+            this.fileControl = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
+            this.labelDoc = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // comboBoxDetailClass
@@ -120,7 +122,7 @@ namespace CAS.UI.UIControls.PurchaseControls
             this.labelSuppliers.AutoSize = true;
             this.labelSuppliers.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelSuppliers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.labelSuppliers.Location = new System.Drawing.Point(386, 333);
+            this.labelSuppliers.Location = new System.Drawing.Point(386, 396);
             this.labelSuppliers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelSuppliers.Name = "labelSuppliers";
             this.labelSuppliers.Size = new System.Drawing.Size(70, 14);
@@ -268,7 +270,7 @@ namespace CAS.UI.UIControls.PurchaseControls
             this.dataGridViewControlSuppliers.Displayer = null;
             this.dataGridViewControlSuppliers.DisplayerText = null;
             this.dataGridViewControlSuppliers.Entity = null;
-            this.dataGridViewControlSuppliers.Location = new System.Drawing.Point(8, 359);
+            this.dataGridViewControlSuppliers.Location = new System.Drawing.Point(8, 422);
             this.dataGridViewControlSuppliers.Name = "dataGridViewControlSuppliers";
             this.dataGridViewControlSuppliers.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this.dataGridViewControlSuppliers.RowHeadersVisible = false;
@@ -335,7 +337,7 @@ namespace CAS.UI.UIControls.PurchaseControls
             this.checkBoxDangerous.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBoxDangerous.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.checkBoxDangerous.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-            this.checkBoxDangerous.Location = new System.Drawing.Point(111, 323);
+            this.checkBoxDangerous.Location = new System.Drawing.Point(111, 386);
             this.checkBoxDangerous.Name = "checkBoxDangerous";
             this.checkBoxDangerous.Size = new System.Drawing.Size(108, 18);
             this.checkBoxDangerous.TabIndex = 143;
@@ -428,6 +430,36 @@ namespace CAS.UI.UIControls.PurchaseControls
             this.textBoxReference.Name = "textBoxReference";
             this.textBoxReference.Size = new System.Drawing.Size(294, 22);
             this.textBoxReference.TabIndex = 149;
+            // 
+            // fileControl
+            // 
+            this.fileControl.AutoSize = true;
+            this.fileControl.BackColor = System.Drawing.Color.Transparent;
+            this.fileControl.Description1 = null;
+            this.fileControl.Description2 = null;
+            this.fileControl.Filter = "PDF file (*.pdf)|*.pdf";
+            this.fileControl.Icon = global::CAS.UI.Properties.Resources.PDFIconSmall;
+            this.fileControl.IconNotEnabled = null;
+            this.fileControl.Location = new System.Drawing.Point(500, 276);
+            this.fileControl.MaximumSize = new System.Drawing.Size(350, 100);
+            this.fileControl.MinimumSize = new System.Drawing.Size(350, 50);
+            this.fileControl.Name = "fileControl";
+            this.fileControl.ShowLinkLabelBrowse = true;
+            this.fileControl.ShowLinkLabelRemove = false;
+            this.fileControl.Size = new System.Drawing.Size(350, 100);
+            this.fileControl.TabIndex = 151;
+            // 
+            // labelDoc
+            // 
+            this.labelDoc.AutoSize = true;
+            this.labelDoc.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelDoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.labelDoc.Location = new System.Drawing.Point(432, 285);
+            this.labelDoc.Name = "labelDoc";
+            this.labelDoc.Size = new System.Drawing.Size(35, 14);
+            this.labelDoc.TabIndex = 152;
+            this.labelDoc.Text = "Doc:";
+            this.labelDoc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 
             this.panelMain.Controls.Add(this.label3);
             this.panelMain.Controls.Add(this.textBoxHTS);
@@ -460,12 +492,14 @@ namespace CAS.UI.UIControls.PurchaseControls
             this.panelMain.Controls.Add(this.textBoxDescRus);
             this.panelMain.Controls.Add(this.labelReference);
             this.panelMain.Controls.Add(this.textBoxReference);
+            this.panelMain.Controls.Add(this.fileControl);
+            this.panelMain.Controls.Add(this.labelDoc);
             // 
             // ProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(863, 541);
+            this.ClientSize = new System.Drawing.Size(863, 650);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1023, 766);
             this.MinimumSize = new System.Drawing.Size(284, 164);
@@ -509,5 +543,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private System.Windows.Forms.TextBox textBoxHTS;
         private System.Windows.Forms.Label labelReference;
         private System.Windows.Forms.TextBox textBoxReference;
+        public AttachedFileControl fileControl;
+        private System.Windows.Forms.Label labelDoc;
     }
 }

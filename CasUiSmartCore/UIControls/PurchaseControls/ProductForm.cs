@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using EFCore.DTO.Dictionaries;
+using EFCore.DTO.General;
+using EFCore.Filter;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
+using SmartCore.Files;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
@@ -18,7 +22,6 @@ namespace CAS.UI.UIControls.PurchaseControls
     public partial class ProductForm : CommonEditorForm
     {
         #region Fields
-
         private Product _currentItem;
         #endregion
 
@@ -53,7 +56,11 @@ namespace CAS.UI.UIControls.PurchaseControls
             _currentItem = currentKit;
             comboBoxAccessoryStandard.Enabled = comboboxStandartEnabled;
 
-            UpdateInformation();
+            Task.Run(() =>
+            {
+                DoLoad();
+            }).ContinueWith(task => UpdateInformation(), TaskScheduler.FromCurrentSynchronizationContext());
+
         }
         #endregion
 
@@ -72,6 +79,17 @@ namespace CAS.UI.UIControls.PurchaseControls
 
         #region Methods
 
+        private void DoLoad()
+        {
+            var links = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<ItemFileLinkDTO, ItemFileLink>(new List<Filter>()
+            {
+                new Filter("ParentId",_currentItem.ItemId),
+                new Filter("ParentTypeId",_currentItem.SmartCoreObjectType.ItemId)
+            }, true);
+
+            _currentItem.Files.AddRange(links);
+        }
+
         #region private void UpdateInformation()
         private void UpdateInformation()
         {
@@ -85,7 +103,11 @@ namespace CAS.UI.UIControls.PurchaseControls
 										   "This record does not contain a image. Enclose Image file to prove the compliance.",
 										   "Attached file proves the Image.");
 
-			textBoxRemarks.Text = string.Empty;
+            fileControl.UpdateInfo(_currentItem.AttachedFile, "Adobe PDF Files|*.pdf",
+                "This record does not contain a file proving the Document. Enclose PDF file to prove the Document.",
+                "Attached file proves the Document.");
+
+            textBoxRemarks.Text = string.Empty;
             comboBoxAccessoryStandard.Type = typeof(GoodStandart);
             Program.MainDispatcher.ProcessControl(comboBoxAccessoryStandard);
 
@@ -250,6 +272,7 @@ namespace CAS.UI.UIControls.PurchaseControls
                 || (comboBoxDetailClass.SelectedItem != _currentItem.GoodsClass)
                 || (checkBoxDangerous.Checked != _currentItem.IsDangerous)
                 || dataGridViewControlSuppliers.GetChangeStatus()
+                || fileControl.GetChangeStatus()
 				|| fileControlImage.GetChangeStatus())
                 return true;
 
@@ -322,37 +345,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			return true;
         }
 
-        #endregion
-
-        #region protected override bool ApplyChanges()
-        ///<summary>
-        ///</summary>
-        ///<returns></returns>
-        protected override void ApplyChanges()
-        {
-            _currentItem.GoodsClass = comboBoxDetailClass.SelectedItem as GoodsClass;
-            _currentItem.Standart = comboBoxAccessoryStandard.SelectedItem as GoodStandart;
-            _currentItem.PartNumber = string.IsNullOrEmpty(textBoxPartNumber.Text) ? "N/A" : textBoxPartNumber.Text;
-            _currentItem.Code = textBoxProductCode.Text;
-            _currentItem.Description = textBoxDescription.Text;
-            _currentItem.DescRus = textBoxDescRus.Text;
-            _currentItem.HTS = textBoxHTS.Text;
-            _currentItem.Measure = comboBoxMeasure.SelectedItem as Measure;
-            _currentItem.Manufacturer = textBoxManufacturer.Text;
-            _currentItem.Name = textBoxName.Text;
-            _currentItem.Reference = textBoxReference.Text;
-            _currentItem.Remarks = textBoxRemarks.Text;
-            _currentItem.ATAChapter = comboBoxAtaChapter.ATAChapter;
-            _currentItem.IsDangerous = checkBoxDangerous.Checked;
-
-            dataGridViewControlSuppliers.ApplyChanges();
-
-			fileControlImage.ApplyChanges();
-			_currentItem.ImageFile = fileControlImage.AttachedFile;
-
-			_currentItem.SupplierRelations.Clear();
-            _currentItem.SupplierRelations.AddRange(dataGridViewControlSuppliers.GetItemsArray());
-        }
         #endregion
 
         #region protected override void AbortChanges()
@@ -429,7 +421,10 @@ namespace CAS.UI.UIControls.PurchaseControls
                     _currentItem.Remarks = textBoxRemarks.Text;
                     _currentItem.Measure = comboBoxMeasure.SelectedItem as Measure;
 
-                    GlobalObjects.CasEnvironment.Manipulator.Save(_currentItem);
+                    fileControl.ApplyChanges();
+                    _currentItem.AttachedFile = fileControl.AttachedFile;
+
+                GlobalObjects.CasEnvironment.Manipulator.Save(_currentItem);
 
                     foreach (KitSuppliersRelation ksr in _currentItem.SupplierRelations)
                     {
