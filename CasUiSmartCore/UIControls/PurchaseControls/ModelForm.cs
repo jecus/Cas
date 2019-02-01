@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
+using EFCore.DTO.General;
+using EFCore.Filter;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
+using SmartCore.Files;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
@@ -26,14 +31,27 @@ namespace CAS.UI.UIControls.PurchaseControls
 		public ModelForm(ComponentModel currentModel) : this()
 		{
 			_currentModel = currentModel;
-			UpdateInformation();
-		}
+            Task.Run(() =>
+            {
+                DoLoad();
+            }).ContinueWith(task => UpdateInformation(), TaskScheduler.FromCurrentSynchronizationContext());
+        }
 
-		#endregion
+        #endregion
 
-		#region private void UpdateInformation()
+        private void DoLoad()
+        {
+            var links = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<ItemFileLinkDTO, ItemFileLink>(new List<Filter>()
+            {
+                new Filter("ParentId",_currentModel.ItemId),
+                new Filter("ParentTypeId",_currentModel.SmartCoreObjectType.ItemId)
+            }, true);
 
-		private void UpdateInformation()
+            _currentModel.Files.AddRange(links);
+        }
+        #region private void UpdateInformation()
+
+        private void UpdateInformation()
 		{
 			comboBoxAtaChapter.UpdateInformation();
 			comboBoxAtaChapter.ATAChapter = _currentModel.ATAChapter;
@@ -63,7 +81,11 @@ namespace CAS.UI.UIControls.PurchaseControls
 				"This record does not contain a image. Enclose Image file to prove the compliance.",
 				"Attached file proves the Image.");
 
-			textBoxFullName.Text = _currentModel.FullName;
+            fileControl.UpdateInfo(_currentModel.AttachedFile, "Adobe PDF Files|*.pdf",
+                "This record does not contain a file proving the Document. Enclose PDF file to prove the Document.",
+                "Attached file proves the Document.");
+
+            textBoxFullName.Text = _currentModel.FullName;
 			textBoxShortName.Text = _currentModel.ShortName;
 
 			if (_currentModel.Name.EndsWith("Copy"))
@@ -109,7 +131,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 				|| (comboBoxDetailClass.SelectedItem != _currentModel.GoodsClass)
 				|| (checkBoxDangerous.Checked != _currentModel.IsDangerous)
 				|| dataGridViewControlSuppliers.GetChangeStatus()
-				|| fileControlImage.GetChangeStatus())
+				|| fileControlImage.GetChangeStatus()
+				|| fileControl.GetChangeStatus())
 				return true;
 
 			if (_currentModel.SupplierRelations.Any(sr => sr.ItemId < 0))
@@ -208,7 +231,10 @@ namespace CAS.UI.UIControls.PurchaseControls
 			fileControlImage.ApplyChanges();
 			_currentModel.ImageFile = fileControlImage.AttachedFile;
 
-			_currentModel.SupplierRelations.Clear();
+            fileControl.ApplyChanges();
+            _currentModel.AttachedFile = fileControl.AttachedFile;
+
+            _currentModel.SupplierRelations.Clear();
 			_currentModel.SupplierRelations.AddRange(dataGridViewControlSuppliers.GetItemsArray());
 		}
 		#endregion
