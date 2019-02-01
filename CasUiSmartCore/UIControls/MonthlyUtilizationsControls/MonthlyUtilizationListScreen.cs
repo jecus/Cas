@@ -436,7 +436,10 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 
         private void HeaderControlButtonReloadClick(object sender, EventArgs e)
         {
-            AnimatedThreadWorker.RunWorkerAsync();
+	        AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+	        AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+	        AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
+			AnimatedThreadWorker.RunWorkerAsync();
         }
         #endregion
 

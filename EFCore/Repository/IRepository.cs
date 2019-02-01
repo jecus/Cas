@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using EFCore.DTO;
 using EFCore.Filter;
 
@@ -15,9 +16,6 @@ namespace EFCore.Repository
 
 		[OperationContract]
 		IList<int> GetSelectColumnOnly(IEnumerable<Filter.Filter> filters, string selectProperty);
-
-		[OperationContract]
-		List<T> GetAll();
 
 		[OperationContract]
 		T GetObjectById(int id, bool loadChild = false);
@@ -39,5 +37,28 @@ namespace EFCore.Repository
 
 		[OperationContract]
 		void Delete(T entity);
+
+
+		#region Async
+
+		[OperationContract]
+		Task<T> GetObjectByIdAsync(int id, bool loadChild = false);
+
+		[OperationContract]
+		Task<T> GetObjectAsync(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false, bool getAll = false);
+
+		[OperationContract]
+		Task<IList<T>> GetObjectListAsync(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false);
+
+		[OperationContract]
+		Task<IList<T>> GetObjectListAllAsync(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false);
+
+		[OperationContract]
+		Task<int> SaveAsync(T entity);
+
+		[OperationContract]
+		Task DeleteAsync(T entity);
+
+		#endregion
 	}
 }
