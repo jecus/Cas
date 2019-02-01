@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Dynamic;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Threading.Tasks;
 using EFCore.Attributte;
 using EFCore.DTO;
 using EFCore.DTO.General;
@@ -30,18 +31,6 @@ namespace EFCore.Repository
 		protected Repository()
 		{
 			
-		}
-
-		public List<T> GetAll()
-		{
-			var ids = new List<int>();
-			for (int i = 90000; i < 100000; i++)
-			{
-				ids.Add(i);
-			}
-			
-			using (_context)
-				return getAllQueryable(new List<Filter.Filter>(){new Filter.Filter("FlightId", ids)}).ToList(); 
 		}
 
 		public IList<int> GetSelectColumnOnly(IEnumerable<Filter.Filter> filters, string selectProperty)
@@ -171,6 +160,73 @@ namespace EFCore.Repository
 				throw exception;
 			}
 		}
+
+
+		#region Async
+
+		public async Task<T> GetObjectByIdAsync(int id, bool loadChild = false)
+		{
+			using (_context)
+				return await getAllQueryable(new[] { new Filter.Filter("ItemId", id) }, loadChild).FirstOrDefaultAsync();
+		}
+
+		public async Task<T> GetObjectAsync(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false, bool getAll = false)
+		{
+			using (_context)
+				return await getAllQueryable(filters, loadChild, getDeleted, getAll).FirstOrDefaultAsync();
+		}
+
+		public async Task<IList<T>> GetObjectListAsync(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false)
+		{
+			using (_context)
+				return await getAllQueryable(filters, loadChild, getDeleted).ToListAsync();
+		}
+
+		public async Task<IList<T>> GetObjectListAllAsync(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false)
+		{
+			using (_context)
+				return await getAllQueryable(filters, loadChild, getDeleted, true).ToListAsync();
+		}
+
+		public async Task<int> SaveAsync(T entity)
+		{
+			try
+			{
+				if (entity.ItemId <= 0)
+					Add(entity);
+				else Update(entity);
+
+				await _context.SaveChangesAsync();
+
+				return entity.ItemId;
+			}
+			catch (DbEntityValidationException e)
+			{
+				foreach (var eve in e.EntityValidationErrors)
+				{
+					Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+						eve.Entry.Entity.GetType().Name, eve.Entry.State);
+					foreach (var ve in eve.ValidationErrors)
+					{
+						Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+							ve.PropertyName, ve.ErrorMessage);
+					}
+				}
+
+				throw;
+			}
+		}
+
+		public async Task DeleteAsync(T entity)
+		{
+			_dbset.Attach(entity);
+			_dbset.Remove(entity);
+			_context.Entry(entity).State = EntityState.Deleted;
+
+			await _context.SaveChangesAsync();
+		}
+
+		#endregion
 
 
 		private IQueryable<T> getAllQueryable(string filters = null, bool loadChild = false, bool getDeleted = false, bool getAll = false)
@@ -360,7 +416,6 @@ namespace EFCore.Repository
 
 			return query;
 		}
-
 
 		private Expression<Func<T, bool>> LambdaConstructor<T>(string propertyName, object inputText, FilterType condition) where T : BaseEntity
 		{
