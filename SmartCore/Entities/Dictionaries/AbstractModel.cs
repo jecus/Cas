@@ -123,7 +123,7 @@ namespace SmartCore.Entities.Dictionaries
         /// </summary>
         [TableColumn("FullName")]
         [FormControl(150, "Full Name", 1, Order = 5)]
-        [ListViewData(0.2f, "Full Name", 3)]
+        [ListViewData(0.2f, "Full Name", 4)]
         [NotNull]
         public string FullName
         {
@@ -153,7 +153,7 @@ namespace SmartCore.Entities.Dictionaries
         /// </summary>
         [TableColumn("ShortName")]
         [FormControl(150, "Short Name", Order =6)]
-        [ListViewData(0.08f, "Short Name",4)]
+        [ListViewData(0.08f, "Short Name",5)]
         [NotNull]
         public string ShortName
         {
@@ -200,7 +200,7 @@ namespace SmartCore.Entities.Dictionaries
         /// </summary>
         [TableColumn("SubModel")]
         [FormControl(150, "Series", 1, Order = 2)]
-        [ListViewData(0.08f, "Series", 2)]
+        [ListViewData(0.08f, "Series", 3)]
         public string Series
         {
             get { return _series; }
