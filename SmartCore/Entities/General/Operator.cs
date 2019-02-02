@@ -1,7 +1,9 @@
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using EFCore.DTO.General;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Management;
 
@@ -12,7 +14,8 @@ namespace SmartCore.Entities.General
     /// Класс описывает оператора 
     /// </summary>
     [Serializable]
-    public class Operator : BaseEntityObject, IComponentContainer
+    [Dto(typeof(OperatorDTO))]
+	public class Operator : BaseEntityObject, IComponentContainer
 	{
 
 		/*

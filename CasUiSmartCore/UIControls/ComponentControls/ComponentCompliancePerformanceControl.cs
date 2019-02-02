@@ -346,8 +346,8 @@ namespace CAS.UI.UIControls.ComponentControls
 					(new object[] { pareAircraft }, maintenanceScreenDisplayerText);
 				lookupComboboxMaintenanceDirective.LoadObjectsFunc = GlobalObjects.MaintenanceCore.GetMaintenanceDirectives;
 				lookupComboboxMaintenanceDirective.FilterParam1 = pareAircraft;
-				lookupComboboxMaintenanceDirective.FilterParam2 =
-					new ICommonFilter[] { new CommonFilter<int>(MaintenanceDirective.MaintenanceCheckProperty, FilterType.LessOrEqual, new[] { 0 }) };
+				//lookupComboboxMaintenanceDirective.FilterParam2 =
+				//	new ICommonFilter[] { new CommonFilter<int>(MaintenanceDirective.MaintenanceCheckProperty, FilterType.LessOrEqual, new[] { 0 }) };
 			}
 
 			#endregion
