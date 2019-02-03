@@ -41,22 +41,22 @@ namespace EFCore.Repository
 
 		#region Async
 
-		[OperationContract]
+		[OperationContract(Name = "GetObjectByIdAsync")]
 		Task<T> GetObjectByIdAsync(int id, bool loadChild = false);
 
-		[OperationContract]
+		[OperationContract(Name = "GetObjectAsync")]
 		Task<T> GetObjectAsync(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false, bool getAll = false);
 
-		[OperationContract]
+		[OperationContract(Name = "GetObjectListAsync")]
 		Task<IList<T>> GetObjectListAsync(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false);
 
-		[OperationContract]
+		[OperationContract(Name = "GetObjectListAllAsync")]
 		Task<IList<T>> GetObjectListAllAsync(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false);
 
-		[OperationContract]
+		[OperationContract(Name = "SaveAsync")]
 		Task<int> SaveAsync(T entity);
 
-		[OperationContract]
+		[OperationContract(Name = "DeleteAsync")]
 		Task DeleteAsync(T entity);
 
 		#endregion
