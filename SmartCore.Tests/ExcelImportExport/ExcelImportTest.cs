@@ -164,7 +164,7 @@ namespace SmartCore.Tests.ExcelImportExport
 			var env = GetEnviroment();
 			var aircraftCore = new AircraftsCore(env.Loader, env.NewKeeper, env.NewLoader);
 			var itemRelationCore = new ItemsRelationsDataAccess(env);
-			var directiveCore = new DirectiveCore(env.NewKeeper, env.NewLoader, env.Loader, itemRelationCore);
+			var directiveCore = new DirectiveCore(env.NewKeeper, env.NewLoader,env.Keeper, env.Loader, itemRelationCore);
 			var componentCore = new ComponentCore(env, env.Loader, env.NewLoader, env.NewKeeper, aircraftCore, itemRelationCore);
 			var aircraftFlightCore = new AircraftFlightCore(env, env.Loader, env.NewLoader, directiveCore, env.Manipulator, componentCore, env.NewKeeper,aircraftCore);
 
@@ -232,46 +232,6 @@ namespace SmartCore.Tests.ExcelImportExport
 			}
 		}
 
-
-		[TestMethod]
-		public void Test()
-		{
-			var env = GetEnviroment();
-
-			var specialists = env.NewLoader.GetObjectListAll<SpecialistDTO, Specialist>();
-			int q = 1;
-			foreach (var specialist in specialists.OrderBy(i => i.LastName))
-			{
-				var name = specialist.FirstName;
-				var surname = specialist.LastName;
-
-				if(name.Contains("/"))
-					name = name.Substring(0, name.LastIndexOf('/'));
-
-				if (name.EndsWith(" "))
-					name = name.Substring(0, name.LastIndexOf(' '));
-
-				if (surname.Contains("/"))
-					surname = surname.Substring(0, surname.LastIndexOf('/'));
-
-				if (surname.EndsWith(" "))
-					surname = surname.Substring(0, surname.LastIndexOf(' '));
-
-				var user = new UserDTO()
-				{
-					Name = name,
-					Surname = surname,
-					Login = $"{surname}{name[0]}",
-					Password = $"Scat{q}"
-				};
-
-				var repo = env.UnitOfWork.GetRepository<UserDTO>();
-				repo.Save(user);
-				q++;
-			}
-		}
-
-
 		[TestMethod]
 		public void ImportReliability()
 		{
@@ -282,7 +242,7 @@ namespace SmartCore.Tests.ExcelImportExport
 			var env = GetEnviroment();
 			var aircraftCore = new AircraftsCore(env.Loader, env.NewKeeper, env.NewLoader);
 			var itemRelationCore = new ItemsRelationsDataAccess(env);
-			var directiveCore = new DirectiveCore(env.NewKeeper, env.NewLoader, env.Loader, itemRelationCore);
+			var directiveCore = new DirectiveCore(env.NewKeeper, env.NewLoader, env.Keeper, env.Loader, itemRelationCore);
 			var aircraftFlightCore = new AircraftFlightCore(env, env.Loader, env.NewLoader, directiveCore, env.Manipulator, null,env.NewKeeper, aircraftCore);
 			var discrepanciesCore = new DiscrepanciesCore(env.Loader, env.NewLoader, directiveCore, aircraftFlightCore);
 
@@ -904,7 +864,110 @@ namespace SmartCore.Tests.ExcelImportExport
 				
 		}
 
-		[TestMethod]
+        [TestMethod]
+        public void ImportMaintenanceDirectivesTest()
+        {
+            var env = GetEnviroment();
+
+            var aircraftCore = new AircraftsCore(env.Loader, env.NewKeeper, env.NewLoader);
+            var itemRelationCore = new ItemsRelationsDataAccess(env);
+            var componentCore = new ComponentCore(env, env.Loader, env.NewLoader, env.NewKeeper, aircraftCore, itemRelationCore);
+            var mpdCore = new MaintenanceCore(env, env.NewLoader, env.NewKeeper, itemRelationCore, aircraftCore);
+
+            var ds = ExcelToDataTableUsingExcelDataReader(@"D:\111\mpdtask.xlsx");
+
+            aircraftCore.LoadAllAircrafts();
+            var aircraft = aircraftCore.GetAircraftById(2331);
+
+            var bd = componentCore.GetAicraftBaseComponents(aircraft.ItemId, BaseComponentType.Frame.ItemId).FirstOrDefault();
+            var ata = env.NewLoader.GetObjectListAll<ATAChapterDTO, AtaChapter>();
+
+            
+
+            var mpds = mpdCore.GetMaintenanceDirectives(aircraft);
+
+            MaintenanceDirective savedMpd = null;
+
+            foreach (DataTable table in ds.Tables)
+            {
+                foreach (DataRow row in table.Rows)
+                {
+                    var find = mpds.FirstOrDefault(i =>
+                        i.TaskNumberCheck.ToLower().Equals(row[0].ToString().ToLower()));
+
+                    #region Добавление Mpd TaskNumber
+
+                    //if (find != null)
+                    //{
+                    //    find.MpdOldTaskCard = row[1].ToString();
+                    //    find.TaskCardNumber = row[2].ToString();
+                    //    env.NewKeeper.Save(find);
+                    //}
+
+                    #endregion
+
+                    #region Основное добавление
+
+                    //MaintenanceDirective mpd;
+
+                    //if (find != null)
+                    //    mpd = find;
+                    //else
+                    //    mpd = new MaintenanceDirective()
+                    //    {
+                    //        ParentBaseComponent = bd,
+                    //        HiddenRemarks = "NEW",
+                    //    };
+
+
+                    //mpd.Program = MaintenanceDirectiveProgramType.ISIP;
+                    //mpd.MpdRef = "Appendix G - ISIP";
+
+
+
+                    //mpd.TaskNumberCheck = row[0].ToString();
+                    //mpd.MRB = row[1].ToString();
+                    //mpd.Zone = row[3].ToString();
+                    //mpd.Access = row[4].ToString();
+                    //mpd.Description = row[8].ToString();
+
+                    //var apl = row[5].ToString();
+                    //if (apl.Contains("ALL"))
+                    //{
+                    //    mpd.IsApplicability = true;
+                    //}
+                    //else if (apl == "(1)")
+                    //{
+                    //    mpd.IsApplicability = true;
+                    //    mpd.Applicability = apl;
+                    //}
+
+
+                    //if (mpd.TaskNumberCheck.Length > 2)
+                    //{
+                    //    var shortName = mpd.TaskNumberCheck.Substring(1, 2);
+                    //    mpd.ATAChapter = ata.FirstOrDefault(a => a.ShortName.Equals(shortName));
+
+                    //}
+                    //mpd.MPDTaskNumber = "D6-38278";
+                    //mpd.IsOperatorTask = false;
+                    //mpd.MpdRevisionDate = new DateTime(2018, 9, 27);
+                    //mpd.Threshold.EffectiveDate = new DateTime(2018, 10, 11);
+                    //mpd.ScheduleRevisionDate = new DateTime(2018, 10, 11);
+                    //mpd.ScheduleRevisionNum = "2";
+                    //mpd.ScheduleRef = "SC-C010-MP";
+
+
+                    #endregion
+
+                   // env.NewKeeper.Save(mpd);
+
+                }
+            }
+        }
+
+
+        [TestMethod]
 		public void ImportDirectivesAD()
 		{
 			var env = GetEnviroment();
@@ -1072,45 +1135,10 @@ namespace SmartCore.Tests.ExcelImportExport
 			}
 		}
 
-		[TestMethod]
-		public void Test123()
-		{
-			var context = new DataContext();
-			var res = context.LifeLimitCategorieDtos.ToList();
-			foreach (var lifeLimitCategorieDto in res)
-			{
-				Trace.WriteLine(lifeLimitCategorieDto.CategoryType);
-			}
-			//var env = GetEnviroment();
-			//var ata = env.Loader.GetObjectList<AtaChapter>(getDeleted:true);
-
-			//foreach (var ataChapter in ata.Where(i => i.IsDeleted))
-			//{
-			//	Trace.WriteLine(ataChapter.ItemId);
-			//	//env.Manipulator.Delete(ataChapter, false);
-
-			//	//if (ataChapter.Count() > 1)
-			//	//{
-			//	//	bool first = true;
-			//	//	foreach (var chapter in ataChapter.OrderBy(i => i.ItemId))
-			//	//	{
-			//	//		if (first)
-			//	//		{
-			//	//			first = false;
-			//	//			continue;
-			//	//		}
-
-			//	//		chapter.IsDeleted = true;
-			//	//		env.Keeper.Save(chapter);
-			//	//	}
-			//	//}
-			//}
-		}
-
 		private CasEnvironment GetEnviroment()
 		{
 			var cas = new CasEnvironment();
-			cas.Connect("92.47.31.254:45617", "casadmin", "casadmin001", "ScatDB");
+			cas.Connect("91.213.233.139:45617", "casadmin", "casadmin001", "ScatDBTest");
 			DbTypes.CasEnvironment = cas;
 			cas.NewLoader.FirstLoad();
 

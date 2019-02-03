@@ -31,7 +31,7 @@ namespace SmartCore.Tests
 			var aircraftCore = new AircraftsCore(env.Loader,env.NewKeeper, env.NewLoader);
 			var itemRelationCore = new ItemsRelationsDataAccess(env);
 			var componentCore = new ComponentCore(env, env.Loader, env.NewLoader, env.NewKeeper, aircraftCore, itemRelationCore);
-			var directiveCore = new DirectiveCore(env.NewKeeper, env.NewLoader, env.Loader, itemRelationCore);
+			var directiveCore = new DirectiveCore(env.NewKeeper, env.NewLoader,env.Keeper, env.Loader, itemRelationCore);
 			var maintenanceCore = new MaintenanceCore(env, env.NewLoader, env.NewKeeper, itemRelationCore, aircraftCore);
 
 			var newBaseComponent = new List<BaseComponent>();

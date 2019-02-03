@@ -116,6 +116,7 @@ namespace SmartCore.Entities.Dictionaries
 	    public static MaintenanceDirectiveProgramType ElectricalWipingInterconnectionSystem   = new MaintenanceDirectiveProgramType(32, "EWIS", "Electrical Wiping Interconnection System", "", MSG.MSG3);
 	    public static MaintenanceDirectiveProgramType SupplementaltypeCertificate = new MaintenanceDirectiveProgramType(33, "STC", "Supplemental type Certificate", "", MSG.MSG3);
 	    public static MaintenanceDirectiveProgramType SpecialCompliance = new MaintenanceDirectiveProgramType(34, "SCIAWL", "Special Compliance Item/Airworthiness Limitation", "", MSG.MSG3);
+	    public static MaintenanceDirectiveProgramType ISIP = new MaintenanceDirectiveProgramType(35, "ISIP", "Integrated Structural Inspection Program", "", MSG.MSG3);
 
 		#region public static MaintenanceDirectiveProgrammType Unknown = new MaintenanceDirectiveProgrammType(-1, "Unknown", "Unknown", "Unknown", MSG.MSG1);
 		/// <summary> 

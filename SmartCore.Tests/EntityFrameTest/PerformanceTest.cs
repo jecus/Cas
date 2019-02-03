@@ -23,7 +23,7 @@ namespace SmartCore.Tests.EntityFrameTest
 		[TestMethod]
 		public void Test()
 		{
-			HibernatingRhinos.Profiler.Appender.EntityFramework.EntityFrameworkProfiler.Initialize();
+			//HibernatingRhinos.Profiler.Appender.EntityFramework.EntityFrameworkProfiler.Initialize();
 
 		}
 

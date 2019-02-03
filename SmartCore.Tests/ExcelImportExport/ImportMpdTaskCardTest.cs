@@ -175,7 +175,7 @@ namespace SmartCore.Tests.ExcelImportExport
 			var env = GetEnviroment();
 
 			var itemRelationCore = new ItemsRelationsDataAccess(env);
-			var directiveCore = new DirectiveCore(env.NewKeeper, env.NewLoader, env.Loader, itemRelationCore);
+			var directiveCore = new DirectiveCore(env.NewKeeper, env.NewLoader,env.Keeper, env.Loader, itemRelationCore);
 
 			var aircraft = env.NewLoader.GetObject<AircraftDTO, Aircraft>(new Filter("ItemId", 2348));
 
