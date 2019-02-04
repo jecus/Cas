@@ -109,7 +109,7 @@ namespace CAS.UI.UIControls.AircraftsControls
             AnimatedThreadWorker.ReportProgress(0, "Check Aircraft");
             GlobalObjects.AircraftsCore.ResetAircraft(CurrentAircraft);
 
-	        var aircraftEquip = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AircraftEquipmentDTO, AircraftEquipments>(new Filter("AircraftId", EFCore.Attributte.FilterType.Equal, CurrentAircraft.ItemId));
+	        var aircraftEquip = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AircraftEquipmentDTO, AircraftEquipments>(new Filter("AircraftId", EFCore.Attributte.FilterType.Equal, CurrentAircraft.ItemId), true);
 	        CurrentAircraft.AircraftEquipments.Clear();
 	        CurrentAircraft.AircraftEquipments.AddRange(aircraftEquip);
 
