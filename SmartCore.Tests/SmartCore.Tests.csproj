@@ -105,6 +105,7 @@
     <Compile Include="EntityFrameTest\RepositoryTest.cs" />
     <Compile Include="ExcelImportExport\AirportCodeConverterTest.cs" />
     <Compile Include="ExcelImportExport\ExcelImportTest.cs" />
+    <Compile Include="ExcelImportExport\ImportExcelMpd.cs" />
     <Compile Include="ExcelImportExport\ImportMpdTaskCardTest.cs" />
     <Compile Include="ItemsRelationsDATest.cs" />
     <Compile Include="KitsCoreTests.cs" />
