@@ -117,6 +117,11 @@ namespace SmartCore.Entities.Dictionaries
 	    public static MaintenanceDirectiveProgramType SupplementaltypeCertificate = new MaintenanceDirectiveProgramType(33, "STC", "Supplemental type Certificate", "", MSG.MSG3);
 	    public static MaintenanceDirectiveProgramType SpecialCompliance = new MaintenanceDirectiveProgramType(34, "SCIAWL", "Special Compliance Item/Airworthiness Limitation", "", MSG.MSG3);
 	    public static MaintenanceDirectiveProgramType ISIP = new MaintenanceDirectiveProgramType(35, "ISIP", "Integrated Structural Inspection Program", "", MSG.MSG3);
+	    public static MaintenanceDirectiveProgramType SupplementaryRequirements = new MaintenanceDirectiveProgramType(36, "SR", "Supplementary Requirements", "", MSG.MSG3);
+	    public static MaintenanceDirectiveProgramType OptionalMaintenance = new MaintenanceDirectiveProgramType(37, "OM", "Optional Maintenance", "", MSG.MSG3);
+	    public static MaintenanceDirectiveProgramType MaintenancePractices = new MaintenanceDirectiveProgramType(38, "MP", "Maintenance Practices", "", MSG.MSG3);
+	    public static MaintenanceDirectiveProgramType Unscheduled = new MaintenanceDirectiveProgramType(39, "US", "Unscheduled", "", MSG.MSG3);
+	    public static MaintenanceDirectiveProgramType OutOfPhase = new MaintenanceDirectiveProgramType(40, "OOP", "Out of Phase", "", MSG.MSG3);
 
 		#region public static MaintenanceDirectiveProgrammType Unknown = new MaintenanceDirectiveProgrammType(-1, "Unknown", "Unknown", "Unknown", MSG.MSG1);
 		/// <summary> 
