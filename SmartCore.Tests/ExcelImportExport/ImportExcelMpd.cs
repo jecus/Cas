@@ -20,7 +20,7 @@ namespace SmartCore.Tests.ExcelImportExport
 	public class ImportExcelMpd
 	{
 		[TestMethod]
-		public void ImportMaintenanceDirectivesTest()
+		public void ImportMaintenanceDirectives37XX()
 		{
 			var env = GetEnviroment();
 
@@ -29,10 +29,10 @@ namespace SmartCore.Tests.ExcelImportExport
 			var componentCore = new ComponentCore(env, env.Loader, env.NewLoader, env.NewKeeper, aircraftCore, itemRelationCore);
 			var mpdCore = new MaintenanceCore(env, env.NewLoader, env.NewKeeper, itemRelationCore, aircraftCore);
 
-			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\123\7.xlsx");
+			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\123\mpd.xlsx");
 
 			aircraftCore.LoadAllAircrafts();
-			var aircraft = aircraftCore.GetAircraftById(2316);
+			var aircraft = aircraftCore.GetAircraftById(2330);
 
 			var bd = componentCore.GetAicraftBaseComponents(aircraft.ItemId, BaseComponentType.Frame.ItemId).FirstOrDefault();
 			var ata = env.NewLoader.GetObjectListAll<ATAChapterDTO, AtaChapter>();
@@ -45,22 +45,49 @@ namespace SmartCore.Tests.ExcelImportExport
 
 			foreach (DataTable table in ds.Tables)
 			{
-				foreach (DataRow row in table.Rows)
+				foreach (var row in table.Rows.OfType<DataRow>().GroupBy(i => i[1]))
+				//foreach (DataRow row in table.Rows)
 				{
-					var find = mpds.FirstOrDefault(i =>
-						i.TaskNumberCheck.ToLower().Equals(row[0].ToString().ToLower()));
 
 					#region Добавление Mpd TaskNumber(Appendix B - Old to New XRef)
 
+					//int counter = 1;
+					//var find = mpds.FirstOrDefault(i => i.TaskNumberCheck.ToLower().Equals(row.Key.ToString().ToLower()));
 					//if (find != null)
 					//{
-					//	find.MpdOldTaskCard = row[2].ToString();
-					//	find.TaskCardNumber = row[3].ToString();
-					//	//env.Keeper.Save(find);
+					//	foreach (var dataRow in row)
+					//	{
+					//		if (counter == 1)
+					//		{
+					//			if (row.Count() > 1)
+					//				find.TaskNumberCheck = $"{row.Key} ({counter})";
+
+					//			find.MpdOldTaskCard = dataRow[2].ToString();
+					//			find.TaskCardNumber = dataRow[3].ToString();
+					//			env.Keeper.Save(find);
+					//			counter++;
+					//		}
+					//		else
+					//		{
+
+					//			MaintenanceDirective mpd = find.GetCopyUnsaved();
+					//			mpd.ParentBaseComponent = bd;
+					//			mpd.TaskNumberCheck = $"{row.Key} ({counter})";
+					//			mpd.MpdOldTaskCard = dataRow[2].ToString();
+					//			mpd.TaskCardNumber = dataRow[3].ToString();
+					//			env.Keeper.Save(mpd);
+					//			counter++;
+
+					//		}
+					//	}
 					//}
+
 
 					#endregion
 
+
+					//var find = mpds.FirstOrDefault(i =>
+					//i.TaskNumberCheck.ToLower().Equals(row[0].ToString().ToLower()));
 
 					//MaintenanceDirective mpd;
 
@@ -143,7 +170,7 @@ namespace SmartCore.Tests.ExcelImportExport
 
 					#endregion
 
-					//env.Keeper.Save(find);
+					//env.Keeper.Save(mpd);
 
 				}
 			}
