@@ -183,10 +183,10 @@ namespace SmartCore.Tests.ExcelImportExport
 			var componentCore = new ComponentCore(env, env.Loader, env.NewLoader, env.NewKeeper, aircraftCore, itemRelationCore);
 			var mpdCore = new MaintenanceCore(env, env.NewLoader, env.NewKeeper, itemRelationCore, aircraftCore);
 
-			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\123\mpd.xlsx");
+			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\MPD\CRJ\App.xlsx");
 
 			aircraftCore.LoadAllAircrafts();
-			var aircraft = aircraftCore.GetAircraftById(233);
+			var aircraft = aircraftCore.GetAircraftById(2331);
 
 			var bd = componentCore.GetAicraftBaseComponents(aircraft.ItemId, BaseComponentType.Frame.ItemId).FirstOrDefault();
 			var ata = env.NewLoader.GetObjectListAll<ATAChapterDTO, AtaChapter>();
@@ -209,6 +209,30 @@ namespace SmartCore.Tests.ExcelImportExport
 							ParentBaseComponent = bd,
 							HiddenRemarks = "NEW",
 						};
+
+
+					#region Apendix G
+
+					//mpd.TaskNumberCheck = row[1].ToString();
+					//mpd.Description = row[2].ToString();
+					//mpd.MpdRef = "Appendix A";
+
+					//var apl = row[5].ToString();
+					//if (apl.Contains("ALL"))
+					//{
+					//	mpd.IsApplicability = true;
+					//}
+
+					//mpd.MPDTaskNumber = row[5].ToString();
+					//mpd.MaintenanceManual = row[6].ToString();
+					//mpd.Workarea = row[8].ToString();
+					//mpd.Access = row[9].ToString();
+					//mpd.Remarks = row[10].ToString();
+
+
+					#endregion
+
+					#region AllSection
 
 					//Section 2.2
 					//mpd.Program = MaintenanceDirectiveProgramType.SystemsAndPowerPlants;
@@ -250,9 +274,15 @@ namespace SmartCore.Tests.ExcelImportExport
 					//mpd.Program = MaintenanceDirectiveProgramType.SystemsMaintenance;
 					//mpd.MpdRef = "Section 2.10";
 
-					mpd.TaskNumberCheck = row[1].ToString();
-					mpd.TaskCardNumber = row[2].ToString();
-					mpd.MaintenanceManual = row[3].ToString();
+
+
+
+					//mpd.TaskNumberCheck = row[1].ToString();
+					//mpd.TaskCardNumber = row[2].ToString();
+					//mpd.MaintenanceManual = row[3].ToString();
+					//mpd.MPDTaskNumber = "SCP A-054-000";
+
+					#endregion
 
 					if (mpd.TaskNumberCheck.Length > 2)
 					{
@@ -260,7 +290,6 @@ namespace SmartCore.Tests.ExcelImportExport
 						mpd.ATAChapter = ata.FirstOrDefault(a => a.ShortName.Equals(shortName));
 					}
 
-					mpd.MPDTaskNumber = "SCP A-054-000";
 					mpd.IsOperatorTask = false;
 					mpd.MpdRevisionDate = new DateTime(2018, 1, 22);
 					mpd.Threshold.EffectiveDate = new DateTime(2018, 10, 10);
@@ -277,7 +306,7 @@ namespace SmartCore.Tests.ExcelImportExport
 		private CasEnvironment GetEnviroment()
 		{
 			var cas = new CasEnvironment();
-			cas.Connect("92.47.31.254:45617", "casadmin", "casadmin001", "ScatDB");
+			cas.Connect("91.213.233.139:45617", "casadmin", "casadmin001", "ScatDB");
 			DbTypes.CasEnvironment = cas;
 			cas.NewLoader.FirstLoad();
 
