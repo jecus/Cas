@@ -183,10 +183,10 @@ namespace SmartCore.Tests.ExcelImportExport
 			var componentCore = new ComponentCore(env, env.Loader, env.NewLoader, env.NewKeeper, aircraftCore, itemRelationCore);
 			var mpdCore = new MaintenanceCore(env, env.NewLoader, env.NewKeeper, itemRelationCore, aircraftCore);
 
-			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\123\mpd.xlsx");
+			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\MPD\CRJ\2.2.xlsx");
 
 			aircraftCore.LoadAllAircrafts();
-			var aircraft = aircraftCore.GetAircraftById(233);
+			var aircraft = aircraftCore.GetAircraftById(2331);
 
 			var bd = componentCore.GetAicraftBaseComponents(aircraft.ItemId, BaseComponentType.Frame.ItemId).FirstOrDefault();
 			var ata = env.NewLoader.GetObjectListAll<ATAChapterDTO, AtaChapter>();
@@ -210,65 +210,136 @@ namespace SmartCore.Tests.ExcelImportExport
 							HiddenRemarks = "NEW",
 						};
 
+
+					#region Apendix G
+
+					//mpd.TaskNumberCheck = row[1].ToString();
+					//mpd.Description = row[2].ToString();
+					//mpd.MpdRef = "Appendix A";
+
+					//var apl = row[5].ToString();
+					//if (apl.Contains("ALL"))
+					//{
+					//	mpd.IsApplicability = true;
+					//}
+
+					//mpd.MPDTaskNumber = row[5].ToString();
+					//mpd.MaintenanceManual = row[6].ToString();
+					//mpd.Workarea = row[8].ToString();
+					//mpd.Access = row[9].ToString();
+					//mpd.Remarks = row[10].ToString();
+
+					//if (mpd.TaskNumberCheck.Length > 2)
+					//{
+					//	var shortName = mpd.TaskNumberCheck.Substring(0, 1);
+					//	mpd.ATAChapter = ata.FirstOrDefault(a => a.ShortName.Equals(shortName));
+					//}
+
+					//mpd.IsOperatorTask = false;
+					//mpd.MpdRevisionDate = new DateTime(2018, 10, 10);
+					//mpd.Threshold.EffectiveDate = new DateTime(2018, 1, 22);
+					//mpd.ScheduleRevisionDate = new DateTime(2018, 1, 22);
+					//mpd.ScheduleRevisionNum = "0";
+					//mpd.MpdRevisionNum = "38";
+					//mpd.ScheduleRef = "MP SCAT/CRJ/AMP/I4/R00";
+
+					//env.Keeper.Save(mpd);
+
+
+					#endregion
+
+					#region AllSection
+
 					//Section 2.2
-					//mpd.Program = MaintenanceDirectiveProgramType.SystemsAndPowerPlants;
-					//mpd.MpdRef = "Section 2.2";
+					mpd.Program = MaintenanceDirectiveProgramType.SystemsAndPowerPlants;
+					mpd.MpdRef = "Section 2.2";
 
 					//Section 2.3
-					//mpd.Program = MaintenanceDirectiveProgramType.StructuralInspection;
-					//mpd.MpdRef = "Section 2.3";
-
-					//Section 2.3
-					//mpd.Program = MaintenanceDirectiveProgramType.SystemsMaintenance;
+					//mpd.Program = MaintenanceDirectiveProgramType.StructuresMaintenance;
 					//mpd.MpdRef = "Section 2.3";
 
 					//Section 2.4
-					//mpd.Program = MaintenanceDirectiveProgramType.SystemsMaintenance;
+					//mpd.Program = MaintenanceDirectiveProgramType.ZonalInspection;
 					//mpd.MpdRef = "Section 2.4";
 
 					//Section 2.5
-					//mpd.Program = MaintenanceDirectiveProgramType.SystemsMaintenance;
+					//mpd.Program = MaintenanceDirectiveProgramType.CPCP;
 					//mpd.MpdRef = "Section 2.5";
 
 					//Section 2.6
-					//mpd.Program = MaintenanceDirectiveProgramType.SystemsMaintenance;
+					//mpd.Program = MaintenanceDirectiveProgramType.CertificationMaintenanceRequirement;
 					//mpd.MpdRef = "Section 2.6";
 
 					//Section 2.7
-					//mpd.Program = MaintenanceDirectiveProgramType.SystemsMaintenance;
+					//mpd.Program = MaintenanceDirectiveProgramType.AWLandCMR;
 					//mpd.MpdRef = "Section 2.7";
 
 					//Section 2.8
-					//mpd.Program = MaintenanceDirectiveProgramType.SystemsMaintenance;
+					//mpd.Program = MaintenanceDirectiveProgramType.SupplementaryRequirements;
 					//mpd.MpdRef = "Section 2.8";
 
 					//Section 2.9
-					//mpd.Program = MaintenanceDirectiveProgramType.SystemsMaintenance;
+					//mpd.Program = MaintenanceDirectiveProgramType.FuelTankSystemMaintenanceProgram;
 					//mpd.MpdRef = "Section 2.9";
 
 					//Section 2.10
-					//mpd.Program = MaintenanceDirectiveProgramType.SystemsMaintenance;
+					//mpd.Program = MaintenanceDirectiveProgramType.ElectricalWipingInterconnectionSystem;
 					//mpd.MpdRef = "Section 2.10";
 
+
 					mpd.TaskNumberCheck = row[1].ToString();
-					mpd.TaskCardNumber = row[2].ToString();
 					mpd.MaintenanceManual = row[3].ToString();
+					mpd.MPDTaskNumber = "SCP A-054-000";
+
 
 					if (mpd.TaskNumberCheck.Length > 2)
 					{
-						var shortName = mpd.TaskNumberCheck.Substring(0, 1);
+						var shortName = mpd.TaskNumberCheck.Substring(0, 2);
 						mpd.ATAChapter = ata.FirstOrDefault(a => a.ShortName.Equals(shortName));
 					}
 
-					mpd.MPDTaskNumber = "SCP A-054-000";
+					mpd.MPDTaskNumber = "CSP A-054-000";
 					mpd.IsOperatorTask = false;
-					mpd.MpdRevisionDate = new DateTime(2018, 1, 22);
-					mpd.Threshold.EffectiveDate = new DateTime(2018, 10, 10);
-					mpd.ScheduleRevisionDate = new DateTime(2018, 10, 10);
+					mpd.MpdRevisionDate = new DateTime(2018, 10, 10);
+					mpd.Threshold.EffectiveDate = new DateTime(2018, 1, 22);
+					mpd.ScheduleRevisionDate = new DateTime(2018, 1, 22);
 					mpd.ScheduleRevisionNum = "0";
 					mpd.MpdRevisionNum = "38";
 					mpd.ScheduleRef = "MP SCAT/CRJ/AMP/I4/R00";
 
+					var taskCards = row[2].ToString().Split(new string[]{"\n"}, StringSplitOptions.None);
+					var counter = 1;
+					if (taskCards.Count() > 1)
+					{
+						foreach (var taskCard in taskCards)
+						{
+							if (counter == 1)
+							{
+								mpd.TaskNumberCheck = $"{row[1]} ({counter})";
+								mpd.TaskCardNumber = taskCard;
+
+								//env.Keeper.Save(mpd);
+								counter++;
+							}
+							else
+							{
+								var newMpd = mpd.GetCopyUnsaved();
+								newMpd.ParentBaseComponent = bd;
+								mpd.TaskNumberCheck = $"{row[1]} ({counter})";
+								mpd.TaskCardNumber = taskCard;
+
+								//env.Keeper.Save(newMpd);
+								counter++;
+							}
+						}	
+					}
+					else
+					{
+						mpd.TaskCardNumber = row[2].ToString();
+						//env.Keeper.Save(mpd);
+					}
+
+					#endregion
 				}
 			}
 		}
@@ -277,7 +348,7 @@ namespace SmartCore.Tests.ExcelImportExport
 		private CasEnvironment GetEnviroment()
 		{
 			var cas = new CasEnvironment();
-			cas.Connect("92.47.31.254:45617", "casadmin", "casadmin001", "ScatDB");
+			cas.Connect("91.213.233.139:45617", "casadmin", "casadmin001", "ScatDB");
 			DbTypes.CasEnvironment = cas;
 			cas.NewLoader.FirstLoad();
 
