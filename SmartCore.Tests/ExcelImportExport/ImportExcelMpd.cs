@@ -201,7 +201,7 @@ namespace SmartCore.Tests.ExcelImportExport
                         continue;
                     
 
-					var find = mpds.FirstOrDefault(i => i.TaskNumberCheck.ToLower().Trim().Equals(row[1].ToString().ToLower()));
+					var find = mpds.FirstOrDefault(i => i.TaskNumberCheck.ToLower().Trim().Equals(row[1].ToString().ToLower().Trim()));
 
 					MaintenanceDirective mpd;
 
@@ -329,8 +329,8 @@ namespace SmartCore.Tests.ExcelImportExport
 							{
 								var newMpd = mpd.GetCopyUnsaved();
 								newMpd.ParentBaseComponent = bd;
-								mpd.TaskNumberCheck = $"{row[1]} ({counter})";
-								mpd.TaskCardNumber = taskCard;
+								newMpd.TaskNumberCheck = $"{row[1]} ({counter})";
+								newMpd.TaskCardNumber = taskCard;
 
                                // env.Keeper.Save(newMpd);
                                 counter++;
