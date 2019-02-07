@@ -183,10 +183,10 @@ namespace SmartCore.Tests.ExcelImportExport
 			var componentCore = new ComponentCore(env, env.Loader, env.NewLoader, env.NewKeeper, aircraftCore, itemRelationCore);
 			var mpdCore = new MaintenanceCore(env, env.NewLoader, env.NewKeeper, itemRelationCore, aircraftCore);
 
-			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\111\Section 2.2.xlsx");
+			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\MPD\CRJ\2.2.xlsx");
 
 			aircraftCore.LoadAllAircrafts();
-			var aircraft = aircraftCore.GetAircraftById(2347);
+			var aircraft = aircraftCore.GetAircraftById(2344);
 
 			var bd = componentCore.GetAicraftBaseComponents(aircraft.ItemId, BaseComponentType.Frame.ItemId).FirstOrDefault();
 			var ata = env.NewLoader.GetObjectListAll<ATAChapterDTO, AtaChapter>();
@@ -199,10 +199,26 @@ namespace SmartCore.Tests.ExcelImportExport
 				{
                     if(string.IsNullOrEmpty(row[1].ToString()))
                         continue;
-                    
 
-					var find = mpds.FirstOrDefault(i => i.TaskNumberCheck.ToLower().Trim().Equals(row[1].ToString().ToLower().Trim()));
+                    MaintenanceDirective find = null;
+					var finds = mpds.Where(i => i.TaskNumberCheck.ToLower().Trim().Equals(row[1].ToString().ToLower().Trim()));
+					
+					//Такой колхоз сделан потому что бывает что mpd две с одинаковым названием
+					var flag = false;
+					foreach (var maintenanceDirective in finds)
+					{
+						if (!flag)
+						{
+							find = maintenanceDirective;
+							flag = true;
+						}
+						else
+						{
+							env.Keeper.Delete(maintenanceDirective);
+						}
+					}
 
+					
 					MaintenanceDirective mpd;
 
 					if (find != null)
