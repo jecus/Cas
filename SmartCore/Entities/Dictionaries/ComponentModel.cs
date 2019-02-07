@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using EFCore.DTO.Dictionaries;
 using SmartCore.Entities.Collections;
+using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 
@@ -30,43 +31,43 @@ namespace SmartCore.Entities.Dictionaries
         {
             get { return SmartCoreType.Component; }
         }
-        #endregion
+		#endregion
+		public Document Document { get; set; }
 
-
-        /*
+		/*
          * Свойства 
          */
 
-        /*
+		/*
          * Методы
          */
 
-        //#region public override void SetProperties(AbstractDictionary dictionary)
-        //public override void SetProperties(AbstractDictionary dictionary)
-        //{
-        //    if (dictionary is DetailModel) 
-        //        SetProperties((DetailModel)dictionary);
-        //}
-        //#endregion
+		//#region public override void SetProperties(AbstractDictionary dictionary)
+		//public override void SetProperties(AbstractDictionary dictionary)
+		//{
+		//    if (dictionary is DetailModel) 
+		//        SetProperties((DetailModel)dictionary);
+		//}
+		//#endregion
 
-        //#region public void SetProperties(DetailModel dictionary)
-        //public void SetProperties(DetailModel dictionary)
-        //{
-        //    FullName = dictionary.FullName;
-        //    ShortName = dictionary.ShortName;
-        //    Model = dictionary.Model;
-        //    Series = dictionary.Series;
-        //    Manufacturer = dictionary.Manufacturer;
-        //    ManufactureReg = dictionary.ManufactureReg;
-        //}
-        //#endregion
+		//#region public void SetProperties(DetailModel dictionary)
+		//public void SetProperties(DetailModel dictionary)
+		//{
+		//    FullName = dictionary.FullName;
+		//    ShortName = dictionary.ShortName;
+		//    Model = dictionary.Model;
+		//    Series = dictionary.Series;
+		//    Manufacturer = dictionary.Manufacturer;
+		//    ManufactureReg = dictionary.ManufactureReg;
+		//}
+		//#endregion
 
-        #region public override string ToString()
-        /// <summary>
-        /// Переводит тип директивы в строку
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
+		#region public override string ToString()
+		/// <summary>
+		/// Переводит тип директивы в строку
+		/// </summary>
+		/// <returns></returns>
+		public override string ToString()
         {
 			//todo:(Evgenii Babak)Возможно даст ошибку в других местах
 			return FullName + " | P/N:" + PartNumber;

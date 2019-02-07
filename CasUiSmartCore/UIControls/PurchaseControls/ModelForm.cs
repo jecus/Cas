@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
 using EFCore.DTO.General;
 using EFCore.Filter;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Files;
 
@@ -41,13 +44,13 @@ namespace CAS.UI.UIControls.PurchaseControls
 
         private void DoLoad()
         {
-            var links = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<ItemFileLinkDTO, ItemFileLink>(new List<Filter>()
+            var links = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DocumentDTO, Document>(new List<Filter>()
             {
-                new Filter("ParentId",_currentModel.ItemId),
+                new Filter("ParentID",_currentModel.ItemId),
                 new Filter("ParentTypeId",_currentModel.SmartCoreObjectType.ItemId)
             }, true);
 
-            _currentModel.Files.AddRange(links);
+            _currentModel.Document = links.FirstOrDefault();
         }
         #region private void UpdateInformation()
 
@@ -81,10 +84,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 				"This record does not contain a image. Enclose Image file to prove the compliance.",
 				"Attached file proves the Image.");
 
-            fileControl.UpdateInfo(_currentModel.AttachedFile, "Adobe PDF Files|*.pdf",
-                "This record does not contain a file proving the Document. Enclose PDF file to prove the Document.",
-                "Attached file proves the Document.");
-
             textBoxFullName.Text = _currentModel.FullName;
 			textBoxShortName.Text = _currentModel.ShortName;
 
@@ -103,6 +102,42 @@ namespace CAS.UI.UIControls.PurchaseControls
 			textBoxSeries.Text = _currentModel.Series;
 
 			checkBoxDangerous.Checked = _currentModel.IsDangerous;
+
+			documentControl1.CurrentDocument = _currentModel.Document;
+			documentControl1.Added += DocumentControl1_Added;
+		}
+
+		#endregion
+
+		#region private void DocumentControl1_Added(object sender, EventArgs e)
+
+		private void DocumentControl1_Added(object sender, EventArgs e)
+		{
+			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("CMM") as DocumentSubType;
+			var dep = GlobalObjects.CasEnvironment.GetDictionary<Department>().GetByFullName("Planning") as Department;
+			var spec = GlobalObjects.CasEnvironment.GetDictionary<Specialization>().GetByFullName("Maintenance Data Librarian") as Specialization;
+			var nomen = GlobalObjects.CasEnvironment.GetDictionary<Nomenclatures>().GetByFullName("e-library") as Nomenclatures;
+			var location = GlobalObjects.CasEnvironment.GetDictionary<Locations>().GetByFullName("e-Server CIT") as Locations;
+			var newDocument = new Document
+			{
+				Parent = _currentModel,
+				ParentId = _currentModel.ItemId,
+				ParentTypeId = _currentModel.SmartCoreObjectType.ItemId,
+				DocType = DocumentType.TechnicalPublication,
+				DocumentSubType = docSubType,
+				Department = dep,
+				ResponsibleOccupation = spec,
+				Nomenсlature = nomen,
+				Location = location
+			};
+
+			var form = new DocumentForm(newDocument, false);
+			if (form.ShowDialog() == DialogResult.OK)
+			{
+				_currentModel.Document = newDocument;
+				documentControl1.CurrentDocument = newDocument;
+
+			}
 		}
 
 		#endregion
@@ -131,8 +166,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				|| (comboBoxDetailClass.SelectedItem != _currentModel.GoodsClass)
 				|| (checkBoxDangerous.Checked != _currentModel.IsDangerous)
 				|| dataGridViewControlSuppliers.GetChangeStatus()
-				|| fileControlImage.GetChangeStatus()
-				|| fileControl.GetChangeStatus())
+				|| fileControlImage.GetChangeStatus())
 				return true;
 
 			if (_currentModel.SupplierRelations.Any(sr => sr.ItemId < 0))
@@ -230,9 +264,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 			fileControlImage.ApplyChanges();
 			_currentModel.ImageFile = fileControlImage.AttachedFile;
-
-            fileControl.ApplyChanges();
-            _currentModel.AttachedFile = fileControl.AttachedFile;
 
             _currentModel.SupplierRelations.Clear();
 			_currentModel.SupplierRelations.AddRange(dataGridViewControlSuppliers.GetItemsArray());
