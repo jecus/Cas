@@ -205,7 +205,7 @@ namespace SmartCore.Tests.ExcelImportExport
 					
 					//Такой колхоз сделан потому что бывает что mpd две с одинаковым названием
 					var flag = false;
-					foreach (var maintenanceDirective in finds)
+					foreach (var maintenanceDirective in finds.OrderBy(i => i.PerformanceRecords.Count > 0))
 					{
 						if (!flag)
 						{
