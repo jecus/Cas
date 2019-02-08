@@ -349,7 +349,15 @@ namespace SmartCore.Tests.ExcelImportExport
 								newMpd.TaskCardNumber = taskCard;
 
                                // env.Keeper.Save(newMpd);
-                                counter++;
+
+                               foreach (var record in mpd.PerformanceRecords)
+                               {
+	                               var newRec = record.GetCopyUnsaved();
+	                               newRec.ParentId = newMpd.ItemId;
+									// env.Keeper.Save(newRec);
+								}
+
+								counter++;
 							}
 						}	
 					}
