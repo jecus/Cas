@@ -183,10 +183,10 @@ namespace SmartCore.Tests.ExcelImportExport
 			var componentCore = new ComponentCore(env, env.Loader, env.NewLoader, env.NewKeeper, aircraftCore, itemRelationCore);
 			var mpdCore = new MaintenanceCore(env, env.NewLoader, env.NewKeeper, itemRelationCore, aircraftCore);
 
-			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\MPD\CRJ\2.2.xlsx");
+			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\MPD\CRJ\2.7.xlsx");
 
 			aircraftCore.LoadAllAircrafts();
-			var aircraft = aircraftCore.GetAircraftById(2344);
+			var aircraft = aircraftCore.GetAircraftById(2342);
 
 			var bd = componentCore.GetAicraftBaseComponents(aircraft.ItemId, BaseComponentType.Frame.ItemId).FirstOrDefault();
 			var ata = env.NewLoader.GetObjectListAll<ATAChapterDTO, AtaChapter>();
@@ -197,32 +197,32 @@ namespace SmartCore.Tests.ExcelImportExport
 			{
 				foreach (DataRow row in table.Rows)
 				{
+					if (row[1].ToString().Equals("57-21-148"))
+						Trace.WriteLine("");
+
                     if(string.IsNullOrEmpty(row[1].ToString()))
                         continue;
 
                     MaintenanceDirective find = null;
-					var finds = mpds.Where(i => i.TaskNumberCheck.ToLower().Trim().Equals(row[1].ToString().ToLower().Trim()));
+                    var finds = mpds
+	                    .Where(i => i.TaskNumberCheck.ToLower().Trim().Equals(row[1].ToString().ToLower().Trim()))
+	                    .OrderBy(i => i.PerformanceRecords.Count > 0)
+	                    .ToList();
 					
 					//Такой колхоз сделан потому что бывает что mpd две с одинаковым названием
 					var flag = false;
-					foreach (var maintenanceDirective in finds.OrderBy(i => i.PerformanceRecords.Count > 0))
-					{
-						if (!flag)
-						{
-							find = maintenanceDirective;
-							flag = true;
-						}
-						else
-						{
-							env.Keeper.Delete(maintenanceDirective);
-						}
-					}
 
-					
+
+					find = finds.FirstOrDefault();
+
+
 					MaintenanceDirective mpd;
 
 					if (find != null)
+					{
 						mpd = find;
+						finds.Remove(find);
+					}
 					else
 						mpd = new MaintenanceDirective()
 						{
@@ -343,20 +343,30 @@ namespace SmartCore.Tests.ExcelImportExport
 							}
 							else
 							{
-								var newMpd = mpd.GetCopyUnsaved();
-								newMpd.ParentBaseComponent = bd;
-								newMpd.TaskNumberCheck = $"{row[1]} ({counter})";
-								newMpd.TaskCardNumber = taskCard;
-
-                               // env.Keeper.Save(newMpd);
-
-                               foreach (var record in mpd.PerformanceRecords)
-                               {
-	                               var newRec = record.GetCopyUnsaved();
-	                               newRec.ParentId = newMpd.ItemId;
-									// env.Keeper.Save(newRec);
+								var mpdExist = finds.FirstOrDefault();
+								if (mpdExist != null)
+								{
+									mpdExist.TaskNumberCheck = $"{row[1]} ({counter})";
+									mpdExist.TaskCardNumber = taskCard;
+									// env.Keeper.Save(qwe);
+									finds.Remove(mpdExist);
 								}
+								else
+								{
+									var newMpd = mpd.GetCopyUnsaved();
+									newMpd.ParentBaseComponent = bd;
+									newMpd.TaskNumberCheck = $"{row[1]} ({counter})";
+									newMpd.TaskCardNumber = taskCard;
 
+									// env.Keeper.Save(newMpd);
+
+									foreach (var record in mpd.PerformanceRecords)
+									{
+										var newRec = record.GetCopyUnsaved();
+										newRec.ParentId = newMpd.ItemId;
+										// env.Keeper.Save(newRec);
+									}
+								}
 								counter++;
 							}
 						}	
