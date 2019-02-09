@@ -197,8 +197,6 @@ namespace SmartCore.Tests.ExcelImportExport
 			{
 				foreach (DataRow row in table.Rows)
 				{
-					if (row[1].ToString().Equals("57-21-148"))
-						Trace.WriteLine("");
 
                     if(string.IsNullOrEmpty(row[1].ToString()))
                         continue;
@@ -348,7 +346,7 @@ namespace SmartCore.Tests.ExcelImportExport
 								{
 									mpdExist.TaskNumberCheck = $"{row[1]} ({counter})";
 									mpdExist.TaskCardNumber = taskCard;
-									// env.Keeper.Save(qwe);
+									// env.Keeper.Save(mpdExist);
 									finds.Remove(mpdExist);
 								}
 								else
@@ -357,6 +355,7 @@ namespace SmartCore.Tests.ExcelImportExport
 									newMpd.ParentBaseComponent = bd;
 									newMpd.TaskNumberCheck = $"{row[1]} ({counter})";
 									newMpd.TaskCardNumber = taskCard;
+									newMpd.HiddenRemarks = "NEW";
 
 									// env.Keeper.Save(newMpd);
 
