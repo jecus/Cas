@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
@@ -229,45 +230,6 @@ namespace SmartCore.Tests.ExcelImportExport
 						};
 
 
-                    #region Apendix G
-
-                    //mpd.TaskNumberCheck = row[1].ToString();
-                    //mpd.Description = row[2].ToString();
-                    //mpd.MpdRef = "Appendix A";
-
-                    //var apl = row[5].ToString();
-                    //if (apl.Contains("ALL"))
-                    //{
-                    //	mpd.IsApplicability = true;
-                    //}
-
-                    //mpd.MPDTaskNumber = row[5].ToString();
-                    //mpd.MaintenanceManual = row[6].ToString();
-                    //mpd.Workarea = row[8].ToString();
-                    //mpd.Access = row[9].ToString();
-                    //mpd.Remarks = row[10].ToString();
-
-                    //if (mpd.TaskNumberCheck.Length > 2)
-                    //{
-                    //	var shortName = mpd.TaskNumberCheck.Substring(0, 1);
-                    //	mpd.ATAChapter = ata.FirstOrDefault(a => a.ShortName.Equals(shortName));
-                    //}
-
-                    //mpd.IsOperatorTask = false;
-                    //mpd.MpdRevisionDate = new DateTime(2018, 10, 10);
-                    //mpd.Threshold.EffectiveDate = new DateTime(2018, 1, 22);
-                    //mpd.ScheduleRevisionDate = new DateTime(2018, 1, 22);
-                    //mpd.ScheduleRevisionNum = "0";
-                    //mpd.MpdRevisionNum = "38";
-                    //mpd.ScheduleRef = "MP SCAT/CRJ/AMP/I4/R00";
-
-                    //env.Keeper.Save(mpd);
-
-
-                    #endregion
-
-                    #region AllSection
-
                     //Section 2.2
                     mpd.Program = MaintenanceDirectiveProgramType.SystemsAndPowerPlants;
                     mpd.MpdRef = "Section 2.2";
@@ -304,26 +266,8 @@ namespace SmartCore.Tests.ExcelImportExport
                     //mpd.Program = MaintenanceDirectiveProgramType.ElectricalWipingInterconnectionSystem;
                     //mpd.MpdRef = "Section 2.10";
 
-
-                    mpd.TaskNumberCheck = row[1].ToString();
-					mpd.MaintenanceManual = row[3].ToString();
-					mpd.MPDTaskNumber = "SCP A-054-000";
-
-
-					if (mpd.TaskNumberCheck.Length > 2)
-					{
-						var shortName = mpd.TaskNumberCheck.Substring(0, 2);
-						mpd.ATAChapter = ata.FirstOrDefault(a => a.ShortName.Equals(shortName));
-					}
-
-					mpd.MPDTaskNumber = "CSP A-054-000";
-					mpd.IsOperatorTask = false;
-					mpd.MpdRevisionDate = new DateTime(2018, 10, 10);
-					mpd.Threshold.EffectiveDate = new DateTime(2018, 1, 22);
-					mpd.ScheduleRevisionDate = new DateTime(2018, 1, 22);
-					mpd.ScheduleRevisionNum = "0";
-					mpd.MpdRevisionNum = "38";
-					mpd.ScheduleRef = "MP SCAT/CRJ/AMP/I4/R00";
+					SetupCRJ(mpd, row, ata);
+                    
 
 					var taskCards = row[2].ToString().Split(new string[]{"\n"}, StringSplitOptions.None);
 					var counter = 1;
@@ -331,6 +275,10 @@ namespace SmartCore.Tests.ExcelImportExport
 					{
 						foreach (var taskCard in taskCards)
 						{
+							if (string.IsNullOrEmpty(taskCard))
+								continue;
+							
+
 							if (counter == 1)
 							{
 								mpd.TaskNumberCheck = $"{row[1]} ({counter})";
@@ -344,6 +292,7 @@ namespace SmartCore.Tests.ExcelImportExport
 								var mpdExist = finds.FirstOrDefault();
 								if (mpdExist != null)
 								{
+									SetupCRJ(mpdExist, row, ata);
 									mpdExist.TaskNumberCheck = $"{row[1]} ({counter})";
 									mpdExist.TaskCardNumber = taskCard;
 									// env.Keeper.Save(mpdExist);
@@ -352,10 +301,9 @@ namespace SmartCore.Tests.ExcelImportExport
 								else
 								{
 									var newMpd = mpd.GetCopyUnsaved();
+									SetupCRJ(newMpd, row, ata);
 									newMpd.ParentBaseComponent = bd;
 									newMpd.TaskNumberCheck = $"{row[1]} ({counter})";
-									newMpd.TaskCardNumber = taskCard;
-									newMpd.HiddenRemarks = "NEW";
 
 									// env.Keeper.Save(newMpd);
 
@@ -375,12 +323,56 @@ namespace SmartCore.Tests.ExcelImportExport
 						mpd.TaskCardNumber = row[2].ToString();
                         //env.Keeper.Save(mpd);
                     }
-
-					#endregion
 				}
 			}
 		}
 
+
+		private void SetupCRJ(MaintenanceDirective mpd, DataRow row, IList<AtaChapter> ata)
+		{
+			#region Appendix
+
+			// mpd.TaskNumberCheck = row[1].ToString();
+			//mpd.Description = row[2].ToString();
+			//mpd.MpdRef = "Appendix A";
+
+			//var apl = row[5].ToString();
+			//if (apl.Contains("ALL"))
+			//{
+			//	mpd.IsApplicability = true;
+			//}
+
+			//mpd.MPDTaskNumber = row[5].ToString();
+			//mpd.MaintenanceManual = row[6].ToString();
+			//mpd.Workarea = row[8].ToString();
+			//mpd.Access = row[9].ToString();
+			//mpd.Remarks = row[10].ToString();
+
+			#endregion
+
+			#region Section
+
+			//mpd.TaskNumberCheck = row[1].ToString();
+			//mpd.MaintenanceManual = row[3].ToString();
+
+			#endregion
+
+
+			if (mpd.TaskNumberCheck.Length > 2)
+			{
+				var shortName = mpd.TaskNumberCheck.Substring(0, 2);
+				mpd.ATAChapter = ata.FirstOrDefault(a => a.ShortName.Equals(shortName));
+			}
+
+			mpd.MPDTaskNumber = "CSP A-054-000";
+			mpd.IsOperatorTask = false;
+			mpd.MpdRevisionDate = new DateTime(2018, 10, 10);
+			mpd.Threshold.EffectiveDate = new DateTime(2018, 1, 22);
+			mpd.ScheduleRevisionDate = new DateTime(2018, 1, 22);
+			mpd.ScheduleRevisionNum = "0";
+			mpd.MpdRevisionNum = "38";
+			mpd.ScheduleRef = "MP SCAT/CRJ/AMP/I4/R00";
+		}
 
 		private CasEnvironment GetEnviroment()
 		{
