@@ -231,7 +231,7 @@ namespace SmartCore.Tests.ExcelImportExport
 						flag = true;
 					}
 
-					SetupCRJ(mpd, row, ata, true);
+					SetupCRJ(mpd, row, ata, flag);
                     
 
 					var taskCards = row[2].ToString().Split(new string[]{"\n"}, StringSplitOptions.None);
