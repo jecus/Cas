@@ -184,10 +184,10 @@ namespace SmartCore.Tests.ExcelImportExport
 			var componentCore = new ComponentCore(env, env.Loader, env.NewLoader, env.NewKeeper, aircraftCore, itemRelationCore);
 			var mpdCore = new MaintenanceCore(env, env.NewLoader, env.NewKeeper, itemRelationCore, aircraftCore);
 
-			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\MPD\CRJ\2.7.xlsx");
+			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\MPD\CRJ\2.2.xlsx");
 
 			aircraftCore.LoadAllAircrafts();
-			var aircraft = aircraftCore.GetAircraftById(2342);
+			var aircraft = aircraftCore.GetAircraftById(2341);
 
 			var bd = componentCore.GetAicraftBaseComponents(aircraft.ItemId, BaseComponentType.Frame.ItemId).FirstOrDefault();
 			var ata = env.NewLoader.GetObjectListAll<ATAChapterDTO, AtaChapter>();
@@ -202,7 +202,7 @@ namespace SmartCore.Tests.ExcelImportExport
                     if(string.IsNullOrEmpty(row[1].ToString()))
                         continue;
 
-                    MaintenanceDirective find = null;
+                    MaintenanceDirective find;
                     var finds = mpds
 	                    .Where(i => i.TaskNumberCheck.ToLower().Trim().Equals(row[1].ToString().ToLower().Trim()))
 	                    .OrderBy(i => i.PerformanceRecords.Count > 0)
@@ -214,7 +214,6 @@ namespace SmartCore.Tests.ExcelImportExport
 
 					find = finds.FirstOrDefault();
 
-
 					MaintenanceDirective mpd;
 
 					if (find != null)
@@ -223,50 +222,16 @@ namespace SmartCore.Tests.ExcelImportExport
 						finds.Remove(find);
 					}
 					else
+					{
 						mpd = new MaintenanceDirective()
 						{
 							ParentBaseComponent = bd,
 							HiddenRemarks = "NEW",
 						};
+						flag = true;
+					}
 
-
-                    //Section 2.2
-                    mpd.Program = MaintenanceDirectiveProgramType.SystemsAndPowerPlants;
-                    mpd.MpdRef = "Section 2.2";
-
-                    //Section 2.3
-                    //mpd.Program = MaintenanceDirectiveProgramType.StructuresMaintenance;
-                    //mpd.MpdRef = "Section 2.3";
-
-                    //Section 2.4
-                    //mpd.Program = MaintenanceDirectiveProgramType.ZonalInspection;
-                    //mpd.MpdRef = "Section 2.4";
-
-                    //Section 2.5
-                    //mpd.Program = MaintenanceDirectiveProgramType.CPCP;
-                    //mpd.MpdRef = "Section 2.5";
-
-                    //Section 2.6
-                    //mpd.Program = MaintenanceDirectiveProgramType.CertificationMaintenanceRequirement;
-                    //mpd.MpdRef = "Section 2.6";
-
-                    //Section 2.7
-                    //mpd.Program = MaintenanceDirectiveProgramType.AWLandCMR;
-                    //mpd.MpdRef = "Section 2.7";
-
-                    //Section 2.8
-                    //mpd.Program = MaintenanceDirectiveProgramType.SupplementaryRequirements;
-                    //mpd.MpdRef = "Section 2.8";
-
-                    //Section 2.9
-                    //mpd.Program = MaintenanceDirectiveProgramType.FuelTankSystemMaintenanceProgram;
-                    //mpd.MpdRef = "Section 2.9";
-
-                    //Section 2.10
-                    //mpd.Program = MaintenanceDirectiveProgramType.ElectricalWipingInterconnectionSystem;
-                    //mpd.MpdRef = "Section 2.10";
-
-					SetupCRJ(mpd, row, ata);
+					SetupCRJ(mpd, row, ata, true);
                     
 
 					var taskCards = row[2].ToString().Split(new string[]{"\n"}, StringSplitOptions.None);
@@ -292,26 +257,28 @@ namespace SmartCore.Tests.ExcelImportExport
 								var mpdExist = finds.FirstOrDefault();
 								if (mpdExist != null)
 								{
-									SetupCRJ(mpdExist, row, ata);
+									SetupCRJ(mpdExist, row, ata, flag);
 									mpdExist.TaskNumberCheck = $"{row[1]} ({counter})";
 									mpdExist.TaskCardNumber = taskCard;
-									// env.Keeper.Save(mpdExist);
+
+									//env.Keeper.Save(mpdExist);
 									finds.Remove(mpdExist);
 								}
 								else
 								{
 									var newMpd = mpd.GetCopyUnsaved();
-									SetupCRJ(newMpd, row, ata);
+									SetupCRJ(newMpd, row, ata, flag);
 									newMpd.ParentBaseComponent = bd;
 									newMpd.TaskNumberCheck = $"{row[1]} ({counter})";
+									newMpd.TaskCardNumber = taskCard;
 
-									// env.Keeper.Save(newMpd);
+									//env.Keeper.Save(newMpd);
 
 									foreach (var record in mpd.PerformanceRecords)
 									{
 										var newRec = record.GetCopyUnsaved();
 										newRec.ParentId = newMpd.ItemId;
-										// env.Keeper.Save(newRec);
+										//env.Keeper.Save(newRec);
 									}
 								}
 								counter++;
@@ -321,16 +288,19 @@ namespace SmartCore.Tests.ExcelImportExport
 					else
 					{
 						mpd.TaskCardNumber = row[2].ToString();
-                        //env.Keeper.Save(mpd);
-                    }
+						//env.Keeper.Save(mpd);
+					}
 				}
 			}
 		}
 
 
-		private void SetupCRJ(MaintenanceDirective mpd, DataRow row, IList<AtaChapter> ata)
+		private void SetupCRJ(MaintenanceDirective mpd, DataRow row, IList<AtaChapter> ata, bool isNew)
 		{
 			#region Appendix
+
+			//Appendix
+			//mpd.MpdRef = "Appendix G";
 
 			// mpd.TaskNumberCheck = row[1].ToString();
 			//mpd.Description = row[2].ToString();
@@ -352,11 +322,53 @@ namespace SmartCore.Tests.ExcelImportExport
 
 			#region Section
 
-			//mpd.TaskNumberCheck = row[1].ToString();
-			//mpd.MaintenanceManual = row[3].ToString();
+			//Section 2.2
+			mpd.Program = MaintenanceDirectiveProgramType.SystemsAndPowerPlants;
+			mpd.MpdRef = "Section 2.2";
+
+			//Section 2.3
+			//mpd.Program = MaintenanceDirectiveProgramType.StructuresMaintenance;
+			//mpd.MpdRef = "Section 2.3";
+
+			//Section 2.4
+			//mpd.Program = MaintenanceDirectiveProgramType.ZonalInspection;
+			//mpd.MpdRef = "Section 2.4";
+
+			//Section 2.5
+			//mpd.Program = MaintenanceDirectiveProgramType.CPCP;
+			//mpd.MpdRef = "Section 2.5";
+
+			//Section 2.6
+			//mpd.Program = MaintenanceDirectiveProgramType.CertificationMaintenanceRequirement;
+			//mpd.MpdRef = "Section 2.6";
+
+			//Section 2.7
+			//mpd.Program = MaintenanceDirectiveProgramType.AWLandCMR;
+			//mpd.MpdRef = "Section 2.7";
+
+			//Section 2.8
+			//mpd.Program = MaintenanceDirectiveProgramType.SupplementaryRequirements;
+			//mpd.MpdRef = "Section 2.8";
+
+			//Section 2.9
+			//mpd.Program = MaintenanceDirectiveProgramType.FuelTankSystemMaintenanceProgram;
+			//mpd.MpdRef = "Section 2.9";
+
+			//Section 2.10
+			//mpd.Program = MaintenanceDirectiveProgramType.ElectricalWipingInterconnectionSystem;
+			//mpd.MpdRef = "Section 2.10";
+
+			mpd.TaskNumberCheck = row[1].ToString();
+			mpd.MaintenanceManual = row[3].ToString();
+			mpd.Description = "_1";
 
 			#endregion
 
+			if (isNew)
+				mpd.HiddenRemarks = "NEW";
+
+			//TODO: потом убрать!!!!!!!!!!!!!!
+			mpd.Remarks = mpd.MpdRef;
 
 			if (mpd.TaskNumberCheck.Length > 2)
 			{
