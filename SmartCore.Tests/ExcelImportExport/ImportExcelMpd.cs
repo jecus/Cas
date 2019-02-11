@@ -360,7 +360,6 @@ namespace SmartCore.Tests.ExcelImportExport
 
 			mpd.TaskNumberCheck = row[1].ToString();
 			mpd.MaintenanceManual = row[3].ToString();
-			mpd.Description = "_1";
 
 			#endregion
 
