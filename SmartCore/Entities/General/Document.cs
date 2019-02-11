@@ -470,8 +470,8 @@ namespace SmartCore.Entities.General
 		public bool HaveFile { get; set; }
 
         #region public string IDNumber { get; set; }
-        [Filter("Id ¹:", Order = 4)]
-        //[TableColumnAttribute("IdNumber")]
+        [Filter("ID ¹:", Order = 4)]
+        [TableColumnAttribute("IdNumber")]
         public string IdNumber { get; set; }
         #endregion
 

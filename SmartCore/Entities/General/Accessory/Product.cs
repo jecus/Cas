@@ -434,7 +434,7 @@ namespace SmartCore.Entities.General.Accessory
 
         #region public Reference Reference { get; set; }
 
-        //[TableColumn("Reference")]
+        [TableColumn("Reference")]
         [ListViewData(0.12f, "Reference", 2)]
         [Filter("Reference:")]
         public string Reference { get; set; }

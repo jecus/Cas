@@ -390,21 +390,10 @@ namespace SmartCore.Entities.Dictionaries
 
         #region public static MaintenanceDirectiveTaskType InspectionTest = new MaintenanceDirectiveTaskType(56, "Inspection Test", "Inspection Test", "");
 
-        public static MaintenanceDirectiveTaskType InspectionTest = new MaintenanceDirectiveTaskType(56, "Inspection Test", "Inspection Test", "");
+        public static MaintenanceDirectiveTaskType InspectionTest = new MaintenanceDirectiveTaskType(56, "Inspection/Test", "Inspection/Test", "");
 
         #endregion
 
-        #region public static MaintenanceDirectiveTaskType MaintenancePractices = new MaintenanceDirectiveTaskType(57, "Maintenance Practices", "Maintenance Practices", "");
-
-        public static MaintenanceDirectiveTaskType MaintenancePractices = new MaintenanceDirectiveTaskType(57, "Maintenance Practices", "Maintenance Practices", "");
-
-        #endregion
-
-        #region public static MaintenanceDirectiveTaskType Unscheduled = new MaintenanceDirectiveTaskType(58, "Unscheduled", "Unscheduled", "");
-
-        public static MaintenanceDirectiveTaskType Unscheduled = new MaintenanceDirectiveTaskType(58, "Unscheduled", "Unscheduled", "");
-
-        #endregion
 
         #region public static MaintenanceDirectiveTaskType Replace = new MaintenanceDirectiveTaskType(100, "RL", "Replace", "");
         /// <summary>

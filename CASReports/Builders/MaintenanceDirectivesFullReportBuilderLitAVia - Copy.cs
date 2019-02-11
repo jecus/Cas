@@ -432,10 +432,10 @@ namespace CASReports.Builders
 		        reportedDirective.Threshold.RepeatInterval != null ? reportedDirective.Threshold.RepeatInterval.Days?.ToString() : "*",
 		        reportedDirective.LastPerformance != null ? reportedDirective.LastPerformance.OnLifelength.Hours?.ToString() : "*",
 		        reportedDirective.LastPerformance != null ? reportedDirective.LastPerformance.OnLifelength.Cycles?.ToString() : "*",
-		        reportedDirective.LastPerformance != null ? SmartCore.Auxiliary.Convert.GetDateFormat(reportedDirective.LastPerformance.RecordDate.Date) : "*",
+		        reportedDirective.LastPerformance != null ? reportedDirective.LastPerformance.RecordDate.Date.ToString("dd.MM.yyyy") : "*",
 				reportedDirective.NextPerformance != null ? reportedDirective.NextPerformance.PerformanceSource.Hours.ToString() : "*",
 		        reportedDirective.NextPerformance != null ? reportedDirective.NextPerformance.PerformanceSource.Cycles.ToString() : "*",
-		        reportedDirective.NextPerformance?.PerformanceDate != null  ? SmartCore.Auxiliary.Convert.GetDateFormat(reportedDirective.NextPerformance.PerformanceDate.Value) : "*" ,
+		        reportedDirective.NextPerformance?.PerformanceDate != null  ? reportedDirective.NextPerformance.PerformanceDate.Value.ToString("dd.MM.yyyy") : "*" ,
 		        reportedDirective.Remains != null ? reportedDirective.Remains.Hours.ToString() : "*",
 		        reportedDirective.Remains != null ? reportedDirective.Remains.Cycles.ToString() : "*",
 		        reportedDirective.Remains != null ? reportedDirective.Remains.Days.ToString() : "*", "", ""

@@ -34,10 +34,19 @@ namespace CAS.UI.UIControls.PurchaseControls
 		public ModelForm(ComponentModel currentModel) : this()
 		{
 			_currentModel = currentModel;
-            Task.Run(() =>
-            {
-                DoLoad();
-            }).ContinueWith(task => UpdateInformation(), TaskScheduler.FromCurrentSynchronizationContext());
+			if (_currentModel.ItemId <= 0)
+			{
+				documentControl1.Enabled = false;
+				UpdateInformation();
+			}
+			else
+			{
+				Task.Run(() =>
+				{
+					DoLoad();
+				}).ContinueWith(task => UpdateInformation(), TaskScheduler.FromCurrentSynchronizationContext());
+			}
+            
         }
 
         #endregion

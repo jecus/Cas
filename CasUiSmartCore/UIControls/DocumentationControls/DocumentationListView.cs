@@ -102,7 +102,6 @@ namespace CAS.UI.UIControls.DocumentationControls
 			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.DocType.FullName, Tag = item.DocType.FullName });
 			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.DocumentSubType.FullName, Tag = item.DocumentSubType.FullName, ForeColor = titleColor });
 			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.ContractNumber, Tag = item.ContractNumber });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.IdNumber, Tag = item.IdNumber });
 			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Description, Tag = item.Description });
 			subItems.Add(new ListViewItem.ListViewSubItem {Text = SmartCore.Auxiliary.Convert.GetDateFormat(item.IssueDateValidFrom), Tag = item.IssueDateValidFrom });
 			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.IssueNumber, Tag = item.IssueNumber });
@@ -122,6 +121,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.ProlongationWay.ToString(), Tag = item.ProlongationWay.ToString() });
 			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Supplier.ToString(), Tag = item.Supplier });
 			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Status.FullName, Tag = item.Status.FullName });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.IdNumber, Tag = item.IdNumber });
 			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Remarks, Tag = item.Remarks });
 
 			return subItems.ToArray();
@@ -145,9 +145,6 @@ namespace CAS.UI.UIControls.DocumentationControls
 
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "№" };
 			ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Id №" };
-            ColumnHeaderList.Add(columnHeader);
 
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Description" };
 			ColumnHeaderList.Add(columnHeader);
@@ -204,6 +201,9 @@ namespace CAS.UI.UIControls.DocumentationControls
 			ColumnHeaderList.Add(columnHeader);
 
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.04f), Text = "Status" };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "ID №" };
 			ColumnHeaderList.Add(columnHeader);
 
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Remarks" };
