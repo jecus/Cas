@@ -166,8 +166,8 @@ namespace SmartCore
         /// <param name="database"></param>
         public void Connect(String serverName, String userName, String pass, String database)
         {
-			var section = ConfigurationManager.GetSection("connectionSettings") as NameValueCollection;
-	        _ipServer = section["IpServer"];
+			//var section = ConfigurationManager.GetSection("connectionSettings") as NameValueCollection;
+	        _ipServer = serverName;
 
 	        var connection = GetWcfConnection();
 

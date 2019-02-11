@@ -4,13 +4,17 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using Auxiliary;
 using EFCore.DTO.Dictionaries;
+using EFCore.DTO.General;
+using EFCore.Filter;
 using Excel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartCore.Aircrafts;
 using SmartCore.Component;
 using SmartCore.DataAccesses.ItemsRelation;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Maintenance;
 using SmartCore.Management;
@@ -294,6 +298,43 @@ namespace SmartCore.Tests.ExcelImportExport
 			}
 		}
 
+		[TestMethod]
+		public void ImportTaskCard()
+		{
+			var env = GetEnviroment();
+
+			var aircraftCore = new AircraftsCore(env.Loader, env.NewKeeper, null);
+			var itemRelationCore = new ItemsRelationsDataAccess(env);
+			var maintenanceCore = new MaintenanceCore(env, env.NewLoader, env.NewKeeper, itemRelationCore, aircraftCore);
+
+			var aircraft = env.NewLoader.GetObject<AircraftDTO, Aircraft>(new Filter("ItemId", 2332));
+
+			var mpdList = maintenanceCore.GetMaintenanceDirectives(aircraft);
+
+			var d = new DirectoryInfo(@"D:\MPD\TascCard\All Task Cards UP-B3722, UP-B3723");
+			var files = d.GetFiles();
+			foreach (var mpd in mpdList)
+			{
+				var file = files.FirstOrDefault(f => f.Name.Replace(".pdf", "") == mpd.TaskCardNumber);
+				if (file != null)
+				{
+					var _fileData = UsefulMethods.GetByteArrayFromFile(file.FullName);
+					var attachedFile = new AttachedFile
+					{
+						FileData = _fileData,
+						FileName = file.Name,
+						FileSize = _fileData.Length
+					};
+					mpd.TaskCardNumberFile = attachedFile;
+					env.NewKeeper.Save(mpd);
+				}
+				else
+				{
+					Trace.WriteLine(mpd.TaskNumberCheck);
+				}
+			}
+		}
+
 
 		private void SetupCRJ(MaintenanceDirective mpd, DataRow row, IList<AtaChapter> ata, bool isNew)
 		{
@@ -360,7 +401,6 @@ namespace SmartCore.Tests.ExcelImportExport
 
 			mpd.TaskNumberCheck = row[1].ToString();
 			mpd.MaintenanceManual = row[3].ToString();
-			mpd.Description = "_1";
 
 			#endregion
 
