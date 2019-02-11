@@ -184,7 +184,7 @@ namespace SmartCore.DtoHelper
 				FuelCapacity = aircraftDto.FuelCapacity,
 				MaxCruiseAltitude = aircraftDto.MaxCruiseAltitude,
 				MaxLandingWeight = aircraftDto.MaxLandingWeight ?? default(double),
-				MaxPayloadWeight = aircraftDto.MaxLandingWeight ?? default(double),
+				MaxPayloadWeight = aircraftDto.MaxPayloadWeight ?? default(double),
 				MaxTakeOffCrossWeight = aircraftDto.MaxTakeOffCrossWeight ?? default(double),
 				MaxTaxiWeight = aircraftDto.MaxTaxiWeight ?? default(double),
 				MaxZeroFuelWeight = aircraftDto.MaxZeroFuelWeight ?? default(double),
