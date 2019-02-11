@@ -24,42 +24,7 @@ namespace SmartCore.Tests.ExcelImportExport
 	[TestClass]
 	public class ImportMpdTaskCardTest
 	{
-		[TestMethod]
-		public void ImportTaskCard()
-		{
-			var env = GetEnviroment();
 
-			var aircraftCore = new AircraftsCore(env.Loader, env.NewKeeper, null);
-			var itemRelationCore = new ItemsRelationsDataAccess(env);
-			var maintenanceCore = new MaintenanceCore(env, env.NewLoader, env.NewKeeper, itemRelationCore , aircraftCore);
-
-			var aircraft = env.NewLoader.GetObject<AircraftDTO,Aircraft>(new Filter("ItemId", 2332));
-
-			var mpdList = maintenanceCore.GetMaintenanceDirectives(aircraft);
-
-			var d = new DirectoryInfo(@"D:\123\LY-AWD TC");
-			var files = d.GetFiles();
-			foreach (var mpd in mpdList)
-			{
-				var file = files.FirstOrDefault(f => f.Name.Replace(".pdf", "") == mpd.TaskCardNumber);
-				if (file != null)
-				{
-					var _fileData = UsefulMethods.GetByteArrayFromFile(file.FullName);
-					var attachedFile = new AttachedFile
-					{
-						FileData = _fileData,
-						FileName = file.Name,
-						FileSize = _fileData.Length
-					};
-					mpd.TaskCardNumberFile = attachedFile;
-					env.NewKeeper.Save(mpd);
-				}
-				else
-				{
-					Trace.WriteLine(mpd);
-				}
-			}
-		}
 
 		[TestMethod]
 		public void Test()
@@ -205,7 +170,7 @@ namespace SmartCore.Tests.ExcelImportExport
 		private CasEnvironment GetEnviroment()
 		{
 			var cas = new CasEnvironment();
-			cas.Connect("92.47.31.254:45617", "casadmin", "casadmin001", "ScatDBTest");
+			cas.Connect("91.213.233.139:45617", "casadmin", "casadmin001", "ScatDBTest");
 			DbTypes.CasEnvironment = cas;
 			cas.NewLoader.FirstLoad();
 

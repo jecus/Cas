@@ -471,7 +471,7 @@ namespace SmartCore.Entities.General
 
         #region public string IDNumber { get; set; }
         [Filter("Id ¹:", Order = 4)]
-        [TableColumnAttribute("IdNumber")]
+        //[TableColumnAttribute("IdNumber")]
         public string IdNumber { get; set; }
         #endregion
 
