@@ -299,6 +299,106 @@ namespace SmartCore.Tests.ExcelImportExport
 		}
 
 		[TestMethod]
+		public void ImportMaintenanceDirectives757()
+		{
+			var env = GetEnviroment();
+
+			var aircraftCore = new AircraftsCore(env.Loader, env.NewKeeper, env.NewLoader);
+			var itemRelationCore = new ItemsRelationsDataAccess(env);
+			var componentCore = new ComponentCore(env, env.Loader, env.NewLoader, env.NewKeeper, aircraftCore, itemRelationCore);
+			var mpdCore = new MaintenanceCore(env, env.NewLoader, env.NewKeeper, itemRelationCore, aircraftCore);
+
+			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\MPD\757\SYS.xlsx");
+
+			aircraftCore.LoadAllAircrafts();
+			var aircraft = aircraftCore.GetAircraftById(2341);
+
+			var bd = componentCore.GetAicraftBaseComponents(aircraft.ItemId, BaseComponentType.Frame.ItemId).FirstOrDefault();
+			var ata = env.NewLoader.GetObjectListAll<ATAChapterDTO, AtaChapter>();
+
+			var mpds = mpdCore.GetMaintenanceDirectives(aircraft);
+
+			foreach (DataTable table in ds.Tables)
+			{
+				foreach (DataRow row in table.Rows)
+				{
+					if (string.IsNullOrEmpty(row[0].ToString()))
+						continue;
+
+					MaintenanceDirective find;
+					var finds = mpds
+						.Where(i => i.TaskNumberCheck.ToLower().Trim().Equals(row[0].ToString().ToLower().Trim()))
+						.OrderBy(i => i.PerformanceRecords.Count > 0)
+						.ToList();
+
+					//Такой колхоз сделан потому что бывает что mpd две с одинаковым названием
+					var flag = false;
+
+
+					find = finds.FirstOrDefault();
+
+					MaintenanceDirective mpd;
+
+					if (find != null)
+					{
+						mpd = find;
+						finds.Remove(find);
+					}
+					else
+					{
+						mpd = new MaintenanceDirective()
+						{
+							ParentBaseComponent = bd,
+							HiddenRemarks = "NEW",
+						};
+						flag = true;
+					}
+
+					//SYSTEMS AND POWERPLANT MAINTENA
+					mpd.Program = MaintenanceDirectiveProgramType.SystemsAndPowerPlants;
+					mpd.MpdRef = "SYSTEMS AND POWERPLANT MAINTENA";
+
+
+					mpd.TaskNumberCheck = row[0].ToString();
+					mpd.MaintenanceManual = row[1].ToString();
+
+					if (!string.IsNullOrEmpty(row[2].ToString()))
+						mpd.Category = MpdCategory.GetItemById(Convert.ToInt32(row[2].ToString().Trim()));
+
+					mpd.Zone = row[6].ToString();
+					mpd.Access = row[7].ToString();
+
+					var apl = row[8].ToString();
+					if (apl.Contains("ALL"))
+					{
+						mpd.IsApplicability = true;
+					}
+
+					mpd.Description = row[11].ToString();
+
+
+					if (flag)
+						mpd.HiddenRemarks = "NEW";
+
+					if (mpd.TaskNumberCheck.Length > 2)
+					{
+						var shortName = mpd.TaskNumberCheck.Substring(0, 2);
+						mpd.ATAChapter = ata.FirstOrDefault(a => a.ShortName.Equals(shortName));
+					}
+
+					mpd.MPDTaskNumber = "D622N011";
+					mpd.IsOperatorTask = false;
+					mpd.MpdRevisionDate = new DateTime(2019, 1, 20);
+					mpd.Threshold.EffectiveDate = new DateTime(2018, 9, 6);
+					mpd.ScheduleRevisionDate = new DateTime(2018, 9, 6);
+					mpd.ScheduleRevisionNum = "3";
+					mpd.ScheduleRef = "MP SCAT/B757/AMP/14/R03";
+					env.Keeper.Save(mpd);
+				}
+			}
+		}
+
+		[TestMethod]
 		public void ImportTaskCard()
 		{
 			var env = GetEnviroment();
@@ -334,7 +434,6 @@ namespace SmartCore.Tests.ExcelImportExport
 				}
 			}
 		}
-
 
 		private void SetupCRJ(MaintenanceDirective mpd, DataRow row, IList<AtaChapter> ata, bool isNew)
 		{
@@ -406,9 +505,6 @@ namespace SmartCore.Tests.ExcelImportExport
 
 			if (isNew)
 				mpd.HiddenRemarks = "NEW";
-
-			//TODO: потом убрать!!!!!!!!!!!!!!
-			mpd.Remarks = mpd.MpdRef;
 
 			if (mpd.TaskNumberCheck.Length > 2)
 			{
