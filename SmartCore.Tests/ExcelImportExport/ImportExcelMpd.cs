@@ -308,10 +308,10 @@ namespace SmartCore.Tests.ExcelImportExport
 			var componentCore = new ComponentCore(env, env.Loader, env.NewLoader, env.NewKeeper, aircraftCore, itemRelationCore);
 			var mpdCore = new MaintenanceCore(env, env.NewLoader, env.NewKeeper, itemRelationCore, aircraftCore);
 
-			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\MPD\757\SYS.xlsx");
+			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\111\b57xx\zona.xlsx");
 
 			aircraftCore.LoadAllAircrafts();
-			var aircraft = aircraftCore.GetAircraftById(2341);
+			var aircraft = aircraftCore.GetAircraftById(2336);
 
 			var bd = componentCore.GetAicraftBaseComponents(aircraft.ItemId, BaseComponentType.Frame.ItemId).FirstOrDefault();
 			var ata = env.NewLoader.GetObjectListAll<ATAChapterDTO, AtaChapter>();
@@ -325,24 +325,17 @@ namespace SmartCore.Tests.ExcelImportExport
 					if (string.IsNullOrEmpty(row[0].ToString()))
 						continue;
 
-					MaintenanceDirective find;
-					var finds = mpds
-						.Where(i => i.TaskNumberCheck.ToLower().Trim().Equals(row[0].ToString().ToLower().Trim()))
-						.OrderBy(i => i.PerformanceRecords.Count > 0)
-						.ToList();
+                    MaintenanceDirective find = mpds.FirstOrDefault(i => i.TaskNumberCheck.ToLower().Trim().Equals(row[0].ToString().ToLower().Trim()));
 
-					//Такой колхоз сделан потому что бывает что mpd две с одинаковым названием
-					var flag = false;
+                    //Такой колхоз сделан потому что бывает что mpd две с одинаковым названием
+                    var flag = false;
 
-
-					find = finds.FirstOrDefault();
 
 					MaintenanceDirective mpd;
 
 					if (find != null)
 					{
 						mpd = find;
-						finds.Remove(find);
 					}
 					else
 					{
@@ -354,30 +347,98 @@ namespace SmartCore.Tests.ExcelImportExport
 						flag = true;
 					}
 
-					//SYSTEMS AND POWERPLANT MAINTENA
-					mpd.Program = MaintenanceDirectiveProgramType.SystemsAndPowerPlants;
-					mpd.MpdRef = "SYSTEMS AND POWERPLANT MAINTENA";
-
-
+					
 					mpd.TaskNumberCheck = row[0].ToString();
 					mpd.MaintenanceManual = row[1].ToString();
 
-					if (!string.IsNullOrEmpty(row[2].ToString()))
-						mpd.Category = MpdCategory.GetItemById(Convert.ToInt32(row[2].ToString().Trim()));
 
-					mpd.Zone = row[6].ToString();
-					mpd.Access = row[7].ToString();
+                    #region SYSTEMS AND POWERPLANT MAINTENA
 
-					var apl = row[8].ToString();
-					if (apl.Contains("ALL"))
-					{
-						mpd.IsApplicability = true;
-					}
+                    //mpd.Program = MaintenanceDirectiveProgramType.SystemsAndPowerPlants;
+                    //mpd.MpdRef = "SYSTEMS AND POWERPLANT MAINTENA";
 
-					mpd.Description = row[11].ToString();
+                    //if (!string.IsNullOrEmpty(row[2].ToString()))
+                    //{
+                    //    int res;
+                    //    if (int.TryParse(row[2].ToString(), out res))
+                    //        mpd.Category = MpdCategory.GetItemById(res);
+                    //}
 
+                    //mpd.Zone = row[6].ToString();
+                    //mpd.Access = row[7].ToString();
 
-					if (flag)
+                    //if (!string.IsNullOrEmpty(row[10].ToString()))
+                    //{
+                    //    double mhr;
+                    //    if (double.TryParse(row[10].ToString(), out mhr))
+                    //        mpd.ManHours = mhr;
+                    //}
+
+                    //var apl = row[8].ToString();
+                    //if (apl.Contains("ALL"))
+                    //{
+                    //    mpd.IsApplicability = true;
+                    //}
+
+                    //mpd.Description = row[11].ToString();
+
+                    #endregion
+
+                    #region STRUCTURAL MAINTENANCE REQUIREM
+
+                    //mpd.Program = MaintenanceDirectiveProgramType.StructuresMaintenance;
+                    //mpd.MpdRef = "STRUCTURAL MAINTENANCE REQUIREM";
+
+                    //if (!string.IsNullOrEmpty(row[9].ToString()))
+                    //{
+                    //    double mhr;
+                    //    if (double.TryParse(row[9].ToString(), out mhr))
+                    //        mpd.ManHours = mhr;
+                    //}
+
+                    //if (!string.IsNullOrEmpty(row[2].ToString()))
+                    //    mpd.ProgramIndicator = MaintenanceDirectiveProgramIndicator.Items
+                    //        .FirstOrDefault(i => i.ShortName.Contains(row[2].ToString()));
+
+                    //mpd.Zone = row[3].ToString();
+                    //mpd.Access = row[4].ToString();
+
+                    //var apl = row[7].ToString();
+                    //if (apl.Contains("ALL"))
+                    //{
+                    //    mpd.IsApplicability = true;
+                    //}
+
+                    //mpd.Description = row[10].ToString();
+
+                    #endregion
+
+                    #region ZONAL INSPECTION PROGRAM
+
+                    //mpd.Program = MaintenanceDirectiveProgramType.StructuresMaintenance;
+                    //mpd.MpdRef = "ZONAL INSPECTION PROGRAM";
+
+                    //if (!string.IsNullOrEmpty(row[8].ToString()))
+                    //{
+                    //    double mhr;
+                    //    if (double.TryParse(row[8].ToString(), out mhr))
+                    //        mpd.ManHours = mhr;
+                    //}
+
+                    //mpd.Zone = row[2].ToString();
+                    //mpd.Access = row[3].ToString();
+
+                    //var apl = row[6].ToString();
+                    //if (apl.Contains("ALL"))
+                    //{
+                    //    mpd.IsApplicability = true;
+                    //}
+
+                    //mpd.Description = row[9].ToString();
+
+                    #endregion
+
+                    if (flag)
 						mpd.HiddenRemarks = "NEW";
 
 					if (mpd.TaskNumberCheck.Length > 2)
@@ -386,7 +447,7 @@ namespace SmartCore.Tests.ExcelImportExport
 						mpd.ATAChapter = ata.FirstOrDefault(a => a.ShortName.Equals(shortName));
 					}
 
-					mpd.MPDTaskNumber = "D622N011";
+					mpd.MPDTaskNumber = "D622N001";
 					mpd.IsOperatorTask = false;
 					mpd.MpdRevisionDate = new DateTime(2019, 1, 20);
 					mpd.Threshold.EffectiveDate = new DateTime(2018, 9, 6);
@@ -657,7 +718,7 @@ namespace SmartCore.Tests.ExcelImportExport
 				mpd.ATAChapter = ata.FirstOrDefault(a => a.ShortName.Equals(shortName));
 			}
 
-			mpd.MPDTaskNumber = "D622N011";
+			mpd.MPDTaskNumber = "D622N001";
 			mpd.IsOperatorTask = false;
 			mpd.MpdRevisionDate = new DateTime(2019, 1, 20);
 			mpd.Threshold.EffectiveDate = new DateTime(2018, 9, 6);
