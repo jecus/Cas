@@ -399,6 +399,126 @@ namespace SmartCore.Tests.ExcelImportExport
 		}
 
 		[TestMethod]
+		public void ImportMaintenanceDirectives757Total()
+		{
+			var env = GetEnviroment();
+
+			var aircraftCore = new AircraftsCore(env.Loader, env.NewKeeper, env.NewLoader);
+			var itemRelationCore = new ItemsRelationsDataAccess(env);
+			var componentCore = new ComponentCore(env, env.Loader, env.NewLoader, env.NewKeeper, aircraftCore, itemRelationCore);
+			var mpdCore = new MaintenanceCore(env, env.NewLoader, env.NewKeeper, itemRelationCore, aircraftCore);
+
+			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\MPD\CRJ\2.2.xlsx");
+
+			aircraftCore.LoadAllAircrafts();
+			var aircraft = aircraftCore.GetAircraftById(1);
+
+			var bd = componentCore.GetAicraftBaseComponents(aircraft.ItemId, BaseComponentType.Frame.ItemId).FirstOrDefault();
+			var ata = env.NewLoader.GetObjectListAll<ATAChapterDTO, AtaChapter>();
+
+			var mpds = mpdCore.GetMaintenanceDirectives(aircraft);
+
+			foreach (DataTable table in ds.Tables)
+			{
+				foreach (DataRow row in table.Rows)
+				{
+
+					if (string.IsNullOrEmpty(row[0].ToString()))
+						continue;
+
+					MaintenanceDirective find;
+					var finds = mpds
+						.Where(i => i.TaskNumberCheck.ToLower().Trim().Equals(row[0].ToString().ToLower().Trim()))
+						.OrderBy(i => i.PerformanceRecords.Count > 0)
+						.ToList();
+
+					//Такой колхоз сделан потому что бывает что mpd две с одинаковым названием
+					var flag = false;
+
+
+					find = finds.FirstOrDefault();
+
+					MaintenanceDirective mpd;
+
+					if (find != null)
+					{
+						mpd = find;
+						finds.Remove(find);
+					}
+					else
+					{
+						mpd = new MaintenanceDirective()
+						{
+							ParentBaseComponent = bd,
+							HiddenRemarks = "NEW",
+						};
+						flag = true;
+					}
+
+					Setup757Total(mpd, row, ata, flag);
+
+
+					var taskCards = row[2].ToString().Split(new string[] { "\n" }, StringSplitOptions.None);
+					var counter = 1;
+					if (taskCards.Count() > 1)
+					{
+						foreach (var taskCard in taskCards)
+						{
+							if (string.IsNullOrEmpty(taskCard))
+								continue;
+
+
+							if (counter == 1)
+							{
+								mpd.TaskNumberCheck = $"{row[0]} ({counter})";
+								mpd.TaskCardNumber = taskCard;
+
+								//env.Keeper.Save(mpd);
+								counter++;
+							}
+							else
+							{
+								var mpdExist = finds.FirstOrDefault();
+								if (mpdExist != null)
+								{
+									Setup757Total(mpdExist, row, ata, flag);
+									mpdExist.TaskNumberCheck = $"{row[0]} ({counter})";
+									mpdExist.TaskCardNumber = taskCard;
+
+									//env.Keeper.Save(mpdExist);
+									finds.Remove(mpdExist);
+								}
+								else
+								{
+									var newMpd = mpd.GetCopyUnsaved();
+									Setup757Total(newMpd, row, ata, flag);
+									newMpd.ParentBaseComponent = bd;
+									newMpd.TaskNumberCheck = $"{row[0]} ({counter})";
+									newMpd.TaskCardNumber = taskCard;
+
+									//env.Keeper.Save(newMpd);
+
+									foreach (var record in mpd.PerformanceRecords)
+									{
+										var newRec = record.GetCopyUnsaved();
+										newRec.ParentId = newMpd.ItemId;
+										//env.Keeper.Save(newRec);
+									}
+								}
+								counter++;
+							}
+						}
+					}
+					else
+					{
+						mpd.TaskCardNumber = row[2].ToString();
+						//env.Keeper.Save(mpd);
+					}
+				}
+			}
+		}
+
+		[TestMethod]
 		public void ImportTaskCard()
 		{
 			var env = GetEnviroment();
@@ -520,6 +640,31 @@ namespace SmartCore.Tests.ExcelImportExport
 			mpd.ScheduleRevisionNum = "0";
 			mpd.MpdRevisionNum = "38";
 			mpd.ScheduleRef = "MP SCAT/CRJ/AMP/I4/R00";
+		}
+
+		private void Setup757Total(MaintenanceDirective mpd, DataRow row, IList<AtaChapter> ata, bool isNew)
+		{
+			mpd.TaskNumberCheck = row[0].ToString();
+			mpd.MpdRevisionNum = row[1].ToString();
+			mpd.Remarks = row[3].ToString();
+
+			if (isNew)
+				mpd.HiddenRemarks = "NEW";
+
+			if (mpd.TaskNumberCheck.Length > 2)
+			{
+				var shortName = mpd.TaskNumberCheck.Substring(0, 2);
+				mpd.ATAChapter = ata.FirstOrDefault(a => a.ShortName.Equals(shortName));
+			}
+
+			mpd.MPDTaskNumber = "D622N011";
+			mpd.IsOperatorTask = false;
+			mpd.MpdRevisionDate = new DateTime(2019, 1, 20);
+			mpd.Threshold.EffectiveDate = new DateTime(2018, 9, 6);
+			mpd.ScheduleRevisionDate = new DateTime(2018, 9, 6);
+			mpd.ScheduleRevisionNum = "3";
+			mpd.ScheduleRef = "MP SCAT/B757/AMP/14/R03";
+
 		}
 
 		private CasEnvironment GetEnviroment()
