@@ -308,7 +308,7 @@ namespace SmartCore.Tests.ExcelImportExport
 			var componentCore = new ComponentCore(env, env.Loader, env.NewLoader, env.NewKeeper, aircraftCore, itemRelationCore);
 			var mpdCore = new MaintenanceCore(env, env.NewLoader, env.NewKeeper, itemRelationCore, aircraftCore);
 
-			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\111\b57xx\zona.xlsx");
+			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\MPD\757\SYS.xlsx");
 
 			aircraftCore.LoadAllAircrafts();
 			var aircraft = aircraftCore.GetAircraftById(2336);
@@ -364,81 +364,81 @@ namespace SmartCore.Tests.ExcelImportExport
                     //        mpd.Category = MpdCategory.GetItemById(res);
                     //}
 
-                    //mpd.Zone = row[6].ToString();
-                    //mpd.Access = row[7].ToString();
+                    //mpd.Zone = row[6].ToString().Replace("\n", " ");
+                    //mpd.Access = row[7].ToString().Replace("\n", " ");
 
-                    //if (!string.IsNullOrEmpty(row[10].ToString()))
-                    //{
-                    //    double mhr;
-                    //    if (double.TryParse(row[10].ToString(), out mhr))
-                    //        mpd.ManHours = mhr;
-                    //}
+					//if (!string.IsNullOrEmpty(row[10].ToString()))
+					//{
+					//    double mhr;
+					//    if (double.TryParse(row[10].ToString(), out mhr))
+					//        mpd.ManHours = mhr;
+					//}
 
-                    //var apl = row[8].ToString();
-                    //if (apl.Contains("ALL"))
-                    //{
-                    //    mpd.IsApplicability = true;
-                    //}
+					//var apl = row[8].ToString();
+					//if (apl.Contains("ALL"))
+					//{
+					//    mpd.IsApplicability = true;
+					//}
 
-                    //mpd.Description = row[11].ToString();
+					//mpd.Description = row[11].ToString();
 
-                    #endregion
+					#endregion
 
-                    #region STRUCTURAL MAINTENANCE REQUIREM
+					#region STRUCTURAL MAINTENANCE REQUIREM
 
-                    //mpd.Program = MaintenanceDirectiveProgramType.StructuresMaintenance;
-                    //mpd.MpdRef = "STRUCTURAL MAINTENANCE REQUIREM";
+					//mpd.Program = MaintenanceDirectiveProgramType.StructuresMaintenance;
+					//mpd.MpdRef = "STRUCTURAL MAINTENANCE REQUIREM";
 
-                    //if (!string.IsNullOrEmpty(row[9].ToString()))
-                    //{
-                    //    double mhr;
-                    //    if (double.TryParse(row[9].ToString(), out mhr))
-                    //        mpd.ManHours = mhr;
-                    //}
+					//if (!string.IsNullOrEmpty(row[9].ToString()))
+					//{
+					//    double mhr;
+					//    if (double.TryParse(row[9].ToString(), out mhr))
+					//        mpd.ManHours = mhr;
+					//}
 
-                    //if (!string.IsNullOrEmpty(row[2].ToString()))
-                    //    mpd.ProgramIndicator = MaintenanceDirectiveProgramIndicator.Items
-                    //        .FirstOrDefault(i => i.ShortName.Contains(row[2].ToString()));
+					//if (!string.IsNullOrEmpty(row[2].ToString()))
+					//    mpd.ProgramIndicator = MaintenanceDirectiveProgramIndicator.Items
+					//        .FirstOrDefault(i => i.ShortName.Contains(row[2].ToString()));
 
-                    //mpd.Zone = row[3].ToString();
-                    //mpd.Access = row[4].ToString();
+					//mpd.Zone = row[3].ToString().Replace("\n", " ");
+					//mpd.Access = row[4].ToString().Replace("\n", " ");
 
-                    //var apl = row[7].ToString();
-                    //if (apl.Contains("ALL"))
-                    //{
-                    //    mpd.IsApplicability = true;
-                    //}
+					//var apl = row[7].ToString();
+					//if (apl.Contains("ALL"))
+					//{
+					//    mpd.IsApplicability = true;
+					//}
 
-                    //mpd.Description = row[10].ToString();
+					//mpd.Description = row[10].ToString();
 
-                    #endregion
+					#endregion
 
-                    #region ZONAL INSPECTION PROGRAM
+					#region ZONAL INSPECTION PROGRAM
 
-                    //mpd.Program = MaintenanceDirectiveProgramType.StructuresMaintenance;
-                    //mpd.MpdRef = "ZONAL INSPECTION PROGRAM";
+					//mpd.Program = MaintenanceDirectiveProgramType.StructuresMaintenance;
+					//mpd.MpdRef = "ZONAL INSPECTION PROGRAM";
 
-                    //if (!string.IsNullOrEmpty(row[8].ToString()))
-                    //{
-                    //    double mhr;
-                    //    if (double.TryParse(row[8].ToString(), out mhr))
-                    //        mpd.ManHours = mhr;
-                    //}
+					//if (!string.IsNullOrEmpty(row[8].ToString()))
+					//{
+					//    double mhr;
+					//    if (double.TryParse(row[8].ToString(), out mhr))
+					//        mpd.ManHours = mhr;
+					//}
 
-                    //mpd.Zone = row[2].ToString();
-                    //mpd.Access = row[3].ToString();
+					//mpd.Zone = row[2].ToString().Replace("\n", " ");
+					//mpd.Access = row[3].ToString().Replace("\n", " ");
 
-                    //var apl = row[6].ToString();
-                    //if (apl.Contains("ALL"))
-                    //{
-                    //    mpd.IsApplicability = true;
-                    //}
+					//var apl = row[6].ToString();
+					//if (apl.Contains("ALL"))
+					//{
+					//    mpd.IsApplicability = true;
+					//}
 
-                    //mpd.Description = row[9].ToString();
+					//mpd.Description = row[9].ToString();
 
-                    #endregion
+					#endregion
 
-                    if (flag)
+					if (flag)
 						mpd.HiddenRemarks = "NEW";
 
 					if (mpd.TaskNumberCheck.Length > 2)
@@ -454,7 +454,7 @@ namespace SmartCore.Tests.ExcelImportExport
 					mpd.ScheduleRevisionDate = new DateTime(2018, 9, 6);
 					mpd.ScheduleRevisionNum = "3";
 					mpd.ScheduleRef = "MP SCAT/B757/AMP/14/R03";
-					env.Keeper.Save(mpd);
+					//env.Keeper.Save(mpd);
 				}
 			}
 		}
@@ -469,10 +469,10 @@ namespace SmartCore.Tests.ExcelImportExport
 			var componentCore = new ComponentCore(env, env.Loader, env.NewLoader, env.NewKeeper, aircraftCore, itemRelationCore);
 			var mpdCore = new MaintenanceCore(env, env.NewLoader, env.NewKeeper, itemRelationCore, aircraftCore);
 
-			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\MPD\CRJ\2.2.xlsx");
+			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\MPD\757\Total.xlsx");
 
 			aircraftCore.LoadAllAircrafts();
-			var aircraft = aircraftCore.GetAircraftById(1);
+			var aircraft = aircraftCore.GetAircraftById(2336);
 
 			var bd = componentCore.GetAicraftBaseComponents(aircraft.ItemId, BaseComponentType.Frame.ItemId).FirstOrDefault();
 			var ata = env.NewLoader.GetObjectListAll<ATAChapterDTO, AtaChapter>();
@@ -546,7 +546,7 @@ namespace SmartCore.Tests.ExcelImportExport
 									mpdExist.TaskNumberCheck = $"{row[0]} ({counter})";
 									mpdExist.TaskCardNumber = taskCard;
 
-									//env.Keeper.Save(mpdExist);
+									env.Keeper.Save(mpdExist);
 									finds.Remove(mpdExist);
 								}
 								else
@@ -557,13 +557,13 @@ namespace SmartCore.Tests.ExcelImportExport
 									newMpd.TaskNumberCheck = $"{row[0]} ({counter})";
 									newMpd.TaskCardNumber = taskCard;
 
-									//env.Keeper.Save(newMpd);
+									env.Keeper.Save(newMpd);
 
 									foreach (var record in mpd.PerformanceRecords)
 									{
 										var newRec = record.GetCopyUnsaved();
 										newRec.ParentId = newMpd.ItemId;
-										//env.Keeper.Save(newRec);
+										env.Keeper.Save(newRec);
 									}
 								}
 								counter++;
@@ -573,7 +573,7 @@ namespace SmartCore.Tests.ExcelImportExport
 					else
 					{
 						mpd.TaskCardNumber = row[2].ToString();
-						//env.Keeper.Save(mpd);
+						env.Keeper.Save(mpd);
 					}
 				}
 			}
