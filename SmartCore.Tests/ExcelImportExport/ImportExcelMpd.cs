@@ -580,6 +580,50 @@ namespace SmartCore.Tests.ExcelImportExport
 		}
 
 		[TestMethod]
+		public void ImportMaintenanceDirectives757TotalFinish()
+		{
+			var env = GetEnviroment();
+
+			var aircraftCore = new AircraftsCore(env.Loader, env.NewKeeper, env.NewLoader);
+			var itemRelationCore = new ItemsRelationsDataAccess(env);
+			var componentCore = new ComponentCore(env, env.Loader, env.NewLoader, env.NewKeeper, aircraftCore,
+				itemRelationCore);
+			var mpdCore = new MaintenanceCore(env, env.NewLoader, env.NewKeeper, itemRelationCore, aircraftCore);
+
+			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\MPD\757\Total.xlsx");
+
+			aircraftCore.LoadAllAircrafts();
+			var aircraft = aircraftCore.GetAircraftById(2336);
+
+			var mpds = mpdCore.GetMaintenanceDirectives(aircraft);
+
+			foreach (DataTable table in ds.Tables)
+			{
+				foreach (DataRow row in table.Rows)
+				{
+					if (string.IsNullOrEmpty(row[0].ToString()))
+						continue;
+
+					var taskCards = row[2].ToString().Split(new string[] { "\n" }, StringSplitOptions.None);
+
+					foreach (var card in taskCards)
+					{
+						var finds = mpds
+							.Where(i => i.TaskCardNumber.ToLower().Trim().Equals(card.ToLower().Trim()))
+							.OrderBy(i => i.PerformanceRecords.Count > 0)
+							.ToList();
+
+						foreach (var mpd in finds)
+						{
+							mpd.TaskNumberCheck = row[0].ToString();
+							env.NewKeeper.Save(mpd);
+						}
+					}
+				}
+			}
+		}
+
+		[TestMethod]
 		public void ImportTaskCard()
 		{
 			var env = GetEnviroment();
