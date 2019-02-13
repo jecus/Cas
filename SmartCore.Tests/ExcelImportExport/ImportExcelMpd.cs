@@ -534,7 +534,7 @@ namespace SmartCore.Tests.ExcelImportExport
 								mpd.TaskNumberCheck = $"{row[0]} ({counter})";
 								mpd.TaskCardNumber = taskCard;
 
-								//env.Keeper.Save(mpd);
+								env.Keeper.Save(mpd);
 								counter++;
 							}
 							else
