@@ -94,7 +94,7 @@ namespace SmartCore.Documents
 					filters.AddRange(new[]
 					{
 						new Filter("ParentTypeId",parent.SmartCoreObjectType.ItemId),
-						new Filter("ParentID ",parent.ItemId)
+						new Filter("ParentID",parent.ItemId)
 					});
 				}
 				else
