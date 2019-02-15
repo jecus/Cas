@@ -554,8 +554,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
             directive.Applicability = Applicability;
 
 	        if (checkBoxIsApplicability.Checked)
-		        directive.Applicability = directive.Applicability.Replace("APL", "");
-	        else directive.Applicability = directive.Applicability.Replace("N/A", "");
+		        directive.Applicability = directive.Applicability.Replace("APL", "").TrimStart();
+	        else directive.Applicability = directive.Applicability.Replace("N/A", "").TrimStart();
 
 			directive.Description = Subject;
             directive.Remarks = Remarks;

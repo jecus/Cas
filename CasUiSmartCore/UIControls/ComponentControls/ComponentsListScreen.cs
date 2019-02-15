@@ -34,6 +34,7 @@ using SmartCore.Filters;
 using SmartCore.Purchase;
 using Component = SmartCore.Entities.General.Accessory.Component;
 using ComponentCollection = SmartCore.Entities.Collections.ComponentCollection;
+using FilterType = EFCore.Attributte.FilterType;
 
 namespace CAS.UI.UIControls.ComponentControls
 {
@@ -959,152 +960,6 @@ namespace CAS.UI.UIControls.ComponentControls
                             .Select(cd => cd.ParentComponent));
                 }
 
-                //if (DirectiveSource is Operator)
-                //{
-                //    Operator op = (Operator)DirectiveSource;
-
-                //    baseDetailCollection =
-                //            new BaseDetailCollection(GlobalObjects.CasEnvironment.GetBaseDetails(op));
-                //    detailCollection.AddRange(GlobalObjects.CasEnvironment.Loader.GetOperatorComponents(op).ToArray());
-
-                //    //////////////////////////////////////////////////////
-                //    //   проверка на компоненты ожидающие перемещения   //
-                //    //////////////////////////////////////////////////////
-                //    //Detail[] waitRemovedDetails =
-                //    //detailCollection.GetWaitRemoveConfirmDetails(currentStore);
-                //    //foreach (Detail detail in waitRemovedDetails)
-                //    //{
-                //    //    _waitRemoveConfirmDetails.Add(detail);
-                //    //    _waitRemoveConfirmTransfers.Add(detail.TransferRecords.Last);
-                //    //}
-                //    //////////////////////////////////////////////////////
-                //    //   проверка на установленные базовые компоненты   //
-                //    //////////////////////////////////////////////////////
-                //    IEnumerable<BaseDetail> lastInstalledBaseDetails =
-                //        GlobalObjects.CasEnvironment.BaseDetails.GetLastInstalledDetailsOn(op);
-                //    foreach (BaseDetail baseDetail in lastInstalledBaseDetails)
-                //    {
-                //        _installedDetails.Add(baseDetail);
-                //        _installedTransfers.Add(baseDetail.TransferRecords.GetLast());
-
-                //        //удаление данного компонента из коллекции
-                //        //т.к. его отображать не нужно
-                //        baseDetailCollection.Remove(baseDetail);
-                //    }
-
-                //    //////////////////////////////////////////////////////
-                //    //     проверка на удаленные базовые компоненты     //
-                //    //////////////////////////////////////////////////////
-                //    //TransferRecord[] removedBaseDetailTransfers =
-                //    //    GlobalObjects.CasEnvironment.Loader.GetLastTransferRecordsFrom(CurrentStore,
-                //    //                                                                   SmartCoreType.BaseDetail).ToArray();
-                //    //foreach (TransferRecord record in removedBaseDetailTransfers)
-                //    //{
-                //    //    //загрузка и БД детали, которой пренадлежит данная запись о перемещении
-                //    //    BaseDetail bd = GlobalObjects.CasEnvironment.BaseDetails.GetItemById(record.ParentId);
-
-                //    //    if (record.DODR)
-                //    //    {
-                //    //        //если перемещение подтверждено, то деталь записывается в "перемещенные"
-                //    //        //окна "TransferedDetails"
-                //    //        if (_removedDetails.CompareAndAdd(bd)) _removedTransfers.Add(record);
-                //    //    }
-                //    //    else
-                //    //    {
-                //    //        //если перемещение не подтверждено, то деталь записывается в 
-                //    //        //"ожидабщие подтверждения" окна "TransferedDetails"
-                //    //        if (_waitRemoveConfirmDetails.CompareAndAdd(bd)) _waitRemoveConfirmTransfers.Add(record);
-                //    //    }
-                //    //}
-
-                //    //////////////////////////////////////////////////////
-                //    //     проверка на установленные компоненты         //
-                //    //////////////////////////////////////////////////////
-                //    IEnumerable<Detail> lastInstalledDetails =
-                //        detailCollection.GetLastInstalledDetailsOn(op);
-                //    foreach (Detail detail in lastInstalledDetails)
-                //    {
-                //        _installedDetails.Add(detail);
-                //        _installedTransfers.Add(detail.TransferRecords.GetLast());
-
-                //        //удаление данного компонента из коллекции
-                //        //т.к. его отображать не нужно
-                //        detailCollection.Remove(detail);
-                //    }
-                //    //////////////////////////////////////////////////////
-                //    //     добавление компонентов базовых агрегатов     //
-                //    //////////////////////////////////////////////////////
-                //    if (baseDetailCollection.Count > 0)
-                //        detailCollection.AddRange(GlobalObjects.CasEnvironment.Loader.GetComponents(baseDetailCollection.ToList()).ToArray());
-                //    //////////////////////////////////////////////////////
-                //    //        проверка на удаленные компоненты          //
-                //    //////////////////////////////////////////////////////
-
-                //    ////извлечение из базы данных всех записей о перемещении
-                //    ////компонентов с данного базового агрегата
-                //    //TransferRecord[] records =
-                //    //    GlobalObjects.CasEnvironment.Loader.GetLastTransferRecordsFrom(CurrentStore).ToArray();
-
-                //    //foreach (TransferRecord record in records)
-                //    //{
-                //    //    //загрузка и БД детали, которой пренадлежит данная запись о перемещении
-                //    //    Detail detail = GlobalObjects.CasEnvironment.Loader.GetDetailById(record.ParentId);
-
-                //    //    if (detail == null)
-                //    //        continue;
-
-                //    //    if (record.DODR)
-                //    //    {
-                //    //        //если перемещение подтверждено, то деталь записывается в "перемещенные"
-                //    //        //окна "TransferedDetails"
-                //    //        if (_removedDetails.CompareAndAdd(detail)) _removedTransfers.Add(record);
-                //    //    }
-                //    //    else
-                //    //    {
-                //    //        //если перемещение не подтверждено, то деталь записывается в 
-                //    //        //"ожидабщие подтверждения" окна "TransferedDetails"
-                //    //        if (_waitRemoveConfirmDetails.CompareAndAdd(detail)) _waitRemoveConfirmTransfers.Add(record);
-                //    //    }
-                //    //}
-
-                //    //////////////////////////////////////////////////////
-                //    //   проверка на установленные базовые компоненты   //
-                //    //////////////////////////////////////////////////////
-                //    foreach (BaseDetail baseDetail in lastInstalledBaseDetails)
-                //    {
-                //        //удаление данного компонента из коллекции
-                //        //т.к. его отображать не нужно
-                //        _currentForecast.ForecastDatas.Remove(_currentForecast.GetForecastDataByBaseDetailId(baseDetail.ItemId));
-                //    }
-
-                //    GlobalObjects.CasEnvironment.Analyst.GetBaseDetailsAndDetailDirectives(_currentForecast);
-                //    resultCollection.AddRange(_currentForecast.BaseDetails.ToArray());
-
-                //    GlobalObjects.CasEnvironment.Analyst.GetComponentsAndDetailDirectives(_currentForecast);
-                //    DetailCollection forecastDetailCollection = new DetailCollection(_currentForecast.Components.ToArray());
-                //    //////////////////////////////////////////////////////
-                //    //     проверка на установленные компоненты         //
-                //    //////////////////////////////////////////////////////
-                //    lastInstalledDetails = forecastDetailCollection.GetLastInstalledDetailsOn(CurrentStore);
-                //    foreach (Detail detail in lastInstalledDetails)
-                //    {
-                //        //удаление данного компонента из коллекции
-                //        //т.к. его отображать не нужно
-                //        forecastDetailCollection.Remove(detail);
-                //    }
-
-                //    foreach (BaseDetail baseDetail in lastInstalledBaseDetails)
-                //    {
-                //        IEnumerable<Detail> baseDetailComponents =
-                //            forecastDetailCollection.Where(
-                //                detail => detail.TransferRecords.GetLast().DestinationObjectId == baseDetail.ItemId
-                //                       && detail.TransferRecords.GetLast().DestinationObjectType == baseDetail.SmartCoreObjectType
-                //                       && detail.TransferRecords.GetLast().DODR == false).ToArray();
-                //        foreach (Detail detail in baseDetailComponents)
-                //            forecastDetailCollection.Remove(detail);
-                //    }
-                //    resultCollection.AddRange(forecastDetailCollection.ToArray());
-                //}
             }
 
             AnimatedThreadWorker.ReportProgress(50, "filter components");
@@ -1123,9 +978,30 @@ namespace CAS.UI.UIControls.ComponentControls
 
             AnimatedThreadWorker.ReportProgress(70, "calculation of components");
 
-            foreach (Component detail in _initialDirectiveArray)
+            var lldData = GlobalObjects.CasEnvironment.Loader
+	            .GetObjectList<ComponentLLPCategoryData>(new ICommonFilter[]
+	            {
+					new CommonFilter<int>(ComponentLLPCategoryData.ComponentIdProperty, SmartCore.Filters.FilterType.In, _initialDirectiveArray.Select(i => i.ItemId).ToArray()), 
+	            });
+
+            var llpchangeRec = GlobalObjects.CasEnvironment.Loader
+	            .GetObjectList<ComponentLLPCategoryChangeRecord>(new ICommonFilter[]
+	            {
+		            new CommonFilter<int>(ComponentLLPCategoryChangeRecord.ParentIdProperty, SmartCore.Filters.FilterType.In, _initialDirectiveArray.Select(i => i.ItemId).ToArray()),
+	            });
+
+			foreach (Component detail in _initialDirectiveArray)
             {
-                GlobalObjects.PerformanceCalculator.GetNextPerformance(detail);
+				if(_currentBaseComponent != null)
+					detail.ParentAircraftId = _currentBaseComponent.ParentAircraftId;
+
+				detail.LLPData.Clear();
+				detail.LLPData.AddRange(lldData.Where(i => i.ComponentId == detail.ItemId));
+
+				detail.ChangeLLPCategoryRecords.Clear();
+				detail.ChangeLLPCategoryRecords.AddRange(llpchangeRec.Where(i => i.ParentId == detail.ItemId));
+
+				GlobalObjects.PerformanceCalculator.GetNextPerformance(detail);
                 _preResultDirectiveArray.Add(detail);
 
                 foreach (ComponentDirective detailDirective in detail.ComponentDirectives)

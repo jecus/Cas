@@ -51,7 +51,7 @@ namespace SmartCore.Entities.Collections
 		/// <returns></returns>
 		public ComponentLLPCategoryData GetItemByCatagory(LLPLifeLimitCategory llpLifeLimitCategory)
         {
-            return Items.Where(llp => llp.ParentCategory.ItemId == llpLifeLimitCategory.ItemId).FirstOrDefault();
+            return Items.FirstOrDefault(llp => llp.ParentCategory.Category.ToLower().Trim().Equals(llpLifeLimitCategory.Category.ToLower().Trim()));
         }
         #endregion
 

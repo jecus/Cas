@@ -135,7 +135,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
 
             extendableRichContainer.Caption = baseComponentTypeString + baseComponentModelString + engineThrustString
                               //+ " P/N:" + _currentComponent.PartNumber
-                              //+ " S/N:" + _currentComponent.SerialNumber
+                              + " S/N:" + _currentComponent.SerialNumber
                               + " M/P:" + _currentComponent.MaintenanceControlProcess.ShortName
                               + " Pos:" + _currentComponent.TransferRecords.GetLast().Position;
 

@@ -128,7 +128,8 @@ namespace CAS.UI.UIControls.AircraftsControls
                 string baseDetailModelString = apu.Model != null
                                                    ? " " + apu.Model
                                                    : "";
-                extendableRichContainerAPU.Caption = baseDetailTypeString + baseDetailModelString + " P/N:" + apu.PartNumber
+                extendableRichContainerAPU.Caption = baseDetailTypeString + baseDetailModelString 
+                                  //+ " P/N:" + apu.PartNumber
                                   + " S/N:" + apu.SerialNumber
                                   + " M/P:" + apu.MaintenanceControlProcess.ShortName
                                   + " Pos:" + apu.TransferRecords.GetLast().Position;

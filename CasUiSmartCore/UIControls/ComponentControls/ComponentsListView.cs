@@ -249,7 +249,7 @@ namespace CAS.UI.UIControls.ComponentControls
                 Component componentItem = (Component)item;
                 approx = componentItem.NextPerformanceDate;
                 next = componentItem.NextPerformanceSource;
-                remains = componentItem.Remains;
+                remains = componentItem.LLPCategories ? componentItem.LLPRemains:componentItem.Remains;
 	            ata = componentItem.Model != null ? componentItem.Model.ATAChapter : componentItem.ATAChapter;
                 partNumber = componentItem.PartNumber;
                 description = componentItem.Model != null ? componentItem.Model.Description : componentItem.Description;
