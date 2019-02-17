@@ -587,7 +587,7 @@ namespace CASReports.Builders
                     ? GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength((BaseComponent)component) 
                     : GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(component);
                 
-                remarks = directive.LastPerformance != null ? directive.LastPerformance.Remarks : component.Remarks;
+                remarks = directive.Remarks;
                 workType = directive.DirectiveType.ToString();
                 repeat = directive.Threshold.RepeatInterval;
                 lifeLimit = component.LifeLimit;
@@ -600,7 +600,7 @@ namespace CASReports.Builders
                 {
                     ampReference = directive.MaintenanceDirective.TaskNumberCheck;
                 }
-                if(nextPerformanceSource != null)
+                if(nextPerformanceSource != null && directive.Status != DirectiveStatus.Closed)
                 {
                     nextComplianceDate = directive.NextPerformanceDate != null
                                      ? ((DateTime) directive.NextPerformanceDate).ToString(
@@ -624,7 +624,7 @@ namespace CASReports.Builders
                 else nextPerformanceSource = Lifelength.Null;
                 
                 
-                if(directive.LastPerformance != null)
+                if(directive.LastPerformance != null && directive.Status != DirectiveStatus.Closed)
                 {
                     lastPerformance = directive.LastPerformance;
                     lastComplianceDate =
@@ -653,6 +653,8 @@ namespace CASReports.Builders
                 }
 
                 condition = directive.Condition.ToString();
+				
+
             }
             //Если объект является деталью или базовой деталью с директивами
             //то надо возвратится, т.к. данные по детали/базовой детали будут
@@ -678,7 +680,7 @@ namespace CASReports.Builders
             lifeLimitRemain.Resemble(lifeLimit);
             
             //string status = "";
-            //if (directive.Status == DirectiveStatus.Closed) status = "C";
+            //if (.Status == DirectiveStatus.Closed) status = "C";
             //if (directive.Status == DirectiveStatus.Open) status = "O";
             //if (directive.Status == DirectiveStatus.Repetative) status = "R";
             //if (directive.Status == DirectiveStatus.NotApplicable) status = "N/A";

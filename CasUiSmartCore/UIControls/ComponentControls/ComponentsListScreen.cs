@@ -1493,7 +1493,8 @@ namespace CAS.UI.UIControls.ComponentControls
                 {
                     string message;
                     
-                    if (!GlobalObjects.WorkPackageCore.AddToWorkPakage(wpItems, wp.ItemId, _currentAircraft, out message))
+                    if (!GlobalObjects.WorkPackageCore.AddToWorkPakage(wpItems, wp.ItemId,
+	                    _currentAircraft ?? GlobalObjects.AircraftsCore.GetAircraftById(_currentBaseComponent.ParentAircraftId), out message))
                     {
                         MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
                                         MessageBoxButtons.OK, MessageBoxIcon.Error);

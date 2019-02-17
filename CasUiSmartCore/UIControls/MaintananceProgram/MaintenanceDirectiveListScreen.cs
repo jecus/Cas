@@ -1027,7 +1027,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
             {
 	            _maintenanceDirectiveReportBuilderLitAVia.DateAsOf = DateTime.Today.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
 				_maintenanceDirectiveReportBuilderLitAVia.ReportedAircraft = CurrentAircraft;
-	            _maintenanceDirectiveReportBuilderLitAVia.AddDirectives(_resultDirectiveArray);
+	            _maintenanceDirectiveReportBuilderLitAVia.AddDirectives(_resultDirectiveArray.OrderBy(i => i.TaskNumberCheck));
 	            e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "SS LA";
 	            e.RequestedEntity = new ReportScreen(_maintenanceDirectiveReportBuilderLitAVia);
             }
