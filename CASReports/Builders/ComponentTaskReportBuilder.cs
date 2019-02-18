@@ -275,7 +275,7 @@ namespace CASReports.Builders
             }
             var manufactureDate = _reportedComponent.ManufactureDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
             var deliveryDate = _reportedComponent.DeliveryDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
-            var status = _reportedComponent.Serviceable ? "Serviceable" : "Unserviceable";
+            var status = _reportedComponent.ComponentStatus;
             var sinceNewHours = reportAircraftLifeLenght.Hours != null ? (int)reportAircraftLifeLenght.Hours : 0;
             var sinceNewCycles = reportAircraftLifeLenght.Cycles != null ? (int)reportAircraftLifeLenght.Cycles : 0;
             var sinceNewDays = reportAircraftLifeLenght.Days != null ? reportAircraftLifeLenght.Days.ToString() : "";
@@ -376,7 +376,7 @@ namespace CASReports.Builders
                                                                      _reportedComponent.Suppliers != null
                                                                         ? _reportedComponent.Suppliers.ToString()
                                                                         : "",
-                                                                     status,
+                                                                     status.ToString(),
                                                                      _reportedComponent.Cost,
                                                                      _reportedComponent.CostOverhaul,
                                                                      _reportedComponent.CostServiceable,

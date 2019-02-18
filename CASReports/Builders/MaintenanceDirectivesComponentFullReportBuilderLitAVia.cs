@@ -329,7 +329,7 @@ namespace CASReports.Builders
 
 	        var reportApuLifeLenght = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(apu);
 
-			var manufactureDate = _reportedAircraft.ManufactureDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
+			var manufactureDate = _reportedAircraft.Model?.FullName;
             var serialNumber = _reportedAircraft.SerialNumber;
             var model = _reportedAircraft.Model.ShortName;
 	        var sinceNewCycles = reportAircraftLifeLenght.Cycles != null ? (int)reportAircraftLifeLenght.Cycles : 0;
@@ -432,10 +432,10 @@ namespace CASReports.Builders
 		        reportedDirective.Threshold.RepeatInterval != null ? reportedDirective.Threshold.RepeatInterval.Days?.ToString() : "*",
 				"",
 				"",
-				"",
+		        reportedDirective.LastPerformance != null ? SmartCore.Auxiliary.Convert.GetDateFormat(reportedDirective.LastPerformance.RecordDate) : "*",
 		        reportedDirective.NextPerformance != null ? reportedDirective.NextPerformance.PerformanceSource.Hours.ToString() : "*",
 		        reportedDirective.NextPerformance != null ? reportedDirective.NextPerformance.PerformanceSource.Cycles.ToString() : "*",
-		        reportedDirective.NextPerformance != null ? reportedDirective.NextPerformance.PerformanceSource.Days.ToString() : "*",
+		        reportedDirective.NextPerformance != null ? SmartCore.Auxiliary.Convert.GetDateFormat(reportedDirective.NextPerformance.PerformanceDate.Value) : "*",
 		        reportedDirective.Remains != null ? reportedDirective.Remains.Hours.ToString() : "*",
 		        reportedDirective.Remains != null ? reportedDirective.Remains.Cycles.ToString() : "*",
 		        reportedDirective.Remains != null ? reportedDirective.Remains.Days.ToString() : "*",
