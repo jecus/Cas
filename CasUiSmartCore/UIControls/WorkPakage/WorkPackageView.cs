@@ -323,10 +323,18 @@ namespace CAS.UI.UIControls.WorkPakage
             if(item is NextPerformance)
             {
                 NextPerformance np = (NextPerformance) item;
+
                 double manHours = np.Parent is IEngineeringDirective ? ((IEngineeringDirective)np.Parent).ManHours : 0;
                 double cost = np.Parent is IEngineeringDirective ? ((IEngineeringDirective)np.Parent).Cost : 0;
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = np.ATAChapter.ToString(), Tag = np.ATAChapter });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = np.Title, Tag = np.Title });
+                if (np.Parent is ComponentDirective)
+                {
+	                var cd = np.Parent as ComponentDirective;
+	                subItems.Add(new ListViewItem.ListViewSubItem { Text = $"{cd.MaintenanceDirective?.TaskCardNumber} {np.Title}", Tag = np.Title });
+				}
+                else subItems.Add(new ListViewItem.ListViewSubItem { Text = np.Title, Tag = np.Title });
+
+                
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = np.Description, Tag = np.Description });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = np.KitsToString, Tag = np.Kits.Count });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = np.PerformanceSource.ToString(), Tag = np.PerformanceSource });

@@ -657,7 +657,7 @@ namespace CAS.UI.UIControls.WorkPakage
                         componentDirectives.Remove(componentDirective);
                     }
 
-                    var row = new DataGridViewRow { Tag = item };
+					var row = new DataGridViewRow { Tag = item };
 
 					var discCell = new DataGridViewTextBoxCell();
 					var taskCardCell = new DataGridViewTextBoxCell();
@@ -704,8 +704,33 @@ namespace CAS.UI.UIControls.WorkPakage
                     var d = item.ParentComponent;
 					var row = new DataGridViewRow { Tag = item };
 
+					string taskCardCellValue;
+					Color taskCardCellBackColor = Color.White;
+					var mpd = item.MaintenanceDirective;
+					if (string.IsNullOrEmpty(mpd?.TaskCardNumber) && mpd?.TaskCardNumberFile == null)
+					{
+						taskCardCellValue = "Not set Task Card file.";
+						taskCardCellBackColor = Color.Red;
+					}
+					else if (!string.IsNullOrEmpty(mpd?.TaskCardNumber) && mpd?.TaskCardNumberFile == null)
+					{
+						taskCardCellValue = string.Format("Not set Task Card file. (Task Card No {0}.)", mpd.TaskCardNumber);
+						taskCardCellBackColor = Color.Red;
+					}
+					else if (string.IsNullOrEmpty(mpd?.TaskCardNumber) && mpd?.TaskCardNumberFile != null)
+					{
+						taskCardCellValue = string.Format("Not set Task Card name. (File name {0}.)", mpd.TaskCardNumberFile.FileName);
+						taskCardCellBackColor = Color.Red;
+					}
+					else taskCardCellValue = mpd.TaskCardNumber;
+
+
 					var discCell = new DataGridViewTextBoxCell();
-					var taskCardCell = new DataGridViewTextBoxCell();
+					DataGridViewCell taskCardCell = new DataGridViewTextBoxCell
+					{
+						Value = taskCardCellValue,
+						Style = { BackColor = taskCardCellBackColor },
+					};
 					var compntCell = new DataGridViewCheckBoxCell { Value = item.PrintInWorkPackage };
 					var kitCell = new DataGridViewTextBoxCell();
                     discCell.Value = "CCO:" + item.DirectiveType + " for " + d.Description + " " + d.PartNumber + " " + d.SerialNumber;
@@ -1491,6 +1516,9 @@ namespace CAS.UI.UIControls.WorkPakage
 			foreach (var item in componentDirectives)
 			{
 				componentChangeOrderNum++;
+
+				if(item.MaintenanceDirective?.TaskCardNumberFile != null)
+					tempFiles.Add(item.MaintenanceDirective?.TaskCardNumberFile);
 				var d = item.ParentComponent;
 				summarySheetItems.Add(new[]
 											{"CCO No:" + componentChangeOrderNum,
