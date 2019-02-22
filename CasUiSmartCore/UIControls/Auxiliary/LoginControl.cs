@@ -3,6 +3,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
@@ -14,6 +16,7 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using Microsoft.SqlServer.Management.Common;
+using Newtonsoft.Json;
 using SmartCore.Entities;
 using SmartCore.Management;
 using SmartCore.Management.Settings;
@@ -111,11 +114,10 @@ namespace CAS.UI.UIControls.Auxiliary
             buttonExit.Text = "Exit";
             
             ConnectingFinished();
-            SaveSettings();
+            //SaveSettings();
 
             if (Connected != null)
                 Connected(this, new EventArgs());
-            //displayer.Finish();
         }
         #endregion
 
@@ -829,8 +831,10 @@ namespace CAS.UI.UIControls.Auxiliary
             //networkObserver.CasServerFound += NetworkObserverCasServerFound;
             //networkObserver.FindServers();
 
-            LoadSettings();
-            _casServerFound = true;
+            //LoadSettings();
+            LoadJsonSettings();
+
+			_casServerFound = true;
             if (comboBoxServerName.Items.Count == 0)
             {
                 panelConnectionSettingsContainer.Visible = true;
@@ -839,11 +843,25 @@ namespace CAS.UI.UIControls.Auxiliary
             buttonConnect.Enabled = true;
         }
 
-        #endregion
+		#endregion
 
-        #region private void NetworkObserverCasServerFound(string database)
+		private void LoadJsonSettings()
+		{
+			string exePath = Path.GetDirectoryName(Application.ExecutablePath);
+			var path = Path.Combine(exePath, "AppSettings.json");
+			var json = File.ReadAllText(path);
+			var settings = JsonConvert.DeserializeObject<JsonSettings>(json);
+			if (settings != null)
+			{
+				comboBoxServerName.Items.Clear();
+				comboBoxServerName.Items.AddRange(settings.ConnectionStrings.Select(i => i.Key).ToArray());
+			}
 
-        private void NetworkObserverCasServerFound(string database)
+		}
+
+		#region private void NetworkObserverCasServerFound(string database)
+
+		private void NetworkObserverCasServerFound(string database)
         {
             if (InvokeRequired)
             {

@@ -2073,7 +2073,7 @@ namespace CAS.UI.UIControls.ComponentControls
                                                 Forecast = _currentForecast
                                             };
 #endif
-                        llpBuilder.AddDirectives(_directivesViewer.GetItemsArray());
+                        llpBuilder.AddDirectives(_directivesViewer.GetItemsArray().Cast<Component>().OrderBy(i => Convert.ToInt32(i.Position)).ToArray());
                         e.RequestedEntity = new ReportScreen(llpBuilder);
                     }
                     else
