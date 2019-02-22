@@ -354,6 +354,7 @@
     <Compile Include="Builders\ComponentChangeReportBuilder.cs" />
     <Compile Include="Builders\AirFleetBuilder.cs" />
     <Compile Include="Builders\ComponentAMReportBuilder.cs" />
+    <Compile Include="Builders\ComponentTaskReportBuilderNew.cs" />
     <Compile Include="Builders\DirectivesReportBuilderLitAVIAEng.cs" />
     <Compile Include="Builders\DirectivesReportBuilderLitAVIA.cs" />
     <Compile Include="Builders\DirectivesReportBuilder.cs" />
@@ -972,6 +973,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DirectivesListReportKAC.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\DirectiveTaskReportNew.cs">
+      <DependentUpon>DirectiveTaskReportNew.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="ReportTemplates\DirectiveTaskReport.cs">
       <AutoGen>True</AutoGen>
@@ -2191,6 +2198,10 @@
     <EmbeddedResource Include="ReportTemplates\DirectivesListReportKAC.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DirectivesListReportKAC.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\DirectiveTaskReportNew.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DirectiveTaskReportNew.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportTemplates\DirectiveTaskReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

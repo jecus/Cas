@@ -33,6 +33,7 @@ namespace CAS.UI.UIControls.ComponentControls
         private bool _needReload;
         private ContextMenuStrip _buttonPrintMenuStrip;
         private ToolStripMenuItem _itemPrintReportRecords;
+        private ToolStripMenuItem _itemPrintReportEngineRecords;
         private ToolStripMenuItem _itemPrintReportHistory;
 
         private BaseComponentHeaderControl _baseComponentHeaderControl;
@@ -114,6 +115,7 @@ namespace CAS.UI.UIControls.ComponentControls
 
 	        if (_itemPrintReportHistory != null) _itemPrintReportHistory.Dispose();
 	        if (_itemPrintReportRecords != null) _itemPrintReportRecords.Dispose();
+	        if (_itemPrintReportEngineRecords != null) _itemPrintReportEngineRecords.Dispose();
 	        if (_buttonPrintMenuStrip != null) _buttonPrintMenuStrip.Dispose();
 
 	        _currentComponent = null;
@@ -562,8 +564,9 @@ namespace CAS.UI.UIControls.ComponentControls
 
             _buttonPrintMenuStrip = new ContextMenuStrip();
             _itemPrintReportRecords = new ToolStripMenuItem { Text = "Records" };
+            _itemPrintReportEngineRecords = new ToolStripMenuItem { Text = "Engine Records" };
             _itemPrintReportHistory = new ToolStripMenuItem { Text = "Compliance history" };
-            _buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { _itemPrintReportRecords, _itemPrintReportHistory });
+            _buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { _itemPrintReportRecords, _itemPrintReportEngineRecords, _itemPrintReportHistory });
 
             ButtonPrintMenuStrip = _buttonPrintMenuStrip;
 
@@ -768,69 +771,117 @@ namespace CAS.UI.UIControls.ComponentControls
         #region private void HeaderControlPrintButtonDisplayerRequested(object sender, Interfaces.ReferenceEventArgs e)
         private void HeaderControlPrintButtonDisplayerRequested(object sender, Interfaces.ReferenceEventArgs e)
         {
-            BaseComponent baseComponent;
-            Operator reportedOperator;
-            var reportedDetail = _currentComponent;
-            var directiveList = new List<ComponentDirective>(_currentComponent.ComponentDirectives.ToArray());
-            if (_currentComponent is BaseComponent)
-            {
-                baseComponent = (BaseComponent)_currentComponent;
+	        BaseComponent baseComponent;
+	        Operator reportedOperator;
+	        var reportedDetail = _currentComponent;
+	        var directiveList = new List<ComponentDirective>(_currentComponent.ComponentDirectives.ToArray());
+	        if (_currentComponent is BaseComponent)
+	        {
+		        baseComponent = (BaseComponent)_currentComponent;
 
-	            var parentAircraft = GlobalObjects.AircraftsCore.GetAircraftById(baseComponent.ParentAircraftId);
-	            var parentStore = GlobalObjects.StoreCore.GetStoreById(baseComponent.ParentStoreId);
+		        var parentAircraft = GlobalObjects.AircraftsCore.GetAircraftById(baseComponent.ParentAircraftId);
+		        var parentStore = GlobalObjects.StoreCore.GetStoreById(baseComponent.ParentStoreId);
 
-				reportedOperator = parentAircraft != null
-                                       ? GlobalObjects.CasEnvironment.Operators.First(o => o.ItemId == parentAircraft.OperatorId)
-									   : parentStore.Operator;
+		        reportedOperator = parentAircraft != null
+			        ? GlobalObjects.CasEnvironment.Operators.First(o => o.ItemId == parentAircraft.OperatorId)
+			        : parentStore.Operator;
+	        }
+	        else
+	        {
+		        baseComponent = _currentComponent.ParentBaseComponent;//TODO:(Evgenii Babak) заменить на использование ComponentCore 
+		        if (baseComponent == null) return;
+
+		        var parentAircraft = GlobalObjects.AircraftsCore.GetAircraftById(baseComponent.ParentAircraftId);
+		        var parentStore = GlobalObjects.StoreCore.GetStoreById(baseComponent.ParentStoreId);
+
+		        reportedOperator = parentAircraft != null
+			        ? GlobalObjects.CasEnvironment.Operators.First(o => o.ItemId == parentAircraft.OperatorId)
+			        : parentStore.Operator;
+
+	        }
+
+	        var caption = $"{DestinationHelper.GetDestinationObjectString(baseComponent)}. Compliance List";
+
+			if (sender == _itemPrintReportEngineRecords)
+	        {
+		        var selection = "";
+		        var header = "";
+		        var trust = "";
+
+				if (baseComponent.BaseComponentType == BaseComponentType.Frame)
+		        {
+			        selection = "All";
+			        header = "FRAME";
+		        }
+
+		        if (baseComponent.BaseComponentType == BaseComponentType.LandingGear)
+		        {
+			        selection = baseComponent.TransferRecords.GetLast().Position;
+			        header = "LANDING GEAR";
+		        }
+
+		        if (baseComponent.BaseComponentType == BaseComponentType.Engine)
+		        {
+			        selection = BaseComponentType.Engine + " " + baseComponent.TransferRecords.GetLast().Position;
+			        header = "ENGINE";
+			        trust = $"Thrust: {baseComponent.Thrust}";
+		        }
+
+		        if (baseComponent.BaseComponentType == BaseComponentType.Apu)
+		        {
+			        selection = BaseComponentType.Apu.ToString();
+			        header = "APU";
+				}
+
+				var builder = new ComponentTasksReportBuilderNew(header, trust);
+		        e.DisplayerText = caption;
+		        e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+		        builder.DateAsOf = DateTime.Today.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
+		        builder.ReportedComponent = reportedDetail;
+		        builder.OperatorLogotype = reportedOperator.LogoTypeWhite;
+		        builder.FilterSelection = selection;
+		        builder.AddDirectives(directiveList.ToArray());
+		        builder.ForecastData = null;
+		        e.RequestedEntity = new ReportScreen(builder);
 			}
-            else
-            {
-                baseComponent = _currentComponent.ParentBaseComponent;//TODO:(Evgenii Babak) заменить на использование ComponentCore 
-				if (baseComponent == null) return;
+	        else
+	        {
+		       
 
-				var parentAircraft = GlobalObjects.AircraftsCore.GetAircraftById(baseComponent.ParentAircraftId);
-				var parentStore = GlobalObjects.StoreCore.GetStoreById(baseComponent.ParentStoreId);
+		        var builder = new ComponentTasksReportBuilder();
 
-				reportedOperator = parentAircraft != null
-                                       ? GlobalObjects.CasEnvironment.Operators.First(o => o.ItemId == parentAircraft.OperatorId)
-									   : parentStore.Operator;
+		        e.DisplayerText = caption;
+		        e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 
-			}
+		        builder.DateAsOf = DateTime.Today.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
+		        builder.ReportedComponent = reportedDetail;
+		        builder.OperatorLogotype = reportedOperator.LogoTypeWhite;
+		        if (baseComponent.BaseComponentType == BaseComponentType.Frame)
+		        {
+			        var selection = "All";
+			        builder.FilterSelection = selection;
+			        builder.AddDirectives(directiveList.ToArray());
+			        builder.ForecastData = null;
+			        e.RequestedEntity = new ReportScreen(builder);
+		        }
+		        else
+		        {
+			        var selection = "";
+			        if (baseComponent.BaseComponentType == BaseComponentType.LandingGear)
+				        selection = baseComponent.TransferRecords.GetLast().Position;
+			        if (baseComponent.BaseComponentType == BaseComponentType.Engine)
+				        selection = BaseComponentType.Engine + " " + baseComponent.TransferRecords.GetLast().Position;
+			        if (baseComponent.BaseComponentType == BaseComponentType.Apu)
+				        selection = BaseComponentType.Apu.ToString();
+			        builder.LifelengthAircraftSinceNew =
+				        GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(CurrentAircraft);
+			        builder.FilterSelection = selection;
+			        builder.AddDirectives(directiveList.ToArray());
+			        builder.ForecastData = null;
+			        e.RequestedEntity = new ReportScreen(builder);
+		        }
 
-            var caption = $"{DestinationHelper.GetDestinationObjectString(baseComponent)}. Compliance List";
- 
-			var builder = new ComponentTasksReportBuilder();
-
-            e.DisplayerText = caption;
-            e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-
-            builder.DateAsOf = DateTime.Today.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
-            builder.ReportedComponent = reportedDetail;
-            builder.OperatorLogotype = reportedOperator.LogoTypeWhite;
-            if (baseComponent.BaseComponentType == BaseComponentType.Frame)
-            {
-                var selection = "All";
-                builder.FilterSelection = selection;
-                builder.AddDirectives(directiveList.ToArray());
-                builder.ForecastData = null;
-                e.RequestedEntity = new ReportScreen(builder);
-            }
-            else
-            {
-                var selection = "";
-                if (baseComponent.BaseComponentType == BaseComponentType.LandingGear)
-                    selection = baseComponent.TransferRecords.GetLast().Position;
-                if (baseComponent.BaseComponentType == BaseComponentType.Engine)
-                    selection = BaseComponentType.Engine + " " + baseComponent.TransferRecords.GetLast().Position;
-                if (baseComponent.BaseComponentType == BaseComponentType.Apu)
-                    selection = BaseComponentType.Apu.ToString();
-                builder.LifelengthAircraftSinceNew =
-                    GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(CurrentAircraft);
-                builder.FilterSelection = selection;
-                builder.AddDirectives(directiveList.ToArray());
-                builder.ForecastData = null;
-                e.RequestedEntity = new ReportScreen(builder);
-            }
+			} 
         }
         #endregion
 

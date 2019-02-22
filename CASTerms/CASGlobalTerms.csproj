@@ -297,6 +297,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\x86\Debug\hasp_net_windows.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Management" />
@@ -306,6 +309,7 @@
   <ItemGroup>
     <Compile Include="GlobalObjects.cs" />
     <Compile Include="IndexAccessElementProvider.cs" />
+    <Compile Include="JsonSettings.cs" />
     <Compile Include="LicenseInformation.cs" />
     <Compile Include="LoginSettingsContainer.cs" />
     <Compile Include="LoginSettingsProvider.cs" />
@@ -338,6 +342,9 @@
       <Project>{48b63705-4573-4bb2-b04d-67a406b09ab6}</Project>
       <Name>SmartCore</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
