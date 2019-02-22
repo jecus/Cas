@@ -74,6 +74,7 @@ namespace CAS.UI.UIControls.Auxiliary
         private bool _isSimple = true;
         private string _topicId = "system_openning_system_login_types_of_authorization";
         private bool _casServerFound;
+        private JsonSettings _settings;
 
         #endregion
 
@@ -661,7 +662,7 @@ namespace CAS.UI.UIControls.Auxiliary
 			serverName = comboBoxServerName.Text;
 #endif
 
-			var settings = new ConnectionSettingsContainer(serverName, textBoxLogin.Text, textBoxPassword.Text, _isSimple);
+			var settings = new ConnectionSettingsContainer(_settings.ConnectionStrings[serverName], textBoxLogin.Text, textBoxPassword.Text, _isSimple);
             Connect(settings);
             //connectionThread = new Thread(Connect);
             //connectionThread.Start(settings);
@@ -711,14 +712,15 @@ namespace CAS.UI.UIControls.Auxiliary
                     authentication = AuthenticationType.SqlServer;
                 OnConnecting();
                 string message;
-                if (settings.ServerName.Split('@').Length >= 2)
-                {
-                    string serverName = settings.ServerName.Split('@')[0];
-                    string baseName = settings.ServerName.Split('@')[1];
+                //if (settings.ServerName.Split('@').Length >= 2)
+                //{
+                //    string serverName = settings.ServerName.Split('@')[0];
+                //    string baseName = settings.ServerName.Split('@')[1];
 
                     try
                     {
-                        GlobalObjects.CasEnvironment.Connect(serverName, settings.Username, settings.Password, baseName);
+                        //GlobalObjects.CasEnvironment.Connect(serverName, settings.Username, settings.Password, baseName);
+                        GlobalObjects.CasEnvironment.Connect(settings.ServerName, settings.Username, settings.Password, "");
                     }
                     catch (ConnectionFailureException ex)
                     {
@@ -750,11 +752,11 @@ namespace CAS.UI.UIControls.Auxiliary
                         _loadForm.Show();
                         backgroundWorker.RunWorkerAsync();
                     }
-                }
-                else
-                {
-                    OnFailed("");
-                }
+                //}
+                //else
+                //{
+                //    OnFailed("");
+                //}
             }
             else
             {
@@ -850,13 +852,22 @@ namespace CAS.UI.UIControls.Auxiliary
 			string exePath = Path.GetDirectoryName(Application.ExecutablePath);
 			var path = Path.Combine(exePath, "AppSettings.json");
 			var json = File.ReadAllText(path);
-			var settings = JsonConvert.DeserializeObject<JsonSettings>(json);
-			if (settings != null)
+			_settings = JsonConvert.DeserializeObject<JsonSettings>(json);
+
+			if (_settings != null)
 			{
 				comboBoxServerName.Items.Clear();
-				comboBoxServerName.Items.AddRange(settings.ConnectionStrings.Select(i => i.Key).ToArray());
+				comboBoxServerName.Items.AddRange(_settings.ConnectionStrings.Select(i => i.Key).ToArray());
+
+				if (_settings.LastInformation != null)
+				{
+					textBoxLogin.Text = _settings.LastInformation.Login;
+					comboBoxServerName.SelectedItem = _settings.LastInformation.Server;
+				}
 			}
 
+			comboBoxAuthentication.SelectedIndex = 0;
+			SetEnabled(true, _isSimple);
 		}
 
 		#region private void NetworkObserverCasServerFound(string database)
