@@ -290,9 +290,9 @@ namespace CASReports.Builders
             var sinceNewDays = reportAircraftLifeLenght.Days != null ? reportAircraftLifeLenght.Days.ToString() : "";
             
             var lifeLimit = _reportedComponent.LifeLimit;
-            var lifeLimitHours = lifeLimit.Hours != null ? lifeLimit.Hours.ToString() : "";
-			var lifeLimitCycles = lifeLimit.Cycles != null ? lifeLimit.Cycles.ToString() : "";
-			var lifeLimitDays = lifeLimit.Days != null ? lifeLimit.Days.ToString() : "";
+            var lifeLimitHours = lifeLimit.Hours != null && lifeLimit.Hours != 0 ? lifeLimit.Hours.ToString() : "";
+			var lifeLimitCycles = lifeLimit.Cycles != null && lifeLimit.Cycles != 0 ? lifeLimit.Cycles.ToString() : "";
+			var lifeLimitDays = lifeLimit.Days != null && lifeLimit.Days != 0 ? lifeLimit.Days.ToString() : "";
 			var remain = Lifelength.Null;
             if(!lifeLimit.IsNullOrZero())
             {
@@ -300,29 +300,29 @@ namespace CASReports.Builders
                 remain.Substract(reportAircraftLifeLenght); 
                 remain.Resemble(lifeLimit);
             }
-			var remainHours = remain.Hours != null ? remain.Hours.ToString() : "";
-			var remainCycles = remain.Cycles != null ? remain.Cycles.ToString() : "";
-			var remainDays = remain.Days != null ? remain.Days.ToString() : "";
+			var remainHours = remain.Hours != null && remain.Hours != 0 ? remain.Hours.ToString() : "";
+			var remainCycles = remain.Cycles != null && remain.Cycles != 0 ? remain.Cycles.ToString() : "";
+			var remainDays = remain.Days != null && remain.Days != 0 ? remain.Days.ToString() : "";
 			var onInstall = lastTransferRecord.OnLifelength;
 			var onInstallDate = installationDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
-			var onInstallHours = onInstall.Hours != null ? onInstall.Hours.ToString() : "";
-			var onInstallCycles = onInstall.Cycles != null ? onInstall.Cycles.ToString() : "";
-			var onInstallDays = onInstall.Days != null ? onInstall.Days.ToString() : "";
+			var onInstallHours = onInstall.Hours != null && onInstall.Hours != 0 ? onInstall.Hours.ToString() : "";
+			var onInstallCycles = onInstall.Cycles != null && onInstall.Cycles != 0 ? onInstall.Cycles.ToString() : "";
+			var onInstallDays = onInstall.Days != null && onInstall.Days != 0 ? onInstall.Days.ToString() : "";
 			var sinceInstall = new Lifelength(reportAircraftLifeLenght);
             sinceInstall.Substract(onInstall);
-			var sinceInstallHours = sinceInstall.Hours != null ? sinceInstall.Hours.ToString() : "";
-			var sinceInstallCycles = sinceInstall.Cycles != null ? sinceInstall.Cycles.ToString() : "";
-			var sinceInstallDays = sinceInstall.Days != null ? sinceInstall.Days.ToString() : "";
+			var sinceInstallHours = sinceInstall.Hours != null && sinceInstall.Hours != 0 ? sinceInstall.Hours.ToString() : "";
+			var sinceInstallCycles = sinceInstall.Cycles != null && sinceInstall.Cycles != 0 ? sinceInstall.Cycles.ToString() : "";
+			var sinceInstallDays = sinceInstall.Days != null && sinceInstall.Days != 0 ? sinceInstall.Days.ToString() : "";
 			var warranty = _reportedComponent.Warranty;
 			var warrantyRemain = new Lifelength(warranty);
             warrantyRemain.Substract(reportAircraftLifeLenght);
             warrantyRemain.Resemble(warranty);
-			var warrantyHours = warranty.Hours != null ? warranty.Hours.ToString() : "";
-			var warrantyCycles = warranty.Cycles != null ? warranty.Cycles.ToString() : "";
-			var warrantyDays = warranty.Days != null ? warranty.Days.ToString() : "";
-			var warrantyRemainHours = warrantyRemain.Hours != null ? warrantyRemain.Hours.ToString() : "";
-			var warrantyRemainCycles = warrantyRemain.Cycles != null ? warrantyRemain.Cycles.ToString() : "";
-			var warrantyRemainDays = warrantyRemain.Days != null ? warrantyRemain.Days.ToString() : "";
+			var warrantyHours = warranty.Hours != null && warranty.Hours != 0 ? warranty.Hours.ToString() : "";
+			var warrantyCycles = warranty.Cycles != null && warranty.Cycles != 0 ? warranty.Cycles.ToString() : "";
+			var warrantyDays = warranty.Days != null && warranty.Days != 0 ? warranty.Days.ToString() : "";
+			var warrantyRemainHours = warrantyRemain.Hours != null && warrantyRemain.Hours != 0 ? warrantyRemain.Hours.ToString() : "";
+			var warrantyRemainCycles = warrantyRemain.Cycles != null && warrantyRemain.Cycles != 0 ? warrantyRemain.Cycles.ToString() : "";
+			var warrantyRemainDays = warrantyRemain.Days != null && warrantyRemain.Days != 0 ? warrantyRemain.Days.ToString() : "";
             Lifelength aircraftOnInstall, aircraftCurrent = Lifelength.Null;
 			var aircraftOnInstallHours = "";
 			var aircraftOnInstallCycles = "";
@@ -587,9 +587,9 @@ namespace CASReports.Builders
                                                            lastCompliance.Hours ?? 0,
                                                            lastCompliance.Cycles ?? 0,
                                                            lastCompliance.ToStrings(),
-                                                           used.Days ?? 0,
-                                                           used.Hours ?? 0,
-                                                           used.Cycles ?? 0,
+                                                           sinceNewThreshold.Hours ?? 0,
+                                                           firstCompliance.Hours ?? 0,
+                                                           lastCompliance.Hours ?? 0,
                                                            nextComplianceDate,
                                                            nextCompliance.Hours ?? 0,
                                                            nextCompliance.Cycles ?? 0,
@@ -600,7 +600,7 @@ namespace CASReports.Builders
                                                            remain.ToStrings(),
                                                            condition,
                                                            detailDirective.ManHours,
-                                                           detailDirective.Cost,
+                                                           nextCompliance.Cycles ?? 0,
                                                            kits,
                                                            equipment,
                                                            detail.ATAChapter.ShortName,

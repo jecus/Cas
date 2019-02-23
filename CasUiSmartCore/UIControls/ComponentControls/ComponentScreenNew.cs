@@ -563,8 +563,8 @@ namespace CAS.UI.UIControls.ComponentControls
             #region ButtonPrintContextMenu
 
             _buttonPrintMenuStrip = new ContextMenuStrip();
-            _itemPrintReportRecords = new ToolStripMenuItem { Text = "Records" };
-            _itemPrintReportEngineRecords = new ToolStripMenuItem { Text = "Engine Records" };
+            _itemPrintReportRecords = new ToolStripMenuItem { Text = "Commercial" };
+            _itemPrintReportEngineRecords = new ToolStripMenuItem { Text = "Records" };
             _itemPrintReportHistory = new ToolStripMenuItem { Text = "Compliance history" };
             _buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { _itemPrintReportRecords, _itemPrintReportEngineRecords, _itemPrintReportHistory });
 

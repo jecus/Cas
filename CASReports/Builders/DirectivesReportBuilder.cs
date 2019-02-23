@@ -662,7 +662,7 @@ namespace CASReports.Builders
                                                            title,
                                                            references,
                                                            reportedDirective.WorkType.ToString(),
-                                                           reportedDirective.Status.ShortName,
+                                                           reportedDirective.Status.FullName,
                                                            effectivityDate,
                                                            sinceNewThreshold.Hours ?? 0,
                                                            sinceNewThreshold.Cycles ?? 0,
