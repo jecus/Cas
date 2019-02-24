@@ -348,6 +348,8 @@
     <Compile Include="Builders\AvailableComponentsBuilder.cs" />
     <Compile Include="Builders\ComplianceListBuilder.cs" />
     <Compile Include="Builders\ComponentAMLLPReportBuilder.cs" />
+    <Compile Include="Builders\ComponentLLPReportBuilderNewLDG.cs" />
+    <Compile Include="Builders\ComponentLLPReportBuilderNew.cs" />
     <Compile Include="Builders\ComponentStatusReportBuilder.cs" />
     <Compile Include="Builders\AvionicsInventoryStatusReportBuilder.cs" />
     <Compile Include="Builders\ComponentStatusOCCMReportBuilder.cs" />
@@ -877,6 +879,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ComponentChangeReport.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\ComponentListLLPReportLDG.cs">
+      <DependentUpon>ComponentListLLPReportLDG.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\ComponentListLLPReportAPU.cs">
+      <DependentUpon>ComponentListLLPReportAPU.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="ReportTemplates\ComponentListLLPReport.cs">
       <AutoGen>True</AutoGen>
@@ -2134,6 +2148,14 @@
     <EmbeddedResource Include="ReportTemplates\ComponentChangeReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ComponentChangeReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ComponentListLLPReportLDG.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComponentListLLPReportLDG.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ComponentListLLPReportAPU.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComponentListLLPReportAPU.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportTemplates\ComponentListLLPReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

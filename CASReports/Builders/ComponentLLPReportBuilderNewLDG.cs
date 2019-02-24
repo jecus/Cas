@@ -12,7 +12,7 @@ using TempUIExtentions;
 
 namespace CASReports.Builders
 {
-    public class ComponentLLPReportBuilder : AbstractReportBuilder
+    public class ComponentLLPReportBuilderNewLDG : AbstractReportBuilder
     {
 
         #region Fields
@@ -20,13 +20,12 @@ namespace CASReports.Builders
         private readonly LifelengthFormatter _lifelengthFormatter = new LifelengthFormatter();
         private Aircraft _reportedAircraft;
         private BaseComponent _reportedBaseComponent;
-        private List<Component> _reportedItems = new List<Component>();
+        private List<ComponentDirective> _reportedItems = new List<ComponentDirective>();
         private Forecast _forecast;
 
         private string _dateAsOf = "";
 
-        //readonly AllDirectiveFilter defaultFilter = new AllDirectiveFilter();
-        private string _reportTitle = "ENGINE LIFE LIMITED PARTS STATUS";
+        public string _reportTitle = "";
         private string _filterSelection;
         private byte[] _operatorLogotype;
 
@@ -92,7 +91,7 @@ namespace CASReports.Builders
         /// <summary>
         /// Директивы включаемые в отчет
         /// </summary>
-        public List<Component> ReportedDirectives
+        public List<ComponentDirective> ReportedDirectives
         {
             get
             {
@@ -214,6 +213,8 @@ namespace CASReports.Builders
 
         #region Methods
 
+
+
         #region public void AddDirectives(object[] directives)
 
         public void AddDirectives(object [] directives)
@@ -221,7 +222,7 @@ namespace CASReports.Builders
             _reportedItems.Clear();
             foreach (object t in directives)
             {
-                if (t is Component) _reportedItems.Add((Component)t);
+                if (t is ComponentDirective) _reportedItems.Add((ComponentDirective)t);
             }
         }
 
@@ -235,7 +236,7 @@ namespace CASReports.Builders
         /// <returns>Построенный отчет</returns>
         public override object GenerateReport()
         {
-            ComponentListLLPReport report = new ComponentListLLPReport();
+	        var report = new ComponentListLLPReportLDG();
             report.SetDataSource(GenerateDataSet());
             return report;
         }
@@ -250,7 +251,7 @@ namespace CASReports.Builders
         /// <returns></returns>
         public virtual LLPDiskSheetDataSet GenerateDataSet()
         {
-            LLPDiskSheetDataSet dataset = new LLPDiskSheetDataSet();
+            var dataset = new LLPDiskSheetDataSet();
             AddAircraftToDataset(dataset);
             AddBaseDetailToDataset(dataset);
             AddDirectivesToDataSet(dataset);
@@ -269,18 +270,8 @@ namespace CASReports.Builders
         /// <param name="dataset">Таблица, в которую добавляются данные</param>
         protected virtual void AddDirectivesToDataSet(LLPDiskSheetDataSet dataset)
         {
-            /* List<String> colors = new List<string>();
-            for (int i = 0; i < HighlightCollection.Instance.Count; i++ )
-            {
-                colors.Add(HighlightCollection.Instance[i].Color.R.ToString()+" "+
-                            HighlightCollection.Instance[i].Color.G.ToString()+" "+
-                            HighlightCollection.Instance[i].Color.B.ToString());
-            }
-            MessageBox.Show(string.Join("\r\n",colors.ToArray()));*/
-            foreach (Component t in _reportedItems)
-            {
+            foreach (var t in _reportedItems)
                 AddDirectiveToDataset(t, dataset);
-            }
         }
 
         #endregion
@@ -484,47 +475,31 @@ namespace CASReports.Builders
 		/// </summary>
 		/// <param name="reportedComponent">Добавлямая директива</param>
 		/// <param name="destinationDataSet">Таблица, в которую добавляется элемент</param>
-		private void AddDirectiveToDataset(Component reportedComponent, LLPDiskSheetDataSet destinationDataSet)
+		private void AddDirectiveToDataset(ComponentDirective reportedComponent, LLPDiskSheetDataSet destinationDataSet)
         {
-            if (!reportedComponent.LLPMark || !reportedComponent.LLPCategories)return;
-            ComponentLLPCategoryData[] llpData = {
-                                                new ComponentLLPCategoryData(), new ComponentLLPCategoryData(),
-                                                new ComponentLLPCategoryData(), new ComponentLLPCategoryData()
-                                              };
-            //var total = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(reportedComponent);
-
-	        int i = 0;
-	        foreach (var data in reportedComponent.LLPData.Where(l => l.ParentCategory != LLPLifeLimitCategory.Unknown))
-	        {
-				llpData[i] = data;
-		        i++;
-	        }
-
-	        var a = llpData[0].LLPCurrent?.Cycles ?? 0;
-	        var b = llpData[1].LLPCurrent?.Cycles ?? 0;
-	        var c = llpData[2].LLPCurrent?.Cycles ?? 0;
-	        var d = llpData[3].LLPCurrent?.Cycles ?? 0;
-
-	        var totalCycle = a + b + c + d;
-
                 destinationDataSet.ItemsTable.AddItemsTableRow(reportedComponent.PartNumber,
                                                                reportedComponent.SerialNumber,
                                                                reportedComponent.Description,
-                                                               "",
-																totalCycle,
-															   llpData[0].LLPLifeLimit?.Cycles ?? 0,
-                                                               llpData[1].LLPLifeLimit?.Cycles ?? 0,
-                                                               llpData[2].LLPLifeLimit?.Cycles ?? 0,
-                                                               llpData[3].LLPLifeLimit?.Cycles ?? 0,
-	                llpData[0].LLPCurrent?.Cycles ?? 0,
-	                llpData[1].LLPCurrent?.Cycles ?? 0,
-	                llpData[2].LLPCurrent?.Cycles ?? 0,
-	                llpData[3].LLPCurrent?.Cycles ?? 0,
-															   llpData[0].Remain?.Cycles ?? 0,
-                                                               llpData[1].Remain?.Cycles ?? 0,
-                                                               llpData[2].Remain?.Cycles ?? 0,
-                                                               llpData[3].Remain?.Cycles ?? 0,
-                                                               reportedComponent.Condition.ToString(),"","","", "", "");
+                                                               GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength((BaseEntityObject)reportedComponent.ParentComponent).ToString(),
+																0,
+                                                               0,
+                                                               0,
+                                                               0,
+                                                               0,
+                                                               0,
+                                                               0,
+                                                               0,
+                                                               0,
+                                                               0,
+                                                               0,
+                                                               0,
+                                                               0,
+                                                               reportedComponent.Condition.ToString(),
+                                                               reportedComponent.ParentComponent.Position,
+                                                               reportedComponent.Remarks,
+                                                               reportedComponent.DirectiveType.FullName,
+                                                               reportedComponent.FirstPerformanceSinceNew?.Cycles.ToString(),
+                                                               "");
         }
 
         #endregion
@@ -593,18 +568,6 @@ namespace CASReports.Builders
 
         protected virtual void AddForecastToDataSet(LLPDiskSheetDataSet destinationDataSet)
         {
-            //string manufactureDate = UsefulMethods.NormalizeDate(ReportedBaseDetail.ManufactureDate);
-            //string sinceNewHours = "";// LifelengthFormatter.GetHoursData(ReportedBaseDetail.Limitation.ResourceSinceNew.Hours).Trim() + " hrs";
-            //string sinceNewCycles = "";//ReportedBaseDetail.Limitation.ResourceSinceNew.Cycles.ToString().Trim() + " cyc";
-            //string sinceOverhaulHours = "";// LifelengthFormatter.GetHoursData(ReportedBaseDetail.Limitation.ResourceSinceOverhaul.Hours).Trim() + " hrs";
-            //string sinceOverhaulCycles = "";//ReportedBaseDetail.Limitation.ResourceSinceOverhaul.Cycles.ToString().Trim() + " cyc";
-            //string sinceHotSectionInspectionHours = "";//LifelengthFormatter.GetHoursData(ReportedBaseDetail.Limitation.ResourceSinceHotSectionInspection.Hours).Trim() + " hrs";
-            //string sinceHotSectionInspectionCycles = "";//ReportedBaseDetail.Limitation.ResourceSinceHotSectionInspection.Cycles.ToString().Trim() + " cyc";
-            //string baseDetailType = "";
-            //if (ReportedBaseDetail.DetailType==DetailType.Engine)
-            //    baseDetailType = "Engine";
-            //else if (ReportedBaseDetail.DetailType == DetailType.Apu)
-            //    baseDetailType = "APU";
             double avgUtilizationCycles = _forecast != null ? _forecast.ForecastDatas[0].AverageUtilization.Cycles : 0;
             double avgUtilizationHours = _forecast != null ? _forecast.ForecastDatas[0].AverageUtilization.Hours : 0;
             string avgUtilizationType = _forecast != null

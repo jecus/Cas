@@ -89,6 +89,8 @@ namespace CAS.UI.UIControls.ComponentControls
 		private ContextMenuStrip _buttonPrintMenuStrip;
         private ToolStripMenuItem _itemPrintReportComponents;
         private ToolStripMenuItem _itemPrintReportLLP;
+        private ToolStripMenuItem _itemPrintReportLLPAPU;
+        private ToolStripMenuItem _itemPrintReportLLPLDG;
 	    private ToolStripMenuItem itemPrintReportMP;
 	    private ToolStripMenuItem itemPrintReportMPLLP;
 	    private ToolStripMenuItem itemPrintLitAvia;
@@ -1281,8 +1283,11 @@ namespace CAS.UI.UIControls.ComponentControls
 		    _buttonPrintMenuStrip = new ContextMenuStrip();
 		    _itemPrintReportComponents = new ToolStripMenuItem { Text = "Components" };
 		    _itemPrintReportLLP = new ToolStripMenuItem { Text = "LLP" };
+		    _itemPrintReportLLPAPU = new ToolStripMenuItem { Text = "LLP" };
+		    _itemPrintReportLLPLDG = new ToolStripMenuItem { Text = "LLP" };
 		    itemPrintReportMPLLP = new ToolStripMenuItem { Text = "MP LLP" };
 		    itemPrintReportMP = new ToolStripMenuItem { Text = "MP HT" };
+		    itemPrintLitAvia = new ToolStripMenuItem { Text = "SS Comp LA" };
 		    itemPrintLitAvia = new ToolStripMenuItem { Text = "SS Comp LA" };
 
 			if (_currentBaseComponent != null && _currentBaseComponent.BaseComponentType == BaseComponentType.Engine && _currentBaseComponent.LLPCategories)
@@ -1290,8 +1295,13 @@ namespace CAS.UI.UIControls.ComponentControls
 			    _buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { _itemPrintReportComponents, _itemPrintReportLLP, itemPrintReportMPLLP, itemPrintLitAvia });
 		    }
 		    else
-		    {
-			    _buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { _itemPrintReportComponents, itemPrintReportMP, itemPrintLitAvia });
+			{
+				if (_currentBaseComponent != null && (_currentBaseComponent.BaseComponentType == BaseComponentType.Apu))
+					_buttonPrintMenuStrip.Items.Add(_itemPrintReportLLPAPU);
+				else if (_currentBaseComponent != null && (_currentBaseComponent.BaseComponentType == BaseComponentType.LandingGear))
+					_buttonPrintMenuStrip.Items.Add(_itemPrintReportLLPLDG);
+
+				_buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { _itemPrintReportComponents, itemPrintReportMP, itemPrintLitAvia });
 			}
 
 		    ButtonPrintMenuStrip = _buttonPrintMenuStrip;
@@ -2088,7 +2098,7 @@ namespace CAS.UI.UIControls.ComponentControls
                                 Forecast = _currentForecast
                             };
 #else
-                            ComponentLLPReportBuilder llpBuilder = new ComponentLLPReportBuilder
+                            var llpBuilder = new ComponentLLPReportBuilder
                                                                        {
                                                                            FilterSelection = selection,
                                                                            ReportedBaseComponent = _currentBaseComponent,
@@ -2098,6 +2108,41 @@ namespace CAS.UI.UIControls.ComponentControls
                             llpBuilder.AddDirectives(_directivesViewer.GetItemsArray().OfType<Component>().Where(d => d.LLPMark).ToArray());
                             e.RequestedEntity = new ReportScreen(llpBuilder);
                         }
+						else if (sender == _itemPrintReportLLPAPU)
+                        {
+							var llpBuilder = new ComponentLLPReportBuilderNew
+							{
+								FilterSelection = selection,
+								ReportedBaseComponent = _currentBaseComponent,
+								Forecast = _currentForecast,
+								_reportTitle = "APU LIFE LIMITED PARTS STATUS"
+							};
+
+							llpBuilder.AddDirectives(_directivesViewer.GetItemsArray()
+								.OfType<Component>()
+								.Where(d => d.MaintenanceControlProcess == MaintenanceControlProcess.LLP && d.ComponentDirectives.Count > 0)
+								.Select(i => i.ComponentDirectives.FirstOrDefault())
+								.ToArray());
+							e.RequestedEntity = new ReportScreen(llpBuilder);
+						}
+                        else if (sender == _itemPrintReportLLPLDG)
+                        {
+	                        var llpBuilder = new ComponentLLPReportBuilderNewLDG
+							{
+		                        FilterSelection = selection,
+		                        ReportedBaseComponent = _currentBaseComponent,
+		                        Forecast = _currentForecast,
+		                        _reportTitle = "LANDING GEAR LLP STATUS"
+	                        };
+
+							llpBuilder.AddDirectives(_directivesViewer.GetItemsArray()
+								.OfType<Component>()
+								.Where(d => d.MaintenanceControlProcess == MaintenanceControlProcess.HT ||
+								            d.MaintenanceControlProcess == MaintenanceControlProcess.LLP && d.ComponentDirectives.Count > 0)
+								.Select(i => i.ComponentDirectives.FirstOrDefault())
+								.ToArray());
+							e.RequestedEntity = new ReportScreen(llpBuilder);
+						}
 						else
                         {
                             if(_currentBaseComponent.BaseComponentType == BaseComponentType.LandingGear)
