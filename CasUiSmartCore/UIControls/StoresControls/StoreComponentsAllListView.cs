@@ -478,7 +478,7 @@ namespace CAS.UI.UIControls.StoresControls
                 ata = (AtaChapter)GlobalObjects.CasEnvironment.GetDictionary<AtaChapter>().GetItemById(21);
             }
 
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = store.ToString(), Tag = store } ); 
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = store?.ToString() ?? "N/A", Tag = store } ); 
             subItems.Add(new ListViewItem.ListViewSubItem { Text = ata.ToString(), Tag = ata } ); 
             subItems.Add(new ListViewItem.ListViewSubItem { Text = partNumber, Tag = partNumber } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = description, Tag = description } );
@@ -694,7 +694,7 @@ namespace CAS.UI.UIControls.StoresControls
                 }
 
             }
-            itemsListView.Items.AddRange(resultList.ToArray());
+            itemsListView.Items.AddRange(resultList.Distinct().ToArray());
         }
 
         #endregion
