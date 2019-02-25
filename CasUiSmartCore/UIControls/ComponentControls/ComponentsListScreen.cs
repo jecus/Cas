@@ -2115,7 +2115,7 @@ namespace CAS.UI.UIControls.ComponentControls
 								FilterSelection = selection,
 								ReportedBaseComponent = _currentBaseComponent,
 								Forecast = _currentForecast,
-								_reportTitle = "APU LIFE LIMITED PARTS STATUS"
+								_reportTitle = "APU LIFE  LIMITED PARTS STATUS"
 							};
 
 							llpBuilder.AddDirectives(_directivesViewer.GetItemsArray()

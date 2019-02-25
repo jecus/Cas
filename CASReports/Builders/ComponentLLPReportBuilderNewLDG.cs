@@ -480,7 +480,7 @@ namespace CASReports.Builders
                 destinationDataSet.ItemsTable.AddItemsTableRow(reportedComponent.PartNumber,
                                                                reportedComponent.SerialNumber,
                                                                reportedComponent.Description,
-                                                               GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength((BaseEntityObject)reportedComponent.ParentComponent).ToString(),
+                                                               GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength((BaseEntityObject)reportedComponent.ParentComponent).Cycles?.ToString(),
 																0,
                                                                0,
                                                                0,
@@ -490,7 +490,7 @@ namespace CASReports.Builders
                                                                0,
                                                                0,
                                                                0,
-                                                               0,
+                                                               reportedComponent.NextPerformance?.Remains?.Cycles ?? 0,
                                                                0,
                                                                0,
                                                                0,
@@ -499,7 +499,7 @@ namespace CASReports.Builders
                                                                reportedComponent.Remarks,
                                                                reportedComponent.DirectiveType.FullName,
                                                                reportedComponent.FirstPerformanceSinceNew?.Cycles.ToString(),
-                                                               "");
+                                                               reportedComponent.NextPerformance?.Remains?.Cycles?.ToString());
         }
 
         #endregion
