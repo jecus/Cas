@@ -344,6 +344,20 @@ namespace CASReports.Builders
 			var lastOverhaulDate = DateTime.MinValue;
 			var lastOverhaulDateString = "";
 
+			var model = "";
+			if (_reportedComponent.Model != null)
+			{
+				if (_reportedComponent.IsBaseComponent)
+				{
+					var bc = _reportedComponent as BaseComponent;
+					if (bc.BaseComponentType == BaseComponentType.LandingGear || bc.BaseComponentType == BaseComponentType.Engine)
+						model = _reportedComponent.Model.ToString();
+					else model = _reportedComponent.Model.FullName;
+				}
+				else model = _reportedComponent.Model.FullName;
+			}
+
+
 			#region поиск последнего ремонта и расчет времени, прошедшего с него
 			//поиск директив деталей
 			var directives = 
@@ -374,7 +388,7 @@ namespace CASReports.Builders
                                                                      _reportedComponent.AvionicsInventory.ToString(),
                                                                      _reportedComponent.PartNumber,
                                                                      _reportedComponent.SerialNumber,
-                                                                     _reportedComponent.Model != null ? _reportedComponent.Model.FullName : "",
+                                                                     model,
                                                                      _reportedComponent.Description,
                                                                      aircraftReNumString,
                                                                      position,
@@ -542,6 +556,10 @@ namespace CASReports.Builders
                     remain.Substract(_current);
                     remain.Resemble(detailDirective.Threshold.RepeatInterval);
                 }
+            }
+            else
+            {
+	            repeatInterval = detailDirective.Threshold.RepeatInterval;
             }
 
             nextComplianceDate = detailDirective.NextPerformanceDate != null
