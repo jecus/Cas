@@ -579,7 +579,7 @@ namespace CASReports.Builders
             string performanceType = reportedDirective.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst
                                          ? "W.O.F"
                                          : "W.O.L";
-            string effectivityDate = SmartCore.Auxiliary.Convert.GetDateFormat(reportedDirective.Threshold.EffectiveDate, "/");
+            string effectivityDate = reportedDirective.Threshold.EffectiveDate.ToString("dd.MM.yyyy");
             string equipment = reportedDirective.NDTType.ShortName;
             string kits = "";
             int num = 1;
@@ -653,13 +653,14 @@ namespace CASReports.Builders
                 reportedDirective.NextPerformanceDate != null
                     ? ((DateTime)reportedDirective.NextPerformanceDate).ToString(new GlobalTermsProvider()["DateFormat"].ToString())
                     : "";
-            Lifelength nextCompliance = reportedDirective.NextPerformanceSource;
+
+			Lifelength nextCompliance = reportedDirective.NextPerformanceSource;
             NextPerformance np = reportedDirective.NextPerformance;
             destinationDataSet.ItemsTable.AddItemsTableRow(reportedDirective.Applicability,
-                                                           reportedDirective.Remarks,
+                                                           reportedDirective.IsApplicability ? $"Applicable / {reportedDirective.Remarks}" : $"Not Applicable / {reportedDirective.Remarks}",
                                                            reportedDirective.HiddenRemarks,
                                                            reportedDirective.Description,
-                                                           title,
+                                                           reportedDirective.Title,
                                                            references,
                                                            reportedDirective.WorkType.ToString(),
                                                            reportedDirective.Status.FullName,
