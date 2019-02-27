@@ -68,7 +68,10 @@ namespace SmartCore.Entities.Dictionaries
 		/// </summary>
 		/// <returns></returns>
 		public override string ToString()
-        {
+		{
+			if (string.IsNullOrEmpty(PartNumber) || PartNumber == "N/A")
+				return FullName;
+
 			//todo:(Evgenii Babak)Возможно даст ошибку в других местах
 			return FullName + " | P/N:" + PartNumber;
         }

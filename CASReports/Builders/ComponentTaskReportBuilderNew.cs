@@ -351,7 +351,7 @@ namespace CASReports.Builders
 				{
 					var bc = _reportedComponent as BaseComponent;
 					if (bc.BaseComponentType == BaseComponentType.LandingGear || bc.BaseComponentType == BaseComponentType.Engine)
-						model = _reportedComponent.Model.ToString();
+						model = _reportedComponent.Model.FullName;
 					else model = _reportedComponent.Model.FullName;
 				}
 				else model = _reportedComponent.Model.FullName;
