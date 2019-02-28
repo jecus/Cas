@@ -654,6 +654,19 @@ namespace CASReports.Builders
                     ? ((DateTime)reportedDirective.NextPerformanceDate).ToString(new GlobalTermsProvider()["DateFormat"].ToString())
                     : "";
 
+
+            if (!firstCompliance.IsNullOrZero() && repeatInterval.IsNullOrZero())
+            {
+	            lastComplianceDate = "";
+				lastCompliance = Lifelength.Zero;
+            }
+
+			if (!firstCompliance.IsNullOrZero())
+			{
+				//remain = Lifelength.Zero;
+				sinceEffDateRemain = Lifelength.Zero;
+			}
+
 			Lifelength nextCompliance = reportedDirective.NextPerformanceSource;
             NextPerformance np = reportedDirective.NextPerformance;
             destinationDataSet.ItemsTable.AddItemsTableRow(reportedDirective.Applicability,

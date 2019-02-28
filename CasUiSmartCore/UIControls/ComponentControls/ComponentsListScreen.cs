@@ -2040,9 +2040,12 @@ namespace CAS.UI.UIControls.ComponentControls
 				                if (directive.MaintenanceDirective == null)
 					                continue;
 
-				                directive.MaintenanceDirective.CompnentSN = component.SerialNumber;
-				                directive.MaintenanceDirective.CompnentPN = component.PartNumber;
-				                mpds.Add(directive.MaintenanceDirective);
+				                var mpd = directive.MaintenanceDirective.GetCopyUnsaved();
+
+				                mpd.CompnentSN = component.SerialNumber;
+				                mpd.CompnentPN = component.PartNumber;
+				                mpd.ParentComponentDirective = directive;
+				                mpds.Add(mpd);
 			                }
 		                }
 

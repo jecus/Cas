@@ -1343,6 +1343,8 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 
 		public string CompnentPN { get; set; }
 		public string CompnentSN { get; set; }
+
+		public ComponentDirective ParentComponentDirective { get; set; }
 		/*
         *  Ìועמהû 
         */

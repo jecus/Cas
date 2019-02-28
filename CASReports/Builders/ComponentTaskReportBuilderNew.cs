@@ -389,7 +389,7 @@ namespace CASReports.Builders
                                                                      _reportedComponent.PartNumber,
                                                                      _reportedComponent.SerialNumber,
                                                                      model,
-                                                                     _reportedComponent.Description,
+                                                                     _reportedComponent.Model?.Description,
                                                                      aircraftReNumString,
                                                                      position,
                                                                      _reportedComponent.Manufacturer,

@@ -366,7 +366,7 @@ namespace CASReports.Builders
                                                                      _reportedComponent.PartNumber,
                                                                      _reportedComponent.SerialNumber,
                                                                      _reportedComponent.Model != null ? _reportedComponent.Model.ToString() : "",
-                                                                     _reportedComponent.Description,
+                                                                     _reportedComponent.Model.Description,
                                                                      aircraftReNumString,
                                                                      position,
                                                                      _reportedComponent.Manufacturer,
