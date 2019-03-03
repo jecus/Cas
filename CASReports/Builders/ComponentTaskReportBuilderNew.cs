@@ -259,7 +259,7 @@ namespace CASReports.Builders
         {
             if (_reportedComponent == null)
                 return;
-            BaseComponent baseComponent;
+            BaseComponent baseComponent = null;
             Aircraft parentAircaft;
             DateTime installationDate;
             string position;
@@ -303,7 +303,7 @@ namespace CASReports.Builders
 			var remainHours = remain.Hours != null && remain.Hours != 0 ? remain.Hours.ToString() : "";
 			var remainCycles = remain.Cycles != null && remain.Cycles != 0 ? remain.Cycles.ToString() : "";
 			var remainDays = remain.Days != null && remain.Days != 0 ? remain.Days.ToString() : "";
-			var onInstall = lastTransferRecord.OnLifelength;
+			var onInstall = baseComponent?.ActualStateRecords.GetLastKnownRecord(lastTransferRecord.RecordDate)?.OnLifelength ?? Lifelength.Null; ;
 			var onInstallDate = installationDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
 			var onInstallHours = onInstall.Hours != null && onInstall.Hours != 0 ? onInstall.Hours.ToString() : "";
 			var onInstallCycles = onInstall.Cycles != null && onInstall.Cycles != 0 ? onInstall.Cycles.ToString() : "";

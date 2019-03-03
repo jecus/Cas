@@ -130,7 +130,7 @@ namespace CAS.UI.UIControls.Auxiliary
 		private void BackgroundWorkerRunWorkerLoadCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
 			UpdateInformation();
-			if (_currentDirective is MaintenanceDirective || _currentDirective is Directive)
+			if (_currentDirective is MaintenanceDirective || _currentDirective is Directive || _currentDirective is ComponentDirective)
 			{
 				this.ClientSize = new System.Drawing.Size(789, 388);
 				this.buttonOk.Location = new System.Drawing.Point(557, 361);
@@ -707,6 +707,16 @@ namespace CAS.UI.UIControls.Auxiliary
 		        checkedListBox1.Items.AddRange(flights.ToArray());
 
 	        }
+			else if (_currentDirective is ComponentDirective)
+			{
+				var directive = _currentDirective as ComponentDirective;
+
+				var flights = GlobalObjects.AircraftFlightsCore.GetAircraftFlightsOnDate(directive.ParentComponent.ParentAircraftId, dateTimePicker1.Value);
+
+				checkedListBox1.Items.Clear();
+				checkedListBox1.Items.AddRange(flights.ToArray());
+
+			}
 
 			dateTimePicker1.ValueChanged += DateTimePicker1ValueChanged;
         }

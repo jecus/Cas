@@ -87,6 +87,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
         private ToolStripSeparator _toolStripSeparator2;
         private ToolStripSeparator _toolStripSeparator4;
         private ToolStripMenuItem _toolStripMenuItemsWorkPackages;
+        private ToolStripMenuItem _toolStripMenuItemsWShowWP;
         private ToolStripMenuItem _toolStripMenuItemQuotations;
         private ToolStripMenuItem _toolStripMenuItemCopy;
         private ToolStripMenuItem _toolStripMenuItemPaste;
@@ -484,6 +485,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
             _toolStripMenuItemOpen = new ToolStripMenuItem();
             _toolStripMenuItemComposeWorkPackage = new ToolStripMenuItem();
             _toolStripMenuItemsWorkPackages = new ToolStripMenuItem();
+            _toolStripMenuItemsWShowWP = new ToolStripMenuItem();
             _toolStripMenuItemComposeQuotationOrder = new ToolStripMenuItem();
             _toolStripMenuItemQuotations = new ToolStripMenuItem();
             _toolStripMenuItemDelete = new ToolStripMenuItem();
@@ -513,6 +515,11 @@ namespace CAS.UI.UIControls.MaintananceProgram
             //
             _toolStripMenuItemComposeWorkPackage.Text = "Compose a work package";
             _toolStripMenuItemComposeWorkPackage.Click += ButtonCreateWorkPakageClick;
+            //
+            // _toolStripMenuItemsWShowWP
+            //
+            _toolStripMenuItemsWShowWP.Text = "Show a work package Title";
+			_toolStripMenuItemsWShowWP.Click += _toolStripMenuItemsWShowWP_Click; ;
             //
             // _toolStripMenuItemsWorkPackages
             //
@@ -571,6 +578,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
                                                     _toolStripSeparator2,
                                                     _toolStripMenuItemComposeWorkPackage,
                                                     _toolStripMenuItemsWorkPackages,
+                                                    _toolStripMenuItemsWShowWP,
                                                     _toolStripSeparator1,
                                                     _toolStripMenuItemComposeQuotationOrder,
                                                     _toolStripMenuItemQuotations,
@@ -582,23 +590,25 @@ namespace CAS.UI.UIControls.MaintananceProgram
                                                 });
             _contextMenuStrip.Opening += ContextMenuStripOpen;
         }
-        #endregion
+		#endregion
 
-        #region private void ContextMenuStripOpen(object sender,CancelEventArgs e)
-        /// <summary>
-        /// Проверка на выделение 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ContextMenuStripOpen(object sender, CancelEventArgs e)
+		#region private void ContextMenuStripOpen(object sender,CancelEventArgs e)
+		/// <summary>
+		/// Проверка на выделение 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void ContextMenuStripOpen(object sender, CancelEventArgs e)
         {
-	        if (_directivesViewer.SelectedItems.Count <= 0)
+	        _toolStripMenuItemsWShowWP.Enabled = false;
+			if (_directivesViewer.SelectedItems.Count <= 0)
 	        {
 		        _toolStripMenuItemOpen.Enabled = false;
 		        _toolStripMenuItemShowTaskCard.Enabled = false;
 		        _toolStripMenuItemHighlight.Enabled = false;
 				_toolStripMenuItemComposeWorkPackage.Enabled = false;
 				_toolStripMenuItemsWorkPackages.Enabled = false;
+				_toolStripMenuItemsWShowWP.Enabled = false;
 				_toolStripMenuItemComposeQuotationOrder.Enabled = false;
 				_toolStripMenuItemQuotations.Enabled = false;
 				_toolStripMenuItemDelete.Enabled = false;
@@ -611,6 +621,10 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 if (mpd != null && mpd.TaskCardNumberFile != null)
                     _toolStripMenuItemShowTaskCard.Enabled = true;
                 else _toolStripMenuItemShowTaskCard.Enabled = false;
+                if (mpd.NextPerformanceIsBlocked)
+	                _toolStripMenuItemsWShowWP.Enabled = true;
+
+
             }
 
 	        if (_directivesViewer.SelectedItems.Count > 0)
@@ -743,15 +757,24 @@ namespace CAS.UI.UIControls.MaintananceProgram
             }
         }
 
-        #endregion
+		#endregion
 
-        #region private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
-        /// <summary>
-        /// Создает закупочный ордер
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
+		private void _toolStripMenuItemsWShowWP_Click(object sender, EventArgs e)
+		{
+			if (_directivesViewer.SelectedItems.Count <= 0) return;
+
+			var res = $"{_directivesViewer.SelectedItem.NextPerformance.BlockedByPackage.Title} {_directivesViewer.SelectedItem.NextPerformance.BlockedByPackage.Number}";
+			MessageBox.Show(res, "",
+				MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
+
+		#region private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
+		/// <summary>
+		/// Создает закупочный ордер
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
         {
             //Список комплектующих закупочного акта
             PurchaseManager.ComposeQuotationOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
