@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using CAS.UI.ExcelExport;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
+using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.CommercialControls;
 using CAS.UI.UIControls.ComponentControls;
@@ -42,6 +44,8 @@ namespace CAS.UI.UIControls.OpepatorsControls
         #region Fields
 
         private Operator _currentOperator;
+        private ExcelExportProvider _exportProvider;
+        private AnimatedThreadWorker _worker;
 
         #endregion
 
@@ -86,7 +90,9 @@ namespace CAS.UI.UIControls.OpepatorsControls
             _hangars.Visible = false;
             _workShops.Visible = false;
 #endif
-            InitOperational();
+	        
+
+			InitOperational();
             UpdateInformation();
         }
 
@@ -488,29 +494,86 @@ namespace CAS.UI.UIControls.OpepatorsControls
 
 		#endregion
 
-	    private void LinkOccurencesDisplayerRequested(object sender, ReferenceEventArgs e)
-	    {
+		#region  private void LinkOccurencesDisplayerRequested(object sender, ReferenceEventArgs e)
+
+		private void LinkOccurencesDisplayerRequested(object sender, ReferenceEventArgs e)
+		{
 			e.DisplayerText = "Occurrences and Interruptions";
-		    e.RequestedEntity = new OccurrencesListScreen(GlobalObjects.CasEnvironment.Operators[0]);
+			e.RequestedEntity = new OccurrencesListScreen(GlobalObjects.CasEnvironment.Operators[0]);
 		}
 
-	    private void LinkSystemDisplayerRequested(object sender, ReferenceEventArgs e)
-	    {
+		#endregion
+
+		#region private void LinkSystemDisplayerRequested(object sender, ReferenceEventArgs e)
+
+		private void LinkSystemDisplayerRequested(object sender, ReferenceEventArgs e)
+		{
 			e.DisplayerText = "System reliability";
-		    e.RequestedEntity = new SystemListScreen(GlobalObjects.CasEnvironment.Operators[0]);
+			e.RequestedEntity = new SystemListScreen(GlobalObjects.CasEnvironment.Operators[0]);
 		}
 
-	    private void LinkComponentsDisplayerRequested(object sender, ReferenceEventArgs e)
-	    {
+		#endregion
+
+		#region private void LinkComponentsDisplayerRequested(object sender, ReferenceEventArgs e)
+
+		private void LinkComponentsDisplayerRequested(object sender, ReferenceEventArgs e)
+		{
 			e.DisplayerText = "Components reliability";
-		    e.RequestedEntity = new SystemListScreen(GlobalObjects.CasEnvironment.Operators[0]);
+			e.RequestedEntity = new SystemListScreen(GlobalObjects.CasEnvironment.Operators[0]);
 		}
 
-	    private void LinkDefferedDefectsDisplayerRequested(object sender, ReferenceEventArgs e)
-	    {
+		#endregion
+
+		#region private void LinkDefferedDefectsDisplayerRequested(object sender, ReferenceEventArgs e)
+
+		private void LinkDefferedDefectsDisplayerRequested(object sender, ReferenceEventArgs e)
+		{
 			e.DisplayerText = "Deferred defects";
-		    e.RequestedEntity = new DefferedListScreen(GlobalObjects.CasEnvironment.Operators[0]);
+			e.RequestedEntity = new DefferedListScreen(GlobalObjects.CasEnvironment.Operators[0]);
 		}
-    }
+
+		#endregion
+
+	    private void ExportMonthly_Click(object sender, System.EventArgs e)
+	    {
+			_worker = new AnimatedThreadWorker();
+			_worker.DoWork += Worker_DoWork;
+			_worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+			_worker.RunWorkerAsync();
+	    }
+
+		private void Worker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+		{
+			var sfd = new SaveFileDialog();
+			sfd.Filter = ".xlsx Files (*.xlsx)|*.xlsx";
+
+			if (sfd.ShowDialog() == DialogResult.OK)
+			{
+				_exportProvider.SaveTo(sfd.FileName);
+				MessageBox.Show("File was success saved!");
+			}
+
+			_exportProvider.Dispose();
+		}
+
+		private void Worker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+		{
+			var t = new TimeSpan();
+			for (int i = 0; i < 5; i++)
+			{
+				t+= new TimeSpan(25,40,0);
+			}
+
+			AnimatedThreadWorker.ReportProgress(0, "load directives");
+			_worker.ReportProgress(0,"Generate file! Please wait....");
+
+			_exportProvider = new ExcelExportProvider();
+			_exportProvider.ReportProgress += (o, args) =>
+			{
+				_worker.ReportProgress(0, $"Generate page for {o}! Please wait....");
+			};
+			_exportProvider.ExportFlights();
+		}
+	}
 }
 

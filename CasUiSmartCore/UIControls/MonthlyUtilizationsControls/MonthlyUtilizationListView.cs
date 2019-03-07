@@ -340,6 +340,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 							        subItems.Add(CreateListViewSubItem("N/A"));
 						        }
 					        }
+
 				        }
 				        else
 				        {

@@ -687,7 +687,7 @@ namespace SmartCore.Calculations.PerformanceCalculator
 			else threshold = directive.Threshold;
 
 			var last = Lifelength.Null;
-			var current = _calculator.GetFlightLifelengthOnStartOfDay(directive.LifeLengthParent);
+			var current = _calculator.GetFlightLifelengthOnEndOfDay(directive.LifeLengthParent, DateTime.Today);
 			NextPerformance np;
 			NextPerformance lastNp;
 
@@ -892,7 +892,8 @@ namespace SmartCore.Calculations.PerformanceCalculator
 						}
 					}
 
-					np.Remains = new Lifelength(np.LimitOverdue);
+					//np.Remains = new Lifelength(np.LimitOverdue);
+					np.Remains = new Lifelength(np.PerformanceSource);
 					np.Remains.Substract(current); // remains = next - current
 
 					np.Remains.Resemble(np.LimitOverdue);

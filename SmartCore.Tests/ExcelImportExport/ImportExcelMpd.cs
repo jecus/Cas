@@ -632,11 +632,11 @@ namespace SmartCore.Tests.ExcelImportExport
 			var itemRelationCore = new ItemsRelationsDataAccess(env);
 			var maintenanceCore = new MaintenanceCore(env, env.NewLoader, env.NewKeeper, itemRelationCore, aircraftCore);
 
-			var aircraft = env.NewLoader.GetObject<AircraftDTO, Aircraft>(new Filter("ItemId", 2332));
+			var aircraft = env.NewLoader.GetObject<AircraftDTO, Aircraft>(new Filter("ItemId", 2340));
 
 			var mpdList = maintenanceCore.GetMaintenanceDirectives(aircraft);
 
-			var d = new DirectoryInfo(@"D:\MPD\TascCard\All Task Cards UP-B3722, UP-B3723");
+			var d = new DirectoryInfo(@"D:\MPD\All Task Cards for UP-B6703");
 			var files = d.GetFiles();
 			foreach (var mpd in mpdList)
 			{
@@ -657,6 +657,50 @@ namespace SmartCore.Tests.ExcelImportExport
 				{
 					Trace.WriteLine(mpd.TaskNumberCheck);
 				}
+			}
+		}
+
+		[TestMethod]
+		public void Test()
+		{
+			var env = GetEnviroment();
+
+			var aircraftCore = new AircraftsCore(env.Loader, env.NewKeeper, env.NewLoader);
+			var itemRelationCore = new ItemsRelationsDataAccess(env);
+			var mpdCore = new MaintenanceCore(env, env.NewLoader, env.NewKeeper, itemRelationCore, aircraftCore);
+			aircraftCore.LoadAllAircrafts();
+			var aircraftFrom = aircraftCore.GetAircraftById(2336);
+			//var aircraftTo = aircraftCore.GetAircraftById(2347);
+
+			var mpdsFrom = mpdCore.GetMaintenanceDirectives(aircraftFrom);
+			//var mpdsTo = mpdCore.GetMaintenanceDirectives(aircraftTo);
+
+			foreach (var maintenanceDirective in mpdsFrom.Where(i => i.IsOperatorTask))
+			{
+				maintenanceDirective.IsOperatorTask = false;
+				env.Keeper.Save(maintenanceDirective);
+				Trace.WriteLine($"{maintenanceDirective.TaskNumberCheck}");
+				//var find = mpdsTo.FirstOrDefault(i => i.TaskNumberCheck.TrimEnd() == maintenanceDirective.TaskNumberCheck.TrimEnd());
+				//if (find == null)
+				//	continue;
+				//Trace.WriteLine($"{maintenanceDirective.TaskNumberCheck} - {find?.TaskNumberCheck ?? "N/A"}");
+				//Trace.WriteLine(maintenanceDirective.Kits.Count);
+				//Trace.WriteLine("------------------------");
+
+				//find.KitsApplicable = true;
+				//env.Keeper.Save(find);
+
+				//foreach (var accessoryRequired in find.Kits)
+				//{
+				//	env.Keeper.Delete(accessoryRequired);
+				//}
+
+				//foreach (var rec in maintenanceDirective.Kits)
+				//{
+				//	var newRec = rec.GetCopyUnsaved();
+				//	newRec.ParentId = find.ItemId;
+				//	env.Keeper.Save(newRec);
+				//}
 			}
 		}
 
@@ -775,7 +819,7 @@ namespace SmartCore.Tests.ExcelImportExport
 		private CasEnvironment GetEnviroment()
 		{
 			var cas = new CasEnvironment();
-			cas.Connect("91.213.233.139:45617", "casadmin", "casadmin001", "ScatDB");
+			cas.Connect("92.47.31.254:45617", "casadmin", "casadmin001", "ScatDB");
 			DbTypes.CasEnvironment = cas;
 			cas.NewLoader.FirstLoad();
 
