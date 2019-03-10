@@ -37,25 +37,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dataGridViewItems = new System.Windows.Forms.DataGridView();
-			this.ColumnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.ColumnTask = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.ColumnTaskCard = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.ColumnClosed = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.ColumnHours = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.ColumnCycles = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.ColumnDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.ColumnDate = new CAS.UI.UIControls.Auxiliary.DataGridViewElements.DataGridViewCalendarColumn();
 			this.buttonCloseWP = new System.Windows.Forms.Button();
 			this.dateTimePickerClosingDate = new System.Windows.Forms.DateTimePicker();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.labelClosingDate = new System.Windows.Forms.Label();
 			this.checkBoxSelectAll = new System.Windows.Forms.CheckBox();
 			this.panelButtons = new System.Windows.Forms.Panel();
+			this.checkBox1 = new System.Windows.Forms.CheckBox();
 			this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
 			this.lifelengthViewer1 = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.documentControl1 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
@@ -66,7 +59,14 @@
 			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewCalendarColumn1 = new CAS.UI.UIControls.Auxiliary.DataGridViewElements.DataGridViewCalendarColumn();
-			this.checkBox1 = new System.Windows.Forms.CheckBox();
+			this.ColumnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ColumnTask = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ColumnTaskCard = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ColumnClosed = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+			this.ColumnHours = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ColumnCycles = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ColumnDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ColumnDate = new CAS.UI.UIControls.Auxiliary.DataGridViewElements.DataGridViewCalendarColumn();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewItems)).BeginInit();
 			this.panelButtons.SuspendLayout();
 			this.SuspendLayout();
@@ -102,67 +102,6 @@
 			this.dataGridViewItems.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewItemsCellValueChanged);
 			this.dataGridViewItems.CurrentCellDirtyStateChanged += new System.EventHandler(this.DataGridViewItemsCurrentCellDirtyStateChanged);
 			this.dataGridViewItems.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DataGridViewItemsDataError);
-			// 
-			// ColumnType
-			// 
-			this.ColumnType.HeaderText = "Type";
-			this.ColumnType.Name = "ColumnType";
-			this.ColumnType.ReadOnly = true;
-			this.ColumnType.Width = 75;
-			// 
-			// ColumnTask
-			// 
-			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.ColumnTask.DefaultCellStyle = dataGridViewCellStyle1;
-			this.ColumnTask.HeaderText = "Task";
-			this.ColumnTask.MaxInputLength = 3072;
-			this.ColumnTask.Name = "ColumnTask";
-			this.ColumnTask.ReadOnly = true;
-			this.ColumnTask.Width = 200;
-			// 
-			// ColumnTaskCard
-			// 
-			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.ColumnTaskCard.DefaultCellStyle = dataGridViewCellStyle2;
-			this.ColumnTaskCard.HeaderText = "Task Card";
-			this.ColumnTaskCard.Name = "ColumnTaskCard";
-			this.ColumnTaskCard.ReadOnly = true;
-			// 
-			// ColumnClosed
-			// 
-			this.ColumnClosed.HeaderText = "Perform";
-			this.ColumnClosed.Name = "ColumnClosed";
-			this.ColumnClosed.Width = 50;
-			// 
-			// ColumnHours
-			// 
-			this.ColumnHours.HeaderText = "Hours";
-			this.ColumnHours.MaxInputLength = 16;
-			this.ColumnHours.Name = "ColumnHours";
-			this.ColumnHours.Width = 75;
-			// 
-			// ColumnCycles
-			// 
-			this.ColumnCycles.HeaderText = "Cycles";
-			this.ColumnCycles.MaxInputLength = 16;
-			this.ColumnCycles.Name = "ColumnCycles";
-			this.ColumnCycles.Width = 75;
-			// 
-			// ColumnDays
-			// 
-			this.ColumnDays.HeaderText = "Days";
-			this.ColumnDays.MaxInputLength = 16;
-			this.ColumnDays.Name = "ColumnDays";
-			this.ColumnDays.ReadOnly = true;
-			this.ColumnDays.Width = 75;
-			// 
-			// ColumnDate
-			// 
-			this.ColumnDate.HeaderText = "Date";
-			this.ColumnDate.Name = "ColumnDate";
-			this.ColumnDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.ColumnDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.ColumnDate.Width = 200;
 			// 
 			// buttonCloseWP
 			// 
@@ -239,6 +178,21 @@
 			this.panelButtons.Name = "panelButtons";
 			this.panelButtons.Size = new System.Drawing.Size(872, 269);
 			this.panelButtons.TabIndex = 58;
+			// 
+			// checkBox1
+			// 
+			this.checkBox1.AutoSize = true;
+			this.checkBox1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.checkBox1.Checked = true;
+			this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.checkBox1.Location = new System.Drawing.Point(243, 126);
+			this.checkBox1.Margin = new System.Windows.Forms.Padding(2);
+			this.checkBox1.Name = "checkBox1";
+			this.checkBox1.Size = new System.Drawing.Size(171, 18);
+			this.checkBox1.TabIndex = 62;
+			this.checkBox1.Text = "Close With Mtop Check";
+			this.checkBox1.UseVisualStyleBackColor = true;
 			// 
 			// checkedListBox1
 			// 
@@ -343,19 +297,66 @@
 			this.dataGridViewCalendarColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.dataGridViewCalendarColumn1.Width = 200;
 			// 
-			// checkBox1
+			// ColumnType
 			// 
-			this.checkBox1.AutoSize = true;
-			this.checkBox1.Checked = true;
-			this.checkBox1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.checkBox1.Location = new System.Drawing.Point(243, 126);
-			this.checkBox1.Margin = new System.Windows.Forms.Padding(2);
-			this.checkBox1.Name = "checkBox1";
-			this.checkBox1.Size = new System.Drawing.Size(171, 18);
-			this.checkBox1.TabIndex = 62;
-			this.checkBox1.Text = "Close With Mtop Check";
-			this.checkBox1.UseVisualStyleBackColor = true;
+			this.ColumnType.HeaderText = "Type";
+			this.ColumnType.Name = "ColumnType";
+			this.ColumnType.ReadOnly = true;
+			this.ColumnType.Width = 75;
+			// 
+			// ColumnTask
+			// 
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.ColumnTask.DefaultCellStyle = dataGridViewCellStyle1;
+			this.ColumnTask.HeaderText = "Task";
+			this.ColumnTask.MaxInputLength = 3072;
+			this.ColumnTask.Name = "ColumnTask";
+			this.ColumnTask.ReadOnly = true;
+			this.ColumnTask.Width = 330;
+			// 
+			// ColumnTaskCard
+			// 
+			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.ColumnTaskCard.DefaultCellStyle = dataGridViewCellStyle2;
+			this.ColumnTaskCard.HeaderText = "Task Card";
+			this.ColumnTaskCard.Name = "ColumnTaskCard";
+			this.ColumnTaskCard.ReadOnly = true;
+			// 
+			// ColumnClosed
+			// 
+			this.ColumnClosed.HeaderText = "Perform";
+			this.ColumnClosed.Name = "ColumnClosed";
+			this.ColumnClosed.Width = 50;
+			// 
+			// ColumnHours
+			// 
+			this.ColumnHours.HeaderText = "Hours";
+			this.ColumnHours.MaxInputLength = 16;
+			this.ColumnHours.Name = "ColumnHours";
+			this.ColumnHours.Width = 75;
+			// 
+			// ColumnCycles
+			// 
+			this.ColumnCycles.HeaderText = "Cycles";
+			this.ColumnCycles.MaxInputLength = 16;
+			this.ColumnCycles.Name = "ColumnCycles";
+			this.ColumnCycles.Width = 75;
+			// 
+			// ColumnDays
+			// 
+			this.ColumnDays.HeaderText = "Days";
+			this.ColumnDays.MaxInputLength = 16;
+			this.ColumnDays.Name = "ColumnDays";
+			this.ColumnDays.ReadOnly = true;
+			this.ColumnDays.Width = 75;
+			// 
+			// ColumnDate
+			// 
+			this.ColumnDate.HeaderText = "Date";
+			this.ColumnDate.Name = "ColumnDate";
+			this.ColumnDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.ColumnDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+			this.ColumnDate.Width = 75;
 			// 
 			// WorkPackageClosingFormNew
 			// 
@@ -381,14 +382,6 @@
 
 		#endregion
 		private System.Windows.Forms.DataGridView dataGridViewItems;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTask;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTaskCard;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn ColumnClosed;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnHours;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCycles;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDays;
-        private Auxiliary.DataGridViewElements.DataGridViewCalendarColumn ColumnDate;
 		private System.Windows.Forms.Button buttonCloseWP;
 		private System.Windows.Forms.DateTimePicker dateTimePickerClosingDate;
 		private System.Windows.Forms.Button buttonCancel;
@@ -406,5 +399,13 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
 		private Auxiliary.DataGridViewElements.DataGridViewCalendarColumn dataGridViewCalendarColumn1;
 		private System.Windows.Forms.CheckBox checkBox1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnType;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTask;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTaskCard;
+		private System.Windows.Forms.DataGridViewCheckBoxColumn ColumnClosed;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnHours;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCycles;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDays;
+		private Auxiliary.DataGridViewElements.DataGridViewCalendarColumn ColumnDate;
 	}
 }

@@ -98,27 +98,27 @@ namespace CAS.UI.UIControls.WorkPakage
             Text = _workPackage.Title;
             dataGridViewItems.Rows.Clear();
             
-            DateTime minComplianceDate = DateTimeExtend.GetCASMinDateTime();
+            var minComplianceDate = DateTimeExtend.GetCASMinDateTime();
 
-            IEnumerable<WorkPackageRecord> directiveWprs =
-                _workPackage.WorkPakageRecords.Where(wpr => wpr.Task != null &&
-                                                            wpr.Task is Directive);
-
-            List<IGrouping<string , WorkPackageRecord>> groupedDirectiveWprs =
-                directiveWprs.GroupBy(wpr => (((Directive)wpr.Task).DirectiveType).FullName).ToList();
-
-            IEnumerable<WorkPackageRecord> wprs =
+            var wprs =
                 _workPackage.WorkPakageRecords.Where(wpr => wpr.Task != null && 
                                                             !(wpr.Task is NonRoutineJob) &&
                                                             !(wpr.Task is Directive));
-            IEnumerable<IGrouping<string , WorkPackageRecord>> groupedWprs =
-                wprs.GroupBy(wpr => wpr.Task.SmartCoreObjectType.FullName);
+            var groupedWprs =
+                wprs.GroupBy(wpr => wpr.Task.SmartCoreObjectType.FullName).ToList();
 
-            groupedDirectiveWprs.AddRange(groupedWprs);
+            var directiveWprs =
+	            _workPackage.WorkPakageRecords.Where(wpr => wpr.Task != null &&
+	                                                        wpr.Task is Directive);
+
+            var groupedDirectiveWprs =
+	            directiveWprs.GroupBy(wpr => (((Directive)wpr.Task).DirectiveType).FullName).ToList();
+
+            groupedWprs.AddRange(groupedDirectiveWprs);
 
             checkBoxSelectAll.CheckedChanged -= CheckBoxSelectAllCheckedChanged;
 
-            foreach (IGrouping<string , WorkPackageRecord> grouping in groupedDirectiveWprs)
+            foreach (IGrouping<string , WorkPackageRecord> grouping in groupedWprs)
             {
                 //добавить расчеты ComlianceDate
                 foreach (WorkPackageRecord item in grouping)
@@ -987,7 +987,9 @@ namespace CAS.UI.UIControls.WorkPakage
                 }
                 else
                 {
-                    row.Cells[ColumnType.Index].Value = "AD: ";
+					if(!string.IsNullOrEmpty(directive.EngineeringOrders) && (string.IsNullOrEmpty(directive.Title) || directive.Title == "N/A"))
+						row.Cells[ColumnType.Index].Value = "EO: ";
+					else row.Cells[ColumnType.Index].Value = "AD: ";
                     row.Cells[ColumnTask.Index].Value = directive.Title + " " + directive.WorkType;
                 }
 
@@ -1016,12 +1018,14 @@ namespace CAS.UI.UIControls.WorkPakage
             }
             else if (closingItem is ComponentDirective)
             {
-                row.Cells[ColumnType.Index].Value = "Component Directive";
+	            var componentDirective = closingItem as ComponentDirective;
+                row.Cells[ColumnType.Index].Value = "Comp Directive";
                 string temp = ((ComponentDirective)closingItem).ParentComponent != null
                                   ? ((ComponentDirective)closingItem).ParentComponent.ToString()
-                                  : "Component Directive";
-                row.Cells[ColumnTask.Index].Value = temp + " " + ((ComponentDirective)closingItem).DirectiveType;
-            }
+                                  : "Comp Directive";
+                row.Cells[ColumnTask.Index].Value = $"Comp: {componentDirective.MaintenanceDirective?.TaskCardNumber} " + componentDirective.DirectiveType + " for " + componentDirective.Description + " P/N:" + componentDirective.PartNumber + " S/N:" + componentDirective.SerialNumber;
+				row.Cells[ColumnTaskCard.Index].Value = componentDirective.MaintenanceDirective?.TaskCardNumber;
+			}
             else if (closingItem is BaseComponent)
             {
                 row.Cells[ColumnType.Index].Value = "Base Component: ";
@@ -1032,7 +1036,7 @@ namespace CAS.UI.UIControls.WorkPakage
             }
             else if (closingItem is Component)
             {
-                row.Cells[ColumnType.Index].Value = "Component: ";
+                row.Cells[ColumnType.Index].Value = "Comp: ";
                 row.Cells[ColumnTask.Index].Value = ((Component)closingItem).Description;
                 row.Cells[ColumnHours.Index] = new DataGridViewLinkCell { TrackVisitedState = false,  UseColumnTextForLinkValue = false, Value = "Edit Transfer" };
                 row.Cells[ColumnCycles.Index] = new DataGridViewTextBoxCell { Value = "Transfer to: " };

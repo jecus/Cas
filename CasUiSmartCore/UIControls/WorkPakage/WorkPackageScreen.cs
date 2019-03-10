@@ -1362,6 +1362,8 @@ namespace CAS.UI.UIControls.WorkPakage
 			    return ((MaintenanceDirective) obj).TaskCardNumberFile;
 		    if (obj is NonRoutineJob)
 			    return ((NonRoutineJob) obj).AttachedFile;
+		    if (obj is ComponentDirective)
+			    return ((ComponentDirective) obj).MaintenanceDirective?.TaskCardNumberFile;
 
 		    return null;
 	    }

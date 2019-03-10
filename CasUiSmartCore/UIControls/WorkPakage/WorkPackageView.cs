@@ -258,6 +258,8 @@ namespace CAS.UI.UIControls.WorkPakage
 				return ((MaintenanceDirective)obj).TaskCardNumberFile;
 			if (obj is NonRoutineJob)
 				return ((NonRoutineJob)obj).AttachedFile;
+			if (obj is ComponentDirective)
+				return ((ComponentDirective)obj).MaintenanceDirective?.TaskCardNumberFile;
 
 			return null;
 		}
@@ -330,7 +332,20 @@ namespace CAS.UI.UIControls.WorkPakage
                 if (np.Parent is ComponentDirective)
                 {
 	                var cd = np.Parent as ComponentDirective;
+
+
 	                subItems.Add(new ListViewItem.ListViewSubItem { Text = $"{cd.MaintenanceDirective?.TaskCardNumber} {np.Title}", Tag = np.Title });
+				}
+				else if (np.Parent is Directive)
+                {
+	                var directive = np.Parent as Directive;
+	                var title = "";
+	                if (!string.IsNullOrEmpty(directive.EngineeringOrders))
+		                title += $"EO:{directive.EngineeringOrders} ";
+	                if (!string.IsNullOrEmpty(directive.Title))
+		                title += $"AD:{directive.Title} ";
+
+					subItems.Add(new ListViewItem.ListViewSubItem { Text = title, Tag = directive.Title });
 				}
                 else subItems.Add(new ListViewItem.ListViewSubItem { Text = np.Title, Tag = np.Title });
 
@@ -382,7 +397,7 @@ namespace CAS.UI.UIControls.WorkPakage
 
                 AtaChapter ata = directive.ATAChapter;
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = ata.ToString(), Tag = ata });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = directive.Title, Tag = directive.Title });
+                subItems.Add(new ListViewItem.ListViewSubItem { Text = $"{directive.EngineeringOrders} {directive.Title}", Tag = directive.Title });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = directive.Description, Tag = directive.Description });
 
                 #region Определение текста для колонки "КИТы"

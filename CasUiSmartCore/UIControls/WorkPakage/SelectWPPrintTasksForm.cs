@@ -663,7 +663,7 @@ namespace CAS.UI.UIControls.WorkPakage
 					var taskCardCell = new DataGridViewTextBoxCell();
 					var compntCell = new DataGridViewCheckBoxCell { Value = item.PrintInWorkPackage };
 					var kitCell = new DataGridViewTextBoxCell();
-                    discCell.Value = "CCO:" + item.Description + " " + item.PartNumber + " " + item.SerialNumber;
+                    discCell.Value = "Comp:" + item.Description + " P/N:" + item.PartNumber + " S/N:" + item.SerialNumber;
 
                     row.Cells.AddRange(discCell, taskCardCell, compntCell, kitCell);
 
@@ -705,7 +705,7 @@ namespace CAS.UI.UIControls.WorkPakage
 					var row = new DataGridViewRow { Tag = item };
 
 					string taskCardCellValue;
-					Color taskCardCellBackColor = Color.White;
+					var taskCardCellBackColor = Color.White;
 					var mpd = item.MaintenanceDirective;
 					if (string.IsNullOrEmpty(mpd?.TaskCardNumber) && mpd?.TaskCardNumberFile == null)
 					{
@@ -714,12 +714,12 @@ namespace CAS.UI.UIControls.WorkPakage
 					}
 					else if (!string.IsNullOrEmpty(mpd?.TaskCardNumber) && mpd?.TaskCardNumberFile == null)
 					{
-						taskCardCellValue = string.Format("Not set Task Card file. (Task Card No {0}.)", mpd.TaskCardNumber);
+						taskCardCellValue = $"Not set Task Card file. (Task Card No {mpd.TaskCardNumber}.)";
 						taskCardCellBackColor = Color.Red;
 					}
 					else if (string.IsNullOrEmpty(mpd?.TaskCardNumber) && mpd?.TaskCardNumberFile != null)
 					{
-						taskCardCellValue = string.Format("Not set Task Card name. (File name {0}.)", mpd.TaskCardNumberFile.FileName);
+						taskCardCellValue = $"Not set Task Card name. (File name {mpd.TaskCardNumberFile.FileName}.)";
 						taskCardCellBackColor = Color.Red;
 					}
 					else taskCardCellValue = mpd.TaskCardNumber;
@@ -733,7 +733,7 @@ namespace CAS.UI.UIControls.WorkPakage
 					};
 					var compntCell = new DataGridViewCheckBoxCell { Value = item.PrintInWorkPackage };
 					var kitCell = new DataGridViewTextBoxCell();
-                    discCell.Value = "CCO:" + item.DirectiveType + " for " + d.Description + " " + d.PartNumber + " " + d.SerialNumber;
+                    discCell.Value = $"Comp: {mpd?.TaskCardNumber} " + item.DirectiveType + " for " + d.Description + " P/N:" + d.PartNumber + " S/N:" + d.SerialNumber;
 
                     row.Cells.AddRange(discCell, taskCardCell, compntCell, kitCell);
 

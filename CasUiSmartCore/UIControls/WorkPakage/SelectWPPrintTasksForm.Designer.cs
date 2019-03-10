@@ -32,10 +32,6 @@ namespace CAS.UI.UIControls.WorkPakage
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectWPPrintTasksForm));
 			this.dataGridViewItems = new System.Windows.Forms.DataGridView();
-			this.ColumnDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.ColumnTaskCard = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.ColumnPrintInWP = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.ColumnQty = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			this.buttonOK = new System.Windows.Forms.Button();
 			this.checkBoxPrintDupliates = new System.Windows.Forms.CheckBox();
 			this.checkBoxPrintIncoming = new System.Windows.Forms.CheckBox();
@@ -43,6 +39,10 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.labelJONumber = new System.Windows.Forms.Label();
 			this.comboBoxRoutingTaskGrouping = new System.Windows.Forms.ComboBox();
 			this.labelRtGrouping = new System.Windows.Forms.Label();
+			this.ColumnDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ColumnTaskCard = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ColumnPrintInWP = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+			this.ColumnQty = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewItems)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -70,38 +70,6 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.dataGridViewItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dataGridViewItems.Size = new System.Drawing.Size(825, 326);
 			this.dataGridViewItems.TabIndex = 0;
-			// 
-			// ColumnDescription
-			// 
-			this.ColumnDescription.HeaderText = "Item";
-			this.ColumnDescription.Name = "ColumnDescription";
-			this.ColumnDescription.ReadOnly = true;
-			this.ColumnDescription.Width = 300;
-			// 
-			// ColumnTaskCard
-			// 
-			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.ColumnTaskCard.DefaultCellStyle = dataGridViewCellStyle1;
-			this.ColumnTaskCard.HeaderText = "Task Card";
-			this.ColumnTaskCard.Name = "ColumnTaskCard";
-			this.ColumnTaskCard.Width = 250;
-			// 
-			// ColumnPrintInWP
-			// 
-			this.ColumnPrintInWP.HeaderText = "Print";
-			this.ColumnPrintInWP.Name = "ColumnPrintInWP";
-			this.ColumnPrintInWP.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.ColumnPrintInWP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			// 
-			// ColumnQty
-			// 
-			this.ColumnQty.HeaderText = "Q-ty";
-			this.ColumnQty.Items.AddRange(new object[] {
-            "One for all",
-            "One for One"});
-			this.ColumnQty.Name = "ColumnQty";
-			this.ColumnQty.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.ColumnQty.Width = 150;
 			// 
 			// buttonOK
 			// 
@@ -177,6 +145,38 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.labelRtGrouping.TabIndex = 8;
 			this.labelRtGrouping.Text = "Routine tasks grouping";
 			// 
+			// ColumnDescription
+			// 
+			this.ColumnDescription.HeaderText = "Item";
+			this.ColumnDescription.Name = "ColumnDescription";
+			this.ColumnDescription.ReadOnly = true;
+			this.ColumnDescription.Width = 440;
+			// 
+			// ColumnTaskCard
+			// 
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.ColumnTaskCard.DefaultCellStyle = dataGridViewCellStyle1;
+			this.ColumnTaskCard.HeaderText = "Task Card";
+			this.ColumnTaskCard.Name = "ColumnTaskCard";
+			this.ColumnTaskCard.Width = 200;
+			// 
+			// ColumnPrintInWP
+			// 
+			this.ColumnPrintInWP.HeaderText = "Print";
+			this.ColumnPrintInWP.Name = "ColumnPrintInWP";
+			this.ColumnPrintInWP.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.ColumnPrintInWP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+			// 
+			// ColumnQty
+			// 
+			this.ColumnQty.HeaderText = "Q-ty";
+			this.ColumnQty.Items.AddRange(new object[] {
+            "One for all",
+            "One for One"});
+			this.ColumnQty.Name = "ColumnQty";
+			this.ColumnQty.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.ColumnQty.Width = 80;
+			// 
 			// SelectWPPrintTasksForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -208,17 +208,15 @@ namespace CAS.UI.UIControls.WorkPakage
 
         private System.Windows.Forms.DataGridView dataGridViewItems;
         private System.Windows.Forms.Button buttonOK;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTaskCard;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn ColumnPrintInWP;
-        //private System.Windows.Forms.DataGridViewCheckBoxColumn ColumnWPACCPrintTitle;
-        //private System.Windows.Forms.DataGridViewCheckBoxColumn ColumnWPACCPrintTaskCard;
-        private System.Windows.Forms.DataGridViewComboBoxColumn ColumnQty;
         private System.Windows.Forms.CheckBox checkBoxPrintDupliates;
         private System.Windows.Forms.CheckBox checkBoxPrintIncoming;
         private System.Windows.Forms.TextBox textBoxNumber;
         private System.Windows.Forms.Label labelJONumber;
         private System.Windows.Forms.ComboBox comboBoxRoutingTaskGrouping;
         private System.Windows.Forms.Label labelRtGrouping;
-    }
+		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTaskCard;
+		private System.Windows.Forms.DataGridViewCheckBoxColumn ColumnPrintInWP;
+		private System.Windows.Forms.DataGridViewComboBoxColumn ColumnQty;
+	}
 }

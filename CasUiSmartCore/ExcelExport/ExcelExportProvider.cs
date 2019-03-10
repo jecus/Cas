@@ -2,21 +2,15 @@
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
+using System.Threading.Tasks;
 using Auxiliary;
-using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
-using EFCore.DTO.General;
-using EFCore.Filter;
-using Microsoft.Office.Interop.Excel;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Atlbs;
-using Filter = EFCore.Filter.Filter;
 
 namespace CAS.UI.ExcelExport
 {
@@ -50,13 +44,14 @@ namespace CAS.UI.ExcelExport
 		public void ExportFlights()
 		{
 			var aircrafts = GlobalObjects.AircraftsCore.GetAllAircrafts();
-			foreach (var aircraft in aircrafts)
+
+			Parallel.ForEach(aircrafts, aircraft =>
 			{
 				if (ReportProgress != null)
 					ReportProgress(aircraft.RegistrationNumber, new EventArgs());
 
 				var baseComponents = GlobalObjects.ComponentCore.GetAicraftBaseComponents(aircraft.ItemId,
-					new[] {BaseComponentType.Engine.ItemId, BaseComponentType.Apu.ItemId}).OrderByDescending(i => i.BaseComponentTypeId).ThenBy(i => i.ItemId);
+					new[] { BaseComponentType.Engine.ItemId, BaseComponentType.Apu.ItemId }).OrderByDescending(i => i.BaseComponentTypeId).ThenBy(i => i.ItemId);
 				GlobalObjects.AircraftFlightsCore.LoadAircraftFlights(aircraft.ItemId);
 				var flights = GlobalObjects.AircraftFlightsCore.GetAircraftFlightsByAircraftId(aircraft.ItemId);
 
@@ -74,6 +69,7 @@ namespace CAS.UI.ExcelExport
 
 				FillHeaderCell(workSheet.Cells[4, 3], "DATE", ExcelHorizontalAlignment.Center);
 				//workSheet.Column(3).AutoFit();
+				workSheet.Column(3).Width = 15;
 
 				FillHeaderCell(workSheet.Cells[4, 4], "FLT NO", ExcelHorizontalAlignment.Center);
 				//workSheet.Column(4).AutoFit();
@@ -119,7 +115,6 @@ namespace CAS.UI.ExcelExport
 
 				foreach (var baseComponent in baseComponents)
 				{
-					var engineCounter = 1;
 					if (baseComponent.BaseComponentType == BaseComponentType.Engine)
 					{
 						#region Заголовок
@@ -139,23 +134,21 @@ namespace CAS.UI.ExcelExport
 						#endregion
 
 
-						FillHeaderCell(workSheet.Cells[4, column], $"ENG #{engineCounter} TSN", ExcelHorizontalAlignment.Center);
+						FillHeaderCell(workSheet.Cells[4, column], $"TSN", ExcelHorizontalAlignment.Center);
 						//workSheet.Column(column).AutoFit();
 						column++;
 
-						FillHeaderCell(workSheet.Cells[4, column], $"ENG #{engineCounter} TSO", ExcelHorizontalAlignment.Center);
+						FillHeaderCell(workSheet.Cells[4, column], $"TSO", ExcelHorizontalAlignment.Center);
 						//workSheet.Column(column).AutoFit();
 						column++;
 
-						FillHeaderCell(workSheet.Cells[4, column], $"ENG #{engineCounter} CSN", ExcelHorizontalAlignment.Center);
-						//workSheet.Column(column).AutoFit();
-						column++;
-					
-						FillHeaderCell(workSheet.Cells[4, column], $"ENG #{engineCounter} CSO", ExcelHorizontalAlignment.Center);
+						FillHeaderCell(workSheet.Cells[4, column], $"CSN", ExcelHorizontalAlignment.Center);
 						//workSheet.Column(column).AutoFit();
 						column++;
 
-						engineCounter++;
+						FillHeaderCell(workSheet.Cells[4, column], $"CSO", ExcelHorizontalAlignment.Center);
+						//workSheet.Column(column).AutoFit();
+						column++;
 					}
 					else if (baseComponent.BaseComponentType == BaseComponentType.Apu)
 					{
@@ -189,7 +182,7 @@ namespace CAS.UI.ExcelExport
 						FillHeaderCell(workSheet.Cells[4, column], $"CSR", ExcelHorizontalAlignment.Center);
 						//workSheet.Column(column).AutoFit();
 						column++;
-						
+
 					}
 
 				}
@@ -204,7 +197,7 @@ namespace CAS.UI.ExcelExport
 
 				workSheet.View.FreezePanes(5, 1);
 
-				int currentRowPosition = flights.Count + 4;
+				int currentRowPosition = 5;
 				int currentColumnPosition = 1;
 				var time = new TimeSpan();
 
@@ -243,12 +236,12 @@ namespace CAS.UI.ExcelExport
 								lastKnownTransferRecBeforFlight.DestinationObjectId == aircraft.ItemId)
 							{
 								shouldFillSubItems = true;
-								var flightsWhichOccuredAfterInstallationOfBd = flights.Where(f => f.AtlbRecordType != AtlbRecordType.Maintenance && f.FlightDate.Date >= lastKnownTransferRecBeforFlight.RecordDate).ToList();
+								//var flightsWhichOccuredAfterInstallationOfBd = flights.Where(f => f.AtlbRecordType != AtlbRecordType.Maintenance && f.FlightDate.Date >= lastKnownTransferRecBeforFlight.RecordDate).ToList();
 
-								var perDaysFlightForBd = Lifelength.Zero;
+								//var perDaysFlightForBd = Lifelength.Zero;
 
-								foreach (var fl in flightsWhichOccuredAfterInstallationOfBd)
-									perDaysFlightForBd.Add(fl.FlightTimeLifelength);
+								//foreach (var fl in flightsWhichOccuredAfterInstallationOfBd)
+								//	perDaysFlightForBd.Add(fl.FlightTimeLifelength);
 
 								baseComponentFlightLifeLenght = GlobalObjects.CasEnvironment.Calculator.GetFlightLifelengthIncludingThisFlight(baseComponent, flight);
 							}
@@ -364,16 +357,17 @@ namespace CAS.UI.ExcelExport
 
 					#endregion
 
-					
+
 					time += flight.BlockTime;
 
-					FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], new Lifelength(0,0, (int)time.TotalMinutes).ToHoursMinutesFormat(""));
+					FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], new Lifelength(0, 0, (int)time.TotalMinutes).ToHoursMinutesFormat(""));
 					FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], counter++);
 
 					currentColumnPosition = 1;
-					currentRowPosition--;
+					currentRowPosition++;
 				}
-			}
+			});
+
 		}
 
 

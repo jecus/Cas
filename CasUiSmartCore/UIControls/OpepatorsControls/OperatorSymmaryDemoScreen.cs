@@ -570,8 +570,9 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			_exportProvider = new ExcelExportProvider();
 			_exportProvider.ReportProgress += (o, args) =>
 			{
-				_worker.ReportProgress(0, $"Generate page for {o}! Please wait....");
+				_worker.ReportProgress(0, $"Generate page for {o}");
 			};
+			_worker.ReportProgress(0, "Finish");
 			_exportProvider.ExportFlights();
 		}
 	}
