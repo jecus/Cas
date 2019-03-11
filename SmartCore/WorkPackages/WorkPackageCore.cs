@@ -239,7 +239,11 @@ namespace SmartCore.WorkPackages
 						foreach (var componentDirective in componentDirectives)
 						{
 							if (bindedItems.ContainsKey(componentDirective))
-								componentDirective.MaintenanceDirective = (MaintenanceDirective)bindedItems[componentDirective].SingleOrDefault();
+							{
+								var mpd = (MaintenanceDirective) bindedItems[componentDirective].SingleOrDefault();
+								mpd.TaskCardNumberFile = _newLoader.GetAttachedFileById(mpd.TaskCardNumberFile.ItemId);
+								componentDirective.MaintenanceDirective = mpd;
+							}
 						}
 					}
 

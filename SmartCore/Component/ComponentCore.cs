@@ -1963,21 +1963,25 @@ namespace SmartCore.Component
 
 			var types = new[] {SmartCoreType.Component.ItemId, SmartCoreType.ComponentDirective.ItemId};
 			//Загрузка документов
-			var documents = _newLoader.GetObjectListAll<DocumentDTO, Document>(new Filter("ParentTypeId", types), true);
+			var documents = _newLoader.GetObjectListAll<DocumentDTO, Document>(new Filter[]
+			{
+				new Filter("ParentTypeId", types),
+				new Filter("ParentID", componentId),
+			} , true);
 
 			if (documents.Count > 0)
 			{
 				var crs = _casEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Component CRS Form") as DocumentSubType;
 				var shipping = _casEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Shipping document") as DocumentSubType;
 
-				var docShipping = documents.FirstOrDefault(d => d.ParentId == component.ItemId && d.ParentTypeId == SmartCoreType.Component.ItemId && d.DocumentSubType == shipping);
+				var docShipping = documents.FirstOrDefault(d => d.ParentId == component.ItemId && d.ParentTypeId == SmartCoreType.Component.ItemId && d.DocumentSubType.ItemId == shipping.ItemId);
 				if (docShipping != null)
 				{
 					component.Document = docShipping;
 					component.Document.Parent = component;
 				}
 
-				var docCrs = documents.FirstOrDefault(d => d.ParentId == component.ItemId && d.ParentTypeId == SmartCoreType.Component.ItemId && d.DocumentSubType == crs);
+				var docCrs = documents.FirstOrDefault(d => d.ParentId == component.ItemId && d.ParentTypeId == SmartCoreType.Component.ItemId && d.DocumentSubType.ItemId == crs.ItemId);
 				if (docCrs != null)
 				{
 					component.DocumentCRS = docCrs;

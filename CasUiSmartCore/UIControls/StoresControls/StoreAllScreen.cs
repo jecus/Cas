@@ -381,8 +381,8 @@ namespace CAS.UI.UIControls.StoresControls
 
 		        if (currentStore != null)
 		        {
-			        baseComponentCollection.AddRange(GlobalObjects.ComponentCore.GetStoreBaseComponents(currentStore.ItemId));
-			        componentCollection.AddRange(GlobalObjects.ComponentCore.GetStoreComponents(currentStore).ToArray());
+			        baseComponentCollection.AddRange(GlobalObjects.ComponentCore.GetStoreBaseComponents(currentStore.ItemId).Where(i => i.ParentStoreId > 0));
+			        componentCollection.AddRange(GlobalObjects.ComponentCore.GetStoreComponents(currentStore).ToArray().Where(i => i.ParentStoreId > 0));
 		        }
 
 

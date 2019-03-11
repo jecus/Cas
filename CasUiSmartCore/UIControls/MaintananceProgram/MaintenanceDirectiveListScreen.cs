@@ -62,10 +62,11 @@ namespace CAS.UI.UIControls.MaintananceProgram
         private MaintenanceDirectivesAMSupplimentalReportBuilder _amSuppReportBuilder = new MaintenanceDirectivesAMSupplimentalReportBuilder();
 #endif
         private MaintenanceDirectivesReportBuilder _maintenanceDirectiveReportBuilder;
-        private MaintenanceDirectivesFullReportBuilderLitAVia _maintenanceDirectiveReportBuilderLitAVia = new MaintenanceDirectivesFullReportBuilderLitAVia();
+        private MaintenanceDirectivesFullReportBuilderLitAVia _maintenanceDirectiveReportBuilderLitAVia;
 
         private ContextMenuStrip buttonPrintMenuStrip;
         private ToolStripMenuItem itemPrintReportMP;
+        private ToolStripMenuItem itemPrintReportMPLimit;
         private ToolStripMenuItem itemPrintReportAMP;
         private ToolStripMenuItem itemPrintWorkscope;
         private ToolStripMenuItem itemPrintMPSTR;
@@ -87,6 +88,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
         private ToolStripSeparator _toolStripSeparator2;
         private ToolStripSeparator _toolStripSeparator4;
         private ToolStripMenuItem _toolStripMenuItemsWorkPackages;
+        private ToolStripMenuItem _toolStripMenuItemsWShowWP;
         private ToolStripMenuItem _toolStripMenuItemQuotations;
         private ToolStripMenuItem _toolStripMenuItemCopy;
         private ToolStripMenuItem _toolStripMenuItemPaste;
@@ -137,6 +139,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
             buttonPrintMenuStrip = new ContextMenuStrip();
             itemPrintReportMP = new ToolStripMenuItem { Text = "MP" };
+            itemPrintReportMPLimit = new ToolStripMenuItem { Text = "MP Limit" };
             itemPrintReportAMP = new ToolStripMenuItem { Text = "AMP STATUS" };
             itemPrintWorkscope = new ToolStripMenuItem { Text = "WORK SCOPE"};
 	        itemPrintMPSTR = new ToolStripMenuItem { Text = "MP STR" };
@@ -148,7 +151,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 	        itemPrintLitAvia = new ToolStripMenuItem { Text = "SS LA" };
 
 
-			buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { itemPrintReportMP, itemPrintReportAMP, itemPrintWorkscope,
+			buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { itemPrintReportMP, itemPrintReportMPLimit, itemPrintReportAMP, itemPrintWorkscope,
 				itemPrintMPSYS, itemPrintMPSTR, itemPrintMPZonal, itemPrintMPAWL, itemPrintMPLine, itemPrintMPSSIP, itemPrintLitAvia  });
 
             ButtonPrintMenuStrip = buttonPrintMenuStrip;
@@ -484,6 +487,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
             _toolStripMenuItemOpen = new ToolStripMenuItem();
             _toolStripMenuItemComposeWorkPackage = new ToolStripMenuItem();
             _toolStripMenuItemsWorkPackages = new ToolStripMenuItem();
+            _toolStripMenuItemsWShowWP = new ToolStripMenuItem();
             _toolStripMenuItemComposeQuotationOrder = new ToolStripMenuItem();
             _toolStripMenuItemQuotations = new ToolStripMenuItem();
             _toolStripMenuItemDelete = new ToolStripMenuItem();
@@ -513,6 +517,11 @@ namespace CAS.UI.UIControls.MaintananceProgram
             //
             _toolStripMenuItemComposeWorkPackage.Text = "Compose a work package";
             _toolStripMenuItemComposeWorkPackage.Click += ButtonCreateWorkPakageClick;
+            //
+            // _toolStripMenuItemsWShowWP
+            //
+            _toolStripMenuItemsWShowWP.Text = "Show a work package Title";
+			_toolStripMenuItemsWShowWP.Click += _toolStripMenuItemsWShowWP_Click; ;
             //
             // _toolStripMenuItemsWorkPackages
             //
@@ -571,6 +580,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
                                                     _toolStripSeparator2,
                                                     _toolStripMenuItemComposeWorkPackage,
                                                     _toolStripMenuItemsWorkPackages,
+                                                    _toolStripMenuItemsWShowWP,
                                                     _toolStripSeparator1,
                                                     _toolStripMenuItemComposeQuotationOrder,
                                                     _toolStripMenuItemQuotations,
@@ -582,23 +592,25 @@ namespace CAS.UI.UIControls.MaintananceProgram
                                                 });
             _contextMenuStrip.Opening += ContextMenuStripOpen;
         }
-        #endregion
+		#endregion
 
-        #region private void ContextMenuStripOpen(object sender,CancelEventArgs e)
-        /// <summary>
-        /// Проверка на выделение 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ContextMenuStripOpen(object sender, CancelEventArgs e)
+		#region private void ContextMenuStripOpen(object sender,CancelEventArgs e)
+		/// <summary>
+		/// Проверка на выделение 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void ContextMenuStripOpen(object sender, CancelEventArgs e)
         {
-	        if (_directivesViewer.SelectedItems.Count <= 0)
+	        _toolStripMenuItemsWShowWP.Enabled = false;
+			if (_directivesViewer.SelectedItems.Count <= 0)
 	        {
 		        _toolStripMenuItemOpen.Enabled = false;
 		        _toolStripMenuItemShowTaskCard.Enabled = false;
 		        _toolStripMenuItemHighlight.Enabled = false;
 				_toolStripMenuItemComposeWorkPackage.Enabled = false;
 				_toolStripMenuItemsWorkPackages.Enabled = false;
+				_toolStripMenuItemsWShowWP.Enabled = false;
 				_toolStripMenuItemComposeQuotationOrder.Enabled = false;
 				_toolStripMenuItemQuotations.Enabled = false;
 				_toolStripMenuItemDelete.Enabled = false;
@@ -611,6 +623,10 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 if (mpd != null && mpd.TaskCardNumberFile != null)
                     _toolStripMenuItemShowTaskCard.Enabled = true;
                 else _toolStripMenuItemShowTaskCard.Enabled = false;
+                if (mpd.NextPerformanceIsBlocked)
+	                _toolStripMenuItemsWShowWP.Enabled = true;
+
+
             }
 
 	        if (_directivesViewer.SelectedItems.Count > 0)
@@ -743,15 +759,24 @@ namespace CAS.UI.UIControls.MaintananceProgram
             }
         }
 
-        #endregion
+		#endregion
 
-        #region private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
-        /// <summary>
-        /// Создает закупочный ордер
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
+		private void _toolStripMenuItemsWShowWP_Click(object sender, EventArgs e)
+		{
+			if (_directivesViewer.SelectedItems.Count <= 0) return;
+
+			var res = $"{_directivesViewer.SelectedItem.NextPerformance.BlockedByPackage.Title} {_directivesViewer.SelectedItem.NextPerformance.BlockedByPackage.Number}";
+			MessageBox.Show(res, "",
+				MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
+
+		#region private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
+		/// <summary>
+		/// Создает закупочный ордер
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
         {
             //Список комплектующих закупочного акта
             PurchaseManager.ComposeQuotationOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
@@ -958,6 +983,15 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "Maintenance Program";
                 e.RequestedEntity = new ReportScreen(_maintenanceDirectiveReportBuilder);    
             }
+            else if (sender == itemPrintReportMPLimit)
+            {
+	            _maintenanceDirectiveReportBuilderLitAVia = new MaintenanceDirectivesFullReportBuilderLitAVia(true);
+				_maintenanceDirectiveReportBuilderLitAVia.DateAsOf = DateTime.Today.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
+				_maintenanceDirectiveReportBuilderLitAVia.ReportedAircraft = CurrentAircraft;
+				_maintenanceDirectiveReportBuilderLitAVia.AddDirectives(_resultDirectiveArray.OrderBy(i => i.TaskNumberCheck));
+				e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "MP Limit";
+				e.RequestedEntity = new ReportScreen(_maintenanceDirectiveReportBuilderLitAVia);
+			}
             else if (sender == itemPrintWorkscope)
             {
                 _workscopeReportBuilder.ReportedAircraft = CurrentAircraft;
@@ -1025,7 +1059,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
             }
             else if (sender == itemPrintLitAvia)
             {
-	            _maintenanceDirectiveReportBuilderLitAVia.DateAsOf = DateTime.Today.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
+	            _maintenanceDirectiveReportBuilderLitAVia = new MaintenanceDirectivesFullReportBuilderLitAVia();
+				_maintenanceDirectiveReportBuilderLitAVia.DateAsOf = DateTime.Today.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
 				_maintenanceDirectiveReportBuilderLitAVia.ReportedAircraft = CurrentAircraft;
 	            _maintenanceDirectiveReportBuilderLitAVia.AddDirectives(_resultDirectiveArray.OrderBy(i => i.TaskNumberCheck));
 	            e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "SS LA";

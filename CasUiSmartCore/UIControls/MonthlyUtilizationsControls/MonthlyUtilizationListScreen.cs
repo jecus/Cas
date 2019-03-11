@@ -186,15 +186,11 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 
             AnimatedThreadWorker.ReportProgress(0, "load Fligths");
 
-	        var flights = GlobalObjects.AircraftFlightsCore.GetAircraftFlightsByAircraftId(CurrentAircraft.ItemId);
+            GlobalObjects.AircraftFlightsCore.LoadAircraftFlights(CurrentAircraft.ItemId);
+
+			var flights = GlobalObjects.AircraftFlightsCore.GetAircraftFlightsByAircraftId(CurrentAircraft.ItemId);
 	        _initialDirectiveArray.AddRange(flights.Where(t => t.FlightDate >= dateTimePickerDateFrom.Value &&
 	                                                t.FlightDate <= dateTimePickerDateTo.Value));
-			//foreach (var t in flights)
-			//         {
-			//             if (t.FlightDate >= dateTimePickerDateFrom.Value && 
-			//                 t.FlightDate <= dateTimePickerDateTo.Value)
-			//                 _initialDirectiveArray.Add(t);
-			//         }
 			_maintenanceChecks = new List<MaintenanceCheck>(GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<MaintenanceCheckDTO, MaintenanceCheck>(new List<Filter>()
 			{
 				new Filter("ParentAircraft",CurrentAircraft.ItemId),

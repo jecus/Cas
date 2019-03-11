@@ -223,9 +223,11 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
 					//TODO:(Evgenii Babak)Если тип inspectedDetail будет Frame, то при перерасчете будет проверен тип базового агрегата и если он равен Frame,
 					//то берется parentAircraft от базовой детали и считается наработка для ВС. пересмотреть подход калякуляции для ВС
-					labelAircraftTsnCsnLast.Text =
-                        GlobalObjects.CasEnvironment.Calculator.
-                            GetFlightLifelengthOnStartOfDay(inspectedComponent, _currentDirective.LastPerformance.RecordDate).ToString();
+					
+					//labelAircraftTsnCsnLast.Text =
+     //                   GlobalObjects.CasEnvironment.Calculator.
+	    //                    GetFlightLifelengthOnStartOfDay(inspectedComponent, _currentDirective.LastPerformance.RecordDate).ToString();
+					labelAircraftTsnCsnLast.Text = _currentDirective.LastPerformance.OnLifelength.ToString();
 				}
 
                 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -344,6 +346,9 @@ namespace CAS.UI.UIControls.MaintananceProgram
                                 Convert.GetDateFormat(
                                     _currentDirective.LastPerformance.RecordDate.AddCalendarSpan(
                                         _currentDirective.Threshold.RepeatInterval.CalendarSpan));
+                            labelDateNext.Text =
+	                            Convert.GetDateFormat(_currentDirective.NextPerformance.PerformanceDate.Value);
+
                         }
                         else
                         {
@@ -363,15 +368,17 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
 							Lifelength nextAircraftTsnCsn =
                                 GlobalObjects.CasEnvironment.Calculator.
-                                    GetFlightLifelengthOnStartOfDay(inspectedComponent, _currentDirective.LastPerformance.RecordDate);
+	                                GetFlightLifelengthOnStartOfDay(inspectedComponent, _currentDirective.LastPerformance.RecordDate);
 
-                            nextTsnCsn.Add(_currentDirective.LastPerformance.RecordDate, _currentDirective.Threshold.RepeatInterval);
-                            nextTsnCsn.Resemble(_currentDirective.Threshold.RepeatInterval);
-                            labelComponentTsnCsnNext.Text = nextTsnCsn.ToString();
+							nextTsnCsn.Add(_currentDirective.LastPerformance.RecordDate, _currentDirective.Threshold.RepeatInterval);
+							nextTsnCsn.Resemble(_currentDirective.Threshold.RepeatInterval);
+                            //labelComponentTsnCsnNext.Text = nextTsnCsn.ToString();
+                            labelComponentTsnCsnNext.Text = _currentDirective.NextPerformance.PerformanceSource.ToString();
 
                             nextAircraftTsnCsn.Add(_currentDirective.LastPerformance.RecordDate, _currentDirective.Threshold.RepeatInterval);
                             nextAircraftTsnCsn.Resemble(_currentDirective.Threshold.RepeatInterval);
-                            labelAircraftTsnCsnNext.Text = nextAircraftTsnCsn.ToString();
+                            //labelAircraftTsnCsnNext.Text = nextAircraftTsnCsn.ToString();
+                            labelAircraftTsnCsnNext.Text = _currentDirective.NextPerformance.PerformanceSource.ToString(); 
 
                             if (labelComponentTsnCsnNext.Text == "") labelComponentTsnCsnNext.Text = "n/a";
                             if (labelAircraftTsnCsnNext.Text == "") labelAircraftTsnCsnNext.Text = "n/a";

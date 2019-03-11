@@ -360,7 +360,10 @@ namespace CAS.UI.UIControls.StoresControls
             {
                 Component componentItem = (Component)parent;
 	            store = GlobalObjects.StoreCore.GetStoreById(componentItem.ParentStoreId);
-                approx = componentItem.NextPerformanceDate;
+	            if (store == null)
+		            MessageBox.Show("qwe");
+
+				approx = componentItem.NextPerformanceDate;
                 next = componentItem.NextPerformanceSource;
                 remains = componentItem.Remains;
                 ata = componentItem.Product?.ATAChapter ?? componentItem.ATAChapter;
@@ -456,6 +459,10 @@ namespace CAS.UI.UIControls.StoresControls
                     repeatInterval = dd.Threshold.RepeatInterval;
                 }
 	            store = GlobalObjects.StoreCore.GetStoreById(dd.ParentComponent.ParentStoreId);
+
+	            if (store == null)
+		            MessageBox.Show("qwe");
+
 				approx = dd.NextPerformanceDate;
                 next = dd.NextPerformanceSource;
                 remains = dd.Remains;

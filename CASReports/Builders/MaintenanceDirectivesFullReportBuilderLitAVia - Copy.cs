@@ -6,6 +6,7 @@ using Auxiliary;
 using CASReports.Datasets;
 using CASReports.ReportTemplates;
 using CASTerms;
+using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -17,8 +18,9 @@ namespace CASReports.Builders
 {
     public class MaintenanceDirectivesFullReportBuilderLitAVia : AbstractReportBuilder
     {
+	    private readonly bool _mpLimit;
 
-        #region Fields
+	    #region Fields
 
         private string _reportTitle = "AMP TASKS STATUS";
         private string _filterSelection;
@@ -34,6 +36,7 @@ namespace CASReports.Builders
         private Lifelength _lifelengthAircraftSinceOverhaul;
         private Lifelength _current;
         private DateTime _manufactureDate;
+        private Lifelength reportAircraftLifeLenght;
 
         #endregion
 
@@ -208,6 +211,11 @@ namespace CASReports.Builders
 
         #endregion
 
+        public MaintenanceDirectivesFullReportBuilderLitAVia(bool mpLimit = false)
+        {
+	        _mpLimit = mpLimit;
+        }
+
         #region Methods
 
         #region protected virtual void GetFilterSelection(CommonFilterCollection filterCollection)
@@ -322,7 +330,7 @@ namespace CASReports.Builders
             if (_reportedAircraft == null)
                 return;
 
-            var reportAircraftLifeLenght = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(_reportedAircraft);
+            reportAircraftLifeLenght = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(_reportedAircraft);
 
 	        var apu = GlobalObjects.ComponentCore.GetAicraftBaseComponents(_reportedAircraft.ItemId)
 		        .FirstOrDefault(i => i.BaseComponentType == BaseComponentType.Apu);
@@ -384,10 +392,6 @@ namespace CASReports.Builders
             Lifelength used = Lifelength.Null;
 
             //string remarks = reportedDirective.LastPerformance != null ? reportedDirective.LastPerformance.Remarks : reportedDirective.Remarks;
-            string remarks = reportedDirective.Remarks;
-            string directiveType = reportedDirective.WorkType.ToString();
-            double cost = reportedDirective.Cost;
-            double mh = reportedDirective.ManHours;
             if (reportedDirective.Status == DirectiveStatus.Closed) status = "C";
             if (reportedDirective.Status == DirectiveStatus.Open) status = "O";
             if (reportedDirective.Status == DirectiveStatus.Repetative) status = "R";
@@ -425,21 +429,77 @@ namespace CASReports.Builders
             }
 
 
-	        destinationDataSet.ItemsTable.AddItemsTableRow(reportedDirective.TaskCardNumber, reportedDirective.TaskNumberCheck, reportedDirective.Description,
-		        firstPerformanceString,
-		        reportedDirective.Threshold.RepeatInterval != null ? reportedDirective.Threshold.RepeatInterval.Hours?.ToString() : "*",
-		        reportedDirective.Threshold.RepeatInterval != null ? reportedDirective.Threshold.RepeatInterval.Cycles?.ToString() : "*",
-		        reportedDirective.Threshold.RepeatInterval != null ? reportedDirective.Threshold.RepeatInterval.Days?.ToString() : "*",
-		        reportedDirective.LastPerformance != null ? reportedDirective.LastPerformance.OnLifelength.Hours?.ToString() : "*",
-		        reportedDirective.LastPerformance != null ? reportedDirective.LastPerformance.OnLifelength.Cycles?.ToString() : "*",
-		        reportedDirective.LastPerformance != null ? reportedDirective.LastPerformance.RecordDate.Date.ToString("dd.MM.yyyy") : "*",
-				reportedDirective.NextPerformance != null ? reportedDirective.NextPerformance.PerformanceSource.Hours.ToString() : "*",
-		        reportedDirective.NextPerformance != null ? reportedDirective.NextPerformance.PerformanceSource.Cycles.ToString() : "*",
-		        reportedDirective.NextPerformance?.PerformanceDate != null  ? reportedDirective.NextPerformance.PerformanceDate.Value.ToString("dd.MM.yyyy") : "*" ,
-		        reportedDirective.Remains != null ? reportedDirective.Remains.Hours.ToString() : "*",
-		        reportedDirective.Remains != null ? reportedDirective.Remains.Cycles.ToString() : "*",
-		        reportedDirective.Remains != null ? reportedDirective.Remains.Days.ToString() : "*", "", ""
-				);
+            var remainCalc = Lifelength.Zero;
+            NextPerformance next = null;
+
+            try
+            {
+	            if (_mpLimit)
+	            {
+		            if (reportedDirective.LastPerformance != null)
+		            {
+			            if (!reportedDirective.Threshold.RepeatInterval.IsNullOrZero() && !reportedDirective.IsClosed)
+			            {
+				            next = reportedDirective.NextPerformance;
+
+				            next.PerformanceSource = Lifelength.Zero;
+				            next.PerformanceSource.Add(reportedDirective.LastPerformance.OnLifelength);
+				            next.PerformanceSource.Add(reportedDirective.Threshold.RepeatInterval);
+				            next.PerformanceSource.Resemble(reportedDirective.Threshold.RepeatInterval);
+
+				            if (reportedDirective.Threshold.RepeatInterval.Days.HasValue)
+					            next.PerformanceDate =
+						            reportedDirective.LastPerformance.RecordDate.AddDays(reportedDirective.Threshold
+							            .RepeatInterval.Days.Value);
+				            else next.PerformanceDate = null;
+
+				            remainCalc.Add(next.PerformanceSource);
+				            remainCalc.Substract(_current);
+				            remainCalc.Resemble(reportedDirective.Threshold.RepeatInterval);
+
+				            if (next.PerformanceDate != null)
+					            remainCalc.Days = DateTimeExtend.DifferenceDateTime(DateTime.Today, next.PerformanceDate.Value).Days;
+				           
+			            }
+		            }
+		            else if(reportedDirective.NextPerformanceSource != null && !reportedDirective.NextPerformanceSource.IsNullOrZero())
+		            {
+			            if (!reportedDirective.Threshold.RepeatInterval.IsNullOrZero())
+			            {
+				            remainCalc.Add(reportedDirective.NextPerformanceSource);
+				            remainCalc.Substract(_current);
+				            remainCalc.Resemble(reportedDirective.Threshold.RepeatInterval);
+			            }
+		            }
+
+	            }
+	            else
+	            {
+		            remainCalc = reportedDirective.Remains;
+		            next = reportedDirective.NextPerformance;
+	            }
+
+	            destinationDataSet.ItemsTable.AddItemsTableRow(reportedDirective.TaskCardNumber, reportedDirective.TaskNumberCheck, reportedDirective.Description,
+		            firstPerformanceString,
+		            reportedDirective.Threshold.RepeatInterval != null ? reportedDirective.Threshold.RepeatInterval.Hours?.ToString() : "*",
+		            reportedDirective.Threshold.RepeatInterval != null ? reportedDirective.Threshold.RepeatInterval.Cycles?.ToString() : "*",
+		            reportedDirective.Threshold.RepeatInterval != null ? reportedDirective.Threshold.RepeatInterval.Days?.ToString() : "*",
+		            reportedDirective.LastPerformance != null ? reportedDirective.LastPerformance.OnLifelength.Hours?.ToString() : "*",
+		            reportedDirective.LastPerformance != null ? reportedDirective.LastPerformance.OnLifelength.Cycles?.ToString() : "*",
+		            reportedDirective.LastPerformance != null ? reportedDirective.LastPerformance.RecordDate.Date.ToString("dd.MM.yyyy") : "*",
+		            next != null ? next.PerformanceSource.Hours.ToString() : "*",
+		            next != null ? next.PerformanceSource.Cycles.ToString() : "*",
+		            next?.PerformanceDate != null  ? next.PerformanceDate.Value.ToString("dd.MM.yyyy") : "*" ,
+		            remainCalc != null ? remainCalc.Hours.ToString() : "*",
+		            remainCalc != null ? remainCalc.Cycles.ToString() : "*",
+		            remainCalc != null ? remainCalc.Days.ToString() : "*", "", ""
+	            );
+            }
+            catch (Exception e)
+            {
+	            Console.WriteLine(e);
+	            throw;
+            }
         }
 
         #endregion

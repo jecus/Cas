@@ -10,7 +10,9 @@ namespace CAS.UI.Management.Dispatchering
     /// </summary>
     public class ReferenceStatusImageLinkLabel : StatusImageLinkLabel,IReference
     {
-        #region Fields
+	    private readonly bool _onlyClick;
+
+	    #region Fields
 
         #endregion
 
@@ -88,19 +90,24 @@ namespace CAS.UI.Management.Dispatchering
             DisplayerText = displayerText;   
         }
 
-        #endregion
+		#endregion
+
+		public ReferenceStatusImageLinkLabel(bool onlyClick)
+		{
+			_onlyClick = onlyClick;
+		}
 
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region private void OnDisplayerRequested()
+		#region private void OnDisplayerRequested()
 
-        /// <summary>
-        /// Метод обработки события DisplayerRequested
-        /// </summary>
-        private void OnDisplayerRequested()
+		/// <summary>
+		/// Метод обработки события DisplayerRequested
+		/// </summary>
+		private void OnDisplayerRequested()
         {
             if (null != DisplayerRequested)
             {
@@ -124,7 +131,8 @@ namespace CAS.UI.Management.Dispatchering
         ///<param name="e">An <see cref="T:System.EventArgs"></see> that contains the event data. </param>
         protected override void OnClick(EventArgs e)
         {
-            OnDisplayerRequested();
+			if(!_onlyClick)
+				OnDisplayerRequested();
             base.OnClick(e);
         }
 
