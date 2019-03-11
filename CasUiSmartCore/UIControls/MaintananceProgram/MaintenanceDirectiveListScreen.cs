@@ -62,10 +62,11 @@ namespace CAS.UI.UIControls.MaintananceProgram
         private MaintenanceDirectivesAMSupplimentalReportBuilder _amSuppReportBuilder = new MaintenanceDirectivesAMSupplimentalReportBuilder();
 #endif
         private MaintenanceDirectivesReportBuilder _maintenanceDirectiveReportBuilder;
-        private MaintenanceDirectivesFullReportBuilderLitAVia _maintenanceDirectiveReportBuilderLitAVia = new MaintenanceDirectivesFullReportBuilderLitAVia();
+        private MaintenanceDirectivesFullReportBuilderLitAVia _maintenanceDirectiveReportBuilderLitAVia;
 
         private ContextMenuStrip buttonPrintMenuStrip;
         private ToolStripMenuItem itemPrintReportMP;
+        private ToolStripMenuItem itemPrintReportMPLimit;
         private ToolStripMenuItem itemPrintReportAMP;
         private ToolStripMenuItem itemPrintWorkscope;
         private ToolStripMenuItem itemPrintMPSTR;
@@ -138,6 +139,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
             buttonPrintMenuStrip = new ContextMenuStrip();
             itemPrintReportMP = new ToolStripMenuItem { Text = "MP" };
+            itemPrintReportMPLimit = new ToolStripMenuItem { Text = "MP Limit" };
             itemPrintReportAMP = new ToolStripMenuItem { Text = "AMP STATUS" };
             itemPrintWorkscope = new ToolStripMenuItem { Text = "WORK SCOPE"};
 	        itemPrintMPSTR = new ToolStripMenuItem { Text = "MP STR" };
@@ -149,7 +151,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 	        itemPrintLitAvia = new ToolStripMenuItem { Text = "SS LA" };
 
 
-			buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { itemPrintReportMP, itemPrintReportAMP, itemPrintWorkscope,
+			buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { itemPrintReportMP, itemPrintReportMPLimit, itemPrintReportAMP, itemPrintWorkscope,
 				itemPrintMPSYS, itemPrintMPSTR, itemPrintMPZonal, itemPrintMPAWL, itemPrintMPLine, itemPrintMPSSIP, itemPrintLitAvia  });
 
             ButtonPrintMenuStrip = buttonPrintMenuStrip;
@@ -981,6 +983,15 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "Maintenance Program";
                 e.RequestedEntity = new ReportScreen(_maintenanceDirectiveReportBuilder);    
             }
+            else if (sender == itemPrintReportMPLimit)
+            {
+	            _maintenanceDirectiveReportBuilderLitAVia = new MaintenanceDirectivesFullReportBuilderLitAVia(true);
+				_maintenanceDirectiveReportBuilderLitAVia.DateAsOf = DateTime.Today.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
+				_maintenanceDirectiveReportBuilderLitAVia.ReportedAircraft = CurrentAircraft;
+				_maintenanceDirectiveReportBuilderLitAVia.AddDirectives(_resultDirectiveArray.OrderBy(i => i.TaskNumberCheck));
+				e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "MP Limit";
+				e.RequestedEntity = new ReportScreen(_maintenanceDirectiveReportBuilderLitAVia);
+			}
             else if (sender == itemPrintWorkscope)
             {
                 _workscopeReportBuilder.ReportedAircraft = CurrentAircraft;
@@ -1048,7 +1059,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
             }
             else if (sender == itemPrintLitAvia)
             {
-	            _maintenanceDirectiveReportBuilderLitAVia.DateAsOf = DateTime.Today.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
+	            _maintenanceDirectiveReportBuilderLitAVia = new MaintenanceDirectivesFullReportBuilderLitAVia();
+				_maintenanceDirectiveReportBuilderLitAVia.DateAsOf = DateTime.Today.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
 				_maintenanceDirectiveReportBuilderLitAVia.ReportedAircraft = CurrentAircraft;
 	            _maintenanceDirectiveReportBuilderLitAVia.AddDirectives(_resultDirectiveArray.OrderBy(i => i.TaskNumberCheck));
 	            e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "SS LA";
