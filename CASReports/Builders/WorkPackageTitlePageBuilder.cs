@@ -120,7 +120,7 @@ namespace CASReports.Builders
         /// <param name="destinationDataSet">Таблица, в которую добавляется элемент</param>
         private void AddItemDataset(KeyValuePair<string, int> keyValuePair, WorkPackageTitlePageDataSet destinationDataSet)
         {
-            destinationDataSet.WPItemsTable.AddWPItemsTableRow(keyValuePair.Key, keyValuePair.Value);
+            destinationDataSet.WPItemsTable.AddWPItemsTableRow(keyValuePair.Key, keyValuePair.Value, "", "", "");
         }
 
         #endregion
