@@ -24,8 +24,10 @@ namespace CASReports.Builders
         #region Fields
 
         private WorkPackage _currentWorkPackage;
+        private readonly int _count;
+        private readonly List<string[]> _summarySheetItems;
 
-		private readonly bool _isScatReport;
+        private readonly bool _isScatReport;
 
 		#endregion
 
@@ -47,14 +49,19 @@ namespace CASReports.Builders
         #endregion
 
         #region Constructor
+
         /// <summary>
         /// Создается построитель отчета Release To Service 
         /// </summary>
         /// <param name="workPackage">Рабочий пакет</param>
+        /// <param name="count"></param>
+        /// <param name="summarySheetItems"></param>
         /// <param name="items"></param>
-        public WOBuilderScat(WorkPackage workPackage)
+        public WOBuilderScat(WorkPackage workPackage, int count, List<string[]> summarySheetItems)
         {
-            _currentWorkPackage = workPackage;
+	        _currentWorkPackage = workPackage;
+	        _count = count;
+	        _summarySheetItems = summarySheetItems;
         }
 
 		#endregion
@@ -92,38 +99,10 @@ namespace CASReports.Builders
 		{
 			int count = 1;
 
-			foreach (var item in _currentWorkPackage.MaintenanceDirectives)
+			foreach (var item in _summarySheetItems)
 			{
-				destinationDataSet.WPItemsTable.AddWPItemsTableRow(item.TaskCardNumber,
-					0, item.Description.Replace("\r\n", " "), count.ToString(), item.TaskNumberCheck);
-				count++;
-			}
-
-			foreach (Directive item in _currentWorkPackage.AdStatus)
-			{
-				var directiveString = item.Title + (string.IsNullOrEmpty(item.Paragraph) ? "" : (" § " + item.Paragraph));
-				var taskCardString = item.EngineeringOrders != "" ? item.EngineeringOrders : "*";
-
-				destinationDataSet.WPItemsTable.AddWPItemsTableRow(directiveString,
-					0, item.Description, count.ToString(), taskCardString);
-				count++;
-			}
-
-			foreach (Directive item in _currentWorkPackage.AdStatus)
-			{
-				var directiveString = "EO" + (string.IsNullOrEmpty(item.Paragraph) ? "" : (" § " + item.Paragraph));
-				var taskCardString = item.EngineeringOrders != "" ? item.EngineeringOrders : "*";
-
-				destinationDataSet.WPItemsTable.AddWPItemsTableRow(directiveString,
-					0, item.Description, count.ToString(), taskCardString);
-				count++;
-			}
-
-			foreach (var item in _currentWorkPackage.ComponentDirectives)
-			{
-				var d = item.ParentComponent;
-				destinationDataSet.WPItemsTable.AddWPItemsTableRow(item.MaintenanceDirective?.TaskNumberCheck,
-					0, item.DirectiveType + " for " + d.Description + " P/N:" + d.PartNumber + " S/N:" + d.SerialNumber, count.ToString(), item.MaintenanceDirective?.TaskCardNumber);
+				destinationDataSet.WPItemsTable.AddWPItemsTableRow(item[0],
+					0, item[1], count.ToString(), item[4]);
 				count++;
 			}
 		}
@@ -158,7 +137,7 @@ namespace CASReports.Builders
 			var wpTitle = _currentWorkPackage.Title;
 			var wpCreatedBy = _currentWorkPackage.Author;
 			var wpPublishedBy = _currentWorkPackage.PublishedBy;
-			var accomplich = Items.Count.ToString();
+			var accomplich = _count.ToString();
 			var createDate = _currentWorkPackage.CreateDate;
 
 
@@ -219,6 +198,7 @@ namespace CASReports.Builders
 			}
 			return string.Join("+" , groups.Distinct().ToArray());
 		}
+
 
 		#endregion
 	}

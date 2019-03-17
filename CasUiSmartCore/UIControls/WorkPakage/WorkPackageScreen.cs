@@ -1224,10 +1224,8 @@ namespace CAS.UI.UIControls.WorkPakage
 			}
 	        else if (sender == _itemPrintOverviewWO)
 			{
-				_builderScat = new WOBuilderScat(_currentWorkPackage);
-				_builderScat.Items = _resultItemsArray;
-				e.DisplayerText = aircraftHeaderControl1.Operator.Name + "." + "WO report";
-				e.RequestedEntity = new ReportScreen(_builderScat);
+				var form = new SelectWPPrintTasksForm(_currentWorkPackage, true);
+				form.ShowDialog();
 			}
 			else if (sender == _itemPrintEquipmentAndMaterials)
 			{

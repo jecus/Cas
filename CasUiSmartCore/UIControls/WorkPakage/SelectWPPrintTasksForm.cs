@@ -45,8 +45,9 @@ namespace CAS.UI.UIControls.WorkPakage
 	    private const string _comboBoxItemOneForAll = "One for All";
 
 	    private readonly WorkPackage _workPackage;
-        
-        #endregion
+	    private readonly bool _isWorkOrder;
+
+	    #endregion
 
         #region Properties
 
@@ -63,12 +64,13 @@ namespace CAS.UI.UIControls.WorkPakage
 
         ///<summary>
         ///</summary>
-        public SelectWPPrintTasksForm(WorkPackage workPackage)
+        public SelectWPPrintTasksForm(WorkPackage workPackage, bool isWorkOrder = false)
             : this()
         {
             if (workPackage == null)
                 throw new ArgumentNullException();
             _workPackage = workPackage;
+            _isWorkOrder = isWorkOrder;
 
             _animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
             _animatedThreadWorker.RunWorkerCompleted += BackgroundWorkerRunWorkerLoadCompleted;
@@ -1540,22 +1542,6 @@ namespace CAS.UI.UIControls.WorkPakage
 				var newkp = new KeyValuePair<string, string>(item.Description + " " + item.PartNumber + " " + item.SerialNumber, "Base Component");
 				mainPageItems.Add(newkp);
 			}
-			//foreach (DetailDirective item in selectedDetailDirectives)
-			//{
-			//    Detail d = item.ParentDetail;
-			//    KeyValuePair<string, string> newkp =
-			//        new KeyValuePair<string, string>(item.DirectiveType.FullName + " " +
-			//              d.Description + " " +
-			//              d.PartNumber + " " + d.SerialNumber, "Component Task");
-			//    if (shiftFromEnd > 0)
-			//    {
-			//        mainPageItems.Insert(mainPageItems.Count - shiftFromEnd, newkp);
-			//    }
-			//    else
-			//    {
-			//        mainPageItems.Add(newkp);
-			//    }
-			//}
 
 			#endregion
 
@@ -1563,10 +1549,6 @@ namespace CAS.UI.UIControls.WorkPakage
 
             foreach (NonRoutineJob item in selectedNrjs)
             {
-                //KeyValuePair<string, string> newkp =
-                //    new KeyValuePair<string, string>(item.Title, "Non-Routine Jobs");
-                //mainPageItems.Add(newkp);
-                //titlePageItems.Add(newkp);
 
                 WorkPackageRecord r =
                     _workPackage.WorkPakageRecords
@@ -1927,104 +1909,123 @@ namespace CAS.UI.UIControls.WorkPakage
 
 
             #region Создание листа перечня работ
-            try
+
+            if (!_isWorkOrder)
             {
+	            try
+	            {
 #if AQUILINE || DemoDebug || SCAT
-                var tempSummarySheet = new WorkPackageSummarySheetBuilderAquiLine(_workPackage, summarySheetItems, true);
-                inputDocumentTitle = PdfReader.Open(((WorkPackageSummarySheetReportScat)tempSummarySheet.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
+		            var tempSummarySheet = new WorkPackageSummarySheetBuilderAquiLine(_workPackage, summarySheetItems, true);
+		            inputDocumentTitle = PdfReader.Open(((WorkPackageSummarySheetReportScat)tempSummarySheet.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
 #else
                 var tempSummarySheet = new WorkPackageSummarySheetBuilder(_workPackage, summarySheetItems);
                  inputDocumentTitle = PdfReader.Open(((WorkPackageSummarySheetReport)tempSummarySheet.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
 #endif
 
-                for (int i = inputDocumentTitle.Pages.Count - 1; i >= 0; i--)
-                {
-                    _outputDocument.InsertPage(0, inputDocumentTitle.Pages[i]);
-                }
-                mainPageItems.Insert(0, new KeyValuePair<string, string>("Summary Sheet", inputDocumentTitle.Pages.Count.ToString()));
-                titlePageItems.Insert(0, new KeyValuePair<string, int>("Summary Sheet", inputDocumentTitle.Pages.Count));
-                crsPageItems.Insert(0, new KeyValuePair<string, int>("page of Summary Sheet (Scheduled works)", inputDocumentTitle.Pages.Count));
+		            for (int i = inputDocumentTitle.Pages.Count - 1; i >= 0; i--)
+		            {
+			            _outputDocument.InsertPage(0, inputDocumentTitle.Pages[i]);
+		            }
+		            mainPageItems.Insert(0, new KeyValuePair<string, string>("Summary Sheet", inputDocumentTitle.Pages.Count.ToString()));
+		            titlePageItems.Insert(0, new KeyValuePair<string, int>("Summary Sheet", inputDocumentTitle.Pages.Count));
+		            crsPageItems.Insert(0, new KeyValuePair<string, int>("page of Summary Sheet (Scheduled works)", inputDocumentTitle.Pages.Count));
 
-            }
-            catch (PdfReaderException ex)
-            {
-                MessageBox.Show("Error while opening PDF Document." +
-								"\nComponents:" +
-                                "\n" + ex.Message,
-                                (string)new GlobalTermsProvider()["SystemName"],
-                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
-                                MessageBoxDefaultButton.Button1);
-            }
-            catch (Exception ex)
-            {
-                Program.Provider.Logger.Log("Error while opening PDF Document.", ex);
+	            }
+	            catch (PdfReaderException ex)
+	            {
+		            MessageBox.Show("Error while opening PDF Document." +
+		                            "\nComponents:" +
+		                            "\n" + ex.Message,
+			            (string)new GlobalTermsProvider()["SystemName"],
+			            MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+			            MessageBoxDefaultButton.Button1);
+	            }
+	            catch (Exception ex)
+	            {
+		            Program.Provider.Logger.Log("Error while opening PDF Document.", ex);
+	            }
             }
             #endregion
 
             _animatedThreadWorker.ReportProgress(75, "Creating Certificate of Release to Service");
 
-            #region формирование и создание листа ReleaceToService
+			#region формирование и создание листа ReleaceToService
 
-            try
-            {
+			if (!_isWorkOrder)
+			{
+				try
+				{
 #if AQUILINE || DemoDebug || SCAT
-				var tempTitle = new WorkPackageReleaseToServiceBuilderAquiline(_workPackage, crsPageItems, true);
-				inputDocumentTitle = PdfReader.Open(((WorkPackageReleaseToServiceReportScat)tempTitle.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
+					var tempTitle = new WorkPackageReleaseToServiceBuilderAquiline(_workPackage, crsPageItems, true);
+					inputDocumentTitle =
+						PdfReader.Open(
+							((WorkPackageReleaseToServiceReportScat) tempTitle.GenerateReport()).ExportToStream(
+								ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
 #else
 				var tempTitle = new WorkPackageReleaseToServiceBuilder(_workPackage, crsPageItems);
-                inputDocumentTitle = PdfReader.Open(((WorkPackageReleaseToServiceReport)tempTitle.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
+                inputDocumentTitle =
+ PdfReader.Open(((WorkPackageReleaseToServiceReport)tempTitle.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
 #endif
 
-				for (int i = inputDocumentTitle.Pages.Count - 1; i >= 0; i--)
-                {
-                    _outputDocument.InsertPage(0, inputDocumentTitle.Pages[i]);
-                }
-                mainPageItems.Insert(0, new KeyValuePair<string, string>("Certificate of Release to Service", inputDocumentTitle.Pages.Count.ToString()));
-                titlePageItems.Insert(0, new KeyValuePair<string, int>("Certificate of Release to Service", inputDocumentTitle.Pages.Count));
-            }
-            catch (PdfReaderException ex)
-            {
-                MessageBox.Show("Error while opening PDF Document." +
-								"\nComponents:" +
-                                "\n" + ex.Message,
-                                (string)new GlobalTermsProvider()["SystemName"],
-                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
-                                MessageBoxDefaultButton.Button1);
-            }
-            catch (Exception ex)
-            {
-                Program.Provider.Logger.Log("Error while opening PDF Document.", ex);
-            }
+					for (int i = inputDocumentTitle.Pages.Count - 1; i >= 0; i--)
+					{
+						_outputDocument.InsertPage(0, inputDocumentTitle.Pages[i]);
+					}
 
-#endregion
+					mainPageItems.Insert(0,
+						new KeyValuePair<string, string>("Certificate of Release to Service",
+							inputDocumentTitle.Pages.Count.ToString()));
+					titlePageItems.Insert(0,
+						new KeyValuePair<string, int>("Certificate of Release to Service",
+							inputDocumentTitle.Pages.Count));
+				}
+				catch (PdfReaderException ex)
+				{
+					MessageBox.Show("Error while opening PDF Document." +
+					                "\nComponents:" +
+					                "\n" + ex.Message,
+						(string) new GlobalTermsProvider()["SystemName"],
+						MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+						MessageBoxDefaultButton.Button1);
+				}
+				catch (Exception ex)
+				{
+					Program.Provider.Logger.Log("Error while opening PDF Document.", ex);
+				}
+			}
+
+			#endregion
 
             _animatedThreadWorker.ReportProgress(85, "Creating Main Page");
 
 #region создание Главной страницы
 
-            try
-            {
-				var tempMp = new WorkPackageMainPageBuilder(_workPackage, mainPageItems, true);
-                inputDocumentTitle = PdfReader.Open(((WPMainPagePerortScat)tempMp.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
+if (!_isWorkOrder)
+{
+	try
+	{
+		var tempMp = new WorkPackageMainPageBuilder(_workPackage, mainPageItems, true);
+		inputDocumentTitle = PdfReader.Open(((WPMainPagePerortScat)tempMp.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
 
-				for (int i = inputDocumentTitle.Pages.Count - 1; i >= 0; i--)
-                {
-                    _outputDocument.InsertPage(0, inputDocumentTitle.Pages[i]);
-                }
-            }
-            catch (PdfReaderException ex)
-            {
-                MessageBox.Show("Error while opening PDF Document." +
-								"\nComponents:" +
-                                "\n" + ex.Message,
-                                (string)new GlobalTermsProvider()["SystemName"],
-                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
-                                MessageBoxDefaultButton.Button1);
-            }
-            catch (Exception ex)
-            {
-                Program.Provider.Logger.Log("Error while opening PDF Document.", ex);
-            }
+		for (int i = inputDocumentTitle.Pages.Count - 1; i >= 0; i--)
+		{
+			_outputDocument.InsertPage(0, inputDocumentTitle.Pages[i]);
+		}
+	}
+	catch (PdfReaderException ex)
+	{
+		MessageBox.Show("Error while opening PDF Document." +
+		                "\nComponents:" +
+		                "\n" + ex.Message,
+			(string)new GlobalTermsProvider()["SystemName"],
+			MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+			MessageBoxDefaultButton.Button1);
+	}
+	catch (Exception ex)
+	{
+		Program.Provider.Logger.Log("Error while opening PDF Document.", ex);
+	}
+}
 
 #endregion
 
@@ -2035,6 +2036,16 @@ namespace CAS.UI.UIControls.WorkPakage
             try
             {
 #if AQUILINE || DemoDebug || SCAT
+	            if (_isWorkOrder)
+	            {
+		            var _builderScat = new WOBuilderScat(_workPackage, _outputDocument.Pages.Count, summarySheetItems);
+		            inputDocumentTitle = PdfReader.Open(((WOScat)_builderScat.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
+
+		            for (int i = inputDocumentTitle.Pages.Count - 1; i >= 0; i--)
+		            {
+			            _outputDocument.InsertPage(0, inputDocumentTitle.Pages[i]);
+		            }
+				}
 				//var tempSummarySheet = new WorkPackageTitleBuilderAquiline(_workPackage, titlePageItems, true);
 				//inputDocumentTitle = PdfReader.Open(((WPTitlePageReportScat)tempSummarySheet.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
 #else
