@@ -370,10 +370,89 @@ namespace CAS.UI.ExcelExport
 
 		}
 
+        public void ExportATLB()
+        {
+            var sheetName = "ATLB";
 
-		#region public void Dispose()
+            var discripancy = GlobalObjects.DiscrepanciesCore.GetDiscrepancies();
 
-		public void Dispose()
+            foreach (var discrepancy in discripancy)
+                discrepancy.Aircraft = GlobalObjects.AircraftsCore.GetAircraftById(discrepancy.ParentFlight.AircraftId);
+
+            //Добавляем старницу
+            Workbook.Worksheets.Add(sheetName);
+            var workSheet = Workbook.Worksheets[sheetName];
+
+            FillHeaderCell(workSheet.Cells[1, 1], "Flight Date", ExcelHorizontalAlignment.Center);
+            workSheet.Column(1).Width=10;
+
+            FillHeaderCell(workSheet.Cells[1, 2], "Aircraft", ExcelHorizontalAlignment.Center);
+            workSheet.Column(2).Width=20;
+
+            FillHeaderCell(workSheet.Cells[1, 3], "Model", ExcelHorizontalAlignment.Center);
+            workSheet.Column(3).AutoFit();
+
+            FillHeaderCell(workSheet.Cells[1, 4], "Page №", ExcelHorizontalAlignment.Center);
+            workSheet.Column(4).AutoFit();
+
+            FillHeaderCell(workSheet.Cells[1, 5], "Description", ExcelHorizontalAlignment.Center);
+            workSheet.Column(5).Width=40;
+
+            FillHeaderCell(workSheet.Cells[1, 6], "Corr. Action", ExcelHorizontalAlignment.Center);
+            workSheet.Column(6).Width=40;
+
+            FillHeaderCell(workSheet.Cells[1, 7], "Station", ExcelHorizontalAlignment.Center);
+            workSheet.Column(7).AutoFit();
+
+            FillHeaderCell(workSheet.Cells[1, 8], "Auth. B1", ExcelHorizontalAlignment.Center);
+            workSheet.Column(8).Width=20;
+
+            FillHeaderCell(workSheet.Cells[1, 9], "ATA", ExcelHorizontalAlignment.Center);
+            workSheet.Column(9).Width = 20;
+
+            FillHeaderCell(workSheet.Cells[1, 10], "Comp. Off P/N", ExcelHorizontalAlignment.Center);
+            workSheet.Column(10).AutoFit();
+
+            FillHeaderCell(workSheet.Cells[1, 11], "Comp. Off S/N", ExcelHorizontalAlignment.Center);
+            workSheet.Column(11).AutoFit();
+
+            FillHeaderCell(workSheet.Cells[1, 12], "Comp On P/N", ExcelHorizontalAlignment.Center);
+            workSheet.Column(12).AutoFit();
+
+            FillHeaderCell(workSheet.Cells[1, 13], "Comp On S/N", ExcelHorizontalAlignment.Center);
+            workSheet.Column(13).AutoFit();
+
+            FillHeaderCell(workSheet.Cells[1, 14], "Remarks", ExcelHorizontalAlignment.Center);
+            workSheet.Column(14).Width=10;
+
+            int currentRowPosition = 2;
+            int currentColumnPosition = 1;
+
+            foreach (var d in discripancy.OrderByDescending(i => i.ParentFlightDate))
+            {
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.ParentFlightDate.Value.ToString(new GlobalTermsProvider()["DateFormat"].ToString()));
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.Aircraft.ToString(), ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.Model.ShortName);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.ParentFlight?.PageNo, ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.Description, ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.CorrectiveActionDescription, ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.ParentFlight.StationToId.ShortName);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.CertificateOfReleaseToServiceAuthorizationB1 != null ? d.CertificateOfReleaseToServiceAuthorizationB1.ToString() : "", ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.ATAChapter != null ? d.ATAChapter.ToString() : "", ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.CorrectiveAction.PartNumberOff, ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.CorrectiveAction.SerialNumberOff, ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.CorrectiveAction.PartNumberOn, ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.CorrectiveAction.SerialNumberOn, ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.Remark, ExcelHorizontalAlignment.Left);
+
+                currentColumnPosition = 1;
+                currentRowPosition++;
+            }
+        }
+
+        #region public void Dispose()
+
+        public void Dispose()
 		{
 			_package.Dispose();
 		}
@@ -399,10 +478,10 @@ namespace CAS.UI.ExcelExport
 
 		#region private void FillCell(ExcelRange workCell, object value)
 
-		private void FillCell(ExcelRange workCell, object value)
+		private void FillCell(ExcelRange workCell, object value, ExcelHorizontalAlignment alignment = ExcelHorizontalAlignment.Center)
 		{
 			workCell.Value = value;
-			workCell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+			workCell.Style.HorizontalAlignment = alignment;
 			workCell.Style.Border.BorderAround(ExcelBorderStyle.Thin);
 		}
 
@@ -441,5 +520,6 @@ namespace CAS.UI.ExcelExport
 
 		public event EventHandler ReportProgress;
 
-	}
+        
+    }
 }
