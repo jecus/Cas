@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -575,6 +576,26 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			_worker.ReportProgress(0, "Finish");
 			_exportProvider.ExportFlights();
 		}
-	}
+
+        private void ExportATLB_Click(object sender, System.EventArgs e)
+        {
+            _worker = new AnimatedThreadWorker();
+            _worker.DoWork += ExportATLBWork;
+            _worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+            _worker.RunWorkerAsync();
+        }
+
+        private void ExportATLBWork(object sender, DoWorkEventArgs e)
+        {
+            AnimatedThreadWorker.ReportProgress(0, "load ATLB");
+            _worker.ReportProgress(0, "Generate file! Please wait....");
+
+            _exportProvider = new ExcelExportProvider();
+            
+            _exportProvider.ExportATLB();
+
+
+        }
+    }
 }
 
