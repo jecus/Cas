@@ -17,6 +17,9 @@
             <xs:sequence>
               <xs:element name="WPItemTitle" msprop:Generator_ColumnVarNameInTable="columnWPItemTitle" msprop:Generator_ColumnPropNameInRow="WPItemTitle" msprop:Generator_ColumnPropNameInTable="WPItemTitleColumn" msprop:Generator_UserColumnName="WPItemTitle" type="xs:string" minOccurs="0" />
               <xs:element name="WPItemType" msprop:Generator_ColumnVarNameInTable="columnWPItemType" msprop:Generator_ColumnPropNameInRow="WPItemType" msprop:Generator_ColumnPropNameInTable="WPItemTypeColumn" msprop:Generator_UserColumnName="WPItemType" type="xs:int" minOccurs="0" />
+              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description" type="xs:string" minOccurs="0" />
+              <xs:element name="Counter" msprop:Generator_ColumnVarNameInTable="columnCounter" msprop:Generator_ColumnPropNameInRow="Counter" msprop:Generator_ColumnPropNameInTable="CounterColumn" msprop:Generator_UserColumnName="Counter" type="xs:string" minOccurs="0" />
+              <xs:element name="TascCardNumber" msprop:Generator_ColumnVarNameInTable="columnTascCardNumber" msprop:Generator_ColumnPropNameInRow="TascCardNumber" msprop:Generator_ColumnPropNameInTable="TascCardNumberColumn" msprop:Generator_UserColumnName="TascCardNumber" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

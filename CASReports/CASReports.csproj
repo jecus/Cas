@@ -378,6 +378,7 @@
     <Compile Include="Builders\ServisibleTagReportBuilder.cs" />
     <Compile Include="Builders\StoreInventoryFileReportBuilder.cs" />
     <Compile Include="Builders\TrackingListBuilder.cs" />
+    <Compile Include="Builders\WOBuilderScat.cs" />
     <Compile Include="Builders\WorkScheduleReportBuilder.cs" />
     <Compile Include="Builders\NomenclatureReportBuilder.cs" />
     <Compile Include="Builders\ListOfDocumentsReportBuilder.cs" />
@@ -1423,6 +1424,12 @@
     </Compile>
     <Compile Include="ReportTemplates\ComponentChangeOrderReportKAC.cs">
       <DependentUpon>ComponentChangeOrderReportKAC.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\WOScat.cs">
+      <DependentUpon>WOScat.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
@@ -2512,6 +2519,10 @@
     <EmbeddedResource Include="ReportTemplates\ComponentChangeOrderReportKAC.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ComponentChangeOrderReportKAC.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\WOScat.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WOScat.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportTemplates\WPTitlePageReportScat.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

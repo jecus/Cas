@@ -56,6 +56,7 @@ namespace CAS.UI.UIControls.WorkPakage
 		private ForecastKitsReportBuilder _forecastKitsReportBulder;
 		private ComponentsReportBuilder _componentsReportBulder;
 		private MaintenanceReportBuilder _maintenanceReportBuilder;
+		private WOBuilderScat _builderScat;
 #if KAC
         private WorkscopeReportBuilderKAC _workscopeReportBuilder = new WorkscopeReportBuilderKAC();
 #else
@@ -74,6 +75,7 @@ namespace CAS.UI.UIControls.WorkPakage
 		private ContextMenuStrip buttonPrintMenuStrip;
 		private ToolStripMenuItem _itemPrintWorkScope;
 		private ToolStripMenuItem _itemPrintOverviewWp;
+		private ToolStripMenuItem _itemPrintOverviewWO;
 		private ToolStripMenuItem _itemPrintEquipmentAndMaterials;
 		private ToolStripMenuItem _itemPrintComponents;
 		private ToolStripMenuItem _itemPrintMaintenanceReport;
@@ -117,10 +119,11 @@ namespace CAS.UI.UIControls.WorkPakage
 
 			_itemPrintWorkScope = new ToolStripMenuItem { Text = "Work Scope" };
 			_itemPrintOverviewWp = new ToolStripMenuItem { Text = "Overview the work package" };
+			_itemPrintOverviewWO = new ToolStripMenuItem { Text = "Overview the work order" };
 			_itemPrintEquipmentAndMaterials = new ToolStripMenuItem { Text = "Equipment and Materials" };
 			_itemPrintComponents = new ToolStripMenuItem { Text = "Components" };
 			_itemPrintMaintenanceReport = new ToolStripMenuItem { Text = "Overview the maintenance report" };
-			buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { _itemPrintComponents, _itemPrintWorkScope, _itemPrintOverviewWp, _itemPrintEquipmentAndMaterials, _itemPrintMaintenanceReport });
+			buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { _itemPrintComponents, _itemPrintWorkScope, _itemPrintOverviewWp, _itemPrintOverviewWO, _itemPrintEquipmentAndMaterials, _itemPrintMaintenanceReport });
 
 			ButtonPrintMenuStrip = buttonPrintMenuStrip;
 
@@ -1218,6 +1221,13 @@ namespace CAS.UI.UIControls.WorkPakage
 			{
 				var form = new SelectWPPrintTasksForm(_currentWorkPackage);
 				form.ShowDialog();
+			}
+	        else if (sender == _itemPrintOverviewWO)
+			{
+				_builderScat = new WOBuilderScat(_currentWorkPackage);
+				_builderScat.Items = _resultItemsArray;
+				e.DisplayerText = aircraftHeaderControl1.Operator.Name + "." + "WO report";
+				e.RequestedEntity = new ReportScreen(_builderScat);
 			}
 			else if (sender == _itemPrintEquipmentAndMaterials)
 			{
