@@ -94,26 +94,29 @@ namespace CASReports.Builders
         /// <param name="dataset">Таблица, в которую добавляются данные</param>
         private void AddItemsToDataSet(WorkPackageSummarySheetDataSet dataset)
         {
-            //int count = 0;
+            int count = 1;
             foreach (string[] itemData in Items)
             {
                 //itemData[0] = count.ToString();
-                AddItemDataset(itemData, dataset);
+                AddItemDataset(itemData, dataset, count);
+                count++;
             }
         }
 
         #endregion
 
         #region private void AddItemDataset(string[]itemData, WorkPackageSummarySheetDataSet destinationDataSet)
+
         /// <summary>
         /// Добавляется элемент в таблицу данных
         /// </summary>
         /// <param name="itemData">Добавлямая директива</param>
         /// <param name="destinationDataSet">Таблица, в которую добавляется элемент</param>
-        private void AddItemDataset(string[]itemData, WorkPackageSummarySheetDataSet destinationDataSet)
+        /// <param name="count"></param>
+        private void AddItemDataset(string[] itemData, WorkPackageSummarySheetDataSet destinationDataSet, int count)
         {
             destinationDataSet.ItemsTable.AddItemsTableRow(itemData[0],itemData[1],itemData[2],
-                                                           itemData[3],itemData[4],itemData[5]);
+                                                           itemData[3],itemData[4],itemData[5], count.ToString(), itemData[6]);
         }
 
         #endregion
@@ -138,7 +141,7 @@ namespace CASReports.Builders
             var workPerformedWorkOrderNo = _currentWorkPackage.Number;
             destinationDataSet.HeaderTable.AddHeaderTableRow(manufacturer,
                                                                  registrationMark, model, serialNumber,
-                                                                 totalCycles, totalFlightHours,
+                                                                 _currentWorkPackage.OpeningDate.ToString("dd.MM.yyyy"), totalFlightHours,
                                                                  operatorLogotype,
                                                                  operatorName, operatorAddress,
                                                                  workPerformedStation,

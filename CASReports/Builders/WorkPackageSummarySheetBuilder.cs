@@ -99,7 +99,7 @@ namespace CASReports.Builders
         private void AddItemDataset(string[]itemData, WorkPackageSummarySheetDataSet destinationDataSet)
         {
             destinationDataSet.ItemsTable.AddItemsTableRow(itemData[0],itemData[1],itemData[2],
-                                                           itemData[3],itemData[4],itemData[5]);
+                                                           itemData[3],itemData[4],itemData[5], "", "");
         }
 
         #endregion

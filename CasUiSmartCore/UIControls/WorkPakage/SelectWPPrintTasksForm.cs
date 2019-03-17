@@ -733,7 +733,7 @@ namespace CAS.UI.UIControls.WorkPakage
 					};
 					var compntCell = new DataGridViewCheckBoxCell { Value = item.PrintInWorkPackage };
 					var kitCell = new DataGridViewTextBoxCell();
-                    discCell.Value = $"Comp: {mpd?.TaskCardNumber} " + item.DirectiveType + " for " + d.Description + " P/N:" + d.PartNumber + " S/N:" + d.SerialNumber;
+                    discCell.Value = $"Comp: {mpd?.TaskNumberCheck} " + item.DirectiveType + " for " + d.Description + " P/N:" + d.PartNumber + " S/N:" + d.SerialNumber;
 
                     row.Cells.AddRange(discCell, taskCardCell, compntCell, kitCell);
 
@@ -1197,7 +1197,7 @@ namespace CAS.UI.UIControls.WorkPakage
                                              item.ATAChapter.ToString(),
                                              item.WorkType.ToString(),
 	                                            taskCardString,
-                                             "MPD Items"});
+                                             "MPD Items", "Routine Tasks"});
                 if (item.TaskCardNumberFile == null)
                     continue;
                 tempFiles.Add(item.TaskCardNumberFile);
@@ -1251,12 +1251,12 @@ namespace CAS.UI.UIControls.WorkPakage
                 string directiveString = item.Title + (string.IsNullOrEmpty(item.Paragraph) ? "" : (" § " + item.Paragraph));
                 string taskCardString = item.EngineeringOrders != "" ? item.EngineeringOrders : "*";
                 summarySheetItems.Add(new[]
-                                              {directiveString + Environment.NewLine + taskCardString, 
+                                              {directiveString, 
                                                item.Description,
                                                item.ATAChapter.ToString(),
                                                item.WorkType.ToString(),
-                                               "",
-                                               DirectiveType.AirworthenessDirectives.ShortName});
+                                               taskCardString,
+                                               DirectiveType.AirworthenessDirectives.ShortName, "Additional Work"});
                 AttachedFile file = item.EngineeringOrderFile;
                 if (file == null)
                     continue;
@@ -1300,12 +1300,12 @@ namespace CAS.UI.UIControls.WorkPakage
 				string directiveString = "EO" + (string.IsNullOrEmpty(item.Paragraph) ? "" : (" § " + item.Paragraph));
 				string taskCardString = item.EngineeringOrders != "" ? item.EngineeringOrders : "*";
 				summarySheetItems.Add(new[]
-											  {directiveString + Environment.NewLine + taskCardString,
+											  {directiveString,
 											   item.Description,
 											   item.ATAChapter.ToString(),
 											   item.WorkType.ToString(),
-											   "",
-											   DirectiveType.EngineeringOrders.ShortName});
+											   taskCardString,
+											   DirectiveType.EngineeringOrders.ShortName, "Additional Work"});
 				AttachedFile file = item.EngineeringOrderFile;
 				if (file == null)
 					continue;
@@ -1348,12 +1348,12 @@ namespace CAS.UI.UIControls.WorkPakage
 				string directiveString = "SB" + (string.IsNullOrEmpty(item.Paragraph) ? "" : (" § " + item.Paragraph));
 				string taskCardString = item.EngineeringOrders != "" ? item.EngineeringOrders : "*";
 				summarySheetItems.Add(new[]
-											  {directiveString + Environment.NewLine + taskCardString,
+											  {directiveString,
 											   item.Description,
 											   item.ATAChapter.ToString(),
 											   item.WorkType.ToString(),
-											   "",
-											   DirectiveType.SB.ShortName});
+											   taskCardString,
+											   DirectiveType.SB.ShortName, "Additional Work"});
 				AttachedFile file = item.EngineeringOrderFile;
 				if (file == null)
 					continue;
@@ -1400,12 +1400,12 @@ namespace CAS.UI.UIControls.WorkPakage
                 string directiveString = damage.Title + (string.IsNullOrEmpty(item.Paragraph) ? "" : (" § " + item.Paragraph));
                 string taskCardString = item.EngineeringOrders != "" ? item.EngineeringOrders : "*";
                 summarySheetItems.Add(new[]
-                                              {directiveString + Environment.NewLine + taskCardString,
+                                              {directiveString,
                                              damage.Title + " " + damage.Description,
                                              damage.ATAChapter.ToString(),
                                              item.WorkType.ToString(),
-                                             "",
-                                             DirectiveType.DamagesRequiring.ShortName});
+                                             taskCardString,
+                                             DirectiveType.DamagesRequiring.ShortName, "Additional Work"});
                 if (shiftFromEnd > 0)
                 {
                     mainPageItems.Insert(mainPageItems.Count - shiftFromEnd, newkp);
@@ -1424,12 +1424,12 @@ namespace CAS.UI.UIControls.WorkPakage
                 string directiveString = item.Title + (string.IsNullOrEmpty(item.Paragraph) ? "" : (" § " + item.Paragraph));
                 string taskCardString = item.EngineeringOrders != "" ? item.EngineeringOrders : "*";
                 summarySheetItems.Add(new[]
-                                              {directiveString + Environment.NewLine + taskCardString,
+                                              {directiveString,
                                                item.Title +" "+item.Description,
                                                item.ATAChapter.ToString(),
                                                item.WorkType.ToString(),
-                                               "",
-                                               DirectiveType.OutOfPhase.ShortName});
+                                               taskCardString,
+                                               DirectiveType.OutOfPhase.ShortName, "Additional Work"});
                 if (shiftFromEnd > 0)
                 {
                     mainPageItems.Insert(mainPageItems.Count - shiftFromEnd, newkp);
@@ -1449,12 +1449,12 @@ namespace CAS.UI.UIControls.WorkPakage
                 string directiveString = defered.Title + (string.IsNullOrEmpty(item.Paragraph) ? "" : (" § " + item.Paragraph));
                 string taskCardString = item.EngineeringOrders != "" ? item.EngineeringOrders : "*";
                 summarySheetItems.Add(new[]
-                                              {directiveString + Environment.NewLine + taskCardString,
+                                              {directiveString,
                                                defered.Title + " " +defered.Description,
                                                defered.ATAChapter.ToString(),
                                                item.WorkType.ToString(),
-                                               "",
-                                               DirectiveType.OutOfPhase.ShortName});
+                                               taskCardString,
+                                               DirectiveType.OutOfPhase.ShortName, "Additional Work"});
                 if (shiftFromEnd > 0)
                 {
                     mainPageItems.Insert(mainPageItems.Count - shiftFromEnd, newkp);
@@ -1488,7 +1488,7 @@ namespace CAS.UI.UIControls.WorkPakage
                                              item.ATAChapter.ToString(),
                                              workType,
                                              "",
-                                             "Component"});
+                                             "Component", "Component Tasks"});
 
             }
 			foreach (var item in selectedBaseComponents)
@@ -1510,7 +1510,7 @@ namespace CAS.UI.UIControls.WorkPakage
 											 item.ATAChapter.ToString(),
 											 workType,
 											 "",
-											 "Base Component"});
+											 "Base Component", "Component Tasks"});
 
 			}
 			foreach (var item in componentDirectives)
@@ -1521,12 +1521,13 @@ namespace CAS.UI.UIControls.WorkPakage
 					tempFiles.Add(item.MaintenanceDirective?.TaskCardNumberFile);
 				var d = item.ParentComponent;
 				summarySheetItems.Add(new[]
-											{"CCO No:" + componentChangeOrderNum,
-											 d.Description + " P/N:" + d.PartNumber + " S/N:" + d.SerialNumber,
+											//{"CCO No:" + componentChangeOrderNum,
+											{item.MaintenanceDirective?.TaskNumberCheck,
+											item.DirectiveType + " for " + d.Description + " P/N:" + d.PartNumber + " S/N:" + d.SerialNumber,
 											 d.ATAChapter.ToString(),
 											 item.DirectiveType.ToString(),
-											 "",
-											 "Component Task"}); 
+											 item.MaintenanceDirective?.TaskCardNumber,
+											 "Component Task", "Component Tasks"}); 
 			}
 			foreach (var item in selectedComponents)
             {
@@ -1582,8 +1583,8 @@ namespace CAS.UI.UIControls.WorkPakage
                     item.ATAChapter.ShortName,
                     "",
                     "",
-                    "Non-Routine Jobs"
-                });
+                    "Non-Routine Jobs", "NRJ"
+				});
 
 	            AttachedFile file = item.AttachedFile;
                 if (file == null)
@@ -1617,7 +1618,7 @@ namespace CAS.UI.UIControls.WorkPakage
                                              item.ATAChapter.ToString(),
                                              item.WorkType.ToString(),
 	                                         taskCardString,
-                                             "MPD Items"});
+                                             "MPD Items", "Routine Tasks"});
             }
 
             foreach (MaintenanceDirective item in weeklyCheckDirectives)
@@ -1630,7 +1631,7 @@ namespace CAS.UI.UIControls.WorkPakage
                                              item.ATAChapter.ToString(),
                                              item.WorkType.ToString(),
 	                                            taskCardString,
-                                             "MPD Items"});
+                                             "MPD Items", "Routine Tasks"});
             }
 
             tempFiles.AddRange(dailyCheckFiles);
@@ -2034,18 +2035,19 @@ namespace CAS.UI.UIControls.WorkPakage
             try
             {
 #if AQUILINE || DemoDebug || SCAT
-				var tempSummarySheet = new WorkPackageTitleBuilderAquiline(_workPackage, titlePageItems, true);
-				inputDocumentTitle = PdfReader.Open(((WPTitlePageReportScat)tempSummarySheet.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
+				//var tempSummarySheet = new WorkPackageTitleBuilderAquiline(_workPackage, titlePageItems, true);
+				//inputDocumentTitle = PdfReader.Open(((WPTitlePageReportScat)tempSummarySheet.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
 #else
 				var tempMp =  new WorkPackageTitlePageBuilder(_workPackage, titlePageItems, GlobalObjects.CasEnvironment.GetBaseDetails(_workPackage.Aircraft));
                 inputDocumentTitle = PdfReader.Open(((WPTitlePageReport)tempMp.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
-#endif
+
 				for (int i = inputDocumentTitle.Pages.Count - 1; i >= 0; i--)
                 {
                     _outputDocument.InsertPage(0, inputDocumentTitle.Pages[i]);
                 }
-            }
-            catch (PdfReaderException ex)
+#endif
+			}
+			catch (PdfReaderException ex)
             {
                 MessageBox.Show("Error while opening PDF Document." +
 								"\nComponents:" +

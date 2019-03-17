@@ -7,6 +7,7 @@ using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.WorkPackage;
 
 namespace CASReports.Builders
@@ -106,10 +107,28 @@ namespace CASReports.Builders
         /// <param name="dataset">Таблица, в которую добавляются данные</param>
         private void AddItemsToDataSet(WorkPackageMainPageDataSet dataset)
         {
-            foreach (KeyValuePair<string, string> keyValuePair in Items)
-            {
-                AddItemDataset(keyValuePair, dataset);
-            }
+	        if (_isScatReport)
+	        {
+		        AddItemDataset(new KeyValuePair<string, string>("Certificate of Release to Service", "1"), dataset);
+		        AddItemDataset(new KeyValuePair<string, string>("Component Change Report ", ""), dataset);
+		        AddItemDataset(new KeyValuePair<string, string>("Certificates of Component and Materials ", ""), dataset);
+		        AddItemDataset(new KeyValuePair<string, string>("Work Summary Sheet", Items.FirstOrDefault(i => i.Key == "Summary Sheet").Value ?? ""), dataset);
+		        AddItemDataset(new KeyValuePair<string, string>("NRC ", ""), dataset);
+		        AddItemDataset(new KeyValuePair<string, string>("", ""), dataset);
+		        AddItemDataset(new KeyValuePair<string, string>("", ""), dataset);
+		        AddItemDataset(new KeyValuePair<string, string>("", ""), dataset);
+		        AddItemDataset(new KeyValuePair<string, string>("", ""), dataset);
+		        AddItemDataset(new KeyValuePair<string, string>("", ""), dataset);
+		        AddItemDataset(new KeyValuePair<string, string>("", ""), dataset);
+		        AddItemDataset(new KeyValuePair<string, string>("", ""), dataset);
+		        
+	        }
+	        else
+	        {
+				foreach (KeyValuePair<string, string> keyValuePair in Items)
+					AddItemDataset(keyValuePair, dataset);
+			}
+			
         }
 
         #endregion
@@ -122,6 +141,7 @@ namespace CASReports.Builders
         /// <param name="destinationDataSet">Таблица, в которую добавляется элемент</param>
         private void AddItemDataset(KeyValuePair<string, string> keyValuePair, WorkPackageMainPageDataSet destinationDataSet)
         {
+
             destinationDataSet.WPItemsTable.AddWPItemsTableRow(keyValuePair.Key, keyValuePair.Value);
         }
 
@@ -145,13 +165,24 @@ namespace CASReports.Builders
             var operatorLogotype = op.LogotypeReportLarge;
             var operatorName = op.Name;
             var operatorAddress = op.Address;
-            var workPerformedStartDate = "";
+            var workPerformedStartDate = _currentWorkPackage.OpeningDate.ToString(termsProvider["DateFormat"].ToString());
             if (_currentWorkPackage.Status == WorkPackageStatus.Published || _currentWorkPackage.Status == WorkPackageStatus.Closed)
                 workPerformedStartDate = _currentWorkPackage.PublishingDate.ToString(termsProvider["DateFormat"].ToString());
             var workPerformedEndDate = "";
             if (_currentWorkPackage.Status == WorkPackageStatus.Closed)
                 workPerformedEndDate = _currentWorkPackage.ClosingDate.ToString(termsProvider["DateFormat"].ToString());
-            var workPerformedStation = _currentWorkPackage.Station;
+
+            var workPerformedStation = "";
+			var task = _currentWorkPackage.WorkPakageRecords.FirstOrDefault(i => i.Task is MaintenanceDirective)?.Task;
+            if (task != null)
+            {
+	            var mpd = task as MaintenanceDirective;
+	            workPerformedStation =
+		            $"{mpd.ScheduleRef} R{mpd.ScheduleRevisionNum} {mpd.ScheduleRevisionDate:dd.MM.yyyy}";
+            }
+
+
+			
             var workPerformedWorkOrderNo = _currentWorkPackage.Number;
             var wpTitle= _currentWorkPackage.Title;
             destinationDataSet.MainDataTable.AddMainDataTableRow(airportName,
