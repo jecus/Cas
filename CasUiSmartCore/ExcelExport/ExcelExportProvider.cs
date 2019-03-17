@@ -383,11 +383,11 @@ namespace CAS.UI.ExcelExport
             Workbook.Worksheets.Add(sheetName);
             var workSheet = Workbook.Worksheets[sheetName];
 
-            FillHeaderCell(workSheet.Cells[1, 1], "Flight Date", ExcelHorizontalAlignment.Center);
+            FillHeaderCell(workSheet.Cells[1, 1], "Date", ExcelHorizontalAlignment.Center);
             workSheet.Column(1).Width=10;
 
             FillHeaderCell(workSheet.Cells[1, 2], "Aircraft", ExcelHorizontalAlignment.Center);
-            workSheet.Column(2).Width=20;
+            workSheet.Column(2).Width=10;
 
             FillHeaderCell(workSheet.Cells[1, 3], "Model", ExcelHorizontalAlignment.Center);
             workSheet.Column(3).AutoFit();
@@ -408,19 +408,19 @@ namespace CAS.UI.ExcelExport
             workSheet.Column(8).Width=20;
 
             FillHeaderCell(workSheet.Cells[1, 9], "ATA", ExcelHorizontalAlignment.Center);
-            workSheet.Column(9).Width = 20;
+            workSheet.Column(9).Width = 5;
 
             FillHeaderCell(workSheet.Cells[1, 10], "Comp. Off P/N", ExcelHorizontalAlignment.Center);
-            workSheet.Column(10).AutoFit();
+            workSheet.Column(10).Width = 15;
 
             FillHeaderCell(workSheet.Cells[1, 11], "Comp. Off S/N", ExcelHorizontalAlignment.Center);
-            workSheet.Column(11).AutoFit();
+            workSheet.Column(11).Width = 15;
 
             FillHeaderCell(workSheet.Cells[1, 12], "Comp On P/N", ExcelHorizontalAlignment.Center);
-            workSheet.Column(12).AutoFit();
+            workSheet.Column(12).Width = 15;
 
             FillHeaderCell(workSheet.Cells[1, 13], "Comp On S/N", ExcelHorizontalAlignment.Center);
-            workSheet.Column(13).AutoFit();
+            workSheet.Column(13).Width = 15;
 
             FillHeaderCell(workSheet.Cells[1, 14], "Remarks", ExcelHorizontalAlignment.Center);
             workSheet.Column(14).Width=10;
@@ -431,7 +431,7 @@ namespace CAS.UI.ExcelExport
             foreach (var d in discripancy.OrderByDescending(i => i.ParentFlightDate))
             {
                 FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.ParentFlightDate.Value.ToString(new GlobalTermsProvider()["DateFormat"].ToString()));
-                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.Aircraft.ToString(), ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.Aircraft.ToString());
                 FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.Model.ShortName);
                 FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.ParentFlight?.PageNo, ExcelHorizontalAlignment.Left);
                 FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.Description, ExcelHorizontalAlignment.Left);
