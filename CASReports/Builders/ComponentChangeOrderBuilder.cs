@@ -39,7 +39,6 @@ namespace CASReports.Builders
 	        _workType = workType;
 	        _orderNum = orderNum;
 	        _isScatReport = isScatReport;
-
 			if (!(currentDetail is Component)) return;
             _currentComponent = (Component) currentDetail;
             _lastTransfer = ((Component)currentDetail).TransferRecords.GetLast(); 
