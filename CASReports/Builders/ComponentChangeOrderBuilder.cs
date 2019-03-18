@@ -82,8 +82,7 @@ namespace CASReports.Builders
         {
             ComponentChangeOrderDataSet dataSet = new ComponentChangeOrderDataSet();
             AddAdditionalDataToDataSet(dataSet);
-			if(_currentComponent != null)
-				AddMainInformationToDataSet(dataSet);
+			AddMainInformationToDataSet(dataSet);
             AddAircraftToDataset(dataSet);
             return dataSet;
         }
@@ -94,12 +93,12 @@ namespace CASReports.Builders
 
         private void AddMainInformationToDataSet(ComponentChangeOrderDataSet destinationDataSet)
         {
-            destinationDataSet.MainTable.AddMainTableRow(_currentComponent.ATAChapter.ToString(),
+            destinationDataSet.MainTable.AddMainTableRow(_currentComponent?.ATAChapter.ToString(),
                                                          _workType,
-                                                         _currentComponent.Description,
-                                                         _currentComponent.Manufacturer,
-                                                         _currentComponent.PartNumber,
-                                                         _currentComponent.SerialNumber, 
+                                                         _currentComponent?.Description,
+                                                         _currentComponent?.Manufacturer,
+                                                         _currentComponent?.PartNumber,
+                                                         _currentComponent?.SerialNumber, 
                                                          _lastTransfer != null ? _lastTransfer.Position :"",
                                                          "",
                                                          "",
