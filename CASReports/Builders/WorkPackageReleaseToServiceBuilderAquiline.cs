@@ -4,10 +4,9 @@ using System.Linq;
 using CASReports.Datasets;
 using CASReports.ReportTemplates;
 using CASTerms;
-using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
+using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.WorkPackage;
 
 namespace CASReports.Builders
@@ -181,9 +180,19 @@ namespace CASReports.Builders
 			var wpTitle = _currentWorkPackage.Title;
 			var workPerformedMaintenanceReportNo = _currentWorkPackage.MaintenanceRepairOrzanization;
 			var remarks = _currentWorkPackage.Remarks;
-			var additionalRemarks = termsProvider["CAARequirements"].ToString();
-			var catchword = termsProvider["Revision"].ToString();
-			var crsNumber = _currentWorkPackage.ReleaseCertificateNo;
+			var additionalRemarks = "";
+			var catchword = "";
+			var crsNumber = "";
+			
+			var task = _currentWorkPackage.WorkPakageRecords.FirstOrDefault(i => i.Task is MaintenanceDirective)?.Task;
+			if (task != null)
+			{
+				var mpd = task as MaintenanceDirective;
+				additionalRemarks = mpd.ScheduleRef;
+				catchword = $"R{mpd.ScheduleRevisionNum}";
+				crsNumber = $"{mpd.ScheduleRevisionDate:dd.MM.yyyy}";
+			}
+
 			var revision = _currentWorkPackage.Revision;
             destinationDataSet.ReleaseToServiceTable.AddReleaseToServiceTableRow(airportName,
                                                                                  maintenanceReleaseCertificate,
@@ -201,7 +210,7 @@ namespace CASReports.Builders
                                                                                  workPerformedMaintenanceReportNo,
                                                                                  remarks, additionalRemarks, catchword,crsNumber, engine1Serial, engine2Serial,
 
-																				 apuSerial, revision, pagesCount);
+																				 apuSerial, _currentWorkPackage.Station, pagesCount);
         }
 
         #endregion

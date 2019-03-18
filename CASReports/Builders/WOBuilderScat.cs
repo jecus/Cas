@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
 using CASReports.Datasets;
 using CASReports.ReportTemplates;
 using CASTerms;
-using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -20,18 +18,16 @@ namespace CASReports.Builders
     /// <summary>
     /// Построитель отчета Release To Service 
     /// </summary>
-    public class WorkPackageTitleBuilderAquiline
+    public class WOBuilderScat : AbstractReportBuilder
 	{
 
         #region Fields
 
         private WorkPackage _currentWorkPackage;
-		/// <summary>
-		/// Директивы включаемые в отчет
-		/// </summary>
-		private readonly List<KeyValuePair<string, int>> _items;
+        private readonly int _count;
+        private readonly List<string[]> _summarySheetItems;
 
-		private readonly bool _isScatReport;
+        private readonly bool _isScatReport;
 
 		#endregion
 
@@ -46,21 +42,26 @@ namespace CASReports.Builders
             set { _currentWorkPackage = value; }
         }
 
-        #endregion
+		public ICommonCollection<BaseEntityObject> Items { get; set; }
+
+		#endregion
 
         #endregion
 
         #region Constructor
+
         /// <summary>
         /// Создается построитель отчета Release To Service 
         /// </summary>
         /// <param name="workPackage">Рабочий пакет</param>
+        /// <param name="count"></param>
+        /// <param name="summarySheetItems"></param>
         /// <param name="items"></param>
-        public WorkPackageTitleBuilderAquiline(WorkPackage workPackage, List<KeyValuePair<string, int>> items, bool IsScatReport = false)
+        public WOBuilderScat(WorkPackage workPackage, int count, List<string[]> summarySheetItems)
         {
-            _currentWorkPackage = workPackage;
-            _items = items;
-	        _isScatReport = IsScatReport;
+	        _currentWorkPackage = workPackage;
+	        _count = count;
+	        _summarySheetItems = summarySheetItems;
         }
 
 		#endregion
@@ -73,23 +74,11 @@ namespace CASReports.Builders
 		/// Сгенерируовать отчет по данным, добавленным в текущий объект
 		/// </summary>
 		/// <returns>Построенный отчет</returns>
-		public object GenerateReport()
+		public override object GenerateReport()
 		{
-			if (_isScatReport)
-			{
-				var report = new WPTitlePageReportScat();
-				report.SetDataSource(GenerateDataSet());
-				return report;
-
-			}
-			else
-			{
-				var report = new WPTitlePageReportAquiline();
-				report.SetDataSource(GenerateDataSet());
-				return report;
-			}
-
-			
+			var report = new WOScat();
+			report.SetDataSource(GenerateDataSet());
+			return report;
 		}
 
 		#endregion
@@ -106,35 +95,18 @@ namespace CASReports.Builders
 
 		#endregion
 
-		#region private void AddItemsToDataSet(WorkPackageTitlePageDataSet dataset)
-
-		/// <summary>
-		/// Добавление директив в таблицу данных
-		/// </summary>
-		/// <param name="dataset">Таблица, в которую добавляются данные</param>
-		private void AddItemsToDataSet(WorkPackageTitlePageDataSet dataset)
+		private void AddItemsToDataSet(WorkPackageTitlePageDataSet destinationDataSet)
 		{
-			_items.Add(new KeyValuePair<string, int>("Total:", _items.Sum(x => x.Value)));
-			foreach (KeyValuePair<string, int> keyValuePair in _items)
+			int count = 1;
+
+			foreach (var item in _summarySheetItems)
 			{
-				AddItemDataset(keyValuePair, dataset);
+				destinationDataSet.WPItemsTable.AddWPItemsTableRow(item[0],
+					0, item[1], count.ToString(), item[4]);
+				count++;
 			}
 		}
 
-		#endregion
-
-		#region private void AddItemDataset(object reportedDirective, WorkPackageTitlePageDataSet destinationDataSet)
-		/// <summary>
-		/// Добавляется элемент в таблицу данных
-		/// </summary>
-		/// <param name="keyValuePair">Добавлямая директива</param>
-		/// <param name="destinationDataSet">Таблица, в которую добавляется элемент</param>
-		private void AddItemDataset(KeyValuePair<string, int> keyValuePair, WorkPackageTitlePageDataSet destinationDataSet)
-		{
-			destinationDataSet.WPItemsTable.AddWPItemsTableRow(keyValuePair.Key, keyValuePair.Value, "", "","");
-		}
-
-		#endregion
 
 		#region private void AddReleaseToServiceInformationToDataSet(WorkPackageTitlePageDataSet destinationDataSet)
 
@@ -165,7 +137,7 @@ namespace CASReports.Builders
 			var wpTitle = _currentWorkPackage.Title;
 			var wpCreatedBy = _currentWorkPackage.Author;
 			var wpPublishedBy = _currentWorkPackage.PublishedBy;
-			var accomplich = GetAccomplich(_currentWorkPackage.WorkPakageRecords);
+			var accomplich = _count.ToString();
 			var createDate = _currentWorkPackage.CreateDate;
 
 
@@ -226,6 +198,7 @@ namespace CASReports.Builders
 			}
 			return string.Join("+" , groups.Distinct().ToArray());
 		}
+
 
 		#endregion
 	}

@@ -16,14 +16,14 @@ namespace CASReports.ReportTemplates {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class WorkPackageSummarySheetReportScat : ReportClass {
+    public class WOScat : ReportClass {
         
-        public WorkPackageSummarySheetReportScat() {
+        public WOScat() {
         }
         
         public override string ResourceName {
             get {
-                return "WorkPackageSummarySheetReportScat.rpt";
+                return "WOScat.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace CASReports.ReportTemplates {
         
         public override string FullResourceName {
             get {
-                return "CASReports.ReportTemplates.WorkPackageSummarySheetReportScat.rpt";
+                return "CASReports.ReportTemplates.WOScat.rpt";
             }
             set {
                 // Do nothing
@@ -66,7 +66,7 @@ namespace CASReports.ReportTemplates {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
@@ -74,7 +74,7 @@ namespace CASReports.ReportTemplates {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,33 +82,17 @@ namespace CASReports.ReportTemplates {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
-            get {
-                return this.ReportDefinition.Sections[4];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
-            get {
-                return this.ReportDefinition.Sections[5];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public CrystalDecisions.CrystalReports.Engine.Section Section5 {
             get {
-                return this.ReportDefinition.Sections[6];
+                return this.ReportDefinition.Sections[4];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedWorkPackageSummarySheetReportScat : Component, ICachedReport {
+    public class CachedWOScat : Component, ICachedReport {
         
-        public CachedWorkPackageSummarySheetReportScat() {
+        public CachedWOScat() {
         }
         
         [Browsable(false)]
@@ -145,7 +129,7 @@ namespace CASReports.ReportTemplates {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            WorkPackageSummarySheetReportScat rpt = new WorkPackageSummarySheetReportScat();
+            WOScat rpt = new WOScat();
             rpt.Site = this.Site;
             return rpt;
         }

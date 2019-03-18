@@ -332,9 +332,12 @@ namespace CAS.UI.UIControls.WorkPakage
                 if (np.Parent is ComponentDirective)
                 {
 	                var cd = np.Parent as ComponentDirective;
-
-
 	                subItems.Add(new ListViewItem.ListViewSubItem { Text = $"{cd.MaintenanceDirective?.TaskCardNumber} {np.Title}", Tag = np.Title });
+				}
+                else if (np.Parent is MaintenanceDirective)
+                {
+	                var md = np.Parent as MaintenanceDirective;
+	                subItems.Add(new ListViewItem.ListViewSubItem { Text = $"{md.TaskCardNumber} {md.TaskNumberCheck} {md.Description}", Tag = np.Title });
 				}
 				else if (np.Parent is Directive)
                 {
@@ -580,8 +583,8 @@ namespace CAS.UI.UIControls.WorkPakage
                 MaintenanceDirective md = (MaintenanceDirective)item;
                 AtaChapter ata = md.ATAChapter;
 
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = ata != null ? ata.ToString() : "", Tag = ata });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = md.ToString(), Tag = md.ToString() });
+				subItems.Add(new ListViewItem.ListViewSubItem { Text = ata != null ? ata.ToString() : "", Tag = ata });
+                subItems.Add(new ListViewItem.ListViewSubItem { Text = $"{md.TaskCardNumber} {md.TaskNumberCheck} {md.Description}", Tag = md.ToString() });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = md.Description, Tag = md.Description, });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = md.Kits.Count > 0 ? md.Kits.Count + " kits" : "", Tag = md.Kits.Count });
                 #region Определение текста для колонки "Первое выполнение"

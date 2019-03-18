@@ -151,7 +151,8 @@ namespace CASReports.Builders
             if (variableNumber != "")
                 variableNumberCaption = "V/N:";
             destinationDataSet.AircraftInformationTable.AddAircraftInformationTableRow(_currentWorkPackage.Aircraft.RegistrationNumber, serialNumber,
-                                                                     manufactureDate, _currentWorkPackage.Aircraft.Model.ToString(),lineNumberCaption, variableNumberCaption, lineNumber,
+                                                                     manufactureDate, _currentWorkPackage.Aircraft.Model.ToString(),lineNumberCaption, variableNumberCaption,
+                                                                     GlobalObjects.CasEnvironment.Operators.First(o => o.ItemId == _currentWorkPackage.Aircraft.OperatorId).Name,
                                                                      variableNumber, sinceNewHours, sinceNewCycles);
         }
 
