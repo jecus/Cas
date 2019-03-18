@@ -35,13 +35,14 @@ namespace CASReports.Builders
         /// <param name="orderNum"></param>
         public ComponentChangeOrderBuilder(WorkPackage currentWorkPackage, object currentDetail, string workType, int orderNum, bool isScatReport = false )
         {
-            if(!(currentDetail is Component)) return;
-            _currentComponent = (Component) currentDetail;
-            _lastTransfer = ((Component)currentDetail).TransferRecords.GetLast();
-            _currentWorkPackage = currentWorkPackage;
-            _workType = workType;
-            _orderNum = orderNum;
+	        _currentWorkPackage = currentWorkPackage;
+	        _workType = workType;
+	        _orderNum = orderNum;
 	        _isScatReport = isScatReport;
+
+			if (!(currentDetail is Component)) return;
+            _currentComponent = (Component) currentDetail;
+            _lastTransfer = ((Component)currentDetail).TransferRecords.GetLast(); 
         }
 
         #endregion
@@ -82,7 +83,8 @@ namespace CASReports.Builders
         {
             ComponentChangeOrderDataSet dataSet = new ComponentChangeOrderDataSet();
             AddAdditionalDataToDataSet(dataSet);
-            AddMainInformationToDataSet(dataSet);
+			if(_currentComponent != null)
+				AddMainInformationToDataSet(dataSet);
             AddAircraftToDataset(dataSet);
             return dataSet;
         }
