@@ -425,7 +425,9 @@ namespace CAS.UI.ExcelExport
             FillHeaderCell(workSheet.Cells[1, 14], "Remarks", ExcelHorizontalAlignment.Center);
             workSheet.Column(14).Width=10;
 
-            int currentRowPosition = 2;
+            workSheet.View.FreezePanes(1, 1);
+
+			int currentRowPosition = 2;
             int currentColumnPosition = 1;
 
             foreach (var d in discripancy.OrderByDescending(i => i.ParentFlightDate))
