@@ -452,7 +452,7 @@ namespace CAS.UI.UIControls.Auxiliary
             linkLabelShowConnectionSettings.TabStop = true;
 
 
-	        linkLabelShowConnectionSettings.Visible = false;
+	        //linkLabelShowConnectionSettings.Visible = false;
 
             
 
