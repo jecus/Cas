@@ -18,7 +18,7 @@ namespace CAS.UI.ExcelExport
 	{
 		#region Fields
 
-		private readonly ExcelPackage _package;
+		private ExcelPackage _package;
 		private ExcelWorkbook Workbook => _package.Workbook;
 
 		#endregion
@@ -27,7 +27,7 @@ namespace CAS.UI.ExcelExport
 
 		public ExcelExportProvider()
 		{
-			_package = new ExcelPackage();
+			
 		}
 
 		#endregion
@@ -43,6 +43,7 @@ namespace CAS.UI.ExcelExport
 
 		public void ExportFlights()
 		{
+			_package = new ExcelPackage();
 			var aircrafts = GlobalObjects.AircraftsCore.GetAllAircrafts();
 
 			Parallel.ForEach(aircrafts, aircraft =>
@@ -372,7 +373,9 @@ namespace CAS.UI.ExcelExport
 
         public void ExportATLB()
         {
-            var sheetName = "ATLB";
+	        _package = new ExcelPackage();
+
+			var sheetName = "ATLB";
 
             var discripancy = GlobalObjects.DiscrepanciesCore.GetDiscrepancies();
 
@@ -425,7 +428,7 @@ namespace CAS.UI.ExcelExport
             FillHeaderCell(workSheet.Cells[1, 14], "Remarks", ExcelHorizontalAlignment.Center);
             workSheet.Column(14).Width=10;
 
-            workSheet.View.FreezePanes(1, 1);
+            workSheet.View.FreezePanes(2, 1);
 
 			int currentRowPosition = 2;
             int currentColumnPosition = 1;
@@ -433,8 +436,8 @@ namespace CAS.UI.ExcelExport
             foreach (var d in discripancy.OrderByDescending(i => i.ParentFlightDate))
             {
                 FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.ParentFlightDate.Value.ToString(new GlobalTermsProvider()["DateFormat"].ToString()));
-                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.Aircraft.ToString());
-                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.Model.ShortName);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.Aircraft.ToString(), ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.Model.ShortName, ExcelHorizontalAlignment.Left);
                 FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.ParentFlight?.PageNo, ExcelHorizontalAlignment.Left);
                 FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.Description, ExcelHorizontalAlignment.Left);
                 FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], d.CorrectiveActionDescription, ExcelHorizontalAlignment.Left);
