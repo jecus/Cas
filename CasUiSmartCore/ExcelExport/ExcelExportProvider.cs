@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Auxiliary;
 using CASTerms;
 using OfficeOpenXml;
@@ -11,6 +14,7 @@ using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
+using SmartCore.Entities.General.MaintenanceWorkscope;
 
 namespace CAS.UI.ExcelExport
 {
@@ -455,9 +459,40 @@ namespace CAS.UI.ExcelExport
             }
         }
 
-        #region public void Dispose()
 
-        public void Dispose()
+        public void ExportMpd(List<MaintenanceDirective> mpds)
+        {
+	        //Михаил, вот тут вставите колонки
+
+
+	        foreach (var mpd in mpds)
+	        {
+				//Михаил, а вот тут вставите данные пример в MaintenanceDirectiveListView
+			}
+		}
+
+
+		#region private void Completed(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+
+		public void Completed(object sender, RunWorkerCompletedEventArgs e)
+        {
+	        var sfd = new SaveFileDialog();
+	        sfd.Filter = ".xlsx Files (*.xlsx)|*.xlsx";
+
+	        if (sfd.ShowDialog() == DialogResult.OK)
+	        {
+		        SaveTo(sfd.FileName);
+		        MessageBox.Show("File was success saved!");
+	        }
+
+	        Dispose();
+        }
+
+        #endregion
+
+		#region public void Dispose()
+
+		public void Dispose()
 		{
 			_package.Dispose();
 		}
@@ -525,6 +560,5 @@ namespace CAS.UI.ExcelExport
 
 		public event EventHandler ReportProgress;
 
-        
-    }
+	}
 }
