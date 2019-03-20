@@ -1633,17 +1633,17 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			
 	    }
 
-	    private void ButtonAddNew_DisplayerRequested(object sender, Interfaces.ReferenceEventArgs e)
+	    private void ExportMpd_Click(object sender, EventArgs eventArgs)
 	    {
 			_worker = new AnimatedThreadWorker();
-			_worker.DoWork += ExportATLBWork;
+			_worker.DoWork += ExportMpdWork;
 			_worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
 			_worker.RunWorkerAsync();
 		}
 
-	    private void ExportATLBWork(object sender, DoWorkEventArgs e)
+	    private void ExportMpdWork(object sender, DoWorkEventArgs e)
 	    {
-		    AnimatedThreadWorker.ReportProgress(0, "load ATLB");
+		    _worker.ReportProgress(0, "load MPD");
 		    _worker.ReportProgress(0, "Generate file! Please wait....");
 
 		    _exportProvider = new ExcelExportProvider();
