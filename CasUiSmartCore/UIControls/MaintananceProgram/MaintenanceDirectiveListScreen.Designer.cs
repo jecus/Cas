@@ -208,13 +208,13 @@ namespace CAS.UI.UIControls.MaintananceProgram
             this.buttonExport.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInNew;
             this.buttonExport.ShowToolTip = true;
             this.buttonExport.Size = new System.Drawing.Size(55, 63);
-            this.buttonExport.TabIndex = 19;
+            this.buttonExport.TabIndex = 25;
             this.buttonExport.TextAlignMain = System.Drawing.ContentAlignment.BottomCenter;
             this.buttonExport.TextAlignSecondary = System.Drawing.ContentAlignment.TopCenter;
             this.buttonExport.TextMain = "";
             this.buttonExport.TextSecondary = "";
             this.buttonExport.ToolTipText = "Export";
-			this.buttonAddNew.DisplayerRequested += ButtonAddNew_DisplayerRequested;
+			this.buttonExport.Click += ExportMpd_Click;
             // 
             // pictureBoxSeperatorBAN
             // 

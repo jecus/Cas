@@ -10,11 +10,14 @@ using Auxiliary;
 using CASTerms;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
+using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.MaintenanceWorkscope;
+using SmartCore.Entities.General.Schedule;
+using Convert = System.Convert;
 
 namespace CAS.UI.ExcelExport
 {
@@ -54,14 +57,14 @@ namespace CAS.UI.ExcelExport
 			{
 				if (ReportProgress != null)
 					ReportProgress(aircraft.RegistrationNumber, new EventArgs());
-
+                
 				var baseComponents = GlobalObjects.ComponentCore.GetAicraftBaseComponents(aircraft.ItemId,
 					new[] { BaseComponentType.Engine.ItemId, BaseComponentType.Apu.ItemId }).OrderByDescending(i => i.BaseComponentTypeId).ThenBy(i => i.ItemId);
 				GlobalObjects.AircraftFlightsCore.LoadAircraftFlights(aircraft.ItemId);
 				var flights = GlobalObjects.AircraftFlightsCore.GetAircraftFlightsByAircraftId(aircraft.ItemId);
 
-				var counter = 1;
-
+                var counter = 1;
+                
 				//Добавляем старницу
 				Workbook.Worksheets.Add(aircraft.RegistrationNumber);
 				var workSheet = Workbook.Worksheets[aircraft.RegistrationNumber];
@@ -206,7 +209,7 @@ namespace CAS.UI.ExcelExport
 				int currentColumnPosition = 1;
 				var time = new TimeSpan();
 
-				foreach (var flight in flights.OrderBy(i => i.FlightDate).ThenBy(i => i.TakeOffTime).ToArray())
+				foreach (var flight in flights.OrderBy(i => i.FlightDate).ThenBy(i => i.TakeOffTime).ToArray().Where(i => i.AtlbRecordType != AtlbRecordType.Maintenance))
 				{
 
 					var frame = GlobalObjects.CasEnvironment.Calculator.GetFlightLifelengthIncludingThisFlight(flight)
@@ -386,7 +389,6 @@ namespace CAS.UI.ExcelExport
             foreach (var discrepancy in discripancy)
                 discrepancy.Aircraft = GlobalObjects.AircraftsCore.GetAircraftById(discrepancy.ParentFlight.AircraftId);
 
-            //Добавляем старницу
             Workbook.Worksheets.Add(sheetName);
             var workSheet = Workbook.Worksheets[sheetName];
 
@@ -462,13 +464,133 @@ namespace CAS.UI.ExcelExport
 
         public void ExportMpd(List<MaintenanceDirective> mpds)
         {
-	        //Михаил, вот тут вставите колонки
+            _package = new ExcelPackage();
 
+            var sheetName = "MPD";
 
-	        foreach (var mpd in mpds)
+            Workbook.Worksheets.Add(sheetName);
+            var workSheet = Workbook.Worksheets[sheetName];
+
+            FillHeaderCell(workSheet.Cells[1, 1], "MPD Item", ExcelHorizontalAlignment.Center);
+            workSheet.Column(1).Width=12;
+
+            FillHeaderCell(workSheet.Cells[1, 2], "Task Card №", ExcelHorizontalAlignment.Center);
+            workSheet.Column(2).Width=14;
+
+            FillHeaderCell(workSheet.Cells[1, 3], "Maint. Manual", ExcelHorizontalAlignment.Center);
+            workSheet.Column(3).Width=12;
+
+            FillHeaderCell(workSheet.Cells[1, 4], "Category", ExcelHorizontalAlignment.Center);
+            workSheet.Column(4).AutoFit();
+
+            FillHeaderCell(workSheet.Cells[1, 5], "Work Type", ExcelHorizontalAlignment.Center);
+            workSheet.Column(5).Width=12;
+
+            FillHeaderCell(workSheet.Cells[1, 6], "Program", ExcelHorizontalAlignment.Center);
+            workSheet.Column(6).Width=10;
+
+            FillHeaderCell(workSheet.Cells[1, 7], "Description", ExcelHorizontalAlignment.Center);
+            workSheet.Column(7).Width=12;
+
+            FillHeaderCell(workSheet.Cells[1, 8], "Zone", ExcelHorizontalAlignment.Center);
+            workSheet.Column(8).Width=6;
+
+            FillHeaderCell(workSheet.Cells[1, 9], "Access", ExcelHorizontalAlignment.Center);
+            workSheet.Column(9).Width=8;
+
+            FillHeaderCell(workSheet.Cells[1, 10], "Work Area", ExcelHorizontalAlignment.Center);
+            workSheet.Column(10).Width=10;
+
+            FillHeaderCell(workSheet.Cells[1, 11], "M.H.", ExcelHorizontalAlignment.Center);
+            workSheet.Column(11).Width=6;
+
+            FillHeaderCell(workSheet.Cells[1, 12], "1st. Perf.", ExcelHorizontalAlignment.Center);
+            workSheet.Column(12).Width=20;
+
+            FillHeaderCell(workSheet.Cells[1, 13], "Rpt. Intv", ExcelHorizontalAlignment.Center);
+            workSheet.Column(13).Width = 18;
+
+            FillHeaderCell(workSheet.Cells[1, 14], "Last", ExcelHorizontalAlignment.Center);
+            workSheet.Column(14).Width = 30;
+
+            FillHeaderCell(workSheet.Cells[1, 15], "Next", ExcelHorizontalAlignment.Center);
+            workSheet.Column(15).Width = 35;
+
+            FillHeaderCell(workSheet.Cells[1, 16], "Remain/Overdue", ExcelHorizontalAlignment.Center);
+            workSheet.Column(16).Width=16;
+
+            workSheet.View.FreezePanes(2, 1);
+
+            int currentRowPosition = 2;
+            int currentColumnPosition = 1;
+
+            foreach (var mpd in mpds.OrderBy(i => i.TaskNumberCheck))
 	        {
-				//Михаил, а вот тут вставите данные пример в MaintenanceDirectiveListView
-			}
+                #region calc
+
+                DateTime defaultDateTime = DateTimeExtend.GetCASMinDateTime();
+                DateTime lastComplianceDate = defaultDateTime;
+                DateTime nextComplianceDate = defaultDateTime;
+                Lifelength lastComplianceLifeLength = Lifelength.Zero;
+
+                string lastPerformanceString, firstPerformanceString = "N/A";
+                
+                if (mpd.LastPerformance != null)
+                {
+                    lastComplianceDate = mpd.LastPerformance.RecordDate;
+                    lastComplianceLifeLength = mpd.LastPerformance.OnLifelength;
+                }
+                if (mpd.Threshold.FirstPerformanceSinceNew != null && !mpd.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
+                {
+                    firstPerformanceString = "s/n: " + mpd.Threshold.FirstPerformanceSinceNew;
+                }
+                if (mpd.Threshold.FirstPerformanceSinceEffectiveDate != null &&
+                    !mpd.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+                {
+                    if (firstPerformanceString != "N/A") firstPerformanceString += " or ";
+                    else firstPerformanceString = "";
+                    firstPerformanceString += "s/e.d: " + mpd.Threshold.FirstPerformanceSinceEffectiveDate;
+                }
+
+                if (mpd.NextPerformanceDate != null && mpd.NextPerformanceDate > defaultDateTime)
+                    nextComplianceDate = Convert.ToDateTime(mpd.NextPerformanceDate);
+
+                
+                if (lastComplianceDate <= defaultDateTime)
+                    lastPerformanceString = "N/A";
+                else
+                    lastPerformanceString = SmartCore.Auxiliary.Convert.GetDateFormat(lastComplianceDate) + " " +
+                                            lastComplianceLifeLength;
+                string nextComplianceString = ((nextComplianceDate <= defaultDateTime)
+                                                   ? ""
+                                                   : SmartCore.Auxiliary.Convert.GetDateFormat(nextComplianceDate) + " ") +
+                                              mpd.NextPerformanceSource;
+                string nextRemainString = mpd.Remains != null && !mpd.Remains.IsNullOrZero()
+                                              ? mpd.Remains.ToString()
+                                              : "N/A";
+
+                #endregion
+
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.TaskNumberCheck != "" ? mpd.TaskNumberCheck : "N/A", ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.TaskCardNumber, ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.MaintenanceManual != "" ? mpd.MaintenanceManual : "N/A", ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.Category.ShortName);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.WorkType.ToString(), ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.Program.ToString(), ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.Description != "" ? mpd.Description : "N/A", ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.Zone);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.Access);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.Workarea, ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.ManHours <= 0 ? "" : mpd.ManHours.ToString());
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], firstPerformanceString);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.Threshold.RepeatInterval.ToString());
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], lastPerformanceString);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], nextComplianceString);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], nextRemainString);
+               
+                currentColumnPosition = 1;
+                currentRowPosition++;
+            }
 		}
 
 
