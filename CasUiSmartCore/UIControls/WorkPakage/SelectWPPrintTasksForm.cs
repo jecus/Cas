@@ -1711,8 +1711,8 @@ namespace CAS.UI.UIControls.WorkPakage
 				inputDocumentTitle = PdfReader.Open(((NonRoutineCardReportScat)order.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
 				for (int i = 0; i < inputDocumentTitle.PageCount; i++)
 					_outputDocument.AddPage(inputDocumentTitle.Pages[i]);
-	            for (int i = 0; i < inputDocumentTitle.PageCount; i++)
-		            _outputDocument.AddPage(inputDocumentTitle.Pages[i]);
+	            //for (int i = 0; i < inputDocumentTitle.PageCount; i++)
+		           // _outputDocument.AddPage(inputDocumentTitle.Pages[i]);
 
 				if (shiftFromEnd > 0)
 				{

@@ -102,7 +102,7 @@ namespace CASReports.Builders
                                                          _lastTransfer != null ? _lastTransfer.Position :"",
                                                          "",
                                                          "",
-                                                         _currentWorkPackage.Title,
+                                                         _currentWorkPackage.Number,
                                                          _currentWorkPackage.Station,
                                                          _orderNum.ToString());
         }
