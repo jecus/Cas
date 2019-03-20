@@ -571,13 +571,13 @@ namespace CAS.UI.ExcelExport
 
                 #endregion
 
-                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.TaskNumberCheck != "" ? mpd.TaskNumberCheck : "N/A", ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], !string.IsNullOrEmpty(mpd.TaskNumberCheck) ? mpd.TaskNumberCheck : "N/A", ExcelHorizontalAlignment.Left);
                 FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.TaskCardNumber, ExcelHorizontalAlignment.Left);
-                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.MaintenanceManual != "" ? mpd.MaintenanceManual : "N/A", ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], !string.IsNullOrEmpty(mpd.MaintenanceManual) ? mpd.MaintenanceManual.Replace("\n", " ") : "N/A", ExcelHorizontalAlignment.Left);
                 FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.Category.ShortName);
                 FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.WorkType.ToString(), ExcelHorizontalAlignment.Left);
                 FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.Program.ToString(), ExcelHorizontalAlignment.Left);
-                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.Description != "" ? mpd.Description : "N/A", ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], !string.IsNullOrEmpty(mpd.Description) ? mpd.Description : "N/A", ExcelHorizontalAlignment.Left);
                 FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.Zone);
                 FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.Access);
                 FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.Workarea, ExcelHorizontalAlignment.Left);
