@@ -15,6 +15,7 @@ using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
+using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.Schedule;
 using Convert = System.Convert;
@@ -461,7 +462,6 @@ namespace CAS.UI.ExcelExport
             }
         }
 
-
         public void ExportMpd(List<MaintenanceDirective> mpds)
         {
             _package = new ExcelPackage();
@@ -593,10 +593,147 @@ namespace CAS.UI.ExcelExport
             }
 		}
 
+        #region Export Directives
 
-		#region private void Completed(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        public void ExportDirective(List<Directive> directives)
+        {
+            _package = new ExcelPackage();
 
-		public void Completed(object sender, RunWorkerCompletedEventArgs e)
+            var sheetName = "Directive";
+
+            Workbook.Worksheets.Add(sheetName);
+            var workSheet = Workbook.Worksheets[sheetName];
+
+            FillHeaderCell(workSheet.Cells[1, 1], "AD No", ExcelHorizontalAlignment.Center);
+            workSheet.Column(1).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 2], "SB No", ExcelHorizontalAlignment.Center);
+            workSheet.Column(2).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 3], "EO No", ExcelHorizontalAlignment.Center);
+            workSheet.Column(3).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 4], "STC No", ExcelHorizontalAlignment.Center);
+            workSheet.Column(4).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 5], "Description", ExcelHorizontalAlignment.Center);
+            workSheet.Column(5).Width = 15;
+
+            FillHeaderCell(workSheet.Cells[1, 6], "Applicability", ExcelHorizontalAlignment.Center);
+            workSheet.Column(6).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 7], "Work Type", ExcelHorizontalAlignment.Center);
+            workSheet.Column(7).Width = 10;
+
+            FillHeaderCell(workSheet.Cells[1, 8], "Status", ExcelHorizontalAlignment.Center);
+            workSheet.Column(8).Width = 10;
+
+            FillHeaderCell(workSheet.Cells[1, 9], "Effective Date", ExcelHorizontalAlignment.Center);
+            workSheet.Column(9).Width = 8;
+
+            FillHeaderCell(workSheet.Cells[1, 10], "1st. Perf.", ExcelHorizontalAlignment.Center);
+            workSheet.Column(10).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 11], "Rpt. Intv", ExcelHorizontalAlignment.Center);
+            workSheet.Column(11).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 12], "Last", ExcelHorizontalAlignment.Center);
+            workSheet.Column(12).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 13], "Next", ExcelHorizontalAlignment.Center);
+            workSheet.Column(13).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 14], "Remain/Overdue", ExcelHorizontalAlignment.Center);
+            workSheet.Column(14).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 15], "ATA", ExcelHorizontalAlignment.Center);
+            workSheet.Column(15).Width = 10;
+
+            FillHeaderCell(workSheet.Cells[1, 16], "Remarks", ExcelHorizontalAlignment.Center);
+            workSheet.Column(16).Width = 15;
+
+            workSheet.View.FreezePanes(2, 1);
+
+            int currentRowPosition = 2;
+            int currentColumnPosition = 1;
+
+            foreach (var directive in directives)
+            {
+                #region MyRegion
+
+                var lastComplianceDate = DateTimeExtend.GetCASMinDateTime();
+                var nextComplianceDate = DateTimeExtend.GetCASMinDateTime();
+                var lastComplianceLifeLength = Lifelength.Zero;
+                var nextComplianceLifeLength = Lifelength.Null;
+                var nextComplianceRemain = Lifelength.Null;
+
+                string lastPerformanceString, firstPerformanceString = "N/A";
+
+                if (directive.Threshold.FirstPerformanceSinceNew != null && !directive.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
+                {
+                    firstPerformanceString = "s/n: " + directive.Threshold.FirstPerformanceSinceNew;
+                }
+                if (directive.Threshold.FirstPerformanceSinceEffectiveDate != null &&
+                    !directive.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+                {
+                    if (firstPerformanceString != "N/A") firstPerformanceString += " or ";
+                    else firstPerformanceString = "";
+                    firstPerformanceString += "s/e.d: " + directive.Threshold.FirstPerformanceSinceEffectiveDate;
+                }
+                var repeatInterval = directive.Threshold.RepeatInterval;
+
+                if (nextComplianceLifeLength == null || nextComplianceLifeLength.IsNullOrZero())
+                    nextComplianceLifeLength = directive.NextPerformanceSource;
+                if (directive.NextPerformanceSource != null && !directive.NextPerformanceSource.IsNullOrZero() &&
+                    directive.NextPerformanceSource.IsLessOrEqualByAnyParameter(nextComplianceLifeLength))
+                {
+                    nextComplianceLifeLength = directive.NextPerformanceSource;
+                    if (directive.NextPerformanceDate != null) nextComplianceDate = (DateTime)directive.NextPerformanceDate;
+                    if (directive.Remains != null) nextComplianceRemain = directive.Remains;
+                }
+                if (lastComplianceDate <= DateTimeExtend.GetCASMinDateTime())
+                    lastPerformanceString = "N/A";
+                else
+                    lastPerformanceString = SmartCore.Auxiliary.Convert.GetDateFormat(lastComplianceDate) + " " +
+                                            lastComplianceLifeLength;
+
+                var nextComplianceString = ((nextComplianceDate <= DateTimeExtend.GetCASMinDateTime())
+                                                   ? ""
+                                                   : SmartCore.Auxiliary.Convert.GetDateFormat(nextComplianceDate)) + " " +
+                                              nextComplianceLifeLength;
+                var nextRemainString = nextComplianceRemain != null && !nextComplianceRemain.IsNullOrZero()
+                                              ? nextComplianceRemain.ToString()
+                                              : "N/A";
+
+                #endregion
+
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], directive.Title + "  §: " + directive.Paragraph);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], !string.IsNullOrEmpty(directive.ServiceBulletinNo) ? directive.ServiceBulletinNo : "N/A");
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], !string.IsNullOrEmpty(directive.EngineeringOrders) ? directive.EngineeringOrders : "N/A");
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], !string.IsNullOrEmpty(directive.StcNo) ? directive.StcNo : "N/A");
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], directive.Description, ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], directive.IsApplicability ? $"APL  {directive.Applicability.TrimEnd(' ')}" : $"N/A  {directive.Applicability.TrimEnd(' ')}");
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], directive.WorkType);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], directive.Status);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], directive.Threshold.EffectiveDate);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], firstPerformanceString);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], repeatInterval.ToString());
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], lastPerformanceString);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], nextComplianceString);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], nextRemainString);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], directive.ATAChapter.ToString(), ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], directive.Remarks.Replace("\r\n", " "), ExcelHorizontalAlignment.Left);
+                
+                currentColumnPosition = 1;
+                currentRowPosition++;
+            }
+        }
+
+        #endregion
+
+        #region private void Completed(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+
+        public void Completed(object sender, RunWorkerCompletedEventArgs e)
         {
 	        var sfd = new SaveFileDialog();
 	        sfd.Filter = ".xlsx Files (*.xlsx)|*.xlsx";
@@ -681,6 +818,6 @@ namespace CAS.UI.ExcelExport
 		#endregion
 
 		public event EventHandler ReportProgress;
-
-	}
+        
+    }
 }
