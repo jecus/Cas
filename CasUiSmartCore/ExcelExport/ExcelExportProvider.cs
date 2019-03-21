@@ -19,6 +19,7 @@ using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.Schedule;
+using System.Text.RegularExpressions;
 using Convert = System.Convert;
 
 namespace CAS.UI.ExcelExport
@@ -653,12 +654,14 @@ namespace CAS.UI.ExcelExport
             FillHeaderCell(workSheet.Cells[1, 16], "Remarks", ExcelHorizontalAlignment.Center);
             workSheet.Column(16).Width = 15;
             workSheet.Column(16).Style.WrapText = true;
-
+            
             workSheet.DefaultRowHeight = 15;
             workSheet.View.FreezePanes(2, 1);
 
             int currentRowPosition = 2;
             int currentColumnPosition = 1;
+
+            directives.Sort(new DirectiveComparer());
             
             foreach (var directive in directives)
             {
