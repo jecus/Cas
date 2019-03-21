@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Auxiliary;
 using CASTerms;
 using OfficeOpenXml;
+using OfficeOpenXml.FormulaParsing.Utilities;
 using OfficeOpenXml.Style;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
@@ -605,7 +606,7 @@ namespace CAS.UI.ExcelExport
             var workSheet = Workbook.Worksheets[sheetName];
 
             FillHeaderCell(workSheet.Cells[1, 1], "AD No", ExcelHorizontalAlignment.Center);
-            workSheet.Column(1).Width = 12;
+            workSheet.Column(1).Width = 16;
 
             FillHeaderCell(workSheet.Cells[1, 2], "SB No", ExcelHorizontalAlignment.Center);
             workSheet.Column(2).Width = 12;
@@ -629,7 +630,7 @@ namespace CAS.UI.ExcelExport
             workSheet.Column(8).Width = 10;
 
             FillHeaderCell(workSheet.Cells[1, 9], "Effective Date", ExcelHorizontalAlignment.Center);
-            workSheet.Column(9).Width = 8;
+            workSheet.Column(9).Width = 14;
 
             FillHeaderCell(workSheet.Cells[1, 10], "1st. Perf.", ExcelHorizontalAlignment.Center);
             workSheet.Column(10).Width = 12;
@@ -638,10 +639,10 @@ namespace CAS.UI.ExcelExport
             workSheet.Column(11).Width = 12;
 
             FillHeaderCell(workSheet.Cells[1, 12], "Last", ExcelHorizontalAlignment.Center);
-            workSheet.Column(12).Width = 12;
+            workSheet.Column(12).Width = 30;
 
             FillHeaderCell(workSheet.Cells[1, 13], "Next", ExcelHorizontalAlignment.Center);
-            workSheet.Column(13).Width = 12;
+            workSheet.Column(13).Width = 18;
 
             FillHeaderCell(workSheet.Cells[1, 14], "Remain/Overdue", ExcelHorizontalAlignment.Center);
             workSheet.Column(14).Width = 12;
@@ -651,12 +652,14 @@ namespace CAS.UI.ExcelExport
 
             FillHeaderCell(workSheet.Cells[1, 16], "Remarks", ExcelHorizontalAlignment.Center);
             workSheet.Column(16).Width = 15;
+            workSheet.Column(16).Style.WrapText = true;
 
+            workSheet.DefaultRowHeight = 15;
             workSheet.View.FreezePanes(2, 1);
 
             int currentRowPosition = 2;
             int currentColumnPosition = 1;
-
+            
             foreach (var directive in directives)
             {
                 #region MyRegion
@@ -666,8 +669,16 @@ namespace CAS.UI.ExcelExport
                 var lastComplianceLifeLength = Lifelength.Zero;
                 var nextComplianceLifeLength = Lifelength.Null;
                 var nextComplianceRemain = Lifelength.Null;
+                var effDate = DateTimeExtend.GetCASMinDateTime();
 
                 string lastPerformanceString, firstPerformanceString = "N/A";
+
+                if (directive.LastPerformance != null &&
+                    directive.LastPerformance.RecordDate > lastComplianceDate)
+                {
+                    lastComplianceDate = directive.LastPerformance.RecordDate;
+                    lastComplianceLifeLength = directive.LastPerformance.OnLifelength;
+                }
 
                 if (directive.Threshold.FirstPerformanceSinceNew != null && !directive.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
                 {
@@ -705,6 +716,8 @@ namespace CAS.UI.ExcelExport
                                               ? nextComplianceRemain.ToString()
                                               : "N/A";
 
+                effDate = directive.Threshold.EffectiveDate;
+
                 #endregion
 
                 FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], directive.Title + "  §: " + directive.Paragraph);
@@ -715,7 +728,7 @@ namespace CAS.UI.ExcelExport
                 FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], directive.IsApplicability ? $"APL  {directive.Applicability.TrimEnd(' ')}" : $"N/A  {directive.Applicability.TrimEnd(' ')}");
                 FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], directive.WorkType);
                 FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], directive.Status);
-                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], directive.Threshold.EffectiveDate);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], effDate > DateTimeExtend.GetCASMinDateTime() ? SmartCore.Auxiliary.Convert.GetDateFormat(effDate) : "");
                 FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], firstPerformanceString);
                 FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], repeatInterval.ToString());
                 FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], lastPerformanceString);
