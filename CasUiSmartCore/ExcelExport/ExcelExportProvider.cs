@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using Auxiliary;
 using CASTerms;
 using OfficeOpenXml;
-using OfficeOpenXml.FormulaParsing.Utilities;
 using OfficeOpenXml.Style;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
@@ -18,8 +17,7 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.MaintenanceWorkscope;
-using SmartCore.Entities.General.Schedule;
-using System.Text.RegularExpressions;
+using Component = SmartCore.Entities.General.Accessory.Component;
 using Convert = System.Convert;
 
 namespace CAS.UI.ExcelExport
@@ -747,6 +745,193 @@ namespace CAS.UI.ExcelExport
 
         #endregion
 
+        #region Export Component
+
+        public void ExportComponent(List<BaseEntityObject> components)
+        {
+            _package = new ExcelPackage();
+
+            var sheetName = "Component";
+
+            Workbook.Worksheets.Add(sheetName);
+            var workSheet = Workbook.Worksheets[sheetName];
+
+            FillHeaderCell(workSheet.Cells[1, 1], "ATA", ExcelHorizontalAlignment.Center);
+            workSheet.Column(1).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 2], "Part. No", ExcelHorizontalAlignment.Center);
+            workSheet.Column(2).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 3], "Description", ExcelHorizontalAlignment.Center);
+            workSheet.Column(3).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 4], "Work Type", ExcelHorizontalAlignment.Center);
+            workSheet.Column(4).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 5], "Serial No", ExcelHorizontalAlignment.Center);
+            workSheet.Column(5).Width = 14;
+
+            FillHeaderCell(workSheet.Cells[1, 6], "MPD Item", ExcelHorizontalAlignment.Center);
+            workSheet.Column(6).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 7], "Pos. No", ExcelHorizontalAlignment.Center);
+            workSheet.Column(7).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 8], "M.P.", ExcelHorizontalAlignment.Center);
+            workSheet.Column(8).Width = 5;
+
+            FillHeaderCell(workSheet.Cells[1, 9], "Zone-Area", ExcelHorizontalAlignment.Center);
+            workSheet.Column(9).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 10], "Access", ExcelHorizontalAlignment.Center);
+            workSheet.Column(10).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 11], "Inst. date", ExcelHorizontalAlignment.Center);
+            workSheet.Column(11).Width = 11;
+
+            FillHeaderCell(workSheet.Cells[1, 12], "Life limit/1st. Perf", ExcelHorizontalAlignment.Center);
+            workSheet.Column(12).Width = 8;
+
+            FillHeaderCell(workSheet.Cells[1, 13], "Rpt. int.", ExcelHorizontalAlignment.Center);
+            workSheet.Column(13).Width = 8;
+
+            FillHeaderCell(workSheet.Cells[1, 14], "Next", ExcelHorizontalAlignment.Center);
+            workSheet.Column(14).Width = 20;
+
+            FillHeaderCell(workSheet.Cells[1, 15], "Remain/Overdue", ExcelHorizontalAlignment.Center);
+            workSheet.Column(15).Width = 13;
+
+            FillHeaderCell(workSheet.Cells[1, 16], "Last", ExcelHorizontalAlignment.Center);
+            workSheet.Column(16).Width = 30;
+
+            FillHeaderCell(workSheet.Cells[1, 17], "M.H.", ExcelHorizontalAlignment.Center);
+            workSheet.Column(17).Width = 5;
+
+            FillHeaderCell(workSheet.Cells[1, 18], "Remarks", ExcelHorizontalAlignment.Center);
+            workSheet.Column(18).Width = 12;
+            workSheet.Column(18).Style.WrapText = true;
+
+            workSheet.DefaultRowHeight = 15;
+            workSheet.View.FreezePanes(2, 1);
+
+            int currentRowPosition = 2;
+            int currentColumnPosition = 1;
+
+            foreach (var comp in components)
+            {
+                #region MyRegion
+
+                DateTime? approx;
+                Lifelength remains, next;
+                AtaChapter ata;
+                MaintenanceControlProcess maintenanceType;
+                DateTime transferDate;
+                Lifelength firstPerformance = Lifelength.Null,
+                           lastPerformance = Lifelength.Null,
+                           repeatInterval = Lifelength.Null;
+                string partNumber,
+                       description,
+                       serialNumber,
+                       position,
+                       mpdString = "",
+                       lastPerformanceString = "",
+                       classString = "",
+                       remarks,
+                       workType = "",
+                       zone = "",
+                       access = "",
+                       ndtString = "";
+                double manHours,
+                       costServiceable = 0,
+                       costOverhaul = 0;
+                if (comp is Component)
+                {
+                    Component componentItem = (Component)comp;
+                    approx = componentItem.NextPerformanceDate;
+                    next = componentItem.NextPerformanceSource;
+                    remains = componentItem.LLPCategories ? componentItem.LLPRemains : componentItem.Remains;
+                    ata = componentItem.Model != null ? componentItem.Model.ATAChapter : componentItem.ATAChapter;
+                    partNumber = componentItem.PartNumber;
+                    description = componentItem.Model != null ? componentItem.Model.Description : componentItem.Description;
+                    serialNumber = componentItem.SerialNumber;
+                    position = componentItem.TransferRecords.GetLast().Position.ToUpper();
+                    maintenanceType = componentItem.MaintenanceControlProcess;
+                    transferDate = componentItem.TransferRecords.GetLast().TransferDate;
+                    firstPerformance = componentItem.LifeLimit;
+                    manHours = componentItem.ManHours;
+                    remarks = componentItem.Remarks;
+                }
+                else
+                {
+                    ComponentDirective dd = (ComponentDirective)comp;
+                    if (dd.Threshold.FirstPerformanceSinceNew != null && !dd.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
+                    {
+                        firstPerformance = dd.Threshold.FirstPerformanceSinceNew;
+                    }
+                    if (dd.LastPerformance != null)
+                    {
+                        lastPerformanceString =
+                            SmartCore.Auxiliary.Convert.GetDateFormat(dd.LastPerformance.RecordDate) + " " +
+                            dd.LastPerformance.OnLifelength;
+                        lastPerformance = dd.LastPerformance.OnLifelength;
+                    }
+                    if (dd.Threshold.RepeatInterval != null && !dd.Threshold.RepeatInterval.IsNullOrZero())
+                    {
+                        repeatInterval = dd.Threshold.RepeatInterval;
+                    }
+
+                    approx = dd.NextPerformanceDate;
+                    next = dd.NextPerformanceSource;
+                    remains = dd.Remains;
+                    ata = dd.ParentComponent.Model != null ? dd.ParentComponent.Model.ATAChapter : dd.ParentComponent.ATAChapter;
+                    partNumber = "    " + dd.PartNumber;
+                    var desc = dd.ParentComponent.Model != null
+                        ? dd.ParentComponent.Model.Description
+                        : dd.ParentComponent.Description;
+
+                    description = "    " + desc;
+                    serialNumber = "    " + dd.SerialNumber;
+                    position = "    " + dd.ParentComponent.TransferRecords.GetLast().Position.ToUpper();
+                    transferDate = dd.ParentComponent.TransferRecords.GetLast().TransferDate;
+                    maintenanceType = dd.ParentComponent.MaintenanceControlProcess;
+                    manHours = dd.ManHours;
+                    zone = dd.ZoneArea;
+                    access = dd.AccessDirective;
+                    remarks = dd.Remarks;
+                    workType = dd.DirectiveType.ToString();
+
+                    if (dd.MaintenanceDirective != null)
+                        mpdString = dd.MaintenanceDirective.TaskNumberCheck;
+                }
+
+                #endregion
+
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], ata.ToString(), ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], partNumber.TrimStart(' '));
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], description.TrimStart(' '), ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], workType);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], serialNumber.TrimStart(' '));
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpdString);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], position.TrimStart(' '));
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], maintenanceType.ShortName);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], zone);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], access);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], transferDate > DateTimeExtend.GetCASMinDateTime() ? SmartCore.Auxiliary.Convert.GetDateFormat(transferDate) : "");
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], firstPerformance.ToString());
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], repeatInterval.ToString());
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], approx == null ? "" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)approx) + " " + next);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], remains != null && !remains.IsNullOrZero() ? remains.ToString() : "");
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], lastPerformanceString);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], manHours.ToString());
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], remarks, ExcelHorizontalAlignment.Left);
+
+                currentColumnPosition = 1;
+                currentRowPosition++;
+            }
+        }
+
+        #endregion
+
         #region private void Completed(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
 
         public void Completed(object sender, RunWorkerCompletedEventArgs e)
@@ -834,6 +1019,7 @@ namespace CAS.UI.ExcelExport
 		#endregion
 
 		public event EventHandler ReportProgress;
+
         
     }
 }
