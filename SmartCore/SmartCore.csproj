@@ -715,6 +715,7 @@
     <Compile Include="Filters\CommonFilterCollection.cs" />
     <Compile Include="Filters\CommonFilterGroup.cs" />
     <Compile Include="Filters\IFilter.cs" />
+    <Compile Include="IAtaSorted.cs" />
     <Compile Include="ICasEnvironment.cs" />
     <Compile Include="Kits\IKitsCore.cs" />
     <Compile Include="Kits\KitsCore.cs" />

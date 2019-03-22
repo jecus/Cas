@@ -10,6 +10,7 @@ using Auxiliary;
 using CASTerms;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
+using SmartCore;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
@@ -817,7 +818,7 @@ namespace CAS.UI.ExcelExport
             int currentRowPosition = 2;
             int currentColumnPosition = 1;
 
-            foreach (var comp in components)
+            foreach (var comp in components.OfType<IAtaSorted>().OrderBy(i => i.AtaSorted.ShortName))
             {
                 #region MyRegion
 
@@ -846,11 +847,11 @@ namespace CAS.UI.ExcelExport
                        costOverhaul = 0;
                 if (comp is Component)
                 {
-                    Component componentItem = (Component)comp;
+                    var componentItem = (Component)comp;
                     approx = componentItem.NextPerformanceDate;
                     next = componentItem.NextPerformanceSource;
                     remains = componentItem.LLPCategories ? componentItem.LLPRemains : componentItem.Remains;
-                    ata = componentItem.Model != null ? componentItem.Model.ATAChapter : componentItem.ATAChapter;
+                    ata = componentItem.ATAChapter;
                     partNumber = componentItem.PartNumber;
                     description = componentItem.Model != null ? componentItem.Model.Description : componentItem.Description;
                     serialNumber = componentItem.SerialNumber;
@@ -863,11 +864,10 @@ namespace CAS.UI.ExcelExport
                 }
                 else
                 {
-                    ComponentDirective dd = (ComponentDirective)comp;
+                    var dd = (ComponentDirective)comp;
                     if (dd.Threshold.FirstPerformanceSinceNew != null && !dd.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
-                    {
                         firstPerformance = dd.Threshold.FirstPerformanceSinceNew;
-                    }
+                    
                     if (dd.LastPerformance != null)
                     {
                         lastPerformanceString =
@@ -876,14 +876,12 @@ namespace CAS.UI.ExcelExport
                         lastPerformance = dd.LastPerformance.OnLifelength;
                     }
                     if (dd.Threshold.RepeatInterval != null && !dd.Threshold.RepeatInterval.IsNullOrZero())
-                    {
                         repeatInterval = dd.Threshold.RepeatInterval;
-                    }
 
                     approx = dd.NextPerformanceDate;
                     next = dd.NextPerformanceSource;
                     remains = dd.Remains;
-                    ata = dd.ParentComponent.Model != null ? dd.ParentComponent.Model.ATAChapter : dd.ParentComponent.ATAChapter;
+                    ata = dd.AtaSorted;
                     partNumber = "    " + dd.PartNumber;
                     var desc = dd.ParentComponent.Model != null
                         ? dd.ParentComponent.Model.Description
