@@ -1,0 +1,2601 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0BB37FD2-48B1-4212-8CB8-82461A379AC3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CASReports</RootNamespace>
+    <AssemblyName>CASReports</AssemblyName>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Orenburg|AnyCPU' ">
+    <OutputPath>bin\Orenburg\</OutputPath>
+    <DefineConstants>TRACE;Orenburg</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Orenburg|x86' ">
+    <OutputPath>bin\x86\Orenburg\</OutputPath>
+    <DefineConstants>TRACE;Orenburg</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Orenburg|x64' ">
+    <OutputPath>bin\x64\Orenburg\</OutputPath>
+    <DefineConstants>TRACE;Orenburg</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'KACRelease|AnyCPU'">
+    <OutputPath>bin\KACRelease\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\CASReports.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'KACRelease|x86'">
+    <OutputPath>bin\x86\KACRelease\</OutputPath>
+    <DefineConstants>TRACE;KAC</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\x86\Release\CASReports.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'KACRelease|x64'">
+    <OutputPath>bin\x64\KACRelease\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\x64\Release\CASReports.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'KACDEBUG|AnyCPU'">
+    <OutputPath>bin\KACDEBUG\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\CASReports.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'KACDEBUG|x86'">
+    <OutputPath>bin\x86\KACDEBUG\</OutputPath>
+    <DefineConstants>TRACE;KAC</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\x86\Release\CASReports.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'KACDEBUG|x64'">
+    <OutputPath>bin\x64\KACDEBUG\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\x64\Release\CASReports.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AQUILINEDEBUG|AnyCPU'">
+    <OutputPath>bin\AQUILINEDEBUG\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AQUILINEDEBUG|x86'">
+    <OutputPath>bin\x86\AQUILINEDEBUG\</OutputPath>
+    <DefineConstants>TRACE;KAC</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AQUILINEDEBUG|x64'">
+    <OutputPath>bin\x64\AQUILINEDEBUG\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AQUILINERELEASE|AnyCPU'">
+    <OutputPath>bin\AQUILINERELEASE\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AQUILINERELEASE|x86'">
+    <OutputPath>bin\x86\AQUILINERELEASE\</OutputPath>
+    <DefineConstants>TRACE;KAC</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AQUILINERELEASE|x64'">
+    <OutputPath>bin\x64\AQUILINERELEASE\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\CrystalDecisions.ReportSource.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\CrystalDecisions.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Web, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\CrystalDecisions.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\CrystalDecisions.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\WINDOWS\assembly\GAC_MSIL\System.Web.Services\2.0.0.0__b03f5f7f11d50a3a\System.Web.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Builders\AbstractReportBuilder.cs" />
+    <Compile Include="Builders\AircraftGeneralDataReportBuilder.cs" />
+    <Compile Include="Builders\ATLBBuilder.cs" />
+    <Compile Include="Builders\AvailableComponentsBuilder.cs" />
+    <Compile Include="Builders\ComplianceListBuilder.cs" />
+    <Compile Include="Builders\ComponentAMLLPReportBuilder.cs" />
+    <Compile Include="Builders\ComponentLLPReportBuilderNewLDG.cs" />
+    <Compile Include="Builders\ComponentLLPReportBuilderNew.cs" />
+    <Compile Include="Builders\ComponentStatusReportBuilder.cs" />
+    <Compile Include="Builders\AvionicsInventoryStatusReportBuilder.cs" />
+    <Compile Include="Builders\ComponentStatusOCCMReportBuilder.cs" />
+    <Compile Include="Builders\ComponentChangeReportBuilder.cs" />
+    <Compile Include="Builders\AirFleetBuilder.cs" />
+    <Compile Include="Builders\ComponentAMReportBuilder.cs" />
+    <Compile Include="Builders\ComponentTaskReportBuilderNew.cs" />
+    <Compile Include="Builders\DirectivesReportBuilderLitAVIAEng.cs" />
+    <Compile Include="Builders\DirectivesReportBuilderLitAVIA.cs" />
+    <Compile Include="Builders\DirectivesReportBuilder.cs" />
+    <Compile Include="Builders\ComponentsReportBuilder.cs" />
+    <Compile Include="Builders\CondenmedTagReportBuilder.cs" />
+    <Compile Include="Builders\CalibrationTagReportBuilder.cs" />
+    <Compile Include="Builders\ListOfApprovedSuppliersBuilder.cs" />
+    <Compile Include="Builders\DirectivesAMReportBuilder.cs" />
+    <Compile Include="Builders\MaintenanceDirectivesAMSupplimentalReportBuilder.cs" />
+    <Compile Include="Builders\MaintenanceDirectivesAMReportBuilder.cs" />
+    <Compile Include="Builders\MaintenanceDirectivesFullReportBuilderLitAVia - Copy.cs" />
+    <Compile Include="Builders\MaintenanceDirectivesComponentFullReportBuilderLitAVia.cs" />
+    <Compile Include="Builders\MaintenanceReportBuilder.cs" />
+    <Compile Include="Builders\RegisterOfDocumentReportBuilder.cs" />
+    <Compile Include="Builders\InspectionTagReportBuilder.cs" />
+    <Compile Include="Builders\IdentificationTagReportBuilder.cs" />
+    <Compile Include="Builders\ToolTagReportBuilder.cs" />
+    <Compile Include="Builders\UnServisibleTagReportBuilder.cs" />
+    <Compile Include="Builders\ServisibleTagReportBuilder.cs" />
+    <Compile Include="Builders\StoreInventoryFileReportBuilder.cs" />
+    <Compile Include="Builders\TrackingListBuilder.cs" />
+    <Compile Include="Builders\WOBuilderScat.cs" />
+    <Compile Include="Builders\WorkScheduleReportBuilder.cs" />
+    <Compile Include="Builders\NomenclatureReportBuilder.cs" />
+    <Compile Include="Builders\ListOfDocumentsReportBuilder.cs" />
+    <Compile Include="Builders\ForecastListReportBuilder.cs" />
+    <Compile Include="Builders\RequestForQuotationReportBuilder.cs" />
+    <Compile Include="Builders\WorkPackageTitleBuilderAquiline.cs" />
+    <Compile Include="Builders\WorkPackageReleaseToServiceBuilderAquiline.cs" />
+    <Compile Include="Builders\WorkPackageReportBuilder.cs" />
+    <Compile Include="Builders\WorkPackageListReportBuilder.cs" />
+    <Compile Include="Builders\DeferredListReportBuilder.cs" />
+    <Compile Include="Builders\MonthlyUtilizationBuilder.cs" />
+    <Compile Include="Builders\ShouldBeOnStockBuilder.cs" />
+    <Compile Include="Builders\WorkPackageReleaseToServiceBuilder.cs" />
+    <Compile Include="Builders\MaintenanceStatusReportBuilder.cs" />
+    <Compile Include="Builders\StoreBuilder.cs" />
+    <Compile Include="Builders\ComponentChangeOrderBuilder.cs" />
+    <Compile Include="Builders\WorkPackageMainPageBuilder.cs" />
+    <Compile Include="Builders\WorkPackageSummarySheetBuilderAquiLine.cs" />
+    <Compile Include="Builders\WorkPackageSummarySheetBuilder.cs" />
+    <Compile Include="Builders\SupplierListReportBuilder.cs" />
+    <Compile Include="Builders\PurchaseOrderReportBuilder.cs" />
+    <Compile Include="Builders\ComponentListReportBuilder.cs" />
+    <Compile Include="Builders\DirectiveTaskReportBuilder.cs" />
+    <Compile Include="Builders\ComponentTaskReportBuilder.cs" />
+    <Compile Include="Builders\MaintenanceProgramReportBuilder.cs" />
+    <Compile Include="Builders\MaintenanceRecordReportBuilder.cs" />
+    <Compile Include="Builders\MaintenanceHistoryReportBuilder.cs" />
+    <Compile Include="Builders\ComponentLLPReportBuilder.cs" />
+    <Compile Include="Builders\ComponentChangeOrderBuilderKAC.cs" />
+    <Compile Include="Builders\NonRoutineCardBuilder.cs" />
+    <Compile Include="Builders\WorkPackageTitlePageBuilder.cs" />
+    <Compile Include="Builders\MaintenanceDirectivesFullReportBuilder.cs" />
+    <Compile Include="Builders\MaintenanceDirectivesReportBuilder.cs" />
+    <Compile Include="Builders\WorkscopeKACReportBuilder.cs" />
+    <Compile Include="Builders\WorkscopeReportBuilder.cs" />
+    <Compile Include="Builders\OperationTimeReportBuilder.cs" />
+    <Compile Include="Builders\AircraftTechnicalConditionReportBuilder.cs" />
+    <Compile Include="Builders\MonthlyPlanReportBuilder.cs" />
+    <Compile Include="Builders\MaintenancePlanReportBuilder.cs" />
+    <Compile Include="Builders\ForecastKitsReportBuilder.cs" />
+    <Compile Include="Builders\WPApuFHJobOrderBuilder.cs" />
+    <Compile Include="Builders\WPIncomingInspectionBuilder.cs" />
+    <Compile Include="Builders\DirectivesReportBuilderKAC.cs" />
+    <Compile Include="Builders\ComponentLLPReportBuilderKAC.cs" />
+    <Compile Include="Builders\LandingGearLLPStatusBuilder.cs" />
+    <Compile Include="Builders\ComponentListReportBuilderKAC.cs" />
+    <Compile Include="Builders\MaintenanceDirectivesFullReportBuilderKAC.cs" />
+    <Compile Include="Builders\MonthlyUtilizationBuilderKAC.cs" />
+    <Compile Include="Builders\ForecastAllFleetKitsReportBuilder.cs" />
+    <Compile Include="Datasets\AircraftGeneralDataDataSet.cs">
+      <DependentUpon>AircraftGeneralDataDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\AircraftGeneralDataDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AircraftGeneralDataDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\AircraftTechicalConditionDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AircraftTechicalConditionDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\AirFleetDataSet.cs">
+      <DependentUpon>AirFleetDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\AirFleetDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AirFleetDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\ATLBDataSet.cs">
+      <DependentUpon>ATLBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\ATLBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ATLBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\AvailableComponentsDataSet.cs">
+      <DependentUpon>AvailableComponentsDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\AvailableComponentsDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AvailableComponentsDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\ComplianceListDataSet.cs">
+      <DependentUpon>ComplianceListDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\ComplianceListDataSet.Designer.cs">
+      <DependentUpon>ComplianceListDataSet.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Datasets\ComponentChangeDataSet.cs">
+      <DependentUpon>ComponentChangeDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\ComponentChangeDataSet.Designer.cs">
+      <DependentUpon>ComponentChangeDataSet.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Datasets\ComponentChangeOrderDataSet.cs">
+      <DependentUpon>ComponentChangeOrderDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\ComponentChangeOrderDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComponentChangeOrderDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\ComponentListDataSet.cs">
+      <DependentUpon>ComponentListDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\ComponentListDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComponentListDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\ComponentsDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComponentsDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\DefferedListDataSet.cs">
+      <DependentUpon>DefferedListDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\DefferedListDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DefferedListDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\DirectivesListDataSet.cs">
+      <DependentUpon>DirectivesListDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\DirectivesListDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DirectivesListDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\DocumentDataSet.cs">
+      <DependentUpon>DocumentDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\DocumentDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DocumentDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\ForecastKitsDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ForecastKitsDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\LandingGearStatusDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LandingGearStatusDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\LLPDiskSheetDataSet.cs">
+      <DependentUpon>LLPDiskSheetDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\LLPDiskSheetDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LLPDiskSheetDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MaintenanceDirectivesDataSetLatAvia.cs">
+      <DependentUpon>MaintenanceDirectivesDataSetLatAvia.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MaintenanceDirectivesDataSetLatAvia.Designer.cs">
+      <DependentUpon>MaintenanceDirectivesDataSetLatAvia.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Datasets\MaintenanceDirectivesDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaintenanceDirectivesDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MaintenanceDirectivesMPDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaintenanceDirectivesMPDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MaintenanceHistoryDataSet.cs">
+      <DependentUpon>MaintenanceHistoryDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MaintenanceHistoryDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaintenanceHistoryDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MaintenancePlanDataSet.cs">
+      <DependentUpon>MaintenancePlanDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MaintenancePlanDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaintenancePlanDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MaintenanceProgramDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaintenanceProgramDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MaintenanceRecordDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaintenanceRecordDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MaintenanceReportDataSet.cs">
+      <DependentUpon>MaintenanceReportDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MaintenanceReportDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaintenanceReportDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MaintenanceStatusDataSet.cs">
+      <DependentUpon>MaintenanceStatusDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MaintenanceSubCheckListDataSet.cs">
+      <DependentUpon>MaintenanceSubCheckListDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MaintenanceSubCheckListDataSet.Designer.cs">
+      <DependentUpon>MaintenanceSubCheckListDataSet.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Datasets\MaintenenceStatusDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaintenenceStatusDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\ModificationItemsDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModificationItemsDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MonthlyPlanDataSet.cs">
+      <DependentUpon>MonthlyPlanDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MonthlyPlanDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MonthlyPlanDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MonthlyUtilizationDataSet.cs">
+      <DependentUpon>MonthlyUtilizationDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MPDLitAvia.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MPDLitAvia.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\OperationTimeDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OperationTimeDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\PurchaseOrderDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PurchaseOrderDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\ReleaseToServiceDataSet.cs">
+      <DependentUpon>ReleaseToServiceDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\ReleaseToServiceDataSet.Designer.cs">
+      <DependentUpon>ReleaseToServiceDataSet.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Datasets\DetailListDataSet.cs">
+      <DependentUpon>DetailListDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\DetailListDataSet.Designer.cs">
+      <DependentUpon>DetailListDataSet.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Datasets\DiscrepanciesDataSet.cs">
+      <DependentUpon>DiscrepanciesDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\DiscrepanciesDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiscrepanciesDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\BaseDetailLogBookDataSet.cs">
+      <DependentUpon>BaseDetailLogBookDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\BaseDetailLogBookDataSet.designer.cs">
+      <DependentUpon>BaseDetailLogBookDataSet.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Builders\DetailListReportBuilder.cs" />
+    <Compile Include="Datasets\EngineeringOrderDataSet.cs">
+      <DependentUpon>EngineeringOrderDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\EngineeringOrderDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EngineeringOrderDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\ForecastListDataSet.cs">
+      <DependentUpon>ForecastListDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\ForecastListDataSet.Designer.cs">
+      <DependentUpon>ForecastListDataSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MaintenanceStatusDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaintenanceStatusDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MaintenanceJobCardDataSet.cs">
+      <DependentUpon>MaintenanceJobCardDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MaintenanceJobCardDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaintenanceJobCardDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MaintenanceSubCheckDataSet.cs">
+      <DependentUpon>MaintenanceSubCheckDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MaintenanceSubCheckDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaintenanceSubCheckDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\MonthlyUtilizationDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MonthlyUtilizationDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\RequestForQuotationDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RequestForQuotationDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\ServisibleDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServisibleDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\ShouldBeOnStockDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShouldBeOnStockDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\StoreDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StoreDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\StoreInventoryFileDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StoreInventoryFileDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\SupplierDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SupplierDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\SupplierListDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SupplierListDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\TrackingListDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TrackingListDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\WorkPackageCoverSheetDataSet.cs">
+      <DependentUpon>WorkPackageCoverSheetDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\WorkPackageCoverSheetDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkPackageCoverSheetDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\WorkPackageDataSet.cs">
+      <DependentUpon>WorkPackageDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\WorkPackageDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkPackageDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\WorkPackageMainPageDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkPackageMainPageDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\WorkPackageReleaseToServiceDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkPackageReleaseToServiceDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\WorkPackagesDataSet.cs">
+      <DependentUpon>WorkPackagesDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\WorkPackagesDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkPackagesDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\WorkPackageSummarySheetDataSet.cs">
+      <DependentUpon>WorkPackageSummarySheetDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\WorkPackageSummarySheetDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkPackageSummarySheetDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\NonRoutineCardDataSet.cs">
+      <DependentUpon>NonRoutineCardDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\NonRoutineCardDataSet.Designer.cs">
+      <DependentUpon>NonRoutineCardDataSet.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Datasets\WorkPackageTitlePageDataSet.cs">
+      <DependentUpon>WorkPackageTitlePageDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\WorkPackageTitlePageDataSet.Designer.cs">
+      <DependentUpon>WorkPackageTitlePageDataSet.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Datasets\WorkscopeDataSet.Designer.cs" />
+    <Compile Include="Datasets\WPApuFHJobOrderDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WPApuFHJobOrderDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\WPIncomingInspectionDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WPIncomingInspectionDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Builders\RepairStatusReportBuilder.cs" />
+    <Compile Include="ReportTemplates\AircraftGeneralDataReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AircraftGeneralDataReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\AircraftTechnicalConditionReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AircraftTechnicalConditionReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\ATLBReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ATLBReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\AvailableComponentsReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AvailableComponentsReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\BaseDetailLogBookReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseDetailLogBookReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\ComplianceListReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComplianceListReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\ComponentChangeOrderReportScat.cs">
+      <DependentUpon>ComponentChangeOrderReportScat.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\ComponentChangeOrderReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComponentChangeOrderReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\ComponentChangeReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComponentChangeReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\ComponentListLLPReportLDG.cs">
+      <DependentUpon>ComponentListLLPReportLDG.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\ComponentListLLPReportAPU.cs">
+      <DependentUpon>ComponentListLLPReportAPU.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\ComponentListLLPReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComponentListLLPReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\ComponentListLLPReportKAC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComponentListLLPReportKAC.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\ComponentListReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComponentListReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\ComponentListReportKAC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComponentListReportKAC.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\ComponentMpLLPReport.cs">
+      <DependentUpon>ComponentMpLLPReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\ComponentReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComponentReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\ComponentStatusReport.cs">
+      <SubType>Component</SubType>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComponentStatusReport.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportTemplates\ComponentStatusOCCMReport.cs">
+      <DependentUpon>ComponentStatusOCCMReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\AirFleetReport.cs">
+      <DependentUpon>AirFleetReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\DefferedListReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DefferedListReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\ComponentMpReport.cs">
+      <DependentUpon>ComponentMpReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\DirectivesEngineListReportScat .cs">
+      <DependentUpon>DirectivesEngineListReportScat .rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\DirectivesListReportScatEng.cs">
+      <DependentUpon>DirectivesListReportScatEng.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\DirectivesListReportScat.cs">
+      <DependentUpon>DirectivesListReportScat.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\DirectivesListReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DirectivesListReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\DirectivesListReportKAC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DirectivesListReportKAC.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\DirectiveTaskReportNew.cs">
+      <DependentUpon>DirectiveTaskReportNew.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\DirectiveTaskReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DirectiveTaskReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\ForecastAllFleetKitsReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ForecastAllFleetKitsReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\ComponentsReport.cs">
+      <DependentUpon>ComponentsReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\ForecastKitsReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ForecastKitsReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\ForecastListReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ForecastListReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\CalibrationTagReport.cs">
+      <DependentUpon>CalibrationTagReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\LandingGearLLPReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LandingGearLLPReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\ListOfApproveSuppliersCrystalReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListOfApproveSuppliersCrystalReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\MaintenanceDirectiveComponentReportLitAvia.cs">
+      <DependentUpon>MaintenanceDirectiveComponentReportLitAvia.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\MaintenanceDirectiveReportLitAvia.cs">
+      <DependentUpon>MaintenanceDirectiveReportLitAvia.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\MaintenanceDirectiveMpAWLReport.cs">
+      <DependentUpon>MaintenanceDirectiveMpAWLReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\DirectiveMpReport.cs">
+      <DependentUpon>DirectiveMpReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\MaintenanceDirectiveMpSupplementalReport.cs">
+      <DependentUpon>MaintenanceDirectiveMpSupplementalReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\MaintenanceDirectiveMpReport.cs">
+      <DependentUpon>MaintenanceDirectiveMpReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\MaintenanceReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaintenanceReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\InspectionTagReport.cs">
+      <DependentUpon>InspectionTagReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\CondemnedTagReport.cs">
+      <DependentUpon>CondemnedTagReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\IdentificationTagReport.cs">
+      <DependentUpon>IdentificationTagReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\NonRoutineCardReportScat.cs">
+      <DependentUpon>NonRoutineCardReportScat.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\ToolTagReport.cs">
+      <DependentUpon>ToolTagReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\UnServisibleTagReport.cs">
+      <DependentUpon>UnServisibleTagReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\ServisibleTagReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServisibleTagReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\StoreInventoryFileReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StoreInventoryFileReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\TrackingListReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TrackingListReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\WorkPackageReleaseToServiceReportScat.cs">
+      <DependentUpon>WorkPackageReleaseToServiceReportScat.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\WorkPackageSummarySheetReportScat.cs">
+      <DependentUpon>WorkPackageSummarySheetReportScat.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\WorkScheduleReport.cs">
+      <DependentUpon>WorkScheduleReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\RegisterOfDocumentsReport.cs">
+      <DependentUpon>RegisterOfDocumentsReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\NomenclatureReport.cs">
+      <DependentUpon>NomenclatureReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\ListOfDocumentsReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListOfDocumentsReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\MaintenanceDirectiveFullReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaintenanceDirectiveFullReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\MaintenanceDirectiveFullReportKAC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaintenanceDirectiveFullReportKAC.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\MaintenanceHistoryReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaintenanceHistoryReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\MaintenancePlanReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaintenancePlanReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\MaintenanceProgramReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaintenanceProgramReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\MaintenanceRecordReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaintenanceRecordReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\MaintenanceStatusReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaintenanceStatusReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\MaintenanceSubCheckListReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaintenanceSubCheckListReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\MonthlyPlanReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MonthlyPlanReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\MonthlyUtilizationReportKAC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MonthlyUtilizationReportKAC.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\NonRoutineCardReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NonRoutineCardReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\OperationTimeReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OperationTimeReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\PurchaseOrderReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PurchaseOrderReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\ReleaseToServiceReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReleaseToServiceReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\RequestForQuotationReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RequestForQuotationReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\SupplierListReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SupplierListReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\WorkPackageListReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkPackageListReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\WorkPackageCoverSheetReport.cs">
+      <DependentUpon>WorkPackageCoverSheetReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\MonthlyUtilizationReport.cs">
+      <DependentUpon>MonthlyUtilizationReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\DamageDirectivesReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DamageDirectivesReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\ShouldBeOnStockReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShouldBeOnStockReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\WorkPackageReleaseToServiceReportAquiline.cs">
+      <DependentUpon>WorkPackageReleaseToServiceReportAquiline.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\WorkPackageReleaseToServiceReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkPackageReleaseToServiceReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\WorkPackageReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkPackageReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\WorkPackagesReport.cs">
+      <DependentUpon>WorkPackagesReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\EngineeringOrderReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EngineeringOrderReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\MaintenanceJobCardReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaintenanceJobCardReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\OutOfPhaseRequirmentsReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OutOfPhaseRequirmentsReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\SBStatusReport.cs">
+      <DependentUpon>SBStatusReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\RepairStatusReport.cs">
+      <DependentUpon>RepairStatusReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\EngineLLPStatusReport.cs">
+      <DependentUpon>EngineLLPStatusReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\DiscrepanciesReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiscrepanciesReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Builders\SSIDReportBuilder.cs" />
+    <Compile Include="ReportTemplates\StoreReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StoreReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\WorkPackageSummarySheetReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkPackageSummarySheetReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\WorkPackageSummarySheetReportAquiLine1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkPackageSummarySheetReportAquiLine.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\WorkscopeReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkscopeReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\WorkscopeReportKAC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkscopeReportKAC.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\WPApuFHJobOrderReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WPApuFHJobOrderReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\WPIncomingInspectionReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WPIncomingInspectionReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\WPMainPagePerortScat.cs">
+      <DependentUpon>WPMainPagePerortScat.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\WPMainPagePerort.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WPMainPagePerort.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\ComponentChangeOrderReportKAC.cs">
+      <DependentUpon>ComponentChangeOrderReportKAC.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\WOScat.cs">
+      <DependentUpon>WOScat.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\WPTitlePageReportScat.cs">
+      <DependentUpon>WPTitlePageReportScat.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\WPTitlePageReportAquiline.cs">
+      <DependentUpon>WPTitlePageReportAquiline.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\WPTitlePageReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WPTitlePageReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTemplates\MaintenanceDirectiveReport.cs">
+      <DependentUpon>MaintenanceDirectiveReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Datasets\AircraftGeneralDataDataSet.xsc">
+      <DependentUpon>AircraftGeneralDataDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\AircraftGeneralDataDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AircraftGeneralDataDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\AircraftGeneralDataDataSet.xss">
+      <DependentUpon>AircraftGeneralDataDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\AircraftTechicalConditionDataSet.xsc">
+      <DependentUpon>AircraftTechicalConditionDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\AircraftTechicalConditionDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AircraftTechicalConditionDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\AircraftTechicalConditionDataSet.xss">
+      <DependentUpon>AircraftTechicalConditionDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\AirFleetDataSet.xsc">
+      <DependentUpon>AirFleetDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\AirFleetDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AirFleetDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\AirFleetDataSet.xss">
+      <DependentUpon>AirFleetDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ATLBDataSet.xsc">
+      <DependentUpon>ATLBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ATLBDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ATLBDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\ATLBDataSet.xss">
+      <DependentUpon>ATLBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\AvailableComponentsDataSet.xsc">
+      <DependentUpon>AvailableComponentsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\AvailableComponentsDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AvailableComponentsDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\AvailableComponentsDataSet.xss">
+      <DependentUpon>AvailableComponentsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\BaseDetailLogBookDataSet.xsc">
+      <DependentUpon>BaseDetailLogBookDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\BaseDetailLogBookDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BaseDetailLogBookDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Datasets\BaseDetailLogBookDataSet.xss">
+      <DependentUpon>BaseDetailLogBookDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ComplianceListDataSet.xsc">
+      <DependentUpon>ComplianceListDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ComplianceListDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ComplianceListDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\ComplianceListDataSet.xss">
+      <DependentUpon>ComplianceListDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ComponentChangeDataSet.xsc">
+      <DependentUpon>ComponentChangeDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ComponentChangeDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ComponentChangeDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Datasets\ComponentChangeDataSet.xss">
+      <DependentUpon>ComponentChangeDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ComponentChangeOrderDataSet.xsc">
+      <DependentUpon>ComponentChangeOrderDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ComponentChangeOrderDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ComponentChangeOrderDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Datasets\ComponentChangeOrderDataSet.xss">
+      <DependentUpon>ComponentChangeOrderDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ComponentListDataSet.xsc">
+      <DependentUpon>ComponentListDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ComponentListDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ComponentListDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\ComponentListDataSet.xss">
+      <DependentUpon>ComponentListDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ComponentsDataSet.xsc">
+      <DependentUpon>ComponentsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ComponentsDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ComponentsDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\ComponentsDataSet.xss">
+      <DependentUpon>ComponentsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\DefferedListDataSet.xsc">
+      <DependentUpon>DefferedListDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\DefferedListDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DefferedListDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\DefferedListDataSet.xss">
+      <DependentUpon>DefferedListDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\DirectivesListDataSet.xsc">
+      <DependentUpon>DirectivesListDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\DirectivesListDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DirectivesListDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\DirectivesListDataSet.xss">
+      <DependentUpon>DirectivesListDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\DocumentDataSet.xsc">
+      <DependentUpon>DocumentDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\DocumentDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DocumentDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\DocumentDataSet.xss">
+      <DependentUpon>DocumentDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ForecastKitsDataSet.xsc">
+      <DependentUpon>ForecastKitsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ForecastKitsDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ForecastKitsDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\ForecastKitsDataSet.xss">
+      <DependentUpon>ForecastKitsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\LandingGearStatusDataSet.xsc">
+      <DependentUpon>LandingGearStatusDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\LandingGearStatusDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>LandingGearStatusDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\LandingGearStatusDataSet.xss">
+      <DependentUpon>LandingGearStatusDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\LLPDiskSheetDataSet.xsc">
+      <DependentUpon>LLPDiskSheetDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\LLPDiskSheetDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>LLPDiskSheetDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\LLPDiskSheetDataSet.xss">
+      <DependentUpon>LLPDiskSheetDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenanceDirectivesDataSetLatAvia.xsc">
+      <DependentUpon>MaintenanceDirectivesDataSetLatAvia.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenanceDirectivesDataSetLatAvia.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MaintenanceDirectivesDataSetLatAvia.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Datasets\MaintenanceDirectivesDataSetLatAvia.xss">
+      <DependentUpon>MaintenanceDirectivesDataSetLatAvia.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenanceDirectivesDataSet.xsc">
+      <DependentUpon>MaintenanceDirectivesDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenanceDirectivesDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MaintenanceDirectivesDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\MaintenanceDirectivesDataSet.xss">
+      <DependentUpon>MaintenanceDirectivesDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenanceDirectivesMPDataSet.xsc">
+      <DependentUpon>MaintenanceDirectivesMPDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenanceDirectivesMPDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MaintenanceDirectivesMPDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\MaintenanceDirectivesMPDataSet.xss">
+      <DependentUpon>MaintenanceDirectivesMPDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenanceHistoryDataSet.xsc">
+      <DependentUpon>MaintenanceHistoryDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenanceHistoryDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MaintenanceHistoryDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\MaintenanceHistoryDataSet.xss">
+      <DependentUpon>MaintenanceHistoryDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenancePlanDataSet.xsc">
+      <DependentUpon>MaintenancePlanDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenancePlanDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MaintenancePlanDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\MaintenancePlanDataSet.xss">
+      <DependentUpon>MaintenancePlanDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenanceProgramDataSet.xsc">
+      <DependentUpon>MaintenanceProgramDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenanceProgramDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MaintenanceProgramDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\MaintenanceProgramDataSet.xss">
+      <DependentUpon>MaintenanceProgramDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenanceRecordDataSet.xsc">
+      <DependentUpon>MaintenanceRecordDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenanceRecordDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MaintenanceRecordDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Datasets\MaintenanceRecordDataSet.xss">
+      <DependentUpon>MaintenanceRecordDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenanceReportDataSet.xsc">
+      <DependentUpon>MaintenanceReportDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenanceReportDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MaintenanceReportDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\MaintenanceReportDataSet.xss">
+      <DependentUpon>MaintenanceReportDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenanceSubCheckListDataSet.xsc">
+      <DependentUpon>MaintenanceSubCheckListDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenanceSubCheckListDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MaintenanceSubCheckListDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Datasets\MaintenanceSubCheckListDataSet.xss">
+      <DependentUpon>MaintenanceSubCheckListDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenenceStatusDataSet.xsc">
+      <DependentUpon>MaintenenceStatusDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenenceStatusDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MaintenenceStatusDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\MaintenenceStatusDataSet.xss">
+      <DependentUpon>MaintenenceStatusDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ModificationItemsDataSet.xsc">
+      <DependentUpon>ModificationItemsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ModificationItemsDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ModificationItemsDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Datasets\ModificationItemsDataSet.xss">
+      <DependentUpon>ModificationItemsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MonthlyPlanDataSet.xsc">
+      <DependentUpon>MonthlyPlanDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MonthlyPlanDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MonthlyPlanDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\MonthlyPlanDataSet.xss">
+      <DependentUpon>MonthlyPlanDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MPDLitAvia.xsc">
+      <DependentUpon>MPDLitAvia.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MPDLitAvia.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MPDLitAvia.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\MPDLitAvia.xss">
+      <DependentUpon>MPDLitAvia.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\OperationTimeDataSet.xsc">
+      <DependentUpon>OperationTimeDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\OperationTimeDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OperationTimeDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\OperationTimeDataSet.xss">
+      <DependentUpon>OperationTimeDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\PurchaseOrderDataSet.xsc">
+      <DependentUpon>PurchaseOrderDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\PurchaseOrderDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PurchaseOrderDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Datasets\PurchaseOrderDataSet.xss">
+      <DependentUpon>PurchaseOrderDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ReleaseToServiceDataSet.xsc">
+      <DependentUpon>ReleaseToServiceDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ReleaseToServiceDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReleaseToServiceDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Datasets\ReleaseToServiceDataSet.xss">
+      <DependentUpon>ReleaseToServiceDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\DetailListDataSet.xsc">
+      <DependentUpon>DetailListDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\DetailListDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DetailListDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\DetailListDataSet.xss">
+      <DependentUpon>DetailListDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\DiscrepanciesDataSet.xsc">
+      <DependentUpon>DiscrepanciesDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\DiscrepanciesDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DiscrepanciesDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\DiscrepanciesDataSet.xss">
+      <DependentUpon>DiscrepanciesDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\EngineeringOrderDataSet.xsc">
+      <DependentUpon>EngineeringOrderDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\EngineeringOrderDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>EngineeringOrderDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\EngineeringOrderDataSet.xss">
+      <DependentUpon>EngineeringOrderDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ForecastListDataSet.xsc">
+      <DependentUpon>ForecastListDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ForecastListDataSet.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Datasets\ForecastListDataSet.xss">
+      <DependentUpon>ForecastListDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenanceStatusDataSet.xsc">
+      <DependentUpon>MaintenanceStatusDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenanceStatusDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MaintenanceStatusDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\MaintenanceStatusDataSet.xss">
+      <DependentUpon>MaintenanceStatusDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenanceJobCardDataSet.xsc">
+      <DependentUpon>MaintenanceJobCardDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenanceJobCardDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MaintenanceJobCardDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\MaintenanceJobCardDataSet.xss">
+      <DependentUpon>MaintenanceJobCardDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenanceSubCheckDataSet.xsc">
+      <DependentUpon>MaintenanceSubCheckDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MaintenanceSubCheckDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MaintenanceSubCheckDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\MaintenanceSubCheckDataSet.xss">
+      <DependentUpon>MaintenanceSubCheckDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MonthlyUtilizationDataSet.xsc">
+      <DependentUpon>MonthlyUtilizationDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\MonthlyUtilizationDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MonthlyUtilizationDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\MonthlyUtilizationDataSet.xss">
+      <DependentUpon>MonthlyUtilizationDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\RequestForQuotationDataSet.xsc">
+      <DependentUpon>RequestForQuotationDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\RequestForQuotationDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RequestForQuotationDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\RequestForQuotationDataSet.xss">
+      <DependentUpon>RequestForQuotationDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ServisibleDataSet.xsc">
+      <DependentUpon>ServisibleDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ServisibleDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ServisibleDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\ServisibleDataSet.xss">
+      <DependentUpon>ServisibleDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ShouldBeOnStockDataSet.xsc">
+      <DependentUpon>ShouldBeOnStockDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\ShouldBeOnStockDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ShouldBeOnStockDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\ShouldBeOnStockDataSet.xss">
+      <DependentUpon>ShouldBeOnStockDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\StoreDataSet.xsc">
+      <DependentUpon>StoreDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\StoreDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>StoreDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\StoreDataSet.xss">
+      <DependentUpon>StoreDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\StoreInventoryFileDataSet.xsc">
+      <DependentUpon>StoreInventoryFileDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\StoreInventoryFileDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>StoreInventoryFileDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\StoreInventoryFileDataSet.xss">
+      <DependentUpon>StoreInventoryFileDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\SupplierDataSet.xsc">
+      <DependentUpon>SupplierDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\SupplierDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SupplierDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\SupplierDataSet.xss">
+      <DependentUpon>SupplierDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\SupplierListDataSet.xsc">
+      <DependentUpon>SupplierListDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\SupplierListDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SupplierListDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\SupplierListDataSet.xss">
+      <DependentUpon>SupplierListDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\TrackingListDataSet.xsc">
+      <DependentUpon>TrackingListDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\TrackingListDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TrackingListDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\TrackingListDataSet.xss">
+      <DependentUpon>TrackingListDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\WorkPackageCoverSheetDataSet.xsc">
+      <DependentUpon>WorkPackageCoverSheetDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\WorkPackageCoverSheetDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>WorkPackageCoverSheetDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\WorkPackageCoverSheetDataSet.xss">
+      <DependentUpon>WorkPackageCoverSheetDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\WorkPackageDataSet.xsc">
+      <DependentUpon>WorkPackageDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\WorkPackageDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>WorkPackageDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\WorkPackageDataSet.xss">
+      <DependentUpon>WorkPackageDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\WorkPackageMainPageDataSet.xsc">
+      <DependentUpon>WorkPackageMainPageDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\WorkPackageMainPageDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>WorkPackageMainPageDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Datasets\WorkPackageMainPageDataSet.xss">
+      <DependentUpon>WorkPackageMainPageDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\WorkPackageReleaseToServiceDataSet.xsc">
+      <DependentUpon>WorkPackageReleaseToServiceDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\WorkPackageReleaseToServiceDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>WorkPackageReleaseToServiceDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\WorkPackageReleaseToServiceDataSet.xss">
+      <DependentUpon>WorkPackageReleaseToServiceDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\WorkPackagesDataSet.xsc">
+      <DependentUpon>WorkPackagesDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\WorkPackagesDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>WorkPackagesDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\WorkPackagesDataSet.xss">
+      <DependentUpon>WorkPackagesDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\WorkPackageSummarySheetDataSet.xsc">
+      <DependentUpon>WorkPackageSummarySheetDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\WorkPackageSummarySheetDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>WorkPackageSummarySheetDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\WorkPackageSummarySheetDataSet.xss">
+      <DependentUpon>WorkPackageSummarySheetDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\NonRoutineCardDataSet.xsc">
+      <DependentUpon>NonRoutineCardDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\NonRoutineCardDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>NonRoutineCardDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Datasets\NonRoutineCardDataSet.xss">
+      <DependentUpon>NonRoutineCardDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\WorkPackageTitlePageDataSet.xsc">
+      <DependentUpon>WorkPackageTitlePageDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\WorkPackageTitlePageDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>WorkPackageTitlePageDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Datasets\WorkPackageTitlePageDataSet.xss">
+      <DependentUpon>WorkPackageTitlePageDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\WorkscopeDataSet.xsc">
+      <DependentUpon>WorkscopeDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\WorkscopeDataSet.xsd" />
+    <None Include="Datasets\WorkscopeDataSet.xss">
+      <DependentUpon>WorkscopeDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\WPApuFHJobOrderDataSet.xsc">
+      <DependentUpon>WPApuFHJobOrderDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\WPApuFHJobOrderDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>WPApuFHJobOrderDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\WPApuFHJobOrderDataSet.xss">
+      <DependentUpon>WPApuFHJobOrderDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\WPIncomingInspectionDataSet.xsc">
+      <DependentUpon>WPIncomingInspectionDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\WPIncomingInspectionDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>WPIncomingInspectionDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\WPIncomingInspectionDataSet.xss">
+      <DependentUpon>WPIncomingInspectionDataSet.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ReportTemplates\AircraftGeneralDataReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AircraftGeneralDataReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\AircraftTechnicalConditionReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AircraftTechnicalConditionReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ATLBReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ATLBReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\AvailableComponentsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AvailableComponentsReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\BaseDetailLogBookReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BaseDetailLogBookReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ComplianceListReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComplianceListReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ComponentChangeOrderReportScat.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComponentChangeOrderReportScat.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ComponentChangeOrderReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComponentChangeOrderReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ComponentChangeReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComponentChangeReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ComponentListLLPReportLDG.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComponentListLLPReportLDG.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ComponentListLLPReportAPU.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComponentListLLPReportAPU.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ComponentListLLPReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComponentListLLPReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ComponentListLLPReportKAC.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComponentListLLPReportKAC.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ComponentListReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComponentListReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ComponentListReportKAC.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComponentListReportKAC.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ComponentMpLLPReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComponentMpLLPReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ComponentReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComponentReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ComponentStatusReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComponentStatusReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ComponentStatusOCCMReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComponentStatusOCCMReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\AirFleetReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AirFleetReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\DefferedListReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DefferedListReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ComponentMpReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComponentMpReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\DirectivesEngineListReportScat .rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DirectivesEngineListReportScat .cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\DirectivesListReportScatEng.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DirectivesListReportScatEng.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\DirectivesListReportScat.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DirectivesListReportScat.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\DirectivesListReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DirectivesListReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\DirectivesListReportKAC.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DirectivesListReportKAC.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\DirectiveTaskReportNew.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DirectiveTaskReportNew.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\DirectiveTaskReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DirectiveTaskReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ForecastAllFleetKitsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ForecastAllFleetKitsReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ComponentsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComponentsReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ForecastKitsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ForecastKitsReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ForecastListReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ForecastListReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\CalibrationTagReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CalibrationTagReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\LandingGearLLPReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>LandingGearLLPReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ListOfApproveSuppliersCrystalReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ListOfApproveSuppliersCrystalReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\MaintenanceDirectiveComponentReportLitAvia.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MaintenanceDirectiveComponentReportLitAvia.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\MaintenanceDirectiveReportLitAvia.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MaintenanceDirectiveReportLitAvia.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\MaintenanceDirectiveMpAWLReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MaintenanceDirectiveMpAWLReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\DirectiveMpReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DirectiveMpReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\MaintenanceDirectiveMpSupplementalReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MaintenanceDirectiveMpSupplementalReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\MaintenanceDirectiveMpReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MaintenanceDirectiveMpReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\MaintenanceReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MaintenanceReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\InspectionTagReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InspectionTagReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\CondemnedTagReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CondemnedTagReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\IdentificationTagReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>IdentificationTagReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\NonRoutineCardReportScat.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>NonRoutineCardReportScat.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ToolTagReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ToolTagReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\UnServisibleTagReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>UnServisibleTagReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ServisibleTagReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ServisibleTagReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\StoreInventoryFileReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>StoreInventoryFileReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\TrackingListReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TrackingListReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\WorkPackageReleaseToServiceReportScat.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WorkPackageReleaseToServiceReportScat.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\WorkPackageSummarySheetReportScat.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WorkPackageSummarySheetReportScat.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\WorkScheduleReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WorkScheduleReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\RegisterOfDocumentsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RegisterOfDocumentsReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\NomenclatureReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>NomenclatureReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ListOfDocumentsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ListOfDocumentsReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\MaintenanceDirectiveFullReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MaintenanceDirectiveFullReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\MaintenanceDirectiveFullReportKAC.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MaintenanceDirectiveFullReportKAC.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\MaintenanceHistoryReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MaintenanceHistoryReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\MaintenancePlanReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MaintenancePlanReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\MaintenanceProgramReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MaintenanceProgramReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\MaintenanceRecordReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MaintenanceRecordReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\MaintenanceStatusReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MaintenanceStatusReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\MaintenanceSubCheckListReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MaintenanceSubCheckListReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\MonthlyPlanReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MonthlyPlanReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\MonthlyUtilizationReportKAC.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MonthlyUtilizationReportKAC.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\NonRoutineCardReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>NonRoutineCardReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\OperationTimeReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OperationTimeReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\PurchaseOrderReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PurchaseOrderReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ReleaseToServiceReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReleaseToServiceReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\RequestForQuotationReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RequestForQuotationReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\SupplierListReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SupplierListReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\WorkPackageListReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WorkPackageListReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\WorkPackageCoverSheetReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WorkPackageCoverSheetReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\MonthlyUtilizationReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MonthlyUtilizationReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\DamageDirectivesReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DamageDirectivesReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ShouldBeOnStockReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ShouldBeOnStockReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\WorkPackageReleaseToServiceReportAquiline.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WorkPackageReleaseToServiceReportAquiline.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\WorkPackageReleaseToServiceReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WorkPackageReleaseToServiceReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\WorkPackageReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WorkPackageReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\WorkPackagesReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WorkPackagesReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\EngineeringOrderReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>EngineeringOrderReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\MaintenanceJobCardReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MaintenanceJobCardReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\OutOfPhaseRequirmentsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OutOfPhaseRequirmentsReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\SBStatusReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SBStatusReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\RepairStatusReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepairStatusReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\EngineLLPStatusReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>EngineLLPStatusReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\DiscrepanciesReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DiscrepanciesReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\StoreReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>StoreReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\WorkPackageSummarySheetReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WorkPackageSummarySheetReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\WorkPackageSummarySheetReportAquiLine.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WorkPackageSummarySheetReportAquiLine1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\WorkscopeReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WorkscopeReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\WorkscopeReportKAC.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WorkscopeReportKAC.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\WPApuFHJobOrderReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WPApuFHJobOrderReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\WPIncomingInspectionReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WPIncomingInspectionReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\WPMainPagePerortScat.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WPMainPagePerortScat.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\WPMainPagePerort.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WPMainPagePerort.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\ComponentChangeOrderReportKAC.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComponentChangeOrderReportKAC.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\WOScat.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WOScat.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\WPTitlePageReportScat.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WPTitlePageReportScat.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\WPTitlePageReportAquiline.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WPTitlePageReportAquiline.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\WPTitlePageReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WPTitlePageReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\MaintenanceDirectiveReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MaintenanceDirectiveReport.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ReportsStyle.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Auxiliary\Auxiliary.csproj">
+      <Project>{8988CAE1-D7C1-499B-B595-9B544FCCF7FB}</Project>
+      <Name>Auxiliary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CASTerms\CASGlobalTerms.csproj">
+      <Project>{0e490ce9-c51f-408c-a6fb-39a8ce185817}</Project>
+      <Name>CASGlobalTerms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SmartCore\SmartCore.csproj">
+      <Project>{48b63705-4573-4bb2-b04d-67a406b09ab6}</Project>
+      <Name>SmartCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TempUIExtentions\TempUIExtentions.csproj">
+      <Project>{7ea3ad0e-0ffa-468b-b372-e41ba03c0b8c}</Project>
+      <Name>TempUIExtentions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>Клиентский профиль .NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using EFCore.DTO.General;
 using EFCore.Interfaces;
 using SmartCore.Entities.General.Interfaces;
 
-namespace SmartCore.AuditMongo
+namespace SmartCore.AuditMongo.Repository
 {
 	public enum AuditOperation : byte
 	{
@@ -15,7 +17,8 @@ namespace SmartCore.AuditMongo
 
 	public interface IAuditRepository
 	{
-		Task WriteAsync<TEntity>(TEntity target, AuditOperation operation)
-			where TEntity : class, IBaseEntityObject, IBaseEntity;
+		Task WriteAsync<TEntity>(TEntity target, AuditOperation operation, UserDTO user,
+			Dictionary<string, object> parameters = null) where TEntity : class, IBaseEntityObject;
+
 	}
 }
