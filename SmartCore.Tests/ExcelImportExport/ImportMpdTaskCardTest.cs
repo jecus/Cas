@@ -14,6 +14,7 @@ using SmartCore.DataAccesses.ItemsRelation;
 using SmartCore.Directives;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Filters;
 using SmartCore.Maintenance;
@@ -166,6 +167,70 @@ namespace SmartCore.Tests.ExcelImportExport
 				}
 			}
 		}
+
+
+		[TestMethod]
+		public void ImportAdTAskCArdOrCrateNew()
+		{
+			var env = GetEnviroment();
+
+			var itemRelationCore = new ItemsRelationsDataAccess(env);
+			var aircraftCore = new AircraftsCore(env.Loader, env.NewKeeper, null);
+			var directiveCore = new DirectiveCore(env.NewKeeper, env.NewLoader, env.Keeper, env.Loader, itemRelationCore);
+			var componentCore = new ComponentCore(env, env.Loader, env.NewLoader, env.NewKeeper, aircraftCore, itemRelationCore);
+
+			var aircraftId = 2348;
+
+			var aircraft = env.NewLoader.GetObject<AircraftDTO, Aircraft>(new Filter("ItemId", aircraftId));
+
+			var directiveList = directiveCore.GetDirectives(aircraft, DirectiveType.AirworthenessDirectives);
+			var bd = componentCore.GetAicraftBaseComponents(aircraftId, BaseComponentType.Engine.ItemId).LastOrDefault();
+
+			var d = new DirectoryInfo(@"H:\CRJ200 27.02.18 AD");
+			var files = d.GetFiles();
+
+			foreach (var file in files)
+			{
+				var name = file.Name.Replace(" ", "").Replace(".pdf", "");
+				var directive = directiveList.FirstOrDefault(i => i.Title.Contains(name));
+
+				if (directive != null)
+				{
+					var _fileData = UsefulMethods.GetByteArrayFromFile(file.FullName);
+					var attachedFile = new AttachedFile
+					{
+						FileData = _fileData,
+						FileName = file.Name,
+						FileSize = _fileData.Length
+					};
+					directive.ADNoFile = attachedFile;
+					env.NewKeeper.Save(directive);
+				}
+				else
+				{
+					var newDirective = new Directive
+					{
+						DirectiveType =  DirectiveType.AirworthenessDirectives,
+						ADType = ADType.Airframe,
+						HiddenRemarks = "NEW",
+						IsApplicability = true,
+						ParentBaseComponent = bd
+					};
+
+					var _fileData = UsefulMethods.GetByteArrayFromFile(file.FullName);
+					var attachedFile = new AttachedFile
+					{
+						FileData = _fileData,
+						FileName = file.Name,
+						FileSize = _fileData.Length
+					};
+					newDirective.ADNoFile = attachedFile;
+					env.NewKeeper.Save(newDirective);
+				}
+			}
+
+		}
+
 
 		private CasEnvironment GetEnviroment()
 		{
