@@ -6,8 +6,10 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using AvControls;
+using CAS.UI.ExcelExport;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
+using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Importing;
 using CAS.UI.UIControls.FiltersControls;
@@ -82,6 +84,8 @@ namespace CAS.UI.UIControls.DirectivesControls
         private ToolStripSeparator _toolStripSeparator4;
         private ToolStripMenuItem _toolStripMenuItemsWorkPackages;
         private ToolStripMenuItem _toolStripMenuItemQuotations;
+        private AnimatedThreadWorker _worker;
+        private ExcelExportProvider _exportProvider;
 
         #endregion
 
@@ -1345,8 +1349,33 @@ namespace CAS.UI.UIControls.DirectivesControls
 
         private void ButtonImportFromExcelClick(object sender, EventArgs e)
         {
-            var form = new CommonExcelImportForm(typeof(Directive));
-            form.ShowDialog(this);
+            _worker = new AnimatedThreadWorker();
+            _worker.DoWork += ExportDirectiveWork;
+            _worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+            _worker.RunWorkerAsync();
+        }
+
+        private void ExportDirectiveWork(object sender, DoWorkEventArgs e)
+        {
+            _worker.ReportProgress(0, "load Directive");
+            _worker.ReportProgress(0, "Generate file! Please wait....");
+
+            _exportProvider = new ExcelExportProvider();
+            _exportProvider.ExportDirective(_resultDirectiveArray.ToList());
+        }
+
+        private void Worker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            var sfd = new SaveFileDialog();
+            sfd.Filter = ".xlsx Files (*.xlsx)|*.xlsx";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                _exportProvider.SaveTo(sfd.FileName);
+                MessageBox.Show("File was success saved!");
+            }
+
+            _exportProvider.Dispose();
         }
 
         #endregion

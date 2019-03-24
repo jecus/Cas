@@ -730,7 +730,11 @@ namespace CAS.UI.UIControls.ComponentControls
 			{
 				var data = LLPData.GetItemByCatagory(category);
 
-				if(data?.LLPCurrent == null || data.LLPLifeLimit == null)
+				//TODO:Заплатка
+				if (data?.LLPCurrent == null)
+					data.LLPCurrent = data.LLPLifelengthCurrent ?? data.LLPLifeLengthForDate;
+
+				if (data?.LLPCurrent == null || data.LLPLifeLimit == null)
 					continue;
 				double currentCycle = data.LLPCurrent.Cycles.GetValueOrDefault();
 				double limitCycle = data.LLPLifeLimit.Cycles.GetValueOrDefault();

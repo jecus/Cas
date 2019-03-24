@@ -1711,8 +1711,8 @@ namespace CAS.UI.UIControls.WorkPakage
 				inputDocumentTitle = PdfReader.Open(((NonRoutineCardReportScat)order.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
 				for (int i = 0; i < inputDocumentTitle.PageCount; i++)
 					_outputDocument.AddPage(inputDocumentTitle.Pages[i]);
-	            for (int i = 0; i < inputDocumentTitle.PageCount; i++)
-		            _outputDocument.AddPage(inputDocumentTitle.Pages[i]);
+	            //for (int i = 0; i < inputDocumentTitle.PageCount; i++)
+		           // _outputDocument.AddPage(inputDocumentTitle.Pages[i]);
 
 				if (shiftFromEnd > 0)
 				{
@@ -1803,109 +1803,134 @@ namespace CAS.UI.UIControls.WorkPakage
             }
 #else
                         componentChangeOrderNum = 0;
-            foreach (Component item in selectedComponents)
-            {
-                componentChangeOrderNum++;
-                //группмрование директив деталей в рабочем пакете(если они имеются),
-                //по идентификатору родительскои детали
-                List<ComponentDirective> dds =
-                   componentDirectives.Where(dd => dd.ParentComponent != null &&
-                                                dd.ParentComponent.ItemId == item.ItemId).ToList();
+   //         foreach (Component item in selectedComponents)
+   //         {
+   //             componentChangeOrderNum++;
+   //             //группмрование директив деталей в рабочем пакете(если они имеются),
+   //             //по идентификатору родительскои детали
+   //             List<ComponentDirective> dds =
+   //                componentDirectives.Where(dd => dd.ParentComponent != null &&
+   //                                             dd.ParentComponent.ItemId == item.ItemId).ToList();
 
-                workType = DirectiveWorkType.Remove.ToString();
-                foreach (var componentDirective in dds)
-                {
-                    workType += ("\n" + componentDirective.DirectiveType);
-                    componentDirectives.Remove(componentDirective);
-                }
+   //             workType = DirectiveWorkType.Remove.ToString();
+   //             foreach (var componentDirective in dds)
+   //             {
+   //                 workType += ("\n" + componentDirective.DirectiveType);
+   //                 componentDirectives.Remove(componentDirective);
+   //             }
 
-                try
-                {
-                    ComponentChangeOrderBuilder order = new ComponentChangeOrderBuilder(_workPackage, item, workType, componentChangeOrderNum, true);
-                    inputDocumentTitle = PdfReader.Open(((ComponentChangeOrderReportScat)order.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
-                    _outputDocument.AddPage(inputDocumentTitle.Pages[0]);
-                }
-                catch (PdfReaderException ex)
-                {
-                    MessageBox.Show("Error while opening PDF Document." +
-									"\nComponents:" +
-                                    "\n" + ex.Message,
-                                    (string)new GlobalTermsProvider()["SystemName"],
-                                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
-                                    MessageBoxDefaultButton.Button1);
-                }
-                catch (Exception ex)
-                {
-                    Program.Provider.Logger.Log("Error while opening PDF Document.", ex);
-                }
-            }
-			foreach (Component item in selectedBaseComponents)
+   //             try
+   //             {
+   //                 ComponentChangeOrderBuilder order = new ComponentChangeOrderBuilder(_workPackage, item, workType, componentChangeOrderNum, true);
+   //                 inputDocumentTitle = PdfReader.Open(((ComponentChangeOrderReportScat)order.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
+   //                 _outputDocument.AddPage(inputDocumentTitle.Pages[0]);
+   //             }
+   //             catch (PdfReaderException ex)
+   //             {
+   //                 MessageBox.Show("Error while opening PDF Document." +
+			//						"\nComponents:" +
+   //                                 "\n" + ex.Message,
+   //                                 (string)new GlobalTermsProvider()["SystemName"],
+   //                                 MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+   //                                 MessageBoxDefaultButton.Button1);
+   //             }
+   //             catch (Exception ex)
+   //             {
+   //                 Program.Provider.Logger.Log("Error while opening PDF Document.", ex);
+   //             }
+   //         }
+			//foreach (Component item in selectedBaseComponents)
+			//{
+			//	componentChangeOrderNum++;
+			//	//группмрование директив деталей в рабочем пакете(если они имеются),
+			//	//по идентификатору родительскои детали
+			//	var dds =
+			//	   componentDirectives.Where(dd => dd.ParentComponent != null &&
+			//									dd.ParentComponent.ItemId == item.ItemId).ToList();
+
+			//	workType = DirectiveWorkType.Remove.ToString();
+			//	foreach (var componentDirective in dds)
+			//	{
+			//		workType += "\n" + componentDirective.DirectiveType;
+			//		componentDirectives.Remove(componentDirective);
+			//	}
+
+			//	try
+			//	{
+			//		var order = new ComponentChangeOrderBuilder(_workPackage, item, workType, componentChangeOrderNum, true);
+			//		inputDocumentTitle = PdfReader.Open(((ComponentChangeOrderReportScat)order.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
+			//		_outputDocument.AddPage(inputDocumentTitle.Pages[0]);
+			//	}
+			//	catch (PdfReaderException ex)
+			//	{
+			//		MessageBox.Show("Error while opening PDF Document." +
+			//						"\nComponents:" +
+			//						"\n" + ex.Message,
+			//						(string)new GlobalTermsProvider()["SystemName"],
+			//						MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+			//						MessageBoxDefaultButton.Button1);
+			//	}
+			//	catch (Exception ex)
+			//	{
+			//		Program.Provider.Logger.Log("Error while opening PDF Document.", ex);
+			//	}
+			//}
+			//foreach (ComponentDirective item in componentDirectives)
+   //         {
+   //             componentChangeOrderNum++;
+
+   //             try
+   //             {
+   //                 var order = 
+   //                     new ComponentChangeOrderBuilder(_workPackage,
+   //                                   item.ParentComponent,
+   //                                   item.DirectiveType.ToString(), componentChangeOrderNum, true);
+   //                 inputDocumentTitle = PdfReader.Open(((ComponentChangeOrderReportScat)order.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
+   //                 _outputDocument.AddPage(inputDocumentTitle.Pages[0]);
+   //             }
+   //             catch (PdfReaderException ex)
+   //             {
+   //                 MessageBox.Show("Error while opening PDF Document." +
+			//						"\nComponents:" +
+   //                                 "\n" + ex.Message,
+   //                                 (string)new GlobalTermsProvider()["SystemName"],
+   //                                 MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+   //                                 MessageBoxDefaultButton.Button1);
+   //             }
+   //             catch (Exception ex)
+   //             {
+   //                 Program.Provider.Logger.Log("Error while opening PDF Document.", ex);
+   //             }
+   //         }
+
+
+			try
 			{
-				componentChangeOrderNum++;
-				//группмрование директив деталей в рабочем пакете(если они имеются),
-				//по идентификатору родительскои детали
-				var dds =
-				   componentDirectives.Where(dd => dd.ParentComponent != null &&
-												dd.ParentComponent.ItemId == item.ItemId).ToList();
-
-				workType = DirectiveWorkType.Remove.ToString();
-				foreach (var componentDirective in dds)
-				{
-					workType += "\n" + componentDirective.DirectiveType;
-					componentDirectives.Remove(componentDirective);
-				}
-
-				try
-				{
-					var order = new ComponentChangeOrderBuilder(_workPackage, item, workType, componentChangeOrderNum, true);
-					inputDocumentTitle = PdfReader.Open(((ComponentChangeOrderReportScat)order.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
-					_outputDocument.AddPage(inputDocumentTitle.Pages[0]);
-				}
-				catch (PdfReaderException ex)
-				{
-					MessageBox.Show("Error while opening PDF Document." +
-									"\nComponents:" +
-									"\n" + ex.Message,
-									(string)new GlobalTermsProvider()["SystemName"],
-									MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
-									MessageBoxDefaultButton.Button1);
-				}
-				catch (Exception ex)
-				{
-					Program.Provider.Logger.Log("Error while opening PDF Document.", ex);
-				}
+				var order =
+					new ComponentChangeOrderBuilder(_workPackage,
+						null,
+						"", componentChangeOrderNum, true);
+				inputDocumentTitle = PdfReader.Open(((ComponentChangeOrderReportScat)order.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
+				_outputDocument.AddPage(inputDocumentTitle.Pages[0]);
 			}
-			foreach (ComponentDirective item in componentDirectives)
-            {
-                componentChangeOrderNum++;
+			catch (PdfReaderException ex)
+			{
+				MessageBox.Show("Error while opening PDF Document." +
+				                "\nComponents:" +
+				                "\n" + ex.Message,
+					(string)new GlobalTermsProvider()["SystemName"],
+					MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+					MessageBoxDefaultButton.Button1);
+			}
+			catch (Exception ex)
+			{
+				Program.Provider.Logger.Log("Error while opening PDF Document.", ex);
+			}
 
-                try
-                {
-                    var order = 
-                        new ComponentChangeOrderBuilder(_workPackage,
-                                      item.ParentComponent,
-                                      item.DirectiveType.ToString(), componentChangeOrderNum, true);
-                    inputDocumentTitle = PdfReader.Open(((ComponentChangeOrderReportScat)order.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
-                    _outputDocument.AddPage(inputDocumentTitle.Pages[0]);
-                }
-                catch (PdfReaderException ex)
-                {
-                    MessageBox.Show("Error while opening PDF Document." +
-									"\nComponents:" +
-                                    "\n" + ex.Message,
-                                    (string)new GlobalTermsProvider()["SystemName"],
-                                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
-                                    MessageBoxDefaultButton.Button1);
-                }
-                catch (Exception ex)
-                {
-                    Program.Provider.Logger.Log("Error while opening PDF Document.", ex);
-                }
-            }
 #endif
-            #endregion
+			#endregion
 
-            _animatedThreadWorker.ReportProgress(70, "Creating Summary Sheet");
+			_animatedThreadWorker.ReportProgress(70, "Creating Summary Sheet");
 
 
             #region Создание листа перечня работ

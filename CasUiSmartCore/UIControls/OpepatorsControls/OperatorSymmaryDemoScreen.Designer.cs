@@ -34,6 +34,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OperatorSymmaryDemoScreen));
 			this.flowLayoutPanelReferences = new System.Windows.Forms.FlowLayoutPanel();
+			this.flowLayoutPanelExport = new System.Windows.Forms.FlowLayoutPanel();
 			this._operatorInfoReference = new CAS.UI.UIControls.OpepatorsControls.OperatorInfoReference();
 			this._operationalReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
 			this._documentsReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
@@ -116,6 +117,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.headerControl.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.flowLayoutPanelReferences.SuspendLayout();
+			this.flowLayoutPanelExport.SuspendLayout();
 			this.flowLayoutPanelAircrafts.SuspendLayout();
 			this.flowLayoutPanelStores.SuspendLayout();
 			this.SuspendLayout();
@@ -129,6 +131,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			// 
 			// panel1
 			// 
+			this.panel1.Controls.Add(this.flowLayoutPanelExport);
 			this.panel1.Controls.Add(this.flowLayoutPanelStores);
 			this.panel1.Controls.Add(this.flowLayoutPanelAircrafts);
 			this.panel1.Controls.Add(this.flowLayoutPanelReferences);
@@ -152,7 +155,6 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.flowLayoutPanelReferences.Controls.Add(this._reliabilityReferenceContainer);
 			this.flowLayoutPanelReferences.Controls.Add(this._qualityAssuranceReferenceContainer);
 			this.flowLayoutPanelReferences.Controls.Add(this._smsReferenceContainer);
-			this.flowLayoutPanelReferences.Controls.Add(this._exportContainer);
 			this.flowLayoutPanelReferences.Dock = System.Windows.Forms.DockStyle.Left;
 			this.flowLayoutPanelReferences.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
 			this.flowLayoutPanelReferences.Location = new System.Drawing.Point(0, 0);
@@ -161,6 +163,20 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.flowLayoutPanelReferences.Size = new System.Drawing.Size(400, 274);
 			this.flowLayoutPanelReferences.TabIndex = 0;
 			this.flowLayoutPanelReferences.WrapContents = false;
+			// 
+			// flowLayoutPanelExport
+			// 
+			this.flowLayoutPanelExport.AutoScroll = true;
+			this.flowLayoutPanelExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this.flowLayoutPanelExport.Controls.Add(this._exportContainer);
+			this.flowLayoutPanelExport.Dock = System.Windows.Forms.DockStyle.Left;
+			this.flowLayoutPanelExport.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+			this.flowLayoutPanelExport.Location = new System.Drawing.Point(0, 0);
+			this.flowLayoutPanelExport.MinimumSize = new System.Drawing.Size(400, 10);
+			this.flowLayoutPanelExport.Name = "flowLayoutPanelExport";
+			this.flowLayoutPanelExport.Size = new System.Drawing.Size(400, 274);
+			this.flowLayoutPanelExport.TabIndex = 0;
+			this.flowLayoutPanelExport.WrapContents = false;
 			// 
 			// _operatorInfoReference
 			// 
@@ -2153,6 +2169,8 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.panel1.ResumeLayout(false);
 			this.flowLayoutPanelReferences.ResumeLayout(false);
 			this.flowLayoutPanelReferences.PerformLayout();
+			this.flowLayoutPanelExport.ResumeLayout(false);
+			this.flowLayoutPanelExport.PerformLayout();
 			this.flowLayoutPanelAircrafts.ResumeLayout(false);
 			this.flowLayoutPanelAircrafts.PerformLayout();
 			this.flowLayoutPanelStores.ResumeLayout(false);
@@ -2169,6 +2187,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelReferences;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelAircrafts;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelStores;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelExport;
 		private CAS.UI.UIControls.AircraftsControls.VehicleCollectionControl _vehicles;
 		private CAS.UI.UIControls.OpepatorsControls.OperatorInfoReference _operatorInfoReference;
 		private CAS.UI.UIControls.StoresControls.StoreCollectionControl _stores;

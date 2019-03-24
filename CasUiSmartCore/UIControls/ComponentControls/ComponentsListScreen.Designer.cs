@@ -32,7 +32,9 @@ namespace CAS.UI.UIControls.ComponentControls
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxSeparatorEx = new System.Windows.Forms.PictureBox();
             this.buttonAddNew = new CAS.UI.Management.Dispatchering.RichReferenceButton();
+            this.buttonExport = new CAS.UI.Management.Dispatchering.RichReferenceButton();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
             this.buttonPreTransferFilter = new AvControls.AvButtonT.AvButtonT();
@@ -44,6 +46,7 @@ namespace CAS.UI.UIControls.ComponentControls
             this.headerControl.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSeparatorEx)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -78,6 +81,8 @@ namespace CAS.UI.UIControls.ComponentControls
             this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel1.Controls.Add(this.buttonDeleteSelected);
             this.flowLayoutPanel1.Controls.Add(this.pictureBox1);
+            this.flowLayoutPanel1.Controls.Add(this.buttonExport);
+            this.flowLayoutPanel1.Controls.Add(this.pictureBoxSeparatorEx);
             this.flowLayoutPanel1.Controls.Add(this.buttonAddNew);
             this.flowLayoutPanel1.Controls.Add(this.pictureBox2);
             this.flowLayoutPanel1.Controls.Add(this.buttonApplyFilter);
@@ -137,6 +142,49 @@ namespace CAS.UI.UIControls.ComponentControls
             this.pictureBox1.Size = new System.Drawing.Size(5, 50);
             this.pictureBox1.TabIndex = 21;
             this.pictureBox1.TabStop = false;
+            // 
+            // pictureBoxSeparatorEx
+            // 
+            this.pictureBoxSeparatorEx.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
+            this.pictureBoxSeparatorEx.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pictureBoxSeparatorEx.Location = new System.Drawing.Point(121, 3);
+            this.pictureBoxSeparatorEx.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.pictureBoxSeparatorEx.Name = "pictureBoxSeparatorEx";
+            this.pictureBoxSeparatorEx.Size = new System.Drawing.Size(5, 57);
+            this.pictureBoxSeparatorEx.TabIndex = 24;
+            this.pictureBoxSeparatorEx.TabStop = false;
+            // 
+            // buttonExport
+            // 
+            this.buttonExport.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.buttonExport.ActiveBackgroundImage = null;
+            this.buttonExport.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonExport.Displayer = null;
+            this.buttonExport.DisplayerText = "";
+            this.buttonExport.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonExport.Entity = null;
+            this.buttonExport.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.buttonExport.FontSecondary = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.buttonExport.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
+            this.buttonExport.ForeColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
+            this.buttonExport.Icon = global::CAS.UI.Properties.Resources.ExcelImport;
+            this.buttonExport.IconLayout = System.Windows.Forms.ImageLayout.Center;
+            this.buttonExport.Location = new System.Drawing.Point(63, 0);
+            this.buttonExport.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonExport.Name = "buttonExport";
+            this.buttonExport.NormalBackgroundImage = null;
+            this.buttonExport.PaddingMain = new System.Windows.Forms.Padding(0);
+            this.buttonExport.PaddingSecondary = new System.Windows.Forms.Padding(0);
+            this.buttonExport.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInNew;
+            this.buttonExport.ShowToolTip = true;
+            this.buttonExport.Size = new System.Drawing.Size(55, 63);
+            this.buttonExport.TabIndex = 19;
+            this.buttonExport.TextAlignMain = System.Drawing.ContentAlignment.BottomCenter;
+            this.buttonExport.TextAlignSecondary = System.Drawing.ContentAlignment.TopCenter;
+            this.buttonExport.TextMain = "";
+            this.buttonExport.TextSecondary = "";
+            this.buttonExport.ToolTipText = "Export";
+            this.buttonExport.Click += new System.EventHandler(this.ButtonExportComponent_Click);
             // 
             // buttonAddNew
             // 
@@ -329,6 +377,7 @@ namespace CAS.UI.UIControls.ComponentControls
             this.headerControl.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSeparatorEx)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
@@ -340,6 +389,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		#endregion
 
 		private AvControls.StatusImageLink.StatusImageLinkLabel labelTitle;
+        private CAS.UI.Management.Dispatchering.RichReferenceButton buttonExport;
         private CAS.UI.Management.Dispatchering.RichReferenceButton buttonAddNew;
         private AvControls.AvButtonT.AvButtonT buttonDeleteSelected;
         private AvControls.AvButtonT.AvButtonT buttonApplyFilter;
@@ -347,6 +397,7 @@ namespace CAS.UI.UIControls.ComponentControls
         private AvControls.AvButtonT.AvButtonT buttonTransferDetails;
         private System.Windows.Forms.Label labelDateAsOf;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.PictureBox pictureBoxSeparatorEx;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox3;

@@ -7,9 +7,11 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using AvControls;
+using CAS.UI.ExcelExport;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
 using CAS.UI.Management.Dispatchering;
+using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.ForecastControls;
@@ -92,6 +94,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
         private ToolStripMenuItem _toolStripMenuItemQuotations;
         private ToolStripMenuItem _toolStripMenuItemCopy;
         private ToolStripMenuItem _toolStripMenuItemPaste;
+        private AnimatedThreadWorker _worker;
+        private ExcelExportProvider _exportProvider;
 
         #endregion
 
@@ -1629,6 +1633,37 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			
 	    }
 
-        #endregion
-    }
+	    private void ExportMpd_Click(object sender, EventArgs eventArgs)
+	    {
+			_worker = new AnimatedThreadWorker();
+			_worker.DoWork += ExportMpdWork;
+			_worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+			_worker.RunWorkerAsync();
+		}
+
+	    private void ExportMpdWork(object sender, DoWorkEventArgs e)
+	    {
+		    _worker.ReportProgress(0, "load MPD");
+		    _worker.ReportProgress(0, "Generate file! Please wait....");
+
+		    _exportProvider = new ExcelExportProvider();
+		    _exportProvider.ExportMpd(_resultDirectiveArray.ToList());
+	    }
+
+	    private void Worker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+	    {
+		    var sfd = new SaveFileDialog();
+		    sfd.Filter = ".xlsx Files (*.xlsx)|*.xlsx";
+
+		    if (sfd.ShowDialog() == DialogResult.OK)
+		    {
+			    _exportProvider.SaveTo(sfd.FileName);
+			    MessageBox.Show("File was success saved!");
+		    }
+
+		    _exportProvider.Dispose();
+	    }
+
+		#endregion
+	}
 }

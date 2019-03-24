@@ -26,7 +26,7 @@ namespace SmartCore.Entities.General.Accessory
     [Dto(typeof(ComponentDTO))]
 	[Condition("IsBaseComponent", "0")]
     [Condition("IsDeleted", "0")]
-    public class Component : AbstractAccessory, IEngineeringDirective, IKitRequired, IStoreFilterParam, IComponentFilterParams, IComparable<Component>, IEquatable<Component>, IFileContainer, IWorkPackageItemFilterParams, IProcessingFilterParams, IComparer<Component>
+    public class Component : AbstractAccessory, IEngineeringDirective, IKitRequired, IStoreFilterParam, IComponentFilterParams, IComparable<Component>, IEquatable<Component>, IFileContainer, IWorkPackageItemFilterParams, IProcessingFilterParams, IComparer<Component>, IAtaSorted
 	{
         private static Type _thisType;
 
@@ -1988,6 +1988,15 @@ namespace SmartCore.Entities.General.Accessory
 		public DateTime TransferDate { get { return (DateTime) TransferRecords.GetLast()?.TransferDate; } }
 		public DateTime SupplierReceiptDate { get { return (DateTime) TransferRecords.GetLast()?.SupplierReceiptDate; } }
 		public InitialReason Reason { get { return TransferRecords.GetLast()?.Reason; } }
+
+		#endregion
+
+		#region Implementation of IAtaSorted
+
+		public AtaChapter AtaSorted
+		{
+			get => Model != null ? Model.ATAChapter : ATAChapter;
+		}
 
 		#endregion
 	}

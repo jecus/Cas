@@ -1,16 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Auxiliary;
 using CASTerms;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
+using SmartCore;
+using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
+using SmartCore.Entities.General.Directives;
+using SmartCore.Entities.General.MaintenanceWorkscope;
+using Component = SmartCore.Entities.General.Accessory.Component;
+using Convert = System.Convert;
 
 namespace CAS.UI.ExcelExport
 {
@@ -50,14 +59,14 @@ namespace CAS.UI.ExcelExport
 			{
 				if (ReportProgress != null)
 					ReportProgress(aircraft.RegistrationNumber, new EventArgs());
-
+                
 				var baseComponents = GlobalObjects.ComponentCore.GetAicraftBaseComponents(aircraft.ItemId,
 					new[] { BaseComponentType.Engine.ItemId, BaseComponentType.Apu.ItemId }).OrderByDescending(i => i.BaseComponentTypeId).ThenBy(i => i.ItemId);
 				GlobalObjects.AircraftFlightsCore.LoadAircraftFlights(aircraft.ItemId);
 				var flights = GlobalObjects.AircraftFlightsCore.GetAircraftFlightsByAircraftId(aircraft.ItemId);
 
-				var counter = 1;
-
+                var counter = 1;
+                
 				//Добавляем старницу
 				Workbook.Worksheets.Add(aircraft.RegistrationNumber);
 				var workSheet = Workbook.Worksheets[aircraft.RegistrationNumber];
@@ -202,7 +211,7 @@ namespace CAS.UI.ExcelExport
 				int currentColumnPosition = 1;
 				var time = new TimeSpan();
 
-				foreach (var flight in flights.OrderBy(i => i.FlightDate).ThenBy(i => i.TakeOffTime).ToArray())
+				foreach (var flight in flights.OrderBy(i => i.FlightDate).ThenBy(i => i.TakeOffTime).ToArray().Where(i => i.AtlbRecordType != AtlbRecordType.Maintenance))
 				{
 
 					var frame = GlobalObjects.CasEnvironment.Calculator.GetFlightLifelengthIncludingThisFlight(flight)
@@ -382,7 +391,6 @@ namespace CAS.UI.ExcelExport
             foreach (var discrepancy in discripancy)
                 discrepancy.Aircraft = GlobalObjects.AircraftsCore.GetAircraftById(discrepancy.ParentFlight.AircraftId);
 
-            //Добавляем старницу
             Workbook.Worksheets.Add(sheetName);
             var workSheet = Workbook.Worksheets[sheetName];
 
@@ -455,9 +463,494 @@ namespace CAS.UI.ExcelExport
             }
         }
 
-        #region public void Dispose()
+        public void ExportMpd(List<MaintenanceDirective> mpds)
+        {
+            _package = new ExcelPackage();
 
-        public void Dispose()
+            var sheetName = "MPD";
+
+            Workbook.Worksheets.Add(sheetName);
+            var workSheet = Workbook.Worksheets[sheetName];
+
+            FillHeaderCell(workSheet.Cells[1, 1], "MPD Item", ExcelHorizontalAlignment.Center);
+            workSheet.Column(1).Width=12;
+
+            FillHeaderCell(workSheet.Cells[1, 2], "Task Card №", ExcelHorizontalAlignment.Center);
+            workSheet.Column(2).Width=14;
+
+            FillHeaderCell(workSheet.Cells[1, 3], "Maint. Manual", ExcelHorizontalAlignment.Center);
+            workSheet.Column(3).Width=12;
+
+            FillHeaderCell(workSheet.Cells[1, 4], "Category", ExcelHorizontalAlignment.Center);
+            workSheet.Column(4).AutoFit();
+
+            FillHeaderCell(workSheet.Cells[1, 5], "Work Type", ExcelHorizontalAlignment.Center);
+            workSheet.Column(5).Width=12;
+
+            FillHeaderCell(workSheet.Cells[1, 6], "Program", ExcelHorizontalAlignment.Center);
+            workSheet.Column(6).Width=10;
+
+            FillHeaderCell(workSheet.Cells[1, 7], "Description", ExcelHorizontalAlignment.Center);
+            workSheet.Column(7).Width=12;
+
+            FillHeaderCell(workSheet.Cells[1, 8], "Zone", ExcelHorizontalAlignment.Center);
+            workSheet.Column(8).Width=6;
+
+            FillHeaderCell(workSheet.Cells[1, 9], "Access", ExcelHorizontalAlignment.Center);
+            workSheet.Column(9).Width=8;
+
+            FillHeaderCell(workSheet.Cells[1, 10], "Work Area", ExcelHorizontalAlignment.Center);
+            workSheet.Column(10).Width=10;
+
+            FillHeaderCell(workSheet.Cells[1, 11], "M.H.", ExcelHorizontalAlignment.Center);
+            workSheet.Column(11).Width=6;
+
+            FillHeaderCell(workSheet.Cells[1, 12], "1st. Perf.", ExcelHorizontalAlignment.Center);
+            workSheet.Column(12).Width=20;
+
+            FillHeaderCell(workSheet.Cells[1, 13], "Rpt. Intv", ExcelHorizontalAlignment.Center);
+            workSheet.Column(13).Width = 18;
+
+            FillHeaderCell(workSheet.Cells[1, 14], "Last", ExcelHorizontalAlignment.Center);
+            workSheet.Column(14).Width = 30;
+
+            FillHeaderCell(workSheet.Cells[1, 15], "Next", ExcelHorizontalAlignment.Center);
+            workSheet.Column(15).Width = 35;
+
+            FillHeaderCell(workSheet.Cells[1, 16], "Remain/Overdue", ExcelHorizontalAlignment.Center);
+            workSheet.Column(16).Width=16;
+
+            workSheet.View.FreezePanes(2, 1);
+
+            int currentRowPosition = 2;
+            int currentColumnPosition = 1;
+
+            foreach (var mpd in mpds.OrderBy(i => i.TaskNumberCheck))
+	        {
+                #region calc
+
+                DateTime defaultDateTime = DateTimeExtend.GetCASMinDateTime();
+                DateTime lastComplianceDate = defaultDateTime;
+                DateTime nextComplianceDate = defaultDateTime;
+                Lifelength lastComplianceLifeLength = Lifelength.Zero;
+
+                string lastPerformanceString, firstPerformanceString = "N/A";
+                
+                if (mpd.LastPerformance != null)
+                {
+                    lastComplianceDate = mpd.LastPerformance.RecordDate;
+                    lastComplianceLifeLength = mpd.LastPerformance.OnLifelength;
+                }
+                if (mpd.Threshold.FirstPerformanceSinceNew != null && !mpd.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
+                {
+                    firstPerformanceString = "s/n: " + mpd.Threshold.FirstPerformanceSinceNew;
+                }
+                if (mpd.Threshold.FirstPerformanceSinceEffectiveDate != null &&
+                    !mpd.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+                {
+                    if (firstPerformanceString != "N/A") firstPerformanceString += " or ";
+                    else firstPerformanceString = "";
+                    firstPerformanceString += "s/e.d: " + mpd.Threshold.FirstPerformanceSinceEffectiveDate;
+                }
+
+                if (mpd.NextPerformanceDate != null && mpd.NextPerformanceDate > defaultDateTime)
+                    nextComplianceDate = Convert.ToDateTime(mpd.NextPerformanceDate);
+
+                
+                if (lastComplianceDate <= defaultDateTime)
+                    lastPerformanceString = "N/A";
+                else
+                    lastPerformanceString = SmartCore.Auxiliary.Convert.GetDateFormat(lastComplianceDate) + " " +
+                                            lastComplianceLifeLength;
+                string nextComplianceString = ((nextComplianceDate <= defaultDateTime)
+                                                   ? ""
+                                                   : SmartCore.Auxiliary.Convert.GetDateFormat(nextComplianceDate) + " ") +
+                                              mpd.NextPerformanceSource;
+                string nextRemainString = mpd.Remains != null && !mpd.Remains.IsNullOrZero()
+                                              ? mpd.Remains.ToString()
+                                              : "N/A";
+
+                #endregion
+
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], !string.IsNullOrEmpty(mpd.TaskNumberCheck) ? mpd.TaskNumberCheck : "N/A", ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.TaskCardNumber, ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], !string.IsNullOrEmpty(mpd.MaintenanceManual) ? mpd.MaintenanceManual.Replace("\n", " ") : "N/A", ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.Category.ShortName);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.WorkType.ToString(), ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.Program.ToString(), ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], !string.IsNullOrEmpty(mpd.Description) ? mpd.Description : "N/A", ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.Zone);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.Access);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.Workarea, ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.ManHours <= 0 ? "" : mpd.ManHours.ToString());
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], firstPerformanceString);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpd.Threshold.RepeatInterval.ToString());
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], lastPerformanceString);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], nextComplianceString);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], nextRemainString);
+               
+                currentColumnPosition = 1;
+                currentRowPosition++;
+            }
+		}
+
+        #region Export Directives
+
+        public void ExportDirective(List<Directive> directives)
+        {
+            _package = new ExcelPackage();
+
+            var sheetName = "Directive";
+
+            Workbook.Worksheets.Add(sheetName);
+            var workSheet = Workbook.Worksheets[sheetName];
+
+            FillHeaderCell(workSheet.Cells[1, 1], "AD No", ExcelHorizontalAlignment.Center);
+            workSheet.Column(1).Width = 16;
+
+            FillHeaderCell(workSheet.Cells[1, 2], "SB No", ExcelHorizontalAlignment.Center);
+            workSheet.Column(2).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 3], "EO No", ExcelHorizontalAlignment.Center);
+            workSheet.Column(3).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 4], "STC No", ExcelHorizontalAlignment.Center);
+            workSheet.Column(4).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 5], "Description", ExcelHorizontalAlignment.Center);
+            workSheet.Column(5).Width = 15;
+
+            FillHeaderCell(workSheet.Cells[1, 6], "Applicability", ExcelHorizontalAlignment.Center);
+            workSheet.Column(6).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 7], "Work Type", ExcelHorizontalAlignment.Center);
+            workSheet.Column(7).Width = 10;
+
+            FillHeaderCell(workSheet.Cells[1, 8], "Status", ExcelHorizontalAlignment.Center);
+            workSheet.Column(8).Width = 10;
+
+            FillHeaderCell(workSheet.Cells[1, 9], "Effective Date", ExcelHorizontalAlignment.Center);
+            workSheet.Column(9).Width = 14;
+
+            FillHeaderCell(workSheet.Cells[1, 10], "1st. Perf.", ExcelHorizontalAlignment.Center);
+            workSheet.Column(10).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 11], "Rpt. Intv", ExcelHorizontalAlignment.Center);
+            workSheet.Column(11).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 12], "Last", ExcelHorizontalAlignment.Center);
+            workSheet.Column(12).Width = 30;
+
+            FillHeaderCell(workSheet.Cells[1, 13], "Next", ExcelHorizontalAlignment.Center);
+            workSheet.Column(13).Width = 18;
+
+            FillHeaderCell(workSheet.Cells[1, 14], "Remain/Overdue", ExcelHorizontalAlignment.Center);
+            workSheet.Column(14).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 15], "ATA", ExcelHorizontalAlignment.Center);
+            workSheet.Column(15).Width = 10;
+
+            FillHeaderCell(workSheet.Cells[1, 16], "Remarks", ExcelHorizontalAlignment.Center);
+            workSheet.Column(16).Width = 15;
+            workSheet.Column(16).Style.WrapText = true;
+            
+            workSheet.DefaultRowHeight = 15;
+            workSheet.View.FreezePanes(2, 1);
+
+            int currentRowPosition = 2;
+            int currentColumnPosition = 1;
+
+            directives.Sort(new DirectiveComparer());
+            
+            foreach (var directive in directives)
+            {
+                #region MyRegion
+
+                var lastComplianceDate = DateTimeExtend.GetCASMinDateTime();
+                var nextComplianceDate = DateTimeExtend.GetCASMinDateTime();
+                var lastComplianceLifeLength = Lifelength.Zero;
+                var nextComplianceLifeLength = Lifelength.Null;
+                var nextComplianceRemain = Lifelength.Null;
+                var effDate = DateTimeExtend.GetCASMinDateTime();
+
+                string lastPerformanceString, firstPerformanceString = "N/A";
+
+                if (directive.LastPerformance != null &&
+                    directive.LastPerformance.RecordDate > lastComplianceDate)
+                {
+                    lastComplianceDate = directive.LastPerformance.RecordDate;
+                    lastComplianceLifeLength = directive.LastPerformance.OnLifelength;
+                }
+
+                if (directive.Threshold.FirstPerformanceSinceNew != null && !directive.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
+                {
+                    firstPerformanceString = "s/n: " + directive.Threshold.FirstPerformanceSinceNew;
+                }
+                if (directive.Threshold.FirstPerformanceSinceEffectiveDate != null &&
+                    !directive.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+                {
+                    if (firstPerformanceString != "N/A") firstPerformanceString += " or ";
+                    else firstPerformanceString = "";
+                    firstPerformanceString += "s/e.d: " + directive.Threshold.FirstPerformanceSinceEffectiveDate;
+                }
+                var repeatInterval = directive.Threshold.RepeatInterval;
+
+                if (nextComplianceLifeLength == null || nextComplianceLifeLength.IsNullOrZero())
+                    nextComplianceLifeLength = directive.NextPerformanceSource;
+                if (directive.NextPerformanceSource != null && !directive.NextPerformanceSource.IsNullOrZero() &&
+                    directive.NextPerformanceSource.IsLessOrEqualByAnyParameter(nextComplianceLifeLength))
+                {
+                    nextComplianceLifeLength = directive.NextPerformanceSource;
+                    if (directive.NextPerformanceDate != null) nextComplianceDate = (DateTime)directive.NextPerformanceDate;
+                    if (directive.Remains != null) nextComplianceRemain = directive.Remains;
+                }
+                if (lastComplianceDate <= DateTimeExtend.GetCASMinDateTime())
+                    lastPerformanceString = "N/A";
+                else
+                    lastPerformanceString = SmartCore.Auxiliary.Convert.GetDateFormat(lastComplianceDate) + " " +
+                                            lastComplianceLifeLength;
+
+                var nextComplianceString = ((nextComplianceDate <= DateTimeExtend.GetCASMinDateTime())
+                                                   ? ""
+                                                   : SmartCore.Auxiliary.Convert.GetDateFormat(nextComplianceDate)) + " " +
+                                              nextComplianceLifeLength;
+                var nextRemainString = nextComplianceRemain != null && !nextComplianceRemain.IsNullOrZero()
+                                              ? nextComplianceRemain.ToString()
+                                              : "N/A";
+
+                effDate = directive.Threshold.EffectiveDate;
+
+                #endregion
+
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], directive.Title + "  §: " + directive.Paragraph);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], !string.IsNullOrEmpty(directive.ServiceBulletinNo) ? directive.ServiceBulletinNo : "N/A");
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], !string.IsNullOrEmpty(directive.EngineeringOrders) ? directive.EngineeringOrders : "N/A");
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], !string.IsNullOrEmpty(directive.StcNo) ? directive.StcNo : "N/A");
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], directive.Description, ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], directive.IsApplicability ? $"APL  {directive.Applicability.TrimEnd(' ')}" : $"N/A  {directive.Applicability.TrimEnd(' ')}");
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], directive.WorkType);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], directive.Status);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], effDate > DateTimeExtend.GetCASMinDateTime() ? SmartCore.Auxiliary.Convert.GetDateFormat(effDate) : "");
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], firstPerformanceString);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], repeatInterval.ToString());
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], lastPerformanceString);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], nextComplianceString);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], nextRemainString);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], directive.ATAChapter.ToString(), ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], directive.Remarks.Replace("\r\n", " "), ExcelHorizontalAlignment.Left);
+                
+                currentColumnPosition = 1;
+                currentRowPosition++;
+            }
+        }
+
+        #endregion
+
+        #region Export Component
+
+        public void ExportComponent(List<BaseEntityObject> components)
+        {
+            _package = new ExcelPackage();
+
+            var sheetName = "Component";
+
+            Workbook.Worksheets.Add(sheetName);
+            var workSheet = Workbook.Worksheets[sheetName];
+
+            FillHeaderCell(workSheet.Cells[1, 1], "ATA", ExcelHorizontalAlignment.Center);
+            workSheet.Column(1).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 2], "Part. No", ExcelHorizontalAlignment.Center);
+            workSheet.Column(2).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 3], "Description", ExcelHorizontalAlignment.Center);
+            workSheet.Column(3).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 4], "Work Type", ExcelHorizontalAlignment.Center);
+            workSheet.Column(4).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 5], "Serial No", ExcelHorizontalAlignment.Center);
+            workSheet.Column(5).Width = 14;
+
+            FillHeaderCell(workSheet.Cells[1, 6], "MPD Item", ExcelHorizontalAlignment.Center);
+            workSheet.Column(6).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 7], "Pos. No", ExcelHorizontalAlignment.Center);
+            workSheet.Column(7).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 8], "M.P.", ExcelHorizontalAlignment.Center);
+            workSheet.Column(8).Width = 5;
+
+            FillHeaderCell(workSheet.Cells[1, 9], "Zone-Area", ExcelHorizontalAlignment.Center);
+            workSheet.Column(9).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 10], "Access", ExcelHorizontalAlignment.Center);
+            workSheet.Column(10).Width = 12;
+
+            FillHeaderCell(workSheet.Cells[1, 11], "Inst. date", ExcelHorizontalAlignment.Center);
+            workSheet.Column(11).Width = 11;
+
+            FillHeaderCell(workSheet.Cells[1, 12], "Life limit/1st. Perf", ExcelHorizontalAlignment.Center);
+            workSheet.Column(12).Width = 8;
+
+            FillHeaderCell(workSheet.Cells[1, 13], "Rpt. int.", ExcelHorizontalAlignment.Center);
+            workSheet.Column(13).Width = 8;
+
+            FillHeaderCell(workSheet.Cells[1, 14], "Next", ExcelHorizontalAlignment.Center);
+            workSheet.Column(14).Width = 20;
+
+            FillHeaderCell(workSheet.Cells[1, 15], "Remain/Overdue", ExcelHorizontalAlignment.Center);
+            workSheet.Column(15).Width = 13;
+
+            FillHeaderCell(workSheet.Cells[1, 16], "Last", ExcelHorizontalAlignment.Center);
+            workSheet.Column(16).Width = 30;
+
+            FillHeaderCell(workSheet.Cells[1, 17], "M.H.", ExcelHorizontalAlignment.Center);
+            workSheet.Column(17).Width = 5;
+
+            FillHeaderCell(workSheet.Cells[1, 18], "Remarks", ExcelHorizontalAlignment.Center);
+            workSheet.Column(18).Width = 12;
+            workSheet.Column(18).Style.WrapText = true;
+
+            workSheet.DefaultRowHeight = 15;
+            workSheet.View.FreezePanes(2, 1);
+
+            int currentRowPosition = 2;
+            int currentColumnPosition = 1;
+
+            foreach (var comp in components.OfType<IAtaSorted>().OrderBy(i => i.AtaSorted.ShortName))
+            {
+                #region MyRegion
+
+                DateTime? approx;
+                Lifelength remains, next;
+                AtaChapter ata;
+                MaintenanceControlProcess maintenanceType;
+                DateTime transferDate;
+                Lifelength firstPerformance = Lifelength.Null,
+                           lastPerformance = Lifelength.Null,
+                           repeatInterval = Lifelength.Null;
+                string partNumber,
+                       description,
+                       serialNumber,
+                       position,
+                       mpdString = "",
+                       lastPerformanceString = "",
+                       classString = "",
+                       remarks,
+                       workType = "",
+                       zone = "",
+                       access = "",
+                       ndtString = "";
+                double manHours,
+                       costServiceable = 0,
+                       costOverhaul = 0;
+                if (comp is Component)
+                {
+                    var componentItem = (Component)comp;
+                    approx = componentItem.NextPerformanceDate;
+                    next = componentItem.NextPerformanceSource;
+                    remains = componentItem.LLPCategories ? componentItem.LLPRemains : componentItem.Remains;
+                    ata = componentItem.ATAChapter;
+                    partNumber = componentItem.PartNumber;
+                    description = componentItem.Model != null ? componentItem.Model.Description : componentItem.Description;
+                    serialNumber = componentItem.SerialNumber;
+                    position = componentItem.TransferRecords.GetLast().Position.ToUpper();
+                    maintenanceType = componentItem.MaintenanceControlProcess;
+                    transferDate = componentItem.TransferRecords.GetLast().TransferDate;
+                    firstPerformance = componentItem.LifeLimit;
+                    manHours = componentItem.ManHours;
+                    remarks = componentItem.Remarks;
+                }
+                else
+                {
+                    var dd = (ComponentDirective)comp;
+                    if (dd.Threshold.FirstPerformanceSinceNew != null && !dd.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
+                        firstPerformance = dd.Threshold.FirstPerformanceSinceNew;
+                    
+                    if (dd.LastPerformance != null)
+                    {
+                        lastPerformanceString =
+                            SmartCore.Auxiliary.Convert.GetDateFormat(dd.LastPerformance.RecordDate) + " " +
+                            dd.LastPerformance.OnLifelength;
+                        lastPerformance = dd.LastPerformance.OnLifelength;
+                    }
+                    if (dd.Threshold.RepeatInterval != null && !dd.Threshold.RepeatInterval.IsNullOrZero())
+                        repeatInterval = dd.Threshold.RepeatInterval;
+
+                    approx = dd.NextPerformanceDate;
+                    next = dd.NextPerformanceSource;
+                    remains = dd.Remains;
+                    ata = dd.AtaSorted;
+                    partNumber = "    " + dd.PartNumber;
+                    var desc = dd.ParentComponent.Model != null
+                        ? dd.ParentComponent.Model.Description
+                        : dd.ParentComponent.Description;
+
+                    description = "    " + desc;
+                    serialNumber = "    " + dd.SerialNumber;
+                    position = "    " + dd.ParentComponent.TransferRecords.GetLast().Position.ToUpper();
+                    transferDate = dd.ParentComponent.TransferRecords.GetLast().TransferDate;
+                    maintenanceType = dd.ParentComponent.MaintenanceControlProcess;
+                    manHours = dd.ManHours;
+                    zone = dd.ZoneArea;
+                    access = dd.AccessDirective;
+                    remarks = dd.Remarks;
+                    workType = dd.DirectiveType.ToString();
+
+                    if (dd.MaintenanceDirective != null)
+                        mpdString = dd.MaintenanceDirective.TaskNumberCheck;
+                }
+
+                #endregion
+
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], ata.ToString(), ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], partNumber.TrimStart(' '));
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], description.TrimStart(' '), ExcelHorizontalAlignment.Left);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], workType);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], serialNumber.TrimStart(' '));
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], mpdString);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], position.TrimStart(' '));
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], maintenanceType.ShortName);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], zone);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], access);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], transferDate > DateTimeExtend.GetCASMinDateTime() ? SmartCore.Auxiliary.Convert.GetDateFormat(transferDate) : "");
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], firstPerformance.ToString());
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], repeatInterval.ToString());
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], approx == null ? "" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)approx) + " " + next);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], remains != null && !remains.IsNullOrZero() ? remains.ToString() : "");
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], lastPerformanceString);
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], manHours.ToString());
+                FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], remarks, ExcelHorizontalAlignment.Left);
+
+                currentColumnPosition = 1;
+                currentRowPosition++;
+            }
+        }
+
+        #endregion
+
+        #region private void Completed(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+
+        public void Completed(object sender, RunWorkerCompletedEventArgs e)
+        {
+	        var sfd = new SaveFileDialog();
+	        sfd.Filter = ".xlsx Files (*.xlsx)|*.xlsx";
+
+	        if (sfd.ShowDialog() == DialogResult.OK)
+	        {
+		        SaveTo(sfd.FileName);
+		        MessageBox.Show("File was success saved!");
+	        }
+
+	        Dispose();
+        }
+
+        #endregion
+
+		#region public void Dispose()
+
+		public void Dispose()
 		{
 			_package.Dispose();
 		}

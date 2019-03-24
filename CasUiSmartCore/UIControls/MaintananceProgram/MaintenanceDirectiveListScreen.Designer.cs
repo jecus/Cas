@@ -32,7 +32,9 @@ namespace CAS.UI.UIControls.MaintananceProgram
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
             this.pictureBoxSeparatorBD = new System.Windows.Forms.PictureBox();
+            this.pictureBoxSeparatorEx = new System.Windows.Forms.PictureBox();
             this.buttonAddNew = new CAS.UI.Management.Dispatchering.RichReferenceButton();
+            this.buttonExport = new CAS.UI.Management.Dispatchering.RichReferenceButton();
             this.pictureBoxSeperatorBAN = new System.Windows.Forms.PictureBox();
             this.pictureBoxSeperato = new System.Windows.Forms.PictureBox();
             this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
@@ -42,6 +44,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.headerControl.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSeparatorBD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSeparatorEx)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSeperatorBAN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSeperato)).BeginInit();
             this.SuspendLayout();
@@ -81,6 +84,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
             this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel1.Controls.Add(this.buttonDeleteSelected);
             this.flowLayoutPanel1.Controls.Add(this.pictureBoxSeparatorBD);
+            this.flowLayoutPanel1.Controls.Add(this.buttonExport);
+            this.flowLayoutPanel1.Controls.Add(this.pictureBoxSeparatorEx);
             this.flowLayoutPanel1.Controls.Add(this.buttonAddNew);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBoxSeperato);
 			this.flowLayoutPanel1.Controls.Add(this.buttonAddShowEquipmentAndMaterials);
@@ -134,6 +139,17 @@ namespace CAS.UI.UIControls.MaintananceProgram
             this.pictureBoxSeparatorBD.Size = new System.Drawing.Size(5, 57);
             this.pictureBoxSeparatorBD.TabIndex = 24;
             this.pictureBoxSeparatorBD.TabStop = false;
+			// 
+			// pictureBoxSeparatorEx
+			// 
+			this.pictureBoxSeparatorEx.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
+            this.pictureBoxSeparatorEx.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pictureBoxSeparatorEx.Location = new System.Drawing.Point(121, 3);
+            this.pictureBoxSeparatorEx.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.pictureBoxSeparatorEx.Name = "pictureBoxSeparatorEx";
+            this.pictureBoxSeparatorEx.Size = new System.Drawing.Size(5, 57);
+            this.pictureBoxSeparatorEx.TabIndex = 24;
+            this.pictureBoxSeparatorEx.TabStop = false;
             // 
             // buttonAddNew
             // 
@@ -167,6 +183,38 @@ namespace CAS.UI.UIControls.MaintananceProgram
             this.buttonAddNew.TextSecondary = "";
             this.buttonAddNew.ToolTipText = "Add new";
             this.buttonAddNew.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.ButtonAddDisplayerRequested);
+			// 
+			// buttonExport
+			// 
+			this.buttonExport.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.buttonExport.ActiveBackgroundImage = null;
+            this.buttonExport.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonExport.Displayer = null;
+            this.buttonExport.DisplayerText = "";
+            this.buttonExport.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonExport.Entity = null;
+            this.buttonExport.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.buttonExport.FontSecondary = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.buttonExport.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
+            this.buttonExport.ForeColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
+            this.buttonExport.Icon = global::CAS.UI.Properties.Resources.ExcelImport;
+            this.buttonExport.IconLayout = System.Windows.Forms.ImageLayout.Center;
+            this.buttonExport.Location = new System.Drawing.Point(63, 0);
+            this.buttonExport.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonExport.Name = "buttonExport";
+            this.buttonExport.NormalBackgroundImage = null;
+            this.buttonExport.PaddingMain = new System.Windows.Forms.Padding(0);
+            this.buttonExport.PaddingSecondary = new System.Windows.Forms.Padding(0);
+            this.buttonExport.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInNew;
+            this.buttonExport.ShowToolTip = true;
+            this.buttonExport.Size = new System.Drawing.Size(55, 63);
+            this.buttonExport.TabIndex = 25;
+            this.buttonExport.TextAlignMain = System.Drawing.ContentAlignment.BottomCenter;
+            this.buttonExport.TextAlignSecondary = System.Drawing.ContentAlignment.TopCenter;
+            this.buttonExport.TextMain = "";
+            this.buttonExport.TextSecondary = "";
+            this.buttonExport.ToolTipText = "Export";
+			this.buttonExport.Click += ExportMpd_Click;
             // 
             // pictureBoxSeperatorBAN
             // 
@@ -295,6 +343,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
             this.headerControl.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSeparatorBD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSeparatorEx)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSeperatorBAN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSeperato)).EndInit();
             this.ResumeLayout(false);
@@ -302,15 +351,17 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
         }
 
-        #endregion
+		#endregion
 
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private AvControls.StatusImageLink.StatusImageLinkLabel labelTitle;
         private CAS.UI.Management.Dispatchering.RichReferenceButton buttonAddNew;
+        private CAS.UI.Management.Dispatchering.RichReferenceButton buttonExport;
         private AvControls.AvButtonT.AvButtonT buttonDeleteSelected;
         private AvControls.AvButtonT.AvButtonT buttonApplyFilter;
         private System.Windows.Forms.Label labelDateAsOf;
         private System.Windows.Forms.PictureBox pictureBoxSeparatorBD;
+        private System.Windows.Forms.PictureBox pictureBoxSeparatorEx;
         private System.Windows.Forms.PictureBox pictureBoxSeperatorBAN;
         private System.Windows.Forms.PictureBox pictureBoxSeperato;
 		private CAS.UI.Management.Dispatchering.RichReferenceButton buttonAddShowEquipmentAndMaterials;

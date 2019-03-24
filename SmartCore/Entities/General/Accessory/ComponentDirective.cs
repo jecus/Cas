@@ -25,7 +25,7 @@ namespace SmartCore.Entities.General.Accessory
     [Table("ComponentDirectives", "dbo", "ItemId")]
     [Dto(typeof(ComponentDirectiveDTO))]
 	[Condition("IsDeleted", "0")]
-    public class ComponentDirective: BaseEntityObject, IKitRequired, IEngineeringDirective, IComponentFilterParams, IStoreFilterParam, IComparable<ComponentDirective>, IFileContainer, IBindedItem, IWorkPackageItemFilterParams
+    public class ComponentDirective: BaseEntityObject, IKitRequired, IEngineeringDirective, IComponentFilterParams, IStoreFilterParam, IComparable<ComponentDirective>, IFileContainer, IBindedItem, IWorkPackageItemFilterParams, IAtaSorted
 	{
 
         private static Type _thisType;
@@ -1150,6 +1150,15 @@ namespace SmartCore.Entities.General.Accessory
 		}
 
 	    #endregion
+
+	    #region Implementation of IAtaSorted
+
+	    public AtaChapter AtaSorted
+	    {
+		    get => ParentComponent.Model != null ? ParentComponent.Model.ATAChapter : ParentComponent.ATAChapter;
+	    }
+
+		#endregion
 	}
 
 }

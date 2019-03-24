@@ -451,9 +451,9 @@ namespace CAS.UI.UIControls.Auxiliary
             linkLabelShowConnectionSettings.AutoSize = true;
             linkLabelShowConnectionSettings.TabStop = true;
 
-#if DemoDebug
-	        linkLabelShowConnectionSettings.Visible = false;
-#endif
+
+	        //linkLabelShowConnectionSettings.Visible = false;
+
             
 
             linkLabelShowConnectionSettings.PreviewKeyDown += linkLabelShowConnectionSettings_PreviewKeyDown;
