@@ -500,10 +500,10 @@ namespace CASReports.Builders
 		        i++;
 	        }
 
-	        var a = llpData[0].LLPCurrent?.Cycles ?? 0;
-	        var b = llpData[1].LLPCurrent?.Cycles ?? 0;
-	        var c = llpData[2].LLPCurrent?.Cycles ?? 0;
-	        var d = llpData[3].LLPCurrent?.Cycles ?? 0;
+	        var a = llpData[0].LLPCurrent?.Cycles ?? (llpData[0].LLPLifelengthCurrent.Cycles ?? llpData[0].LLPLifeLengthForDate.Cycles) ?? 0; 
+	        var b = llpData[1].LLPCurrent?.Cycles ?? (llpData[1].LLPLifelengthCurrent.Cycles ?? llpData[1].LLPLifeLengthForDate.Cycles) ?? 0;
+	        var c = llpData[2].LLPCurrent?.Cycles ?? (llpData[2].LLPLifelengthCurrent.Cycles ?? llpData[2].LLPLifeLengthForDate.Cycles) ?? 0;
+	        var d = llpData[3].LLPCurrent?.Cycles ?? (llpData[3].LLPLifelengthCurrent.Cycles ?? llpData[3].LLPLifeLengthForDate.Cycles) ?? 0;
 
 	        var totalCycle = a + b + c + d;
 
@@ -516,10 +516,10 @@ namespace CASReports.Builders
                                                                llpData[1].LLPLifeLimit?.Cycles ?? 0,
                                                                llpData[2].LLPLifeLimit?.Cycles ?? 0,
                                                                llpData[3].LLPLifeLimit?.Cycles ?? 0,
-	                llpData[0].LLPCurrent?.Cycles ?? 0,
-	                llpData[1].LLPCurrent?.Cycles ?? 0,
-	                llpData[2].LLPCurrent?.Cycles ?? 0,
-	                llpData[3].LLPCurrent?.Cycles ?? 0,
+	                a,
+	                b,
+	                c,
+	                d,
 															   llpData[0].Remain?.Cycles ?? 0,
                                                                llpData[1].Remain?.Cycles ?? 0,
                                                                llpData[2].Remain?.Cycles ?? 0,

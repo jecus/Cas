@@ -880,6 +880,7 @@ namespace CAS.UI.UIControls.ComponentControls
 
 	            foreach (var component in componentCollection)
 	            {
+		            component.ParentBaseComponent = _currentBaseComponent;
 		            foreach (var componentDirective in component.ComponentDirectives)
 		            {
 			            foreach (var items in componentDirective.ItemRelations.Where(i => i.FirtsItemTypeId == SmartCoreType.MaintenanceDirective.ItemId || i.SecondItemTypeId == SmartCoreType.MaintenanceDirective.ItemId))

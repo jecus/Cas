@@ -901,7 +901,7 @@ namespace SmartCore.Calculations
 		{
 			// Налет воздушного судна между двумя датами равен разности налета на заданные даты
 			var res = getFlightLifelengthOnEndOfDay(aircraft, toDate);
-			res.Substract(getFlightLifelengthOnStartOfDay(aircraft, fromDate));
+			res.Substract(getFlightLifelengthOnEndOfDay(aircraft, fromDate));
 			res.Days = Convert.ToInt32((toDate.Date.Ticks - fromDate.Date.Ticks) / TimeSpan.TicksPerDay);
 			return res;
 		}
