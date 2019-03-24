@@ -6,12 +6,15 @@ using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.PurchaseControls.Initial;
 using CAS.UI.UIControls.PurchaseControls.Quatation;
 using CASReports.Builders;
 using CASTerms;
+using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Filters;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls
@@ -22,12 +25,12 @@ namespace CAS.UI.UIControls.PurchaseControls
     public partial class RequestForQuotationListScreen : ScreenControl
     {
         #region Fields
+        private CommonFilterCollection _filter = new CommonFilterCollection(typeof(RequestForQuotation));
+        private ICommonCollection<RequestForQuotation> _quotatioArray = new CommonCollection<RequestForQuotation>();
+        private ICommonCollection<RequestForQuotation> _resultArray = new CommonCollection<RequestForQuotation>();
 
         private readonly BaseEntityObject _parent;
-
-        private List<RequestForQuotation> _directives = new List<RequestForQuotation>();
         private RequestForQuotationListView _directivesViewer;
-
         private ContextMenuStrip _contextMenuStrip;
         private ToolStripMenuItem _toolStripMenuItemPublish;
         private ToolStripMenuItem _toolStripMenuItemEdit;
@@ -100,8 +103,8 @@ namespace CAS.UI.UIControls.PurchaseControls
                 AnimatedThreadWorker.CancelAsync();
             AnimatedThreadWorker.Dispose();
 
-            _directives.Clear();
-            _directives = null;
+            _quotatioArray.Clear();
+            _quotatioArray = null;
 
             if (_toolStripMenuItemPublish != null) _toolStripMenuItemPublish.Dispose();
             if (_toolStripMenuItemCreatePurchase != null) _toolStripMenuItemCreatePurchase.Dispose();
@@ -131,7 +134,7 @@ namespace CAS.UI.UIControls.PurchaseControls
                 labelTitle.Text = "Date as of: " + SmartCore.Auxiliary.Convert.GetDateFormat(DateTime.Today);
             }
             
-            _directivesViewer.SetItemsArray(_directives.ToArray());
+            _directivesViewer.SetItemsArray(_quotatioArray.ToArray());
             headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
 
             _directivesViewer.Focus();
@@ -142,13 +145,14 @@ namespace CAS.UI.UIControls.PurchaseControls
         protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
         {
             if (_parent == null) return;
-            _directives.Clear();
+            _quotatioArray.Clear();
+            _resultArray.Clear();
 
             AnimatedThreadWorker.ReportProgress(0, "load Quotations");
 
             try
             {
-                _directives.AddRange(GlobalObjects.PurchaseCore.GetRequestForQuotation(_parent as Aircraft));
+                _quotatioArray.AddRange(GlobalObjects.PurchaseCore.GetRequestForQuotation(_parent as Aircraft));
             }
             catch (Exception ex)
             {
@@ -411,14 +415,12 @@ namespace CAS.UI.UIControls.PurchaseControls
             if (_directivesViewer.SelectedItems.Count > 0)
             {
                 buttonDeleteSelected.Enabled = true;
-                buttonReleaseToService.Enabled = true;
                 headerControl.EditButtonEnabled = true;
             }
             else
             {
                 headerControl.EditButtonEnabled = false;
                 buttonDeleteSelected.Enabled = false;
-                buttonReleaseToService.Enabled = false;
             }
         }
 
@@ -519,6 +521,110 @@ namespace CAS.UI.UIControls.PurchaseControls
         }
         #endregion
 
+        #region private void HeaderControlButtonReloadClick(object sender, EventArgs e)
+
+        private void HeaderQuotationButtonReloadClick(object sender, EventArgs e)
+        {
+            AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+            AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+            AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
+            AnimatedThreadWorker.RunWorkerAsync();
+        }
         #endregion
+
+        #region private void HeaderControlButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
+        private void HeaderQuotationButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+            //throw new System.NotImplementedException();
+        }
+        #endregion
+
+        #region private void ButtonApplyFilterClick(object sender, EventArgs e)
+
+        private void ButtonApplyFilterClick(object sender, EventArgs e)
+        {
+            var form = new CommonFilterForm(_filter, _quotatioArray);
+
+            if (form.ShowDialog(this) == DialogResult.OK)
+            {
+                AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+                AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+                AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoFilteringWork;
+
+                AnimatedThreadWorker.RunWorkerAsync();
+            }
+        }
+
+        #endregion
+
+        #region private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
+
+        private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
+        {
+            _resultArray.Clear();
+
+            #region Фильтрация директив
+            AnimatedThreadWorker.ReportProgress(50, "filter directives");
+
+            FilterItems(_quotatioArray, _resultArray);
+
+            if (AnimatedThreadWorker.CancellationPending)
+            {
+                e.Cancel = true;
+                return;
+            }
+            #endregion
+
+            AnimatedThreadWorker.ReportProgress(100, "Complete");
+        }
+
+        #endregion
+
+        #region private void FilterItems(IEnumerable<RequestForQuotation> initialCollection, ICommonCollection<Document> resultCollection)
+
+        ///<summary>
+        ///</summary>
+        ///<param name="initialCollection"></param>
+        ///<param name="resultCollection"></param>
+        private void FilterItems(IEnumerable<RequestForQuotation> initialCollection, ICommonCollection<RequestForQuotation> resultCollection)
+        {
+            if (_filter == null || _filter.Count == 0)
+            {
+                resultCollection.Clear();
+                resultCollection.AddRange(initialCollection);
+                return;
+            }
+
+            resultCollection.Clear();
+
+            foreach (var pd in initialCollection)
+            {
+                if (_filter.FilterTypeAnd)
+                {
+                    bool acceptable = true;
+                    foreach (ICommonFilter filter in _filter)
+                    {
+                        acceptable = filter.Acceptable(pd); if (!acceptable) break;
+                    }
+                    if (acceptable) resultCollection.Add(pd);
+                }
+                else
+                {
+                    bool acceptable = true;
+                    foreach (ICommonFilter filter in _filter)
+                    {
+                        if (filter.Values == null || filter.Values.Length == 0)
+                            continue;
+                        acceptable = filter.Acceptable(pd); if (acceptable) break;
+                    }
+                    if (acceptable) resultCollection.Add(pd);
+                }
+            }
+        }
+        #endregion
+
+        #endregion
+
+
     }
 }

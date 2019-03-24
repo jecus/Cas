@@ -19,6 +19,7 @@ namespace SmartCore.Packages
         /// <summary>
         /// 
         /// </summary>
+        [Filter("Title:")]
         [TableColumn("Title")]
         [FormControl("Title:")]
         [ListViewData(150f, "Title", 3)]

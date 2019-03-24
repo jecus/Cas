@@ -53,8 +53,8 @@ namespace SmartCore.Entities.General.WorkPackage
 		/// 
 		/// </summary>
 		[TableColumn("Number")]
-        [ListViewData(100f, "WP No:", 2)]
-        [FilterAttribute("WP No", Order = 1)]
+        [ListViewData(100f, "Order є:", 2)]
+        [FilterAttribute("Order є", Order = 1)]
         public String Number { get; set; }
         #endregion
 
@@ -144,7 +144,7 @@ namespace SmartCore.Entities.General.WorkPackage
                                                     Cas3WorkPakageRecord.WorkPackageItemType = 14 and 
                                                     Cas3WorkPakageRecord.WorkPakageId = WorkPackages.ItemId)) WPMH)"
 			)]
-        [ListViewData(85, "MH",10)]
+        //[ListViewData(85, "MH",10)]
         public double ManHours { get; set; }
         #endregion
 
@@ -152,7 +152,7 @@ namespace SmartCore.Entities.General.WorkPackage
         /// <summary>
         /// 
         /// </summary>
-        [ListViewData(0.08f, "Persent", 14)]
+        //[ListViewData(0.08f, "Persent", 14)]
         public double Persent { get; set; }
         #endregion
 
@@ -306,7 +306,7 @@ namespace SmartCore.Entities.General.WorkPackage
         /// <summary>
         /// ƒл€ закрытого рабочего пакета, возвращает временной интервал, затраченный на исполнение задач в виде строки
         /// </summary>
-        [ListViewData(100,"Work time", 11)]
+        //[ListViewData(100,"Work time", 11)]
         public String WorkTimeString
         {
             get
@@ -427,7 +427,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		/// </summary>
         [TableColumn("Station")]
         [FormControl("Station:")]
-        [ListViewData(0.08f, "Station", 12)]
+        //[ListViewData(0.08f, "Station", 12)]
         [FilterAttribute("Station", Order = 4)]
         public String Station { get; set; }
 		#endregion
@@ -444,7 +444,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		/// 
 		/// </summary>
 		[TableColumn("MaintenanceReportNo")]
-        [ListViewData(0.05f, "MRO", 13)]
+        //[ListViewData(0.05f, "MRO", 13)]
         [FormControl("MRO:")]
         [FilterAttribute("MRO", Order = 10)]
         public String MaintenanceRepairOrzanization { get; set; }
@@ -525,7 +525,7 @@ namespace SmartCore.Entities.General.WorkPackage
         /// ќбратна€ ссылка на воздушное судно, дл€ которого составлен рабочий пакет. 
         /// ћожет быть null если рабочий пакет составлен не дл€ воздушного судна
         /// </summary>
-        [ListViewData(85, "Aircraft", 1)]
+        [ListViewData(85, "Parent", 1)]
         public string AircraftString
         {
             get

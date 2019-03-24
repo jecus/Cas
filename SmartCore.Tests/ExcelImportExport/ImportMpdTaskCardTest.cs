@@ -179,21 +179,21 @@ namespace SmartCore.Tests.ExcelImportExport
 			var directiveCore = new DirectiveCore(env.NewKeeper, env.NewLoader, env.Keeper, env.Loader, itemRelationCore);
 			var componentCore = new ComponentCore(env, env.Loader, env.NewLoader, env.NewKeeper, aircraftCore, itemRelationCore);
 
-			var aircraftId = 2348;
+			var aircraftId = 2336;
 
 			var aircraft = env.NewLoader.GetObject<AircraftDTO, Aircraft>(new Filter("ItemId", aircraftId));
 
 			var directiveList = directiveCore.GetDirectives(aircraft, DirectiveType.AirworthenessDirectives);
-			var bd = componentCore.GetAicraftBaseComponents(aircraftId, BaseComponentType.Engine.ItemId).LastOrDefault();
+			var bd = componentCore.GetAicraftBaseComponents(aircraftId, BaseComponentType.Frame.ItemId).LastOrDefault();
 
-			var d = new DirectoryInfo(@"H:\CRJ200 27.02.18 AD");
+			var d = new DirectoryInfo(@"D:\Work\doc\ALL AD 757 13 Feb 2019 1111\FAA 757");
 			var files = d.GetFiles();
 
 			foreach (var file in files)
 			{
 				var name = file.Name.Replace(" ", "").Replace(".pdf", "");
 				var directive = directiveList.FirstOrDefault(i => i.Title.Contains(name));
-
+               
 				if (directive != null)
 				{
 					var _fileData = UsefulMethods.GetByteArrayFromFile(file.FullName);
@@ -204,12 +204,13 @@ namespace SmartCore.Tests.ExcelImportExport
 						FileSize = _fileData.Length
 					};
 					directive.ADNoFile = attachedFile;
-					env.NewKeeper.Save(directive);
-				}
+                    env.NewKeeper.Save(directive);
+                }
 				else
 				{
 					var newDirective = new Directive
 					{
+                        Title = name,
 						DirectiveType =  DirectiveType.AirworthenessDirectives,
 						ADType = ADType.Airframe,
 						HiddenRemarks = "NEW",
@@ -225,8 +226,8 @@ namespace SmartCore.Tests.ExcelImportExport
 						FileSize = _fileData.Length
 					};
 					newDirective.ADNoFile = attachedFile;
-					env.NewKeeper.Save(newDirective);
-				}
+                    env.NewKeeper.Save(newDirective);
+                }
 			}
 
 		}
