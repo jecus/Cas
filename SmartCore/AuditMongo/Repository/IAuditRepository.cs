@@ -17,7 +17,7 @@ namespace SmartCore.AuditMongo.Repository
 
 	public interface IAuditRepository
 	{
-		Task WriteAsync<TEntity>(TEntity target, AuditOperation operation, UserDTO user,
+		void WriteAsync<TEntity>(TEntity target, AuditOperation operation, UserDTO user,
 			Dictionary<string, object> parameters = null) where TEntity : class, IBaseEntityObject;
 
 	}

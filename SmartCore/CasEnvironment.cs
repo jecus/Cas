@@ -169,7 +169,7 @@ namespace SmartCore
         /// <param name="userName"></param>
         /// <param name="pass"></param>
         /// <param name="database"></param>
-        public async Task Connect(String serverName, String userName, String pass, String database)
+        public void Connect(String serverName, String userName, String pass, String database)
         {
 			//var section = ConfigurationManager.GetSection("connectionSettings") as NameValueCollection;
 	       // _ipServer = section["IpServer"];
@@ -183,7 +183,7 @@ namespace SmartCore
 
 	        CurrentUser = user;
 
-	        await AuditRepository.WriteAsync(new Entities.User(user), AuditOperation.SignIn, user);
+	        AuditRepository.WriteAsync(new Entities.User(user), AuditOperation.SignIn, user);
 
 			//_unitOfWork = new UnitOfWork(new DatabaseProvider());
 			_unitOfWork = new UnitOfWork(new WcfProvider(_ipServer));

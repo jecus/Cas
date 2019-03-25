@@ -56,7 +56,7 @@ namespace SmartCore
 		/// </summary>
 		void Disconnect();
 
-		Task Connect(String serverName, String userName, String pass, String database);
+		void Connect(String serverName, String userName, String pass, String database);
 
 		UserDTO GetUser(string login, string password);
 

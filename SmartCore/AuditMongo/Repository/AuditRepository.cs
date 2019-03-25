@@ -17,11 +17,11 @@ namespace SmartCore.AuditMongo.Repository
 
 		#region Implementation of IAuditRepository
 
-		public async Task WriteAsync<TEntity>(TEntity target, AuditOperation operation, UserDTO user, Dictionary<string, object> parameters = null) where TEntity : class, IBaseEntityObject
+		public void WriteAsync<TEntity>(TEntity target, AuditOperation operation, UserDTO user, Dictionary<string, object> parameters = null) where TEntity : class, IBaseEntityObject
 		{
 			var objectName = typeof(TEntity).Name;
 
-			await _context.AuditCollection.InsertOneAsync(new AuditEntity
+			_context.AuditCollection.InsertOne(new AuditEntity
 			{
 				Action = $"{objectName}{operation}",
 				Date = DateTime.UtcNow,
