@@ -25,8 +25,8 @@ namespace SmartCore.AuditMongo.Repository
 			{
 				Action = $"{objectName}{operation}",
 				Date = DateTime.UtcNow,
-				ObjectId = target.ItemId,
-				ObjectTypeId = target.SmartCoreObjectType.ItemId,
+				ObjectId = target?.ItemId ?? -1,
+				ObjectTypeId = target?.SmartCoreObjectType.ItemId ?? -1,
 				UserId = user.ItemId,
 				AdditionalParameters = parameters
 			});

@@ -725,6 +725,7 @@
     <Compile Include="Entities\NewKeeper.cs" />
     <Compile Include="Entities\NewLoader\INewLoader.cs" />
     <Compile Include="Entities\NewLoader\NewLoader.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\XlsReader.cs" />
     <Compile Include="Files\FilesDataAccess.cs" />
     <Compile Include="Files\FilesSmartCore.cs" />

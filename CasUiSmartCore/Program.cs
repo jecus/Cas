@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
@@ -9,10 +10,14 @@ using CAS.UI.Logging;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.Management.Dispatchering.DispatcheredUIControls.OpepatorsControls;
 using CASTerms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SmartCore;
 using SmartCore.AircraftFlights;
 using SmartCore.Aircrafts;
 using SmartCore.Analyst;
+using SmartCore.AuditMongo;
+using SmartCore.AuditMongo.Repository;
 using SmartCore.Audits;
 using SmartCore.AverageUtilizations;
 using SmartCore.Calculations;
@@ -39,6 +44,7 @@ using SmartCore.RegisterPerformances;
 using SmartCore.Relation;
 using SmartCore.Sms;
 using SmartCore.Stores;
+using SmartCore.Tests.MongoTest;
 using SmartCore.TrackCore;
 using SmartCore.TransferRec;
 using SmartCore.WorkPackages;
@@ -71,12 +77,23 @@ namespace CAS.UI
 
         static Program()
         {
-            var environment = DbTypes.CasEnvironment = new CasEnvironment();
+	        var exePath = Path.GetDirectoryName(Application.ExecutablePath);
+	        var path = Path.Combine(exePath, "AppSettings.json");
+	        var json = File.ReadAllText(path);
+	        GlobalObjects.Config = JsonConvert.DeserializeObject<JObject>(json);
+
+			var auditContext = new AuditContext((string)GlobalObjects.Config["ConnectionStrings"]["Audit"]);
+	        GlobalObjects.AuditRepository = new AuditRepository(auditContext);
+
+			var environment = DbTypes.CasEnvironment = new CasEnvironment();
+			environment.AuditRepository = GlobalObjects.AuditRepository;
+
 
 			var nonRoutineJobDataAccess = new NonRoutineJobDataAccess(environment.Loader, environment.Keeper);
 			var itemsRelationsDataAccess = new ItemsRelationsDataAccess(environment);
 			var filesDataAccess = new FilesDataAccess(environment.NewLoader);
 			var workPackageRecordsDataAccess = new WorkPackageRecordsDataAccess(environment);
+			
 
 			var storeService = new StoreCore(environment);
 			var aircraftService = new AircraftsCore(environment.Loader, environment.NewKeeper, environment.NewLoader);

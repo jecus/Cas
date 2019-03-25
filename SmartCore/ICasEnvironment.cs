@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 using EFCore.DTO.General;
 using EFCore.UnitOfWork;
 using Microsoft.SqlServer.Management.Smo;
@@ -55,7 +56,7 @@ namespace SmartCore
 		/// </summary>
 		void Disconnect();
 
-		void Connect(String serverName, String userName, String pass, String database);
+		Task Connect(String serverName, String userName, String pass, String database);
 
 		UserDTO GetUser(string login, string password);
 

@@ -14,6 +14,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.ServiceModel;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using EFCore.Contract;
 using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
@@ -27,6 +28,7 @@ using SmartCore.Entities.General.Store;
 using SmartCore.Entities.General.WorkShop;
 using SmartCore.Management;
 using SmartCore.Aircrafts;
+using SmartCore.AuditMongo.Repository;
 using SmartCore.Entities.General;
 using SmartCore.Entities.Collections;
 using SmartCore.Calculations;
@@ -36,6 +38,7 @@ using SmartCore.Entities;
 using SmartCore.Entities.NewLoader;
 using SmartCore.ObjectCache;
 using SmartCore.Queries;
+using User = Microsoft.SqlServer.Management.Smo.User;
 
 namespace SmartCore
 {
@@ -121,6 +124,8 @@ namespace SmartCore
         #endregion
 
 
+		public IAuditRepository AuditRepository { get; set; }
+
         #region public void Disconnect()
 
         /// <summary>
@@ -164,7 +169,7 @@ namespace SmartCore
         /// <param name="userName"></param>
         /// <param name="pass"></param>
         /// <param name="database"></param>
-        public void Connect(String serverName, String userName, String pass, String database)
+        public async Task Connect(String serverName, String userName, String pass, String database)
         {
 			//var section = ConfigurationManager.GetSection("connectionSettings") as NameValueCollection;
 	       // _ipServer = section["IpServer"];
@@ -178,20 +183,13 @@ namespace SmartCore
 
 	        CurrentUser = user;
 
-	        //_unitOfWork = new UnitOfWork(new DatabaseProvider());
-	        _unitOfWork = new UnitOfWork(new WcfProvider(_ipServer));
+	        await AuditRepository.WriteAsync(new Entities.User(user), AuditOperation.SignIn, user);
+
+			//_unitOfWork = new UnitOfWork(new DatabaseProvider());
+			_unitOfWork = new UnitOfWork(new WcfProvider(_ipServer));
 	        _newLoader = new NewLoader(this);
 
-	        //_databaseManager.Connect($"{connection.ServerName}\\MSSQLSERVER", connection.UserName, connection.Password);
-	        //_databaseManager.SelectDatabase(DatabaseManager, connection.DatabaseName);
-
-	        //_unitOfWork = new UnitOfWork();
-	        //_newLoader = new NewLoader(this);
-
-	        //_databaseManager.Connect(serverName, userName, pass);
-	        //_databaseManager.SelectDatabase(DatabaseManager, database);
-	        //var connectionString = $"data source= {serverName};initial catalog= {database};user id={userName};password={pass};MultipleActiveResultSets=True;App=EntityFramework";
-	        //_unitOfWork = new UnitOfWork(connectionString);
+	        
 		}
 		#endregion
 
