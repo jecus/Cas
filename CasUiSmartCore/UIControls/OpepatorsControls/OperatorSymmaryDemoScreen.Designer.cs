@@ -128,14 +128,20 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.headerControl.Size = new System.Drawing.Size(711, 58);
 			this.headerControl.ReloadButtonClick += new System.EventHandler(this.HeaderControl1ReloadRised);
 			this.headerControl.Controls.SetChildIndex(this.aircraftHeaderControl1, 0);
-			// 
-			// panel1
-			// 
-			this.panel1.Controls.Add(this.flowLayoutPanelExport);
-			this.panel1.Controls.Add(this.flowLayoutPanelStores);
-			this.panel1.Controls.Add(this.flowLayoutPanelAircrafts);
-			this.panel1.Controls.Add(this.flowLayoutPanelReferences);
-			this.panel1.Location = new System.Drawing.Point(0, 62);
+            // 
+            // panel1
+            // 
+#if DEMO
+            this.panel1.Controls.Add(this.flowLayoutPanelStores);
+            this.panel1.Controls.Add(this.flowLayoutPanelReferences);
+#else
+            this.panel1.Controls.Add(this.flowLayoutPanelExport);
+            this.panel1.Controls.Add(this.flowLayoutPanelStores);
+            this.panel1.Controls.Add(this.flowLayoutPanelAircrafts);
+            this.panel1.Controls.Add(this.flowLayoutPanelReferences);
+#endif
+
+            this.panel1.Location = new System.Drawing.Point(0, 62);
 			this.panel1.Margin = new System.Windows.Forms.Padding(4);
 			this.panel1.Size = new System.Drawing.Size(715, 274);
 			// 
@@ -143,18 +149,26 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			// 
 			this.aircraftHeaderControl1.ChildClickable = true;
 			this.aircraftHeaderControl1.OperatorClickable = true;
-			// 
-			// flowLayoutPanelReferences
-			// 
-			this.flowLayoutPanelReferences.AutoScroll = true;
-			this.flowLayoutPanelReferences.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-			this.flowLayoutPanelReferences.Controls.Add(this._operatorInfoReference);
+            // 
+            // flowLayoutPanelReferences
+            // 
+#if DEMO
+            this.flowLayoutPanelReferences.Controls.Add(this._operatorInfoReference);
+            this.flowLayoutPanelReferences.Controls.Add(this._documentsReferenceContainer);
+            this.flowLayoutPanelReferences.Controls.Add(this._personnelReferenceContainer);
+            this.flowLayoutPanelReferences.Controls.Add(this._qualityAssuranceReferenceContainer);
+#else
+            this.flowLayoutPanelReferences.Controls.Add(this._operatorInfoReference);
 			this.flowLayoutPanelReferences.Controls.Add(this._documentsReferenceContainer);
 			this.flowLayoutPanelReferences.Controls.Add(this._operationalReferenceContainer);
 			this.flowLayoutPanelReferences.Controls.Add(this._personnelReferenceContainer);
 			this.flowLayoutPanelReferences.Controls.Add(this._reliabilityReferenceContainer);
 			this.flowLayoutPanelReferences.Controls.Add(this._qualityAssuranceReferenceContainer);
-			this.flowLayoutPanelReferences.Controls.Add(this._smsReferenceContainer);
+			this.flowLayoutPanelReferences.Controls.Add(this._smsReferenceContainer);        
+#endif
+            this.flowLayoutPanelReferences.AutoScroll = true;
+			this.flowLayoutPanelReferences.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			
 			this.flowLayoutPanelReferences.Dock = System.Windows.Forms.DockStyle.Left;
 			this.flowLayoutPanelReferences.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
 			this.flowLayoutPanelReferences.Location = new System.Drawing.Point(0, 0);
@@ -1493,12 +1507,13 @@ namespace CAS.UI.UIControls.OpepatorsControls
 #if SCAT
 			this._vehicles.Visible = false;
 #endif
-			// 
-			// flowLayoutPanelStores
-			// 
-			this.flowLayoutPanelStores.AutoScroll = true;
-			this.flowLayoutPanelStores.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-			this.flowLayoutPanelStores.Controls.Add(this._cabinInteriorReferenceContainer);
+            // 
+            // flowLayoutPanelStores
+            // 
+#if DEMO
+            this.flowLayoutPanelStores.Controls.Add(this._purchaseReferenceContainer);
+#else
+            this.flowLayoutPanelStores.Controls.Add(this._cabinInteriorReferenceContainer);
 			this.flowLayoutPanelStores.Controls.Add(this._comercialReferenceContainer);
 			this.flowLayoutPanelStores.Controls.Add(this._developmentReferenceContainer);
 			this.flowLayoutPanelStores.Controls.Add(this._hangars);
@@ -1508,6 +1523,10 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.flowLayoutPanelStores.Controls.Add(this._purchaseReferenceContainer);
 			this.flowLayoutPanelStores.Controls.Add(this._stores);
 			this.flowLayoutPanelStores.Controls.Add(this._workShops);
+#endif
+            this.flowLayoutPanelStores.AutoScroll = true;
+			this.flowLayoutPanelStores.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			
 			this.flowLayoutPanelStores.Dock = System.Windows.Forms.DockStyle.Left;
 			this.flowLayoutPanelStores.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
 			this.flowLayoutPanelStores.Location = new System.Drawing.Point(800, 0);
@@ -1965,10 +1984,19 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.LinkProducts.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkProducts.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.LinkProducts.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkProductsDisplayerRequested);
-			// 
-			// _purchaseReferenceContainer
-			// 
-			this._purchaseReferenceContainer.AutoSize = true;
+            // 
+            // _purchaseReferenceContainer
+            // 
+#if DEMO
+            this._purchaseReferenceContainer.ReferenceLink04 = this.LinkSuppliers;
+#else
+            this._purchaseReferenceContainer.ReferenceLink = this.LinkInitialOrders;
+			this._purchaseReferenceContainer.ReferenceLink02 = this.LinkPurchaseOrders;
+			this._purchaseReferenceContainer.ReferenceLink03 = this.LinkQuotationOrders;
+			this._purchaseReferenceContainer.ReferenceLink04 = this.LinkSuppliers;
+			this._purchaseReferenceContainer.ReferenceLink05 = this.LinkSupplierComponents;
+#endif
+            this._purchaseReferenceContainer.AutoSize = true;
 			this._purchaseReferenceContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this._purchaseReferenceContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
 			this._purchaseReferenceContainer.Caption = "Purchase";
@@ -1977,11 +2005,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this._purchaseReferenceContainer.Location = new System.Drawing.Point(3, 324);
 			this._purchaseReferenceContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this._purchaseReferenceContainer.Name = "_purchaseReferenceContainer";
-			this._purchaseReferenceContainer.ReferenceLink = this.LinkInitialOrders;
-			this._purchaseReferenceContainer.ReferenceLink02 = this.LinkPurchaseOrders;
-			this._purchaseReferenceContainer.ReferenceLink03 = this.LinkQuotationOrders;
-			this._purchaseReferenceContainer.ReferenceLink04 = this.LinkSuppliers;
-			this._purchaseReferenceContainer.ReferenceLink05 = this.LinkSupplierComponents;
+			
 			this._purchaseReferenceContainer.ReferenceLink06 = null;
 			this._purchaseReferenceContainer.ReferenceLink07 = null;
 			this._purchaseReferenceContainer.ReferenceLink08 = null;
@@ -2182,7 +2206,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 
        
 
-        #endregion
+#endregion
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelReferences;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelAircrafts;

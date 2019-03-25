@@ -2074,13 +2074,13 @@ if (!_isWorkOrder)
 				//var tempSummarySheet = new WorkPackageTitleBuilderAquiline(_workPackage, titlePageItems, true);
 				//inputDocumentTitle = PdfReader.Open(((WPTitlePageReportScat)tempSummarySheet.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
 #else
-				var tempMp =  new WorkPackageTitlePageBuilder(_workPackage, titlePageItems, GlobalObjects.CasEnvironment.GetBaseDetails(_workPackage.Aircraft));
-                inputDocumentTitle = PdfReader.Open(((WPTitlePageReport)tempMp.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
+				//var tempMp =  new WorkPackageTitlePageBuilder(_workPackage, titlePageItems, GlobalObjects.CasEnvironment.GetBaseDetails(_workPackage.Aircraft));
+    //            inputDocumentTitle = PdfReader.Open(((WPTitlePageReport)tempMp.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
 
-				for (int i = inputDocumentTitle.Pages.Count - 1; i >= 0; i--)
-                {
-                    _outputDocument.InsertPage(0, inputDocumentTitle.Pages[i]);
-                }
+				//for (int i = inputDocumentTitle.Pages.Count - 1; i >= 0; i--)
+    //            {
+    //                _outputDocument.InsertPage(0, inputDocumentTitle.Pages[i]);
+    //            }
 #endif
 			}
 			catch (PdfReaderException ex)
