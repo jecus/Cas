@@ -920,5 +920,10 @@ namespace CAS.UI.UIControls.PurchaseControls
         #endregion
 
         #endregion
+
+        private void ButtonFilter_Click(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
     }
 }
