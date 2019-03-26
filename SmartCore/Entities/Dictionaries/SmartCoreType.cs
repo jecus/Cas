@@ -389,18 +389,20 @@ namespace SmartCore.Entities.Dictionaries
         /// 
         /// </summary>
         public static SmartCoreType WorkStation = new SmartCoreType(2501, "WorkStation", "WorkStation", typeof(WorkStation));
-        #endregion
-        /*
+		#endregion
+
+		public static SmartCoreType User = new SmartCoreType(3000, "User", "User", typeof(User));
+		/*
          * Методы
          */
 
-        #region public static SmartCoreType GetSmartCoreTypeById(Int32 smartCoreTypeId)
-        /// <summary>
-        /// Возвращает тип базового объекта по его Id
-        /// </summary>
-        /// <param name="smartCoreTypeId"></param>
-        /// <returns></returns>
-        public static SmartCoreType GetSmartCoreTypeById(Int32 smartCoreTypeId)
+		#region public static SmartCoreType GetSmartCoreTypeById(Int32 smartCoreTypeId)
+		/// <summary>
+		/// Возвращает тип базового объекта по его Id
+		/// </summary>
+		/// <param name="smartCoreTypeId"></param>
+		/// <returns></returns>
+		public static SmartCoreType GetSmartCoreTypeById(Int32 smartCoreTypeId)
         {
             for (int i = 0; i < _Items.Count; i++)
                 if (_Items[i].ItemId == smartCoreTypeId)

@@ -1,0 +1,28 @@
+﻿using EFCore.DTO.General;
+using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General;
+using SmartCore.Entities.General.Interfaces;
+
+namespace SmartCore.Entities
+{
+	public class User : BaseEntityObject
+	{
+		public string Name { get; set; }
+
+		public string Surname { get; set; }
+
+		public string Login { get; set; }
+
+		public string Password { get; set; }
+
+		public User(UserDTO user)
+		{
+			ItemId = user.ItemId;
+			SmartCoreObjectType = SmartCoreType.User;
+			Name = user.Name;
+			Surname = user.Surname;
+			Login = user.Login;
+			Password = user.Password;
+		}
+	}
+}

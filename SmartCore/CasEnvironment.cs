@@ -14,6 +14,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.ServiceModel;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using EFCore.Contract;
 using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
@@ -27,6 +28,7 @@ using SmartCore.Entities.General.Store;
 using SmartCore.Entities.General.WorkShop;
 using SmartCore.Management;
 using SmartCore.Aircrafts;
+using SmartCore.AuditMongo.Repository;
 using SmartCore.Entities.General;
 using SmartCore.Entities.Collections;
 using SmartCore.Calculations;
@@ -36,6 +38,7 @@ using SmartCore.Entities;
 using SmartCore.Entities.NewLoader;
 using SmartCore.ObjectCache;
 using SmartCore.Queries;
+using User = Microsoft.SqlServer.Management.Smo.User;
 
 namespace SmartCore
 {
@@ -121,6 +124,8 @@ namespace SmartCore
         #endregion
 
 
+		public IAuditRepository AuditRepository { get; set; }
+
         #region public void Disconnect()
 
         /// <summary>
@@ -178,20 +183,13 @@ namespace SmartCore
 
 	        CurrentUser = user;
 
-	        //_unitOfWork = new UnitOfWork(new DatabaseProvider());
-	        _unitOfWork = new UnitOfWork(new WcfProvider(_ipServer));
+	        AuditRepository.WriteAsync(new Entities.User(user), AuditOperation.SignIn, user);
+
+			//_unitOfWork = new UnitOfWork(new DatabaseProvider());
+			_unitOfWork = new UnitOfWork(new WcfProvider(_ipServer));
 	        _newLoader = new NewLoader(this);
 
-	        //_databaseManager.Connect($"{connection.ServerName}\\MSSQLSERVER", connection.UserName, connection.Password);
-	        //_databaseManager.SelectDatabase(DatabaseManager, connection.DatabaseName);
-
-	        //_unitOfWork = new UnitOfWork();
-	        //_newLoader = new NewLoader(this);
-
-	        //_databaseManager.Connect(serverName, userName, pass);
-	        //_databaseManager.SelectDatabase(DatabaseManager, database);
-	        //var connectionString = $"data source= {serverName};initial catalog= {database};user id={userName};password={pass};MultipleActiveResultSets=True;App=EntityFramework";
-	        //_unitOfWork = new UnitOfWork(connectionString);
+	        
 		}
 		#endregion
 
@@ -1098,7 +1096,7 @@ namespace SmartCore
         {
             get
             {
-                if (_keeper == null) _keeper = new Keeper(this);
+                if (_keeper == null) _keeper = new Keeper(this, AuditRepository);
                 //
                 return _keeper;
             }
@@ -1121,7 +1119,7 @@ namespace SmartCore
         {
             get
             {
-                if (_manipulator == null) _manipulator = new Manipulator(this);
+                if (_manipulator == null) _manipulator = new Manipulator(this, AuditRepository);
                 //
                 return _manipulator;
             }
@@ -1163,7 +1161,7 @@ namespace SmartCore
 	    {
 		    get
 		    {
-			    if (_newKeeper == null) _newKeeper = new NewKeeper(this);
+			    if (_newKeeper == null) _newKeeper = new NewKeeper(this, AuditRepository);
 			    return _newKeeper;
 		    }
 	    }

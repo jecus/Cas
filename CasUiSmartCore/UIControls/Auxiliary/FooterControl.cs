@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using CAS.UI.Management;
 using CAS.UI.Management.Dispatchering;
 using CASTerms;
+using SmartCore.AuditMongo.Repository;
 using SmartCore.Management;
 
 namespace CAS.UI.UIControls.Auxiliary
@@ -77,7 +78,9 @@ namespace CAS.UI.UIControls.Auxiliary
         {
             if (ControlRequest != null)
                 ControlRequest(this, new ApplicationControlRequestArgs(ControlType.LogOut));
-        }
+
+            GlobalObjects.AuditRepository.WriteAsync(new SmartCore.Entities.User(GlobalObjects.CasEnvironment.CurrentUser), AuditOperation.SignOut, GlobalObjects.CasEnvironment.CurrentUser);
+		}
         #endregion
 
         #region private void AvButtonLogoutLocationChanged(object sender, EventArgs e)
