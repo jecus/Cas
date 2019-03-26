@@ -1096,7 +1096,7 @@ namespace SmartCore
         {
             get
             {
-                if (_keeper == null) _keeper = new Keeper(this);
+                if (_keeper == null) _keeper = new Keeper(this, AuditRepository);
                 //
                 return _keeper;
             }
@@ -1119,7 +1119,7 @@ namespace SmartCore
         {
             get
             {
-                if (_manipulator == null) _manipulator = new Manipulator(this);
+                if (_manipulator == null) _manipulator = new Manipulator(this, AuditRepository);
                 //
                 return _manipulator;
             }
@@ -1161,7 +1161,7 @@ namespace SmartCore
 	    {
 		    get
 		    {
-			    if (_newKeeper == null) _newKeeper = new NewKeeper(this);
+			    if (_newKeeper == null) _newKeeper = new NewKeeper(this, AuditRepository);
 			    return _newKeeper;
 		    }
 	    }

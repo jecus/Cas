@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using EFCore.DTO.General;
 using EFCore.Filter;
+using Newtonsoft.Json;
 using SmartCore.AircraftFlights;
 using SmartCore.Aircrafts;
+using SmartCore.AuditMongo.Repository;
 using SmartCore.Auxiliary;
 using SmartCore.Component;
 using SmartCore.Entities.Collections;
@@ -89,7 +91,9 @@ namespace SmartCore.Entities
         /// </summary>
         private readonly ICasEnvironment _casEnvironment;
 
-	    /// <summary>
+        private readonly IAuditRepository _auditRepository;
+
+        /// <summary>
         /// Ядро, с которым связан манипулятор
         /// </summary>
         private ICasEnvironment CasEnvironment { get { return _casEnvironment; } }
@@ -101,9 +105,10 @@ namespace SmartCore.Entities
         /// Класс обеспечивает легкое сохранение и создание объектов Cas
         /// </summary>
         /// <param name="casEnvironment"></param>
-        public Manipulator(ICasEnvironment casEnvironment)
+        public Manipulator(ICasEnvironment casEnvironment, IAuditRepository auditRepository)
         {
-            _casEnvironment = casEnvironment;
+	        _casEnvironment = casEnvironment;
+	        _auditRepository = auditRepository;
         }
 
         #endregion
@@ -298,7 +303,9 @@ namespace SmartCore.Entities
 
 			CasEnvironment.Keeper.Delete(deletedObject, isDeletedOnly);
 
-            if (deletedObject is AbstractDictionary)
+			_auditRepository.WriteAsync(deletedObject, AuditOperation.Deleted, _casEnvironment.CurrentUser);
+
+			if (deletedObject is AbstractDictionary)
             {
                 var col = CasEnvironment.GetDictionary(deletedObject.GetType());
 

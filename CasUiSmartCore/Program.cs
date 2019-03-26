@@ -320,6 +320,10 @@ namespace CAS.UI
                 }
                 _mainDispatcher.DefaultProxy.Remove(displayer, false);
             }
+
+            var user = GlobalObjects.CasEnvironment.CurrentUser;
+			if(user.ItemId > 0)
+				GlobalObjects.AuditRepository.WriteAsync(new SmartCore.Entities.User(user), AuditOperation.SignOut, user);
         }
 
         private static void ApplicationThreadException(object sender, ThreadExceptionEventArgs e)

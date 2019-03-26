@@ -23,7 +23,8 @@ namespace SmartCore.AuditMongo.Repository
 
 			_context.AuditCollection.InsertOne(new AuditEntity
 			{
-				Action = $"{objectName}{operation}",
+				//Action = $"{objectName}{operation}",
+				Action = $"{operation}",
 				Date = DateTime.UtcNow,
 				ObjectId = target?.ItemId ?? -1,
 				ObjectTypeId = target?.SmartCoreObjectType.ItemId ?? -1,

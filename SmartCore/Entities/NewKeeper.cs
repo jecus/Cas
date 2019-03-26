@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using EFCore.Attributte;
 using EFCore.DTO;
+using Newtonsoft.Json;
+using SmartCore.AuditMongo.Repository;
 using SmartCore.DataAccesses;
 using SmartCore.DtoHelper;
 using SmartCore.Entities.General;
@@ -16,15 +19,17 @@ namespace SmartCore.Entities
 		#region Fields
 
 		private readonly CasEnvironment _casEnvironment;
+		private readonly IAuditRepository _auditRepository;
 		private readonly FilesSmartCore _filesSmartCore;
 
 		#endregion
 
 		#region Constructor
 
-		public NewKeeper(CasEnvironment casEnvironment)
+		public NewKeeper(CasEnvironment casEnvironment, IAuditRepository auditRepository)
 		{
 			_casEnvironment = casEnvironment;
+			_auditRepository = auditRepository;
 			_filesSmartCore = new FilesSmartCore(_casEnvironment);
 		}
 
@@ -73,6 +78,9 @@ namespace SmartCore.Entities
 			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "DeleteGeneric")?.MakeGenericMethod(blType, dto.Type);
 
 			method.Invoke(this, new object[] { value, isDeletedOnly, saveAttachedFile });
+
+			_auditRepository.WriteAsync(value, AuditOperation.Deleted, _casEnvironment.CurrentUser);
+
 		}
 
 		public void DeleteGeneric<T, TOut>(T value, bool isDeletedOnly = false, bool saveAttachedFile = true) where T : BaseEntityObject, new() where TOut : BaseEntity, new()

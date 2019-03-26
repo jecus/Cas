@@ -7,6 +7,8 @@ using System.Reflection;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using System.Data;
+using Newtonsoft.Json;
+using SmartCore.AuditMongo.Repository;
 using SmartCore.DataAccesses;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
@@ -35,6 +37,8 @@ namespace SmartCore.Entities
         /// </summary>
         private readonly CasEnvironment _casEnvironment;
 
+        private readonly IAuditRepository _auditRepository;
+
         #endregion
 
 	    private readonly FilesSmartCore _filesSmartCore;
@@ -45,10 +49,11 @@ namespace SmartCore.Entities
         /// Сохраняет объекты в базе данных
         /// </summary>
         /// <param name="casEnvironment"></param>
-        public Keeper(CasEnvironment casEnvironment)
+        public Keeper(CasEnvironment casEnvironment, IAuditRepository auditRepository)
         {
             _casEnvironment = casEnvironment;
-			_filesSmartCore = new FilesSmartCore(_casEnvironment);
+            _auditRepository = auditRepository;
+            _filesSmartCore = new FilesSmartCore(_casEnvironment);
         }
 
         #endregion
@@ -161,6 +166,8 @@ namespace SmartCore.Entities
 				var qr = BaseQueries.GetDeleteQuery(obj);
                 _casEnvironment.Execute(qr, BaseQueries.GetParameters(obj));
             }
+
+            _auditRepository.WriteAsync(obj, AuditOperation.Deleted, _casEnvironment.CurrentUser);
 
 			if (obj is IFileContainer && saveAttachedFile)
 				DeleteAttachedFile(obj as IFileContainer);
