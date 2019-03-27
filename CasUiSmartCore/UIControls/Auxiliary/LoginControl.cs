@@ -34,7 +34,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         private BackgroundWorker backgroundWorker;
         private LoadingState _loadingState = new LoadingState();
-        private LoadForm _loadForm = new LoadForm { ShowButtonsPanel = false };
+        private LoadingForm _loadForm = new LoadingForm { ShowButtonsPanel = false };
 
         protected Label labelTitle;
         protected Panel panelLoginPasswordContainer;

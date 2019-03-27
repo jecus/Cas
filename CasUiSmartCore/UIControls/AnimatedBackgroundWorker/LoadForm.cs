@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using MetroFramework.Forms;
 using SmartCore.Entities;
 
 namespace CAS.UI.UIControls.AnimatedBackgroundWorker
@@ -7,7 +8,7 @@ namespace CAS.UI.UIControls.AnimatedBackgroundWorker
     ///<summary>
     /// Форма для отображение процесса загрузки
     ///</summary>
-    public partial class LoadForm : Form
+    public partial class LoadForm : MetroForm
     {
         #region Fields
 

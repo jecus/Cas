@@ -861,6 +861,12 @@
     <Compile Include="UIControls\AircraftTechnicalLogBookControls\AircraftFlightLight\DiscrepanciesListControlLight.designer.cs">
       <DependentUpon>DiscrepanciesListControlLight.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\AnimatedBackgroundWorker\LoadingFormNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\AnimatedBackgroundWorker\LoadingFormNew.Designer.cs">
+      <DependentUpon>LoadingFormNew.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\Auxiliary\DataGridViewElements\DataGridViewLookupCell.cs" />
     <Compile Include="UIControls\Auxiliary\DataGridViewElements\DataGridViewLookupColumn.cs" />
     <Compile Include="UIControls\Auxiliary\DataGridViewElements\DataGridViewCalendarEditingControl.cs">
@@ -3711,6 +3717,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\AircraftTechnicalLogBookControls\AircraftFlightLight\DiscrepanciesListControlLight.resx">
       <DependentUpon>DiscrepanciesListControlLight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\AnimatedBackgroundWorker\LoadingFormNew.resx">
+      <DependentUpon>LoadingFormNew.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\Auxiliary\TestControl.resx">
       <DependentUpon>TestControl.cs</DependentUpon>
