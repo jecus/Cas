@@ -1,5 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using Auxiliary;
+using CAS.UI.Interfaces;
 
 namespace CAS.UI.UIControls.OpepatorsControls
 {
@@ -46,6 +48,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.labelEmailValue = new System.Windows.Forms.LinkLabel();
 			this.operatorInfoTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
 			this.linkLabelEditOperatorInfo = new CAS.UI.Management.Dispatchering.ReferenceLinkLabel();
+			this.linkLabelEditPassword = new CAS.UI.Management.Dispatchering.ReferenceLinkLabel();
 			this.operatorInfoTableLayoutPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -78,7 +81,9 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.operatorInfoTableLayoutPanel.Controls.Add(this.labelEmailValue, 1, 5);
 			this.operatorInfoTableLayoutPanel.Controls.Add(this.linkLabelEditOperatorInfo, 0, 6);
 			this.operatorInfoTableLayoutPanel.SetColumnSpan(this.linkLabelEditOperatorInfo, 2);
-			this.operatorInfoTableLayoutPanel.Location = new System.Drawing.Point(3, 43);
+            this.operatorInfoTableLayoutPanel.Controls.Add(this.linkLabelEditPassword, 0, 7);
+            this.operatorInfoTableLayoutPanel.SetColumnSpan(this.linkLabelEditPassword, 2);
+            this.operatorInfoTableLayoutPanel.Location = new System.Drawing.Point(3, 43);
 			this.operatorInfoTableLayoutPanel.Name = "operatorInfoTableLayoutPanel";
 			this.operatorInfoTableLayoutPanel.Dock = DockStyle.Fill;
 			this.operatorInfoTableLayoutPanel.Size = new System.Drawing.Size(336, 14);
@@ -229,10 +234,27 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.linkLabelEditOperatorInfo.TabStop = true;
 			this.linkLabelEditOperatorInfo.Text = "Edit operator\'s info";
 			this.linkLabelEditOperatorInfo.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkLabelEditOperatorInfoDisplayerRequested);
-			// 
-			// OperatorInfoReference
-			//
-			this.MainControl = operatorInfoTableLayoutPanel;
+            // 
+            // linkLabelEditPassword
+            // 
+            this.linkLabelEditPassword.AutoSize = true;
+            this.linkLabelEditPassword.Displayer = null;
+            this.linkLabelEditPassword.DisplayerText = null;
+            this.linkLabelEditPassword.Entity = null;
+            this.linkLabelEditPassword.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.linkLabelEditPassword.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.linkLabelEditPassword.Location = new System.Drawing.Point(0, 0);
+            this.linkLabelEditPassword.Name = "linkLabelEditPassword";
+            this.linkLabelEditPassword.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+            this.linkLabelEditPassword.Size = new System.Drawing.Size(144, 17);
+            this.linkLabelEditPassword.TabIndex = 12;
+            this.linkLabelEditPassword.TabStop = true;
+            this.linkLabelEditPassword.Text = "Edit password";
+            this.linkLabelEditPassword.DisplayerRequested += new EventHandler<ReferenceEventArgs>(this.ButtonChangePasswordClick); 
+            // 
+            // OperatorInfoReference
+            //
+            this.MainControl = operatorInfoTableLayoutPanel;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoSize = true;
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -262,6 +284,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 		private System.Windows.Forms.LinkLabel labelEmailValue;
 		private TableLayoutPanel operatorInfoTableLayoutPanel;
 		private CAS.UI.Management.Dispatchering.ReferenceLinkLabel linkLabelEditOperatorInfo;
+		private CAS.UI.Management.Dispatchering.ReferenceLinkLabel linkLabelEditPassword;
 
 	}
 }

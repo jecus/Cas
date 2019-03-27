@@ -1013,6 +1013,12 @@
     <Compile Include="UIControls\MTOP\MTOPSummary.Designer.cs">
       <DependentUpon>MTOPSummary.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\OpepatorsControls\PasswordChangeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\OpepatorsControls\PasswordChangeForm.Designer.cs">
+      <DependentUpon>PasswordChangeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\PersonnelControls\EmployeeCompliance\TrainingCompliance.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -3760,6 +3766,9 @@
       <DependentUpon>MTOPSummary.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\NonRoutineJobsControls\NonRoutineJobsListScreen.resx" />
+    <EmbeddedResource Include="UIControls\OpepatorsControls\PasswordChangeForm.resx">
+      <DependentUpon>PasswordChangeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PersonnelControls\EmployeeCompliance\TrainingCompliance.resx">
       <DependentUpon>TrainingCompliance.cs</DependentUpon>
       <SubType>Designer</SubType>

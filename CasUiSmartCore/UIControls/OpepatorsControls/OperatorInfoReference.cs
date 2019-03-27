@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
+using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.DocumentationControls;
 using CAS.UI.UIControls.ReferenceControls;
 using SmartCore.Entities.General;
@@ -133,5 +134,20 @@ namespace CAS.UI.UIControls.OpepatorsControls
 
 
         #endregion
+
+        private void LinkLabelEditPasswordDisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void ButtonChangePasswordClick(object sender, EventArgs e)
+        {
+            var form = new PasswordChangeForm();
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+               
+            }
+        }
     }
 }
