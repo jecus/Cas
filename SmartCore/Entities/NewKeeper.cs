@@ -37,11 +37,17 @@ namespace SmartCore.Entities
 
 		public void Save(BaseEntityObject value, bool saveAttachedFile = true)
 		{
+			var type = AuditOperation.Created;
+			if (value.ItemId > 0)
+				type = AuditOperation.Changed;
+				
 			var blType = value.GetType();
 			var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
 			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "SaveGeneric")?.MakeGenericMethod(blType, dto.Type);
 
 			method.Invoke(this, new object[] { value, saveAttachedFile });
+
+			_auditRepository.WriteAsync(value, type ,_casEnvironment.CurrentUser);
 		}
 
 		public void SaveGeneric<T, TOut>(T value, bool saveAttachedFile = true) where T : BaseEntityObject, new() where TOut : BaseEntity, new()

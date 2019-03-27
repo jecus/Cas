@@ -76,13 +76,15 @@ namespace SmartCore.Entities
                 var qr = BaseQueries.GetInsertQuery(obj);
                 var ds = _casEnvironment.Execute(qr, BaseQueries.GetParameters(obj));
                 obj.ItemId = DbTypes.ToInt32(ds.Tables[0].Rows[0][0]);
-            }
+                _auditRepository.WriteAsync(obj, AuditOperation.Created, _casEnvironment.CurrentUser);
+			}
             else
             {
                 // update уже существующей записи
                 var qr = BaseQueries.GetUpdateQuery(obj);
                 _casEnvironment.Execute(qr, BaseQueries.GetParameters(obj));
-            }
+                _auditRepository.WriteAsync(obj, AuditOperation.Changed, _casEnvironment.CurrentUser);
+			}
 
 			if (obj is IFileContainer && saveAttachedFile)
 				SaveAttachedFile(obj as IFileContainer);

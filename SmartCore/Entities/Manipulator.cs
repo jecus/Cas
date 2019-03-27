@@ -121,10 +121,15 @@ namespace SmartCore.Entities
         public void Save(BaseEntityObject saveObject)
         {
             if(saveObject == null) return;
-           
-            CasEnvironment.Keeper.Save(saveObject);
-            
-            if (saveObject is AbstractDictionary)
+
+            var type = AuditOperation.Created;
+            if (saveObject.ItemId > 0)
+	            type = AuditOperation.Changed;
+
+			CasEnvironment.Keeper.Save(saveObject);
+			_auditRepository.WriteAsync(saveObject, type, _casEnvironment.CurrentUser);
+
+			if (saveObject is AbstractDictionary)
             {
                 IDictionaryCollection col = CasEnvironment.GetDictionary(saveObject.GetType());
 
@@ -170,9 +175,14 @@ namespace SmartCore.Entities
         {
             if (saveObject == null) return;
 
-            CasEnvironment.Keeper.SaveAll(saveObject, saveChild, saveForced);
+            var type = AuditOperation.Created;
+            if (saveObject.ItemId > 0)
+	            type = AuditOperation.Changed;
 
-            if (saveObject is AbstractDictionary)
+			CasEnvironment.Keeper.SaveAll(saveObject, saveChild, saveForced);
+			_auditRepository.WriteAsync(saveObject, type, _casEnvironment.CurrentUser);
+
+			if (saveObject is AbstractDictionary)
             {
                 IDictionaryCollection col = CasEnvironment.GetDictionary(saveObject.GetType());
 
@@ -218,9 +228,14 @@ namespace SmartCore.Entities
             if(performance == null)
                 return;
 
-            _casEnvironment.Keeper.Save(performance, saveAttachedFile);
+            var type = AuditOperation.Created;
+            if (performance.ItemId > 0)
+	            type = AuditOperation.Changed;
+            
+			_casEnvironment.Keeper.Save(performance, saveAttachedFile);
+			_auditRepository.WriteAsync(performance, type, _casEnvironment.CurrentUser);
 
-            if (performance.Parent.PerformanceRecords.GetItemById(performance.ItemId) == null)
+			if (performance.Parent.PerformanceRecords.GetItemById(performance.ItemId) == null)
                 performance.Parent.PerformanceRecords.Add(performance);
 
             if (performance.Parent is MaintenanceDirective)
