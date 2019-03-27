@@ -201,7 +201,15 @@ namespace SmartCore
 		    return channelFactoryFoo.CreateChannel().GetUser(login, password);
 	    }
 
-	    public Connection GetWcfConnection()
+		public void UpdateUser(string password)
+		{
+			var binding = new BasicHttpBinding();
+			var endPoint = new EndpointAddress($"http://{_ipServer}/LoginService/LoginService.svc");
+			var channelFactoryFoo = new ChannelFactory<ILoginService>(binding, endPoint);
+			channelFactoryFoo.CreateChannel().UpdatePassword(CurrentUser.ItemId, password);
+		}
+
+		public Connection GetWcfConnection()
 	    {
 		    try
 		    {

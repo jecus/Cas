@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using EFCore.DTO;
 using EFCore.DTO.General;
@@ -13,6 +14,16 @@ namespace EFCore.Contract
 			var context = new DataContext(connection);
 			var dbset = context.Set<UserDTO>();
 			return dbset.FirstOrDefault(i => i.Login.Equals(login) && i.Password.Equals(password));
+		}
+
+		public void UpdatePassword(int id, string password)
+		{
+			var connection = Helper.Helper.GetConnectionString();
+			var context = new DataContext(connection);
+			var dbset = context.Set<UserDTO>();
+			var user = dbset.FirstOrDefault(i => i.ItemId == id);
+			user.Password = password;
+			context.SaveChanges();
 		}
 	}
 }

@@ -130,24 +130,19 @@ namespace CAS.UI.UIControls.OpepatorsControls
         {
             UpdateDataForOperator();
         }
-        #endregion
+		#endregion
+
+		#region  private void LinkLabelEditPassword_Click(object sender, EventArgs e)
+
+		private void LinkLabelEditPassword_Click(object sender, EventArgs e)
+		{
+			var form = new PasswordChangeForm();
+			form.ShowDialog();
+		}
+
+		#endregion
 
 
-        #endregion
-
-        private void LinkLabelEditPasswordDisplayerRequested(object sender, ReferenceEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
-        private void ButtonChangePasswordClick(object sender, EventArgs e)
-        {
-            var form = new PasswordChangeForm();
-
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-               
-            }
-        }
-    }
+		#endregion
+	}
 }

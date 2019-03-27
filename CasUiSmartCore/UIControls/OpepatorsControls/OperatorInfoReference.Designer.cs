@@ -48,7 +48,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.labelEmailValue = new System.Windows.Forms.LinkLabel();
 			this.operatorInfoTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
 			this.linkLabelEditOperatorInfo = new CAS.UI.Management.Dispatchering.ReferenceLinkLabel();
-			this.linkLabelEditPassword = new CAS.UI.Management.Dispatchering.ReferenceLinkLabel();
+			this.linkLabelEditPassword = new LinkLabel();
 			this.operatorInfoTableLayoutPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -238,19 +238,15 @@ namespace CAS.UI.UIControls.OpepatorsControls
             // linkLabelEditPassword
             // 
             this.linkLabelEditPassword.AutoSize = true;
-            this.linkLabelEditPassword.Displayer = null;
-            this.linkLabelEditPassword.DisplayerText = null;
-            this.linkLabelEditPassword.Entity = null;
             this.linkLabelEditPassword.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.linkLabelEditPassword.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
             this.linkLabelEditPassword.Location = new System.Drawing.Point(0, 0);
             this.linkLabelEditPassword.Name = "linkLabelEditPassword";
-            this.linkLabelEditPassword.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this.linkLabelEditPassword.Size = new System.Drawing.Size(144, 17);
             this.linkLabelEditPassword.TabIndex = 12;
             this.linkLabelEditPassword.TabStop = true;
             this.linkLabelEditPassword.Text = "Edit password";
-            this.linkLabelEditPassword.DisplayerRequested += new EventHandler<ReferenceEventArgs>(this.ButtonChangePasswordClick); 
+			this.linkLabelEditPassword.Click += LinkLabelEditPassword_Click;  
             // 
             // OperatorInfoReference
             //
@@ -268,6 +264,8 @@ namespace CAS.UI.UIControls.OpepatorsControls
 
 		}
 
+
+
 		#endregion
 
 		private System.Windows.Forms.Label labelAddress;
@@ -284,7 +282,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 		private System.Windows.Forms.LinkLabel labelEmailValue;
 		private TableLayoutPanel operatorInfoTableLayoutPanel;
 		private CAS.UI.Management.Dispatchering.ReferenceLinkLabel linkLabelEditOperatorInfo;
-		private CAS.UI.Management.Dispatchering.ReferenceLinkLabel linkLabelEditPassword;
+		private LinkLabel linkLabelEditPassword;
 
 	}
 }

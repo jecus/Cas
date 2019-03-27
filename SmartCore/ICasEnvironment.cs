@@ -60,6 +60,8 @@ namespace SmartCore
 
 		UserDTO GetUser(string login, string password);
 
+		void UpdateUser(string password);
+
 		void CheckTablesFor(Type type);
 
 		void CreateTablesFor(Type type);

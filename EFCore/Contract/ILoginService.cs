@@ -8,5 +8,8 @@ namespace EFCore.Contract
 	{
 		[OperationContract]
 		UserDTO GetUser(string login, string password);
+
+		[OperationContract]
+		void UpdatePassword(int id, string password);
 	}
 }
