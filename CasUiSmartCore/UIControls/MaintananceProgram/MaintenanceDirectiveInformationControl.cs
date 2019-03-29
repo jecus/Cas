@@ -11,6 +11,7 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Events;
 using CAS.UI.UIControls.JobCardControls;
 using CASTerms;
+using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Deprecated;
 using SmartCore.Entities.General.MaintenanceWorkscope;
@@ -464,7 +465,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 lookupComboboxJobCard.SetEditScreenControl<JobCardScreen>(maintenanceScreenDisplayerText);
                 lookupComboboxJobCard.SetAddScreenControl<JobCardScreen>(new object[] { directive }, directive + ". New Job Card");
                 lookupComboboxJobCard.LoadObjectsFunc = GlobalObjects.CasEnvironment.NewLoader.GetJobCard;
-                lookupComboboxJobCard.FilterParam1 = directive;
+				lookupComboboxJobCard.FilterParam1 = directive;
                 lookupComboboxJobCard.SelectedItemId = directive.JobCard != null
                     ? directive.JobCard.ItemId
                     : -1;
