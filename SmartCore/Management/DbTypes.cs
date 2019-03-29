@@ -9,7 +9,6 @@ using System.Linq;
 using System.Reflection;
 using SmartCore.Aircrafts;
 using SmartCore.Calculations;
-using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;

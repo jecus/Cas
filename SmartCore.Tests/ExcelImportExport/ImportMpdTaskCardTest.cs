@@ -15,8 +15,6 @@ using SmartCore.Directives;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Directives;
-using SmartCore.Entities.General.MaintenanceWorkscope;
-using SmartCore.Filters;
 using SmartCore.Maintenance;
 using SmartCore.Management;
 

@@ -12,8 +12,6 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.SMS;
-using SmartCore.Filters;
-using SmartCore.Queries;
 
 namespace CAS.UI.UIControls.SMSControls
 {

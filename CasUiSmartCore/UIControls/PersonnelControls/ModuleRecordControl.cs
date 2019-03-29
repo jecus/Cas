@@ -2,7 +2,6 @@
 using System.Drawing;
 using CAS.UI.Interfaces;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General.Personnel;
 
 namespace CAS.UI.UIControls.PersonnelControls
 {

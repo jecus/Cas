@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary.Events;
-using CAS.UI.UIControls.DetailsControls;
 using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;

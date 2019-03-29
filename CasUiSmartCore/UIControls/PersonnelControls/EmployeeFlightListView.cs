@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Auxiliary;
 using CAS.UI.Interfaces;
@@ -14,10 +10,7 @@ using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
-using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Atlbs;
-using SmartCore.Entities.General.Personnel;
 
 namespace CAS.UI.UIControls.PersonnelControls
 {

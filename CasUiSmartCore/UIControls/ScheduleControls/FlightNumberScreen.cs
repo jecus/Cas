@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using EFCore.DTO.Dictionaries;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Schedule;
-using SmartCore.Filters;
 
 namespace CAS.UI.UIControls.ScheduleControls
 {

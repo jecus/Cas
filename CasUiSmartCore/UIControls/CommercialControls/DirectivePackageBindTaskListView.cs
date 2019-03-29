@@ -5,15 +5,12 @@ using System.Windows.Forms;
 using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
-using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.WorkPackage;
 
 namespace CAS.UI.UIControls.CommercialControls

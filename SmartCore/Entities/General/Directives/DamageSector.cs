@@ -1,7 +1,5 @@
 ﻿using System;
 using EFCore.DTO.General;
-using SmartCore.Entities.Collections;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.Entities.General.Directives

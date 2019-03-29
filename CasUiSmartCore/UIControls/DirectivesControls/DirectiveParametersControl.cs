@@ -11,9 +11,7 @@ using CAS.UI.UIControls.KitControls;
 using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
-using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Directives;
 
 namespace CAS.UI.UIControls.DirectivesControls

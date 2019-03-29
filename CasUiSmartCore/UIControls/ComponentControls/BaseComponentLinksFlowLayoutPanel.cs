@@ -6,7 +6,6 @@ using Auxiliary;
 using AvControls;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
-using CAS.UI.UIControls.DetailsControls;
 using CAS.UI.UIControls.DirectivesControls;
 using CAS.UI.UIControls.ForecastControls;
 using CASTerms;

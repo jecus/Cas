@@ -12,7 +12,6 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
-using SmartCore.Files;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {

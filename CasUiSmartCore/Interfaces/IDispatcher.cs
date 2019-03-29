@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
-using CAS.UI.Interfaces;
 
 namespace CAS.UI.Interfaces
 {

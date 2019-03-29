@@ -8,7 +8,6 @@ using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
 using CAS.UI.Management.Dispatchering;
-using CAS.UI.UIControls.DetailsControls;
 using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;

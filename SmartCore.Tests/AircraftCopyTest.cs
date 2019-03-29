@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using EFCore.DTO.General;
 using EFCore.Filter;
@@ -14,7 +13,6 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.MaintenanceWorkscope;
-using SmartCore.Filters;
 using SmartCore.Maintenance;
 using SmartCore.Management;
 

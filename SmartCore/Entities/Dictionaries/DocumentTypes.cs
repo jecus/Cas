@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using EFCore.DTO.Dictionaries;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General.Attributes;

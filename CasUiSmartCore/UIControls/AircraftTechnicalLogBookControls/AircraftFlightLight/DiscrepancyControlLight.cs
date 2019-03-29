@@ -7,7 +7,6 @@ using CASTerms;
 using EFCore.DTO.General;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Atlbs;
 using SmartCore.Entities.General.Personnel;
 

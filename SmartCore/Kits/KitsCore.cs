@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using SmartCore.Component;
 using SmartCore.DataAccesses.NonRoutines;
@@ -13,11 +12,9 @@ using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;
-using SmartCore.Management;
 using SmartCore.NonRoutineJobs;
 using SmartCore.Purchase;
 using SmartCore.Queries;
-using SmartCore.WorkPackages;
 
 namespace SmartCore.Kits
 {

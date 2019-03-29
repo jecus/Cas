@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
-using SmartCore.Entities.General.Attributes;
 
 namespace CAS.UI.Interfaces
 {

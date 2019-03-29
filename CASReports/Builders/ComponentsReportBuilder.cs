@@ -6,7 +6,6 @@ using CASReports.Datasets;
 using CASReports.ReportTemplates;
 using CASTerms;
 using SmartCore.Calculations;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;

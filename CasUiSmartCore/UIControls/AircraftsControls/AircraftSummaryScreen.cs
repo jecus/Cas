@@ -18,8 +18,6 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
-using SmartCore.Entities.General.WorkPackage;
-using SmartCore.Filters;
 
 namespace CAS.UI.UIControls.AircraftsControls
 {

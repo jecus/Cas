@@ -5,7 +5,6 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General.Store;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls

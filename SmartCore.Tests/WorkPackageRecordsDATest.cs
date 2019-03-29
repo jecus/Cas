@@ -2,11 +2,9 @@
 using EFCore.Filter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartCore.DataAccesses.WorkPackageRecords;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.WorkPackage;
-using SmartCore.Filters;
 using SmartCore.Management;
 
 namespace SmartCore.Tests

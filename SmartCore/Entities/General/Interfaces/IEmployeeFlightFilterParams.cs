@@ -1,5 +1,4 @@
-﻿using System;
-using SmartCore.Entities.Dictionaries;
+﻿using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.Entities.General.Interfaces

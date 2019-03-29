@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -14,7 +11,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.ServiceModel;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using EFCore.Contract;
 using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
@@ -38,7 +34,6 @@ using SmartCore.Entities;
 using SmartCore.Entities.NewLoader;
 using SmartCore.ObjectCache;
 using SmartCore.Queries;
-using User = Microsoft.SqlServer.Management.Smo.User;
 
 namespace SmartCore
 {

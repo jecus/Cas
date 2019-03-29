@@ -2,7 +2,6 @@
 using System.Reflection;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
-using SmartCore.Files;
 
 namespace SmartCore.DataAccesses.AttachedFiles
 {

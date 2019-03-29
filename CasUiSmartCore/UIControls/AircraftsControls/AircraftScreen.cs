@@ -14,7 +14,6 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.ComponentChangeReport;
 using CAS.UI.UIControls.ComponentControls;
-using CAS.UI.UIControls.DetailsControls;
 using CAS.UI.UIControls.DirectivesControls;
 using CAS.UI.UIControls.Discrepancies;
 using CAS.UI.UIControls.DocumentationControls;
@@ -38,7 +37,6 @@ using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.SMS;
 using SmartCore.Filters;
 using Component = SmartCore.Entities.General.Accessory.Component;
-using ComponentCollection = SmartCore.Entities.Collections.ComponentCollection;
 
 namespace CAS.UI.UIControls.AircraftsControls
 {

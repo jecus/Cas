@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using SmartCore.Calculations.Maintenance;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Atlbs;
-using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.MaintenanceWorkscope;
 
 namespace SmartCore.Calculations
 {

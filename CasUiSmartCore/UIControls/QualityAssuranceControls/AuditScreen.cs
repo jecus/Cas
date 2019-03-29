@@ -8,23 +8,15 @@ using AvControls;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.DetailsControls;
-using CAS.UI.UIControls.DirectivesControls;
-using CAS.UI.UIControls.MaintananceProgram;
-using CAS.UI.UIControls.StoresControls;
-using CAS.UI.UIControls.WorkPakage;
 using CASReports.Builders;
 using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.Quality;
-using SmartCore.Entities.General.WorkPackage;
 
 namespace CAS.UI.UIControls.QualityAssuranceControls
 {

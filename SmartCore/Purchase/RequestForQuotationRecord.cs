@@ -1,11 +1,9 @@
 using System;
 using EFCore.DTO.General;
-using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
-using SmartCore.Entities.General.Interfaces;
 using SmartCore.Packages;
 
 namespace SmartCore.Purchase

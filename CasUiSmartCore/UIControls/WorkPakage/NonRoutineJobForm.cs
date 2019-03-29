@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.KitControls;
 using CASTerms;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.WorkPackage;
 
 namespace CAS.UI.UIControls.WorkPakage

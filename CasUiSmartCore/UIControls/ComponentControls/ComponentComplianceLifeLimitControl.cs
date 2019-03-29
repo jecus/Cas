@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using CAS.UI.UIControls.DetailsControls;
 using CAS.UI.UIControls.DocumentationControls;
 using CAS.UI.UIControls.KitControls;
 using CASTerms;

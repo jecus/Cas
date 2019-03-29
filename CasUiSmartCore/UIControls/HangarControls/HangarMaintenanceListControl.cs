@@ -2,9 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using CAS.UI.UIControls.JobCardControls;
-using CASTerms;
-using SmartCore.Entities.General.Deprecated;
 using SmartCore.Entities.General.Hangar;
 
 namespace CAS.UI.UIControls.HangarControls

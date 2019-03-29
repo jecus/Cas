@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Reflection;
 using EFCore.DTO.General;
-using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
-using SmartCore.Entities.General.Personnel;
 
 namespace SmartCore.Entities.Dictionaries
 {

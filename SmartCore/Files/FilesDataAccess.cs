@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using EFCore.DTO.General;
 using EFCore.Filter;
-using SmartCore.Entities;
 using SmartCore.Entities.NewLoader;
-using SmartCore.Filters;
 
 namespace SmartCore.Files
 {

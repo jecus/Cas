@@ -3,7 +3,6 @@ using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
 using SmartCore.Auxiliary.Extentions;
-using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 

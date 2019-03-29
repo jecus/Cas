@@ -6,11 +6,8 @@ using CAS.UI.Helpers;
 using CAS.UI.UIControls.Auxiliary.Comparers;
 using CASTerms;
 using SmartCore.Calculations;
-using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
-using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 
 namespace CAS.UI.UIControls.ForecastControls

@@ -4,8 +4,6 @@ using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.PersonnelControls;
 using CASTerms;
-using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General.Personnel;
 using SmartCore.Entities.General.Quality;
 
 namespace CAS.UI.UIControls.QualityAssuranceControls

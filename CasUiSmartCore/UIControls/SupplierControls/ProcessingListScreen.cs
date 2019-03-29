@@ -16,7 +16,6 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Filters;
-using SmartCore.Purchase;
 using Component = SmartCore.Entities.General.Accessory.Component;
 using ComponentCollection = SmartCore.Entities.Collections.ComponentCollection;
 

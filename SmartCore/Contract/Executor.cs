@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
-using System.Windows.Forms;
 using Microsoft.SqlServer.Management.Smo;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Atlbs;
-using SmartCore.Entities.General.Attributes;
-using SmartCore.Files;
 using SmartCore.Management;
 using SmartCore.Queries;
 

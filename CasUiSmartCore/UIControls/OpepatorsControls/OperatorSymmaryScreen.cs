@@ -6,7 +6,6 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.ComponentControls;
-using CAS.UI.UIControls.DetailsControls;
 using CAS.UI.UIControls.PersonnelControls;
 using CAS.UI.UIControls.PurchaseControls;
 using CAS.UI.UIControls.ScheduleControls;

@@ -2,10 +2,7 @@ using SmartCore.AircraftFlights;
 using SmartCore.Aircrafts;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Deprecated;
-using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.Store;
 using SmartCore.Maintenance;
-using SmartCore.Packages;
 using SmartCore.Purchase;
 using SmartCore.WorkPackages;
 

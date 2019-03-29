@@ -1,6 +1,4 @@
-﻿using System;
-using System.Reflection;
-using EFCore.DTO.Dictionaries;
+﻿using EFCore.DTO.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
 

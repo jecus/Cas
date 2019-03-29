@@ -1,9 +1,3 @@
-using System.ComponentModel;
-using System.Text.RegularExpressions;
-
-
-
-
 namespace TextProcessing
 {
     //[TestFixture]

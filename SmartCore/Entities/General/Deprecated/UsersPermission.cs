@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Data;
-using SmartCore.Management;
 
 namespace SmartCore.Entities.General
 {

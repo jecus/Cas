@@ -1,6 +1,4 @@
-﻿using System.Configuration;
-using System.Data.Entity.Migrations;
-using System.Linq;
+﻿using System.Linq;
 using EFCore.DTO;
 using EFCore.DTO.General;
 

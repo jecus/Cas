@@ -11,7 +11,6 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Filters;
-using SmartCore.Management;
 using SmartCore.Queries;
 
 namespace SmartCore.Packages

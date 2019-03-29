@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.ComponentControls;
-using CAS.UI.UIControls.DetailsControls;
 using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;

@@ -7,11 +7,9 @@ using SmartCore.Aircrafts;
 using SmartCore.Auxiliary;
 using SmartCore.Entities;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Atlbs;
 using SmartCore.Entities.General.Schedule;
 using SmartCore.Entities.NewLoader;
-using SmartCore.Filters;
 using SmartCore.TrackCore;
 using FilterType = EFCore.Attributte.FilterType;
 

@@ -4,12 +4,9 @@ using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
 using EFCore.DTO.Dictionaries;
-using EFCore.DTO.General;
 using EFCore.Filter;
-using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Filters;
 
 
 namespace CAS.UI.UIControls.DirectivesControls

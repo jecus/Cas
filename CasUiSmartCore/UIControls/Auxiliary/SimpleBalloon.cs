@@ -1,6 +1,5 @@
 using System;
 using System.Drawing;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace CAS.UI.UIControls.Auxiliary

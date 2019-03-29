@@ -3,10 +3,7 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using EFCore.DTO;
 using EFCore.DTO.Dictionaries;
-using EFCore.DTO.General;
-using EFCore.Filter;
 using Excel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartCore.AircraftFlights;
@@ -21,7 +18,6 @@ using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Atlbs;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.MaintenanceWorkscope;
-using SmartCore.Entities.General.Personnel;
 using SmartCore.Maintenance;
 using SmartCore.Management;
 

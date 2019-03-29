@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
@@ -11,7 +10,6 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Events;
 using CAS.UI.UIControls.JobCardControls;
 using CASTerms;
-using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Deprecated;
 using SmartCore.Entities.General.MaintenanceWorkscope;

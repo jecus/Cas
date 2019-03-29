@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using CASTerms;
-using SmartCore.Entities.Collections;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 
 namespace CAS.UI.UIControls.Auxiliary

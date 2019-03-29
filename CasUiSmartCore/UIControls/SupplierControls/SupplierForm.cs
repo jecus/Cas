@@ -6,12 +6,8 @@ using CAS.UI.UIControls.DocumentationControls;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using CASTerms;
-using EFCore.DTO.General;
-using EFCore.Filter;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
-using SmartCore.Entities.General.Store;
-using SmartCore.Filters;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.SupplierControls

@@ -6,7 +6,6 @@ using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Personnel;
 
 namespace CAS.UI.UIControls.MaintenanceControlCenterControls
 {

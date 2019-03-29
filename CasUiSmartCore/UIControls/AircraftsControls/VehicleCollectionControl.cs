@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using AvControls;
 using CAS.UI.Interfaces;
@@ -9,14 +8,10 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.ComponentControls;
-using CAS.UI.UIControls.DetailsControls;
 using CAS.UI.UIControls.ForecastControls;
 using CAS.UI.UIControls.MonthlyUtilizationsControls;
-using CAS.UI.UIControls.TemplatesControls.Forms;
 using CAS.UI.UIControls.WorkPakage;
-using CASReports.Builders;
 using CASTerms;
-using Microsoft.VisualBasic.Devices;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 

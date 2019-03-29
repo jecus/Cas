@@ -1,12 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
+﻿using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using CAS.UI.Management;
 using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.WorkPakage;
-using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.WorkPackage;
 

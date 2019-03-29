@@ -5,7 +5,6 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.MaintenanceWorkscope;
 
 namespace SmartCore.Relation
 {

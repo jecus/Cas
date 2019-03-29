@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.DocumentationControls;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
 using EFCore.DTO.Dictionaries;

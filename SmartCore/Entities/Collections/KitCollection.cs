@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SmartCore.Entities.General.Store;
 using SmartCore.Purchase;
 
 namespace SmartCore.Entities.Collections

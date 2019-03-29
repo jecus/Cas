@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.ServiceModel;
 using EFCore.Attributte;
 
 namespace EFCore.Filter

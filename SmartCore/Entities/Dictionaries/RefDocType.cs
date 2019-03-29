@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries

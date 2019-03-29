@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using SmartCore.Aircrafts;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities;
@@ -10,7 +9,6 @@ using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Filters;
-using SmartCore.Maintenance;
 using SmartCore.Packages;
 using SmartCore.Relation;
 

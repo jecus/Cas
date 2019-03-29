@@ -1,23 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
-using Auxiliary;
 using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.Auxiliary.TreeDataGridView;
-using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.WorkPackage;
 
 namespace CAS.UI.UIControls.CommercialControls

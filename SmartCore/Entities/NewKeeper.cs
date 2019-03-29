@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using EFCore.Attributte;
 using EFCore.DTO;
-using Newtonsoft.Json;
 using SmartCore.AuditMongo.Repository;
 using SmartCore.DataAccesses;
 using SmartCore.DtoHelper;

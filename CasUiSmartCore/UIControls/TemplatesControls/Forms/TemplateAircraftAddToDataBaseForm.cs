@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.ComponentControls;
-using CAS.UI.UIControls.DetailsControls;
 using CAS.UI.UIControls.DirectivesControls;
 using CASTerms;
 using SmartCore.Auxiliary;

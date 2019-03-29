@@ -1,6 +1,5 @@
 using System;
 using CAS.UI.Management;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Store;
 
 namespace CAS.UI.UIControls.Auxiliary

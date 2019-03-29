@@ -8,7 +8,6 @@
 using System.Collections.Generic;
     // DataRow, DataTable, DataSet
     // SqlParameter
-using System.Linq;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;

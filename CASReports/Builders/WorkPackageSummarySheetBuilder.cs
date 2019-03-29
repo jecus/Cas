@@ -3,8 +3,6 @@ using System.Linq;
 using CASReports.Datasets;
 using CASReports.ReportTemplates;
 using CASTerms;
-using SmartCore.Calculations;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.WorkPackage;
 
 namespace CASReports.Builders

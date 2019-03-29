@@ -5,7 +5,6 @@ using CAS.UI.Management;
 using CAS.UI.Management.Dispatchering;
 using CASTerms;
 using SmartCore.AuditMongo.Repository;
-using SmartCore.Management;
 
 namespace CAS.UI.UIControls.Auxiliary
 {

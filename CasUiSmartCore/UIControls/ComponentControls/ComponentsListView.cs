@@ -10,13 +10,11 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.StoresControls;
-using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;
 using TempUIExtentions;
 

@@ -9,7 +9,6 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.Management.Dispatchering.DispatcheredUIControls;
-using CAS.UI.UIControls.DetailsControls;
 using CAS.UI.UIControls.StoresControls;
 using CASTerms;
 using SmartCore.Entities.Dictionaries;

@@ -3,7 +3,6 @@ using System.Reflection;
 using EFCore.DTO.General;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
-using SmartCore.Entities.General.WorkPackage;
 
 namespace SmartCore.Files
 {

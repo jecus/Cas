@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using EFCore.DTO.General;
 using SmartCore.Entities.Collections;
-using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;

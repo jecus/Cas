@@ -11,7 +11,6 @@ using EFCore.DTO.General;
 using EFCore.Filter;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General.Store;
-using SmartCore.Filters;
 
 namespace CAS.UI.UIControls.StoresControls
 {

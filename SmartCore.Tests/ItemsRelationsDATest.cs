@@ -1,14 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using EFCore.DTO.General;
-using EFCore.Filter;
+﻿using EFCore.DTO.General;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartCore.DataAccesses.ItemsRelation;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.MaintenanceWorkscope;
-using SmartCore.Filters;
 using SmartCore.Relation;
 
 namespace SmartCore.Tests

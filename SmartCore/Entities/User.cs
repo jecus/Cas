@@ -1,7 +1,6 @@
 ﻿using EFCore.DTO.General;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Interfaces;
 
 namespace SmartCore.Entities
 {

@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Forms;
 using Auxiliary;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Attributes;
-using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.Store;
 
 namespace CAS.UI.UIControls.DocumentationControls

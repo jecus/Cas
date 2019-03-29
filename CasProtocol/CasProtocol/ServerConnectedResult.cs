@@ -1,8 +1,6 @@
 ﻿namespace CasProtocol
 {
-    using System;
-
-    public enum ServerConnectedResult
+	public enum ServerConnectedResult
     {
         Connected,
         Failed

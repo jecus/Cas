@@ -5,7 +5,6 @@ using Auxiliary;
 using AvControls;
 using AvControls.StatusImageLink;
 using CAS.UI.Helpers;
-using CAS.UI.UIControls.DetailsControls;
 using SmartCore.Entities.General.Accessory;
 
 namespace CAS.UI.UIControls.ComponentControls

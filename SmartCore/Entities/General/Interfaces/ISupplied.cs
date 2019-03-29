@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using SmartCore.Entities.Collections;
+﻿using SmartCore.Entities.Collections;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 

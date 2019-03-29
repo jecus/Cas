@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
@@ -13,7 +9,6 @@ using CAS.UI.Management.Dispatchering;
 using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 

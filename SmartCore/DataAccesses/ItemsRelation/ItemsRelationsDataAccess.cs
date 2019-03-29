@@ -1,12 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using SmartCore.Entities;
-using SmartCore.Entities.Collections;
-using SmartCore.Entities.General.Accessory;
-using SmartCore.Filters;
 using SmartCore.Queries;
-using SmartCore.Relation;
 
 namespace SmartCore.DataAccesses.ItemsRelation
 {

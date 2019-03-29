@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reflection;
-using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
-using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.MaintenanceWorkscope;
 
 namespace SmartCore.DataAccesses.Kits
 {

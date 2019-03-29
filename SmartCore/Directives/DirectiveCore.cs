@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using EFCore.DTO.General;
 using EFCore.Filter;
@@ -15,7 +13,6 @@ using SmartCore.Entities.General.Atlbs;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.NewLoader;
 using SmartCore.Filters;
-using SmartCore.Management;
 using SmartCore.Queries;
 
 namespace SmartCore.Directives

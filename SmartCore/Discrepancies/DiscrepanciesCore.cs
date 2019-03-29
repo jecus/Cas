@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
 using EFCore.DTO.General;
 using EFCore.Filter;
 using SmartCore.AircraftFlights;
-using SmartCore.Aircrafts;
 using SmartCore.Directives;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
@@ -13,7 +11,6 @@ using SmartCore.Entities.General.Atlbs;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.NewLoader;
 using SmartCore.Filters;
-using SmartCore.Queries;
 
 namespace SmartCore.Discrepancies
 {

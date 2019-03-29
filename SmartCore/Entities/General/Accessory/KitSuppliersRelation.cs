@@ -4,7 +4,6 @@ using EFCore.DTO.General;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.Store;
 using SmartCore.Purchase;
 
 namespace SmartCore.Entities.General.Accessory

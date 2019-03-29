@@ -3,11 +3,7 @@ using SmartCore.AircraftFlights;
 using SmartCore.Aircrafts;
 using SmartCore.Component;
 using SmartCore.DataAccesses.ItemsRelation;
-using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
-using SmartCore.Filters;
 using SmartCore.Management;
-using SmartCore.TransferRec;
 
 namespace SmartCore.Tests
 {

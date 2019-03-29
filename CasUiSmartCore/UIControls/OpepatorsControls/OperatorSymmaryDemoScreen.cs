@@ -11,7 +11,6 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.CommercialControls;
 using CAS.UI.UIControls.ComponentControls;
-using CAS.UI.UIControls.DetailsControls;
 using CAS.UI.UIControls.DirectivesControls;
 using CAS.UI.UIControls.Discrepancies;
 using CAS.UI.UIControls.DocumentationControls;
@@ -33,7 +32,6 @@ using CASTerms;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Mail;
 
 namespace CAS.UI.UIControls.OpepatorsControls

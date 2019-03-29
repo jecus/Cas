@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 
 namespace CAS.UI.Interfaces

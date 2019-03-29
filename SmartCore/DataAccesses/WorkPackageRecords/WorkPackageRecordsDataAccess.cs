@@ -3,7 +3,6 @@ using System.Linq;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;
-using SmartCore.Management;
 using SmartCore.Queries;
 
 namespace SmartCore.DataAccesses.WorkPackageRecords

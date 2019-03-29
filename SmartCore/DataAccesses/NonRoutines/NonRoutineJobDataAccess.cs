@@ -1,16 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using SmartCore.DataAccesses.AttachedFiles;
 using SmartCore.DataAccesses.Kits;
 using SmartCore.Entities;
-using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;
-using SmartCore.Management;
 using SmartCore.Queries;
 
 namespace SmartCore.DataAccesses.NonRoutines

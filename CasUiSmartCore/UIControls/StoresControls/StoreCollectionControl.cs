@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Auxiliary;
 using AvControls;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.Auxiliary.Comparers;
 using CASTerms;
 using Microsoft.VisualBasic.Devices;
 using SmartCore.Entities.Collections;

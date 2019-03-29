@@ -5,7 +5,6 @@ using EFCore.DTO.General;
 using EFCore.Filter;
 using SmartCore.Aircrafts;
 using SmartCore.Calculations;
-using SmartCore.Component;
 using SmartCore.DataAccesses.ItemsRelation;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;

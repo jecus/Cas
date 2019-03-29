@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using SmartCore.DataAccesses.AttachedFiles;
 using SmartCore.Entities.General;
 using SmartCore.Files;

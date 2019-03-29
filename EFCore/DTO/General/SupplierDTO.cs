@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using EFCore.Attributte;
-using EFCore.DTO.Dictionaries;
 
 namespace EFCore.DTO.General
 {

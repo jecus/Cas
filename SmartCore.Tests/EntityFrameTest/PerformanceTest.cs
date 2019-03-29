@@ -1,19 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using EFCore.DTO;
-using EFCore.DTO.Dictionaries;
-using EFCore.DTO.General;
-using EFCore.Filter;
-using EFCore.UnitOfWork;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Atlbs;
-using SmartCore.Filters;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartCore.Management;
-using SmartCore.Queries;
 
 namespace SmartCore.Tests.EntityFrameTest
 {

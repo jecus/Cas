@@ -1,11 +1,8 @@
 ﻿using EFCore.DTO.General;
 using EFCore.Filter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.MaintenanceWorkscope;
-using SmartCore.Filters;
 using SmartCore.Management;
 using SmartCore.RegisterPerformances;
 

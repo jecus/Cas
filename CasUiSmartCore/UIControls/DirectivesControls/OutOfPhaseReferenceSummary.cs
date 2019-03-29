@@ -11,7 +11,6 @@ using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
 using Convert = SmartCore.Auxiliary.Convert;
 

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
-using SmartCore.Entities.General.Store;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls

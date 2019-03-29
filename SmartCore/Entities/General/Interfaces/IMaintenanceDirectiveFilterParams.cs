@@ -1,8 +1,6 @@
-﻿using System;
-using SmartCore.Calculations;
+﻿using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
-using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.MTOP;
 
 namespace SmartCore.Entities.General.Interfaces

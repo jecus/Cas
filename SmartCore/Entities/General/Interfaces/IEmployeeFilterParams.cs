@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 

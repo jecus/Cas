@@ -5,8 +5,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
-using CAS.UI.UIControls.AnimatedBackgroundWorker;
-using CAS.UI.UIControls.DocumentationControls;
 using CAS.UI.UIControls.ReferenceControls;
 using SmartCore.Entities.General;
 

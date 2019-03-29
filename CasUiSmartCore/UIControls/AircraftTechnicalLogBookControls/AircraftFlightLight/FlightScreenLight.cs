@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
@@ -12,7 +11,6 @@ using EFCore.DTO.General;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Atlbs;
-using SmartCore.Filters;
 
 namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls.AircraftFlightLight
 {

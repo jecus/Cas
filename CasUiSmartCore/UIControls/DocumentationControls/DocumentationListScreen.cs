@@ -13,9 +13,6 @@ using CASTerms;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Directives;
-using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Filters;
 
 namespace CAS.UI.UIControls.DocumentationControls

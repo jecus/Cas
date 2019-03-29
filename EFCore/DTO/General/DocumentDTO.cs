@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using EFCore.Attributte;
 using EFCore.DTO.Dictionaries;
-using EFCore.Interfaces;
 
 namespace EFCore.DTO.General
 {

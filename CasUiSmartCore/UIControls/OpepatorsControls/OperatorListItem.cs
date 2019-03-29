@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using AvControls.AvalonButtonM;
 using SmartCore.Entities.General;
 

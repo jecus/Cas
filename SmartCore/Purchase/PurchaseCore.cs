@@ -1,12 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Windows.Forms;
 using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
 using EFCore.Filter;
-using SmartCore.Calculations;
 using SmartCore.Calculations.Maintenance;
 using SmartCore.Calculations.PerformanceCalculator;
 using SmartCore.Entities;
@@ -18,7 +15,6 @@ using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.Store;
 using SmartCore.Entities.NewLoader;
 using SmartCore.Filters;
-using SmartCore.Management;
 using SmartCore.Packages;
 using SmartCore.Queries;
 

@@ -2,13 +2,8 @@
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Directives;
-using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.Personnel;
-using SmartCore.Entities.General.Quality;
 using SmartCore.Entities.General.Store;
-using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Purchase;
 using TempUIExtentions;
 

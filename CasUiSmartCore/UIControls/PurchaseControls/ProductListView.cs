@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
 using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.StoresControls;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 
 namespace CAS.UI.UIControls.PurchaseControls

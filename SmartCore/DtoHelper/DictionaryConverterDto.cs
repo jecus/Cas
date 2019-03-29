@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
-using EFCore.DTO;
 using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
 using SmartCore.Auxiliary;

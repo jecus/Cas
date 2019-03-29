@@ -7,7 +7,6 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.Store;
 using SmartCore.Files;
 using SmartCore.Purchase;
 

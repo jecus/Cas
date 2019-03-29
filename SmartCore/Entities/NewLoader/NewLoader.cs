@@ -20,7 +20,6 @@ using SmartCore.Entities.General.Deprecated;
 using SmartCore.Entities.General.Hangar;
 using SmartCore.Entities.General.Store;
 using SmartCore.Entities.General.WorkShop;
-using SmartCore.Filters;
 using SmartCore.Queries;
 
 namespace SmartCore.Entities.NewLoader
