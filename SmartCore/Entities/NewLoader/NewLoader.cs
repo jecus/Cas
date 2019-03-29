@@ -786,6 +786,8 @@ namespace SmartCore.Entities.NewLoader
 			if (parametres[0] is BaseEntityObject)
 			{
 				var a = (BaseEntityObject)parametres[0];
+				if (a.ItemId == -1)
+					return null;
 				return new CommonCollection<JobCard>(GetObjectListAll<JobCardDTO, JobCard>(new List<Filter>()
 				{
 					new Filter("ParentId",a.ItemId),

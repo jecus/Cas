@@ -318,8 +318,6 @@ namespace SmartCore.Entities
 
 			CasEnvironment.Keeper.Delete(deletedObject, isDeletedOnly);
 
-			_auditRepository.WriteAsync(deletedObject, AuditOperation.Deleted, _casEnvironment.CurrentUser);
-
 			if (deletedObject is AbstractDictionary)
             {
                 var col = CasEnvironment.GetDictionary(deletedObject.GetType());
