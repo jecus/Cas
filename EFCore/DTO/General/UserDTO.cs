@@ -3,6 +3,12 @@ using EFCore.Attributte;
 
 namespace EFCore.DTO.General
 {
+	public enum UsetType
+	{
+		Admin,
+		User
+	}
+
 	[DataContract(IsReference = true)]
 	[Condition("IsDeleted", 0)]
 	public class UserDTO : BaseEntity
@@ -18,6 +24,9 @@ namespace EFCore.DTO.General
 
 		[DataMember]
 		public string Password { get; set; }
+
+		[DataMember]
+		public UsetType UserType { get; set; }
 
 		public override string ToString()
 		{

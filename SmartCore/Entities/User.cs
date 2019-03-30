@@ -14,6 +14,8 @@ namespace SmartCore.Entities
 
 		public string Password { get; set; }
 
+		public UsetType UserType { get; set; }
+
 		public User(UserDTO user)
 		{
 			ItemId = user.ItemId;
@@ -22,6 +24,12 @@ namespace SmartCore.Entities
 			Surname = user.Surname;
 			Login = user.Login;
 			Password = user.Password;
+			UserType = user.UserType;
+		}
+
+		public User()
+		{
+			
 		}
 	}
 }
