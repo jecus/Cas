@@ -310,7 +310,8 @@ namespace SmartCore.DtoHelper
 				IsDangerous = productDto.IsDangerous,
 				DescRus = productDto.DescRus,
 				HTS = productDto.HTS,
-				Reference = productDto.Reference
+				Reference = productDto.Reference,
+                ProductType = productDto.ModelingObjectTypeId == -1 ? ProductType.EquipmentandMaterial: ProductType.ComponentModel
 			};
 
 			if (productDto.SupplierRelations != null)
