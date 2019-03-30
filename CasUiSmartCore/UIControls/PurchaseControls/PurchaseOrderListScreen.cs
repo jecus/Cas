@@ -569,9 +569,16 @@ namespace CAS.UI.UIControls.PurchaseControls
 
         #endregion
 
+        #region private void ButtonAddNewClick(object sender, EventArgs e)
+
+        private void ButtonAddNewClick(object sender, EventArgs e)
+        {
+
+        }
+
         #endregion
 
-
+        #endregion
 
 
 
