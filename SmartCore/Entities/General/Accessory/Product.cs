@@ -12,7 +12,12 @@ using SmartCore.Purchase;
 
 namespace SmartCore.Entities.General.Accessory
 {
+    public enum ProductType
+    {
+        ComponentModel, EquipmentandMaterial
+    }
 
+    
     /// <summary>
     /// Описание комплектующего
     /// </summary>
@@ -23,6 +28,9 @@ namespace SmartCore.Entities.General.Accessory
     [Serializable]
     public class Product : BaseEntityObject, ISupplied, IEquatable<Product>, IFileContainer, IAllProductsFilterParams
     {
+
+        public ProductType ProductType { get; set; } 
+
         private static Type _thisType;
 
         #region public GoodsClass GoodsClass { get; set; }

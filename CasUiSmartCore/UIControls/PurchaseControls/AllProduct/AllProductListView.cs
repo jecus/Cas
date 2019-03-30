@@ -13,6 +13,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		public AllProductListView()
         {
+            SortMultiplier = 1;
             IgnoreAutoResize = true;
 			InitializeComponent();
 		}
@@ -104,5 +105,19 @@ namespace CAS.UI.UIControls.PurchaseControls
             
             return subItems.ToArray();
         }
+
+        protected override void SetGroupsToItems(int columnIndex)
+        {
+            itemsListView.Groups.Clear();
+            foreach (var item in ListViewItemList)
+            {
+                var product = item.Tag as Product;
+                var temp = product.ProductType.ToString();
+
+                itemsListView.Groups.Add(temp, temp);
+                item.Group = itemsListView.Groups[temp];
+            }
+        }
+        
     }
 }
