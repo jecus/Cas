@@ -137,9 +137,9 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			// panel1
 			// 
 #if DEMO
+			this.panel1.Controls.Add(this.flowLayoutPanelExport);
             this.panel1.Controls.Add(this.flowLayoutPanelStores);
             this.panel1.Controls.Add(this.flowLayoutPanelReferences);
-			this.panel1.Controls.Add(this.flowLayoutPanelExport);
 #else
 			this.panel1.Controls.Add(this.flowLayoutPanelExport);
             this.panel1.Controls.Add(this.flowLayoutPanelStores);
@@ -189,7 +189,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.flowLayoutPanelExport.AutoScroll = true;
 			this.flowLayoutPanelExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
 #if DEMO
-			this.flowLayoutPanelExport.Controls.Add(this._exportContainer);
+			this.flowLayoutPanelExport.Controls.Add(this._adminContainer);
 #else
 			this.flowLayoutPanelExport.Controls.Add(this._exportContainer);
 			this.flowLayoutPanelExport.Controls.Add(this._adminContainer);
