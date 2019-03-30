@@ -662,6 +662,7 @@
     <Compile Include="Entities\General\FlightCrewRecord.cs" />
     <Compile Include="Entities\General\Hangar\Hangar.cs" />
     <Compile Include="Entities\General\Interfaces\AbstractAccessory.cs" />
+    <Compile Include="Entities\General\Interfaces\AllProductsFilterParams.cs" />
     <Compile Include="Entities\General\Interfaces\EmployeeWorkPackageFilterParams.cs" />
     <Compile Include="Entities\General\Interfaces\IEmployeeFilterParams.cs" />
     <Compile Include="Entities\General\Interfaces\IEmployeeFlightFilterParams.cs" />

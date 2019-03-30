@@ -1148,6 +1148,18 @@
     <Compile Include="UIControls\PowerPlants\PowerPlantListView.Designer.cs">
       <DependentUpon>PowerPlantListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\PurchaseControls\AllProduct\AllProductListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\AllProduct\AllProductListScreen.Designer.cs">
+      <DependentUpon>AllProductListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\AllProduct\AllProductListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\AllProduct\AllProductListView.Designer.cs">
+      <DependentUpon>AllProductListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\PurchaseControls\GoodStandardForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3840,6 +3852,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PowerPlants\PowerPlantListScreen.resx">
       <DependentUpon>PowerPlantListScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\PurchaseControls\AllProduct\AllProductListScreen.resx">
+      <DependentUpon>AllProductListScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PurchaseControls\GoodStandardForm.resx">
       <DependentUpon>GoodStandardForm.cs</DependentUpon>

@@ -261,9 +261,15 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			e.RequestedEntity = new CommonListScreen(typeof(ComponentModel));
 		}
 
-		#region private void LinkInitialOrderDisplayerRequested(object sender, ReferenceEventArgs e)
+        private void LinkAllProductsDisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+            e.DisplayerText = "Products";
+            e.RequestedEntity = new AllProductListScreen(CurrentOperator);
+        }
 
-		private void LinkInitialOrderDisplayerRequested(object sender, ReferenceEventArgs e)
+        #region private void LinkInitialOrderDisplayerRequested(object sender, ReferenceEventArgs e)
+
+        private void LinkInitialOrderDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = CurrentOperator.Name + " Initial Orders";
             e.RequestedEntity = new InitialOrderListScreen(_currentOperator);
@@ -594,6 +600,8 @@ namespace CAS.UI.UIControls.OpepatorsControls
 
 
         }
+
+        
     }
 }
 

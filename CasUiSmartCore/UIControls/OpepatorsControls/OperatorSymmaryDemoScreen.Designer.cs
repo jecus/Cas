@@ -111,6 +111,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this._productsReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
 			this.LinkComponentModels = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkProducts = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+			this.LinkAllProducts = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this._stores = new CAS.UI.UIControls.StoresControls.StoreCollectionControl();
 			this._workShops = new CAS.UI.UIControls.StoresControls.WorkShopCollectionControl();
 			this._exportContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
@@ -1914,7 +1915,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this._productsReferenceContainer.Name = "_productsReferenceContainer";
 			this._productsReferenceContainer.ReferenceLink = this.LinkComponentModels;
 			this._productsReferenceContainer.ReferenceLink02 = this.LinkProducts;
-			this._productsReferenceContainer.ReferenceLink03 = null;
+			this._productsReferenceContainer.ReferenceLink03 = this.LinkAllProducts;
 			this._productsReferenceContainer.ReferenceLink04 = null;
 			this._productsReferenceContainer.ReferenceLink05 = null;
 			this._productsReferenceContainer.ReferenceLink06 = null;
@@ -1984,6 +1985,31 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.LinkProducts.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkProducts.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.LinkProducts.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkProductsDisplayerRequested);
+            // 
+            // LinkProducts
+            // 
+            this.LinkAllProducts.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkAllProducts.Displayer = null;
+            this.LinkAllProducts.DisplayerText = null;
+            this.LinkAllProducts.Entity = null;
+            this.LinkAllProducts.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.LinkAllProducts.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkAllProducts.ImageBackColor = System.Drawing.Color.Transparent;
+            this.LinkAllProducts.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.LinkAllProducts.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkAllProducts.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+            this.LinkAllProducts.Location = new System.Drawing.Point(270, 0);
+            this.LinkAllProducts.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.LinkAllProducts.MaximumSize = new System.Drawing.Size(250, 20);
+            this.LinkAllProducts.Name = "LinkAllProducts";
+            this.LinkAllProducts.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+            this.LinkAllProducts.Size = new System.Drawing.Size(250, 20);
+            this.LinkAllProducts.Status = AvControls.Statuses.Satisfactory;
+            this.LinkAllProducts.TabIndex = 50;
+            this.LinkAllProducts.Text = "Products";
+            this.LinkAllProducts.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.LinkAllProducts.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+            this.LinkAllProducts.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkAllProductsDisplayerRequested);
             // 
             // _purchaseReferenceContainer
             // 
@@ -2273,6 +2299,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkWarranty;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkComponentModels;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkProducts;
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkAllProducts;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkInitialOrders;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkPurchaseOrders;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkQuotationOrders;

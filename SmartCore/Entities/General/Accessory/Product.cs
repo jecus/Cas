@@ -21,8 +21,8 @@ namespace SmartCore.Entities.General.Accessory
     [Condition("IsDeleted", "0")]
     [Condition("ModelingObjectTypeId", "-1")]
     [Serializable]
-    public class Product : BaseEntityObject, ISupplied, IEquatable<Product>, IFileContainer
-	{
+    public class Product : BaseEntityObject, ISupplied, IEquatable<Product>, IFileContainer, IAllProductsFilterParams
+    {
         private static Type _thisType;
 
         #region public GoodsClass GoodsClass { get; set; }
