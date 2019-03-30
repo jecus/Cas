@@ -133,14 +133,15 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.headerControl.Size = new System.Drawing.Size(711, 58);
 			this.headerControl.ReloadButtonClick += new System.EventHandler(this.HeaderControl1ReloadRised);
 			this.headerControl.Controls.SetChildIndex(this.aircraftHeaderControl1, 0);
-            // 
-            // panel1
-            // 
+			// 
+			// panel1
+			// 
 #if DEMO
             this.panel1.Controls.Add(this.flowLayoutPanelStores);
             this.panel1.Controls.Add(this.flowLayoutPanelReferences);
+			this.panel1.Controls.Add(this.flowLayoutPanelExport);
 #else
-            this.panel1.Controls.Add(this.flowLayoutPanelExport);
+			this.panel1.Controls.Add(this.flowLayoutPanelExport);
             this.panel1.Controls.Add(this.flowLayoutPanelStores);
             this.panel1.Controls.Add(this.flowLayoutPanelAircrafts);
             this.panel1.Controls.Add(this.flowLayoutPanelReferences);
@@ -187,8 +188,12 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			// 
 			this.flowLayoutPanelExport.AutoScroll = true;
 			this.flowLayoutPanelExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+#if DEMO
+			this.flowLayoutPanelExport.Controls.Add(this._exportContainer);
+#else
 			this.flowLayoutPanelExport.Controls.Add(this._exportContainer);
 			this.flowLayoutPanelExport.Controls.Add(this._adminContainer);
+#endif
 			this.flowLayoutPanelExport.Dock = System.Windows.Forms.DockStyle.Left;
 			this.flowLayoutPanelExport.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
 			this.flowLayoutPanelExport.Location = new System.Drawing.Point(0, 0);
