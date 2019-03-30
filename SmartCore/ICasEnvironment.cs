@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using EFCore.Contract;
 using EFCore.DTO.General;
 using EFCore.UnitOfWork;
 using Microsoft.SqlServer.Management.Smo;
@@ -57,8 +58,7 @@ namespace SmartCore
 
 		void Connect(String serverName, String userName, String pass, String database);
 
-		UserDTO GetUser(string login, string password);
-
+		ILoginService GetSeviceUser();
 		void UpdateUser(string password);
 
 		void CheckTablesFor(Type type);

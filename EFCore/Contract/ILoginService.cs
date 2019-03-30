@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System.Collections.Generic;
+using System.ServiceModel;
 using EFCore.DTO.General;
 
 namespace EFCore.Contract
@@ -14,5 +15,8 @@ namespace EFCore.Contract
 
 		[OperationContract]
 		void CreateUser(IIdentityUser user);
+
+		[OperationContract]
+		List<IIdentityUser> GetAllList();
 	}
 }

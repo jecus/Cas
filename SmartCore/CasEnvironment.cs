@@ -192,25 +192,28 @@ namespace SmartCore
 		}
 		#endregion
 
-		public UserDTO GetUser(string login, string password)
-	    {
-		    var binding = new BasicHttpBinding();
-		    var endPoint = new EndpointAddress($"http://{_ipServer}/LoginService/LoginService.svc");
-		    var channelFactoryFoo = new ChannelFactory<ILoginService>(binding, endPoint);
-		    return channelFactoryFoo.CreateChannel().GetUser(login, password);
-	    }
 
-		public void UpdateUser(string password)
+		public ILoginService GetSeviceUser()
 		{
 			var binding = new BasicHttpBinding();
 			var endPoint = new EndpointAddress($"http://{_ipServer}/LoginService/LoginService.svc");
 			var channelFactoryFoo = new ChannelFactory<ILoginService>(binding, endPoint);
-			channelFactoryFoo.CreateChannel().UpdatePassword(IdentityUser.ItemId, password);
+			return channelFactoryFoo.CreateChannel();
+		}
+
+		private UserDTO GetUser(string login, string password)
+	    {
+		    return GetSeviceUser().GetUser(login, password);
+	    }
+
+		public void UpdateUser(string password)
+		{
+			GetSeviceUser().UpdatePassword(IdentityUser.ItemId, password);
 		}
 
 		#region public Connection GetWcfConnection()
 
-		public Connection GetWcfConnection()
+		private Connection GetWcfConnection()
 		{
 			try
 			{

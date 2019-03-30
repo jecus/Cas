@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using EFCore.DTO;
 using EFCore.DTO.General;
 
@@ -31,6 +32,13 @@ namespace EFCore.Contract
 			var dbset = context.Set<UserDTO>();
 			dbset.Add((UserDTO) user);
 			context.SaveChanges();
+		}
+
+		public List<IIdentityUser> GetAllList()
+		{
+			var connection = Helper.Helper.GetConnectionString();
+			var context = new DataContext(connection);
+			return new List<IIdentityUser>(context.Set<UserDTO>().ToList());
 		}
 	}
 }
