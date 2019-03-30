@@ -44,7 +44,7 @@ namespace SmartCore.Entities
 
 			method.Invoke(this, new object[] { value, saveAttachedFile });
 
-			_auditRepository.WriteAsync(value, type ,_casEnvironment.CurrentUser);
+			_auditRepository.WriteAsync(value, type ,_casEnvironment.IdentityUser);
 		}
 
 		public void SaveGeneric<T, TOut>(T value, bool saveAttachedFile = true) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
@@ -82,7 +82,7 @@ namespace SmartCore.Entities
 
 			method.Invoke(this, new object[] { value, isDeletedOnly, saveAttachedFile });
 
-			_auditRepository.WriteAsync(value, AuditOperation.Deleted, _casEnvironment.CurrentUser);
+			_auditRepository.WriteAsync(value, AuditOperation.Deleted, _casEnvironment.IdentityUser);
 
 		}
 

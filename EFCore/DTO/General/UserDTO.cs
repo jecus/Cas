@@ -1,5 +1,7 @@
 ﻿using System.Runtime.Serialization;
+using System.Security.Principal;
 using EFCore.Attributte;
+using EFCore.Interfaces;
 
 namespace EFCore.DTO.General
 {
@@ -11,7 +13,7 @@ namespace EFCore.DTO.General
 
 	[DataContract(IsReference = true)]
 	[Condition("IsDeleted", 0)]
-	public class UserDTO : BaseEntity
+	public class UserDTO : BaseEntity, IIdentityUser
 	{
 		[DataMember]
 		public string Name { get; set; }
@@ -32,5 +34,15 @@ namespace EFCore.DTO.General
 		{
 			return Name.Equals(Surname) ? Name : $"{Surname} {Name}";
 		}
+	}
+
+	public interface IIdentityUser : IBaseEntity
+	{
+		string Name { get; set; }
+		string Surname { get; set; }
+		string Login { get; set; }
+		string Password { get; set; }
+		UsetType UserType { get; set; }
+
 	}
 }

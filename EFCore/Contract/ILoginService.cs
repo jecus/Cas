@@ -11,5 +11,8 @@ namespace EFCore.Contract
 
 		[OperationContract]
 		void UpdatePassword(int id, string password);
+
+		[OperationContract]
+		void CreateUser(IIdentityUser user);
 	}
 }

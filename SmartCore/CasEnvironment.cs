@@ -116,10 +116,14 @@ namespace SmartCore
         /// Управление базой данных
         /// </summary>
         public DatabaseManager DatabaseManager { get { return _databaseManager ?? (_databaseManager = new DatabaseManager()); } }
-        #endregion
+		#endregion
 
+
+		#region public IAuditRepository AuditRepository { get; set; }
 
 		public IAuditRepository AuditRepository { get; set; }
+
+        #endregion
 
         #region public void Disconnect()
 
@@ -176,7 +180,7 @@ namespace SmartCore
 	        if(user == null)
 		        throw new Exception($"Invalid combination of login and password");
 
-	        CurrentUser = user;
+	        IdentityUser = user;
 
 	        AuditRepository.WriteAsync(new Entities.User(user), AuditOperation.SignIn, user);
 
@@ -201,23 +205,27 @@ namespace SmartCore
 			var binding = new BasicHttpBinding();
 			var endPoint = new EndpointAddress($"http://{_ipServer}/LoginService/LoginService.svc");
 			var channelFactoryFoo = new ChannelFactory<ILoginService>(binding, endPoint);
-			channelFactoryFoo.CreateChannel().UpdatePassword(CurrentUser.ItemId, password);
+			channelFactoryFoo.CreateChannel().UpdatePassword(IdentityUser.ItemId, password);
 		}
 
+		#region public Connection GetWcfConnection()
+
 		public Connection GetWcfConnection()
-	    {
-		    try
-		    {
-			    var binding = new BasicHttpBinding();
-			    var endPoint = new EndpointAddress($"http://{_ipServer}/ConnectionSevice/ConnectionService.svc");
-			    var channelFactoryFoo = new ChannelFactory<IConnectionService>(binding, endPoint);
-			    return channelFactoryFoo.CreateChannel().GetConnection();
-		    }
-		    catch
-		    {
+		{
+			try
+			{
+				var binding = new BasicHttpBinding();
+				var endPoint = new EndpointAddress($"http://{_ipServer}/ConnectionSevice/ConnectionService.svc");
+				var channelFactoryFoo = new ChannelFactory<IConnectionService>(binding, endPoint);
+				return channelFactoryFoo.CreateChannel().GetConnection();
+			}
+			catch
+			{
 				throw new Exception($"WCF was not found on server");
 			}
-	    }
+		}
+
+		#endregion
 
         #region public void CheckTablesFor(Type type)
         public void CheckTablesFor(Type type)
@@ -635,17 +643,17 @@ namespace SmartCore
                 return _reasons;
             }
         }
-        #endregion
+		#endregion
 
-        #region public CasUser CurrentUser { get; }
-        /// <summary>
-        /// Пользователь, подключенный к базе данных
-        /// </summary>
-        private UserDTO _currentUser;
+		#region public IIdentityUser IdentityUser { get; }
+		/// <summary>
+		/// Пользователь, подключенный к базе данных
+		/// </summary>
+		private IIdentityUser _currentUser;
         /// <summary>
         /// Возвращает пользователя, подключенного к базе данных
         /// </summary>
-        public UserDTO CurrentUser
+        public IIdentityUser IdentityUser
         {
             get
             {

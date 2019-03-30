@@ -171,7 +171,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 	        _animatedThreadWorker.RunWorkerAsync();
 
 			textBoxTitle.Text = parent + "-IO-" + DateTime.Now;
-            textBoxAuthor.Text = GlobalObjects.CasEnvironment.CurrentUser.ToString();
+            textBoxAuthor.Text = GlobalObjects.CasEnvironment.IdentityUser.ToString();
 
         }
 		#endregion

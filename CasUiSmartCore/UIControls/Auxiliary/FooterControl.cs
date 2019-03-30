@@ -37,7 +37,7 @@ namespace CAS.UI.UIControls.Auxiliary
             Dock = DockStyle.Bottom;
             try
             {
-                var currentUser = GlobalObjects.CasEnvironment.CurrentUser;
+                var currentUser = GlobalObjects.CasEnvironment.IdentityUser;
                 if (currentUser != null)
                 {
                     _userName = currentUser.ToString();
@@ -78,7 +78,7 @@ namespace CAS.UI.UIControls.Auxiliary
             if (ControlRequest != null)
                 ControlRequest(this, new ApplicationControlRequestArgs(ControlType.LogOut));
 
-            GlobalObjects.AuditRepository.WriteAsync(new SmartCore.Entities.User(GlobalObjects.CasEnvironment.CurrentUser), AuditOperation.SignOut, GlobalObjects.CasEnvironment.CurrentUser);
+            GlobalObjects.AuditRepository.WriteAsync(new SmartCore.Entities.User(GlobalObjects.CasEnvironment.IdentityUser), AuditOperation.SignOut, GlobalObjects.CasEnvironment.IdentityUser);
 		}
         #endregion
 

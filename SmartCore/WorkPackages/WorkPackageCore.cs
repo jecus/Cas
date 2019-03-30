@@ -981,7 +981,7 @@ namespace SmartCore.WorkPackages
 			{
 				wp.Status = WorkPackageStatus.Published;
 				wp.PublishingDate = date;
-				wp.PublishedBy = _casEnvironment.CurrentUser.Login;
+				wp.PublishedBy = _casEnvironment.IdentityUser.Login;
 				wp.Remarks = remarks;
 			}
 			else
@@ -1063,7 +1063,7 @@ namespace SmartCore.WorkPackages
 
 				wp.Status = WorkPackageStatus.Published;
 				wp.PublishingDate = date;
-				wp.PublishedBy = _casEnvironment.CurrentUser.Login;
+				wp.PublishedBy = _casEnvironment.IdentityUser.Login;
 				wp.ClosedBy = "";
 			}
 
@@ -1376,7 +1376,7 @@ namespace SmartCore.WorkPackages
 			{
 				Description = "",
 				Status = WorkPackageStatus.Opened,
-				Author = _casEnvironment.CurrentUser.Login,
+				Author = _casEnvironment.IdentityUser.Login,
 				CreateDate = DateTime.Now,
 				OpeningDate = DateTime.Today,
 				PublishingDate = DateTimeExtend.GetCASMinDateTime(),
@@ -1603,7 +1603,7 @@ namespace SmartCore.WorkPackages
 			{
 				Description = nonRoutine.First().Title,
 				Status = WorkPackageStatus.Opened,
-				Author = _casEnvironment.CurrentUser.Login,
+				Author = _casEnvironment.IdentityUser.Login,
 				CreateDate = DateTime.Now,
 				OpeningDate = DateTime.Today,
 				PublishingDate = DateTimeExtend.GetCASMinDateTime(),

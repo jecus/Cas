@@ -1085,7 +1085,7 @@ namespace CAS.UI.UIControls.DirectivesControls
             }
 
             textBoxKitRequired.Text = _currentDirective.Kits.Count + " kits";
-            bool permission = true;//currentDirective.HasPermission(Users.CurrentUser, DataEvent.Update);
+            bool permission = true;//currentDirective.HasPermission(Users.IdentityUser, DataEvent.Update);
 
             textBoxKitRequired.ReadOnly = !permission;
         }

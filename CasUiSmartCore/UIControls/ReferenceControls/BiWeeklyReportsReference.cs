@@ -46,7 +46,7 @@ namespace CAS.UI.UIControls.ReferenceControls
             showAllReference.Text = "Show all BiWeeklies";
             showAllReference.VisitedLinkColor = Color.FromArgb(62, 155, 246);
             showAllReference.DisplayerRequested += showAllReference_DisplayerRequested;
-            //if (!HasPermision(Users.CurrentUser.Role)) showAllReference.Enabled = false;
+            //if (!HasPermision(Users.IdentityUser.Role)) showAllReference.Enabled = false;
             //
             // mainPanel
             //

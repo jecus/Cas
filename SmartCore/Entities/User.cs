@@ -16,7 +16,7 @@ namespace SmartCore.Entities
 
 		public UsetType UserType { get; set; }
 
-		public User(UserDTO user)
+		public User(IIdentityUser user)
 		{
 			ItemId = user.ItemId;
 			SmartCoreObjectType = SmartCoreType.User;

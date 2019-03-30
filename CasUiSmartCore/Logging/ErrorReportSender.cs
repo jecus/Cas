@@ -127,7 +127,7 @@ namespace CAS.UI.Logging
             try
             {
                 builder.AppendFormat(
-                    "User Name : {0}", GlobalObjects.CasEnvironment.CurrentUser.Login);
+                    "User Name : {0}", GlobalObjects.CasEnvironment.IdentityUser.Login);
                 builder.AppendLine();
             }
             catch (Exception)

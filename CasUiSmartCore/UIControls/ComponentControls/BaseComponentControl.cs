@@ -370,9 +370,9 @@ namespace CAS.UI.UIControls.ComponentControls
             //
             Controls.Add(splitContainer);
             Size = defaultSize;
-            registerToolStripMenuItem.Enabled =true; //DirectiveCollection.HasAccess(Users.CurrentUser.Role, DataEvent.Create);
-            addComponentToolStripMenuItem1.Enabled =true; //DetailCollection.HasAccess(Users.CurrentUser.Role, DataEvent.Create);
-            deleteToolStripMenuItem.Enabled =true; //BaseDetailCollection.HasAccess(Users.CurrentUser.Role, DataEvent.Remove);
+            registerToolStripMenuItem.Enabled =true; //DirectiveCollection.HasAccess(Users.IdentityUser.Role, DataEvent.Create);
+            addComponentToolStripMenuItem1.Enabled =true; //DetailCollection.HasAccess(Users.IdentityUser.Role, DataEvent.Create);
+            deleteToolStripMenuItem.Enabled =true; //BaseDetailCollection.HasAccess(Users.IdentityUser.Role, DataEvent.Remove);
             // 
             // BaseDetailControl
             // 

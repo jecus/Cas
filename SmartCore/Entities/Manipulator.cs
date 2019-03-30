@@ -120,7 +120,7 @@ namespace SmartCore.Entities
 	            type = AuditOperation.Changed;
 
 			CasEnvironment.Keeper.Save(saveObject);
-			_auditRepository.WriteAsync(saveObject, type, _casEnvironment.CurrentUser);
+			_auditRepository.WriteAsync(saveObject, type, _casEnvironment.IdentityUser);
 
 			if (saveObject is AbstractDictionary)
             {
@@ -173,7 +173,7 @@ namespace SmartCore.Entities
 	            type = AuditOperation.Changed;
 
 			CasEnvironment.Keeper.SaveAll(saveObject, saveChild, saveForced);
-			_auditRepository.WriteAsync(saveObject, type, _casEnvironment.CurrentUser);
+			_auditRepository.WriteAsync(saveObject, type, _casEnvironment.IdentityUser);
 
 			if (saveObject is AbstractDictionary)
             {
@@ -226,7 +226,7 @@ namespace SmartCore.Entities
 	            type = AuditOperation.Changed;
             
 			_casEnvironment.Keeper.Save(performance, saveAttachedFile);
-			_auditRepository.WriteAsync(performance, type, _casEnvironment.CurrentUser);
+			_auditRepository.WriteAsync(performance, type, _casEnvironment.IdentityUser);
 
 			if (performance.Parent.PerformanceRecords.GetItemById(performance.ItemId) == null)
                 performance.Parent.PerformanceRecords.Add(performance);

@@ -23,5 +23,14 @@ namespace EFCore.Contract
 			user.Password = password;
 			context.SaveChanges();
 		}
+
+		public void CreateUser(IIdentityUser user)
+		{
+			var connection = Helper.Helper.GetConnectionString();
+			var context = new DataContext(connection);
+			var dbset = context.Set<UserDTO>();
+			dbset.Add((UserDTO) user);
+			context.SaveChanges();
+		}
 	}
 }

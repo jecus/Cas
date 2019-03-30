@@ -321,7 +321,7 @@ namespace CAS.UI
                 _mainDispatcher.DefaultProxy.Remove(displayer, false);
             }
 
-            var user = GlobalObjects.CasEnvironment.CurrentUser;
+            var user = GlobalObjects.CasEnvironment.IdentityUser;
 			if(user.ItemId > 0)
 				GlobalObjects.AuditRepository.WriteAsync(new SmartCore.Entities.User(user), AuditOperation.SignOut, user);
         }

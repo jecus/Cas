@@ -16,7 +16,7 @@ namespace SmartCore.AuditMongo.Repository
 
 		#region Implementation of IAuditRepository
 
-		public void WriteAsync<TEntity>(TEntity target, AuditOperation operation, UserDTO user, Dictionary<string, object> parameters = null) where TEntity : class, IBaseEntityObject
+		public void WriteAsync<TEntity>(TEntity target, AuditOperation operation, IIdentityUser user, Dictionary<string, object> parameters = null) where TEntity : class, IBaseEntityObject
 		{
 			//var objectName = typeof(TEntity).Name;
 

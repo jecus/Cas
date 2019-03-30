@@ -35,7 +35,7 @@ namespace SmartCore
 		BaseComponentCollection BaseComponents { get; }
 		Dictionary<string, ICommonCollection> TempCollections { get; }
 		ReasonCollection Reasons { get; }
-		UserDTO CurrentUser { get; }
+		IIdentityUser IdentityUser { get; }
 		ILoader Loader { get; }
 		INewLoader NewLoader { get; }
 		INewKeeper NewKeeper { get; }

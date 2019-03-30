@@ -138,7 +138,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             buttonAddOperator.Location = new Point(operatorCollectionControl.Left, operatorCollectionControl.Bottom);
             buttonAddOperator.TextMain = "Add Operator";
             buttonAddOperator.DisplayerRequested += buttonAddOperator_DisplayerRequested;
-           // if (Users.CurrentUser.Role != UserRole.Administrator) buttonAddOperator.Visible = false;
+           // if (Users.IdentityUser.Role != UserRole.Administrator) buttonAddOperator.Visible = false;
             //
             // OperatorsCollectionScreen
             //
@@ -149,7 +149,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
             mainPanel.Controls.Add(operatorCollectionControl);
             mainPanel.Controls.Add(buttonAddOperator);
             mainPanel.Controls.Add(flowLayoutPanelRight);
-            buttonAddOperator.Enabled = true;//(OperatorCollection.Instance.HasPermission(Users.CurrentUser, DataEvent.Update));
+            buttonAddOperator.Enabled = true;//(OperatorCollection.Instance.HasPermission(Users.IdentityUser, DataEvent.Update));
             UpdateInformation();
         }
 

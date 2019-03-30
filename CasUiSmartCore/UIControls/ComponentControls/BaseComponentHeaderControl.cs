@@ -181,7 +181,7 @@ namespace CAS.UI.UIControls.ComponentControls
                 statusLinkLabel.Status = (Statuses)currentDetail.ConditionState;*/
             statusLinkLabel.Text = "Status: " + EnumHelper.EnumToString(statusLinkLabel.Status);
             checkBoxServiceable.Checked = _currentComponent.Serviceable;
-            checkBoxServiceable.Enabled = true; //currentDetail.HasPermission(Users.CurrentUser, DataEvent.Update);
+            checkBoxServiceable.Enabled = true; //currentDetail.HasPermission(Users.IdentityUser, DataEvent.Update);
             if (_currentComponent is BaseComponent)
                 _contentPanel.UpdateInformation();
         }

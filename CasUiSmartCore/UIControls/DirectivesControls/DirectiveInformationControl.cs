@@ -397,7 +397,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			Subject = _directive.Description;
             Remarks = _directive.Remarks;
             HiddenRemarks = _directive.HiddenRemarks;
-            bool permission = true; //currentDirective.HasPermission(Users.CurrentUser, DataEvent.Update);
+            bool permission = true; //currentDirective.HasPermission(Users.IdentityUser, DataEvent.Update);
 
             fileControlADNo.UpdateInfo(_directive.ADNoFile,
                             "Adobe PDF Files|*.pdf",

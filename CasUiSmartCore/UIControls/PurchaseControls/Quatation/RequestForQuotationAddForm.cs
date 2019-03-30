@@ -104,7 +104,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 	        _animatedThreadWorker.RunWorkerAsync();
 
 			textBoxTitle.Text = parent + "-QO-" + DateTime.Now;
-            textBoxAuthor.Text = GlobalObjects.CasEnvironment.CurrentUser.Login;
+            textBoxAuthor.Text = GlobalObjects.CasEnvironment.IdentityUser.Login;
         }
 		#endregion
 

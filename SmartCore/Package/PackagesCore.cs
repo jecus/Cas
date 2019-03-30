@@ -335,7 +335,7 @@ namespace SmartCore.Packages
             {
                 wp.Status = WorkPackageStatus.Published;
                 wp.PublishingDate = date;
-                wp.PublishedBy = _casEnvironment.CurrentUser.Login;
+                wp.PublishedBy = _casEnvironment.IdentityUser.Login;
                 wp.Remarks = remarks;
             }
             else
@@ -354,7 +354,7 @@ namespace SmartCore.Packages
 
                 wp.Status = WorkPackageStatus.Published;
                 wp.PublishingDate = date;
-                wp.PublishedBy = _casEnvironment.CurrentUser.Login;
+                wp.PublishedBy = _casEnvironment.IdentityUser.Login;
                 wp.ClosedBy = "";
             }
 
@@ -559,14 +559,14 @@ namespace SmartCore.Packages
             {
                 wp.Status = WorkPackageStatus.Published;
                 wp.PublishingDate = date;
-                //wp.PublishedBy = _casEnvironment.CurrentUser.Login;
+                //wp.PublishedBy = _casEnvironment.IdentityUser.Login;
                 wp.Remarks = remarks;
             }
             else
             {
                 wp.Status = WorkPackageStatus.Published;
                 wp.PublishingDate = date;
-                //wp.PublishedBy = _casEnvironment.CurrentUser.Login;
+                //wp.PublishedBy = _casEnvironment.IdentityUser.Login;
                 //wp.ClosedBy = "";
             }
 

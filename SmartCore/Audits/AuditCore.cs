@@ -519,7 +519,7 @@ namespace SmartCore.Audits
 			{
 				Description = "",
 				Status = WorkPackageStatus.Opened,
-				Author = _casEnvironment.CurrentUser.Login,
+				Author = _casEnvironment.IdentityUser.Login,
 				CreateDate = DateTime.Now,
 				OpeningDate = DateTime.Today,
 				PublishingDate = DateTimeExtend.GetCASMinDateTime(),
@@ -1215,7 +1215,7 @@ namespace SmartCore.Audits
 			{
 				wp.Status = WorkPackageStatus.Published;
 				wp.PublishingDate = date;
-				wp.PublishedBy = _casEnvironment.CurrentUser.Login;
+				wp.PublishedBy = _casEnvironment.IdentityUser.Login;
 				wp.Remarks = remarks;
 			}
 			else
@@ -1234,7 +1234,7 @@ namespace SmartCore.Audits
 
 				wp.Status = WorkPackageStatus.Published;
 				wp.PublishingDate = date;
-				wp.PublishedBy = _casEnvironment.CurrentUser.Login;
+				wp.PublishedBy = _casEnvironment.IdentityUser.Login;
 				wp.ClosedBy = "";
 			}
 
