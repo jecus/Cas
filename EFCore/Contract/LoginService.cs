@@ -2,6 +2,7 @@
 using System.Linq;
 using EFCore.DTO;
 using EFCore.DTO.General;
+using SmartCore.Entities;
 
 namespace EFCore.Contract
 {
@@ -11,16 +12,14 @@ namespace EFCore.Contract
 		{
 			var connection = Helper.Helper.GetConnectionString();
 			var context = new DataContext(connection);
-			var dbset = context.Set<UserDTO>();
-			return dbset.FirstOrDefault(i => i.Login.Equals(login) && i.Password.Equals(password));
+			return context.UserDtos.FirstOrDefault(i => i.Login.Equals(login) && i.Password.Equals(password));
 		}
 
 		public void UpdatePassword(int id, string password)
 		{
 			var connection = Helper.Helper.GetConnectionString();
 			var context = new DataContext(connection);
-			var dbset = context.Set<UserDTO>();
-			var user = dbset.FirstOrDefault(i => i.ItemId == id);
+			var user = context.UserDtos.FirstOrDefault(i => i.ItemId == id);
 			user.Password = password;
 			context.SaveChanges();
 		}
@@ -29,16 +28,59 @@ namespace EFCore.Contract
 		{
 			var connection = Helper.Helper.GetConnectionString();
 			var context = new DataContext(connection);
-			var dbset = context.Set<UserDTO>();
-			dbset.Add((UserDTO) user);
+			context.UserDtos.Add((UserDTO) user);
 			context.SaveChanges();
 		}
 
-		public List<IIdentityUser> GetAllList()
+		public List<UserDTO> GetAllList()
 		{
 			var connection = Helper.Helper.GetConnectionString();
 			var context = new DataContext(connection);
-			return new List<IIdentityUser>(context.Set<UserDTO>().ToList());
+			return context.UserDtos.Where(i => !i.IsDeleted).ToList();
 		}
+
+		public void DeleteUser(int id)
+		{
+			var connection = Helper.Helper.GetConnectionString();
+			var context = new DataContext(connection);
+			var user = context.UserDtos.FirstOrDefault(i => i.ItemId == id);
+			if (user != null)
+			{
+				user.IsDeleted = true;
+				context.SaveChanges();
+			}
+		}
+
+		public void AddOrUpdateUser(User user)
+		{
+			var connection = Helper.Helper.GetConnectionString();
+			var context = new DataContext(connection);
+
+			if (user.ItemId > 0)
+			{
+				var updateUser = context.UserDtos.FirstOrDefault(i => i.ItemId == user.ItemId);
+				updateUser.Login = user.Login;
+				updateUser.Password = user.Password;
+				updateUser.Name = user.Name;
+				updateUser.Password = user.Password;
+				updateUser.UserType = user.UserType;
+			}
+			else
+			{
+				var newUser = new UserDTO();
+				newUser.Login = user.Login;
+				newUser.Password = user.Password;
+				newUser.Name = user.Name;
+				newUser.Password = user.Password;
+				newUser.UserType = user.UserType;
+
+				context.UserDtos.Add(newUser);
+
+			}
+
+			context.SaveChanges();
+
+		}
+
 	}
 }

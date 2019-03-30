@@ -26,6 +26,7 @@ using CAS.UI.UIControls.ScheduleControls;
 using CAS.UI.UIControls.ScheduleControls.AircraftStatus;
 using CAS.UI.UIControls.ScheduleControls.PlanOPS;
 using CAS.UI.UIControls.SupplierControls;
+using CAS.UI.UIControls.Users;
 using CAS.UI.UIControls.WorkPakage;
 using CASReports.Builders;
 using CASTerms;
@@ -533,15 +534,23 @@ namespace CAS.UI.UIControls.OpepatorsControls
 
 		#endregion
 
-	    private void ExportMonthly_Click(object sender, System.EventArgs e)
-	    {
+		private void Users_Click(object sender, ReferenceEventArgs e)
+		{
+			e.DisplayerText = "Users";
+			e.RequestedEntity = new UserListScreen(GlobalObjects.CasEnvironment.Operators[0]);
+		}
+
+		#region Export
+
+		private void ExportMonthly_Click(object sender, EventArgs e)
+		{
 			_worker = new AnimatedThreadWorker();
 			_worker.DoWork += Worker_DoWork;
 			_worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
 			_worker.RunWorkerAsync();
-	    }
+		}
 
-		private void Worker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+		private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
 			var sfd = new SaveFileDialog();
 			sfd.Filter = ".xlsx Files (*.xlsx)|*.xlsx";
@@ -555,7 +564,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			_exportProvider.Dispose();
 		}
 
-		private void Worker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+		private void Worker_DoWork(object sender, DoWorkEventArgs e)
 		{
 			var t = new TimeSpan();
 			for (int i = 0; i < 5; i++)
@@ -575,25 +584,29 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			_exportProvider.ExportFlights();
 		}
 
-        private void ExportATLB_Click(object sender, System.EventArgs e)
-        {
-            _worker = new AnimatedThreadWorker();
-            _worker.DoWork += ExportATLBWork;
-            _worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
-            _worker.RunWorkerAsync();
-        }
+		private void ExportATLB_Click(object sender, EventArgs e)
+		{
+			_worker = new AnimatedThreadWorker();
+			_worker.DoWork += ExportATLBWork;
+			_worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+			_worker.RunWorkerAsync();
+		}
 
-        private void ExportATLBWork(object sender, DoWorkEventArgs e)
-        {
-            AnimatedThreadWorker.ReportProgress(0, "load ATLB");
-            _worker.ReportProgress(0, "Generate file! Please wait....");
+		private void ExportATLBWork(object sender, DoWorkEventArgs e)
+		{
+			AnimatedThreadWorker.ReportProgress(0, "load ATLB");
+			_worker.ReportProgress(0, "Generate file! Please wait....");
 
-            _exportProvider = new ExcelExportProvider();
+			_exportProvider = new ExcelExportProvider();
             
-            _exportProvider.ExportATLB();
+			_exportProvider.ExportATLB();
 
 
-        }
+		}
+
+		#endregion
+
+        
     }
 }
 

@@ -34,6 +34,7 @@ using SmartCore.Entities;
 using SmartCore.Entities.NewLoader;
 using SmartCore.ObjectCache;
 using SmartCore.Queries;
+using User = Microsoft.SqlServer.Management.Smo.User;
 
 namespace SmartCore
 {
@@ -199,6 +200,32 @@ namespace SmartCore
 			var endPoint = new EndpointAddress($"http://{_ipServer}/LoginService/LoginService.svc");
 			var channelFactoryFoo = new ChannelFactory<ILoginService>(binding, endPoint);
 			return channelFactoryFoo.CreateChannel();
+		}
+
+		public List<UserDTO> GetAllUsers()
+		{
+			var binding = new BasicHttpBinding()
+			{
+				CloseTimeout = new TimeSpan(0, 10, 0),
+				OpenTimeout = new TimeSpan(0, 10, 0),
+				ReceiveTimeout = new TimeSpan(0, 10, 0),
+				SendTimeout = new TimeSpan(0, 10, 0),
+				MaxBufferPoolSize = Int32.MaxValue,
+				MaxBufferSize = Int32.MaxValue,
+				MaxReceivedMessageSize = Int32.MaxValue,
+				TransferMode = TransferMode.Streamed,
+				ReaderQuotas =
+				{
+					MaxArrayLength = Int32.MaxValue,
+					MaxBytesPerRead = Int32.MaxValue,
+					MaxDepth = Int32.MaxValue,
+					MaxStringContentLength = Int32.MaxValue,
+					MaxNameTableCharCount = Int32.MaxValue
+				}
+			};
+			var endPoint = new EndpointAddress($"http://{_ipServer}/LoginService/LoginService.svc");
+			var channelFactoryFoo = new ChannelFactory<ILoginService>(binding, endPoint);
+			return channelFactoryFoo.CreateChannel().GetAllList();
 		}
 
 		private UserDTO GetUser(string login, string password)

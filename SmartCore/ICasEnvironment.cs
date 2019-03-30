@@ -59,6 +59,8 @@ namespace SmartCore
 		void Connect(String serverName, String userName, String pass, String database);
 
 		ILoginService GetSeviceUser();
+
+		List<UserDTO> GetAllUsers();
 		void UpdateUser(string password);
 
 		void CheckTablesFor(Type type);
