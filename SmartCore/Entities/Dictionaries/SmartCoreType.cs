@@ -392,6 +392,7 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		public static SmartCoreType User = new SmartCoreType(3000, "User", "User", typeof(User));
+		public static SmartCoreType AttachedFile = new SmartCoreType(3001, "AttachedFile", "AttachedFile", typeof(AttachedFile));
 		/*
          * Методы
          */

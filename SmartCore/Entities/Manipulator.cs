@@ -168,12 +168,7 @@ namespace SmartCore.Entities
         {
             if (saveObject == null) return;
 
-            var type = AuditOperation.Created;
-            if (saveObject.ItemId > 0)
-	            type = AuditOperation.Changed;
-
 			CasEnvironment.Keeper.SaveAll(saveObject, saveChild, saveForced);
-			_auditRepository.WriteAsync(saveObject, type, _casEnvironment.IdentityUser);
 
 			if (saveObject is AbstractDictionary)
             {
