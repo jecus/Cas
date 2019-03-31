@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using EFCore.DTO.General;
 using SmartCore.Entities.General.Interfaces;
 
@@ -15,7 +16,7 @@ namespace SmartCore.AuditMongo.Repository
 
 	public interface IAuditRepository
 	{
-		void WriteAsync<TEntity>(TEntity target, AuditOperation operation, IIdentityUser user,
+		Task WriteAsync<TEntity>(TEntity target, AuditOperation operation, IIdentityUser user,
 			Dictionary<string, object> parameters = null) where TEntity : class, IBaseEntityObject;
 
 	}
