@@ -719,6 +719,7 @@ namespace CAS.UI.UIControls.Auxiliary
                     {
                         //GlobalObjects.CasEnvironment.Connect(serverName, settings.Username, settings.Password, baseName);
                         GlobalObjects.CasEnvironment.Connect(settings.ServerName, settings.Username, settings.Password, "");
+						SaveJsonSetting(settings.Username);
                     }
                     catch (ConnectionFailureException ex)
                     {
@@ -844,6 +845,21 @@ namespace CAS.UI.UIControls.Auxiliary
         }
 
 		#endregion
+
+		private void SaveJsonSetting(string login)
+		{
+			var exePath = Path.GetDirectoryName(Application.ExecutablePath);
+			var path = Path.Combine(exePath, "AppSettings.json");
+			var json = File.ReadAllText(path);
+			_settings = JsonConvert.DeserializeObject<JsonSettings>(json);
+
+			if (!_settings.LastInformation.Login.Equals(login))
+				return;
+
+			_settings.LastInformation.Login = login;
+			var output = JsonConvert.SerializeObject(_settings, Newtonsoft.Json.Formatting.Indented);
+			File.WriteAllText(path, output);
+		}
 
 		private void LoadJsonSettings()
 		{
