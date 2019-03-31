@@ -29,7 +29,7 @@ namespace SmartCore.AuditMongo.Repository
 					if(parameters == null)
 						parameters = new Dictionary<string, object>();
 
-					parameters.Add("ObjectType", typeof(TEntity).Name);
+					parameters.Add("ObjectType", typeof(TEntity).UnderlyingSystemType.Name);
 				}
 
 				await _context.AuditCollection.InsertOneAsync(new AuditEntity

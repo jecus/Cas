@@ -5,7 +5,7 @@ namespace SmartCore.Entities
 {
 	public interface INewKeeper
 	{
-		void Save(BaseEntityObject value, bool saveAttachedFile = true);
+		void Save(BaseEntityObject value, bool saveAttachedFile = true, bool writeAudit = true);
 
 		void SaveGeneric<T, TOut>(T value, bool saveAttachedFile = true)
 			where T : BaseEntityObject, new() where TOut : BaseEntity, new();

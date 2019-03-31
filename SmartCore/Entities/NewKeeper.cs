@@ -32,7 +32,7 @@ namespace SmartCore.Entities
 
 		#endregion
 
-		public void Save(BaseEntityObject value, bool saveAttachedFile = true)
+		public void Save(BaseEntityObject value, bool saveAttachedFile = true, bool writeAudit = true)
 		{
 			var type = AuditOperation.Created;
 			if (value.ItemId > 0)
@@ -44,7 +44,8 @@ namespace SmartCore.Entities
 
 			method.Invoke(this, new object[] { value, saveAttachedFile });
 
-			_auditRepository.WriteAsync(value, type ,_casEnvironment.IdentityUser);
+			if(writeAudit)
+				_auditRepository.WriteAsync(value, type ,_casEnvironment.IdentityUser);
 		}
 
 		public void SaveGeneric<T, TOut>(T value, bool saveAttachedFile = true) where T : BaseEntityObject, new() where TOut : BaseEntity, new()

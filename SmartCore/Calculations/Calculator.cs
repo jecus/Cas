@@ -1846,7 +1846,7 @@ namespace SmartCore.Calculations
 							if (!llpData.LLPCurrent.IsEqual(llpData.LLPTemp))
 							{
 								llpData.LLPTemp = new Lifelength(llpData.LLPCurrent);
-								_environment.NewKeeper.Save(llpData);
+								_environment.NewKeeper.Save(llpData, writeAudit:false);
 							}
 						}
 
