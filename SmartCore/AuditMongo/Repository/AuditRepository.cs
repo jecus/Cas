@@ -19,12 +19,18 @@ namespace SmartCore.AuditMongo.Repository
 
 		public async Task WriteAsync<TEntity>(TEntity target, AuditOperation operation, IIdentityUser user, Dictionary<string, object> parameters = null) where TEntity : class, IBaseEntityObject
 		{
-			//var objectName = typeof(TEntity).Name;
-
 			try
 			{
 				if (target.IsDeleted)
 					operation = AuditOperation.Deleted;
+
+				if (target.SmartCoreObjectType.ItemId == -1)
+				{
+					if(parameters == null)
+						parameters = new Dictionary<string, object>();
+
+					parameters.Add("ObjectType", typeof(TEntity).Name);
+				}
 
 				await _context.AuditCollection.InsertOneAsync(new AuditEntity
 				{

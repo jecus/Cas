@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using CASTerms;
+using EFCore.DTO.General;
 using MetroFramework.Forms;
 using SmartCore.Entities;
 
@@ -21,8 +22,9 @@ namespace CAS.UI.UIControls.Users
 			InitializeComponent();
 		}
 
-		public UserForm(User user) : base()
+		public UserForm(User user)
 		{
+			InitializeComponent();
 			_user = user;
 			UpdateInformation();
 		}
@@ -37,6 +39,22 @@ namespace CAS.UI.UIControls.Users
 			textBoxName.Text = _user.Name;
 			textBoxLogin.Text = _user.Login;
 			textBoxPassword.Text = _user.Password;
+
+			metroComboBox1.DataSource = Enum.GetValues(typeof(UsetType));
+			metroComboBox1.SelectedItem = _user.UserType;
+		}
+
+		#endregion
+
+		#region private void ApplyChanges()
+
+		private void ApplyChanges()
+		{
+			_user.Surname = textBoxSurname.Text;
+			_user.Name = textBoxName.Text;
+			_user.Login = textBoxLogin.Text;
+			_user.Password = textBoxPassword.Text;
+			_user.UserType = (UsetType)metroComboBox1.SelectedItem;
 		}
 
 		#endregion
@@ -79,6 +97,7 @@ namespace CAS.UI.UIControls.Users
 		{
 			if (Check())
 			{
+				ApplyChanges();
 				GlobalObjects.CasEnvironment.GetSeviceUser().AddOrUpdateUser(_user);
 				DialogResult = DialogResult.OK;
 				Close();

@@ -71,7 +71,7 @@ namespace EFCore.Contract
 				newUser.Login = user.Login;
 				newUser.Password = user.Password;
 				newUser.Name = user.Name;
-				newUser.Password = user.Password;
+				newUser.Surname = user.Surname;
 				newUser.UserType = user.UserType;
 
 				context.UserDtos.Add(newUser);

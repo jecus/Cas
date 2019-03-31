@@ -50,6 +50,7 @@ namespace CAS.UI.UIControls.Users
 			if (currentOperator == null)
 				throw new ArgumentNullException("currentOperator");
 
+			_filter = new CommonFilterCollection(typeof(User));
 			aircraftHeaderControl1.Operator = currentOperator;
 			StatusTitle = "Users";
 			

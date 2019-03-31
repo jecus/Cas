@@ -32,6 +32,7 @@
 			MetroFramework.Controls.MetroLabel metroLabel1;
 			MetroFramework.Controls.MetroLabel metroLabel2;
 			MetroFramework.Controls.MetroLabel metroLabel3;
+			MetroFramework.Controls.MetroLabel metroLabel4;
 			this.textBoxSurname = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxName = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxLogin = new MetroFramework.Controls.MetroTextBox();
@@ -39,11 +40,57 @@
 			this.checkBox1 = new MetroFramework.Controls.MetroCheckBox();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.buttonOk = new System.Windows.Forms.Button();
+			this.metroComboBox1 = new MetroFramework.Controls.MetroComboBox();
 			labelNewPassword = new MetroFramework.Controls.MetroLabel();
 			metroLabel1 = new MetroFramework.Controls.MetroLabel();
 			metroLabel2 = new MetroFramework.Controls.MetroLabel();
 			metroLabel3 = new MetroFramework.Controls.MetroLabel();
+			metroLabel4 = new MetroFramework.Controls.MetroLabel();
 			this.SuspendLayout();
+			// 
+			// labelNewPassword
+			// 
+			labelNewPassword.AutoSize = true;
+			labelNewPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			labelNewPassword.Location = new System.Drawing.Point(23, 60);
+			labelNewPassword.Name = "labelNewPassword";
+			labelNewPassword.Size = new System.Drawing.Size(64, 19);
+			labelNewPassword.TabIndex = 28;
+			labelNewPassword.Text = "Surname:";
+			labelNewPassword.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// metroLabel1
+			// 
+			metroLabel1.AutoSize = true;
+			metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			metroLabel1.Location = new System.Drawing.Point(23, 86);
+			metroLabel1.Name = "metroLabel1";
+			metroLabel1.Size = new System.Drawing.Size(48, 19);
+			metroLabel1.TabIndex = 30;
+			metroLabel1.Text = "Name:";
+			metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// metroLabel2
+			// 
+			metroLabel2.AutoSize = true;
+			metroLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			metroLabel2.Location = new System.Drawing.Point(23, 112);
+			metroLabel2.Name = "metroLabel2";
+			metroLabel2.Size = new System.Drawing.Size(44, 19);
+			metroLabel2.TabIndex = 32;
+			metroLabel2.Text = "Login:";
+			metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// metroLabel3
+			// 
+			metroLabel3.AutoSize = true;
+			metroLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			metroLabel3.Location = new System.Drawing.Point(23, 138);
+			metroLabel3.Name = "metroLabel3";
+			metroLabel3.Size = new System.Drawing.Size(66, 19);
+			metroLabel3.TabIndex = 34;
+			metroLabel3.Text = "Password:";
+			metroLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// textBoxSurname
 			// 
@@ -76,17 +123,6 @@
 			this.textBoxSurname.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.textBoxSurname.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
-			// labelNewPassword
-			// 
-			labelNewPassword.AutoSize = true;
-			labelNewPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			labelNewPassword.Location = new System.Drawing.Point(23, 60);
-			labelNewPassword.Name = "labelNewPassword";
-			labelNewPassword.Size = new System.Drawing.Size(64, 19);
-			labelNewPassword.TabIndex = 28;
-			labelNewPassword.Text = "Surname:";
-			labelNewPassword.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			// 
 			// textBoxName
 			// 
 			// 
@@ -117,17 +153,6 @@
 			this.textBoxName.UseSelectable = true;
 			this.textBoxName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.textBoxName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			// 
-			// metroLabel1
-			// 
-			metroLabel1.AutoSize = true;
-			metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			metroLabel1.Location = new System.Drawing.Point(23, 86);
-			metroLabel1.Name = "metroLabel1";
-			metroLabel1.Size = new System.Drawing.Size(48, 19);
-			metroLabel1.TabIndex = 30;
-			metroLabel1.Text = "Name:";
-			metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// textBoxLogin
 			// 
@@ -160,17 +185,6 @@
 			this.textBoxLogin.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.textBoxLogin.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
-			// metroLabel2
-			// 
-			metroLabel2.AutoSize = true;
-			metroLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			metroLabel2.Location = new System.Drawing.Point(23, 112);
-			metroLabel2.Name = "metroLabel2";
-			metroLabel2.Size = new System.Drawing.Size(44, 19);
-			metroLabel2.TabIndex = 32;
-			metroLabel2.Text = "Login:";
-			metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			// 
 			// textBoxPassword
 			// 
 			// 
@@ -202,21 +216,10 @@
 			this.textBoxPassword.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.textBoxPassword.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
-			// metroLabel3
-			// 
-			metroLabel3.AutoSize = true;
-			metroLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			metroLabel3.Location = new System.Drawing.Point(23, 138);
-			metroLabel3.Name = "metroLabel3";
-			metroLabel3.Size = new System.Drawing.Size(66, 19);
-			metroLabel3.TabIndex = 34;
-			metroLabel3.Text = "Password:";
-			metroLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			// 
 			// checkBox1
 			// 
 			this.checkBox1.AutoSize = true;
-			this.checkBox1.Location = new System.Drawing.Point(300, 167);
+			this.checkBox1.Location = new System.Drawing.Point(300, 162);
 			this.checkBox1.Name = "checkBox1";
 			this.checkBox1.Size = new System.Drawing.Size(105, 15);
 			this.checkBox1.TabIndex = 36;
@@ -231,7 +234,7 @@
 			this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonCancel.Location = new System.Drawing.Point(330, 186);
+			this.buttonCancel.Location = new System.Drawing.Point(330, 225);
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.Size = new System.Drawing.Size(75, 33);
 			this.buttonCancel.TabIndex = 38;
@@ -244,18 +247,41 @@
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(249, 186);
+			this.buttonOk.Location = new System.Drawing.Point(249, 225);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 37;
 			this.buttonOk.Text = "Ok";
 			this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
 			// 
+			// metroComboBox1
+			// 
+			this.metroComboBox1.FormattingEnabled = true;
+			this.metroComboBox1.ItemHeight = 23;
+			this.metroComboBox1.Location = new System.Drawing.Point(111, 184);
+			this.metroComboBox1.Name = "metroComboBox1";
+			this.metroComboBox1.Size = new System.Drawing.Size(294, 29);
+			this.metroComboBox1.TabIndex = 39;
+			this.metroComboBox1.UseSelectable = true;
+			// 
+			// metroLabel4
+			// 
+			metroLabel4.AutoSize = true;
+			metroLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			metroLabel4.Location = new System.Drawing.Point(23, 189);
+			metroLabel4.Name = "metroLabel4";
+			metroLabel4.Size = new System.Drawing.Size(69, 19);
+			metroLabel4.TabIndex = 40;
+			metroLabel4.Text = "User Type:";
+			metroLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
 			// UserForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(428, 230);
+			this.ClientSize = new System.Drawing.Size(428, 269);
+			this.Controls.Add(metroLabel4);
+			this.Controls.Add(this.metroComboBox1);
 			this.Controls.Add(this.buttonCancel);
 			this.Controls.Add(this.buttonOk);
 			this.Controls.Add(this.checkBox1);
@@ -286,5 +312,6 @@
 		private MetroFramework.Controls.MetroCheckBox checkBox1;
 		public System.Windows.Forms.Button buttonCancel;
 		public System.Windows.Forms.Button buttonOk;
+		private MetroFramework.Controls.MetroComboBox metroComboBox1;
 	}
 }
