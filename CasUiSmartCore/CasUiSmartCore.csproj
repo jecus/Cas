@@ -5306,4 +5306,9 @@
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties AppSettings_1json__JSONSchema="" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>
