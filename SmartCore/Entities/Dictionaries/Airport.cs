@@ -14,6 +14,15 @@ namespace SmartCore.Entities.Dictionaries
     [DictionaryCollection(typeof(CommonDictionaryCollection<Airport>))]
     public class Airport : AbstractDictionary
     {
+        #region public Airport()
+
+        public Airport()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.Airport;
+        }
+
+            #endregion
 
         #region public String ShortName { get; set; }
 

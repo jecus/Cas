@@ -13,6 +13,16 @@ namespace SmartCore.Entities.Dictionaries
     [Serializable]
     public class AircraftWorkerCategory : AbstractDictionary
     {
+        #region public AircraftWorkerCategory()
+
+        public AircraftWorkerCategory()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.AircraftWorkerCategory;
+        }
+
+        #endregion
+
         #region Implement of Dictionary
 
         #region  public override string FullName { get; set; }
@@ -117,6 +127,16 @@ namespace SmartCore.Entities.Dictionaries
     [Serializable]
     public class ModuleRecord : BaseEntityObject
     {
+        #region public ModuleRecord()
+
+        public ModuleRecord()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.ModuleRecord;
+        }
+
+            #endregion
+
         #region public AircraftWorkerCategory AircraftWorkerCategory { get; set; }
         /// <summary>
         /// 
@@ -163,6 +183,16 @@ namespace SmartCore.Entities.Dictionaries
     [Serializable]
     public class CategoryRecord : BaseEntityObject
     {
+        #region public CategoryRecord()
+
+        public CategoryRecord()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.CategoryRecord;
+        }
+
+        #endregion
+
         private static Type _thisType;
 
         #region override public Int32 ParentId { get; set; }

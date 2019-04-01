@@ -84,8 +84,18 @@ namespace SmartCore.Entities.Dictionaries
 		{
 			return _thisType ?? (_thisType = typeof(SchedulePeriods));
 		}
-		#endregion
+        #endregion
 
-		#endregion
+        #endregion
+
+        #region public SchedulePeriods()
+
+        public SchedulePeriods()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.SchedulePeriods;
+        }
+
+        #endregion
 	}
 }

@@ -50,14 +50,23 @@ namespace SmartCore.Entities.General
 		}
 
 		#endregion
-
-
+        
 		#region private static Type GetCurrentType()
 		private static Type GetCurrentType()
 		{
 			return _thisType ?? (_thisType = typeof(AircraftEquipments));
 		}
-		#endregion
+        #endregion
+
+        #region public AircraftEquipments()
+
+        public AircraftEquipments()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.AircraftEquipments;
+        }
+
+        #endregion
 
 	}
 }

@@ -78,12 +78,18 @@ namespace SmartCore.Entities.General.Atlbs
          *  Дополнительные своиства
          */
 
+        #region public FlightCargoRecord()
+
         public FlightCargoRecord()
         {
             CargoCategory = null;
             Weigth = 0;
             Measure = null;
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.FlightCargoRecord;
         }
+
+        #endregion
 
         #region private static Type GetCurrentType()
         private static Type GetCurrentType()

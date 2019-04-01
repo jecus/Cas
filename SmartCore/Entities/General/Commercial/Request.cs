@@ -222,6 +222,7 @@ namespace SmartCore.Entities.General.Commercial
         /// </summary>
         public Request()
         {
+            ItemId = -1;
             SmartCoreObjectType = SmartCoreType.JobCard;
 
             ApprovedByDate = DateTime.Today;

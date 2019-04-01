@@ -67,5 +67,11 @@ namespace SmartCore.Entities.General
 		#endregion
 
 		public string SupplierName { get; set; }
+
+        public QuotationCost()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.QuotationCost;
+        }
 	}
 }

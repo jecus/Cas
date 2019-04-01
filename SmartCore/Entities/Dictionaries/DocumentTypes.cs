@@ -412,6 +412,7 @@ namespace SmartCore.Entities.Dictionaries
         {
             ItemId = -1;
             _documentTypeId = -1;
+            SmartCoreObjectType = SmartCoreType.DocumentSubType;
         }
         #endregion
     }

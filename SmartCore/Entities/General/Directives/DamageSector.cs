@@ -1,5 +1,6 @@
 ﻿using System;
 using EFCore.DTO.General;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.Entities.General.Directives
@@ -61,6 +62,8 @@ namespace SmartCore.Entities.General.Directives
         /// </summary>
         public DamageSector()
         {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.DamageSector;
             DamageChartColumn = -1;
             DamageChartRow = -1;
             Remarks = "";

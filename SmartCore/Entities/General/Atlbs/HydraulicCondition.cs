@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 
@@ -158,6 +159,8 @@ namespace SmartCore.Entities.General.Atlbs
         /// </summary>
         public HydraulicCondition()
         {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.HydraulicCondition;
         }
         #endregion
 

@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using EFCore.DTO.General;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.Entities.General.Schedule
@@ -81,6 +82,8 @@ namespace SmartCore.Entities.General.Schedule
         /// </summary>
         public FlightNumberPeriodDaySchedule()
         {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.FlightNumberPeriodDaySchedule;
             PeriodFrom = DateTime.Today;
             PeriodTo = DateTime.Today.AddDays(1);
         }

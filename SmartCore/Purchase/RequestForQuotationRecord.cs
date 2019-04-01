@@ -308,6 +308,7 @@ namespace SmartCore.Purchase
         public RequestForQuotationRecord()
         {
             ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.RequestForQuotationRecord;
             ParentPackageId = -1;
             PackageItemId = -1;
             CostCondition = ComponentStatus.New | ComponentStatus.Serviceable | ComponentStatus.Overhaul | ComponentStatus.Repair;

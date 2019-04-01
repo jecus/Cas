@@ -132,5 +132,12 @@ namespace SmartCore.Entities.Dictionaries
 		}
 
 		#endregion
+
+        public AircraftOtherParameters()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.AircraftOtherParameters;
+        }
+
 	}
 }

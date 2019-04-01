@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using EFCore.DTO.General;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.Entities.General.Personnel
@@ -35,13 +36,18 @@ namespace SmartCore.Entities.General.Personnel
 		}
 
 		#endregion
-
-
+        
 		#region private static Type GetCurrentType()
 		private static Type GetCurrentType()
 		{
 			return _thisType ?? (_thisType = typeof(WorkPackageSpecialists));
 		}
 		#endregion
+
+        public WorkPackageSpecialists()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.WorkPackageSpecialists;
+        }
 	}
 }

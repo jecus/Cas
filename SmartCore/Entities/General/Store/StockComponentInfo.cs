@@ -177,6 +177,8 @@ namespace SmartCore.Entities.General.Store
 		/// </summary>
 		public StockComponentInfo()
         {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.StockComponentInfo;
             GoodsClass = GoodsClass.MaintenanceMaterials;
         }
 		#endregion

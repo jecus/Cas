@@ -1,4 +1,5 @@
 ﻿using EFCore.DTO.General;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.Entities.General.Quality
@@ -32,6 +33,12 @@ namespace SmartCore.Entities.General.Quality
         public Document Document { get; set; }
 
         #endregion
+
+        public ProcedureDocumentReference()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.ProcedureDocumentReference;
+        }
     }
     #endregion
 

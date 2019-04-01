@@ -315,6 +315,8 @@ namespace SmartCore.Entities.General.Atlbs
         public EngineCondition()
         {
             PressALT = 0;
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.EngineCondition;
         }
 
         #endregion

@@ -128,6 +128,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
         public MaintenanceCheckBindTaskRecord()
         {
             ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.MaintenanceCheckBindTaskRecord;
         }
 
         #endregion

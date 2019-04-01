@@ -14,6 +14,16 @@ namespace SmartCore.Entities.Dictionaries
 		private static Type _thisType;
 		private static Department _unknown;
 
+        #region public Department()
+
+        public Department()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.Department;
+        }
+
+        #endregion
+
 		#region Implement of Dictionary
 
 		#region public override string ShortName { get; set; }

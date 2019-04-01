@@ -186,6 +186,8 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 
         public MaintenanceProgramChangeRecord()
         {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.MaintenanceProgramChangeRecord;
             _msg = MSG.Unknown;
         }
         #endregion

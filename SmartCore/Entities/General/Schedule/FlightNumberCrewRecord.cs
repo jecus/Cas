@@ -69,6 +69,7 @@ namespace SmartCore.Entities.General.Schedule
         public FlightNumberCrewRecord()
         {
             Count = 1;
+            SmartCoreObjectType = SmartCoreType.FlightNumberCrewRecord;
         }
         #endregion
 

@@ -108,5 +108,11 @@ namespace SmartCore.Relation
 		}
 		#endregion
 
+        public ItemsRelation()
+        {
+            ItemId = -1;
+            SmartCoreObjectType=SmartCoreType.ItemsRelation;
+        }
+
 	}
 }

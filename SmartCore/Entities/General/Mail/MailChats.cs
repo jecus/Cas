@@ -63,7 +63,8 @@ namespace SmartCore.Entities.General.Mail
 		#endregion
 
 		public MailChats()
-		{
+        {
+            ItemId = -1;
 			SmartCoreObjectType = SmartCoreType.MailChats;
 			CreateDate = DateTime.Today;
 		}

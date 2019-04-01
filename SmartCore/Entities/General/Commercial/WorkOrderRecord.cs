@@ -26,7 +26,7 @@ namespace SmartCore.Entities.General.Commercial
             ItemId = -1;
             DirectiveId = 0;
             ParentId = 0;
-            PackageItemType = SmartCoreType.Unknown;
+            PackageItemType = SmartCoreType.WorkOrderRecord;
         }
         /// <summary>
         /// Создает запись о задаче в рабочем пакете на основе переданных параметров
