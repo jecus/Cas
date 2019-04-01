@@ -1,22 +1,17 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 using System.Data.SqlClient;
 using System.Threading;
 using Microsoft.SqlServer.Management.Smo;
 using Microsoft.SqlServer.Management.Common;
-using System.Data.Sql;
 using System.Data;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
-using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
-using SmartCore.Filters;
 using SmartCore.Queries;
 
 namespace SmartCore.Management

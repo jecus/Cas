@@ -10,13 +10,11 @@ using CAS.UI.UIControls.Auxiliary.Events;
 using CAS.UI.UIControls.WorkPakage;
 using CASTerms;
 using EFCore.DTO.General;
-using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Atlbs;
 using SmartCore.Entities.General.WorkPackage;
-using SmartCore.Filters;
 
 namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 {

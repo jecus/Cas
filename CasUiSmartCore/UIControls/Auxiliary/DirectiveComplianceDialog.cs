@@ -19,8 +19,6 @@ using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.MTOP;
 using SmartCore.Entities.General.WorkPackage;
-using SmartCore.Files;
-using SmartCore.Filters;
 using Component = SmartCore.Entities.General.Accessory.Component;
 
 namespace CAS.UI.UIControls.Auxiliary

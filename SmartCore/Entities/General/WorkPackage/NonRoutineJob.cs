@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
@@ -8,7 +7,6 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Packages;
 
 namespace SmartCore.Entities.General.WorkPackage
@@ -538,6 +536,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		/// </summary>
 		public NonRoutineJob()
         {
+            ItemId = -1;
             SmartCoreObjectType = SmartCoreType.NonRoutineJob;
 
             Kits = new CommonCollection<AccessoryRequired>();

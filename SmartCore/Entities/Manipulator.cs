@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using EFCore.DTO.General;
 using EFCore.Filter;
 using SmartCore.AircraftFlights;
 using SmartCore.Aircrafts;
-using SmartCore.Auxiliary;
+using SmartCore.AuditMongo.Repository;
 using SmartCore.Component;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Deprecated;
-using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.Store;
-using SmartCore.Filters;
 using SmartCore.Maintenance;
-using SmartCore.Packages;
 using SmartCore.Purchase;
 using SmartCore.Relation;
 using SmartCore.WorkPackages;
@@ -89,7 +84,9 @@ namespace SmartCore.Entities
         /// </summary>
         private readonly ICasEnvironment _casEnvironment;
 
-	    /// <summary>
+        private readonly IAuditRepository _auditRepository;
+
+        /// <summary>
         /// Ядро, с которым связан манипулятор
         /// </summary>
         private ICasEnvironment CasEnvironment { get { return _casEnvironment; } }
@@ -101,9 +98,10 @@ namespace SmartCore.Entities
         /// Класс обеспечивает легкое сохранение и создание объектов Cas
         /// </summary>
         /// <param name="casEnvironment"></param>
-        public Manipulator(ICasEnvironment casEnvironment)
+        public Manipulator(ICasEnvironment casEnvironment, IAuditRepository auditRepository)
         {
-            _casEnvironment = casEnvironment;
+	        _casEnvironment = casEnvironment;
+	        _auditRepository = auditRepository;
         }
 
         #endregion
@@ -116,10 +114,15 @@ namespace SmartCore.Entities
         public void Save(BaseEntityObject saveObject)
         {
             if(saveObject == null) return;
-           
-            CasEnvironment.Keeper.Save(saveObject);
-            
-            if (saveObject is AbstractDictionary)
+
+            var type = AuditOperation.Created;
+            if (saveObject.ItemId > 0)
+	            type = AuditOperation.Changed;
+
+			CasEnvironment.Keeper.Save(saveObject);
+			_auditRepository.WriteAsync(saveObject, type, _casEnvironment.IdentityUser);
+
+			if (saveObject is AbstractDictionary)
             {
                 IDictionaryCollection col = CasEnvironment.GetDictionary(saveObject.GetType());
 
@@ -165,9 +168,9 @@ namespace SmartCore.Entities
         {
             if (saveObject == null) return;
 
-            CasEnvironment.Keeper.SaveAll(saveObject, saveChild, saveForced);
+			CasEnvironment.Keeper.SaveAll(saveObject, saveChild, saveForced);
 
-            if (saveObject is AbstractDictionary)
+			if (saveObject is AbstractDictionary)
             {
                 IDictionaryCollection col = CasEnvironment.GetDictionary(saveObject.GetType());
 
@@ -213,9 +216,14 @@ namespace SmartCore.Entities
             if(performance == null)
                 return;
 
-            _casEnvironment.Keeper.Save(performance, saveAttachedFile);
+            var type = AuditOperation.Created;
+            if (performance.ItemId > 0)
+	            type = AuditOperation.Changed;
+            
+			_casEnvironment.Keeper.Save(performance, saveAttachedFile);
+			_auditRepository.WriteAsync(performance, type, _casEnvironment.IdentityUser);
 
-            if (performance.Parent.PerformanceRecords.GetItemById(performance.ItemId) == null)
+			if (performance.Parent.PerformanceRecords.GetItemById(performance.ItemId) == null)
                 performance.Parent.PerformanceRecords.Add(performance);
 
             if (performance.Parent is MaintenanceDirective)
@@ -298,7 +306,7 @@ namespace SmartCore.Entities
 
 			CasEnvironment.Keeper.Delete(deletedObject, isDeletedOnly);
 
-            if (deletedObject is AbstractDictionary)
+			if (deletedObject is AbstractDictionary)
             {
                 var col = CasEnvironment.GetDictionary(deletedObject.GetType());
 

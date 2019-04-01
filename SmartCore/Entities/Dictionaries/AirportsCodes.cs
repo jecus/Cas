@@ -12,6 +12,16 @@ namespace SmartCore.Entities.Dictionaries
 	[Serializable]
 	public class AirportsCodes : AbstractDictionary
 	{
+        #region public AirportsCodes()
+
+        public AirportsCodes()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.AirportsCodes;
+        }
+
+            #endregion
+
 		#region public override string ShortName { get; set; }
 
 		[TableColumn("Iata")]

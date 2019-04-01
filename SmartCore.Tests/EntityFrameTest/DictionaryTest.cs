@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
-using System.Diagnostics;
+﻿using System.Data.Entity;
 using System.Linq;
 using EFCore.DTO;
 using EFCore.DTO.Dictionaries;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SmartCore.Entities.Dictionaries;
 
 namespace SmartCore.Tests.EntityFrameTest
 {

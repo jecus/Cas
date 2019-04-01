@@ -1,12 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SmartCore.DataAccesses.AttachedFiles;
-using SmartCore.DataAccesses.ItemsRelation;
 using SmartCore.DataAccesses.NonRoutines;
-using SmartCore.Entities;
-using SmartCore.Entities.Collections;
-using SmartCore.Entities.Dictionaries;
 
 namespace SmartCore.Tests
 {

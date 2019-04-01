@@ -30,7 +30,6 @@ using CASReports.Builders;
 using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
 using EFCore.Filter;
-using SmartCore.DtoHelper;
 using SmartCore.Filters;
 using SmartCore.Purchase;
 using Component = SmartCore.Entities.General.Accessory.Component;

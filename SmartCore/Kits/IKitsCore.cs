@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Purchase;
 

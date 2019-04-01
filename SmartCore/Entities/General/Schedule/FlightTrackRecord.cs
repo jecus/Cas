@@ -69,5 +69,11 @@ namespace SmartCore.Entities.General.Schedule
 
 		#endregion
 
+        public FlightTrackRecord()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.FlightTrackRecord;
+        }
+
 	}
 }

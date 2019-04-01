@@ -6,7 +6,6 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Comparers;
 using CASTerms;
-using SmartCore.Entities.General.Personnel;
 using SmartCore.Entities.General.Schedule;
 
 namespace CAS.UI.UIControls.ScheduleControls.PlanOPS

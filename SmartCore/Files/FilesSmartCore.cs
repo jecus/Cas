@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using SmartCore.DataAccesses.AttachedFiles;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Attributes;
 using SmartCore.Filters;
 using SmartCore.Management;
-using SmartCore.Packages;
 using SmartCore.Queries;
 
 namespace SmartCore.Files

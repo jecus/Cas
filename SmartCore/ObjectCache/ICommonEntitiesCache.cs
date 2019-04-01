@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Windows.Forms;
-using Microsoft.SqlServer.Management.Smo;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Interfaces;

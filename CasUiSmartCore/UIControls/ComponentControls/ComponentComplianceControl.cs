@@ -21,7 +21,6 @@ using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.WorkPackage;
-using SmartCore.Filters;
 using TempUIExtentions;
 using Component = SmartCore.Entities.General.Accessory.Component;
 

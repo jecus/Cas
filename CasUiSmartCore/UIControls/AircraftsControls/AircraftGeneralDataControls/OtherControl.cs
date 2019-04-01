@@ -52,7 +52,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
         /// </summary>
         private void CheckPermission()
         {
-            bool permission = true;// currentAircraft.HasPermission(Users.CurrentUser, DataEvent.Update);
+            bool permission = true;// currentAircraft.HasPermission(Users.IdentityUser, DataEvent.Update);
             textBoxAddressBit.ReadOnly = !permission;
             textBoxELTHexCode.ReadOnly = !permission;
         }

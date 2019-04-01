@@ -1,4 +1,5 @@
 ﻿using System;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
 
@@ -68,6 +69,7 @@ namespace SmartCore.Purchase
         public IORQORRelation()
         {
             ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.IORQORRelation;
         }
         #endregion
 

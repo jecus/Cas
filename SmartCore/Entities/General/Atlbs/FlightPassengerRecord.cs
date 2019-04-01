@@ -86,13 +86,19 @@ namespace SmartCore.Entities.General.Atlbs
          *  Дополнительные своиства
          */
 
+        #region public FlightPassengerRecord()
+
         public FlightPassengerRecord()
         {
             PassengerCategory = null;
             CountEconomy = 0;
             CountBusiness = 0;
             CountFirst = 0;
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.FlightPassengerRecord;
         }
+
+        #endregion
 
         #region private static Type GetCurrentType()
         private static Type GetCurrentType()

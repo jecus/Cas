@@ -6,10 +6,8 @@ using System.Windows.Forms;
 using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
-using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Comparers;
-using CAS.UI.UIControls.DetailsControls;
 using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
@@ -17,7 +15,6 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
-using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.StoresControls
 {

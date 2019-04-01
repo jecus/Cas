@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using EFCore.DTO;
+﻿using EFCore.DTO;
 using EFCore.DTO.Dictionaries;
 using EFCore.Repository;
 

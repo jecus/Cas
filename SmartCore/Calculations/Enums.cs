@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SmartCore.Calculations
+﻿namespace SmartCore.Calculations
 {
     #region public enum LifelengthSubResource
     /// <summary>

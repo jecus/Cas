@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Reflection;
 using EFCore.DTO.General;
 using SmartCore.Auxiliary;
@@ -636,6 +635,7 @@ namespace SmartCore.Entities.General.Atlbs
 			EngineRemarks = "";
 			Messages = "";
 			FDR = "";
+            SmartCoreObjectType = SmartCoreType.Discrepancy;
 		}
         #endregion
 

@@ -13,7 +13,6 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Store;
-using SmartCore.Filters;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.StoresControls

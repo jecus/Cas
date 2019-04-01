@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using EFCore.DTO.General;
 using SmartCore.Calculations;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 
@@ -91,6 +92,8 @@ namespace SmartCore.Entities.General.Atlbs
         public LandingGearCondition()
         {
             _parentAircraftFlight = null;
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.LandingGearCondition;
         }
         #endregion
      

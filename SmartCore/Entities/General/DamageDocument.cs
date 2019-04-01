@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Linq;
 using EFCore.DTO.General;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Entities.Collections;

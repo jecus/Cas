@@ -334,11 +334,11 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
             }
             _currentAudit.Status = WorkPackageStatus.Closed;
             _currentAudit.ClosingDate = dateTimePickerClosingDate.Value;
-            _currentAudit.ClosedBy = GlobalObjects.CasEnvironment.CurrentUser.Login;
+            _currentAudit.ClosedBy = GlobalObjects.CasEnvironment.IdentityUser.Login;
             _currentAudit.ClosingRemarks = "";
 
             if (string.IsNullOrEmpty(_currentAudit.PublishedBy))
-                _currentAudit.PublishedBy = GlobalObjects.CasEnvironment.CurrentUser.Login;
+                _currentAudit.PublishedBy = GlobalObjects.CasEnvironment.IdentityUser.Login;
             if (_currentAudit.PublishingDate <= _currentAudit.OpeningDate)
                 _currentAudit.PublishingDate = _currentAudit.OpeningDate;
             try

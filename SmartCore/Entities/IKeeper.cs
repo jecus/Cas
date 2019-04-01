@@ -1,8 +1,4 @@
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Atlbs;
-using SmartCore.Entities.General.Store;
 using SmartCore.Filters;
 
 namespace SmartCore.Entities

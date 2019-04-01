@@ -458,6 +458,7 @@ namespace SmartCore.Entities.General.Deprecated
         /// </summary>
         public JobCard()
         {
+            ItemId = -1;
             SmartCoreObjectType = SmartCoreType.JobCard;
 
             ApprovedByDate = DateTime.Today;

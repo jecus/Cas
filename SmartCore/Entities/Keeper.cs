@@ -5,15 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using SmartCore.Entities.Collections;
-using SmartCore.Entities.Dictionaries;
-using System.Data;
+using SmartCore.AuditMongo.Repository;
 using SmartCore.DataAccesses;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Atlbs;
 using SmartCore.Entities.General.Attributes;
-using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.Store;
 using SmartCore.Files;
 using SmartCore.Filters;
 using SmartCore.Management;
@@ -35,6 +30,8 @@ namespace SmartCore.Entities
         /// </summary>
         private readonly CasEnvironment _casEnvironment;
 
+        private readonly IAuditRepository _auditRepository;
+
         #endregion
 
 	    private readonly FilesSmartCore _filesSmartCore;
@@ -45,10 +42,11 @@ namespace SmartCore.Entities
         /// Сохраняет объекты в базе данных
         /// </summary>
         /// <param name="casEnvironment"></param>
-        public Keeper(CasEnvironment casEnvironment)
+        public Keeper(CasEnvironment casEnvironment, IAuditRepository auditRepository)
         {
             _casEnvironment = casEnvironment;
-			_filesSmartCore = new FilesSmartCore(_casEnvironment);
+            _auditRepository = auditRepository;
+            _filesSmartCore = new FilesSmartCore(_casEnvironment);
         }
 
         #endregion
@@ -71,13 +69,15 @@ namespace SmartCore.Entities
                 var qr = BaseQueries.GetInsertQuery(obj);
                 var ds = _casEnvironment.Execute(qr, BaseQueries.GetParameters(obj));
                 obj.ItemId = DbTypes.ToInt32(ds.Tables[0].Rows[0][0]);
-            }
+                _auditRepository.WriteAsync(obj, AuditOperation.Created, _casEnvironment.IdentityUser);
+			}
             else
             {
                 // update уже существующей записи
                 var qr = BaseQueries.GetUpdateQuery(obj);
                 _casEnvironment.Execute(qr, BaseQueries.GetParameters(obj));
-            }
+                _auditRepository.WriteAsync(obj, AuditOperation.Changed, _casEnvironment.IdentityUser);
+			}
 
 			if (obj is IFileContainer && saveAttachedFile)
 				SaveAttachedFile(obj as IFileContainer);
@@ -160,7 +160,9 @@ namespace SmartCore.Entities
             {
 				var qr = BaseQueries.GetDeleteQuery(obj);
                 _casEnvironment.Execute(qr, BaseQueries.GetParameters(obj));
-            }
+
+                _auditRepository.WriteAsync(obj, AuditOperation.Deleted, _casEnvironment.IdentityUser);
+			}
 
 			if (obj is IFileContainer && saveAttachedFile)
 				DeleteAttachedFile(obj as IFileContainer);

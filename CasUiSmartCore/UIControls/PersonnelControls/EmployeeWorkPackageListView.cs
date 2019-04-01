@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
@@ -12,7 +7,6 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.WorkPakage;
 using CASTerms;
 using SmartCore.Auxiliary;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Personnel;
 using SmartCore.Entities.General.WorkPackage;
 

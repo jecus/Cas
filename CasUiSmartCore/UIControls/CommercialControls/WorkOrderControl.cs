@@ -17,7 +17,6 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Commercial;
-using SmartCore.Entities.General.Deprecated;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.Personnel;
 

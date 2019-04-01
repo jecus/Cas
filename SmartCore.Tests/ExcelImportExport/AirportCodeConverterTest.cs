@@ -5,7 +5,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Atlbs;
 using SmartCore.Management;
-using SmartCore.Queries;
 
 namespace SmartCore.Tests.ExcelImportExport
 {

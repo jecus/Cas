@@ -70,6 +70,7 @@ namespace SmartCore.Entities.Dictionaries
         public Reason()
         {
             ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.Reason;
         }
 
         #region public override string ToString()

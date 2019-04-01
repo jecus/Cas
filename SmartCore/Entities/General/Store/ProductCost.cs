@@ -3,7 +3,6 @@ using System.Reflection;
 using EFCore.DTO.General;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
-using SmartCore.Entities.General.Interfaces;
 
 namespace SmartCore.Entities.General.Store
 {
@@ -221,7 +220,9 @@ namespace SmartCore.Entities.General.Store
 		#region public ProductCost()
 
 		public ProductCost()
-		{
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.ProductCost;
 			ParentId = -1;
 			SupplierId = -1;
 		}

@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General.Store;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls
@@ -19,6 +19,7 @@ namespace CAS.UI.UIControls.PurchaseControls
         ///</summary>
         public RequestForQuotationListView()
         {
+            IgnoreAutoResize = true;
             InitializeComponent();
         }
 		#endregion
@@ -60,41 +61,45 @@ namespace CAS.UI.UIControls.PurchaseControls
 
         protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(RequestForQuotation item)
         {
-            ListViewItem.ListViewSubItem[] subItems = new ListViewItem.ListViewSubItem[7];
-            subItems[0] = new ListViewItem.ListViewSubItem {Text = item.Title, Tag = item.Title};
-            subItems[1] = new ListViewItem.ListViewSubItem {Text = item.Description, Tag = item.Description};
-            subItems[2] = new ListViewItem.ListViewSubItem
-                              {
-                                  Text = item.OpeningDate == (new DateTime(1852, 01, 01))
-                                             ? ""
-                                             : SmartCore.Auxiliary.Convert.GetDateFormat(item.OpeningDate),
-                                  Tag = item.OpeningDate
-                              };
+            var subItems = new List<ListViewItem.ListViewSubItem>();
 
-            subItems[3] = new ListViewItem.ListViewSubItem
-                              {
-                                  Text = item.Status != WorkPackageStatus.Opened
-                                             ? item.PublishingDate == (new DateTime(1852, 01, 01))
-                                                   ? ""
-                                                   : SmartCore.Auxiliary.Convert.GetDateFormat(item.PublishingDate)
-                                             : "",
-                                  Tag = item.PublishingDate
-                              };
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Title, Tag = item.Title });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Description, Tag = item.Description });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
+            subItems.Add(new ListViewItem.ListViewSubItem
+            {
+                Text = item.OpeningDate == (new DateTime(1852, 01, 01))
+                    ? ""
+                    : SmartCore.Auxiliary.Convert.GetDateFormat(item.OpeningDate),
+                Tag = item.OpeningDate
+            });
+            subItems.Add(new ListViewItem.ListViewSubItem
+            {
+                Text = item.Status != WorkPackageStatus.Opened
+                    ? item.PublishingDate == (new DateTime(1852, 01, 01))
+                        ? ""
+                        : SmartCore.Auxiliary.Convert.GetDateFormat(item.PublishingDate)
+                    : "",
+                Tag = item.PublishingDate
+            });
+            subItems.Add(new ListViewItem.ListViewSubItem
+            {
+                Text = item.Status == WorkPackageStatus.Closed
+                    ? item.ClosingDate == (new DateTime(1852, 01, 01))
+                        ? ""
+                        : SmartCore.Auxiliary.Convert.GetDateFormat(item.ClosingDate)
+                    : "",
+                Tag = item.ClosingDate
+            });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Author, Tag = item.Author });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.PublishedBy?.ToString(), Tag = item.PublishedBy });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ClosedBy?.ToString(), Tag = item.ClosedBy });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Remarks, Tag = item.Remarks });
 
-            subItems[4] = new ListViewItem.ListViewSubItem
-                              {
-                                  Text = item.Status == WorkPackageStatus.Closed
-                                             ? item.ClosingDate == (new DateTime(1852, 01, 01))
-                                                   ? ""
-                                                   : SmartCore.Auxiliary.Convert.GetDateFormat(item.ClosingDate)
-                                             : "",
-                                  Tag = item.ClosingDate
-                              };
-            subItems[5] = new ListViewItem.ListViewSubItem {Text = item.Author, Tag = item.Author};
-            subItems[6] = new ListViewItem.ListViewSubItem {Text = item.Remarks, Tag = item.Remarks};
-
-            return subItems;
-        }
+            return subItems.ToArray();
+         }
 
         #endregion
 
@@ -109,9 +114,55 @@ namespace CAS.UI.UIControls.PurchaseControls
                 e.RequestedEntity = new RequestForQuotationScreen(SelectedItem);
             }
         }
-        
+
         #endregion
-        
+
+        #region protected override void SetHeaders()
+
+        protected override void SetHeaders()
+        {
+            ColumnHeaderList.Clear();
+
+            var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Parent" };
+            ColumnHeaderList.Add(columnHeader);
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Order No" };
+            ColumnHeaderList.Add(columnHeader);
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.15f), Text = "Title" };
+            ColumnHeaderList.Add(columnHeader);
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.15f), Text = "Description" };
+            ColumnHeaderList.Add(columnHeader);
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Create Date" };
+            ColumnHeaderList.Add(columnHeader);
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Opening date" };
+            ColumnHeaderList.Add(columnHeader);
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.13f), Text = "Publishing date" };
+            ColumnHeaderList.Add(columnHeader);
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Closing date" };
+            ColumnHeaderList.Add(columnHeader);
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Author" };
+            ColumnHeaderList.Add(columnHeader);
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Published By" };
+            ColumnHeaderList.Add(columnHeader);
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Closed By" };
+            ColumnHeaderList.Add(columnHeader);
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Remark" };
+            ColumnHeaderList.Add(columnHeader);
+
+            itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+        }
+
+        #endregion
         #endregion
     }
 }

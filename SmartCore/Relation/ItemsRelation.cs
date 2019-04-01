@@ -5,7 +5,6 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.MaintenanceWorkscope;
 
 namespace SmartCore.Relation
 {
@@ -108,6 +107,12 @@ namespace SmartCore.Relation
 			return _thisType ?? (_thisType = typeof(ItemsRelation));
 		}
 		#endregion
+
+        public ItemsRelation()
+        {
+            ItemId = -1;
+            SmartCoreObjectType=SmartCoreType.ItemsRelation;
+        }
 
 	}
 }

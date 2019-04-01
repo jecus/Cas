@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using Auxiliary;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
 using SmartCore.Entities.General.MTOP;

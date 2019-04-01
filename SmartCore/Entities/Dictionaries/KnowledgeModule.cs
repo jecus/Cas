@@ -10,6 +10,16 @@ namespace SmartCore.Entities.Dictionaries
     [Serializable]
     public class KnowledgeModule : AbstractDictionary
     {
+        #region public KnowledgeModule()
+
+        public KnowledgeModule()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.KnowledgeModule;
+        }
+
+        #endregion
+
         #region Implement of Dictionary
 
         #region  public override string FullName { get; set; }

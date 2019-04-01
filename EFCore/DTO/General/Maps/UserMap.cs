@@ -38,6 +38,10 @@ namespace EFCore.DTO.General.Maps
 				.HasMaxLength(100)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("Login");
+
+			Property(i => i.UserType)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("UserType");
 		}
 	}
 }

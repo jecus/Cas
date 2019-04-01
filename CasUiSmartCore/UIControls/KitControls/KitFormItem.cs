@@ -8,7 +8,6 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.Store;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.KitControls

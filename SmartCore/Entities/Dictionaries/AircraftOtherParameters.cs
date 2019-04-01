@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using EFCore.DTO.Dictionaries;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.Entities.Dictionaries
@@ -133,5 +132,12 @@ namespace SmartCore.Entities.Dictionaries
 		}
 
 		#endregion
+
+        public AircraftOtherParameters()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.AircraftOtherParameters;
+        }
+
 	}
 }

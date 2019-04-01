@@ -92,9 +92,19 @@ namespace SmartCore.Entities.Dictionaries
 		[Child]
 		public LocationsType LocationsType { get; set; }
 
-		#region public static Nomenclatures Unknown
+        #region public Locations()
 
-		public static Locations Unknown
+        public Locations()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.Locations;
+        }
+
+        #endregion
+
+        #region public static Locations Unknown
+
+        public static Locations Unknown
 		{
 			get
 			{

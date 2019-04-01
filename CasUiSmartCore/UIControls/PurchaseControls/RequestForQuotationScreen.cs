@@ -689,6 +689,17 @@ namespace CAS.UI.UIControls.PurchaseControls
         }
         #endregion
 
+        #region private void ButtonFilter_Click(object sender, EventArgs e)
+
+        private void ButtonFilter_Click(object sender, EventArgs e)
+        {
+
+        }
+
         #endregion
+
+        #endregion
+
+
     }
 }

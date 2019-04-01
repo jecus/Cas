@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Reflection;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
-using SmartCore.Files;
 
 namespace SmartCore.DataAccesses.AttachedFiles
 {
@@ -10,6 +10,12 @@ namespace SmartCore.DataAccesses.AttachedFiles
 	[Dto(typeof(AttachedFileDTO))]
 	public class ItemFileLinkDTO : BaseEntityObject
 	{
+        public ItemFileLinkDTO()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.ItemFileLinkDTO;
+        }
+
 		private static Type _thisType;
 
 		/// <summary>

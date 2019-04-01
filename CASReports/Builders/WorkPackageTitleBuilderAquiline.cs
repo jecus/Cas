@@ -1,14 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
 using CASReports.Datasets;
 using CASReports.ReportTemplates;
 using CASTerms;
-using SmartCore.Calculations;
-using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;

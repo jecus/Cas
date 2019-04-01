@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text.RegularExpressions;
 using EFCore.DTO.General;
 using EFCore.Filter;
 using SmartCore.Aircrafts;
 using SmartCore.Component;
-using SmartCore.Calculations;
 using SmartCore.Directives;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
@@ -21,7 +18,6 @@ using SmartCore.Entities.General.Schedule;
 using SmartCore.Entities.General.SMS;
 using SmartCore.Entities.NewLoader;
 using SmartCore.Filters;
-using SmartCore.Management;
 using SmartCore.Queries;
 
 namespace SmartCore.AircraftFlights

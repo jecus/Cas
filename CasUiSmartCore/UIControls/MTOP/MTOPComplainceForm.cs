@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
-using CAS.UI.UIControls.MaintananceProgram;
 using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;

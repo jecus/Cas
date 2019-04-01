@@ -14,7 +14,6 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.Schedule;
 using SmartCore.Filters;
-using SmartCore.Queries;
 
 namespace CAS.UI.UIControls.ScheduleControls.Trip
 {

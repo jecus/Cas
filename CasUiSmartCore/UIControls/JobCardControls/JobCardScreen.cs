@@ -10,7 +10,6 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Deprecated;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.MaintenanceWorkscope;
-using SmartCore.Entities.General.Personnel;
 using SmartCore.Entities.General.Quality;
 
 namespace CAS.UI.UIControls.JobCardControls

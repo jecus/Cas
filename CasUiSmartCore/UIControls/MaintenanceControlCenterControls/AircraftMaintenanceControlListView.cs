@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
-using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.DetailsControls;
-using CAS.UI.UIControls.DirectivesControls;
-using CAS.UI.UIControls.MaintananceProgram;
-using CAS.UI.UIControls.StoresControls;
 using CAS.UI.UIControls.WorkPakage;
 using CASTerms;
 using EFCore.DTO.Dictionaries;

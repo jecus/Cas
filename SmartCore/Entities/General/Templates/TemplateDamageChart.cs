@@ -1,7 +1,6 @@
 ﻿using System;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
-using SmartCore.Entities.General.Interfaces;
 
 namespace SmartCore.Entities.General.Templates
 {

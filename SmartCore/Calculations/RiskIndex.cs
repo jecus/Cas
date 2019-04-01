@@ -1,6 +1,5 @@
 ﻿using System;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Management;
 
 namespace SmartCore.Calculations
 {

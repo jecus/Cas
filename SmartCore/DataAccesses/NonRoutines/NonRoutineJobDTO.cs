@@ -1,10 +1,8 @@
 ﻿using SmartCore.DataAccesses.AttachedFiles;
 using SmartCore.DataAccesses.Kits;
-using SmartCore.Entities;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.DataAccesses.NonRoutines
@@ -92,7 +90,8 @@ namespace SmartCore.DataAccesses.NonRoutines
 		/// Создает нерутинную работу без дополнительной информации
 		/// </summary>
 		public NonRoutineJobDTO()
-		{
+        {
+            ItemId = -1;
 			SmartCoreObjectType = SmartCoreType.NonRoutineJob;
 		}
 	}

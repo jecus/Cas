@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Linq;
 using System.Reflection;
 using EFCore.DTO.General;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
-using SmartCore.Entities.General.Interfaces;
 using SmartCore.Files;
 
 namespace SmartCore.Entities.General

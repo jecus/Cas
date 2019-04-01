@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
-using System.Security.Cryptography.X509Certificates;
 
 namespace SmartCore.Tests.DataAccess
 {

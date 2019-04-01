@@ -11,7 +11,6 @@ using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General.Atlbs;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.Personnel;
@@ -26,59 +25,59 @@ namespace SmartCore.Entities.General.WorkPackage
     /// </summary>
     [Table("WorkPackages", "dbo", "ItemId")]
     [Dto(typeof(WorkPackageDTO))]
-	[Condition("IsDeleted", "0")]
-    public class WorkPackage :  BaseEntityObject, IDirectivePackage, IFileContainer, EmployeeWorkPackageFilterParams
-	{
-		private static Type _thisType;
-		/*
+    [Condition("IsDeleted", "0")]
+    public class WorkPackage : BaseEntityObject, IDirectivePackage, IFileContainer, EmployeeWorkPackageFilterParams
+    {
+        private static Type _thisType;
+        /*
 		*  Свойства взятые из базы данных
 		*/
 
-		#region public Int32 ParentId { get; set; }
-		/// <summary>
-		/// Id воздушного судна, для которого составлен рабочий пакет
-		/// </summary>
-		[TableColumn("ParentId")]
+        #region public Int32 ParentId { get; set; }
+        /// <summary>
+        /// Id воздушного судна, для которого составлен рабочий пакет
+        /// </summary>
+        [TableColumn("ParentId")]
         public Int32 ParentId { get; set; }
 
-		public static PropertyInfo ParentIdProperty
-		{
-			get { return GetCurrentType().GetProperty("ParentId"); }
-		}
+        public static PropertyInfo ParentIdProperty
+        {
+            get { return GetCurrentType().GetProperty("ParentId"); }
+        }
 
-		#endregion
+        #endregion
 
-		#region public String Number { get; set; }
-		/// <summary>
-		/// 
-		/// </summary>
-		[TableColumn("Number")]
+        #region public String Number { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        [TableColumn("Number")]
         [ListViewData(100f, "WP No:", 2)]
         [FilterAttribute("WP No", Order = 1)]
         public String Number { get; set; }
         #endregion
 
-		#region public String Title { get; set; }
-		/// <summary>
-		/// 
-		/// </summary>
+        #region public String Title { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         [TableColumn("Title")]
         [FormControl("Title:")]
-        [ListViewData(150f,"Title",3)]
+        [ListViewData(150f, "Title", 3)]
         [FilterAttribute("Title", Order = 2)]
         public String Title { get; set; }
-		#endregion
+        #endregion
 
-		#region public String Description { get; set; }
-		/// <summary>
-		/// 
-		/// </summary>
+        #region public String Description { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         [TableColumn("Description")]
         [FormControl("Description:")]
-        [ListViewData(100, "Description",4)]
+        [ListViewData(100, "Description", 4)]
         [FilterAttribute("Description", Order = 3)]
         public String Description { get; set; }
-		#endregion
+        #endregion
 
         #region public double ManHours { get; set; }
 
@@ -86,7 +85,7 @@ namespace SmartCore.Entities.General.WorkPackage
         /// Трудозатраты пакета работ
         /// </summary>
         [SubQueryAttribute("ManHours",
-			@"(select sum(manhours) 
+            @"(select sum(manhours) 
             from (SELECT manhours 
                   FROM directives 
                   where directives.itemId in (select DirectivesId 
@@ -143,8 +142,8 @@ namespace SmartCore.Entities.General.WorkPackage
                                               where Cas3WorkPakageRecord.IsDeleted = 0 and 
                                                     Cas3WorkPakageRecord.WorkPackageItemType = 14 and 
                                                     Cas3WorkPakageRecord.WorkPakageId = WorkPackages.ItemId)) WPMH)"
-			)]
-        [ListViewData(85, "MH",10)]
+            )]
+        [ListViewData(85, "MH", 10)]
         public double ManHours { get; set; }
         #endregion
 
@@ -167,20 +166,20 @@ namespace SmartCore.Entities.General.WorkPackage
         [FilterAttribute("Status", Order = 20)]
         public WorkPackageStatus Status
         {
-            get { return _status; } 
+            get { return _status; }
             set { _status = value; }
         }
 
-		public static PropertyInfo StatusProperty
-		{
-			get { return GetCurrentType().GetProperty("Status"); }
-		}
+        public static PropertyInfo StatusProperty
+        {
+            get { return GetCurrentType().GetProperty("Status"); }
+        }
 
-		#endregion
+        #endregion
 
-		#region public DateTime CreateDate { get; set; }
+        #region public DateTime CreateDate { get; set; }
 
-		private DateTime _createDate;
+        private DateTime _createDate;
         /// <summary>
         /// Дата открытия Рабочего Пакета 
         /// </summary>
@@ -192,7 +191,7 @@ namespace SmartCore.Entities.General.WorkPackage
             set
             {
                 DateTime min = DateTimeExtend.GetCASMinDateTime();
-                if(_createDate < min || _createDate != value)
+                if (_createDate < min || _createDate != value)
                 {
                     _createDate = value < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : value;
                 }
@@ -213,7 +212,7 @@ namespace SmartCore.Entities.General.WorkPackage
         }
         #endregion
 
-		#region public DateTime OpeningDate { get; set; }
+        #region public DateTime OpeningDate { get; set; }
 
         private DateTime _openingDate;
         /// <summary>
@@ -231,23 +230,23 @@ namespace SmartCore.Entities.General.WorkPackage
         /// <summary>
         /// Представление даты открытия рабочего пакета для списка
         /// </summary>
-        [ListViewData(0.1f, "Opening date", 6)] 
+        [ListViewData(0.1f, "Opening date", 6)]
         public DateTime? ListViewOpeningDate
         {
             get
             {
-                if (_openingDate < (DateTimeExtend.GetCASMinDateTime()) ) return null;
+                if (_openingDate < (DateTimeExtend.GetCASMinDateTime())) return null;
                 return _openingDate;
             }
         }
-		#endregion
+        #endregion
 
-		#region public DateTime PublishingDate { get; set; }
+        #region public DateTime PublishingDate { get; set; }
 
         private DateTime _publishingDate;
-		/// <summary>
-		/// Дата публикации рабочего пакета 
-		/// </summary>
+        /// <summary>
+        /// Дата публикации рабочего пакета 
+        /// </summary>
         [TableColumn("PublishingDate")]
         [FormControl("Publishing Date:")]
         [FilterAttribute("Published", Order = 15)]
@@ -270,9 +269,9 @@ namespace SmartCore.Entities.General.WorkPackage
             }
         }
 
-		#endregion
+        #endregion
 
-		#region public DateTime ClosingDate { get; set; }
+        #region public DateTime ClosingDate { get; set; }
 
         private DateTime _closingDate;
         /// <summary>
@@ -300,13 +299,13 @@ namespace SmartCore.Entities.General.WorkPackage
             }
         }
 
-		#endregion
+        #endregion
 
         #region public String WorkTimeString { get; set; }
         /// <summary>
         /// Для закрытого рабочего пакета, возвращает временной интервал, затраченный на исполнение задач в виде строки
         /// </summary>
-        [ListViewData(100,"Work time", 11)]
+        [ListViewData(100, "Work time", 11)]
         public String WorkTimeString
         {
             get
@@ -331,7 +330,7 @@ namespace SmartCore.Entities.General.WorkPackage
         /// </summary>
         [TableColumn("Author")]
         [FormControl("Author:", Enabled = false)]
-        [ListViewData(0.08f,"Author")]
+        [ListViewData(0.08f, "Author")]
         [FilterAttribute("Author", Order = 12)]
         public String Author { get; set; }
         #endregion
@@ -358,50 +357,50 @@ namespace SmartCore.Entities.General.WorkPackage
         public String ClosedBy { get; set; }
         #endregion
 
-		#region public String Remarks { get; set; }
-		/// <summary>
-		/// Примечания рабочего пакета 
-		/// </summary>
+        #region public String Remarks { get; set; }
+        /// <summary>
+        /// Примечания рабочего пакета 
+        /// </summary>
         [TableColumn("Remarks")]
         [FormControl("Remarks:")]
         [ListViewData(0.08f, "Remarks")]
         public String Remarks { get; set; }
-		#endregion
+        #endregion
 
-		#region public String PublishingRemarks { get; set; }
-		/// <summary>
-		/// 
-		/// </summary>
+        #region public String PublishingRemarks { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         [TableColumn("PublishingRemarks")]
         [FormControl("Publishing Remarks:")]
         public String PublishingRemarks { get; set; }
-		#endregion
+        #endregion
 
-		#region public String ClosingRemarks { get; set; }
-		/// <summary>
-		/// 
-		/// </summary>
+        #region public String ClosingRemarks { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         [TableColumn("ClosingRemarks")]
         [FormControl("Closing Remarks:")]
         public String ClosingRemarks { get; set; }
-		#endregion
+        #endregion
 
-		#region public Boolean OnceClosed { get; set; }
-		/// <summary>
-		/// 
-		/// </summary>
+        #region public Boolean OnceClosed { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         [TableColumn("OnceClosed")]
         public Boolean OnceClosed { get; set; }
-		#endregion
+        #endregion
 
-		#region public String ReleaseCertificateNo { get; set; }
-		/// <summary>
-		/// 
-		/// </summary>
+        #region public String ReleaseCertificateNo { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         [TableColumn("ReleaseCertificateNo")]
         [FormControl("Release Certificate No:")]
         public String ReleaseCertificateNo { get; set; }
-		#endregion
+        #endregion
 
         #region public String Revision { get; set; }
         /// <summary>
@@ -412,99 +411,99 @@ namespace SmartCore.Entities.General.WorkPackage
         public String Revision { get; set; }
         #endregion
 
-		#region public String CheckType { get; set; }
-		/// <summary>
-		/// 
-		/// </summary>
+        #region public String CheckType { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         [TableColumn("CheckType")]
         [FormControl("Check Type:")]
         public String CheckType { get; set; }
-		#endregion
+        #endregion
 
-		#region public String Station { get; set; }
-		/// <summary>
-		/// 
-		/// </summary>
+        #region public String Station { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         [TableColumn("Station")]
         [FormControl("Station:")]
         [ListViewData(0.08f, "Station", 12)]
         [FilterAttribute("Station", Order = 4)]
         public String Station { get; set; }
-		#endregion
+        #endregion
 
-		#region public string EmployeesRemark { get; set; }
+        #region public string EmployeesRemark { get; set; }
 
-		[TableColumn("EmployeesRemark")]
-	    public string EmployeesRemark { get; set; }
+        [TableColumn("EmployeesRemark")]
+        public string EmployeesRemark { get; set; }
 
-		#endregion
+        #endregion
 
-		#region public String MaintenanceRepairOrzanization { get; set; }
-		/// <summary>
-		/// 
-		/// </summary>
-		[TableColumn("MaintenanceReportNo")]
+        #region public String MaintenanceRepairOrzanization { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        [TableColumn("MaintenanceReportNo")]
         [ListViewData(0.05f, "MRO", 13)]
         [FormControl("MRO:")]
         [FilterAttribute("MRO", Order = 10)]
         public String MaintenanceRepairOrzanization { get; set; }
-		#endregion
+        #endregion
 
-		#region public AttachedFile AttachedFile { get; set; }
+        #region public AttachedFile AttachedFile { get; set; }
 
-		private AttachedFile _attachedFile;
+        private AttachedFile _attachedFile;
 
-		/// <summary>
-		/// 
-		/// </summary>
-		[FormControl("WP File:")]
-		public AttachedFile AttachedFile
-	    {
-			get
-			{
-				return _attachedFile ?? (Files.GetFileByFileLinkType(FileLinkType.WorkPackageAttachedFile));
-			}
-			set
-			{
-				_attachedFile = value;
-				Files.SetFileByFileLinkType(SmartCoreObjectType.ItemId, value, FileLinkType.WorkPackageAttachedFile);
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        [FormControl("WP File:")]
+        public AttachedFile AttachedFile
+        {
+            get
+            {
+                return _attachedFile ?? (Files.GetFileByFileLinkType(FileLinkType.WorkPackageAttachedFile));
+            }
+            set
+            {
+                _attachedFile = value;
+                Files.SetFileByFileLinkType(SmartCoreObjectType.ItemId, value, FileLinkType.WorkPackageAttachedFile);
+            }
+        }
 
-	    #endregion
+        #endregion
 
-		#region public CommonCollection<ItemFileLink> Files { get; set; }
+        #region public CommonCollection<ItemFileLink> Files { get; set; }
 
-		private CommonCollection<ItemFileLink> _files;
+        private CommonCollection<ItemFileLink> _files;
 
-		[Child(RelationType.OneToMany, "ParentId", "ParentTypeId", 2499)]
-		public CommonCollection<ItemFileLink> Files
-		{
-			get { return _files ?? (_files = new CommonCollection<ItemFileLink>()); }
-			set
-			{
-				if (_files != value)
-				{
-					if (_files != null)
-						_files.Clear();
-					if (value != null)
-						_files = value;
-				}
-			}
-		}
+        [Child(RelationType.OneToMany, "ParentId", "ParentTypeId", 2499)]
+        public CommonCollection<ItemFileLink> Files
+        {
+            get { return _files ?? (_files = new CommonCollection<ItemFileLink>()); }
+            set
+            {
+                if (_files != value)
+                {
+                    if (_files != null)
+                        _files.Clear();
+                    if (value != null)
+                        _files = value;
+                }
+            }
+        }
 
-		#endregion
-		/*
+        #endregion
+        /*
          * Дополнительные свойства
          */
 
-		#region public Aircraft Aircraft { get; set; }
+        #region public Aircraft Aircraft { get; set; }
 
-		/// <summary>
-		/// Обратная ссылка на воздушное судно, для которого составлен рабочий пакет. 
-		/// Может быть null если рабочий пакет составлен не для воздушного судна
-		/// </summary>
-		[FilterAttribute("Aircraft", Order = 41)]
+        /// <summary>
+        /// Обратная ссылка на воздушное судно, для которого составлен рабочий пакет. 
+        /// Может быть null если рабочий пакет составлен не для воздушного судна
+        /// </summary>
+        [FilterAttribute("Aircraft", Order = 41)]
         public Aircraft Aircraft { get; set; }
 
         #endregion
@@ -567,7 +566,7 @@ namespace SmartCore.Entities.General.WorkPackage
         #region public CommonCollection<MaintenanceCheckBindTaskRecord> MaintenanceCheckBindTaskRecords { get; }
 
         private CommonCollection<MaintenanceCheckBindTaskRecord> _maintenanceCheckBindTaskRecords;
-	    /// <summary>
+        /// <summary>
         /// Возвращает массив записей о привязке задач к чекам находящимся в данном рабочем пакете
         /// </summary>
         public CommonCollection<MaintenanceCheckBindTaskRecord> MaintenanceCheckBindTaskRecords
@@ -623,17 +622,17 @@ namespace SmartCore.Entities.General.WorkPackage
         /// Можно ли закрыть пакет
         /// </summary>
         public bool CanClose { get; set; }
-		#endregion
+        #endregion
 
-		/*
+        /*
          * Элементы рабочего пакета, Work Package содержит все виды работ из Forecast + Job Cards + Non Routine Jobs + Maintenance Cheks + Maintenance Workscope Items
          */
 
-		#region public BaseComponentCollection BaseComponents { get; internal set; }
-		/// <summary>
-		/// Базовые агрегаты, для которых задан Lifelimit
-		/// </summary>
-		public BaseComponentCollection BaseComponents
+        #region public BaseComponentCollection BaseComponents { get; internal set; }
+        /// <summary>
+        /// Базовые агрегаты, для которых задан Lifelimit
+        /// </summary>
+        public BaseComponentCollection BaseComponents
         {
             get
             {
@@ -649,13 +648,13 @@ namespace SmartCore.Entities.General.WorkPackage
                 return res;
             }
         }
-		#endregion
+        #endregion
 
-		#region public ComponentCollection Components { get; internal set; }
-		/// <summary>
-		/// Компоненты, которые необходимо заменить (Remove/Replace)
-		/// </summary>
-		public ComponentCollection Components
+        #region public ComponentCollection Components { get; internal set; }
+        /// <summary>
+        /// Компоненты, которые необходимо заменить (Remove/Replace)
+        /// </summary>
+        public ComponentCollection Components
         {
             get
             {
@@ -671,22 +670,22 @@ namespace SmartCore.Entities.General.WorkPackage
                 return res;
             }
         }
-		#endregion
+        #endregion
 
-		#region public IEnumerable<ComponentDirective> ComponentDirectives { get; }
-		/// <summary>
-		/// Работы по компонентам, которые необходимо выполнить. Важно - для Component Directive родителем могут быть как BaseComponent так и Component
-		/// </summary>
-		public IEnumerable<ComponentDirective> ComponentDirectives
+        #region public IEnumerable<ComponentDirective> ComponentDirectives { get; }
+        /// <summary>
+        /// Работы по компонентам, которые необходимо выполнить. Важно - для Component Directive родителем могут быть как BaseComponent так и Component
+        /// </summary>
+        public IEnumerable<ComponentDirective> ComponentDirectives
         {
             get
             {
                 List<ComponentDirective> res = new List<ComponentDirective>();
                 foreach (WorkPackageRecord record in _workPackageRecords)
                 {
-                    if(record.Task != null &&
+                    if (record.Task != null &&
                        record.Task.SmartCoreObjectType == SmartCoreType.ComponentDirective)
-                       res.Add((ComponentDirective)record.Task);
+                        res.Add((ComponentDirective)record.Task);
                 }
                 return res;
             }
@@ -714,59 +713,59 @@ namespace SmartCore.Entities.General.WorkPackage
                 return res;
             }
         }
-		#endregion
+        #endregion
 
-		#region public IEnumerable<Directive> SbStatus { get; }
-		/// <summary>
-		/// Элементы отчета Cpcp, которые требуют выполнения 
-		/// </summary>
-		public IEnumerable<Directive> SbStatus
-		{
-			get
-			{
-				CommonCollection<Directive> res = new CommonCollection<Directive>();
-				foreach (WorkPackageRecord record in _workPackageRecords)
-				{
-					if (record.Task != null &&
-						record.Task.SmartCoreObjectType == SmartCoreType.Directive &&
-						((Directive)record.Task).DirectiveType == DirectiveType.SB)
-					{
-						res.Add((Directive)record.Task);
-					}
-				}
-				return res;
-			}
-		}
-		#endregion
+        #region public IEnumerable<Directive> SbStatus { get; }
+        /// <summary>
+        /// Элементы отчета Cpcp, которые требуют выполнения 
+        /// </summary>
+        public IEnumerable<Directive> SbStatus
+        {
+            get
+            {
+                CommonCollection<Directive> res = new CommonCollection<Directive>();
+                foreach (WorkPackageRecord record in _workPackageRecords)
+                {
+                    if (record.Task != null &&
+                        record.Task.SmartCoreObjectType == SmartCoreType.Directive &&
+                        ((Directive)record.Task).DirectiveType == DirectiveType.SB)
+                    {
+                        res.Add((Directive)record.Task);
+                    }
+                }
+                return res;
+            }
+        }
+        #endregion
 
-		#region public IEnumerable<Directive> EoStatus { get; }
-		/// <summary>
-		/// Элементы отчета Cpcp, которые требуют выполнения 
-		/// </summary>
-		public IEnumerable<Directive> EoStatus
-		{
-			get
-			{
-				CommonCollection<Directive> res = new CommonCollection<Directive>();
-				foreach (WorkPackageRecord record in _workPackageRecords)
-				{
-					if (record.Task != null &&
-						record.Task.SmartCoreObjectType == SmartCoreType.Directive &&
-						((Directive)record.Task).DirectiveType == DirectiveType.EngineeringOrders)
-					{
-						res.Add((Directive)record.Task);
-					}
-				}
-				return res;
-			}
-		}
-		#endregion
+        #region public IEnumerable<Directive> EoStatus { get; }
+        /// <summary>
+        /// Элементы отчета Cpcp, которые требуют выполнения 
+        /// </summary>
+        public IEnumerable<Directive> EoStatus
+        {
+            get
+            {
+                CommonCollection<Directive> res = new CommonCollection<Directive>();
+                foreach (WorkPackageRecord record in _workPackageRecords)
+                {
+                    if (record.Task != null &&
+                        record.Task.SmartCoreObjectType == SmartCoreType.Directive &&
+                        ((Directive)record.Task).DirectiveType == DirectiveType.EngineeringOrders)
+                    {
+                        res.Add((Directive)record.Task);
+                    }
+                }
+                return res;
+            }
+        }
+        #endregion
 
-		#region public IEnumerable<Directive> Damages { get; }
-		/// <summary>
-		/// Элементы отчета Cpcp, которые требуют выполнения 
-		/// </summary>
-		public IEnumerable<Directive> Damages
+        #region public IEnumerable<Directive> Damages { get; }
+        /// <summary>
+        /// Элементы отчета Cpcp, которые требуют выполнения 
+        /// </summary>
+        public IEnumerable<Directive> Damages
         {
             get
             {
@@ -824,10 +823,10 @@ namespace SmartCore.Entities.General.WorkPackage
         {
             get
             {
-                IEnumerable<NonRoutineJob> res = 
+                IEnumerable<NonRoutineJob> res =
                     _workPackageRecords.Where(record => record.Task != null &&
                                                         record.Task.SmartCoreObjectType == SmartCoreType.NonRoutineJob)
-                                       .Select(record=>record.Task as NonRoutineJob);
+                                       .Select(record => record.Task as NonRoutineJob);
                 return res;
             }
         }
@@ -865,99 +864,99 @@ namespace SmartCore.Entities.General.WorkPackage
                 return res;
             }
         }
-		#endregion
+        #endregion
 
-		#region public IEnumerable<AbstractAccessory> Kits {get;}
+        #region public IEnumerable<AbstractAccessory> Kits {get;}
 
-		public IEnumerable<AbstractAccessory> Kits
-	    {
-		    get
-		    {
-			    var kits = new List<AbstractAccessory>();
+        public IEnumerable<AbstractAccessory> Kits
+        {
+            get
+            {
+                var kits = new List<AbstractAccessory>();
 
-			    foreach (var wpr in WorkPakageRecords)
-			    {
-				    if (wpr.Task != null && wpr.Task is IKitRequired)
-					    kits.AddRange((wpr.Task as IKitRequired).Kits.ToArray());
-			    }
+                foreach (var wpr in WorkPakageRecords)
+                {
+                    if (wpr.Task != null && wpr.Task is IKitRequired)
+                        kits.AddRange((wpr.Task as IKitRequired).Kits.ToArray());
+                }
 
-				return kits;
-		    }
-	    }
+                return kits;
+            }
+        }
 
-		#endregion
+        #endregion
 
-		#region #EmployeeWorkPackageFilterParams
+        #region #EmployeeWorkPackageFilterParams
 
-		public Specialist Specialist { get; set; }
+        public Specialist Specialist { get; set; }
 
-		public List<AircraftModel> LicenseAircrafts
-		{
-			get { return Specialist.LicenseAircrafts; }
-		}
+        public List<AircraftModel> LicenseAircrafts
+        {
+            get { return Specialist.LicenseAircrafts; }
+        }
 
-		public List<LicenseFunction> LicenseFunctions
-		{
-			get { return Specialist.LicenseFunctions; }
-		}
+        public List<LicenseFunction> LicenseFunctions
+        {
+            get { return Specialist.LicenseFunctions; }
+        }
 
-		public List<LicenseRights> LicenseRights
-		{
-			get { return Specialist.LicenseRights; }
-		}
+        public List<LicenseRights> LicenseRights
+        {
+            get { return Specialist.LicenseRights; }
+        }
 
-		#endregion
+        #endregion
 
-		#region public Document ClosingDocument { get; set; }
+        #region public Document ClosingDocument { get; set; }
 
-		public Document ClosingDocument { get; set; }
+        public Document ClosingDocument { get; set; }
 
-		#endregion
+        #endregion
 
-		/*
+        /*
 		*  Методы 
 		*/
 
-		public string ComboBoxMember
-		{
-			get { return $"{Aircraft} WP : {Number} | Title: {Title}"; }
-		}
+        public string ComboBoxMember
+        {
+            get { return $"{Aircraft} WP : {Number} | Title: {Title}"; }
+        }
 
 
-		#region public WorkPackage()
-		/// <summary>
-		/// Создает воздушное судно без дополнительной информации
-		/// </summary>
-		public WorkPackage()
+        #region public WorkPackage()
+        /// <summary>
+        /// Создает воздушное судно без дополнительной информации
+        /// </summary>
+        public WorkPackage()
         {
             ItemId = -1;
-			SmartCoreObjectType = SmartCoreType.WorkPackage;
+            SmartCoreObjectType = SmartCoreType.WorkPackage;
             CanClose = true;
             CanPublish = true;
             WorkPackageItemsLoaded = false;
             Title = "";
             // создаем все коллекции
         }
-		#endregion
+        #endregion
 
-		#region private static Type GetCurrentType()
-		private static Type GetCurrentType()
-		{
-			return _thisType ?? (_thisType = typeof(WorkPackage));
-		}
-		#endregion
+        #region private static Type GetCurrentType()
+        private static Type GetCurrentType()
+        {
+            return _thisType ?? (_thisType = typeof(WorkPackage));
+        }
+        #endregion
 
-		#region public override string ToString()
-		/// <summary>
-		/// Перегружаем для отладки
-		/// </summary>
-		/// <returns></returns>
-		public override string ToString()
+        #region public override string ToString()
+        /// <summary>
+        /// Перегружаем для отладки
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
         {
             return Title;
         }
-		#endregion
+        #endregion
 
-	}
+    }
 
 }

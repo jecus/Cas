@@ -20,7 +20,6 @@ using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.MTOP;
-using SmartCore.Entities.General.Store;
 using SmartCore.Entities.General.WorkPackage;
 using Convert = System.Convert;
 
@@ -557,11 +556,11 @@ namespace CAS.UI.UIControls.WorkPakage
             }
             _workPackage.Status = WorkPackageStatus.Closed;
             _workPackage.ClosingDate = dateTimePickerClosingDate.Value;
-            _workPackage.ClosedBy = GlobalObjects.CasEnvironment.CurrentUser.Login;
+            _workPackage.ClosedBy = GlobalObjects.CasEnvironment.IdentityUser.Login;
             _workPackage.ClosingRemarks = "";
 
             if (_workPackage.PublishedBy == "")
-                _workPackage.PublishedBy = GlobalObjects.CasEnvironment.CurrentUser.Login;
+                _workPackage.PublishedBy = GlobalObjects.CasEnvironment.IdentityUser.Login;
             if (_workPackage.PublishingDate <= _workPackage.OpeningDate)
                 _workPackage.PublishingDate = _workPackage.OpeningDate;
             try

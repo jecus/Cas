@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using EFCore.DTO.General;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.Entities.General
@@ -156,6 +157,7 @@ namespace SmartCore.Entities.General
         {
             ItemId = -1;
             IsDeleted = false;
+			SmartCoreObjectType = SmartCoreType.AttachedFile;
         }
         #endregion
 

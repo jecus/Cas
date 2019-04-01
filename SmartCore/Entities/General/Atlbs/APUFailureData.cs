@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Linq;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
-using SmartCore.Entities.General.Interfaces;
 using SmartCore.Files;
 
 namespace SmartCore.Entities.General.Atlbs

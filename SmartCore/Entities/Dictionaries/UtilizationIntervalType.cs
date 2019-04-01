@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SmartCore.Entities.Dictionaries
+﻿namespace SmartCore.Entities.Dictionaries
 {
     /// <summary>
     /// Тип интервала средней наработки

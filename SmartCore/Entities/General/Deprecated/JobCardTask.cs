@@ -1,6 +1,7 @@
 using System;
 using EFCore.DTO.General;
 using SmartCore.Entities.Collections;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.Entities.General.Deprecated
@@ -126,6 +127,8 @@ namespace SmartCore.Entities.General.Deprecated
         /// </summary>
         public JobCardTask()
         {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.JobCardTask;
             Man = 1;
         }
         #endregion

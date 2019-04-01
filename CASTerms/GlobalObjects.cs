@@ -1,7 +1,9 @@
-﻿using SmartCore;
+﻿using Newtonsoft.Json.Linq;
+using SmartCore;
 using SmartCore.AircraftFlights;
 using SmartCore.Aircrafts;
 using SmartCore.Analyst;
+using SmartCore.AuditMongo.Repository;
 using SmartCore.Audits;
 using SmartCore.AverageUtilizations;
 using SmartCore.Calculations.MTOP;
@@ -37,6 +39,9 @@ namespace CASTerms
         /// <summary>
         /// Используемое ядро Cas
         /// </summary>
+        public static JObject Config { get; set; }
+
+		public static IAuditRepository  AuditRepository { get; set; }
         public static ICasEnvironment CasEnvironment { get; set; }
         public static IPackageCore PackageCore { get; set; }
         public static IPurchaseCore PurchaseCore { get; set; }

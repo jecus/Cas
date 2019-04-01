@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Data;
 using System.Linq;
 using EFCore.DTO.General;
 using EFCore.Filter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Filters;
 using SmartCore.Management;
 
 namespace SmartCore.Tests

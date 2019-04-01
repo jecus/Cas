@@ -10,7 +10,6 @@ using CAS.UI.UIControls.JobCardControls;
 using CASTerms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Deprecated;
 using SmartCore.Entities.General.Directives;
 using TempUIExtentions;

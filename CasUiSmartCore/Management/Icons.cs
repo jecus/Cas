@@ -267,7 +267,7 @@ namespace CAS.UI.Management
 
         #endregion
 
-        #region internal Image CurrentUser
+        #region internal Image IdentityUser
 
         /// <summary>
         /// Возвращает иконку, использующуюся для отображения информации о пользователе

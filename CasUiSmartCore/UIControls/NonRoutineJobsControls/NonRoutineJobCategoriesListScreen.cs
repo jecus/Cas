@@ -13,7 +13,6 @@ using CAS.UI.UIControls.WorkPakage;
 using CASTerms;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.WorkPackage;
 
 namespace CAS.UI.UIControls.NonRoutineJobsControls

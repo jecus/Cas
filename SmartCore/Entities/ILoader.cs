@@ -5,9 +5,6 @@ using System.Reflection;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Deprecated;
-using SmartCore.Entities.General.Templates;
 using SmartCore.Filters;
 using SmartCore.Queries;
 

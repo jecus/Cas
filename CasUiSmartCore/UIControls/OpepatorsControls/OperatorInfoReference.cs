@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
-using CAS.UI.UIControls.DocumentationControls;
 using CAS.UI.UIControls.ReferenceControls;
 using SmartCore.Entities.General;
 
@@ -129,9 +128,19 @@ namespace CAS.UI.UIControls.OpepatorsControls
         {
             UpdateDataForOperator();
         }
-        #endregion
+		#endregion
+
+		#region  private void LinkLabelEditPassword_Click(object sender, EventArgs e)
+
+		private void LinkLabelEditPassword_Click(object sender, EventArgs e)
+		{
+			var form = new PasswordChangeForm();
+			form.ShowDialog();
+		}
+
+		#endregion
 
 
-        #endregion
-    }
+		#endregion
+	}
 }

@@ -2,10 +2,8 @@
 
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 using AvControls;
@@ -14,12 +12,8 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.OpepatorsControls;
 using CASTerms;
 using SmartCore.Auxiliary;
-using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.Quality;
 using Convert = SmartCore.Auxiliary.Convert;
 

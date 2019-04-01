@@ -6,7 +6,6 @@ using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Calculations.Maintenance;
 using SmartCore.Entities.Collections;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.MaintenanceWorkscope;

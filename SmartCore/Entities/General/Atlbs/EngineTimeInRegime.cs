@@ -129,6 +129,8 @@ namespace SmartCore.Entities.General.Atlbs
         public EngineTimeInRegime()
         {
             FlightRegime = FlightRegime.UNK;
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.EngineTimeInRegime;
         }
 
         #endregion

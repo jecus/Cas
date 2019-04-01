@@ -253,6 +253,8 @@ namespace SmartCore.Entities.Dictionaries
             _maxAge = 0;
             _weightSummer = 0;
             _weightWinter = 0;
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.AGWCategory;
         }
         #endregion
 

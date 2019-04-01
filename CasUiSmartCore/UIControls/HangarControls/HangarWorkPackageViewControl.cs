@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -9,23 +8,14 @@ using System.Windows.Forms;
 using System.Windows.Forms.Design;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
-using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.Auxiliary.Comparers;
-using CAS.UI.UIControls.DetailsControls;
-using CAS.UI.UIControls.DirectivesControls;
-using CAS.UI.UIControls.MaintananceProgram;
-using CAS.UI.UIControls.StoresControls;
 using CAS.UI.UIControls.WorkPakage;
 using CASTerms;
 using EFCore.DTO.Dictionaries;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.WorkPackage;
 
 namespace CAS.UI.UIControls.HangarControls

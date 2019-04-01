@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.ComponentControls;
-using CAS.UI.UIControls.DetailsControls;
 using CAS.UI.UIControls.DirectivesControls;
 using CAS.UI.UIControls.KitControls;
 using CAS.UI.UIControls.MaintananceProgram;

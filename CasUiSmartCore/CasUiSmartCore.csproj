@@ -608,6 +608,39 @@
     <OutputPath>bin\x64\ScatRelease\</OutputPath>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DEMO|AnyCPU'">
+    <OutputPath>bin\DEMO\</OutputPath>
+    <DefineConstants>TRACE;RELEASE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DEMO|x86'">
+    <OutputPath>bin\x86\DEMO\</OutputPath>
+    <DefineConstants>TRACE;DEMO</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DEMO|x64'">
+    <OutputPath>bin\x64\DEMO\</OutputPath>
+    <DefineConstants>TRACE;RELEASE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -637,6 +670,15 @@
     </Reference>
     <Reference Include="EPPlus.Core, Version=1.5.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.Core.1.5.4\lib\net45\EPPlus.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
@@ -819,6 +861,12 @@
     <Compile Include="UIControls\AircraftTechnicalLogBookControls\AircraftFlightLight\DiscrepanciesListControlLight.designer.cs">
       <DependentUpon>DiscrepanciesListControlLight.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\AnimatedBackgroundWorker\LoadingFormNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\AnimatedBackgroundWorker\LoadingFormNew.Designer.cs">
+      <DependentUpon>LoadingFormNew.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\Auxiliary\DataGridViewElements\DataGridViewLookupCell.cs" />
     <Compile Include="UIControls\Auxiliary\DataGridViewElements\DataGridViewLookupColumn.cs" />
     <Compile Include="UIControls\Auxiliary\DataGridViewElements\DataGridViewCalendarEditingControl.cs">
@@ -980,6 +1028,12 @@
     <Compile Include="UIControls\MTOP\MTOPSummary.Designer.cs">
       <DependentUpon>MTOPSummary.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\OpepatorsControls\PasswordChangeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\OpepatorsControls\PasswordChangeForm.Designer.cs">
+      <DependentUpon>PasswordChangeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\PersonnelControls\EmployeeCompliance\TrainingCompliance.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1093,6 +1147,18 @@
     </Compile>
     <Compile Include="UIControls\PowerPlants\PowerPlantListView.Designer.cs">
       <DependentUpon>PowerPlantListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\AllProduct\AllProductListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\AllProduct\AllProductListScreen.Designer.cs">
+      <DependentUpon>AllProductListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\AllProduct\AllProductListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\AllProduct\AllProductListView.Designer.cs">
+      <DependentUpon>AllProductListView.cs</DependentUpon>
     </Compile>
     <Compile Include="UIControls\PurchaseControls\GoodStandardForm.cs">
       <SubType>Form</SubType>
@@ -2512,6 +2578,24 @@
     <Compile Include="UIControls\SupplierControls\SupplierListView.Designer.cs">
       <DependentUpon>SupplierListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\Users\UserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\Users\UserForm.Designer.cs">
+      <DependentUpon>UserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Users\UserListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Users\UserListView.Designer.cs">
+      <DependentUpon>UserListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Users\UserListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Users\UserListScreen.Designer.cs">
+      <DependentUpon>UserListScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\WorkHelper\WorkHelperMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3664,6 +3748,9 @@
     <EmbeddedResource Include="UIControls\AircraftTechnicalLogBookControls\AircraftFlightLight\DiscrepanciesListControlLight.resx">
       <DependentUpon>DiscrepanciesListControlLight.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\AnimatedBackgroundWorker\LoadingFormNew.resx">
+      <DependentUpon>LoadingFormNew.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIControls\Auxiliary\TestControl.resx">
       <DependentUpon>TestControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -3727,6 +3814,9 @@
       <DependentUpon>MTOPSummary.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\NonRoutineJobsControls\NonRoutineJobsListScreen.resx" />
+    <EmbeddedResource Include="UIControls\OpepatorsControls\PasswordChangeForm.resx">
+      <DependentUpon>PasswordChangeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PersonnelControls\EmployeeCompliance\TrainingCompliance.resx">
       <DependentUpon>TrainingCompliance.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -3780,6 +3870,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PowerPlants\PowerPlantListScreen.resx">
       <DependentUpon>PowerPlantListScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\PurchaseControls\AllProduct\AllProductListScreen.resx">
+      <DependentUpon>AllProductListScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PurchaseControls\GoodStandardForm.resx">
       <DependentUpon>GoodStandardForm.cs</DependentUpon>
@@ -4364,6 +4457,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\SupplierControls\SupplierListScreen.resx">
       <DependentUpon>SupplierListScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Users\UserForm.resx">
+      <DependentUpon>UserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Users\UserListScreen.resx">
+      <DependentUpon>UserListScreen.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\WorkHelper\WorkHelperMainForm.resx">
@@ -5206,4 +5306,9 @@
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties AppSettings_1json__JSONSchema="" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

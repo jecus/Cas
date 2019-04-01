@@ -204,7 +204,7 @@ namespace SmartCore.Entities.General
 		    var g = obj as BaseEntityObject;
 		    if (g == null) return false;
 
-		    return ItemId == g.ItemId && SmartCoreObjectType.ItemId == g.SmartCoreObjectType.ItemId;
+		    return ItemId == g.ItemId && SmartCoreObjectType?.ItemId == g.SmartCoreObjectType?.ItemId;
 	    }
 
 	    #endregion

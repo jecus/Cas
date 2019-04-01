@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-
-
-namespace SmartCore.Entities
+﻿namespace SmartCore.Entities
 {
     public class XlsReader
     {

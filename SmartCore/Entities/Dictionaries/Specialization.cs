@@ -115,6 +115,7 @@ namespace SmartCore.Entities.Dictionaries
         public Specialization()
         {
             ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.Specialization;
         }
 		#endregion
 

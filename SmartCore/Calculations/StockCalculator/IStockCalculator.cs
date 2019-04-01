@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Store;
 
 namespace SmartCore.Calculations.StockCalculator

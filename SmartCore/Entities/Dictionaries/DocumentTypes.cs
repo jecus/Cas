@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using EFCore.DTO.Dictionaries;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General.Attributes;
@@ -413,6 +412,7 @@ namespace SmartCore.Entities.Dictionaries
         {
             ItemId = -1;
             _documentTypeId = -1;
+            SmartCoreObjectType = SmartCoreType.DocumentSubType;
         }
         #endregion
     }

@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Atlbs;
 
 namespace SmartCore.Entities.Collections

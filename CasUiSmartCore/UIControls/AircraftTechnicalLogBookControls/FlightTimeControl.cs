@@ -2,7 +2,6 @@ using System;
 using System.ComponentModel;
 using Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Events;
-using CASTerms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Atlbs;
 

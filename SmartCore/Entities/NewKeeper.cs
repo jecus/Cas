@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using EFCore.Attributte;
 using EFCore.DTO;
+using SmartCore.AuditMongo.Repository;
 using SmartCore.DataAccesses;
 using SmartCore.DtoHelper;
 using SmartCore.Entities.General;
@@ -16,27 +16,36 @@ namespace SmartCore.Entities
 		#region Fields
 
 		private readonly CasEnvironment _casEnvironment;
+		private readonly IAuditRepository _auditRepository;
 		private readonly FilesSmartCore _filesSmartCore;
 
 		#endregion
 
 		#region Constructor
 
-		public NewKeeper(CasEnvironment casEnvironment)
+		public NewKeeper(CasEnvironment casEnvironment, IAuditRepository auditRepository)
 		{
 			_casEnvironment = casEnvironment;
+			_auditRepository = auditRepository;
 			_filesSmartCore = new FilesSmartCore(_casEnvironment);
 		}
 
 		#endregion
 
-		public void Save(BaseEntityObject value, bool saveAttachedFile = true)
+		public void Save(BaseEntityObject value, bool saveAttachedFile = true, bool writeAudit = true)
 		{
+			var type = AuditOperation.Created;
+			if (value.ItemId > 0)
+				type = AuditOperation.Changed;
+				
 			var blType = value.GetType();
 			var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
 			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "SaveGeneric")?.MakeGenericMethod(blType, dto.Type);
 
 			method.Invoke(this, new object[] { value, saveAttachedFile });
+
+			if(writeAudit)
+				_auditRepository.WriteAsync(value, type ,_casEnvironment.IdentityUser);
 		}
 
 		public void SaveGeneric<T, TOut>(T value, bool saveAttachedFile = true) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
@@ -73,6 +82,9 @@ namespace SmartCore.Entities
 			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "DeleteGeneric")?.MakeGenericMethod(blType, dto.Type);
 
 			method.Invoke(this, new object[] { value, isDeletedOnly, saveAttachedFile });
+
+			_auditRepository.WriteAsync(value, AuditOperation.Deleted, _casEnvironment.IdentityUser);
+
 		}
 
 		public void DeleteGeneric<T, TOut>(T value, bool isDeletedOnly = false, bool saveAttachedFile = true) where T : BaseEntityObject, new() where TOut : BaseEntity, new()

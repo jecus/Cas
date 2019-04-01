@@ -1,6 +1,7 @@
 using System;
 using EFCore.DTO.General;
 using SmartCore.Calculations;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Personnel;
 
@@ -167,6 +168,8 @@ namespace SmartCore.Entities.General.Atlbs
         public CertificateOfReleaseToService()
         {
             _recordDate = DateTime.Today;
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.CertificateOfReleaseToService;
         }
     }
 

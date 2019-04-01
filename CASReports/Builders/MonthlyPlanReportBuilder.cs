@@ -6,13 +6,11 @@ using CASReports.ReportTemplates;
 using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
-using SmartCore.Entities.General.Store;
 using SmartCore.Filters;
 using Convert = System.Convert;
 

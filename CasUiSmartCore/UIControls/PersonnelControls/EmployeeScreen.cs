@@ -15,9 +15,7 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Atlbs;
 using SmartCore.Entities.General.Personnel;
 using SmartCore.Entities.General.WorkPackage;
-using SmartCore.Filters;
 using SmartCore.Purchase;
-using SmartCore.Queries;
 using Component = SmartCore.Entities.General.Accessory.Component;
 
 namespace CAS.UI.UIControls.PersonnelControls

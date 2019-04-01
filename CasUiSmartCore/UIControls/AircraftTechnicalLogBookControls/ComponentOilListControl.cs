@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary.Events;
 using CASTerms;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Atlbs;
 

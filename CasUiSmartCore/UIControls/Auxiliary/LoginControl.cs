@@ -5,10 +5,8 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
-using CAS.UI.Logging;
 using CAS.UI.Management;
 using CAS.UI.Properties;
 using CAS.UI.Events;
@@ -34,7 +32,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         private BackgroundWorker backgroundWorker;
         private LoadingState _loadingState = new LoadingState();
-        private LoadForm _loadForm = new LoadForm { ShowButtonsPanel = false };
+        private LoadingForm _loadForm = new LoadingForm { ShowButtonsPanel = false };
 
         protected Label labelTitle;
         protected Panel panelLoginPasswordContainer;
@@ -721,6 +719,7 @@ namespace CAS.UI.UIControls.Auxiliary
                     {
                         //GlobalObjects.CasEnvironment.Connect(serverName, settings.Username, settings.Password, baseName);
                         GlobalObjects.CasEnvironment.Connect(settings.ServerName, settings.Username, settings.Password, "");
+						SaveJsonSetting(settings.Username);
                     }
                     catch (ConnectionFailureException ex)
                     {
@@ -846,6 +845,21 @@ namespace CAS.UI.UIControls.Auxiliary
         }
 
 		#endregion
+
+		private void SaveJsonSetting(string login)
+		{
+			var exePath = Path.GetDirectoryName(Application.ExecutablePath);
+			var path = Path.Combine(exePath, "AppSettings.json");
+			var json = File.ReadAllText(path);
+			_settings = JsonConvert.DeserializeObject<JsonSettings>(json);
+
+			if (!_settings.LastInformation.Login.Equals(login))
+				return;
+
+			_settings.LastInformation.Login = login;
+			var output = JsonConvert.SerializeObject(_settings, Newtonsoft.Json.Formatting.Indented);
+			File.WriteAllText(path, output);
+		}
 
 		private void LoadJsonSettings()
 		{

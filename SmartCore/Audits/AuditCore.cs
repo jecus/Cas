@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using EFCore.DTO.General;
 using EFCore.Filter;
@@ -16,10 +15,8 @@ using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.Quality;
-using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Entities.NewLoader;
 using SmartCore.Filters;
-using SmartCore.Management;
 using SmartCore.Queries;
 using SmartCore.RegisterPerformances;
 
@@ -522,7 +519,7 @@ namespace SmartCore.Audits
 			{
 				Description = "",
 				Status = WorkPackageStatus.Opened,
-				Author = _casEnvironment.CurrentUser.Login,
+				Author = _casEnvironment.IdentityUser.Login,
 				CreateDate = DateTime.Now,
 				OpeningDate = DateTime.Today,
 				PublishingDate = DateTimeExtend.GetCASMinDateTime(),
@@ -1218,7 +1215,7 @@ namespace SmartCore.Audits
 			{
 				wp.Status = WorkPackageStatus.Published;
 				wp.PublishingDate = date;
-				wp.PublishedBy = _casEnvironment.CurrentUser.Login;
+				wp.PublishedBy = _casEnvironment.IdentityUser.Login;
 				wp.Remarks = remarks;
 			}
 			else
@@ -1237,7 +1234,7 @@ namespace SmartCore.Audits
 
 				wp.Status = WorkPackageStatus.Published;
 				wp.PublishingDate = date;
-				wp.PublishedBy = _casEnvironment.CurrentUser.Login;
+				wp.PublishedBy = _casEnvironment.IdentityUser.Login;
 				wp.ClosedBy = "";
 			}
 

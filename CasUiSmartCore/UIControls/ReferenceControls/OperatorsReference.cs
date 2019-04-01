@@ -57,7 +57,7 @@ namespace CAS.UI.UIControls.ReferenceControls
             showAllReference.DisplayerText = displayerText;
             showAllReference.ReflectionType = ReflectionTypes.DisplayInNew;
             showAllReference.DisplayerRequested += showAllReference_DisplayerRequested;
-            //if (!HasPermision(Users.CurrentUser.Role)) showAllReference.Enabled = false;
+            //if (!HasPermision(Users.IdentityUser.Role)) showAllReference.Enabled = false;
             //
             // mainPanel
             //

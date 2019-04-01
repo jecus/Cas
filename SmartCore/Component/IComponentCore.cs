@@ -9,7 +9,6 @@ using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.Personnel;
 using SmartCore.Entities.General.Store;
 using SmartCore.Entities.General.WorkPackage;
-using SmartCore.Purchase;
 
 namespace SmartCore.Component
 {

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using EFCore.DTO.General;
 using SmartCore.Auxiliary;
@@ -14,7 +13,6 @@ using SmartCore.Entities.General.Store;
 using SmartCore.Entities.General.Templates;
 using SmartCore.Files;
 using SmartCore.Purchase;
-using SmartCore.Relation;
 
 namespace SmartCore.Entities.General.Accessory
 {

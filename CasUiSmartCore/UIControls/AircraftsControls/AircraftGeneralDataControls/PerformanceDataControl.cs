@@ -53,7 +53,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
         /// </summary>
         private void CheckPermission()
         {
-            bool permission = true;// currentAircraft.HasPermission(Users.CurrentUser, DataEvent.Update);
+            bool permission = true;// currentAircraft.HasPermission(Users.IdentityUser, DataEvent.Update);
 
             numericUpDownBasicEmptyWeight.ReadOnly = !permission;
             numericUpDownBasicEmptyweightCargoConfig.ReadOnly = !permission;

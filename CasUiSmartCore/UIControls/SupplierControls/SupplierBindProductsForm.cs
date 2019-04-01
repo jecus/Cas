@@ -11,7 +11,6 @@ using EFCore.Filter;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Store;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.SupplierControls

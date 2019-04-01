@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
@@ -464,7 +463,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 lookupComboboxJobCard.SetEditScreenControl<JobCardScreen>(maintenanceScreenDisplayerText);
                 lookupComboboxJobCard.SetAddScreenControl<JobCardScreen>(new object[] { directive }, directive + ". New Job Card");
                 lookupComboboxJobCard.LoadObjectsFunc = GlobalObjects.CasEnvironment.NewLoader.GetJobCard;
-                lookupComboboxJobCard.FilterParam1 = directive;
+				lookupComboboxJobCard.FilterParam1 = directive;
                 lookupComboboxJobCard.SelectedItemId = directive.JobCard != null
                     ? directive.JobCard.ItemId
                     : -1;

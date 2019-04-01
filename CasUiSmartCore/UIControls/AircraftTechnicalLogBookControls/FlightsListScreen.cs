@@ -12,7 +12,6 @@ using CAS.UI.UIControls.ScheduleControls.Trip;
 using CASTerms;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Atlbs;
 
 namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls

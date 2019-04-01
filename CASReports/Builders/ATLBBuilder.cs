@@ -1,14 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Auxiliary;
 using CASReports.Datasets;
 using CASReports.ReportTemplates;
 using CASTerms;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Atlbs;
 using SmartCore.Entities.General.MaintenanceWorkscope;
-using SmartCore.Entities.General.Personnel;
 
 namespace CASReports.Builders
 {

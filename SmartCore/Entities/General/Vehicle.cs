@@ -1,12 +1,10 @@
 using System;
 using EFCore.DTO.General;
-using SmartCore.Entities.Collections;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.Templates;
 
 namespace SmartCore.Entities.General

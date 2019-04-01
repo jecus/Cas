@@ -1,7 +1,6 @@
 using System;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
-using CAS.UI.UIControls.OpepatorsControls;
 using Microsoft.VisualBasic.Devices;
 
 namespace CAS.UI.UIControls.OpepatorsControls

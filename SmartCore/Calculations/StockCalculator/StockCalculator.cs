@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Linq;
 using EFCore.DTO.General;
 using EFCore.Filter;
 using SmartCore.Component;
-using SmartCore.Entities;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Store;
 using SmartCore.Entities.NewLoader;
-using SmartCore.Filters;
 using SmartCore.Queries;
 
 namespace SmartCore.Calculations.StockCalculator

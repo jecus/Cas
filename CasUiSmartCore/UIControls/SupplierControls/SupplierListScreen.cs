@@ -16,7 +16,6 @@ using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Store;
 using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;
 using SmartCore.Purchase;

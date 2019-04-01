@@ -12,7 +12,6 @@ using System.Windows.Forms.Design;
 using AvControls;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
-using CAS.UI.UIControls.ComponentControls;
 using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Auxiliary.Extentions;
@@ -23,7 +22,6 @@ using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using TempUIExtentions;
-using Component = SmartCore.Entities.General.Accessory.Component;
 using Convert = SmartCore.Auxiliary.Convert;
 
 #endregion

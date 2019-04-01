@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using EFCore.DTO.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
@@ -86,6 +85,16 @@ namespace SmartCore.Entities.Dictionaries
 			get { return _department ?? Department.Unknown; }
 			set { _department = value; }
 		}
+
+        #region public LocationsType()
+
+        public LocationsType()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.LocationsType;
+        }
+
+        #endregion
 
 		#region public static Nomenclatures Unknown
 

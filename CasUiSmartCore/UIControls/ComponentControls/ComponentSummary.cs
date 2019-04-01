@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using CAS.UI.UIControls.DetailsControls;
 using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;

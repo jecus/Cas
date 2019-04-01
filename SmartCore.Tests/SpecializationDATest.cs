@@ -2,7 +2,6 @@
 using EFCore.Filter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Filters;
 
 namespace SmartCore.Tests
 {

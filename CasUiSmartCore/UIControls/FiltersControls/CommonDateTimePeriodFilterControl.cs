@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Reflection;
-using SmartCore.Auxiliary;
 using SmartCore.Filters;
 
 namespace CAS.UI.UIControls.FiltersControls

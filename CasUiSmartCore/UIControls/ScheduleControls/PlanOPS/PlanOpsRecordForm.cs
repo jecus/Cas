@@ -15,7 +15,6 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Atlbs;
 using SmartCore.Entities.General.Schedule;
-using SmartCore.Filters;
 
 namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 {

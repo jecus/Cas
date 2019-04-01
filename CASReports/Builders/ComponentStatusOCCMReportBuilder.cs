@@ -3,9 +3,6 @@ using CASTerms;
 
 using CASReports.Datasets;
 using CASReports.ReportTemplates;
-using SmartCore.Calculations;
-using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 
 namespace CASReports.Builders

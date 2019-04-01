@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.KitControls;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Interfaces;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {

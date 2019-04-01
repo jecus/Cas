@@ -4,7 +4,6 @@ using System.Reflection;
 using EFCore.DTO.General;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.Entities.General
@@ -179,6 +178,7 @@ namespace SmartCore.Entities.General
             ItemId = -1;
             _workRegime = FlightRegime.UNK;
             _workRegimeType = SmartCoreType.FlightRegime;
+            SmartCoreObjectType = SmartCoreType.ActualStateRecord;
         }
         #endregion
 

@@ -10,7 +10,6 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
 using EFCore.DTO.Dictionaries;
-using EFCore.DTO.General;
 using EFCore.Filter;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;

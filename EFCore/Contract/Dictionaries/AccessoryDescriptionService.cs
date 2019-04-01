@@ -1,7 +1,4 @@
-﻿using System.Configuration;
-using System.IO;
-using System.ServiceModel;
-using EFCore.DTO;
+﻿using EFCore.DTO;
 using EFCore.DTO.Dictionaries;
 using EFCore.Repository;
 

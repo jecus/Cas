@@ -7,7 +7,6 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Commercial;
-using SmartCore.Entities.General.Quality;
 
 namespace CAS.UI.UIControls.CommercialControls
 {

@@ -242,6 +242,7 @@ namespace SmartCore.Entities.Dictionaries
             _eventCountInMaxPeriod = 1;
             _minReportPeriod = Lifelength.Null;
             _maxReportPeriod = Lifelength.Null;
+            SmartCoreObjectType = SmartCoreType.EventCategory;
         }
         #endregion
 

@@ -11,7 +11,6 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Filters;
-using SmartCore.Management;
 using SmartCore.Queries;
 
 namespace SmartCore.Packages
@@ -336,7 +335,7 @@ namespace SmartCore.Packages
             {
                 wp.Status = WorkPackageStatus.Published;
                 wp.PublishingDate = date;
-                wp.PublishedBy = _casEnvironment.CurrentUser.Login;
+                wp.PublishedBy = _casEnvironment.IdentityUser.Login;
                 wp.Remarks = remarks;
             }
             else
@@ -355,7 +354,7 @@ namespace SmartCore.Packages
 
                 wp.Status = WorkPackageStatus.Published;
                 wp.PublishingDate = date;
-                wp.PublishedBy = _casEnvironment.CurrentUser.Login;
+                wp.PublishedBy = _casEnvironment.IdentityUser.Login;
                 wp.ClosedBy = "";
             }
 
@@ -560,14 +559,14 @@ namespace SmartCore.Packages
             {
                 wp.Status = WorkPackageStatus.Published;
                 wp.PublishingDate = date;
-                //wp.PublishedBy = _casEnvironment.CurrentUser.Login;
+                //wp.PublishedBy = _casEnvironment.IdentityUser.Login;
                 wp.Remarks = remarks;
             }
             else
             {
                 wp.Status = WorkPackageStatus.Published;
                 wp.PublishingDate = date;
-                //wp.PublishedBy = _casEnvironment.CurrentUser.Login;
+                //wp.PublishedBy = _casEnvironment.IdentityUser.Login;
                 //wp.ClosedBy = "";
             }
 

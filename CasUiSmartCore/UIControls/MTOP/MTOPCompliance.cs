@@ -7,7 +7,6 @@ using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.MTOP;
 
 namespace CAS.UI.UIControls.MTOP

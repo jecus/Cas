@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Reflection;
 using EFCore.DTO.General;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
-using SmartCore.Entities.General.WorkPackage;
 
 namespace SmartCore.Files
 {
@@ -98,6 +98,12 @@ namespace SmartCore.Files
 		}
 
 		#endregion
+
+        public ItemFileLink()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.ItemFileLink;
+        }
 
 		#endregion
 

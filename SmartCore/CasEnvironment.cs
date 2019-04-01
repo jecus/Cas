@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -27,6 +24,7 @@ using SmartCore.Entities.General.Store;
 using SmartCore.Entities.General.WorkShop;
 using SmartCore.Management;
 using SmartCore.Aircrafts;
+using SmartCore.AuditMongo.Repository;
 using SmartCore.Entities.General;
 using SmartCore.Entities.Collections;
 using SmartCore.Calculations;
@@ -36,6 +34,7 @@ using SmartCore.Entities;
 using SmartCore.Entities.NewLoader;
 using SmartCore.ObjectCache;
 using SmartCore.Queries;
+using User = Microsoft.SqlServer.Management.Smo.User;
 
 namespace SmartCore
 {
@@ -118,8 +117,14 @@ namespace SmartCore
         /// Управление базой данных
         /// </summary>
         public DatabaseManager DatabaseManager { get { return _databaseManager ?? (_databaseManager = new DatabaseManager()); } }
-        #endregion
+		#endregion
 
+
+		#region public IAuditRepository AuditRepository { get; set; }
+
+		public IAuditRepository AuditRepository { get; set; }
+
+        #endregion
 
         #region public void Disconnect()
 
@@ -176,47 +181,81 @@ namespace SmartCore
 	        if(user == null)
 		        throw new Exception($"Invalid combination of login and password");
 
-	        CurrentUser = user;
+	        IdentityUser = user;
 
-	        //_unitOfWork = new UnitOfWork(new DatabaseProvider());
-	        _unitOfWork = new UnitOfWork(new WcfProvider(_ipServer));
+	        AuditRepository.WriteAsync(new Entities.User(user), AuditOperation.SignIn, user);
+
+			//_unitOfWork = new UnitOfWork(new DatabaseProvider());
+			_unitOfWork = new UnitOfWork(new WcfProvider(_ipServer));
 	        _newLoader = new NewLoader(this);
 
-	        //_databaseManager.Connect($"{connection.ServerName}\\MSSQLSERVER", connection.UserName, connection.Password);
-	        //_databaseManager.SelectDatabase(DatabaseManager, connection.DatabaseName);
-
-	        //_unitOfWork = new UnitOfWork();
-	        //_newLoader = new NewLoader(this);
-
-	        //_databaseManager.Connect(serverName, userName, pass);
-	        //_databaseManager.SelectDatabase(DatabaseManager, database);
-	        //var connectionString = $"data source= {serverName};initial catalog= {database};user id={userName};password={pass};MultipleActiveResultSets=True;App=EntityFramework";
-	        //_unitOfWork = new UnitOfWork(connectionString);
+	        
 		}
 		#endregion
 
-		public UserDTO GetUser(string login, string password)
+
+		public ILoginService GetSeviceUser()
+		{
+			var binding = new BasicHttpBinding();
+			var endPoint = new EndpointAddress($"http://{_ipServer}/LoginService/LoginService.svc");
+			var channelFactoryFoo = new ChannelFactory<ILoginService>(binding, endPoint);
+			return channelFactoryFoo.CreateChannel();
+		}
+
+		public List<UserDTO> GetAllUsers()
+		{
+			var binding = new BasicHttpBinding()
+			{
+				CloseTimeout = new TimeSpan(0, 10, 0),
+				OpenTimeout = new TimeSpan(0, 10, 0),
+				ReceiveTimeout = new TimeSpan(0, 10, 0),
+				SendTimeout = new TimeSpan(0, 10, 0),
+				MaxBufferPoolSize = Int32.MaxValue,
+				MaxBufferSize = Int32.MaxValue,
+				MaxReceivedMessageSize = Int32.MaxValue,
+				TransferMode = TransferMode.Streamed,
+				ReaderQuotas =
+				{
+					MaxArrayLength = Int32.MaxValue,
+					MaxBytesPerRead = Int32.MaxValue,
+					MaxDepth = Int32.MaxValue,
+					MaxStringContentLength = Int32.MaxValue,
+					MaxNameTableCharCount = Int32.MaxValue
+				}
+			};
+			var endPoint = new EndpointAddress($"http://{_ipServer}/LoginService/LoginService.svc");
+			var channelFactoryFoo = new ChannelFactory<ILoginService>(binding, endPoint);
+			return channelFactoryFoo.CreateChannel().GetAllList();
+		}
+
+		private UserDTO GetUser(string login, string password)
 	    {
-		    var binding = new BasicHttpBinding();
-		    var endPoint = new EndpointAddress($"http://{_ipServer}/LoginService/LoginService.svc");
-		    var channelFactoryFoo = new ChannelFactory<ILoginService>(binding, endPoint);
-		    return channelFactoryFoo.CreateChannel().GetUser(login, password);
+		    return GetSeviceUser().GetUser(login, password);
 	    }
 
-	    public Connection GetWcfConnection()
-	    {
-		    try
-		    {
-			    var binding = new BasicHttpBinding();
-			    var endPoint = new EndpointAddress($"http://{_ipServer}/ConnectionSevice/ConnectionService.svc");
-			    var channelFactoryFoo = new ChannelFactory<IConnectionService>(binding, endPoint);
-			    return channelFactoryFoo.CreateChannel().GetConnection();
-		    }
-		    catch
-		    {
+		public void UpdateUser(string password)
+		{
+			GetSeviceUser().UpdatePassword(IdentityUser.ItemId, password);
+		}
+
+		#region public Connection GetWcfConnection()
+
+		private Connection GetWcfConnection()
+		{
+			try
+			{
+				var binding = new BasicHttpBinding();
+				var endPoint = new EndpointAddress($"http://{_ipServer}/ConnectionSevice/ConnectionService.svc");
+				var channelFactoryFoo = new ChannelFactory<IConnectionService>(binding, endPoint);
+				return channelFactoryFoo.CreateChannel().GetConnection();
+			}
+			catch
+			{
 				throw new Exception($"WCF was not found on server");
 			}
-	    }
+		}
+
+		#endregion
 
         #region public void CheckTablesFor(Type type)
         public void CheckTablesFor(Type type)
@@ -634,17 +673,17 @@ namespace SmartCore
                 return _reasons;
             }
         }
-        #endregion
+		#endregion
 
-        #region public CasUser CurrentUser { get; }
-        /// <summary>
-        /// Пользователь, подключенный к базе данных
-        /// </summary>
-        private UserDTO _currentUser;
+		#region public IIdentityUser IdentityUser { get; }
+		/// <summary>
+		/// Пользователь, подключенный к базе данных
+		/// </summary>
+		private IIdentityUser _currentUser;
         /// <summary>
         /// Возвращает пользователя, подключенного к базе данных
         /// </summary>
-        public UserDTO CurrentUser
+        public IIdentityUser IdentityUser
         {
             get
             {
@@ -1098,7 +1137,7 @@ namespace SmartCore
         {
             get
             {
-                if (_keeper == null) _keeper = new Keeper(this);
+                if (_keeper == null) _keeper = new Keeper(this, AuditRepository);
                 //
                 return _keeper;
             }
@@ -1121,7 +1160,7 @@ namespace SmartCore
         {
             get
             {
-                if (_manipulator == null) _manipulator = new Manipulator(this);
+                if (_manipulator == null) _manipulator = new Manipulator(this, AuditRepository);
                 //
                 return _manipulator;
             }
@@ -1163,7 +1202,7 @@ namespace SmartCore
 	    {
 		    get
 		    {
-			    if (_newKeeper == null) _newKeeper = new NewKeeper(this);
+			    if (_newKeeper == null) _newKeeper = new NewKeeper(this, AuditRepository);
 			    return _newKeeper;
 		    }
 	    }

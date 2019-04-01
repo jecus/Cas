@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using CASTerms;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.Store;
 
 namespace CAS.UI.UIControls.KitControls
 {

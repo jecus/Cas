@@ -7,14 +7,17 @@ using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.PurchaseControls.Initial;
 using CASTerms;
 using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
 using EFCore.Filter;
+using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
+using SmartCore.Filters;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls
@@ -25,10 +28,11 @@ namespace CAS.UI.UIControls.PurchaseControls
     public partial class InitialOrderListScreen : ScreenControl
     {
         #region Fields
-
+        private CommonFilterCollection _filter = new CommonFilterCollection(typeof(InitialOrder));
+        private ICommonCollection<InitialOrder> _initialArray = new CommonCollection<InitialOrder>();
+        private ICommonCollection<InitialOrder> _resultArray = new CommonCollection<InitialOrder>();
         private readonly BaseEntityObject _parent;
-
-        private List<InitialOrder> _directives = new List<InitialOrder>();
+        
         private InitialOrderListView _directivesViewer;
 
         private ContextMenuStrip _contextMenuStrip;
@@ -103,8 +107,8 @@ namespace CAS.UI.UIControls.PurchaseControls
                 AnimatedThreadWorker.CancelAsync();
             AnimatedThreadWorker.Dispose();
 
-            _directives.Clear();
-            _directives = null;
+            _initialArray.Clear();
+            _initialArray = null;
 
             if (_toolStripMenuItemPublish != null) _toolStripMenuItemPublish.Dispose();
             if (_toolStripMenuItemCreateQuatation != null) _toolStripMenuItemCreateQuatation.Dispose();
@@ -134,7 +138,7 @@ namespace CAS.UI.UIControls.PurchaseControls
                 labelTitle.Text = "Date as of: " + SmartCore.Auxiliary.Convert.GetDateFormat(DateTime.Today);
             }
             
-            _directivesViewer.SetItemsArray(_directives.ToArray());
+            _directivesViewer.SetItemsArray(_resultArray.ToArray());
             headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
 
             _directivesViewer.Focus();
@@ -145,16 +149,14 @@ namespace CAS.UI.UIControls.PurchaseControls
         protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
         {
             if (_parent == null) return;
-            _directives.Clear();
+            _initialArray.Clear();
+            _resultArray.Clear();
 
             AnimatedThreadWorker.ReportProgress(0, "load Quotations");
 
             try
             {
-                _directives.AddRange(GlobalObjects.PurchaseCore.GetInitialOrders(_parent as Aircraft));
-                //_directives.AddRange(GlobalObjects.CasEnvironment.Loader.GetPackages<RequestForQuotation, RequestForQuotationRecord>(_parent as Aircraft, loadWorkPackageItems:true));
-                //if (_parent is Operator)
-                //    _directives.AddRange(GlobalObjects.CasEnvironment.Loader.GetOperatorDocuments((Operator)_parent).ToArray());
+                _initialArray.AddRange(GlobalObjects.PurchaseCore.GetInitialOrders(_parent as Aircraft));
             }
             catch (Exception ex)
             {
@@ -164,7 +166,7 @@ namespace CAS.UI.UIControls.PurchaseControls
             AnimatedThreadWorker.ReportProgress(20, "calculation Quotations");
 
             AnimatedThreadWorker.ReportProgress(70, "filter Quotations");
-
+            FilterItems(_initialArray, _resultArray);
             AnimatedThreadWorker.ReportProgress(100, "Complete");
         }
         #endregion
@@ -479,14 +481,12 @@ namespace CAS.UI.UIControls.PurchaseControls
             if (_directivesViewer.SelectedItems.Count > 0)
             {
                 buttonDeleteSelected.Enabled = true;
-                buttonReleaseToService.Enabled = true;
                 headerControl.EditButtonEnabled = true;
             }
             else
             {
                 headerControl.EditButtonEnabled = false;
                 buttonDeleteSelected.Enabled = false;
-                buttonReleaseToService.Enabled = false;
             }
         }
 
@@ -553,30 +553,13 @@ namespace CAS.UI.UIControls.PurchaseControls
         }
         #endregion
 
-        #region private void ButtonReleaseToServiceClick(object sender, EventArgs e)
-        private void ButtonReleaseToServiceClick(object sender, EventArgs e)
-        {
-            if (_directivesViewer.SelectedItem == null) 
-                return;
-            
-            //GlobalObjects.CasEnvironment.Loader.LoadRequestForQuotationItems(_directivesViewer.SelectedItem);
-            //RequestForQuotationReportBuilder builder = new RequestForQuotationReportBuilder(_directivesViewer.SelectedItem);
-            
-            //ReferenceEventArgs refe = new ReferenceEventArgs
-            //{
-            //    DisplayerText = "Release To Service",
-            //    TypeOfReflection = ReflectionTypes.DisplayInNew,
-            //    RequestedEntity = new ReportScreen(builder)
-            //};
-            //InvokeDisplayerRequested(refe);
-            //  MessageBox.Show("Показать репорт с распечаткой титульной страницы");
-        }
-        #endregion
-
         #region private void HeaderControlButtonReloadClick(object sender, EventArgs e)
 
         private void HeaderControlButtonReloadClick(object sender, EventArgs e)
         {
+            AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+            AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+            AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
             AnimatedThreadWorker.RunWorkerAsync();
         }
         #endregion
@@ -588,6 +571,92 @@ namespace CAS.UI.UIControls.PurchaseControls
         }
         #endregion
 
+        #region private void ButtonApplyFilterClick(object sender, EventArgs e)
+
+        private void ButtonApplyFilterClick(object sender, EventArgs e)
+        {
+            var form = new CommonFilterForm(_filter, _initialArray);
+
+            if (form.ShowDialog(this) == DialogResult.OK)
+            {
+                AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+                AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+                AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoFilteringWork;
+
+                AnimatedThreadWorker.RunWorkerAsync();
+            }
+        }
+
         #endregion
+
+        #region private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
+
+        private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
+        {
+            _resultArray.Clear();
+
+            #region Фильтрация директив
+            AnimatedThreadWorker.ReportProgress(50, "filter directives");
+
+            FilterItems(_initialArray, _resultArray);
+
+            if (AnimatedThreadWorker.CancellationPending)
+            {
+                e.Cancel = true;
+                return;
+            }
+            #endregion
+
+            AnimatedThreadWorker.ReportProgress(100, "Complete");
+        }
+
+        #endregion
+
+        #region private void FilterItems(IEnumerable<InitialOrder> initialCollection, ICommonCollection<Document> resultCollection)
+
+        ///<summary>
+        ///</summary>
+        ///<param name="initialCollection"></param>
+        ///<param name="resultCollection"></param>
+        private void FilterItems(IEnumerable<InitialOrder> initialCollection, ICommonCollection<InitialOrder> resultCollection)
+        {
+            if (_filter == null || _filter.Count == 0)
+            {
+                resultCollection.Clear();
+                resultCollection.AddRange(initialCollection);
+                return;
+            }
+
+            resultCollection.Clear();
+
+            foreach (var pd in initialCollection)
+            {
+                if (_filter.FilterTypeAnd)
+                {
+                    bool acceptable = true;
+                    foreach (ICommonFilter filter in _filter)
+                    {
+                        acceptable = filter.Acceptable(pd); if (!acceptable) break;
+                    }
+                    if (acceptable) resultCollection.Add(pd);
+                }
+                else
+                {
+                    bool acceptable = true;
+                    foreach (ICommonFilter filter in _filter)
+                    {
+                        if (filter.Values == null || filter.Values.Length == 0)
+                            continue;
+                        acceptable = filter.Acceptable(pd); if (acceptable) break;
+                    }
+                    if (acceptable) resultCollection.Add(pd);
+                }
+            }
+        }
+        #endregion
+
+        #endregion
+
+
     }
 }

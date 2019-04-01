@@ -7,7 +7,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
 using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASReports.Builders;
@@ -16,7 +15,6 @@ using CASTerms;
 using CrystalDecisions.Shared;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
-using SmartCore.Auxiliary;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
@@ -2074,13 +2072,13 @@ if (!_isWorkOrder)
 				//var tempSummarySheet = new WorkPackageTitleBuilderAquiline(_workPackage, titlePageItems, true);
 				//inputDocumentTitle = PdfReader.Open(((WPTitlePageReportScat)tempSummarySheet.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
 #else
-				var tempMp =  new WorkPackageTitlePageBuilder(_workPackage, titlePageItems, GlobalObjects.CasEnvironment.GetBaseDetails(_workPackage.Aircraft));
-                inputDocumentTitle = PdfReader.Open(((WPTitlePageReport)tempMp.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
+				//var tempMp =  new WorkPackageTitlePageBuilder(_workPackage, titlePageItems, GlobalObjects.CasEnvironment.GetBaseDetails(_workPackage.Aircraft));
+    //            inputDocumentTitle = PdfReader.Open(((WPTitlePageReport)tempMp.GenerateReport()).ExportToStream(ExportFormatType.PortableDocFormat), PdfDocumentOpenMode.Import);
 
-				for (int i = inputDocumentTitle.Pages.Count - 1; i >= 0; i--)
-                {
-                    _outputDocument.InsertPage(0, inputDocumentTitle.Pages[i]);
-                }
+				//for (int i = inputDocumentTitle.Pages.Count - 1; i >= 0; i--)
+    //            {
+    //                _outputDocument.InsertPage(0, inputDocumentTitle.Pages[i]);
+    //            }
 #endif
 			}
 			catch (PdfReaderException ex)

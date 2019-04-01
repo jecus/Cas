@@ -3,11 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows.Forms;
 using System.Windows.Forms.Design;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
-using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Schedule;
 

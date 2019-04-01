@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using AvControls;
-using CAS.UI.UIControls.DetailsControls;
 using CASTerms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;

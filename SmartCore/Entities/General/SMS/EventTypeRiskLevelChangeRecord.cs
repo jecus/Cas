@@ -128,6 +128,8 @@ namespace SmartCore.Entities.General.SMS
 
         public EventTypeRiskLevelChangeRecord()
         {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.EventTypeRiskLevelChangeRecord;
             _recordDate = DateTime.Now;
         }
         #endregion

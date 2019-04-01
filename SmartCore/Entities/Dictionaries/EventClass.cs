@@ -322,6 +322,8 @@ namespace SmartCore.Entities.Dictionaries
             _propertyDamage = PropertyDamage.UNK;
             _environmentalDamage = EnvironmentalDamage.UNK;
             _reputationDamage = ReputationDamage.UNK;
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.EventClass;
         }
         #endregion
 

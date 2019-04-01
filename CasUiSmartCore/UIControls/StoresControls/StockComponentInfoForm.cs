@@ -9,7 +9,6 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Store;
-using SmartCore.Filters;
 
 namespace CAS.UI.UIControls.StoresControls
 {

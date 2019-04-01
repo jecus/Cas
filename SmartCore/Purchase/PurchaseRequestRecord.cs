@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using EFCore.DTO.General;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Calculations;

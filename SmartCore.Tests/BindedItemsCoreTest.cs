@@ -1,12 +1,10 @@
 ﻿using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartCore.Aircrafts;
 using SmartCore.Component;
 using SmartCore.DataAccesses.ItemsRelation;
 using SmartCore.Directives;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.MaintenanceWorkscope;

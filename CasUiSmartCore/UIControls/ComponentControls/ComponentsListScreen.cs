@@ -36,7 +36,6 @@ using SmartCore.Filters;
 using SmartCore.Purchase;
 using Component = SmartCore.Entities.General.Accessory.Component;
 using ComponentCollection = SmartCore.Entities.Collections.ComponentCollection;
-using FilterType = EFCore.Attributte.FilterType;
 
 namespace CAS.UI.UIControls.ComponentControls
 {

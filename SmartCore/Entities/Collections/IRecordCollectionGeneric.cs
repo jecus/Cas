@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using SmartCore.Entities.General;
 
 namespace SmartCore.Entities.Collections

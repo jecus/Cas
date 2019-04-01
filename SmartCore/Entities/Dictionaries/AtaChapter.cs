@@ -15,6 +15,15 @@ namespace SmartCore.Entities.Dictionaries
     [Serializable]
     public class AtaChapter : AbstractDictionary
     {
+        #region public AtaChapter()
+
+        public AtaChapter()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.AtaChapter;
+        }
+
+            #endregion
 
         #region public String ShortName { get; set; }
 

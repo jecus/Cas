@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Text;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;

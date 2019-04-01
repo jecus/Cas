@@ -1,4 +1,5 @@
-﻿using SmartCore.Entities.General;
+﻿using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.DataAccesses.AttachedFiles
@@ -30,6 +31,7 @@ namespace SmartCore.DataAccesses.AttachedFiles
 		{
 			ItemId = -1;
 			IsDeleted = false;
+            SmartCoreObjectType = SmartCoreType.AttachedFileDTO;
 		}
 	}
 }

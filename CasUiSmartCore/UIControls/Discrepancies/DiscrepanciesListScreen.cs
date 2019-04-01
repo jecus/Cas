@@ -2,22 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using AvControls;
 using CAS.UI.Interfaces;
-using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
-using CAS.UI.UIControls.WorkPakage;
 using CASReports.Builders;
 using CASTerms;
-using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Atlbs;
-using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;
 
 namespace CAS.UI.UIControls.Discrepancies

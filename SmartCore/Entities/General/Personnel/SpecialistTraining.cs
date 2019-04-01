@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using EFCore.DTO.General;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
-using SmartCore.Entities.General.Interfaces;
 using SmartCore.Files;
 using SmartCore.Purchase;
 
@@ -174,7 +172,8 @@ namespace SmartCore.Entities.General.Personnel
 		#endregion
 
 		public SpecialistTraining()
-		{
+        {
+            ItemId = -1;
 			SmartCoreObjectType = SmartCoreType.SpecialistTraining;
 		}
 

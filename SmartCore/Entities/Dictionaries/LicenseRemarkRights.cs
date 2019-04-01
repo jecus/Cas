@@ -1,6 +1,4 @@
-﻿using System;
-using System.Reflection;
-using EFCore.DTO.Dictionaries;
+﻿using EFCore.DTO.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
 
@@ -11,6 +9,16 @@ namespace SmartCore.Entities.Dictionaries
 	[Condition("IsDeleted", "0")]
 	public class LicenseRemarkRights : AbstractDictionary
 	{
+        #region public LicenseRemarkRights()
+
+        public LicenseRemarkRights()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.LicenseRemarkRights;
+        }
+
+        #endregion
+
 		#region Implement of Dictionary
 
 		#region public override string ShortName { get; set; }

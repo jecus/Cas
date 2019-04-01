@@ -744,7 +744,7 @@ namespace SmartCore.Purchase
             ItemId = -1;
             ParentPackageId = -1;
             PackageItemId = -1;
-
+            SmartCoreObjectType = SmartCoreType.InitialOrderRecord;
 	        Threshold.EffectiveDate = DateTimeExtend.GetCASMinDateTime();
 
         }

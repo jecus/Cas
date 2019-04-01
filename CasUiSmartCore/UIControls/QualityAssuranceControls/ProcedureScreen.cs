@@ -7,8 +7,6 @@ using CAS.UI.UIControls.Auxiliary.Events;
 using CASTerms;
 using EFCore.DTO.General;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.Quality;
 
 namespace CAS.UI.UIControls.QualityAssuranceControls

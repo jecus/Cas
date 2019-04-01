@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using EFCore.Contract;
 using EFCore.DTO.General;
 using EFCore.UnitOfWork;
 using Microsoft.SqlServer.Management.Smo;
@@ -35,7 +36,7 @@ namespace SmartCore
 		BaseComponentCollection BaseComponents { get; }
 		Dictionary<string, ICommonCollection> TempCollections { get; }
 		ReasonCollection Reasons { get; }
-		UserDTO CurrentUser { get; }
+		IIdentityUser IdentityUser { get; }
 		ILoader Loader { get; }
 		INewLoader NewLoader { get; }
 		INewKeeper NewKeeper { get; }
@@ -57,7 +58,10 @@ namespace SmartCore
 
 		void Connect(String serverName, String userName, String pass, String database);
 
-		UserDTO GetUser(string login, string password);
+		ILoginService GetSeviceUser();
+
+		List<UserDTO> GetAllUsers();
+		void UpdateUser(string password);
 
 		void CheckTablesFor(Type type);
 

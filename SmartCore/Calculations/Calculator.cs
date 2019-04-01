@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows.Forms;
 using SmartCore.AircraftFlights;
 using SmartCore.Aircrafts;
 using SmartCore.Analyst;
@@ -1841,13 +1840,14 @@ namespace SmartCore.Calculations
 						if (component.StartDate < llpData.FromDate && llpData.LLPLifeLengthForDate.Cycles.HasValue && llpData.LLPLifeLengthForDate.Cycles != 0 && llpData.LLPCurrent != null)
 							llpData.LLPCurrent += llpData.LLPLifeLengthForDate;
 
-
+						
 						if (llpData.LLPCurrent != null)
 						{
 							if (!llpData.LLPCurrent.IsEqual(llpData.LLPTemp))
 							{
 								llpData.LLPTemp = new Lifelength(llpData.LLPCurrent);
-								_environment.NewKeeper.Save(llpData);
+								//TODO: нет LLPTemp на WCF сервисе(ComponentLLPCategoryDataDTO) РАЗОБРАТЬСЯ!!!!!!!!!!!!!!!!!!!!!!!!!!
+								//_environment.NewKeeper.Save(llpData, writeAudit: false);
 							}
 						}
 

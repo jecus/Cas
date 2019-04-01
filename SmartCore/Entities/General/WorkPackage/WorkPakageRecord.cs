@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using EFCore.DTO.General;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
 
@@ -123,6 +124,7 @@ namespace SmartCore.Entities.General.WorkPackage
         public WorkPackageRecord()
         {
             ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.WorkPackageRecord;
             DirectiveId = 0;
             WorkPakageId = 0;
             WorkPackageItemType = 0;

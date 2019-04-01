@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using CASReports.Datasets;
 using CASReports.ReportTemplates;
-using CASTerms;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 

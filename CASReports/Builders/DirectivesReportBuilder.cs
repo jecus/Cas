@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Auxiliary;
 using CASReports.Datasets;
 using CASReports.ReportTemplates;
 using CASTerms;

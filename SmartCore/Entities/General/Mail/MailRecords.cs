@@ -300,7 +300,8 @@ namespace SmartCore.Entities.General.Mail
 		#endregion
 
 		public MailRecords()
-		{
+        {
+            ItemId = -1;
 			ReceiveMailDate = DateTime.Today;
 			CreateMailRecordDate = DateTime.Today;
 			PerformeUpToDate = DateTime.Today;

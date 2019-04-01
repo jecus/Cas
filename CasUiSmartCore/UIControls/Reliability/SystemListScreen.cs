@@ -8,7 +8,6 @@ using CAS.UI.UIControls.ComponentChangeReport;
 using CASTerms;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
-using Convert = SmartCore.Auxiliary.Convert;
 
 namespace CAS.UI.UIControls.Reliability
 {

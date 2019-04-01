@@ -605,6 +605,7 @@ namespace SmartCore.Entities.General.Personnel
 		/// </summary>
 		public Specialist()
         {
+            ItemId = -1;
             SmartCoreObjectType = SmartCoreType.Employee;
             Gender = Gender.Male;
             AGWCategory = null;

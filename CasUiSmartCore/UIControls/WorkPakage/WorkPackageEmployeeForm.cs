@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.FiltersControls;
@@ -14,13 +11,10 @@ using EFCore.DTO.General;
 using EFCore.Filter;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
-using SmartCore.Entities.General.Atlbs;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.Personnel;
 using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;
-using SmartCore.Queries;
 
 namespace CAS.UI.UIControls.WorkPakage
 {

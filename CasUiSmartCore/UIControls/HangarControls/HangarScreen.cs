@@ -3,10 +3,8 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.MaintenanceControlCenterControls;
 using CASTerms;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Hangar;
 
 namespace CAS.UI.UIControls.HangarControls

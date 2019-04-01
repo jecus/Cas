@@ -1,11 +1,9 @@
 using System;
 using EFCore.DTO.General;
-using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
-using SmartCore.Entities.General.Interfaces;
 using SmartCore.Packages;
 
 namespace SmartCore.Purchase
@@ -310,6 +308,7 @@ namespace SmartCore.Purchase
         public RequestForQuotationRecord()
         {
             ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.RequestForQuotationRecord;
             ParentPackageId = -1;
             PackageItemId = -1;
             CostCondition = ComponentStatus.New | ComponentStatus.Serviceable | ComponentStatus.Overhaul | ComponentStatus.Repair;

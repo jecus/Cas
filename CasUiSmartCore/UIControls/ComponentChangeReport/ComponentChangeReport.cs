@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using AvControls;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
-using SmartCore.Filters;
 using Convert = SmartCore.Auxiliary.Convert;
 
 namespace CAS.UI.UIControls.ComponentChangeReport

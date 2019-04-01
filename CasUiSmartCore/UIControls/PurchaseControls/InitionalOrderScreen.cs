@@ -8,10 +8,8 @@ using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.Store;
 using System.Linq;
 using CAS.UI.UIControls.PurchaseControls.Initial;
 using SmartCore.Purchase;
@@ -920,5 +918,10 @@ namespace CAS.UI.UIControls.PurchaseControls
         #endregion
 
         #endregion
+
+        private void ButtonFilter_Click(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
     }
 }

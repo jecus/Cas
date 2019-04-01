@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
@@ -12,8 +10,6 @@ using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Filters;
-using Convert = System.Convert;
 
 namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
 {

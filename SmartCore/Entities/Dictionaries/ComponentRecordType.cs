@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries

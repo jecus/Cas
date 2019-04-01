@@ -146,8 +146,7 @@ namespace SmartCore.Entities.Dictionaries
         /// </summary>
         public LLPLifeLimitCategory()
         {
-            SmartCoreObjectType = SmartCoreType.Unknown;
-
+            SmartCoreObjectType = SmartCoreType.LLPLifeLimitCategory;
             IsDeleted = false;
             ItemId = -1;
             _category = "";

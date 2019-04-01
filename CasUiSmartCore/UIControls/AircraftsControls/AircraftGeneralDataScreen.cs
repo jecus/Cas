@@ -8,14 +8,10 @@ using CASReports.Builders;
 using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Calculations.Maintenance;
-using SmartCore.Directives;
-using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
-using SmartCore.Entities.General.WorkPackage;
-using SmartCore.Filters;
 
 namespace CAS.UI.UIControls.AircraftsControls
 {

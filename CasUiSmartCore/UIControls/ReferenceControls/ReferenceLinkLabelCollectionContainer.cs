@@ -1,8 +1,5 @@
-using System.ComponentModel;
-using System.ComponentModel.Design;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Windows.Forms.Design;
 using Auxiliary;
 using CAS.UI.Management.Dispatchering;
 

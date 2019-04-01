@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Reflection;
 using SmartCore.Entities.Collections;
-using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.Entities.Dictionaries
 {

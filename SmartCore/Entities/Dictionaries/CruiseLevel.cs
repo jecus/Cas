@@ -223,6 +223,7 @@ namespace SmartCore.Entities.Dictionaries
         /// </summary>
         public CruiseLevel()
         {
+            SmartCoreObjectType = SmartCoreType.CruiseLevel;
         }
         #endregion
 

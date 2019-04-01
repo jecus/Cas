@@ -17,19 +17,37 @@ namespace SmartCore.AuditMongo.Repository
 
 		#region Implementation of IAuditRepository
 
-		public async Task WriteAsync<TEntity>(TEntity target, AuditOperation operation, UserDTO user, Dictionary<string, object> parameters = null) where TEntity : class, IBaseEntityObject
+		public async Task WriteAsync<TEntity>(TEntity target, AuditOperation operation, IIdentityUser user, Dictionary<string, object> parameters = null) where TEntity : class, IBaseEntityObject
 		{
-			var objectName = typeof(TEntity).Name;
-
-			await _context.AuditCollection.InsertOneAsync(new AuditEntity
+			try
 			{
-				Action = $"{objectName}{operation}",
-				Date = DateTime.UtcNow,
-				ObjectId = target.ItemId,
-				ObjectTypeId = target.SmartCoreObjectType.ItemId,
-				UserId = user.ItemId,
-				AdditionalParameters = parameters
-			});
+				if(_context == null)
+					return;
+
+				if (target.IsDeleted)
+					operation = AuditOperation.Deleted;
+
+				if (target.SmartCoreObjectType.ItemId == -1)
+				{
+					if(parameters == null)
+						parameters = new Dictionary<string, object>();
+
+					parameters.Add("ObjectType", typeof(TEntity).UnderlyingSystemType.Name);
+				}
+
+				await _context.AuditCollection.InsertOneAsync(new AuditEntity
+				{
+					//Action = $"{objectName}{operation}",
+					Action = $"{operation}",
+					Date = DateTime.UtcNow,
+					ObjectId = target?.ItemId ?? -1,
+					ObjectTypeId = target?.SmartCoreObjectType.ItemId ?? -1,
+					UserId = user.ItemId,
+					AdditionalParameters = parameters
+				});
+			}
+			catch
+			{}
 		}
 
 		#endregion

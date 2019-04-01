@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using CASReports.Datasets;
 using CASReports.ReportTemplates;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Store;
 using SmartCore.Purchase;
 
 namespace CASReports.Builders

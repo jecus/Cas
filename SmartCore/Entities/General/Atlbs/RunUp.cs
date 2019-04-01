@@ -193,6 +193,8 @@ namespace SmartCore.Entities.General.Atlbs
 
 		public RunUp()
         {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.RunUp;
             RunUpType = RunUpType.RunUp;
             RunUpPhase = DetectionPhase.RunUpPoint;
             RunUpCondition = RunUpCondition.Satisfactory;
