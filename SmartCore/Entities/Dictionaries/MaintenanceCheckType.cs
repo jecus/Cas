@@ -147,6 +147,7 @@ namespace SmartCore.Entities.Dictionaries
         {
             ItemId = -1;
             _priority = 0;
+            SmartCoreObjectType = SmartCoreType.MaintenanceCheckType;
         }
         #endregion
 

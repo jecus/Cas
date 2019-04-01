@@ -226,7 +226,6 @@ namespace SmartCore.Purchase
         public Supplier()
         {
             ItemId = -1;
-
             SmartCoreObjectType = SmartCoreType.Supplier;
         }
         #endregion

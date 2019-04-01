@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using EFCore.DTO.General;
 using SmartCore.Entities.Collections;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.Entities.General.Atlbs
@@ -198,6 +199,8 @@ namespace SmartCore.Entities.General.Atlbs
 		/// </summary>
 		public CorrectiveAction()
         {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.CorrectiveAction;
         }
         #endregion
 

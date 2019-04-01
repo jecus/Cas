@@ -90,7 +90,8 @@ namespace SmartCore.DataAccesses.NonRoutines
 		/// Создает нерутинную работу без дополнительной информации
 		/// </summary>
 		public NonRoutineJobDTO()
-		{
+        {
+            ItemId = -1;
 			SmartCoreObjectType = SmartCoreType.NonRoutineJob;
 		}
 	}

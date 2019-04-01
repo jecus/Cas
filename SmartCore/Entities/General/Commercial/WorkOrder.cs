@@ -231,6 +231,7 @@ namespace SmartCore.Entities.General.Commercial
         /// </summary>
         public WorkOrder()
         {
+            ItemId = -1;
             SmartCoreObjectType = SmartCoreType.JobCard;
 
             ApprovedByDate = DateTime.Today;

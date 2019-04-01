@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using EFCore.DTO.General;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 
@@ -159,6 +160,8 @@ namespace SmartCore.Entities.General.Atlbs
         /// </summary>
         public ComponentOilCondition()
         {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.ComponentOilCondition;
         }
         #endregion
 

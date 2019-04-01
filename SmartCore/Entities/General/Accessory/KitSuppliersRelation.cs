@@ -476,6 +476,7 @@ namespace SmartCore.Entities.General.Accessory
         {
             ItemId = -1;
             KitId = -1;
+            SmartCoreObjectType = SmartCoreType.KitSuppliersRelation;
         }
         #endregion
 

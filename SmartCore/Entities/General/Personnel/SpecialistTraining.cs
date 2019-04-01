@@ -172,7 +172,8 @@ namespace SmartCore.Entities.General.Personnel
 		#endregion
 
 		public SpecialistTraining()
-		{
+        {
+            ItemId = -1;
 			SmartCoreObjectType = SmartCoreType.SpecialistTraining;
 		}
 

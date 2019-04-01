@@ -896,6 +896,8 @@ namespace SmartCore.Entities.General.Accessory
             VibroOverloadMinEnabled = true;
             VibroOverload2MaxEnabled = true;
             VibroOverload2MinEnabled = true;
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.ComponentWorkInRegimeParams;
         }
 
         #endregion

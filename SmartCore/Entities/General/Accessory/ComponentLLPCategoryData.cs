@@ -184,6 +184,7 @@ namespace SmartCore.Entities.General.Accessory
             LLPLifeLimit = Lifelength.Null;
             LLPLifelength = Lifelength.Null;
             Notify = Lifelength.Null;
+            SmartCoreObjectType = SmartCoreType.ComponentLLPCategoryData;
         }
 		#endregion
 

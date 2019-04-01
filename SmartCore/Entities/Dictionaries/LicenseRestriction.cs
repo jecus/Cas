@@ -9,6 +9,16 @@ namespace SmartCore.Entities.Dictionaries
 	[Condition("IsDeleted", "0")]
 	public class LicenseRestriction : AbstractDictionary
 	{
+        #region public LicenseRestriction()
+
+        public LicenseRestriction()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.LicenseRestriction;
+        }
+
+        #endregion
+
 		#region Implement of Dictionary
 
 		#region public override string ShortName { get; set; }

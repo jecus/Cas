@@ -86,6 +86,16 @@ namespace SmartCore.Entities.Dictionaries
 			set { _department = value; }
 		}
 
+        #region public LocationsType()
+
+        public LocationsType()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.LocationsType;
+        }
+
+        #endregion
+
 		#region public static Nomenclatures Unknown
 
 		public static LocationsType Unknown

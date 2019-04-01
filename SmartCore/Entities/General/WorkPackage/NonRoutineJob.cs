@@ -536,6 +536,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		/// </summary>
 		public NonRoutineJob()
         {
+            ItemId = -1;
             SmartCoreObjectType = SmartCoreType.NonRoutineJob;
 
             Kits = new CommonCollection<AccessoryRequired>();

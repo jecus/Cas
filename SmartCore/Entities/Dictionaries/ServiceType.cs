@@ -103,8 +103,17 @@ namespace SmartCore.Entities.Dictionaries
 			}
 		}
 
-		#endregion
+        #endregion
 
+        #region public ServiceType()
+
+        public ServiceType()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.ServiceType;
+        }
+
+        #endregion
 
 	}
 }

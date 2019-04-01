@@ -149,7 +149,8 @@ namespace SmartCore.Entities.General.Personnel
 		#endregion
 
 		public SpecialistLicense()
-		{
+        {
+            ItemId = -1;
 			EmployeeLicenceType = EmployeeLicenceType.UNK;
 			SmartCoreObjectType = SmartCoreType.SpecialistLicense;
 			IssueDate = DateTime.Today;

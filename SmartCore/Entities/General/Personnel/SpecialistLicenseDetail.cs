@@ -36,8 +36,10 @@ namespace SmartCore.Entities.General.Personnel
 		public int SpecialistId { get; set; }
 
 		#endregion
+
 		public SpecialistLicenseDetail()
-		{
+        {
+            ItemId = -1;
 			IssueDate = DateTime.Today;
 			SmartCoreObjectType = SmartCoreType.SpecialistLicenseDetail;
 		}

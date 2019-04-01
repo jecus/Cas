@@ -91,6 +91,9 @@ namespace SmartCore.Entities.General
         /// </summary>
         public FlightCrewRecord()
         {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.FlightCrewRecord;
+
         }
         #endregion
 

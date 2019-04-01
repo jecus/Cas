@@ -67,7 +67,8 @@ namespace SmartCore.Entities.General.Personnel
 
 
 		public SpecialistMedicalRecord()
-		{
+        {
+            ItemId = -1;
 			IssueDate = DateTime.Today;
 			SmartCoreObjectType = SmartCoreType.SpecialistMedicalRecord;
 		}

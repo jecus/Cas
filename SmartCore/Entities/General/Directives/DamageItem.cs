@@ -265,6 +265,8 @@ namespace SmartCore.Entities.General.Directives
         /// </summary>
         public DamageItem()
         {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.DamageItem;
             DirectiveType = DirectiveType.DamagesRequiring;
             DamageMeasure = Measure.Millimeters;
             DamageType = DamageType.Damage;

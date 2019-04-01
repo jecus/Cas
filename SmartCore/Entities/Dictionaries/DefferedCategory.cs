@@ -142,7 +142,7 @@ namespace SmartCore.Entities.Dictionaries
         public DeferredCategory()
         {
             IsDeleted = false;
-            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.DeferredCategory;
             _fullName = "";
             AircraftModel = null;
             Threshold = new DirectiveThreshold{

@@ -72,6 +72,8 @@ namespace SmartCore.Entities.General.Directives
         /// </summary>
         public DeferredItem()
         {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.DeferredItem;
             DirectiveType = DirectiveType.DeferredItems;
         }
 

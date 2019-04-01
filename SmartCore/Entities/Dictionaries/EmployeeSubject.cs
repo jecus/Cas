@@ -165,6 +165,16 @@ namespace SmartCore.Entities.Dictionaries
 			return $"{FullName}";
 		}
 
-		#endregion
+        #endregion
+
+        #region public EmployeeSubject()
+
+        public EmployeeSubject()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.EmployeeSubject;
+        }
+
+        #endregion
 	}
 }

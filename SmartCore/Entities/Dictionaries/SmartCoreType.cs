@@ -1,8 +1,10 @@
 ﻿using System;
+using SmartCore.DataAccesses.AttachedFiles;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Atlbs;
+using SmartCore.Entities.General.Commercial;
 using SmartCore.Entities.General.Deprecated;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Hangar;
@@ -16,7 +18,9 @@ using SmartCore.Entities.General.SMS;
 using SmartCore.Entities.General.Store;
 using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Entities.General.WorkShop;
+using SmartCore.Files;
 using SmartCore.Purchase;
+using SmartCore.Relation;
 
 namespace SmartCore.Entities.Dictionaries
 {
@@ -393,6 +397,83 @@ namespace SmartCore.Entities.Dictionaries
 
 		public static SmartCoreType User = new SmartCoreType(3000, "User", "User", typeof(User));
 		public static SmartCoreType AttachedFile = new SmartCoreType(3001, "AttachedFile", "AttachedFile", typeof(AttachedFile));
+		public static SmartCoreType AttachedFileDTO = new SmartCoreType(3002, "AttachedFileDTO", "AttachedFileDTO", typeof(AttachedFileDTO));
+		public static SmartCoreType ItemFileLinkDTO = new SmartCoreType(3003, "ItemFileLinkDTO", "ItemFileLinkDTO", typeof(ItemFileLinkDTO));
+		public static SmartCoreType AGWCategory = new SmartCoreType(3004, "AGWCategory", "AGWCategory", typeof(AGWCategory));
+		public static SmartCoreType AircraftOtherParameters = new SmartCoreType(3005, "AircraftOtherParameters", "AircraftOtherParameters", typeof(AircraftOtherParameters));
+		public static SmartCoreType AircraftWorkerCategory = new SmartCoreType(3006, "AircraftWorkerCategory", "AircraftWorkerCategory", typeof(AircraftWorkerCategory));
+		public static SmartCoreType ModuleRecord = new SmartCoreType(3007, "ModuleRecord", "ModuleRecord", typeof(ModuleRecord));
+		public static SmartCoreType CategoryRecord = new SmartCoreType(3008, "CategoryRecord", "CategoryRecord", typeof(CategoryRecord));
+		public static SmartCoreType Airport = new SmartCoreType(3009, "Airport", "Airport", typeof(Airport));
+		public static SmartCoreType AirportsCodes = new SmartCoreType(3010, "AirportsCodes", "AirportsCodes", typeof(AirportsCodes));
+		public static SmartCoreType AtaChapter = new SmartCoreType(3011, "AtaChapter", "AtaChapter", typeof(AtaChapter));
+		public static SmartCoreType CruiseLevel = new SmartCoreType(3012, "CruiseLevel", "CruiseLevel", typeof(CruiseLevel));
+		public static SmartCoreType DeferredCategory = new SmartCoreType(3013, "DeferredCategory", "DeferredCategory", typeof(DeferredCategory));
+		public static SmartCoreType Department = new SmartCoreType(3014, "Department", "Department", typeof(Department));
+		public static SmartCoreType DocumentSubType = new SmartCoreType(3015, "DocumentSubType", "DocumentSubType", typeof(DocumentSubType));
+		public static SmartCoreType EmployeeSubject = new SmartCoreType(3016, "EmployeeSubject", "EmployeeSubject", typeof(EmployeeSubject));
+		public static SmartCoreType EventCategory = new SmartCoreType(3017, "EventCategory", "EventCategory", typeof(EventCategory));
+		public static SmartCoreType EventClass = new SmartCoreType(3018, "EventClass", "EventClass", typeof(EventClass));
+		public static SmartCoreType FlightNum = new SmartCoreType(3019, "FlightNum", "FlightNum", typeof(FlightNum));
+		public static SmartCoreType KnowledgeModule = new SmartCoreType(3020, "KnowledgeModule", "KnowledgeModule", typeof(KnowledgeModule));
+		public static SmartCoreType LicenseRemarkRights = new SmartCoreType(3021, "LicenseRemarkRights", "LicenseRemarkRights", typeof(LicenseRemarkRights));
+		public static SmartCoreType LicenseRestriction = new SmartCoreType(3022, "LicenseRestriction", "LicenseRestriction", typeof(LicenseRestriction));
+		public static SmartCoreType LLPLifeLimitCategory = new SmartCoreType(3023, "LLPLifeLimitCategory", "LLPLifeLimitCategory", typeof(LLPLifeLimitCategory));
+		public static SmartCoreType Locations = new SmartCoreType(3024, "Locations", "Locations", typeof(Locations));
+		public static SmartCoreType LocationsType = new SmartCoreType(3025, "LocationsType", "LocationsType", typeof(LocationsType));
+		public static SmartCoreType MaintenanceCheckType = new SmartCoreType(3026, "MaintenanceCheckType", "MaintenanceCheckType", typeof(MaintenanceCheckType));
+		public static SmartCoreType Nomenclatures = new SmartCoreType(3027, "Nomenclatures", "Nomenclatures", typeof(Nomenclatures));
+		public static SmartCoreType SchedulePeriods = new SmartCoreType(3028, "SchedulePeriods", "SchedulePeriods", typeof(SchedulePeriods));
+		public static SmartCoreType ServiceType = new SmartCoreType(3029, "ServiceType", "ServiceType", typeof(ServiceType));
+		public static SmartCoreType Reason = new SmartCoreType(3030, "Reason", "Reason", typeof(Reason));
+		public static SmartCoreType Specialization = new SmartCoreType(3031, "Specialization", "Specialization", typeof(Specialization));
+		public static SmartCoreType TripName = new SmartCoreType(3032, "TripName", "TripName", typeof(TripName));
+		public static SmartCoreType ComponentLLPCategoryData = new SmartCoreType(3033, "ComponentLLPCategoryData", "ComponentLLPCategoryData", typeof(ComponentLLPCategoryData));
+		public static SmartCoreType ComponentWorkInRegimeParams = new SmartCoreType(3034, "ComponentWorkInRegimeParams", "ComponentWorkInRegimeParams", typeof(ComponentWorkInRegimeParams));
+		public static SmartCoreType KitSuppliersRelation = new SmartCoreType(3035, "KitSuppliersRelation", "KitSuppliersRelation", typeof(KitSuppliersRelation));
+		public static SmartCoreType ActualStateRecord = new SmartCoreType(3036, "ActualStateRecord", "ActualStateRecord", typeof(ActualStateRecord));
+		public static SmartCoreType AircraftEquipments = new SmartCoreType(3037, "AircraftEquipments", "AircraftEquipments", typeof(AircraftEquipments));
+		public static SmartCoreType CertificateOfReleaseToService = new SmartCoreType(3038, "CertificateOfReleaseToService", "CertificateOfReleaseToService", typeof(CertificateOfReleaseToService));
+		public static SmartCoreType ComponentOilCondition = new SmartCoreType(3039, "ComponentOilCondition", "ComponentOilCondition", typeof(ComponentOilCondition));
+		public static SmartCoreType CorrectiveAction = new SmartCoreType(3040, "CorrectiveAction", "CorrectiveAction", typeof(CorrectiveAction));
+		public static SmartCoreType Discrepancy = new SmartCoreType(3041, "Discrepancy", "Discrepancy", typeof(Discrepancy));
+		public static SmartCoreType EngineAccelerationTime = new SmartCoreType(3042, "EngineAccelerationTime", "EngineAccelerationTime", typeof(EngineAccelerationTime));
+		public static SmartCoreType EngineCondition = new SmartCoreType(3043, "EngineCondition", "EngineCondition", typeof(EngineCondition));
+		public static SmartCoreType EngineTimeInRegime = new SmartCoreType(3044, "EngineTimeInRegime", "EngineTimeInRegime", typeof(EngineTimeInRegime));
+		public static SmartCoreType FlightCargoRecord = new SmartCoreType(3045, "FlightCargoRecord", "FlightCargoRecord", typeof(FlightCargoRecord));
+		public static SmartCoreType FlightPassengerRecord = new SmartCoreType(3046, "FlightPassengerRecord", "FlightPassengerRecord", typeof(FlightPassengerRecord));
+		public static SmartCoreType HydraulicCondition = new SmartCoreType(3047, "HydraulicCondition", "HydraulicCondition", typeof(HydraulicCondition));
+		public static SmartCoreType LandingGearCondition = new SmartCoreType(3048, "LandingGearCondition", "LandingGearCondition", typeof(LandingGearCondition));
+		public static SmartCoreType RunUp = new SmartCoreType(3049, "RunUp", "RunUp", typeof(RunUp));
+		public static SmartCoreType RequestRecord = new SmartCoreType(3050, "RequestRecord", "RequestRecord", typeof(RequestRecord));
+		public static SmartCoreType WorkOrderRecord = new SmartCoreType(3051, "WorkOrderRecord", "WorkOrderRecord", typeof(WorkOrderRecord));
+		public static SmartCoreType JobCardTask = new SmartCoreType(3052, "JobCardTask", "JobCardTask", typeof(JobCardTask));
+		public static SmartCoreType DamageItem = new SmartCoreType(3053, "DamageItem", "DamageItem", typeof(DamageItem));
+		public static SmartCoreType DamageSector = new SmartCoreType(3054, "DamageSector", "DamageSector", typeof(DamageSector));
+		public static SmartCoreType DeferredItem = new SmartCoreType(3055, "DeferredItem", "DeferredItem", typeof(DeferredItem));
+		public static SmartCoreType FlightCrewRecord = new SmartCoreType(3056, "FlightCrewRecord", "FlightCrewRecord", typeof(FlightCrewRecord));
+		public static SmartCoreType MaintenanceCheckBindTaskRecord = new SmartCoreType(3057, "MaintenanceCheckBindTaskRecord", "MaintenanceCheckBindTaskRecord", typeof(MaintenanceCheckBindTaskRecord));
+		public static SmartCoreType MaintenanceProgramChangeRecord = new SmartCoreType(3058, "MaintenanceProgramChangeRecord", "MaintenanceProgramChangeRecord", typeof(MaintenanceProgramChangeRecord));
+		public static SmartCoreType WorkPackageSpecialists = new SmartCoreType(3059, "WorkPackageSpecialists", "WorkPackageSpecialists", typeof(WorkPackageSpecialists));
+		public static SmartCoreType ProcedureDocumentReference = new SmartCoreType(3060, "ProcedureDocumentReference", "ProcedureDocumentReference", typeof(ProcedureDocumentReference));
+		public static SmartCoreType QuotationCost = new SmartCoreType(3061, "QuotationCost", "QuotationCost", typeof(QuotationCost));
+		public static SmartCoreType FlightNumberAircraftModelRelation = new SmartCoreType(3062, "FlightNumberAircraftModelRelation", "FlightNumberAircraftModelRelation", typeof(FlightNumberAircraftModelRelation));
+		public static SmartCoreType FlightNumberAirportRelation = new SmartCoreType(3063, "FlightNumberAirportRelation", "FlightNumberAirportRelation", typeof(FlightNumberAirportRelation));
+		public static SmartCoreType FlightNumberCrewRecord = new SmartCoreType(3064, "FlightNumberCrewRecord", "FlightNumberCrewRecord", typeof(FlightNumberCrewRecord));
+		public static SmartCoreType FlightNumberPeriodDaySchedule = new SmartCoreType(3065, "FlightNumberPeriodDaySchedule", "FlightNumberPeriodDaySchedule", typeof(FlightNumberPeriodDaySchedule));
+		public static SmartCoreType FlightTrack = new SmartCoreType(3066, "FlightTrack", "FlightTrack", typeof(FlightTrack));
+		public static SmartCoreType FlightTrackRecord = new SmartCoreType(3067, "FlightTrackRecord", "FlightTrackRecord", typeof(FlightTrackRecord));
+		public static SmartCoreType EventCondition = new SmartCoreType(3068, "EventCondition", "EventCondition", typeof(EventCondition));
+		public static SmartCoreType EventTypeRiskLevelChangeRecord = new SmartCoreType(3069, "EventTypeRiskLevelChangeRecord", "EventTypeRiskLevelChangeRecord", typeof(EventTypeRiskLevelChangeRecord));
+		public static SmartCoreType ProductCost = new SmartCoreType(3070, "ProductCost", "ProductCost", typeof(ProductCost));
+		public static SmartCoreType StockComponentInfo = new SmartCoreType(3071, "StockComponentInfo", "StockComponentInfo", typeof(StockComponentInfo));
+		public static SmartCoreType WorkPackageRecord = new SmartCoreType(3072, "WorkPackageRecord", "WorkPackageRecord", typeof(WorkPackageRecord));
+		public static SmartCoreType ItemFileLink = new SmartCoreType(3073, "ItemFileLink", "ItemFileLink", typeof(ItemFileLink));
+		public static SmartCoreType InitialOrderRecord = new SmartCoreType(3074, "InitialOrderRecord", "InitialOrderRecord", typeof(InitialOrderRecord));
+		public static SmartCoreType IORQORRelation = new SmartCoreType(3075, "IORQORRelation", "IORQORRelation", typeof(IORQORRelation));
+		public static SmartCoreType RequestForQuotationRecord = new SmartCoreType(3076, "RequestForQuotationRecord", "RequestForQuotationRecord", typeof(RequestForQuotationRecord));
+		public static SmartCoreType ItemsRelation = new SmartCoreType(3077, "ItemsRelation", "ItemsRelation", typeof(ItemsRelation));
+		
 		/*
          * Методы
          */

@@ -1,6 +1,7 @@
 ﻿using System;
 using EFCore.DTO.General;
 using SmartCore.Auxiliary;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.Entities.General.Schedule
@@ -70,5 +71,11 @@ namespace SmartCore.Entities.General.Schedule
 		}
 
 		#endregion
+
+        public FlightPlanOps()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.FlightPlanOps;
+        }
 	}
 }

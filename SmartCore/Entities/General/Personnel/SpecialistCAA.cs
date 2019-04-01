@@ -76,7 +76,8 @@ namespace SmartCore.Entities.General.Personnel
 		#endregion
 
 		public SpecialistCAA()
-		{
+        {
+            ItemId = -1;
 			ValidToDate = DateTime.Today;
 			IssueDate = DateTime.Today;
 			SmartCoreObjectType = SmartCoreType.SpecialistCAA;

@@ -66,5 +66,15 @@ namespace SmartCore.Entities.Dictionaries
 		{
 			return FullName;
 		}
+
+        #region public FlightNum()
+
+        public FlightNum()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.FlightNum;
+        }
+
+        #endregion
 	}
 }

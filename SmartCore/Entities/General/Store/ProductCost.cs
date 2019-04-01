@@ -220,7 +220,9 @@ namespace SmartCore.Entities.General.Store
 		#region public ProductCost()
 
 		public ProductCost()
-		{
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.ProductCost;
 			ParentId = -1;
 			SupplierId = -1;
 		}

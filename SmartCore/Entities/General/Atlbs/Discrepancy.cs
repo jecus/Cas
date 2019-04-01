@@ -635,6 +635,7 @@ namespace SmartCore.Entities.General.Atlbs
 			EngineRemarks = "";
 			Messages = "";
 			FDR = "";
+            SmartCoreObjectType = SmartCoreType.Discrepancy;
 		}
         #endregion
 

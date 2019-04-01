@@ -62,7 +62,8 @@ namespace SmartCore.Entities.General.Personnel
 		#endregion
 
 		public SpecialistInstrumentRating()
-		{
+        {
+            ItemId = -1;
 			IssueDate = DateTime.Now;
 			SmartCoreObjectType = SmartCoreType.SpecialistInstrumentRating;
 		}

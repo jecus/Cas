@@ -92,13 +92,13 @@ namespace SmartCore.Entities.Dictionaries
 		{
 			return _thisType ?? (_thisType = typeof(TripName));
 		}
-		#endregion
+        #endregion
 
-		#endregion
+        #endregion
 
-		#region public static Department Unknown
+        #region public static TripName Unknown
 
-		public static TripName Unknown
+        public static TripName Unknown
 		{
 			get
 			{
@@ -112,6 +112,16 @@ namespace SmartCore.Entities.Dictionaries
 			}
 		}
 
-		#endregion
+        #endregion
+
+        #region public TripName()
+
+        public TripName()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.TripName;
+        }
+
+        #endregion
 	}
 }

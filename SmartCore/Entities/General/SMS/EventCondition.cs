@@ -109,7 +109,7 @@ namespace SmartCore.Entities.General.SMS
         {
             //задаем все ID в -1
             ItemId = -1;
-            EventConditionType = SmartCoreType.Unknown;
+            EventConditionType = SmartCoreType.EventCondition;
         }
         #endregion
 

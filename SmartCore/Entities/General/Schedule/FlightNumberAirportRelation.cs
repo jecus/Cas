@@ -56,6 +56,8 @@ namespace SmartCore.Entities.General.Schedule
         /// </summary>
         public FlightNumberAirportRelation()
         {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.FlightNumberAirportRelation;
         }
         #endregion
 

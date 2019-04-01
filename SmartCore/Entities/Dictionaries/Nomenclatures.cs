@@ -162,6 +162,16 @@ namespace SmartCore.Entities.Dictionaries
 			return $"{FullName}";
 		}
 
-		#endregion
+        #endregion
+
+        #region public Nomenclatures()
+
+        public Nomenclatures()
+        {
+            ItemId = -1;
+            SmartCoreObjectType = SmartCoreType.Nomenclatures;
+        }
+
+        #endregion
 	}
 }
