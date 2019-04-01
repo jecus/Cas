@@ -1166,6 +1166,12 @@
     <Compile Include="UIControls\PurchaseControls\GoodStandardForm.Designer.cs">
       <DependentUpon>GoodStandardForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\PurchaseControls\Initial\InitialOrderFormNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Initial\InitialOrderFormNew.Designer.cs">
+      <DependentUpon>InitialOrderFormNew.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\PurchaseControls\Initial\InitialOrderListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -3876,6 +3882,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PurchaseControls\GoodStandardForm.resx">
       <DependentUpon>GoodStandardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\PurchaseControls\Initial\InitialOrderFormNew.resx">
+      <DependentUpon>InitialOrderFormNew.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PurchaseControls\ModelForm.resx">
       <DependentUpon>ModelForm.cs</DependentUpon>
