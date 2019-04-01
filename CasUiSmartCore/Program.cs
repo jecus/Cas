@@ -81,7 +81,13 @@ namespace CAS.UI
 	        var json = File.ReadAllText(path);
 	        GlobalObjects.Config = JsonConvert.DeserializeObject<JObject>(json);
 
-			var auditContext = new AuditContext((string)GlobalObjects.Config["ConnectionStrings"]["Audit"]);
+	        AuditContext auditContext = null;
+
+			try
+	        {
+		        auditContext = new AuditContext((string)GlobalObjects.Config["ConnectionStrings"]["Audit"]);
+			}
+	        catch {}
 	        GlobalObjects.AuditRepository = new AuditRepository(auditContext);
 
 			var environment = DbTypes.CasEnvironment = new CasEnvironment();

@@ -21,6 +21,9 @@ namespace SmartCore.AuditMongo.Repository
 		{
 			try
 			{
+				if(_context == null)
+					return;
+
 				if (target.IsDeleted)
 					operation = AuditOperation.Deleted;
 
