@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CAS.UI.Interfaces;
-using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
@@ -31,6 +28,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private readonly ProductPartNumberFilter _partNumberFilter = new ProductPartNumberFilter();
 		private readonly ProductCollectionFilter _collectionFilter = new ProductCollectionFilter();
+		private readonly ProductStandartFilter _standartFilter = new ProductStandartFilter();
 
 		#endregion
 
@@ -56,6 +54,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		    _order = order;
 
 		    _collectionFilter.Filters.Add(_partNumberFilter);
+		    _collectionFilter.Filters.Add(_standartFilter);
 
 			Task.Run(() => DoWork())
 			    .ContinueWith(task => Completed(), TaskScheduler.FromCurrentSynchronizationContext());
@@ -178,6 +177,16 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private void textBoxSearchPartNumber_TextChanged(object sender, EventArgs e)
 		{
 			_partNumberFilter.Mask = textBoxSearchPartNumber.Text;
+			UpdateListViewItems();
+		}
+
+		#endregion
+
+		#region private void textBoxSearchStandart_TextChanged(object sender, EventArgs e)
+
+		private void textBoxSearchStandart_TextChanged(object sender, EventArgs e)
+		{
+			_standartFilter.Mask = textBoxSearchStandart.Text;
 			UpdateListViewItems();
 		}
 
