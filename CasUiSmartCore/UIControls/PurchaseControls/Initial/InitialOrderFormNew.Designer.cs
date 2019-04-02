@@ -992,7 +992,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.listViewInitialItems.ShowGroups = true;
 			this.listViewInitialItems.Size = new System.Drawing.Size(684, 304);
 			this.listViewInitialItems.TabIndex = 294;
-			this.listViewInitialItems.Visible = false;
 			// 
 			// InitialOrderFormNew
 			// 

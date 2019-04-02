@@ -41,8 +41,18 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		    InitializeComponent();
 	    }
 
-	    public InitialOrderFormNew(InitialOrder order) : this()
+	    public InitialOrderFormNew(InitialOrder order, List<Product> products = null) : this()
 	    {
+		    if (products != null)
+		    {
+			    foreach (var product in products)
+			    {
+					var newRequest = new InitialOrderRecord(-1, product, 1);
+					newRequest.Product = product;
+					_addedInitialOrderRecords.Add(newRequest);
+				}
+		    }
+
 		    _order = order;
 
 		    _collectionFilter.Filters.Add(_partNumberFilter);

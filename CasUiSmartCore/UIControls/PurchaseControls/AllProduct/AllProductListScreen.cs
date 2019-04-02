@@ -298,7 +298,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
         private void _toolStripMenuItemComposeInitial_Click(object sender, EventArgs e)
         {
-            var form = new InitialOrderFormNew(new InitialOrder());
+            var form = new InitialOrderFormNew(new InitialOrder(), _directivesViewer.SelectedItems);
             form.ShowDialog();
         }
 
