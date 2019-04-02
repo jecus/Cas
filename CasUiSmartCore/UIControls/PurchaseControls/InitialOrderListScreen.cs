@@ -448,7 +448,7 @@ namespace CAS.UI.UIControls.PurchaseControls
         {
             if (_directivesViewer.SelectedItems.Count != 1) return;
 
-            var editForm = new OrderAddForm(_directivesViewer.SelectedItems[0]);
+            var editForm = new InitialOrderFormNew(_directivesViewer.SelectedItems[0]);
             if(editForm.ShowDialog() == DialogResult.OK)
                 AnimatedThreadWorker.RunWorkerAsync();
         }
@@ -537,12 +537,12 @@ namespace CAS.UI.UIControls.PurchaseControls
 
         private void ButtonAddNewClick(object sender, EventArgs e)
         {
-            OrderAddForm form = new OrderAddForm(CurrentParent, OrderFormType.Initial);
+            var form = new InitialOrderFormNew(new InitialOrder(){ParentId = CurrentParent.ItemId, ParentType = CurrentParent.SmartCoreObjectType});
             if(form.ShowDialog() == DialogResult.OK)
             {
                 AnimatedThreadWorker.RunWorkerAsync();
 
-                ReferenceEventArgs refe = new ReferenceEventArgs
+                var refe = new ReferenceEventArgs
                                               {
                                                   DisplayerText = form.AddedInitial.Title,
                                                   TypeOfReflection = ReflectionTypes.DisplayInNew,

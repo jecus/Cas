@@ -298,7 +298,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
         private void _toolStripMenuItemComposeInitial_Click(object sender, EventArgs e)
         {
-            var form = new InitialOrderFormNew(new InitialOrder(), _directivesViewer.SelectedItems);
+            var form = new InitialOrderFormNew(new InitialOrder(){ParentId = aircraftHeaderControl1.Operator.ItemId, ParentType = aircraftHeaderControl1.Operator.SmartCoreObjectType}, _directivesViewer.SelectedItems);
             form.ShowDialog();
         }
 

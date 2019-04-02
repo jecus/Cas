@@ -445,7 +445,7 @@ namespace CAS.UI.UIControls.PurchaseControls
         #region private void ToolStripMenuItemAddKitsClick(object sender, EventArgs e)
         private void ToolStripMenuItemAddKitsClick(object sender, EventArgs e)
         {
-            OrderAddForm form = new OrderAddForm(_currentItem);
+            var form = new InitialOrderFormNew(_currentItem);
             if(form.ShowDialog() == DialogResult.OK)
                 AnimatedThreadWorker.RunWorkerAsync();
 

@@ -46,6 +46,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.labelMeasure = new MetroFramework.Controls.MetroLabel();
 			this.labelTotal = new MetroFramework.Controls.MetroLabel();
 			this.textBoxTotal = new MetroFramework.Controls.MetroTextBox();
+			this.lifelengthViewerNotify = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
+			this.lifelengthViewerLifeLimit = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.comboBoxDefferedCategory = new System.Windows.Forms.ComboBox();
 			this.labelDefferedCategory = new MetroFramework.Controls.MetroLabel();
 			this.labelReason = new MetroFramework.Controls.MetroLabel();
@@ -59,6 +61,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.labelPriority = new MetroFramework.Controls.MetroLabel();
 			this.labelNotify = new MetroFramework.Controls.MetroLabel();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.comboBoxStatus = new System.Windows.Forms.ComboBox();
 			this.textBoxRemarks = new MetroFramework.Controls.MetroTextBox();
 			this.labelRemarks = new MetroFramework.Controls.MetroLabel();
 			this.comboBoxClosedBy = new System.Windows.Forms.ComboBox();
@@ -71,19 +74,16 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.label5 = new MetroFramework.Controls.MetroLabel();
 			this.dateTimePickerOpeningDate = new System.Windows.Forms.DateTimePicker();
 			this.labelOpeningDate = new MetroFramework.Controls.MetroLabel();
-			this.textBoxStatus = new MetroFramework.Controls.MetroTextBox();
 			this.labelStatus = new MetroFramework.Controls.MetroLabel();
 			this.textBoxAuthor = new MetroFramework.Controls.MetroTextBox();
 			this.labelAuthor = new MetroFramework.Controls.MetroLabel();
 			this.labelDesc = new MetroFramework.Controls.MetroLabel();
-			this.textBoxProductDesc = new MetroFramework.Controls.MetroTextBox();
+			this.textBoxDescription = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxTitle = new MetroFramework.Controls.MetroTextBox();
 			this.labelQOTitle = new MetroFramework.Controls.MetroLabel();
 			this.buttonOk = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.listViewInitialItems = new CAS.UI.UIControls.PurchaseControls.Initial.InitialOrderListView();
-			this.lifelengthViewerNotify = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
-			this.lifelengthViewerLifeLimit = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.listViewKits = new CAS.UI.UIControls.PurchaseControls.Quatation.RequestProductListView();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
@@ -293,6 +293,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.button1.Size = new System.Drawing.Size(75, 33);
 			this.button1.TabIndex = 249;
 			this.button1.Text = "Apply";
+			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
 			// numericUpDownQuantity
 			// 
@@ -384,6 +385,68 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.textBoxTotal.UseSelectable = true;
 			this.textBoxTotal.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.textBoxTotal.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+			// 
+			// lifelengthViewerNotify
+			// 
+			this.lifelengthViewerNotify.AutoSize = true;
+			this.lifelengthViewerNotify.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.lifelengthViewerNotify.CalendarApplicable = false;
+			this.lifelengthViewerNotify.CyclesApplicable = false;
+			this.lifelengthViewerNotify.EnabledCalendar = true;
+			this.lifelengthViewerNotify.EnabledCycle = false;
+			this.lifelengthViewerNotify.EnabledHours = false;
+			this.lifelengthViewerNotify.FieldsBackColor = System.Drawing.SystemColors.Window;
+			this.lifelengthViewerNotify.ForeColor = System.Drawing.Color.DimGray;
+			this.lifelengthViewerNotify.HeaderCalendar = "Calendar";
+			this.lifelengthViewerNotify.HeaderCycles = "Cycles";
+			this.lifelengthViewerNotify.HeaderFormattedCalendar = "Calendar";
+			this.lifelengthViewerNotify.HeaderHours = "Hours";
+			this.lifelengthViewerNotify.HoursApplicable = false;
+			this.lifelengthViewerNotify.LeftHeader = "";
+			this.lifelengthViewerNotify.Location = new System.Drawing.Point(347, 215);
+			this.lifelengthViewerNotify.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.lifelengthViewerNotify.Modified = false;
+			this.lifelengthViewerNotify.Name = "lifelengthViewerNotify";
+			this.lifelengthViewerNotify.ReadOnly = false;
+			this.lifelengthViewerNotify.ShowCalendar = true;
+			this.lifelengthViewerNotify.ShowCalendarOnly = true;
+			this.lifelengthViewerNotify.ShowFormattedCalendar = false;
+			this.lifelengthViewerNotify.ShowHeaders = false;
+			this.lifelengthViewerNotify.ShowMinutes = false;
+			this.lifelengthViewerNotify.Size = new System.Drawing.Size(176, 35);
+			this.lifelengthViewerNotify.SystemCalculated = true;
+			this.lifelengthViewerNotify.TabIndex = 147;
+			// 
+			// lifelengthViewerLifeLimit
+			// 
+			this.lifelengthViewerLifeLimit.AutoSize = true;
+			this.lifelengthViewerLifeLimit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.lifelengthViewerLifeLimit.CalendarApplicable = false;
+			this.lifelengthViewerLifeLimit.CyclesApplicable = false;
+			this.lifelengthViewerLifeLimit.EnabledCalendar = true;
+			this.lifelengthViewerLifeLimit.EnabledCycle = false;
+			this.lifelengthViewerLifeLimit.EnabledHours = false;
+			this.lifelengthViewerLifeLimit.FieldsBackColor = System.Drawing.SystemColors.Window;
+			this.lifelengthViewerLifeLimit.ForeColor = System.Drawing.Color.DimGray;
+			this.lifelengthViewerLifeLimit.HeaderCalendar = "Calendar";
+			this.lifelengthViewerLifeLimit.HeaderCycles = "Cycles";
+			this.lifelengthViewerLifeLimit.HeaderFormattedCalendar = "Calendar";
+			this.lifelengthViewerLifeLimit.HeaderHours = "Hours";
+			this.lifelengthViewerLifeLimit.HoursApplicable = false;
+			this.lifelengthViewerLifeLimit.LeftHeader = "";
+			this.lifelengthViewerLifeLimit.Location = new System.Drawing.Point(112, 215);
+			this.lifelengthViewerLifeLimit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.lifelengthViewerLifeLimit.Modified = false;
+			this.lifelengthViewerLifeLimit.Name = "lifelengthViewerLifeLimit";
+			this.lifelengthViewerLifeLimit.ReadOnly = false;
+			this.lifelengthViewerLifeLimit.ShowCalendar = true;
+			this.lifelengthViewerLifeLimit.ShowCalendarOnly = true;
+			this.lifelengthViewerLifeLimit.ShowFormattedCalendar = false;
+			this.lifelengthViewerLifeLimit.ShowHeaders = false;
+			this.lifelengthViewerLifeLimit.ShowMinutes = false;
+			this.lifelengthViewerLifeLimit.Size = new System.Drawing.Size(176, 35);
+			this.lifelengthViewerLifeLimit.SystemCalculated = true;
+			this.lifelengthViewerLifeLimit.TabIndex = 146;
 			// 
 			// comboBoxDefferedCategory
 			// 
@@ -520,6 +583,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// groupBox2
 			// 
+			this.groupBox2.Controls.Add(this.comboBoxStatus);
 			this.groupBox2.Controls.Add(this.textBoxRemarks);
 			this.groupBox2.Controls.Add(this.labelRemarks);
 			this.groupBox2.Controls.Add(this.comboBoxClosedBy);
@@ -532,12 +596,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.groupBox2.Controls.Add(this.label5);
 			this.groupBox2.Controls.Add(this.dateTimePickerOpeningDate);
 			this.groupBox2.Controls.Add(this.labelOpeningDate);
-			this.groupBox2.Controls.Add(this.textBoxStatus);
 			this.groupBox2.Controls.Add(this.labelStatus);
 			this.groupBox2.Controls.Add(this.textBoxAuthor);
 			this.groupBox2.Controls.Add(this.labelAuthor);
 			this.groupBox2.Controls.Add(this.labelDesc);
-			this.groupBox2.Controls.Add(this.textBoxProductDesc);
+			this.groupBox2.Controls.Add(this.textBoxDescription);
 			this.groupBox2.Controls.Add(this.textBoxTitle);
 			this.groupBox2.Controls.Add(this.labelQOTitle);
 			this.groupBox2.Location = new System.Drawing.Point(717, 371);
@@ -546,6 +609,17 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.groupBox2.TabIndex = 291;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Initial";
+			// 
+			// comboBoxStatus
+			// 
+			this.comboBoxStatus.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.comboBoxStatus.FormattingEnabled = true;
+			this.comboBoxStatus.ItemHeight = 17;
+			this.comboBoxStatus.Location = new System.Drawing.Point(118, 102);
+			this.comboBoxStatus.Name = "comboBoxStatus";
+			this.comboBoxStatus.Size = new System.Drawing.Size(400, 25);
+			this.comboBoxStatus.TabIndex = 265;
+			this.comboBoxStatus.SelectedIndexChanged += new System.EventHandler(this.comboBoxStatus_SelectedIndexChanged);
 			// 
 			// textBoxRemarks
 			// 
@@ -590,6 +664,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// comboBoxClosedBy
 			// 
+			this.comboBoxClosedBy.Enabled = false;
 			this.comboBoxClosedBy.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.comboBoxClosedBy.FormattingEnabled = true;
 			this.comboBoxClosedBy.ItemHeight = 17;
@@ -620,6 +695,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// dateTimePickerClosingDate
 			// 
+			this.dateTimePickerClosingDate.Enabled = false;
 			this.dateTimePickerClosingDate.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateTimePickerClosingDate.Location = new System.Drawing.Point(118, 214);
 			this.dateTimePickerClosingDate.Name = "dateTimePickerClosingDate";
@@ -638,6 +714,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// dateTimePickerPublishDate
 			// 
+			this.dateTimePickerPublishDate.Enabled = false;
 			this.dateTimePickerPublishDate.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateTimePickerPublishDate.Location = new System.Drawing.Point(118, 159);
 			this.dateTimePickerPublishDate.Name = "dateTimePickerPublishDate";
@@ -646,6 +723,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// comboBoxPublishedBy
 			// 
+			this.comboBoxPublishedBy.Enabled = false;
 			this.comboBoxPublishedBy.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.comboBoxPublishedBy.FormattingEnabled = true;
 			this.comboBoxPublishedBy.ItemHeight = 17;
@@ -666,11 +744,13 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// dateTimePickerOpeningDate
 			// 
+			this.dateTimePickerOpeningDate.Enabled = false;
 			this.dateTimePickerOpeningDate.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateTimePickerOpeningDate.Location = new System.Drawing.Point(118, 131);
 			this.dateTimePickerOpeningDate.Name = "dateTimePickerOpeningDate";
 			this.dateTimePickerOpeningDate.Size = new System.Drawing.Size(400, 22);
 			this.dateTimePickerOpeningDate.TabIndex = 162;
+			this.dateTimePickerOpeningDate.ValueChanged += new System.EventHandler(this.dateTimePickerOpeningDate_ValueChanged);
 			// 
 			// labelOpeningDate
 			// 
@@ -682,37 +762,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.labelOpeningDate.Text = "Open. date:";
 			this.labelOpeningDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// textBoxStatus
-			// 
-			// 
-			// 
-			// 
-			this.textBoxStatus.CustomButton.Image = null;
-			this.textBoxStatus.CustomButton.Location = new System.Drawing.Point(380, 2);
-			this.textBoxStatus.CustomButton.Name = "";
-			this.textBoxStatus.CustomButton.Size = new System.Drawing.Size(17, 17);
-			this.textBoxStatus.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.textBoxStatus.CustomButton.TabIndex = 1;
-			this.textBoxStatus.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.textBoxStatus.CustomButton.UseSelectable = true;
-			this.textBoxStatus.CustomButton.Visible = false;
-			this.textBoxStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxStatus.Lines = new string[0];
-			this.textBoxStatus.Location = new System.Drawing.Point(118, 103);
-			this.textBoxStatus.MaxLength = 32767;
-			this.textBoxStatus.Name = "textBoxStatus";
-			this.textBoxStatus.PasswordChar = '\0';
-			this.textBoxStatus.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.textBoxStatus.SelectedText = "";
-			this.textBoxStatus.SelectionLength = 0;
-			this.textBoxStatus.SelectionStart = 0;
-			this.textBoxStatus.ShortcutsEnabled = true;
-			this.textBoxStatus.Size = new System.Drawing.Size(400, 22);
-			this.textBoxStatus.TabIndex = 161;
-			this.textBoxStatus.UseSelectable = true;
-			this.textBoxStatus.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.textBoxStatus.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			// 
 			// labelStatus
 			// 
 			this.labelStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
@@ -720,7 +769,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.labelStatus.Name = "labelStatus";
 			this.labelStatus.Size = new System.Drawing.Size(87, 23);
 			this.labelStatus.TabIndex = 160;
-			this.labelStatus.Text = "Author:";
+			this.labelStatus.Text = "Status:";
 			this.labelStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// textBoxAuthor
@@ -737,6 +786,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.textBoxAuthor.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
 			this.textBoxAuthor.CustomButton.UseSelectable = true;
 			this.textBoxAuthor.CustomButton.Visible = false;
+			this.textBoxAuthor.Enabled = false;
 			this.textBoxAuthor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.textBoxAuthor.Lines = new string[0];
 			this.textBoxAuthor.Location = new System.Drawing.Point(118, 75);
@@ -775,39 +825,39 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.labelDesc.Text = "Description:";
 			this.labelDesc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// textBoxProductDesc
+			// textBoxDescription
 			// 
-			this.textBoxProductDesc.BackColor = System.Drawing.Color.White;
+			this.textBoxDescription.BackColor = System.Drawing.Color.White;
 			// 
 			// 
 			// 
-			this.textBoxProductDesc.CustomButton.Image = null;
-			this.textBoxProductDesc.CustomButton.Location = new System.Drawing.Point(380, 2);
-			this.textBoxProductDesc.CustomButton.Name = "";
-			this.textBoxProductDesc.CustomButton.Size = new System.Drawing.Size(17, 17);
-			this.textBoxProductDesc.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.textBoxProductDesc.CustomButton.TabIndex = 1;
-			this.textBoxProductDesc.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.textBoxProductDesc.CustomButton.UseSelectable = true;
-			this.textBoxProductDesc.CustomButton.Visible = false;
-			this.textBoxProductDesc.Enabled = false;
-			this.textBoxProductDesc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxProductDesc.Lines = new string[0];
-			this.textBoxProductDesc.Location = new System.Drawing.Point(118, 47);
-			this.textBoxProductDesc.MaxLength = 128;
-			this.textBoxProductDesc.Multiline = true;
-			this.textBoxProductDesc.Name = "textBoxProductDesc";
-			this.textBoxProductDesc.PasswordChar = '\0';
-			this.textBoxProductDesc.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.textBoxProductDesc.SelectedText = "";
-			this.textBoxProductDesc.SelectionLength = 0;
-			this.textBoxProductDesc.SelectionStart = 0;
-			this.textBoxProductDesc.ShortcutsEnabled = true;
-			this.textBoxProductDesc.Size = new System.Drawing.Size(400, 22);
-			this.textBoxProductDesc.TabIndex = 156;
-			this.textBoxProductDesc.UseSelectable = true;
-			this.textBoxProductDesc.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.textBoxProductDesc.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+			this.textBoxDescription.CustomButton.Image = null;
+			this.textBoxDescription.CustomButton.Location = new System.Drawing.Point(380, 2);
+			this.textBoxDescription.CustomButton.Name = "";
+			this.textBoxDescription.CustomButton.Size = new System.Drawing.Size(17, 17);
+			this.textBoxDescription.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxDescription.CustomButton.TabIndex = 1;
+			this.textBoxDescription.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxDescription.CustomButton.UseSelectable = true;
+			this.textBoxDescription.CustomButton.Visible = false;
+			this.textBoxDescription.Enabled = false;
+			this.textBoxDescription.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxDescription.Lines = new string[0];
+			this.textBoxDescription.Location = new System.Drawing.Point(118, 47);
+			this.textBoxDescription.MaxLength = 128;
+			this.textBoxDescription.Multiline = true;
+			this.textBoxDescription.Name = "textBoxDescription";
+			this.textBoxDescription.PasswordChar = '\0';
+			this.textBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textBoxDescription.SelectedText = "";
+			this.textBoxDescription.SelectionLength = 0;
+			this.textBoxDescription.SelectionStart = 0;
+			this.textBoxDescription.ShortcutsEnabled = true;
+			this.textBoxDescription.Size = new System.Drawing.Size(400, 22);
+			this.textBoxDescription.TabIndex = 156;
+			this.textBoxDescription.UseSelectable = true;
+			this.textBoxDescription.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxDescription.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// textBoxTitle
 			// 
@@ -890,68 +940,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.listViewInitialItems.ShowGroups = true;
 			this.listViewInitialItems.Size = new System.Drawing.Size(687, 304);
 			this.listViewInitialItems.TabIndex = 294;
-			// 
-			// lifelengthViewerNotify
-			// 
-			this.lifelengthViewerNotify.AutoSize = true;
-			this.lifelengthViewerNotify.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.lifelengthViewerNotify.CalendarApplicable = false;
-			this.lifelengthViewerNotify.CyclesApplicable = false;
-			this.lifelengthViewerNotify.EnabledCalendar = true;
-			this.lifelengthViewerNotify.EnabledCycle = false;
-			this.lifelengthViewerNotify.EnabledHours = false;
-			this.lifelengthViewerNotify.FieldsBackColor = System.Drawing.SystemColors.Window;
-			this.lifelengthViewerNotify.ForeColor = System.Drawing.Color.DimGray;
-			this.lifelengthViewerNotify.HeaderCalendar = "Calendar";
-			this.lifelengthViewerNotify.HeaderCycles = "Cycles";
-			this.lifelengthViewerNotify.HeaderFormattedCalendar = "Calendar";
-			this.lifelengthViewerNotify.HeaderHours = "Hours";
-			this.lifelengthViewerNotify.HoursApplicable = false;
-			this.lifelengthViewerNotify.LeftHeader = "";
-			this.lifelengthViewerNotify.Location = new System.Drawing.Point(347, 215);
-			this.lifelengthViewerNotify.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.lifelengthViewerNotify.Modified = false;
-			this.lifelengthViewerNotify.Name = "lifelengthViewerNotify";
-			this.lifelengthViewerNotify.ReadOnly = false;
-			this.lifelengthViewerNotify.ShowCalendar = true;
-			this.lifelengthViewerNotify.ShowCalendarOnly = true;
-			this.lifelengthViewerNotify.ShowFormattedCalendar = false;
-			this.lifelengthViewerNotify.ShowHeaders = false;
-			this.lifelengthViewerNotify.ShowMinutes = false;
-			this.lifelengthViewerNotify.Size = new System.Drawing.Size(176, 35);
-			this.lifelengthViewerNotify.SystemCalculated = true;
-			this.lifelengthViewerNotify.TabIndex = 147;
-			// 
-			// lifelengthViewerLifeLimit
-			// 
-			this.lifelengthViewerLifeLimit.AutoSize = true;
-			this.lifelengthViewerLifeLimit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.lifelengthViewerLifeLimit.CalendarApplicable = false;
-			this.lifelengthViewerLifeLimit.CyclesApplicable = false;
-			this.lifelengthViewerLifeLimit.EnabledCalendar = true;
-			this.lifelengthViewerLifeLimit.EnabledCycle = false;
-			this.lifelengthViewerLifeLimit.EnabledHours = false;
-			this.lifelengthViewerLifeLimit.FieldsBackColor = System.Drawing.SystemColors.Window;
-			this.lifelengthViewerLifeLimit.ForeColor = System.Drawing.Color.DimGray;
-			this.lifelengthViewerLifeLimit.HeaderCalendar = "Calendar";
-			this.lifelengthViewerLifeLimit.HeaderCycles = "Cycles";
-			this.lifelengthViewerLifeLimit.HeaderFormattedCalendar = "Calendar";
-			this.lifelengthViewerLifeLimit.HeaderHours = "Hours";
-			this.lifelengthViewerLifeLimit.HoursApplicable = false;
-			this.lifelengthViewerLifeLimit.LeftHeader = "";
-			this.lifelengthViewerLifeLimit.Location = new System.Drawing.Point(112, 215);
-			this.lifelengthViewerLifeLimit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.lifelengthViewerLifeLimit.Modified = false;
-			this.lifelengthViewerLifeLimit.Name = "lifelengthViewerLifeLimit";
-			this.lifelengthViewerLifeLimit.ReadOnly = false;
-			this.lifelengthViewerLifeLimit.ShowCalendar = true;
-			this.lifelengthViewerLifeLimit.ShowCalendarOnly = true;
-			this.lifelengthViewerLifeLimit.ShowFormattedCalendar = false;
-			this.lifelengthViewerLifeLimit.ShowHeaders = false;
-			this.lifelengthViewerLifeLimit.ShowMinutes = false;
-			this.lifelengthViewerLifeLimit.Size = new System.Drawing.Size(176, 35);
-			this.lifelengthViewerLifeLimit.SystemCalculated = true;
-			this.lifelengthViewerLifeLimit.TabIndex = 146;
+			this.listViewInitialItems.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.listViewInitialItems_SelectedItemsChanged);
 			// 
 			// listViewKits
 			// 
@@ -1034,10 +1023,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
         private MetroTextBox textBoxTitle;
         private MetroLabel labelQOTitle;
         private MetroLabel labelDesc;
-        private MetroTextBox textBoxProductDesc;
+        private MetroTextBox textBoxDescription;
         private MetroTextBox textBoxAuthor;
         private MetroLabel labelAuthor;
-        private MetroTextBox textBoxStatus;
         private MetroLabel labelStatus;
         private System.Windows.Forms.DateTimePicker dateTimePickerOpeningDate;
         private MetroLabel labelOpeningDate;
@@ -1054,5 +1042,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
 		private InitialOrderListView listViewInitialItems;
+		private System.Windows.Forms.ComboBox comboBoxStatus;
 	}
 }
