@@ -323,6 +323,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// comboBoxDIR
 			// 
+			this.comboBoxDIR.Enabled = false;
 			this.comboBoxDIR.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.comboBoxDIR.FormattingEnabled = true;
 			this.comboBoxDIR.ItemHeight = 17;
@@ -519,6 +520,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// comboBoxDefferedCategory
 			// 
+			this.comboBoxDefferedCategory.Enabled = false;
 			this.comboBoxDefferedCategory.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.comboBoxDefferedCategory.FormattingEnabled = true;
 			this.comboBoxDefferedCategory.ItemHeight = 17;
