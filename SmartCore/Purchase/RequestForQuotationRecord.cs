@@ -203,6 +203,9 @@ namespace SmartCore.Purchase
 		#endregion
 
 
+		[TableColumn("Remarks")]
+		public string Remarks { get; set; }
+
 		private Priority _priority;
 		[TableColumn("Priority")]
 		public Priority Priority

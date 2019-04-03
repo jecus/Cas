@@ -86,6 +86,10 @@ namespace EFCore.DTO.General.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("InitialReason");
 
+			Property(i => i.Remarks)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("Remarks ");
+
 
 			HasRequired(i => i.ToSupplier)
 				.WithMany(i => i.RequestForQuotationRecordDtos)

@@ -57,6 +57,9 @@ namespace EFCore.DTO.General
 		public int InitialReason { get; set; }
 
 		[DataMember]
+		public string Remarks { get; set; }
+
+		[DataMember]
 		[Include]
 		public DefferedCategorieDTO DefferedCategory { get; set; }
 

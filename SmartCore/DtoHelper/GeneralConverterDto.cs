@@ -4707,21 +4707,15 @@ namespace SmartCore.DtoHelper
 			return new RequestForQuotationRecordDTO
 			{
 				ItemId = quotationrecord.ItemId,
-
 				IsDeleted = quotationrecord.IsDeleted,
 				ParentPackageId = quotationrecord.ParentPackageId,
-
 				PackageItemId = quotationrecord.PackageItemId,
-
 				CostCondition = (short)quotationrecord.CostCondition,
 				Processed = quotationrecord.Processed,
 				PackageItemTypeId = quotationrecord.PackageItemType?.ItemId,
-
 				Quantity = quotationrecord.Quantity,
-
 				Measure = quotationrecord.Measure?.ItemId,
 				CostNew = quotationrecord.CostNew,
-
 				CostOverhaul = quotationrecord.CostOverhaul,
 				CostServiceable = quotationrecord.CostServiceable,
 				ToSupplierId = quotationrecord.ToSupplier?.ItemId,
@@ -4729,7 +4723,8 @@ namespace SmartCore.DtoHelper
 				DestinationObjectId = quotationrecord.DestinationObjectId,
 				DefferedCategoryId = quotationrecord.DeferredCategory.ItemId,
 				InitialReason = quotationrecord.InitialReason.ItemId,
-				DestinationObjectType = quotationrecord.DestinationObjectType.ItemId
+				DestinationObjectType = quotationrecord.DestinationObjectType.ItemId,
+				Remarks = quotationrecord.Remarks
 			};
 		}
 
@@ -4754,7 +4749,8 @@ namespace SmartCore.DtoHelper
 				DestinationObjectId = quotationrecorddto.DestinationObjectId,
 				DeferredCategory = quotationrecorddto.DefferedCategory?.Convert(),
 				InitialReason = InitialReason.GetItemById(quotationrecorddto.InitialReason),
-				DestinationObjectType = SmartCoreType.GetSmartCoreTypeById(quotationrecorddto.DestinationObjectType)
+				DestinationObjectType = SmartCoreType.GetSmartCoreTypeById(quotationrecorddto.DestinationObjectType),
+				Remarks = quotationrecorddto.Remarks
 			};
 		}
 
