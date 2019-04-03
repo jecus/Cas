@@ -4659,6 +4659,8 @@ namespace SmartCore.DtoHelper
 				ClosingDate = reqquotation.ClosingDate,
 				Author = reqquotation.Author,
 				Remarks = reqquotation.Remarks,
+				PublishedByUser = reqquotation.PublishedByUser,
+				CloseByUser = reqquotation.CloseByUser,
 				ParentTypeId = reqquotation.ParentType?.ItemId,
 				ToSupplierId = reqquotation.ToSupplier?.ItemId,
 				Files = reqquotation.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
@@ -4683,6 +4685,8 @@ namespace SmartCore.DtoHelper
 				ClosingDate = reqquotationdto.ClosingDate ?? DateTimeExtend.GetCASMinDateTime(),
 				Author = reqquotationdto.Author,
 				Remarks = reqquotationdto.Remarks,
+				PublishedByUser = reqquotationdto.PublishedByUser,
+				CloseByUser = reqquotationdto.CloseByUser,
 				ParentType = reqquotationdto.ParentTypeId.HasValue ? SmartCoreType.Items.GetItemById(reqquotationdto.ParentTypeId.Value) : SmartCoreType.Unknown,
 				ToSupplier = reqquotationdto.ToSupplier?.Convert()
 			};

@@ -74,7 +74,17 @@ namespace EFCore.DTO.General.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("ClosedById");
 
-			
+			Property(i => i.PublishedByUser)
+				.HasMaxLength(128)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("PublishedByUser ");
+
+			Property(i => i.CloseByUser)
+				.HasMaxLength(128)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("CloseByUser");
+
+
 			HasRequired(i => i.PublishedBy)
 				.WithMany(i => i.QuotationPublishedDtos)
 				.HasForeignKey(i => i.PublishedById);

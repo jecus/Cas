@@ -49,6 +49,12 @@ namespace EFCore.DTO.General
 		public int ClosedById { get; set; }
 
 		[DataMember]
+		public string PublishedByUser { get; set; }
+
+		[DataMember]
+		public string CloseByUser { get; set; }
+
+		[DataMember]
 		[Include]
 		public SpecialistDTO PublishedBy { get; set; }
 
