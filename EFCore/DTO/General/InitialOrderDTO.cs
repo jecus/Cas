@@ -52,13 +52,13 @@ namespace EFCore.DTO.General
 		public string CloseByUser { get; set; }
 
 
-		[DataMember]
-		[Include]
-		public SpecialistDTO PublishedBy { get; set; }
+		//[DataMember]
+		//[Include]
+		//public SpecialistDTO PublishedBy { get; set; }
 
-		[DataMember]
-		[Include]
-		public SpecialistDTO ClosedBy { get; set; }
+		//[DataMember]
+		//[Include]
+		//public SpecialistDTO ClosedBy { get; set; }
 
 
 		[DataMember]

@@ -3761,8 +3761,8 @@ namespace SmartCore.DtoHelper
 				ItemId = initorder.ItemId,
 				IsDeleted = initorder.IsDeleted,
 				Title = initorder.Title,
-				PublishedById = initorder.PublishedBy.ItemId,
-				ClosedById = initorder.ClosedBy.ItemId,
+				PublishedById = initorder.PublishedById,
+				ClosedById = initorder.ClosedById,
 				Description = initorder.Description,
 				Author = initorder.Author,
 				ParentId = initorder.ParentId,
@@ -3796,10 +3796,10 @@ namespace SmartCore.DtoHelper
 				PublishingDate = initorderdto.PublishingDate ?? DateTimeExtend.GetCASMinDateTime(),
 				ClosingDate = initorderdto.ClosingDate ?? DateTimeExtend.GetCASMinDateTime(),
 				Remarks = initorderdto.Remarks,
+				PublishedById = initorderdto.PublishedById,
+				ClosedById = initorderdto.ClosedById,
 				PublishedByUser = initorderdto.PublishedByUser,
 				CloseByUser = initorderdto.CloseByUser,
-				PublishedBy = initorderdto.PublishedBy?.Convert(),
-				ClosedBy = initorderdto.ClosedBy?.Convert(),
 			};
 
 			if (initorderdto.Files != null)

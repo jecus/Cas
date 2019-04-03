@@ -256,8 +256,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 				    OpeningDate = initial.OpeningDate,
 				    Author = initial.Author,
 				    Remarks = initial.Remarks,
-				    PublishedBy = initial.PublishedBy,
-				    ClosedBy = initial.ClosedBy,
 			    };
 
 			    GlobalObjects.CasEnvironment.NewKeeper.Save(quatation);

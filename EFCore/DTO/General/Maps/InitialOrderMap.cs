@@ -80,13 +80,13 @@ namespace EFCore.DTO.General.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("CloseByUser");
 
-			HasRequired(i => i.PublishedBy)
-				.WithMany(i => i.PublishedDtos)
-				.HasForeignKey(i => i.PublishedById);
+			//HasRequired(i => i.PublishedBy)
+			//	.WithMany(i => i.PublishedDtos)
+			//	.HasForeignKey(i => i.PublishedById);
 
-			HasRequired(i => i.ClosedBy)
-				.WithMany(i => i.ClosedDtos)
-				.HasForeignKey(i => i.ClosedById);
+			//HasRequired(i => i.ClosedBy)
+			//	.WithMany(i => i.ClosedDtos)
+			//	.HasForeignKey(i => i.ClosedById);
 
 
 			HasMany(i => i.Files).WithRequired(i => i.InitialOrderDto).HasForeignKey(i => i.ParentId);

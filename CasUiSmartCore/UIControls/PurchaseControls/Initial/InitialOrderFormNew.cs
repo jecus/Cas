@@ -32,7 +32,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private readonly InitialOrder _order;
 		private List<BaseEntityObject> destinations = new List<BaseEntityObject>();
 		private DefferedCategoriesCollection _defferedCategories = new DefferedCategoriesCollection();
-		private List<Specialist> _specialists = new List<Specialist>();
 
 		private readonly ProductPartNumberFilter _partNumberFilter = new ProductPartNumberFilter();
 		private readonly ProductCollectionFilter _collectionFilter = new ProductCollectionFilter();
@@ -123,10 +122,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			destinations.AddRange(GlobalObjects.CasEnvironment.Hangars.GetValidEntries());
 
 			var specIds = GlobalObjects.CasEnvironment.NewLoader.GetSelectColumnOnly<SpecializationDTO>(new[] { new Filter("DepartmentId", 4) }, "ItemId");
-			if (specIds.Count > 0)
-				_specialists.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<SpecialistDTO, Specialist>(new Filter("SpecializationID", specIds)));
-
-			_specialists.Add(Specialist.Unknown);
 		}
 
 		#endregion
@@ -146,6 +141,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			comboBoxReason.Items.Clear();
 			comboBoxReason.Items.AddRange(InitialReason.Items.ToArray());
+
+			comboBoxCategory.Items.Clear();
+			comboBoxCategory.Items.AddRange(GlobalObjects.CasEnvironment.GetDictionary<DeferredCategory>().ToArray());
+			
 		}
 
 		#endregion
@@ -229,14 +228,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			if (_order.ItemId > 0)
 			{
-				comboBoxPublishedBy.Items.Clear();
-				comboBoxPublishedBy.Items.AddRange(_specialists.ToArray());
-				comboBoxPublishedBy.SelectedItem = _order.PublishedBy;
-
-				comboBoxClosedBy.Items.Clear();
-				comboBoxClosedBy.Items.AddRange(_specialists.ToArray());
-				comboBoxClosedBy.SelectedItem = _order.ClosedBy;
-
 				textBoxTitle.Text = _order.Title;
 				textBoxDescription.Text = _order.Description;
 				dateTimePickerOpeningDate.Value = _order.OpeningDate;
@@ -249,8 +240,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			{
 				dateTimePickerClosingDate.Enabled = false;
 				dateTimePickerPublishDate.Enabled = false;
-				comboBoxPublishedBy.Enabled = false;
-				comboBoxClosedBy.Enabled = false;
 
 				textBoxAuthor.Text = GlobalObjects.CasEnvironment.IdentityUser.ToString();
 			}
@@ -366,8 +355,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				_order.OpeningDate = dateTimePickerOpeningDate.Value;
 				_order.ClosingDate = dateTimePickerClosingDate.Value;
 				_order.PublishingDate = dateTimePickerPublishDate.Value;
-				_order.PublishedBy = comboBoxPublishedBy.SelectedItem as Specialist;
-				_order.ClosedBy = comboBoxClosedBy.SelectedItem as Specialist;
 			}
 			else if (_order.Status == WorkPackageStatus.Opened)
 			{
@@ -376,12 +363,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			else if (_order.Status == WorkPackageStatus.Closed)
 			{
 				_order.ClosingDate = dateTimePickerClosingDate.Value;
-				_order.ClosedBy = comboBoxClosedBy.SelectedItem as Specialist;
 			}
 			else if (_order.Status == WorkPackageStatus.Published)
 			{
 				_order.PublishingDate = dateTimePickerPublishDate.Value;
-				_order.PublishedBy = comboBoxPublishedBy.SelectedItem as Specialist;
 			}
 
 			_order.Author = textBoxAuthor.Text;
@@ -538,33 +523,25 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			{
 				dateTimePickerOpeningDate.Enabled = true;
 				dateTimePickerPublishDate.Enabled = false;
-				comboBoxPublishedBy.Enabled = false;
 				dateTimePickerClosingDate.Enabled = false;
-				comboBoxClosedBy.Enabled = false;
 			}
 			else if (status == WorkPackageStatus.Published)
 			{
 				dateTimePickerOpeningDate.Enabled = false;
 				dateTimePickerPublishDate.Enabled = true;
-				comboBoxPublishedBy.Enabled = true;
 				dateTimePickerClosingDate.Enabled = false;
-				comboBoxClosedBy.Enabled = false;
 			}
 			else if (status == WorkPackageStatus.Closed)
 			{
 				dateTimePickerOpeningDate.Enabled = false;
 				dateTimePickerPublishDate.Enabled = false;
-				comboBoxPublishedBy.Enabled = false;
 				dateTimePickerClosingDate.Enabled = true;
-				comboBoxClosedBy.Enabled = true;
 			}
 			else
 			{
 				dateTimePickerOpeningDate.Enabled = true;
 				dateTimePickerPublishDate.Enabled = true;
-				comboBoxPublishedBy.Enabled = true;
 				dateTimePickerClosingDate.Enabled = true;
-				comboBoxClosedBy.Enabled = true;
 			}
 		}
 	}
