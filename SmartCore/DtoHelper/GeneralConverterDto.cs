@@ -3771,8 +3771,9 @@ namespace SmartCore.DtoHelper
 				OpeningDate = initorder.OpeningDate,
 				PublishingDate = initorder.PublishingDate,
 				ClosingDate = initorder.ClosingDate,
-
 				Remarks = initorder.Remarks,
+				PublishedByUser = initorder.PublishedByUser,
+				CloseByUser = initorder.CloseByUser,
 				Files = initorder.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
 				PackageRecords = initorder.PackageRecords?.Select(i => i.Convert()) as ICollection<InitialOrderRecordDTO>
 			};
@@ -3795,6 +3796,8 @@ namespace SmartCore.DtoHelper
 				PublishingDate = initorderdto.PublishingDate ?? DateTimeExtend.GetCASMinDateTime(),
 				ClosingDate = initorderdto.ClosingDate ?? DateTimeExtend.GetCASMinDateTime(),
 				Remarks = initorderdto.Remarks,
+				PublishedByUser = initorderdto.PublishedByUser,
+				CloseByUser = initorderdto.CloseByUser,
 				PublishedBy = initorderdto.PublishedBy?.Convert(),
 				ClosedBy = initorderdto.ClosedBy?.Convert(),
 			};

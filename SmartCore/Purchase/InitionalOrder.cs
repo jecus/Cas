@@ -120,6 +120,12 @@ namespace SmartCore.Purchase
 			set { _closedBy = value; }
 		}
 
+		[TableColumn("PublishedByUser")]
+		public string PublishedByUser { get; set; }
+
+		[TableColumn("CloseByUser")]
+		public string CloseByUser { get; set; }
+
 		/*
 		*  Ìועמהû 
 		*/

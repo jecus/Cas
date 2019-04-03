@@ -45,6 +45,12 @@ namespace EFCore.DTO.General
 		[DataMember]
 		public string Remarks { get; set; }
 
+		[DataMember]
+		public string PublishedByUser { get; set; }
+
+		[DataMember]
+		public string CloseByUser { get; set; }
+
 
 		[DataMember]
 		[Include]
