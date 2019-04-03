@@ -342,10 +342,16 @@ namespace CAS.UI.UIControls.PurchaseControls
         /// <param name="e"></param>
         private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
         {
-            foreach (InitialOrder rfq in _directivesViewer.SelectedItems)
+            foreach (var rfq in _directivesViewer.SelectedItems)
             {
-                if (rfq.Status != WorkPackageStatus.Closed)
-                    GlobalObjects.PackageCore.PublishPackage<InitialOrder, InitialOrderRecord>(rfq, DateTime.Now);
+	            if (rfq.Status != WorkPackageStatus.Closed)
+	            {
+		            rfq.Status = WorkPackageStatus.Published;
+		            rfq.PublishingDate = DateTime.Now;
+		            rfq.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
+		            rfq.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
+					GlobalObjects.CasEnvironment.NewKeeper.Save(rfq);
+	            }
                 else
                 {
                     switch (MessageBox.Show(@"This initial order is already closed," +

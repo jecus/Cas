@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using EFCore.DTO.Dictionaries;
@@ -16,7 +15,6 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Personnel;
 using SmartCore.Filters;
 using SmartCore.Purchase;
 
@@ -121,7 +119,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			destinations.AddRange(GlobalObjects.CasEnvironment.Stores.GetValidEntries());
 			destinations.AddRange(GlobalObjects.CasEnvironment.Hangars.GetValidEntries());
 
-			var specIds = GlobalObjects.CasEnvironment.NewLoader.GetSelectColumnOnly<SpecializationDTO>(new[] { new Filter("DepartmentId", 4) }, "ItemId");
 		}
 
 		#endregion
@@ -141,9 +138,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			comboBoxReason.Items.Clear();
 			comboBoxReason.Items.AddRange(InitialReason.Items.ToArray());
-
-			comboBoxCategory.Items.Clear();
-			comboBoxCategory.Items.AddRange(GlobalObjects.CasEnvironment.GetDictionary<DeferredCategory>().ToArray());
 			
 		}
 
@@ -154,6 +148,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private void comboBoxDestination_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			comboBoxDefferedCategory.Items.Clear();
+			comboBoxDIR.Items.Clear();
 
 			var a = comboBoxDestination.SelectedItem as Aircraft;
 
@@ -233,6 +228,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				dateTimePickerOpeningDate.Value = _order.OpeningDate;
 				dateTimePickerClosingDate.Value = _order.ClosingDate;
 				dateTimePickerPublishDate.Value = _order.PublishingDate;
+				textBoxClosingBy.Text = _order.CloseByUser;
+				textBoxPublishedBy.Text = _order.PublishedByUser;
 				textBoxAuthor.Text = _order.Author;
 				textBoxRemarks.Text = _order.Remarks;
 			}
@@ -349,6 +346,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			_order.Title = textBoxTitle.Text;
 			_order.Description = textBoxDescription.Text;
 			_order.Status = (WorkPackageStatus)comboBoxStatus.SelectedItem;
+			_order.Remarks = textBoxRemarks.Text;
+
+			if (_order.ItemId <= 0)
+				_order.Author = GlobalObjects.CasEnvironment.IdentityUser.ToString();
 
 			if (_order.Status == WorkPackageStatus.All)
 			{
@@ -368,9 +369,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			{
 				_order.PublishingDate = dateTimePickerPublishDate.Value;
 			}
-
-			_order.Author = textBoxAuthor.Text;
-			_order.Remarks = textBoxRemarks.Text;
 		}
 		#endregion
 
@@ -450,6 +448,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			listViewInitialItems.SelectedItem.Measure = comboBoxMeasure.SelectedItem as Measure ?? Measure.Unknown;
 			listViewInitialItems.SelectedItem.Quantity = (double)numericUpDownQuantity.Value;
 			listViewInitialItems.SelectedItem.DeferredCategory = comboBoxDefferedCategory.SelectedItem as DeferredCategory ?? DeferredCategory.Unknown;
+			listViewInitialItems.SelectedItem.Remarks = metroTextBox1.Text;
 
 			ComponentStatus costCondition = ComponentStatus.Unknown;
 			if (checkBoxNew.Checked)
@@ -491,7 +490,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		{
 			comboBoxMeasure.SelectedItem = null;
 			comboBoxReason.SelectedItem = null;
-			textBoxDescription.Text = "";
+			metroTextBox1.Text = "";
 			numericUpDownQuantity.Value = 0;
 			checkBoxNew.Checked = false;
 			checkBoxOverhaul.Checked = false;

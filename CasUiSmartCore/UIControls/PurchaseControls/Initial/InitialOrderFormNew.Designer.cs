@@ -40,7 +40,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
 			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
 			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-			this.comboBoxCategory = new System.Windows.Forms.ComboBox();
+			this.comboBoxDIR = new System.Windows.Forms.ComboBox();
 			this.comboBoxPriority = new System.Windows.Forms.ComboBox();
 			this.label19 = new MetroFramework.Controls.MetroLabel();
 			this.button1 = new System.Windows.Forms.Button();
@@ -65,6 +65,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.labelPriority = new MetroFramework.Controls.MetroLabel();
 			this.labelNotify = new MetroFramework.Controls.MetroLabel();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.textBoxClosingBy = new MetroFramework.Controls.MetroTextBox();
+			this.textBoxPublishedBy = new MetroFramework.Controls.MetroTextBox();
 			this.comboBoxStatus = new System.Windows.Forms.ComboBox();
 			this.textBoxRemarks = new MetroFramework.Controls.MetroTextBox();
 			this.labelRemarks = new MetroFramework.Controls.MetroLabel();
@@ -87,8 +89,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.listViewInitialItems = new CAS.UI.UIControls.PurchaseControls.Initial.InitialOrderListView();
 			this.listViewKits = new CAS.UI.UIControls.PurchaseControls.Quatation.RequestProductListView();
-			this.textBoxPublishedBy = new MetroFramework.Controls.MetroTextBox();
-			this.textBoxClosingBy = new MetroFramework.Controls.MetroTextBox();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.groupBox2.SuspendLayout();
@@ -239,7 +239,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.groupBox1.Controls.Add(this.metroTextBox1);
 			this.groupBox1.Controls.Add(this.metroLabel2);
 			this.groupBox1.Controls.Add(this.metroLabel1);
-			this.groupBox1.Controls.Add(this.comboBoxCategory);
+			this.groupBox1.Controls.Add(this.comboBoxDIR);
 			this.groupBox1.Controls.Add(this.comboBoxPriority);
 			this.groupBox1.Controls.Add(this.label19);
 			this.groupBox1.Controls.Add(this.button1);
@@ -321,15 +321,15 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.metroLabel1.TabIndex = 253;
 			this.metroLabel1.Text = "Category:";
 			// 
-			// comboBoxCategory
+			// comboBoxDIR
 			// 
-			this.comboBoxCategory.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
-			this.comboBoxCategory.FormattingEnabled = true;
-			this.comboBoxCategory.ItemHeight = 17;
-			this.comboBoxCategory.Location = new System.Drawing.Point(118, 80);
-			this.comboBoxCategory.Name = "comboBoxCategory";
-			this.comboBoxCategory.Size = new System.Drawing.Size(400, 25);
-			this.comboBoxCategory.TabIndex = 252;
+			this.comboBoxDIR.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.comboBoxDIR.FormattingEnabled = true;
+			this.comboBoxDIR.ItemHeight = 17;
+			this.comboBoxDIR.Location = new System.Drawing.Point(118, 111);
+			this.comboBoxDIR.Name = "comboBoxDIR";
+			this.comboBoxDIR.Size = new System.Drawing.Size(400, 25);
+			this.comboBoxDIR.TabIndex = 252;
 			// 
 			// comboBoxPriority
 			// 
@@ -522,7 +522,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxDefferedCategory.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.comboBoxDefferedCategory.FormattingEnabled = true;
 			this.comboBoxDefferedCategory.ItemHeight = 17;
-			this.comboBoxDefferedCategory.Location = new System.Drawing.Point(118, 109);
+			this.comboBoxDefferedCategory.Location = new System.Drawing.Point(118, 82);
 			this.comboBoxDefferedCategory.Name = "comboBoxDefferedCategory";
 			this.comboBoxDefferedCategory.Size = new System.Drawing.Size(400, 25);
 			this.comboBoxDefferedCategory.TabIndex = 145;
@@ -678,6 +678,70 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.groupBox2.TabIndex = 291;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Initial";
+			// 
+			// textBoxClosingBy
+			// 
+			// 
+			// 
+			// 
+			this.textBoxClosingBy.CustomButton.Image = null;
+			this.textBoxClosingBy.CustomButton.Location = new System.Drawing.Point(381, 2);
+			this.textBoxClosingBy.CustomButton.Name = "";
+			this.textBoxClosingBy.CustomButton.Size = new System.Drawing.Size(17, 17);
+			this.textBoxClosingBy.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxClosingBy.CustomButton.TabIndex = 1;
+			this.textBoxClosingBy.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxClosingBy.CustomButton.UseSelectable = true;
+			this.textBoxClosingBy.CustomButton.Visible = false;
+			this.textBoxClosingBy.Enabled = false;
+			this.textBoxClosingBy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxClosingBy.Lines = new string[0];
+			this.textBoxClosingBy.Location = new System.Drawing.Point(118, 242);
+			this.textBoxClosingBy.MaxLength = 32767;
+			this.textBoxClosingBy.Name = "textBoxClosingBy";
+			this.textBoxClosingBy.PasswordChar = '\0';
+			this.textBoxClosingBy.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textBoxClosingBy.SelectedText = "";
+			this.textBoxClosingBy.SelectionLength = 0;
+			this.textBoxClosingBy.SelectionStart = 0;
+			this.textBoxClosingBy.ShortcutsEnabled = true;
+			this.textBoxClosingBy.Size = new System.Drawing.Size(401, 22);
+			this.textBoxClosingBy.TabIndex = 267;
+			this.textBoxClosingBy.UseSelectable = true;
+			this.textBoxClosingBy.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxClosingBy.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+			// 
+			// textBoxPublishedBy
+			// 
+			// 
+			// 
+			// 
+			this.textBoxPublishedBy.CustomButton.Image = null;
+			this.textBoxPublishedBy.CustomButton.Location = new System.Drawing.Point(381, 2);
+			this.textBoxPublishedBy.CustomButton.Name = "";
+			this.textBoxPublishedBy.CustomButton.Size = new System.Drawing.Size(17, 17);
+			this.textBoxPublishedBy.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxPublishedBy.CustomButton.TabIndex = 1;
+			this.textBoxPublishedBy.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxPublishedBy.CustomButton.UseSelectable = true;
+			this.textBoxPublishedBy.CustomButton.Visible = false;
+			this.textBoxPublishedBy.Enabled = false;
+			this.textBoxPublishedBy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxPublishedBy.Lines = new string[0];
+			this.textBoxPublishedBy.Location = new System.Drawing.Point(118, 187);
+			this.textBoxPublishedBy.MaxLength = 32767;
+			this.textBoxPublishedBy.Name = "textBoxPublishedBy";
+			this.textBoxPublishedBy.PasswordChar = '\0';
+			this.textBoxPublishedBy.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textBoxPublishedBy.SelectedText = "";
+			this.textBoxPublishedBy.SelectionLength = 0;
+			this.textBoxPublishedBy.SelectionStart = 0;
+			this.textBoxPublishedBy.ShortcutsEnabled = true;
+			this.textBoxPublishedBy.Size = new System.Drawing.Size(401, 22);
+			this.textBoxPublishedBy.TabIndex = 266;
+			this.textBoxPublishedBy.UseSelectable = true;
+			this.textBoxPublishedBy.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxPublishedBy.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// comboBoxStatus
 			// 
@@ -1002,70 +1066,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.listViewKits.Size = new System.Drawing.Size(687, 315);
 			this.listViewKits.TabIndex = 68;
 			// 
-			// textBoxPublishedBy
-			// 
-			// 
-			// 
-			// 
-			this.textBoxPublishedBy.CustomButton.Image = null;
-			this.textBoxPublishedBy.CustomButton.Location = new System.Drawing.Point(381, 2);
-			this.textBoxPublishedBy.CustomButton.Name = "";
-			this.textBoxPublishedBy.CustomButton.Size = new System.Drawing.Size(17, 17);
-			this.textBoxPublishedBy.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.textBoxPublishedBy.CustomButton.TabIndex = 1;
-			this.textBoxPublishedBy.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.textBoxPublishedBy.CustomButton.UseSelectable = true;
-			this.textBoxPublishedBy.CustomButton.Visible = false;
-			this.textBoxPublishedBy.Enabled = false;
-			this.textBoxPublishedBy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxPublishedBy.Lines = new string[0];
-			this.textBoxPublishedBy.Location = new System.Drawing.Point(118, 187);
-			this.textBoxPublishedBy.MaxLength = 32767;
-			this.textBoxPublishedBy.Name = "textBoxPublishedBy";
-			this.textBoxPublishedBy.PasswordChar = '\0';
-			this.textBoxPublishedBy.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.textBoxPublishedBy.SelectedText = "";
-			this.textBoxPublishedBy.SelectionLength = 0;
-			this.textBoxPublishedBy.SelectionStart = 0;
-			this.textBoxPublishedBy.ShortcutsEnabled = true;
-			this.textBoxPublishedBy.Size = new System.Drawing.Size(401, 22);
-			this.textBoxPublishedBy.TabIndex = 266;
-			this.textBoxPublishedBy.UseSelectable = true;
-			this.textBoxPublishedBy.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.textBoxPublishedBy.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			// 
-			// textBoxClosingBy
-			// 
-			// 
-			// 
-			// 
-			this.textBoxClosingBy.CustomButton.Image = null;
-			this.textBoxClosingBy.CustomButton.Location = new System.Drawing.Point(381, 2);
-			this.textBoxClosingBy.CustomButton.Name = "";
-			this.textBoxClosingBy.CustomButton.Size = new System.Drawing.Size(17, 17);
-			this.textBoxClosingBy.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.textBoxClosingBy.CustomButton.TabIndex = 1;
-			this.textBoxClosingBy.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.textBoxClosingBy.CustomButton.UseSelectable = true;
-			this.textBoxClosingBy.CustomButton.Visible = false;
-			this.textBoxClosingBy.Enabled = false;
-			this.textBoxClosingBy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxClosingBy.Lines = new string[0];
-			this.textBoxClosingBy.Location = new System.Drawing.Point(118, 242);
-			this.textBoxClosingBy.MaxLength = 32767;
-			this.textBoxClosingBy.Name = "textBoxClosingBy";
-			this.textBoxClosingBy.PasswordChar = '\0';
-			this.textBoxClosingBy.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.textBoxClosingBy.SelectedText = "";
-			this.textBoxClosingBy.SelectionLength = 0;
-			this.textBoxClosingBy.SelectionStart = 0;
-			this.textBoxClosingBy.ShortcutsEnabled = true;
-			this.textBoxClosingBy.Size = new System.Drawing.Size(401, 22);
-			this.textBoxClosingBy.TabIndex = 267;
-			this.textBoxClosingBy.UseSelectable = true;
-			this.textBoxClosingBy.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.textBoxClosingBy.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			// 
 			// InitialOrderFormNew
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1155,7 +1155,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private MetroTextBox metroTextBox1;
 		private MetroLabel metroLabel2;
 		private MetroLabel metroLabel1;
-		private System.Windows.Forms.ComboBox comboBoxCategory;
+		private System.Windows.Forms.ComboBox comboBoxDIR;
 		private MetroTextBox textBoxClosingBy;
 		private MetroTextBox textBoxPublishedBy;
 	}
