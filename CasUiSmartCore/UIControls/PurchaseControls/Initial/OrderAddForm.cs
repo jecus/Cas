@@ -305,29 +305,19 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		    comboBoxTypeOfOperation.Items.Clear();
 		    comboBoxTypeOfOperation.Items.AddRange(TypeOfOperation.Items.ToArray());
-		    comboBoxTypeOfOperation.SelectedItem = _addedInitial.TypeOfOperation;
-
-
+		    
 		    comboBoxShipBy.Items.Clear();
 		    comboBoxShipBy.Items.AddRange(ShipBy.Items.ToArray());
-		    comboBoxShipBy.SelectedItem = _addedInitial.ShipBy;
-
+		    
 		    comboBoxIncoTerm.Items.Clear();
 		    comboBoxIncoTerm.Items.AddRange(IncoTerm.Items.ToArray());
-		    comboBoxIncoTerm.SelectedItem = _addedInitial.IncoTerm;
-
 		    comboBoxCarrier.Items.Clear();
 		    comboBoxCarrier.Items.AddRange(_suppliers.ToArray());
 		    comboBoxCarrier.Items.Add(Supplier.Unknown);
-		    comboBoxCarrier.SelectedItem = _addedInitial.Supplier;
-
-		    comboBoxCountry.SelectedItem = _addedInitial.Country;
-
+		   
 		    comboBoxApprovedBy.Items.Clear();
 		    comboBoxApprovedBy.Items.AddRange(_specialists.ToArray());
-		    comboBoxApprovedBy.SelectedItem = _addedInitial.ApprovedBy;
-
-
+		    
 		    comboBoxPublishedBy.Items.Clear();
 		    comboBoxPublishedBy.Items.AddRange(_specialists.ToArray());
 		    comboBoxPublishedBy.SelectedItem = _addedInitial.PublishedBy;
@@ -344,16 +334,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			    dateTimePickerOpeningDate.Value = _addedInitial.OpeningDate;
 			    textBoxAuthor.Text = _addedInitial.Author;
 			    textBoxRemarks.Text = _addedInitial.Remarks;
-			    textBoxRFQ.Text = _addedInitial.RFQ;
-			    textBoxQR.Text = _addedInitial.QR;
-			    textBoxPO.Text = _addedInitial.PO;
-			    textBoxInvoice.Text = _addedInitial.Invoice;
-			    textBoxPickUp.Text = _addedInitial.PickUp;
-			    textBoxShipTo.Text = _addedInitial.ShipTo;
-			    textBoxWeight.Text = _addedInitial.Weight;
-			    textBoxDIMS.Text = _addedInitial.DIMS;
-			    comboBoxTypeOfOperation.SelectedItem = _addedInitial.TypeOfOperation;
-		    }
+			}
 	    }
 
 	    #endregion
@@ -474,22 +455,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
             _addedInitial.OpeningDate = dateTimePickerOpeningDate.Value;
             _addedInitial.Author = textBoxAuthor.Text;
             _addedInitial.Remarks = textBoxRemarks.Text;
-            _addedInitial.RFQ = textBoxRFQ.Text;
-            _addedInitial.QR = textBoxQR.Text;
-            _addedInitial.PO = textBoxPO.Text;
-            _addedInitial.Invoice = textBoxInvoice.Text;
-            _addedInitial.PickUp = textBoxPickUp.Text;
-            _addedInitial.ShipTo = textBoxShipTo.Text;
-            _addedInitial.Weight = textBoxWeight.Text;
-            _addedInitial.DIMS = textBoxDIMS.Text;
-            _addedInitial.TypeOfOperation = comboBoxTypeOfOperation.SelectedItem as TypeOfOperation;
-            _addedInitial.ShipBy = comboBoxShipBy.SelectedItem as ShipBy;
-            _addedInitial.IncoTerm = comboBoxIncoTerm.SelectedItem as IncoTerm;
-            _addedInitial.Country = comboBoxCountry.SelectedItem as Citizenship;
-            _addedInitial.Supplier = comboBoxCarrier.SelectedItem as Supplier;
-	        _addedInitial.ApprovedBy = comboBoxApprovedBy.SelectedItem as Specialist;
-	        _addedInitial.ApprovedBy = comboBoxApprovedBy.SelectedItem as Specialist;
-	        _addedInitial.PublishedBy = comboBoxPublishedBy.SelectedItem as Specialist;
+            _addedInitial.PublishedBy = comboBoxPublishedBy.SelectedItem as Specialist;
 	        _addedInitial.ClosedBy = comboBoxClosedBy.SelectedItem as Specialist;
 		}
 		#endregion
