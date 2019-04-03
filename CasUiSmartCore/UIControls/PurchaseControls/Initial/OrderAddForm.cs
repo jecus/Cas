@@ -240,37 +240,21 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 	    {
 		    comboBoxCountry.Items.Clear();
 		    comboBoxCountry.Items.AddRange(Citizenship.Items.ToArray());
-
-		    comboBoxTypeOfOperation.Items.Clear();
+			comboBoxTypeOfOperation.Items.Clear();
 		    comboBoxTypeOfOperation.Items.AddRange(TypeOfOperation.Items.ToArray());
-		    comboBoxTypeOfOperation.SelectedItem = _addedQuotation.TypeOfOperation;
-
-
 		    comboBoxShipBy.Items.Clear();
 		    comboBoxShipBy.Items.AddRange(ShipBy.Items.ToArray());
-		    comboBoxShipBy.SelectedItem = _addedQuotation.ShipBy;
-
 		    comboBoxIncoTerm.Items.Clear();
 		    comboBoxIncoTerm.Items.AddRange(IncoTerm.Items.ToArray());
-		    comboBoxIncoTerm.SelectedItem = _addedQuotation.IncoTerm;
-
 		    comboBoxCarrier.Items.Clear();
 		    comboBoxCarrier.Items.AddRange(_suppliers.ToArray());
 		    comboBoxCarrier.Items.Add(Supplier.Unknown);
-		    comboBoxCarrier.SelectedItem = _addedQuotation.Supplier;
-
-		    comboBoxCountry.SelectedItem = _addedQuotation.Country;
-
 		    comboBoxApprovedBy.Items.Clear();
 		    comboBoxApprovedBy.Items.AddRange(_specialists.ToArray());
-		    comboBoxApprovedBy.SelectedItem = _addedQuotation.ApprovedBy;
-
-
 		    comboBoxPublishedBy.Items.Clear();
 		    comboBoxPublishedBy.Items.AddRange(_specialists.ToArray());
 		    comboBoxPublishedBy.SelectedItem = _addedQuotation.PublishedBy;
-
-		    comboBoxClosedBy.Items.Clear();
+			comboBoxClosedBy.Items.Clear();
 		    comboBoxClosedBy.Items.AddRange(_specialists.ToArray());
 		    comboBoxClosedBy.SelectedItem = _addedQuotation.ClosedBy;
 
@@ -282,16 +266,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			    dateTimePickerOpeningDate.Value = _addedQuotation.OpeningDate;
 			    textBoxAuthor.Text = _addedQuotation.Author;
 			    textBoxRemarks.Text = _addedQuotation.Remarks;
-			    textBoxRFQ.Text = _addedQuotation.RFQ;
-			    textBoxQR.Text = _addedQuotation.QR;
-			    textBoxPO.Text = _addedQuotation.PO;
-			    textBoxInvoice.Text = _addedQuotation.Invoice;
-			    textBoxPickUp.Text = _addedQuotation.PickUp;
-			    textBoxShipTo.Text = _addedQuotation.ShipTo;
-			    textBoxWeight.Text = _addedQuotation.Weight;
-			    textBoxDIMS.Text = _addedQuotation.DIMS;
-			    comboBoxTypeOfOperation.SelectedItem = _addedQuotation.TypeOfOperation;
-		    }
+			}
 	    }
 
 		#endregion
@@ -465,21 +440,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		    _addedQuotation.OpeningDate = dateTimePickerOpeningDate.Value;
 		    _addedQuotation.Author = textBoxAuthor.Text;
 		    _addedQuotation.Remarks = textBoxRemarks.Text;
-		    _addedQuotation.RFQ = textBoxRFQ.Text;
-		    _addedQuotation.QR = textBoxQR.Text;
-		    _addedQuotation.PO = textBoxPO.Text;
-		    _addedQuotation.Invoice = textBoxInvoice.Text;
-		    _addedQuotation.PickUp = textBoxPickUp.Text;
-		    _addedQuotation.ShipTo = textBoxShipTo.Text;
-		    _addedQuotation.Weight = textBoxWeight.Text;
-		    _addedQuotation.DIMS = textBoxDIMS.Text;
-		    _addedQuotation.TypeOfOperation = comboBoxTypeOfOperation.SelectedItem as TypeOfOperation;
-		    _addedQuotation.ShipBy = comboBoxShipBy.SelectedItem as ShipBy;
-		    _addedQuotation.IncoTerm = comboBoxIncoTerm.SelectedItem as IncoTerm;
-		    _addedQuotation.Country = comboBoxCountry.SelectedItem as Citizenship;
-		    _addedQuotation.Supplier = comboBoxCarrier.SelectedItem as Supplier;
-		    _addedQuotation.ApprovedBy = comboBoxApprovedBy.SelectedItem as Specialist;
-		    _addedQuotation.ApprovedBy = comboBoxApprovedBy.SelectedItem as Specialist;
 		    _addedQuotation.PublishedBy = comboBoxPublishedBy.SelectedItem as Specialist;
 		    _addedQuotation.ClosedBy = comboBoxClosedBy.SelectedItem as Specialist;
 	    }
