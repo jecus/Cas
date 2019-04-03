@@ -13,52 +13,10 @@ namespace EFCore.DTO.General
 		public string Title { get; set; }
 
 		[DataMember]
-		public string RFQ { get; set; }
-
-		[DataMember]
-		public string QR { get; set; }
-
-		[DataMember]
-		public string PO { get; set; }
-
-		[DataMember]
-		public string Invoice { get; set; }
-
-		[DataMember]
-		public string ShipTo { get; set; }
-
-		[DataMember]
-		public string PickUp { get; set; }
-
-		[DataMember]
-		public string Weight { get; set; }
-
-		[DataMember]
-		public string DIMS { get; set; }
-
-		[DataMember]
-		public int TypeOfOperation { get; set; }
-
-		[DataMember]
-		public int ApprovedById { get; set; }
-
-		[DataMember]
 		public int PublishedById { get; set; }
 
 		[DataMember]
 		public int ClosedById { get; set; }
-
-		[DataMember]
-		public int ShipBy { get; set; }
-
-		[DataMember]
-		public int IncoTerm { get; set; }
-
-		[DataMember]
-		public int CountryId { get; set; }
-
-		[DataMember]
-		public int CarrierId { get; set; }
 
 		[DataMember]
 		public string Description { get; set; }
@@ -87,13 +45,6 @@ namespace EFCore.DTO.General
 		[DataMember]
 		public string Remarks { get; set; }
 
-		[DataMember]
-		[Include]
-		public SupplierDTO Supplier { get; set; }
-
-		[DataMember]
-		[Include]
-		public SpecialistDTO ApprovedBy { get; set; }
 
 		[DataMember]
 		[Include]
