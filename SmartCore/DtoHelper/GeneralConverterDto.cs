@@ -3836,13 +3836,13 @@ namespace SmartCore.DtoHelper
 				PackageItemTypeId = orderrec.PackageItemType?.ItemId,
 				CostCondition = (short?)orderrec.CostCondition,
 				ProductId = orderrec.ProductId,
-
 				ProductType = orderrec.ProductType?.ItemId,
 				PerfNumFromStart = orderrec.PerformanceNumFromStart,
 				PerfNumFromRecord = orderrec.PerformanceNumFromRecord,
 				FromRecordId = orderrec.FromRecordId,
 				IsClosed = orderrec.IsClosed,
 				IsSchedule = orderrec.IsSchedule,
+				Remarks = orderrec.Remarks
 			};
 		}
 
@@ -3868,12 +3868,11 @@ namespace SmartCore.DtoHelper
 				PackageItemId = orderrecdto.PackageItemId ?? default(int),
 				PackageItemType = orderrecdto.PackageItemTypeId.HasValue ? SmartCoreType.Items.GetItemById(orderrecdto.PackageItemTypeId.Value) : SmartCoreType.Unknown,
 				CostCondition = orderrecdto.CostCondition.HasValue ? (ComponentStatus)orderrecdto.CostCondition.Value : ComponentStatus.Unknown,
-
 				ProductId = orderrecdto.ProductId ?? default(int),
 				ProductType = orderrecdto.ProductType.HasValue ? SmartCoreType.Items.GetItemById(orderrecdto.ProductType.Value) : SmartCoreType.Unknown,
 				PerformanceNumFromStart = orderrecdto.PerfNumFromStart ?? default(int),
 				PerformanceNumFromRecord = orderrecdto.PerfNumFromRecord ?? default(int),
-
+				Remarks = orderrecdto.Remarks,
 				FromRecordId = orderrecdto.FromRecordId ?? default(int),
 				IsClosed = orderrecdto.IsClosed ?? default(bool),
 				IsSchedule = orderrecdto.IsSchedule ?? default(bool)

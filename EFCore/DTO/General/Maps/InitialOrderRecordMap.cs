@@ -108,6 +108,10 @@ namespace EFCore.DTO.General.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("IsSchedule");
 
+			Property(i => i.Remarks)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("Remarks");
+
 			HasRequired(i => i.DeferredCategory)
 				.WithMany(i => i.InitialOrderRecordDto)
 				.HasForeignKey(i => i.DefferedCategory);
