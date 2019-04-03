@@ -191,3 +191,11 @@ if not exists ( select  *
     add CloseByUser nvarchar(128) null 
 GO
 --------------------------------------------------------------------------
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('dbo.InitionalOrderRecords')
+                    and c.name = 'Remarks' ) 
+
+	alter table dbo.InitionalOrderRecords
+    add Remarks nvarchar(MAX) null 
+GO
