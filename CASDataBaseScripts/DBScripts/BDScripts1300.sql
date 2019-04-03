@@ -10,7 +10,7 @@ GO
 
 
 --------------------------------------------------------------------------------
-if not exists ( select  *
+if exists ( select  *
             from    sys.columns c                        
             where   c.object_id = object_id('dbo.InitialOrders')
                     and c.name = 'PickUp' ) 
@@ -19,7 +19,7 @@ if not exists ( select  *
     drop COLUMN  PickUp
 GO
 
-if not exists ( select  *
+if exists ( select  *
             from    sys.columns c                        
             where   c.object_id = object_id('dbo.InitialOrders')
                     and c.name = 'ShipTo' ) 
@@ -28,7 +28,7 @@ if not exists ( select  *
     drop COLUMN  ShipTo
 GO
 
-if not exists ( select  *
+if exists ( select  *
             from    sys.columns c                        
             where   c.object_id = object_id('dbo.InitialOrders')
                     and c.name = 'DIMS' ) 
@@ -37,7 +37,7 @@ if not exists ( select  *
     drop COLUMN  DIMS
 GO
 
-if not exists ( select  *
+if exists ( select  *
             from    sys.columns c                        
             where   c.object_id = object_id('dbo.InitialOrders')
                     and c.name = 'Weight' ) 
@@ -46,7 +46,7 @@ if not exists ( select  *
     drop COLUMN  Weight
 GO
 
-if not exists ( select  *
+if exists ( select  *
             from    sys.columns c                        
             where   c.object_id = object_id('dbo.InitialOrders')
                     and c.name = 'Invoice' ) 
@@ -55,7 +55,7 @@ if not exists ( select  *
     drop COLUMN  Invoice
 GO
 
-if not exists ( select  *
+if exists ( select  *
             from    sys.columns c                        
             where   c.object_id = object_id('dbo.InitialOrders')
                     and c.name = 'PO' ) 
@@ -64,7 +64,7 @@ if not exists ( select  *
     drop COLUMN  PO
 GO
 
-if not exists ( select  *
+if exists ( select  *
             from    sys.columns c                        
             where   c.object_id = object_id('dbo.InitialOrders')
                     and c.name = 'QR' ) 
@@ -73,7 +73,7 @@ if not exists ( select  *
     drop COLUMN  QR
 GO
 
-if not exists ( select  *
+if exists ( select  *
             from    sys.columns c                        
             where   c.object_id = object_id('dbo.InitialOrders')
                     and c.name = 'RFQ' ) 
@@ -82,7 +82,7 @@ if not exists ( select  *
     drop COLUMN  RFQ
 GO
 
-if not exists ( select  *
+if exists ( select  *
             from    sys.columns c                        
             where   c.object_id = object_id('dbo.InitialOrders')
                     and c.name = 'ApprovedById' ) 
@@ -91,7 +91,7 @@ if not exists ( select  *
     drop COLUMN  ApprovedById
 GO
 
-if not exists ( select  *
+if exists ( select  *
             from    sys.columns c                        
             where   c.object_id = object_id('dbo.InitialOrders')
                     and c.name = 'CarrierId' ) 
@@ -100,7 +100,7 @@ if not exists ( select  *
     drop COLUMN  CarrierId
 GO
 
-if not exists ( select  *
+if exists ( select  *
             from    sys.columns c                        
             where   c.object_id = object_id('dbo.InitialOrders')
                     and c.name = 'IncoTerm' ) 
@@ -109,7 +109,7 @@ if not exists ( select  *
     drop COLUMN  IncoTerm
 GO
 
-if not exists ( select  *
+if exists ( select  *
             from    sys.columns c                        
             where   c.object_id = object_id('dbo.InitialOrders')
                     and c.name = 'ShipBy' ) 
@@ -118,7 +118,7 @@ if not exists ( select  *
     drop COLUMN  ShipBy
 GO
 
-if not exists ( select  *
+if exists ( select  *
             from    sys.columns c                        
             where   c.object_id = object_id('dbo.InitialOrders')
                     and c.name = 'CountryId' ) 
@@ -127,11 +127,30 @@ if not exists ( select  *
     drop COLUMN  CountryId
 GO
 
-if not exists ( select  *
+if exists ( select  *
             from    sys.columns c                        
             where   c.object_id = object_id('dbo.InitialOrders')
                     and c.name = 'TypeOfOperation' ) 
 
 	alter table dbo.InitialOrders
     drop COLUMN  TypeOfOperation
+GO
+
+
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('dbo.InitialOrders')
+                    and c.name = 'PublishedByUser' ) 
+
+	alter table dbo.InitialOrders
+    add PublishedByUser nvarchar(128) null 
+GO
+
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('dbo.InitialOrders')
+                    and c.name = 'CloseByUser' ) 
+
+	alter table dbo.InitialOrders
+    add CloseByUser nvarchar(128) null 
 GO
