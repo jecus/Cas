@@ -1,9 +1,11 @@
 using System;
 using EFCore.DTO.General;
+using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
+using SmartCore.Entities.General.Interfaces;
 using SmartCore.Packages;
 
 namespace SmartCore.Purchase
@@ -300,15 +302,65 @@ namespace SmartCore.Purchase
         public Boolean Processed { get; set; }
 		#endregion
 
-        /*
+		#region public Lifelength LifeLimit { get; set; }
+		/// <summary>
+		/// Ограничение срока эксплуатации агрегата
+		/// </summary>
+		[TableColumn("LifeLimit")]
+		public Lifelength LifeLimit
+		{
+			get { return Threshold.FirstPerformanceSinceEffectiveDate; }
+			set { Threshold.FirstPerformanceSinceEffectiveDate = value; }
+		}
+		#endregion
+
+		#region public Lifelength LifeLimitNotify { get; set; }
+		/// <summary>
+		/// Уведомление до ограничения срока эксплуатации агрегата
+		/// </summary>
+		[TableColumn("LifeLimitNotify")]
+		public Lifelength LifeLimitNotify
+		{
+			get { return Threshold.FirstNotification; }
+			set { Threshold.FirstNotification = value; }
+		}
+		#endregion
+
+		#region IThreshold IDirective.Threshold { get; set; }
+
+		private DirectiveThreshold _threshold;
+		/// <summary>
+		/// порог первого и посделующего выполнений
+		/// </summary>
+		public IThreshold Threshold
+		{
+			get { return _threshold = new DirectiveThreshold(); }
+			set { _threshold = value as DirectiveThreshold; }
+		}
+		#endregion
+
+		#region public IDirective Task { get; set; }
+
+		/// <summary>
+		/// Задача, с которой связан продукт
+		/// </summary>
+		public IDirective Task
+		{
+			get { return PackageItem as IDirective; }
+			set { PackageItem = value; }
+		}
+
+		#endregion
+
+		/*
 		*  Методы 
 		*/
 
-        #region public RequestForQuotationRecord()
-        /// <summary>
-        /// Создает воздушное судно без дополнительной информации
-        /// </summary>
-        public RequestForQuotationRecord()
+		#region public RequestForQuotationRecord()
+		/// <summary>
+		/// Создает воздушное судно без дополнительной информации
+		/// </summary>
+		public RequestForQuotationRecord()
         {
             ItemId = -1;
             SmartCoreObjectType = SmartCoreType.RequestForQuotationRecord;

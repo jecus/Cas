@@ -90,6 +90,16 @@ namespace EFCore.DTO.General.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("Remarks ");
 
+			Property(i => i.LifeLimit)
+				.HasMaxLength(21)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("LifeLimit");
+
+			Property(i => i.LifeLimitNotify)
+				.HasMaxLength(21)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("LifeLimitNotify");
+
 
 			HasRequired(i => i.ToSupplier)
 				.WithMany(i => i.RequestForQuotationRecordDtos)

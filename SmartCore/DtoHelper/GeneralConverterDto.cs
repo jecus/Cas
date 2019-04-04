@@ -4724,6 +4724,8 @@ namespace SmartCore.DtoHelper
 				DefferedCategoryId = quotationrecord.DeferredCategory.ItemId,
 				InitialReason = quotationrecord.InitialReason.ItemId,
 				DestinationObjectType = quotationrecord.DestinationObjectType.ItemId,
+				LifeLimit = quotationrecord.LifeLimit?.ConvertToByteArray(),
+				LifeLimitNotify = quotationrecord.LifeLimitNotify?.ConvertToByteArray(),
 				Remarks = quotationrecord.Remarks
 			};
 		}
@@ -4750,6 +4752,8 @@ namespace SmartCore.DtoHelper
 				DeferredCategory = quotationrecorddto.DefferedCategory?.Convert(),
 				InitialReason = InitialReason.GetItemById(quotationrecorddto.InitialReason),
 				DestinationObjectType = SmartCoreType.GetSmartCoreTypeById(quotationrecorddto.DestinationObjectType),
+				LifeLimit = Lifelength.ConvertFromByteArray(quotationrecorddto.LifeLimit),
+				LifeLimitNotify = Lifelength.ConvertFromByteArray(quotationrecorddto.LifeLimitNotify),
 				Remarks = quotationrecorddto.Remarks
 			};
 		}

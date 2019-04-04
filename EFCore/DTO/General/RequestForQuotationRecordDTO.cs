@@ -60,6 +60,12 @@ namespace EFCore.DTO.General
 		public string Remarks { get; set; }
 
 		[DataMember]
+		public byte[] LifeLimit { get; set; }
+
+		[DataMember]
+		public byte[] LifeLimitNotify { get; set; }
+
+		[DataMember]
 		[Include]
 		public DefferedCategorieDTO DefferedCategory { get; set; }
 
