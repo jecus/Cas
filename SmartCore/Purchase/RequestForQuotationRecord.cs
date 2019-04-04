@@ -263,29 +263,28 @@ namespace SmartCore.Purchase
         {
             get { return Product != null ? Product.Suppliers : null; }
         }
-        #endregion
-
-        #region public Supplier ToSupplier  { get; set; }
-
-        private Supplier _toSupplier;
-        /// <summary>
-        /// Поставщик, к которому делаетя запрос
-        /// </summary>
-        [TableColumn("ToSupplier")]
-        public Supplier ToSupplier
-        {
-            get { return _toSupplier; }
-            set
-            {
-                if (_toSupplier != value)
-                {
-                    _toSupplier = value;
-                    OnPropertyChanged("ToSupplier");
-                }
-            }
-        }
 		#endregion
 
+		#region public Supplier ToSupplier  { get; set; }
+
+		private Supplier _toSupplier;
+		/// <summary>
+		/// Поставщик, к которому делаетя запрос
+		/// </summary>
+		[TableColumn("ToSupplier")]
+		public Supplier ToSupplier
+		{
+			get { return _toSupplier; }
+			set
+			{
+				if (_toSupplier != value)
+				{
+					_toSupplier = value;
+					OnPropertyChanged("ToSupplier");
+				}
+			}
+		}
+		#endregion
 		#region public ComponentStatus CostCondition { get; set; }
 		/// <summary>
 		/// 
@@ -418,7 +417,6 @@ namespace SmartCore.Purchase
                 _measure = accessory.Measure;
                 PackageItemType = accessory.SmartCoreObjectType;
                 _quantity = quantity;
-                _toSupplier = toSupplier;
             }
             else
             {
@@ -429,7 +427,6 @@ namespace SmartCore.Purchase
                 _measure = Measure.Unit;
                 PackageItemType = SmartCoreType.Unknown;
                 _quantity = 0;
-                _toSupplier = null;
             }
         }
         #endregion

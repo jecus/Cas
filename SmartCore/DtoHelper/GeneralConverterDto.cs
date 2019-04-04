@@ -4662,7 +4662,6 @@ namespace SmartCore.DtoHelper
 				PublishedByUser = reqquotation.PublishedByUser,
 				CloseByUser = reqquotation.CloseByUser,
 				ParentTypeId = reqquotation.ParentType?.ItemId,
-				ToSupplierId = reqquotation.ToSupplier?.ItemId,
 				Files = reqquotation.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
 				PackageRecords = reqquotation.PackageRecords?.Select(i => i.Convert()) as ICollection<RequestForQuotationRecordDTO>
 			};
@@ -4688,7 +4687,6 @@ namespace SmartCore.DtoHelper
 				PublishedByUser = reqquotationdto.PublishedByUser,
 				CloseByUser = reqquotationdto.CloseByUser,
 				ParentType = reqquotationdto.ParentTypeId.HasValue ? SmartCoreType.Items.GetItemById(reqquotationdto.ParentTypeId.Value) : SmartCoreType.Unknown,
-				ToSupplier = reqquotationdto.ToSupplier?.Convert()
 			};
 
 			if (reqquotationdto.Files != null)
@@ -4718,7 +4716,6 @@ namespace SmartCore.DtoHelper
 				CostNew = quotationrecord.CostNew,
 				CostOverhaul = quotationrecord.CostOverhaul,
 				CostServiceable = quotationrecord.CostServiceable,
-				ToSupplierId = quotationrecord.ToSupplier?.ItemId,
 				Priority = quotationrecord.Priority.ItemId,
 				DestinationObjectId = quotationrecord.DestinationObjectId,
 				DefferedCategoryId = quotationrecord.DeferredCategory.ItemId,
@@ -4746,7 +4743,6 @@ namespace SmartCore.DtoHelper
 				CostNew = quotationrecorddto.CostNew ?? default(double),
 				CostOverhaul = quotationrecorddto.CostOverhaul ?? default(double),
 				CostServiceable = quotationrecorddto.CostServiceable ?? default(double),
-				ToSupplier = quotationrecorddto.ToSupplier?.Convert(),
 				Priority = Priority.GetItemById(quotationrecorddto.Priority),
 				DestinationObjectId = quotationrecorddto.DestinationObjectId,
 				DeferredCategory = quotationrecorddto.DefferedCategory?.Convert(),

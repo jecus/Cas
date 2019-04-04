@@ -69,11 +69,6 @@ namespace EFCore.DTO.General
 		[Include]
 		public DefferedCategorieDTO DefferedCategory { get; set; }
 
-		[DataMember]
-		[Include]
-		public SupplierDTO ToSupplier { get; set; }
-
-
 		#region Navigation Property
 
 		[DataMember]

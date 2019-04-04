@@ -28,33 +28,32 @@ namespace SmartCore.Purchase
 		/*
 		*  Свойства
 		*/
+		#region public Supplier ToSupplier  { get; set; }
 
-        #region public Supplier ToSupplier  { get; set; }
+		private Supplier _toSupplier;
+		/// <summary>
+		/// Поставщик, к которому делаетя запрос
+		/// </summary>
+		[TableColumn("ToSupplier")]
+		public Supplier ToSupplier
+		{
+			get { return _toSupplier; }
+			set
+			{
+				if (_toSupplier != value)
+				{
+					_toSupplier = value;
+					OnPropertyChanged("ToSupplier");
+				}
+			}
+		}
+		#endregion
 
-        private Supplier _toSupplier;
-        /// <summary>
-        /// Поставщик, к которому делаетя запрос
-        /// </summary>
-        [TableColumn("ToSupplier")]
-        public Supplier ToSupplier
-        {
-            get { return _toSupplier; }
-            set
-            {
-                if (_toSupplier != value)
-                {
-                    _toSupplier = value;
-                    OnPropertyChanged("ToSupplier");
-                }
-            }
-        }
-        #endregion
-
-        #region public List<Product> Products { get; set; }
-        /// <summary>
-        /// Запрашиваемые комплектующие
-        /// </summary>
-        public List<Product> Products { get; set; }
+		#region public List<Product> Products { get; set; }
+		/// <summary>
+		/// Запрашиваемые комплектующие
+		/// </summary>
+		public List<Product> Products { get; set; }
         #endregion
 
         #region public override CommonCollection<RequestForQuotationRecord> PackageRecords
@@ -127,17 +126,13 @@ namespace SmartCore.Purchase
 
 		#endregion
 
-		private Specialist _publishedBy;
-		private Specialist _closedBy;
-
-
-		[TableColumn("PublishedById ")]
+		[TableColumn("PublishedById")]
 		public int PublishedById { get; set; }
 
 		[TableColumn("ClosedById")]
 		public int ClosedById { get; set; }
 
-		[TableColumn("PublishedByUser ")]
+		[TableColumn("PublishedByUser")]
 		public string PublishedByUser { get; set; }
 
 		[TableColumn("CloseByUser")]

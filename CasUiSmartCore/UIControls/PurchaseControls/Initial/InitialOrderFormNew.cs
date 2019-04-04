@@ -430,6 +430,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			comboBoxDestination.SelectedItem = destination;
 			comboBoxPriority.SelectedItem = listViewInitialItems.SelectedItem.Priority;
+			metroTextBox1.Text = listViewInitialItems.SelectedItem.Remarks;
 
 			lifelengthViewerLifeLimit.Lifelength = new Lifelength(listViewInitialItems.SelectedItem.LifeLimit);
 			lifelengthViewerNotify.Lifelength = new Lifelength(listViewInitialItems.SelectedItem.LifeLimitNotify);

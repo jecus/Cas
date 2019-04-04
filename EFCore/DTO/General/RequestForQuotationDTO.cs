@@ -54,9 +54,6 @@ namespace EFCore.DTO.General
 		[DataMember]
 		public string CloseByUser { get; set; }
 
-		[DataMember]
-		[Include]
-		public SupplierDTO ToSupplier { get; set; }
 
 		[DataMember]
 		[Child(FilterType.Equal, "ParentTypeId", 1900)]

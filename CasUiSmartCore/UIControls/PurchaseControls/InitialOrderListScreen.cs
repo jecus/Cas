@@ -398,37 +398,55 @@ namespace CAS.UI.UIControls.PurchaseControls
 
         private void ToolStripMenuItemCloseClick(object sender, EventArgs e)
         {
-            //foreach (InitionalOrder rfq in _directivesViewer.SelectedItems)
-            //{
-            //    if (rfq.Status == WorkPackageStatus.Closed)
-            //    {
-            //        MessageBox.Show("Initional Order " + rfq.Title + " is already closed.",
-            //                        (string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
-            //                        MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-            //        continue;
-            //    }
-            //    RequestForQuotationClosingForm form = new RequestForQuotationClosingForm(rfq);
-            //    form.ShowDialog();
+	        var selected = _directivesViewer.SelectedItems.ToArray();
+			foreach (var rfq in selected)
+			{
+				if (rfq.Status == WorkPackageStatus.Closed)
+				{
+					MessageBox.Show("Initional Order " + rfq.Title + " is already closed.",
+									(string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
+									MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+					continue;
+				}
+				
+				var quotation = new RequestForQuotation
+				{
+					CloseByUser = "",
+					PublishedByUser = "",
+					Author = GlobalObjects.CasEnvironment.IdentityUser.ToString(),
+					ClosedById = -1,
+					PublishedById = -1,
+					OpeningDate = DateTime.Now,
+					Title = rfq.Title,
+					ParentId = rfq.ItemId,
+					ParentType = rfq.SmartCoreObjectType,
+					Status = WorkPackageStatus.Opened,
+				};
+				GlobalObjects.CasEnvironment.Keeper.Save(quotation);
+				var records =
+					GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(
+						new Filter("ParentPackageId", rfq.ItemId));
 
-            //    if (form.CreatePurchaseOrder)
-            //    {
-            //        GlobalObjects.CasEnvironment.Loader.LoadInitionalOrderItems(rfq);
-            //        rfq.Products.Sort();
-            //        PurchaseOrderKitForm kitForm = new PurchaseOrderKitForm(rfq);
-            //        if (kitForm.ShowDialog() == DialogResult.OK)
-            //        {
-            //            ReferenceEventArgs refe = new ReferenceEventArgs
-            //            {
-            //                DisplayerText = kitForm.CurrentOrder.Title,
-            //                TypeOfReflection = ReflectionTypes.DisplayInNew,
-            //                RequestedEntity = new PurchaseOrderScreen(kitForm.CurrentOrder)
-            //            };
-            //            InvokeDisplayerRequested(refe);
-            //        }
-            //    }
-            //}
-            //AnimatedThreadWorker.RunWorkerAsync();
-        }
+				foreach (var record in records)
+				{
+					var newQuatationRecord = new RequestForQuotationRecord(quotation.ItemId, record.Product, record.Quantity)
+						{
+							DeferredCategory = record.DeferredCategory,
+							DestinationObjectId = record.DestinationObjectId,
+							DestinationObjectType = record.DestinationObjectType,
+							LifeLimit = record.LifeLimit,
+							LifeLimitNotify = record.LifeLimitNotify,
+							Remarks = record.Remarks,
+							InitialReason = record.InitialReason,
+							Measure = record.Measure,
+							CostCondition = record.CostCondition
+						};
+					GlobalObjects.CasEnvironment.NewKeeper.Save(newQuatationRecord);
+				}
+
+			}
+			AnimatedThreadWorker.RunWorkerAsync();
+		}
 
         #endregion
 
