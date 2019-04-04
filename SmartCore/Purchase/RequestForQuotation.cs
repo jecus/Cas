@@ -130,20 +130,12 @@ namespace SmartCore.Purchase
 		private Specialist _publishedBy;
 		private Specialist _closedBy;
 
-		
-		[TableColumn("PublishedById")]
-		public Specialist PublishedBy
-		{
-			get { return _publishedBy ?? Specialist.Unknown; }
-			set { _publishedBy = value; }
-		}
+
+		[TableColumn("PublishedById ")]
+		public int PublishedById { get; set; }
 
 		[TableColumn("ClosedById")]
-		public Specialist ClosedBy
-		{
-			get { return _closedBy ?? Specialist.Unknown; }
-			set { _closedBy = value; }
-		}
+		public int ClosedById { get; set; }
 
 		[TableColumn("PublishedByUser ")]
 		public string PublishedByUser { get; set; }

@@ -94,8 +94,8 @@ namespace CAS.UI.UIControls.PurchaseControls
                 Tag = item.ClosingDate
             });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Author, Tag = item.Author });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.PublishedBy?.ToString(), Tag = item.PublishedBy });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ClosedBy?.ToString(), Tag = item.ClosedBy });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.PublishedByUser, Tag = item.PublishedByUser });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.CloseByUser, Tag = item.CloseByUser });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Remarks, Tag = item.Remarks });
 
             return subItems.ToArray();

@@ -85,14 +85,6 @@ namespace EFCore.DTO.General.Maps
 				.HasColumnName("CloseByUser");
 
 
-			HasRequired(i => i.PublishedBy)
-				.WithMany(i => i.QuotationPublishedDtos)
-				.HasForeignKey(i => i.PublishedById);
-
-			HasRequired(i => i.ClosedBy)
-				.WithMany(i => i.QuotationClosedDtos)
-				.HasForeignKey(i => i.ClosedById);
-
 			HasRequired(i => i.ToSupplier)
 				.WithMany(i => i.RequestForQuotationDtos)
 				.HasForeignKey(i => i.ToSupplierId);
