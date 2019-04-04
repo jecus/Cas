@@ -389,3 +389,22 @@ if not exists ( select  *
 	alter table dbo.RequestForQuotationRecords
     add Remarks nvarchar(MAX) null 
 GO
+
+
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('dbo.RequestForQuotationRecords')
+                    and c.name = 'LifeLimit' ) 
+
+	alter table dbo.RequestForQuotationRecords
+    add LifeLimit varbinary(21)null 
+GO
+
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('dbo.RequestForQuotationRecords')
+                    and c.name = 'LifeLimitNotify' ) 
+
+	alter table dbo.RequestForQuotationRecords
+    add LifeLimitNotify varbinary(21)null 
+GO

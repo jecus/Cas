@@ -56,14 +56,6 @@ namespace EFCore.DTO.General
 
 		[DataMember]
 		[Include]
-		public SpecialistDTO PublishedBy { get; set; }
-
-		[DataMember]
-		[Include]
-		public SpecialistDTO ClosedBy { get; set; }
-
-		[DataMember]
-		[Include]
 		public SupplierDTO ToSupplier { get; set; }
 
 		[DataMember]

@@ -253,10 +253,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		    comboBoxApprovedBy.Items.AddRange(_specialists.ToArray());
 		    comboBoxPublishedBy.Items.Clear();
 		    comboBoxPublishedBy.Items.AddRange(_specialists.ToArray());
-		    comboBoxPublishedBy.SelectedItem = _addedQuotation.PublishedBy;
 			comboBoxClosedBy.Items.Clear();
 		    comboBoxClosedBy.Items.AddRange(_specialists.ToArray());
-		    comboBoxClosedBy.SelectedItem = _addedQuotation.ClosedBy;
 
 
 		    if (_addedQuotation.ItemId > 0)
@@ -440,8 +438,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		    _addedQuotation.OpeningDate = dateTimePickerOpeningDate.Value;
 		    _addedQuotation.Author = textBoxAuthor.Text;
 		    _addedQuotation.Remarks = textBoxRemarks.Text;
-		    _addedQuotation.PublishedBy = comboBoxPublishedBy.SelectedItem as Specialist;
-		    _addedQuotation.ClosedBy = comboBoxClosedBy.SelectedItem as Specialist;
+		    //_addedQuotation.PublishedBy = comboBoxPublishedBy.SelectedItem as Specialist;
+		    //_addedQuotation.ClosedBy = comboBoxClosedBy.SelectedItem as Specialist;
 	    }
 
 	    #endregion
