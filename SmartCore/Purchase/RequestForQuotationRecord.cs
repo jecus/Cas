@@ -309,11 +309,8 @@ namespace SmartCore.Purchase
 		/// Ограничение срока эксплуатации агрегата
 		/// </summary>
 		[TableColumn("LifeLimit")]
-		public Lifelength LifeLimit
-		{
-			get { return Threshold.FirstPerformanceSinceEffectiveDate; }
-			set { Threshold.FirstPerformanceSinceEffectiveDate = value; }
-		}
+		public Lifelength LifeLimit { get; set; }
+
 		#endregion
 
 		#region public Lifelength LifeLimitNotify { get; set; }
@@ -321,11 +318,7 @@ namespace SmartCore.Purchase
 		/// Уведомление до ограничения срока эксплуатации агрегата
 		/// </summary>
 		[TableColumn("LifeLimitNotify")]
-		public Lifelength LifeLimitNotify
-		{
-			get { return Threshold.FirstNotification; }
-			set { Threshold.FirstNotification = value; }
-		}
+		public Lifelength LifeLimitNotify { get; set; }
 		#endregion
 
 		#region IThreshold IDirective.Threshold { get; set; }

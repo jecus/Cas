@@ -13,6 +13,7 @@ using CASTerms;
 using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
 using EFCore.Filter;
+using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -281,10 +282,10 @@ namespace CAS.UI.UIControls.PurchaseControls
 				    newquatationRecord.DestinationObjectId = record.DestinationObjectId;
 				    newquatationRecord.InitialReason = record.InitialReason;
 				    newquatationRecord.Remarks = record.Remarks;
-				    newquatationRecord.Threshold.FirstPerformanceSinceEffectiveDate = record.LifeLimit;
-				    newquatationRecord.Threshold.FirstNotification = record.LifeLimitNotify;
+				    newquatationRecord.LifeLimit = new Lifelength(record.LifeLimit);
+				    newquatationRecord.LifeLimitNotify = new Lifelength(record.LifeLimitNotify);
 
-				    GlobalObjects.CasEnvironment.NewKeeper.Save(newquatationRecord);
+					GlobalObjects.CasEnvironment.Keeper.Save(newquatationRecord);
 			    }
 		    }
 			catch (Exception ex)
