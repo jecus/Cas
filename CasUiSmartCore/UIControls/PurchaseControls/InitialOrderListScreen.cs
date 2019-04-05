@@ -280,6 +280,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 				    newquatationRecord.DestinationObjectType = record.DestinationObjectType;
 				    newquatationRecord.DestinationObjectId = record.DestinationObjectId;
 				    newquatationRecord.InitialReason = record.InitialReason;
+				    newquatationRecord.Remarks = record.Remarks;
+				    newquatationRecord.LifeLimit = record.LifeLimit;
+				    newquatationRecord.LifeLimitNotify = record.LifeLimitNotify;
 
 				    GlobalObjects.CasEnvironment.NewKeeper.Save(newquatationRecord);
 			    }

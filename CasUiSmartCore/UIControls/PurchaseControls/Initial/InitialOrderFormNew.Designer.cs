@@ -747,6 +747,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// comboBoxStatus
 			// 
+			this.comboBoxStatus.Enabled = false;
 			this.comboBoxStatus.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.comboBoxStatus.FormattingEnabled = true;
 			this.comboBoxStatus.ItemHeight = 17;
@@ -953,7 +954,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.textBoxDescription.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
 			this.textBoxDescription.CustomButton.UseSelectable = true;
 			this.textBoxDescription.CustomButton.Visible = false;
-			this.textBoxDescription.Enabled = false;
 			this.textBoxDescription.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.textBoxDescription.Lines = new string[0];
 			this.textBoxDescription.Location = new System.Drawing.Point(118, 47);
