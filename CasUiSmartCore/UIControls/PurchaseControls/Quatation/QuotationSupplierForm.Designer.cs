@@ -46,6 +46,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.button1 = new System.Windows.Forms.Button();
 			this.numericUpDownCostServ = new System.Windows.Forms.NumericUpDown();
 			this.labelQuantity = new MetroFramework.Controls.MetroLabel();
+			this.labelSearchName = new MetroFramework.Controls.MetroLabel();
+			this.textBoxSearchName = new MetroFramework.Controls.MetroTextBox();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostRepair)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostOH)).BeginInit();
@@ -59,7 +61,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.supplierListView.DisplayerText = null;
 			this.supplierListView.Entity = null;
 			this.supplierListView.IgnoreAutoResize = false;
-			this.supplierListView.Location = new System.Drawing.Point(23, 63);
+			this.supplierListView.Location = new System.Drawing.Point(23, 89);
 			this.supplierListView.Name = "supplierListView";
 			this.supplierListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.supplierListView.ShowGroups = true;
@@ -72,7 +74,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.supplierListView1.DisplayerText = null;
 			this.supplierListView1.Entity = null;
 			this.supplierListView1.IgnoreAutoResize = false;
-			this.supplierListView1.Location = new System.Drawing.Point(23, 344);
+			this.supplierListView1.Location = new System.Drawing.Point(23, 370);
 			this.supplierListView1.Name = "supplierListView1";
 			this.supplierListView1.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.supplierListView1.ShowGroups = true;
@@ -92,7 +94,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.ButtonAdd.Icon = global::CAS.UI.Properties.Resources.AddIconSmall;
 			this.ButtonAdd.IconLayout = System.Windows.Forms.ImageLayout.Center;
 			this.ButtonAdd.IconNotEnabled = null;
-			this.ButtonAdd.Location = new System.Drawing.Point(564, 304);
+			this.ButtonAdd.Location = new System.Drawing.Point(564, 330);
 			this.ButtonAdd.Margin = new System.Windows.Forms.Padding(4);
 			this.ButtonAdd.Name = "ButtonAdd";
 			this.ButtonAdd.NormalBackgroundImage = null;
@@ -120,7 +122,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.ButtonDelete.Icon = global::CAS.UI.Properties.Resources.DeleteIconSmall;
 			this.ButtonDelete.IconLayout = System.Windows.Forms.ImageLayout.Center;
 			this.ButtonDelete.IconNotEnabled = null;
-			this.ButtonDelete.Location = new System.Drawing.Point(558, 597);
+			this.ButtonDelete.Location = new System.Drawing.Point(558, 623);
 			this.ButtonDelete.Margin = new System.Windows.Forms.Padding(4);
 			this.ButtonDelete.Name = "ButtonDelete";
 			this.ButtonDelete.NormalBackgroundImage = null;
@@ -143,7 +145,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(801, 583);
+			this.buttonOk.Location = new System.Drawing.Point(801, 608);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 295;
@@ -157,7 +159,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonCancel.Location = new System.Drawing.Point(882, 583);
+			this.buttonCancel.Location = new System.Drawing.Point(882, 608);
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.Size = new System.Drawing.Size(75, 33);
 			this.buttonCancel.TabIndex = 294;
@@ -175,7 +177,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.groupBox1.Controls.Add(this.button1);
 			this.groupBox1.Controls.Add(this.numericUpDownCostServ);
 			this.groupBox1.Controls.Add(this.labelQuantity);
-			this.groupBox1.Location = new System.Drawing.Point(686, 63);
+			this.groupBox1.Location = new System.Drawing.Point(686, 89);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(275, 173);
 			this.groupBox1.TabIndex = 296;
@@ -291,11 +293,55 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.labelQuantity.Text = "Cost serv:";
 			this.labelQuantity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// labelSearchName
+			// 
+			this.labelSearchName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.labelSearchName.Location = new System.Drawing.Point(23, 60);
+			this.labelSearchName.Name = "labelSearchName";
+			this.labelSearchName.Size = new System.Drawing.Size(55, 23);
+			this.labelSearchName.TabIndex = 297;
+			this.labelSearchName.Text = "Name:";
+			this.labelSearchName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// textBoxSearchName
+			// 
+			// 
+			// 
+			// 
+			this.textBoxSearchName.CustomButton.Image = null;
+			this.textBoxSearchName.CustomButton.Location = new System.Drawing.Point(150, 2);
+			this.textBoxSearchName.CustomButton.Name = "";
+			this.textBoxSearchName.CustomButton.Size = new System.Drawing.Size(17, 17);
+			this.textBoxSearchName.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxSearchName.CustomButton.TabIndex = 1;
+			this.textBoxSearchName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxSearchName.CustomButton.UseSelectable = true;
+			this.textBoxSearchName.CustomButton.Visible = false;
+			this.textBoxSearchName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxSearchName.Lines = new string[0];
+			this.textBoxSearchName.Location = new System.Drawing.Point(84, 61);
+			this.textBoxSearchName.MaxLength = 32767;
+			this.textBoxSearchName.Name = "textBoxSearchName";
+			this.textBoxSearchName.PasswordChar = '\0';
+			this.textBoxSearchName.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textBoxSearchName.SelectedText = "";
+			this.textBoxSearchName.SelectionLength = 0;
+			this.textBoxSearchName.SelectionStart = 0;
+			this.textBoxSearchName.ShortcutsEnabled = true;
+			this.textBoxSearchName.Size = new System.Drawing.Size(170, 22);
+			this.textBoxSearchName.TabIndex = 298;
+			this.textBoxSearchName.UseSelectable = true;
+			this.textBoxSearchName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxSearchName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+			this.textBoxSearchName.TextChanged += new System.EventHandler(this.textBoxSearchPartNumber_TextChanged);
+			// 
 			// QuotationSupplierForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(980, 639);
+			this.ClientSize = new System.Drawing.Size(980, 664);
+			this.Controls.Add(this.labelSearchName);
+			this.Controls.Add(this.textBoxSearchName);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.buttonOk);
 			this.Controls.Add(this.buttonCancel);
@@ -336,5 +382,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.NumericUpDown numericUpDownCostServ;
 		private MetroFramework.Controls.MetroLabel labelQuantity;
+		private MetroFramework.Controls.MetroLabel labelSearchName;
+		private MetroFramework.Controls.MetroTextBox textBoxSearchName;
 	}
 }

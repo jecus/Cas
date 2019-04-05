@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
 using MetroFramework.Forms;
+using SmartCore.Filters;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls.Quatation
@@ -11,6 +12,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 	{
 		#region Fields
 
+		private readonly List<Supplier> _suppliers;
 		private readonly List<RequestForQuotationRecord> _selectedItems;
 		private List<SupplierPrice> _prices = new List<SupplierPrice>();
 
@@ -25,6 +27,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 		public QuotationSupplierForm(List<Supplier> suppliers, List<RequestForQuotationRecord> selectedItems) : this()
 		{
+			_suppliers = suppliers;
 			_selectedItems = selectedItems;
 			supplierListView.SetItemsArray(suppliers.ToArray());
 		}
@@ -98,6 +101,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 			foreach (var record in _selectedItems)
 				record.SupplierPrice.AddRange(_prices);
+		}
+
+		private void textBoxSearchPartNumber_TextChanged(object sender, System.EventArgs e)
+		{
+			supplierListView.SetItemsArray(_suppliers.Where(i => i.Name.ToLower().Contains(textBoxSearchName.Text.ToLower())).ToArray());
 		}
 	}
 }
