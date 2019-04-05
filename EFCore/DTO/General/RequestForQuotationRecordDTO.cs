@@ -66,6 +66,9 @@ namespace EFCore.DTO.General
 		public byte[] LifeLimitNotify { get; set; }
 
 		[DataMember]
+		public string SettingJSON { get; set; }
+
+		[DataMember]
 		[Include]
 		public DefferedCategorieDTO DefferedCategory { get; set; }
 

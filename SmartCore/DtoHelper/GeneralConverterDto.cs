@@ -4723,6 +4723,7 @@ namespace SmartCore.DtoHelper
 				DestinationObjectType = quotationrecord.DestinationObjectType.ItemId,
 				LifeLimit = quotationrecord.LifeLimit?.ConvertToByteArray(),
 				LifeLimitNotify = quotationrecord.LifeLimitNotify?.ConvertToByteArray(),
+				SettingJSON = quotationrecord.SettingJSON,
 				Remarks = quotationrecord.Remarks
 			};
 		}
@@ -4750,6 +4751,7 @@ namespace SmartCore.DtoHelper
 				DestinationObjectType = SmartCoreType.GetSmartCoreTypeById(quotationrecorddto.DestinationObjectType),
 				LifeLimit = Lifelength.ConvertFromByteArray(quotationrecorddto.LifeLimit),
 				LifeLimitNotify = Lifelength.ConvertFromByteArray(quotationrecorddto.LifeLimitNotify),
+				SettingJSON = quotationrecorddto.SettingJSON,
 				Remarks = quotationrecorddto.Remarks
 			};
 		}
