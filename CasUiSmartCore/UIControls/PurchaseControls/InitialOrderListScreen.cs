@@ -19,6 +19,7 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Filters;
 using SmartCore.Purchase;
+using FilterType = EFCore.Attributte.FilterType;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
@@ -258,7 +259,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				    Remarks = initial.Remarks,
 			    };
 
-			    GlobalObjects.CasEnvironment.NewKeeper.Save(quatation);
+			    GlobalObjects.CasEnvironment.Keeper.Save(quatation);
 
 			    var initialRecords = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(new Filter("ParentPackageId", initial.ItemId));
 			    var ids = initialRecords.Select(i => i.ProductId);
@@ -423,13 +424,16 @@ namespace CAS.UI.UIControls.PurchaseControls
 					Status = WorkPackageStatus.Opened,
 				};
 				GlobalObjects.CasEnvironment.Keeper.Save(quotation);
-				var records =
-					GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(
-						new Filter("ParentPackageId", rfq.ItemId));
 
-				foreach (var record in records)
+				var records = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(new Filter("ParentPackageId", rfq.ItemId));
+				var ids = records.Select(i => i.ProductId);
+				if (records.Count() > 0)
 				{
-					var newQuatationRecord = new RequestForQuotationRecord(quotation.ItemId, record.Product, record.Quantity)
+					var products = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, Product>(new Filter("ItemId", FilterType.In, ids), loadChild: true).ToList();
+					foreach (var record in records)
+					{
+						record.Product = products.FirstOrDefault(i => i.ItemId == record.ProductId);
+						var newQuatationRecord = new RequestForQuotationRecord(quotation.ItemId, record.Product, record.Quantity)
 						{
 							DeferredCategory = record.DeferredCategory,
 							DestinationObjectId = record.DestinationObjectId,
@@ -439,10 +443,14 @@ namespace CAS.UI.UIControls.PurchaseControls
 							Remarks = record.Remarks,
 							InitialReason = record.InitialReason,
 							Measure = record.Measure,
-							CostCondition = record.CostCondition
+							CostCondition = record.CostCondition,
 						};
-					GlobalObjects.CasEnvironment.NewKeeper.Save(newQuatationRecord);
+						GlobalObjects.CasEnvironment.Keeper.Save(newQuatationRecord);
+					}
 				}
+				
+
+				
 
 			}
 			AnimatedThreadWorker.RunWorkerAsync();
