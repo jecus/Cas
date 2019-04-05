@@ -58,7 +58,10 @@ namespace CAS.UI.UIControls.PurchaseControls
             var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Part Number" };
             ColumnHeaderList.Add(columnHeader);
 
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Standart" };
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Name" };
+            ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Standart" };
             ColumnHeaderList.Add(columnHeader);
 
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Description" };
@@ -92,7 +95,8 @@ namespace CAS.UI.UIControls.PurchaseControls
         {
             var subItems = new List<ListViewItem.ListViewSubItem>();
 
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.PartNumber, Tag = item.PartNumber });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Name, Tag = item.Name });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.PartNumber, Tag = item.PartNumber });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Standart?.ToString(), Tag = item.Standart });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Description, Tag = item.Description });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Reference, Tag = item.Reference });
