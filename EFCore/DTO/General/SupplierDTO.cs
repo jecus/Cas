@@ -69,21 +69,11 @@ namespace EFCore.DTO.General
 		[DataMember]
 		public ICollection<SpecialistTrainingDTO> SpecialistTrainingDtos { get; set; }
 		[DataMember]
-		public ICollection<RequestForQuotationRecordDTO> RequestForQuotationRecordDtos { get; set; }
-		[DataMember]
-		public ICollection<RequestForQuotationDTO> RequestForQuotationDtos { get; set; }
-		[DataMember]
 		public ICollection<PurchaseRequestRecordDTO> PurchaseRequestRecordDtos { get; set; }
 		[DataMember]
 		public ICollection<PurchaseOrderDTO> PurchaseOrderDtos { get; set; }
 		[DataMember]
 		public ICollection<KitSuppliersRelationDTO> KitSuppliersRelationDtos { get; set; }
-
-		[DataMember]
-		public ICollection<InitialOrderDTO> InitialOrderDtos { get; set; }
-
-		[DataMember]
-		public ICollection<RequestForQuotationDTO> QuotationDtos { get; set; }
 
 		#endregion
 	}
