@@ -267,30 +267,13 @@ namespace CAS.UI.UIControls.PurchaseControls
 
         #endregion
 
-        #region private void _toolStripMenuItemAddQuotation_Click(object sender, EventArgs e)
-
-        private void _toolStripMenuItemAddQuotation_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        #endregion
-
         #region private void _toolStripMenuItemComposeInitial_Click1(object sender, EventArgs e)
 
         private void _toolStripMenuItemComposeQuotation_Click(object sender, EventArgs e)
         {
-            
-        }
-
-        #endregion
-
-        #region private void _toolStripMenuItemAddInitial_Click(object sender, EventArgs e)
-
-        private void _toolStripMenuItemAddInitial_Click(object sender, EventArgs e)
-        {
-
-        }
+			var form = new QuatationOrderFormNew(new RequestForQuotation() { ParentId = aircraftHeaderControl1.Operator.ItemId, ParentType = aircraftHeaderControl1.Operator.SmartCoreObjectType }, _directivesViewer.SelectedItems);
+			form.ShowDialog();
+		}
 
         #endregion
 

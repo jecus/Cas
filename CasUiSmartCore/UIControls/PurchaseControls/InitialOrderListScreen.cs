@@ -259,7 +259,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				    Remarks = initial.Remarks,
 			    };
 
-			    GlobalObjects.CasEnvironment.Keeper.Save(quatation);
+			    GlobalObjects.CasEnvironment.NewKeeper.Save(quatation);
 
 			    var initialRecords = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(new Filter("ParentPackageId", initial.ItemId));
 			    var ids = initialRecords.Select(i => i.ProductId);

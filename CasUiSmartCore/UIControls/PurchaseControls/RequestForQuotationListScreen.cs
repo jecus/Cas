@@ -370,7 +370,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		{
 			if (_directivesViewer.SelectedItems.Count != 1) return;
 
-			var editForm = new OrderAddForm(_directivesViewer.SelectedItems[0], OrderFormType.Purchase);
+			var editForm = new QuatationOrderFormNew(_directivesViewer.SelectedItems[0]);
 			if (editForm.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();
 		}
@@ -381,7 +381,7 @@ namespace CAS.UI.UIControls.PurchaseControls
         {
 			if (_directivesViewer.SelectedItems.Count != 1) return;
 
-	        var editForm = new OrderAddForm(_directivesViewer.SelectedItems[0]);
+	        var editForm = new QuatationOrderFormNew(_directivesViewer.SelectedItems[0]);
 	        if (editForm.ShowDialog() == DialogResult.OK)
 		        AnimatedThreadWorker.RunWorkerAsync();
 		}
@@ -470,16 +470,16 @@ namespace CAS.UI.UIControls.PurchaseControls
 
         private void ButtonAddNewClick(object sender, EventArgs e)
         {
-			OrderAddForm form = new OrderAddForm(CurrentParent, OrderFormType.Quotation);
+			var  form = new QuatationOrderFormNew(new RequestForQuotation());
 			if (form.ShowDialog() == DialogResult.OK)
             {
                 AnimatedThreadWorker.RunWorkerAsync();
 
-                ReferenceEventArgs refe = new ReferenceEventArgs
+                var refe = new ReferenceEventArgs
                                               {
-                                                  DisplayerText = form.Added.Title,
+                                                  DisplayerText = form.AddedInitial.Title,
                                                   TypeOfReflection = ReflectionTypes.DisplayInNew,
-                                                  RequestedEntity = new RequestForQuotationScreen(form.Added)
+                                                  RequestedEntity = new RequestForQuotationScreen(form.AddedInitial)
                                               };
                 InvokeDisplayerRequested(refe);    
             }
