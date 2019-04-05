@@ -281,8 +281,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 				    newquatationRecord.DestinationObjectId = record.DestinationObjectId;
 				    newquatationRecord.InitialReason = record.InitialReason;
 				    newquatationRecord.Remarks = record.Remarks;
-				    newquatationRecord.LifeLimit = record.LifeLimit;
-				    newquatationRecord.LifeLimitNotify = record.LifeLimitNotify;
+				    newquatationRecord.Threshold.FirstPerformanceSinceEffectiveDate = record.LifeLimit;
+				    newquatationRecord.Threshold.FirstNotification = record.LifeLimitNotify;
 
 				    GlobalObjects.CasEnvironment.NewKeeper.Save(newquatationRecord);
 			    }
