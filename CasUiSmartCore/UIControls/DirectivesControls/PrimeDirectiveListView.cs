@@ -109,37 +109,40 @@ namespace CAS.UI.UIControls.DirectivesControls
                                };
             ColumnHeaderList.Add(columnHeader);
 
-	        columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "STC No" };
-	        ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.12f), Text = "Description"};
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Applicabilty" };
             ColumnHeaderList.Add(columnHeader);
 
-            columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.12f), Text = "Applicabilty"};
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Description" };
+            ColumnHeaderList.Add(columnHeader);
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Next" };
+            ColumnHeaderList.Add(columnHeader);
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.05f), Text = "Last" };
+            ColumnHeaderList.Add(columnHeader);
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Rpt. Intv." };
+            ColumnHeaderList.Add(columnHeader);
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Remain/Overdue" };
+            ColumnHeaderList.Add(columnHeader);
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Status" };
+            ColumnHeaderList.Add(columnHeader);
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Remarks" };
+            ColumnHeaderList.Add(columnHeader);
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Effective date" };
             ColumnHeaderList.Add(columnHeader);
 
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Work Type" };
             ColumnHeaderList.Add(columnHeader);
 
-            columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.12f), Text = "Status"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.12f), Text = "Effective date"};
-            ColumnHeaderList.Add(columnHeader);
-
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "STC No" };
+	        ColumnHeaderList.Add(columnHeader);
+			
             columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.12f), Text = "1st. Perf."};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Rpt. Intv." };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.12f), Text = "Next"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.12f), Text = "Remain/Overdue"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.05f), Text = "Last"};
             ColumnHeaderList.Add(columnHeader);
 
             columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.05f), Text = "ATA Chapter"};
@@ -154,13 +157,10 @@ namespace CAS.UI.UIControls.DirectivesControls
             columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.05f), Text = "NDT"};
             ColumnHeaderList.Add(columnHeader);
 
-            columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.12f), Text = "M.H."};
+            columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.08f), Text = "M.H."};
             ColumnHeaderList.Add(columnHeader);
 
             columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.12f), Text = "Cost"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.12f), Text = "Remarks"};
             ColumnHeaderList.Add(columnHeader);
 
             columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.12f), Text = "Hidden remarks"};
