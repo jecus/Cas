@@ -171,24 +171,6 @@ namespace EFCore.DTO.General
 		[DataMember]
 		public ICollection<JobCardDTO> ApprovedJobCardDtos { get; set; }
 
-		[DataMember]
-		public ICollection<InitialOrderDTO> ApprovedDtos { get; set; }
-
-		[DataMember]
-		public ICollection<InitialOrderDTO> PublishedDtos { get; set; }
-
-		[DataMember]
-		public ICollection<InitialOrderDTO> ClosedDtos { get; set; }
-
-		[DataMember]
-		public ICollection<RequestForQuotationDTO> QuotationApprovedDtos { get; set; }
-
-		[DataMember]
-		public ICollection<RequestForQuotationDTO> QuotationPublishedDtos { get; set; }
-
-		[DataMember]
-		public ICollection<RequestForQuotationDTO> QuotationClosedDtos { get; set; }
-
 		#endregion
 
 	}
