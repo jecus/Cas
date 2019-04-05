@@ -1,8 +1,13 @@
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using EFCore.DTO;
 using EFCore.DTO.General;
+using Newtonsoft.Json;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
@@ -209,7 +214,18 @@ namespace SmartCore.Purchase
 		public string Remarks { get; set; }
 
 		[TableColumn("SettingJSON")]
-		public string SettingJSON { get; set; }
+		public string SettingJSON
+		{
+			get => JsonConvert.SerializeObject(SupplierPrice, Formatting.Indented,new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+			set => SupplierPrice = JsonConvert.DeserializeObject<List<SupplierPrice>>(value ?? "", new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+		}
+
+		public List<SupplierPrice> SupplierPrice
+		{
+			get => _supplierPrice ?? (_supplierPrice = new List<SupplierPrice>());
+			set => _supplierPrice = value;
+		}
+
 
 		private Priority _priority;
 		[TableColumn("Priority")]
@@ -288,6 +304,7 @@ namespace SmartCore.Purchase
 			}
 		}
 		#endregion
+
 		#region public ComponentStatus CostCondition { get; set; }
 		/// <summary>
 		/// 
@@ -324,6 +341,8 @@ namespace SmartCore.Purchase
 		#region IThreshold IDirective.Threshold { get; set; }
 
 		private DirectiveThreshold _threshold;
+		private List<SupplierPrice> _supplierPrice;
+
 		/// <summary>
 		/// порог первого и посделующего выполнений
 		/// </summary>
@@ -439,5 +458,38 @@ namespace SmartCore.Purchase
         #endregion   
 
     }
+
+	[JsonObject]
+	public class SupplierPrice : BaseCoreObject
+    {
+		[JsonIgnore]
+		public Supplier Supplier { get; set; }
+
+		[JsonIgnore]
+		[ListViewData(200, "Supplier")]
+		public string SupplierName
+		{
+			get => Supplier?.Name ?? Supplier.Unknown.Name;
+		}
+
+		[JsonProperty]
+		public int SupplierId { get; set; }
+
+		[ListViewData(100,"CostNew")]
+		[JsonProperty]
+		public decimal CostNew { get; set; }
+
+		[ListViewData(100, "CostServ")]
+		[JsonProperty]
+		public decimal CostServiceable { get; set; }
+
+		[ListViewData(100, "CostOH")]
+		[JsonProperty]
+		public decimal CostOverhaul { get; set; }
+
+		[ListViewData(100, "CostRepair")]
+		[JsonProperty]
+		public decimal CostRepair { get; set; }
+	}
 
 }

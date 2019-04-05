@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.PurchaseControls.Quatation;
 using CASTerms;
 using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
@@ -40,6 +41,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private ContextMenuStrip _contextMenuStrip;
 		private ToolStripMenuItem _toolStripMenuItemAddSuppliers;
 		private ToolStripMenuItem _toolStripMenuItemAddSuppliersAll;
+		private List<Supplier> _suppliers = new List<Supplier>();
 
 		#endregion
 
@@ -103,8 +105,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private void DoWork()
 		{
 			destinations.Clear();
+			_suppliers.Clear();
 
-			if(_currentAircraftKits.Count == 0)
+			if (_currentAircraftKits.Count == 0)
 				_currentAircraftKits = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, Product>(loadChild: true).ToList();
 			_collectionFilter.InitialCollection = _currentAircraftKits;
 
@@ -143,6 +146,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			destinations.AddRange(GlobalObjects.CasEnvironment.Stores.GetValidEntries());
 			destinations.AddRange(GlobalObjects.CasEnvironment.Hangars.GetValidEntries());
 
+			_suppliers.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<SupplierDTO, Supplier>(loadChild: true));
 		}
 
 		#endregion
@@ -540,6 +544,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		#endregion
 
+		#region private void comboBoxStatus_SelectedIndexChanged(object sender, EventArgs e)
+
 		private void comboBoxStatus_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			var status = (WorkPackageStatus)comboBoxStatus.SelectedItem;
@@ -568,6 +574,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				dateTimePickerClosingDate.Enabled = true;
 			}
 		}
+
+		#endregion
 
 		#region private void InitToolStripMenuItems()
 
@@ -632,12 +640,14 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void _toolStripMenuItemAddSuppliersAll_Click(object sender, EventArgs e)
 		{
-
+			var form = new QuotationSupplierForm(_suppliers, listViewInitialItems.SelectedItems);
+			form.ShowDialog();
 		}
 
 		private void _toolStripMenuItemAddSuppliers_Click(object sender, EventArgs e)
 		{
-
+			var form = new QuotationSupplierForm(_suppliers, listViewInitialItems.SelectedItems);
+			form.ShowDialog();
 		}
 	}
 }

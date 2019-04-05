@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.PurchaseControls.Quatation
+﻿using CAS.UI.UIControls.Auxiliary;
+
+namespace CAS.UI.UIControls.PurchaseControls.Quatation
 {
 	partial class QuotationSupplierForm
 	{
@@ -29,26 +31,26 @@
 		private void InitializeComponent()
 		{
 			this.supplierListView = new CAS.UI.UIControls.SupplierControls.SupplierListView();
-			this.supplierListView1 = new CAS.UI.UIControls.SupplierControls.SupplierListView();
+			this.supplierListView1 = new CAS.UI.UIControls.SupplierControls.SupplierPriceListView();
 			this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
 			this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
 			this.buttonOk = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.numericUpDownCostRepair = new System.Windows.Forms.NumericUpDown();
+			this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+			this.numericUpDownCostOH = new System.Windows.Forms.NumericUpDown();
+			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+			this.numericUpDownCostNew = new System.Windows.Forms.NumericUpDown();
+			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
 			this.button1 = new System.Windows.Forms.Button();
 			this.numericUpDownCostServ = new System.Windows.Forms.NumericUpDown();
 			this.labelQuantity = new MetroFramework.Controls.MetroLabel();
-			this.numericUpDownCostNew = new System.Windows.Forms.NumericUpDown();
-			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-			this.numericUpDownCostOH = new System.Windows.Forms.NumericUpDown();
-			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-			this.numericUpDownCostRepair = new System.Windows.Forms.NumericUpDown();
-			this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
 			this.groupBox1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostServ)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostNew)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostOH)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostRepair)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostOH)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostNew)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostServ)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// supplierListView
@@ -76,6 +78,7 @@
 			this.supplierListView1.ShowGroups = true;
 			this.supplierListView1.Size = new System.Drawing.Size(657, 246);
 			this.supplierListView1.TabIndex = 70;
+			this.supplierListView1.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.SupplierListView1_SelectedItemsChanged);
 			// 
 			// ButtonAdd
 			// 
@@ -103,6 +106,7 @@
 			this.ButtonAdd.TextMain = "Add Selected";
 			this.ButtonAdd.TextSecondary = "";
 			this.ButtonAdd.ToolTipText = "";
+			this.ButtonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
 			// 
 			// ButtonDelete
 			// 
@@ -130,6 +134,7 @@
 			this.ButtonDelete.TextMain = "Delete Selected";
 			this.ButtonDelete.TextSecondary = "";
 			this.ButtonDelete.ToolTipText = "";
+			this.ButtonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
 			// 
 			// buttonOk
 			// 
@@ -143,6 +148,7 @@
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 295;
 			this.buttonOk.Text = "OK";
+			this.buttonOk.Click += new System.EventHandler(this.ButtonOk_Click);
 			// 
 			// buttonCancel
 			// 
@@ -156,6 +162,7 @@
 			this.buttonCancel.Size = new System.Drawing.Size(75, 33);
 			this.buttonCancel.TabIndex = 294;
 			this.buttonCancel.Text = "Cancel";
+			this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
 			// 
 			// groupBox1
 			// 
@@ -174,90 +181,6 @@
 			this.groupBox1.TabIndex = 296;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Cost";
-			// 
-			// button1
-			// 
-			this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.button1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button1.Location = new System.Drawing.Point(194, 127);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 33);
-			this.button1.TabIndex = 249;
-			this.button1.Text = "Apply";
-			// 
-			// numericUpDownCostServ
-			// 
-			this.numericUpDownCostServ.DecimalPlaces = 2;
-			this.numericUpDownCostServ.Location = new System.Drawing.Point(102, 41);
-			this.numericUpDownCostServ.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-			this.numericUpDownCostServ.Name = "numericUpDownCostServ";
-			this.numericUpDownCostServ.Size = new System.Drawing.Size(165, 20);
-			this.numericUpDownCostServ.TabIndex = 142;
-			// 
-			// labelQuantity
-			// 
-			this.labelQuantity.AutoSize = true;
-			this.labelQuantity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelQuantity.Location = new System.Drawing.Point(5, 42);
-			this.labelQuantity.Name = "labelQuantity";
-			this.labelQuantity.Size = new System.Drawing.Size(66, 19);
-			this.labelQuantity.TabIndex = 158;
-			this.labelQuantity.Text = "Cost serv:";
-			this.labelQuantity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// numericUpDownCostNew
-			// 
-			this.numericUpDownCostNew.DecimalPlaces = 2;
-			this.numericUpDownCostNew.Location = new System.Drawing.Point(103, 15);
-			this.numericUpDownCostNew.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-			this.numericUpDownCostNew.Name = "numericUpDownCostNew";
-			this.numericUpDownCostNew.Size = new System.Drawing.Size(165, 20);
-			this.numericUpDownCostNew.TabIndex = 250;
-			// 
-			// metroLabel1
-			// 
-			this.metroLabel1.AutoSize = true;
-			this.metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabel1.Location = new System.Drawing.Point(6, 16);
-			this.metroLabel1.Name = "metroLabel1";
-			this.metroLabel1.Size = new System.Drawing.Size(65, 19);
-			this.metroLabel1.TabIndex = 251;
-			this.metroLabel1.Text = "Cost new:";
-			this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// numericUpDownCostOH
-			// 
-			this.numericUpDownCostOH.DecimalPlaces = 2;
-			this.numericUpDownCostOH.Location = new System.Drawing.Point(102, 67);
-			this.numericUpDownCostOH.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-			this.numericUpDownCostOH.Name = "numericUpDownCostOH";
-			this.numericUpDownCostOH.Size = new System.Drawing.Size(165, 20);
-			this.numericUpDownCostOH.TabIndex = 252;
-			// 
-			// metroLabel2
-			// 
-			this.metroLabel2.AutoSize = true;
-			this.metroLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabel2.Location = new System.Drawing.Point(5, 68);
-			this.metroLabel2.Name = "metroLabel2";
-			this.metroLabel2.Size = new System.Drawing.Size(62, 19);
-			this.metroLabel2.TabIndex = 253;
-			this.metroLabel2.Text = "Cost OH:";
-			this.metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// numericUpDownCostRepair
 			// 
@@ -283,6 +206,91 @@
 			this.metroLabel3.Text = "Cost repair:";
 			this.metroLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// numericUpDownCostOH
+			// 
+			this.numericUpDownCostOH.DecimalPlaces = 2;
+			this.numericUpDownCostOH.Location = new System.Drawing.Point(102, 67);
+			this.numericUpDownCostOH.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+			this.numericUpDownCostOH.Name = "numericUpDownCostOH";
+			this.numericUpDownCostOH.Size = new System.Drawing.Size(165, 20);
+			this.numericUpDownCostOH.TabIndex = 252;
+			// 
+			// metroLabel2
+			// 
+			this.metroLabel2.AutoSize = true;
+			this.metroLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.metroLabel2.Location = new System.Drawing.Point(5, 68);
+			this.metroLabel2.Name = "metroLabel2";
+			this.metroLabel2.Size = new System.Drawing.Size(62, 19);
+			this.metroLabel2.TabIndex = 253;
+			this.metroLabel2.Text = "Cost OH:";
+			this.metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// numericUpDownCostNew
+			// 
+			this.numericUpDownCostNew.DecimalPlaces = 2;
+			this.numericUpDownCostNew.Location = new System.Drawing.Point(103, 15);
+			this.numericUpDownCostNew.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+			this.numericUpDownCostNew.Name = "numericUpDownCostNew";
+			this.numericUpDownCostNew.Size = new System.Drawing.Size(165, 20);
+			this.numericUpDownCostNew.TabIndex = 250;
+			// 
+			// metroLabel1
+			// 
+			this.metroLabel1.AutoSize = true;
+			this.metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.metroLabel1.Location = new System.Drawing.Point(6, 16);
+			this.metroLabel1.Name = "metroLabel1";
+			this.metroLabel1.Size = new System.Drawing.Size(65, 19);
+			this.metroLabel1.TabIndex = 251;
+			this.metroLabel1.Text = "Cost new:";
+			this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// button1
+			// 
+			this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.button1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.button1.Location = new System.Drawing.Point(194, 127);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(75, 33);
+			this.button1.TabIndex = 249;
+			this.button1.Text = "Apply";
+			this.button1.Click += new System.EventHandler(this.Button1_Click);
+			// 
+			// numericUpDownCostServ
+			// 
+			this.numericUpDownCostServ.DecimalPlaces = 2;
+			this.numericUpDownCostServ.Location = new System.Drawing.Point(102, 41);
+			this.numericUpDownCostServ.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+			this.numericUpDownCostServ.Name = "numericUpDownCostServ";
+			this.numericUpDownCostServ.Size = new System.Drawing.Size(165, 20);
+			this.numericUpDownCostServ.TabIndex = 142;
+			// 
+			// labelQuantity
+			// 
+			this.labelQuantity.AutoSize = true;
+			this.labelQuantity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelQuantity.Location = new System.Drawing.Point(5, 42);
+			this.labelQuantity.Name = "labelQuantity";
+			this.labelQuantity.Size = new System.Drawing.Size(66, 19);
+			this.labelQuantity.TabIndex = 158;
+			this.labelQuantity.Text = "Cost serv:";
+			this.labelQuantity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
 			// QuotationSupplierForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -302,10 +310,10 @@
 			this.Text = "Quotation Supplier Form";
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostServ)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostNew)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostOH)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostRepair)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostOH)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostNew)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostServ)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -313,7 +321,7 @@
 		#endregion
 
 		private CAS.UI.UIControls.SupplierControls.SupplierListView supplierListView;
-		private SupplierControls.SupplierListView supplierListView1;
+		private CAS.UI.UIControls.SupplierControls.SupplierPriceListView supplierListView1;
 		private AvControls.AvButtonT.AvButtonT ButtonAdd;
 		private AvControls.AvButtonT.AvButtonT ButtonDelete;
 		private System.Windows.Forms.Button buttonOk;

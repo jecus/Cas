@@ -2590,6 +2590,12 @@
     <Compile Include="UIControls\SupplierControls\SupplierListScreen.Designer.cs">
       <DependentUpon>SupplierListScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\SupplierControls\SupplierPriceListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\SupplierControls\SupplierPriceListView.Designer.cs">
+      <DependentUpon>SupplierPriceListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\SupplierControls\SupplierListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
