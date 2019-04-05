@@ -99,8 +99,12 @@ namespace EFCore.DTO.General.Maps
 				.HasMaxLength(21)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("LifeLimitNotify");
-				
-				;HasRequired(i => i.DefferedCategory)
+
+			Property(i => i.SettingJSON)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("SettingJSON ");
+
+			; HasRequired(i => i.DefferedCategory)
 				.WithMany(i => i.RequestForQuotationRecordDtos)
 				.HasForeignKey(i => i.DefferedCategoryId);
 		}

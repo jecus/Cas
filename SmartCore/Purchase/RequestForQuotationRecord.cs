@@ -208,6 +208,9 @@ namespace SmartCore.Purchase
 		[TableColumn("Remarks")]
 		public string Remarks { get; set; }
 
+		[TableColumn("SettingJSON")]
+		public string SettingJSON { get; set; }
+
 		private Priority _priority;
 		[TableColumn("Priority")]
 		public Priority Priority
