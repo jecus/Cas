@@ -606,6 +606,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			});
 
+			listViewInitialItems.ContextMenuStrip = _contextMenuStrip;
 			_contextMenuStrip.Opening += _contextMenuStrip_Opening; 
 		}
 
