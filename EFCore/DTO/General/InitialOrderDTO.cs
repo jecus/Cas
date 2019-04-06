@@ -51,6 +51,9 @@ namespace EFCore.DTO.General
 		[DataMember]
 		public string CloseByUser { get; set; }
 
+		[DataMember]
+		public string Number { get; set; }
+
 
 		//[DataMember]
 		//[Include]

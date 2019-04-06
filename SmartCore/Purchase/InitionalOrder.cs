@@ -114,6 +114,9 @@ namespace SmartCore.Purchase
 		[TableColumn("CloseByUser")]
 		public string CloseByUser { get; set; }
 
+		[TableColumn("Number")]
+		public string Number { get; set; }
+
 		/*
 		*  Ìועמהû 
 		*/

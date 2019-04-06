@@ -417,3 +417,21 @@ if not exists ( select  *
 	alter table dbo.RequestForQuotationRecords
     add SettingJSON nvarchar(MAX)null 
 GO
+
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('dbo.InitialOrders')
+                    and c.name = 'Number' ) 
+
+	alter table dbo.InitialOrders
+    add Number nvarchar(128)null 
+GO
+
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('dbo.RequestsForQuotation')
+                    and c.name = 'Number' ) 
+
+	alter table dbo.RequestsForQuotation
+    add Number nvarchar(128)null 
+GO

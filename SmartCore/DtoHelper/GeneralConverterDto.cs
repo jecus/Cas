@@ -3774,6 +3774,7 @@ namespace SmartCore.DtoHelper
 				Remarks = initorder.Remarks,
 				PublishedByUser = initorder.PublishedByUser,
 				CloseByUser = initorder.CloseByUser,
+				Number = initorder.Number,
 				Files = initorder.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
 				PackageRecords = initorder.PackageRecords?.Select(i => i.Convert()) as ICollection<InitialOrderRecordDTO>
 			};
@@ -3800,6 +3801,7 @@ namespace SmartCore.DtoHelper
 				ClosedById = initorderdto.ClosedById,
 				PublishedByUser = initorderdto.PublishedByUser,
 				CloseByUser = initorderdto.CloseByUser,
+				Number = initorderdto.Number,
 			};
 
 			if (initorderdto.Files != null)
@@ -4662,6 +4664,7 @@ namespace SmartCore.DtoHelper
 				PublishedByUser = reqquotation.PublishedByUser,
 				CloseByUser = reqquotation.CloseByUser,
 				ParentTypeId = reqquotation.ParentType?.ItemId,
+				Number = reqquotation.Number,
 				Files = reqquotation.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
 				PackageRecords = reqquotation.PackageRecords?.Select(i => i.Convert()) as ICollection<RequestForQuotationRecordDTO>
 			};
@@ -4686,6 +4689,7 @@ namespace SmartCore.DtoHelper
 				Remarks = reqquotationdto.Remarks,
 				PublishedByUser = reqquotationdto.PublishedByUser,
 				CloseByUser = reqquotationdto.CloseByUser,
+				Number = reqquotationdto.Number,
 				ParentType = reqquotationdto.ParentTypeId.HasValue ? SmartCoreType.Items.GetItemById(reqquotationdto.ParentTypeId.Value) : SmartCoreType.Unknown,
 			};
 
