@@ -81,14 +81,14 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.labelStatus = new MetroFramework.Controls.MetroLabel();
 			this.textBoxAuthor = new MetroFramework.Controls.MetroTextBox();
 			this.labelAuthor = new MetroFramework.Controls.MetroLabel();
-			this.labelDesc = new MetroFramework.Controls.MetroLabel();
-			this.textBoxDescription = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxTitle = new MetroFramework.Controls.MetroTextBox();
 			this.labelQOTitle = new MetroFramework.Controls.MetroLabel();
 			this.buttonOk = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.listViewInitialItems = new CAS.UI.UIControls.PurchaseControls.Quatation.QuatationOrderListView();
 			this.listViewKits = new CAS.UI.UIControls.PurchaseControls.Quatation.RequestProductListView();
+			this.metroTextBoxNumber = new MetroFramework.Controls.MetroTextBox();
+			this.metroLabelNumber = new MetroFramework.Controls.MetroLabel();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.groupBox2.SuspendLayout();
@@ -654,6 +654,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// groupBox2
 			// 
+			this.groupBox2.Controls.Add(this.metroTextBoxNumber);
+			this.groupBox2.Controls.Add(this.metroLabelNumber);
 			this.groupBox2.Controls.Add(this.textBoxClosingBy);
 			this.groupBox2.Controls.Add(this.textBoxPublishedBy);
 			this.groupBox2.Controls.Add(this.comboBoxStatus);
@@ -670,8 +672,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.groupBox2.Controls.Add(this.labelStatus);
 			this.groupBox2.Controls.Add(this.textBoxAuthor);
 			this.groupBox2.Controls.Add(this.labelAuthor);
-			this.groupBox2.Controls.Add(this.labelDesc);
-			this.groupBox2.Controls.Add(this.textBoxDescription);
 			this.groupBox2.Controls.Add(this.textBoxTitle);
 			this.groupBox2.Controls.Add(this.labelQOTitle);
 			this.groupBox2.Location = new System.Drawing.Point(717, 434);
@@ -928,50 +928,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.labelAuthor.Text = "Author:";
 			this.labelAuthor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// labelDesc
-			// 
-			this.labelDesc.AutoSize = true;
-			this.labelDesc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelDesc.Location = new System.Drawing.Point(20, 50);
-			this.labelDesc.Name = "labelDesc";
-			this.labelDesc.Size = new System.Drawing.Size(77, 19);
-			this.labelDesc.TabIndex = 157;
-			this.labelDesc.Text = "Description:";
-			this.labelDesc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// textBoxDescription
-			// 
-			this.textBoxDescription.BackColor = System.Drawing.Color.White;
-			// 
-			// 
-			// 
-			this.textBoxDescription.CustomButton.Image = null;
-			this.textBoxDescription.CustomButton.Location = new System.Drawing.Point(380, 2);
-			this.textBoxDescription.CustomButton.Name = "";
-			this.textBoxDescription.CustomButton.Size = new System.Drawing.Size(17, 17);
-			this.textBoxDescription.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.textBoxDescription.CustomButton.TabIndex = 1;
-			this.textBoxDescription.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.textBoxDescription.CustomButton.UseSelectable = true;
-			this.textBoxDescription.CustomButton.Visible = false;
-			this.textBoxDescription.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxDescription.Lines = new string[0];
-			this.textBoxDescription.Location = new System.Drawing.Point(118, 47);
-			this.textBoxDescription.MaxLength = 128;
-			this.textBoxDescription.Multiline = true;
-			this.textBoxDescription.Name = "textBoxDescription";
-			this.textBoxDescription.PasswordChar = '\0';
-			this.textBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.textBoxDescription.SelectedText = "";
-			this.textBoxDescription.SelectionLength = 0;
-			this.textBoxDescription.SelectionStart = 0;
-			this.textBoxDescription.ShortcutsEnabled = true;
-			this.textBoxDescription.Size = new System.Drawing.Size(400, 22);
-			this.textBoxDescription.TabIndex = 156;
-			this.textBoxDescription.UseSelectable = true;
-			this.textBoxDescription.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.textBoxDescription.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			// 
 			// textBoxTitle
 			// 
 			// 
@@ -988,7 +944,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.textBoxTitle.CustomButton.Visible = false;
 			this.textBoxTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.textBoxTitle.Lines = new string[0];
-			this.textBoxTitle.Location = new System.Drawing.Point(118, 19);
+			this.textBoxTitle.Location = new System.Drawing.Point(118, 47);
 			this.textBoxTitle.MaxLength = 32767;
 			this.textBoxTitle.Name = "textBoxTitle";
 			this.textBoxTitle.PasswordChar = '\0';
@@ -1006,7 +962,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// labelQOTitle
 			// 
 			this.labelQOTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelQOTitle.Location = new System.Drawing.Point(20, 16);
+			this.labelQOTitle.Location = new System.Drawing.Point(20, 44);
 			this.labelQOTitle.Name = "labelQOTitle";
 			this.labelQOTitle.Size = new System.Drawing.Size(87, 27);
 			this.labelQOTitle.TabIndex = 3;
@@ -1068,6 +1024,47 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.listViewKits.Size = new System.Drawing.Size(687, 315);
 			this.listViewKits.TabIndex = 68;
 			// 
+			// metroTextBoxNumber
+			// 
+			// 
+			// 
+			// 
+			this.metroTextBoxNumber.CustomButton.Image = null;
+			this.metroTextBoxNumber.CustomButton.Location = new System.Drawing.Point(380, 2);
+			this.metroTextBoxNumber.CustomButton.Name = "";
+			this.metroTextBoxNumber.CustomButton.Size = new System.Drawing.Size(17, 17);
+			this.metroTextBoxNumber.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.metroTextBoxNumber.CustomButton.TabIndex = 1;
+			this.metroTextBoxNumber.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.metroTextBoxNumber.CustomButton.UseSelectable = true;
+			this.metroTextBoxNumber.CustomButton.Visible = false;
+			this.metroTextBoxNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.metroTextBoxNumber.Lines = new string[0];
+			this.metroTextBoxNumber.Location = new System.Drawing.Point(118, 20);
+			this.metroTextBoxNumber.MaxLength = 32767;
+			this.metroTextBoxNumber.Name = "metroTextBoxNumber";
+			this.metroTextBoxNumber.PasswordChar = '\0';
+			this.metroTextBoxNumber.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.metroTextBoxNumber.SelectedText = "";
+			this.metroTextBoxNumber.SelectionLength = 0;
+			this.metroTextBoxNumber.SelectionStart = 0;
+			this.metroTextBoxNumber.ShortcutsEnabled = true;
+			this.metroTextBoxNumber.Size = new System.Drawing.Size(400, 22);
+			this.metroTextBoxNumber.TabIndex = 268;
+			this.metroTextBoxNumber.UseSelectable = true;
+			this.metroTextBoxNumber.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.metroTextBoxNumber.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+			// 
+			// metroLabelNumber
+			// 
+			this.metroLabelNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.metroLabelNumber.Location = new System.Drawing.Point(20, 17);
+			this.metroLabelNumber.Name = "metroLabelNumber";
+			this.metroLabelNumber.Size = new System.Drawing.Size(87, 27);
+			this.metroLabelNumber.TabIndex = 269;
+			this.metroLabelNumber.Text = "№:";
+			this.metroLabelNumber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
 			// QuatationOrderFormNew
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1094,7 +1091,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.groupBox1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).EndInit();
 			this.groupBox2.ResumeLayout(false);
-			this.groupBox2.PerformLayout();
 			this.ResumeLayout(false);
 
         }
@@ -1135,8 +1131,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
         private System.Windows.Forms.GroupBox groupBox2;
         private MetroTextBox textBoxTitle;
         private MetroLabel labelQOTitle;
-        private MetroLabel labelDesc;
-        private MetroTextBox textBoxDescription;
         private MetroTextBox textBoxAuthor;
         private MetroLabel labelAuthor;
         private MetroLabel labelStatus;
@@ -1160,5 +1154,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private System.Windows.Forms.ComboBox comboBoxDIR;
 		private MetroTextBox textBoxClosingBy;
 		private MetroTextBox textBoxPublishedBy;
+		private MetroTextBox metroTextBoxNumber;
+		private MetroLabel metroLabelNumber;
 	}
 }

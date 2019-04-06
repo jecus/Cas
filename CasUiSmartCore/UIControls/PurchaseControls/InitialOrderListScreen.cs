@@ -254,10 +254,10 @@ namespace CAS.UI.UIControls.PurchaseControls
 				    Parent =  initial,
 				    ParentType = initial.SmartCoreObjectType,
 				    Title = initial.Title,
-				    Description = initial.Description,
 				    OpeningDate = initial.OpeningDate,
 				    Author = initial.Author,
 				    Remarks = initial.Remarks,
+				    Number = initial.Number,
 			    };
 
 			    GlobalObjects.CasEnvironment.NewKeeper.Save(quatation);

@@ -252,7 +252,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			if (_order.ItemId > 0)
 			{
 				textBoxTitle.Text = _order.Title;
-				textBoxDescription.Text = _order.Description;
+				metroTextBoxNumber.Text = _order.Number;
 				dateTimePickerOpeningDate.Value = _order.OpeningDate;
 				dateTimePickerClosingDate.Value = _order.ClosingDate;
 				dateTimePickerPublishDate.Value = _order.PublishingDate;
@@ -372,7 +372,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private void ApplyInitialData()
 		{
 			_order.Title = textBoxTitle.Text;
-			_order.Description = textBoxDescription.Text;
+			_order.Number = metroTextBoxNumber.Text;
 			_order.Status = (WorkPackageStatus)comboBoxStatus.SelectedItem;
 			_order.Remarks = textBoxRemarks.Text;
 
