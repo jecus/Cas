@@ -127,19 +127,19 @@ namespace CAS.UI.UIControls.DirectivesControls
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Remain/Overdue" };
             ColumnHeaderList.Add(columnHeader);
 
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Status" };
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "Status" };
             ColumnHeaderList.Add(columnHeader);
 
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Remarks" };
             ColumnHeaderList.Add(columnHeader);
 
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Effective date" };
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Effective date" };
             ColumnHeaderList.Add(columnHeader);
 
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Work Type" };
             ColumnHeaderList.Add(columnHeader);
 
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "STC No" };
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "STC No" };
 	        ColumnHeaderList.Add(columnHeader);
 			
             columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.12f), Text = "1st. Perf."};
@@ -157,10 +157,10 @@ namespace CAS.UI.UIControls.DirectivesControls
             columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.05f), Text = "NDT"};
             ColumnHeaderList.Add(columnHeader);
 
-            columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.08f), Text = "M.H."};
+            columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.05f), Text = "M.H."};
             ColumnHeaderList.Add(columnHeader);
 
-            columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.12f), Text = "Cost"};
+            columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.05f), Text = "Cost"};
             ColumnHeaderList.Add(columnHeader);
 
             columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.12f), Text = "Hidden remarks"};
@@ -343,29 +343,29 @@ namespace CAS.UI.UIControls.DirectivesControls
 			subItems.Add(new ListViewItem.ListViewSubItem { ForeColor = c1, Text = s1, Tag = s1 });
 			subItems.Add(new ListViewItem.ListViewSubItem { ForeColor = c2, Text = s2, Tag = s2 });
 			subItems.Add(new ListViewItem.ListViewSubItem { ForeColor = c3, Text = s3, Tag = s3 });
-			subItems.Add(new ListViewItem.ListViewSubItem { ForeColor = stcColor, Text = stcno, Tag = stcno });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = descriptionString, Tag = descriptionString });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = applicabilityString, Tag = applicabilityString });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = workType.ToString(), Tag = workType });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = status.ToString(), Tag = status });
-			subItems.Add(new ListViewItem.ListViewSubItem 
-            { 
-                Text = effDate > DateTimeExtend.GetCASMinDateTime()
-					? SmartCore.Auxiliary.Convert.GetDateFormat(effDate) : "", 
-                Tag = effDate 
-            });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = firstPerformanceString, Tag = firstPerformanceString });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = repeatInterval.ToString(), Tag = repeatInterval });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = descriptionString, Tag = descriptionString });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = nextComplianceString, Tag = nextComplianceDate });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = nextRemainString, Tag = nextRemainString });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = lastPerformanceString, Tag = lastComplianceDate });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = repeatInterval.ToString(), Tag = repeatInterval });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = nextRemainString, Tag = nextRemainString });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = status.ToString(), Tag = status });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = remarksString, Tag = remarksString });
+			subItems.Add(new ListViewItem.ListViewSubItem
+			{
+				Text = effDate > DateTimeExtend.GetCASMinDateTime()
+					? SmartCore.Auxiliary.Convert.GetDateFormat(effDate) : "",
+				Tag = effDate
+			});
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = workType.ToString(), Tag = workType });
+			subItems.Add(new ListViewItem.ListViewSubItem { ForeColor = stcColor, Text = stcno, Tag = stcno });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = firstPerformanceString, Tag = firstPerformanceString });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = ata.ToString(), Tag = ata });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = baseDetail, Tag = baseDetail });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = kitRequieredString, Tag = kitRequieredString });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = ndtString, Tag = ndtString });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = manHours == -1? "" : manHours.ToString(), Tag = manHours });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = cost == -1 ? "" : cost.ToString(), Tag = cost });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = remarksString, Tag = remarksString });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = hiddenRemarksString, Tag = hiddenRemarksString });
 
             return subItems.ToArray();

@@ -55,13 +55,14 @@ namespace CAS.UI.UIControls.PurchaseControls
         {
             ColumnHeaderList.Clear();
 
-            var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Part Number" };
+
+            var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Name" };
             ColumnHeaderList.Add(columnHeader);
 
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Name" };
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Part Number" };
             ColumnHeaderList.Add(columnHeader);
 
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Standart" };
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Standart" };
             ColumnHeaderList.Add(columnHeader);
 
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Description" };
