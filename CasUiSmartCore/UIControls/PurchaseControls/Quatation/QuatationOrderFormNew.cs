@@ -594,7 +594,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// toolStripMenuItemCopy
 			// 
-			_toolStripMenuItemAddSuppliers.Text = "Add Suppliers";
+			_toolStripMenuItemAddSuppliers.Text = "Edit Suppliers";
 			_toolStripMenuItemAddSuppliers.Click += _toolStripMenuItemAddSuppliers_Click;
 
 			// 
@@ -646,7 +646,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void _toolStripMenuItemAddSuppliers_Click(object sender, EventArgs e)
 		{
-			var form = new QuotationSupplierForm(_suppliers, listViewInitialItems.SelectedItems);
+			var form = new QuotationSupplierForm(_suppliers, listViewInitialItems.SelectedItem);
 			form.ShowDialog();
 		}
 	}

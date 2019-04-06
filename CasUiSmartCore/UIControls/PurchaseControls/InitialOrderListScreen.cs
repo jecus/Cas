@@ -349,30 +349,36 @@ namespace CAS.UI.UIControls.PurchaseControls
         {
             foreach (var rfq in _directivesViewer.SelectedItems)
             {
-	            if (rfq.Status != WorkPackageStatus.Closed)
-	            {
-		            rfq.Status = WorkPackageStatus.Published;
+				if (rfq.Status == WorkPackageStatus.Published)
+				{
+					MessageBox.Show("Initional Order " + rfq.Title + " is already publisher.",
+						(string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
+						MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+					continue;
+				}
+
+				rfq.Status = WorkPackageStatus.Published;
 		            rfq.PublishingDate = DateTime.Now;
 		            rfq.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
 		            rfq.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
 					GlobalObjects.CasEnvironment.NewKeeper.Save(rfq);
-	            }
-                else
-                {
-                    switch (MessageBox.Show(@"This initial order is already closed," +
-                                             "\nif you want to republish it," +
-                                             "\nInformation entered at the closing will be erased." + "\n\n Republish " + rfq.Title + " initial order?", (string)new GlobalTermsProvider()["SystemName"],
-                                        MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation,
-                                        MessageBoxDefaultButton.Button2))
-                    {
-                        case DialogResult.Yes:
-                            GlobalObjects.PackageCore.PublishPackage<InitialOrder, InitialOrderRecord>(rfq, DateTime.Now);
-                            break;
-                        case DialogResult.No:
-                            //arguments.Cancel = true;
-                            break;
-                    }
-                }
+	            //}
+             //   else
+             //   {
+             //       switch (MessageBox.Show(@"This initial order is already closed," +
+             //                                "\nif you want to republish it," +
+             //                                "\nInformation entered at the closing will be erased." + "\n\n Republish " + rfq.Title + " initial order?", (string)new GlobalTermsProvider()["SystemName"],
+             //                           MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation,
+             //                           MessageBoxDefaultButton.Button2))
+             //       {
+             //           case DialogResult.Yes:
+             //               GlobalObjects.PackageCore.PublishPackage<InitialOrder, InitialOrderRecord>(rfq, DateTime.Now);
+             //               break;
+             //           case DialogResult.No:
+             //               //arguments.Cancel = true;
+             //               break;
+             //       }
+             //   }
             }
             AnimatedThreadWorker.RunWorkerAsync();
         }
@@ -404,59 +410,82 @@ namespace CAS.UI.UIControls.PurchaseControls
         private void ToolStripMenuItemCloseClick(object sender, EventArgs e)
         {
 	        var selected = _directivesViewer.SelectedItems.ToArray();
-			foreach (var rfq in selected)
-			{
-				if (rfq.Status == WorkPackageStatus.Closed)
-				{
-					MessageBox.Show("Initional Order " + rfq.Title + " is already closed.",
-									(string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
-									MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-					continue;
+
+	        try
+	        {
+		        foreach (var rfq in selected)
+		        {
+			        if (rfq.Status == WorkPackageStatus.Closed)
+			        {
+				        MessageBox.Show("Initional Order " + rfq.Title + " is already closed.",
+					        (string) new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
+					        MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+				        continue;
+			        }
+
+					rfq.Status = WorkPackageStatus.Closed;
+					rfq.ClosingDate = DateTime.Now;
+					rfq.CloseByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
+					rfq.ClosedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
+					GlobalObjects.CasEnvironment.NewKeeper.Save(rfq);
+
+					//var initial = _directivesViewer.SelectedItem;
+					//      var quatation = new RequestForQuotation
+					//      {
+					//       Parent = initial,
+					//       ParentType = initial.SmartCoreObjectType,
+					//       Title = initial.Title,
+					//       Description = initial.Description,
+					//       OpeningDate = initial.OpeningDate,
+					//       Author = initial.Author,
+					//       Remarks = initial.Remarks,
+					//      };
+
+					//      GlobalObjects.CasEnvironment.NewKeeper.Save(quatation);
+
+					//      var initialRecords =
+					//       GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(
+					//        new Filter("ParentPackageId", initial.ItemId));
+					//      var ids = initialRecords.Select(i => i.ProductId);
+					//      if (ids.Count() > 0)
+					//      {
+					//       var product =
+					//        GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, Product>(
+					//	        new Filter("ItemId", ids));
+					//       foreach (var addedInitialOrderRecord in initialRecords)
+					//        addedInitialOrderRecord.Product =
+					//	        product.FirstOrDefault(i => i.ItemId == addedInitialOrderRecord.ProductId);
+					//      }
+
+					//      foreach (var record in initialRecords)
+					//      {
+					//       var newquatationRecord =
+					//        new RequestForQuotationRecord(quatation.ItemId, record.Product, record.Quantity);
+					//       newquatationRecord.Priority = record.Priority;
+					//       newquatationRecord.Measure = record.Measure;
+					//       newquatationRecord.DeferredCategory = record.DeferredCategory;
+					//       newquatationRecord.CostCondition = record.CostCondition;
+					//       newquatationRecord.DestinationObjectType = record.DestinationObjectType;
+					//       newquatationRecord.DestinationObjectId = record.DestinationObjectId;
+					//       newquatationRecord.InitialReason = record.InitialReason;
+					//       newquatationRecord.Remarks = record.Remarks;
+					//       newquatationRecord.LifeLimit = new Lifelength(record.LifeLimit);
+					//       newquatationRecord.LifeLimitNotify = new Lifelength(record.LifeLimitNotify);
+
+					//       GlobalObjects.CasEnvironment.Keeper.Save(newquatationRecord);
+					//      }
 				}
-				
-				var quotation = new RequestForQuotation
-				{
-					CloseByUser = "",
-					PublishedByUser = "",
-					Author = GlobalObjects.CasEnvironment.IdentityUser.ToString(),
-					ClosedById = -1,
-					PublishedById = -1,
-					OpeningDate = DateTime.Now,
-					Title = rfq.Title,
-					ParentId = rfq.ItemId,
-					ParentType = rfq.SmartCoreObjectType,
-					Status = WorkPackageStatus.Opened,
-				};
-				GlobalObjects.CasEnvironment.Keeper.Save(quotation);
-
-				var records = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(new Filter("ParentPackageId", rfq.ItemId));
-				var ids = records.Select(i => i.ProductId);
-				if (records.Count() > 0)
-				{
-					var products = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, Product>(new Filter("ItemId", FilterType.In, ids), loadChild: true).ToList();
-					foreach (var record in records)
-					{
-						record.Product = products.FirstOrDefault(i => i.ItemId == record.ProductId);
-						var newQuatationRecord = new RequestForQuotationRecord(quotation.ItemId, record.Product, record.Quantity)
-						{
-							DeferredCategory = record.DeferredCategory,
-							DestinationObjectId = record.DestinationObjectId,
-							DestinationObjectType = record.DestinationObjectType,
-							LifeLimit = record.LifeLimit,
-							LifeLimitNotify = record.LifeLimitNotify,
-							Remarks = record.Remarks,
-							InitialReason = record.InitialReason,
-							Measure = record.Measure,
-							CostCondition = record.CostCondition,
-						};
-						GlobalObjects.CasEnvironment.Keeper.Save(newQuatationRecord);
-					}
-				}
-				
-
-				
-
 			}
+			catch (Exception ex)
+			{
+				Program.Provider.Logger.Log("Error while saving data", ex);
+				throw;
+			}
+
+			MessageBox.Show("Saving was successful", "Message infomation", MessageBoxButtons.OK,
+		        MessageBoxIcon.Information);
+        
+
 			AnimatedThreadWorker.RunWorkerAsync();
 		}
 

@@ -1010,7 +1010,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.labelQOTitle.Name = "labelQOTitle";
 			this.labelQOTitle.Size = new System.Drawing.Size(87, 27);
 			this.labelQOTitle.TabIndex = 3;
-			this.labelQOTitle.Text = "№:";
+			this.labelQOTitle.Text = "Title:";
 			this.labelQOTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// buttonOk

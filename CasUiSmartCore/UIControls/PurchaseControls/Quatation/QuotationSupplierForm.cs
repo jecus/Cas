@@ -15,6 +15,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		private readonly List<Supplier> _suppliers;
 		private readonly List<RequestForQuotationRecord> _selectedItems;
 		private List<SupplierPrice> _prices = new List<SupplierPrice>();
+		private RequestForQuotationRecord _selectedItem;
 
 		#endregion
 
@@ -32,12 +33,26 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			supplierListView.SetItemsArray(suppliers.ToArray());
 		}
 
+		public QuotationSupplierForm(List<Supplier> suppliers, RequestForQuotationRecord selectedItem) : this()
+		{
+			_suppliers = suppliers;
+			_selectedItem = selectedItem;
+
+			foreach (var price in selectedItem.SupplierPrice)
+				price.Supplier = _suppliers.FirstOrDefault(i => i.ItemId == price.SupplierId);
+
+			_prices.AddRange(selectedItem.SupplierPrice);
+			if(_prices.Count > 0)
+				supplierListView1.SetItemsArray(_prices.ToArray());
+			supplierListView.SetItemsArray(suppliers.ToArray());
+		}
+
 		#endregion
 
 		private void ButtonAdd_Click(object sender, System.EventArgs e)
 		{
 			foreach (var supplier in supplierListView.SelectedItems.ToArray())
-				_prices.Add(new SupplierPrice(){Supplier = supplier});
+				_prices.Add(new SupplierPrice(){Supplier = supplier, SupplierId = supplier.ItemId});
 
 			supplierListView1.SetItemsArray(_prices.ToArray());
 		}
@@ -99,8 +114,21 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 				return;
 			}
 
-			foreach (var record in _selectedItems)
-				record.SupplierPrice.AddRange(_prices);
+			if (_selectedItem != null)
+			{
+				_selectedItem.SupplierPrice.Clear();
+				_selectedItem.SupplierPrice.AddRange(_prices);
+			}
+			else
+			{
+				foreach (var record in _selectedItems)
+				{
+					record.SupplierPrice.Clear();
+					record.SupplierPrice.AddRange(_prices);
+				}
+			}
+
+			
 		}
 
 		private void textBoxSearchPartNumber_TextChanged(object sender, System.EventArgs e)
