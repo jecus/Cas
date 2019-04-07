@@ -53,7 +53,10 @@ namespace CAS.UI.UIControls.StoresControls
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Part. No" };
             ColumnHeaderList.Add(columnHeader);
 
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.3f), Text = "Description" };
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Alt Part. No" };
+            ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.3f), Text = "Description" };
             ColumnHeaderList.Add(columnHeader);
             //4
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Serial No" };
@@ -297,6 +300,7 @@ namespace CAS.UI.UIControls.StoresControls
                        warranty = Lifelength.Null, repeatInterval = Lifelength.Null;
 	        string partNumber = "",
                    description = "",
+                   altPartNumber = "",
                    serialNumber = "",
                    code = "",
                    classString = "",
@@ -365,6 +369,7 @@ namespace CAS.UI.UIControls.StoresControls
                 remains = componentItem.Remains;
                 ata = componentItem.Product?.ATAChapter ?? componentItem.ATAChapter;
 				partNumber = componentItem.Product?.PartNumber ?? componentItem.PartNumber;
+				altPartNumber = componentItem.Product?.AltPartNumber ?? componentItem.ALTPartNumber;
                 description = componentItem.Description;
                 serialNumber = componentItem.SerialNumber;
                 code = componentItem.Product != null ? componentItem.Product.Code :componentItem.Code;
@@ -485,6 +490,7 @@ namespace CAS.UI.UIControls.StoresControls
             subItems.Add(new ListViewItem.ListViewSubItem { Text = store?.ToString() ?? "N/A", Tag = store } ); 
             subItems.Add(new ListViewItem.ListViewSubItem { Text = ata.ToString(), Tag = ata } ); 
             subItems.Add(new ListViewItem.ListViewSubItem { Text = partNumber, Tag = partNumber } );
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = altPartNumber, Tag = altPartNumber } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = description, Tag = description } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = serialNumber, Tag = serialNumber } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = code, Tag = code });
