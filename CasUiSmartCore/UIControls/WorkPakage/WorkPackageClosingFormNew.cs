@@ -10,6 +10,7 @@ using CAS.UI.UIControls.StoresControls;
 using CASTerms;
 using EFCore.DTO.General;
 using EFCore.Filter;
+using MetroFramework.Forms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
@@ -27,7 +28,7 @@ namespace CAS.UI.UIControls.WorkPakage
 {
     ///<summary>
     ///</summary>
-    public partial class WorkPackageClosingFormNew : Form
+    public partial class WorkPackageClosingFormNew : MetroForm
     {
         #region Fields
         
