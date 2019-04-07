@@ -435,3 +435,12 @@ if not exists ( select  *
 	alter table dbo.RequestsForQuotation
     add Number nvarchar(128)null 
 GO
+
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('Dictionaries.AccessoryDescriptions')
+                    and c.name = 'AltPartNumber' ) 
+
+	alter table Dictionaries.AccessoryDescriptions
+    add AltPartNumber nvarchar(256)null 
+GO

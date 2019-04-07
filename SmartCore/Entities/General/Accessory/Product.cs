@@ -147,6 +147,9 @@ namespace SmartCore.Entities.General.Accessory
 		}
 		#endregion
 
+		[TableColumn("AltPartNumber")]
+		public string AltPartNumber { get; set; }
+
 		#region public String SerialNumber { get; set; }
 
 		private string _serialNumber;

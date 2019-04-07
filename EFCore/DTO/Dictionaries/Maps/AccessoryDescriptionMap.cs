@@ -28,6 +28,11 @@ namespace EFCore.DTO.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("PartNumber");
 
+			Property(i => i.AltPartNumber)
+				.HasMaxLength(256)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("AltPartNumber");
+
 			Property(i => i.StandartId)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("Standart");
