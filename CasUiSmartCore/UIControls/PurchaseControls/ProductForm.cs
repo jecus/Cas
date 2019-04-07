@@ -144,6 +144,7 @@ namespace CAS.UI.UIControls.PurchaseControls
             comboBoxAccessoryStandard.SelectedItem = _currentItem.Standart;
             textBoxName.Text = _currentItem.Name;
             textBoxPartNumber.Text = _currentItem.PartNumber;
+            textBoxAltPartNum.Text = _currentItem.AltPartNumber;
             textBoxProductCode.Text = _currentItem.Code;
             textBoxDescription.Text = _currentItem.Description;
             textBoxDescRus.Text = _currentItem.DescRus;
@@ -259,6 +260,7 @@ namespace CAS.UI.UIControls.PurchaseControls
             if (comboBoxMeasure.SelectedItem != _currentItem.Measure
                 || comboBoxAccessoryStandard.SelectedItem != _currentItem.Standart
                 || textBoxPartNumber.Text != _currentItem.PartNumber
+                || textBoxAltPartNum.Text != _currentItem.AltPartNumber
                 || textBoxProductCode.Text != _currentItem.Code
                 || textBoxDescription.Text != _currentItem.Description
                 || textBoxDescRus.Text != _currentItem.DescRus
@@ -412,6 +414,7 @@ namespace CAS.UI.UIControls.PurchaseControls
                 }
                     _currentItem.GoodsClass = comboBoxDetailClass.SelectedItem as GoodsClass;
                     _currentItem.PartNumber = textBoxPartNumber.Text;
+                    _currentItem.AltPartNumber = textBoxAltPartNum.Text;
                     _currentItem.Description = textBoxDescription.Text;
                     _currentItem.Manufacturer = textBoxManufacturer.Text;
                     _currentItem.Standart = goodStandart;
