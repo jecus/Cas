@@ -59,6 +59,9 @@ namespace CAS.UI.UIControls.PurchaseControls
             var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Name" };
             ColumnHeaderList.Add(columnHeader);
 
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Alt Part Number" };
+            ColumnHeaderList.Add(columnHeader);
+
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Part Number" };
             ColumnHeaderList.Add(columnHeader);
 
@@ -97,6 +100,7 @@ namespace CAS.UI.UIControls.PurchaseControls
             var subItems = new List<ListViewItem.ListViewSubItem>();
 
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Name, Tag = item.Name });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.AltPartNumber, Tag = item.AltPartNumber });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.PartNumber, Tag = item.PartNumber });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Standart?.ToString(), Tag = item.Standart });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Description, Tag = item.Description });
