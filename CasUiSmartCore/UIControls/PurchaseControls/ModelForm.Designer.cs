@@ -69,6 +69,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxHts = new System.Windows.Forms.TextBox();
 			this.labelDoc = new System.Windows.Forms.Label();
 			this.documentControl1 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
+			this.label3 = new System.Windows.Forms.Label();
+			this.textBoxAltPartNum = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// labelName
@@ -343,7 +345,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// 
 			this.labelRemarks.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelRemarks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelRemarks.Location = new System.Drawing.Point(9, 169);
+			this.labelRemarks.Location = new System.Drawing.Point(8, 199);
 			this.labelRemarks.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.labelRemarks.Name = "labelRemarks";
 			this.labelRemarks.Size = new System.Drawing.Size(100, 25);
@@ -356,7 +358,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxRemarks.BackColor = System.Drawing.Color.White;
 			this.textBoxRemarks.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.textBoxRemarks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxRemarks.Location = new System.Drawing.Point(125, 171);
+			this.textBoxRemarks.Location = new System.Drawing.Point(124, 201);
 			this.textBoxRemarks.Margin = new System.Windows.Forms.Padding(4);
 			this.textBoxRemarks.MaxLength = 100;
 			this.textBoxRemarks.Multiline = true;
@@ -487,7 +489,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// 
 			this.label2.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.label2.Location = new System.Drawing.Point(6, 268);
+			this.label2.Location = new System.Drawing.Point(5, 298);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(101, 25);
 			this.label2.TabIndex = 156;
@@ -499,7 +501,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxHts.BackColor = System.Drawing.Color.White;
 			this.textBoxHts.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.textBoxHts.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxHts.Location = new System.Drawing.Point(124, 270);
+			this.textBoxHts.Location = new System.Drawing.Point(123, 300);
 			this.textBoxHts.MaxLength = 128;
 			this.textBoxHts.Name = "textBoxHts";
 			this.textBoxHts.Size = new System.Drawing.Size(313, 22);
@@ -524,8 +526,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.documentControl1.Name = "documentControl1";
 			this.documentControl1.Size = new System.Drawing.Size(314, 41);
 			this.documentControl1.TabIndex = 160;
-
-
 			this.panelMain.Controls.Add(textBoxHts);
 			this.panelMain.Controls.Add(label2);
 			this.panelMain.Controls.Add(labelName);
@@ -565,6 +565,31 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.panelMain.Controls.Add(dataGridViewControlSuppliers);
 			this.panelMain.Controls.Add(fileControlImage);
 			this.panelMain.Controls.Add(documentControl1);
+			this.panelMain.Controls.Add(label3);
+			this.panelMain.Controls.Add(textBoxAltPartNum);
+
+			// 
+			// label3
+			// 
+			this.label3.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.label3.Location = new System.Drawing.Point(8, 169);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(101, 25);
+			this.label3.TabIndex = 161;
+			this.label3.Text = "Alt Part Num:";
+			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// textBoxAltPartNum
+			// 
+			this.textBoxAltPartNum.BackColor = System.Drawing.Color.White;
+			this.textBoxAltPartNum.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.textBoxAltPartNum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxAltPartNum.Location = new System.Drawing.Point(124, 172);
+			this.textBoxAltPartNum.MaxLength = 128;
+			this.textBoxAltPartNum.Name = "textBoxAltPartNum";
+			this.textBoxAltPartNum.Size = new System.Drawing.Size(312, 22);
+			this.textBoxAltPartNum.TabIndex = 162;
 			// 
 			// ModelForm
 			// 
@@ -621,5 +646,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private System.Windows.Forms.TextBox textBoxHts;
         private System.Windows.Forms.Label labelDoc;
 		private DocumentationControls.DocumentControl documentControl1;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.TextBox textBoxAltPartNum;
 	}
 }

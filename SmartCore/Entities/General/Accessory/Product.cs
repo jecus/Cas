@@ -47,7 +47,7 @@ namespace SmartCore.Entities.General.Accessory
 			}, Order = 10)]
         [ListViewData(0.15f, "Class")]
         [NotNull]
-        [Filter("Class:", Order = 5)]
+        [Filter("Class:", Order = 6)]
 
         public GoodsClass GoodsClass
         {
@@ -87,7 +87,7 @@ namespace SmartCore.Entities.General.Accessory
         /// </summary>
         [TableColumn("Standart"), ListViewData(0.12f, "Standard", 11)]
         [FormControl(200, "Standard:", Order = 3)]
-        [Filter("Standard:",Order = 7)]
+        [Filter("Standard:",Order = 8)]
         [Child(false)]
         public GoodStandart Standart
         {
@@ -105,7 +105,7 @@ namespace SmartCore.Entities.General.Accessory
         /// </summary>
         [TableColumn("Model"), ListViewData(0.15f, "Name", 1)]
         [FormControl(250, "Name:", "Standart", "Name", true, Order = 1)]
-        [Filter("Name:", Order = 3)]
+        [Filter("Name:", Order = 4)]
         [NotNull]
         public String Name
         {
@@ -148,6 +148,8 @@ namespace SmartCore.Entities.General.Accessory
 		#endregion
 
 		[TableColumn("AltPartNumber")]
+		[ListViewData(0.12f, "Alt Part Number", 14)]
+		[Filter("Alt Part Number:", Order = 2)]
 		public string AltPartNumber { get; set; }
 
 		#region public String SerialNumber { get; set; }
@@ -194,7 +196,7 @@ namespace SmartCore.Entities.General.Accessory
         /// <summary>
         /// 
         /// </summary>
-        [TableColumn("Code"), ListViewData(0.12f, "Product Code", 14)]
+        [TableColumn("Code"), ListViewData(0.12f, "Product Code", 15)]
         [FormControl(200, "Product Code:", Order = 4)]
         public String Code { get; set; }
 
@@ -206,9 +208,9 @@ namespace SmartCore.Entities.General.Accessory
         /// <summary>
         /// Описание агрегата
         /// </summary>
-        [TableColumn("Description"), ListViewData(0.3f, "Description", 15)]
+        [TableColumn("Description"), ListViewData(0.3f, "Description", 16)]
         [FormControl(250, "Description:", 8, "Standart", "Description", true, Order = 19)]
-        [Filter("Description:", Order = 2)]
+        [Filter("Description:", Order = 3)]
         public String Description
         {
             get { return _standart != null ? _standart.Description : _description; }
@@ -237,9 +239,9 @@ namespace SmartCore.Entities.General.Accessory
         /// <summary>
         /// Производитель
         /// </summary>
-        [TableColumn("Manufacturer"), ListViewData(0.12f, "Manufacturer", 16)]
+        [TableColumn("Manufacturer"), ListViewData(0.12f, "Manufacturer", 17)]
         [FormControl(250, "Manufacturer", Order = 8)]
-        [Filter("Manufacturer:", Order = 4)]
+        [Filter("Manufacturer:", Order = 5)]
         [NotNull]
         public String Manufacturer
         {
@@ -415,9 +417,9 @@ namespace SmartCore.Entities.General.Accessory
         /// <summary>
         /// Поставщики данной детали
         /// </summary>
-        [ListViewData(0.12f, "Suppliers", 17)]
+        [ListViewData(0.12f, "Suppliers", 18)]
         [Child(typeof(KitSuppliersRelation), "KitId", "ParentTypeId", 1005, "SupplierId")]
-        [Filter("Supplier:", Order = 6)]
+        [Filter("Supplier:", Order = 7)]
         public SupplierCollection Suppliers
         {
             get { return _suppliers ?? (_suppliers = new SupplierCollection()); }
