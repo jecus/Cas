@@ -102,6 +102,8 @@
 			this.comboBoxSupplier = new System.Windows.Forms.ComboBox();
 			this.dateTimePickerReciveDate = new System.Windows.Forms.DateTimePicker();
 			this.label2 = new System.Windows.Forms.Label();
+			this.labelAltpartNum = new System.Windows.Forms.Label();
+			this.textBoxAltPartNum = new System.Windows.Forms.TextBox();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -199,7 +201,7 @@
 			this.labelBatchNumber.AutoSize = true;
 			this.labelBatchNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelBatchNumber.ForeColor = System.Drawing.Color.Black;
-			this.labelBatchNumber.Location = new System.Drawing.Point(12, 142);
+			this.labelBatchNumber.Location = new System.Drawing.Point(12, 168);
 			this.labelBatchNumber.Name = "labelBatchNumber";
 			this.labelBatchNumber.Size = new System.Drawing.Size(78, 13);
 			this.labelBatchNumber.TabIndex = 92;
@@ -211,7 +213,7 @@
 			this.textBoxBatchNumber.BackColor = System.Drawing.Color.White;
 			this.textBoxBatchNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.textBoxBatchNumber.ForeColor = System.Drawing.Color.Black;
-			this.textBoxBatchNumber.Location = new System.Drawing.Point(108, 139);
+			this.textBoxBatchNumber.Location = new System.Drawing.Point(108, 165);
 			this.textBoxBatchNumber.MaxLength = 128;
 			this.textBoxBatchNumber.Name = "textBoxBatchNumber";
 			this.textBoxBatchNumber.Size = new System.Drawing.Size(200, 20);
@@ -222,7 +224,7 @@
 			this.labelIdNumber.AutoSize = true;
 			this.labelIdNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelIdNumber.ForeColor = System.Drawing.Color.Black;
-			this.labelIdNumber.Location = new System.Drawing.Point(12, 168);
+			this.labelIdNumber.Location = new System.Drawing.Point(12, 194);
 			this.labelIdNumber.Name = "labelIdNumber";
 			this.labelIdNumber.Size = new System.Drawing.Size(61, 13);
 			this.labelIdNumber.TabIndex = 94;
@@ -234,7 +236,7 @@
 			this.textBoxIdNumber.BackColor = System.Drawing.Color.White;
 			this.textBoxIdNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.textBoxIdNumber.ForeColor = System.Drawing.Color.Black;
-			this.textBoxIdNumber.Location = new System.Drawing.Point(108, 165);
+			this.textBoxIdNumber.Location = new System.Drawing.Point(108, 191);
 			this.textBoxIdNumber.MaxLength = 128;
 			this.textBoxIdNumber.Name = "textBoxIdNumber";
 			this.textBoxIdNumber.Size = new System.Drawing.Size(200, 20);
@@ -301,7 +303,7 @@
 			this.labelSerialNumber.AutoSize = true;
 			this.labelSerialNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelSerialNumber.ForeColor = System.Drawing.Color.Black;
-			this.labelSerialNumber.Location = new System.Drawing.Point(12, 116);
+			this.labelSerialNumber.Location = new System.Drawing.Point(12, 142);
 			this.labelSerialNumber.Name = "labelSerialNumber";
 			this.labelSerialNumber.Size = new System.Drawing.Size(76, 13);
 			this.labelSerialNumber.TabIndex = 77;
@@ -313,7 +315,7 @@
 			this.textBoxSerialNumber.BackColor = System.Drawing.Color.White;
 			this.textBoxSerialNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.textBoxSerialNumber.ForeColor = System.Drawing.Color.Black;
-			this.textBoxSerialNumber.Location = new System.Drawing.Point(108, 113);
+			this.textBoxSerialNumber.Location = new System.Drawing.Point(108, 139);
 			this.textBoxSerialNumber.MaxLength = 128;
 			this.textBoxSerialNumber.Name = "textBoxSerialNumber";
 			this.textBoxSerialNumber.Size = new System.Drawing.Size(200, 20);
@@ -347,7 +349,7 @@
 			this.labelDescription.AutoSize = true;
 			this.labelDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelDescription.ForeColor = System.Drawing.Color.Black;
-			this.labelDescription.Location = new System.Drawing.Point(12, 252);
+			this.labelDescription.Location = new System.Drawing.Point(12, 278);
 			this.labelDescription.Name = "labelDescription";
 			this.labelDescription.Size = new System.Drawing.Size(75, 13);
 			this.labelDescription.TabIndex = 81;
@@ -359,7 +361,7 @@
 			this.textBoxDescription.BackColor = System.Drawing.Color.White;
 			this.textBoxDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.textBoxDescription.ForeColor = System.Drawing.Color.Black;
-			this.textBoxDescription.Location = new System.Drawing.Point(106, 250);
+			this.textBoxDescription.Location = new System.Drawing.Point(106, 276);
 			this.textBoxDescription.MaxLength = 256;
 			this.textBoxDescription.Multiline = true;
 			this.textBoxDescription.Name = "textBoxDescription";
@@ -420,7 +422,7 @@
 			this.textBoxRemarks.Multiline = true;
 			this.textBoxRemarks.Name = "textBoxRemarks";
 			this.textBoxRemarks.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxRemarks.Size = new System.Drawing.Size(201, 81);
+			this.textBoxRemarks.Size = new System.Drawing.Size(201, 109);
 			this.textBoxRemarks.TabIndex = 11;
 			// 
 			// labelProduct
@@ -459,7 +461,7 @@
 			this.labelManufacturer.AutoSize = true;
 			this.labelManufacturer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelManufacturer.ForeColor = System.Drawing.Color.Black;
-			this.labelManufacturer.Location = new System.Drawing.Point(12, 225);
+			this.labelManufacturer.Location = new System.Drawing.Point(12, 251);
 			this.labelManufacturer.Name = "labelManufacturer";
 			this.labelManufacturer.Size = new System.Drawing.Size(73, 13);
 			this.labelManufacturer.TabIndex = 118;
@@ -471,7 +473,7 @@
 			this.textBoxManufacturer.BackColor = System.Drawing.Color.White;
 			this.textBoxManufacturer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.textBoxManufacturer.ForeColor = System.Drawing.Color.Black;
-			this.textBoxManufacturer.Location = new System.Drawing.Point(108, 222);
+			this.textBoxManufacturer.Location = new System.Drawing.Point(108, 248);
 			this.textBoxManufacturer.MaxLength = 128;
 			this.textBoxManufacturer.Name = "textBoxManufacturer";
 			this.textBoxManufacturer.Size = new System.Drawing.Size(200, 20);
@@ -482,7 +484,7 @@
 			this.labelProductCode.AutoSize = true;
 			this.labelProductCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelProductCode.ForeColor = System.Drawing.Color.Black;
-			this.labelProductCode.Location = new System.Drawing.Point(12, 197);
+			this.labelProductCode.Location = new System.Drawing.Point(12, 223);
 			this.labelProductCode.Name = "labelProductCode";
 			this.labelProductCode.Size = new System.Drawing.Size(35, 13);
 			this.labelProductCode.TabIndex = 120;
@@ -494,7 +496,7 @@
 			this.textBoxProductCode.BackColor = System.Drawing.Color.White;
 			this.textBoxProductCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.textBoxProductCode.ForeColor = System.Drawing.Color.Black;
-			this.textBoxProductCode.Location = new System.Drawing.Point(108, 195);
+			this.textBoxProductCode.Location = new System.Drawing.Point(108, 221);
 			this.textBoxProductCode.MaxLength = 128;
 			this.textBoxProductCode.Name = "textBoxProductCode";
 			this.textBoxProductCode.Size = new System.Drawing.Size(200, 20);
@@ -604,7 +606,7 @@
 			this.textBoxDiscrepancy.Multiline = true;
 			this.textBoxDiscrepancy.Name = "textBoxDiscrepancy";
 			this.textBoxDiscrepancy.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxDiscrepancy.Size = new System.Drawing.Size(201, 81);
+			this.textBoxDiscrepancy.Size = new System.Drawing.Size(201, 110);
 			this.textBoxDiscrepancy.TabIndex = 132;
 			// 
 			// labelFaaForm
@@ -612,7 +614,7 @@
 			this.labelFaaForm.AutoSize = true;
 			this.labelFaaForm.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelFaaForm.ForeColor = System.Drawing.Color.Black;
-			this.labelFaaForm.Location = new System.Drawing.Point(9, 351);
+			this.labelFaaForm.Location = new System.Drawing.Point(9, 377);
 			this.labelFaaForm.Name = "labelFaaForm";
 			this.labelFaaForm.Size = new System.Drawing.Size(56, 13);
 			this.labelFaaForm.TabIndex = 135;
@@ -624,7 +626,7 @@
 			this.label4.AutoSize = true;
 			this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label4.ForeColor = System.Drawing.Color.Black;
-			this.label4.Location = new System.Drawing.Point(314, 351);
+			this.label4.Location = new System.Drawing.Point(313, 377);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(77, 13);
 			this.label4.TabIndex = 137;
@@ -636,7 +638,7 @@
 			this.labelIamge.AutoSize = true;
 			this.labelIamge.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelIamge.ForeColor = System.Drawing.Color.Black;
-			this.labelIamge.Location = new System.Drawing.Point(609, 351);
+			this.labelIamge.Location = new System.Drawing.Point(608, 377);
 			this.labelIamge.Name = "labelIamge";
 			this.labelIamge.Size = new System.Drawing.Size(39, 13);
 			this.labelIamge.TabIndex = 140;
@@ -652,7 +654,7 @@
 			this.fileControlImage.Filter = null;
 			this.fileControlImage.Icon = global::CAS.UI.Properties.Resources.ImageIcon_Small;
 			this.fileControlImage.IconNotEnabled = global::CAS.UI.Properties.Resources.ImageIcon_Small_Gray;
-			this.fileControlImage.Location = new System.Drawing.Point(697, 337);
+			this.fileControlImage.Location = new System.Drawing.Point(696, 363);
 			this.fileControlImage.MaximumSize = new System.Drawing.Size(350, 100);
 			this.fileControlImage.Name = "fileControlImage";
 			this.fileControlImage.ShowLinkLabelBrowse = true;
@@ -668,7 +670,7 @@
 			this.fileControlShipping.Filter = null;
 			this.fileControlShipping.Icon = global::CAS.UI.Properties.Resources.PDFIconSmall;
 			this.fileControlShipping.IconNotEnabled = global::CAS.UI.Properties.Resources.PDFIconSmall_gray;
-			this.fileControlShipping.Location = new System.Drawing.Point(400, 337);
+			this.fileControlShipping.Location = new System.Drawing.Point(399, 363);
 			this.fileControlShipping.MaximumSize = new System.Drawing.Size(350, 100);
 			this.fileControlShipping.Name = "fileControlShipping";
 			this.fileControlShipping.ShowLinkLabelBrowse = true;
@@ -684,7 +686,7 @@
 			this.fileControlFaaForm.Filter = null;
 			this.fileControlFaaForm.Icon = global::CAS.UI.Properties.Resources.PDFIconSmall;
 			this.fileControlFaaForm.IconNotEnabled = global::CAS.UI.Properties.Resources.PDFIconSmall_gray;
-			this.fileControlFaaForm.Location = new System.Drawing.Point(108, 337);
+			this.fileControlFaaForm.Location = new System.Drawing.Point(108, 363);
 			this.fileControlFaaForm.MaximumSize = new System.Drawing.Size(350, 100);
 			this.fileControlFaaForm.Name = "fileControlFaaForm";
 			this.fileControlFaaForm.ShowLinkLabelBrowse = true;
@@ -947,13 +949,38 @@
 			this.label2.Text = "ReceivedFrom:";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// labelAltpartNum
+			// 
+			this.labelAltpartNum.AutoSize = true;
+			this.labelAltpartNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelAltpartNum.ForeColor = System.Drawing.Color.Black;
+			this.labelAltpartNum.Location = new System.Drawing.Point(12, 116);
+			this.labelAltpartNum.Name = "labelAltpartNum";
+			this.labelAltpartNum.Size = new System.Drawing.Size(82, 13);
+			this.labelAltpartNum.TabIndex = 153;
+			this.labelAltpartNum.Text = "Alt Part Num:";
+			this.labelAltpartNum.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// textBoxAltPartNum
+			// 
+			this.textBoxAltPartNum.BackColor = System.Drawing.Color.White;
+			this.textBoxAltPartNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.textBoxAltPartNum.ForeColor = System.Drawing.Color.Black;
+			this.textBoxAltPartNum.Location = new System.Drawing.Point(108, 113);
+			this.textBoxAltPartNum.MaxLength = 128;
+			this.textBoxAltPartNum.Name = "textBoxAltPartNum";
+			this.textBoxAltPartNum.Size = new System.Drawing.Size(200, 20);
+			this.textBoxAltPartNum.TabIndex = 152;
+			// 
 			// ConsumablePartAndKitForm
 			// 
 			this.AcceptButton = this.buttonOK;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.buttonCancel;
-			this.ClientSize = new System.Drawing.Size(908, 688);
+			this.ClientSize = new System.Drawing.Size(908, 691);
+			this.Controls.Add(this.labelAltpartNum);
+			this.Controls.Add(this.textBoxAltPartNum);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.dateTimePickerReciveDate);
 			this.Controls.Add(this.comboBoxSupplier);
@@ -1098,5 +1125,7 @@
 		private System.Windows.Forms.ComboBox comboBoxSupplier;
 		private System.Windows.Forms.DateTimePicker dateTimePickerReciveDate;
 		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label labelAltpartNum;
+		private System.Windows.Forms.TextBox textBoxAltPartNum;
 	}
 }
