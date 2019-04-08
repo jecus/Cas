@@ -304,13 +304,19 @@ namespace CAS.UI.UIControls.DocumentationControls
 		{
 			if(_parent == null) return;
 
-			if (_parent is DirectiveRecord || _parent is Component || _parent is ComponentDirective || _parent is WorkPackage)
+			if (_parent is DirectiveRecord || _parent is Component || _parent is ComponentDirective)
 			{
 				comboBoxDocumentType.Enabled = false;
 				comboBoxSubType.Enabled = false;
 				textBoxContractNumber.Enabled = false;
 				textBoxDescription.Enabled = false;
 				checkBoxClosed.Enabled = false;
+			}
+			else if(_parent is WorkPackage)
+			{
+				comboBoxDocumentType.Enabled = false;
+				comboBoxSubType.Enabled = false;
+				textBoxContractNumber.Enabled = false;
 			}
 			else if (_parent is SpecialistTraining)
 			{

@@ -238,8 +238,8 @@ namespace CAS.UI.UIControls.WorkPakage
 				DocType = DocumentType.TechnicalRecords,
 				DocumentSubType = docSubType,
 				IsClosed = true,
-				ContractNumber = $"{_workPackage.Title}",
-				Description = _workPackage.Description,
+				ContractNumber = $"{_workPackage.Number}",
+				Description = _workPackage.Title,
 				ParentAircraftId = _workPackage.ParentId
 			};
 		}

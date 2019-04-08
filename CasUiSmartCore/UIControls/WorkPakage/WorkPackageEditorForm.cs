@@ -27,7 +27,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			if(currentWp == null)
 				return;
 
-			DocumentControls.AddRange(new[] { documentControl1 /*,documentControl2, documentControl3, documentControl4, documentControl5, documentControl6*/ });
+			DocumentControls.AddRange(new[] { documentControl1, documentControl2, documentControl3, documentControl4, documentControl5, documentControl6 });
 			_currentWp = currentWp;
 			UpdateInformation();
 		}
@@ -82,8 +82,8 @@ namespace CAS.UI.UIControls.WorkPakage
 				DocType = DocumentType.TechnicalRecords,
 				DocumentSubType = docSubType,
 				IsClosed = true,
-				ContractNumber = $"{_currentWp.Title}",
-				Description = _currentWp.Description,
+				ContractNumber = $"{_currentWp.Number}",
+				Description = _currentWp.Title,
 				ParentAircraftId = _currentWp.ParentId
 			};
 
