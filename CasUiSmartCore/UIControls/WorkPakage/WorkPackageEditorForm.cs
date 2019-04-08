@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.WorkPackage;
 
 namespace CAS.UI.UIControls.WorkPakage
 {
-	public partial class WorkPackageEditorForm : Form
+	public partial class WorkPackageEditorForm : MetroForm
 	{
 		private readonly WorkPackage _currentWp;
 		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
