@@ -2246,7 +2246,7 @@ namespace SmartCore.WorkPackages
 
 			foreach (var wp in wps)
 			{
-				wp.ClosingDocument = documents.FirstOrDefault(d => d.ParentId == wp.ItemId);
+				wp.ClosingDocument.AddRange(documents.Where(d => d.ParentId == wp.ItemId));
 
 				//Обратная ссылка на родительский самолет
 				wp.Aircraft = _aircraftsCore.GetAircraftById(wp.ParentId);

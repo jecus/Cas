@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
@@ -11,6 +12,7 @@ namespace CAS.UI.UIControls.WorkPakage
 	public partial class WorkPackageEditorForm : Form
 	{
 		private readonly WorkPackage _currentWp;
+		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
 
 		#region Costructor
 
@@ -24,6 +26,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			if(currentWp == null)
 				return;
 
+			DocumentControls.AddRange(new[] { documentControl1 /*,documentControl2, documentControl3, documentControl4, documentControl5, documentControl6*/ });
 			_currentWp = currentWp;
 			UpdateInformation();
 		}
@@ -54,10 +57,14 @@ namespace CAS.UI.UIControls.WorkPakage
 			textBoxRevision.Text = _currentWp.Revision;
 			textBoxStation.Text = _currentWp.Station;
 
-			documentControl1.CurrentDocument = _currentWp.ClosingDocument;
-			documentControl1.Added += DocumentControl1_Added;
+			for (int i = 0; i < _currentWp.ClosingDocument.Count; i++)
+			{
+				var control = DocumentControls[i];
+				control.CurrentDocument = _currentWp.ClosingDocument[i];
+				control.Added += DocumentControl1_Added;
+			}
 
-		}
+	}
 
 		#endregion
 
@@ -82,7 +89,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			var form = new DocumentForm(newDocument, false);
 			if (form.ShowDialog() == DialogResult.OK)
 			{
-				_currentWp.ClosingDocument = newDocument;
+				_currentWp.ClosingDocument.Add(newDocument);
 				documentControl1.CurrentDocument = newDocument;
 
 			}

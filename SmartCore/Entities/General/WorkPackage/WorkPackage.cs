@@ -566,6 +566,8 @@ namespace SmartCore.Entities.General.WorkPackage
         #region public CommonCollection<MaintenanceCheckBindTaskRecord> MaintenanceCheckBindTaskRecords { get; }
 
         private CommonCollection<MaintenanceCheckBindTaskRecord> _maintenanceCheckBindTaskRecords;
+        private List<Document> _closingDocument;
+
         /// <summary>
         /// Возвращает массив записей о привязке задач к чекам находящимся в данном рабочем пакете
         /// </summary>
@@ -909,7 +911,11 @@ namespace SmartCore.Entities.General.WorkPackage
 
         #region public Document ClosingDocument { get; set; }
 
-        public Document ClosingDocument { get; set; }
+        public List<Document> ClosingDocument
+        {
+	        get => _closingDocument ?? (_closingDocument = new List<Document>());
+	        set => _closingDocument = value;
+        }
 
         #endregion
 

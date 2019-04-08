@@ -34,6 +34,7 @@ namespace CAS.UI.UIControls.WorkPakage
         
         private readonly WorkPackage _workPackage;
 	    bool checkClosed = false;
+		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
 
         //private List<WorkPackageClosingFormItem> _closingItems;
         
@@ -58,8 +59,9 @@ namespace CAS.UI.UIControls.WorkPakage
             : this()
         {
             _workPackage = workPackage;
+            DocumentControls.AddRange(new []{documentControl1,documentControl2,documentControl3, documentControl4, documentControl5, documentControl6});
 
-            UpdateInformation();
+			UpdateInformation();
         }
 
         #endregion
@@ -199,8 +201,13 @@ namespace CAS.UI.UIControls.WorkPakage
 
             checkBoxSelectAll.CheckedChanged += CheckBoxSelectAllCheckedChanged;
 
-			documentControl1.CurrentDocument = _workPackage.ClosingDocument;
-			documentControl1.Added += DocumentControl1_Added;
+
+            for (int i = 0; i < _workPackage.ClosingDocument.Count; i++)
+            {
+	            var control = DocumentControls[i];
+	            control.CurrentDocument = _workPackage.ClosingDocument[i];
+	            control.Added += DocumentControl1_Added;
+			}
         }
 
 		#endregion
@@ -211,7 +218,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			var form = new DocumentForm(newDocument, false);
 			if (form.ShowDialog() == DialogResult.OK)
 			{
-				_workPackage.ClosingDocument = newDocument;
+				_workPackage.ClosingDocument.Add(newDocument);
 				documentControl1.CurrentDocument = newDocument;
 
 			}
