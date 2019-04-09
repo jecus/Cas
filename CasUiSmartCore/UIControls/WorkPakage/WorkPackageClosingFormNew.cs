@@ -201,12 +201,13 @@ namespace CAS.UI.UIControls.WorkPakage
 
             checkBoxSelectAll.CheckedChanged += CheckBoxSelectAllCheckedChanged;
 
+            foreach (var control in DocumentControls)
+	            control.Added += DocumentControl1_Added;
 
-            for (int i = 0; i < _workPackage.ClosingDocument.Count; i++)
+			for (int i = 0; i < _workPackage.ClosingDocument.Count; i++)
             {
 	            var control = DocumentControls[i];
 	            control.CurrentDocument = _workPackage.ClosingDocument[i];
-	            control.Added += DocumentControl1_Added;
 			}
         }
 
@@ -214,12 +215,13 @@ namespace CAS.UI.UIControls.WorkPakage
 
 		private void DocumentControl1_Added(object sender, EventArgs e)
 		{
+			var control = sender as DocumentControl;
 			var newDocument = CreateNewDocument();
 			var form = new DocumentForm(newDocument, false);
 			if (form.ShowDialog() == DialogResult.OK)
 			{
 				_workPackage.ClosingDocument.Add(newDocument);
-				documentControl1.CurrentDocument = newDocument;
+				control.CurrentDocument = newDocument;
 
 			}
 		}

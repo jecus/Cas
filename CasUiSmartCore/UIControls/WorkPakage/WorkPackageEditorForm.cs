@@ -58,11 +58,14 @@ namespace CAS.UI.UIControls.WorkPakage
 			textBoxRevision.Text = _currentWp.Revision;
 			textBoxStation.Text = _currentWp.Station;
 
+
+			foreach (var control in DocumentControls)
+				control.Added += DocumentControl1_Added;
+
 			for (int i = 0; i < _currentWp.ClosingDocument.Count; i++)
 			{
 				var control = DocumentControls[i];
 				control.CurrentDocument = _currentWp.ClosingDocument[i];
-				control.Added += DocumentControl1_Added;
 			}
 
 	}
@@ -73,6 +76,7 @@ namespace CAS.UI.UIControls.WorkPakage
 
 		private void DocumentControl1_Added(object sender, EventArgs e)
 		{
+			var control = sender as DocumentControl;
 			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Work package") as DocumentSubType;
 			var newDocument = new Document
 			{
@@ -91,7 +95,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			if (form.ShowDialog() == DialogResult.OK)
 			{
 				_currentWp.ClosingDocument.Add(newDocument);
-				documentControl1.CurrentDocument = newDocument;
+				control.CurrentDocument = newDocument;
 
 			}
 		}
