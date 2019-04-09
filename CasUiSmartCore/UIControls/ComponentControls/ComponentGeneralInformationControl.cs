@@ -517,14 +517,30 @@ namespace CAS.UI.UIControls.ComponentControls
             }
         }
 
-        #endregion
+		#endregion
 
-        #region private string HusKit
+		#region private string AltPartNumber
 
-        ///<summary>
-        /// Hush Kit
-        ///</summary>
-        private string HusKit
+		/// <summary>
+		/// Displayed PartNumber
+		/// </summary>
+		private string AltPartNumber
+		{
+			get { return textBoxAltPartNum.Text; }
+			set
+			{
+				textBoxAltPartNum.Text = value;
+			}
+		}
+
+		#endregion
+
+		#region private string HusKit
+
+		///<summary>
+		/// Hush Kit
+		///</summary>
+		private string HusKit
         {
             get
             {
@@ -899,7 +915,7 @@ namespace CAS.UI.UIControls.ComponentControls
             ComponentLocation = _currentComponent.Location;
             Quantity = _currentComponent.Quantity;
             ALTPN = _currentComponent.ALTPartNumber;
-	        Discrepancy = _currentComponent.Discrepancy;
+            Discrepancy = _currentComponent.Discrepancy;
 	        Incoming = _currentComponent.Incoming;
 			IsDangerous = _currentComponent.IsDangerous;
 			IsPool = _currentComponent.IsPOOL;
@@ -1518,6 +1534,7 @@ namespace CAS.UI.UIControls.ComponentControls
 
 
 				textBoxPartNo.Text = accessoryDescription.PartNumber;
+				textBoxAltPartNum.Text = accessoryDescription.AltPartNumber;
                 textBoxDescription.Text = accessoryDescription.Description;
                 textBoxProductCode.Text = accessoryDescription.Code;
                 textBoxManufacturer.Text = accessoryDescription.Manufacturer;

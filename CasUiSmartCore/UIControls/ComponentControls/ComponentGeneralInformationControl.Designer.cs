@@ -34,6 +34,7 @@ namespace CAS.UI.UIControls.ComponentControls
         private void InitializeComponent()
         {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComponentGeneralInformationControl));
+			System.Windows.Forms.GroupBox groupBoxStart;
 			this.lifelengthViewerStart = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.dateTimePickerStart = new System.Windows.Forms.DateTimePicker();
 			this.labelPosition = new System.Windows.Forms.Label();
@@ -141,6 +142,8 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxModel = new CAS.UI.UIControls.Auxiliary.LookupCombobox();
 			this.lifelengthNotify = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.lifelengthViewer1 = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
+			this.labelAltPartNum = new System.Windows.Forms.Label();
+			this.textBoxAltPartNum = new System.Windows.Forms.TextBox();
 			groupBoxStart = new System.Windows.Forms.GroupBox();
 			this.panelAvionicsInventory.SuspendLayout();
 			this.panelLandingGearMark.SuspendLayout();
@@ -198,7 +201,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.labelPosition.AutoSize = true;
 			this.labelPosition.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelPosition.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelPosition.Location = new System.Drawing.Point(2, 263);
+			this.labelPosition.Location = new System.Drawing.Point(3, 265);
 			this.labelPosition.Name = "labelPosition";
 			this.labelPosition.RightToLeft = System.Windows.Forms.RightToLeft.No;
 			this.labelPosition.Size = new System.Drawing.Size(62, 14);
@@ -224,7 +227,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.labelManufacturer.AutoSize = true;
 			this.labelManufacturer.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelManufacturer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelManufacturer.Location = new System.Drawing.Point(3, 65);
+			this.labelManufacturer.Location = new System.Drawing.Point(3, 66);
 			this.labelManufacturer.Name = "labelManufacturer";
 			this.labelManufacturer.Size = new System.Drawing.Size(95, 14);
 			this.labelManufacturer.TabIndex = 7;
@@ -236,7 +239,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.labelPartNo.AutoSize = true;
 			this.labelPartNo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelPartNo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelPartNo.Location = new System.Drawing.Point(2, 88);
+			this.labelPartNo.Location = new System.Drawing.Point(3, 94);
 			this.labelPartNo.Name = "labelPartNo";
 			this.labelPartNo.Size = new System.Drawing.Size(59, 14);
 			this.labelPartNo.TabIndex = 0;
@@ -248,11 +251,11 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.textBoxDescription.BackColor = System.Drawing.Color.White;
 			this.textBoxDescription.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.textBoxDescription.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxDescription.Location = new System.Drawing.Point(112, 159);
+			this.textBoxDescription.Location = new System.Drawing.Point(113, 202);
 			this.textBoxDescription.MaxLength = 250;
 			this.textBoxDescription.Multiline = true;
 			this.textBoxDescription.Name = "textBoxDescription";
-			this.textBoxDescription.Size = new System.Drawing.Size(250, 95);
+			this.textBoxDescription.Size = new System.Drawing.Size(249, 52);
 			this.textBoxDescription.TabIndex = 6;
 			// 
 			// labelSerialNo
@@ -260,7 +263,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.labelSerialNo.AutoSize = true;
 			this.labelSerialNo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelSerialNo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelSerialNo.Location = new System.Drawing.Point(3, 115);
+			this.labelSerialNo.Location = new System.Drawing.Point(3, 149);
 			this.labelSerialNo.Name = "labelSerialNo";
 			this.labelSerialNo.Size = new System.Drawing.Size(68, 14);
 			this.labelSerialNo.TabIndex = 1;
@@ -284,10 +287,10 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.textBoxSerialNo.BackColor = System.Drawing.Color.White;
 			this.textBoxSerialNo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.textBoxSerialNo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxSerialNo.Location = new System.Drawing.Point(113, 110);
+			this.textBoxSerialNo.Location = new System.Drawing.Point(113, 146);
 			this.textBoxSerialNo.MaxLength = 100;
 			this.textBoxSerialNo.Name = "textBoxSerialNo";
-			this.textBoxSerialNo.Size = new System.Drawing.Size(250, 22);
+			this.textBoxSerialNo.Size = new System.Drawing.Size(249, 22);
 			this.textBoxSerialNo.TabIndex = 5;
 			// 
 			// textBoxMPDItem
@@ -341,10 +344,10 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.textBoxPartNo.BackColor = System.Drawing.Color.White;
 			this.textBoxPartNo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.textBoxPartNo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxPartNo.Location = new System.Drawing.Point(112, 86);
+			this.textBoxPartNo.Location = new System.Drawing.Point(113, 90);
 			this.textBoxPartNo.MaxLength = 100;
 			this.textBoxPartNo.Name = "textBoxPartNo";
-			this.textBoxPartNo.Size = new System.Drawing.Size(250, 22);
+			this.textBoxPartNo.Size = new System.Drawing.Size(249, 22);
 			this.textBoxPartNo.TabIndex = 4;
 			// 
 			// labelMaintFreq
@@ -364,7 +367,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.labelDescription.AutoSize = true;
 			this.labelDescription.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelDescription.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelDescription.Location = new System.Drawing.Point(2, 161);
+			this.labelDescription.Location = new System.Drawing.Point(2, 208);
 			this.labelDescription.Name = "labelDescription";
 			this.labelDescription.Size = new System.Drawing.Size(82, 14);
 			this.labelDescription.TabIndex = 4;
@@ -533,7 +536,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.textBoxManufacturer.Location = new System.Drawing.Point(113, 62);
 			this.textBoxManufacturer.MaxLength = 100;
 			this.textBoxManufacturer.Name = "textBoxManufacturer";
-			this.textBoxManufacturer.Size = new System.Drawing.Size(250, 22);
+			this.textBoxManufacturer.Size = new System.Drawing.Size(249, 22);
 			this.textBoxManufacturer.TabIndex = 3;
 			// 
 			// textBoxPosition
@@ -541,9 +544,9 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.textBoxPosition.BackColor = System.Drawing.Color.White;
 			this.textBoxPosition.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.textBoxPosition.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxPosition.Location = new System.Drawing.Point(112, 260);
+			this.textBoxPosition.Location = new System.Drawing.Point(113, 260);
 			this.textBoxPosition.Name = "textBoxPosition";
-			this.textBoxPosition.Size = new System.Drawing.Size(250, 22);
+			this.textBoxPosition.Size = new System.Drawing.Size(249, 22);
 			this.textBoxPosition.TabIndex = 7;
 			// 
 			// panelLandingGearMark
@@ -766,7 +769,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.labelLocation.AutoSize = true;
 			this.labelLocation.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelLocation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelLocation.Location = new System.Drawing.Point(2, 291);
+			this.labelLocation.Location = new System.Drawing.Point(3, 291);
 			this.labelLocation.Name = "labelLocation";
 			this.labelLocation.RightToLeft = System.Windows.Forms.RightToLeft.No;
 			this.labelLocation.Size = new System.Drawing.Size(65, 14);
@@ -875,7 +878,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.labelProductCode.AutoSize = true;
 			this.labelProductCode.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelProductCode.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelProductCode.Location = new System.Drawing.Point(2, 138);
+			this.labelProductCode.Location = new System.Drawing.Point(3, 180);
 			this.labelProductCode.Name = "labelProductCode";
 			this.labelProductCode.Size = new System.Drawing.Size(45, 14);
 			this.labelProductCode.TabIndex = 94;
@@ -887,10 +890,10 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.textBoxProductCode.BackColor = System.Drawing.Color.White;
 			this.textBoxProductCode.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.textBoxProductCode.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxProductCode.Location = new System.Drawing.Point(112, 135);
+			this.textBoxProductCode.Location = new System.Drawing.Point(113, 174);
 			this.textBoxProductCode.MaxLength = 100;
 			this.textBoxProductCode.Name = "textBoxProductCode";
-			this.textBoxProductCode.Size = new System.Drawing.Size(250, 22);
+			this.textBoxProductCode.Size = new System.Drawing.Size(249, 22);
 			this.textBoxProductCode.TabIndex = 95;
 			// 
 			// labelStatus
@@ -912,9 +915,9 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxStatus.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.comboBoxStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.comboBoxStatus.FormattingEnabled = true;
-			this.comboBoxStatus.Location = new System.Drawing.Point(112, 316);
+			this.comboBoxStatus.Location = new System.Drawing.Point(113, 315);
 			this.comboBoxStatus.Name = "comboBoxStatus";
-			this.comboBoxStatus.Size = new System.Drawing.Size(250, 22);
+			this.comboBoxStatus.Size = new System.Drawing.Size(249, 22);
 			this.comboBoxStatus.TabIndex = 96;
 			// 
 			// labelDiscrepancy
@@ -985,7 +988,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.label3.AutoSize = true;
 			this.label3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.label3.Location = new System.Drawing.Point(2, 38);
+			this.label3.Location = new System.Drawing.Point(3, 38);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(99, 14);
 			this.label3.TabIndex = 147;
@@ -997,9 +1000,9 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxSupplier.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.comboBoxSupplier.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.comboBoxSupplier.FormattingEnabled = true;
-			this.comboBoxSupplier.Location = new System.Drawing.Point(112, 34);
+			this.comboBoxSupplier.Location = new System.Drawing.Point(113, 34);
 			this.comboBoxSupplier.Name = "comboBoxSupplier";
-			this.comboBoxSupplier.Size = new System.Drawing.Size(141, 22);
+			this.comboBoxSupplier.Size = new System.Drawing.Size(140, 22);
 			this.comboBoxSupplier.TabIndex = 148;
 			this.comboBoxSupplier.SelectedIndexChanged += new System.EventHandler(this.comboBoxSupplier_SelectedIndexChanged);
 			// 
@@ -1011,7 +1014,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.dateTimePickerReciveDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
 			this.dateTimePickerReciveDate.Location = new System.Drawing.Point(259, 34);
 			this.dateTimePickerReciveDate.Name = "dateTimePickerReciveDate";
-			this.dateTimePickerReciveDate.Size = new System.Drawing.Size(105, 22);
+			this.dateTimePickerReciveDate.Size = new System.Drawing.Size(103, 22);
 			this.dateTimePickerReciveDate.TabIndex = 149;
 			this.dateTimePickerReciveDate.ValueChanged += new System.EventHandler(this.dateTimePickerReciveDate_ValueChanged);
 			// 
@@ -1193,7 +1196,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.labelCheck.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.labelCheck.Location = new System.Drawing.Point(401, 291);
 			this.labelCheck.Name = "labelCheck";
-			this.labelCheck.Size = new System.Drawing.Size(102, 14);
+			this.labelCheck.Size = new System.Drawing.Size(122, 14);
 			this.labelCheck.TabIndex = 171;
 			this.labelCheck.Text = "Current Category:";
 			this.labelCheck.Visible = false;
@@ -1549,10 +1552,10 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.dictionaryComboBoxLocation.Displayer = null;
 			this.dictionaryComboBoxLocation.DisplayerText = null;
 			this.dictionaryComboBoxLocation.Entity = null;
-			this.dictionaryComboBoxLocation.Location = new System.Drawing.Point(113, 287);
+			this.dictionaryComboBoxLocation.Location = new System.Drawing.Point(113, 288);
 			this.dictionaryComboBoxLocation.Name = "dictionaryComboBoxLocation";
 			this.dictionaryComboBoxLocation.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.dictionaryComboBoxLocation.Size = new System.Drawing.Size(250, 21);
+			this.dictionaryComboBoxLocation.Size = new System.Drawing.Size(249, 21);
 			this.dictionaryComboBoxLocation.TabIndex = 98;
 			this.dictionaryComboBoxLocation.Visible = false;
 			// 
@@ -1678,12 +1681,38 @@ namespace CAS.UI.UIControls.ComponentControls
 			groupBoxStart.Text = "Start";
 			groupBoxStart.Visible = false;
 			// 
+			// labelAltPartNum
+			// 
+			this.labelAltPartNum.AutoSize = true;
+			this.labelAltPartNum.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.labelAltPartNum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelAltPartNum.Location = new System.Drawing.Point(3, 123);
+			this.labelAltPartNum.Name = "labelAltPartNum";
+			this.labelAltPartNum.Size = new System.Drawing.Size(76, 14);
+			this.labelAltPartNum.TabIndex = 173;
+			this.labelAltPartNum.Text = "Alt Part №:";
+			this.labelAltPartNum.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// textBoxAltPartNum
+			// 
+			this.textBoxAltPartNum.BackColor = System.Drawing.Color.White;
+			this.textBoxAltPartNum.Enabled = false;
+			this.textBoxAltPartNum.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.textBoxAltPartNum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxAltPartNum.Location = new System.Drawing.Point(113, 118);
+			this.textBoxAltPartNum.MaxLength = 100;
+			this.textBoxAltPartNum.Name = "textBoxAltPartNum";
+			this.textBoxAltPartNum.Size = new System.Drawing.Size(249, 22);
+			this.textBoxAltPartNum.TabIndex = 174;
+			// 
 			// ComponentGeneralInformationControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this.Controls.Add(this.labelAltPartNum);
+			this.Controls.Add(this.textBoxAltPartNum);
 			this.Controls.Add(groupBoxStart);
 			this.Controls.Add(this.labelCheck);
 			this.Controls.Add(this.radioButtonD);
@@ -1901,6 +1930,8 @@ namespace CAS.UI.UIControls.ComponentControls
 		private System.Windows.Forms.Label labelCheck;
 		private LifelengthViewer lifelengthViewerStart;
 		private System.Windows.Forms.DateTimePicker dateTimePickerStart;
-	    private System.Windows.Forms.GroupBox groupBoxStart;
+		private System.Windows.Forms.Label labelAltPartNum;
+		private System.Windows.Forms.TextBox textBoxAltPartNum;
+		private System.Windows.Forms.GroupBox groupBoxStart;
 	}
 }
