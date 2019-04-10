@@ -10,6 +10,7 @@ using System.Windows.Forms.Design;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary.Comparers;
+using CASTerms;
 using Microsoft.VisualBasic.Devices;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
@@ -386,12 +387,15 @@ namespace CAS.UI.UIControls.Auxiliary
                 object value = properties[i].GetValue(item, null);
                 if(value != null)
                 {
-                    string valueString;
+	                if (properties[i].Name == "CorrectorId")
+		                value = GlobalObjects.CasEnvironment.GetCorrector((int) value);
+
+					string valueString;
                     if (value is DateTime)
                         valueString = SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)value);
                     else valueString = value.ToString();
-                    
-                    
+
+                                   
                     subItems[i] = new ListViewItem.ListViewSubItem
                                   {
                                       Text = valueString,

@@ -283,10 +283,14 @@ namespace SmartCore
         }
 		#endregion
 
-		public UserDTO GetCorrector(int id)
+		#region public UserDTO GetCorrector(int id)
+
+		public string GetCorrector(int id)
 		{
-			return Users.FirstOrDefault(i => i.ItemId == id) ?? UserDTO.Unknown;
+			return Users.ContainsKey(id) ? Users[id] : "Unknown";
 		}
+
+		#endregion
 
 		/*
 		* Выполнение запросов
@@ -542,24 +546,8 @@ namespace SmartCore
 		#endregion
 
 		#region public CommonCollection<Store> User { get; internal set; }
-		/// <summary>
-		/// Доступные склады компании
-		/// </summary>
-		private List<UserDTO> _users;
-		/// <summary>
-		/// Доступные склады компании
-		/// </summary>
-		public List<UserDTO> Users
-		{
-			get
-			{
-				if (_operators.Count == 0 || _users == null || _baseComponents == null)
-					NewLoader.FirstLoad();
-				
-				return _users;
-			}
-			internal set => _users = value;
-		}
+
+		public Dictionary<int, string> Users { get; set; }
 		#endregion
 
 		#region public CommonCollection<Hangar> Hangars { get; internal set; }
@@ -803,7 +791,10 @@ namespace SmartCore
             loadingState.CurrentPersentageDescription = "Loading Users";
             backgroundWorker.ReportProgress(1, loadingState);
 
-			Users = new List<UserDTO>(GetAllUsers());
+            var users = GetAllUsers();
+            Users = new Dictionary<int, string>();
+			foreach (var user in users)
+				Users.Add(user.ItemId, user.ToString());
 
             if (backgroundWorker.CancellationPending)
             {
