@@ -412,6 +412,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void listViewInitialItems_SelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
 		{
+			button1.Enabled = listViewInitialItems.SelectedItem != null;
 			if (listViewInitialItems.SelectedItem == null) return;
 
 			var product = listViewInitialItems.SelectedItem.Product;
@@ -489,6 +490,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void Reset()
 		{
+			button1.Enabled = false;
 			comboBoxMeasure.SelectedItem = null;
 			comboBoxReason.SelectedItem = null;
 			metroTextBox1.Text = "";

@@ -254,7 +254,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				    Parent =  initial,
 				    ParentType = initial.SmartCoreObjectType,
 				    Title = initial.Title,
-				    OpeningDate = initial.OpeningDate,
+				    OpeningDate = DateTime.Now,
 				    Author = initial.Author,
 				    Remarks = initial.Remarks,
 				    Number = initial.Number,
@@ -294,7 +294,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				throw;
 		    }
 
-			MessageBox.Show("Saving was successful", "Message infomation", MessageBoxButtons.OK,
+			MessageBox.Show("Create quatation successful", "Message infomation", MessageBoxButtons.OK,
 				MessageBoxIcon.Information);
 		}
 

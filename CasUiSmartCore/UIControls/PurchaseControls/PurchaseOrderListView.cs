@@ -62,11 +62,9 @@ namespace CAS.UI.UIControls.PurchaseControls
         {
             var subItems = new List<ListViewItem.ListViewSubItem>();
 
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Number, Tag = item.Number });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Title, Tag = item.Title });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Description, Tag = item.Description });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
             subItems.Add(new ListViewItem.ListViewSubItem
             {
                 Text = item.OpeningDate == (new DateTime(1852, 01, 01))
@@ -93,8 +91,8 @@ namespace CAS.UI.UIControls.PurchaseControls
                 Tag = item.ClosingDate
             });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Author, Tag = item.Author });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.PublishedByUser, Tag = item.PublishedByUser });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.CloseByUser, Tag = item.CloseByUser });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Remarks, Tag = item.Remarks });
 
             return subItems.ToArray();
@@ -122,19 +120,13 @@ namespace CAS.UI.UIControls.PurchaseControls
         {
             ColumnHeaderList.Clear();
 
-            var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Parent" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Order No" };
+            var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Order No" };
             ColumnHeaderList.Add(columnHeader);
 
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.15f), Text = "Title" };
             ColumnHeaderList.Add(columnHeader);
 
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.15f), Text = "Description" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Create Date" };
             ColumnHeaderList.Add(columnHeader);
 
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Opening date" };

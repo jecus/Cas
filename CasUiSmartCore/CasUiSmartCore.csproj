@@ -1202,6 +1202,12 @@
     <Compile Include="UIControls\PurchaseControls\Purchase\CreatePurchaseOrderForm.Designer.cs">
       <DependentUpon>CreatePurchaseOrderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\PurchaseControls\Purchase\PurchaseRecordListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Purchase\PurchaseRecordListView.Designer.cs">
+      <DependentUpon>PurchaseRecordListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\PurchaseControls\Purchase\QuatationSupplierPriceListView.cs">
       <SubType>UserControl</SubType>
     </Compile>

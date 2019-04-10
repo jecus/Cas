@@ -359,7 +359,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			var editForm = new CreatePurchaseOrderForm(_directivesViewer.SelectedItems[0]);
 			if (editForm.ShowDialog() == DialogResult.OK)
 			{
-				MessageBox.Show("Saving was successful", "Message infomation", MessageBoxButtons.OK,
+				MessageBox.Show("Create purchase successful", "Message infomation", MessageBoxButtons.OK,
 					MessageBoxIcon.Information);
 			}
 		}

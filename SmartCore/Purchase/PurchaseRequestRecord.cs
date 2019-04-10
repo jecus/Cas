@@ -103,12 +103,11 @@ namespace SmartCore.Purchase
         
         #region public Supplier Supplier { get; set; }
 
-        //ListViewData(0.2f, "Supplier", 4)]
         [TableColumn("SupplierId")]
         public int SupplierId { get; set; }
 		#endregion
 
-		//public Supplier Supplier { get; set; }
+		public Supplier Supplier { get; set; }
 
 		#region public KitCostCondition CostCondition { get; set; }
 		/// <summary>
@@ -173,6 +172,8 @@ namespace SmartCore.Purchase
 				}
 			}
 		}
+
+		public SupplierPrice Price { get; set; }
 
 		#endregion
 

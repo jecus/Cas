@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using EFCore.DTO.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls.Quatation
 {
-	public partial class QuatationSupplierPriceListView : BaseListViewControl<SupplierPrice>
+	public partial class PurchaseRecordListView : BaseListViewControl<PurchaseRequestRecord>
 	{
 		#region Constructor
 
-		public QuatationSupplierPriceListView()
+		public PurchaseRecordListView()
 		{
 			InitializeComponent();
 			OldColumnIndex = 2;
@@ -28,16 +29,19 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			ColumnHeaderList.Clear();
 			itemsListView.Columns.Clear();
 
-			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "CostNew" };
+			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Supplier" };
 			ColumnHeaderList.Add(columnHeader);
 
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "CostOverhaul" };
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Q-ty" };
 			ColumnHeaderList.Add(columnHeader);
 
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "CostServiceable" };
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Cost" };
 			ColumnHeaderList.Add(columnHeader);
 
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "CostRepair" };
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Condition" };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Measure" };
 			ColumnHeaderList.Add(columnHeader);
 
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
@@ -47,22 +51,24 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Product item)
 
-		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(SupplierPrice item)
+		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(PurchaseRequestRecord item)
 		{
 			var subItems = new List<ListViewItem.ListViewSubItem>();
 
-			var subItem = new ListViewItem.ListViewSubItem { Text = item.CostNew.ToString(), Tag = item.CostNew };
+			var subItem = new ListViewItem.ListViewSubItem { Text = item.Supplier.ToString(), Tag = item.Supplier };
 			subItems.Add(subItem);
 
-			subItem = new ListViewItem.ListViewSubItem { Text = item.CostOverhaul.ToString(), Tag = item.CostOverhaul };
+			subItem = new ListViewItem.ListViewSubItem { Text = item.Quantity.ToString(), Tag = item.Quantity };
 			subItems.Add(subItem);
 
-			subItem = new ListViewItem.ListViewSubItem { Text = item.CostServiceable.ToString(), Tag = item.CostServiceable };
+			subItem = new ListViewItem.ListViewSubItem { Text = item.Cost.ToString(), Tag = item.Cost };
 			subItems.Add(subItem);
 
-			subItem = new ListViewItem.ListViewSubItem { Text = item.CostRepair.ToString(), Tag = item.CostRepair };
+			subItem = new ListViewItem.ListViewSubItem { Text = item.CostCondition.ToString(), Tag = item.Measure };
 			subItems.Add(subItem);
 
+			subItem = new ListViewItem.ListViewSubItem { Text = item.Measure.ToString(), Tag = item.Measure };
+			subItems.Add(subItem);
 
 			return subItems.ToArray();
 		}
@@ -76,11 +82,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			foreach (ListViewItem item in itemsListView.Items)
 			{
 				string temp;
-				if (item.Tag is SupplierPrice)
+				if (item.Tag is PurchaseRequestRecord)
 				{
-					var p = (SupplierPrice)item.Tag;
+					var p = (PurchaseRequestRecord)item.Tag;
 
-					temp = $"{p.Parent?.Product?.PartNumber} | Q-ty:{p.Parent?.Quantity}";
+					temp = $"{p.Product?.PartNumber}";
 					itemsListView.Groups.Add(temp, temp);
 					item.Group = itemsListView.Groups[temp];
 				}
