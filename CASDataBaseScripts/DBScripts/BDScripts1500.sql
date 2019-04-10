@@ -4,7 +4,7 @@ if not exists ( select  *
                     and c.name = 'PublishedById' ) 
 
 	alter table dbo.PurchaseOrders
-    add PublishedById int 
+    add PublishedById int null
 GO
 
 if not exists ( select  *
@@ -13,7 +13,7 @@ if not exists ( select  *
                     and c.name = 'ClosedById' ) 
 
 	alter table dbo.PurchaseOrders
-    add ClosedById int  
+    add ClosedById int null
 GO
 
 if not exists ( select  *
@@ -22,7 +22,7 @@ if not exists ( select  *
                     and c.name = 'PublishedByUser' ) 
 
 	alter table dbo.PurchaseOrders
-    add PublishedByUser nvarchar(128)
+    add PublishedByUser nvarchar(128)null
 GO
 
 if not exists ( select  *
@@ -31,7 +31,7 @@ if not exists ( select  *
                     and c.name = 'CloseByUser' ) 
 
 	alter table dbo.PurchaseOrders
-    add CloseByUser nvarchar(128)
+    add CloseByUser nvarchar(128)null
 GO
 
 if not exists ( select  *
@@ -40,5 +40,5 @@ if not exists ( select  *
                     and c.name = 'Number' ) 
 
 	alter table dbo.PurchaseOrders
-    add Number nvarchar(128)
+    add Number nvarchar(128)null
 GO
