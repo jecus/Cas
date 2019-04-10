@@ -4539,7 +4539,7 @@ namespace SmartCore.DtoHelper
 				ParentPackageId = purchaserecdto.ParentPackageId ?? default(int),
 				PackageItemId = purchaserecdto.PackageItemId ?? default(int),
 				PackageItemType = purchaserecdto.PackageItemTypeId.HasValue ? SmartCoreType.Items.GetItemById(purchaserecdto.PackageItemTypeId.Value) : SmartCoreType.Unknown,
-				SupplierId = purchaserecdto.SupplierId,
+				SupplierId = purchaserecdto.SupplierId ?? default(int),
 
 				Remarks = purchaserecdto.Remarks,
 				Quantity = purchaserecdto.Quantity ?? default(double),

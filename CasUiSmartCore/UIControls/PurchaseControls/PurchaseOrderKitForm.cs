@@ -257,7 +257,7 @@ namespace CAS.UI.UIControls.PurchaseControls
                                                     PackageItemType = purchaseOrderKitFormItem.CurrentProduct.SmartCoreObjectType,
                                                     ParentPackageId = _currentPurchase.ItemId,
                                                     ParentPackage = _currentPurchase,
-                                                    Supplier = _currentPurchase.Supplier,
+                                                    SupplierId = _currentPurchase.Supplier.ItemId,
                                                     CostCondition = conditionItem.CostCondition,
                                                     Quantity = conditionItem.Quantity,
                                                     Cost = conditionItem.Cost,
