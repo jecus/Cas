@@ -300,6 +300,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				record.PackageItemId = _order.ItemId;
 				GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
 			}
+
+			DialogResult = DialogResult.OK;
 		}
 
 		#endregion

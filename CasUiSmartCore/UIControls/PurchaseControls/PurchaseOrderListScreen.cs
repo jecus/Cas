@@ -270,29 +270,24 @@ namespace CAS.UI.UIControls.PurchaseControls
         /// <param name="e"></param>
         private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
         {
-            foreach (PurchaseOrder po in _directivesViewer.SelectedItems)
-            {
-                if (po.Status != WorkPackageStatus.Closed)
-                    GlobalObjects.PurchaseCore.Publish(po, DateTime.Now);
-                else
-                {
-                    switch (MessageBox.Show(@"This request for quotation order is already closed," +
-                                             "\nif you want to republish it," +
-                                             "\nInformation entered at the closing will be erased." + "\n\n Republish " + po.Title + " purchase order?", (string)new GlobalTermsProvider()["SystemName"],
-                                        MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation,
-                                        MessageBoxDefaultButton.Button2))
-                    {
-                        case DialogResult.Yes:
-                            GlobalObjects.PurchaseCore.Publish(po, DateTime.Now);
-                            AnimatedThreadWorker.RunWorkerAsync();
-                            break;
-                        case DialogResult.No:
-                            //arguments.Cancel = true;
-                            break;
-                    }
-                }
-            }
-        }
+			foreach (var rfq in _directivesViewer.SelectedItems)
+			{
+				if (rfq.Status == WorkPackageStatus.Published)
+				{
+					MessageBox.Show("Purchase Order " + rfq.Title + " is already publisher.",
+						(string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
+						MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+					continue;
+				}
+
+				rfq.Status = WorkPackageStatus.Published;
+				rfq.PublishingDate = DateTime.Now;
+				rfq.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
+				rfq.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
+				GlobalObjects.CasEnvironment.NewKeeper.Save(rfq);
+			}
+			AnimatedThreadWorker.RunWorkerAsync();
+		}
 
         #endregion
 
@@ -320,21 +315,34 @@ namespace CAS.UI.UIControls.PurchaseControls
 
         private void ToolStripMenuItemCloseClick(object sender, EventArgs e)
         {
-            foreach (PurchaseOrder rfq in _directivesViewer.SelectedItems)
-            {
-                if (rfq.Status == WorkPackageStatus.Closed)
-                {
-                    MessageBox.Show("Purchase order " + rfq.Title + " is already closed.",
-                                    (string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
-                                    MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-                    continue;
-                }
-                GlobalObjects.PurchaseCore.LoadPurchaseOrderItems(rfq);
-                PurchaseOrderClosingForm form = new PurchaseOrderClosingForm(rfq);
-                if(form.ShowDialog() == DialogResult.OK)
-                    AnimatedThreadWorker.RunWorkerAsync();
-            }
-        }
+			var selected = _directivesViewer.SelectedItems.ToArray();
+
+			try
+			{
+				foreach (var rfq in selected)
+				{
+					if (rfq.Status == WorkPackageStatus.Closed)
+					{
+						MessageBox.Show("Purchase Order " + rfq.Title + " is already closed.",
+							(string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
+							MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+						continue;
+					}
+
+					rfq.Status = WorkPackageStatus.Closed;
+					rfq.ClosingDate = DateTime.Now;
+					rfq.CloseByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
+					rfq.ClosedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
+					GlobalObjects.CasEnvironment.NewKeeper.Save(rfq);
+				}
+			}
+			catch (Exception ex)
+			{
+				Program.Provider.Logger.Log("Error while saving data", ex);
+				throw;
+			}
+			AnimatedThreadWorker.RunWorkerAsync();
+		}
 
         #endregion
 

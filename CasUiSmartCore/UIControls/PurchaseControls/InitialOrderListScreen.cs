@@ -482,10 +482,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 				throw;
 			}
 
-			MessageBox.Show("Saving was successful", "Message infomation", MessageBoxButtons.OK,
-		        MessageBoxIcon.Information);
-        
-
 			AnimatedThreadWorker.RunWorkerAsync();
 		}
 
