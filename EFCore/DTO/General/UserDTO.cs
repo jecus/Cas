@@ -15,6 +15,8 @@ namespace EFCore.DTO.General
 	[Condition("IsDeleted", 0)]
 	public class UserDTO : BaseEntity, IIdentityUser
 	{
+		private static UserDTO Unknown1;
+
 		[DataMember]
 		public string Name { get; set; }
 
@@ -34,6 +36,8 @@ namespace EFCore.DTO.General
 		{
 			return Name.Equals(Surname) ? Name : $"{Surname} {Name}";
 		}
+
+		public static UserDTO Unknown => Unknown1 ?? (Unknown1 = new UserDTO{ Name = "Unknown", ItemId = -1});
 	}
 
 	public interface IIdentityUser : IBaseEntity
