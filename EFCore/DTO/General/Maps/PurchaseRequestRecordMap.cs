@@ -59,9 +59,6 @@ namespace EFCore.DTO.General.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("Processed");
 
-			HasRequired(i => i.Supplier)
-				.WithMany(i => i.PurchaseRequestRecordDtos)
-				.HasForeignKey(i => i.SupplierId);
 
 			HasMany(i => i.Files).WithRequired(i => i.PurchaseRequestRecord).HasForeignKey(i => i.ParentId);
 		}

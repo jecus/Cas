@@ -38,9 +38,6 @@ namespace EFCore.DTO.General
 		[DataMember]
 		public bool? Processed { get; set; }
 
-		[DataMember]
-		[Child]
-		public SupplierDTO Supplier { get; set; }
 
 		[DataMember]
 		[Child(FilterType.Equal, "ParentTypeId", 1860)]

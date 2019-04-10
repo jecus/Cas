@@ -1326,11 +1326,17 @@ namespace SmartCore.Calculations.PerformanceCalculator
 				{
 					if (current.IsGreaterByAnyParameter(limitOverdue))
 						return ConditionState.Overdue;
+
+					if (limitOverdue.IsGreaterByAnyParameter(current) && current.IsGreaterByAnyParameter(limitNotify))
+						return ConditionState.Notify;
 				}
 				else
 				{
 					if (limitOverdue.IsGreaterByAnyParameter(current) && current.IsGreaterByAnyParameter(limitNotify))
 						return ConditionState.Notify;
+
+					if (current.IsGreaterByAnyParameter(limitOverdue))
+						return ConditionState.Overdue;
 				}
 
 				return ConditionState.Satisfactory;

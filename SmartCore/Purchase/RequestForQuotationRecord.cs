@@ -466,6 +466,9 @@ namespace SmartCore.Purchase
 		public Supplier Supplier { get; set; }
 
 		[JsonIgnore]
+		public RequestForQuotationRecord Parent { get; set; }
+
+		[JsonIgnore]
 		[ListViewData(200, "Supplier")]
 		public string SupplierName
 		{

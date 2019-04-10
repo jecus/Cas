@@ -440,6 +440,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void listViewInitialItems_SelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
 		{
+			button1.Enabled = button2.Enabled = listViewInitialItems.SelectedItem != null;
 			if (listViewInitialItems.SelectedItem == null) return;
 
 			var product = listViewInitialItems.SelectedItem.Product;
@@ -517,6 +518,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void Reset()
 		{
+			button1.Enabled = button2.Enabled = false;
 			comboBoxMeasure.SelectedItem = null;
 			comboBoxReason.SelectedItem = null;
 			metroTextBox1.Text = "";
@@ -645,6 +647,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		}
 
 		private void _toolStripMenuItemAddSuppliers_Click(object sender, EventArgs e)
+		{
+			var form = new QuotationSupplierForm(_suppliers, listViewInitialItems.SelectedItem);
+			form.ShowDialog();
+		}
+
+		private void Button2_Click(object sender, EventArgs e)
 		{
 			var form = new QuotationSupplierForm(_suppliers, listViewInitialItems.SelectedItem);
 			form.ShowDialog();
