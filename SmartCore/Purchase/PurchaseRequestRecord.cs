@@ -35,54 +35,6 @@ namespace SmartCore.Purchase
         }
         #endregion
 
-        #region public String AccessoryPartNumber { get; set; }
-        /// <summary>
-        /// партийный номер
-        /// </summary>
-        [ListViewData(0.12f, "Part Number", 1)]
-        public String AccessoryPartNumber
-        {
-            get { return Product != null ? Product.PartNumber : ""; }
-            set
-            {
-                if (Product != null)
-                    Product.PartNumber = value;
-            }
-        }
-        #endregion
-
-        #region public String AccessoryDescription { get; set; }
-        /// <summary>
-        /// описание
-        /// </summary>
-        [ListViewData(0.12f, "Description", 2)]
-        public String AccessoryDescription
-        {
-            get { return Product != null ? Product.Description : ""; }
-            set
-            {
-                if (Product != null)
-                    Product.Description = value;
-            }
-        }
-        #endregion
-
-        #region public String AccessoryManufacturer { get; set; }
-        /// <summary>
-        /// производитель
-        /// </summary>
-        [ListViewData(0.12f, "Manufacturer", 3)]
-        public String AccessoryManufacturer
-        {
-            get { return Product != null ? Product.Manufacturer : ""; }
-            set
-            {
-                if (Product != null)
-                    Product.Manufacturer = value;
-            }
-        }
-        #endregion
-
         #region public double Quantity { get; set; }
 
         private double _quantity;
@@ -148,131 +100,21 @@ namespace SmartCore.Purchase
         }
         #endregion
 
-        /// <summary>
-        /// ¬озвращает строковое представление количества "след. выполнений"
-        /// </summary>
-        [ListViewData(0.12f, "Performance", 5)]
-        public string PerformanceToString
-        {
-            get
-            {
-                //if (IsSchedule && Task != null)
-                //{
-                //    AbstractPerformanceRecord apr = PerformanceRecords
-                //        .OfType<AbstractPerformanceRecord>()
-                //        .FirstOrDefault(r => r.PerformanceNum == PerformanceNumFromStart);
-                //    if (apr != null)
-                //        return apr.OnLifelength.ToString();
-
-                //    NextPerformance np = NextPerformances
-                //        .FirstOrDefault(n => n.PerformanceNum == PerformanceNumFromStart);
-                //    if (np != null)
-                //        return np.PerformanceSource.ToString();
-                //    return "";
-                //}
-                //return RepeatInterval;
-                return "";
-            }
-        }
-
-        /// <summary>
-        /// партийный номер
-        /// </summary>
-        [ListViewData(0.12f, "Rpt. Int", 6)]
-        public String RepeatInterval
-        {
-            get
-            {
-                //if (IsSchedule && Task != null)
-                //    return Task.Threshold.RepeatInterval.ToString();
-                //return Threshold.RepeatInterval.ToString();
-                return "";
-            }
-        }
-
-        /// <summary>
-        /// партийный номер
-        /// </summary>
-        [ListViewData(0.12f, "Perf. Date", 8)]
-        public String PerformanceDateString
-        {
-            get
-            {
-                //if (IsSchedule && Task != null)
-                //{
-                //    AbstractPerformanceRecord apr = PerformanceRecords
-                //        .OfType<AbstractPerformanceRecord>()
-                //        .FirstOrDefault(r => r.PerformanceNum == PerformanceNumFromStart);
-                //    if (apr != null)
-                //        return Auxiliary.Convert.GetDateFormat(apr.RecordDate);
-
-                //    NextPerformance np = NextPerformances
-                //        .FirstOrDefault(n => n.PerformanceNum == PerformanceNumFromStart);
-                //    if (np != null)
-                //        return np.PerformanceDate == null
-                //            ? "N/A"
-                //            : Auxiliary.Convert.GetDateFormat((DateTime)np.PerformanceDate);
-                //    return "";
-                //}
-                //return NextPerformanceDate == null ? "N/A" : Auxiliary.Convert.GetDateFormat((DateTime)NextPerformanceDate);
-                return "";
-            }
-        }
-
-        /// <summary>
-        /// ¬озвращает остаток ресурса до ближайшего выполнени€ задачи (если оно расчитано) или Lifelength.Null
-        /// </summary>
-        [ListViewData(0.12f, "Remain", 7)]
-        public Lifelength Remains
-        {
-            get
-            {
-                //if (NextPerformances.Count == 0)
-                //    return Lifelength.Null;
-                //return NextPerformances[0].Remains;
-                return Lifelength.Null;
-            }
-        }
-
-        /// <summary>
-        /// «амечани€ по KIT - у 
-        /// </summary>
-        [ListViewData(0.12f, "Remarks")]
-        public String AccessoryRemarks
-        {
-            get { return Product != null ? Product.Remarks : ""; }
-            set
-            {
-                if (Product != null)
-                    Product.Remarks = value;
-            }
-        }
-
-        //#region public string KitParentString { get; }
-
-        /////// <summary>
-        /////// —троковое описание родител€
-        /////// </summary>
-        ////[ListViewData(0.12f, "Parent", 5)]
-        ////public string ParentString
-        ////{
-        ////    get { return _product != null ? _product.ParentString : ""; }
-        ////}
-        //#endregion
-
+        
         #region public Supplier Supplier { get; set; }
 
         //ListViewData(0.2f, "Supplier", 4)]
         [TableColumn("SupplierId")]
-        [Child(false)]
-        public Supplier Supplier { get; set; }
-        #endregion
+        public int SupplierId { get; set; }
+		#endregion
 
-        #region public KitCostCondition CostCondition { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [TableColumn("CostCondition")]
+		//public Supplier Supplier { get; set; }
+
+		#region public KitCostCondition CostCondition { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		[TableColumn("CostCondition")]
         public ComponentStatus CostCondition { get; set; }
         #endregion
 
@@ -356,11 +198,9 @@ namespace SmartCore.Purchase
         /// <summary>
         /// —оздает запись без дополнительной информации
         /// </summary>
-        public PurchaseRequestRecord(int rfqId, Supplier supplier, Product accessory, double quantity)
+        public PurchaseRequestRecord(int rfqId, Product accessory, double quantity)
             : this()
         {
-            if(supplier == null)
-                throw new ArgumentNullException("supplier", "Supplier must be not null");
             ParentPackageId = rfqId;
 
             if(accessory != null)

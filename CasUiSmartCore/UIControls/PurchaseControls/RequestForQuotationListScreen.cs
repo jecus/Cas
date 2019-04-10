@@ -357,10 +357,11 @@ namespace CAS.UI.UIControls.PurchaseControls
 			if (_directivesViewer.SelectedItems.Count != 1) return;
 
 			var editForm = new CreatePurchaseOrderForm(_directivesViewer.SelectedItems[0]);
-			editForm.ShowDialog();
-
-			MessageBox.Show("Saving was successful", "Message infomation", MessageBoxButtons.OK,
-				MessageBoxIcon.Information);
+			if (editForm.ShowDialog() == DialogResult.OK)
+			{
+				MessageBox.Show("Saving was successful", "Message infomation", MessageBoxButtons.OK,
+					MessageBoxIcon.Information);
+			}
 		}
 
 		#region private void ToolStripMenuItemEditClick(object sender, EventArgs e)
