@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class JobCardMap : EntityTypeConfiguration<JobCardDTO>
+	public class JobCardMap : BaseMap<JobCardDTO>
 	{
-		public JobCardMap()
+		public JobCardMap() : base()
 		{
 			ToTable("dbo.JobCards");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.ParentId)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)

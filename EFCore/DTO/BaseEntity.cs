@@ -11,5 +11,8 @@ namespace EFCore.DTO
 
 		[DataMember]
 		public int ItemId { get; set; }
+
+		[DataMember]
+		public int CorrectorId { get; set; }
 	}
 }

@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class RequestForQuotationRecordMap : EntityTypeConfiguration<RequestForQuotationRecordDTO>
+	public class RequestForQuotationRecordMap : BaseMap<RequestForQuotationRecordDTO>
 	{
-		public RequestForQuotationRecordMap()
+		public RequestForQuotationRecordMap() : base()
 		{
 			ToTable("dbo.RequestForQuotationRecords");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.ParentPackageId)
 				.IsRequired()

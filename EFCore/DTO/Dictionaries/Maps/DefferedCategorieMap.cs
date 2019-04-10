@@ -1,22 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 using EFCore.DTO.Dictionaries;
 
 namespace EFCore.DTO.Maps
 {
-	public class DefferedCategorieMap : EntityTypeConfiguration<DefferedCategorieDTO>
+	public class DefferedCategorieMap : BaseMap<DefferedCategorieDTO>
 	{
-		public DefferedCategorieMap()
+		public DefferedCategorieMap() : base()
 		{
 			ToTable("Dictionaries.DefferedCategories");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId).HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.CategoryName)
 				.HasMaxLength(50)

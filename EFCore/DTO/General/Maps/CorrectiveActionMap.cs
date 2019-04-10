@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class CorrectiveActionMap : EntityTypeConfiguration<CorrectiveActionDTO>
+	public class CorrectiveActionMap : BaseMap<CorrectiveActionDTO>
 	{
-		public CorrectiveActionMap()
+		public CorrectiveActionMap() : base()
 		{
 			ToTable("dbo.CorrectiveActions");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.DiscrepancyID)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)

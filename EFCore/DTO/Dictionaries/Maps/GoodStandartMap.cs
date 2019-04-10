@@ -1,22 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 using EFCore.DTO.Dictionaries;
 
 namespace EFCore.DTO.Maps
 {
-	public class GoodStandartMap : EntityTypeConfiguration<GoodStandartDTO>
+	public class GoodStandartMap : BaseMap<GoodStandartDTO>
 	{
-		public GoodStandartMap()
+		public GoodStandartMap() : base()
 		{
 			ToTable("Dictionaries.GoodStandarts");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId).HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.Name)
 				.HasMaxLength(256)

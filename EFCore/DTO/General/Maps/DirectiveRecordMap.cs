@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class DirectiveRecordMap : EntityTypeConfiguration<DirectiveRecordDTO>
+	public class DirectiveRecordMap : BaseMap<DirectiveRecordDTO>
 	{
-		public DirectiveRecordMap()
+		public DirectiveRecordMap() : base()
 		{
 			ToTable("dbo.DirectivesRecords");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.NumGroup)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)

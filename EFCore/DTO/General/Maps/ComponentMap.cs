@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class ComponentMap : EntityTypeConfiguration<ComponentDTO>
+	public class ComponentMap : BaseMap<ComponentDTO>
 	{
-		public ComponentMap()
+		public ComponentMap() : base()
 		{
 			ToTable("dbo.Components");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.ATAChapterId)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
