@@ -588,17 +588,7 @@ namespace CAS.UI.UIControls.PurchaseControls
         {
             var form = new InitialOrderFormNew(new InitialOrder(){ParentId = CurrentParent.ItemId, ParentType = CurrentParent.SmartCoreObjectType});
             if(form.ShowDialog() == DialogResult.OK)
-            {
-                AnimatedThreadWorker.RunWorkerAsync();
-
-                var refe = new ReferenceEventArgs
-                                              {
-                                                  DisplayerText = form.AddedInitial.Title,
-                                                  TypeOfReflection = ReflectionTypes.DisplayInNew,
-                                                  RequestedEntity = new InitionalOrderScreen(form.AddedInitial)
-                                              };
-                InvokeDisplayerRequested(refe);    
-            }
+                AnimatedThreadWorker.RunWorkerAsync(); 
         }
         #endregion
 

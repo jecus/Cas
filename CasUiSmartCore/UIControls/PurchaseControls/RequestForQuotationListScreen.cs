@@ -8,6 +8,7 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.PurchaseControls.Initial;
+using CAS.UI.UIControls.PurchaseControls.Purchase;
 using CASReports.Builders;
 using CASTerms;
 using SmartCore.Entities.Collections;
@@ -281,29 +282,24 @@ namespace CAS.UI.UIControls.PurchaseControls
         /// <param name="e"></param>
         private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
         {
-            foreach (RequestForQuotation rfq in _directivesViewer.SelectedItems)
-            {
-                if (rfq.Status != WorkPackageStatus.Closed)
-                    GlobalObjects.PurchaseCore.Publish(rfq, DateTime.Now);
-                else
-                {
-                    switch (MessageBox.Show(@"This request for quotation order is already closed," +
-                                             "\nif you want to republish it," +
-                                             "\nInformation entered at the closing will be erased." + "\n\n Republish " + rfq.Title + " request for quotation?", (string)new GlobalTermsProvider()["SystemName"],
-                                        MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation,
-                                        MessageBoxDefaultButton.Button2))
-                    {
-                        case DialogResult.Yes:
-                            GlobalObjects.PurchaseCore.Publish(rfq, DateTime.Now);
-                            break;
-                        case DialogResult.No:
-                            //arguments.Cancel = true;
-                            break;
-                    }
-                }
-            }
-            AnimatedThreadWorker.RunWorkerAsync();
-        }
+	        foreach (var rfq in _directivesViewer.SelectedItems)
+	        {
+		        if (rfq.Status == WorkPackageStatus.Published)
+		        {
+			        MessageBox.Show("Initional Order " + rfq.Title + " is already publisher.",
+				        (string) new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
+				        MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+			        continue;
+		        }
+
+		        rfq.Status = WorkPackageStatus.Published;
+		        rfq.PublishingDate = DateTime.Now;
+		        rfq.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
+		        rfq.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
+		        GlobalObjects.CasEnvironment.NewKeeper.Save(rfq);
+	        }
+	        AnimatedThreadWorker.RunWorkerAsync();
+		}
 
         #endregion
 
@@ -331,36 +327,26 @@ namespace CAS.UI.UIControls.PurchaseControls
 
         private void ToolStripMenuItemCloseClick(object sender, EventArgs e)
         {
-            foreach (RequestForQuotation rfq in _directivesViewer.SelectedItems)
-            {
-                if (rfq.Status == WorkPackageStatus.Closed)
-                {
-                    MessageBox.Show("Request for quotation " + rfq.Title + " is already closed.",
-                                    (string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
-                                    MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-                    continue;
-                }
-                RequestForQuotationClosingForm form = new RequestForQuotationClosingForm(rfq);
-                form.ShowDialog();
+			var selected = _directivesViewer.SelectedItems.ToArray();
 
-                if (form.CreatePurchaseOrder)
-                {
-                    GlobalObjects.PurchaseCore.LoadRequestForQuotationItems(rfq);
-                    rfq.Products.Sort();
-                    PurchaseOrderKitForm kitForm = new PurchaseOrderKitForm(rfq);
-                    if (kitForm.ShowDialog() == DialogResult.OK)
-                    {
-                        ReferenceEventArgs refe = new ReferenceEventArgs
-                        {
-                            DisplayerText = kitForm.CurrentOrder.Title,
-                            TypeOfReflection = ReflectionTypes.DisplayInNew,
-                            RequestedEntity = new PurchaseOrderScreen(kitForm.CurrentOrder)
-                        };
-                        InvokeDisplayerRequested(refe);
-                    }
-                }
-            }
-            AnimatedThreadWorker.RunWorkerAsync();
+			foreach (var rfq in selected)
+			{
+				if (rfq.Status == WorkPackageStatus.Closed)
+				{
+					MessageBox.Show("Initional Order " + rfq.Title + " is already closed.",
+						(string) new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
+						MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+					continue;
+				}
+
+				rfq.Status = WorkPackageStatus.Closed;
+				rfq.ClosingDate = DateTime.Now;
+				rfq.CloseByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
+				rfq.ClosedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
+				GlobalObjects.CasEnvironment.NewKeeper.Save(rfq);
+			}
+
+			AnimatedThreadWorker.RunWorkerAsync();
         }
 
 		#endregion
@@ -370,9 +356,11 @@ namespace CAS.UI.UIControls.PurchaseControls
 		{
 			if (_directivesViewer.SelectedItems.Count != 1) return;
 
-			var editForm = new QuatationOrderFormNew(_directivesViewer.SelectedItems[0]);
-			if (editForm.ShowDialog() == DialogResult.OK)
-				AnimatedThreadWorker.RunWorkerAsync();
+			var editForm = new CreatePurchaseOrderForm(_directivesViewer.SelectedItems[0]);
+			editForm.ShowDialog();
+
+			MessageBox.Show("Saving was successful", "Message infomation", MessageBoxButtons.OK,
+				MessageBoxIcon.Information);
 		}
 
 		#region private void ToolStripMenuItemEditClick(object sender, EventArgs e)
