@@ -1,12 +1,27 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class OperatorMap : BaseMap<OperatorDTO>
+	public class OperatorMap : EntityTypeConfiguration<OperatorDTO>
 	{
-		public OperatorMap() : base()
+		public OperatorMap()
 		{
 			ToTable("dbo.Operators");
+
+			HasKey(i => i.ItemId);
+			Property(i => i.ItemId)
+				.HasColumnName("OperatorID");
+
+			Property(i => i.IsDeleted)
+				.IsRequired()
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("IsDeleted");
+
+			Property(i => i.CorrectorId)
+				.IsRequired()
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("Corrector");
 
 			Property(i => i.Name)
 				.IsRequired()
