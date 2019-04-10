@@ -4474,7 +4474,11 @@ namespace SmartCore.DtoHelper
 				Remarks = purchase.Remarks,
 				ParentTypeId = purchase.ParentType?.ItemId,
 				SupplierId = purchase.Supplier?.ItemId,
-
+				PublishedById = purchase.PublishedById,
+				ClosedById = purchase.ClosedById,
+				PublishedByUser = purchase.PublishedByUser,
+				CloseByUser = purchase.CloseByUser,
+				Number = purchase.Number,
 				Files = purchase.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>
 			};
 		}
@@ -4490,7 +4494,6 @@ namespace SmartCore.DtoHelper
 				Description = purchasedto.Description,
 				ParentId = purchasedto.ParentID ?? default(int),
 				ParentQuotationId = purchasedto.ParentQuotationId ?? default(int),
-
 				Status = purchasedto.Status.HasValue ? (WorkPackageStatus)purchasedto.Status.Value : WorkPackageStatus.All,
 				OpeningDate = purchasedto.OpeningDate ?? DateTimeExtend.GetCASMinDateTime(),
 				PublishingDate = purchasedto.PublishingDate ?? DateTimeExtend.GetCASMinDateTime(),
@@ -4498,6 +4501,11 @@ namespace SmartCore.DtoHelper
 				Author = purchasedto.Author,
 				Remarks = purchasedto.Remarks,
 				ParentType = purchasedto.ParentTypeId.HasValue ? SmartCoreType.Items.GetItemById(purchasedto.ParentTypeId.Value) : SmartCoreType.Unknown,
+				PublishedById = purchasedto.PublishedById,
+				ClosedById = purchasedto.ClosedById,
+				PublishedByUser = purchasedto.PublishedByUser,
+				CloseByUser = purchasedto.CloseByUser,
+				Number = purchasedto.Number,
 				Supplier = purchasedto.Supplier?.Convert()
 			};
 

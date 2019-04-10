@@ -70,6 +70,29 @@ namespace EFCore.DTO.General.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("SupplierId");
 
+			Property(i => i.PublishedById)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("PublishedById");
+
+			Property(i => i.ClosedById)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("ClosedById");
+
+			Property(i => i.PublishedByUser)
+				.HasMaxLength(128)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("PublishedByUser");
+
+			Property(i => i.CloseByUser)
+				.HasMaxLength(128)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("CloseByUser");
+
+			Property(i => i.Number)
+				.HasMaxLength(128)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("Number");
+
 
 			HasRequired(i => i.Supplier)
 				.WithMany(i => i.PurchaseOrderDtos)
