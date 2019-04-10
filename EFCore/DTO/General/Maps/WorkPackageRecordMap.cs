@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class WorkPackageRecordMap : EntityTypeConfiguration<WorkPackageRecordDTO>
+	public class WorkPackageRecordMap : BaseMap<WorkPackageRecordDTO>
 	{
-		public WorkPackageRecordMap()
+		public WorkPackageRecordMap() : base()
 		{
 			ToTable("dbo.Cas3WorkPakageRecord");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.WorkPakageId)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)

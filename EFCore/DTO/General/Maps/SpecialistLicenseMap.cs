@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class SpecialistLicenseMap : EntityTypeConfiguration<SpecialistLicenseDTO>
+	public class SpecialistLicenseMap : BaseMap<SpecialistLicenseDTO>
 	{
-		public SpecialistLicenseMap()
+		public SpecialistLicenseMap() : base()
 		{
 			ToTable("dbo.SpecialistsLicense");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.Confirmation)
 				.IsRequired()

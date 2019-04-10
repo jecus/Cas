@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class KnowledgeModuleMap : EntityTypeConfiguration<KnowledgeModuleDTO>
+	public class KnowledgeModuleMap : BaseMap<KnowledgeModuleDTO>
 	{
-		public KnowledgeModuleMap()
+		public KnowledgeModuleMap() : base()
 		{
 			ToTable("dbo.KnowledgeModules");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.Number)
 				.HasMaxLength(256)

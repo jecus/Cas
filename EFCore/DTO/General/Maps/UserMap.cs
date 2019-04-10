@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class UserMap : EntityTypeConfiguration<UserDTO>
+	public class UserMap : BaseMap<UserDTO>
 	{
-		public UserMap()
+		public UserMap() : base()
 		{
 			ToTable("dbo.Users");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.Name)
 				.HasMaxLength(100)

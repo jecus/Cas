@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class StockComponentInfoMap : EntityTypeConfiguration<StockComponentInfoDTO>
+	public class StockComponentInfoMap : BaseMap<StockComponentInfoDTO>
 	{
-		public StockComponentInfoMap()
+		public StockComponentInfoMap() : base()
 		{
 			ToTable("dbo.StockComponentInfos");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.StoreID)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)

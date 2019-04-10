@@ -1,23 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class QuotationCostMap : EntityTypeConfiguration<QuotationCostDTO>
+	public class QuotationCostMap : BaseMap<QuotationCostDTO>
 	{
-		public QuotationCostMap()
+		public QuotationCostMap() : base()
 		{
 			ToTable("dbo.QuotationCost");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
-
+			
 			Property(i => i.CostNew)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("CostNew");

@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class WorkOrderMap : EntityTypeConfiguration<WorkOrderDTO>
+	public class WorkOrderMap : BaseMap<WorkOrderDTO>
 	{
-		public WorkOrderMap()
+		public WorkOrderMap() : base()
 		{
 			ToTable("dbo.WorkOrders");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.PreparedByDate)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)

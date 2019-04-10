@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class SupplierMap : EntityTypeConfiguration<SupplierDTO>
+	public class SupplierMap : BaseMap<SupplierDTO>
 	{
-		public SupplierMap()
+		public SupplierMap() : base()
 		{
 			ToTable("dbo.Supplier");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.Name)
 				.HasMaxLength(50)

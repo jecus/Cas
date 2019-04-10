@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class InitialOrderMap : EntityTypeConfiguration<InitialOrderDTO>
+	public class InitialOrderMap : BaseMap<InitialOrderDTO>
 	{
-		public InitialOrderMap()
+		public InitialOrderMap() : base()
 		{
 			ToTable("dbo.InitialOrders");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.Title)
 				.HasMaxLength(256)

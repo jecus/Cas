@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class SpecialistMap : EntityTypeConfiguration<SpecialistDTO>
+	public class SpecialistMap : BaseMap<SpecialistDTO>
 	{
-		public SpecialistMap()
+		public SpecialistMap() : base()
 		{
 			ToTable("dbo.Specialists");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.FirstName)
 				.HasMaxLength(256)

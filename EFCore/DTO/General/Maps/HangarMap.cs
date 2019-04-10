@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class HangarMap : EntityTypeConfiguration<HangarDTO>
+	public class HangarMap : BaseMap<HangarDTO>
 	{
-		public HangarMap()
+		public HangarMap() : base()
 		{
 			ToTable("dbo.Hangars");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.StoreName)
 				.HasMaxLength(256)

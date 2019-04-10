@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class AircraftFlightMap : EntityTypeConfiguration<AircraftFlightDTO>
+	public class AircraftFlightMap : BaseMap<AircraftFlightDTO>
 	{
-		public AircraftFlightMap()
+		public AircraftFlightMap() : base()
 		{
 			ToTable("dbo.AircraftFlights");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.ATLBID)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)

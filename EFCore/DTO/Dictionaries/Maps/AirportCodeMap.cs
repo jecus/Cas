@@ -1,23 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 using EFCore.DTO.Dictionaries;
 
 namespace EFCore.DTO.Maps
 {
-	public class AirportCodeMap : EntityTypeConfiguration<AirportCodeDTO>
+	public class AirportCodeMap : BaseMap<AirportCodeDTO>
 	{
-		public AirportCodeMap()
+		public AirportCodeMap() : base()
 		{
 			ToTable("Dictionaries.AirportsCodes");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.Iata)
 				.HasMaxLength(256)
