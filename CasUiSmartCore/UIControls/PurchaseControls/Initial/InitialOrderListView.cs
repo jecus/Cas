@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CASTerms;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls.Initial
@@ -35,6 +36,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Quantity" };
 			ColumnHeaderList.Add(columnHeader);
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+			ColumnHeaderList.Add(columnHeader);
+
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
 		}
 
@@ -43,6 +47,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(InitialOrderRecord item)
 		{
 			var subItems = new List<ListViewItem.ListViewSubItem>();
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
 			var subItem = new ListViewItem.ListViewSubItem { Text = item.Product?.PartNumber, Tag = item.Product?.PartNumber };
 			subItems.Add(subItem);
@@ -58,6 +63,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			subItem = new ListViewItem.ListViewSubItem { Text = item.Quantity.ToString(), Tag = item.Quantity.ToString() };
 			subItems.Add(subItem);
+
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
 			return subItems.ToArray();
 		}

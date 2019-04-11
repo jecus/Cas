@@ -88,6 +88,9 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "ReceivedDate" };
 			ColumnHeaderList.Add(columnHeader);
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+			ColumnHeaderList.Add(columnHeader);
+
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
         }
         #endregion
@@ -195,7 +198,7 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 
 	        var released = item.ReleasedSpecialist?.ToString() ?? "";
 	        var received = item.ReceivedSpecialist?.ToString() ?? "";
-
+	        var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
 			var subItem = new ListViewItem.ListViewSubItem { Text = item.TransferDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString()), Tag = item.TransferDate };
             subItems.Add(subItem);
@@ -238,6 +241,7 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 			subItems.Add(subItem);
 			subItem = new ListViewItem.ListViewSubItem { Text = fromSupplierReciveDate, Tag = item.ParentComponent.FromSupplierReciveDate };
 			subItems.Add(subItem);
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
 			return subItems.ToArray();
         }

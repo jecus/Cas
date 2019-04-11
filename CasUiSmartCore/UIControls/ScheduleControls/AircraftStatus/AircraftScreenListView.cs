@@ -65,6 +65,9 @@ namespace CAS.UI.UIControls.ScheduleControls.AircraftStatus
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Remarks" };
 			ColumnHeaderList.Add(columnHeader);
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+			ColumnHeaderList.Add(columnHeader);
+
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
 		}
 
@@ -84,6 +87,8 @@ namespace CAS.UI.UIControls.ScheduleControls.AircraftStatus
 			var downTimeString = "";
 
 			var time = DateTime.Now.Subtract(item.ParentFlight.FlightDate.AddMinutes(item.ParentFlight.LDGTime));
+
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
 			if (time.TotalHours > 0)
 			{
@@ -127,6 +132,8 @@ namespace CAS.UI.UIControls.ScheduleControls.AircraftStatus
 
 			subItem = new ListViewItem.ListViewSubItem { Text = item.Remarks, Tag = item.Remarks };
 			subItems.Add(subItem);
+
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
 			return subItems.ToArray();
 		}

@@ -73,6 +73,9 @@ namespace CAS.UI.UIControls.PersonnelControls
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Night Time" };
 			ColumnHeaderList.Add(columnHeader);
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+			ColumnHeaderList.Add(columnHeader);
+
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
 
 		}
@@ -103,6 +106,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 				perDaysBlock.Add(aircraftFlight.BlockTimeLifelenght);
 			}
 
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 			var subItem = new ListViewItem.ListViewSubItem { Text = dateString, Tag = date };
 			subItems.Add(subItem);
 			subItem = new ListViewItem.ListViewSubItem { Text = aircraft, Tag = item.Aircraft };
@@ -121,6 +125,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			subItems.Add(subItem);
 			subItem = new ListViewItem.ListViewSubItem { Text = item.NightTime.ToString(), Tag = item.NightTime };
 			subItems.Add(subItem);
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
 			return subItems.ToArray();
 		}

@@ -5,6 +5,7 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Comparers;
+using CASTerms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Personnel;
 
@@ -104,6 +105,9 @@ namespace CAS.UI.UIControls.PersonnelControls
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "Skype" };
 			ColumnHeaderList.Add(columnHeader);
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+			ColumnHeaderList.Add(columnHeader);
+
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
 
 		}
@@ -162,8 +166,8 @@ namespace CAS.UI.UIControls.PersonnelControls
 			}
 
 		    var department = item.Specialization?.Department ??  Department.Unknown;
-
-		    var phone = string.IsNullOrEmpty(item.Additional) ? item.Phone : $"{item.Phone} | Add.: {item.Additional}";
+		    var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var phone = string.IsNullOrEmpty(item.Additional) ? item.Phone : $"{item.Phone} | Add.: {item.Additional}";
 
 			var subItem = new ListViewItem.ListViewSubItem { Text = item.Status.ToString(), Tag = item.Status };
 			subItems.Add(subItem);
@@ -205,6 +209,8 @@ namespace CAS.UI.UIControls.PersonnelControls
 			subItems.Add(subItem);
 			subItem = new ListViewItem.ListViewSubItem { Text = item.Skype, Tag = item.Skype };
 			subItems.Add(subItem);
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
+
 			return subItems.ToArray();
 		}
 

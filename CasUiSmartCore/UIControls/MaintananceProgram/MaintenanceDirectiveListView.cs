@@ -9,6 +9,7 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Comparers;
+using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
@@ -148,7 +149,10 @@ namespace CAS.UI.UIControls.MaintananceProgram
             columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.12f), Text = "Hidden remarks"};
             ColumnHeaderList.Add(columnHeader);
 
-            itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+            ColumnHeaderList.Add(columnHeader);
+
+			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
         }
         #endregion
 
@@ -231,7 +235,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
            if (item.NextPerformanceDate != null && item.NextPerformanceDate > defaultDateTime)
               nextComplianceDate = Convert.ToDateTime(item.NextPerformanceDate);
 
-
+            var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 			string kitRequieredString = item.KitsApplicable ? item.Kits.Count + " kits" : "N/A";
 			string ndtString = item.NDTType.ShortName;
 			string skillString = item.Skill.ShortName;
@@ -268,8 +272,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			if(item.KitsApplicable && item.Kits.Count == 0)
 				kitColor = Color.FromArgb(Highlight.Red.Color);
 
-			subItems.Add( new ListViewItem.ListViewSubItem { Text = item.ScheduleItem, Tag = item.ScheduleItem } );
-			subItems.Add( new ListViewItem.ListViewSubItem { Text = taskCheck, Tag = taskCheck } );
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ScheduleItem, Tag = item.ScheduleItem } );
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = taskCheck, Tag = taskCheck } );
             subItems.Add(new ListViewItem.ListViewSubItem { ForeColor = tcnColor, Text = item.TaskCardNumber, Tag = item.TaskCardNumber});
             subItems.Add(new ListViewItem.ListViewSubItem { Text = description, Tag = description });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Program.ToString(), Tag = item.Program });
@@ -285,24 +289,25 @@ namespace CAS.UI.UIControls.MaintananceProgram
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Workarea, Tag = item.Workarea });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Access, Tag = item.Access });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = status.ToString(), Tag = status });
-            subItems.Add( new ListViewItem.ListViewSubItem { Text = taskNumber, Tag = taskNumber });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = taskNumber, Tag = taskNumber });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = maintManual, Tag = maintManual });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = mrb, Tag = mrb });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.TaskCardNumber, Tag = item.TaskCardNumber });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.CriticalSystem.ToString(), Tag = item.CriticalSystem });
-            subItems.Add( new ListViewItem.ListViewSubItem { Text = ata.ToString(), Tag = ata });
-            subItems.Add( new ListViewItem.ListViewSubItem { Text = kitRequieredString, Tag = kitRequieredString, BackColor = kitColor});
-            subItems.Add( new ListViewItem.ListViewSubItem { Text = ndtString, Tag = ndtString });
-            subItems.Add( new ListViewItem.ListViewSubItem { Text = skillString, Tag = skillString });
-            subItems.Add( new ListViewItem.ListViewSubItem { Text = categoryString, Tag = categoryString });
-            subItems.Add( new ListViewItem.ListViewSubItem { Text = item.Elapsed <= 0 ? "" : item.Elapsed.ToString(), Tag = item.Elapsed });
-            subItems.Add( new ListViewItem.ListViewSubItem { Text = item.ManHours <= 0 ? "" : item.ManHours.ToString(), Tag = item.ManHours });
-            subItems.Add( new ListViewItem.ListViewSubItem { Text = item.Cost <= 0 ? "" : item.Cost.ToString(), Tag = item.Cost });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = ata.ToString(), Tag = ata });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = kitRequieredString, Tag = kitRequieredString, BackColor = kitColor});
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = ndtString, Tag = ndtString });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = skillString, Tag = skillString });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = categoryString, Tag = categoryString });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Elapsed <= 0 ? "" : item.Elapsed.ToString(), Tag = item.Elapsed });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ManHours <= 0 ? "" : item.ManHours.ToString(), Tag = item.ManHours });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Cost <= 0 ? "" : item.Cost.ToString(), Tag = item.Cost });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = app, Tag = app });
-			subItems.Add( new ListViewItem.ListViewSubItem { Text = remarksString, Tag = remarksString });
-            subItems.Add( new ListViewItem.ListViewSubItem { Text = hiddenRemarksString, Tag = hiddenRemarksString});
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = remarksString, Tag = remarksString });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = hiddenRemarksString, Tag = hiddenRemarksString});
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
-            return subItems.ToArray();
+			return subItems.ToArray();
         }
 
         #endregion

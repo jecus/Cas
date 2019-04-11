@@ -151,6 +151,9 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Hidden Remarks" };
 			ColumnHeaderList.Add(columnHeader);
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+			ColumnHeaderList.Add(columnHeader);
+
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
 		}
 
@@ -185,6 +188,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			var depDelayString = "";
 			var arrDelayString = "";
 			var arrEstimatedString = "";
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
 			if (item.IsDispatcherEdit && item.IsDispatcherEditLdg)
 			{
@@ -432,12 +436,13 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			subItem = new ListViewItem.ListViewSubItem { Text = flCat, Tag = flCat };
 			subItems.Add(subItem);
 
-
 			subItem = new ListViewItem.ListViewSubItem { Text = item.Remarks, Tag = item.Remarks };
 			subItems.Add(subItem);
 
 			subItem = new ListViewItem.ListViewSubItem { Text = item.HiddenRemarks, Tag = item.HiddenRemarks };
 			subItems.Add(subItem);
+
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
 			return subItems.ToArray();
 		}

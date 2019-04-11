@@ -101,8 +101,7 @@ namespace CAS.UI.UIControls.Discrepancies
 
 	        columnHeader = new ColumnHeader { Width = 190, Text = "Action Type" };
 	        ColumnHeaderList.Add(columnHeader);
-
-
+			
 	        columnHeader = new ColumnHeader { Width = 190, Text = "Fault Consequence" };
 	        ColumnHeaderList.Add(columnHeader);
 
@@ -183,7 +182,10 @@ namespace CAS.UI.UIControls.Discrepancies
 			columnHeader = new ColumnHeader {Width = 120, Text = "Remarks"};
             ColumnHeaderList.Add(columnHeader);
 
-            itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+            ColumnHeaderList.Add(columnHeader);
+
+			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
         }
 		#endregion
 
@@ -225,8 +227,8 @@ namespace CAS.UI.UIControls.Discrepancies
         protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Discrepancy item)
         {
             var subItems = new List<ListViewItem.ListViewSubItem>();
+            var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
-	        
 
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.IsReliability ? "R" : "N", Tag = item.IsReliability });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Aircraft.ToString(), Tag = item.Aircraft });
@@ -255,8 +257,7 @@ namespace CAS.UI.UIControls.Discrepancies
 	        subItems.Add(new ListViewItem.ListViewSubItem { Text = item.TimeDelay.ToString(), Tag = item.TimeDelay });
 	        subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Substruction ? "Yes" : "No", Tag = item.Substruction });
 
-
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.DeferredCategory, Tag = item.DeferredCategory });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.DeferredCategory, Tag = item.DeferredCategory });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.EventType, Tag = item.EventType });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.EventClass, Tag = item.EventClass });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.EventCategory, Tag = item.EventCategory });
@@ -288,8 +289,9 @@ namespace CAS.UI.UIControls.Discrepancies
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Auth.ToString(), Tag = item.Auth });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.FDR, Tag = item.FDR });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Remark, Tag = item.Remark });
-           
-            return subItems.ToArray();
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
+
+			return subItems.ToArray();
         }
 
         #endregion

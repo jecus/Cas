@@ -57,6 +57,9 @@ namespace CAS.UI.UIControls.PowerPlants
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Engine (Flight)" };
 			ColumnHeaderList.Add(columnHeader);
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+			ColumnHeaderList.Add(columnHeader);
+
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
 		}
 		#endregion
@@ -71,7 +74,7 @@ namespace CAS.UI.UIControls.PowerPlants
 				tcsnLifeLenght = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(aircraft);
 
 			var temp = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(item);
-
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 			var transferDate = item.TransferRecords.GetLast().TransferDate;
 
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = aircraft.ToString(), Tag = aircraft });
@@ -88,6 +91,7 @@ namespace CAS.UI.UIControls.PowerPlants
 			});
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = tcsnLifeLenght.ToString(), Tag = tcsnLifeLenght });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = temp.ToString(), Tag = temp });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
 			return subItems.ToArray();
 		}

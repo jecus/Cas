@@ -65,6 +65,9 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.3f), Text = "Date" };
             ColumnHeaderList.Add(columnHeader);
 
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+            ColumnHeaderList.Add(columnHeader);
+
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
         }
         #endregion
@@ -84,11 +87,14 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             var dates = (first != null ? UsefulMethods.NormalizeDate(first.FlightDate.Date) : "YY:MM:DD") + " - " +
                            (last != null ? UsefulMethods.NormalizeDate(last.FlightDate.Date) : "YY:MM:DD");
 
-            subItems[0] = new ListViewItem.ListViewSubItem { Text = item.ATLBNo, Tag = item.ATLBNo };
+            var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+
+			subItems[0] = new ListViewItem.ListViewSubItem { Text = item.ATLBNo, Tag = item.ATLBNo };
             subItems[1] = new ListViewItem.ListViewSubItem { Text = pages, Tag = pages };
             subItems[2] = new ListViewItem.ListViewSubItem { Text = dates, Tag = last != null ? last.FlightDate : DateTimeExtend.GetCASMinDateTime() };
+            subItems[3] = new ListViewItem.ListViewSubItem { Text = author, Tag = author };
 
-            return subItems;
+			return subItems;
         }
 
 		#endregion

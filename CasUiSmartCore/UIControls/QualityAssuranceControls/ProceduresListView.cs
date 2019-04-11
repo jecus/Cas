@@ -8,6 +8,7 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Comparers;
+using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
@@ -102,7 +103,10 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
             columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.12f), Text = "Hidden remarks"};
             ColumnHeaderList.Add(columnHeader);
 
-            itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+            ColumnHeaderList.Add(columnHeader);
+
+			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
         }
 		#endregion
 
@@ -202,8 +206,10 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
                                           ? item.Remains.ToString()
                                           : "N/A";
 
-            //////////////////////////////////////////////////////////////////////////////////////
-            string description = item.Description != "" ? item.Description : "N/A";
+			//////////////////////////////////////////////////////////////////////////////////////
+
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			string description = item.Description != "" ? item.Description : "N/A";
             string title = item.Title != "" ? item.Title : "N/A";
             string reqiredDocuments = item.DocumentReferences.Count > 0 ? item.DocumentReferences.Aggregate("", (current, i) => current + (i.Document + "; ")): "N/A";
             DirectiveStatus status = item.Status;
@@ -226,8 +232,9 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
             subItems.Add( new ListViewItem.ListViewSubItem { Text = item.Cost <= 0 ? "" : item.Cost.ToString(), Tag = item.Cost });
             subItems.Add( new ListViewItem.ListViewSubItem { Text = remarksString, Tag = remarksString });
             subItems.Add( new ListViewItem.ListViewSubItem { Text = hiddenRemarksString, Tag = hiddenRemarksString});
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
-            return subItems.ToArray();
+			return subItems.ToArray();
         }
 
         #endregion

@@ -166,7 +166,10 @@ namespace CAS.UI.UIControls.DirectivesControls
             columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.12f), Text = "Hidden remarks"};
             ColumnHeaderList.Add(columnHeader);
 
-            itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+            ColumnHeaderList.Add(columnHeader);
+
+			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
         }
 		#endregion
 
@@ -241,7 +244,6 @@ namespace CAS.UI.UIControls.DirectivesControls
             var stcColor = itemsListView.ForeColor;
 
             var effDate = DateTimeExtend.GetCASMinDateTime();
-
             var ata = item.ATAChapter;
             //////////////////////////////////////////////////////////////////////////////////////
             //         Определение последнего выполнения директивы и KitRequiered               //
@@ -308,8 +310,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 	        var baseDetail = item.ParentBaseComponent.ToString();
             var status = item.Status;
             var workType = item.WorkType;
+            var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
-            if (item.ADNoFile == null)
+			if (item.ADNoFile == null)
                 adColor = Color.MediumVioletRed;
             if (item.ServiceBulletinFile == null)
                 sbColor = Color.MediumVioletRed;
@@ -367,8 +370,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = manHours == -1? "" : manHours.ToString(), Tag = manHours });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = cost == -1 ? "" : cost.ToString(), Tag = cost });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = hiddenRemarksString, Tag = hiddenRemarksString });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
-            return subItems.ToArray();
+			return subItems.ToArray();
         }
 
         #endregion
