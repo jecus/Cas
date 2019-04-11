@@ -15,7 +15,13 @@ namespace SmartCore.Entities.General.Attributes
             _title = title;
         }
 
-        public ListViewDataAttribute(float headerWidht, string title)
+        public ListViewDataAttribute(string title, int order)
+        {
+	        _order = order;
+			_title = title;
+        }
+
+		public ListViewDataAttribute(float headerWidht, string title)
         {
             _headerWidth = headerWidht;
             _title = title;

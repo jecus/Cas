@@ -70,7 +70,7 @@ namespace SmartCore.Entities.General
 
 		#region public int CorrectorId { get; set; }
 
-		[ListViewData("Author")]
+		[ListViewData("Author", 999)]
 		[TableColumn("Corrector")]
         public int CorrectorId { get; set; }
 
