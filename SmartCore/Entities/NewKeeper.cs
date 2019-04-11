@@ -34,6 +34,8 @@ namespace SmartCore.Entities
 
 		public void Save(BaseEntityObject value, bool saveAttachedFile = true, bool writeAudit = true)
 		{
+			value.CorrectorId = _casEnvironment.IdentityUser.ItemId;
+
 			var type = AuditOperation.Created;
 			if (value.ItemId > 0)
 				type = AuditOperation.Changed;
@@ -77,6 +79,8 @@ namespace SmartCore.Entities
 
 		public void Delete(BaseEntityObject value, bool isDeletedOnly = false, bool saveAttachedFile = true)
 		{
+			value.CorrectorId = _casEnvironment.IdentityUser.ItemId;
+
 			var blType = value.GetType();
 			var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
 			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "DeleteGeneric")?.MakeGenericMethod(blType, dto.Type);
