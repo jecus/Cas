@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
 using MetroFramework.Forms;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Filters;
 using SmartCore.Purchase;
 
@@ -31,6 +32,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			_suppliers = suppliers;
 			_selectedItems = selectedItems;
 			supplierListView.SetItemsArray(suppliers.ToArray());
+
+			UpdateControls();
 		}
 
 		public QuotationSupplierForm(List<Supplier> suppliers, RequestForQuotationRecord selectedItem) : this()
@@ -45,9 +48,26 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			if(_prices.Count > 0)
 				supplierListView1.SetItemsArray(_prices.ToArray());
 			supplierListView.SetItemsArray(suppliers.ToArray());
+
+			UpdateControls();
 		}
 
 		#endregion
+
+		public void UpdateControls()
+		{
+			comboBoxCostNew.Items.Clear();
+			comboBoxCostNew.Items.AddRange(Сurrency.Items.ToArray());
+
+			comboBoxCostOH.Items.Clear();
+			comboBoxCostOH.Items.AddRange(Сurrency.Items.ToArray());
+
+			comboBoxCostRepair.Items.Clear();
+			comboBoxCostRepair.Items.AddRange(Сurrency.Items.ToArray());
+
+			comboBoxCostServ.Items.Clear();
+			comboBoxCostServ.Items.AddRange(Сurrency.Items.ToArray());
+		}
 
 		private void ButtonAdd_Click(object sender, System.EventArgs e)
 		{
@@ -75,6 +95,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			numericUpDownCostOH.Value = supplierListView1.SelectedItem.CostOverhaul;
 			numericUpDownCostRepair.Value = supplierListView1.SelectedItem.CostRepair;
 			numericUpDownCostServ.Value = supplierListView1.SelectedItem.CostServiceable;
+
+			comboBoxCostNew.SelectedItem = supplierListView1.SelectedItem.СurrencyNew;
+			comboBoxCostOH.SelectedItem = supplierListView1.SelectedItem.СurrencyOH;
+			comboBoxCostRepair.SelectedItem = supplierListView1.SelectedItem.СurrencyRepair;
+			comboBoxCostServ.SelectedItem = supplierListView1.SelectedItem.СurrencyServ;
+
 		}
 
 		private void Button1_Click(object sender, System.EventArgs e)
@@ -85,6 +111,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			supplierListView1.SelectedItem.CostOverhaul = numericUpDownCostOH.Value;
 			supplierListView1.SelectedItem.CostRepair = numericUpDownCostRepair.Value;
 			supplierListView1.SelectedItem.CostServiceable = numericUpDownCostServ.Value;
+
+			supplierListView1.SelectedItem.СurrencyNew = (Сurrency) comboBoxCostNew.SelectedItem;
+			supplierListView1.SelectedItem.СurrencyOH = (Сurrency)comboBoxCostOH.SelectedItem;
+			supplierListView1.SelectedItem.СurrencyRepair = (Сurrency)comboBoxCostRepair.SelectedItem;
+			supplierListView1.SelectedItem.СurrencyServ = (Сurrency)comboBoxCostServ.SelectedItem;
 
 			supplierListView1.SetItemsArray(_prices.ToArray());
 
@@ -97,6 +128,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			numericUpDownCostOH.Value = 0;
 			numericUpDownCostRepair.Value = 0;
 			numericUpDownCostServ.Value = 0;
+			comboBoxCostNew.SelectedItem = Сurrency.UNK;
+			comboBoxCostOH.SelectedItem = Сurrency.UNK;
+			comboBoxCostRepair.SelectedItem = Сurrency.UNK;
+			comboBoxCostServ.SelectedItem = Сurrency.UNK;
 		}
 
 		private void ButtonCancel_Click(object sender, System.EventArgs e)

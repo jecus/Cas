@@ -462,14 +462,14 @@ namespace SmartCore.Purchase
 	[JsonObject]
 	public class SupplierPrice : BaseCoreObject
     {
-		[JsonIgnore]
+	    [JsonIgnore]
 		public Supplier Supplier { get; set; }
 
 		[JsonIgnore]
 		public RequestForQuotationRecord Parent { get; set; }
 
 		[JsonIgnore]
-		[ListViewData(200, "Supplier")]
+		[ListViewData(200, "Supplier",1)]
 		public string SupplierName
 		{
 			get => Supplier?.Name ?? Supplier.Unknown.Name;
@@ -478,21 +478,69 @@ namespace SmartCore.Purchase
 		[JsonProperty]
 		public int SupplierId { get; set; }
 
-		[ListViewData(100,"CostNew")]
+		[ListViewData(80,"CostNew", 2)]
 		[JsonProperty]
 		public decimal CostNew { get; set; }
 
-		[ListViewData(100, "CostServ")]
+		[ListViewData(80, "CostServ",4)]
 		[JsonProperty]
 		public decimal CostServiceable { get; set; }
 
-		[ListViewData(100, "CostOH")]
+		[ListViewData(80, "CostOH",6)]
 		[JsonProperty]
 		public decimal CostOverhaul { get; set; }
 
-		[ListViewData(100, "CostRepair")]
+		[ListViewData(80, "CostRepair",8)]
 		[JsonProperty]
 		public decimal CostRepair { get; set; }
+
+		[DefaultValue(-1)]
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+		public int ÑurrencyNewId { get; set; }
+
+		[JsonIgnore]
+		[ListViewData(80, "Currency",3)]
+		public Ñurrency ÑurrencyNew
+		{
+			get => Ñurrency.GetItemById(ÑurrencyNewId);
+			set => ÑurrencyNewId = value.ItemId;
+		}
+
+		[DefaultValue(-1)]
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+		public int ÑurrencyServId { get; set; }
+
+		[ListViewData(80, "Currency",5)]
+		[JsonIgnore]
+		public Ñurrency ÑurrencyServ
+		{
+			get => Ñurrency.GetItemById(ÑurrencyServId);
+			set => ÑurrencyServId = value.ItemId;
+		}
+
+		[DefaultValue(-1)]
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+		public int ÑurrencyOHId { get; set; }
+
+		[JsonIgnore]
+		[ListViewData(80, "Currency",7)]
+		public Ñurrency ÑurrencyOH
+		{
+			get => Ñurrency.GetItemById(ÑurrencyOHId);
+			set => ÑurrencyOHId = value.ItemId;
+		}
+
+		[DefaultValue(-1)]
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+		public int ÑurrencyRepairId { get; set; }
+
+		[JsonIgnore]
+		[ListViewData(80, "Currency",9)]
+		public Ñurrency ÑurrencyRepair
+		{
+			get => Ñurrency.GetItemById(ÑurrencyRepairId);
+			set => ÑurrencyRepairId = value.ItemId;
+		}
 	}
 
 }

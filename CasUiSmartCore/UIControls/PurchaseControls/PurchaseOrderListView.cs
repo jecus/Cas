@@ -104,12 +104,12 @@ namespace CAS.UI.UIControls.PurchaseControls
         
         protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
         {
-            if (SelectedItem != null)
-            {
-                e.TypeOfReflection = ReflectionTypes.DisplayInCurrent;
-                e.DisplayerText = SelectedItem.Title;
-                e.RequestedEntity = new PurchaseOrderScreen(SelectedItem);
-            }
+            //if (SelectedItem != null)
+            //{
+            //    e.TypeOfReflection = ReflectionTypes.DisplayInCurrent;
+            //    e.DisplayerText = SelectedItem.Title;
+            //    e.RequestedEntity = new PurchaseOrderScreen(SelectedItem);
+            //}
         }
 
         #endregion

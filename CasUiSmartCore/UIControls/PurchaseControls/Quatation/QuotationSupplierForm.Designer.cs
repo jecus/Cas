@@ -48,6 +48,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.labelQuantity = new MetroFramework.Controls.MetroLabel();
 			this.labelSearchName = new MetroFramework.Controls.MetroLabel();
 			this.textBoxSearchName = new MetroFramework.Controls.MetroTextBox();
+			this.comboBoxCostNew = new System.Windows.Forms.ComboBox();
+			this.comboBoxCostServ = new System.Windows.Forms.ComboBox();
+			this.comboBoxCostOH = new System.Windows.Forms.ComboBox();
+			this.comboBoxCostRepair = new System.Windows.Forms.ComboBox();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostRepair)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostOH)).BeginInit();
@@ -145,7 +149,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(801, 608);
+			this.buttonOk.Location = new System.Drawing.Point(813, 608);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 295;
@@ -159,7 +163,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonCancel.Location = new System.Drawing.Point(882, 608);
+			this.buttonCancel.Location = new System.Drawing.Point(894, 608);
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.Size = new System.Drawing.Size(75, 33);
 			this.buttonCancel.TabIndex = 294;
@@ -168,6 +172,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.comboBoxCostRepair);
+			this.groupBox1.Controls.Add(this.comboBoxCostOH);
+			this.groupBox1.Controls.Add(this.comboBoxCostServ);
+			this.groupBox1.Controls.Add(this.comboBoxCostNew);
 			this.groupBox1.Controls.Add(this.numericUpDownCostRepair);
 			this.groupBox1.Controls.Add(this.metroLabel3);
 			this.groupBox1.Controls.Add(this.numericUpDownCostOH);
@@ -179,7 +187,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.groupBox1.Controls.Add(this.labelQuantity);
 			this.groupBox1.Location = new System.Drawing.Point(686, 89);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(275, 173);
+			this.groupBox1.Size = new System.Drawing.Size(301, 173);
 			this.groupBox1.TabIndex = 296;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Cost";
@@ -194,7 +202,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
             0,
             0});
 			this.numericUpDownCostRepair.Name = "numericUpDownCostRepair";
-			this.numericUpDownCostRepair.Size = new System.Drawing.Size(165, 20);
+			this.numericUpDownCostRepair.Size = new System.Drawing.Size(88, 20);
 			this.numericUpDownCostRepair.TabIndex = 254;
 			// 
 			// metroLabel3
@@ -218,7 +226,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
             0,
             0});
 			this.numericUpDownCostOH.Name = "numericUpDownCostOH";
-			this.numericUpDownCostOH.Size = new System.Drawing.Size(165, 20);
+			this.numericUpDownCostOH.Size = new System.Drawing.Size(88, 20);
 			this.numericUpDownCostOH.TabIndex = 252;
 			// 
 			// metroLabel2
@@ -242,7 +250,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
             0,
             0});
 			this.numericUpDownCostNew.Name = "numericUpDownCostNew";
-			this.numericUpDownCostNew.Size = new System.Drawing.Size(165, 20);
+			this.numericUpDownCostNew.Size = new System.Drawing.Size(87, 20);
 			this.numericUpDownCostNew.TabIndex = 250;
 			// 
 			// metroLabel1
@@ -262,7 +270,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button1.Location = new System.Drawing.Point(194, 127);
+			this.button1.Location = new System.Drawing.Point(220, 127);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(75, 33);
 			this.button1.TabIndex = 249;
@@ -279,7 +287,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
             0,
             0});
 			this.numericUpDownCostServ.Name = "numericUpDownCostServ";
-			this.numericUpDownCostServ.Size = new System.Drawing.Size(165, 20);
+			this.numericUpDownCostServ.Size = new System.Drawing.Size(88, 20);
 			this.numericUpDownCostServ.TabIndex = 142;
 			// 
 			// labelQuantity
@@ -335,11 +343,51 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.textBoxSearchName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			this.textBoxSearchName.TextChanged += new System.EventHandler(this.textBoxSearchPartNumber_TextChanged);
 			// 
+			// comboBoxCostNew
+			// 
+			this.comboBoxCostNew.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.comboBoxCostNew.FormattingEnabled = true;
+			this.comboBoxCostNew.ItemHeight = 12;
+			this.comboBoxCostNew.Location = new System.Drawing.Point(196, 16);
+			this.comboBoxCostNew.Name = "comboBoxCostNew";
+			this.comboBoxCostNew.Size = new System.Drawing.Size(99, 20);
+			this.comboBoxCostNew.TabIndex = 299;
+			// 
+			// comboBoxCostServ
+			// 
+			this.comboBoxCostServ.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.comboBoxCostServ.FormattingEnabled = true;
+			this.comboBoxCostServ.ItemHeight = 12;
+			this.comboBoxCostServ.Location = new System.Drawing.Point(196, 41);
+			this.comboBoxCostServ.Name = "comboBoxCostServ";
+			this.comboBoxCostServ.Size = new System.Drawing.Size(99, 20);
+			this.comboBoxCostServ.TabIndex = 300;
+			// 
+			// comboBoxCostOH
+			// 
+			this.comboBoxCostOH.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.comboBoxCostOH.FormattingEnabled = true;
+			this.comboBoxCostOH.ItemHeight = 12;
+			this.comboBoxCostOH.Location = new System.Drawing.Point(196, 67);
+			this.comboBoxCostOH.Name = "comboBoxCostOH";
+			this.comboBoxCostOH.Size = new System.Drawing.Size(99, 20);
+			this.comboBoxCostOH.TabIndex = 301;
+			// 
+			// comboBoxCostRepair
+			// 
+			this.comboBoxCostRepair.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.comboBoxCostRepair.FormattingEnabled = true;
+			this.comboBoxCostRepair.ItemHeight = 12;
+			this.comboBoxCostRepair.Location = new System.Drawing.Point(196, 93);
+			this.comboBoxCostRepair.Name = "comboBoxCostRepair";
+			this.comboBoxCostRepair.Size = new System.Drawing.Size(99, 20);
+			this.comboBoxCostRepair.TabIndex = 302;
+			// 
 			// QuotationSupplierForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(980, 664);
+			this.ClientSize = new System.Drawing.Size(992, 664);
 			this.Controls.Add(this.labelSearchName);
 			this.Controls.Add(this.textBoxSearchName);
 			this.Controls.Add(this.groupBox1);
@@ -384,5 +432,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		private MetroFramework.Controls.MetroLabel labelQuantity;
 		private MetroFramework.Controls.MetroLabel labelSearchName;
 		private MetroFramework.Controls.MetroTextBox textBoxSearchName;
+		private System.Windows.Forms.ComboBox comboBoxCostRepair;
+		private System.Windows.Forms.ComboBox comboBoxCostOH;
+		private System.Windows.Forms.ComboBox comboBoxCostServ;
+		private System.Windows.Forms.ComboBox comboBoxCostNew;
 	}
 }

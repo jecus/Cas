@@ -125,6 +125,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 			comboBoxCondition.Items.Clear();
 			comboBoxCondition.DataSource = Enum.GetValues(typeof(ComponentStatus));
+
+			comboBoxCurrency.Items.Clear();
+			comboBoxCurrency.Items.AddRange(Сurrency.Items.ToArray());
 		}
 
 		#endregion
