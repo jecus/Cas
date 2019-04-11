@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Comparers;
+using CASTerms;
 using SmartCore.Entities;
 
 namespace CAS.UI.UIControls.Users
@@ -69,13 +70,14 @@ namespace CAS.UI.UIControls.Users
 		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(User item)
 		{
 			var subItems = new List<ListViewItem.ListViewSubItem>();
-
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 			var userName = $"{item.Surname} {item.Name}";
 
 			subItems.Add(new ListViewItem.ListViewSubItem {Text = userName, Tag = userName });
 			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Login, Tag = item.Login });
 			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Password, Tag = item.Password });
 			//subItems.Add(new ListViewItem.ListViewSubItem {Text = item.UserType.ToString(), Tag = item.UserType });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
 			return subItems.ToArray();
 		}
@@ -101,6 +103,9 @@ namespace CAS.UI.UIControls.Users
 
 			//columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "UserType" };
 			//ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+			ColumnHeaderList.Add(columnHeader);
 
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
 		}

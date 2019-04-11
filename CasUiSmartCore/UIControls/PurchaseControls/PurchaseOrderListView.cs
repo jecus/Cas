@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
+using CASTerms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Purchase;
 
@@ -61,8 +62,9 @@ namespace CAS.UI.UIControls.PurchaseControls
         protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(PurchaseOrder item)
         {
             var subItems = new List<ListViewItem.ListViewSubItem>();
+            var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Number, Tag = item.Number });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Number, Tag = item.Number });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Title, Tag = item.Title });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Description, Tag = item.Description });
             subItems.Add(new ListViewItem.ListViewSubItem
@@ -94,8 +96,9 @@ namespace CAS.UI.UIControls.PurchaseControls
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.PublishedByUser, Tag = item.PublishedByUser });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.CloseByUser, Tag = item.CloseByUser });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Remarks, Tag = item.Remarks });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
-            return subItems.ToArray();
+			return subItems.ToArray();
         }
 
         #endregion
@@ -150,7 +153,10 @@ namespace CAS.UI.UIControls.PurchaseControls
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Remark" };
             ColumnHeaderList.Add(columnHeader);
 
-            itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+            ColumnHeaderList.Add(columnHeader);
+
+			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
         }
 
         #endregion

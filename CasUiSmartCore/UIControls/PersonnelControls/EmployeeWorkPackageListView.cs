@@ -51,6 +51,9 @@ namespace CAS.UI.UIControls.PersonnelControls
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.15f), Text = "Station" };
 			ColumnHeaderList.Add(columnHeader);
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+			ColumnHeaderList.Add(columnHeader);
+
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
 
 		}
@@ -80,6 +83,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 
 			var closingDate = item.ClosingDate <= DateTimeExtend.GetCASMinDateTime().Date ? "" : item.ClosingDate.ToString("dd.MM.yyyy");
 			var aircraft = GlobalObjects.AircraftsCore.GetAircraftById(item.ParentId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
 			var subItem = new ListViewItem.ListViewSubItem { Text = closingDate, Tag = item.ClosingDate };
 			subItems.Add(subItem);
@@ -93,7 +97,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			subItems.Add(subItem);
 			subItem = new ListViewItem.ListViewSubItem { Text = item.Station, Tag = item.Status };
 			subItems.Add(subItem);
-
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 			return subItems.ToArray();
 		}
 

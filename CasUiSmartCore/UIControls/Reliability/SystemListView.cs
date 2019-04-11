@@ -48,6 +48,9 @@ namespace CAS.UI.UIControls.Reliability
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Reason" };
 			ColumnHeaderList.Add(columnHeader);
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+			ColumnHeaderList.Add(columnHeader);
+
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
 		}
 		#endregion
@@ -58,7 +61,7 @@ namespace CAS.UI.UIControls.Reliability
 		{
 			var subItems = new List<ListViewItem.ListViewSubItem>();
 			string on, off,  ata, goodClass, reason = "", description = "", fromTo = "";
-
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 			if (item.IsReplaceComponentRemoved)
 			{
 				off = item.ReplaceComponent.ToString();
@@ -133,6 +136,7 @@ namespace CAS.UI.UIControls.Reliability
 			subItems.Add(subItem);
 			subItem = new ListViewItem.ListViewSubItem { Text = reason, Tag = reason };
 			subItems.Add(subItem);
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
 
 			return subItems.ToArray();

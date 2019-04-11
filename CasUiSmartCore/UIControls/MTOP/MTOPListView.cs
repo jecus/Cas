@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
+using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.General.MTOP;
 
@@ -41,6 +42,8 @@ namespace CAS.UI.UIControls.MTOP
 				ColumnHeaderList.Add(columnHeader);
 			}
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+			ColumnHeaderList.Add(columnHeader);
 
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
 		}
@@ -55,7 +58,7 @@ namespace CAS.UI.UIControls.MTOP
 
 			var tempHours = item.PhaseThresh.Hours;
 			var name = $"{item.Name}";
-
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 			var subItem = new ListViewItem.ListViewSubItem { Text = name, Tag = name };
 			subItems.Add(subItem);
 
@@ -83,6 +86,7 @@ namespace CAS.UI.UIControls.MTOP
 				subItems.Add(subItem);
 			}
 
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
 			return subItems.ToArray();
 		}

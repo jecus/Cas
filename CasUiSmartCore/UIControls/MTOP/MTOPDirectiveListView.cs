@@ -5,6 +5,7 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Comparers;
+using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.MTOP;
@@ -98,6 +99,9 @@ namespace CAS.UI.UIControls.MTOP
 				ColumnHeaderList.Add(columnHeader);
 			}
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+			ColumnHeaderList.Add(columnHeader);
+
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
 		}
 
@@ -112,7 +116,7 @@ namespace CAS.UI.UIControls.MTOP
 			var phaseString = "";
 			if (item.MTOPPhase != null)
 				phaseString = item.MTOPPhase.ToString();
-			
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
 			var subItem = new ListViewItem.ListViewSubItem { Text = item.TaskCardNumber, Tag = item.TaskCardNumber };
 			subItems.Add(subItem);
@@ -163,6 +167,7 @@ namespace CAS.UI.UIControls.MTOP
 				subItems.Add(subItem);
 			}
 
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
 			return subItems.ToArray();
 		}

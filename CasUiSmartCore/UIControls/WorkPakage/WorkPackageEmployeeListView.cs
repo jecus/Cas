@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CASTerms;
 using SmartCore.Entities.General.Personnel;
 
 namespace CAS.UI.UIControls.WorkPakage
@@ -33,6 +34,9 @@ namespace CAS.UI.UIControls.WorkPakage
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.4f), Text = "Privileges" };
 			ColumnHeaderList.Add(columnHeader);
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+			ColumnHeaderList.Add(columnHeader);
+
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
 
 		}
@@ -43,7 +47,7 @@ namespace CAS.UI.UIControls.WorkPakage
 		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Specialist item)
 		{
 			var subItems = new List<ListViewItem.ListViewSubItem>();
-
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 			var ratingString = "";
 			foreach (var license in item.Licenses)
 			{
@@ -68,6 +72,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			subItems.Add(subItem);
 			subItem = new ListViewItem.ListViewSubItem { Text = ratingString, Tag = ratingString };
 			subItems.Add(subItem);
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
 			return subItems.ToArray();
 		}

@@ -193,6 +193,9 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 	        columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Maintenance" };
 	        ColumnHeaderList.Add(columnHeader);
 
+	        columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+	        ColumnHeaderList.Add(columnHeader);
+
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
         }
         #endregion
@@ -207,6 +210,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 	        var dateString = item.FlightDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
 	        var date = item.FlightDate.Date.AddMinutes(item.OutTime);
 	        var atlb = _atbs.GetItemById(item.ATLBId);
+	        var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
 			if (item.AtlbRecordType == AtlbRecordType.Flight)
 	        {
@@ -383,6 +387,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 		        subItems.Add(subItem);
 		        subItem = new ListViewItem.ListViewSubItem { Text = item.ListViewChecksPerformed, Tag = item.ListViewChecksPerformed };
 				subItems.Add(subItem);
+				subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 			}
 	        else
 	        {
@@ -445,6 +450,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 		        subItems.Add(subItem);
 		        subItem = new ListViewItem.ListViewSubItem { Text = item.ListViewChecksPerformed, Tag = item.ListViewChecksPerformed };
 		        subItems.Add(subItem);
+		        subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 			}
             
 

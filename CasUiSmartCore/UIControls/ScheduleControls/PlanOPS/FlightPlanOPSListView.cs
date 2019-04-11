@@ -36,6 +36,9 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.8f), Text = "Remarks" };
 			ColumnHeaderList.Add(columnHeader);
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+			ColumnHeaderList.Add(columnHeader);
+
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
 		}
 
@@ -46,7 +49,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(FlightPlanOps item)
 		{
 			var subItems = new List<ListViewItem.ListViewSubItem>();
-
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 			var period = $"{item.From:dd-MMMM-yyyy} - {item.To:dd-MMMM-yyyy}";
 
 			var subItem = new ListViewItem.ListViewSubItem { Text = period, Tag = period };
@@ -54,7 +57,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 
 			subItem = new ListViewItem.ListViewSubItem { Text = item.Remarks, Tag = item.Remarks };
 			subItems.Add(subItem);
-
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 			return subItems.ToArray();
 		}
 

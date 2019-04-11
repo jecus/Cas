@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CASTerms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Mail;
 using Convert = SmartCore.Auxiliary.Convert;
@@ -58,6 +59,8 @@ namespace CAS.UI.UIControls.MailControls
 			ColumnHeaderList.Add(columnHeader);
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Executor" };
 			ColumnHeaderList.Add(columnHeader);
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+			ColumnHeaderList.Add(columnHeader);
 
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
 		}
@@ -72,7 +75,7 @@ namespace CAS.UI.UIControls.MailControls
 
 			var status = item.IsClosed ? "Closed" : "Open";
 			var parformUpToDate = item.PerformeUpTo ? Convert.GetDateFormat(item.PerformeUpToDate) : "";
-
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 			var subItem = new ListViewItem.ListViewSubItem { Text = item.Status.ToString(), Tag = item.Status };
 			subItems.Add(subItem);
 			subItem = new ListViewItem.ListViewSubItem { Text = item.DocClass.ToString(), Tag = item.DocClass };
@@ -123,6 +126,7 @@ namespace CAS.UI.UIControls.MailControls
 			subItems.Add(subItem);
 			subItem = new ListViewItem.ListViewSubItem { Text = item.Specialist.ToString(), Tag = item.Specialist };
 			subItems.Add(subItem);
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
 			return subItems.ToArray();
 		}

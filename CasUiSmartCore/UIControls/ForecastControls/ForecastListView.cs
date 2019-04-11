@@ -8,6 +8,7 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Comparers;
+using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Directives;
@@ -102,6 +103,9 @@ namespace CAS.UI.UIControls.ForecastControls
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "X2" };
 			ColumnHeaderList.Add(columnHeader);
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+			ColumnHeaderList.Add(columnHeader);
+
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
 			itemsListView.Columns[3].AutoResize(ColumnHeaderAutoResizeStyle.None);
 			itemsListView.Columns[3].Width = 10;
@@ -190,8 +194,8 @@ namespace CAS.UI.UIControls.ForecastControls
             int times = index == 0 ? item.Parent.Times : index + 1;
             double manHours = item.Parent is IEngineeringDirective ? ((IEngineeringDirective) item.Parent).ManHours : 0;
             double cost = item.Parent is IEngineeringDirective ? ((IEngineeringDirective)item.Parent).Cost : 0;
-
-	        var title = item.Title;
+            var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var title = item.Title;
 	        if (item.Parent is Directive)
 	        {
 		        var directive = item.Parent as Directive;
@@ -220,6 +224,7 @@ namespace CAS.UI.UIControls.ForecastControls
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.BeforeForecastResourceRemain != null ? item.BeforeForecastResourceRemain.ToString() : "", Tag = item.BeforeForecastResourceRemain });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Parent.ForecastLifelength.ToString(), Tag = item.Parent.ForecastLifelength });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Parent.AfterForecastResourceRemain != null ? item.Parent.AfterForecastResourceRemain.ToString() : "", Tag = item.Parent.AfterForecastResourceRemain });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
 			return subItems.ToArray();
         }

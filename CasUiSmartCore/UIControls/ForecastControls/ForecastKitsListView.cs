@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.KitControls;
+using CASTerms;
 using SmartCore.Entities.General.Accessory;
 
 namespace CAS.UI.UIControls.ForecastControls
@@ -120,6 +121,9 @@ namespace CAS.UI.UIControls.ForecastControls
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Remarks" };
 			ColumnHeaderList.Add(columnHeader);
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+			ColumnHeaderList.Add(columnHeader);
+
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
 		}
 		#endregion
@@ -136,8 +140,9 @@ namespace CAS.UI.UIControls.ForecastControls
 		    var supplier = item.Suppliers != null ? item.Suppliers.ToString() : "";
 		    var quantity = Math.Round(item.Quantity, 2).ToString();
 		    var taskQuantity = Math.Round(item.TaskQuantity, 2).ToString();
+		    var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
-		    subItems.Add(new ListViewItem.ListViewSubItem { Text = standart, Tag = standart });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = standart, Tag = standart });
 		    subItems.Add(new ListViewItem.ListViewSubItem { Text = item.PartNumber, Tag = item.PartNumber });
 		    subItems.Add(new ListViewItem.ListViewSubItem { Text = product, Tag = product });
 		    subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Manufacturer, Tag = item.Manufacturer });
@@ -151,9 +156,9 @@ namespace CAS.UI.UIControls.ForecastControls
 		    subItems.Add(new ListViewItem.ListViewSubItem { Text = taskQuantity, Tag = item.TaskQuantity });
 		    subItems.Add(new ListViewItem.ListViewSubItem { Text = item.GoodsClass.ToString(), Tag = item.GoodsClass });
 		    subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Remarks, Tag = item.Remarks });
+		    subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
-
-		    return subItems.ToArray();
+			return subItems.ToArray();
 	    }
 
 	    #endregion

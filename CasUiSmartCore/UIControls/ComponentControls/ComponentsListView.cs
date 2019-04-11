@@ -10,6 +10,7 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.StoresControls;
+using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
@@ -146,6 +147,9 @@ namespace CAS.UI.UIControls.ComponentControls
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Hidden Remarks" };
             ColumnHeaderList.Add(columnHeader);
 
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+            ColumnHeaderList.Add(columnHeader);
+
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
         }
 		#endregion
@@ -215,6 +219,7 @@ namespace CAS.UI.UIControls.ComponentControls
         protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(BaseEntityObject item)
         {
 			var subItems = new List<ListViewItem.ListViewSubItem>();
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
 			DateTime? approx;
             Lifelength remains, next;
@@ -359,7 +364,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = costServiceable.ToString(), Tag = costServiceable });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = remarks, Tag = remarks });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = hiddenRemarks, Tag = hiddenRemarks });
-			
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
 			return subItems.ToArray();
         }
