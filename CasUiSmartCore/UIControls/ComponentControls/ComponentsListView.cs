@@ -337,7 +337,7 @@ namespace CAS.UI.UIControls.ComponentControls
 					? SmartCore.Auxiliary.Convert.GetDateFormat(transferDate) : "",
                 Tag = transferDate 
             });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = firstPerformance.ToString(), Tag = firstPerformance });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = firstPerformance?.ToString(), Tag = firstPerformance });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = repeatInterval.ToString(), Tag = repeatInterval });
 			subItems.Add(new ListViewItem.ListViewSubItem
             {
