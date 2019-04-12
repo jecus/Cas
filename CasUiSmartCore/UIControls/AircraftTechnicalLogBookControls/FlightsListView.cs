@@ -75,7 +75,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Route" };
             ColumnHeaderList.Add(columnHeader);
 
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
             ColumnHeaderList.Add(columnHeader);
 
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
@@ -86,7 +86,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
         protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(AircraftFlight item)
         {
-            var subItems = new ListViewItem.ListViewSubItem[5];
+            var subItems = new ListViewItem.ListViewSubItem[6];
 	        var dateString = item.FlightDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
 
 	        var timeString = "";

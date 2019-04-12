@@ -54,7 +54,7 @@ namespace CAS.UI.UIControls.AircraftsControls
         {
 
             waitForm = StaticWaitFormProvider.WaitForm;
-            extendableRichContainer.Caption = aircraftCollection.Count + " Aircrafts";
+            extendableRichContainer.Caption = aircraftCollection.Count + " Aircraft";
             _itemsCollection = aircraftCollection;
             FillUiElementsFromCollection();
         }
@@ -209,7 +209,7 @@ namespace CAS.UI.UIControls.AircraftsControls
                 
                 
             }
-            extendableRichContainer.Caption = _controlItems.Count + " Aircrafts";
+            extendableRichContainer.Caption = _controlItems.Count + " Aircraft";
             _controlItems.Sort(new Comparison<ReferenceStatusImageLinkLabel>((x,y)=> string.Compare(x.Text,y.Text)));
             linkBiWeekly.Enabled = linkPowerPlants.Enabled = linkReliability.Enabled = true;
 #if !SCAT

@@ -104,7 +104,7 @@ namespace CAS.UI.UIControls.DirectivesControls
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Hidden remarks" };
             ColumnHeaderList.Add(columnHeader);
 
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
             ColumnHeaderList.Add(columnHeader);
 
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
@@ -123,7 +123,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 
         protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Directive item)
         {
-            var subItems = new ListViewItem.ListViewSubItem[20];
+            var subItems = new ListViewItem.ListViewSubItem[21];
             var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 			var sbColor = itemsListView.ForeColor;
 			var eoColor = itemsListView.ForeColor;

@@ -109,6 +109,9 @@ namespace CAS.UI.UIControls.ScheduleControls
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "HiddenRemarks" };
 			ColumnHeaderList.Add(columnHeader);
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
+			ColumnHeaderList.Add(columnHeader);
+
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
 		}
 
@@ -123,7 +126,7 @@ namespace CAS.UI.UIControls.ScheduleControls
 			if (item is FlightNumber)
 			{
 				var flightNumber = item as FlightNumber;
-
+				var author = GlobalObjects.CasEnvironment.GetCorrector(flightNumber.CorrectorId);
 				var subItem = new ListViewItem.ListViewSubItem {Text = flightNumber.FlightNo.ToString(), Tag = flightNumber.FlightNo};
 				subItems.Add(subItem);
 
@@ -171,11 +174,13 @@ namespace CAS.UI.UIControls.ScheduleControls
 
 				subItem = new ListViewItem.ListViewSubItem { Text = flightNumber.HiddenRemarks, Tag = flightNumber.HiddenRemarks };
 				subItems.Add(subItem);
+
+				subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 			}
 			else
 			{
 				var flightNumberPeriod = item as FlightNumberPeriod;
-
+				var author = GlobalObjects.CasEnvironment.GetCorrector(flightNumberPeriod.CorrectorId);
 				string period;
 				if (flightNumberPeriod.FlightType == FlightType.Schedule)
 					period = $"{flightNumberPeriod.DepartureDate:dd-MMMM-yyyy} - {flightNumberPeriod.ArrivalDate:dd-MMMM-yyyy}";
@@ -287,6 +292,8 @@ namespace CAS.UI.UIControls.ScheduleControls
 
 				subItem = new ListViewItem.ListViewSubItem { Text = "", Tag = "" };
 				subItems.Add(subItem);
+
+				subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 			}
 
 			return subItems.ToArray();

@@ -185,7 +185,10 @@ namespace CAS.UI.UIControls.StoresControls
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Hidden Remarks" };
             ColumnHeaderList.Add(columnHeader);
 
-            itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
+            ColumnHeaderList.Add(columnHeader);
+
+			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
         }
         #endregion
 
@@ -289,8 +292,8 @@ namespace CAS.UI.UIControls.StoresControls
         protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(IBaseCoreObject item)
         {
             var subItems = new List<ListViewItem.ListViewSubItem>();
-
-            DateTime? approx = null;
+            
+			DateTime? approx = null;
             AtaChapter ata;
             Store store = null;
             string maintenanceTypeString = "";
@@ -325,7 +328,8 @@ namespace CAS.UI.UIControls.StoresControls
 		        shouldBeOnStockString = "",
 		        from = "",
 				quantityInString = "",
-				currency = "";
+				currency = "",
+				author = "";
 			double manHours = 0,
 				   unitPrice = 0,
 				   totalPrice = 0,
@@ -367,7 +371,7 @@ namespace CAS.UI.UIControls.StoresControls
 	            store = GlobalObjects.StoreCore.GetStoreById(componentItem.ParentStoreId);
 	            if (store == null)
 		            MessageBox.Show("qwe");
-
+	            author = GlobalObjects.CasEnvironment.GetCorrector(componentItem.CorrectorId);
 				approx = componentItem.NextPerformanceDate;
                 next = componentItem.NextPerformanceSource;
                 remains = componentItem.Remains;
@@ -469,6 +473,7 @@ namespace CAS.UI.UIControls.StoresControls
 
 	            if (store == null)
 		            MessageBox.Show("qwe");
+	            author = GlobalObjects.CasEnvironment.GetCorrector(dd.CorrectorId);
 
 				approx = dd.NextPerformanceDate;
                 next = dd.NextPerformanceSource;
@@ -563,8 +568,9 @@ namespace CAS.UI.UIControls.StoresControls
             subItems.Add(new ListViewItem.ListViewSubItem { Text = isPool ? "Yes" : "No", Tag = isPool } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = IsDangerous ? "Yes" : "No", Tag = IsDangerous } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = hiddenRemarks, Tag = hiddenRemarks } );
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
-            return subItems.ToArray();
+			return subItems.ToArray();
         }
 
         #endregion

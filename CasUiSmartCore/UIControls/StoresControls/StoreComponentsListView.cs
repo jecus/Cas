@@ -184,7 +184,10 @@ namespace CAS.UI.UIControls.StoresControls
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Hidden Remarks" };
             ColumnHeaderList.Add(columnHeader);
 
-            itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
+            ColumnHeaderList.Add(columnHeader);
+
+			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
         }
         #endregion
 
@@ -324,6 +327,7 @@ namespace CAS.UI.UIControls.StoresControls
 		        shouldBeOnStockString = "",
 		        from = "",
 				quantityInString = "",
+		        author = "",
 				currency = "";
 			double manHours = 0,
 				   unitPrice = 0,
@@ -363,7 +367,8 @@ namespace CAS.UI.UIControls.StoresControls
             if (parent is Component)
             {
                 Component componentItem = (Component)parent;
-                approx = componentItem.NextPerformanceDate;
+                author = GlobalObjects.CasEnvironment.GetCorrector(componentItem.CorrectorId);
+				approx = componentItem.NextPerformanceDate;
                 next = componentItem.NextPerformanceSource;
                 remains = componentItem.Remains;
                 ata = componentItem.Product?.ATAChapter ?? componentItem.ATAChapter;
@@ -446,7 +451,8 @@ namespace CAS.UI.UIControls.StoresControls
             else if (parent is ComponentDirective)
             {
                 ComponentDirective dd = (ComponentDirective)parent;
-                if (dd.Threshold.FirstPerformanceSinceNew != null && !dd.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
+                author = GlobalObjects.CasEnvironment.GetCorrector(dd.CorrectorId);
+				if (dd.Threshold.FirstPerformanceSinceNew != null && !dd.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
                 {
                     firstPerformance = dd.Threshold.FirstPerformanceSinceNew;
                 }
@@ -508,10 +514,7 @@ namespace CAS.UI.UIControls.StoresControls
             });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = workType, Tag = workType });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = manHours.ToString(), Tag = manHours } );
-            
-
-
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = needWpQuantity.ToString(), Tag = needWpQuantity });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = needWpQuantity.ToString(), Tag = needWpQuantity });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = reserve.ToString(), Tag = reserve });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = firstPerformance.ToString(), Tag = firstPerformance });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = repeatInterval.ToString(), Tag = repeatInterval });
@@ -554,8 +557,9 @@ namespace CAS.UI.UIControls.StoresControls
             subItems.Add(new ListViewItem.ListViewSubItem { Text = isPool ? "Yes" : "No", Tag = isPool } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = IsDangerous ? "Yes" : "No", Tag = IsDangerous } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = hiddenRemarks, Tag = hiddenRemarks } );
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
-            return subItems.ToArray();
+			return subItems.ToArray();
         }
 
         #endregion

@@ -15,6 +15,7 @@ using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.KitControls;
 using CAS.UI.UIControls.PersonnelControls;
 using CAS.UI.UIControls.PurchaseControls;
+using CASTerms;
 using Microsoft.VisualBasic.Devices;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
@@ -598,7 +599,10 @@ namespace CAS.UI.UIControls.Auxiliary
                 object value = properties[i].GetValue(item, null);
                 if(value != null)
                 {
-                    string valueString;
+	                if (properties[i].Name == "CorrectorId")
+		                value = GlobalObjects.CasEnvironment.GetCorrector((int)value);
+
+					string valueString;
                     if (value is DateTime)
                         valueString = SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)value);
                     else valueString = value.ToString();

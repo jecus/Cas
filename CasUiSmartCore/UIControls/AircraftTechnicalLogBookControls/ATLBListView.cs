@@ -65,7 +65,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.3f), Text = "Date" };
             ColumnHeaderList.Add(columnHeader);
 
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Author" };
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
             ColumnHeaderList.Add(columnHeader);
 
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
@@ -76,7 +76,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
         protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(ATLB item)
         {
-            var subItems = new ListViewItem.ListViewSubItem[3];
+            var subItems = new ListViewItem.ListViewSubItem[4];
 
 	        var flights = GlobalObjects.AircraftFlightsCore.GetAircraftFlightsByAircraftId(_parentAircraft.ItemId);
 
