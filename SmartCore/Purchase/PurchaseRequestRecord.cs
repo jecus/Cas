@@ -98,12 +98,22 @@ namespace SmartCore.Purchase
                 }
             }
         }
-        #endregion
+		#endregion
 
-        
-        #region public Supplier Supplier { get; set; }
+		#region public Ñurrency Currency { get; set; }
 
-        [TableColumn("SupplierId")]
+		[TableColumn("CurrencyId")]
+		public Ñurrency Currency
+		{
+			get => _currency ?? Ñurrency.UNK;
+			set => _currency = value;
+		}
+
+		#endregion
+
+		#region public Supplier Supplier { get; set; }
+
+		[TableColumn("SupplierId")]
         public int SupplierId { get; set; }
 		#endregion
 
@@ -156,8 +166,9 @@ namespace SmartCore.Purchase
 		#region public CommonCollection<ItemFileLink> Files { get; set; }
 
 		private CommonCollection<ItemFileLink> _files;
+		private Ñurrency _currency;
 
-	    [Child(RelationType.OneToMany, "ParentId", "ParentTypeId", 1860)]
+		[Child(RelationType.OneToMany, "ParentId", "ParentTypeId", 1860)]
 		public CommonCollection<ItemFileLink> Files
 		{
 			get { return _files ?? (_files = new CommonCollection<ItemFileLink>()); }

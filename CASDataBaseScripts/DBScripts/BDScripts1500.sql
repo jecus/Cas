@@ -42,3 +42,12 @@ if not exists ( select  *
 	alter table dbo.PurchaseOrders
     add Number nvarchar(128)null
 GO
+
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('dbo.PurchaseRequestsRecords')
+                    and c.name = 'CurrencyId' ) 
+
+	alter table dbo.PurchaseRequestsRecords
+    add CurrencyId int not null default -1
+GO

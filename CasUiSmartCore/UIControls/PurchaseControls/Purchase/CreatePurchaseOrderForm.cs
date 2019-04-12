@@ -267,6 +267,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			purchaseRecordListView1.SelectedItem.Measure = (Measure) comboBoxMeasure.SelectedItem;
 			purchaseRecordListView1.SelectedItem.Quantity = (double) numericUpDownQuantity.Value;
 			purchaseRecordListView1.SelectedItem.Cost = (double)numericUpDown1.Value;
+			purchaseRecordListView1.SelectedItem.Currency = (Сurrency) comboBoxCurrency.SelectedItem;
 
 			purchaseRecordListView1.SetItemsArray(_addedRecord.ToArray());
 		}

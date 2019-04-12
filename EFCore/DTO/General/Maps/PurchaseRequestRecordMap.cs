@@ -24,6 +24,10 @@ namespace EFCore.DTO.General.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("SupplierId");
 
+			Property(i => i.CurrencyId)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("CurrencyId");
+
 			Property(i => i.Remarks)
 				.HasMaxLength(256)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)

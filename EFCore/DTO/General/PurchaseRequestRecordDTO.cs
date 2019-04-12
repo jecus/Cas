@@ -21,6 +21,9 @@ namespace EFCore.DTO.General
 		public int? SupplierId { get; set; }
 
 		[DataMember]
+		public int CurrencyId { get; set; }
+
+		[DataMember]
 		public string Remarks { get; set; }
 
 		[DataMember]
