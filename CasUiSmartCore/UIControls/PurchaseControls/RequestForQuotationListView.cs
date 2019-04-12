@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.PurchaseControls.Initial;
 using CASTerms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Purchase;
@@ -100,25 +101,42 @@ namespace CAS.UI.UIControls.PurchaseControls
 			return subItems.ToArray();
          }
 
-        #endregion
+		#endregion
 
-        #region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
-        
-        protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
-        {
-            if (SelectedItem != null)
-            {
-                e.TypeOfReflection = ReflectionTypes.DisplayInCurrent;
-                e.DisplayerText = SelectedItem.Title;
-                e.RequestedEntity = new RequestForQuotationScreen(SelectedItem);
-            }
-        }
+		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 
-        #endregion
+		//protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		//{
+		//    if (SelectedItem != null)
+		//    {
+		//        e.TypeOfReflection = ReflectionTypes.DisplayInCurrent;
+		//        e.DisplayerText = SelectedItem.Title;
+		//        e.RequestedEntity = new RequestForQuotationScreen(SelectedItem);
+		//    }
+		//}
 
-        #region protected override void SetHeaders()
+		#endregion
 
-        protected override void SetHeaders()
+		#region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
+		protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			if (SelectedItem != null)
+			{
+
+				var editForm = new QuatationOrderFormNew(SelectedItem);
+				if (editForm.ShowDialog() == DialogResult.OK)
+				{
+					ListViewItem.ListViewSubItem[] subs = GetListViewSubItems(SelectedItem);
+					for (int i = 0; i < subs.Length; i++)
+						itemsListView.SelectedItems[0].SubItems[i].Text = subs[i].Text;
+				}
+			}
+		}
+		#endregion
+
+		#region protected override void SetHeaders()
+
+		protected override void SetHeaders()
         {
             ColumnHeaderList.Clear();
 

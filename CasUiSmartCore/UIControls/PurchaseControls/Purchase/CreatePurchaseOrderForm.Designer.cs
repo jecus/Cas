@@ -33,6 +33,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
 			this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.comboBoxCurrency = new System.Windows.Forms.ComboBox();
+			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
 			this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
 			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
 			this.button1 = new System.Windows.Forms.Button();
@@ -69,8 +71,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.purchaseRecordListView1 = new CAS.UI.UIControls.PurchaseControls.Quatation.PurchaseRecordListView();
 			this.quatationSupplierPriceListView1 = new CAS.UI.UIControls.PurchaseControls.Quatation.QuatationSupplierPriceListView();
-			this.comboBoxCurrency = new System.Windows.Forms.ComboBox();
-			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
@@ -155,6 +155,28 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Selected Product";
 			// 
+			// comboBoxCurrency
+			// 
+			this.comboBoxCurrency.Enabled = false;
+			this.comboBoxCurrency.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.comboBoxCurrency.FormattingEnabled = true;
+			this.comboBoxCurrency.ItemHeight = 17;
+			this.comboBoxCurrency.Location = new System.Drawing.Point(118, 80);
+			this.comboBoxCurrency.Name = "comboBoxCurrency";
+			this.comboBoxCurrency.Size = new System.Drawing.Size(400, 25);
+			this.comboBoxCurrency.TabIndex = 252;
+			// 
+			// metroLabel2
+			// 
+			this.metroLabel2.AutoSize = true;
+			this.metroLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.metroLabel2.Location = new System.Drawing.Point(20, 82);
+			this.metroLabel2.Name = "metroLabel2";
+			this.metroLabel2.Size = new System.Drawing.Size(64, 19);
+			this.metroLabel2.TabIndex = 253;
+			this.metroLabel2.Text = "Currency:";
+			this.metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
 			// numericUpDown1
 			// 
 			this.numericUpDown1.DecimalPlaces = 2;
@@ -173,7 +195,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// 
 			this.metroLabel1.AutoSize = true;
 			this.metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabel1.Location = new System.Drawing.Point(21, 110);
+			this.metroLabel1.Location = new System.Drawing.Point(21, 136);
 			this.metroLabel1.Name = "metroLabel1";
 			this.metroLabel1.Size = new System.Drawing.Size(38, 19);
 			this.metroLabel1.TabIndex = 251;
@@ -211,7 +233,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// 
 			this.labelQuantity.AutoSize = true;
 			this.labelQuantity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelQuantity.Location = new System.Drawing.Point(21, 136);
+			this.labelQuantity.Location = new System.Drawing.Point(21, 110);
 			this.labelQuantity.Name = "labelQuantity";
 			this.labelQuantity.Size = new System.Drawing.Size(61, 19);
 			this.labelQuantity.TabIndex = 158;
@@ -220,6 +242,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// 
 			// comboBoxMeasure
 			// 
+			this.comboBoxMeasure.Enabled = false;
 			this.comboBoxMeasure.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.comboBoxMeasure.FormattingEnabled = true;
 			this.comboBoxMeasure.ItemHeight = 17;
@@ -715,27 +738,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.quatationSupplierPriceListView1.ShowGroups = true;
 			this.quatationSupplierPriceListView1.Size = new System.Drawing.Size(687, 266);
 			this.quatationSupplierPriceListView1.TabIndex = 295;
-			// 
-			// comboBoxCurrency
-			// 
-			this.comboBoxCurrency.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
-			this.comboBoxCurrency.FormattingEnabled = true;
-			this.comboBoxCurrency.ItemHeight = 17;
-			this.comboBoxCurrency.Location = new System.Drawing.Point(118, 80);
-			this.comboBoxCurrency.Name = "comboBoxCurrency";
-			this.comboBoxCurrency.Size = new System.Drawing.Size(400, 25);
-			this.comboBoxCurrency.TabIndex = 252;
-			// 
-			// metroLabel2
-			// 
-			this.metroLabel2.AutoSize = true;
-			this.metroLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabel2.Location = new System.Drawing.Point(20, 82);
-			this.metroLabel2.Name = "metroLabel2";
-			this.metroLabel2.Size = new System.Drawing.Size(64, 19);
-			this.metroLabel2.TabIndex = 253;
-			this.metroLabel2.Text = "Currency:";
-			this.metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// CreatePurchaseOrderForm
 			// 
