@@ -28,7 +28,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			ColumnHeaderList.Clear();
 			itemsListView.Columns.Clear();
 
-			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "CostNew" };
+			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Suppliers" };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "CostNew" };
 			ColumnHeaderList.Add(columnHeader);
 
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "CostOverhaul" };
@@ -51,7 +54,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		{
 			var subItems = new List<ListViewItem.ListViewSubItem>();
 
-			var subItem = new ListViewItem.ListViewSubItem { Text = item.CostNew.ToString(), Tag = item.CostNew };
+			var subItem = new ListViewItem.ListViewSubItem { Text = item.Supplier.ToString(), Tag = item.Supplier };
+			subItems.Add(subItem);
+
+			subItem = new ListViewItem.ListViewSubItem { Text = item.CostNew.ToString(), Tag = item.CostNew };
 			subItems.Add(subItem);
 
 			subItem = new ListViewItem.ListViewSubItem { Text = item.CostOverhaul.ToString(), Tag = item.CostOverhaul };

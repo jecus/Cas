@@ -17,39 +17,26 @@ using FilterType = EFCore.Attributte.FilterType;
 
 namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {
-    public partial class CreatePurchaseOrderForm : MetroForm
+    public partial class PurchaseOrderForm : MetroForm
     {
 		#region Fields
 
 		private List<PurchaseRequestRecord> _addedRecord = new List<PurchaseRequestRecord>();
 
-		private readonly RequestForQuotation _quotation;
-		private List<SupplierPrice> _prices = new List<SupplierPrice>();
 		private PurchaseOrder _order;
 
 		#endregion
 
 		#region Constructor
 
-		public CreatePurchaseOrderForm()
+		public PurchaseOrderForm()
 	    {
 		    InitializeComponent();
 		}
 
-		public CreatePurchaseOrderForm(RequestForQuotation quotation):this()
+		public PurchaseOrderForm(PurchaseOrder order):this()
 		{
-			_quotation = quotation;
-
-			_order = new PurchaseOrder()
-			{
-				Parent = _quotation,
-				ParentType = _quotation.SmartCoreObjectType,
-				Title = _quotation.Title,
-				OpeningDate = DateTime.Now,
-				Author = _quotation.Author,
-				Remarks = _quotation.Remarks,
-				Number = _quotation.Number,
-			}; 
+			_order = order;
 
 			Task.Run(() => DoWork())
 				.ContinueWith(task => Completed(), TaskScheduler.FromCurrentSynchronizationContext());
@@ -61,9 +48,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		private void Completed()
 		{
-			quatationSupplierPriceListView1.SetItemsArray(_prices.ToArray());
 			UpdateControls();
 			UpdateInitialControls();
+			purchaseRecordListView1.SetItemsArray(_addedRecord.ToArray());
 		}
 
 		#endregion
@@ -72,10 +59,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		private void DoWork()
 		{
-			_prices.Clear();
 
-			var records = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationRecordDTO, RequestForQuotationRecord>(new Filter("ParentPackageId", _quotation.ItemId));
-			var ids = records.SelectMany(i => i.SupplierPrice).Select(s => s.SupplierId).Distinct().ToArray();
+			var records = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseRequestRecordDTO, PurchaseRequestRecord>(new Filter("ParentPackageId", _order.ItemId));
+			var ids = records.Select(s => s.SupplierId).Distinct().ToArray();
 			var productIds = records.Select(s => s.PackageItemId).Distinct().ToArray();
 			var suppliers = GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[]{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, ids), });
 			var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new ICommonFilter[]{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, productIds), });
@@ -83,14 +69,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			foreach (var record in records)
 			{
 				record.Product = products.FirstOrDefault(i => i.ItemId == record.PackageItemId);
-				foreach (var price in record.SupplierPrice)
-				{
-					price.Supplier = suppliers.FirstOrDefault(i => i.ItemId == price.SupplierId);
-					price.Parent = record;
-				}
+				record.Supplier = suppliers.FirstOrDefault(i => i.ItemId == record.SupplierId);
 			}
-
-			_prices.AddRange(records.SelectMany(i => i.SupplierPrice));
 		}
 
 		#endregion
@@ -128,27 +108,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 			comboBoxCurrency.Items.Clear();
 			comboBoxCurrency.Items.AddRange(Сurrency.Items.ToArray());
-		}
-
-		#endregion
-
-		#region private void ButtonAdd_Click(object sender, EventArgs e)
-
-		private void ButtonAdd_Click(object sender, EventArgs e)
-		{
-			foreach (var price in quatationSupplierPriceListView1.SelectedItems.ToArray())
-			{
-				var newRequest = new PurchaseRequestRecord(-1, price.Parent.Product, 1);
-				newRequest.CostCondition = ComponentStatus.New;
-				newRequest.Product = price.Parent.Product;
-				newRequest.Supplier = price.Supplier;
-				newRequest.Quantity = 1;
-				newRequest.SupplierId = price.Supplier.ItemId;
-				newRequest.Price = price;
-				_addedRecord.Add(newRequest);
-			}
-
-			purchaseRecordListView1.SetItemsArray(_addedRecord.ToArray());
 		}
 
 		#endregion
@@ -315,7 +274,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 			foreach (var record in _addedRecord)
 			{
-				record.PackageItemId = _order.ItemId;
 				GlobalObjects.CasEnvironment.NewKeeper.Save(record);
 			}
 

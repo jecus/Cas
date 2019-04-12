@@ -1196,6 +1196,12 @@
     <Compile Include="UIControls\PurchaseControls\ProductListView.Designer.cs">
       <DependentUpon>ProductListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\PurchaseControls\Purchase\PurchaseOrderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Purchase\PurchaseOrderForm.Designer.cs">
+      <DependentUpon>PurchaseOrderForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\PurchaseControls\Purchase\CreatePurchaseOrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3927,6 +3933,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PurchaseControls\ProductListScreen.resx">
       <DependentUpon>ProductListScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\PurchaseControls\Purchase\PurchaseOrderForm.resx">
+      <DependentUpon>PurchaseOrderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PurchaseControls\Purchase\CreatePurchaseOrderForm.resx">
       <DependentUpon>CreatePurchaseOrderForm.cs</DependentUpon>

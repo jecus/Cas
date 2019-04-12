@@ -61,10 +61,6 @@ namespace EFCore.DTO.General
 		public string Number { get; set; }
 
 		[DataMember]
-		[Child]
-		public SupplierDTO Supplier { get; set; }
-
-		[DataMember]
 		[Child(FilterType.Equal, "ParentTypeId", 1860)]
 		public ICollection<ItemFileLinkDTO> Files { get; set; }
 	}
