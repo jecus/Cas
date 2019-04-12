@@ -83,11 +83,6 @@ namespace EFCore.DTO.General.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("Number");
 
-
-			HasRequired(i => i.Supplier)
-				.WithMany(i => i.PurchaseOrderDtos)
-				.HasForeignKey(i => i.SupplierId);
-
 			HasMany(i => i.Files).WithRequired(i => i.PurchaseOrder).HasForeignKey(i => i.ParentId);
 		}
 	}

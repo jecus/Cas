@@ -4248,8 +4248,7 @@ namespace SmartCore.DtoHelper
 				ClosedById = purchasedto.ClosedById,
 				PublishedByUser = purchasedto.PublishedByUser,
 				CloseByUser = purchasedto.CloseByUser,
-				Number = purchasedto.Number,
-				Supplier = purchasedto.Supplier?.Convert()
+				Number = purchasedto.Number
 			};
 
 			if (purchasedto.Files != null)

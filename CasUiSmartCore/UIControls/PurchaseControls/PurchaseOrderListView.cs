@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.PurchaseControls.Purchase;
 using CASTerms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Purchase;
@@ -101,25 +102,41 @@ namespace CAS.UI.UIControls.PurchaseControls
 			return subItems.ToArray();
         }
 
-        #endregion
+		#endregion
 
-        #region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
-        
-        protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
-        {
-            //if (SelectedItem != null)
-            //{
-            //    e.TypeOfReflection = ReflectionTypes.DisplayInCurrent;
-            //    e.DisplayerText = SelectedItem.Title;
-            //    e.RequestedEntity = new PurchaseOrderScreen(SelectedItem);
-            //}
-        }
+		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 
-        #endregion
+		//protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		//{
+		//    //if (SelectedItem != null)
+		//    //{
+		//    //    e.TypeOfReflection = ReflectionTypes.DisplayInCurrent;
+		//    //    e.DisplayerText = SelectedItem.Title;
+		//    //    e.RequestedEntity = new PurchaseOrderScreen(SelectedItem);
+		//    //}
+		//}
 
-        #region protected override void SetHeaders()
+		#endregion
 
-        protected override void SetHeaders()
+		#region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
+
+		/// <summary>
+		/// Реагирует на двойной щелчок в списке элементов
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			if (SelectedItem == null) return;
+
+			var form = new PurchaseOrderForm(SelectedItem);
+			form.ShowDialog();
+		}
+		#endregion
+
+		#region protected override void SetHeaders()
+
+		protected override void SetHeaders()
         {
             ColumnHeaderList.Clear();
 

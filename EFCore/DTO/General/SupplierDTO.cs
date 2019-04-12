@@ -69,10 +69,6 @@ namespace EFCore.DTO.General
 		[DataMember]
 		public ICollection<SpecialistTrainingDTO> SpecialistTrainingDtos { get; set; }
 		[DataMember]
-		public ICollection<PurchaseRequestRecordDTO> PurchaseRequestRecordDtos { get; set; }
-		[DataMember]
-		public ICollection<PurchaseOrderDTO> PurchaseOrderDtos { get; set; }
-		[DataMember]
 		public ICollection<KitSuppliersRelationDTO> KitSuppliersRelationDtos { get; set; }
 
 		#endregion
