@@ -853,7 +853,7 @@ namespace CAS.UI.UIControls.Auxiliary
 			var json = File.ReadAllText(path);
 			_settings = JsonConvert.DeserializeObject<JsonSettings>(json);
 
-			if (!_settings.LastInformation.Login.Equals(login))
+			if (_settings.LastInformation.Login.Equals(login))
 				return;
 
 			_settings.LastInformation.Login = login;
