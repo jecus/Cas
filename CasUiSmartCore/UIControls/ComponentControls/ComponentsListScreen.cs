@@ -23,6 +23,7 @@ using CASReports.Builders;
 using CASTerms;
 using EFCore.DTO.General;
 using EFCore.Filter;
+using SmartCore.AuditMongo.Repository;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -1976,6 +1977,7 @@ namespace CAS.UI.UIControls.ComponentControls
 					_amReportBuilder.AddDirectives(comp);
 		            e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "MP HT";
 		            e.RequestedEntity = new ReportScreen(_amReportBuilder);
+		            GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ComponentsListScreen (MP HT)");
 	            }
 	            else if (sender == itemPrintLitAvia)
 	            {
@@ -2001,6 +2003,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		            _maintenanceDirectiveReportBuilderLitAVia.AddDirectives(mpds);
 		            e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "SS Comp LA";
 		            e.RequestedEntity = new ReportScreen(_maintenanceDirectiveReportBuilderLitAVia);
+		            GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ComponentsListScreen (SS Comp LA)");
 				}
 
 				else if (sender == _itemPrintReportComponents)
@@ -2010,6 +2013,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		            _builder.AddDirectives(_directivesViewer.GetItemsArray());
 		            _builder.Forecast = _currentForecast;
 		            e.RequestedEntity = new ReportScreen(_builder);
+		            GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ComponentsListScreen (Components)");
 				}
 	            else
 	            {
@@ -2058,7 +2062,8 @@ namespace CAS.UI.UIControls.ComponentControls
 		                _maintenanceDirectiveReportBuilderLitAVia.AddDirectives(mpds);
 		                e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "SS Comp LA";
 		                e.RequestedEntity = new ReportScreen(_maintenanceDirectiveReportBuilderLitAVia);
-	                }
+		                GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ComponentsListScreen (SS Comp LA)");
+					}
 					else if (sender == itemPrintReportMPLLP)
                     {
 	                    _amLLPReportBuilder.ReportedAircraft = CurrentAircraft;
@@ -2070,8 +2075,8 @@ namespace CAS.UI.UIControls.ComponentControls
 						_amLLPReportBuilder.AddDirectives(components);
 	                    e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "MP LLP";
 	                    e.RequestedEntity = new ReportScreen(_amLLPReportBuilder);
-
-                    }
+	                    GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ComponentsListScreen (MP LLP)");
+					}
 
 					else if (_llpMark)
                     {
@@ -2092,7 +2097,8 @@ namespace CAS.UI.UIControls.ComponentControls
 #endif
                         llpBuilder.AddDirectives(_directivesViewer.GetItemsArray().Cast<Component>().OrderBy(i => Convert.ToInt32(i.Position)).ToArray());
                         e.RequestedEntity = new ReportScreen(llpBuilder);
-                    }
+                        GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ComponentsListScreen (LLP)");
+					}
                     else
                     {
                         if (sender == _itemPrintReportLLP)
@@ -2114,7 +2120,8 @@ namespace CAS.UI.UIControls.ComponentControls
 #endif
                             llpBuilder.AddDirectives(_directivesViewer.GetItemsArray().OfType<Component>().Where(d => d.LLPMark).ToArray());
                             e.RequestedEntity = new ReportScreen(llpBuilder);
-                        }
+                            GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ComponentsListScreen (LLP)");
+						}
 						else if (sender == _itemPrintReportLLPAPU)
                         {
 							var llpBuilder = new ComponentLLPReportBuilderNew
@@ -2131,6 +2138,7 @@ namespace CAS.UI.UIControls.ComponentControls
 								.Select(i => i.ComponentDirectives.FirstOrDefault())
 								.ToArray());
 							e.RequestedEntity = new ReportScreen(llpBuilder);
+							GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ComponentsListScreen (LLP APU)");
 						}
                         else if (sender == _itemPrintReportLLPLDG)
                         {
@@ -2149,6 +2157,7 @@ namespace CAS.UI.UIControls.ComponentControls
 								.Select(i => i.ComponentDirectives.FirstOrDefault())
 								.ToArray());
 							e.RequestedEntity = new ReportScreen(llpBuilder);
+							GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ComponentsListScreen (LLP LDG)");
 						}
 						else
                         {
@@ -2163,7 +2172,8 @@ namespace CAS.UI.UIControls.ComponentControls
                                 };
                                 lgllpBuilder.AddDirectives(_directivesViewer.GetItemsArray());
                                 e.RequestedEntity = new ReportScreen(lgllpBuilder);
-                            }
+                                GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ComponentsListScreen (Life Limited Parts Status)");
+							}
                             else
                             {
                                 _builder.LifelengthAircraftSinceNew =
@@ -2174,8 +2184,9 @@ namespace CAS.UI.UIControls.ComponentControls
                                     _builder.AddDirectives(_directivesViewer.GetItemsArray());
                                 else _builder.AddDirectives(_directivesViewer.GetItemsArray().OfType<Component>().Where(d => d.LLPMark == false).ToArray());
                                 _builder.Forecast = _currentForecast;
-                                e.RequestedEntity = new ReportScreen(_builder);   
-                            }
+                                e.RequestedEntity = new ReportScreen(_builder);
+								GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ComponentsListScreen (Life Limited Parts Status)");
+							}
                         }
                     }
                 }

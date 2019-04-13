@@ -962,7 +962,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 _maintenanceDirectiveFullReportBuilder.Forecast = _currentForecast;
                 e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "Maintenance Status report";
                 e.RequestedEntity = new ReportScreen(_maintenanceDirectiveFullReportBuilder);
-            }
+                GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "MaintenanceDirectiveListScreen (AMP STATUS)");
+			}
             else if (sender == itemPrintReportMP)
             {
                 MaintenanceDirective[] items =
@@ -985,8 +986,9 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 _maintenanceDirectiveReportBuilder.AddDirectives(items);
                 _maintenanceDirectiveReportBuilder.Forecast = _currentForecast;
                 e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "Maintenance Program";
-                e.RequestedEntity = new ReportScreen(_maintenanceDirectiveReportBuilder);    
-            }
+                e.RequestedEntity = new ReportScreen(_maintenanceDirectiveReportBuilder);
+                GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "MaintenanceDirectiveListScreen (MP)");
+			}
             else if (sender == itemPrintReportMPLimit)
             {
 	            _maintenanceDirectiveReportBuilderLitAVia = new MaintenanceDirectivesFullReportBuilderLitAVia(true);
@@ -995,6 +997,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 				_maintenanceDirectiveReportBuilderLitAVia.AddDirectives(_resultDirectiveArray.OrderBy(i => i.TaskNumberCheck));
 				e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "MP Limit";
 				e.RequestedEntity = new ReportScreen(_maintenanceDirectiveReportBuilderLitAVia);
+				GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "MaintenanceDirectiveListScreen (MP Limit)");
 			}
             else if (sender == itemPrintWorkscope)
             {
@@ -1004,7 +1007,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 _workscopeReportBuilder.Forecast = _currentForecast;
                 e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "WORK SCOPE";
                 e.RequestedEntity = new ReportScreen(_workscopeReportBuilder);
-            }
+                GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "MaintenanceDirectiveListScreen (WORK SCOPE)");
+			}
 			else if (sender == itemPrintMPSYS)
             {
 	            _amReportBuilder.ReportedAircraft = CurrentAircraft;
@@ -1014,6 +1018,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 	                                                                                        i.Program.ItemId == MaintenanceDirectiveProgramType.SystemsMaintenance.ItemId));
 	            e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "MP SYS";
 	            e.RequestedEntity = new ReportScreen(_amReportBuilder);
+	            GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "MaintenanceDirectiveListScreen (MP SYS)");
 			}
             else if (sender == itemPrintMPSTR)
             {
@@ -1023,7 +1028,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 	            _amReportBuilder.AddDirectives(_initialDirectiveArray.Where(i => i.Program.ItemId == MaintenanceDirectiveProgramType.StructuresMaintenance.ItemId));
 	            e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "MP STR";
 	            e.RequestedEntity = new ReportScreen(_amReportBuilder);
-            }
+	            GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "MaintenanceDirectiveListScreen (MP STR)");
+			}
             else if (sender == itemPrintMPZonal)
             {
 	            _amReportBuilder.ReportedAircraft = CurrentAircraft;
@@ -1033,7 +1039,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 				                                                                            i.Program.ItemId == MaintenanceDirectiveProgramType.StructuralInspection.ItemId));
 	            e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "MP Zonal";
 	            e.RequestedEntity = new ReportScreen(_amReportBuilder);
-            }
+	            GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "MaintenanceDirectiveListScreen (MP Zonal)");
+			}
             else if (sender == itemPrintMPAWL)
             {
 	            _amReportBuilder.ReportedAircraft = CurrentAircraft;
@@ -1043,7 +1050,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 	                                                                                        || i.Program.ItemId == MaintenanceDirectiveProgramType.CertificationMaintenanceRequirement.ItemId));
 	            e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "MP AWL + CMR";
 	            e.RequestedEntity = new ReportScreen(_amReportBuilder);
-            }
+	            GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "MaintenanceDirectiveListScreen (MP AWL + CMR + FIS)");
+			}
 			else if (sender == itemPrintMPLine)
             {
 	            _amReportBuilder.ReportedAircraft = CurrentAircraft;
@@ -1052,7 +1060,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 				_amReportBuilder.AddDirectives(_initialDirectiveArray.Where(i => i.Program.ItemId == MaintenanceDirectiveProgramType.LineMaintenance.ItemId));
 	            e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "MP Operator";
 	            e.RequestedEntity = new ReportScreen(_amReportBuilder);
-            }
+	            GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "MaintenanceDirectiveListScreen (MP Operator)");
+			}
             else if (sender == itemPrintMPSSIP)
             {
 	            _amSuppReportBuilder.ReportedAircraft = CurrentAircraft;
@@ -1060,7 +1069,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 	            _amSuppReportBuilder.AddDirectives(_initialDirectiveArray.Where(i => i.Program.ItemId == MaintenanceDirectiveProgramType.SupplementalStructuralInspectionProgram.ItemId));
 	            e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "MP SSIP";
 	            e.RequestedEntity = new ReportScreen(_amSuppReportBuilder);
-            }
+	            GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "MaintenanceDirectiveListScreen (MP SSIP)");
+			}
             else if (sender == itemPrintLitAvia)
             {
 	            _maintenanceDirectiveReportBuilderLitAVia = new MaintenanceDirectivesFullReportBuilderLitAVia();
@@ -1069,7 +1079,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 	            _maintenanceDirectiveReportBuilderLitAVia.AddDirectives(_resultDirectiveArray.OrderBy(i => i.TaskNumberCheck));
 	            e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "SS LA";
 	            e.RequestedEntity = new ReportScreen(_maintenanceDirectiveReportBuilderLitAVia);
-            }
+	            GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "MaintenanceDirectiveListScreen (SS LA)");
+			}
 			else
             {
                 e.Cancel = true;

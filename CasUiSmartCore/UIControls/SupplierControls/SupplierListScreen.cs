@@ -475,6 +475,7 @@ namespace CAS.UI.UIControls.SupplierControls
 		        _listOfApprovedSuppliersBuilder.FilterSelection = _filter;
 		        e.DisplayerText = aircraftHeaderControl1.Operator.Name + "." + "Contacts";
 		        e.RequestedEntity = new ReportScreen(_listOfApprovedSuppliersBuilder);
+		        GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "SupplierListScreen (Contacts)");
 			}
 			else if (sender == _itemPrintReportListOfApprovedSuppliers)
 	        {
@@ -483,6 +484,7 @@ namespace CAS.UI.UIControls.SupplierControls
 				_listOfApprovedSuppliersBuilder.FilterSelection = _filter;
 		        e.DisplayerText = aircraftHeaderControl1.Operator.Name + "." + "Approved of Supplier";
 		        e.RequestedEntity = new ReportScreen(_listOfApprovedSuppliersBuilder);
+		        GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "SupplierListScreen (List of Approved Suppliers)");
 			}
 
 	       

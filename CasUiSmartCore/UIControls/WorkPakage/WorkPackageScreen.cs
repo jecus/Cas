@@ -1216,16 +1216,19 @@ namespace CAS.UI.UIControls.WorkPakage
 				_workscopeReportBuilder.AddDirectives(form.SelectedItems);
 				e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + _currentWorkPackage.Title + "." + "Workscope";
 				e.RequestedEntity = new ReportScreen(_workscopeReportBuilder);
+				GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "WorkPackageScreen (Work Scope)");
 			}
 			else if (sender == _itemPrintOverviewWp)
 			{
 				var form = new SelectWPPrintTasksForm(_currentWorkPackage);
 				form.ShowDialog();
+				GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "WorkPackageScreen (Overview the work package)");
 			}
 	        else if (sender == _itemPrintOverviewWO)
 			{
 				var form = new SelectWPPrintTasksForm(_currentWorkPackage, true);
 				form.ShowDialog();
+				GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "WorkPackageScreen (Overview the work order)");
 			}
 			else if (sender == _itemPrintEquipmentAndMaterials)
 			{
@@ -1233,6 +1236,7 @@ namespace CAS.UI.UIControls.WorkPakage
 				_forecastKitsReportBulder.FilterSelection = null;
 				e.DisplayerText = aircraftHeaderControl1.Operator.Name + "." + "Forecast Kits report";
 				e.RequestedEntity = new ReportScreen(_forecastKitsReportBulder);
+				GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "WorkPackageScreen (Equipment and Materials)");
 			}
 			else if (sender == _itemPrintComponents)
 	        {
@@ -1245,6 +1249,7 @@ namespace CAS.UI.UIControls.WorkPakage
 				_componentsReportBulder.FilterSelection = _filter;
 				e.DisplayerText = aircraftHeaderControl1.Operator.Name + "." + "Components Report";
 				e.RequestedEntity = new ReportScreen(_componentsReportBulder);
+				GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "WorkPackageScreen (Components)");
 			}
 			else if (sender == _itemPrintMaintenanceReport)
 	        {
@@ -1254,7 +1259,7 @@ namespace CAS.UI.UIControls.WorkPakage
 				_maintenanceReportBuilder.ReportedWorkPackage = _currentWorkPackage;
 				e.DisplayerText = aircraftHeaderControl1.Operator.Name + "." + "Maintenance Report";
 				e.RequestedEntity = new ReportScreen(_maintenanceReportBuilder);
-
+				GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "WorkPackageScreen (Overview the maintenance report)");
 			}
 			else throw new NotSupportedException("this type of report not supported");
 		}
