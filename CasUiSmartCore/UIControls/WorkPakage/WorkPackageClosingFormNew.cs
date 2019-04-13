@@ -59,7 +59,7 @@ namespace CAS.UI.UIControls.WorkPakage
             : this()
         {
             _workPackage = workPackage;
-            DocumentControls.AddRange(new []{documentControl1,documentControl2,documentControl3, documentControl4, documentControl5, documentControl6});
+            DocumentControls.AddRange(new []{documentControl1,documentControl2,documentControl3, documentControl4, documentControl5, documentControl6, documentControl7, documentControl8, documentControl9, documentControl10});
 
 			UpdateInformation();
         }

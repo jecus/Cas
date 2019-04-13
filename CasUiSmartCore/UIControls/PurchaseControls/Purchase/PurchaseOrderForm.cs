@@ -71,6 +71,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				record.Product = products.FirstOrDefault(i => i.ItemId == record.PackageItemId);
 				record.Supplier = suppliers.FirstOrDefault(i => i.ItemId == record.SupplierId);
 			}
+
+			_addedRecord.AddRange(records);
 		}
 
 		#endregion
@@ -118,10 +120,21 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		{
 			if (purchaseRecordListView1.SelectedItems.Count == 0) return;
 
-			foreach (var item in purchaseRecordListView1.SelectedItems.ToArray())
-				_addedRecord.Remove(item);
+			DialogResult confirmResult =
+				MessageBox.Show(
+						"Do you really want to delete Purchase Record(s)? ", "Confirm delete operation",
+					MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
 
-			purchaseRecordListView1.SetItemsArray(_addedRecord.ToArray());
+			if (confirmResult == DialogResult.Yes)
+			{
+				foreach (var item in purchaseRecordListView1.SelectedItems.ToArray())
+				{
+					_addedRecord.Remove(item);
+					GlobalObjects.CasEnvironment.NewKeeper.Delete(item, true);
+				}
+
+				purchaseRecordListView1.SetItemsArray(_addedRecord.ToArray());
+			}	
 		}
 
 		#endregion
