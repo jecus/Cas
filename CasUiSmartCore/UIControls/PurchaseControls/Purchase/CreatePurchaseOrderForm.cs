@@ -315,7 +315,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 			foreach (var record in _addedRecord)
 			{
-				record.PackageItemId = _order.ItemId;
+				record.ParentPackageId = _order.ItemId;
 				GlobalObjects.CasEnvironment.NewKeeper.Save(record);
 			}
 
