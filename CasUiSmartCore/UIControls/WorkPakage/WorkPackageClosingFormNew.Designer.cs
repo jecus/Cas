@@ -74,8 +74,14 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewCalendarColumn1 = new CAS.UI.UIControls.Auxiliary.DataGridViewElements.DataGridViewCalendarColumn();
+			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+			this.documentControl7 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
+			this.documentControl8 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
+			this.documentControl9 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
+			this.documentControl10 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewItems)).BeginInit();
 			this.panelButtons.SuspendLayout();
+			this.flowLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// dataGridViewItems
@@ -236,15 +242,10 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			// panelButtons
 			// 
-			this.panelButtons.Controls.Add(this.documentControl6);
-			this.panelButtons.Controls.Add(this.documentControl5);
-			this.panelButtons.Controls.Add(this.documentControl4);
-			this.panelButtons.Controls.Add(this.documentControl3);
-			this.panelButtons.Controls.Add(this.documentControl2);
+			this.panelButtons.Controls.Add(this.flowLayoutPanel1);
 			this.panelButtons.Controls.Add(this.checkBox1);
 			this.panelButtons.Controls.Add(this.checkedListBox1);
 			this.panelButtons.Controls.Add(this.lifelengthViewer1);
-			this.panelButtons.Controls.Add(this.documentControl1);
 			this.panelButtons.Controls.Add(this.checkBoxSelectAll);
 			this.panelButtons.Controls.Add(this.labelClosingDate);
 			this.panelButtons.Controls.Add(this.buttonCancel);
@@ -264,7 +265,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// documentControl6
 			// 
 			this.documentControl6.CurrentDocument = null;
-			this.documentControl6.Location = new System.Drawing.Point(444, 237);
+			this.documentControl6.Location = new System.Drawing.Point(3, 191);
 			this.documentControl6.Name = "documentControl6";
 			this.documentControl6.Size = new System.Drawing.Size(419, 41);
 			this.documentControl6.TabIndex = 67;
@@ -272,7 +273,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// documentControl5
 			// 
 			this.documentControl5.CurrentDocument = null;
-			this.documentControl5.Location = new System.Drawing.Point(444, 190);
+			this.documentControl5.Location = new System.Drawing.Point(3, 238);
 			this.documentControl5.Name = "documentControl5";
 			this.documentControl5.Size = new System.Drawing.Size(419, 41);
 			this.documentControl5.TabIndex = 66;
@@ -280,7 +281,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// documentControl4
 			// 
 			this.documentControl4.CurrentDocument = null;
-			this.documentControl4.Location = new System.Drawing.Point(444, 143);
+			this.documentControl4.Location = new System.Drawing.Point(3, 285);
 			this.documentControl4.Name = "documentControl4";
 			this.documentControl4.Size = new System.Drawing.Size(419, 41);
 			this.documentControl4.TabIndex = 65;
@@ -288,7 +289,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// documentControl3
 			// 
 			this.documentControl3.CurrentDocument = null;
-			this.documentControl3.Location = new System.Drawing.Point(444, 96);
+			this.documentControl3.Location = new System.Drawing.Point(3, 332);
 			this.documentControl3.Name = "documentControl3";
 			this.documentControl3.Size = new System.Drawing.Size(419, 41);
 			this.documentControl3.TabIndex = 64;
@@ -296,7 +297,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// documentControl2
 			// 
 			this.documentControl2.CurrentDocument = null;
-			this.documentControl2.Location = new System.Drawing.Point(444, 49);
+			this.documentControl2.Location = new System.Drawing.Point(3, 426);
 			this.documentControl2.Name = "documentControl2";
 			this.documentControl2.Size = new System.Drawing.Size(419, 41);
 			this.documentControl2.TabIndex = 63;
@@ -358,7 +359,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// documentControl1
 			// 
 			this.documentControl1.CurrentDocument = null;
-			this.documentControl1.Location = new System.Drawing.Point(444, 3);
+			this.documentControl1.Location = new System.Drawing.Point(3, 379);
 			this.documentControl1.Name = "documentControl1";
 			this.documentControl1.Size = new System.Drawing.Size(419, 41);
 			this.documentControl1.TabIndex = 59;
@@ -418,6 +419,56 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.dataGridViewCalendarColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			this.dataGridViewCalendarColumn1.Width = 200;
 			// 
+			// flowLayoutPanel1
+			// 
+			this.flowLayoutPanel1.AutoScroll = true;
+			this.flowLayoutPanel1.Controls.Add(this.documentControl1);
+			this.flowLayoutPanel1.Controls.Add(this.documentControl2);
+			this.flowLayoutPanel1.Controls.Add(this.documentControl3);
+			this.flowLayoutPanel1.Controls.Add(this.documentControl4);
+			this.flowLayoutPanel1.Controls.Add(this.documentControl5);
+			this.flowLayoutPanel1.Controls.Add(this.documentControl6);
+			this.flowLayoutPanel1.Controls.Add(this.documentControl7);
+			this.flowLayoutPanel1.Controls.Add(this.documentControl8);
+			this.flowLayoutPanel1.Controls.Add(this.documentControl9);
+			this.flowLayoutPanel1.Controls.Add(this.documentControl10);
+			this.flowLayoutPanel1.Location = new System.Drawing.Point(415, 22);
+			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+			this.flowLayoutPanel1.Size = new System.Drawing.Size(443, 260);
+			this.flowLayoutPanel1.TabIndex = 293;
+			// 
+			// documentControl7
+			// 
+			this.documentControl7.CurrentDocument = null;
+			this.documentControl7.Location = new System.Drawing.Point(3, 3);
+			this.documentControl7.Name = "documentControl7";
+			this.documentControl7.Size = new System.Drawing.Size(419, 41);
+			this.documentControl7.TabIndex = 294;
+			// 
+			// documentControl8
+			// 
+			this.documentControl8.CurrentDocument = null;
+			this.documentControl8.Location = new System.Drawing.Point(3, 50);
+			this.documentControl8.Name = "documentControl8";
+			this.documentControl8.Size = new System.Drawing.Size(419, 41);
+			this.documentControl8.TabIndex = 295;
+			// 
+			// documentControl9
+			// 
+			this.documentControl9.CurrentDocument = null;
+			this.documentControl9.Location = new System.Drawing.Point(3, 97);
+			this.documentControl9.Name = "documentControl9";
+			this.documentControl9.Size = new System.Drawing.Size(419, 41);
+			this.documentControl9.TabIndex = 296;
+			// 
+			// documentControl10
+			// 
+			this.documentControl10.CurrentDocument = null;
+			this.documentControl10.Location = new System.Drawing.Point(3, 144);
+			this.documentControl10.Name = "documentControl10";
+			this.documentControl10.Size = new System.Drawing.Size(419, 41);
+			this.documentControl10.TabIndex = 297;
+			// 
 			// WorkPackageClosingFormNew
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -436,6 +487,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewItems)).EndInit();
 			this.panelButtons.ResumeLayout(false);
 			this.panelButtons.PerformLayout();
+			this.flowLayoutPanel1.ResumeLayout(false);
 			this.ResumeLayout(false);
 
         }
@@ -472,5 +524,10 @@ namespace CAS.UI.UIControls.WorkPakage
 		private DocumentationControls.DocumentControl documentControl4;
 		private DocumentationControls.DocumentControl documentControl3;
 		private DocumentationControls.DocumentControl documentControl2;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+		private DocumentationControls.DocumentControl documentControl7;
+		private DocumentationControls.DocumentControl documentControl8;
+		private DocumentationControls.DocumentControl documentControl9;
+		private DocumentationControls.DocumentControl documentControl10;
 	}
 }

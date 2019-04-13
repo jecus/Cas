@@ -77,6 +77,10 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.documentControl4 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.documentControl5 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.documentControl6 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
+			this.documentControl7 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
+			this.documentControl8 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
+			this.documentControl9 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
+			this.documentControl10 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			labelNumber = new MetroFramework.Controls.MetroLabel();
 			label1 = new MetroFramework.Controls.MetroLabel();
 			labelValidFrom = new MetroFramework.Controls.MetroLabel();
@@ -325,7 +329,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			// 
 			this.textBoxWpNumber.CustomButton.Image = null;
-			this.textBoxWpNumber.CustomButton.Location = new System.Drawing.Point(232, 2);
+			this.textBoxWpNumber.CustomButton.Location = new System.Drawing.Point(233, 2);
 			this.textBoxWpNumber.CustomButton.Name = "";
 			this.textBoxWpNumber.CustomButton.Size = new System.Drawing.Size(15, 15);
 			this.textBoxWpNumber.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -356,7 +360,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			// 
 			this.textBoxDescription.CustomButton.Image = null;
-			this.textBoxDescription.CustomButton.Location = new System.Drawing.Point(232, 2);
+			this.textBoxDescription.CustomButton.Location = new System.Drawing.Point(233, 2);
 			this.textBoxDescription.CustomButton.Name = "";
 			this.textBoxDescription.CustomButton.Size = new System.Drawing.Size(15, 15);
 			this.textBoxDescription.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -408,7 +412,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			// 
 			this.textBoxAuthor.CustomButton.Image = null;
-			this.textBoxAuthor.CustomButton.Location = new System.Drawing.Point(232, 2);
+			this.textBoxAuthor.CustomButton.Location = new System.Drawing.Point(233, 2);
 			this.textBoxAuthor.CustomButton.Name = "";
 			this.textBoxAuthor.CustomButton.Size = new System.Drawing.Size(15, 15);
 			this.textBoxAuthor.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -440,7 +444,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			// 
 			this.textBoxClosedBy.CustomButton.Image = null;
-			this.textBoxClosedBy.CustomButton.Location = new System.Drawing.Point(232, 2);
+			this.textBoxClosedBy.CustomButton.Location = new System.Drawing.Point(233, 2);
 			this.textBoxClosedBy.CustomButton.Name = "";
 			this.textBoxClosedBy.CustomButton.Size = new System.Drawing.Size(15, 15);
 			this.textBoxClosedBy.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -472,7 +476,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			// 
 			this.textBoxReleaseCertificate.CustomButton.Image = null;
-			this.textBoxReleaseCertificate.CustomButton.Location = new System.Drawing.Point(232, 2);
+			this.textBoxReleaseCertificate.CustomButton.Location = new System.Drawing.Point(233, 2);
 			this.textBoxReleaseCertificate.CustomButton.Name = "";
 			this.textBoxReleaseCertificate.CustomButton.Size = new System.Drawing.Size(15, 15);
 			this.textBoxReleaseCertificate.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -503,7 +507,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			// 
 			this.textBoxPublishingRemark.CustomButton.Image = null;
-			this.textBoxPublishingRemark.CustomButton.Location = new System.Drawing.Point(232, 2);
+			this.textBoxPublishingRemark.CustomButton.Location = new System.Drawing.Point(233, 2);
 			this.textBoxPublishingRemark.CustomButton.Name = "";
 			this.textBoxPublishingRemark.CustomButton.Size = new System.Drawing.Size(15, 15);
 			this.textBoxPublishingRemark.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -534,7 +538,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			// 
 			this.textBoxMRO.CustomButton.Image = null;
-			this.textBoxMRO.CustomButton.Location = new System.Drawing.Point(232, 2);
+			this.textBoxMRO.CustomButton.Location = new System.Drawing.Point(233, 2);
 			this.textBoxMRO.CustomButton.Name = "";
 			this.textBoxMRO.CustomButton.Size = new System.Drawing.Size(15, 15);
 			this.textBoxMRO.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -565,7 +569,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			// 
 			this.textBoxCheckType.CustomButton.Image = null;
-			this.textBoxCheckType.CustomButton.Location = new System.Drawing.Point(232, 2);
+			this.textBoxCheckType.CustomButton.Location = new System.Drawing.Point(233, 2);
 			this.textBoxCheckType.CustomButton.Name = "";
 			this.textBoxCheckType.CustomButton.Size = new System.Drawing.Size(15, 15);
 			this.textBoxCheckType.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -596,7 +600,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			// 
 			this.textBoxStatus.CustomButton.Image = null;
-			this.textBoxStatus.CustomButton.Location = new System.Drawing.Point(296, 2);
+			this.textBoxStatus.CustomButton.Location = new System.Drawing.Point(297, 2);
 			this.textBoxStatus.CustomButton.Name = "";
 			this.textBoxStatus.CustomButton.Size = new System.Drawing.Size(15, 15);
 			this.textBoxStatus.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -628,7 +632,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			// 
 			this.textBoxTitle.CustomButton.Image = null;
-			this.textBoxTitle.CustomButton.Location = new System.Drawing.Point(296, 2);
+			this.textBoxTitle.CustomButton.Location = new System.Drawing.Point(297, 2);
 			this.textBoxTitle.CustomButton.Name = "";
 			this.textBoxTitle.CustomButton.Size = new System.Drawing.Size(15, 15);
 			this.textBoxTitle.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -679,7 +683,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			// 
 			this.textBoxPublishedBy.CustomButton.Image = null;
-			this.textBoxPublishedBy.CustomButton.Location = new System.Drawing.Point(232, 2);
+			this.textBoxPublishedBy.CustomButton.Location = new System.Drawing.Point(233, 2);
 			this.textBoxPublishedBy.CustomButton.Name = "";
 			this.textBoxPublishedBy.CustomButton.Size = new System.Drawing.Size(15, 15);
 			this.textBoxPublishedBy.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -711,7 +715,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			// 
 			this.textBoxRemarks.CustomButton.Image = null;
-			this.textBoxRemarks.CustomButton.Location = new System.Drawing.Point(232, 2);
+			this.textBoxRemarks.CustomButton.Location = new System.Drawing.Point(233, 2);
 			this.textBoxRemarks.CustomButton.Name = "";
 			this.textBoxRemarks.CustomButton.Size = new System.Drawing.Size(15, 15);
 			this.textBoxRemarks.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -742,7 +746,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			// 
 			this.textBoxClosingRemarks.CustomButton.Image = null;
-			this.textBoxClosingRemarks.CustomButton.Location = new System.Drawing.Point(232, 2);
+			this.textBoxClosingRemarks.CustomButton.Location = new System.Drawing.Point(233, 2);
 			this.textBoxClosingRemarks.CustomButton.Name = "";
 			this.textBoxClosingRemarks.CustomButton.Size = new System.Drawing.Size(15, 15);
 			this.textBoxClosingRemarks.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -773,7 +777,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			// 
 			this.textBoxRevision.CustomButton.Image = null;
-			this.textBoxRevision.CustomButton.Location = new System.Drawing.Point(232, 2);
+			this.textBoxRevision.CustomButton.Location = new System.Drawing.Point(233, 2);
 			this.textBoxRevision.CustomButton.Name = "";
 			this.textBoxRevision.CustomButton.Size = new System.Drawing.Size(15, 15);
 			this.textBoxRevision.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -804,7 +808,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			// 
 			this.textBoxStation.CustomButton.Image = null;
-			this.textBoxStation.CustomButton.Location = new System.Drawing.Point(232, 2);
+			this.textBoxStation.CustomButton.Location = new System.Drawing.Point(233, 2);
 			this.textBoxStation.CustomButton.Name = "";
 			this.textBoxStation.CustomButton.Size = new System.Drawing.Size(15, 15);
 			this.textBoxStation.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -836,7 +840,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(763, 477);
+			this.buttonOk.Location = new System.Drawing.Point(763, 646);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 242;
@@ -850,7 +854,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonClose.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonClose.Location = new System.Drawing.Point(844, 477);
+			this.buttonClose.Location = new System.Drawing.Point(844, 646);
 			this.buttonClose.Name = "buttonClose";
 			this.buttonClose.Size = new System.Drawing.Size(75, 33);
 			this.buttonClose.TabIndex = 241;
@@ -905,11 +909,47 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.documentControl6.Size = new System.Drawing.Size(314, 41);
 			this.documentControl6.TabIndex = 247;
 			// 
+			// documentControl7
+			// 
+			this.documentControl7.CurrentDocument = null;
+			this.documentControl7.Location = new System.Drawing.Point(606, 453);
+			this.documentControl7.Name = "documentControl7";
+			this.documentControl7.Size = new System.Drawing.Size(314, 41);
+			this.documentControl7.TabIndex = 248;
+			// 
+			// documentControl8
+			// 
+			this.documentControl8.CurrentDocument = null;
+			this.documentControl8.Location = new System.Drawing.Point(605, 500);
+			this.documentControl8.Name = "documentControl8";
+			this.documentControl8.Size = new System.Drawing.Size(314, 41);
+			this.documentControl8.TabIndex = 249;
+			// 
+			// documentControl9
+			// 
+			this.documentControl9.CurrentDocument = null;
+			this.documentControl9.Location = new System.Drawing.Point(606, 547);
+			this.documentControl9.Name = "documentControl9";
+			this.documentControl9.Size = new System.Drawing.Size(314, 41);
+			this.documentControl9.TabIndex = 250;
+			// 
+			// documentControl10
+			// 
+			this.documentControl10.CurrentDocument = null;
+			this.documentControl10.Location = new System.Drawing.Point(605, 594);
+			this.documentControl10.Name = "documentControl10";
+			this.documentControl10.Size = new System.Drawing.Size(314, 41);
+			this.documentControl10.TabIndex = 251;
+			// 
 			// WorkPackageEditorForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(937, 533);
+			this.ClientSize = new System.Drawing.Size(937, 702);
+			this.Controls.Add(this.documentControl10);
+			this.Controls.Add(this.documentControl9);
+			this.Controls.Add(this.documentControl8);
+			this.Controls.Add(this.documentControl7);
 			this.Controls.Add(this.documentControl6);
 			this.Controls.Add(this.documentControl5);
 			this.Controls.Add(this.documentControl4);
@@ -957,9 +997,10 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.Controls.Add(label1);
 			this.Controls.Add(this.textBoxWpNumber);
 			this.Controls.Add(labelNumber);
-			this.MaximumSize = new System.Drawing.Size(937, 550);
+			this.MaximumSize = new System.Drawing.Size(937, 750);
 			this.MinimumSize = new System.Drawing.Size(937, 382);
 			this.Name = "WorkPackageEditorForm";
+			this.Resizable = false;
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.Text = "Work Package Editor Form";
@@ -997,5 +1038,9 @@ namespace CAS.UI.UIControls.WorkPakage
 		private DocumentationControls.DocumentControl documentControl4;
 		private DocumentationControls.DocumentControl documentControl5;
 		private DocumentationControls.DocumentControl documentControl6;
+		private DocumentationControls.DocumentControl documentControl7;
+		private DocumentationControls.DocumentControl documentControl8;
+		private DocumentationControls.DocumentControl documentControl9;
+		private DocumentationControls.DocumentControl documentControl10;
 	}
 }
