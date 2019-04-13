@@ -1240,7 +1240,8 @@ namespace CAS.UI.UIControls.ForecastControls
 	            _scheduleReportBuilder.FilterSelection = _filter;
                 e.DisplayerText = aircraftHeaderControl1.Operator.Name + "." + "Scheduled report";
                 e.RequestedEntity = new ReportScreen(_scheduleReportBuilder);
-            }
+                GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ForecastListScreen (Scheduled)");
+			}
             else if (sender == itemPrintReportMaintenancePlan)
             {
                 _maintenancePlanReportBulder = new MaintenancePlanReportBuilder(CurrentAircraft, _directivesViewer.GetItemsArray());
@@ -1248,7 +1249,8 @@ namespace CAS.UI.UIControls.ForecastControls
 				_maintenancePlanReportBulder.FilterSelection = _filter;
                 e.DisplayerText = aircraftHeaderControl1.Operator.Name + "." + "Maintenance Plan report";
                 e.RequestedEntity = new ReportScreen(_maintenancePlanReportBulder);
-            }
+                GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ForecastListScreen (Maintenance Plan)");
+			}
             else if (sender == itemPrintReportEquipmentAndMaterials)
             {
                 List<AbstractAccessory> aircraftKits =
@@ -1264,7 +1266,8 @@ namespace CAS.UI.UIControls.ForecastControls
 				_forecastKitsReportBuilder.FilterSelection = _filter;
 				e.DisplayerText = aircraftHeaderControl1.Operator.Name + "." + "Equipment and Materials";
                 e.RequestedEntity = new ReportScreen(_forecastKitsReportBuilder);
-            }
+                GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ForecastListScreen (Equipment and Materials)");
+			}
 			else if (sender == _itemPrintComponents)
 			{
 				var items = new List<IBaseEntityObject>();
@@ -1276,6 +1279,7 @@ namespace CAS.UI.UIControls.ForecastControls
 				_componentsReportBulder.FilterSelection = _filter;
 				e.DisplayerText = aircraftHeaderControl1.Operator.Name + "." + "Components Report";
 				e.RequestedEntity = new ReportScreen(_componentsReportBulder);
+				GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ForecastListScreen (Components)");
 			}
 			else
             {

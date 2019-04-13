@@ -11,7 +11,8 @@ namespace SmartCore.AuditMongo.Repository
 		SignOut, // ВЫлогинился)))
 		Created, // Добавление в БД
 		Changed, // Изменение
-		Deleted // Удаление
+		Deleted, // Удаление
+		ReportOpened // Открытие отчета
 	}
 
 	public interface IAuditRepository
@@ -19,5 +20,6 @@ namespace SmartCore.AuditMongo.Repository
 		Task WriteAsync<TEntity>(TEntity target, AuditOperation operation, IIdentityUser user,
 			Dictionary<string, object> parameters = null) where TEntity : class, IBaseEntityObject;
 
+		Task WriteReportAsync(IIdentityUser user, string reportName);
 	}
 }

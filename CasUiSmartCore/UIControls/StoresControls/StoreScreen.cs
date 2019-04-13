@@ -1492,6 +1492,7 @@ namespace CAS.UI.UIControls.StoresControls
 				reportBuilder.AddDetails(_directivesViewer.GetItemsArray());
 
 				e.RequestedEntity = new ReportScreen(reportBuilder);
+				GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "StoreScreen (Stock General Report)");
 			}
 			else if (sender == _itemPrintReportInventoryFile)
 	        {
@@ -1501,7 +1502,8 @@ namespace CAS.UI.UIControls.StoresControls
 				r.FilterSelection = _additionalfilter;
 				e.DisplayerText = $"Inventory file";
 				e.RequestedEntity = new ReportScreen(r);
-	        }
+				GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "StoreScreen (Inventory File)");
+			}
 			else if (sender == _itemPrintReportEquipmentToolRegister)
 	        {
 				var r = new StoreInventoryFileReportBuilder(CurrentOperator, _resultDirectiveArray.OfType<Component>());
@@ -1510,6 +1512,7 @@ namespace CAS.UI.UIControls.StoresControls
 				r.FilterSelection = _additionalfilter;
 				e.DisplayerText = $"Equipment/tool register";
 				e.RequestedEntity = new ReportScreen(r);
+				GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "StoreScreen (Equipment Tool Register)");
 			}
 			else if (sender == _itemPrintReportAvailableComponents)
 	        {
@@ -1517,6 +1520,7 @@ namespace CAS.UI.UIControls.StoresControls
 				r.FilterSelection = _additionalfilter;
 				e.DisplayerText = $"Available Components";
 				e.RequestedEntity = new ReportScreen(r);
+				GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "StoreScreen (Available Components)");
 			}
 		}
 		#endregion

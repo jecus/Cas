@@ -1149,6 +1149,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		        _amReportBuilder.AddDirectives(_directivesViewer.GetItemsArray());
 		        e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "MP AD, SB, STC & REPAIR";
 		        e.RequestedEntity = new ReportScreen(_amReportBuilder);
+		        GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "PrimeDirectiveListScreen (MP AD, SB, STC & REPAIR)");
 			}
 			else if (sender == itemPrintReportADLitAVIA)
 	        {
@@ -1156,6 +1157,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 				_builderLitAVIA.ReportedAircraft = CurrentAircraft;
 		        _builderLitAVIA.AddDirectives(_directivesViewer.GetItemsArray());
 		        e.RequestedEntity = new ReportScreen(_builderLitAVIA);
+		        GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "PrimeDirectiveListScreen (AD LA)");
 			}
 	        else if (sender == itemPrintReportADLitAVIAEng)
 	        {
@@ -1163,7 +1165,8 @@ namespace CAS.UI.UIControls.DirectivesControls
 		        _builderLitAviaEng.ReportedBaseComponent = _currentBaseComponent;
 		        _builderLitAviaEng.AddDirectives(_directivesViewer.GetItemsArray());
 		        e.RequestedEntity = new ReportScreen(_builderLitAviaEng);
-	        }
+		        GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "PrimeDirectiveListScreen (AD Eng LA)");
+			}
 			else if (sender == itemPrintReportAD)
 	        {
 		        if (_currentAircraft != null)
@@ -1173,7 +1176,8 @@ namespace CAS.UI.UIControls.DirectivesControls
 			        _builder.AddDirectives(_directivesViewer.GetItemsArray());
 			        _builder.Forecast = _currentForecast;
 			        e.RequestedEntity = new ReportScreen(_builder);
-		        }
+			        GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "PrimeDirectiveListScreen (AD All)");
+				}
 		        else
 		        {
 			        if (_currentBaseComponent != null)
@@ -1185,7 +1189,8 @@ namespace CAS.UI.UIControls.DirectivesControls
 				        _builder.AddDirectives(_directivesViewer.GetItemsArray());
 				        _builder.Forecast = _currentForecast;
 				        e.RequestedEntity = new ReportScreen(_builder);
-			        }
+				        GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "PrimeDirectiveListScreen (AD All)");
+					}
 			        else
 			        {
 				        e.Cancel = true;

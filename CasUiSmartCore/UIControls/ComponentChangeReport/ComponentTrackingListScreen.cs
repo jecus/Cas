@@ -410,6 +410,7 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 				var reportBuilder = new ComponentChangeReportBuilder(CurrentAircraft, _initialDirectiveArray.OrderByDescending(f => f.StartTransferDate).ToArray());
 				e.DisplayerText = CurrentAircraft.RegistrationNumber + " Component Change Report";
 				e.RequestedEntity = new ReportScreen(reportBuilder);
+				GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ComponentTrackingListScreen (Component Change Report)");
 			}
 			else if (sender == _itemPrintTrackingList)
 	        {
@@ -417,6 +418,7 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 				reportBuilder.FilterSelection = _filter;
 				e.DisplayerText = "Tracking List Report";
 				e.RequestedEntity = new ReportScreen(reportBuilder);
+				GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ComponentTrackingListScreen (Tracking List)");
 			}
 			else if (sender == _itemPrintRequest)
 	        {
@@ -434,6 +436,7 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 					reportBuilder.FilterSelection = _filter;
 					e.DisplayerText = "Request Report";
 					e.RequestedEntity = new ReportScreen(reportBuilder);
+					GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ComponentTrackingListScreen (Request)");
 				}
 	        }
 

@@ -675,7 +675,8 @@ namespace CAS.UI.UIControls.PurchaseControls
             e.DisplayerText = "Request For Quotation Report";
             e.TypeOfReflection = ReflectionTypes.DisplayInNew;
             e.RequestedEntity = new ReportScreen(builder);
-        }
+            GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "RequestForQuotationScreen (Request For Quotation Report)");
+		}
         #endregion
 
         #region void HeaderControlButtonEditClick(object sender, EventArgs e)
