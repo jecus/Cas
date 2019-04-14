@@ -60,7 +60,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private void DoWork()
 		{
 
-			var records = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseRequestRecordDTO, PurchaseRequestRecord>(new Filter("ParentPackageId", _order.ItemId));
+			var records = GlobalObjects.CasEnvironment.Loader.GetObjectList<PurchaseRequestRecord>(new ICommonFilter[]{new CommonFilter<int>(PurchaseRequestRecord.ParentPackageIdProperty, _order.ItemId) });
 			var ids = records.Select(s => s.SupplierId).Distinct().ToArray();
 			var productIds = records.Select(s => s.PackageItemId).Distinct().ToArray();
 			var suppliers = GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[]{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, ids), });
@@ -130,7 +130,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				foreach (var item in purchaseRecordListView1.SelectedItems.ToArray())
 				{
 					_addedRecord.Remove(item);
-					GlobalObjects.CasEnvironment.NewKeeper.Delete(item, true);
+					GlobalObjects.CasEnvironment.Keeper.Delete(item, true);
 				}
 
 				purchaseRecordListView1.SetItemsArray(_addedRecord.ToArray());
@@ -191,28 +191,28 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			if(comboBoxCondition.SelectedItem == null) return;
 			if (purchaseRecordListView1.SelectedItem == null) return;
 
-			var selected = (ComponentStatus)comboBoxCondition.SelectedItem;
+			//var selected = (ComponentStatus)comboBoxCondition.SelectedItem;
 
-			if (selected == ComponentStatus.New)
-			{
-				numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostNew;
-				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyNew;
-			}
-			else if (selected == ComponentStatus.Overhaul)
-			{
-				numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostOverhaul;
-				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyOH;
-			}
-			else if (selected == ComponentStatus.Repair)
-			{
-				numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostRepair;
-				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyRepair;
-			}
-			else if (selected == ComponentStatus.Serviceable)
-			{
-				numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostServiceable;
-				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyServ;
-			}
+			//if (selected == ComponentStatus.New)
+			//{
+			//	numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostNew;
+			//	comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyNew;
+			//}
+			//else if (selected == ComponentStatus.Overhaul)
+			//{
+			//	numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostOverhaul;
+			//	comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyOH;
+			//}
+			//else if (selected == ComponentStatus.Repair)
+			//{
+			//	numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostRepair;
+			//	comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyRepair;
+			//}
+			//else if (selected == ComponentStatus.Serviceable)
+			//{
+			//	numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostServiceable;
+			//	comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyServ;
+			//}
 
 		}
 
