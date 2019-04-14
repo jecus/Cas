@@ -8,10 +8,13 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 {
 	public partial class PurchaseRecordListView : BaseListViewControl<PurchaseRequestRecord>
 	{
+		private readonly bool _orderBySupplies;
+
 		#region Constructor
 
-		public PurchaseRecordListView()
+		public PurchaseRecordListView(bool orderBySupplies = false)
 		{
+			_orderBySupplies = orderBySupplies;
 			InitializeComponent();
 			OldColumnIndex = 2;
 			SortMultiplier = 1;
@@ -90,9 +93,18 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 				{
 					var p = (PurchaseRequestRecord)item.Tag;
 
-					temp = $"{p.Product?.PartNumber}";
-					itemsListView.Groups.Add(temp, temp);
-					item.Group = itemsListView.Groups[temp];
+					if (_orderBySupplies)
+					{
+						temp = $"{p.Supplier}";
+						itemsListView.Groups.Add(temp, temp);
+						item.Group = itemsListView.Groups[temp];
+					}
+					else
+					{
+						temp = $"{p.Product?.PartNumber}";
+						itemsListView.Groups.Add(temp, temp);
+						item.Group = itemsListView.Groups[temp];
+					}
 				}
 			}
 		}
