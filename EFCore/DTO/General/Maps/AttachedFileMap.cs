@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class AttachedFileMap : EntityTypeConfiguration<AttachedFileDTO>
+	public class AttachedFileMap : BaseMap<AttachedFileDTO>
 	{
-		public AttachedFileMap()
+		public AttachedFileMap() : base()
 		{
 			ToTable("dbo.Files");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.FileName)
 				.HasMaxLength(256)

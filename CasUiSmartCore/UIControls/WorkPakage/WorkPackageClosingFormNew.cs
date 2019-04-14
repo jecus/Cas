@@ -10,6 +10,7 @@ using CAS.UI.UIControls.StoresControls;
 using CASTerms;
 using EFCore.DTO.General;
 using EFCore.Filter;
+using MetroFramework.Forms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
@@ -27,12 +28,13 @@ namespace CAS.UI.UIControls.WorkPakage
 {
     ///<summary>
     ///</summary>
-    public partial class WorkPackageClosingFormNew : Form
+    public partial class WorkPackageClosingFormNew : MetroForm
     {
         #region Fields
         
         private readonly WorkPackage _workPackage;
 	    bool checkClosed = false;
+		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
 
         //private List<WorkPackageClosingFormItem> _closingItems;
         
@@ -57,8 +59,9 @@ namespace CAS.UI.UIControls.WorkPakage
             : this()
         {
             _workPackage = workPackage;
+            DocumentControls.AddRange(new []{documentControl1,documentControl2,documentControl3, documentControl4, documentControl5, documentControl6, documentControl7, documentControl8, documentControl9, documentControl10});
 
-            UpdateInformation();
+			UpdateInformation();
         }
 
         #endregion
@@ -198,20 +201,27 @@ namespace CAS.UI.UIControls.WorkPakage
 
             checkBoxSelectAll.CheckedChanged += CheckBoxSelectAllCheckedChanged;
 
-			documentControl1.CurrentDocument = _workPackage.ClosingDocument;
-			documentControl1.Added += DocumentControl1_Added;
+            foreach (var control in DocumentControls)
+	            control.Added += DocumentControl1_Added;
+
+			for (int i = 0; i < _workPackage.ClosingDocument.Count; i++)
+            {
+	            var control = DocumentControls[i];
+	            control.CurrentDocument = _workPackage.ClosingDocument[i];
+			}
         }
 
 		#endregion
 
 		private void DocumentControl1_Added(object sender, EventArgs e)
 		{
+			var control = sender as DocumentControl;
 			var newDocument = CreateNewDocument();
 			var form = new DocumentForm(newDocument, false);
 			if (form.ShowDialog() == DialogResult.OK)
 			{
-				_workPackage.ClosingDocument = newDocument;
-				documentControl1.CurrentDocument = newDocument;
+				_workPackage.ClosingDocument.Add(newDocument);
+				control.CurrentDocument = newDocument;
 
 			}
 		}
@@ -230,8 +240,8 @@ namespace CAS.UI.UIControls.WorkPakage
 				DocType = DocumentType.TechnicalRecords,
 				DocumentSubType = docSubType,
 				IsClosed = true,
-				ContractNumber = $"{_workPackage.Title}",
-				Description = _workPackage.Description,
+				ContractNumber = $"{_workPackage.Number}",
+				Description = _workPackage.Title,
 				ParentAircraftId = _workPackage.ParentId
 			};
 		}

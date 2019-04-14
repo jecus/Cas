@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class EventTypeRiskLevelChangeRecordMap : EntityTypeConfiguration<EventTypeRiskLevelChangeRecordDTO>
+	public class EventTypeRiskLevelChangeRecordMap : BaseMap<EventTypeRiskLevelChangeRecordDTO>
 	{
-		public EventTypeRiskLevelChangeRecordMap()
+		public EventTypeRiskLevelChangeRecordMap() : base()
 		{
 			ToTable("dbo.EventTypeRiskLevelChangeRecords");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.EventCategoryId)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)

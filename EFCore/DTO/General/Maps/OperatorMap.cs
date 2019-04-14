@@ -18,6 +18,11 @@ namespace EFCore.DTO.General.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("IsDeleted");
 
+			Property(i => i.CorrectorId)
+				.IsRequired()
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("Corrector");
+
 			Property(i => i.Name)
 				.IsRequired()
 				.HasMaxLength(50)

@@ -700,7 +700,8 @@ namespace CAS.UI.UIControls.ForecastControls
                 _forecastKitsReportBulder.Forecast = _currentForecast;
                 e.DisplayerText = aircraftHeaderControl1.Operator.Name + "." + "Forecast Kits report";
                 e.RequestedEntity = new ReportScreen(_forecastKitsReportBulder);
-            }
+                GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ForecastKitsListScreen (Equipment and Materials)");
+			}
             else
             {
                 e.Cancel = true;

@@ -33,6 +33,8 @@ namespace CAS.UI.UIControls.MailControls
 			ColumnHeaderList.Add(columnHeader);
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "CreateDate" };
 			ColumnHeaderList.Add(columnHeader);
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
+			ColumnHeaderList.Add(columnHeader);
 
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
 		}
@@ -49,6 +51,7 @@ namespace CAS.UI.UIControls.MailControls
 			var from = item.SupplierFrom != Supplier.Unknown ? item.SupplierFrom.ToString() : operatorName;
 			var to = item.SupplierTo != Supplier.Unknown ? item.SupplierTo.ToString() : operatorName;
 
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 			var fromTo = $"{from} - {to}";
 
 			var subItem = new ListViewItem.ListViewSubItem { Text = fromTo, Tag = fromTo };
@@ -57,6 +60,7 @@ namespace CAS.UI.UIControls.MailControls
 			subItems.Add(subItem);
 			subItem = new ListViewItem.ListViewSubItem { Text = Convert.GetDateFormat(item.CreateDate), Tag = item.CreateDate };
 			subItems.Add(subItem);
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
 			return subItems.ToArray();
 		}

@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class RequestForQuotationMap : EntityTypeConfiguration<RequestForQuotationDTO>
+	public class RequestForQuotationMap : BaseMap<RequestForQuotationDTO>
 	{
-		public RequestForQuotationMap()
+		public RequestForQuotationMap() : base()
 		{
 			ToTable("dbo.RequestsForQuotation");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.Title)
 				.HasMaxLength(256)
@@ -66,56 +56,6 @@ namespace EFCore.DTO.General.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("ToSupplier");
 
-			Property(i => i.RFQ)
-				.HasMaxLength(256)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("RFQ");
-
-			Property(i => i.QR)
-				.HasMaxLength(256)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("QR");
-
-			Property(i => i.PO)
-				.HasMaxLength(256)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("PO");
-
-			Property(i => i.Invoice)
-				.HasMaxLength(256)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("Invoice");
-
-			Property(i => i.Weight)
-				.HasMaxLength(256)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("Weight");
-
-			Property(i => i.DIMS)
-				.HasMaxLength(256)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("DIMS");
-
-			Property(i => i.ShipTo)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("ShipTo");
-
-			Property(i => i.PickUp)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("PickUp");
-
-			Property(i => i.TypeOfOperation)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("TypeOfOperation");
-
-			Property(i => i.ShipBy)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("ShipBy");
-
-			Property(i => i.ApprovedById)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("ApprovedById");
-
 			Property(i => i.PublishedById)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("PublishedById");
@@ -124,38 +64,21 @@ namespace EFCore.DTO.General.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("ClosedById");
 
-			Property(i => i.IncoTerm)
+			Property(i => i.PublishedByUser)
+				.HasMaxLength(128)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IncoTerm");
+				.HasColumnName("PublishedByUser ");
 
-			Property(i => i.CountryId)
+			Property(i => i.CloseByUser)
+				.HasMaxLength(128)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("CountryId");
+				.HasColumnName("CloseByUser");
 
-			Property(i => i.CarrierId)
+			Property(i => i.Number)
+				.HasMaxLength(128)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("CarrierId");
+				.HasColumnName("Number");
 
-
-			HasRequired(i => i.Supplier)
-				.WithMany(i => i.QuotationDtos)
-				.HasForeignKey(i => i.CarrierId);
-
-			HasRequired(i => i.ApprovedBy)
-				.WithMany(i => i.QuotationApprovedDtos)
-				.HasForeignKey(i => i.ApprovedById);
-
-			HasRequired(i => i.PublishedBy)
-				.WithMany(i => i.QuotationPublishedDtos)
-				.HasForeignKey(i => i.PublishedById);
-
-			HasRequired(i => i.ClosedBy)
-				.WithMany(i => i.QuotationClosedDtos)
-				.HasForeignKey(i => i.ClosedById);
-
-			HasRequired(i => i.ToSupplier)
-				.WithMany(i => i.RequestForQuotationDtos)
-				.HasForeignKey(i => i.ToSupplierId);
 
 			HasMany(i => i.Files).WithRequired(i => i.RequestForQuotation).HasForeignKey(i => i.ParentId);
 			HasMany(i => i.PackageRecords).WithRequired(i => i.RequestForQuotationDto).HasForeignKey(i => i.ParentPackageId);

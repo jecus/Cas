@@ -1,9 +1,16 @@
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using EFCore.DTO;
 using EFCore.DTO.General;
+using Newtonsoft.Json;
+using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
+using SmartCore.Entities.General.Interfaces;
 using SmartCore.Packages;
 
 namespace SmartCore.Purchase
@@ -203,6 +210,23 @@ namespace SmartCore.Purchase
 		#endregion
 
 
+		[TableColumn("Remarks")]
+		public string Remarks { get; set; }
+
+		[TableColumn("SettingJSON")]
+		public string SettingJSON
+		{
+			get => JsonConvert.SerializeObject(SupplierPrice, Formatting.Indented,new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+			set => SupplierPrice = JsonConvert.DeserializeObject<List<SupplierPrice>>(value ?? "", new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+		}
+
+		public List<SupplierPrice> SupplierPrice
+		{
+			get => _supplierPrice ?? (_supplierPrice = new List<SupplierPrice>());
+			set => _supplierPrice = value;
+		}
+
+
 		private Priority _priority;
 		[TableColumn("Priority")]
 		public Priority Priority
@@ -258,27 +282,27 @@ namespace SmartCore.Purchase
         {
             get { return Product != null ? Product.Suppliers : null; }
         }
-        #endregion
+		#endregion
 
-        #region public Supplier ToSupplier  { get; set; }
+		#region public Supplier ToSupplier  { get; set; }
 
-        private Supplier _toSupplier;
-        /// <summary>
-        /// Поставщик, к которому делаетя запрос
-        /// </summary>
-        [TableColumn("ToSupplier")]
-        public Supplier ToSupplier
-        {
-            get { return _toSupplier; }
-            set
-            {
-                if (_toSupplier != value)
-                {
-                    _toSupplier = value;
-                    OnPropertyChanged("ToSupplier");
-                }
-            }
-        }
+		private Supplier _toSupplier;
+		/// <summary>
+		/// Поставщик, к которому делаетя запрос
+		/// </summary>
+		[TableColumn("ToSupplier")]
+		public Supplier ToSupplier
+		{
+			get { return _toSupplier; }
+			set
+			{
+				if (_toSupplier != value)
+				{
+					_toSupplier = value;
+					OnPropertyChanged("ToSupplier");
+				}
+			}
+		}
 		#endregion
 
 		#region public ComponentStatus CostCondition { get; set; }
@@ -297,15 +321,60 @@ namespace SmartCore.Purchase
         public Boolean Processed { get; set; }
 		#endregion
 
-        /*
+		#region public Lifelength LifeLimit { get; set; }
+		/// <summary>
+		/// Ограничение срока эксплуатации агрегата
+		/// </summary>
+		[TableColumn("LifeLimit")]
+		public Lifelength LifeLimit { get; set; }
+
+		#endregion
+
+		#region public Lifelength LifeLimitNotify { get; set; }
+		/// <summary>
+		/// Уведомление до ограничения срока эксплуатации агрегата
+		/// </summary>
+		[TableColumn("LifeLimitNotify")]
+		public Lifelength LifeLimitNotify { get; set; }
+		#endregion
+
+		#region IThreshold IDirective.Threshold { get; set; }
+
+		private DirectiveThreshold _threshold;
+		private List<SupplierPrice> _supplierPrice;
+
+		/// <summary>
+		/// порог первого и посделующего выполнений
+		/// </summary>
+		public IThreshold Threshold
+		{
+			get { return _threshold = new DirectiveThreshold(); }
+			set { _threshold = value as DirectiveThreshold; }
+		}
+		#endregion
+
+		#region public IDirective Task { get; set; }
+
+		/// <summary>
+		/// Задача, с которой связан продукт
+		/// </summary>
+		public IDirective Task
+		{
+			get { return PackageItem as IDirective; }
+			set { PackageItem = value; }
+		}
+
+		#endregion
+
+		/*
 		*  Методы 
 		*/
 
-        #region public RequestForQuotationRecord()
-        /// <summary>
-        /// Создает воздушное судно без дополнительной информации
-        /// </summary>
-        public RequestForQuotationRecord()
+		#region public RequestForQuotationRecord()
+		/// <summary>
+		/// Создает воздушное судно без дополнительной информации
+		/// </summary>
+		public RequestForQuotationRecord()
         {
             ItemId = -1;
             SmartCoreObjectType = SmartCoreType.RequestForQuotationRecord;
@@ -363,7 +432,6 @@ namespace SmartCore.Purchase
                 _measure = accessory.Measure;
                 PackageItemType = accessory.SmartCoreObjectType;
                 _quantity = quantity;
-                _toSupplier = toSupplier;
             }
             else
             {
@@ -374,7 +442,6 @@ namespace SmartCore.Purchase
                 _measure = Measure.Unit;
                 PackageItemType = SmartCoreType.Unknown;
                 _quantity = 0;
-                _toSupplier = null;
             }
         }
         #endregion
@@ -391,5 +458,89 @@ namespace SmartCore.Purchase
         #endregion   
 
     }
+
+	[JsonObject]
+	public class SupplierPrice : BaseCoreObject
+    {
+	    [JsonIgnore]
+		public Supplier Supplier { get; set; }
+
+		[JsonIgnore]
+		public RequestForQuotationRecord Parent { get; set; }
+
+		[JsonIgnore]
+		[ListViewData(200, "Supplier",1)]
+		public string SupplierName
+		{
+			get => Supplier?.Name ?? Supplier.Unknown.Name;
+		}
+
+		[JsonProperty]
+		public int SupplierId { get; set; }
+
+		[ListViewData(80,"CostNew", 2)]
+		[JsonProperty]
+		public decimal CostNew { get; set; }
+
+		[ListViewData(80, "CostServ",4)]
+		[JsonProperty]
+		public decimal CostServiceable { get; set; }
+
+		[ListViewData(80, "CostOH",6)]
+		[JsonProperty]
+		public decimal CostOverhaul { get; set; }
+
+		[ListViewData(80, "CostRepair",8)]
+		[JsonProperty]
+		public decimal CostRepair { get; set; }
+
+		[DefaultValue(-1)]
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+		public int СurrencyNewId { get; set; }
+
+		[JsonIgnore]
+		[ListViewData(80, "Currency",3)]
+		public Сurrency СurrencyNew
+		{
+			get => Сurrency.GetItemById(СurrencyNewId);
+			set => СurrencyNewId = value.ItemId;
+		}
+
+		[DefaultValue(-1)]
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+		public int СurrencyServId { get; set; }
+
+		[ListViewData(80, "Currency",5)]
+		[JsonIgnore]
+		public Сurrency СurrencyServ
+		{
+			get => Сurrency.GetItemById(СurrencyServId);
+			set => СurrencyServId = value.ItemId;
+		}
+
+		[DefaultValue(-1)]
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+		public int СurrencyOHId { get; set; }
+
+		[JsonIgnore]
+		[ListViewData(80, "Currency",7)]
+		public Сurrency СurrencyOH
+		{
+			get => Сurrency.GetItemById(СurrencyOHId);
+			set => СurrencyOHId = value.ItemId;
+		}
+
+		[DefaultValue(-1)]
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+		public int СurrencyRepairId { get; set; }
+
+		[JsonIgnore]
+		[ListViewData(80, "Currency",9)]
+		public Сurrency СurrencyRepair
+		{
+			get => Сurrency.GetItemById(СurrencyRepairId);
+			set => СurrencyRepairId = value.ItemId;
+		}
+	}
 
 }

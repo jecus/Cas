@@ -473,7 +473,8 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
                 e.DisplayerText = CurrentAircraft.RegistrationNumber + " Monthly Utilization Report";
                 e.RequestedEntity = new ReportScreen(reportBuilder);
-            }
+                GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "MonthlyUtilizationListScreen (Monthly Utilization)");
+			}
             else if (sender == itemPrintReportOperationTime)
             {
                 _workPackages = GlobalObjects.WorkPackageCore.GetWorkPackagesLite(CurrentAircraft, WorkPackageStatus.Closed, _maintenanceChecks.Select(m => (IDirective)m).ToList());
@@ -542,7 +543,8 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
                 e.DisplayerText = CurrentAircraft.RegistrationNumber + " Operation Time Report";
                 e.RequestedEntity = new ReportScreen(reportBuilder);
-            }
+                GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "MonthlyUtilizationListScreen (Operation Time)");
+			}
             else
             {
                 e.Cancel = true;

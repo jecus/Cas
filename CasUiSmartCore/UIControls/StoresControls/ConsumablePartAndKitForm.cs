@@ -148,6 +148,7 @@ namespace CAS.UI.UIControls.StoresControls
 			comboBoxDetailClass.SelectedItem = _consumablePart.GoodsClass;
 			textBoxDiscrepancy.Text = _consumablePart.Discrepancy;
 			textBoxPartNumber.Text = _consumablePart.PartNumber;
+			textBoxAltPartNum.Text = _consumablePart.ALTPartNumber;
 			textBoxSerialNumber.Text = _consumablePart.SerialNumber;
 			textBoxBatchNumber.Text = _consumablePart.BatchNumber;
 			textBoxIdNumber.Text = _consumablePart.IdNumber;
@@ -194,12 +195,14 @@ namespace CAS.UI.UIControls.StoresControls
 				comboBoxDetailClass.Enabled = false;
 				comboBoxMeasure.Enabled = false;
 				textBoxPartNumber.ReadOnly = true;
+				textBoxAltPartNum.ReadOnly = true;
 				comboBoxStandart.Enabled = false;
 				//textBoxProductCode.Enabled = false;
 				textBoxDescription.ReadOnly = true;
 				comboBoxMeasure.SelectedItem = product.Measure;
 				comboBoxStandart.SelectedItem = product.Standart;
 				textBoxPartNumber.Text = product.PartNumber;
+				textBoxAltPartNum.Text = product.AltPartNumber;
 				textBoxDescription.Text = product.Description;
 				//textBoxProductCode.Text = accessoryDescription.Code;
 				textBoxManufacturer.Text = product.Manufacturer;
@@ -300,6 +303,7 @@ namespace CAS.UI.UIControls.StoresControls
 			string kitStandartName = _consumablePart.Standart != null ? _consumablePart.Standart.FullName : "";
 			if (dictionaryComboProduct.SelectedItem != _consumablePart.Product
 			    || textBoxPartNumber.Text != obj.PartNumber
+			    || textBoxAltPartNum.Text != obj.ALTPartNumber
 			    || (comboBoxStandart.SelectedItem != null
 				    ? comboBoxStandart.SelectedItem != _consumablePart.Standart
 				    : (comboBoxStandart.Text != "Select Item" && comboBoxStandart.Text != "N/A"
@@ -446,6 +450,7 @@ namespace CAS.UI.UIControls.StoresControls
 			obj.GoodsClass = comboBoxDetailClass.SelectedItem as GoodsClass;
 			obj.ATAChapter = ataChapterComboBox.SelectedItem as AtaChapter;
 			obj.PartNumber = textBoxPartNumber.Text;
+			obj.ALTPartNumber = textBoxAltPartNum.Text;
 			obj.SerialNumber = textBoxSerialNumber.Text;
 			obj.BatchNumber = textBoxBatchNumber.Text;
 			obj.IdNumber = textBoxIdNumber.Text;
@@ -542,6 +547,10 @@ namespace CAS.UI.UIControls.StoresControls
 			textBoxPartNumber.Text = "";
 			textBoxPartNumber.ReadOnly = false;
 			textBoxPartNumber.Enabled = true;
+
+			textBoxAltPartNum.Text = "";
+			textBoxAltPartNum.ReadOnly = false;
+			textBoxAltPartNum.Enabled = true;
 
 			textBoxSerialNumber.Text = "";
 			textBoxSerialNumber.ReadOnly = false;
@@ -880,6 +889,7 @@ namespace CAS.UI.UIControls.StoresControls
                 comboBoxMeasure.Enabled = false;
                 comboBoxStandart.Enabled = false;
                 textBoxPartNumber.Enabled = false;
+                textBoxAltPartNum.Enabled = false;
                 textBoxDescription.Enabled = false;
 	            textBoxManufacturer.Enabled = false;
 	            textBoxProductCode.Enabled = false;
@@ -890,6 +900,7 @@ namespace CAS.UI.UIControls.StoresControls
 				comboBoxMeasure.SelectedItem = accessoryDescription.Measure;
                 comboBoxStandart.SelectedItem = accessoryDescription.Standart;
                 textBoxPartNumber.Text = accessoryDescription.PartNumber;
+                textBoxAltPartNum.Text = accessoryDescription.AltPartNumber;
                 textBoxDescription.Text = accessoryDescription.Description;
 				checkBoxDangerous.Checked = accessoryDescription.IsDangerous;
 				textBoxManufacturer.Text = accessoryDescription.Manufacturer;
@@ -919,6 +930,7 @@ namespace CAS.UI.UIControls.StoresControls
                     comboBoxMeasure.Enabled = true;
                     comboBoxStandart.Enabled = true;
                     textBoxPartNumber.ReadOnly = false;
+                    textBoxAltPartNum.ReadOnly = false;
                     textBoxDescription.ReadOnly = false;
                 }
             }

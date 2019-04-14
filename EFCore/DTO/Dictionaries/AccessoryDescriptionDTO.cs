@@ -22,7 +22,10 @@ namespace EFCore.DTO.Dictionaries
 	    [DataMember]
 		public string PartNumber { get; set; }
 
-	    [DataMember]
+		[DataMember]
+		public string AltPartNumber { get; set; }
+
+		[DataMember]
 		public int? StandartId { get; set; }
 
 	    [DataMember]

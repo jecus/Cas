@@ -361,17 +361,20 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 {
                     builder.FilterSelection = true;//(Schedule)
                     builder.ReportedDirectives = new MaintenanceCheckCollection(_checkItems.Where(c=>c.Schedule).ToList());
-                }
+                    GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "MaintenanceScreen (Status Schedule)");
+				}
                 if (sender == itemPrintReportStatusUnschedule)
                 {
                     builder.FilterSelection = false;//(Unschedule)
                     builder.ReportedDirectives = new MaintenanceCheckCollection(_checkItems.Where(c => c.Schedule == false).ToList());
-                }
+                    GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "MaintenanceScreen (Status Store)");
+				}
                 builder.ForecastData = null;
                 e.DisplayerText = caption;
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
                 e.RequestedEntity = new ReportScreen(builder);
-            }
+                
+			}
             if(sender == itemPrintReportProgramSchedule || sender == itemPrintReportProgramUnschedule)
             {
                 MaintenanceProgramReportBuilder builder = new MaintenanceProgramReportBuilder();
@@ -383,17 +386,20 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 {
                     builder.FilterSelection = true;//(Schedule)
                     builder.ReportedDirectives = new MaintenanceCheckCollection(_checkItems.Where(c => c.Schedule).ToList());
-                }
+                    GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "MaintenanceScreen (Program Schedule)");
+				}
                 if (sender == itemPrintReportProgramUnschedule)
                 {
                     builder.FilterSelection = false;//(Unschedule)
                     builder.ReportedDirectives = new MaintenanceCheckCollection(_checkItems.Where(c => c.Schedule == false).ToList());
-                }
+                    GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "MaintenanceScreen (Program Store)");
+				}
                 builder.ForecastData = null;
                 e.DisplayerText = caption;
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-                e.RequestedEntity = new ReportScreen(builder);    
-            }
+                e.RequestedEntity = new ReportScreen(builder);
+				
+			}
             if (sender == itemPrintReportRecords)
             {
                 MaintenanceRecordReportBuilder builder = new MaintenanceRecordReportBuilder();
@@ -407,7 +413,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 e.DisplayerText = caption;
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
                 e.RequestedEntity = new ReportScreen(builder);
-            }
+                GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "MaintenanceScreen (Records)");
+			}
             if (sender == itemPrintReportHistory)
             {
                 List<MaintenanceCheckRecord> records = new List<MaintenanceCheckRecord>(complianceControl.GetItemsArray());
@@ -422,7 +429,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 e.DisplayerText = caption;
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
                 e.RequestedEntity = new ReportScreen(builder);
-            }
+                GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "MaintenanceScreen (Compliance history)");
+			}
         }
         #endregion
 

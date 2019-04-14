@@ -99,6 +99,9 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "HiddenRemarks" };
 			ColumnHeaderList.Add(columnHeader);
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
+			ColumnHeaderList.Add(columnHeader);
+
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
 		}
 
@@ -118,7 +121,7 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 
 			var departure = item.FlightNumberPeriod.DepartureDate.Date.AddMinutes(item.FlightNumberPeriod.PeriodFrom);
 			var arrival = item.FlightNumberPeriod.DepartureDate.Date.AddMinutes(item.FlightNumberPeriod.PeriodTo);
-
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 			var distance = $"{item.FlightNumberPeriod.FlightNum.Distance} {item.FlightNumberPeriod.FlightNum.DistanceMeasure}";
 
 			foreach (var model in item.FlightNumberPeriod.FlightNum.AircraftModels)
@@ -216,6 +219,8 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 
 			subItem = new ListViewItem.ListViewSubItem { Text = item.FlightNumberPeriod.FlightNum.HiddenRemarks, Tag = item.FlightNumberPeriod.FlightNum.HiddenRemarks };
 			subItems.Add(subItem);
+
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
 			return subItems.ToArray();
 		}

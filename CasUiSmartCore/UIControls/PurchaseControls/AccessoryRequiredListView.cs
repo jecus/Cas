@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.KitControls;
+using CASTerms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
 
@@ -153,6 +154,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Remarks" };
 			ColumnHeaderList.Add(columnHeader);
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
+			ColumnHeaderList.Add(columnHeader);
+
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
 		}
 		#endregion
@@ -177,8 +181,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 			var quantity = isComponent ? 1 : item.Quantity;
 			var quantityString = $"{quantity} {item.Measure.ShortName}";
 			var taskQuantity = Math.Round(item.TaskQuantity, 2).ToString();
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
-		    subItems.Add(new ListViewItem.ListViewSubItem { Text = standart, Tag = standart });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = standart, Tag = standart });
 		    subItems.Add(new ListViewItem.ListViewSubItem { Text = item.PartNumber, Tag = item.PartNumber });
 		    subItems.Add(new ListViewItem.ListViewSubItem { Text = product, Tag = product });
 		    subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ParentString, Tag = item.ParentString });
@@ -192,9 +197,10 @@ namespace CAS.UI.UIControls.PurchaseControls
 		    subItems.Add(new ListViewItem.ListViewSubItem { Text = item.CostOverhaul.ToString(), Tag = item.CostOverhaul });
 		    subItems.Add(new ListViewItem.ListViewSubItem { Text = item.CostServiceable.ToString(), Tag = item.CostServiceable });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Remarks, Tag = item.Remarks });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
 
-		    return subItems.ToArray();
+			return subItems.ToArray();
 	    }
 
 		#endregion

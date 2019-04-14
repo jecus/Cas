@@ -94,6 +94,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 			var issueDateValidToString = item.IssueValidTo ? SmartCore.Auxiliary.Convert.GetDateFormat(item.IssueDateValidTo) : "";
 			var aboard = item.Aboard ? "Yes" : "No";
 			var privy = item.Privy ? "Yes" : "No";
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
 			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.DocType.FullName, Tag = item.DocType.FullName });
 			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.DocumentSubType.FullName, Tag = item.DocumentSubType.FullName, ForeColor = titleColor });
@@ -119,6 +120,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Status.FullName, Tag = item.Status.FullName });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.IdNumber, Tag = item.IdNumber });
 			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Remarks, Tag = item.Remarks });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
 			return subItems.ToArray();
 		}
@@ -203,6 +205,9 @@ namespace CAS.UI.UIControls.DocumentationControls
 			ColumnHeaderList.Add(columnHeader);
 
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Remarks" };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
 			ColumnHeaderList.Add(columnHeader);
 
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());

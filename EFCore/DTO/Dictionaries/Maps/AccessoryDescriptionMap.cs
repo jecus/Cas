@@ -1,23 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 using EFCore.DTO.Dictionaries;
 
 namespace EFCore.DTO.Maps
 {
-	public class AccessoryDescriptionMap : EntityTypeConfiguration<AccessoryDescriptionDTO>
+	public class AccessoryDescriptionMap : BaseMap<AccessoryDescriptionDTO>
 	{
-		public AccessoryDescriptionMap()
+		public AccessoryDescriptionMap() : base()
 		{
 			ToTable("Dictionaries.AccessoryDescriptions");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.Description)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
@@ -27,6 +17,11 @@ namespace EFCore.DTO.Maps
 				.HasMaxLength(256)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("PartNumber");
+
+			Property(i => i.AltPartNumber)
+				.HasMaxLength(256)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("AltPartNumber");
 
 			Property(i => i.StandartId)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)

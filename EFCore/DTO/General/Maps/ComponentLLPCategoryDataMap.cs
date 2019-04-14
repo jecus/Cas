@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class ComponentLLPCategoryDataMap : EntityTypeConfiguration<ComponentLLPCategoryDataDTO>
+	public class ComponentLLPCategoryDataMap : BaseMap<ComponentLLPCategoryDataDTO>
 	{
-		public ComponentLLPCategoryDataMap()
+		public ComponentLLPCategoryDataMap() : base()
 		{
 			ToTable("dbo.ComponentLLPCategoryData");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.LLPCategoryId)
 				.IsRequired()

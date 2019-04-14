@@ -99,6 +99,9 @@ namespace CAS.UI.UIControls.WorkPakage
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Cost" };
             ColumnHeaderList.Add(columnHeader);
 
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
+            ColumnHeaderList.Add(columnHeader);
+
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
         }
 		#endregion
@@ -321,23 +324,24 @@ namespace CAS.UI.UIControls.WorkPakage
 		    ListViewItem.ListViewSubItem[] GetListViewSubItems(BaseEntityObject item)
         {
             List<ListViewItem.ListViewSubItem> subItems = new List<ListViewItem.ListViewSubItem>();
-
-            if(item is NextPerformance)
+            var author = "";
+			if (item is NextPerformance)
             {
                 NextPerformance np = (NextPerformance) item;
-
                 double manHours = np.Parent is IEngineeringDirective ? ((IEngineeringDirective)np.Parent).ManHours : 0;
                 double cost = np.Parent is IEngineeringDirective ? ((IEngineeringDirective)np.Parent).Cost : 0;
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = np.ATAChapter.ToString(), Tag = np.ATAChapter });
                 if (np.Parent is ComponentDirective)
                 {
 	                var cd = np.Parent as ComponentDirective;
-	                subItems.Add(new ListViewItem.ListViewSubItem { Text = $"{cd.MaintenanceDirective?.TaskCardNumber} {np.Title}", Tag = np.Title });
+	                author = GlobalObjects.CasEnvironment.GetCorrector(cd.CorrectorId);
+					subItems.Add(new ListViewItem.ListViewSubItem { Text = $"{cd.MaintenanceDirective?.TaskCardNumber} {np.Title}", Tag = np.Title });
 				}
                 else if (np.Parent is MaintenanceDirective)
                 {
 	                var md = np.Parent as MaintenanceDirective;
-	                subItems.Add(new ListViewItem.ListViewSubItem { Text = $"{md.TaskCardNumber} {md.TaskNumberCheck} {md.Description}", Tag = np.Title });
+	                author = GlobalObjects.CasEnvironment.GetCorrector(md.CorrectorId);
+					subItems.Add(new ListViewItem.ListViewSubItem { Text = $"{md.TaskCardNumber} {md.TaskNumberCheck} {md.Description}", Tag = np.Title });
 				}
 				else if (np.Parent is Directive)
                 {
@@ -347,7 +351,7 @@ namespace CAS.UI.UIControls.WorkPakage
 		                title += $"EO:{directive.EngineeringOrders} ";
 	                if (!string.IsNullOrEmpty(directive.Title))
 		                title += $"AD:{directive.Title} ";
-
+	                author = GlobalObjects.CasEnvironment.GetCorrector(directive.CorrectorId);
 					subItems.Add(new ListViewItem.ListViewSubItem { Text = title, Tag = directive.Title });
 				}
                 else subItems.Add(new ListViewItem.ListViewSubItem { Text = np.Title, Tag = np.Title });
@@ -371,13 +375,14 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = np.PerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)np.PerformanceDate), Tag = np.PerformanceDate });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = manHours.ToString(), Tag = manHours });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = cost.ToString(), Tag = cost });
-
+                subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 			}
             else if (item is AbstractPerformanceRecord)
             {
                 //DirectiveRecord directiveRecord = (DirectiveRecord)item;
                 AbstractPerformanceRecord apr = (AbstractPerformanceRecord)item;
-                double manHours = apr.Parent is IEngineeringDirective ? ((IEngineeringDirective)apr.Parent).ManHours : 0;
+                author = GlobalObjects.CasEnvironment.GetCorrector(apr.CorrectorId);
+				double manHours = apr.Parent is IEngineeringDirective ? ((IEngineeringDirective)apr.Parent).ManHours : 0;
                 double cost = apr.Parent is IEngineeringDirective ? ((IEngineeringDirective)apr.Parent).Cost : 0;
                 Lifelength remains = Lifelength.Null;
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = apr.ATAChapter.ToString(), Tag = apr.ATAChapter });
@@ -392,14 +397,15 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = SmartCore.Auxiliary.Convert.GetDateFormat(apr.RecordDate), Tag = apr.RecordDate });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = manHours.ToString(), Tag = manHours });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = cost.ToString(), Tag = cost });
-
+                subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 			}
             else if (item is Directive)
             {
                 Directive directive = (Directive)item;
 
                 AtaChapter ata = directive.ATAChapter;
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = ata.ToString(), Tag = ata });
+                author = GlobalObjects.CasEnvironment.GetCorrector(directive.CorrectorId);
+				subItems.Add(new ListViewItem.ListViewSubItem { Text = ata.ToString(), Tag = ata });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = $"{directive.EngineeringOrders} {directive.Title}", Tag = directive.Title });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = directive.Description, Tag = directive.Description });
 
@@ -483,14 +489,15 @@ namespace CAS.UI.UIControls.WorkPakage
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = directive.Cost.ToString(), Tag = directive.Cost });
 				#endregion
 
+				subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
 			}
             else if (item is BaseComponent)
             {
                 BaseComponent bd = (BaseComponent)item;
                 AtaChapter ata = bd.ATAChapter;
-
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = ata.ToString(), Tag = ata });
+                author = GlobalObjects.CasEnvironment.GetCorrector(bd.CorrectorId);
+				subItems.Add(new ListViewItem.ListViewSubItem { Text = ata.ToString(), Tag = ata });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = bd.PartNumber, Tag = bd.PartNumber });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = bd.Description, Tag = bd.Description });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = bd.Kits.Count > 0 ? bd.Kits.Count + " kits" : "", Tag = bd.Kits.Count });
@@ -502,13 +509,14 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = bd.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)bd.NextPerformanceDate), Tag = bd.NextPerformanceDate });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = bd.ManHours.ToString(), Tag = bd.ManHours });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = bd.Cost.ToString(), Tag = bd.Cost });
+                subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 			}
             else if (item is Component)
             {
                 Component d = (Component)item;
                 AtaChapter ata = d.ATAChapter;
-
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = ata.ToString(), Tag = ata });
+                author = GlobalObjects.CasEnvironment.GetCorrector(d.CorrectorId);
+				subItems.Add(new ListViewItem.ListViewSubItem { Text = ata.ToString(), Tag = ata });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = d.PartNumber, Tag = d.PartNumber });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = d.Description, Tag = d.Description });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = d.Kits.Count > 0 ? d.Kits.Count + " kits" : "", Tag = d.Kits.Count });
@@ -520,13 +528,14 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = d.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)d.NextPerformanceDate), Tag = d.NextPerformanceDate });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = d.ManHours.ToString(), Tag = d.ManHours });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = d.Cost.ToString(), Tag = d.Cost });
+                subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 			}
             else if (item is ComponentDirective)
             {
                 ComponentDirective dd = (ComponentDirective)item;
                 AtaChapter ata = dd.ParentComponent.ATAChapter;
-
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = ata != null ? ata.ToString() : "", Tag = ata });
+                author = GlobalObjects.CasEnvironment.GetCorrector(dd.CorrectorId);
+				subItems.Add(new ListViewItem.ListViewSubItem { Text = ata != null ? ata.ToString() : "", Tag = ata });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = dd.Remarks, Tag = dd.Remarks });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = dd.Kits.Count > 0 ? dd.Kits.Count + " kits" : "", Tag = dd.Kits.Count });
@@ -561,11 +570,13 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = dd.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)dd.NextPerformanceDate), Tag = dd.NextPerformanceDate });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = dd.ManHours.ToString(), Tag = dd.ManHours });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = dd.Cost.ToString(), Tag = dd.Cost });
+                subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 			}
             else if (item is MaintenanceCheck)
             {
                 MaintenanceCheck mc = (MaintenanceCheck)item;
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = null });
+                author = GlobalObjects.CasEnvironment.GetCorrector(mc.CorrectorId);
+				subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = null });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = mc.Name + (mc.Schedule ? " Shedule" : " Unshedule"), Tag = mc.Name });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = mc.Kits.Count > 0 ? mc.Kits.Count + " kits" : "", Tag = mc.Kits.Count });
@@ -577,12 +588,13 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = mc.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)mc.NextPerformanceDate), Tag = mc.NextPerformanceDate });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = mc.ManHours.ToString(), Tag = mc.ManHours });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = mc.Cost.ToString(), Tag = mc.Cost });
+                subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 			}
             else if (item is MaintenanceDirective)
             {
                 MaintenanceDirective md = (MaintenanceDirective)item;
                 AtaChapter ata = md.ATAChapter;
-
+                author = GlobalObjects.CasEnvironment.GetCorrector(md.CorrectorId);
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = ata != null ? ata.ToString() : "", Tag = ata });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = $"{md.TaskCardNumber} {md.TaskNumberCheck} {md.Description}", Tag = md.ToString() });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = md.Description, Tag = md.Description, });
@@ -630,12 +642,14 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = md.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)md.NextPerformanceDate), Tag = md.NextPerformanceDate });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = md.ManHours.ToString(), Tag = md.ManHours });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = md.Cost.ToString(), Tag = md.Cost });
+                subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 			}
             else if (item is NonRoutineJob)
             {
                 NonRoutineJob job = (NonRoutineJob)item;
                 AtaChapter ata = job.ATAChapter;
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = ata != null ? ata.ToString() : "", Tag = ata });
+                author = GlobalObjects.CasEnvironment.GetCorrector(job.CorrectorId);
+				subItems.Add(new ListViewItem.ListViewSubItem { Text = ata != null ? ata.ToString() : "", Tag = ata });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = job.Title, Tag = job.Title });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = job.Description, Tag = job.Description });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = job.Kits.Count > 0 ? job.Kits.Count + " kits" : "", Tag = job.Kits.Count });
@@ -647,6 +661,7 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = DateTimeExtend.GetCASMinDateTime() });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = job.ManHours.ToString(), Tag = job.ManHours });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = job.Cost.ToString(), Tag = job.Cost });
+                subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 			}
             else throw new ArgumentOutOfRangeException(String.Format("1135: Takes an argument has no known type {0}", item.GetType()));
 

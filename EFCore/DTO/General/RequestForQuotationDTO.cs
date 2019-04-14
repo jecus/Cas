@@ -43,72 +43,20 @@ namespace EFCore.DTO.General
 		public int? ToSupplierId { get; set; }
 
 		[DataMember]
-		public string RFQ { get; set; }
-
-		[DataMember]
-		public string QR { get; set; }
-
-		[DataMember]
-		public string PO { get; set; }
-
-		[DataMember]
-		public string Invoice { get; set; }
-
-		[DataMember]
-		public string ShipTo { get; set; }
-
-		[DataMember]
-		public string PickUp { get; set; }
-
-		[DataMember]
-		public string Weight { get; set; }
-
-		[DataMember]
-		public string DIMS { get; set; }
-
-		[DataMember]
-		public int TypeOfOperation { get; set; }
-
-		[DataMember]
-		public int ApprovedById { get; set; }
-
-		[DataMember]
 		public int PublishedById { get; set; }
 
 		[DataMember]
 		public int ClosedById { get; set; }
 
 		[DataMember]
-		public int ShipBy { get; set; }
+		public string PublishedByUser { get; set; }
 
 		[DataMember]
-		public int IncoTerm { get; set; }
+		public string CloseByUser { get; set; }
 
 		[DataMember]
-		public int CountryId { get; set; }
+		public string Number { get; set; }
 
-		[DataMember]
-		public int CarrierId { get; set; }
-
-		[DataMember]
-		[Include]
-		public SupplierDTO Supplier { get; set; }
-
-		[DataMember]
-		[Include]
-		public SpecialistDTO ApprovedBy { get; set; }
-
-		[DataMember]
-		[Include]
-		public SpecialistDTO PublishedBy { get; set; }
-
-		[DataMember]
-		[Include]
-		public SpecialistDTO ClosedBy { get; set; }
-
-		[DataMember]
-		[Include]
-		public SupplierDTO ToSupplier { get; set; }
 
 		[DataMember]
 		[Child(FilterType.Equal, "ParentTypeId", 1900)]

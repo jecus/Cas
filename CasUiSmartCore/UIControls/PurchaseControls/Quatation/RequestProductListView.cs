@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CASTerms;
 using SmartCore.Entities.General.Accessory;
 
 namespace CAS.UI.UIControls.PurchaseControls.Quatation
@@ -30,10 +31,16 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "P/N" };
 			ColumnHeaderList.Add(columnHeader);
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Standart" };
+			ColumnHeaderList.Add(columnHeader);
+
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.25f), Text = "Description" };
 			ColumnHeaderList.Add(columnHeader);
 
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Suppliers" };
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "ATA" };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
 			ColumnHeaderList.Add(columnHeader);
 
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
@@ -46,15 +53,21 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Product item)
 		{
 			var subItems = new List<ListViewItem.ListViewSubItem>();
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
 			var subItem = new ListViewItem.ListViewSubItem { Text = item.PartNumber, Tag = item.PartNumber };
+			subItems.Add(subItem);
+
+			subItem = new ListViewItem.ListViewSubItem { Text = item.Standart?.ToString(), Tag = item.Standart };
 			subItems.Add(subItem);
 
 			subItem = new ListViewItem.ListViewSubItem { Text = item.Description, Tag = item.Description };
 			subItems.Add(subItem);
 
-			subItem = new ListViewItem.ListViewSubItem { Text = item.Suppliers?.ToString(), Tag = item.Suppliers?.ToString() };
+			subItem = new ListViewItem.ListViewSubItem { Text = item.ATAChapter?.ToString(), Tag = item.ATAChapter?.ToString() };
 			subItems.Add(subItem);
+
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
 			return subItems.ToArray();
 		}

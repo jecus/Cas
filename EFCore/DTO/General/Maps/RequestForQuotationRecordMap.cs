@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class RequestForQuotationRecordMap : EntityTypeConfiguration<RequestForQuotationRecordDTO>
+	public class RequestForQuotationRecordMap : BaseMap<RequestForQuotationRecordDTO>
 	{
-		public RequestForQuotationRecordMap()
+		public RequestForQuotationRecordMap() : base()
 		{
 			ToTable("dbo.RequestForQuotationRecords");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.ParentPackageId)
 				.IsRequired()
@@ -86,12 +76,25 @@ namespace EFCore.DTO.General.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("InitialReason");
 
+			Property(i => i.Remarks)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("Remarks ");
 
-			HasRequired(i => i.ToSupplier)
-				.WithMany(i => i.RequestForQuotationRecordDtos)
-				.HasForeignKey(i => i.ToSupplierId)
-				
-				;HasRequired(i => i.DefferedCategory)
+			Property(i => i.LifeLimit)
+				.HasMaxLength(21)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("LifeLimit");
+
+			Property(i => i.LifeLimitNotify)
+				.HasMaxLength(21)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("LifeLimitNotify");
+
+			Property(i => i.SettingJSON)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("SettingJSON ");
+
+			; HasRequired(i => i.DefferedCategory)
 				.WithMany(i => i.RequestForQuotationRecordDtos)
 				.HasForeignKey(i => i.DefferedCategoryId);
 		}

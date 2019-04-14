@@ -704,7 +704,8 @@ namespace CAS.UI.UIControls.WorkPakage
             e.DisplayerText = op.Name + ".Work Package List";
             e.TypeOfReflection = ReflectionTypes.DisplayInNew;
             e.RequestedEntity = new ReportScreen(reportBuilder);
-        }
+            GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "AirFleetWorkPackageListScreen (Work Package List)");
+		}
         #endregion
 
         #region private void ButtonReleaseToService(object sender, EventArgs e)

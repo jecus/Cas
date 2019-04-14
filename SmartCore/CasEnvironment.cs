@@ -283,6 +283,15 @@ namespace SmartCore
         }
 		#endregion
 
+		#region public UserDTO GetCorrector(int id)
+
+		public string GetCorrector(int id)
+		{
+			return Users.ContainsKey(id) ? Users[id] : "Unknown";
+		}
+
+		#endregion
+
 		/*
 		* Выполнение запросов
 		*/
@@ -534,13 +543,18 @@ namespace SmartCore
                 _stores = value;
             }
         }
-        #endregion
+		#endregion
 
-        #region public CommonCollection<Hangar> Hangars { get; internal set; }
-        /// <summary>
-        /// Доступные ангары компании
-        /// </summary>
-        private CommonCollection<Hangar> _hangars;
+		#region public CommonCollection<Store> User { get; internal set; }
+
+		public Dictionary<int, string> Users { get; set; }
+		#endregion
+
+		#region public CommonCollection<Hangar> Hangars { get; internal set; }
+		/// <summary>
+		/// Доступные ангары компании
+		/// </summary>
+		private CommonCollection<Hangar> _hangars;
         /// <summary>
         /// Доступные ангары компании
         /// </summary>
@@ -770,10 +784,25 @@ namespace SmartCore
             
             if ( loadingState == null )
                  loadingState = new LoadingState();
-            loadingState.MaxPersentage = 9;
+            loadingState.MaxPersentage = 10;
 
-            //Временные коллекции
-            loadingState.CurrentPersentage = 0;
+            //Загрузка всех пользователей
+			loadingState.CurrentPersentage = 0;
+            loadingState.CurrentPersentageDescription = "Loading Users";
+            backgroundWorker.ReportProgress(1, loadingState);
+
+            var users = GetAllUsers();
+            Users = new Dictionary<int, string>();
+			foreach (var user in users)
+				Users.Add(user.ItemId, user.ToString());
+
+            if (backgroundWorker.CancellationPending)
+            {
+	            return;
+            }
+
+			//Временные коллекции
+			loadingState.CurrentPersentage = 1;
             loadingState.CurrentPersentageDescription = "Loading Temp Collection";
             backgroundWorker.ReportProgress(1, loadingState);
 
@@ -785,7 +814,7 @@ namespace SmartCore
             }
 
             //Загрузка всех словарей
-            loadingState.CurrentPersentage = 1;
+            loadingState.CurrentPersentage = 2;
             loadingState.CurrentPersentageDescription = "Loading Dictionaries";
             backgroundWorker.ReportProgress(1, loadingState);
 
@@ -797,7 +826,7 @@ namespace SmartCore
             }
 
             // Загрузка всех операторов
-            loadingState.CurrentPersentage = 2;
+            loadingState.CurrentPersentage = 3;
             loadingState.CurrentPersentageDescription = "Loading Operators";
             backgroundWorker.ReportProgress(1, loadingState);
 
@@ -809,7 +838,7 @@ namespace SmartCore
             }
 
             // Загрузка всех воздушных судов 
-            loadingState.CurrentPersentage = 3;
+            loadingState.CurrentPersentage = 4;
             loadingState.CurrentPersentageDescription = "Loading Aircrafts";
             backgroundWorker.ReportProgress(1, loadingState);
 
@@ -822,7 +851,7 @@ namespace SmartCore
 
 #if !KAC
             //Загрузка всех ТС
-            loadingState.CurrentPersentage = 4;
+            loadingState.CurrentPersentage = 5;
             loadingState.CurrentPersentageDescription = "Loading Vehicles";
             backgroundWorker.ReportProgress(1, loadingState);
 
@@ -834,7 +863,7 @@ namespace SmartCore
             }
 
             //Загрузка всех ангаров
-            loadingState.CurrentPersentage = 4;
+            loadingState.CurrentPersentage = 6;
             loadingState.CurrentPersentageDescription = "Loading Hangars";
             backgroundWorker.ReportProgress(1, loadingState);
 
@@ -847,7 +876,7 @@ namespace SmartCore
 #endif
 
             // Загрузка всех складов
-            loadingState.CurrentPersentage = 5;
+            loadingState.CurrentPersentage = 7;
             loadingState.CurrentPersentageDescription = "Loading Stores";
             backgroundWorker.ReportProgress(1, loadingState);
 
@@ -860,7 +889,7 @@ namespace SmartCore
 
 #if !KAC
             // Загрузка всех лабораторий
-            loadingState.CurrentPersentage = 6;
+            loadingState.CurrentPersentage = 8;
             loadingState.CurrentPersentageDescription = "Loading Work Shops";
             backgroundWorker.ReportProgress(1, loadingState);
 
@@ -873,7 +902,7 @@ namespace SmartCore
 #endif
 
             // Загрузка всех базовых агрегатов
-            loadingState.CurrentPersentage = 7;
+            loadingState.CurrentPersentage = 9;
             loadingState.CurrentPersentageDescription = "Loading Base Details";
             backgroundWorker.ReportProgress(1, loadingState);
 
@@ -885,7 +914,7 @@ namespace SmartCore
             }
 
             // Выставляем ссылки между объектами
-            loadingState.CurrentPersentage = 8;
+            loadingState.CurrentPersentage = 10;
             loadingState.CurrentPersentageDescription = "Set Links";
             backgroundWorker.ReportProgress(1, loadingState);
 

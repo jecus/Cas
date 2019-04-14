@@ -1,16 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.WorkPackage;
 
 namespace CAS.UI.UIControls.WorkPakage
 {
-	public partial class WorkPackageEditorForm : Form
+	public partial class WorkPackageEditorForm : MetroForm
 	{
 		private readonly WorkPackage _currentWp;
+		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
 
 		#region Costructor
 
@@ -24,6 +27,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			if(currentWp == null)
 				return;
 
+			DocumentControls.AddRange(new[] { documentControl1, documentControl2, documentControl3, documentControl4, documentControl5, documentControl6 , documentControl7, documentControl8, documentControl9, documentControl10});
 			_currentWp = currentWp;
 			UpdateInformation();
 		}
@@ -54,10 +58,17 @@ namespace CAS.UI.UIControls.WorkPakage
 			textBoxRevision.Text = _currentWp.Revision;
 			textBoxStation.Text = _currentWp.Station;
 
-			documentControl1.CurrentDocument = _currentWp.ClosingDocument;
-			documentControl1.Added += DocumentControl1_Added;
 
-		}
+			foreach (var control in DocumentControls)
+				control.Added += DocumentControl1_Added;
+
+			for (int i = 0; i < _currentWp.ClosingDocument.Count; i++)
+			{
+				var control = DocumentControls[i];
+				control.CurrentDocument = _currentWp.ClosingDocument[i];
+			}
+
+	}
 
 		#endregion
 
@@ -65,6 +76,7 @@ namespace CAS.UI.UIControls.WorkPakage
 
 		private void DocumentControl1_Added(object sender, EventArgs e)
 		{
+			var control = sender as DocumentControl;
 			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Work package") as DocumentSubType;
 			var newDocument = new Document
 			{
@@ -74,16 +86,16 @@ namespace CAS.UI.UIControls.WorkPakage
 				DocType = DocumentType.TechnicalRecords,
 				DocumentSubType = docSubType,
 				IsClosed = true,
-				ContractNumber = $"{_currentWp.Title}",
-				Description = _currentWp.Description,
+				ContractNumber = $"{_currentWp.Number}",
+				Description = _currentWp.Title,
 				ParentAircraftId = _currentWp.ParentId
 			};
 
 			var form = new DocumentForm(newDocument, false);
 			if (form.ShowDialog() == DialogResult.OK)
 			{
-				_currentWp.ClosingDocument = newDocument;
-				documentControl1.CurrentDocument = newDocument;
+				_currentWp.ClosingDocument.Add(newDocument);
+				control.CurrentDocument = newDocument;
 
 			}
 		}

@@ -101,6 +101,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			textBoxName.Text = _currentModel.Name;
 			textBoxDesigner.Text = _currentModel.Designer;
 			textBoxPartNumber.Text = _currentModel.PartNumber;
+			textBoxAltPartNum.Text = _currentModel.AltPartNumber;
 			textBoxDescription.Text = _currentModel.Description;
 			textBoxDescRus.Text = _currentModel.DescRus;
 			textBoxHts.Text = _currentModel.HTS;
@@ -161,6 +162,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				|| textBoxName.Text != _currentModel.Name
 				|| textBoxDesigner.Text != _currentModel.Designer
 				|| textBoxPartNumber.Text != _currentModel.PartNumber
+				|| textBoxAltPartNum.Text != _currentModel.AltPartNumber
 				|| textBoxDescription.Text != _currentModel.Description
 				|| textBoxDescRus.Text != _currentModel.DescRus
 				|| textBoxHts.Text != _currentModel.HTS
@@ -256,7 +258,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_currentModel.ManufactureReg = comboBoxManufRegion.SelectedItem as ManufactureRegion;
 
 			_currentModel.PartNumber = string.IsNullOrEmpty(textBoxPartNumber.Text) ? "N/A" : textBoxPartNumber.Text;
-		    _currentModel.FullName = textBoxFullName.Text;
+			_currentModel.AltPartNumber = string.IsNullOrEmpty(textBoxAltPartNum.Text) ? "N/A" : textBoxAltPartNum.Text;
+			_currentModel.FullName = textBoxFullName.Text;
 			_currentModel.ShortName = textBoxShortName.Text;
 			_currentModel.Name = textBoxName.Text;
 			_currentModel.Designer = textBoxDesigner.Text;

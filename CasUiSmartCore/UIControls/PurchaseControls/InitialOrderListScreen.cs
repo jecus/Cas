@@ -13,12 +13,14 @@ using CASTerms;
 using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
 using EFCore.Filter;
+using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Filters;
 using SmartCore.Purchase;
+using FilterType = EFCore.Attributte.FilterType;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
@@ -252,26 +254,10 @@ namespace CAS.UI.UIControls.PurchaseControls
 				    Parent =  initial,
 				    ParentType = initial.SmartCoreObjectType,
 				    Title = initial.Title,
-				    Description = initial.Description,
-				    OpeningDate = initial.OpeningDate,
+				    OpeningDate = DateTime.Now,
 				    Author = initial.Author,
 				    Remarks = initial.Remarks,
-				    RFQ = initial.RFQ,
-				    QR = initial.QR,
-				    PO = initial.PO,
-				    Invoice = initial.Invoice,
-				    PickUp = initial.PickUp,
-				    ShipTo = initial.ShipTo,
-				    Weight = initial.Weight,
-				    DIMS = initial.DIMS,
-				    TypeOfOperation = initial.TypeOfOperation,
-				    ShipBy = initial.ShipBy,
-				    IncoTerm = initial.IncoTerm,
-				    Country = initial.Country,
-				    Supplier = initial.Supplier,
-				    ApprovedBy = initial.ApprovedBy,
-				    PublishedBy = initial.PublishedBy,
-				    ClosedBy = initial.ClosedBy,
+				    Number = initial.Number,
 			    };
 
 			    GlobalObjects.CasEnvironment.NewKeeper.Save(quatation);
@@ -295,8 +281,11 @@ namespace CAS.UI.UIControls.PurchaseControls
 				    newquatationRecord.DestinationObjectType = record.DestinationObjectType;
 				    newquatationRecord.DestinationObjectId = record.DestinationObjectId;
 				    newquatationRecord.InitialReason = record.InitialReason;
+				    newquatationRecord.Remarks = record.Remarks;
+				    newquatationRecord.LifeLimit = new Lifelength(record.LifeLimit);
+				    newquatationRecord.LifeLimitNotify = new Lifelength(record.LifeLimitNotify);
 
-				    GlobalObjects.CasEnvironment.NewKeeper.Save(newquatationRecord);
+					GlobalObjects.CasEnvironment.Keeper.Save(newquatationRecord);
 			    }
 		    }
 			catch (Exception ex)
@@ -305,7 +294,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				throw;
 		    }
 
-			MessageBox.Show("Saving was successful", "Message infomation", MessageBoxButtons.OK,
+			MessageBox.Show("Create quatation successful", "Message infomation", MessageBoxButtons.OK,
 				MessageBoxIcon.Information);
 		}
 
@@ -358,26 +347,38 @@ namespace CAS.UI.UIControls.PurchaseControls
         /// <param name="e"></param>
         private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
         {
-            foreach (InitialOrder rfq in _directivesViewer.SelectedItems)
+            foreach (var rfq in _directivesViewer.SelectedItems)
             {
-                if (rfq.Status != WorkPackageStatus.Closed)
-                    GlobalObjects.PackageCore.PublishPackage<InitialOrder, InitialOrderRecord>(rfq, DateTime.Now);
-                else
-                {
-                    switch (MessageBox.Show(@"This initial order is already closed," +
-                                             "\nif you want to republish it," +
-                                             "\nInformation entered at the closing will be erased." + "\n\n Republish " + rfq.Title + " initial order?", (string)new GlobalTermsProvider()["SystemName"],
-                                        MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation,
-                                        MessageBoxDefaultButton.Button2))
-                    {
-                        case DialogResult.Yes:
-                            GlobalObjects.PackageCore.PublishPackage<InitialOrder, InitialOrderRecord>(rfq, DateTime.Now);
-                            break;
-                        case DialogResult.No:
-                            //arguments.Cancel = true;
-                            break;
-                    }
-                }
+				if (rfq.Status == WorkPackageStatus.Published)
+				{
+					MessageBox.Show("Initional Order " + rfq.Title + " is already publisher.",
+						(string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
+						MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+					continue;
+				}
+
+				rfq.Status = WorkPackageStatus.Published;
+		            rfq.PublishingDate = DateTime.Now;
+		            rfq.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
+		            rfq.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
+					GlobalObjects.CasEnvironment.NewKeeper.Save(rfq);
+	            //}
+             //   else
+             //   {
+             //       switch (MessageBox.Show(@"This initial order is already closed," +
+             //                                "\nif you want to republish it," +
+             //                                "\nInformation entered at the closing will be erased." + "\n\n Republish " + rfq.Title + " initial order?", (string)new GlobalTermsProvider()["SystemName"],
+             //                           MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation,
+             //                           MessageBoxDefaultButton.Button2))
+             //       {
+             //           case DialogResult.Yes:
+             //               GlobalObjects.PackageCore.PublishPackage<InitialOrder, InitialOrderRecord>(rfq, DateTime.Now);
+             //               break;
+             //           case DialogResult.No:
+             //               //arguments.Cancel = true;
+             //               break;
+             //       }
+             //   }
             }
             AnimatedThreadWorker.RunWorkerAsync();
         }
@@ -408,37 +409,81 @@ namespace CAS.UI.UIControls.PurchaseControls
 
         private void ToolStripMenuItemCloseClick(object sender, EventArgs e)
         {
-            //foreach (InitionalOrder rfq in _directivesViewer.SelectedItems)
-            //{
-            //    if (rfq.Status == WorkPackageStatus.Closed)
-            //    {
-            //        MessageBox.Show("Initional Order " + rfq.Title + " is already closed.",
-            //                        (string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
-            //                        MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-            //        continue;
-            //    }
-            //    RequestForQuotationClosingForm form = new RequestForQuotationClosingForm(rfq);
-            //    form.ShowDialog();
+	        var selected = _directivesViewer.SelectedItems.ToArray();
 
-            //    if (form.CreatePurchaseOrder)
-            //    {
-            //        GlobalObjects.CasEnvironment.Loader.LoadInitionalOrderItems(rfq);
-            //        rfq.Products.Sort();
-            //        PurchaseOrderKitForm kitForm = new PurchaseOrderKitForm(rfq);
-            //        if (kitForm.ShowDialog() == DialogResult.OK)
-            //        {
-            //            ReferenceEventArgs refe = new ReferenceEventArgs
-            //            {
-            //                DisplayerText = kitForm.CurrentOrder.Title,
-            //                TypeOfReflection = ReflectionTypes.DisplayInNew,
-            //                RequestedEntity = new PurchaseOrderScreen(kitForm.CurrentOrder)
-            //            };
-            //            InvokeDisplayerRequested(refe);
-            //        }
-            //    }
-            //}
-            //AnimatedThreadWorker.RunWorkerAsync();
-        }
+	        try
+	        {
+		        foreach (var rfq in selected)
+		        {
+			        if (rfq.Status == WorkPackageStatus.Closed)
+			        {
+				        MessageBox.Show("Initional Order " + rfq.Title + " is already closed.",
+					        (string) new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
+					        MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+				        continue;
+			        }
+
+					rfq.Status = WorkPackageStatus.Closed;
+					rfq.ClosingDate = DateTime.Now;
+					rfq.CloseByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
+					rfq.ClosedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
+					GlobalObjects.CasEnvironment.NewKeeper.Save(rfq);
+
+					//var initial = _directivesViewer.SelectedItem;
+					//      var quatation = new RequestForQuotation
+					//      {
+					//       Parent = initial,
+					//       ParentType = initial.SmartCoreObjectType,
+					//       Title = initial.Title,
+					//       Description = initial.Description,
+					//       OpeningDate = initial.OpeningDate,
+					//       Author = initial.Author,
+					//       Remarks = initial.Remarks,
+					//      };
+
+					//      GlobalObjects.CasEnvironment.NewKeeper.Save(quatation);
+
+					//      var initialRecords =
+					//       GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(
+					//        new Filter("ParentPackageId", initial.ItemId));
+					//      var ids = initialRecords.Select(i => i.ProductId);
+					//      if (ids.Count() > 0)
+					//      {
+					//       var product =
+					//        GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, Product>(
+					//	        new Filter("ItemId", ids));
+					//       foreach (var addedInitialOrderRecord in initialRecords)
+					//        addedInitialOrderRecord.Product =
+					//	        product.FirstOrDefault(i => i.ItemId == addedInitialOrderRecord.ProductId);
+					//      }
+
+					//      foreach (var record in initialRecords)
+					//      {
+					//       var newquatationRecord =
+					//        new RequestForQuotationRecord(quatation.ItemId, record.Product, record.Quantity);
+					//       newquatationRecord.Priority = record.Priority;
+					//       newquatationRecord.Measure = record.Measure;
+					//       newquatationRecord.DeferredCategory = record.DeferredCategory;
+					//       newquatationRecord.CostCondition = record.CostCondition;
+					//       newquatationRecord.DestinationObjectType = record.DestinationObjectType;
+					//       newquatationRecord.DestinationObjectId = record.DestinationObjectId;
+					//       newquatationRecord.InitialReason = record.InitialReason;
+					//       newquatationRecord.Remarks = record.Remarks;
+					//       newquatationRecord.LifeLimit = new Lifelength(record.LifeLimit);
+					//       newquatationRecord.LifeLimitNotify = new Lifelength(record.LifeLimitNotify);
+
+					//       GlobalObjects.CasEnvironment.Keeper.Save(newquatationRecord);
+					//      }
+				}
+			}
+			catch (Exception ex)
+			{
+				Program.Provider.Logger.Log("Error while saving data", ex);
+				throw;
+			}
+
+			AnimatedThreadWorker.RunWorkerAsync();
+		}
 
         #endregion
 
@@ -448,7 +493,7 @@ namespace CAS.UI.UIControls.PurchaseControls
         {
             if (_directivesViewer.SelectedItems.Count != 1) return;
 
-            var editForm = new OrderAddForm(_directivesViewer.SelectedItems[0]);
+            var editForm = new InitialOrderFormNew(_directivesViewer.SelectedItems[0]);
             if(editForm.ShowDialog() == DialogResult.OK)
                 AnimatedThreadWorker.RunWorkerAsync();
         }
@@ -537,19 +582,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 
         private void ButtonAddNewClick(object sender, EventArgs e)
         {
-            OrderAddForm form = new OrderAddForm(CurrentParent, OrderFormType.Initial);
+            var form = new InitialOrderFormNew(new InitialOrder(){ParentId = CurrentParent.ItemId, ParentType = CurrentParent.SmartCoreObjectType});
             if(form.ShowDialog() == DialogResult.OK)
-            {
-                AnimatedThreadWorker.RunWorkerAsync();
-
-                ReferenceEventArgs refe = new ReferenceEventArgs
-                                              {
-                                                  DisplayerText = form.AddedInitial.Title,
-                                                  TypeOfReflection = ReflectionTypes.DisplayInNew,
-                                                  RequestedEntity = new InitionalOrderScreen(form.AddedInitial)
-                                              };
-                InvokeDisplayerRequested(refe);    
-            }
+                AnimatedThreadWorker.RunWorkerAsync(); 
         }
         #endregion
 

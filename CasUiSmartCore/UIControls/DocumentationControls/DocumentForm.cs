@@ -9,6 +9,7 @@ using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using EFCore.DTO.General;
 using EFCore.Filter;
+using MetroFramework.Forms;
 using SmartCore.Auxiliary;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -27,7 +28,7 @@ namespace CAS.UI.UIControls.DocumentationControls
     ///<summary>
     /// Форма для представления информации о документе
     ///</summary>
-    public partial class DocumentForm : Form
+    public partial class DocumentForm : MetroForm
     {
         #region Fields
 
@@ -303,13 +304,19 @@ namespace CAS.UI.UIControls.DocumentationControls
 		{
 			if(_parent == null) return;
 
-			if (_parent is DirectiveRecord || _parent is Component || _parent is ComponentDirective || _parent is WorkPackage)
+			if (_parent is DirectiveRecord || _parent is Component || _parent is ComponentDirective)
 			{
 				comboBoxDocumentType.Enabled = false;
 				comboBoxSubType.Enabled = false;
 				textBoxContractNumber.Enabled = false;
 				textBoxDescription.Enabled = false;
 				checkBoxClosed.Enabled = false;
+			}
+			else if(_parent is WorkPackage)
+			{
+				comboBoxDocumentType.Enabled = false;
+				comboBoxSubType.Enabled = false;
+				textBoxContractNumber.Enabled = false;
 			}
 			else if (_parent is SpecialistTraining)
 			{
@@ -502,7 +509,7 @@ namespace CAS.UI.UIControls.DocumentationControls
         }
 
         #region private void ButtonOkClick(object sender, EventArgs e)
-        private void ButtonOkClick(object sender, EventArgs e)
+        private void buttonOk_Click(object sender, EventArgs e)
         {
 	        try
 	        {
@@ -520,7 +527,7 @@ namespace CAS.UI.UIControls.DocumentationControls
         #endregion
 
         #region private void ButtonCancelClick(object sender, EventArgs e)
-        private void ButtonCancelClick(object sender, EventArgs e)
+        private void buttonCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();

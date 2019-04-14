@@ -21,6 +21,9 @@ namespace EFCore.DTO.General
 		public int? SupplierId { get; set; }
 
 		[DataMember]
+		public int CurrencyId { get; set; }
+
+		[DataMember]
 		public string Remarks { get; set; }
 
 		[DataMember]
@@ -38,9 +41,6 @@ namespace EFCore.DTO.General
 		[DataMember]
 		public bool? Processed { get; set; }
 
-		[DataMember]
-		[Child]
-		public SupplierDTO Supplier { get; set; }
 
 		[DataMember]
 		[Child(FilterType.Equal, "ParentTypeId", 1860)]

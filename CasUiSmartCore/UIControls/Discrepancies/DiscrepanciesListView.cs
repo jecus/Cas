@@ -207,7 +207,10 @@ namespace CAS.UI.UIControls.Discrepancies
             columnHeader = new ColumnHeader {Width = 80, Text = "Remarks"};
             ColumnHeaderList.Add(columnHeader);
 
-            itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
+            ColumnHeaderList.Add(columnHeader);
+
+			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
         }
 		#endregion
 
@@ -263,6 +266,8 @@ namespace CAS.UI.UIControls.Discrepancies
 			//{
 
 			//}
+
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.IsReliability ? "R" : "N", Tag = item.IsReliability });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ParentFlight.ParentATLB.ATLBNo, Tag = item.ParentFlight.ParentATLB.ATLBNo });
@@ -327,8 +332,9 @@ namespace CAS.UI.UIControls.Discrepancies
             subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Remarks, Tag = item.Remarks });
-           
-            return subItems.ToArray();
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
+
+			return subItems.ToArray();
         }
 
         #endregion

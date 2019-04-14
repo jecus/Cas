@@ -57,13 +57,20 @@ namespace EFCore.DTO.General
 		public int InitialReason { get; set; }
 
 		[DataMember]
-		[Include]
-		public DefferedCategorieDTO DefferedCategory { get; set; }
+		public string Remarks { get; set; }
+
+		[DataMember]
+		public byte[] LifeLimit { get; set; }
+
+		[DataMember]
+		public byte[] LifeLimitNotify { get; set; }
+
+		[DataMember]
+		public string SettingJSON { get; set; }
 
 		[DataMember]
 		[Include]
-		public SupplierDTO ToSupplier { get; set; }
-
+		public DefferedCategorieDTO DefferedCategory { get; set; }
 
 		#region Navigation Property
 

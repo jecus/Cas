@@ -1166,6 +1166,12 @@
     <Compile Include="UIControls\PurchaseControls\GoodStandardForm.Designer.cs">
       <DependentUpon>GoodStandardForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\PurchaseControls\Initial\InitialOrderFormNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Initial\InitialOrderFormNew.Designer.cs">
+      <DependentUpon>InitialOrderFormNew.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\PurchaseControls\Initial\InitialOrderListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1190,11 +1196,47 @@
     <Compile Include="UIControls\PurchaseControls\ProductListView.Designer.cs">
       <DependentUpon>ProductListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\PurchaseControls\Purchase\PurchaseOrderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Purchase\PurchaseOrderForm.Designer.cs">
+      <DependentUpon>PurchaseOrderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Purchase\CreatePurchaseOrderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Purchase\CreatePurchaseOrderForm.Designer.cs">
+      <DependentUpon>CreatePurchaseOrderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Purchase\PurchaseRecordListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Purchase\PurchaseRecordListView.Designer.cs">
+      <DependentUpon>PurchaseRecordListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Purchase\QuatationSupplierPriceListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Purchase\QuatationSupplierPriceListView.Designer.cs">
+      <DependentUpon>QuatationSupplierPriceListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Quatation\QuatationOrderFormNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Quatation\QuatationOrderFormNew.Designer.cs">
+      <DependentUpon>QuatationOrderFormNew.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\PurchaseControls\Quatation\QuatationOrderListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UIControls\PurchaseControls\Quatation\QuatationOrderListView.Designer.cs">
       <DependentUpon>QuatationOrderListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Quatation\QuotationSupplierForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Quatation\QuotationSupplierForm.Designer.cs">
+      <DependentUpon>QuotationSupplierForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UIControls\PurchaseControls\QuotationOrderComposeForm.cs">
       <SubType>Form</SubType>
@@ -2572,6 +2614,12 @@
     <Compile Include="UIControls\SupplierControls\SupplierListScreen.Designer.cs">
       <DependentUpon>SupplierListScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\SupplierControls\SupplierPriceListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\SupplierControls\SupplierPriceListView.Designer.cs">
+      <DependentUpon>SupplierPriceListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\SupplierControls\SupplierListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -3877,11 +3925,26 @@
     <EmbeddedResource Include="UIControls\PurchaseControls\GoodStandardForm.resx">
       <DependentUpon>GoodStandardForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\PurchaseControls\Initial\InitialOrderFormNew.resx">
+      <DependentUpon>InitialOrderFormNew.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PurchaseControls\ModelForm.resx">
       <DependentUpon>ModelForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PurchaseControls\ProductListScreen.resx">
       <DependentUpon>ProductListScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\PurchaseControls\Purchase\PurchaseOrderForm.resx">
+      <DependentUpon>PurchaseOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\PurchaseControls\Purchase\CreatePurchaseOrderForm.resx">
+      <DependentUpon>CreatePurchaseOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\PurchaseControls\Quatation\QuatationOrderFormNew.resx">
+      <DependentUpon>QuatationOrderFormNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\PurchaseControls\Quatation\QuotationSupplierForm.resx">
+      <DependentUpon>QuotationSupplierForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PurchaseControls\QuotationOrderComposeForm.resx">
       <DependentUpon>QuotationOrderComposeForm.cs</DependentUpon>

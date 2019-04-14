@@ -1,21 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class AircraftWorkerCategoryMap : EntityTypeConfiguration<AircraftWorkerCategoryDTO>
+	public class AircraftWorkerCategoryMap : BaseMap<AircraftWorkerCategoryDTO>
 	{
-		public AircraftWorkerCategoryMap()
+		public AircraftWorkerCategoryMap() : base()
 		{
 			ToTable("dbo.AircraftWorkerCategories");
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.Category)
 				.HasMaxLength(256)

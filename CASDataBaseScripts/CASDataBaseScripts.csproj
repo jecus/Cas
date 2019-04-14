@@ -57,6 +57,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DBScripts\BDScripts1500.sql" />
+    <Content Include="DBScripts\BDScripts1400.sql" />
     <Content Include="DBScripts\BDScripts1300.sql" />
     <Content Include="DBScripts\BDScripts1200.sql" />
     <Content Include="DBScripts\BDScripts1100.sql" />

@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class RequestMap : EntityTypeConfiguration<RequestDTO>
+	public class RequestMap : BaseMap<RequestDTO>
 	{
-		public RequestMap()
+		public RequestMap() : base()
 		{
 			ToTable("dbo.Requests");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.PreparedByDate)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)

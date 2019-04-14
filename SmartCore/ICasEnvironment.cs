@@ -61,6 +61,9 @@ namespace SmartCore
 		ILoginService GetSeviceUser();
 
 		List<UserDTO> GetAllUsers();
+
+		string GetCorrector(int id);
+
 		void UpdateUser(string password);
 
 		void CheckTablesFor(Type type);

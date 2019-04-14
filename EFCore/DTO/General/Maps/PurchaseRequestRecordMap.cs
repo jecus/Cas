@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class PurchaseRequestRecordMap : EntityTypeConfiguration<PurchaseRequestRecordDTO>
+	public class PurchaseRequestRecordMap : BaseMap<PurchaseRequestRecordDTO>
 	{
-		public PurchaseRequestRecordMap()
+		public PurchaseRequestRecordMap() : base()
 		{
 			ToTable("dbo.PurchaseRequestsRecords");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.ParentPackageId)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
@@ -33,6 +23,10 @@ namespace EFCore.DTO.General.Maps
 			Property(i => i.SupplierId)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("SupplierId");
+
+			Property(i => i.CurrencyId)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("CurrencyId");
 
 			Property(i => i.Remarks)
 				.HasMaxLength(256)
@@ -59,9 +53,6 @@ namespace EFCore.DTO.General.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("Processed");
 
-			HasRequired(i => i.Supplier)
-				.WithMany(i => i.PurchaseRequestRecordDtos)
-				.HasForeignKey(i => i.SupplierId);
 
 			HasMany(i => i.Files).WithRequired(i => i.PurchaseRequestRecord).HasForeignKey(i => i.ParentId);
 		}

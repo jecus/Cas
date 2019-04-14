@@ -6,6 +6,7 @@ using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary.Comparers;
+using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
@@ -103,7 +104,10 @@ namespace CAS.UI.UIControls.DirectivesControls
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Hidden remarks" };
             ColumnHeaderList.Add(columnHeader);
 
-            itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
+            ColumnHeaderList.Add(columnHeader);
+
+			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
         }
 		#endregion
 
@@ -119,8 +123,8 @@ namespace CAS.UI.UIControls.DirectivesControls
 
         protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Directive item)
         {
-            var subItems = new ListViewItem.ListViewSubItem[20];
-
+            var subItems = new ListViewItem.ListViewSubItem[21];
+            var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 			var sbColor = itemsListView.ForeColor;
 			var eoColor = itemsListView.ForeColor;
 
@@ -227,7 +231,8 @@ namespace CAS.UI.UIControls.DirectivesControls
             subItems[17] = new ListViewItem.ListViewSubItem { Text = cost == -1 ? "" : cost.ToString(), Tag = cost };
             subItems[18] = new ListViewItem.ListViewSubItem { Text = remarksString, Tag = remarksString };
             subItems[19] = new ListViewItem.ListViewSubItem { Text = hiddenRemarksString, Tag = hiddenRemarksString };
-            return subItems;
+            subItems[20] = new ListViewItem.ListViewSubItem { Text = author, Tag = author };
+			return subItems;
         }
 
         #endregion

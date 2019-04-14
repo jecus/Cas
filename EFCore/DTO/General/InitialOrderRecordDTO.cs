@@ -76,6 +76,9 @@ namespace EFCore.DTO.General
 		public bool? IsSchedule { get; set; }
 
 		[DataMember]
+		public string Remarks { get; set; }
+
+		[DataMember]
 		[Include]
 		public DefferedCategorieDTO DeferredCategory { get; set; }
 

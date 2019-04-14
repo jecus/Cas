@@ -18,6 +18,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = agwCategory.ItemId,
 				IsDeleted = agwCategory.IsDeleted,
+				CorrectorId = agwCategory.CorrectorId,
 				FullName = agwCategory.FullName,
 				Gender = (short) agwCategory.Gender,
 				MinAge = agwCategory.MinAge,
@@ -33,6 +34,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = agwCategorieDto.ItemId,
 				IsDeleted = agwCategorieDto.IsDeleted,
+				CorrectorId = agwCategorieDto.CorrectorId,
 				FullName = agwCategorieDto.FullName,
 				Gender = agwCategorieDto.Gender != null ? (Gender) agwCategorieDto.Gender : Gender.NotApplicable,
 				MinAge = agwCategorieDto.MinAge ?? default(int),
@@ -49,10 +51,11 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = aircraftModel.ItemId,
 				IsDeleted = aircraftModel.IsDeleted,
+				CorrectorId = aircraftModel.CorrectorId,
 				Model = aircraftModel.Name,
 				PartNumber = aircraftModel.PartNumber,
+				AltPartNumber = aircraftModel.AltPartNumber,
 				AtaChapterId = aircraftModel.ATAChapter?.ItemId,
-				//ATAChapter = aircraftModel.ATAChapter?.Convert(),
 				GoodStandart = aircraftModel.Standart?.Convert(),
 				Description = aircraftModel.Description,
 				StandartId = aircraftModel.Standart?.ItemId,
@@ -81,8 +84,10 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = aircraftModelDto.ItemId,
 				IsDeleted = aircraftModelDto.IsDeleted,
+				CorrectorId = aircraftModelDto.CorrectorId,
 				Name = aircraftModelDto.Model,
 				PartNumber = aircraftModelDto.PartNumber,
+				AltPartNumber = aircraftModelDto.AltPartNumber,
 				ATAChapter = aircraftModelDto.ATAChapter?.Convert(),
 				Description = aircraftModelDto.Description,
 				Standart = aircraftModelDto.GoodStandart?.Convert(),
@@ -115,6 +120,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = parameters.ItemId,
 				IsDeleted = parameters.IsDeleted,
+				CorrectorId = parameters.CorrectorId,
 				FullName = parameters.FullName,
 				Name = parameters.ShortName
 			};
@@ -126,6 +132,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = parametersDto.ItemId,
 				IsDeleted = parametersDto.IsDeleted,
+				CorrectorId = parametersDto.CorrectorId,
 				FullName = parametersDto.FullName,
 				ShortName = parametersDto.Name
 			};
@@ -138,6 +145,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = code.ItemId,
 				IsDeleted = code.IsDeleted,
+				CorrectorId = code.CorrectorId,
 				FullName = code.FullName,
 				City = code.City,
 				Country = code.Country,
@@ -153,6 +161,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = codeDto.ItemId,
 				IsDeleted = codeDto.IsDeleted,
+				CorrectorId = codeDto.CorrectorId,
 				FullName = codeDto.FullName,
 				City = codeDto.City,
 				Country = codeDto.Country,
@@ -169,6 +178,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = airport.ItemId,
 				IsDeleted = airport.IsDeleted,
+				CorrectorId = airport.CorrectorId,
 				ShortName = airport.ShortName,
 				FullName = airport.FullName,
 				Altitude = airport.Altitude,
@@ -183,6 +193,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = airportDto.ItemId,
 				IsDeleted = airportDto.IsDeleted,
+				CorrectorId = airportDto.CorrectorId,
 				ShortName = airportDto.ShortName,
 				FullName = airportDto.FullName,
 				Altitude = airportDto.Altitude ?? default(int),
@@ -198,8 +209,10 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = componentModel.ItemId,
 				IsDeleted = componentModel.IsDeleted,
+				CorrectorId = componentModel.CorrectorId,
 				Model = componentModel.Name,
 				PartNumber = componentModel.PartNumber,
+				AltPartNumber = componentModel.AltPartNumber,
 				AtaChapterId = componentModel.ATAChapter?.ItemId,
 				Description = componentModel.Description,
 				StandartId = componentModel.Standart?.ItemId,
@@ -230,8 +243,10 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = componentModelDto.ItemId,
 				IsDeleted = componentModelDto.IsDeleted,
+				CorrectorId = componentModelDto.CorrectorId,
 				Name = componentModelDto.Model,
 				PartNumber = componentModelDto.PartNumber,
+				AltPartNumber = componentModelDto.AltPartNumber,
 				ATAChapter = componentModelDto.ATAChapter?.Convert(),
 				Description = componentModelDto.Description,
 				Standart = componentModelDto.GoodStandart?.Convert(),
@@ -266,8 +281,10 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = product.ItemId,
 				IsDeleted = product.IsDeleted,
+				CorrectorId = product.CorrectorId,
 				Model = product.Name,
 				PartNumber = product.PartNumber,
+				AltPartNumber = product.AltPartNumber,
 				AtaChapterId = product.ATAChapter?.ItemId,
 				Description = product.Description,
 				StandartId = product.Standart?.ItemId,
@@ -294,8 +311,10 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = productDto.ItemId,
 				IsDeleted = productDto.IsDeleted,
+				CorrectorId = productDto.CorrectorId,
 				Name = productDto.Model,
 				PartNumber = productDto.PartNumber,
+				AltPartNumber = productDto.AltPartNumber,
 				ATAChapter = productDto.ATAChapter?.Convert(),
 				Description = productDto.Description,
 				Standart = productDto.GoodStandart?.Convert(),
@@ -328,6 +347,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = ataChapter.ItemId,
 				IsDeleted = ataChapter.IsDeleted,
+				CorrectorId = ataChapter.CorrectorId,
 				FullName = ataChapter.FullName,
 				ShortName = ataChapter.ShortName
 			};
@@ -339,6 +359,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = ataChapterDto.ItemId,
 				IsDeleted = ataChapterDto.IsDeleted,
+				CorrectorId = ataChapterDto.CorrectorId,
 				FullName = ataChapterDto.FullName,
 				ShortName = ataChapterDto.ShortName
 			};
@@ -351,6 +372,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = standart.ItemId,
 				IsDeleted = standart.IsDeleted,
+				CorrectorId = standart.CorrectorId,
 				Name = standart.FullName,
 				PartNumber = standart.PartNumber,
 				Description = standart.Description,
@@ -366,6 +388,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = standartDto.ItemId,
 				IsDeleted = standartDto.IsDeleted,
+				CorrectorId = standartDto.CorrectorId,
 				FullName = standartDto.Name,
 				PartNumber = standartDto.PartNumber,
 				Description = standartDto.Description,
@@ -382,6 +405,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = cruiseLevel.ItemId,
 				IsDeleted = cruiseLevel.IsDeleted,
+				CorrectorId = cruiseLevel.CorrectorId,
 				FullName = cruiseLevel.FullName,
 				Feet = cruiseLevel.Feet,
 				IVFR = cruiseLevel.IVFR,
@@ -396,6 +420,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = cruiseLevelDto.ItemId,
 				IsDeleted = cruiseLevelDto.IsDeleted,
+				CorrectorId = cruiseLevelDto.CorrectorId,
 				FullName = cruiseLevelDto.FullName,
 				Feet = cruiseLevelDto.Feet ?? default(int),
 				IVFR = cruiseLevelDto.IVFR,
@@ -410,6 +435,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = damagechart.ItemId,
 				IsDeleted = damagechart.IsDeleted,
+				CorrectorId = damagechart.CorrectorId,
 				ChartName = damagechart.ChartName,
 				AircraftModelId = damagechart.AircraftModel?.ItemId,
 				AccessoryDescription = damagechart.AircraftModel?.Convert()
@@ -422,6 +448,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = damagechartDto.ItemId,
 				IsDeleted = damagechartDto.IsDeleted,
+				CorrectorId = damagechartDto.CorrectorId,
 				ChartName = damagechartDto.ChartName,
 				AircraftModel = ConvertToAircraftModel(damagechartDto.AccessoryDescription),
 			};
@@ -433,6 +460,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = defferedcategorie.ItemId,
 				IsDeleted = defferedcategorie.IsDeleted,
+				CorrectorId = defferedcategorie.CorrectorId,
 				CategoryName = defferedcategorie.FullName,
 				AircraftModelId = defferedcategorie.AircraftModel?.ItemId,
 				Threshold = defferedcategorie.Threshold?.ToBinary()
@@ -445,6 +473,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = ddefferedcategorieDto.ItemId,
 				IsDeleted = ddefferedcategorieDto.IsDeleted,
+				CorrectorId = ddefferedcategorieDto.CorrectorId,
 				FullName = ddefferedcategorieDto.CategoryName,
 				AircraftModel = ddefferedcategorieDto.AccessoryDescription?.ConvertToAircraftModel(),
 				//TODO:Разобраться почему private set
@@ -458,6 +487,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = department.ItemId,
 				IsDeleted = department.IsDeleted,
+				CorrectorId = department.CorrectorId,
 				Name = department.ShortName,
 				FullName = department.FullName
 			};
@@ -469,6 +499,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = departmentDto.ItemId,
 				IsDeleted = departmentDto.IsDeleted,
+				CorrectorId = departmentDto.CorrectorId,
 				ShortName = departmentDto.Name,
 				FullName = departmentDto.FullName
 			};
@@ -480,6 +511,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = documentsubtype.ItemId,
 				IsDeleted = documentsubtype.IsDeleted,
+				CorrectorId = documentsubtype.CorrectorId,
 				Name = documentsubtype.FullName,
 				DocumentTypeId = documentsubtype.DocumentTypeId,
 			};
@@ -491,6 +523,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = documentsubtypeDto.ItemId,
 				IsDeleted = documentsubtypeDto.IsDeleted,
+				CorrectorId = documentsubtypeDto.CorrectorId,
 				FullName = documentsubtypeDto.Name,
 				DocumentTypeId = documentsubtypeDto.DocumentTypeId
 			};
@@ -502,6 +535,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = employeesubject.ItemId,
 				IsDeleted = employeesubject.IsDeleted,
+				CorrectorId = employeesubject.CorrectorId,
 				Name = employeesubject.ShortName,
 				FullName = employeesubject.FullName,
 				LicenceTypeId = employeesubject.LicenceTypeId
@@ -514,6 +548,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = employeesubjectDto.ItemId,
 				IsDeleted = employeesubjectDto.IsDeleted,
+				CorrectorId = employeesubjectDto.CorrectorId,
 				ShortName = employeesubjectDto.Name,
 				FullName = employeesubjectDto.FullName,
 				LicenceTypeId = employeesubjectDto.LicenceTypeId ?? default(int)
@@ -526,6 +561,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = eventcategorie.ItemId,
 				IsDeleted = eventcategorie.IsDeleted,
+				CorrectorId = eventcategorie.CorrectorId,
 				Weight = eventcategorie.Weight,
 				MinCompareOp = eventcategorie.MinCompareOperation?.ItemId,
 				EventCountMinPeriod = eventcategorie.EventCountMinPeriod,
@@ -542,6 +578,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = eventcategorieDto.ItemId,
 				IsDeleted = eventcategorieDto.IsDeleted,
+				CorrectorId = eventcategorieDto.CorrectorId,
 				Weight = eventcategorieDto.Weight ?? default(int),
 				MinCompareOperation = eventcategorieDto.MinCompareOp.HasValue ? LogicOperation.Items.GetItemById(eventcategorieDto.MinCompareOp.Value) : LogicOperation.Unknown,
 				EventCountMinPeriod = eventcategorieDto.EventCountMinPeriod ?? default(int),
@@ -560,6 +597,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = eventclass.ItemId,
 				IsDeleted = eventclass.IsDeleted,
+				CorrectorId = eventclass.CorrectorId,
 				FullName = eventclass.FullName,
 				People = eventclass.PeopleDamage?.ItemId,
 				Failure = eventclass.FailureViolationDeviation?.ItemId,
@@ -577,6 +615,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = eventclassDto.ItemId,
 				IsDeleted = eventclassDto.IsDeleted,
+				CorrectorId = eventclassDto.CorrectorId,
 				FullName = eventclassDto.FullName,
 				PeopleDamage = eventclassDto.People.HasValue ? HumanDamage.Items.GetItemById(eventclassDto.People.Value) : HumanDamage.UNK,
 				FailureViolationDeviation = eventclassDto.Failure.HasValue ? FailureViolationDeviation.Items.GetItemById(eventclassDto.Failure.Value) : FailureViolationDeviation.UNK,
@@ -593,6 +632,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = flightnum.ItemId,
 				IsDeleted = flightnum.IsDeleted,
+				CorrectorId = flightnum.CorrectorId,
 				FlightNumber = flightnum.FullName
 			};
 		}
@@ -603,6 +643,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = flightnumDto.ItemId,
 				IsDeleted = flightnumDto.IsDeleted,
+				CorrectorId = flightnumDto.CorrectorId,
 				FullName = flightnumDto.FlightNumber ?? ""
 			};
 		}
@@ -613,6 +654,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = licenseremarkright.ItemId,
 				IsDeleted = licenseremarkright.IsDeleted,
+				CorrectorId = licenseremarkright.CorrectorId,
 				Name = licenseremarkright.ShortName,
 				FullName = licenseremarkright.FullName
 			};
@@ -624,6 +666,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = licenseremarkrightDto.ItemId,
 				IsDeleted = licenseremarkrightDto.IsDeleted,
+				CorrectorId = licenseremarkrightDto.CorrectorId,
 				ShortName = licenseremarkrightDto.Name,
 				FullName = licenseremarkrightDto.FullName
 			};
@@ -634,6 +677,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = lifelimitcategorie.ItemId,
 				IsDeleted = lifelimitcategorie.IsDeleted,
+				CorrectorId = lifelimitcategorie.CorrectorId,
 				CategoryType = lifelimitcategorie.CategoryType.ItemId.ToString(), 
 				CategoryName = lifelimitcategorie.Category,
 				AircraftModelId = lifelimitcategorie.AircraftModel?.ItemId,
@@ -669,6 +713,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = lifelimitcategorieDto.ItemId,
 				IsDeleted = lifelimitcategorieDto.IsDeleted,
+				CorrectorId = lifelimitcategorieDto.CorrectorId,
 				CategoryType = LLPLifeLimitCategoryType.Items.GetItemById(int.Parse(lifelimitcategorieDto.CategoryType)) != null ? (LLPLifeLimitCategoryType)LLPLifeLimitCategoryType.Items.GetItemById(int.Parse(lifelimitcategorieDto.CategoryType)) : LLPLifeLimitCategoryType.Unknown,
 				Category = lifelimitcategorieDto.CategoryName,
 				AircraftModel = lifelimitcategorieDto.AccessoryDescription?.ConvertToAircraftModel(),
@@ -681,6 +726,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = location.ItemId,
 				IsDeleted = location.IsDeleted,
+				CorrectorId = location.CorrectorId,
 				Name = location.ShortName,
 				FullName = location.FullName,
 				LocationsTypeId = location.LocationsType?.ItemId ?? default(int),
@@ -694,6 +740,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = locationDto.ItemId,
 				IsDeleted = locationDto.IsDeleted,
+				CorrectorId = locationDto.CorrectorId,
 				ShortName = locationDto.Name,
 				FullName = locationDto.FullName,
 				LocationsType = locationDto.LocationsType?.Convert()
@@ -706,6 +753,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = locationsTypeDto.ItemId,
 				IsDeleted = locationsTypeDto.IsDeleted,
+				CorrectorId = locationsTypeDto.CorrectorId,
 				FullName = locationsTypeDto.FullName,
 				ShortName = locationsTypeDto.Name,
 			};
@@ -724,6 +772,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = locationsType.ItemId,
 				IsDeleted = locationsType.IsDeleted,
+				CorrectorId = locationsType.CorrectorId,
 				FullName = locationsType.FullName,
 				Name = locationsType.ShortName,
 				DepartmentId = locationsType.Department?.ItemId ?? -1
@@ -737,6 +786,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = nomenclature.ItemId,
 				IsDeleted = nomenclature.IsDeleted,
+				CorrectorId = nomenclature.CorrectorId,
 				Name = nomenclature.ShortName,
 				FullName = nomenclature.FullName,
 				DepartmentId = nomenclature.Department?.ItemId ?? -1,
@@ -750,6 +800,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = nomenclatureDto.ItemId,
 				IsDeleted = nomenclatureDto.IsDeleted,
+				CorrectorId = nomenclatureDto.CorrectorId,
 				ShortName = nomenclatureDto.Name,
 				FullName = nomenclatureDto.FullName,
 			};
@@ -768,6 +819,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = nonrutinejob.ItemId,
 				IsDeleted = nonrutinejob.IsDeleted,
+				CorrectorId = nonrutinejob.CorrectorId,
 				ATAChapterId = nonrutinejob.ATAChapter?.ItemId,
 				Title = nonrutinejob.Title,
 				Description = nonrutinejob.Description,
@@ -783,6 +835,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = nonrutinejobDto.ItemId,
 				IsDeleted = nonrutinejobDto.IsDeleted,
+				CorrectorId = nonrutinejobDto.CorrectorId,
 				ATAChapter = nonrutinejobDto.ATAChapter?.Convert(),
 				Title = nonrutinejobDto.Title,
 				Description = nonrutinejobDto.Description,
@@ -798,6 +851,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = reason.ItemId,
 				IsDeleted = reason.IsDeleted,
+				CorrectorId = reason.CorrectorId,
 				Name = reason.FullName,
 				Category = reason.Category
 			};
@@ -809,6 +863,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = reasonDto.ItemId,
 				IsDeleted = reasonDto.IsDeleted,
+				CorrectorId = reasonDto.CorrectorId,
 				FullName = reasonDto.Name,
 				Category = reasonDto.Category
 			};
@@ -820,6 +875,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = licenserestriction.ItemId,
 				IsDeleted = licenserestriction.IsDeleted,
+				CorrectorId = licenserestriction.CorrectorId,
 				Name = licenserestriction.ShortName,
 				FullName = licenserestriction.FullName
 			};
@@ -831,6 +887,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = licenserestrictionDto.ItemId,
 				IsDeleted = licenserestrictionDto.IsDeleted,
+				CorrectorId = licenserestrictionDto.CorrectorId,
 				ShortName = licenserestrictionDto.Name,
 				FullName = licenserestrictionDto.FullName
 			};
@@ -842,6 +899,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = scheduleperiod.ItemId,
 				IsDeleted = scheduleperiod.IsDeleted,
+				CorrectorId = scheduleperiod.CorrectorId,
 				Schedule = (int)scheduleperiod.Schedule,
 				DateTo = scheduleperiod.To,
 				DateFrom = scheduleperiod.From
@@ -854,6 +912,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = scheduleperiodDto.ItemId,
 				IsDeleted = scheduleperiodDto.IsDeleted,
+				CorrectorId = scheduleperiodDto.CorrectorId,
 				Schedule = (Schedule) scheduleperiodDto.Schedule,
 				To = scheduleperiodDto.DateTo ?? DateTimeExtend.GetCASMinDateTime(),
 				From = scheduleperiodDto.DateFrom ?? DateTimeExtend.GetCASMinDateTime()
@@ -866,6 +925,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = servicetype.ItemId,
 				IsDeleted = servicetype.IsDeleted,
+				CorrectorId = servicetype.CorrectorId,
 				Name = servicetype.ShortName,
 				FullName = servicetype.FullName
 			};
@@ -877,6 +937,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = servicetypeDto.ItemId,
 				IsDeleted = servicetypeDto.IsDeleted,
+				CorrectorId = servicetypeDto.CorrectorId,
 				ShortName = servicetypeDto.Name,
 				FullName = servicetypeDto.FullName
 			};
@@ -888,6 +949,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = specialization.ItemId,
 				IsDeleted = specialization.IsDeleted,
+				CorrectorId = specialization.CorrectorId,
 				ShortName = specialization.ShortName,
 				FullName = specialization.FullName,
 				DepartmentId = specialization.Department?.ItemId ?? -1,
@@ -903,6 +965,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = specializationDto.ItemId,
 				IsDeleted = specializationDto.IsDeleted,
+				CorrectorId = specializationDto.CorrectorId,
 				ShortName = specializationDto.ShortName,
 				FullName = specializationDto.FullName,
 				Level = specializationDto.Level,
@@ -924,6 +987,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = tripname.ItemId,
 				IsDeleted = tripname.IsDeleted,
+				CorrectorId = tripname.CorrectorId,
 				TripName = tripname.FullName
 			};
 		}
@@ -934,6 +998,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = tripnameDto.ItemId,
 				IsDeleted = tripnameDto.IsDeleted,
+				CorrectorId = tripnameDto.CorrectorId,
 				FullName = tripnameDto.TripName
 			};
 		}

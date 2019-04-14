@@ -2,7 +2,6 @@
 using System.Linq;
 using EFCore.DTO;
 using EFCore.DTO.General;
-using SmartCore.Entities;
 
 namespace EFCore.Contract
 {
@@ -51,7 +50,7 @@ namespace EFCore.Contract
 			}
 		}
 
-		public void AddOrUpdateUser(User user)
+		public void AddOrUpdateUser(UserDTO user)
 		{
 			var connection = Helper.Helper.GetConnectionString();
 			var context = new DataContext(connection);

@@ -429,7 +429,8 @@ namespace CAS.UI.UIControls.AircraftsControls
                 e.DisplayerText = caption;
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
                 e.RequestedEntity = new ReportScreen(builder);
-            }
+                GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "AircraftSummaryScreen (Aircraft General Data)");
+			}
             else if (sender == _itemPrintReportTechnicalCondition)
             {
 				var maintenanceChecks = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<MaintenanceCheckDTO, MaintenanceCheck> (new List<Filter>
@@ -527,7 +528,8 @@ namespace CAS.UI.UIControls.AircraftsControls
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
                 e.DisplayerText = CurrentAircraft.RegistrationNumber + " Operation Time Report";
                 e.RequestedEntity = new ReportScreen(reportBuilder);
-            }
+                GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "AircraftSummaryScreen (Technical Condition)");
+			}
             else
             {
                 e.Cancel = true;

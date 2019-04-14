@@ -64,6 +64,8 @@ namespace SmartCore.Entities
         /// <param name="saveAttachedFile">Сохранять прикрепленные файлы</param>
         public void Save(BaseEntityObject obj, bool saveAttachedFile = true)
         {
+	        obj.CorrectorId = _casEnvironment.IdentityUser.ItemId;
+
             if (obj.ItemId <= 0)
             {
                 var qr = BaseQueries.GetInsertQuery(obj);
@@ -154,6 +156,7 @@ namespace SmartCore.Entities
             if(isDeletedOnly)
             {
                 obj.IsDeleted = true;
+                obj.CorrectorId = _casEnvironment.IdentityUser.ItemId;
                 Save(obj, saveAttachedFile);
 			}
 			else

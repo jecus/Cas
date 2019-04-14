@@ -26,11 +26,25 @@ namespace SmartCore.Purchase
 		/*
 		*  Свойства
 		*/
+		[TableColumn("PublishedById")]
+		public int PublishedById { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public PorProcessType Processed { get; set; }
+		[TableColumn("ClosedById")]
+		public int ClosedById { get; set; }
+
+		[TableColumn("PublishedByUser")]
+		public string PublishedByUser { get; set; }
+
+		[TableColumn("CloseByUser")]
+		public string CloseByUser { get; set; }
+
+		[TableColumn("Number")]
+		public string Number { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public PorProcessType Processed { get; set; }
         /// <summary>
         /// 
         /// </summary>

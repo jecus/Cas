@@ -1047,13 +1047,13 @@ namespace SmartCore.Calculations.PerformanceCalculator
 					// whichever first
 
 					// состояние директивы - просрочена или нормально
-					np.Condition = computeConditionState(directive, np.LimitNotify, np.LimitOverdue, np.Remains, current, notify, x =>x.IsOverdue(), x => x.IsLessByAnyParameter(notify));
+					np.Condition = computeConditionState(directive, np.LimitNotify, np.LimitOverdue, np.Remains, current, notify, x =>x.IsOverdue(), x => x.IsLessByAnyParameter(notify), ThresholdConditionType.WhicheverFirst);
 					
 				}
 				else // whichever later
 				{
 					// директива просрочена только в том случае, когда она просрочена по всем параметрам
-					np.Condition = computeConditionState(directive, np.LimitNotify, np.LimitOverdue, np.Remains, current, notify, x => x.IsAllOverdue(), x => x.IsLess(notify));
+					np.Condition = computeConditionState(directive, np.LimitNotify, np.LimitOverdue, np.Remains, current, notify, x => x.IsAllOverdue(), x => x.IsLess(notify), ThresholdConditionType.WhicheverLater);
 				}
 
 				#endregion
@@ -1304,8 +1304,10 @@ namespace SmartCore.Calculations.PerformanceCalculator
 		}
 
 
-		private ConditionState computeConditionState(IDirective directive, Lifelength limitNotify, Lifelength limitOverdue, Lifelength remains,
-													 Lifelength current, Lifelength notify, Func<Lifelength, bool> getIsOverdueFunc, Func<Lifelength, bool> getIsLessFunc )
+		private ConditionState computeConditionState(IDirective directive, Lifelength limitNotify,
+			Lifelength limitOverdue, Lifelength remains,
+			Lifelength current, Lifelength notify, Func<Lifelength, bool> getIsOverdueFunc,
+			Func<Lifelength, bool> getIsLessFunc, ThresholdConditionType whicheverFirst)
 		{
 			if (notify != null && !notify.IsNullOrZero())
 			{
@@ -1319,12 +1321,11 @@ namespace SmartCore.Calculations.PerformanceCalculator
 				}
 
 
-				if(current.IsGreaterByAnyParameter(limitOverdue))
-					return ConditionState.Overdue;
+					if (current.IsGreaterByAnyParameter(limitOverdue))
+						return ConditionState.Overdue;
 
-				
-				if(limitOverdue.IsGreaterByAnyParameter(current) && current.IsGreaterByAnyParameter(limitNotify))
-					return ConditionState.Notify;
+					if (limitOverdue.IsGreaterByAnyParameter(current) && current.IsGreaterByAnyParameter(limitNotify))
+						return ConditionState.Notify;
 
 				return ConditionState.Satisfactory;
 				

@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class KitSuppliersRelationMap : EntityTypeConfiguration<KitSuppliersRelationDTO>
+	public class KitSuppliersRelationMap : BaseMap<KitSuppliersRelationDTO>
 	{
-		public KitSuppliersRelationMap()
+		public KitSuppliersRelationMap() : base()
 		{
 			ToTable("dbo.KitSuppliers");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.KitId)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)

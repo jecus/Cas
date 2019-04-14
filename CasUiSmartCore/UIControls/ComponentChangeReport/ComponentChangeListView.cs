@@ -48,6 +48,9 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Reason" };
 			ColumnHeaderList.Add(columnHeader);
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
+			ColumnHeaderList.Add(columnHeader);
+
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
 		}
 		#endregion
@@ -116,8 +119,9 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 				fromTo += $"{from} => {DestinationHelper.GetDestinationObjectString(item)}";
 			}
 
-
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 			var subItem = new ListViewItem.ListViewSubItem { Text = item.TransferDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString()), Tag = item.TransferDate };
+
 			subItems.Add(subItem);
 			subItem = new ListViewItem.ListViewSubItem { Text = fromTo, Tag = fromTo };
 			subItems.Add(subItem);
@@ -133,6 +137,7 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 			subItems.Add(subItem);
 			subItem = new ListViewItem.ListViewSubItem { Text = reason, Tag = reason };
 			subItems.Add(subItem);
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
 
 			return subItems.ToArray();

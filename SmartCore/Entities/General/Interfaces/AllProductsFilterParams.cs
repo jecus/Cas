@@ -10,16 +10,19 @@ namespace SmartCore.Entities.General.Interfaces
         [Filter("Part Number:", Order = 1)]
         string PartNumber { get; }
 
-        [Filter("Standard:")]
+        [Filter("Alt Part Number:", Order = 2)]
+        string AltPartNumber { get; }
+
+		[Filter("Standard:")]
         GoodStandart Standart { get; }
 
-        [Filter("Description:", Order = 2)]
+        [Filter("Description:", Order = 3)]
         string Description { get; }
 
-        [Filter("Reference:", Order = 3)]
+        [Filter("Reference:", Order = 4)]
         string Reference { get; }
 
-        [Filter("Product Code:", Order = 4)]
+        [Filter("Product Code:", Order = 5)]
         string Code { get; }
 
         [Filter("Supplier:")]
@@ -31,10 +34,10 @@ namespace SmartCore.Entities.General.Interfaces
         [Filter("Class:")]
         GoodsClass GoodsClass { get; }
 
-        [Filter("IsDangerous:", Order = 6)]
+        [Filter("IsDangerous:", Order = 7)]
         bool IsDangerous { get; }
 
-        [Filter("Remarks:", Order = 5)]
+        [Filter("Remarks:", Order = 6)]
         string Remarks { get; }
     }
 }

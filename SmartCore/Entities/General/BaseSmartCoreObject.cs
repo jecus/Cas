@@ -66,10 +66,18 @@ namespace SmartCore.Entities.General
         {
             get { return GetCurrentType().GetProperty("ItemId"); }
         }
+		#endregion
+
+		#region public int CorrectorId { get; set; }
+
+		[ListViewData("Signer")]
+		[TableColumn("Corrector")]
+        public int CorrectorId { get; set; }
+
         #endregion
 
-        #region public override int CompareTo(object y)
-        public override int CompareTo(object y)
+		#region public override int CompareTo(object y)
+		public override int CompareTo(object y)
         {
             if (y is BaseEntityObject)
                 return ItemId.CompareTo(((BaseEntityObject)y).ItemId);

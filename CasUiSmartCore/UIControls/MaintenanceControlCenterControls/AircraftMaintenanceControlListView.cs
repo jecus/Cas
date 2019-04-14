@@ -93,10 +93,13 @@ namespace CAS.UI.UIControls.MaintenanceControlCenterControls
             columnHeader = new ColumnHeader { Width = 60, Text = "MH" };
             ColumnHeaderList.Add(columnHeader);
 
-            //columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Cost" };
-            //ColumnHeaderList.Add(columnHeader);
+			//columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Cost" };
+			//ColumnHeaderList.Add(columnHeader);
 
-            itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
+			ColumnHeaderList.Add(columnHeader);
+
+			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
         }
 		#endregion
 
@@ -225,8 +228,9 @@ namespace CAS.UI.UIControls.MaintenanceControlCenterControls
 
                 double manHours = np.Parent is IEngineeringDirective ? ((IEngineeringDirective)np.Parent).ManHours : 0;
                 double cost = np.Parent is IEngineeringDirective ? ((IEngineeringDirective)np.Parent).Cost : 0;
+                var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = np.ATAChapter.ToString(), Tag = np.ATAChapter });
+				subItems.Add(new ListViewItem.ListViewSubItem { Text = np.ATAChapter.ToString(), Tag = np.ATAChapter });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = np.Title, Tag = np.Title });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = np.Description, Tag = np.Description });
                 //subItems.Add(new ListViewItem.ListViewSubItem { Text = np.KitsToString, Tag = np.Kits.Count });
@@ -236,9 +240,10 @@ namespace CAS.UI.UIControls.MaintenanceControlCenterControls
                 //subItems.Add(new ListViewItem.ListViewSubItem { Text = np.WorkType, Tag = np.WorkType });
                 //subItems.Add(new ListViewItem.ListViewSubItem { Text = np.PerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)np.PerformanceDate), Tag = np.PerformanceDate });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = manHours.ToString(), Tag = manHours });
-                //subItems.Add(new ListViewItem.ListViewSubItem { Text = np.Parent.Cost.ToString(), Tag = np.Parent.Cost });
-                
-            }
+				//subItems.Add(new ListViewItem.ListViewSubItem { Text = np.Parent.Cost.ToString(), Tag = np.Parent.Cost });
+				subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
+
+			}
             else if (item is AbstractPerformanceRecord)
             {
                 //DirectiveRecord directiveRecord = (DirectiveRecord)item;

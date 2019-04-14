@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class PurchaseOrderMap : EntityTypeConfiguration<PurchaseOrderDTO>
+	public class PurchaseOrderMap : BaseMap<PurchaseOrderDTO>
 	{
-		public PurchaseOrderMap()
+		public PurchaseOrderMap() : base()
 		{
 			ToTable("dbo.PurchaseOrders");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.Title)
 				.HasMaxLength(256)
@@ -70,10 +60,28 @@ namespace EFCore.DTO.General.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("SupplierId");
 
+			Property(i => i.PublishedById)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("PublishedById");
 
-			HasRequired(i => i.Supplier)
-				.WithMany(i => i.PurchaseOrderDtos)
-				.HasForeignKey(i => i.SupplierId);
+			Property(i => i.ClosedById)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("ClosedById");
+
+			Property(i => i.PublishedByUser)
+				.HasMaxLength(128)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("PublishedByUser");
+
+			Property(i => i.CloseByUser)
+				.HasMaxLength(128)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("CloseByUser");
+
+			Property(i => i.Number)
+				.HasMaxLength(128)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("Number");
 
 			HasMany(i => i.Files).WithRequired(i => i.PurchaseOrder).HasForeignKey(i => i.ParentId);
 		}

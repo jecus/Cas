@@ -115,6 +115,8 @@ namespace SmartCore.Entities
         {
             if(saveObject == null) return;
 
+            saveObject.CorrectorId = _casEnvironment.IdentityUser.ItemId;
+
             var type = AuditOperation.Created;
             if (saveObject.ItemId > 0)
 	            type = AuditOperation.Changed;
@@ -219,7 +221,9 @@ namespace SmartCore.Entities
             var type = AuditOperation.Created;
             if (performance.ItemId > 0)
 	            type = AuditOperation.Changed;
-            
+
+            performance.CorrectorId = _casEnvironment.IdentityUser.ItemId;
+
 			_casEnvironment.Keeper.Save(performance, saveAttachedFile);
 			_auditRepository.WriteAsync(performance, type, _casEnvironment.IdentityUser);
 

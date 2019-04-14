@@ -1006,7 +1006,8 @@ namespace CAS.UI.UIControls.ForecastControls
                 //_scheduleReportBuilder.Forecast = _currentForecast;
                 e.DisplayerText = aircraftHeaderControl1.Operator.Name + "." + "Scheduled report";
                 e.RequestedEntity = new ReportScreen(_scheduleReportBuilder);
-            }
+                GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "AirFleetForecastListView (Scheduled)");
+			}
             else if (sender == itemPrintReportMaintenancePlan)
             {
                 _maintenancePlanReportBulder = new MaintenancePlanReportBuilder(aircraftHeaderControl1.Operator, _directivesViewer.GetItemsArray());
@@ -1017,14 +1018,16 @@ namespace CAS.UI.UIControls.ForecastControls
                 //_scheduleReportBuilder.Forecast = _currentForecast;
                 e.DisplayerText = aircraftHeaderControl1.Operator.Name + "." + "Maintenance Plan report";
                 e.RequestedEntity = new ReportScreen(_maintenancePlanReportBulder);
-            }
+                GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "AirFleetForecastListView (Maintenance Plan)");
+			}
             else if (sender == itemPrintReportEquipmentAndMaterials)
             {
                 _forecastAllFleetKitsReportBuilder = new ForecastAllFleetKitsReportBuilder(aircraftHeaderControl1.Operator, _directivesViewer.GetItemsArray());
                 _forecastAllFleetKitsReportBuilder.Forecast = _currentAirFleetForecast.GetForecastByAircraft(_currentAircrafts[0]);
                 e.DisplayerText = aircraftHeaderControl1.Operator.Name + "." + "Equipment and Materials";
                 e.RequestedEntity = new ReportScreen(_forecastAllFleetKitsReportBuilder);
-            }
+                GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "AirFleetForecastListView (Equipment and Materials)");
+			}
             else
             {
                 e.Cancel = true;

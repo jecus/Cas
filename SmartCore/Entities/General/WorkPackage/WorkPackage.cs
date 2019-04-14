@@ -190,7 +190,7 @@ namespace SmartCore.Entities.General.WorkPackage
             get { return _createDate; }
             set
             {
-                DateTime min = DateTimeExtend.GetCASMinDateTime();
+                var min = DateTimeExtend.GetCASMinDateTime();
                 if (_createDate < min || _createDate != value)
                 {
                     _createDate = value < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : value;
@@ -224,7 +224,14 @@ namespace SmartCore.Entities.General.WorkPackage
         public DateTime OpeningDate
         {
             get { return _openingDate; }
-            set { _openingDate = value; }
+            set
+            {
+	            var min = DateTimeExtend.GetCASMinDateTime();
+	            if (_openingDate < min || _openingDate != value)
+	            {
+		            _openingDate = value < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : value;
+	            }
+            }
         }
 
         /// <summary>
@@ -253,7 +260,14 @@ namespace SmartCore.Entities.General.WorkPackage
         public DateTime PublishingDate
         {
             get { return _publishingDate; }
-            set { _publishingDate = value; }
+            set
+            {
+	            var min = DateTimeExtend.GetCASMinDateTime();
+	            if (_publishingDate < min || _publishingDate != value)
+	            {
+		            _publishingDate = value < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : value;
+	            }
+			}
         }
 
         /// <summary>
@@ -283,7 +297,14 @@ namespace SmartCore.Entities.General.WorkPackage
         public DateTime ClosingDate
         {
             get { return _closingDate; }
-            set { _closingDate = value; }
+            set
+            {
+	            var min = DateTimeExtend.GetCASMinDateTime();
+	            if (_closingDate < min || _closingDate != value)
+	            {
+		            _closingDate = value < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : value;
+	            }
+			}
         }
 
         /// <summary>
@@ -566,6 +587,8 @@ namespace SmartCore.Entities.General.WorkPackage
         #region public CommonCollection<MaintenanceCheckBindTaskRecord> MaintenanceCheckBindTaskRecords { get; }
 
         private CommonCollection<MaintenanceCheckBindTaskRecord> _maintenanceCheckBindTaskRecords;
+        private List<Document> _closingDocument;
+
         /// <summary>
         /// Возвращает массив записей о привязке задач к чекам находящимся в данном рабочем пакете
         /// </summary>
@@ -909,7 +932,11 @@ namespace SmartCore.Entities.General.WorkPackage
 
         #region public Document ClosingDocument { get; set; }
 
-        public Document ClosingDocument { get; set; }
+        public List<Document> ClosingDocument
+        {
+	        get => _closingDocument ?? (_closingDocument = new List<Document>());
+	        set => _closingDocument = value;
+        }
 
         #endregion
 

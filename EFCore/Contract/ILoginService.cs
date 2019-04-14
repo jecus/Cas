@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
 using EFCore.DTO.General;
-using SmartCore.Entities;
 
 namespace EFCore.Contract
 {
@@ -24,6 +23,6 @@ namespace EFCore.Contract
 		void DeleteUser(int id);
 
 		[OperationContract]
-		void AddOrUpdateUser(User user);
+		void AddOrUpdateUser(UserDTO user);
 	}
 }

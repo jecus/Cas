@@ -729,6 +729,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			e.DisplayerText = "Work Package List";
 			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 			e.RequestedEntity = new ReportScreen(reportBuilder);
+			GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "WorkPackageListScreen (Work Package List)");
 		}
 		#endregion
 

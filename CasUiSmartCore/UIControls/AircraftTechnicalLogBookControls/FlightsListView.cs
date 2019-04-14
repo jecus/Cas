@@ -75,7 +75,10 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Route" };
             ColumnHeaderList.Add(columnHeader);
 
-            itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
+            ColumnHeaderList.Add(columnHeader);
+
+			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
         }
         #endregion
 
@@ -83,7 +86,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
         protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(AircraftFlight item)
         {
-            var subItems = new ListViewItem.ListViewSubItem[5];
+            var subItems = new ListViewItem.ListViewSubItem[6];
 	        var dateString = item.FlightDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
 
 	        var timeString = "";
@@ -93,8 +96,9 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
             var date = item.FlightDate.Date;
             date = date.AddMinutes(item.OutTime);
+            var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
-	        string route;
+			string route;
 			if (item.AtlbRecordType != AtlbRecordType.Maintenance)
 				route = item.StationFromId.ShortName + " - " + item.StationToId.ShortName;
 			else route = item.StationToId.ShortName;
@@ -104,8 +108,9 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             subItems[2] = new ListViewItem.ListViewSubItem { Text = dateString, Tag = date };
             subItems[3] = new ListViewItem.ListViewSubItem { Text = timeString, Tag = date };
             subItems[4] = new ListViewItem.ListViewSubItem { Text = route, Tag = route };
+            subItems[5] = new ListViewItem.ListViewSubItem { Text = author, Tag = author };
 
-            return subItems;
+			return subItems;
         }
 
         #endregion

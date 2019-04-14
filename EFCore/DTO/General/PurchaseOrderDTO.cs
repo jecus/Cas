@@ -46,8 +46,19 @@ namespace EFCore.DTO.General
 		public int? SupplierId { get; set; }
 
 		[DataMember]
-		[Child]
-		public SupplierDTO Supplier { get; set; }
+		public int PublishedById { get; set; }
+
+		[DataMember]
+		public int ClosedById { get; set; }
+
+		[DataMember]
+		public string PublishedByUser { get; set; }
+
+		[DataMember]
+		public string CloseByUser { get; set; }
+
+		[DataMember]
+		public string Number { get; set; }
 
 		[DataMember]
 		[Child(FilterType.Equal, "ParentTypeId", 1860)]

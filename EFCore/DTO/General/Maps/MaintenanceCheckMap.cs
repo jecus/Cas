@@ -1,22 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 
 namespace EFCore.DTO.General.Maps
 {
-	public class MaintenanceCheckMap : EntityTypeConfiguration<MaintenanceCheckDTO>
+	public class MaintenanceCheckMap : BaseMap<MaintenanceCheckDTO>
 	{
-		public MaintenanceCheckMap()
+		public MaintenanceCheckMap() : base()
 		{
 			ToTable("dbo.Cas3MaintenanceCheck");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId)
-				.HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.Name)
 				.HasMaxLength(50)

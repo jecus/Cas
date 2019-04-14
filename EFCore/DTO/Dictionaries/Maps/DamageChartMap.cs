@@ -1,22 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
 using EFCore.DTO.Dictionaries;
 
 namespace EFCore.DTO.Maps
 {
-	public class DamageChartMap : EntityTypeConfiguration<DamageChartDTO>
+	public class DamageChartMap : BaseMap<DamageChartDTO>
 	{
-		public DamageChartMap()
+		public DamageChartMap() : base()
 		{
 			ToTable("Dictionaries.DamageCharts");
-
-			HasKey(i => i.ItemId);
-			Property(i => i.ItemId).HasColumnName("ItemId");
-
-			Property(i => i.IsDeleted)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IsDeleted");
 
 			Property(i => i.ChartName)
 				.HasMaxLength(50)

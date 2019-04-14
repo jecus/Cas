@@ -49,7 +49,16 @@ namespace CAS.UI.UIControls.StoresControls
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Part. No" };
             ColumnHeaderList.Add(columnHeader);
 
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.3f), Text = "Description" };
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Alt Part. No" };
+            ColumnHeaderList.Add(columnHeader);
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Standart" };
+            ColumnHeaderList.Add(columnHeader);
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Name" };
+            ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.3f), Text = "Description" };
             ColumnHeaderList.Add(columnHeader);
             //4
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Serial No" };
@@ -175,7 +184,10 @@ namespace CAS.UI.UIControls.StoresControls
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Hidden Remarks" };
             ColumnHeaderList.Add(columnHeader);
 
-            itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
+            ColumnHeaderList.Add(columnHeader);
+
+			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
         }
         #endregion
 
@@ -292,6 +304,9 @@ namespace CAS.UI.UIControls.StoresControls
                        warranty = Lifelength.Null, repeatInterval = Lifelength.Null;
 	        string partNumber = "",
                    description = "",
+                   altPartNumber = "",
+                   standart = "",
+                   name = "",
                    serialNumber = "",
                    code = "",
                    classString = "",
@@ -312,6 +327,7 @@ namespace CAS.UI.UIControls.StoresControls
 		        shouldBeOnStockString = "",
 		        from = "",
 				quantityInString = "",
+		        author = "",
 				currency = "";
 			double manHours = 0,
 				   unitPrice = 0,
@@ -351,12 +367,16 @@ namespace CAS.UI.UIControls.StoresControls
             if (parent is Component)
             {
                 Component componentItem = (Component)parent;
-                approx = componentItem.NextPerformanceDate;
+                author = GlobalObjects.CasEnvironment.GetCorrector(componentItem.CorrectorId);
+				approx = componentItem.NextPerformanceDate;
                 next = componentItem.NextPerformanceSource;
                 remains = componentItem.Remains;
                 ata = componentItem.Product?.ATAChapter ?? componentItem.ATAChapter;
 				partNumber = componentItem.Product?.PartNumber ?? componentItem.PartNumber;
-                description = componentItem.Description;
+				altPartNumber = componentItem.Product?.AltPartNumber ?? componentItem.ALTPartNumber;
+				standart = componentItem.Product?.Standart?.ToString() ?? componentItem.Standart?.ToString();
+				name = componentItem.Product?.Name;
+				description = componentItem.Description;
                 serialNumber = componentItem.SerialNumber;
                 code = componentItem.Product != null ? componentItem.Product.Code :componentItem.Code;
                 classString = componentItem.GoodsClass.ToString();
@@ -431,7 +451,8 @@ namespace CAS.UI.UIControls.StoresControls
             else if (parent is ComponentDirective)
             {
                 ComponentDirective dd = (ComponentDirective)parent;
-                if (dd.Threshold.FirstPerformanceSinceNew != null && !dd.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
+                author = GlobalObjects.CasEnvironment.GetCorrector(dd.CorrectorId);
+				if (dd.Threshold.FirstPerformanceSinceNew != null && !dd.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
                 {
                     firstPerformance = dd.Threshold.FirstPerformanceSinceNew;
                 }
@@ -470,6 +491,9 @@ namespace CAS.UI.UIControls.StoresControls
 
             subItems.Add(new ListViewItem.ListViewSubItem { Text = ata.ToString(), Tag = ata } ); 
             subItems.Add(new ListViewItem.ListViewSubItem { Text = partNumber, Tag = partNumber } );
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = altPartNumber, Tag = altPartNumber } );
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = standart, Tag = standart } );
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = name, Tag = name } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = description, Tag = description } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = serialNumber, Tag = serialNumber } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = code, Tag = code });
@@ -490,10 +514,7 @@ namespace CAS.UI.UIControls.StoresControls
             });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = workType, Tag = workType });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = manHours.ToString(), Tag = manHours } );
-            
-
-
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = needWpQuantity.ToString(), Tag = needWpQuantity });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = needWpQuantity.ToString(), Tag = needWpQuantity });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = reserve.ToString(), Tag = reserve });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = firstPerformance.ToString(), Tag = firstPerformance });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = repeatInterval.ToString(), Tag = repeatInterval });
@@ -536,8 +557,9 @@ namespace CAS.UI.UIControls.StoresControls
             subItems.Add(new ListViewItem.ListViewSubItem { Text = isPool ? "Yes" : "No", Tag = isPool } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = IsDangerous ? "Yes" : "No", Tag = IsDangerous } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = hiddenRemarks, Tag = hiddenRemarks } );
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
-            return subItems.ToArray();
+			return subItems.ToArray();
         }
 
         #endregion
@@ -585,7 +607,7 @@ namespace CAS.UI.UIControls.StoresControls
                         }
                         //Если привязанным элементом является деталь
                         //то в результирующий список следом за ней добавляются ее директивы
-                        IEnumerable<ListViewItem> items =
+                        var items =
                             ListViewItemList
                             .Where(lvi => lvi.Tag is ComponentDirective && ((ComponentDirective)lvi.Tag).ComponentId == component.ItemId);
                         foreach (ListViewItem listViewItem in items)
@@ -634,7 +656,7 @@ namespace CAS.UI.UIControls.StoresControls
                                 resultList.Add(temp);
                             }
                         }
-                        IEnumerable<ListViewItem> items =
+                        var items =
                             ListViewItemList
                             .Where(lvi => lvi.Tag is ComponentDirective && ((ComponentDirective)lvi.Tag).ComponentId == component.ItemId);
                         foreach (ListViewItem listViewItem in items)

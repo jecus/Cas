@@ -50,6 +50,30 @@ namespace SmartCore.AuditMongo.Repository
 			{}
 		}
 
+		public async Task WriteReportAsync(IIdentityUser user, string reportName)
+		{
+			try
+			{
+				if (_context == null)
+					return;
+
+				await _context.AuditCollection.InsertOneAsync(new AuditEntity
+				{
+					Action = $"{AuditOperation.ReportOpened}",
+					Date = DateTime.UtcNow,
+					ObjectId = -1,
+					ObjectTypeId = -1,
+					UserId = user.ItemId,
+					AdditionalParameters = new Dictionary<string, object>()
+					{
+						["ReportName"] = reportName
+					}
+				});
+			}
+			catch
+			{ }
+		}
+
 		#endregion
 	}
 }

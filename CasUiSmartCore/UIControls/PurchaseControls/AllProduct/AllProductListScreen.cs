@@ -7,6 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
+using CAS.UI.UIControls.PurchaseControls.Initial;
 using CASTerms;
 using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
@@ -26,6 +27,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private ICommonCollection<Product> _initialProductArray = new CommonCollection<Product>();
 		private ICommonCollection<Product> _resultProductArray = new CommonCollection<Product>();
+        private List<InitialOrder> _initialOrders = new List<InitialOrder>();
+        private List<RequestForQuotation> _requestForQuotations = new List<RequestForQuotation>();
 
 		private BaseListViewControl<Product> _directivesViewer;
 
@@ -36,14 +39,18 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private ToolStripMenuItem _toolStripMenuItemPaste;
 		private ToolStripMenuItem _toolStripMenuItemShowImages;
 		private ToolStripMenuItem _toolStripMenuItemDelete;
+        private ToolStripMenuItem _toolStripMenuItemComposeInitial;
+        private ToolStripMenuItem _toolStripMenuItemAddInitial;
+        private ToolStripMenuItem _toolStripMenuItemComposeQuotation;
+        private ToolStripMenuItem _toolStripMenuItemAddQuotation;
 
-		#endregion
+        #endregion
 
-		#region Constructor
+        #region Constructor
 
-		#region public ProductListScreen()
+        #region public ProductListScreen()
 
-		public AllProductListScreen()
+        public AllProductListScreen()
 		{
 			InitializeComponent();
 		}
@@ -74,7 +81,21 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
-			_directivesViewer.SetItemsArray(_resultProductArray.ToArray());
+            _toolStripMenuItemAddInitial.DropDownItems.Clear();
+            foreach (var initialOrder in _initialOrders)
+            {
+                var item = new ToolStripMenuItem(initialOrder.Title);
+                _toolStripMenuItemAddInitial.DropDownItems.Add(item);
+            }
+
+            _toolStripMenuItemAddQuotation.DropDownItems.Clear();
+            foreach (var requestForQuotation in _requestForQuotations)
+            {
+                var item = new ToolStripMenuItem(requestForQuotation.Title);
+                _toolStripMenuItemAddQuotation.DropDownItems.Add(item);
+            }
+
+            _directivesViewer.SetItemsArray(_resultProductArray.ToArray());
 			_directivesViewer.Focus();
 		}
 
@@ -86,11 +107,15 @@ namespace CAS.UI.UIControls.PurchaseControls
 		{
 			_initialProductArray.Clear();
 			_resultProductArray.Clear();
+            _initialOrders.Clear();
+            _requestForQuotations.Clear();
 
 			AnimatedThreadWorker.ReportProgress(0, "load products");
 
 			try
 			{
+                _initialOrders.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderDTO, InitialOrder>(new Filter("Status", 1)));
+                _requestForQuotations.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>(new Filter("Status", 1)));
 				_initialProductArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, Product>(loadChild:true));
 
 				var ids = _initialProductArray.SelectMany(i => i.SupplierRelations).Select(i => i.SupplierID).Distinct();
@@ -166,6 +191,10 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_toolStripMenuItemPaste = new ToolStripMenuItem();
 			_toolStripMenuItemDelete = new ToolStripMenuItem();
 			_toolStripMenuItemShowImages = new ToolStripMenuItem();
+			_toolStripMenuItemComposeInitial = new ToolStripMenuItem();
+			_toolStripMenuItemAddInitial = new ToolStripMenuItem();
+			_toolStripMenuItemComposeQuotation = new ToolStripMenuItem();
+			_toolStripMenuItemAddQuotation = new ToolStripMenuItem();
 
 			// 
 			// contextMenuStrip
@@ -194,11 +223,35 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// 
 			_toolStripMenuItemShowImages.Text = "Show Image";
 			_toolStripMenuItemShowImages.Click += ShowImageItemsClick;
+            // 
+            // toolStripMenuItemComposeInitialOrder
+            // 
+            _toolStripMenuItemComposeInitial.Text = "Compose Initial Order";
+            _toolStripMenuItemComposeInitial.Click += _toolStripMenuItemComposeInitial_Click;
+            // 
+            // toolStripMenuItemAddtoInitialOrder
+            // 
+            _toolStripMenuItemAddInitial.Text = "Add to Initial Order";
+            
+            // 
+            // toolStripMenuItemComposeQuotationOrder
+            // 
+            _toolStripMenuItemComposeQuotation.Text = "Compose Quotation Order";
+            _toolStripMenuItemComposeQuotation.Click += _toolStripMenuItemComposeQuotation_Click;
+            // 
+            // toolStripMenuItemAddtoQuotationOrder
+            // 
+            _toolStripMenuItemAddQuotation.Text = "Add to Quotation Order";
+            
 
-			_contextMenuStrip.Items.AddRange(new ToolStripItem[]
+            _contextMenuStrip.Items.AddRange(new ToolStripItem[]
 			{
 
-				_toolStripMenuItemShowImages,
+				_toolStripMenuItemComposeInitial,
+				_toolStripMenuItemAddInitial,
+				new ToolStripSeparator(),
+                _toolStripMenuItemComposeQuotation,
+                _toolStripMenuItemAddQuotation,
 				new ToolStripSeparator(),
 				_toolStripMenuItemCopy,
 				_toolStripMenuItemPaste,
@@ -209,11 +262,34 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_contextMenuStrip.Opening += ContextMenuStripOpen;
 		}
 
-		#endregion
+        
 
-		#region private void ContextMenuStripOpen(object sender, CancelEventArgs e)
 
-		private void ContextMenuStripOpen(object sender, CancelEventArgs e)
+        #endregion
+
+        #region private void _toolStripMenuItemComposeInitial_Click1(object sender, EventArgs e)
+
+        private void _toolStripMenuItemComposeQuotation_Click(object sender, EventArgs e)
+        {
+			var form = new QuatationOrderFormNew(new RequestForQuotation() { ParentId = aircraftHeaderControl1.Operator.ItemId, ParentType = aircraftHeaderControl1.Operator.SmartCoreObjectType }, _directivesViewer.SelectedItems);
+			form.ShowDialog();
+		}
+
+        #endregion
+
+        #region private void _toolStripMenuItemComposeInitial_Click(object sender, EventArgs e)
+
+        private void _toolStripMenuItemComposeInitial_Click(object sender, EventArgs e)
+        {
+            var form = new InitialOrderFormNew(new InitialOrder(){ParentId = aircraftHeaderControl1.Operator.ItemId, ParentType = aircraftHeaderControl1.Operator.SmartCoreObjectType}, _directivesViewer.SelectedItems);
+            form.ShowDialog();
+        }
+
+        #endregion
+
+        #region private void ContextMenuStripOpen(object sender, CancelEventArgs e)
+
+        private void ContextMenuStripOpen(object sender, CancelEventArgs e)
 		{
 			if (_directivesViewer.SelectedItems.Count <= 0)
 			{

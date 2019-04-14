@@ -102,6 +102,9 @@ namespace CAS.UI.UIControls.SupplierControls
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Remarks" };
 			ColumnHeaderList.Add(columnHeader);
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
+			ColumnHeaderList.Add(columnHeader);
+
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
 		}
 
@@ -112,7 +115,7 @@ namespace CAS.UI.UIControls.SupplierControls
 		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(IBaseCoreObject item)
 		{
 			var subItems = new List<ListViewItem.ListViewSubItem>();
-
+			
 			string from = "", to = "", supplierType = "", approved = "", reason = "",
 				partNumber = "", description = "", serialNumber = "",
 				code = "", classString = "", batchNumber = "", qty = "",
@@ -127,6 +130,7 @@ namespace CAS.UI.UIControls.SupplierControls
 			if (parent == null)
 				return subItems.ToArray();
 
+			string author = "";
 
 			if (parent is Component)
 			{
@@ -149,6 +153,7 @@ namespace CAS.UI.UIControls.SupplierControls
 
 				supplierType = transferRecord.DestinationObjectType == SmartCoreType.Supplier ? (transferRecord.DestinationObject as Supplier).SupplierClass.ToString() : componentItem.FromSupplier.SupplierClass.ToString();
 
+				author = GlobalObjects.CasEnvironment.GetCorrector(componentItem.CorrectorId);
 
 				approved = componentItem.FromSupplier.Approved ? "Yes" : "No";
 				shipment = transferRecord.TransferDate;
@@ -194,7 +199,7 @@ namespace CAS.UI.UIControls.SupplierControls
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = isPool ? "Yes" : "No", Tag = isPool });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = isDangerous ? "Yes" : "No", Tag = isDangerous });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = remarks, Tag = remarks });
-
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 			return subItems.ToArray();
 		}
 

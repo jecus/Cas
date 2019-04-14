@@ -4,6 +4,8 @@ using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.PurchaseControls.Initial;
+using CASTerms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Purchase;
 
@@ -62,12 +64,9 @@ namespace CAS.UI.UIControls.PurchaseControls
         protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(RequestForQuotation item)
         {
             var subItems = new List<ListViewItem.ListViewSubItem>();
-
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
+            var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Number, Tag = item.Number });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Title, Tag = item.Title });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Description, Tag = item.Description });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
             subItems.Add(new ListViewItem.ListViewSubItem
             {
                 Text = item.OpeningDate == (new DateTime(1852, 01, 01))
@@ -94,48 +93,57 @@ namespace CAS.UI.UIControls.PurchaseControls
                 Tag = item.ClosingDate
             });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Author, Tag = item.Author });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.PublishedBy?.ToString(), Tag = item.PublishedBy });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ClosedBy?.ToString(), Tag = item.ClosedBy });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.PublishedByUser, Tag = item.PublishedByUser });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.CloseByUser, Tag = item.CloseByUser });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Remarks, Tag = item.Remarks });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
-            return subItems.ToArray();
+			return subItems.ToArray();
          }
 
-        #endregion
+		#endregion
 
-        #region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
-        
-        protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
-        {
-            if (SelectedItem != null)
-            {
-                e.TypeOfReflection = ReflectionTypes.DisplayInCurrent;
-                e.DisplayerText = SelectedItem.Title;
-                e.RequestedEntity = new RequestForQuotationScreen(SelectedItem);
-            }
-        }
+		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 
-        #endregion
+		//protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		//{
+		//    if (SelectedItem != null)
+		//    {
+		//        e.TypeOfReflection = ReflectionTypes.DisplayInCurrent;
+		//        e.DisplayerText = SelectedItem.Title;
+		//        e.RequestedEntity = new RequestForQuotationScreen(SelectedItem);
+		//    }
+		//}
 
-        #region protected override void SetHeaders()
+		#endregion
 
-        protected override void SetHeaders()
+		#region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
+		protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			if (SelectedItem != null)
+			{
+
+				var editForm = new QuatationOrderFormNew(SelectedItem);
+				if (editForm.ShowDialog() == DialogResult.OK)
+				{
+					ListViewItem.ListViewSubItem[] subs = GetListViewSubItems(SelectedItem);
+					for (int i = 0; i < subs.Length; i++)
+						itemsListView.SelectedItems[0].SubItems[i].Text = subs[i].Text;
+				}
+			}
+		}
+		#endregion
+
+		#region protected override void SetHeaders()
+
+		protected override void SetHeaders()
         {
             ColumnHeaderList.Clear();
 
-            var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Parent" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Order No" };
+            var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Order No" };
             ColumnHeaderList.Add(columnHeader);
 
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.15f), Text = "Title" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.15f), Text = "Description" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Create Date" };
             ColumnHeaderList.Add(columnHeader);
 
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Opening date" };
@@ -159,7 +167,10 @@ namespace CAS.UI.UIControls.PurchaseControls
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Remark" };
             ColumnHeaderList.Add(columnHeader);
 
-            itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
+            ColumnHeaderList.Add(columnHeader);
+
+			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
         }
 
         #endregion

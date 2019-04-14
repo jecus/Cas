@@ -36,6 +36,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = required.ItemId,
 				IsDeleted = required.IsDeleted,
+				CorrectorId = required.CorrectorId,
 				ParentId = required.ParentId,
 				ParentTypeId = required.ParentTypeId,
 				AircraftModelId = required.AircraftModelId,
@@ -59,6 +60,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = required.ItemId,
 				IsDeleted = required.IsDeleted,
+				CorrectorId = required.CorrectorId,
 				ParentId = required.ParentId,
 				ParentTypeId = required.ParentTypeId ?? default(int),
 				AircraftModelId = required.AircraftModelId ?? default(int),
@@ -76,6 +78,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = record.ItemId,
 				IsDeleted = record.IsDeleted,
+				CorrectorId = record.CorrectorId,
 				FlightRegimeId = record.WorkRegime?.ItemId ?? -1,
 				Remarks = record.Remarks,
 				OnLifelength = record.OnLifelength?.ConvertToByteArray(),
@@ -91,6 +94,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = record.ItemId,
 				IsDeleted = record.IsDeleted,
+				CorrectorId = record.CorrectorId,
 				WorkRegime = FlightRegime.Items.GetItemById(record.FlightRegimeId),
 				Remarks = record.Remarks,
 				OnLifelength = Lifelength.ConvertFromByteArray(record.OnLifelength),
@@ -106,6 +110,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = aircraft.ItemId,
 				IsDeleted = aircraft.IsDeleted,
+				CorrectorId = aircraft.CorrectorId,
 				AircraftFrameId = aircraft.AircraftFrameId,
 				OperatorID = aircraft.OperatorId,
 				APUFH = aircraft.APUFH,
@@ -165,6 +170,7 @@ namespace SmartCore.DtoHelper
 				ItemId = aircraftDto.ItemId,
 				AircraftFrameId = aircraftDto.AircraftFrameId,
 				IsDeleted = aircraftDto.IsDeleted,
+				CorrectorId = aircraftDto.CorrectorId,
 				APUFH = aircraftDto.APUFH,
 				OperatorId = aircraftDto.OperatorID,
 				AircraftTypeId = aircraftDto.AircraftTypeID,
@@ -227,6 +233,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = condition.ItemId,
 				IsDeleted = condition.IsDeleted,
+				CorrectorId = condition.CorrectorId,
 				FlightID = condition.FlightId,
 				EngineID = condition.EngineId,
 				RecordDate = condition.RecordDate,
@@ -263,6 +270,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = conditionDto.ItemId,
 				IsDeleted = conditionDto.IsDeleted,
+				CorrectorId = conditionDto.CorrectorId,
 				FlightId = conditionDto.FlightID,
 				EngineId = conditionDto.EngineID,
 				RecordDate = conditionDto.RecordDate ?? DateTimeExtend.GetCASMinDateTime(),
@@ -299,6 +307,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = record.ItemId,
 				IsDeleted = record.IsDeleted,
+				CorrectorId = record.CorrectorId,
 				ParentAircraftId = record.ParentAircraftId,
 				MSG = (short?) record.MSG,
 				MaintenanceCheckRecordId = record.MaintenanceCheckRecordId,
@@ -316,6 +325,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = record.ItemId,
 				IsDeleted = record.IsDeleted,
+				CorrectorId = record.CorrectorId,
 				ParentAircraftId = record.ParentAircraftId ?? default(int),
 				MSG = record.MSG.HasValue ? (MSG)record.MSG.Value : MSG.Unknown,
 				MaintenanceCheckRecordId = record.MaintenanceCheckRecordId ?? default(int),
@@ -333,6 +343,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = card.ItemId,
 				IsDeleted = card.IsDeleted,
+				CorrectorId = card.CorrectorId,
 				ParentId = card.ParentId,
 				WorkArea = card.WorkArea,
 				ManHours = card.ManHours,
@@ -380,6 +391,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = card.ItemId,
 				IsDeleted = card.IsDeleted,
+				CorrectorId = card.CorrectorId,
 				ParentId = card.ParentId,
 				WorkArea = card.WorkArea,
 				ManHours = card.ManHours ?? default(double),
@@ -439,6 +451,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = cardTask.ItemId,
 				IsDeleted = cardTask.IsDeleted,
+				CorrectorId = cardTask.CorrectorId,
 				JobCardId = cardTask.JobCard?.ItemId,
 				ParentTaskId = cardTask.ParentTaskId,
 				Number = cardTask.Number,
@@ -455,6 +468,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = cardTask.ItemId,
 				IsDeleted = cardTask.IsDeleted,
+				CorrectorId = cardTask.CorrectorId,
 				ParentTaskId = cardTask.ParentTaskId ?? default(int),
 				Number = cardTask.Number,
 				Description = cardTask.Description,
@@ -471,6 +485,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = specialist.ItemId,
 				IsDeleted = specialist.IsDeleted,
+				CorrectorId = specialist.CorrectorId,
 				FirstName = specialist.FirstName,
 				ShortName = specialist.ShortName,
 				SpecializationID = specialist.Specialization?.ItemId ?? -1,
@@ -516,6 +531,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = specialist.ItemId,
 				IsDeleted = specialist.IsDeleted,
+				CorrectorId = specialist.CorrectorId,
 				FirstName = specialist.FirstName,
 				LastName = specialist.LastName,
 				ShortName = specialist.ShortName,
@@ -577,6 +593,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = specialistTraining.ItemId,
 				IsDeleted = specialistTraining.IsDeleted,
+				CorrectorId = specialistTraining.CorrectorId,
 				SpecialistId = specialistTraining.SpecialistId,
 				TrainingId = specialistTraining.TrainingType?.ItemId,
 				SupplierId = specialistTraining.Supplier?.ItemId,
@@ -599,6 +616,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = specialistTraining.ItemId,
 				IsDeleted = specialistTraining.IsDeleted,
+				CorrectorId = specialistTraining.CorrectorId,
 				SpecialistId = specialistTraining.SpecialistId,
 				TrainingType = specialistTraining.TrainingId.HasValue ? TrainingType.GetDirectiveTypeById(specialistTraining.TrainingId.Value) : TrainingType.Unknown,
 				ManHours = specialistTraining.ManHours ?? default(double),
@@ -626,6 +644,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = license.ItemId,
 				IsDeleted = license.IsDeleted,
+				CorrectorId = license.CorrectorId,
 				Confirmation = license.Confirmation,
 				LicenseTypeID = license.EmployeeLicenceType?.ItemId ?? -1,
 				AircraftTypeID = license.AircraftTypeID,
@@ -647,6 +666,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = license.ItemId,
 				IsDeleted = license.IsDeleted,
+				CorrectorId = license.CorrectorId,
 				Confirmation = license.Confirmation,
 				EmployeeLicenceType = EmployeeLicenceType.Items.GetItemById(license.LicenseTypeID),
 				AircraftTypeID = license.AircraftTypeID,
@@ -681,6 +701,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = licenseRemark.ItemId,
 				IsDeleted = licenseRemark.IsDeleted,
+				CorrectorId = licenseRemark.CorrectorId,
 				IssueDate = licenseRemark.IssueDate,
 				RightsId = licenseRemark.Rights?.ItemId ?? -1,
 				RestrictionId = licenseRemark.LicenseRestriction?.ItemId ?? -1,
@@ -695,6 +716,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = licenseRemark.ItemId,
 				IsDeleted = licenseRemark.IsDeleted,
+				CorrectorId = licenseRemark.CorrectorId,
 				IssueDate = licenseRemark.IssueDate,
 				SpecialistLicenseId = licenseRemark.SpecialistLicenseId,
 				SpecialistId = licenseRemark.SpecialistId,
@@ -709,6 +731,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = instrumentRating.ItemId,
 				IsDeleted = instrumentRating.IsDeleted,
+				CorrectorId = instrumentRating.CorrectorId,
 				IssueDate = instrumentRating.IssueDate,
 				SpecialistLicenseId = instrumentRating.SpecialistLicenseId,
 				IcaoId = instrumentRating.Icao?.ItemId ?? -1,
@@ -725,6 +748,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = instrumentRating.ItemId,
 				IsDeleted = instrumentRating.IsDeleted,
+				CorrectorId = instrumentRating.CorrectorId,
 				IssueDate = instrumentRating.IssueDate,
 				SpecialistLicenseId = instrumentRating.SpecialistLicenseId,
 				Icao = LicenseIcao.GetItemById(instrumentRating.IcaoId),
@@ -741,6 +765,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = licenseRating.ItemId,
 				IsDeleted = licenseRating.IsDeleted,
+				CorrectorId = licenseRating.CorrectorId,
 				SpecialistLicenseId = licenseRating.SpecialistLicenseId,
 				IssueDate = licenseRating.IssueDate,
 				RightsId = licenseRating.Rights?.ItemId ?? -1,
@@ -754,6 +779,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = licenseRating.ItemId,
 				IsDeleted = licenseRating.IsDeleted,
+				CorrectorId = licenseRating.CorrectorId,
 				SpecialistLicenseId = licenseRating.SpecialistLicenseId,
 				IssueDate = licenseRating.IssueDate,
 				Rights = LicenseRights.Items.GetItemById(licenseRating.RightsId),
@@ -767,6 +793,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = licenseDetail.ItemId,
 				IsDeleted = licenseDetail.IsDeleted,
+				CorrectorId = licenseDetail.CorrectorId,
 				Description = licenseDetail.Description,
 				IssueDate = licenseDetail.IssueDate,
 				SpecialistLicenseId = licenseDetail.SpecialistLicenseId,
@@ -780,6 +807,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = licenseDetail.ItemId,
 				IsDeleted = licenseDetail.IsDeleted,
+				CorrectorId = licenseDetail.CorrectorId,
 				Description = licenseDetail.Description,
 				IssueDate = licenseDetail.IssueDate,
 				SpecialistLicenseId = licenseDetail.SpecialistLicenseId,
@@ -793,6 +821,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = specialistCaa.ItemId,
 				IsDeleted = specialistCaa.IsDeleted,
+				CorrectorId = specialistCaa.CorrectorId,
 				NumberCAA = specialistCaa.CAANumber,
 				CAAId = specialistCaa.Caa?.ItemId ?? -1,
 				CAAType = (int) specialistCaa.CaaType,
@@ -809,6 +838,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = specialistCaa.ItemId,
 				IsDeleted = specialistCaa.IsDeleted,
+				CorrectorId = specialistCaa.CorrectorId,
 				CAANumber = specialistCaa.NumberCAA,
 				Caa = Citizenship.Items.GetItemById(specialistCaa.CAAId),
 				CaaType = (CaaType) specialistCaa.CAAType,
@@ -825,6 +855,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = document.ItemId,
 				IsDeleted = document.IsDeleted,
+				CorrectorId = document.CorrectorId,
 				ParentID = document.ParentId,
 				ParentTypeId = document.ParentTypeId,
 				DocTypeId = document.DocTypeId,
@@ -864,6 +895,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = document.ItemId,
 				IsDeleted = document.IsDeleted,
+				CorrectorId = document.CorrectorId,
 				ParentId = document.ParentID,
 				ParentTypeId = document.ParentTypeId,
 				DocTypeId = document.DocTypeId,
@@ -909,6 +941,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = supplier.ItemId,
 				IsDeleted = supplier.IsDeleted,
+				CorrectorId = supplier.CorrectorId,
 				Name = supplier.Name,
 				ShortName = supplier.ShortName,
 				AirCode = supplier.AirCode,
@@ -935,16 +968,14 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = supplier.ItemId,
 				IsDeleted = supplier.IsDeleted,
-
+				CorrectorId = supplier.CorrectorId,
 				Name = supplier.Name,
 				ShortName = supplier.ShortName,
 				AirCode = supplier.AirCode,
 				VendorCode = supplier.VendorCode,
 				Phone = supplier.Phone,
-
 				Fax = supplier.Fax,
 				Address = supplier.Address,
-
 				ContactPerson = supplier.ContactPerson,
 				Email = supplier.Email,
 				WebSite = supplier.WebSite,
@@ -952,7 +983,6 @@ namespace SmartCore.DtoHelper
 				Approved = supplier.Approved ?? default(bool),
 				Remarks = supplier.Remarks,
 				SupplierClass = SupplierClass.Items.GetItemById(supplier.SupplierClassId),
-
 				Subject = supplier.Subject
 			};
 
@@ -969,8 +999,8 @@ namespace SmartCore.DtoHelper
 			{
 
 				ItemId = record.ItemId,
-
 				IsDeleted = record.IsDeleted,
+				CorrectorId = record.CorrectorId,
 				AircraftWorkerCategoryId = record.AircraftWorkerCategory?.ItemId,
 				AircraftTypeId = record.AircraftModel?.ItemId,
 				ParentId = record.ParentId,
@@ -988,9 +1018,8 @@ namespace SmartCore.DtoHelper
 
 				ItemId = record.ItemId,
 				IsDeleted = record.IsDeleted,
-
+				CorrectorId = record.CorrectorId,
 				AircraftWorkerCategory = record.AircraftWorkerCategory?.Convert(),
-
 				ParentId = record.ParentId ?? default(int),
 				ParentType = record.ParentTypeId.HasValue ? SmartCoreType.Items.GetItemById(record.ParentTypeId.Value) : SmartCoreType.Unknown,
 				AircraftModel = record.AircraftModel?.ConvertToAircraftModel()
@@ -1004,9 +1033,9 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = category.ItemId,
 				IsDeleted = category.IsDeleted,
+				CorrectorId = category.CorrectorId,
 				Category = category.Category
 			};
-
 		}
 
 		public static AircraftWorkerCategory Convert(this AircraftWorkerCategoryDTO category)
@@ -1015,20 +1044,19 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = category.ItemId,
 				IsDeleted = category.IsDeleted,
+				CorrectorId = category.CorrectorId,
 				Category = category.Category
 			};
-
 		}
 
 
 		public static ItemFileLinkDTO Convert(this ItemFileLink link)
-
 		{
 			return new ItemFileLinkDTO
-
 			{
 				ItemId = link.ItemId, 
 				IsDeleted = link.IsDeleted,
+				CorrectorId = link.CorrectorId,
 				ParentId = link.ParentId,
 				ParentTypeId = link.ParentTypeId,
 				LinkType = link.LinkType,
@@ -1042,10 +1070,9 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = link.ItemId,
 				IsDeleted = link.IsDeleted,
-
+				CorrectorId = link.CorrectorId,
 				ParentId = link.ParentId,
 				ParentTypeId = link.ParentTypeId,
-
 				LinkType = link.LinkType,
 				File = link.File?.Convert()
 			};
@@ -1057,9 +1084,9 @@ namespace SmartCore.DtoHelper
 
 			return new AttachedFileDTO
 			{
-
 				ItemId = file.ItemId,
 				IsDeleted = file.IsDeleted,
+				CorrectorId = file.CorrectorId,
 				FileName = file.FileName,
 				FileData = file.FileData,
 				FileSize = file.FileSize
@@ -1072,6 +1099,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = file.ItemId,
 				IsDeleted = file.IsDeleted,
+				CorrectorId = file.CorrectorId,
 				FileName = file.FileName,
 				FileData = file.FileData,
 				FileSize = (int?) (file.FileSize ?? default(int))
@@ -1084,7 +1112,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = audit.ItemId,
 				IsDeleted = audit.IsDeleted,
-
+				CorrectorId = audit.CorrectorId,
 				ParentId = audit.ParentId,
 				Number = audit.Number,
 				Title = audit.Title,
@@ -1094,18 +1122,14 @@ namespace SmartCore.DtoHelper
 				OpeningDate = audit.OpeningDate,
 				PublishingDate = audit.PublishingDate,
 				ClosingDate = audit.ClosingDate,
-
 				Author = audit.Author,
 				PublishedBy = audit.PublishedBy,
 				ClosedBy = audit.ClosedBy,
-
 				Remarks = audit.Remarks,
 				PublishingRemarks = audit.PublishingRemarks,
-
 				ClosingRemarks = audit.ClosingRemarks,
 				OnceClosed = audit.OnceClosed,
 				ReleaseCertificateNo = audit.ReleaseCertificateNo,
-
 				Revision = audit.Revision,
 				CheckType = audit.CheckType,
 				Station = audit.Station,
@@ -1122,6 +1146,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = auditdto.ItemId,
 				IsDeleted = auditdto.IsDeleted,
+				CorrectorId = auditdto.CorrectorId,
 				ParentId = auditdto.ParentId ?? default(int),
 				Number = auditdto.Number,
 				Title = auditdto.Title,
@@ -1147,12 +1172,10 @@ namespace SmartCore.DtoHelper
 
 			if (auditdto.Files != null)
 				value.Files.AddRange(auditdto.Files.Select(i => i.Convert()));
-
-
+			
 			if (auditdto.AuditRecords != null)
 				value.AuditRecords.AddRange(auditdto.AuditRecords.Select(i => i.Convert()));
-
-
+			
 			return value;
 		}
 
@@ -1162,11 +1185,11 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = auditrec.ItemId,
 				IsDeleted = auditrec.IsDeleted,
+				CorrectorId = auditrec.CorrectorId,
 				AuditId = auditrec.AuditId,
 				DirectivesId = auditrec.DirectiveId,
 				AuditItemTypeId = auditrec.AuditItemTypeId,
 				PerfNumFromStart = auditrec.PerformanceNumFromStart,
-
 				PerfNumFromRecord = auditrec.PerformanceNumFromRecord,
 				FromRecordId = auditrec.FromRecordId,
 				JobCardNumber = auditrec.JobCardNumber
@@ -1179,26 +1202,25 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = auditrecdto.ItemId,
 				IsDeleted = auditrecdto.IsDeleted,
+				CorrectorId = auditrecdto.CorrectorId,
 				AuditId = auditrecdto.AuditId,
-
 				DirectiveId = auditrecdto.DirectivesId ?? default(int),
 				AuditItemTypeId = auditrecdto.AuditItemTypeId ?? default(int),
 				PerformanceNumFromStart = auditrecdto.PerfNumFromStart ?? default(int),
 				PerformanceNumFromRecord = auditrecdto.PerfNumFromRecord ?? default(int),
 				FromRecordId = auditrecdto.FromRecordId ?? default(int),
 				JobCardNumber = auditrecdto.JobCardNumber
-
 			};
 
 		}
 
 		public static AircraftEquipmentDTO Convert(this AircraftEquipments aireq)
 		{
-
 			return new AircraftEquipmentDTO
 			{
 				ItemId = aireq.ItemId,
 				IsDeleted = aireq.IsDeleted,
+				CorrectorId = aireq.CorrectorId,
 				Description = aireq.Description,
 				AircraftId = aireq.AircraftId,
 				AircraftOtherParameterId = aireq.AircraftOtherParameter?.ItemId,
@@ -1213,7 +1235,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = aireqdto.ItemId,
 				IsDeleted = aireqdto.IsDeleted,
-
+				CorrectorId = aireqdto.CorrectorId,
 				Description = aireqdto.Description,
 				AircraftId = aireqdto.AircraftId,
 				AircraftOtherParameter = aireqdto.AircraftOtherParameter?.Convert(),
@@ -1228,6 +1250,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = arcf.ItemId,
 				IsDeleted = arcf.IsDeleted,
+				CorrectorId = arcf.CorrectorId,
 				ATLBID = arcf.ATLBId,
 				AircraftId = arcf.AircraftId,
 				FlightNo = arcf.FlightNo,
@@ -1235,16 +1258,13 @@ namespace SmartCore.DtoHelper
 				FlightDate = arcf.FlightDate,
 				StationFrom = arcf.StationFrom,
 				StationTo = arcf.StationTo,
-
 				DelayTime = arcf.DelayTime,
-
 				DelayReasonId = arcf.DelayReason?.ItemId,
 				OutTime = arcf.OutTime,
 				InTime = arcf.InTime,
 				TakeOffTime = arcf.TakeOffTime,
 				LDGTime = arcf.LDGTime,
 				NightTime = arcf.NightTime,
-
 				CRSID = arcf.CrsId,
 				Tanks = arcf.Tanks,
 				Fluids = arcf.Fluids,
@@ -1252,17 +1272,13 @@ namespace SmartCore.DtoHelper
 				Highlight = arcf.Highlight?.ItemId,
 				Correct = arcf.Correct,
 				Reference = arcf.Reference,
-
 				Cycles = arcf.Cycles,
 				PageNo = arcf.PageNo,
-
 				FlightType = (short?)arcf.FlightType?.ItemId,
 				LevelId = arcf.Level?.ItemId,
 				Distance = arcf.Distance,
-
 				DistanceMeasure = arcf.DistanceMeasure?.ItemId,
 				TakeOffWeight = arcf.TakeOffWeight,
-
 				AlignmentBefore = arcf.AlignmentBefore,
 				AlignmentAfter = arcf.AlignmentAfter,
 				FlightCategory = (short?)arcf.FlightCategory,
@@ -1280,12 +1296,11 @@ namespace SmartCore.DtoHelper
 		{
 			var value = new AircraftFlight
 			{
-
 				ItemId = arcfdto.ItemId,
 				IsDeleted = arcfdto.IsDeleted,
+				CorrectorId = arcfdto.CorrectorId,
 				ATLBId = arcfdto.ATLBID,
 				AircraftId = arcfdto.AircraftId ?? default(int),
-
 				FlightNo = arcfdto.FlightNo,
 				Remarks = arcfdto.Remarks,
 				FlightDate = arcfdto.FlightDate ?? DateTimeExtend.GetCASMinDateTime(),
@@ -1293,22 +1308,18 @@ namespace SmartCore.DtoHelper
 				StationTo = arcfdto.StationTo,
 				DelayTime = arcfdto.DelayTime ?? default(short),
 				DelayReason = arcfdto.DelayReason?.Convert(),
-
 				OutTime = arcfdto.OutTime ?? default(int),
 				InTime = arcfdto.InTime ?? default(int),
 				TakeOffTime = arcfdto.TakeOffTime ?? default(int),
 				LDGTime = arcfdto.LDGTime ?? default(int),
 				NightTime = arcfdto.NightTime ?? default(int),
-
 				CrsId = arcfdto.CRSID ?? default(int),
 				Tanks = arcfdto.Tanks,
 				Fluids = arcfdto.Fluids,
 				EnginesGeneralCondition = arcfdto.EnginesGeneralCondition,
 				Highlight = arcfdto.Highlight.HasValue ? Highlight.GetHighlightById(arcfdto.Highlight.Value) : Highlight.White,
 				Correct = arcfdto.Correct,
-
 				Reference = arcfdto.Reference,
-
 				Cycles = arcfdto.Cycles,
 				PageNo = arcfdto.PageNo,
 				FlightType = FlightType.Items.GetItemById(arcfdto.FlightType ?? default(short)),
@@ -1325,56 +1336,47 @@ namespace SmartCore.DtoHelper
 				StationFromId = arcfdto.StationFromDto?.Convert(),
 				StationToId = arcfdto.StationToDto?.Convert(),
 				FlightNumber = arcfdto.FlightNumber?.Convert(),
-
 			};
 
 			if (arcfdto.Files != null)
 				value.Files.AddRange(arcfdto.Files.Select(i => i.Convert()));
-
 
 			return value;
 		}
 
 
 		public static ATLBDTO Convert(this ATLB atl)
-
 		{
 			return new ATLBDTO
 			{
 				ItemId = atl.ItemId,
 				IsDeleted = atl.IsDeleted,
-
+				CorrectorId = atl.CorrectorId,
 				AircraftID = atl.ParentAircraftId,
 				ATLBNo = atl.ATLBNo,
 				StartPageNo = atl.StartPageNo,
 				OpeningDate = atl.OpeningDate,
 				Remarks = atl.Remarks,
 				Revision = atl.Revision,
-
 				PageFlightCount = atl.PageFlightCount,
 				AtlbStatus = (int)atl.AtlbStatus,
-
 				Files = atl.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>
 			};
-
 		}
 
 
 		public static ATLB Convert(this ATLBDTO atldto)
 		{
-
 			var value = new ATLB
 			{
 				ItemId = atldto.ItemId,
 				IsDeleted = atldto.IsDeleted,
-
+				CorrectorId = atldto.CorrectorId,
 				ParentAircraftId = atldto.AircraftID ?? default(int),
 				ATLBNo = atldto.ATLBNo,
 				StartPageNo = atldto.StartPageNo ?? default(int),
 				OpeningDate = atldto.OpeningDate ?? DateTimeExtend.GetCASMinDateTime(),
-
 				Remarks = atldto.Remarks,
-
 				Revision = atldto.Revision,
 				PageFlightCount = atldto.PageFlightCount ?? default(int),
 				AtlbStatus = (AtlbStatus)atldto.AtlbStatus
@@ -1389,14 +1391,13 @@ namespace SmartCore.DtoHelper
 		
 		public static CertificateOfReleaseToServiceDTO Convert(this CertificateOfReleaseToService corts)
 		{
-
 			return new CertificateOfReleaseToServiceDTO
 			{
 				ItemId = corts.ItemId,
 				IsDeleted = corts.IsDeleted,
+				CorrectorId = corts.CorrectorId,
 				Station = corts.Station ,
 				RecordDate = corts.RecordDate,
-
 				CheckPerformed = corts.CheckPerformed,
 				Reference = corts.Reference,
 				AuthorizationB1Id= corts.AuthorizationB1?.ItemId,
@@ -1406,17 +1407,16 @@ namespace SmartCore.DtoHelper
 
 
 		public static CertificateOfReleaseToService Convert(this CertificateOfReleaseToServiceDTO cortsdto)
-
 		{
 			return new CertificateOfReleaseToService
 			{
 				ItemId = cortsdto.ItemId,
 				IsDeleted = cortsdto.IsDeleted,
+				CorrectorId = cortsdto.CorrectorId,
 				Station = cortsdto.Station,
 				RecordDate = cortsdto.RecordDate ?? DateTimeExtend.GetCASMinDateTime(),
 				CheckPerformed = cortsdto.CheckPerformed,
 				Reference = cortsdto.Reference,
-
 				AuthorizationB1 = cortsdto.AuthorizationB1?.Convert(),
 				AuthorizationB2 = cortsdto.AuthorizationB2?.Convert()
 			};
@@ -1425,10 +1425,10 @@ namespace SmartCore.DtoHelper
 		public static ComponentDirectiveDTO Convert(this ComponentDirective comdir)
 		{
 			return new ComponentDirectiveDTO
-
 			{
 				ItemId = comdir.ItemId,
 				IsDeleted = comdir.IsDeleted,
+				CorrectorId = comdir.CorrectorId,
 				DirectiveType = comdir.DirectiveTypeId,
 				Threshold = comdir.Threshold?.ToBinary(),
 				ManHours = comdir.ManHours,
@@ -1441,10 +1441,8 @@ namespace SmartCore.DtoHelper
 				MPDTaskTypeId = comdir.MPDTaskType?.ItemId,
 				NDTType = (short)(comdir.NDTType?.ItemId ?? -1),
 				ComponentId = comdir.ComponentId,
-
 				ZoneArea = comdir.ZoneArea,
 				AccessDirective = comdir.AccessDirective,
-
 				AAM = comdir.AAM,
 				CMM = comdir.CMM,
 				Files = comdir.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
@@ -1454,22 +1452,20 @@ namespace SmartCore.DtoHelper
 			};
 		}
 
-
 		public static ComponentDirective Convert(this ComponentDirectiveDTO comdirdto)
 		{
 			var value = new ComponentDirective()
 			{
 				ItemId = comdirdto.ItemId,
 				IsDeleted = comdirdto.IsDeleted,
+				CorrectorId = comdirdto.CorrectorId,
 				DirectiveTypeId = comdirdto.DirectiveType,
 
 				//TODO:Разобраться почему private set
 				Threshold = new ComponentDirectiveThreshold(comdirdto.Threshold),
-
 				ManHours = comdirdto.ManHours ?? default(double),
 				Remarks = comdirdto.Remarks,
 				Cost = comdirdto.Cost ?? default(double),
-
 				Highlight = comdirdto.Highlight.HasValue ? Highlight.GetHighlightById(comdirdto.Highlight.Value) : Highlight.White,
 				KitRequired = comdirdto.KitRequired,
 				HiddenRemarks = comdirdto.HiddenRemarks,
@@ -1527,21 +1523,19 @@ namespace SmartCore.DtoHelper
 		}
 
 		public static ComponentDTO Convert(this Entities.General.Accessory.Component comp)
-
 		{
 			return new ComponentDTO
 			{
 				ItemId = comp.ItemId,
 				IsDeleted = comp.IsDeleted,
+				CorrectorId = comp.CorrectorId,
 				StartDate = comp.StartDate,
 				ATAChapterId = comp.ATAChapter?.ItemId,
 				PartNumber = comp.PartNumber,
 				Description = comp.Description,
 				SerialNumber = comp.SerialNumber,
-
 				BatchNumber = comp.BatchNumber,
 				IdNumber = comp.IdNumber,
-
 				MaintenanceType = comp.MaintenanceControlProcess?.ItemId ?? -1,
 				Remarks = comp.Remarks,
 				ModelId = comp.Model?.ItemId,
@@ -1549,20 +1543,17 @@ namespace SmartCore.DtoHelper
 				ManufactureDate = comp.ManufactureDate,
 				DeliveryDate = comp.DeliveryDate,
 				Lifelength = comp.Lifelength?.ConvertToByteArray(),
-
 				LLPMark = comp.LLPMark,
 				LLPCategories = comp.LLPCategories,
 				LandingGear = (short)comp.LandingGear,
 				AvionicsInventory = (short)comp.AvionicsInventory,
 				ALTPN = comp.ALTPartNumber,
 				MTOGW = comp.MTOGW,
-
 				HushKit = comp.HushKit,
 				Cost = comp.Cost,
 				CostServiceable = comp.CostServiceable,
 				CostOverhaul = comp.CostOverhaul,
 				Measure = comp.Measure?.ItemId,
-
 				Quantity = comp.Quantity,
 				ManHours = comp.ManHours,
 				Warranty = comp.Warranty?.ConvertToByteArray(),
@@ -1571,30 +1562,22 @@ namespace SmartCore.DtoHelper
 				ShelfLife = comp.ShelfLife,
 				ExpirationDate = comp.ExpirationDate,
 				NotificationDate = comp.NotificationDate,
-
 				Highlight = comp.Highlight?.ItemId,
 				MPDItem = comp.MPDItem,
 				HiddenRemarks = comp.HiddenRemarks,
 				Supplier = comp.Suppliers?.ToString(),
 				LifeLimit = comp.LifeLimit?.ConvertToByteArray(),
-
 				LifeLimitNotify = comp.LifeLimitNotify?.ConvertToByteArray(),
 				KitRequired = comp.KitRequired,
-
 				StartLifelength = comp.StartLifelength?.ConvertToByteArray(),
 				Code = comp.Code,
-
 				Status = (short?)comp.Status?.ItemId,
 				IsBaseComponent = comp.IsBaseComponent,
-
 				LocationId = comp.Location?.ItemId ?? -1,
-
 				Incoming = comp.Incoming,
-
 				Discrepancy = comp.Discrepancy,
 				IsPool = comp.IsPOOL,
 				IsDangerous = comp.IsDangerous,
-
 				QuantityInput = comp.QuantityIn,
 				FromSupplierId = comp.FromSupplier?.ItemId ?? -1,
 				FromSupplierReciveDate = comp.FromSupplierReciveDate,
@@ -1616,22 +1599,19 @@ namespace SmartCore.DtoHelper
 			var value = new Entities.General.Accessory.Component
 			{
 				ItemId = compdto.ItemId,
-
 				IsDeleted = compdto.IsDeleted,
+				CorrectorId = compdto.CorrectorId,
 				StartDate = compdto.StartDate ?? DateTimeExtend.GetCASMinDateTime(),
-
 				ATAChapter = compdto.ATAChapter?.Convert(),
 				PartNumber = compdto.PartNumber,
 				Description = compdto.Description,
 				SerialNumber = compdto.SerialNumber,
 				BatchNumber = compdto.BatchNumber,
-
 				IdNumber = compdto.IdNumber,
 				MaintenanceControlProcess = MaintenanceControlProcess.Items.GetItemById(compdto.MaintenanceType),
 				Remarks = compdto.Remarks,
 				Model = compdto.Model?.ConvertToComponentModel(),
 				Manufacturer = compdto.Manufacturer,
-
 				ManufactureDate = compdto.ManufactureDate ?? DateTimeExtend.GetCASMinDateTime(),
 				DeliveryDate = compdto.DeliveryDate ?? DateTimeExtend.GetCASMinDateTime(),
 				Lifelength = Lifelength.ConvertFromByteArray(compdto.Lifelength),
@@ -1655,20 +1635,15 @@ namespace SmartCore.DtoHelper
 				ExpirationDate = compdto.ExpirationDate,
 				NotificationDate = compdto.NotificationDate,
 				Highlight = Highlight.GetHighlightById(compdto.Highlight),
-
 				MPDItem = compdto.MPDItem,
 				HiddenRemarks = compdto.HiddenRemarks,
-
 				LifeLimit = Lifelength.ConvertFromByteArray(compdto.LifeLimit),
 				LifeLimitNotify = Lifelength.ConvertFromByteArray(compdto.LifeLimitNotify),
 				KitRequired = compdto.KitRequired,
-
 				StartLifelength = Lifelength.ConvertFromByteArray(compdto.StartLifelength),
 				Code = compdto.Code,
-
 				IsBaseComponent = compdto.IsBaseComponent,
 				Location = compdto.Location?.Convert(),
-
 				Incoming = compdto.Incoming,
 				Discrepancy = compdto.Discrepancy,
 				IsPOOL = compdto.IsPool,
@@ -1693,7 +1668,6 @@ namespace SmartCore.DtoHelper
 				}
 			}
 
-
 			if (compdto.SupplierRelations != null)
 				value.SupplierRelations.AddRange(compdto.SupplierRelations.Select(i => i.Convert()));
 
@@ -1702,13 +1676,9 @@ namespace SmartCore.DtoHelper
 
 			if (compdto.Kits != null)
 			{
-
 				foreach (var dto in compdto.Kits)
-
 				{
-
 					var record = dto.Convert();
-
 					record.ParentObject = value;
 					value.Kits.Add(record);
 				}
@@ -1717,21 +1687,17 @@ namespace SmartCore.DtoHelper
 
 			if (compdto.ActualStateRecords != null)
 			{
-
 				foreach (var dto in compdto.ActualStateRecords)
 				{
 					var record = dto.Convert();
-
 					record.ParentComponent = value;
 					value.ActualStateRecords.Add(record);
-
 				}
 			}
 
 
 			if (compdto.TransferRecords != null)
 			{
-
 				foreach (var dto in compdto.TransferRecords)
 				{
 					var record = dto.Convert();
@@ -1742,7 +1708,6 @@ namespace SmartCore.DtoHelper
 
 
 			if (compdto.ComponentDirectives != null)
-
 			{
 				foreach (var dto in compdto.ComponentDirectives)
 				{
@@ -1759,7 +1724,6 @@ namespace SmartCore.DtoHelper
 					var directive = dto.Convert();
 					directive.ParentComponent = value;
 					value.ChangeLLPCategoryRecords.Add(directive);
-
 				}
 			}
 
@@ -1773,9 +1737,9 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = comp.ItemId,
 				IsDeleted = comp.IsDeleted,
+				CorrectorId = comp.CorrectorId,
 				StartDate = comp.StartDate,
 				BaseComponentTypeId = comp.BaseComponentTypeId,
-
 				ComponentCount = comp.ComponentCount,
 				AverageUtilization = comp.AverageUtilization?.ConvertToByteArray(),
 				Acceleration = comp.AccelerationGround,
@@ -1786,7 +1750,6 @@ namespace SmartCore.DtoHelper
 				Description = comp.Description,
 				SerialNumber = comp.SerialNumber,
 				BatchNumber = comp.BatchNumber,
-
 				IdNumber = comp.IdNumber,
 				MaintenanceType = comp.MaintenanceControlProcess?.ItemId ?? -1,
 				Remarks = comp.Remarks,
@@ -1797,7 +1760,6 @@ namespace SmartCore.DtoHelper
 				Lifelength = comp.Lifelength?.ConvertToByteArray(),
 				LLPMark = comp.LLPMark,
 				LLPCategories = comp.LLPCategories,
-
 				LandingGear = (short)comp.LandingGear,
 				AvionicsInventory = (short)comp.AvionicsInventory,
 				ALTPN = comp.ALTPartNumber,
@@ -1805,9 +1767,7 @@ namespace SmartCore.DtoHelper
 				HushKit = comp.HushKit,
 				Cost = comp.Cost,
 				CostServiceable = comp.CostServiceable,
-
 				CostOverhaul = comp.CostOverhaul,
-
 				Measure = comp.Measure?.ItemId,
 				Quantity = comp.Quantity,
 				ManHours = comp.ManHours,
@@ -1824,21 +1784,17 @@ namespace SmartCore.DtoHelper
 				LifeLimit = comp.LifeLimit?.ConvertToByteArray(),
 				LifeLimitNotify = comp.LifeLimitNotify?.ConvertToByteArray(),
 				KitRequired = comp.KitRequired,
-
 				StartLifelength = comp.StartLifelength?.ConvertToByteArray(),
 				Code = comp.Code,
 				Status = (short?)comp.Status?.ItemId,
 				IsBaseComponent = comp.IsBaseComponent,
 				LocationId = comp.Location?.ItemId ?? -1,
-
 				Incoming = comp.Incoming,
 				Discrepancy = comp.Discrepancy,
 				IsPool = comp.IsPOOL,
-
 				IsDangerous = comp.IsDangerous,
 				QuantityInput = comp.QuantityIn,
 				FromSupplierId = comp.FromSupplier?.ItemId ?? -1,
-
 				FromSupplierReciveDate = comp.FromSupplierReciveDate,
 				LLPData = comp.LLPData?.Select(i => i.Convert()) as ICollection<ComponentLLPCategoryDataDTO>,
 				CategoriesRecords = comp.CategoriesRecords?.Select(i => i.Convert()) as ICollection<CategoryRecordDTO>,
@@ -1846,7 +1802,6 @@ namespace SmartCore.DtoHelper
 				Files = comp.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
 				Kits = comp.Kits?.Select(i => i.Convert()) as ICollection<AccessoryRequiredDTO>,
 				ActualStateRecords = comp.ActualStateRecords?.Select(i => i.Convert()) as ICollection<ActualStateRecordDTO>,
-
 				TransferRecords = comp.TransferRecords?.Select(i => i.Convert()) as ICollection<TransferRecordDTO>,
 				ComponentDirectives = comp.ComponentDirectives?.Select(i => i.Convert()) as ICollection<ComponentDirectiveDTO>,
 				ChangeLLPCategoryRecords = comp.ChangeLLPCategoryRecords?.Select(i => i.Convert()) as ICollection<ComponentLLPCategoryChangeRecordDTO>
@@ -1859,22 +1814,20 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = compdto.ItemId,
 				IsDeleted = compdto.IsDeleted,
+				CorrectorId = compdto.CorrectorId,
 				StartDate = compdto.StartDate ?? DateTimeExtend.GetCASMinDateTime(),
 				BaseComponentTypeId = compdto.BaseComponentTypeId,
 				ComponentCount = compdto.ComponentCount,
 				AverageUtilization = AverageUtilization.ConvertFromByteArray(compdto.AverageUtilization),
 				AccelerationGround = compdto.Acceleration ?? default(int),
 				AccelerationAir = compdto.AccelerationAir ?? default(int),
-
 				Thrust = compdto.Thrust,
 				ATAChapter = compdto.ATAChapter?.Convert(),
-
 				PartNumber = compdto.PartNumber,
 				Description = compdto.Description,
 				SerialNumber = compdto.SerialNumber,
 				BatchNumber = compdto.BatchNumber,
 				IdNumber = compdto.IdNumber,
-
 				MaintenanceControlProcess = MaintenanceControlProcess.Items.GetItemById(compdto.MaintenanceType),
 				Remarks = compdto.Remarks,
 				Model = compdto.Model?.ConvertToComponentModel(),
@@ -1888,7 +1841,6 @@ namespace SmartCore.DtoHelper
 				AvionicsInventory = (AvionicsInventoryMarkType)compdto.AvionicsInventory,
 				ALTPartNumber = compdto.ALTPN,
 				MTOGW = compdto.MTOGW,
-
 				HushKit = compdto.HushKit,
 				Cost = compdto.Cost ?? default(double),
 				CostServiceable = compdto.CostServiceable ?? default(double),
@@ -1903,28 +1855,22 @@ namespace SmartCore.DtoHelper
 				ExpirationDate = compdto.ExpirationDate,
 				NotificationDate = compdto.NotificationDate,
 				Highlight = Highlight.GetHighlightById(compdto.Highlight),
-
 				MPDItem = compdto.MPDItem,
 				HiddenRemarks = compdto.HiddenRemarks,
-
 				LifeLimit = Lifelength.ConvertFromByteArray(compdto.LifeLimit),
 				LifeLimitNotify = Lifelength.ConvertFromByteArray(compdto.LifeLimitNotify),
 				KitRequired = compdto.KitRequired,
 				StartLifelength = Lifelength.ConvertFromByteArray(compdto.StartLifelength),
 				Code = compdto.Code,
-
 				IsBaseComponent = compdto.IsBaseComponent,
 				Location = compdto.Location?.Convert(),
-
 				Incoming = compdto.Incoming,
 				Discrepancy = compdto.Discrepancy,
 				IsPOOL = compdto.IsPool,
 				IsDangerous = compdto.IsDangerous,
-
 				QuantityIn = compdto.QuantityInput ?? default(double),
 				FromSupplier = compdto.FromSupplier?.Convert(),
 				FromSupplierReciveDate = compdto.FromSupplierReciveDate ?? DateTimeExtend.GetCASMinDateTime()
-
 			};
 
 			if (compdto.LLPData != null)
@@ -1935,7 +1881,6 @@ namespace SmartCore.DtoHelper
 				foreach (var dto in compdto.CategoriesRecords)
 				{
 					var record = dto.Convert();
-
 					record.Parent = value;
 					value.CategoriesRecords.Add(record);
 				}
@@ -1953,26 +1898,20 @@ namespace SmartCore.DtoHelper
 			if (compdto.Kits != null)
 			{
 				foreach (var dto in compdto.Kits)
-
 				{
 					var record = dto.Convert();
-
 					record.ParentObject = value;
 					value.Kits.Add(record);
-
 				}
-
 			}
 
 			if (compdto.ActualStateRecords != null)
 			{
 				foreach (var dto in compdto.ActualStateRecords)
 				{
-
 					var record = dto.Convert();
 					record.ParentComponent = value;
 					value.ActualStateRecords.Add(record);
-
 				}
 			}
 
@@ -1997,15 +1936,12 @@ namespace SmartCore.DtoHelper
 			}
 
 			if (compdto.ChangeLLPCategoryRecords != null)
-
 			{
-
 				foreach (var dto in compdto.ChangeLLPCategoryRecords)
 				{
 					var directive = dto.Convert();
 					directive.ParentComponent = value;
 					value.ChangeLLPCategoryRecords.Add(directive);
-
 				}
 			}
 
@@ -2018,6 +1954,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = cllpcr.ItemId,
 				IsDeleted = cllpcr.IsDeleted,
+				CorrectorId = cllpcr.CorrectorId,
 				ParentId = cllpcr.ParentId,
 				RecordDate = cllpcr.RecordDate,
 				ToCategoryId = cllpcr.ToCategory?.ItemId,
@@ -2031,14 +1968,11 @@ namespace SmartCore.DtoHelper
 		{
 			var value = new ComponentLLPCategoryChangeRecord()
 			{
-
 				ItemId = cllpcrdto.ItemId,
-
 				IsDeleted = cllpcrdto.IsDeleted,
+				CorrectorId = cllpcrdto.CorrectorId,
 				ParentId = cllpcrdto.ParentId,
-
 				RecordDate = cllpcrdto.RecordDate ?? DateTimeExtend.GetCASMinDateTime(),
-
 				ToCategory = cllpcrdto.ToCategory?.Convert(),
 				OnLifelength = Lifelength.ConvertFromByteArray(cllpcrdto.OnLifeLength),
 				Remarks = cllpcrdto.Remarks
@@ -2047,20 +1981,18 @@ namespace SmartCore.DtoHelper
 			if (cllpcrdto.Files != null)
 
 				value.Files.AddRange(cllpcrdto.Files.Select(i => i.Convert()));
-
-
+			
 			return value;
 		}
 
 
 		public static ComponentLLPCategoryDataDTO Convert(this ComponentLLPCategoryData cllpcd)
-
 		{
 			return new ComponentLLPCategoryDataDTO
 			{
-
 				ItemId = cllpcd.ItemId,
 				IsDeleted = cllpcd.IsDeleted,
+				CorrectorId = cllpcd.CorrectorId,
 				LLPCategoryId = cllpcd.ParentCategory?.ItemId ?? -1,
 				LLPLifeLength = cllpcd.LLPLifelength?.ConvertToByteArray(),
 				Notify = cllpcd.Notify?.ConvertToByteArray(),
@@ -2079,8 +2011,8 @@ namespace SmartCore.DtoHelper
 			return new ComponentLLPCategoryData()
 			{
 				ItemId = cllpcddto.ItemId,
-
 				IsDeleted = cllpcddto.IsDeleted,
+				CorrectorId = cllpcddto.CorrectorId,
 				ParentCategory = cllpcddto.ParentCategory?.Convert(),
 				LLPLifelength = Lifelength.ConvertFromByteArray(cllpcddto.LLPLifeLength),
 				Notify = Lifelength.ConvertFromByteArray(cllpcddto.LLPLifeLength),
@@ -2094,14 +2026,12 @@ namespace SmartCore.DtoHelper
 
 
 		public static ComponentOilConditionDTO Convert(this ComponentOilCondition coc)
-
 		{
-
 			return new ComponentOilConditionDTO
 			{
 				ItemId = coc.ItemId,
-
 				IsDeleted = coc.IsDeleted,
+				CorrectorId = coc.CorrectorId,
 				FlightId = coc.FlightId,
 				OilAdded = coc.OilAdded,
 				OnBoard = coc.OnBoard,
@@ -2118,26 +2048,24 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = cocdto.ItemId,
 				IsDeleted = cocdto.IsDeleted,
+				CorrectorId = cocdto.CorrectorId,
 				FlightId = cocdto.FlightId ?? default(int),
 				OilAdded = cocdto.OilAdded ?? default(double),
 				OnBoard = cocdto.OnBoard ?? default(double),
 				Remain = cocdto.Remain ?? default(double),
-
 				Spent = cocdto.Spent ?? default(double),
 				RemainAfter = cocdto.RemainAfter ?? default(double),
 				ComponentId = cocdto.ComponentId ?? default(int)
-
 			};
-
 		}
 
 		public static ComponentWorkInRegimeParamDTO Convert(this ComponentWorkInRegimeParams cwirp)
 		{
-
 			return new ComponentWorkInRegimeParamDTO
 			{
 				ItemId = cwirp.ItemId,
 				IsDeleted = cwirp.IsDeleted,
+				CorrectorId = cwirp.CorrectorId,
 				FlightRegime = cwirp.FlightRegime?.ItemId,
 				TimeInRegimeMax = (int?)cwirp.TimeInRegimeMax.Ticks,
 				EPRMin = cwirp.EPRMin,
@@ -2163,51 +2091,40 @@ namespace SmartCore.DtoHelper
 				FuelFlowMeasure = cwirp.FuelFlowMeasure?.ItemId,
 				FuelBurnMin = cwirp.FuelBurnMin,
 				FuelBurnMax = cwirp.FuelBurnMax,
-
 				FuelBurnMeasure = cwirp.FuelBurnMeasure?.ItemId,
 				VibroOverloadMin = cwirp.VibroOverloadMin,
 				VibroOverloadMax = cwirp.VibroOverloadMax,
 				VibroOverload2Min = cwirp.VibroOverload2Min,
 				VibroOverload2Max = cwirp.VibroOverload2Max,
-
 				GroundAir = (short?)cwirp.GroundAir,
-
 				PersentTime = cwirp.PersentTime,
 				ResorceProvider = cwirp.ResorceProvider?.ItemId,
 				ResorceProviderId = cwirp.ResorceProviderId,
 				TLAMin = cwirp.TLAMin,
 				TLAMax = cwirp.TLAMax,
-
 				TLAMinEnabled = cwirp.TLAMinEnabled,
-
 				TLAMaxEnabled = cwirp.TLAMaxEnabled,
-
 				EPRMinEnabled = cwirp.EPRMinEnabled,
 				EPRMaxEnabled = cwirp.EPRMaxEnabled,
 				N1MinEnabled = cwirp.N1MinEnabled,
-
 				N1MaxEnabled = cwirp.N1MaxEnabled,
 				EGTMinEnabled = cwirp.EGTMinEnabled,
 				EGTMaxEnabled = cwirp.EGTMaxEnabled,
 				N2MinEnabled = cwirp.N2MinEnabled,
 				N2MaxEnabled = cwirp.N2MaxEnabled,
-
 				OilTemperatureMinEnabled = cwirp.OilTemperatureMinEnabled,
 				OilTemperatureMaxEnabled = cwirp.OilTemperatureMaxEnabled,
 				OilPressureMinEnabled = cwirp.OilPressureMinEnabled,
 				OilPressureMaxEnabled = cwirp.OilPressureMaxEnabled,
 				OilFlowMin = cwirp.OilFlowMin,
-
 				OilFlowMax = cwirp.OilFlowMax,
 				OilFlowMinEnabled = cwirp.OilFlowMinEnabled,
 				OilFlowMaxEnabled = cwirp.OilFlowMaxEnabled,
 				OilFlowMeasure = cwirp.OilFlowMeasure?.ItemId,
-
 				FuelPressMinEnabled = cwirp.FuelPressMinEnabled,
 				FuelPressMaxEnabled = cwirp.FuelPressMaxEnabled,
 				OilPressTorqueMinEnabled = cwirp.OilPressTorqueMinEnabled,
 				OilPressTorqueMaxEnabled = cwirp.OilPressTorqueMaxEnabled,
-
 				FuelFlowMinEnabled = cwirp.FuelFlowMinEnabled,
 				FuelFlowMaxEnabled = cwirp.FuelFlowMaxEnabled,
 				FuelBurnMinEnabled = cwirp.FuelBurnMinEnabled,
@@ -2215,14 +2132,10 @@ namespace SmartCore.DtoHelper
 				VibroOverloadMinEnabled = cwirp.VibroOverloadMinEnabled,
 				VibroOverloadMaxEnabled = cwirp.VibroOverloadMaxEnabled,
 				VibroOverload2MinEnabled = cwirp.VibroOverload2MinEnabled,
-
 				VibroOverload2MaxEnabled = cwirp.VibroOverload2MaxEnabled,
 				Remarks = cwirp.Remarks,
-
 				TLARecomended = cwirp.TLARecomended,
-
 				TLARecomendedEnabled = cwirp.TLARecomendedEnabled,
-
 				EPRRecomended = cwirp.EPRRecomended,
 				EPRRecomendedEnabled = cwirp.EPRRecomendedEnabled,
 				N1Recomended = cwirp.N1Recomended,
@@ -2251,42 +2164,33 @@ namespace SmartCore.DtoHelper
 				VibroOverload2RecomendedEnabled = cwirp.VibroOverload2RecomendedEnabled,
 				ComponentId = cwirp.ComponentId
 			};
-
 		}
 
 		public static ComponentWorkInRegimeParams Convert(this ComponentWorkInRegimeParamDTO cwirpdto)
 		{
 			return new ComponentWorkInRegimeParams
-
 			{
 				ItemId = cwirpdto.ItemId,
 				IsDeleted = cwirpdto.IsDeleted,
+				CorrectorId = cwirpdto.CorrectorId,
 				FlightRegime = cwirpdto.FlightRegime.HasValue ? FlightRegime.Items.GetItemById(cwirpdto.FlightRegime.Value) : FlightRegime.UNK,
 				TimeInRegimeMax = new TimeSpan(cwirpdto.TimeInRegimeMax ?? default(int)),
-
 				EPRMin = cwirpdto.EPRMin ?? default(double),
 				EPRMax = cwirpdto.EPRMax ?? default(double),
 				N1Min = cwirpdto.N1Min ?? default(double),
-
 				N1Max = cwirpdto.N1Max ?? default(double),
-
 				EGTMin = cwirpdto.EGTMin ?? default(double),
 				EGTMax = cwirpdto.EGTMax ?? default(double),
 				EGTMeasure = cwirpdto.EGTMeasure.HasValue ? Measure.Items.GetItemById(cwirpdto.EGTMeasure.Value) : Measure.Unknown,
-
 				N2Min = cwirpdto.N2Min ?? default(double),
 				N2Max = cwirpdto.N2Max ?? default(double),
 				OilTemperatureMin = cwirpdto.OilTemperatureMin ?? default(double),
-
 				OilTemperatureMax = cwirpdto.OilTemperatureMax ?? default(double),
-
 				OilTemperatureMeasure = cwirpdto.OilTemperatureMeasure.HasValue ? Measure.Items.GetItemById(cwirpdto.OilTemperatureMeasure.Value) : Measure.Unknown,
 				FuelPressMin = cwirpdto.FuelPressMin ?? default(double),
 				FuelPressMax = cwirpdto.FuelPressMax ?? default(double),
-
 				FuelPressMeasure = cwirpdto.FuelPresseMeasure.HasValue ? Measure.Items.GetItemById(cwirpdto.FuelPresseMeasure.Value) : Measure.Unknown,
 				OilPressTorqueMin = cwirpdto.OilPressTorqueMin ?? default(double),
-
 				OilPressTorqueMax = cwirpdto.OilPressTorqueMax ?? default(double),
 				OilPressTorqueMeasure = cwirpdto.OilPressTorqueMeasure.HasValue ? Measure.Items.GetItemById(cwirpdto.OilPressTorqueMeasure.Value) : Measure.Unknown,
 				FuelFlowMin = cwirpdto.FuelFlowMin ?? default(double),
@@ -2303,7 +2207,6 @@ namespace SmartCore.DtoHelper
 				PersentTime = cwirpdto.PersentTime ?? default(double),
 				ResorceProvider = cwirpdto.ResorceProvider.HasValue ? SmartCoreType.Items.GetItemById(cwirpdto.ResorceProvider.Value) : SmartCoreType.Unknown,
 				ResorceProviderId = cwirpdto.ResorceProviderId ?? default(int),
-
 				TLAMin = cwirpdto.TLAMin ?? default(double),
 				TLAMax = cwirpdto.TLAMax ?? default(double),
 				TLAMinEnabled = cwirpdto.TLAMinEnabled ?? default(bool),
@@ -2321,7 +2224,6 @@ namespace SmartCore.DtoHelper
 				OilPressureMinEnabled = cwirpdto.OilPressureMinEnabled ?? default(bool),
 				OilPressureMaxEnabled = cwirpdto.OilPressureMaxEnabled ?? default(bool),
 				OilFlowMin = cwirpdto.OilFlowMin ?? default(double),
-
 				OilFlowMax = cwirpdto.OilFlowMax ?? default(double),
 				OilFlowMinEnabled = cwirpdto.OilFlowMinEnabled ?? default(bool),
 				OilFlowMaxEnabled = cwirpdto.OilFlowMaxEnabled ?? default(bool),
@@ -2340,7 +2242,6 @@ namespace SmartCore.DtoHelper
 				VibroOverload2MaxEnabled = cwirpdto.VibroOverload2MaxEnabled ?? default(bool),
 				Remarks = cwirpdto.Remarks,
 				TLARecomended = cwirpdto.TLARecomended ?? default(double),
-
 				TLARecomendedEnabled = cwirpdto.TLARecomendedEnabled ?? default(bool),
 				EPRRecomended = cwirpdto.EPRRecomended ?? default(double),
 				EPRRecomendedEnabled = cwirpdto.EPRRecomendedEnabled ?? default(bool),
@@ -2380,8 +2281,8 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = dmgdoc.ItemId,
 				IsDeleted = dmgdoc.IsDeleted,
+				CorrectorId = dmgdoc.CorrectorId,
 				DirectiveId = dmgdoc.ParentDirectiveId,
-
 				DamageChartId = dmgdoc.DamageChartId,
 				DamageLocation = dmgdoc.Location,
 				DocumentType = dmgdoc.DocumentTypeId,
@@ -2397,6 +2298,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = dmgdocdto.ItemId,
 				IsDeleted = dmgdocdto.IsDeleted,
+				CorrectorId = dmgdocdto.CorrectorId,
 				ParentDirectiveId = dmgdocdto.DirectiveId ?? default(int),
 				DamageChartId = dmgdocdto.DamageChartId ?? default(int),
 				Location = dmgdocdto.DamageLocation,
@@ -2418,16 +2320,12 @@ namespace SmartCore.DtoHelper
 		public static DamageSectorDTO Convert(this DamageSector dmgsec)
 		{
 			return new DamageSectorDTO
-
 			{
-
 				ItemId = dmgsec.ItemId,
 				IsDeleted = dmgsec.IsDeleted,
-
+				CorrectorId = dmgsec.CorrectorId,
 				DamageChartColumn = dmgsec.DamageChartColumn,
-
 				DamageChartRow = dmgsec.DamageChartRow,
-
 				Remarks = dmgsec.Remarks,
 				DamageDocumentId = dmgsec.DamageDocument?.ItemId
 			};
@@ -2438,33 +2336,29 @@ namespace SmartCore.DtoHelper
 			return new DamageSector()
 			{
 				ItemId = dmgsecdto.ItemId,
-
 				IsDeleted = dmgsecdto.IsDeleted,
+				CorrectorId = dmgsecdto.CorrectorId,
 				DamageChartColumn = dmgsecdto.DamageChartColumn ?? default(int),
-
 				DamageChartRow = dmgsecdto.DamageChartRow ?? default(int),
 				Remarks = dmgsecdto.Remarks,
 				DamageDocument = dmgsecdto.DamageDocument?.Convert()
 			};
 		}
 
-
 		public static DirectiveDTO Convert(this Directive direc)
 		{
-
 			return new DirectiveDTO
 			{
 				ItemId = direc.ItemId,
 				Title = direc.Title,
 				IsDeleted = direc.IsDeleted,
+				CorrectorId = direc.CorrectorId,
 				IsApplicability = direc.IsApplicability,
 				ManHours = direc.ManHours,
 				Remarks = direc.Remarks,
 				Threshold = direc.Threshold?.ToBinary(),
 				ThldTypeCond = direc.ThrldTypeCond,
-
 				Applicability = direc.Applicability,
-
 				DirectiveType = direc.DirectiveType?.ItemId,
 				Description = direc.Description,
 				EngineeringOrders = direc.EngineeringOrders,
@@ -2475,14 +2369,11 @@ namespace SmartCore.DtoHelper
 				KitRequired = direc.KitRequired,
 				HiddenRemarks = direc.HiddenRemarks,
 				ADType = (short?)direc.ADType,
-
 				WorkType = direc.WorkType?.ItemId,
-
 				ServiceBulletinNo = direc.ServiceBulletinNo,
 				StcNo = direc.StcNo,
 				ServiceBulletinFileID = direc.ServiceBulletinFile?.ItemId,
 				ADFileID = direc.ADNoFile?.ItemId,
-
 				IsClosed = direc.IsClosed,
 				AircraftFlight = direc.AircraftFlightId,
 				NDTType = (short)(direc.NDTType?.ItemId ?? -1),
@@ -2501,21 +2392,18 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = direcdto.ItemId,
 				IsDeleted = direcdto.IsDeleted,
+				CorrectorId = direcdto.CorrectorId,
 				IsApplicability = direcdto.IsApplicability,
-
 				Title = direcdto.Title,
 				ManHours = direcdto.ManHours ?? default(double),
 				Remarks = direcdto.Remarks,
-
 				Threshold = DirectiveThreshold.ConvertFromByteArray(direcdto.Threshold),
 				ThrldTypeCond = direcdto.ThldTypeCond,
 				Applicability = direcdto.Applicability,
 				DirectiveType = direcdto.DirectiveType.HasValue ? DirectiveType.Items.GetItemById(direcdto.DirectiveType.Value) : DirectiveType.Unknown,
 				Description = direcdto.Description,
-
 				EngineeringOrders = direcdto.EngineeringOrders,
 				Cost = direcdto.Cost ?? default(double),
-
 				Highlight = direcdto.Highlight.HasValue ? Highlight.GetHighlightById(direcdto.Highlight.Value) : Highlight.White,
 				Paragraph = direcdto.Paragraph,
 				KitRequired = direcdto.KitRequired,
@@ -2538,7 +2426,6 @@ namespace SmartCore.DtoHelper
 			{
 				foreach (var dto in direcdto.PerformanceRecords)
 				{
-
 					var record = dto.Convert();
 					record.Parent = value;
 					value.PerformanceRecords.Add(record);
@@ -2557,10 +2444,8 @@ namespace SmartCore.DtoHelper
 					var directive = dto.Convert();
 					directive.ParentObject = value;
 					value.Kits.Add(directive);
-
 				}
 			}
-
 
 			return value;
 		}
@@ -2569,11 +2454,10 @@ namespace SmartCore.DtoHelper
 		public static DirectiveDTO Convert(this DeferredItem direc)
 		{
 			return new DirectiveDTO
-
 			{
-
 				ItemId = direc.ItemId,
 				IsDeleted = direc.IsDeleted,
+				CorrectorId = direc.CorrectorId,
 				Title = direc.Title,
 				IsApplicability = direc.IsApplicability,
 				ManHours = direc.ManHours,
@@ -2590,10 +2474,8 @@ namespace SmartCore.DtoHelper
 				Paragraph = direc.Paragraph,
 				KitRequired = direc.KitRequired,
 				HiddenRemarks = direc.HiddenRemarks,
-
 				ADType = (short?)direc.ADType,
 				WorkType = direc.WorkType?.ItemId,
-
 				ServiceBulletinNo = direc.ServiceBulletinNo,
 				StcNo = direc.StcNo,
 				ServiceBulletinFileID = direc.ServiceBulletinFile?.ItemId,
@@ -2601,15 +2483,11 @@ namespace SmartCore.DtoHelper
 				IsClosed = direc.IsClosed,
 				DeferredExtention = direc.DeferredExtention,
 				DeferredMelCdlItem = direc.DeferredMelCdlItem,
-
 				DeferredLogBookRef = direc.DeferredLogBookRef,
-
 				DeferredCategoryId = direc.DeferredCategory?.ItemId ?? -1,
 				AircraftFlight = direc.AircraftFlightId,
-
 				NDTType = (short)(direc.NDTType?.ItemId ?? -1),
 				ComponentId = direc.ParentBaseComponent?.ItemId,
-
 				ATAChapterId = direc.ATAChapter?.ItemId ?? -1,
 				Files = direc.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
 				PerformanceRecords = direc.PerformanceRecords?.Select(i => i.Convert()) as ICollection<DirectiveRecordDTO>,
@@ -2624,8 +2502,8 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = direcdto.ItemId,
 				IsDeleted = direcdto.IsDeleted,
+				CorrectorId = direcdto.CorrectorId,
 				IsApplicability = direcdto.IsApplicability,
-
 				Title = direcdto.Title,
 				ManHours = direcdto.ManHours ?? default(double),
 				Remarks = direcdto.Remarks,
@@ -2659,16 +2537,13 @@ namespace SmartCore.DtoHelper
 				value.Files.AddRange(direcdto.Files.Select(i => i.Convert()));
 
 			if (direcdto.PerformanceRecords != null)
-
 			{
 				foreach (var dto in direcdto.PerformanceRecords)
 				{
 					var record = dto.Convert();
 					record.Parent = value;
 					value.PerformanceRecords.Add(record);
-
 				}
-
 			}
 
 			if (direcdto.CategoriesRecords != null)
@@ -2680,7 +2555,6 @@ namespace SmartCore.DtoHelper
 				{
 					var directive = dto.Convert();
 					directive.ParentObject = value;
-
 					value.Kits.Add(directive);
 				}
 			}
@@ -2694,6 +2568,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = direc.ItemId,
 				IsDeleted = direc.IsDeleted,
+				CorrectorId = direc.CorrectorId,
 				Title = direc.Title,
 				IsApplicability = direc.IsApplicability,
 				Number = direc.Number,
@@ -2710,7 +2585,6 @@ namespace SmartCore.DtoHelper
 				Remarks = direc.Remarks,
 				Threshold = direc.Threshold?.ToBinary(),
 				ThldTypeCond = direc.ThrldTypeCond,
-
 				Applicability = direc.Applicability,
 				DirectiveType = direc.DirectiveType?.ItemId,
 				DamageType = (int) direc.DamageType,
@@ -2718,7 +2592,6 @@ namespace SmartCore.DtoHelper
 				CorrectiveAction = direc.CorrectiveAction,
 				InspectionDocumentsNo = direc.InspectionDocumentsNo,
 				Description = direc.Description,
-
 				EngineeringOrders = direc.EngineeringOrders,
 				EngineeringOrderFileID = direc.EngineeringOrderFile?.ItemId,
 				Cost = direc.Cost,
@@ -2726,15 +2599,12 @@ namespace SmartCore.DtoHelper
 				Paragraph = direc.Paragraph,
 				KitRequired = direc.KitRequired,
 				HiddenRemarks = direc.HiddenRemarks,
-
 				ADType = (short?)direc.ADType,
 				WorkType = direc.WorkType?.ItemId,
 				ServiceBulletinNo = direc.ServiceBulletinNo,
 				StcNo = direc.StcNo,
-
 				ServiceBulletinFileID = direc.ServiceBulletinFile?.ItemId,
 				ADFileID = direc.ADNoFile?.ItemId,
-
 				IsClosed = direc.IsClosed,
 				AircraftFlight = direc.AircraftFlightId,
 				NDTType = (short)(direc.NDTType?.ItemId ?? -1),
@@ -2745,7 +2615,6 @@ namespace SmartCore.DtoHelper
 				PerformanceRecords = direc.PerformanceRecords?.Select(i => i.Convert()) as ICollection<DirectiveRecordDTO>,
 				CategoriesRecords = direc.CategoriesRecords?.Select(i => i.Convert()) as ICollection<CategoryRecordDTO>,
 				Kits = direc.Kits?.Select(i => i.Convert()) as ICollection<AccessoryRequiredDTO>
-
 			};
 		}
 
@@ -2754,38 +2623,31 @@ namespace SmartCore.DtoHelper
 			var value = new DamageItem()
 			{
 				ItemId = direcdto.ItemId,
-
 				IsDeleted = direcdto.IsDeleted,
+				CorrectorId = direcdto.CorrectorId,
 				Number = direcdto.Number,
 				Location = direcdto.Location,
 				IsTemporary = direcdto.IsTemporary,
 				DamageLenght = direcdto.DamageLenght,
-
 				DamageWidth = direcdto.DamageWidth,
 				DamageDepth = direcdto.DamageDepth,
 				DamageLenghtLimit = direcdto.DamageLenghtLimit,
 				DamageWidthLimit = direcdto.DamageWidthLimit,
 				DamageDepthLimit = direcdto.DamageDepthLimit,
-
 				DamageMeasure = Measure.Items.GetItemById(direcdto.DamageMeasure),
 				DamageType = (DamageType) direcdto.DamageType,
-
 				DamageClass = (DamageClass) direcdto.DamageClass,
 				CorrectiveAction = direcdto.CorrectiveAction,
 				InspectionDocumentsNo = direcdto.InspectionDocumentsNo,
 				IsApplicability = direcdto.IsApplicability,
-
 				Title = direcdto.Title,
 				ManHours = direcdto.ManHours ?? default(double),
 				Remarks = direcdto.Remarks,
 				Threshold = DirectiveThreshold.ConvertFromByteArray(direcdto.Threshold),
 				ThrldTypeCond = direcdto.ThldTypeCond,
-
 				Applicability = direcdto.Applicability,
 				DirectiveType = direcdto.DirectiveType.HasValue ? DirectiveType.Items.GetItemById(direcdto.DirectiveType.Value) : DirectiveType.Unknown,
-
 				Description = direcdto.Description,
-
 				EngineeringOrders = direcdto.EngineeringOrders,
 				Cost = direcdto.Cost ?? default(double),
 				Highlight = direcdto.Highlight.HasValue ? Highlight.GetHighlightById(direcdto.Highlight.Value) : Highlight.White,
@@ -2797,29 +2659,23 @@ namespace SmartCore.DtoHelper
 				ServiceBulletinNo = direcdto.ServiceBulletinNo,
 				StcNo = direcdto.StcNo,
 				IsClosed = direcdto.IsClosed ?? default(bool),
-
 				AircraftFlightId = direcdto.AircraftFlight ?? default(int),
 				NDTType = NDTType.GetItemById(direcdto.NDTType),
 				ParentBaseComponent = direcdto.BaseComponent?.ConvertToBaseComponent(),
 				ATAChapter = direcdto.ATAChapter?.Convert()
-
 			};
-
 
 			if (direcdto.Files != null)
 				value.Files.AddRange(direcdto.Files.Select(i => i.Convert()));
-
-
+			
 			if (direcdto.DamageDocs != null)
 				value.DamageDocs.AddRange(direcdto.DamageDocs.Select(i => i.Convert()));
-
-
+			
 			if (direcdto.PerformanceRecords != null)
 			{
 				foreach (var dto in direcdto.PerformanceRecords)
 				{
 					var record = dto.Convert();
-
 					record.Parent = value;
 					value.PerformanceRecords.Add(record);
 				}
@@ -2842,16 +2698,14 @@ namespace SmartCore.DtoHelper
 			return value;
 
 		}
-
-
-
-
+		
 		public static DirectiveRecord Convert(this DirectiveRecordDTO dirrecdto)
 		{
 			var value = new DirectiveRecord()
 			{
 				ItemId = dirrecdto.ItemId,
 				IsDeleted = dirrecdto.IsDeleted,
+				CorrectorId = dirrecdto.CorrectorId,
 				PerformanceNum = dirrecdto.NumGroup ?? default(int),
 				RecordTypeId = dirrecdto.RecordTypeID,
 				ParentId = dirrecdto.ParentID,
@@ -2860,7 +2714,6 @@ namespace SmartCore.DtoHelper
 				RecordDate = dirrecdto.RecordDate,
 				OnLifelength = Lifelength.ConvertFromByteArray(dirrecdto.OnLifelength),
 				Unused = Lifelength.ConvertFromByteArray(dirrecdto.Unused),
-
 				Overused = Lifelength.ConvertFromByteArray(dirrecdto.Overused),
 				DirectivePackageId = dirrecdto.WorkPackageID ?? default(int),
 				Dispatched = dirrecdto.Dispatched ??DateTimeExtend.GetCASMinDateTime(),
@@ -2871,8 +2724,7 @@ namespace SmartCore.DtoHelper
 				MaintenanceDirectiveRecordId = dirrecdto.MaintenanceDirectiveRecordId ?? default(int),
 				MaintenanceCheckRecordId = dirrecdto.MaintenanceCheckRecordId ?? default(int)
 			};
-
-
+			
 			if (dirrecdto.Files != null)
 				value.Files.AddRange(dirrecdto.Files.Select(i => i.Convert()));
 
@@ -2882,27 +2734,23 @@ namespace SmartCore.DtoHelper
 		public static DirectiveRecordDTO Convert(this DirectiveRecord dirrec)
 		{
 			return new DirectiveRecordDTO
-
 			{
 				ItemId = dirrec.ItemId,
 				IsDeleted = dirrec.IsDeleted,
+				CorrectorId = dirrec.CorrectorId,
 				NumGroup = dirrec.PerformanceNum,
 				RecordTypeID = dirrec.RecordTypeId,
-
 				ParentID = dirrec.ParentId,
-
 				ParentTypeId = dirrec.ParentType?.ItemId ?? -1,
 				Remarks = dirrec.Remarks,
 				RecordDate = dirrec.RecordDate,
 				OnLifelength = dirrec.OnLifelength?.ConvertToByteArray(),
 				Unused = dirrec.Unused?.ConvertToByteArray(),
 				Overused = dirrec.Overused?.ConvertToByteArray(),
-
 				WorkPackageID = dirrec.DirectivePackageId,
 				Dispatched = dirrec.Dispatched,
 				Completed = dirrec.Completed,
 				Reference = dirrec.Reference,
-
 				ODR = dirrec.ODR,
 				MaintenanceOrganization = dirrec.MaintenanceOrganization,
 				MaintenanceDirectiveRecordId = dirrec.MaintenanceDirectiveRecordId,
@@ -2910,14 +2758,14 @@ namespace SmartCore.DtoHelper
 				Files = dirrec.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>
 			};
 		}
-
-
+		
 		public static MaintenanceCheckRecord ConvertToMaintenanceCheckRecord(this DirectiveRecordDTO dirrecdto)
 		{
 			var value = new MaintenanceCheckRecord
 			{
 				ItemId = dirrecdto.ItemId,
 				IsDeleted = dirrecdto.IsDeleted,
+				CorrectorId = dirrecdto.CorrectorId,
 				IsControlPoint = dirrecdto.IsControlPoint,
 				CalculatedPerformanceSource = Lifelength.ConvertFromByteArray(dirrecdto.CalculatedPerformanceSource),
 				ComplianceCheckName = dirrecdto.ComplianceCheckName,
@@ -2939,11 +2787,11 @@ namespace SmartCore.DtoHelper
 
 		public static DirectiveRecordDTO Convert(this MaintenanceCheckRecord dirrecdto)
 		{
-
 			return new DirectiveRecordDTO
 			{
 				ItemId = dirrecdto.ItemId,
 				IsDeleted = dirrecdto.IsDeleted,
+				CorrectorId = dirrecdto.CorrectorId,
 				IsControlPoint = dirrecdto.IsControlPoint,
 				CalculatedPerformanceSource = dirrecdto.CalculatedPerformanceSource?.ConvertToByteArray(),
 				ComplianceCheckName = dirrecdto.ComplianceCheckName,
@@ -2952,31 +2800,25 @@ namespace SmartCore.DtoHelper
 				ParentTypeId = dirrecdto.ParentType?.ItemId ?? -1,
 				Remarks = dirrecdto.Remarks,
 				RecordDate = dirrecdto.RecordDate,
-
 				OnLifelength = dirrecdto.OnLifelength?.ConvertToByteArray(),
-
 				WorkPackageID = dirrecdto.DirectivePackageId,
 				FilesForMaintenanceCheckRecord = (ICollection<ItemFileLinkDTO>) dirrecdto.Files?.Select(i => i.Convert())//TODO:Файлы юзаюстя разные с DirectiveRecord
-
 			};
 		}
 
 
 		public static DiscrepancyDTO Convert(this Discrepancy disc)
 		{
-
 			return new DiscrepancyDTO
 			{
-
 				ItemId = disc.ItemId,
 				IsDeleted = disc.IsDeleted,
+				CorrectorId = disc.CorrectorId,
 				FlightID = disc.FlightId,
 				FilledBy = disc.FilledBy,
 				Description = disc.Description,
 				PilotRemarks = disc.PilotRemarks,
-
 				ATAChapterID = disc.ATAChapter?.ItemId ?? -1,
-
 				DirectiveId = disc.DirectiveId,
 				Num = disc.Num,
 				Remarks = disc.Remark,
@@ -2984,28 +2826,22 @@ namespace SmartCore.DtoHelper
 				EngineShutUp = disc.EngineShutUp,
 				BaseComponentId = disc.BaseComponentId,
 				FDR = disc.FDR,
-
 				AuthId = disc.Auth?.ItemId ?? -1,
-
 				Messages = disc.Messages,
 				WorkPackageId = disc.WorkPackageId,
 				IsReliability = disc.IsReliability,
 				Status = (int)disc.Status,
 				IsOccurrence = disc.IsOccurrence,
-
 				Substruction = disc.Substruction,
 				TimeDelay = disc.TimeDelay,
-
 				ConsequenceType = disc.ConsequenceType?.ItemId ?? -1,
 				DeffectConfirm = disc.DeffectConfirm?.ItemId ?? -1,
-
 				DeffeсtPhase = disc.DeffeсtPhase?.ItemId ?? -1,
 				DeffeсtCategory = disc.DeffeсtCategory?.ItemId ?? -1,
 				ActionType = disc.ActionType?.ItemId ?? -1,
 				InterruptionType = disc.InterruptionType?.ItemId ?? -1,
 				ConsequenceOps = disc.ConsequenceOps?.ItemId ?? -1,
 				Occurrence = disc.Occurrence?.ItemId ?? -1,
-
 				ConsequenceFault = disc.ConsequenceFault?.ItemId ?? -1
 			};
 		}
@@ -3013,11 +2849,10 @@ namespace SmartCore.DtoHelper
 		public static Discrepancy Convert(this DiscrepancyDTO discdto)
 		{
 			return new Discrepancy()
-
 			{
 				ItemId = discdto.ItemId,
-
 				IsDeleted = discdto.IsDeleted,
+				CorrectorId = discdto.CorrectorId,
 				FlightId = discdto.FlightID,
 				IsReliability = discdto.IsReliability,
 				IsOccurrence = discdto.IsOccurrence,
@@ -3035,41 +2870,31 @@ namespace SmartCore.DtoHelper
 				PilotRemarks = discdto.PilotRemarks,
 				ATAChapter = discdto.ATAChapter?.Convert(),
 				DirectiveId = discdto.DirectiveId,
-
 				Num = discdto.Num ?? default(int),
-
 				WorkPackageId = discdto.WorkPackageId ?? default(int),
-
 				TimeDelay = discdto.TimeDelay,
-
 				Occurrence = OccurrenceType.GetItemById(discdto.Occurrence),
 				DeffectConfirm = DeffectConfirm.GetItemById(discdto.DeffectConfirm),
 				InterruptionType = InterruptionType.GetItemById(discdto.InterruptionType),
-
 				DeffeсtPhase = DeffeсtPhase.GetItemById(discdto.DeffeсtPhase),
 				DeffeсtCategory = DeffeсtCategory.GetItemById(discdto.DeffeсtCategory),
-
 				ActionType = ActionType.GetItemById(discdto.ActionType),
 				ConsequenceOps = ConsequenceOPS.GetItemById(discdto.ConsequenceOps),
 				ConsequenceFault = ConsequenceFaults.GetItemById(discdto.ConsequenceFault),
 				ConsequenceType = IncidentType.GetItemById(discdto.ConsequenceType)
-
 			};
 		}
-
-
 		
 		public static EngineAccelerationTimeDTO Convert(this EngineAccelerationTime engacctime)
 		{
 			return new EngineAccelerationTimeDTO
 			{
-
 				ItemId = engacctime.ItemId,
 				IsDeleted = engacctime.IsDeleted,
+				CorrectorId = engacctime.CorrectorId,
 				FlightId = engacctime.FlightId,
 				EngineId = engacctime.BaseComponentId,
 				AccelerationTime = engacctime.AccelerationTime,
-
 				RecordDate = engacctime.RecordDate,
 				AccelerationTimeAir = engacctime.AccelerationTimeAir
 			};
@@ -3081,6 +2906,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = engacctimedto.ItemId,
 				IsDeleted = engacctimedto.IsDeleted,
+				CorrectorId = engacctimedto.CorrectorId,
 				FlightId = engacctimedto.FlightId ?? default(int),
 				BaseComponentId = engacctimedto.EngineId ?? default(int),
 				AccelerationTime = engacctimedto.AccelerationTime ?? default(int),
@@ -3096,9 +2922,9 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = engtimeinregime.ItemId,
 				IsDeleted = engtimeinregime.IsDeleted,
+				CorrectorId = engtimeinregime.CorrectorId,
 				FlightId = engtimeinregime.FlightId,
 				EngineId = engtimeinregime.BaseComponentId,
-
 				FlightRegimeId = engtimeinregime.FlightRegime?.ItemId,
 				TimeInRegime = (int?)engtimeinregime.TimeInRegime.Ticks,
 				RecordDate = engtimeinregime.RecordDate,
@@ -3109,11 +2935,11 @@ namespace SmartCore.DtoHelper
 
 		public static EngineTimeInRegime Convert(this EngineTimeInRegimeDTO engtimeinregimedto)
 		{
-
 			return new EngineTimeInRegime()
 			{
 				ItemId = engtimeinregimedto.ItemId,
 				IsDeleted = engtimeinregimedto.IsDeleted,
+				CorrectorId = engtimeinregimedto.CorrectorId,
 				FlightId = engtimeinregimedto.FlightId,
 				BaseComponentId = engtimeinregimedto.EngineId ?? default(int),
 				FlightRegime = engtimeinregimedto.FlightRegimeId.HasValue ? FlightRegime.Items.GetItemById(engtimeinregimedto.FlightRegimeId.Value) : FlightRegime.UNK,
@@ -3124,14 +2950,13 @@ namespace SmartCore.DtoHelper
 		}
 
 		public static EventConditionDTO Convert(this EventCondition evtcond)
-
 		{
 			return new EventConditionDTO
 			{
 				ItemId = evtcond.ItemId,
 				IsDeleted = evtcond.IsDeleted,
+				CorrectorId = evtcond.CorrectorId,
 				EventConditionTypeId = evtcond.EventConditionType?.ItemId,
-
 				ValueId = (int?)evtcond.Value,
 				ParentId = evtcond.ParentId,
 				ParentTypeId = evtcond.ParentType?.ItemId
@@ -3144,9 +2969,9 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = evtconddto.ItemId,
 				IsDeleted = evtconddto.IsDeleted,
+				CorrectorId = evtconddto.CorrectorId,
 				EventConditionType = evtconddto.EventConditionTypeId.HasValue ? SmartCoreType.Items.GetItemById(evtconddto.EventConditionTypeId.Value) : SmartCoreType.Unknown,
 				Value = evtconddto.ValueId,
-
 				ParentId = evtconddto.ParentId ?? default(int),
 				ParentType = evtconddto.ParentTypeId.HasValue ? SmartCoreType.Items.GetItemById(evtconddto.ParentTypeId.Value) : SmartCoreType.Unknown
 			};
@@ -3158,9 +2983,9 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = evnt.ItemId,
 				IsDeleted = evnt.IsDeleted,
+				CorrectorId = evnt.CorrectorId,
 				EventTypeId = evnt.EventType?.ItemId,
 				EventCategoryId = evnt.EventCategory?.ItemId,
-
 				EventClassId = evnt.EventClass?.ItemId,
 				IncidentTypeId = evnt.IncidentType?.ItemId,
 				RecordDate = evnt.RecordDate,
@@ -3181,6 +3006,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = evntdto.ItemId,
 				IsDeleted = evntdto.IsDeleted,
+				CorrectorId = evntdto.CorrectorId,
 				EventType = evntdto.EventType?.Convert(),
 				EventCategory = evntdto.EventCategory?.Convert(),
 				EventClass = evntdto.EventClass?.Convert(),
@@ -3188,11 +3014,9 @@ namespace SmartCore.DtoHelper
 				RecordDate = evntdto.RecordDate ?? DateTimeExtend.GetCASMinDateTime(),
 				ParentType = evntdto.ParentTypeId.HasValue ? SmartCoreType.Items.GetItemById(evntdto.ParentTypeId.Value) : SmartCoreType.Unknown,
 				ParentId = evntdto.ParentId ?? default(int),
-
 				Remarks = evntdto.Remarks,
 				Description = evntdto.Description,
 				EventStatus = evntdto.EventStatusId.HasValue ? SmsEventStatus.Items.GetItemById(evntdto.EventStatusId.Value) : SmsEventStatus.UNK,
-
 				AircraftId = evntdto.AircraftId ?? default(int)
 			};
 
@@ -3200,7 +3024,6 @@ namespace SmartCore.DtoHelper
 				value.EventConditions.AddRange(evntdto.EventConditions.Select(i => i.Convert()));
 
 			return value;
-
 		}
 
 		public static EventTypeRiskLevelChangeRecordDTO Convert(this EventTypeRiskLevelChangeRecord evtrisklvl)
@@ -3209,15 +3032,14 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = evtrisklvl.ItemId,
 				IsDeleted = evtrisklvl.IsDeleted,
+				CorrectorId = evtrisklvl.CorrectorId,
 				EventCategoryId = evtrisklvl.EventCategory?.ItemId,
 				EventClassId = evtrisklvl.EventClass?.ItemId,
 				IncidentTypeId = evtrisklvl.IncidentType?.ItemId,
 				RecordDate = evtrisklvl.RecordDate,
-
 				Remarks = evtrisklvl.Remarks,
 				ParentId = evtrisklvl.ParentEventType?.ItemId,
 			};
-
 		}
 
 		public static EventTypeRiskLevelChangeRecord Convert(this EventTypeRiskLevelChangeRecordDTO evtrisklvldto)
@@ -3226,15 +3048,13 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = evtrisklvldto.ItemId,
 				IsDeleted = evtrisklvldto.IsDeleted,
+				CorrectorId = evtrisklvldto.CorrectorId,
 				EventCategory = evtrisklvldto.EventCategory?.Convert(),
 				EventClass = evtrisklvldto.EventClass?.Convert(),
-
 				IncidentType = evtrisklvldto.IncidentTypeId.HasValue ? IncidentType.Items.GetItemById(evtrisklvldto.IncidentTypeId.Value) : IncidentType.UNK,
-
 				RecordDate = evtrisklvldto.RecordDate ?? DateTimeExtend.GetCASMinDateTime(),
 				Remarks = evtrisklvldto.Remarks,
 				ParentEventType = evtrisklvldto.ParentEventType?.Convert()
-
 			};
 		}
 
@@ -3244,11 +3064,9 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = cargorec.ItemId,
 				IsDeleted = cargorec.IsDeleted,
-
+				CorrectorId = cargorec.CorrectorId,
 				FlightId = cargorec.FlightId,
-
 				CargoCategory = cargorec.CargoCategory?.ItemId,
-
 				Weigth = cargorec.Weigth,
 				Measure = cargorec.Measure?.ItemId,
 				RecordDate = cargorec.RecordDate,
@@ -3259,28 +3077,25 @@ namespace SmartCore.DtoHelper
 		{
 			return new FlightCargoRecord()
 			{
-
 				ItemId = cargorecdto.ItemId,
 				IsDeleted = cargorecdto.IsDeleted,
+				CorrectorId = cargorecdto.CorrectorId,
 				FlightId = cargorecdto.FlightId ?? default(int),
 				CargoCategory = cargorecdto.CargoCategory.HasValue ? CargoCategory.Items.GetItemById(cargorecdto.CargoCategory.Value) : CargoCategory.UNK,
 				Weigth = cargorecdto.Weigth ?? default(double),
 				Measure = cargorecdto.Measure.HasValue ? Measure.Items.GetItemById(cargorecdto.Measure.Value) : Measure.Unknown,
 				RecordDate = cargorecdto.RecordDate ?? DateTimeExtend.GetCASMinDateTime()
 			};
-
 		}
 
 
 		public static FlightCrewRecordDTO Convert(this FlightCrewRecord crewrec)
 		{
-
 			return new FlightCrewRecordDTO
 			{
-
 				ItemId = crewrec.ItemId,
 				IsDeleted = crewrec.IsDeleted,
-
+				CorrectorId = crewrec.CorrectorId,
 				FlightID = crewrec.FlightId,
 				SpecialistID = crewrec.Specialist?.ItemId,
 				SpecializationID = crewrec.Specialization?.ItemId,
@@ -3296,6 +3111,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = crewrecdto.ItemId,
 				IsDeleted = crewrecdto.IsDeleted,
+				CorrectorId = crewrecdto.CorrectorId,
 				FlightId = crewrecdto.FlightID,
 				Specialist = crewrecdto.Specialist?.Convert(),
 				Specialization = crewrecdto.Specialization?.Convert(),
@@ -3312,8 +3128,8 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = airmodrel.ItemId,
 				IsDeleted = airmodrel.IsDeleted,
+				CorrectorId = airmodrel.CorrectorId,
 				AircraftModelId = airmodrel.AircraftModel?.ItemId,
-
 				FlightNumberId = airmodrel.FlightNumber?.ItemId,
 			};
 		}
@@ -3325,10 +3141,9 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = airmodreldto.ItemId,
 				IsDeleted = airmodreldto.IsDeleted,
+				CorrectorId = airmodreldto.CorrectorId,
 				AircraftModel = airmodreldto.AircraftModel?.ConvertToAircraftModel(),
-
 				FlightNumber = airmodreldto.FlightNumber?.Convert()
-
 			};
 		}
 
@@ -3337,9 +3152,9 @@ namespace SmartCore.DtoHelper
 		{
 			return new FlightNumberAirportRelationDTO
 			{
-
 				ItemId = airprelation.ItemId,
 				IsDeleted = airprelation.IsDeleted,
+				CorrectorId = airprelation.CorrectorId,
 				FlightNumberId = airprelation.FlightNumber?.ItemId,
 				AirportId = airprelation.Airport?.ItemId,
 			};
@@ -3347,15 +3162,14 @@ namespace SmartCore.DtoHelper
 
 		public static FlightNumberAirportRelation Convert(this FlightNumberAirportRelationDTO airprelationdto)
 		{
-
 			return new FlightNumberAirportRelation()
 			{
 				ItemId = airprelationdto.ItemId,
 				IsDeleted = airprelationdto.IsDeleted,
+				CorrectorId = airprelationdto.CorrectorId,
 				FlightNumber = airprelationdto.FlightNumber?.Convert(),
 				Airport = airprelationdto.Airport?.Convert()
 			};
-
 		}
 
 
@@ -3364,8 +3178,8 @@ namespace SmartCore.DtoHelper
 			return new FlightNumberCrewRecordDTO
 			{
 				ItemId = flightcrewrec.ItemId,
-
 				IsDeleted = flightcrewrec.IsDeleted,
+				CorrectorId = flightcrewrec.CorrectorId,
 				FlightNumberId = flightcrewrec.FlightNumber?.ItemId,
 				SpecializationId = flightcrewrec.Specialization?.ItemId,
 				Count = flightcrewrec.Count,
@@ -3373,12 +3187,12 @@ namespace SmartCore.DtoHelper
 		}
 
 		public static FlightNumberCrewRecord Convert(this FlightNumberCrewRecordDTO flightcrewrecdto)
-
 		{
 			return new FlightNumberCrewRecord()
 			{
 				ItemId = flightcrewrecdto.ItemId,
 				IsDeleted = flightcrewrecdto.IsDeleted,
+				CorrectorId = flightcrewrecdto.CorrectorId,
 				FlightNumber = flightcrewrecdto.FlightNumber?.Convert(),
 				Specialization = flightcrewrecdto.Specialization?.Convert(),
 				Count = flightcrewrecdto.Count ?? default(int)
@@ -3388,12 +3202,11 @@ namespace SmartCore.DtoHelper
 
 		public static FlightNumberDTO Convert(this FlightNumber flightnum)
 		{
-
 			return new FlightNumberDTO
 			{
-
 				ItemId = flightnum.ItemId,
 				IsDeleted = flightnum.IsDeleted,
+				CorrectorId = flightnum.CorrectorId,
 				FlightNoId = flightnum.FlightNo?.ItemId ?? -1,
 				Remarks = flightnum.Description,
 				HiddenRemarks = flightnum.HiddenRemarks,
@@ -3404,7 +3217,6 @@ namespace SmartCore.DtoHelper
 				MaxTakeOffWeight = flightnum.MaxTakeOffWeight,
 				MaxLandWeight = flightnum.MaxLandWeight,
 				FlightAircraftCode = (int?)flightnum.FlightAircraftCode,
-
 				FlightType = flightnum.FlightType.ItemId,
 				FlightCategory = (int?)flightnum.FlightCategory,
 				Distance = flightnum.Distance,
@@ -3412,7 +3224,6 @@ namespace SmartCore.DtoHelper
 				StationFromId = flightnum.StationFrom?.ItemId,
 				StationToId = flightnum.StationTo?.ItemId,
 				MinLevelId = flightnum.MinLevel?.ItemId,
-
 				MaxPassengerAmount = flightnum.MaxPassengerAmount,
 				Threshold = flightnum.Threshold?.ToBinary(),
 				IsClosed = flightnum.IsClosed
@@ -3420,32 +3231,25 @@ namespace SmartCore.DtoHelper
 		}
 
 		public static FlightNumber Convert(this FlightNumberDTO flightnumdto)
-
 		{
 			return new FlightNumber
 			{
-
 				ItemId = flightnumdto.ItemId,
 				IsDeleted = flightnumdto.IsDeleted,
-
+				CorrectorId = flightnumdto.CorrectorId,
 				FlightNo = flightnumdto.FlightNo?.Convert(),
 				Remarks = flightnumdto.Description,
 				HiddenRemarks = flightnumdto.HiddenRemarks,
 				MaxFuelAmount = flightnumdto.MaxFuelAmount ?? default(double),
 				MinFuelAmount = flightnumdto.MinFuelAmount ?? default(double),
 				MaxPayload = flightnumdto.MaxPayload ?? default(double),
-
 				MaxCargoWeight = flightnumdto.MaxCargoWeight ?? default(double),
-
 				MaxTakeOffWeight = flightnumdto.MaxTakeOffWeight ?? default(double),
 				MaxLandWeight = flightnumdto.MaxLandWeight ?? default(double),
 				FlightAircraftCode = flightnumdto.FlightAircraftCode.HasValue ? (FlightAircraftCode)flightnumdto.FlightAircraftCode.Value : FlightAircraftCode.Unknown,
-
 				FlightType = FlightType.Items.GetItemById(flightnumdto.FlightType),
-
 				FlightCategory = flightnumdto.FlightCategory.HasValue ? (FlightCategory) flightnumdto.FlightCategory.Value : FlightCategory.Unknown,
 				Distance = flightnumdto.Distance ?? default(int),
-
 				DistanceMeasure = flightnumdto.DistanceMeasure.HasValue ? Measure.Items.GetItemById(flightnumdto.DistanceMeasure.Value) : Measure.Unknown,
 				StationFrom = flightnumdto.StationFrom?.Convert(),
 				StationTo = flightnumdto.StationTo?.Convert(),
@@ -3462,22 +3266,20 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = numperiod.ItemId,
 				IsDeleted = numperiod.IsDeleted,
+				CorrectorId = numperiod.CorrectorId,
 				FlightNumberId = numperiod.FlightNumberId,
 				PeriodFrom = numperiod.PeriodFrom,
 				PeriodTo = numperiod.PeriodTo,
 				IsMonday = numperiod.IsMonday,
 				IsThursday = numperiod.IsThursday,
 				IsWednesday = numperiod.IsWednesday,
-
 				IsTuesday = numperiod.IsTuesday,
 				IsFriday = numperiod.IsFriday,
 				IsSaturday = numperiod.IsSaturday,
-
 				IsSunday = numperiod.IsSunday,
 				DepartureDate = numperiod.DepartureDate,
 				ArrivalDate = numperiod.ArrivalDate,
 				Schedule = (int)numperiod.Schedule
-
 			};
 		}
 
@@ -3485,9 +3287,9 @@ namespace SmartCore.DtoHelper
 		{
 			return new FlightNumberPeriod()
 			{
-
 				ItemId = numperioddto.ItemId,
 				IsDeleted = numperioddto.IsDeleted,
+				CorrectorId = numperioddto.CorrectorId,
 				FlightNumberId = numperioddto.FlightNumberId,
 				PeriodFrom = numperioddto.PeriodFrom ?? default(int),
 				PeriodTo = numperioddto.PeriodTo ?? default(int),
@@ -3495,7 +3297,6 @@ namespace SmartCore.DtoHelper
 				IsThursday = numperioddto.IsThursday ?? default(bool),
 				IsWednesday = numperioddto.IsWednesday ?? default(bool),
 				IsTuesday = numperioddto.IsTuesday ?? default(bool),
-
 				IsFriday = numperioddto.IsFriday ?? default(bool),
 				IsSaturday = numperioddto.IsSaturday ?? default(bool),
 				IsSunday = numperioddto.IsSunday ?? default(bool),
@@ -3504,39 +3305,34 @@ namespace SmartCore.DtoHelper
 				Schedule = (Schedule)numperioddto.Schedule
 			};
 		}
-
-
+		
 		public static FlightPassengerRecordDTO Convert(this FlightPassengerRecord passengerrec)
 		{
 			return new FlightPassengerRecordDTO
 			{
 				ItemId = passengerrec.ItemId,
 				IsDeleted = passengerrec.IsDeleted,
+				CorrectorId = passengerrec.CorrectorId,
 				FlightId = passengerrec.FlightId,
 				PassengerCategoryId = passengerrec.PassengerCategory?.ItemId,
-
 				CountEconomy = passengerrec.CountEconomy,
 				CountBusiness = passengerrec.CountBusiness,
-
 				CountFirst = passengerrec.CountFirst,
-
 				RecordDate = passengerrec.RecordDate,
 			};
-
 		}
 
 		public static FlightPassengerRecord Convert(this FlightPassengerRecordDTO passengerrecdto)
-
 		{
 			return new FlightPassengerRecord()
 			{
 				ItemId = passengerrecdto.ItemId,
 				IsDeleted = passengerrecdto.IsDeleted,
+				CorrectorId = passengerrecdto.CorrectorId,
 				FlightId = passengerrecdto.FlightId ?? default(int),
 				PassengerCategory = passengerrecdto.PassengerCategory?.Convert(),
 				CountEconomy = passengerrecdto.CountEconomy ?? default(short),
 				CountBusiness = passengerrecdto.CountBusiness ?? default(short),
-
 				CountFirst = passengerrecdto.CountFirst ?? default(short),
 				RecordDate = passengerrecdto.RecordDate ?? DateTimeExtend.GetCASMinDateTime()
 			};
@@ -3546,11 +3342,10 @@ namespace SmartCore.DtoHelper
 		{
 			return new FlightPlanOpsDTO
 			{
-
 				ItemId = planops.ItemId,
 				IsDeleted = planops.IsDeleted,
+				CorrectorId = planops.CorrectorId,
 				Remarks = planops.Remarks,
-
 				DateFrom = planops.From,
 				DateTo = planops.To,
 			};
@@ -3562,6 +3357,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = planopsdto.ItemId,
 				IsDeleted = planopsdto.IsDeleted,
+				CorrectorId = planopsdto.CorrectorId,
 				Remarks = planopsdto.Remarks,
 				To = planopsdto.DateTo ?? DateTimeExtend.GetCASMinDateTime(),
 				From = planopsdto.DateFrom ?? DateTimeExtend.GetCASMinDateTime()
@@ -3575,9 +3371,9 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = planopsrec.ItemId,
 				IsDeleted = planopsrec.IsDeleted,
+				CorrectorId = planopsrec.CorrectorId,
 				FlightPlanOpsId = planopsrec.ParentFlightPlanOps?.ItemId,
 				AircraftId = planopsrec.AircraftId,
-
 				AircraftExchangeId = planopsrec.AircraftExchangeId,
 				DelayReasonId = planopsrec.DelayReason?.ItemId,
 				CancelReasonId = planopsrec.CancelReason?.ItemId,
@@ -3587,7 +3383,6 @@ namespace SmartCore.DtoHelper
 				PeriodTo = planopsrec.PeriodTo,
 				PlanDate = planopsrec.Date,
 				ParentFlightId = planopsrec.ParentFlightId,
-
 				Remarks = planopsrec.Remarks,
 				HiddenRemarks = planopsrec.HiddenRemarks,
 				IsDispatcherEdit = planopsrec.IsDispatcherEdit,
@@ -3600,9 +3395,9 @@ namespace SmartCore.DtoHelper
 		{
 			return new FlightPlanOpsRecords()
 			{
-
 				ItemId = planopsrecdto.ItemId,
 				IsDeleted = planopsrecdto.IsDeleted,
+				CorrectorId = planopsrecdto.CorrectorId,
 				ParentFlightPlanOps = planopsrecdto.ParentFlightPlanOps?.Convert(),
 				AircraftId = planopsrecdto.AircraftId ?? default(int),
 				AircraftExchangeId = planopsrecdto.AircraftExchangeId ?? default(int),
@@ -3611,14 +3406,11 @@ namespace SmartCore.DtoHelper
 				Reason = planopsrecdto.Reason?.Convert(),
 				FlightTrackRecordId = planopsrecdto.FlightTrackRecordId ?? default(int),
 				PeriodFrom = planopsrecdto.PeriodFrom ?? default(int),
-
 				PeriodTo = planopsrecdto.PeriodTo ?? default(int),
 				Date = planopsrecdto.PlanDate ?? DateTimeExtend.GetCASMinDateTime(),
-
 				ParentFlightId = planopsrecdto.ParentFlightId ?? default(int),
 				Remarks = planopsrecdto.Remarks,
 				HiddenRemarks = planopsrecdto.HiddenRemarks,
-
 				IsDispatcherEdit = planopsrecdto.IsDispatcherEdit ?? default(bool),
 				IsDispatcherEditLdg = planopsrecdto.IsDispatcherEditLdg ?? default(bool),
 				Status = OpsStatus.Items.GetItemById(planopsrecdto.StatusId)
@@ -3627,18 +3419,17 @@ namespace SmartCore.DtoHelper
 
 		public static FlightTrackDTO Convert(this FlightTrack fltrack)
 		{
-
 			return new FlightTrackDTO
 			{
 				ItemId = fltrack.ItemId,
 				IsDeleted = fltrack.IsDeleted,
+				CorrectorId = fltrack.CorrectorId,
 				Remarks = fltrack.Remarks,
 				DayOfWeek = fltrack.DayOfWeek?.ItemId,
 				TripNameId = fltrack.TripName?.ItemId,
 				SupplierID = fltrack.Supplier?.ItemId ?? -1,
 				FlightTripRecord = fltrack.FlightTripRecord?.Select(i => i.Convert()) as ICollection<FlightTrackRecordDTO>
 			};
-
 		}
 
 		public static FlightTrack Convert(this FlightTrackDTO fltrackdto)
@@ -3647,7 +3438,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = fltrackdto.ItemId,
 				IsDeleted = fltrackdto.IsDeleted,
-
+				CorrectorId = fltrackdto.CorrectorId,
 				Remarks = fltrackdto.Remarks,
 				DayOfWeek = fltrackdto.DayOfWeek.HasValue ? DayofWeek.Items.GetItemById(fltrackdto.DayOfWeek.Value) : DayofWeek.Unknown,
 				TripName = fltrackdto.TripName?.Convert(),
@@ -3658,16 +3449,15 @@ namespace SmartCore.DtoHelper
 				value.FlightTripRecord.AddRange(fltrackdto.FlightTripRecord.Select(i => i.Convert()));
 
 			return value;
-
 		}
 
 		public static FlightTrackRecordDTO Convert(this FlightTrackRecord trackrec)
 		{
-
 			return new FlightTrackRecordDTO
 			{
 				ItemId = trackrec.ItemId,
 				IsDeleted = trackrec.IsDeleted,
+				CorrectorId = trackrec.CorrectorId,
 				FlightTripId = trackrec.FlightTripId,
 				FlightPeriodId = trackrec.FlightPeriodId
 			};
@@ -3678,24 +3468,21 @@ namespace SmartCore.DtoHelper
 		{
 			return new FlightTrackRecord()
 			{
-
 				ItemId = trackrecdto.ItemId,
 				IsDeleted = trackrecdto.IsDeleted,
-
+				CorrectorId = trackrecdto.CorrectorId,
 				FlightTripId = trackrecdto.FlightTripId,
 				FlightPeriodId = trackrecdto.FlightPeriodId ?? default(int)
-
 			};
 		}
 
 		public static HangarDTO Convert(this Hangar hangar)
-
 		{
 			return new HangarDTO
 			{
-
 				ItemId = hangar.ItemId,
 				IsDeleted = hangar.IsDeleted,
+				CorrectorId = hangar.CorrectorId,
 				StoreName = hangar.Name,
 				Location = hangar.Location,
 				OperatorId = hangar.OperatorId,
@@ -3707,16 +3494,14 @@ namespace SmartCore.DtoHelper
 		{
 			return new Hangar()
 			{
-
 				ItemId = hangardto.ItemId,
 				IsDeleted = hangardto.IsDeleted,
+				CorrectorId = hangardto.CorrectorId,
 				Name = hangardto.StoreName,
 				Location = hangardto.Location,
-
 				OperatorId = hangardto.OperatorId ?? default(int),
 				Remarks = hangardto.Remarks
 			};
-
 		}
 
 		public static HydraulicConditionDTO Convert(this HydraulicCondition hydrcondition)
@@ -3725,25 +3510,24 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = hydrcondition.ItemId,
 				IsDeleted = hydrcondition.IsDeleted,
+				CorrectorId = hydrcondition.CorrectorId,
 				FlightId = hydrcondition.FlightId,
-
 				Remain = hydrcondition.Remain,
 				Added = hydrcondition.OilAdded,
 				OnBoard = hydrcondition.OnBoard,
 				Spent = hydrcondition.Spent,
 				RemainAfter = hydrcondition.RemainAfter,
 				HydraulicSystem = hydrcondition.HydraulicSystem
-
 			};
 		}
 
 		public static HydraulicCondition Convert(this HydraulicConditionDTO hydrconditiondto)
 		{
 			return new HydraulicCondition()
-
 			{
 				ItemId = hydrconditiondto.ItemId,
 				IsDeleted = hydrconditiondto.IsDeleted,
+				CorrectorId = hydrconditiondto.CorrectorId,
 				FlightId = hydrconditiondto.FlightId ?? default(int),
 				Remain = hydrconditiondto.Remain ?? default(double),
 				OilAdded = hydrconditiondto.Added ?? default(double),
@@ -3760,23 +3544,10 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = initorder.ItemId,
 				IsDeleted = initorder.IsDeleted,
+				CorrectorId = initorder.CorrectorId,
 				Title = initorder.Title,
-				RFQ = initorder.RFQ,
-				QR = initorder.QR,
-				PO = initorder.PO,
-				Invoice = initorder.Invoice,
-				PickUp = initorder.PickUp,
-				Weight = initorder.Weight,
-				DIMS = initorder.DIMS,
-				CarrierId = initorder.Supplier.ItemId,
-				ShipTo = initorder.ShipTo,
-				ShipBy = initorder.ShipBy.ItemId,
-				ApprovedById = initorder.ApprovedBy.ItemId,
-				PublishedById = initorder.PublishedBy.ItemId,
-				ClosedById = initorder.ClosedBy.ItemId,
-				TypeOfOperation = initorder.TypeOfOperation.ItemId,
-				IncoTerm = initorder.IncoTerm.ItemId,
-				CountryId = initorder.Country.ItemId,
+				PublishedById = initorder.PublishedById,
+				ClosedById = initorder.ClosedById,
 				Description = initorder.Description,
 				Author = initorder.Author,
 				ParentId = initorder.ParentId,
@@ -3785,8 +3556,10 @@ namespace SmartCore.DtoHelper
 				OpeningDate = initorder.OpeningDate,
 				PublishingDate = initorder.PublishingDate,
 				ClosingDate = initorder.ClosingDate,
-
 				Remarks = initorder.Remarks,
+				PublishedByUser = initorder.PublishedByUser,
+				CloseByUser = initorder.CloseByUser,
+				Number = initorder.Number,
 				Files = initorder.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
 				PackageRecords = initorder.PackageRecords?.Select(i => i.Convert()) as ICollection<InitialOrderRecordDTO>
 			};
@@ -3799,32 +3572,22 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = initorderdto.ItemId,
 				IsDeleted = initorderdto.IsDeleted,
+				CorrectorId = initorderdto.CorrectorId,
 				Title = initorderdto.Title,
-				RFQ = initorderdto.RFQ,
-				QR = initorderdto.QR,
-				PO = initorderdto.PO,
-				ShipTo = initorderdto.ShipTo,
-				Weight = initorderdto.Weight,
-				DIMS = initorderdto.DIMS,
-				Invoice = initorderdto.Invoice,
-				PickUp = initorderdto.PickUp,
 				Description = initorderdto.Description,
 				Author = initorderdto.Author,
 				ParentId = initorderdto.ParentId ?? default(int),
 				ParentType = initorderdto.ParentTypeId.HasValue ? SmartCoreType.Items.GetItemById(initorderdto.ParentTypeId.Value) : SmartCoreType.Unknown,
-				TypeOfOperation = TypeOfOperation.GetItemById(initorderdto.TypeOfOperation),
-				ShipBy = ShipBy.GetItemById(initorderdto.ShipBy),
-				IncoTerm = IncoTerm.GetItemById(initorderdto.IncoTerm),
 				Status = initorderdto.Status.HasValue ? (WorkPackageStatus)initorderdto.Status.Value : WorkPackageStatus.All,
 				OpeningDate = initorderdto.OpeningDate ?? DateTimeExtend.GetCASMinDateTime(),
 				PublishingDate = initorderdto.PublishingDate ?? DateTimeExtend.GetCASMinDateTime(),
 				ClosingDate = initorderdto.ClosingDate ?? DateTimeExtend.GetCASMinDateTime(),
 				Remarks = initorderdto.Remarks,
-				Country = Citizenship.GetItemById(initorderdto.CountryId),
-				Supplier = initorderdto.Supplier?.Convert(),
-				ApprovedBy = initorderdto.ApprovedBy?.Convert(),
-				PublishedBy = initorderdto.PublishedBy?.Convert(),
-				ClosedBy = initorderdto.ClosedBy?.Convert(),
+				PublishedById = initorderdto.PublishedById,
+				ClosedById = initorderdto.ClosedById,
+				PublishedByUser = initorderdto.PublishedByUser,
+				CloseByUser = initorderdto.CloseByUser,
+				Number = initorderdto.Number,
 			};
 
 			if (initorderdto.Files != null)
@@ -3833,8 +3596,7 @@ namespace SmartCore.DtoHelper
 
 			if (initorderdto.PackageRecords != null)
 				value.PackageRecords.AddRange(initorderdto.PackageRecords.Select(i => i.Convert()));
-
-
+			
 			return value;
 		}
 
@@ -3845,6 +3607,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = orderrec.ItemId,
 				IsDeleted = orderrec.IsDeleted,
+				CorrectorId = orderrec.CorrectorId,
 				InitialReason = orderrec.InitialReason?.ItemId,
 				Priority = orderrec.Priority.ItemId,
 				DestinationObjectID = orderrec.DestinationObjectId,
@@ -3861,13 +3624,13 @@ namespace SmartCore.DtoHelper
 				PackageItemTypeId = orderrec.PackageItemType?.ItemId,
 				CostCondition = (short?)orderrec.CostCondition,
 				ProductId = orderrec.ProductId,
-
 				ProductType = orderrec.ProductType?.ItemId,
 				PerfNumFromStart = orderrec.PerformanceNumFromStart,
 				PerfNumFromRecord = orderrec.PerformanceNumFromRecord,
 				FromRecordId = orderrec.FromRecordId,
 				IsClosed = orderrec.IsClosed,
 				IsSchedule = orderrec.IsSchedule,
+				Remarks = orderrec.Remarks
 			};
 		}
 
@@ -3878,6 +3641,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = orderrecdto.ItemId,
 				IsDeleted = orderrecdto.IsDeleted,
+				CorrectorId = orderrecdto.CorrectorId,
 				Priority = Priority.GetItemById(orderrecdto.Priority),
 				InitialReason = orderrecdto.InitialReason.HasValue ? InitialReason.Items.GetItemById(orderrecdto.InitialReason.Value) : InitialReason.Unknown,
 				DestinationObjectId = orderrecdto.DestinationObjectID ?? default(int),
@@ -3893,45 +3657,40 @@ namespace SmartCore.DtoHelper
 				PackageItemId = orderrecdto.PackageItemId ?? default(int),
 				PackageItemType = orderrecdto.PackageItemTypeId.HasValue ? SmartCoreType.Items.GetItemById(orderrecdto.PackageItemTypeId.Value) : SmartCoreType.Unknown,
 				CostCondition = orderrecdto.CostCondition.HasValue ? (ComponentStatus)orderrecdto.CostCondition.Value : ComponentStatus.Unknown,
-
 				ProductId = orderrecdto.ProductId ?? default(int),
 				ProductType = orderrecdto.ProductType.HasValue ? SmartCoreType.Items.GetItemById(orderrecdto.ProductType.Value) : SmartCoreType.Unknown,
 				PerformanceNumFromStart = orderrecdto.PerfNumFromStart ?? default(int),
 				PerformanceNumFromRecord = orderrecdto.PerfNumFromRecord ?? default(int),
-
+				Remarks = orderrecdto.Remarks,
 				FromRecordId = orderrecdto.FromRecordId ?? default(int),
 				IsClosed = orderrecdto.IsClosed ?? default(bool),
 				IsSchedule = orderrecdto.IsSchedule ?? default(bool)
 			};
-
 		}
 
 
 		public static ItemsRelationDTO Convert(this ItemsRelation itemsrel)
-
 		{
 			return new ItemsRelationDTO
 			{
 				ItemId = itemsrel.ItemId,
 				IsDeleted = itemsrel.IsDeleted,
-
+				CorrectorId = itemsrel.CorrectorId,
 				FirstItemId = itemsrel.FirstItemId,
 				FirtsItemTypeId = itemsrel.FirtsItemTypeId,
 				SecondItemId = itemsrel.SecondItemId,
-
 				SecondItemTypeId = itemsrel.SecondItemTypeId,
 				RelationTypeId = (int)itemsrel.RelationTypeId
 			};
-
 		}
 
 		public static ItemsRelation Convert(this ItemsRelationDTO itemsreldto)
 		{
 			return new ItemsRelation()
 			{
-
 				ItemId = itemsreldto.ItemId,
 				IsDeleted = itemsreldto.IsDeleted,
+				CorrectorId = itemsreldto.CorrectorId,
 				FirstItemId = itemsreldto.FirstItemId,
 				FirtsItemTypeId = itemsreldto.FirtsItemTypeId,
 				SecondItemId = itemsreldto.SecondItemId,
@@ -3947,14 +3706,13 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = supprelation.ItemId,
 				IsDeleted = supprelation.IsDeleted,
+				CorrectorId = supprelation.CorrectorId,
 				KitId = supprelation.KitId,
 				SupplierId = supprelation.SupplierId,
 				ParentTypeId = supprelation.ParentTypeId,
 				CostNew = supprelation.CostNew,
-
 				CostOverhaul = supprelation.CostOverhaul,
-				CostServiceable = supprelation.CostServiceable,
-
+				CostServiceable = supprelation.CostServiceable
 			};
 		}
 
@@ -3964,6 +3722,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = supprelationdto.ItemId,
 				IsDeleted = supprelationdto.IsDeleted,
+				CorrectorId = supprelationdto.CorrectorId,
 				KitId = supprelationdto.KitId,
 				ParentTypeId = supprelationdto.ParentTypeId ?? default(int),
 				CostNew = supprelationdto.CostNew ?? default(double),
@@ -3980,13 +3739,11 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = knowmod.ItemId,
 				IsDeleted = knowmod.IsDeleted,
+				CorrectorId = knowmod.CorrectorId,
 				Number = knowmod.Number,
-
 				Title = knowmod.Title,
 				Description = knowmod.Description
-
 			};
-
 		}
 
 		public static KnowledgeModule Convert(this KnowledgeModuleDTO knowmoddto)
@@ -3995,9 +3752,9 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = knowmoddto.ItemId,
 				IsDeleted = knowmoddto.IsDeleted,
+				CorrectorId = knowmoddto.CorrectorId,
 				Number = knowmoddto.Number,
 				Title = knowmoddto.Title,
-
 				Description = knowmoddto.Description
 			};
 		}
@@ -4008,12 +3765,11 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = gearcondition.ItemId,
 				IsDeleted = gearcondition.IsDeleted,
+				CorrectorId = gearcondition.CorrectorId,
 				FlightID = gearcondition.FlightId,
-
 				LandingGearID = gearcondition.LandingGearId,
 				TirePressure1 = gearcondition.TirePressure1,
 				TirePressure2 = gearcondition.TirePressure2,
-
 				RecordDate = gearcondition.RecordDate
 			};
 		}
@@ -4021,10 +3777,10 @@ namespace SmartCore.DtoHelper
 		public static LandingGearCondition Convert(this LandingGearConditionDTO gearconditiondto)
 		{
 			return new LandingGearCondition()
-
 			{
 				ItemId = gearconditiondto.ItemId,
 				IsDeleted = gearconditiondto.IsDeleted,
+				CorrectorId = gearconditiondto.CorrectorId,
 				FlightId = gearconditiondto.FlightID,
 				LandingGearId = gearconditiondto.LandingGearID,
 				TirePressure1 = gearconditiondto.TirePressure1 ?? default(double),
@@ -4040,51 +3796,45 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = maincbtrec.ItemId,
 				IsDeleted = maincbtrec.IsDeleted,
+				CorrectorId = maincbtrec.CorrectorId,
 				CheckId = maincbtrec.CheckId,
 				CheckPerformaceNum = maincbtrec.CheckPerformaceNum,
 				CheckPerformaceGroupNum = maincbtrec.CheckPerformaceGroupNum,
-
 				TaskId = maincbtrec.TaskId,
 				TaskTypeId = maincbtrec.TaskType?.ItemId,
 				TaskPerfNumFromStart = maincbtrec.TaskPerformanceNumFromStart,
 				TaskPerfNumFromRecord = maincbtrec.TaskPerformanceNumFromRecord,
 				TaskFromRecordId = maincbtrec.TaskFromRecordId,
 				WorkPackageId = maincbtrec.WorkPackageId
-
 			};
 		}
 
 		public static MaintenanceCheckBindTaskRecord Convert(this MaintenanceCheckBindTaskRecordDTO maincbtrecdto)
 		{
 			return new MaintenanceCheckBindTaskRecord()
-
 			{
 				ItemId = maincbtrecdto.ItemId,
-
 				IsDeleted = maincbtrecdto.IsDeleted,
+				CorrectorId = maincbtrecdto.CorrectorId,
 				CheckId = maincbtrecdto.CheckId ?? default(int),
-
 				CheckPerformaceNum = maincbtrecdto.CheckPerformaceNum ?? default(int),
 				CheckPerformaceGroupNum = maincbtrecdto.CheckPerformaceGroupNum ?? default(int),
 				TaskId = maincbtrecdto.TaskId ?? default(int),
 				TaskType = maincbtrecdto.TaskTypeId.HasValue ? SmartCoreType.Items.GetItemById(maincbtrecdto.TaskTypeId.Value) : SmartCoreType.Unknown,
 				TaskPerformanceNumFromStart = maincbtrecdto.TaskPerfNumFromStart ?? default(int),
-
 				TaskPerformanceNumFromRecord = maincbtrecdto.TaskPerfNumFromRecord ?? default(int),
 				TaskFromRecordId = maincbtrecdto.TaskFromRecordId ?? default(int),
 				WorkPackageId = maincbtrecdto.WorkPackageId ?? default(int)
 			};
-
 		}
 
 		public static MaintenanceCheckDTO Convert(this MaintenanceCheck maincheck)
 		{
 			return new MaintenanceCheckDTO
-
 			{
 				ItemId = maincheck.ItemId,
 				IsDeleted = maincheck.IsDeleted,
-
+				CorrectorId = maincheck.CorrectorId,
 				Name = maincheck.Name,
 				Interval = maincheck.Interval?.ConvertToByteArray(),
 				Notify = maincheck.Notify?.ConvertToByteArray(),
@@ -4093,7 +3843,6 @@ namespace SmartCore.DtoHelper
 				Cost = maincheck.Cost,
 				ManHours = maincheck.ManHours,
 				Schedule = maincheck.Schedule,
-
 				Resource = (short)maincheck.Resource,
 				Grouping = maincheck.Grouping,
 				PerformanceRecords = maincheck.PerformanceRecords?.Select(i => i.Convert()) as ICollection<DirectiveRecordDTO>,
@@ -4105,14 +3854,13 @@ namespace SmartCore.DtoHelper
 
 
 		public static MaintenanceCheck Convert(this MaintenanceCheckDTO maincheckdto)
-
 		{
 			var value = new MaintenanceCheck()
 			{
 				ItemId = maincheckdto.ItemId,
 				IsDeleted = maincheckdto.IsDeleted,
+				CorrectorId = maincheckdto.CorrectorId,
 				Name = maincheckdto.Name,
-
 				Interval = Lifelength.ConvertFromByteArray(maincheckdto.Interval),
 				Notify = Lifelength.ConvertFromByteArray(maincheckdto.Notify),
 				ParentAircraftId = maincheckdto.ParentAircraft,
@@ -4143,8 +3891,6 @@ namespace SmartCore.DtoHelper
 				}
 			}
 
-
-
 			if (maincheckdto.BindMpds != null)
 				value.BindMpds.AddRange(maincheckdto.BindMpds.Select(i => i.Convert()));
 
@@ -4152,18 +3898,16 @@ namespace SmartCore.DtoHelper
 		}
 
 		public static MaintenanceCheckTypeDTO Convert(this MaintenanceCheckType mainchecktype)
-
 		{
 			return new MaintenanceCheckTypeDTO
 			{
 				ItemId = mainchecktype.ItemId,
 				IsDeleted = mainchecktype.IsDeleted,
+				CorrectorId = mainchecktype.CorrectorId,
 				Name = mainchecktype.FullName,
 				Priority = mainchecktype.Priority,
-
 				ShortName = mainchecktype.ShortName,
 			};
-
 		}
 
 
@@ -4173,9 +3917,9 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = mainchecktypedto.ItemId,
 				IsDeleted = mainchecktypedto.IsDeleted,
+				CorrectorId = mainchecktypedto.CorrectorId,
 				FullName = mainchecktypedto.Name,
 				Priority = mainchecktypedto.Priority ?? default(int),
-
 				ShortName = mainchecktypedto.ShortName
 			};
 		}
@@ -4183,14 +3927,12 @@ namespace SmartCore.DtoHelper
 
 		public static ModuleRecordDTO Convert(this ModuleRecord modulerec)
 		{
-
 			return new ModuleRecordDTO
 			{
 				ItemId = modulerec.ItemId,
 				IsDeleted = modulerec.IsDeleted,
-
+				CorrectorId = modulerec.CorrectorId,
 				AircraftWorkerCategoryId = modulerec.AircraftWorkerCategory?.ItemId,
-
 				KnowledgeModuleId = modulerec.KnowledgeModule?.ItemId,
 				KnowledgeLevel = modulerec.KnowledgeLevel,
 			};
@@ -4202,11 +3944,11 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = modulerecdto.ItemId,
 				IsDeleted = modulerecdto.IsDeleted,
+				CorrectorId = modulerecdto.CorrectorId,
 				AircraftWorkerCategory = modulerecdto.AircraftWorkerCategory?.Convert(),
 				KnowledgeModule = modulerecdto.KnowledgeModule?.Convert(),
 				KnowledgeLevel = modulerecdto.KnowledgeLevel ?? default(int)
 			};
-
 		}
 
 		public static MTOPCheckDTO Convert(this MTOPCheck mtop)
@@ -4215,33 +3957,29 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = mtop.ItemId,
 				IsDeleted = mtop.IsDeleted,
+				CorrectorId = mtop.CorrectorId,
 				Name = mtop.Name,
 				ParentAircraftId = mtop.ParentAircraftId,
 				IsZeroPhase = mtop.IsZeroPhase,
 				CheckTypeId = mtop.CheckType?.ItemId ?? -1,
 				Thresh = mtop.Thresh?.ConvertToByteArray(),
-
 				Repeat = mtop.Repeat?.ConvertToByteArray(),
-
 				Notify = mtop.Notify?.ConvertToByteArray(),
 				PerformanceRecords = mtop.PerformanceRecords?.Select(i => i.Convert()) as ICollection<MTOPCheckRecordDTO>
 			};
-
 		}
 
 		public static MTOPCheck Convert(this MTOPCheckDTO mtopdto)
 		{
 			var value = new MTOPCheck()
-
 			{
 				ItemId = mtopdto.ItemId,
 				IsDeleted = mtopdto.IsDeleted,
+				CorrectorId = mtopdto.CorrectorId,
 				Name = mtopdto.Name,
-
 				IsZeroPhase = mtopdto.IsZeroPhase,
 				ParentAircraftId = mtopdto.ParentAircraftId,
 				CheckType = mtopdto.CheckType?.Convert(),
-
 				Thresh = Lifelength.ConvertFromByteArray(mtopdto.Thresh),
 				Repeat = Lifelength.ConvertFromByteArray(mtopdto.Repeat),
 				Notify = Lifelength.ConvertFromByteArray(mtopdto.Notify)
@@ -4258,10 +3996,9 @@ namespace SmartCore.DtoHelper
 			return new MTOPCheckRecordDTO
 			{
 				ItemId = mtopcheckrec.ItemId,
-
 				IsDeleted = mtopcheckrec.IsDeleted,
+				CorrectorId = mtopcheckrec.CorrectorId,
 				CheckName = mtopcheckrec.CheckName,
-
 				Remarks = mtopcheckrec.Remarks,
 				RecordDate = mtopcheckrec.RecordDate,
 				GroupName = mtopcheckrec.GroupName,
@@ -4270,16 +4007,15 @@ namespace SmartCore.DtoHelper
 				CalculatedPerformanceSource = mtopcheckrec.CalculatedPerformanceSource?.ConvertToByteArray(),
 				AverageUtilization = mtopcheckrec.AverageUtilization?.ConvertToByteArray()
 			};
-
 		}
 
 		public static MTOPCheckRecord Convert(this MTOPCheckRecordDTO mtopcheckrecdto)
 		{
-
 			return new MTOPCheckRecord()
 			{
 				ItemId = mtopcheckrecdto.ItemId,
 				IsDeleted = mtopcheckrecdto.IsDeleted,
+				CorrectorId = mtopcheckrecdto.CorrectorId,
 				CheckName = mtopcheckrecdto.CheckName,
 				Remarks = mtopcheckrecdto.Remarks,
 				RecordDate = mtopcheckrecdto.RecordDate ?? DateTimeExtend.GetCASMinDateTime(),
@@ -4289,17 +4025,15 @@ namespace SmartCore.DtoHelper
 				CalculatedPerformanceSource = Lifelength.ConvertFromByteArray(mtopcheckrecdto.CalculatedPerformanceSource),
 				AverageUtilization = AverageUtilization.ConvertFromByteArray(mtopcheckrecdto.AverageUtilization)
 			};
-
 		}
 
 		public static ProcedureDocumentReferenceDTO Convert(this ProcedureDocumentReference docreference)
 		{
 			return new ProcedureDocumentReferenceDTO
 			{
-
 				ItemId = docreference.ItemId,
-
 				IsDeleted = docreference.IsDeleted,
+				CorrectorId = docreference.CorrectorId,
 				ProcedureId = docreference.Procedure?.ItemId,
 				DocumentId = docreference.Document?.ItemId,
 			};
@@ -4311,20 +4045,19 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = docreferencedto.ItemId,
 				IsDeleted = docreferencedto.IsDeleted,
+				CorrectorId = docreferencedto.CorrectorId,
 				Procedure = docreferencedto.Procedure?.Convert(),
 				Document = docreferencedto.Document?.Convert()
 			};
 		}
-
-
+		
 		public static ProcedureDTO Convert(this Procedure procedure)
 		{
-
 			return new ProcedureDTO
 			{
-
 				ItemId = procedure.ItemId,
 				IsDeleted = procedure.IsDeleted,
+				CorrectorId = procedure.CorrectorId,
 				Title = procedure.Title,
 				ProcedureTypeId = procedure.ProcedureType?.ItemId,
 				Applicability = procedure.Applicability,
@@ -4332,7 +4065,6 @@ namespace SmartCore.DtoHelper
 				AuditedObjectId = procedure.AuditedObjectId,
 				AuditedObjectTypeId = procedure.AuditedObjectType?.ItemId,
 				Description = procedure.Description,
-
 				CheckList = procedure.CheckList,
 				CheckListFileId = procedure.CheckListFile?.ItemId,
 				ProcedureFileId = procedure.ProcedureFile?.ItemId,
@@ -4349,9 +4081,7 @@ namespace SmartCore.DtoHelper
 				Level = procedure.Level,
 				AuditedObject = procedure.AuditedObject,
 				PerformanceRecords = procedure.PerformanceRecords?.Select(i => i.Convert()) as ICollection<DirectiveRecordDTO>,
-
 				Files = procedure.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
-
 				Kits = procedure.Kits?.Select(i => i.Convert()) as ICollection<AccessoryRequiredDTO>,
 				DocumentReferences = procedure.DocumentReferences?.Select(i => i.Convert()) as ICollection<ProcedureDocumentReferenceDTO>
 			};
@@ -4363,31 +4093,25 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = proceduredto.ItemId,
 				IsDeleted = proceduredto.IsDeleted,
-
+				CorrectorId = proceduredto.CorrectorId,
 				Title = proceduredto.Title,
 				ProcedureType = proceduredto.ProcedureTypeId.HasValue ? ProcedureType.Items.GetItemById(proceduredto.ProcedureTypeId.Value) : ProcedureType.Unknown,
 				Applicability = proceduredto.Applicability,
 				AuditedObjectId = proceduredto.AuditedObjectId ?? default(int),
 				AuditedObjectType = proceduredto.AuditedObjectTypeId.HasValue ? SmartCoreType.Items.GetItemById(proceduredto.AuditedObjectTypeId.Value) : SmartCoreType.Unknown,
 				Description = proceduredto.Description,
-
 				CheckList = proceduredto.CheckList,
-
 				JobCard = proceduredto.JobCard?.Convert(),
 				Threshold = MaintenanceDirectiveThreshold.ConvertFromByteArray(proceduredto.Threshold),
 				Remarks = proceduredto.Remarks,
 				HiddenRemarks = proceduredto.HiddenRemarks,
 				IsClosed = proceduredto.IsClosed ?? default(bool),
-
 				ManHours = proceduredto.ManHours ?? default(double),
 				Elapsed = proceduredto.Elapsed ?? default(double),
 				Cost = proceduredto.Cost ?? default(double),
-
 				PrintInWorkPackage = proceduredto.PrintInWP ?? default(bool),
 				ProcedureRating = proceduredto.ProcedureRatingId.HasValue ? ProcedureRating.Items.GetItemById(proceduredto.ProcedureRatingId.Value) : ProcedureRating.Unknown,
-
 				Level = proceduredto.Level ?? default(int),
-
 				AuditedObject = proceduredto.AuditedObject
 			};
 
@@ -4398,7 +4122,6 @@ namespace SmartCore.DtoHelper
 					var record = dto.Convert();
 					record.Parent = value;
 					value.PerformanceRecords.Add(record);
-
 				}
 
 			}
@@ -4413,7 +4136,6 @@ namespace SmartCore.DtoHelper
 				{
 					var directive = dto.Convert();
 					directive.ParentObject = value;
-
 					value.Kits.Add(directive);
 				}
 
@@ -4433,19 +4155,18 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = prodcost.ItemId,
 				IsDeleted = prodcost.IsDeleted,
+				CorrectorId = prodcost.CorrectorId,
 				SupplierId = prodcost.SupplierId,
 				KitId = prodcost.KitId,
 				ParentId = prodcost.ParentId,
 				ParentTypeId = prodcost.ParentTypeId,
 				QtyIn = prodcost.QtyIn,
-
 				UnitPrice = prodcost.UnitPrice,
 				TotalPrice = prodcost.TotalPrice,
 				ShipPrice = prodcost.ShipPrice,
 				SubTotal = prodcost.SubTotal,
 				Tax = prodcost.Tax,
 				Tax1 = prodcost.Tax1,
-
 				Tax2 = prodcost.Tax2,
 				Total = prodcost.Total,
 				CurrencyId = prodcost.Currency?.ItemId
@@ -4454,14 +4175,12 @@ namespace SmartCore.DtoHelper
 
 
 		public static ProductCost Convert(this ProductCostDTO prodcostdto)
-
 		{
 			return new ProductCost()
 			{
-
 				ItemId = prodcostdto.ItemId,
 				IsDeleted = prodcostdto.IsDeleted,
-
+				CorrectorId = prodcostdto.CorrectorId,
 				SupplierId = prodcostdto.SupplierId ?? default(int),
 				KitId = prodcostdto.KitId ?? default(int),
 				ParentId = prodcostdto.ParentId,
@@ -4474,7 +4193,6 @@ namespace SmartCore.DtoHelper
 				Tax = prodcostdto.Tax ?? default(double),
 				Tax1 = prodcostdto.Tax1 ?? default(double),
 				Tax2 = prodcostdto.Tax2 ?? default(double),
-
 				Total = prodcostdto.Total ?? default(double),
 				Currency = prodcostdto.CurrencyId.HasValue ? Сurrency.Items.GetItemById(prodcostdto.CurrencyId.Value) : Сurrency.UNK
 			};
@@ -4486,6 +4204,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = purchase.ItemId,
 				IsDeleted = purchase.IsDeleted,
+				CorrectorId = purchase.CorrectorId,
 				Title = purchase.Title,
 				Description = purchase.Description,
 				ParentID = purchase.ParentId,
@@ -4498,23 +4217,26 @@ namespace SmartCore.DtoHelper
 				Remarks = purchase.Remarks,
 				ParentTypeId = purchase.ParentType?.ItemId,
 				SupplierId = purchase.Supplier?.ItemId,
-
+				PublishedById = purchase.PublishedById,
+				ClosedById = purchase.ClosedById,
+				PublishedByUser = purchase.PublishedByUser,
+				CloseByUser = purchase.CloseByUser,
+				Number = purchase.Number,
 				Files = purchase.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>
 			};
 		}
 
 		public static PurchaseOrder Convert(this PurchaseOrderDTO purchasedto)
-
 		{
 			var value = new PurchaseOrder()
 			{
 				ItemId = purchasedto.ItemId,
 				IsDeleted = purchasedto.IsDeleted,
+				CorrectorId = purchasedto.CorrectorId,
 				Title = purchasedto.Title,
 				Description = purchasedto.Description,
 				ParentId = purchasedto.ParentID ?? default(int),
 				ParentQuotationId = purchasedto.ParentQuotationId ?? default(int),
-
 				Status = purchasedto.Status.HasValue ? (WorkPackageStatus)purchasedto.Status.Value : WorkPackageStatus.All,
 				OpeningDate = purchasedto.OpeningDate ?? DateTimeExtend.GetCASMinDateTime(),
 				PublishingDate = purchasedto.PublishingDate ?? DateTimeExtend.GetCASMinDateTime(),
@@ -4522,7 +4244,11 @@ namespace SmartCore.DtoHelper
 				Author = purchasedto.Author,
 				Remarks = purchasedto.Remarks,
 				ParentType = purchasedto.ParentTypeId.HasValue ? SmartCoreType.Items.GetItemById(purchasedto.ParentTypeId.Value) : SmartCoreType.Unknown,
-				Supplier = purchasedto.Supplier?.Convert()
+				PublishedById = purchasedto.PublishedById,
+				ClosedById = purchasedto.ClosedById,
+				PublishedByUser = purchasedto.PublishedByUser,
+				CloseByUser = purchasedto.CloseByUser,
+				Number = purchasedto.Number
 			};
 
 			if (purchasedto.Files != null)
@@ -4534,16 +4260,15 @@ namespace SmartCore.DtoHelper
 		public static PurchaseRequestRecordDTO Convert(this PurchaseRequestRecord purchaserec)
 		{
 			return new PurchaseRequestRecordDTO
-
 			{
 				ItemId = purchaserec.ItemId,
 				IsDeleted = purchaserec.IsDeleted,
+				CorrectorId = purchaserec.CorrectorId,
 				ParentPackageId = purchaserec.ParentPackageId,
-
 				PackageItemId = purchaserec.PackageItemId,
-
 				PackageItemTypeId = purchaserec.PackageItemType?.ItemId,
-				SupplierId = purchaserec.Supplier?.ItemId,
+				SupplierId = purchaserec.SupplierId,
+				CurrencyId = purchaserec.Currency?.ItemId ?? -1,
 				Remarks = purchaserec.Remarks,
 				Quantity = purchaserec.Quantity,
 				Measure = purchaserec.Measure?.ItemId,
@@ -4560,11 +4285,12 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = purchaserecdto.ItemId,
 				IsDeleted = purchaserecdto.IsDeleted,
+				CorrectorId = purchaserecdto.CorrectorId,
 				ParentPackageId = purchaserecdto.ParentPackageId ?? default(int),
 				PackageItemId = purchaserecdto.PackageItemId ?? default(int),
 				PackageItemType = purchaserecdto.PackageItemTypeId.HasValue ? SmartCoreType.Items.GetItemById(purchaserecdto.PackageItemTypeId.Value) : SmartCoreType.Unknown,
-				Supplier = purchaserecdto.Supplier?.Convert(),
-
+				SupplierId = purchaserecdto.SupplierId ?? default(int),
+				Currency = Сurrency.GetItemById(purchaserecdto.CurrencyId),
 				Remarks = purchaserecdto.Remarks,
 				Quantity = purchaserecdto.Quantity ?? default(double),
 				Measure = purchaserecdto.Measure.HasValue ? Measure.Items.GetItemById(purchaserecdto.Measure.Value) : Measure.Unknown,
@@ -4586,6 +4312,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = request.ItemId,
 				IsDeleted = request.IsDeleted,
+				CorrectorId = request.CorrectorId,
 				PreparedByDate = request.PreparedByDate,
 				PreparedById = request.PreparedBy?.ItemId,
 				CheckedByDate = request.CheckedByDate,
@@ -4610,7 +4337,6 @@ namespace SmartCore.DtoHelper
 				PublishingRemarks = request.PublishingRemarks,
 				ClosingRemarks = request.ClosingRemarks,
 				Kits = request.Kits?.Select(i => i.Convert()) as ICollection<AccessoryRequiredDTO>,
-
 				PackageRecords = request.PackageRecords?.Select(i => i.Convert()) as ICollection<RequestRecordDTO>
 			};
 		}
@@ -4620,8 +4346,8 @@ namespace SmartCore.DtoHelper
 			var value = new Request()
 			{
 				ItemId = requestdto.ItemId,
-
 				IsDeleted = requestdto.IsDeleted,
+				CorrectorId = requestdto.CorrectorId,
 				PreparedByDate = requestdto.PreparedByDate ?? DateTimeExtend.GetCASMinDateTime(),
 				PreparedBy = requestdto.PreparedBy?.Convert(),
 				CheckedByDate = requestdto.CheckedByDate ?? DateTimeExtend.GetCASMinDateTime(),
@@ -4642,22 +4368,18 @@ namespace SmartCore.DtoHelper
 				PublishedBy = requestdto.PublishedBy,
 				ClosedBy = requestdto.ClosedBy,
 				Remarks = requestdto.Remarks,
-
 				PublishingRemarks = requestdto.PublishingRemarks,
 				ClosingRemarks = requestdto.ClosingRemarks
-
 			};
 
 			if (requestdto.Kits != null)
 			{
 				foreach (var dto in requestdto.Kits)
 				{
-
 					var directive = dto.Convert();
 					directive.ParentObject = value;
 					value.Kits.Add(directive);
 				}
-
 			}
 
 			if (requestdto.PackageRecords != null)
@@ -4671,25 +4393,11 @@ namespace SmartCore.DtoHelper
 		{
 			return new RequestForQuotationDTO
 			{
-
 				ItemId = reqquotation.ItemId,
 				IsDeleted = reqquotation.IsDeleted,
-				RFQ = reqquotation.RFQ,
-				QR = reqquotation.QR,
-				PO = reqquotation.PO,
-				Invoice = reqquotation.Invoice,
-				PickUp = reqquotation.PickUp,
-				Weight = reqquotation.Weight,
-				DIMS = reqquotation.DIMS,
-				CarrierId = reqquotation.Supplier.ItemId,
-				ShipTo = reqquotation.ShipTo,
-				ShipBy = reqquotation.ShipBy.ItemId,
-				ApprovedById = reqquotation.ApprovedBy.ItemId,
-				PublishedById = reqquotation.PublishedBy.ItemId,
-				ClosedById = reqquotation.ClosedBy.ItemId,
-				TypeOfOperation = reqquotation.TypeOfOperation.ItemId,
-				IncoTerm = reqquotation.IncoTerm.ItemId,
-				CountryId = reqquotation.Country.ItemId,
+				CorrectorId = reqquotation.CorrectorId,
+				PublishedById = reqquotation.PublishedById,
+				ClosedById = reqquotation.ClosedById,
 				Title = reqquotation.Title,
 				Description = reqquotation.Description,
 				ParentId = reqquotation.ParentId,
@@ -4698,10 +4406,11 @@ namespace SmartCore.DtoHelper
 				PublishingDate = reqquotation.PublishingDate,
 				ClosingDate = reqquotation.ClosingDate,
 				Author = reqquotation.Author,
-
 				Remarks = reqquotation.Remarks,
+				PublishedByUser = reqquotation.PublishedByUser,
+				CloseByUser = reqquotation.CloseByUser,
 				ParentTypeId = reqquotation.ParentType?.ItemId,
-				ToSupplierId = reqquotation.ToSupplier?.ItemId,
+				Number = reqquotation.Number,
 				Files = reqquotation.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
 				PackageRecords = reqquotation.PackageRecords?.Select(i => i.Convert()) as ICollection<RequestForQuotationRecordDTO>
 			};
@@ -4713,25 +4422,10 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = reqquotationdto.ItemId,
 				IsDeleted = reqquotationdto.IsDeleted,
+				CorrectorId = reqquotationdto.CorrectorId,
 				Title = reqquotationdto.Title,
-
-				RFQ = reqquotationdto.RFQ,
-				QR = reqquotationdto.QR,
-				PO = reqquotationdto.PO,
-				Invoice = reqquotationdto.Invoice,
-				PickUp = reqquotationdto.PickUp,
-				Weight = reqquotationdto.Weight,
-				DIMS = reqquotationdto.DIMS,
-				ShipTo = reqquotationdto.ShipTo,
-				Country = Citizenship.GetItemById(reqquotationdto.CountryId),
-				TypeOfOperation = TypeOfOperation.GetItemById(reqquotationdto.TypeOfOperation),
-				ShipBy = ShipBy.GetItemById(reqquotationdto.ShipBy),
-				IncoTerm = IncoTerm.GetItemById(reqquotationdto.IncoTerm),
-				Supplier = reqquotationdto.Supplier?.Convert(),
-				ApprovedBy = reqquotationdto.ApprovedBy?.Convert(),
-				PublishedBy = reqquotationdto.PublishedBy?.Convert(),
-				ClosedBy = reqquotationdto.ClosedBy?.Convert(),
-
+				PublishedById = reqquotationdto.PublishedById,
+				ClosedById = reqquotationdto.ClosedById,
 				Description = reqquotationdto.Description,
 				ParentId = reqquotationdto.ParentId ?? default(int),
 				Status = reqquotationdto.Status.HasValue ? (WorkPackageStatus)reqquotationdto.Status.Value : WorkPackageStatus.All,
@@ -4740,8 +4434,10 @@ namespace SmartCore.DtoHelper
 				ClosingDate = reqquotationdto.ClosingDate ?? DateTimeExtend.GetCASMinDateTime(),
 				Author = reqquotationdto.Author,
 				Remarks = reqquotationdto.Remarks,
+				PublishedByUser = reqquotationdto.PublishedByUser,
+				CloseByUser = reqquotationdto.CloseByUser,
+				Number = reqquotationdto.Number,
 				ParentType = reqquotationdto.ParentTypeId.HasValue ? SmartCoreType.Items.GetItemById(reqquotationdto.ParentTypeId.Value) : SmartCoreType.Unknown,
-				ToSupplier = reqquotationdto.ToSupplier?.Convert()
 			};
 
 			if (reqquotationdto.Files != null)
@@ -4750,8 +4446,7 @@ namespace SmartCore.DtoHelper
 			if (reqquotationdto.PackageRecords != null)
 
 				value.PackageRecords.AddRange(reqquotationdto.PackageRecords.Select(i => i.Convert()));
-
-
+			
 			return value;
 		}
 
@@ -4760,29 +4455,27 @@ namespace SmartCore.DtoHelper
 			return new RequestForQuotationRecordDTO
 			{
 				ItemId = quotationrecord.ItemId,
-
 				IsDeleted = quotationrecord.IsDeleted,
+				CorrectorId = quotationrecord.CorrectorId,
 				ParentPackageId = quotationrecord.ParentPackageId,
-
 				PackageItemId = quotationrecord.PackageItemId,
-
 				CostCondition = (short)quotationrecord.CostCondition,
 				Processed = quotationrecord.Processed,
 				PackageItemTypeId = quotationrecord.PackageItemType?.ItemId,
-
 				Quantity = quotationrecord.Quantity,
-
 				Measure = quotationrecord.Measure?.ItemId,
 				CostNew = quotationrecord.CostNew,
-
 				CostOverhaul = quotationrecord.CostOverhaul,
 				CostServiceable = quotationrecord.CostServiceable,
-				ToSupplierId = quotationrecord.ToSupplier?.ItemId,
 				Priority = quotationrecord.Priority.ItemId,
 				DestinationObjectId = quotationrecord.DestinationObjectId,
 				DefferedCategoryId = quotationrecord.DeferredCategory.ItemId,
 				InitialReason = quotationrecord.InitialReason.ItemId,
-				DestinationObjectType = quotationrecord.DestinationObjectType.ItemId
+				DestinationObjectType = quotationrecord.DestinationObjectType.ItemId,
+				LifeLimit = quotationrecord.LifeLimit?.ConvertToByteArray(),
+				LifeLimitNotify = quotationrecord.LifeLimitNotify?.ConvertToByteArray(),
+				SettingJSON = quotationrecord.SettingJSON,
+				Remarks = quotationrecord.Remarks
 			};
 		}
 
@@ -4792,6 +4485,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = quotationrecorddto.ItemId,
 				IsDeleted = quotationrecorddto.IsDeleted,
+				CorrectorId = quotationrecorddto.CorrectorId,
 				ParentPackageId = quotationrecorddto.ParentPackageId,
 				PackageItemId = quotationrecorddto.PackageItemId,
 				CostCondition = (ComponentStatus)quotationrecorddto.CostCondition,
@@ -4802,22 +4496,25 @@ namespace SmartCore.DtoHelper
 				CostNew = quotationrecorddto.CostNew ?? default(double),
 				CostOverhaul = quotationrecorddto.CostOverhaul ?? default(double),
 				CostServiceable = quotationrecorddto.CostServiceable ?? default(double),
-				ToSupplier = quotationrecorddto.ToSupplier?.Convert(),
 				Priority = Priority.GetItemById(quotationrecorddto.Priority),
 				DestinationObjectId = quotationrecorddto.DestinationObjectId,
 				DeferredCategory = quotationrecorddto.DefferedCategory?.Convert(),
 				InitialReason = InitialReason.GetItemById(quotationrecorddto.InitialReason),
-				DestinationObjectType = SmartCoreType.GetSmartCoreTypeById(quotationrecorddto.DestinationObjectType)
+				DestinationObjectType = SmartCoreType.GetSmartCoreTypeById(quotationrecorddto.DestinationObjectType),
+				LifeLimit = Lifelength.ConvertFromByteArray(quotationrecorddto.LifeLimit),
+				LifeLimitNotify = Lifelength.ConvertFromByteArray(quotationrecorddto.LifeLimitNotify),
+				SettingJSON = quotationrecorddto.SettingJSON,
+				Remarks = quotationrecorddto.Remarks
 			};
 		}
 
 		public static RequestRecordDTO Convert(this RequestRecord requestrec)
 		{
 			return new RequestRecordDTO
-
 			{
 				ItemId = requestrec.ItemId,
 				IsDeleted = requestrec.IsDeleted,
+				CorrectorId = requestrec.CorrectorId,
 				ParentId = requestrec.ParentId,
 				DirectivesId = requestrec.DirectiveId,
 				PackageItemTypeId = requestrec.PackageItemType?.ItemId
@@ -4827,12 +4524,11 @@ namespace SmartCore.DtoHelper
 
 		public static RequestRecord Convert(this RequestRecordDTO requestrecdto)
 		{
-
 			return new RequestRecord()
 			{
 				ItemId = requestrecdto.ItemId,
-
 				IsDeleted = requestrecdto.IsDeleted,
+				CorrectorId = requestrecdto.CorrectorId,
 				ParentId = requestrecdto.ParentId ?? default(int),
 				DirectiveId = requestrecdto.DirectivesId ?? default(int),
 				PackageItemType = requestrecdto.PackageItemTypeId.HasValue ? SmartCoreType.Items.GetItemById(requestrecdto.PackageItemTypeId.Value) : SmartCoreType.Unknown
@@ -4845,50 +4541,41 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = runup.ItemId,
 				IsDeleted = runup.IsDeleted,
+				CorrectorId = runup.CorrectorId,
 				FlightId = runup.FlightId,
 				StartTime = runup.StartTime.TotalMinutes as int?,
 				RunUpType = (short)runup.RunUpType,
 				RunUpPhase = (short)runup.RunUpPhase,
 				RunUpCondition = (short)runup.RunUpCondition,
 				EndTime = runup.EndTime.TotalMinutes as int?,
-
 				EndPhase = (short)runup.EndPhase,
 				ShutDownReasonId = runup.ShutDownReasonId,
 				ShutDownType = (short)runup.ShutDownType,
 				LandTime = runup.LandTime.TotalMinutes as int?,
-
 				AirTime = runup.AirTime.TotalMinutes as int?,
-
 				RecordDate = runup.RecordDate,
-
 				OnLifelength = runup.OnLifelength?.ConvertToByteArray(),
-
 				BaseComponentId = runup.BaseComponentId
 			};
 		}
 
 		public static RunUp Convert(this RunUpDTO runupdto)
 		{
-
 			return new RunUp()
 			{
 				ItemId = runupdto.ItemId,
 				IsDeleted = runupdto.IsDeleted,
+				CorrectorId = runupdto.CorrectorId,
 				FlightId = runupdto.FlightId,
 				StartTime = new TimeSpan(0, runupdto.StartTime ?? 0, 0),
 				RunUpType = runupdto.RunUpType.HasValue ? (RunUpType)runupdto.RunUpType.Value : RunUpType.Unknown,
-
 				RunUpPhase = runupdto.RunUpPhase.HasValue ? (DetectionPhase)runupdto.RunUpPhase.Value : DetectionPhase.Unknown,
-
 				RunUpCondition = runupdto.RunUpCondition.HasValue ? (RunUpCondition)runupdto.RunUpCondition.Value : RunUpCondition.Unknown,
 				EndTime = new TimeSpan(0, runupdto.EndTime ?? 0, 0),
 				EndPhase = runupdto.EndPhase.HasValue ? (DetectionPhase)runupdto.EndPhase.Value : DetectionPhase.Unknown,
-
 				ShutDownReasonId = runupdto.ShutDownReasonId ?? default(int),
 				ShutDownType = runupdto.ShutDownType.HasValue ? (ShutDownType)runupdto.ShutDownType.Value : ShutDownType.Unknown,
-
 				LandTime = new TimeSpan(0, runupdto.LandTime ?? 0, 0),
-
 				AirTime = new TimeSpan(0, runupdto.AirTime ?? 0, 0),
 				RecordDate = runupdto.RecordDate ?? DateTimeExtend.GetCASMinDateTime(),
 				OnLifelength = Lifelength.ConvertFromByteArray(runupdto.OnLifelength),
@@ -4902,10 +4589,10 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = smsevent.ItemId,
 				IsDeleted = smsevent.IsDeleted,
+				CorrectorId = smsevent.CorrectorId,
 				FullName = smsevent.FullName,
 				Description = smsevent.Description
 			};
-
 		}
 
 		public static SmsEventType Convert(this SmsEventTypeDTO smseventdto)
@@ -4914,46 +4601,43 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = smseventdto.ItemId,
 				IsDeleted = smseventdto.IsDeleted,
+				CorrectorId = smseventdto.CorrectorId,
 				FullName = smseventdto.FullName,
 				Description = smseventdto.Description
 			};
 		}
 		
-
 		public static StockComponentInfoDTO Convert(this StockComponentInfo info)
 		{
-
 			return new StockComponentInfoDTO
 			{
 				ItemId = info.ItemId,
 				IsDeleted = info.IsDeleted,
+				CorrectorId = info.CorrectorId,
 				StoreID = info.StoreId,
 				PartNumber = info.PartNumber,
 				Description = info.Description,
 				AccessoryDescriptionId = info.AccessoryDescription?.ItemId,
 				Measure = info.Measure?.ItemId,
 				GoodStandartId = info.Standart?.ItemId,
-				ComponentClass = info.GoodsClass?.ItemId,
-
+				ComponentClass = info.GoodsClass?.ItemId
 			};
 		}
 
 		public static StockComponentInfo Convert(this StockComponentInfoDTO infodto)
-
 		{
 			return new StockComponentInfo
 			{
 				ItemId = infodto.ItemId,
 				IsDeleted = infodto.IsDeleted,
+				CorrectorId = infodto.CorrectorId,
 				StoreId = infodto.StoreID ?? default(int),
-
 				PartNumber = infodto.PartNumber,
 				Description = infodto.Description,
 				AccessoryDescription = infodto.AccessoryDescription?.ConvertToProduct(),
 				Measure = infodto.Measure.HasValue ? Measure.Items.GetItemById(infodto.Measure.Value) : Measure.Unknown,
 				Standart = infodto.Standart?.Convert(),
 				GoodsClass = infodto.ComponentClass.HasValue ? GoodsClass.Items.GetItemById(infodto.ComponentClass.Value) : GoodsClass.Unknown
-
 			};
 		}
 
@@ -4963,9 +4647,8 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = store.ItemId,
 				IsDeleted = store.IsDeleted,
-
+				CorrectorId = store.CorrectorId,
 				OperatorID = store.OperatorId,
-
 				StoreName = store.Name,
 				Adress = store.Adress,
 				Contact = store.Contact,
@@ -4977,13 +4660,13 @@ namespace SmartCore.DtoHelper
 			};
 		}
 
-
 		public static Store Convert(this StoreDTO storedto)
 		{
 			return new Store()
 			{
 				ItemId = storedto.ItemId,
 				IsDeleted = storedto.IsDeleted,
+				CorrectorId = storedto.CorrectorId,
 				Adress = storedto.Adress,
 				Contact = storedto.Contact,
 				Email = storedto.Email,
@@ -5002,6 +4685,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = supplierdoc.ItemId,
 				IsDeleted = supplierdoc.IsDeleted,
+				CorrectorId = supplierdoc.CorrectorId,
 				SupplierId = supplierdoc.SupplierId,
 				Name = supplierdoc.Name,
 				DocumentType = supplierdoc.DocumentType,
@@ -5009,28 +4693,23 @@ namespace SmartCore.DtoHelper
 			};
 		}
 
-
 		public static SupplierDocument Convert(this SupplierDocumentDTO supplierdocdto)
 		{
-
 			var value = new SupplierDocument()
 			{
 				ItemId = supplierdocdto.ItemId,
 				IsDeleted = supplierdocdto.IsDeleted,
+				CorrectorId = supplierdocdto.CorrectorId,
 				SupplierId = supplierdocdto.SupplierId ?? default(int),
 				Name = supplierdocdto.Name,
 				DocumentType = supplierdocdto.DocumentType,
-
 				FileId = supplierdocdto.FileId ?? default(int)
-
 			};
 
 			if (supplierdocdto.Files != null)
 				value.Files.AddRange(supplierdocdto.Files.Select(i => i.Convert()));
-
-
+			
 			return value;
-
 		}
 
 		public static TransferRecordDTO Convert(this TransferRecord transrec)
@@ -5039,43 +4718,37 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = transrec.ItemId,
 				IsDeleted = transrec.IsDeleted,
+				CorrectorId = transrec.CorrectorId,
 				PreConfirmTransfer = transrec.PreConfirmTransfer,
 				ParentID = transrec.ParentId,
 				ParentType = transrec.ParentType?.ItemId,
 				FromAircraftID = transrec.FromAircraftId,
 				FromStoreID = transrec.FromStoreId,
 				DestinationObjectID = transrec.DestinationObjectId,
-
 				DestinationObjectType = transrec.DestinationObjectType?.ItemId,
 				ConsumableId = transrec.ConsumableId,
 				TransferDate = transrec.StartTransferDate,
 				DestConfirmTransferDate = transrec.TransferDate,
 				WorkPackageID = transrec.DirectivePackageId,
 				PerformanceNum = transrec.PerformanceNum,
-
 				Remarks = transrec.Remarks,
 				Reference = transrec.Reference,
 				PODR = transrec.PODR,
-
 				DODR = transrec.DODR,
 				Position = transrec.Position,
 				FromBaseComponentID = transrec.FromBaseComponentId,
 				Description = transrec.Description,
-
 				ReasonId = transrec.Reason?.ItemId ?? -1,
 				State = transrec.State?.ItemId,
-
 				ReplaceComponentId = transrec.ReplaceComponentId,
 				IsReplaceComponentRemoved = transrec.IsReplaceComponentRemoved,
 				ReceivedSpecialistId = transrec.ReceivedSpecialist?.ItemId,
 				ReleasedSpecialistId = transrec.ReleasedSpecialist?.ItemId,
 				FromSupplierId = transrec.FromSupplierId,
-
 				SupplierReceiptDate = transrec.SupplierReceiptDate,
 				SupplierNotify = transrec.SupplierNotify?.ConvertToByteArray(),
 				FromSpecialistId = transrec.FromSpecialistId,
 				Files = transrec.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>
-
 			};
 		}
 
@@ -5083,14 +4756,13 @@ namespace SmartCore.DtoHelper
 		{
 			var value = new TransferRecord()
 			{
-
 				ItemId = transrecdto.ItemId,
 				IsDeleted = transrecdto.IsDeleted,
+				CorrectorId = transrecdto.CorrectorId,
 				ParentId = transrecdto.ParentID,
 				ParentType = transrecdto.ParentType.HasValue ? SmartCoreType.Items.GetItemById(transrecdto.ParentType.Value) : SmartCoreType.Unknown,
 				FromAircraftId = transrecdto.FromAircraftID,
 				FromStoreId = transrecdto.FromStoreID,
-
 				DestinationObjectId = transrecdto.DestinationObjectID ?? default(int),
 				DestinationObjectType = transrecdto.DestinationObjectType.HasValue ? SmartCoreType.Items.GetItemById(transrecdto.DestinationObjectType.Value) : SmartCoreType.Unknown,
 				ConsumableId = transrecdto.ConsumableId ?? default(int),
@@ -5108,7 +4780,6 @@ namespace SmartCore.DtoHelper
 				Description = transrecdto.Description,
 				Reason = InitialReason.Items.GetItemById(transrecdto.ReasonId) ?? InitialReason.Unknown,
 				State = transrecdto.State.HasValue ? ComponentStorePosition.Items.GetItemById(transrecdto.State.Value) : ComponentStorePosition.UNK,
-
 				ReplaceComponentId = transrecdto.ReplaceComponentId,
 				IsReplaceComponentRemoved = transrecdto.IsReplaceComponentRemoved,
 				ReceivedSpecialist = transrecdto.ReceivedSpecialist?.Convert(),
@@ -5116,15 +4787,12 @@ namespace SmartCore.DtoHelper
 				FromSupplierId = transrecdto.FromSupplierId,
 				SupplierReceiptDate = transrecdto.SupplierReceiptDate ?? DateTimeExtend.GetCASMinDateTime(),
 				SupplierNotify = Lifelength.ConvertFromByteArray(transrecdto.SupplierNotify),
-
 				FromSpecialistId = transrecdto.FromSpecialistId
-
 			};
 
 			if (transrecdto.Files != null)
 				value.Files.AddRange(transrecdto.Files.Select(i => i.Convert()));
-
-
+			
 			return value;
 		}
 
@@ -5134,6 +4802,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = vehicle.ItemId,
 				IsDeleted = vehicle.IsDeleted,
+				CorrectorId = vehicle.CorrectorId,
 				OperatorId = vehicle.OperatorId,
 				RegistrationNumber = vehicle.RegistrationNumber,
 				ModelId = vehicle.Model?.ItemId,
@@ -5142,11 +4811,9 @@ namespace SmartCore.DtoHelper
 				CockpitSeating = vehicle.CockpitSeating,
 				DeliveryDate = vehicle.DeliveryDate,
 				AcceptanceDate = vehicle.AcceptanceDate,
-				Schedule = vehicle.Schedule,
+				Schedule = vehicle.Schedule
 			};
-
 		}
-
 
 		public static Vehicle Convert(this VehicleDTO vehicledto)
 		{
@@ -5154,9 +4821,9 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = vehicledto.ItemId,
 				IsDeleted = vehicledto.IsDeleted,
+				CorrectorId = vehicledto.CorrectorId,
 				OperatorId = vehicledto.OperatorId ?? default(int),
 				RegistrationNumber = vehicledto.RegistrationNumber,
-
 				Model = vehicledto.Model?.ConvertToAircraftModel(),
 				ManufactureDate = vehicledto.ManufactureDate ?? DateTimeExtend.GetCASMinDateTime(),
 				Owner = vehicledto.Owner,
@@ -5168,12 +4835,12 @@ namespace SmartCore.DtoHelper
 		}
 
 		public static WorkOrderDTO Convert(this WorkOrder work)
-
 		{
 			return new WorkOrderDTO
 			{
 				ItemId = work.ItemId,
 				IsDeleted = work.IsDeleted,
+				CorrectorId = work.CorrectorId,
 				PreparedByDate = work.PreparedByDate,
 				PreparedById = work.PreparedBy?.ItemId,
 				CheckedByDate = work.CheckedByDate,
@@ -5183,9 +4850,7 @@ namespace SmartCore.DtoHelper
 				JobCardNumber = work.JobCardNumber,
 				JobCardHeader = work.JobCardHeader,
 				WorkOrderFooter = work.WorkOrderFooter,
-
 				Title = work.Title,
-
 				Description = work.Description,
 				Number = work.Number,
 				ParentId = work.ParentId,
@@ -5200,19 +4865,17 @@ namespace SmartCore.DtoHelper
 				PublishingRemarks = work.PublishingRemarks,
 				ClosingRemarks = work.ClosingRemarks,
 				Kits = work.Kits?.Select(i => i.Convert()) as ICollection<AccessoryRequiredDTO>,
-
 				PackageRecords = work.Kits?.Select(i => i.Convert()) as ICollection<WorkOrderRecordDTO>
 			};
-
 		}
 
 		public static WorkOrder Convert(this WorkOrderDTO workdto)
-
 		{
 			var value = new WorkOrder()
 			{
 				ItemId = workdto.ItemId,
 				IsDeleted = workdto.IsDeleted,
+				CorrectorId = workdto.CorrectorId,
 				PreparedByDate = workdto.PreparedByDate ?? DateTimeExtend.GetCASMinDateTime(),
 				PreparedBy = workdto.PreparedBy?.Convert(),
 				CheckedByDate = workdto.CheckedByDate ?? DateTimeExtend.GetCASMinDateTime(),
@@ -5227,10 +4890,8 @@ namespace SmartCore.DtoHelper
 				Number = workdto.Number,
 				ParentId = workdto.ParentId ?? default(int),
 				Status = workdto.Status.HasValue ? (WorkPackageStatus)workdto.Status.Value : WorkPackageStatus.All,
-
 				CreateDate = workdto.CreateDate ?? DateTimeExtend.GetCASMinDateTime(),
 				OpeningDate = workdto.OpeningDate ?? DateTimeExtend.GetCASMinDateTime(),
-
 				PublishingDate = workdto.PublishingDate ?? DateTimeExtend.GetCASMinDateTime(),
 				ClosingDate = workdto.ClosingDate ?? DateTimeExtend.GetCASMinDateTime(),
 				PublishedBy = workdto.PublishedBy,
@@ -5242,14 +4903,12 @@ namespace SmartCore.DtoHelper
 
 			if (workdto.Kits != null)
 			{
-
 				foreach (var dto in workdto.Kits)
 				{
 					var directive = dto.Convert();
 					directive.ParentObject = value;
 					value.Kits.Add(directive);
 				}
-
 			}
 
 			if (workdto.PackageRecords != null)
@@ -5259,12 +4918,12 @@ namespace SmartCore.DtoHelper
 		}
 
 		public static WorkOrderRecordDTO Convert(this WorkOrderRecord workorder)
-
 		{
 			return new WorkOrderRecordDTO
 			{
 				ItemId = workorder.ItemId,
 				IsDeleted = workorder.IsDeleted,
+				CorrectorId = workorder.CorrectorId,
 				ParentId = workorder.ParentId,
 				DirectivesId = workorder.DirectiveId,
 				PackageItemTypeId = workorder.PackageItemType?.ItemId
@@ -5273,13 +4932,11 @@ namespace SmartCore.DtoHelper
 
 		public static WorkOrderRecord Convert(this WorkOrderRecordDTO workorderdto)
 		{
-
 			return new WorkOrderRecord()
 			{
-
 				ItemId = workorderdto.ItemId,
 				IsDeleted = workorderdto.IsDeleted,
-
+				CorrectorId = workorderdto.CorrectorId,
 				ParentId = workorderdto.ParentId ?? default(int),
 				DirectiveId = workorderdto.DirectivesId ?? default(int),
 				PackageItemType = workorderdto.PackageItemTypeId.HasValue ? SmartCoreType.Items.GetItemById(workorderdto.PackageItemTypeId.Value) : SmartCoreType.Unknown
@@ -5292,8 +4949,8 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = workpack.ItemId,
 				IsDeleted = workpack.IsDeleted,
+				CorrectorId = workpack.CorrectorId,
 				ParentId = workpack.ParentId,
-
 				Title = workpack.Title,
 				Description = workpack.Description,
 				Status = (int)workpack.Status,
@@ -5305,7 +4962,6 @@ namespace SmartCore.DtoHelper
 				PublishingRemarks = workpack.PublishingRemarks,
 				ClosingRemarks = workpack.ClosingRemarks,
 				OnceClosed = workpack.OnceClosed,
-
 				ReleaseCertificateNo = workpack.ReleaseCertificateNo,
 				CheckType = workpack.CheckType,
 				Station = workpack.Station,
@@ -5314,11 +4970,9 @@ namespace SmartCore.DtoHelper
 				Revision = workpack.Revision,
 				CreateDate = workpack.CreateDate,
 				PublishedBy = workpack.PublishedBy,
-
 				ClosedBy = workpack.ClosedBy,
 				EmployeesRemark = workpack.EmployeesRemark,
 				Files = workpack.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>
-
 			};
 		}
 
@@ -5329,12 +4983,12 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = workpackdto.ItemId,
 				IsDeleted = workpackdto.IsDeleted,
+				CorrectorId = workpackdto.CorrectorId,
 				ParentId = workpackdto.ParentId ?? default(int),
 				Title = workpackdto.Title,
 				Description = workpackdto.Description,
 				Status = (WorkPackageStatus)workpackdto.Status,
 				Author = workpackdto.Author,
-
 				OpeningDate = workpackdto.OpeningDate,
 				PublishingDate = workpackdto.PublishingDate ?? DateTimeExtend.GetCASMinDateTime(),
 				ClosingDate = workpackdto.ClosingDate ?? DateTimeExtend.GetCASMinDateTime(),
@@ -5346,7 +5000,6 @@ namespace SmartCore.DtoHelper
 				CheckType = workpackdto.CheckType,
 				Station = workpackdto.Station,
 				MaintenanceRepairOrzanization = workpackdto.MaintenanceReportNo,
-
 				Number = workpackdto.Number,
 				Revision = workpackdto.Revision,
 				CreateDate = workpackdto.CreateDate ?? DateTimeExtend.GetCASMinDateTime(),
@@ -5367,6 +5020,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = workpackrec.ItemId,
 				IsDeleted = workpackrec.IsDeleted,
+				CorrectorId = workpackrec.CorrectorId,
 				WorkPakageId = workpackrec.WorkPakageId,
 				DirectivesId = workpackrec.DirectiveId,
 				WorkPackageItemType = workpackrec.WorkPackageItemType,
@@ -5385,14 +5039,15 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = workpackrecdto.ItemId,
 				IsDeleted = workpackrecdto.IsDeleted,
+				CorrectorId = workpackrecdto.CorrectorId,
 				WorkPakageId = workpackrecdto.WorkPakageId,
 				DirectiveId = workpackrecdto.DirectivesId ?? default(int),
 				WorkPackageItemType = workpackrecdto.WorkPackageItemType ?? default(int),
 				PerformanceNumFromStart = workpackrecdto.PerfNumFromStart ?? default(int),
 				PerformanceNumFromRecord = workpackrecdto.PerfNumFromRecord ?? default(int),
 				FromRecordId = workpackrecdto.FromRecordId ?? default(int),
-		ParentCheckId = workpackrecdto.ParentCheckId ?? default(int),
-		Group = workpackrecdto.Group ?? default(int),
+				ParentCheckId = workpackrecdto.ParentCheckId ?? default(int),
+				Group = workpackrecdto.Group ?? default(int),
 				JobCardNumber = workpackrecdto.JobCardNumber
 			};
 		}
@@ -5403,6 +5058,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = workspec.ItemId,
 				IsDeleted = workspec.IsDeleted,
+				CorrectorId = workspec.CorrectorId,
 				WorkPackageId = workspec.WorkPackageId,
 				SpecialistId = workspec.SpecialistId
 			};
@@ -5414,6 +5070,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = workspecdto.ItemId,
 				IsDeleted = workspecdto.IsDeleted,
+				CorrectorId = workspecdto.CorrectorId,
 				WorkPackageId = workspecdto.WorkPackageId,
 				SpecialistId = workspecdto.SpecialistId
 			};
@@ -5425,6 +5082,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = workshop.ItemId,
 				IsDeleted = workshop.IsDeleted,
+				CorrectorId = workshop.CorrectorId,
 				StoreName = workshop.Name,
 				Location = workshop.Location,
 				OperatorId = workshop.OperatorId,
@@ -5438,6 +5096,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = workshopdto.ItemId,
 				IsDeleted = workshopdto.IsDeleted,
+				CorrectorId = workshopdto.CorrectorId,
 				Name = workshopdto.StoreName,
 				Location = workshopdto.Location,
 				OperatorId = workshopdto.OperatorId ?? default(int),
@@ -5451,6 +5110,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = maindirec.ItemId,
 				IsDeleted = maindirec.IsDeleted,
+				CorrectorId = maindirec.CorrectorId,
 				IsApplicability = maindirec.IsApplicability,
 				IsOperatorTask = maindirec.IsOperatorTask,
 				ProgramIndicator = maindirec.ProgramIndicator?.ItemId ?? -1,
@@ -5508,6 +5168,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = maindirecdto.ItemId,
 				IsDeleted = maindirecdto.IsDeleted,
+				CorrectorId = maindirecdto.CorrectorId,
 				IsApplicability = maindirecdto.IsApplicability,
 				ProgramIndicator = MaintenanceDirectiveProgramIndicator.GetItemById(maindirecdto.ProgramIndicator),
 				IsOperatorTask = maindirecdto.IsOperatorTask,
@@ -5589,6 +5250,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = oper.ItemId,
 				IsDeleted = oper.IsDeleted,
+				CorrectorId = oper.CorrectorId,
 				Name = oper.Name,
 				LogoType = oper.LogoType,
 				ICAOCode = oper.ICAOCode,
@@ -5608,6 +5270,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = operdto.ItemId,
 				IsDeleted = operdto.IsDeleted,
+				CorrectorId = operdto.CorrectorId,
 				Name = operdto.Name,
 				LogoTypeImageByteView = operdto.LogoType,
 				LogoType = operdto.LogoType,
@@ -5628,6 +5291,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = coract.ItemId,
 				IsDeleted = coract.IsDeleted,
+				CorrectorId = coract.CorrectorId,
 				DiscrepancyID = coract.DiscrepancyId,
 				Description = coract.Description,
 				ShortDescription = coract.ShortDescription,
@@ -5637,7 +5301,6 @@ namespace SmartCore.DtoHelper
 				SerialNumberOff = coract.SerialNumberOff,
 				PartNumberOn = coract.PartNumberOn,
 				SerialNumberOn = coract.SerialNumberOn,
-				
 				CRSID = coract.CRSID
 			};
 		}
@@ -5648,6 +5311,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = coractdto.ItemId,
 				IsDeleted = coractdto.IsDeleted,
+				CorrectorId = coractdto.CorrectorId,
 				DiscrepancyId = coractdto.DiscrepancyID,
 				Description = coractdto.Description,
 				ShortDescription = coractdto.ShortDescription,
@@ -5667,6 +5331,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = medicalRecordDto.ItemId,
 				IsDeleted = medicalRecordDto.IsDeleted,
+				CorrectorId = medicalRecordDto.CorrectorId,
 				Remarks = medicalRecordDto.Remarks,
 				ClassNumber = medicalRecordDto.ClassId ?? default(int),
 				SpecialistId = medicalRecordDto.SpecialistId ?? default(int),
@@ -5682,6 +5347,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = medicalRecord.ItemId,
 				IsDeleted = medicalRecord.IsDeleted,
+				CorrectorId = medicalRecord.CorrectorId,
 				Repeat = medicalRecord.RepeatLifelength?.ConvertToByteArray(),
 				Notify = medicalRecord.NotifyLifelength?.ConvertToByteArray(),
 				Remarks = medicalRecord.Remarks,
@@ -5697,6 +5363,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = quotDto.ItemId,
 				IsDeleted = quotDto.IsDeleted,
+				CorrectorId = quotDto.CorrectorId,
 				Cost = quotDto.CostNew,
 				ProductId = quotDto.ProductId,
 				SupplierId = quotDto.SupplierId,
@@ -5713,6 +5380,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = quot.ItemId,
 				IsDeleted = quot.IsDeleted,
+				CorrectorId = quot.CorrectorId,
 				CostNew = quot.Cost,
 				ProductId = quot.ProductId,
 				SupplierId = quot.SupplierId,
@@ -5722,6 +5390,5 @@ namespace SmartCore.DtoHelper
 				CostServisible = quot.CostServisible
 			};
 		}
-
 	}
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CASTerms;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls.Initial
@@ -23,16 +24,19 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "P/N" };
 			ColumnHeaderList.Add(columnHeader);
 
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.15f), Text = "Description" };
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Standart" };
 			ColumnHeaderList.Add(columnHeader);
 
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Suppliers" };
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.15f), Text = "Description" };
 			ColumnHeaderList.Add(columnHeader);
 
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Measure" };
 			ColumnHeaderList.Add(columnHeader);
 
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Quantity" };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
 			ColumnHeaderList.Add(columnHeader);
 
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
@@ -43,14 +47,15 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(InitialOrderRecord item)
 		{
 			var subItems = new List<ListViewItem.ListViewSubItem>();
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
 			var subItem = new ListViewItem.ListViewSubItem { Text = item.Product?.PartNumber, Tag = item.Product?.PartNumber };
 			subItems.Add(subItem);
 
-			subItem = new ListViewItem.ListViewSubItem { Text = item.Product?.Description, Tag = item.Product?.Description };
+			subItem = new ListViewItem.ListViewSubItem { Text = item.Product?.Standart?.ToString(), Tag = item.Product?.Standart?.ToString() };
 			subItems.Add(subItem);
 
-			subItem = new ListViewItem.ListViewSubItem { Text = item.Suppliers?.ToString(), Tag = item.Suppliers?.ToString() };
+			subItem = new ListViewItem.ListViewSubItem { Text = item.Product?.Description, Tag = item.Product?.Description };
 			subItems.Add(subItem);
 
 			subItem = new ListViewItem.ListViewSubItem { Text = item.Measure.ToString(), Tag = item.Measure.ToString() };
@@ -58,6 +63,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			subItem = new ListViewItem.ListViewSubItem { Text = item.Quantity.ToString(), Tag = item.Quantity.ToString() };
 			subItems.Add(subItem);
+
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
 			return subItems.ToArray();
 		}

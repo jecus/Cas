@@ -82,12 +82,8 @@ namespace SmartCore.Purchase
 		#region public CommonCollection<ItemFileLink> Files { get; set; }
 
 		private CommonCollection<ItemFileLink> _files;
-		private TypeOfOperation _typeOfOperation;
-		private ShipBy _shipBy;
-		private IncoTerm _incoTerm;
 		private Citizenship _stationFromId;
 		private Supplier _supplier;
-		private Specialist _approvedBy;
 		private Specialist _publishedBy;
 		private Specialist _closedBy;
 
@@ -108,86 +104,18 @@ namespace SmartCore.Purchase
 		}
 
 		#endregion
-
-		[TableColumn("TypeOfOperation")]
-		public TypeOfOperation TypeOfOperation
-		{
-			get { return _typeOfOperation ?? TypeOfOperation.UNK; }
-			set { _typeOfOperation = value; }
-		}
-
-		[TableColumn("ShipBy")]
-		public ShipBy ShipBy
-		{
-			get { return _shipBy ?? ShipBy.UNK; }
-			set { _shipBy = value; }
-		}
-
-		[TableColumn("IncoTerm")]
-		public IncoTerm IncoTerm
-		{
-			get { return _incoTerm ?? IncoTerm.UNK; }
-			set { _incoTerm = value; }
-		}
-
-		[TableColumn("CountryId")]
-		public Citizenship Country
-		{
-			get { return _stationFromId ?? Citizenship.UNK; }
-			set { _stationFromId = value; }
-		}
-
-		[TableColumn("CarrierId")]
-		public Supplier Supplier
-		{
-			get { return _supplier ?? Supplier.Unknown; }
-			set { _supplier = value; }
-		}
-
-		[TableColumn("RFQ")]
-		public string RFQ { get; set; }
-
-		[TableColumn("QR")]
-		public string QR { get; set; }
-
-		[TableColumn("PO")]
-		public string PO { get; set; }
-
-		[TableColumn("Invoice")]
-		public string Invoice { get; set; }
-
-		[TableColumn("Weight")]
-		public string Weight { get; set; }
-
-		[TableColumn("DIMS")]
-		public string DIMS { get; set; }
-
-		[TableColumn("ShipTo")]
-		public string ShipTo { get; set; }
-
-		[TableColumn("PickUp")]
-		public string PickUp { get; set; }
-
-		[TableColumn("ApprovedById")]
-		public Specialist ApprovedBy
-		{
-			get { return _approvedBy ?? Specialist.Unknown; }
-			set { _approvedBy = value; }
-		}
-
 		[TableColumn("PublishedById")]
-		public Specialist PublishedBy
-		{
-			get { return _publishedBy ?? Specialist.Unknown; }
-			set { _publishedBy = value; }
-		}
-
+		public int PublishedById { get; set; }
 		[TableColumn("ClosedById")]
-		public Specialist ClosedBy
-		{
-			get { return _closedBy ?? Specialist.Unknown; }
-			set { _closedBy = value; }
-		}
+		public int ClosedById { get; set; }
+		[TableColumn("PublishedByUser")]
+		public string PublishedByUser { get; set; }
+
+		[TableColumn("CloseByUser")]
+		public string CloseByUser { get; set; }
+
+		[TableColumn("Number")]
+		public string Number { get; set; }
 
 		/*
 		*  Ìועמהû 

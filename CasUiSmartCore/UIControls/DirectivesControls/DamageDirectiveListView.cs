@@ -5,6 +5,7 @@ using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary.Comparers;
+using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
@@ -123,7 +124,10 @@ namespace CAS.UI.UIControls.DirectivesControls
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Hidden remarks" };
             ColumnHeaderList.Add(columnHeader);
 
-            itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
+            ColumnHeaderList.Add(columnHeader);
+
+			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
         }
 		#endregion
 
@@ -140,11 +144,11 @@ namespace CAS.UI.UIControls.DirectivesControls
         protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Directive item)
         {
             var subItems = new List<ListViewItem.ListViewSubItem>();
-
-            //////////////////////////////////////////////////////////////////////////////////////
-            //         Определение последнего выполнения директивы и KitRequiered               //
-            //////////////////////////////////////////////////////////////////////////////////////
-            var lastComplianceDate = DateTimeExtend.GetCASMinDateTime();
+            var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			//////////////////////////////////////////////////////////////////////////////////////
+			//         Определение последнего выполнения директивы и KitRequiered               //
+			//////////////////////////////////////////////////////////////////////////////////////
+			var lastComplianceDate = DateTimeExtend.GetCASMinDateTime();
             var nextComplianceDate = DateTimeExtend.GetCASMinDateTime();
             var lastComplianceLifeLength = Lifelength.Zero;
             var nextComplianceRemain = Lifelength.Null;
@@ -242,8 +246,9 @@ namespace CAS.UI.UIControls.DirectivesControls
             subItems.Add(new ListViewItem.ListViewSubItem { Text = cost == -1 ? "" : cost.ToString(), Tag = cost });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = remarksString, Tag = remarksString });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = hiddenRemarksString, Tag = hiddenRemarksString });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
-            return subItems.ToArray();
+			return subItems.ToArray();
         }
 
         #endregion

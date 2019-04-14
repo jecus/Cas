@@ -98,7 +98,14 @@ namespace CAS.UI.UIControls.Users
 			if (Check())
 			{
 				ApplyChanges();
-				GlobalObjects.CasEnvironment.GetSeviceUser().AddOrUpdateUser(_user);
+				GlobalObjects.CasEnvironment.GetSeviceUser().AddOrUpdateUser(new UserDTO()
+				{
+					ItemId = _user.ItemId,
+					Login = _user.Login,
+					Password = _user.Password,
+					Surname = _user.Surname,
+					Name = _user.Name
+				}); 
 				DialogResult = DialogResult.OK;
 				Close();
 			}

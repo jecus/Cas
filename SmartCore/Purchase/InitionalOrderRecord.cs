@@ -731,6 +731,9 @@ namespace SmartCore.Purchase
         public Boolean Processed { get; set; }
 		#endregion
 
+		[TableColumn("Remarks")]
+		public string Remarks { get; set; }
+
         /*
 		*  Ìועמהû 
 		*/
