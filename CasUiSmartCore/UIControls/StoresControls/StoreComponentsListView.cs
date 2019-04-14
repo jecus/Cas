@@ -607,7 +607,7 @@ namespace CAS.UI.UIControls.StoresControls
                         }
                         //Если привязанным элементом является деталь
                         //то в результирующий список следом за ней добавляются ее директивы
-                        IEnumerable<ListViewItem> items =
+                        var items =
                             ListViewItemList
                             .Where(lvi => lvi.Tag is ComponentDirective && ((ComponentDirective)lvi.Tag).ComponentId == component.ItemId);
                         foreach (ListViewItem listViewItem in items)
@@ -656,7 +656,7 @@ namespace CAS.UI.UIControls.StoresControls
                                 resultList.Add(temp);
                             }
                         }
-                        IEnumerable<ListViewItem> items =
+                        var items =
                             ListViewItemList
                             .Where(lvi => lvi.Tag is ComponentDirective && ((ComponentDirective)lvi.Tag).ComponentId == component.ItemId);
                         foreach (ListViewItem listViewItem in items)

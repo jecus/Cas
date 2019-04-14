@@ -296,7 +296,7 @@ namespace CAS.UI.UIControls.StoresControls
 				_itemPrintReportAvailableComponents.Enabled = false;
 			}
 			
-			_directivesViewer.SetItemsArray(_resultDirectiveArray.ToArray());
+			_directivesViewer.SetItemsArray(_resultDirectiveArray.Distinct().ToArray());
 
             if (_removedComponents.Count > 0
                || _waitRemoveConfirmComponents.Count > 0
