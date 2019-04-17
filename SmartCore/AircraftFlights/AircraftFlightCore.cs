@@ -784,10 +784,7 @@ namespace SmartCore.AircraftFlights
 			if(atldIds.Count == 0)
 				return;
 
-			var flights = _loader.GetObjectList<AircraftFlight>(new ICommonFilter[]
-			{
-				new CommonFilter<int>(AircraftFlight.ATLBIdProperty, FilterType.In, atldIds.ToArray()), 
-			});
+			var flights = _newLoader.GetObjectList<AircraftFlightDTO,AircraftFlight>(new Filter("ATLBID", atldIds));
 
 			if (flights.Count == 0)
 				return;
