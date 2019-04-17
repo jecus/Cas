@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary.DataGridViewElements;
 using CASTerms;
 using EFCore.DTO.General;
+using MetroFramework.Forms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -20,7 +21,7 @@ namespace CAS.UI.UIControls.StoresControls
     /// <summary>
     /// Форма для установки агрегата со склада на ВС
     /// </summary>
-    public partial class MoveComponentForm : Form
+    public partial class MoveComponentForm : MetroForm
     {
         #region Fields
 
