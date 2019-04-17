@@ -8,6 +8,7 @@ using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using EFCore.DTO.Dictionaries;
 using EFCore.Filter;
+using MetroFramework.Forms;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
@@ -18,7 +19,7 @@ namespace CAS.UI.UIControls.SupplierControls
     /// <summary>
     /// Форма для переноса шаблона ВС в рабочую базу данных
     /// </summary>
-    public partial class SupplierBindProductsForm : Form
+    public partial class SupplierBindProductsForm : MetroForm
     {
 
         #region Fields

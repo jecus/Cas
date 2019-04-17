@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.WorkPakage
+﻿using MetroFramework.Controls;
+
+namespace CAS.UI.UIControls.WorkPakage
 {
 	partial class WorkPackageEmployeeForm
 	{
@@ -31,14 +33,14 @@
 			this.buttonDelete = new System.Windows.Forms.Button();
 			this.buttonAdd = new System.Windows.Forms.Button();
 			this.buttonClose = new System.Windows.Forms.Button();
-			this.labelCAA = new System.Windows.Forms.Label();
-			this.label1 = new System.Windows.Forms.Label();
-			this.labelWpNumber = new System.Windows.Forms.Label();
-			this.labelWpTitle = new System.Windows.Forms.Label();
+			this.labelCAA = new MetroLabel();
+			this.label1 = new MetroLabel();
+			this.labelWpNumber = new MetroLabel();
+			this.labelWpTitle = new MetroLabel();
 			this.workPackageEmployeeListView2 = new CAS.UI.UIControls.WorkPakage.WorkPackageEmployeeListView();
 			this.workPackageEmployeeListViewAll = new CAS.UI.UIControls.WorkPakage.WorkPackageEmployeeListView();
-			this.textboxRemark = new System.Windows.Forms.TextBox();
-			this.labelAddress = new System.Windows.Forms.Label();
+			this.textboxRemark = new MetroTextBox();
+			this.labelAddress = new MetroLabel();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.ButtonFilter = new AvControls.AvButtonT.AvButtonT();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -50,7 +52,7 @@
 			this.buttonDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonDelete.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonDelete.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonDelete.Location = new System.Drawing.Point(647, 625);
+			this.buttonDelete.Location = new System.Drawing.Point(647, 677);
 			this.buttonDelete.Name = "buttonDelete";
 			this.buttonDelete.Size = new System.Drawing.Size(85, 33);
 			this.buttonDelete.TabIndex = 18;
@@ -63,7 +65,7 @@
 			this.buttonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonAdd.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonAdd.Location = new System.Drawing.Point(738, 625);
+			this.buttonAdd.Location = new System.Drawing.Point(738, 677);
 			this.buttonAdd.Name = "buttonAdd";
 			this.buttonAdd.Size = new System.Drawing.Size(96, 33);
 			this.buttonAdd.TabIndex = 16;
@@ -77,7 +79,7 @@
 			this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonClose.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonClose.Location = new System.Drawing.Point(840, 625);
+			this.buttonClose.Location = new System.Drawing.Point(840, 677);
 			this.buttonClose.Name = "buttonClose";
 			this.buttonClose.Size = new System.Drawing.Size(75, 33);
 			this.buttonClose.TabIndex = 17;
@@ -87,9 +89,8 @@
 			// labelCAA
 			// 
 			this.labelCAA.AutoSize = true;
-			this.labelCAA.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelCAA.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelCAA.Location = new System.Drawing.Point(12, 9);
+			this.labelCAA.Location = new System.Drawing.Point(12, 63);
 			this.labelCAA.Name = "labelCAA";
 			this.labelCAA.Size = new System.Drawing.Size(119, 14);
 			this.labelCAA.TabIndex = 38;
@@ -98,9 +99,8 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.label1.Location = new System.Drawing.Point(12, 33);
+			this.label1.Location = new System.Drawing.Point(12, 87);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(129, 14);
 			this.label1.TabIndex = 39;
@@ -109,9 +109,8 @@
 			// labelWpNumber
 			// 
 			this.labelWpNumber.AutoSize = true;
-			this.labelWpNumber.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelWpNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelWpNumber.Location = new System.Drawing.Point(137, 9);
+			this.labelWpNumber.Location = new System.Drawing.Point(137, 63);
 			this.labelWpNumber.Name = "labelWpNumber";
 			this.labelWpNumber.Size = new System.Drawing.Size(21, 14);
 			this.labelWpNumber.TabIndex = 40;
@@ -120,9 +119,8 @@
 			// labelWpTitle
 			// 
 			this.labelWpTitle.AutoSize = true;
-			this.labelWpTitle.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelWpTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelWpTitle.Location = new System.Drawing.Point(137, 33);
+			this.labelWpTitle.Location = new System.Drawing.Point(137, 87);
 			this.labelWpTitle.Name = "labelWpTitle";
 			this.labelWpTitle.Size = new System.Drawing.Size(33, 14);
 			this.labelWpTitle.TabIndex = 41;
@@ -134,7 +132,7 @@
 			this.workPackageEmployeeListView2.DisplayerText = null;
 			this.workPackageEmployeeListView2.Entity = null;
 			this.workPackageEmployeeListView2.IgnoreAutoResize = false;
-			this.workPackageEmployeeListView2.Location = new System.Drawing.Point(12, 326);
+			this.workPackageEmployeeListView2.Location = new System.Drawing.Point(12, 380);
 			this.workPackageEmployeeListView2.Name = "workPackageEmployeeListView2";
 			this.workPackageEmployeeListView2.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.workPackageEmployeeListView2.ShowGroups = true;
@@ -147,7 +145,7 @@
 			this.workPackageEmployeeListViewAll.DisplayerText = null;
 			this.workPackageEmployeeListViewAll.Entity = null;
 			this.workPackageEmployeeListViewAll.IgnoreAutoResize = false;
-			this.workPackageEmployeeListViewAll.Location = new System.Drawing.Point(12, 61);
+			this.workPackageEmployeeListViewAll.Location = new System.Drawing.Point(12, 115);
 			this.workPackageEmployeeListViewAll.Name = "workPackageEmployeeListViewAll";
 			this.workPackageEmployeeListViewAll.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.workPackageEmployeeListViewAll.ShowGroups = true;
@@ -157,9 +155,8 @@
 			// textboxRemark
 			// 
 			this.textboxRemark.BackColor = System.Drawing.Color.White;
-			this.textboxRemark.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.textboxRemark.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textboxRemark.Location = new System.Drawing.Point(83, 591);
+			this.textboxRemark.Location = new System.Drawing.Point(83, 645);
 			this.textboxRemark.MaxLength = 3000;
 			this.textboxRemark.Multiline = true;
 			this.textboxRemark.Name = "textboxRemark";
@@ -170,9 +167,8 @@
 			// labelAddress
 			// 
 			this.labelAddress.AutoSize = true;
-			this.labelAddress.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelAddress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelAddress.Location = new System.Drawing.Point(14, 594);
+			this.labelAddress.Location = new System.Drawing.Point(14, 648);
 			this.labelAddress.Name = "labelAddress";
 			this.labelAddress.Size = new System.Drawing.Size(59, 14);
 			this.labelAddress.TabIndex = 42;
@@ -182,7 +178,7 @@
 			// 
 			this.pictureBox2.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
 			this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.pictureBox2.Location = new System.Drawing.Point(910, 11);
+			this.pictureBox2.Location = new System.Drawing.Point(910, 65);
 			this.pictureBox2.Name = "pictureBox2";
 			this.pictureBox2.Size = new System.Drawing.Size(5, 50);
 			this.pictureBox2.TabIndex = 45;
@@ -200,7 +196,7 @@
 			this.ButtonFilter.Icon = global::CAS.UI.Properties.Resources.ApplyFilterIcon;
 			this.ButtonFilter.IconLayout = System.Windows.Forms.ImageLayout.Center;
 			this.ButtonFilter.IconNotEnabled = global::CAS.UI.Properties.Resources.AddIconGraySmall;
-			this.ButtonFilter.Location = new System.Drawing.Point(865, 15);
+			this.ButtonFilter.Location = new System.Drawing.Point(865, 69);
 			this.ButtonFilter.Margin = new System.Windows.Forms.Padding(5);
 			this.ButtonFilter.Name = "ButtonFilter";
 			this.ButtonFilter.NormalBackgroundImage = null;
@@ -220,7 +216,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(921, 670);
+			this.ClientSize = new System.Drawing.Size(921, 722);
 			this.Controls.Add(this.pictureBox2);
 			this.Controls.Add(this.ButtonFilter);
 			this.Controls.Add(this.textboxRemark);
@@ -239,8 +235,7 @@
 			this.MinimizeBox = false;
 			this.Name = "WorkPackageEmployeeForm";
 			this.ShowIcon = false;
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "WorkPackageEmployeeForm";
+			this.Text = "Work Package Employee Form";
 			this.Load += new System.EventHandler(this.WorkPackageEmployeeForm_Load);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
 			this.ResumeLayout(false);
@@ -255,12 +250,12 @@
 		private System.Windows.Forms.Button buttonDelete;
 		private System.Windows.Forms.Button buttonAdd;
 		private System.Windows.Forms.Button buttonClose;
-		private System.Windows.Forms.Label labelCAA;
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Label labelWpNumber;
-		private System.Windows.Forms.Label labelWpTitle;
-		private System.Windows.Forms.TextBox textboxRemark;
-		private System.Windows.Forms.Label labelAddress;
+		private MetroLabel labelCAA;
+		private MetroLabel label1;
+		private MetroLabel labelWpNumber;
+		private MetroLabel labelWpTitle;
+		private MetroTextBox textboxRemark;
+		private MetroLabel labelAddress;
 		private System.Windows.Forms.PictureBox pictureBox2;
 		private AvControls.AvButtonT.AvButtonT ButtonFilter;
 	}
