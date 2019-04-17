@@ -72,7 +72,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		private void ButtonAdd_Click(object sender, System.EventArgs e)
 		{
 			foreach (var supplier in supplierListView.SelectedItems.ToArray())
-				_prices.Add(new SupplierPrice(){Supplier = supplier, SupplierId = supplier.ItemId});
+				_prices.Add(new SupplierPrice{Supplier = supplier, SupplierId = supplier.ItemId, Parent = _selectedItem});
 
 			supplierListView1.SetItemsArray(_prices.ToArray());
 		}
@@ -136,11 +136,13 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 		private void ButtonCancel_Click(object sender, System.EventArgs e)
 		{
+			DialogResult = DialogResult.Cancel;
 			this.Close();
 		}
 
 		private void ButtonOk_Click(object sender, System.EventArgs e)
 		{
+			DialogResult = DialogResult.OK;
 			if (supplierListView1.ListViewItemList.Count <= 0)
 			{
 				MessageBox.Show("Please select a suppliers for  order", (string)new GlobalTermsProvider()["SystemName"],

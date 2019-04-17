@@ -1226,6 +1226,12 @@
     <Compile Include="UIControls\PurchaseControls\Quatation\QuatationOrderFormNew.Designer.cs">
       <DependentUpon>QuatationOrderFormNew.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\PurchaseControls\Quatation\QuatationOrderListViewNew.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Quatation\QuatationOrderListViewNew.Designer.cs">
+      <DependentUpon>QuatationOrderListViewNew.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\PurchaseControls\Quatation\QuatationOrderListView.cs">
       <SubType>UserControl</SubType>
     </Compile>

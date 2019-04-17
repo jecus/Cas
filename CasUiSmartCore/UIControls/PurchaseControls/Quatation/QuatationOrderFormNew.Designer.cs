@@ -88,7 +88,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.labelQOTitle = new MetroFramework.Controls.MetroLabel();
 			this.buttonOk = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
-			this.listViewInitialItems = new CAS.UI.UIControls.PurchaseControls.Quatation.QuatationOrderListView();
+			this.listViewInitialItems = new CAS.UI.UIControls.PurchaseControls.Quatation.QuatationOrderListViewNew();
 			this.listViewKits = new CAS.UI.UIControls.PurchaseControls.Quatation.RequestProductListView();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
@@ -1163,7 +1163,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
         private MetroLabel labelRemarks;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
-		private CAS.UI.UIControls.PurchaseControls.Quatation.QuatationOrderListView listViewInitialItems;
+		private CAS.UI.UIControls.PurchaseControls.Quatation.QuatationOrderListViewNew listViewInitialItems;
 		private System.Windows.Forms.ComboBox comboBoxStatus;
 		private MetroTextBox metroTextBox1;
 		private MetroLabel metroLabel2;
