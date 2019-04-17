@@ -6,6 +6,7 @@ using CAS.UI.UIControls.DocumentationControls;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Purchase;
@@ -14,7 +15,7 @@ namespace CAS.UI.UIControls.SupplierControls
 {
     ///<summary>
     ///</summary>
-    public partial class SupplierForm : Form
+    public partial class SupplierForm : MetroForm
     {
         #region Fields
         private readonly Supplier _currentSupplier;
