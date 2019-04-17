@@ -8,6 +8,7 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
+using SmartCore.Entities.General.Interfaces;
 using SmartCore.Files;
 using SmartCore.Packages;
 
@@ -20,7 +21,7 @@ namespace SmartCore.Purchase
     [Table("PurchaseOrders", "dbo", "ItemId")]
     [Dto(typeof(PurchaseOrderDTO))]
 	[Condition("IsDeleted", "0")]
-    public class PurchaseOrder : AbstractPackage<PurchaseRequestRecord>, IComparable<PurchaseOrder>, IFileContainer
+    public class PurchaseOrder : AbstractPackage<PurchaseRequestRecord>, IComparable<PurchaseOrder>, IFileContainer, ILogistic
 	{
 
 		/*
