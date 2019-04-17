@@ -20,6 +20,7 @@ using CAS.UI.UIControls.MaintenanceControlCenterControls;
 using CAS.UI.UIControls.MonthlyUtilizationsControls;
 using CAS.UI.UIControls.PersonnelControls;
 using CAS.UI.UIControls.PurchaseControls;
+using CAS.UI.UIControls.PurchaseControls.AllOrders;
 using CAS.UI.UIControls.QualityAssuranceControls;
 using CAS.UI.UIControls.Reliability;
 using CAS.UI.UIControls.ScheduleControls;
@@ -268,9 +269,19 @@ namespace CAS.UI.UIControls.OpepatorsControls
             e.RequestedEntity = new AllProductListScreen(CurrentOperator);
         }
 
+		#region private void LinkOrders_DisplayerRequested(object sender, Interfaces.ReferenceEventArgs e)
+
+		private void LinkOrders_DisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.DisplayerText = CurrentOperator.Name + " Initial Orders";
+	        e.RequestedEntity = new AllOrderListScreen(_currentOperator);
+        }
+
+        #endregion
+
         #region private void LinkInitialOrderDisplayerRequested(object sender, ReferenceEventArgs e)
 
-        private void LinkInitialOrderDisplayerRequested(object sender, ReferenceEventArgs e)
+		private void LinkInitialOrderDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = CurrentOperator.Name + " Initial Orders";
             e.RequestedEntity = new InitialOrderListScreen(_currentOperator);

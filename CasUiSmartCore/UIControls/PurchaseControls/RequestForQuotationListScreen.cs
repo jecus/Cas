@@ -14,6 +14,7 @@ using CASTerms;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Interfaces;
 using SmartCore.Filters;
 using SmartCore.Purchase;
 
@@ -25,7 +26,7 @@ namespace CAS.UI.UIControls.PurchaseControls
     public partial class RequestForQuotationListScreen : ScreenControl
     {
         #region Fields
-        private CommonFilterCollection _filter = new CommonFilterCollection(typeof(RequestForQuotation));
+        private CommonFilterCollection _filter = new CommonFilterCollection(typeof(ILogistic));
         private ICommonCollection<RequestForQuotation> _quotatioArray = new CommonCollection<RequestForQuotation>();
         private ICommonCollection<RequestForQuotation> _resultArray = new CommonCollection<RequestForQuotation>();
 

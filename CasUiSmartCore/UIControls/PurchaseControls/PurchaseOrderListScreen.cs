@@ -11,6 +11,7 @@ using CASTerms;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Interfaces;
 using SmartCore.Filters;
 using SmartCore.Purchase;
 
@@ -22,7 +23,7 @@ namespace CAS.UI.UIControls.PurchaseControls
     public partial class PurchaseOrderListScreen : ScreenControl
     {
         #region Fields
-        private CommonFilterCollection _filter = new CommonFilterCollection(typeof(PurchaseOrder));
+        private CommonFilterCollection _filter = new CommonFilterCollection(typeof(ILogistic));
         private ICommonCollection<PurchaseOrder> _purchaseArray = new CommonCollection<PurchaseOrder>();
         private ICommonCollection<PurchaseOrder> _resultArray = new CommonCollection<PurchaseOrder>();
         private readonly BaseEntityObject _parent;

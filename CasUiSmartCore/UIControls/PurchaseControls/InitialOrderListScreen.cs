@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
-using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.PurchaseControls.Initial;
@@ -18,9 +17,9 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
+using SmartCore.Entities.General.Interfaces;
 using SmartCore.Filters;
 using SmartCore.Purchase;
-using FilterType = EFCore.Attributte.FilterType;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
@@ -30,7 +29,7 @@ namespace CAS.UI.UIControls.PurchaseControls
     public partial class InitialOrderListScreen : ScreenControl
     {
         #region Fields
-        private CommonFilterCollection _filter = new CommonFilterCollection(typeof(InitialOrder));
+        private CommonFilterCollection _filter = new CommonFilterCollection(typeof(ILogistic));
         private ICommonCollection<InitialOrder> _initialArray = new CommonCollection<InitialOrder>();
         private ICommonCollection<InitialOrder> _resultArray = new CommonCollection<InitialOrder>();
         private readonly BaseEntityObject _parent;

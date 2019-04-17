@@ -81,6 +81,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.LinkEvets = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this._purchaseReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
 			this.LinkInitialOrders = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+			this.LinkOrders = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkPurchaseOrders = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkQuotationOrders = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkSuppliers = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -2082,9 +2083,10 @@ namespace CAS.UI.UIControls.OpepatorsControls
 #if DEMO
             this._purchaseReferenceContainer.ReferenceLink04 = this.LinkSuppliers;
 #else
+            this._purchaseReferenceContainer.ReferenceLink = this.LinkOrders;
             this._purchaseReferenceContainer.ReferenceLink = this.LinkInitialOrders;
-			this._purchaseReferenceContainer.ReferenceLink02 = this.LinkPurchaseOrders;
 			this._purchaseReferenceContainer.ReferenceLink03 = this.LinkQuotationOrders;
+			this._purchaseReferenceContainer.ReferenceLink02 = this.LinkPurchaseOrders;
 			this._purchaseReferenceContainer.ReferenceLink04 = this.LinkSuppliers;
 			this._purchaseReferenceContainer.ReferenceLink05 = this.LinkSupplierComponents;
 #endif
@@ -2112,6 +2114,31 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this._purchaseReferenceContainer.Size = new System.Drawing.Size(158, 42);
 			this._purchaseReferenceContainer.TabIndex = 51;
 			this._purchaseReferenceContainer.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
+			// 
+			// LinkOrders
+			// 
+			this.LinkOrders.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkOrders.Displayer = null;
+			this.LinkOrders.DisplayerText = null;
+			this.LinkOrders.Entity = null;
+			this.LinkOrders.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.LinkOrders.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkOrders.ImageBackColor = System.Drawing.Color.Transparent;
+			this.LinkOrders.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.LinkOrders.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkOrders.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.LinkOrders.Location = new System.Drawing.Point(10, 0);
+			this.LinkOrders.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.LinkOrders.MaximumSize = new System.Drawing.Size(250, 20);
+			this.LinkOrders.Name = "LinkOrders";
+			this.LinkOrders.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.LinkOrders.Size = new System.Drawing.Size(250, 20);
+			this.LinkOrders.Status = AvControls.Statuses.Satisfactory;
+			this.LinkOrders.TabIndex = 52;
+			this.LinkOrders.Text = "All Orders";
+			this.LinkOrders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.LinkOrders.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.LinkOrders.DisplayerRequested += LinkOrders_DisplayerRequested;
 			// 
 			// LinkInitialOrders
 			// 
@@ -2296,11 +2323,10 @@ namespace CAS.UI.UIControls.OpepatorsControls
 
 		}
 
-       
 
-#endregion
+		#endregion
 
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelReferences;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelReferences;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelAircrafts;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelStores;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelExport;
@@ -2369,6 +2395,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkProducts;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkAllProducts;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkInitialOrders;
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkOrders;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkPurchaseOrders;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkQuotationOrders;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkSuppliers;

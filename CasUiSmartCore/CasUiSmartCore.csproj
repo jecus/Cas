@@ -1148,6 +1148,18 @@
     <Compile Include="UIControls\PowerPlants\PowerPlantListView.Designer.cs">
       <DependentUpon>PowerPlantListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\PurchaseControls\AllOrders\AllOrderListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\AllOrders\AllOrderListView.Designer.cs">
+      <DependentUpon>AllOrderListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\AllOrders\AllOrderListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\AllOrders\AllOrderListScreen.Designer.cs">
+      <DependentUpon>AllOrderListScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\PurchaseControls\AllProduct\AllProductListScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -3924,6 +3936,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PowerPlants\PowerPlantListScreen.resx">
       <DependentUpon>PowerPlantListScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\PurchaseControls\AllOrders\AllOrderListScreen.resx">
+      <DependentUpon>AllOrderListScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PurchaseControls\AllProduct\AllProductListScreen.resx">
       <DependentUpon>AllProductListScreen.cs</DependentUpon>
