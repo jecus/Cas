@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using CASTerms;
 using EFCore.DTO.General;
 using EFCore.Filter;
+using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
@@ -15,7 +16,7 @@ namespace CAS.UI.UIControls.StoresControls
     ///<summary>
     /// Форма для задания неснижаемого запаса некоторого комплектующего на складе
     ///</summary>
-    public partial class StockComponentInfoForm : Form
+    public partial class StockComponentInfoForm : MetroForm
     {
         private StockComponentInfo _stockComponentInfo;
 	    private readonly bool _disableControls;
