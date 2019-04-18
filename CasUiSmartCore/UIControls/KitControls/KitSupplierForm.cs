@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
 using EFCore.DTO.General;
+using MetroFramework.Forms;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Purchase;
@@ -13,7 +14,7 @@ namespace CAS.UI.UIControls.KitControls
     ///<summary>
     /// Форма для отображения и редактирования списка поставщиков комплектующего
     ///</summary>
-    public partial class AccessorySupplierForm : Form
+    public partial class AccessorySupplierForm : MetroForm
     {
         #region  Fields
         private readonly ISupplied _parentKit;
