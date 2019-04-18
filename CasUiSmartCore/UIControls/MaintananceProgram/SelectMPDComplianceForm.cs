@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
+using MetroFramework.Forms;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 
@@ -9,7 +10,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
     /// Форма, позволяющая делать выбор MPD Item-ов при для введения выполнения
     /// <br/> при вводе выполнения Maintenance Check-а
     ///</summary>
-    public partial class SelectMPDComplianceForm : Form
+    public partial class SelectMPDComplianceForm : MetroForm
     {
         #region Fields
         
