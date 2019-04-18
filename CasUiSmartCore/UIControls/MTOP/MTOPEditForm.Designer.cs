@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.MTOP
+﻿using MetroFramework.Controls;
+
+namespace CAS.UI.UIControls.MTOP
 {
 	partial class MTOPEditForm
 	{
@@ -28,20 +30,20 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Windows.Forms.Label label1;
-			System.Windows.Forms.Label label4;
+			MetroFramework.Controls.MetroLabel label1;
+			MetroFramework.Controls.MetroLabel label4;
 			System.Windows.Forms.GroupBox groupBox2;
 			this._lifelengthViewerNotify = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this._lifelengthViewerTresh = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this._lifelengthViewerRepeat = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.checkBox1 = new MetroFramework.Controls.MetroCheckBox();
 			this._comboBoxCheckType = new CAS.UI.UIControls.Auxiliary.DictionaryComboBox();
-			this._textBoxName = new System.Windows.Forms.TextBox();
+			this._textBoxName = new MetroFramework.Controls.MetroTextBox();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.buttonOk = new System.Windows.Forms.Button();
-			this.checkBox1 = new System.Windows.Forms.CheckBox();
-			label1 = new System.Windows.Forms.Label();
-			label4 = new System.Windows.Forms.Label();
+			label1 = new MetroFramework.Controls.MetroLabel();
+			label4 = new MetroFramework.Controls.MetroLabel();
 			groupBox2 = new System.Windows.Forms.GroupBox();
 			groupBox2.SuspendLayout();
 			this.groupBox1.SuspendLayout();
@@ -50,22 +52,20 @@
 			// label1
 			// 
 			label1.AutoSize = true;
-			label1.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label1.Location = new System.Drawing.Point(6, 44);
+			label1.Location = new System.Drawing.Point(6, 41);
 			label1.Name = "label1";
-			label1.Size = new System.Drawing.Size(101, 18);
+			label1.Size = new System.Drawing.Size(78, 19);
 			label1.TabIndex = 12;
 			label1.Text = "Check Type:";
 			// 
 			// label4
 			// 
 			label4.AutoSize = true;
-			label4.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			label4.Location = new System.Drawing.Point(6, 15);
 			label4.Name = "label4";
-			label4.Size = new System.Drawing.Size(59, 18);
+			label4.Size = new System.Drawing.Size(48, 19);
 			label4.TabIndex = 11;
 			label4.Text = "Name:";
 			// 
@@ -74,7 +74,7 @@
 			groupBox2.Controls.Add(this._lifelengthViewerNotify);
 			groupBox2.Controls.Add(this._lifelengthViewerTresh);
 			groupBox2.Controls.Add(this._lifelengthViewerRepeat);
-			groupBox2.Location = new System.Drawing.Point(12, 118);
+			groupBox2.Location = new System.Drawing.Point(12, 169);
 			groupBox2.Name = "groupBox2";
 			groupBox2.Size = new System.Drawing.Size(474, 143);
 			groupBox2.TabIndex = 6;
@@ -179,11 +179,22 @@
 			this.groupBox1.Controls.Add(label1);
 			this.groupBox1.Controls.Add(label4);
 			this.groupBox1.Controls.Add(this._textBoxName);
-			this.groupBox1.Location = new System.Drawing.Point(12, 12);
+			this.groupBox1.Location = new System.Drawing.Point(12, 63);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(474, 100);
 			this.groupBox1.TabIndex = 5;
 			this.groupBox1.TabStop = false;
+			// 
+			// checkBox1
+			// 
+			this.checkBox1.AutoSize = true;
+			this.checkBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.checkBox1.Location = new System.Drawing.Point(339, 68);
+			this.checkBox1.Name = "checkBox1";
+			this.checkBox1.Size = new System.Drawing.Size(92, 15);
+			this.checkBox1.TabIndex = 13;
+			this.checkBox1.Text = "Is Zero Phase";
+			this.checkBox1.UseSelectable = true;
 			// 
 			// _comboBoxCheckType
 			// 
@@ -198,10 +209,33 @@
 			// 
 			// _textBoxName
 			// 
+			// 
+			// 
+			// 
+			this._textBoxName.CustomButton.Image = null;
+			this._textBoxName.CustomButton.Location = new System.Drawing.Point(308, 2);
+			this._textBoxName.CustomButton.Name = "";
+			this._textBoxName.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this._textBoxName.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this._textBoxName.CustomButton.TabIndex = 1;
+			this._textBoxName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this._textBoxName.CustomButton.UseSelectable = true;
+			this._textBoxName.CustomButton.Visible = false;
+			this._textBoxName.Lines = new string[0];
 			this._textBoxName.Location = new System.Drawing.Point(142, 15);
+			this._textBoxName.MaxLength = 32767;
 			this._textBoxName.Name = "_textBoxName";
+			this._textBoxName.PasswordChar = '\0';
+			this._textBoxName.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this._textBoxName.SelectedText = "";
+			this._textBoxName.SelectionLength = 0;
+			this._textBoxName.SelectionStart = 0;
+			this._textBoxName.ShortcutsEnabled = true;
 			this._textBoxName.Size = new System.Drawing.Size(326, 20);
 			this._textBoxName.TabIndex = 0;
+			this._textBoxName.UseSelectable = true;
+			this._textBoxName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this._textBoxName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// buttonCancel
 			// 
@@ -209,7 +243,7 @@
 			this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonCancel.Location = new System.Drawing.Point(411, 271);
+			this.buttonCancel.Location = new System.Drawing.Point(411, 319);
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.Size = new System.Drawing.Size(75, 33);
 			this.buttonCancel.TabIndex = 280;
@@ -222,30 +256,18 @@
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(320, 271);
+			this.buttonOk.Location = new System.Drawing.Point(320, 319);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(85, 33);
 			this.buttonOk.TabIndex = 279;
 			this.buttonOk.Text = "Ok";
 			this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
 			// 
-			// checkBox1
-			// 
-			this.checkBox1.AutoSize = true;
-			this.checkBox1.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.checkBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.checkBox1.Location = new System.Drawing.Point(339, 68);
-			this.checkBox1.Name = "checkBox1";
-			this.checkBox1.Size = new System.Drawing.Size(129, 22);
-			this.checkBox1.TabIndex = 13;
-			this.checkBox1.Text = "Is Zero Phase";
-			this.checkBox1.UseVisualStyleBackColor = true;
-			// 
 			// MTOPEditForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(495, 310);
+			this.ClientSize = new System.Drawing.Size(495, 358);
 			this.Controls.Add(this.buttonCancel);
 			this.Controls.Add(this.buttonOk);
 			this.Controls.Add(groupBox2);
@@ -254,9 +276,9 @@
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "MTOPEditForm";
+			this.Resizable = false;
 			this.ShowIcon = false;
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "MTOPEditForm";
+			this.Text = "MTOP Edit Form";
 			groupBox2.ResumeLayout(false);
 			groupBox2.PerformLayout();
 			this.groupBox1.ResumeLayout(false);
@@ -269,12 +291,12 @@
 
 		private System.Windows.Forms.GroupBox groupBox1;
 		private Auxiliary.DictionaryComboBox _comboBoxCheckType;
-		private System.Windows.Forms.TextBox _textBoxName;
+		private MetroTextBox _textBoxName;
 		private Auxiliary.LifelengthViewer _lifelengthViewerTresh;
 		private Auxiliary.LifelengthViewer _lifelengthViewerRepeat;
 		private System.Windows.Forms.Button buttonCancel;
 		private System.Windows.Forms.Button buttonOk;
 		private Auxiliary.LifelengthViewer _lifelengthViewerNotify;
-		private System.Windows.Forms.CheckBox checkBox1;
+		private MetroCheckBox checkBox1;
 	}
 }
