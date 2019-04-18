@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary.DataGridViewElements;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -14,7 +15,7 @@ using SmartCore.Entities.General.Schedule;
 
 namespace CAS.UI.UIControls.ScheduleControls.Trip
 {
-	public partial class FlightForm : Form
+	public partial class FlightForm : MetroForm
 	{
 		#region Fields
 
