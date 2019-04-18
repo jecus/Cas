@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -17,7 +18,7 @@ using SmartCore.Queries;
 
 namespace CAS.UI.UIControls.ScheduleControls.Trip
 {
-	public partial class TrackForm : Form
+	public partial class TrackForm : MetroForm
 	{
 		#region Fields
 		private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
