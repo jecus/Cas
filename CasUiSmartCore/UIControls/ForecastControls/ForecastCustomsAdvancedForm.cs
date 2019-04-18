@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using MetroFramework.Forms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 
@@ -11,7 +12,7 @@ namespace CAS.UI.UIControls.ForecastControls
     ///<summary>
     /// Расширенная форма для редактирования ресурсов прогноза
     ///</summary>
-    public partial class ForecastCustomsAdvancedForm : Form
+    public partial class ForecastCustomsAdvancedForm : MetroForm
     {
         private Forecast _currentForecast;
         private List<ForecastAdvancedControlItem> _forecastControlItems = new List<ForecastAdvancedControlItem>();
