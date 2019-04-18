@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
@@ -16,7 +17,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
     /// <summary>
     /// Форма для переноса шаблона ВС в рабочую базу данных
     /// </summary>
-    public partial class MaintenanceCheckBindTaskForm : Form
+    public partial class MaintenanceCheckBindTaskForm : MetroForm
     {
 
         #region Fields
