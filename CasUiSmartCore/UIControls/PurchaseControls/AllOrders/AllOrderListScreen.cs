@@ -8,6 +8,7 @@ using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.PurchaseControls.Initial;
+using CAS.UI.UIControls.PurchaseControls.Purchase;
 using CASTerms;
 using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
@@ -35,6 +36,14 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
         private readonly BaseEntityObject _parent;
         
         private AllOrderListView _directivesViewer;
+        private ContextMenuStrip _contextMenuStrip;
+        private ToolStripMenuItem _toolStripMenuItemPublish;
+        private ToolStripMenuItem _toolStripMenuItemCreateQuatation;
+        private ToolStripMenuItem _toolStripMenuItemClose;
+        private ToolStripMenuItem _toolStripMenuItemDelete;
+        private ToolStripSeparator _toolStripSeparator1;
+        private ToolStripMenuItem _toolStripMenuItemEdit;
+        private ToolStripMenuItem _toolStripMenuItemCreatePurchase;
 
         #endregion
         
@@ -64,6 +73,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
             aircraftHeaderControl1.Operator = currentOperator;
             StatusTitle = "Operator Initials";
             labelTitle.Visible = false;
+			InitToolStripMenuItems();
             InitListView();
         }
 
@@ -157,6 +167,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
         {
             _directivesViewer = new AllOrderListView()
                                     {
+										ContextMenuStrip = _contextMenuStrip,
                                         TabIndex = 2,
                                         Location = new Point(panel1.Left, panel1.Top),
                                         Dock = DockStyle.Fill
@@ -167,11 +178,266 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
             panel1.Controls.Add(_directivesViewer);
         }
 
-        #endregion
+		#endregion
 
-        #region private void DirectivesViewerSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
+		#region private void InitToolStripMenuItems()
 
-        private void DirectivesViewerSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
+		private void InitToolStripMenuItems()
+		{
+			_contextMenuStrip = new ContextMenuStrip();
+			_toolStripMenuItemPublish = new ToolStripMenuItem();
+			_toolStripMenuItemCreateQuatation = new ToolStripMenuItem();
+			_toolStripMenuItemCreatePurchase = new ToolStripMenuItem();
+			_toolStripMenuItemClose = new ToolStripMenuItem();
+			_toolStripMenuItemDelete = new ToolStripMenuItem();
+			_toolStripSeparator1 = new ToolStripSeparator();
+			_toolStripMenuItemEdit = new ToolStripMenuItem();
+			// 
+			// contextMenuStrip
+			// 
+			_contextMenuStrip.Name = "_contextMenuStrip";
+			_contextMenuStrip.Size = new Size(179, 176);
+
+			_toolStripMenuItemEdit.Text = "Edit";
+			_toolStripMenuItemEdit.Click += _toolStripMenuItemEdit_Click;
+			// 
+			// toolStripMenuItemView
+			// 
+			_toolStripMenuItemPublish.Text = "Publish";
+			_toolStripMenuItemPublish.Click += _toolStripMenuItemPublish_Click;
+			// 
+			// toolStripMenuItemCreatePurchas
+			//
+			_toolStripMenuItemCreatePurchase.Text = "Create Purchase Order";
+			_toolStripMenuItemCreatePurchase.Click += _toolStripMenuItemCreatePurchase_Click; ;
+			// 
+			// toolStripMenuItemCreateQuatation
+			//
+			_toolStripMenuItemCreateQuatation.Text = "Create Quatation Order";
+			_toolStripMenuItemCreateQuatation.Click += _toolStripMenuItemCreateQuatation_Click;
+			// 
+			// toolStripMenuItemClose
+			// 
+			_toolStripMenuItemClose.Text = "Close";
+			_toolStripMenuItemClose.Click += _toolStripMenuItemClose_Click;
+			// 
+			// toolStripMenuItemDelete
+			// 
+			_toolStripMenuItemDelete.Text = "Delete";
+			_toolStripMenuItemDelete.Click += _toolStripMenuItemDelete_Click;
+
+			_contextMenuStrip.Items.Clear();
+			_contextMenuStrip.Opening += _contextMenuStrip_Opening;
+			_contextMenuStrip.Items.AddRange(new ToolStripItem[]
+												{
+													//_toolStripMenuItemCreateQuatation,
+													//new ToolStripSeparator(),
+													_toolStripMenuItemCreatePurchase,
+													new ToolStripSeparator(),
+													_toolStripMenuItemPublish,
+													_toolStripMenuItemClose,
+													_toolStripSeparator1,
+													_toolStripMenuItemEdit,
+													_toolStripSeparator1,
+													_toolStripMenuItemDelete
+
+												});
+		}
+
+		#endregion
+
+		#region private void _toolStripMenuItemCreatePurchase_Click(object sender, EventArgs e)
+
+		private void _toolStripMenuItemCreatePurchase_Click(object sender, EventArgs e)
+		{
+			var editForm = new CreatePurchaseOrderForm(_directivesViewer.SelectedItems[0] as RequestForQuotation);
+			if (editForm.ShowDialog() == DialogResult.OK)
+			{
+				MessageBox.Show("Create purchase successful", "Message infomation", MessageBoxButtons.OK,
+					MessageBoxIcon.Information);
+			}
+		}
+
+		#endregion
+
+		#region private void _contextMenuStrip_Opening(object sender, CancelEventArgs e)
+
+		private void _contextMenuStrip_Opening(object sender, CancelEventArgs e)
+		{
+			if (_directivesViewer.SelectedItems.Count <= 0)
+				e.Cancel = true;
+			else if (_directivesViewer.SelectedItems.Count == 1)
+			{
+				var wp = _directivesViewer.SelectedItem;
+				if (wp.Status == WorkPackageStatus.Closed || wp.Status == WorkPackageStatus.Opened)
+				{
+					_toolStripMenuItemClose.Enabled = false;
+					_toolStripMenuItemPublish.Enabled = true;
+				}
+				else if (wp.Status == WorkPackageStatus.Published)
+				{
+					_toolStripMenuItemClose.Enabled = true;
+					_toolStripMenuItemPublish.Enabled = false;
+				}
+				else
+				{
+					_toolStripMenuItemClose.Enabled = true;
+					_toolStripMenuItemPublish.Enabled = true;
+				}
+
+				_toolStripMenuItemCreateQuatation.Enabled = true;
+
+				if (wp is InitialOrder)
+				{
+					_toolStripMenuItemCreatePurchase.Enabled = false;
+					_toolStripMenuItemCreateQuatation.Enabled = true;
+				}
+				else if (wp is RequestForQuotation)
+				{
+					_toolStripMenuItemCreatePurchase.Enabled = true;
+					_toolStripMenuItemCreateQuatation.Enabled = false;
+				}
+				else
+				{
+					_toolStripMenuItemCreatePurchase.Enabled = false;
+					_toolStripMenuItemCreateQuatation.Enabled = false;
+				}
+			}
+
+			else
+			{
+				_toolStripMenuItemCreateQuatation.Enabled = false;
+				_toolStripMenuItemClose.Enabled = true;
+				_toolStripMenuItemPublish.Enabled = true;
+				_toolStripMenuItemCreatePurchase.Enabled = false;
+			}
+		}
+
+		#endregion
+
+		#region private void _toolStripMenuItemDelete_Click(object sender, EventArgs e)
+
+		private void _toolStripMenuItemDelete_Click(object sender, EventArgs e)
+		{
+			if (_directivesViewer.SelectedItems.Count == 1)
+			{
+				GlobalObjects.CasEnvironment.Manipulator.Delete(_directivesViewer.SelectedItem as BaseEntityObject);
+			}
+			else
+			{
+				foreach (var rfq in _directivesViewer.SelectedItems)
+				{
+					GlobalObjects.CasEnvironment.Manipulator.Delete(rfq as BaseEntityObject);
+				}
+			}
+			AnimatedThreadWorker.RunWorkerAsync();
+		}
+
+		#endregion
+
+		#region private void _toolStripMenuItemClose_Click(object sender, EventArgs e)
+
+		private void _toolStripMenuItemClose_Click(object sender, EventArgs e)
+		{
+			var selected = _directivesViewer.SelectedItems.ToArray();
+
+			try
+			{
+				foreach (var rfq in selected)
+				{
+					if (rfq.Status == WorkPackageStatus.Closed)
+					{
+						MessageBox.Show("Initional Order " + rfq.Title + " is already closed.",
+							(string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
+							MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+						continue;
+					}
+
+					rfq.Status = WorkPackageStatus.Closed;
+					rfq.ClosingDate = DateTime.Now;
+					rfq.CloseByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
+					rfq.ClosedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
+					GlobalObjects.CasEnvironment.NewKeeper.Save(rfq as BaseEntityObject);
+				}
+			}
+			catch (Exception ex)
+			{
+				Program.Provider.Logger.Log("Error while saving data", ex);
+				throw;
+			}
+
+			AnimatedThreadWorker.RunWorkerAsync();
+		}
+
+		#endregion
+
+		private void _toolStripMenuItemCreateQuatation_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		#region private void _toolStripMenuItemPublish_Click(object sender, EventArgs e)
+
+		private void _toolStripMenuItemPublish_Click(object sender, EventArgs e)
+		{
+			foreach (var rfq in _directivesViewer.SelectedItems)
+			{
+				if (rfq.Status == WorkPackageStatus.Published)
+				{
+					MessageBox.Show("Initional Order " + rfq.Title + " is already publisher.",
+						(string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
+						MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+					continue;
+				}
+
+				rfq.Status = WorkPackageStatus.Published;
+				rfq.PublishingDate = DateTime.Now;
+				rfq.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
+				rfq.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
+				GlobalObjects.CasEnvironment.NewKeeper.Save(rfq as BaseEntityObject);
+			}
+			AnimatedThreadWorker.RunWorkerAsync();
+		}
+
+		#endregion
+
+		#region private void _toolStripMenuItemEdit_Click(object sender, EventArgs e)
+
+		private void _toolStripMenuItemEdit_Click(object sender, EventArgs e)
+		{
+			if (_directivesViewer.SelectedItem == null) return;
+
+			if (_directivesViewer.SelectedItem is InitialOrder)
+			{
+				var editForm = new InitialOrderFormNew(_directivesViewer.SelectedItem as InitialOrder);
+				if (editForm.ShowDialog() == DialogResult.OK)
+				{
+					AnimatedThreadWorker.RunWorkerAsync();
+				}
+			}
+			else if (_directivesViewer.SelectedItem is RequestForQuotation)
+			{
+				var editForm = new QuatationOrderFormNew(_directivesViewer.SelectedItem as RequestForQuotation);
+				if (editForm.ShowDialog() == DialogResult.OK)
+				{
+					AnimatedThreadWorker.RunWorkerAsync();
+				}
+			}
+			else
+			{
+				var editForm = new PurchaseOrderForm(_directivesViewer.SelectedItem as PurchaseOrder);
+				if (editForm.ShowDialog() == DialogResult.OK)
+				{
+					AnimatedThreadWorker.RunWorkerAsync();
+				}
+			}
+		}
+
+		#endregion
+
+		#region private void DirectivesViewerSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
+
+		private void DirectivesViewerSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
         {
             if (_directivesViewer.SelectedItems.Count > 0)
             {

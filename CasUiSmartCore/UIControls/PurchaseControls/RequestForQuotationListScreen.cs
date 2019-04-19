@@ -351,7 +351,8 @@ namespace CAS.UI.UIControls.PurchaseControls
         }
 
 		#endregion
-
+		
+		#region private void _toolStripMenuItemCreatePurchase_Click(object sender, EventArgs e)
 
 		private void _toolStripMenuItemCreatePurchase_Click(object sender, EventArgs e)
 		{
@@ -364,6 +365,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 					MessageBoxIcon.Information);
 			}
 		}
+
+		#endregion
 
 		#region private void ToolStripMenuItemEditClick(object sender, EventArgs e)
 

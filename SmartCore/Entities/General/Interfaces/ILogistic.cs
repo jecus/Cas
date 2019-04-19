@@ -7,35 +7,39 @@ namespace SmartCore.Entities.General.Interfaces
 	public interface ILogistic : IBaseEntityObject
 	{
 		[Filter("Number:", Order = 1)]
-		string Number { get; }
+		string Number { get; set; }
 
 		[Filter("NumTitleber:", Order = 2)]
-		string Title { get; }
+		string Title { get; set; }
 
 		[Filter("Author:", Order = 3)]
-		string Author { get; }
+		string Author { get; set; }
 
 		[Filter("PublishedByUser:", Order = 4)]
-		string PublishedByUser { get; }
+		string PublishedByUser { get; set; }
 
 		[Filter("CloseByUser:", Order = 5)]
-		string CloseByUser { get; }
+		string CloseByUser { get; set; }
 
 		[Filter("Remarks:", Order = 6)]
-		string Remarks { get; }
+		string Remarks { get; set; }
 
 		[Filter("OpeningDate:", Order = 7)]
-		DateTime OpeningDate { get; }
+		DateTime OpeningDate { get; set; }
 
 		[Filter("PublishingDate:", Order = 8)]
-		DateTime PublishingDate { get; }
+		DateTime PublishingDate { get; set; }
 
 		[Filter("ClosingDate:", Order = 9)]
-		DateTime ClosingDate { get; }
+		DateTime ClosingDate { get; set; }
 
 		[Filter("Status:", Order = 10)]
-		WorkPackageStatus Status { get; }
+		WorkPackageStatus Status { get; set; }
 
-		int CorrectorId { get; }
+		int CorrectorId { get; set; }
+
+		int ClosedById { get; set; }
+
+		int PublishedById { get; set; }
 	}
 }
