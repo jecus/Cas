@@ -330,10 +330,10 @@ namespace CAS.UI.UIControls.ForecastControls
 			this.Controls.Add(this.tabControlMain);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.button1);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "ForecastCustomsMTOP";
+			this.Resizable = false;
 			this.Text = "Forecast Parameters Form";
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownHours)).EndInit();
 			this.tabPageCheck.ResumeLayout(false);

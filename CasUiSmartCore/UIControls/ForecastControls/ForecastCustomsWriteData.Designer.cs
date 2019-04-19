@@ -638,8 +638,8 @@ namespace CAS.UI.UIControls.ForecastControls
 			this.Controls.Add(this.buttonAdvanced);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.button1);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Name = "ForecastCustomsWriteData";
+			this.Resizable = false;
 			this.Text = "Forecast Parameters Form";
 			this.Activated += new System.EventHandler(this.TemplateAircraftAddToDataBaseForm_Activated);
 			this.Deactivate += new System.EventHandler(this.TemplateAircraftAddToDataBaseForm_Deactivate);

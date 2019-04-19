@@ -373,7 +373,6 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 			this.Controls.Add(this.flightNumberListViewAll);
 			this.Controls.Add(label1);
 			this.Controls.Add(labelNumber);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "TrackForm";

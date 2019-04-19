@@ -272,7 +272,6 @@ namespace CAS.UI.UIControls.MTOP
 			this.Controls.Add(this.buttonOk);
 			this.Controls.Add(groupBox2);
 			this.Controls.Add(this.groupBox1);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "MTOPEditForm";

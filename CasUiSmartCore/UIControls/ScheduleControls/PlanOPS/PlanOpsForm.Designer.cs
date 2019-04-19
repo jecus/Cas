@@ -164,7 +164,6 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			this.Controls.Add(label1);
 			this.Controls.Add(this.dateTimePickerFrom);
 			this.Controls.Add(labelSubType);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "PlanOpsForm";

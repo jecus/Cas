@@ -33,8 +33,8 @@ namespace CAS.UI.UIControls.ForecastControls
 			this.button1 = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
-			this.label1 = new MetroLabel();
-			this.label2 = new MetroLabel();
+			this.label1 = new MetroFramework.Controls.MetroLabel();
+			this.label2 = new MetroFramework.Controls.MetroLabel();
 			this.listView1 = new System.Windows.Forms.ListView();
 			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.listView2 = new System.Windows.Forms.ListView();
@@ -78,7 +78,7 @@ namespace CAS.UI.UIControls.ForecastControls
 			this.label1.AutoSize = true;
 			this.label1.Location = new System.Drawing.Point(7, 60);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(54, 13);
+			this.label1.Size = new System.Drawing.Size(71, 19);
 			this.label1.TabIndex = 2;
 			this.label1.Text = "All Aircraft";
 			// 
@@ -87,7 +87,7 @@ namespace CAS.UI.UIControls.ForecastControls
 			this.label2.AutoSize = true;
 			this.label2.Location = new System.Drawing.Point(203, 60);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(64, 13);
+			this.label2.Size = new System.Drawing.Size(83, 19);
 			this.label2.TabIndex = 2;
 			this.label2.Text = "Filter aircraft";
 			// 
@@ -157,10 +157,10 @@ namespace CAS.UI.UIControls.ForecastControls
 			this.Controls.Add(this.button3);
 			this.Controls.Add(this.button4);
 			this.Controls.Add(this.button1);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "ForecastFilterAircraft";
+			this.Resizable = false;
 			this.ShowIcon = false;
 			this.Text = "Filter to aircraft for forecast";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ForecastFilterAircraftFormClosed);

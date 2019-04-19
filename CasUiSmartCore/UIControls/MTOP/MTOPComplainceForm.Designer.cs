@@ -248,10 +248,10 @@ namespace CAS.UI.UIControls.MTOP
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.buttonOk);
 			this.Controls.Add(this.groupBox1);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "MTOPComplainceForm";
+			this.Resizable = false;
 			this.Text = "MTOP Complaince Form";
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();

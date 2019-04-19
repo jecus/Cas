@@ -33,14 +33,14 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.buttonDelete = new System.Windows.Forms.Button();
 			this.buttonAdd = new System.Windows.Forms.Button();
 			this.buttonClose = new System.Windows.Forms.Button();
-			this.labelCAA = new MetroLabel();
-			this.label1 = new MetroLabel();
-			this.labelWpNumber = new MetroLabel();
-			this.labelWpTitle = new MetroLabel();
+			this.labelCAA = new MetroFramework.Controls.MetroLabel();
+			this.label1 = new MetroFramework.Controls.MetroLabel();
+			this.labelWpNumber = new MetroFramework.Controls.MetroLabel();
+			this.labelWpTitle = new MetroFramework.Controls.MetroLabel();
 			this.workPackageEmployeeListView2 = new CAS.UI.UIControls.WorkPakage.WorkPackageEmployeeListView();
 			this.workPackageEmployeeListViewAll = new CAS.UI.UIControls.WorkPakage.WorkPackageEmployeeListView();
-			this.textboxRemark = new MetroTextBox();
-			this.labelAddress = new MetroLabel();
+			this.textboxRemark = new MetroFramework.Controls.MetroTextBox();
+			this.labelAddress = new MetroFramework.Controls.MetroLabel();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.ButtonFilter = new AvControls.AvButtonT.AvButtonT();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -92,7 +92,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.labelCAA.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.labelCAA.Location = new System.Drawing.Point(12, 63);
 			this.labelCAA.Name = "labelCAA";
-			this.labelCAA.Size = new System.Drawing.Size(119, 14);
+			this.labelCAA.Size = new System.Drawing.Size(116, 19);
 			this.labelCAA.TabIndex = 38;
 			this.labelCAA.Text = "Work package №:";
 			// 
@@ -102,7 +102,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.label1.Location = new System.Drawing.Point(12, 87);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(129, 14);
+			this.label1.Size = new System.Drawing.Size(121, 19);
 			this.label1.TabIndex = 39;
 			this.label1.Text = "Work package title:";
 			// 
@@ -112,7 +112,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.labelWpNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.labelWpNumber.Location = new System.Drawing.Point(137, 63);
 			this.labelWpNumber.Name = "labelWpNumber";
-			this.labelWpNumber.Size = new System.Drawing.Size(21, 14);
+			this.labelWpNumber.Size = new System.Drawing.Size(25, 19);
 			this.labelWpNumber.TabIndex = 40;
 			this.labelWpNumber.Text = "№";
 			// 
@@ -122,7 +122,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.labelWpTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.labelWpTitle.Location = new System.Drawing.Point(137, 87);
 			this.labelWpTitle.Name = "labelWpTitle";
-			this.labelWpTitle.Size = new System.Drawing.Size(33, 14);
+			this.labelWpTitle.Size = new System.Drawing.Size(33, 19);
 			this.labelWpTitle.TabIndex = 41;
 			this.labelWpTitle.Text = "Title";
 			// 
@@ -155,14 +155,35 @@ namespace CAS.UI.UIControls.WorkPakage
 			// textboxRemark
 			// 
 			this.textboxRemark.BackColor = System.Drawing.Color.White;
+			// 
+			// 
+			// 
+			this.textboxRemark.CustomButton.Image = null;
+			this.textboxRemark.CustomButton.Location = new System.Drawing.Point(457, 1);
+			this.textboxRemark.CustomButton.Name = "";
+			this.textboxRemark.CustomButton.Size = new System.Drawing.Size(65, 65);
+			this.textboxRemark.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textboxRemark.CustomButton.TabIndex = 1;
+			this.textboxRemark.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textboxRemark.CustomButton.UseSelectable = true;
+			this.textboxRemark.CustomButton.Visible = false;
 			this.textboxRemark.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textboxRemark.Lines = new string[0];
 			this.textboxRemark.Location = new System.Drawing.Point(83, 645);
 			this.textboxRemark.MaxLength = 3000;
 			this.textboxRemark.Multiline = true;
 			this.textboxRemark.Name = "textboxRemark";
+			this.textboxRemark.PasswordChar = '\0';
 			this.textboxRemark.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.textboxRemark.SelectedText = "";
+			this.textboxRemark.SelectionLength = 0;
+			this.textboxRemark.SelectionStart = 0;
+			this.textboxRemark.ShortcutsEnabled = true;
 			this.textboxRemark.Size = new System.Drawing.Size(523, 67);
 			this.textboxRemark.TabIndex = 43;
+			this.textboxRemark.UseSelectable = true;
+			this.textboxRemark.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textboxRemark.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// labelAddress
 			// 
@@ -170,7 +191,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.labelAddress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.labelAddress.Location = new System.Drawing.Point(14, 648);
 			this.labelAddress.Name = "labelAddress";
-			this.labelAddress.Size = new System.Drawing.Size(59, 14);
+			this.labelAddress.Size = new System.Drawing.Size(57, 19);
 			this.labelAddress.TabIndex = 42;
 			this.labelAddress.Text = "Remark:";
 			// 
@@ -230,10 +251,10 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.Controls.Add(this.buttonClose);
 			this.Controls.Add(this.workPackageEmployeeListView2);
 			this.Controls.Add(this.workPackageEmployeeListViewAll);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "WorkPackageEmployeeForm";
+			this.Resizable = false;
 			this.ShowIcon = false;
 			this.Text = "Work Package Employee Form";
 			this.Load += new System.EventHandler(this.WorkPackageEmployeeForm_Load);

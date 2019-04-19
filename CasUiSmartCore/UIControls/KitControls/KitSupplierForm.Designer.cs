@@ -154,7 +154,6 @@ namespace CAS.UI.UIControls.KitControls
 			this.Controls.Add(this.flowLayoutPanelCharts);
 			this.Controls.Add(this.buttonOk);
 			this.Controls.Add(this.buttonCancel);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Name = "AccessorySupplierForm";
 			this.Text = "Kit Supplier Form";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.KitFormFormClosed);

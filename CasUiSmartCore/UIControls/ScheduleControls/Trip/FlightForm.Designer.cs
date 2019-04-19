@@ -185,7 +185,6 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 			this.Controls.Add(this.dataGridViewFlights);
 			this.Controls.Add(this.comboBox1);
 			this.Controls.Add(labelNumber);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "FlightForm";

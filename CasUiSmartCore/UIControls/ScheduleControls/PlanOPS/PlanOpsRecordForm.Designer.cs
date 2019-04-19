@@ -789,7 +789,6 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			this.Controls.Add(this.comboBoxAircraftExchange);
 			this.Controls.Add(labelSubType);
 			this.Controls.Add(this.comboBoxAircrafts);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "PlanOpsRecordForm";

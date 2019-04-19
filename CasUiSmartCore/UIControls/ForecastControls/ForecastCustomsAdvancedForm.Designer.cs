@@ -166,8 +166,8 @@ namespace CAS.UI.UIControls.ForecastControls
 			this.Controls.Add(this.buttonOk);
 			this.Controls.Add(this.buttonCancel);
 			this.Controls.Add(this.flowLayoutPanelMain);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Name = "ForecastCustomsAdvancedForm";
+			this.Resizable = false;
 			this.Text = "Forecast Advanced Form";
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownPercents)).EndInit();
 			this.ResumeLayout(false);
