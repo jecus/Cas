@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.DetailsControls;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 
@@ -12,7 +13,7 @@ namespace CAS.UI.UIControls.ComponentControls
     ///<summary>
     /// Форма для редактирования категорий жизненного цикла вращающихся деталей двигателей
     ///</summary>
-    public partial class LLPLifeLimitCategoriesForm : Form
+    public partial class LLPLifeLimitCategoriesForm : MetroForm
     {
         #region Fields
 
