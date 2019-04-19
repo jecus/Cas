@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using CAS.UI.Helpers;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -16,7 +17,7 @@ namespace CAS.UI.UIControls.ComponentControls
     ///Форма отображает детали, котрые были удалены с 
     ///самолета или базовой детали
     ///</summary>
-    public partial class TransferedComponentForm : Form
+    public partial class TransferedComponentForm : MetroForm
     {
         #region Fields
 
