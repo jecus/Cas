@@ -9,7 +9,7 @@ namespace SmartCore.Entities.General.Interfaces
 		[Filter("Number:", Order = 1)]
 		string Number { get; set; }
 
-		[Filter("NumTitleber:", Order = 2)]
+		[Filter("Title:", Order = 2)]
 		string Title { get; set; }
 
 		[Filter("Author:", Order = 3)]

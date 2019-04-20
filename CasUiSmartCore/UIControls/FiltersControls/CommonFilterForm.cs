@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
@@ -23,7 +24,7 @@ namespace CAS.UI.UIControls.FiltersControls
     /// <summary>
     /// Общая Форма для редактирования объектов
     /// </summary>
-    public partial class CommonFilterForm : Form
+    public partial class CommonFilterForm : MetroForm
     {
 
         #region Fields
