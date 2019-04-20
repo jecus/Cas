@@ -4,6 +4,7 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
 
 namespace CAS.UI.UIControls.PurchaseControls
@@ -21,38 +22,34 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		#endregion
 
-		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
-
-		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
 		{
-			if (SelectedItem != null)
+			if (SelectedItem == null) return;
+
+			if (SelectedItem.ProductType == ProductType.ComponentModel)
 			{
-				var dp = ScreenAndFormManager.GetEditScreenOrForm(SelectedItem);
-				if (dp.DisplayerType == DisplayerType.Screen)
-					e.SetParameters(dp);
-				else
+				var editForm = new ModelForm(SelectedItem as ComponentModel);
+				if (editForm.ShowDialog() == DialogResult.OK)
 				{
-					if (dp.Form.ShowDialog() == DialogResult.OK)
-					{
-						if (dp.Form is ProductForm)
-						{
-							var changedJob = ((ProductForm)dp.Form).CurrentProdcuct;
-							itemsListView.SelectedItems[0].Tag = changedJob;
-
-							var subs = GetListViewSubItems(SelectedItem);
-							for (int i = 0; i < subs.Length; i++)
-								itemsListView.SelectedItems[0].SubItems[i].Text = subs[i].Text;
-						}
-					}
-
-					e.Cancel = true;
+					var subs = GetListViewSubItems(SelectedItem);
+					for (int i = 0; i < subs.Length; i++)
+						itemsListView.SelectedItems[0].SubItems[i].Text = subs[i].Text;
 				}
 			}
-
-			#endregion
+			else
+			{
+				var editForm = new ProductForm(SelectedItem);
+				if (editForm.ShowDialog() == DialogResult.OK)
+				{
+					var subs = GetListViewSubItems(SelectedItem);
+					for (int i = 0; i < subs.Length; i++)
+						itemsListView.SelectedItems[0].SubItems[i].Text = subs[i].Text;
+				}
+			}
 		}
 
-        protected override void SetHeaders()
+
+		protected override void SetHeaders()
         {
             ColumnHeaderList.Clear();
 

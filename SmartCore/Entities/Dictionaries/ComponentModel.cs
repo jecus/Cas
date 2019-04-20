@@ -32,7 +32,7 @@ namespace SmartCore.Entities.Dictionaries
             get { return SmartCoreType.Component; }
         }
 		#endregion
-		public Document Document { get; set; }
+		
 
 		/*
          * Свойства 

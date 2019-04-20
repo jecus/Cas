@@ -62,10 +62,10 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxHTS = new System.Windows.Forms.TextBox();
 			this.labelReference = new System.Windows.Forms.Label();
 			this.textBoxReference = new System.Windows.Forms.TextBox();
-			this.fileControl = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
 			this.labelDoc = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.textBoxAltPartNum = new System.Windows.Forms.TextBox();
+			this.documentControl1 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.SuspendLayout();
 			// 
 			// comboBoxDetailClass
@@ -433,24 +433,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxReference.Size = new System.Drawing.Size(294, 22);
 			this.textBoxReference.TabIndex = 149;
 			// 
-			// fileControl
-			// 
-			this.fileControl.AutoSize = true;
-			this.fileControl.BackColor = System.Drawing.Color.Transparent;
-			this.fileControl.Description1 = null;
-			this.fileControl.Description2 = null;
-			this.fileControl.Filter = "PDF file (*.pdf)|*.pdf";
-			this.fileControl.Icon = global::CAS.UI.Properties.Resources.PDFIconSmall;
-			this.fileControl.IconNotEnabled = null;
-			this.fileControl.Location = new System.Drawing.Point(500, 276);
-			this.fileControl.MaximumSize = new System.Drawing.Size(350, 100);
-			this.fileControl.MinimumSize = new System.Drawing.Size(350, 50);
-			this.fileControl.Name = "fileControl";
-			this.fileControl.ShowLinkLabelBrowse = true;
-			this.fileControl.ShowLinkLabelRemove = false;
-			this.fileControl.Size = new System.Drawing.Size(350, 100);
-			this.fileControl.TabIndex = 151;
-			// 
 			// labelDoc
 			// 
 			this.labelDoc.AutoSize = true;
@@ -493,7 +475,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.panelMain.Controls.Add(this.textBoxDescRus);
 			this.panelMain.Controls.Add(this.labelReference);
 			this.panelMain.Controls.Add(this.textBoxReference);
-			this.panelMain.Controls.Add(this.fileControl);
+			this.panelMain.Controls.Add(this.documentControl1);
 			this.panelMain.Controls.Add(this.labelDoc);
 			this.panelMain.Controls.Add(this.label4);
 			this.panelMain.Controls.Add(this.textBoxAltPartNum);
@@ -520,11 +502,19 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxAltPartNum.Size = new System.Drawing.Size(313, 22);
 			this.textBoxAltPartNum.TabIndex = 153;
 			// 
+			// documentControl1
+			// 
+			this.documentControl1.CurrentDocument = null;
+			this.documentControl1.Location = new System.Drawing.Point(537, 285);
+			this.documentControl1.Name = "documentControl1";
+			this.documentControl1.Size = new System.Drawing.Size(314, 41);
+			this.documentControl1.TabIndex = 161;
+			// 
 			// ProductForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(863, 650);
+			this.ClientSize = new System.Drawing.Size(883, 679);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximumSize = new System.Drawing.Size(1023, 766);
 			this.MinimumSize = new System.Drawing.Size(284, 164);
@@ -568,9 +558,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private System.Windows.Forms.TextBox textBoxHTS;
         private System.Windows.Forms.Label labelReference;
         private System.Windows.Forms.TextBox textBoxReference;
-        public AttachedFileControl fileControl;
         private System.Windows.Forms.Label labelDoc;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.TextBox textBoxAltPartNum;
+		private DocumentationControls.DocumentControl documentControl1;
 	}
 }

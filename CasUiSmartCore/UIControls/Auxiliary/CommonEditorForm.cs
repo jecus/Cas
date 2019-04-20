@@ -10,6 +10,7 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.ComponentControls;
 using CAS.UI.UIControls.DirectivesControls;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities;
@@ -24,7 +25,7 @@ namespace CAS.UI.UIControls.Auxiliary
     /// <summary>
     /// Общая Форма для редактирования объектов
     /// </summary>
-    public partial class CommonEditorForm : Form
+    public partial class CommonEditorForm : MetroForm
     {
         #region Fields
 

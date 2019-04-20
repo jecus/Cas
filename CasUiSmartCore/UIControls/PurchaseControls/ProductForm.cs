@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
 using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
@@ -55,7 +57,10 @@ namespace CAS.UI.UIControls.PurchaseControls
             _currentItem = currentKit;
             comboBoxAccessoryStandard.Enabled = comboboxStandartEnabled;
 
-            Task.Run(() =>
+            if (_currentItem.ItemId <= 0)
+				documentControl1.Enabled = false;
+
+				Task.Run(() =>
             {
                 DoLoad();
             }).ContinueWith(task => UpdateInformation(), TaskScheduler.FromCurrentSynchronizationContext());
@@ -80,13 +85,13 @@ namespace CAS.UI.UIControls.PurchaseControls
 
         private void DoLoad()
         {
-            var links = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<ItemFileLinkDTO, ItemFileLink>(new List<Filter>()
-            {
-                new Filter("ParentId",_currentItem.ItemId),
-                new Filter("ParentTypeId",_currentItem.SmartCoreObjectType.ItemId)
-            }, true);
+	        var links = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DocumentDTO, Document>(new List<Filter>()
+	        {
+		        new Filter("ParentID",_currentItem.ItemId),
+		        new Filter("ParentTypeId",_currentItem.SmartCoreObjectType.ItemId)
+	        }, true);
 
-            _currentItem.Files.AddRange(links);
+	        _currentItem.Document = links.FirstOrDefault();
         }
 
         #region private void UpdateInformation()
@@ -102,9 +107,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 										   "This record does not contain a image. Enclose Image file to prove the compliance.",
 										   "Attached file proves the Image.");
 
-            fileControl.UpdateInfo(_currentItem.AttachedFile, "Adobe PDF Files|*.pdf",
-                "This record does not contain a file proving the Document. Enclose PDF file to prove the Document.",
-                "Attached file proves the Document.");
 
             textBoxRemarks.Text = string.Empty;
             comboBoxAccessoryStandard.Type = typeof(GoodStandart);
@@ -192,56 +194,49 @@ namespace CAS.UI.UIControls.PurchaseControls
             }
             comboBoxMeasure.SelectedItem = _currentItem.Measure;
             textBoxRemarks.Text = _currentItem.Remarks;
-            //else
-            //{
-            //    //comboBoxDetailClass.SelectedItem = DetailClass.Kit;
-            //    //comboBoxDetailClass.Enabled = true;
-            //    //textBoxPartNumber.ReadOnly = true;
-            //    //textBoxDescription.ReadOnly = true;
-            //    //textBoxManufacturer.ReadOnly = true;
-            //    //textBoxRemarks.ReadOnly = true;
-            //    //numericCostNew.ReadOnly = true;
-            //    //numericCostServiceable.ReadOnly = true;
-            //    //numericCostOverhaul.ReadOnly = true;
-            //    //textBoxSuppliers.ReadOnly = true;
-            //    //linkLabelEditSupplier.Enabled = true;
-            //}
-            //if (_currentKit.ItemId > 0)
-            //{
-            //    Product accessoryDescription;
-            //    if((accessoryDescription = comboBoxAccessoryDescription.SelectedItem as Product) != null)
-            //    {
-            //        comboBoxAccessoryDescription.Enabled = accessoryDescription.IsDeleted;
-            //    }
-            //    else comboBoxAccessoryDescription.Enabled = true;
 
-            //    //////////////////////////////////////////////
-            //    ////загрузка котировочных ордеров для определения 
-            //    ////того, можно ли менять партийный и серийный номер данного агрегата
-            //    //List<RequestForQuotation> closedQuotations = new List<RequestForQuotation>();
-            //    //List<PurchaseOrder> closedPurchases = new List<PurchaseOrder>();
-            //    //try
-            //    //{
-            //    //    closedQuotations.AddRange(GlobalObjects.CasEnvironment.Loader.GetRequestForQuotation(null,
-            //    //                                                                         WorkPackageStatus.Closed,
-            //    //                                                                         false,
-            //    //                                                                         new CommonCollection<AbstractAccessory> { _currentKit }));
-            //    //    closedPurchases.AddRange(GlobalObjects.CasEnvironment.Loader.GetPurchaseOrders(null,
-            //    //                                                                         WorkPackageStatus.Closed,
-            //    //                                                                         false,
-            //    //                                                                         new CommonCollection<AbstractAccessory> { _currentKit }));
-            //    //    textBoxPartNumber.ReadOnly = (closedQuotations.Count > 0 || closedPurchases.Count > 0);
-            //    //}
-            //    //catch (Exception exception)
-            //    //{
-            //    //    Program.Provider.Logger.Log("Error while loading requestes for detail", exception);
-            //    //}
-            //}
 
-            comboBoxAccessoryStandard.SelectedIndexChanged += DictComboStandardSelectedIndexChanged;
+			documentControl1.CurrentDocument = _currentItem.Document;
+			documentControl1.Added += DocumentControl1_Added;
+
+
+			comboBoxAccessoryStandard.SelectedIndexChanged += DictComboStandardSelectedIndexChanged;
 			comboBoxAccessoryStandard.SelectedIndexChanged += ComboBoxAccessoryStandard_SelectedIndexChanged;
 
 		}
+		#endregion
+
+		#region private void DocumentControl1_Added(object sender, EventArgs e)
+
+		private void DocumentControl1_Added(object sender, EventArgs e)
+		{
+			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("CMM") as DocumentSubType;
+			var dep = GlobalObjects.CasEnvironment.GetDictionary<Department>().GetByFullName("Planning") as Department;
+			var spec = GlobalObjects.CasEnvironment.GetDictionary<Specialization>().GetByFullName("Maintenance Data Librarian") as Specialization;
+			var nomen = GlobalObjects.CasEnvironment.GetDictionary<Nomenclatures>().GetByFullName("e-library") as Nomenclatures;
+			var location = GlobalObjects.CasEnvironment.GetDictionary<Locations>().GetByFullName("e-Server CIT") as Locations;
+			var newDocument = new Document
+			{
+				Parent = _currentItem,
+				ParentId = _currentItem.ItemId,
+				ParentTypeId = _currentItem.SmartCoreObjectType.ItemId,
+				DocType = DocumentType.TechnicalPublication,
+				DocumentSubType = docSubType,
+				Department = dep,
+				ResponsibleOccupation = spec,
+				Nomenсlature = nomen,
+				Location = location
+			};
+
+			var form = new DocumentForm(newDocument, false);
+			if (form.ShowDialog() == DialogResult.OK)
+			{
+				_currentItem.Document = newDocument;
+				documentControl1.CurrentDocument = newDocument;
+
+			}
+		}
+
 		#endregion
 
 		#region protected override void SetFormControls()
@@ -273,7 +268,6 @@ namespace CAS.UI.UIControls.PurchaseControls
                 || (comboBoxDetailClass.SelectedItem != _currentItem.GoodsClass)
                 || (checkBoxDangerous.Checked != _currentItem.IsDangerous)
                 || dataGridViewControlSuppliers.GetChangeStatus()
-                || fileControl.GetChangeStatus()
 				|| fileControlImage.GetChangeStatus())
                 return true;
 
@@ -423,9 +417,6 @@ namespace CAS.UI.UIControls.PurchaseControls
                     _currentItem.Remarks = textBoxRemarks.Text;
                     _currentItem.Measure = comboBoxMeasure.SelectedItem as Measure;
 
-                    fileControl.ApplyChanges();
-                    _currentItem.AttachedFile = fileControl.AttachedFile;
-
                 GlobalObjects.CasEnvironment.Manipulator.Save(_currentItem);
 
                     foreach (KitSuppliersRelation ksr in _currentItem.SupplierRelations)
@@ -457,17 +448,6 @@ namespace CAS.UI.UIControls.PurchaseControls
                             }
                         }
                     }
-
-                //GlobalObjects.CasEnvironment.Manipulator.Save(_currentKit);
-
-                //foreach (KitSuppliersRelation relation in _currentKit.SupplierRelations)
-                //{
-                //    if (relation.SupplierId != 0)
-                //    {
-                //        relation.KitId = _currentKit.ItemId;
-                //        GlobalObjects.CasEnvironment.Keeper.Save(relation);
-                //    }
-                //}
             }
             catch (Exception ex)
             {

@@ -13,6 +13,7 @@ using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
 using EFCore.Filter;
 using SmartCore.Entities.Collections;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
@@ -116,7 +117,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 			{
                 _initialOrders.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderDTO, InitialOrder>(new Filter("Status", 1)));
                 _requestForQuotations.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>(new Filter("Status", 1)));
-				_initialProductArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, Product>(loadChild:true));
+				_initialProductArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, Product>(new Filter("ModelingObjectTypeId",-1),loadChild:true));
+				_initialProductArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, ComponentModel>(new Filter("ModelingObjectTypeId", 5), loadChild: true));
 
 				var ids = _initialProductArray.SelectMany(i => i.SupplierRelations).Select(i => i.SupplierID).Distinct();
 				if (ids.Count() > 0)

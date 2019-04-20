@@ -28,8 +28,8 @@ namespace SmartCore.Entities.General.Accessory
     [Serializable]
     public class Product : BaseEntityObject, ISupplied, IEquatable<Product>, IFileContainer, IAllProductsFilterParams
     {
-
-        public ProductType ProductType { get; set; } 
+	    public Document Document { get; set; }
+		public ProductType ProductType { get; set; } 
 
         private static Type _thisType;
 
