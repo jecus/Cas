@@ -51,3 +51,12 @@ if not exists ( select  *
 	alter table dbo.PurchaseRequestsRecords
     add CurrencyId int not null default -1
 GO
+
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('Dictionaries.AccessoryDescriptions')
+                    and c.name = 'IsEffectivity' ) 
+
+	alter table Dictionaries.AccessoryDescriptions
+    add IsEffectivity nvarchar(MAX)null
+GO

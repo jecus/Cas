@@ -153,6 +153,7 @@ namespace CAS.UI.UIControls.PurchaseControls
             textBoxHTS.Text = _currentItem.HTS;
             textBoxManufacturer.Text = _currentItem.Manufacturer;
             textBoxRemarks.Text = _currentItem.Remarks;
+            textBoxIsEffectivity.Text = _currentItem.IsEffectivity;
             textBoxReference.Text = _currentItem.Reference;
             dataGridViewControlSuppliers.SetItemsArray((ICommonCollection) _currentItem.SupplierRelations);
 
@@ -262,6 +263,7 @@ namespace CAS.UI.UIControls.PurchaseControls
                 || textBoxHTS.Text != _currentItem.HTS
                 || textBoxManufacturer.Text != _currentItem.Manufacturer
                 || textBoxRemarks.Text != _currentItem.Remarks
+                || textBoxIsEffectivity.Text != _currentItem.IsEffectivity
                 || textBoxName.Text != _currentItem.Name
                 || textBoxReference.Text != _currentItem.Reference
                 || comboBoxAtaChapter.ATAChapter != _currentItem.ATAChapter
@@ -415,6 +417,7 @@ namespace CAS.UI.UIControls.PurchaseControls
                     _currentItem.Name = textBoxName.Text;
                     _currentItem.Reference = textBoxReference.Text;
                     _currentItem.Remarks = textBoxRemarks.Text;
+                    _currentItem.IsEffectivity = textBoxIsEffectivity.Text;
                     _currentItem.Measure = comboBoxMeasure.SelectedItem as Measure;
 
                 GlobalObjects.CasEnvironment.Manipulator.Save(_currentItem);

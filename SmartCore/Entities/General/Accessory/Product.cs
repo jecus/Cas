@@ -152,6 +152,9 @@ namespace SmartCore.Entities.General.Accessory
 		[Filter("Alt Part Number:", Order = 2)]
 		public string AltPartNumber { get; set; }
 
+		[TableColumn("IsEffectivity")]
+		public string IsEffectivity { get; set; }
+
 		#region public String SerialNumber { get; set; }
 
 		private string _serialNumber;
