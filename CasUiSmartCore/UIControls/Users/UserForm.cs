@@ -104,7 +104,8 @@ namespace CAS.UI.UIControls.Users
 					Login = _user.Login,
 					Password = _user.Password,
 					Surname = _user.Surname,
-					Name = _user.Name
+					Name = _user.Name,
+					UserType = _user.UserType
 				}); 
 				DialogResult = DialogResult.OK;
 				Close();
