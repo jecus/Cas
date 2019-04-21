@@ -284,16 +284,26 @@ namespace SmartCore.Entities.Dictionaries
         /// <summary>
         /// Горючее
         /// </summary>
-        public static GoodsClass Fuel = new GoodsClass(24, "Fuel", "Auxiliary Materials Maintenance FLM Fuel", "Auxiliary Materials Maintenance FLM Fuel", FLM);
-        #endregion
+        public static GoodsClass Fuel = new GoodsClass(24, "Fuels", "Auxiliary Materials Maintenance FLM Fuel", "Auxiliary Materials Maintenance FLM Fuel", FLM);
+		#endregion
 
-        #region Элементы пункта Fuel
+		#region public static GoodsClass Lubricants = new GoodsClass(76, "Lubricants", "Lubricants", "Lubricants", FLM);
 
-        #region public static GoodsClass AircraftFuel = new GoodsClass(25, "Aircraft Fuel", "Auxiliary Materials Maintenance FLM Fuel Aircraft", "Auxiliary Materials Maintenance FLM Fuel Aircraft", Fuel);
-        /// <summary>
-        /// Горючее для ВС
-        /// </summary>
-        public static GoodsClass AircraftFuel = new GoodsClass(25, "Aircraft Fuel", "Auxiliary Materials Maintenance FLM Fuel Aircraft", "Auxiliary Materials Maintenance FLM Fuel Aircraft", Fuel);
+		public static GoodsClass Lubricants = new GoodsClass(76, "Lubricants", "Lubricants", "Lubricants", FLM);
+		#endregion
+
+		#region public static GoodsClass DryLubes = new GoodsClass(77, "Dry Lubes", "Dry Lubes", "Dry Lubes", FLM);
+
+		public static GoodsClass DryLubes = new GoodsClass(77, "Dry Lubes", "Dry Lubes", "Dry Lubes", FLM);
+		#endregion
+
+		#region Элементы пункта Fuel
+
+		#region public static GoodsClass AircraftFuel = new GoodsClass(25, "Aircraft Fuel", "Auxiliary Materials Maintenance FLM Fuel Aircraft", "Auxiliary Materials Maintenance FLM Fuel Aircraft", Fuel);
+		/// <summary>
+		/// Горючее для ВС
+		/// </summary>
+		public static GoodsClass AircraftFuel = new GoodsClass(25, "Aircraft Fuel", "Auxiliary Materials Maintenance FLM Fuel Aircraft", "Auxiliary Materials Maintenance FLM Fuel Aircraft", Fuel);
         #endregion
 
         #region public static GoodsClass VehicleFuel = new GoodsClass(26, "Vehicle Fuel", "Auxiliary Materials Maintenance FLM Fuel Vehicle", "Auxiliary Materials Maintenance FLM Fuel Vehicle", Fuel);
@@ -309,7 +319,7 @@ namespace SmartCore.Entities.Dictionaries
         /// <summary>
         /// Масла
         /// </summary>
-        public static GoodsClass Oil = new GoodsClass(27, "Oil", "Auxiliary Materials Maintenance FLM Oil", "Auxiliary Materials Maintenance FLM Oil", FLM);
+        public static GoodsClass Oil = new GoodsClass(27, "Oils", "Auxiliary Materials Maintenance FLM Oil", "Auxiliary Materials Maintenance FLM Oil", FLM);
         #endregion
 
         #region Элементы пункта Oil
@@ -334,7 +344,7 @@ namespace SmartCore.Entities.Dictionaries
 		/// <summary>
 		/// Смазка
 		/// </summary>
-		public static GoodsClass Grease = new GoodsClass(30, "Grease", "Auxiliary Materials Maintenance FLM Grease", "Auxiliary Materials Maintenance FLM Grease", FLM);
+		public static GoodsClass Grease = new GoodsClass(30, "Greases", "Auxiliary Materials Maintenance FLM Grease", "Auxiliary Materials Maintenance FLM Grease", FLM);
 		#endregion
 
 		#region Элементы пункта Grease
@@ -353,12 +363,61 @@ namespace SmartCore.Entities.Dictionaries
 		public static GoodsClass VehicleGrease = new GoodsClass(32, "Vehicle Grease", "Auxiliary Materials Maintenance FLM Grease Vehicle", "Auxiliary Materials Maintenance FLM Grease Vehicle", Grease);
 		#endregion
 
+		#region public static GoodsClass CommonGreases = new GoodsClass(78, "Common Greases", "Common Greases", "Common Greases", Grease);
+
+		public static GoodsClass CommonGreases = new GoodsClass(78, "Common Greases", "Common Greases", "Common Greases", Grease);
+
+
 		#endregion
 
-		#region public static GoodsClass Hydraulic = new GoodsClass(35, "Hydraulic", "Auxiliary Materials Maintenance FLM Hydraulic", "Auxiliary Materials Maintenance FLM Hydraulic", FLM);
+		#region public static GoodsClass Hydraulic = new GoodsClass(35, "Hydraulic Fluids", "Auxiliary Materials Maintenance FLM Hydraulic", "Auxiliary Materials Maintenance FLM Hydraulic", FLM);
 
-		public static GoodsClass Hydraulic = new GoodsClass(35, "Hydraulic", "Auxiliary Materials Maintenance FLM Hydraulic", "Auxiliary Materials Maintenance FLM Hydraulic", FLM);
+		public static GoodsClass Hydraulic = new GoodsClass(35, "Hydraulic Fluids", "Auxiliary Materials Maintenance FLM Hydraulic", "Auxiliary Materials Maintenance FLM Hydraulic", Grease);
 
+
+		#endregion
+
+		#endregion
+
+
+
+		#endregion
+
+		#region Элементы пункта KIT
+
+		#region public static GoodsClass AntiIcingAndDeIcing = new GoodsClass(70, "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", KIT);
+
+		public static GoodsClass AntiIcingAndDeIcing = new GoodsClass(70, "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", KIT);
+
+		#endregion
+
+		#region public static GoodsClass BacterialogicalProtection = new GoodsClass(71, "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", KIT);
+
+		public static GoodsClass BacterialogicalProtection = new GoodsClass(71, "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", KIT);
+
+		#endregion
+
+		#region public static GoodsClass Materials = new GoodsClass(72, "Materials", "Materials", "Materials", KIT);
+
+		public static GoodsClass Materials = new GoodsClass(72, "Materials", "Materials", "Materials", KIT);
+
+		#endregion
+
+		# region public static GoodsClass FinishingMaterials = new GoodsClass(73, "Finishing Materials", "Finishing Materials", "Finishing Materials", KIT);
+
+		public static GoodsClass FinishingMaterials = new GoodsClass(73, "Finishing Materials", "Finishing Materials", "Finishing Materials", KIT);
+
+		#endregion
+
+		#region public static GoodsClass MiscellaneousMaterials = new GoodsClass(74, "Miscellaneous Materials", "Miscellaneous Materials", "Miscellaneous Materials", KIT);
+
+		public static GoodsClass MiscellaneousMaterials = new GoodsClass(74, "Miscellaneous Materials", "Miscellaneous Materials", "Miscellaneous Materials", KIT);
+
+		#endregion
+
+		#region public static GoodsClass SpecialMaterials = new GoodsClass(75, "Special Materials", "Special Materials", "Special Materials", KIT);
+
+		public static GoodsClass SpecialMaterials = new GoodsClass(75, "Special Materials", "Special Materials", "Special Materials", KIT);
 
 		#endregion
 
@@ -372,14 +431,23 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		#region Элементы пункта ConsumableParts
-		public static GoodsClass Abraive = new GoodsClass(36, "Abraive", "Auxiliary Materials Maintenance Abraive", "Auxiliary Materials Maintenance Abraive", ConsumableParts);
+		public static GoodsClass Abraive = new GoodsClass(36, "Abrasive", "Auxiliary Materials Maintenance Abrasive", "Auxiliary Materials Maintenance Abrasive", ConsumableParts);
 		public static GoodsClass Composite = new GoodsClass(37, "Composite", "Auxiliary Materials Maintenance Composite", "Auxiliary Materials Maintenance Composite", ConsumableParts);
 		public static GoodsClass Compound = new GoodsClass(38, "Compound", "Auxiliary Materials Maintenance Compound", "Auxiliary Materials Maintenance Compound", ConsumableParts);
 		public static GoodsClass Glue = new GoodsClass(39, "Glue", "Auxiliary Materials Maintenance Glue", "Auxiliary Materials Maintenance Glue", ConsumableParts);
-		public static GoodsClass Lacquer = new GoodsClass(40, "Lacquer", "Auxiliary Materials Maintenance Lacquer", "Auxiliary Materials Maintenance Lacquer", ConsumableParts);
-		public static GoodsClass Paint = new GoodsClass(41, "Paint", "Auxiliary Materials Maintenance Paint", "Auxiliary Materials Maintenance Paint", ConsumableParts);
+		public static GoodsClass Lacquer = new GoodsClass(40, "Lacquers", "Auxiliary Materials Maintenance Lacquer", "Auxiliary Materials Maintenance Lacquer", ConsumableParts);
+		public static GoodsClass Paint = new GoodsClass(41, "Paints", "Auxiliary Materials Maintenance Paint", "Auxiliary Materials Maintenance Paint", ConsumableParts);
 		public static GoodsClass Polish = new GoodsClass(42, "Polish", "Auxiliary Materials Maintenance Polish", "Auxiliary Materials Maintenance Polish", ConsumableParts);
 		public static GoodsClass Primer = new GoodsClass(43, "Primer", "Auxiliary Materials Maintenance Primer", "Auxiliary Materials Maintenance Primer", ConsumableParts);
+		public static GoodsClass Adhesives = new GoodsClass(79, "Adhesives", "Adhesives", "Adhesives", ConsumableParts);
+		public static GoodsClass AdhesivesCompounds = new GoodsClass(80, "Adhesives Compounds", "Adhesives Compounds", "Adhesives Compounds", ConsumableParts);
+		public static GoodsClass Cements = new GoodsClass(81, "Cements", "Cements", "Cements", ConsumableParts);
+		public static GoodsClass Disinfectants = new GoodsClass(82, "Disinfectants", "Disinfectants", "Disinfectants", ConsumableParts);
+		public static GoodsClass PretreatmentForPainting = new GoodsClass(83, "Pretreatment for Painting and Sealing", "Pretreatment for Painting and Sealing", "Pretreatment for Painting and Sealing", ConsumableParts);
+		public static GoodsClass Preservation = new GoodsClass(84, "Preservation", "Preservation", "Preservation", ConsumableParts);
+		public static GoodsClass Sealants = new GoodsClass(85, "Sealants", "Sealants", "Sealants", ConsumableParts);
+		public static GoodsClass Strippers = new GoodsClass(86, "Strippers", "Strippers", "Strippers", ConsumableParts);
+
 
 		#endregion
 
@@ -393,9 +461,11 @@ namespace SmartCore.Entities.Dictionaries
 		public static GoodsClass Alcohol = new GoodsClass(45, "Alcohol", "Auxiliary Materials Maintenance Alcohol", "Auxiliary Materials Maintenance Alcohol", Fluid);
 		public static GoodsClass AntiCorrosion = new GoodsClass(46, "Anti-corrosion", "Auxiliary Materials Maintenance Anti-corrosion", "Auxiliary Materials Maintenance Anti-corrosion", Fluid);
 		public static GoodsClass Coolant = new GoodsClass(47, "Coolant", "Auxiliary Materials Maintenance Coolant", "Auxiliary Materials Maintenance Coolant", Fluid);
-		public static GoodsClass Cleaner = new GoodsClass(48, "Cleaner", "Auxiliary Materials Maintenance Cleaner", "Auxiliary Materials Maintenance Cleaner", Fluid);	
+		public static GoodsClass Cleaner = new GoodsClass(48, "Cleaners", "Auxiliary Materials Maintenance Cleaner", "Auxiliary Materials Maintenance Cleaner", Fluid);	
 		public static GoodsClass DeIcing = new GoodsClass(49, "De-icing", "Auxiliary Materials Maintenance De-icing", "Auxiliary Materials Maintenance De-icing", Fluid);
 		public static GoodsClass Solvent = new GoodsClass(50, "Solvent", "Auxiliary Materials Maintenance Solvent", "Auxiliary Materials Maintenance Solvent", Fluid);
+		public static GoodsClass CleaningAgents = new GoodsClass(87, "Cleaning Agents", "Cleaning Agents", "Cleaning Agents", Fluid);
+		public static GoodsClass CleanersPolishes = new GoodsClass(88, "Cleaners Polishes", "Cleaners Polishes", "Cleaners Polishes", Fluid);
 
 		#endregion
 
@@ -431,6 +501,7 @@ namespace SmartCore.Entities.Dictionaries
 		public static GoodsClass AircraftTools = new GoodsClass(65, "Aircraft tools", "Production Auxiliary Equipment AircraftTools", "Production Auxiliary Equipment AircraftTools", Tools);
 		public static GoodsClass EngineTools = new GoodsClass(66, "Engine tools", "Production Auxiliary Equipment EngineTools", "Production Auxiliary Equipment EngineTools", Tools);
 		public static GoodsClass SpecialTools = new GoodsClass(67, "Special tools", "Production Auxiliary Equipment SpecialTools", "Production Auxiliary Equipment SpecialTools", Tools);
+		public static GoodsClass CommercialTools = new GoodsClass(89, "Commercial Tools", "Production Auxiliary Equipment CommercialTools", "Production Auxiliary Equipment CommercialTools", Tools);
 
 		#endregion
 
