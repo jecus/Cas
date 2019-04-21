@@ -287,16 +287,6 @@ namespace SmartCore.Entities.Dictionaries
         public static GoodsClass Fuel = new GoodsClass(24, "Fuels", "Auxiliary Materials Maintenance FLM Fuel", "Auxiliary Materials Maintenance FLM Fuel", FLM);
 		#endregion
 
-		#region public static GoodsClass Lubricants = new GoodsClass(76, "Lubricants", "Lubricants", "Lubricants", FLM);
-
-		public static GoodsClass Lubricants = new GoodsClass(76, "Lubricants", "Lubricants", "Lubricants", FLM);
-		#endregion
-
-		#region public static GoodsClass DryLubes = new GoodsClass(77, "Dry Lubes", "Dry Lubes", "Dry Lubes", FLM);
-
-		public static GoodsClass DryLubes = new GoodsClass(77, "Dry Lubes", "Dry Lubes", "Dry Lubes", FLM);
-		#endregion
-
 		#region Элементы пункта Fuel
 
 		#region public static GoodsClass AircraftFuel = new GoodsClass(25, "Aircraft Fuel", "Auxiliary Materials Maintenance FLM Fuel Aircraft", "Auxiliary Materials Maintenance FLM Fuel Aircraft", Fuel);
@@ -379,7 +369,15 @@ namespace SmartCore.Entities.Dictionaries
 
 		#endregion
 
+		#region public static GoodsClass Lubricants = new GoodsClass(76, "Lubricants", "Lubricants", "Lubricants", FLM);
 
+		public static GoodsClass Lubricants = new GoodsClass(76, "Lubricants", "Lubricants", "Lubricants", FLM);
+		#endregion
+
+		#region public static GoodsClass DryLubes = new GoodsClass(77, "Dry Lubes", "Dry Lubes", "Dry Lubes", FLM);
+
+		public static GoodsClass DryLubes = new GoodsClass(77, "Dry Lubes", "Dry Lubes", "Dry Lubes", FLM);
+		#endregion
 
 		#endregion
 
