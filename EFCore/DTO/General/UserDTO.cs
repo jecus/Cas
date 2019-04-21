@@ -8,7 +8,9 @@ namespace EFCore.DTO.General
 	public enum UsetType
 	{
 		Admin,
-		User
+		SuperUser,
+		ReadOnly,
+		SaveOnly
 	}
 
 	[DataContract(IsReference = true)]
