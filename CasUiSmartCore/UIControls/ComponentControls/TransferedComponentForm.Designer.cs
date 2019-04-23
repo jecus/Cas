@@ -1,4 +1,6 @@
 ﻿using AvControls.AvButtonT;
+using CASTerms;
+using EFCore.DTO.General;
 
 namespace CAS.UI.UIControls.ComponentControls
 {
@@ -30,6 +32,7 @@ namespace CAS.UI.UIControls.ComponentControls
         /// </summary>
         private void InitializeComponent()
         {
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("Removed", System.Windows.Forms.HorizontalAlignment.Left);
 			System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("Installed", System.Windows.Forms.HorizontalAlignment.Left);
 			System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("Wait remove confirm", System.Windows.Forms.HorizontalAlignment.Left);
@@ -115,6 +118,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.ButtonDelete.TextSecondary = "components";
 			this.ButtonDelete.ToolTipText = null;
 			this.ButtonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
+			this.ButtonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
 			// ButtonAdd
 			// 
@@ -143,6 +147,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.ButtonAdd.TextSecondary = "components";
 			this.ButtonAdd.ToolTipText = null;
 			this.ButtonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
+			this.ButtonAdd.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// ButtonCancel
 			// 

@@ -1,4 +1,6 @@
 ﻿using CAS.UI.UIControls.Auxiliary;
+using CASTerms;
+using EFCore.DTO.General;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
@@ -30,7 +32,8 @@ namespace CAS.UI.UIControls.PurchaseControls
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GoodStandardForm));
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GoodStandardForm));
             this.labelRemarks = new System.Windows.Forms.Label();
             this.textBoxRemarks = new System.Windows.Forms.TextBox();
             this.labelDescription = new System.Windows.Forms.Label();
@@ -237,10 +240,11 @@ namespace CAS.UI.UIControls.PurchaseControls
             this.ButtonAdd.TextSecondary = "";
             this.ButtonAdd.ToolTipText = "Add Item";
             this.ButtonAdd.Click += new System.EventHandler(this.ButtonAddClick);
-            // 
-            // buttonDelete
-            // 
-            this.buttonDelete.ActiveBackColor = System.Drawing.Color.Transparent;
+            this.ButtonAdd.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// buttonDelete
+			// 
+			this.buttonDelete.ActiveBackColor = System.Drawing.Color.Transparent;
             this.buttonDelete.ActiveBackgroundImage = null;
             this.buttonDelete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonDelete.FontMain = new System.Drawing.Font("Verdana", 14.25F);
@@ -265,8 +269,9 @@ namespace CAS.UI.UIControls.PurchaseControls
             this.buttonDelete.TextSecondary = "";
             this.buttonDelete.ToolTipText = "Delete";
             this.buttonDelete.Click += new System.EventHandler(this.ButtonDeleteClick);
+            this.buttonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 
-            this.panelMain.Controls.Add(this.labelName);
+			this.panelMain.Controls.Add(this.labelName);
             this.panelMain.Controls.Add(this.textBoxName);
             this.panelMain.Controls.Add(this.labelClass);
             //this.panelMain.Controls.Add(this.labelCostOverhaul);

@@ -1,5 +1,7 @@
 ﻿using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CASTerms;
+using EFCore.DTO.General;
 
 namespace CAS.UI.UIControls.JobCardControls
 {
@@ -32,7 +34,8 @@ namespace CAS.UI.UIControls.JobCardControls
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelBiWeeklyReport = new System.Windows.Forms.Label();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.labelBiWeeklyReport = new System.Windows.Forms.Label();
             this.labelFooter = new System.Windows.Forms.Label();
             this.textboxBiWeeklyReport = new System.Windows.Forms.TextBox();
             this.textboxFooter = new System.Windows.Forms.TextBox();
@@ -1384,10 +1387,11 @@ namespace CAS.UI.UIControls.JobCardControls
             this.ButtonAdd.TextSecondary = "";
             this.ButtonAdd.ToolTipText = "Add Item";
             this.ButtonAdd.Click += new System.EventHandler(this.ButtonAddClick);
-            // 
-            // buttonDelete
-            // 
-            this.buttonDelete.ActiveBackColor = System.Drawing.Color.Transparent;
+            this.ButtonAdd.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// buttonDelete
+			// 
+			this.buttonDelete.ActiveBackColor = System.Drawing.Color.Transparent;
             this.buttonDelete.ActiveBackgroundImage = null;
             this.buttonDelete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonDelete.Dock = System.Windows.Forms.DockStyle.Right;
@@ -1413,10 +1417,11 @@ namespace CAS.UI.UIControls.JobCardControls
             this.buttonDelete.TextSecondary = "";
             this.buttonDelete.ToolTipText = "Delete";
             this.buttonDelete.Click += new System.EventHandler(this.ButtonDeleteClick);
-            // 
-            // JobCardControl
-            // 
-            this.AutoSize = true;
+            this.buttonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			// 
+			// JobCardControl
+			// 
+			this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.Controls.Add(this.flowLayoutPanelMain);
             this.Name = "JobCardControl";

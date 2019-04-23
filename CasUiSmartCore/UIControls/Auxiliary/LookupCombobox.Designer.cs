@@ -1,5 +1,7 @@
 ﻿using System.Threading;
 using System.Windows.Forms;
+using CASTerms;
+using EFCore.DTO.General;
 
 namespace CAS.UI.UIControls.Auxiliary
 {
@@ -61,7 +63,8 @@ namespace CAS.UI.UIControls.Auxiliary
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBoxReason = new System.Windows.Forms.ComboBox();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.comboBoxReason = new System.Windows.Forms.ComboBox();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.richReferenceButtonCreate = new CAS.UI.Management.Dispatchering.RichReferenceButton();
             this.richReferenceButtonEdit = new CAS.UI.Management.Dispatchering.RichReferenceButton();
@@ -124,10 +127,11 @@ namespace CAS.UI.UIControls.Auxiliary
             this.richReferenceButtonCreate.TextSecondary = "";
             this.richReferenceButtonCreate.ToolTipText = "Add new";
             this.richReferenceButtonCreate.Click += new System.EventHandler(this.ButtonCreateClick);
-            // 
-            // richReferenceButtonEdit
-            // 
-            this.richReferenceButtonEdit.ActiveBackColor = System.Drawing.Color.Transparent;
+            this.richReferenceButtonCreate.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// richReferenceButtonEdit
+			// 
+			this.richReferenceButtonEdit.ActiveBackColor = System.Drawing.Color.Transparent;
             this.richReferenceButtonEdit.ActiveBackgroundImage = null;
             this.richReferenceButtonEdit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.richReferenceButtonEdit.Displayer = null;
@@ -158,10 +162,11 @@ namespace CAS.UI.UIControls.Auxiliary
             this.richReferenceButtonEdit.TextSecondary = "";
             this.richReferenceButtonEdit.ToolTipText = "Edit selected";
             this.richReferenceButtonEdit.Click += new System.EventHandler(this.ButtonEditClick);
-            // 
-            // richReferenceButtonViewList
-            // 
-            this.richReferenceButtonViewList.ActiveBackColor = System.Drawing.Color.Transparent;
+            this.richReferenceButtonEdit.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// richReferenceButtonViewList
+			// 
+			this.richReferenceButtonViewList.ActiveBackColor = System.Drawing.Color.Transparent;
             this.richReferenceButtonViewList.ActiveBackgroundImage = null;
             this.richReferenceButtonViewList.Cursor = System.Windows.Forms.Cursors.Hand;
             this.richReferenceButtonViewList.Displayer = null;

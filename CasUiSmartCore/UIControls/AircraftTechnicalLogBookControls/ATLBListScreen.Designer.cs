@@ -1,4 +1,6 @@
-﻿
+﻿using CASTerms;
+using EFCore.DTO.General;
+
 namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 {
     partial class ATLBListScreen
@@ -29,7 +31,8 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelDateAsOf = new System.Windows.Forms.Label();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.labelDateAsOf = new System.Windows.Forms.Label();
             this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
             this.buttonAddNew = new CAS.UI.Management.Dispatchering.RichReferenceButton();
             this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
@@ -94,10 +97,11 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             this.buttonAddNew.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonAddNew.Name = "buttonAddNew";
             this.buttonAddNew.DisplayerRequested += ButtonAddDisplayerRequested;
-            // 
-            // buttonDeleteSelected
-            // 
-            this.buttonDeleteSelected.ActiveBackColor = System.Drawing.Color.FromArgb(200, 200, 200);
+            this.buttonAddNew.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// buttonDeleteSelected
+			// 
+			this.buttonDeleteSelected.ActiveBackColor = System.Drawing.Color.FromArgb(200, 200, 200);
             this.buttonDeleteSelected.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.buttonDeleteSelected.FontSecondary = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.buttonDeleteSelected.ForeColorMain = System.Drawing.Color.FromArgb(49, 82, 128);
@@ -114,10 +118,11 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             this.buttonDeleteSelected.TextAlignSecondary = System.Drawing.ContentAlignment.TopCenter;
             this.buttonDeleteSelected.TextMain = "Delete";
             this.buttonDeleteSelected.TextSecondary = "selected";
-            // 
-            // labelDateAsOf
-            // 
-            this.labelDateAsOf.AutoSize = true;
+            this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			// 
+			// labelDateAsOf
+			// 
+			this.labelDateAsOf.AutoSize = true;
             this.labelDateAsOf.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.labelDateAsOf.ForeColor = System.Drawing.Color.FromArgb(122, 122, 122);
             this.labelDateAsOf.Location = new System.Drawing.Point(57, 30);

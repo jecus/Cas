@@ -1,5 +1,7 @@
 ﻿using System.Threading;
 using AvControls.AvButtonT;
+using CASTerms;
+using EFCore.DTO.General;
 
 namespace CAS.UI.UIControls.Auxiliary
 {
@@ -44,7 +46,8 @@ namespace CAS.UI.UIControls.Auxiliary
         /// </summary>
         private void InitializeComponent()
         {
-            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.panelContainer = new System.Windows.Forms.Panel();
             this.ButtonRegisterActualState = new AvControls.AvButtonT.AvButtonT();
             this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
@@ -108,10 +111,11 @@ namespace CAS.UI.UIControls.Auxiliary
             this.ButtonRegisterActualState.TextSecondary = "Actual State";
             this.ButtonRegisterActualState.ToolTipText = "";
             this.ButtonRegisterActualState.Visible = false;
-            // 
-            // ButtonDelete
-            // 
-            this.ButtonDelete.ActiveBackColor = System.Drawing.Color.Transparent;
+            this.ButtonRegisterActualState.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// ButtonDelete
+			// 
+			this.ButtonDelete.ActiveBackColor = System.Drawing.Color.Transparent;
             this.ButtonDelete.ActiveBackgroundImage = null;
             this.ButtonDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ButtonDelete.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -137,10 +141,11 @@ namespace CAS.UI.UIControls.Auxiliary
             this.ButtonDelete.TextMain = "Delete";
             this.ButtonDelete.TextSecondary = "";
             this.ButtonDelete.ToolTipText = "";
-            // 
-            // ButtonEdit
-            // 
-            this.ButtonEdit.ActiveBackColor = System.Drawing.Color.Transparent;
+            this.ButtonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			// 
+			// ButtonEdit
+			// 
+			this.ButtonEdit.ActiveBackColor = System.Drawing.Color.Transparent;
             this.ButtonEdit.ActiveBackgroundImage = null;
             this.ButtonEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ButtonEdit.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -166,10 +171,11 @@ namespace CAS.UI.UIControls.Auxiliary
             this.ButtonEdit.TextMain = "Edit";
             this.ButtonEdit.TextSecondary = "";
             this.ButtonEdit.ToolTipText = "";
-            // 
-            // ButtonAdd
-            // 
-            this.ButtonAdd.ActiveBackColor = System.Drawing.Color.Transparent;
+            this.ButtonEdit.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// ButtonAdd
+			// 
+			this.ButtonAdd.ActiveBackColor = System.Drawing.Color.Transparent;
             this.ButtonAdd.ActiveBackgroundImage = null;
             this.ButtonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ButtonAdd.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -194,10 +200,11 @@ namespace CAS.UI.UIControls.Auxiliary
             this.ButtonAdd.TextMain = "Add";
             this.ButtonAdd.TextSecondary = "";
             this.ButtonAdd.ToolTipText = "";
-            // 
-            // listViewCompliance
-            // 
-            this.listViewCompliance.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.ButtonAdd.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// listViewCompliance
+			// 
+			this.listViewCompliance.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewCompliance.FullRowSelect = true;

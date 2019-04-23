@@ -1,4 +1,7 @@
-﻿namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
+﻿using CASTerms;
+using EFCore.DTO.General;
+
+namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 {
 	partial class FlightPlanOpsListScreen
 	{
@@ -28,6 +31,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
 			this.buttonAddNew = new CAS.UI.Management.Dispatchering.RichReferenceButton();
 			this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
@@ -109,6 +113,7 @@
 			this.buttonAddNew.TextSecondary = "";
 			this.buttonAddNew.ToolTipText = "Add new";
 			this.buttonAddNew.DisplayerRequested += ButtonAddDisplayerRequested;
+			this.buttonAddNew.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// buttonDeleteSelected
 			// 
@@ -132,6 +137,7 @@
 			this.buttonDeleteSelected.TextSecondary = "";
 			this.buttonDeleteSelected.ToolTipText = "Delete selected";
 			this.buttonDeleteSelected.Click += ButtonDeleteClick;
+			this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
 			// pictureBox1
 			// 

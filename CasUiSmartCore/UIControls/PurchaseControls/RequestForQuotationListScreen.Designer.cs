@@ -1,4 +1,6 @@
-﻿
+﻿using CASTerms;
+using EFCore.DTO.General;
+
 namespace CAS.UI.UIControls.PurchaseControls
 {
     partial class RequestForQuotationListScreen
@@ -29,7 +31,8 @@ namespace CAS.UI.UIControls.PurchaseControls
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
             this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
             this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -118,10 +121,11 @@ namespace CAS.UI.UIControls.PurchaseControls
             this.buttonAddNew.TextSecondary = "";
             this.buttonAddNew.ToolTipText = "Add new";
             this.buttonAddNew.Click += ButtonAddNewClick;
-            // 
-            // buttonDeleteSelected
-            // 
-            this.buttonDeleteSelected.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.buttonAddNew.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// buttonDeleteSelected
+			// 
+			this.buttonDeleteSelected.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.buttonDeleteSelected.ActiveBackgroundImage = null;
             this.buttonDeleteSelected.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonDeleteSelected.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
@@ -141,10 +145,11 @@ namespace CAS.UI.UIControls.PurchaseControls
             this.buttonDeleteSelected.TextSecondary = "";
             this.buttonDeleteSelected.ToolTipText = "Delete selected";
             this.buttonDeleteSelected.Click += ButtonDeleteClick;
-            // 
-            // buttonApplyFilter
-            // 
-            this.buttonApplyFilter.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			// 
+			// buttonApplyFilter
+			// 
+			this.buttonApplyFilter.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.buttonApplyFilter.ActiveBackgroundImage = null;
             this.buttonApplyFilter.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonApplyFilter.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);

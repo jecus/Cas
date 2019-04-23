@@ -1,4 +1,7 @@
-﻿namespace CAS.UI.UIControls.PurchaseControls.Initial
+﻿using CASTerms;
+using EFCore.DTO.General;
+
+namespace CAS.UI.UIControls.PurchaseControls.Initial
 {
     partial class OrderAddForm
     {
@@ -28,6 +31,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.textBoxRemarks = new System.Windows.Forms.TextBox();
 			this.dateTimePickerOpeningDate = new System.Windows.Forms.DateTimePicker();
 			this.textBoxAuthor = new System.Windows.Forms.TextBox();
@@ -291,6 +295,7 @@
 			this.buttonOk.TabIndex = 246;
 			this.buttonOk.Text = "OK";
 			this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
+			this.buttonOk.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// buttonCancel
 			// 
@@ -333,6 +338,7 @@
 			this.ButtonAdd.TextSecondary = "";
 			this.ButtonAdd.ToolTipText = "";
 			this.ButtonAdd.Click += new System.EventHandler(this.ButtonAddClick);
+			this.ButtonAdd.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// ButtonDelete
 			// 
@@ -361,6 +367,7 @@
 			this.ButtonDelete.TextSecondary = "";
 			this.ButtonDelete.ToolTipText = "";
 			this.ButtonDelete.Click += new System.EventHandler(this.ButtonDeleteClick);
+			this.ButtonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
 			// groupBox1
 			// 
