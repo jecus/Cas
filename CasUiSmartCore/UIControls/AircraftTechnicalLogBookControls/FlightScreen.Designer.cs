@@ -1,4 +1,6 @@
 ﻿using CAS.UI.UIControls.DirectivesControls;
+using CASTerms;
+using EFCore.DTO.General;
 
 namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 {
@@ -30,7 +32,8 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanelMain = new System.Windows.Forms.FlowLayoutPanel();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.flowLayoutPanelMain = new System.Windows.Forms.FlowLayoutPanel();
             this.extendableRichContainerSummary = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
             this.flightGeneralInformatonControl = new CAS.UI.UIControls.AircraftTechnicalLogBookControls.FlightGeneralInformatonControl();
             this.extendableRichContainerFuel = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
@@ -126,10 +129,11 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             this.buttonAddAtlb.TextAlignSecondary = System.Drawing.ContentAlignment.TopCenter;
             this.buttonAddAtlb.TextMain = "Add new";
             this.buttonAddAtlb.TextSecondary = "ATLB";
-            // 
-            // flowLayoutPanelMain
-            // 
-            this.flowLayoutPanelMain.AutoScroll = true;
+            this.buttonAddAtlb.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// flowLayoutPanelMain
+			// 
+			this.flowLayoutPanelMain.AutoScroll = true;
             this.flowLayoutPanelMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.flowLayoutPanelMain.Controls.Add(this.extendableRichContainerSummary);
             this.flowLayoutPanelMain.Controls.Add(this.flightGeneralInformatonControl);

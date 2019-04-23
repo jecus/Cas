@@ -1,6 +1,5 @@
-﻿
-using System;
-using System.Web.UI.WebControls;
+﻿using CASTerms;
+using EFCore.DTO.General;
 
 namespace CAS.UI.UIControls.ScheduleControls
 {
@@ -32,6 +31,7 @@ namespace CAS.UI.UIControls.ScheduleControls
         /// </summary>
         private void InitializeComponent()
         {
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.labelDateAsOf = new System.Windows.Forms.Label();
 	        this.isSummerRadioButton = new System.Windows.Forms.RadioButton();
 	        this.isWinterRadioButton = new System.Windows.Forms.RadioButton();
@@ -253,10 +253,11 @@ namespace CAS.UI.UIControls.ScheduleControls
 	        this.buttonAddNew.TextSecondary = "";
 	        this.buttonAddNew.ToolTipText = "Add new";
 	        this.buttonAddNew.DisplayerRequested += ButtonAddDisplayerRequested;
-	        // 
-	        // buttonDeleteSelected
-	        // 
-	        this.buttonDeleteSelected.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+	        this.buttonAddNew.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// buttonDeleteSelected
+			// 
+			this.buttonDeleteSelected.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
 	        this.buttonDeleteSelected.ActiveBackgroundImage = null;
 	        this.buttonDeleteSelected.Cursor = System.Windows.Forms.Cursors.Hand;
 	        this.buttonDeleteSelected.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
@@ -276,10 +277,11 @@ namespace CAS.UI.UIControls.ScheduleControls
 	        this.buttonDeleteSelected.TextSecondary = "";
 	        this.buttonDeleteSelected.ToolTipText = "Delete selected";
 	        this.buttonDeleteSelected.Click += ButtonDeleteClick;
-	        // 
-	        // pictureBox1
-	        // 
-	        this.pictureBox1.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
+	        this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			// 
+			// pictureBox1
+			// 
+			this.pictureBox1.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
 	        this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
 	        this.pictureBox1.Location = new System.Drawing.Point(124, 3);
 	        this.pictureBox1.Name = "pictureBox1";

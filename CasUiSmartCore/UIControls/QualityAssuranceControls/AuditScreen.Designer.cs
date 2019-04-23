@@ -1,4 +1,6 @@
-﻿
+﻿using CASTerms;
+using EFCore.DTO.General;
+
 namespace CAS.UI.UIControls.QualityAssuranceControls
 {
     partial class AuditScreen
@@ -29,7 +31,8 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelDateAsOf = new System.Windows.Forms.Label();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.labelDateAsOf = new System.Windows.Forms.Label();
             this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
             this.buttonReleaseToService = new AvControls.AvButtonT.AvButtonT();
             this.buttonClose = new AvControls.AvButtonT.AvButtonT();
@@ -190,10 +193,11 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
             this.buttonPublish.TextMain = "Publish";
             this.buttonPublish.TextSecondary = "";
             this.buttonPublish.ToolTipText = "";
-            // 
-            // buttonAddNonRoutineJob
-            // 
-            this.buttonAddNonRoutineJob.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.buttonPublish.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// buttonAddNonRoutineJob
+			// 
+			this.buttonAddNonRoutineJob.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.buttonAddNonRoutineJob.ActiveBackgroundImage = null;
             this.buttonAddNonRoutineJob.Click +=new System.EventHandler(ButtonAddNonRoutineJobClick);
             this.buttonAddNonRoutineJob.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -219,10 +223,11 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
             this.buttonAddNonRoutineJob.TextMain = "Add Non-";
             this.buttonAddNonRoutineJob.TextSecondary = "Routine Job";
             this.buttonAddNonRoutineJob.ToolTipText = "";
-            // 
-            // WorkPackageScreen
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.buttonAddNonRoutineJob.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// WorkPackageScreen
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "WorkPackageScreen";

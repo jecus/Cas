@@ -1,4 +1,6 @@
 ﻿using MetroFramework.Controls;
+using CASTerms;
+using EFCore.DTO.General;
 
 namespace CAS.UI.UIControls.SupplierControls
 {
@@ -30,6 +32,7 @@ namespace CAS.UI.UIControls.SupplierControls
         /// </summary>
         private void InitializeComponent()
         {
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.buttonSave = new System.Windows.Forms.Button();
 			this.textBoxEmail = new MetroFramework.Controls.MetroTextBox();
@@ -96,6 +99,7 @@ namespace CAS.UI.UIControls.SupplierControls
 			this.buttonSave.TabIndex = 17;
 			this.buttonSave.Text = "Save";
 			this.buttonSave.Click += new System.EventHandler(this.ButtonSaveClick);
+			this.buttonSave.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// textBoxEmail
 			// 
@@ -511,6 +515,7 @@ namespace CAS.UI.UIControls.SupplierControls
 			this.ButtonAddDoc.TextSecondary = "";
 			this.ButtonAddDoc.ToolTipText = "Add Item";
 			this.ButtonAddDoc.Click += new System.EventHandler(this.ButtonAddFileClick);
+			this.ButtonAddDoc.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// buttonDeleteDoc
 			// 
@@ -540,6 +545,7 @@ namespace CAS.UI.UIControls.SupplierControls
 			this.buttonDeleteDoc.TextSecondary = "";
 			this.buttonDeleteDoc.ToolTipText = "Delete";
 			this.buttonDeleteDoc.Click += new System.EventHandler(this.ButtonDeleteClick);
+			this.buttonDeleteDoc.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
 			// labelImageCaption
 			// 

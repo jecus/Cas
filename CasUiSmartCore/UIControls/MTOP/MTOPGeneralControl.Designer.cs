@@ -1,4 +1,7 @@
-﻿namespace CAS.UI.UIControls.MTOP
+﻿using CASTerms;
+using EFCore.DTO.General;
+
+namespace CAS.UI.UIControls.MTOP
 {
 	partial class MTOPGeneralControl
 	{
@@ -28,6 +31,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.avButtonAddCheck = new AvControls.AvButtonT.AvButtonT();
 			this.avButtonEditCheck = new AvControls.AvButtonT.AvButtonT();
 			this.avButtonDeleteCheck = new AvControls.AvButtonT.AvButtonT();
@@ -63,6 +67,7 @@
 			this.avButtonAddCheck.TextSecondary = "";
 			this.avButtonAddCheck.ToolTipText = "Add";
 			this.avButtonAddCheck.Click += new System.EventHandler(this.avButtonAddCheck_Click);
+			this.avButtonAddCheck.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// avButtonEditCheck
 			// 
@@ -91,6 +96,7 @@
 			this.avButtonEditCheck.TextSecondary = "";
 			this.avButtonEditCheck.ToolTipText = "Edit";
 			this.avButtonEditCheck.Click += new System.EventHandler(this.avButtonEditCheck_Click);
+			this.avButtonEditCheck.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// avButtonDeleteCheck
 			// 
@@ -119,6 +125,7 @@
 			this.avButtonDeleteCheck.TextSecondary = "";
 			this.avButtonDeleteCheck.ToolTipText = "Delete";
 			this.avButtonDeleteCheck.Click += new System.EventHandler(this.avButtonDeleteCheck_Click);
+			this.avButtonDeleteCheck.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
 			// mtopCheckListView1
 			// 

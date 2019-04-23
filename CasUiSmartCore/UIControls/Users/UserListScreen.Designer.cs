@@ -1,4 +1,7 @@
-﻿namespace CAS.UI.UIControls.Users
+﻿using CASTerms;
+using EFCore.DTO.General;
+
+namespace CAS.UI.UIControls.Users
 {
 	partial class UserListScreen
 	{
@@ -28,6 +31,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
 			this.buttonAddDocument = new AvControls.AvButtonT.AvButtonT();
 			this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
@@ -100,6 +104,7 @@
 			this.buttonAddDocument.TextSecondary = "";
 			this.buttonAddDocument.ToolTipText = "Add new";
 			this.buttonAddDocument.Click += new System.EventHandler(this.ButtonAddNonRoutineJobClick);
+			this.buttonAddDocument.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// buttonApplyFilter
 			// 
@@ -149,6 +154,7 @@
 			this.buttonDeleteSelected.TextSecondary = "";
 			this.buttonDeleteSelected.ToolTipText = "Delete selected";
 			this.buttonDeleteSelected.Click += new System.EventHandler(this.ButtonDeleteClick);
+			this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
 			// pictureBox1
 			// 

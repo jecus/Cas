@@ -1,4 +1,7 @@
-﻿namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
+﻿using CASTerms;
+using EFCore.DTO.General;
+
+namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
 {
     partial class BaseComponentEditorCollectionControl
     {
@@ -28,7 +31,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
             this.SuspendLayout();
             // 
             // ButtonAdd
@@ -55,10 +59,11 @@
             this.ButtonAdd.TextMain = "Add new";
             this.ButtonAdd.TextSecondary = "";
             this.ButtonAdd.Click += new System.EventHandler(this.ButtonAddClick);
-            // 
-            // PowerPlantsControl
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.ButtonAdd.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// PowerPlantsControl
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.Controls.Add(this.ButtonAdd);

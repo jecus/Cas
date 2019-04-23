@@ -1,4 +1,6 @@
 ﻿using MetroFramework.Controls;
+using CASTerms;
+using EFCore.DTO.General;
 
 namespace CAS.UI.UIControls.ScheduleControls.Trip
 {
@@ -30,6 +32,7 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 		/// </summary>
 		private void InitializeComponent()
 		{
+			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			MetroFramework.Controls.MetroLabel labelNumber;
 			MetroFramework.Controls.MetroLabel label1;
 			MetroFramework.Controls.MetroLabel label2;
@@ -142,6 +145,7 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 			this.buttonDelete.TabIndex = 42;
 			this.buttonDelete.Text = "Delete";
 			this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+			this.buttonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
 			// buttonAdd
 			// 
@@ -155,6 +159,7 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 			this.buttonAdd.TabIndex = 40;
 			this.buttonAdd.Text = "Add";
 			this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+			this.buttonAdd.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// textBoxRemarks
 			// 
@@ -209,6 +214,7 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 			this.buttonOk.TabIndex = 243;
 			this.buttonOk.Text = "OK";
 			this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
+			this.buttonOk.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// lookupComboboxTrip
 			// 

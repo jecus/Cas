@@ -1,4 +1,6 @@
-﻿
+﻿using CASTerms;
+using EFCore.DTO.General;
+
 namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 {
     partial class FlightsListScreen
@@ -29,7 +31,8 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelDateAsOf = new System.Windows.Forms.Label();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.labelDateAsOf = new System.Windows.Forms.Label();
             this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
             this.buttonAddNew = new CAS.UI.Management.Dispatchering.RichReferenceButton();
             this.buttonAddNewLight = new CAS.UI.Management.Dispatchering.RichReferenceButton();
@@ -104,6 +107,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             this.buttonAddNew.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonAddNew.Name = "buttonAddNew";
             this.buttonAddNew.DisplayerRequested += ButtonAddDisplayerRequested;
+            this.buttonAddNew.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// buttonAddNewLight
 			// 
@@ -123,6 +127,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             this.buttonAddNewLight.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonAddNewLight.Name = "buttonAddNew";
             this.buttonAddNewLight.DisplayerRequested += ButtonAddLightDisplayerRequested;
+            this.buttonAddNewLight.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// buttonAddNewFull
 			// 
@@ -142,10 +147,11 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             this.buttonAddNewFull.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonAddNewFull.Name = "buttonAddNew";
             this.buttonAddNewFull.DisplayerRequested += ButtonAddFullDisplayerRequested;
-            // 
-            // buttonDeleteSelected
-            // 
-            this.buttonDeleteSelected.ActiveBackColor = System.Drawing.Color.FromArgb(200, 200, 200);
+            this.buttonAddNewFull.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// buttonDeleteSelected
+			// 
+			this.buttonDeleteSelected.ActiveBackColor = System.Drawing.Color.FromArgb(200, 200, 200);
             this.buttonDeleteSelected.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.buttonDeleteSelected.FontSecondary = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.buttonDeleteSelected.ForeColorMain = System.Drawing.Color.FromArgb(49, 82, 128);
@@ -162,6 +168,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             this.buttonDeleteSelected.TextAlignSecondary = System.Drawing.ContentAlignment.TopCenter;
             this.buttonDeleteSelected.TextMain = "Delete";
             this.buttonDeleteSelected.TextSecondary = "selected";
+            this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
 			// buttonAddTripFlight
 			// 
@@ -182,6 +189,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 	        this.buttonAddTripFlight.TextAlignSecondary = System.Drawing.ContentAlignment.TopCenter;
 	        this.buttonAddTripFlight.TextMain = "Add ";
 	        this.buttonAddTripFlight.TextSecondary = "Track";
+	        this.buttonAddTripFlight.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// labelDateAsOf
 			// 

@@ -1,4 +1,7 @@
-﻿namespace CAS.UI.UIControls.Auxiliary
+﻿using CASTerms;
+using EFCore.DTO.General;
+
+namespace CAS.UI.UIControls.Auxiliary
 {
     partial class DamageChartFileDialog
     {
@@ -28,7 +31,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanelCharts = new System.Windows.Forms.FlowLayoutPanel();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.flowLayoutPanelCharts = new System.Windows.Forms.FlowLayoutPanel();
             this.panelLabelCharts = new System.Windows.Forms.Panel();
             this.labelFilesCaption = new System.Windows.Forms.Label();
             this.panelButtonsFiles = new System.Windows.Forms.Panel();
@@ -126,10 +130,11 @@
             this.ButtonAddChart.TextSecondary = "";
             this.ButtonAddChart.ToolTipText = "";
             this.ButtonAddChart.Click += new System.EventHandler(this.ButtonAddChartClick);
-            // 
-            // flowLayoutPanelImages
-            // 
-            this.flowLayoutPanelImages.AutoScroll = true;
+            this.ButtonAddChart.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// flowLayoutPanelImages
+			// 
+			this.flowLayoutPanelImages.AutoScroll = true;
             this.flowLayoutPanelImages.Controls.Add(this.panelLabelImages);
             this.flowLayoutPanelImages.Controls.Add(this.panelButtonsImages);
             this.flowLayoutPanelImages.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -199,10 +204,11 @@
             this.ButtonAddImage.TextSecondary = "";
             this.ButtonAddImage.ToolTipText = "";
             this.ButtonAddImage.Click += new System.EventHandler(this.ButtonAddImageClick);
-            // 
-            // panelButtons
-            // 
-            this.panelButtons.Controls.Add(this.buttonOK);
+            this.ButtonAddImage.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// panelButtons
+			// 
+			this.panelButtons.Controls.Add(this.buttonOK);
             this.panelButtons.Controls.Add(this.buttonCancel);
             this.panelButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelButtons.Location = new System.Drawing.Point(0, 507);
@@ -223,10 +229,11 @@
             this.buttonOK.TabIndex = 14;
             this.buttonOK.Text = "OK";
             this.buttonOK.Click += new System.EventHandler(this.ButtonOkClick);
-            // 
-            // buttonCancel
-            // 
-            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonOK.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// buttonCancel
+			// 
+			this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);

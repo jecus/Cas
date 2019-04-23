@@ -1,4 +1,6 @@
-﻿
+﻿using CASTerms;
+using EFCore.DTO.General;
+
 namespace CAS.UI.UIControls.ForecastControls
 {
     partial class AirFleetForecastListScreen
@@ -29,7 +31,8 @@ namespace CAS.UI.UIControls.ForecastControls
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelDateAsOf = new System.Windows.Forms.Label();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.labelDateAsOf = new System.Windows.Forms.Label();
             this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
             this._buttonComposeWorkPackage = new AvControls.AvButtonT.AvButtonT();
             this.SuspendLayout();
@@ -105,10 +108,11 @@ namespace CAS.UI.UIControls.ForecastControls
             this._buttonComposeWorkPackage.TextAlignSecondary = System.Drawing.ContentAlignment.TopLeft;
             this._buttonComposeWorkPackage.TextMain = "Compose a";
             this._buttonComposeWorkPackage.TextSecondary = "work package";
-            // 
-            // RequestForQuotationListScreen
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this._buttonComposeWorkPackage.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// RequestForQuotationListScreen
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "ForecastListScreen";
             this.ShowAircraftStatusPanel = false;

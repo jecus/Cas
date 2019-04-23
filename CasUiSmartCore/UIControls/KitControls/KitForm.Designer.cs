@@ -1,4 +1,6 @@
 ﻿using MetroFramework.Controls;
+using CASTerms;
+using EFCore.DTO.General;
 
 namespace CAS.UI.UIControls.KitControls
 {
@@ -30,6 +32,7 @@ namespace CAS.UI.UIControls.KitControls
         /// </summary>
         private void InitializeComponent()
         {
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.flowLayoutPanelCharts = new System.Windows.Forms.FlowLayoutPanel();
 			this.panelLabel = new MetroFramework.Controls.MetroPanel();
 			this.labelKits = new MetroFramework.Controls.MetroLabel();
@@ -120,6 +123,7 @@ namespace CAS.UI.UIControls.KitControls
 			this.ButtonAdd.TextSecondary = "";
 			this.ButtonAdd.ToolTipText = "";
 			this.ButtonAdd.Click += new System.EventHandler(this.ButtonAddClick);
+			this.ButtonAdd.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// buttonOk
 			// 
@@ -134,6 +138,7 @@ namespace CAS.UI.UIControls.KitControls
 			this.buttonOk.Text = "Ok";
 			this.buttonOk.UseVisualStyleBackColor = true;
 			this.buttonOk.Click += new System.EventHandler(this.ButtonOkClick);
+			this.buttonOk.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// buttonCancel
 			// 

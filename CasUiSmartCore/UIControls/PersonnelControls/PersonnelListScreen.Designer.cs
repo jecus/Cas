@@ -1,4 +1,6 @@
-﻿
+﻿using CASTerms;
+using EFCore.DTO.General;
+
 namespace CAS.UI.UIControls.PersonnelControls
 {
     partial class PersonnelListScreen
@@ -29,7 +31,8 @@ namespace CAS.UI.UIControls.PersonnelControls
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelDateAsOf = new System.Windows.Forms.Label();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.labelDateAsOf = new System.Windows.Forms.Label();
             this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
             this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
             this.buttonAddNew = new CAS.UI.Management.Dispatchering.RichReferenceButton();
@@ -126,6 +129,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			this.buttonAddNew.TextSecondary = "";
 			this.buttonAddNew.ToolTipText = "Add new";
 			this.buttonAddNew.DisplayerRequested += ButtonAddDisplayerRequested;
+			this.buttonAddNew.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// buttonDeleteSelected
 			// 
@@ -149,6 +153,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			this.buttonDeleteSelected.TextSecondary = "";
 			this.buttonDeleteSelected.ToolTipText = "Delete selected";
 			this.buttonDeleteSelected.Click += ButtonDeleteClick;
+			this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
 			// pictureBox1
 			// 

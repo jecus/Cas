@@ -1,6 +1,8 @@
 ﻿using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.JobCardControls;
+using CASTerms;
+using EFCore.DTO.General;
 
 namespace CAS.UI.UIControls.CommercialControls
 {
@@ -33,7 +35,8 @@ namespace CAS.UI.UIControls.CommercialControls
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelBiWeeklyReport = new System.Windows.Forms.Label();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.labelBiWeeklyReport = new System.Windows.Forms.Label();
             this.labelFooter = new System.Windows.Forms.Label();
             this.textboxBiWeeklyReport = new System.Windows.Forms.TextBox();
             this.textboxFooter = new System.Windows.Forms.TextBox();
@@ -390,10 +393,11 @@ namespace CAS.UI.UIControls.CommercialControls
             this.buttonAddTask.TextSecondary = "";
             this.buttonAddTask.ToolTipText = "Add Item";
             this.buttonAddTask.Click += new System.EventHandler(this.ButtonAddTaskClick);
-            // 
-            // buttonDeleteTask
-            // 
-            this.buttonDeleteTask.ActiveBackColor = System.Drawing.Color.Transparent;
+            this.buttonAddTask.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// buttonDeleteTask
+			// 
+			this.buttonDeleteTask.ActiveBackColor = System.Drawing.Color.Transparent;
             this.buttonDeleteTask.ActiveBackgroundImage = null;
             this.buttonDeleteTask.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonDeleteTask.Dock = System.Windows.Forms.DockStyle.Right;
@@ -419,10 +423,11 @@ namespace CAS.UI.UIControls.CommercialControls
             this.buttonDeleteTask.TextSecondary = "";
             this.buttonDeleteTask.ToolTipText = "Delete";
             this.buttonDeleteTask.Click += new System.EventHandler(this.ButtonDeleteTaskClick);
-            // 
-            // workOrderViewControl
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.workOrderViewControl, 9);
+            this.buttonDeleteTask.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			// 
+			// workOrderViewControl
+			// 
+			this.tableLayoutPanel1.SetColumnSpan(this.workOrderViewControl, 9);
             this.workOrderViewControl.Displayer = null;
             this.workOrderViewControl.DisplayerText = null;
             this.workOrderViewControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -987,10 +992,11 @@ namespace CAS.UI.UIControls.CommercialControls
             this.ButtonAdd.TextSecondary = "";
             this.ButtonAdd.ToolTipText = "Add Item";
             this.ButtonAdd.Click += new System.EventHandler(this.ButtonAddClick);
-            // 
-            // buttonDelete
-            // 
-            this.buttonDelete.ActiveBackColor = System.Drawing.Color.Transparent;
+            this.ButtonAdd.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// buttonDelete
+			// 
+			this.buttonDelete.ActiveBackColor = System.Drawing.Color.Transparent;
             this.buttonDelete.ActiveBackgroundImage = null;
             this.buttonDelete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonDelete.Dock = System.Windows.Forms.DockStyle.Right;
@@ -1016,10 +1022,11 @@ namespace CAS.UI.UIControls.CommercialControls
             this.buttonDelete.TextSecondary = "";
             this.buttonDelete.ToolTipText = "Delete";
             this.buttonDelete.Click += new System.EventHandler(this.ButtonDeleteClick);
-            // 
-            // numericUpDownMan
-            // 
-            this.numericUpDownMan.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			// 
+			// numericUpDownMan
+			// 
+			this.numericUpDownMan.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.numericUpDownMan.Location = new System.Drawing.Point(1084, 857);
             this.numericUpDownMan.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.numericUpDownMan.Maximum = new decimal(new int[] {

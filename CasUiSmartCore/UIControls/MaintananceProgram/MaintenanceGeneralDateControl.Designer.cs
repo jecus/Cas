@@ -1,4 +1,6 @@
 ﻿using AvControls.AvButtonT;
+using CASTerms;
+using EFCore.DTO.General;
 
 namespace CAS.UI.UIControls.MaintananceProgram
 {
@@ -40,7 +42,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.components = new System.ComponentModel.Container();
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "C01",
             "24000H",
@@ -217,10 +220,11 @@ namespace CAS.UI.UIControls.MaintananceProgram
             this.avButtonAddCheck.TextSecondary = "";
             this.avButtonAddCheck.ToolTipText = "Add";
             this.avButtonAddCheck.Click += new System.EventHandler(this.AvButtonAddClick);
-            // 
-            // avButtonEditCheck
-            // 
-            this.avButtonEditCheck.ActiveBackColor = System.Drawing.Color.Transparent;
+            this.avButtonAddCheck.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// avButtonEditCheck
+			// 
+			this.avButtonEditCheck.ActiveBackColor = System.Drawing.Color.Transparent;
             this.avButtonEditCheck.ActiveBackgroundImage = null;
             this.avButtonEditCheck.Cursor = System.Windows.Forms.Cursors.Hand;
             this.avButtonEditCheck.Enabled = false;
@@ -245,10 +249,11 @@ namespace CAS.UI.UIControls.MaintananceProgram
             this.avButtonEditCheck.TextSecondary = "";
             this.avButtonEditCheck.ToolTipText = "Edit";
             this.avButtonEditCheck.Click += new System.EventHandler(this.AvButtonEditClick);
-            // 
-            // avButtonDeleteCheck
-            // 
-            this.avButtonDeleteCheck.ActiveBackColor = System.Drawing.Color.Transparent;
+            this.avButtonEditCheck.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// avButtonDeleteCheck
+			// 
+			this.avButtonDeleteCheck.ActiveBackColor = System.Drawing.Color.Transparent;
             this.avButtonDeleteCheck.ActiveBackgroundImage = null;
             this.avButtonDeleteCheck.Cursor = System.Windows.Forms.Cursors.Hand;
             this.avButtonDeleteCheck.Enabled = false;
@@ -273,10 +278,11 @@ namespace CAS.UI.UIControls.MaintananceProgram
             this.avButtonDeleteCheck.TextSecondary = "";
             this.avButtonDeleteCheck.ToolTipText = "Delete";
             this.avButtonDeleteCheck.Click += new System.EventHandler(this.AvButtonDeleteClick);
-            // 
-            // columnHeaderTitle
-            // 
-            this.columnHeaderTitle.Text = "Title";
+            this.avButtonDeleteCheck.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			// 
+			// columnHeaderTitle
+			// 
+			this.columnHeaderTitle.Text = "Title";
             this.columnHeaderTitle.Width = 156;
             // 
             // columnHeaderWorkArea
@@ -336,10 +342,11 @@ namespace CAS.UI.UIControls.MaintananceProgram
             this.avButtonAddJobCard.TextSecondary = "";
             this.avButtonAddJobCard.ToolTipText = "Add Item";
             this.avButtonAddJobCard.Click += new System.EventHandler(this.AvButtonAddJobCardClick);
-            // 
-            // avButtonViewJobCard
-            // 
-            this.avButtonViewJobCard.ActiveBackColor = System.Drawing.Color.Transparent;
+            this.avButtonAddJobCard.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// avButtonViewJobCard
+			// 
+			this.avButtonViewJobCard.ActiveBackColor = System.Drawing.Color.Transparent;
             this.avButtonViewJobCard.ActiveBackgroundImage = null;
             this.avButtonViewJobCard.Cursor = System.Windows.Forms.Cursors.Hand;
             this.avButtonViewJobCard.Enabled = false;
@@ -392,10 +399,11 @@ namespace CAS.UI.UIControls.MaintananceProgram
             this.avButtonEditJobCard.TextSecondary = "";
             this.avButtonEditJobCard.ToolTipText = "Edit Item";
             this.avButtonEditJobCard.Click += new System.EventHandler(this.AvButtonEditJobCardClick);
-            // 
-            // delimiter1
-            // 
-            this.delimiter1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("delimiter1.BackgroundImage")));
+            this.avButtonEditJobCard.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// delimiter1
+			// 
+			this.delimiter1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("delimiter1.BackgroundImage")));
             this.delimiter1.Location = new System.Drawing.Point(374, 6);
             this.delimiter1.Name = "delimiter1";
             this.delimiter1.Orientation = SmartControls.General.DelimiterOrientation.Vertical;
@@ -562,10 +570,11 @@ namespace CAS.UI.UIControls.MaintananceProgram
             this.buttonDelete.TextSecondary = "";
             this.buttonDelete.ToolTipText = "Delete";
             this.buttonDelete.Click += new System.EventHandler(this.ButtonDeleteClick);
-            // 
-            // MaintenanceGeneralDateControl
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.buttonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			// 
+			// MaintenanceGeneralDateControl
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.buttonDelete);
