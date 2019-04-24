@@ -269,8 +269,8 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this._adminContainer.Location = new System.Drawing.Point(3, 232);
 			this._adminContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this._adminContainer.Name = "_adminContainer";
-			this._adminContainer.ReferenceLink = this.Users;
-			this._adminContainer.ReferenceLink02 = this.Activity;
+			this._adminContainer.ReferenceLink = this.Activity;
+			this._adminContainer.ReferenceLink02 = this.Users;
 			this._adminContainer.ReferenceLink03 = null;
 			this._adminContainer.ReferenceLink04 = null;
 			this._adminContainer.ReferenceLink05 = null;

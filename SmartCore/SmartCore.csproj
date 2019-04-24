@@ -370,6 +370,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activity\ActivityDTO.cs" />
     <Compile Include="AircraftFlights\AircraftFlightCore.cs" />
     <Compile Include="AircraftFlights\IAircraftFlightCore.cs" />
     <Compile Include="Aircrafts\AircraftsCore.cs" />

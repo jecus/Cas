@@ -7,8 +7,14 @@ using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using SmartCore.Activity;
+using SmartCore.AuditMongo;
+using SmartCore.AuditMongo.Repository;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Filters;
 
@@ -21,8 +27,8 @@ namespace CAS.UI.UIControls.Users
 	{
 		#region Fields
 
-		private CommonCollection<User> _initial = new CommonCollection<User>();
-		private CommonCollection<User> _result = new CommonCollection<User>();
+		private CommonCollection<ActivityDTO> _initial = new CommonCollection<ActivityDTO>();
+		private CommonCollection<ActivityDTO> _result = new CommonCollection<ActivityDTO>();
 		private ActivityListView _directivesViewer;
 
 		private CommonFilterCollection _filter;
@@ -50,7 +56,7 @@ namespace CAS.UI.UIControls.Users
 			if (currentOperator == null)
 				throw new ArgumentNullException("currentOperator");
 
-			_filter = new CommonFilterCollection(typeof(User));
+			_filter = new CommonFilterCollection(typeof(ActivityDTO));
 			aircraftHeaderControl1.Operator = currentOperator;
 			StatusTitle = "Users";
 			
@@ -67,7 +73,7 @@ namespace CAS.UI.UIControls.Users
 		#region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
-			_directivesViewer.SetItemsArray(_result.ToArray());
+			_directivesViewer.SetItemsArray(_result.OrderByDescending(i => i.Date).ToArray());
 			headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
 
 			_directivesViewer.Focus();
@@ -80,12 +86,25 @@ namespace CAS.UI.UIControls.Users
 			_initial.Clear();
 			_result.Clear();
 
-			AnimatedThreadWorker.ReportProgress(0, "load documents");
+			AnimatedThreadWorker.ReportProgress(0, "load Activities");
 
 			try
 			{
-				var userDto = GlobalObjects.CasEnvironment.GetAllUsers();
-				_initial.AddRange(userDto.Select(i => new User(i)));
+				var activity = GlobalObjects.AuditContext.AuditCollection.FindSync(new BsonDocumentFilterDefinition<AuditEntity>(new BsonDocument())).ToList();
+				var users = GlobalObjects.CasEnvironment.GetAllUsers();
+				foreach (var bsonElement in activity)
+				{
+					Enum.TryParse(bsonElement.Action, out AuditOperation myStatus);
+					
+					_initial.Add(new ActivityDTO()
+					{
+						Date = bsonElement.Date,
+						User = users.FirstOrDefault(i => i.ItemId == bsonElement.UserId),
+						Operation = myStatus,
+						ObjectId = bsonElement.ObjectId,
+						Type = SmartCoreType.GetSmartCoreTypeById(bsonElement.ObjectTypeId)
+					});
+				}
 			}
 			catch(Exception ex)
 			{
@@ -117,52 +136,6 @@ namespace CAS.UI.UIControls.Users
 		}
 
 		#endregion
-
-		#region private void ButtonDeleteClick(object sender, EventArgs e)
-
-        private void ButtonDeleteClick(object sender, EventArgs e)
-        {
-			if (_directivesViewer.SelectedItems == null) return;
-
-			var confirmResult =
-				MessageBox.Show(
-					_directivesViewer.SelectedItem != null
-						? "Do you really want to delete User " + _directivesViewer.SelectedItem.Login + "?"
-						: "Do you really want to delete selected User? ", "Confirm delete operation",
-					MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-
-			if (confirmResult == DialogResult.Yes)
-			{
-				int count = _directivesViewer.SelectedItems.Count;
-
-				var selectedItems = new List<User>();
-				selectedItems.AddRange(_directivesViewer.SelectedItems.ToArray());
-				for (int i = 0; i < count; i++)
-				{
-					try
-					{
-						GlobalObjects.CasEnvironment.GetSeviceUser().DeleteUser(selectedItems[i].ItemId);
-					}
-					catch (Exception ex)
-					{
-						Program.Provider.Logger.Log("Error while deleting data", ex);
-						return;
-					}
-				}
-
-				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
-				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
-				AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
-
-				AnimatedThreadWorker.RunWorkerAsync();
-			}
-			else
-			{
-				MessageBox.Show("Failed to delete Documents: Parent container is invalid", "Operation failed",
-								MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		}
-        #endregion
 
         #region private void HeaderControlButtonReloadClick(object sender, System.EventArgs e)
 
@@ -222,7 +195,7 @@ namespace CAS.UI.UIControls.Users
 		///</summary>
 		///<param name="initialCollection"></param>
 		///<param name="resultCollection"></param>
-		private void FilterItems(IEnumerable<User> initialCollection, ICommonCollection<User> resultCollection)
+		private void FilterItems(IEnumerable<ActivityDTO> initialCollection, ICommonCollection<ActivityDTO> resultCollection)
 		{
 			if (_filter == null || _filter.Count == 0)
 			{
