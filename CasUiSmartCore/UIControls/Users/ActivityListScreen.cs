@@ -58,7 +58,7 @@ namespace CAS.UI.UIControls.Users
 
 			_filter = new CommonFilterCollection(typeof(ActivityDTO));
 			aircraftHeaderControl1.Operator = currentOperator;
-			StatusTitle = "Users";
+			StatusTitle = "Activity";
 			
 			InitListView();
 			AnimatedThreadWorker.RunWorkerAsync();
