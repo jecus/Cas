@@ -1,4 +1,5 @@
-﻿
+﻿using CASTerms;
+using EFCore.DTO.General;
 using System.Windows.Forms;
 
 namespace CAS.UI.UIControls.WorkPakage
@@ -31,6 +32,7 @@ namespace CAS.UI.UIControls.WorkPakage
 		/// </summary>
 		private void InitializeComponent()
 		{
+			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.buttonAddNonRoutineJob = new AvControls.AvButtonT.AvButtonT();
 			this.pictureBoxS1 = new System.Windows.Forms.PictureBox();
@@ -181,6 +183,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.buttonAddNonRoutineJob.TextSecondary = "";
 			this.buttonAddNonRoutineJob.ToolTipText = "Add Non-Routine Job";
 			this.buttonAddNonRoutineJob.Click += new System.EventHandler(this.ButtonAddNonRoutineJobClick);
+			this.buttonAddNonRoutineJob.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// pictureBoxS1
 			// 
@@ -264,6 +267,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.buttonPublish.TextSecondary = "";
 			this.buttonPublish.ToolTipText = "Publish";
 			this.buttonPublish.Click += new System.EventHandler(this.ButtonPublishClick);
+			this.buttonPublish.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// pictureBoxS3
 			// 

@@ -1,6 +1,8 @@
 ﻿using System.Windows.Forms;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
+using CASTerms;
+using EFCore.DTO.General;
 
 namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
 {
@@ -32,7 +34,8 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.GroupBox groupBox1;
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			System.Windows.Forms.GroupBox groupBox1;
             System.Windows.Forms.GroupBox groupBox2;
             System.Windows.Forms.GroupBox groupBox3;
             System.Windows.Forms.GroupBox groupBox4;
@@ -682,10 +685,11 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
             this.ButtonDelete.TextSecondary = "";
             this.ButtonDelete.ToolTipText = null;
             this.ButtonDelete.Click += new System.EventHandler(this.ButtonDeleteClick);
-            // 
-            // BaseDetailEditorControl
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.ButtonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			// 
+			// BaseDetailEditorControl
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.ButtonDelete);
             this.Controls.Add(this.delimiter1);

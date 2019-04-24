@@ -1,4 +1,7 @@
-﻿namespace CAS.UI.UIControls.KitControls
+﻿using CASTerms;
+using EFCore.DTO.General;
+
+namespace CAS.UI.UIControls.KitControls
 {
     partial class KitFormItem
     {
@@ -31,6 +34,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.labelPartNumber = new System.Windows.Forms.Label();
 			this.textBoxPartNumber = new System.Windows.Forms.TextBox();
 			this.labelDescription = new System.Windows.Forms.Label();
@@ -176,6 +180,7 @@
 			this.ButtonDelete.TextSecondary = "";
 			this.ButtonDelete.ToolTipText = "";
 			this.ButtonDelete.Click += new System.EventHandler(this.ButtonDeleteClick);
+			this.ButtonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
 			// comboBoxDetailClass
 			// 

@@ -1,3 +1,6 @@
+using CASTerms;
+using EFCore.DTO.General;
+
 namespace CAS.UI.UIControls.Auxiliary
 {
     partial class HeaderControl
@@ -44,7 +47,8 @@ namespace CAS.UI.UIControls.Auxiliary
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonCloseTab = new CAS.UI.Management.Dispatchering.RichReferenceButton();
             this.pictureBoxH = new System.Windows.Forms.PictureBox();
             this.buttonHelp = new CAS.UI.Management.Dispatchering.HelpRequestingButtonT();
@@ -289,10 +293,11 @@ namespace CAS.UI.UIControls.Auxiliary
             this.richReferenceButtonSave2.ToolTipText = "Save And Add Another";
             this.richReferenceButtonSave2.Visible = false;
             this.richReferenceButtonSave2.Click += new System.EventHandler(this.ButtonSave2Click);
-            // 
-            // pictureBoxS
-            // 
-            this.pictureBoxS.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
+            this.richReferenceButtonSave2.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// pictureBoxS
+			// 
+			this.pictureBoxS.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
             this.pictureBoxS.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBoxS.Location = new System.Drawing.Point(244, 4);
             this.pictureBoxS.Margin = new System.Windows.Forms.Padding(4);
@@ -335,10 +340,11 @@ namespace CAS.UI.UIControls.Auxiliary
             this.richReferenceButtonSave.Visible = false;
             this.richReferenceButtonSave.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.ButtonSaveDisplayerRequested);
             this.richReferenceButtonSave.Click += new System.EventHandler(this.ButtonSaveClick);
-            // 
-            // pictureBoxE
-            // 
-            this.pictureBoxE.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
+            this.richReferenceButtonSave.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// pictureBoxE
+			// 
+			this.pictureBoxE.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
             this.pictureBoxE.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBoxE.Location = new System.Drawing.Point(159, 4);
             this.pictureBoxE.Margin = new System.Windows.Forms.Padding(4);

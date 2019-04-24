@@ -1,4 +1,7 @@
-﻿namespace CAS.UI.UIControls.Auxiliary
+﻿using CASTerms;
+using EFCore.DTO.General;
+
+namespace CAS.UI.UIControls.Auxiliary
 {
     partial class SupplierDocFileControl
     {
@@ -28,7 +31,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanelMain = new System.Windows.Forms.FlowLayoutPanel();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.flowLayoutPanelMain = new System.Windows.Forms.FlowLayoutPanel();
             this.panelLabel = new System.Windows.Forms.Panel();
             this.extendableRichContainer1 = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
             this.panelMain = new System.Windows.Forms.Panel();
@@ -129,10 +133,11 @@
             this.ButtonDelete.TextSecondary = "";
             this.ButtonDelete.ToolTipText = null;
             this.ButtonDelete.Click += new System.EventHandler(this.ButtonDeleteClick);
-            // 
-            // textBoxDocumentName
-            // 
-            this.textBoxDocumentName.BackColor = System.Drawing.Color.White;
+            this.ButtonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			// 
+			// textBoxDocumentName
+			// 
+			this.textBoxDocumentName.BackColor = System.Drawing.Color.White;
             this.textBoxDocumentName.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxDocumentName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.textBoxDocumentName.Location = new System.Drawing.Point(92, 4);

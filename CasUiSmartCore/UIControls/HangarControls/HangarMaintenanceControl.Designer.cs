@@ -1,4 +1,7 @@
-﻿namespace CAS.UI.UIControls.HangarControls
+﻿using CASTerms;
+using EFCore.DTO.General;
+
+namespace CAS.UI.UIControls.HangarControls
 {
     partial class HangarMaintenanceControl
     {
@@ -38,7 +41,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.extendableRichContainer = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.extendableRichContainer = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
             this.avButtonReload = new AvControls.AvButtonT.AvButtonT();
             this.buttonDelete = new AvControls.AvButtonT.AvButtonT();
             this.labelProcess = new System.Windows.Forms.Label();
@@ -141,10 +145,11 @@
             this.buttonDelete.TextSecondary = "";
             this.buttonDelete.ToolTipText = "Delete";
             this.buttonDelete.Click += new System.EventHandler(this.ButtonDeleteClick);
-            // 
-            // labelProcess
-            // 
-            this.labelProcess.AutoSize = true;
+            this.buttonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			// 
+			// labelProcess
+			// 
+			this.labelProcess.AutoSize = true;
             this.labelProcess.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelProcess.Font = new System.Drawing.Font("Verdana", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelProcess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));

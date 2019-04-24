@@ -1,4 +1,6 @@
-﻿
+﻿using CASTerms;
+using EFCore.DTO.General;
+
 namespace CAS.UI.UIControls.DirectivesControls
 {
 	partial class DefferedListScreen
@@ -29,6 +31,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		/// </summary>
 		private void InitializeComponent()
 		{
+			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
 			this.pictureBoxS2 = new System.Windows.Forms.PictureBox();
@@ -109,6 +112,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.buttonDeleteSelected.TextSecondary = "";
 			this.buttonDeleteSelected.ToolTipText = "Delete selected";
 			this.buttonDeleteSelected.Click += new System.EventHandler(this.ButtonDeleteClick);
+			this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
 			// pictureBoxS2
 			// 
