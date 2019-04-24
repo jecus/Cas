@@ -2650,6 +2650,18 @@
     <Compile Include="UIControls\Users\UserForm.Designer.cs">
       <DependentUpon>UserForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\Users\ActivityListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Users\ActivityListScreen.Designer.cs">
+      <DependentUpon>ActivityListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Users\ActivityListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Users\ActivityListView.Designer.cs">
+      <DependentUpon>ActivityListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\Users\UserListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4546,6 +4558,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\Users\UserForm.resx">
       <DependentUpon>UserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Users\ActivityListScreen.resx">
+      <DependentUpon>ActivityListScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\Users\UserListScreen.resx">
       <DependentUpon>UserListScreen.cs</DependentUpon>

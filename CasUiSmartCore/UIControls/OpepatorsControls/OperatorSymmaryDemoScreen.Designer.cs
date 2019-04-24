@@ -43,6 +43,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.LinkRigestry = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.ExportMonthly = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel(true);
 			this.Users = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+			this.Activity = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.ExportATLB = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel(true);
 			this.LinkRecords = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkInternalDocuments = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -269,7 +270,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this._adminContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this._adminContainer.Name = "_adminContainer";
 			this._adminContainer.ReferenceLink = this.Users;
-			this._adminContainer.ReferenceLink02 = null;
+			this._adminContainer.ReferenceLink02 = this.Activity;
 			this._adminContainer.ReferenceLink03 = null;
 			this._adminContainer.ReferenceLink04 = null;
 			this._adminContainer.ReferenceLink05 = null;
@@ -313,6 +314,30 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.ExportMonthly.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.ExportMonthly.Click +=	 ExportMonthly_Click;
 			// 
+			// Activity
+			// 
+			this.Activity.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.Activity.Displayer = null;
+			this.Activity.DisplayerText = null;
+			this.Activity.Entity = null;
+			this.Activity.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.Activity.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.Activity.ImageBackColor = System.Drawing.Color.Transparent;
+			this.Activity.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.Activity.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.Activity.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.Activity.Location = new System.Drawing.Point(10, 0);
+			this.Activity.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.Activity.Name = "Activity";
+			this.Activity.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.Activity.Size = new System.Drawing.Size(188, 20);
+			this.Activity.Status = AvControls.Statuses.Satisfactory;
+			this.Activity.TabIndex = 2;
+			this.Activity.Text = "Activity";
+			this.Activity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.Activity.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.Activity.DisplayerRequested += Activity_DisplayerRequested; ;
+			// 
 			// Users
 			// 
 			this.Users.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
@@ -337,10 +362,10 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.Users.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.Users.DisplayerRequested += Users_Click;
 
-            // 
-            // ExportMonthly
-            // 
-            this.ExportATLB.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			// 
+			// ExportMonthly
+			// 
+			this.ExportATLB.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
             this.ExportATLB.Displayer = null;
             this.ExportATLB.DisplayerText = null;
             this.ExportATLB.Entity = null;
@@ -2323,7 +2348,6 @@ namespace CAS.UI.UIControls.OpepatorsControls
 
 		}
 
-
 		#endregion
 
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelReferences;
@@ -2357,6 +2381,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel ExportMonthly;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel Users;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel ExportATLB;
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel Activity;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRecords;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkInternalDocuments;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkNomenclatures;

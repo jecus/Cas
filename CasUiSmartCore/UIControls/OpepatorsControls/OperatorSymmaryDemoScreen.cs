@@ -623,7 +623,12 @@ namespace CAS.UI.UIControls.OpepatorsControls
 
 		#endregion
 
-        
+
+		private void Activity_DisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			e.DisplayerText = "Activity";
+			e.RequestedEntity = new ActivityListScreen(GlobalObjects.CasEnvironment.Operators[0]);
+		}
     }
 }
 
