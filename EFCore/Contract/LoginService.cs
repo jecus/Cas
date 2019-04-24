@@ -63,6 +63,7 @@ namespace EFCore.Contract
 				updateUser.Name = user.Name;
 				updateUser.Password = user.Password;
 				updateUser.UserType = user.UserType;
+				updateUser.UiType = user.UiType;
 			}
 			else
 			{
@@ -72,6 +73,7 @@ namespace EFCore.Contract
 				newUser.Name = user.Name;
 				newUser.Surname = user.Surname;
 				newUser.UserType = user.UserType;
+				newUser.UiType = user.UiType;
 
 				context.UserDtos.Add(newUser);
 
