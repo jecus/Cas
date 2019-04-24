@@ -3,6 +3,7 @@ using SmartCore;
 using SmartCore.AircraftFlights;
 using SmartCore.Aircrafts;
 using SmartCore.Analyst;
+using SmartCore.AuditMongo;
 using SmartCore.AuditMongo.Repository;
 using SmartCore.Audits;
 using SmartCore.AverageUtilizations;
@@ -41,6 +42,7 @@ namespace CASTerms
         /// </summary>
         public static JObject Config { get; set; }
 
+		public static AuditContext  AuditContext { get; set; }
 		public static IAuditRepository  AuditRepository { get; set; }
         public static ICasEnvironment CasEnvironment { get; set; }
         public static IPackageCore PackageCore { get; set; }

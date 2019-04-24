@@ -34,7 +34,6 @@ namespace CAS.UI.UIControls.Users
 			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
 			this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
-			this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -107,30 +106,6 @@ namespace CAS.UI.UIControls.Users
 			this.buttonApplyFilter.ToolTipText = "Apply filter";
 			this.buttonApplyFilter.Click += new System.EventHandler(this.ButtonApplyFilterClick);
 			// 
-			// buttonDeleteSelected
-			// 
-			this.buttonDeleteSelected.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-			this.buttonDeleteSelected.ActiveBackgroundImage = null;
-			this.buttonDeleteSelected.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonDeleteSelected.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-			this.buttonDeleteSelected.FontSecondary = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-			this.buttonDeleteSelected.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
-			this.buttonDeleteSelected.ForeColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
-			this.buttonDeleteSelected.Icon = global::CAS.UI.Properties.Resources.DeleteIcon;
-			this.buttonDeleteSelected.IconLayout = System.Windows.Forms.ImageLayout.Center;
-			this.buttonDeleteSelected.IconNotEnabled = global::CAS.UI.Properties.Resources.DeleteIcon_gray;
-			this.buttonDeleteSelected.Location = new System.Drawing.Point(135, 0);
-			this.buttonDeleteSelected.Name = "buttonDeleteSelected";
-			this.buttonDeleteSelected.NormalBackgroundImage = null;
-			this.buttonDeleteSelected.ShowToolTip = true;
-			this.buttonDeleteSelected.Size = new System.Drawing.Size(52, 57);
-			this.buttonDeleteSelected.TabIndex = 20;
-			this.buttonDeleteSelected.TextMain = "";
-			this.buttonDeleteSelected.TextSecondary = "";
-			this.buttonDeleteSelected.ToolTipText = "Delete selected";
-			this.buttonDeleteSelected.Click += new System.EventHandler(this.ButtonDeleteClick);
-			this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
-			// 
 			// pictureBox1
 			// 
 			this.pictureBox1.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
@@ -155,7 +130,6 @@ namespace CAS.UI.UIControls.Users
 			// 
 			this.flowLayoutPanel1.AutoSize = true;
 			this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.flowLayoutPanel1.Controls.Add(this.buttonDeleteSelected);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox1);
 			this.flowLayoutPanel1.Controls.Add(this.buttonApplyFilter);
 			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
@@ -195,7 +169,6 @@ namespace CAS.UI.UIControls.Users
 
 		private AvControls.StatusImageLink.StatusImageLinkLabel labelTitle;
 		private AvControls.AvButtonT.AvButtonT buttonApplyFilter;
-		private AvControls.AvButtonT.AvButtonT buttonDeleteSelected;
 		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.PictureBox pictureBox2;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
