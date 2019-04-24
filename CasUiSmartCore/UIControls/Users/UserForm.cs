@@ -42,6 +42,9 @@ namespace CAS.UI.UIControls.Users
 
 			metroComboBox1.DataSource = Enum.GetValues(typeof(UsetType));
 			metroComboBox1.SelectedItem = _user.UserType;
+
+			metroComboBoxUiType.DataSource = Enum.GetValues(typeof(UiType));
+			metroComboBoxUiType.SelectedItem = _user.UiType;
 		}
 
 		#endregion
@@ -55,6 +58,7 @@ namespace CAS.UI.UIControls.Users
 			_user.Login = textBoxLogin.Text;
 			_user.Password = textBoxPassword.Text;
 			_user.UserType = (UsetType)metroComboBox1.SelectedItem;
+			_user.UiType = (UiType)metroComboBoxUiType.SelectedItem;
 		}
 
 		#endregion
@@ -105,7 +109,8 @@ namespace CAS.UI.UIControls.Users
 					Password = _user.Password,
 					Surname = _user.Surname,
 					Name = _user.Name,
-					UserType = _user.UserType
+					UserType = _user.UserType,
+					UiType = _user.UiType
 				}); 
 				DialogResult = DialogResult.OK;
 				Close();

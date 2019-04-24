@@ -60,3 +60,12 @@ if not exists ( select  *
 	alter table Dictionaries.AccessoryDescriptions
     add IsEffectivity nvarchar(MAX)null
 GO
+--------------------------------------------------------------------------------
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('dbo.Users')
+                    and c.name = 'UiType' ) 
+
+	alter table dbo.Users
+    add UiType binary not null default 0
+GO

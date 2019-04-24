@@ -33,6 +33,7 @@
 			MetroFramework.Controls.MetroLabel metroLabel2;
 			MetroFramework.Controls.MetroLabel metroLabel3;
 			MetroFramework.Controls.MetroLabel metroLabel4;
+			MetroFramework.Controls.MetroLabel metroLabelUiType;
 			this.textBoxSurname = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxName = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxLogin = new MetroFramework.Controls.MetroTextBox();
@@ -41,11 +42,13 @@
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.buttonOk = new System.Windows.Forms.Button();
 			this.metroComboBox1 = new MetroFramework.Controls.MetroComboBox();
+			this.metroComboBoxUiType = new MetroFramework.Controls.MetroComboBox();
 			labelNewPassword = new MetroFramework.Controls.MetroLabel();
 			metroLabel1 = new MetroFramework.Controls.MetroLabel();
 			metroLabel2 = new MetroFramework.Controls.MetroLabel();
 			metroLabel3 = new MetroFramework.Controls.MetroLabel();
 			metroLabel4 = new MetroFramework.Controls.MetroLabel();
+			metroLabelUiType = new MetroFramework.Controls.MetroLabel();
 			this.SuspendLayout();
 			// 
 			// labelNewPassword
@@ -91,6 +94,17 @@
 			metroLabel3.TabIndex = 34;
 			metroLabel3.Text = "Password:";
 			metroLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// metroLabel4
+			// 
+			metroLabel4.AutoSize = true;
+			metroLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			metroLabel4.Location = new System.Drawing.Point(23, 189);
+			metroLabel4.Name = "metroLabel4";
+			metroLabel4.Size = new System.Drawing.Size(69, 19);
+			metroLabel4.TabIndex = 40;
+			metroLabel4.Text = "User Type:";
+			metroLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// textBoxSurname
 			// 
@@ -234,7 +248,7 @@
 			this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonCancel.Location = new System.Drawing.Point(330, 225);
+			this.buttonCancel.Location = new System.Drawing.Point(330, 260);
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.Size = new System.Drawing.Size(75, 33);
 			this.buttonCancel.TabIndex = 38;
@@ -247,7 +261,7 @@
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(249, 225);
+			this.buttonOk.Location = new System.Drawing.Point(249, 260);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 37;
@@ -264,22 +278,34 @@
 			this.metroComboBox1.TabIndex = 39;
 			this.metroComboBox1.UseSelectable = true;
 			// 
-			// metroLabel4
+			// metroLabelUiType
 			// 
-			metroLabel4.AutoSize = true;
-			metroLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			metroLabel4.Location = new System.Drawing.Point(23, 189);
-			metroLabel4.Name = "metroLabel4";
-			metroLabel4.Size = new System.Drawing.Size(69, 19);
-			metroLabel4.TabIndex = 40;
-			metroLabel4.Text = "User Type:";
-			metroLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			metroLabelUiType.AutoSize = true;
+			metroLabelUiType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			metroLabelUiType.Location = new System.Drawing.Point(23, 224);
+			metroLabelUiType.Name = "metroLabelUiType";
+			metroLabelUiType.Size = new System.Drawing.Size(55, 19);
+			metroLabelUiType.TabIndex = 42;
+			metroLabelUiType.Text = "Ui Type:";
+			metroLabelUiType.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// metroComboBoxUiType
+			// 
+			this.metroComboBoxUiType.FormattingEnabled = true;
+			this.metroComboBoxUiType.ItemHeight = 23;
+			this.metroComboBoxUiType.Location = new System.Drawing.Point(111, 219);
+			this.metroComboBoxUiType.Name = "metroComboBoxUiType";
+			this.metroComboBoxUiType.Size = new System.Drawing.Size(294, 29);
+			this.metroComboBoxUiType.TabIndex = 41;
+			this.metroComboBoxUiType.UseSelectable = true;
 			// 
 			// UserForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(428, 269);
+			this.ClientSize = new System.Drawing.Size(428, 304);
+			this.Controls.Add(metroLabelUiType);
+			this.Controls.Add(this.metroComboBoxUiType);
 			this.Controls.Add(metroLabel4);
 			this.Controls.Add(this.metroComboBox1);
 			this.Controls.Add(this.buttonCancel);
@@ -313,5 +339,6 @@
 		public System.Windows.Forms.Button buttonCancel;
 		public System.Windows.Forms.Button buttonOk;
 		private MetroFramework.Controls.MetroComboBox metroComboBox1;
+		private MetroFramework.Controls.MetroComboBox metroComboBoxUiType;
 	}
 }
