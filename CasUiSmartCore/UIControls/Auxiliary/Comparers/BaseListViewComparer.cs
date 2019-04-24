@@ -92,7 +92,13 @@ namespace CAS.UI.UIControls.Auxiliary.Comparers
             }
             if(x.SubItems[ColumnIndex].Tag as IComparable != null && (x.SubItems[ColumnIndex].Tag.GetType().Equals(y.SubItems[ColumnIndex].Tag.GetType())))
             {
-                return SortMultiplier * ((IComparable)x.SubItems[ColumnIndex].Tag).CompareTo(y.SubItems[ColumnIndex].Tag);
+	            try
+	            {
+		            return SortMultiplier * ((IComparable)x.SubItems[ColumnIndex].Tag).CompareTo(y.SubItems[ColumnIndex].Tag);
+	            }
+	            catch
+	            {
+	            }
             }
             return SortMultiplier * string.Compare(x.SubItems[ColumnIndex].Text, y.SubItems[ColumnIndex].Text);
         }
