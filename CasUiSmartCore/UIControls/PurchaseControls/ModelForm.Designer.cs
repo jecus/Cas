@@ -604,7 +604,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.labelIsEffectivity.Name = "labelIsEffectivity";
 			this.labelIsEffectivity.Size = new System.Drawing.Size(100, 25);
 			this.labelIsEffectivity.TabIndex = 164;
-			this.labelIsEffectivity.Text = "IsEffectivity:";
+			this.labelIsEffectivity.Text = "Effectivity:";
 			this.labelIsEffectivity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// textBoxIsEffectivity

@@ -276,15 +276,55 @@ namespace SmartCore.Entities.Dictionaries
 		/// ГСМ
 		/// </summary>
 		public static GoodsClass FLM = new GoodsClass(23, "FLM", "Auxiliary Materials Maintenance FLM", "Auxiliary Materials Maintenance FLM", MaintenanceMaterials);
-        #endregion
+		#endregion
 
-        #region Элементы пункта FLM
+		#region Элементы пункта MaintenanceMaterials
 
-        #region public static GoodsClass Fuel = new GoodsClass(24, "Fuel", "Auxiliary Materials Maintenance FLM Fuel", "Auxiliary Materials Maintenance FLM Fuel", FLM);
-        /// <summary>
-        /// Горючее
-        /// </summary>
-        public static GoodsClass Fuel = new GoodsClass(24, "Fuels", "Auxiliary Materials Maintenance FLM Fuel", "Auxiliary Materials Maintenance FLM Fuel", FLM);
+		#region public static GoodsClass AntiIcingAndDeIcing = new GoodsClass(70, "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", MaintenanceMaterials);
+
+		public static GoodsClass AntiIcingAndDeIcing = new GoodsClass(70, "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", MaintenanceMaterials);
+
+		#endregion
+
+		#region public static GoodsClass BacterialogicalProtection = new GoodsClass(71, "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", MaintenanceMaterials);
+
+		public static GoodsClass BacterialogicalProtection = new GoodsClass(71, "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", MaintenanceMaterials);
+
+		#endregion
+
+		#region public static GoodsClass Materials = new GoodsClass(72, "Materials", "Materials", "Materials", MaintenanceMaterials);
+
+		public static GoodsClass Materials = new GoodsClass(72, "Materials", "Materials", "Materials", MaintenanceMaterials);
+
+		#endregion
+
+		#region public static GoodsClass FinishingMaterials = new GoodsClass(73, "Finishing Materials", "Finishing Materials", "Finishing Materials", MaintenanceMaterials);
+
+		public static GoodsClass FinishingMaterials = new GoodsClass(73, "Finishing Materials", "Finishing Materials", "Finishing Materials", MaintenanceMaterials);
+
+		#endregion
+
+		#region public static GoodsClass MiscellaneousMaterials = new GoodsClass(74, "Miscellaneous Materials", "Miscellaneous Materials", "Miscellaneous Materials", MaintenanceMaterials);
+
+		public static GoodsClass MiscellaneousMaterials = new GoodsClass(74, "Miscellaneous Materials", "Miscellaneous Materials", "Miscellaneous Materials", MaintenanceMaterials);
+
+		#endregion
+
+		#region public static GoodsClass SpecialMaterials = new GoodsClass(75, "Special Materials", "Special Materials", "Special Materials", MaintenanceMaterials);
+
+		public static GoodsClass SpecialMaterials = new GoodsClass(75, "Special Materials", "Special Materials", "Special Materials", MaintenanceMaterials);
+
+		#endregion
+
+		#endregion
+
+		#region Элементы пункта FLM
+
+		#region public static GoodsClass Fuel = new GoodsClass(24, "Fuel", "Auxiliary Materials Maintenance FLM Fuel", "Auxiliary Materials Maintenance FLM Fuel", FLM);
+		/// <summary>
+		/// Горючее
+		/// </summary>
+		public static GoodsClass Fuel = new GoodsClass(24, "Fuels", "Auxiliary Materials Maintenance FLM Fuel", "Auxiliary Materials Maintenance FLM Fuel", FLM);
 		#endregion
 
 		#region Элементы пункта Fuel
@@ -360,12 +400,12 @@ namespace SmartCore.Entities.Dictionaries
 
 		#endregion
 
+		#endregion
+
 		#region public static GoodsClass Hydraulic = new GoodsClass(35, "Hydraulic Fluids", "Auxiliary Materials Maintenance FLM Hydraulic", "Auxiliary Materials Maintenance FLM Hydraulic", FLM);
 
-		public static GoodsClass Hydraulic = new GoodsClass(35, "Hydraulic Fluids", "Auxiliary Materials Maintenance FLM Hydraulic", "Auxiliary Materials Maintenance FLM Hydraulic", Grease);
+		public static GoodsClass Hydraulic = new GoodsClass(35, "Hydraulic Fluids", "Auxiliary Materials Maintenance FLM Hydraulic", "Auxiliary Materials Maintenance FLM Hydraulic", FLM);
 
-
-		#endregion
 
 		#endregion
 
@@ -377,46 +417,6 @@ namespace SmartCore.Entities.Dictionaries
 		#region public static GoodsClass DryLubes = new GoodsClass(77, "Dry Lubes", "Dry Lubes", "Dry Lubes", FLM);
 
 		public static GoodsClass DryLubes = new GoodsClass(77, "Dry Lubes", "Dry Lubes", "Dry Lubes", FLM);
-		#endregion
-
-		#endregion
-
-		#region Элементы пункта KIT
-
-		#region public static GoodsClass AntiIcingAndDeIcing = new GoodsClass(70, "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", KIT);
-
-		public static GoodsClass AntiIcingAndDeIcing = new GoodsClass(70, "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", KIT);
-
-		#endregion
-
-		#region public static GoodsClass BacterialogicalProtection = new GoodsClass(71, "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", KIT);
-
-		public static GoodsClass BacterialogicalProtection = new GoodsClass(71, "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", KIT);
-
-		#endregion
-
-		#region public static GoodsClass Materials = new GoodsClass(72, "Materials", "Materials", "Materials", KIT);
-
-		public static GoodsClass Materials = new GoodsClass(72, "Materials", "Materials", "Materials", KIT);
-
-		#endregion
-
-		# region public static GoodsClass FinishingMaterials = new GoodsClass(73, "Finishing Materials", "Finishing Materials", "Finishing Materials", KIT);
-
-		public static GoodsClass FinishingMaterials = new GoodsClass(73, "Finishing Materials", "Finishing Materials", "Finishing Materials", KIT);
-
-		#endregion
-
-		#region public static GoodsClass MiscellaneousMaterials = new GoodsClass(74, "Miscellaneous Materials", "Miscellaneous Materials", "Miscellaneous Materials", KIT);
-
-		public static GoodsClass MiscellaneousMaterials = new GoodsClass(74, "Miscellaneous Materials", "Miscellaneous Materials", "Miscellaneous Materials", KIT);
-
-		#endregion
-
-		#region public static GoodsClass SpecialMaterials = new GoodsClass(75, "Special Materials", "Special Materials", "Special Materials", KIT);
-
-		public static GoodsClass SpecialMaterials = new GoodsClass(75, "Special Materials", "Special Materials", "Special Materials", KIT);
-
 		#endregion
 
 		#endregion
