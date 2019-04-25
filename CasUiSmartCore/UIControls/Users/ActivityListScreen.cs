@@ -232,8 +232,17 @@ namespace CAS.UI.UIControls.Users
 		}
 		#endregion
 
+		#region private void ButtonOkClick(object sender, EventArgs e)
+
+		private void ButtonOkClick(object sender, EventArgs e)
+		{
+			AnimatedThreadWorker.RunWorkerAsync();
+		}
 
 		#endregion
+
+		#endregion
+
 
 	}
 }

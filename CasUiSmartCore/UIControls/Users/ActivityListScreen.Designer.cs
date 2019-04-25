@@ -37,6 +37,11 @@ namespace CAS.UI.UIControls.Users
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+			this.labelDateFrom = new System.Windows.Forms.Label();
+			this.dateTimePickerDateFrom = new System.Windows.Forms.DateTimePicker();
+			this.labelDateTo = new System.Windows.Forms.Label();
+			this.dateTimePickerDateTo = new System.Windows.Forms.DateTimePicker();
+			this.buttonOK = new System.Windows.Forms.Button();
 			this.headerControl.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -106,6 +111,51 @@ namespace CAS.UI.UIControls.Users
 			this.buttonApplyFilter.ToolTipText = "Apply filter";
 			this.buttonApplyFilter.Click += new System.EventHandler(this.ButtonApplyFilterClick);
 			// 
+			// labelDateFrom
+			// 
+			this.labelDateFrom.AutoSize = true;
+			this.labelDateFrom.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.labelDateFrom.ForeColor = System.Drawing.Color.FromArgb(122, 122, 122);
+			this.labelDateFrom.Location = new System.Drawing.Point(32, 35);
+			this.labelDateFrom.Text = "From";
+			// 
+			// dateTimePickerDateFrom
+			// 
+			this.dateTimePickerDateFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+			this.dateTimePickerDateFrom.ForeColor = System.Drawing.Color.DimGray;
+			this.dateTimePickerDateFrom.BackColor = System.Drawing.Color.White;
+			this.dateTimePickerDateFrom.Location = new System.Drawing.Point(80, 32);
+			this.dateTimePickerDateFrom.Width = 100;
+			this.dateTimePickerDateFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			// 
+			// labelDateTo
+			// 
+			this.labelDateTo.AutoSize = true;
+			this.labelDateTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+			this.labelDateTo.ForeColor = System.Drawing.Color.FromArgb(122, 122, 122);
+			this.labelDateTo.Location = new System.Drawing.Point(190, 35);
+			this.labelDateTo.Text = "To";
+			// 
+			// dateTimePickerDateTo
+			// 
+			this.dateTimePickerDateTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+			this.dateTimePickerDateTo.ForeColor = System.Drawing.Color.DimGray;
+			this.dateTimePickerDateTo.BackColor = System.Drawing.Color.White;
+			this.dateTimePickerDateTo.Location = new System.Drawing.Point(220, 32);
+			this.dateTimePickerDateTo.Width = 100;
+			this.dateTimePickerDateTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			//
+			// buttonOK
+			//
+			this.buttonOK.UseVisualStyleBackColor = true;
+			this.buttonOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+			this.buttonOK.ForeColor = System.Drawing.Color.DimGray;
+			this.buttonOK.Location = new System.Drawing.Point(340, 30);
+			this.buttonOK.Width = 70;
+			this.buttonOK.Text = "OK";
+			this.buttonOK.Click += ButtonOkClick;
+			this.buttonOK.Enabled = !(userType == UsetType.ReadOnly);
+			// 
 			// pictureBox1
 			// 
 			this.pictureBox1.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
@@ -145,6 +195,11 @@ namespace CAS.UI.UIControls.Users
 			//
 			this.panelTopContainer.Controls.Add(this.labelTitle);
 			this.panelTopContainer.Controls.Add(this.flowLayoutPanel1);
+			this.panelTopContainer.Controls.Add(this.labelDateFrom);
+			this.panelTopContainer.Controls.Add(this.dateTimePickerDateFrom);
+			this.panelTopContainer.Controls.Add(this.labelDateTo);
+			this.panelTopContainer.Controls.Add(this.dateTimePickerDateTo);
+			this.panelTopContainer.Controls.Add(this.buttonOK);
 			// 
 			// DocumentationListScreen
 			// 
@@ -167,6 +222,11 @@ namespace CAS.UI.UIControls.Users
 
 		#endregion
 
+		private System.Windows.Forms.Label labelDateFrom;
+		private System.Windows.Forms.DateTimePicker dateTimePickerDateFrom;
+		private System.Windows.Forms.Label labelDateTo;
+		private System.Windows.Forms.DateTimePicker dateTimePickerDateTo;
+		private System.Windows.Forms.Button buttonOK;
 		private AvControls.StatusImageLink.StatusImageLinkLabel labelTitle;
 		private AvControls.AvButtonT.AvButtonT buttonApplyFilter;
 		private System.Windows.Forms.PictureBox pictureBox1;
