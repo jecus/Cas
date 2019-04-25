@@ -59,16 +59,31 @@ namespace CAS.UI.UIControls.Users
 			_filter = new CommonFilterCollection(typeof(ActivityDTO));
 			aircraftHeaderControl1.Operator = currentOperator;
 			StatusTitle = "Activity";
-			
+
+			UpdateInformation();
+
 			InitListView();
 			AnimatedThreadWorker.RunWorkerAsync();
 		}
+
+
 
 		#endregion
 
 		#endregion
 
 		#region Methods
+
+		#region private void UpdateInformation()
+
+		private void UpdateInformation()
+		{
+			var date = DateTime.Now;
+			dateTimePickerDateFrom.Value = new DateTime(date.Year, date.Month, date.Day, 0, 0, 1).AddDays(-7);
+			dateTimePickerDateTo.Value = new DateTime(date.Year, date.Month, date.Day, 23, 59, 59);
+		}
+
+		#endregion
 
 		#region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -90,8 +105,12 @@ namespace CAS.UI.UIControls.Users
 
 			try
 			{
-				var activity = GlobalObjects.AuditContext.AuditCollection.FindSync(new BsonDocumentFilterDefinition<AuditEntity>(new BsonDocument())).ToList();
+				var activity = GlobalObjects.AuditContext.AuditCollection
+					.FindSync(i => i.Date >= dateTimePickerDateFrom.Value && i.Date <= dateTimePickerDateTo.Value)
+					.ToList();
+
 				var users = GlobalObjects.CasEnvironment.GetAllUsers();
+
 				foreach (var bsonElement in activity)
 				{
 					Enum.TryParse(bsonElement.Action, out AuditOperation myStatus);
@@ -99,10 +118,11 @@ namespace CAS.UI.UIControls.Users
 					_initial.Add(new ActivityDTO()
 					{
 						Date = bsonElement.Date,
-						User = users.FirstOrDefault(i => i.ItemId == bsonElement.UserId),
+						User = new User(users.FirstOrDefault(i => i.ItemId == bsonElement.UserId)),
 						Operation = myStatus,
 						ObjectId = bsonElement.ObjectId,
-						Type = SmartCoreType.GetSmartCoreTypeById(bsonElement.ObjectTypeId)
+						Type = SmartCoreType.GetSmartCoreTypeById(bsonElement.ObjectTypeId),
+						Information = bsonElement.AdditionalParameters?.Count > 0 ? string.Join(",", bsonElement.AdditionalParameters.Select(i => i.Value.ToString())) : ""
 					});
 				}
 			}

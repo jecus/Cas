@@ -44,5 +44,14 @@ namespace SmartCore.Entities
 			Password = "";
 			Surname = "";
 		}
+
+		#region Overrides of BaseEntityObject
+
+		public override string ToString()
+		{
+			return Name.Equals(Surname) ? Name : $"{Surname} {Name}";
+		}
+
+		#endregion
 	}
 }

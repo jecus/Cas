@@ -1,6 +1,7 @@
 ﻿using System;
 using EFCore.DTO.General;
 using SmartCore.AuditMongo.Repository;
+using SmartCore.Entities;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
@@ -13,7 +14,7 @@ namespace SmartCore.Activity
 		public DateTime Date { get; set; }
 
 		[Filter("User:", Order = 2)]
-		public UserDTO User { get; set; }
+		public User User { get; set; }
 
 		[Filter("Operation:", Order = 3)]
 		public AuditOperation Operation { get; set; }
@@ -23,5 +24,6 @@ namespace SmartCore.Activity
 
 
 		public int ObjectId { get; set; }
+		public string Information { get; set; }
 	}
 }
