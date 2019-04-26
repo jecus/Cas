@@ -600,6 +600,7 @@
     <Compile Include="Entities\Dictionaries\TypeReference.cs" />
     <Compile Include="Entities\Dictionaries\Urgency.cs" />
     <Compile Include="Entities\Dictionaries\UtilizationIntervalType.cs" />
+    <Compile Include="Entities\Dictionaries\WpWorkType.cs" />
     <Compile Include="Entities\Dictionaries\Сurrency.cs" />
     <Compile Include="Entities\FileLinkType.cs" />
     <Compile Include="Entities\General\AbstractPerformanceRecord.cs" />
