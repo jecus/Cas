@@ -80,7 +80,7 @@ namespace EFCore.DTO.General
 		public int WpWorkType { get; set; }
 
 		[DataMember]
-		public float KMH { get; set; }
+		public double KMH { get; set; }
 
 		[DataMember]
 		public string PerformAfter { get; set; }

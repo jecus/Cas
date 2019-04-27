@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using EFCore.DTO.General;
+using Newtonsoft.Json;
 using SmartCore.Auxiliary;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Calculations;
@@ -16,6 +18,7 @@ using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.Personnel;
 using SmartCore.Files;
 using SmartCore.Packages;
+using ComponentCollection = SmartCore.Entities.Collections.ComponentCollection;
 using Convert = System.Convert;
 
 namespace SmartCore.Entities.General.WorkPackage
@@ -286,11 +289,24 @@ namespace SmartCore.Entities.General.WorkPackage
 		#endregion
 
 		[TableColumn("PerformAfter")]
-		[ListViewData(0.1f, "Perform After", 8)]
-		public string PerformAfter { get; set; }
+		public string PerformAfter
+		{
+			get => JsonConvert.SerializeObject(PerfAfter, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+			set => PerfAfter = JsonConvert.DeserializeObject<PerformAfter>(value ?? "", new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+		}
+
+
+		public PerformAfter PerfAfter
+		{
+			get => _perfAfter ?? (_perfAfter = new PerformAfter());
+			set => _perfAfter = value;
+		}
 
 		[ListViewData(0.1f, "Perform Date", 9)]
-		public DateTime PerformDate { get; set; }
+		public DateTime PerformDate => PerfAfter.PerformDate;
+
+		[ListViewData(0.1f, "Perform After", 8)]
+		public string PerformAfterLW => PerfAfter.ToString();
 
 		[TableColumn("WpWorkType")]
 		public WpWorkType WpWorkType
@@ -300,9 +316,10 @@ namespace SmartCore.Entities.General.WorkPackage
 		}
 
 		[TableColumn("KMH")]
-		[ListViewData(85, "K*MH", 13)]
-		public float KMH { get; set; }
+		public double KMH { get; set; }
 
+		[ListViewData(85, "K*MH", 13)]
+		public string KMHLW => KMH.ToString("##.##");
 
 		#region public DateTime ClosingDate { get; set; }
 
@@ -608,6 +625,7 @@ namespace SmartCore.Entities.General.WorkPackage
         private CommonCollection<MaintenanceCheckBindTaskRecord> _maintenanceCheckBindTaskRecords;
         private List<Document> _closingDocument;
         private WpWorkType _wpWorkType;
+        private PerformAfter _perfAfter;
 
         /// <summary>
         /// Возвращает массив записей о привязке задач к чекам находящимся в данном рабочем пакете
@@ -1004,6 +1022,69 @@ namespace SmartCore.Entities.General.WorkPackage
         }
         #endregion
 
+    }
+
+    [JsonObject]
+	public class PerformAfter
+    {
+	    #region Fields
+
+	    private DateTime _performDate;
+
+	    #endregion
+
+	    #region Constructor
+
+	    public PerformAfter()
+	    {
+		    AirportFromId = -1;
+		    AirportToId = -1;
+		    FlightNumId = -1;
+
+	    }
+
+		    #endregion
+
+		[DefaultValue(-1)]
+	    public int AirportFromId { get; set; }
+
+	    [DefaultValue(-1)]
+		public int AirportToId { get; set; }
+
+		[DefaultValue(-1)]
+		public int FlightNumId { get; set; }
+
+		public DateTime PerformDate
+		{
+			get => _performDate < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : _performDate; 
+			set => _performDate = value;
+		}
+
+		[JsonIgnore]
+		public FlightNum FlightNum { get; set; }
+
+		[JsonIgnore]
+		public AirportsCodes AirportFrom { get; set; }
+
+		[JsonIgnore]
+		public AirportsCodes AirportTo { get; set; }
+
+		#region Overrides of Object
+
+		public override string ToString()
+		{
+			var res = "";
+
+			if (FlightNum != null)
+				res += FlightNum.ToString();
+			if(AirportFrom != null)
+				res += $" {AirportFrom.ShortName}";
+			if(AirportTo != null)
+				res += $"-{AirportTo.ShortName}";
+			return res;
+		}
+
+		#endregion
     }
 
 }

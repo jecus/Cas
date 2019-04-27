@@ -62,6 +62,11 @@ namespace CAS.UI.UIControls.WorkPakage
 			lookupComboboxFlightNum.Type = typeof(FlightNum);
 			lookupComboboxFrom.Type = typeof(AirportsCodes);
 			lookupComboboxTo.Type = typeof(AirportsCodes);
+
+			lookupComboboxFlightNum.SelectedItem = _currentWp.PerfAfter.FlightNum;
+			lookupComboboxFrom.SelectedItem = _currentWp.PerfAfter.AirportFrom;
+			lookupComboboxTo.SelectedItem = _currentWp.PerfAfter.AirportTo;
+			dateTimePickerFlightDate.Value = _currentWp.PerfAfter.PerformDate;
 			
 
 			foreach (var control in DocumentControls)
@@ -144,6 +149,16 @@ namespace CAS.UI.UIControls.WorkPakage
 			_currentWp.Station = textBoxStation.Text;
 			_currentWp.WpWorkType = (WpWorkType)comboBoxWorkType.SelectedItem;
 			_currentWp.KMH = (float)numericUpDown1.Value;
+
+			_currentWp.PerfAfter.FlightNum = (FlightNum) lookupComboboxFlightNum.SelectedItem;
+			_currentWp.PerfAfter.AirportFrom = (AirportsCodes) lookupComboboxFrom.SelectedItem;
+			_currentWp.PerfAfter.AirportTo = (AirportsCodes) lookupComboboxTo.SelectedItem;
+
+			_currentWp.PerfAfter.FlightNumId = _currentWp.PerfAfter.FlightNum.ItemId;
+			_currentWp.PerfAfter.AirportFromId = _currentWp.PerfAfter.AirportFrom.ItemId;
+			_currentWp.PerfAfter.AirportToId = _currentWp.PerfAfter.AirportTo.ItemId;
+
+			_currentWp.PerfAfter.PerformDate = dateTimePickerFlightDate.Value;
 		}
 
 		#endregion
