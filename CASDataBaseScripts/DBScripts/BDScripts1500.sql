@@ -67,7 +67,7 @@ if not exists ( select  *
                     and c.name = 'UiType' ) 
 
 	alter table dbo.Users
-    add UiType binary not null default 0
+    add UiType int not null default 0
 GO
 --------------------------------------------------------------------------------
 if not exists ( select  *
@@ -76,7 +76,7 @@ if not exists ( select  *
                     and c.name = 'WpWorkType' ) 
 
 	alter table dbo.WorkPackages
-    add WpWorkType binary not null default -1
+    add WpWorkType int not null default -1
 GO
 
 if not exists ( select  *

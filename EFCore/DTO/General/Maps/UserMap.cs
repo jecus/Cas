@@ -32,6 +32,10 @@ namespace EFCore.DTO.General.Maps
 			Property(i => i.UserType)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("UserType");
+
+			Property(i => i.UiType)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("UiType");
 		}
 	}
 }

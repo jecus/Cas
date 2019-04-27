@@ -4972,7 +4972,7 @@ namespace SmartCore.DtoHelper
 				PublishedBy = workpack.PublishedBy,
 				ClosedBy = workpack.ClosedBy,
 				EmployeesRemark = workpack.EmployeesRemark,
-				WpWorkType = (byte)workpack.WpWorkType.ItemId,
+				WpWorkType = workpack.WpWorkType.ItemId,
 				KMH = workpack.KMH,
 				PerformAfter = workpack.PerformAfter,
 				Files = workpack.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>

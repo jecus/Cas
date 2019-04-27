@@ -56,6 +56,12 @@ namespace CAS.UI.UIControls.WorkPakage
 			textBoxStation.Text = _currentWp.Station;
 			comboBoxWorkType.Items.Clear();
 			comboBoxWorkType.Items.AddRange(WpWorkType.Items.ToArray());
+			comboBoxWorkType.SelectedItem = _currentWp.WpWorkType;
+			numericUpDown1.Value = (decimal)_currentWp.KMH;
+
+			lookupComboboxFlightNum.Type = typeof(FlightNum);
+			lookupComboboxFrom.Type = typeof(AirportsCodes);
+			lookupComboboxTo.Type = typeof(AirportsCodes);
 			
 
 			foreach (var control in DocumentControls)
@@ -136,6 +142,8 @@ namespace CAS.UI.UIControls.WorkPakage
 			_currentWp.Remarks = textBoxRemarks.Text;
 			_currentWp.ClosingRemarks = textBoxClosingRemarks.Text;
 			_currentWp.Station = textBoxStation.Text;
+			_currentWp.WpWorkType = (WpWorkType)comboBoxWorkType.SelectedItem;
+			_currentWp.KMH = (float)numericUpDown1.Value;
 		}
 
 		#endregion

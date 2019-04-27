@@ -77,7 +77,7 @@ namespace EFCore.DTO.General
 		public string EmployeesRemark { get; set; }
 
 		[DataMember]
-		public byte WpWorkType { get; set; }
+		public int WpWorkType { get; set; }
 
 		[DataMember]
 		public float KMH { get; set; }
