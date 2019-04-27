@@ -69,3 +69,30 @@ if not exists ( select  *
 	alter table dbo.Users
     add UiType binary not null default 0
 GO
+--------------------------------------------------------------------------------
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('dbo.WorkPackages')
+                    and c.name = 'WpWorkType' ) 
+
+	alter table dbo.WorkPackages
+    add WpWorkType binary not null default -1
+GO
+
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('dbo.WorkPackages')
+                    and c.name = 'KMH' ) 
+
+	alter table dbo.WorkPackages
+    add KMH float not null default 0
+GO
+
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('dbo.WorkPackages')
+                    and c.name = 'PerformAfter' ) 
+
+	alter table dbo.WorkPackages
+    add PerformAfter nvarchar(MAX) null 
+GO

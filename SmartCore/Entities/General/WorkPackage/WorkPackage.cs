@@ -52,8 +52,8 @@ namespace SmartCore.Entities.General.WorkPackage
         /// 
         /// </summary>
         [TableColumn("Number")]
-        [ListViewData(100f, "WP No:", 2)]
-        [FilterAttribute("WP No", Order = 1)]
+        [ListViewData(100f, "WP/WO є", 2)]
+        [FilterAttribute("WP/WO є", Order = 1)]
         public String Number { get; set; }
         #endregion
 
@@ -143,7 +143,7 @@ namespace SmartCore.Entities.General.WorkPackage
                                                     Cas3WorkPakageRecord.WorkPackageItemType = 14 and 
                                                     Cas3WorkPakageRecord.WorkPakageId = WorkPackages.ItemId)) WPMH)"
             )]
-        [ListViewData(85, "MH", 10)]
+        [ListViewData(85, "MH", 12)]
         public double ManHours { get; set; }
         #endregion
 
@@ -151,7 +151,7 @@ namespace SmartCore.Entities.General.WorkPackage
         /// <summary>
         /// 
         /// </summary>
-        [ListViewData(0.08f, "Persent", 14)]
+        [ListViewData(0.08f, "Persent", 16)]
         public double Persent { get; set; }
         #endregion
 
@@ -283,17 +283,34 @@ namespace SmartCore.Entities.General.WorkPackage
             }
         }
 
-        #endregion
+		#endregion
 
-        #region public DateTime ClosingDate { get; set; }
+		[TableColumn("PerformAfter")]
+		[ListViewData(0.1f, "Perform After", 8)]
+		public string PerformAfter { get; set; }
 
-        private DateTime _closingDate;
+		[ListViewData(0.1f, "Perform Date", 9)]
+		public DateTime PerformDate { get; set; }
+
+		[TableColumn("WpWorkType")]
+		public WpWorkType WpWorkType
+		{
+			get => _wpWorkType ?? WpWorkType.Unknown;
+			set => _wpWorkType = value;
+		}
+
+		[TableColumn("KMH")]
+		public float KMH { get; set; }
+
+		#region public DateTime ClosingDate { get; set; }
+
+		private DateTime _closingDate;
         /// <summary>
         /// ƒата закрыти€ рабочего пакета
         /// </summary>
         [TableColumn("ClosingDate")]
         [FormControl("Closing Date:")]
-        [FilterAttribute("Closed", Order = 17)]
+        [FilterAttribute("Closed", Order = 19)]
         public DateTime ClosingDate
         {
             get { return _closingDate; }
@@ -310,7 +327,7 @@ namespace SmartCore.Entities.General.WorkPackage
         /// <summary>
         /// ѕредставление даты закрыти€ рабочего пакета дл€ списка
         /// </summary>
-        [ListViewData(0.1f, "Closing date", 8)]
+        [ListViewData(0.1f, "Closing date", 10)]
         public DateTime? ListViewClosingDate
         {
             get
@@ -326,7 +343,7 @@ namespace SmartCore.Entities.General.WorkPackage
         /// <summary>
         /// ƒл€ закрытого рабочего пакета, возвращает временной интервал, затраченный на исполнение задач в виде строки
         /// </summary>
-        [ListViewData(100, "Work time", 11)]
+        [ListViewData(100, "Work time", 13)]
         public String WorkTimeString
         {
             get
@@ -447,7 +464,7 @@ namespace SmartCore.Entities.General.WorkPackage
         /// </summary>
         [TableColumn("Station")]
         [FormControl("Station:")]
-        [ListViewData(0.08f, "Station", 12)]
+        [ListViewData(0.08f, "Station", 14)]
         [FilterAttribute("Station", Order = 4)]
         public String Station { get; set; }
         #endregion
@@ -464,7 +481,7 @@ namespace SmartCore.Entities.General.WorkPackage
         /// 
         /// </summary>
         [TableColumn("MaintenanceReportNo")]
-        [ListViewData(0.05f, "MRO", 13)]
+        [ListViewData(0.05f, "MRO", 15)]
         [FormControl("MRO:")]
         [FilterAttribute("MRO", Order = 10)]
         public String MaintenanceRepairOrzanization { get; set; }
@@ -588,6 +605,7 @@ namespace SmartCore.Entities.General.WorkPackage
 
         private CommonCollection<MaintenanceCheckBindTaskRecord> _maintenanceCheckBindTaskRecords;
         private List<Document> _closingDocument;
+        private WpWorkType _wpWorkType;
 
         /// <summary>
         /// ¬озвращает массив записей о прив€зке задач к чекам наход€щимс€ в данном рабочем пакете

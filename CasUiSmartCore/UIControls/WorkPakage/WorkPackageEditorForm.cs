@@ -45,8 +45,6 @@ namespace CAS.UI.UIControls.WorkPakage
 			textBoxAuthor.Text = _currentWp.Author;
 			textBoxClosedBy.Text = _currentWp.ClosedBy;
 			textBoxPublishingRemark.Text = _currentWp.PublishingRemarks;
-			textBoxReleaseCertificate.Text = _currentWp.ReleaseCertificateNo;
-			textBoxCheckType.Text = _currentWp.CheckType;
 			textBoxMRO.Text = _currentWp.MaintenanceRepairOrzanization;
 			textBoxTitle.Text = _currentWp.Title;
 			textBoxStatus.Text = _currentWp.Status.ToString();
@@ -55,9 +53,10 @@ namespace CAS.UI.UIControls.WorkPakage
 			textBoxPublishedBy.Text = _currentWp.PublishedBy;
 			textBoxRemarks.Text = _currentWp.Remarks;
 			textBoxClosingRemarks.Text = _currentWp.ClosingRemarks;
-			textBoxRevision.Text = _currentWp.Revision;
 			textBoxStation.Text = _currentWp.Station;
-
+			comboBoxWorkType.Items.Clear();
+			comboBoxWorkType.Items.AddRange(WpWorkType.Items.ToArray());
+			
 
 			foreach (var control in DocumentControls)
 				control.Added += DocumentControl1_Added;
@@ -130,15 +129,12 @@ namespace CAS.UI.UIControls.WorkPakage
 			_currentWp.Description = textBoxDescription.Text;
 			_currentWp.PublishingDate = dateTimePickerPublishingDate.Value;
 			_currentWp.PublishingRemarks = textBoxPublishingRemark.Text;
-			_currentWp.ReleaseCertificateNo = textBoxReleaseCertificate.Text;
-			_currentWp.CheckType = textBoxCheckType.Text;
 			_currentWp.MaintenanceRepairOrzanization = textBoxMRO.Text;
 			_currentWp.Title = textBoxTitle.Text;
 			_currentWp.OpeningDate = dateTimePickerOpeningDate.Value;
 			_currentWp.ClosingDate = dateTimePickerClosingDate.Value;
 			_currentWp.Remarks = textBoxRemarks.Text;
 			_currentWp.ClosingRemarks = textBoxClosingRemarks.Text;
-			_currentWp.Revision = textBoxRevision.Text;
 			_currentWp.Station = textBoxStation.Text;
 		}
 

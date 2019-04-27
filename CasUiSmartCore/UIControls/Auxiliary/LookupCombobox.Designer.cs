@@ -1,8 +1,4 @@
-﻿using System.Threading;
-using System.Windows.Forms;
-using CASTerms;
-using EFCore.DTO.General;
-
+﻿
 namespace CAS.UI.UIControls.Auxiliary
 {
     partial class LookupCombobox
@@ -63,8 +59,7 @@ namespace CAS.UI.UIControls.Auxiliary
         /// </summary>
         private void InitializeComponent()
         {
-	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
-			this.comboBoxReason = new System.Windows.Forms.ComboBox();
+	        this.comboBoxReason = new System.Windows.Forms.ComboBox();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.richReferenceButtonCreate = new CAS.UI.Management.Dispatchering.RichReferenceButton();
             this.richReferenceButtonEdit = new CAS.UI.Management.Dispatchering.RichReferenceButton();
@@ -127,8 +122,7 @@ namespace CAS.UI.UIControls.Auxiliary
             this.richReferenceButtonCreate.TextSecondary = "";
             this.richReferenceButtonCreate.ToolTipText = "Add new";
             this.richReferenceButtonCreate.Click += new System.EventHandler(this.ButtonCreateClick);
-            this.richReferenceButtonCreate.Enabled = !(userType == UsetType.ReadOnly);
-			// 
+            // 
 			// richReferenceButtonEdit
 			// 
 			this.richReferenceButtonEdit.ActiveBackColor = System.Drawing.Color.Transparent;
@@ -162,8 +156,7 @@ namespace CAS.UI.UIControls.Auxiliary
             this.richReferenceButtonEdit.TextSecondary = "";
             this.richReferenceButtonEdit.ToolTipText = "Edit selected";
             this.richReferenceButtonEdit.Click += new System.EventHandler(this.ButtonEditClick);
-            this.richReferenceButtonEdit.Enabled = !(userType == UsetType.ReadOnly);
-			// 
+            // 
 			// richReferenceButtonViewList
 			// 
 			this.richReferenceButtonViewList.ActiveBackColor = System.Drawing.Color.Transparent;

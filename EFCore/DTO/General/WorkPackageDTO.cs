@@ -77,6 +77,15 @@ namespace EFCore.DTO.General
 		public string EmployeesRemark { get; set; }
 
 		[DataMember]
+		public byte WpWorkType { get; set; }
+
+		[DataMember]
+		public float KMH { get; set; }
+
+		[DataMember]
+		public string PerformAfter { get; set; }
+
+		[DataMember]
 		[Child(FilterType.Equal, "ParentTypeId", 2499)]
 		public ICollection<ItemFileLinkDTO> Files { get; set; }
 	}
