@@ -317,7 +317,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			metroLabel1.Name = "metroLabel1";
 			metroLabel1.Size = new System.Drawing.Size(46, 19);
 			metroLabel1.TabIndex = 255;
-			metroLabel1.Text = "K*MH:";
+			metroLabel1.Text = "K for MH:";
 			metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// textBoxWpNumber

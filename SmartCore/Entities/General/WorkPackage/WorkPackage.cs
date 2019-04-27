@@ -318,7 +318,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		[TableColumn("KMH")]
 		public double KMH { get; set; }
 
-		[ListViewData(85, "K*MH", 13)]
+		[ListViewData(85, "K for MH", 13)]
 		public string KMHLW => KMH.ToString("##.##");
 
 		#region public DateTime ClosingDate { get; set; }
