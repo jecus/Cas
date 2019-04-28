@@ -56,17 +56,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 		public void UpdateControls()
 		{
-			comboBoxCostNew.Items.Clear();
-			comboBoxCostNew.Items.AddRange(Сurrency.Items.ToArray());
-
-			comboBoxCostOH.Items.Clear();
-			comboBoxCostOH.Items.AddRange(Сurrency.Items.ToArray());
-
-			comboBoxCostRepair.Items.Clear();
-			comboBoxCostRepair.Items.AddRange(Сurrency.Items.ToArray());
-
-			comboBoxCostServ.Items.Clear();
-			comboBoxCostServ.Items.AddRange(Сurrency.Items.ToArray());
+			comboBoxOffering.Items.Clear();
+			comboBoxOffering.Items.AddRange(Сurrency.Items.ToArray());
 		}
 
 		private void ButtonAdd_Click(object sender, System.EventArgs e)
@@ -91,31 +82,13 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		{
 			if (supplierListView1.SelectedItem == null) return;
 
-			numericUpDownCostNew.Value = supplierListView1.SelectedItem.CostNew;
-			numericUpDownCostOH.Value = supplierListView1.SelectedItem.CostOverhaul;
-			numericUpDownCostRepair.Value = supplierListView1.SelectedItem.CostRepair;
-			numericUpDownCostServ.Value = supplierListView1.SelectedItem.CostServiceable;
 
-			comboBoxCostNew.SelectedItem = supplierListView1.SelectedItem.СurrencyNew;
-			comboBoxCostOH.SelectedItem = supplierListView1.SelectedItem.СurrencyOH;
-			comboBoxCostRepair.SelectedItem = supplierListView1.SelectedItem.СurrencyRepair;
-			comboBoxCostServ.SelectedItem = supplierListView1.SelectedItem.СurrencyServ;
 
 		}
 
 		private void Button1_Click(object sender, System.EventArgs e)
 		{
 			if (supplierListView1.SelectedItem == null) return;
-
-			supplierListView1.SelectedItem.CostNew = numericUpDownCostNew.Value;
-			supplierListView1.SelectedItem.CostOverhaul = numericUpDownCostOH.Value;
-			supplierListView1.SelectedItem.CostRepair = numericUpDownCostRepair.Value;
-			supplierListView1.SelectedItem.CostServiceable = numericUpDownCostServ.Value;
-
-			supplierListView1.SelectedItem.СurrencyNew = (Сurrency) comboBoxCostNew.SelectedItem;
-			supplierListView1.SelectedItem.СurrencyOH = (Сurrency)comboBoxCostOH.SelectedItem;
-			supplierListView1.SelectedItem.СurrencyRepair = (Сurrency)comboBoxCostRepair.SelectedItem;
-			supplierListView1.SelectedItem.СurrencyServ = (Сurrency)comboBoxCostServ.SelectedItem;
 
 			supplierListView1.SetItemsArray(_prices.ToArray());
 
@@ -124,14 +97,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 		private void Reset()
 		{
-			numericUpDownCostNew.Value = 0;
-			numericUpDownCostOH.Value = 0;
-			numericUpDownCostRepair.Value = 0;
-			numericUpDownCostServ.Value = 0;
-			comboBoxCostNew.SelectedItem = Сurrency.UNK;
-			comboBoxCostOH.SelectedItem = Сurrency.UNK;
-			comboBoxCostRepair.SelectedItem = Сurrency.UNK;
-			comboBoxCostServ.SelectedItem = Сurrency.UNK;
+			comboBoxOffering.SelectedItem = Сurrency.UNK;
 		}
 
 		private void ButtonCancel_Click(object sender, System.EventArgs e)
