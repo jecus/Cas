@@ -221,26 +221,26 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 			var selected = (ComponentStatus)comboBoxCondition.SelectedItem;
 
-			if (selected == ComponentStatus.New)
-			{
-				numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostNew;
-				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyNew;
-			}
-			else if (selected == ComponentStatus.Overhaul)
-			{
-				numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostOverhaul;
-				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyOH;
-			}
-			else if (selected == ComponentStatus.Repair)
-			{
-				numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostRepair;
-				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyRepair;
-			}
-			else if (selected == ComponentStatus.Serviceable)
-			{
-				numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostServiceable;
-				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyServ;
-			}
+			//if (selected == ComponentStatus.New)
+			//{
+			//	numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostNew;
+			//	comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyNew;
+			//}
+			//else if (selected == ComponentStatus.Overhaul)
+			//{
+			//	numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostOverhaul;
+			//	comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyOH;
+			//}
+			//else if (selected == ComponentStatus.Repair)
+			//{
+			//	numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostRepair;
+			//	comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyRepair;
+			//}
+			//else if (selected == ComponentStatus.Serviceable)
+			//{
+			//	numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostServiceable;
+			//	comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyServ;
+			//}
 
 		}
 

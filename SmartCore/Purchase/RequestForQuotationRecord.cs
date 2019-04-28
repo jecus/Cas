@@ -469,7 +469,7 @@ namespace SmartCore.Purchase
 		public RequestForQuotationRecord Parent { get; set; }
 
 		[JsonIgnore]
-		[ListViewData(200, "Supplier",1)]
+		[ListViewData(120, "Supplier",1)]
 		public string SupplierName
 		{
 			get => Supplier?.Name ?? Supplier.Unknown.Name;
@@ -478,69 +478,55 @@ namespace SmartCore.Purchase
 		[JsonProperty]
 		public int SupplierId { get; set; }
 
-		[ListViewData(80,"CostNew", 2)]
+		[ListViewData(80, "Offering", 2)]
 		[JsonProperty]
-		public decimal CostNew { get; set; }
+		public decimal Offering { get; set; }
 
-		[ListViewData(80, "CostServ",4)]
+		[ListViewData(80, "Routine", 4)]
 		[JsonProperty]
-		public decimal CostServiceable { get; set; }
+		public decimal Routine { get; set; }
 
-		[ListViewData(80, "CostOH",6)]
+		[ListViewData(80, "K for MH", 5)]
 		[JsonProperty]
-		public decimal CostOverhaul { get; set; }
+		public decimal RoutineKMH { get; set; }
 
-		[ListViewData(80, "CostRepair",8)]
+		[ListViewData(80, "NDT", 6)]
 		[JsonProperty]
-		public decimal CostRepair { get; set; }
+		public decimal NDT { get; set; }
+
+		[ListViewData(80, "K for MH", 7)]
+		[JsonProperty]
+		public decimal NDTKMH { get; set; }
+
+		[ListViewData(80, "AD", 8)]
+		[JsonProperty]
+		public decimal AD { get; set; }
+
+		[ListViewData(80, "K for MH", 9)]
+		[JsonProperty]
+		public decimal ADKMH { get; set; }
+
+		[ListViewData(80, "NRC", 10)]
+		[JsonProperty]
+		public decimal NRC { get; set; }
+
+		[ListViewData(80, "K for MH", 11)]
+		[JsonProperty]
+		public decimal NRCKMH { get; set; }
 
 		[DefaultValue(-1)]
 		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-		public int ÑurrencyNewId { get; set; }
+		public int ÑurrencyOfferingId { get; set; }
 
 		[JsonIgnore]
-		[ListViewData(80, "Currency",3)]
-		public Ñurrency ÑurrencyNew
+		[ListViewData(80, "Currency",12)]
+		public Ñurrency ÑurrencyOffering
 		{
-			get => Ñurrency.GetItemById(ÑurrencyNewId);
-			set => ÑurrencyNewId = value.ItemId;
+			get => Ñurrency.GetItemById(ÑurrencyOfferingId);
+			set => ÑurrencyOfferingId = value.ItemId;
 		}
 
-		[DefaultValue(-1)]
-		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-		public int ÑurrencyServId { get; set; }
-
-		[ListViewData(80, "Currency",5)]
-		[JsonIgnore]
-		public Ñurrency ÑurrencyServ
-		{
-			get => Ñurrency.GetItemById(ÑurrencyServId);
-			set => ÑurrencyServId = value.ItemId;
-		}
-
-		[DefaultValue(-1)]
-		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-		public int ÑurrencyOHId { get; set; }
-
-		[JsonIgnore]
-		[ListViewData(80, "Currency",7)]
-		public Ñurrency ÑurrencyOH
-		{
-			get => Ñurrency.GetItemById(ÑurrencyOHId);
-			set => ÑurrencyOHId = value.ItemId;
-		}
-
-		[DefaultValue(-1)]
-		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-		public int ÑurrencyRepairId { get; set; }
-
-		[JsonIgnore]
-		[ListViewData(80, "Currency",9)]
-		public Ñurrency ÑurrencyRepair
-		{
-			get => Ñurrency.GetItemById(ÑurrencyRepairId);
-			set => ÑurrencyRepairId = value.ItemId;
-		}
+		
 	}
 
 }

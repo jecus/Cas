@@ -80,10 +80,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 				var record = item as SupplierPrice;
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = record.Supplier.ToString(), Tag = record.Supplier });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = $"New:{record.CostNew} {record.СurrencyNew}", Tag = record.CostNew });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = $"OH:{record.CostOverhaul} {record.CostOverhaul}", Tag = record.CostOverhaul });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = $"Serv:{record.CostServiceable} {record.СurrencyServ}", Tag = record.CostServiceable });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = $"Rep:{record.CostRepair} {record.СurrencyRepair}", Tag = record.CostRepair });
+				subItems.Add(new ListViewItem.ListViewSubItem { Text = $"Offering:{record.Offering} {record.СurrencyOffering}", Tag = record.Offering });
+				subItems.Add(new ListViewItem.ListViewSubItem { Text = $"Routine:{record.Routine}({record.RoutineKMH})", Tag = "" });
+				subItems.Add(new ListViewItem.ListViewSubItem { Text = $"NDT:{record.NDT}({record.NDTKMH})", Tag = "" });
+				subItems.Add(new ListViewItem.ListViewSubItem { Text = $"AD:{record.AD}({record.ADKMH})", Tag = "" });
 			}
 				
 
