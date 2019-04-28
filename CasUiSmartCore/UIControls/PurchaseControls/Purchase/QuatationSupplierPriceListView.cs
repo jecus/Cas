@@ -31,34 +31,34 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Suppliers" };
 			ColumnHeaderList.Add(columnHeader);
 
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Offering" };
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Offering" };
 			ColumnHeaderList.Add(columnHeader);
 
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Routine" };
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Routine" };
 			ColumnHeaderList.Add(columnHeader);
 
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "K for MH" };
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "K for MH" };
 			ColumnHeaderList.Add(columnHeader);
 
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "NDT" };
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "NDT" };
 			ColumnHeaderList.Add(columnHeader);
 
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "K for MH" };
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "K for MH" };
 			ColumnHeaderList.Add(columnHeader);
 
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "AD" };
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "AD" };
 			ColumnHeaderList.Add(columnHeader);
 
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "K for MH" };
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "K for MH" };
 			ColumnHeaderList.Add(columnHeader);
 
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "NRC" };
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "NRC" };
 			ColumnHeaderList.Add(columnHeader);
 
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "K for MH" };
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "K for MH" };
 			ColumnHeaderList.Add(columnHeader);
 
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Currency" };
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Currency" };
 			ColumnHeaderList.Add(columnHeader);
 
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());

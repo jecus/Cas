@@ -256,6 +256,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			comboBoxCondition.SelectedItem = purchaseRecordListView1.SelectedItem.CostCondition;
 			comboBoxMeasure.SelectedItem = purchaseRecordListView1.SelectedItem.Measure;
 			numericUpDownQuantity.Value = (decimal)purchaseRecordListView1.SelectedItem.Quantity;
+			numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.Offering;
+			comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyOffering;
 		}
 		#endregion
 
