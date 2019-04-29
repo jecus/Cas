@@ -31,16 +31,34 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Suppliers" };
 			ColumnHeaderList.Add(columnHeader);
 
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "CostNew" };
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Offering" };
 			ColumnHeaderList.Add(columnHeader);
 
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "CostOverhaul" };
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Routine" };
 			ColumnHeaderList.Add(columnHeader);
 
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "CostServiceable" };
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "K for MH" };
 			ColumnHeaderList.Add(columnHeader);
 
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "CostRepair" };
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "NDT" };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "K for MH" };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "AD" };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "K for MH" };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "NRC" };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "K for MH" };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Currency" };
 			ColumnHeaderList.Add(columnHeader);
 
 			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
@@ -57,16 +75,34 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			var subItem = new ListViewItem.ListViewSubItem { Text = item.Supplier.ToString(), Tag = item.Supplier };
 			subItems.Add(subItem);
 
-			subItem = new ListViewItem.ListViewSubItem { Text = item.CostNew.ToString(), Tag = item.CostNew };
+			subItem = new ListViewItem.ListViewSubItem { Text = item.Offering.ToString(), Tag = item.Offering };
 			subItems.Add(subItem);
 
-			subItem = new ListViewItem.ListViewSubItem { Text = item.CostOverhaul.ToString(), Tag = item.CostOverhaul };
+			subItem = new ListViewItem.ListViewSubItem { Text = item.Routine.ToString(), Tag = item.Routine };
 			subItems.Add(subItem);
 
-			subItem = new ListViewItem.ListViewSubItem { Text = item.CostServiceable.ToString(), Tag = item.CostServiceable };
+			subItem = new ListViewItem.ListViewSubItem { Text = item.RoutineKMH.ToString(), Tag = item.RoutineKMH };
 			subItems.Add(subItem);
 
-			subItem = new ListViewItem.ListViewSubItem { Text = item.CostRepair.ToString(), Tag = item.CostRepair };
+			subItem = new ListViewItem.ListViewSubItem { Text = item.NDT.ToString(), Tag = item.NDT };
+			subItems.Add(subItem);
+
+			subItem = new ListViewItem.ListViewSubItem { Text = item.NDTKMH.ToString(), Tag = item.NDTKMH };
+			subItems.Add(subItem);
+
+			subItem = new ListViewItem.ListViewSubItem { Text = item.AD.ToString(), Tag = item.AD };
+			subItems.Add(subItem);
+
+			subItem = new ListViewItem.ListViewSubItem { Text = item.ADKMH.ToString(), Tag = item.ADKMH };
+			subItems.Add(subItem);
+
+			subItem = new ListViewItem.ListViewSubItem { Text = item.NRC.ToString(), Tag = item.NRC };
+			subItems.Add(subItem);
+
+			subItem = new ListViewItem.ListViewSubItem { Text = item.NRCKMH.ToString(), Tag = item.NRCKMH };
+			subItems.Add(subItem);
+
+			subItem = new ListViewItem.ListViewSubItem { Text = item.СurrencyOffering.ToString(), Tag = item.СurrencyOffering };
 			subItems.Add(subItem);
 
 

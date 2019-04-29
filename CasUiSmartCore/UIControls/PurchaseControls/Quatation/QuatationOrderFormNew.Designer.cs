@@ -32,7 +32,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
         /// </summary>
         private void InitializeComponent()
         {
-	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.labelSearchSupplier = new MetroFramework.Controls.MetroLabel();
 			this.textBoxSearchStandart = new MetroFramework.Controls.MetroTextBox();
 			this.labelSearchPartNumber = new MetroFramework.Controls.MetroLabel();
@@ -194,7 +193,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.ButtonAdd.Icon = global::CAS.UI.Properties.Resources.AddIconSmall;
 			this.ButtonAdd.IconLayout = System.Windows.Forms.ImageLayout.Center;
 			this.ButtonAdd.IconNotEnabled = null;
-			this.ButtonAdd.Location = new System.Drawing.Point(594, 413);
+			this.ButtonAdd.Location = new System.Drawing.Point(761, 413);
 			this.ButtonAdd.Margin = new System.Windows.Forms.Padding(4);
 			this.ButtonAdd.Name = "ButtonAdd";
 			this.ButtonAdd.NormalBackgroundImage = null;
@@ -209,7 +208,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.ButtonAdd.TextSecondary = "";
 			this.ButtonAdd.ToolTipText = "";
 			this.ButtonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
-			this.ButtonAdd.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// ButtonDelete
 			// 
@@ -223,7 +221,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.ButtonDelete.Icon = global::CAS.UI.Properties.Resources.DeleteIconSmall;
 			this.ButtonDelete.IconLayout = System.Windows.Forms.ImageLayout.Center;
 			this.ButtonDelete.IconNotEnabled = null;
-			this.ButtonDelete.Location = new System.Drawing.Point(588, 754);
+			this.ButtonDelete.Location = new System.Drawing.Point(755, 754);
 			this.ButtonDelete.Margin = new System.Windows.Forms.Padding(4);
 			this.ButtonDelete.Name = "ButtonDelete";
 			this.ButtonDelete.NormalBackgroundImage = null;
@@ -238,7 +236,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.ButtonDelete.TextSecondary = "";
 			this.ButtonDelete.ToolTipText = "";
 			this.ButtonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
-			this.ButtonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
 			// groupBox1
 			// 
@@ -270,7 +267,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.groupBox1.Controls.Add(this.checkBoxNew);
 			this.groupBox1.Controls.Add(this.labelPriority);
 			this.groupBox1.Controls.Add(this.labelNotify);
-			this.groupBox1.Location = new System.Drawing.Point(717, 24);
+			this.groupBox1.Location = new System.Drawing.Point(886, 24);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(357, 398);
 			this.groupBox1.TabIndex = 290;
@@ -297,7 +294,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// 
 			this.metroTextBox1.CustomButton.Image = null;
-			this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(381, 2);
+			this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(214, 2);
 			this.metroTextBox1.CustomButton.Name = "";
 			this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(17, 17);
 			this.metroTextBox1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -452,7 +449,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// 
 			this.textBoxTotal.CustomButton.Image = null;
-			this.textBoxTotal.CustomButton.Location = new System.Drawing.Point(147, 2);
+			this.textBoxTotal.CustomButton.Location = new System.Drawing.Point(99, 2);
 			this.textBoxTotal.CustomButton.Name = "";
 			this.textBoxTotal.CustomButton.Size = new System.Drawing.Size(15, 15);
 			this.textBoxTotal.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -696,7 +693,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.groupBox2.Controls.Add(this.labelAuthor);
 			this.groupBox2.Controls.Add(this.textBoxTitle);
 			this.groupBox2.Controls.Add(this.labelQOTitle);
-			this.groupBox2.Location = new System.Drawing.Point(717, 434);
+			this.groupBox2.Location = new System.Drawing.Point(886, 434);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(357, 304);
 			this.groupBox2.TabIndex = 291;
@@ -709,7 +706,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// 
 			this.metroTextBoxNumber.CustomButton.Image = null;
-			this.metroTextBoxNumber.CustomButton.Location = new System.Drawing.Point(380, 2);
+			this.metroTextBoxNumber.CustomButton.Location = new System.Drawing.Point(214, 2);
 			this.metroTextBoxNumber.CustomButton.Name = "";
 			this.metroTextBoxNumber.CustomButton.Size = new System.Drawing.Size(17, 17);
 			this.metroTextBoxNumber.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -750,7 +747,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// 
 			this.textBoxClosingBy.CustomButton.Image = null;
-			this.textBoxClosingBy.CustomButton.Location = new System.Drawing.Point(381, 2);
+			this.textBoxClosingBy.CustomButton.Location = new System.Drawing.Point(214, 2);
 			this.textBoxClosingBy.CustomButton.Name = "";
 			this.textBoxClosingBy.CustomButton.Size = new System.Drawing.Size(17, 17);
 			this.textBoxClosingBy.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -782,7 +779,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// 
 			this.textBoxPublishedBy.CustomButton.Image = null;
-			this.textBoxPublishedBy.CustomButton.Location = new System.Drawing.Point(381, 2);
+			this.textBoxPublishedBy.CustomButton.Location = new System.Drawing.Point(214, 2);
 			this.textBoxPublishedBy.CustomButton.Name = "";
 			this.textBoxPublishedBy.CustomButton.Size = new System.Drawing.Size(17, 17);
 			this.textBoxPublishedBy.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -826,7 +823,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// 
 			this.textBoxRemarks.CustomButton.Image = null;
-			this.textBoxRemarks.CustomButton.Location = new System.Drawing.Point(381, 2);
+			this.textBoxRemarks.CustomButton.Location = new System.Drawing.Point(214, 2);
 			this.textBoxRemarks.CustomButton.Name = "";
 			this.textBoxRemarks.CustomButton.Size = new System.Drawing.Size(17, 17);
 			this.textBoxRemarks.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -955,7 +952,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// 
 			this.textBoxAuthor.CustomButton.Image = null;
-			this.textBoxAuthor.CustomButton.Location = new System.Drawing.Point(380, 2);
+			this.textBoxAuthor.CustomButton.Location = new System.Drawing.Point(214, 2);
 			this.textBoxAuthor.CustomButton.Name = "";
 			this.textBoxAuthor.CustomButton.Size = new System.Drawing.Size(17, 17);
 			this.textBoxAuthor.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -997,7 +994,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// 
 			this.textBoxTitle.CustomButton.Image = null;
-			this.textBoxTitle.CustomButton.Location = new System.Drawing.Point(380, 2);
+			this.textBoxTitle.CustomButton.Location = new System.Drawing.Point(214, 2);
 			this.textBoxTitle.CustomButton.Name = "";
 			this.textBoxTitle.CustomButton.Size = new System.Drawing.Size(17, 17);
 			this.textBoxTitle.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -1039,13 +1036,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(917, 746);
+			this.buttonOk.Location = new System.Drawing.Point(1088, 746);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 293;
 			this.buttonOk.Text = "OK";
 			this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
-			this.buttonOk.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// buttonCancel
 			// 
@@ -1054,7 +1050,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonCancel.Location = new System.Drawing.Point(998, 746);
+			this.buttonCancel.Location = new System.Drawing.Point(1169, 746);
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.Size = new System.Drawing.Size(75, 33);
 			this.buttonCancel.TabIndex = 292;
@@ -1071,7 +1067,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.listViewInitialItems.Name = "listViewInitialItems";
 			this.listViewInitialItems.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.listViewInitialItems.ShowGroups = true;
-			this.listViewInitialItems.Size = new System.Drawing.Size(687, 304);
+			this.listViewInitialItems.Size = new System.Drawing.Size(857, 304);
 			this.listViewInitialItems.TabIndex = 294;
 			this.listViewInitialItems.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.listViewInitialItems_SelectedItemsChanged);
 			// 
@@ -1085,14 +1081,14 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.listViewKits.Name = "listViewKits";
 			this.listViewKits.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.listViewKits.ShowGroups = true;
-			this.listViewKits.Size = new System.Drawing.Size(687, 315);
+			this.listViewKits.Size = new System.Drawing.Size(857, 315);
 			this.listViewKits.TabIndex = 68;
 			// 
 			// QuatationOrderFormNew
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1086, 792);
+			this.ClientSize = new System.Drawing.Size(1257, 792);
 			this.Controls.Add(this.listViewInitialItems);
 			this.Controls.Add(this.buttonOk);
 			this.Controls.Add(this.buttonCancel);

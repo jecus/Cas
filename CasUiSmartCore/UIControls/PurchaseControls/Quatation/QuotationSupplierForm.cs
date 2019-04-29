@@ -82,22 +82,31 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		{
 			if (supplierListView1.SelectedItem == null) return;
 
+			comboBoxOffering.SelectedItem = supplierListView1.SelectedItem.СurrencyOffering;
+			numericUpDownAD.Value = supplierListView1.SelectedItem.AD;
+			numericUpDownADKMH.Value = supplierListView1.SelectedItem.ADKMH;
+			numericUpDownNDT.Value = supplierListView1.SelectedItem.NDT;
+			numericUpDownNDTKMH.Value = supplierListView1.SelectedItem.NDTKMH;
+			numericUpDownNRC.Value = supplierListView1.SelectedItem.NRC;
+			numericUpDownNRCKMH.Value = supplierListView1.SelectedItem.NRCKMH;
+			numericUpDownOffering.Value = supplierListView1.SelectedItem.Offering;
+			numericUpDownRoutine.Value = supplierListView1.SelectedItem.Routine;
+			numericUpDownRoutineKMH.Value = supplierListView1.SelectedItem.RoutineKMH;
 
-
-		}
-
-		private void Button1_Click(object sender, System.EventArgs e)
-		{
-			if (supplierListView1.SelectedItem == null) return;
-
-			supplierListView1.SetItemsArray(_prices.ToArray());
-
-			Reset();
 		}
 
 		private void Reset()
 		{
 			comboBoxOffering.SelectedItem = Сurrency.UNK;
+			numericUpDownAD.Value = 0;
+			numericUpDownADKMH.Value = 0;
+			numericUpDownNDT.Value = 0;
+			numericUpDownNDTKMH.Value = 0;
+			numericUpDownNRC.Value = 0;
+			numericUpDownNRCKMH.Value = 0;
+			numericUpDownOffering.Value = 0;
+			numericUpDownRoutine.Value = 0;
+			numericUpDownRoutineKMH.Value = 0;
 		}
 
 		private void ButtonCancel_Click(object sender, System.EventArgs e)
@@ -137,6 +146,26 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		private void textBoxSearchPartNumber_TextChanged(object sender, System.EventArgs e)
 		{
 			supplierListView.SetItemsArray(_suppliers.Where(i => i.Name.ToLower().Contains(textBoxSearchName.Text.ToLower())).ToArray());
+		}
+
+		private void Button1_Click_1(object sender, System.EventArgs e)
+		{
+			if (supplierListView1.SelectedItem == null) return;
+
+			supplierListView1.SelectedItem.СurrencyOffering = (Сurrency) comboBoxOffering.SelectedItem;
+			supplierListView1.SelectedItem.AD = numericUpDownAD.Value;
+			supplierListView1.SelectedItem.ADKMH = numericUpDownADKMH.Value;
+			supplierListView1.SelectedItem.NDT = numericUpDownNDT.Value;
+			supplierListView1.SelectedItem.NDTKMH = numericUpDownNDTKMH.Value;
+			supplierListView1.SelectedItem.NRC = numericUpDownNRC.Value;
+			supplierListView1.SelectedItem.NRCKMH = numericUpDownNRCKMH.Value;
+			supplierListView1.SelectedItem.Offering = numericUpDownOffering.Value;
+			supplierListView1.SelectedItem.Routine = numericUpDownRoutine.Value;
+			supplierListView1.SelectedItem.RoutineKMH = numericUpDownRoutineKMH.Value;
+
+			supplierListView1.SetItemsArray(_prices.ToArray());
+
+			Reset();
 		}
 	}
 }

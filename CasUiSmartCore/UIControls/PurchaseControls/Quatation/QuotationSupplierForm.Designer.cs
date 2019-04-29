@@ -82,7 +82,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.supplierListView.Name = "supplierListView";
 			this.supplierListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.supplierListView.ShowGroups = true;
-			this.supplierListView.Size = new System.Drawing.Size(657, 237);
+			this.supplierListView.Size = new System.Drawing.Size(782, 237);
 			this.supplierListView.TabIndex = 69;
 			// 
 			// supplierListView1
@@ -95,7 +95,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.supplierListView1.Name = "supplierListView1";
 			this.supplierListView1.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.supplierListView1.ShowGroups = true;
-			this.supplierListView1.Size = new System.Drawing.Size(657, 246);
+			this.supplierListView1.Size = new System.Drawing.Size(782, 246);
 			this.supplierListView1.TabIndex = 70;
 			this.supplierListView1.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.SupplierListView1_SelectedItemsChanged);
 			// 
@@ -111,7 +111,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.ButtonAdd.Icon = global::CAS.UI.Properties.Resources.AddIconSmall;
 			this.ButtonAdd.IconLayout = System.Windows.Forms.ImageLayout.Center;
 			this.ButtonAdd.IconNotEnabled = null;
-			this.ButtonAdd.Location = new System.Drawing.Point(564, 330);
+			this.ButtonAdd.Location = new System.Drawing.Point(687, 330);
 			this.ButtonAdd.Margin = new System.Windows.Forms.Padding(4);
 			this.ButtonAdd.Name = "ButtonAdd";
 			this.ButtonAdd.NormalBackgroundImage = null;
@@ -139,7 +139,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.ButtonDelete.Icon = global::CAS.UI.Properties.Resources.DeleteIconSmall;
 			this.ButtonDelete.IconLayout = System.Windows.Forms.ImageLayout.Center;
 			this.ButtonDelete.IconNotEnabled = null;
-			this.ButtonDelete.Location = new System.Drawing.Point(558, 623);
+			this.ButtonDelete.Location = new System.Drawing.Point(681, 623);
 			this.ButtonDelete.Margin = new System.Windows.Forms.Padding(4);
 			this.ButtonDelete.Name = "ButtonDelete";
 			this.ButtonDelete.NormalBackgroundImage = null;
@@ -162,7 +162,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(813, 608);
+			this.buttonOk.Location = new System.Drawing.Point(941, 608);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 295;
@@ -176,7 +176,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonCancel.Location = new System.Drawing.Point(894, 608);
+			this.buttonCancel.Location = new System.Drawing.Point(1022, 608);
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.Size = new System.Drawing.Size(75, 33);
 			this.buttonCancel.TabIndex = 294;
@@ -246,7 +246,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.groupBox1.Controls.Add(this.button1);
 			this.groupBox1.Controls.Add(this.numericUpDownRoutine);
 			this.groupBox1.Controls.Add(this.labelRoutine);
-			this.groupBox1.Location = new System.Drawing.Point(687, 83);
+			this.groupBox1.Location = new System.Drawing.Point(811, 83);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(300, 257);
 			this.groupBox1.TabIndex = 299;
@@ -454,6 +454,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.button1.Size = new System.Drawing.Size(75, 33);
 			this.button1.TabIndex = 249;
 			this.button1.Text = "Apply";
+			this.button1.Click += new System.EventHandler(this.Button1_Click_1);
 			// 
 			// numericUpDownRoutine
 			// 
@@ -483,7 +484,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(992, 664);
+			this.ClientSize = new System.Drawing.Size(1120, 664);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.labelSearchName);
 			this.Controls.Add(this.textBoxSearchName);
