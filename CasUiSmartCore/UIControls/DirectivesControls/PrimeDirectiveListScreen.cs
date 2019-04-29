@@ -421,10 +421,10 @@ namespace CAS.UI.UIControls.DirectivesControls
             }
             if (_toolStripMenuItemsWorkPackages != null)
             {
-                foreach (ToolStripMenuItem item in _toolStripMenuItemsWorkPackages.DropDownItems)
-                {
+	            _toolStripMenuItemsWorkPackages.DropDownItems.Clear();
+
+				foreach (ToolStripMenuItem item in _toolStripMenuItemsWorkPackages.DropDownItems)
                     item.Click -= AddToWorkPackageItemClick;
-                }
 
                 _toolStripMenuItemsWorkPackages.DropDownItems.Clear();
 
