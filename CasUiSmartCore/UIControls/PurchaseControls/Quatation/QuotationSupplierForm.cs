@@ -56,8 +56,17 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 		public void UpdateControls()
 		{
-			comboBoxOffering.Items.Clear();
-			comboBoxOffering.Items.AddRange(Сurrency.Items.ToArray());
+			comboBoxCostNew.Items.Clear();
+			comboBoxCostNew.Items.AddRange(Сurrency.Items.ToArray());
+
+			comboBoxCostOH.Items.Clear();
+			comboBoxCostOH.Items.AddRange(Сurrency.Items.ToArray());
+
+			comboBoxCostRepair.Items.Clear();
+			comboBoxCostRepair.Items.AddRange(Сurrency.Items.ToArray());
+
+			comboBoxCostServ.Items.Clear();
+			comboBoxCostServ.Items.AddRange(Сurrency.Items.ToArray());
 		}
 
 		private void ButtonAdd_Click(object sender, System.EventArgs e)
@@ -82,31 +91,47 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		{
 			if (supplierListView1.SelectedItem == null) return;
 
-			comboBoxOffering.SelectedItem = supplierListView1.SelectedItem.СurrencyOffering;
-			numericUpDownAD.Value = supplierListView1.SelectedItem.AD;
-			numericUpDownADKMH.Value = supplierListView1.SelectedItem.ADKMH;
-			numericUpDownNDT.Value = supplierListView1.SelectedItem.NDT;
-			numericUpDownNDTKMH.Value = supplierListView1.SelectedItem.NDTKMH;
-			numericUpDownNRC.Value = supplierListView1.SelectedItem.NRC;
-			numericUpDownNRCKMH.Value = supplierListView1.SelectedItem.NRCKMH;
-			numericUpDownOffering.Value = supplierListView1.SelectedItem.Offering;
-			numericUpDownRoutine.Value = supplierListView1.SelectedItem.Routine;
-			numericUpDownRoutineKMH.Value = supplierListView1.SelectedItem.RoutineKMH;
+			numericUpDownCostNew.Value = supplierListView1.SelectedItem.CostNew;
+			numericUpDownCostOH.Value = supplierListView1.SelectedItem.CostOverhaul;
+			numericUpDownCostRepair.Value = supplierListView1.SelectedItem.CostRepair;
+			numericUpDownCostServ.Value = supplierListView1.SelectedItem.CostServiceable;
 
+			comboBoxCostNew.SelectedItem = supplierListView1.SelectedItem.СurrencyNew;
+			comboBoxCostOH.SelectedItem = supplierListView1.SelectedItem.СurrencyOH;
+			comboBoxCostRepair.SelectedItem = supplierListView1.SelectedItem.СurrencyRepair;
+			comboBoxCostServ.SelectedItem = supplierListView1.SelectedItem.СurrencyServ;
+
+		}
+
+		private void Button1_Click(object sender, System.EventArgs e)
+		{
+			if (supplierListView1.SelectedItem == null) return;
+
+			supplierListView1.SelectedItem.CostNew = numericUpDownCostNew.Value;
+			supplierListView1.SelectedItem.CostOverhaul = numericUpDownCostOH.Value;
+			supplierListView1.SelectedItem.CostRepair = numericUpDownCostRepair.Value;
+			supplierListView1.SelectedItem.CostServiceable = numericUpDownCostServ.Value;
+
+			supplierListView1.SelectedItem.СurrencyNew = (Сurrency) comboBoxCostNew.SelectedItem;
+			supplierListView1.SelectedItem.СurrencyOH = (Сurrency)comboBoxCostOH.SelectedItem;
+			supplierListView1.SelectedItem.СurrencyRepair = (Сurrency)comboBoxCostRepair.SelectedItem;
+			supplierListView1.SelectedItem.СurrencyServ = (Сurrency)comboBoxCostServ.SelectedItem;
+
+			supplierListView1.SetItemsArray(_prices.ToArray());
+
+			Reset();
 		}
 
 		private void Reset()
 		{
-			comboBoxOffering.SelectedItem = Сurrency.UNK;
-			numericUpDownAD.Value = 0;
-			numericUpDownADKMH.Value = 0;
-			numericUpDownNDT.Value = 0;
-			numericUpDownNDTKMH.Value = 0;
-			numericUpDownNRC.Value = 0;
-			numericUpDownNRCKMH.Value = 0;
-			numericUpDownOffering.Value = 0;
-			numericUpDownRoutine.Value = 0;
-			numericUpDownRoutineKMH.Value = 0;
+			numericUpDownCostNew.Value = 0;
+			numericUpDownCostOH.Value = 0;
+			numericUpDownCostRepair.Value = 0;
+			numericUpDownCostServ.Value = 0;
+			comboBoxCostNew.SelectedItem = Сurrency.UNK;
+			comboBoxCostOH.SelectedItem = Сurrency.UNK;
+			comboBoxCostRepair.SelectedItem = Сurrency.UNK;
+			comboBoxCostServ.SelectedItem = Сurrency.UNK;
 		}
 
 		private void ButtonCancel_Click(object sender, System.EventArgs e)
@@ -146,26 +171,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		private void textBoxSearchPartNumber_TextChanged(object sender, System.EventArgs e)
 		{
 			supplierListView.SetItemsArray(_suppliers.Where(i => i.Name.ToLower().Contains(textBoxSearchName.Text.ToLower())).ToArray());
-		}
-
-		private void Button1_Click_1(object sender, System.EventArgs e)
-		{
-			if (supplierListView1.SelectedItem == null) return;
-
-			supplierListView1.SelectedItem.СurrencyOffering = (Сurrency) comboBoxOffering.SelectedItem;
-			supplierListView1.SelectedItem.AD = numericUpDownAD.Value;
-			supplierListView1.SelectedItem.ADKMH = numericUpDownADKMH.Value;
-			supplierListView1.SelectedItem.NDT = numericUpDownNDT.Value;
-			supplierListView1.SelectedItem.NDTKMH = numericUpDownNDTKMH.Value;
-			supplierListView1.SelectedItem.NRC = numericUpDownNRC.Value;
-			supplierListView1.SelectedItem.NRCKMH = numericUpDownNRCKMH.Value;
-			supplierListView1.SelectedItem.Offering = numericUpDownOffering.Value;
-			supplierListView1.SelectedItem.Routine = numericUpDownRoutine.Value;
-			supplierListView1.SelectedItem.RoutineKMH = numericUpDownRoutineKMH.Value;
-
-			supplierListView1.SetItemsArray(_prices.ToArray());
-
-			Reset();
 		}
 	}
 }
