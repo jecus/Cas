@@ -93,10 +93,13 @@ namespace CAS.UI.UIControls.WorkPakage
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Perf. Date" };
             ColumnHeaderList.Add(columnHeader);
 
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "MH" };
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.06f), Text = "MH" };
             ColumnHeaderList.Add(columnHeader);
 
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Cost" };
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.06f), Text = "K*MH" };
+            ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.06f), Text = "Cost" };
             ColumnHeaderList.Add(columnHeader);
 
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
@@ -329,6 +332,7 @@ namespace CAS.UI.UIControls.WorkPakage
             {
                 NextPerformance np = (NextPerformance) item;
                 double manHours = np.Parent is IEngineeringDirective ? ((IEngineeringDirective)np.Parent).ManHours : 0;
+                double KmanHours = manHours*_currentWorkPackage.KMH;
                 double cost = np.Parent is IEngineeringDirective ? ((IEngineeringDirective)np.Parent).Cost : 0;
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = np.ATAChapter.ToString(), Tag = np.ATAChapter });
                 if (np.Parent is ComponentDirective)
@@ -374,6 +378,7 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = np.NDTString, Tag = np.NDTString });
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = np.PerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)np.PerformanceDate), Tag = np.PerformanceDate });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = manHours.ToString(), Tag = manHours });
+                subItems.Add(new ListViewItem.ListViewSubItem { Text = KmanHours.ToString("F"), Tag = KmanHours });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = cost.ToString(), Tag = cost });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 			}
@@ -383,6 +388,7 @@ namespace CAS.UI.UIControls.WorkPakage
                 AbstractPerformanceRecord apr = (AbstractPerformanceRecord)item;
                 author = GlobalObjects.CasEnvironment.GetCorrector(apr.CorrectorId);
 				double manHours = apr.Parent is IEngineeringDirective ? ((IEngineeringDirective)apr.Parent).ManHours : 0;
+				double KmanHours = manHours*_currentWorkPackage.KMH;
                 double cost = apr.Parent is IEngineeringDirective ? ((IEngineeringDirective)apr.Parent).Cost : 0;
                 Lifelength remains = Lifelength.Null;
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = apr.ATAChapter.ToString(), Tag = apr.ATAChapter });
@@ -396,6 +402,7 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = apr.NDTString, Tag = apr.NDTString });
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = SmartCore.Auxiliary.Convert.GetDateFormat(apr.RecordDate), Tag = apr.RecordDate });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = manHours.ToString(), Tag = manHours });
+                subItems.Add(new ListViewItem.ListViewSubItem { Text = KmanHours.ToString("F"), Tag = KmanHours });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = cost.ToString(), Tag = cost });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 			}
@@ -405,6 +412,7 @@ namespace CAS.UI.UIControls.WorkPakage
 
                 AtaChapter ata = directive.ATAChapter;
                 author = GlobalObjects.CasEnvironment.GetCorrector(directive.CorrectorId);
+                double KManHours = directive.ManHours * _currentWorkPackage.KMH;
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = ata.ToString(), Tag = ata });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = $"{directive.EngineeringOrders} {directive.Title}", Tag = directive.Title });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = directive.Description, Tag = directive.Description });
@@ -482,6 +490,7 @@ namespace CAS.UI.UIControls.WorkPakage
                 #region Определение текста для колонки "Человек/Часы"
 
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = directive.ManHours.ToString(), Tag = directive.ManHours });
+                subItems.Add(new ListViewItem.ListViewSubItem { Text = KManHours.ToString(), Tag = KManHours });
                 #endregion
 
                 #region Определение текста для колонки "Стоимость"
@@ -497,6 +506,7 @@ namespace CAS.UI.UIControls.WorkPakage
                 BaseComponent bd = (BaseComponent)item;
                 AtaChapter ata = bd.ATAChapter;
                 author = GlobalObjects.CasEnvironment.GetCorrector(bd.CorrectorId);
+                double KManHours = bd.ManHours * _currentWorkPackage.KMH;
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = ata.ToString(), Tag = ata });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = bd.PartNumber, Tag = bd.PartNumber });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = bd.Description, Tag = bd.Description });
@@ -508,6 +518,7 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = bd.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)bd.NextPerformanceDate), Tag = bd.NextPerformanceDate });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = bd.ManHours.ToString(), Tag = bd.ManHours });
+                subItems.Add(new ListViewItem.ListViewSubItem { Text = KManHours.ToString("F"), Tag = KManHours });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = bd.Cost.ToString(), Tag = bd.Cost });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 			}
@@ -516,6 +527,7 @@ namespace CAS.UI.UIControls.WorkPakage
                 Component d = (Component)item;
                 AtaChapter ata = d.ATAChapter;
                 author = GlobalObjects.CasEnvironment.GetCorrector(d.CorrectorId);
+                double KManHours = d.ManHours * _currentWorkPackage.KMH;
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = ata.ToString(), Tag = ata });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = d.PartNumber, Tag = d.PartNumber });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = d.Description, Tag = d.Description });
@@ -527,6 +539,7 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = d.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)d.NextPerformanceDate), Tag = d.NextPerformanceDate });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = d.ManHours.ToString(), Tag = d.ManHours });
+                subItems.Add(new ListViewItem.ListViewSubItem { Text = KManHours.ToString("F"), Tag = KManHours });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = d.Cost.ToString(), Tag = d.Cost });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 			}
@@ -535,6 +548,7 @@ namespace CAS.UI.UIControls.WorkPakage
                 ComponentDirective dd = (ComponentDirective)item;
                 AtaChapter ata = dd.ParentComponent.ATAChapter;
                 author = GlobalObjects.CasEnvironment.GetCorrector(dd.CorrectorId);
+                double KManHours = dd.ManHours * _currentWorkPackage.KMH;
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = ata != null ? ata.ToString() : "", Tag = ata });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = dd.Remarks, Tag = dd.Remarks });
@@ -569,6 +583,7 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = dd.NDTType.ShortName, Tag = dd.NDTType.ShortName });
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = dd.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)dd.NextPerformanceDate), Tag = dd.NextPerformanceDate });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = dd.ManHours.ToString(), Tag = dd.ManHours });
+                subItems.Add(new ListViewItem.ListViewSubItem { Text = KManHours.ToString("F"), Tag =KManHours });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = dd.Cost.ToString(), Tag = dd.Cost });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 			}
@@ -576,6 +591,7 @@ namespace CAS.UI.UIControls.WorkPakage
             {
                 MaintenanceCheck mc = (MaintenanceCheck)item;
                 author = GlobalObjects.CasEnvironment.GetCorrector(mc.CorrectorId);
+                double KManHours = mc.ManHours * _currentWorkPackage.KMH;
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = null });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = mc.Name + (mc.Schedule ? " Shedule" : " Unshedule"), Tag = mc.Name });
@@ -587,6 +603,7 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = mc.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)mc.NextPerformanceDate), Tag = mc.NextPerformanceDate });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = mc.ManHours.ToString(), Tag = mc.ManHours });
+                subItems.Add(new ListViewItem.ListViewSubItem { Text = KManHours.ToString("F"), Tag = KManHours });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = mc.Cost.ToString(), Tag = mc.Cost });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 			}
@@ -595,6 +612,7 @@ namespace CAS.UI.UIControls.WorkPakage
                 MaintenanceDirective md = (MaintenanceDirective)item;
                 AtaChapter ata = md.ATAChapter;
                 author = GlobalObjects.CasEnvironment.GetCorrector(md.CorrectorId);
+                double KManHours = md.ManHours * _currentWorkPackage.KMH;
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = ata != null ? ata.ToString() : "", Tag = ata });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = $"{md.TaskCardNumber} {md.TaskNumberCheck} {md.Description}", Tag = md.ToString() });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = md.Description, Tag = md.Description, });
@@ -641,6 +659,7 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = md.NDTType.ShortName, Tag = md.NDTType.ShortName });
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = md.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)md.NextPerformanceDate), Tag = md.NextPerformanceDate });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = md.ManHours.ToString(), Tag = md.ManHours });
+                subItems.Add(new ListViewItem.ListViewSubItem { Text = KManHours.ToString("F"), Tag = KManHours });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = md.Cost.ToString(), Tag = md.Cost });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 			}
@@ -649,6 +668,7 @@ namespace CAS.UI.UIControls.WorkPakage
                 NonRoutineJob job = (NonRoutineJob)item;
                 AtaChapter ata = job.ATAChapter;
                 author = GlobalObjects.CasEnvironment.GetCorrector(job.CorrectorId);
+                double KManHours = job.ManHours * _currentWorkPackage.KMH;
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = ata != null ? ata.ToString() : "", Tag = ata });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = job.Title, Tag = job.Title });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = job.Description, Tag = job.Description });
@@ -660,6 +680,7 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
 				subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = DateTimeExtend.GetCASMinDateTime() });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = job.ManHours.ToString(), Tag = job.ManHours });
+                subItems.Add(new ListViewItem.ListViewSubItem { Text = KManHours.ToString("F"), Tag = KManHours });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = job.Cost.ToString(), Tag = job.Cost });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 			}
