@@ -96,3 +96,12 @@ if not exists ( select  *
 	alter table dbo.WorkPackages
     add PerformAfter nvarchar(MAX) null 
 GO
+
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('dbo.WorkPackages')
+                    and c.name = 'ProviderJSON' ) 
+
+	alter table dbo.WorkPackages
+    add ProviderJSON nvarchar(MAX) null 
+GO

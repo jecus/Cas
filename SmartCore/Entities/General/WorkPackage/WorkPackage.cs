@@ -18,8 +18,10 @@ using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.Personnel;
 using SmartCore.Files;
 using SmartCore.Packages;
+using SmartCore.Purchase;
 using ComponentCollection = SmartCore.Entities.Collections.ComponentCollection;
 using Convert = System.Convert;
+using Currency =  SmartCore.Entities.Dictionaries.Ñurrency;
 
 namespace SmartCore.Entities.General.WorkPackage
 {
@@ -295,7 +297,6 @@ namespace SmartCore.Entities.General.WorkPackage
 			set => PerfAfter = JsonConvert.DeserializeObject<PerformAfter>(value ?? "", new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
 		}
 
-
 		public PerformAfter PerfAfter
 		{
 			get => _perfAfter ?? (_perfAfter = new PerformAfter());
@@ -315,11 +316,42 @@ namespace SmartCore.Entities.General.WorkPackage
 			set => _wpWorkType = value;
 		}
 
+
+		[TableColumn("ProviderJSON")]
+		public string ProviderJSON
+		{
+			get => JsonConvert.SerializeObject(ProviderPrice, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+			set => ProviderPrice = JsonConvert.DeserializeObject<List<ProviderPrice>>(value ?? "", new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+		}
+
+		private List<ProviderPrice> _providerPrice;
+		public List<ProviderPrice> ProviderPrice
+		{
+			get => _providerPrice ?? (_providerPrice = new List<ProviderPrice>());
+			set => _providerPrice = value;
+		}
+
+
+		#region public double KMH { get; set; }
+
 		[TableColumn("KMH")]
 		public double KMH { get; set; }
 
+		#endregion
+
+		#region public string KMHLW => KMH.ToString("##.##");
+
 		[ListViewData(85, "K for MH", 13)]
 		public string KMHLW => KMH.ToString("##.##");
+
+		#endregion
+
+		#region public string KMLW => (KMH * ManHours).ToString("##.##");
+
+		[ListViewData(85, "K * MH", 14)]
+		public string KMLW => (KMH * ManHours).ToString("##.##");
+
+		#endregion
 
 		#region public DateTime ClosingDate { get; set; }
 
@@ -1086,5 +1118,70 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#endregion
     }
+
+	[JsonObject]
+	public class ProviderPrice : BaseCoreObject
+	{
+		[JsonIgnore] public Supplier Supplier { get; set; }
+
+		[JsonIgnore] public WorkPackage Parent { get; set; }
+
+		[JsonIgnore]
+		[ListViewData(200, "Supplier", 1)]
+		public string SupplierName
+		{
+			get => Supplier?.Name ?? Supplier.Unknown.Name;
+		}
+
+		[JsonProperty] public int SupplierId { get; set; }
+
+		[ListViewData(80, "Offering", 2)]
+		[JsonProperty]
+		public decimal Offering { get; set; }
+
+		[ListViewData(80, "Routine", 4)]
+		[JsonProperty]
+		public decimal Routine { get; set; }
+
+		[ListViewData(80, "K for MH", 5)]
+		[JsonProperty]
+		public decimal RoutineKMH { get; set; }
+
+		[ListViewData(80, "NDT", 6)]
+		[JsonProperty]
+		public decimal NDT { get; set; }
+
+		[ListViewData(80, "K for MH", 7)]
+		[JsonProperty]
+		public decimal NDTKMH { get; set; }
+
+		[ListViewData(80, "AD", 8)]
+		[JsonProperty]
+		public decimal AD { get; set; }
+
+		[ListViewData(80, "K for MH", 9)]
+		[JsonProperty]
+		public decimal ADKMH { get; set; }
+
+		[ListViewData(80, "NRC", 10)]
+		[JsonProperty]
+		public decimal NRC { get; set; }
+
+		[ListViewData(80, "K for MH", 11)]
+		[JsonProperty]
+		public decimal NRCKMH { get; set; }
+
+		[DefaultValue(-1)]
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+		public int CurrencyOfferingId { get; set; }
+
+		[JsonIgnore]
+		[ListViewData(80, "Currency", 12)]
+		public Currency CurrencyOffering
+		{
+			get => Currency.GetItemById(CurrencyOfferingId);
+			set => CurrencyOfferingId = value.ItemId;
+		}
+	}
 
 }

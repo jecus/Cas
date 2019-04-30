@@ -86,6 +86,9 @@ namespace EFCore.DTO.General
 		public string PerformAfter { get; set; }
 
 		[DataMember]
+		public string ProviderJSON { get; set; }
+
+		[DataMember]
 		[Child(FilterType.Equal, "ParentTypeId", 2499)]
 		public ICollection<ItemFileLinkDTO> Files { get; set; }
 	}

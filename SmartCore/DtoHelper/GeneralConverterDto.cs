@@ -4975,6 +4975,7 @@ namespace SmartCore.DtoHelper
 				WpWorkType = workpack.WpWorkType.ItemId,
 				KMH = workpack.KMH,
 				PerformAfter = workpack.PerformAfter,
+				ProviderJSON = workpack.ProviderJSON,
 				Files = workpack.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>
 			};
 		}
@@ -5010,7 +5011,7 @@ namespace SmartCore.DtoHelper
 				ClosedBy = workpackdto.ClosedBy,
 				WpWorkType = WpWorkType.GetComponentTypeById(workpackdto.WpWorkType),
 				KMH = workpackdto.KMH,
-				PerformAfter = workpackdto.PerformAfter,
+				ProviderJSON = workpackdto.ProviderJSON,
 				EmployeesRemark = workpackdto.EmployeesRemark
 			};
 
