@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using CASTerms;
+using EFCore.DTO.General;
 using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.WorkPackage;
@@ -14,7 +16,7 @@ namespace CAS.UI.UIControls.WorkPakage
 	{
 		#region Fields
 
-		private readonly List<Supplier> _suppliers;
+		private readonly List<Supplier> _suppliers = new List<Supplier>();
 		private List<ProviderPrice> _prices = new List<ProviderPrice>();
 		private WorkPackage _selectedItem;
 
@@ -27,9 +29,8 @@ namespace CAS.UI.UIControls.WorkPakage
 			InitializeComponent();
 		}
 
-		public WpProviderForm(List<Supplier> suppliers, WorkPackage selectedItem) : this()
+		public WpProviderForm(WorkPackage selectedItem) : this()
 		{
-			_suppliers = suppliers;
 			_selectedItem = selectedItem;
 
 			foreach (var price in selectedItem.ProviderPrice)
@@ -38,12 +39,33 @@ namespace CAS.UI.UIControls.WorkPakage
 			_prices.AddRange(selectedItem.ProviderPrice);
 			if (_prices.Count > 0)
 				supplierListView1.SetItemsArray(_prices.ToArray());
-			supplierListView.SetItemsArray(suppliers.ToArray());
+			
 
-			UpdateControls();
+			Task.Run(() => DoWork())
+				.ContinueWith(task => Completed(), TaskScheduler.FromCurrentSynchronizationContext());
+
+			
 		}
 
 		#endregion
+
+		private void Completed()
+		{
+			supplierListView.SetItemsArray(_suppliers.ToArray());
+			UpdateControls();
+		}
+
+		private void DoWork()
+		{
+			_suppliers.Clear();
+			_suppliers.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<SupplierDTO, Supplier>(loadChild: true));
+
+			foreach (var providerPrice in _prices)
+			{
+				providerPrice.Supplier = _suppliers.FirstOrDefault(i => i.ItemId == providerPrice.SupplierId);
+				providerPrice.Parent = _selectedItem;
+			}
+		}
 
 		public void UpdateControls()
 		{

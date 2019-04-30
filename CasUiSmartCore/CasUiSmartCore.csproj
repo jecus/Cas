@@ -3719,6 +3719,12 @@
     <Compile Include="UIControls\WorkPakage\SelectWPPrintTasksForm.Designer.cs">
       <DependentUpon>SelectWPPrintTasksForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\WorkPakage\ProviderPriceListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\WorkPakage\ProviderPriceListView.Designer.cs">
+      <DependentUpon>ProviderPriceListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\WorkPakage\WorkPackageClosingDataGridViewRow.cs" />
     <Compile Include="UIControls\WorkPakage\WorkPackageEditorForm.cs">
       <SubType>Form</SubType>
@@ -3785,6 +3791,12 @@
     </Compile>
     <Compile Include="UIControls\WorkPakage\AirFleetWorkPackageListView.Designer.cs">
       <DependentUpon>AirFleetWorkPackageListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\WorkPakage\WpProviderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\WorkPakage\WpProviderForm.Designer.cs">
+      <DependentUpon>WpProviderForm.cs</DependentUpon>
     </Compile>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
     <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />

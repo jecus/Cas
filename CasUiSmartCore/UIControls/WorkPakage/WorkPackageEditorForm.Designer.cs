@@ -49,6 +49,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			MetroFramework.Controls.MetroLabel label18;
 			MetroFramework.Controls.MetroLabel labelWorkType;
 			MetroFramework.Controls.MetroLabel metroLabel1;
+			MetroFramework.Controls.MetroLabel metroLabel2;
 			this.textBoxWpNumber = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxDescription = new MetroFramework.Controls.MetroTextBox();
 			this.dateTimePickerIssueCreateDate = new System.Windows.Forms.DateTimePicker();
@@ -88,6 +89,8 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.label21 = new System.Windows.Forms.Label();
 			this.label22 = new System.Windows.Forms.Label();
 			this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+			this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
+			this.linkLabelEditComponents = new System.Windows.Forms.LinkLabel();
 			labelNumber = new MetroFramework.Controls.MetroLabel();
 			label1 = new MetroFramework.Controls.MetroLabel();
 			labelValidFrom = new MetroFramework.Controls.MetroLabel();
@@ -107,6 +110,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			label18 = new MetroFramework.Controls.MetroLabel();
 			labelWorkType = new MetroFramework.Controls.MetroLabel();
 			metroLabel1 = new MetroFramework.Controls.MetroLabel();
+			metroLabel2 = new MetroFramework.Controls.MetroLabel();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
 			this.SuspendLayout();
@@ -315,7 +319,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			metroLabel1.Location = new System.Drawing.Point(23, 515);
 			metroLabel1.Name = "metroLabel1";
-			metroLabel1.Size = new System.Drawing.Size(46, 19);
+			metroLabel1.Size = new System.Drawing.Size(65, 19);
 			metroLabel1.TabIndex = 255;
 			metroLabel1.Text = "K for MH:";
 			metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -962,11 +966,70 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.numericUpDown1.Size = new System.Drawing.Size(251, 20);
 			this.numericUpDown1.TabIndex = 256;
 			// 
+			// metroTextBox1
+			// 
+			// 
+			// 
+			// 
+			this.metroTextBox1.CustomButton.Image = null;
+			this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(174, 2);
+			this.metroTextBox1.CustomButton.Name = "";
+			this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.metroTextBox1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.metroTextBox1.CustomButton.TabIndex = 1;
+			this.metroTextBox1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.metroTextBox1.CustomButton.UseSelectable = true;
+			this.metroTextBox1.CustomButton.Visible = false;
+			this.metroTextBox1.ForeColor = System.Drawing.Color.DimGray;
+			this.metroTextBox1.Lines = new string[0];
+			this.metroTextBox1.Location = new System.Drawing.Point(180, 541);
+			this.metroTextBox1.MaxLength = 32767;
+			this.metroTextBox1.Name = "metroTextBox1";
+			this.metroTextBox1.PasswordChar = '\0';
+			this.metroTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.metroTextBox1.SelectedText = "";
+			this.metroTextBox1.SelectionLength = 0;
+			this.metroTextBox1.SelectionStart = 0;
+			this.metroTextBox1.ShortcutsEnabled = true;
+			this.metroTextBox1.Size = new System.Drawing.Size(208, 20);
+			this.metroTextBox1.TabIndex = 258;
+			this.metroTextBox1.UseSelectable = true;
+			this.metroTextBox1.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.metroTextBox1.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+			// 
+			// metroLabel2
+			// 
+			metroLabel2.AutoSize = true;
+			metroLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			metroLabel2.Location = new System.Drawing.Point(23, 541);
+			metroLabel2.Name = "metroLabel2";
+			metroLabel2.Size = new System.Drawing.Size(67, 19);
+			metroLabel2.TabIndex = 257;
+			metroLabel2.Text = "Providers:";
+			metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// linkLabelEditComponents
+			// 
+			this.linkLabelEditComponents.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.linkLabelEditComponents.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.linkLabelEditComponents.Location = new System.Drawing.Point(393, 539);
+			this.linkLabelEditComponents.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.linkLabelEditComponents.Name = "linkLabelEditComponents";
+			this.linkLabelEditComponents.Size = new System.Drawing.Size(37, 23);
+			this.linkLabelEditComponents.TabIndex = 259;
+			this.linkLabelEditComponents.TabStop = true;
+			this.linkLabelEditComponents.Text = "Edit";
+			this.linkLabelEditComponents.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.linkLabelEditComponents.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelEditComponents_LinkClicked);
+			// 
 			// WorkPackageEditorForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(866, 687);
+			this.Controls.Add(this.linkLabelEditComponents);
+			this.Controls.Add(this.metroTextBox1);
+			this.Controls.Add(metroLabel2);
 			this.Controls.Add(this.numericUpDown1);
 			this.Controls.Add(metroLabel1);
 			this.Controls.Add(this.groupBox1);
@@ -1073,5 +1136,7 @@ namespace CAS.UI.UIControls.WorkPakage
 		private System.Windows.Forms.Label label21;
 		private System.Windows.Forms.Label label22;
 		private System.Windows.Forms.NumericUpDown numericUpDown1;
+		private MetroTextBox metroTextBox1;
+		private System.Windows.Forms.LinkLabel linkLabelEditComponents;
 	}
 }

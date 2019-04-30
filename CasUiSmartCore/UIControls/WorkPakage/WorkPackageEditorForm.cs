@@ -38,6 +38,7 @@ namespace CAS.UI.UIControls.WorkPakage
 
 		private void UpdateInformation()
 		{
+			metroTextBox1.Text = $"{_currentWp.ProviderPrice.Count} Count";
 			textBoxWpNumber.Text = _currentWp.Number;
 			textBoxDescription.Text = _currentWp.Description;
 			dateTimePickerIssueCreateDate.Value = _currentWp.CreateDate;
@@ -172,5 +173,12 @@ namespace CAS.UI.UIControls.WorkPakage
 		}
 
 		#endregion
+
+		private void LinkLabelEditComponents_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			var form = new WpProviderForm(_currentWp);
+			if (form.ShowDialog() == DialogResult.OK)
+				metroTextBox1.Text = $"{_currentWp.ProviderPrice.Count} Count";
+		}
 	}
 }

@@ -156,7 +156,7 @@ namespace SmartCore.Entities.General.WorkPackage
         /// <summary>
         /// 
         /// </summary>
-        [ListViewData(0.08f, "Persent", 17)]
+        [ListViewData(0.08f, "Persent", 18)]
         public double Persent { get; set; }
         #endregion
 
@@ -394,7 +394,7 @@ namespace SmartCore.Entities.General.WorkPackage
         /// <summary>
         /// Для закрытого рабочего пакета, возвращает временной интервал, затраченный на исполнение задач в виде строки
         /// </summary>
-        [ListViewData(100, "Work time", 14)]
+        [ListViewData(100, "Work time", 15)]
         public String WorkTimeString
         {
             get
@@ -515,7 +515,7 @@ namespace SmartCore.Entities.General.WorkPackage
         /// </summary>
         [TableColumn("Station")]
         [FormControl("Station:")]
-        [ListViewData(0.08f, "Station", 15)]
+        [ListViewData(0.08f, "Station", 16)]
         [FilterAttribute("Station", Order = 4)]
         public String Station { get; set; }
         #endregion
@@ -532,7 +532,7 @@ namespace SmartCore.Entities.General.WorkPackage
         /// 
         /// </summary>
         [TableColumn("MaintenanceReportNo")]
-        [ListViewData(0.05f, "MRO", 16)]
+        [ListViewData(0.05f, "MRO", 17)]
         [FormControl("MRO:")]
         [FilterAttribute("MRO", Order = 10)]
         public String MaintenanceRepairOrzanization { get; set; }
