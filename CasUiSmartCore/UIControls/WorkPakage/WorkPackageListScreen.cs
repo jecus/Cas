@@ -236,7 +236,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			// _toolStripMenuItemEditProvider
 			// 
-			_toolStripMenuItemEditProvider.Text = "Edit Provider";
+			_toolStripMenuItemEditProvider.Text = "Overview Providers";
 			_toolStripMenuItemEditProvider.Click += ToolStripMenuItemEditProviderClick;
 			// 
 			// toolStripMenuItemView

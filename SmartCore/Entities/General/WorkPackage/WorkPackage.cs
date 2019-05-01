@@ -304,7 +304,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		}
 
 		[ListViewData(0.1f, "Perform Date", 9)]
-		public DateTime PerformDate => PerfAfter.PerformDate;
+		public string PerformDate => PerfAfter.PerformDate != DateTimeExtend.GetCASMinDateTime() ?  SmartCore.Auxiliary.Convert.GetDateFormat(PerfAfter.PerformDate) : "";
 
 		[ListViewData(0.1f, "Perform After", 8)]
 		public string PerformAfterLW => PerfAfter.ToString();
