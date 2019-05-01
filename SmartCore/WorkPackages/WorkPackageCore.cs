@@ -741,6 +741,9 @@ namespace SmartCore.WorkPackages
 						if (directive.PhaseRepeat != null && !directive.PhaseRepeat.IsNullOrZero())
 							nextPerformance.PerformanceSource.Days += directive.PhaseRepeat.Days;
 						else nextPerformance.PerformanceSource.Days += directive.PhaseThresh.Days;
+
+						if (directive.LastPerformance == null)
+							break;
 					}
 
 
