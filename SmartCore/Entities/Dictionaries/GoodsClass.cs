@@ -278,46 +278,6 @@ namespace SmartCore.Entities.Dictionaries
 		public static GoodsClass FLM = new GoodsClass(23, "FLM", "Auxiliary Materials Maintenance FLM", "Auxiliary Materials Maintenance FLM", MaintenanceMaterials);
 		#endregion
 
-		#region Элементы пункта MaintenanceMaterials
-
-		#region public static GoodsClass AntiIcingAndDeIcing = new GoodsClass(70, "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", MaintenanceMaterials);
-
-		public static GoodsClass AntiIcingAndDeIcing = new GoodsClass(70, "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", MaintenanceMaterials);
-
-		#endregion
-
-		#region public static GoodsClass BacterialogicalProtection = new GoodsClass(71, "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", MaintenanceMaterials);
-
-		public static GoodsClass BacterialogicalProtection = new GoodsClass(71, "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", MaintenanceMaterials);
-
-		#endregion
-
-		#region public static GoodsClass Materials = new GoodsClass(72, "Materials", "Materials", "Materials", MaintenanceMaterials);
-
-		public static GoodsClass Materials = new GoodsClass(72, "Materials", "Materials", "Materials", MaintenanceMaterials);
-
-		#endregion
-
-		#region public static GoodsClass FinishingMaterials = new GoodsClass(73, "Finishing Materials", "Finishing Materials", "Finishing Materials", MaintenanceMaterials);
-
-		public static GoodsClass FinishingMaterials = new GoodsClass(73, "Finishing Materials", "Finishing Materials", "Finishing Materials", MaintenanceMaterials);
-
-		#endregion
-
-		#region public static GoodsClass MiscellaneousMaterials = new GoodsClass(74, "Miscellaneous Materials", "Miscellaneous Materials", "Miscellaneous Materials", MaintenanceMaterials);
-
-		public static GoodsClass MiscellaneousMaterials = new GoodsClass(74, "Miscellaneous Materials", "Miscellaneous Materials", "Miscellaneous Materials", MaintenanceMaterials);
-
-		#endregion
-
-		#region public static GoodsClass SpecialMaterials = new GoodsClass(75, "Special Materials", "Special Materials", "Special Materials", MaintenanceMaterials);
-
-		public static GoodsClass SpecialMaterials = new GoodsClass(75, "Special Materials", "Special Materials", "Special Materials", MaintenanceMaterials);
-
-		#endregion
-
-		#endregion
-
 		#region Элементы пункта FLM
 
 		#region public static GoodsClass Fuel = new GoodsClass(24, "Fuel", "Auxiliary Materials Maintenance FLM Fuel", "Auxiliary Materials Maintenance FLM Fuel", FLM);
@@ -480,6 +440,46 @@ namespace SmartCore.Entities.Dictionaries
 		public static GoodsClass EngineAccessories = new GoodsClass(57, "Engine accessories", "Auxiliary Materials Engine Accessories", "Auxiliary Materials Engine Accessories", AccessoriesMaterial);
 		public static GoodsClass LandingGearAccessories = new GoodsClass(58, "Landing gear accessories", "Auxiliary Materials Landing Gear Accessories", "Auxiliary Materials Landing Gear Accessories", AccessoriesMaterial);
 		public static GoodsClass PropellerAccessories = new GoodsClass(59, "Propeller accessories", "Auxiliary Materials Propeller Accessories", "Auxiliary Materials Propeller Accessories", AccessoriesMaterial);
+
+		#endregion
+
+		#region Элементы пункта MaintenanceMaterials
+
+		#region public static GoodsClass AntiIcingAndDeIcing = new GoodsClass(70, "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", MaintenanceMaterials);
+
+		public static GoodsClass AntiIcingAndDeIcing = new GoodsClass(70, "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", MaintenanceMaterials);
+
+		#endregion
+
+		#region public static GoodsClass BacterialogicalProtection = new GoodsClass(71, "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", MaintenanceMaterials);
+
+		public static GoodsClass BacterialogicalProtection = new GoodsClass(71, "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", MaintenanceMaterials);
+
+		#endregion
+
+		#region public static GoodsClass Materials = new GoodsClass(72, "Materials", "Materials", "Materials", MaintenanceMaterials);
+
+		public static GoodsClass Materials = new GoodsClass(72, "Materials", "Materials", "Materials", MaintenanceMaterials);
+
+		#endregion
+
+		#region public static GoodsClass FinishingMaterials = new GoodsClass(73, "Finishing Materials", "Finishing Materials", "Finishing Materials", MaintenanceMaterials);
+
+		public static GoodsClass FinishingMaterials = new GoodsClass(73, "Finishing Materials", "Finishing Materials", "Finishing Materials", MaintenanceMaterials);
+
+		#endregion
+
+		#region public static GoodsClass MiscellaneousMaterials = new GoodsClass(74, "Miscellaneous Materials", "Miscellaneous Materials", "Miscellaneous Materials", MaintenanceMaterials);
+
+		public static GoodsClass MiscellaneousMaterials = new GoodsClass(74, "Miscellaneous Materials", "Miscellaneous Materials", "Miscellaneous Materials", MaintenanceMaterials);
+
+		#endregion
+
+		#region public static GoodsClass SpecialMaterials = new GoodsClass(75, "Special Materials", "Special Materials", "Special Materials", MaintenanceMaterials);
+
+		public static GoodsClass SpecialMaterials = new GoodsClass(75, "Special Materials", "Special Materials", "Special Materials", MaintenanceMaterials);
+
+		#endregion
 
 		#endregion
 
