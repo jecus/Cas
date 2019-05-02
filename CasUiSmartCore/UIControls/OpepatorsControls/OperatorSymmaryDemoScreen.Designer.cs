@@ -58,6 +58,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.LinkPersonnel = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkGeneral = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkOccurences = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+			this.LinkEvent = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkSystem = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkComponents = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkEngines = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -729,6 +730,30 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.LinkGeneral.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkGeneral.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			// 
+			// LinkEvent
+			// 
+			this.LinkEvent.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkEvent.Displayer = null;
+			this.LinkEvent.DisplayerText = null;
+			this.LinkEvent.Entity = null;
+			this.LinkEvent.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.LinkEvent.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkEvent.ImageBackColor = System.Drawing.Color.Transparent;
+			this.LinkEvent.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.LinkEvent.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkEvent.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.LinkEvent.Location = new System.Drawing.Point(10, 0);
+			this.LinkEvent.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.LinkEvent.Name = "LinkEvent";
+			this.LinkEvent.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.LinkEvent.Size = new System.Drawing.Size(280, 20);
+			this.LinkEvent.Status = AvControls.Statuses.Satisfactory;
+			this.LinkEvent.TabIndex = 6;
+			this.LinkEvent.Text = "Event";
+			this.LinkEvent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.LinkEvent.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.LinkEvent.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkEventDisplayerRequested);
+			// 
 			// LinkOccurences
 			// 
 			this.LinkOccurences.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
@@ -846,6 +871,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.LinkDefects.Text = "Defects";
 			this.LinkDefects.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkDefects.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.LinkDefects.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkDefectDisplayerRequested);
 			//
 			// LinkDefferedDefects
 			// 
@@ -907,15 +933,14 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this._reliabilityReferenceContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this._reliabilityReferenceContainer.Name = "_reliabilityReferenceContainer";
 			this._reliabilityReferenceContainer.ReferenceLink = LinkGeneral;
-			this._reliabilityReferenceContainer.ReferenceLink02 = LinkOccurences;
-			this._reliabilityReferenceContainer.ReferenceLink03 = LinkSystem;
-			this._reliabilityReferenceContainer.ReferenceLink04 = LinkComponents;
-			this._reliabilityReferenceContainer.ReferenceLink05 = LinkEngines;
-			this._reliabilityReferenceContainer.ReferenceLink06 = LinkDefects;
-			this._reliabilityReferenceContainer.ReferenceLink06 = LinkDefferedDefects;
-			this._reliabilityReferenceContainer.ReferenceLink07 = LinkReportBuilder;
-			this._reliabilityReferenceContainer.ReferenceLink08 = null;
-			this._reliabilityReferenceContainer.ReferenceLink09 = null;
+			this._reliabilityReferenceContainer.ReferenceLink02 = LinkEvent;
+			this._reliabilityReferenceContainer.ReferenceLink03 = LinkOccurences;
+			this._reliabilityReferenceContainer.ReferenceLink04 = LinkSystem;
+			this._reliabilityReferenceContainer.ReferenceLink05 = LinkComponents;
+			this._reliabilityReferenceContainer.ReferenceLink06 = LinkEngines;
+			this._reliabilityReferenceContainer.ReferenceLink07 = LinkDefects;
+			this._reliabilityReferenceContainer.ReferenceLink08 = LinkDefferedDefects;
+			this._reliabilityReferenceContainer.ReferenceLink09 = LinkReportBuilder;
 			this._reliabilityReferenceContainer.ReferenceLink10 = null;
 			this._reliabilityReferenceContainer.ReferenceLink11 = null;
 			this._reliabilityReferenceContainer.ReferenceLink12 = null;
@@ -2432,6 +2457,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkGeneral;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkOccurences;
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkEvent;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkSystem;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkComponents;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkEngines;

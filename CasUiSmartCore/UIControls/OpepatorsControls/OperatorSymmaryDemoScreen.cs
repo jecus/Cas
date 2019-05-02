@@ -521,6 +521,26 @@ namespace CAS.UI.UIControls.OpepatorsControls
 
 		#endregion
 
+		#region  private void LinkEventDisplayerRequested(object sender, ReferenceEventArgs e)
+
+		private void LinkEventDisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			e.DisplayerText = "Event";
+			e.RequestedEntity = new EventListScreen(GlobalObjects.CasEnvironment.Operators[0]);
+		}
+
+		#endregion
+
+		#region  private void LinkDefectDisplayerRequested(object sender, ReferenceEventArgs e)
+
+		private void LinkDefectDisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			e.DisplayerText = "Defects";
+			e.RequestedEntity = new EventListScreen(GlobalObjects.CasEnvironment.Operators[0]);
+		}
+
+		#endregion
+
 		#region private void LinkSystemDisplayerRequested(object sender, ReferenceEventArgs e)
 
 		private void LinkSystemDisplayerRequested(object sender, ReferenceEventArgs e)

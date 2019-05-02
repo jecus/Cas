@@ -13,11 +13,9 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 
-		public static DeffeсtCategory CAT1 = new DeffeсtCategory(1, "CAT1", "CAT1");
-		public static DeffeсtCategory CAT2 = new DeffeсtCategory(2, "CAT2", "CAT2");
-		public static DeffeсtCategory CAT3 = new DeffeсtCategory(3, "CAT3", "CAT3");
-		public static DeffeсtCategory CAT4 = new DeffeсtCategory(4, "CAT4", "CAT4");
-
+		public static DeffeсtCategory CAT1 = new DeffeсtCategory(1, "Recurrent", "Recurrent");
+		public static DeffeсtCategory CAT2 = new DeffeсtCategory(2, "Repeated", "Repeated");
+		
 		#region public static DeffeсtCategory UNK = new DeffeсtCategory(-1, "N/A", "Not applicable");
 		/// <summary>
 		/// неизвестный

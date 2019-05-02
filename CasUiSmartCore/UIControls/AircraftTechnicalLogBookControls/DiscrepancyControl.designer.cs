@@ -1108,10 +1108,10 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			// 
 			this.comboBoxEngine.Enabled = false;
 			this.comboBoxEngine.FormattingEnabled = true;
-			this.comboBoxEngine.Location = new System.Drawing.Point(508, 100);
+			this.comboBoxEngine.Location = new System.Drawing.Point(523, 100);
 			this.comboBoxEngine.Margin = new System.Windows.Forms.Padding(3, 2, 3, 3);
 			this.comboBoxEngine.Name = "comboBoxEngine";
-			this.comboBoxEngine.Size = new System.Drawing.Size(175, 21);
+			this.comboBoxEngine.Size = new System.Drawing.Size(160, 21);
 			this.comboBoxEngine.TabIndex = 245;
 			this.comboBoxEngine.Visible = false;
 			// 
@@ -1120,16 +1120,16 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.labelEngine.AutoSize = true;
 			this.labelEngine.Location = new System.Drawing.Point(399, 103);
 			this.labelEngine.Name = "labelEngine";
-			this.labelEngine.Size = new System.Drawing.Size(82, 13);
+			this.labelEngine.Size = new System.Drawing.Size(96, 13);
 			this.labelEngine.TabIndex = 244;
-			this.labelEngine.Text = "Engine Shut Up";
+			this.labelEngine.Text = "Engine Shut Down";
 			this.labelEngine.Visible = false;
 			// 
 			// checkBoxEngine
 			// 
 			this.checkBoxEngine.AutoSize = true;
 			this.checkBoxEngine.Enabled = false;
-			this.checkBoxEngine.Location = new System.Drawing.Point(487, 103);
+			this.checkBoxEngine.Location = new System.Drawing.Point(501, 103);
 			this.checkBoxEngine.Name = "checkBoxEngine";
 			this.checkBoxEngine.Size = new System.Drawing.Size(15, 14);
 			this.checkBoxEngine.TabIndex = 243;

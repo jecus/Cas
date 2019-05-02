@@ -66,7 +66,10 @@ namespace CAS.UI.UIControls.Discrepancies
 			columnHeader = new ColumnHeader { Width = 80, Text = "ATLB №" };
 	        ColumnHeaderList.Add(columnHeader);
 
-	        columnHeader = new ColumnHeader { Width = 80, Text = "Status" };
+	        columnHeader = new ColumnHeader { Width = 80, Text = "Block №" };
+	        ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = 80, Text = "Status" };
 	        ColumnHeaderList.Add(columnHeader);
 
 			columnHeader = new ColumnHeader { Width = 80, Text = "Page №" };
@@ -234,7 +237,8 @@ namespace CAS.UI.UIControls.Discrepancies
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Aircraft.ToString(), Tag = item.Aircraft });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Model.ShortName, Tag = item.Model });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ParentFlight?.ParentATLB?.ATLBNo, Tag = item.ParentFlight?.ParentATLB?.ATLBNo });
-	        subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Status.ToString(), Tag = item.Status });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Num.ToString(), Tag = item.Num });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Status.ToString(), Tag = item.Status });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ParentFlight?.PageNo, Tag = item.ParentFlight?.PageNo });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ATAChapter != null ? item.ATAChapter.ToString() : "", Tag = item.ATAChapter != null ? item.ATAChapter.ToString() : "" });
