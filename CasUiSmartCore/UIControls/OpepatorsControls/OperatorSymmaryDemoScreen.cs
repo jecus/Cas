@@ -536,7 +536,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 		private void LinkDefectDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
 			e.DisplayerText = "Defects";
-			e.RequestedEntity = new EventListScreen(GlobalObjects.CasEnvironment.Operators[0]);
+			e.RequestedEntity = new DefectListScreen(GlobalObjects.CasEnvironment.Operators[0]);
 		}
 
 		#endregion

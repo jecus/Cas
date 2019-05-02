@@ -7,10 +7,12 @@ using System.Windows.Forms;
 using AvControls;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.Discrepancies;
 using CAS.UI.UIControls.FiltersControls;
 using CASReports.Builders;
 using CASTerms;
 using SmartCore.Auxiliary;
+using SmartCore.Discrepancies;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -18,7 +20,7 @@ using SmartCore.Entities.General.Atlbs;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Filters;
 
-namespace CAS.UI.UIControls.Discrepancies
+namespace CAS.UI.UIControls.Reliability
 {
     ///<summary>
     ///</summary>
@@ -153,11 +155,11 @@ namespace CAS.UI.UIControls.Discrepancies
 
 	        if (_firstLoad)
 	        {
-		        _initialDirectiveArray.AddRange(GlobalObjects.DiscrepanciesCore.GetDiscrepancies().ToArray());
+		        _initialDirectiveArray.AddRange(GlobalObjects.DiscrepanciesCore.GetDiscrepancies(null, DiscFilterType.Defect).ToArray());
 	        }
 	        else
 	        {
-				var discrip = GlobalObjects.DiscrepanciesCore.GetDiscrepancies().ToArray();
+				var discrip = GlobalObjects.DiscrepanciesCore.GetDiscrepancies(null, DiscFilterType.Defect).ToArray();
 		        _initialDirectiveArray.AddRange(discrip.Where(t => t.ParentFlightDate >= dateTimePickerDateFrom.Value &&
 		                                                           t.ParentFlightDate <= dateTimePickerDateTo.Value));
 			}

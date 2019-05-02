@@ -6,6 +6,6 @@ namespace SmartCore.Discrepancies
 {
 	public interface IDiscrepanciesCore
 	{
-		List<Discrepancy> GetDiscrepancies(Aircraft aircraft = null);
+		List<Discrepancy> GetDiscrepancies(Aircraft aircraft = null, DiscFilterType filterType = DiscFilterType.All);
 	}
 }

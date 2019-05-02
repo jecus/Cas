@@ -134,7 +134,12 @@ namespace SmartCore.Entities.General.Atlbs
 		[TableColumn("IsReliability")]
 	    public bool IsReliability { get; set; }
 
-	    #endregion
+	    public static PropertyInfo IsReliabilityProperty
+		{
+		    get { return GetCurrentType().GetProperty("IsReliability"); }
+	    }
+
+		#endregion
 
 		#region public ATAChapter ATAChapter
 		/// <summary>
@@ -190,7 +195,12 @@ namespace SmartCore.Entities.General.Atlbs
 	    [TableColumn("IsOccurrence")]
 	    public bool IsOccurrence { get; set; }
 
-	    [TableColumn("Substruction")]
+	    public static PropertyInfo IsOccurrenceProperty
+		{
+		    get { return GetCurrentType().GetProperty("IsOccurrence"); }
+	    }
+
+		[TableColumn("Substruction")]
 	    public bool Substruction { get; set; }
 
 	    [TableColumn("EngineShutUp")]

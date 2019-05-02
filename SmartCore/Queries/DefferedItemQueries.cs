@@ -133,7 +133,7 @@ namespace SmartCore.Queries
                                                                         and DR.ParentTypeId = {0} 
                                                                         and DR.RecordDate >= '{1}'
                                                                         Order by DR.RecordDate desc))",
-                          SmartCoreType.Directive.ItemId, DbTypes.DbObject(aircraftFlight.FlightDate.Date));
+                          SmartCoreType.Directive.ItemId, DbTypes.DbObject(aircraftFlight.FlightDate.ToString("yyyy/MM/dd")));
 
             List<ICommonFilter> allFilters = new List<ICommonFilter> 
                 { 
