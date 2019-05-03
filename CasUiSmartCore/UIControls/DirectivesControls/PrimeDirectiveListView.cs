@@ -466,37 +466,37 @@ namespace CAS.UI.UIControls.DirectivesControls
             if (SelectedItem is DeferredItem)
             {
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-                e.DisplayerText = regNumber + ". " + SelectedItem.DirectiveType.CommonName + ". " + SelectedItem.Title;
+                e.DisplayerText = regNumber + ". " + SelectedItem.DirectiveType.CommonName + ". " + SelectedItem.Title + "  §: " + SelectedItem.Paragraph;
                 e.RequestedEntity = new DeferredScreen((DeferredItem)SelectedItem);
             }
             else if (SelectedItem is DamageItem)
             {
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-                e.DisplayerText = regNumber + ". " + SelectedItem.DirectiveType.CommonName + ". " + SelectedItem.Title;
+                e.DisplayerText = regNumber + ". " + SelectedItem.DirectiveType.CommonName + ". " + SelectedItem.Title + "  §: " + SelectedItem.Paragraph; ;
                 e.RequestedEntity = new DamageDirectiveScreen((DamageItem)SelectedItem);
             }
             else if (SelectedItem.DirectiveType.Equals(DirectiveType.OutOfPhase))
             {
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-                e.DisplayerText = regNumber + ". " + SelectedItem.DirectiveType.CommonName + ". " + SelectedItem.Title;
+                e.DisplayerText = regNumber + ". " + SelectedItem.DirectiveType.CommonName + ". " + SelectedItem.Title + "  §: " + SelectedItem.Paragraph; ;
                 e.RequestedEntity = new OutOfPhaseReferenceScreen(SelectedItem);
             }
             else if (SelectedItem.DirectiveType.Equals(DirectiveType.AirworthenessDirectives))
             {
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-                e.DisplayerText = regNumber + ". " + SelectedItem.DirectiveType.CommonName + ". " + SelectedItem.Title;
+                e.DisplayerText = regNumber + ". " + SelectedItem.DirectiveType.CommonName + ". " + SelectedItem.Title + "  §: " + SelectedItem.Paragraph; ;
                 e.RequestedEntity = new DirectiveScreen(SelectedItem);
             }
             else if (SelectedItem.DirectiveType.Equals(DirectiveType.SB))
             {
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-                e.DisplayerText = regNumber + ". " + SelectedItem.DirectiveType.CommonName + ". " + SelectedItem.ServiceBulletinNo;
+                e.DisplayerText = regNumber + ". " + SelectedItem.DirectiveType.CommonName + ". " + SelectedItem.ServiceBulletinNo + "  §: " + SelectedItem.Paragraph; ;
                 e.RequestedEntity = new DirectiveScreen(SelectedItem);
             }
             else if (SelectedItem.DirectiveType.Equals(DirectiveType.EngineeringOrders))
             {
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-                e.DisplayerText = regNumber + ". " + SelectedItem.DirectiveType.CommonName + ". " + SelectedItem.EngineeringOrders;
+                e.DisplayerText = regNumber + ". " + SelectedItem.DirectiveType.CommonName + ". " + SelectedItem.EngineeringOrders + "  §: " + SelectedItem.Paragraph; ;
                 e.RequestedEntity = new DirectiveScreen(SelectedItem);
             }
         }

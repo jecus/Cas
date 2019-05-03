@@ -56,6 +56,7 @@
 			this.Margin = new System.Windows.Forms.Padding(2);
 			this.Name = "WaitCancelForm";
 			this.Padding = new System.Windows.Forms.Padding(15, 60, 15, 16);
+			this.Resizable = false;
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.Text = "Wait Cancel Form";
