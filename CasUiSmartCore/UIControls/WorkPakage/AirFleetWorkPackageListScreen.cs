@@ -145,7 +145,16 @@ namespace CAS.UI.UIControls.WorkPakage
 
             _initialDirectiveArray.AddRange(GlobalObjects.WorkPackageCore.GetWorkPackages().ToArray());
 
-            AnimatedThreadWorker.ReportProgress(30, "calculation Work Packages");
+            var airports = GlobalObjects.CasEnvironment.GetDictionary<AirportsCodes>();
+            var flightNum = GlobalObjects.CasEnvironment.GetDictionary<FlightNum>();
+            foreach (var wp in _initialDirectiveArray)
+            {
+	            wp.PerfAfter.AirportFrom = (AirportsCodes)airports.GetItemById(wp.PerfAfter.AirportFromId);
+	            wp.PerfAfter.AirportTo = (AirportsCodes)airports.GetItemById(wp.PerfAfter.AirportToId);
+	            wp.PerfAfter.FlightNum = (FlightNum)flightNum.GetItemById(wp.PerfAfter.FlightNumId);
+            }
+
+			AnimatedThreadWorker.ReportProgress(30, "calculation Work Packages");
 
             if (AnimatedThreadWorker.CancellationPending)
             {

@@ -52,6 +52,7 @@ namespace CAS.UI.UIControls.WorkPakage
 		private void Completed()
 		{
 			supplierListView.SetItemsArray(_suppliers.ToArray());
+			supplierListView1.SetItemsArray(_prices.ToArray());
 			UpdateControls();
 		}
 
