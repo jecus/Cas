@@ -374,6 +374,11 @@ namespace SmartCore.Entities.Dictionaries
 		public static GoodsClass Lubricants = new GoodsClass(76, "Lubricants", "Lubricants", "Lubricants", FLM);
 		#endregion
 
+		#region public static GoodsClass LubricantsOGD = new GoodsClass(90, "Lubricants (Oils, Greases, Dry Lubes", "Lubricants (Oils, Greases, Dry Lubes", "Lubricants (Oils, Greases, Dry Lubes", FLM);
+
+		public static GoodsClass LubricantsOGD = new GoodsClass(90, "Lubricants (Oils, Greases, Dry Lubes)", "Lubricants (Oils, Greases, Dry Lubes", "Lubricants (Oils, Greases, Dry Lubes", FLM);
+		#endregion
+
 		#region public static GoodsClass DryLubes = new GoodsClass(77, "Dry Lubes", "Dry Lubes", "Dry Lubes", FLM);
 
 		public static GoodsClass DryLubes = new GoodsClass(77, "Dry Lubes", "Dry Lubes", "Dry Lubes", FLM);
@@ -399,13 +404,15 @@ namespace SmartCore.Entities.Dictionaries
 		public static GoodsClass Primer = new GoodsClass(43, "Primer", "Auxiliary Materials Maintenance Primer", "Auxiliary Materials Maintenance Primer", ConsumableParts);
 		public static GoodsClass Adhesives = new GoodsClass(79, "Adhesives", "Adhesives", "Adhesives", ConsumableParts);
 		public static GoodsClass AdhesivesCompounds = new GoodsClass(80, "Adhesives Compounds", "Adhesives Compounds", "Adhesives Compounds", ConsumableParts);
+		
 		public static GoodsClass Cements = new GoodsClass(81, "Cements", "Cements", "Cements", ConsumableParts);
 		public static GoodsClass Disinfectants = new GoodsClass(82, "Disinfectants", "Disinfectants", "Disinfectants", ConsumableParts);
 		public static GoodsClass PretreatmentForPainting = new GoodsClass(83, "Pretreatment for Painting and Sealing", "Pretreatment for Painting and Sealing", "Pretreatment for Painting and Sealing", ConsumableParts);
 		public static GoodsClass Preservation = new GoodsClass(84, "Preservation", "Preservation", "Preservation", ConsumableParts);
 		public static GoodsClass Sealants = new GoodsClass(85, "Sealants", "Sealants", "Sealants", ConsumableParts);
 		public static GoodsClass Strippers = new GoodsClass(86, "Strippers", "Strippers", "Strippers", ConsumableParts);
-
+		public static GoodsClass BondingAngAdhesive = new GoodsClass(91, "Bonding ang Adhesive Compounds", "Bonding ang Adhesive Compounds", "Bonding ang Adhesive Compounds", ConsumableParts);
+		public static GoodsClass AdhesivesCements = new GoodsClass(92, "Adhesives, Cements, Sealants", "Adhesives, Cements, Sealants", "Adhesives, Cements, Sealants", ConsumableParts);
 
 		#endregion
 
@@ -423,23 +430,23 @@ namespace SmartCore.Entities.Dictionaries
 		public static GoodsClass DeIcing = new GoodsClass(49, "De-icing", "Auxiliary Materials Maintenance De-icing", "Auxiliary Materials Maintenance De-icing", Fluid);
 		public static GoodsClass Solvent = new GoodsClass(50, "Solvent", "Auxiliary Materials Maintenance Solvent", "Auxiliary Materials Maintenance Solvent", Fluid);
 		public static GoodsClass CleaningAgents = new GoodsClass(87, "Cleaning Agents", "Cleaning Agents", "Cleaning Agents", Fluid);
-		public static GoodsClass CleanersPolishes = new GoodsClass(88, "Cleaners Polishes", "Cleaners Polishes", "Cleaners Polishes", Fluid);
+		public static GoodsClass CleanersPolishes = new GoodsClass(88, "Cleaners, Polishes", "Cleaners, Polishes", "Cleaners, Polishes", Fluid);
 
 		#endregion
 
 		#region public static GoodsClass AccessoriesMaterial = new GoodsClass(55, "Accessories", "Auxiliary Materials Accessories", "Auxiliary Materials Accessories", MaintenanceMaterials);
 
-		public static GoodsClass AccessoriesMaterial = new GoodsClass(55, "Accessories", "Auxiliary Materials Accessories", "Auxiliary Materials Accessories", MaintenanceMaterials);
+		public static GoodsClass AccessoriesMaterial = new GoodsClass(55, "Expendables", "Auxiliary Materials Expendables", "Auxiliary Materials Expendables", MaintenanceMaterials);
 
 
 		#endregion
 
 		#region Элементы AccessoriesMaterial
 
-		public static GoodsClass AircraftAccessories = new GoodsClass(56, "Aircraft accessories", "Auxiliary Materials Aircraft Accessories", "Auxiliary Materials Aircraft Accessories", AccessoriesMaterial);
-		public static GoodsClass EngineAccessories = new GoodsClass(57, "Engine accessories", "Auxiliary Materials Engine Accessories", "Auxiliary Materials Engine Accessories", AccessoriesMaterial);
-		public static GoodsClass LandingGearAccessories = new GoodsClass(58, "Landing gear accessories", "Auxiliary Materials Landing Gear Accessories", "Auxiliary Materials Landing Gear Accessories", AccessoriesMaterial);
-		public static GoodsClass PropellerAccessories = new GoodsClass(59, "Propeller accessories", "Auxiliary Materials Propeller Accessories", "Auxiliary Materials Propeller Accessories", AccessoriesMaterial);
+		public static GoodsClass AircraftAccessories = new GoodsClass(56, "Aircraft Expendables", "Auxiliary Materials Aircraft Expendables", "Auxiliary Materials Aircraft Expendables", AccessoriesMaterial);
+		public static GoodsClass EngineAccessories = new GoodsClass(57, "Engine Expendables", "Auxiliary Materials Engine Expendables", "Auxiliary Materials Engine Expendables", AccessoriesMaterial);
+		public static GoodsClass LandingGearAccessories = new GoodsClass(58, "Landing gear Expendables", "Auxiliary Materials Landing Gear Expendables", "Auxiliary Materials Landing Gear Expendables", AccessoriesMaterial);
+		public static GoodsClass PropellerAccessories = new GoodsClass(59, "Propeller Expendables", "Auxiliary Materials Propeller Expendables", "Auxiliary Materials Propeller Expendables", AccessoriesMaterial);
 
 		#endregion
 
