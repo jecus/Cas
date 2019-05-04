@@ -33,7 +33,7 @@ namespace SmartCore.Tests.ExcelImportExport
 
 					prod.Description = row[1].ToString();
 					prod.Standart = standart.FirstOrDefault(i => i.FullName.ToLower().Contains(row[2].ToString().ToLower()));
-					prod.Name = !string.IsNullOrEmpty(row[2].ToString()) ? row[2].ToString() : "*";
+					prod.Name = !string.IsNullOrEmpty(row[3].ToString()) ? row[3].ToString() : "*";
 					prod.GoodsClass = (GoodsClass) GoodsClass.Items.GetByFullName(row[6].ToString());
 					prod.IsEffectivity = row[7].ToString();
 					prod.Remarks = row[8].ToString();

@@ -411,8 +411,8 @@ namespace SmartCore.Entities.Dictionaries
 		public static GoodsClass Preservation = new GoodsClass(84, "Preservation", "Preservation", "Preservation", ConsumableParts);
 		public static GoodsClass Sealants = new GoodsClass(85, "Sealants", "Sealants", "Sealants", ConsumableParts);
 		public static GoodsClass Strippers = new GoodsClass(86, "Strippers", "Strippers", "Strippers", ConsumableParts);
-		public static GoodsClass BondingAngAdhesive = new GoodsClass(91, "Bonding ang Adhesive Compounds", "Bonding ang Adhesive Compounds", "Bonding ang Adhesive Compounds", ConsumableParts);
-		public static GoodsClass AdhesivesCements = new GoodsClass(92, "Adhesives, Cements, Sealants", "Adhesives, Cements, Sealants", "Adhesives, Cements, Sealants", ConsumableParts);
+		public static GoodsClass BondingAngAdhesive = new GoodsClass(95, "Bonding ang Adhesive Compounds", "Bonding ang Adhesive Compounds", "Bonding ang Adhesive Compounds", ConsumableParts);
+		public static GoodsClass AdhesivesCements = new GoodsClass(96, "Adhesives, Cements, Sealants", "Adhesives, Cements, Sealants", "Adhesives, Cements, Sealants", ConsumableParts);
 
 		#endregion
 

@@ -47,7 +47,7 @@ namespace SmartCore.Entities.General.Accessory
 			}, Order = 10)]
         [ListViewData(0.15f, "Class")]
         [NotNull]
-        [Filter("Class:", Order = 6)]
+        [Filter("Class:", Order = 10)]
 
         public GoodsClass GoodsClass
         {
@@ -68,12 +68,14 @@ namespace SmartCore.Entities.General.Accessory
 
 		[TableColumn("AtaChapter")]
 		[ListViewData(0.12f, "ATA")]
-		[Filter("ATA:")]
+		[Filter("ATA:", Order = 11)]
 		public AtaChapter ATAChapter { get; set; }
 
 		#endregion
 
 		[TableColumn("DescRus")]
+		[ListViewData(0.12f, "Description Rus", 20)]
+		[Filter("Description Rus:", Order = 7)]
 		public string DescRus { get; set; }
 
 		[TableColumn("HTS")]
@@ -87,7 +89,7 @@ namespace SmartCore.Entities.General.Accessory
         /// </summary>
         [TableColumn("Standart"), ListViewData(0.12f, "Standard", 11)]
         [FormControl(200, "Standard:", Order = 3)]
-        [Filter("Standard:",Order = 8)]
+        [Filter("Standard:",Order = 12)]
         [Child(false)]
         public GoodStandart Standart
         {
@@ -408,9 +410,9 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public bool IsDangerous { get; set; }
 
-		[TableColumn("IsDangerous"), ListViewData(0.25f, "IsDangerous")]
+		[TableColumn("IsDangerous"), ListViewData(0.12f, "IsDangerous")]
 		[FormControl(250, "IsDangerous:", 8, Order = 25)]
-		[Filter("IsDangerous:")]
+		[Filter("IsDangerous:", Order = 8)]
 		public bool IsDangerous { get; set; }
 		#endregion
 
@@ -422,7 +424,7 @@ namespace SmartCore.Entities.General.Accessory
         /// </summary>
         [ListViewData(0.12f, "Suppliers", 18)]
         [Child(typeof(KitSuppliersRelation), "KitId", "ParentTypeId", 1005, "SupplierId")]
-        [Filter("Supplier:", Order = 7)]
+        [Filter("Supplier:", Order = 9)]
         public SupplierCollection Suppliers
         {
             get { return _suppliers ?? (_suppliers = new SupplierCollection()); }
@@ -451,7 +453,7 @@ namespace SmartCore.Entities.General.Accessory
 
         [TableColumn("Reference")]
         [ListViewData(0.12f, "Reference", 2)]
-        [Filter("Reference:")]
+        [Filter("Reference:", Order = 6)]
         public string Reference { get; set; }
 
         #endregion
