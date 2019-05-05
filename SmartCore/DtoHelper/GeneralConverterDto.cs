@@ -2377,6 +2377,7 @@ namespace SmartCore.DtoHelper
 				IsClosed = direc.IsClosed,
 				AircraftFlight = direc.AircraftFlightId,
 				NDTType = (short)(direc.NDTType?.ItemId ?? -1),
+				DirectiveOrder = (short)(direc.DirectiveOrder?.ItemId ?? -1),
 				ComponentId = direc.ParentBaseComponent?.ItemId,
 				ATAChapterId = direc.ATAChapter?.ItemId ?? -1,
 				Files = direc.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
@@ -2415,6 +2416,7 @@ namespace SmartCore.DtoHelper
 				IsClosed = direcdto.IsClosed ??default(bool),
 				AircraftFlightId = direcdto.AircraftFlight ?? default(int) ,
 				NDTType = NDTType.GetItemById(direcdto.NDTType),
+				DirectiveOrder = DirectiveOrder.GetDirectiveOrderById(direcdto.DirectiveOrder),
 				ParentBaseComponent = direcdto.BaseComponent?.ConvertToBaseComponent(),
 				ATAChapter = direcdto.ATAChapter?.Convert()
 			};
@@ -2487,6 +2489,7 @@ namespace SmartCore.DtoHelper
 				DeferredCategoryId = direc.DeferredCategory?.ItemId ?? -1,
 				AircraftFlight = direc.AircraftFlightId,
 				NDTType = (short)(direc.NDTType?.ItemId ?? -1),
+				DirectiveOrder = (short)(direc.DirectiveOrder?.ItemId ?? -1),
 				ComponentId = direc.ParentBaseComponent?.ItemId,
 				ATAChapterId = direc.ATAChapter?.ItemId ?? -1,
 				Files = direc.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
@@ -2529,6 +2532,7 @@ namespace SmartCore.DtoHelper
 				IsClosed = direcdto.IsClosed ?? default(bool),
 				AircraftFlightId = direcdto.AircraftFlight ?? default(int),
 				NDTType = NDTType.GetItemById(direcdto.NDTType),
+				DirectiveOrder = DirectiveOrder.GetDirectiveOrderById(direcdto.DirectiveOrder),
 				ParentBaseComponent = direcdto.BaseComponent?.ConvertToBaseComponent(),
 				ATAChapter = direcdto.ATAChapter?.Convert()
 			};
@@ -2608,6 +2612,7 @@ namespace SmartCore.DtoHelper
 				IsClosed = direc.IsClosed,
 				AircraftFlight = direc.AircraftFlightId,
 				NDTType = (short)(direc.NDTType?.ItemId ?? -1),
+				DirectiveOrder = (short)(direc.DirectiveOrder?.ItemId ?? -1),
 				ComponentId = direc.ParentBaseComponent?.ItemId,
 				ATAChapterId = direc.ATAChapter?.ItemId ?? -1,
 				Files = direc.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
@@ -2661,6 +2666,7 @@ namespace SmartCore.DtoHelper
 				IsClosed = direcdto.IsClosed ?? default(bool),
 				AircraftFlightId = direcdto.AircraftFlight ?? default(int),
 				NDTType = NDTType.GetItemById(direcdto.NDTType),
+				DirectiveOrder = DirectiveOrder.GetDirectiveOrderById(direcdto.DirectiveOrder),
 				ParentBaseComponent = direcdto.BaseComponent?.ConvertToBaseComponent(),
 				ATAChapter = direcdto.ATAChapter?.Convert()
 			};

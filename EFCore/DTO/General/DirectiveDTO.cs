@@ -89,6 +89,9 @@ namespace EFCore.DTO.General
 		public short NDTType { get; set; }
 
 		[DataMember]
+		public short DirectiveOrder { get; set; }
+
+		[DataMember]
 		public int? ComponentId { get; set; }
 
 		[DataMember]
@@ -126,6 +129,13 @@ namespace EFCore.DTO.General
 		public int DamageType { get; set; }
 		[DataMember]
 		public int DamageClass { get; set; }
+
+		[DataMember]
+		public int? SupersedesId { get; set; }
+
+		[DataMember]
+		public int? SupersededId { get; set; }
+
 		[DataMember]
 		public string CorrectiveAction { get; set; }
 		[DataMember]

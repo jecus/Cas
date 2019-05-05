@@ -158,13 +158,16 @@ namespace SmartCore.Entities.General.Directives
 		[TableColumn("NDTType")]
         [Filter("NDT:", Order = 12)]
         public NDTType NDTType { get; set; }
-        #endregion
+		#endregion
 
-        #region public String ServiceBulletinNo { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [TableColumn("ServiceBulletinNo")]
+		[TableColumn("DirectiveOrder")]
+		public DirectiveOrder DirectiveOrder { get; set; }
+
+		#region public String ServiceBulletinNo { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		[TableColumn("ServiceBulletinNo")]
         [Filter("SB:", Order = 3)]
         [ExcelImport("SB:")]
         public String ServiceBulletinNo { get; set; }
