@@ -236,7 +236,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
               nextComplianceDate = Convert.ToDateTime(item.NextPerformanceDate);
 
             var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
-			string kitRequieredString = item.KitsApplicable ? item.Kits.Count + " kits" : "N/A";
+			string kitRequieredString = item.KitsApplicable ? item.Kits.Count + " EA" : "N/A";
 			string ndtString = item.NDTType.ShortName;
 			string skillString = item.Skill.ShortName;
 			string categoryString = item.Category.ShortName;

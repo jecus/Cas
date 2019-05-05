@@ -446,9 +446,9 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.labelKitRequired.Location = new System.Drawing.Point(537, 87);
 			this.labelKitRequired.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.labelKitRequired.Name = "labelKitRequired";
-			this.labelKitRequired.Size = new System.Drawing.Size(88, 14);
+			this.labelKitRequired.Size = new System.Drawing.Size(120, 14);
 			this.labelKitRequired.TabIndex = 74;
-			this.labelKitRequired.Text = "Kit Required:";
+			this.labelKitRequired.Text = "Part and Material:";
 			this.labelKitRequired.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// textBoxCost

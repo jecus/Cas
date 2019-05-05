@@ -70,7 +70,7 @@ namespace SmartCore.Entities.General.Directives
 		#region public bool IsApplicability { get; set; }
 
 		[TableColumn("IsApplicability")]
-		[Filter("IsApplicability:")]
+		[Filter("Applicability:")]
 		public bool IsApplicability { get; set; }
 
 		#endregion

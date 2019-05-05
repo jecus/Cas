@@ -297,7 +297,7 @@ namespace CAS.UI.UIControls.DirectivesControls
             effDate = item.Threshold.EffectiveDate;
             var descriptionString = item.Description;
 	        var applicabilityString = item.IsApplicability ? $"APL  {item.Applicability}" : $"N/A  {item.Applicability}";
-            var kitRequieredString = item.Kits.Count + " kits";
+            var kitRequieredString = item.Kits.Count + " EA";
             var ndtString = item.NDTType.ShortName;
             var manHours = item.ManHours;
             var cost = item.Cost;

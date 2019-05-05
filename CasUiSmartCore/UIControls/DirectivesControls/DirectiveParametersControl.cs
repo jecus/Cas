@@ -228,6 +228,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.lookupComboboxForCompnt.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.lookupComboboxForCompnt.Size = new System.Drawing.Size(350, 22);
 			this.lookupComboboxForCompnt.TabIndex = 204;
+			this.lookupComboboxForCompnt.Type = null;
 			// 
 			// radio_FirstWhicheverLast
 			// 
@@ -280,18 +281,20 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.lifelengthViewer_SinceEffDate.ForeColor = System.Drawing.Color.DimGray;
 			this.lifelengthViewer_SinceEffDate.HeaderCalendar = "Calendar";
 			this.lifelengthViewer_SinceEffDate.HeaderCycles = "Cycles";
+			this.lifelengthViewer_SinceEffDate.HeaderFormattedCalendar = "Calendar";
 			this.lifelengthViewer_SinceEffDate.HeaderHours = "Hours";
 			this.lifelengthViewer_SinceEffDate.HoursApplicable = false;
 			this.lifelengthViewer_SinceEffDate.LeftHeader = "Since Eff. Date";
-			this.lifelengthViewer_SinceEffDate.Location = new System.Drawing.Point(22, 89);
-			this.lifelengthViewer_SinceEffDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.lifelengthViewer_SinceEffDate.Location = new System.Drawing.Point(23, 89);
+			this.lifelengthViewer_SinceEffDate.Margin = new System.Windows.Forms.Padding(2);
 			this.lifelengthViewer_SinceEffDate.Modified = false;
 			this.lifelengthViewer_SinceEffDate.Name = "lifelengthViewer_SinceEffDate";
 			this.lifelengthViewer_SinceEffDate.ReadOnly = false;
 			this.lifelengthViewer_SinceEffDate.ShowCalendar = true;
+			this.lifelengthViewer_SinceEffDate.ShowFormattedCalendar = false;
 			this.lifelengthViewer_SinceEffDate.ShowHeaders = false;
 			this.lifelengthViewer_SinceEffDate.ShowMinutes = true;
-			this.lifelengthViewer_SinceEffDate.Size = new System.Drawing.Size(470, 35);
+			this.lifelengthViewer_SinceEffDate.Size = new System.Drawing.Size(469, 35);
 			this.lifelengthViewer_SinceEffDate.SystemCalculated = true;
 			this.lifelengthViewer_SinceEffDate.TabIndex = 20;
 			// 
@@ -309,15 +312,17 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.lifelengthViewer_SinceNew.ForeColor = System.Drawing.Color.DimGray;
 			this.lifelengthViewer_SinceNew.HeaderCalendar = "Calendar";
 			this.lifelengthViewer_SinceNew.HeaderCycles = "Cycles";
+			this.lifelengthViewer_SinceNew.HeaderFormattedCalendar = "Calendar";
 			this.lifelengthViewer_SinceNew.HeaderHours = "Hours";
 			this.lifelengthViewer_SinceNew.HoursApplicable = false;
 			this.lifelengthViewer_SinceNew.LeftHeader = "Since New";
 			this.lifelengthViewer_SinceNew.Location = new System.Drawing.Point(56, 31);
-			this.lifelengthViewer_SinceNew.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.lifelengthViewer_SinceNew.Margin = new System.Windows.Forms.Padding(2);
 			this.lifelengthViewer_SinceNew.Modified = false;
 			this.lifelengthViewer_SinceNew.Name = "lifelengthViewer_SinceNew";
 			this.lifelengthViewer_SinceNew.ReadOnly = false;
 			this.lifelengthViewer_SinceNew.ShowCalendar = true;
+			this.lifelengthViewer_SinceNew.ShowFormattedCalendar = false;
 			this.lifelengthViewer_SinceNew.ShowMinutes = true;
 			this.lifelengthViewer_SinceNew.Size = new System.Drawing.Size(437, 52);
 			this.lifelengthViewer_SinceNew.SystemCalculated = true;
@@ -338,15 +343,17 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.lifelengthViewer_Repeat.ForeColor = System.Drawing.Color.DimGray;
 			this.lifelengthViewer_Repeat.HeaderCalendar = "Calendar";
 			this.lifelengthViewer_Repeat.HeaderCycles = "Cycles";
+			this.lifelengthViewer_Repeat.HeaderFormattedCalendar = "Calendar";
 			this.lifelengthViewer_Repeat.HeaderHours = "Hours";
 			this.lifelengthViewer_Repeat.HoursApplicable = false;
 			this.lifelengthViewer_Repeat.LeftHeader = "Repeat Interval";
 			this.lifelengthViewer_Repeat.Location = new System.Drawing.Point(7, 31);
-			this.lifelengthViewer_Repeat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.lifelengthViewer_Repeat.Margin = new System.Windows.Forms.Padding(2);
 			this.lifelengthViewer_Repeat.Modified = false;
 			this.lifelengthViewer_Repeat.Name = "lifelengthViewer_Repeat";
 			this.lifelengthViewer_Repeat.ReadOnly = false;
 			this.lifelengthViewer_Repeat.ShowCalendar = true;
+			this.lifelengthViewer_Repeat.ShowFormattedCalendar = false;
 			this.lifelengthViewer_Repeat.ShowMinutes = true;
 			this.lifelengthViewer_Repeat.Size = new System.Drawing.Size(473, 52);
 			this.lifelengthViewer_Repeat.SystemCalculated = true;
@@ -366,15 +373,17 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.lifelengthViewer_FirstNotify.ForeColor = System.Drawing.Color.DimGray;
 			this.lifelengthViewer_FirstNotify.HeaderCalendar = "Calendar";
 			this.lifelengthViewer_FirstNotify.HeaderCycles = "Cycles";
+			this.lifelengthViewer_FirstNotify.HeaderFormattedCalendar = "Calendar";
 			this.lifelengthViewer_FirstNotify.HeaderHours = "Hours";
 			this.lifelengthViewer_FirstNotify.HoursApplicable = false;
 			this.lifelengthViewer_FirstNotify.LeftHeader = "Notify";
 			this.lifelengthViewer_FirstNotify.Location = new System.Drawing.Point(85, 130);
-			this.lifelengthViewer_FirstNotify.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.lifelengthViewer_FirstNotify.Margin = new System.Windows.Forms.Padding(2);
 			this.lifelengthViewer_FirstNotify.Modified = false;
 			this.lifelengthViewer_FirstNotify.Name = "lifelengthViewer_FirstNotify";
 			this.lifelengthViewer_FirstNotify.ReadOnly = false;
 			this.lifelengthViewer_FirstNotify.ShowCalendar = true;
+			this.lifelengthViewer_FirstNotify.ShowFormattedCalendar = false;
 			this.lifelengthViewer_FirstNotify.ShowHeaders = false;
 			this.lifelengthViewer_FirstNotify.ShowMinutes = true;
 			this.lifelengthViewer_FirstNotify.Size = new System.Drawing.Size(407, 35);
@@ -414,7 +423,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.imageLinkLabelStatus.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
 			this.imageLinkLabelStatus.LinkMouseCapturedColor = System.Drawing.Color.Empty;
 			this.imageLinkLabelStatus.Location = new System.Drawing.Point(3, 2);
-			this.imageLinkLabelStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.imageLinkLabelStatus.Margin = new System.Windows.Forms.Padding(4);
 			this.imageLinkLabelStatus.Name = "imageLinkLabelStatus";
 			this.imageLinkLabelStatus.Size = new System.Drawing.Size(83, 25);
 			this.imageLinkLabelStatus.TabIndex = 193;
@@ -492,7 +501,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.labelKitRequired.Name = "labelKitRequired";
 			this.labelKitRequired.Size = new System.Drawing.Size(150, 25);
 			this.labelKitRequired.TabIndex = 183;
-			this.labelKitRequired.Text = "Kit Required:";
+			this.labelKitRequired.Text = "Part and Material:";
 			// 
 			// groupBoxClose
 			// 
@@ -629,15 +638,17 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.lifelengthViewer_RepeatNotify.ForeColor = System.Drawing.Color.DimGray;
 			this.lifelengthViewer_RepeatNotify.HeaderCalendar = "Calendar";
 			this.lifelengthViewer_RepeatNotify.HeaderCycles = "Cycles";
+			this.lifelengthViewer_RepeatNotify.HeaderFormattedCalendar = "Calendar";
 			this.lifelengthViewer_RepeatNotify.HeaderHours = "Hours";
 			this.lifelengthViewer_RepeatNotify.HoursApplicable = false;
 			this.lifelengthViewer_RepeatNotify.LeftHeader = "Notify";
 			this.lifelengthViewer_RepeatNotify.Location = new System.Drawing.Point(72, 89);
-			this.lifelengthViewer_RepeatNotify.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.lifelengthViewer_RepeatNotify.Margin = new System.Windows.Forms.Padding(2);
 			this.lifelengthViewer_RepeatNotify.Modified = false;
 			this.lifelengthViewer_RepeatNotify.Name = "lifelengthViewer_RepeatNotify";
 			this.lifelengthViewer_RepeatNotify.ReadOnly = false;
 			this.lifelengthViewer_RepeatNotify.ShowCalendar = true;
+			this.lifelengthViewer_RepeatNotify.ShowFormattedCalendar = false;
 			this.lifelengthViewer_RepeatNotify.ShowHeaders = false;
 			this.lifelengthViewer_RepeatNotify.ShowMinutes = true;
 			this.lifelengthViewer_RepeatNotify.Size = new System.Drawing.Size(407, 35);
@@ -1084,7 +1095,7 @@ namespace CAS.UI.UIControls.DirectivesControls
                 checkBoxIsTemporary.Checked = damageItem.IsTemporary;
             }
 
-            textBoxKitRequired.Text = _currentDirective.Kits.Count + " kits";
+            textBoxKitRequired.Text = _currentDirective.Kits.Count + " EA";
             bool permission = true;//currentDirective.HasPermission(Users.IdentityUser, DataEvent.Update);
 
             textBoxKitRequired.ReadOnly = !permission;
@@ -1245,7 +1256,7 @@ namespace CAS.UI.UIControls.DirectivesControls
         {
             KitForm dlg = new KitForm(_currentDirective);
             if(dlg.ShowDialog() == DialogResult.OK)
-                textBoxKitRequired.Text = _currentDirective.Kits.Count + " kits";
+                textBoxKitRequired.Text = _currentDirective.Kits.Count + " EA";
         }
         #endregion
 
