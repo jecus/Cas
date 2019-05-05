@@ -83,6 +83,9 @@ namespace CAS.UI.UIControls.ComponentControls
 			//4
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "MPD Item" };
 			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Task Card №" };
+			ColumnHeaderList.Add(columnHeader);
 			//5
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Pos. No" };
             ColumnHeaderList.Add(columnHeader);
@@ -234,6 +237,7 @@ namespace CAS.UI.UIControls.ComponentControls
                    serialNumber,
                    position,
 				   mpdString= "",
+				   mpdNumString= "",
                    lastPerformanceString = "",
 				   classString ="",
                    kitRequieredString,
@@ -316,8 +320,11 @@ namespace CAS.UI.UIControls.ComponentControls
                 hiddenRemarks = dd.HiddenRemarks;
                 workType = dd.DirectiveType.ToString();
 	            ndtString = dd.NDTType.ShortName;
-				if (dd.MaintenanceDirective!=null)
-					mpdString = dd.MaintenanceDirective.TaskNumberCheck;
+	            if (dd.MaintenanceDirective != null)
+	            {
+		            mpdString = dd.MaintenanceDirective.TaskNumberCheck;
+		            mpdNumString = dd.MaintenanceDirective.TaskCardNumber;
+	            }
 			}
 
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = ata.ToString(), Tag = ata });
@@ -326,6 +333,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = workType, Tag = workType });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = serialNumber, Tag = serialNumber });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = mpdString, Tag = mpdString });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = mpdNumString, Tag = mpdNumString });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = position, Tag = position });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = maintenanceType.ShortName, Tag = maintenanceType });
 	        subItems.Add(new ListViewItem.ListViewSubItem { Text = zone, Tag = zone });
