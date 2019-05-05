@@ -80,7 +80,7 @@ namespace CAS.UI.UIControls.KitControls
 			this.labelKits.Name = "labelKits";
 			this.labelKits.Size = new System.Drawing.Size(28, 19);
 			this.labelKits.TabIndex = 3;
-			this.labelKits.Text = "Kits";
+			this.labelKits.Text = "Part and Material";
 			this.labelKits.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// panelButtons
@@ -171,7 +171,7 @@ namespace CAS.UI.UIControls.KitControls
 			this.MinimumSize = new System.Drawing.Size(655, 300);
 			this.Name = "KitForm";
 			this.ShowIcon = false;
-			this.Text = "Kit Form";
+			this.Text = "Part and Material";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.KitFormFormClosed);
 			this.flowLayoutPanelCharts.ResumeLayout(false);
 			this.panelLabel.ResumeLayout(false);
