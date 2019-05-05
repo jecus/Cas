@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Excel;
@@ -31,10 +32,16 @@ namespace SmartCore.Tests.ExcelImportExport
 					if (prod == null)
 						prod = new Product{DescRus = "NEW"};
 
+					var goodClass = row[6].ToString();
+
 					prod.Description = row[1].ToString();
 					prod.Standart = standart.FirstOrDefault(i => i.FullName.ToLower().Contains(row[2].ToString().ToLower()));
 					prod.Name = !string.IsNullOrEmpty(row[3].ToString()) ? row[3].ToString() : "*";
-					prod.GoodsClass = (GoodsClass) GoodsClass.Items.GetByFullName(row[6].ToString());
+
+					prod.GoodsClass = GoodsClass.Items.FirstOrDefault(i => goodClass.ToLower().Contains(i.FullName.ToLower()));
+					if (prod.GoodsClass == null)
+						prod.GoodsClass = GoodsClass.Items.FirstOrDefault(i => goodClass.ToLower().Contains(i.ShortName.ToLower()));
+
 					prod.IsEffectivity = row[7].ToString();
 					prod.Remarks = row[8].ToString();
 					prod.PartNumber = row[9].ToString();

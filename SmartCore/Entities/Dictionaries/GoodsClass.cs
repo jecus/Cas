@@ -376,7 +376,7 @@ namespace SmartCore.Entities.Dictionaries
 
 		#region public static GoodsClass LubricantsOGD = new GoodsClass(90, "Lubricants (Oils, Greases, Dry Lubes", "Lubricants (Oils, Greases, Dry Lubes", "Lubricants (Oils, Greases, Dry Lubes", FLM);
 
-		public static GoodsClass LubricantsOGD = new GoodsClass(90, "Lubricants (Oils, Greases, Dry Lubes)", "Lubricants (Oils, Greases, Dry Lubes", "Lubricants (Oils, Greases, Dry Lubes", FLM);
+		public static GoodsClass LubricantsOGD = new GoodsClass(90, "Lubricants (Oils, Greases, Dry Lubes)", "Lubricants (Oils, Greases, Dry Lubes)", "Lubricants (Oils, Greases, Dry Lubes", FLM);
 		#endregion
 
 		#region public static GoodsClass DryLubes = new GoodsClass(77, "Dry Lubes", "Dry Lubes", "Dry Lubes", FLM);
@@ -502,11 +502,11 @@ namespace SmartCore.Entities.Dictionaries
 
 		#region Элементы пункта Tools
 
-		public static GoodsClass StandartTools = new GoodsClass(64, "Standart tools", "Production Auxiliary Equipment StandartTools", "Production Auxiliary Equipment StandartTools", Tools);
-		public static GoodsClass AircraftTools = new GoodsClass(65, "Aircraft tools", "Production Auxiliary Equipment AircraftTools", "Production Auxiliary Equipment AircraftTools", Tools);
-		public static GoodsClass EngineTools = new GoodsClass(66, "Engine tools", "Production Auxiliary Equipment EngineTools", "Production Auxiliary Equipment EngineTools", Tools);
-		public static GoodsClass SpecialTools = new GoodsClass(67, "Special tools", "Production Auxiliary Equipment SpecialTools", "Production Auxiliary Equipment SpecialTools", Tools);
-		public static GoodsClass CommercialTools = new GoodsClass(89, "Commercial Tools", "Production Auxiliary Equipment CommercialTools", "Production Auxiliary Equipment CommercialTools", Tools);
+		public static GoodsClass StandartTools = new GoodsClass(64, "Standart tools", "Production Auxiliary Equipment Standart Tools", "Production Auxiliary Equipment StandartTools", Tools);
+		public static GoodsClass AircraftTools = new GoodsClass(65, "Aircraft tools", "Production Auxiliary Equipment Aircraft Tools", "Production Auxiliary Equipment AircraftTools", Tools);
+		public static GoodsClass EngineTools = new GoodsClass(66, "Engine tools", "Production Auxiliary Equipment Engine Tools", "Production Auxiliary Equipment EngineTools", Tools);
+		public static GoodsClass SpecialTools = new GoodsClass(67, "Special tools", "Production Auxiliary Equipment Special Tools", "Production Auxiliary Equipment SpecialTools", Tools);
+		public static GoodsClass CommercialTools = new GoodsClass(89, "Commercial Tools", "Production Auxiliary Equipment Commercial Tools", "Production Auxiliary Equipment CommercialTools", Tools);
 
 		#endregion
 
