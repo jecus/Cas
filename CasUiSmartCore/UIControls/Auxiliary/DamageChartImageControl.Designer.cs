@@ -1,4 +1,7 @@
-﻿namespace CAS.UI.UIControls.Auxiliary
+﻿using CASTerms;
+using EFCore.DTO.General;
+
+namespace CAS.UI.UIControls.Auxiliary
 {
     partial class DamageChartImageControl
     {
@@ -28,7 +31,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanelMain = new System.Windows.Forms.FlowLayoutPanel();
+
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.flowLayoutPanelMain = new System.Windows.Forms.FlowLayoutPanel();
             this.panelLabel = new System.Windows.Forms.Panel();
             this.extendableRichContainer1 = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
             this.panelMain = new System.Windows.Forms.Panel();
@@ -148,10 +153,11 @@
             this.ButtonDelete.TextSecondary = "";
             this.ButtonDelete.ToolTipText = null;
             this.ButtonDelete.Click += new System.EventHandler(this.ButtonDeleteClick);
-            // 
-            // DamageChartImageControl
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.ButtonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			// 
+			// DamageChartImageControl
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;

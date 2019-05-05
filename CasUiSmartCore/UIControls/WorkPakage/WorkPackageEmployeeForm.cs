@@ -9,6 +9,7 @@ using CASTerms;
 using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
 using EFCore.Filter;
+using MetroFramework.Forms;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Interfaces;
@@ -18,7 +19,7 @@ using SmartCore.Filters;
 
 namespace CAS.UI.UIControls.WorkPakage
 {
-	public partial class WorkPackageEmployeeForm : Form
+	public partial class WorkPackageEmployeeForm : MetroForm
 	{
 		#region Fields
 

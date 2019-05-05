@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using EFCore.DTO;
+using EFCore.DTO.General;
 using SmartCore.AuditMongo.Repository;
 using SmartCore.DataAccesses;
 using SmartCore.DtoHelper;
@@ -34,6 +35,9 @@ namespace SmartCore.Entities
 
 		public void Save(BaseEntityObject value, bool saveAttachedFile = true, bool writeAudit = true)
 		{
+			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
+				return;
+
 			value.CorrectorId = _casEnvironment.IdentityUser.ItemId;
 
 			var type = AuditOperation.Created;
@@ -52,6 +56,9 @@ namespace SmartCore.Entities
 
 		public void SaveGeneric<T, TOut>(T value, bool saveAttachedFile = true) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
 		{
+			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
+				return;
+
 			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntity)))
 				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
 
@@ -79,6 +86,9 @@ namespace SmartCore.Entities
 
 		public void Delete(BaseEntityObject value, bool isDeletedOnly = false, bool saveAttachedFile = true)
 		{
+			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly || _casEnvironment.IdentityUser.UserType == UsetType.SaveOnly)
+				return;
+
 			value.CorrectorId = _casEnvironment.IdentityUser.ItemId;
 
 			var blType = value.GetType();
@@ -93,6 +103,9 @@ namespace SmartCore.Entities
 
 		public void DeleteGeneric<T, TOut>(T value, bool isDeletedOnly = false, bool saveAttachedFile = true) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
 		{
+			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly || _casEnvironment.IdentityUser.UserType == UsetType.SaveOnly)
+				return;
+
 			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntity)))
 				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
 

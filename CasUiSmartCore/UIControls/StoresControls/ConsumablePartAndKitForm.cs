@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using CASTerms;
 using EFCore.DTO.Dictionaries;
 using EFCore.Filter;
+using MetroFramework.Forms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
@@ -20,7 +21,7 @@ namespace CAS.UI.UIControls.StoresControls
 	///<summary>
 	/// Форма для редактирования расходника, КИТа, ГСМ и т.д.
 	///</summary>
-	public partial class ConsumablePartAndKitForm : Form
+	public partial class ConsumablePartAndKitForm : MetroForm
 	{
 		public Component _consumablePart;
 		private Store _currentStore;

@@ -13,6 +13,7 @@ using CASReports.Builders;
 using CASReports.ReportTemplates;
 using CASTerms;
 using CrystalDecisions.Shared;
+using MetroFramework.Forms;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using SmartCore.Auxiliary.Extentions;
@@ -31,7 +32,7 @@ namespace CAS.UI.UIControls.WorkPakage
     /// Форма, позволяющая делать выбор между компонентами и их расходниками для включения
     /// <br/> в запросный/закупочный акт
     ///</summary>
-    public partial class SelectWPPrintTasksForm : Form
+    public partial class SelectWPPrintTasksForm : MetroForm
     {
         #region Fields
 

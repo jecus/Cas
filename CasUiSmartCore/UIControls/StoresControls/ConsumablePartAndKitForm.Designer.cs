@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.StoresControls
+﻿using MetroFramework.Controls;
+
+namespace CAS.UI.UIControls.StoresControls
 {
     partial class ConsumablePartAndKitForm
     {
@@ -38,52 +40,52 @@
         private void InitializeComponent()
         {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConsumablePartAndKitForm));
-			this.labelInstallDate = new System.Windows.Forms.Label();
+			this.labelInstallDate = new MetroFramework.Controls.MetroLabel();
 			this.dateTimePickerInstallDate = new System.Windows.Forms.DateTimePicker();
-			this.labelManufactureDate = new System.Windows.Forms.Label();
+			this.labelManufactureDate = new MetroFramework.Controls.MetroLabel();
 			this.dateTimePickerManufactureDate = new System.Windows.Forms.DateTimePicker();
 			this.comboBoxMeasure = new System.Windows.Forms.ComboBox();
-			this.labelLocation = new System.Windows.Forms.Label();
+			this.labelLocation = new MetroFramework.Controls.MetroLabel();
 			this.comboBoxPosition = new System.Windows.Forms.ComboBox();
-			this.labelPosition = new System.Windows.Forms.Label();
-			this.labelBatchNumber = new System.Windows.Forms.Label();
-			this.textBoxBatchNumber = new System.Windows.Forms.TextBox();
-			this.labelIdNumber = new System.Windows.Forms.Label();
-			this.textBoxIdNumber = new System.Windows.Forms.TextBox();
+			this.labelPosition = new MetroFramework.Controls.MetroLabel();
+			this.labelBatchNumber = new MetroFramework.Controls.MetroLabel();
+			this.textBoxBatchNumber = new MetroFramework.Controls.MetroTextBox();
+			this.labelIdNumber = new MetroFramework.Controls.MetroLabel();
+			this.textBoxIdNumber = new MetroFramework.Controls.MetroTextBox();
 			this.buttonOK = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.numericUpDownQuantity = new System.Windows.Forms.NumericUpDown();
-			this.labelType = new System.Windows.Forms.Label();
-			this.labelSerialNumber = new System.Windows.Forms.Label();
-			this.textBoxSerialNumber = new System.Windows.Forms.TextBox();
-			this.labelPartNumber = new System.Windows.Forms.Label();
-			this.textBoxPartNumber = new System.Windows.Forms.TextBox();
-			this.labelDescription = new System.Windows.Forms.Label();
-			this.textBoxDescription = new System.Windows.Forms.TextBox();
-			this.labelMeasure = new System.Windows.Forms.Label();
-			this.labelQuantity = new System.Windows.Forms.Label();
-			this.labelSeparator = new System.Windows.Forms.Label();
-			this.labelRemarks = new System.Windows.Forms.Label();
-			this.textBoxRemarks = new System.Windows.Forms.TextBox();
-			this.labelProduct = new System.Windows.Forms.Label();
-			this.labelSupplier = new System.Windows.Forms.Label();
-			this.labelStandart = new System.Windows.Forms.Label();
-			this.labelManufacturer = new System.Windows.Forms.Label();
-			this.textBoxManufacturer = new System.Windows.Forms.TextBox();
-			this.labelProductCode = new System.Windows.Forms.Label();
-			this.textBoxProductCode = new System.Windows.Forms.TextBox();
+			this.labelType = new MetroFramework.Controls.MetroLabel();
+			this.labelSerialNumber = new MetroFramework.Controls.MetroLabel();
+			this.textBoxSerialNumber = new MetroFramework.Controls.MetroTextBox();
+			this.labelPartNumber = new MetroFramework.Controls.MetroLabel();
+			this.textBoxPartNumber = new MetroFramework.Controls.MetroTextBox();
+			this.labelDescription = new MetroFramework.Controls.MetroLabel();
+			this.textBoxDescription = new MetroFramework.Controls.MetroTextBox();
+			this.labelMeasure = new MetroFramework.Controls.MetroLabel();
+			this.labelQuantity = new MetroFramework.Controls.MetroLabel();
+			this.labelSeparator = new MetroFramework.Controls.MetroLabel();
+			this.labelRemarks = new MetroFramework.Controls.MetroLabel();
+			this.textBoxRemarks = new MetroFramework.Controls.MetroTextBox();
+			this.labelProduct = new MetroFramework.Controls.MetroLabel();
+			this.labelSupplier = new MetroFramework.Controls.MetroLabel();
+			this.labelStandart = new MetroFramework.Controls.MetroLabel();
+			this.labelManufacturer = new MetroFramework.Controls.MetroLabel();
+			this.textBoxManufacturer = new MetroFramework.Controls.MetroTextBox();
+			this.labelProductCode = new MetroFramework.Controls.MetroLabel();
+			this.textBoxProductCode = new MetroFramework.Controls.MetroTextBox();
 			this.buttonSaveAndAdd = new System.Windows.Forms.Button();
 			this.comboBoxStatus = new System.Windows.Forms.ComboBox();
-			this.labelStatus = new System.Windows.Forms.Label();
-			this.labelTotal = new System.Windows.Forms.Label();
-			this.textBoxTotal = new System.Windows.Forms.TextBox();
-			this.label1 = new System.Windows.Forms.Label();
-			this.checkBoxIncoming = new System.Windows.Forms.CheckBox();
-			this.labelDiscrepancy = new System.Windows.Forms.Label();
-			this.textBoxDiscrepancy = new System.Windows.Forms.TextBox();
-			this.labelFaaForm = new System.Windows.Forms.Label();
-			this.label4 = new System.Windows.Forms.Label();
-			this.labelIamge = new System.Windows.Forms.Label();
+			this.labelStatus = new MetroFramework.Controls.MetroLabel();
+			this.labelTotal = new MetroFramework.Controls.MetroLabel();
+			this.textBoxTotal = new MetroFramework.Controls.MetroTextBox();
+			this.label1 = new MetroFramework.Controls.MetroLabel();
+			this.checkBoxIncoming = new MetroFramework.Controls.MetroCheckBox();
+			this.labelDiscrepancy = new MetroFramework.Controls.MetroLabel();
+			this.textBoxDiscrepancy = new MetroFramework.Controls.MetroTextBox();
+			this.labelFaaForm = new MetroFramework.Controls.MetroLabel();
+			this.label4 = new MetroFramework.Controls.MetroLabel();
+			this.labelIamge = new MetroFramework.Controls.MetroLabel();
 			this.fileControlImage = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
 			this.fileControlShipping = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
 			this.fileControlFaaForm = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
@@ -97,24 +99,23 @@
 			this.lifelengthViewerNotify = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.lifelengthViewerLifeLimit = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.comboBoxDetailClass = new CAS.UI.UIControls.Auxiliary.TreeDictionaryComboBox();
-			this.checkBoxDangerous = new System.Windows.Forms.CheckBox();
-			this.checkBoxPOOL = new System.Windows.Forms.CheckBox();
+			this.checkBoxDangerous = new MetroFramework.Controls.MetroCheckBox();
+			this.checkBoxPOOL = new MetroFramework.Controls.MetroCheckBox();
 			this.comboBoxSupplier = new System.Windows.Forms.ComboBox();
 			this.dateTimePickerReciveDate = new System.Windows.Forms.DateTimePicker();
-			this.label2 = new System.Windows.Forms.Label();
-			this.labelAltpartNum = new System.Windows.Forms.Label();
-			this.textBoxAltPartNum = new System.Windows.Forms.TextBox();
+			this.label2 = new MetroFramework.Controls.MetroLabel();
+			this.labelAltpartNum = new MetroFramework.Controls.MetroLabel();
+			this.textBoxAltPartNum = new MetroFramework.Controls.MetroTextBox();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// labelInstallDate
 			// 
 			this.labelInstallDate.AutoSize = true;
-			this.labelInstallDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelInstallDate.ForeColor = System.Drawing.Color.Black;
-			this.labelInstallDate.Location = new System.Drawing.Point(609, 174);
+			this.labelInstallDate.Location = new System.Drawing.Point(619, 230);
 			this.labelInstallDate.Name = "labelInstallDate";
-			this.labelInstallDate.Size = new System.Drawing.Size(80, 13);
+			this.labelInstallDate.Size = new System.Drawing.Size(78, 19);
 			this.labelInstallDate.TabIndex = 103;
 			this.labelInstallDate.Text = "Install. Date:";
 			this.labelInstallDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -125,7 +126,7 @@
 			this.dateTimePickerInstallDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateTimePickerInstallDate.ForeColor = System.Drawing.Color.Black;
 			this.dateTimePickerInstallDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.dateTimePickerInstallDate.Location = new System.Drawing.Point(696, 172);
+			this.dateTimePickerInstallDate.Location = new System.Drawing.Point(706, 230);
 			this.dateTimePickerInstallDate.Name = "dateTimePickerInstallDate";
 			this.dateTimePickerInstallDate.Size = new System.Drawing.Size(200, 20);
 			this.dateTimePickerInstallDate.TabIndex = 14;
@@ -134,11 +135,10 @@
 			// labelManufactureDate
 			// 
 			this.labelManufactureDate.AutoSize = true;
-			this.labelManufactureDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelManufactureDate.ForeColor = System.Drawing.Color.Black;
-			this.labelManufactureDate.Location = new System.Drawing.Point(609, 147);
+			this.labelManufactureDate.Location = new System.Drawing.Point(619, 202);
 			this.labelManufactureDate.Name = "labelManufactureDate";
-			this.labelManufactureDate.Size = new System.Drawing.Size(81, 13);
+			this.labelManufactureDate.Size = new System.Drawing.Size(82, 19);
 			this.labelManufactureDate.TabIndex = 101;
 			this.labelManufactureDate.Text = "Manuf. Date:";
 			this.labelManufactureDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -149,7 +149,7 @@
 			this.dateTimePickerManufactureDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateTimePickerManufactureDate.ForeColor = System.Drawing.Color.Black;
 			this.dateTimePickerManufactureDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.dateTimePickerManufactureDate.Location = new System.Drawing.Point(696, 144);
+			this.dateTimePickerManufactureDate.Location = new System.Drawing.Point(706, 202);
 			this.dateTimePickerManufactureDate.Name = "dateTimePickerManufactureDate";
 			this.dateTimePickerManufactureDate.Size = new System.Drawing.Size(200, 20);
 			this.dateTimePickerManufactureDate.TabIndex = 13;
@@ -158,7 +158,7 @@
 			// comboBoxMeasure
 			// 
 			this.comboBoxMeasure.FormattingEnabled = true;
-			this.comboBoxMeasure.Location = new System.Drawing.Point(400, 221);
+			this.comboBoxMeasure.Location = new System.Drawing.Point(410, 279);
 			this.comboBoxMeasure.Name = "comboBoxMeasure";
 			this.comboBoxMeasure.Size = new System.Drawing.Size(200, 21);
 			this.comboBoxMeasure.TabIndex = 7;
@@ -167,11 +167,10 @@
 			// labelLocation
 			// 
 			this.labelLocation.AutoSize = true;
-			this.labelLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelLocation.ForeColor = System.Drawing.Color.Black;
-			this.labelLocation.Location = new System.Drawing.Point(314, 198);
+			this.labelLocation.Location = new System.Drawing.Point(324, 252);
 			this.labelLocation.Name = "labelLocation";
-			this.labelLocation.Size = new System.Drawing.Size(51, 13);
+			this.labelLocation.Size = new System.Drawing.Size(61, 19);
 			this.labelLocation.TabIndex = 98;
 			this.labelLocation.Text = "Location:";
 			this.labelLocation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -179,7 +178,7 @@
 			// comboBoxPosition
 			// 
 			this.comboBoxPosition.FormattingEnabled = true;
-			this.comboBoxPosition.Location = new System.Drawing.Point(400, 165);
+			this.comboBoxPosition.Location = new System.Drawing.Point(410, 223);
 			this.comboBoxPosition.Name = "comboBoxPosition";
 			this.comboBoxPosition.Size = new System.Drawing.Size(200, 21);
 			this.comboBoxPosition.TabIndex = 3;
@@ -187,11 +186,10 @@
 			// labelPosition
 			// 
 			this.labelPosition.AutoSize = true;
-			this.labelPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelPosition.ForeColor = System.Drawing.Color.Black;
-			this.labelPosition.Location = new System.Drawing.Point(313, 168);
+			this.labelPosition.Location = new System.Drawing.Point(324, 223);
 			this.labelPosition.Name = "labelPosition";
-			this.labelPosition.Size = new System.Drawing.Size(35, 13);
+			this.labelPosition.Size = new System.Drawing.Size(41, 19);
 			this.labelPosition.TabIndex = 96;
 			this.labelPosition.Text = "State:";
 			this.labelPosition.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -199,11 +197,10 @@
 			// labelBatchNumber
 			// 
 			this.labelBatchNumber.AutoSize = true;
-			this.labelBatchNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelBatchNumber.ForeColor = System.Drawing.Color.Black;
-			this.labelBatchNumber.Location = new System.Drawing.Point(12, 168);
+			this.labelBatchNumber.Location = new System.Drawing.Point(13, 223);
 			this.labelBatchNumber.Name = "labelBatchNumber";
-			this.labelBatchNumber.Size = new System.Drawing.Size(78, 13);
+			this.labelBatchNumber.Size = new System.Drawing.Size(98, 19);
 			this.labelBatchNumber.TabIndex = 92;
 			this.labelBatchNumber.Text = "Batch Number:";
 			this.labelBatchNumber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -211,22 +208,42 @@
 			// textBoxBatchNumber
 			// 
 			this.textBoxBatchNumber.BackColor = System.Drawing.Color.White;
-			this.textBoxBatchNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			// 
+			// 
+			// 
+			this.textBoxBatchNumber.CustomButton.Image = null;
+			this.textBoxBatchNumber.CustomButton.Location = new System.Drawing.Point(182, 2);
+			this.textBoxBatchNumber.CustomButton.Name = "";
+			this.textBoxBatchNumber.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.textBoxBatchNumber.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxBatchNumber.CustomButton.TabIndex = 1;
+			this.textBoxBatchNumber.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxBatchNumber.CustomButton.UseSelectable = true;
+			this.textBoxBatchNumber.CustomButton.Visible = false;
 			this.textBoxBatchNumber.ForeColor = System.Drawing.Color.Black;
-			this.textBoxBatchNumber.Location = new System.Drawing.Point(108, 165);
+			this.textBoxBatchNumber.Lines = new string[0];
+			this.textBoxBatchNumber.Location = new System.Drawing.Point(118, 223);
 			this.textBoxBatchNumber.MaxLength = 128;
 			this.textBoxBatchNumber.Name = "textBoxBatchNumber";
+			this.textBoxBatchNumber.PasswordChar = '\0';
+			this.textBoxBatchNumber.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textBoxBatchNumber.SelectedText = "";
+			this.textBoxBatchNumber.SelectionLength = 0;
+			this.textBoxBatchNumber.SelectionStart = 0;
+			this.textBoxBatchNumber.ShortcutsEnabled = true;
 			this.textBoxBatchNumber.Size = new System.Drawing.Size(200, 20);
 			this.textBoxBatchNumber.TabIndex = 6;
+			this.textBoxBatchNumber.UseSelectable = true;
+			this.textBoxBatchNumber.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxBatchNumber.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// labelIdNumber
 			// 
 			this.labelIdNumber.AutoSize = true;
-			this.labelIdNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelIdNumber.ForeColor = System.Drawing.Color.Black;
-			this.labelIdNumber.Location = new System.Drawing.Point(12, 194);
+			this.labelIdNumber.Location = new System.Drawing.Point(13, 250);
 			this.labelIdNumber.Name = "labelIdNumber";
-			this.labelIdNumber.Size = new System.Drawing.Size(61, 13);
+			this.labelIdNumber.Size = new System.Drawing.Size(78, 19);
 			this.labelIdNumber.TabIndex = 94;
 			this.labelIdNumber.Text = "ID Number:";
 			this.labelIdNumber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -234,13 +251,34 @@
 			// textBoxIdNumber
 			// 
 			this.textBoxIdNumber.BackColor = System.Drawing.Color.White;
-			this.textBoxIdNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			// 
+			// 
+			// 
+			this.textBoxIdNumber.CustomButton.Image = null;
+			this.textBoxIdNumber.CustomButton.Location = new System.Drawing.Point(182, 2);
+			this.textBoxIdNumber.CustomButton.Name = "";
+			this.textBoxIdNumber.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.textBoxIdNumber.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxIdNumber.CustomButton.TabIndex = 1;
+			this.textBoxIdNumber.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxIdNumber.CustomButton.UseSelectable = true;
+			this.textBoxIdNumber.CustomButton.Visible = false;
 			this.textBoxIdNumber.ForeColor = System.Drawing.Color.Black;
-			this.textBoxIdNumber.Location = new System.Drawing.Point(108, 191);
+			this.textBoxIdNumber.Lines = new string[0];
+			this.textBoxIdNumber.Location = new System.Drawing.Point(118, 250);
 			this.textBoxIdNumber.MaxLength = 128;
 			this.textBoxIdNumber.Name = "textBoxIdNumber";
+			this.textBoxIdNumber.PasswordChar = '\0';
+			this.textBoxIdNumber.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textBoxIdNumber.SelectedText = "";
+			this.textBoxIdNumber.SelectionLength = 0;
+			this.textBoxIdNumber.SelectionStart = 0;
+			this.textBoxIdNumber.ShortcutsEnabled = true;
 			this.textBoxIdNumber.Size = new System.Drawing.Size(200, 20);
 			this.textBoxIdNumber.TabIndex = 8;
+			this.textBoxIdNumber.UseSelectable = true;
+			this.textBoxIdNumber.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxIdNumber.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// buttonOK
 			// 
@@ -248,10 +286,10 @@
 			this.buttonOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOK.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOK.Location = new System.Drawing.Point(764, 650);
+			this.buttonOK.Location = new System.Drawing.Point(748, 715);
 			this.buttonOK.Margin = new System.Windows.Forms.Padding(2);
 			this.buttonOK.Name = "buttonOK";
-			this.buttonOK.Size = new System.Drawing.Size(56, 27);
+			this.buttonOK.Size = new System.Drawing.Size(75, 33);
 			this.buttonOK.TabIndex = 20;
 			this.buttonOK.Text = "OK";
 			this.buttonOK.Click += new System.EventHandler(this.ButtonOkClick);
@@ -263,10 +301,10 @@
 			this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonCancel.Location = new System.Drawing.Point(823, 650);
+			this.buttonCancel.Location = new System.Drawing.Point(827, 715);
 			this.buttonCancel.Margin = new System.Windows.Forms.Padding(2);
 			this.buttonCancel.Name = "buttonCancel";
-			this.buttonCancel.Size = new System.Drawing.Size(69, 27);
+			this.buttonCancel.Size = new System.Drawing.Size(75, 33);
 			this.buttonCancel.TabIndex = 21;
 			this.buttonCancel.Text = "Cancel";
 			this.buttonCancel.Click += new System.EventHandler(this.ButtonCancelClick);
@@ -274,7 +312,7 @@
 			// numericUpDownQuantity
 			// 
 			this.numericUpDownQuantity.DecimalPlaces = 2;
-			this.numericUpDownQuantity.Location = new System.Drawing.Point(696, 87);
+			this.numericUpDownQuantity.Location = new System.Drawing.Point(706, 147);
 			this.numericUpDownQuantity.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -289,11 +327,10 @@
 			// labelType
 			// 
 			this.labelType.AutoSize = true;
-			this.labelType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelType.ForeColor = System.Drawing.Color.Black;
-			this.labelType.Location = new System.Drawing.Point(313, 144);
+			this.labelType.Location = new System.Drawing.Point(324, 196);
 			this.labelType.Name = "labelType";
-			this.labelType.Size = new System.Drawing.Size(41, 13);
+			this.labelType.Size = new System.Drawing.Size(41, 19);
 			this.labelType.TabIndex = 76;
 			this.labelType.Text = "Class:";
 			this.labelType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -301,11 +338,10 @@
 			// labelSerialNumber
 			// 
 			this.labelSerialNumber.AutoSize = true;
-			this.labelSerialNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelSerialNumber.ForeColor = System.Drawing.Color.Black;
-			this.labelSerialNumber.Location = new System.Drawing.Point(12, 142);
+			this.labelSerialNumber.Location = new System.Drawing.Point(13, 196);
 			this.labelSerialNumber.Name = "labelSerialNumber";
-			this.labelSerialNumber.Size = new System.Drawing.Size(76, 13);
+			this.labelSerialNumber.Size = new System.Drawing.Size(98, 19);
 			this.labelSerialNumber.TabIndex = 77;
 			this.labelSerialNumber.Text = "Serial Number:";
 			this.labelSerialNumber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -313,22 +349,42 @@
 			// textBoxSerialNumber
 			// 
 			this.textBoxSerialNumber.BackColor = System.Drawing.Color.White;
-			this.textBoxSerialNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			// 
+			// 
+			// 
+			this.textBoxSerialNumber.CustomButton.Image = null;
+			this.textBoxSerialNumber.CustomButton.Location = new System.Drawing.Point(182, 2);
+			this.textBoxSerialNumber.CustomButton.Name = "";
+			this.textBoxSerialNumber.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.textBoxSerialNumber.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxSerialNumber.CustomButton.TabIndex = 1;
+			this.textBoxSerialNumber.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxSerialNumber.CustomButton.UseSelectable = true;
+			this.textBoxSerialNumber.CustomButton.Visible = false;
 			this.textBoxSerialNumber.ForeColor = System.Drawing.Color.Black;
-			this.textBoxSerialNumber.Location = new System.Drawing.Point(108, 139);
+			this.textBoxSerialNumber.Lines = new string[0];
+			this.textBoxSerialNumber.Location = new System.Drawing.Point(118, 197);
 			this.textBoxSerialNumber.MaxLength = 128;
 			this.textBoxSerialNumber.Name = "textBoxSerialNumber";
+			this.textBoxSerialNumber.PasswordChar = '\0';
+			this.textBoxSerialNumber.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textBoxSerialNumber.SelectedText = "";
+			this.textBoxSerialNumber.SelectionLength = 0;
+			this.textBoxSerialNumber.SelectionStart = 0;
+			this.textBoxSerialNumber.ShortcutsEnabled = true;
 			this.textBoxSerialNumber.Size = new System.Drawing.Size(200, 20);
 			this.textBoxSerialNumber.TabIndex = 4;
+			this.textBoxSerialNumber.UseSelectable = true;
+			this.textBoxSerialNumber.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxSerialNumber.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// labelPartNumber
 			// 
 			this.labelPartNumber.AutoSize = true;
-			this.labelPartNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelPartNumber.ForeColor = System.Drawing.Color.Black;
-			this.labelPartNumber.Location = new System.Drawing.Point(12, 90);
+			this.labelPartNumber.Location = new System.Drawing.Point(13, 145);
 			this.labelPartNumber.Name = "labelPartNumber";
-			this.labelPartNumber.Size = new System.Drawing.Size(81, 13);
+			this.labelPartNumber.Size = new System.Drawing.Size(90, 19);
 			this.labelPartNumber.TabIndex = 79;
 			this.labelPartNumber.Text = "Part Number:";
 			this.labelPartNumber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -336,22 +392,42 @@
 			// textBoxPartNumber
 			// 
 			this.textBoxPartNumber.BackColor = System.Drawing.Color.White;
-			this.textBoxPartNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			// 
+			// 
+			// 
+			this.textBoxPartNumber.CustomButton.Image = null;
+			this.textBoxPartNumber.CustomButton.Location = new System.Drawing.Point(182, 2);
+			this.textBoxPartNumber.CustomButton.Name = "";
+			this.textBoxPartNumber.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.textBoxPartNumber.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxPartNumber.CustomButton.TabIndex = 1;
+			this.textBoxPartNumber.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxPartNumber.CustomButton.UseSelectable = true;
+			this.textBoxPartNumber.CustomButton.Visible = false;
 			this.textBoxPartNumber.ForeColor = System.Drawing.Color.Black;
-			this.textBoxPartNumber.Location = new System.Drawing.Point(108, 87);
+			this.textBoxPartNumber.Lines = new string[0];
+			this.textBoxPartNumber.Location = new System.Drawing.Point(118, 145);
 			this.textBoxPartNumber.MaxLength = 128;
 			this.textBoxPartNumber.Name = "textBoxPartNumber";
+			this.textBoxPartNumber.PasswordChar = '\0';
+			this.textBoxPartNumber.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textBoxPartNumber.SelectedText = "";
+			this.textBoxPartNumber.SelectionLength = 0;
+			this.textBoxPartNumber.SelectionStart = 0;
+			this.textBoxPartNumber.ShortcutsEnabled = true;
 			this.textBoxPartNumber.Size = new System.Drawing.Size(200, 20);
 			this.textBoxPartNumber.TabIndex = 2;
+			this.textBoxPartNumber.UseSelectable = true;
+			this.textBoxPartNumber.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxPartNumber.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// labelDescription
 			// 
 			this.labelDescription.AutoSize = true;
-			this.labelDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelDescription.ForeColor = System.Drawing.Color.Black;
-			this.labelDescription.Location = new System.Drawing.Point(12, 278);
+			this.labelDescription.Location = new System.Drawing.Point(13, 334);
 			this.labelDescription.Name = "labelDescription";
-			this.labelDescription.Size = new System.Drawing.Size(75, 13);
+			this.labelDescription.Size = new System.Drawing.Size(77, 19);
 			this.labelDescription.TabIndex = 81;
 			this.labelDescription.Text = "Description:";
 			this.labelDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -359,24 +435,43 @@
 			// textBoxDescription
 			// 
 			this.textBoxDescription.BackColor = System.Drawing.Color.White;
-			this.textBoxDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			// 
+			// 
+			// 
+			this.textBoxDescription.CustomButton.Image = null;
+			this.textBoxDescription.CustomButton.Location = new System.Drawing.Point(120, 1);
+			this.textBoxDescription.CustomButton.Name = "";
+			this.textBoxDescription.CustomButton.Size = new System.Drawing.Size(79, 79);
+			this.textBoxDescription.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxDescription.CustomButton.TabIndex = 1;
+			this.textBoxDescription.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxDescription.CustomButton.UseSelectable = true;
+			this.textBoxDescription.CustomButton.Visible = false;
 			this.textBoxDescription.ForeColor = System.Drawing.Color.Black;
-			this.textBoxDescription.Location = new System.Drawing.Point(106, 276);
+			this.textBoxDescription.Lines = new string[0];
+			this.textBoxDescription.Location = new System.Drawing.Point(118, 334);
 			this.textBoxDescription.MaxLength = 256;
 			this.textBoxDescription.Multiline = true;
 			this.textBoxDescription.Name = "textBoxDescription";
+			this.textBoxDescription.PasswordChar = '\0';
 			this.textBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxDescription.Size = new System.Drawing.Size(202, 81);
+			this.textBoxDescription.SelectedText = "";
+			this.textBoxDescription.SelectionLength = 0;
+			this.textBoxDescription.SelectionStart = 0;
+			this.textBoxDescription.ShortcutsEnabled = true;
+			this.textBoxDescription.Size = new System.Drawing.Size(200, 81);
 			this.textBoxDescription.TabIndex = 10;
+			this.textBoxDescription.UseSelectable = true;
+			this.textBoxDescription.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxDescription.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// labelMeasure
 			// 
 			this.labelMeasure.AutoSize = true;
-			this.labelMeasure.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelMeasure.ForeColor = System.Drawing.Color.Black;
-			this.labelMeasure.Location = new System.Drawing.Point(314, 225);
+			this.labelMeasure.Location = new System.Drawing.Point(324, 279);
 			this.labelMeasure.Name = "labelMeasure";
-			this.labelMeasure.Size = new System.Drawing.Size(59, 13);
+			this.labelMeasure.Size = new System.Drawing.Size(62, 19);
 			this.labelMeasure.TabIndex = 83;
 			this.labelMeasure.Text = "Measure:";
 			this.labelMeasure.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -384,11 +479,10 @@
 			// labelQuantity
 			// 
 			this.labelQuantity.AutoSize = true;
-			this.labelQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelQuantity.ForeColor = System.Drawing.Color.Black;
-			this.labelQuantity.Location = new System.Drawing.Point(609, 91);
+			this.labelQuantity.Location = new System.Drawing.Point(619, 147);
 			this.labelQuantity.Name = "labelQuantity";
-			this.labelQuantity.Size = new System.Drawing.Size(73, 13);
+			this.labelQuantity.Size = new System.Drawing.Size(75, 19);
 			this.labelQuantity.TabIndex = 84;
 			this.labelQuantity.Text = "Quantity In:";
 			this.labelQuantity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -396,7 +490,7 @@
 			// labelSeparator
 			// 
 			this.labelSeparator.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.labelSeparator.Location = new System.Drawing.Point(12, 549);
+			this.labelSeparator.Location = new System.Drawing.Point(22, 607);
 			this.labelSeparator.Name = "labelSeparator";
 			this.labelSeparator.Size = new System.Drawing.Size(880, 1);
 			this.labelSeparator.TabIndex = 85;
@@ -404,11 +498,10 @@
 			// labelRemarks
 			// 
 			this.labelRemarks.AutoSize = true;
-			this.labelRemarks.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelRemarks.ForeColor = System.Drawing.Color.Black;
-			this.labelRemarks.Location = new System.Drawing.Point(314, 250);
+			this.labelRemarks.Location = new System.Drawing.Point(324, 305);
 			this.labelRemarks.Name = "labelRemarks";
-			this.labelRemarks.Size = new System.Drawing.Size(52, 13);
+			this.labelRemarks.Size = new System.Drawing.Size(62, 19);
 			this.labelRemarks.TabIndex = 86;
 			this.labelRemarks.Text = "Remarks:";
 			this.labelRemarks.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -416,22 +509,42 @@
 			// textBoxRemarks
 			// 
 			this.textBoxRemarks.BackColor = System.Drawing.Color.White;
-			this.textBoxRemarks.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			// 
+			// 
+			// 
+			this.textBoxRemarks.CustomButton.Image = null;
+			this.textBoxRemarks.CustomButton.Location = new System.Drawing.Point(93, 1);
+			this.textBoxRemarks.CustomButton.Name = "";
+			this.textBoxRemarks.CustomButton.Size = new System.Drawing.Size(107, 107);
+			this.textBoxRemarks.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxRemarks.CustomButton.TabIndex = 1;
+			this.textBoxRemarks.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxRemarks.CustomButton.UseSelectable = true;
+			this.textBoxRemarks.CustomButton.Visible = false;
 			this.textBoxRemarks.ForeColor = System.Drawing.Color.Black;
-			this.textBoxRemarks.Location = new System.Drawing.Point(400, 248);
+			this.textBoxRemarks.Lines = new string[0];
+			this.textBoxRemarks.Location = new System.Drawing.Point(410, 306);
+			this.textBoxRemarks.MaxLength = 32767;
 			this.textBoxRemarks.Multiline = true;
 			this.textBoxRemarks.Name = "textBoxRemarks";
+			this.textBoxRemarks.PasswordChar = '\0';
 			this.textBoxRemarks.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.textBoxRemarks.SelectedText = "";
+			this.textBoxRemarks.SelectionLength = 0;
+			this.textBoxRemarks.SelectionStart = 0;
+			this.textBoxRemarks.ShortcutsEnabled = true;
 			this.textBoxRemarks.Size = new System.Drawing.Size(201, 109);
 			this.textBoxRemarks.TabIndex = 11;
+			this.textBoxRemarks.UseSelectable = true;
+			this.textBoxRemarks.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxRemarks.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// labelProduct
 			// 
 			this.labelProduct.AutoSize = true;
-			this.labelProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelProduct.Location = new System.Drawing.Point(12, 11);
+			this.labelProduct.Location = new System.Drawing.Point(13, 64);
 			this.labelProduct.Name = "labelProduct";
-			this.labelProduct.Size = new System.Drawing.Size(55, 13);
+			this.labelProduct.Size = new System.Drawing.Size(58, 19);
 			this.labelProduct.TabIndex = 105;
 			this.labelProduct.Text = "Product:";
 			// 
@@ -439,17 +552,16 @@
 			// 
 			this.labelSupplier.AutoSize = true;
 			this.labelSupplier.ForeColor = System.Drawing.SystemColors.WindowText;
-			this.labelSupplier.Location = new System.Drawing.Point(427, 462);
+			this.labelSupplier.Location = new System.Drawing.Point(437, 520);
 			this.labelSupplier.Name = "labelSupplier";
-			this.labelSupplier.Size = new System.Drawing.Size(95, 13);
+			this.labelSupplier.Size = new System.Drawing.Size(111, 19);
 			this.labelSupplier.TabIndex = 108;
 			this.labelSupplier.Text = "PRODUCT COST:";
 			this.labelSupplier.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// labelStandart
 			// 
-			this.labelStandart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-			this.labelStandart.Location = new System.Drawing.Point(12, 58);
+			this.labelStandart.Location = new System.Drawing.Point(13, 115);
 			this.labelStandart.Name = "labelStandart";
 			this.labelStandart.Size = new System.Drawing.Size(69, 25);
 			this.labelStandart.TabIndex = 110;
@@ -459,11 +571,10 @@
 			// labelManufacturer
 			// 
 			this.labelManufacturer.AutoSize = true;
-			this.labelManufacturer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelManufacturer.ForeColor = System.Drawing.Color.Black;
-			this.labelManufacturer.Location = new System.Drawing.Point(12, 251);
+			this.labelManufacturer.Location = new System.Drawing.Point(13, 305);
 			this.labelManufacturer.Name = "labelManufacturer";
-			this.labelManufacturer.Size = new System.Drawing.Size(73, 13);
+			this.labelManufacturer.Size = new System.Drawing.Size(91, 19);
 			this.labelManufacturer.TabIndex = 118;
 			this.labelManufacturer.Text = "Manufacturer:";
 			this.labelManufacturer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -471,22 +582,42 @@
 			// textBoxManufacturer
 			// 
 			this.textBoxManufacturer.BackColor = System.Drawing.Color.White;
-			this.textBoxManufacturer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			// 
+			// 
+			// 
+			this.textBoxManufacturer.CustomButton.Image = null;
+			this.textBoxManufacturer.CustomButton.Location = new System.Drawing.Point(182, 2);
+			this.textBoxManufacturer.CustomButton.Name = "";
+			this.textBoxManufacturer.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.textBoxManufacturer.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxManufacturer.CustomButton.TabIndex = 1;
+			this.textBoxManufacturer.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxManufacturer.CustomButton.UseSelectable = true;
+			this.textBoxManufacturer.CustomButton.Visible = false;
 			this.textBoxManufacturer.ForeColor = System.Drawing.Color.Black;
-			this.textBoxManufacturer.Location = new System.Drawing.Point(108, 248);
+			this.textBoxManufacturer.Lines = new string[0];
+			this.textBoxManufacturer.Location = new System.Drawing.Point(118, 306);
 			this.textBoxManufacturer.MaxLength = 128;
 			this.textBoxManufacturer.Name = "textBoxManufacturer";
+			this.textBoxManufacturer.PasswordChar = '\0';
+			this.textBoxManufacturer.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textBoxManufacturer.SelectedText = "";
+			this.textBoxManufacturer.SelectionLength = 0;
+			this.textBoxManufacturer.SelectionStart = 0;
+			this.textBoxManufacturer.ShortcutsEnabled = true;
 			this.textBoxManufacturer.Size = new System.Drawing.Size(200, 20);
 			this.textBoxManufacturer.TabIndex = 117;
+			this.textBoxManufacturer.UseSelectable = true;
+			this.textBoxManufacturer.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxManufacturer.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// labelProductCode
 			// 
 			this.labelProductCode.AutoSize = true;
-			this.labelProductCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelProductCode.ForeColor = System.Drawing.Color.Black;
-			this.labelProductCode.Location = new System.Drawing.Point(12, 223);
+			this.labelProductCode.Location = new System.Drawing.Point(13, 279);
 			this.labelProductCode.Name = "labelProductCode";
-			this.labelProductCode.Size = new System.Drawing.Size(35, 13);
+			this.labelProductCode.Size = new System.Drawing.Size(44, 19);
 			this.labelProductCode.TabIndex = 120;
 			this.labelProductCode.Text = "Code:";
 			this.labelProductCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -494,13 +625,34 @@
 			// textBoxProductCode
 			// 
 			this.textBoxProductCode.BackColor = System.Drawing.Color.White;
-			this.textBoxProductCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			// 
+			// 
+			// 
+			this.textBoxProductCode.CustomButton.Image = null;
+			this.textBoxProductCode.CustomButton.Location = new System.Drawing.Point(182, 2);
+			this.textBoxProductCode.CustomButton.Name = "";
+			this.textBoxProductCode.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.textBoxProductCode.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxProductCode.CustomButton.TabIndex = 1;
+			this.textBoxProductCode.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxProductCode.CustomButton.UseSelectable = true;
+			this.textBoxProductCode.CustomButton.Visible = false;
 			this.textBoxProductCode.ForeColor = System.Drawing.Color.Black;
-			this.textBoxProductCode.Location = new System.Drawing.Point(108, 221);
+			this.textBoxProductCode.Lines = new string[0];
+			this.textBoxProductCode.Location = new System.Drawing.Point(118, 279);
 			this.textBoxProductCode.MaxLength = 128;
 			this.textBoxProductCode.Name = "textBoxProductCode";
+			this.textBoxProductCode.PasswordChar = '\0';
+			this.textBoxProductCode.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textBoxProductCode.SelectedText = "";
+			this.textBoxProductCode.SelectionLength = 0;
+			this.textBoxProductCode.SelectionStart = 0;
+			this.textBoxProductCode.ShortcutsEnabled = true;
 			this.textBoxProductCode.Size = new System.Drawing.Size(200, 20);
 			this.textBoxProductCode.TabIndex = 119;
+			this.textBoxProductCode.UseSelectable = true;
+			this.textBoxProductCode.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxProductCode.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// buttonSaveAndAdd
 			// 
@@ -508,7 +660,7 @@
 			this.buttonSaveAndAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonSaveAndAdd.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonSaveAndAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonSaveAndAdd.Location = new System.Drawing.Point(780, 733);
+			this.buttonSaveAndAdd.Location = new System.Drawing.Point(780, 773);
 			this.buttonSaveAndAdd.Margin = new System.Windows.Forms.Padding(2);
 			this.buttonSaveAndAdd.Name = "buttonSaveAndAdd";
 			this.buttonSaveAndAdd.Size = new System.Drawing.Size(128, 27);
@@ -519,7 +671,7 @@
 			// comboBoxStatus
 			// 
 			this.comboBoxStatus.FormattingEnabled = true;
-			this.comboBoxStatus.Location = new System.Drawing.Point(401, 113);
+			this.comboBoxStatus.Location = new System.Drawing.Point(410, 171);
 			this.comboBoxStatus.Name = "comboBoxStatus";
 			this.comboBoxStatus.Size = new System.Drawing.Size(200, 21);
 			this.comboBoxStatus.TabIndex = 122;
@@ -527,11 +679,10 @@
 			// labelStatus
 			// 
 			this.labelStatus.AutoSize = true;
-			this.labelStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelStatus.ForeColor = System.Drawing.Color.Black;
-			this.labelStatus.Location = new System.Drawing.Point(314, 116);
+			this.labelStatus.Location = new System.Drawing.Point(324, 171);
 			this.labelStatus.Name = "labelStatus";
-			this.labelStatus.Size = new System.Drawing.Size(40, 13);
+			this.labelStatus.Size = new System.Drawing.Size(46, 19);
 			this.labelStatus.TabIndex = 123;
 			this.labelStatus.Text = "Status:";
 			this.labelStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -539,11 +690,10 @@
 			// labelTotal
 			// 
 			this.labelTotal.AutoSize = true;
-			this.labelTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelTotal.ForeColor = System.Drawing.Color.Black;
-			this.labelTotal.Location = new System.Drawing.Point(609, 119);
+			this.labelTotal.Location = new System.Drawing.Point(619, 175);
 			this.labelTotal.Name = "labelTotal";
-			this.labelTotal.Size = new System.Drawing.Size(44, 13);
+			this.labelTotal.Size = new System.Drawing.Size(56, 19);
 			this.labelTotal.TabIndex = 126;
 			this.labelTotal.Text = "Current:";
 			this.labelTotal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -551,23 +701,43 @@
 			// textBoxTotal
 			// 
 			this.textBoxTotal.BackColor = System.Drawing.Color.White;
-			this.textBoxTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			// 
+			// 
+			// 
+			this.textBoxTotal.CustomButton.Image = null;
+			this.textBoxTotal.CustomButton.Location = new System.Drawing.Point(183, 2);
+			this.textBoxTotal.CustomButton.Name = "";
+			this.textBoxTotal.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.textBoxTotal.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxTotal.CustomButton.TabIndex = 1;
+			this.textBoxTotal.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxTotal.CustomButton.UseSelectable = true;
+			this.textBoxTotal.CustomButton.Visible = false;
 			this.textBoxTotal.ForeColor = System.Drawing.Color.Black;
-			this.textBoxTotal.Location = new System.Drawing.Point(697, 117);
+			this.textBoxTotal.Lines = new string[0];
+			this.textBoxTotal.Location = new System.Drawing.Point(706, 175);
 			this.textBoxTotal.MaxLength = 128;
 			this.textBoxTotal.Name = "textBoxTotal";
+			this.textBoxTotal.PasswordChar = '\0';
 			this.textBoxTotal.ReadOnly = true;
-			this.textBoxTotal.Size = new System.Drawing.Size(200, 20);
+			this.textBoxTotal.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textBoxTotal.SelectedText = "";
+			this.textBoxTotal.SelectionLength = 0;
+			this.textBoxTotal.SelectionStart = 0;
+			this.textBoxTotal.ShortcutsEnabled = true;
+			this.textBoxTotal.Size = new System.Drawing.Size(201, 20);
 			this.textBoxTotal.TabIndex = 125;
+			this.textBoxTotal.UseSelectable = true;
+			this.textBoxTotal.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxTotal.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label1.ForeColor = System.Drawing.Color.Black;
-			this.label1.Location = new System.Drawing.Point(314, 91);
+			this.label1.Location = new System.Drawing.Point(324, 147);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(31, 13);
+			this.label1.Size = new System.Drawing.Size(33, 19);
 			this.label1.TabIndex = 128;
 			this.label1.Text = "ATA:";
 			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -575,24 +745,22 @@
 			// checkBoxIncoming
 			// 
 			this.checkBoxIncoming.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.checkBoxIncoming.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.checkBoxIncoming.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.checkBoxIncoming.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.checkBoxIncoming.Location = new System.Drawing.Point(749, 225);
+			this.checkBoxIncoming.Location = new System.Drawing.Point(759, 283);
 			this.checkBoxIncoming.Name = "checkBoxIncoming";
 			this.checkBoxIncoming.Size = new System.Drawing.Size(147, 26);
 			this.checkBoxIncoming.TabIndex = 131;
 			this.checkBoxIncoming.Text = "Incoming Control";
+			this.checkBoxIncoming.UseSelectable = true;
 			this.checkBoxIncoming.CheckedChanged += new System.EventHandler(this.checkBoxIncoming_CheckedChanged);
 			// 
 			// labelDiscrepancy
 			// 
 			this.labelDiscrepancy.AutoSize = true;
-			this.labelDiscrepancy.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelDiscrepancy.ForeColor = System.Drawing.Color.Black;
-			this.labelDiscrepancy.Location = new System.Drawing.Point(609, 252);
+			this.labelDiscrepancy.Location = new System.Drawing.Point(619, 305);
 			this.labelDiscrepancy.Name = "labelDiscrepancy";
-			this.labelDiscrepancy.Size = new System.Drawing.Size(69, 13);
+			this.labelDiscrepancy.Size = new System.Drawing.Size(81, 19);
 			this.labelDiscrepancy.TabIndex = 133;
 			this.labelDiscrepancy.Text = "Discrepancy:";
 			this.labelDiscrepancy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -600,23 +768,43 @@
 			// textBoxDiscrepancy
 			// 
 			this.textBoxDiscrepancy.BackColor = System.Drawing.Color.White;
-			this.textBoxDiscrepancy.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			// 
+			// 
+			// 
+			this.textBoxDiscrepancy.CustomButton.Image = null;
+			this.textBoxDiscrepancy.CustomButton.Location = new System.Drawing.Point(93, 2);
+			this.textBoxDiscrepancy.CustomButton.Name = "";
+			this.textBoxDiscrepancy.CustomButton.Size = new System.Drawing.Size(105, 105);
+			this.textBoxDiscrepancy.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxDiscrepancy.CustomButton.TabIndex = 1;
+			this.textBoxDiscrepancy.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxDiscrepancy.CustomButton.UseSelectable = true;
+			this.textBoxDiscrepancy.CustomButton.Visible = false;
 			this.textBoxDiscrepancy.ForeColor = System.Drawing.Color.Black;
-			this.textBoxDiscrepancy.Location = new System.Drawing.Point(696, 247);
+			this.textBoxDiscrepancy.Lines = new string[0];
+			this.textBoxDiscrepancy.Location = new System.Drawing.Point(706, 305);
+			this.textBoxDiscrepancy.MaxLength = 32767;
 			this.textBoxDiscrepancy.Multiline = true;
 			this.textBoxDiscrepancy.Name = "textBoxDiscrepancy";
+			this.textBoxDiscrepancy.PasswordChar = '\0';
 			this.textBoxDiscrepancy.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.textBoxDiscrepancy.SelectedText = "";
+			this.textBoxDiscrepancy.SelectionLength = 0;
+			this.textBoxDiscrepancy.SelectionStart = 0;
+			this.textBoxDiscrepancy.ShortcutsEnabled = true;
 			this.textBoxDiscrepancy.Size = new System.Drawing.Size(201, 110);
 			this.textBoxDiscrepancy.TabIndex = 132;
+			this.textBoxDiscrepancy.UseSelectable = true;
+			this.textBoxDiscrepancy.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxDiscrepancy.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// labelFaaForm
 			// 
 			this.labelFaaForm.AutoSize = true;
-			this.labelFaaForm.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelFaaForm.ForeColor = System.Drawing.Color.Black;
-			this.labelFaaForm.Location = new System.Drawing.Point(9, 377);
+			this.labelFaaForm.Location = new System.Drawing.Point(19, 435);
 			this.labelFaaForm.Name = "labelFaaForm";
-			this.labelFaaForm.Size = new System.Drawing.Size(56, 13);
+			this.labelFaaForm.Size = new System.Drawing.Size(72, 19);
 			this.labelFaaForm.TabIndex = 135;
 			this.labelFaaForm.Text = "FAA Form:";
 			this.labelFaaForm.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -624,11 +812,10 @@
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label4.ForeColor = System.Drawing.Color.Black;
-			this.label4.Location = new System.Drawing.Point(313, 377);
+			this.label4.Location = new System.Drawing.Point(323, 435);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(77, 13);
+			this.label4.Size = new System.Drawing.Size(93, 19);
 			this.label4.TabIndex = 137;
 			this.label4.Text = "Shipping Doc.:";
 			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -636,11 +823,10 @@
 			// labelIamge
 			// 
 			this.labelIamge.AutoSize = true;
-			this.labelIamge.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelIamge.ForeColor = System.Drawing.Color.Black;
-			this.labelIamge.Location = new System.Drawing.Point(608, 377);
+			this.labelIamge.Location = new System.Drawing.Point(618, 435);
 			this.labelIamge.Name = "labelIamge";
-			this.labelIamge.Size = new System.Drawing.Size(39, 13);
+			this.labelIamge.Size = new System.Drawing.Size(49, 19);
 			this.labelIamge.TabIndex = 140;
 			this.labelIamge.Text = "Image:";
 			this.labelIamge.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -654,7 +840,7 @@
 			this.fileControlImage.Filter = null;
 			this.fileControlImage.Icon = global::CAS.UI.Properties.Resources.ImageIcon_Small;
 			this.fileControlImage.IconNotEnabled = global::CAS.UI.Properties.Resources.ImageIcon_Small_Gray;
-			this.fileControlImage.Location = new System.Drawing.Point(696, 363);
+			this.fileControlImage.Location = new System.Drawing.Point(706, 421);
 			this.fileControlImage.MaximumSize = new System.Drawing.Size(350, 100);
 			this.fileControlImage.Name = "fileControlImage";
 			this.fileControlImage.ShowLinkLabelBrowse = true;
@@ -670,7 +856,7 @@
 			this.fileControlShipping.Filter = null;
 			this.fileControlShipping.Icon = global::CAS.UI.Properties.Resources.PDFIconSmall;
 			this.fileControlShipping.IconNotEnabled = global::CAS.UI.Properties.Resources.PDFIconSmall_gray;
-			this.fileControlShipping.Location = new System.Drawing.Point(399, 363);
+			this.fileControlShipping.Location = new System.Drawing.Point(409, 421);
 			this.fileControlShipping.MaximumSize = new System.Drawing.Size(350, 100);
 			this.fileControlShipping.Name = "fileControlShipping";
 			this.fileControlShipping.ShowLinkLabelBrowse = true;
@@ -686,7 +872,7 @@
 			this.fileControlFaaForm.Filter = null;
 			this.fileControlFaaForm.Icon = global::CAS.UI.Properties.Resources.PDFIconSmall;
 			this.fileControlFaaForm.IconNotEnabled = global::CAS.UI.Properties.Resources.PDFIconSmall_gray;
-			this.fileControlFaaForm.Location = new System.Drawing.Point(108, 363);
+			this.fileControlFaaForm.Location = new System.Drawing.Point(118, 421);
 			this.fileControlFaaForm.MaximumSize = new System.Drawing.Size(350, 100);
 			this.fileControlFaaForm.Name = "fileControlFaaForm";
 			this.fileControlFaaForm.ShowLinkLabelBrowse = true;
@@ -696,7 +882,7 @@
 			// 
 			// ataChapterComboBox
 			// 
-			this.ataChapterComboBox.Location = new System.Drawing.Point(400, 89);
+			this.ataChapterComboBox.Location = new System.Drawing.Point(410, 147);
 			this.ataChapterComboBox.Name = "ataChapterComboBox";
 			this.ataChapterComboBox.Size = new System.Drawing.Size(200, 21);
 			this.ataChapterComboBox.TabIndex = 129;
@@ -706,7 +892,7 @@
 			this.dictionaryComboBoxLocation.Displayer = null;
 			this.dictionaryComboBoxLocation.DisplayerText = null;
 			this.dictionaryComboBoxLocation.Entity = null;
-			this.dictionaryComboBoxLocation.Location = new System.Drawing.Point(400, 194);
+			this.dictionaryComboBoxLocation.Location = new System.Drawing.Point(410, 252);
 			this.dictionaryComboBoxLocation.Name = "dictionaryComboBoxLocation";
 			this.dictionaryComboBoxLocation.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.dictionaryComboBoxLocation.Size = new System.Drawing.Size(200, 21);
@@ -718,7 +904,7 @@
 			this.dataGridViewControlSuppliers.Displayer = null;
 			this.dataGridViewControlSuppliers.DisplayerText = null;
 			this.dataGridViewControlSuppliers.Entity = null;
-			this.dataGridViewControlSuppliers.Location = new System.Drawing.Point(14, 479);
+			this.dataGridViewControlSuppliers.Location = new System.Drawing.Point(24, 537);
 			this.dataGridViewControlSuppliers.Name = "dataGridViewControlSuppliers";
 			this.dataGridViewControlSuppliers.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.dataGridViewControlSuppliers.RowHeadersVisible = false;
@@ -734,7 +920,7 @@
 			this.comboBoxStandart.Displayer = null;
 			this.comboBoxStandart.DisplayerText = null;
 			this.comboBoxStandart.Entity = null;
-			this.comboBoxStandart.Location = new System.Drawing.Point(108, 61);
+			this.comboBoxStandart.Location = new System.Drawing.Point(118, 119);
 			this.comboBoxStandart.Name = "comboBoxStandart";
 			this.comboBoxStandart.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.comboBoxStandart.Size = new System.Drawing.Size(791, 21);
@@ -760,7 +946,7 @@
 			this.lifelengthViewerWarranty.HeaderHours = "Hours";
 			this.lifelengthViewerWarranty.HoursApplicable = false;
 			this.lifelengthViewerWarranty.LeftHeader = "Warranty:";
-			this.lifelengthViewerWarranty.Location = new System.Drawing.Point(19, 610);
+			this.lifelengthViewerWarranty.Location = new System.Drawing.Point(29, 668);
 			this.lifelengthViewerWarranty.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.lifelengthViewerWarranty.Modified = false;
 			this.lifelengthViewerWarranty.Name = "lifelengthViewerWarranty";
@@ -791,7 +977,7 @@
 			this.lifelengthViewerWarrantyNotify.HeaderHours = "Hours";
 			this.lifelengthViewerWarrantyNotify.HoursApplicable = false;
 			this.lifelengthViewerWarrantyNotify.LeftHeader = "Notify:";
-			this.lifelengthViewerWarrantyNotify.Location = new System.Drawing.Point(485, 610);
+			this.lifelengthViewerWarrantyNotify.Location = new System.Drawing.Point(495, 668);
 			this.lifelengthViewerWarrantyNotify.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.lifelengthViewerWarrantyNotify.Modified = false;
 			this.lifelengthViewerWarrantyNotify.Name = "lifelengthViewerWarrantyNotify";
@@ -809,7 +995,7 @@
 			this.dictionaryComboProduct.Displayer = null;
 			this.dictionaryComboProduct.DisplayerText = null;
 			this.dictionaryComboProduct.Entity = null;
-			this.dictionaryComboProduct.Location = new System.Drawing.Point(108, 6);
+			this.dictionaryComboProduct.Location = new System.Drawing.Point(118, 64);
 			this.dictionaryComboProduct.Margin = new System.Windows.Forms.Padding(4);
 			this.dictionaryComboProduct.Name = "dictionaryComboProduct";
 			this.dictionaryComboProduct.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
@@ -836,7 +1022,7 @@
 			this.lifelengthViewerNotify.HeaderHours = "Hours";
 			this.lifelengthViewerNotify.HoursApplicable = false;
 			this.lifelengthViewerNotify.LeftHeader = "Notify:";
-			this.lifelengthViewerNotify.Location = new System.Drawing.Point(485, 554);
+			this.lifelengthViewerNotify.Location = new System.Drawing.Point(495, 612);
 			this.lifelengthViewerNotify.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.lifelengthViewerNotify.Modified = false;
 			this.lifelengthViewerNotify.Name = "lifelengthViewerNotify";
@@ -866,7 +1052,7 @@
 			this.lifelengthViewerLifeLimit.HeaderHours = "Hours";
 			this.lifelengthViewerLifeLimit.HoursApplicable = false;
 			this.lifelengthViewerLifeLimit.LeftHeader = "Life limit:";
-			this.lifelengthViewerLifeLimit.Location = new System.Drawing.Point(25, 554);
+			this.lifelengthViewerLifeLimit.Location = new System.Drawing.Point(35, 612);
 			this.lifelengthViewerLifeLimit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.lifelengthViewerLifeLimit.Modified = false;
 			this.lifelengthViewerLifeLimit.Name = "lifelengthViewerLifeLimit";
@@ -884,7 +1070,7 @@
 			this.comboBoxDetailClass.DisplayerText = null;
 			this.comboBoxDetailClass.DropDownHeight = 256;
 			this.comboBoxDetailClass.Entity = null;
-			this.comboBoxDetailClass.Location = new System.Drawing.Point(400, 138);
+			this.comboBoxDetailClass.Location = new System.Drawing.Point(410, 196);
 			this.comboBoxDetailClass.Margin = new System.Windows.Forms.Padding(4);
 			this.comboBoxDetailClass.Name = "comboBoxDetailClass";
 			this.comboBoxDetailClass.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
@@ -897,32 +1083,30 @@
 			// 
 			this.checkBoxDangerous.AutoSize = true;
 			this.checkBoxDangerous.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.checkBoxDangerous.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.checkBoxDangerous.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.checkBoxDangerous.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.checkBoxDangerous.Location = new System.Drawing.Point(788, 200);
+			this.checkBoxDangerous.Location = new System.Drawing.Point(798, 258);
 			this.checkBoxDangerous.Name = "checkBoxDangerous";
-			this.checkBoxDangerous.Size = new System.Drawing.Size(108, 18);
+			this.checkBoxDangerous.Size = new System.Drawing.Size(91, 15);
 			this.checkBoxDangerous.TabIndex = 142;
 			this.checkBoxDangerous.Text = "Is Dangerous";
+			this.checkBoxDangerous.UseSelectable = true;
 			// 
 			// checkBoxPOOL
 			// 
 			this.checkBoxPOOL.AutoSize = true;
 			this.checkBoxPOOL.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.checkBoxPOOL.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.checkBoxPOOL.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.checkBoxPOOL.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.checkBoxPOOL.Location = new System.Drawing.Point(708, 200);
+			this.checkBoxPOOL.Location = new System.Drawing.Point(718, 258);
 			this.checkBoxPOOL.Name = "checkBoxPOOL";
-			this.checkBoxPOOL.Size = new System.Drawing.Size(74, 18);
+			this.checkBoxPOOL.Size = new System.Drawing.Size(65, 15);
 			this.checkBoxPOOL.TabIndex = 141;
 			this.checkBoxPOOL.Text = "Is POOL";
+			this.checkBoxPOOL.UseSelectable = true;
 			// 
 			// comboBoxSupplier
 			// 
 			this.comboBoxSupplier.FormattingEnabled = true;
-			this.comboBoxSupplier.Location = new System.Drawing.Point(108, 33);
+			this.comboBoxSupplier.Location = new System.Drawing.Point(118, 91);
 			this.comboBoxSupplier.Name = "comboBoxSupplier";
 			this.comboBoxSupplier.Size = new System.Drawing.Size(200, 21);
 			this.comboBoxSupplier.TabIndex = 143;
@@ -934,15 +1118,14 @@
 			this.dateTimePickerReciveDate.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.dateTimePickerReciveDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.dateTimePickerReciveDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.dateTimePickerReciveDate.Location = new System.Drawing.Point(314, 33);
+			this.dateTimePickerReciveDate.Location = new System.Drawing.Point(324, 91);
 			this.dateTimePickerReciveDate.Name = "dateTimePickerReciveDate";
 			this.dateTimePickerReciveDate.Size = new System.Drawing.Size(105, 22);
 			this.dateTimePickerReciveDate.TabIndex = 150;
 			// 
 			// label2
 			// 
-			this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-			this.label2.Location = new System.Drawing.Point(12, 38);
+			this.label2.Location = new System.Drawing.Point(13, 91);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(90, 20);
 			this.label2.TabIndex = 151;
@@ -952,11 +1135,10 @@
 			// labelAltpartNum
 			// 
 			this.labelAltpartNum.AutoSize = true;
-			this.labelAltpartNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelAltpartNum.ForeColor = System.Drawing.Color.Black;
-			this.labelAltpartNum.Location = new System.Drawing.Point(12, 116);
+			this.labelAltpartNum.Location = new System.Drawing.Point(13, 171);
 			this.labelAltpartNum.Name = "labelAltpartNum";
-			this.labelAltpartNum.Size = new System.Drawing.Size(82, 13);
+			this.labelAltpartNum.Size = new System.Drawing.Size(89, 19);
 			this.labelAltpartNum.TabIndex = 153;
 			this.labelAltpartNum.Text = "Alt Part Num:";
 			this.labelAltpartNum.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -964,13 +1146,34 @@
 			// textBoxAltPartNum
 			// 
 			this.textBoxAltPartNum.BackColor = System.Drawing.Color.White;
-			this.textBoxAltPartNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			// 
+			// 
+			// 
+			this.textBoxAltPartNum.CustomButton.Image = null;
+			this.textBoxAltPartNum.CustomButton.Location = new System.Drawing.Point(182, 2);
+			this.textBoxAltPartNum.CustomButton.Name = "";
+			this.textBoxAltPartNum.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.textBoxAltPartNum.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxAltPartNum.CustomButton.TabIndex = 1;
+			this.textBoxAltPartNum.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxAltPartNum.CustomButton.UseSelectable = true;
+			this.textBoxAltPartNum.CustomButton.Visible = false;
 			this.textBoxAltPartNum.ForeColor = System.Drawing.Color.Black;
-			this.textBoxAltPartNum.Location = new System.Drawing.Point(108, 113);
+			this.textBoxAltPartNum.Lines = new string[0];
+			this.textBoxAltPartNum.Location = new System.Drawing.Point(118, 171);
 			this.textBoxAltPartNum.MaxLength = 128;
 			this.textBoxAltPartNum.Name = "textBoxAltPartNum";
+			this.textBoxAltPartNum.PasswordChar = '\0';
+			this.textBoxAltPartNum.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textBoxAltPartNum.SelectedText = "";
+			this.textBoxAltPartNum.SelectionLength = 0;
+			this.textBoxAltPartNum.SelectionStart = 0;
+			this.textBoxAltPartNum.ShortcutsEnabled = true;
 			this.textBoxAltPartNum.Size = new System.Drawing.Size(200, 20);
 			this.textBoxAltPartNum.TabIndex = 152;
+			this.textBoxAltPartNum.UseSelectable = true;
+			this.textBoxAltPartNum.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxAltPartNum.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// ConsumablePartAndKitForm
 			// 
@@ -978,7 +1181,7 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.buttonCancel;
-			this.ClientSize = new System.Drawing.Size(908, 691);
+			this.ClientSize = new System.Drawing.Size(924, 770);
 			this.Controls.Add(this.labelAltpartNum);
 			this.Controls.Add(this.textBoxAltPartNum);
 			this.Controls.Add(this.label2);
@@ -1047,11 +1250,11 @@
 			this.Controls.Add(this.textBoxRemarks);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
-			this.MaximumSize = new System.Drawing.Size(924, 730);
+			this.MaximumSize = new System.Drawing.Size(924, 780);
 			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(924, 730);
 			this.Name = "ConsumablePartAndKitForm";
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+			this.Resizable = false;
 			this.Text = "Consumable part/KIT/FLM form";
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).EndInit();
 			this.ResumeLayout(false);
@@ -1063,69 +1266,69 @@
 
         private Auxiliary.LifelengthViewer lifelengthViewerNotify;
         private Auxiliary.LifelengthViewer lifelengthViewerLifeLimit;
-        private System.Windows.Forms.Label labelInstallDate;
+        private MetroLabel labelInstallDate;
         private System.Windows.Forms.DateTimePicker dateTimePickerInstallDate;
-        private System.Windows.Forms.Label labelManufactureDate;
+        private MetroLabel labelManufactureDate;
         private System.Windows.Forms.DateTimePicker dateTimePickerManufactureDate;
         private System.Windows.Forms.ComboBox comboBoxMeasure;
-        private System.Windows.Forms.Label labelLocation;
+        private MetroLabel labelLocation;
         private System.Windows.Forms.ComboBox comboBoxPosition;
-        private System.Windows.Forms.Label labelPosition;
-        private System.Windows.Forms.Label labelBatchNumber;
-        private System.Windows.Forms.TextBox textBoxBatchNumber;
-        private System.Windows.Forms.Label labelIdNumber;
-        private System.Windows.Forms.TextBox textBoxIdNumber;
+        private MetroLabel labelPosition;
+        private MetroLabel labelBatchNumber;
+        private MetroTextBox textBoxBatchNumber;
+        private MetroLabel labelIdNumber;
+        private MetroTextBox textBoxIdNumber;
         private Auxiliary.TreeDictionaryComboBox comboBoxDetailClass;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.NumericUpDown numericUpDownQuantity;
-        private System.Windows.Forms.Label labelType;
-        private System.Windows.Forms.Label labelSerialNumber;
-        private System.Windows.Forms.TextBox textBoxSerialNumber;
-        private System.Windows.Forms.Label labelPartNumber;
-        private System.Windows.Forms.TextBox textBoxPartNumber;
-        private System.Windows.Forms.Label labelDescription;
-        private System.Windows.Forms.TextBox textBoxDescription;
-        private System.Windows.Forms.Label labelMeasure;
-        private System.Windows.Forms.Label labelQuantity;
-        private System.Windows.Forms.Label labelSeparator;
-        private System.Windows.Forms.Label labelRemarks;
-        private System.Windows.Forms.TextBox textBoxRemarks;
-        private System.Windows.Forms.Label labelProduct;
+        private MetroLabel labelType;
+        private MetroLabel labelSerialNumber;
+        private MetroTextBox textBoxSerialNumber;
+		private MetroLabel labelPartNumber;
+        private MetroTextBox textBoxPartNumber;
+        private MetroLabel labelDescription;
+        private MetroTextBox textBoxDescription;
+        private MetroLabel labelMeasure;
+        private MetroLabel labelQuantity;
+        private MetroLabel labelSeparator;
+        private MetroLabel labelRemarks;
+        private MetroTextBox textBoxRemarks;
+        private MetroLabel labelProduct;
         private Auxiliary.LookupCombobox dictionaryComboProduct;
-        private System.Windows.Forms.Label labelSupplier;
+        private MetroLabel labelSupplier;
         private Auxiliary.LifelengthViewer lifelengthViewerWarranty;
         private Auxiliary.LifelengthViewer lifelengthViewerWarrantyNotify;
-        private System.Windows.Forms.Label labelStandart;
+        private MetroLabel labelStandart;
         private Auxiliary.LookupCombobox comboBoxStandart;
-        private System.Windows.Forms.Label labelManufacturer;
-        private System.Windows.Forms.TextBox textBoxManufacturer;
-        private System.Windows.Forms.Label labelProductCode;
-        private System.Windows.Forms.TextBox textBoxProductCode;
+        private MetroLabel labelManufacturer;
+        private MetroTextBox textBoxManufacturer;
+        private MetroLabel labelProductCode;
+        private MetroTextBox textBoxProductCode;
         private System.Windows.Forms.Button buttonSaveAndAdd;
         private System.Windows.Forms.ComboBox comboBoxStatus;
-        private System.Windows.Forms.Label labelStatus;
+        private MetroLabel labelStatus;
         private Auxiliary.CommonDataGridViewControl dataGridViewControlSuppliers;
-        private System.Windows.Forms.Label labelTotal;
-        private System.Windows.Forms.TextBox textBoxTotal;
+        private MetroLabel labelTotal;
+        private MetroTextBox textBoxTotal;
 		private Auxiliary.DictionaryComboBox dictionaryComboBoxLocation;
-		private System.Windows.Forms.Label label1;
+		private MetroLabel label1;
 		private Auxiliary.ATAChapterComboBox ataChapterComboBox;
-		private System.Windows.Forms.CheckBox checkBoxIncoming;
-		private System.Windows.Forms.Label labelDiscrepancy;
-		private System.Windows.Forms.TextBox textBoxDiscrepancy;
-		private System.Windows.Forms.Label labelFaaForm;
+		private MetroCheckBox checkBoxIncoming;
+		private MetroLabel labelDiscrepancy;
+		private MetroTextBox textBoxDiscrepancy;
+		private MetroLabel labelFaaForm;
 		private Auxiliary.AttachedFileControl fileControlFaaForm;
 		private Auxiliary.AttachedFileControl fileControlShipping;
-		private System.Windows.Forms.Label label4;
+		private MetroLabel label4;
 		private Auxiliary.AttachedFileControl fileControlImage;
-		private System.Windows.Forms.Label labelIamge;
-		private System.Windows.Forms.CheckBox checkBoxDangerous;
-		private System.Windows.Forms.CheckBox checkBoxPOOL;
+		private MetroLabel labelIamge;
+		private MetroCheckBox checkBoxDangerous;
+		private MetroCheckBox checkBoxPOOL;
 		private System.Windows.Forms.ComboBox comboBoxSupplier;
 		private System.Windows.Forms.DateTimePicker dateTimePickerReciveDate;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.Label labelAltpartNum;
-		private System.Windows.Forms.TextBox textBoxAltPartNum;
+		private MetroLabel label2;
+		private MetroLabel labelAltpartNum;
+		private MetroTextBox textBoxAltPartNum;
 	}
 }

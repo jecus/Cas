@@ -43,6 +43,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.LinkRigestry = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.ExportMonthly = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel(true);
 			this.Users = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+			this.Activity = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.ExportATLB = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel(true);
 			this.LinkRecords = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkInternalDocuments = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -57,6 +58,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.LinkPersonnel = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkGeneral = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkOccurences = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+			this.LinkEvent = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkSystem = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkComponents = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkEngines = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -81,6 +83,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.LinkEvets = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this._purchaseReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
 			this.LinkInitialOrders = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+			this.LinkOrders = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkPurchaseOrders = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkQuotationOrders = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkSuppliers = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -267,8 +270,8 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this._adminContainer.Location = new System.Drawing.Point(3, 232);
 			this._adminContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this._adminContainer.Name = "_adminContainer";
-			this._adminContainer.ReferenceLink = this.Users;
-			this._adminContainer.ReferenceLink02 = null;
+			this._adminContainer.ReferenceLink = this.Activity;
+			this._adminContainer.ReferenceLink02 = this.Users;
 			this._adminContainer.ReferenceLink03 = null;
 			this._adminContainer.ReferenceLink04 = null;
 			this._adminContainer.ReferenceLink05 = null;
@@ -312,6 +315,30 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.ExportMonthly.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.ExportMonthly.Click +=	 ExportMonthly_Click;
 			// 
+			// Activity
+			// 
+			this.Activity.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.Activity.Displayer = null;
+			this.Activity.DisplayerText = null;
+			this.Activity.Entity = null;
+			this.Activity.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.Activity.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.Activity.ImageBackColor = System.Drawing.Color.Transparent;
+			this.Activity.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.Activity.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.Activity.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.Activity.Location = new System.Drawing.Point(10, 0);
+			this.Activity.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.Activity.Name = "Activity";
+			this.Activity.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.Activity.Size = new System.Drawing.Size(188, 20);
+			this.Activity.Status = AvControls.Statuses.Satisfactory;
+			this.Activity.TabIndex = 2;
+			this.Activity.Text = "Activity";
+			this.Activity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.Activity.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.Activity.DisplayerRequested += Activity_DisplayerRequested; ;
+			// 
 			// Users
 			// 
 			this.Users.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
@@ -336,10 +363,10 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.Users.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.Users.DisplayerRequested += Users_Click;
 
-            // 
-            // ExportMonthly
-            // 
-            this.ExportATLB.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			// 
+			// ExportMonthly
+			// 
+			this.ExportATLB.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
             this.ExportATLB.Displayer = null;
             this.ExportATLB.DisplayerText = null;
             this.ExportATLB.Entity = null;
@@ -703,6 +730,30 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.LinkGeneral.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkGeneral.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			// 
+			// LinkEvent
+			// 
+			this.LinkEvent.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkEvent.Displayer = null;
+			this.LinkEvent.DisplayerText = null;
+			this.LinkEvent.Entity = null;
+			this.LinkEvent.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.LinkEvent.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkEvent.ImageBackColor = System.Drawing.Color.Transparent;
+			this.LinkEvent.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.LinkEvent.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkEvent.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.LinkEvent.Location = new System.Drawing.Point(10, 0);
+			this.LinkEvent.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.LinkEvent.Name = "LinkEvent";
+			this.LinkEvent.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.LinkEvent.Size = new System.Drawing.Size(280, 20);
+			this.LinkEvent.Status = AvControls.Statuses.Satisfactory;
+			this.LinkEvent.TabIndex = 6;
+			this.LinkEvent.Text = "Event";
+			this.LinkEvent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.LinkEvent.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.LinkEvent.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkEventDisplayerRequested);
+			// 
 			// LinkOccurences
 			// 
 			this.LinkOccurences.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
@@ -820,6 +871,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.LinkDefects.Text = "Defects";
 			this.LinkDefects.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkDefects.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.LinkDefects.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkDefectDisplayerRequested);
 			//
 			// LinkDefferedDefects
 			// 
@@ -881,15 +933,14 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this._reliabilityReferenceContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this._reliabilityReferenceContainer.Name = "_reliabilityReferenceContainer";
 			this._reliabilityReferenceContainer.ReferenceLink = LinkGeneral;
-			this._reliabilityReferenceContainer.ReferenceLink02 = LinkOccurences;
-			this._reliabilityReferenceContainer.ReferenceLink03 = LinkSystem;
-			this._reliabilityReferenceContainer.ReferenceLink04 = LinkComponents;
-			this._reliabilityReferenceContainer.ReferenceLink05 = LinkEngines;
-			this._reliabilityReferenceContainer.ReferenceLink06 = LinkDefects;
-			this._reliabilityReferenceContainer.ReferenceLink06 = LinkDefferedDefects;
-			this._reliabilityReferenceContainer.ReferenceLink07 = LinkReportBuilder;
-			this._reliabilityReferenceContainer.ReferenceLink08 = null;
-			this._reliabilityReferenceContainer.ReferenceLink09 = null;
+			this._reliabilityReferenceContainer.ReferenceLink02 = LinkEvent;
+			this._reliabilityReferenceContainer.ReferenceLink03 = LinkOccurences;
+			this._reliabilityReferenceContainer.ReferenceLink04 = LinkSystem;
+			this._reliabilityReferenceContainer.ReferenceLink05 = LinkComponents;
+			this._reliabilityReferenceContainer.ReferenceLink06 = LinkEngines;
+			this._reliabilityReferenceContainer.ReferenceLink07 = LinkDefects;
+			this._reliabilityReferenceContainer.ReferenceLink08 = LinkDefferedDefects;
+			this._reliabilityReferenceContainer.ReferenceLink09 = LinkReportBuilder;
 			this._reliabilityReferenceContainer.ReferenceLink10 = null;
 			this._reliabilityReferenceContainer.ReferenceLink11 = null;
 			this._reliabilityReferenceContainer.ReferenceLink12 = null;
@@ -2082,9 +2133,10 @@ namespace CAS.UI.UIControls.OpepatorsControls
 #if DEMO
             this._purchaseReferenceContainer.ReferenceLink04 = this.LinkSuppliers;
 #else
+            this._purchaseReferenceContainer.ReferenceLink = this.LinkOrders;
             this._purchaseReferenceContainer.ReferenceLink = this.LinkInitialOrders;
-			this._purchaseReferenceContainer.ReferenceLink02 = this.LinkPurchaseOrders;
 			this._purchaseReferenceContainer.ReferenceLink03 = this.LinkQuotationOrders;
+			this._purchaseReferenceContainer.ReferenceLink02 = this.LinkPurchaseOrders;
 			this._purchaseReferenceContainer.ReferenceLink04 = this.LinkSuppliers;
 			this._purchaseReferenceContainer.ReferenceLink05 = this.LinkSupplierComponents;
 #endif
@@ -2112,6 +2164,31 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this._purchaseReferenceContainer.Size = new System.Drawing.Size(158, 42);
 			this._purchaseReferenceContainer.TabIndex = 51;
 			this._purchaseReferenceContainer.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
+			// 
+			// LinkOrders
+			// 
+			this.LinkOrders.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkOrders.Displayer = null;
+			this.LinkOrders.DisplayerText = null;
+			this.LinkOrders.Entity = null;
+			this.LinkOrders.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.LinkOrders.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkOrders.ImageBackColor = System.Drawing.Color.Transparent;
+			this.LinkOrders.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.LinkOrders.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkOrders.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.LinkOrders.Location = new System.Drawing.Point(10, 0);
+			this.LinkOrders.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.LinkOrders.MaximumSize = new System.Drawing.Size(250, 20);
+			this.LinkOrders.Name = "LinkOrders";
+			this.LinkOrders.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.LinkOrders.Size = new System.Drawing.Size(250, 20);
+			this.LinkOrders.Status = AvControls.Statuses.Satisfactory;
+			this.LinkOrders.TabIndex = 52;
+			this.LinkOrders.Text = "All Orders";
+			this.LinkOrders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.LinkOrders.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.LinkOrders.DisplayerRequested += LinkOrders_DisplayerRequested;
 			// 
 			// LinkInitialOrders
 			// 
@@ -2296,11 +2373,9 @@ namespace CAS.UI.UIControls.OpepatorsControls
 
 		}
 
-       
+		#endregion
 
-#endregion
-
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelReferences;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelReferences;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelAircrafts;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelStores;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelExport;
@@ -2331,6 +2406,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel ExportMonthly;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel Users;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel ExportATLB;
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel Activity;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRecords;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkInternalDocuments;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkNomenclatures;
@@ -2369,6 +2445,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkProducts;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkAllProducts;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkInitialOrders;
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkOrders;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkPurchaseOrders;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkQuotationOrders;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkSuppliers;
@@ -2380,6 +2457,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkGeneral;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkOccurences;
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkEvent;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkSystem;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkComponents;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkEngines;

@@ -1,4 +1,6 @@
 ﻿using MetroFramework.Controls;
+using CASTerms;
+using EFCore.DTO.General;
 
 namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {
@@ -30,6 +32,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
         /// </summary>
         private void InitializeComponent()
         {
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.comboBoxCurrency = new System.Windows.Forms.ComboBox();
@@ -102,6 +105,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.ButtonDelete.TextSecondary = "";
 			this.ButtonDelete.ToolTipText = "";
 			this.ButtonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
+			this.ButtonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
 			// groupBox1
 			// 

@@ -14,6 +14,13 @@ using SmartCore.Filters;
 
 namespace SmartCore.Discrepancies
 {
+	public enum DiscFilterType
+	{
+		All,
+		Defect,
+		Occurrence
+	}
+
 	public class DiscrepanciesCore : IDiscrepanciesCore
 	{
 		private readonly ILoader _loader;
@@ -32,23 +39,26 @@ namespace SmartCore.Discrepancies
 
 		#region public List<Discrepancy> GetDiscrepancies(Aircraft aircraft = null)
 
-		/// <summary>
-		/// Возвращает отклонения произошедшие на воздушном судне
-		/// </summary>
-		/// <param name="aircraft">Воздушное судно. При пережаче null вернет все отклонения хранящиеся в БД</param>
 		///// <param name="status">Фильтр статуса рабочего пакета. (По умолчанию = WorkPackageStatus.All)</param>
 		///// <param name="loadWorkPackageItems">Флаг загрузки элементов рабочих пакетов</param>
 		///// <param name="includedTasks">Задачи, которые должны содержать пакеты (при передаче пустои коллекции запрос вернет 0 рабочих пакетов)</param>
 		/// <returns></returns>
-		public List<Discrepancy> GetDiscrepancies(Aircraft aircraft = null) //TODO: Переделать на int? aircraftId = null
+		public List<Discrepancy> GetDiscrepancies(Aircraft aircraft = null, DiscFilterType filterType = DiscFilterType.All) //TODO: Переделать на int? aircraftId = null
 		{
 			var resultList = new List<Discrepancy>();
-			var ids = new List<int>();
 			var preResultList = new List<Discrepancy>();
+
+
+			var filters = new List<ICommonFilter>();
+
+			if(filterType == DiscFilterType.Defect)
+				filters.Add(new CommonFilter<bool>(Discrepancy.IsReliabilityProperty, true));
+			else if(filterType == DiscFilterType.Occurrence)
+				filters.Add(new CommonFilter<bool>(Discrepancy.IsOccurrenceProperty, true));
 
 			if (aircraft != null)
 			{
-				preResultList.AddRange(_loader.GetObjectList<Discrepancy>(new []
+				preResultList.AddRange(_loader.GetObjectList<Discrepancy>(new[]
 				{
 					new CommonFilter<string>(Discrepancy.FlightIdProperty,FilterType.In, new []{$"(Select ItemId from AircraftFlights where AircraftId = {aircraft.ItemId})"}),
 				}));
@@ -58,7 +68,7 @@ namespace SmartCore.Discrepancies
 				//что значения ключевого поля таблицы должны быть
 				//среди идентификаторов родительских задач КИТов
 			}
-			else preResultList.AddRange(_newLoader.GetObjectListAll<DiscrepancyDTO, Discrepancy>());
+			else preResultList.AddRange(_loader.GetObjectListAll<Discrepancy>(filters.ToArray()));
 
 
 			#region//заполнение Discrepancies CorrectiveAction в Discrepancies нового полета//

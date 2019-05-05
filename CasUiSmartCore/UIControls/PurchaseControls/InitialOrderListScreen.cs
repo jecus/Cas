@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
-using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.PurchaseControls.Initial;
@@ -18,9 +17,9 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
+using SmartCore.Entities.General.Interfaces;
 using SmartCore.Filters;
 using SmartCore.Purchase;
-using FilterType = EFCore.Attributte.FilterType;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
@@ -30,7 +29,7 @@ namespace CAS.UI.UIControls.PurchaseControls
     public partial class InitialOrderListScreen : ScreenControl
     {
         #region Fields
-        private CommonFilterCollection _filter = new CommonFilterCollection(typeof(InitialOrder));
+        private CommonFilterCollection _filter = new CommonFilterCollection(typeof(ILogistic));
         private ICommonCollection<InitialOrder> _initialArray = new CommonCollection<InitialOrder>();
         private ICommonCollection<InitialOrder> _resultArray = new CommonCollection<InitialOrder>();
         private readonly BaseEntityObject _parent;
@@ -244,59 +243,63 @@ namespace CAS.UI.UIControls.PurchaseControls
 		#endregion
 
 
-	    private void _toolStripMenuItemCreateQuatation_Click(object sender, EventArgs e)
-	    {
-		    try
-		    {
-			    var initial = _directivesViewer.SelectedItem;
-			    var quatation = new RequestForQuotation
-			    {
-				    Parent =  initial,
-				    ParentType = initial.SmartCoreObjectType,
-				    Title = initial.Title,
-				    OpeningDate = DateTime.Now,
-				    Author = initial.Author,
-				    Remarks = initial.Remarks,
-				    Number = initial.Number,
-			    };
+		#region private void _toolStripMenuItemCreateQuatation_Click(object sender, EventArgs e)
 
-			    GlobalObjects.CasEnvironment.NewKeeper.Save(quatation);
+		private void _toolStripMenuItemCreateQuatation_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				var initial = _directivesViewer.SelectedItem;
+				var quatation = new RequestForQuotation
+				{
+					Parent =  initial,
+					ParentType = initial.SmartCoreObjectType,
+					Title = initial.Title,
+					OpeningDate = DateTime.Now,
+					Author = initial.Author,
+					Remarks = initial.Remarks,
+					Number = initial.Number,
+				};
 
-			    var initialRecords = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(new Filter("ParentPackageId", initial.ItemId));
-			    var ids = initialRecords.Select(i => i.ProductId);
-			    if (ids.Count() > 0)
-			    {
-				    var product = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, Product>(new Filter("ItemId", ids));
-				    foreach (var addedInitialOrderRecord in initialRecords)
-					    addedInitialOrderRecord.Product = product.FirstOrDefault(i => i.ItemId == addedInitialOrderRecord.ProductId);
-			    }
+				GlobalObjects.CasEnvironment.NewKeeper.Save(quatation);
 
-			    foreach (var record in initialRecords)
-			    {
-				    var newquatationRecord = new RequestForQuotationRecord(quatation.ItemId, record.Product, record.Quantity);
-				    newquatationRecord.Priority = record.Priority;
-				    newquatationRecord.Measure = record.Measure;
-				    newquatationRecord.DeferredCategory = record.DeferredCategory;
-				    newquatationRecord.CostCondition = record.CostCondition;
-				    newquatationRecord.DestinationObjectType = record.DestinationObjectType;
-				    newquatationRecord.DestinationObjectId = record.DestinationObjectId;
-				    newquatationRecord.InitialReason = record.InitialReason;
-				    newquatationRecord.Remarks = record.Remarks;
-				    newquatationRecord.LifeLimit = new Lifelength(record.LifeLimit);
-				    newquatationRecord.LifeLimitNotify = new Lifelength(record.LifeLimitNotify);
+				var initialRecords = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(new Filter("ParentPackageId", initial.ItemId));
+				var ids = initialRecords.Select(i => i.ProductId);
+				if (ids.Count() > 0)
+				{
+					var product = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, Product>(new Filter("ItemId", ids));
+					foreach (var addedInitialOrderRecord in initialRecords)
+						addedInitialOrderRecord.Product = product.FirstOrDefault(i => i.ItemId == addedInitialOrderRecord.ProductId);
+				}
+
+				foreach (var record in initialRecords)
+				{
+					var newquatationRecord = new RequestForQuotationRecord(quatation.ItemId, record.Product, record.Quantity);
+					newquatationRecord.Priority = record.Priority;
+					newquatationRecord.Measure = record.Measure;
+					newquatationRecord.DeferredCategory = record.DeferredCategory;
+					newquatationRecord.CostCondition = record.CostCondition;
+					newquatationRecord.DestinationObjectType = record.DestinationObjectType;
+					newquatationRecord.DestinationObjectId = record.DestinationObjectId;
+					newquatationRecord.InitialReason = record.InitialReason;
+					newquatationRecord.Remarks = record.Remarks;
+					newquatationRecord.LifeLimit = new Lifelength(record.LifeLimit);
+					newquatationRecord.LifeLimitNotify = new Lifelength(record.LifeLimitNotify);
 
 					GlobalObjects.CasEnvironment.Keeper.Save(newquatationRecord);
-			    }
-		    }
+				}
+			}
 			catch (Exception ex)
 			{
 				Program.Provider.Logger.Log("Error while saving data", ex);
 				throw;
-		    }
+			}
 
 			MessageBox.Show("Create quatation successful", "Message infomation", MessageBoxButtons.OK,
 				MessageBoxIcon.Information);
 		}
+
+		#endregion
 
 		#region private void ContextMenuStripOpen(object sender,CancelEventArgs e)
 		/// <summary>

@@ -97,6 +97,9 @@ namespace EFCore.DTO.Dictionaries
         [DataMember]
         public string Reference { get; set; }
 
+		[DataMember]
+        public string IsEffectivity { get; set; }
+
         [DataMember]
         [Include]
 	    public ATAChapterDTO ATAChapter { get; set; }

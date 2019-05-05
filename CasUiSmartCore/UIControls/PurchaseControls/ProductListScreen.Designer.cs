@@ -1,4 +1,7 @@
-﻿namespace CAS.UI.UIControls.PurchaseControls
+﻿using CASTerms;
+using EFCore.DTO.General;
+
+namespace CAS.UI.UIControls.PurchaseControls
 {
     partial class ProductListScreen
     {
@@ -28,6 +31,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.buttonAddProduct = new AvControls.AvButtonT.AvButtonT();
 			this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
 			this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
@@ -83,6 +87,7 @@
 			this.buttonAddProduct.TextSecondary = "";
 			this.buttonAddProduct.ToolTipText = "Add new";
 			this.buttonAddProduct.Click += new System.EventHandler(this.ButtonAddProductClick);
+			this.buttonAddProduct.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// buttonApplyFilter
 			// 
@@ -138,6 +143,7 @@
 			this.buttonDeleteSelected.TextSecondary = "";
 			this.buttonDeleteSelected.ToolTipText = "Delete selected";
 			this.buttonDeleteSelected.Click += new System.EventHandler(this.ButtonDeleteClick);
+			this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
 			// pictureBox1
 			// 

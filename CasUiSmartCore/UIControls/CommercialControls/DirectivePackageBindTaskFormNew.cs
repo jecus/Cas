@@ -7,6 +7,7 @@ using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
+using MetroFramework.Forms;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -19,7 +20,7 @@ namespace CAS.UI.UIControls.CommercialControls
     /// <summary>
     /// Форма для переноса шаблона ВС в рабочую базу данных
     /// </summary>
-    public partial class DirectivePackageBindTaskFormNew : Form
+    public partial class DirectivePackageBindTaskFormNew : MetroForm
     {
 
         #region Fields

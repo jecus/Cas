@@ -52,7 +52,7 @@ namespace SmartCore.Entities.Dictionaries
 		/// <summary>
 		/// неизвестный
 		/// </summary>
-		public static Сurrency UNK = new Сurrency(-1, "UNK", "Unknown");
+		public static Сurrency UNK = new Сurrency(-1, "UNK", "UNK");
 		#endregion
 
 		#region public static Сurrency GetItemById(Int32 maintenanceTypeId)

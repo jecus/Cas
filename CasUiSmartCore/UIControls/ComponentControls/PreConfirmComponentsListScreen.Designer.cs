@@ -1,4 +1,6 @@
-﻿
+﻿using CASTerms;
+using EFCore.DTO.General;
+
 namespace CAS.UI.UIControls.ComponentControls
 {
     partial class PreConfirmComponentsListScreen
@@ -29,7 +31,8 @@ namespace CAS.UI.UIControls.ComponentControls
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -113,10 +116,11 @@ namespace CAS.UI.UIControls.ComponentControls
             this.buttonDeleteSelected.TextSecondary = "";
             this.buttonDeleteSelected.ToolTipText = "Delete selected";
             this.buttonDeleteSelected.Click += new System.EventHandler(this.ButtonDeleteClick);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
+            this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			// 
+			// pictureBox1
+			// 
+			this.pictureBox1.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox1.Location = new System.Drawing.Point(181, 3);
             this.pictureBox1.Name = "pictureBox1";

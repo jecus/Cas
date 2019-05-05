@@ -1,6 +1,8 @@
 ﻿using System.Threading;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CASTerms;
+using EFCore.DTO.General;
 
 namespace CAS.UI.UIControls.PersonnelControls
 {
@@ -35,6 +37,7 @@ namespace CAS.UI.UIControls.PersonnelControls
         /// </summary>
         private void InitializeComponent()
         {
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.labelBiWeeklyReport = new System.Windows.Forms.Label();
 			this.textboxBiWeeklyReport = new System.Windows.Forms.TextBox();
 			this.documentationListView = new CAS.UI.UIControls.DocumentationControls.DocumentationListView();
@@ -108,6 +111,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			this.buttonDelete.TextSecondary = "";
 			this.buttonDelete.ToolTipText = "Delete";
 			this.buttonDelete.Click += new System.EventHandler(this.ButtonDeleteClick);
+			this.buttonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
 			// ButtonAdd
 			// 
@@ -136,6 +140,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			this.ButtonAdd.TextSecondary = "";
 			this.ButtonAdd.ToolTipText = "Add Item";
 			this.ButtonAdd.Click += new System.EventHandler(this.ButtonAddClick);
+			this.ButtonAdd.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// ButtonFilter
 			// 

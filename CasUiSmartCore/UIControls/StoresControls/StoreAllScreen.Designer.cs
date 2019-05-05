@@ -1,4 +1,5 @@
-﻿
+﻿using CASTerms;
+using EFCore.DTO.General;
 using CAS.UI.UIControls.Auxiliary;
 
 namespace CAS.UI.UIControls.StoresControls
@@ -31,7 +32,8 @@ namespace CAS.UI.UIControls.StoresControls
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
             this.pictureBoxSeparatorD = new System.Windows.Forms.PictureBox();
             this.pictureBoxSeparatorF = new System.Windows.Forms.PictureBox();
@@ -144,10 +146,11 @@ namespace CAS.UI.UIControls.StoresControls
             this.buttonDeleteSelected.TextSecondary = "";
             this.buttonDeleteSelected.ToolTipText = "Delete selected";
             this.buttonDeleteSelected.Click += new System.EventHandler(this.ButtonDeleteClick);
-            // 
-            // pictureBoxSeparatorD
-            // 
-            this.pictureBoxSeparatorD.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
+            this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			// 
+			// pictureBoxSeparatorD
+			// 
+			this.pictureBoxSeparatorD.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
             this.pictureBoxSeparatorD.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBoxSeparatorD.Location = new System.Drawing.Point(247, 3);
             this.pictureBoxSeparatorD.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);

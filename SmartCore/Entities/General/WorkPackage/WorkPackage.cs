@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using EFCore.DTO.General;
+using Newtonsoft.Json;
 using SmartCore.Auxiliary;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Calculations;
@@ -16,7 +18,10 @@ using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.Personnel;
 using SmartCore.Files;
 using SmartCore.Packages;
+using SmartCore.Purchase;
+using ComponentCollection = SmartCore.Entities.Collections.ComponentCollection;
 using Convert = System.Convert;
+using Currency =  SmartCore.Entities.Dictionaries.Сurrency;
 
 namespace SmartCore.Entities.General.WorkPackage
 {
@@ -52,8 +57,8 @@ namespace SmartCore.Entities.General.WorkPackage
         /// 
         /// </summary>
         [TableColumn("Number")]
-        [ListViewData(100f, "WP No:", 2)]
-        [FilterAttribute("WP No", Order = 1)]
+        [ListViewData(100f, "WP/WO №", 2)]
+        [FilterAttribute("WP/WO №", Order = 1)]
         public String Number { get; set; }
         #endregion
 
@@ -143,7 +148,7 @@ namespace SmartCore.Entities.General.WorkPackage
                                                     Cas3WorkPakageRecord.WorkPackageItemType = 14 and 
                                                     Cas3WorkPakageRecord.WorkPakageId = WorkPackages.ItemId)) WPMH)"
             )]
-        [ListViewData(85, "MH", 10)]
+        [ListViewData(85, "MH", 12)]
         public double ManHours { get; set; }
         #endregion
 
@@ -151,7 +156,7 @@ namespace SmartCore.Entities.General.WorkPackage
         /// <summary>
         /// 
         /// </summary>
-        [ListViewData(0.08f, "Persent", 14)]
+        [ListViewData(0.08f, "Persent", 18)]
         public double Persent { get; set; }
         #endregion
 
@@ -283,17 +288,80 @@ namespace SmartCore.Entities.General.WorkPackage
             }
         }
 
-        #endregion
+		#endregion
 
-        #region public DateTime ClosingDate { get; set; }
+		[TableColumn("PerformAfter")]
+		public string PerformAfter
+		{
+			get => JsonConvert.SerializeObject(PerfAfter, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+			set => PerfAfter = JsonConvert.DeserializeObject<PerformAfter>(value ?? "", new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+		}
 
-        private DateTime _closingDate;
+		public PerformAfter PerfAfter
+		{
+			get => _perfAfter ?? (_perfAfter = new PerformAfter());
+			set => _perfAfter = value;
+		}
+
+		[ListViewData(0.1f, "Perform Date", 9)]
+		public string PerformDate => PerfAfter.PerformDate != DateTimeExtend.GetCASMinDateTime() ?  SmartCore.Auxiliary.Convert.GetDateFormat(PerfAfter.PerformDate) : "";
+
+		[ListViewData(0.1f, "Perform After", 8)]
+		public string PerformAfterLW => PerfAfter.ToString();
+
+		[TableColumn("WpWorkType")]
+		public WpWorkType WpWorkType
+		{
+			get => _wpWorkType ?? WpWorkType.Unknown;
+			set => _wpWorkType = value;
+		}
+
+
+		[TableColumn("ProviderJSON")]
+		public string ProviderJSON
+		{
+			get => JsonConvert.SerializeObject(ProviderPrice, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+			set => ProviderPrice = JsonConvert.DeserializeObject<List<ProviderPrice>>(value ?? "", new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+		}
+
+		private List<ProviderPrice> _providerPrice;
+		public List<ProviderPrice> ProviderPrice
+		{
+			get => _providerPrice ?? (_providerPrice = new List<ProviderPrice>());
+			set => _providerPrice = value;
+		}
+
+
+		#region public double KMH { get; set; }
+
+		[TableColumn("KMH")]
+		public double KMH { get; set; }
+
+		#endregion
+
+		#region public string KMHLW => KMH.ToString("##.##");
+
+		[ListViewData(85, "K for MH", 13)]
+		public string KMHLW => KMH.ToString("##.##");
+
+		#endregion
+
+		#region public string KMLW => (KMH * ManHours).ToString("##.##");
+
+		[ListViewData(85, "K * MH", 14)]
+		public string KMLW => (KMH * ManHours).ToString("##.##");
+
+		#endregion
+
+		#region public DateTime ClosingDate { get; set; }
+
+		private DateTime _closingDate;
         /// <summary>
         /// Дата закрытия рабочего пакета
         /// </summary>
         [TableColumn("ClosingDate")]
         [FormControl("Closing Date:")]
-        [FilterAttribute("Closed", Order = 17)]
+        [FilterAttribute("Closed", Order = 19)]
         public DateTime ClosingDate
         {
             get { return _closingDate; }
@@ -310,7 +378,7 @@ namespace SmartCore.Entities.General.WorkPackage
         /// <summary>
         /// Представление даты закрытия рабочего пакета для списка
         /// </summary>
-        [ListViewData(0.1f, "Closing date", 8)]
+        [ListViewData(0.1f, "Closing date", 10)]
         public DateTime? ListViewClosingDate
         {
             get
@@ -326,7 +394,7 @@ namespace SmartCore.Entities.General.WorkPackage
         /// <summary>
         /// Для закрытого рабочего пакета, возвращает временной интервал, затраченный на исполнение задач в виде строки
         /// </summary>
-        [ListViewData(100, "Work time", 11)]
+        [ListViewData(100, "Work time", 15)]
         public String WorkTimeString
         {
             get
@@ -447,7 +515,7 @@ namespace SmartCore.Entities.General.WorkPackage
         /// </summary>
         [TableColumn("Station")]
         [FormControl("Station:")]
-        [ListViewData(0.08f, "Station", 12)]
+        [ListViewData(0.08f, "Station", 16)]
         [FilterAttribute("Station", Order = 4)]
         public String Station { get; set; }
         #endregion
@@ -464,7 +532,7 @@ namespace SmartCore.Entities.General.WorkPackage
         /// 
         /// </summary>
         [TableColumn("MaintenanceReportNo")]
-        [ListViewData(0.05f, "MRO", 13)]
+        [ListViewData(0.05f, "MRO", 17)]
         [FormControl("MRO:")]
         [FilterAttribute("MRO", Order = 10)]
         public String MaintenanceRepairOrzanization { get; set; }
@@ -588,6 +656,8 @@ namespace SmartCore.Entities.General.WorkPackage
 
         private CommonCollection<MaintenanceCheckBindTaskRecord> _maintenanceCheckBindTaskRecords;
         private List<Document> _closingDocument;
+        private WpWorkType _wpWorkType;
+        private PerformAfter _perfAfter;
 
         /// <summary>
         /// Возвращает массив записей о привязке задач к чекам находящимся в данном рабочем пакете
@@ -985,5 +1055,133 @@ namespace SmartCore.Entities.General.WorkPackage
         #endregion
 
     }
+
+    [JsonObject]
+	public class PerformAfter
+    {
+	    #region Fields
+
+	    private DateTime _performDate;
+
+	    #endregion
+
+	    #region Constructor
+
+	    public PerformAfter()
+	    {
+		    AirportFromId = -1;
+		    AirportToId = -1;
+		    FlightNumId = -1;
+
+	    }
+
+		    #endregion
+
+		[DefaultValue(-1)]
+	    public int AirportFromId { get; set; }
+
+	    [DefaultValue(-1)]
+		public int AirportToId { get; set; }
+
+		[DefaultValue(-1)]
+		public int FlightNumId { get; set; }
+
+		public DateTime PerformDate
+		{
+			get => _performDate < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : _performDate; 
+			set => _performDate = value;
+		}
+
+		[JsonIgnore]
+		public FlightNum FlightNum { get; set; }
+
+		[JsonIgnore]
+		public AirportsCodes AirportFrom { get; set; }
+
+		[JsonIgnore]
+		public AirportsCodes AirportTo { get; set; }
+
+		#region Overrides of Object
+
+		public override string ToString()
+		{
+			var res = "";
+
+			if (FlightNum != null)
+				res += FlightNum.ToString();
+			if(AirportFrom != null)
+				res += $" {AirportFrom.ShortName}";
+			if(AirportTo != null)
+				res += $"-{AirportTo.ShortName}";
+			return res;
+		}
+
+		#endregion
+    }
+
+	[JsonObject]
+	public class ProviderPrice : BaseCoreObject
+	{
+		[JsonIgnore] public Supplier Supplier { get; set; }
+
+		[JsonIgnore] public WorkPackage Parent { get; set; }
+
+		[JsonIgnore]
+		[ListViewData(200, "Supplier", 1)]
+		public string SupplierName
+		{
+			get => Supplier?.Name ?? Supplier.Unknown.Name;
+		}
+
+		[JsonProperty] public int SupplierId { get; set; }
+
+		[ListViewData(80, "Offering", 2)]
+		[JsonProperty]
+		public decimal Offering { get; set; }
+
+		[ListViewData(80, "Routine", 4)]
+		[JsonProperty]
+		public decimal Routine { get; set; }
+
+		[ListViewData(80, "K for MH", 5)]
+		[JsonProperty]
+		public decimal RoutineKMH { get; set; }
+
+		[ListViewData(80, "NDT", 6)]
+		[JsonProperty]
+		public decimal NDT { get; set; }
+
+		[ListViewData(80, "K for MH", 7)]
+		[JsonProperty]
+		public decimal NDTKMH { get; set; }
+
+		[ListViewData(80, "AD", 8)]
+		[JsonProperty]
+		public decimal AD { get; set; }
+
+		[ListViewData(80, "K for MH", 9)]
+		[JsonProperty]
+		public decimal ADKMH { get; set; }
+
+		[ListViewData(80, "NRC", 10)]
+		[JsonProperty]
+		public decimal NRC { get; set; }
+
+		[ListViewData(80, "K for MH", 11)]
+		[JsonProperty]
+		public decimal NRCKMH { get; set; }
+
+		[DefaultValue(-1)]
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+		public int CurrencyOfferingId { get; set; }
+
+		[JsonIgnore]
+		[ListViewData(80, "Currency", 12)]
+		public Currency CurrencyOffering
+		{
+			get => Currency.GetItemById(CurrencyOfferingId);
+			set => CurrencyOfferingId = value.ItemId;
+		}
+	}
 
 }

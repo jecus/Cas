@@ -126,7 +126,7 @@ namespace CAS.UI.Management
 	        }
 
 	        if (DateTime.Now.Date < windowsRegistryLicenseInformation.Expires.Date &&
-	            (windowsRegistryLicenseInformation.Expires.Date - DateTime.Now.Date).TotalDays > 90)
+	            (windowsRegistryLicenseInformation.Expires.Date - DateTime.Now.Date).TotalDays > 180)
 	        {
 		        CASMessage.Show(MessageType.LicenseViolation);
 		        Environment.Exit(Environment.ExitCode);

@@ -122,7 +122,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.labelSubject.Name = "labelSubject";
 			this.labelSubject.Size = new System.Drawing.Size(150, 25);
 			this.labelSubject.TabIndex = 0;
-			this.labelSubject.Text = "Subject";
+			this.labelSubject.Text = "Description";
 			// 
 			// textboxSubject
 			// 

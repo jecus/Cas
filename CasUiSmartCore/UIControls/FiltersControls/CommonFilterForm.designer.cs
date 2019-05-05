@@ -82,6 +82,7 @@ namespace CAS.UI.UIControls.FiltersControls
 			this.panelMain.AutoSize = true;
 			this.panelMain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.panelMain.Location = new System.Drawing.Point(3, 3);
+			this.panelMain.MaximumSize = new System.Drawing.Size(0, 920);
 			this.panelMain.MinimumSize = new System.Drawing.Size(400, 120);
 			this.panelMain.Name = "panelMain";
 			this.panelMain.Size = new System.Drawing.Size(400, 120);
@@ -94,20 +95,21 @@ namespace CAS.UI.UIControls.FiltersControls
 			this.flowLayoutPanel1.Controls.Add(this.panelMain);
 			this.flowLayoutPanel1.Controls.Add(this.panelButtons);
 			this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-			this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+			this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 51);
 			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-			this.flowLayoutPanel1.Size = new System.Drawing.Size(406, 168);
+			this.flowLayoutPanel1.Size = new System.Drawing.Size(406, 177);
 			this.flowLayoutPanel1.TabIndex = 15;
 			// 
 			// panelButtons
 			// 
-			this.panelButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.panelButtons.Controls.Add(this.radioButtonOr);
 			this.panelButtons.Controls.Add(this.radioButtonAnd);
 			this.panelButtons.Controls.Add(this.buttonClearFilter);
 			this.panelButtons.Controls.Add(this.buttonOK);
 			this.panelButtons.Controls.Add(this.buttonCancel);
-			this.panelButtons.Location = new System.Drawing.Point(3, 129);
+			this.panelButtons.Dock = System.Windows.Forms.DockStyle.Right;
+			this.panelButtons.Location = new System.Drawing.Point(3, 136);
+			this.panelButtons.Margin = new System.Windows.Forms.Padding(3, 10, 3, 5);
 			this.panelButtons.Name = "panelButtons";
 			this.panelButtons.Size = new System.Drawing.Size(400, 36);
 			this.panelButtons.TabIndex = 0;
@@ -160,18 +162,16 @@ namespace CAS.UI.UIControls.FiltersControls
 			this.AcceptButton = this.buttonOK;
 			this.AutoSize = true;
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
 			this.CancelButton = this.buttonCancel;
-			this.ClientSize = new System.Drawing.Size(406, 171);
+			this.ClientSize = new System.Drawing.Size(406, 236);
 			this.Controls.Add(this.flowLayoutPanel1);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.MaximizeBox = false;
 			this.MaximumSize = new System.Drawing.Size(1280, 768);
 			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(285, 165);
 			this.Name = "CommonFilterForm";
+			this.Resizable = false;
 			this.ShowIcon = false;
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Filter Form";
 			this.Activated += new System.EventHandler(this.Form_Activated);
 			this.Deactivate += new System.EventHandler(this.Form_Deactivate);

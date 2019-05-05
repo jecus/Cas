@@ -1,4 +1,6 @@
-﻿
+﻿using CASTerms;
+using EFCore.DTO.General;
+
 namespace CAS.UI.UIControls.ComponentControls
 {
     partial class ComponentsListScreen
@@ -29,7 +31,8 @@ namespace CAS.UI.UIControls.ComponentControls
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBoxSeparatorEx = new System.Windows.Forms.PictureBox();
@@ -132,10 +135,11 @@ namespace CAS.UI.UIControls.ComponentControls
             this.buttonDeleteSelected.TextSecondary = "";
             this.buttonDeleteSelected.ToolTipText = "Delete selected";
             this.buttonDeleteSelected.Click += new System.EventHandler(this.ButtonDeleteClick);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
+            this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			// 
+			// pictureBox1
+			// 
+			this.pictureBox1.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox1.Location = new System.Drawing.Point(181, 3);
             this.pictureBox1.Name = "pictureBox1";
@@ -217,10 +221,11 @@ namespace CAS.UI.UIControls.ComponentControls
             this.buttonAddNew.TextSecondary = "";
             this.buttonAddNew.ToolTipText = "Add New";
             this.buttonAddNew.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.ButtonAddDisplayerRequested);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
+            this.buttonAddNew.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// pictureBox2
+			// 
+			this.pictureBox2.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox2.Location = new System.Drawing.Point(118, 3);
             this.pictureBox2.Name = "pictureBox2";

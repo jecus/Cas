@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.General;
@@ -10,7 +11,7 @@ using SmartCore.Entities.General.MTOP;
 
 namespace CAS.UI.UIControls.MTOP
 {
-	public partial class MTOPComplainceForm : Form
+	public partial class MTOPComplainceForm : MetroForm
 	{
 		private MTOPCheckRecord _checkRecord;
 		private Aircraft _aircraft;

@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using Auxiliary;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Calculations.Maintenance;
@@ -18,7 +19,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 {
     ///<summary>
     ///</summary>
-    public partial class MaintenanceComplainceForm : Form
+    public partial class MaintenanceComplainceForm : MetroForm
     {
 
         #region Fields

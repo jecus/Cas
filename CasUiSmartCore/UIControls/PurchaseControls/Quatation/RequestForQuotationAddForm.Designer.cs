@@ -1,4 +1,7 @@
-﻿namespace CAS.UI.UIControls.PurchaseControls.Quatation
+﻿using CASTerms;
+using EFCore.DTO.General;
+
+namespace CAS.UI.UIControls.PurchaseControls.Quatation
 {
     partial class RequestForQuotationAddForm
     {
@@ -28,6 +31,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
 			this.textBoxRemarks = new System.Windows.Forms.TextBox();
 			this.dateTimePickerOpeningDate = new System.Windows.Forms.DateTimePicker();
@@ -105,6 +109,7 @@
 			this.ButtonDelete.TextSecondary = "";
 			this.ButtonDelete.ToolTipText = "";
 			this.ButtonDelete.Click += new System.EventHandler(this.ButtonDeleteClick);
+			this.ButtonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
 			// textBoxRemarks
 			// 
@@ -300,6 +305,7 @@
 			this.ButtonAdd.TextSecondary = "";
 			this.ButtonAdd.ToolTipText = "";
 			this.ButtonAdd.Click += new System.EventHandler(this.ButtonAddClick);
+			this.ButtonAdd.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// buttonOk
 			// 
@@ -314,6 +320,7 @@
 			this.buttonOk.TabIndex = 244;
 			this.buttonOk.Text = "OK";
 			this.buttonOk.Click += new System.EventHandler(this.ButtonOkClick);
+			this.buttonOk.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// buttonCancel
 			// 

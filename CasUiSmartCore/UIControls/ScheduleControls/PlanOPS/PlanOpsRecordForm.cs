@@ -11,6 +11,7 @@ using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
 using EFCore.DTO.General;
 using EFCore.Filter;
+using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Atlbs;
@@ -18,7 +19,7 @@ using SmartCore.Entities.General.Schedule;
 
 namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 {
-	public partial class PlanOpsRecordForm : Form
+	public partial class PlanOpsRecordForm : MetroForm
 	{
 		#region Fields
 

@@ -36,10 +36,8 @@ namespace CAS.UI.UIControls.WorkPakage
 			MetroFramework.Controls.MetroLabel label2;
 			MetroFramework.Controls.MetroLabel label3;
 			MetroFramework.Controls.MetroLabel label4;
-			MetroFramework.Controls.MetroLabel label5;
 			MetroFramework.Controls.MetroLabel label6;
 			MetroFramework.Controls.MetroLabel label7;
-			MetroFramework.Controls.MetroLabel label8;
 			MetroFramework.Controls.MetroLabel label9;
 			MetroFramework.Controls.MetroLabel label10;
 			MetroFramework.Controls.MetroLabel label11;
@@ -47,19 +45,19 @@ namespace CAS.UI.UIControls.WorkPakage
 			MetroFramework.Controls.MetroLabel label13;
 			MetroFramework.Controls.MetroLabel label14;
 			MetroFramework.Controls.MetroLabel label15;
-			MetroFramework.Controls.MetroLabel label16;
 			MetroFramework.Controls.MetroLabel label17;
 			MetroFramework.Controls.MetroLabel label18;
+			MetroFramework.Controls.MetroLabel labelWorkType;
+			MetroFramework.Controls.MetroLabel metroLabel1;
+			MetroFramework.Controls.MetroLabel metroLabel2;
 			this.textBoxWpNumber = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxDescription = new MetroFramework.Controls.MetroTextBox();
 			this.dateTimePickerIssueCreateDate = new System.Windows.Forms.DateTimePicker();
 			this.dateTimePickerPublishingDate = new System.Windows.Forms.DateTimePicker();
 			this.textBoxAuthor = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxClosedBy = new MetroFramework.Controls.MetroTextBox();
-			this.textBoxReleaseCertificate = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxPublishingRemark = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxMRO = new MetroFramework.Controls.MetroTextBox();
-			this.textBoxCheckType = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxStatus = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxTitle = new MetroFramework.Controls.MetroTextBox();
 			this.dateTimePickerClosingDate = new System.Windows.Forms.DateTimePicker();
@@ -67,7 +65,6 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.textBoxPublishedBy = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxRemarks = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxClosingRemarks = new MetroFramework.Controls.MetroTextBox();
-			this.textBoxRevision = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxStation = new MetroFramework.Controls.MetroTextBox();
 			this.buttonOk = new System.Windows.Forms.Button();
 			this.buttonClose = new System.Windows.Forms.Button();
@@ -81,16 +78,27 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.documentControl8 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.documentControl9 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.documentControl10 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
+			this.comboBoxWorkType = new System.Windows.Forms.ComboBox();
+			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.lookupComboboxFlightNum = new CAS.UI.UIControls.Auxiliary.LookupCombobox();
+			this.lookupComboboxTo = new CAS.UI.UIControls.Auxiliary.LookupCombobox();
+			this.label19 = new System.Windows.Forms.Label();
+			this.lookupComboboxFrom = new CAS.UI.UIControls.Auxiliary.LookupCombobox();
+			this.dateTimePickerFlightDate = new System.Windows.Forms.DateTimePicker();
+			this.label20 = new System.Windows.Forms.Label();
+			this.label21 = new System.Windows.Forms.Label();
+			this.label22 = new System.Windows.Forms.Label();
+			this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+			this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
+			this.linkLabelEditComponents = new System.Windows.Forms.LinkLabel();
 			labelNumber = new MetroFramework.Controls.MetroLabel();
 			label1 = new MetroFramework.Controls.MetroLabel();
 			labelValidFrom = new MetroFramework.Controls.MetroLabel();
 			label2 = new MetroFramework.Controls.MetroLabel();
 			label3 = new MetroFramework.Controls.MetroLabel();
 			label4 = new MetroFramework.Controls.MetroLabel();
-			label5 = new MetroFramework.Controls.MetroLabel();
 			label6 = new MetroFramework.Controls.MetroLabel();
 			label7 = new MetroFramework.Controls.MetroLabel();
-			label8 = new MetroFramework.Controls.MetroLabel();
 			label9 = new MetroFramework.Controls.MetroLabel();
 			label10 = new MetroFramework.Controls.MetroLabel();
 			label11 = new MetroFramework.Controls.MetroLabel();
@@ -98,27 +106,31 @@ namespace CAS.UI.UIControls.WorkPakage
 			label13 = new MetroFramework.Controls.MetroLabel();
 			label14 = new MetroFramework.Controls.MetroLabel();
 			label15 = new MetroFramework.Controls.MetroLabel();
-			label16 = new MetroFramework.Controls.MetroLabel();
 			label17 = new MetroFramework.Controls.MetroLabel();
 			label18 = new MetroFramework.Controls.MetroLabel();
+			labelWorkType = new MetroFramework.Controls.MetroLabel();
+			metroLabel1 = new MetroFramework.Controls.MetroLabel();
+			metroLabel2 = new MetroFramework.Controls.MetroLabel();
+			this.groupBox1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// labelNumber
 			// 
 			labelNumber.AutoSize = true;
 			labelNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			labelNumber.Location = new System.Drawing.Point(18, 65);
+			labelNumber.Location = new System.Drawing.Point(23, 117);
 			labelNumber.Name = "labelNumber";
-			labelNumber.Size = new System.Drawing.Size(55, 19);
+			labelNumber.Size = new System.Drawing.Size(84, 19);
 			labelNumber.TabIndex = 26;
-			labelNumber.Text = "WP No:";
+			labelNumber.Text = "WP/WO No:";
 			labelNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// label1
 			// 
 			label1.AutoSize = true;
 			label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label1.Location = new System.Drawing.Point(18, 91);
+			label1.Location = new System.Drawing.Point(23, 169);
 			label1.Name = "label1";
 			label1.Size = new System.Drawing.Size(77, 19);
 			label1.TabIndex = 28;
@@ -129,7 +141,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			labelValidFrom.AutoSize = true;
 			labelValidFrom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			labelValidFrom.Location = new System.Drawing.Point(18, 120);
+			labelValidFrom.Location = new System.Drawing.Point(23, 195);
 			labelValidFrom.Name = "labelValidFrom";
 			labelValidFrom.Size = new System.Drawing.Size(82, 19);
 			labelValidFrom.TabIndex = 31;
@@ -140,7 +152,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			label2.AutoSize = true;
 			label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label2.Location = new System.Drawing.Point(18, 148);
+			label2.Location = new System.Drawing.Point(23, 251);
 			label2.Name = "label2";
 			label2.Size = new System.Drawing.Size(102, 19);
 			label2.TabIndex = 33;
@@ -151,7 +163,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			label3.AutoSize = true;
 			label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label3.Location = new System.Drawing.Point(18, 173);
+			label3.Location = new System.Drawing.Point(23, 307);
 			label3.Name = "label3";
 			label3.Size = new System.Drawing.Size(53, 19);
 			label3.TabIndex = 34;
@@ -162,29 +174,18 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			label4.AutoSize = true;
 			label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label4.Location = new System.Drawing.Point(18, 199);
+			label4.Location = new System.Drawing.Point(23, 411);
 			label4.Name = "label4";
 			label4.Size = new System.Drawing.Size(70, 19);
 			label4.TabIndex = 36;
 			label4.Text = "Closed By:";
 			label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// label5
-			// 
-			label5.AutoSize = true;
-			label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label5.Location = new System.Drawing.Point(18, 251);
-			label5.Name = "label5";
-			label5.Size = new System.Drawing.Size(142, 19);
-			label5.TabIndex = 40;
-			label5.Text = "Release Certificate No:";
-			label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			// 
 			// label6
 			// 
 			label6.AutoSize = true;
 			label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label6.Location = new System.Drawing.Point(18, 225);
+			label6.Location = new System.Drawing.Point(23, 386);
 			label6.Name = "label6";
 			label6.Size = new System.Drawing.Size(125, 19);
 			label6.TabIndex = 38;
@@ -195,29 +196,18 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			label7.AutoSize = true;
 			label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label7.Location = new System.Drawing.Point(18, 303);
+			label7.Location = new System.Drawing.Point(23, 463);
 			label7.Name = "label7";
 			label7.Size = new System.Drawing.Size(43, 19);
 			label7.TabIndex = 44;
 			label7.Text = "MRO:";
 			label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// label8
-			// 
-			label8.AutoSize = true;
-			label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label8.Location = new System.Drawing.Point(18, 277);
-			label8.Name = "label8";
-			label8.Size = new System.Drawing.Size(78, 19);
-			label8.TabIndex = 42;
-			label8.Text = "Check Type:";
-			label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			// 
 			// label9
 			// 
 			label9.AutoSize = true;
 			label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label9.Location = new System.Drawing.Point(448, 91);
+			label9.Location = new System.Drawing.Point(23, 63);
 			label9.Name = "label9";
 			label9.Size = new System.Drawing.Size(46, 19);
 			label9.TabIndex = 48;
@@ -228,7 +218,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			label10.AutoSize = true;
 			label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label10.Location = new System.Drawing.Point(448, 65);
+			label10.Location = new System.Drawing.Point(23, 143);
 			label10.Name = "label10";
 			label10.Size = new System.Drawing.Size(36, 19);
 			label10.TabIndex = 46;
@@ -239,7 +229,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			label11.AutoSize = true;
 			label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label11.Location = new System.Drawing.Point(448, 143);
+			label11.Location = new System.Drawing.Point(23, 279);
 			label11.Name = "label11";
 			label11.Size = new System.Drawing.Size(86, 19);
 			label11.TabIndex = 53;
@@ -250,7 +240,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			label12.AutoSize = true;
 			label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label12.Location = new System.Drawing.Point(448, 115);
+			label12.Location = new System.Drawing.Point(23, 223);
 			label12.Name = "label12";
 			label12.Size = new System.Drawing.Size(94, 19);
 			label12.TabIndex = 51;
@@ -261,7 +251,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			label13.AutoSize = true;
 			label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label13.Location = new System.Drawing.Point(18, 329);
+			label13.Location = new System.Drawing.Point(23, 359);
 			label13.Name = "label13";
 			label13.Size = new System.Drawing.Size(86, 19);
 			label13.TabIndex = 54;
@@ -272,7 +262,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			label14.AutoSize = true;
 			label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label14.Location = new System.Drawing.Point(18, 355);
+			label14.Location = new System.Drawing.Point(23, 333);
 			label14.Name = "label14";
 			label14.Size = new System.Drawing.Size(62, 19);
 			label14.TabIndex = 56;
@@ -283,29 +273,18 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			label15.AutoSize = true;
 			label15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label15.Location = new System.Drawing.Point(18, 381);
+			label15.Location = new System.Drawing.Point(23, 437);
 			label15.Name = "label15";
 			label15.Size = new System.Drawing.Size(109, 19);
 			label15.TabIndex = 58;
 			label15.Text = "Closing Remarks:";
 			label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// label16
-			// 
-			label16.AutoSize = true;
-			label16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label16.Location = new System.Drawing.Point(18, 407);
-			label16.Name = "label16";
-			label16.Size = new System.Drawing.Size(59, 19);
-			label16.TabIndex = 60;
-			label16.Text = "Revision:";
-			label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			// 
 			// label17
 			// 
 			label17.AutoSize = true;
 			label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label17.Location = new System.Drawing.Point(18, 433);
+			label17.Location = new System.Drawing.Point(23, 489);
 			label17.Name = "label17";
 			label17.Size = new System.Drawing.Size(52, 19);
 			label17.TabIndex = 62;
@@ -316,12 +295,34 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			label18.AutoSize = true;
 			label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label18.Location = new System.Drawing.Point(448, 173);
+			label18.Location = new System.Drawing.Point(448, 170);
 			label18.Name = "label18";
 			label18.Size = new System.Drawing.Size(72, 19);
 			label18.TabIndex = 64;
 			label18.Text = "Document:";
 			label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// labelWorkType
+			// 
+			labelWorkType.AutoSize = true;
+			labelWorkType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			labelWorkType.Location = new System.Drawing.Point(23, 89);
+			labelWorkType.Name = "labelWorkType";
+			labelWorkType.Size = new System.Drawing.Size(74, 19);
+			labelWorkType.TabIndex = 253;
+			labelWorkType.Text = "Work Type:";
+			labelWorkType.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// metroLabel1
+			// 
+			metroLabel1.AutoSize = true;
+			metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			metroLabel1.Location = new System.Drawing.Point(23, 515);
+			metroLabel1.Name = "metroLabel1";
+			metroLabel1.Size = new System.Drawing.Size(65, 19);
+			metroLabel1.TabIndex = 255;
+			metroLabel1.Text = "K for MH:";
+			metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// textBoxWpNumber
 			// 
@@ -339,7 +340,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.textBoxWpNumber.CustomButton.Visible = false;
 			this.textBoxWpNumber.ForeColor = System.Drawing.Color.DimGray;
 			this.textBoxWpNumber.Lines = new string[0];
-			this.textBoxWpNumber.Location = new System.Drawing.Point(175, 63);
+			this.textBoxWpNumber.Location = new System.Drawing.Point(180, 117);
 			this.textBoxWpNumber.MaxLength = 32767;
 			this.textBoxWpNumber.Name = "textBoxWpNumber";
 			this.textBoxWpNumber.PasswordChar = '\0';
@@ -370,7 +371,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.textBoxDescription.CustomButton.Visible = false;
 			this.textBoxDescription.ForeColor = System.Drawing.Color.DimGray;
 			this.textBoxDescription.Lines = new string[0];
-			this.textBoxDescription.Location = new System.Drawing.Point(175, 89);
+			this.textBoxDescription.Location = new System.Drawing.Point(180, 169);
 			this.textBoxDescription.MaxLength = 32767;
 			this.textBoxDescription.Name = "textBoxDescription";
 			this.textBoxDescription.PasswordChar = '\0';
@@ -390,7 +391,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.dateTimePickerIssueCreateDate.CalendarForeColor = System.Drawing.Color.DimGray;
 			this.dateTimePickerIssueCreateDate.Enabled = false;
 			this.dateTimePickerIssueCreateDate.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.dateTimePickerIssueCreateDate.Location = new System.Drawing.Point(175, 115);
+			this.dateTimePickerIssueCreateDate.Location = new System.Drawing.Point(180, 195);
 			this.dateTimePickerIssueCreateDate.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
 			this.dateTimePickerIssueCreateDate.Name = "dateTimePickerIssueCreateDate";
 			this.dateTimePickerIssueCreateDate.Size = new System.Drawing.Size(250, 22);
@@ -400,7 +401,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			this.dateTimePickerPublishingDate.CalendarForeColor = System.Drawing.Color.DimGray;
 			this.dateTimePickerPublishingDate.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.dateTimePickerPublishingDate.Location = new System.Drawing.Point(175, 143);
+			this.dateTimePickerPublishingDate.Location = new System.Drawing.Point(180, 251);
 			this.dateTimePickerPublishingDate.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
 			this.dateTimePickerPublishingDate.Name = "dateTimePickerPublishingDate";
 			this.dateTimePickerPublishingDate.Size = new System.Drawing.Size(250, 22);
@@ -423,7 +424,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.textBoxAuthor.Enabled = false;
 			this.textBoxAuthor.ForeColor = System.Drawing.Color.DimGray;
 			this.textBoxAuthor.Lines = new string[0];
-			this.textBoxAuthor.Location = new System.Drawing.Point(175, 171);
+			this.textBoxAuthor.Location = new System.Drawing.Point(180, 307);
 			this.textBoxAuthor.MaxLength = 32767;
 			this.textBoxAuthor.Name = "textBoxAuthor";
 			this.textBoxAuthor.PasswordChar = '\0';
@@ -455,7 +456,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.textBoxClosedBy.Enabled = false;
 			this.textBoxClosedBy.ForeColor = System.Drawing.Color.DimGray;
 			this.textBoxClosedBy.Lines = new string[0];
-			this.textBoxClosedBy.Location = new System.Drawing.Point(175, 197);
+			this.textBoxClosedBy.Location = new System.Drawing.Point(180, 411);
 			this.textBoxClosedBy.MaxLength = 32767;
 			this.textBoxClosedBy.Name = "textBoxClosedBy";
 			this.textBoxClosedBy.PasswordChar = '\0';
@@ -469,37 +470,6 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.textBoxClosedBy.UseSelectable = true;
 			this.textBoxClosedBy.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.textBoxClosedBy.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			// 
-			// textBoxReleaseCertificate
-			// 
-			// 
-			// 
-			// 
-			this.textBoxReleaseCertificate.CustomButton.Image = null;
-			this.textBoxReleaseCertificate.CustomButton.Location = new System.Drawing.Point(233, 2);
-			this.textBoxReleaseCertificate.CustomButton.Name = "";
-			this.textBoxReleaseCertificate.CustomButton.Size = new System.Drawing.Size(15, 15);
-			this.textBoxReleaseCertificate.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.textBoxReleaseCertificate.CustomButton.TabIndex = 1;
-			this.textBoxReleaseCertificate.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.textBoxReleaseCertificate.CustomButton.UseSelectable = true;
-			this.textBoxReleaseCertificate.CustomButton.Visible = false;
-			this.textBoxReleaseCertificate.ForeColor = System.Drawing.Color.DimGray;
-			this.textBoxReleaseCertificate.Lines = new string[0];
-			this.textBoxReleaseCertificate.Location = new System.Drawing.Point(175, 249);
-			this.textBoxReleaseCertificate.MaxLength = 32767;
-			this.textBoxReleaseCertificate.Name = "textBoxReleaseCertificate";
-			this.textBoxReleaseCertificate.PasswordChar = '\0';
-			this.textBoxReleaseCertificate.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.textBoxReleaseCertificate.SelectedText = "";
-			this.textBoxReleaseCertificate.SelectionLength = 0;
-			this.textBoxReleaseCertificate.SelectionStart = 0;
-			this.textBoxReleaseCertificate.ShortcutsEnabled = true;
-			this.textBoxReleaseCertificate.Size = new System.Drawing.Size(251, 20);
-			this.textBoxReleaseCertificate.TabIndex = 41;
-			this.textBoxReleaseCertificate.UseSelectable = true;
-			this.textBoxReleaseCertificate.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.textBoxReleaseCertificate.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// textBoxPublishingRemark
 			// 
@@ -517,7 +487,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.textBoxPublishingRemark.CustomButton.Visible = false;
 			this.textBoxPublishingRemark.ForeColor = System.Drawing.Color.DimGray;
 			this.textBoxPublishingRemark.Lines = new string[0];
-			this.textBoxPublishingRemark.Location = new System.Drawing.Point(175, 223);
+			this.textBoxPublishingRemark.Location = new System.Drawing.Point(180, 385);
 			this.textBoxPublishingRemark.MaxLength = 32767;
 			this.textBoxPublishingRemark.Name = "textBoxPublishingRemark";
 			this.textBoxPublishingRemark.PasswordChar = '\0';
@@ -548,7 +518,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.textBoxMRO.CustomButton.Visible = false;
 			this.textBoxMRO.ForeColor = System.Drawing.Color.DimGray;
 			this.textBoxMRO.Lines = new string[0];
-			this.textBoxMRO.Location = new System.Drawing.Point(175, 301);
+			this.textBoxMRO.Location = new System.Drawing.Point(180, 463);
 			this.textBoxMRO.MaxLength = 32767;
 			this.textBoxMRO.Name = "textBoxMRO";
 			this.textBoxMRO.PasswordChar = '\0';
@@ -563,44 +533,13 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.textBoxMRO.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.textBoxMRO.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
-			// textBoxCheckType
-			// 
-			// 
-			// 
-			// 
-			this.textBoxCheckType.CustomButton.Image = null;
-			this.textBoxCheckType.CustomButton.Location = new System.Drawing.Point(233, 2);
-			this.textBoxCheckType.CustomButton.Name = "";
-			this.textBoxCheckType.CustomButton.Size = new System.Drawing.Size(15, 15);
-			this.textBoxCheckType.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.textBoxCheckType.CustomButton.TabIndex = 1;
-			this.textBoxCheckType.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.textBoxCheckType.CustomButton.UseSelectable = true;
-			this.textBoxCheckType.CustomButton.Visible = false;
-			this.textBoxCheckType.ForeColor = System.Drawing.Color.DimGray;
-			this.textBoxCheckType.Lines = new string[0];
-			this.textBoxCheckType.Location = new System.Drawing.Point(175, 275);
-			this.textBoxCheckType.MaxLength = 32767;
-			this.textBoxCheckType.Name = "textBoxCheckType";
-			this.textBoxCheckType.PasswordChar = '\0';
-			this.textBoxCheckType.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.textBoxCheckType.SelectedText = "";
-			this.textBoxCheckType.SelectionLength = 0;
-			this.textBoxCheckType.SelectionStart = 0;
-			this.textBoxCheckType.ShortcutsEnabled = true;
-			this.textBoxCheckType.Size = new System.Drawing.Size(251, 20);
-			this.textBoxCheckType.TabIndex = 43;
-			this.textBoxCheckType.UseSelectable = true;
-			this.textBoxCheckType.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.textBoxCheckType.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			// 
 			// textBoxStatus
 			// 
 			// 
 			// 
 			// 
 			this.textBoxStatus.CustomButton.Image = null;
-			this.textBoxStatus.CustomButton.Location = new System.Drawing.Point(297, 2);
+			this.textBoxStatus.CustomButton.Location = new System.Drawing.Point(233, 2);
 			this.textBoxStatus.CustomButton.Name = "";
 			this.textBoxStatus.CustomButton.Size = new System.Drawing.Size(15, 15);
 			this.textBoxStatus.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -611,7 +550,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.textBoxStatus.Enabled = false;
 			this.textBoxStatus.ForeColor = System.Drawing.Color.DimGray;
 			this.textBoxStatus.Lines = new string[0];
-			this.textBoxStatus.Location = new System.Drawing.Point(605, 89);
+			this.textBoxStatus.Location = new System.Drawing.Point(180, 63);
 			this.textBoxStatus.MaxLength = 32767;
 			this.textBoxStatus.Name = "textBoxStatus";
 			this.textBoxStatus.PasswordChar = '\0';
@@ -620,7 +559,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.textBoxStatus.SelectionLength = 0;
 			this.textBoxStatus.SelectionStart = 0;
 			this.textBoxStatus.ShortcutsEnabled = true;
-			this.textBoxStatus.Size = new System.Drawing.Size(315, 20);
+			this.textBoxStatus.Size = new System.Drawing.Size(251, 20);
 			this.textBoxStatus.TabIndex = 49;
 			this.textBoxStatus.UseSelectable = true;
 			this.textBoxStatus.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -632,7 +571,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			// 
 			this.textBoxTitle.CustomButton.Image = null;
-			this.textBoxTitle.CustomButton.Location = new System.Drawing.Point(297, 2);
+			this.textBoxTitle.CustomButton.Location = new System.Drawing.Point(233, 2);
 			this.textBoxTitle.CustomButton.Name = "";
 			this.textBoxTitle.CustomButton.Size = new System.Drawing.Size(15, 15);
 			this.textBoxTitle.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -642,7 +581,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.textBoxTitle.CustomButton.Visible = false;
 			this.textBoxTitle.ForeColor = System.Drawing.Color.DimGray;
 			this.textBoxTitle.Lines = new string[0];
-			this.textBoxTitle.Location = new System.Drawing.Point(605, 63);
+			this.textBoxTitle.Location = new System.Drawing.Point(180, 143);
 			this.textBoxTitle.MaxLength = 32767;
 			this.textBoxTitle.Name = "textBoxTitle";
 			this.textBoxTitle.PasswordChar = '\0';
@@ -651,7 +590,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.textBoxTitle.SelectionLength = 0;
 			this.textBoxTitle.SelectionStart = 0;
 			this.textBoxTitle.ShortcutsEnabled = true;
-			this.textBoxTitle.Size = new System.Drawing.Size(315, 20);
+			this.textBoxTitle.Size = new System.Drawing.Size(251, 20);
 			this.textBoxTitle.TabIndex = 47;
 			this.textBoxTitle.UseSelectable = true;
 			this.textBoxTitle.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -661,20 +600,20 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			this.dateTimePickerClosingDate.CalendarForeColor = System.Drawing.Color.DimGray;
 			this.dateTimePickerClosingDate.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.dateTimePickerClosingDate.Location = new System.Drawing.Point(605, 143);
+			this.dateTimePickerClosingDate.Location = new System.Drawing.Point(180, 279);
 			this.dateTimePickerClosingDate.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
 			this.dateTimePickerClosingDate.Name = "dateTimePickerClosingDate";
-			this.dateTimePickerClosingDate.Size = new System.Drawing.Size(314, 22);
+			this.dateTimePickerClosingDate.Size = new System.Drawing.Size(250, 22);
 			this.dateTimePickerClosingDate.TabIndex = 52;
 			// 
 			// dateTimePickerOpeningDate
 			// 
 			this.dateTimePickerOpeningDate.CalendarForeColor = System.Drawing.Color.DimGray;
 			this.dateTimePickerOpeningDate.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.dateTimePickerOpeningDate.Location = new System.Drawing.Point(605, 115);
+			this.dateTimePickerOpeningDate.Location = new System.Drawing.Point(180, 223);
 			this.dateTimePickerOpeningDate.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
 			this.dateTimePickerOpeningDate.Name = "dateTimePickerOpeningDate";
-			this.dateTimePickerOpeningDate.Size = new System.Drawing.Size(314, 22);
+			this.dateTimePickerOpeningDate.Size = new System.Drawing.Size(250, 22);
 			this.dateTimePickerOpeningDate.TabIndex = 50;
 			// 
 			// textBoxPublishedBy
@@ -694,7 +633,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.textBoxPublishedBy.Enabled = false;
 			this.textBoxPublishedBy.ForeColor = System.Drawing.Color.DimGray;
 			this.textBoxPublishedBy.Lines = new string[0];
-			this.textBoxPublishedBy.Location = new System.Drawing.Point(175, 327);
+			this.textBoxPublishedBy.Location = new System.Drawing.Point(180, 359);
 			this.textBoxPublishedBy.MaxLength = 32767;
 			this.textBoxPublishedBy.Name = "textBoxPublishedBy";
 			this.textBoxPublishedBy.PasswordChar = '\0';
@@ -725,7 +664,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.textBoxRemarks.CustomButton.Visible = false;
 			this.textBoxRemarks.ForeColor = System.Drawing.Color.DimGray;
 			this.textBoxRemarks.Lines = new string[0];
-			this.textBoxRemarks.Location = new System.Drawing.Point(175, 353);
+			this.textBoxRemarks.Location = new System.Drawing.Point(180, 333);
 			this.textBoxRemarks.MaxLength = 32767;
 			this.textBoxRemarks.Name = "textBoxRemarks";
 			this.textBoxRemarks.PasswordChar = '\0';
@@ -756,7 +695,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.textBoxClosingRemarks.CustomButton.Visible = false;
 			this.textBoxClosingRemarks.ForeColor = System.Drawing.Color.DimGray;
 			this.textBoxClosingRemarks.Lines = new string[0];
-			this.textBoxClosingRemarks.Location = new System.Drawing.Point(175, 379);
+			this.textBoxClosingRemarks.Location = new System.Drawing.Point(180, 437);
 			this.textBoxClosingRemarks.MaxLength = 32767;
 			this.textBoxClosingRemarks.Name = "textBoxClosingRemarks";
 			this.textBoxClosingRemarks.PasswordChar = '\0';
@@ -770,37 +709,6 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.textBoxClosingRemarks.UseSelectable = true;
 			this.textBoxClosingRemarks.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.textBoxClosingRemarks.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			// 
-			// textBoxRevision
-			// 
-			// 
-			// 
-			// 
-			this.textBoxRevision.CustomButton.Image = null;
-			this.textBoxRevision.CustomButton.Location = new System.Drawing.Point(233, 2);
-			this.textBoxRevision.CustomButton.Name = "";
-			this.textBoxRevision.CustomButton.Size = new System.Drawing.Size(15, 15);
-			this.textBoxRevision.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.textBoxRevision.CustomButton.TabIndex = 1;
-			this.textBoxRevision.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.textBoxRevision.CustomButton.UseSelectable = true;
-			this.textBoxRevision.CustomButton.Visible = false;
-			this.textBoxRevision.ForeColor = System.Drawing.Color.DimGray;
-			this.textBoxRevision.Lines = new string[0];
-			this.textBoxRevision.Location = new System.Drawing.Point(175, 405);
-			this.textBoxRevision.MaxLength = 32767;
-			this.textBoxRevision.Name = "textBoxRevision";
-			this.textBoxRevision.PasswordChar = '\0';
-			this.textBoxRevision.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.textBoxRevision.SelectedText = "";
-			this.textBoxRevision.SelectionLength = 0;
-			this.textBoxRevision.SelectionStart = 0;
-			this.textBoxRevision.ShortcutsEnabled = true;
-			this.textBoxRevision.Size = new System.Drawing.Size(251, 20);
-			this.textBoxRevision.TabIndex = 61;
-			this.textBoxRevision.UseSelectable = true;
-			this.textBoxRevision.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.textBoxRevision.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// textBoxStation
 			// 
@@ -818,7 +726,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.textBoxStation.CustomButton.Visible = false;
 			this.textBoxStation.ForeColor = System.Drawing.Color.DimGray;
 			this.textBoxStation.Lines = new string[0];
-			this.textBoxStation.Location = new System.Drawing.Point(175, 431);
+			this.textBoxStation.Location = new System.Drawing.Point(180, 489);
 			this.textBoxStation.MaxLength = 32767;
 			this.textBoxStation.Name = "textBoxStation";
 			this.textBoxStation.PasswordChar = '\0';
@@ -840,7 +748,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(763, 646);
+			this.buttonOk.Location = new System.Drawing.Point(694, 640);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 242;
@@ -854,7 +762,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonClose.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonClose.Location = new System.Drawing.Point(844, 646);
+			this.buttonClose.Location = new System.Drawing.Point(775, 640);
 			this.buttonClose.Name = "buttonClose";
 			this.buttonClose.Size = new System.Drawing.Size(75, 33);
 			this.buttonClose.TabIndex = 241;
@@ -864,7 +772,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// documentControl1
 			// 
 			this.documentControl1.CurrentDocument = null;
-			this.documentControl1.Location = new System.Drawing.Point(605, 171);
+			this.documentControl1.Location = new System.Drawing.Point(538, 166);
 			this.documentControl1.Name = "documentControl1";
 			this.documentControl1.Size = new System.Drawing.Size(314, 41);
 			this.documentControl1.TabIndex = 65;
@@ -872,7 +780,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// documentControl2
 			// 
 			this.documentControl2.CurrentDocument = null;
-			this.documentControl2.Location = new System.Drawing.Point(605, 218);
+			this.documentControl2.Location = new System.Drawing.Point(538, 213);
 			this.documentControl2.Name = "documentControl2";
 			this.documentControl2.Size = new System.Drawing.Size(314, 41);
 			this.documentControl2.TabIndex = 243;
@@ -880,7 +788,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// documentControl3
 			// 
 			this.documentControl3.CurrentDocument = null;
-			this.documentControl3.Location = new System.Drawing.Point(605, 265);
+			this.documentControl3.Location = new System.Drawing.Point(538, 260);
 			this.documentControl3.Name = "documentControl3";
 			this.documentControl3.Size = new System.Drawing.Size(314, 41);
 			this.documentControl3.TabIndex = 244;
@@ -888,7 +796,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// documentControl4
 			// 
 			this.documentControl4.CurrentDocument = null;
-			this.documentControl4.Location = new System.Drawing.Point(605, 312);
+			this.documentControl4.Location = new System.Drawing.Point(538, 307);
 			this.documentControl4.Name = "documentControl4";
 			this.documentControl4.Size = new System.Drawing.Size(314, 41);
 			this.documentControl4.TabIndex = 245;
@@ -896,7 +804,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// documentControl5
 			// 
 			this.documentControl5.CurrentDocument = null;
-			this.documentControl5.Location = new System.Drawing.Point(605, 359);
+			this.documentControl5.Location = new System.Drawing.Point(538, 354);
 			this.documentControl5.Name = "documentControl5";
 			this.documentControl5.Size = new System.Drawing.Size(314, 41);
 			this.documentControl5.TabIndex = 246;
@@ -904,7 +812,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// documentControl6
 			// 
 			this.documentControl6.CurrentDocument = null;
-			this.documentControl6.Location = new System.Drawing.Point(605, 406);
+			this.documentControl6.Location = new System.Drawing.Point(538, 401);
 			this.documentControl6.Name = "documentControl6";
 			this.documentControl6.Size = new System.Drawing.Size(314, 41);
 			this.documentControl6.TabIndex = 247;
@@ -912,7 +820,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// documentControl7
 			// 
 			this.documentControl7.CurrentDocument = null;
-			this.documentControl7.Location = new System.Drawing.Point(606, 453);
+			this.documentControl7.Location = new System.Drawing.Point(539, 448);
 			this.documentControl7.Name = "documentControl7";
 			this.documentControl7.Size = new System.Drawing.Size(314, 41);
 			this.documentControl7.TabIndex = 248;
@@ -920,7 +828,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// documentControl8
 			// 
 			this.documentControl8.CurrentDocument = null;
-			this.documentControl8.Location = new System.Drawing.Point(605, 500);
+			this.documentControl8.Location = new System.Drawing.Point(538, 495);
 			this.documentControl8.Name = "documentControl8";
 			this.documentControl8.Size = new System.Drawing.Size(314, 41);
 			this.documentControl8.TabIndex = 249;
@@ -928,7 +836,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// documentControl9
 			// 
 			this.documentControl9.CurrentDocument = null;
-			this.documentControl9.Location = new System.Drawing.Point(606, 547);
+			this.documentControl9.Location = new System.Drawing.Point(539, 542);
 			this.documentControl9.Name = "documentControl9";
 			this.documentControl9.Size = new System.Drawing.Size(314, 41);
 			this.documentControl9.TabIndex = 250;
@@ -936,16 +844,197 @@ namespace CAS.UI.UIControls.WorkPakage
 			// documentControl10
 			// 
 			this.documentControl10.CurrentDocument = null;
-			this.documentControl10.Location = new System.Drawing.Point(605, 594);
+			this.documentControl10.Location = new System.Drawing.Point(538, 589);
 			this.documentControl10.Name = "documentControl10";
 			this.documentControl10.Size = new System.Drawing.Size(314, 41);
 			this.documentControl10.TabIndex = 251;
+			// 
+			// comboBoxWorkType
+			// 
+			this.comboBoxWorkType.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.comboBoxWorkType.ForeColor = System.Drawing.Color.DimGray;
+			this.comboBoxWorkType.FormattingEnabled = true;
+			this.comboBoxWorkType.Location = new System.Drawing.Point(180, 89);
+			this.comboBoxWorkType.Name = "comboBoxWorkType";
+			this.comboBoxWorkType.Size = new System.Drawing.Size(250, 22);
+			this.comboBoxWorkType.TabIndex = 252;
+			// 
+			// groupBox1
+			// 
+			this.groupBox1.Controls.Add(this.lookupComboboxFlightNum);
+			this.groupBox1.Controls.Add(this.lookupComboboxTo);
+			this.groupBox1.Controls.Add(this.label19);
+			this.groupBox1.Controls.Add(this.lookupComboboxFrom);
+			this.groupBox1.Controls.Add(this.dateTimePickerFlightDate);
+			this.groupBox1.Controls.Add(this.label20);
+			this.groupBox1.Controls.Add(this.label21);
+			this.groupBox1.Controls.Add(this.label22);
+			this.groupBox1.Location = new System.Drawing.Point(448, 32);
+			this.groupBox1.Name = "groupBox1";
+			this.groupBox1.Size = new System.Drawing.Size(404, 131);
+			this.groupBox1.TabIndex = 254;
+			this.groupBox1.TabStop = false;
+			this.groupBox1.Text = "Perform after";
+			// 
+			// lookupComboboxFlightNum
+			// 
+			this.lookupComboboxFlightNum.Displayer = null;
+			this.lookupComboboxFlightNum.DisplayerText = null;
+			this.lookupComboboxFlightNum.Entity = null;
+			this.lookupComboboxFlightNum.Location = new System.Drawing.Point(73, 19);
+			this.lookupComboboxFlightNum.Name = "lookupComboboxFlightNum";
+			this.lookupComboboxFlightNum.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.lookupComboboxFlightNum.Size = new System.Drawing.Size(317, 21);
+			this.lookupComboboxFlightNum.TabIndex = 35;
+			this.lookupComboboxFlightNum.Type = null;
+			// 
+			// lookupComboboxTo
+			// 
+			this.lookupComboboxTo.Displayer = null;
+			this.lookupComboboxTo.DisplayerText = null;
+			this.lookupComboboxTo.Entity = null;
+			this.lookupComboboxTo.Location = new System.Drawing.Point(73, 97);
+			this.lookupComboboxTo.Name = "lookupComboboxTo";
+			this.lookupComboboxTo.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.lookupComboboxTo.Size = new System.Drawing.Size(317, 21);
+			this.lookupComboboxTo.TabIndex = 34;
+			this.lookupComboboxTo.Type = null;
+			// 
+			// label19
+			// 
+			this.label19.AutoSize = true;
+			this.label19.Location = new System.Drawing.Point(6, 99);
+			this.label19.Name = "label19";
+			this.label19.Size = new System.Drawing.Size(20, 13);
+			this.label19.TabIndex = 33;
+			this.label19.Text = "To";
+			// 
+			// lookupComboboxFrom
+			// 
+			this.lookupComboboxFrom.Displayer = null;
+			this.lookupComboboxFrom.DisplayerText = null;
+			this.lookupComboboxFrom.Entity = null;
+			this.lookupComboboxFrom.Location = new System.Drawing.Point(73, 70);
+			this.lookupComboboxFrom.Name = "lookupComboboxFrom";
+			this.lookupComboboxFrom.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.lookupComboboxFrom.Size = new System.Drawing.Size(317, 21);
+			this.lookupComboboxFrom.TabIndex = 32;
+			this.lookupComboboxFrom.Type = null;
+			// 
+			// dateTimePickerFlightDate
+			// 
+			this.dateTimePickerFlightDate.Location = new System.Drawing.Point(73, 45);
+			this.dateTimePickerFlightDate.Margin = new System.Windows.Forms.Padding(2);
+			this.dateTimePickerFlightDate.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
+			this.dateTimePickerFlightDate.Name = "dateTimePickerFlightDate";
+			this.dateTimePickerFlightDate.Size = new System.Drawing.Size(317, 20);
+			this.dateTimePickerFlightDate.TabIndex = 31;
+			this.dateTimePickerFlightDate.Value = new System.DateTime(2012, 12, 26, 0, 0, 0, 0);
+			// 
+			// label20
+			// 
+			this.label20.AutoSize = true;
+			this.label20.Location = new System.Drawing.Point(6, 74);
+			this.label20.Name = "label20";
+			this.label20.Size = new System.Drawing.Size(30, 13);
+			this.label20.TabIndex = 30;
+			this.label20.Text = "From";
+			// 
+			// label21
+			// 
+			this.label21.AutoSize = true;
+			this.label21.Location = new System.Drawing.Point(6, 50);
+			this.label21.Name = "label21";
+			this.label21.Size = new System.Drawing.Size(30, 13);
+			this.label21.TabIndex = 29;
+			this.label21.Text = "Date";
+			// 
+			// label22
+			// 
+			this.label22.AutoSize = true;
+			this.label22.Location = new System.Drawing.Point(6, 24);
+			this.label22.Name = "label22";
+			this.label22.Size = new System.Drawing.Size(49, 13);
+			this.label22.TabIndex = 28;
+			this.label22.Text = "Flight No";
+			// 
+			// numericUpDown1
+			// 
+			this.numericUpDown1.DecimalPlaces = 2;
+			this.numericUpDown1.Location = new System.Drawing.Point(180, 515);
+			this.numericUpDown1.Name = "numericUpDown1";
+			this.numericUpDown1.Size = new System.Drawing.Size(251, 20);
+			this.numericUpDown1.TabIndex = 256;
+			// 
+			// metroTextBox1
+			// 
+			// 
+			// 
+			// 
+			this.metroTextBox1.CustomButton.Image = null;
+			this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(174, 2);
+			this.metroTextBox1.CustomButton.Name = "";
+			this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.metroTextBox1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.metroTextBox1.CustomButton.TabIndex = 1;
+			this.metroTextBox1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.metroTextBox1.CustomButton.UseSelectable = true;
+			this.metroTextBox1.CustomButton.Visible = false;
+			this.metroTextBox1.ForeColor = System.Drawing.Color.DimGray;
+			this.metroTextBox1.Lines = new string[0];
+			this.metroTextBox1.Location = new System.Drawing.Point(180, 541);
+			this.metroTextBox1.MaxLength = 32767;
+			this.metroTextBox1.Name = "metroTextBox1";
+			this.metroTextBox1.PasswordChar = '\0';
+			this.metroTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.metroTextBox1.SelectedText = "";
+			this.metroTextBox1.SelectionLength = 0;
+			this.metroTextBox1.SelectionStart = 0;
+			this.metroTextBox1.ShortcutsEnabled = true;
+			this.metroTextBox1.Size = new System.Drawing.Size(208, 20);
+			this.metroTextBox1.TabIndex = 258;
+			this.metroTextBox1.UseSelectable = true;
+			this.metroTextBox1.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.metroTextBox1.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+			// 
+			// metroLabel2
+			// 
+			metroLabel2.AutoSize = true;
+			metroLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			metroLabel2.Location = new System.Drawing.Point(23, 541);
+			metroLabel2.Name = "metroLabel2";
+			metroLabel2.Size = new System.Drawing.Size(67, 19);
+			metroLabel2.TabIndex = 257;
+			metroLabel2.Text = "Providers:";
+			metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// linkLabelEditComponents
+			// 
+			this.linkLabelEditComponents.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.linkLabelEditComponents.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.linkLabelEditComponents.Location = new System.Drawing.Point(393, 539);
+			this.linkLabelEditComponents.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.linkLabelEditComponents.Name = "linkLabelEditComponents";
+			this.linkLabelEditComponents.Size = new System.Drawing.Size(37, 23);
+			this.linkLabelEditComponents.TabIndex = 259;
+			this.linkLabelEditComponents.TabStop = true;
+			this.linkLabelEditComponents.Text = "Edit";
+			this.linkLabelEditComponents.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.linkLabelEditComponents.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelEditComponents_LinkClicked);
 			// 
 			// WorkPackageEditorForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(937, 702);
+			this.ClientSize = new System.Drawing.Size(866, 687);
+			this.Controls.Add(this.linkLabelEditComponents);
+			this.Controls.Add(this.metroTextBox1);
+			this.Controls.Add(metroLabel2);
+			this.Controls.Add(this.numericUpDown1);
+			this.Controls.Add(metroLabel1);
+			this.Controls.Add(this.groupBox1);
+			this.Controls.Add(labelWorkType);
+			this.Controls.Add(this.comboBoxWorkType);
 			this.Controls.Add(this.documentControl10);
 			this.Controls.Add(this.documentControl9);
 			this.Controls.Add(this.documentControl8);
@@ -961,8 +1050,6 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.Controls.Add(label18);
 			this.Controls.Add(this.textBoxStation);
 			this.Controls.Add(label17);
-			this.Controls.Add(this.textBoxRevision);
-			this.Controls.Add(label16);
 			this.Controls.Add(this.textBoxClosingRemarks);
 			this.Controls.Add(label15);
 			this.Controls.Add(this.textBoxRemarks);
@@ -979,10 +1066,6 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.Controls.Add(label10);
 			this.Controls.Add(this.textBoxMRO);
 			this.Controls.Add(label7);
-			this.Controls.Add(this.textBoxCheckType);
-			this.Controls.Add(label8);
-			this.Controls.Add(this.textBoxReleaseCertificate);
-			this.Controls.Add(label5);
 			this.Controls.Add(this.textBoxPublishingRemark);
 			this.Controls.Add(label6);
 			this.Controls.Add(this.textBoxClosedBy);
@@ -998,12 +1081,15 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.Controls.Add(this.textBoxWpNumber);
 			this.Controls.Add(labelNumber);
 			this.MaximumSize = new System.Drawing.Size(937, 750);
-			this.MinimumSize = new System.Drawing.Size(937, 382);
+			this.MinimumSize = new System.Drawing.Size(800, 382);
 			this.Name = "WorkPackageEditorForm";
 			this.Resizable = false;
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.Text = "Work Package Editor Form";
+			this.groupBox1.ResumeLayout(false);
+			this.groupBox1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -1017,10 +1103,8 @@ namespace CAS.UI.UIControls.WorkPakage
 		private System.Windows.Forms.DateTimePicker dateTimePickerPublishingDate;
 		private MetroTextBox textBoxAuthor;
 		private MetroTextBox textBoxClosedBy;
-		private MetroTextBox textBoxReleaseCertificate;
 		private MetroTextBox textBoxPublishingRemark;
 		private MetroTextBox textBoxMRO;
-		private MetroTextBox textBoxCheckType;
 		private MetroTextBox textBoxStatus;
 		private MetroTextBox textBoxTitle;
 		private System.Windows.Forms.DateTimePicker dateTimePickerClosingDate;
@@ -1028,7 +1112,6 @@ namespace CAS.UI.UIControls.WorkPakage
 		private MetroTextBox textBoxPublishedBy;
 		private MetroTextBox textBoxRemarks;
 		private MetroTextBox textBoxClosingRemarks;
-		private MetroTextBox textBoxRevision;
 		private MetroTextBox textBoxStation;
 		private DocumentationControls.DocumentControl documentControl1;
 		private System.Windows.Forms.Button buttonOk;
@@ -1042,5 +1125,18 @@ namespace CAS.UI.UIControls.WorkPakage
 		private DocumentationControls.DocumentControl documentControl8;
 		private DocumentationControls.DocumentControl documentControl9;
 		private DocumentationControls.DocumentControl documentControl10;
+		private System.Windows.Forms.ComboBox comboBoxWorkType;
+		private System.Windows.Forms.GroupBox groupBox1;
+		private Auxiliary.LookupCombobox lookupComboboxFlightNum;
+		private Auxiliary.LookupCombobox lookupComboboxTo;
+		private System.Windows.Forms.Label label19;
+		private Auxiliary.LookupCombobox lookupComboboxFrom;
+		private System.Windows.Forms.DateTimePicker dateTimePickerFlightDate;
+		private System.Windows.Forms.Label label20;
+		private System.Windows.Forms.Label label21;
+		private System.Windows.Forms.Label label22;
+		private System.Windows.Forms.NumericUpDown numericUpDown1;
+		private MetroTextBox metroTextBox1;
+		private System.Windows.Forms.LinkLabel linkLabelEditComponents;
 	}
 }

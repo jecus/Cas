@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -13,7 +14,7 @@ namespace CAS.UI.UIControls.ForecastControls
 {
     ///<summary>
     ///</summary>
-    public partial class ForecastCustomsMTOP : Form
+    public partial class ForecastCustomsMTOP : MetroForm
     {
         private MaintenanceCheckCollection _checkItems;
 

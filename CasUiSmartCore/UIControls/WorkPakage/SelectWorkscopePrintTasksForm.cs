@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
+using MetroFramework.Forms;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
@@ -21,7 +22,7 @@ namespace CAS.UI.UIControls.WorkPakage
     /// Форма, позволяющая делать выбор между компонентами и их расходниками для включения
     /// <br/> в запросный/закупочный акт
     ///</summary>
-    public partial class SelectWorkscopePrintTasksForm : Form
+    public partial class SelectWorkscopePrintTasksForm : MetroForm
     {
         #region Fields
 

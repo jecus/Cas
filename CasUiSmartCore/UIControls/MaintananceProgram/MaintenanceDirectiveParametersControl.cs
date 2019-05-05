@@ -248,7 +248,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 	        checkBoxKitsApplicable.Checked = _currentDirective.KitsApplicable;
 		    linkLabelEditKit.Enabled = _currentDirective.KitsApplicable;
 		    textBoxKitRequired.Enabled = _currentDirective.KitsApplicable;
-			textBoxKitRequired.Text = _currentDirective.KitsApplicable ? $"{_currentDirective.Kits.Count} kits" : "N/A";
+			textBoxKitRequired.Text = _currentDirective.KitsApplicable ? $"{_currentDirective.Kits.Count} EA" : "N/A";
 			checkBoxKitsApplicable.CheckedChanged += checkBoxKitsApplicable_CheckedChanged;
 
 			//MPD Item может иметь привязку либо на MaintenanceCheck либо на Компоненты
@@ -431,7 +431,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
         {
             KitForm dlg = new KitForm(_currentDirective);
             if (dlg.ShowDialog() == DialogResult.OK)
-                textBoxKitRequired.Text = _currentDirective.Kits.Count + " kits";
+                textBoxKitRequired.Text = _currentDirective.Kits.Count + " EA";
         }
         #endregion
 
@@ -541,7 +541,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			{
 				linkLabelEditKit.Enabled = true;
 				textBoxKitRequired.Enabled = true;
-				textBoxKitRequired.Text = $"{_currentDirective.Kits.Count} kits";
+				textBoxKitRequired.Text = $"{_currentDirective.Kits.Count} EA";
 			}
 			
 		}

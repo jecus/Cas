@@ -123,7 +123,11 @@ namespace EFCore.DTO.Maps
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .HasColumnName("Reference");
 
-            HasRequired(i => i.ATAChapter)
+            Property(i => i.IsEffectivity)
+	            .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+	            .HasColumnName("IsEffectivity");
+
+			HasRequired(i => i.ATAChapter)
 				.WithMany(i => i.AccessoryDescriptionDtos)
 				.HasForeignKey(i => i.AtaChapterId);
 

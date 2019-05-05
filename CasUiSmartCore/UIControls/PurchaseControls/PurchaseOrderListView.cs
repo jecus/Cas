@@ -129,8 +129,13 @@ namespace CAS.UI.UIControls.PurchaseControls
 		{
 			if (SelectedItem == null) return;
 
-			var form = new PurchaseOrderForm(SelectedItem);
-			form.ShowDialog();
+			var editForm = new PurchaseOrderForm(SelectedItem);
+			if (editForm.ShowDialog() == DialogResult.OK)
+			{
+				var subs = GetListViewSubItems(SelectedItem);
+				for (int i = 0; i < subs.Length; i++)
+					itemsListView.SelectedItems[0].SubItems[i].Text = subs[i].Text;
+			}
 		}
 		#endregion
 

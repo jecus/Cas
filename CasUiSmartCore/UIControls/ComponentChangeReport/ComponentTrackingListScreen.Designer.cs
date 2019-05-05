@@ -1,4 +1,6 @@
-﻿
+﻿using CASTerms;
+using EFCore.DTO.General;
+
 namespace CAS.UI.UIControls.ComponentChangeReport
 {
     partial class ComponentTrackingListScreen
@@ -29,6 +31,7 @@ namespace CAS.UI.UIControls.ComponentChangeReport
         /// </summary>
         private void InitializeComponent()
         {
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
 			this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
@@ -184,6 +187,7 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 			this.buttonDeleteSelected.TextSecondary = "";
 			this.buttonDeleteSelected.ToolTipText = "Delete selected";
 			this.buttonDeleteSelected.Click += new System.EventHandler(this.ButtonDeleteClick);
+			this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
 			// pictureBox1
 			// 

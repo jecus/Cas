@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Schedule;
 
 namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 {
-	public partial class AddAircraftPlanOpsForm : Form
+	public partial class AddAircraftPlanOpsForm : MetroForm
 	{
 		#region Fields
 

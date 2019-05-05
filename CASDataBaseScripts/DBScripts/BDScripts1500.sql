@@ -51,3 +51,57 @@ if not exists ( select  *
 	alter table dbo.PurchaseRequestsRecords
     add CurrencyId int not null default -1
 GO
+
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('Dictionaries.AccessoryDescriptions')
+                    and c.name = 'IsEffectivity' ) 
+
+	alter table Dictionaries.AccessoryDescriptions
+    add IsEffectivity nvarchar(MAX)null
+GO
+--------------------------------------------------------------------------------
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('dbo.Users')
+                    and c.name = 'UiType' ) 
+
+	alter table dbo.Users
+    add UiType int not null default 0
+GO
+--------------------------------------------------------------------------------
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('dbo.WorkPackages')
+                    and c.name = 'WpWorkType' ) 
+
+	alter table dbo.WorkPackages
+    add WpWorkType int not null default -1
+GO
+
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('dbo.WorkPackages')
+                    and c.name = 'KMH' ) 
+
+	alter table dbo.WorkPackages
+    add KMH float not null default 0
+GO
+
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('dbo.WorkPackages')
+                    and c.name = 'PerformAfter' ) 
+
+	alter table dbo.WorkPackages
+    add PerformAfter nvarchar(MAX) null 
+GO
+
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('dbo.WorkPackages')
+                    and c.name = 'ProviderJSON' ) 
+
+	alter table dbo.WorkPackages
+    add ProviderJSON nvarchar(MAX) null 
+GO

@@ -1,4 +1,7 @@
-﻿namespace CAS.UI.UIControls.OpepatorsControls
+﻿using CASTerms;
+using EFCore.DTO.General;
+
+namespace CAS.UI.UIControls.OpepatorsControls
 {
     partial class OperatorScreen
     {
@@ -28,7 +31,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.OperatorControl = new OperatorControl(new SmartCore.Entities.General.Operator());
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.OperatorControl = new OperatorControl(new SmartCore.Entities.General.Operator());
             this._buttonDeleteOperator = new CAS.UI.Management.Dispatchering.RichReferenceButton();
             this.headerControl.SuspendLayout();
             this.SuspendLayout();
@@ -85,10 +89,11 @@
             _buttonDeleteOperator.TextMain = "Delete";
             _buttonDeleteOperator.TextSecondary = "operator";
             _buttonDeleteOperator.DisplayerRequested += buttonDeleteOperator_DisplayerRequested;
-            // 
-            // NonRoutineJobsListScreen
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            _buttonDeleteOperator.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			// 
+			// NonRoutineJobsListScreen
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.Name = "NonRoutineJobsListScreen";
             this.ShowTopPanelContainer = true;
             this.ShowAircraftStatusPanel = false;

@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
+using MetroFramework.Forms;
 
 namespace CAS.UI.UIControls.AnimatedBackgroundWorker
 {
     ///<summary>
     /// Форма, отображает ожидание заверщениея асинхронной операции
     ///</summary>
-    public partial class WaitCancelForm : Form
+    public partial class WaitCancelForm : MetroForm
     {
         #region Fields
 

@@ -1,4 +1,6 @@
 ﻿using  MetroFramework.Controls;
+using CASTerms;
+using EFCore.DTO.General;
 
 namespace CAS.UI.UIControls.PurchaseControls.Initial
 {
@@ -30,6 +32,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
         /// </summary>
         private void InitializeComponent()
         {
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.labelSearchSupplier = new MetroFramework.Controls.MetroLabel();
 			this.textBoxSearchStandart = new MetroFramework.Controls.MetroTextBox();
 			this.labelSearchPartNumber = new MetroFramework.Controls.MetroLabel();
@@ -88,7 +91,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.labelQOTitle = new MetroFramework.Controls.MetroLabel();
 			this.buttonOk = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
-			this.listViewInitialItems = new CAS.UI.UIControls.PurchaseControls.Quatation.QuatationOrderListView();
+			this.listViewInitialItems = new CAS.UI.UIControls.PurchaseControls.Quatation.QuatationOrderListViewNew();
 			this.listViewKits = new CAS.UI.UIControls.PurchaseControls.Quatation.RequestProductListView();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
@@ -206,6 +209,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.ButtonAdd.TextSecondary = "";
 			this.ButtonAdd.ToolTipText = "";
 			this.ButtonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
+			this.ButtonAdd.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// ButtonDelete
 			// 
@@ -234,6 +238,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.ButtonDelete.TextSecondary = "";
 			this.ButtonDelete.ToolTipText = "";
 			this.ButtonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
+			this.ButtonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
 			// groupBox1
 			// 
@@ -1040,6 +1045,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.buttonOk.TabIndex = 293;
 			this.buttonOk.Text = "OK";
 			this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
+			this.buttonOk.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// buttonCancel
 			// 
@@ -1163,7 +1169,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
         private MetroLabel labelRemarks;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
-		private CAS.UI.UIControls.PurchaseControls.Quatation.QuatationOrderListView listViewInitialItems;
+		private CAS.UI.UIControls.PurchaseControls.Quatation.QuatationOrderListViewNew listViewInitialItems;
 		private System.Windows.Forms.ComboBox comboBoxStatus;
 		private MetroTextBox metroTextBox1;
 		private MetroLabel metroLabel2;

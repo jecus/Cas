@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Entities.General;
 
 namespace CAS.UI.UIControls.ForecastControls
 {
     ///<summary>
     ///</summary>
-    public partial class ForecastFilterAircraft : Form
+    public partial class ForecastFilterAircraft : MetroForm
     {
         ///<summary>
         ///</summary>

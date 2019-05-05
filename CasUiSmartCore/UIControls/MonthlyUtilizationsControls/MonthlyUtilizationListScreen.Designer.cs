@@ -1,4 +1,6 @@
-﻿
+﻿using CASTerms;
+using EFCore.DTO.General;
+
 namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 {
     partial class MonthlyUtilizationListScreen
@@ -29,7 +31,8 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
         /// </summary>
         private void InitializeComponent()
         {
-	        this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
             this.buttonAddNew = new CAS.UI.Management.Dispatchering.RichReferenceButton();
             this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
@@ -147,10 +150,11 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
             this.buttonOK.Width = 70;
             this.buttonOK.Text = "OK";
             this.buttonOK.Click += ButtonOkClick;
-            // 
-            // labelAvgUtilization
-            // 
-            this.labelAvgUtilization.AutoSize = true;
+            this.buttonOK.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// labelAvgUtilization
+			// 
+			this.labelAvgUtilization.AutoSize = true;
             this.labelAvgUtilization.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             this.labelAvgUtilization.ForeColor = System.Drawing.Color.FromArgb(122, 122, 122);
             this.labelAvgUtilization.Location = new System.Drawing.Point(430, 35);
@@ -187,10 +191,11 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
             this.buttonAddNew.Name = "buttonAddNew";
             this.buttonAddNew.Visible = false;
             this.buttonAddNew.DisplayerRequested += ButtonAddDisplayerRequested;
-            // 
-            // buttonDeleteSelected
-            // 
-            this.buttonDeleteSelected.ActiveBackColor = System.Drawing.Color.FromArgb(200, 200, 200);
+            this.buttonAddNew.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// buttonDeleteSelected
+			// 
+			this.buttonDeleteSelected.ActiveBackColor = System.Drawing.Color.FromArgb(200, 200, 200);
             this.buttonDeleteSelected.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.buttonDeleteSelected.FontSecondary = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.buttonDeleteSelected.ForeColorMain = System.Drawing.Color.FromArgb(49, 82, 128);
@@ -206,7 +211,8 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
             this.buttonDeleteSelected.TextAlignSecondary = System.Drawing.ContentAlignment.TopCenter;
             this.buttonDeleteSelected.TextMain = "";
             this.buttonDeleteSelected.TextSecondary = "";
-            this.buttonApplyFilter.ToolTipText = "Delete selected";
+            this.buttonDeleteSelected.ToolTipText = "Delete selected";
+            this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
 			// buttonApplyFilter
 			// 

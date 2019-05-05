@@ -4972,6 +4972,10 @@ namespace SmartCore.DtoHelper
 				PublishedBy = workpack.PublishedBy,
 				ClosedBy = workpack.ClosedBy,
 				EmployeesRemark = workpack.EmployeesRemark,
+				WpWorkType = workpack.WpWorkType.ItemId,
+				KMH = workpack.KMH,
+				PerformAfter = workpack.PerformAfter,
+				ProviderJSON = workpack.ProviderJSON,
 				Files = workpack.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>
 			};
 		}
@@ -5005,6 +5009,9 @@ namespace SmartCore.DtoHelper
 				CreateDate = workpackdto.CreateDate ?? DateTimeExtend.GetCASMinDateTime(),
 				PublishedBy = workpackdto.PublishedBy,
 				ClosedBy = workpackdto.ClosedBy,
+				WpWorkType = WpWorkType.GetComponentTypeById(workpackdto.WpWorkType),
+				KMH = workpackdto.KMH,
+				ProviderJSON = workpackdto.ProviderJSON,
 				EmployeesRemark = workpackdto.EmployeesRemark
 			};
 

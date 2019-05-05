@@ -1,4 +1,6 @@
-﻿
+﻿using CASTerms;
+using EFCore.DTO.General;
+
 namespace CAS.UI.UIControls.PurchaseControls
 {
     partial class InitionalOrderScreen
@@ -29,7 +31,8 @@ namespace CAS.UI.UIControls.PurchaseControls
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
             this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
             this.pictureBoxS1 = new System.Windows.Forms.PictureBox();
@@ -131,10 +134,11 @@ namespace CAS.UI.UIControls.PurchaseControls
             this.buttonDeleteSelected.TextAlignSecondary = System.Drawing.ContentAlignment.TopLeft;
             this.buttonDeleteSelected.TextMain = "";
             this.buttonDeleteSelected.TextSecondary = "";
-            // 
-            // buttonClose
-            // 
-            this.buttonClose.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			// 
+			// buttonClose
+			// 
+			this.buttonClose.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.buttonClose.ActiveBackgroundImage = null;
             this.buttonClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonClose.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
@@ -187,10 +191,11 @@ namespace CAS.UI.UIControls.PurchaseControls
             this.buttonPublish.TextSecondary = "";
             this.buttonPublish.ToolTipText = "Publish";
             this.buttonPublish.Click += new System.EventHandler(this.ButtonPublishClick);
-            // 
-            // buttonFilter
-            // 
-            this.buttonFilter.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.buttonPublish.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// buttonFilter
+			// 
+			this.buttonFilter.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.buttonFilter.ActiveBackgroundImage = null;
             this.buttonFilter.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonFilter.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);

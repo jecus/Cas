@@ -8,6 +8,7 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AircraftTechnicalLogBookControls;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.Auxiliary.Comparers;
 using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
@@ -49,8 +50,8 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
         public MouthlyUtilizationListView(Aircraft parentAircraft, ICommonCollection<ATLB> atlbCollection)
             : this()
         {
-            SortMultiplier = 1;
-            OldColumnIndex = 0;
+            SortMultiplier = 0;
+            OldColumnIndex = 1;
             _parentAircraft = parentAircraft;
             _atbs = atlbCollection;
         }
@@ -516,6 +517,37 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 									          .SelectMany(dd => dd.PerformanceRecords)
 									          .OrderByDescending(dr => dr.RecordDate)
 									          .FirstOrDefault();
+		}
+
+		#endregion
+
+		#region Overrides of BaseListViewControl<AircraftFlight>
+
+		protected override void SortItems(int columnIndex)
+		{
+			if (OldColumnIndex != columnIndex)
+				SortMultiplier = -1;
+			if (SortMultiplier == 1)
+				SortMultiplier = -1;
+			else
+				SortMultiplier = 1;
+			itemsListView.Items.Clear();
+			OldColumnIndex = columnIndex;
+
+			List<ListViewItem> resultList = new List<ListViewItem>();
+
+			ListViewItemList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
+
+			foreach (ListViewItem item in ListViewItemList)
+			{
+				if (item.Tag is AircraftFlight)
+				{
+					resultList.Add(item);
+				}
+			}
+
+
+			itemsListView.Items.AddRange(resultList.ToArray());
 		}
 
 		#endregion

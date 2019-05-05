@@ -8,7 +8,14 @@ namespace EFCore.DTO.General
 	public enum UsetType
 	{
 		Admin,
-		User
+		SuperUser,
+		ReadOnly,
+		SaveOnly
+	}
+
+	public enum UiType
+	{
+		All
 	}
 
 	[DataContract(IsReference = true)]
@@ -30,6 +37,9 @@ namespace EFCore.DTO.General
 		[DataMember]
 		public UsetType UserType { get; set; }
 
+		[DataMember]
+		public UiType UiType { get; set; }
+
 		public override string ToString()
 		{
 			return Name.Equals(Surname) ? Name : $"{Surname} {Name}";
@@ -43,6 +53,7 @@ namespace EFCore.DTO.General
 		string Login { get; set; }
 		string Password { get; set; }
 		UsetType UserType { get; set; }
+		UiType UiType { get; set; }
 
 	}
 }

@@ -45,6 +45,7 @@ namespace CAS.UI.UIControls.WorkPakage
 		private ToolStripMenuItem _toolStripMenuItemOpen;
 		private ToolStripMenuItem _toolStripMenuItemPublish;
 		private ToolStripMenuItem _toolStripMenuItemEdit;
+		private ToolStripMenuItem _toolStripMenuItemEditProvider;
 		private ToolStripMenuItem _toolStripMenuItemClose;
 		private ToolStripMenuItem _toolStripMenuItemDelete;
 		private ToolStripSeparator _toolStripSeparator1;
@@ -159,6 +160,15 @@ namespace CAS.UI.UIControls.WorkPakage
 
 			_initialDirectiveArray.AddRange(GlobalObjects.WorkPackageCore.GetWorkPackages(CurrentAircraft).ToArray());
 
+			var airports = GlobalObjects.CasEnvironment.GetDictionary<AirportsCodes>();
+			var flightNum = GlobalObjects.CasEnvironment.GetDictionary<FlightNum>();
+			foreach (var wp in _initialDirectiveArray)
+			{
+				wp.PerfAfter.AirportFrom = (AirportsCodes) airports.GetItemById(wp.PerfAfter.AirportFromId);
+				wp.PerfAfter.AirportTo = (AirportsCodes)airports.GetItemById(wp.PerfAfter.AirportToId);
+				wp.PerfAfter.FlightNum = (FlightNum)flightNum.GetItemById(wp.PerfAfter.FlightNumId);
+			}
+
 			AnimatedThreadWorker.ReportProgress(40, "filter directives");
 
 			AnimatedThreadWorker.ReportProgress(70, "filter directives");
@@ -199,6 +209,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			_toolStripMenuItemClose = new ToolStripMenuItem();
 			_toolStripMenuItemsWorkPackages = new List<ToolStripMenuItem>();
 			_toolStripMenuItemEdit = new ToolStripMenuItem();
+			_toolStripMenuItemEditProvider = new ToolStripMenuItem();
 			_toolStripMenuItemDelete = new ToolStripMenuItem();
 			_toolStripMenuItemHighlight = new ToolStripMenuItem();
 			_toolStripSeparator1 = new ToolStripSeparator();
@@ -222,6 +233,11 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			_toolStripMenuItemEdit.Text = "Edit";
 			_toolStripMenuItemEdit.Click += ToolStripMenuItemEditClick;
+			// 
+			// _toolStripMenuItemEditProvider
+			// 
+			_toolStripMenuItemEditProvider.Text = "Overview Providers";
+			_toolStripMenuItemEditProvider.Click += ToolStripMenuItemEditProviderClick;
 			// 
 			// toolStripMenuItemView
 			// 
@@ -276,6 +292,7 @@ namespace CAS.UI.UIControls.WorkPakage
 													_toolStripMenuItemClose,
 													_toolStripSeparator1,
 													_toolStripMenuItemEdit,
+													_toolStripMenuItemEditProvider,
 													_toolStripMenuItemOpen,
 													_toolStripMenuItemDelete,
 													_toolStripSeparator1,
@@ -287,6 +304,22 @@ namespace CAS.UI.UIControls.WorkPakage
 												});
 			_contextMenuStrip.Opening += ContextMenuStripOpen;
 		}
+
+		private void ToolStripMenuItemEditProviderClick(object sender, EventArgs e)
+		{
+			var form = new WpProviderForm(_directivesViewer.SelectedItem);
+
+			if (form.ShowDialog() == DialogResult.OK)
+			{
+				GlobalObjects.CasEnvironment.NewKeeper.Save(_directivesViewer.SelectedItem);
+				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+				AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
+
+				AnimatedThreadWorker.RunWorkerAsync();
+			}
+		}
+
 		#endregion
 
 		#region private void _toolStripMenuItemPrintMaintenanceReport_Click(object sender, EventArgs e)
@@ -331,11 +364,13 @@ namespace CAS.UI.UIControls.WorkPakage
 		/// <param name="e"></param>
 		private void ContextMenuStripOpen(object sender, CancelEventArgs e)
 		{
+			_toolStripMenuItemEditProvider.Enabled = false;
 			if (_directivesViewer.SelectedItems.Count <= 0)
 				e.Cancel = true;
 			if (_directivesViewer.SelectedItems.Count == 1)
 			{
 				_toolStripMenuItemOpen.Enabled = true;
+				_toolStripMenuItemEditProvider.Enabled = true;
 				_toolStripMenuItemPrintMaintenanceReport.Enabled = _directivesViewer.SelectedItem.Status == WorkPackageStatus.Closed;
 			}
 		}

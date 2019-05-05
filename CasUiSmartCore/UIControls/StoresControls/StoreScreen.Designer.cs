@@ -1,4 +1,5 @@
-﻿
+﻿using CASTerms;
+using EFCore.DTO.General;
 using CAS.UI.UIControls.Auxiliary;
 
 namespace CAS.UI.UIControls.StoresControls
@@ -31,7 +32,8 @@ namespace CAS.UI.UIControls.StoresControls
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
             this.pictureBoxSeparatorD = new System.Windows.Forms.PictureBox();
             this.pictureBoxSeparatorF = new System.Windows.Forms.PictureBox();
@@ -151,10 +153,11 @@ namespace CAS.UI.UIControls.StoresControls
             this.buttonDeleteSelected.TextSecondary = "";
             this.buttonDeleteSelected.ToolTipText = "Delete selected";
             this.buttonDeleteSelected.Click += new System.EventHandler(this.ButtonDeleteClick);
-            // 
-            // pictureBoxSeparatorD
-            // 
-            this.pictureBoxSeparatorD.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
+            this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			// 
+			// pictureBoxSeparatorD
+			// 
+			this.pictureBoxSeparatorD.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
             this.pictureBoxSeparatorD.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBoxSeparatorD.Location = new System.Drawing.Point(247, 3);
             this.pictureBoxSeparatorD.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
@@ -203,10 +206,11 @@ namespace CAS.UI.UIControls.StoresControls
             this._buttonAddConsumablePartAndKit.TextSecondary = "";
             this._buttonAddConsumablePartAndKit.ToolTipText = "Equipment&Material";
             this._buttonAddConsumablePartAndKit.Click += new System.EventHandler(this.ButtonAddConsumablePartAndKit);
-            // 
-            // pictureBoxSeparatorCPK
-            // 
-            this.pictureBoxSeparatorCPK.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
+            this._buttonAddConsumablePartAndKit.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// pictureBoxSeparatorCPK
+			// 
+			this.pictureBoxSeparatorCPK.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
             this.pictureBoxSeparatorCPK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBoxSeparatorCPK.Location = new System.Drawing.Point(184, 3);
             this.pictureBoxSeparatorCPK.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
@@ -248,10 +252,11 @@ namespace CAS.UI.UIControls.StoresControls
             this._buttonAddDetail.TextSecondary = "";
             this._buttonAddDetail.ToolTipText = "Add new component";
             this._buttonAddDetail.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.ButtonAddDetailDisplayerRequested);
-            // 
-            // pictureBoxSeparatorC
-            // 
-            this.pictureBoxSeparatorC.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
+            this._buttonAddDetail.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// pictureBoxSeparatorC
+			// 
+			this.pictureBoxSeparatorC.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
             this.pictureBoxSeparatorC.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBoxSeparatorC.Location = new System.Drawing.Point(121, 3);
             this.pictureBoxSeparatorC.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
@@ -290,10 +295,11 @@ namespace CAS.UI.UIControls.StoresControls
             this._buttonTransferDetails.TextSecondary = "";
             this._buttonTransferDetails.ToolTipText = "Transfered details";
             this._buttonTransferDetails.Click += new System.EventHandler(this.ButtonTransferedDetailsClick);
-            // 
-            // pictureBoxSeparatorTC
-            // 
-            this.pictureBoxSeparatorTC.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
+            this._buttonTransferDetails.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// pictureBoxSeparatorTC
+			// 
+			this.pictureBoxSeparatorTC.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
             this.pictureBoxSeparatorTC.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBoxSeparatorTC.Location = new System.Drawing.Point(58, 3);
             this.pictureBoxSeparatorTC.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
@@ -332,10 +338,11 @@ namespace CAS.UI.UIControls.StoresControls
             this._buttonMoveToAircraft.TextSecondary = "";
             this._buttonMoveToAircraft.ToolTipText = "Move to...";
             this._buttonMoveToAircraft.Click += new System.EventHandler(this.ButtonMoveToAircraftClick);
-            // 
-            // labelDateAsOf
-            // 
-            this.labelDateAsOf.AutoSize = true;
+            this._buttonMoveToAircraft.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// labelDateAsOf
+			// 
+			this.labelDateAsOf.AutoSize = true;
             this.labelDateAsOf.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.labelDateAsOf.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.labelDateAsOf.Location = new System.Drawing.Point(57, 30);

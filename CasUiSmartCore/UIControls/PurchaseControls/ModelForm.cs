@@ -106,6 +106,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			textBoxDescRus.Text = _currentModel.DescRus;
 			textBoxHts.Text = _currentModel.HTS;
 			textBoxRemarks.Text = _currentModel.Remarks;
+			textBoxIsEffectivity.Text = _currentModel.IsEffectivity;
 			textBoxManufacturer.Text = _currentModel.Manufacturer;
 			textBoxProductCode.Text = _currentModel.Code;
 			textBoxSeries.Text = _currentModel.Series;
@@ -167,6 +168,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				|| textBoxDescRus.Text != _currentModel.DescRus
 				|| textBoxHts.Text != _currentModel.HTS
 				|| textBoxRemarks.Text != _currentModel.Remarks
+				|| textBoxIsEffectivity.Text != _currentModel.IsEffectivity
 				|| textBoxManufacturer.Text != _currentModel.Manufacturer
 				|| textBoxProductCode.Text != _currentModel.Code
 				|| textBoxSeries.Text != _currentModel.Series
@@ -267,6 +269,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_currentModel.DescRus = textBoxDescRus.Text;
 			_currentModel.HTS = textBoxHts.Text;
 			_currentModel.Remarks = textBoxRemarks.Text;
+			_currentModel.IsEffectivity = textBoxIsEffectivity.Text;
 			_currentModel.Manufacturer = textBoxManufacturer.Text;
 			_currentModel.Code = textBoxProductCode.Text;
 			_currentModel.Series = textBoxSeries.Text;

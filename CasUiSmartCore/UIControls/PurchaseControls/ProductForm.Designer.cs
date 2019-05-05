@@ -62,10 +62,12 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxHTS = new System.Windows.Forms.TextBox();
 			this.labelReference = new System.Windows.Forms.Label();
 			this.textBoxReference = new System.Windows.Forms.TextBox();
-			this.fileControl = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
 			this.labelDoc = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.textBoxAltPartNum = new System.Windows.Forms.TextBox();
+			this.documentControl1 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
+			this.labelIsEffectivity = new System.Windows.Forms.Label();
+			this.textBoxIsEffectivity = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// comboBoxDetailClass
@@ -74,7 +76,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.comboBoxDetailClass.DisplayerText = null;
 			this.comboBoxDetailClass.DropDownHeight = 106;
 			this.comboBoxDetailClass.Entity = null;
-			this.comboBoxDetailClass.Location = new System.Drawing.Point(111, 33);
+			this.comboBoxDetailClass.Location = new System.Drawing.Point(110, 33);
 			this.comboBoxDetailClass.Name = "comboBoxDetailClass";
 			this.comboBoxDetailClass.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.comboBoxDetailClass.RootNodesNames = null;
@@ -98,7 +100,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// 
 			this.labelRemarks.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelRemarks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelRemarks.Location = new System.Drawing.Point(5, 178);
+			this.labelRemarks.Location = new System.Drawing.Point(6, 172);
 			this.labelRemarks.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.labelRemarks.Name = "labelRemarks";
 			this.labelRemarks.Size = new System.Drawing.Size(100, 25);
@@ -111,7 +113,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxRemarks.BackColor = System.Drawing.Color.White;
 			this.textBoxRemarks.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.textBoxRemarks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxRemarks.Location = new System.Drawing.Point(111, 179);
+			this.textBoxRemarks.Location = new System.Drawing.Point(110, 173);
 			this.textBoxRemarks.Margin = new System.Windows.Forms.Padding(4);
 			this.textBoxRemarks.Multiline = true;
 			this.textBoxRemarks.Name = "textBoxRemarks";
@@ -158,7 +160,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// 
 			this.labelDescription.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelDescription.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelDescription.Location = new System.Drawing.Point(5, 268);
+			this.labelDescription.Location = new System.Drawing.Point(6, 325);
 			this.labelDescription.Name = "labelDescription";
 			this.labelDescription.Size = new System.Drawing.Size(89, 25);
 			this.labelDescription.TabIndex = 81;
@@ -170,7 +172,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxDescription.BackColor = System.Drawing.Color.White;
 			this.textBoxDescription.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.textBoxDescription.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxDescription.Location = new System.Drawing.Point(111, 271);
+			this.textBoxDescription.Location = new System.Drawing.Point(110, 328);
 			this.textBoxDescription.Multiline = true;
 			this.textBoxDescription.Name = "textBoxDescription";
 			this.textBoxDescription.Size = new System.Drawing.Size(313, 52);
@@ -192,7 +194,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxPartNumber.BackColor = System.Drawing.Color.White;
 			this.textBoxPartNumber.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.textBoxPartNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxPartNumber.Location = new System.Drawing.Point(111, 116);
+			this.textBoxPartNumber.Location = new System.Drawing.Point(110, 116);
 			this.textBoxPartNumber.MaxLength = 128;
 			this.textBoxPartNumber.Name = "textBoxPartNumber";
 			this.textBoxPartNumber.Size = new System.Drawing.Size(313, 22);
@@ -236,7 +238,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.comboBoxAccessoryStandard.Displayer = null;
 			this.comboBoxAccessoryStandard.DisplayerText = null;
 			this.comboBoxAccessoryStandard.Entity = null;
-			this.comboBoxAccessoryStandard.Location = new System.Drawing.Point(111, 6);
+			this.comboBoxAccessoryStandard.Location = new System.Drawing.Point(110, 6);
 			this.comboBoxAccessoryStandard.Name = "comboBoxAccessoryStandard";
 			this.comboBoxAccessoryStandard.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.comboBoxAccessoryStandard.Size = new System.Drawing.Size(312, 21);
@@ -297,7 +299,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxName.BackColor = System.Drawing.Color.White;
 			this.textBoxName.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.textBoxName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxName.Location = new System.Drawing.Point(111, 88);
+			this.textBoxName.Location = new System.Drawing.Point(110, 88);
 			this.textBoxName.MaxLength = 128;
 			this.textBoxName.Name = "textBoxName";
 			this.textBoxName.Size = new System.Drawing.Size(313, 22);
@@ -339,7 +341,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.checkBoxDangerous.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.checkBoxDangerous.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.checkBoxDangerous.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.checkBoxDangerous.Location = new System.Drawing.Point(111, 386);
+			this.checkBoxDangerous.Location = new System.Drawing.Point(111, 392);
 			this.checkBoxDangerous.Name = "checkBoxDangerous";
 			this.checkBoxDangerous.Size = new System.Drawing.Size(108, 18);
 			this.checkBoxDangerous.TabIndex = 143;
@@ -362,9 +364,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.comboBoxAtaChapter.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.comboBoxAtaChapter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.comboBoxAtaChapter.FormattingEnabled = true;
-			this.comboBoxAtaChapter.Location = new System.Drawing.Point(112, 61);
+			this.comboBoxAtaChapter.Location = new System.Drawing.Point(110, 59);
 			this.comboBoxAtaChapter.Name = "comboBoxAtaChapter";
-			this.comboBoxAtaChapter.Size = new System.Drawing.Size(311, 22);
+			this.comboBoxAtaChapter.Size = new System.Drawing.Size(313, 22);
 			this.comboBoxAtaChapter.TabIndex = 144;
 			// 
 			// label2
@@ -433,24 +435,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxReference.Size = new System.Drawing.Size(294, 22);
 			this.textBoxReference.TabIndex = 149;
 			// 
-			// fileControl
-			// 
-			this.fileControl.AutoSize = true;
-			this.fileControl.BackColor = System.Drawing.Color.Transparent;
-			this.fileControl.Description1 = null;
-			this.fileControl.Description2 = null;
-			this.fileControl.Filter = "PDF file (*.pdf)|*.pdf";
-			this.fileControl.Icon = global::CAS.UI.Properties.Resources.PDFIconSmall;
-			this.fileControl.IconNotEnabled = null;
-			this.fileControl.Location = new System.Drawing.Point(500, 276);
-			this.fileControl.MaximumSize = new System.Drawing.Size(350, 100);
-			this.fileControl.MinimumSize = new System.Drawing.Size(350, 50);
-			this.fileControl.Name = "fileControl";
-			this.fileControl.ShowLinkLabelBrowse = true;
-			this.fileControl.ShowLinkLabelRemove = false;
-			this.fileControl.Size = new System.Drawing.Size(350, 100);
-			this.fileControl.TabIndex = 151;
-			// 
 			// labelDoc
 			// 
 			this.labelDoc.AutoSize = true;
@@ -493,10 +477,12 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.panelMain.Controls.Add(this.textBoxDescRus);
 			this.panelMain.Controls.Add(this.labelReference);
 			this.panelMain.Controls.Add(this.textBoxReference);
-			this.panelMain.Controls.Add(this.fileControl);
+			this.panelMain.Controls.Add(this.documentControl1);
 			this.panelMain.Controls.Add(this.labelDoc);
 			this.panelMain.Controls.Add(this.label4);
 			this.panelMain.Controls.Add(this.textBoxAltPartNum);
+			this.panelMain.Controls.Add(this.textBoxIsEffectivity);
+			this.panelMain.Controls.Add(this.labelIsEffectivity);
 			// 
 			// label4
 			// 
@@ -520,15 +506,46 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxAltPartNum.Size = new System.Drawing.Size(313, 22);
 			this.textBoxAltPartNum.TabIndex = 153;
 			// 
+			// documentControl1
+			// 
+			this.documentControl1.CurrentDocument = null;
+			this.documentControl1.Location = new System.Drawing.Point(537, 285);
+			this.documentControl1.Name = "documentControl1";
+			this.documentControl1.Size = new System.Drawing.Size(314, 41);
+			this.documentControl1.TabIndex = 161;
+			// 
+			// labelIsEffectivity
+			// 
+			this.labelIsEffectivity.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelIsEffectivity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelIsEffectivity.Location = new System.Drawing.Point(5, 267);
+			this.labelIsEffectivity.Name = "labelIsEffectivity";
+			this.labelIsEffectivity.Size = new System.Drawing.Size(89, 25);
+			this.labelIsEffectivity.TabIndex = 163;
+			this.labelIsEffectivity.Text = "Effectivity:";
+			this.labelIsEffectivity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// textBoxIsEffectivity
+			// 
+			this.textBoxIsEffectivity.BackColor = System.Drawing.Color.White;
+			this.textBoxIsEffectivity.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.textBoxIsEffectivity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxIsEffectivity.Location = new System.Drawing.Point(110, 270);
+			this.textBoxIsEffectivity.Multiline = true;
+			this.textBoxIsEffectivity.Name = "textBoxIsEffectivity";
+			this.textBoxIsEffectivity.Size = new System.Drawing.Size(313, 52);
+			this.textBoxIsEffectivity.TabIndex = 162;
+			// 
 			// ProductForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(863, 650);
+			this.ClientSize = new System.Drawing.Size(883, 679);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximumSize = new System.Drawing.Size(1023, 766);
 			this.MinimumSize = new System.Drawing.Size(284, 164);
 			this.Name = "ProductForm";
+			this.Resizable = false;
 			this.Text = "Product Form";
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -568,9 +585,11 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private System.Windows.Forms.TextBox textBoxHTS;
         private System.Windows.Forms.Label labelReference;
         private System.Windows.Forms.TextBox textBoxReference;
-        public AttachedFileControl fileControl;
         private System.Windows.Forms.Label labelDoc;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.TextBox textBoxAltPartNum;
+		private DocumentationControls.DocumentControl documentControl1;
+		private System.Windows.Forms.Label labelIsEffectivity;
+		private System.Windows.Forms.TextBox textBoxIsEffectivity;
 	}
 }

@@ -112,6 +112,22 @@ namespace EFCore.DTO.General.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("EmployeesRemark");
 
+			Property(i => i.WpWorkType)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("WpWorkType");
+
+			Property(i => i.KMH)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("KMH");
+
+			Property(i => i.PerformAfter)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("PerformAfter");
+
+			Property(i => i.ProviderJSON)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("ProviderJSON");
+
 
 			HasMany(i => i.Files).WithRequired(i => i.WorkPackage).HasForeignKey(i => i.ParentId);
 		} 

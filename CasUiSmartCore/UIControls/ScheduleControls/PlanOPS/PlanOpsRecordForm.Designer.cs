@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
+﻿using MetroFramework.Controls;
+
+namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 {
 	partial class PlanOpsRecordForm
 	{
@@ -28,34 +30,34 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Windows.Forms.Label labelSubType;
-			System.Windows.Forms.Label label1;
-			System.Windows.Forms.Label label2;
-			System.Windows.Forms.Label label3;
-			System.Windows.Forms.Label label9;
-			System.Windows.Forms.Label label10;
-			System.Windows.Forms.Label label11;
-			System.Windows.Forms.Label label12;
+			MetroFramework.Controls.MetroLabel labelSubType;
+			MetroFramework.Controls.MetroLabel label1;
+			MetroFramework.Controls.MetroLabel label2;
+			MetroFramework.Controls.MetroLabel label3;
+			MetroFramework.Controls.MetroLabel label9;
+			MetroFramework.Controls.MetroLabel label10;
+			MetroFramework.Controls.MetroLabel label11;
+			MetroFramework.Controls.MetroLabel label12;
+			MetroFramework.Controls.MetroLabel label13;
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlanOpsRecordForm));
-			System.Windows.Forms.Label label13;
 			this.comboBoxAircrafts = new System.Windows.Forms.ComboBox();
 			this.comboBoxAircraftExchange = new System.Windows.Forms.ComboBox();
 			this.delayComboBox = new CAS.UI.UIControls.Auxiliary.ReasonComboBox();
 			this.reasonComboBoxCancel = new CAS.UI.UIControls.Auxiliary.ReasonComboBox();
 			this.buttonOk = new System.Windows.Forms.Button();
 			this.buttonDelete = new System.Windows.Forms.Button();
-			this.label4 = new System.Windows.Forms.Label();
-			this.label5 = new System.Windows.Forms.Label();
+			this.label4 = new MetroFramework.Controls.MetroLabel();
+			this.label5 = new MetroFramework.Controls.MetroLabel();
 			this.dateTimePickerTakeOffS = new System.Windows.Forms.DateTimePicker();
 			this.dateTimePickerLDGS = new System.Windows.Forms.DateTimePicker();
-			this.label14 = new System.Windows.Forms.Label();
-			this.textFlightS = new System.Windows.Forms.TextBox();
-			this.label6 = new System.Windows.Forms.Label();
-			this.label7 = new System.Windows.Forms.Label();
+			this.label14 = new MetroFramework.Controls.MetroLabel();
+			this.textFlightS = new MetroFramework.Controls.MetroTextBox();
+			this.label6 = new MetroFramework.Controls.MetroLabel();
+			this.label7 = new MetroFramework.Controls.MetroLabel();
 			this.dateTimePickerTakeOffD = new System.Windows.Forms.DateTimePicker();
 			this.dateTimePickerLDGD = new System.Windows.Forms.DateTimePicker();
-			this.label8 = new System.Windows.Forms.Label();
-			this.textFlightD = new System.Windows.Forms.TextBox();
+			this.label8 = new MetroFramework.Controls.MetroLabel();
+			this.textFlightD = new MetroFramework.Controls.MetroTextBox();
 			this.delimiter2 = new CAS.UI.UIControls.Auxiliary.Delimiter();
 			this.delimiter1 = new CAS.UI.UIControls.Auxiliary.Delimiter();
 			this.delimiter3 = new CAS.UI.UIControls.Auxiliary.Delimiter();
@@ -69,8 +71,8 @@
 			this.ColumnTakeOff = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ColumnLDG = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.reasonComboBox = new CAS.UI.UIControls.Auxiliary.ReasonComboBox();
-			this.textBoxRemarks = new System.Windows.Forms.TextBox();
-			this.textBoxHiddenRemarks = new System.Windows.Forms.TextBox();
+			this.textBoxRemarks = new MetroFramework.Controls.MetroTextBox();
+			this.textBoxHiddenRemarks = new MetroFramework.Controls.MetroTextBox();
 			this.documentControlReason = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.delimiter5 = new CAS.UI.UIControls.Auxiliary.Delimiter();
 			this.documentControlDelay = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
@@ -79,29 +81,28 @@
 			this.delimiter7 = new CAS.UI.UIControls.Auxiliary.Delimiter();
 			this.delimiter8 = new CAS.UI.UIControls.Auxiliary.Delimiter();
 			this.documentControlFlight = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.checkBox1 = new System.Windows.Forms.CheckBox();
-			this.checkBox2 = new System.Windows.Forms.CheckBox();
+			this.checkBox1 = new MetroFramework.Controls.MetroCheckBox();
+			this.checkBox2 = new MetroFramework.Controls.MetroCheckBox();
 			this.comboBoxStatus = new System.Windows.Forms.ComboBox();
-			labelSubType = new System.Windows.Forms.Label();
-			label1 = new System.Windows.Forms.Label();
-			label2 = new System.Windows.Forms.Label();
-			label3 = new System.Windows.Forms.Label();
-			label9 = new System.Windows.Forms.Label();
-			label10 = new System.Windows.Forms.Label();
-			label11 = new System.Windows.Forms.Label();
-			label12 = new System.Windows.Forms.Label();
-			label13 = new System.Windows.Forms.Label();
+			labelSubType = new MetroFramework.Controls.MetroLabel();
+			label1 = new MetroFramework.Controls.MetroLabel();
+			label2 = new MetroFramework.Controls.MetroLabel();
+			label3 = new MetroFramework.Controls.MetroLabel();
+			label9 = new MetroFramework.Controls.MetroLabel();
+			label10 = new MetroFramework.Controls.MetroLabel();
+			label11 = new MetroFramework.Controls.MetroLabel();
+			label12 = new MetroFramework.Controls.MetroLabel();
+			label13 = new MetroFramework.Controls.MetroLabel();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewFlights)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// labelSubType
 			// 
 			labelSubType.AutoSize = true;
-			labelSubType.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			labelSubType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			labelSubType.Location = new System.Drawing.Point(8, 15);
+			labelSubType.Location = new System.Drawing.Point(13, 63);
 			labelSubType.Name = "labelSubType";
-			labelSubType.Size = new System.Drawing.Size(56, 14);
+			labelSubType.Size = new System.Drawing.Size(55, 19);
 			labelSubType.TabIndex = 11;
 			labelSubType.Text = "Aircraft:";
 			labelSubType.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -109,11 +110,10 @@
 			// label1
 			// 
 			label1.AutoSize = true;
-			label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label1.Location = new System.Drawing.Point(8, 43);
+			label1.Location = new System.Drawing.Point(13, 91);
 			label1.Name = "label1";
-			label1.Size = new System.Drawing.Size(113, 14);
+			label1.Size = new System.Drawing.Size(107, 19);
 			label1.TabIndex = 13;
 			label1.Text = "Aircraft Excange:";
 			label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -121,11 +121,10 @@
 			// label2
 			// 
 			label2.AutoSize = true;
-			label2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label2.Location = new System.Drawing.Point(10, 232);
+			label2.Location = new System.Drawing.Point(13, 280);
 			label2.Name = "label2";
-			label2.Size = new System.Drawing.Size(47, 14);
+			label2.Size = new System.Drawing.Size(44, 19);
 			label2.TabIndex = 14;
 			label2.Text = "Delay:";
 			label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -133,11 +132,10 @@
 			// label3
 			// 
 			label3.AutoSize = true;
-			label3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label3.Location = new System.Drawing.Point(8, 286);
+			label3.Location = new System.Drawing.Point(13, 335);
 			label3.Name = "label3";
-			label3.Size = new System.Drawing.Size(89, 14);
+			label3.Size = new System.Drawing.Size(83, 19);
 			label3.TabIndex = 16;
 			label3.Text = "Cancellation:";
 			label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -145,11 +143,10 @@
 			// label9
 			// 
 			label9.AutoSize = true;
-			label9.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label9.Location = new System.Drawing.Point(10, 173);
+			label9.Location = new System.Drawing.Point(13, 220);
 			label9.Name = "label9";
-			label9.Size = new System.Drawing.Size(73, 14);
+			label9.Size = new System.Drawing.Size(67, 19);
 			label9.TabIndex = 268;
 			label9.Text = "Exchange:";
 			label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -157,11 +154,10 @@
 			// label10
 			// 
 			label10.AutoSize = true;
-			label10.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label10.Location = new System.Drawing.Point(8, 326);
+			label10.Location = new System.Drawing.Point(13, 380);
 			label10.Name = "label10";
-			label10.Size = new System.Drawing.Size(66, 14);
+			label10.Size = new System.Drawing.Size(62, 19);
 			label10.TabIndex = 272;
 			label10.Text = "Remarks:";
 			label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -169,11 +165,10 @@
 			// label11
 			// 
 			label11.AutoSize = true;
-			label11.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label11.Location = new System.Drawing.Point(364, 326);
+			label11.Location = new System.Drawing.Point(378, 380);
 			label11.Name = "label11";
-			label11.Size = new System.Drawing.Size(114, 14);
+			label11.Size = new System.Drawing.Size(108, 19);
 			label11.TabIndex = 274;
 			label11.Text = "Hidden Remarks:";
 			label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -181,21 +176,31 @@
 			// label12
 			// 
 			label12.AutoSize = true;
-			label12.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label12.Location = new System.Drawing.Point(8, 71);
+			label12.Location = new System.Drawing.Point(13, 119);
 			label12.Name = "label12";
-			label12.Size = new System.Drawing.Size(53, 14);
+			label12.Size = new System.Drawing.Size(46, 19);
 			label12.TabIndex = 289;
 			label12.Text = "Status:";
 			label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// label13
+			// 
+			label13.AutoSize = true;
+			label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			label13.Location = new System.Drawing.Point(203, 188);
+			label13.Name = "label13";
+			label13.Size = new System.Drawing.Size(51, 19);
+			label13.TabIndex = 290;
+			label13.Text = "Reason";
+			label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// comboBoxAircrafts
 			// 
 			this.comboBoxAircrafts.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.comboBoxAircrafts.ForeColor = System.Drawing.Color.DimGray;
 			this.comboBoxAircrafts.FormattingEnabled = true;
-			this.comboBoxAircrafts.Location = new System.Drawing.Point(122, 12);
+			this.comboBoxAircrafts.Location = new System.Drawing.Point(125, 63);
 			this.comboBoxAircrafts.Name = "comboBoxAircrafts";
 			this.comboBoxAircrafts.Size = new System.Drawing.Size(236, 22);
 			this.comboBoxAircrafts.TabIndex = 10;
@@ -206,7 +211,7 @@
 			this.comboBoxAircraftExchange.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.comboBoxAircraftExchange.ForeColor = System.Drawing.Color.DimGray;
 			this.comboBoxAircraftExchange.FormattingEnabled = true;
-			this.comboBoxAircraftExchange.Location = new System.Drawing.Point(122, 40);
+			this.comboBoxAircraftExchange.Location = new System.Drawing.Point(125, 91);
 			this.comboBoxAircraftExchange.Name = "comboBoxAircraftExchange";
 			this.comboBoxAircraftExchange.Size = new System.Drawing.Size(236, 22);
 			this.comboBoxAircraftExchange.TabIndex = 12;
@@ -216,7 +221,7 @@
 			// 
 			this.delayComboBox.AutoSize = true;
 			this.delayComboBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.delayComboBox.Location = new System.Drawing.Point(122, 229);
+			this.delayComboBox.Location = new System.Drawing.Point(125, 280);
 			this.delayComboBox.Margin = new System.Windows.Forms.Padding(4);
 			this.delayComboBox.Name = "delayComboBox";
 			this.delayComboBox.SelectedReason = null;
@@ -227,7 +232,7 @@
 			// 
 			this.reasonComboBoxCancel.AutoSize = true;
 			this.reasonComboBoxCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.reasonComboBoxCancel.Location = new System.Drawing.Point(122, 284);
+			this.reasonComboBoxCancel.Location = new System.Drawing.Point(125, 335);
 			this.reasonComboBoxCancel.Margin = new System.Windows.Forms.Padding(4);
 			this.reasonComboBoxCancel.Name = "reasonComboBoxCancel";
 			this.reasonComboBoxCancel.SelectedReason = null;
@@ -241,7 +246,7 @@
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(1031, 420);
+			this.buttonOk.Location = new System.Drawing.Point(1031, 428);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 245;
@@ -255,7 +260,7 @@
 			this.buttonDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonDelete.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonDelete.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonDelete.Location = new System.Drawing.Point(1112, 420);
+			this.buttonDelete.Location = new System.Drawing.Point(1112, 428);
 			this.buttonDelete.Name = "buttonDelete";
 			this.buttonDelete.Size = new System.Drawing.Size(85, 33);
 			this.buttonDelete.TabIndex = 244;
@@ -265,22 +270,20 @@
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.label4.Location = new System.Drawing.Point(497, 15);
+			this.label4.Location = new System.Drawing.Point(500, 63);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(43, 14);
+			this.label4.Size = new System.Drawing.Size(43, 19);
 			this.label4.TabIndex = 251;
 			this.label4.Text = "Arr(S)";
 			// 
 			// label5
 			// 
 			this.label5.AutoSize = true;
-			this.label5.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.label5.Location = new System.Drawing.Point(381, 15);
+			this.label5.Location = new System.Drawing.Point(386, 63);
 			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(50, 14);
+			this.label5.Size = new System.Drawing.Size(48, 19);
 			this.label5.TabIndex = 250;
 			this.label5.Text = "Dep(S)";
 			// 
@@ -289,7 +292,7 @@
 			this.dateTimePickerTakeOffS.CustomFormat = "HH:mm";
 			this.dateTimePickerTakeOffS.Enabled = false;
 			this.dateTimePickerTakeOffS.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.dateTimePickerTakeOffS.Location = new System.Drawing.Point(436, 12);
+			this.dateTimePickerTakeOffS.Location = new System.Drawing.Point(439, 64);
 			this.dateTimePickerTakeOffS.Margin = new System.Windows.Forms.Padding(2);
 			this.dateTimePickerTakeOffS.Name = "dateTimePickerTakeOffS";
 			this.dateTimePickerTakeOffS.ShowUpDown = true;
@@ -302,7 +305,7 @@
 			this.dateTimePickerLDGS.CustomFormat = "HH:mm";
 			this.dateTimePickerLDGS.Enabled = false;
 			this.dateTimePickerLDGS.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.dateTimePickerLDGS.Location = new System.Drawing.Point(545, 12);
+			this.dateTimePickerLDGS.Location = new System.Drawing.Point(548, 64);
 			this.dateTimePickerLDGS.Margin = new System.Windows.Forms.Padding(2);
 			this.dateTimePickerLDGS.Name = "dateTimePickerLDGS";
 			this.dateTimePickerLDGS.ShowUpDown = true;
@@ -313,43 +316,64 @@
 			// label14
 			// 
 			this.label14.AutoSize = true;
-			this.label14.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.label14.Location = new System.Drawing.Point(606, 15);
+			this.label14.Location = new System.Drawing.Point(612, 63);
 			this.label14.Name = "label14";
-			this.label14.Size = new System.Drawing.Size(59, 14);
+			this.label14.Size = new System.Drawing.Size(56, 19);
 			this.label14.TabIndex = 249;
 			this.label14.Text = "Flight(S)";
 			// 
 			// textFlightS
 			// 
-			this.textFlightS.Location = new System.Drawing.Point(671, 12);
+			// 
+			// 
+			// 
+			this.textFlightS.CustomButton.Image = null;
+			this.textFlightS.CustomButton.Location = new System.Drawing.Point(27, 2);
+			this.textFlightS.CustomButton.Name = "";
+			this.textFlightS.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.textFlightS.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textFlightS.CustomButton.TabIndex = 1;
+			this.textFlightS.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textFlightS.CustomButton.UseSelectable = true;
+			this.textFlightS.CustomButton.Visible = false;
+			this.textFlightS.Lines = new string[] {
+        "03:40"};
+			this.textFlightS.Location = new System.Drawing.Point(674, 64);
+			this.textFlightS.MaxLength = 32767;
 			this.textFlightS.Name = "textFlightS";
+			this.textFlightS.PasswordChar = '\0';
 			this.textFlightS.ReadOnly = true;
+			this.textFlightS.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textFlightS.SelectedText = "";
+			this.textFlightS.SelectionLength = 0;
+			this.textFlightS.SelectionStart = 0;
+			this.textFlightS.ShortcutsEnabled = true;
 			this.textFlightS.Size = new System.Drawing.Size(45, 20);
 			this.textFlightS.TabIndex = 248;
 			this.textFlightS.TabStop = false;
 			this.textFlightS.Text = "03:40";
+			this.textFlightS.UseSelectable = true;
+			this.textFlightS.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textFlightS.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// label6
 			// 
 			this.label6.AutoSize = true;
-			this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.label6.Location = new System.Drawing.Point(893, 16);
+			this.label6.Location = new System.Drawing.Point(894, 63);
 			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(44, 14);
+			this.label6.Size = new System.Drawing.Size(45, 19);
 			this.label6.TabIndex = 257;
 			this.label6.Text = "Arr(D)";
 			// 
 			// label7
 			// 
 			this.label7.AutoSize = true;
-			this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.label7.Location = new System.Drawing.Point(756, 16);
+			this.label7.Location = new System.Drawing.Point(759, 63);
 			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(51, 14);
+			this.label7.Size = new System.Drawing.Size(50, 19);
 			this.label7.TabIndex = 256;
 			this.label7.Text = "Dep(D)";
 			// 
@@ -357,7 +381,7 @@
 			// 
 			this.dateTimePickerTakeOffD.CustomFormat = "HH:mm";
 			this.dateTimePickerTakeOffD.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.dateTimePickerTakeOffD.Location = new System.Drawing.Point(811, 13);
+			this.dateTimePickerTakeOffD.Location = new System.Drawing.Point(814, 64);
 			this.dateTimePickerTakeOffD.Margin = new System.Windows.Forms.Padding(2);
 			this.dateTimePickerTakeOffD.Name = "dateTimePickerTakeOffD";
 			this.dateTimePickerTakeOffD.ShowUpDown = true;
@@ -369,7 +393,7 @@
 			// 
 			this.dateTimePickerLDGD.CustomFormat = "HH:mm";
 			this.dateTimePickerLDGD.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.dateTimePickerLDGD.Location = new System.Drawing.Point(941, 13);
+			this.dateTimePickerLDGD.Location = new System.Drawing.Point(944, 64);
 			this.dateTimePickerLDGD.Margin = new System.Windows.Forms.Padding(2);
 			this.dateTimePickerLDGD.Name = "dateTimePickerLDGD";
 			this.dateTimePickerLDGD.ShowUpDown = true;
@@ -380,28 +404,51 @@
 			// label8
 			// 
 			this.label8.AutoSize = true;
-			this.label8.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.label8.Location = new System.Drawing.Point(1002, 16);
+			this.label8.Location = new System.Drawing.Point(1006, 63);
 			this.label8.Name = "label8";
-			this.label8.Size = new System.Drawing.Size(60, 14);
+			this.label8.Size = new System.Drawing.Size(58, 19);
 			this.label8.TabIndex = 255;
 			this.label8.Text = "Flight(D)";
 			// 
 			// textFlightD
 			// 
-			this.textFlightD.Location = new System.Drawing.Point(1067, 13);
+			// 
+			// 
+			// 
+			this.textFlightD.CustomButton.Image = null;
+			this.textFlightD.CustomButton.Location = new System.Drawing.Point(27, 2);
+			this.textFlightD.CustomButton.Name = "";
+			this.textFlightD.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.textFlightD.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textFlightD.CustomButton.TabIndex = 1;
+			this.textFlightD.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textFlightD.CustomButton.UseSelectable = true;
+			this.textFlightD.CustomButton.Visible = false;
+			this.textFlightD.Lines = new string[] {
+        "03:40"};
+			this.textFlightD.Location = new System.Drawing.Point(1070, 64);
+			this.textFlightD.MaxLength = 32767;
 			this.textFlightD.Name = "textFlightD";
+			this.textFlightD.PasswordChar = '\0';
 			this.textFlightD.ReadOnly = true;
+			this.textFlightD.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textFlightD.SelectedText = "";
+			this.textFlightD.SelectionLength = 0;
+			this.textFlightD.SelectionStart = 0;
+			this.textFlightD.ShortcutsEnabled = true;
 			this.textFlightD.Size = new System.Drawing.Size(45, 20);
 			this.textFlightD.TabIndex = 254;
 			this.textFlightD.TabStop = false;
 			this.textFlightD.Text = "03:40";
+			this.textFlightD.UseSelectable = true;
+			this.textFlightD.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textFlightD.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// delimiter2
 			// 
 			this.delimiter2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("delimiter2.BackgroundImage")));
-			this.delimiter2.Location = new System.Drawing.Point(367, 7);
+			this.delimiter2.Location = new System.Drawing.Point(370, 58);
 			this.delimiter2.Margin = new System.Windows.Forms.Padding(4);
 			this.delimiter2.Name = "delimiter2";
 			this.delimiter2.Orientation = CAS.UI.UIControls.Auxiliary.DelimiterOrientation.Vertical;
@@ -412,7 +459,7 @@
 			// delimiter1
 			// 
 			this.delimiter1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("delimiter1.BackgroundImage")));
-			this.delimiter1.Location = new System.Drawing.Point(13, 151);
+			this.delimiter1.Location = new System.Drawing.Point(16, 202);
 			this.delimiter1.Margin = new System.Windows.Forms.Padding(4);
 			this.delimiter1.Name = "delimiter1";
 			this.delimiter1.Orientation = CAS.UI.UIControls.Auxiliary.DelimiterOrientation.Horizontal;
@@ -423,7 +470,7 @@
 			// delimiter3
 			// 
 			this.delimiter3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("delimiter3.BackgroundImage")));
-			this.delimiter3.Location = new System.Drawing.Point(727, 7);
+			this.delimiter3.Location = new System.Drawing.Point(730, 58);
 			this.delimiter3.Margin = new System.Windows.Forms.Padding(4);
 			this.delimiter3.Name = "delimiter3";
 			this.delimiter3.Orientation = CAS.UI.UIControls.Auxiliary.DelimiterOrientation.Vertical;
@@ -448,7 +495,7 @@
             this.ColumnFlightDate,
             this.ColumnTakeOff,
             this.ColumnLDG});
-			this.dataGridViewFlights.Location = new System.Drawing.Point(384, 43);
+			this.dataGridViewFlights.Location = new System.Drawing.Point(387, 94);
 			this.dataGridViewFlights.Margin = new System.Windows.Forms.Padding(2);
 			this.dataGridViewFlights.Name = "dataGridViewFlights";
 			this.dataGridViewFlights.RowHeadersVisible = false;
@@ -513,7 +560,7 @@
 			// 
 			this.reasonComboBox.AutoSize = true;
 			this.reasonComboBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.reasonComboBox.Location = new System.Drawing.Point(122, 169);
+			this.reasonComboBox.Location = new System.Drawing.Point(125, 220);
 			this.reasonComboBox.Margin = new System.Windows.Forms.Padding(4);
 			this.reasonComboBox.Name = "reasonComboBox";
 			this.reasonComboBox.SelectedReason = null;
@@ -522,28 +569,72 @@
 			// 
 			// textBoxRemarks
 			// 
-			this.textBoxRemarks.Location = new System.Drawing.Point(127, 329);
+			// 
+			// 
+			// 
+			this.textBoxRemarks.CustomButton.Image = null;
+			this.textBoxRemarks.CustomButton.Location = new System.Drawing.Point(172, 2);
+			this.textBoxRemarks.CustomButton.Name = "";
+			this.textBoxRemarks.CustomButton.Size = new System.Drawing.Size(61, 61);
+			this.textBoxRemarks.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxRemarks.CustomButton.TabIndex = 1;
+			this.textBoxRemarks.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxRemarks.CustomButton.UseSelectable = true;
+			this.textBoxRemarks.CustomButton.Visible = false;
+			this.textBoxRemarks.Lines = new string[0];
+			this.textBoxRemarks.Location = new System.Drawing.Point(125, 380);
 			this.textBoxRemarks.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
 			this.textBoxRemarks.MaxLength = 1024;
 			this.textBoxRemarks.Multiline = true;
 			this.textBoxRemarks.Name = "textBoxRemarks";
-			this.textBoxRemarks.Size = new System.Drawing.Size(231, 66);
+			this.textBoxRemarks.PasswordChar = '\0';
+			this.textBoxRemarks.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textBoxRemarks.SelectedText = "";
+			this.textBoxRemarks.SelectionLength = 0;
+			this.textBoxRemarks.SelectionStart = 0;
+			this.textBoxRemarks.ShortcutsEnabled = true;
+			this.textBoxRemarks.Size = new System.Drawing.Size(236, 66);
 			this.textBoxRemarks.TabIndex = 271;
+			this.textBoxRemarks.UseSelectable = true;
+			this.textBoxRemarks.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxRemarks.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// textBoxHiddenRemarks
 			// 
-			this.textBoxHiddenRemarks.Location = new System.Drawing.Point(484, 329);
+			// 
+			// 
+			// 
+			this.textBoxHiddenRemarks.CustomButton.Image = null;
+			this.textBoxHiddenRemarks.CustomButton.Location = new System.Drawing.Point(167, 2);
+			this.textBoxHiddenRemarks.CustomButton.Name = "";
+			this.textBoxHiddenRemarks.CustomButton.Size = new System.Drawing.Size(61, 61);
+			this.textBoxHiddenRemarks.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxHiddenRemarks.CustomButton.TabIndex = 1;
+			this.textBoxHiddenRemarks.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxHiddenRemarks.CustomButton.UseSelectable = true;
+			this.textBoxHiddenRemarks.CustomButton.Visible = false;
+			this.textBoxHiddenRemarks.Lines = new string[0];
+			this.textBoxHiddenRemarks.Location = new System.Drawing.Point(487, 380);
 			this.textBoxHiddenRemarks.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
 			this.textBoxHiddenRemarks.MaxLength = 1024;
 			this.textBoxHiddenRemarks.Multiline = true;
 			this.textBoxHiddenRemarks.Name = "textBoxHiddenRemarks";
+			this.textBoxHiddenRemarks.PasswordChar = '\0';
+			this.textBoxHiddenRemarks.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textBoxHiddenRemarks.SelectedText = "";
+			this.textBoxHiddenRemarks.SelectionLength = 0;
+			this.textBoxHiddenRemarks.SelectionStart = 0;
+			this.textBoxHiddenRemarks.ShortcutsEnabled = true;
 			this.textBoxHiddenRemarks.Size = new System.Drawing.Size(231, 66);
 			this.textBoxHiddenRemarks.TabIndex = 273;
+			this.textBoxHiddenRemarks.UseSelectable = true;
+			this.textBoxHiddenRemarks.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxHiddenRemarks.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// documentControlReason
 			// 
 			this.documentControlReason.CurrentDocument = null;
-			this.documentControlReason.Location = new System.Drawing.Point(375, 161);
+			this.documentControlReason.Location = new System.Drawing.Point(378, 212);
 			this.documentControlReason.Name = "documentControlReason";
 			this.documentControlReason.Size = new System.Drawing.Size(308, 41);
 			this.documentControlReason.TabIndex = 278;
@@ -551,7 +642,7 @@
 			// delimiter5
 			// 
 			this.delimiter5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("delimiter5.BackgroundImage")));
-			this.delimiter5.Location = new System.Drawing.Point(13, 209);
+			this.delimiter5.Location = new System.Drawing.Point(16, 260);
 			this.delimiter5.Margin = new System.Windows.Forms.Padding(4);
 			this.delimiter5.Name = "delimiter5";
 			this.delimiter5.Orientation = CAS.UI.UIControls.Auxiliary.DelimiterOrientation.Horizontal;
@@ -562,7 +653,7 @@
 			// documentControlDelay
 			// 
 			this.documentControlDelay.CurrentDocument = null;
-			this.documentControlDelay.Location = new System.Drawing.Point(375, 217);
+			this.documentControlDelay.Location = new System.Drawing.Point(378, 268);
 			this.documentControlDelay.Name = "documentControlDelay";
 			this.documentControlDelay.Size = new System.Drawing.Size(308, 41);
 			this.documentControlDelay.TabIndex = 280;
@@ -570,7 +661,7 @@
 			// delimiter6
 			// 
 			this.delimiter6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("delimiter6.BackgroundImage")));
-			this.delimiter6.Location = new System.Drawing.Point(11, 265);
+			this.delimiter6.Location = new System.Drawing.Point(14, 316);
 			this.delimiter6.Margin = new System.Windows.Forms.Padding(4);
 			this.delimiter6.Name = "delimiter6";
 			this.delimiter6.Orientation = CAS.UI.UIControls.Auxiliary.DelimiterOrientation.Horizontal;
@@ -581,7 +672,7 @@
 			// documentControlCancellation
 			// 
 			this.documentControlCancellation.CurrentDocument = null;
-			this.documentControlCancellation.Location = new System.Drawing.Point(367, 273);
+			this.documentControlCancellation.Location = new System.Drawing.Point(370, 324);
 			this.documentControlCancellation.Name = "documentControlCancellation";
 			this.documentControlCancellation.Size = new System.Drawing.Size(316, 41);
 			this.documentControlCancellation.TabIndex = 282;
@@ -589,7 +680,7 @@
 			// delimiter7
 			// 
 			this.delimiter7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("delimiter7.BackgroundImage")));
-			this.delimiter7.Location = new System.Drawing.Point(11, 321);
+			this.delimiter7.Location = new System.Drawing.Point(14, 372);
 			this.delimiter7.Margin = new System.Windows.Forms.Padding(4);
 			this.delimiter7.Name = "delimiter7";
 			this.delimiter7.Orientation = CAS.UI.UIControls.Auxiliary.DelimiterOrientation.Horizontal;
@@ -600,7 +691,7 @@
 			// delimiter8
 			// 
 			this.delimiter8.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("delimiter8.BackgroundImage")));
-			this.delimiter8.Location = new System.Drawing.Point(367, 153);
+			this.delimiter8.Location = new System.Drawing.Point(370, 204);
 			this.delimiter8.Margin = new System.Windows.Forms.Padding(4);
 			this.delimiter8.Name = "delimiter8";
 			this.delimiter8.Orientation = CAS.UI.UIControls.Auxiliary.DelimiterOrientation.Vertical;
@@ -611,7 +702,7 @@
 			// documentControlFlight
 			// 
 			this.documentControlFlight.CurrentDocument = null;
-			this.documentControlFlight.Location = new System.Drawing.Point(887, 98);
+			this.documentControlFlight.Location = new System.Drawing.Point(890, 149);
 			this.documentControlFlight.Name = "documentControlFlight";
 			this.documentControlFlight.Size = new System.Drawing.Size(308, 41);
 			this.documentControlFlight.TabIndex = 285;
@@ -620,21 +711,21 @@
 			// checkBox1
 			// 
 			this.checkBox1.AutoSize = true;
-			this.checkBox1.Location = new System.Drawing.Point(735, 16);
+			this.checkBox1.Location = new System.Drawing.Point(738, 67);
 			this.checkBox1.Name = "checkBox1";
-			this.checkBox1.Size = new System.Drawing.Size(15, 14);
+			this.checkBox1.Size = new System.Drawing.Size(16, 0);
 			this.checkBox1.TabIndex = 286;
-			this.checkBox1.UseVisualStyleBackColor = true;
+			this.checkBox1.UseSelectable = true;
 			this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
 			// 
 			// checkBox2
 			// 
 			this.checkBox2.AutoSize = true;
-			this.checkBox2.Location = new System.Drawing.Point(872, 16);
+			this.checkBox2.Location = new System.Drawing.Point(875, 67);
 			this.checkBox2.Name = "checkBox2";
-			this.checkBox2.Size = new System.Drawing.Size(15, 14);
+			this.checkBox2.Size = new System.Drawing.Size(16, 0);
 			this.checkBox2.TabIndex = 287;
-			this.checkBox2.UseVisualStyleBackColor = true;
+			this.checkBox2.UseSelectable = true;
 			this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
 			// 
 			// comboBoxStatus
@@ -642,29 +733,17 @@
 			this.comboBoxStatus.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.comboBoxStatus.ForeColor = System.Drawing.Color.DimGray;
 			this.comboBoxStatus.FormattingEnabled = true;
-			this.comboBoxStatus.Location = new System.Drawing.Point(122, 68);
+			this.comboBoxStatus.Location = new System.Drawing.Point(125, 119);
 			this.comboBoxStatus.Name = "comboBoxStatus";
 			this.comboBoxStatus.Size = new System.Drawing.Size(236, 22);
 			this.comboBoxStatus.TabIndex = 288;
-			// 
-			// label13
-			// 
-			label13.AutoSize = true;
-			label13.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			label13.Location = new System.Drawing.Point(200, 137);
-			label13.Name = "label13";
-			label13.Size = new System.Drawing.Size(54, 14);
-			label13.TabIndex = 290;
-			label13.Text = "Reason";
-			label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// PlanOpsRecordForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-			this.ClientSize = new System.Drawing.Size(1209, 465);
+			this.ClientSize = new System.Drawing.Size(1209, 473);
 			this.Controls.Add(label13);
 			this.Controls.Add(label12);
 			this.Controls.Add(this.comboBoxStatus);
@@ -710,14 +789,13 @@
 			this.Controls.Add(this.comboBoxAircraftExchange);
 			this.Controls.Add(labelSubType);
 			this.Controls.Add(this.comboBoxAircrafts);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "PlanOpsRecordForm";
+			this.Resizable = false;
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "PlanOpsRecordForm";
+			this.Text = "Plan Ops Record Form";
 			this.Load += new System.EventHandler(this.PlanOpsRecordForm_Load);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewFlights)).EndInit();
 			this.ResumeLayout(false);
@@ -733,18 +811,18 @@
 		private Auxiliary.ReasonComboBox reasonComboBoxCancel;
 		private System.Windows.Forms.Button buttonOk;
 		private System.Windows.Forms.Button buttonDelete;
-		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.Label label5;
+		private MetroLabel label4;
+		private MetroLabel label5;
 		private System.Windows.Forms.DateTimePicker dateTimePickerTakeOffS;
 		private System.Windows.Forms.DateTimePicker dateTimePickerLDGS;
-		private System.Windows.Forms.Label label14;
-		private System.Windows.Forms.TextBox textFlightS;
-		private System.Windows.Forms.Label label6;
-		private System.Windows.Forms.Label label7;
+		private MetroLabel label14;
+		private MetroTextBox textFlightS;
+		private MetroLabel label6;
+		private MetroLabel label7;
 		private System.Windows.Forms.DateTimePicker dateTimePickerTakeOffD;
 		private System.Windows.Forms.DateTimePicker dateTimePickerLDGD;
-		private System.Windows.Forms.Label label8;
-		private System.Windows.Forms.TextBox textFlightD;
+		private MetroLabel label8;
+		private MetroTextBox textFlightD;
 		private Auxiliary.Delimiter delimiter2;
 		private Auxiliary.Delimiter delimiter1;
 		private Auxiliary.Delimiter delimiter3;
@@ -758,8 +836,8 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTakeOff;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLDG;
 		private Auxiliary.ReasonComboBox reasonComboBox;
-		private System.Windows.Forms.TextBox textBoxRemarks;
-		private System.Windows.Forms.TextBox textBoxHiddenRemarks;
+		private MetroTextBox textBoxRemarks;
+		private MetroTextBox textBoxHiddenRemarks;
 		private DocumentationControls.DocumentControl documentControlReason;
 		private Auxiliary.Delimiter delimiter5;
 		private DocumentationControls.DocumentControl documentControlDelay;
@@ -768,8 +846,8 @@
 		private Auxiliary.Delimiter delimiter7;
 		private Auxiliary.Delimiter delimiter8;
 		private DocumentationControls.DocumentControl documentControlFlight;
-		private System.Windows.Forms.CheckBox checkBox1;
-		private System.Windows.Forms.CheckBox checkBox2;
+		private MetroCheckBox checkBox1;
+		private MetroCheckBox checkBox2;
 		private System.Windows.Forms.ComboBox comboBoxStatus;
 	}
 }

@@ -1,5 +1,7 @@
-﻿
-namespace CAS.UI.UIControls.Discrepancies
+﻿using CASTerms;
+using EFCore.DTO.General;
+
+namespace CAS.UI.UIControls.Reliability
 {
     partial class OccurrencesListScreen
     {
@@ -29,7 +31,8 @@ namespace CAS.UI.UIControls.Discrepancies
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.labelDateAsOf = new System.Windows.Forms.Label();
             this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
             this.pictureBoxSeparatorBD = new System.Windows.Forms.PictureBox();
@@ -179,10 +182,11 @@ namespace CAS.UI.UIControls.Discrepancies
             this.buttonDeleteSelected.TextSecondary = "";
             this.buttonDeleteSelected.ToolTipText = "Delete selected";
             this.buttonDeleteSelected.Click += new System.EventHandler(this.ButtonDeleteClick);
-            // 
-            // pictureBoxSeparatorBD
-            // 
-            this.pictureBoxSeparatorBD.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
+            this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			// 
+			// pictureBoxSeparatorBD
+			// 
+			this.pictureBoxSeparatorBD.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
             this.pictureBoxSeparatorBD.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBoxSeparatorBD.Location = new System.Drawing.Point(121, 3);
             this.pictureBoxSeparatorBD.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);

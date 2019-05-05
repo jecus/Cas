@@ -76,6 +76,7 @@ namespace CAS.UI.UIControls.Users
 			subItems.Add(new ListViewItem.ListViewSubItem {Text = userName, Tag = userName });
 			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Login, Tag = item.Login });
 			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Password, Tag = item.Password });
+			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.UiType.ToString(), Tag = item.UiType });
 			//subItems.Add(new ListViewItem.ListViewSubItem {Text = item.UserType.ToString(), Tag = item.UserType });
 			
 			return subItems.ToArray();
@@ -98,6 +99,9 @@ namespace CAS.UI.UIControls.Users
 			ColumnHeaderList.Add(columnHeader);
 
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Password" };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Ui Type" };
 			ColumnHeaderList.Add(columnHeader);
 
 			//columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "UserType" };

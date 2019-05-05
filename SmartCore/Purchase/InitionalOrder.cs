@@ -9,6 +9,7 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
+using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.Personnel;
 using SmartCore.Files;
 using SmartCore.Packages;
@@ -22,7 +23,7 @@ namespace SmartCore.Purchase
     [Table("InitialOrders", "dbo", "ItemId")]
     [Dto(typeof(InitialOrderDTO))]
 	[Condition("IsDeleted", "0")]
-    public class InitialOrder : AbstractPackage<InitialOrderRecord>, IComparable<InitialOrder>, IFileContainer
+    public class InitialOrder : AbstractPackage<InitialOrderRecord>, IComparable<InitialOrder>, IFileContainer, ILogistic
 	{
 		/*
 		*  Свойства

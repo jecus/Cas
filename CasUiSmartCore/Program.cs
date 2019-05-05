@@ -89,6 +89,7 @@ namespace CAS.UI
 			}
 	        catch {}
 	        GlobalObjects.AuditRepository = new AuditRepository(auditContext);
+	        GlobalObjects.AuditContext = auditContext;
 
 			var environment = DbTypes.CasEnvironment = new CasEnvironment();
 			environment.AuditRepository = GlobalObjects.AuditRepository;

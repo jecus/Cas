@@ -1,4 +1,6 @@
 ﻿using AvControls.AvButtonT;
+using CASTerms;
+using EFCore.DTO.General;
 
 namespace CAS.UI.UIControls.DirectivesControls
 {
@@ -30,7 +32,8 @@ namespace CAS.UI.UIControls.DirectivesControls
         /// </summary>
         private void InitializeComponent()
         {
-            this.listViewDamageCharts = new System.Windows.Forms.ListView();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.listViewDamageCharts = new System.Windows.Forms.ListView();
             this.columnChartName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnAircraftModel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnChartFileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -97,10 +100,11 @@ namespace CAS.UI.UIControls.DirectivesControls
             this.ButtonDelete.TextMain = "Delete damage";
             this.ButtonDelete.TextSecondary = "chart";
             this.ButtonDelete.Click += new System.EventHandler(this.ButtonDeleteClick);
-            // 
-            // ButtonAdd
-            // 
-            this.ButtonAdd.ActiveBackColor = System.Drawing.Color.Transparent;
+            this.ButtonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
+			// 
+			// ButtonAdd
+			// 
+			this.ButtonAdd.ActiveBackColor = System.Drawing.Color.Transparent;
             this.ButtonAdd.ActiveBackgroundImage = null;
             this.ButtonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ButtonAdd.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -123,10 +127,11 @@ namespace CAS.UI.UIControls.DirectivesControls
             this.ButtonAdd.TextMain = "Add damage";
             this.ButtonAdd.TextSecondary = "chart";
             this.ButtonAdd.Click += new System.EventHandler(this.ButtonAddClick);
-            // 
-            // DamageChartsForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.ButtonAdd.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// DamageChartsForm
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.ClientSize = new System.Drawing.Size(584, 262);

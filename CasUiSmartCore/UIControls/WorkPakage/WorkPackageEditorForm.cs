@@ -38,6 +38,7 @@ namespace CAS.UI.UIControls.WorkPakage
 
 		private void UpdateInformation()
 		{
+			metroTextBox1.Text = $"{_currentWp.ProviderPrice.Count} Count";
 			textBoxWpNumber.Text = _currentWp.Number;
 			textBoxDescription.Text = _currentWp.Description;
 			dateTimePickerIssueCreateDate.Value = _currentWp.CreateDate;
@@ -45,8 +46,6 @@ namespace CAS.UI.UIControls.WorkPakage
 			textBoxAuthor.Text = _currentWp.Author;
 			textBoxClosedBy.Text = _currentWp.ClosedBy;
 			textBoxPublishingRemark.Text = _currentWp.PublishingRemarks;
-			textBoxReleaseCertificate.Text = _currentWp.ReleaseCertificateNo;
-			textBoxCheckType.Text = _currentWp.CheckType;
 			textBoxMRO.Text = _currentWp.MaintenanceRepairOrzanization;
 			textBoxTitle.Text = _currentWp.Title;
 			textBoxStatus.Text = _currentWp.Status.ToString();
@@ -55,9 +54,21 @@ namespace CAS.UI.UIControls.WorkPakage
 			textBoxPublishedBy.Text = _currentWp.PublishedBy;
 			textBoxRemarks.Text = _currentWp.Remarks;
 			textBoxClosingRemarks.Text = _currentWp.ClosingRemarks;
-			textBoxRevision.Text = _currentWp.Revision;
 			textBoxStation.Text = _currentWp.Station;
+			comboBoxWorkType.Items.Clear();
+			comboBoxWorkType.Items.AddRange(WpWorkType.Items.ToArray());
+			comboBoxWorkType.SelectedItem = _currentWp.WpWorkType;
+			numericUpDown1.Value = (decimal)_currentWp.KMH;
 
+			lookupComboboxFlightNum.Type = typeof(FlightNum);
+			lookupComboboxFrom.Type = typeof(AirportsCodes);
+			lookupComboboxTo.Type = typeof(AirportsCodes);
+
+			lookupComboboxFlightNum.SelectedItem = _currentWp.PerfAfter.FlightNum;
+			lookupComboboxFrom.SelectedItem = _currentWp.PerfAfter.AirportFrom;
+			lookupComboboxTo.SelectedItem = _currentWp.PerfAfter.AirportTo;
+			dateTimePickerFlightDate.Value = _currentWp.PerfAfter.PerformDate;
+			
 
 			foreach (var control in DocumentControls)
 				control.Added += DocumentControl1_Added;
@@ -130,16 +141,25 @@ namespace CAS.UI.UIControls.WorkPakage
 			_currentWp.Description = textBoxDescription.Text;
 			_currentWp.PublishingDate = dateTimePickerPublishingDate.Value;
 			_currentWp.PublishingRemarks = textBoxPublishingRemark.Text;
-			_currentWp.ReleaseCertificateNo = textBoxReleaseCertificate.Text;
-			_currentWp.CheckType = textBoxCheckType.Text;
 			_currentWp.MaintenanceRepairOrzanization = textBoxMRO.Text;
 			_currentWp.Title = textBoxTitle.Text;
 			_currentWp.OpeningDate = dateTimePickerOpeningDate.Value;
 			_currentWp.ClosingDate = dateTimePickerClosingDate.Value;
 			_currentWp.Remarks = textBoxRemarks.Text;
 			_currentWp.ClosingRemarks = textBoxClosingRemarks.Text;
-			_currentWp.Revision = textBoxRevision.Text;
 			_currentWp.Station = textBoxStation.Text;
+			_currentWp.WpWorkType = (WpWorkType)comboBoxWorkType.SelectedItem;
+			_currentWp.KMH = (float)numericUpDown1.Value;
+
+			_currentWp.PerfAfter.FlightNum = (FlightNum) lookupComboboxFlightNum.SelectedItem;
+			_currentWp.PerfAfter.AirportFrom = (AirportsCodes) lookupComboboxFrom.SelectedItem;
+			_currentWp.PerfAfter.AirportTo = (AirportsCodes) lookupComboboxTo.SelectedItem;
+
+			_currentWp.PerfAfter.FlightNumId = _currentWp.PerfAfter.FlightNum.ItemId;
+			_currentWp.PerfAfter.AirportFromId = _currentWp.PerfAfter.AirportFrom.ItemId;
+			_currentWp.PerfAfter.AirportToId = _currentWp.PerfAfter.AirportTo.ItemId;
+
+			_currentWp.PerfAfter.PerformDate = dateTimePickerFlightDate.Value;
 		}
 
 		#endregion
@@ -153,5 +173,12 @@ namespace CAS.UI.UIControls.WorkPakage
 		}
 
 		#endregion
+
+		private void LinkLabelEditComponents_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			var form = new WpProviderForm(_currentWp);
+			if (form.ShowDialog() == DialogResult.OK)
+				metroTextBox1.Text = $"{_currentWp.ProviderPrice.Count} Count";
+		}
 	}
 }

@@ -5,6 +5,7 @@ using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary.Comparers;
+using CAS.UI.UIControls.DirectivesControls;
 using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
@@ -12,7 +13,7 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Directives;
 using TempUIExtentions;
 
-namespace CAS.UI.UIControls.DirectivesControls
+namespace CAS.UI.UIControls.Reliability
 {
     ///<summary>
     /// список для отображения ордеров запроса

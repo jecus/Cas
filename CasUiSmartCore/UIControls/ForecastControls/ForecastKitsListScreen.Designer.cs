@@ -1,4 +1,6 @@
-﻿
+﻿using CASTerms;
+using EFCore.DTO.General;
+
 namespace CAS.UI.UIControls.ForecastControls
 {
     partial class ForecastKitsListScreen
@@ -29,7 +31,8 @@ namespace CAS.UI.UIControls.ForecastControls
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonComposeQuotation = new AvControls.AvButtonT.AvButtonT();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
@@ -112,10 +115,11 @@ namespace CAS.UI.UIControls.ForecastControls
             this.buttonComposeQuotation.TextSecondary = "";
             this.buttonComposeQuotation.ToolTipText = "Compose Quotation";
             this.buttonComposeQuotation.Click += new System.EventHandler(this.ButtonComposeQuotationClick);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
+            this.buttonComposeQuotation.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// pictureBox2
+			// 
+			this.pictureBox2.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox2.Location = new System.Drawing.Point(56, 4);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);

@@ -22,6 +22,9 @@ namespace SmartCore.Entities
 		[Filter("UserType:")]
 		public UsetType UserType { get; set; }
 
+		[Filter("UiType:")]
+		public UiType UiType { get; set; }
+
 		public User(IIdentityUser user)
 		{
 			ItemId = user.ItemId;
@@ -31,6 +34,7 @@ namespace SmartCore.Entities
 			Login = user.Login;
 			Password = user.Password;
 			UserType = user.UserType;
+			UiType = user.UiType;
 		}
 
 		public User()
@@ -40,5 +44,14 @@ namespace SmartCore.Entities
 			Password = "";
 			Surname = "";
 		}
+
+		#region Overrides of BaseEntityObject
+
+		public override string ToString()
+		{
+			return Name.Equals(Surname) ? Name : $"{Surname} {Name}";
+		}
+
+		#endregion
 	}
 }

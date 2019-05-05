@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
 
@@ -10,7 +11,7 @@ namespace CAS.UI.UIControls.KitControls
 {
     ///<summary>
     ///</summary>
-    public partial class KitForm : Form
+    public partial class KitForm : MetroForm
     {
         #region  Fields
 

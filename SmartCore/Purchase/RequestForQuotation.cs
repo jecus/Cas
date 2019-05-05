@@ -9,6 +9,7 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
+using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.Personnel;
 using SmartCore.Files;
 using SmartCore.Packages;
@@ -22,7 +23,7 @@ namespace SmartCore.Purchase
     [Table("RequestsForQuotation", "dbo", "ItemId")]
     [Dto(typeof(RequestForQuotationDTO))]
 	[Condition("IsDeleted", "0")]
-    public class RequestForQuotation : AbstractPackage<RequestForQuotationRecord>, IComparable<RequestForQuotation>, IFileContainer
+    public class RequestForQuotation : AbstractPackage<RequestForQuotationRecord>, IComparable<RequestForQuotation>, IFileContainer, ILogistic
 	{
 
 		/*

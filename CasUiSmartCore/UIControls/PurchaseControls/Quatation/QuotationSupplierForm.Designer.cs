@@ -1,4 +1,6 @@
 ﻿using CAS.UI.UIControls.Auxiliary;
+using CASTerms;
+using EFCore.DTO.General;
 
 namespace CAS.UI.UIControls.PurchaseControls.Quatation
 {
@@ -30,6 +32,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		/// </summary>
 		private void InitializeComponent()
 		{
+			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.supplierListView = new CAS.UI.UIControls.SupplierControls.SupplierListView();
 			this.supplierListView1 = new CAS.UI.UIControls.SupplierControls.SupplierPriceListView();
 			this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
@@ -113,6 +116,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.ButtonAdd.TextSecondary = "";
 			this.ButtonAdd.ToolTipText = "";
 			this.ButtonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
+			this.ButtonAdd.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// ButtonDelete
 			// 
@@ -141,6 +145,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.ButtonDelete.TextSecondary = "";
 			this.ButtonDelete.ToolTipText = "";
 			this.ButtonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
+			this.ButtonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
 			// buttonOk
 			// 
@@ -155,6 +160,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.buttonOk.TabIndex = 295;
 			this.buttonOk.Text = "OK";
 			this.buttonOk.Click += new System.EventHandler(this.ButtonOk_Click);
+			this.buttonOk.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// buttonCancel
 			// 

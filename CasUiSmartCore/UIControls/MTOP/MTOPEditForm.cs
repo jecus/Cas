@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.MTOP;
 
 namespace CAS.UI.UIControls.MTOP
 {
-	public partial class MTOPEditForm : Form
+	public partial class MTOPEditForm : MetroForm
 	{
 		#region Fields
 

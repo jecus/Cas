@@ -1,4 +1,4 @@
-﻿namespace CAS.UI.UIControls.DirectivesControls
+﻿namespace CAS.UI.UIControls.Reliability
 {
     partial class DefferedListView
 	{

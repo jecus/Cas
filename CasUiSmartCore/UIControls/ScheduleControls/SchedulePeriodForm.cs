@@ -6,11 +6,12 @@ using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using EFCore.DTO.Dictionaries;
+using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 
 namespace CAS.UI.UIControls.ScheduleControls
 {
-	public partial class SchedulePeriodForm : Form
+	public partial class SchedulePeriodForm : MetroForm
 	{
 		#region Fields
 

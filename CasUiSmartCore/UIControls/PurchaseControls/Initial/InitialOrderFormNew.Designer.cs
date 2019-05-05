@@ -1,4 +1,6 @@
-﻿using  MetroFramework.Controls;
+﻿using MetroFramework.Controls;
+using CASTerms;
+using EFCore.DTO.General;
 
 namespace CAS.UI.UIControls.PurchaseControls.Initial
 {
@@ -30,6 +32,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
         /// </summary>
         private void InitializeComponent()
         {
+	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.labelSearchSupplier = new MetroFramework.Controls.MetroLabel();
 			this.textBoxSearchStandart = new MetroFramework.Controls.MetroTextBox();
 			this.labelSearchPartNumber = new MetroFramework.Controls.MetroLabel();
@@ -205,6 +208,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.ButtonAdd.TextSecondary = "";
 			this.ButtonAdd.ToolTipText = "";
 			this.ButtonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
+			this.ButtonAdd.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// ButtonDelete
 			// 
@@ -233,6 +237,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.ButtonDelete.TextSecondary = "";
 			this.ButtonDelete.ToolTipText = "";
 			this.ButtonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
+			this.ButtonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
 			// groupBox1
 			// 
@@ -1024,6 +1029,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.buttonOk.TabIndex = 293;
 			this.buttonOk.Text = "OK";
 			this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
+			this.buttonOk.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// buttonCancel
 			// 

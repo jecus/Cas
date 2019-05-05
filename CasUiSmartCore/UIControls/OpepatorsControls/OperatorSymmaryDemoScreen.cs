@@ -20,6 +20,7 @@ using CAS.UI.UIControls.MaintenanceControlCenterControls;
 using CAS.UI.UIControls.MonthlyUtilizationsControls;
 using CAS.UI.UIControls.PersonnelControls;
 using CAS.UI.UIControls.PurchaseControls;
+using CAS.UI.UIControls.PurchaseControls.AllOrders;
 using CAS.UI.UIControls.QualityAssuranceControls;
 using CAS.UI.UIControls.Reliability;
 using CAS.UI.UIControls.ScheduleControls;
@@ -268,9 +269,19 @@ namespace CAS.UI.UIControls.OpepatorsControls
             e.RequestedEntity = new AllProductListScreen(CurrentOperator);
         }
 
+		#region private void LinkOrders_DisplayerRequested(object sender, Interfaces.ReferenceEventArgs e)
+
+		private void LinkOrders_DisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+	        e.DisplayerText = CurrentOperator.Name + " Initial Orders";
+	        e.RequestedEntity = new AllOrderListScreen(_currentOperator);
+        }
+
+        #endregion
+
         #region private void LinkInitialOrderDisplayerRequested(object sender, ReferenceEventArgs e)
 
-        private void LinkInitialOrderDisplayerRequested(object sender, ReferenceEventArgs e)
+		private void LinkInitialOrderDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             e.DisplayerText = CurrentOperator.Name + " Initial Orders";
             e.RequestedEntity = new InitialOrderListScreen(_currentOperator);
@@ -510,6 +521,26 @@ namespace CAS.UI.UIControls.OpepatorsControls
 
 		#endregion
 
+		#region  private void LinkEventDisplayerRequested(object sender, ReferenceEventArgs e)
+
+		private void LinkEventDisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			e.DisplayerText = "Event";
+			e.RequestedEntity = new EventListScreen(GlobalObjects.CasEnvironment.Operators[0]);
+		}
+
+		#endregion
+
+		#region  private void LinkDefectDisplayerRequested(object sender, ReferenceEventArgs e)
+
+		private void LinkDefectDisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			e.DisplayerText = "Defects";
+			e.RequestedEntity = new DefectListScreen(GlobalObjects.CasEnvironment.Operators[0]);
+		}
+
+		#endregion
+
 		#region private void LinkSystemDisplayerRequested(object sender, ReferenceEventArgs e)
 
 		private void LinkSystemDisplayerRequested(object sender, ReferenceEventArgs e)
@@ -612,7 +643,12 @@ namespace CAS.UI.UIControls.OpepatorsControls
 
 		#endregion
 
-        
+
+		private void Activity_DisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			e.DisplayerText = "Activity";
+			e.RequestedEntity = new ActivityListScreen(GlobalObjects.CasEnvironment.Operators[0]);
+		}
     }
 }
 

@@ -92,7 +92,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		{
 			   var filteredCollection = _collectionFilter.GatherDirectives();
 			listViewKits.SetItemsArray(filteredCollection.ToArray());
-			listViewInitialItems.SetItemsArray(_addedQuatationOrderRecords.ToArray());
+			listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
 
 			UpdateControls();
 			UpdateInitialControls();
@@ -116,9 +116,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				_quotationCosts.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<QuotationCostDTO, QuotationCost>(new Filter("QuotationId", _order.ItemId)));
 				_addedQuatationOrderRecords.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationRecordDTO, RequestForQuotationRecord>(new Filter("ParentPackageId", _order.ItemId)));
 				var ids = _addedQuatationOrderRecords.Select(i => i.PackageItemId);
+				var supplierId = _addedQuatationOrderRecords.SelectMany(i => i.SupplierPrice).Select(i => i.SupplierId);
+				var suppliers = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<SupplierDTO, Supplier>(new Filter("ItemId",supplierId));
+
 				if (ids.Count() > 0)
 				{
-					//var product = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, Product>(new Filter("ItemId", ids), true);
 					foreach (var addedInitialOrderRecord in _addedQuatationOrderRecords)
 					{
 						var product = _currentAircraftKits.FirstOrDefault(i => i.ItemId == addedInitialOrderRecord.PackageItemId);
@@ -135,6 +137,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 						}
 
 						addedInitialOrderRecord.Product = product;
+
+						foreach (var price in addedInitialOrderRecord.SupplierPrice)
+						{
+							price.Parent = addedInitialOrderRecord;
+							price.Supplier = suppliers.FirstOrDefault(i => i.ItemId == price.SupplierId);
+						}
 					}
 				}
 			}
@@ -190,7 +198,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 					categories.Add(DeferredCategory.Unknown);
 
 					comboBoxDefferedCategory.Items.AddRange(categories.ToArray());
-					comboBoxDefferedCategory.SelectedItem = categories.FirstOrDefault(c => c.Equals(listViewInitialItems.SelectedItem.DeferredCategory)) ?? DeferredCategory.Unknown;
+
+					if(listViewInitialItems.SelectedItem is RequestForQuotationRecord)
+						comboBoxDefferedCategory.SelectedItem = categories.FirstOrDefault(c => c.Equals(((RequestForQuotationRecord)listViewInitialItems.SelectedItem).DeferredCategory)) ?? DeferredCategory.Unknown;
 				}
 			}
 			else comboBoxDefferedCategory.Enabled = false;
@@ -411,7 +421,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				_addedQuatationOrderRecords.Add(newRequest);
 			}
 
-			listViewInitialItems.SetItemsArray(_addedQuatationOrderRecords.ToArray());
+			listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
 		}
 
 		#endregion
@@ -424,13 +434,20 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			foreach (var item in listViewInitialItems.SelectedItems.ToArray())
 			{
-				if (item.ItemId > 0)
-					_deleteExistQuatationOrderRecords.Add(item);
+				if (item is RequestForQuotationRecord)
+				{
+					var rec = item as RequestForQuotationRecord;
+					if (rec.ItemId > 0)
+						_deleteExistQuatationOrderRecords.Add(rec);
 
-				_addedQuatationOrderRecords.Remove(item);
+					_addedQuatationOrderRecords.Remove(rec);
+				}
+
+				
 			}
 
-			listViewInitialItems.SetItemsArray(_addedQuatationOrderRecords.ToArray());
+			listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
+			
 		}
 
 
@@ -443,26 +460,31 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			button1.Enabled = button2.Enabled = listViewInitialItems.SelectedItem != null;
 			if (listViewInitialItems.SelectedItem == null) return;
 
-			var product = listViewInitialItems.SelectedItem.Product;
+			if (!(listViewInitialItems.SelectedItem is RequestForQuotationRecord))
+				return;
+
+			var record = listViewInitialItems.SelectedItem as RequestForQuotationRecord;
+
+			var product = record.Product;
 
 			comboBoxMeasure.SelectedItem = product.Measure;
-			comboBoxReason.SelectedItem = listViewInitialItems.SelectedItem.InitialReason;
-			numericUpDownQuantity.Value = (decimal)listViewInitialItems.SelectedItem.Quantity;
-			checkBoxNew.Checked = (listViewInitialItems.SelectedItem.CostCondition & ComponentStatus.New) != 0;
-			checkBoxOverhaul.Checked = (listViewInitialItems.SelectedItem.CostCondition & ComponentStatus.Overhaul) != 0;
-			checkBoxRepair.Checked = (listViewInitialItems.SelectedItem.CostCondition & ComponentStatus.Repair) != 0;
-			checkBoxServiceable.Checked = (listViewInitialItems.SelectedItem.CostCondition & ComponentStatus.Serviceable) != 0;
+			comboBoxReason.SelectedItem = record.InitialReason;
+			numericUpDownQuantity.Value = (decimal)record.Quantity;
+			checkBoxNew.Checked = (record.CostCondition & ComponentStatus.New) != 0;
+			checkBoxOverhaul.Checked = (record.CostCondition & ComponentStatus.Overhaul) != 0;
+			checkBoxRepair.Checked = (record.CostCondition & ComponentStatus.Repair) != 0;
+			checkBoxServiceable.Checked = (record.CostCondition & ComponentStatus.Serviceable) != 0;
 
 			var destination =
-				destinations.FirstOrDefault(d => d.SmartCoreObjectType == listViewInitialItems.SelectedItem.DestinationObjectType
-				                                 && d.ItemId == listViewInitialItems.SelectedItem.DestinationObjectId);
+				destinations.FirstOrDefault(d => d.SmartCoreObjectType == record.DestinationObjectType
+				                                 && d.ItemId == record.DestinationObjectId);
 
 			comboBoxDestination.SelectedItem = destination;
-			comboBoxPriority.SelectedItem = listViewInitialItems.SelectedItem.Priority;
-			metroTextBox1.Text = listViewInitialItems.SelectedItem.Remarks;
+			comboBoxPriority.SelectedItem = record.Priority;
+			metroTextBox1.Text = record.Remarks;
 
-			lifelengthViewerLifeLimit.Lifelength = new Lifelength(listViewInitialItems.SelectedItem.LifeLimit);
-			lifelengthViewerNotify.Lifelength = new Lifelength(listViewInitialItems.SelectedItem.LifeLimitNotify);
+			lifelengthViewerLifeLimit.Lifelength = new Lifelength(record.LifeLimit);
+			lifelengthViewerNotify.Lifelength = new Lifelength(record.LifeLimitNotify);
 
 		}
 
@@ -473,12 +495,16 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private void button1_Click(object sender, EventArgs e)
 		{
 			if (listViewInitialItems.SelectedItem == null) return;
+			if (!(listViewInitialItems.SelectedItem is RequestForQuotationRecord))
+				return;
 
-			listViewInitialItems.SelectedItem.Priority = comboBoxPriority.SelectedItem as Priority ?? Priority.UNK;
-			listViewInitialItems.SelectedItem.Measure = comboBoxMeasure.SelectedItem as Measure ?? Measure.Unknown;
-			listViewInitialItems.SelectedItem.Quantity = (double)numericUpDownQuantity.Value;
-			listViewInitialItems.SelectedItem.DeferredCategory = comboBoxDefferedCategory.SelectedItem as DeferredCategory ?? DeferredCategory.Unknown;
-			listViewInitialItems.SelectedItem.Remarks = metroTextBox1.Text;
+			var record = listViewInitialItems.SelectedItem as RequestForQuotationRecord;
+
+			record.Priority = comboBoxPriority.SelectedItem as Priority ?? Priority.UNK;
+			record.Measure = comboBoxMeasure.SelectedItem as Measure ?? Measure.Unknown;
+			record.Quantity = (double)numericUpDownQuantity.Value;
+			record.DeferredCategory = comboBoxDefferedCategory.SelectedItem as DeferredCategory ?? DeferredCategory.Unknown;
+			record.Remarks = metroTextBox1.Text;
 
 			ComponentStatus costCondition = ComponentStatus.Unknown;
 			if (checkBoxNew.Checked)
@@ -490,24 +516,24 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			if (checkBoxRepair.Checked)
 				costCondition = costCondition | ComponentStatus.Repair;
 
-			listViewInitialItems.SelectedItem.CostCondition = costCondition;
+			record.CostCondition = costCondition;
 
 			var destination = comboBoxDestination.SelectedItem as BaseEntityObject;
 			if (destination != null)
 			{
-				listViewInitialItems.SelectedItem.DestinationObjectType = destination.SmartCoreObjectType;
-				listViewInitialItems.SelectedItem.DestinationObjectId = destination.ItemId;
+				record.DestinationObjectType = destination.SmartCoreObjectType;
+				record.DestinationObjectId = destination.ItemId;
 			}
 			else
 			{
-				listViewInitialItems.SelectedItem.DestinationObjectType = SmartCoreType.Unknown;
-				listViewInitialItems.SelectedItem.DestinationObjectId = -1;
+				record.DestinationObjectType = SmartCoreType.Unknown;
+				record.DestinationObjectId = -1;
 			}
-			listViewInitialItems.SelectedItem.InitialReason = comboBoxReason.SelectedItem as InitialReason ?? InitialReason.Unknown;
-			listViewInitialItems.SelectedItem.LifeLimit = lifelengthViewerLifeLimit.Lifelength;
-			listViewInitialItems.SelectedItem.LifeLimitNotify = lifelengthViewerNotify.Lifelength;
+			record.InitialReason = comboBoxReason.SelectedItem as InitialReason ?? InitialReason.Unknown;
+			record.LifeLimit = lifelengthViewerLifeLimit.Lifelength;
+			record.LifeLimitNotify = lifelengthViewerNotify.Lifelength;
 
-			listViewInitialItems.SetItemsArray(_addedQuatationOrderRecords.ToArray());
+			listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
 
 			Reset();
 		}
@@ -642,20 +668,43 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void _toolStripMenuItemAddSuppliersAll_Click(object sender, EventArgs e)
 		{
-			var form = new QuotationSupplierForm(_suppliers, listViewInitialItems.SelectedItems);
-			form.ShowDialog();
+			var form = new QuotationSupplierForm(_suppliers, listViewInitialItems.SelectedItems.Select(i => i is RequestForQuotationRecord).Cast<RequestForQuotationRecord>().ToList());
+			if (form.ShowDialog() == DialogResult.OK)
+				listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
 		}
 
 		private void _toolStripMenuItemAddSuppliers_Click(object sender, EventArgs e)
 		{
-			var form = new QuotationSupplierForm(_suppliers, listViewInitialItems.SelectedItem);
-			form.ShowDialog();
+			if (!(listViewInitialItems.SelectedItem is RequestForQuotationRecord))
+				return;
+
+			var form = new QuotationSupplierForm(_suppliers, listViewInitialItems.SelectedItem as RequestForQuotationRecord);
+			if (form.ShowDialog() == DialogResult.OK)
+				listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
 		}
 
 		private void Button2_Click(object sender, EventArgs e)
 		{
-			var form = new QuotationSupplierForm(_suppliers, listViewInitialItems.SelectedItem);
-			form.ShowDialog();
+			if (!(listViewInitialItems.SelectedItem is RequestForQuotationRecord))
+				return;
+
+			var form = new QuotationSupplierForm(_suppliers, listViewInitialItems.SelectedItem as RequestForQuotationRecord);
+			if(form.ShowDialog() == DialogResult.OK)
+				listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
+
+		}
+
+
+		private List<BaseCoreObject> UpdateLW(List<RequestForQuotationRecord> records)
+		{
+			var res = new List<BaseCoreObject>();
+
+			foreach (var record in records)
+			{
+				res.Add(record);
+				res.AddRange(record.SupplierPrice);
+			}
+			return res;
 		}
 	}
 }
