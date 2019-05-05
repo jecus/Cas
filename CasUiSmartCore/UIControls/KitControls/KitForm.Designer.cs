@@ -119,7 +119,7 @@ namespace CAS.UI.UIControls.KitControls
 			this.ButtonAdd.TabIndex = 0;
 			this.ButtonAdd.TextAlignMain = System.Drawing.ContentAlignment.MiddleLeft;
 			this.ButtonAdd.TextAlignSecondary = System.Drawing.ContentAlignment.MiddleLeft;
-			this.ButtonAdd.TextMain = "Add Kit";
+			this.ButtonAdd.TextMain = "Add";
 			this.ButtonAdd.TextSecondary = "";
 			this.ButtonAdd.ToolTipText = "";
 			this.ButtonAdd.Click += new System.EventHandler(this.ButtonAddClick);
