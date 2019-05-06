@@ -28,6 +28,9 @@ namespace CAS.UI.UIControls.Discrepancies
 		public OccurrencesListView()
         {
             InitializeComponent();
+
+            SortMultiplier = 1;
+            OldColumnIndex = 11;
         }
         #endregion
 
