@@ -3,7 +3,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 Task("Build")
-	.IsDependentOn("Clenup")
+	.IsDependentOn("NuGet-Restore")
 	.Does(() => {
     	Information("Building project...");
 		//DotNetBuild("./CasWcfService.csproj");
@@ -19,6 +19,14 @@ Task("Build")
     Error("Build Failed, throwing exception...");
     throw ex; 
 });
+
+Task("NuGet-Restore")
+    .IsDependentOn("Clenup")
+    .Does(() =>
+    {
+        NuGetRestore("D:/Work/GitCas/CAS.sln");
+    });
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //	OTHER
