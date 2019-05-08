@@ -35,7 +35,10 @@ namespace SmartCore.Tests.ExcelImportExport
 					var goodClass = row[6].ToString();
 
 					prod.Description = row[1].ToString();
-					prod.Standart = standart.FirstOrDefault(i => i.FullName.ToLower().Contains(row[2].ToString().ToLower()));
+
+					if(!string.IsNullOrEmpty(row[2].ToString()))
+						prod.Standart = standart.FirstOrDefault(i => i.FullName.ToLower().Contains(row[2].ToString().ToLower()));
+
 					prod.Name = !string.IsNullOrEmpty(row[3].ToString()) ? row[3].ToString() : "*";
 
 					prod.GoodsClass = GoodsClass.Items.FirstOrDefault(i => goodClass.ToLower().Contains(i.FullName.ToLower()));

@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 using AvControls;
@@ -112,6 +114,8 @@ namespace CAS.UI.UIControls.DirectivesControls
 
         #region Properties
 
+        public List<Directive> Directives;
+
         #region public string DamageChartLocation
         /// <summary>
         /// DamageChartLocation
@@ -178,15 +182,15 @@ namespace CAS.UI.UIControls.DirectivesControls
             set { _effDate = value; }
         }
 
-        #endregion
+		#endregion
 
-        #endregion
+		#endregion
 
-        #region Methods
-       
-        #region private void InitializeComponent()
+		#region Methods
 
-        private void InitializeComponent()
+		#region private void InitializeComponent()
+
+		private void InitializeComponent()
         {
 			this.radio_FirstWhicheverLast = new System.Windows.Forms.RadioButton();
 			this.radio_FirstWhicheverFirst = new System.Windows.Forms.RadioButton();
@@ -773,6 +777,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			// comboBoxSuperseded
 			// 
+			this.comboBoxSuperseded.Enabled = false;
 			this.comboBoxSuperseded.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.comboBoxSuperseded.FormattingEnabled = true;
 			this.comboBoxSuperseded.Location = new System.Drawing.Point(743, 90);
@@ -1136,7 +1141,17 @@ namespace CAS.UI.UIControls.DirectivesControls
         ///</summary>
         public void UpdateControl()
         {
-            lookupComboboxForCompnt.DisplayerText = _currentDirective.ParentBaseComponent + ". Component Status";
+			comboBoxSuperseded.Items.Clear();
+			comboBoxSuperseded.Items.AddRange(Directives.ToArray());
+			if (_currentDirective.SupersededId != null)
+				comboBoxSuperseded.SelectedItem = Directives.FirstOrDefault(i => i.ItemId == _currentDirective.SupersededId);
+
+			comboBoxSupersedes.Items.Clear();
+			comboBoxSupersedes.Items.AddRange(Directives.ToArray());
+			if (_currentDirective.SupersedesId != null)
+				comboBoxSupersedes.SelectedItem = Directives.FirstOrDefault(i => i.ItemId == _currentDirective.SupersedesId);
+
+			lookupComboboxForCompnt.DisplayerText = _currentDirective.ParentBaseComponent + ". Component Status";
             lookupComboboxForCompnt.LoadObjectsFunc = GlobalObjects.DirectiveCore.GetDirectives;
             lookupComboboxForCompnt.FilterParam1 = _currentDirective.ParentBaseComponent;
             lookupComboboxForCompnt.FilterParam2 = DirectiveType.DeferredItems;
@@ -1304,6 +1319,9 @@ namespace CAS.UI.UIControls.DirectivesControls
             destinationDirective.Workarea = textBoxWorkArea.Text;
 
 			DirectiveThreshold threshold = new DirectiveThreshold();
+            if (comboBoxSupersedes.SelectedItem != null)
+	            _currentDirective.SupersedesId = ((Directive) comboBoxSupersedes.SelectedItem).ItemId;
+            var threshold = new DirectiveThreshold();
             threshold.EffectiveDate = _effDate;
             threshold.FirstPerformanceSinceNew = new Lifelength(lifelengthViewer_SinceNew.Lifelength);
             threshold.FirstPerformanceSinceEffectiveDate = new Lifelength(lifelengthViewer_SinceEffDate.Lifelength);

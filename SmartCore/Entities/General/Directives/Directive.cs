@@ -226,6 +226,11 @@ namespace SmartCore.Entities.General.Directives
 		}
 		#endregion
 
+		[TableColumn("SupersedesId")]
+		public int? SupersedesId { get; set; }
+
+		[TableColumn("SupersededId")]
+		public int? SupersededId { get; set; }
 
 
 		#region  public AttachedFile ServiceBulletinFile { get; set; }
