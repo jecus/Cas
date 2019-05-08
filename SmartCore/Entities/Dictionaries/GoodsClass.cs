@@ -402,6 +402,12 @@ namespace SmartCore.Entities.Dictionaries
 		public static GoodsClass Paint = new GoodsClass(41, "Paints", "Auxiliary Materials Maintenance Paint", "Auxiliary Materials Maintenance Paint", ConsumableParts);
 		public static GoodsClass Polish = new GoodsClass(42, "Polish", "Auxiliary Materials Maintenance Polish", "Auxiliary Materials Maintenance Polish", ConsumableParts);
 		public static GoodsClass Primer = new GoodsClass(43, "Primer", "Auxiliary Materials Maintenance Primer", "Auxiliary Materials Maintenance Primer", ConsumableParts);
+		public static GoodsClass Alcohol = new GoodsClass(45, "Alcohol", "Auxiliary Materials Maintenance Alcohol", "Auxiliary Materials Maintenance Alcohol", ConsumableParts);
+		//public static GoodsClass AntiCorrosion = new GoodsClass(46, "Anti-corrosion", "Auxiliary Materials Maintenance Anti-corrosion", "Auxiliary Materials Maintenance Anti-corrosion", ConsumableParts);
+		public static GoodsClass Coolant = new GoodsClass(47, "Coolant", "Auxiliary Materials Maintenance Coolant", "Auxiliary Materials Maintenance Coolant", ConsumableParts);
+		public static GoodsClass Cleaner = new GoodsClass(48, "Cleaners", "Auxiliary Materials Maintenance Cleaner", "Auxiliary Materials Maintenance Cleaner", ConsumableParts);
+		//public static GoodsClass DeIcing = new GoodsClass(49, "De-icing", "Auxiliary Materials Maintenance De-icing", "Auxiliary Materials Maintenance De-icing", ConsumableParts);
+		public static GoodsClass Solvent = new GoodsClass(50, "Solvent", "Auxiliary Materials Maintenance Solvent", "Auxiliary Materials Maintenance Solvent", ConsumableParts);
 		public static GoodsClass Adhesives = new GoodsClass(79, "Adhesives", "Adhesives", "Adhesives", ConsumableParts);
 		public static GoodsClass AdhesivesCompounds = new GoodsClass(80, "Adhesives Compounds", "Adhesives Compounds", "Adhesives Compounds", ConsumableParts);
 		
@@ -411,28 +417,19 @@ namespace SmartCore.Entities.Dictionaries
 		public static GoodsClass Preservation = new GoodsClass(84, "Preservation", "Preservation", "Preservation", ConsumableParts);
 		public static GoodsClass Sealants = new GoodsClass(85, "Sealants", "Sealants", "Sealants", ConsumableParts);
 		public static GoodsClass Strippers = new GoodsClass(86, "Strippers", "Strippers", "Strippers", ConsumableParts);
+		public static GoodsClass CleaningAgents = new GoodsClass(87, "Cleaning Agents", "Cleaning Agents", "Cleaning Agents", ConsumableParts);
+		public static GoodsClass CleanersPolishes = new GoodsClass(88, "Cleaners, Polishes", "Cleaners, Polishes", "Cleaners, Polishes", ConsumableParts);
 		public static GoodsClass BondingAngAdhesive = new GoodsClass(95, "Bonding ang Adhesive Compounds", "Bonding ang Adhesive Compounds", "Bonding ang Adhesive Compounds", ConsumableParts);
 		public static GoodsClass AdhesivesCements = new GoodsClass(96, "Adhesives, Cements, Sealants", "Adhesives, Cements, Sealants", "Adhesives, Cements, Sealants", ConsumableParts);
 
 		#endregion
 
-		#region public static GoodsClass Fluid = new GoodsClass(44, "Fluid", "Auxiliary Materials Maintenance Fluid", "Auxiliary Materials Maintenance Fluid", MaintenanceMaterials);
+		//#region public static GoodsClass Fluid = new GoodsClass(44, "Fluid", "Auxiliary Materials Maintenance Fluid", "Auxiliary Materials Maintenance Fluid", MaintenanceMaterials);
 
-		public static GoodsClass Fluid = new GoodsClass(44, "Fluid", "Auxiliary Materials Maintenance Fluid", "Auxiliary Materials Maintenance Fluid", MaintenanceMaterials);
+		//public static GoodsClass Fluid = new GoodsClass(44, "Fluid", "Auxiliary Materials Maintenance Fluid", "Auxiliary Materials Maintenance Fluid", MaintenanceMaterials);
 
-		#endregion
-
-		#region Элементы пунтка Fluid
-		public static GoodsClass Alcohol = new GoodsClass(45, "Alcohol", "Auxiliary Materials Maintenance Alcohol", "Auxiliary Materials Maintenance Alcohol", Fluid);
-		public static GoodsClass AntiCorrosion = new GoodsClass(46, "Anti-corrosion", "Auxiliary Materials Maintenance Anti-corrosion", "Auxiliary Materials Maintenance Anti-corrosion", Fluid);
-		public static GoodsClass Coolant = new GoodsClass(47, "Coolant", "Auxiliary Materials Maintenance Coolant", "Auxiliary Materials Maintenance Coolant", Fluid);
-		public static GoodsClass Cleaner = new GoodsClass(48, "Cleaners", "Auxiliary Materials Maintenance Cleaner", "Auxiliary Materials Maintenance Cleaner", Fluid);	
-		public static GoodsClass DeIcing = new GoodsClass(49, "De-icing", "Auxiliary Materials Maintenance De-icing", "Auxiliary Materials Maintenance De-icing", Fluid);
-		public static GoodsClass Solvent = new GoodsClass(50, "Solvent", "Auxiliary Materials Maintenance Solvent", "Auxiliary Materials Maintenance Solvent", Fluid);
-		public static GoodsClass CleaningAgents = new GoodsClass(87, "Cleaning Agents", "Cleaning Agents", "Cleaning Agents", Fluid);
-		public static GoodsClass CleanersPolishes = new GoodsClass(88, "Cleaners, Polishes", "Cleaners, Polishes", "Cleaners, Polishes", Fluid);
-
-		#endregion
+		//#endregion
+		
 
 		#region public static GoodsClass AccessoriesMaterial = new GoodsClass(55, "Accessories", "Auxiliary Materials Accessories", "Auxiliary Materials Accessories", MaintenanceMaterials);
 
@@ -502,7 +499,7 @@ namespace SmartCore.Entities.Dictionaries
 
 		#region Элементы пункта Tools
 
-		public static GoodsClass StandartTools = new GoodsClass(64, "Standart tools", "Production Auxiliary Equipment Standart Tools", "Production Auxiliary Equipment StandartTools", Tools);
+		public static GoodsClass StandartTools = new GoodsClass(64, "Standard tools", "Production Auxiliary Equipment Standard Tools", "Production Auxiliary Equipment StandardTools", Tools);
 		public static GoodsClass AircraftTools = new GoodsClass(65, "Aircraft tools", "Production Auxiliary Equipment Aircraft Tools", "Production Auxiliary Equipment AircraftTools", Tools);
 		public static GoodsClass EngineTools = new GoodsClass(66, "Engine tools", "Production Auxiliary Equipment Engine Tools", "Production Auxiliary Equipment EngineTools", Tools);
 		public static GoodsClass SpecialTools = new GoodsClass(67, "Special tools", "Production Auxiliary Equipment Special Tools", "Production Auxiliary Equipment SpecialTools", Tools);
