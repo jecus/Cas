@@ -13,7 +13,7 @@ namespace EFCore.DTO.General
 		public int? InitialReason { get; set; }
 
 		[DataMember]
-		public int Priority { get; set; }
+		public int? Priority { get; set; }
 
 		[DataMember]
 		public int? DestinationObjectID { get; set; }

@@ -3678,7 +3678,7 @@ namespace SmartCore.DtoHelper
 				ItemId = orderrecdto.ItemId,
 				IsDeleted = orderrecdto.IsDeleted,
 				CorrectorId = orderrecdto.CorrectorId,
-				Priority = Priority.GetItemById(orderrecdto.Priority),
+				Priority = orderrecdto.Priority.HasValue ? Priority.GetItemById(orderrecdto.Priority.Value) : Priority.UNK,
 				InitialReason = orderrecdto.InitialReason.HasValue ? InitialReason.Items.GetItemById(orderrecdto.InitialReason.Value) : InitialReason.Unknown,
 				DestinationObjectId = orderrecdto.DestinationObjectID ?? default(int),
 				DestinationObjectType = orderrecdto.DestinationObjectType.HasValue ? SmartCoreType.Items.GetItemById(orderrecdto.DestinationObjectType.Value) : SmartCoreType.Unknown,
