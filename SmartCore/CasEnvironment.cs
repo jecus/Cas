@@ -122,9 +122,13 @@ namespace SmartCore
 
 		#region public IAuditRepository AuditRepository { get; set; }
 
-		public IAuditRepository AuditRepository { get; set; }
+		public IAuditRepository AuditRepository
+		{
+			get => _auditRepository ?? (_auditRepository = new AuditRepository(null));
+			set => _auditRepository = value;
+		}
 
-        #endregion
+		#endregion
 
         #region public void Disconnect()
 
@@ -1240,6 +1244,7 @@ namespace SmartCore
 		private IAircraftsCore _aircraftsCore;
 
 	    private string _ipServer;
+	    private IAuditRepository _auditRepository;
 
 	    //TODO: врменный метод. IAircraftsCore должен передаваться через конструктор
 		public void SetAircraftCore(IAircraftsCore aircraftsCore)
