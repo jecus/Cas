@@ -67,6 +67,12 @@ namespace CAS.UI.UIControls.DirectivesControls
 		private Label labelSuperseded;
 		private ComboBox comboBoxOrder;
 		private Label label3;
+		private Label label6;
+		private TextBox textBoxWorkArea;
+		private Label labelZone;
+		private TextBox textBoxZone;
+		private Label labelAccess;
+		private TextBox textBoxAccess;
 		private DateTime _effDate = DateTimeExtend.GetCASMinDateTime();
 
         #endregion
@@ -207,22 +213,28 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this._textboxManHours = new System.Windows.Forms.TextBox();
 			this.groupBox_Repetative = new System.Windows.Forms.GroupBox();
 			this.radio_RepeatWhicheverLast = new System.Windows.Forms.RadioButton();
-			this._labelManHours = new System.Windows.Forms.Label();
-			this.groupFirstPerformance = new System.Windows.Forms.GroupBox();
-			this.labelThreshold = new System.Windows.Forms.Label();
-			this.comboBoxNdt = new System.Windows.Forms.ComboBox();
-			this.lookupComboboxForCompnt = new CAS.UI.UIControls.Auxiliary.LookupCombobox();
 			this.lifelengthViewer_RepeatNotify = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.lifelengthViewer_Repeat = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
+			this._labelManHours = new System.Windows.Forms.Label();
+			this.groupFirstPerformance = new System.Windows.Forms.GroupBox();
 			this.lifelengthViewer_SinceEffDate = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.lifelengthViewer_SinceNew = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.lifelengthViewer_FirstNotify = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
+			this.labelThreshold = new System.Windows.Forms.Label();
+			this.comboBoxNdt = new System.Windows.Forms.ComboBox();
+			this.lookupComboboxForCompnt = new CAS.UI.UIControls.Auxiliary.LookupCombobox();
 			this.comboBoxSupersedes = new System.Windows.Forms.ComboBox();
 			this.labelSupersedes = new System.Windows.Forms.Label();
 			this.comboBoxSuperseded = new System.Windows.Forms.ComboBox();
 			this.labelSuperseded = new System.Windows.Forms.Label();
 			this.comboBoxOrder = new System.Windows.Forms.ComboBox();
 			this.label3 = new System.Windows.Forms.Label();
+			this.label6 = new System.Windows.Forms.Label();
+			this.textBoxWorkArea = new System.Windows.Forms.TextBox();
+			this.labelZone = new System.Windows.Forms.Label();
+			this.textBoxZone = new System.Windows.Forms.TextBox();
+			this.labelAccess = new System.Windows.Forms.Label();
+			this.textBoxAccess = new System.Windows.Forms.TextBox();
 			this.groupBoxClose.SuspendLayout();
 			this.groupBox_Repetative.SuspendLayout();
 			this.groupFirstPerformance.SuspendLayout();
@@ -269,9 +281,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			this.labelForComponent.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelForComponent.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelForComponent.Location = new System.Drawing.Point(3, 110);
+			this.labelForComponent.Location = new System.Drawing.Point(3, 186);
 			this.labelForComponent.Name = "labelForComponent";
-			this.labelForComponent.Size = new System.Drawing.Size(150, 25);
+			this.labelForComponent.Size = new System.Drawing.Size(124, 22);
 			this.labelForComponent.TabIndex = 203;
 			this.labelForComponent.Text = "For Component";
 			// 
@@ -382,7 +394,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			this.groupBoxClose.Controls.Add(this.checkBoxClose);
 			this.groupBoxClose.ForeColor = System.Drawing.Color.DimGray;
-			this.groupBoxClose.Location = new System.Drawing.Point(1093, 199);
+			this.groupBoxClose.Location = new System.Drawing.Point(1093, 275);
 			this.groupBoxClose.Name = "groupBoxClose";
 			this.groupBoxClose.Size = new System.Drawing.Size(86, 223);
 			this.groupBoxClose.TabIndex = 195;
@@ -417,7 +429,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			this.labelNDT.Font = new System.Drawing.Font("Verdana", 9F);
 			this.labelNDT.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelNDT.Location = new System.Drawing.Point(3, 135);
+			this.labelNDT.Location = new System.Drawing.Point(3, 208);
 			this.labelNDT.Name = "labelNDT";
 			this.labelNDT.Size = new System.Drawing.Size(106, 25);
 			this.labelNDT.TabIndex = 186;
@@ -442,7 +454,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.checkBoxIsTemporary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.checkBoxIsTemporary.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.checkBoxIsTemporary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.checkBoxIsTemporary.Location = new System.Drawing.Point(1053, 173);
+			this.checkBoxIsTemporary.Location = new System.Drawing.Point(1053, 249);
 			this.checkBoxIsTemporary.Name = "checkBoxIsTemporary";
 			this.checkBoxIsTemporary.Size = new System.Drawing.Size(12, 11);
 			this.checkBoxIsTemporary.TabIndex = 190;
@@ -482,7 +494,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			this._labelIsTemporary.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this._labelIsTemporary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this._labelIsTemporary.Location = new System.Drawing.Point(903, 171);
+			this._labelIsTemporary.Location = new System.Drawing.Point(903, 247);
 			this._labelIsTemporary.Name = "_labelIsTemporary";
 			this._labelIsTemporary.Size = new System.Drawing.Size(150, 25);
 			this._labelIsTemporary.TabIndex = 185;
@@ -507,7 +519,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.groupBox_Repetative.Controls.Add(this.checkBoxRepeat);
 			this.groupBox_Repetative.Controls.Add(this.lifelengthViewer_Repeat);
 			this.groupBox_Repetative.ForeColor = System.Drawing.Color.DimGray;
-			this.groupBox_Repetative.Location = new System.Drawing.Point(567, 199);
+			this.groupBox_Repetative.Location = new System.Drawing.Point(567, 275);
 			this.groupBox_Repetative.Name = "groupBox_Repetative";
 			this.groupBox_Repetative.Size = new System.Drawing.Size(486, 223);
 			this.groupBox_Repetative.TabIndex = 192;
@@ -524,65 +536,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.radio_RepeatWhicheverLast.TabIndex = 24;
 			this.radio_RepeatWhicheverLast.Text = "Whichever Later";
 			this.radio_RepeatWhicheverLast.UseVisualStyleBackColor = true;
-			// 
-			// _labelManHours
-			// 
-			this._labelManHours.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this._labelManHours.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this._labelManHours.Location = new System.Drawing.Point(3, 38);
-			this._labelManHours.Name = "_labelManHours";
-			this._labelManHours.Size = new System.Drawing.Size(150, 25);
-			this._labelManHours.TabIndex = 184;
-			this._labelManHours.Text = "Man Hours";
-			// 
-			// groupFirstPerformance
-			// 
-			this.groupFirstPerformance.AutoSize = true;
-			this.groupFirstPerformance.Controls.Add(this.radio_FirstWhicheverLast);
-			this.groupFirstPerformance.Controls.Add(this.radio_FirstWhicheverFirst);
-			this.groupFirstPerformance.Controls.Add(this.lifelengthViewer_SinceEffDate);
-			this.groupFirstPerformance.Controls.Add(this.lifelengthViewer_SinceNew);
-			this.groupFirstPerformance.Controls.Add(this.lifelengthViewer_FirstNotify);
-			this.groupFirstPerformance.ForeColor = System.Drawing.Color.DimGray;
-			this.groupFirstPerformance.Location = new System.Drawing.Point(6, 199);
-			this.groupFirstPerformance.Name = "groupFirstPerformance";
-			this.groupFirstPerformance.Size = new System.Drawing.Size(555, 223);
-			this.groupFirstPerformance.TabIndex = 191;
-			this.groupFirstPerformance.TabStop = false;
-			this.groupFirstPerformance.Text = "FIRST PERFORMANCE";
-			// 
-			// labelThreshold
-			// 
-			this.labelThreshold.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.labelThreshold.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelThreshold.Location = new System.Drawing.Point(503, 171);
-			this.labelThreshold.Name = "labelThreshold";
-			this.labelThreshold.Size = new System.Drawing.Size(80, 25);
-			this.labelThreshold.TabIndex = 182;
-			this.labelThreshold.Text = "Threshold";
-			// 
-			// comboBoxNdt
-			// 
-			this.comboBoxNdt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.comboBoxNdt.FormattingEnabled = true;
-			this.comboBoxNdt.Location = new System.Drawing.Point(153, 138);
-			this.comboBoxNdt.Name = "comboBoxNdt";
-			this.comboBoxNdt.Size = new System.Drawing.Size(210, 21);
-			this.comboBoxNdt.TabIndex = 205;
-			// 
-			// lookupComboboxForCompnt
-			// 
-			this.lookupComboboxForCompnt.Displayer = null;
-			this.lookupComboboxForCompnt.DisplayerText = null;
-			this.lookupComboboxForCompnt.Entity = null;
-			this.lookupComboboxForCompnt.Font = new System.Drawing.Font("Verdana", 9F);
-			this.lookupComboboxForCompnt.Location = new System.Drawing.Point(153, 107);
-			this.lookupComboboxForCompnt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-			this.lookupComboboxForCompnt.Name = "lookupComboboxForCompnt";
-			this.lookupComboboxForCompnt.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.lookupComboboxForCompnt.Size = new System.Drawing.Size(350, 22);
-			this.lookupComboboxForCompnt.TabIndex = 204;
-			this.lookupComboboxForCompnt.Type = null;
 			// 
 			// lifelengthViewer_RepeatNotify
 			// 
@@ -646,6 +599,32 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.lifelengthViewer_Repeat.Size = new System.Drawing.Size(473, 52);
 			this.lifelengthViewer_Repeat.SystemCalculated = true;
 			this.lifelengthViewer_Repeat.TabIndex = 12;
+			// 
+			// _labelManHours
+			// 
+			this._labelManHours.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this._labelManHours.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this._labelManHours.Location = new System.Drawing.Point(3, 38);
+			this._labelManHours.Name = "_labelManHours";
+			this._labelManHours.Size = new System.Drawing.Size(150, 25);
+			this._labelManHours.TabIndex = 184;
+			this._labelManHours.Text = "Man Hours";
+			// 
+			// groupFirstPerformance
+			// 
+			this.groupFirstPerformance.AutoSize = true;
+			this.groupFirstPerformance.Controls.Add(this.radio_FirstWhicheverLast);
+			this.groupFirstPerformance.Controls.Add(this.radio_FirstWhicheverFirst);
+			this.groupFirstPerformance.Controls.Add(this.lifelengthViewer_SinceEffDate);
+			this.groupFirstPerformance.Controls.Add(this.lifelengthViewer_SinceNew);
+			this.groupFirstPerformance.Controls.Add(this.lifelengthViewer_FirstNotify);
+			this.groupFirstPerformance.ForeColor = System.Drawing.Color.DimGray;
+			this.groupFirstPerformance.Location = new System.Drawing.Point(6, 275);
+			this.groupFirstPerformance.Name = "groupFirstPerformance";
+			this.groupFirstPerformance.Size = new System.Drawing.Size(555, 223);
+			this.groupFirstPerformance.TabIndex = 191;
+			this.groupFirstPerformance.TabStop = false;
+			this.groupFirstPerformance.Text = "FIRST PERFORMANCE";
 			// 
 			// lifelengthViewer_SinceEffDate
 			// 
@@ -739,6 +718,39 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.lifelengthViewer_FirstNotify.SystemCalculated = true;
 			this.lifelengthViewer_FirstNotify.TabIndex = 8;
 			// 
+			// labelThreshold
+			// 
+			this.labelThreshold.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.labelThreshold.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelThreshold.Location = new System.Drawing.Point(503, 247);
+			this.labelThreshold.Name = "labelThreshold";
+			this.labelThreshold.Size = new System.Drawing.Size(80, 25);
+			this.labelThreshold.TabIndex = 182;
+			this.labelThreshold.Text = "Threshold";
+			// 
+			// comboBoxNdt
+			// 
+			this.comboBoxNdt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.comboBoxNdt.FormattingEnabled = true;
+			this.comboBoxNdt.Location = new System.Drawing.Point(153, 211);
+			this.comboBoxNdt.Name = "comboBoxNdt";
+			this.comboBoxNdt.Size = new System.Drawing.Size(210, 21);
+			this.comboBoxNdt.TabIndex = 205;
+			// 
+			// lookupComboboxForCompnt
+			// 
+			this.lookupComboboxForCompnt.Displayer = null;
+			this.lookupComboboxForCompnt.DisplayerText = null;
+			this.lookupComboboxForCompnt.Entity = null;
+			this.lookupComboboxForCompnt.Font = new System.Drawing.Font("Verdana", 9F);
+			this.lookupComboboxForCompnt.Location = new System.Drawing.Point(153, 183);
+			this.lookupComboboxForCompnt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.lookupComboboxForCompnt.Name = "lookupComboboxForCompnt";
+			this.lookupComboboxForCompnt.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.lookupComboboxForCompnt.Size = new System.Drawing.Size(350, 22);
+			this.lookupComboboxForCompnt.TabIndex = 204;
+			this.lookupComboboxForCompnt.Type = null;
+			// 
 			// comboBoxSupersedes
 			// 
 			this.comboBoxSupersedes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
@@ -799,12 +811,85 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.label3.Text = "Order:";
 			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.label6.Location = new System.Drawing.Point(3, 102);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(77, 14);
+			this.label6.TabIndex = 217;
+			this.label6.Text = "Work area:";
+			// 
+			// textBoxWorkArea
+			// 
+			this.textBoxWorkArea.BackColor = System.Drawing.Color.White;
+			this.textBoxWorkArea.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.textBoxWorkArea.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxWorkArea.Location = new System.Drawing.Point(153, 99);
+			this.textBoxWorkArea.MaxLength = 200;
+			this.textBoxWorkArea.Name = "textBoxWorkArea";
+			this.textBoxWorkArea.Size = new System.Drawing.Size(350, 22);
+			this.textBoxWorkArea.TabIndex = 216;
+			// 
+			// labelZone
+			// 
+			this.labelZone.AutoSize = true;
+			this.labelZone.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelZone.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelZone.Location = new System.Drawing.Point(3, 130);
+			this.labelZone.Name = "labelZone";
+			this.labelZone.Size = new System.Drawing.Size(44, 14);
+			this.labelZone.TabIndex = 215;
+			this.labelZone.Text = "Zone:";
+			// 
+			// textBoxZone
+			// 
+			this.textBoxZone.BackColor = System.Drawing.Color.White;
+			this.textBoxZone.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.textBoxZone.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxZone.Location = new System.Drawing.Point(153, 127);
+			this.textBoxZone.MaxLength = 200;
+			this.textBoxZone.Name = "textBoxZone";
+			this.textBoxZone.Size = new System.Drawing.Size(350, 22);
+			this.textBoxZone.TabIndex = 212;
+			// 
+			// labelAccess
+			// 
+			this.labelAccess.AutoSize = true;
+			this.labelAccess.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelAccess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelAccess.Location = new System.Drawing.Point(3, 158);
+			this.labelAccess.Name = "labelAccess";
+			this.labelAccess.Size = new System.Drawing.Size(54, 14);
+			this.labelAccess.TabIndex = 214;
+			this.labelAccess.Text = "Access:";
+			// 
+			// textBoxAccess
+			// 
+			this.textBoxAccess.BackColor = System.Drawing.Color.White;
+			this.textBoxAccess.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.textBoxAccess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxAccess.Location = new System.Drawing.Point(153, 155);
+			this.textBoxAccess.MaxLength = 1000;
+			this.textBoxAccess.Multiline = true;
+			this.textBoxAccess.Name = "textBoxAccess";
+			this.textBoxAccess.Size = new System.Drawing.Size(350, 22);
+			this.textBoxAccess.TabIndex = 213;
+			// 
 			// DirectiveParametersControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this.Controls.Add(this.label6);
+			this.Controls.Add(this.textBoxWorkArea);
+			this.Controls.Add(this.labelZone);
+			this.Controls.Add(this.textBoxZone);
+			this.Controls.Add(this.labelAccess);
+			this.Controls.Add(this.textBoxAccess);
 			this.Controls.Add(this.comboBoxOrder);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.comboBoxSuperseded);
@@ -836,7 +921,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.Controls.Add(this.groupFirstPerformance);
 			this.Controls.Add(this.labelThreshold);
 			this.Name = "DirectiveParametersControl";
-			this.Size = new System.Drawing.Size(1186, 426);
+			this.Size = new System.Drawing.Size(1186, 503);
 			this.groupBoxClose.ResumeLayout(false);
 			this.groupBoxClose.PerformLayout();
 			this.groupBox_Repetative.ResumeLayout(false);
@@ -1120,6 +1205,10 @@ namespace CAS.UI.UIControls.DirectivesControls
 	        comboBoxOrder.Items.AddRange(DirectiveOrder.Items.ToArray());
 	        comboBoxOrder.SelectedItem = _currentDirective.DirectiveOrder;
 
+	        textBoxZone.Text = _currentDirective.DirectiveZone;
+	        textBoxAccess.Text = _currentDirective.DirectiveAccess;
+	        textBoxWorkArea.Text = _currentDirective.Workarea;
+
 			comboBoxWorkType.Items.Clear();
             var directiveTypes = DirectiveWorkType.Items.OrderBy(x => x.FullName).ToList();
             for (int i = 0; i < directiveTypes.Count; i++)
@@ -1210,8 +1299,11 @@ namespace CAS.UI.UIControls.DirectivesControls
 			destinationDirective.DirectiveOrder = comboBoxOrder.SelectedItem as DirectiveOrder;
             destinationDirective.KitRequired = textBoxKitRequired.Text;
             destinationDirective.IsClosed = isClosed;
+            destinationDirective.DirectiveZone = textBoxZone.Text;
+            destinationDirective.DirectiveAccess = textBoxAccess.Text;
+            destinationDirective.Workarea = textBoxWorkArea.Text;
 
-            DirectiveThreshold threshold = new DirectiveThreshold();
+			DirectiveThreshold threshold = new DirectiveThreshold();
             threshold.EffectiveDate = _effDate;
             threshold.FirstPerformanceSinceNew = new Lifelength(lifelengthViewer_SinceNew.Lifelength);
             threshold.FirstPerformanceSinceEffectiveDate = new Lifelength(lifelengthViewer_SinceEffDate.Lifelength);

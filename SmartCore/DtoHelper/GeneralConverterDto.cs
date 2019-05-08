@@ -2378,6 +2378,9 @@ namespace SmartCore.DtoHelper
 				AircraftFlight = direc.AircraftFlightId,
 				NDTType = (short)(direc.NDTType?.ItemId ?? -1),
 				DirectiveOrder = (short)(direc.DirectiveOrder?.ItemId ?? -1),
+				Zone = direc.DirectiveZone,
+				Access = direc.DirectiveAccess,
+				Workarea = direc.Workarea,
 				ComponentId = direc.ParentBaseComponent?.ItemId,
 				ATAChapterId = direc.ATAChapter?.ItemId ?? -1,
 				Files = direc.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
@@ -2417,6 +2420,9 @@ namespace SmartCore.DtoHelper
 				AircraftFlightId = direcdto.AircraftFlight ?? default(int) ,
 				NDTType = NDTType.GetItemById(direcdto.NDTType),
 				DirectiveOrder = DirectiveOrder.GetDirectiveOrderById(direcdto.DirectiveOrder),
+				DirectiveZone = direcdto.Zone,
+				DirectiveAccess = direcdto.Access,
+				Workarea = direcdto.Workarea,
 				ParentBaseComponent = direcdto.BaseComponent?.ConvertToBaseComponent(),
 				ATAChapter = direcdto.ATAChapter?.Convert()
 			};
@@ -2490,6 +2496,9 @@ namespace SmartCore.DtoHelper
 				AircraftFlight = direc.AircraftFlightId,
 				NDTType = (short)(direc.NDTType?.ItemId ?? -1),
 				DirectiveOrder = (short)(direc.DirectiveOrder?.ItemId ?? -1),
+				Zone = direc.DirectiveZone,
+				Access = direc.DirectiveAccess,
+				Workarea = direc.Workarea,
 				ComponentId = direc.ParentBaseComponent?.ItemId,
 				ATAChapterId = direc.ATAChapter?.ItemId ?? -1,
 				Files = direc.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
@@ -2533,6 +2542,9 @@ namespace SmartCore.DtoHelper
 				AircraftFlightId = direcdto.AircraftFlight ?? default(int),
 				NDTType = NDTType.GetItemById(direcdto.NDTType),
 				DirectiveOrder = DirectiveOrder.GetDirectiveOrderById(direcdto.DirectiveOrder),
+				DirectiveZone = direcdto.Zone,
+				DirectiveAccess = direcdto.Access,
+				Workarea = direcdto.Workarea,
 				ParentBaseComponent = direcdto.BaseComponent?.ConvertToBaseComponent(),
 				ATAChapter = direcdto.ATAChapter?.Convert()
 			};
@@ -2613,6 +2625,9 @@ namespace SmartCore.DtoHelper
 				AircraftFlight = direc.AircraftFlightId,
 				NDTType = (short)(direc.NDTType?.ItemId ?? -1),
 				DirectiveOrder = (short)(direc.DirectiveOrder?.ItemId ?? -1),
+				Zone = direc.DirectiveZone,
+				Access = direc.DirectiveAccess,
+				Workarea = direc.Workarea,
 				ComponentId = direc.ParentBaseComponent?.ItemId,
 				ATAChapterId = direc.ATAChapter?.ItemId ?? -1,
 				Files = direc.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
@@ -2667,6 +2682,9 @@ namespace SmartCore.DtoHelper
 				AircraftFlightId = direcdto.AircraftFlight ?? default(int),
 				NDTType = NDTType.GetItemById(direcdto.NDTType),
 				DirectiveOrder = DirectiveOrder.GetDirectiveOrderById(direcdto.DirectiveOrder),
+				DirectiveZone = direcdto.Zone,
+				DirectiveAccess = direcdto.Access,
+				Workarea = direcdto.Workarea,
 				ParentBaseComponent = direcdto.BaseComponent?.ConvertToBaseComponent(),
 				ATAChapter = direcdto.ATAChapter?.Convert()
 			};

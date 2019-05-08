@@ -24,3 +24,32 @@ if not exists ( select  *
 	alter table dbo.Directives
     add SupersededId int null 
 GO
+
+--------------------------------------------------------------------------------
+
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('dbo.Directives')
+                    and c.name = 'Zone' ) 
+
+	alter table dbo.Directives
+    add Zone nvarchar(256) null 
+GO
+
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('dbo.Directives')
+                    and c.name = 'Access' ) 
+
+	alter table dbo.Directives
+    add Access nvarchar(MAX) null 
+GO
+
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('dbo.Directives')
+                    and c.name = 'Workarea' ) 
+
+	alter table dbo.Directives
+    add Workarea nvarchar(256) null 
+GO

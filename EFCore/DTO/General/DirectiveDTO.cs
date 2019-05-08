@@ -137,6 +137,15 @@ namespace EFCore.DTO.General
 		public int? SupersededId { get; set; }
 
 		[DataMember]
+		public string Zone { get; set; }
+
+		[DataMember]
+		public string Access { get; set; }
+
+		[DataMember]
+		public string Workarea { get; set; }
+
+		[DataMember]
 		public string CorrectiveAction { get; set; }
 		[DataMember]
 		public string InspectionDocumentsNo { get; set; }

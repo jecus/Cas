@@ -202,6 +202,20 @@ namespace EFCore.DTO.General.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("SupersededId");
 
+			Property(i => i.Zone)
+				.HasMaxLength(256)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("Zone");
+
+			Property(i => i.Access)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("Access");
+
+			Property(i => i.Workarea)
+				.HasMaxLength(256)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("Workarea");
+
 			Property(i => i.CorrectiveAction)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("CorrectiveAction");
