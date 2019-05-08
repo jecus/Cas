@@ -1318,8 +1318,7 @@ namespace CAS.UI.UIControls.DirectivesControls
             destinationDirective.DirectiveAccess = textBoxAccess.Text;
             destinationDirective.Workarea = textBoxWorkArea.Text;
 
-			DirectiveThreshold threshold = new DirectiveThreshold();
-            if (comboBoxSupersedes.SelectedItem != null)
+			if (comboBoxSupersedes.SelectedItem != null)
 	            _currentDirective.SupersedesId = ((Directive) comboBoxSupersedes.SelectedItem).ItemId;
             var threshold = new DirectiveThreshold();
             threshold.EffectiveDate = _effDate;
