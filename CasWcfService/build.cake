@@ -1,3 +1,5 @@
+
+var target = Argument("target", "Build");
 ///////////////////////////////////////////////////////////////////////////////
 //	Build
 ///////////////////////////////////////////////////////////////////////////////
@@ -5,23 +7,11 @@
 Task("Build")
 	.IsDependentOn("Clenup")
 	.Does(() => {
-    	Information("Building project...");
-		  DotNetBuild("./CasWcfService.csproj");
-		
-
-}).OnError(ex => {
-    Error("Build Failed, throwing exception...");
-    throw ex; 
-});
-
-
-Task("Publish")
-	.IsDependentOn("Clenup")
-	.Does(() => {
     	Information("Publish project...");
-		
+		  //DotNetBuild("./CasWcfService.csproj", settings => settings.SetConfiguration("Release").WithProperty("OutDir", "./bin/Release"));
+
 	MSBuild("./CasWcfService.csproj", new MSBuildSettings()
-  .WithProperty("OutDir", "./bin")
+  .WithProperty("OutDir", "./bin/Publish")
   .WithProperty("DeployOnBuild", "true")
   .WithProperty("WebPublishMethod", "Package")
   .WithProperty("PackageAsSingleFile", "true")
@@ -43,4 +33,4 @@ Task("Clenup")
 			CleanDirectories("./obj");	
 		});
 		
-RunTarget("Build");		
+RunTarget(target);		
