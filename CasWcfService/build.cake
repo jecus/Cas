@@ -6,7 +6,19 @@ Task("Build")
 	.IsDependentOn("Clenup")
 	.Does(() => {
     	Information("Building project...");
-		//DotNetBuild("./CasWcfService.csproj");
+		  DotNetBuild("./CasWcfService.csproj");
+		
+
+}).OnError(ex => {
+    Error("Build Failed, throwing exception...");
+    throw ex; 
+});
+
+
+Task("Publish")
+	.IsDependentOn("Clenup")
+	.Does(() => {
+    	Information("Publish project...");
 		
 	MSBuild("./CasWcfService.csproj", new MSBuildSettings()
   .WithProperty("OutDir", "./bin")
@@ -19,7 +31,6 @@ Task("Build")
     Error("Build Failed, throwing exception...");
     throw ex; 
 });
-
 
 
 ///////////////////////////////////////////////////////////////////////////////
