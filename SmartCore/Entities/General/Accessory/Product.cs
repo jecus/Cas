@@ -154,8 +154,7 @@ namespace SmartCore.Entities.General.Accessory
 		[Filter("Alt Part Number:", Order = 2)]
 		public string AltPartNumber { get; set; }
 
-		[TableColumn("IsEffectivity")]
-		public string IsEffectivity { get; set; }
+		
 
 		#region public String SerialNumber { get; set; }
 
@@ -407,6 +406,10 @@ namespace SmartCore.Entities.General.Accessory
 			}
 		}
 		#endregion
+
+		[TableColumn("IsEffectivity")]
+		[ListViewData(0.12f, "Effectivity")]
+		public string IsEffectivity { get; set; }
 
 		#region public bool IsDangerous { get; set; }
 
