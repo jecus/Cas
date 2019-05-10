@@ -61,6 +61,7 @@ namespace SmartCore.Tests.ExcelImportExport
 					if (prod.GoodsClass == null)
 						prod.GoodsClass = GoodsClass.Items.FirstOrDefault(i => goodClass.ToLower().Contains(i.ShortName.ToLower()));
 
+					prod.Reference = row[0].ToString();
 					prod.IsEffectivity = row[7].ToString();
 					prod.Remarks = row[8].ToString();
 					prod.PartNumber = row[9].ToString();

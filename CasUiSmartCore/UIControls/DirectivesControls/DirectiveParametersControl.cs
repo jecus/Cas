@@ -114,7 +114,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 
         #region Properties
 
-        public List<Directive> Directives;
+        public List<Directive> Directives = new List<Directive>();
 
         #region public string DamageChartLocation
         /// <summary>
