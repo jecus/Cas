@@ -106,6 +106,34 @@ namespace CAS.UI.UIControls.DirectivesControls
             _currentDirective = currentDirective;
 
             UpdateInformation();
+
+            
+		}
+
+        private void Completed()
+        {
+	        comboBoxOrder.Items.Clear();
+	        comboBoxOrder.Items.AddRange(DirectiveOrder.Items.ToArray());
+	        comboBoxOrder.SelectedItem = _currentDirective.DirectiveOrder;
+
+			comboBoxSuperseded.Items.Clear();
+			comboBoxSuperseded.Items.AddRange(Directives.ToArray());
+			comboBoxSuperseded.DisplayMember = "Title";
+			if (_currentDirective.SupersededId != null)
+				comboBoxSuperseded.SelectedItem = Directives.FirstOrDefault(i => i.ItemId == _currentDirective.SupersededId);
+
+			comboBoxSupersedes.Items.Clear();
+			comboBoxSupersedes.Items.AddRange(Directives.ToArray());
+			comboBoxSupersedes.DisplayMember = "Title";
+			if (_currentDirective.SupersedesId != null)
+				comboBoxSupersedes.SelectedItem = Directives.FirstOrDefault(i => i.ItemId == _currentDirective.SupersedesId);
+		}
+
+        private void DoWork()
+        {
+	        var aircraft =
+		        GlobalObjects.AircraftsCore.GetAircraftById(_currentDirective.ParentBaseComponent.ParentAircraftId);
+	        Directives.AddRange(GlobalObjects.DirectiveCore.GetDirectives(aircraft, DirectiveType.AirworthenessDirectives));
         }
 
         #endregion
@@ -144,7 +172,25 @@ namespace CAS.UI.UIControls.DirectivesControls
             set
             {
                 _currentDirective = value;
-                UpdateInformation();
+
+                if (_currentDirective.DirectiveType == DirectiveType.AirworthenessDirectives)
+                {
+	                Task.Run(() => DoWork())
+		                .ContinueWith(task => Completed(), TaskScheduler.FromCurrentSynchronizationContext());
+				}
+                else
+                {
+	                labelSuperseded.Visible = false;
+	                labelSupersedes.Visible = false;
+	                label3.Visible = false;
+	                comboBoxSuperseded.Visible = false;
+	                comboBoxSupersedes.Visible = false;
+	                comboBoxOrder.Visible = false;
+
+                }
+                
+				UpdateInformation();
+
             }
             get
             {
@@ -1141,17 +1187,7 @@ namespace CAS.UI.UIControls.DirectivesControls
         ///</summary>
         public void UpdateControl()
         {
-			comboBoxSuperseded.Items.Clear();
-			comboBoxSuperseded.Items.AddRange(Directives.ToArray());
-			if (_currentDirective.SupersededId != null)
-				comboBoxSuperseded.SelectedItem = Directives.FirstOrDefault(i => i.ItemId == _currentDirective.SupersededId);
-
-			comboBoxSupersedes.Items.Clear();
-			comboBoxSupersedes.Items.AddRange(Directives.ToArray());
-			if (_currentDirective.SupersedesId != null)
-				comboBoxSupersedes.SelectedItem = Directives.FirstOrDefault(i => i.ItemId == _currentDirective.SupersedesId);
-
-			lookupComboboxForCompnt.DisplayerText = _currentDirective.ParentBaseComponent + ". Component Status";
+	        lookupComboboxForCompnt.DisplayerText = _currentDirective.ParentBaseComponent + ". Component Status";
             lookupComboboxForCompnt.LoadObjectsFunc = GlobalObjects.DirectiveCore.GetDirectives;
             lookupComboboxForCompnt.FilterParam1 = _currentDirective.ParentBaseComponent;
             lookupComboboxForCompnt.FilterParam2 = DirectiveType.DeferredItems;
@@ -1216,9 +1252,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			comboBoxNdt.Items.AddRange(NDTType.Items.ToArray());
 	        comboBoxNdt.SelectedItem = _currentDirective.NDTType;
 
-	        comboBoxOrder.Items.Clear();
-	        comboBoxOrder.Items.AddRange(DirectiveOrder.Items.ToArray());
-	        comboBoxOrder.SelectedItem = _currentDirective.DirectiveOrder;
 
 	        textBoxZone.Text = _currentDirective.DirectiveZone;
 	        textBoxAccess.Text = _currentDirective.DirectiveAccess;
