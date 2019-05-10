@@ -1,15 +1,17 @@
+
+var target = Argument("target", "Build");
 ///////////////////////////////////////////////////////////////////////////////
 //	Build
 ///////////////////////////////////////////////////////////////////////////////
 
 Task("Build")
-	.IsDependentOn("NuGet-Restore")
+	.IsDependentOn("Clenup")
 	.Does(() => {
-    	Information("Building project...");
-		//DotNetBuild("./CasWcfService.csproj");
-		
+    	Information("Publish project...");
+		  //DotNetBuild("./CasWcfService.csproj", settings => settings.SetConfiguration("Release").WithProperty("OutDir", "./bin/Release"));
+
 	MSBuild("./CasWcfService.csproj", new MSBuildSettings()
-  .WithProperty("OutDir", "./bin")
+  .WithProperty("OutDir", "./bin/Publish")
   .WithProperty("DeployOnBuild", "true")
   .WithProperty("WebPublishMethod", "Package")
   .WithProperty("PackageAsSingleFile", "true")
@@ -19,13 +21,6 @@ Task("Build")
     Error("Build Failed, throwing exception...");
     throw ex; 
 });
-
-Task("NuGet-Restore")
-    .IsDependentOn("Clenup")
-    .Does(() =>
-    {
-        NuGetRestore("D:/Work/GitCas/CAS.sln");
-    });
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -38,4 +33,4 @@ Task("Clenup")
 			CleanDirectories("./obj");	
 		});
 		
-RunTarget("Build");		
+RunTarget(target);		
