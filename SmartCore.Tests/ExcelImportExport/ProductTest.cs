@@ -19,7 +19,7 @@ namespace SmartCore.Tests.ExcelImportExport
 			var env = GetEnviroment();
 
 			var products = env.Loader.GetObjectList<Product>();
-			var standart = env.Loader.GetObjectList<GoodStandart>();
+			var standarts = env.Loader.GetObjectList<GoodStandart>();
 			var ata = env.Loader.GetObjectList<AtaChapter>();
 
 			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\1.xlsx");
@@ -36,8 +36,24 @@ namespace SmartCore.Tests.ExcelImportExport
 
 					prod.Description = row[1].ToString();
 
-					if(!string.IsNullOrEmpty(row[2].ToString()))
-						prod.Standart = standart.FirstOrDefault(i => i.FullName.ToLower().Contains(row[2].ToString().ToLower()));
+					if (!string.IsNullOrEmpty(row[2].ToString()))
+					{
+						var standart = standarts.FirstOrDefault(i => i.FullName.ToLower().Contains(row[2].ToString().ToLower()));
+
+						if (standart == null)
+						{
+							standart = new GoodStandart()
+							{
+								FullName = row[2].ToString(),
+								Description = row[2].ToString(),
+								PartNumber = "*"
+							};
+							env.NewKeeper.Save(standart);
+							standarts.Add(standart);
+						}
+
+						prod.Standart = standart;
+					}
 
 					prod.Name = !string.IsNullOrEmpty(row[3].ToString()) ? row[3].ToString() : "*";
 
@@ -51,7 +67,7 @@ namespace SmartCore.Tests.ExcelImportExport
 					prod.AltPartNumber = row[10].ToString();
 					prod.ATAChapter = ata.FirstOrDefault(a => a.ShortName.Equals(row[11].ToString()));
 
-					//env.Keeper.Save(prod);
+					env.Keeper.Save(prod);
 				}
 			}
 		}
