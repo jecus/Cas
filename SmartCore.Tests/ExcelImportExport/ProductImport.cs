@@ -11,7 +11,7 @@ using SmartCore.Management;
 namespace SmartCore.Tests.ExcelImportExport
 {
 	[TestClass]
-	public class ProductTest
+	public class ProductImport
 	{
 		[TestMethod]
 		public void ImportProduct()
@@ -32,9 +32,7 @@ namespace SmartCore.Tests.ExcelImportExport
 					if (prod == null)
 						prod = new Product{DescRus = "NEW"};
 
-					var goodClass = row[6].ToString();
-
-					prod.Description = row[1].ToString();
+					
 
 					if (!string.IsNullOrEmpty(row[2].ToString()))
 					{
@@ -55,13 +53,17 @@ namespace SmartCore.Tests.ExcelImportExport
 						prod.Standart = standart;
 					}
 
-					prod.Name = !string.IsNullOrEmpty(row[3].ToString()) ? row[3].ToString() : "*";
+					var goodClass = row[6].ToString().Replace('−', '-');
 
-					prod.GoodsClass = GoodsClass.Items.FirstOrDefault(i => goodClass.ToLower().Contains(i.FullName.ToLower()));
+					prod.GoodsClass = GoodsClass.Items.FirstOrDefault(i => goodClass.ToLower().Equals(i.FullName.ToLower()));
+					if (prod.GoodsClass == null)
+						prod.GoodsClass = GoodsClass.Items.FirstOrDefault(i => goodClass.ToLower().Contains(i.FullName.ToLower()));
 					if (prod.GoodsClass == null)
 						prod.GoodsClass = GoodsClass.Items.FirstOrDefault(i => goodClass.ToLower().Contains(i.ShortName.ToLower()));
 
-					prod.Reference = row[0].ToString();
+					prod.Reference = row[0].ToString().Replace('−', '-');
+					prod.Description = row[1].ToString();
+					prod.Name = !string.IsNullOrEmpty(row[3].ToString()) ? row[3].ToString() : "*";
 					prod.IsEffectivity = row[7].ToString();
 					prod.Remarks = row[8].ToString();
 					prod.PartNumber = row[9].ToString();
@@ -73,6 +75,46 @@ namespace SmartCore.Tests.ExcelImportExport
 			}
 		}
 
+
+		[TestMethod]
+		public void ImportProductStoreCIT()
+		{
+			var env = GetEnviroment();
+
+			var products = env.Loader.GetObjectList<Product>();
+			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\B737.757.767 CIT 08.05.2019 E&M.xls");
+
+			foreach (DataTable table in ds.Tables)
+			{
+				foreach (DataRow row in table.Rows)
+				{
+					var prod = products.FirstOrDefault(i => i.Name.ToLower().Equals(row[3].ToString().ToLower()));
+
+					if (prod == null)
+						prod = new Product { DescRus = "CIT EM" };
+
+					var goodClass = row[0].ToString().Replace('−', '-');
+
+					prod.GoodsClass = GoodsClass.Items.FirstOrDefault(i => goodClass.ToLower().Equals(i.FullName.ToLower()));
+					if (prod.GoodsClass == null)
+						prod.GoodsClass = GoodsClass.Items.FirstOrDefault(i => goodClass.ToLower().Contains(i.FullName.ToLower()));
+					if (prod.GoodsClass == null)
+						prod.GoodsClass = GoodsClass.Items.FirstOrDefault(i => goodClass.ToLower().Contains(i.ShortName.ToLower()));
+
+					prod.Name = !string.IsNullOrEmpty(row[4].ToString()) ? row[4].ToString() : "*";
+					prod.PartNumber = row[5].ToString();
+					prod.AltPartNumber = row[6].ToString();
+					prod.IsEffectivity = row[19].ToString();
+
+					prod.Reference = "*";
+					prod.Remarks = "*";
+					prod.Description = "*";
+					
+
+					env.Keeper.Save(prod);
+				}
+			}
+		}
 
 		private CasEnvironment GetEnviroment()
 		{

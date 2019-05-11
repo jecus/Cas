@@ -419,7 +419,7 @@ namespace SmartCore.Entities.Dictionaries
 		public static GoodsClass Strippers = new GoodsClass(86, "Strippers", "Strippers", "Strippers", ConsumableParts);
 		public static GoodsClass CleaningAgents = new GoodsClass(87, "Cleaning Agents", "Cleaning Agents", "Cleaning Agents", ConsumableParts);
 		public static GoodsClass CleanersPolishes = new GoodsClass(88, "Cleaners, Polishes", "Cleaners, Polishes", "Cleaners, Polishes", ConsumableParts);
-		public static GoodsClass BondingAngAdhesive = new GoodsClass(95, "Bonding ang Adhesive Compounds", "Bonding ang Adhesive Compounds", "Bonding ang Adhesive Compounds", ConsumableParts);
+		public static GoodsClass BondingAngAdhesive = new GoodsClass(95, "Bonding and Adhesive Compounds", "Bonding and Adhesive Compounds", "Bonding and Adhesive Compounds", ConsumableParts);
 		public static GoodsClass AdhesivesCements = new GoodsClass(96, "Adhesives, Cements, Sealants", "Adhesives, Cements, Sealants", "Adhesives, Cements, Sealants", ConsumableParts);
 
 		#endregion
@@ -451,13 +451,13 @@ namespace SmartCore.Entities.Dictionaries
 
 		#region public static GoodsClass AntiIcingAndDeIcing = new GoodsClass(70, "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", MaintenanceMaterials);
 
-		public static GoodsClass AntiIcingAndDeIcing = new GoodsClass(70, "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", MaintenanceMaterials);
+		public static GoodsClass AntiIcingAndDeIcing = new GoodsClass(70, "Anti-Icing and De-Icing Materials ANTI−ICING AND DE−ICING MATERIALS", "Anti-Icing and De-Icing Materials", "Anti-Icing and De-Icing Materials", MaintenanceMaterials);
 
 		#endregion
 
 		#region public static GoodsClass BacterialogicalProtection = new GoodsClass(71, "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", MaintenanceMaterials);
 
-		public static GoodsClass BacterialogicalProtection = new GoodsClass(71, "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", "Bacterialogical Contamination Protection", MaintenanceMaterials);
+		public static GoodsClass BacterialogicalProtection = new GoodsClass(71, "Bacteriоlogical Contamination Protection", "Bacteriоlogical Contamination Protection", "Bacteriоlogical Contamination Protection", MaintenanceMaterials);
 
 		#endregion
 

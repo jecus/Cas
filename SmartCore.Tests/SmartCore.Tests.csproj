@@ -136,7 +136,7 @@
     <Compile Include="EntityFrameTest\GeneralTest.cs" />
     <Compile Include="EntityFrameTest\PerformanceTest.cs" />
     <Compile Include="EntityFrameTest\RepositoryTest.cs" />
-    <Compile Include="ExcelImportExport\ProductTest.cs" />
+    <Compile Include="ExcelImportExport\ProductImport.cs" />
     <Compile Include="ExcelImportExport\TestStandart.cs" />
     <Compile Include="ExcelImportExport\AirportCodeConverterTest.cs" />
     <Compile Include="ExcelImportExport\ExcelImportTest.cs" />
