@@ -107,8 +107,7 @@ namespace SmartCore.Tests.ExcelImportExport
 
 					prod.Reference = "*";
 					prod.Remarks = "*";
-					prod.Description = "*";
-					
+
 
 					env.Keeper.Save(prod);
 				}
@@ -121,13 +120,13 @@ namespace SmartCore.Tests.ExcelImportExport
 		{
 			var env = GetEnviroment();
 
-			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\B737.757.767 CIT 08.05.2019 Компоненты.xls");
+			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\B737.757.767 CIT 11.05.2019 Компоненты.xls");
 
 			foreach (DataTable table in ds.Tables)
 			{
 				foreach (DataRow row in table.Rows)
 				{
-					if (string.IsNullOrEmpty(row[1].ToString()) && string.IsNullOrEmpty(row[2].ToString()) && string.IsNullOrEmpty(row[3].ToString()))
+					if (string.IsNullOrEmpty(row[1].ToString()) && string.IsNullOrEmpty(row[4].ToString()) && string.IsNullOrEmpty(row[5].ToString()))
 						continue;
 
 					var model = new ComponentModel { DescRus = "CIT Comp" };
@@ -140,15 +139,14 @@ namespace SmartCore.Tests.ExcelImportExport
 					if (model.GoodsClass == null)
 						model.GoodsClass = GoodsClass.Items.FirstOrDefault(i => goodClass.ToLower().Contains(i.ShortName.ToLower()));
 
-					model.Name = !string.IsNullOrEmpty(row[1].ToString()) ? row[1].ToString() : "*";
+					model.Name = !string.IsNullOrEmpty(row[4].ToString()) ? row[4].ToString() : "*";
 					model.Description = model.Name;
-					model.PartNumber = row[2].ToString();
-					model.AltPartNumber = row[3].ToString();
-					model.IsEffectivity = row[4].ToString();
+					model.PartNumber = row[5].ToString();
+					model.AltPartNumber = row[6].ToString();
+					model.IsEffectivity = row[19].ToString();
 
 					model.Reference = "*";
 					model.Remarks = "*";
-					model.Description = "*";
 
 
 					env.Keeper.Save(model);
