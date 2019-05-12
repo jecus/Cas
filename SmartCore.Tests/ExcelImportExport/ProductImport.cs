@@ -43,7 +43,7 @@ namespace SmartCore.Tests.ExcelImportExport
 							standart = new GoodStandart()
 							{
 								FullName = row[2].ToString(),
-								Description = row[2].ToString(),
+								Description = row[1].ToString(),
 								PartNumber = "*"
 							};
 							env.NewKeeper.Save(standart);
@@ -81,17 +81,16 @@ namespace SmartCore.Tests.ExcelImportExport
 		{
 			var env = GetEnviroment();
 
-			var products = env.Loader.GetObjectList<Product>();
 			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\B737.757.767 CIT 08.05.2019 E&M.xls");
 
 			foreach (DataTable table in ds.Tables)
 			{
 				foreach (DataRow row in table.Rows)
 				{
-					var prod = products.FirstOrDefault(i => i.Name.ToLower().Equals(row[3].ToString().ToLower()));
+					if(string.IsNullOrEmpty(row[4].ToString()) && string.IsNullOrEmpty(row[5].ToString()) && string.IsNullOrEmpty(row[6].ToString()))
+						continue;
 
-					if (prod == null)
-						prod = new Product { DescRus = "CIT EM" };
+					var prod = new Product { DescRus = "CIT EM" };
 
 					var goodClass = row[0].ToString().Replace('−', '-');
 
@@ -115,6 +114,48 @@ namespace SmartCore.Tests.ExcelImportExport
 				}
 			}
 		}
+
+
+		[TestMethod]
+		public void ImportComponentStoreCIT()
+		{
+			var env = GetEnviroment();
+
+			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\B737.757.767 CIT 08.05.2019 Компоненты.xls");
+
+			foreach (DataTable table in ds.Tables)
+			{
+				foreach (DataRow row in table.Rows)
+				{
+					if (string.IsNullOrEmpty(row[1].ToString()) && string.IsNullOrEmpty(row[2].ToString()) && string.IsNullOrEmpty(row[3].ToString()))
+						continue;
+
+					var model = new ComponentModel { DescRus = "CIT Comp" };
+
+					var goodClass = row[0].ToString().Replace('−', '-');
+
+					model.GoodsClass = GoodsClass.Items.FirstOrDefault(i => goodClass.ToLower().Equals(i.FullName.ToLower()));
+					if (model.GoodsClass == null)
+						model.GoodsClass = GoodsClass.Items.FirstOrDefault(i => goodClass.ToLower().Contains(i.FullName.ToLower()));
+					if (model.GoodsClass == null)
+						model.GoodsClass = GoodsClass.Items.FirstOrDefault(i => goodClass.ToLower().Contains(i.ShortName.ToLower()));
+
+					model.Name = !string.IsNullOrEmpty(row[1].ToString()) ? row[1].ToString() : "*";
+					model.Description = model.Name;
+					model.PartNumber = row[2].ToString();
+					model.AltPartNumber = row[3].ToString();
+					model.IsEffectivity = row[4].ToString();
+
+					model.Reference = "*";
+					model.Remarks = "*";
+					model.Description = "*";
+
+
+					env.Keeper.Save(model);
+				}
+			}
+		}
+
 
 		private CasEnvironment GetEnviroment()
 		{
