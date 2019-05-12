@@ -74,7 +74,8 @@ namespace CAS.UI.UIControls.AircraftsControls
             this.LinkNonRoutineJobsCategories = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             this.LinkNonRoutineJobs = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             this.ContainerPlanning = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
-            this.LinkATLBs = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+            this.LinkATLBEvent = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+			this.LinkATLBs = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             this.LinkRegisterFlight = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             this.LinkRegisterFlightLight = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             this.LinkAverageUtilization = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -1000,16 +1001,16 @@ namespace CAS.UI.UIControls.AircraftsControls
             this.ContainerPlanning.Location = new System.Drawing.Point(2, 296);
             this.ContainerPlanning.Margin = new System.Windows.Forms.Padding(2);
             this.ContainerPlanning.Name = "ContainerPlanning";
-            this.ContainerPlanning.ReferenceLink = this.LinkATLBs;
-            this.ContainerPlanning.ReferenceLink02 = this.LinkRegisterFlight;
-            this.ContainerPlanning.ReferenceLink03 = this.LinkRegisterFlightLight;
-            this.ContainerPlanning.ReferenceLink04 = this.LinkAverageUtilization;
-            this.ContainerPlanning.ReferenceLink05 = this.LinkForecast;
-            this.ContainerPlanning.ReferenceLink06 = this.LinkForecastMtop;
-            this.ContainerPlanning.ReferenceLink07 = this.LinkForecastKits;
-            this.ContainerPlanning.ReferenceLink08 = this.LinkMonthlyUtilization;
-            this.ContainerPlanning.ReferenceLink09 = this.LinkWorkPackages;
-            this.ContainerPlanning.ReferenceLink10 = null;
+            this.ContainerPlanning.ReferenceLink = this.LinkATLBEvent;
+            this.ContainerPlanning.ReferenceLink02 = this.LinkATLBs;
+            this.ContainerPlanning.ReferenceLink03 = this.LinkRegisterFlight;
+            this.ContainerPlanning.ReferenceLink04 = this.LinkRegisterFlightLight;
+            this.ContainerPlanning.ReferenceLink05 = this.LinkAverageUtilization;
+            this.ContainerPlanning.ReferenceLink06 = this.LinkForecast;
+            this.ContainerPlanning.ReferenceLink07 = this.LinkForecastMtop;
+            this.ContainerPlanning.ReferenceLink08 = this.LinkForecastKits;
+            this.ContainerPlanning.ReferenceLink09 = this.LinkMonthlyUtilization;
+            this.ContainerPlanning.ReferenceLink10 = this.LinkWorkPackages;
             this.ContainerPlanning.ReferenceLink11 = null;
             this.ContainerPlanning.ReferenceLink12 = null;
             this.ContainerPlanning.ReferenceLink13 = null;
@@ -1020,9 +1021,33 @@ namespace CAS.UI.UIControls.AircraftsControls
             this.ContainerPlanning.TabIndex = 23;
             this.ContainerPlanning.UpperLeftIcon = ((System.Drawing.Image)(resources.GetObject("ContainerPlanning.UpperLeftIcon")));
             // 
-            // LinkATLBs
+            // AllATLB
             // 
-            this.LinkATLBs.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkATLBEvent.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkATLBEvent.Displayer = null;
+            this.LinkATLBEvent.DisplayerText = null;
+            this.LinkATLBEvent.Entity = null;
+            this.LinkATLBEvent.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.LinkATLBEvent.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkATLBEvent.ImageBackColor = System.Drawing.Color.Transparent;
+            this.LinkATLBEvent.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.LinkATLBEvent.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkATLBEvent.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+            this.LinkATLBEvent.Location = new System.Drawing.Point(10, 0);
+            this.LinkATLBEvent.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.LinkATLBEvent.Name = "ATLBEvent";
+            this.LinkATLBEvent.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+            this.LinkATLBEvent.Size = new System.Drawing.Size(188, 20);
+            this.LinkATLBEvent.Status = AvControls.Statuses.Satisfactory;
+            this.LinkATLBEvent.TabIndex = 2;
+            this.LinkATLBEvent.Text = "ATLB Event";
+            this.LinkATLBEvent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.LinkATLBEvent.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+            this.LinkATLBEvent.DisplayerRequested += AllATLB_DisplayerRequested;
+			// 
+			// LinkATLBs
+			// 
+			this.LinkATLBs.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
             this.LinkATLBs.Displayer = null;
             this.LinkATLBs.DisplayerText = null;
             this.LinkATLBs.Entity = null;
@@ -1565,7 +1590,8 @@ namespace CAS.UI.UIControls.AircraftsControls
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkNonRoutineJobs;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkATLBs;
         private ReferenceControls.ReferenceLinkLabelCollectionContainer ContainerPlanning;
-        private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRegisterFlight;
+        private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkATLBEvent;
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRegisterFlight;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRegisterFlightLight;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkAverageUtilization;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkMonthlyUtilization;
