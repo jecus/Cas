@@ -82,7 +82,6 @@ namespace CAS.UI.UIControls.FiltersControls
 			this.panelMain.AutoSize = true;
 			this.panelMain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.panelMain.Location = new System.Drawing.Point(3, 3);
-			this.panelMain.MaximumSize = new System.Drawing.Size(0, 920);
 			this.panelMain.MinimumSize = new System.Drawing.Size(400, 120);
 			this.panelMain.Name = "panelMain";
 			this.panelMain.Size = new System.Drawing.Size(400, 120);
@@ -166,7 +165,6 @@ namespace CAS.UI.UIControls.FiltersControls
 			this.ClientSize = new System.Drawing.Size(406, 236);
 			this.Controls.Add(this.flowLayoutPanel1);
 			this.MaximizeBox = false;
-			this.MaximumSize = new System.Drawing.Size(1280, 768);
 			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(285, 165);
 			this.Name = "CommonFilterForm";
