@@ -337,7 +337,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.Activity.Text = "Activity";
 			this.Activity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.Activity.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
-			this.Activity.DisplayerRequested += Activity_DisplayerRequested; ;
+			this.Activity.DisplayerRequested += Activity_DisplayerRequested;
 			// 
 			// Users
 			// 

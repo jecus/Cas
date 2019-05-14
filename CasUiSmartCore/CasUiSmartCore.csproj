@@ -887,6 +887,12 @@
     <Compile Include="UIControls\AnimatedBackgroundWorker\LoadingFormNew.Designer.cs">
       <DependentUpon>LoadingFormNew.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\ATLBEvent\AllATLBListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ATLBEvent\AllATLBListScreen.Designer.cs">
+      <DependentUpon>AllATLBListScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\Auxiliary\DataGridViewElements\DataGridViewLookupCell.cs" />
     <Compile Include="UIControls\Auxiliary\DataGridViewElements\DataGridViewLookupColumn.cs" />
     <Compile Include="UIControls\Auxiliary\DataGridViewElements\DataGridViewCalendarEditingControl.cs">
@@ -3872,6 +3878,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\AnimatedBackgroundWorker\LoadingFormNew.resx">
       <DependentUpon>LoadingFormNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ATLBEvent\AllATLBListScreen.resx">
+      <DependentUpon>AllATLBListScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\Auxiliary\TestControl.resx">
       <DependentUpon>TestControl.cs</DependentUpon>

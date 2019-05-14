@@ -898,9 +898,17 @@ namespace SmartCore.AircraftFlights
 
 		#region public IList<ATLB> GetATLBsByAircraftId(int aircraftId, bool loadChild = false)
 
-		public IList<ATLB> GetATLBsByAircraftId(int aircraftId, bool loadChild = false)
+		public IList<ATLB> GetATLBsByAircraftId(int aircraftId, bool loadChild = false, bool onlyOpened = false)
 		{
-			return _newLoader.GetObjectList<ATLBDTO,ATLB>(new Filter("AircraftID", aircraftId), loadChild);
+			var filter = new List<Filter>
+			{
+				new Filter("AircraftID", aircraftId),
+				
+			};
+			if (onlyOpened)
+				filter.Add(new Filter("AtlbStatus", 0));
+			
+			return _newLoader.GetObjectList<ATLBDTO,ATLB>(filter, loadChild);
 		}
 
 		#endregion

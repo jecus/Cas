@@ -38,7 +38,7 @@ namespace SmartCore.AircraftFlights
 		AircraftFlightCollection GetFlightsByAtlb(params object[] parametres);
 
 		List<AircraftFlight> GetFlightWithPageNum(int aircraftId, string pageNum, int atlbId);
-		IList<ATLB> GetATLBsByAircraftId(int aircraftId, bool loadChild = false);
+		IList<ATLB> GetATLBsByAircraftId(int aircraftId, bool loadChild = false, bool onlyOpened = false);
 
 		FlightNumber GetFlightNumberById(int itemId, bool loadChild);
 

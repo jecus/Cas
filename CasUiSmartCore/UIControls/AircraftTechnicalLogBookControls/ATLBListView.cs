@@ -5,6 +5,7 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using SmartCore.Auxiliary;
+using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Atlbs;
 
@@ -25,10 +26,13 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         #region private ATLBListView()
         ///<summary>
         ///</summary>
-        private ATLBListView()
+        public ATLBListView()
         {
             InitializeComponent();
-        }
+
+            OldColumnIndex = 2;
+            SortMultiplier = 1;
+		}
         #endregion
 
         #region public ATLBListView(Aircraft parentAircraft) : this()
@@ -41,17 +45,17 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             SortMultiplier = 1;
             _parentAircraft = parentAircraft;
         }
-        #endregion
+		#endregion
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region protected override void SetHeaders()
-        /// <summary>
-        /// Устанавливает заголовки
-        /// </summary>
-        protected override void SetHeaders()
+		#region protected override void SetHeaders()
+		/// <summary>
+		/// Устанавливает заголовки
+		/// </summary>
+		protected override void SetHeaders()
         {
             itemsListView.Columns.Clear();
             ColumnHeaderList.Clear();
@@ -77,9 +81,16 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(ATLB item)
         {
             var subItems = new ListViewItem.ListViewSubItem[4];
-
-	        var flights = GlobalObjects.AircraftFlightsCore.GetAircraftFlightsByAircraftId(_parentAircraft.ItemId);
-
+            AircraftFlightCollection flights;
+            if (_parentAircraft != null)
+            {
+				flights = GlobalObjects.AircraftFlightsCore.GetAircraftFlightsByAircraftId(_parentAircraft.ItemId);
+			}
+            else
+            {
+				flights = GlobalObjects.AircraftFlightsCore.GetAircraftFlightsByAircraftId(item.ParentAircraftId);
+			}
+	        
 			var first = flights.GetFirstFlightInAtlb(item.ItemId);
             var last = flights.GetLastFlightInAtlb(item.ItemId);
             var pages = (first != null && first.PageNo != "" ? first.PageNo : "XXX") + " - " +
