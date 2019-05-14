@@ -115,13 +115,37 @@ namespace SmartCore.Entities.Dictionaries
         /// </summary>
         public static Measure Quart = new Measure(46, "Qrt", "Quart", MeasureCategory.Volume);
 
-        #endregion
+		#endregion
 
-        #region public static Measure KgCm2 = new Measure(51, "KgCm2", "Kg/Cm2", MeasureCategory.Pressure);
-        /// <summary>
-        /// Килограмм на квадратный сантиметр
-        /// </summary>
-        public static Measure KgCm2 = new Measure(51, "KgCm2", "Kg/Cm2", MeasureCategory.Pressure);
+		#region public static Measure Can = new Measure(47, "Can", "Can", MeasureCategory.Volume);
+
+		public static Measure Can = new Measure(47, "Can", "Can", MeasureCategory.Volume);
+
+		#endregion
+
+		#region public static Measure Tube = new Measure(48, "Tube", "Tube", MeasureCategory.Volume);
+
+		public static Measure Tube = new Measure(48, "Tube", "Tube", MeasureCategory.Volume);
+
+		#endregion
+
+		#region public static Measure Botle = new Measure(49, "Botle", "Botle", MeasureCategory.Volume);
+		
+		public static Measure Botle = new Measure(49, "Botle", "Botle", MeasureCategory.Volume);
+
+		#endregion
+
+		#region public static Measure Box = new Measure(50, "Box", "Box", MeasureCategory.Volume);
+		
+		public static Measure Box = new Measure(50, "Box", "Box", MeasureCategory.Volume);
+
+		#endregion
+
+		#region public static Measure KgCm2 = new Measure(51, "KgCm2", "Kg/Cm2", MeasureCategory.Pressure);
+		/// <summary>
+		/// Килограмм на квадратный сантиметр
+		/// </summary>
+		public static Measure KgCm2 = new Measure(51, "KgCm2", "Kg/Cm2", MeasureCategory.Pressure);
 		#endregion
 
 
