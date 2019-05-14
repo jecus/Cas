@@ -934,7 +934,7 @@ namespace CAS.UI.UIControls.FiltersControls
 				}
 				//Задаем размеры панели : у ширины отнимаем 20 чтобы влезла полоса прокрутки , а у высоты 85 чтобы влезла панель с кнопками
 				panelMain.Width = Width - 20;
-				panelMain.Height = Height - 85;
+				panelMain.Height = Height - 105;
 
 			}
 

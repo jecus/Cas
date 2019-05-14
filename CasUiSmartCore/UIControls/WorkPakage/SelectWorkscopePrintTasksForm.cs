@@ -906,7 +906,7 @@ namespace CAS.UI.UIControls.WorkPakage
 
             //Save();
 
-            //DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.OK;
             //Close();
         }
         #endregion
