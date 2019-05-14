@@ -155,9 +155,9 @@ namespace CAS.UI.UIControls.WorkPakage
 			_currentWp.PerfAfter.AirportFrom = (AirportsCodes) lookupComboboxFrom.SelectedItem;
 			_currentWp.PerfAfter.AirportTo = (AirportsCodes) lookupComboboxTo.SelectedItem;
 
-			_currentWp.PerfAfter.FlightNumId = _currentWp.PerfAfter.FlightNum.ItemId;
-			_currentWp.PerfAfter.AirportFromId = _currentWp.PerfAfter.AirportFrom.ItemId;
-			_currentWp.PerfAfter.AirportToId = _currentWp.PerfAfter.AirportTo.ItemId;
+			_currentWp.PerfAfter.FlightNumId = _currentWp.PerfAfter.FlightNum?.ItemId ?? -1;
+			_currentWp.PerfAfter.AirportFromId = _currentWp.PerfAfter.AirportFrom?.ItemId ?? -1;
+			_currentWp.PerfAfter.AirportToId = _currentWp.PerfAfter.AirportTo?.ItemId ?? -1;
 
 			_currentWp.PerfAfter.PerformDate = dateTimePickerFlightDate.Value;
 		}
