@@ -134,6 +134,8 @@ namespace CAS.UI.UIControls.StoresControls
 			comboBoxStandart.Type = typeof(GoodStandart);
 			comboBoxMeasure.Items.Clear();
 			comboBoxMeasure.Items.AddRange(Measure.GetByCategories(new[] {MeasureCategory.Mass, MeasureCategory.EconomicEntity, MeasureCategory.Volume, }));
+			comboBoxMeasure.Items.Add(Measure.Centimeters);
+			comboBoxMeasure.Items.Add(Measure.SquareMeter);
 			comboBoxStatus.Items.Clear();
 			foreach (object o in Enum.GetValues(typeof(ComponentStatus)))
 				comboBoxStatus.Items.Add(o);
