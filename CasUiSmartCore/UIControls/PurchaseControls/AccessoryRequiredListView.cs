@@ -112,7 +112,10 @@ namespace CAS.UI.UIControls.PurchaseControls
 			itemsListView.Columns.Clear();
 			ColumnHeaderList.Clear();
 
-			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Standart" };
+			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Reference" };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Standart" };
 			ColumnHeaderList.Add(columnHeader);
 
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Part Number" };
@@ -182,7 +185,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 			var quantityString = $"{quantity} {item.Measure.ShortName}";
 			var taskQuantity = Math.Round(item.TaskQuantity, 2).ToString();
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var reference = item.Product?.Reference;
 
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = reference, Tag = reference });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = standart, Tag = standart });
 		    subItems.Add(new ListViewItem.ListViewSubItem { Text = item.PartNumber, Tag = item.PartNumber });
 		    subItems.Add(new ListViewItem.ListViewSubItem { Text = product, Tag = product });

@@ -72,13 +72,13 @@ namespace CAS.UI.UIControls.PurchaseControls
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Reference" };
             ColumnHeaderList.Add(columnHeader);
 
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Product Code" };
-            ColumnHeaderList.Add(columnHeader);
-
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Suppliers" };
             ColumnHeaderList.Add(columnHeader);
+			
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Code" };
+            ColumnHeaderList.Add(columnHeader);
 
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "ATA" };
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "ATA" };
             ColumnHeaderList.Add(columnHeader);
 
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Class" };
@@ -107,9 +107,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Standart?.ToString(), Tag = item.Standart });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Description, Tag = item.Description });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Reference, Tag = item.Reference });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Code, Tag = item.Code });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Suppliers?.ToString(), Tag = item.Suppliers });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ATAChapter?.ToString(), Tag = item.ATAChapter });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Code, Tag = item.Code });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ATAChapter?.ToString(), Tag = item.ATAChapter });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.GoodsClass?.ToString(), Tag = item.GoodsClass });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.IsDangerous.ToString(), Tag = item.IsDangerous });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Remarks, Tag = item.Remarks });

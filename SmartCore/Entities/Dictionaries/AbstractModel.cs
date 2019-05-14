@@ -123,7 +123,7 @@ namespace SmartCore.Entities.Dictionaries
         /// </summary>
         [TableColumn("FullName")]
         [FormControl(150, "Full Name", 1, Order = 5)]
-        [ListViewData(0.2f, "Full Name", 4)]
+        //[ListViewData(0.2f, "Full Name", 4)]
         [NotNull]
         public string FullName
         {
@@ -153,7 +153,7 @@ namespace SmartCore.Entities.Dictionaries
         /// </summary>
         [TableColumn("ShortName")]
         [FormControl(150, "Short Name", Order =6)]
-        [ListViewData(0.08f, "Short Name",5)]
+        //[ListViewData(0.08f, "Short Name",5)]
         [NotNull]
         public string ShortName
         {
@@ -225,7 +225,7 @@ namespace SmartCore.Entities.Dictionaries
         /// </summary>
         [TableColumn("Designer")]
         [FormControl(150, "Designer", 1, Order = 7)]
-        [ListViewData(0.1f, "Designer")]
+        //[ListViewData(0.1f, "Designer")]
         [NotNull]
         public string Designer
         {
@@ -283,7 +283,7 @@ namespace SmartCore.Entities.Dictionaries
         /// </summary>
         [TableColumn("ModelingObjectSubTypeId")]
         [FormControl(150, "Manufacture Region", Order = 9)]
-        [ListViewData(0.1f, "Manufacture Region")]
+        //[ListViewData(0.1f, "Manufacture Region")]
         [NotNull]
         public ManufactureRegion ManufactureReg
         {

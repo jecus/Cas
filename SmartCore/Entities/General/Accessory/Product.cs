@@ -47,7 +47,7 @@ namespace SmartCore.Entities.General.Accessory
 			}, Order = 10)]
         [ListViewData(0.15f, "Class")]
         [NotNull]
-        [Filter("Class:", Order = 10)]
+        [Filter("Class:", Order = 11)]
 
         public GoodsClass GoodsClass
         {
@@ -68,7 +68,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		[TableColumn("AtaChapter")]
 		[ListViewData(0.12f, "ATA")]
-		[Filter("ATA:", Order = 11)]
+		[Filter("ATA:", Order = 12)]
 		public AtaChapter ATAChapter { get; set; }
 
 		#endregion
@@ -89,7 +89,7 @@ namespace SmartCore.Entities.General.Accessory
         /// </summary>
         [TableColumn("Standart"), ListViewData(0.12f, "Standard", 11)]
         [FormControl(200, "Standard:", Order = 3)]
-        [Filter("Standard:",Order = 12)]
+        [Filter("Standard:",Order = 13)]
         [Child(false)]
         public GoodStandart Standart
         {
@@ -200,7 +200,7 @@ namespace SmartCore.Entities.General.Accessory
         /// <summary>
         /// 
         /// </summary>
-        [TableColumn("Code"), ListViewData(0.12f, "Product Code", 15)]
+        [TableColumn("Code"), ListViewData(0.12f, "Code", 19)]
         [FormControl(200, "Product Code:", Order = 4)]
         public String Code { get; set; }
 
@@ -409,13 +409,14 @@ namespace SmartCore.Entities.General.Accessory
 
 		[TableColumn("IsEffectivity")]
 		[ListViewData(0.12f, "Effectivity")]
+		[Filter("Effectivity:", Order = 8)]
 		public string IsEffectivity { get; set; }
 
 		#region public bool IsDangerous { get; set; }
 
 		[TableColumn("IsDangerous"), ListViewData(0.12f, "IsDangerous")]
 		[FormControl(250, "IsDangerous:", 8, Order = 25)]
-		[Filter("IsDangerous:", Order = 8)]
+		[Filter("IsDangerous:", Order = 9)]
 		public bool IsDangerous { get; set; }
 		#endregion
 
@@ -427,7 +428,7 @@ namespace SmartCore.Entities.General.Accessory
         /// </summary>
         [ListViewData(0.12f, "Suppliers", 18)]
         [Child(typeof(KitSuppliersRelation), "KitId", "ParentTypeId", 1005, "SupplierId")]
-        [Filter("Supplier:", Order = 9)]
+        [Filter("Supplier:", Order = 10)]
         public SupplierCollection Suppliers
         {
             get { return _suppliers ?? (_suppliers = new SupplierCollection()); }
