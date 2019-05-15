@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
 using EFCore.DTO.Dictionaries;
+using EFCore.DTO.General;
 using EFCore.Filter;
 using MetroFramework.Forms;
 using SmartCore.Auxiliary;
@@ -62,8 +65,10 @@ namespace CAS.UI.UIControls.StoresControls
 		{
 			_consumablePart = consumablePart;
 			_isStore = GlobalObjects.StoreCore.GetStoreById(consumablePart.ParentStoreId) != null;
-			FillControls();
+			Task.Run(() => DoWork())
+				.ContinueWith(task => FillControls(), TaskScheduler.FromCurrentSynchronizationContext());
 		}
+
 		#endregion
 
 		#region public ConsumablePartAndKitForm(Store store) : this()
@@ -82,6 +87,21 @@ namespace CAS.UI.UIControls.StoresControls
 		#endregion
 
 		#region Methods
+
+		private void DoWork()
+		{
+			var documents = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<DocumentDTO, Document>(new []
+			{
+				new Filter("ParentID",_consumablePart.ItemId), 
+				new Filter("DocTypeId", DocumentType.StoreRecord.ItemId), 
+			});
+
+			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Component CRS Form") as DocumentSubType;
+			_consumablePart.DocumentFaa = documents.FirstOrDefault(i => i.DocumentSubType.ItemId == docSubType.ItemId);
+
+			docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Shipping document") as DocumentSubType;
+			_consumablePart.DocumentShipping = documents.FirstOrDefault(i => i.DocumentSubType.ItemId == docSubType.ItemId);
+		}
 
 		#region private void FillControls()
 		/// <summary>
@@ -178,16 +198,6 @@ namespace CAS.UI.UIControls.StoresControls
 			checkBoxDangerous.Checked = _consumablePart.IsDangerous;
 
 
-			fileControlFaaForm.UpdateInfo(_consumablePart.FaaFormFile,
-				"Adobe PDF Files|*.pdf",
-				"This record does not contain a file proving the FAA File. Enclose PDF file to prove the compliance.",
-				"Attached file proves the FAA File.");
-
-			fileControlShipping.UpdateInfo(_consumablePart.IncomingFile,
-				"Adobe PDF Files|*.pdf",
-				"This record does not contain a file proving the Shipping File. Enclose PDF file to prove the compliance.",
-				"Attached file proves the Shipping File.");
-
 			comboBoxSupplier.Enabled = dateTimePickerReciveDate.Enabled = _isStore;
 
 			Product product;
@@ -247,9 +257,18 @@ namespace CAS.UI.UIControls.StoresControls
 				State = record.State;
 				dateTimePickerInstallDate.Value = record.TransferDate;
 				dateTimePickerManufactureDate.Value = _consumablePart.ManufactureDate;
+
+
+				documentControlFaa.CurrentDocument = _consumablePart.DocumentFaa;
+				documentControlFaa.Added += DocumentControlFaa_Added;
+				documentControlShip.CurrentDocument = _consumablePart.DocumentShipping;
+				documentControlShip.Added += DocumentControlShip_Added;
 			}
 			else
 			{
+				documentControlFaa.Enabled = false;
+				documentControlShip.Enabled = false;
+
 				buttonSaveAndAdd.Visible = true;
 				State = ComponentStorePosition.Serviceable;
 				dateTimePickerManufactureDate.Value = DateTime.Today;
@@ -332,9 +351,7 @@ namespace CAS.UI.UIControls.StoresControls
 				      checkBoxIncoming.Checked != obj.Incoming ||
 				      checkBoxPOOL.Checked != obj.IsPOOL ||
 				      checkBoxDangerous.Checked != obj.IsDangerous ||
-				      textBoxDiscrepancy.Text != obj.Discrepancy ||
-				      fileControlFaaForm.GetChangeStatus() ||
-				      fileControlShipping.GetChangeStatus()))
+				      textBoxDiscrepancy.Text != obj.Discrepancy))
 			{
 				return true;
 			}
@@ -425,17 +442,6 @@ namespace CAS.UI.UIControls.StoresControls
 				return false;
 			}
 
-			string validateFiles;
-			if (!fileControlFaaForm.ValidateData(out validateFiles))
-			{
-				if (message != "") message += "\n ";
-				message += "FAA File: " + validateFiles;
-			}
-			if (!fileControlShipping.ValidateData(out validateFiles))
-			{
-				if (message != "") message += "\n ";
-				message += "Shipping File: " + validateFiles;
-			}
 			return true;
 		}
 
@@ -489,11 +495,6 @@ namespace CAS.UI.UIControls.StoresControls
 			obj.FromSupplier = comboBoxSupplier.SelectedItem as Supplier;
 			obj.FromSupplierReciveDate = dateTimePickerReciveDate.Value;
 
-			fileControlFaaForm.ApplyChanges();
-			obj.FaaFormFile = fileControlFaaForm.AttachedFile;
-
-			fileControlShipping.ApplyChanges();
-			obj.IncomingFile = fileControlShipping.AttachedFile;
 
 			dataGridViewControlSuppliers.ApplyChanges(true);
 
@@ -1244,5 +1245,49 @@ namespace CAS.UI.UIControls.StoresControls
 		}
 
 		#endregion
+
+		private void DocumentControlShip_Added(object sender, EventArgs e)
+		{
+			var control = sender as DocumentControl;
+			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Shipping document") as DocumentSubType;
+			var newDocument = new Document
+			{
+				Parent = _consumablePart,
+				ParentId = _consumablePart.ItemId,
+				ParentTypeId = _consumablePart.SmartCoreObjectType.ItemId,
+				DocType = DocumentType.StoreRecord,
+				DocumentSubType = docSubType,
+				IsClosed = true,
+				ContractNumber = $"{_consumablePart.ToString()}",
+				Description = _consumablePart.PartNumber,
+				ParentAircraftId = _consumablePart.ParentAircraftId
+			};
+
+			var form = new DocumentForm(newDocument, false);
+			if (form.ShowDialog() == DialogResult.OK)
+				control.CurrentDocument = newDocument;
+		}
+
+		private void DocumentControlFaa_Added(object sender, EventArgs e)
+		{
+			var control = sender as DocumentControl;
+			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Component CRS Form") as DocumentSubType;
+			var newDocument = new Document
+			{
+				Parent = _consumablePart,
+				ParentId = _consumablePart.ItemId,
+				ParentTypeId = _consumablePart.SmartCoreObjectType.ItemId,
+				DocType = DocumentType.StoreRecord,
+				DocumentSubType = docSubType,
+				IsClosed = true,
+				ContractNumber = $"{_consumablePart.ToString()}",
+				Description = _consumablePart.PartNumber,
+				ParentAircraftId = _consumablePart.ParentAircraftId
+			};
+
+			var form = new DocumentForm(newDocument, false);
+			if (form.ShowDialog() == DialogResult.OK)
+				control.CurrentDocument = newDocument;
+		}
 	}
 }

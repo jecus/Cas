@@ -87,8 +87,6 @@ namespace CAS.UI.UIControls.StoresControls
 			this.label4 = new MetroFramework.Controls.MetroLabel();
 			this.labelIamge = new MetroFramework.Controls.MetroLabel();
 			this.fileControlImage = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
-			this.fileControlShipping = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
-			this.fileControlFaaForm = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
 			this.ataChapterComboBox = new CAS.UI.UIControls.Auxiliary.ATAChapterComboBox();
 			this.dictionaryComboBoxLocation = new CAS.UI.UIControls.Auxiliary.DictionaryComboBox();
 			this.dataGridViewControlSuppliers = new CAS.UI.UIControls.Auxiliary.CommonDataGridViewControl();
@@ -106,6 +104,8 @@ namespace CAS.UI.UIControls.StoresControls
 			this.label2 = new MetroFramework.Controls.MetroLabel();
 			this.labelAltpartNum = new MetroFramework.Controls.MetroLabel();
 			this.textBoxAltPartNum = new MetroFramework.Controls.MetroTextBox();
+			this.documentControlFaa = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
+			this.documentControlShip = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -848,38 +848,6 @@ namespace CAS.UI.UIControls.StoresControls
 			this.fileControlImage.Size = new System.Drawing.Size(201, 37);
 			this.fileControlImage.TabIndex = 139;
 			// 
-			// fileControlShipping
-			// 
-			this.fileControlShipping.AutoSize = true;
-			this.fileControlShipping.Description1 = "";
-			this.fileControlShipping.Description2 = "";
-			this.fileControlShipping.Filter = null;
-			this.fileControlShipping.Icon = global::CAS.UI.Properties.Resources.PDFIconSmall;
-			this.fileControlShipping.IconNotEnabled = global::CAS.UI.Properties.Resources.PDFIconSmall_gray;
-			this.fileControlShipping.Location = new System.Drawing.Point(409, 421);
-			this.fileControlShipping.MaximumSize = new System.Drawing.Size(350, 100);
-			this.fileControlShipping.Name = "fileControlShipping";
-			this.fileControlShipping.ShowLinkLabelBrowse = true;
-			this.fileControlShipping.ShowLinkLabelRemove = false;
-			this.fileControlShipping.Size = new System.Drawing.Size(201, 37);
-			this.fileControlShipping.TabIndex = 138;
-			// 
-			// fileControlFaaForm
-			// 
-			this.fileControlFaaForm.AutoSize = true;
-			this.fileControlFaaForm.Description1 = "";
-			this.fileControlFaaForm.Description2 = "";
-			this.fileControlFaaForm.Filter = null;
-			this.fileControlFaaForm.Icon = global::CAS.UI.Properties.Resources.PDFIconSmall;
-			this.fileControlFaaForm.IconNotEnabled = global::CAS.UI.Properties.Resources.PDFIconSmall_gray;
-			this.fileControlFaaForm.Location = new System.Drawing.Point(118, 421);
-			this.fileControlFaaForm.MaximumSize = new System.Drawing.Size(350, 100);
-			this.fileControlFaaForm.Name = "fileControlFaaForm";
-			this.fileControlFaaForm.ShowLinkLabelBrowse = true;
-			this.fileControlFaaForm.ShowLinkLabelRemove = false;
-			this.fileControlFaaForm.Size = new System.Drawing.Size(200, 37);
-			this.fileControlFaaForm.TabIndex = 136;
-			// 
 			// ataChapterComboBox
 			// 
 			this.ataChapterComboBox.Location = new System.Drawing.Point(410, 147);
@@ -1175,6 +1143,22 @@ namespace CAS.UI.UIControls.StoresControls
 			this.textBoxAltPartNum.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.textBoxAltPartNum.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
+			// documentControlFaa
+			// 
+			this.documentControlFaa.CurrentDocument = null;
+			this.documentControlFaa.Location = new System.Drawing.Point(118, 425);
+			this.documentControlFaa.Name = "documentControlFaa";
+			this.documentControlFaa.Size = new System.Drawing.Size(200, 41);
+			this.documentControlFaa.TabIndex = 154;
+			// 
+			// documentControlShip
+			// 
+			this.documentControlShip.CurrentDocument = null;
+			this.documentControlShip.Location = new System.Drawing.Point(412, 425);
+			this.documentControlShip.Name = "documentControlShip";
+			this.documentControlShip.Size = new System.Drawing.Size(200, 41);
+			this.documentControlShip.TabIndex = 155;
+			// 
 			// ConsumablePartAndKitForm
 			// 
 			this.AcceptButton = this.buttonOK;
@@ -1182,6 +1166,8 @@ namespace CAS.UI.UIControls.StoresControls
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.buttonCancel;
 			this.ClientSize = new System.Drawing.Size(924, 770);
+			this.Controls.Add(this.documentControlShip);
+			this.Controls.Add(this.documentControlFaa);
 			this.Controls.Add(this.labelAltpartNum);
 			this.Controls.Add(this.textBoxAltPartNum);
 			this.Controls.Add(this.label2);
@@ -1191,9 +1177,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.Controls.Add(this.checkBoxPOOL);
 			this.Controls.Add(this.labelIamge);
 			this.Controls.Add(this.fileControlImage);
-			this.Controls.Add(this.fileControlShipping);
 			this.Controls.Add(this.label4);
-			this.Controls.Add(this.fileControlFaaForm);
 			this.Controls.Add(this.labelFaaForm);
 			this.Controls.Add(this.labelDiscrepancy);
 			this.Controls.Add(this.textBoxDiscrepancy);
@@ -1318,8 +1302,6 @@ namespace CAS.UI.UIControls.StoresControls
 		private MetroLabel labelDiscrepancy;
 		private MetroTextBox textBoxDiscrepancy;
 		private MetroLabel labelFaaForm;
-		private Auxiliary.AttachedFileControl fileControlFaaForm;
-		private Auxiliary.AttachedFileControl fileControlShipping;
 		private MetroLabel label4;
 		private Auxiliary.AttachedFileControl fileControlImage;
 		private MetroLabel labelIamge;
@@ -1330,5 +1312,7 @@ namespace CAS.UI.UIControls.StoresControls
 		private MetroLabel label2;
 		private MetroLabel labelAltpartNum;
 		private MetroTextBox textBoxAltPartNum;
+		private DocumentationControls.DocumentControl documentControlFaa;
+		private DocumentationControls.DocumentControl documentControlShip;
 	}
 }
