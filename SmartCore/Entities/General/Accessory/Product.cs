@@ -492,7 +492,7 @@ namespace SmartCore.Entities.General.Accessory
 		public override string ToString()
         {
             return (string.IsNullOrEmpty(Name) ? "" : Name + " ") + (Standart == null || string.IsNullOrEmpty(Standart.ToString()) ? "" : Standart + " ") + 
-                   (string.IsNullOrEmpty(PartNumber) ? "" : PartNumber + " ") + Description;
+                   (string.IsNullOrEmpty(PartNumber) ? "" : PartNumber + " ") + Reference;
         }
         #endregion
 
