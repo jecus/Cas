@@ -1849,6 +1849,18 @@ namespace SmartCore.Entities.General.Accessory
 
 		#endregion
 
+		#region public Document DocumentFaa { get; set; }
+
+		public Document DocumentFaa { get; set; }
+
+		#endregion
+
+		#region public Document DocumentShipping { get; set; }
+
+		public Document DocumentShipping { get; set; }
+
+		#endregion
+
 		#region public Supplier FromSupplier { get; set; }
 
 		private Supplier _fromSupplier;

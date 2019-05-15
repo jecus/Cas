@@ -169,6 +169,7 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 	    public static DocumentType Permission = new DocumentType(24, "Permission", "Permission");
+	    public static DocumentType StoreRecord = new DocumentType(25, "Store Record", "Store Record");
 
 		#region public static DocumentType Other = new DocumentType(-1, "Oth", "Other");
 		/// <summary> 
