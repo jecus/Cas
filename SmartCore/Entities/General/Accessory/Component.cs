@@ -9,6 +9,7 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.Collections;
+using SmartCore.Entities.General.Personnel;
 using SmartCore.Entities.General.Store;
 using SmartCore.Entities.General.Templates;
 using SmartCore.Files;
@@ -890,6 +891,13 @@ namespace SmartCore.Entities.General.Accessory
         /// </summary>
         [ListViewData(0.05f, "Should be on stock")]
         public double ShouldBeOnStock { get; set; }
+		#endregion
+
+		#region public int Received { get; set; }
+
+		[TableColumn("Received")]
+		public int Received { get; set; }
+		
 		#endregion
 
 		//TODO:временное свойство(какое кол-во продукта нужно из раб пакета)

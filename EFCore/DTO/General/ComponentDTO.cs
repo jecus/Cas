@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 using EFCore.Attributte;
 using EFCore.DTO.Dictionaries;
 using EFCore.Interfaces;
+using SmartCore.Entities.General.Personnel;
 
 namespace EFCore.DTO.General
 {
@@ -205,6 +206,9 @@ namespace EFCore.DTO.General
 
 		[DataMember]
 		public int FromSupplierId { get; set; }
+
+		[DataMember]
+		public int Received { get; set; }
 
 		[DataMember]
 		public DateTime? FromSupplierReciveDate { get; set; }

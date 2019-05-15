@@ -106,6 +106,8 @@ namespace CAS.UI.UIControls.StoresControls
 			this.label2 = new MetroFramework.Controls.MetroLabel();
 			this.labelAltpartNum = new MetroFramework.Controls.MetroLabel();
 			this.textBoxAltPartNum = new MetroFramework.Controls.MetroTextBox();
+			this.comboBoxReceived = new System.Windows.Forms.ComboBox();
+			this.metroLabelReceived = new MetroFramework.Controls.MetroLabel();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -772,9 +774,9 @@ namespace CAS.UI.UIControls.StoresControls
 			// 
 			// 
 			this.textBoxDiscrepancy.CustomButton.Image = null;
-			this.textBoxDiscrepancy.CustomButton.Location = new System.Drawing.Point(93, 2);
+			this.textBoxDiscrepancy.CustomButton.Location = new System.Drawing.Point(121, 2);
 			this.textBoxDiscrepancy.CustomButton.Name = "";
-			this.textBoxDiscrepancy.CustomButton.Size = new System.Drawing.Size(105, 105);
+			this.textBoxDiscrepancy.CustomButton.Size = new System.Drawing.Size(77, 77);
 			this.textBoxDiscrepancy.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
 			this.textBoxDiscrepancy.CustomButton.TabIndex = 1;
 			this.textBoxDiscrepancy.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -792,7 +794,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.textBoxDiscrepancy.SelectionLength = 0;
 			this.textBoxDiscrepancy.SelectionStart = 0;
 			this.textBoxDiscrepancy.ShortcutsEnabled = true;
-			this.textBoxDiscrepancy.Size = new System.Drawing.Size(201, 110);
+			this.textBoxDiscrepancy.Size = new System.Drawing.Size(201, 82);
 			this.textBoxDiscrepancy.TabIndex = 132;
 			this.textBoxDiscrepancy.UseSelectable = true;
 			this.textBoxDiscrepancy.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -1175,6 +1177,25 @@ namespace CAS.UI.UIControls.StoresControls
 			this.textBoxAltPartNum.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.textBoxAltPartNum.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
+			// comboBoxReceived
+			// 
+			this.comboBoxReceived.FormattingEnabled = true;
+			this.comboBoxReceived.Location = new System.Drawing.Point(706, 393);
+			this.comboBoxReceived.Name = "comboBoxReceived";
+			this.comboBoxReceived.Size = new System.Drawing.Size(200, 21);
+			this.comboBoxReceived.TabIndex = 154;
+			// 
+			// metroLabelReceived
+			// 
+			this.metroLabelReceived.AutoSize = true;
+			this.metroLabelReceived.ForeColor = System.Drawing.Color.Black;
+			this.metroLabelReceived.Location = new System.Drawing.Point(619, 393);
+			this.metroLabelReceived.Name = "metroLabelReceived";
+			this.metroLabelReceived.Size = new System.Drawing.Size(64, 19);
+			this.metroLabelReceived.TabIndex = 155;
+			this.metroLabelReceived.Text = "Received:";
+			this.metroLabelReceived.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
 			// ConsumablePartAndKitForm
 			// 
 			this.AcceptButton = this.buttonOK;
@@ -1182,6 +1203,8 @@ namespace CAS.UI.UIControls.StoresControls
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.buttonCancel;
 			this.ClientSize = new System.Drawing.Size(924, 770);
+			this.Controls.Add(this.comboBoxReceived);
+			this.Controls.Add(this.metroLabelReceived);
 			this.Controls.Add(this.labelAltpartNum);
 			this.Controls.Add(this.textBoxAltPartNum);
 			this.Controls.Add(this.label2);
@@ -1330,5 +1353,7 @@ namespace CAS.UI.UIControls.StoresControls
 		private MetroLabel label2;
 		private MetroLabel labelAltpartNum;
 		private MetroTextBox textBoxAltPartNum;
+		private System.Windows.Forms.ComboBox comboBoxReceived;
+		private MetroLabel metroLabelReceived;
 	}
 }

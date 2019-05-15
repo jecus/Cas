@@ -53,3 +53,12 @@ if not exists ( select  *
 	alter table dbo.Directives
     add Workarea nvarchar(256) null 
 GO
+--------------------------------------------------------------------------------
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('dbo.Components')
+                    and c.name = 'Received' ) 
+
+	alter table dbo.Components
+    add Received int not null default -1
+GO

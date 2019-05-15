@@ -253,6 +253,11 @@ namespace EFCore.DTO.General.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("FromSupplierId");
 
+			Property(i => i.Received)
+				.IsRequired()
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("Received");
+
 			Property(i => i.FromSupplierReciveDate)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("FromSupplierReciveDate");
