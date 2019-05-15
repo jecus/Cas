@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
+using EFCore.Attributte;
 using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
 using EFCore.Filter;
@@ -16,8 +17,11 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
+using SmartCore.Entities.General.Personnel;
 using SmartCore.Entities.General.Store;
+using SmartCore.Filters;
 using SmartCore.Purchase;
+using FilterType = SmartCore.Filters.FilterType;
 
 namespace CAS.UI.UIControls.StoresControls
 {
@@ -30,6 +34,7 @@ namespace CAS.UI.UIControls.StoresControls
 		private Store _currentStore;
 		private bool _isStore;
 		private ProductCost _productCost;
+		private List<Specialist> _specialists = new List<Specialist>();
 
 		#region Properties
 
@@ -80,7 +85,8 @@ namespace CAS.UI.UIControls.StoresControls
 		{
 			_currentStore = store;
 			_consumablePart = new Component {GoodsClass = GoodsClass.MaintenanceMaterials };
-			FillControls();
+			Task.Run(() => DoWork())
+				.ContinueWith(task => FillControls(), TaskScheduler.FromCurrentSynchronizationContext());
 		}
 		#endregion
 
@@ -90,17 +96,36 @@ namespace CAS.UI.UIControls.StoresControls
 
 		private void DoWork()
 		{
-			var documents = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<DocumentDTO, Document>(new []
+			_specialists.Clear();
+
+			if (_consumablePart.ItemId > 0)
 			{
-				new Filter("ParentID",_consumablePart.ItemId), 
-				new Filter("DocTypeId", DocumentType.StoreRecord.ItemId), 
-			});
+				var documents = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<DocumentDTO, Document>(new[]
+				{
+					new Filter("ParentID",_consumablePart.ItemId),
+					new Filter("DocTypeId", DocumentType.StoreRecord.ItemId),
+				});
 
-			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Component CRS Form") as DocumentSubType;
-			_consumablePart.DocumentFaa = documents.FirstOrDefault(i => i.DocumentSubType.ItemId == docSubType.ItemId);
+				var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Component CRS Form") as DocumentSubType;
+				_consumablePart.DocumentFaa = documents.FirstOrDefault(i => i.DocumentSubType.ItemId == docSubType.ItemId);
 
-			docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Shipping document") as DocumentSubType;
-			_consumablePart.DocumentShipping = documents.FirstOrDefault(i => i.DocumentSubType.ItemId == docSubType.ItemId);
+				docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Shipping document") as DocumentSubType;
+				_consumablePart.DocumentShipping = documents.FirstOrDefault(i => i.DocumentSubType.ItemId == docSubType.ItemId);
+
+			}
+
+			var department =
+				GlobalObjects.CasEnvironment.NewLoader.GetObject<DepartmentDTO, Department>(new Filter("FullName",
+					"Logistics & Stores Department "));
+
+			var spec = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<SpecializationDTO, Specialization>(
+				new Filter("DepartmentId", department.ItemId));
+			var ids = spec.Select(i => i.ItemId);
+
+			_specialists.AddRange(GlobalObjects.CasEnvironment.Loader.GetObjectList< Specialist>(new ICommonFilter[]
+			{
+				new CommonFilter<int>(Specialist.SpecializationIdProperty, FilterType.In, ids.ToArray()), 
+			}));
 		}
 
 		#region private void FillControls()
@@ -274,6 +299,11 @@ namespace CAS.UI.UIControls.StoresControls
 				dateTimePickerManufactureDate.Value = DateTime.Today;
 				dateTimePickerInstallDate.Value = DateTime.Today;
 			}
+
+			comboBoxReceived.Items.Clear();
+			comboBoxReceived.Items.Add(Specialist.Unknown);
+			comboBoxReceived.Items.AddRange(_specialists.ToArray());
+			comboBoxReceived.SelectedItem = _consumablePart.Received;
 
 			SetForDetailClass();
 			SetForMeasure();
@@ -480,6 +510,8 @@ namespace CAS.UI.UIControls.StoresControls
 
 			obj.Model = dictionaryComboProduct.SelectedItem as ComponentModel;
 			obj.Location = dictionaryComboBoxLocation.SelectedItem as Locations;
+			obj.Received = comboBoxReceived.SelectedItem as Specialist;
+			obj.ReceivedId = _consumablePart.Received?.ItemId ?? -1;
 			obj.Remarks = textBoxRemarks.Text;
 			obj.ManufactureDate = dateTimePickerManufactureDate.Value;
 			obj.LifeLimit = lifelengthViewerLifeLimit.Lifelength;

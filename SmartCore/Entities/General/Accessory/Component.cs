@@ -896,8 +896,14 @@ namespace SmartCore.Entities.General.Accessory
 		#region public int Received { get; set; }
 
 		[TableColumn("Received")]
-		public int Received { get; set; }
-		
+		public int ReceivedId { get; set; }
+
+		public Specialist Received
+		{
+			get => _received ?? (_received = Specialist.Unknown);
+			set => _received = value;
+		}
+
 		#endregion
 
 		//TODO:временное свойство(какое кол-во продукта нужно из раб пакета)
@@ -1864,6 +1870,7 @@ namespace SmartCore.Entities.General.Accessory
 		#region public Supplier FromSupplier { get; set; }
 
 		private Supplier _fromSupplier;
+		private Specialist _received;
 
 		[TableColumn("FromSupplierId")]
 		[Child]
