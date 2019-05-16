@@ -24,6 +24,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         #region Fields
 
         private readonly ATLB _currentATLB;
+        private readonly bool _allView;
         private AircraftFlightCollection _itemsArray = new AircraftFlightCollection();
 
         private FlightsListView _directivesViewer;
@@ -56,28 +57,44 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         /// Создает элемент управления для отображения списка агрегатов
         ///</summary>
         ///<param name="currentAtlb">Бортовой журнал, соержащий полеты</param>
-        public FlightsListScreen(ATLB currentAtlb)
+        public FlightsListScreen(ATLB currentAtlb, bool allView = false)
             : this()
         {
             if (currentAtlb == null)
                 throw new ArgumentNullException("currentAtlb", "Cannot display null-currentAtlb");
             _currentATLB = currentAtlb;
+			_allView = allView;
 
             CurrentAircraft = GlobalObjects.AircraftsCore.GetAircraftById(currentAtlb.ParentAircraftId);
             StatusTitle = currentAtlb + " " + "Fligths";
 
             InitToolStripMenuItems();
             InitListView();
+
+			if(allView)
+				UpdateControls();
         }
 
-        #endregion
+		#endregion
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region public override void DisposeScreen()
-        public override void DisposeScreen()
+		#region private void UpdateControls()
+
+		private void UpdateControls()
+		{
+			buttonAddTripFlight.Enabled = false;
+			buttonAddNew.Enabled = false;
+			buttonAddNewLight.Enabled = false;
+			buttonDeleteSelected.Enabled = false;
+		}
+
+		#endregion
+
+		#region public override void DisposeScreen()
+		public override void DisposeScreen()
         {
             if (AnimatedThreadWorker.IsBusy)
                 AnimatedThreadWorker.CancelAsync();
@@ -317,7 +334,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
         private void InitListView()
         {
-            _directivesViewer = new FlightsListView(CurrentAircraft);
+            _directivesViewer = new FlightsListView(CurrentAircraft, _allView);
             _directivesViewer.TabIndex = 2;
             _directivesViewer.ContextMenuStrip = _contextMenuStrip;
             _directivesViewer.Location = new Point(panel1.Left, panel1.Top);

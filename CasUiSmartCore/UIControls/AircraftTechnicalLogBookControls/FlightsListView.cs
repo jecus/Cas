@@ -22,6 +22,8 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         #region Fields
 
         private readonly Aircraft _parentAircraft;
+        private readonly bool _allView;
+
         #endregion
 
         #region Constructors
@@ -38,12 +40,13 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         #region public FlightsListView(Aircraft parentAircraft) : this()
         ///<summary>
         ///</summary>
-        public FlightsListView(Aircraft parentAircraft)
+        public FlightsListView(Aircraft parentAircraft, bool allView = false)
             : this()
         {
             OldColumnIndex = 0;
 	        SortMultiplier = 0;
             _parentAircraft = parentAircraft;
+			_allView = allView;
         }
         #endregion
 
@@ -122,7 +125,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             if (SelectedItem != null)
             {
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-                e.RequestedEntity = new FlightScreen(SelectedItem);
+                e.RequestedEntity = new FlightScreen(SelectedItem, true, _allView);
                 e.DisplayerText = _parentAircraft.RegistrationNumber + ". " + SelectedItem; 
             }
         }

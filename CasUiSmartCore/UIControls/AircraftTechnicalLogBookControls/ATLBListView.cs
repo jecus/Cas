@@ -19,6 +19,8 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         #region Fields
 
         private readonly Aircraft _parentAircraft;
+        private readonly bool _showDefects;
+
         #endregion
 
         #region Constructors
@@ -38,12 +40,13 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         #region public ATLBListView(Aircraft parentAircraft) : this()
         ///<summary>
         ///</summary>
-        public ATLBListView(Aircraft parentAircraft)
+        public ATLBListView(Aircraft parentAircraft, bool showDefects = false)
             : this()
         {
             OldColumnIndex = 2;
             SortMultiplier = 1;
             _parentAircraft = parentAircraft;
+            _showDefects = showDefects;
         }
 		#endregion
 
@@ -143,7 +146,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             {
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
                 e.DisplayerText = _parentAircraft.RegistrationNumber + ". ATLB No " + SelectedItem.ATLBNo;
-                e.RequestedEntity = new FlightsListScreen(SelectedItem);
+                e.RequestedEntity = new FlightsListScreen(SelectedItem, _showDefects);
             }
         }
         #endregion

@@ -207,7 +207,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
         private void InitListView()
         {
-            _directivesViewer = new ATLBListView(CurrentAircraft);
+            _directivesViewer = new ATLBListView(CurrentAircraft, true);
             _directivesViewer.TabIndex = 2;
             _directivesViewer.ContextMenuStrip = _contextMenuStrip;
             _directivesViewer.Location = new Point(panel1.Left, panel1.Top);
