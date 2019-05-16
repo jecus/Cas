@@ -407,7 +407,7 @@ namespace CAS.UI.UIControls.StoresControls
                 quantity = isComponent && componentItem.ItemId > 0 ? 1 : componentItem.Quantity;
 				quantityString = quantity.ToString();
 				quantityIn = isComponent && componentItem.ItemId > 0 ? 1 : componentItem.QuantityIn;
-	            quantityInString = $"{quantityIn:0.##}" + (componentItem.Measure != null ? " " + componentItem.Measure + "(s)" : "");
+	            quantityInString = $"{quantityIn:0.##}" + (componentItem.Measure != null ? " " + componentItem.Measure + "(s)" : "") + componentItem.Packing;
 	            needWpQuantity = Math.Round(componentItem.NeedWpQuantity, 2);
 	            reserve = quantity - needWpQuantity;
 				shouldBeOnStock = componentItem.ShouldBeOnStock;

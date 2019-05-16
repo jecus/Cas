@@ -491,8 +491,8 @@ namespace SmartCore.Entities.General.Accessory
 		/// <returns></returns>
 		public override string ToString()
         {
-            return (string.IsNullOrEmpty(Name) ? "" : Name + " ") + (Standart == null || string.IsNullOrEmpty(Standart.ToString()) ? "" : Standart + " ") + 
-                   (string.IsNullOrEmpty(PartNumber) ? "" : PartNumber + " ") + Reference;
+            return Reference + (string.IsNullOrEmpty(Name) ? "" : Name + " ") + (Standart == null || string.IsNullOrEmpty(Standart.ToString()) ? "" : Standart + " ") + 
+                   (string.IsNullOrEmpty(PartNumber) ? "" : PartNumber + " ");
         }
         #endregion
 

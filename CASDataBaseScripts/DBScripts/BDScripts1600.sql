@@ -62,3 +62,14 @@ if not exists ( select  *
 	alter table dbo.Components
     add Received int not null default -1
 GO
+
+--------------------------------------------------------------------------------
+
+if not exists ( select  *
+            from    sys.columns c                        
+            where   c.object_id = object_id('dbo.Components')
+                    and c.name = 'Packing' ) 
+
+	alter table dbo.Components
+    add Packing nvarchar(128) null 
+GO

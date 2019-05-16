@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Schema;
 using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
 using EFCore.Attributte;
@@ -203,6 +205,7 @@ namespace CAS.UI.UIControls.StoresControls
 			textBoxDescription.Text = _consumablePart.Description;
 			textBoxProductCode.Text = _consumablePart.Code;
 			dictionaryComboProduct.SelectedItem = _consumablePart.Model;
+			metroTextBoxPacking.Text = _consumablePart.Packing;
 
 			if (_consumablePart.ProductCosts.Count == 0)
 				_consumablePart.ProductCosts.Add(new ProductCost {QtyIn = _consumablePart.QuantityIn, Currency = Сurrency.USD});
@@ -523,7 +526,7 @@ namespace CAS.UI.UIControls.StoresControls
 			obj.Incoming = checkBoxIncoming.Checked;
 			obj.IsPOOL = checkBoxPOOL.Checked;
 			obj.IsDangerous = checkBoxDangerous.Checked;
-
+			obj.Packing = metroTextBoxPacking.Text;
 			obj.FromSupplier = comboBoxSupplier.SelectedItem as Supplier;
 			obj.FromSupplierReciveDate = dateTimePickerReciveDate.Value;
 
@@ -787,10 +790,8 @@ namespace CAS.UI.UIControls.StoresControls
 				quantity = _consumablePart.Quantity;
 	        else quantity = (double)numericUpDownQuantity.Value;
 
-            
-
-            textBoxTotal.Text = String.Format("{0:0.##}", quantity) + (measure != null ? " " + measure + "(s)" : "");
-        }
+			textBoxTotal.Text = String.Format("{0:0.##}", quantity) + (measure != null ? " " + measure + "(s)" : "");
+		}
         #endregion
 
         #region private void DateTimePickerInstallationDateValueChanged(object sender, EventArgs e)

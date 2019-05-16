@@ -1582,6 +1582,7 @@ namespace SmartCore.DtoHelper
 				FromSupplierId = comp.FromSupplier?.ItemId ?? -1,
 				FromSupplierReciveDate = comp.FromSupplierReciveDate,
 				Received = comp.ReceivedId,
+				Packing = comp.Packing,
 				LLPData = comp.LLPData?.Select(i => i.Convert()) as ICollection<ComponentLLPCategoryDataDTO>,
 				CategoriesRecords = comp.CategoriesRecords?.Select(i => i.Convert()) as ICollection<CategoryRecordDTO>,
 				SupplierRelations = comp.SupplierRelations?.Select(i => i.Convert()) as ICollection<KitSuppliersRelationDTO>,
@@ -1652,7 +1653,8 @@ namespace SmartCore.DtoHelper
 				QuantityIn = compdto.QuantityInput ?? default(double),
 				FromSupplier = compdto.FromSupplier?.Convert(),
 				FromSupplierReciveDate = compdto.FromSupplierReciveDate ?? DateTimeExtend.GetCASMinDateTime(),
-				ReceivedId = compdto.Received
+				ReceivedId = compdto.Received,
+				Packing = compdto.Packing
 			};
 
 			if (compdto.LLPData != null)
@@ -1799,6 +1801,7 @@ namespace SmartCore.DtoHelper
 				FromSupplierId = comp.FromSupplier?.ItemId ?? -1,
 				FromSupplierReciveDate = comp.FromSupplierReciveDate,
 				Received = comp.ReceivedId,
+				Packing = comp.Packing,
 				LLPData = comp.LLPData?.Select(i => i.Convert()) as ICollection<ComponentLLPCategoryDataDTO>,
 				CategoriesRecords = comp.CategoriesRecords?.Select(i => i.Convert()) as ICollection<CategoryRecordDTO>,
 				SupplierRelations = comp.SupplierRelations?.Select(i => i.Convert()) as ICollection<KitSuppliersRelationDTO>,
@@ -1874,7 +1877,8 @@ namespace SmartCore.DtoHelper
 				QuantityIn = compdto.QuantityInput ?? default(double),
 				FromSupplier = compdto.FromSupplier?.Convert(),
 				FromSupplierReciveDate = compdto.FromSupplierReciveDate ?? DateTimeExtend.GetCASMinDateTime(),
-				ReceivedId = compdto.Received
+				ReceivedId = compdto.Received,
+				Packing = compdto.Packing
 			};
 
 			if (compdto.LLPData != null)

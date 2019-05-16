@@ -906,6 +906,14 @@ namespace SmartCore.Entities.General.Accessory
 
 		#endregion
 
+		#region public string Packing { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		[TableColumn("Packing"), MinMaxValue(0, 10000)]
+		public string Packing { get; set; }
+		#endregion
+
 		//TODO:временное свойство(какое кол-во продукта нужно из раб пакета)
 		public double NeedWpQuantity { get; set; }
 
