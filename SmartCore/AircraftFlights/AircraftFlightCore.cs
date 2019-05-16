@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text.RegularExpressions;
 using EFCore.DTO.General;
@@ -845,6 +846,34 @@ namespace SmartCore.AircraftFlights
 		}
 
 		#endregion
+
+		public AircraftFlight GetFirstFlight(int atlbId)
+		{
+			var qr = BaseQueries.GetSelectQueryWithWhere(typeof(AircraftFlight), new []
+			{
+				new CommonFilter<int>(AircraftFlight.ATLBIdProperty, atlbId), 
+			}).Replace("Select", "Select TOP(1)") + "order by FlightDate,OutTime";
+
+			DataSet ds = _casEnvironment.Execute(qr);
+			var result = BaseQueries.GetObjectList<AircraftFlight>(ds.Tables[0]);
+
+			// возвращаем результат
+			return result.FirstOrDefault();
+		}
+
+		public AircraftFlight GetLastFlight(int atlbId)
+		{
+			var qr = BaseQueries.GetSelectQueryWithWhere(typeof(AircraftFlight), new[]
+			{
+				new CommonFilter<int>(AircraftFlight.ATLBIdProperty, atlbId),
+			}).Replace("Select", "Select TOP(1)") + "order by FlightDate Desc,OutTime Desc";
+
+			DataSet ds = _casEnvironment.Execute(qr);
+			var result = BaseQueries.GetObjectList<AircraftFlight>(ds.Tables[0]);
+
+			// возвращаем результат
+			return result.FirstOrDefault();
+		}
 
 		#region public AircraftFlight GetAircraftFlightById(int aircraftId, int aircraftFlightId)
 

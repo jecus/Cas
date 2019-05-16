@@ -37,6 +37,8 @@ namespace CAS.UI.UIControls.StoresControls
 		private bool _isStore;
 		private ProductCost _productCost;
 		private List<Specialist> _specialists = new List<Specialist>();
+		private Department _department;
+		private Department _departmentPalanning;
 
 		#region Properties
 
@@ -116,12 +118,16 @@ namespace CAS.UI.UIControls.StoresControls
 
 			}
 
-			var department =
+			_department =
 				GlobalObjects.CasEnvironment.NewLoader.GetObject<DepartmentDTO, Department>(new Filter("FullName",
 					"Logistics & Stores Department "));
 
+			_departmentPalanning =
+				GlobalObjects.CasEnvironment.NewLoader.GetObject<DepartmentDTO, Department>(new Filter("FullName",
+					"Planning"));
+
 			var spec = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<SpecializationDTO, Specialization>(
-				new Filter("DepartmentId", department.ItemId));
+				new Filter("DepartmentId", _department.ItemId));
 			var ids = spec.Select(i => i.ItemId);
 
 			_specialists.AddRange(GlobalObjects.CasEnvironment.Loader.GetObjectList< Specialist>(new ICommonFilter[]
@@ -1291,9 +1297,10 @@ namespace CAS.UI.UIControls.StoresControls
 				DocType = DocumentType.StoreRecord,
 				DocumentSubType = docSubType,
 				IsClosed = true,
-				ContractNumber = $"{_consumablePart.ToString()}",
-				Description = _consumablePart.PartNumber,
-				ParentAircraftId = _consumablePart.ParentAircraftId
+				ContractNumber = $"",
+				Description = "",
+				ParentAircraftId = _consumablePart.ParentAircraftId,
+				Department = _department
 			};
 
 			var form = new DocumentForm(newDocument, false);
@@ -1310,12 +1317,13 @@ namespace CAS.UI.UIControls.StoresControls
 				Parent = _consumablePart,
 				ParentId = _consumablePart.ItemId,
 				ParentTypeId = _consumablePart.SmartCoreObjectType.ItemId,
-				DocType = DocumentType.StoreRecord,
+				DocType = DocumentType.TechnicalRecords,
 				DocumentSubType = docSubType,
 				IsClosed = true,
-				ContractNumber = $"{_consumablePart.ToString()}",
-				Description = _consumablePart.PartNumber,
-				ParentAircraftId = _consumablePart.ParentAircraftId
+				ContractNumber = $"{_consumablePart}",
+				Description = _consumablePart.Description,
+				ParentAircraftId = _consumablePart.ParentAircraftId,
+				Department = _departmentPalanning
 			};
 
 			var form = new DocumentForm(newDocument, false);

@@ -19,6 +19,8 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         #region Fields
 
         private readonly Aircraft _parentAircraft;
+        private readonly bool _showDefects;
+
         #endregion
 
         #region Constructors
@@ -38,12 +40,13 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         #region public ATLBListView(Aircraft parentAircraft) : this()
         ///<summary>
         ///</summary>
-        public ATLBListView(Aircraft parentAircraft)
+        public ATLBListView(Aircraft parentAircraft, bool showDefects = false)
             : this()
         {
             OldColumnIndex = 2;
             SortMultiplier = 1;
             _parentAircraft = parentAircraft;
+            _showDefects = showDefects;
         }
 		#endregion
 
@@ -82,17 +85,21 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         {
             var subItems = new ListViewItem.ListViewSubItem[4];
             AircraftFlightCollection flights;
-            if (_parentAircraft != null)
+            AircraftFlight first;
+            AircraftFlight last;
+
+			if (_parentAircraft != null)
             {
 				flights = GlobalObjects.AircraftFlightsCore.GetAircraftFlightsByAircraftId(_parentAircraft.ItemId);
+	            first = flights.GetFirstFlightInAtlb(item.ItemId);
+	            last = flights.GetLastFlightInAtlb(item.ItemId);
 			}
             else
             {
-				flights = GlobalObjects.AircraftFlightsCore.GetAircraftFlightsByAircraftId(item.ParentAircraftId);
+	            first = GlobalObjects.AircraftFlightsCore.GetFirstFlight(item.ItemId);
+				last = GlobalObjects.AircraftFlightsCore.GetLastFlight(item.ItemId);
 			}
-	        
-			var first = flights.GetFirstFlightInAtlb(item.ItemId);
-            var last = flights.GetLastFlightInAtlb(item.ItemId);
+			
             var pages = (first != null && first.PageNo != "" ? first.PageNo : "XXX") + " - " +
                            (last != null && last.PageNo != "" ? last.PageNo : "XXX");
             var dates = (first != null ? UsefulMethods.NormalizeDate(first.FlightDate.Date) : "YY:MM:DD") + " - " +
@@ -139,7 +146,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             {
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
                 e.DisplayerText = _parentAircraft.RegistrationNumber + ". ATLB No " + SelectedItem.ATLBNo;
-                e.RequestedEntity = new FlightsListScreen(SelectedItem);
+                e.RequestedEntity = new FlightsListScreen(SelectedItem, _showDefects);
             }
         }
         #endregion
