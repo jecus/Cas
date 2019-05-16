@@ -64,14 +64,34 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             UpdateInformation();
         }
 
-        #endregion
+		#endregion
 
-        #endregion
+		#region public ATLBListScreen(ATLB currentAtlb)  : this()
+		///<summary>
+		/// Создает элемент управления для отображения списка агрегатов
+		///</summary>
+		///<param name="currentAircraft">Бортовой журнал, соержащий полеты</param>
+		public AllATLBListScreen(Aircraft currentAircraft)
+			: this()
+		{
+			if (currentAircraft == null)
+				throw new ArgumentNullException("currentAircraft", "Cannot display null-currentAircraft");
 
-        #region Methods
+			CurrentAircraft = currentAircraft;
+			StatusTitle = currentAircraft + " " + "Fligths";
 
-        #region public override void DisposeScreen()
-        public override void DisposeScreen()
+			InitListView();
+			UpdateInformation();
+		}
+
+		#endregion
+
+		#endregion
+
+		#region Methods
+
+		#region public override void DisposeScreen()
+		public override void DisposeScreen()
         {
             if (AnimatedThreadWorker.IsBusy)
                 AnimatedThreadWorker.CancelAsync();
@@ -112,12 +132,14 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
             AnimatedThreadWorker.ReportProgress(0, "load ATLBs");
 
-            var aircrafts = GlobalObjects.AircraftsCore.GetAllAircrafts();
-            foreach (var aircraft in aircrafts)
-            {
-				_itemsArray.AddRange(GlobalObjects.AircraftFlightsCore.GetATLBsByAircraftId(aircraft.ItemId, true, true));
-			}
-           
+			//         var aircrafts = GlobalObjects.AircraftsCore.GetAllAircrafts();
+			//         foreach (var aircraft in aircrafts)
+			//         {
+			//	_itemsArray.AddRange(GlobalObjects.AircraftFlightsCore.GetATLBsByAircraftId(aircraft.ItemId, true, true));
+			//}
+
+			_itemsArray.AddRange(GlobalObjects.AircraftFlightsCore.GetATLBsByAircraftId(CurrentAircraft.ItemId, true, true));
+
 			AnimatedThreadWorker.ReportProgress(40, "filter ATLBs");
 
             AnimatedThreadWorker.ReportProgress(70, "filter ATLBs");
@@ -185,7 +207,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
         private void InitListView()
         {
-            _directivesViewer = new ATLBListView();
+            _directivesViewer = new ATLBListView(CurrentAircraft);
             _directivesViewer.TabIndex = 2;
             _directivesViewer.ContextMenuStrip = _contextMenuStrip;
             _directivesViewer.Location = new Point(panel1.Left, panel1.Top);

@@ -29,6 +29,10 @@ namespace SmartCore.AircraftFlights
 
 		AircraftFlightCollection GetAircraftFlightsByAircraftId(int aircraftId);
 
+		AircraftFlight GetFirstFlight(int atlbId);
+
+		AircraftFlight GetLastFlight(int atlbId);
+
 		AircraftFlight GetAircraftFlightById(int aircraftId, int aircraftFlightId);
 
 		AircraftFlight GetLastAircraftFlight(int aircraftId);

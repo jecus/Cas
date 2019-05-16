@@ -2048,7 +2048,7 @@ namespace CAS.UI.UIControls.AircraftsControls
 		private void AllATLB_DisplayerRequested(object sender, ReferenceEventArgs e)
 		{
 			e.DisplayerText = "ATLB Event";
-			e.RequestedEntity = new AllATLBListScreen(GlobalObjects.CasEnvironment.Operators[0]);
+			e.RequestedEntity = new AllATLBListScreen(CurrentAircraft);
 		}
 	}
 }

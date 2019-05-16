@@ -82,17 +82,21 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         {
             var subItems = new ListViewItem.ListViewSubItem[4];
             AircraftFlightCollection flights;
-            if (_parentAircraft != null)
+            AircraftFlight first;
+            AircraftFlight last;
+
+			if (_parentAircraft != null)
             {
 				flights = GlobalObjects.AircraftFlightsCore.GetAircraftFlightsByAircraftId(_parentAircraft.ItemId);
+	            first = flights.GetFirstFlightInAtlb(item.ItemId);
+	            last = flights.GetLastFlightInAtlb(item.ItemId);
 			}
             else
             {
-				flights = GlobalObjects.AircraftFlightsCore.GetAircraftFlightsByAircraftId(item.ParentAircraftId);
+	            first = GlobalObjects.AircraftFlightsCore.GetFirstFlight(item.ItemId);
+				last = GlobalObjects.AircraftFlightsCore.GetLastFlight(item.ItemId);
 			}
-	        
-			var first = flights.GetFirstFlightInAtlb(item.ItemId);
-            var last = flights.GetLastFlightInAtlb(item.ItemId);
+			
             var pages = (first != null && first.PageNo != "" ? first.PageNo : "XXX") + " - " +
                            (last != null && last.PageNo != "" ? last.PageNo : "XXX");
             var dates = (first != null ? UsefulMethods.NormalizeDate(first.FlightDate.Date) : "YY:MM:DD") + " - " +
