@@ -11,7 +11,6 @@ using CAS.UI.UIControls.Discrepancies;
 using CAS.UI.UIControls.FiltersControls;
 using CASReports.Builders;
 using CASTerms;
-using SmartCore.Auxiliary;
 using SmartCore.Discrepancies;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;

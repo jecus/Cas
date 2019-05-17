@@ -1,11 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Comparers;
-using CASTerms;
 using SmartCore.Activity;
-using SmartCore.Entities;
 
 namespace CAS.UI.UIControls.Users
 {

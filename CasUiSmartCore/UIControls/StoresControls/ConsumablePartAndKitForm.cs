@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Schema;
 using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
-using EFCore.Attributte;
 using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
 using EFCore.Filter;
