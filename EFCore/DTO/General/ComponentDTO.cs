@@ -4,7 +4,6 @@ using System.Runtime.Serialization;
 using EFCore.Attributte;
 using EFCore.DTO.Dictionaries;
 using EFCore.Interfaces;
-using SmartCore.Entities.General.Personnel;
 
 namespace EFCore.DTO.General
 {
