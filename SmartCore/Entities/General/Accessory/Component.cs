@@ -914,6 +914,10 @@ namespace SmartCore.Entities.General.Accessory
 		public string Packing { get; set; }
 		#endregion
 
+		public string Reference => Product?.Reference;
+		public string IsEffectivity => Product?.IsEffectivity;
+
+
 		//TODO:временное свойство(какое кол-во продукта нужно из раб пакета)
 		public double NeedWpQuantity { get; set; }
 
