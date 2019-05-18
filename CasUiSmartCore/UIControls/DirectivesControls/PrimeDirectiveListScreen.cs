@@ -448,8 +448,11 @@ namespace CAS.UI.UIControls.DirectivesControls
         {
             _initialDirectiveArray.Clear();
             _resultDirectiveArray.Clear();
+            _openPubWorkPackages.Clear();
+            _openPubQuotations.Clear();
 
-            AnimatedThreadWorker.ReportProgress(0, "load directives");
+
+			AnimatedThreadWorker.ReportProgress(0, "load directives");
 
             try
             {
