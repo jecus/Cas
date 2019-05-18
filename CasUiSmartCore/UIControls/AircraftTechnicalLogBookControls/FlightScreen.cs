@@ -85,7 +85,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 		///</summary>
 		/// <param name="atlb">Директива</param>
 		///<param name="aircraft"></param>
-		public FlightScreen(ATLB atlb, Aircraft aircraft) : this()
+		public FlightScreen(ATLB atlb, Aircraft aircraft, bool showDeffects = false, bool allView = false) : this()
 		{
 			if (atlb == null)
 				throw new ArgumentNullException("atlb", "Argument cannot be null");
@@ -101,6 +101,11 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
 			//ButtonPrintMenuStrip = buttonPrintMenuStrip;
 			#endregion
+
+			if (allView)
+				UpdateControls();
+
+			_showDeffects = showDeffects;
 
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWorkWithCreateFlight;
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;

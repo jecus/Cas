@@ -179,7 +179,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 	        this.buttonAddTripFlight.ForeColorSecondary = System.Drawing.Color.FromArgb(49, 82, 128);
 	        this.buttonAddTripFlight.Click += ButtonAddTripClick;
 	        this.buttonAddTripFlight.Icon = CAS.UI.Properties.Resources.AddIcon;
-	        this.buttonAddTripFlight.IconNotEnabled = CAS.UI.Properties.Resources.DeleteIcon_gray;
+	        this.buttonAddTripFlight.IconNotEnabled = CAS.UI.Properties.Resources.AddIcon_gray;
 	        this.buttonAddTripFlight.Location = new System.Drawing.Point(920, 0);
 	        this.buttonAddTripFlight.PaddingSecondary = new System.Windows.Forms.Padding(4, 0, 0, 0);
 	        this.buttonAddTripFlight.Size = new System.Drawing.Size(145, 59);

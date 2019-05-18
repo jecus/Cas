@@ -427,9 +427,9 @@ namespace CASReports.Builders
 
 	        destinationDataSet.ItemsTable.AddItemsTableRow(reportedDirective.TaskCardNumber, reportedDirective.TaskNumberCheck, reportedDirective.Description,
 		        firstPerformanceString,
-		        reportedDirective.Threshold.RepeatInterval != null ? reportedDirective.Threshold.RepeatInterval.Hours?.ToString() : "*",
-		        reportedDirective.Threshold.RepeatInterval != null ? reportedDirective.Threshold.RepeatInterval.Cycles?.ToString() : "*",
-		        reportedDirective.Threshold.RepeatInterval != null ? reportedDirective.Threshold.RepeatInterval.Days?.ToString() : "*",
+		        reportedDirective.ParentComponentDirective?.RepeatInterval != null ? reportedDirective.ParentComponentDirective?.RepeatInterval.Hours?.ToString() : "*",
+		        reportedDirective.ParentComponentDirective?.RepeatInterval != null ? reportedDirective.ParentComponentDirective?.RepeatInterval.Cycles?.ToString() : "*",
+		        reportedDirective.ParentComponentDirective?.RepeatInterval != null ? reportedDirective.ParentComponentDirective?.RepeatInterval.Days?.ToString() : "*",
 		        reportedDirective.ParentComponentDirective?.LastPerformance != null ? reportedDirective.ParentComponentDirective?.LastPerformance.OnLifelength.Hours?.ToString() : "*",
 		        reportedDirective.ParentComponentDirective?.LastPerformance != null ? reportedDirective.ParentComponentDirective?.LastPerformance.OnLifelength.Cycles?.ToString() : "*",
 				reportedDirective.ParentComponentDirective?.LastPerformance != null ? reportedDirective.ParentComponentDirective?.LastPerformance.RecordDate.ToString("dd.MM.yyyy") : "*",

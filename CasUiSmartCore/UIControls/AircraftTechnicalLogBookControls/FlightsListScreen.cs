@@ -434,7 +434,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
 	    private void ButtonAddFullDisplayerRequested(object sender, ReferenceEventArgs e)
 	    {
-		    e.RequestedEntity = new FlightScreen(_currentATLB, CurrentAircraft);
+		    e.RequestedEntity = new FlightScreen(_currentATLB, CurrentAircraft, _allView, _allView);
 		    e.DisplayerText = CurrentAircraft.RegistrationNumber + ". New Flight";
 	    }
 

@@ -550,13 +550,15 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             panelDiscrepancies.Controls.Remove(panelAdd);
             // Добавляем контрол - неисправность
             _discrepanciesCount++;
-            var d = new DiscrepancyControl(new Discrepancy{ParentFlight = Flight}, Discrepancies, WorkPackages, TransferRecords);
-            d.Index = _discrepanciesCount;
-            d.ShowDeffects = ShowDeffects;
-            d.Station = _station;
-            d.RTSDate = _rtsDate;
-            d.Extended = true;
-            d.EnableExtendedControl = false;
+            var d = new DiscrepancyControl(new Discrepancy {ParentFlight = Flight}, Discrepancies, WorkPackages,
+	            TransferRecords, ShowDeffects)
+            {
+	            Index = _discrepanciesCount,
+	            Station = _station,
+	            RTSDate = _rtsDate,
+	            Extended = true,
+	            EnableExtendedControl = false
+            };
             d.Deleted += ConditionControlDeleted;
             d.EditWp += D_EditWp;
 	        d.ComponentChangeReportOpen += D_ComponentChangeReportOpen;
