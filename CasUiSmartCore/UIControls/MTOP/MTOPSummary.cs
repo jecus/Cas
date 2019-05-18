@@ -232,6 +232,10 @@ namespace CAS.UI.UIControls.MTOP
 			}
 			else return;
 
+			//TODO:заплатка а то у нулевого чека бывает 10000 записей и тупа все зависает 
+			if (to > 1000)
+				to = 1000;
+
 			
 			listViewScheduleZero.Columns.Add("Group", 60);
 			listViewScheduleZero.Columns.Add("Repeat", 120);
