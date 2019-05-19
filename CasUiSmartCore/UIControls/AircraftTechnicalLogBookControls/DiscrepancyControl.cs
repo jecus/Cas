@@ -199,6 +199,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         /// </summary>
         public DiscrepancyControl(Discrepancy discrepancy, List<Discrepancy> discrepancies, List<WorkPackage> workPackages, List<TransferRecord> transferRecords, bool showDeffects = false) : this ()
         {
+
 	        ShowDeffects = showDeffects;
 	        _discrepancies.AddRange(discrepancies);
 			_workPackages.AddRange(workPackages);
@@ -1021,7 +1022,12 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 		    comboBoxActinType.Enabled = comboBoxDeffectCat.Enabled =
 			    comboBoxDeffectConfirm.Enabled = comboBoxPhase.Enabled = checkBoxOccurrence.Enabled =  checkBoxReliability.Checked;
 
-		    if (!checkBoxReliability.Checked)
+
+		    if (!checkBoxReliability.Checked && checkBoxOccurrence.Checked)
+			    checkBoxOccurrence.Checked = false;
+
+
+			if (!checkBoxReliability.Checked)
 			    radioClose.Checked = true;
 		    else if(radioClose.Checked) radioOpen.Checked = true;
 	    }
@@ -1058,6 +1064,8 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 											labelOccurrence.Enabled = comboBoxOccurrence.Enabled =
 											labelEngine.Enabled = checkBoxEngine.Enabled = comboBoxEngine.Enabled = 
 												labelEngineRemark.Enabled = textBoxEngineRemark.Enabled =checkBoxOccurrence.Checked;
+
+			textBoxMessages.Enabled = ShowDeffects;
 		}
 	}
 }
