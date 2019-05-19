@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text.RegularExpressions;
 using EFCore.DTO.General;
@@ -846,6 +847,34 @@ namespace SmartCore.AircraftFlights
 
 		#endregion
 
+		public AircraftFlight GetFirstFlight(int atlbId)
+		{
+			var qr = BaseQueries.GetSelectQueryWithWhere(typeof(AircraftFlight), new []
+			{
+				new CommonFilter<int>(AircraftFlight.ATLBIdProperty, atlbId), 
+			}).Replace("Select", "Select TOP(1)") + "order by FlightDate,OutTime";
+
+			DataSet ds = _casEnvironment.Execute(qr);
+			var result = BaseQueries.GetObjectList<AircraftFlight>(ds.Tables[0]);
+
+			// возвращаем результат
+			return result.FirstOrDefault();
+		}
+
+		public AircraftFlight GetLastFlight(int atlbId)
+		{
+			var qr = BaseQueries.GetSelectQueryWithWhere(typeof(AircraftFlight), new[]
+			{
+				new CommonFilter<int>(AircraftFlight.ATLBIdProperty, atlbId),
+			}).Replace("Select", "Select TOP(1)") + "order by FlightDate Desc,OutTime Desc";
+
+			DataSet ds = _casEnvironment.Execute(qr);
+			var result = BaseQueries.GetObjectList<AircraftFlight>(ds.Tables[0]);
+
+			// возвращаем результат
+			return result.FirstOrDefault();
+		}
+
 		#region public AircraftFlight GetAircraftFlightById(int aircraftId, int aircraftFlightId)
 
 		public AircraftFlight GetAircraftFlightById(int aircraftId, int aircraftFlightId)
@@ -898,9 +927,17 @@ namespace SmartCore.AircraftFlights
 
 		#region public IList<ATLB> GetATLBsByAircraftId(int aircraftId, bool loadChild = false)
 
-		public IList<ATLB> GetATLBsByAircraftId(int aircraftId, bool loadChild = false)
+		public IList<ATLB> GetATLBsByAircraftId(int aircraftId, bool loadChild = false, bool onlyOpened = false)
 		{
-			return _newLoader.GetObjectList<ATLBDTO,ATLB>(new Filter("AircraftID", aircraftId), loadChild);
+			var filter = new List<Filter>
+			{
+				new Filter("AircraftID", aircraftId),
+				
+			};
+			if (onlyOpened)
+				filter.Add(new Filter("AtlbStatus", 0));
+			
+			return _newLoader.GetObjectList<ATLBDTO,ATLB>(filter, loadChild);
 		}
 
 		#endregion

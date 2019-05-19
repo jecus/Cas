@@ -29,6 +29,10 @@ namespace SmartCore.AircraftFlights
 
 		AircraftFlightCollection GetAircraftFlightsByAircraftId(int aircraftId);
 
+		AircraftFlight GetFirstFlight(int atlbId);
+
+		AircraftFlight GetLastFlight(int atlbId);
+
 		AircraftFlight GetAircraftFlightById(int aircraftId, int aircraftFlightId);
 
 		AircraftFlight GetLastAircraftFlight(int aircraftId);
@@ -38,7 +42,7 @@ namespace SmartCore.AircraftFlights
 		AircraftFlightCollection GetFlightsByAtlb(params object[] parametres);
 
 		List<AircraftFlight> GetFlightWithPageNum(int aircraftId, string pageNum, int atlbId);
-		IList<ATLB> GetATLBsByAircraftId(int aircraftId, bool loadChild = false);
+		IList<ATLB> GetATLBsByAircraftId(int aircraftId, bool loadChild = false, bool onlyOpened = false);
 
 		FlightNumber GetFlightNumberById(int itemId, bool loadChild);
 

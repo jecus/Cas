@@ -11,7 +11,7 @@ namespace EFCore.Contract
 		{
 			var connection = Helper.Helper.GetConnectionString();
 			var context = new DataContext(connection);
-			return context.UserDtos.FirstOrDefault(i => i.Login.Equals(login) && i.Password.Equals(password));
+			return context.UserDtos.FirstOrDefault(i => !i.IsDeleted && i.Login.Equals(login) && i.Password.Equals(password));
 		}
 
 		public void UpdatePassword(int id, string password)

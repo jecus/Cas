@@ -121,6 +121,11 @@ namespace EFCore.DTO.General.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("NDTType");
 
+			Property(i => i.DirectiveOrder)
+				.IsRequired()
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("DirectiveOrder");
+
 			Property(i => i.ComponentId)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("ComponentId");
@@ -188,6 +193,28 @@ namespace EFCore.DTO.General.Maps
 			Property(i => i.DamageClass)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("DamageClass");
+
+			Property(i => i.SupersedesId)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("SupersedesId");
+
+			Property(i => i.SupersededId)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("SupersededId");
+
+			Property(i => i.Zone)
+				.HasMaxLength(256)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("Zone");
+
+			Property(i => i.Access)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("Access");
+
+			Property(i => i.Workarea)
+				.HasMaxLength(256)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("Workarea");
 
 			Property(i => i.CorrectiveAction)
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)

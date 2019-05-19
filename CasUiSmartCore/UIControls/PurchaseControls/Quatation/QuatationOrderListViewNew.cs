@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Auxiliary;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls.Quatation

@@ -87,8 +87,6 @@ namespace CAS.UI.UIControls.StoresControls
 			this.label4 = new MetroFramework.Controls.MetroLabel();
 			this.labelIamge = new MetroFramework.Controls.MetroLabel();
 			this.fileControlImage = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
-			this.fileControlShipping = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
-			this.fileControlFaaForm = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
 			this.ataChapterComboBox = new CAS.UI.UIControls.Auxiliary.ATAChapterComboBox();
 			this.dictionaryComboBoxLocation = new CAS.UI.UIControls.Auxiliary.DictionaryComboBox();
 			this.dataGridViewControlSuppliers = new CAS.UI.UIControls.Auxiliary.CommonDataGridViewControl();
@@ -106,6 +104,12 @@ namespace CAS.UI.UIControls.StoresControls
 			this.label2 = new MetroFramework.Controls.MetroLabel();
 			this.labelAltpartNum = new MetroFramework.Controls.MetroLabel();
 			this.textBoxAltPartNum = new MetroFramework.Controls.MetroTextBox();
+			this.comboBoxReceived = new System.Windows.Forms.ComboBox();
+			this.metroLabelReceived = new MetroFramework.Controls.MetroLabel();
+			this.documentControlFaa = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
+			this.documentControlShip = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
+			this.metroLabelPacking = new MetroFramework.Controls.MetroLabel();
+			this.metroTextBoxPacking = new MetroFramework.Controls.MetroTextBox();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -113,7 +117,7 @@ namespace CAS.UI.UIControls.StoresControls
 			// 
 			this.labelInstallDate.AutoSize = true;
 			this.labelInstallDate.ForeColor = System.Drawing.Color.Black;
-			this.labelInstallDate.Location = new System.Drawing.Point(619, 230);
+			this.labelInstallDate.Location = new System.Drawing.Point(619, 254);
 			this.labelInstallDate.Name = "labelInstallDate";
 			this.labelInstallDate.Size = new System.Drawing.Size(78, 19);
 			this.labelInstallDate.TabIndex = 103;
@@ -126,7 +130,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.dateTimePickerInstallDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateTimePickerInstallDate.ForeColor = System.Drawing.Color.Black;
 			this.dateTimePickerInstallDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.dateTimePickerInstallDate.Location = new System.Drawing.Point(706, 230);
+			this.dateTimePickerInstallDate.Location = new System.Drawing.Point(706, 254);
 			this.dateTimePickerInstallDate.Name = "dateTimePickerInstallDate";
 			this.dateTimePickerInstallDate.Size = new System.Drawing.Size(200, 20);
 			this.dateTimePickerInstallDate.TabIndex = 14;
@@ -136,7 +140,7 @@ namespace CAS.UI.UIControls.StoresControls
 			// 
 			this.labelManufactureDate.AutoSize = true;
 			this.labelManufactureDate.ForeColor = System.Drawing.Color.Black;
-			this.labelManufactureDate.Location = new System.Drawing.Point(619, 202);
+			this.labelManufactureDate.Location = new System.Drawing.Point(619, 226);
 			this.labelManufactureDate.Name = "labelManufactureDate";
 			this.labelManufactureDate.Size = new System.Drawing.Size(82, 19);
 			this.labelManufactureDate.TabIndex = 101;
@@ -149,7 +153,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.dateTimePickerManufactureDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateTimePickerManufactureDate.ForeColor = System.Drawing.Color.Black;
 			this.dateTimePickerManufactureDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.dateTimePickerManufactureDate.Location = new System.Drawing.Point(706, 202);
+			this.dateTimePickerManufactureDate.Location = new System.Drawing.Point(706, 226);
 			this.dateTimePickerManufactureDate.Name = "dateTimePickerManufactureDate";
 			this.dateTimePickerManufactureDate.Size = new System.Drawing.Size(200, 20);
 			this.dateTimePickerManufactureDate.TabIndex = 13;
@@ -691,7 +695,7 @@ namespace CAS.UI.UIControls.StoresControls
 			// 
 			this.labelTotal.AutoSize = true;
 			this.labelTotal.ForeColor = System.Drawing.Color.Black;
-			this.labelTotal.Location = new System.Drawing.Point(619, 175);
+			this.labelTotal.Location = new System.Drawing.Point(619, 199);
 			this.labelTotal.Name = "labelTotal";
 			this.labelTotal.Size = new System.Drawing.Size(56, 19);
 			this.labelTotal.TabIndex = 126;
@@ -715,7 +719,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.textBoxTotal.CustomButton.Visible = false;
 			this.textBoxTotal.ForeColor = System.Drawing.Color.Black;
 			this.textBoxTotal.Lines = new string[0];
-			this.textBoxTotal.Location = new System.Drawing.Point(706, 175);
+			this.textBoxTotal.Location = new System.Drawing.Point(706, 199);
 			this.textBoxTotal.MaxLength = 128;
 			this.textBoxTotal.Name = "textBoxTotal";
 			this.textBoxTotal.PasswordChar = '\0';
@@ -746,7 +750,7 @@ namespace CAS.UI.UIControls.StoresControls
 			// 
 			this.checkBoxIncoming.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.checkBoxIncoming.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.checkBoxIncoming.Location = new System.Drawing.Point(759, 283);
+			this.checkBoxIncoming.Location = new System.Drawing.Point(759, 307);
 			this.checkBoxIncoming.Name = "checkBoxIncoming";
 			this.checkBoxIncoming.Size = new System.Drawing.Size(147, 26);
 			this.checkBoxIncoming.TabIndex = 131;
@@ -758,7 +762,7 @@ namespace CAS.UI.UIControls.StoresControls
 			// 
 			this.labelDiscrepancy.AutoSize = true;
 			this.labelDiscrepancy.ForeColor = System.Drawing.Color.Black;
-			this.labelDiscrepancy.Location = new System.Drawing.Point(619, 305);
+			this.labelDiscrepancy.Location = new System.Drawing.Point(619, 329);
 			this.labelDiscrepancy.Name = "labelDiscrepancy";
 			this.labelDiscrepancy.Size = new System.Drawing.Size(81, 19);
 			this.labelDiscrepancy.TabIndex = 133;
@@ -772,9 +776,9 @@ namespace CAS.UI.UIControls.StoresControls
 			// 
 			// 
 			this.textBoxDiscrepancy.CustomButton.Image = null;
-			this.textBoxDiscrepancy.CustomButton.Location = new System.Drawing.Point(93, 2);
+			this.textBoxDiscrepancy.CustomButton.Location = new System.Drawing.Point(145, 2);
 			this.textBoxDiscrepancy.CustomButton.Name = "";
-			this.textBoxDiscrepancy.CustomButton.Size = new System.Drawing.Size(105, 105);
+			this.textBoxDiscrepancy.CustomButton.Size = new System.Drawing.Size(53, 53);
 			this.textBoxDiscrepancy.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
 			this.textBoxDiscrepancy.CustomButton.TabIndex = 1;
 			this.textBoxDiscrepancy.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -782,7 +786,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.textBoxDiscrepancy.CustomButton.Visible = false;
 			this.textBoxDiscrepancy.ForeColor = System.Drawing.Color.Black;
 			this.textBoxDiscrepancy.Lines = new string[0];
-			this.textBoxDiscrepancy.Location = new System.Drawing.Point(706, 305);
+			this.textBoxDiscrepancy.Location = new System.Drawing.Point(706, 329);
 			this.textBoxDiscrepancy.MaxLength = 32767;
 			this.textBoxDiscrepancy.Multiline = true;
 			this.textBoxDiscrepancy.Name = "textBoxDiscrepancy";
@@ -792,7 +796,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.textBoxDiscrepancy.SelectionLength = 0;
 			this.textBoxDiscrepancy.SelectionStart = 0;
 			this.textBoxDiscrepancy.ShortcutsEnabled = true;
-			this.textBoxDiscrepancy.Size = new System.Drawing.Size(201, 110);
+			this.textBoxDiscrepancy.Size = new System.Drawing.Size(201, 58);
 			this.textBoxDiscrepancy.TabIndex = 132;
 			this.textBoxDiscrepancy.UseSelectable = true;
 			this.textBoxDiscrepancy.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -847,38 +851,6 @@ namespace CAS.UI.UIControls.StoresControls
 			this.fileControlImage.ShowLinkLabelRemove = false;
 			this.fileControlImage.Size = new System.Drawing.Size(201, 37);
 			this.fileControlImage.TabIndex = 139;
-			// 
-			// fileControlShipping
-			// 
-			this.fileControlShipping.AutoSize = true;
-			this.fileControlShipping.Description1 = "";
-			this.fileControlShipping.Description2 = "";
-			this.fileControlShipping.Filter = null;
-			this.fileControlShipping.Icon = global::CAS.UI.Properties.Resources.PDFIconSmall;
-			this.fileControlShipping.IconNotEnabled = global::CAS.UI.Properties.Resources.PDFIconSmall_gray;
-			this.fileControlShipping.Location = new System.Drawing.Point(409, 421);
-			this.fileControlShipping.MaximumSize = new System.Drawing.Size(350, 100);
-			this.fileControlShipping.Name = "fileControlShipping";
-			this.fileControlShipping.ShowLinkLabelBrowse = true;
-			this.fileControlShipping.ShowLinkLabelRemove = false;
-			this.fileControlShipping.Size = new System.Drawing.Size(201, 37);
-			this.fileControlShipping.TabIndex = 138;
-			// 
-			// fileControlFaaForm
-			// 
-			this.fileControlFaaForm.AutoSize = true;
-			this.fileControlFaaForm.Description1 = "";
-			this.fileControlFaaForm.Description2 = "";
-			this.fileControlFaaForm.Filter = null;
-			this.fileControlFaaForm.Icon = global::CAS.UI.Properties.Resources.PDFIconSmall;
-			this.fileControlFaaForm.IconNotEnabled = global::CAS.UI.Properties.Resources.PDFIconSmall_gray;
-			this.fileControlFaaForm.Location = new System.Drawing.Point(118, 421);
-			this.fileControlFaaForm.MaximumSize = new System.Drawing.Size(350, 100);
-			this.fileControlFaaForm.Name = "fileControlFaaForm";
-			this.fileControlFaaForm.ShowLinkLabelBrowse = true;
-			this.fileControlFaaForm.ShowLinkLabelRemove = false;
-			this.fileControlFaaForm.Size = new System.Drawing.Size(200, 37);
-			this.fileControlFaaForm.TabIndex = 136;
 			// 
 			// ataChapterComboBox
 			// 
@@ -1084,7 +1056,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.checkBoxDangerous.AutoSize = true;
 			this.checkBoxDangerous.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.checkBoxDangerous.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.checkBoxDangerous.Location = new System.Drawing.Point(798, 258);
+			this.checkBoxDangerous.Location = new System.Drawing.Point(798, 282);
 			this.checkBoxDangerous.Name = "checkBoxDangerous";
 			this.checkBoxDangerous.Size = new System.Drawing.Size(91, 15);
 			this.checkBoxDangerous.TabIndex = 142;
@@ -1096,7 +1068,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.checkBoxPOOL.AutoSize = true;
 			this.checkBoxPOOL.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.checkBoxPOOL.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.checkBoxPOOL.Location = new System.Drawing.Point(718, 258);
+			this.checkBoxPOOL.Location = new System.Drawing.Point(718, 282);
 			this.checkBoxPOOL.Name = "checkBoxPOOL";
 			this.checkBoxPOOL.Size = new System.Drawing.Size(65, 15);
 			this.checkBoxPOOL.TabIndex = 141;
@@ -1108,7 +1080,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.comboBoxSupplier.FormattingEnabled = true;
 			this.comboBoxSupplier.Location = new System.Drawing.Point(118, 91);
 			this.comboBoxSupplier.Name = "comboBoxSupplier";
-			this.comboBoxSupplier.Size = new System.Drawing.Size(200, 21);
+			this.comboBoxSupplier.Size = new System.Drawing.Size(678, 21);
 			this.comboBoxSupplier.TabIndex = 143;
 			this.comboBoxSupplier.SelectedIndexChanged += new System.EventHandler(this.comboBoxSupplier_SelectedIndexChanged);
 			// 
@@ -1118,7 +1090,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.dateTimePickerReciveDate.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.dateTimePickerReciveDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.dateTimePickerReciveDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.dateTimePickerReciveDate.Location = new System.Drawing.Point(324, 91);
+			this.dateTimePickerReciveDate.Location = new System.Drawing.Point(802, 91);
 			this.dateTimePickerReciveDate.Name = "dateTimePickerReciveDate";
 			this.dateTimePickerReciveDate.Size = new System.Drawing.Size(105, 22);
 			this.dateTimePickerReciveDate.TabIndex = 150;
@@ -1175,6 +1147,84 @@ namespace CAS.UI.UIControls.StoresControls
 			this.textBoxAltPartNum.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.textBoxAltPartNum.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
+			// comboBoxReceived
+			// 
+			this.comboBoxReceived.FormattingEnabled = true;
+			this.comboBoxReceived.Location = new System.Drawing.Point(706, 393);
+			this.comboBoxReceived.Name = "comboBoxReceived";
+			this.comboBoxReceived.Size = new System.Drawing.Size(200, 21);
+			this.comboBoxReceived.TabIndex = 154;
+			// 
+			// metroLabelReceived
+			// 
+			this.metroLabelReceived.AutoSize = true;
+			this.metroLabelReceived.ForeColor = System.Drawing.Color.Black;
+			this.metroLabelReceived.Location = new System.Drawing.Point(619, 393);
+			this.metroLabelReceived.Name = "metroLabelReceived";
+			this.metroLabelReceived.Size = new System.Drawing.Size(64, 19);
+			this.metroLabelReceived.TabIndex = 155;
+			this.metroLabelReceived.Text = "Received:";
+			this.metroLabelReceived.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// documentControlFaa
+			// 
+			this.documentControlFaa.CurrentDocument = null;
+			this.documentControlFaa.Location = new System.Drawing.Point(118, 425);
+			this.documentControlFaa.Name = "documentControlFaa";
+			this.documentControlFaa.Size = new System.Drawing.Size(200, 41);
+			this.documentControlFaa.TabIndex = 154;
+			// 
+			// documentControlShip
+			// 
+			this.documentControlShip.CurrentDocument = null;
+			this.documentControlShip.Location = new System.Drawing.Point(412, 425);
+			this.documentControlShip.Name = "documentControlShip";
+			this.documentControlShip.Size = new System.Drawing.Size(200, 41);
+			this.documentControlShip.TabIndex = 155;
+			// 
+			// metroLabelPacking
+			// 
+			this.metroLabelPacking.AutoSize = true;
+			this.metroLabelPacking.ForeColor = System.Drawing.Color.Black;
+			this.metroLabelPacking.Location = new System.Drawing.Point(619, 173);
+			this.metroLabelPacking.Name = "metroLabelPacking";
+			this.metroLabelPacking.Size = new System.Drawing.Size(56, 19);
+			this.metroLabelPacking.TabIndex = 157;
+			this.metroLabelPacking.Text = "Packing:";
+			this.metroLabelPacking.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// metroTextBoxPacking
+			// 
+			this.metroTextBoxPacking.BackColor = System.Drawing.Color.White;
+			// 
+			// 
+			// 
+			this.metroTextBoxPacking.CustomButton.Image = null;
+			this.metroTextBoxPacking.CustomButton.Location = new System.Drawing.Point(183, 2);
+			this.metroTextBoxPacking.CustomButton.Name = "";
+			this.metroTextBoxPacking.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.metroTextBoxPacking.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.metroTextBoxPacking.CustomButton.TabIndex = 1;
+			this.metroTextBoxPacking.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.metroTextBoxPacking.CustomButton.UseSelectable = true;
+			this.metroTextBoxPacking.CustomButton.Visible = false;
+			this.metroTextBoxPacking.ForeColor = System.Drawing.Color.Black;
+			this.metroTextBoxPacking.Lines = new string[0];
+			this.metroTextBoxPacking.Location = new System.Drawing.Point(706, 173);
+			this.metroTextBoxPacking.MaxLength = 128;
+			this.metroTextBoxPacking.Name = "metroTextBoxPacking";
+			this.metroTextBoxPacking.PasswordChar = '\0';
+			this.metroTextBoxPacking.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.metroTextBoxPacking.SelectedText = "";
+			this.metroTextBoxPacking.SelectionLength = 0;
+			this.metroTextBoxPacking.SelectionStart = 0;
+			this.metroTextBoxPacking.ShortcutsEnabled = true;
+			this.metroTextBoxPacking.Size = new System.Drawing.Size(201, 20);
+			this.metroTextBoxPacking.TabIndex = 156;
+			this.metroTextBoxPacking.UseSelectable = true;
+			this.metroTextBoxPacking.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.metroTextBoxPacking.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+			// 
 			// ConsumablePartAndKitForm
 			// 
 			this.AcceptButton = this.buttonOK;
@@ -1182,6 +1232,12 @@ namespace CAS.UI.UIControls.StoresControls
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.buttonCancel;
 			this.ClientSize = new System.Drawing.Size(924, 770);
+			this.Controls.Add(this.metroLabelPacking);
+			this.Controls.Add(this.metroTextBoxPacking);
+			this.Controls.Add(this.comboBoxReceived);
+			this.Controls.Add(this.metroLabelReceived);
+			this.Controls.Add(this.documentControlShip);
+			this.Controls.Add(this.documentControlFaa);
 			this.Controls.Add(this.labelAltpartNum);
 			this.Controls.Add(this.textBoxAltPartNum);
 			this.Controls.Add(this.label2);
@@ -1191,9 +1247,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.Controls.Add(this.checkBoxPOOL);
 			this.Controls.Add(this.labelIamge);
 			this.Controls.Add(this.fileControlImage);
-			this.Controls.Add(this.fileControlShipping);
 			this.Controls.Add(this.label4);
-			this.Controls.Add(this.fileControlFaaForm);
 			this.Controls.Add(this.labelFaaForm);
 			this.Controls.Add(this.labelDiscrepancy);
 			this.Controls.Add(this.textBoxDiscrepancy);
@@ -1318,8 +1372,6 @@ namespace CAS.UI.UIControls.StoresControls
 		private MetroLabel labelDiscrepancy;
 		private MetroTextBox textBoxDiscrepancy;
 		private MetroLabel labelFaaForm;
-		private Auxiliary.AttachedFileControl fileControlFaaForm;
-		private Auxiliary.AttachedFileControl fileControlShipping;
 		private MetroLabel label4;
 		private Auxiliary.AttachedFileControl fileControlImage;
 		private MetroLabel labelIamge;
@@ -1330,5 +1382,11 @@ namespace CAS.UI.UIControls.StoresControls
 		private MetroLabel label2;
 		private MetroLabel labelAltpartNum;
 		private MetroTextBox textBoxAltPartNum;
+		private System.Windows.Forms.ComboBox comboBoxReceived;
+		private MetroLabel metroLabelReceived;
+		private DocumentationControls.DocumentControl documentControlFaa;
+		private DocumentationControls.DocumentControl documentControlShip;
+		private MetroLabel metroLabelPacking;
+		private MetroTextBox metroTextBoxPacking;
 	}
 }

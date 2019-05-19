@@ -136,7 +136,16 @@ namespace CAS.UI.UIControls.DirectivesControls
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Effective date" };
             ColumnHeaderList.Add(columnHeader);
 
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Work Type" };
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Zone" };
+            ColumnHeaderList.Add(columnHeader);
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Work Area" };
+            ColumnHeaderList.Add(columnHeader);
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Access" };
+            ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Work Type" };
             ColumnHeaderList.Add(columnHeader);
 
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "STC No" };
@@ -310,6 +319,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 	        var baseDetail = item.ParentBaseComponent.ToString();
             var status = item.Status;
             var workType = item.WorkType;
+            var access = item.DirectiveAccess;
+            var zone = item.DirectiveZone;
+            var workarea = item.Workarea;
             var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
 			if (item.ADNoFile == null)
@@ -360,6 +372,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 					? SmartCore.Auxiliary.Convert.GetDateFormat(effDate) : "",
 				Tag = effDate
 			});
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = zone, Tag = zone });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = workarea, Tag = workarea });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = access, Tag = access });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = workType.ToString(), Tag = workType });
 			subItems.Add(new ListViewItem.ListViewSubItem { ForeColor = stcColor, Text = stcno, Tag = stcno });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = firstPerformanceString, Tag = firstPerformanceString });

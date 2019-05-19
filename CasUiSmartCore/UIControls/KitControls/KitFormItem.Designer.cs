@@ -50,8 +50,8 @@ namespace CAS.UI.UIControls.KitControls
 			this.comboBoxMeasure = new System.Windows.Forms.ComboBox();
 			this.labelMeasure = new System.Windows.Forms.Label();
 			this.labelStandart = new System.Windows.Forms.Label();
-			this.labelManufacturer = new System.Windows.Forms.Label();
-			this.textBoxManufacturer = new System.Windows.Forms.TextBox();
+			this.labelReference = new System.Windows.Forms.Label();
+			this.textBoxReference = new System.Windows.Forms.TextBox();
 			this.comboBoxProduct = new CAS.UI.UIControls.Auxiliary.LookupCombobox();
 			this.comboBoxStandart = new CAS.UI.UIControls.Auxiliary.LookupCombobox();
 			((System.ComponentModel.ISupportInitialize)(this.numericCount)).BeginInit();
@@ -252,25 +252,25 @@ namespace CAS.UI.UIControls.KitControls
 			// 
 			// labelManufacturer
 			// 
-			this.labelManufacturer.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelManufacturer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelManufacturer.Location = new System.Drawing.Point(8, 192);
-			this.labelManufacturer.Name = "labelManufacturer";
-			this.labelManufacturer.Size = new System.Drawing.Size(100, 25);
-			this.labelManufacturer.TabIndex = 91;
-			this.labelManufacturer.Text = "Manufacturer:";
-			this.labelManufacturer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.labelReference.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelReference.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelReference.Location = new System.Drawing.Point(8, 192);
+			this.labelReference.Name = "labelReference";
+			this.labelReference.Size = new System.Drawing.Size(100, 25);
+			this.labelReference.TabIndex = 91;
+			this.labelReference.Text = "Reference:";
+			this.labelReference.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// textBoxManufacturer
 			// 
-			this.textBoxManufacturer.BackColor = System.Drawing.Color.White;
-			this.textBoxManufacturer.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.textBoxManufacturer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxManufacturer.Location = new System.Drawing.Point(114, 194);
-			this.textBoxManufacturer.MaxLength = 128;
-			this.textBoxManufacturer.Name = "textBoxManufacturer";
-			this.textBoxManufacturer.Size = new System.Drawing.Size(438, 22);
-			this.textBoxManufacturer.TabIndex = 10;
+			this.textBoxReference.BackColor = System.Drawing.Color.White;
+			this.textBoxReference.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.textBoxReference.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxReference.Location = new System.Drawing.Point(114, 194);
+			this.textBoxReference.MaxLength = 128;
+			this.textBoxReference.Name = "textBoxReference";
+			this.textBoxReference.Size = new System.Drawing.Size(438, 22);
+			this.textBoxReference.TabIndex = 10;
 			// 
 			// comboBoxProduct
 			// 
@@ -305,8 +305,8 @@ namespace CAS.UI.UIControls.KitControls
 			this.AutoSize = true;
 			this.Controls.Add(this.comboBoxStandart);
 			this.Controls.Add(this.comboBoxProduct);
-			this.Controls.Add(this.labelManufacturer);
-			this.Controls.Add(this.textBoxManufacturer);
+			this.Controls.Add(this.labelReference);
+			this.Controls.Add(this.textBoxReference);
 			this.Controls.Add(this.labelStandart);
 			this.Controls.Add(this.comboBoxMeasure);
 			this.Controls.Add(this.labelMeasure);
@@ -347,8 +347,8 @@ namespace CAS.UI.UIControls.KitControls
         private System.Windows.Forms.ComboBox comboBoxMeasure;
         private System.Windows.Forms.Label labelMeasure;
         private System.Windows.Forms.Label labelStandart;
-        private System.Windows.Forms.Label labelManufacturer;
-        private System.Windows.Forms.TextBox textBoxManufacturer;
+        private System.Windows.Forms.Label labelReference;
+        private System.Windows.Forms.TextBox textBoxReference;
         private Auxiliary.LookupCombobox comboBoxProduct;
         private Auxiliary.LookupCombobox comboBoxStandart;
     }

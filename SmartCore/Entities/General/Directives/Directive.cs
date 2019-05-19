@@ -80,7 +80,7 @@ namespace SmartCore.Entities.General.Directives
 		/// ATA глава, к которой директива относится
 		/// </summary>
 		[TableColumn("ATAChapter")]
-        [Filter("Ata Chapter:", Order = 7)]
+        [Filter("Ata Chapter:", Order = 10)]
         [ExcelImport("Ata Chapter:", Order = 5)]
         public AtaChapter ATAChapter { get; set; }
 		#endregion
@@ -117,7 +117,7 @@ namespace SmartCore.Entities.General.Directives
         /// 
         /// </summary>
         [TableColumn("ADType")]
-        [Filter("AD Type:", Order = 8)]
+        [Filter("AD Type:", Order = 11)]
         [ExcelImport("AD Type:")]
         public ADType ADType { get; set; }
         #endregion
@@ -156,15 +156,42 @@ namespace SmartCore.Entities.General.Directives
 		/// Тип производимого Non-Destructive-Test
 		/// </summary>
 		[TableColumn("NDTType")]
-        [Filter("NDT:", Order = 12)]
+        [Filter("NDT:", Order = 15)]
         public NDTType NDTType { get; set; }
-        #endregion
+		#endregion
 
-        #region public String ServiceBulletinNo { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [TableColumn("ServiceBulletinNo")]
+		[TableColumn("DirectiveOrder")]
+		public DirectiveOrder DirectiveOrder { get; set; }
+
+		#region public string Workarea { get; set; }
+
+		[Filter("Work Area:", Order = 8)]
+		[TableColumn("Workarea")]
+		public string Workarea { get; set; }
+
+		#endregion
+
+		#region public String Zone { get; set; }
+
+		[TableColumn("Zone")]
+		[Filter("Zone:", Order = 7)]
+		public string DirectiveZone { get; set; }
+
+		#endregion
+
+		#region public String Access { get; set; }
+
+		[TableColumn("Access")]
+		[Filter("Access:", Order = 9)]
+		public string DirectiveAccess { get; set; }
+
+		#endregion
+
+		#region public String ServiceBulletinNo { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		[TableColumn("ServiceBulletinNo")]
         [Filter("SB:", Order = 3)]
         [ExcelImport("SB:")]
         public String ServiceBulletinNo { get; set; }
@@ -199,6 +226,11 @@ namespace SmartCore.Entities.General.Directives
 		}
 		#endregion
 
+		[TableColumn("SupersedesId")]
+		public int? SupersedesId { get; set; }
+
+		[TableColumn("SupersededId")]
+		public int? SupersededId { get; set; }
 
 
 		#region  public AttachedFile ServiceBulletinFile { get; set; }
@@ -604,7 +636,7 @@ namespace SmartCore.Entities.General.Directives
         /// <summary>
         /// Статус директивы
         /// </summary>
-        [Filter("Status:", Order = 9)]
+        [Filter("Status:", Order = 13)]
         public DirectiveStatus Status
         {
             get
@@ -630,7 +662,7 @@ namespace SmartCore.Entities.General.Directives
         /// <summary>
         /// Возвращает состояние ближайшего выполнения задачи (если оно расчитано) или ConditionState.NotEstimated
         /// </summary>
-        [Filter("Condition:", Order = 11)]
+        [Filter("Condition:", Order = 14)]
         public ConditionState Condition
         {
             get

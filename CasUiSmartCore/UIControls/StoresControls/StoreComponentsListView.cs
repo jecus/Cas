@@ -46,7 +46,10 @@ namespace CAS.UI.UIControls.StoresControls
             ColumnHeader columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "ATA" };
             ColumnHeaderList.Add(columnHeader);
 
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Part. No" };
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Refference" };
+            ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Part. No" };
             ColumnHeaderList.Add(columnHeader);
 
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Alt Part. No" };
@@ -173,6 +176,9 @@ namespace CAS.UI.UIControls.StoresControls
 			ColumnHeaderList.Add(columnHeader);
 
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Remarks" };
+            ColumnHeaderList.Add(columnHeader);
+
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Effectivity" };
             ColumnHeaderList.Add(columnHeader);
 
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "IsPool" };
@@ -307,7 +313,9 @@ namespace CAS.UI.UIControls.StoresControls
                    altPartNumber = "",
                    standart = "",
                    name = "",
-                   serialNumber = "",
+				   refference = "",
+                   effectivity = "",
+				   serialNumber = "",
                    code = "",
                    classString = "",
                    batchNumber = "",
@@ -375,6 +383,8 @@ namespace CAS.UI.UIControls.StoresControls
 				partNumber = componentItem.Product?.PartNumber ?? componentItem.PartNumber;
 				altPartNumber = componentItem.Product?.AltPartNumber ?? componentItem.ALTPartNumber;
 				standart = componentItem.Product?.Standart?.ToString() ?? componentItem.Standart?.ToString();
+				refference = componentItem.Product?.Reference;
+				effectivity = componentItem.Product?.IsEffectivity;
 				name = componentItem.Product?.Name;
 				description = componentItem.Description;
                 serialNumber = componentItem.SerialNumber;
@@ -407,7 +417,7 @@ namespace CAS.UI.UIControls.StoresControls
                 quantity = isComponent && componentItem.ItemId > 0 ? 1 : componentItem.Quantity;
 				quantityString = quantity.ToString();
 				quantityIn = isComponent && componentItem.ItemId > 0 ? 1 : componentItem.QuantityIn;
-	            quantityInString = $"{quantityIn:0.##}" + (componentItem.Measure != null ? " " + componentItem.Measure + "(s)" : "");
+	            quantityInString = $"{quantityIn:0.##}" + (componentItem.Measure != null ? " " + componentItem.Measure + "(s)" : "") + componentItem.Packing;
 	            needWpQuantity = Math.Round(componentItem.NeedWpQuantity, 2);
 	            reserve = quantity - needWpQuantity;
 				shouldBeOnStock = componentItem.ShouldBeOnStock;
@@ -490,6 +500,7 @@ namespace CAS.UI.UIControls.StoresControls
             }
 
             subItems.Add(new ListViewItem.ListViewSubItem { Text = ata.ToString(), Tag = ata } ); 
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = refference, Tag = refference } ); 
             subItems.Add(new ListViewItem.ListViewSubItem { Text = partNumber, Tag = partNumber } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = altPartNumber, Tag = altPartNumber } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = standart, Tag = standart } );
@@ -554,6 +565,7 @@ namespace CAS.UI.UIControls.StoresControls
             subItems.Add(new ListViewItem.ListViewSubItem { Text = currency, Tag = currency } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = supplier, Tag = supplier } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = remarks, Tag = remarks } );
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = effectivity, Tag = effectivity } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = isPool ? "Yes" : "No", Tag = isPool } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = IsDangerous ? "Yes" : "No", Tag = IsDangerous } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = hiddenRemarks, Tag = hiddenRemarks } );

@@ -9,6 +9,7 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.Collections;
+using SmartCore.Entities.General.Personnel;
 using SmartCore.Entities.General.Store;
 using SmartCore.Entities.General.Templates;
 using SmartCore.Files;
@@ -891,6 +892,31 @@ namespace SmartCore.Entities.General.Accessory
         [ListViewData(0.05f, "Should be on stock")]
         public double ShouldBeOnStock { get; set; }
 		#endregion
+
+		#region public int Received { get; set; }
+
+		[TableColumn("Received")]
+		public int ReceivedId { get; set; }
+
+		public Specialist Received
+		{
+			get => _received ?? (_received = Specialist.Unknown);
+			set => _received = value;
+		}
+
+		#endregion
+
+		#region public string Packing { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		[TableColumn("Packing"), MinMaxValue(0, 10000)]
+		public string Packing { get; set; }
+		#endregion
+
+		public string Reference => Product?.Reference;
+		public string IsEffectivity => Product?.IsEffectivity;
+
 
 		//TODO:временное свойство(какое кол-во продукта нужно из раб пакета)
 		public double NeedWpQuantity { get; set; }
@@ -1841,9 +1867,22 @@ namespace SmartCore.Entities.General.Accessory
 
 		#endregion
 
+		#region public Document DocumentFaa { get; set; }
+
+		public Document DocumentFaa { get; set; }
+
+		#endregion
+
+		#region public Document DocumentShipping { get; set; }
+
+		public Document DocumentShipping { get; set; }
+
+		#endregion
+
 		#region public Supplier FromSupplier { get; set; }
 
 		private Supplier _fromSupplier;
+		private Specialist _received;
 
 		[TableColumn("FromSupplierId")]
 		[Child]

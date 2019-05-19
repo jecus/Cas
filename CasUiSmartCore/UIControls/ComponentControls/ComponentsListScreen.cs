@@ -23,7 +23,6 @@ using CASReports.Builders;
 using CASTerms;
 using EFCore.DTO.General;
 using EFCore.Filter;
-using SmartCore.AuditMongo.Repository;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;

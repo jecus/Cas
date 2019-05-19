@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
 using EFCore.DTO.Dictionaries;
+using EFCore.DTO.General;
 using EFCore.Filter;
 using MetroFramework.Forms;
 using SmartCore.Auxiliary;
@@ -13,8 +16,11 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
+using SmartCore.Entities.General.Personnel;
 using SmartCore.Entities.General.Store;
+using SmartCore.Filters;
 using SmartCore.Purchase;
+using FilterType = SmartCore.Filters.FilterType;
 
 namespace CAS.UI.UIControls.StoresControls
 {
@@ -27,6 +33,9 @@ namespace CAS.UI.UIControls.StoresControls
 		private Store _currentStore;
 		private bool _isStore;
 		private ProductCost _productCost;
+		private List<Specialist> _specialists = new List<Specialist>();
+		private Department _department;
+		private Department _departmentPalanning;
 
 		#region Properties
 
@@ -62,8 +71,10 @@ namespace CAS.UI.UIControls.StoresControls
 		{
 			_consumablePart = consumablePart;
 			_isStore = GlobalObjects.StoreCore.GetStoreById(consumablePart.ParentStoreId) != null;
-			FillControls();
+			Task.Run(() => DoWork())
+				.ContinueWith(task => FillControls(), TaskScheduler.FromCurrentSynchronizationContext());
 		}
+
 		#endregion
 
 		#region public ConsumablePartAndKitForm(Store store) : this()
@@ -75,13 +86,52 @@ namespace CAS.UI.UIControls.StoresControls
 		{
 			_currentStore = store;
 			_consumablePart = new Component {GoodsClass = GoodsClass.MaintenanceMaterials };
-			FillControls();
+			Task.Run(() => DoWork())
+				.ContinueWith(task => FillControls(), TaskScheduler.FromCurrentSynchronizationContext());
 		}
 		#endregion
 
 		#endregion
 
 		#region Methods
+
+		private void DoWork()
+		{
+			_specialists.Clear();
+
+			if (_consumablePart.ItemId > 0)
+			{
+				var documents = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<DocumentDTO, Document>(new[]
+				{
+					new Filter("ParentID",_consumablePart.ItemId),
+					new Filter("DocTypeId", DocumentType.StoreRecord.ItemId),
+				});
+
+				var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Component CRS Form") as DocumentSubType;
+				_consumablePart.DocumentFaa = documents.FirstOrDefault(i => i.DocumentSubType.ItemId == docSubType.ItemId);
+
+				docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Shipping document") as DocumentSubType;
+				_consumablePart.DocumentShipping = documents.FirstOrDefault(i => i.DocumentSubType.ItemId == docSubType.ItemId);
+
+			}
+
+			_department =
+				GlobalObjects.CasEnvironment.NewLoader.GetObject<DepartmentDTO, Department>(new Filter("FullName",
+					"Logistics & Stores Department "));
+
+			_departmentPalanning =
+				GlobalObjects.CasEnvironment.NewLoader.GetObject<DepartmentDTO, Department>(new Filter("FullName",
+					"Planning"));
+
+			var spec = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<SpecializationDTO, Specialization>(
+				new Filter("DepartmentId", _department.ItemId));
+			var ids = spec.Select(i => i.ItemId);
+
+			_specialists.AddRange(GlobalObjects.CasEnvironment.Loader.GetObjectList< Specialist>(new ICommonFilter[]
+			{
+				new CommonFilter<int>(Specialist.SpecializationIdProperty, FilterType.In, ids.ToArray()), 
+			}));
+		}
 
 		#region private void FillControls()
 		/// <summary>
@@ -134,6 +184,8 @@ namespace CAS.UI.UIControls.StoresControls
 			comboBoxStandart.Type = typeof(GoodStandart);
 			comboBoxMeasure.Items.Clear();
 			comboBoxMeasure.Items.AddRange(Measure.GetByCategories(new[] {MeasureCategory.Mass, MeasureCategory.EconomicEntity, MeasureCategory.Volume, }));
+			comboBoxMeasure.Items.Add(Measure.Centimeters);
+			comboBoxMeasure.Items.Add(Measure.SquareMeter);
 			comboBoxStatus.Items.Clear();
 			foreach (object o in Enum.GetValues(typeof(ComponentStatus)))
 				comboBoxStatus.Items.Add(o);
@@ -156,6 +208,7 @@ namespace CAS.UI.UIControls.StoresControls
 			textBoxDescription.Text = _consumablePart.Description;
 			textBoxProductCode.Text = _consumablePart.Code;
 			dictionaryComboProduct.SelectedItem = _consumablePart.Model;
+			metroTextBoxPacking.Text = _consumablePart.Packing;
 
 			if (_consumablePart.ProductCosts.Count == 0)
 				_consumablePart.ProductCosts.Add(new ProductCost {QtyIn = _consumablePart.QuantityIn, Currency = Сurrency.USD});
@@ -175,16 +228,6 @@ namespace CAS.UI.UIControls.StoresControls
 			checkBoxPOOL.Checked = _consumablePart.IsPOOL;
 			checkBoxDangerous.Checked = _consumablePart.IsDangerous;
 
-
-			fileControlFaaForm.UpdateInfo(_consumablePart.FaaFormFile,
-				"Adobe PDF Files|*.pdf",
-				"This record does not contain a file proving the FAA File. Enclose PDF file to prove the compliance.",
-				"Attached file proves the FAA File.");
-
-			fileControlShipping.UpdateInfo(_consumablePart.IncomingFile,
-				"Adobe PDF Files|*.pdf",
-				"This record does not contain a file proving the Shipping File. Enclose PDF file to prove the compliance.",
-				"Attached file proves the Shipping File.");
 
 			comboBoxSupplier.Enabled = dateTimePickerReciveDate.Enabled = _isStore;
 
@@ -245,14 +288,28 @@ namespace CAS.UI.UIControls.StoresControls
 				State = record.State;
 				dateTimePickerInstallDate.Value = record.TransferDate;
 				dateTimePickerManufactureDate.Value = _consumablePart.ManufactureDate;
+
+
+				documentControlFaa.CurrentDocument = _consumablePart.DocumentFaa;
+				documentControlFaa.Added += DocumentControlFaa_Added;
+				documentControlShip.CurrentDocument = _consumablePart.DocumentShipping;
+				documentControlShip.Added += DocumentControlShip_Added;
 			}
 			else
 			{
+				documentControlFaa.Enabled = false;
+				documentControlShip.Enabled = false;
+
 				buttonSaveAndAdd.Visible = true;
 				State = ComponentStorePosition.Serviceable;
 				dateTimePickerManufactureDate.Value = DateTime.Today;
 				dateTimePickerInstallDate.Value = DateTime.Today;
 			}
+
+			comboBoxReceived.Items.Clear();
+			comboBoxReceived.Items.Add(Specialist.Unknown);
+			comboBoxReceived.Items.AddRange(_specialists.ToArray());
+			comboBoxReceived.SelectedItem = _consumablePart.Received;
 
 			SetForDetailClass();
 			SetForMeasure();
@@ -330,9 +387,7 @@ namespace CAS.UI.UIControls.StoresControls
 				      checkBoxIncoming.Checked != obj.Incoming ||
 				      checkBoxPOOL.Checked != obj.IsPOOL ||
 				      checkBoxDangerous.Checked != obj.IsDangerous ||
-				      textBoxDiscrepancy.Text != obj.Discrepancy ||
-				      fileControlFaaForm.GetChangeStatus() ||
-				      fileControlShipping.GetChangeStatus()))
+				      textBoxDiscrepancy.Text != obj.Discrepancy))
 			{
 				return true;
 			}
@@ -423,17 +478,6 @@ namespace CAS.UI.UIControls.StoresControls
 				return false;
 			}
 
-			string validateFiles;
-			if (!fileControlFaaForm.ValidateData(out validateFiles))
-			{
-				if (message != "") message += "\n ";
-				message += "FAA File: " + validateFiles;
-			}
-			if (!fileControlShipping.ValidateData(out validateFiles))
-			{
-				if (message != "") message += "\n ";
-				message += "Shipping File: " + validateFiles;
-			}
 			return true;
 		}
 
@@ -472,6 +516,8 @@ namespace CAS.UI.UIControls.StoresControls
 
 			obj.Model = dictionaryComboProduct.SelectedItem as ComponentModel;
 			obj.Location = dictionaryComboBoxLocation.SelectedItem as Locations;
+			obj.Received = comboBoxReceived.SelectedItem as Specialist;
+			obj.ReceivedId = _consumablePart.Received?.ItemId ?? -1;
 			obj.Remarks = textBoxRemarks.Text;
 			obj.ManufactureDate = dateTimePickerManufactureDate.Value;
 			obj.LifeLimit = lifelengthViewerLifeLimit.Lifelength;
@@ -483,15 +529,10 @@ namespace CAS.UI.UIControls.StoresControls
 			obj.Incoming = checkBoxIncoming.Checked;
 			obj.IsPOOL = checkBoxPOOL.Checked;
 			obj.IsDangerous = checkBoxDangerous.Checked;
-
+			obj.Packing = metroTextBoxPacking.Text;
 			obj.FromSupplier = comboBoxSupplier.SelectedItem as Supplier;
 			obj.FromSupplierReciveDate = dateTimePickerReciveDate.Value;
 
-			fileControlFaaForm.ApplyChanges();
-			obj.FaaFormFile = fileControlFaaForm.AttachedFile;
-
-			fileControlShipping.ApplyChanges();
-			obj.IncomingFile = fileControlShipping.AttachedFile;
 
 			dataGridViewControlSuppliers.ApplyChanges(true);
 
@@ -752,10 +793,8 @@ namespace CAS.UI.UIControls.StoresControls
 				quantity = _consumablePart.Quantity;
 	        else quantity = (double)numericUpDownQuantity.Value;
 
-            
-
-            textBoxTotal.Text = String.Format("{0:0.##}", quantity) + (measure != null ? " " + measure + "(s)" : "");
-        }
+			textBoxTotal.Text = String.Format("{0:0.##}", quantity) + (measure != null ? " " + measure + "(s)" : "");
+		}
         #endregion
 
         #region private void DateTimePickerInstallationDateValueChanged(object sender, EventArgs e)
@@ -1242,5 +1281,51 @@ namespace CAS.UI.UIControls.StoresControls
 		}
 
 		#endregion
+
+		private void DocumentControlShip_Added(object sender, EventArgs e)
+		{
+			var control = sender as DocumentControl;
+			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Shipping document") as DocumentSubType;
+			var newDocument = new Document
+			{
+				Parent = _consumablePart,
+				ParentId = _consumablePart.ItemId,
+				ParentTypeId = _consumablePart.SmartCoreObjectType.ItemId,
+				DocType = DocumentType.StoreRecord,
+				DocumentSubType = docSubType,
+				IsClosed = true,
+				ContractNumber = $"",
+				Description = "",
+				ParentAircraftId = _consumablePart.ParentAircraftId,
+				Department = _department
+			};
+
+			var form = new DocumentForm(newDocument, false);
+			if (form.ShowDialog() == DialogResult.OK)
+				control.CurrentDocument = newDocument;
+		}
+
+		private void DocumentControlFaa_Added(object sender, EventArgs e)
+		{
+			var control = sender as DocumentControl;
+			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Component CRS Form") as DocumentSubType;
+			var newDocument = new Document
+			{
+				Parent = _consumablePart,
+				ParentId = _consumablePart.ItemId,
+				ParentTypeId = _consumablePart.SmartCoreObjectType.ItemId,
+				DocType = DocumentType.TechnicalRecords,
+				DocumentSubType = docSubType,
+				IsClosed = true,
+				ContractNumber = $"{_consumablePart}",
+				Description = _consumablePart.Description,
+				ParentAircraftId = _consumablePart.ParentAircraftId,
+				Department = _departmentPalanning
+			};
+
+			var form = new DocumentForm(newDocument, false);
+			if (form.ShowDialog() == DialogResult.OK)
+				control.CurrentDocument = newDocument;
+		}
 	}
 }

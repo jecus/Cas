@@ -1351,6 +1351,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.checkBoxOccurrence.TabIndex = 222;
 			this.checkBoxOccurrence.Text = "Occurrence";
 			this.checkBoxOccurrence.UseVisualStyleBackColor = true;
+			this.checkBoxOccurrence.Enabled = false;
 			this.checkBoxOccurrence.Visible = false;
 			this.checkBoxOccurrence.CheckedChanged += new System.EventHandler(this.checkBoxOccurrence_CheckedChanged);
 			// 

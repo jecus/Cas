@@ -5,15 +5,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
-using EFCore.DTO.General;
-using EFCore.Filter;
 using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Filters;
 using SmartCore.Purchase;
-using FilterType = EFCore.Attributte.FilterType;
 
 namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {

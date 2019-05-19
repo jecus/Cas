@@ -577,13 +577,16 @@ namespace SmartCore.Entities.General.Accessory
         /// </summary>
         [TableColumnAttribute("IsClosed")]
         public Boolean IsClosed { get; set; }
-        #endregion
+		#endregion
 
-        #region public Boolean NextPerformanceIsBlocked { get; }
-        /// <summary>
-        /// Ћогический флаг, показывающий, заблокировано ли след. выполенение директивы рабочим пакетом
-        /// </summary>
-        public Boolean NextPerformanceIsBlocked
+		public string Reference => "";
+		public string IsEffectivity => "";
+
+		#region public Boolean NextPerformanceIsBlocked { get; }
+		/// <summary>
+		/// Ћогический флаг, показывающий, заблокировано ли след. выполенение директивы рабочим пакетом
+		/// </summary>
+		public Boolean NextPerformanceIsBlocked
         {
             get
             {

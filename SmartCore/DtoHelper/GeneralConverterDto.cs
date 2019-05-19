@@ -1581,6 +1581,8 @@ namespace SmartCore.DtoHelper
 				QuantityInput = comp.QuantityIn,
 				FromSupplierId = comp.FromSupplier?.ItemId ?? -1,
 				FromSupplierReciveDate = comp.FromSupplierReciveDate,
+				Received = comp.ReceivedId,
+				Packing = comp.Packing,
 				LLPData = comp.LLPData?.Select(i => i.Convert()) as ICollection<ComponentLLPCategoryDataDTO>,
 				CategoriesRecords = comp.CategoriesRecords?.Select(i => i.Convert()) as ICollection<CategoryRecordDTO>,
 				SupplierRelations = comp.SupplierRelations?.Select(i => i.Convert()) as ICollection<KitSuppliersRelationDTO>,
@@ -1650,7 +1652,9 @@ namespace SmartCore.DtoHelper
 				IsDangerous = compdto.IsDangerous,
 				QuantityIn = compdto.QuantityInput ?? default(double),
 				FromSupplier = compdto.FromSupplier?.Convert(),
-				FromSupplierReciveDate = compdto.FromSupplierReciveDate ?? DateTimeExtend.GetCASMinDateTime()
+				FromSupplierReciveDate = compdto.FromSupplierReciveDate ?? DateTimeExtend.GetCASMinDateTime(),
+				ReceivedId = compdto.Received,
+				Packing = compdto.Packing
 			};
 
 			if (compdto.LLPData != null)
@@ -1796,6 +1800,8 @@ namespace SmartCore.DtoHelper
 				QuantityInput = comp.QuantityIn,
 				FromSupplierId = comp.FromSupplier?.ItemId ?? -1,
 				FromSupplierReciveDate = comp.FromSupplierReciveDate,
+				Received = comp.ReceivedId,
+				Packing = comp.Packing,
 				LLPData = comp.LLPData?.Select(i => i.Convert()) as ICollection<ComponentLLPCategoryDataDTO>,
 				CategoriesRecords = comp.CategoriesRecords?.Select(i => i.Convert()) as ICollection<CategoryRecordDTO>,
 				SupplierRelations = comp.SupplierRelations?.Select(i => i.Convert()) as ICollection<KitSuppliersRelationDTO>,
@@ -1870,7 +1876,9 @@ namespace SmartCore.DtoHelper
 				IsDangerous = compdto.IsDangerous,
 				QuantityIn = compdto.QuantityInput ?? default(double),
 				FromSupplier = compdto.FromSupplier?.Convert(),
-				FromSupplierReciveDate = compdto.FromSupplierReciveDate ?? DateTimeExtend.GetCASMinDateTime()
+				FromSupplierReciveDate = compdto.FromSupplierReciveDate ?? DateTimeExtend.GetCASMinDateTime(),
+				ReceivedId = compdto.Received,
+				Packing = compdto.Packing
 			};
 
 			if (compdto.LLPData != null)
@@ -2377,6 +2385,12 @@ namespace SmartCore.DtoHelper
 				IsClosed = direc.IsClosed,
 				AircraftFlight = direc.AircraftFlightId,
 				NDTType = (short)(direc.NDTType?.ItemId ?? -1),
+				DirectiveOrder = (short)(direc.DirectiveOrder?.ItemId ?? -1),
+				Zone = direc.DirectiveZone,
+				Access = direc.DirectiveAccess,
+				SupersededId = direc.SupersededId,
+				SupersedesId = direc.SupersedesId,
+				Workarea = direc.Workarea,
 				ComponentId = direc.ParentBaseComponent?.ItemId,
 				ATAChapterId = direc.ATAChapter?.ItemId ?? -1,
 				Files = direc.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
@@ -2415,6 +2429,12 @@ namespace SmartCore.DtoHelper
 				IsClosed = direcdto.IsClosed ??default(bool),
 				AircraftFlightId = direcdto.AircraftFlight ?? default(int) ,
 				NDTType = NDTType.GetItemById(direcdto.NDTType),
+				DirectiveOrder = DirectiveOrder.GetDirectiveOrderById(direcdto.DirectiveOrder),
+				DirectiveZone = direcdto.Zone,
+				DirectiveAccess = direcdto.Access,
+				SupersededId = direcdto.SupersededId,
+				SupersedesId = direcdto.SupersedesId,
+				Workarea = direcdto.Workarea,
 				ParentBaseComponent = direcdto.BaseComponent?.ConvertToBaseComponent(),
 				ATAChapter = direcdto.ATAChapter?.Convert()
 			};
@@ -2487,6 +2507,12 @@ namespace SmartCore.DtoHelper
 				DeferredCategoryId = direc.DeferredCategory?.ItemId ?? -1,
 				AircraftFlight = direc.AircraftFlightId,
 				NDTType = (short)(direc.NDTType?.ItemId ?? -1),
+				DirectiveOrder = (short)(direc.DirectiveOrder?.ItemId ?? -1),
+				Zone = direc.DirectiveZone,
+				Access = direc.DirectiveAccess,
+				SupersededId = direc.SupersededId,
+				SupersedesId = direc.SupersedesId,
+				Workarea = direc.Workarea,
 				ComponentId = direc.ParentBaseComponent?.ItemId,
 				ATAChapterId = direc.ATAChapter?.ItemId ?? -1,
 				Files = direc.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
@@ -2529,6 +2555,12 @@ namespace SmartCore.DtoHelper
 				IsClosed = direcdto.IsClosed ?? default(bool),
 				AircraftFlightId = direcdto.AircraftFlight ?? default(int),
 				NDTType = NDTType.GetItemById(direcdto.NDTType),
+				DirectiveOrder = DirectiveOrder.GetDirectiveOrderById(direcdto.DirectiveOrder),
+				DirectiveZone = direcdto.Zone,
+				DirectiveAccess = direcdto.Access,
+				SupersededId = direcdto.SupersededId,
+				SupersedesId = direcdto.SupersedesId,
+				Workarea = direcdto.Workarea,
 				ParentBaseComponent = direcdto.BaseComponent?.ConvertToBaseComponent(),
 				ATAChapter = direcdto.ATAChapter?.Convert()
 			};
@@ -2608,6 +2640,12 @@ namespace SmartCore.DtoHelper
 				IsClosed = direc.IsClosed,
 				AircraftFlight = direc.AircraftFlightId,
 				NDTType = (short)(direc.NDTType?.ItemId ?? -1),
+				DirectiveOrder = (short)(direc.DirectiveOrder?.ItemId ?? -1),
+				Zone = direc.DirectiveZone,
+				Access = direc.DirectiveAccess,
+				SupersededId = direc.SupersededId,
+				SupersedesId = direc.SupersedesId,
+				Workarea = direc.Workarea,
 				ComponentId = direc.ParentBaseComponent?.ItemId,
 				ATAChapterId = direc.ATAChapter?.ItemId ?? -1,
 				Files = direc.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
@@ -2661,6 +2699,12 @@ namespace SmartCore.DtoHelper
 				IsClosed = direcdto.IsClosed ?? default(bool),
 				AircraftFlightId = direcdto.AircraftFlight ?? default(int),
 				NDTType = NDTType.GetItemById(direcdto.NDTType),
+				DirectiveOrder = DirectiveOrder.GetDirectiveOrderById(direcdto.DirectiveOrder),
+				DirectiveZone = direcdto.Zone,
+				DirectiveAccess = direcdto.Access,
+				SupersededId = direcdto.SupersededId,
+				SupersedesId = direcdto.SupersedesId,
+				Workarea = direcdto.Workarea,
 				ParentBaseComponent = direcdto.BaseComponent?.ConvertToBaseComponent(),
 				ATAChapter = direcdto.ATAChapter?.Convert()
 			};
@@ -3642,7 +3686,7 @@ namespace SmartCore.DtoHelper
 				ItemId = orderrecdto.ItemId,
 				IsDeleted = orderrecdto.IsDeleted,
 				CorrectorId = orderrecdto.CorrectorId,
-				Priority = Priority.GetItemById(orderrecdto.Priority),
+				Priority = orderrecdto.Priority.HasValue ? Priority.GetItemById(orderrecdto.Priority.Value) : Priority.UNK,
 				InitialReason = orderrecdto.InitialReason.HasValue ? InitialReason.Items.GetItemById(orderrecdto.InitialReason.Value) : InitialReason.Unknown,
 				DestinationObjectId = orderrecdto.DestinationObjectID ?? default(int),
 				DestinationObjectType = orderrecdto.DestinationObjectType.HasValue ? SmartCoreType.Items.GetItemById(orderrecdto.DestinationObjectType.Value) : SmartCoreType.Unknown,

@@ -13,7 +13,6 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Filters;
 using SmartCore.Purchase;
-using FilterType = EFCore.Attributte.FilterType;
 
 namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {

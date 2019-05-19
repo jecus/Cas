@@ -131,7 +131,7 @@ namespace SmartCore.Queries
                                                                         where DR.IsDeleted = 0
                                                                         and DR.ParentId = directives.ItemId
                                                                         and DR.ParentTypeId = {0} 
-                                                                        and DR.RecordDate >= '{1}'
+                                                                        and DR.RecordDate >= convert(datetime, '{1}', 104)
                                                                         Order by DR.RecordDate desc))",
                           SmartCoreType.Directive.ItemId, DbTypes.DbObject(aircraftFlight.FlightDate.Date));
 

@@ -5,6 +5,7 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using SmartCore.Auxiliary;
+using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Atlbs;
 
@@ -18,6 +19,8 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         #region Fields
 
         private readonly Aircraft _parentAircraft;
+        private readonly bool _showDefects;
+
         #endregion
 
         #region Constructors
@@ -25,33 +28,37 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         #region private ATLBListView()
         ///<summary>
         ///</summary>
-        private ATLBListView()
+        public ATLBListView()
         {
             InitializeComponent();
-        }
+
+            OldColumnIndex = 2;
+            SortMultiplier = 1;
+		}
         #endregion
 
         #region public ATLBListView(Aircraft parentAircraft) : this()
         ///<summary>
         ///</summary>
-        public ATLBListView(Aircraft parentAircraft)
+        public ATLBListView(Aircraft parentAircraft, bool showDefects = false)
             : this()
         {
             OldColumnIndex = 2;
             SortMultiplier = 1;
             _parentAircraft = parentAircraft;
+            _showDefects = showDefects;
         }
-        #endregion
+		#endregion
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region protected override void SetHeaders()
-        /// <summary>
-        /// Устанавливает заголовки
-        /// </summary>
-        protected override void SetHeaders()
+		#region protected override void SetHeaders()
+		/// <summary>
+		/// Устанавливает заголовки
+		/// </summary>
+		protected override void SetHeaders()
         {
             itemsListView.Columns.Clear();
             ColumnHeaderList.Clear();
@@ -77,11 +84,22 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(ATLB item)
         {
             var subItems = new ListViewItem.ListViewSubItem[4];
+            AircraftFlightCollection flights;
+            AircraftFlight first;
+            AircraftFlight last;
 
-	        var flights = GlobalObjects.AircraftFlightsCore.GetAircraftFlightsByAircraftId(_parentAircraft.ItemId);
-
-			var first = flights.GetFirstFlightInAtlb(item.ItemId);
-            var last = flights.GetLastFlightInAtlb(item.ItemId);
+			if (_parentAircraft != null)
+            {
+				flights = GlobalObjects.AircraftFlightsCore.GetAircraftFlightsByAircraftId(_parentAircraft.ItemId);
+	            first = flights.GetFirstFlightInAtlb(item.ItemId);
+	            last = flights.GetLastFlightInAtlb(item.ItemId);
+			}
+            else
+            {
+	            first = GlobalObjects.AircraftFlightsCore.GetFirstFlight(item.ItemId);
+				last = GlobalObjects.AircraftFlightsCore.GetLastFlight(item.ItemId);
+			}
+			
             var pages = (first != null && first.PageNo != "" ? first.PageNo : "XXX") + " - " +
                            (last != null && last.PageNo != "" ? last.PageNo : "XXX");
             var dates = (first != null ? UsefulMethods.NormalizeDate(first.FlightDate.Date) : "YY:MM:DD") + " - " +
@@ -128,7 +146,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             {
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
                 e.DisplayerText = _parentAircraft.RegistrationNumber + ". ATLB No " + SelectedItem.ATLBNo;
-                e.RequestedEntity = new FlightsListScreen(SelectedItem);
+                e.RequestedEntity = new FlightsListScreen(SelectedItem, _showDefects);
             }
         }
         #endregion

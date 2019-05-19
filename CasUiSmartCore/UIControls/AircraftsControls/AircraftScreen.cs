@@ -2043,8 +2043,12 @@ namespace CAS.UI.UIControls.AircraftsControls
             e.DisplayerText = CurrentAircraft.RegistrationNumber + ". List of WP";
             e.RequestedEntity = new WorkPackageListScreen(CurrentAircraft);
         }
-        #endregion
+		#endregion
 
-
-    }
+		private void AllATLB_DisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			e.DisplayerText = "ATLB Event";
+			e.RequestedEntity = new AllATLBListScreen(CurrentAircraft);
+		}
+	}
 }

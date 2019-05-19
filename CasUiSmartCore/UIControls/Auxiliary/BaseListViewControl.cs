@@ -393,7 +393,9 @@ namespace CAS.UI.UIControls.Auxiliary
 					string valueString;
                     if (value is DateTime)
                         valueString = SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)value);
-                    else valueString = value.ToString();
+                    else if (value is double)
+	                    valueString = ((double)value).ToString("F");
+					else valueString = value.ToString();
 
                                    
                     subItems[i] = new ListViewItem.ListViewSubItem

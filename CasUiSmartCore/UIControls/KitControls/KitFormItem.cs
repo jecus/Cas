@@ -136,7 +136,7 @@ namespace CAS.UI.UIControls.KitControls
                 comboBoxStandart.SelectedItem = accessoryDescription.Standart;
                 textBoxPartNumber.Text = accessoryDescription.PartNumber;
                 textBoxDescription.Text = accessoryDescription.Description;
-                textBoxManufacturer.Text = accessoryDescription.Manufacturer;
+                textBoxReference.Text = accessoryDescription.Reference;
                 //textBoxSuppliers.Text = accessoryDescription.Suppliers.ToString();
             }
             else if (_currentKit.Standart != null)
@@ -154,7 +154,7 @@ namespace CAS.UI.UIControls.KitControls
                 comboBoxStandart.SelectedItem = accessoryStandart;
                 textBoxPartNumber.Text = accessoryStandart.PartNumber;
                 textBoxDescription.Text = accessoryStandart.Description;
-                textBoxManufacturer.Text = "";
+                textBoxReference.Text = "";
             }
             else
             {
@@ -173,7 +173,7 @@ namespace CAS.UI.UIControls.KitControls
                     comboBoxStandart.SelectedItem = _currentKit.Standart;
                     textBoxPartNumber.Text = _currentKit.PartNumber;
                     textBoxDescription.Text = _currentKit.Description;
-                    textBoxManufacturer.Text = _currentKit.Manufacturer;
+                    textBoxReference.Text = _currentKit.Product?.Reference;
                     //textBoxSuppliers.Text = _currentKit.Suppliers.ToString();   
                 }
             }
@@ -313,7 +313,6 @@ namespace CAS.UI.UIControls.KitControls
                             : kitStandartName != ""))
                 || textBoxPartNumber.Text != _currentKit.PartNumber
                 || textBoxDescription.Text != _currentKit.Description
-                || textBoxManufacturer.Text != _currentKit.Manufacturer
                 || textBoxRemarks.Text != _currentKit.Remarks
                 //|| numericCostNew.Value != (decimal)_currentKit.CostNew
                 //|| numericCostServiceable.Value != (decimal)_currentKit.CostServiceable
@@ -373,12 +372,12 @@ namespace CAS.UI.UIControls.KitControls
                 message += "Not set Description";
                 return false;
             }
-            if (comboBoxProduct.Text != "" && string.IsNullOrEmpty(textBoxManufacturer.Text))
-            {
-                if (message != "") message += "\n ";
-                message += "Not set Manufacturer";
-                return false;
-            }
+            //if (comboBoxProduct.Text != "" && string.IsNullOrEmpty(textBoxReference.Text))
+            //{
+            //    if (message != "") message += "\n ";
+            //    message += "Not set Reference";
+            //    return false;
+            //}
             //if (comboBoxMeasure.SelectedItem as Measure == null)
             //{
             //    if (message != "") message += "\n ";
@@ -407,7 +406,6 @@ namespace CAS.UI.UIControls.KitControls
             _currentKit.Quantity = (double)numericCount.Value;
 			_currentKit.PartNumber = textBoxPartNumber.Text;
 			_currentKit.Description = textBoxDescription.Text;
-			_currentKit.Manufacturer = textBoxManufacturer.Text;
 			_currentKit.Standart = comboBoxStandart.SelectedItem as GoodStandart;
 			_currentKit.Remarks = textBoxRemarks.Text;
 			_currentKit.Measure = comboBoxMeasure.SelectedItem as Measure;
@@ -450,7 +448,7 @@ namespace CAS.UI.UIControls.KitControls
                 comboBoxStandart.SelectedItem = accessoryDescription.Standart;
                 textBoxPartNumber.Text = accessoryDescription.PartNumber;
                 textBoxDescription.Text = accessoryDescription.Description;
-                textBoxManufacturer.Text = accessoryDescription.Manufacturer;
+                textBoxReference.Text = accessoryDescription.Reference;
                 //textBoxSuppliers.Text = accessoryDescription.Suppliers.ToString();
                 //textBoxRemarks.Text = accessoryDescription.Remarks;
             }

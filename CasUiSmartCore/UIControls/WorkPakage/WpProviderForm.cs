@@ -7,7 +7,6 @@ using EFCore.DTO.General;
 using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.WorkPackage;
-using SmartCore.Filters;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.WorkPakage

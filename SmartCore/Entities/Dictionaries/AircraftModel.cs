@@ -47,7 +47,7 @@ namespace SmartCore.Entities.Dictionaries
 			}, Order = 10)]
 	    [ListViewData(0.15f, "Class")]
 	    [NotNull]
-	    [Filter("Class:", Order = 5)]
+	    [Filter("Class:")]
 
 	    public GoodsClass GoodsClass
 	    {

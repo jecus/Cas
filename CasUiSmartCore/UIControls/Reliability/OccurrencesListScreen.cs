@@ -11,7 +11,6 @@ using CAS.UI.UIControls.Discrepancies;
 using CAS.UI.UIControls.FiltersControls;
 using CASReports.Builders;
 using CASTerms;
-using SmartCore.Auxiliary;
 using SmartCore.Discrepancies;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -48,9 +47,8 @@ namespace CAS.UI.UIControls.Reliability
         private ToolStripMenuItem _toolStripMenuItemDelete;
         private ToolStripSeparator _toolStripSeparator2;
         private ToolStripMenuItem _toolStripMenuItemHighlight;
-	    private bool _firstLoad;
 
-	    #endregion
+        #endregion
 
 		#region Constructors
 
@@ -72,9 +70,10 @@ namespace CAS.UI.UIControls.Reliability
                 throw new ArgumentNullException("Operator");
             CurrentOperator = op;
 
-	        _firstLoad = true;
+			dateTimePickerDateTo.Value = DateTime.Now;
+			dateTimePickerDateFrom.Value = DateTime.Now.AddMonths(-1);
 
-            InitToolStripMenuItems();
+			InitToolStripMenuItems();
             InitListView();
         }
 
@@ -126,18 +125,6 @@ namespace CAS.UI.UIControls.Reliability
             labelTitle.Text = "";
             labelTitle.Status = Statuses.NotActive;
 
-	        if (_firstLoad)
-			{
-				_firstLoad = false;
-
-				var q = _initialDirectiveArray.OrderBy(i => i.ParentFlightDate);
-
-				dateTimePickerDateFrom.Value = q.FirstOrDefault()?.ParentFlightDate ?? DateTimeExtend.GetCASMinDateTime();
-				dateTimePickerDateTo.Value = q.LastOrDefault()?.ParentFlightDate ?? DateTime.Today;
-
-			}
-
-
             _directivesViewer.SetItemsArray(_resultDirectiveArray.ToArray());
             headerControl.PrintButtonEnabled= _directivesViewer.ListViewItemList.Count != 0;
             _directivesViewer.Focus();
@@ -153,18 +140,11 @@ namespace CAS.UI.UIControls.Reliability
             AnimatedThreadWorker.ReportProgress(0, "load Work Packages");
 
 
-	        if (_firstLoad)
-	        {
-		        _initialDirectiveArray.AddRange(GlobalObjects.DiscrepanciesCore.GetDiscrepancies(null, DiscFilterType.Occurrence).ToArray());
-	        }
-	        else
-	        {
-				var discrip = GlobalObjects.DiscrepanciesCore.GetDiscrepancies(null, DiscFilterType.Occurrence).ToArray();
-		        _initialDirectiveArray.AddRange(discrip.Where(t => t.ParentFlightDate >= dateTimePickerDateFrom.Value &&
-		                                                           t.ParentFlightDate <= dateTimePickerDateTo.Value));
-			}
+			var discrip = GlobalObjects.DiscrepanciesCore.GetDiscrepancies(null, DiscFilterType.Occurrence).ToArray();
+		    _initialDirectiveArray.AddRange(discrip.Where(t => t.ParentFlightDate >= dateTimePickerDateFrom.Value &&
+		                                                        t.ParentFlightDate <= dateTimePickerDateTo.Value));
 
-	        foreach (var discrepancy in _initialDirectiveArray)
+		    foreach (var discrepancy in _initialDirectiveArray)
 		        discrepancy.Aircraft = GlobalObjects.AircraftsCore.GetAircraftById(discrepancy.ParentFlight.AircraftId);
 
 

@@ -55,7 +55,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 		/// Создает страницу для отображения информации об одной директиве
 		///</summary>
 		/// <param name="flight">Директива</param>
-		public FlightScreen(AircraftFlight flight, bool showDeffects = false)
+		public FlightScreen(AircraftFlight flight, bool showDeffects = false, bool allView = false)
 			: this()
 		{
 			if (flight == null)
@@ -69,10 +69,14 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			}
 			else throw new ArgumentException("flight.AircraftId cannot be 0", "flight");
 
+			if(allView)
+				UpdateControls();
+
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWorkWithCreateFlight;
 			AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
 		}
+
 		#endregion
 
 		#region public FlightScreen(ATLB atlb, Aircraft aircraft) : this()
@@ -81,7 +85,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 		///</summary>
 		/// <param name="atlb">Директива</param>
 		///<param name="aircraft"></param>
-		public FlightScreen(ATLB atlb, Aircraft aircraft) : this()
+		public FlightScreen(ATLB atlb, Aircraft aircraft, bool showDeffects = false, bool allView = false) : this()
 		{
 			if (atlb == null)
 				throw new ArgumentNullException("atlb", "Argument cannot be null");
@@ -97,6 +101,11 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
 			//ButtonPrintMenuStrip = buttonPrintMenuStrip;
 			#endregion
+
+			if (allView)
+				UpdateControls();
+
+			_showDeffects = showDeffects;
 
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWorkWithCreateFlight;
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
@@ -128,6 +137,22 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 		#endregion
 
 		#region Methods
+
+		private void UpdateControls()
+		{
+			extendableRichContainerFuel.Visible = false;
+			fuelTireOilInformationControl.Visible = false;
+			extendableRichContainerPassengersCargo.Visible = false;
+			passengersCargoControl.Visible = false;
+			extendableRichContainerEngineRunUps.Visible = false;
+			EngineRunupsListControl.Visible = false;
+			extendableRichContainerEngineCondition.Visible = false;
+			engineMonitoringListControl.Visible = false;
+			extendableRichContainerAPURunUps.Visible = false;
+			APURunupsListControl.Visible = false;
+			extendableRichContainerSms.Visible = false;
+			smsEventListControl.Visible = false;
+		}
 
 		#region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -169,7 +194,6 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 				EditObjectControl cc = c as EditObjectControl;
 				if (cc != null) cc.AttachedObject = _currentFlight;
 			}
-
 		}
 
 		#endregion

@@ -207,6 +207,12 @@ namespace EFCore.DTO.General
 		public int FromSupplierId { get; set; }
 
 		[DataMember]
+		public int Received { get; set; }
+
+		[DataMember]
+		public string Packing { get; set; }
+
+		[DataMember]
 		public DateTime? FromSupplierReciveDate { get; set; }
 
 		[DataMember]

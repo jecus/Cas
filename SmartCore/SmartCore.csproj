@@ -501,6 +501,7 @@
     <Compile Include="Entities\Dictionaries\ConditionState.cs" />
     <Compile Include="Entities\Dictionaries\ConsequenceFaults.cs" />
     <Compile Include="Entities\Dictionaries\ConsequenceOPS.cs" />
+    <Compile Include="Entities\Dictionaries\DirectiveOrder.cs" />
     <Compile Include="Entities\Dictionaries\IncoTerm.cs" />
     <Compile Include="Entities\Dictionaries\OccurrenceType.cs" />
     <Compile Include="Entities\Dictionaries\CriticalSystemList.cs" />

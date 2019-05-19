@@ -52,7 +52,7 @@ namespace SmartCore.Entities.General.Accessory
         /// Чертёжный номер агрегата
         /// </summary>
         [ListViewData(0.1f, "Standart", 1)]
-        [Filter("Standart:", Order = 1)]
+        [Filter("Standart:", Order = 7)]
         [TableColumn("GoodStandartId")]
         [Child(false)]
         public override GoodStandart Standart
@@ -130,7 +130,7 @@ namespace SmartCore.Entities.General.Accessory
         //[TableColumn("DetailClass")]
         [FormControl(250, "Class")]
         [ListViewData(0.08f, "Class")]
-        [Filter("Class:", Order = 7)]
+        [Filter("Class:", Order = 8)]
         [NotNull]
         public override GoodsClass GoodsClass
         {
@@ -443,7 +443,7 @@ namespace SmartCore.Entities.General.Accessory
         /// <summary>
         /// Тип родительской задачи
         /// </summary>
-        [Filter("Task type:", Order = 9)]
+        [Filter("Task type:", Order = 10)]
         public SmartCoreType SmartCoreType
         {
             get { return _smartCoreType; }
@@ -457,7 +457,7 @@ namespace SmartCore.Entities.General.Accessory
         /// Чек программы обслуживания, к которому привязана задача
         /// </summary>
         [ListViewData(80, "Check", 6)]
-        [Filter("Check:", Order = 10)]
+        [Filter("Check:", Order = 11)]
         public MaintenanceCheck MaintenanceCheck
         {
             get { return _check; }
@@ -470,7 +470,7 @@ namespace SmartCore.Entities.General.Accessory
         /// <summary>
         /// Возвращает тип чека, если родительской задачей является Чек программы обслуживания или MaintenanceCheckType.Unknown
         /// </summary>
-        [Filter("Check type:", Order = 11)]
+        [Filter("Check type:", Order = 12)]
         public MaintenanceCheckType MaintenanceCheckType
         {
             get { return _maintenanceCheckType; }
@@ -517,6 +517,8 @@ namespace SmartCore.Entities.General.Accessory
 
 		#endregion
 
+		[Filter("Reference:", Order = 1)]
+		public string Reference => Product?.Reference;
 
 		#region public IKitRequired ParentObject  { get; set; }
 

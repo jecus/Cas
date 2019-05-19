@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Reflection;
 using EFCore.DTO.General;
 using SmartCore.Auxiliary;
 using SmartCore.Auxiliary.Extentions;
@@ -11,6 +12,7 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Atlbs;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
+using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Files;
 using SmartCore.Management;
 
@@ -26,7 +28,7 @@ namespace SmartCore.Entities.General.Personnel
     [Serializable]
     public class Specialist : BaseEntityObject, IFileContainer, IEmployeeFilterParams, IEmployeeWorkPackageFilterParams
 	{
-		
+		private static Type _thisType;
 		/*
 		*  Свойства
 		*/
@@ -376,6 +378,11 @@ namespace SmartCore.Entities.General.Personnel
 			set { _specialization = value; }
 		}
 
+		public static PropertyInfo SpecializationIdProperty
+		{
+			get { return GetCurrentType().GetProperty("Specialization"); }
+		}
+
 		#endregion
 
 		#region public string Combination { get; set; }
@@ -644,6 +651,13 @@ namespace SmartCore.Entities.General.Personnel
 			}
 		}
 
+		#endregion
+
+		#region private static Type GetCurrentType()
+		private static Type GetCurrentType()
+		{
+			return _thisType ?? (_thisType = typeof(Specialist));
+		}
 		#endregion
 	}
 }
