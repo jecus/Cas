@@ -10,6 +10,7 @@ using SmartCore.Component;
 using SmartCore.DataAccesses.ItemsRelation;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Store;
 using SmartCore.Filters;
@@ -91,7 +92,7 @@ namespace SmartCore.Tests.ExcelImportExport
 			var componentCore = new ComponentCore(env, env.Loader, env.NewLoader, env.NewKeeper, aircraftCore, itemRelationCore);
 
 
-			var store = env.Loader.GetObject<Store>(new CommonFilter<int>(Store.ItemIdProperty, 1));
+			var store = env.Loader.GetObject<Store>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, 1));
 			var models = env.Loader.GetObjectList<ComponentModel>();
 
 			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\B737.757.767 CIT 08.05.2019 E&M.xls");
@@ -118,16 +119,25 @@ namespace SmartCore.Tests.ExcelImportExport
 					comp.ALTPartNumber = row[6].ToString();
 					comp.SerialNumber = row[7].ToString();
 					comp.BatchNumber = row[8].ToString();
-					comp.QuantityIn = Convert.ToDouble(row[9].ToString());
-					comp.Current = Convert.ToDouble(row[10].ToString());
+
+					Double.TryParse(row[9].ToString().Replace('.', ','), out double quantityIn);
+					Double.TryParse(row[10].ToString().Replace('.', ','), out double current);
+
+					comp.QuantityIn = quantityIn;
+					comp.Current = current;
 					comp.Measure = Measure.Items.FirstOrDefault(i => i.ShortName.ToLower().Equals(row[11].ToString().ToLower()));
+
+
+					Double.TryParse(row[12].ToString().Replace('.', ','), out double unitPrice);
+					Double.TryParse(row[13].ToString().Replace('.', ','), out double totalPrice);
+
 					comp.ProductCosts = new CommonCollection<ProductCost>()
 					{
 						new ProductCost
 						{
 							Currency = Сurrency.USD,
-							UnitPrice = Convert.ToDouble(row[12].ToString()),
-							TotalPrice = Convert.ToDouble(row[13].ToString()),
+							UnitPrice = unitPrice,
+							TotalPrice = totalPrice,
 						}		
 					};
 					
@@ -138,7 +148,8 @@ namespace SmartCore.Tests.ExcelImportExport
 						i.DescRus == "CIT EM");
 
 					comp.GoodsClass = GoodsClass.MaintenanceMaterials;
-					componentCore.AddComponent(comp, store, DateTime.Parse(row[2].ToString()), "", ComponentStorePosition.Serviceable, destinationResponsible: true);
+					DateTime.TryParse(row[2].ToString(), out var date);
+					//componentCore.AddComponent(comp, store, date, "", ComponentStorePosition.Serviceable, destinationResponsible: true);
 				}
 			}
 		}
