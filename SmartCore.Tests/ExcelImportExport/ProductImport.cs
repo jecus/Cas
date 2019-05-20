@@ -1,11 +1,18 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Excel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SmartCore.Aircrafts;
+using SmartCore.Component;
+using SmartCore.DataAccesses.ItemsRelation;
+using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
+using SmartCore.Entities.General.Store;
+using SmartCore.Filters;
 using SmartCore.Management;
 
 namespace SmartCore.Tests.ExcelImportExport
@@ -75,6 +82,67 @@ namespace SmartCore.Tests.ExcelImportExport
 			}
 		}
 
+		[TestMethod]
+		public void ImportComponentStore()
+		{
+			var env = GetEnviroment();
+			var aircraftCore = new AircraftsCore(env.Loader, env.NewKeeper, env.NewLoader);
+			var itemRelationCore = new ItemsRelationsDataAccess(env);
+			var componentCore = new ComponentCore(env, env.Loader, env.NewLoader, env.NewKeeper, aircraftCore, itemRelationCore);
+
+
+			var store = env.Loader.GetObject<Store>(new CommonFilter<int>(Store.ItemIdProperty, 1));
+			var models = env.Loader.GetObjectList<ComponentModel>();
+
+			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\B737.757.767 CIT 08.05.2019 E&M.xls");
+
+			foreach (DataTable table in ds.Tables)
+			{
+				foreach (DataRow row in table.Rows)
+				{
+					if (string.IsNullOrEmpty(row[4].ToString()) && string.IsNullOrEmpty(row[5].ToString()) &&
+					    string.IsNullOrEmpty(row[6].ToString()))
+						continue;
+
+
+					var comp = new Entities.General.Accessory.Component();
+
+					var goodClass = row[0].ToString().Replace('−', '-');
+					comp.GoodsClass = GoodsClass.Items.FirstOrDefault(i => goodClass.ToLower().Equals(i.FullName.ToLower()));
+					if (comp.GoodsClass == null)
+						comp.GoodsClass = GoodsClass.Items.FirstOrDefault(i => goodClass.ToLower().Contains(i.FullName.ToLower()));
+					if (comp.GoodsClass == null)
+						comp.GoodsClass = GoodsClass.Items.FirstOrDefault(i => goodClass.ToLower().Contains(i.ShortName.ToLower()));
+
+					comp.PartNumber = row[5].ToString();
+					comp.ALTPartNumber = row[6].ToString();
+					comp.SerialNumber = row[7].ToString();
+					comp.BatchNumber = row[8].ToString();
+					comp.QuantityIn = Convert.ToDouble(row[9].ToString());
+					comp.Current = Convert.ToDouble(row[10].ToString());
+					comp.Measure = Measure.Items.FirstOrDefault(i => i.ShortName.ToLower().Equals(row[11].ToString().ToLower()));
+					comp.ProductCosts = new CommonCollection<ProductCost>()
+					{
+						new ProductCost
+						{
+							Currency = Сurrency.USD,
+							UnitPrice = Convert.ToDouble(row[12].ToString()),
+							TotalPrice = Convert.ToDouble(row[13].ToString()),
+						}		
+					};
+					
+
+					comp.Model = models.FirstOrDefault(i =>
+						i.Name == row[4].ToString() && i.PartNumber == comp.PartNumber &&
+						i.AltPartNumber == comp.ALTPartNumber &&
+						i.DescRus == "CIT EM");
+
+					comp.GoodsClass = GoodsClass.MaintenanceMaterials;
+					componentCore.AddComponent(comp, store, DateTime.Parse(row[2].ToString()), "", ComponentStorePosition.Serviceable, destinationResponsible: true);
+				}
+			}
+		}
+
 
 		[TestMethod]
 		public void ImportProductStoreCIT()
@@ -113,7 +181,6 @@ namespace SmartCore.Tests.ExcelImportExport
 				}
 			}
 		}
-
 
 		[TestMethod]
 		public void ImportComponentStoreCIT()

@@ -66,13 +66,19 @@ namespace SmartCore.Entities.Dictionaries
         /// </summary>
         public static DirectiveStatus Repetative = new DirectiveStatus(3, "R", "Repetative");
 
-        #endregion
+		#endregion
 
-        #region public static DirectiveStatus UNK = new DirectiveStatus(-1, "UNK", "Unknown");
-        /// <summary>
-        /// 
-        /// </summary>
-        public static DirectiveStatus UNK = new DirectiveStatus(-1, "UNK", "Unknown");
+		#region public static DirectiveStatus Servise = new DirectiveStatus(4, "S", "Servise");
+
+		public static DirectiveStatus Servise = new DirectiveStatus(4, "S", "Servise");
+
+		#endregion
+
+		#region public static DirectiveStatus UNK = new DirectiveStatus(-1, "UNK", "Unknown");
+		/// <summary>
+		/// 
+		/// </summary>
+		public static DirectiveStatus UNK = new DirectiveStatus(-1, "UNK", "Unknown");
         #endregion
         /*
          * Свойства 
