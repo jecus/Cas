@@ -160,6 +160,31 @@ namespace EFCore.Repository
 			}
 		}
 
+		public void BulkInsert(IEnumerable<T> entity, int? batchSize = null)
+		{
+			if (!batchSize.HasValue)
+				batchSize = 250;
+
+			_context.BulkInsert(entity, config => { config.BatchSize = batchSize.Value; });
+		}
+
+		public void BulkUpdate(IEnumerable<T> entity, int? batchSize = null)
+		{
+			if (!batchSize.HasValue)
+				batchSize = 250;
+
+			_context.BulkUpdate(entity, config => { config.BatchSize = batchSize.Value; });
+		}
+
+		public void BulkDelete(IEnumerable<T> entity, int? batchSize = null)
+		{
+			if (!batchSize.HasValue)
+				batchSize = 250;
+
+			_context.BulkDelete(entity, config => { config.BatchSize = batchSize.Value; });
+		}
+
+
 
 		#region Async
 

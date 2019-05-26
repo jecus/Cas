@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using EFCore.DTO;
@@ -83,6 +84,66 @@ namespace SmartCore.Entities
 			if (value is IFileDTOContainer && saveAttachedFile)
 				SaveAttachedFileDTO(value as IFileDTOContainer);
 		}
+
+
+		public void BulkInsert<T, TOut>(IEnumerable<T> values,int? batchSize = null) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
+		{
+			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
+				return;
+
+			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntity)))
+				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
+
+			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
+				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
+
+			var repo = _casEnvironment.UnitOfWork.GetRepository<TOut>();
+
+			if (repo == null)
+				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
+
+
+			var method = GetMethod(typeof(T), "Convert");
+
+			var res = new List<TOut>();
+			foreach (var value in values)
+			{
+				res.Add(InvokeConverter<T, TOut>(value, method));
+			}
+			
+			repo.BulkInsert(res, batchSize);
+			
+		}
+
+		public void BulkDelete<T, TOut>(IEnumerable<T> values, int? batchSize = null) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
+		{
+			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
+				return;
+
+			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntity)))
+				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
+
+			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
+				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
+
+			var repo = _casEnvironment.UnitOfWork.GetRepository<TOut>();
+
+			if (repo == null)
+				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
+
+
+			var method = GetMethod(typeof(T), "Convert");
+
+			var res = new List<TOut>();
+			foreach (var value in values)
+			{
+				res.Add(InvokeConverter<T, TOut>(value, method));
+			}
+
+			repo.BulkDelete(res, batchSize);
+
+		}
+
 
 		public void Delete(BaseEntityObject value, bool isDeletedOnly = false, bool saveAttachedFile = true)
 		{
