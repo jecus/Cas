@@ -7,7 +7,7 @@ namespace SmartCore.Entities
 	public interface INewKeeper
 	{
 
-		void BulkInsert<T, TOut>(List<T> values, int? batchSize = null) where T : BaseEntityObject, new()
+		void BulkInsert<T, TOut>(List<BaseEntityObject> values, int? batchSize = null) where T : BaseEntityObject, new()
 			where TOut : BaseEntity, new();
 		void SaveGeneric<T, TOut>(T value, bool saveAttachedFile = true) where T : BaseEntityObject, new()
 			where TOut : BaseEntity, new();
