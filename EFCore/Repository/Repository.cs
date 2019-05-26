@@ -476,6 +476,14 @@ namespace EFCore.Repository
 				case FilterType.NotEqual:
 					equal = Expression.NotEqual(prop, res);
 					break;
+				case FilterType.Contains:
+					var parameterExp = Expression.Parameter(typeof(T), "type");
+					var propertyExp = Expression.Property(parameterExp, propertyName);
+					var method = type.GetMethod("Contains", new[] { type });
+					var someValue = Expression.Constant(inputText, typeof(string));
+					var containsMethodExp = Expression.Call(propertyExp, method, someValue);
+					return Expression.Lambda<Func<T, bool>>(containsMethodExp, parameterExp);
+					break;
 				default:
 					equal = Expression.Equal(prop, res);
 					break;
