@@ -34,28 +34,7 @@ namespace SmartCore.Entities
 
 		#endregion
 
-		public void Save(BaseEntityObject value, bool saveAttachedFile = true, bool writeAudit = true)
-		{
-			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
-				return;
-
-			value.CorrectorId = _casEnvironment.IdentityUser.ItemId;
-
-			var type = AuditOperation.Created;
-			if (value.ItemId > 0)
-				type = AuditOperation.Changed;
-				
-			var blType = value.GetType();
-			var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
-			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "SaveGeneric")?.MakeGenericMethod(blType, dto.Type);
-
-			method.Invoke(this, new object[] { value, saveAttachedFile });
-
-			if(writeAudit)
-				_auditRepository.WriteAsync(value, type ,_casEnvironment.IdentityUser);
-		}
-
-		private void SaveGeneric<T, TOut>(T value, bool saveAttachedFile = true) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
+		public void SaveGeneric<T, TOut>(T value, bool saveAttachedFile = true) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
 		{
 			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
 				return;
@@ -84,13 +63,63 @@ namespace SmartCore.Entities
 			if (value is IFileDTOContainer && saveAttachedFile)
 				SaveAttachedFileDTO(value as IFileDTOContainer);
 		}
-
-		public void BulkInsert(List<BaseEntityObject> value, int? batchSize = null)
+		public void Save(BaseEntityObject value, bool saveAttachedFile = true, bool writeAudit = true)
 		{
 			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
 				return;
 
 			value.CorrectorId = _casEnvironment.IdentityUser.ItemId;
+
+			var type = AuditOperation.Created;
+			if (value.ItemId > 0)
+				type = AuditOperation.Changed;
+				
+			var blType = value.GetType();
+			var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
+			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "SaveGeneric")?.MakeGenericMethod(blType, dto.Type);
+
+			method.Invoke(this, new object[] { value, saveAttachedFile });
+
+			if(writeAudit)
+				_auditRepository.WriteAsync(value, type ,_casEnvironment.IdentityUser);
+		}
+
+
+		public void BulkInsert<T, TOut>(List<BaseEntityObject> values, int? batchSize = null) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
+		{
+			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
+				return;
+
+			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntity)))
+				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
+
+			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
+				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
+
+			var repo = _casEnvironment.UnitOfWork.GetRepository<TOut>();
+
+			if (repo == null)
+				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
+
+
+			var method = GetMethod(typeof(T), "Convert");
+
+			var res = new List<TOut>();
+			foreach (var value in values)
+			{
+				res.Add(InvokeConverter<T, TOut>((T)value, method));
+			}
+
+			repo.BulkInsert(res, batchSize);
+
+		}
+		public void BulkInsert(List<BaseEntityObject> value, int? batchSize = null)
+		{
+			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
+				return;
+
+			foreach (var o in value)
+				o.CorrectorId = _casEnvironment.IdentityUser.ItemId;
 
 			var blType = value.GetType();
 			var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
@@ -99,7 +128,9 @@ namespace SmartCore.Entities
 			method.Invoke(this, new object[] { value, batchSize });
 
 		}
-		private void BulkInsert<T, TOut>(IEnumerable<T> values,int? batchSize = null) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
+		
+
+		public void BulkDelete<T, TOut>(List<BaseEntityObject> values, int? batchSize = null) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
 		{
 			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
 				return;
@@ -121,76 +152,30 @@ namespace SmartCore.Entities
 			var res = new List<TOut>();
 			foreach (var value in values)
 			{
-				res.Add(InvokeConverter<T, TOut>(value, method));
+				res.Add(InvokeConverter<T, TOut>((T)value, method));
 			}
-			
-			repo.BulkInsert(res, batchSize);
-			
+
+			repo.BulkDelete(res, batchSize);
+
 		}
-
-
 		public void BulkDelete(List<BaseEntityObject> value,int? batchSize = null)
 		{
 			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly || _casEnvironment.IdentityUser.UserType == UsetType.SaveOnly)
 				return;
 
-			value.CorrectorId = _casEnvironment.IdentityUser.ItemId;
+			foreach (var o in value)
+				o.CorrectorId = _casEnvironment.IdentityUser.ItemId;
 
-			var blType = value.GetType();
+			var blType = value.First().GetType();
 			var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
 			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "BulkDelete")?.MakeGenericMethod(blType, dto.Type);
 
 			method.Invoke(this, new object[] { value, batchSize });
 
 		}
-		public void BulkDelete<T, TOut>(IEnumerable<T> values, int? batchSize = null) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
-		{
-			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
-				return;
-
-			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntity)))
-				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
-
-			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
-				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
-
-			var repo = _casEnvironment.UnitOfWork.GetRepository<TOut>();
-
-			if (repo == null)
-				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
 
 
-			var method = GetMethod(typeof(T), "Convert");
-
-			var res = new List<TOut>();
-			foreach (var value in values)
-			{
-				res.Add(InvokeConverter<T, TOut>(value, method));
-			}
-
-			repo.BulkDelete(res, batchSize);
-
-		}
-
-
-		public void Delete(BaseEntityObject value, bool isDeletedOnly = false, bool saveAttachedFile = true)
-		{
-			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly || _casEnvironment.IdentityUser.UserType == UsetType.SaveOnly)
-				return;
-
-			value.CorrectorId = _casEnvironment.IdentityUser.ItemId;
-
-			var blType = value.GetType();
-			var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
-			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "DeleteGeneric")?.MakeGenericMethod(blType, dto.Type);
-
-			method.Invoke(this, new object[] { value, isDeletedOnly, saveAttachedFile });
-
-			_auditRepository.WriteAsync(value, AuditOperation.Deleted, _casEnvironment.IdentityUser);
-
-		}
-
-		private void DeleteGeneric<T, TOut>(T value, bool isDeletedOnly = false, bool saveAttachedFile = true) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
+		public void DeleteGeneric<T, TOut>(T value, bool isDeletedOnly = false, bool saveAttachedFile = true) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
 		{
 			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly || _casEnvironment.IdentityUser.UserType == UsetType.SaveOnly)
 				return;
@@ -221,8 +206,24 @@ namespace SmartCore.Entities
 			if (value is IFileDTOContainer && saveAttachedFile)
 				DeleteAttachedFileDTO(value as IFileDTOContainer);
 		}
+		public void Delete(BaseEntityObject value, bool isDeletedOnly = false, bool saveAttachedFile = true)
+		{
+			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly || _casEnvironment.IdentityUser.UserType == UsetType.SaveOnly)
+				return;
 
+			value.CorrectorId = _casEnvironment.IdentityUser.ItemId;
 
+			var blType = value.GetType();
+			var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
+			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "DeleteGeneric")?.MakeGenericMethod(blType, dto.Type);
+
+			method.Invoke(this, new object[] { value, isDeletedOnly, saveAttachedFile });
+
+			_auditRepository.WriteAsync(value, AuditOperation.Deleted, _casEnvironment.IdentityUser);
+
+		}
+
+		
 		#region private void DeleteAttachedFileDTO(IFileContainer container)
 
 		private void DeleteAttachedFile(IFileContainer container)
