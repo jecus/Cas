@@ -55,7 +55,7 @@ namespace SmartCore.Entities
 				_auditRepository.WriteAsync(value, type ,_casEnvironment.IdentityUser);
 		}
 
-		public void SaveGeneric<T, TOut>(T value, bool saveAttachedFile = true) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
+		private void SaveGeneric<T, TOut>(T value, bool saveAttachedFile = true) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
 		{
 			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
 				return;
@@ -85,8 +85,21 @@ namespace SmartCore.Entities
 				SaveAttachedFileDTO(value as IFileDTOContainer);
 		}
 
+		public void BulkInsert(List<BaseEntityObject> value, int? batchSize = null)
+		{
+			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
+				return;
 
-		public void BulkInsert<T, TOut>(IEnumerable<T> values,int? batchSize = null) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
+			value.CorrectorId = _casEnvironment.IdentityUser.ItemId;
+
+			var blType = value.GetType();
+			var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
+			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "BulkInsert")?.MakeGenericMethod(blType, dto.Type);
+
+			method.Invoke(this, new object[] { value, batchSize });
+
+		}
+		private void BulkInsert<T, TOut>(IEnumerable<T> values,int? batchSize = null) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
 		{
 			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
 				return;
@@ -115,6 +128,21 @@ namespace SmartCore.Entities
 			
 		}
 
+
+		public void BulkDelete(List<BaseEntityObject> value,int? batchSize = null)
+		{
+			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly || _casEnvironment.IdentityUser.UserType == UsetType.SaveOnly)
+				return;
+
+			value.CorrectorId = _casEnvironment.IdentityUser.ItemId;
+
+			var blType = value.GetType();
+			var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
+			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "BulkDelete")?.MakeGenericMethod(blType, dto.Type);
+
+			method.Invoke(this, new object[] { value, batchSize });
+
+		}
 		public void BulkDelete<T, TOut>(IEnumerable<T> values, int? batchSize = null) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
 		{
 			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
@@ -162,7 +190,7 @@ namespace SmartCore.Entities
 
 		}
 
-		public void DeleteGeneric<T, TOut>(T value, bool isDeletedOnly = false, bool saveAttachedFile = true) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
+		private void DeleteGeneric<T, TOut>(T value, bool isDeletedOnly = false, bool saveAttachedFile = true) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
 		{
 			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly || _casEnvironment.IdentityUser.UserType == UsetType.SaveOnly)
 				return;
