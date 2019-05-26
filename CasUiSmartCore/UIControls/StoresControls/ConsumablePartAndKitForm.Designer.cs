@@ -20,7 +20,6 @@ namespace CAS.UI.UIControls.StoresControls
                 components.Dispose();
             }
 
-            dictionaryComboProduct.SelectedIndexChanged -= DictionaryComboProductSelectedIndexChanged;
             comboBoxStandart.SelectedIndexChanged -= ComboBoxStandartSelectedIndexChanged;
             comboBoxDetailClass.SelectedIndexChanged -= ComboBoxDetailClassSelectedIndexChanged;
             comboBoxMeasure.SelectedIndexChanged -= ComboBoxMeasureSelectedIndexChanged;
@@ -93,7 +92,6 @@ namespace CAS.UI.UIControls.StoresControls
 			this.comboBoxStandart = new CAS.UI.UIControls.Auxiliary.LookupCombobox();
 			this.lifelengthViewerWarranty = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.lifelengthViewerWarrantyNotify = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
-			this.dictionaryComboProduct = new CAS.UI.UIControls.Auxiliary.LookupCombobox();
 			this.lifelengthViewerNotify = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.lifelengthViewerLifeLimit = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.comboBoxDetailClass = new CAS.UI.UIControls.Auxiliary.TreeDictionaryComboBox();
@@ -110,6 +108,8 @@ namespace CAS.UI.UIControls.StoresControls
 			this.documentControlShip = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.metroLabelPacking = new MetroFramework.Controls.MetroLabel();
 			this.metroTextBoxPacking = new MetroFramework.Controls.MetroTextBox();
+			this.linkLabelEditComponents = new System.Windows.Forms.LinkLabel();
+			this.TextBoxProduct = new MetroFramework.Controls.MetroTextBox();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -962,20 +962,6 @@ namespace CAS.UI.UIControls.StoresControls
 			this.lifelengthViewerWarrantyNotify.SystemCalculated = true;
 			this.lifelengthViewerWarrantyNotify.TabIndex = 18;
 			// 
-			// dictionaryComboProduct
-			// 
-			this.dictionaryComboProduct.Displayer = null;
-			this.dictionaryComboProduct.DisplayerText = null;
-			this.dictionaryComboProduct.Entity = null;
-			this.dictionaryComboProduct.Location = new System.Drawing.Point(118, 64);
-			this.dictionaryComboProduct.Margin = new System.Windows.Forms.Padding(4);
-			this.dictionaryComboProduct.Name = "dictionaryComboProduct";
-			this.dictionaryComboProduct.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.dictionaryComboProduct.Size = new System.Drawing.Size(791, 21);
-			this.dictionaryComboProduct.TabIndex = 0;
-			this.dictionaryComboProduct.Type = null;
-			this.dictionaryComboProduct.SelectedIndexChanged += new System.EventHandler(this.DictionaryComboProductSelectedIndexChanged);
-			// 
 			// lifelengthViewerNotify
 			// 
 			this.lifelengthViewerNotify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1225,6 +1211,53 @@ namespace CAS.UI.UIControls.StoresControls
 			this.metroTextBoxPacking.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.metroTextBoxPacking.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
+			// linkLabelEditComponents
+			// 
+			this.linkLabelEditComponents.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.linkLabelEditComponents.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.linkLabelEditComponents.Location = new System.Drawing.Point(799, 60);
+			this.linkLabelEditComponents.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.linkLabelEditComponents.Name = "linkLabelEditComponents";
+			this.linkLabelEditComponents.Size = new System.Drawing.Size(37, 23);
+			this.linkLabelEditComponents.TabIndex = 191;
+			this.linkLabelEditComponents.TabStop = true;
+			this.linkLabelEditComponents.Text = "Edit";
+			this.linkLabelEditComponents.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.linkLabelEditComponents.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelEditComponents_LinkClicked);
+			// 
+			// TextBoxProduct
+			// 
+			this.TextBoxProduct.BackColor = System.Drawing.Color.White;
+			// 
+			// 
+			// 
+			this.TextBoxProduct.CustomButton.Image = null;
+			this.TextBoxProduct.CustomButton.Location = new System.Drawing.Point(660, 2);
+			this.TextBoxProduct.CustomButton.Name = "";
+			this.TextBoxProduct.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.TextBoxProduct.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.TextBoxProduct.CustomButton.TabIndex = 1;
+			this.TextBoxProduct.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.TextBoxProduct.CustomButton.UseSelectable = true;
+			this.TextBoxProduct.CustomButton.Visible = false;
+			this.TextBoxProduct.Enabled = false;
+			this.TextBoxProduct.ForeColor = System.Drawing.Color.Black;
+			this.TextBoxProduct.Lines = new string[0];
+			this.TextBoxProduct.Location = new System.Drawing.Point(118, 65);
+			this.TextBoxProduct.MaxLength = 128;
+			this.TextBoxProduct.Name = "TextBoxProduct";
+			this.TextBoxProduct.PasswordChar = '\0';
+			this.TextBoxProduct.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.TextBoxProduct.SelectedText = "";
+			this.TextBoxProduct.SelectionLength = 0;
+			this.TextBoxProduct.SelectionStart = 0;
+			this.TextBoxProduct.ShortcutsEnabled = true;
+			this.TextBoxProduct.Size = new System.Drawing.Size(678, 20);
+			this.TextBoxProduct.TabIndex = 192;
+			this.TextBoxProduct.UseSelectable = true;
+			this.TextBoxProduct.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.TextBoxProduct.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+			// 
 			// ConsumablePartAndKitForm
 			// 
 			this.AcceptButton = this.buttonOK;
@@ -1232,6 +1265,8 @@ namespace CAS.UI.UIControls.StoresControls
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.buttonCancel;
 			this.ClientSize = new System.Drawing.Size(924, 770);
+			this.Controls.Add(this.TextBoxProduct);
+			this.Controls.Add(this.linkLabelEditComponents);
 			this.Controls.Add(this.metroLabelPacking);
 			this.Controls.Add(this.metroTextBoxPacking);
 			this.Controls.Add(this.comboBoxReceived);
@@ -1271,7 +1306,6 @@ namespace CAS.UI.UIControls.StoresControls
 			this.Controls.Add(this.lifelengthViewerWarrantyNotify);
 			this.Controls.Add(this.labelSupplier);
 			this.Controls.Add(this.labelProduct);
-			this.Controls.Add(this.dictionaryComboProduct);
 			this.Controls.Add(this.lifelengthViewerNotify);
 			this.Controls.Add(this.lifelengthViewerLifeLimit);
 			this.Controls.Add(this.labelInstallDate);
@@ -1349,7 +1383,6 @@ namespace CAS.UI.UIControls.StoresControls
         private MetroLabel labelRemarks;
         private MetroTextBox textBoxRemarks;
         private MetroLabel labelProduct;
-        private Auxiliary.LookupCombobox dictionaryComboProduct;
         private MetroLabel labelSupplier;
         private Auxiliary.LifelengthViewer lifelengthViewerWarranty;
         private Auxiliary.LifelengthViewer lifelengthViewerWarrantyNotify;
@@ -1388,5 +1421,7 @@ namespace CAS.UI.UIControls.StoresControls
 		private DocumentationControls.DocumentControl documentControlShip;
 		private MetroLabel metroLabelPacking;
 		private MetroTextBox metroTextBoxPacking;
+		private System.Windows.Forms.LinkLabel linkLabelEditComponents;
+		private MetroTextBox TextBoxProduct;
 	}
 }

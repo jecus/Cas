@@ -96,14 +96,13 @@ namespace CAS.UI.UIControls.StoresControls
             //7
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "From" };
             ColumnHeaderList.Add(columnHeader);
-
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Inst. date" };
             ColumnHeaderList.Add(columnHeader);
             //6
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "Work Type" };
             ColumnHeaderList.Add(columnHeader);
 
-			columnHeader = new ColumnHeader { Width = 75, Text = "M.H." };
+            columnHeader = new ColumnHeader { Width = 75, Text = "M.H." };
 			ColumnHeaderList.Add(columnHeader);
 
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "Need Wp Q-ty" };
@@ -232,62 +231,62 @@ namespace CAS.UI.UIControls.StoresControls
 		/// </summary>
 		protected override void SetGroupsToItems(int columnIndex)
         {
-            itemsListView.Groups.Clear();
-            itemsListView.Groups.AddRange(new[]
-                                              {
-                                                  new ListViewGroup("Engines", "Engines"),
-                                                  new ListViewGroup("APU's", "APU's"),
-                                                  new ListViewGroup("Landing Gears", "Landing Gears"),
-                                              });
-            foreach (ListViewItem item in ListViewItemList.OrderBy(x => x.Text))
-            {
-                String temp = "";
+       //     itemsListView.Groups.Clear();
+       //     itemsListView.Groups.AddRange(new[]
+       //                                       {
+       //                                           new ListViewGroup("Engines", "Engines"),
+       //                                           new ListViewGroup("APU's", "APU's"),
+       //                                           new ListViewGroup("Landing Gears", "Landing Gears"),
+       //                                       });
+       //     foreach (ListViewItem item in ListViewItemList.OrderBy(x => x.Text))
+       //     {
+       //         String temp = "";
 
-                if (!(item.Tag is IDirective)) continue;
+       //         if (!(item.Tag is IDirective)) continue;
 
-                IDirective parent = (IDirective)item.Tag;
+       //         IDirective parent = (IDirective)item.Tag;
 
-                #region Группировка по типу задачи
+       //         #region Группировка по типу задачи
 
-                if (parent is ComponentDirective)
-                    parent = ((ComponentDirective) parent).ParentComponent;
-                if (parent is BaseComponent)
-                {
-                    if (((BaseComponent)parent).BaseComponentType == BaseComponentType.Engine)
-                        temp = "Engines";
-                    else if (((BaseComponent)parent).BaseComponentType == BaseComponentType.Apu)
-                        temp = "APU's";
-                    else if (((BaseComponent)parent).BaseComponentType == BaseComponentType.LandingGear)
-                        temp = "Landing Gears";
+       //         if (parent is ComponentDirective)
+       //             parent = ((ComponentDirective) parent).ParentComponent;
+       //         if (parent is BaseComponent)
+       //         {
+       //             if (((BaseComponent)parent).BaseComponentType == BaseComponentType.Engine)
+       //                 temp = "Engines";
+       //             else if (((BaseComponent)parent).BaseComponentType == BaseComponentType.Apu)
+       //                 temp = "APU's";
+       //             else if (((BaseComponent)parent).BaseComponentType == BaseComponentType.LandingGear)
+       //                 temp = "Landing Gears";
 
-                    item.Group = itemsListView.Groups[temp];
-                }
-                else if (parent is Component)
-                {
-                    Component component = (Component)parent;
+       //             item.Group = itemsListView.Groups[temp];
+       //         }
+       //         else if (parent is Component)
+       //         {
+       //             Component component = (Component)parent;
 
-                        if (component.ParentBaseComponent != null)
-                        {
-                            BaseComponent baseComponent = component.ParentBaseComponent;//TODO:(Evgenii Babak) заменить на использование ComponentCore 
-							temp = baseComponent + " Components";
-                        }
-                        else
-                        {
-	                        AtaChapter ata = null;
+       //                 if (component.ParentBaseComponent != null)
+       //                 {
+       //                     BaseComponent baseComponent = component.ParentBaseComponent;//TODO:(Evgenii Babak) заменить на использование ComponentCore 
+							//temp = baseComponent + " Components";
+       //                 }
+       //                 else
+       //                 {
+	      //                  AtaChapter ata = null;
 
-							if (component.Product != null)
-							{
-								ata = component.Product.ATAChapter;
-							}
-	                        else ata = component.ATAChapter;
+							//if (component.Product != null)
+							//{
+							//	ata = component.Product.ATAChapter;
+							//}
+	      //                  else ata = component.ATAChapter;
                             
-                            temp = ata.ShortName + " " + ata.FullName;
-                        }
-                        itemsListView.Groups.Add(temp, temp);
-                    item.Group = itemsListView.Groups[temp];
-                }
-                #endregion
-            }
+       //                     temp = ata.ShortName + " " + ata.FullName;
+       //                 }
+       //                 itemsListView.Groups.Add(temp, temp);
+       //             item.Group = itemsListView.Groups[temp];
+       //         }
+       //         #endregion
+       //     }
         }
 
         #endregion
@@ -522,6 +521,13 @@ namespace CAS.UI.UIControls.StoresControls
                 Text = transferDate > DateTimeExtend.GetCASMinDateTime()
 					? SmartCore.Auxiliary.Convert.GetDateFormat(transferDate) : "",
                 Tag = transferDate
+            });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = workType, Tag = workType });
+            subItems.Add(new ListViewItem.ListViewSubItem
+            {
+	            Text = transferDate > DateTimeExtend.GetCASMinDateTime()
+		            ? SmartCore.Auxiliary.Convert.GetDateFormat(transferDate) : "",
+	            Tag = transferDate
             });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = workType, Tag = workType });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = manHours.ToString(), Tag = manHours } );

@@ -1174,6 +1174,12 @@
     <Compile Include="UIControls\PowerPlants\PowerPlantListView.Designer.cs">
       <DependentUpon>PowerPlantListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\ProductControls\ProductBindForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\ProductControls\ProductBindForm.Designer.cs">
+      <DependentUpon>ProductBindForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\PurchaseControls\AllOrders\AllOrderListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4002,6 +4008,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PowerPlants\PowerPlantListScreen.resx">
       <DependentUpon>PowerPlantListScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ProductControls\ProductBindForm.resx">
+      <DependentUpon>ProductBindForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PurchaseControls\AllOrders\AllOrderListScreen.resx">
       <DependentUpon>AllOrderListScreen.cs</DependentUpon>

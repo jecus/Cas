@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.UIControls.DocumentationControls;
+using CAS.UI.UIControls.ProductControls;
 using CASTerms;
 using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
@@ -139,11 +140,9 @@ namespace CAS.UI.UIControls.StoresControls
 		/// </summary>
 		private void FillControls()
 		{
-			Program.MainDispatcher.ProcessControl(dictionaryComboProduct);
 			Program.MainDispatcher.ProcessControl(comboBoxStandart);
 			Program.MainDispatcher.ProcessControl(dictionaryComboBoxLocation);
 
-			dictionaryComboProduct.SelectedIndexChanged -= DictionaryComboProductSelectedIndexChanged;
 			comboBoxStandart.SelectedIndexChanged -= ComboBoxStandartSelectedIndexChanged;
 			comboBoxDetailClass.SelectedIndexChanged -= ComboBoxDetailClassSelectedIndexChanged;
 			comboBoxMeasure.SelectedIndexChanged -= ComboBoxMeasureSelectedIndexChanged;
@@ -180,14 +179,13 @@ namespace CAS.UI.UIControls.StoresControls
 			ataChapterComboBox.ATAChapter = _consumablePart.ATAChapter;
 
 			dictionaryComboBoxLocation.Type = typeof(Locations);
-			dictionaryComboProduct.Type = typeof(Product);
 			comboBoxStandart.Type = typeof(GoodStandart);
 			comboBoxMeasure.Items.Clear();
 			comboBoxMeasure.Items.AddRange(Measure.GetByCategories(new[] {MeasureCategory.Mass, MeasureCategory.EconomicEntity, MeasureCategory.Volume, }));
 			comboBoxMeasure.Items.Add(Measure.Centimeters);
 			comboBoxMeasure.Items.Add(Measure.SquareMeter);
 			comboBoxStatus.Items.Clear();
-			foreach (object o in Enum.GetValues(typeof(ComponentStatus)))
+			foreach (var o in Enum.GetValues(typeof(ComponentStatus)))
 				comboBoxStatus.Items.Add(o);
 			comboBoxPosition.Items.Clear();
 			comboBoxPosition.Items.AddRange(ComponentStorePosition.Items.ToArray());
@@ -207,7 +205,6 @@ namespace CAS.UI.UIControls.StoresControls
 			textBoxIdNumber.Text = _consumablePart.IdNumber;
 			textBoxDescription.Text = _consumablePart.Description;
 			textBoxProductCode.Text = _consumablePart.Code;
-			dictionaryComboProduct.SelectedItem = _consumablePart.Model;
 			metroTextBoxPacking.Text = _consumablePart.Packing;
 
 			if (_consumablePart.ProductCosts.Count == 0)
@@ -241,41 +238,27 @@ namespace CAS.UI.UIControls.StoresControls
 				textBoxPartNumber.ReadOnly = true;
 				textBoxAltPartNum.ReadOnly = true;
 				comboBoxStandart.Enabled = false;
-				//textBoxProductCode.Enabled = false;
 				textBoxDescription.ReadOnly = true;
 				comboBoxMeasure.SelectedItem = product.Measure;
 				comboBoxStandart.SelectedItem = product.Standart;
 				textBoxPartNumber.Text = product.PartNumber;
 				textBoxAltPartNum.Text = product.AltPartNumber;
 				textBoxDescription.Text = product.Description;
-				//textBoxProductCode.Text = accessoryDescription.Code;
 				textBoxManufacturer.Text = product.Manufacturer;
 			}
 			else if (_consumablePart.Standart != null)
 			{
-				GoodStandart goodStandart = _consumablePart.Standart;
+				var goodStandart = _consumablePart.Standart;
 				comboBoxDetailClass.SelectedItem = goodStandart.GoodsClass;
 
 				comboBoxDetailClass.Enabled = false;
-				//comboBoxMeasure.Enabled = false;
 				textBoxPartNumber.ReadOnly = true;
 				textBoxDescription.ReadOnly = true;
-				//textBoxProductCode.ReadOnly = true;
 
-				//comboBoxMeasure.SelectedItem = goodStandart.Measure;
 				comboBoxStandart.SelectedItemId = goodStandart.ItemId;
 				textBoxPartNumber.Text = goodStandart.PartNumber;
 				textBoxDescription.Text = goodStandart.Description;
-				//textBoxProductCode.Text = "";
 				textBoxManufacturer.Text = "";
-
-				//numericCostNew.ReadOnly = true;
-				//numericCostServiceable.ReadOnly = true;
-				//numericCostOverhaul.ReadOnly = true;
-
-				//numericCostNew.Value = (decimal)goodStandart.CostNew;
-				//numericCostServiceable.Value = (decimal)goodStandart.CostServiceable;
-				//numericCostOverhaul.Value = (decimal)goodStandart.CostOverhaul;
 			}
 			comboBoxStatus.SelectedItem = _consumablePart.ComponentStatus;
 			textBoxRemarks.Text = _consumablePart.Remarks;
@@ -284,7 +267,7 @@ namespace CAS.UI.UIControls.StoresControls
 			{
 				numericUpDownQuantity.Enabled = false;
 				buttonSaveAndAdd.Visible = false;
-				TransferRecord record = _consumablePart.TransferRecords.GetLast();
+				var record = _consumablePart.TransferRecords.GetLast();
 				State = record.State;
 				dateTimePickerInstallDate.Value = record.TransferDate;
 				dateTimePickerManufactureDate.Value = _consumablePart.ManufactureDate;
@@ -313,9 +296,9 @@ namespace CAS.UI.UIControls.StoresControls
 
 			SetForDetailClass();
 			SetForMeasure();
+			UpdateByProduct(_consumablePart.Product);
 
 			comboBoxStandart.SelectedIndexChanged += ComboBoxStandartSelectedIndexChanged;
-			dictionaryComboProduct.SelectedIndexChanged += DictionaryComboProductSelectedIndexChanged;
 			comboBoxDetailClass.SelectedIndexChanged += ComboBoxDetailClassSelectedIndexChanged;
 			comboBoxMeasure.SelectedIndexChanged += ComboBoxMeasureSelectedIndexChanged;
 			dateTimePickerInstallDate.ValueChanged += DateTimePickerInstallationDateValueChanged;
@@ -358,9 +341,8 @@ namespace CAS.UI.UIControls.StoresControls
 		/// <returns></returns>
 		private bool GetChangeStatus(Component obj)
 		{
-			string kitStandartName = _consumablePart.Standart != null ? _consumablePart.Standart.FullName : "";
-			if (dictionaryComboProduct.SelectedItem != _consumablePart.Product
-			    || textBoxPartNumber.Text != obj.PartNumber
+			var kitStandartName = _consumablePart.Standart != null ? _consumablePart.Standart.FullName : "";
+			if (textBoxPartNumber.Text != obj.PartNumber
 			    || textBoxAltPartNum.Text != obj.ALTPartNumber
 			    || (comboBoxStandart.SelectedItem != null
 				    ? comboBoxStandart.SelectedItem != _consumablePart.Standart
@@ -376,7 +358,6 @@ namespace CAS.UI.UIControls.StoresControls
 				      dictionaryComboBoxLocation.SelectedItem.ItemId != obj.Location.ItemId ||
 				      textBoxRemarks.Text != obj.Remarks ||
 				      (ComponentStatus) comboBoxStatus.SelectedItem != obj.ComponentStatus ||
-				      dictionaryComboProduct.SelectedItem != obj.Model ||
 				      lifelengthViewerLifeLimit.Lifelength.IsEqual(obj.LifeLimit) ||
 				      lifelengthViewerNotify.Lifelength.IsEqual(obj.LifeLimitNotify) ||
 				      lifelengthViewerWarranty.Lifelength.IsEqual(obj.Warranty) ||
@@ -420,8 +401,7 @@ namespace CAS.UI.UIControls.StoresControls
 		private bool ValidateData(out string message)
 		{
 			message = "";
-			if (dictionaryComboProduct.Text == "N/A" || dictionaryComboProduct.Text == "Select Item" ||
-			    dictionaryComboProduct.SelectedItem == null && _consumablePart.ItemId > 0)
+			if (_consumablePart.Product == null && _consumablePart.ItemId > 0)
 			{
 				if (message != "") message += "\n ";
 				message += "Not set Product";
@@ -514,7 +494,6 @@ namespace CAS.UI.UIControls.StoresControls
 			}
 				
 
-			obj.Model = dictionaryComboProduct.SelectedItem as ComponentModel;
 			obj.Location = dictionaryComboBoxLocation.SelectedItem as Locations;
 			obj.Received = comboBoxReceived.SelectedItem as Specialist;
 			obj.ReceivedId = _consumablePart.Received?.ItemId ?? -1;
@@ -543,7 +522,7 @@ namespace CAS.UI.UIControls.StoresControls
 			    (_consumablePart.TransferRecords.GetLast().State != State ||
 			     _consumablePart.TransferRecords.GetLast().TransferDate != dateTimePickerInstallDate.Value))
 			{
-				TransferRecord record = _consumablePart.TransferRecords.GetLast();
+				var record = _consumablePart.TransferRecords.GetLast();
 				record.State = State;
 				record.TransferDate = dateTimePickerInstallDate.Value;
 			}
@@ -557,7 +536,7 @@ namespace CAS.UI.UIControls.StoresControls
 			{
 				if (_consumablePart.ItemId <= 0)
 				{
-					foreach (KitSuppliersRelation relation in _consumablePart.SupplierRelations)
+					foreach (var relation in _consumablePart.SupplierRelations)
 					{
 						GlobalObjects.CasEnvironment.Manipulator.Delete(relation, false);
 					}
@@ -574,7 +553,6 @@ namespace CAS.UI.UIControls.StoresControls
 
 		private void ClearFields()
 		{
-			dictionaryComboProduct.SelectedIndexChanged -= DictionaryComboProductSelectedIndexChanged;
 			comboBoxStandart.SelectedIndexChanged -= ComboBoxStandartSelectedIndexChanged;
 			comboBoxDetailClass.SelectedIndexChanged -= ComboBoxDetailClassSelectedIndexChanged;
 			comboBoxMeasure.SelectedIndexChanged -= ComboBoxMeasureSelectedIndexChanged;
@@ -614,9 +592,6 @@ namespace CAS.UI.UIControls.StoresControls
 			textBoxProductCode.ReadOnly = false;
 			textBoxProductCode.Enabled = true;
 
-			dictionaryComboProduct.SelectedItemId = -1;
-			dictionaryComboProduct.Enabled = true;
-
 			comboBoxStandart.SelectedItemId = -1;
 			comboBoxStandart.Enabled = true;
 
@@ -646,7 +621,6 @@ namespace CAS.UI.UIControls.StoresControls
 			SetForMeasure();
 
 			comboBoxStandart.SelectedIndexChanged += ComboBoxStandartSelectedIndexChanged;
-			dictionaryComboProduct.SelectedIndexChanged += DictionaryComboProductSelectedIndexChanged;
 			comboBoxDetailClass.SelectedIndexChanged += ComboBoxDetailClassSelectedIndexChanged;
 			comboBoxMeasure.SelectedIndexChanged += ComboBoxMeasureSelectedIndexChanged;
 			dateTimePickerInstallDate.ValueChanged += DateTimePickerInstallationDateValueChanged;
@@ -662,7 +636,6 @@ namespace CAS.UI.UIControls.StoresControls
 			{
 				var partNumber = textBoxPartNumber.Text.Replace(" ", "").ToLower();
 				List<ComponentModel> componentModels;
-				_consumablePart.Product = dictionaryComboProduct.SelectedItem as Product;
 				if (_consumablePart.Product != null && _consumablePart.Product.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.ProductionAuxiliaryEquipment))
 				{
 					try
@@ -746,7 +719,7 @@ namespace CAS.UI.UIControls.StoresControls
         /// </summary>
         private void SetForDetailClass()
         {
-            GoodsClass dc = comboBoxDetailClass.SelectedItem as GoodsClass;
+            var dc = comboBoxDetailClass.SelectedItem as GoodsClass;
             if (dc == null)
             {
                 comboBoxMeasure.Enabled = true;
@@ -809,7 +782,7 @@ namespace CAS.UI.UIControls.StoresControls
             }
             else
             {
-                TransferRecord record = _consumablePart.TransferRecords.GetLast();
+                var record = _consumablePart.TransferRecords.GetLast();
 
                 if (record.FromAircraftId == 0 &&
                     record.FromBaseComponentId == 0 &&
@@ -847,7 +820,7 @@ namespace CAS.UI.UIControls.StoresControls
             }
             else
             {
-                TransferRecord record = _consumablePart.TransferRecords.GetLast();
+                var record = _consumablePart.TransferRecords.GetLast();
 
                 if (record.FromAircraftId == 0 &&
                     record.FromBaseComponentId == 0 &&
@@ -897,17 +870,15 @@ namespace CAS.UI.UIControls.StoresControls
         #endregion
 
         #region private void DictionaryComboProductSelectedIndexChanged(object sender, EventArgs e)
-        private void DictionaryComboProductSelectedIndexChanged(object sender, EventArgs e)
+        private void UpdateByProduct(Product product)
         {
-            comboBoxStandart.SelectedIndexChanged -= ComboBoxStandartSelectedIndexChanged;
-
-            Product accessoryDescription;
-            if ((accessoryDescription = dictionaryComboProduct.SelectedItem as Product) != null)
-            {
-	            if (accessoryDescription.ImageFile != null)
+	        if (product != null)
+	        {
+		        TextBoxProduct.Text = product.ToString();
+	            if (product.ImageFile != null)
 	            {
 		            fileControlImage.Enabled = true;
-		            fileControlImage.UpdateInfo(accessoryDescription.ImageFile,
+		            fileControlImage.UpdateInfo(product.ImageFile,
 			            "Image Files|*.jpg;*.jpeg;*.png",
 			            "This record does not contain a image. Enclose Image file to prove the compliance.",
 			            "Attached file proves the Image.");
@@ -919,9 +890,9 @@ namespace CAS.UI.UIControls.StoresControls
 					fileControlImage.Enabled = false;
 				}
 
-				UpdateSupplier(accessoryDescription);
+				UpdateSupplier(product);
 
-				if (_productCost != null && _productCost.KitId == accessoryDescription.ItemId)
+				if (_productCost != null && _productCost.KitId == product.ItemId)
 					dataGridViewControlSuppliers.SetItemsArray((ICommonCollection) _consumablePart.ProductCosts);
 				else ResetProductCost();
 
@@ -936,16 +907,16 @@ namespace CAS.UI.UIControls.StoresControls
 				comboBoxMeasure.Enabled = false;
 	            ataChapterComboBox.Enabled = false;
 
-				comboBoxDetailClass.SelectedItem = accessoryDescription.GoodsClass;
-				comboBoxMeasure.SelectedItem = accessoryDescription.Measure;
-                comboBoxStandart.SelectedItem = accessoryDescription.Standart;
-                textBoxPartNumber.Text = accessoryDescription.PartNumber;
-                textBoxAltPartNum.Text = accessoryDescription.AltPartNumber;
-                textBoxDescription.Text = accessoryDescription.Description;
-				checkBoxDangerous.Checked = accessoryDescription.IsDangerous;
-				textBoxManufacturer.Text = accessoryDescription.Manufacturer;
-	            ataChapterComboBox.ATAChapter = accessoryDescription.ATAChapter;
-	            textBoxProductCode.Text = accessoryDescription.Code;
+				comboBoxDetailClass.SelectedItem = product.GoodsClass;
+				comboBoxMeasure.SelectedItem = product.Measure;
+                comboBoxStandart.SelectedItem = product.Standart;
+                textBoxPartNumber.Text = product.PartNumber;
+                textBoxAltPartNum.Text = product.AltPartNumber;
+                textBoxDescription.Text = product.Description;
+				checkBoxDangerous.Checked = product.IsDangerous;
+				textBoxManufacturer.Text = product.Manufacturer;
+	            ataChapterComboBox.ATAChapter = product.ATAChapter;
+	            textBoxProductCode.Text = product.Code;
 
 				SetForDetailClass();
 			}
@@ -960,10 +931,10 @@ namespace CAS.UI.UIControls.StoresControls
             {
                 textBoxRemarks.Text = _consumablePart.Remarks;
 
-                if (accessoryDescription != null)
+                if (product != null)
                 {
-                    _consumablePart.Suppliers = new SupplierCollection(accessoryDescription.Suppliers);
-                    _consumablePart.SupplierRelations = new CommonCollection<KitSuppliersRelation>(accessoryDescription.SupplierRelations);
+                    _consumablePart.Suppliers = new SupplierCollection(product.Suppliers);
+                    _consumablePart.SupplierRelations = new CommonCollection<KitSuppliersRelation>(product.SupplierRelations);
                 }
                 else
                 {
@@ -976,13 +947,13 @@ namespace CAS.UI.UIControls.StoresControls
             }
             else
             {
-                if (accessoryDescription != null)
+                if (product != null)
                 {
-                    textBoxRemarks.Text = accessoryDescription.Remarks;
+                    textBoxRemarks.Text = product.Remarks;
 
-                    _consumablePart.Suppliers = new SupplierCollection(accessoryDescription.Suppliers);
+                    _consumablePart.Suppliers = new SupplierCollection(product.Suppliers);
                     _consumablePart.SupplierRelations = new CommonCollection<KitSuppliersRelation>();
-                    foreach (KitSuppliersRelation ksr in accessoryDescription.SupplierRelations)
+                    foreach (var ksr in product.SupplierRelations)
                     {
                         _consumablePart.SupplierRelations.Add(new KitSuppliersRelation(ksr));
                     }
@@ -1003,27 +974,15 @@ namespace CAS.UI.UIControls.StoresControls
                 comboBoxDetailClass.SelectedItem = goodStandart.GoodsClass;
 
 				comboBoxDetailClass.Enabled = false;
-                //comboBoxMeasure.Enabled = false;
-                textBoxPartNumber.ReadOnly = true;
+				textBoxPartNumber.ReadOnly = true;
                 textBoxDescription.ReadOnly = true;
-                //textBoxProductCode.ReadOnly = false;
-                //textBoxRemarks.ReadOnly = true;
 
-                //comboBoxMeasure.SelectedItem = goodStandart.Measure;
                 textBoxPartNumber.Text = goodStandart.PartNumber;
                 textBoxDescription.Text = goodStandart.Description;
-                //textBoxRemarks.Text = accessoryDescription.Remarks;
-                //numericCostNew.ReadOnly = true;
-                //numericCostServiceable.ReadOnly = true;
-                //numericCostOverhaul.ReadOnly = true;
-
-                //numericCostNew.Value = (decimal)goodStandart.CostNew;
-                //numericCostServiceable.Value = (decimal)goodStandart.CostServiceable;
-                //numericCostOverhaul.Value = (decimal)goodStandart.CostOverhaul;
             }
             else
             {
-				if((dictionaryComboProduct.SelectedItem as Product) == null)
+				if(_consumablePart.Product == null)
 					comboBoxDetailClass.Enabled = true;
 			}
 
@@ -1034,25 +993,14 @@ namespace CAS.UI.UIControls.StoresControls
                 if (goodStandart != null)
                 {
                     comboBoxDetailClass.Enabled = false;
-                    //comboBoxMeasure.Enabled = false;
                     textBoxPartNumber.ReadOnly = true;
                     textBoxDescription.ReadOnly = true;
-                    //textBoxProductCode.ReadOnly = false;
-                    //textBoxRemarks.ReadOnly = true;
-                    //numericCostNew.ReadOnly = true;
-                    //numericCostServiceable.ReadOnly = true;
-                    //numericCostOverhaul.ReadOnly = true;
                 }
                 else
                 {
                     comboBoxMeasure.Enabled = true;
                     textBoxPartNumber.ReadOnly = false;
                     textBoxDescription.ReadOnly = false;
-                    //textBoxProductCode.ReadOnly = false;
-                    //textBoxRemarks.ReadOnly = false;
-                    //numericCostNew.ReadOnly = false;
-                    //numericCostServiceable.ReadOnly = false;
-                    //numericCostOverhaul.ReadOnly = false;
                 }
             }
             else
@@ -1062,14 +1010,8 @@ namespace CAS.UI.UIControls.StoresControls
                     textBoxRemarks.Text = goodStandart.Remarks;
                 }
                 comboBoxDetailClass.Enabled = true;
-                //comboBoxMeasure.Enabled = true;
                 textBoxPartNumber.ReadOnly = false;
                 textBoxDescription.ReadOnly = false;
-                //textBoxProductCode.ReadOnly = false;
-                //textBoxRemarks.ReadOnly = false;
-                //numericCostNew.ReadOnly = false;
-                //numericCostServiceable.ReadOnly = false;
-                //numericCostOverhaul.ReadOnly = false;
             }
         }
 		#endregion
@@ -1097,7 +1039,7 @@ namespace CAS.UI.UIControls.StoresControls
             }
             if (GetChangeStatus(_consumablePart))
             {
-                DialogResult result = MessageBox.Show("Do you want to save changes?",
+                var result = MessageBox.Show("Do you want to save changes?",
                                                       (string)new GlobalTermsProvider()["SystemName"],
                                                       MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation,
                                                       MessageBoxDefaultButton.Button1);
@@ -1137,7 +1079,7 @@ namespace CAS.UI.UIControls.StoresControls
             {
                 if (GetChangeStatus(_consumablePart))
                 {
-                    DialogResult result = MessageBox.Show("Do you want to save changes?",
+                    var result = MessageBox.Show("Do you want to save changes?",
                                                           (string)new GlobalTermsProvider()["SystemName"],
                                                           MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation,
                                                           MessageBoxDefaultButton.Button1);
@@ -1194,7 +1136,7 @@ namespace CAS.UI.UIControls.StoresControls
             }
             if (GetChangeStatus(_consumablePart))
             {
-                DialogResult result = MessageBox.Show("Do you want to save changes?",
+                var result = MessageBox.Show("Do you want to save changes?",
                                                       (string)new GlobalTermsProvider()["SystemName"],
                                                       MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                                                       MessageBoxDefaultButton.Button1);
@@ -1326,6 +1268,14 @@ namespace CAS.UI.UIControls.StoresControls
 			var form = new DocumentForm(newDocument, false);
 			if (form.ShowDialog() == DialogResult.OK)
 				control.CurrentDocument = newDocument;
+		}
+
+		private void LinkLabelEditComponents_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			var form = new ProductBindForm(_consumablePart);
+			if(form.ShowDialog() == DialogResult.OK)
+				UpdateByProduct(_consumablePart.Product);
+
 		}
 	}
 }
