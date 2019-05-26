@@ -70,7 +70,7 @@ namespace SmartCore.Entities.General.Accessory
         [FormControl(250, "Class:", 
                      TreeDictRootNodes = new[]
                      {
-                        "ComponentsAndParts", "ProductionAuxiliaryEquipment","OfficeEquipment", "MaintenanceMaterials", "ProductionAuxiliaryEquipment", "Tools", "Protection"
+                        "ComponentsAndParts", "ProductionAuxiliaryEquipment"
 					 })]
         public override GoodsClass GoodsClass
         {
