@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using CASTerms;
 using EFCore.Attributte;
 using EFCore.DTO.Dictionaries;
@@ -63,6 +64,7 @@ namespace CAS.UI.UIControls.ProductControls
 		private void Complete()
 		{
 			allProductListView1.SetItemsArray(_result.ToArray());
+			allProductListView1.Focus();
 			metroProgressSpinner1.Visible = false;
 		}
 
@@ -83,6 +85,11 @@ namespace CAS.UI.UIControls.ProductControls
 		{
 			if (allProductListView1.SelectedItem != null)
 				_current.Product = allProductListView1.SelectedItem;
+			else
+			{
+				MessageBox.Show("Please select one product!", (string)new GlobalTermsProvider()["SystemName"],
+					MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+			}
 		}
 
 		#endregion

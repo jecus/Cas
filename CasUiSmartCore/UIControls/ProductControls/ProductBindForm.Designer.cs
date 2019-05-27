@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			MetroFramework.Controls.MetroLabel labelNumber;
-			this.allProductListView1 = new CAS.UI.UIControls.PurchaseControls.AllProductListView();
+			this.allProductListView1 = new CAS.UI.UIControls.PurchaseControls.ProductListView();
 			this.buttonOk = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.button1 = new System.Windows.Forms.Button();
@@ -37,6 +37,17 @@
 			this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
 			labelNumber = new MetroFramework.Controls.MetroLabel();
 			this.SuspendLayout();
+			// 
+			// labelNumber
+			// 
+			labelNumber.AutoSize = true;
+			labelNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			labelNumber.Location = new System.Drawing.Point(10, 78);
+			labelNumber.Name = "labelNumber";
+			labelNumber.Size = new System.Drawing.Size(56, 19);
+			labelNumber.TabIndex = 299;
+			labelNumber.Text = "Part №:";
+			labelNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// allProductListView1
 			// 
@@ -62,7 +73,7 @@
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 297;
-			this.buttonOk.Text = "OK";
+			this.buttonOk.Text = "Add";
 			this.buttonOk.Click += new System.EventHandler(this.ButtonOk_Click);
 			// 
 			// buttonCancel
@@ -123,17 +134,6 @@
 			this.textBoxPartNumber.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.textBoxPartNumber.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
-			// labelNumber
-			// 
-			labelNumber.AutoSize = true;
-			labelNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			labelNumber.Location = new System.Drawing.Point(10, 78);
-			labelNumber.Name = "labelNumber";
-			labelNumber.Size = new System.Drawing.Size(56, 19);
-			labelNumber.TabIndex = 299;
-			labelNumber.Text = "Part №:";
-			labelNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			// 
 			// metroProgressSpinner1
 			// 
 			this.metroProgressSpinner1.Location = new System.Drawing.Point(373, 194);
@@ -159,7 +159,7 @@
 			this.Controls.Add(this.allProductListView1);
 			this.Name = "ProductBindForm";
 			this.Resizable = false;
-			this.Text = "ProductFind";
+			this.Text = "ProductBind";
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -167,7 +167,7 @@
 
 		#endregion
 
-		private PurchaseControls.AllProductListView allProductListView1;
+		private PurchaseControls.ProductListView allProductListView1;
 		private System.Windows.Forms.Button buttonOk;
 		private System.Windows.Forms.Button buttonCancel;
 		private System.Windows.Forms.Button button1;
