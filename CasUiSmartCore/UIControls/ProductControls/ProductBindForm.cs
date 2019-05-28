@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CAS.UI.UIControls.PurchaseControls;
 using CASTerms;
 using EFCore.Attributte;
 using EFCore.DTO.Dictionaries;
@@ -90,6 +91,25 @@ namespace CAS.UI.UIControls.ProductControls
 				MessageBox.Show("Please select one product!", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 			}
+		}
+
+		#endregion
+
+		#region private void Button2_Click(object sender, EventArgs e)
+
+		private void Button2_Click(object sender, EventArgs e)
+		{
+			var form = new ProductForm(new Product());
+			if (form.ShowDialog() == DialogResult.OK)
+			{
+				if (textBoxPartNumber.Text != "")
+				{
+					metroProgressSpinner1.Visible = true;
+					Task.Run(() => DoWork())
+						.ContinueWith(task => Complete(), TaskScheduler.FromCurrentSynchronizationContext());
+				}
+			}
+
 		}
 
 		#endregion

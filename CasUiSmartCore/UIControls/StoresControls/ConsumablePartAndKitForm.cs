@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.UIControls.DocumentationControls;
 using CAS.UI.UIControls.ProductControls;
+using CAS.UI.UIControls.PurchaseControls;
 using CASTerms;
 using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
@@ -872,7 +873,9 @@ namespace CAS.UI.UIControls.StoresControls
         #region private void DictionaryComboProductSelectedIndexChanged(object sender, EventArgs e)
         private void UpdateByProduct(Product product)
         {
-	        if (product != null)
+	        linkLabel1.Enabled = _consumablePart.Product != null;
+
+			if (product != null)
 	        {
 		        TextBoxProduct.Text = product.ToString();
 	            if (product.ImageFile != null)
@@ -1276,6 +1279,13 @@ namespace CAS.UI.UIControls.StoresControls
 			if(form.ShowDialog() == DialogResult.OK)
 				UpdateByProduct(_consumablePart.Product);
 
+		}
+
+		private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			var form = new ProductForm(_consumablePart.Product);
+			if (form.ShowDialog() == DialogResult.OK)
+				UpdateByProduct(_consumablePart.Product);
 		}
 	}
 }

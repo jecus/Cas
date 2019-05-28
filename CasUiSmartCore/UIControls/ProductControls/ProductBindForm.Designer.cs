@@ -35,6 +35,7 @@
 			this.button1 = new System.Windows.Forms.Button();
 			this.textBoxPartNumber = new MetroFramework.Controls.MetroTextBox();
 			this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
+			this.button2 = new System.Windows.Forms.Button();
 			labelNumber = new MetroFramework.Controls.MetroLabel();
 			this.SuspendLayout();
 			// 
@@ -145,11 +146,25 @@
 			this.metroProgressSpinner1.UseSelectable = true;
 			this.metroProgressSpinner1.Visible = false;
 			// 
+			// button2
+			// 
+			this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.button2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.button2.Location = new System.Drawing.Point(742, 63);
+			this.button2.Name = "button2";
+			this.button2.Size = new System.Drawing.Size(119, 33);
+			this.button2.TabIndex = 302;
+			this.button2.Text = "Add Product";
+			this.button2.Click += new System.EventHandler(this.Button2_Click);
+			// 
 			// ProductBindForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(965, 540);
+			this.Controls.Add(this.button2);
 			this.Controls.Add(this.metroProgressSpinner1);
 			this.Controls.Add(this.textBoxPartNumber);
 			this.Controls.Add(labelNumber);
@@ -157,6 +172,8 @@
 			this.Controls.Add(this.buttonOk);
 			this.Controls.Add(this.buttonCancel);
 			this.Controls.Add(this.allProductListView1);
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
 			this.Name = "ProductBindForm";
 			this.Resizable = false;
 			this.Text = "ProductBind";
@@ -173,5 +190,6 @@
 		private System.Windows.Forms.Button button1;
 		private MetroFramework.Controls.MetroTextBox textBoxPartNumber;
 		private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner1;
+		private System.Windows.Forms.Button button2;
 	}
 }

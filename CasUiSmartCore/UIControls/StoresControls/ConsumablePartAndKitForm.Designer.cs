@@ -110,6 +110,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.metroTextBoxPacking = new MetroFramework.Controls.MetroTextBox();
 			this.linkLabelEditComponents = new System.Windows.Forms.LinkLabel();
 			this.TextBoxProduct = new MetroFramework.Controls.MetroTextBox();
+			this.linkLabel1 = new System.Windows.Forms.LinkLabel();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -1215,13 +1216,13 @@ namespace CAS.UI.UIControls.StoresControls
 			// 
 			this.linkLabelEditComponents.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.linkLabelEditComponents.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.linkLabelEditComponents.Location = new System.Drawing.Point(799, 60);
+			this.linkLabelEditComponents.Location = new System.Drawing.Point(801, 63);
 			this.linkLabelEditComponents.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.linkLabelEditComponents.Name = "linkLabelEditComponents";
-			this.linkLabelEditComponents.Size = new System.Drawing.Size(37, 23);
+			this.linkLabelEditComponents.Size = new System.Drawing.Size(48, 23);
 			this.linkLabelEditComponents.TabIndex = 191;
 			this.linkLabelEditComponents.TabStop = true;
-			this.linkLabelEditComponents.Text = "Edit";
+			this.linkLabelEditComponents.Text = "Bind";
 			this.linkLabelEditComponents.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.linkLabelEditComponents.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelEditComponents_LinkClicked);
 			// 
@@ -1258,6 +1259,20 @@ namespace CAS.UI.UIControls.StoresControls
 			this.TextBoxProduct.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.TextBoxProduct.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
+			// linkLabel1
+			// 
+			this.linkLabel1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.linkLabel1.Location = new System.Drawing.Point(853, 63);
+			this.linkLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.linkLabel1.Name = "linkLabel1";
+			this.linkLabel1.Size = new System.Drawing.Size(37, 23);
+			this.linkLabel1.TabIndex = 193;
+			this.linkLabel1.TabStop = true;
+			this.linkLabel1.Text = "Edit";
+			this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
+			// 
 			// ConsumablePartAndKitForm
 			// 
 			this.AcceptButton = this.buttonOK;
@@ -1265,6 +1280,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.buttonCancel;
 			this.ClientSize = new System.Drawing.Size(924, 770);
+			this.Controls.Add(this.linkLabel1);
 			this.Controls.Add(this.TextBoxProduct);
 			this.Controls.Add(this.linkLabelEditComponents);
 			this.Controls.Add(this.metroLabelPacking);
@@ -1423,5 +1439,6 @@ namespace CAS.UI.UIControls.StoresControls
 		private MetroTextBox metroTextBoxPacking;
 		private System.Windows.Forms.LinkLabel linkLabelEditComponents;
 		private MetroTextBox TextBoxProduct;
+		private System.Windows.Forms.LinkLabel linkLabel1;
 	}
 }
