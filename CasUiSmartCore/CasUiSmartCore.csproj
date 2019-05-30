@@ -2592,6 +2592,12 @@
     <Compile Include="UIControls\SMSControls\SmsEventForm.Designer.cs">
       <DependentUpon>SmsEventForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\StoresControls\ComponentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\StoresControls\ComponentForm.Designer.cs">
+      <DependentUpon>ComponentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\StoresControls\ConsumablePartAndKitForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -4601,6 +4607,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\SMSControls\SmsEventForm.resx">
       <DependentUpon>SmsEventForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\StoresControls\ComponentForm.resx">
+      <DependentUpon>ComponentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\StoresControls\ConsumablePartAndKitForm.resx">
       <DependentUpon>ConsumablePartAndKitForm.cs</DependentUpon>
