@@ -43,8 +43,8 @@ namespace SmartCore.Entities.General.Accessory
         [FormControl(250, "Class:", "Standart", "GoodsClass", false,
             TreeDictRootNodes = new[]
             {
-				"OfficeEquipment", "MaintenanceMaterials", "ProductionAuxiliaryEquipment", "Tools", "Protection"
-			}, Order = 10)]
+	            "ComponentsAndParts" ,"OfficeEquipment", "MaintenanceMaterials", "ProductionAuxiliaryEquipment", "Tools", "Protection"
+            }, Order = 10)]
         [ListViewData(0.15f, "Class")]
         [NotNull]
         [Filter("Class:", Order = 11)]

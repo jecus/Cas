@@ -1287,5 +1287,11 @@ namespace CAS.UI.UIControls.StoresControls
 			if (form.ShowDialog() == DialogResult.OK)
 				UpdateByProduct(_consumablePart.Product);
 		}
+
+		private void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			_consumablePart.Product = null;
+			UpdateByProduct(_consumablePart.Product);
+		}
 	}
 }

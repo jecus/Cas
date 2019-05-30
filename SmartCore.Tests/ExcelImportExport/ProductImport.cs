@@ -99,9 +99,9 @@ namespace SmartCore.Tests.ExcelImportExport
 
 
 			var store = env.Loader.GetObject<Store>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, 11));
-			var models = env.Loader.GetObjectList<Product>();
+			var models = env.Loader.GetObjectList<ComponentModel>();
 
-			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\E&M.xlsx");
+			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\Components.xlsx");
 
 			foreach (DataTable table in ds.Tables)
 			{
@@ -135,13 +135,13 @@ namespace SmartCore.Tests.ExcelImportExport
 
 					#region E&M
 
-					comp.Product = models.FirstOrDefault(i =>i.PartNumber == comp.PartNumber);
-					comp.Measure = Measure.Unit;
+					//comp.Product = models.FirstOrDefault(i =>i.PartNumber == comp.PartNumber);
+					//comp.Measure = Measure.Unit;
 
 					#endregion
 
-					//comp.Model = models.FirstOrDefault(i => i.PartNumber == comp.PartNumber);
-					//comp.Measure = Measure.Unknown;
+					comp.Model = models.FirstOrDefault(i => i.PartNumber == comp.PartNumber);
+					comp.Measure = Measure.Unknown;
 
 					//comp.GoodsClass = GoodsClass.MaintenanceMaterials;
 					DateTime.TryParse(row[2].ToString(), out var date);

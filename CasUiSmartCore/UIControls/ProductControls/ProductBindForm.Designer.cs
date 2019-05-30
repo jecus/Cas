@@ -152,11 +152,11 @@
 			this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button2.Location = new System.Drawing.Point(742, 63);
+			this.button2.Location = new System.Drawing.Point(710, 63);
 			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(119, 33);
+			this.button2.Size = new System.Drawing.Size(151, 33);
 			this.button2.TabIndex = 302;
-			this.button2.Text = "Add Product";
+			this.button2.Text = "Add New Product";
 			this.button2.Click += new System.EventHandler(this.Button2_Click);
 			// 
 			// ProductBindForm
