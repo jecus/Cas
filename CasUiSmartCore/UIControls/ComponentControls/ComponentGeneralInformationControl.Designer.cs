@@ -33,8 +33,8 @@ namespace CAS.UI.UIControls.ComponentControls
         /// </summary>
         private void InitializeComponent()
         {
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComponentGeneralInformationControl));
 			System.Windows.Forms.GroupBox groupBoxStart;
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComponentGeneralInformationControl));
 			this.lifelengthViewerStart = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.dateTimePickerStart = new System.Windows.Forms.DateTimePicker();
 			this.labelPosition = new System.Windows.Forms.Label();
@@ -139,17 +139,34 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.dictionaryComboBoxLocation = new CAS.UI.UIControls.Auxiliary.DictionaryComboBox();
 			this.comboBoxComponentType = new CAS.UI.UIControls.Auxiliary.TreeDictionaryComboBox();
 			this.comboBoxAtaChapter = new CAS.UI.UIControls.Auxiliary.ATAChapterComboBox();
-			this.comboBoxModel = new CAS.UI.UIControls.Auxiliary.LookupCombobox();
 			this.lifelengthNotify = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.lifelengthViewer1 = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.labelAltPartNum = new System.Windows.Forms.Label();
 			this.textBoxAltPartNum = new System.Windows.Forms.TextBox();
+			this.textBoxModel = new System.Windows.Forms.TextBox();
+			this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+			this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+			this.linkLabelEditComponents = new System.Windows.Forms.LinkLabel();
 			groupBoxStart = new System.Windows.Forms.GroupBox();
+			groupBoxStart.SuspendLayout();
 			this.panelAvionicsInventory.SuspendLayout();
 			this.panelLandingGearMark.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
-			groupBoxStart.SuspendLayout();
 			this.SuspendLayout();
+			// 
+			// groupBoxStart
+			// 
+			groupBoxStart.Controls.Add(this.lifelengthViewerStart);
+			groupBoxStart.Controls.Add(this.dateTimePickerStart);
+			groupBoxStart.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			groupBoxStart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			groupBoxStart.Location = new System.Drawing.Point(3, 395);
+			groupBoxStart.Name = "groupBoxStart";
+			groupBoxStart.Size = new System.Drawing.Size(371, 112);
+			groupBoxStart.TabIndex = 172;
+			groupBoxStart.TabStop = false;
+			groupBoxStart.Text = "Start";
+			groupBoxStart.Visible = false;
 			// 
 			// lifelengthViewerStart
 			// 
@@ -275,7 +292,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.labelMPDItem.AutoSize = true;
 			this.labelMPDItem.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelMPDItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelMPDItem.Location = new System.Drawing.Point(401, 66);
+			this.labelMPDItem.Location = new System.Drawing.Point(401, 92);
 			this.labelMPDItem.Name = "labelMPDItem";
 			this.labelMPDItem.Size = new System.Drawing.Size(72, 14);
 			this.labelMPDItem.TabIndex = 2;
@@ -298,7 +315,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.textBoxMPDItem.BackColor = System.Drawing.Color.White;
 			this.textBoxMPDItem.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.textBoxMPDItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxMPDItem.Location = new System.Drawing.Point(537, 63);
+			this.textBoxMPDItem.Location = new System.Drawing.Point(537, 89);
 			this.textBoxMPDItem.MaxLength = 50;
 			this.textBoxMPDItem.Name = "textBoxMPDItem";
 			this.textBoxMPDItem.Size = new System.Drawing.Size(250, 22);
@@ -332,7 +349,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.labelAtaChapter.AutoSize = true;
 			this.labelAtaChapter.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelAtaChapter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelAtaChapter.Location = new System.Drawing.Point(401, 94);
+			this.labelAtaChapter.Location = new System.Drawing.Point(401, 120);
 			this.labelAtaChapter.Name = "labelAtaChapter";
 			this.labelAtaChapter.Size = new System.Drawing.Size(33, 14);
 			this.labelAtaChapter.TabIndex = 3;
@@ -378,7 +395,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			// 
 			this.labelMaxTakeOffWeight.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelMaxTakeOffWeight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelMaxTakeOffWeight.Location = new System.Drawing.Point(403, 119);
+			this.labelMaxTakeOffWeight.Location = new System.Drawing.Point(403, 145);
 			this.labelMaxTakeOffWeight.Name = "labelMaxTakeOffWeight";
 			this.labelMaxTakeOffWeight.Size = new System.Drawing.Size(100, 25);
 			this.labelMaxTakeOffWeight.TabIndex = 33;
@@ -390,7 +407,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.textBoxMaxTakeOffWeight.BackColor = System.Drawing.Color.White;
 			this.textBoxMaxTakeOffWeight.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.textBoxMaxTakeOffWeight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxMaxTakeOffWeight.Location = new System.Drawing.Point(542, 114);
+			this.textBoxMaxTakeOffWeight.Location = new System.Drawing.Point(542, 140);
 			this.textBoxMaxTakeOffWeight.MaxLength = 200;
 			this.textBoxMaxTakeOffWeight.Name = "textBoxMaxTakeOffWeight";
 			this.textBoxMaxTakeOffWeight.Size = new System.Drawing.Size(250, 22);
@@ -403,7 +420,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.checkBoxAvionicsInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.checkBoxAvionicsInventory.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.checkBoxAvionicsInventory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.checkBoxAvionicsInventory.Location = new System.Drawing.Point(403, 119);
+			this.checkBoxAvionicsInventory.Location = new System.Drawing.Point(403, 145);
 			this.checkBoxAvionicsInventory.Name = "checkBoxAvionicsInventory";
 			this.checkBoxAvionicsInventory.Size = new System.Drawing.Size(133, 18);
 			this.checkBoxAvionicsInventory.TabIndex = 14;
@@ -417,7 +434,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.panelAvionicsInventory.Controls.Add(this.radioButtonInventoryOptional);
 			this.panelAvionicsInventory.Controls.Add(this.radioButtonInventoryRequired);
 			this.panelAvionicsInventory.Controls.Add(this.radioButtonAvionicsInventoryUnknown);
-			this.panelAvionicsInventory.Location = new System.Drawing.Point(539, 114);
+			this.panelAvionicsInventory.Location = new System.Drawing.Point(539, 140);
 			this.panelAvionicsInventory.Name = "panelAvionicsInventory";
 			this.panelAvionicsInventory.Size = new System.Drawing.Size(255, 27);
 			this.panelAvionicsInventory.TabIndex = 15;
@@ -478,7 +495,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			// 
 			this.textBoxHushKit.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.textBoxHushKit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxHushKit.Location = new System.Drawing.Point(542, 114);
+			this.textBoxHushKit.Location = new System.Drawing.Point(542, 140);
 			this.textBoxHushKit.MaxLength = 200;
 			this.textBoxHushKit.Name = "textBoxHushKit";
 			this.textBoxHushKit.Size = new System.Drawing.Size(250, 22);
@@ -499,7 +516,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			// 
 			this.labelHushKit.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelHushKit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelHushKit.Location = new System.Drawing.Point(403, 119);
+			this.labelHushKit.Location = new System.Drawing.Point(403, 145);
 			this.labelHushKit.Name = "labelHushKit";
 			this.labelHushKit.Size = new System.Drawing.Size(100, 25);
 			this.labelHushKit.TabIndex = 35;
@@ -783,7 +800,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.labelBatchNumber.AutoSize = true;
 			this.labelBatchNumber.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelBatchNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelBatchNumber.Location = new System.Drawing.Point(400, 11);
+			this.labelBatchNumber.Location = new System.Drawing.Point(400, 37);
 			this.labelBatchNumber.Name = "labelBatchNumber";
 			this.labelBatchNumber.Size = new System.Drawing.Size(68, 14);
 			this.labelBatchNumber.TabIndex = 89;
@@ -794,7 +811,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			// 
 			this.textBoxBatchNumber.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.textBoxBatchNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxBatchNumber.Location = new System.Drawing.Point(537, 6);
+			this.textBoxBatchNumber.Location = new System.Drawing.Point(537, 32);
 			this.textBoxBatchNumber.MaxLength = 200;
 			this.textBoxBatchNumber.Name = "textBoxBatchNumber";
 			this.textBoxBatchNumber.Size = new System.Drawing.Size(250, 22);
@@ -805,7 +822,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.labelIdNumber.AutoSize = true;
 			this.labelIdNumber.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelIdNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelIdNumber.Location = new System.Drawing.Point(400, 37);
+			this.labelIdNumber.Location = new System.Drawing.Point(400, 63);
 			this.labelIdNumber.Name = "labelIdNumber";
 			this.labelIdNumber.Size = new System.Drawing.Size(47, 14);
 			this.labelIdNumber.TabIndex = 88;
@@ -817,7 +834,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.textBoxIdNumber.BackColor = System.Drawing.Color.White;
 			this.textBoxIdNumber.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.textBoxIdNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxIdNumber.Location = new System.Drawing.Point(537, 34);
+			this.textBoxIdNumber.Location = new System.Drawing.Point(537, 60);
 			this.textBoxIdNumber.MaxLength = 50;
 			this.textBoxIdNumber.Name = "textBoxIdNumber";
 			this.textBoxIdNumber.Size = new System.Drawing.Size(250, 22);
@@ -1582,26 +1599,10 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxAtaChapter.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.comboBoxAtaChapter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.comboBoxAtaChapter.FormattingEnabled = true;
-			this.comboBoxAtaChapter.Location = new System.Drawing.Point(537, 91);
+			this.comboBoxAtaChapter.Location = new System.Drawing.Point(537, 117);
 			this.comboBoxAtaChapter.Name = "comboBoxAtaChapter";
 			this.comboBoxAtaChapter.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxAtaChapter.TabIndex = 12;
-			// 
-			// comboBoxModel
-			// 
-			this.comboBoxModel.Displayer = null;
-			this.comboBoxModel.DisplayerText = null;
-			this.comboBoxModel.Entity = null;
-			this.comboBoxModel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.comboBoxModel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.comboBoxModel.Location = new System.Drawing.Point(113, 6);
-			this.comboBoxModel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-			this.comboBoxModel.Name = "comboBoxModel";
-			this.comboBoxModel.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.comboBoxModel.Size = new System.Drawing.Size(250, 22);
-			this.comboBoxModel.TabIndex = 2;
-			this.comboBoxModel.Type = null;
-			this.comboBoxModel.SelectedIndexChanged += new System.EventHandler(this.DictionaryComboProductSelectedIndexChanged);
 			// 
 			// lifelengthNotify
 			// 
@@ -1667,20 +1668,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.lifelengthViewer1.SystemCalculated = true;
 			this.lifelengthViewer1.TabIndex = 62;
 			// 
-			// groupBoxStart
-			// 
-			groupBoxStart.Controls.Add(this.lifelengthViewerStart);
-			groupBoxStart.Controls.Add(this.dateTimePickerStart);
-			groupBoxStart.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			groupBoxStart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			groupBoxStart.Location = new System.Drawing.Point(3, 395);
-			groupBoxStart.Name = "groupBoxStart";
-			groupBoxStart.Size = new System.Drawing.Size(371, 112);
-			groupBoxStart.TabIndex = 172;
-			groupBoxStart.TabStop = false;
-			groupBoxStart.Text = "Start";
-			groupBoxStart.Visible = false;
-			// 
 			// labelAltPartNum
 			// 
 			this.labelAltPartNum.AutoSize = true;
@@ -1705,12 +1692,68 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.textBoxAltPartNum.Size = new System.Drawing.Size(249, 22);
 			this.textBoxAltPartNum.TabIndex = 174;
 			// 
+			// textBoxModel
+			// 
+			this.textBoxModel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.textBoxModel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxModel.Location = new System.Drawing.Point(112, 6);
+			this.textBoxModel.MaxLength = 200;
+			this.textBoxModel.Name = "textBoxModel";
+			this.textBoxModel.Size = new System.Drawing.Size(537, 22);
+			this.textBoxModel.TabIndex = 175;
+			// 
+			// linkLabel2
+			// 
+			this.linkLabel2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.linkLabel2.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.linkLabel2.Location = new System.Drawing.Point(737, 5);
+			this.linkLabel2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.linkLabel2.Name = "linkLabel2";
+			this.linkLabel2.Size = new System.Drawing.Size(50, 23);
+			this.linkLabel2.TabIndex = 197;
+			this.linkLabel2.TabStop = true;
+			this.linkLabel2.Text = "Clear";
+			this.linkLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel2_LinkClicked);
+			// 
+			// linkLabel1
+			// 
+			this.linkLabel1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.linkLabel1.Location = new System.Drawing.Point(699, 5);
+			this.linkLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.linkLabel1.Name = "linkLabel1";
+			this.linkLabel1.Size = new System.Drawing.Size(37, 23);
+			this.linkLabel1.TabIndex = 196;
+			this.linkLabel1.TabStop = true;
+			this.linkLabel1.Text = "Edit";
+			this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
+			// 
+			// linkLabelEditComponents
+			// 
+			this.linkLabelEditComponents.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.linkLabelEditComponents.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.linkLabelEditComponents.Location = new System.Drawing.Point(649, 5);
+			this.linkLabelEditComponents.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.linkLabelEditComponents.Name = "linkLabelEditComponents";
+			this.linkLabelEditComponents.Size = new System.Drawing.Size(48, 23);
+			this.linkLabelEditComponents.TabIndex = 195;
+			this.linkLabelEditComponents.TabStop = true;
+			this.linkLabelEditComponents.Text = "Bind";
+			this.linkLabelEditComponents.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.linkLabelEditComponents.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelEditComponents_LinkClicked);
+			// 
 			// ComponentGeneralInformationControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this.Controls.Add(this.linkLabel2);
+			this.Controls.Add(this.linkLabel1);
+			this.Controls.Add(this.linkLabelEditComponents);
+			this.Controls.Add(this.textBoxModel);
 			this.Controls.Add(this.labelAltPartNum);
 			this.Controls.Add(this.textBoxAltPartNum);
 			this.Controls.Add(groupBoxStart);
@@ -1783,7 +1826,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.Controls.Add(this.labelDeliverDate);
 			this.Controls.Add(this.textBoxSerialNo);
 			this.Controls.Add(this.dateTimePickerDeliveryDate);
-			this.Controls.Add(this.comboBoxModel);
 			this.Controls.Add(this.labelPartNo);
 			this.Controls.Add(this.textBoxPartNo);
 			this.Controls.Add(this.labelSerialNo);
@@ -1808,13 +1850,13 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.Controls.Add(this.textBoxHushKit);
 			this.Name = "ComponentGeneralInformationControl";
 			this.Size = new System.Drawing.Size(1195, 718);
+			groupBoxStart.ResumeLayout(false);
+			groupBoxStart.PerformLayout();
 			this.panelAvionicsInventory.ResumeLayout(false);
 			this.panelAvionicsInventory.PerformLayout();
 			this.panelLandingGearMark.ResumeLayout(false);
 			this.panelLandingGearMark.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).EndInit();
-			groupBoxStart.ResumeLayout(false);
-			groupBoxStart.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -1847,7 +1889,6 @@ namespace CAS.UI.UIControls.ComponentControls
         private ATAChapterComboBox comboBoxAtaChapter;
         private System.Windows.Forms.TextBox textBoxDescription;
         private System.Windows.Forms.TextBox textBoxManufacturer;
-        private CAS.UI.UIControls.Auxiliary.LookupCombobox comboBoxModel;
         private System.Windows.Forms.TextBox textBoxPartNo;
         private System.Windows.Forms.TextBox textBoxPosition;
         private System.Windows.Forms.Panel panelLandingGearMark;
@@ -1933,5 +1974,9 @@ namespace CAS.UI.UIControls.ComponentControls
 		private System.Windows.Forms.Label labelAltPartNum;
 		private System.Windows.Forms.TextBox textBoxAltPartNum;
 		private System.Windows.Forms.GroupBox groupBoxStart;
+		private System.Windows.Forms.TextBox textBoxModel;
+		private System.Windows.Forms.LinkLabel linkLabel2;
+		private System.Windows.Forms.LinkLabel linkLabel1;
+		private System.Windows.Forms.LinkLabel linkLabelEditComponents;
 	}
 }

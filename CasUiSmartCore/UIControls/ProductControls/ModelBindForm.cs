@@ -8,28 +8,29 @@ using EFCore.Attributte;
 using EFCore.DTO.Dictionaries;
 using EFCore.Filter;
 using MetroFramework.Forms;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
 
 namespace CAS.UI.UIControls.ProductControls
 {
-	public partial class ProductBindForm : MetroForm
+	public partial class ModelBindForm : MetroForm
 	{
 
 		#region Fields
 
 		private readonly Component _current;
-		private List<Product> _result = new List<Product>();
+		private List<ComponentModel> _result = new List<ComponentModel>();
 
 		#endregion
 
 		#region Constructor
 
-		public ProductBindForm()
+		public ModelBindForm()
 		{
 			InitializeComponent();
 		}
 
-		public ProductBindForm(Component current) :this()
+		public ModelBindForm(Component current) :this()
 		{
 			_current = current;
 		}
@@ -52,10 +53,10 @@ namespace CAS.UI.UIControls.ProductControls
 		private void DoWork()
 		{
 			_result.Clear();
-			_result.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, Product>(new Filter[]
+			_result.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, ComponentModel>(new Filter[]
 			{
 				new Filter("PartNumber",FilterType.Contains, textBoxPartNumber.Text),
-				new Filter("ModelingObjectTypeId", -1)
+				new Filter("ModelingObjectTypeId", 5)
 			}));
 		}
 
@@ -86,7 +87,7 @@ namespace CAS.UI.UIControls.ProductControls
 		private void ButtonOk_Click(object sender, EventArgs e)
 		{
 			if (allProductListView1.SelectedItem != null)
-				_current.Product = allProductListView1.SelectedItem;
+				_current.Model = allProductListView1.SelectedItem;
 			else
 			{
 				MessageBox.Show("Please select one product!", (string)new GlobalTermsProvider()["SystemName"],
@@ -100,7 +101,7 @@ namespace CAS.UI.UIControls.ProductControls
 
 		private void Button2_Click(object sender, EventArgs e)
 		{
-			var form = new ProductForm(new Product());
+			var form = new ModelForm(new ComponentModel());
 			if (form.ShowDialog() == DialogResult.OK)
 			{
 				if (textBoxPartNumber.Text != "")
