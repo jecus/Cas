@@ -635,57 +635,7 @@ namespace CAS.UI.UIControls.StoresControls
 		{
 			try
 			{
-				var partNumber = textBoxPartNumber.Text.Replace(" ", "").ToLower();
-				List<ComponentModel> componentModels;
-				if (_consumablePart.Product != null && _consumablePart.Product.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.ProductionAuxiliaryEquipment))
-				{
-					try
-					{
-						var product = _consumablePart.Product;
-
-						componentModels = new List<ComponentModel>(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, ComponentModel>(new List<Filter>()
-						{
-							new Filter("ModelingObjectTypeId",5),
-							new Filter("FullName",product.Name),
-							new Filter("PartNumber",partNumber)
-						}));
-
-						if (componentModels.Count == 0)
-						{
-							var newModel = new ComponentModel
-							{
-								Name = product.Name,
-								FullName = product.Name,
-								ShortName = product.Name,
-								Standart = product.Standart,
-								PartNumber = product.PartNumber,
-								Description = product.Description,
-								IsDangerous = product.IsDangerous,
-								Code = product.Code,
-								Manufacturer = product.Manufacturer,
-								Remarks = product.Remarks,
-								ImageFile = fileControlImage.AttachedFile,
-								GoodsClass = product.GoodsClass,
-								ATAChapter = product.ATAChapter
-							};
-
-							GlobalObjects.CasEnvironment.NewKeeper.Save(newModel);
-							_consumablePart.Model = newModel;
-						}
-						else
-						{
-							_consumablePart.Model = componentModels.FirstOrDefault();
-						}
-
-					}
-					catch (Exception ex)
-					{
-						Program.Provider.Logger.Log("Not Find dictionary of type " + typeof(ComponentModel).Name, ex);
-					}
-	            }
-
-
-                if (_consumablePart.ItemId <= 0)
+				if (_consumablePart.ItemId <= 0)
                 {
 					if(_currentStore == null)
 						_currentStore = GlobalObjects.CasEnvironment.Stores.GetItemById(_consumablePart.ParentStoreId);
