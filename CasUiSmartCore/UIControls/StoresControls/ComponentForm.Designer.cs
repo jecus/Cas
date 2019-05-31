@@ -112,6 +112,8 @@ namespace CAS.UI.UIControls.StoresControls
 			this.TextBoxProduct = new MetroFramework.Controls.MetroTextBox();
 			this.linkLabel1 = new System.Windows.Forms.LinkLabel();
 			this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+			this.metroLabelEffectivity = new MetroFramework.Controls.MetroLabel();
+			this.metroTextBoxEffectivity = new MetroFramework.Controls.MetroTextBox();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -505,7 +507,7 @@ namespace CAS.UI.UIControls.StoresControls
 			// 
 			this.labelRemarks.AutoSize = true;
 			this.labelRemarks.ForeColor = System.Drawing.Color.Black;
-			this.labelRemarks.Location = new System.Drawing.Point(324, 305);
+			this.labelRemarks.Location = new System.Drawing.Point(324, 334);
 			this.labelRemarks.Name = "labelRemarks";
 			this.labelRemarks.Size = new System.Drawing.Size(62, 19);
 			this.labelRemarks.TabIndex = 86;
@@ -519,9 +521,9 @@ namespace CAS.UI.UIControls.StoresControls
 			// 
 			// 
 			this.textBoxRemarks.CustomButton.Image = null;
-			this.textBoxRemarks.CustomButton.Location = new System.Drawing.Point(93, 1);
+			this.textBoxRemarks.CustomButton.Location = new System.Drawing.Point(121, 1);
 			this.textBoxRemarks.CustomButton.Name = "";
-			this.textBoxRemarks.CustomButton.Size = new System.Drawing.Size(107, 107);
+			this.textBoxRemarks.CustomButton.Size = new System.Drawing.Size(79, 79);
 			this.textBoxRemarks.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
 			this.textBoxRemarks.CustomButton.TabIndex = 1;
 			this.textBoxRemarks.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -529,7 +531,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.textBoxRemarks.CustomButton.Visible = false;
 			this.textBoxRemarks.ForeColor = System.Drawing.Color.Black;
 			this.textBoxRemarks.Lines = new string[0];
-			this.textBoxRemarks.Location = new System.Drawing.Point(410, 306);
+			this.textBoxRemarks.Location = new System.Drawing.Point(410, 334);
 			this.textBoxRemarks.MaxLength = 32767;
 			this.textBoxRemarks.Multiline = true;
 			this.textBoxRemarks.Name = "textBoxRemarks";
@@ -539,7 +541,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.textBoxRemarks.SelectionLength = 0;
 			this.textBoxRemarks.SelectionStart = 0;
 			this.textBoxRemarks.ShortcutsEnabled = true;
-			this.textBoxRemarks.Size = new System.Drawing.Size(201, 109);
+			this.textBoxRemarks.Size = new System.Drawing.Size(201, 81);
 			this.textBoxRemarks.TabIndex = 11;
 			this.textBoxRemarks.UseSelectable = true;
 			this.textBoxRemarks.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -1288,6 +1290,50 @@ namespace CAS.UI.UIControls.StoresControls
 			this.linkLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel2_LinkClicked);
 			// 
+			// metroLabelEffectivity
+			// 
+			this.metroLabelEffectivity.AutoSize = true;
+			this.metroLabelEffectivity.ForeColor = System.Drawing.Color.Black;
+			this.metroLabelEffectivity.Location = new System.Drawing.Point(324, 305);
+			this.metroLabelEffectivity.Name = "metroLabelEffectivity";
+			this.metroLabelEffectivity.Size = new System.Drawing.Size(66, 19);
+			this.metroLabelEffectivity.TabIndex = 198;
+			this.metroLabelEffectivity.Text = "Effectivity:";
+			this.metroLabelEffectivity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// metroTextBoxEffectivity
+			// 
+			this.metroTextBoxEffectivity.BackColor = System.Drawing.Color.White;
+			// 
+			// 
+			// 
+			this.metroTextBoxEffectivity.CustomButton.Image = null;
+			this.metroTextBoxEffectivity.CustomButton.Location = new System.Drawing.Point(183, 2);
+			this.metroTextBoxEffectivity.CustomButton.Name = "";
+			this.metroTextBoxEffectivity.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.metroTextBoxEffectivity.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.metroTextBoxEffectivity.CustomButton.TabIndex = 1;
+			this.metroTextBoxEffectivity.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.metroTextBoxEffectivity.CustomButton.UseSelectable = true;
+			this.metroTextBoxEffectivity.CustomButton.Visible = false;
+			this.metroTextBoxEffectivity.ForeColor = System.Drawing.Color.Black;
+			this.metroTextBoxEffectivity.Lines = new string[0];
+			this.metroTextBoxEffectivity.Location = new System.Drawing.Point(409, 306);
+			this.metroTextBoxEffectivity.MaxLength = 128;
+			this.metroTextBoxEffectivity.Name = "metroTextBoxEffectivity";
+			this.metroTextBoxEffectivity.PasswordChar = '\0';
+			this.metroTextBoxEffectivity.ReadOnly = true;
+			this.metroTextBoxEffectivity.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.metroTextBoxEffectivity.SelectedText = "";
+			this.metroTextBoxEffectivity.SelectionLength = 0;
+			this.metroTextBoxEffectivity.SelectionStart = 0;
+			this.metroTextBoxEffectivity.ShortcutsEnabled = true;
+			this.metroTextBoxEffectivity.Size = new System.Drawing.Size(201, 20);
+			this.metroTextBoxEffectivity.TabIndex = 197;
+			this.metroTextBoxEffectivity.UseSelectable = true;
+			this.metroTextBoxEffectivity.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.metroTextBoxEffectivity.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+			// 
 			// ComponentForm
 			// 
 			this.AcceptButton = this.buttonOK;
@@ -1295,6 +1341,8 @@ namespace CAS.UI.UIControls.StoresControls
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.buttonCancel;
 			this.ClientSize = new System.Drawing.Size(924, 770);
+			this.Controls.Add(this.metroLabelEffectivity);
+			this.Controls.Add(this.metroTextBoxEffectivity);
 			this.Controls.Add(this.linkLabel2);
 			this.Controls.Add(this.linkLabel1);
 			this.Controls.Add(this.TextBoxProduct);
@@ -1457,5 +1505,7 @@ namespace CAS.UI.UIControls.StoresControls
 		private MetroTextBox TextBoxProduct;
 		private System.Windows.Forms.LinkLabel linkLabel1;
 		private System.Windows.Forms.LinkLabel linkLabel2;
+		private MetroLabel metroLabelEffectivity;
+		private MetroTextBox metroTextBoxEffectivity;
 	}
 }

@@ -870,6 +870,7 @@ namespace CAS.UI.UIControls.StoresControls
 				textBoxManufacturer.Text = product.Manufacturer;
 	            ataChapterComboBox.ATAChapter = product.ATAChapter;
 	            textBoxProductCode.Text = product.Code;
+	            metroTextBoxEffectivity.Text = product.IsEffectivity;
 
 				SetForDetailClass();
 			}
@@ -878,7 +879,8 @@ namespace CAS.UI.UIControls.StoresControls
 				ataChapterComboBox.Enabled = true;
 				comboBoxDetailClass.Enabled = true;
 				textBoxProductCode.Enabled = true;
-			}
+				metroTextBoxEffectivity.Text = "";
+            }
 
             if (_consumablePart.ItemId > 0)
             {
@@ -1240,6 +1242,7 @@ namespace CAS.UI.UIControls.StoresControls
 
 		private void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
+			TextBoxProduct.Text = "";
 			_consumablePart.Model = null;
 			UpdateByModel(_consumablePart.Model);
 		}

@@ -85,6 +85,25 @@ namespace CAS.UI.UIControls.StoresControls
 			this.labelFaaForm = new MetroFramework.Controls.MetroLabel();
 			this.label4 = new MetroFramework.Controls.MetroLabel();
 			this.labelIamge = new MetroFramework.Controls.MetroLabel();
+			this.checkBoxDangerous = new MetroFramework.Controls.MetroCheckBox();
+			this.checkBoxPOOL = new MetroFramework.Controls.MetroCheckBox();
+			this.comboBoxSupplier = new System.Windows.Forms.ComboBox();
+			this.dateTimePickerReciveDate = new System.Windows.Forms.DateTimePicker();
+			this.label2 = new MetroFramework.Controls.MetroLabel();
+			this.labelAltpartNum = new MetroFramework.Controls.MetroLabel();
+			this.textBoxAltPartNum = new MetroFramework.Controls.MetroTextBox();
+			this.comboBoxReceived = new System.Windows.Forms.ComboBox();
+			this.metroLabelReceived = new MetroFramework.Controls.MetroLabel();
+			this.metroLabelPacking = new MetroFramework.Controls.MetroLabel();
+			this.metroTextBoxPacking = new MetroFramework.Controls.MetroTextBox();
+			this.linkLabelEditComponents = new System.Windows.Forms.LinkLabel();
+			this.TextBoxProduct = new MetroFramework.Controls.MetroTextBox();
+			this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+			this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+			this.metroLabelEffectivity = new MetroFramework.Controls.MetroLabel();
+			this.metroTextBoxEffectivity = new MetroFramework.Controls.MetroTextBox();
+			this.documentControlShip = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
+			this.documentControlFaa = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.fileControlImage = new CAS.UI.UIControls.Auxiliary.AttachedFileControl();
 			this.ataChapterComboBox = new CAS.UI.UIControls.Auxiliary.ATAChapterComboBox();
 			this.dictionaryComboBoxLocation = new CAS.UI.UIControls.Auxiliary.DictionaryComboBox();
@@ -95,23 +114,6 @@ namespace CAS.UI.UIControls.StoresControls
 			this.lifelengthViewerNotify = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.lifelengthViewerLifeLimit = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.comboBoxDetailClass = new CAS.UI.UIControls.Auxiliary.TreeDictionaryComboBox();
-			this.checkBoxDangerous = new MetroFramework.Controls.MetroCheckBox();
-			this.checkBoxPOOL = new MetroFramework.Controls.MetroCheckBox();
-			this.comboBoxSupplier = new System.Windows.Forms.ComboBox();
-			this.dateTimePickerReciveDate = new System.Windows.Forms.DateTimePicker();
-			this.label2 = new MetroFramework.Controls.MetroLabel();
-			this.labelAltpartNum = new MetroFramework.Controls.MetroLabel();
-			this.textBoxAltPartNum = new MetroFramework.Controls.MetroTextBox();
-			this.comboBoxReceived = new System.Windows.Forms.ComboBox();
-			this.metroLabelReceived = new MetroFramework.Controls.MetroLabel();
-			this.documentControlFaa = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControlShip = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.metroLabelPacking = new MetroFramework.Controls.MetroLabel();
-			this.metroTextBoxPacking = new MetroFramework.Controls.MetroTextBox();
-			this.linkLabelEditComponents = new System.Windows.Forms.LinkLabel();
-			this.TextBoxProduct = new MetroFramework.Controls.MetroTextBox();
-			this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-			this.linkLabel2 = new System.Windows.Forms.LinkLabel();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -505,7 +507,7 @@ namespace CAS.UI.UIControls.StoresControls
 			// 
 			this.labelRemarks.AutoSize = true;
 			this.labelRemarks.ForeColor = System.Drawing.Color.Black;
-			this.labelRemarks.Location = new System.Drawing.Point(324, 305);
+			this.labelRemarks.Location = new System.Drawing.Point(324, 334);
 			this.labelRemarks.Name = "labelRemarks";
 			this.labelRemarks.Size = new System.Drawing.Size(62, 19);
 			this.labelRemarks.TabIndex = 86;
@@ -519,9 +521,9 @@ namespace CAS.UI.UIControls.StoresControls
 			// 
 			// 
 			this.textBoxRemarks.CustomButton.Image = null;
-			this.textBoxRemarks.CustomButton.Location = new System.Drawing.Point(93, 1);
+			this.textBoxRemarks.CustomButton.Location = new System.Drawing.Point(121, 1);
 			this.textBoxRemarks.CustomButton.Name = "";
-			this.textBoxRemarks.CustomButton.Size = new System.Drawing.Size(107, 107);
+			this.textBoxRemarks.CustomButton.Size = new System.Drawing.Size(79, 79);
 			this.textBoxRemarks.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
 			this.textBoxRemarks.CustomButton.TabIndex = 1;
 			this.textBoxRemarks.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -529,7 +531,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.textBoxRemarks.CustomButton.Visible = false;
 			this.textBoxRemarks.ForeColor = System.Drawing.Color.Black;
 			this.textBoxRemarks.Lines = new string[0];
-			this.textBoxRemarks.Location = new System.Drawing.Point(410, 306);
+			this.textBoxRemarks.Location = new System.Drawing.Point(410, 334);
 			this.textBoxRemarks.MaxLength = 32767;
 			this.textBoxRemarks.Multiline = true;
 			this.textBoxRemarks.Name = "textBoxRemarks";
@@ -539,7 +541,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.textBoxRemarks.SelectionLength = 0;
 			this.textBoxRemarks.SelectionStart = 0;
 			this.textBoxRemarks.ShortcutsEnabled = true;
-			this.textBoxRemarks.Size = new System.Drawing.Size(201, 109);
+			this.textBoxRemarks.Size = new System.Drawing.Size(201, 81);
 			this.textBoxRemarks.TabIndex = 11;
 			this.textBoxRemarks.UseSelectable = true;
 			this.textBoxRemarks.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -837,6 +839,299 @@ namespace CAS.UI.UIControls.StoresControls
 			this.labelIamge.Text = "Image:";
 			this.labelIamge.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// checkBoxDangerous
+			// 
+			this.checkBoxDangerous.AutoSize = true;
+			this.checkBoxDangerous.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.checkBoxDangerous.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.checkBoxDangerous.Location = new System.Drawing.Point(798, 282);
+			this.checkBoxDangerous.Name = "checkBoxDangerous";
+			this.checkBoxDangerous.Size = new System.Drawing.Size(91, 15);
+			this.checkBoxDangerous.TabIndex = 142;
+			this.checkBoxDangerous.Text = "Is Dangerous";
+			this.checkBoxDangerous.UseSelectable = true;
+			// 
+			// checkBoxPOOL
+			// 
+			this.checkBoxPOOL.AutoSize = true;
+			this.checkBoxPOOL.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.checkBoxPOOL.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.checkBoxPOOL.Location = new System.Drawing.Point(718, 282);
+			this.checkBoxPOOL.Name = "checkBoxPOOL";
+			this.checkBoxPOOL.Size = new System.Drawing.Size(65, 15);
+			this.checkBoxPOOL.TabIndex = 141;
+			this.checkBoxPOOL.Text = "Is POOL";
+			this.checkBoxPOOL.UseSelectable = true;
+			// 
+			// comboBoxSupplier
+			// 
+			this.comboBoxSupplier.FormattingEnabled = true;
+			this.comboBoxSupplier.Location = new System.Drawing.Point(118, 91);
+			this.comboBoxSupplier.Name = "comboBoxSupplier";
+			this.comboBoxSupplier.Size = new System.Drawing.Size(678, 21);
+			this.comboBoxSupplier.TabIndex = 143;
+			this.comboBoxSupplier.SelectedIndexChanged += new System.EventHandler(this.comboBoxSupplier_SelectedIndexChanged);
+			// 
+			// dateTimePickerReciveDate
+			// 
+			this.dateTimePickerReciveDate.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.dateTimePickerReciveDate.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.dateTimePickerReciveDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.dateTimePickerReciveDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.dateTimePickerReciveDate.Location = new System.Drawing.Point(802, 91);
+			this.dateTimePickerReciveDate.Name = "dateTimePickerReciveDate";
+			this.dateTimePickerReciveDate.Size = new System.Drawing.Size(105, 22);
+			this.dateTimePickerReciveDate.TabIndex = 150;
+			// 
+			// label2
+			// 
+			this.label2.Location = new System.Drawing.Point(13, 91);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(90, 20);
+			this.label2.TabIndex = 151;
+			this.label2.Text = "ReceivedFrom:";
+			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// labelAltpartNum
+			// 
+			this.labelAltpartNum.AutoSize = true;
+			this.labelAltpartNum.ForeColor = System.Drawing.Color.Black;
+			this.labelAltpartNum.Location = new System.Drawing.Point(13, 171);
+			this.labelAltpartNum.Name = "labelAltpartNum";
+			this.labelAltpartNum.Size = new System.Drawing.Size(89, 19);
+			this.labelAltpartNum.TabIndex = 153;
+			this.labelAltpartNum.Text = "Alt Part Num:";
+			this.labelAltpartNum.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// textBoxAltPartNum
+			// 
+			this.textBoxAltPartNum.BackColor = System.Drawing.Color.White;
+			// 
+			// 
+			// 
+			this.textBoxAltPartNum.CustomButton.Image = null;
+			this.textBoxAltPartNum.CustomButton.Location = new System.Drawing.Point(182, 2);
+			this.textBoxAltPartNum.CustomButton.Name = "";
+			this.textBoxAltPartNum.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.textBoxAltPartNum.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxAltPartNum.CustomButton.TabIndex = 1;
+			this.textBoxAltPartNum.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxAltPartNum.CustomButton.UseSelectable = true;
+			this.textBoxAltPartNum.CustomButton.Visible = false;
+			this.textBoxAltPartNum.ForeColor = System.Drawing.Color.Black;
+			this.textBoxAltPartNum.Lines = new string[0];
+			this.textBoxAltPartNum.Location = new System.Drawing.Point(118, 171);
+			this.textBoxAltPartNum.MaxLength = 128;
+			this.textBoxAltPartNum.Name = "textBoxAltPartNum";
+			this.textBoxAltPartNum.PasswordChar = '\0';
+			this.textBoxAltPartNum.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textBoxAltPartNum.SelectedText = "";
+			this.textBoxAltPartNum.SelectionLength = 0;
+			this.textBoxAltPartNum.SelectionStart = 0;
+			this.textBoxAltPartNum.ShortcutsEnabled = true;
+			this.textBoxAltPartNum.Size = new System.Drawing.Size(200, 20);
+			this.textBoxAltPartNum.TabIndex = 152;
+			this.textBoxAltPartNum.UseSelectable = true;
+			this.textBoxAltPartNum.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxAltPartNum.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+			// 
+			// comboBoxReceived
+			// 
+			this.comboBoxReceived.FormattingEnabled = true;
+			this.comboBoxReceived.Location = new System.Drawing.Point(706, 393);
+			this.comboBoxReceived.Name = "comboBoxReceived";
+			this.comboBoxReceived.Size = new System.Drawing.Size(200, 21);
+			this.comboBoxReceived.TabIndex = 154;
+			// 
+			// metroLabelReceived
+			// 
+			this.metroLabelReceived.AutoSize = true;
+			this.metroLabelReceived.ForeColor = System.Drawing.Color.Black;
+			this.metroLabelReceived.Location = new System.Drawing.Point(619, 393);
+			this.metroLabelReceived.Name = "metroLabelReceived";
+			this.metroLabelReceived.Size = new System.Drawing.Size(64, 19);
+			this.metroLabelReceived.TabIndex = 155;
+			this.metroLabelReceived.Text = "Received:";
+			this.metroLabelReceived.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// metroLabelPacking
+			// 
+			this.metroLabelPacking.AutoSize = true;
+			this.metroLabelPacking.ForeColor = System.Drawing.Color.Black;
+			this.metroLabelPacking.Location = new System.Drawing.Point(619, 173);
+			this.metroLabelPacking.Name = "metroLabelPacking";
+			this.metroLabelPacking.Size = new System.Drawing.Size(56, 19);
+			this.metroLabelPacking.TabIndex = 157;
+			this.metroLabelPacking.Text = "Packing:";
+			this.metroLabelPacking.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// metroTextBoxPacking
+			// 
+			this.metroTextBoxPacking.BackColor = System.Drawing.Color.White;
+			// 
+			// 
+			// 
+			this.metroTextBoxPacking.CustomButton.Image = null;
+			this.metroTextBoxPacking.CustomButton.Location = new System.Drawing.Point(183, 2);
+			this.metroTextBoxPacking.CustomButton.Name = "";
+			this.metroTextBoxPacking.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.metroTextBoxPacking.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.metroTextBoxPacking.CustomButton.TabIndex = 1;
+			this.metroTextBoxPacking.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.metroTextBoxPacking.CustomButton.UseSelectable = true;
+			this.metroTextBoxPacking.CustomButton.Visible = false;
+			this.metroTextBoxPacking.ForeColor = System.Drawing.Color.Black;
+			this.metroTextBoxPacking.Lines = new string[0];
+			this.metroTextBoxPacking.Location = new System.Drawing.Point(706, 173);
+			this.metroTextBoxPacking.MaxLength = 128;
+			this.metroTextBoxPacking.Name = "metroTextBoxPacking";
+			this.metroTextBoxPacking.PasswordChar = '\0';
+			this.metroTextBoxPacking.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.metroTextBoxPacking.SelectedText = "";
+			this.metroTextBoxPacking.SelectionLength = 0;
+			this.metroTextBoxPacking.SelectionStart = 0;
+			this.metroTextBoxPacking.ShortcutsEnabled = true;
+			this.metroTextBoxPacking.Size = new System.Drawing.Size(201, 20);
+			this.metroTextBoxPacking.TabIndex = 156;
+			this.metroTextBoxPacking.UseSelectable = true;
+			this.metroTextBoxPacking.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.metroTextBoxPacking.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+			// 
+			// linkLabelEditComponents
+			// 
+			this.linkLabelEditComponents.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.linkLabelEditComponents.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.linkLabelEditComponents.Location = new System.Drawing.Point(790, 63);
+			this.linkLabelEditComponents.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.linkLabelEditComponents.Name = "linkLabelEditComponents";
+			this.linkLabelEditComponents.Size = new System.Drawing.Size(48, 23);
+			this.linkLabelEditComponents.TabIndex = 191;
+			this.linkLabelEditComponents.TabStop = true;
+			this.linkLabelEditComponents.Text = "Bind";
+			this.linkLabelEditComponents.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.linkLabelEditComponents.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelEditComponents_LinkClicked);
+			// 
+			// TextBoxProduct
+			// 
+			this.TextBoxProduct.BackColor = System.Drawing.Color.White;
+			// 
+			// 
+			// 
+			this.TextBoxProduct.CustomButton.Image = null;
+			this.TextBoxProduct.CustomButton.Location = new System.Drawing.Point(660, 2);
+			this.TextBoxProduct.CustomButton.Name = "";
+			this.TextBoxProduct.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.TextBoxProduct.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.TextBoxProduct.CustomButton.TabIndex = 1;
+			this.TextBoxProduct.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.TextBoxProduct.CustomButton.UseSelectable = true;
+			this.TextBoxProduct.CustomButton.Visible = false;
+			this.TextBoxProduct.Enabled = false;
+			this.TextBoxProduct.ForeColor = System.Drawing.Color.Black;
+			this.TextBoxProduct.Lines = new string[0];
+			this.TextBoxProduct.Location = new System.Drawing.Point(118, 65);
+			this.TextBoxProduct.MaxLength = 128;
+			this.TextBoxProduct.Name = "TextBoxProduct";
+			this.TextBoxProduct.PasswordChar = '\0';
+			this.TextBoxProduct.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.TextBoxProduct.SelectedText = "";
+			this.TextBoxProduct.SelectionLength = 0;
+			this.TextBoxProduct.SelectionStart = 0;
+			this.TextBoxProduct.ShortcutsEnabled = true;
+			this.TextBoxProduct.Size = new System.Drawing.Size(678, 20);
+			this.TextBoxProduct.TabIndex = 192;
+			this.TextBoxProduct.UseSelectable = true;
+			this.TextBoxProduct.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.TextBoxProduct.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+			// 
+			// linkLabel1
+			// 
+			this.linkLabel1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.linkLabel1.Location = new System.Drawing.Point(840, 63);
+			this.linkLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.linkLabel1.Name = "linkLabel1";
+			this.linkLabel1.Size = new System.Drawing.Size(37, 23);
+			this.linkLabel1.TabIndex = 193;
+			this.linkLabel1.TabStop = true;
+			this.linkLabel1.Text = "Edit";
+			this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
+			// 
+			// linkLabel2
+			// 
+			this.linkLabel2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.linkLabel2.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.linkLabel2.Location = new System.Drawing.Point(878, 63);
+			this.linkLabel2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.linkLabel2.Name = "linkLabel2";
+			this.linkLabel2.Size = new System.Drawing.Size(50, 23);
+			this.linkLabel2.TabIndex = 194;
+			this.linkLabel2.TabStop = true;
+			this.linkLabel2.Text = "Clear";
+			this.linkLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel2_LinkClicked);
+			// 
+			// metroLabelEffectivity
+			// 
+			this.metroLabelEffectivity.AutoSize = true;
+			this.metroLabelEffectivity.ForeColor = System.Drawing.Color.Black;
+			this.metroLabelEffectivity.Location = new System.Drawing.Point(324, 306);
+			this.metroLabelEffectivity.Name = "metroLabelEffectivity";
+			this.metroLabelEffectivity.Size = new System.Drawing.Size(66, 19);
+			this.metroLabelEffectivity.TabIndex = 196;
+			this.metroLabelEffectivity.Text = "Effectivity:";
+			this.metroLabelEffectivity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// metroTextBoxEffectivity
+			// 
+			this.metroTextBoxEffectivity.BackColor = System.Drawing.Color.White;
+			// 
+			// 
+			// 
+			this.metroTextBoxEffectivity.CustomButton.Image = null;
+			this.metroTextBoxEffectivity.CustomButton.Location = new System.Drawing.Point(183, 2);
+			this.metroTextBoxEffectivity.CustomButton.Name = "";
+			this.metroTextBoxEffectivity.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.metroTextBoxEffectivity.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.metroTextBoxEffectivity.CustomButton.TabIndex = 1;
+			this.metroTextBoxEffectivity.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.metroTextBoxEffectivity.CustomButton.UseSelectable = true;
+			this.metroTextBoxEffectivity.CustomButton.Visible = false;
+			this.metroTextBoxEffectivity.ForeColor = System.Drawing.Color.Black;
+			this.metroTextBoxEffectivity.Lines = new string[0];
+			this.metroTextBoxEffectivity.Location = new System.Drawing.Point(410, 306);
+			this.metroTextBoxEffectivity.MaxLength = 128;
+			this.metroTextBoxEffectivity.Name = "metroTextBoxEffectivity";
+			this.metroTextBoxEffectivity.PasswordChar = '\0';
+			this.metroTextBoxEffectivity.ReadOnly = true;
+			this.metroTextBoxEffectivity.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.metroTextBoxEffectivity.SelectedText = "";
+			this.metroTextBoxEffectivity.SelectionLength = 0;
+			this.metroTextBoxEffectivity.SelectionStart = 0;
+			this.metroTextBoxEffectivity.ShortcutsEnabled = true;
+			this.metroTextBoxEffectivity.Size = new System.Drawing.Size(201, 20);
+			this.metroTextBoxEffectivity.TabIndex = 195;
+			this.metroTextBoxEffectivity.UseSelectable = true;
+			this.metroTextBoxEffectivity.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.metroTextBoxEffectivity.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+			// 
+			// documentControlShip
+			// 
+			this.documentControlShip.CurrentDocument = null;
+			this.documentControlShip.Location = new System.Drawing.Point(412, 425);
+			this.documentControlShip.Name = "documentControlShip";
+			this.documentControlShip.Size = new System.Drawing.Size(200, 41);
+			this.documentControlShip.TabIndex = 155;
+			// 
+			// documentControlFaa
+			// 
+			this.documentControlFaa.CurrentDocument = null;
+			this.documentControlFaa.Location = new System.Drawing.Point(118, 425);
+			this.documentControlFaa.Name = "documentControlFaa";
+			this.documentControlFaa.Size = new System.Drawing.Size(200, 41);
+			this.documentControlFaa.TabIndex = 154;
+			// 
 			// fileControlImage
 			// 
 			this.fileControlImage.AutoSize = true;
@@ -1039,255 +1334,6 @@ namespace CAS.UI.UIControls.StoresControls
 			this.comboBoxDetailClass.TabIndex = 1;
 			this.comboBoxDetailClass.SelectedIndexChanged += new System.EventHandler(this.ComboBoxDetailClassSelectedIndexChanged);
 			// 
-			// checkBoxDangerous
-			// 
-			this.checkBoxDangerous.AutoSize = true;
-			this.checkBoxDangerous.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.checkBoxDangerous.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.checkBoxDangerous.Location = new System.Drawing.Point(798, 282);
-			this.checkBoxDangerous.Name = "checkBoxDangerous";
-			this.checkBoxDangerous.Size = new System.Drawing.Size(91, 15);
-			this.checkBoxDangerous.TabIndex = 142;
-			this.checkBoxDangerous.Text = "Is Dangerous";
-			this.checkBoxDangerous.UseSelectable = true;
-			// 
-			// checkBoxPOOL
-			// 
-			this.checkBoxPOOL.AutoSize = true;
-			this.checkBoxPOOL.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.checkBoxPOOL.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.checkBoxPOOL.Location = new System.Drawing.Point(718, 282);
-			this.checkBoxPOOL.Name = "checkBoxPOOL";
-			this.checkBoxPOOL.Size = new System.Drawing.Size(65, 15);
-			this.checkBoxPOOL.TabIndex = 141;
-			this.checkBoxPOOL.Text = "Is POOL";
-			this.checkBoxPOOL.UseSelectable = true;
-			// 
-			// comboBoxSupplier
-			// 
-			this.comboBoxSupplier.FormattingEnabled = true;
-			this.comboBoxSupplier.Location = new System.Drawing.Point(118, 91);
-			this.comboBoxSupplier.Name = "comboBoxSupplier";
-			this.comboBoxSupplier.Size = new System.Drawing.Size(678, 21);
-			this.comboBoxSupplier.TabIndex = 143;
-			this.comboBoxSupplier.SelectedIndexChanged += new System.EventHandler(this.comboBoxSupplier_SelectedIndexChanged);
-			// 
-			// dateTimePickerReciveDate
-			// 
-			this.dateTimePickerReciveDate.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.dateTimePickerReciveDate.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.dateTimePickerReciveDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.dateTimePickerReciveDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.dateTimePickerReciveDate.Location = new System.Drawing.Point(802, 91);
-			this.dateTimePickerReciveDate.Name = "dateTimePickerReciveDate";
-			this.dateTimePickerReciveDate.Size = new System.Drawing.Size(105, 22);
-			this.dateTimePickerReciveDate.TabIndex = 150;
-			// 
-			// label2
-			// 
-			this.label2.Location = new System.Drawing.Point(13, 91);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(90, 20);
-			this.label2.TabIndex = 151;
-			this.label2.Text = "ReceivedFrom:";
-			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// labelAltpartNum
-			// 
-			this.labelAltpartNum.AutoSize = true;
-			this.labelAltpartNum.ForeColor = System.Drawing.Color.Black;
-			this.labelAltpartNum.Location = new System.Drawing.Point(13, 171);
-			this.labelAltpartNum.Name = "labelAltpartNum";
-			this.labelAltpartNum.Size = new System.Drawing.Size(89, 19);
-			this.labelAltpartNum.TabIndex = 153;
-			this.labelAltpartNum.Text = "Alt Part Num:";
-			this.labelAltpartNum.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// textBoxAltPartNum
-			// 
-			this.textBoxAltPartNum.BackColor = System.Drawing.Color.White;
-			// 
-			// 
-			// 
-			this.textBoxAltPartNum.CustomButton.Image = null;
-			this.textBoxAltPartNum.CustomButton.Location = new System.Drawing.Point(182, 2);
-			this.textBoxAltPartNum.CustomButton.Name = "";
-			this.textBoxAltPartNum.CustomButton.Size = new System.Drawing.Size(15, 15);
-			this.textBoxAltPartNum.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.textBoxAltPartNum.CustomButton.TabIndex = 1;
-			this.textBoxAltPartNum.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.textBoxAltPartNum.CustomButton.UseSelectable = true;
-			this.textBoxAltPartNum.CustomButton.Visible = false;
-			this.textBoxAltPartNum.ForeColor = System.Drawing.Color.Black;
-			this.textBoxAltPartNum.Lines = new string[0];
-			this.textBoxAltPartNum.Location = new System.Drawing.Point(118, 171);
-			this.textBoxAltPartNum.MaxLength = 128;
-			this.textBoxAltPartNum.Name = "textBoxAltPartNum";
-			this.textBoxAltPartNum.PasswordChar = '\0';
-			this.textBoxAltPartNum.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.textBoxAltPartNum.SelectedText = "";
-			this.textBoxAltPartNum.SelectionLength = 0;
-			this.textBoxAltPartNum.SelectionStart = 0;
-			this.textBoxAltPartNum.ShortcutsEnabled = true;
-			this.textBoxAltPartNum.Size = new System.Drawing.Size(200, 20);
-			this.textBoxAltPartNum.TabIndex = 152;
-			this.textBoxAltPartNum.UseSelectable = true;
-			this.textBoxAltPartNum.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.textBoxAltPartNum.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			// 
-			// comboBoxReceived
-			// 
-			this.comboBoxReceived.FormattingEnabled = true;
-			this.comboBoxReceived.Location = new System.Drawing.Point(706, 393);
-			this.comboBoxReceived.Name = "comboBoxReceived";
-			this.comboBoxReceived.Size = new System.Drawing.Size(200, 21);
-			this.comboBoxReceived.TabIndex = 154;
-			// 
-			// metroLabelReceived
-			// 
-			this.metroLabelReceived.AutoSize = true;
-			this.metroLabelReceived.ForeColor = System.Drawing.Color.Black;
-			this.metroLabelReceived.Location = new System.Drawing.Point(619, 393);
-			this.metroLabelReceived.Name = "metroLabelReceived";
-			this.metroLabelReceived.Size = new System.Drawing.Size(64, 19);
-			this.metroLabelReceived.TabIndex = 155;
-			this.metroLabelReceived.Text = "Received:";
-			this.metroLabelReceived.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// documentControlFaa
-			// 
-			this.documentControlFaa.CurrentDocument = null;
-			this.documentControlFaa.Location = new System.Drawing.Point(118, 425);
-			this.documentControlFaa.Name = "documentControlFaa";
-			this.documentControlFaa.Size = new System.Drawing.Size(200, 41);
-			this.documentControlFaa.TabIndex = 154;
-			// 
-			// documentControlShip
-			// 
-			this.documentControlShip.CurrentDocument = null;
-			this.documentControlShip.Location = new System.Drawing.Point(412, 425);
-			this.documentControlShip.Name = "documentControlShip";
-			this.documentControlShip.Size = new System.Drawing.Size(200, 41);
-			this.documentControlShip.TabIndex = 155;
-			// 
-			// metroLabelPacking
-			// 
-			this.metroLabelPacking.AutoSize = true;
-			this.metroLabelPacking.ForeColor = System.Drawing.Color.Black;
-			this.metroLabelPacking.Location = new System.Drawing.Point(619, 173);
-			this.metroLabelPacking.Name = "metroLabelPacking";
-			this.metroLabelPacking.Size = new System.Drawing.Size(56, 19);
-			this.metroLabelPacking.TabIndex = 157;
-			this.metroLabelPacking.Text = "Packing:";
-			this.metroLabelPacking.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// metroTextBoxPacking
-			// 
-			this.metroTextBoxPacking.BackColor = System.Drawing.Color.White;
-			// 
-			// 
-			// 
-			this.metroTextBoxPacking.CustomButton.Image = null;
-			this.metroTextBoxPacking.CustomButton.Location = new System.Drawing.Point(183, 2);
-			this.metroTextBoxPacking.CustomButton.Name = "";
-			this.metroTextBoxPacking.CustomButton.Size = new System.Drawing.Size(15, 15);
-			this.metroTextBoxPacking.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.metroTextBoxPacking.CustomButton.TabIndex = 1;
-			this.metroTextBoxPacking.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.metroTextBoxPacking.CustomButton.UseSelectable = true;
-			this.metroTextBoxPacking.CustomButton.Visible = false;
-			this.metroTextBoxPacking.ForeColor = System.Drawing.Color.Black;
-			this.metroTextBoxPacking.Lines = new string[0];
-			this.metroTextBoxPacking.Location = new System.Drawing.Point(706, 173);
-			this.metroTextBoxPacking.MaxLength = 128;
-			this.metroTextBoxPacking.Name = "metroTextBoxPacking";
-			this.metroTextBoxPacking.PasswordChar = '\0';
-			this.metroTextBoxPacking.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.metroTextBoxPacking.SelectedText = "";
-			this.metroTextBoxPacking.SelectionLength = 0;
-			this.metroTextBoxPacking.SelectionStart = 0;
-			this.metroTextBoxPacking.ShortcutsEnabled = true;
-			this.metroTextBoxPacking.Size = new System.Drawing.Size(201, 20);
-			this.metroTextBoxPacking.TabIndex = 156;
-			this.metroTextBoxPacking.UseSelectable = true;
-			this.metroTextBoxPacking.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.metroTextBoxPacking.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			// 
-			// linkLabelEditComponents
-			// 
-			this.linkLabelEditComponents.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.linkLabelEditComponents.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.linkLabelEditComponents.Location = new System.Drawing.Point(790, 63);
-			this.linkLabelEditComponents.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-			this.linkLabelEditComponents.Name = "linkLabelEditComponents";
-			this.linkLabelEditComponents.Size = new System.Drawing.Size(48, 23);
-			this.linkLabelEditComponents.TabIndex = 191;
-			this.linkLabelEditComponents.TabStop = true;
-			this.linkLabelEditComponents.Text = "Bind";
-			this.linkLabelEditComponents.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.linkLabelEditComponents.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelEditComponents_LinkClicked);
-			// 
-			// TextBoxProduct
-			// 
-			this.TextBoxProduct.BackColor = System.Drawing.Color.White;
-			// 
-			// 
-			// 
-			this.TextBoxProduct.CustomButton.Image = null;
-			this.TextBoxProduct.CustomButton.Location = new System.Drawing.Point(660, 2);
-			this.TextBoxProduct.CustomButton.Name = "";
-			this.TextBoxProduct.CustomButton.Size = new System.Drawing.Size(15, 15);
-			this.TextBoxProduct.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.TextBoxProduct.CustomButton.TabIndex = 1;
-			this.TextBoxProduct.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.TextBoxProduct.CustomButton.UseSelectable = true;
-			this.TextBoxProduct.CustomButton.Visible = false;
-			this.TextBoxProduct.Enabled = false;
-			this.TextBoxProduct.ForeColor = System.Drawing.Color.Black;
-			this.TextBoxProduct.Lines = new string[0];
-			this.TextBoxProduct.Location = new System.Drawing.Point(118, 65);
-			this.TextBoxProduct.MaxLength = 128;
-			this.TextBoxProduct.Name = "TextBoxProduct";
-			this.TextBoxProduct.PasswordChar = '\0';
-			this.TextBoxProduct.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.TextBoxProduct.SelectedText = "";
-			this.TextBoxProduct.SelectionLength = 0;
-			this.TextBoxProduct.SelectionStart = 0;
-			this.TextBoxProduct.ShortcutsEnabled = true;
-			this.TextBoxProduct.Size = new System.Drawing.Size(678, 20);
-			this.TextBoxProduct.TabIndex = 192;
-			this.TextBoxProduct.UseSelectable = true;
-			this.TextBoxProduct.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.TextBoxProduct.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			// 
-			// linkLabel1
-			// 
-			this.linkLabel1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.linkLabel1.Location = new System.Drawing.Point(840, 63);
-			this.linkLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-			this.linkLabel1.Name = "linkLabel1";
-			this.linkLabel1.Size = new System.Drawing.Size(37, 23);
-			this.linkLabel1.TabIndex = 193;
-			this.linkLabel1.TabStop = true;
-			this.linkLabel1.Text = "Edit";
-			this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
-			// 
-			// linkLabel2
-			// 
-			this.linkLabel2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.linkLabel2.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.linkLabel2.Location = new System.Drawing.Point(878, 63);
-			this.linkLabel2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-			this.linkLabel2.Name = "linkLabel2";
-			this.linkLabel2.Size = new System.Drawing.Size(50, 23);
-			this.linkLabel2.TabIndex = 194;
-			this.linkLabel2.TabStop = true;
-			this.linkLabel2.Text = "Clear";
-			this.linkLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel2_LinkClicked);
-			// 
 			// ConsumablePartAndKitForm
 			// 
 			this.AcceptButton = this.buttonOK;
@@ -1295,6 +1341,8 @@ namespace CAS.UI.UIControls.StoresControls
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.buttonCancel;
 			this.ClientSize = new System.Drawing.Size(924, 770);
+			this.Controls.Add(this.metroLabelEffectivity);
+			this.Controls.Add(this.metroTextBoxEffectivity);
 			this.Controls.Add(this.linkLabel2);
 			this.Controls.Add(this.linkLabel1);
 			this.Controls.Add(this.TextBoxProduct);
@@ -1457,5 +1505,7 @@ namespace CAS.UI.UIControls.StoresControls
 		private MetroTextBox TextBoxProduct;
 		private System.Windows.Forms.LinkLabel linkLabel1;
 		private System.Windows.Forms.LinkLabel linkLabel2;
+		private MetroLabel metroLabelEffectivity;
+		private MetroTextBox metroTextBoxEffectivity;
 	}
 }

@@ -124,6 +124,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Product" };
 			ColumnHeaderList.Add(columnHeader);
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Description" };
+			ColumnHeaderList.Add(columnHeader);
+
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Task" };
 			ColumnHeaderList.Add(columnHeader);
 
@@ -173,6 +176,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		    var check = item.MaintenanceCheck != null ? item.MaintenanceCheck.ToString() : "";
 		    var standart = item.Standart != null ? item.Standart.ToString() : "";
 		    var product = item.Product != null ? item.Product.Name : "";
+		    var description = item.Description != null ? item.Description : "";
 		    var supplier = item.Suppliers != null ? item.Suppliers.ToString() : "";
 			bool isComponent =
 					item.GoodsClass.IsNodeOrSubNodeOf(new IDictionaryTreeItem[]
@@ -191,6 +195,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = standart, Tag = standart });
 		    subItems.Add(new ListViewItem.ListViewSubItem { Text = item.PartNumber, Tag = item.PartNumber });
 		    subItems.Add(new ListViewItem.ListViewSubItem { Text = product, Tag = product });
+		    subItems.Add(new ListViewItem.ListViewSubItem { Text = description, Tag = description });
 		    subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ParentString, Tag = item.ParentString });
 		    subItems.Add(new ListViewItem.ListViewSubItem { Text = quantityString, Tag = item.Quantity });
 		    subItems.Add(new ListViewItem.ListViewSubItem { Text = taskQuantity, Tag = item.TaskQuantity });

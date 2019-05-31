@@ -201,6 +201,7 @@ namespace CAS.UI.UIControls.StoresControls
 			textBoxDiscrepancy.Text = _consumablePart.Discrepancy;
 			textBoxPartNumber.Text = _consumablePart.PartNumber;
 			textBoxAltPartNum.Text = _consumablePart.ALTPartNumber;
+			metroTextBoxEffectivity.Text = _consumablePart.IsEffectivity;
 			textBoxSerialNumber.Text = _consumablePart.SerialNumber;
 			textBoxBatchNumber.Text = _consumablePart.BatchNumber;
 			textBoxIdNumber.Text = _consumablePart.IdNumber;
@@ -920,7 +921,7 @@ namespace CAS.UI.UIControls.StoresControls
 				textBoxManufacturer.Text = product.Manufacturer;
 	            ataChapterComboBox.ATAChapter = product.ATAChapter;
 	            textBoxProductCode.Text = product.Code;
-
+	            metroTextBoxEffectivity.Text = product.IsEffectivity;
 				SetForDetailClass();
 			}
             else
@@ -928,6 +929,7 @@ namespace CAS.UI.UIControls.StoresControls
 				ataChapterComboBox.Enabled = true;
 				comboBoxDetailClass.Enabled = true;
 				textBoxProductCode.Enabled = true;
+				metroTextBoxEffectivity.Text = "";
 			}
 
             if (_consumablePart.ItemId > 0)
@@ -1290,6 +1292,7 @@ namespace CAS.UI.UIControls.StoresControls
 
 		private void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
+			TextBoxProduct.Text = "";
 			_consumablePart.Product = null;
 			UpdateByProduct(_consumablePart.Product);
 		}

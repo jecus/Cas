@@ -61,7 +61,7 @@ namespace CAS.UI.UIControls.ProductControls
 			          $"Reference like '%{textBoxPartNumber.Text}%')";
 
 			var ds = GlobalObjects.CasEnvironment.Execute(res);
-			_result.AddRange(BaseQueries.GetObjectList<Product>(ds));
+			_result.AddRange(BaseQueries.GetObjectList<Product>(ds.Tables[0]));
 
 			//_result.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, Product>(new Filter[]
 			//{
