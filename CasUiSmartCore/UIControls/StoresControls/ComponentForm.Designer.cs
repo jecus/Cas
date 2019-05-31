@@ -1316,13 +1316,13 @@ namespace CAS.UI.UIControls.StoresControls
 			this.metroTextBoxEffectivity.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
 			this.metroTextBoxEffectivity.CustomButton.UseSelectable = true;
 			this.metroTextBoxEffectivity.CustomButton.Visible = false;
+			this.metroTextBoxEffectivity.Enabled = false;
 			this.metroTextBoxEffectivity.ForeColor = System.Drawing.Color.Black;
 			this.metroTextBoxEffectivity.Lines = new string[0];
 			this.metroTextBoxEffectivity.Location = new System.Drawing.Point(409, 306);
 			this.metroTextBoxEffectivity.MaxLength = 128;
 			this.metroTextBoxEffectivity.Name = "metroTextBoxEffectivity";
 			this.metroTextBoxEffectivity.PasswordChar = '\0';
-			this.metroTextBoxEffectivity.ReadOnly = true;
 			this.metroTextBoxEffectivity.ScrollBars = System.Windows.Forms.ScrollBars.None;
 			this.metroTextBoxEffectivity.SelectedText = "";
 			this.metroTextBoxEffectivity.SelectionLength = 0;
