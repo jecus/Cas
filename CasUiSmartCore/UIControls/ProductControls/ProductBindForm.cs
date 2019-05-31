@@ -8,7 +8,9 @@ using EFCore.Attributte;
 using EFCore.DTO.Dictionaries;
 using EFCore.Filter;
 using MetroFramework.Forms;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
+using SmartCore.Queries;
 
 namespace CAS.UI.UIControls.ProductControls
 {
@@ -52,11 +54,20 @@ namespace CAS.UI.UIControls.ProductControls
 		private void DoWork()
 		{
 			_result.Clear();
-			_result.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, Product>(new Filter[]
-			{
-				new Filter("PartNumber",FilterType.Contains, textBoxPartNumber.Text),
-				new Filter("ModelingObjectTypeId", -1)
-			}));
+			var res = BaseQueries.GetSelectQueryWithWhere<Product>() + $" AND ( Model like '%{textBoxPartNumber.Text}%' OR " +
+			          $"PartNumber like '%{textBoxPartNumber.Text}%' OR " +
+			          $"Description like '%{textBoxPartNumber.Text}%' OR " +
+			          $"AltPartNumber like '%{textBoxPartNumber.Text}%' OR " +
+			          $"Reference like '%{textBoxPartNumber.Text}%')";
+
+			var ds = GlobalObjects.CasEnvironment.Execute(res);
+			_result.AddRange(BaseQueries.GetObjectList<Product>(ds));
+
+			//_result.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, Product>(new Filter[]
+			//{
+			//	new Filter("PartNumber",FilterType.Contains, textBoxPartNumber.Text),
+			//	new Filter("ModelingObjectTypeId", -1)
+			//}));
 		}
 
 		#endregion
