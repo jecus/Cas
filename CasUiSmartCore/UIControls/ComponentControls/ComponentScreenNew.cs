@@ -239,7 +239,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			                    }
 		                    }
 	                    }
-					}
+                    }
                     else
                     {
 	                    if (AnimatedThreadWorker.CancellationPending)

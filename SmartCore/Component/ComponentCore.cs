@@ -1960,6 +1960,8 @@ namespace SmartCore.Component
 			if (component == null)
 				return null;
 
+			component.Received = _loader.GetObject<Specialist>(component.ReceivedId);
+
 			var types = new[] {SmartCoreType.Component.ItemId, SmartCoreType.ComponentDirective.ItemId};
 			//Загрузка документов
 			var documents = _newLoader.GetObjectListAll<DocumentDTO, Document>(new Filter[]

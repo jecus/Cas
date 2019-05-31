@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.Helpers;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
@@ -11,6 +12,7 @@ using CAS.UI.UIControls.DocumentationControls;
 using CAS.UI.UIControls.ProductControls;
 using CAS.UI.UIControls.PurchaseControls;
 using CASTerms;
+using EFCore.DTO.General;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
@@ -19,6 +21,7 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
+using SmartCore.Entities.General.Personnel;
 using SmartCore.Entities.General.Store;
 using SmartCore.Purchase;
 using Component = SmartCore.Entities.General.Accessory.Component;
@@ -37,6 +40,7 @@ namespace CAS.UI.UIControls.ComponentControls
         private bool _isStore;
 		private ProductCost _productCost;
 	    private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
+		private List<Specialist> _specialists = new List<Specialist>();
 
 		#endregion
 
@@ -53,24 +57,7 @@ namespace CAS.UI.UIControls.ComponentControls
 
         #endregion
 
-        #region public DetailGeneralInformationControl(AbstractDetail currentDetail)
-
-        /// <summary>
-        /// Создает экземпляр отображатора информации об агрегате
-        /// </summary>
-        /// <param name="currentComponentгрегат</param>
-        public ComponentGeneralInformationControl(Component currentComponent) : this()
-        {
-            if (null == currentComponent)
-                throw new ArgumentNullException("currentComponent", "Argument cannot be null");
-            _currentComponent = currentComponent;
-            _isStore = GlobalObjects.StoreCore.GetStoreById(currentComponent.ParentStoreId) != null;
-			UpdateControl();
-            UpdateInformation();
-        }
-
-        #endregion
-
+        
         #endregion
 
         #region Propeties
@@ -84,6 +71,8 @@ namespace CAS.UI.UIControls.ComponentControls
             {
                 _currentComponent = value;
                 _isStore = GlobalObjects.StoreCore.GetStoreById(value.ParentStoreId) != null || value.ParentSupplierId > 0 || value.ParentSpecialistId > 0;
+                Task.Run(() => DoWork())
+	                .ContinueWith(task => Complete(), TaskScheduler.FromCurrentSynchronizationContext());
 				UpdateControl();
                 UpdateInformation();
             }
@@ -643,6 +632,24 @@ namespace CAS.UI.UIControls.ComponentControls
 
 		#region Methods
 
+		#region DoWork
+
+		private void Complete()
+		{
+			comboBoxReceived.Items.Clear();
+			comboBoxReceived.Items.AddRange(_specialists.ToArray());
+			comboBoxReceived.Items.Add(Specialist.Unknown);
+			comboBoxReceived.SelectedItem = _currentComponent.Received;
+		}
+
+		private void DoWork()
+		{
+			_specialists.Clear();
+			_specialists.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<SpecialistDTO, Specialist>());
+		}
+
+		#endregion
+
 		#region public bool GetChangeStatus()
 		/// <summary>
 		/// Возвращает значение, показывающее были ли изменения в данном элементе управления
@@ -1158,7 +1165,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		    component.Discrepancy = Discrepancy;
 			component.FromSupplier = comboBoxSupplier.SelectedItem as Supplier;
 		    component.FromSupplierReciveDate = dateTimePickerReciveDate.Value;
-
+		    component.ReceivedId = ((Specialist) comboBoxReceived.SelectedItem).ItemId; 
 			fileControlShipping.ApplyChanges();
 			component.IncomingFile = fileControlShipping.AttachedFile;
 

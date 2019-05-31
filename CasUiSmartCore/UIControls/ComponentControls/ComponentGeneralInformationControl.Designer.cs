@@ -147,6 +147,8 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.linkLabel2 = new System.Windows.Forms.LinkLabel();
 			this.linkLabel1 = new System.Windows.Forms.LinkLabel();
 			this.linkLabelEditComponents = new System.Windows.Forms.LinkLabel();
+			this.comboBoxReceived = new System.Windows.Forms.ComboBox();
+			this.labelReceived = new System.Windows.Forms.Label();
 			groupBoxStart = new System.Windows.Forms.GroupBox();
 			groupBoxStart.SuspendLayout();
 			this.panelAvionicsInventory.SuspendLayout();
@@ -573,7 +575,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.panelLandingGearMark.Controls.Add(this.radioButtonLLG);
 			this.panelLandingGearMark.Controls.Add(this.radioButtonNLG);
 			this.panelLandingGearMark.Controls.Add(this.radioButtonRLG);
-			this.panelLandingGearMark.Location = new System.Drawing.Point(1017, 323);
+			this.panelLandingGearMark.Location = new System.Drawing.Point(1017, 351);
 			this.panelLandingGearMark.Name = "panelLandingGearMark";
 			this.panelLandingGearMark.Size = new System.Drawing.Size(175, 27);
 			this.panelLandingGearMark.TabIndex = 27;
@@ -700,7 +702,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxStorePosition.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.comboBoxStorePosition.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.comboBoxStorePosition.FormattingEnabled = true;
-			this.comboBoxStorePosition.Location = new System.Drawing.Point(942, 295);
+			this.comboBoxStorePosition.Location = new System.Drawing.Point(942, 323);
 			this.comboBoxStorePosition.Name = "comboBoxStorePosition";
 			this.comboBoxStorePosition.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxStorePosition.TabIndex = 7;
@@ -737,7 +739,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			// numericUpDownQuantity
 			// 
 			this.numericUpDownQuantity.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.numericUpDownQuantity.Location = new System.Drawing.Point(937, 196);
+			this.numericUpDownQuantity.Location = new System.Drawing.Point(937, 224);
 			this.numericUpDownQuantity.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -775,7 +777,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.labelQuantity.AutoSize = true;
 			this.labelQuantity.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelQuantity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelQuantity.Location = new System.Drawing.Point(832, 199);
+			this.labelQuantity.Location = new System.Drawing.Point(832, 227);
 			this.labelQuantity.Name = "labelQuantity";
 			this.labelQuantity.Size = new System.Drawing.Size(66, 14);
 			this.labelQuantity.TabIndex = 74;
@@ -845,7 +847,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.labelThrust.AutoSize = true;
 			this.labelThrust.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelThrust.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelThrust.Location = new System.Drawing.Point(832, 229);
+			this.labelThrust.Location = new System.Drawing.Point(832, 257);
 			this.labelThrust.Name = "labelThrust";
 			this.labelThrust.Size = new System.Drawing.Size(52, 14);
 			this.labelThrust.TabIndex = 91;
@@ -857,7 +859,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			// 
 			this.textBoxThrust.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.textBoxThrust.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxThrust.Location = new System.Drawing.Point(937, 224);
+			this.textBoxThrust.Location = new System.Drawing.Point(937, 252);
 			this.textBoxThrust.MaxLength = 200;
 			this.textBoxThrust.Name = "textBoxThrust";
 			this.textBoxThrust.Size = new System.Drawing.Size(252, 22);
@@ -871,7 +873,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.checkBoxDangerous.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.checkBoxDangerous.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.checkBoxDangerous.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.checkBoxDangerous.Location = new System.Drawing.Point(937, 261);
+			this.checkBoxDangerous.Location = new System.Drawing.Point(937, 289);
 			this.checkBoxDangerous.Name = "checkBoxDangerous";
 			this.checkBoxDangerous.Size = new System.Drawing.Size(108, 18);
 			this.checkBoxDangerous.TabIndex = 93;
@@ -884,7 +886,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.checkBoxPOOL.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.checkBoxPOOL.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.checkBoxPOOL.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.checkBoxPOOL.Location = new System.Drawing.Point(835, 261);
+			this.checkBoxPOOL.Location = new System.Drawing.Point(835, 289);
 			this.checkBoxPOOL.Name = "checkBoxPOOL";
 			this.checkBoxPOOL.Size = new System.Drawing.Size(74, 18);
 			this.checkBoxPOOL.TabIndex = 92;
@@ -1744,12 +1746,36 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.linkLabelEditComponents.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.linkLabelEditComponents.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelEditComponents_LinkClicked);
 			// 
+			// comboBoxReceived
+			// 
+			this.comboBoxReceived.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.comboBoxReceived.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.comboBoxReceived.FormattingEnabled = true;
+			this.comboBoxReceived.Location = new System.Drawing.Point(937, 196);
+			this.comboBoxReceived.Name = "comboBoxReceived";
+			this.comboBoxReceived.Size = new System.Drawing.Size(252, 22);
+			this.comboBoxReceived.TabIndex = 199;
+			// 
+			// labelReceived
+			// 
+			this.labelReceived.AutoSize = true;
+			this.labelReceived.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.labelReceived.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelReceived.Location = new System.Drawing.Point(832, 196);
+			this.labelReceived.Name = "labelReceived";
+			this.labelReceived.Size = new System.Drawing.Size(68, 14);
+			this.labelReceived.TabIndex = 198;
+			this.labelReceived.Text = "Received:";
+			this.labelReceived.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
 			// ComponentGeneralInformationControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this.Controls.Add(this.comboBoxReceived);
+			this.Controls.Add(this.labelReceived);
 			this.Controls.Add(this.linkLabel2);
 			this.Controls.Add(this.linkLabel1);
 			this.Controls.Add(this.linkLabelEditComponents);
@@ -1978,5 +2004,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		private System.Windows.Forms.LinkLabel linkLabel2;
 		private System.Windows.Forms.LinkLabel linkLabel1;
 		private System.Windows.Forms.LinkLabel linkLabelEditComponents;
+		private System.Windows.Forms.ComboBox comboBoxReceived;
+		private System.Windows.Forms.Label labelReceived;
 	}
 }
