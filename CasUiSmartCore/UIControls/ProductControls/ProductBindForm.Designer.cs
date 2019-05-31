@@ -47,7 +47,7 @@
 			labelNumber.Name = "labelNumber";
 			labelNumber.Size = new System.Drawing.Size(56, 19);
 			labelNumber.TabIndex = 299;
-			labelNumber.Text = "Part №:";
+			labelNumber.Text = "Search:";
 			labelNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// allProductListView1
