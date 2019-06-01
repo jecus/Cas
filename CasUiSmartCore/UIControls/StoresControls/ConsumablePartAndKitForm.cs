@@ -90,6 +90,9 @@ namespace CAS.UI.UIControls.StoresControls
 			_consumablePart = new Component {GoodsClass = GoodsClass.MaintenanceMaterials };
 			Task.Run(() => DoWork())
 				.ContinueWith(task => FillControls(), TaskScheduler.FromCurrentSynchronizationContext());
+			var form = new ProductBindForm(_consumablePart);
+			if (form.ShowDialog() == DialogResult.OK)
+				UpdateByProduct(_consumablePart.Product);
 		}
 		#endregion
 
@@ -638,52 +641,52 @@ namespace CAS.UI.UIControls.StoresControls
 			{
 				var partNumber = textBoxPartNumber.Text.Replace(" ", "").ToLower();
 				List<ComponentModel> componentModels;
-				if (_consumablePart.Product != null && _consumablePart.Product.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.ProductionAuxiliaryEquipment))
-				{
-					try
-					{
-						var product = _consumablePart.Product;
+				//if (_consumablePart.Product != null && _consumablePart.Product.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.ProductionAuxiliaryEquipment))
+				//{
+				//	try
+				//	{
+				//		var product = _consumablePart.Product;
 
-						componentModels = new List<ComponentModel>(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, ComponentModel>(new List<Filter>()
-						{
-							new Filter("ModelingObjectTypeId",5),
-							new Filter("FullName",product.Name),
-							new Filter("PartNumber",partNumber)
-						}));
+				//		componentModels = new List<ComponentModel>(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, ComponentModel>(new List<Filter>()
+				//		{
+				//			new Filter("ModelingObjectTypeId",5),
+				//			new Filter("FullName",product.Name),
+				//			new Filter("PartNumber",partNumber)
+				//		}));
 
-						if (componentModels.Count == 0)
-						{
-							var newModel = new ComponentModel
-							{
-								Name = product.Name,
-								FullName = product.Name,
-								ShortName = product.Name,
-								Standart = product.Standart,
-								PartNumber = product.PartNumber,
-								Description = product.Description,
-								IsDangerous = product.IsDangerous,
-								Code = product.Code,
-								Manufacturer = product.Manufacturer,
-								Remarks = product.Remarks,
-								ImageFile = fileControlImage.AttachedFile,
-								GoodsClass = product.GoodsClass,
-								ATAChapter = product.ATAChapter
-							};
+				//		if (componentModels.Count == 0)
+				//		{
+				//			var newModel = new ComponentModel
+				//			{
+				//				Name = product.Name,
+				//				FullName = product.Name,
+				//				ShortName = product.Name,
+				//				Standart = product.Standart,
+				//				PartNumber = product.PartNumber,
+				//				Description = product.Description,
+				//				IsDangerous = product.IsDangerous,
+				//				Code = product.Code,
+				//				Manufacturer = product.Manufacturer,
+				//				Remarks = product.Remarks,
+				//				ImageFile = fileControlImage.AttachedFile,
+				//				GoodsClass = product.GoodsClass,
+				//				ATAChapter = product.ATAChapter
+				//			};
 
-							GlobalObjects.CasEnvironment.NewKeeper.Save(newModel);
-							_consumablePart.Model = newModel;
-						}
-						else
-						{
-							_consumablePart.Model = componentModels.FirstOrDefault();
-						}
+				//			GlobalObjects.CasEnvironment.NewKeeper.Save(newModel);
+				//			_consumablePart.Model = newModel;
+				//		}
+				//		else
+				//		{
+				//			_consumablePart.Model = componentModels.FirstOrDefault();
+				//		}
 
-					}
-					catch (Exception ex)
-					{
-						Program.Provider.Logger.Log("Not Find dictionary of type " + typeof(ComponentModel).Name, ex);
-					}
-	            }
+				//	}
+				//	catch (Exception ex)
+				//	{
+				//		Program.Provider.Logger.Log("Not Find dictionary of type " + typeof(ComponentModel).Name, ex);
+				//	}
+	   //         }
 
 
                 if (_consumablePart.ItemId <= 0)
