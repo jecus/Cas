@@ -1423,7 +1423,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.MinimumSize = new System.Drawing.Size(924, 730);
 			this.Name = "ConsumablePartAndKitForm";
 			this.Resizable = false;
-			this.Text = "E&M form";
+			this.Text = "E&&M form";
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
