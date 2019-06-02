@@ -407,7 +407,7 @@ namespace CAS.UI.UIControls.StoresControls
                 transferDate = componentItem.TransferRecords.GetLast().TransferDate;
                 firstPerformance = componentItem.LifeLimit;
                 warranty = componentItem.Warranty;
-                warrantyRemain = componentItem.NextPerformance.WarrantlyRemains;
+                warrantyRemain = componentItem.NextPerformance?.WarrantlyRemains ?? Lifelength.Null;
                 kitRequieredString = componentItem.Kits.Count > 0 ? componentItem.Kits.Count + " kits" : "";
                 kitCount = componentItem.Kits.Count;
                 bool isComponent =

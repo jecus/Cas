@@ -32,7 +32,7 @@ namespace CAS.UI
             dispatcheredMultitabControl.InactiveBottomColor = Css.CommonAppearance.Colors.BackColor;
             dispatcheredMultitabControl.BackColor = Css.CommonAppearance.Colors.BackColor;
             Text = new GlobalTermsProvider()["SystemName"].ToString(); //+ ". Licensed to " + LicenseManager.LicensedTo + ". Expiry Date " + LicenseManager.ExpiryDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
-            
+            DoubleBuffered = true;
 #if DEBUG
             find = new FindForm(this);
             find.Show();

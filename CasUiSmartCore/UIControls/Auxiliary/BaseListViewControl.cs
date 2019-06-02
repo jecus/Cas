@@ -153,7 +153,9 @@ namespace CAS.UI.UIControls.Auxiliary
         ///</summary>
         public BaseListViewControl()
         {
-            InitializeComponent();
+	        DoubleBuffered = true;
+	        SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
+			InitializeComponent();
         }
         #endregion
        
