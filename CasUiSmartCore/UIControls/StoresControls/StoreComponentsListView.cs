@@ -132,7 +132,10 @@ namespace CAS.UI.UIControls.StoresControls
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Warranty" };
             ColumnHeaderList.Add(columnHeader);
 
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Kit" };
+            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Warranty Remain" };
+            ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Kit" };
             ColumnHeaderList.Add(columnHeader);
 
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "Current" };
@@ -306,7 +309,7 @@ namespace CAS.UI.UIControls.StoresControls
                        lastPerformance = Lifelength.Null,
                        remains = null,
                        next = null,
-                       warranty = Lifelength.Null, repeatInterval = Lifelength.Null;
+                       warranty = Lifelength.Null, warrantyRemain = Lifelength.Null, repeatInterval = Lifelength.Null;
 	        string partNumber = "",
                    description = "",
                    altPartNumber = "",
@@ -404,6 +407,7 @@ namespace CAS.UI.UIControls.StoresControls
                 transferDate = componentItem.TransferRecords.GetLast().TransferDate;
                 firstPerformance = componentItem.LifeLimit;
                 warranty = componentItem.Warranty;
+                warrantyRemain = componentItem.NextPerformance.WarrantlyRemains;
                 kitRequieredString = componentItem.Kits.Count > 0 ? componentItem.Kits.Count + " kits" : "";
                 kitCount = componentItem.Kits.Count;
                 bool isComponent =
@@ -518,13 +522,6 @@ namespace CAS.UI.UIControls.StoresControls
             subItems.Add(new ListViewItem.ListViewSubItem { Text = from, Tag = from });
             subItems.Add(new ListViewItem.ListViewSubItem
             {
-                Text = transferDate > DateTimeExtend.GetCASMinDateTime()
-					? SmartCore.Auxiliary.Convert.GetDateFormat(transferDate) : "",
-                Tag = transferDate
-            });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = workType, Tag = workType });
-            subItems.Add(new ListViewItem.ListViewSubItem
-            {
 	            Text = transferDate > DateTimeExtend.GetCASMinDateTime()
 		            ? SmartCore.Auxiliary.Convert.GetDateFormat(transferDate) : "",
 	            Tag = transferDate
@@ -556,6 +553,7 @@ namespace CAS.UI.UIControls.StoresControls
             } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = lastPerformanceString, Tag = lastPerformance } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = warranty.ToString(), Tag = warranty } );
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = warrantyRemain.ToString(), Tag = warrantyRemain } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = kitRequieredString, Tag = kitCount });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = quantityString, Tag = quantity });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = shouldBeOnStockString, Tag = shouldBeOnStock });

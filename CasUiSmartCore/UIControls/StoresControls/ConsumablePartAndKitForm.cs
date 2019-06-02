@@ -90,9 +90,6 @@ namespace CAS.UI.UIControls.StoresControls
 			_consumablePart = new Component {GoodsClass = GoodsClass.MaintenanceMaterials };
 			Task.Run(() => DoWork())
 				.ContinueWith(task => FillControls(), TaskScheduler.FromCurrentSynchronizationContext());
-			var form = new ProductBindForm(_consumablePart);
-			if (form.ShowDialog() == DialogResult.OK)
-				UpdateByProduct(_consumablePart.Product);
 		}
 		#endregion
 
