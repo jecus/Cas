@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using CAS.UI.ExcelExport;
+using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
@@ -36,7 +38,8 @@ namespace CAS.UI.UIControls.Users
 		private ActivityListView _directivesViewer;
 
 		private CommonFilterCollection _filter;
-
+		private AnimatedThreadWorker _worker;
+		private ExcelExportProvider _exportProvider;
 
 		#endregion
 
@@ -348,6 +351,38 @@ namespace CAS.UI.UIControls.Users
 		}
 
 		#endregion
+
+		private void ExportActivity_Click(object sender, EventArgs eventArgs)
+		{
+			_worker = new AnimatedThreadWorker();
+			_worker.DoWork += ExportActivityWork;
+			_worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+			_worker.RunWorkerAsync();
+		}
+
+		private void ExportActivityWork(object sender, DoWorkEventArgs e)
+		{
+			_worker.ReportProgress(0, "load Activity");
+			_worker.ReportProgress(0, "Generate file! Please wait....");
+
+			_exportProvider = new ExcelExportProvider();
+			_exportProvider.ExportActivity(_result.ToList());
+		}
+
+		private void Worker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+		{
+			var sfd = new SaveFileDialog();
+			sfd.Filter = ".xlsx Files (*.xlsx)|*.xlsx";
+
+			if (sfd.ShowDialog() == DialogResult.OK)
+			{
+				_exportProvider.SaveTo(sfd.FileName);
+				MessageBox.Show("File was success saved!");
+			}
+
+			_exportProvider.Dispose();
+		}
+
 
 		#endregion
 
