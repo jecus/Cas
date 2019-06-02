@@ -953,66 +953,7 @@ namespace SmartCore.Calculations
         }
 		#endregion
 
-		#region private Lifelength getBlocksLifelengthByPeriod(Aircraft aircraft, DateTime dateFrom, DateTime dateTo)
-		/// <summary>
-		/// Возвращает суммарный налет воздушного судна за указанный период
-		/// </summary>
-		/// <param name="aircraft"></param>
-		/// <param name="dateFrom"></param>
-		/// <param name="dateTo"></param>
-		/// <returns></returns>
-		private Lifelength getBlocksLifelengthByPeriod(Aircraft aircraft, DateTime dateFrom, DateTime dateTo)
-		{
-			dateFrom = dateFrom.Date;
-			dateTo = dateTo.Date;
-
-			var flights = _aircraftFlightCore.GetAircraftFlightsByAircraftId(aircraft.ItemId);
-			var aircraftFrame = _componentCore.GetBaseComponentById(aircraft.AircraftFrameId);
-			// пробегаемся по всем полетам
-			var res = getBlockLifelengthForPeriod(flights, aircraftFrame, dateFrom, dateTo);
-
-			res.Days = GetDays(dateFrom, dateTo);
-			return res;
-		}
-		#endregion
-
-		#region private Lifelength GetBlockLifelengthOnEndOfDay(Aircraft aircraft, DateTime date)
-		/// <summary>
-		/// Возвращает налет воздушного судна на конец дня (учитывая совершенные полеты)
-		/// </summary>
-		/// <param name="aircraft"></param>
-		/// <param name="date"></param>
-		/// <returns></returns>
-		private Lifelength getBlockLifelengthOnEndOfDay(Aircraft aircraft, DateTime date)
-		{
-			Init();
-
-			// если склад то свойство aircraft пусто, а наработка равна нулю
-			if (aircraft == null) return Lifelength.Zero;
-
-			// раньше производства равен нулю 
-			date = date.Date;
-			if (date < aircraft.ManufactureDate) return Lifelength.Zero;
-
-			// вычисляем результат
-
-			var aircraftFrame = _componentCore.GetBaseComponentById(aircraft.AircraftFrameId);
-			// получаем последнее Actual State на заданную дату 
-			// получаем на него Opening Lifelength и затем прибавляем все сделанные полеты за интервал
-			var actual = aircraftFrame.ActualStateRecords.GetLastKnownRecord(date);
-			var res = (actual == null) ? Lifelength.Zero : getFlightLifelengthOnStartOfDay(aircraft, actual.RecordDate.Date);
-			var startDate = (actual == null) ? aircraft.ManufactureDate : actual.RecordDate.Date;
-			res.Add(getBlocksLifelengthByPeriod(aircraft, startDate, date)); // opening сейчас учитывает все полеты от start date
-
-			// календарь
-			//TODO (Evgenii Babak) : Посмотреть почему добавляем + 1 день
-			res.Days = GetDays(aircraft.ManufactureDate, date) + 1;
-
-			return new Lifelength(res);
-		}
-
-		#endregion
-
+		
 		// Базовый агрегат
 
 		#region public Lifelength GetFlightLifelengthIncludingThisFlight(BaseComponent baseComponent, AircraftFlight flight)
