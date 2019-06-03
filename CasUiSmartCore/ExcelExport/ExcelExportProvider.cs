@@ -604,28 +604,32 @@ namespace CAS.UI.ExcelExport
 			Workbook.Worksheets.Add(sheetName);
 			var workSheet = Workbook.Worksheets[sheetName];
 
-			FillHeaderCell(workSheet.Cells[1, 1], "Time", ExcelHorizontalAlignment.Center);
+			FillHeaderCell(workSheet.Cells[1, 1], "Date", ExcelHorizontalAlignment.Center);
 			workSheet.Column(1).Width = 14;
 
-			FillHeaderCell(workSheet.Cells[1, 2], "User", ExcelHorizontalAlignment.Center);
-			workSheet.Column(2).Width = 26;
+			FillHeaderCell(workSheet.Cells[1, 2], "Time", ExcelHorizontalAlignment.Center);
+			workSheet.Column(2).Width = 14;
 
-			FillHeaderCell(workSheet.Cells[1, 3], "Activity Type", ExcelHorizontalAlignment.Center);
-			workSheet.Column(3).Width = 14;
+			FillHeaderCell(workSheet.Cells[1, 3], "User", ExcelHorizontalAlignment.Center);
+			workSheet.Column(3).Width = 24;
 
-			FillHeaderCell(workSheet.Cells[1, 4], "Object Type", ExcelHorizontalAlignment.Center);
-			workSheet.Column(4).Width = 16;
+			FillHeaderCell(workSheet.Cells[1, 4], "Activity Type", ExcelHorizontalAlignment.Center);
+			workSheet.Column(4).Width = 14;
 
-			FillHeaderCell(workSheet.Cells[1, 5], "Aircraft", ExcelHorizontalAlignment.Center);
+			FillHeaderCell(workSheet.Cells[1, 5], "Object Type", ExcelHorizontalAlignment.Center);
 			workSheet.Column(5).Width = 16;
 
-			FillHeaderCell(workSheet.Cells[1, 6], "Title", ExcelHorizontalAlignment.Center);
-			workSheet.Column(6).Width = 14;
+			FillHeaderCell(workSheet.Cells[1, 6], "Aircraft", ExcelHorizontalAlignment.Center);
+			workSheet.Column(6).Width = 16;
 
-			FillHeaderCell(workSheet.Cells[1, 7], "Additional Information", ExcelHorizontalAlignment.Center);
-			workSheet.Column(7).Width = 12;
+			FillHeaderCell(workSheet.Cells[1, 7], "Title", ExcelHorizontalAlignment.Center);
+			workSheet.Column(7).Width = 16;
 
-			workSheet.Column(6).Style.WrapText = true;
+			FillHeaderCell(workSheet.Cells[1, 8], "Additional Information", ExcelHorizontalAlignment.Center);
+			workSheet.Column(8).Width = 18;
+
+			workSheet.Column(7).Style.WrapText = true;
+			workSheet.Column(8).Style.WrapText = true;
 
 			workSheet.DefaultRowHeight = 15;
 			workSheet.View.FreezePanes(2, 1);
@@ -636,13 +640,14 @@ namespace CAS.UI.ExcelExport
 
 			foreach (var act in activity)
 	        {
+		        FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], act.Date.GetDateTimeFormats());
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], act.Date.ToString("HH:mm:ss"));
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], act.User.ToString(), ExcelHorizontalAlignment.Left);
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], act.Operation.ToString());
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], act.Type.FullName, ExcelHorizontalAlignment.Left);
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], act.Aircraft.ToString());
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], act.Title, ExcelHorizontalAlignment.Left);
-				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], act.Information);
+				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], act.Information, ExcelHorizontalAlignment.Left);
 
 				currentColumnPosition = 1;
 				currentRowPosition++;
