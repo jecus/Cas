@@ -218,10 +218,6 @@ namespace CAS.UI.UIControls.StoresControls
 			comboBoxMeasure.SelectedItem = _consumablePart.Measure;
 			numericUpDownQuantity.Value = (decimal) _consumablePart.QuantityIn;
 			textBoxRemarks.Text = _consumablePart.Remarks;
-			lifelengthViewerLifeLimit.Lifelength = _consumablePart.LifeLimit;
-			lifelengthViewerNotify.Lifelength = _consumablePart.LifeLimitNotify;
-			lifelengthViewerWarranty.Lifelength = _consumablePart.Warranty;
-			lifelengthViewerWarrantyNotify.Lifelength = _consumablePart.WarrantyNotify;
 			checkBoxIncoming.Checked = _consumablePart.Incoming;
 			checkBoxPOOL.Checked = _consumablePart.IsPOOL;
 			checkBoxDangerous.Checked = _consumablePart.IsDangerous;
@@ -359,10 +355,6 @@ namespace CAS.UI.UIControls.StoresControls
 				      dictionaryComboBoxLocation.SelectedItem.ItemId != obj.Location.ItemId ||
 				      textBoxRemarks.Text != obj.Remarks ||
 				      (ComponentStatus) comboBoxStatus.SelectedItem != obj.ComponentStatus ||
-				      lifelengthViewerLifeLimit.Lifelength.IsEqual(obj.LifeLimit) ||
-				      lifelengthViewerNotify.Lifelength.IsEqual(obj.LifeLimitNotify) ||
-				      lifelengthViewerWarranty.Lifelength.IsEqual(obj.Warranty) ||
-				      lifelengthViewerWarrantyNotify.Lifelength.IsEqual(obj.WarrantyNotify) ||
 				      dateTimePickerManufactureDate.Value != obj.ManufactureDate ||
 				      numericUpDownQuantity.Value != (decimal) obj.QuantityIn ||
 				      ataChapterComboBox.ATAChapter.ItemId != obj.ATAChapter.ItemId ||
@@ -500,10 +492,6 @@ namespace CAS.UI.UIControls.StoresControls
 			obj.ReceivedId = _consumablePart.Received?.ItemId ?? -1;
 			obj.Remarks = textBoxRemarks.Text;
 			obj.ManufactureDate = dateTimePickerManufactureDate.Value;
-			obj.LifeLimit = lifelengthViewerLifeLimit.Lifelength;
-			obj.LifeLimitNotify = lifelengthViewerNotify.Lifelength;
-			obj.Warranty = lifelengthViewerWarranty.Lifelength;
-			obj.WarrantyNotify = lifelengthViewerWarrantyNotify.Lifelength;
 			obj.ATAChapter = ataChapterComboBox.ATAChapter;
 			obj.Discrepancy = textBoxDiscrepancy.Text;
 			obj.Incoming = checkBoxIncoming.Checked;
@@ -608,10 +596,6 @@ namespace CAS.UI.UIControls.StoresControls
 
 			textBoxRemarks.Text = "";
 
-			lifelengthViewerLifeLimit.Lifelength = Lifelength.Null;
-			lifelengthViewerNotify.Lifelength = Lifelength.Null;
-			lifelengthViewerWarranty.Lifelength = Lifelength.Null;
-			lifelengthViewerWarrantyNotify.Lifelength = Lifelength.Null;
 
 			textBoxRemarks.Text = "";
 

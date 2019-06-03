@@ -19,6 +19,7 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
+using SmartCore.Entities.General.Atlbs;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.WorkPackage;
@@ -133,12 +134,13 @@ namespace CAS.UI.UIControls.Users
 					});
 				}
 
+				AnimatedThreadWorker.ReportProgress(50 , "load Parents");
 				foreach (var obj in _initial.GroupBy(i => i.Type?.ItemId))
 				{
 					if (obj.Key == SmartCoreType.WorkPackage.ItemId)
 					{
 						var ids = obj.Select(i => i.ObjectId);
-						var wps = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<WorkPackageDTO, WorkPackage>(new Filter("ItemId", ids));
+						var wps = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<WorkPackageDTO, WorkPackage>(new Filter("ItemId", ids), getDeleted:true);
 						foreach (var dto in obj)
 						{
 							var wp = wps.FirstOrDefault(i => i.ItemId == dto.ObjectId);
@@ -151,9 +153,9 @@ namespace CAS.UI.UIControls.Users
 					else if (obj.Key == SmartCoreType.WorkPackageRecord.ItemId)
 					{
 						var ids = obj.Select(i => i.ObjectId);
-						var wpr = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<WorkPackageRecordDTO, WorkPackageRecord>(new Filter("ItemId", ids));
+						var wpr = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<WorkPackageRecordDTO, WorkPackageRecord>(new Filter("ItemId", ids), getDeleted: true);
 						var wpIds = wpr.Select(i => i.WorkPakageId);
-						var wps = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<WorkPackageDTO, WorkPackage>(new Filter("ItemId", wpIds));
+						var wps = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<WorkPackageDTO, WorkPackage>(new Filter("ItemId", wpIds), getDeleted: true);
 						foreach (var dto in obj)
 						{
 							var wp = wps.FirstOrDefault(i => i.ItemId == dto.ObjectId);
@@ -166,7 +168,7 @@ namespace CAS.UI.UIControls.Users
 					else if (obj.Key == SmartCoreType.MaintenanceDirective.ItemId)
 					{
 						var ids = obj.Select(i => i.ObjectId);
-						var mpds = GlobalObjects.CasEnvironment.Loader.GetObjectList<MaintenanceDirective>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()));
+						var mpds = GlobalObjects.CasEnvironment.Loader.GetObjectList<MaintenanceDirective>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), getDeleted: true);
 						foreach (var dto in obj)
 						{
 							var mpd = mpds.FirstOrDefault(i => i.ItemId == dto.ObjectId);
@@ -179,7 +181,22 @@ namespace CAS.UI.UIControls.Users
 					else if (obj.Key == SmartCoreType.Directive.ItemId)
 					{
 						var ids = obj.Select(i => i.ObjectId);
-						var directives = GlobalObjects.CasEnvironment.Loader.GetObjectList<Directive>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()));
+						var directives = GlobalObjects.CasEnvironment.Loader.GetObjectList<Directive>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), getDeleted: true);
+						foreach (var dto in obj)
+						{
+							var directive = directives.FirstOrDefault(i => i.ItemId == dto.ObjectId);
+							if (directive == null)
+								continue;
+							dto.Aircraft = GlobalObjects.AircraftsCore.GetAircraftById(directive.ParentBaseComponent.ParentAircraftId);
+							dto.Title = directive.Title;
+						}
+					}
+					else if (obj.Key == SmartCoreType.DirectiveRecord.ItemId)
+					{
+						var ids = obj.Select(i => i.ObjectId);
+						var directiveRecords = GlobalObjects.CasEnvironment.Loader.GetObjectList<DirectiveRecord>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), getDeleted: true);
+						var directiveIds = directiveRecords.Select(i => i.ParentId);
+						var directives = GlobalObjects.CasEnvironment.Loader.GetObjectList<Directive>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, directiveIds.ToArray()), getDeleted: true);
 						foreach (var dto in obj)
 						{
 							var directive = directives.FirstOrDefault(i => i.ItemId == dto.ObjectId);
@@ -192,7 +209,7 @@ namespace CAS.UI.UIControls.Users
 					else if (obj.Key == SmartCoreType.BaseComponent.ItemId)
 					{
 						var ids = obj.Select(i => i.ObjectId);
-						var baseComponents = GlobalObjects.CasEnvironment.Loader.GetObjectList<BaseComponent>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()));
+						var baseComponents = GlobalObjects.CasEnvironment.Loader.GetObjectList<BaseComponent>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), getDeleted: true);
 						foreach (var dto in obj)
 						{
 							var baseComponent = baseComponents.FirstOrDefault(i => i.ItemId == dto.ObjectId);
@@ -205,7 +222,7 @@ namespace CAS.UI.UIControls.Users
 					else if (obj.Key == SmartCoreType.Component.ItemId)
 					{
 						var ids = obj.Select(i => i.ObjectId);
-						var components = GlobalObjects.CasEnvironment.Loader.GetObjectList<SmartCore.Entities.General.Accessory.Component>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()));
+						var components = GlobalObjects.CasEnvironment.Loader.GetObjectList<SmartCore.Entities.General.Accessory.Component>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), getDeleted: true);
 						foreach (var dto in obj)
 						{
 							var component = components.FirstOrDefault(i => i.ItemId == dto.ObjectId);
@@ -215,14 +232,55 @@ namespace CAS.UI.UIControls.Users
 							dto.Title = component.SerialNumber;
 						}
 					}
+					else if (obj.Key == SmartCoreType.ComponentDirective.ItemId)
+					{
+						var ids = obj.Select(i => i.ObjectId);
+						var componentDirectives = GlobalObjects.CasEnvironment.Loader.GetObjectList<ComponentDirective>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), getDeleted: true);
+						var componentIds = componentDirectives.Select(i => i.ComponentId);
+						var components = GlobalObjects.CasEnvironment.Loader.GetObjectList<SmartCore.Entities.General.Accessory.Component>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, componentIds.ToArray()), getDeleted: true);
+						foreach (var dto in obj)
+						{
+							var component = components.FirstOrDefault(i => i.ItemId == dto.ObjectId);
+							if (component == null)
+								continue;
+							dto.Aircraft = GlobalObjects.AircraftsCore.GetAircraftById(component.ParentAircraftId);
+							dto.Title = component.SerialNumber;
+						}
+					}
+					else if (obj.Key == SmartCoreType.AircraftFlight.ItemId)
+					{
+						var ids = obj.Select(i => i.ObjectId);
+						var flights = GlobalObjects.CasEnvironment.Loader.GetObjectList<AircraftFlight>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), getDeleted: true);
+						foreach (var dto in obj)
+						{
+							var flight = flights.FirstOrDefault(i => i.ItemId == dto.ObjectId);
+							if (flight == null)
+								continue;
+							dto.Aircraft = GlobalObjects.AircraftsCore.GetAircraftById(flight.AircraftId);
+							dto.Title = flight.ToString();
+						}
+					}
+					else if (obj.Key == SmartCoreType.Discrepancy.ItemId)
+					{
+						var ids = obj.Select(i => i.ObjectId);
+						var discrepancies = GlobalObjects.CasEnvironment.Loader.GetObjectList<Discrepancy>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), getDeleted: true);
+						var flIds = discrepancies.Select(i => i.FlightId);
+						var flights = GlobalObjects.CasEnvironment.Loader.GetObjectList<AircraftFlight>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, flIds.ToArray()), getDeleted: true);
+						foreach (var dto in obj)
+						{
+							var flight = flights.FirstOrDefault(i => i.ItemId == dto.ObjectId);
+							if (flight == null)
+								continue;
+							dto.Aircraft = GlobalObjects.AircraftsCore.GetAircraftById(flight.AircraftId);
+							dto.Title = flight.ToString();
+						}
+					}
 				}
 			}
 			catch(Exception ex)
 			{
 				Program.Provider.Logger.Log("Error while load documents", ex);
 			}
-
-			AnimatedThreadWorker.ReportProgress(20, "calculation documents");
 
 			AnimatedThreadWorker.ReportProgress(70, "filter documents");
 			FilterItems(_initial, _result);

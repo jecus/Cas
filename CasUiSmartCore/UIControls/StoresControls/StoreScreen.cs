@@ -1820,21 +1820,28 @@ namespace CAS.UI.UIControls.StoresControls
 
         private void ButtonAddDetailDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-			if (CurrentStore != null)
-			{
-				e.RequestedEntity = new ComponentAddingScreen(CurrentStore);
-				e.DisplayerText = CurrentStore.Name + ". New Component";
-			}
-			else
-			{
-				if (GlobalObjects.CasEnvironment.Stores.Count == 0)
-				{
-					e.Cancel = true;
-					return;
-				}
-				e.RequestedEntity = new ComponentAddingScreen(GlobalObjects.CasEnvironment.Stores[0]);
-				e.DisplayerText = GlobalObjects.CasEnvironment.Stores[0].ItemId + ". New Component";
-			}
+	        if (CurrentStore != null)
+	        {
+		        var form = new ComponentForm(CurrentStore);
+		        if (form.ShowDialog() == DialogResult.OK) AnimatedThreadWorker.RunWorkerAsync();
+	        }
+	        else
+		        MessageBox.Show("Функционал пока не реализован" + Environment.NewLine + "Работает в отдельном складе");
+			//if (CurrentStore != null)
+			//{
+			//	e.RequestedEntity = new ComponentAddingScreen(CurrentStore);
+			//	e.DisplayerText = CurrentStore.Name + ". New Component";
+			//}
+			//else
+			//{
+			//	if (GlobalObjects.CasEnvironment.Stores.Count == 0)
+			//	{
+			//		e.Cancel = true;
+			//		return;
+			//	}
+			//	e.RequestedEntity = new ComponentAddingScreen(GlobalObjects.CasEnvironment.Stores[0]);
+			//	e.DisplayerText = GlobalObjects.CasEnvironment.Stores[0].ItemId + ". New Component";
+			//}
 		}
 
         #endregion

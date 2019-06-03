@@ -1,5 +1,6 @@
 using System;
 using System.Media;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Auxiliary;
 using CAS.UI.Management;
@@ -113,8 +114,8 @@ namespace CAS.UI
 
         #region public static extern bool FlashWindow(IntPtr hWnd, bool bInvert);
 
-        //[DllImport("user32.dll")]
-        //public static extern bool FlashWindow(IntPtr hWnd, bool bInvert);
+        [DllImport("user32.dll")]
+        public static extern bool FlashWindow(IntPtr hWnd, bool bInvert);
 
         #endregion
 

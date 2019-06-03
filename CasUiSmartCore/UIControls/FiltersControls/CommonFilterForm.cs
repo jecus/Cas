@@ -45,6 +45,7 @@ namespace CAS.UI.UIControls.FiltersControls
         /// </summary>
         private CommonFilterForm()
         {
+	        DoubleBuffered = true;
             InitializeComponent();
         }
 

@@ -90,10 +90,6 @@ namespace CAS.UI.UIControls.StoresControls
 			this.dictionaryComboBoxLocation = new CAS.UI.UIControls.Auxiliary.DictionaryComboBox();
 			this.dataGridViewControlSuppliers = new CAS.UI.UIControls.Auxiliary.CommonDataGridViewControl();
 			this.comboBoxStandart = new CAS.UI.UIControls.Auxiliary.LookupCombobox();
-			this.lifelengthViewerWarranty = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
-			this.lifelengthViewerWarrantyNotify = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
-			this.lifelengthViewerNotify = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
-			this.lifelengthViewerLifeLimit = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.comboBoxDetailClass = new CAS.UI.UIControls.Auxiliary.TreeDictionaryComboBox();
 			this.checkBoxDangerous = new MetroFramework.Controls.MetroCheckBox();
 			this.checkBoxPOOL = new MetroFramework.Controls.MetroCheckBox();
@@ -294,7 +290,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.buttonOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOK.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOK.Location = new System.Drawing.Point(748, 715);
+			this.buttonOK.Location = new System.Drawing.Point(755, 612);
 			this.buttonOK.Margin = new System.Windows.Forms.Padding(2);
 			this.buttonOK.Name = "buttonOK";
 			this.buttonOK.Size = new System.Drawing.Size(75, 33);
@@ -309,7 +305,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonCancel.Location = new System.Drawing.Point(827, 715);
+			this.buttonCancel.Location = new System.Drawing.Point(834, 612);
 			this.buttonCancel.Margin = new System.Windows.Forms.Padding(2);
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.Size = new System.Drawing.Size(75, 33);
@@ -668,7 +664,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.buttonSaveAndAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonSaveAndAdd.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonSaveAndAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonSaveAndAdd.Location = new System.Drawing.Point(780, 773);
+			this.buttonSaveAndAdd.Location = new System.Drawing.Point(780, 658);
 			this.buttonSaveAndAdd.Margin = new System.Windows.Forms.Padding(2);
 			this.buttonSaveAndAdd.Name = "buttonSaveAndAdd";
 			this.buttonSaveAndAdd.Size = new System.Drawing.Size(128, 27);
@@ -903,128 +899,6 @@ namespace CAS.UI.UIControls.StoresControls
 			this.comboBoxStandart.TabIndex = 109;
 			this.comboBoxStandart.Type = null;
 			this.comboBoxStandart.SelectedIndexChanged += new System.EventHandler(this.ComboBoxStandartSelectedIndexChanged);
-			// 
-			// lifelengthViewerWarranty
-			// 
-			this.lifelengthViewerWarranty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.lifelengthViewerWarranty.AutoSize = true;
-			this.lifelengthViewerWarranty.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.lifelengthViewerWarranty.CalendarApplicable = false;
-			this.lifelengthViewerWarranty.CyclesApplicable = false;
-			this.lifelengthViewerWarranty.EnabledCalendar = true;
-			this.lifelengthViewerWarranty.EnabledCycle = false;
-			this.lifelengthViewerWarranty.EnabledHours = false;
-			this.lifelengthViewerWarranty.FieldsBackColor = System.Drawing.SystemColors.Window;
-			this.lifelengthViewerWarranty.ForeColor = System.Drawing.Color.DimGray;
-			this.lifelengthViewerWarranty.HeaderCalendar = "Calendar";
-			this.lifelengthViewerWarranty.HeaderCycles = "Cycles";
-			this.lifelengthViewerWarranty.HeaderFormattedCalendar = "Calendar";
-			this.lifelengthViewerWarranty.HeaderHours = "Hours";
-			this.lifelengthViewerWarranty.HoursApplicable = false;
-			this.lifelengthViewerWarranty.LeftHeader = "Warranty:";
-			this.lifelengthViewerWarranty.Location = new System.Drawing.Point(29, 668);
-			this.lifelengthViewerWarranty.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.lifelengthViewerWarranty.Modified = false;
-			this.lifelengthViewerWarranty.Name = "lifelengthViewerWarranty";
-			this.lifelengthViewerWarranty.ReadOnly = false;
-			this.lifelengthViewerWarranty.ShowCalendar = true;
-			this.lifelengthViewerWarranty.ShowFormattedCalendar = false;
-			this.lifelengthViewerWarranty.ShowHeaders = false;
-			this.lifelengthViewerWarranty.ShowMinutes = false;
-			this.lifelengthViewerWarranty.Size = new System.Drawing.Size(437, 35);
-			this.lifelengthViewerWarranty.SystemCalculated = true;
-			this.lifelengthViewerWarranty.TabIndex = 16;
-			// 
-			// lifelengthViewerWarrantyNotify
-			// 
-			this.lifelengthViewerWarrantyNotify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.lifelengthViewerWarrantyNotify.AutoSize = true;
-			this.lifelengthViewerWarrantyNotify.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.lifelengthViewerWarrantyNotify.CalendarApplicable = false;
-			this.lifelengthViewerWarrantyNotify.CyclesApplicable = false;
-			this.lifelengthViewerWarrantyNotify.EnabledCalendar = true;
-			this.lifelengthViewerWarrantyNotify.EnabledCycle = false;
-			this.lifelengthViewerWarrantyNotify.EnabledHours = false;
-			this.lifelengthViewerWarrantyNotify.FieldsBackColor = System.Drawing.SystemColors.Window;
-			this.lifelengthViewerWarrantyNotify.ForeColor = System.Drawing.Color.DimGray;
-			this.lifelengthViewerWarrantyNotify.HeaderCalendar = "Calendar";
-			this.lifelengthViewerWarrantyNotify.HeaderCycles = "Cycles";
-			this.lifelengthViewerWarrantyNotify.HeaderFormattedCalendar = "Calendar";
-			this.lifelengthViewerWarrantyNotify.HeaderHours = "Hours";
-			this.lifelengthViewerWarrantyNotify.HoursApplicable = false;
-			this.lifelengthViewerWarrantyNotify.LeftHeader = "Notify:";
-			this.lifelengthViewerWarrantyNotify.Location = new System.Drawing.Point(495, 668);
-			this.lifelengthViewerWarrantyNotify.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.lifelengthViewerWarrantyNotify.Modified = false;
-			this.lifelengthViewerWarrantyNotify.Name = "lifelengthViewerWarrantyNotify";
-			this.lifelengthViewerWarrantyNotify.ReadOnly = false;
-			this.lifelengthViewerWarrantyNotify.ShowCalendar = true;
-			this.lifelengthViewerWarrantyNotify.ShowFormattedCalendar = false;
-			this.lifelengthViewerWarrantyNotify.ShowHeaders = false;
-			this.lifelengthViewerWarrantyNotify.ShowMinutes = false;
-			this.lifelengthViewerWarrantyNotify.Size = new System.Drawing.Size(413, 35);
-			this.lifelengthViewerWarrantyNotify.SystemCalculated = true;
-			this.lifelengthViewerWarrantyNotify.TabIndex = 18;
-			// 
-			// lifelengthViewerNotify
-			// 
-			this.lifelengthViewerNotify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.lifelengthViewerNotify.AutoSize = true;
-			this.lifelengthViewerNotify.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.lifelengthViewerNotify.CalendarApplicable = false;
-			this.lifelengthViewerNotify.CyclesApplicable = false;
-			this.lifelengthViewerNotify.EnabledCalendar = true;
-			this.lifelengthViewerNotify.EnabledCycle = false;
-			this.lifelengthViewerNotify.EnabledHours = false;
-			this.lifelengthViewerNotify.FieldsBackColor = System.Drawing.SystemColors.Window;
-			this.lifelengthViewerNotify.ForeColor = System.Drawing.Color.DimGray;
-			this.lifelengthViewerNotify.HeaderCalendar = "Calendar";
-			this.lifelengthViewerNotify.HeaderCycles = "Cycles";
-			this.lifelengthViewerNotify.HeaderFormattedCalendar = "Calendar";
-			this.lifelengthViewerNotify.HeaderHours = "Hours";
-			this.lifelengthViewerNotify.HoursApplicable = false;
-			this.lifelengthViewerNotify.LeftHeader = "Notify:";
-			this.lifelengthViewerNotify.Location = new System.Drawing.Point(495, 612);
-			this.lifelengthViewerNotify.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.lifelengthViewerNotify.Modified = false;
-			this.lifelengthViewerNotify.Name = "lifelengthViewerNotify";
-			this.lifelengthViewerNotify.ReadOnly = false;
-			this.lifelengthViewerNotify.ShowCalendar = true;
-			this.lifelengthViewerNotify.ShowFormattedCalendar = false;
-			this.lifelengthViewerNotify.ShowMinutes = false;
-			this.lifelengthViewerNotify.Size = new System.Drawing.Size(413, 52);
-			this.lifelengthViewerNotify.SystemCalculated = true;
-			this.lifelengthViewerNotify.TabIndex = 17;
-			// 
-			// lifelengthViewerLifeLimit
-			// 
-			this.lifelengthViewerLifeLimit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.lifelengthViewerLifeLimit.AutoSize = true;
-			this.lifelengthViewerLifeLimit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.lifelengthViewerLifeLimit.CalendarApplicable = false;
-			this.lifelengthViewerLifeLimit.CyclesApplicable = false;
-			this.lifelengthViewerLifeLimit.EnabledCalendar = true;
-			this.lifelengthViewerLifeLimit.EnabledCycle = false;
-			this.lifelengthViewerLifeLimit.EnabledHours = false;
-			this.lifelengthViewerLifeLimit.FieldsBackColor = System.Drawing.SystemColors.Window;
-			this.lifelengthViewerLifeLimit.ForeColor = System.Drawing.Color.DimGray;
-			this.lifelengthViewerLifeLimit.HeaderCalendar = "Calendar";
-			this.lifelengthViewerLifeLimit.HeaderCycles = "Cycles";
-			this.lifelengthViewerLifeLimit.HeaderFormattedCalendar = "Calendar";
-			this.lifelengthViewerLifeLimit.HeaderHours = "Hours";
-			this.lifelengthViewerLifeLimit.HoursApplicable = false;
-			this.lifelengthViewerLifeLimit.LeftHeader = "Life limit:";
-			this.lifelengthViewerLifeLimit.Location = new System.Drawing.Point(35, 612);
-			this.lifelengthViewerLifeLimit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.lifelengthViewerLifeLimit.Modified = false;
-			this.lifelengthViewerLifeLimit.Name = "lifelengthViewerLifeLimit";
-			this.lifelengthViewerLifeLimit.ReadOnly = false;
-			this.lifelengthViewerLifeLimit.ShowCalendar = true;
-			this.lifelengthViewerLifeLimit.ShowFormattedCalendar = false;
-			this.lifelengthViewerLifeLimit.ShowMinutes = false;
-			this.lifelengthViewerLifeLimit.Size = new System.Drawing.Size(429, 52);
-			this.lifelengthViewerLifeLimit.SystemCalculated = true;
-			this.lifelengthViewerLifeLimit.TabIndex = 15;
 			// 
 			// comboBoxDetailClass
 			// 
@@ -1340,7 +1214,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.buttonCancel;
-			this.ClientSize = new System.Drawing.Size(924, 770);
+			this.ClientSize = new System.Drawing.Size(924, 655);
 			this.Controls.Add(this.metroLabelEffectivity);
 			this.Controls.Add(this.metroTextBoxEffectivity);
 			this.Controls.Add(this.linkLabel2);
@@ -1382,12 +1256,8 @@ namespace CAS.UI.UIControls.StoresControls
 			this.Controls.Add(this.textBoxManufacturer);
 			this.Controls.Add(this.comboBoxStandart);
 			this.Controls.Add(this.labelStandart);
-			this.Controls.Add(this.lifelengthViewerWarranty);
-			this.Controls.Add(this.lifelengthViewerWarrantyNotify);
 			this.Controls.Add(this.labelSupplier);
 			this.Controls.Add(this.labelProduct);
-			this.Controls.Add(this.lifelengthViewerNotify);
-			this.Controls.Add(this.lifelengthViewerLifeLimit);
 			this.Controls.Add(this.labelInstallDate);
 			this.Controls.Add(this.dateTimePickerInstallDate);
 			this.Controls.Add(this.labelManufactureDate);
@@ -1420,7 +1290,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.MaximizeBox = false;
 			this.MaximumSize = new System.Drawing.Size(924, 780);
 			this.MinimizeBox = false;
-			this.MinimumSize = new System.Drawing.Size(924, 730);
+			this.MinimumSize = new System.Drawing.Size(924, 650);
 			this.Name = "ComponentForm";
 			this.Resizable = false;
 			this.Text = "Component form";
@@ -1431,9 +1301,6 @@ namespace CAS.UI.UIControls.StoresControls
         }
 
         #endregion
-
-        private Auxiliary.LifelengthViewer lifelengthViewerNotify;
-        private Auxiliary.LifelengthViewer lifelengthViewerLifeLimit;
         private MetroLabel labelInstallDate;
         private System.Windows.Forms.DateTimePicker dateTimePickerInstallDate;
         private MetroLabel labelManufactureDate;
@@ -1464,8 +1331,6 @@ namespace CAS.UI.UIControls.StoresControls
         private MetroTextBox textBoxRemarks;
         private MetroLabel labelProduct;
         private MetroLabel labelSupplier;
-        private Auxiliary.LifelengthViewer lifelengthViewerWarranty;
-        private Auxiliary.LifelengthViewer lifelengthViewerWarrantyNotify;
         private MetroLabel labelStandart;
         private Auxiliary.LookupCombobox comboBoxStandart;
         private MetroLabel labelManufacturer;
