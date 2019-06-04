@@ -82,21 +82,21 @@ namespace SmartCore.Entities.General.Interfaces
 
 		#region bool IsPOOL { get; }
 
-		[Filter("IsPool :", Order = 12)]
+		[Filter("IsPool :", Order = 14)]
 		bool IsPOOL { get; }
 
 		#endregion
 
 		#region bool IsDangerous { get; }
 
-		[Filter("IsDangerous :", Order = 14)]
+		[Filter("IsDangerous :", Order = 16)]
 		bool IsDangerous { get; }
 
 		#endregion
 
 		#region GoodsClass GoodsClass { get; }
 
-		[Filter("Class:", Order = 13)]
+		[Filter("Class:", Order = 15)]
 		GoodsClass GoodsClass { get; }
 
 		#endregion
@@ -105,7 +105,7 @@ namespace SmartCore.Entities.General.Interfaces
 		/// <summary>
 		/// Внешний ключ на идентификатор записи со справочной информацией
 		/// </summary>
-		[Filter("ATA:", Order = 16)]
+		[Filter("ATA:", Order = 18)]
 		AtaChapter ATAChapter { get; }
 		#endregion
 
@@ -114,7 +114,7 @@ namespace SmartCore.Entities.General.Interfaces
 		/// <summary>
 		/// Возвращает тип выполняемых работ
 		/// </summary>
-		[Filter("Work Type:", Order = 18)]
+		[Filter("Work Type:", Order = 20)]
 		ComponentRecordType DirectiveType { get; }
 		#endregion
 
@@ -123,20 +123,20 @@ namespace SmartCore.Entities.General.Interfaces
 		/// <summary>
 		/// Возвращает текущий статус задачи: Открыта, Повторяется или Закрыта
 		/// </summary>
-		[Filter("Status:", Order = 17)]
+		[Filter("Status:", Order = 19)]
 		ComponentStatus ComponentStatus { get; }
 		#endregion
 
 		#region ComponentStorePosition State { get; }
 
-		[Filter("State:", Order = 15)]
+		[Filter("State:", Order = 17)]
 		ComponentStorePosition State { get; }
 
 		#endregion
 
 		#region Locations Location { get; }
 
-		[Filter("Location :", Order = 19)]
+		[Filter("Location :", Order = 21)]
 		Locations Location { get; }
 
 		#endregion
@@ -146,13 +146,13 @@ namespace SmartCore.Entities.General.Interfaces
 		/// <summary>
 		/// Возвращает состояние ближайшего выполнения задачи (если оно расчитано) или ConditionState.NotEstimated
 		/// </summary>
-		[Filter("Condition:", Order = 20)]
+		[Filter("Condition:", Order = 22)]
 		ConditionState Condition { get; }
 		#endregion
 
 		#region LocationsType Facility { get; }
 
-		[Filter("Facility:", Order = 21)]
+		[Filter("Facility:", Order = 23)]
 		LocationsType Facility { get; }
 			#endregion
 
@@ -181,6 +181,9 @@ namespace SmartCore.Entities.General.Interfaces
 		[Filter("Maint. Proc.:")]
 		MaintenanceControlProcess MaintenanceControlProcess { get; }
 		#endregion
+
+		[Filter("Standart:")]
+		GoodStandart Standart { get; }
 
 		#region BaseComponent ParentBaseComponent { get; }
 
@@ -221,5 +224,11 @@ namespace SmartCore.Entities.General.Interfaces
 
 		[Filter("Effectivity:", Order = 11)]
 		string IsEffectivity { get; }
+
+		[Filter("Alt. Part No:", Order = 12)]
+		string ALTPartNumber { get; }
+		
+		[Filter("Name:", Order = 13)]
+		string Name { get; }
 	}
 }

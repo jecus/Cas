@@ -617,7 +617,7 @@ namespace CAS.UI.ExcelExport
 			workSheet.Column(4).Width = 14;
 
 			FillHeaderCell(workSheet.Cells[1, 5], "Object Type", ExcelHorizontalAlignment.Center);
-			workSheet.Column(5).Width = 16;
+			workSheet.Column(5).Width = 30;
 
 			FillHeaderCell(workSheet.Cells[1, 6], "Aircraft", ExcelHorizontalAlignment.Center);
 			workSheet.Column(6).Width = 16;
@@ -638,9 +638,9 @@ namespace CAS.UI.ExcelExport
 			int currentColumnPosition = 1;
 
 
-			foreach (var act in activity)
+			foreach (var act in activity.OrderByDescending(i => i.Date))
 	        {
-		        FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], act.Date.GetDateTimeFormats());
+		        FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], act.Date.ToString("dd/MM/yyyy"));
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], act.Date.ToString("HH:mm:ss"));
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], act.User.ToString(), ExcelHorizontalAlignment.Left);
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], act.Operation.ToString());

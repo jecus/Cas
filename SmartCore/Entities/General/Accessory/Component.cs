@@ -916,6 +916,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		public string Reference => Product?.Reference;
 		public string IsEffectivity => Product?.IsEffectivity;
+		public string Name => Product?.Name;
 
 
 		//TODO:временное свойство(какое кол-во продукта нужно из раб пакета)

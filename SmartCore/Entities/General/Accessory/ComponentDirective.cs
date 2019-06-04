@@ -581,6 +581,9 @@ namespace SmartCore.Entities.General.Accessory
 
 		public string Reference => "";
 		public string IsEffectivity => "";
+		public string ALTPartNumber => "";
+		public string Name => "";
+		public GoodStandart Standart => null;
 
 		#region public Boolean NextPerformanceIsBlocked { get; }
 		/// <summary>
