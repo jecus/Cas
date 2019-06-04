@@ -579,11 +579,11 @@ namespace SmartCore.Entities.General.Accessory
         public Boolean IsClosed { get; set; }
 		#endregion
 
-		public string Reference => "";
-		public string IsEffectivity => "";
-		public string ALTPartNumber => "";
-		public string Name => "";
-		public GoodStandart Standart => null;
+		public string Reference => ParentComponent?.Reference;
+		public string IsEffectivity => ParentComponent?.IsEffectivity;
+		public string ALTPartNumber => ParentComponent?.ALTPartNumber;
+		public string Name => ParentComponent?.Name;
+		public GoodStandart Standart => ParentComponent?.Standart;
 
 		#region public Boolean NextPerformanceIsBlocked { get; }
 		/// <summary>
