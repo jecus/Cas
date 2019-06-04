@@ -474,17 +474,33 @@ namespace SmartCore.Entities.General.Accessory
         [TableColumn("ManufactureDate")]
         public DateTime ManufactureDate
         {
-            get { return manufactureDate; }
-            set { manufactureDate = value; }
-        }
+			get { return manufactureDate > DateTimeExtend.GetCASMinDateTime() ? manufactureDate : DateTimeExtend.GetCASMinDateTime(); }
+			set
+			{
+				var min = DateTimeExtend.GetCASMinDateTime();
+				if (manufactureDate < min || manufactureDate != value)
+					manufactureDate = value < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : value;
+			}
+		}
 		#endregion
 
         #region public DateTime DeliveryDate { get; set; }
+
         /// <summary>
         /// Дата доставки
         /// </summary>
         [TableColumn("DeliveryDate")]
-        public DateTime DeliveryDate { get; set; }
+        public DateTime DeliveryDate
+        {
+			get { return _deliveryDate > DateTimeExtend.GetCASMinDateTime() ? _deliveryDate : DateTimeExtend.GetCASMinDateTime(); }
+			set
+			{
+				var min = DateTimeExtend.GetCASMinDateTime();
+				if (_deliveryDate < min || _deliveryDate != value)
+					_deliveryDate = value < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : value;
+			}
+		}
+
         #endregion
 
 		#region internal Lifelength Lifelength { get; set; }
@@ -1883,6 +1899,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		private Supplier _fromSupplier;
 		private Specialist _received;
+		private DateTime _deliveryDate;
 
 		[TableColumn("FromSupplierId")]
 		[Child]

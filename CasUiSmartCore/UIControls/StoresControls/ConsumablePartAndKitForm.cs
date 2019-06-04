@@ -879,7 +879,7 @@ namespace CAS.UI.UIControls.StoresControls
 			if (product != null)
 	        {
 		        if ((bool) product.GoodsClass?.IsNodeOrSubNodeOf(new[]
-			        {GoodsClass.Materials, GoodsClass.Tools, GoodsClass.Protection}))
+			        {GoodsClass.Materials,GoodsClass.MaintenanceMaterials, GoodsClass.Tools, GoodsClass.Protection}))
 		        {
 			        lifelengthViewerLifeLimit.Enabled = true;
 			        lifelengthViewerNotify.Enabled = true;

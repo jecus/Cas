@@ -496,6 +496,13 @@ namespace CAS.UI.UIControls.StoresControls
 				position = dd.ParentComponent.TransferRecords.GetLast().State;
 				isPool = dd.IsPOOL;
 				IsDangerous = dd.IsDangerous;
+				partNumber = dd.ParentComponent.Product?.PartNumber ?? dd.ParentComponent.PartNumber;
+				altPartNumber = dd.ParentComponent.Product?.AltPartNumber ?? dd.ParentComponent.ALTPartNumber;
+				standart = dd.ParentComponent.Product?.Standart?.ToString() ?? dd.ParentComponent.Standart?.ToString();
+				name = dd.ParentComponent.Product?.Name;
+				description = dd.ParentComponent.Description;
+				serialNumber = dd.ParentComponent.SerialNumber;
+				classString = dd.ParentComponent.GoodsClass.ToString();
 			}
             else
             {

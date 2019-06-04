@@ -418,8 +418,9 @@ namespace CAS.UI.UIControls.PurchaseControls
                     _currentItem.Remarks = textBoxRemarks.Text;
                     _currentItem.IsEffectivity = textBoxIsEffectivity.Text;
                     _currentItem.Measure = comboBoxMeasure.SelectedItem as Measure;
+                    _currentItem.ATAChapter = comboBoxAtaChapter.ATAChapter;
 
-                GlobalObjects.CasEnvironment.Manipulator.Save(_currentItem);
+					GlobalObjects.CasEnvironment.Manipulator.Save(_currentItem);
 
                     foreach (KitSuppliersRelation ksr in _currentItem.SupplierRelations)
                     {
