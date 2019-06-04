@@ -878,6 +878,22 @@ namespace CAS.UI.UIControls.StoresControls
 
 			if (product != null)
 	        {
+		        if ((bool) product.GoodsClass?.IsNodeOrSubNodeOf(new[]
+			        {GoodsClass.Materials, GoodsClass.Tools, GoodsClass.Protection}))
+		        {
+			        lifelengthViewerLifeLimit.Enabled = true;
+			        lifelengthViewerNotify.Enabled = true;
+					lifelengthViewerWarranty.Enabled = true;
+					lifelengthViewerWarrantyNotify.Enabled = true;
+				}
+		        else
+		        {
+			        lifelengthViewerLifeLimit.Enabled = false;
+			        lifelengthViewerNotify.Enabled = false;
+			        lifelengthViewerWarranty.Enabled = false;
+			        lifelengthViewerWarrantyNotify.Enabled = false;
+				}
+
 		        TextBoxProduct.Text = product.ToString();
 	            if (product.ImageFile != null)
 	            {

@@ -1001,7 +1001,7 @@ namespace CAS.UI.UIControls.StoresControls
 			// 
 			this.linkLabelEditComponents.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.linkLabelEditComponents.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.linkLabelEditComponents.Location = new System.Drawing.Point(790, 63);
+			this.linkLabelEditComponents.Location = new System.Drawing.Point(771, 64);
 			this.linkLabelEditComponents.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.linkLabelEditComponents.Name = "linkLabelEditComponents";
 			this.linkLabelEditComponents.Size = new System.Drawing.Size(48, 23);
@@ -1018,7 +1018,7 @@ namespace CAS.UI.UIControls.StoresControls
 			// 
 			// 
 			this.TextBoxProduct.CustomButton.Image = null;
-			this.TextBoxProduct.CustomButton.Location = new System.Drawing.Point(660, 2);
+			this.TextBoxProduct.CustomButton.Location = new System.Drawing.Point(637, 2);
 			this.TextBoxProduct.CustomButton.Name = "";
 			this.TextBoxProduct.CustomButton.Size = new System.Drawing.Size(15, 15);
 			this.TextBoxProduct.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -1038,7 +1038,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.TextBoxProduct.SelectionLength = 0;
 			this.TextBoxProduct.SelectionStart = 0;
 			this.TextBoxProduct.ShortcutsEnabled = true;
-			this.TextBoxProduct.Size = new System.Drawing.Size(678, 20);
+			this.TextBoxProduct.Size = new System.Drawing.Size(655, 20);
 			this.TextBoxProduct.TabIndex = 192;
 			this.TextBoxProduct.UseSelectable = true;
 			this.TextBoxProduct.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -1048,7 +1048,7 @@ namespace CAS.UI.UIControls.StoresControls
 			// 
 			this.linkLabel1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.linkLabel1.Location = new System.Drawing.Point(840, 63);
+			this.linkLabel1.Location = new System.Drawing.Point(821, 64);
 			this.linkLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.linkLabel1.Name = "linkLabel1";
 			this.linkLabel1.Size = new System.Drawing.Size(37, 23);
@@ -1062,7 +1062,7 @@ namespace CAS.UI.UIControls.StoresControls
 			// 
 			this.linkLabel2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.linkLabel2.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.linkLabel2.Location = new System.Drawing.Point(878, 63);
+			this.linkLabel2.Location = new System.Drawing.Point(859, 64);
 			this.linkLabel2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.linkLabel2.Name = "linkLabel2";
 			this.linkLabel2.Size = new System.Drawing.Size(50, 23);
