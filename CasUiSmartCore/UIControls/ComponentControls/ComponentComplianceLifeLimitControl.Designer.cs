@@ -212,7 +212,7 @@
 			this.labelKitRequired.Name = "labelKitRequired";
 			this.labelKitRequired.Size = new System.Drawing.Size(121, 25);
 			this.labelKitRequired.TabIndex = 79;
-			this.labelKitRequired.Text = "Kit Required:";
+			this.labelKitRequired.Text = "Part and Material:";
 			this.labelKitRequired.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// textBoxKitRequired

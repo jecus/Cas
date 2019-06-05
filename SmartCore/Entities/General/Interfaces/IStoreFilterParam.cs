@@ -62,7 +62,7 @@ namespace SmartCore.Entities.General.Interfaces
 
 		#region string BatchNumber { get; }
 
-		[Filter("Batch Number:", Order = 7)]
+		[Filter("Batch No:", Order = 7)]
 		string BatchNumber { get; }
 
 		#endregion
