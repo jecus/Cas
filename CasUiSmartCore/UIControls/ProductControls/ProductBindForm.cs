@@ -10,12 +10,14 @@ using EFCore.Filter;
 using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
+using SmartCore.Entities.General.Interfaces;
 using SmartCore.Queries;
 
 namespace CAS.UI.UIControls.ProductControls
 {
 	public partial class ProductBindForm : MetroForm
 	{
+		private readonly AbstractAccessory _currentKit;
 
 		#region Fields
 
@@ -34,6 +36,11 @@ namespace CAS.UI.UIControls.ProductControls
 		public ProductBindForm(Component current) :this()
 		{
 			_current = current;
+		}
+
+		public ProductBindForm(AbstractAccessory currentKit)
+		{
+			_currentKit = currentKit;
 		}
 
 		#endregion
@@ -97,7 +104,11 @@ namespace CAS.UI.UIControls.ProductControls
 		private void ButtonOk_Click(object sender, EventArgs e)
 		{
 			if (allProductListView1.SelectedItem != null)
-				_current.Product = allProductListView1.SelectedItem;
+			{
+				if (_current != null)
+					_current.Product = allProductListView1.SelectedItem;
+				else _currentKit.Product = allProductListView1.SelectedItem;
+			}
 			else
 			{
 				MessageBox.Show("Please select one product!", (string)new GlobalTermsProvider()["SystemName"],

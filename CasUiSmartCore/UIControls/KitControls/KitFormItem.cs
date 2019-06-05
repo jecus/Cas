@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using CASTerms;
 using System.Linq;
+using CAS.UI.UIControls.ProductControls;
+using CAS.UI.UIControls.PurchaseControls;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
@@ -80,12 +82,9 @@ namespace CAS.UI.UIControls.KitControls
         #region private void UpdateInformation()
         private void UpdateInformation()
         {
-            comboBoxProduct.SelectedIndexChanged -= DictComboDescriptionSelectedIndexChanged;
-            comboBoxStandart.SelectedIndexChanged -= ComboBoxStandartSelectedIndexChanged;
+	        comboBoxStandart.SelectedIndexChanged -= ComboBoxStandartSelectedIndexChanged;
 
             textBoxRemarks.Text = string.Empty;
-            comboBoxProduct.Type = typeof(Product);
-            Program.MainDispatcher.ProcessControl(comboBoxProduct);
 
             comboBoxStandart.Type = typeof(GoodStandart);
             Program.MainDispatcher.ProcessControl(comboBoxStandart);
@@ -118,9 +117,9 @@ namespace CAS.UI.UIControls.KitControls
 
             comboBoxDetailClass.SelectedItem = GoodsClass.KIT;
             comboBoxMeasure.SelectedItem = Measure.Unit;
-            comboBoxProduct.SelectedItem = _currentKit.Product;
+            UpdateByProduct(_currentKit.Product);
 
-            Product accessoryDescription;
+			Product accessoryDescription;
             if ((accessoryDescription = _currentKit.Product) != null)
             {
                 comboBoxDetailClass.SelectedItem = accessoryDescription.GoodsClass;
@@ -182,44 +181,6 @@ namespace CAS.UI.UIControls.KitControls
 
             if(_currentKit.ItemId > 0)
             {
-                //if (comboBoxAccessoryDescription.SelectedItem != null)
-                //{
-                //    comboBoxAccessoryDescription.Enabled = _currentKit.Product.IsDeleted;
-                //    comboBoxDetailClass.Enabled = false;
-                //    comboBoxMeasure.Enabled = false;
-                //    textBoxPartNumber.ReadOnly = false;
-                //    textBoxDescription.ReadOnly = false;
-                //    textBoxManufacturer.ReadOnly = false;
-                //    textBoxRemarks.ReadOnly = false;
-                //    if (_rfqr != null)
-                //    {
-                //        numericCostNew.ReadOnly = true;
-                //        numericCostServiceable.ReadOnly = true;
-                //        numericCostOverhaul.ReadOnly = true;
-                //    }
-                //    else
-                //    {
-                //        numericCostNew.ReadOnly = false;
-                //        numericCostServiceable.ReadOnly = false;
-                //        numericCostOverhaul.ReadOnly = false;
-                //    }
-                //    textBoxSuppliers.ReadOnly = false;
-                //    linkLabelEditSupplier.Enabled = false;
-                //}
-                //else
-                //{
-                //    comboBoxDetailClass.Enabled = true;
-                //    comboBoxMeasure.Enabled = true;
-                //    textBoxPartNumber.ReadOnly = true;
-                //    textBoxDescription.ReadOnly = true;
-                //    textBoxManufacturer.ReadOnly = true;
-                //    textBoxRemarks.ReadOnly = true;
-                //    numericCostNew.ReadOnly = true;
-                //    numericCostServiceable.ReadOnly = true;
-                //    numericCostOverhaul.ReadOnly = true;
-                //    textBoxSuppliers.ReadOnly = true;
-                //    linkLabelEditSupplier.Enabled = true;
-                //}
 
                 ////////////////////////////////////////////
                 //загрузка котировочных ордеров для определения 
@@ -236,64 +197,18 @@ namespace CAS.UI.UIControls.KitControls
                                                                                          WorkPackageStatus.Closed,
                                                                                          false,
                                                                                          new [] { _currentKit }));
-                    comboBoxProduct.Enabled = 
-                        _currentKit.Product == null || 
-                        _currentKit.Product.IsDeleted || 
-                        (closedQuotations.Count == 0 && closedPurchases.Count == 0);
+                    //comboBoxProduct.Enabled = 
+                    //    _currentKit.Product == null || 
+                    //    _currentKit.Product.IsDeleted || 
+                    //    (closedQuotations.Count == 0 && closedPurchases.Count == 0);
                 }
                 catch (Exception exception)
                 {
                     Program.Provider.Logger.Log("Error while loading requestes for detail", exception);
                 }
             }
-            //else
-            //{
-            //    //comboBoxDetailClass.SelectedItem = DetailClass.Kit;
-            //    //comboBoxDetailClass.Enabled = true;
-            //    //textBoxPartNumber.ReadOnly = true;
-            //    //textBoxDescription.ReadOnly = true;
-            //    //textBoxManufacturer.ReadOnly = true;
-            //    //textBoxRemarks.ReadOnly = true;
-            //    //numericCostNew.ReadOnly = true;
-            //    //numericCostServiceable.ReadOnly = true;
-            //    //numericCostOverhaul.ReadOnly = true;
-            //    //textBoxSuppliers.ReadOnly = true;
-            //    //linkLabelEditSupplier.Enabled = true;
-            //}
-            //if (_currentKit.ItemId > 0)
-            //{
-            //    Product accessoryDescription;
-            //    if((accessoryDescription = comboBoxAccessoryDescription.SelectedItem as Product) != null)
-            //    {
-            //        comboBoxAccessoryDescription.Enabled = accessoryDescription.IsDeleted;
-            //    }
-            //    else comboBoxAccessoryDescription.Enabled = true;
 
-            //    //////////////////////////////////////////////
-            //    ////загрузка котировочных ордеров для определения 
-            //    ////того, можно ли менять партийный и серийный номер данного агрегата
-            //    //List<RequestForQuotation> closedQuotations = new List<RequestForQuotation>();
-            //    //List<PurchaseOrder> closedPurchases = new List<PurchaseOrder>();
-            //    //try
-            //    //{
-            //    //    closedQuotations.AddRange(GlobalObjects.CasEnvironment.Loader.GetRequestForQuotation(null,
-            //    //                                                                         WorkPackageStatus.Closed,
-            //    //                                                                         false,
-            //    //                                                                         new CommonCollection<AbstractAccessory> { _currentKit }));
-            //    //    closedPurchases.AddRange(GlobalObjects.CasEnvironment.Loader.GetPurchaseOrders(null,
-            //    //                                                                         WorkPackageStatus.Closed,
-            //    //                                                                         false,
-            //    //                                                                         new CommonCollection<AbstractAccessory> { _currentKit }));
-            //    //    textBoxPartNumber.ReadOnly = (closedQuotations.Count > 0 || closedPurchases.Count > 0);
-            //    //}
-            //    //catch (Exception exception)
-            //    //{
-            //    //    Program.Provider.Logger.Log("Error while loading requestes for detail", exception);
-            //    //}
-            //}
-            
             comboBoxStandart.SelectedIndexChanged += ComboBoxStandartSelectedIndexChanged;
-            comboBoxProduct.SelectedIndexChanged += DictComboDescriptionSelectedIndexChanged;
         }
         #endregion
 
@@ -304,8 +219,7 @@ namespace CAS.UI.UIControls.KitControls
         public bool GetChangeStatus()
         {
             string kitStandartName = _currentKit.Standart != null ? _currentKit.Standart.FullName : "";
-            if (comboBoxProduct.SelectedItem != _currentKit.Product
-                || comboBoxMeasure.SelectedItem != _currentKit.Measure
+            if (comboBoxMeasure.SelectedItem != _currentKit.Measure
                 || (comboBoxStandart.SelectedItem != null 
                         ? comboBoxStandart.SelectedItem != _currentKit.Standart 
                         : (comboBoxStandart.Text != "Select Item" && comboBoxStandart.Text != "N/A"
@@ -401,7 +315,6 @@ namespace CAS.UI.UIControls.KitControls
         ///<returns></returns>
         public void ApplyChanges()
         {
-            _currentKit.Product = comboBoxProduct.SelectedItem as Product;
 	        _currentKit.GoodsClass = comboBoxDetailClass.SelectedItem as GoodsClass;
             _currentKit.Quantity = (double)numericCount.Value;
 			_currentKit.PartNumber = textBoxPartNumber.Text;
@@ -427,14 +340,13 @@ namespace CAS.UI.UIControls.KitControls
         #endregion
 
         #region private void DictComboDescriptionSelectedIndexChanged(object sender, EventArgs e)
-        private void DictComboDescriptionSelectedIndexChanged(object sender, EventArgs e)
+        private void UpdateByProduct(Product product)
         {
             comboBoxStandart.SelectedIndexChanged -= ComboBoxStandartSelectedIndexChanged;
 
-            Product accessoryDescription;
-            if ((accessoryDescription = comboBoxProduct.SelectedItem as Product) != null)
+            if (product != null)
             {
-                comboBoxDetailClass.SelectedItem = accessoryDescription.GoodsClass;
+                comboBoxDetailClass.SelectedItem = product.GoodsClass;
 
                 comboBoxDetailClass.Enabled = false;
                 comboBoxMeasure.Enabled = false;
@@ -444,11 +356,11 @@ namespace CAS.UI.UIControls.KitControls
                 //linkLabelEditSupplier.Enabled = false;
                 //textBoxRemarks.ReadOnly = true;
 
-                comboBoxMeasure.SelectedItem = accessoryDescription.Measure;
-                comboBoxStandart.SelectedItem = accessoryDescription.Standart;
-                textBoxPartNumber.Text = accessoryDescription.PartNumber;
-                textBoxDescription.Text = accessoryDescription.Description;
-                textBoxReference.Text = accessoryDescription.Reference;
+                comboBoxMeasure.SelectedItem = product.Measure;
+                comboBoxStandart.SelectedItem = product.Standart;
+                textBoxPartNumber.Text = product.PartNumber;
+                textBoxDescription.Text = product.Description;
+                textBoxReference.Text = product.Reference;
                 //textBoxSuppliers.Text = accessoryDescription.Suppliers.ToString();
                 //textBoxRemarks.Text = accessoryDescription.Remarks;
             }
@@ -457,7 +369,7 @@ namespace CAS.UI.UIControls.KitControls
             {
                 textBoxRemarks.Text = _currentKit.Remarks;
 
-                if (accessoryDescription != null)
+                if (product != null)
                 {
                     comboBoxDetailClass.Enabled = false;
                     comboBoxMeasure.Enabled = false;
@@ -466,8 +378,8 @@ namespace CAS.UI.UIControls.KitControls
                     textBoxDescription.ReadOnly = true;
                     //linkLabelEditSupplier.Enabled = false;
                     //textBoxRemarks.ReadOnly = true;
-                    _currentKit.Suppliers = new SupplierCollection(accessoryDescription.Suppliers);
-                    _currentKit.SupplierRelations = new CommonCollection<KitSuppliersRelation>(accessoryDescription.SupplierRelations);
+                    _currentKit.Suppliers = new SupplierCollection(product.Suppliers);
+                    _currentKit.SupplierRelations = new CommonCollection<KitSuppliersRelation>(product.SupplierRelations);
 
                     //textBoxSuppliers.Text = accessoryDescription.Suppliers.ToString();
                 }
@@ -487,13 +399,13 @@ namespace CAS.UI.UIControls.KitControls
             }
             else
             {
-                if(accessoryDescription != null)
+                if(product != null)
                 {
-                    textBoxRemarks.Text = accessoryDescription.Remarks;
+                    textBoxRemarks.Text = product.Remarks;
 
-                    _currentKit.Suppliers = new SupplierCollection(accessoryDescription.Suppliers);
+                    _currentKit.Suppliers = new SupplierCollection(product.Suppliers);
                     _currentKit.SupplierRelations = new CommonCollection<KitSuppliersRelation>();
-                    foreach (KitSuppliersRelation ksr in accessoryDescription.SupplierRelations)
+                    foreach (KitSuppliersRelation ksr in product.SupplierRelations)
                     {
                         _currentKit.SupplierRelations.Add(new KitSuppliersRelation(ksr));
                     }
@@ -617,6 +529,28 @@ namespace CAS.UI.UIControls.KitControls
 			{
 				numericCount.Maximum = decimal.MaxValue;
 			}
+		}
+
+		private void LinkLabelEditComponents_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			var form = new ProductBindForm(_currentKit);
+			if (form.ShowDialog() == DialogResult.OK)
+				UpdateByProduct(_currentKit.Product);
+
+		}
+
+		private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			var form = new ProductForm(_currentKit.Product);
+			if (form.ShowDialog() == DialogResult.OK)
+				UpdateByProduct(_currentKit.Product);
+		}
+
+		private void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			TextBoxProduct.Text = "";
+			_currentKit.Product = null;
+			UpdateByProduct(_currentKit.Product);
 		}
 	}
 }
