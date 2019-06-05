@@ -17,6 +17,7 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
+using SmartCore.Filters;
 using Component = SmartCore.Entities.General.Accessory.Component;
 using ComponentCollection = SmartCore.Entities.Collections.ComponentCollection;
 
@@ -204,9 +205,13 @@ namespace CAS.UI.UIControls.ComponentControls
 		                    return;
 	                    }
 						//Загрузка документов
-						var documents = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DocumentDTO,Document>(new Filter("ParentTypeId", types),true);
+						var documents = GlobalObjects.CasEnvironment.Loader.GetObjectList<Document>(new ICommonFilter[]
+						{
+							new CommonFilter<int>(Document.ParentIdProperty, _currentComponent.ItemId),
+							new CommonFilter<int>(Document.ParentTypeIdProperty, FilterType.In, types)
+						});
 
-	                    if (documents.Count > 0)
+						if (documents.Count > 0)
 	                    {
 		                    var crs = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Component CRS Form") as DocumentSubType;
 		                    var shipping = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Shipping document") as DocumentSubType;

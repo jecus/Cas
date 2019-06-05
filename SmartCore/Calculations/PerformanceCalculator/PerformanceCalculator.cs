@@ -900,6 +900,13 @@ namespace SmartCore.Calculations.PerformanceCalculator
 
 						np.WarrantlyRemains.Resemble(np.LimitOverdue);
 					}
+					else if (directive is ComponentDirective)
+					{
+						np.WarrantlyRemains = new Lifelength(((ComponentDirective)directive).Threshold.Warranty);
+						np.WarrantlyRemains.Substract(current); // remains = next - current
+
+						np.WarrantlyRemains.Resemble(np.LimitOverdue);
+					}
 
 					//np.Remains = new Lifelength(np.LimitOverdue);
 					np.Remains = new Lifelength(np.PerformanceSource);

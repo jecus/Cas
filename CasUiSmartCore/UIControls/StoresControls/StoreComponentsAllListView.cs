@@ -357,7 +357,7 @@ namespace CAS.UI.UIControls.StoresControls
 				   shouldBeOnStock = 0, needWpQuantity = 0, reserve = 0;
             int times, 
                 kitCount = 0;
-			var position = ComponentStorePosition.UNK;
+			var position = ComponentStorePosition.UNK.ToString();
 			IDirective parent;
             if (item is NextPerformance)
             {
@@ -400,7 +400,7 @@ namespace CAS.UI.UIControls.StoresControls
                 classString = componentItem.GoodsClass.ToString();
                 batchNumber = componentItem.BatchNumber;
                 idNumber = componentItem.IdNumber;
-                position = componentItem.TransferRecords.GetLast().State;
+                position = componentItem.TransferRecords.GetLast()?.State?.ToString();
                 status = componentItem.ComponentStatus.ToString();
                 location = componentItem.Location.ToString();
                 facility = componentItem.Location.LocationsType?.ToString() ?? LocationsType.Unknown.ToString();
@@ -493,8 +493,7 @@ namespace CAS.UI.UIControls.StoresControls
 				approx = dd.NextPerformanceDate;
                 next = dd.NextPerformanceSource;
                 remains = dd.Remains;
-                ata = dd.ParentComponent.Product?.ATAChapter ?? dd.ParentComponent.ATAChapter; 
-				description = "    " + dd.ParentComponent.Description;
+                ata = dd.ParentComponent.Product?.ATAChapter ?? dd.ParentComponent.ATAChapter;
                 maintenanceTypeString = dd.ParentComponent.MaintenanceControlProcess.ShortName;
                 warranty = dd.Threshold.Warranty;
                 kitRequieredString = dd.Kits.Count > 0 ? dd.Kits.Count + " kits" : "";
@@ -503,17 +502,17 @@ namespace CAS.UI.UIControls.StoresControls
                 remarks = dd.Remarks;
                 hiddenRemarks = dd.HiddenRemarks;
                 workType = dd.DirectiveType.ToString();
-				position = dd.ParentComponent.TransferRecords.GetLast().State;
+				position = "    " + dd.ParentComponent.TransferRecords.GetLast()?.State?.ToString();
 				isPool = dd.IsPOOL;
 				IsDangerous = dd.IsDangerous;
-				partNumber = dd.ParentComponent.Product?.PartNumber ?? dd.ParentComponent.PartNumber;
-				altPartNumber = dd.ParentComponent.Product?.AltPartNumber ?? dd.ParentComponent.ALTPartNumber;
+				partNumber = "    " + (dd.ParentComponent.Product?.PartNumber ?? dd.ParentComponent.PartNumber);
+				altPartNumber = "    " +(dd.ParentComponent.Product?.AltPartNumber ?? dd.ParentComponent.ALTPartNumber);
 				standart = dd.ParentComponent.Product?.Standart?.ToString() ?? dd.ParentComponent.Standart?.ToString();
-				name = dd.ParentComponent.Product?.Name;
-				description = dd.ParentComponent.Description;
-				serialNumber = dd.ParentComponent.SerialNumber;
+				name = "    " + dd.ParentComponent.Product?.Name;
+				description = "    " + dd.ParentComponent.Description;
+				serialNumber = "    " + dd.ParentComponent.SerialNumber;
 				classString = dd.ParentComponent.GoodsClass.ToString();
-			}
+            }
             else
             {
                 ata = (AtaChapter)GlobalObjects.CasEnvironment.GetDictionary<AtaChapter>().GetItemById(21);

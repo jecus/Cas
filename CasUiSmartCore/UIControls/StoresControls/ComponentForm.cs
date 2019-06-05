@@ -103,10 +103,10 @@ namespace CAS.UI.UIControls.StoresControls
 
 			if (_consumablePart.ItemId > 0)
 			{
-				var documents = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<DocumentDTO, Document>(new[]
+				var documents = GlobalObjects.CasEnvironment.Loader.GetObjectList<Document>(new ICommonFilter[]
 				{
-					new Filter("ParentID",_consumablePart.ItemId),
-					new Filter("DocTypeId", DocumentType.StoreRecord.ItemId),
+					new CommonFilter<int>(Document.ParentIdProperty, _consumablePart.ItemId),
+					new CommonFilter<int>(Document.ParentTypeIdProperty, _consumablePart.SmartCoreObjectType.ItemId)
 				});
 
 				var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Component CRS Form") as DocumentSubType;
