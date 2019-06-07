@@ -112,7 +112,7 @@ namespace CAS.UI.UIControls.StoresControls
 				var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Component CRS Form") as DocumentSubType;
 				_consumablePart.DocumentFaa = documents.FirstOrDefault(i => i.DocumentSubType.ItemId == docSubType.ItemId);
 
-				docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Shipping document") as DocumentSubType;
+				docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Store Shipping document") as DocumentSubType;
 				_consumablePart.DocumentShipping = documents.FirstOrDefault(i => i.DocumentSubType.ItemId == docSubType.ItemId);
 
 			}
@@ -1248,7 +1248,7 @@ namespace CAS.UI.UIControls.StoresControls
 		private void DocumentControlShip_Added(object sender, EventArgs e)
 		{
 			var control = sender as DocumentControl;
-			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Shipping document") as DocumentSubType;
+			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Store Shipping document") as DocumentSubType;
 			var newDocument = new Document
 			{
 				Parent = _consumablePart,
