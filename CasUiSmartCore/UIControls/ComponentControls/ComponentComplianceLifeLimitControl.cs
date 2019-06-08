@@ -716,7 +716,7 @@ namespace CAS.UI.UIControls.ComponentControls
                
                 KitForm dlg = new KitForm((IKitRequired)d);
                 if (dlg.ShowDialog() == DialogResult.OK)
-                    textBoxKitRequired.Text = d.Kits.Count + " kits";
+                    textBoxKitRequired.Text = d.Kits.Count + " EA";
             }
         }
 		#endregion

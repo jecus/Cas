@@ -155,7 +155,7 @@ namespace SmartCore.Entities.Dictionaries
         /// <summary>
         /// 
         /// </summary>
-        public static SmartCoreType MaintenanceDirective = new SmartCoreType(14, "MPD", "AMP", typeof(MaintenanceDirective));
+        public static SmartCoreType MaintenanceDirective = new SmartCoreType(14, "MPD", "MPD", typeof(MaintenanceDirective));
         #endregion
 
         #region public static SmartCoreType Product = new SmartCoreType(1005, "Prod", "Product", typeof(Product));

@@ -892,10 +892,27 @@ namespace SmartCore.Calculations.PerformanceCalculator
 						}
 					}
 
+
+					if (directive is Entities.General.Accessory.Component)
+					{
+						np.WarrantlyRemains = new Lifelength(((Entities.General.Accessory.Component)directive).Warranty);
+						np.WarrantlyRemains.Substract(current); // remains = next - current
+
+						np.WarrantlyRemains.Resemble(np.LimitOverdue);
+					}
+					else if (directive is ComponentDirective)
+					{
+						np.WarrantlyRemains = new Lifelength(((ComponentDirective)directive).Threshold.Warranty);
+						np.WarrantlyRemains.Substract(current); // remains = next - current
+
+						np.WarrantlyRemains.Resemble(np.LimitOverdue);
+					}
+
 					//np.Remains = new Lifelength(np.LimitOverdue);
 					np.Remains = new Lifelength(np.PerformanceSource);
 					np.Remains.Substract(current); // remains = next - current
 
+					
 					np.Remains.Resemble(np.LimitOverdue);
 				}
 

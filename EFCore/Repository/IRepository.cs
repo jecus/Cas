@@ -35,6 +35,15 @@ namespace EFCore.Repository
 		int Save(T entity);
 
 		[OperationContract]
+		void BulkInsert(IEnumerable<T> entity, int? batchSize = null);
+
+		[OperationContract]
+		void BulkUpdate(IEnumerable<T> entity, int? batchSize = null);
+
+		[OperationContract]
+		void BulkDelete(IEnumerable<T> entity, int? batchSize = null);
+
+		[OperationContract]
 		void Delete(T entity);
 
 

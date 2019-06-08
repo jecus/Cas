@@ -1848,16 +1848,16 @@ namespace SmartCore.Component
 				ConnectComponentDirectivesWithComponents(components, directives);
 
 
-				if (directives.Count <= 0)
-					return;
-
-				var directivesIds = directives.Select(d => d.ItemId);
-				var itemsRelations = _itemsRelationsDataAccess.GetRelations(directivesIds, SmartCoreType.ComponentDirective.ItemId);
-
-				if (itemsRelations.Count > 0)
+				if (directives.Count > 0)
 				{
-					foreach (var componentDirective in directives)
-						componentDirective.ItemRelations.AddRange(itemsRelations.Where(i => i.FirstItemId == componentDirective.ItemId || i.SecondItemId == componentDirective.ItemId));//TODO:(Evgenii Babak)не использовать Where 
+					var directivesIds = directives.Select(d => d.ItemId);
+					var itemsRelations = _itemsRelationsDataAccess.GetRelations(directivesIds, SmartCoreType.ComponentDirective.ItemId);
+
+					if (itemsRelations.Count > 0)
+					{
+						foreach (var componentDirective in directives)
+							componentDirective.ItemRelations.AddRange(itemsRelations.Where(i => i.FirstItemId == componentDirective.ItemId || i.SecondItemId == componentDirective.ItemId));//TODO:(Evgenii Babak)не использовать Where 
+					}
 				}
 
 				var types = new[] {SmartCoreType.Component.ItemId, SmartCoreType.ComponentDirective.ItemId};
@@ -1959,6 +1959,8 @@ namespace SmartCore.Component
 
 			if (component == null)
 				return null;
+
+			component.Received = _loader.GetObject<Specialist>(component.ReceivedId);
 
 			var types = new[] {SmartCoreType.Component.ItemId, SmartCoreType.ComponentDirective.ItemId};
 			//Загрузка документов

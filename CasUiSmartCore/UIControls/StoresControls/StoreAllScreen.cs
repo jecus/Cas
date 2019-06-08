@@ -361,9 +361,12 @@ namespace CAS.UI.UIControls.StoresControls
 			#region Загрузка элементов
 
 	        _stores.AddRange(GlobalObjects.StoreCore.GetAllStores());
+	        //загрузка рабочих пакетов для определения 
+	        //перекрытых ими выполнений задач
+	        _openPubWorkPackages.AddRange(GlobalObjects.WorkPackageCore.GetWorkPackagesLite(CurrentAircraft, WorkPackageStatus.Opened));
+	        _openPubWorkPackages.AddRange(GlobalObjects.WorkPackageCore.GetWorkPackagesLite(CurrentAircraft, WorkPackageStatus.Published));
 
-
-	        ComponentCollection componentCollection = new ComponentCollection();
+			ComponentCollection componentCollection = new ComponentCollection();
 	        BaseComponentCollection baseComponentCollection = new BaseComponentCollection();
 
 			foreach (var currentStore in _stores)
@@ -607,10 +610,7 @@ namespace CAS.UI.UIControls.StoresControls
 
 				AnimatedThreadWorker.ReportProgress(90, "comparison with the Work Packages");
 
-				//загрузка рабочих пакетов для определения 
-				//перекрытых ими выполнений задач
-				_openPubWorkPackages.AddRange(GlobalObjects.WorkPackageCore.GetWorkPackagesLite(CurrentAircraft, WorkPackageStatus.Opened));
-				_openPubWorkPackages.AddRange(GlobalObjects.WorkPackageCore.GetWorkPackagesLite(CurrentAircraft, WorkPackageStatus.Published));
+				
 				//сбор всех записей рабочих пакетов для удобства фильтрации
 				List<WorkPackageRecord> openWPRecords = new List<WorkPackageRecord>();
 				foreach (WorkPackage openWorkPackage in _openPubWorkPackages)

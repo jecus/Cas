@@ -54,5 +54,11 @@ namespace EFCore.Attributte
 		[Description("Between")]
 		[EnumMember]
 		Between = 20,
+		// <summary>
+		/// Между 2-мя значениями
+		/// </summary>
+		[Description("Between")]
+		[EnumMember]
+		Contains = 21
 	}
 }

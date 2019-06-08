@@ -158,7 +158,7 @@ namespace SmartCore.Entities.General
         #region public override int GetHashCode()
         public override int GetHashCode()
         {
-            int itemTypeHash = SmartCoreObjectType.ItemId.GetHashCode();
+            int itemTypeHash = SmartCoreObjectType?.ItemId.GetHashCode() ?? -1;
             int itemIdHash = ItemId.GetHashCode();
 
             return itemTypeHash ^ itemIdHash;

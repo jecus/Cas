@@ -17,35 +17,32 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		#endregion
 
-		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		#region Overrides of BaseListViewControl<Product>
 
-		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
 		{
 			if (SelectedItem != null)
 			{
-				var dp = ScreenAndFormManager.GetEditScreenOrForm(SelectedItem);
-				if (dp.DisplayerType == DisplayerType.Screen)
-					e.SetParameters(dp);
-				else
+				var dp = ScreenAndFormManager.GetEditForm(SelectedItem);
+				if (dp.ShowDialog() == DialogResult.OK)
 				{
-					if (dp.Form.ShowDialog() == DialogResult.OK)
+					if (dp is ProductForm)
 					{
-						if (dp.Form is ProductForm)
-						{
-							var changedJob = ((ProductForm)dp.Form).CurrentProdcuct;
-							itemsListView.SelectedItems[0].Tag = changedJob;
+						var changedJob = ((ProductForm) dp).CurrentProdcuct;
+						itemsListView.SelectedItems[0].Tag = changedJob;
 
-							var subs = GetListViewSubItems(SelectedItem);
-							for (int i = 0; i < subs.Length; i++)
-								itemsListView.SelectedItems[0].SubItems[i].Text = subs[i].Text;
-						}
+						var subs = GetListViewSubItems(SelectedItem);
+						for (int i = 0; i < subs.Length; i++)
+							itemsListView.SelectedItems[0].SubItems[i].Text = subs[i].Text;
 					}
-
-					e.Cancel = true;
 				}
-			}
 
-			#endregion
+			}
+		}
+
+
+		#endregion
+
 		}
 	}
-}
+

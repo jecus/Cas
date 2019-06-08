@@ -4,9 +4,13 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using CAS.UI.ExcelExport;
+using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
+using EFCore.DTO.General;
+using EFCore.Filter;
 using MongoDB.Driver;
 using SmartCore.Activity;
 using SmartCore.AuditMongo.Repository;
@@ -14,6 +18,11 @@ using SmartCore.Entities;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Accessory;
+using SmartCore.Entities.General.Atlbs;
+using SmartCore.Entities.General.Directives;
+using SmartCore.Entities.General.MaintenanceWorkscope;
+using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;
 
 namespace CAS.UI.UIControls.Users
@@ -30,7 +39,8 @@ namespace CAS.UI.UIControls.Users
 		private ActivityListView _directivesViewer;
 
 		private CommonFilterCollection _filter;
-
+		private AnimatedThreadWorker _worker;
+		private ExcelExportProvider _exportProvider;
 
 		#endregion
 
@@ -123,13 +133,154 @@ namespace CAS.UI.UIControls.Users
 						Information = bsonElement.AdditionalParameters?.Count > 0 ? string.Join(",", bsonElement.AdditionalParameters.Select(i => i.Value.ToString())) : ""
 					});
 				}
+
+				AnimatedThreadWorker.ReportProgress(50 , "load Parents");
+				foreach (var obj in _initial.GroupBy(i => i.Type?.ItemId))
+				{
+					if (obj.Key == SmartCoreType.WorkPackage.ItemId)
+					{
+						var ids = obj.Select(i => i.ObjectId);
+						var wps = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<WorkPackageDTO, WorkPackage>(new Filter("ItemId", ids), getDeleted:true);
+						foreach (var dto in obj)
+						{
+							var wp = wps.FirstOrDefault(i => i.ItemId == dto.ObjectId);
+							if(wp == null)
+								continue;
+							dto.Aircraft = GlobalObjects.AircraftsCore.GetAircraftById(wp.ParentId);
+							dto.Title = wp.Title;
+						}
+					}
+					else if (obj.Key == SmartCoreType.WorkPackageRecord.ItemId)
+					{
+						var ids = obj.Select(i => i.ObjectId);
+						var wpr = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<WorkPackageRecordDTO, WorkPackageRecord>(new Filter("ItemId", ids), getDeleted: true);
+						var wpIds = wpr.Select(i => i.WorkPakageId);
+						var wps = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<WorkPackageDTO, WorkPackage>(new Filter("ItemId", wpIds), getDeleted: true);
+						foreach (var dto in obj)
+						{
+							var wp = wps.FirstOrDefault(i => i.ItemId == dto.ObjectId);
+							if (wp == null)
+								continue;
+							dto.Aircraft = GlobalObjects.AircraftsCore.GetAircraftById(wp.ParentId);
+							dto.Title = wp.Title;
+						}
+					}
+					else if (obj.Key == SmartCoreType.MaintenanceDirective.ItemId)
+					{
+						var ids = obj.Select(i => i.ObjectId);
+						var mpds = GlobalObjects.CasEnvironment.Loader.GetObjectList<MaintenanceDirective>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), getDeleted: true);
+						foreach (var dto in obj)
+						{
+							var mpd = mpds.FirstOrDefault(i => i.ItemId == dto.ObjectId);
+							if (mpd == null)
+								continue;
+							dto.Aircraft = GlobalObjects.AircraftsCore.GetAircraftById(mpd.ParentBaseComponent.ParentAircraftId);
+							dto.Title = mpd.Title;
+						}
+					}
+					else if (obj.Key == SmartCoreType.Directive.ItemId)
+					{
+						var ids = obj.Select(i => i.ObjectId);
+						var directives = GlobalObjects.CasEnvironment.Loader.GetObjectList<Directive>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), getDeleted: true);
+						foreach (var dto in obj)
+						{
+							var directive = directives.FirstOrDefault(i => i.ItemId == dto.ObjectId);
+							if (directive == null)
+								continue;
+							dto.Aircraft = GlobalObjects.AircraftsCore.GetAircraftById(directive.ParentBaseComponent.ParentAircraftId);
+							dto.Title = directive.Title;
+						}
+					}
+					else if (obj.Key == SmartCoreType.DirectiveRecord.ItemId)
+					{
+						var ids = obj.Select(i => i.ObjectId);
+						var directiveRecords = GlobalObjects.CasEnvironment.Loader.GetObjectList<DirectiveRecord>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), getDeleted: true);
+						var directiveIds = directiveRecords.Select(i => i.ParentId);
+						var directives = GlobalObjects.CasEnvironment.Loader.GetObjectList<Directive>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, directiveIds.ToArray()), getDeleted: true);
+						foreach (var dto in obj)
+						{
+							var directive = directives.FirstOrDefault(i => i.ItemId == dto.ObjectId);
+							if (directive == null)
+								continue;
+							dto.Aircraft = GlobalObjects.AircraftsCore.GetAircraftById(directive.ParentBaseComponent.ParentAircraftId);
+							dto.Title = directive.Title;
+						}
+					}
+					else if (obj.Key == SmartCoreType.BaseComponent.ItemId)
+					{
+						var ids = obj.Select(i => i.ObjectId);
+						var baseComponents = GlobalObjects.CasEnvironment.Loader.GetObjectList<BaseComponent>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), getDeleted: true);
+						foreach (var dto in obj)
+						{
+							var baseComponent = baseComponents.FirstOrDefault(i => i.ItemId == dto.ObjectId);
+							if (baseComponent == null)
+								continue;
+							dto.Aircraft = GlobalObjects.AircraftsCore.GetAircraftById(baseComponent.ParentAircraftId);
+							dto.Title = baseComponent.SerialNumber;
+						}
+					}
+					else if (obj.Key == SmartCoreType.Component.ItemId)
+					{
+						var ids = obj.Select(i => i.ObjectId);
+						var components = GlobalObjects.CasEnvironment.Loader.GetObjectList<SmartCore.Entities.General.Accessory.Component>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), getDeleted: true);
+						foreach (var dto in obj)
+						{
+							var component = components.FirstOrDefault(i => i.ItemId == dto.ObjectId);
+							if (component == null)
+								continue;
+							dto.Aircraft = GlobalObjects.AircraftsCore.GetAircraftById(component.ParentAircraftId);
+							dto.Title = component.SerialNumber;
+						}
+					}
+					else if (obj.Key == SmartCoreType.ComponentDirective.ItemId)
+					{
+						var ids = obj.Select(i => i.ObjectId);
+						var componentDirectives = GlobalObjects.CasEnvironment.Loader.GetObjectList<ComponentDirective>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), getDeleted: true);
+						var componentIds = componentDirectives.Select(i => i.ComponentId);
+						var components = GlobalObjects.CasEnvironment.Loader.GetObjectList<SmartCore.Entities.General.Accessory.Component>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, componentIds.ToArray()), getDeleted: true);
+						foreach (var dto in obj)
+						{
+							var component = components.FirstOrDefault(i => i.ItemId == dto.ObjectId);
+							if (component == null)
+								continue;
+							dto.Aircraft = GlobalObjects.AircraftsCore.GetAircraftById(component.ParentAircraftId);
+							dto.Title = component.SerialNumber;
+						}
+					}
+					else if (obj.Key == SmartCoreType.AircraftFlight.ItemId)
+					{
+						var ids = obj.Select(i => i.ObjectId);
+						var flights = GlobalObjects.CasEnvironment.Loader.GetObjectList<AircraftFlight>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), getDeleted: true);
+						foreach (var dto in obj)
+						{
+							var flight = flights.FirstOrDefault(i => i.ItemId == dto.ObjectId);
+							if (flight == null)
+								continue;
+							dto.Aircraft = GlobalObjects.AircraftsCore.GetAircraftById(flight.AircraftId);
+							dto.Title = flight.ToString();
+						}
+					}
+					else if (obj.Key == SmartCoreType.Discrepancy.ItemId)
+					{
+						var ids = obj.Select(i => i.ObjectId);
+						var discrepancies = GlobalObjects.CasEnvironment.Loader.GetObjectList<Discrepancy>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), getDeleted: true);
+						var flIds = discrepancies.Select(i => i.FlightId);
+						var flights = GlobalObjects.CasEnvironment.Loader.GetObjectList<AircraftFlight>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, flIds.ToArray()), getDeleted: true);
+						foreach (var dto in obj)
+						{
+							var flight = flights.FirstOrDefault(i => i.ItemId == dto.ObjectId);
+							if (flight == null)
+								continue;
+							dto.Aircraft = GlobalObjects.AircraftsCore.GetAircraftById(flight.AircraftId);
+							dto.Title = flight.ToString();
+						}
+					}
+				}
 			}
 			catch(Exception ex)
 			{
 				Program.Provider.Logger.Log("Error while load documents", ex);
 			}
-
-			AnimatedThreadWorker.ReportProgress(20, "calculation documents");
 
 			AnimatedThreadWorker.ReportProgress(70, "filter documents");
 			FilterItems(_initial, _result);
@@ -258,6 +409,38 @@ namespace CAS.UI.UIControls.Users
 		}
 
 		#endregion
+
+		private void ExportActivity_Click(object sender, EventArgs eventArgs)
+		{
+			_worker = new AnimatedThreadWorker();
+			_worker.DoWork += ExportActivityWork;
+			_worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+			_worker.RunWorkerAsync();
+		}
+
+		private void ExportActivityWork(object sender, DoWorkEventArgs e)
+		{
+			_worker.ReportProgress(0, "load Activity");
+			_worker.ReportProgress(0, "Generate file! Please wait....");
+
+			_exportProvider = new ExcelExportProvider();
+			_exportProvider.ExportActivity(_result.ToList());
+		}
+
+		private void Worker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+		{
+			var sfd = new SaveFileDialog();
+			sfd.Filter = ".xlsx Files (*.xlsx)|*.xlsx";
+
+			if (sfd.ShowDialog() == DialogResult.OK)
+			{
+				_exportProvider.SaveTo(sfd.FileName);
+				MessageBox.Show("File was success saved!");
+			}
+
+			_exportProvider.Dispose();
+		}
+
 
 		#endregion
 

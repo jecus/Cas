@@ -1,5 +1,6 @@
 using System;
 using System.Media;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Auxiliary;
 using CAS.UI.Management;
@@ -32,7 +33,7 @@ namespace CAS.UI
             dispatcheredMultitabControl.InactiveBottomColor = Css.CommonAppearance.Colors.BackColor;
             dispatcheredMultitabControl.BackColor = Css.CommonAppearance.Colors.BackColor;
             Text = new GlobalTermsProvider()["SystemName"].ToString(); //+ ". Licensed to " + LicenseManager.LicensedTo + ". Expiry Date " + LicenseManager.ExpiryDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
-            
+            DoubleBuffered = true;
 #if DEBUG
             find = new FindForm(this);
             find.Show();
@@ -113,8 +114,8 @@ namespace CAS.UI
 
         #region public static extern bool FlashWindow(IntPtr hWnd, bool bInvert);
 
-        //[DllImport("user32.dll")]
-        //public static extern bool FlashWindow(IntPtr hWnd, bool bInvert);
+        [DllImport("user32.dll")]
+        public static extern bool FlashWindow(IntPtr hWnd, bool bInvert);
 
         #endregion
 

@@ -15,9 +15,8 @@ namespace CAS.UI.UIControls.StoresControls
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            dictionaryComboProduct.SelectedIndexChanged -= DictionaryComboProductSelectedIndexChanged;
 
-            if (disposing && (components != null))
+	        if (disposing && (components != null))
             {
                 components.Dispose();
             }
@@ -37,7 +36,6 @@ namespace CAS.UI.UIControls.StoresControls
 			this.textBoxDescription = new MetroFramework.Controls.MetroTextBox();
 			this.buttonOK = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
-			this.dictionaryComboProduct = new CAS.UI.UIControls.Auxiliary.LookupCombobox();
 			this.labelPartNumber = new MetroFramework.Controls.MetroLabel();
 			this.labelDescription = new MetroFramework.Controls.MetroLabel();
 			this.labelProduct = new MetroFramework.Controls.MetroLabel();
@@ -49,6 +47,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.numericUpDownQuantity = new System.Windows.Forms.NumericUpDown();
 			this.textBoxStandart = new MetroFramework.Controls.MetroTextBox();
 			this.labelStandart = new MetroFramework.Controls.MetroLabel();
+			this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -145,22 +144,6 @@ namespace CAS.UI.UIControls.StoresControls
 			this.buttonCancel.TabIndex = 11;
 			this.buttonCancel.Text = "Cancel";
 			this.buttonCancel.Click += new System.EventHandler(this.ButtonCancelClick);
-			// 
-			// dictionaryComboProduct
-			// 
-			this.dictionaryComboProduct.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.dictionaryComboProduct.Displayer = null;
-			this.dictionaryComboProduct.DisplayerText = null;
-			this.dictionaryComboProduct.Entity = null;
-			this.dictionaryComboProduct.Location = new System.Drawing.Point(100, 64);
-			this.dictionaryComboProduct.Margin = new System.Windows.Forms.Padding(4);
-			this.dictionaryComboProduct.Name = "dictionaryComboProduct";
-			this.dictionaryComboProduct.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.dictionaryComboProduct.Size = new System.Drawing.Size(324, 21);
-			this.dictionaryComboProduct.TabIndex = 5;
-			this.dictionaryComboProduct.Type = null;
-			this.dictionaryComboProduct.SelectedIndexChanged += new System.EventHandler(this.DictionaryComboProductSelectedIndexChanged);
 			// 
 			// labelPartNumber
 			// 
@@ -299,6 +282,39 @@ namespace CAS.UI.UIControls.StoresControls
 			this.labelStandart.Text = "Standard:";
 			this.labelStandart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// metroTextBox1
+			// 
+			this.metroTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			// 
+			// 
+			// 
+			this.metroTextBox1.CustomButton.Image = null;
+			this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(307, 2);
+			this.metroTextBox1.CustomButton.Name = "";
+			this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.metroTextBox1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.metroTextBox1.CustomButton.TabIndex = 1;
+			this.metroTextBox1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.metroTextBox1.CustomButton.UseSelectable = true;
+			this.metroTextBox1.CustomButton.Visible = false;
+			this.metroTextBox1.Lines = new string[0];
+			this.metroTextBox1.Location = new System.Drawing.Point(100, 66);
+			this.metroTextBox1.MaxLength = 128;
+			this.metroTextBox1.Name = "metroTextBox1";
+			this.metroTextBox1.PasswordChar = '\0';
+			this.metroTextBox1.ReadOnly = true;
+			this.metroTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.metroTextBox1.SelectedText = "";
+			this.metroTextBox1.SelectionLength = 0;
+			this.metroTextBox1.SelectionStart = 0;
+			this.metroTextBox1.ShortcutsEnabled = true;
+			this.metroTextBox1.Size = new System.Drawing.Size(325, 20);
+			this.metroTextBox1.TabIndex = 89;
+			this.metroTextBox1.UseSelectable = true;
+			this.metroTextBox1.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.metroTextBox1.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+			// 
 			// StockComponentInfoForm
 			// 
 			this.AcceptButton = this.buttonOK;
@@ -306,6 +322,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.buttonCancel;
 			this.ClientSize = new System.Drawing.Size(434, 340);
+			this.Controls.Add(this.metroTextBox1);
 			this.Controls.Add(this.textBoxStandart);
 			this.Controls.Add(this.labelStandart);
 			this.Controls.Add(this.numericUpDownQuantity);
@@ -317,7 +334,6 @@ namespace CAS.UI.UIControls.StoresControls
 			this.Controls.Add(this.labelProduct);
 			this.Controls.Add(this.labelDescription);
 			this.Controls.Add(this.labelPartNumber);
-			this.Controls.Add(this.dictionaryComboProduct);
 			this.Controls.Add(this.buttonOK);
 			this.Controls.Add(this.buttonCancel);
 			this.Controls.Add(this.textBoxDescription);
@@ -342,7 +358,6 @@ namespace CAS.UI.UIControls.StoresControls
         private MetroTextBox textBoxDescription;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonCancel;
-        private Auxiliary.LookupCombobox dictionaryComboProduct;
         private MetroLabel labelPartNumber;
         private MetroLabel labelDescription;
         private MetroLabel labelProduct;
@@ -354,5 +369,6 @@ namespace CAS.UI.UIControls.StoresControls
         private System.Windows.Forms.NumericUpDown numericUpDownQuantity;
         private MetroTextBox textBoxStandart;
         private MetroLabel labelStandart;
-    }
+		private MetroTextBox metroTextBox1;
+	}
 }

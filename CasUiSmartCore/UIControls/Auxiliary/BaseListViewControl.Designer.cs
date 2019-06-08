@@ -76,6 +76,7 @@ namespace CAS.UI.UIControls.Auxiliary
             // itemsListView
             // 
             this.itemsListView.AllowColumnReorder = true;
+            this.itemsListView.CheckBoxes = false;
             this.itemsListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemsListView.Font = new System.Drawing.Font("Verdana", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
             this.itemsListView.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));

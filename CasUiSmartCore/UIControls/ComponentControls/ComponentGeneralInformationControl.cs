@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.Helpers;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary.Events;
 using CAS.UI.UIControls.DocumentationControls;
+using CAS.UI.UIControls.ProductControls;
+using CAS.UI.UIControls.PurchaseControls;
 using CASTerms;
+using EFCore.DTO.General;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
@@ -17,6 +21,7 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
+using SmartCore.Entities.General.Personnel;
 using SmartCore.Entities.General.Store;
 using SmartCore.Purchase;
 using Component = SmartCore.Entities.General.Accessory.Component;
@@ -35,6 +40,7 @@ namespace CAS.UI.UIControls.ComponentControls
         private bool _isStore;
 		private ProductCost _productCost;
 	    private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
+		private List<Specialist> _specialists = new List<Specialist>();
 
 		#endregion
 
@@ -51,24 +57,7 @@ namespace CAS.UI.UIControls.ComponentControls
 
         #endregion
 
-        #region public DetailGeneralInformationControl(AbstractDetail currentDetail)
-
-        /// <summary>
-        /// Создает экземпляр отображатора информации об агрегате
-        /// </summary>
-        /// <param name="currentComponentгрегат</param>
-        public ComponentGeneralInformationControl(Component currentComponent) : this()
-        {
-            if (null == currentComponent)
-                throw new ArgumentNullException("currentComponent", "Argument cannot be null");
-            _currentComponent = currentComponent;
-            _isStore = GlobalObjects.StoreCore.GetStoreById(currentComponent.ParentStoreId) != null;
-			UpdateControl();
-            UpdateInformation();
-        }
-
-        #endregion
-
+        
         #endregion
 
         #region Propeties
@@ -82,6 +71,8 @@ namespace CAS.UI.UIControls.ComponentControls
             {
                 _currentComponent = value;
                 _isStore = GlobalObjects.StoreCore.GetStoreById(value.ParentStoreId) != null || value.ParentSupplierId > 0 || value.ParentSpecialistId > 0;
+                Task.Run(() => DoWork())
+	                .ContinueWith(task => Complete(), TaskScheduler.FromCurrentSynchronizationContext());
 				UpdateControl();
                 UpdateInformation();
             }
@@ -285,22 +276,6 @@ namespace CAS.UI.UIControls.ComponentControls
                         radioButtonRLG.Checked = true;
                         break;
                 }
-            }
-        }
-
-        #endregion
-
-        #region private DetailModel Model
-
-        /// <summary>
-        /// Отображаемая модель
-        /// </summary>
-        private ComponentModel Model
-        {
-            get { return comboBoxModel.SelectedItem as ComponentModel; }
-            set
-            {
-                comboBoxModel.SelectedItem = value;
             }
         }
 
@@ -657,6 +632,24 @@ namespace CAS.UI.UIControls.ComponentControls
 
 		#region Methods
 
+		#region DoWork
+
+		private void Complete()
+		{
+			comboBoxReceived.Items.Clear();
+			comboBoxReceived.Items.AddRange(_specialists.ToArray());
+			comboBoxReceived.Items.Add(Specialist.Unknown);
+			comboBoxReceived.SelectedItem = _currentComponent.Received;
+		}
+
+		private void DoWork()
+		{
+			_specialists.Clear();
+			_specialists.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<SpecialistDTO, Specialist>());
+		}
+
+		#endregion
+
 		#region public bool GetChangeStatus()
 		/// <summary>
 		/// Возвращает значение, показывающее были ли изменения в данном элементе управления
@@ -677,7 +670,6 @@ namespace CAS.UI.UIControls.ComponentControls
                     ComponentLocation.ItemId != _currentComponent.Location.ItemId ||
                     Description != _currentComponent.Description ||
                     LandingGearMark != _currentComponent.LandingGear ||
-                    Model != _currentComponent.Model ||
                     MaintenanceType != _currentComponent.MaintenanceControlProcess ||
                     ComponentStatus != _currentComponent.ComponentStatus ||
                     Manufacturer != _currentComponent.Manufacturer ||
@@ -890,8 +882,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			if (_currentComponent == null)
                 throw new ArgumentNullException("_current" + "Detail");
 
-            comboBoxModel.Type = typeof(ComponentModel);
-            Program.MainDispatcher.ProcessControl(comboBoxModel);
 
 	        if (_currentComponent.PartNumber.EndsWith("Copy"))
 		        _currentComponent.PartNumber = _currentComponent.PartNumber.Replace("Copy", "");
@@ -903,7 +893,6 @@ namespace CAS.UI.UIControls.ComponentControls
             IdNumber = _currentComponent.IdNumber;
             ATAChapter = _currentComponent.ATAChapter;
             Description = _currentComponent.Model != null ? _currentComponent.Model.Description : _currentComponent.Description;
-            Model = _currentComponent.Model;
             MaintenanceType = _currentComponent.MaintenanceControlProcess;
             ComponentStatus = _currentComponent.ComponentStatus;
             Manufacturer = _currentComponent.Manufacturer;
@@ -1070,7 +1059,9 @@ namespace CAS.UI.UIControls.ComponentControls
             }
 
 
-	        radioButtonA.CheckedChanged += radioButton_CheckedChanged;
+            UpdateByModel(_currentComponent.Model);
+
+			radioButtonA.CheckedChanged += radioButton_CheckedChanged;
 	        radioButtonB.CheckedChanged += radioButton_CheckedChanged;
 	        radioButtonC.CheckedChanged += radioButton_CheckedChanged;
 	        radioButtonD.CheckedChanged += radioButton_CheckedChanged;
@@ -1157,7 +1148,6 @@ namespace CAS.UI.UIControls.ComponentControls
 		    component.IdNumber = IdNumber;
 		    component.Description = Description;
 		    component.LandingGear = LandingGearMark;
-		    component.Model = Model;
 		    component.MaintenanceControlProcess = MaintenanceType;
 		    component.ComponentStatus = ComponentStatus;
 		    component.Manufacturer = Manufacturer;
@@ -1175,7 +1165,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		    component.Discrepancy = Discrepancy;
 			component.FromSupplier = comboBoxSupplier.SelectedItem as Supplier;
 		    component.FromSupplierReciveDate = dateTimePickerReciveDate.Value;
-
+		    component.ReceivedId = ((Specialist) comboBoxReceived.SelectedItem).ItemId; 
 			fileControlShipping.ApplyChanges();
 			component.IncomingFile = fileControlShipping.AttachedFile;
 
@@ -1494,17 +1484,17 @@ namespace CAS.UI.UIControls.ComponentControls
         #endregion
 
         #region private void DictionaryComboProductSelectedIndexChanged(object sender, EventArgs e)
-        private void DictionaryComboProductSelectedIndexChanged(object sender, EventArgs e)
+        private void UpdateByModel(ComponentModel model)
         {
-            //comboBoxStandart.SelectedIndexChanged -= ComboBoxStandartSelectedIndexChanged;
+			linkLabel1.Enabled = model != null;
 
-            ComponentModel accessoryDescription;
-            if ((accessoryDescription = comboBoxModel.SelectedItem as ComponentModel) != null)
+            if (model != null)
             {
-	            if (accessoryDescription.ImageFile?.FileSize != null)
+	            textBoxModel.Text = model.ToString();
+				if (model.ImageFile?.FileSize != null)
 	            {
 		            fileControlImage.Enabled = true;
-		            fileControlImage.UpdateInfo(accessoryDescription.ImageFile,
+		            fileControlImage.UpdateInfo(model.ImageFile,
 			            "Image Files|*.jpg;*.jpeg;*.png",
 			            "This record does not contain a image. Enclose Image file to prove the compliance.",
 			            "Attached file proves the Image.");
@@ -1516,30 +1506,28 @@ namespace CAS.UI.UIControls.ComponentControls
 		            fileControlImage.Enabled = false;
 	            }
 
-				UpdateSupplier(accessoryDescription);
+				UpdateSupplier(model);
 
-				if (_productCost != null && _productCost.KitId == accessoryDescription.ItemId)
+				if (_productCost != null && _productCost.KitId == model.ItemId)
 					dataGridViewControlSuppliers.SetItemsArray((ICommonCollection) _currentComponent.ProductCosts);
 				else ResetProductCost();
 
-				comboBoxComponentType.SelectedItem = accessoryDescription.GoodsClass;
-	            checkBoxDangerous.Checked = accessoryDescription.IsDangerous;
+				comboBoxComponentType.SelectedItem = model.GoodsClass;
+	            checkBoxDangerous.Checked = model.IsDangerous;
 
                 comboBoxComponentType.Enabled = false;
-                comboBoxAtaChapter.ATAChapter = accessoryDescription.ATAChapter;
+                comboBoxAtaChapter.ATAChapter = model.ATAChapter;
                 comboBoxAtaChapter.Enabled = false;
                 textBoxPartNo.ReadOnly = true;
                 textBoxDescription.ReadOnly = true;
 				textBoxProductCode.ReadOnly = true;
 
 
-				textBoxPartNo.Text = accessoryDescription.PartNumber;
-				textBoxAltPartNum.Text = accessoryDescription.AltPartNumber;
-                textBoxDescription.Text = accessoryDescription.Description;
-                textBoxProductCode.Text = accessoryDescription.Code;
-                textBoxManufacturer.Text = accessoryDescription.Manufacturer;
-                //dataGridViewControlSuppliers.SetItemsArray(accessoryDescription.SupplierRelations);
-                //textBoxRemarks.Text = accessoryDescription.Remarks;
+				textBoxPartNo.Text = model.PartNumber;
+				textBoxAltPartNum.Text = model.AltPartNumber;
+                textBoxDescription.Text = model.Description;
+                textBoxProductCode.Text = model.Code;
+                textBoxManufacturer.Text = model.Manufacturer;
             }
             else
             {
@@ -1550,19 +1538,11 @@ namespace CAS.UI.UIControls.ComponentControls
 
 				comboBoxComponentType.Enabled = true;
                 comboBoxAtaChapter.Enabled = true;
-                //comboBoxMeasure.Enabled = true;
-                //comboBoxStandart.Enabled = true;
                 textBoxPartNo.ReadOnly = false;
                 textBoxDescription.ReadOnly = false;
                 textBoxProductCode.ReadOnly = false;
-                //dataGridViewControlSuppliers.ReadOnly = false;
-                //textBoxRemarks.ReadOnly = false;
-                //numericCostNew.ReadOnly = false;
-                //numericCostServiceable.ReadOnly = false;
-                //numericCostOverhaul.ReadOnly = false;
             }
 
-            //comboBoxStandart.SelectedIndexChanged += ComboBoxStandartSelectedIndexChanged;
         }
 		#endregion
 
@@ -1809,6 +1789,26 @@ namespace CAS.UI.UIControls.ComponentControls
 			lifelengthViewerStart.Lifelength = _currentComponent.StartLifelength;
 
 			dateTimePickerStart.ValueChanged += dateTimePickerStart_ValueChanged;
+		}
+
+		private void LinkLabelEditComponents_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			var form = new ModelBindForm(_currentComponent);
+			if (form.ShowDialog() == DialogResult.OK)
+				UpdateByModel(_currentComponent.Model);
+		}
+
+		private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			var form = new ModelForm(_currentComponent.Model);
+			if (form.ShowDialog() == DialogResult.OK)
+				UpdateByModel(_currentComponent.Model);
+		}
+
+		private void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			_currentComponent.Model = null;
+			UpdateByModel(_currentComponent.Model);
 		}
 	}
 }

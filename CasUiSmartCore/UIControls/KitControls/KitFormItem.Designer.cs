@@ -16,8 +16,7 @@ namespace CAS.UI.UIControls.KitControls
         /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
         protected override void Dispose(bool disposing)
         {
-            comboBoxProduct.SelectedIndexChanged -= DictComboDescriptionSelectedIndexChanged;
-            comboBoxStandart.SelectedIndexChanged -= ComboBoxStandartSelectedIndexChanged;
+	        comboBoxStandart.SelectedIndexChanged -= ComboBoxStandartSelectedIndexChanged;
 
             if (disposing && (components != null))
             {
@@ -34,7 +33,6 @@ namespace CAS.UI.UIControls.KitControls
         /// </summary>
         private void InitializeComponent()
         {
-	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.labelPartNumber = new System.Windows.Forms.Label();
 			this.textBoxPartNumber = new System.Windows.Forms.TextBox();
 			this.labelDescription = new System.Windows.Forms.Label();
@@ -52,8 +50,11 @@ namespace CAS.UI.UIControls.KitControls
 			this.labelStandart = new System.Windows.Forms.Label();
 			this.labelReference = new System.Windows.Forms.Label();
 			this.textBoxReference = new System.Windows.Forms.TextBox();
-			this.comboBoxProduct = new CAS.UI.UIControls.Auxiliary.LookupCombobox();
 			this.comboBoxStandart = new CAS.UI.UIControls.Auxiliary.LookupCombobox();
+			this.TextBoxProduct = new MetroFramework.Controls.MetroTextBox();
+			this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+			this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+			this.linkLabelEditComponents = new System.Windows.Forms.LinkLabel();
 			((System.ComponentModel.ISupportInitialize)(this.numericCount)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -166,7 +167,7 @@ namespace CAS.UI.UIControls.KitControls
 			this.ButtonDelete.IconLayout = System.Windows.Forms.ImageLayout.Center;
 			this.ButtonDelete.IconNotEnabled = null;
 			this.ButtonDelete.Location = new System.Drawing.Point(478, 290);
-			this.ButtonDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.ButtonDelete.Margin = new System.Windows.Forms.Padding(4);
 			this.ButtonDelete.Name = "ButtonDelete";
 			this.ButtonDelete.NormalBackgroundImage = null;
 			this.ButtonDelete.PaddingMain = new System.Windows.Forms.Padding(0);
@@ -180,7 +181,6 @@ namespace CAS.UI.UIControls.KitControls
 			this.ButtonDelete.TextSecondary = "";
 			this.ButtonDelete.ToolTipText = "";
 			this.ButtonDelete.Click += new System.EventHandler(this.ButtonDeleteClick);
-			this.ButtonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
 			// comboBoxDetailClass
 			// 
@@ -250,7 +250,7 @@ namespace CAS.UI.UIControls.KitControls
 			this.labelStandart.Text = "Standard:";
 			this.labelStandart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// labelManufacturer
+			// labelReference
 			// 
 			this.labelReference.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelReference.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
@@ -261,7 +261,7 @@ namespace CAS.UI.UIControls.KitControls
 			this.labelReference.Text = "Reference:";
 			this.labelReference.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// textBoxManufacturer
+			// textBoxReference
 			// 
 			this.textBoxReference.BackColor = System.Drawing.Color.White;
 			this.textBoxReference.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -271,19 +271,6 @@ namespace CAS.UI.UIControls.KitControls
 			this.textBoxReference.Name = "textBoxReference";
 			this.textBoxReference.Size = new System.Drawing.Size(438, 22);
 			this.textBoxReference.TabIndex = 10;
-			// 
-			// comboBoxProduct
-			// 
-			this.comboBoxProduct.Displayer = null;
-			this.comboBoxProduct.DisplayerText = null;
-			this.comboBoxProduct.Entity = null;
-			this.comboBoxProduct.Location = new System.Drawing.Point(114, 2);
-			this.comboBoxProduct.Name = "comboBoxProduct";
-			this.comboBoxProduct.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.comboBoxProduct.Size = new System.Drawing.Size(435, 21);
-			this.comboBoxProduct.TabIndex = 0;
-			this.comboBoxProduct.Type = null;
-			this.comboBoxProduct.SelectedIndexChanged += new System.EventHandler(this.DictComboDescriptionSelectedIndexChanged);
 			// 
 			// comboBoxStandart
 			// 
@@ -298,13 +285,91 @@ namespace CAS.UI.UIControls.KitControls
 			this.comboBoxStandart.Type = null;
 			this.comboBoxStandart.SelectedIndexChanged += new System.EventHandler(this.ComboBoxStandartSelectedIndexChanged);
 			// 
+			// TextBoxProduct
+			// 
+			this.TextBoxProduct.BackColor = System.Drawing.Color.White;
+			// 
+			// 
+			// 
+			this.TextBoxProduct.CustomButton.Image = null;
+			this.TextBoxProduct.CustomButton.Location = new System.Drawing.Point(264, 2);
+			this.TextBoxProduct.CustomButton.Name = "";
+			this.TextBoxProduct.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.TextBoxProduct.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.TextBoxProduct.CustomButton.TabIndex = 1;
+			this.TextBoxProduct.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.TextBoxProduct.CustomButton.UseSelectable = true;
+			this.TextBoxProduct.CustomButton.Visible = false;
+			this.TextBoxProduct.Enabled = false;
+			this.TextBoxProduct.ForeColor = System.Drawing.Color.Black;
+			this.TextBoxProduct.Lines = new string[0];
+			this.TextBoxProduct.Location = new System.Drawing.Point(114, 5);
+			this.TextBoxProduct.MaxLength = 128;
+			this.TextBoxProduct.Name = "TextBoxProduct";
+			this.TextBoxProduct.PasswordChar = '\0';
+			this.TextBoxProduct.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.TextBoxProduct.SelectedText = "";
+			this.TextBoxProduct.SelectionLength = 0;
+			this.TextBoxProduct.SelectionStart = 0;
+			this.TextBoxProduct.ShortcutsEnabled = true;
+			this.TextBoxProduct.Size = new System.Drawing.Size(294, 20);
+			this.TextBoxProduct.TabIndex = 193;
+			this.TextBoxProduct.UseSelectable = true;
+			this.TextBoxProduct.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.TextBoxProduct.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+			// 
+			// linkLabel2
+			// 
+			this.linkLabel2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.linkLabel2.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.linkLabel2.Location = new System.Drawing.Point(498, 3);
+			this.linkLabel2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.linkLabel2.Name = "linkLabel2";
+			this.linkLabel2.Size = new System.Drawing.Size(50, 23);
+			this.linkLabel2.TabIndex = 197;
+			this.linkLabel2.TabStop = true;
+			this.linkLabel2.Text = "Clear";
+			this.linkLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel2_LinkClicked);
+			// 
+			// linkLabel1
+			// 
+			this.linkLabel1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.linkLabel1.Location = new System.Drawing.Point(460, 3);
+			this.linkLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.linkLabel1.Name = "linkLabel1";
+			this.linkLabel1.Size = new System.Drawing.Size(37, 23);
+			this.linkLabel1.TabIndex = 196;
+			this.linkLabel1.TabStop = true;
+			this.linkLabel1.Text = "Edit";
+			this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
+			// 
+			// linkLabelEditComponents
+			// 
+			this.linkLabelEditComponents.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.linkLabelEditComponents.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.linkLabelEditComponents.Location = new System.Drawing.Point(410, 3);
+			this.linkLabelEditComponents.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.linkLabelEditComponents.Name = "linkLabelEditComponents";
+			this.linkLabelEditComponents.Size = new System.Drawing.Size(48, 23);
+			this.linkLabelEditComponents.TabIndex = 195;
+			this.linkLabelEditComponents.TabStop = true;
+			this.linkLabelEditComponents.Text = "Bind";
+			this.linkLabelEditComponents.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.linkLabelEditComponents.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelEditComponents_LinkClicked);
+			// 
 			// KitFormItem
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
+			this.Controls.Add(this.linkLabel2);
+			this.Controls.Add(this.linkLabel1);
+			this.Controls.Add(this.linkLabelEditComponents);
+			this.Controls.Add(this.TextBoxProduct);
 			this.Controls.Add(this.comboBoxStandart);
-			this.Controls.Add(this.comboBoxProduct);
 			this.Controls.Add(this.labelReference);
 			this.Controls.Add(this.textBoxReference);
 			this.Controls.Add(this.labelStandart);
@@ -349,7 +414,10 @@ namespace CAS.UI.UIControls.KitControls
         private System.Windows.Forms.Label labelStandart;
         private System.Windows.Forms.Label labelReference;
         private System.Windows.Forms.TextBox textBoxReference;
-        private Auxiliary.LookupCombobox comboBoxProduct;
         private Auxiliary.LookupCombobox comboBoxStandart;
-    }
+		private MetroFramework.Controls.MetroTextBox TextBoxProduct;
+		private System.Windows.Forms.LinkLabel linkLabel2;
+		private System.Windows.Forms.LinkLabel linkLabel1;
+		private System.Windows.Forms.LinkLabel linkLabelEditComponents;
+	}
 }

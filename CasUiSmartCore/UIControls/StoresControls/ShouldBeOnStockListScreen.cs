@@ -147,10 +147,10 @@ namespace CAS.UI.UIControls.StoresControls
 
         protected override void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
         {
-            StockComponentInfoForm form = new StockComponentInfoForm(new StockComponentInfo(CurrentStore));
+            //StockComponentInfoForm form = new StockComponentInfoForm(new StockComponentInfo(CurrentStore));
 
-            if (form.ShowDialog() == DialogResult.OK)
-                AnimatedThreadWorker.RunWorkerAsync();
+            //if (form.ShowDialog() == DialogResult.OK)
+            //    AnimatedThreadWorker.RunWorkerAsync();
         }
         #endregion
 

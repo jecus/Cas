@@ -95,6 +95,8 @@ namespace SmartCore.Calculations
         public Lifelength Remains { get; set; }
 		#endregion
 
+		public Lifelength WarrantlyRemains { get; set; }
+
 		public Lifelength LimitNotify { get; set; }
 		public Lifelength LimitOverdue { get; set; }
 

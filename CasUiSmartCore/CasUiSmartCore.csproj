@@ -1174,6 +1174,18 @@
     <Compile Include="UIControls\PowerPlants\PowerPlantListView.Designer.cs">
       <DependentUpon>PowerPlantListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\ProductControls\ModelBindForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\ProductControls\ModelBindForm.Designer.cs">
+      <DependentUpon>ModelBindForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\ProductControls\ProductBindForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\ProductControls\ProductBindForm.Designer.cs">
+      <DependentUpon>ProductBindForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\PurchaseControls\AllOrders\AllOrderListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -2579,6 +2591,12 @@
     </Compile>
     <Compile Include="UIControls\SMSControls\SmsEventForm.Designer.cs">
       <DependentUpon>SmsEventForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\StoresControls\ComponentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\StoresControls\ComponentForm.Designer.cs">
+      <DependentUpon>ComponentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UIControls\StoresControls\ConsumablePartAndKitForm.cs">
       <SubType>Form</SubType>
@@ -4003,6 +4021,12 @@
     <EmbeddedResource Include="UIControls\PowerPlants\PowerPlantListScreen.resx">
       <DependentUpon>PowerPlantListScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ProductControls\ModelBindForm.resx">
+      <DependentUpon>ModelBindForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ProductControls\ProductBindForm.resx">
+      <DependentUpon>ProductBindForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PurchaseControls\AllOrders\AllOrderListScreen.resx">
       <DependentUpon>AllOrderListScreen.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -4583,6 +4607,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\SMSControls\SmsEventForm.resx">
       <DependentUpon>SmsEventForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\StoresControls\ComponentForm.resx">
+      <DependentUpon>ComponentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\StoresControls\ConsumablePartAndKitForm.resx">
       <DependentUpon>ConsumablePartAndKitForm.cs</DependentUpon>

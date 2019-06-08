@@ -1,11 +1,25 @@
-﻿using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using EFCore.DTO.General;
+using EFCore.Filter;
 using Excel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SmartCore.Aircrafts;
+using SmartCore.Auxiliary;
+using SmartCore.Component;
+using SmartCore.DataAccesses.ItemsRelation;
+using SmartCore.Entities;
+using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
+using SmartCore.Entities.General.Store;
+using SmartCore.Filters;
+using SmartCore.Maintenance;
 using SmartCore.Management;
 
 namespace SmartCore.Tests.ExcelImportExport
@@ -75,6 +89,112 @@ namespace SmartCore.Tests.ExcelImportExport
 			}
 		}
 
+		[TestMethod]
+		public void ImportComponentStore()
+		{
+			var env = GetEnviroment();
+			var aircraftCore = new AircraftsCore(env.Loader, env.NewKeeper, env.NewLoader);
+			var itemRelationCore = new ItemsRelationsDataAccess(env);
+			var componentCore = new ComponentCore(env, env.Loader, env.NewLoader, env.NewKeeper, aircraftCore, itemRelationCore);
+
+
+			var store = env.Loader.GetObject<Store>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, 11));
+			var models = env.Loader.GetObjectList<ComponentModel>();
+
+			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\Components.xlsx");
+
+			foreach (DataTable table in ds.Tables)
+			{
+				foreach (DataRow row in table.Rows)
+				{
+					if (string.IsNullOrEmpty(row[4].ToString()) && string.IsNullOrEmpty(row[5].ToString()) &&
+					    string.IsNullOrEmpty(row[6].ToString()))
+						continue;
+
+
+					var comp = new Entities.General.Accessory.Component();
+
+					var goodClass = row[0].ToString().Replace('−', '-');
+					comp.GoodsClass = GoodsClass.Items.FirstOrDefault(i => goodClass.ToLower().Equals(i.FullName.ToLower()));
+					if (comp.GoodsClass == null || comp.GoodsClass == GoodsClass.Unknown)
+						comp.GoodsClass = GoodsClass.Items.FirstOrDefault(i => goodClass.ToLower().Contains(i.FullName.ToLower()));
+					if (comp.GoodsClass == null || comp.GoodsClass == GoodsClass.Unknown)
+						comp.GoodsClass = GoodsClass.Items.FirstOrDefault(i => goodClass.ToLower().Contains(i.ShortName.ToLower()));
+
+					comp.Description = row[4].ToString();
+					comp.PartNumber = row[5].ToString();
+					comp.ALTPartNumber = row[6].ToString();
+					comp.SerialNumber = row[7].ToString();
+					comp.BatchNumber = row[8].ToString();
+
+					Double.TryParse(row[9].ToString().Replace('.', ','), out double quantityIn);
+					Double.TryParse(row[10].ToString().Replace('.', ','), out double current);
+
+					comp.QuantityIn = quantityIn;
+					comp.Quantity = current;
+
+					#region E&M
+
+					//comp.Product = models.FirstOrDefault(i =>i.PartNumber == comp.PartNumber);
+					//comp.Measure = Measure.Unit;
+
+					#endregion
+
+					comp.Model = models.FirstOrDefault(i => i.PartNumber == comp.PartNumber);
+					comp.Measure = Measure.Unknown;
+
+					//comp.GoodsClass = GoodsClass.MaintenanceMaterials;
+					DateTime.TryParse(row[2].ToString(), out var date);
+					if (date.Year < DateTimeExtend.GetCASMinDateTime().Year)
+						date = DateTimeExtend.GetCASMinDateTime();
+					comp.ManufactureDate = date;
+					componentCore.AddComponent(comp, store, date, "", ComponentStorePosition.Serviceable, destinationResponsible: true);
+
+
+					Double.TryParse(row[12].ToString().Replace('.', ','), out double unitPrice);
+					Double.TryParse(row[13].ToString().Replace('.', ','), out double totalPrice);
+
+					comp.ProductCosts = new CommonCollection<ProductCost>()
+					{
+						new ProductCost
+						{
+							Currency = Сurrency.USD,
+							UnitPrice = unitPrice,
+							TotalPrice = totalPrice,
+							ParentId = comp.ItemId,
+							ParentTypeId = comp.SmartCoreType.ItemId
+						}
+					};
+					foreach (var compProductCost in comp.ProductCosts)
+					{
+						env.Keeper.Save(compProductCost);
+					}
+					
+				}
+			}
+		}
+
+
+		[TestMethod]
+		public void Test()
+		{
+			var env = GetEnviroment();
+			var aircraftCore = new AircraftsCore(env.Loader, env.NewKeeper, env.NewLoader);
+			var itemRelationCore = new ItemsRelationsDataAccess(env);
+			var componentCore = new ComponentCore(env, env.Loader, env.NewLoader, env.NewKeeper, aircraftCore, itemRelationCore);
+
+			var store = env.Loader.GetObject<Store>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, 11));
+			var res = componentCore.GetStoreComponents(store);
+
+			var deleted = new List<BaseEntityObject>();
+			foreach (var re in res)
+			{
+				deleted.Add(re);
+			}
+
+			env.NewKeeper.BulkDelete(deleted);
+		}
+
 
 		[TestMethod]
 		public void ImportProductStoreCIT()
@@ -113,7 +233,6 @@ namespace SmartCore.Tests.ExcelImportExport
 				}
 			}
 		}
-
 
 		[TestMethod]
 		public void ImportComponentStoreCIT()
@@ -159,6 +278,7 @@ namespace SmartCore.Tests.ExcelImportExport
 		{
 			var cas = new CasEnvironment();
 			cas.Connect("91.213.233.139:45617", "casadmin", "casadmin001", "ScatDB");
+			//cas.Connect("92.47.31.254:45617", "Admin", "rfcflvby", "ScatDB");
 			DbTypes.CasEnvironment = cas;
 			cas.NewLoader.FirstLoad();
 

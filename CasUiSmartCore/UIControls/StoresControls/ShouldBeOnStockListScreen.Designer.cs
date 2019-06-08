@@ -39,6 +39,7 @@ namespace CAS.UI.UIControls.StoresControls
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "NonRoutineJobCategoriesListScreen";
             this.ShowAircraftStatusPanel = false;
+            this.buttonAddNew.Visible = false;
             this.Size = new System.Drawing.Size(917, 590);
             this.ResumeLayout(false);
             this.PerformLayout();

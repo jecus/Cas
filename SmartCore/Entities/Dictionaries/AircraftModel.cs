@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using EFCore.DTO.Dictionaries;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General.Accessory;
@@ -19,8 +20,58 @@ namespace SmartCore.Entities.Dictionaries
     [Serializable]
     public class AircraftModel : AbstractModel
     {
+	    #region public string FullName { get; set; }
 
-        private static AircraftModel _unknown;
+	    private string _fullName;
+	    /// <summary>
+	    /// Полное название серии модели самолета Н:Boeing 737
+	    /// </summary>
+	    [TableColumn("FullName")]
+	    [FormControl(150, "Full Name", 1, Order = 5)]
+	    [ListViewData(0.2f, "Full Name", 4)]
+	    [NotNull]
+	    public string FullName
+	    {
+		    get { return _fullName; }
+		    set
+		    {
+			    if (_fullName != value)
+			    {
+				    _fullName = value;
+				    OnPropertyChanged("FullName");
+			    }
+		    }
+	    }
+
+
+	    #endregion
+
+	    #region public string ShortName { get; set; }
+
+	    private string _shortName;
+	    /// <summary>
+	    /// Сокращенное название модели самолета
+	    /// </summary>
+	    [TableColumn("ShortName")]
+	    [FormControl(150, "Short Name", Order = 6)]
+	    [ListViewData(0.08f, "Short Name",5)]
+	    [NotNull]
+	    public string ShortName
+	    {
+		    get { return _shortName; }
+		    set
+		    {
+			    if (_shortName != value)
+			    {
+				    _shortName = value;
+				    OnPropertyChanged("ShortName");
+			    }
+		    }
+	    }
+
+	    #endregion
+
+		private static AircraftModel _unknown;
 
         #region public SmartCoreType ModelingObjectType
         /// <summary>

@@ -75,6 +75,8 @@ namespace CAS.UI.UIControls.Users
 			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Operation.ToString(), Tag = item.Operation });
 			//subItems.Add(new ListViewItem.ListViewSubItem {Text = item.ObjectId.ToString(), Tag = item.ObjectId });
 			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Type.FullName, Tag = item.Type });
+			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Aircraft.ToString(), Tag = item.Aircraft });
+			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Title, Tag = item.Title });
 			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Information, Tag = item.Information });
 			
 			return subItems.ToArray();
@@ -103,6 +105,12 @@ namespace CAS.UI.UIControls.Users
 			//ColumnHeaderList.Add(columnHeader);
 
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Object Type" };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Aircraft" };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Title" };
 			ColumnHeaderList.Add(columnHeader);
 
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.40f), Text = "Additional Information" };

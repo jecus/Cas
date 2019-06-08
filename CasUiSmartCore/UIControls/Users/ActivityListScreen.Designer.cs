@@ -34,6 +34,7 @@ namespace CAS.UI.UIControls.Users
 			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
 			this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
+			this.buttonExport = new CAS.UI.Management.Dispatchering.RichReferenceButton();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -156,6 +157,38 @@ namespace CAS.UI.UIControls.Users
 			this.buttonOK.Click += ButtonOkClick;
 			this.buttonOK.Enabled = !(userType == UsetType.ReadOnly);
 			// 
+			// buttonExport
+			// 
+			this.buttonExport.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+			this.buttonExport.ActiveBackgroundImage = null;
+			this.buttonExport.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonExport.Displayer = null;
+			this.buttonExport.DisplayerText = "";
+			this.buttonExport.Dock = System.Windows.Forms.DockStyle.Right;
+			this.buttonExport.Entity = null;
+			this.buttonExport.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonExport.FontSecondary = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonExport.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
+			this.buttonExport.ForeColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
+			this.buttonExport.Icon = global::CAS.UI.Properties.Resources.ExcelImport;
+			this.buttonExport.IconLayout = System.Windows.Forms.ImageLayout.Center;
+			this.buttonExport.Location = new System.Drawing.Point(63, 0);
+			this.buttonExport.Margin = new System.Windows.Forms.Padding(0);
+			this.buttonExport.Name = "buttonExport";
+			this.buttonExport.NormalBackgroundImage = null;
+			this.buttonExport.PaddingMain = new System.Windows.Forms.Padding(0);
+			this.buttonExport.PaddingSecondary = new System.Windows.Forms.Padding(0);
+			this.buttonExport.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInNew;
+			this.buttonExport.ShowToolTip = true;
+			this.buttonExport.Size = new System.Drawing.Size(55, 63);
+			this.buttonExport.TabIndex = 25;
+			this.buttonExport.TextAlignMain = System.Drawing.ContentAlignment.BottomCenter;
+			this.buttonExport.TextAlignSecondary = System.Drawing.ContentAlignment.TopCenter;
+			this.buttonExport.TextMain = "";
+			this.buttonExport.TextSecondary = "";
+			this.buttonExport.ToolTipText = "Export";
+			this.buttonExport.Click += ExportActivity_Click;
+			// 
 			// pictureBox1
 			// 
 			this.pictureBox1.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
@@ -182,6 +215,8 @@ namespace CAS.UI.UIControls.Users
 			this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox1);
 			this.flowLayoutPanel1.Controls.Add(this.buttonApplyFilter);
+			this.flowLayoutPanel1.Controls.Add(this.pictureBox1);
+			this.flowLayoutPanel1.Controls.Add(this.buttonExport);
 			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
 			this.flowLayoutPanel1.Location = new System.Drawing.Point(1291, 0);
@@ -227,6 +262,7 @@ namespace CAS.UI.UIControls.Users
 		private System.Windows.Forms.Label labelDateTo;
 		private System.Windows.Forms.DateTimePicker dateTimePickerDateTo;
 		private System.Windows.Forms.Button buttonOK;
+		private CAS.UI.Management.Dispatchering.RichReferenceButton buttonExport;
 		private AvControls.StatusImageLink.StatusImageLinkLabel labelTitle;
 		private AvControls.AvButtonT.AvButtonT buttonApplyFilter;
 		private System.Windows.Forms.PictureBox pictureBox1;

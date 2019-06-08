@@ -29,7 +29,7 @@ namespace CAS.UI.UIControls.StoresControls
 	///<summary>
 	/// Форма для редактирования расходника, КИТа, ГСМ и т.д.
 	///</summary>
-	public partial class ConsumablePartAndKitForm : MetroForm
+	public partial class ComponentForm : MetroForm
 	{
 		public Component _consumablePart;
 		private Store _currentStore;
@@ -59,7 +59,7 @@ namespace CAS.UI.UIControls.StoresControls
 		/// <summary>
 		/// Конструктор по умолчанию
 		/// </summary>
-		private ConsumablePartAndKitForm()
+		private ComponentForm()
 		{
 			InitializeComponent();
 		}
@@ -69,7 +69,7 @@ namespace CAS.UI.UIControls.StoresControls
 		/// <summary>
 		/// Конструктор по умолчанию
 		/// </summary>
-		public ConsumablePartAndKitForm(Component consumablePart) : this()
+		public ComponentForm(Component consumablePart) : this()
 		{
 			_consumablePart = consumablePart;
 			_isStore = GlobalObjects.StoreCore.GetStoreById(consumablePart.ParentStoreId) != null;
@@ -83,7 +83,7 @@ namespace CAS.UI.UIControls.StoresControls
 		/// <summary>
 		/// Конструктор по умолчанию
 		/// </summary>
-		public ConsumablePartAndKitForm(Store store)
+		public ComponentForm(Store store)
 			: this()
 		{
 			_currentStore = store;
@@ -105,14 +105,14 @@ namespace CAS.UI.UIControls.StoresControls
 			{
 				var documents = GlobalObjects.CasEnvironment.Loader.GetObjectList<Document>(new ICommonFilter[]
 				{
-					new CommonFilter<int>(Document.ParentIdProperty, _consumablePart.ItemId), 
-					new CommonFilter<int>(Document.ParentTypeIdProperty, _consumablePart.SmartCoreObjectType.ItemId) 
+					new CommonFilter<int>(Document.ParentIdProperty, _consumablePart.ItemId),
+					new CommonFilter<int>(Document.ParentTypeIdProperty, _consumablePart.SmartCoreObjectType.ItemId)
 				});
 
 				var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Component CRS Form") as DocumentSubType;
 				_consumablePart.DocumentFaa = documents.FirstOrDefault(i => i.DocumentSubType.ItemId == docSubType.ItemId);
 
-				docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Store Shipping document") as DocumentSubType;
+				docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Shipping document") as DocumentSubType;
 				_consumablePart.DocumentShipping = documents.FirstOrDefault(i => i.DocumentSubType.ItemId == docSubType.ItemId);
 
 			}
@@ -201,7 +201,6 @@ namespace CAS.UI.UIControls.StoresControls
 			textBoxDiscrepancy.Text = _consumablePart.Discrepancy;
 			textBoxPartNumber.Text = _consumablePart.PartNumber;
 			textBoxAltPartNum.Text = _consumablePart.ALTPartNumber;
-			metroTextBoxEffectivity.Text = _consumablePart.IsEffectivity;
 			textBoxSerialNumber.Text = _consumablePart.SerialNumber;
 			textBoxBatchNumber.Text = _consumablePart.BatchNumber;
 			textBoxIdNumber.Text = _consumablePart.IdNumber;
@@ -219,10 +218,6 @@ namespace CAS.UI.UIControls.StoresControls
 			comboBoxMeasure.SelectedItem = _consumablePart.Measure;
 			numericUpDownQuantity.Value = (decimal) _consumablePart.QuantityIn;
 			textBoxRemarks.Text = _consumablePart.Remarks;
-			lifelengthViewerLifeLimit.Lifelength = _consumablePart.LifeLimit;
-			lifelengthViewerNotify.Lifelength = _consumablePart.LifeLimitNotify;
-			lifelengthViewerWarranty.Lifelength = _consumablePart.Warranty;
-			lifelengthViewerWarrantyNotify.Lifelength = _consumablePart.WarrantyNotify;
 			checkBoxIncoming.Checked = _consumablePart.Incoming;
 			checkBoxPOOL.Checked = _consumablePart.IsPOOL;
 			checkBoxDangerous.Checked = _consumablePart.IsDangerous;
@@ -298,7 +293,7 @@ namespace CAS.UI.UIControls.StoresControls
 
 			SetForDetailClass();
 			SetForMeasure();
-			UpdateByProduct(_consumablePart.Product);
+			UpdateByModel(_consumablePart.Model);
 
 			comboBoxStandart.SelectedIndexChanged += ComboBoxStandartSelectedIndexChanged;
 			comboBoxDetailClass.SelectedIndexChanged += ComboBoxDetailClassSelectedIndexChanged;
@@ -360,10 +355,6 @@ namespace CAS.UI.UIControls.StoresControls
 				      dictionaryComboBoxLocation.SelectedItem.ItemId != obj.Location.ItemId ||
 				      textBoxRemarks.Text != obj.Remarks ||
 				      (ComponentStatus) comboBoxStatus.SelectedItem != obj.ComponentStatus ||
-				      lifelengthViewerLifeLimit.Lifelength.IsEqual(obj.LifeLimit) ||
-				      lifelengthViewerNotify.Lifelength.IsEqual(obj.LifeLimitNotify) ||
-				      lifelengthViewerWarranty.Lifelength.IsEqual(obj.Warranty) ||
-				      lifelengthViewerWarrantyNotify.Lifelength.IsEqual(obj.WarrantyNotify) ||
 				      dateTimePickerManufactureDate.Value != obj.ManufactureDate ||
 				      numericUpDownQuantity.Value != (decimal) obj.QuantityIn ||
 				      ataChapterComboBox.ATAChapter.ItemId != obj.ATAChapter.ItemId ||
@@ -501,10 +492,6 @@ namespace CAS.UI.UIControls.StoresControls
 			obj.ReceivedId = _consumablePart.Received?.ItemId ?? -1;
 			obj.Remarks = textBoxRemarks.Text;
 			obj.ManufactureDate = dateTimePickerManufactureDate.Value;
-			obj.LifeLimit = lifelengthViewerLifeLimit.Lifelength;
-			obj.LifeLimitNotify = lifelengthViewerNotify.Lifelength;
-			obj.Warranty = lifelengthViewerWarranty.Lifelength;
-			obj.WarrantyNotify = lifelengthViewerWarrantyNotify.Lifelength;
 			obj.ATAChapter = ataChapterComboBox.ATAChapter;
 			obj.Discrepancy = textBoxDiscrepancy.Text;
 			obj.Incoming = checkBoxIncoming.Checked;
@@ -609,10 +596,6 @@ namespace CAS.UI.UIControls.StoresControls
 
 			textBoxRemarks.Text = "";
 
-			lifelengthViewerLifeLimit.Lifelength = Lifelength.Null;
-			lifelengthViewerNotify.Lifelength = Lifelength.Null;
-			lifelengthViewerWarranty.Lifelength = Lifelength.Null;
-			lifelengthViewerWarrantyNotify.Lifelength = Lifelength.Null;
 
 			textBoxRemarks.Text = "";
 
@@ -636,57 +619,7 @@ namespace CAS.UI.UIControls.StoresControls
 		{
 			try
 			{
-				var partNumber = textBoxPartNumber.Text.Replace(" ", "").ToLower();
-				List<ComponentModel> componentModels;
-				//if (_consumablePart.Product != null && _consumablePart.Product.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.ProductionAuxiliaryEquipment))
-				//{
-				//	try
-				//	{
-				//		var product = _consumablePart.Product;
-
-				//		componentModels = new List<ComponentModel>(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, ComponentModel>(new List<Filter>()
-				//		{
-				//			new Filter("ModelingObjectTypeId",5),
-				//			new Filter("FullName",product.Name),
-				//			new Filter("PartNumber",partNumber)
-				//		}));
-
-				//		if (componentModels.Count == 0)
-				//		{
-				//			var newModel = new ComponentModel
-				//			{
-				//				Name = product.Name,
-				//				FullName = product.Name,
-				//				ShortName = product.Name,
-				//				Standart = product.Standart,
-				//				PartNumber = product.PartNumber,
-				//				Description = product.Description,
-				//				IsDangerous = product.IsDangerous,
-				//				Code = product.Code,
-				//				Manufacturer = product.Manufacturer,
-				//				Remarks = product.Remarks,
-				//				ImageFile = fileControlImage.AttachedFile,
-				//				GoodsClass = product.GoodsClass,
-				//				ATAChapter = product.ATAChapter
-				//			};
-
-				//			GlobalObjects.CasEnvironment.NewKeeper.Save(newModel);
-				//			_consumablePart.Model = newModel;
-				//		}
-				//		else
-				//		{
-				//			_consumablePart.Model = componentModels.FirstOrDefault();
-				//		}
-
-				//	}
-				//	catch (Exception ex)
-				//	{
-				//		Program.Provider.Logger.Log("Not Find dictionary of type " + typeof(ComponentModel).Name, ex);
-				//	}
-	   //         }
-
-
-                if (_consumablePart.ItemId <= 0)
+				if (_consumablePart.ItemId <= 0)
                 {
 					if(_currentStore == null)
 						_currentStore = GlobalObjects.CasEnvironment.Stores.GetItemById(_consumablePart.ParentStoreId);
@@ -872,28 +805,12 @@ namespace CAS.UI.UIControls.StoresControls
         #endregion
 
         #region private void DictionaryComboProductSelectedIndexChanged(object sender, EventArgs e)
-        private void UpdateByProduct(Product product)
+        private void UpdateByModel(ComponentModel product)
         {
 	        linkLabel1.Enabled = _consumablePart.Product != null;
 
 			if (product != null)
 	        {
-		        if ((bool) product.GoodsClass?.IsNodeOrSubNodeOf(new[]
-			        {GoodsClass.Materials,GoodsClass.MaintenanceMaterials, GoodsClass.Tools, GoodsClass.Protection}))
-		        {
-			        lifelengthViewerLifeLimit.Enabled = true;
-			        lifelengthViewerNotify.Enabled = true;
-					lifelengthViewerWarranty.Enabled = true;
-					lifelengthViewerWarrantyNotify.Enabled = true;
-				}
-		        else
-		        {
-			        lifelengthViewerLifeLimit.Enabled = false;
-			        lifelengthViewerNotify.Enabled = false;
-			        lifelengthViewerWarranty.Enabled = false;
-			        lifelengthViewerWarrantyNotify.Enabled = false;
-				}
-
 		        TextBoxProduct.Text = product.ToString();
 	            if (product.ImageFile != null)
 	            {
@@ -938,6 +855,7 @@ namespace CAS.UI.UIControls.StoresControls
 	            ataChapterComboBox.ATAChapter = product.ATAChapter;
 	            textBoxProductCode.Text = product.Code;
 	            metroTextBoxEffectivity.Text = product.IsEffectivity;
+
 				SetForDetailClass();
 			}
             else
@@ -946,7 +864,7 @@ namespace CAS.UI.UIControls.StoresControls
 				comboBoxDetailClass.Enabled = true;
 				textBoxProductCode.Enabled = true;
 				metroTextBoxEffectivity.Text = "";
-			}
+            }
 
             if (_consumablePart.ItemId > 0)
             {
@@ -1248,7 +1166,7 @@ namespace CAS.UI.UIControls.StoresControls
 		private void DocumentControlShip_Added(object sender, EventArgs e)
 		{
 			var control = sender as DocumentControl;
-			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Store Shipping document") as DocumentSubType;
+			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Shipping document") as DocumentSubType;
 			var newDocument = new Document
 			{
 				Parent = _consumablePart,
@@ -1293,24 +1211,24 @@ namespace CAS.UI.UIControls.StoresControls
 
 		private void LinkLabelEditComponents_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			var form = new ProductBindForm(_consumablePart);
+			var form = new ModelBindForm(_consumablePart);
 			if(form.ShowDialog() == DialogResult.OK)
-				UpdateByProduct(_consumablePart.Product);
+				UpdateByModel(_consumablePart.Model);
 
 		}
 
 		private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			var form = new ProductForm(_consumablePart.Product);
+			var form = new ModelForm(_consumablePart.Model);
 			if (form.ShowDialog() == DialogResult.OK)
-				UpdateByProduct(_consumablePart.Product);
+				UpdateByModel(_consumablePart.Model);
 		}
 
 		private void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
 			TextBoxProduct.Text = "";
-			_consumablePart.Product = null;
-			UpdateByProduct(_consumablePart.Product);
+			_consumablePart.Model = null;
+			UpdateByModel(_consumablePart.Model);
 		}
 	}
 }
