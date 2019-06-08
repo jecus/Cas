@@ -59,7 +59,7 @@ namespace CAS.UI.UIControls.StoresControls
 
 		private void DisableControls()
 		{
-			dictionaryComboProduct.Enabled = false;
+			metroTextBox1.Enabled = false;
 			textBoxStandart.Enabled = false;
 			comboBoxDetailClass.Enabled = false;
 			textBoxPartNumber.Enabled = false;
@@ -73,17 +73,12 @@ namespace CAS.UI.UIControls.StoresControls
 		/// </summary>
 		public void FillControls()
         {
-            Program.MainDispatcher.ProcessControl(dictionaryComboProduct);
-            //textBoxStandart.Type = typeof(GoodStandart);
-            //Program.MainDispatcher.ProcessControl(textBoxStandart);
 
-            _existInfos = null;
+	        _existInfos = null;
             _existInfos = 
                 
 	        GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<StockComponentInfoDTO, StockComponentInfo>(new Filter("StoreID", _stockComponentInfo.StoreId));
 
-			dictionaryComboProduct.SelectedIndexChanged -= DictionaryComboProductSelectedIndexChanged;
-            //textBoxStandart.SelectedIndexChanged -= ComboBoxStandartSelectedIndexChanged;
             comboBoxDetailClass.SelectedIndexChanged -= ComboBoxDetailClassSelectedIndexChanged;
             comboBoxMeasure.SelectedIndexChanged -= ComboBoxMeasureSelectedIndexChanged;
 
@@ -96,14 +91,13 @@ namespace CAS.UI.UIControls.StoresControls
                 comboBoxDetailClass.RootNodesNames = fca.TreeDictRootNodes;
             comboBoxDetailClass.Type = typeof(GoodsClass);
 
-            dictionaryComboProduct.Type = typeof(Product);
             comboBoxMeasure.Items.Clear();
             comboBoxMeasure.Items.AddRange(Measure.GetByCategories(new[] { MeasureCategory.Mass, MeasureCategory.EconomicEntity}));
 
             comboBoxDetailClass.SelectedItem = _stockComponentInfo.GoodsClass;
             textBoxPartNumber.Text = _stockComponentInfo.PartNumber;
             textBoxDescription.Text = _stockComponentInfo.Description;
-            dictionaryComboProduct.SelectedItem = _stockComponentInfo.AccessoryDescription;
+            metroTextBox1.Text = _stockComponentInfo.AccessoryDescription.ToString();
             comboBoxMeasure.SelectedItem = _stockComponentInfo.Measure;
             numericUpDownQuantity.Value = (decimal)_stockComponentInfo.ShouldBeOnStock;
 
@@ -146,8 +140,6 @@ namespace CAS.UI.UIControls.StoresControls
 
             comboBoxDetailClass.SelectedIndexChanged += ComboBoxDetailClassSelectedIndexChanged;
             comboBoxMeasure.SelectedIndexChanged += ComboBoxMeasureSelectedIndexChanged;
-            //textBoxStandart.SelectedIndexChanged += ComboBoxStandartSelectedIndexChanged;
-            dictionaryComboProduct.SelectedIndexChanged += DictionaryComboProductSelectedIndexChanged;
         }
         #endregion
 
@@ -161,7 +153,6 @@ namespace CAS.UI.UIControls.StoresControls
             //string kitStandartName = _stockDetailInfo.Standart != null ? _stockDetailInfo.Standart.FullName : "";
             if (textBoxPartNumber.Text != obj.PartNumber ||
                 textBoxDescription.Text != obj.Description ||
-                dictionaryComboProduct.SelectedItem != obj.AccessoryDescription ||
                 numericUpDownQuantity.Value != (decimal)obj.ShouldBeOnStock ||
                 (_stockComponentInfo.Standart != null ? _stockComponentInfo.Standart.ToString() != textBoxStandart.Text : textBoxStandart.Text != ""))
             {
@@ -245,12 +236,10 @@ namespace CAS.UI.UIControls.StoresControls
         /// <returns></returns>
         private void ApplyChanges(StockComponentInfo obj)
         {
-            Product p = dictionaryComboProduct.SelectedItem as Product;
-            obj.GoodsClass = comboBoxDetailClass.SelectedItem as GoodsClass;
+	        obj.GoodsClass = comboBoxDetailClass.SelectedItem as GoodsClass;
             obj.PartNumber = textBoxPartNumber.Text;
             obj.Description = textBoxDescription.Text;
-            obj.AccessoryDescription = p;
-            obj.Standart = p != null ? p.Standart : null;
+            obj.Standart = obj.AccessoryDescription != null ? obj.AccessoryDescription.Standart : null;
             obj.Measure = comboBoxMeasure.SelectedItem as Measure;
             obj.ShouldBeOnStock = (double)numericUpDownQuantity.Value;
         }
@@ -458,62 +447,6 @@ namespace CAS.UI.UIControls.StoresControls
             }
         }
 
-        #endregion
-
-        #region private void DictionaryComboProductSelectedIndexChanged(object sender, EventArgs e)
-        private void DictionaryComboProductSelectedIndexChanged(object sender, EventArgs e)
-        {
-            //textBoxStandart.SelectedIndexChanged -= ComboBoxStandartSelectedIndexChanged;
-
-            Product product;
-            if ((product = dictionaryComboProduct.SelectedItem as Product) != null)
-            {
-                comboBoxDetailClass.SelectedItem = product.GoodsClass;
-
-                comboBoxDetailClass.Enabled = false;
-                comboBoxMeasure.Enabled = false;
-                //textBoxStandart.Enabled = false;
-                textBoxPartNumber.ReadOnly = true;
-                textBoxDescription.ReadOnly = true;
-                //textBoxRemarks.ReadOnly = true;
-
-                comboBoxMeasure.SelectedItem = product.Measure;
-                textBoxStandart.Text = product.Standart != null ? product.Standart.ToString() : "";
-                textBoxPartNumber.Text = product.PartNumber;
-                textBoxDescription.Text = product.Description;
-            }
-
-            if (_stockComponentInfo.ItemId > 0)
-            {
-                if (product != null)
-                {
-                    comboBoxDetailClass.Enabled = false;
-                    comboBoxMeasure.Enabled = false;
-                    //textBoxStandart.Enabled = false;
-                    textBoxPartNumber.ReadOnly = true;
-                    textBoxDescription.ReadOnly = true;
-                }
-                else
-                {
-                    comboBoxDetailClass.Enabled = true;
-                    comboBoxMeasure.Enabled = true;
-                    //textBoxStandart.Enabled = true;
-                    textBoxPartNumber.ReadOnly = false;
-                    textBoxDescription.ReadOnly = false;
-                }
-            }
-            else
-            {
-                comboBoxDetailClass.Enabled = true;
-                comboBoxMeasure.Enabled = true;
-                //textBoxStandart.Enabled = true;
-                textBoxPartNumber.ReadOnly = false;
-                textBoxDescription.ReadOnly = false;
-            }
-
-			if (_disableControls)
-				DisableControls();
-		}
         #endregion
 
         #region private void ComboBoxStandartSelectedIndexChanged(object sender, EventArgs e)
