@@ -122,11 +122,11 @@ namespace CAS.UI.UIControls.Users
 				foreach (var bsonElement in activity)
 				{
 					Enum.TryParse(bsonElement.Action, out AuditOperation myStatus);
-					
+					var userr = users.FirstOrDefault(i => i.ItemId == bsonElement.UserId);
 					_initial.Add(new ActivityDTO()
 					{
 						Date = bsonElement.Date,
-						User = new User(users.FirstOrDefault(i => i.ItemId == bsonElement.UserId)),
+						User = userr!= null ? new User(userr): new User(){Name = $"Deleted User with Id:{bsonElement.UserId}"},
 						Operation = myStatus,
 						ObjectId = bsonElement.ObjectId,
 						Type = SmartCoreType.GetSmartCoreTypeById(bsonElement.ObjectTypeId),
