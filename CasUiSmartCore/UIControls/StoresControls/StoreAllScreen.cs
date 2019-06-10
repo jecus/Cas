@@ -1069,8 +1069,9 @@ namespace CAS.UI.UIControls.StoresControls
 				    AccessoryDescription = component.Model,
 				    Description = component.Description,
 				    PartNumber = component.PartNumber,
-				    StoreId = CurrentStore.ItemId
-			    };
+				    StoreId = CurrentStore.ItemId,
+				    Measure = component.Measure
+				};
 
 			    var form = new StockComponentInfoForm(newStockComponentInfo, true);
 

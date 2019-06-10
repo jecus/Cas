@@ -343,10 +343,11 @@ namespace CAS.UI.UIControls.KitControls
         private void UpdateByProduct(Product product)
         {
             comboBoxStandart.SelectedIndexChanged -= ComboBoxStandartSelectedIndexChanged;
-
-            if (product != null)
+            linkLabel1.Enabled = product != null;
+			if (product != null)
             {
-                comboBoxDetailClass.SelectedItem = product.GoodsClass;
+	            TextBoxProduct.Text = product.ToString();
+				comboBoxDetailClass.SelectedItem = product.GoodsClass;
 
                 comboBoxDetailClass.Enabled = false;
                 comboBoxMeasure.Enabled = false;

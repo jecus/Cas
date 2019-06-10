@@ -758,6 +758,7 @@
   <ItemGroup>
     <Compile Include="ExcelExport\DirectiveComparer.cs" />
     <Compile Include="ExcelExport\ExcelExportProvider.cs" />
+    <Compile Include="Extentions.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\ItemRelationHelper.cs" />
     <Compile Include="Helpers\ListViewGroupHelper.cs" />

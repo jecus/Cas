@@ -94,7 +94,7 @@ namespace CAS.UI.UIControls.StoresControls
             comboBoxDetailClass.Type = typeof(GoodsClass);
 
             comboBoxMeasure.Items.Clear();
-            comboBoxMeasure.Items.AddRange(Measure.GetByCategories(new[] { MeasureCategory.Mass, MeasureCategory.EconomicEntity}));
+            comboBoxMeasure.Items.AddRange(Measure.Items.ToArray());
 
             comboBoxDetailClass.SelectedItem = _stockComponentInfo.GoodsClass;
             textBoxPartNumber.Text = _stockComponentInfo.PartNumber;
@@ -136,6 +136,7 @@ namespace CAS.UI.UIControls.StoresControls
                 textBoxPartNumber.Text = accessoryStandart.PartNumber;
                 textBoxDescription.Text = accessoryStandart.Description;
             }
+			
 
             SetForDetailClass();
             SetForMeasure();

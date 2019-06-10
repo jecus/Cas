@@ -783,8 +783,8 @@ namespace CAS.UI.UIControls.StoresControls
                     Component component = (Component) item;
                     if (component.Condition == ConditionState.NotEstimated)
                         listViewItem.BackColor = Color.FromArgb(Highlight.Blue.Color);
-                    if (/*component.Current == component.ShouldBeOnStock &&*/ component.ShouldBeOnStock > 0||
-                        component.Condition == ConditionState.Notify)
+                    if (/*component.Current == component.ShouldBeOnStock && component.ShouldBeOnStock > 0 ||*/
+						component.Condition == ConditionState.Notify)
                         listViewItem.BackColor = Color.FromArgb(Highlight.Yellow.Color);   
                     if (/*component.Current < component.ShouldBeOnStock ||*/
                         component.Condition == ConditionState.Overdue)

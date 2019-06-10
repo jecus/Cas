@@ -38,7 +38,7 @@ namespace CAS.UI.UIControls.ProductControls
 			_current = current;
 		}
 
-		public ProductBindForm(AbstractAccessory currentKit)
+		public ProductBindForm(AbstractAccessory currentKit) : this()
 		{
 			_currentKit = currentKit;
 		}
