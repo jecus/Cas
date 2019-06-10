@@ -6,7 +6,9 @@ using CASTerms;
 using EFCore.DTO.General;
 using EFCore.Filter;
 using MetroFramework.Forms;
+using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Store;
@@ -51,7 +53,7 @@ namespace CAS.UI.UIControls.StoresControls
 		        DisableControls();
         }
 
-		#endregion
+	    #endregion
 
 		#endregion
 
@@ -192,16 +194,10 @@ namespace CAS.UI.UIControls.StoresControls
                 message += "Not set Part Number";
                 return false;
             }
-            if (textBoxDescription.Text == "")
-            {
-                if (message != "") message += "\n ";
-                message += "Not set Description";
-                return false;
-            }
             if (comboBoxMeasure.SelectedItem as Measure == null)
             {
                 if (message != "") message += "\n ";
-                message += "Not set Quantity";
+                message += "Not set Measure";
                 return false;
             }
             if (numericUpDownQuantity.Value == 0)
@@ -248,40 +244,7 @@ namespace CAS.UI.UIControls.StoresControls
         #region private void Save()
         private void Save()
         {
-            //string standart = textBoxStandart.Text.Replace(" ", "").ToLower();
-            //string partNumber = textBoxPartNumber.Text.Replace(" ", "").ToLower();
-
-            //List<GoodStandart> goodStandarts = null;
-            //GoodStandart goodStandart;
-            //try
-            //{
-            //    goodStandarts = GlobalObjects.CasEnvironment.Loader.GetObjectList<GoodStandart>();
-            //}
-            //catch (Exception ex)
-            //{
-            //    Program.Provider.Logger.Log("Not Find dictionary of type " + typeof(GoodStandart).Name, ex);
-            //}
-
-            //if (_stockDetailInfo.Standart == null && goodStandarts != null && standart != "")
-            //{
-            //    goodStandart = goodStandarts
-            //        .FirstOrDefault(ad => ad.PartNumber.Replace(" ", "").ToLower() == partNumber
-            //                           && ad.FullName.Replace(" ", "").ToLower() == standart);
-            //    if (goodStandart == null)
-            //    {
-            //        goodStandart = new GoodStandart();
-            //        goodStandart.GoodsClass = comboBoxDetailClass.SelectedItem as GoodsClass;
-            //        goodStandart.PartNumber = textBoxPartNumber.Text;
-            //        goodStandart.Description = textBoxDescription.Text;
-            //        goodStandart.FullName = textBoxStandart.Text;
-            //        //goodStandart.Measure = comboBoxMeasure.SelectedItem as Measure;
-
-            //        GlobalObjects.CasEnvironment.Manipulator.Save(goodStandart);
-            //    }
-            //    _stockDetailInfo.Standart = goodStandart;
-            //}
-
-            try
+	        try
             {
                 GlobalObjects.CasEnvironment.Keeper.Save(_stockComponentInfo);
             }

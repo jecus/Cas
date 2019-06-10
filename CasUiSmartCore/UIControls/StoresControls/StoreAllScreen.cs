@@ -102,7 +102,7 @@ namespace CAS.UI.UIControls.StoresControls
 		private ToolStripMenuItem _itemPrintReportAvailableComponents;
 		private ToolStripMenuItem _itemPrintReportEquipmentToolRegister;
 
-
+		private ComponentCollection resultCollection;
 		private TransferedComponentForm _transferedComponentForm;
 	    private WorkPackage _selectedWorkPackage;
         #endregion
@@ -346,7 +346,7 @@ namespace CAS.UI.UIControls.StoresControls
 
 	        _calculateWpItems = false;
 
-			var resultCollection = new ComponentCollection();
+			resultCollection = new ComponentCollection();
 			_preResultDirectiveArray.Clear();
 	        _stores.Clear();
 			_resultDirectiveArray.Clear();
@@ -1598,7 +1598,7 @@ namespace CAS.UI.UIControls.StoresControls
             if (CurrentStore != null)
             {
                 e.DisplayerText = CurrentStore.Name + ". Should be on stock";
-                e.RequestedEntity = new ShouldBeOnStockListScreen(CurrentStore);
+                e.RequestedEntity = new ShouldBeOnStockListScreen(CurrentStore, resultCollection);
             }
             e.TypeOfReflection = ReflectionTypes.DisplayInNew;    
         }

@@ -122,7 +122,6 @@ namespace SmartCore.Entities.General.Store
         /// Описание агрегата
         /// </summary>
         [TableColumn("ComponentModel")]
-        [ListViewData(0.15f, "Product")]
         [Child(true)]
         public Product AccessoryDescription
         {
@@ -136,6 +135,10 @@ namespace SmartCore.Entities.General.Store
                 }
             }
         }
+
+
+        [ListViewData(0.15f, "Product")]
+		public string ProductName => _accessoryDescription?.Name;
         #endregion
 
         #region public double Current { get; set; }

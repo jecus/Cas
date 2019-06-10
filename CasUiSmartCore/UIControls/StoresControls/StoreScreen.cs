@@ -105,7 +105,9 @@ namespace CAS.UI.UIControls.StoresControls
 
 		private TransferedComponentForm _transferedComponentForm;
 	    private WorkPackage _selectedWorkPackage;
-        #endregion
+	    private ComponentCollection resultCollection;
+
+	    #endregion
         
         #region Constructors
 
@@ -360,7 +362,7 @@ namespace CAS.UI.UIControls.StoresControls
 
 	        _calculateWpItems = false;
 
-			ComponentCollection resultCollection = new ComponentCollection();
+			resultCollection = new ComponentCollection();
 			_preResultDirectiveArray.Clear();
 			_resultDirectiveArray.Clear();
             _removedComponents.Clear();
@@ -1944,7 +1946,7 @@ namespace CAS.UI.UIControls.StoresControls
             if (CurrentStore != null)
             {
                 e.DisplayerText = CurrentStore.Name + ". Should be on stock";
-                e.RequestedEntity = new ShouldBeOnStockListScreen(CurrentStore);
+                e.RequestedEntity = new ShouldBeOnStockListScreen(CurrentStore, resultCollection);
             }
             e.TypeOfReflection = ReflectionTypes.DisplayInNew;    
         }
