@@ -11,6 +11,7 @@ using EFCore.DTO.General;
 using EFCore.Filter;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General.Store;
+using ComponentCollection = SmartCore.Entities.Collections.ComponentCollection;
 
 namespace CAS.UI.UIControls.StoresControls
 {
@@ -20,7 +21,9 @@ namespace CAS.UI.UIControls.StoresControls
     [ToolboxItem(false)]
     public partial class ShouldBeOnStockListScreen : CommonListScreen
     {
-        #region Fields
+	    private readonly ComponentCollection _resultCollection;
+
+	    #region Fields
 
         #endregion
         
@@ -39,16 +42,19 @@ namespace CAS.UI.UIControls.StoresControls
 
         #region public ShouldBeOnStockScreen(Store currentStore, PropertyInfo beginGroup = null) : base(typeof(StockDetailInfo), beginGroup)
 
-        ///<summary>
-        /// Создаёт экземпляр элемента управления, отображающего список неснижаемого запаса на складе
-        ///</summary>
-        ///<param name="currentStore">Склад, которому принадлежат записи о неснижаемом запасе</param>
-        ///<param name="beginGroup">Описывает своиство класса StockDetailInfo, по которому нужно сделать первичную группировку</param>
-        public ShouldBeOnStockListScreen(Store currentStore, PropertyInfo beginGroup = null)
+        /// <summary>
+        ///  Создаёт экземпляр элемента управления, отображающего список неснижаемого запаса на складе
+        /// </summary>
+        /// <param name="currentStore">Склад, которому принадлежат записи о неснижаемом запасе</param>
+        /// <param name="resultCollection"></param>
+        /// <param name="beginGroup">Описывает своиство класса StockDetailInfo, по которому нужно сделать первичную группировку</param>
+        public ShouldBeOnStockListScreen(Store currentStore, ComponentCollection resultCollection,
+	        PropertyInfo beginGroup = null)
             : base(typeof(StockComponentInfo), beginGroup)
         {
             if (currentStore == null)
                 throw new ArgumentNullException("currentStore");
+            _resultCollection = resultCollection;
             CurrentStore = currentStore;
             StatusTitle = "Should be on Stock";
         }
@@ -101,7 +107,9 @@ namespace CAS.UI.UIControls.StoresControls
 
             try
             {
-                GlobalObjects.StockCalculator.CalculateStock(InitialDirectiveArray.OfType<StockComponentInfo>(), CurrentStore);
+				//TODO: раньше было так я стал передавать компоненты из списка вроде быстрее но не совсем верное решение 
+	            //GlobalObjects.StockCalculator.CalculateStock(InitialDirectiveArray.OfType<StockComponentInfo>(), CurrentStore);
+				GlobalObjects.StockCalculator.CalculateStock(_resultCollection.ToArray(), InitialDirectiveArray.OfType<StockComponentInfo>());
             }
             catch (Exception exception)
             {
