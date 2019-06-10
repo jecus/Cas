@@ -283,7 +283,7 @@ namespace CAS.UI.UIControls.StoresControls
 
             try
             {
-                GlobalObjects.CasEnvironment.Manipulator.Save(_stockComponentInfo);
+                GlobalObjects.CasEnvironment.Keeper.Save(_stockComponentInfo);
             }
             catch (Exception ex)
             {
