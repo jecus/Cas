@@ -1097,11 +1097,11 @@ namespace CAS.UI.UIControls.StoresControls
 
 		    var component = _directivesViewer.SelectedItem as Component;
 
-		    if (_shouldBeOnStock.FirstOrDefault(i => i.GoodsClass == component.Model.GoodsClass &&
+		    if (_shouldBeOnStock.FirstOrDefault(i => i.GoodsClass == component.Model?.GoodsClass &&
 		                                             i.PartNumber.Replace(" ", "").ToLower() == component.PartNumber.Replace(" ", "").ToLower()) != null)
 		    {
 			    MessageBox.Show("Stock detail info with this part number: " + component.PartNumber +
-			                    "\nand goods class: " + component.Model.GoodsClass +
+			                    "\nand goods class: " + component.Model?.GoodsClass +
 			                    "\nis already exist.");
 		    }
 		    else
