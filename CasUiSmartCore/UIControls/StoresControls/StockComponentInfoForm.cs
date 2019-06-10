@@ -97,7 +97,7 @@ namespace CAS.UI.UIControls.StoresControls
             comboBoxDetailClass.SelectedItem = _stockComponentInfo.GoodsClass;
             textBoxPartNumber.Text = _stockComponentInfo.PartNumber;
             textBoxDescription.Text = _stockComponentInfo.Description;
-            metroTextBox1.Text = _stockComponentInfo.AccessoryDescription.ToString();
+            metroTextBox1.Text = _stockComponentInfo.AccessoryDescription?.ToString();
             comboBoxMeasure.SelectedItem = _stockComponentInfo.Measure;
             numericUpDownQuantity.Value = (decimal)_stockComponentInfo.ShouldBeOnStock;
 
