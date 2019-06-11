@@ -66,10 +66,7 @@ namespace CAS.UI.UIControls.StoresControls
             //4
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Serial No" };
             ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Code" };
-            ColumnHeaderList.Add(columnHeader);
-
+			
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Class" };
             ColumnHeaderList.Add(columnHeader);
 
@@ -90,54 +87,22 @@ namespace CAS.UI.UIControls.StoresControls
 
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Facility" };
 			ColumnHeaderList.Add(columnHeader);
-			//6
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "M.P." };
-            ColumnHeaderList.Add(columnHeader);
-            //7
+			//7
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "From" };
             ColumnHeaderList.Add(columnHeader);
+
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Inst. date" };
             ColumnHeaderList.Add(columnHeader);
             //6
             columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "Work Type" };
             ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = 75, Text = "M.H." };
-			ColumnHeaderList.Add(columnHeader);
-
+			
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "Need Wp Q-ty" };
 			ColumnHeaderList.Add(columnHeader);
 
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "Reserve" };
 			ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Life limit/1st. Perf" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Rpt. int." };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = 0, Text = "Performances" };
-            ColumnHeaderList.Add(columnHeader);
-            //9
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Next" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Remain/Overdue" };
-            ColumnHeaderList.Add(columnHeader);
-            //11
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Last" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Warranty" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Warranty Remain" };
-            ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Kit" };
-            ColumnHeaderList.Add(columnHeader);
-
+			
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "Current" };
 			ColumnHeaderList.Add(columnHeader);
 
@@ -177,6 +142,9 @@ namespace CAS.UI.UIControls.StoresControls
 			columnHeader = new ColumnHeader { Width = 75, Text = "Supplier" };
 			ColumnHeaderList.Add(columnHeader);
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Code" };
+			ColumnHeaderList.Add(columnHeader);
+
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Remarks" };
             ColumnHeaderList.Add(columnHeader);
 
@@ -187,6 +155,39 @@ namespace CAS.UI.UIControls.StoresControls
 			ColumnHeaderList.Add(columnHeader);
 
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "IsDangerous" };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "M.P." };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = 75, Text = "M.H." };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Life limit/1st. Perf" };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Rpt. int." };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = 0, Text = "Performances" };
+			ColumnHeaderList.Add(columnHeader);
+			//9
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Next" };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Remain/Overdue" };
+			ColumnHeaderList.Add(columnHeader);
+			//11
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Last" };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Warranty" };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Warranty Remain" };
+			ColumnHeaderList.Add(columnHeader);
+
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Kit" };
 			ColumnHeaderList.Add(columnHeader);
 			//19
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Hidden Remarks" };
@@ -517,7 +518,6 @@ namespace CAS.UI.UIControls.StoresControls
             subItems.Add(new ListViewItem.ListViewSubItem { Text = name, Tag = name } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = description, Tag = description } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = serialNumber, Tag = serialNumber } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = code, Tag = code });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = classString, Tag = classString });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = batchNumber, Tag = batchNumber });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = idNumber, Tag = idNumber });
@@ -525,7 +525,6 @@ namespace CAS.UI.UIControls.StoresControls
             subItems.Add(new ListViewItem.ListViewSubItem { Text = status, Tag = status });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = location, Tag = location });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = facility, Tag = facility });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = maintenanceTypeString, Tag = maintenanceTypeString });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = from, Tag = from });
             subItems.Add(new ListViewItem.ListViewSubItem
             {
@@ -534,35 +533,9 @@ namespace CAS.UI.UIControls.StoresControls
 	            Tag = transferDate
             });
             subItems.Add(new ListViewItem.ListViewSubItem { Text = workType, Tag = workType });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = manHours.ToString(), Tag = manHours } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = needWpQuantity.ToString(), Tag = needWpQuantity });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = needWpQuantity.ToString(), Tag = needWpQuantity });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = reserve.ToString(), Tag = reserve });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = firstPerformance.ToString(), Tag = firstPerformance });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = repeatInterval.ToString(), Tag = repeatInterval });
-
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = timesString, Tag = times });
-
-            subItems.Add(new ListViewItem.ListViewSubItem
-            {
-                Text = approx != null 
-                    ? SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)approx) + " " + next
-                    : next != null && !next.IsNullOrZero()
-                        ? next.ToString()
-                        : "",
-                Tag = approx == null ? DateTimeExtend.GetCASMinDateTime() : (DateTime)approx
-            } );
-            subItems.Add(new ListViewItem.ListViewSubItem
-            {
-                Text = remains != null && !remains.IsNullOrZero()
-                                       ? remains.ToString()
-                                       : "",
-                Tag = remains ?? Lifelength.Null
-            } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = lastPerformanceString, Tag = lastPerformance } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = warranty.ToString(), Tag = warranty } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = warrantyRemain.ToString(), Tag = warrantyRemain } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = kitRequieredString, Tag = kitCount });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = quantityString, Tag = quantity });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = quantityString, Tag = quantity });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = shouldBeOnStockString, Tag = shouldBeOnStock });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = quantityInString, Tag = quantityIn });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = unitPrice.ToString(), Tag = unitPrice } );
@@ -575,11 +548,39 @@ namespace CAS.UI.UIControls.StoresControls
             subItems.Add(new ListViewItem.ListViewSubItem { Text = total.ToString(), Tag = total } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = currency, Tag = currency } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = supplier, Tag = supplier } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = remarks, Tag = remarks } );
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = code, Tag = code });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = remarks, Tag = remarks } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = effectivity, Tag = effectivity } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = isPool ? "Yes" : "No", Tag = isPool } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = IsDangerous ? "Yes" : "No", Tag = IsDangerous } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = hiddenRemarks, Tag = hiddenRemarks } );
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = maintenanceTypeString, Tag = maintenanceTypeString });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = manHours.ToString(), Tag = manHours });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = firstPerformance.ToString(), Tag = firstPerformance });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = repeatInterval.ToString(), Tag = repeatInterval });
+
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = timesString, Tag = times });
+
+            subItems.Add(new ListViewItem.ListViewSubItem
+            {
+	            Text = approx != null
+		            ? SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)approx) + " " + next
+		            : next != null && !next.IsNullOrZero()
+			            ? next.ToString()
+			            : "",
+	            Tag = approx == null ? DateTimeExtend.GetCASMinDateTime() : (DateTime)approx
+            });
+            subItems.Add(new ListViewItem.ListViewSubItem
+            {
+	            Text = remains != null && !remains.IsNullOrZero()
+		            ? remains.ToString()
+		            : "",
+	            Tag = remains ?? Lifelength.Null
+            });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = lastPerformanceString, Tag = lastPerformance });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = warranty.ToString(), Tag = warranty });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = warrantyRemain.ToString(), Tag = warrantyRemain });
+            subItems.Add(new ListViewItem.ListViewSubItem { Text = kitRequieredString, Tag = kitCount });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = hiddenRemarks, Tag = hiddenRemarks } );
             subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
 
 			return subItems.ToArray();
