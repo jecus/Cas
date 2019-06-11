@@ -1,6 +1,7 @@
 ﻿using CASTerms;
 using EFCore.DTO.General;
 using CAS.UI.UIControls.Auxiliary;
+using MetroFramework.Controls;
 
 namespace CAS.UI.UIControls.StoresControls
 {
@@ -33,6 +34,7 @@ namespace CAS.UI.UIControls.StoresControls
         private void InitializeComponent()
         {
 	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+	        this.metroCheckBox1 = new System.Windows.Forms.CheckBox();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
             this.pictureBoxSeparatorD = new System.Windows.Forms.PictureBox();
@@ -123,11 +125,24 @@ namespace CAS.UI.UIControls.StoresControls
             this.panelTopContainer.Controls.Add(this.buttonCalculate);
             this.panelTopContainer.Controls.Add(this.buttonMoveTo);
             this.panelTopContainer.Controls.Add(this.labelDateAsOf);
+            this.panelTopContainer.Controls.Add(this.metroCheckBox1);
             this.panelTopContainer.Size = new System.Drawing.Size(1138, 62);
+
             // 
-            // buttonDeleteSelected
+            // metroCheckBox1
             // 
-            this.buttonDeleteSelected.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.metroCheckBox1.AutoSize = true;
+            this.metroCheckBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.metroCheckBox1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.metroCheckBox1.Location = new System.Drawing.Point(345, 5);
+            this.metroCheckBox1.Name = "calculateCheck";
+            this.metroCheckBox1.Size = new System.Drawing.Size(114, 15);
+            this.metroCheckBox1.TabIndex = 0;
+            this.metroCheckBox1.Text = "with calculation";
+            // 
+			// buttonDeleteSelected
+			// 
+			this.buttonDeleteSelected.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.buttonDeleteSelected.ActiveBackgroundImage = null;
             this.buttonDeleteSelected.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonDeleteSelected.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
@@ -442,7 +457,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this._statusImageLinkLabel3.Margin = new System.Windows.Forms.Padding(0);
 			this._statusImageLinkLabel3.Name = "_statusImageLinkLabel3";
 			this._statusImageLinkLabel3.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInNew;
-			this._statusImageLinkLabel3.Size = new System.Drawing.Size(185, 27);
+			this._statusImageLinkLabel3.Size = new System.Drawing.Size(120, 27);
 			this._statusImageLinkLabel3.Status = AvControls.Statuses.Pending;
 			this._statusImageLinkLabel3.TabIndex = 22;
 			this._statusImageLinkLabel3.Text = "Tracking";
@@ -542,6 +557,7 @@ namespace CAS.UI.UIControls.StoresControls
 		private System.Windows.Forms.Label labelWorkPackage;
 		private System.Windows.Forms.Button buttonCalculate;
 		private System.Windows.Forms.Button buttonMoveTo;
+		private System.Windows.Forms.CheckBox metroCheckBox1;
 
 	}
 }
