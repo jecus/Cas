@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -8,10 +7,10 @@ using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CASTerms;
+using Microsoft.VisualBasic.Devices;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
-using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.NewGrid
@@ -31,6 +30,12 @@ namespace CAS.UI.UIControls.NewGrid
 		#endregion
 
 		#region Properties
+
+		#region ItemsCount
+
+		public int ItemsCount => radGridView1.Rows.Count;
+
+		#endregion
 
 		#region public List<T> SelectedItems
 		/// <summary>
@@ -207,6 +212,8 @@ namespace CAS.UI.UIControls.NewGrid
 				SetItemsColor();
 				SetTotalText();
 
+				radGridView1.RowFormatting += RadGridView1_RowFormatting;
+
 			}
 			catch (Exception ex)
 			{
@@ -215,6 +222,44 @@ namespace CAS.UI.UIControls.NewGrid
 			}
 		}
 
+		#region public virtual void InsertItems(T[] itemsArray)
+		/// <summary>
+		/// Добавляет элементы в начало ListView
+		/// </summary>
+		/// <param name="itemsArray"></param>
+		public virtual void InsertItems(T[] itemsArray)
+		{
+			if (itemsArray.Length == 0)
+				return;
+
+			var temp = new List<GridViewDataRowInfo>();
+			foreach (var item in itemsArray)
+			{
+				var i = 0;
+				var rowInfo = new GridViewDataRowInfo(this.radGridView1.MasterView) { AllowResize = true };
+				rowInfo.Tag = item;
+
+				foreach (var cell in GetListViewSubItems(item))
+				{
+					rowInfo.Cells[i].Value = cell;
+
+					if (cell.ForeColor.HasValue)
+						rowInfo.Cells[i].Style.ForeColor = cell.ForeColor.Value;
+
+					i++;
+				}
+				temp.Add(rowInfo);
+			}
+
+			radGridView1.BeginUpdate();
+			radGridView1.Rows.AddRange(temp.ToArray());
+			radGridView1.EndUpdate();
+
+			SetItemsColor();
+			SetTotalText();
+		}
+
+		#endregion
 
 		#region public virtual T[] GetItemsArray()
 		/// <summary>
@@ -390,6 +435,101 @@ namespace CAS.UI.UIControls.NewGrid
 			}
 		}
 
+		#endregion
+
+
+		//Events
+
+		#region private void RadGridView1_RowFormatting(object sender, RowFormattingEventArgs e)
+
+		//Колхоз но по другому не знаю как сделать что бы при выделении цвет менял
+		private void RadGridView1_RowFormatting(object sender, RowFormattingEventArgs e)
+		{
+			if (e.RowElement.IsSelected)
+			{
+				foreach (GridViewCellInfo gridViewCellInfo in e.RowElement.RowInfo.Cells)
+					gridViewCellInfo.Style.CustomizeFill = false;
+			}
+			else SetItemColor(e.RowElement.RowInfo, (T)e.RowElement.RowInfo.Tag);
+		}
+
+		#endregion
+
+		#region private void RadGridView1_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+
+		private void RadGridView1_KeyDown(object sender, KeyEventArgs e)
+		{
+			switch (e.KeyData)
+			{
+				case Keys.Enter:
+					if (SelectedItem != null)
+					{
+						if(DisplayerRequested != null)
+							OnDisplayerRequested();
+						else RadGridView1_DoubleClick(sender, e);
+					}
+					break;
+				default:
+					break;
+			}
+		}
+
+		#endregion
+
+		#region public event EventHandler<ReferenceEventArgs> DisplayerRequested
+		/// <summary>
+		/// Событие, воздуждаемое при необходимости отобразть что-то в новой/текущей вкладке  
+		/// </summary>
+		public event EventHandler<ReferenceEventArgs> DisplayerRequested;
+
+		#endregion
+
+		#region private void RadGridView1_DoubleClick(object sender, System.EventArgs e)
+
+		protected  virtual void RadGridView1_DoubleClick(object sender, EventArgs e)
+		{
+			OnDisplayerRequested();
+		}
+
+		#endregion
+
+		#region protected void OnDisplayerRequested()
+		/// <summary>
+		/// Метод, возбуждающий событие DisplayerRequested
+		/// </summary>
+		protected void OnDisplayerRequested()
+		{
+			if (null != DisplayerRequested)
+			{
+				var reflection = ReflectionType;
+				var k = new Keyboard();
+				if (k.ShiftKeyDown && reflection == ReflectionTypes.DisplayInCurrent)
+					reflection = ReflectionTypes.DisplayInNew;
+				var e = null != Displayer ? new ReferenceEventArgs(Entity, reflection, Displayer, DisplayerText) : new ReferenceEventArgs(Entity, reflection, DisplayerText);
+
+				try
+				{
+					FillDisplayerRequestedParams(e);
+					DisplayerRequested(this, e);
+				}
+				catch (Exception ex)
+				{
+					Program.Provider.Logger.Log("Error while opening record", ex);
+				}
+			}
+		}
+
+		#endregion
+
+		#region protected virtual void FillDisplayerRequestedParams(ReferenceEventArgs e)
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		{
+		}
 		#endregion
 	}
 
