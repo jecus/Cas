@@ -179,35 +179,6 @@ namespace CAS.UI.UIControls.KitControls
             textBoxRemarks.Text = _currentKit.Remarks;
             numericCount.Value = (decimal)_currentKit.Quantity;
 
-            if(_currentKit.ItemId > 0)
-            {
-
-                ////////////////////////////////////////////
-                //загрузка котировочных ордеров для определения 
-                //того, можно ли менять партийный и серийный номер данного агрегата
-                List<RequestForQuotation> closedQuotations = new List<RequestForQuotation>();
-                List<PurchaseOrder> closedPurchases = new List<PurchaseOrder>();
-                try
-                {
-                    closedQuotations.AddRange(GlobalObjects.PurchaseCore.GetRequestForQuotation(null,
-                                                                                         new []{WorkPackageStatus.Closed},
-                                                                                         false,
-                                                                                         new[] { _currentKit.Product }));
-                    closedPurchases.AddRange(GlobalObjects.PurchaseCore.GetPurchaseOrders(null,
-                                                                                         WorkPackageStatus.Closed,
-                                                                                         false,
-                                                                                         new [] { _currentKit }));
-                    //comboBoxProduct.Enabled = 
-                    //    _currentKit.Product == null || 
-                    //    _currentKit.Product.IsDeleted || 
-                    //    (closedQuotations.Count == 0 && closedPurchases.Count == 0);
-                }
-                catch (Exception exception)
-                {
-                    Program.Provider.Logger.Log("Error while loading requestes for detail", exception);
-                }
-            }
-
             comboBoxStandart.SelectedIndexChanged += ComboBoxStandartSelectedIndexChanged;
         }
         #endregion
@@ -259,7 +230,7 @@ namespace CAS.UI.UIControls.KitControls
             //    message += "You can not save the existing item without using a template";
             //    return false;
             //}
-            if (comboBoxDetailClass.SelectedItem == null)
+            if (_currentKit.Product == null)
             {
                 if (message != "") message += "\n ";
                 message += "Not set detail type";

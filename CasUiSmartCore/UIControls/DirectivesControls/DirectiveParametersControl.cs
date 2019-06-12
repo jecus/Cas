@@ -809,6 +809,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.comboBoxSupersedes.Name = "comboBoxSupersedes";
 			this.comboBoxSupersedes.Size = new System.Drawing.Size(308, 21);
 			this.comboBoxSupersedes.TabIndex = 207;
+			this.comboBoxSupersedes.Visible = false;
 			// 
 			// labelSupersedes
 			// 
@@ -820,6 +821,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.labelSupersedes.TabIndex = 206;
 			this.labelSupersedes.Text = "Supersedes:";
 			this.labelSupersedes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.labelSupersedes.Visible = false;
 			// 
 			// comboBoxSuperseded
 			// 
@@ -830,6 +832,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.comboBoxSuperseded.Name = "comboBoxSuperseded";
 			this.comboBoxSuperseded.Size = new System.Drawing.Size(308, 21);
 			this.comboBoxSuperseded.TabIndex = 209;
+			this.comboBoxSuperseded.Visible = false;
 			// 
 			// labelSuperseded
 			// 
@@ -841,6 +844,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.labelSuperseded.TabIndex = 208;
 			this.labelSuperseded.Text = "Superseded:";
 			this.labelSuperseded.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.labelSuperseded.Visible = false;
 			// 
 			// comboBoxOrder
 			// 
@@ -850,6 +854,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.comboBoxOrder.Name = "comboBoxOrder";
 			this.comboBoxOrder.Size = new System.Drawing.Size(308, 21);
 			this.comboBoxOrder.TabIndex = 211;
+			this.comboBoxOrder.Visible = false;
 			// 
 			// label3
 			// 
@@ -861,6 +866,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.label3.TabIndex = 210;
 			this.label3.Text = "Order:";
 			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.label3.Visible = false;
 			// 
 			// label6
 			// 

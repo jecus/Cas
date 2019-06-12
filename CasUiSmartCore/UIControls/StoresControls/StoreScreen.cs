@@ -1421,7 +1421,12 @@ namespace CAS.UI.UIControls.StoresControls
             if (CurrentStore != null)
             {
 				var form = new ConsumablePartAndKitForm(CurrentStore);
-				if (form.ShowDialog() == DialogResult.OK) AnimatedThreadWorker.RunWorkerAsync();
+				if (form.ShowDialog() == DialogResult.OK)
+				{
+					var changedJob = form._consumablePart;
+					
+					_directivesViewer.InsertItems(new IBaseCoreObject[]{changedJob});
+				}
 			}
             else
                 MessageBox.Show("Функционал пока не реализован" + Environment.NewLine + "Работает в отдельном складе");         
@@ -1839,7 +1844,11 @@ namespace CAS.UI.UIControls.StoresControls
 	        if (CurrentStore != null)
 	        {
 		        var form = new ComponentForm(CurrentStore);
-		        if (form.ShowDialog() == DialogResult.OK) AnimatedThreadWorker.RunWorkerAsync();
+		        if (form.ShowDialog() == DialogResult.OK)
+		        {
+			        var changedJob = form._consumablePart;
+					_directivesViewer.InsertItems(new IBaseCoreObject[] { changedJob });
+				}
 	        }
 	        else
 		        MessageBox.Show("Функционал пока не реализован" + Environment.NewLine + "Работает в отдельном складе");

@@ -112,6 +112,6 @@ namespace CAS.UI.UIControls.Auxiliary
         private System.Windows.Forms.Panel panelBottomContainer;
         public System.Windows.Forms.Label labelTotal;
         private QuickSearchControl quickSearchControl;
-        protected System.Windows.Forms.ListView itemsListView;
+        public System.Windows.Forms.ListView itemsListView;
     }
 }
