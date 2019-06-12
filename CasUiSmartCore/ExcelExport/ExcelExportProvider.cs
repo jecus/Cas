@@ -673,7 +673,7 @@ namespace CAS.UI.ExcelExport
 
 		#region MyRegion
 
-		public void ExportShouldBeOnStock(List<Component> componentInfo)
+		public void ExportShouldBeOnStock(List<StockComponentInfo> componentInfo)
 		{
 			_package = new ExcelPackage();
 
@@ -716,11 +716,11 @@ namespace CAS.UI.ExcelExport
 
 			foreach (var stock in componentInfo)
 			{
-				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.Standart.ToString());
-				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.GoodsClass.ToString());
+				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.Standart?.ToString());
+				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.GoodsClass?.ToString());
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.PartNumber, ExcelHorizontalAlignment.Left);
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.Description);
-				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.Product.ToString(), ExcelHorizontalAlignment.Left);
+				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.AccessoryDescription?.ToString(), ExcelHorizontalAlignment.Left);
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.Current);
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.ShouldBeOnStock, ExcelHorizontalAlignment.Left);
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.Measure, ExcelHorizontalAlignment.Left);

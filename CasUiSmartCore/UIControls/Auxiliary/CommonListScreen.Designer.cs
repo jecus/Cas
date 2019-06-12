@@ -34,8 +34,10 @@ namespace CAS.UI.UIControls.Auxiliary
 	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
+            this.pictureBoxS4 = new System.Windows.Forms.PictureBox();
             this.pictureBoxS2 = new System.Windows.Forms.PictureBox();
             this.buttonAddNew = new CAS.UI.Management.Dispatchering.RichReferenceButton();
+            this.buttonExport = new CAS.UI.Management.Dispatchering.RichReferenceButton();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
             this.labelDateAsOf = new System.Windows.Forms.Label();
@@ -78,7 +80,9 @@ namespace CAS.UI.UIControls.Auxiliary
             this.flowLayoutPanel1.Controls.Add(this.buttonAddNew);
             this.flowLayoutPanel1.Controls.Add(this.pictureBox2);
             this.flowLayoutPanel1.Controls.Add(this.buttonApplyFilter);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flowLayoutPanel1.Controls.Add(this.pictureBoxS4);
+			this.flowLayoutPanel1.Controls.Add(this.buttonExport);
+			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(593, 0);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
@@ -122,6 +126,16 @@ namespace CAS.UI.UIControls.Auxiliary
             this.buttonDeleteSelected.Click += new System.EventHandler(this.ButtonDeleteClick);
             this.buttonDeleteSelected.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
+			// pictureBoxS4
+			// 
+			this.pictureBoxS4.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
+            this.pictureBoxS4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pictureBoxS4.Location = new System.Drawing.Point(118, 3);
+            this.pictureBoxS4.Name = "pictureBoxS4";
+            this.pictureBoxS4.Size = new System.Drawing.Size(5, 50);
+            this.pictureBoxS4.TabIndex = 20;
+            this.pictureBoxS4.TabStop = false;
+            // 
 			// pictureBoxS2
 			// 
 			this.pictureBoxS2.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
@@ -164,6 +178,39 @@ namespace CAS.UI.UIControls.Auxiliary
             this.buttonAddNew.ToolTipText = "Add new";
             this.buttonAddNew.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.ButtonAddDisplayerRequested);
             this.buttonAddNew.Enabled = !(userType == UsetType.ReadOnly);
+            // 
+            // buttonAddNew
+            // 
+            this.buttonExport.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.buttonExport.ActiveBackgroundImage = null;
+            this.buttonExport.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonExport.Displayer = null;
+            this.buttonExport.DisplayerText = "";
+            this.buttonExport.Entity = null;
+            this.buttonExport.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.buttonExport.FontSecondary = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.buttonExport.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
+            this.buttonExport.ForeColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
+            this.buttonExport.Icon = global::CAS.UI.Properties.Resources.ExcelImport;
+            this.buttonExport.IconLayout = System.Windows.Forms.ImageLayout.Center;
+            this.buttonExport.IconNotEnabled = global::CAS.UI.Properties.Resources.AddIcon_gray;
+            this.buttonExport.Location = new System.Drawing.Point(63, 0);
+            this.buttonExport.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonExport.Name = "buttonExport";
+            this.buttonExport.NormalBackgroundImage = null;
+            this.buttonExport.PaddingMain = new System.Windows.Forms.Padding(0);
+            this.buttonExport.PaddingSecondary = new System.Windows.Forms.Padding(0);
+            this.buttonExport.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInNew;
+            this.buttonExport.ShowToolTip = true;
+            this.buttonExport.Size = new System.Drawing.Size(52, 57);
+            this.buttonExport.TabIndex = 19;
+            this.buttonExport.TextAlignMain = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonExport.TextAlignSecondary = System.Drawing.ContentAlignment.TopLeft;
+            this.buttonExport.TextMain = "";
+            this.buttonExport.TextSecondary = "";
+            this.buttonExport.ToolTipText = "Export";
+            this.buttonExport.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.ButtonExportDisplayerRequested);
+            this.buttonExport.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// pictureBox2
 			// 
@@ -247,6 +294,7 @@ namespace CAS.UI.UIControls.Auxiliary
             this.headerControl.ResumeLayout(false);
             this.headerControl.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxS4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxS2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
@@ -260,8 +308,10 @@ namespace CAS.UI.UIControls.Auxiliary
         private System.Windows.Forms.Label labelDateAsOf;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
 		protected CAS.UI.Management.Dispatchering.RichReferenceButton buttonAddNew;
+		protected CAS.UI.Management.Dispatchering.RichReferenceButton buttonExport;
         protected AvControls.AvButtonT.AvButtonT buttonDeleteSelected;
         private System.Windows.Forms.PictureBox pictureBoxS2;
+        private System.Windows.Forms.PictureBox pictureBoxS4;
         private System.Windows.Forms.PictureBox pictureBox2;
         private AvControls.AvButtonT.AvButtonT buttonApplyFilter;
     }

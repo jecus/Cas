@@ -1050,15 +1050,24 @@ namespace CAS.UI.UIControls.Auxiliary
 
             AnimatedThreadWorker.RunWorkerAsync();
         }
-        #endregion
+		#endregion
 
-        #region protected virtual ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
-        /// <summary>
-        /// Реагирует на нажатие кнопки добавления нового элемента
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected virtual void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
+		#region #region protected virtual ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
+
+		protected virtual void ButtonExportDisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+
+		}
+
+		#endregion
+
+		#region protected virtual ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
+		/// <summary>
+		/// Реагирует на нажатие кнопки добавления нового элемента
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected virtual void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
         {
             try
             {

@@ -155,7 +155,7 @@ namespace SmartCore.Component
 		/// <returns></returns>
 		public ComponentCollection GetStoreComponents(Store store)
 		{
-			return GetComponentsByQuery(ComponentQueries.GetSelectQuery(store, loadChild: true), false);
+			return GetComponentsByQuery(ComponentQueries.GetSelectQuery(store, loadChild: true));
 		}
 
 		#endregion
