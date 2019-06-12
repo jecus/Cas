@@ -671,7 +671,7 @@ namespace CAS.UI.ExcelExport
 
 		#endregion
 
-		#region MyRegion
+		#region ExportShouldBeOnStock
 
 		public void ExportShouldBeOnStock(List<StockComponentInfo> componentInfo)
 		{
@@ -683,16 +683,16 @@ namespace CAS.UI.ExcelExport
 			var workSheet = Workbook.Worksheets[sheetName];
 
 			FillHeaderCell(workSheet.Cells[1, 1], "Standart", ExcelHorizontalAlignment.Center);
-			workSheet.Column(1).Width = 14;
+			workSheet.Column(1).Width = 20;
 
 			FillHeaderCell(workSheet.Cells[1, 2], "Class", ExcelHorizontalAlignment.Center);
-			workSheet.Column(2).Width = 14;
+			workSheet.Column(2).Width = 26;
 
 			FillHeaderCell(workSheet.Cells[1, 3], "Part Number", ExcelHorizontalAlignment.Center);
 			workSheet.Column(3).Width = 24;
 
 			FillHeaderCell(workSheet.Cells[1, 4], "Description", ExcelHorizontalAlignment.Center);
-			workSheet.Column(4).Width = 14;
+			workSheet.Column(4).Width = 20;
 
 			FillHeaderCell(workSheet.Cells[1, 5], "Product", ExcelHorizontalAlignment.Center);
 			workSheet.Column(5).Width = 30;
@@ -704,9 +704,11 @@ namespace CAS.UI.ExcelExport
 			workSheet.Column(7).Width = 16;
 
 			FillHeaderCell(workSheet.Cells[1, 8], "Measure", ExcelHorizontalAlignment.Center);
-			workSheet.Column(8).Width = 18;
+			workSheet.Column(8).Width = 16;
 
-			
+			workSheet.Column(2).Style.WrapText = true;
+			workSheet.Column(4).Style.WrapText = true;
+			workSheet.Column(5).Style.WrapText = true;
 			workSheet.DefaultRowHeight = 15;
 			workSheet.View.FreezePanes(2, 1);
 
@@ -718,12 +720,12 @@ namespace CAS.UI.ExcelExport
 			{
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.Standart?.ToString());
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.GoodsClass?.ToString());
-				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.PartNumber, ExcelHorizontalAlignment.Left);
-				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.Description);
+				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.PartNumber);
+				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.Description, ExcelHorizontalAlignment.Left);
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.AccessoryDescription?.ToString(), ExcelHorizontalAlignment.Left);
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.Current);
-				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.ShouldBeOnStock, ExcelHorizontalAlignment.Left);
-				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.Measure, ExcelHorizontalAlignment.Left);
+				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.ShouldBeOnStock);
+				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.Measure);
 				
 				currentColumnPosition = 1;
 				currentRowPosition++;
