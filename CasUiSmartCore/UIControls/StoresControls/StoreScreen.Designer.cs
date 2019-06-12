@@ -45,8 +45,8 @@ namespace CAS.UI.UIControls.StoresControls
             this.pictureBoxSeparatorC = new System.Windows.Forms.PictureBox();
             this._buttonTransferDetails = new AvControls.AvButtonT.AvButtonT();
             this.pictureBoxSeparatorTC = new System.Windows.Forms.PictureBox();
-            this._buttonMoveToAircraft = new AvControls.AvButtonT.AvButtonT();
-            this.labelDateAsOf = new System.Windows.Forms.Label();
+            this.buttonExport = new CAS.UI.Management.Dispatchering.RichReferenceButton();
+			this.labelDateAsOf = new System.Windows.Forms.Label();
             this._buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
             this._statusImageLinkLabel1 = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             this._statusImageLinkLabel2 = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -104,8 +104,8 @@ namespace CAS.UI.UIControls.StoresControls
             this.flowLayoutPanel1.Controls.Add(this.pictureBoxSeparatorC);
             this.flowLayoutPanel1.Controls.Add(this._buttonTransferDetails);
             this.flowLayoutPanel1.Controls.Add(this.pictureBoxSeparatorTC);
-            this.flowLayoutPanel1.Controls.Add(this._buttonMoveToAircraft);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
+			this.flowLayoutPanel1.Controls.Add(this.buttonExport);
+			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(426, 0);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
@@ -322,38 +322,38 @@ namespace CAS.UI.UIControls.StoresControls
             this.pictureBoxSeparatorTC.Size = new System.Drawing.Size(5, 57);
             this.pictureBoxSeparatorTC.TabIndex = 25;
             this.pictureBoxSeparatorTC.TabStop = false;
-            // 
-            // _buttonMoveToAircraft
-            // 
-            this._buttonMoveToAircraft.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this._buttonMoveToAircraft.ActiveBackgroundImage = null;
-            this._buttonMoveToAircraft.Cursor = System.Windows.Forms.Cursors.Hand;
-            this._buttonMoveToAircraft.Dock = System.Windows.Forms.DockStyle.Right;
-            this._buttonMoveToAircraft.Enabled = false;
-            this._buttonMoveToAircraft.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this._buttonMoveToAircraft.FontSecondary = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this._buttonMoveToAircraft.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
-            this._buttonMoveToAircraft.ForeColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
-            this._buttonMoveToAircraft.Icon = global::CAS.UI.Properties.Resources.TransferComponentUpGreenArrow;
-            this._buttonMoveToAircraft.IconLayout = System.Windows.Forms.ImageLayout.Center;
-            this._buttonMoveToAircraft.IconNotEnabled = global::CAS.UI.Properties.Resources.TransferComponentUpGreenArrowGray;
-            this._buttonMoveToAircraft.Location = new System.Drawing.Point(0, 0);
-            this._buttonMoveToAircraft.Margin = new System.Windows.Forms.Padding(0);
-            this._buttonMoveToAircraft.MinimumSize = new System.Drawing.Size(52, 57);
-            this._buttonMoveToAircraft.Name = "_buttonMoveToAircraft";
-            this._buttonMoveToAircraft.NormalBackgroundImage = null;
-            this._buttonMoveToAircraft.PaddingMain = new System.Windows.Forms.Padding(0);
-            this._buttonMoveToAircraft.PaddingSecondary = new System.Windows.Forms.Padding(4, 0, 0, 0);
-            this._buttonMoveToAircraft.ShowToolTip = true;
-            this._buttonMoveToAircraft.Size = new System.Drawing.Size(55, 63);
-            this._buttonMoveToAircraft.TabIndex = 18;
-            this._buttonMoveToAircraft.TextAlignMain = System.Drawing.ContentAlignment.MiddleLeft;
-            this._buttonMoveToAircraft.TextAlignSecondary = System.Drawing.ContentAlignment.MiddleLeft;
-            this._buttonMoveToAircraft.TextMain = "";
-            this._buttonMoveToAircraft.TextSecondary = "";
-            this._buttonMoveToAircraft.ToolTipText = "Move to...";
-            this._buttonMoveToAircraft.Click += new System.EventHandler(this.ButtonMoveToAircraftClick);
-            this._buttonMoveToAircraft.Enabled = !(userType == UsetType.ReadOnly);
+			// 
+			// buttonExport
+			// 
+			this.buttonExport.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+			this.buttonExport.ActiveBackgroundImage = null;
+			this.buttonExport.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonExport.Displayer = null;
+			this.buttonExport.DisplayerText = "";
+			this.buttonExport.Dock = System.Windows.Forms.DockStyle.Right;
+			this.buttonExport.Entity = null;
+			this.buttonExport.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonExport.FontSecondary = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonExport.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
+			this.buttonExport.ForeColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
+			this.buttonExport.Icon = global::CAS.UI.Properties.Resources.ExcelImport;
+			this.buttonExport.IconLayout = System.Windows.Forms.ImageLayout.Center;
+			this.buttonExport.Location = new System.Drawing.Point(63, 0);
+			this.buttonExport.Margin = new System.Windows.Forms.Padding(0);
+			this.buttonExport.Name = "buttonExport";
+			this.buttonExport.NormalBackgroundImage = null;
+			this.buttonExport.PaddingMain = new System.Windows.Forms.Padding(0);
+			this.buttonExport.PaddingSecondary = new System.Windows.Forms.Padding(0);
+			this.buttonExport.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInNew;
+			this.buttonExport.ShowToolTip = true;
+			this.buttonExport.Size = new System.Drawing.Size(55, 63);
+			this.buttonExport.TabIndex = 25;
+			this.buttonExport.TextAlignMain = System.Drawing.ContentAlignment.BottomCenter;
+			this.buttonExport.TextAlignSecondary = System.Drawing.ContentAlignment.TopCenter;
+			this.buttonExport.TextMain = "";
+			this.buttonExport.TextSecondary = "";
+			this.buttonExport.ToolTipText = "Export";
+			this.buttonExport.Click += ExportStock_Click;
 			// 
 			// labelDateAsOf
 			// 
@@ -534,7 +534,7 @@ namespace CAS.UI.UIControls.StoresControls
             this.PerformLayout();
 
         }
-
+		
 		#endregion
 
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
@@ -542,8 +542,8 @@ namespace CAS.UI.UIControls.StoresControls
         private AvControls.AvButtonT.AvButtonT _buttonAddConsumablePartAndKit;
         private AvControls.AvButtonT.AvButtonT _buttonApplyFilter;
         private AvControls.AvButtonT.AvButtonT _buttonTransferDetails;
-        private AvControls.AvButtonT.AvButtonT _buttonMoveToAircraft;
-        private CAS.UI.Management.Dispatchering.RichReferenceButton _buttonAddDetail;
+		private CAS.UI.Management.Dispatchering.RichReferenceButton buttonExport;
+		private CAS.UI.Management.Dispatchering.RichReferenceButton _buttonAddDetail;
         private CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel _statusImageLinkLabel1;
         private CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel _statusImageLinkLabel2;
         private CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel _statusImageLinkLabel3;

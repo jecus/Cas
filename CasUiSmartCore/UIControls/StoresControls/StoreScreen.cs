@@ -8,8 +8,10 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using AvControls;
 using AvControls.AvMultitabControl.Auxiliary;
+using CAS.UI.ExcelExport;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
+using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.ComponentChangeReport;
 using CAS.UI.UIControls.ComponentControls;
@@ -106,6 +108,8 @@ namespace CAS.UI.UIControls.StoresControls
 		private TransferedComponentForm _transferedComponentForm;
 	    private WorkPackage _selectedWorkPackage;
 	    private ComponentCollection resultCollection;
+	    private AnimatedThreadWorker _worker;
+	    private ExcelExportProvider _exportProvider;
 
 	    #endregion
         
@@ -1237,7 +1241,6 @@ namespace CAS.UI.UIControls.StoresControls
         private void DirectivesViewerSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
         {
             headerControl.EditButtonEnabled = _directivesViewer.SelectedItems.Count > 0;
-            buttonDeleteSelected.Enabled = _buttonMoveToAircraft.Enabled = _directivesViewer.SelectedItems.Count > 0; 
         }
 
         #endregion
@@ -2660,6 +2663,36 @@ namespace CAS.UI.UIControls.StoresControls
 
 				AnimatedThreadWorker.RunWorkerAsync();
 			}
+		}
+
+		private void ExportStock_Click(object sender, EventArgs eventArgs)
+		{
+			_worker = new AnimatedThreadWorker();
+			_worker.DoWork += ExportStockWork;
+			_worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+			_worker.RunWorkerAsync();
+		}
+
+		private void ExportStockWork(object sender, DoWorkEventArgs e)
+		{
+			_worker.ReportProgress(0, "Generate file! Please wait....");
+
+			_exportProvider = new ExcelExportProvider();
+			_exportProvider.ExportStock(_resultDirectiveArray.ToList());
+		}
+
+		private void Worker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+		{
+			var sfd = new SaveFileDialog();
+			sfd.Filter = ".xlsx Files (*.xlsx)|*.xlsx";
+
+			if (sfd.ShowDialog() == DialogResult.OK)
+			{
+				_exportProvider.SaveTo(sfd.FileName);
+				MessageBox.Show("File was success saved!");
+			}
+
+			_exportProvider.Dispose();
 		}
 
 		#endregion
