@@ -747,15 +747,15 @@
     <Reference Include="System.Xml" />
     <Reference Include="Telerik.WinControls, Version=2019.1.115.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Progress\Telerik UI for WinForms R1 2019\Bin\Telerik.WinControls.dll</HintPath>
+      <HintPath>..\DLL\Telerik\Telerik.WinControls.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.WinControls.GridView, Version=2019.1.115.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Progress\Telerik UI for WinForms R1 2019\Bin\Telerik.WinControls.GridView.dll</HintPath>
+      <HintPath>..\DLL\Telerik\Telerik.WinControls.GridView.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.WinControls.Themes.TelerikMetroBlue, Version=2019.1.115.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Progress\Telerik UI for WinForms R1 2019\Bin\Telerik.WinControls.Themes.TelerikMetroBlue.dll</HintPath>
+      <HintPath>..\DLL\Telerik\Telerik.WinControls.Themes.TelerikMetroBlue.dll</HintPath>
     </Reference>
     <Reference Include="UIAutomationProvider">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
