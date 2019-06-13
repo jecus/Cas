@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
@@ -451,6 +453,27 @@ namespace CAS.UI.UIControls.NewGrid
 		}
 
 		#endregion
+
+		public void ExportToExcel()
+		{
+			using (var ms = new System.IO.MemoryStream())
+			{
+				var exporter = new Telerik.WinControls.Export.GridViewSpreadExport(radGridView1);
+				var renderer = new Telerik.WinControls.Export.SpreadExportRenderer();
+				 exporter.RunExport(ms, renderer);
+
+				 var sfd = new SaveFileDialog {Filter = ".xlsx Files (*.xlsx)|*.xlsx"};
+
+				 if (sfd.ShowDialog() == DialogResult.OK)
+				{
+					using (var fileStream = new FileStream(sfd.FileName, FileMode.Create, FileAccess.Write))
+					{
+						ms.WriteTo(fileStream);
+					}
+					MessageBox.Show("File was success saved!");
+				}
+			}
+		}
 
 		//Events
 
