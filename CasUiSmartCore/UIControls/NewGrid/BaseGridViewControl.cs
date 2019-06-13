@@ -24,12 +24,27 @@ namespace CAS.UI.UIControls.NewGrid
 		//коллекция выделенных элементов
 		private readonly List<T> _selectedItemsList = new List<T>();
 		private readonly List<T> _items = new List<T>();
-
-		private List<CustomCell>  _cells = new List<CustomCell>();
+		private RadDropDownMenu _customMenu;
 
 		#endregion
 
 		#region Properties
+
+		#region public Action MenuOpeningAction { get; set; }
+
+		public Action MenuOpeningAction { get; set; }
+
+		#endregion
+
+		#region public RadDropDownMenu CustomMenu
+
+		public RadDropDownMenu CustomMenu
+		{
+			get => _customMenu ?? (_customMenu = new RadDropDownMenu());
+			set => _customMenu = value;
+		}
+
+		#endregion
 
 		#region ItemsCount
 
@@ -202,9 +217,9 @@ namespace CAS.UI.UIControls.NewGrid
 			if(itemsArray == null)
 				throw new ArgumentNullException("itemsArray", "itemsArray can't be null");
 			//очищение предварительной коллекции элементов
-			_cells.Clear();
 			_items.Clear();
 			_items.AddRange(itemsArray);
+			radGridView1.Rows.Clear();
 
 			try
 			{
@@ -437,8 +452,21 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#endregion
 
-
 		//Events
+
+		#region private void RadGridView1_ContextMenuOpening(object sender, Telerik.WinControls.UI.ContextMenuOpeningEventArgs e)
+
+		private void RadGridView1_ContextMenuOpening(object sender, ContextMenuOpeningEventArgs e)
+		{
+			var cellElement = e.ContextMenuProvider as GridCellElement;
+			if (cellElement == null || cellElement.RowInfo is GridViewFilteringRowInfo || cellElement.RowInfo is GridViewTableHeaderRowInfo)
+				return;
+
+			MenuOpeningAction?.Invoke();
+			e.ContextMenu = _customMenu;
+		}
+
+		#endregion
 
 		#region private void RadGridView1_RowFormatting(object sender, RowFormattingEventArgs e)
 
