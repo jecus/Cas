@@ -1429,6 +1429,7 @@ namespace CAS.UI.UIControls.StoresControls
 					var changedJob = form._consumablePart;
 					
 					_directivesViewer.InsertItems(new IBaseCoreObject[]{changedJob});
+					_preResultDirectiveArray.Add(changedJob);
 				}
 			}
             else
@@ -1851,6 +1852,7 @@ namespace CAS.UI.UIControls.StoresControls
 		        {
 			        var changedJob = form._consumablePart;
 					_directivesViewer.InsertItems(new IBaseCoreObject[] { changedJob });
+					_preResultDirectiveArray.Add(changedJob);
 				}
 	        }
 	        else

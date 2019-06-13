@@ -374,45 +374,46 @@ namespace CAS.UI.UIControls.PurchaseControls
                 //string description = textBoxDescription.Text.Replace(" ", "").ToLower();
 
                 List<Product> products = null;
-                List<GoodStandart> goodStandarts = null;
-                GoodStandart goodStandart = null;
-                try
-                {
-                    goodStandarts = new List<GoodStandart>(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<GoodStandartDTO, GoodStandart>());
-                }
-                catch (Exception ex)
-                {
-                    Program.Provider.Logger.Log("Not Find dictionary of type " + typeof(GoodStandart).Name, ex);
-                }
+                //List<GoodStandart> goodStandarts = null;
+                //GoodStandart goodStandart = null;
+                //try
+                //{
+                //    //goodStandarts = new List<GoodStandart>(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<GoodStandartDTO, GoodStandart>());
+                //}
+                //catch (Exception ex)
+                //{
+                //    Program.Provider.Logger.Log("Not Find dictionary of type " + typeof(GoodStandart).Name, ex);
+                //}
 
-                if (goodStandarts != null)
-                {
-                    goodStandart = goodStandarts
-                        .FirstOrDefault(gs => gs.PartNumber.Replace(" ", "").ToLower() == partNumber
-                                           && standart != null && gs.FullName.Replace(" ", "").ToLower() == standart.FullName.Replace(" ", "").ToLower());
-                    if (goodStandart == null)
-                    {
-                        goodStandart = new GoodStandart();
-                        goodStandart.GoodsClass = comboBoxDetailClass.SelectedItem as GoodsClass;
-                        goodStandart.PartNumber = textBoxPartNumber.Text;
-                        goodStandart.Description = textBoxDescription.Text;
-                        goodStandart.FullName = standartName.ToLower() == "select item" || standartName.ToLower() == "n/a" ? "N/A" : standartName;
-                        //goodStandart.CostNew = (double)numericCostNew.Value;
-                        //goodStandart.CostServiceable = (double)numericCostServiceable.Value;
-                        //goodStandart.CostOverhaul = (double)numericCostOverhaul.Value;
-                        goodStandart.Remarks = textBoxRemarks.Text;
-                        //goodStandart.Measure = comboBoxMeasure.SelectedItem as Measure;
+                //if (goodStandarts != null)
+                //{
+                //    goodStandart = goodStandarts
+                //        .FirstOrDefault(gs => gs.PartNumber.Replace(" ", "").ToLower() == partNumber
+                //                           && standart != null && gs.FullName.Replace(" ", "").ToLower() == standart.FullName.Replace(" ", "").ToLower());
+                //    if (goodStandart == null)
+                //    {
+                //        goodStandart = new GoodStandart();
+                //        goodStandart.GoodsClass = comboBoxDetailClass.SelectedItem as GoodsClass;
+                //        goodStandart.PartNumber = textBoxPartNumber.Text;
+                //        goodStandart.Description = textBoxDescription.Text;
+                //        goodStandart.FullName = standartName.ToLower() == "select item" || standartName.ToLower() == "n/a" ? "N/A" : standartName;
+                //        //goodStandart.CostNew = (double)numericCostNew.Value;
+                //        //goodStandart.CostServiceable = (double)numericCostServiceable.Value;
+                //        //goodStandart.CostOverhaul = (double)numericCostOverhaul.Value;
+                //        goodStandart.Remarks = textBoxRemarks.Text;
+                //        //goodStandart.Measure = comboBoxMeasure.SelectedItem as Measure;
 
-                        GlobalObjects.CasEnvironment.Manipulator.Save(goodStandart);
-                    }
-                    _currentItem.Standart = goodStandart;
-                }
+                //        GlobalObjects.CasEnvironment.Manipulator.Save(goodStandart);
+                //    }
+                //    _currentItem.Standart = goodStandart;
+                //}
                     _currentItem.GoodsClass = comboBoxDetailClass.SelectedItem as GoodsClass;
                     _currentItem.PartNumber = textBoxPartNumber.Text;
                     _currentItem.AltPartNumber = textBoxAltPartNum.Text;
                     _currentItem.Description = textBoxDescription.Text;
                     _currentItem.Manufacturer = textBoxManufacturer.Text;
-                    _currentItem.Standart = goodStandart;
+                    //_currentItem.Standart = goodStandart;
+                    _currentItem.Standart = standart;
                     _currentItem.Name = textBoxName.Text;
                     _currentItem.Reference = textBoxReference.Text;
                     _currentItem.Remarks = textBoxRemarks.Text;
