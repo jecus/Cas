@@ -724,7 +724,7 @@ namespace CAS.UI.ExcelExport
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.GoodsClass?.ToString());
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.PartNumber);
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.Description, ExcelHorizontalAlignment.Left);
-				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.AccessoryDescription?.ToString(), ExcelHorizontalAlignment.Left);
+				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.AccessoryDescription?.Name, ExcelHorizontalAlignment.Left);
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.Current);
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.ShouldBeOnStock);
 				FillCell(workSheet.Cells[currentRowPosition, currentColumnPosition++], stock.Measure);
