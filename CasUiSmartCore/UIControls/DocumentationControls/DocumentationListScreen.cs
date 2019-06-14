@@ -14,6 +14,7 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Filters;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.DocumentationControls
 {
@@ -29,12 +30,12 @@ namespace CAS.UI.UIControls.DocumentationControls
 		private readonly BaseEntityObject _parent;
 		private DocumentationListView _directivesViewer;
 
-		private ContextMenuStrip _contextMenuStrip;
-		private ToolStripMenuItem _toolStripMenuItemCopy;
-		private ToolStripMenuItem _toolStripMenuItemPaste;
-		private ToolStripMenuItem _toolStripMenuItemShowTaskCard;
-		private ToolStripMenuItem _toolStripMenuItemSaveAsTaskCard;
-		private ToolStripSeparator _toolStripSeparator1;
+		private RadDropDownMenu _contextMenuStrip;
+		private RadMenuItem _toolStripMenuItemCopy;
+		private RadMenuItem _toolStripMenuItemPaste;
+		private RadMenuItem _toolStripMenuItemShowTaskCard;
+		private RadMenuItem _toolStripMenuItemSaveAsTaskCard;
+		private RadSeparator _toolStripSeparator1;
 
 		private ContextMenuStrip _buttonPrintMenuStrip;
 		private ToolStripMenuItem _itemPrintReportListOfDocuments;
@@ -120,7 +121,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
 			_directivesViewer.SetItemsArray(_resultDocumentArray.ToArray());
-			headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
+			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 
 			_directivesViewer.Focus();
 		}
@@ -184,10 +185,24 @@ namespace CAS.UI.UIControls.DocumentationControls
 			{
 				TabIndex = 2,
 				Location = new Point(panel1.Left, panel1.Top),
-				Dock = DockStyle.Fill, IgnoreAutoResize = true
+				Dock = DockStyle.Fill
 			};
 
-			_directivesViewer.ContextMenuStrip = _contextMenuStrip;
+			_directivesViewer.CustomMenu = _contextMenuStrip;
+
+			_directivesViewer.MenuOpeningAction = () => {
+				if (_directivesViewer.SelectedItems.Count <= 0)
+				{
+					_toolStripMenuItemShowTaskCard.Enabled = false;
+				}
+
+				if (_directivesViewer.SelectedItems.Count == 1)
+				{
+					var document = _directivesViewer.SelectedItems[0];
+					_toolStripMenuItemSaveAsTaskCard.Enabled = _toolStripMenuItemShowTaskCard.Enabled = document.AttachedFile != null;
+				}
+			};
+
 			panel1.Controls.Add(_directivesViewer);
 		}
 
@@ -215,12 +230,12 @@ namespace CAS.UI.UIControls.DocumentationControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new ContextMenuStrip();
-			_toolStripMenuItemCopy = new ToolStripMenuItem();
-			_toolStripMenuItemPaste = new ToolStripMenuItem();
-			_toolStripMenuItemShowTaskCard = new ToolStripMenuItem();
-			_toolStripMenuItemSaveAsTaskCard = new ToolStripMenuItem();
-			_toolStripSeparator1 = new ToolStripSeparator();
+			_contextMenuStrip = new RadDropDownMenu();
+			_toolStripMenuItemCopy = new RadMenuItem();
+			_toolStripMenuItemPaste = new RadMenuItem();
+			_toolStripMenuItemShowTaskCard = new RadMenuItem();
+			_toolStripMenuItemSaveAsTaskCard = new RadMenuItem();
+			_toolStripSeparator1 = new RadSeparator();
 
 			// 
 			// contextMenuStrip
@@ -252,16 +267,13 @@ namespace CAS.UI.UIControls.DocumentationControls
 			_toolStripMenuItemSaveAsTaskCard.Text = "Save as document file";
 			_toolStripMenuItemSaveAsTaskCard.Click += _toolStripMenuItemSaveAsTaskCard_Click;
 
-			_contextMenuStrip.Items.AddRange(new ToolStripItem[]
-			{
-				_toolStripMenuItemSaveAsTaskCard,
+			_contextMenuStrip.Items.AddRange(_toolStripMenuItemSaveAsTaskCard,
 				_toolStripMenuItemShowTaskCard,
-				_toolStripSeparator1,
+				//_toolStripSeparator1,
 				_toolStripMenuItemCopy,
-				_toolStripMenuItemPaste
-			});
-
-			_contextMenuStrip.Opening += ContextMenuStripOpen;
+				_toolStripMenuItemPaste);
+			
+			
 		}
 
 		#endregion
@@ -351,24 +363,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 			}
 
 		}
-
-		#region private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-
-		private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-	    {
-		    if (_directivesViewer.SelectedItems.Count <= 0)
-		    {
-			    _toolStripMenuItemShowTaskCard.Enabled = false;
-			}
-
-		    if (_directivesViewer.SelectedItems.Count == 1)
-		    {
-			    var document = _directivesViewer.SelectedItems[0];
-			    _toolStripMenuItemSaveAsTaskCard.Enabled = _toolStripMenuItemShowTaskCard.Enabled = document.AttachedFile != null;
-		    }
-	    }
-
-		#endregion
+		
 
 		#region private void ButtonAddNonRoutineJobClick(object sender, EventArgs e)
 		private void ButtonAddNonRoutineJobClick(object sender, EventArgs e)

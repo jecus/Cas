@@ -191,7 +191,7 @@ namespace CAS.UI.UIControls.PersonnelControls
         {
 			_resultDocumentArray.Clear();
 
-            documentationListView.ItemListView.Clear();
+            documentationListView.radGridView1.Rows.Clear();
         }
 
 		#endregion

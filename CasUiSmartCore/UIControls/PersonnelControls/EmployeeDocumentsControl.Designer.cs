@@ -80,7 +80,6 @@ namespace CAS.UI.UIControls.PersonnelControls
 			this.documentationListView.Margin = new System.Windows.Forms.Padding(4);
 			this.documentationListView.Name = "documentationListView";
 			this.documentationListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.documentationListView.ShowGroups = true;
 			this.documentationListView.Size = new System.Drawing.Size(1115, 471);
 			this.documentationListView.TabIndex = 0;
 			// 
