@@ -4,7 +4,9 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using CAS.UI.ExcelExport;
 using CAS.UI.Interfaces;
+using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using EFCore.DTO.General;
@@ -23,17 +25,19 @@ namespace CAS.UI.UIControls.StoresControls
     {
 	    private readonly ComponentCollection _resultCollection;
 
-	    #region Fields
 
-        #endregion
-        
-        #region Constructors
+		#region Fields
+		private AnimatedThreadWorker _worker;
+		private ExcelExportProvider _exportProvider;
+		#endregion
 
-        #region public ShouldBeOnStockScreen()
-        ///<summary>
-        /// Конструктор по умолчанию
-        ///</summary>
-        public ShouldBeOnStockListScreen()
+		#region Constructors
+
+		#region public ShouldBeOnStockScreen()
+		///<summary>
+		/// Конструктор по умолчанию
+		///</summary>
+		public ShouldBeOnStockListScreen()
         {
             InitializeComponent();
             ViewedType = typeof (StockComponentInfo);
@@ -167,8 +171,42 @@ namespace CAS.UI.UIControls.StoresControls
         {
             //throw new System.NotImplementedException();
         }
-        #endregion
+		#endregion
 
-        #endregion
-    }
+		#region protected override void ButtonExportDisplayerRequested(object sender, ReferenceEventArgs e)
+
+		protected override void ButtonExportDisplayerRequested(object sender, ReferenceEventArgs e)
+        {
+	        _worker = new AnimatedThreadWorker();
+	        _worker.DoWork += ExportActivity_Click;
+	        _worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+	        _worker.RunWorkerAsync();
+        }
+
+		#endregion
+
+		private void ExportActivity_Click(object sender, EventArgs eventArgs)
+		{
+			_worker.ReportProgress(0, "Generate file! Please wait....");
+
+			_exportProvider = new ExcelExportProvider();
+			_exportProvider.ExportShouldBeOnStock(InitialDirectiveArray.OfType<StockComponentInfo>().ToList());
+		}
+
+		private void Worker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+		{
+			var sfd = new SaveFileDialog();
+			sfd.Filter = ".xlsx Files (*.xlsx)|*.xlsx";
+
+			if (sfd.ShowDialog() == DialogResult.OK)
+			{
+				_exportProvider.SaveTo(sfd.FileName);
+				MessageBox.Show("File was success saved!");
+			}
+
+			_exportProvider.Dispose();
+		}
+
+		#endregion
+	}
 }

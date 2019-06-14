@@ -360,10 +360,10 @@ namespace CAS.UI.UIControls.StoresControls
 				      dictionaryComboBoxLocation.SelectedItem.ItemId != obj.Location.ItemId ||
 				      textBoxRemarks.Text != obj.Remarks ||
 				      (ComponentStatus) comboBoxStatus.SelectedItem != obj.ComponentStatus ||
-				      lifelengthViewerLifeLimit.Lifelength.IsEqual(obj.LifeLimit) ||
-				      lifelengthViewerNotify.Lifelength.IsEqual(obj.LifeLimitNotify) ||
-				      lifelengthViewerWarranty.Lifelength.IsEqual(obj.Warranty) ||
-				      lifelengthViewerWarrantyNotify.Lifelength.IsEqual(obj.WarrantyNotify) ||
+				      lifelengthViewerLifeLimit.Lifelength != (obj.LifeLimit) ||
+				      lifelengthViewerNotify.Lifelength != (obj.LifeLimitNotify) ||
+				      lifelengthViewerWarranty.Lifelength != (obj.Warranty) ||
+				      lifelengthViewerWarrantyNotify.Lifelength != (obj.WarrantyNotify) ||
 				      dateTimePickerManufactureDate.Value != obj.ManufactureDate ||
 				      numericUpDownQuantity.Value != (decimal) obj.QuantityIn ||
 				      ataChapterComboBox.ATAChapter.ItemId != obj.ATAChapter.ItemId ||

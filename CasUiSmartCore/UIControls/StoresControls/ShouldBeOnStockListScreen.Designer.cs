@@ -40,6 +40,7 @@ namespace CAS.UI.UIControls.StoresControls
             this.Name = "NonRoutineJobCategoriesListScreen";
             this.ShowAircraftStatusPanel = false;
             this.buttonAddNew.Visible = false;
+            this.buttonExport.Visible = true;
             this.Size = new System.Drawing.Size(917, 590);
             this.ResumeLayout(false);
             this.PerformLayout();

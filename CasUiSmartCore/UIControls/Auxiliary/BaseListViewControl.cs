@@ -153,9 +153,10 @@ namespace CAS.UI.UIControls.Auxiliary
         ///</summary>
         public BaseListViewControl()
         {
-	        DoubleBuffered = true;
-	        SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
-			InitializeComponent();
+	        InitializeComponent();
+			DoubleBuffered = true;
+			SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
+			this.DoubleBuffering(true);
         }
         #endregion
        
@@ -187,19 +188,19 @@ namespace CAS.UI.UIControls.Auxiliary
         protected virtual List<PropertyInfo> GetTypeProperties()
         {
             //определение типа
-            Type type = typeof(T);
+            var type = typeof(T);
             //определение своиств, имеющих атрибут "отображаемое в списке"
-            List<PropertyInfo> properties =
+            var properties =
                 type.GetProperties().Where(p => p.GetCustomAttributes(typeof(ListViewDataAttribute), false).Length != 0).ToList();
 
             //поиск своиств у которых задан порядок отображения
             //своиства, имеющие порядок отображения
-            Dictionary<int, PropertyInfo> orderedProperties = new Dictionary<int, PropertyInfo>();
+            var orderedProperties = new Dictionary<int, PropertyInfo>();
             //своиства, НЕ имеющие порядок отображения
-            List<PropertyInfo> unOrderedProperties = new List<PropertyInfo>();
-            foreach (PropertyInfo propertyInfo in properties)
+            var unOrderedProperties = new List<PropertyInfo>();
+            foreach (var propertyInfo in properties)
             {
-                ListViewDataAttribute lvda = (ListViewDataAttribute)
+                var lvda = (ListViewDataAttribute)
                     propertyInfo.GetCustomAttributes(typeof(ListViewDataAttribute), false).First();
                 if (lvda.Order > 0) orderedProperties.Add(lvda.Order, propertyInfo);
                 else unOrderedProperties.Add(propertyInfo);
@@ -254,11 +255,11 @@ namespace CAS.UI.UIControls.Auxiliary
         /// <returns>Массив директив</returns>
         public virtual T[] GetItemsArray()
         {
-            int count = itemsListView.Items.Count;
-            List<T> returnDetailArray = new List<T>();
+            var count = itemsListView.Items.Count;
+            var returnDetailArray = new List<T>();
             if (count > 0)
             {
-                for (int i = 0; i < count; i++)
+                for (var i = 0; i < count; i++)
                 {
                     returnDetailArray.Add((T)itemsListView.Items[i].Tag);
                 }
@@ -273,14 +274,13 @@ namespace CAS.UI.UIControls.Auxiliary
         /// </summary>
         protected virtual void SetHeaders()
         {
-            List<PropertyInfo> properties = GetTypeProperties();
+            var properties = GetTypeProperties();
 
             ColumnHeaderList.Clear();
             ColumnHeader columnHeader;
-            foreach (PropertyInfo propertyInfo in properties)
+            foreach (var propertyInfo in properties)
             {
-                ListViewDataAttribute attr =
-                    (ListViewDataAttribute) propertyInfo.GetCustomAttributes(typeof (ListViewDataAttribute), false)[0]; 
+                var attr = (ListViewDataAttribute) propertyInfo.GetCustomAttributes(typeof (ListViewDataAttribute), false)[0]; 
                 columnHeader = new ColumnHeader();
                 columnHeader.Width = attr.HeaderWidth > 1 ? (int)attr.HeaderWidth : (int)(itemsListView.Width * attr.HeaderWidth);
                 columnHeader.Text = attr.Title;
@@ -300,8 +300,8 @@ namespace CAS.UI.UIControls.Auxiliary
         {
             if (itemsArray.Length != 0)
             {
-                int count = itemsArray.Length;
-                for (int i = 0; i < count; i++)
+                var count = itemsArray.Length;
+                for (var i = 0; i < count; i++)
                 {
                     AddItem(itemsArray[i]);
                 }
@@ -327,11 +327,11 @@ namespace CAS.UI.UIControls.Auxiliary
             if (itemsArray.Length == 0) 
                 return;
             
-            List<ListViewItem> listViewItems = itemsArray.Select(GetItem).ToList();
+            var listViewItems = itemsArray.Select(GetItem).ToList();
             
             //SortItems(SortMultiplier, listViewItems);
                 
-            for (int i = listViewItems.Count - 1; i >= 0; i--)
+            for (var i = listViewItems.Count - 1; i >= 0; i--)
             {
                 //ListViewItemList.Insert(0, listViewItems[i]);
                 //itemsListView.Items.Insert(0, listViewItems[i]);
@@ -361,7 +361,7 @@ namespace CAS.UI.UIControls.Auxiliary
         {
             try
             {
-                ListViewItem listViewItem = new ListViewItem(GetListViewSubItems(item),null) {Tag = item};
+                var listViewItem = new ListViewItem(GetListViewSubItems(item),null) {Tag = item};
                 ListViewItemList.Add(listViewItem);
                 return;
             }
@@ -381,12 +381,12 @@ namespace CAS.UI.UIControls.Auxiliary
         /// <returns></returns>
         protected virtual ListViewItem.ListViewSubItem[] GetListViewSubItems(T item)
         {
-            List<PropertyInfo> properties = GetTypeProperties();
+            var properties = GetTypeProperties();
 
-            ListViewItem.ListViewSubItem[] subItems = new ListViewItem.ListViewSubItem[properties.Count];
-            for (int i = 0; i < properties.Count; i++ )
+            var subItems = new ListViewItem.ListViewSubItem[properties.Count];
+            for (var i = 0; i < properties.Count; i++ )
             {
-                object value = properties[i].GetValue(item, null);
+                var value = properties[i].GetValue(item, null);
                 if(value != null)
                 {
 	                if (properties[i].Name == "CorrectorId")
@@ -430,7 +430,7 @@ namespace CAS.UI.UIControls.Auxiliary
         {
             try
             {
-                ListViewItem listViewItem = new ListViewItem(GetListViewSubItems(item), null) { Tag = item };
+                var listViewItem = new ListViewItem(GetListViewSubItems(item), null) { Tag = item };
                 return listViewItem;
             }
             catch (Exception ex)
@@ -522,7 +522,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region private void SetItemsColor(IEnumerable<ListViewItem> listViewItems)
         private void SetItemsColor(IEnumerable<ListViewItem> listViewItems)
         {
-            foreach (ListViewItem item in listViewItems)
+            foreach (var item in listViewItems)
             {
                 SetItemColor(item, (T)item.Tag);
             }
@@ -532,7 +532,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region protected virtual void SetItemColor(ListViewItem listViewItem, T item)
         protected virtual void SetItemColor(ListViewItem listViewItem, T item)
         {
-            IDirective imd = item as IDirective;
+            var imd = item as IDirective;
             if (imd == null) return;
 
             if(imd.NextPerformanceIsBlocked)
@@ -559,12 +559,12 @@ namespace CAS.UI.UIControls.Auxiliary
         /// <param name="items">Элементы, для которых требуется обновить подсветку</param>
         public void UpdateItemsColor(IEnumerable<T> items)
         {
-            List<ListViewItem> lvi =
+            var lvi =
                 items.SelectMany(i => itemsListView.Items.Cast<ListViewItem>()
                                                          .Where(listViewItem => listViewItem.Tag == i))
                      .ToList();
 
-            foreach (ListViewItem item in lvi)
+            foreach (var item in lvi)
             {
                 SetItemColor(item, (T)item.Tag);
             }
@@ -578,12 +578,12 @@ namespace CAS.UI.UIControls.Auxiliary
         /// <param name="item">Элемент, для которого требуется обновить подсветку</param>
         public void UpdateItemColor(T item)
         {
-            List<ListViewItem> lvi =
+            var lvi =
                 itemsListView.Items.Cast<ListViewItem>()
                                    .Where(listViewItem => listViewItem.Tag == item)
                                    .ToList();
 
-            foreach (ListViewItem listViewItem in lvi)
+            foreach (var listViewItem in lvi)
             {
                 SetItemColor(listViewItem, (T)listViewItem.Tag);
             }
@@ -608,11 +608,11 @@ namespace CAS.UI.UIControls.Auxiliary
         ///</summary>
         private void SearchItem(string stringToSearch)
         {
-            int searchStartIndex = 0;
+            var searchStartIndex = 0;
             //очистка выделенных элементов списка
             ClearSelectedItems();
-            List<ListViewItem> findItems = new List<ListViewItem>();
-            ListViewItem item = itemsListView.FindItemWithText(stringToSearch, true, searchStartIndex);
+            var findItems = new List<ListViewItem>();
+            var item = itemsListView.FindItemWithText(stringToSearch, true, searchStartIndex);
             while (item != null && searchStartIndex < itemsListView.Items.Count)
             {
                 item.Selected = true;
@@ -642,7 +642,7 @@ namespace CAS.UI.UIControls.Auxiliary
         protected virtual void CopyToClipboard()
         {
             // регистрация формата данных либо получаем его, если он уже зарегистрирован
-            DataFormats.Format format = DataFormats.GetFormat(typeof(T[]).FullName);
+            var format = DataFormats.GetFormat(typeof(T[]).FullName);
             // копируем в буфер обмена
             IDataObject dataObj = new DataObject();
             dataObj.SetData(format.Name, false, SelectedItems.ToArray());
@@ -771,18 +771,18 @@ namespace CAS.UI.UIControls.Auxiliary
 			if(IgnoreAutoResize)
 				return;
             //определение своиств типа
-            List<PropertyInfo> preProrerty = GetTypeProperties();
+            var preProrerty = GetTypeProperties();
             //определение своиств, имеющих атрибут "отображаемое в списке"
-            List<PropertyInfo> properties =
+            var properties =
                 preProrerty.Where(p => p.GetCustomAttributes(typeof(ListViewDataAttribute), false).Length != 0).ToList();
-            for (int i = 0; i < ColumnHeaderList.Count; i++)
+            for (var i = 0; i < ColumnHeaderList.Count; i++)
             {
                 if (i >= properties.Count)
                 {
                     ColumnHeaderList[i].Width = (int)(itemsListView.Width * 0.1f);
                     continue;
                 }
-                ListViewDataAttribute attr =
+                var attr =
                     (ListViewDataAttribute)properties[i].GetCustomAttributes(typeof(ListViewDataAttribute), false)[0];
                 ColumnHeaderList[i].Width = attr.HeaderWidth > 1
                                          ? (int)attr.HeaderWidth
@@ -799,8 +799,8 @@ namespace CAS.UI.UIControls.Auxiliary
         {
             if (null != DisplayerRequested)
             {
-                ReflectionTypes reflection = ReflectionType;
-                Keyboard k = new Keyboard();
+                var reflection = ReflectionType;
+                var k = new Keyboard();
                 if (k.ShiftKeyDown && reflection == ReflectionTypes.DisplayInCurrent) 
                     reflection = ReflectionTypes.DisplayInNew;
                 ReferenceEventArgs e;

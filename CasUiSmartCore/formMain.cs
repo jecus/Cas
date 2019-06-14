@@ -27,27 +27,21 @@ namespace CAS.UI
         private WorkHelperMainForm codegen;
         public formMain()
         {
-            InitializeComponent();
+	        InitializeComponent();
             StaticWaitFormProvider.StatusChaged += StaticWaitFormProvider_StatusChaged;
             loginPage.Entity = dispatcheredUILoginPage1;
             dispatcheredMultitabControl.InactiveBottomColor = Css.CommonAppearance.Colors.BackColor;
             dispatcheredMultitabControl.BackColor = Css.CommonAppearance.Colors.BackColor;
             Text = new GlobalTermsProvider()["SystemName"].ToString(); //+ ". Licensed to " + LicenseManager.LicensedTo + ". Expiry Date " + LicenseManager.ExpiryDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
-            DoubleBuffered = true;
+			this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+			Application.EnableVisualStyles();
 #if DEBUG
             find = new FindForm(this);
             find.Show();
             codegen = new WorkHelperMainForm();
             codegen.Show();
 #endif
-
-            /*
-                        else
-                            Text = (string)new GlobalTermsProvider()["SystemName"].ToString(); //+ ". Licensed is expired on " + LicenseManager.ExpiryDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
-            */
-
-
-            Icon = Resources.LTR;
+	        Icon = Resources.LTR;
             LicenseDispatcher.Form = this;
         }
 

@@ -719,6 +719,10 @@
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="PresentationFramework" />
+    <Reference Include="RadControlSpy, Version=2019.1.115.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Telerik\RadControlSpy.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
@@ -745,6 +749,30 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
+    <Reference Include="Telerik.WinControls, Version=2019.1.115.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Telerik\Telerik.WinControls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.GridView, Version=2019.1.115.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Telerik\Telerik.WinControls.GridView.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.Themes.TelerikMetroBlue, Version=2019.1.115.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Telerik\Telerik.WinControls.Themes.TelerikMetroBlue.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.UI, Version=2019.1.115.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Telerik\Telerik.WinControls.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.UI.Design, Version=2019.1.115.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Telerik\Telerik.WinControls.UI.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="TelerikExport, Version=2019.1.115.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Telerik\TelerikExport.dll</HintPath>
+    </Reference>
     <Reference Include="UIAutomationProvider">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -758,6 +786,7 @@
   <ItemGroup>
     <Compile Include="ExcelExport\DirectiveComparer.cs" />
     <Compile Include="ExcelExport\ExcelExportProvider.cs" />
+    <Compile Include="Extentions.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\ItemRelationHelper.cs" />
     <Compile Include="Helpers\ListViewGroupHelper.cs" />
@@ -1053,6 +1082,12 @@
     </Compile>
     <Compile Include="UIControls\MTOP\MTOPSummary.Designer.cs">
       <DependentUpon>MTOPSummary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\NewGrid\BaseGridViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\NewGrid\BaseGridViewControl.Designer.cs">
+      <DependentUpon>BaseGridViewControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UIControls\OpepatorsControls\PasswordChangeForm.cs">
       <SubType>Form</SubType>
@@ -3838,6 +3873,7 @@
     <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="UIControls\AircraftsControls\AircraftGeneralDataControls\AircraftApprovalControl.resx">
       <DependentUpon>AircraftApprovalControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -3962,6 +3998,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\MTOP\MTOPSummary.resx">
       <DependentUpon>MTOPSummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\NewGrid\BaseGridViewControl.resx">
+      <DependentUpon>BaseGridViewControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\NonRoutineJobsControls\NonRoutineJobsListScreen.resx" />
     <EmbeddedResource Include="UIControls\OpepatorsControls\PasswordChangeForm.resx">

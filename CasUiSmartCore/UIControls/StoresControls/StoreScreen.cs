@@ -8,8 +8,10 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using AvControls;
 using AvControls.AvMultitabControl.Auxiliary;
+using CAS.UI.ExcelExport;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
+using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.ComponentChangeReport;
 using CAS.UI.UIControls.ComponentControls;
@@ -106,6 +108,8 @@ namespace CAS.UI.UIControls.StoresControls
 		private TransferedComponentForm _transferedComponentForm;
 	    private WorkPackage _selectedWorkPackage;
 	    private ComponentCollection resultCollection;
+	    private AnimatedThreadWorker _worker;
+	    private ExcelExportProvider _exportProvider;
 
 	    #endregion
         
@@ -335,9 +339,9 @@ namespace CAS.UI.UIControls.StoresControls
 
                 _toolStripMenuItemQuotations.DropDownItems.Clear();
 
-                foreach (RequestForQuotation quotation in _openPubQuotations)
+                foreach (var quotation in _openPubQuotations)
                 {
-                    ToolStripMenuItem item = new ToolStripMenuItem(quotation.Title);
+                    var item = new ToolStripMenuItem(quotation.Title);
                     item.Click += AddToQuotationOrderItemClick;
                     item.Tag = quotation;
                     _toolStripMenuItemQuotations.DropDownItems.Add(item);
@@ -388,7 +392,7 @@ namespace CAS.UI.UIControls.StoresControls
 
 			//извлечение и собрание всех компоннтов самолета
 			//(деталей и базовых деталей) в одну коллекцию
-			ComponentCollection componentCollection = new ComponentCollection();
+			var componentCollection = new ComponentCollection();
             BaseComponentCollection baseComponentCollection;
 
             if (CurrentStore != null)
@@ -401,307 +405,320 @@ namespace CAS.UI.UIControls.StoresControls
             {
                 baseComponentCollection = new BaseComponentCollection();
                 foreach (var store in GlobalObjects.CasEnvironment.Stores)
-                {
-                    baseComponentCollection.AddRange(GlobalObjects.ComponentCore.GetStoreBaseComponents(store.ItemId));
-                }
+	                baseComponentCollection.AddRange(GlobalObjects.ComponentCore.GetStoreBaseComponents(store.ItemId));
             }
 
-            //////////////////////////////////////////////////////
-            //   проверка на компоненты ожидающие перемещения   //
-            //////////////////////////////////////////////////////
-            //Detail[] waitRemovedDetails =
-            //detailCollection.GetWaitRemoveConfirmDetails(currentStore);
-            //foreach (Detail detail in waitRemovedDetails)
-            //{
-            //    _waitRemoveConfirmDetails.Add(detail);
-            //    _waitRemoveConfirmTransfers.Add(detail.TransferRecords.Last);
-            //}
-            //////////////////////////////////////////////////////
-            //   проверка на установленные базовые компоненты   //
-            //////////////////////////////////////////////////////
-            IEnumerable<BaseComponent> lastInstalledBaseDetails =
-                GlobalObjects.CasEnvironment.BaseComponents.GetLastInstalledComponentsOn(CurrentStore);
-            foreach (BaseComponent baseDetail in lastInstalledBaseDetails)
+            if (!metroCheckBox1.Checked)
             {
-                _installedComponents.Add(baseDetail);
-                _installedTransfers.Add(baseDetail.TransferRecords.GetLast());
+	            resultCollection.AddRange(baseComponentCollection.ToArray());
+	            resultCollection.AddRange(componentCollection.ToArray());
 
-                //удаление данного компонента из коллекции
-                //т.к. его отображать не нужно
-                baseComponentCollection.Remove(baseDetail);
-            }
+	            foreach (var component in resultCollection)
+	            {
+		            _preResultDirectiveArray.Add(component);
+		            foreach (var detailDirective in component.ComponentDirectives)
+			            _preResultDirectiveArray.Add(detailDirective);
+	            }
 
-            //////////////////////////////////////////////////////
-            //     проверка на удаленные базовые компоненты     //
-            //////////////////////////////////////////////////////
-            var removedBaseComponentTransfers =
-                GlobalObjects.TransferRecordCore.GetLastTransferRecordsFrom(CurrentStore,
-                                                                               SmartCoreType.BaseComponent).ToArray();
-            foreach (TransferRecord record in removedBaseComponentTransfers)
-            {
-                //загрузка и БД детали, которой пренадлежит данная запись о перемещении
-                BaseComponent bd = GlobalObjects.ComponentCore.GetBaseComponentById(record.ParentId);
 
-                if (record.DODR)
-                {
-                    //если перемещение подтверждено, то деталь записывается в "перемещенные"
-                    //окна "TransferedDetails"
-                    if (_removedComponents.CompareAndAdd(bd)) _removedTransfers.Add(record);
-                }
-                else
-                {
-                    //если перемещение не подтверждено, то деталь записывается в 
-                    //"ожидабщие подтверждения" окна "TransferedDetails"
-                    if (_waitRemoveConfirmComponents.CompareAndAdd(bd)) _waitRemoveConfirmTransfers.Add(record);
-                }
-            }
+	            AnimatedThreadWorker.ReportProgress(40, "calculation of stock");
 
-            //////////////////////////////////////////////////////
-            //     проверка на установленные компоненты         //
-            //////////////////////////////////////////////////////
-            var lastInstalledDetails = componentCollection.GetLastInstalledComponentsOn(CurrentStore);
-            foreach (var component in lastInstalledDetails)
-            {
-                _installedComponents.Add(component);
-                _installedTransfers.Add(component.TransferRecords.GetLast());
+	            GlobalObjects.StockCalculator.CalculateStock(resultCollection.ToArray(), _shouldBeOnStock);
 
-                //удаление данного компонента из коллекции
-                //т.к. его отображать не нужно
-                componentCollection.Remove(component);
-            }
-            //////////////////////////////////////////////////////
-            //     добавление компонентов базовых агрегатов     //
-            //////////////////////////////////////////////////////
-            //if(baseComponentCollection.Count > 0)
-                //componentCollection.AddRange(GlobalObjects.ComponentCore.GetComponents(baseComponentCollection.ToList()).ToArray());
-            //////////////////////////////////////////////////////
-            //        проверка на удаленные компоненты          //
-            //////////////////////////////////////////////////////
+	            AnimatedThreadWorker.ReportProgress(60, "calculation of stock");
 
-            //извлечение из базы данных всех записей о перемещении
-            //компонентов с данного базового агрегата
-            TransferRecord[] records =
-                GlobalObjects.TransferRecordCore.GetLastTransferRecordsFrom(CurrentStore).ToArray();
-
-            foreach (TransferRecord record in records)
-            {
-                //загрузка и БД детали, которой пренадлежит данная запись о перемещении
-                Component component = GlobalObjects.ComponentCore.GetComponentById(record.ParentId);
-
-                if (component == null)
-                    continue;
-
-                if (record.DODR)
-                {
-                    //если перемещение подтверждено, то деталь записывается в "перемещенные"
-                    //окна "TransferedDetails"
-                    if (_removedComponents.CompareAndAdd(component)) _removedTransfers.Add(record);
-                }
-                else
-                {
-                    //если перемещение не подтверждено, то деталь записывается в 
-                    //"ожидабщие подтверждения" окна "TransferedDetails"
-                    if (_waitRemoveConfirmComponents.CompareAndAdd(component)) _waitRemoveConfirmTransfers.Add(record);
-                }
-            }
-
-            #endregion
-
-            #region Калькуляция общего запаса компонентов
-
-            AnimatedThreadWorker.ReportProgress(40, "calculation of stock");
-
-            GlobalObjects.StockCalculator.CalculateStock(resultCollection.ToArray(), _shouldBeOnStock);
-
-            if (AnimatedThreadWorker.CancellationPending)
-            {
-                e.Cancel = true;
-                return;
-            }
-            #endregion
-
-            if (_currentForecast == null)
-            {
-                resultCollection.AddRange(baseComponentCollection.ToArray());
-                resultCollection.AddRange(componentCollection.ToArray());
-
-                #region Калькуляция состояния компонентов
-
-                AnimatedThreadWorker.ReportProgress(60, "calculation of components");
-
-                foreach (Component detail in resultCollection)
-                {
-                    GlobalObjects.PerformanceCalculator.GetNextPerformance(detail);
-					_preResultDirectiveArray.Add(detail);
-
-                    foreach (var componentDirective in detail.ComponentDirectives)
-                    {
-                        GlobalObjects.PerformanceCalculator.GetNextPerformance(componentDirective);
-						_preResultDirectiveArray.Add(componentDirective);
-                    }
-                }
-
-                if (AnimatedThreadWorker.CancellationPending)
-                {
-                    e.Cancel = true;
-                    return;
-                }
-                #endregion
-            }
+	            GlobalObjects.StockCalculator.CalculateStock(resultCollection.ToArray(), CurrentStore);
+			}
             else
             {
-                AnimatedThreadWorker.ReportProgress(60, "calculation components");
+				//////////////////////////////////////////////////////
+				//   проверка на установленные базовые компоненты   //
+				//////////////////////////////////////////////////////
+				var lastInstalledBaseDetails =
+					GlobalObjects.CasEnvironment.BaseComponents.GetLastInstalledComponentsOn(CurrentStore);
+				foreach (var baseDetail in lastInstalledBaseDetails)
+				{
+					_installedComponents.Add(baseDetail);
+					_installedTransfers.Add(baseDetail.TransferRecords.GetLast());
 
-                //извлечение и собрание всех компоннтов самолета
-                //(деталей и базовых деталей) в одну коллекцию
-                //List<MaintenanceType> types = new List<MaintenanceType>(_maintenanceTypes);
+					//удаление данного компонента из коллекции
+					//т.к. его отображать не нужно
+					baseComponentCollection.Remove(baseDetail);
+				}
 
-                if (CurrentStore != null)
-                {
-                    #region Калькуляция компонентов
-                    //////////////////////////////////////////////////////
-                    //   проверка на установленные базовые компоненты   //
-                    //////////////////////////////////////////////////////
-                    foreach (var baseComponent in lastInstalledBaseDetails)
-                    {
-                        //удаление данного компонента из коллекции
-                        //т.к. его отображать не нужно
-                        _currentForecast.ForecastDatas.Remove(_currentForecast.GetForecastDataByBaseComponentId(baseComponent.ItemId));
-                    }
+				//////////////////////////////////////////////////////
+				//     проверка на удаленные базовые компоненты     //
+				//////////////////////////////////////////////////////
+				var removedBaseComponentTransfers =
+					GlobalObjects.TransferRecordCore.GetLastTransferRecordsFrom(CurrentStore,
+																				   SmartCoreType.BaseComponent).ToArray();
+				foreach (var record in removedBaseComponentTransfers)
+				{
+					//загрузка и БД детали, которой пренадлежит данная запись о перемещении
+					var bd = GlobalObjects.ComponentCore.GetBaseComponentById(record.ParentId);
 
-                    GlobalObjects.AnalystCore.GetBaseComponentsAndComponentDirectives(_currentForecast);
-                    resultCollection.AddRange(_currentForecast.BaseComponents.ToArray());
+					if (record.DODR)
+					{
+						//если перемещение подтверждено, то деталь записывается в "перемещенные"
+						//окна "TransferedDetails"
+						if (_removedComponents.CompareAndAdd(bd)) _removedTransfers.Add(record);
+					}
+					else
+					{
+						//если перемещение не подтверждено, то деталь записывается в 
+						//"ожидабщие подтверждения" окна "TransferedDetails"
+						if (_waitRemoveConfirmComponents.CompareAndAdd(bd)) _waitRemoveConfirmTransfers.Add(record);
+					}
+				}
 
-                    GlobalObjects.AnalystCore.GetComponentsAndComponentDirectives(_currentForecast);
-                    ComponentCollection forecastComponentCollection = new ComponentCollection(_currentForecast.Components.ToArray());
-                    //////////////////////////////////////////////////////
-                    //     проверка на установленные компоненты         //
-                    //////////////////////////////////////////////////////
-                    lastInstalledDetails = forecastComponentCollection.GetLastInstalledComponentsOn(CurrentStore);
-                    foreach (Component detail in lastInstalledDetails)
-                    {
-                        //удаление данного компонента из коллекции
-                        //т.к. его отображать не нужно
-                        forecastComponentCollection.Remove(detail);
-                    }
+				//////////////////////////////////////////////////////
+				//     проверка на установленные компоненты         //
+				//////////////////////////////////////////////////////
+				var lastInstalledDetails = componentCollection.GetLastInstalledComponentsOn(CurrentStore);
+				foreach (var component in lastInstalledDetails)
+				{
+					_installedComponents.Add(component);
+					_installedTransfers.Add(component.TransferRecords.GetLast());
 
-                    foreach (var baseComponent in lastInstalledBaseDetails)
-                    {
-                        IEnumerable<Component> baseComponents =
-                            forecastComponentCollection.Where(
-                                component => component.TransferRecords.GetLast().DestinationObjectId == baseComponent.ItemId
-                                          && component.TransferRecords.GetLast().DestinationObjectType == baseComponent.SmartCoreObjectType
-                                          && component.TransferRecords.GetLast().DODR == false).ToArray();
-                        foreach (var component in baseComponents) 
-                            forecastComponentCollection.Remove(component);
-                    }
-                    resultCollection.AddRange(forecastComponentCollection.ToArray());
+					//удаление данного компонента из коллекции
+					//т.к. его отображать не нужно
+					componentCollection.Remove(component);
+				}
+				//////////////////////////////////////////////////////
+				//        проверка на удаленные компоненты          //
+				//////////////////////////////////////////////////////
 
-                    #endregion
-                }
+				//извлечение из базы данных всех записей о перемещении
+				//компонентов с данного базового агрегата
+				var records =
+					GlobalObjects.TransferRecordCore.GetLastTransferRecordsFrom(CurrentStore).ToArray();
 
-                #region Слияние компонентов в одну коллекцию
+				foreach (var record in records)
+				{
+					//загрузка и БД детали, которой пренадлежит данная запись о перемещении
+					//var component = GlobalObjects.ComponentCore.GetComponentById(record.ParentId);
+					var component = record.ParentComponent;
 
-                AnimatedThreadWorker.ReportProgress(40, "calculation of components");
+					if (component == null)
+						continue;
 
-                foreach (var component in resultCollection)
-                {
-					_preResultDirectiveArray.Add(component);
-                    foreach (ComponentDirective detailDirective in component.ComponentDirectives)
-						_preResultDirectiveArray.Add(detailDirective);
-                }
+					if (record.DODR)
+					{
+						//если перемещение подтверждено, то деталь записывается в "перемещенные"
+						//окна "TransferedDetails"
+						if (_removedComponents.CompareAndAdd(component)) _removedTransfers.Add(record);
+					}
+					else
+					{
+						//если перемещение не подтверждено, то деталь записывается в 
+						//"ожидабщие подтверждения" окна "TransferedDetails"
+						if (_waitRemoveConfirmComponents.CompareAndAdd(component)) _waitRemoveConfirmTransfers.Add(record);
+					}
+				}
 
-                if (AnimatedThreadWorker.CancellationPending)
-                {
-                    e.Cancel = true;
-                    return;
-                }
-                #endregion
-            }
+				#endregion
 
-            if (AnimatedThreadWorker.CancellationPending)
-            {
-                e.Cancel = true;
-                return;
-            }
+				#region Калькуляция общего запаса компонентов
 
-            componentCollection.Clear();
+				AnimatedThreadWorker.ReportProgress(40, "calculation of stock");
 
+				GlobalObjects.StockCalculator.CalculateStock(resultCollection.ToArray(), _shouldBeOnStock);
+
+				if (AnimatedThreadWorker.CancellationPending)
+				{
+					e.Cancel = true;
+					return;
+				}
+				#endregion
+
+				if (_currentForecast == null)
+				{
+					resultCollection.AddRange(baseComponentCollection.ToArray());
+					resultCollection.AddRange(componentCollection.ToArray());
+
+					#region Калькуляция состояния компонентов
+
+					AnimatedThreadWorker.ReportProgress(60, "calculation of components");
+
+					foreach (var detail in resultCollection)
+					{
+						GlobalObjects.PerformanceCalculator.GetNextPerformance(detail);
+						_preResultDirectiveArray.Add(detail);
+
+						foreach (var componentDirective in detail.ComponentDirectives)
+						{
+							GlobalObjects.PerformanceCalculator.GetNextPerformance(componentDirective);
+							_preResultDirectiveArray.Add(componentDirective);
+						}
+					}
+
+					if (AnimatedThreadWorker.CancellationPending)
+					{
+						e.Cancel = true;
+						return;
+					}
+					#endregion
+				}
+				else
+				{
+					AnimatedThreadWorker.ReportProgress(60, "calculation components");
+
+					//извлечение и собрание всех компоннтов самолета
+					//(деталей и базовых деталей) в одну коллекцию
+					//List<MaintenanceType> types = new List<MaintenanceType>(_maintenanceTypes);
+
+					if (CurrentStore != null)
+					{
+						#region Калькуляция компонентов
+						//////////////////////////////////////////////////////
+						//   проверка на установленные базовые компоненты   //
+						//////////////////////////////////////////////////////
+						foreach (var baseComponent in lastInstalledBaseDetails)
+						{
+							//удаление данного компонента из коллекции
+							//т.к. его отображать не нужно
+							_currentForecast.ForecastDatas.Remove(_currentForecast.GetForecastDataByBaseComponentId(baseComponent.ItemId));
+						}
+
+						GlobalObjects.AnalystCore.GetBaseComponentsAndComponentDirectives(_currentForecast);
+						resultCollection.AddRange(_currentForecast.BaseComponents.ToArray());
+
+						GlobalObjects.AnalystCore.GetComponentsAndComponentDirectives(_currentForecast);
+						var forecastComponentCollection = new ComponentCollection(_currentForecast.Components.ToArray());
+						//////////////////////////////////////////////////////
+						//     проверка на установленные компоненты         //
+						//////////////////////////////////////////////////////
+						lastInstalledDetails = forecastComponentCollection.GetLastInstalledComponentsOn(CurrentStore);
+						foreach (var detail in lastInstalledDetails)
+						{
+							//удаление данного компонента из коллекции
+							//т.к. его отображать не нужно
+							forecastComponentCollection.Remove(detail);
+						}
+
+						foreach (var baseComponent in lastInstalledBaseDetails)
+						{
+							IEnumerable<Component> baseComponents =
+								forecastComponentCollection.Where(
+									component => component.TransferRecords.GetLast().DestinationObjectId == baseComponent.ItemId
+											  && component.TransferRecords.GetLast().DestinationObjectType == baseComponent.SmartCoreObjectType
+											  && component.TransferRecords.GetLast().DODR == false).ToArray();
+							foreach (var component in baseComponents)
+								forecastComponentCollection.Remove(component);
+						}
+						resultCollection.AddRange(forecastComponentCollection.ToArray());
+
+						#endregion
+					}
+
+					#region Слияние компонентов в одну коллекцию
+
+					AnimatedThreadWorker.ReportProgress(40, "calculation of components");
+
+					foreach (var component in resultCollection)
+					{
+						_preResultDirectiveArray.Add(component);
+						foreach (var detailDirective in component.ComponentDirectives)
+							_preResultDirectiveArray.Add(detailDirective);
+					}
+
+					if (AnimatedThreadWorker.CancellationPending)
+					{
+						e.Cancel = true;
+						return;
+					}
+					#endregion
+				}
+
+				if (AnimatedThreadWorker.CancellationPending)
+				{
+					e.Cancel = true;
+					return;
+				}
+
+				componentCollection.Clear();
+
+				#region Калькуляция кол-ва компонентов
+
+				AnimatedThreadWorker.ReportProgress(60, "calculation of stock");
+
+				GlobalObjects.StockCalculator.CalculateStock(resultCollection.ToArray(), CurrentStore);
+
+				if (AnimatedThreadWorker.CancellationPending)
+				{
+					e.Cancel = true;
+					return;
+				}
+				#endregion
+
+				#region Сравнение с рабочими пакетами
+
+				AnimatedThreadWorker.ReportProgress(90, "comparison with the Work Packages");
+
+
+					//загрузка рабочих пакетов для определения 
+					//перекрытых ими выполнений задач
+					_openPubWorkPackages.AddRange(GlobalObjects.WorkPackageCore.GetWorkPackagesLite(CurrentAircraft, WorkPackageStatus.Opened));
+					_openPubWorkPackages.AddRange(GlobalObjects.WorkPackageCore.GetWorkPackagesLite(CurrentAircraft, WorkPackageStatus.Published));
+					//сбор всех записей рабочих пакетов для удобства фильтрации
+					var openWPRecords = new List<WorkPackageRecord>();
+					foreach (var openWorkPackage in _openPubWorkPackages)
+						openWPRecords.AddRange(openWorkPackage.WorkPakageRecords);
+
+					foreach (IDirective dir in _resultDirectiveArray)
+					{
+						if (dir.NextPerformances == null || dir.NextPerformances.Count <= 0)
+							continue;
+						var baseObject = (BaseEntityObject)dir;
+						//Проход по всем след. выполнениям чека и записям в рабочих пакетах
+						//для поиска перекрывающихся выполнений
+						var performances = dir.NextPerformances;
+						foreach (var np in performances)
+						{
+							//поиск записи в рабочих пакетах по данному чеку
+							//чей номер группы выполнения (по записи) совпадает с расчитанным
+							var wpr =
+								openWPRecords.FirstOrDefault(r => r.PerformanceNumFromStart == np.PerformanceNum
+								                                  && r.WorkPackageItemType ==
+								                                  baseObject.SmartCoreObjectType.ItemId
+								                                  && r.DirectiveId == baseObject.ItemId);
+							if (wpr != null)
+								np.BlockedByPackage = _openPubWorkPackages.GetItemById(wpr.WorkPakageId);
+
+						}
+					}
+
+
+				if (AnimatedThreadWorker.CancellationPending)
+				{
+					e.Cancel = true;
+					return;
+				}
+				#endregion
+
+				#region Загрузка Котировочных ордеров
+
+				AnimatedThreadWorker.ReportProgress(95, "Load Quotations");
+
+				//загрузка рабочих пакетов для определения 
+				//перекрытых ими выполнений задач
+				if (_openPubQuotations == null) _openPubQuotations = new CommonCollection<RequestForQuotation>();
+
+				_openPubQuotations.Clear();
+				_openPubQuotations.AddRange(GlobalObjects.PurchaseCore.GetRequestForQuotation(CurrentStore, new[] { WorkPackageStatus.Opened, WorkPackageStatus.Published }));
+
+				if (AnimatedThreadWorker.CancellationPending)
+				{
+					e.Cancel = true;
+					return;
+				}
+				#endregion
+			}
+
+            AnimatedThreadWorker.ReportProgress(90, "Filtering");
 			AdditionalFilterItems(_preResultDirectiveArray, _resultDirectiveArray);
 
-			#region Калькуляция кол-ва компонентов
-
-			AnimatedThreadWorker.ReportProgress(60, "calculation of stock");
-
-            GlobalObjects.StockCalculator.CalculateStock(resultCollection.ToArray(), CurrentStore);
-
-            if (AnimatedThreadWorker.CancellationPending)
-            {
-                e.Cancel = true;
-                return;
-            }
-            #endregion
-
-            #region Сравнение с рабочими пакетами
-
-            AnimatedThreadWorker.ReportProgress(90, "comparison with the Work Packages");
-
-			//загрузка рабочих пакетов для определения 
-			//перекрытых ими выполнений задач
-			_openPubWorkPackages.AddRange(GlobalObjects.WorkPackageCore.GetWorkPackagesLite(CurrentAircraft, WorkPackageStatus.Opened));
-			_openPubWorkPackages.AddRange(GlobalObjects.WorkPackageCore.GetWorkPackagesLite(CurrentAircraft, WorkPackageStatus.Published));
-            //сбор всех записей рабочих пакетов для удобства фильтрации
-            List<WorkPackageRecord> openWPRecords = new List<WorkPackageRecord>();
-            foreach (WorkPackage openWorkPackage in _openPubWorkPackages)
-                openWPRecords.AddRange(openWorkPackage.WorkPakageRecords);
-
-            foreach (IDirective dir in _resultDirectiveArray)
-            {
-                if (dir.NextPerformances == null || dir.NextPerformances.Count <= 0)
-                    continue;
-                BaseEntityObject baseObject = (BaseEntityObject)dir;
-                //Проход по всем след. выполнениям чека и записям в рабочих пакетах
-                //для поиска перекрывающихся выполнений
-                List<NextPerformance> performances = dir.NextPerformances;
-                foreach (NextPerformance np in performances)
-                {
-                    //поиск записи в рабочих пакетах по данному чеку
-                    //чей номер группы выполнения (по записи) совпадает с расчитанным
-                    WorkPackageRecord wpr =
-                        openWPRecords.FirstOrDefault(r => r.PerformanceNumFromStart == np.PerformanceNum 
-                                                          && r.WorkPackageItemType == baseObject.SmartCoreObjectType.ItemId 
-                                                          && r.DirectiveId == baseObject.ItemId);
-                    if (wpr != null)
-                        np.BlockedByPackage = _openPubWorkPackages.GetItemById(wpr.WorkPakageId);
-                }
-            }
-
-            if (AnimatedThreadWorker.CancellationPending)
-            {
-                e.Cancel = true;
-                return;
-            }
-            #endregion
-
-            #region Загрузка Котировочных ордеров
-
-            AnimatedThreadWorker.ReportProgress(95, "Load Quotations");
-
-            //загрузка рабочих пакетов для определения 
-            //перекрытых ими выполнений задач
-            if (_openPubQuotations == null) _openPubQuotations = new CommonCollection<RequestForQuotation>();
-
-            _openPubQuotations.Clear();
-            _openPubQuotations.AddRange(GlobalObjects.PurchaseCore.GetRequestForQuotation(CurrentStore, new[] { WorkPackageStatus.Opened, WorkPackageStatus.Published }));
-
-            if (AnimatedThreadWorker.CancellationPending)
-            {
-                e.Cancel = true;
-                return;
-            }
-            #endregion
-
-            AnimatedThreadWorker.ReportProgress(100, "calculation over");
+			AnimatedThreadWorker.ReportProgress(100, "Calculation over");
             #endregion
 
         }
@@ -769,9 +786,9 @@ namespace CAS.UI.UIControls.StoresControls
 			_toolStripMenuItemPaste = new ToolStripMenuItem();
 
 			_toolStripMenuItemHighlight.DropDownItems.Clear();
-            foreach (Highlight highlight in Highlight.HighlightList)
+            foreach (var highlight in Highlight.HighlightList)
             {
-                ToolStripMenuItem item = new ToolStripMenuItem { Text = highlight.FullName, Tag = highlight };
+                var item = new ToolStripMenuItem { Text = highlight.FullName, Tag = highlight };
                 item.Click += ToolStripMenuItemHighlightClick;
                 _toolStripMenuItemHighlight.DropDownItems.Add(item);
             }
@@ -1113,7 +1130,8 @@ namespace CAS.UI.UIControls.StoresControls
 				    AccessoryDescription = component.Model,
 				    Description = component.Description,
 				    PartNumber = component.PartNumber,
-				    StoreId = CurrentStore.ItemId
+				    StoreId = CurrentStore.ItemId,
+					Measure = component.Measure
 			    };
 
 			    var form = new StockComponentInfoForm(newStockComponentInfo, true);
@@ -1223,7 +1241,6 @@ namespace CAS.UI.UIControls.StoresControls
         private void DirectivesViewerSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
         {
             headerControl.EditButtonEnabled = _directivesViewer.SelectedItems.Count > 0;
-            buttonDeleteSelected.Enabled = _buttonMoveToAircraft.Enabled = _directivesViewer.SelectedItems.Count > 0; 
         }
 
         #endregion
@@ -1234,7 +1251,7 @@ namespace CAS.UI.UIControls.StoresControls
             if (_directivesViewer.SelectedItems == null)
                 return;
 
-            CommonCollection<IDirective> directives = new CommonCollection<IDirective>();
+            var directives = new CommonCollection<IDirective>();
             foreach (BaseCoreObject o in _directivesViewer.SelectedItems)
             {
                 IDirective dir;
@@ -1249,7 +1266,7 @@ namespace CAS.UI.UIControls.StoresControls
             if(directives.Count <= 0)
                 return;
 
-            DialogResult confirmResult =
+            var confirmResult =
                 MessageBox.Show(
                     directives.Count == 1
                         ? "Do you really want to delete " +
@@ -1265,7 +1282,7 @@ namespace CAS.UI.UIControls.StoresControls
                 try
                 {
                     _directivesViewer.ItemListView.BeginUpdate();
-                    foreach (IDirective t in directives)
+                    foreach (var t in directives)
                     {
                         if (t is BaseComponent)
                             GlobalObjects.ComponentCore.DeleteBaseComponent((BaseComponent)t);
@@ -1369,7 +1386,7 @@ namespace CAS.UI.UIControls.StoresControls
 
 			resultCollection.Clear();
 
-			foreach (BaseEntityObject pd in initialCollection)
+			foreach (var pd in initialCollection)
 			{
 				//if (pd.MaintenanceCheck != null && pd.MaintenanceCheck.Name == "2C")
 				//{
@@ -1377,8 +1394,8 @@ namespace CAS.UI.UIControls.StoresControls
 				//}
 				if (_additionalfilter.FilterTypeAnd)
 				{
-					bool acceptable = true;
-					foreach (ICommonFilter filter in _additionalfilter)
+					var acceptable = true;
+					foreach (var filter in _additionalfilter)
 					{
 						acceptable = filter.Acceptable(pd); if (!acceptable) break;
 					}
@@ -1386,8 +1403,8 @@ namespace CAS.UI.UIControls.StoresControls
 				}
 				else
 				{
-					bool acceptable = true;
-					foreach (ICommonFilter filter in _additionalfilter)
+					var acceptable = true;
+					foreach (var filter in _additionalfilter)
 					{
 						if (filter.Values == null || filter.Values.Length == 0)
 							continue;
@@ -1407,7 +1424,13 @@ namespace CAS.UI.UIControls.StoresControls
             if (CurrentStore != null)
             {
 				var form = new ConsumablePartAndKitForm(CurrentStore);
-				if (form.ShowDialog() == DialogResult.OK) AnimatedThreadWorker.RunWorkerAsync();
+				if (form.ShowDialog() == DialogResult.OK)
+				{
+					var changedJob = form._consumablePart;
+					
+					_directivesViewer.InsertItems(new IBaseCoreObject[]{changedJob});
+					_preResultDirectiveArray.Add(changedJob);
+				}
 			}
             else
                 MessageBox.Show("Функционал пока не реализован" + Environment.NewLine + "Работает в отдельном складе");         
@@ -1429,7 +1452,7 @@ namespace CAS.UI.UIControls.StoresControls
         #region private void HeaderControlButtonEditClick(object sender, EventArgs e)
         private void HeaderControlButtonEditClick(object sender, EventArgs e)
         {
-            CommonEditorForm dlg = new CommonEditorForm(CurrentStore);
+            var dlg = new CommonEditorForm(CurrentStore);
             if (dlg.ShowDialog() != DialogResult.OK) return;
         }
 		#endregion
@@ -1619,14 +1642,14 @@ namespace CAS.UI.UIControls.StoresControls
                             foreach (var baseComponent in storeBaseComponents)
                             {
                                 //определение ресурсов прогноза для каждой базовой детали
-                                ForecastData forecastData =
+                                var forecastData =
                                     new ForecastData(DateTime.Today,
                                                      baseComponent,
                                                      GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(baseComponent));
                                 //дабавление в массив
                                 _currentForecast.ForecastDatas.Add(forecastData);
                             }
-                            ForecastData main = _currentForecast.ForecastDataForNonLifelenght;
+                            var main = _currentForecast.ForecastDataForNonLifelenght;
 
                             labelDateAsOf.Visible = true;
                             labelDateAsOf.Text =
@@ -1646,14 +1669,14 @@ namespace CAS.UI.UIControls.StoresControls
                             foreach (var baseComponent in storeBaseComponents)
                             {
                                 //определение ресурсов прогноза для каждой базовой детали
-                                ForecastData forecastData =
+                                var forecastData =
                                     new ForecastData(DateTime.Today.AddDays(7),
                                                      baseComponent,
                                                      GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(baseComponent));
                                 //дабавление в массив
                                 _currentForecast.ForecastDatas.Add(forecastData);
                             }
-                            ForecastData main = _currentForecast.ForecastDataForNonLifelenght;
+                            var main = _currentForecast.ForecastDataForNonLifelenght;
 
                             labelDateAsOf.Visible = true;
                             labelDateAsOf.Text =
@@ -1680,7 +1703,7 @@ namespace CAS.UI.UIControls.StoresControls
                                 //дабавление в массив
                                 _currentForecast.ForecastDatas.Add(forecastData);
                             }
-                            ForecastData main = _currentForecast.ForecastDataForNonLifelenght;
+                            var main = _currentForecast.ForecastDataForNonLifelenght;
 
                             labelDateAsOf.Visible = true;
                             labelDateAsOf.Text =
@@ -1707,7 +1730,7 @@ namespace CAS.UI.UIControls.StoresControls
                                 //дабавление в массив
                                 _currentForecast.ForecastDatas.Add(forecastData);
                             }
-                            ForecastData main = _currentForecast.ForecastDataForNonLifelenght;
+                            var main = _currentForecast.ForecastDataForNonLifelenght;
 
                             labelDateAsOf.Visible = true;
                             labelDateAsOf.Text =
@@ -1727,7 +1750,7 @@ namespace CAS.UI.UIControls.StoresControls
                             foreach (var baseComponent in storeBaseComponents)
                             {
                                 //определение ресурсов прогноза для каждой базовой детали
-                                ForecastData forecastData =
+                                var forecastData =
                                     new ForecastData(DateTime.Today,
                                                      baseComponent,
                                                      GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(baseComponent));
@@ -1737,9 +1760,9 @@ namespace CAS.UI.UIControls.StoresControls
                         }
                         else return;
 
-                        ForecastData main = _currentForecast.ForecastDataForNonLifelenght;
-                        ForecastCustomsWriteData form = new ForecastCustomsWriteData(_currentForecast);
-                        ForecastCustomsAdvancedForm advancedForm = new ForecastCustomsAdvancedForm(_currentForecast);
+                        var main = _currentForecast.ForecastDataForNonLifelenght;
+                        var form = new ForecastCustomsWriteData(_currentForecast);
+                        var advancedForm = new ForecastCustomsAdvancedForm(_currentForecast);
 
                         form.ShowDialog();
 
@@ -1825,7 +1848,12 @@ namespace CAS.UI.UIControls.StoresControls
 	        if (CurrentStore != null)
 	        {
 		        var form = new ComponentForm(CurrentStore);
-		        if (form.ShowDialog() == DialogResult.OK) AnimatedThreadWorker.RunWorkerAsync();
+		        if (form.ShowDialog() == DialogResult.OK)
+		        {
+			        var changedJob = form._consumablePart;
+					_directivesViewer.InsertItems(new IBaseCoreObject[] { changedJob });
+					_preResultDirectiveArray.Add(changedJob);
+				}
 	        }
 	        else
 		        MessageBox.Show("Функционал пока не реализован" + Environment.NewLine + "Работает в отдельном складе");
@@ -1966,7 +1994,7 @@ namespace CAS.UI.UIControls.StoresControls
 
         private void ToolStripMenuItemHighlightClick(object sender, EventArgs e)
         {
-            foreach (IBaseCoreObject t in _directivesViewer.SelectedItems)
+            foreach (var t in _directivesViewer.SelectedItems)
             {
                 if (t is BaseComponent)
                 {
@@ -1987,7 +2015,7 @@ namespace CAS.UI.UIControls.StoresControls
 
         private void ToolStripMenuItemAddClick(object sender, EventArgs e)
         {
-            ReferenceEventArgs arguments = new ReferenceEventArgs();
+            var arguments = new ReferenceEventArgs();
             
             ButtonAddDetailDisplayerRequested(this, arguments);
             
@@ -2020,8 +2048,8 @@ namespace CAS.UI.UIControls.StoresControls
         {
             if (!(_directivesViewer.SelectedItem is BaseComponent))
                 return;
-            BaseComponent baseComponent = (BaseComponent)_directivesViewer.SelectedItem;
-            ReferenceEventArgs args = new ReferenceEventArgs
+            var baseComponent = (BaseComponent)_directivesViewer.SelectedItem;
+            var args = new ReferenceEventArgs
             {
                 RequestedEntity = new PrimeDirectiveListScreen(baseComponent, DirectiveType.AirworthenessDirectives),
                 TypeOfReflection = ReflectionTypes.DisplayInNew,
@@ -2038,8 +2066,8 @@ namespace CAS.UI.UIControls.StoresControls
         {
             if (!(_directivesViewer.SelectedItem is BaseComponent))
                 return;
-            BaseComponent baseComponent = (BaseComponent)_directivesViewer.SelectedItem;
-            ReferenceEventArgs args = new ReferenceEventArgs
+            var baseComponent = (BaseComponent)_directivesViewer.SelectedItem;
+            var args = new ReferenceEventArgs
                                           {
                                               RequestedEntity = new PrimeDirectiveListScreen(baseComponent, DirectiveType.EngineeringOrders),
                                               TypeOfReflection = ReflectionTypes.DisplayInNew,
@@ -2056,8 +2084,8 @@ namespace CAS.UI.UIControls.StoresControls
         {
             if (!(_directivesViewer.SelectedItem is BaseComponent))
                 return;
-            BaseComponent baseComponent = (BaseComponent)_directivesViewer.SelectedItem;
-            ReferenceEventArgs args = new ReferenceEventArgs();
+            var baseComponent = (BaseComponent)_directivesViewer.SelectedItem;
+            var args = new ReferenceEventArgs();
             args.RequestedEntity = new ForecastListScreen(baseComponent, DirectiveType.All);
             args.TypeOfReflection = ReflectionTypes.DisplayInNew;
             args.DisplayerText = baseComponent + ". Forecast";
@@ -2094,8 +2122,8 @@ namespace CAS.UI.UIControls.StoresControls
         {
             if (!(_directivesViewer.SelectedItem is BaseComponent))
                 return;
-            BaseComponent baseComponent = (BaseComponent)_directivesViewer.SelectedItem;
-            ReferenceEventArgs args = new ReferenceEventArgs
+            var baseComponent = (BaseComponent)_directivesViewer.SelectedItem;
+            var args = new ReferenceEventArgs
             {
                 RequestedEntity = new PrimeDirectiveListScreen(baseComponent, DirectiveType.SB),
                 TypeOfReflection = ReflectionTypes.DisplayInNew,
@@ -2145,7 +2173,7 @@ namespace CAS.UI.UIControls.StoresControls
         {
             if (_directivesViewer.SelectedItems.Count <= 0) return;
 
-            RequestForQuotation wp = (RequestForQuotation)((ToolStripMenuItem)sender).Tag;
+            var wp = (RequestForQuotation)((ToolStripMenuItem)sender).Tag;
 
             PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
         }
@@ -2230,13 +2258,13 @@ namespace CAS.UI.UIControls.StoresControls
 			try
 			{
 
-				bool _showMsg = false;
-				DataFormats.Format format = DataFormats.GetFormat(typeof(Component[]).FullName);
+				var _showMsg = false;
+				var format = DataFormats.GetFormat(typeof(Component[]).FullName);
 
 				if (_directivesViewer.SelectedItems == null || _directivesViewer.SelectedItems.Count == 0)
 					return;
 
-				List<Component> pds = new List<Component>();
+				var pds = new List<Component>();
 				foreach (var selecteditem in _directivesViewer.SelectedItems)
 				{
 					if (!(selecteditem is Component))
@@ -2258,9 +2286,9 @@ namespace CAS.UI.UIControls.StoresControls
 					return;
 
 				//todo:(EvgeniiBabak) Нужен другой способ проверки сереализуемости объекта
-				using (MemoryStream mem = new MemoryStream())
+				using (var mem = new MemoryStream())
 				{
-					BinaryFormatter bin = new BinaryFormatter();
+					var bin = new BinaryFormatter();
 					try
 					{
 						bin.Serialize(mem, pds);
@@ -2292,7 +2320,7 @@ namespace CAS.UI.UIControls.StoresControls
 		{
 			try
 			{
-				string format = typeof(Component[]).FullName;
+				var format = typeof(Component[]).FullName;
 
 				if (string.IsNullOrEmpty(format))
 					return;
@@ -2314,7 +2342,7 @@ namespace CAS.UI.UIControls.StoresControls
 					component.PartNumber += " Copy";
 					objectsToPaste.Add(component);
 
-					foreach (ComponentDirective componentDirective in component.ComponentDirectives)
+					foreach (var componentDirective in component.ComponentDirectives)
 					{
 						_resultDirectiveArray.Add(componentDirective);
 						objectsToPaste.Add(componentDirective);
@@ -2468,12 +2496,12 @@ namespace CAS.UI.UIControls.StoresControls
 					quantity = product.Max(p => p.Quantity);
 				else if (product.Key.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.ComponentsAndParts))
 				{
-					foreach (AbstractAccessory accessoryRequired in product)
+					foreach (var accessoryRequired in product)
 						quantity += accessoryRequired.Quantity < 1 ? 1 : (int)accessoryRequired.Quantity;
 				}
 				else
 				{
-					foreach (AbstractAccessory accessoryRequired in product)
+					foreach (var accessoryRequired in product)
 						quantity += accessoryRequired.Quantity;
 				}
 
@@ -2637,6 +2665,36 @@ namespace CAS.UI.UIControls.StoresControls
 
 				AnimatedThreadWorker.RunWorkerAsync();
 			}
+		}
+
+		private void ExportStock_Click(object sender, EventArgs eventArgs)
+		{
+			_worker = new AnimatedThreadWorker();
+			_worker.DoWork += ExportStockWork;
+			_worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+			_worker.RunWorkerAsync();
+		}
+
+		private void ExportStockWork(object sender, DoWorkEventArgs e)
+		{
+			_worker.ReportProgress(0, "Generate file! Please wait....");
+
+			_exportProvider = new ExcelExportProvider();
+			_exportProvider.ExportStock(_resultDirectiveArray.ToList());
+		}
+
+		private void Worker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+		{
+			var sfd = new SaveFileDialog();
+			sfd.Filter = ".xlsx Files (*.xlsx)|*.xlsx";
+
+			if (sfd.ShowDialog() == DialogResult.OK)
+			{
+				_exportProvider.SaveTo(sfd.FileName);
+				MessageBox.Show("File was success saved!");
+			}
+
+			_exportProvider.Dispose();
 		}
 
 		#endregion
