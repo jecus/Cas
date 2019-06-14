@@ -162,9 +162,9 @@ namespace CAS.UI.UIControls.NewGrid
 		}
 		#endregion
 
-		#region public void AddHeader(string title, int? size = null)
+		#region public void AddColumn(string title, int? size = null)
 
-		public void AddHeader(string title, int? size = null)
+		public void AddColumn(string title, int? size = null)
 		{
 			var col = new GridViewBrowseColumn(title);
 
@@ -442,6 +442,7 @@ namespace CAS.UI.UIControls.NewGrid
 		{
 			try
 			{
+				ColumnHeaderList.Clear();
 				SetHeaders();
 				radGridView1.Columns.AddRange(ColumnHeaderList.ToArray());
 			}
