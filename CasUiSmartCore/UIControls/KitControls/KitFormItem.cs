@@ -224,13 +224,19 @@ namespace CAS.UI.UIControls.KitControls
         public bool ValidateData(out string message)
         {
             message = "";
-            //if (comboBoxAccessoryDescription.SelectedItem == null && _currentKit.ItemId > 0)
-            //{
-            //    if (message != "") message += "\n ";
-            //    message += "You can not save the existing item without using a template";
-            //    return false;
-            //}
-            if (_currentKit.Product == null)
+			//if (comboBoxAccessoryDescription.SelectedItem == null && _currentKit.ItemId > 0)
+			//{
+			//    if (message != "") message += "\n ";
+			//    message += "You can not save the existing item without using a template";
+			//    return false;
+			//}
+			if (comboBoxDetailClass.SelectedItem == null)
+			{
+				if (message != "") message += "\n ";
+				message += "Not set Class";
+				return false;
+			}
+			if (_currentKit.Product == null)
             {
                 if (message != "") message += "\n ";
                 message += "Not set detail type";
