@@ -1083,6 +1083,12 @@
     <Compile Include="UIControls\MTOP\MTOPSummary.Designer.cs">
       <DependentUpon>MTOPSummary.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\NewGrid\CommonGridViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\NewGrid\CommonGridViewControl.Designer.cs">
+      <DependentUpon>CommonGridViewControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\NewGrid\BaseGridViewControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -3998,6 +4004,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\MTOP\MTOPSummary.resx">
       <DependentUpon>MTOPSummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\NewGrid\CommonGridViewControl.resx">
+      <DependentUpon>CommonGridViewControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\NewGrid\BaseGridViewControl.resx">
       <DependentUpon>BaseGridViewControl.cs</DependentUpon>

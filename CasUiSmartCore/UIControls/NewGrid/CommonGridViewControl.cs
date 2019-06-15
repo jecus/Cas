@@ -8,29 +8,82 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
+using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using Microsoft.VisualBasic.Devices;
+using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.NewGrid
 {
-	public partial class BaseGridViewControl<T> : UserControl where T : class, IBaseCoreObject
+	public partial class CommonGridViewControl : UserControl
 	{
 		#region Fields
-
+		private Type _viewedType;
 		//заголовки списка
 		protected readonly List<GridViewDataColumn> ColumnHeaderList = new List<GridViewDataColumn>();
 		//коллекция выделенных элементов
-		private readonly List<T> _selectedItemsList = new List<T>();
-		private readonly List<T> _items = new List<T>();
+		private readonly List<BaseEntityObject> _items = new List<BaseEntityObject>();
 		private RadDropDownMenu _customMenu;
+
+		protected ICommonCollection _selectedItemsList;
 
 		#endregion
 
 		#region Properties
+
+		#region public Type ViewedType
+		/// <summary>
+		/// Тип, объекты которого будут отображаться в списке
+		/// </summary>
+		public Type ViewedType
+		{
+			get { return _viewedType; }
+			set
+			{
+				#region Проверка типа
+				if (value == null)
+					throw new ArgumentNullException("value", "type must be not null");
+				//Проверка, является ли переданный тип наследником BaseSmartCoreObject
+				if (!value.IsSubclassOf(typeof(BaseEntityObject)))
+				{
+					//цикл прошел до низа иерархии и невстретил тип BaseSmartCoreObject
+					//значит переданный тип не является его наследником
+					throw new ArgumentNullException("value", "not inherit from " + typeof(BaseEntityObject).Name);
+				}
+				#endregion
+
+				_viewedType = value;
+
+				try
+				{
+					if (_selectedItemsList != null) _selectedItemsList.Clear();
+					Type genericType = typeof(CommonCollection<>);
+					Type genericList = genericType.MakeGenericType(_viewedType);
+					_selectedItemsList = (ICommonCollection)Activator.CreateInstance(genericList);
+				}
+				catch (Exception ex)
+				{
+					Program.Provider.Logger.Log("Error while building collection", ex);
+					return;
+				}
+
+				try
+				{
+					FirstLoad();
+				}
+				catch (Exception ex)
+				{
+					Program.Provider.Logger.Log("Error while building control", ex);
+					return;
+				}
+			}
+		}
+		#endregion
 
 		#region public Action MenuOpeningAction { get; set; }
 
@@ -58,7 +111,7 @@ namespace CAS.UI.UIControls.NewGrid
 		/// <summary>
 		/// Возвращает выбранные элементы
 		/// </summary>
-		public List<T> SelectedItems
+		public virtual ICommonCollection SelectedItems
 		{
 			get
 			{
@@ -68,8 +121,8 @@ namespace CAS.UI.UIControls.NewGrid
 				_selectedItemsList.Clear();
 				_selectedItemsList.AddRange(radGridView1.SelectedRows
 					.Cast<GridViewDataRowInfo>()
-					.Where(i => i.Tag != null && i.Tag is T)
-					.Select(i => i.Tag as T)
+					.Where(i => i.Tag != null && i.Tag is BaseEntityObject)
+					.Select(i => i.Tag as BaseEntityObject)
 					.ToArray());
 				return _selectedItemsList;
 			}
@@ -80,12 +133,12 @@ namespace CAS.UI.UIControls.NewGrid
 		/// <summary>
 		/// Выбранный элемент
 		/// </summary>
-		public T SelectedItem
+		public virtual BaseEntityObject SelectedItem
 		{
 			get
 			{
 				if (radGridView1.CurrentRow != null)
-					return (radGridView1.CurrentRow.Tag as T);
+					return (radGridView1.CurrentRow.Tag as BaseEntityObject);
 				return null;
 			}
 		}
@@ -128,12 +181,11 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#region Constructor
 
-		public BaseGridViewControl()
+		public CommonGridViewControl()
 		{
 			InitializeComponent();
 			radGridView1.SelectionMode = GridViewSelectionMode.FullRowSelect;
 			radGridView1.MultiSelect = true;
-			FirstLoad();
 		}
 
 
@@ -154,7 +206,7 @@ namespace CAS.UI.UIControls.NewGrid
 			{
 				var attr = (ListViewDataAttribute)propertyInfo.GetCustomAttributes(typeof(ListViewDataAttribute), false)[0];
 				columnHeader = new GridViewBrowseColumn(attr.Title);
-				columnHeader.Width = attr.HeaderWidth > 1 ? (int)attr.HeaderWidth : (int)(radGridView1.Width * attr.HeaderWidth);
+				columnHeader.Width = attr.HeaderWidth > 1 ? (int)attr.HeaderWidth : ((int)(radGridView1.Width * attr.HeaderWidth) * 2);
 				columnHeader.Tag = propertyInfo.PropertyType;
 
 				ColumnHeaderList.Add(columnHeader);
@@ -162,9 +214,9 @@ namespace CAS.UI.UIControls.NewGrid
 		}
 		#endregion
 
-		#region public void AddColumn(string title, int? size = null)
+		#region public void AddHeader(string title, int? size = null)
 
-		public void AddColumn(string title, int? size = null)
+		public void AddHeader(string title, int? size = null)
 		{
 			var col = new GridViewBrowseColumn(title);
 
@@ -182,13 +234,13 @@ namespace CAS.UI.UIControls.NewGrid
 		/// Получает свойства типа, на основе которых будут созданы колонки 
 		/// </summary>
 		/// <returns></returns>
-		private List<PropertyInfo> GetTypeProperties()
+		protected virtual List<PropertyInfo> GetTypeProperties()
 		{
-			//определение типа
-			var type = typeof(T);
+			if (_viewedType == null)
+				throw new NullReferenceException("_viewedType is null");
 			//определение своиств, имеющих атрибут "отображаемое в списке"
 			var properties =
-				type.GetProperties().Where(p => p.GetCustomAttributes(typeof(ListViewDataAttribute), false).Length != 0).ToList();
+				_viewedType.GetProperties().Where(p => p.GetCustomAttributes(typeof(ListViewDataAttribute), false).Length != 0).ToList();
 
 			//поиск своиств у которых задан порядок отображения
 			//своиства, имеющие порядок отображения
@@ -198,7 +250,7 @@ namespace CAS.UI.UIControls.NewGrid
 			foreach (var propertyInfo in properties)
 			{
 				var lvda = (ListViewDataAttribute)
-					propertyInfo.GetCustomAttributes(typeof(ListViewDataAttribute), false).First();
+					propertyInfo.GetCustomAttributes(typeof(ListViewDataAttribute), false).FirstOrDefault();
 				if (lvda.Order > 0) orderedProperties.Add(lvda.Order, propertyInfo);
 				else unOrderedProperties.Add(propertyInfo);
 			}
@@ -210,11 +262,10 @@ namespace CAS.UI.UIControls.NewGrid
 			properties.AddRange(unOrderedProperties);
 
 			return properties;
-
 		}
 		#endregion
 
-		public virtual void SetItemsArray(T[] itemsArray)
+		public virtual void SetItemsArray(IEnumerable<BaseEntityObject> itemsArray)
 		{
 			if(itemsArray == null)
 				throw new ArgumentNullException("itemsArray", "itemsArray can't be null");
@@ -244,9 +295,9 @@ namespace CAS.UI.UIControls.NewGrid
 		/// Добавляет элементы в начало ListView
 		/// </summary>
 		/// <param name="itemsArray"></param>
-		public virtual void InsertItems(T[] itemsArray)
+		public virtual void InsertItems(List<BaseEntityObject> itemsArray)
 		{
-			if (itemsArray.Length == 0)
+			if (itemsArray.Count == 0)
 				return;
 
 			var temp = new List<GridViewDataRowInfo>();
@@ -283,9 +334,27 @@ namespace CAS.UI.UIControls.NewGrid
 		/// Метод возвращает массив директив
 		/// </summary>
 		/// <returns>Массив директив</returns>
-		public virtual T[] GetItemsArray()
+		public virtual ICommonCollection GetItemsArray()
 		{
-			return _items.ToArray();
+			try
+			{
+				Type genericType = typeof(CommonCollection<>);
+				Type genericList = genericType.MakeGenericType(_viewedType);
+				ICommonCollection returnDetailArray = (ICommonCollection)Activator.CreateInstance(genericList);
+				if (ItemsCount > 0)
+				{
+					for (int i = 0; i < ItemsCount; i++)
+					{
+						returnDetailArray.Add(_items[i]);
+					}
+				}
+				return returnDetailArray;
+			}
+			catch (Exception ex)
+			{
+				Program.Provider.Logger.Log("Error while building collection", ex);
+				return null;
+			}
 		}
 		#endregion
 
@@ -308,7 +377,7 @@ namespace CAS.UI.UIControls.NewGrid
 		/// Добавляет элементы в ListView
 		/// </summary>
 		/// <param name="itemsArray"></param>
-		private void AddItems(T[] itemsArray)
+		private void AddItems(IEnumerable<BaseEntityObject> itemsArray)
 		{
 			try
 			{
@@ -349,7 +418,7 @@ namespace CAS.UI.UIControls.NewGrid
 		/// </summary>
 		/// <param name="item"></param>
 		/// <returns></returns>
-		protected virtual List<CustomCell> GetListViewSubItems(T item)
+		protected virtual List<CustomCell> GetListViewSubItems(BaseEntityObject item)
 		{
 			var properties = GetTypeProperties();
 
@@ -393,12 +462,12 @@ namespace CAS.UI.UIControls.NewGrid
 		private void SetItemsColor()
 		{
 			foreach (var item in radGridView1.Rows)
-				SetItemColor(item, (T)item.Tag);
+				SetItemColor(item, (BaseEntityObject)item.Tag);
 		}
 		#endregion
 
 		#region protected virtual void SetItemColor(GridViewRowInfo listViewItem, T item)
-		protected virtual void SetItemColor(GridViewRowInfo listViewItem, T item)
+		protected virtual void SetItemColor(GridViewRowInfo listViewItem, BaseEntityObject item)
 		{
 			var imd = item as IDirective;
 			if (imd == null) return;
@@ -442,7 +511,6 @@ namespace CAS.UI.UIControls.NewGrid
 		{
 			try
 			{
-				ColumnHeaderList.Clear();
 				SetHeaders();
 				radGridView1.Columns.AddRange(ColumnHeaderList.ToArray());
 			}
@@ -502,7 +570,7 @@ namespace CAS.UI.UIControls.NewGrid
 				foreach (GridViewCellInfo gridViewCellInfo in e.RowElement.RowInfo.Cells)
 					gridViewCellInfo.Style.CustomizeFill = false;
 			}
-			else SetItemColor(e.RowElement.RowInfo, (T)e.RowElement.RowInfo.Tag);
+			else SetItemColor(e.RowElement.RowInfo, (BaseEntityObject)e.RowElement.RowInfo.Tag);
 		}
 
 		#endregion
@@ -581,24 +649,10 @@ namespace CAS.UI.UIControls.NewGrid
 		/// <param name="e"></param>
 		protected virtual void FillDisplayerRequestedParams(ReferenceEventArgs e)
 		{
+			e.DisplayerText = _viewedType.Name;
+			e.RequestedEntity = new CommonListScreen(_viewedType);
+			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 		}
-		#endregion
-	}
-
-
-	public class CustomCell
-	{
-		public string Text { get; set; }
-		public object Tag { get; set; }
-		public Color? ForeColor { get; set; }
-
-		#region Overrides of Object
-
-		public override string ToString()
-		{
-			return Text;
-		}
-
 		#endregion
 	}
 }
