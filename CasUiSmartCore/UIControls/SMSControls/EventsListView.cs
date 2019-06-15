@@ -1,6 +1,8 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.NewGrid;
 using SmartCore.Entities.General.SMS;
 
 namespace CAS.UI.UIControls.SMSControls
@@ -8,21 +10,12 @@ namespace CAS.UI.UIControls.SMSControls
     ///<summary>
     /// список для отображения событий системы безопасности полетов
     ///</summary>
-    public partial class EventsListView : CommonListViewControl
+    public partial class EventsListView : CommonGridViewControl
     {
-        #region public EventsListView()
-        ///<summary>
-        ///</summary>
-        public EventsListView()
-        {
-            InitializeComponent();
-        }
-        #endregion
-
-        #region public EventsListView(PropertyInfo beginGroup) : base(beginGroup)
-        ///<summary>
-        ///</summary>
-        public EventsListView(PropertyInfo beginGroup) : base(beginGroup)
+	    #region public EventsListView()
+		///<summary>
+		///</summary>
+		public EventsListView() : base()
         {
             InitializeComponent();
         }
@@ -36,27 +29,27 @@ namespace CAS.UI.UIControls.SMSControls
         {
             get
             {
-                if (itemsListView.SelectedItems.Count == 1)
-                    return (itemsListView.SelectedItems[0].Tag as Event);
+                if (radGridView1.SelectedRows.Count == 1)
+                    return (radGridView1.SelectedRows[0].Tag as Event);
                 return null;
             }
         }
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
-        protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
-        {
+		#region protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
+		protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
+		{
             if (SelectedItem != null)
             {
-                SmsEventForm form = new SmsEventForm(SelectedItem);
+                var form = new SmsEventForm(SelectedItem);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    ListViewItem.ListViewSubItem[] subs = GetListViewSubItems(SelectedItem);
-                    for (int i = 0; i < subs.Length; i++)
-                        itemsListView.SelectedItems[0].SubItems[i].Text = subs[i].Text;
-                }
+                    var subs = GetListViewSubItems(SelectedItem);
+                    for (int i = 0; i < subs.Count; i++)
+						radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
+				}
             }
         }
         #endregion

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
+using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using Microsoft.VisualBasic.Devices;
 using SmartCore.Entities.Dictionaries;
@@ -541,6 +542,23 @@ namespace CAS.UI.UIControls.NewGrid
 		protected  virtual void RadGridView1_DoubleClick(object sender, EventArgs e)
 		{
 			OnDisplayerRequested();
+		}
+
+		#endregion
+
+		#region public event EventHandler<SelectedItemsChangeEventArgs> SelectedItemsChanged;
+		/// <summary>
+		/// Событие возникающее при изменении массива выбранных элементов в списке.
+		/// </summary>
+		public event EventHandler<SelectedItemsChangeEventArgs> SelectedItemsChanged;
+		#endregion
+
+		#region private void RadGridView1_SelectionChanged(object sender, System.EventArgs e)
+
+		private void RadGridView1_SelectionChanged(object sender, EventArgs e)
+		{
+			if (SelectedItemsChanged != null)
+				SelectedItemsChanged.Invoke(this, new SelectedItemsChangeEventArgs(_selectedItemsList.Count));
 		}
 
 		#endregion

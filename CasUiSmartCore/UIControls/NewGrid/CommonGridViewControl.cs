@@ -563,7 +563,7 @@ namespace CAS.UI.UIControls.NewGrid
 		#region private void RadGridView1_RowFormatting(object sender, RowFormattingEventArgs e)
 
 		//Колхоз но по другому не знаю как сделать что бы при выделении цвет менял
-		private void RadGridView1_RowFormatting(object sender, RowFormattingEventArgs e)
+		public void RadGridView1_RowFormatting(object sender, RowFormattingEventArgs e)
 		{
 			if (e.RowElement.IsSelected)
 			{
@@ -637,6 +637,23 @@ namespace CAS.UI.UIControls.NewGrid
 					Program.Provider.Logger.Log("Error while opening record", ex);
 				}
 			}
+		}
+
+		#endregion
+
+		#region public event EventHandler<SelectedItemsChangeEventArgs> SelectedItemsChanged;
+		/// <summary>
+		/// Событие возникающее при изменении массива выбранных элементов в списке.
+		/// </summary>
+		public event EventHandler<SelectedItemsChangeEventArgs> SelectedItemsChanged;
+		#endregion
+
+		#region private void RadGridView1_SelectionChanged(object sender, System.EventArgs e)
+
+		private void RadGridView1_SelectionChanged(object sender, EventArgs e)
+		{
+			if (SelectedItemsChanged != null)
+				SelectedItemsChanged.Invoke(this, new SelectedItemsChangeEventArgs(_selectedItemsList.Count));
 		}
 
 		#endregion

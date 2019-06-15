@@ -1,33 +1,26 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Store;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.StoresControls
 {
     ///<summary>
     /// список для отображения событий системы безопасности полетов
     ///</summary>
-    public partial class ShouldBeOnStockListView : CommonListViewControl
+    public partial class ShouldBeOnStockListView : CommonGridViewControl
     {
         #region public ShouldBeOnStockListView()
         ///<summary>
         ///</summary>
-        public ShouldBeOnStockListView()
-        {
-            InitializeComponent();
-        }
-        #endregion
-
-        #region public ShouldBeOnStockListView(PropertyInfo beginGroup) : base(beginGroup)
-        ///<summary>
-        ///</summary>
-        public ShouldBeOnStockListView(PropertyInfo beginGroup)
-            : base(beginGroup)
+        public ShouldBeOnStockListView() : base()
         {
             InitializeComponent();
         }
@@ -41,46 +34,52 @@ namespace CAS.UI.UIControls.StoresControls
         {
             get
             {
-                if (itemsListView.SelectedItems.Count == 1)
-                    return (itemsListView.SelectedItems[0].Tag as StockComponentInfo);
+                if (radGridView1.SelectedRows.Count == 1)
+                    return (radGridView1.SelectedRows[0].Tag as StockComponentInfo);
                 return null;
             }
         }
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
-        protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
-        {
+		#region protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
+		protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
+		{
             if (SelectedItem != null)
             {
-                StockComponentInfoForm form = new StockComponentInfoForm(SelectedItem);
+                var form = new StockComponentInfoForm(SelectedItem);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     GlobalObjects.StockCalculator.CalculateStock(SelectedItem);
-                    ListViewItem.ListViewSubItem[] subs = GetListViewSubItems(SelectedItem);
-                    for (int i = 0; i < subs.Length; i++)
-                        itemsListView.SelectedItems[0].SubItems[i].Text = subs[i].Text;
+                    var subs = GetListViewSubItems(SelectedItem);
+                    for (int i = 0; i < subs.Count; i++)
+                        radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
 
-                    SetItemColor(itemsListView.SelectedItems[0], SelectedItem);
+                    SetItemColor(radGridView1.SelectedRows[0], SelectedItem);
                 }
             }
         }
-        #endregion
+		#endregion
 
-        #region protected override void SetItemColor(ListViewItem listViewItem, BaseSmartCoreObject item)
-        protected override void SetItemColor(ListViewItem listViewItem, BaseEntityObject item)
-        {
-            StockComponentInfo sdi = item as StockComponentInfo;
+		#region protected override void SetItemColor(GridViewRowInfo listViewItem, Document item)
+		protected override void SetItemColor(GridViewRowInfo listViewItem, BaseEntityObject item)
+		{
+            var sdi = item as StockComponentInfo;
             if (sdi == null) return;
 
-            if (sdi.Current < sdi.ShouldBeOnStock)
-                listViewItem.BackColor = Color.FromArgb(Highlight.Red.Color);
-            if (sdi.Current == sdi.ShouldBeOnStock)
-                listViewItem.BackColor = Color.FromArgb(Highlight.Yellow.Color);
-            if (sdi.ShouldBeOnStock == 0)
-                listViewItem.BackColor = Color.FromArgb(Highlight.Blue.Color);
+            foreach (GridViewCellInfo cell in listViewItem.Cells)
+            {
+	            cell.Style.CustomizeFill = true;
+
+				if (sdi.Current < sdi.ShouldBeOnStock)
+					cell.Style.BackColor = Color.FromArgb(Highlight.Red.Color);
+				if (sdi.Current == sdi.ShouldBeOnStock)
+					cell.Style.BackColor = Color.FromArgb(Highlight.Yellow.Color);
+				if (sdi.ShouldBeOnStock == 0)
+					cell.Style.BackColor = Color.FromArgb(Highlight.Blue.Color);
+			}
+            
         }
         #endregion
 

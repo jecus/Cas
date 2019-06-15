@@ -81,12 +81,12 @@ namespace CAS.UI.UIControls.NonRoutineJobsControls
 
         protected override void InitListView(PropertyInfo beginGroup = null)
         {
-            DirectivesViewer = new NonRoutineJobCategoriesListView(beginGroup);
+            DirectivesViewer = new NonRoutineJobCategoriesListView();
             DirectivesViewer.TabIndex = 2;
             DirectivesViewer.Location = new Point(panel1.Left, panel1.Top);
             DirectivesViewer.Dock = DockStyle.Fill;
             DirectivesViewer.ViewedType = typeof(NonRoutineJob);
-	        DirectivesViewer.ContextMenuStrip = _contextMenuStrip;
+	        DirectivesViewer.CustomMenu = _contextMenuStrip;
 
             DirectivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 

@@ -1,5 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.NewGrid;
 using SmartCore.Entities.Dictionaries;
 
 namespace CAS.UI.UIControls.SMSControls
@@ -7,12 +9,12 @@ namespace CAS.UI.UIControls.SMSControls
     ///<summary>
     /// список для отображения категорий нерутинных работ
     ///</summary>
-    public partial class EventTypesListView : CommonListViewControl
+    public partial class EventTypesListView : CommonGridViewControl
     {
         #region public EventTypesListView()
         ///<summary>
         ///</summary>
-        public EventTypesListView()
+        public EventTypesListView(): base()
         {
             InitializeComponent();
         }
@@ -26,27 +28,27 @@ namespace CAS.UI.UIControls.SMSControls
         {
             get
             {
-                if (itemsListView.SelectedItems.Count == 1)
-                    return (itemsListView.SelectedItems[0].Tag as SmsEventType);
+                if (radGridView1.SelectedRows.Count == 1)
+                    return (radGridView1.SelectedRows[0].Tag as SmsEventType);
                 return null;
             }
         }
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
-        protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
-        {
+		#region protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
+		protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
+		{
             if (SelectedItem != null)
             {
-                SmsEventTypeForm form = new SmsEventTypeForm(SelectedItem);
+                var form = new SmsEventTypeForm(SelectedItem);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    ListViewItem.ListViewSubItem[] subs = GetListViewSubItems(SelectedItem);
-                    for (int i = 0; i < subs.Length; i++)
-                        itemsListView.SelectedItems[0].SubItems[i].Text = subs[i].Text;
-                }
+                    var subs = GetListViewSubItems(SelectedItem);
+                    for (int i = 0; i < subs.Count; i++)
+						radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
+				}
             }
         }
         #endregion

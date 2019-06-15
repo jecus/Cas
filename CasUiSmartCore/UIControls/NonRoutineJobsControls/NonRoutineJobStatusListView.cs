@@ -1,32 +1,26 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using CAS.UI.Management;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.NewGrid;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.WorkPackage;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.NonRoutineJobsControls
 {
     ///<summary>
     /// список для отображения категорий нерутинных работ
     ///</summary>
-    public partial class NonRoutineJobStatusListView : CommonListViewControl
+    public partial class NonRoutineJobStatusListView : CommonGridViewControl
     {
-        #region public NonRoutineJobListViewNew()
+	    #region public NonRoutineJobListViewNew(PropertyInfo beginGroup) : base(beginGroup)
         ///<summary>
         ///</summary>
         public NonRoutineJobStatusListView()
-        {
-            InitializeComponent();
-        }
-        #endregion
-
-        #region public NonRoutineJobListViewNew(PropertyInfo beginGroup) : base(beginGroup)
-        ///<summary>
-        ///</summary>
-        public NonRoutineJobStatusListView(PropertyInfo beginGroup)
-            : base(beginGroup)
+            : base()
         {
             InitializeComponent();
         }
@@ -40,41 +34,42 @@ namespace CAS.UI.UIControls.NonRoutineJobsControls
         {
             get
             {
-                if (itemsListView.SelectedItems.Count == 1)
-                    return (itemsListView.SelectedItems[0].Tag as NonRoutineJob);
+                if (radGridView1.SelectedRows.Count == 1)
+                    return (radGridView1.SelectedRows[0].Tag as NonRoutineJob);
                 return null;
             }
         }
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
-        protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
-        {
+		#region protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
+		protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
+		{
 			if (SelectedItem == null) return;
 			var form = ScreenAndFormManager.GetEditForm(SelectedItem);
 
 			if (form.ShowDialog() == DialogResult.OK)
 			{
-				ListViewItem.ListViewSubItem[] subs = GetListViewSubItems(SelectedItem);
-				for (int i = 0; i < subs.Length; i++)
-					itemsListView.SelectedItems[0].SubItems[i].Text = subs[i].Text;
+				var subs = GetListViewSubItems(SelectedItem);
+				for (int i = 0; i < subs.Count; i++)
+					radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
 			}
 		}
 		#endregion
 
-		#region protected override void SetItemColor(ListViewItem listViewItem, BaseEntityObject item)
+		#region protected override void SetItemColor(GridViewRowInfo listViewItem, BaseEntityObject item)
 
-		protected override void SetItemColor(ListViewItem listViewItem, BaseEntityObject item)
-	    {
+		protected override void SetItemColor(GridViewRowInfo listViewItem, BaseEntityObject item)
+		{
 		    var nrj = item as NonRoutineJob;
 		    if (nrj == null) return;
 
-		    listViewItem.UseItemStyleForSubItems = false;
-
 		    if (nrj.AttachedFile == null)
-			    listViewItem.SubItems[1].ForeColor = Color.MediumVioletRed;
+		    {
+			    listViewItem.Cells[1].Style.CustomizeFill = true;
+				listViewItem.Cells[1].Style.ForeColor = Color.MediumVioletRed;
+		    }
 	    }
 
 	    #endregion
