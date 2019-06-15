@@ -375,9 +375,14 @@ namespace CAS.UI.UIControls.DocumentationControls
 
 		private void ApplyChanges()
 	    {
-		    _currentDocument.ParentId = _parent.ItemId;
-		    _currentDocument.Parent = _parent;
-		    _currentDocument.ParentTypeId = _parent.SmartCoreObjectType.ItemId;
+			//При update Parent не проставляем только при создании
+		    if (_parent != null)
+		    {
+			    _currentDocument.ParentId = _parent.ItemId;
+			    _currentDocument.Parent = _parent;
+			    _currentDocument.ParentTypeId = _parent.SmartCoreObjectType.ItemId;
+			}
+		    
 		    _currentDocument.DocType = (DocumentType) comboBoxDocumentType.SelectedItem;
 		    _currentDocument.DocumentSubType = comboBoxSubType.SelectedItem != null
 			    ? ((DocumentSubType)comboBoxSubType.SelectedItem)
