@@ -125,6 +125,10 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#endregion
 
+		public int SortMultiplier { get; set; }
+
+		public int OldColumnIndex { get; set; }
+
 		#endregion
 
 		#region Constructor

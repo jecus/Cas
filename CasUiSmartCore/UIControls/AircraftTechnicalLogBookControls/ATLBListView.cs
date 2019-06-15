@@ -1,8 +1,10 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Generic;
+using System.Windows.Forms;
 using Auxiliary;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Entities.Collections;
@@ -14,7 +16,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
     ///<summary>
     /// список для отображения ордеров запроса
     ///</summary>
-    public partial class ATLBListView : BaseListViewControl<ATLB>
+    public partial class ATLBListView : BaseGridViewControl<ATLB>
     {
         #region Fields
 
@@ -35,6 +37,9 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             OldColumnIndex = 2;
             SortMultiplier = 1;
 		}
+
+        
+
         #endregion
 
         #region public ATLBListView(Aircraft parentAircraft) : this()
@@ -60,30 +65,17 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 		/// </summary>
 		protected override void SetHeaders()
         {
-            itemsListView.Columns.Clear();
-            ColumnHeaderList.Clear();
-
-            ColumnHeader columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.15f), Text = "ATLB No" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.25f), Text = "Pages" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.3f), Text = "Date" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
-            ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+	        AddColumn("ATLB No", (int)(radGridView1.Width * 0.30f));
+	        AddColumn("Pages", (int)(radGridView1.Width * 0.50f));
+	        AddColumn("Date", (int)(radGridView1.Width * 0.6f));
+	        AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
         }
         #endregion
 
         #region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(ATLB item)
 
-        protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(ATLB item)
+        protected override List<CustomCell> GetListViewSubItems(ATLB item)
         {
-            var subItems = new ListViewItem.ListViewSubItem[4];
             AircraftFlightCollection flights;
             AircraftFlight first;
             AircraftFlight last;
@@ -107,34 +99,35 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
             var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
-			subItems[0] = new ListViewItem.ListViewSubItem { Text = item.ATLBNo, Tag = item.ATLBNo };
-            subItems[1] = new ListViewItem.ListViewSubItem { Text = pages, Tag = pages };
-            subItems[2] = new ListViewItem.ListViewSubItem { Text = dates, Tag = last != null ? last.FlightDate : DateTimeExtend.GetCASMinDateTime() };
-            subItems[3] = new ListViewItem.ListViewSubItem { Text = author, Tag = author };
-
-			return subItems;
+            return new List<CustomCell>()
+            {
+	            CreateRow(item.ATLBNo, item.ATLBNo),
+	            CreateRow(pages, pages),
+	            CreateRow(dates, last != null ? last.FlightDate : DateTimeExtend.GetCASMinDateTime()),
+	            CreateRow(author, author)
+            };
         }
 
 		#endregion
 
 		#region protected override void SetGroupsToItems(int columnIndex)
 
-	    protected override void SetGroupsToItems(int columnIndex)
-	    {
-		    itemsListView.Groups.Clear();
-		    foreach (ListViewItem item in ListViewItemList)
-		    {
-			    string temp;
+	    //protected override void SetGroupsToItems(int columnIndex)
+	    //{
+		   // itemsListView.Groups.Clear();
+		   // foreach (ListViewItem item in ListViewItemList)
+		   // {
+			  //  string temp;
 
-			    if (item.Tag is ATLB)
-			    {
-				    var atlb = item.Tag as ATLB;
-				    temp = atlb.AtlbStatus.ToString();
-				    itemsListView.Groups.Add(temp, temp);
-				    item.Group = itemsListView.Groups[temp];
-			    }
-		    }
-	    }
+			  //  if (item.Tag is ATLB)
+			  //  {
+				 //   var atlb = item.Tag as ATLB;
+				 //   temp = atlb.AtlbStatus.ToString();
+				 //   itemsListView.Groups.Add(temp, temp);
+				 //   item.Group = itemsListView.Groups[temp];
+			  //  }
+		   // }
+	    //}
 
 	    #endregion
 

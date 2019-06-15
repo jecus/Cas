@@ -106,7 +106,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             if (_toolStripSeparator2 != null) _toolStripSeparator2.Dispose();
             if(_contextMenuStrip != null) _contextMenuStrip.Dispose();
 
-            if (_directivesViewer != null) _directivesViewer.DisposeView();
+            if (_directivesViewer != null) _directivesViewer.Dispose();
 
             Dispose(true);
         }
@@ -119,7 +119,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             if(e.Cancelled)
                 return;
 			_directivesViewer.SetItemsArray(_itemsArray.ToArray());
-            headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
+            headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
             _directivesViewer.Focus();
         }
         #endregion
@@ -176,12 +176,12 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
                 {
 
                     List<ATLB> selectedItems = new List<ATLB>(_directivesViewer.SelectedItems);
-                    _directivesViewer.ItemListView.BeginUpdate();
+                    _directivesViewer.radGridView1.BeginUpdate();
                     for (int i = 0; i < count; i++)
                     {
                         GlobalObjects.CasEnvironment.Manipulator.Delete(selectedItems[i]);
                     }
-                    _directivesViewer.ItemListView.EndUpdate();
+                    _directivesViewer.radGridView1.EndUpdate();
                 }
                 catch (Exception ex)
                 {
@@ -211,7 +211,6 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             _directivesViewer.ContextMenuStrip = _contextMenuStrip;
             _directivesViewer.Location = new Point(panel1.Left, panel1.Top);
             _directivesViewer.Dock = DockStyle.Fill;
-			_directivesViewer.IgnoreAutoResize = true;
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
             Controls.Add(_directivesViewer);
             panel1.Controls.Add(_directivesViewer);

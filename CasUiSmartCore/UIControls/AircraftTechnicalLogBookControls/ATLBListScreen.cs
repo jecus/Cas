@@ -11,6 +11,7 @@ using CASTerms;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Atlbs;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 {
@@ -25,13 +26,13 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
         private ATLBListView _directivesViewer;
 
-        private ContextMenuStrip _contextMenuStrip;
-        private ToolStripMenuItem _toolStripMenuItemTitle;
-        private ToolStripMenuItem _toolStripMenuItemAdd;
-        private ToolStripMenuItem _toolStripMenuItemDelete;
-        private ToolStripMenuItem _toolStripMenuItemProperties;
-        private ToolStripSeparator _toolStripSeparator1;
-        private ToolStripSeparator _toolStripSeparator2;
+        private RadDropDownMenu _contextMenuStrip;
+        private RadMenuItem _toolStripMenuItemTitle;
+        private RadMenuItem _toolStripMenuItemAdd;
+        private RadMenuItem _toolStripMenuItemDelete;
+        private RadMenuItem _toolStripMenuItemProperties;
+        private RadMenuSeparatorItem _toolStripSeparator1;
+        private RadMenuSeparatorItem _toolStripSeparator2;
 
         #endregion
 
@@ -90,7 +91,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             if (_toolStripSeparator2 != null) _toolStripSeparator2.Dispose();
             if(_contextMenuStrip != null) _contextMenuStrip.Dispose();
 
-            if (_directivesViewer != null) _directivesViewer.DisposeView();
+            if (_directivesViewer != null) _directivesViewer.Dispose();
 
             Dispose(true);
         }
@@ -110,7 +111,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
                 labelDateAsOf.Text = lastAtlb != null ? "Current ATLB: " +  lastAtlb : ""; 
             }
             _directivesViewer.SetItemsArray(_itemsArray.ToArray());
-            headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
+            headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
             _directivesViewer.Focus();
         }
         #endregion
@@ -165,12 +166,12 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
                 {
 
                     List<ATLB> selectedItems = new List<ATLB>(_directivesViewer.SelectedItems);
-                    _directivesViewer.ItemListView.BeginUpdate();
+                    _directivesViewer.radGridView1.BeginUpdate();
                     for (int i = 0; i < count; i++)
                     {
                         GlobalObjects.CasEnvironment.Manipulator.Delete(selectedItems[i]);
                     }
-                    _directivesViewer.ItemListView.EndUpdate();
+                    _directivesViewer.radGridView1.EndUpdate();
                 }
                 catch (Exception ex)
                 {
@@ -186,13 +187,13 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
         private void InitToolStripMenuItems()
         {
-            _contextMenuStrip = new ContextMenuStrip();
-            _toolStripMenuItemTitle = new ToolStripMenuItem();
-            _toolStripSeparator1 = new ToolStripSeparator();
-            _toolStripMenuItemAdd = new ToolStripMenuItem();
-            _toolStripMenuItemDelete = new ToolStripMenuItem();
-            _toolStripSeparator2 = new ToolStripSeparator();
-            _toolStripMenuItemProperties = new ToolStripMenuItem();
+            _contextMenuStrip = new RadDropDownMenu();
+            _toolStripMenuItemTitle = new RadMenuItem();
+            _toolStripSeparator1 = new RadMenuSeparatorItem();
+            _toolStripMenuItemAdd = new RadMenuItem();
+            _toolStripMenuItemDelete = new RadMenuItem();
+            _toolStripSeparator2 = new RadMenuSeparatorItem();
+            _toolStripMenuItemProperties = new RadMenuItem();
             // 
             // contextMenuStrip
             // 
@@ -218,36 +219,18 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             _toolStripMenuItemProperties.Text = "Properties";
             _toolStripMenuItemProperties.Click += ToolStripMenuItemPropertiesClick;
 
-            _contextMenuStrip.Items.AddRange(new ToolStripItem[]
-                                                 {
-                                                     _toolStripMenuItemTitle,
-                                                     _toolStripSeparator1,
-                                                     _toolStripMenuItemAdd,
-                                                     _toolStripMenuItemDelete,
-                                                     _toolStripSeparator2,
-                                                     _toolStripMenuItemProperties
-                                                 });
-            _contextMenuStrip.Opening += ContextMenuStripOpen;
-        }
+            _contextMenuStrip.Items.AddRange(
+	            _toolStripMenuItemTitle,
+	            _toolStripSeparator1,
+	            _toolStripMenuItemAdd,
+	            _toolStripMenuItemDelete,
+	            _toolStripSeparator2,
+	            _toolStripMenuItemProperties
+	            );
+			
+		}
         #endregion
-
-        #region private void ContextMenuStripOpen(object sender,CancelEventArgs e)
-        /// <summary>
-        /// Проверка на выделение 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-        {
-            if (_directivesViewer.SelectedItems.Count <= 0)
-                e.Cancel = true;
-            _toolStripMenuItemTitle.Enabled = _directivesViewer.SelectedItems.Count > 0;
-            _toolStripMenuItemDelete.Enabled = _directivesViewer.SelectedItems.Count > 0;
-            _toolStripMenuItemProperties.Enabled = _directivesViewer.SelectedItems.Count > 0;
-        }
-
-        #endregion
-
+		
         #region private void ToolStripMenuItemEditClick(object sender, EventArgs e)
 
         private void ToolStripMenuItemEditClick(object sender, EventArgs e)
@@ -313,13 +296,22 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         {
             _directivesViewer = new ATLBListView(CurrentAircraft);
             _directivesViewer.TabIndex = 2;
-            _directivesViewer.ContextMenuStrip = _contextMenuStrip;
+            _directivesViewer.CustomMenu = _contextMenuStrip;
             _directivesViewer.Location = new Point(panel1.Left, panel1.Top);
             _directivesViewer.Dock = DockStyle.Fill;
-			_directivesViewer.IgnoreAutoResize = true;
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
             Controls.Add(_directivesViewer);
             panel1.Controls.Add(_directivesViewer);
+
+
+            _directivesViewer.MenuOpeningAction = () =>
+            {
+	            if (_directivesViewer.ItemsCount <= 0)
+		            return;
+	            _toolStripMenuItemTitle.Enabled = _directivesViewer.ItemsCount > 0;
+	            _toolStripMenuItemDelete.Enabled = _directivesViewer.ItemsCount > 0;
+	            _toolStripMenuItemProperties.Enabled = _directivesViewer.ItemsCount > 0;
+            };
         }
 
         #endregion
