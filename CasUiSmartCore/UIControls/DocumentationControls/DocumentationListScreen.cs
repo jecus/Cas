@@ -35,7 +35,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 		private RadMenuItem _toolStripMenuItemPaste;
 		private RadMenuItem _toolStripMenuItemShowTaskCard;
 		private RadMenuItem _toolStripMenuItemSaveAsTaskCard;
-		private RadSeparator _toolStripSeparator1;
+		private RadMenuSeparatorItem _toolStripSeparator1;
 
 		private ContextMenuStrip _buttonPrintMenuStrip;
 		private ToolStripMenuItem _itemPrintReportListOfDocuments;
@@ -235,7 +235,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 			_toolStripMenuItemPaste = new RadMenuItem();
 			_toolStripMenuItemShowTaskCard = new RadMenuItem();
 			_toolStripMenuItemSaveAsTaskCard = new RadMenuItem();
-			_toolStripSeparator1 = new RadSeparator();
+			_toolStripSeparator1 = new RadMenuSeparatorItem();
 
 			// 
 			// contextMenuStrip
@@ -269,7 +269,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 
 			_contextMenuStrip.Items.AddRange(_toolStripMenuItemSaveAsTaskCard,
 				_toolStripMenuItemShowTaskCard,
-				//_toolStripSeparator1,
+				_toolStripSeparator1,
 				_toolStripMenuItemCopy,
 				_toolStripMenuItemPaste);
 			

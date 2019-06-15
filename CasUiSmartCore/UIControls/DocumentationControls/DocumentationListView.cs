@@ -10,6 +10,7 @@ using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Store;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.DocumentationControls
 {
@@ -177,39 +178,31 @@ namespace CAS.UI.UIControls.DocumentationControls
                 }
             }
         }
-        #endregion
+		#endregion
 
-		//TODO: COLOR!
-		//#region protected override void SetItemColor(ListViewItem listViewItem, MaintenanceDirective item)
-		//protected override void SetItemColor(ListViewItem listViewItem, Document item)
-		//{
-		//	var itemBackColor = UsefulMethods.GetColor(item);
-		//	var itemForeColor = Color.Gray;
+		#region protected override void SetItemColor(GridViewRowInfo listViewItem, Document item)
 
-		//	listViewItem.BackColor = UsefulMethods.GetColor(item);
+		protected override void SetItemColor(GridViewRowInfo listViewItem, Document item)
+		{
+			var itemBackColor = UsefulMethods.GetColor(item);
+			var itemForeColor = Color.Gray;
 
-		//	var listViewForeColor = ItemListView.ForeColor;
-		//	var listViewBackColor = ItemListView.BackColor;
+			foreach (GridViewCellInfo cell in listViewItem.Cells)
+			{
+				cell.Style.DrawFill = true;
+				cell.Style.CustomizeFill = true;
+				cell.Style.BackColor = UsefulMethods.GetColor(item);
 
-		//	if (listViewItem.SubItems.OfType<ListViewItem.ListViewSubItem>().All(lvsi => lvsi.ForeColor.ToArgb() == listViewForeColor.ToArgb()
-		//																				 && lvsi.BackColor.ToArgb() == listViewBackColor.ToArgb()))
-		//	{
-		//		listViewItem.ForeColor = itemForeColor;
-		//		listViewItem.BackColor = itemBackColor;
-		//	}
-		//	else
-		//	{
-		//		listViewItem.UseItemStyleForSubItems = false;
-		//		foreach (ListViewItem.ListViewSubItem subItem in listViewItem.SubItems)
-		//		{
-		//			if (subItem.ForeColor.ToArgb() == listViewForeColor.ToArgb())
-		//				subItem.ForeColor = itemForeColor;
-		//			if (subItem.BackColor.ToArgb() == listViewBackColor.ToArgb())
-		//				subItem.BackColor = itemBackColor;
-		//		}
-		//	}
-		//}
-		//#endregion
+				var listViewForeColor = cell.Style.ForeColor;
+
+				if (listViewForeColor != Color.MediumVioletRed)
+					cell.Style.ForeColor = itemForeColor;
+				cell.Style.BackColor = itemBackColor;
+			}
+		}
+
+
+		#endregion
 
 		#endregion
 	}
