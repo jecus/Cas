@@ -223,7 +223,8 @@ namespace CAS.UI.Management
 		{
 			if (component.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.MaintenanceMaterials) ||
 				component.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.Tools) ||
-			    component.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.Protection))
+				component.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.Tools) ||
+			    component.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.Unknown))
 				return null;
 
 			string pagecaption;
