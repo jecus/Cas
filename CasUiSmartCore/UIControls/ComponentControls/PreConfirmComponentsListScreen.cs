@@ -166,7 +166,7 @@ namespace CAS.UI.UIControls.ComponentControls
 
             if(_currentForecast != null) _currentForecast.Clear(); 
             _currentForecast = null;
-            if (_directivesViewer != null) _directivesViewer.DisposeView();
+            if (_directivesViewer != null) _directivesViewer.Dispose();
 
             Dispose(true);
         }
@@ -196,7 +196,7 @@ namespace CAS.UI.UIControls.ComponentControls
 
 
             _directivesViewer.SetItemsArray(_resultDirectiveArray.ToArray());
-            headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
+            headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
             _directivesViewer.Focus();
 
            
@@ -390,7 +390,7 @@ namespace CAS.UI.UIControls.ComponentControls
 
                 try
                 {
-                    _directivesViewer.ItemListView.BeginUpdate();
+                    _directivesViewer.radGridView1.BeginUpdate();
                     for (int i = 0; i < count; i++)
                     {
                         if (_directivesViewer.SelectedItems[i] is Component)
@@ -401,7 +401,7 @@ namespace CAS.UI.UIControls.ComponentControls
 							GlobalObjects.CasEnvironment.NewKeeper.Save(tr);
                         }
                     }
-                    _directivesViewer.ItemListView.EndUpdate();
+                    _directivesViewer.radGridView1.EndUpdate();
 
 					AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
 					AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;

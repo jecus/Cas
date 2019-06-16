@@ -231,7 +231,7 @@ namespace CAS.UI.UIControls.NewGrid
 			try
 			{
 				AddItems(itemsArray);
-				SetItemsColor();
+				UpdateItemColor();
 				SetTotalText();
 
 				radGridView1.RowFormatting += RadGridView1_RowFormatting;
@@ -277,7 +277,7 @@ namespace CAS.UI.UIControls.NewGrid
 			radGridView1.Rows.AddRange(temp.ToArray());
 			radGridView1.EndUpdate();
 
-			SetItemsColor();
+			UpdateItemColor();
 			SetTotalText();
 		}
 
@@ -394,8 +394,8 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#endregion
 
-		#region private void SetItemsColor()
-		private void SetItemsColor()
+		#region public void SetItemsColor()
+		public void UpdateItemColor()
 		{
 			foreach (var item in radGridView1.Rows)
 				SetItemColor(item, (T)item.Tag);
