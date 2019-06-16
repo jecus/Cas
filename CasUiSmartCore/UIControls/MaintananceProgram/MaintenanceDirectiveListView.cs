@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using Auxiliary;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
 using CAS.UI.UIControls.NewGrid;
@@ -9,7 +10,9 @@ using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General;
 using SmartCore.Entities.General.MaintenanceWorkscope;
+using Telerik.WinControls.UI;
 using Convert = System.Convert;
 
 namespace CAS.UI.UIControls.MaintananceProgram
@@ -79,45 +82,34 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			AddColumn("Hidden remarks", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
         }
-        #endregion
+		#endregion
 
-        #region protected override void SetItemColor(ListViewItem listViewItem, MaintenanceDirective item)
-		//TODO COLOR!
-   //     protected override void SetItemColor(ListViewItem listViewItem, MaintenanceDirective item)
-   //     {
-   //         Color itemBackColor = UsefulMethods.GetColor(item);
-   //         Color itemForeColor = Color.Black;
+		#region protected override void SetItemColor(ListViewItem listViewItem, MaintenanceDirective item)
 
-   //         listViewItem.BackColor = UsefulMethods.GetColor(item);
+		protected override void SetItemColor(GridViewRowInfo listViewItem, MaintenanceDirective item)
+		{
+			Color itemBackColor = UsefulMethods.GetColor(item);
+			Color itemForeColor = Color.Black;
 
-   //         //Color white = Color.White;
-   //         //Color itemBackColor = UsefulMethods.GetColor(item);
-   //         Color listViewForeColor = ItemListView.ForeColor;
-			//Color listViewBackColor = ItemListView.BackColor;
+			foreach (GridViewCellInfo cell in listViewItem.Cells)
+			{
+				cell.Style.DrawFill = true;
+				cell.Style.CustomizeFill = true;
+				cell.Style.BackColor = UsefulMethods.GetColor(item);
 
-			//if (listViewItem.SubItems.OfType<ListViewItem.ListViewSubItem>().All(lvsi => lvsi.ForeColor.ToArgb() == listViewForeColor.ToArgb()
-			//																	 && lvsi.BackColor.ToArgb() == listViewBackColor.ToArgb()))
-   //         {
-			//	listViewItem.ForeColor = itemForeColor;
-   //             listViewItem.BackColor = itemBackColor;
-   //         }
-   //         else
-   //         {
-   //             listViewItem.UseItemStyleForSubItems = false;
-   //             foreach (ListViewItem.ListViewSubItem subItem in listViewItem.SubItems)
-   //             {
-   //                 if (subItem.ForeColor.ToArgb() == listViewForeColor.ToArgb())
-   //                     subItem.ForeColor = itemForeColor;
-			//		if (subItem.BackColor.ToArgb() == listViewBackColor.ToArgb())
-			//			subItem.BackColor = itemBackColor;
-			//	}
-   //         }
-   //     }
-        #endregion
+				var listViewForeColor = cell.Style.ForeColor;
 
-        #region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(MaintenanceDirective item)
+				if (listViewForeColor != Color.MediumVioletRed)
+					cell.Style.ForeColor = itemForeColor;
+				cell.Style.BackColor = itemBackColor;
+			}
+		}
 
-        protected override List<CustomCell> GetListViewSubItems(MaintenanceDirective item)
+		#endregion
+
+		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(MaintenanceDirective item)
+
+		protected override List<CustomCell> GetListViewSubItems(MaintenanceDirective item)
         {
             var subItems = new List<CustomCell>();
 
