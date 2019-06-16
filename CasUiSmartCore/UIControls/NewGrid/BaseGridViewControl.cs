@@ -434,9 +434,9 @@ namespace CAS.UI.UIControls.NewGrid
 		/// <summary>
 		/// Устанавивает информацию об общем количестве элементов в нижней панели
 		/// </summary>
-		private void SetTotalText()
+		protected virtual void SetTotalText()
 		{
-			label1.Text = "Total: " + radGridView1.Rows.Count;
+			labelTotal.Text = "Total: " + radGridView1.Rows.Count;
 		}
 
 		#endregion
