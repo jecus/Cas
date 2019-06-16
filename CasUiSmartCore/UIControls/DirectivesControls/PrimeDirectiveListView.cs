@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Auxiliary;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.NewGrid;
@@ -11,6 +12,8 @@ using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
+using SmartCore.Entities.General.MaintenanceWorkscope;
+using Telerik.WinControls.UI;
 using TempUIExtentions;
 
 namespace CAS.UI.UIControls.DirectivesControls
@@ -42,6 +45,10 @@ namespace CAS.UI.UIControls.DirectivesControls
         public PrimeDirectiveListView(DirectiveType primaryDirectiveType) : this()
         {
             CurrentPrimatyDirectiveType = primaryDirectiveType;
+			ColumnHeaderList.Clear();
+			SetHeaders();
+			radGridView1.Columns.Clear();
+			radGridView1.Columns.AddRange(ColumnHeaderList.ToArray());
         }
         #endregion
 
@@ -109,39 +116,29 @@ namespace CAS.UI.UIControls.DirectivesControls
 		#endregion
 
 		#region protected override void SetItemColor(ListViewItem listViewItem, Directive item)
-        //protected override void SetItemColor(ListViewItem listViewItem, Directive item)
-        //{
-        //    Color itemBackColor = UsefulMethods.GetColor(item);
-        //    Color itemForeColor = Color.Black;
-            
-        //    listViewItem.BackColor = UsefulMethods.GetColor(item);
+		protected override void SetItemColor(GridViewRowInfo listViewItem, Directive item)
+		{
+			Color itemBackColor = UsefulMethods.GetColor(item);
+			Color itemForeColor = Color.Black;
 
-        //    //Color white = Color.White;
-        //    //Color itemBackColor = UsefulMethods.GetColor(item);
-        //    Color listViewForeColor = ItemListView.ForeColor;
+			foreach (GridViewCellInfo cell in listViewItem.Cells)
+			{
+				cell.Style.DrawFill = true;
+				cell.Style.CustomizeFill = true;
+				cell.Style.BackColor = UsefulMethods.GetColor(item);
 
-        //    if (listViewItem.SubItems.OfType<ListViewItem.ListViewSubItem>().Count(lvsi => lvsi.ForeColor.ToArgb() != listViewForeColor.ToArgb()) == 0)
-        //    {
-        //        listViewItem.ForeColor = itemForeColor;
-        //        listViewItem.BackColor = itemBackColor;
-        //    }
-        //    else
-        //    {
-        //        listViewItem.UseItemStyleForSubItems = false;
-        //        foreach (ListViewItem.ListViewSubItem subItem in listViewItem.SubItems)
-        //        {
-        //            if (subItem.ForeColor.ToArgb() == listViewForeColor.ToArgb())
-        //                subItem.ForeColor = itemForeColor;
+				var listViewForeColor = cell.Style.ForeColor;
 
-        //            subItem.BackColor = itemBackColor;
-        //        }
-        //    }
-        //}
-        #endregion
+				if (listViewForeColor != Color.MediumVioletRed)
+					cell.Style.ForeColor = itemForeColor;
+				cell.Style.BackColor = itemBackColor;
+			}
+		}
+		#endregion
 
-        #region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Directive item)
+		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Directive item)
 
-        protected override List<CustomCell> GetListViewSubItems(Directive item)
+		protected override List<CustomCell> GetListViewSubItems(Directive item)
         {
 			var subItems = new List<CustomCell>();
 
