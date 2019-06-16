@@ -239,6 +239,8 @@ namespace CAS.UI.UIControls.NewGrid
 				AddItems(itemsArray);
 				UpdateItemColor();
 				SetTotalText();
+				GroupingItems();
+				SortingItems();
 
 				radGridView1.RowFormatting += RadGridView1_RowFormatting;
 
@@ -439,7 +441,7 @@ namespace CAS.UI.UIControls.NewGrid
 		}
 		#endregion
 
-		#region private void SetTotalText()
+		#region protected virtual void SetTotalText()
 		/// <summary>
 		/// Устанавивает информацию об общем количестве элементов в нижней панели
 		/// </summary>
@@ -471,7 +473,7 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#region protected virtual void SortingItems()
 
-		protected virtual void SortingItems()
+		private void SortingItems()
 		{
 			Sorting();
 		}
@@ -499,20 +501,30 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#endregion
 
+		#region protected virtual void GroupingItems()
+
 		protected virtual void GroupingItems()
 		{
 			Grouping();
 		}
 
-		public void Grouping(ListSortDirection direction = ListSortDirection.Ascending, string colName = null)
+		#endregion
+
+		#region public void Grouping(string colName = null)
+
+		public void Grouping(string colName = null)
 		{
 			if (string.IsNullOrEmpty(colName))
 				return;
 
+			var radSortOrder = SortMultiplier == 0 ? ListSortDirection.Ascending : ListSortDirection.Descending;
+
 			var descriptor = new GroupDescriptor();
-			descriptor.GroupNames.Add(colName, direction);
+			descriptor.GroupNames.Add(colName, radSortOrder);
 			this.radGridView1.GroupDescriptors.Add(descriptor);
 		}
+
+		#endregion
 
 
 		//Events

@@ -48,7 +48,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         public ATLBListView(Aircraft parentAircraft, bool showDefects = false)
             : this()
         {
-            OldColumnIndex = 2;
+            OldColumnIndex = 3;
             SortMultiplier = 1;
             _parentAircraft = parentAircraft;
             _showDefects = showDefects;
@@ -65,6 +65,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 		/// </summary>
 		protected override void SetHeaders()
         {
+	        AddColumn("Status", (int)(radGridView1.Width * 0.30f));
 	        AddColumn("ATLB No", (int)(radGridView1.Width * 0.30f));
 	        AddColumn("Pages", (int)(radGridView1.Width * 0.50f));
 	        AddColumn("Date", (int)(radGridView1.Width * 0.6f));
@@ -101,6 +102,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
             return new List<CustomCell>()
             {
+	            CreateRow(item.AtlbStatus.ToString(), item.AtlbStatus),
 	            CreateRow(item.ATLBNo, item.ATLBNo),
 	            CreateRow(pages, pages),
 	            CreateRow(dates, last != null ? last.FlightDate : DateTimeExtend.GetCASMinDateTime()),
@@ -112,24 +114,16 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
 		#region protected override void SetGroupsToItems(int columnIndex)
 
-	    //protected override void SetGroupsToItems(int columnIndex)
-	    //{
-		   // itemsListView.Groups.Clear();
-		   // foreach (ListViewItem item in ListViewItemList)
-		   // {
-			  //  string temp;
+		#region Overrides of BaseGridViewControl<ATLB>
 
-			  //  if (item.Tag is ATLB)
-			  //  {
-				 //   var atlb = item.Tag as ATLB;
-				 //   temp = atlb.AtlbStatus.ToString();
-				 //   itemsListView.Groups.Add(temp, temp);
-				 //   item.Group = itemsListView.Groups[temp];
-			  //  }
-		   // }
-	    //}
+		protected override void GroupingItems()
+		{
+			Grouping("Status");
+		}
 
-	    #endregion
+		#endregion
+
+		#endregion
 
 		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 
