@@ -922,6 +922,7 @@
     <Compile Include="UIControls\ATLBEvent\AllATLBListScreen.Designer.cs">
       <DependentUpon>AllATLBListScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\Auxiliary\Comparers\GridViewDataRowInfoComparer.cs" />
     <Compile Include="UIControls\Auxiliary\DataGridViewElements\DataGridViewLookupCell.cs" />
     <Compile Include="UIControls\Auxiliary\DataGridViewElements\DataGridViewLookupColumn.cs" />
     <Compile Include="UIControls\Auxiliary\DataGridViewElements\DataGridViewCalendarEditingControl.cs">

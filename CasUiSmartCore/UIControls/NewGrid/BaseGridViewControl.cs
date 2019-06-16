@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -12,9 +13,13 @@ using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using Microsoft.VisualBasic.Devices;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General;
+using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
+using Telerik.WinControls.Data;
 using Telerik.WinControls.UI;
+using Component = SmartCore.Entities.General.Accessory.Component;
 
 namespace CAS.UI.UIControls.NewGrid
 {
@@ -26,7 +31,7 @@ namespace CAS.UI.UIControls.NewGrid
 		protected readonly List<GridViewDataColumn> ColumnHeaderList = new List<GridViewDataColumn>();
 		//коллекция выделенных элементов
 		private readonly List<T> _selectedItemsList = new List<T>();
-		private readonly List<T> _items = new List<T>();
+		protected readonly List<T> _items = new List<T>();
 		private RadDropDownMenu _customMenu;
 
 		#endregion
@@ -141,9 +146,7 @@ namespace CAS.UI.UIControls.NewGrid
 			FirstLoad();
 		}
 
-
 		#endregion
-
 
 		#region protected virtual void SetHeaders()
 		/// <summary>
@@ -219,6 +222,8 @@ namespace CAS.UI.UIControls.NewGrid
 		}
 		#endregion
 
+		#region public virtual void SetItemsArray(T[] itemsArray)
+
 		public virtual void SetItemsArray(T[] itemsArray)
 		{
 			if(itemsArray == null)
@@ -243,6 +248,8 @@ namespace CAS.UI.UIControls.NewGrid
 				return;
 			}
 		}
+
+		#endregion
 
 		#region public virtual void InsertItems(T[] itemsArray)
 		/// <summary>
@@ -327,6 +334,7 @@ namespace CAS.UI.UIControls.NewGrid
 					foreach (var cell in GetListViewSubItems(item))
 					{
 						rowInfo.Cells[i].Value = cell;
+						rowInfo.Cells[i].Tag = cell;
 
 						if(cell.ForeColor.HasValue)
 							rowInfo.Cells[i].Style.ForeColor = cell.ForeColor.Value;
@@ -394,7 +402,7 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#endregion
 
-		#region public void SetItemsColor()
+		#region public void UpdateItemColor()
 		public void UpdateItemColor()
 		{
 			foreach (var item in radGridView1.Rows)
@@ -460,25 +468,40 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#endregion
 
-		public void ExportToExcel()
+		#region protected virtual void SortingItems()
+
+		protected virtual void SortingItems()
 		{
-			using (var ms = new System.IO.MemoryStream())
-			{
-				var exporter = new Telerik.WinControls.Export.GridViewSpreadExport(radGridView1);
-				var renderer = new Telerik.WinControls.Export.SpreadExportRenderer();
-				 exporter.RunExport(ms, renderer);
+			Sorting();
+		}
 
-				 var sfd = new SaveFileDialog {Filter = ".xlsx Files (*.xlsx)|*.xlsx"};
+		#endregion
 
-				 if (sfd.ShowDialog() == DialogResult.OK)
-				{
-					using (var fileStream = new FileStream(sfd.FileName, FileMode.Create, FileAccess.Write))
-					{
-						ms.WriteTo(fileStream);
-					}
-					MessageBox.Show("File was success saved!");
-				}
-			}
+		#region public void Sorting(string colName = null)
+
+		public void Sorting(string colName = null)
+		{
+			var radSortOrder = SortMultiplier == 0 ? RadSortOrder.Ascending : RadSortOrder.Descending;
+			if (!string.IsNullOrEmpty(colName))
+				radGridView1.Columns[colName].SortOrder = radSortOrder;
+			radGridView1.Columns[OldColumnIndex].SortOrder = radSortOrder;
+		}
+
+		#endregion
+
+		protected virtual void GroupingItems()
+		{
+			Grouping();
+		}
+
+		public void Grouping(ListSortDirection direction = ListSortDirection.Ascending, string colName = null)
+		{
+			if (string.IsNullOrEmpty(colName))
+				return;
+
+			var descriptor = new GroupDescriptor();
+			descriptor.GroupNames.Add(colName, direction);
+			this.radGridView1.GroupDescriptors.Add(descriptor);
 		}
 
 		//Events

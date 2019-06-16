@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Windows.Forms;
 using Auxiliary;
-using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
-using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.NewGrid;
 using CAS.UI.UIControls.StoresControls;
@@ -17,7 +15,8 @@ using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Interfaces;
+using Telerik.WinControls.Data;
+using Telerik.WinControls.UI;
 using TempUIExtentions;
 
 namespace CAS.UI.UIControls.ComponentControls
@@ -41,28 +40,58 @@ namespace CAS.UI.UIControls.ComponentControls
         {
             InitializeComponent();
         }
-        #endregion
 
-        #region public DetailsListView(BaseDetail parentBaseDetail) : this()
-        ///<summary>
-        ///</summary>
-        public ComponentsListView(BaseComponent parentBaseComponent)
+		#endregion
+
+		#region public DetailsListView(BaseDetail parentBaseDetail) : this()
+		///<summary>
+		///</summary>
+		public ComponentsListView(BaseComponent parentBaseComponent)
             : this()
         {
             OldColumnIndex = 0;
             _parentBaseComponent = parentBaseComponent;
+			radGridView1.CellClick += RadGridView1_CellClick;
         }
-        #endregion
 
-        #endregion
+		private void RadGridView1_CellClick(object sender, GridViewCellEventArgs e)
+		{
+			if (e.ColumnIndex > -1)
+			{
+				var resultList = new List<BaseEntityObject>();
+				var list = radGridView1.Rows.Select(i => i).ToList();
+				list.Sort(new GridViewDataRowInfoComparer(e.ColumnIndex, SortMultiplier));
+				//добавление остальных подзадач
+				foreach (GridViewRowInfo item in list)
+				{
+					if (item.Tag is Component)
+					{
+						resultList.Add(item.Tag as BaseEntityObject);
 
-        #region Methods
+						Component component = (Component) item.Tag;
+						var items = list
+							.Where(lvi =>
+								lvi.Tag is ComponentDirective &&
+								((ComponentDirective) lvi.Tag).ComponentId == component.ItemId).Select(i => i.Tag);
+						resultList.AddRange(items.OfType<BaseEntityObject>());
+					}
+				}
 
-        #region protected override void SetHeaders()
-        /// <summary>
-        /// Устанавливает заголовки
-        /// </summary>
-        protected override void SetHeaders()
+
+				SetItemsArray(resultList.ToArray());
+			}
+		}
+		#endregion
+
+		#endregion
+
+		#region Methods
+
+		#region protected override void SetHeaders()
+		/// <summary>
+		/// Устанавливает заголовки
+		/// </summary>
+		protected override void SetHeaders()
         {
 	        AddColumn("ATA", (int)(radGridView1.Width * 0.2f));
 	        AddColumn("Part. No", (int)(radGridView1.Width * 0.2f));
@@ -97,68 +126,78 @@ namespace CAS.UI.UIControls.ComponentControls
 
 		#region protected override SetGroupsToItems(int columnIndex)
 		//protected override void SetGroupsToItems(int columnIndex)
-  //      {
+		//      {
 		//	//TODO:(Evgenii Babak) перенести в ListViewHelper
-  //          itemsListView.Groups.Clear();
-  //          foreach (ListViewItem listViewItem in ListViewItemList.OrderBy(x => x.Text))
-  //          {
+		//          itemsListView.Groups.Clear();
+		//          foreach (ListViewItem listViewItem in ListViewItemList.OrderBy(x => x.Text))
+		//          {
 		//		var parent = (IDirective)listViewItem.Tag;
 
 		//		if (parent is ComponentDirective)
 		//			parent = ((ComponentDirective)parent).ParentComponent;
 
 		//		string groupName = "";
-  //              if (parent is BaseComponent)
-  //              {
-  //                  if (((BaseComponent)parent).BaseComponentType == BaseComponentType.Engine)
-  //                      groupName = "Engines";
-  //                  else if (((BaseComponent)parent).BaseComponentType == BaseComponentType.Apu)
-  //                      groupName = "APU";
-  //                  else if (((BaseComponent)parent).BaseComponentType == BaseComponentType.LandingGear)
-  //                      groupName = "Landing gears";
-  //                  else if (((BaseComponent)parent).BaseComponentType == BaseComponentType.Propeller)
-  //                      groupName = "Propellers";
+		//              if (parent is BaseComponent)
+		//              {
+		//                  if (((BaseComponent)parent).BaseComponentType == BaseComponentType.Engine)
+		//                      groupName = "Engines";
+		//                  else if (((BaseComponent)parent).BaseComponentType == BaseComponentType.Apu)
+		//                      groupName = "APU";
+		//                  else if (((BaseComponent)parent).BaseComponentType == BaseComponentType.LandingGear)
+		//                      groupName = "Landing gears";
+		//                  else if (((BaseComponent)parent).BaseComponentType == BaseComponentType.Propeller)
+		//                      groupName = "Propellers";
 		//			else if (((BaseComponent)parent).BaseComponentType == BaseComponentType.Frame)
 		//				groupName = "Frames";
 		//		}
-  //              else if (parent is Component) 
-  //              {
-  //                  Component component = (Component)parent;
-  //                  if (_parentBaseComponent != null &&
-  //                     _parentBaseComponent.BaseComponentType == BaseComponentType.Engine) groupName = component.LLPMark ? "LLP Disk" : "Component";
-  //                  else
-  //                  {
-  //                      var ata = component.Model != null ? component.Model.ATAChapter : component.ATAChapter;
-  //                      groupName = ata.ShortName + " " + ata.FullName;
-  //                  }
-  //              }
-  //              itemsListView.Groups.Add(groupName, groupName);
-  //              listViewItem.Group = itemsListView.Groups[groupName];
+		//              else if (parent is Component) 
+		//              {
+		//                  Component component = (Component)parent;
+		//                  if (_parentBaseComponent != null &&
+		//                     _parentBaseComponent.BaseComponentType == BaseComponentType.Engine) groupName = component.LLPMark ? "LLP Disk" : "Component";
+		//                  else
+		//                  {
+		//                      var ata = component.Model != null ? component.Model.ATAChapter : component.ATAChapter;
+		//                      groupName = ata.ShortName + " " + ata.FullName;
+		//                  }
+		//              }
+		//              itemsListView.Groups.Add(groupName, groupName);
+		//              listViewItem.Group = itemsListView.Groups[groupName];
 
 		//	}
-  //      }
-        #endregion
+		//      }
+		#endregion
 
-        #region protected override void SetItemColor(ListViewItem listViewItem, BaseSmartCoreObject item)
-		//TODO COLOR!
-        //protected override void SetItemColor(ListViewItem listViewItem, BaseEntityObject item)
-        //{
-        //    if (item is ComponentDirective)
-        //    {
-        //        listViewItem.ForeColor = Color.Gray;
-        //        listViewItem.BackColor = UsefulMethods.GetColor(item);
-        //    }
-        //    if (item is Component)
-        //    {
-        //        listViewItem.ForeColor = Color.Black;
-        //        listViewItem.BackColor = UsefulMethods.GetColor(item);
-        //    }
-        //}
-        #endregion
+		#region protected override void SetItemColor(GridViewRowInfo listViewItem, BaseEntityObject item)
 
-        #region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(BaseSmartCoreObject item)
+		protected override void SetItemColor(GridViewRowInfo listViewItem, BaseEntityObject item)
+        {
+			if (item is ComponentDirective)
+			{
+				foreach (GridViewCellInfo cell in listViewItem.Cells)
+				{
+					cell.Style.CustomizeFill = true;
+					cell.Style.ForeColor = Color.Gray;
+					cell.Style.BackColor = UsefulMethods.GetColor(item);
+				}
+				
+			}
+			if (item is Component)
+			{
+				foreach (GridViewCellInfo cell in listViewItem.Cells)
+				{
+					cell.Style.CustomizeFill = true;
+					cell.Style.ForeColor = Color.Black;
+					cell.Style.BackColor = UsefulMethods.GetColor(item);
+				}
+			}
+		}
 
-        protected override List<CustomCell> GetListViewSubItems(BaseEntityObject item)
+		#endregion
+
+		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(BaseSmartCoreObject item)
+
+		protected override List<CustomCell> GetListViewSubItems(BaseEntityObject item)
         {
 			var subItems = new List<CustomCell>();
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
@@ -301,145 +340,145 @@ namespace CAS.UI.UIControls.ComponentControls
 			return subItems;
         }
 
-        #endregion
+		#endregion
 
-        #region protected override void SortItems(int columnIndex)
+		#region protected override void SortItems(int columnIndex)
 
-   //     protected override void SortItems(int columnIndex)
-   //     {
-   //         if (OldColumnIndex != columnIndex)
-   //             SortMultiplier = -1;
-   //         if (SortMultiplier == 1)
-   //             SortMultiplier = -1;
-   //         else
-   //             SortMultiplier = 1;
-   //         itemsListView.Items.Clear();
+		//     protected override void SortItems(int columnIndex)
+		//     {
+		//         if (OldColumnIndex != columnIndex)
+		//             SortMultiplier = -1;
+		//         if (SortMultiplier == 1)
+		//             SortMultiplier = -1;
+		//         else
+		//             SortMultiplier = 1;
+		//         itemsListView.Items.Clear();
 
-   //         List<ListViewItem> resultList = new List<ListViewItem>();
+		//         List<ListViewItem> resultList = new List<ListViewItem>();
 
-   //         if (columnIndex <= 6 || columnIndex == 19 || columnIndex == 20)
-   //         {
-   //             SetGroupsToItems(columnIndex);
-   //             ListViewItemList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
-   //             //добавление остальных подзадач
-   //             foreach (ListViewItem item in ListViewItemList)
-   //             {
-   //                 if (item.Tag is Component)
-   //                 {
-   //                     resultList.Add(item);
+		//         if (columnIndex <= 6 || columnIndex == 19 || columnIndex == 20)
+		//         {
+		//             SetGroupsToItems(columnIndex);
+		//             ListViewItemList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
+		//             //добавление остальных подзадач
+		//             foreach (ListViewItem item in ListViewItemList)
+		//             {
+		//                 if (item.Tag is Component)
+		//                 {
+		//                     resultList.Add(item);
 
-   //                     Component component = (Component)item.Tag;
-   //                     IEnumerable<ListViewItem> items =
-   //                         ListViewItemList
-   //                         .Where(lvi =>lvi.Tag is ComponentDirective && ((ComponentDirective) lvi.Tag).ComponentId == component.ItemId);
-   //                     foreach (ListViewItem listViewItem in items)
-   //                     {
-   //                         listViewItem.Group = item.Group;
-   //                     }
-   //                     resultList.AddRange(items);
-   //                 }
-   //                 else if(item.Tag is ComponentDirective)
-   //                 {
-   //                     ComponentDirective dd = item.Tag as ComponentDirective;
-   //                     Component d = dd.ParentComponent;
-   //                     if(d == null)
-   //                         resultList.Add(item);
-   //                     else
-   //                     {
-   //                         ListViewItem lvi =
-   //                             ListViewItemList.FirstOrDefault(lv => lv.Tag is Component && ((Component) lv.Tag).ItemId == d.ItemId);
-   //                         if(lvi == null)
-   //                             resultList.Add(item);
-   //                     }
-   //                 }
-			//	}
-   //         }
-   //         else if (columnIndex == 10)
-   //         {
-   //             foreach (ListViewItem item in ListViewItemList)
-   //             {
-   //                 if (item.Tag is Component)
-   //                 {
-   //                     resultList.Add(item);
+		//                     Component component = (Component)item.Tag;
+		//                     IEnumerable<ListViewItem> items =
+		//                         ListViewItemList
+		//                         .Where(lvi =>lvi.Tag is ComponentDirective && ((ComponentDirective) lvi.Tag).ComponentId == component.ItemId);
+		//                     foreach (ListViewItem listViewItem in items)
+		//                     {
+		//                         listViewItem.Group = item.Group;
+		//                     }
+		//                     resultList.AddRange(items);
+		//                 }
+		//                 else if(item.Tag is ComponentDirective)
+		//                 {
+		//                     ComponentDirective dd = item.Tag as ComponentDirective;
+		//                     Component d = dd.ParentComponent;
+		//                     if(d == null)
+		//                         resultList.Add(item);
+		//                     else
+		//                     {
+		//                         ListViewItem lvi =
+		//                             ListViewItemList.FirstOrDefault(lv => lv.Tag is Component && ((Component) lv.Tag).ItemId == d.ItemId);
+		//                         if(lvi == null)
+		//                             resultList.Add(item);
+		//                     }
+		//                 }
+		//	}
+		//         }
+		//         else if (columnIndex == 10)
+		//         {
+		//             foreach (ListViewItem item in ListViewItemList)
+		//             {
+		//                 if (item.Tag is Component)
+		//                 {
+		//                     resultList.Add(item);
 
-   //                     Component component = (Component)item.Tag;
-   //                     IEnumerable<ListViewItem> items =
-   //                         ListViewItemList
-   //                         .Where(lvi => lvi.Tag is ComponentDirective && ((ComponentDirective)lvi.Tag).ComponentId == component.ItemId);
-   //                     resultList.AddRange(items);
-   //                 }
-   //                 else if (item.Tag is ComponentDirective)
-   //                 {
-   //                     ComponentDirective dd = item.Tag as ComponentDirective;
-   //                     Component d = dd.ParentComponent;
-   //                     if (d == null)
-   //                         resultList.Add(item);
-   //                     else
-   //                     {
-   //                         ListViewItem lvi =
-   //                             ListViewItemList.FirstOrDefault(lv => lv.Tag is Component && ((Component)lv.Tag).ItemId == d.ItemId);
-   //                         if (lvi == null)
-   //                             resultList.Add(item);
-   //                     }
-   //                 }
-   //             }
+		//                     Component component = (Component)item.Tag;
+		//                     IEnumerable<ListViewItem> items =
+		//                         ListViewItemList
+		//                         .Where(lvi => lvi.Tag is ComponentDirective && ((ComponentDirective)lvi.Tag).ComponentId == component.ItemId);
+		//                     resultList.AddRange(items);
+		//                 }
+		//                 else if (item.Tag is ComponentDirective)
+		//                 {
+		//                     ComponentDirective dd = item.Tag as ComponentDirective;
+		//                     Component d = dd.ParentComponent;
+		//                     if (d == null)
+		//                         resultList.Add(item);
+		//                     else
+		//                     {
+		//                         ListViewItem lvi =
+		//                             ListViewItemList.FirstOrDefault(lv => lv.Tag is Component && ((Component)lv.Tag).ItemId == d.ItemId);
+		//                         if (lvi == null)
+		//                             resultList.Add(item);
+		//                     }
+		//                 }
+		//             }
 
-   //             resultList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
+		//             resultList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
 
-   //             itemsListView.Groups.Clear();
-   //             foreach (var item in resultList)
-   //             {
-			//		var temp = ListViewGroupHelper.GetGroupStringByPerformanceDate(item.Tag);
-			//		itemsListView.Groups.Add(temp, temp);
-   //                 item.Group = itemsListView.Groups[temp];
-   //             }
-   //         }
-   //         else
-   //         {
-   //             SetGroupsToItems(columnIndex);
-   //             //добавление остальных подзадач
-   //             foreach (ListViewItem item in ListViewItemList)
-   //             {
-   //                 if (item.Tag is Component)
-   //                 {
-   //                     resultList.Add(item);
+		//             itemsListView.Groups.Clear();
+		//             foreach (var item in resultList)
+		//             {
+		//		var temp = ListViewGroupHelper.GetGroupStringByPerformanceDate(item.Tag);
+		//		itemsListView.Groups.Add(temp, temp);
+		//                 item.Group = itemsListView.Groups[temp];
+		//             }
+		//         }
+		//         else
+		//         {
+		//             SetGroupsToItems(columnIndex);
+		//             //добавление остальных подзадач
+		//             foreach (ListViewItem item in ListViewItemList)
+		//             {
+		//                 if (item.Tag is Component)
+		//                 {
+		//                     resultList.Add(item);
 
-   //                     Component component = (Component)item.Tag;
-   //                     IEnumerable<ListViewItem> items =
-   //                         ListViewItemList
-   //                         .Where(lvi => lvi.Tag is ComponentDirective && ((ComponentDirective)lvi.Tag).ComponentId == component.ItemId);
-   //                     foreach (ListViewItem listViewItem in items)
-   //                     {
-   //                         listViewItem.Group = item.Group;
-   //                     }
-   //                     resultList.AddRange(items);
-   //                 }
-   //                 else if (item.Tag is ComponentDirective)
-   //                 {
-   //                     ComponentDirective dd = item.Tag as ComponentDirective;
-   //                     Component d = dd.ParentComponent;
-   //                     if (d == null)
-   //                         resultList.Add(item);
-   //                     else
-   //                     {
-   //                         ListViewItem lvi =
-   //                             ListViewItemList.FirstOrDefault(lv => lv.Tag is Component && ((Component)lv.Tag).ItemId == d.ItemId);
-   //                         if (lvi == null)
-   //                             resultList.Add(item);
-   //                     }
-   //                 }
-   //             }
-   //             resultList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
-   //         }
-   //         itemsListView.Items.AddRange(resultList.Distinct().ToArray());
-			//OldColumnIndex = columnIndex;
-   //     }
+		//                     Component component = (Component)item.Tag;
+		//                     IEnumerable<ListViewItem> items =
+		//                         ListViewItemList
+		//                         .Where(lvi => lvi.Tag is ComponentDirective && ((ComponentDirective)lvi.Tag).ComponentId == component.ItemId);
+		//                     foreach (ListViewItem listViewItem in items)
+		//                     {
+		//                         listViewItem.Group = item.Group;
+		//                     }
+		//                     resultList.AddRange(items);
+		//                 }
+		//                 else if (item.Tag is ComponentDirective)
+		//                 {
+		//                     ComponentDirective dd = item.Tag as ComponentDirective;
+		//                     Component d = dd.ParentComponent;
+		//                     if (d == null)
+		//                         resultList.Add(item);
+		//                     else
+		//                     {
+		//                         ListViewItem lvi =
+		//                             ListViewItemList.FirstOrDefault(lv => lv.Tag is Component && ((Component)lv.Tag).ItemId == d.ItemId);
+		//                         if (lvi == null)
+		//                             resultList.Add(item);
+		//                     }
+		//                 }
+		//             }
+		//             resultList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
+		//         }
+		//         itemsListView.Items.AddRange(resultList.Distinct().ToArray());
+		//OldColumnIndex = columnIndex;
+		//     }
 
-        #endregion
+		#endregion
 
-        #region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 
-        protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
         {
             if (SelectedItem != null)
             {

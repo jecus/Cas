@@ -484,7 +484,22 @@ namespace CAS.UI.UIControls.ComponentControls
                 _toolStripMenuItemComposeInitialOrder.Click += ToolStripMenuItemComposeInitialClick;
             }
 
-            _directivesViewer.SetItemsArray(_resultDirectiveArray.ToArray());
+            var res = new List<BaseEntityObject>();
+            foreach (var item in _resultDirectiveArray)
+            {
+				if (item is Component)
+				{
+					res.Add(item);
+
+					var component = item as Component;
+					var items = _resultDirectiveArray.Where(lvi =>
+						lvi is ComponentDirective &&
+						((ComponentDirective)lvi).ComponentId == component.ItemId);
+					res.AddRange(items);
+				}
+			}
+
+            _directivesViewer.SetItemsArray(res.ToArray());
             headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
             _directivesViewer.Focus();
 
