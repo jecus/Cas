@@ -7,6 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
+using CAS.UI.UIControls.NewGrid;
 using CAS.UI.UIControls.PurchaseControls.Initial;
 using CASTerms;
 using EFCore.DTO.Dictionaries;
@@ -19,6 +20,7 @@ using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Filters;
 using SmartCore.Purchase;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
@@ -31,19 +33,19 @@ namespace CAS.UI.UIControls.PurchaseControls
         private List<InitialOrder> _initialOrders = new List<InitialOrder>();
         private List<RequestForQuotation> _requestForQuotations = new List<RequestForQuotation>();
 
-		private BaseListViewControl<Product> _directivesViewer;
+		private BaseGridViewControl<Product> _directivesViewer;
 
 		private CommonFilterCollection _filter;
 
-		private ContextMenuStrip _contextMenuStrip;
-		private ToolStripMenuItem _toolStripMenuItemCopy;
-		private ToolStripMenuItem _toolStripMenuItemPaste;
-		private ToolStripMenuItem _toolStripMenuItemShowImages;
-		private ToolStripMenuItem _toolStripMenuItemDelete;
-        private ToolStripMenuItem _toolStripMenuItemComposeInitial;
-        private ToolStripMenuItem _toolStripMenuItemAddInitial;
-        private ToolStripMenuItem _toolStripMenuItemComposeQuotation;
-        private ToolStripMenuItem _toolStripMenuItemAddQuotation;
+		private RadDropDownMenu _contextMenuStrip;
+		private RadMenuItem _toolStripMenuItemCopy;
+		private RadMenuItem _toolStripMenuItemPaste;
+		private RadMenuItem _toolStripMenuItemShowImages;
+		private RadMenuItem _toolStripMenuItemDelete;
+        private RadMenuItem _toolStripMenuItemComposeInitial;
+        private RadMenuItem _toolStripMenuItemAddInitial;
+        private RadMenuItem _toolStripMenuItemComposeQuotation;
+        private RadMenuItem _toolStripMenuItemAddQuotation;
 
         #endregion
 
@@ -82,18 +84,18 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
-            _toolStripMenuItemAddInitial.DropDownItems.Clear();
+            _toolStripMenuItemAddInitial.Items.Clear();
             foreach (var initialOrder in _initialOrders)
             {
-                var item = new ToolStripMenuItem(initialOrder.Title);
-                _toolStripMenuItemAddInitial.DropDownItems.Add(item);
+                var item = new RadMenuItem(initialOrder.Title);
+                _toolStripMenuItemAddInitial.Items.Add(item);
             }
 
-            _toolStripMenuItemAddQuotation.DropDownItems.Clear();
+            _toolStripMenuItemAddQuotation.Items.Clear();
             foreach (var requestForQuotation in _requestForQuotations)
             {
-                var item = new ToolStripMenuItem(requestForQuotation.Title);
-                _toolStripMenuItemAddQuotation.DropDownItems.Add(item);
+                var item = new RadMenuItem(requestForQuotation.Title);
+                _toolStripMenuItemAddQuotation.Items.Add(item);
             }
 
             _directivesViewer.SetItemsArray(_resultProductArray.ToArray());
@@ -178,7 +180,22 @@ namespace CAS.UI.UIControls.PurchaseControls
 				Dock = DockStyle.Fill
 			};
 
-			_directivesViewer.ContextMenuStrip = _contextMenuStrip;
+			_directivesViewer.CustomMenu = _contextMenuStrip;
+
+			_directivesViewer.MenuOpeningAction = () =>
+			{
+				if (_directivesViewer.SelectedItems.Count <= 0)
+				{
+					_toolStripMenuItemShowImages.Enabled = false;
+				}
+
+				if (_directivesViewer.SelectedItems.Count == 1)
+				{
+					var product = _directivesViewer.SelectedItems[0];
+					_toolStripMenuItemShowImages.Enabled = product.ImageFile != null;
+				}
+			};
+
 			panel1.Controls.Add(_directivesViewer);
 		}
 
@@ -188,15 +205,15 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new ContextMenuStrip();
-			_toolStripMenuItemCopy = new ToolStripMenuItem();
-			_toolStripMenuItemPaste = new ToolStripMenuItem();
-			_toolStripMenuItemDelete = new ToolStripMenuItem();
-			_toolStripMenuItemShowImages = new ToolStripMenuItem();
-			_toolStripMenuItemComposeInitial = new ToolStripMenuItem();
-			_toolStripMenuItemAddInitial = new ToolStripMenuItem();
-			_toolStripMenuItemComposeQuotation = new ToolStripMenuItem();
-			_toolStripMenuItemAddQuotation = new ToolStripMenuItem();
+			_contextMenuStrip = new RadDropDownMenu();
+			_toolStripMenuItemCopy = new RadMenuItem();
+			_toolStripMenuItemPaste = new RadMenuItem();
+			_toolStripMenuItemDelete = new RadMenuItem();
+			_toolStripMenuItemShowImages = new RadMenuItem();
+			_toolStripMenuItemComposeInitial = new RadMenuItem();
+			_toolStripMenuItemAddInitial = new RadMenuItem();
+			_toolStripMenuItemComposeQuotation = new RadMenuItem();
+			_toolStripMenuItemAddQuotation = new RadMenuItem();
 
 			// 
 			// contextMenuStrip
@@ -246,22 +263,17 @@ namespace CAS.UI.UIControls.PurchaseControls
             _toolStripMenuItemAddQuotation.Text = "Add to Quotation Order";
             
 
-            _contextMenuStrip.Items.AddRange(new ToolStripItem[]
-			{
-
-				_toolStripMenuItemComposeInitial,
+            _contextMenuStrip.Items.AddRange(
+	            _toolStripMenuItemComposeInitial,
 				_toolStripMenuItemAddInitial,
-				new ToolStripSeparator(),
+				new RadMenuSeparatorItem(),
                 _toolStripMenuItemComposeQuotation,
                 _toolStripMenuItemAddQuotation,
-				new ToolStripSeparator(),
+				new RadMenuSeparatorItem(),
 				_toolStripMenuItemCopy,
 				_toolStripMenuItemPaste,
 				_toolStripMenuItemDelete
-				
-			});
-
-			_contextMenuStrip.Opening += ContextMenuStripOpen;
+	            );
 		}
 
         
@@ -289,25 +301,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
         #endregion
 
-        #region private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-
-        private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-		{
-			if (_directivesViewer.SelectedItems.Count <= 0)
-			{
-				_toolStripMenuItemShowImages.Enabled = false;
-			}
-
-			if (_directivesViewer.SelectedItems.Count == 1)
-			{
-				var product = _directivesViewer.SelectedItems[0];
-				_toolStripMenuItemShowImages.Enabled =  product.ImageFile != null;
-			}
-		}
-
-		#endregion
-
-		#region private void ShowImageItemsClick(object sender, EventArgs e)
+        #region private void ShowImageItemsClick(object sender, EventArgs e)
 
 		private void ShowImageItemsClick(object sender, EventArgs e)
 		{

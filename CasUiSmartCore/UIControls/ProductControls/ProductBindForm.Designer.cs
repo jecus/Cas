@@ -55,11 +55,9 @@
 			this.allProductListView1.Displayer = null;
 			this.allProductListView1.DisplayerText = null;
 			this.allProductListView1.Entity = null;
-			this.allProductListView1.IgnoreAutoResize = true;
 			this.allProductListView1.Location = new System.Drawing.Point(8, 102);
 			this.allProductListView1.Name = "allProductListView1";
 			this.allProductListView1.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.allProductListView1.ShowGroups = true;
 			this.allProductListView1.Size = new System.Drawing.Size(944, 396);
 			this.allProductListView1.TabIndex = 0;
 			// 

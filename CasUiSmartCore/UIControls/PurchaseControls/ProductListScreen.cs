@@ -7,6 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
@@ -16,6 +17,7 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Filters;
 using SmartCore.Purchase;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
@@ -26,15 +28,15 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private ICommonCollection<Product> _initialProductArray = new CommonCollection<Product>();
 		private ICommonCollection<Product> _resultProductArray = new CommonCollection<Product>();
 
-		private BaseListViewControl<Product> _directivesViewer;
+		private BaseGridViewControl<Product> _directivesViewer;
 
 		private CommonFilterCollection _filter;
 
-		private ContextMenuStrip _contextMenuStrip;
-		private ToolStripMenuItem _toolStripMenuItemCopy;
-		private ToolStripMenuItem _toolStripMenuItemPaste;
-		private ToolStripMenuItem _toolStripMenuItemShowImages;
-		private ToolStripMenuItem _toolStripMenuItemDelete;
+		private RadDropDownMenu _contextMenuStrip;
+		private RadMenuItem _toolStripMenuItemCopy;
+		private RadMenuItem _toolStripMenuItemPaste;
+		private RadMenuItem _toolStripMenuItemShowImages;
+		private RadMenuItem _toolStripMenuItemDelete;
 
 		#endregion
 
@@ -149,8 +151,23 @@ namespace CAS.UI.UIControls.PurchaseControls
 				Location = new Point(panel1.Left, panel1.Top),
 				Dock = DockStyle.Fill
 			};
+			
+			_directivesViewer.CustomMenu = _contextMenuStrip;
 
-			_directivesViewer.ContextMenuStrip = _contextMenuStrip;
+			_directivesViewer.MenuOpeningAction = () =>
+			{
+				if (_directivesViewer.SelectedItems.Count <= 0)
+				{
+					_toolStripMenuItemShowImages.Enabled = false;
+				}
+
+				if (_directivesViewer.SelectedItems.Count == 1)
+				{
+					var product = _directivesViewer.SelectedItems[0];
+					_toolStripMenuItemShowImages.Enabled = product.ImageFile != null;
+				}
+			};
+			
 			panel1.Controls.Add(_directivesViewer);
 		}
 
@@ -160,11 +177,11 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new ContextMenuStrip();
-			_toolStripMenuItemCopy = new ToolStripMenuItem();
-			_toolStripMenuItemPaste = new ToolStripMenuItem();
-			_toolStripMenuItemDelete = new ToolStripMenuItem();
-			_toolStripMenuItemShowImages = new ToolStripMenuItem();
+			_contextMenuStrip = new RadDropDownMenu();
+			_toolStripMenuItemCopy = new RadMenuItem();
+			_toolStripMenuItemPaste = new RadMenuItem();
+			_toolStripMenuItemDelete = new RadMenuItem();
+			_toolStripMenuItemShowImages = new RadMenuItem();
 
 			// 
 			// contextMenuStrip
@@ -194,36 +211,13 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_toolStripMenuItemShowImages.Text = "Show Image";
 			_toolStripMenuItemShowImages.Click += ShowImageItemsClick;
 
-			_contextMenuStrip.Items.AddRange(new ToolStripItem[]
-			{
-
+			_contextMenuStrip.Items.AddRange(
 				_toolStripMenuItemShowImages,
-				new ToolStripSeparator(),
+				new RadMenuSeparatorItem(),
 				_toolStripMenuItemCopy,
 				_toolStripMenuItemPaste,
 				_toolStripMenuItemDelete
-				
-			});
-
-			_contextMenuStrip.Opening += ContextMenuStripOpen;
-		}
-
-		#endregion
-
-		#region private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-
-		private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-		{
-			if (_directivesViewer.SelectedItems.Count <= 0)
-			{
-				_toolStripMenuItemShowImages.Enabled = false;
-			}
-
-			if (_directivesViewer.SelectedItems.Count == 1)
-			{
-				var product = _directivesViewer.SelectedItems[0];
-				_toolStripMenuItemShowImages.Enabled =  product.ImageFile != null;
-			}
+				);
 		}
 
 		#endregion
