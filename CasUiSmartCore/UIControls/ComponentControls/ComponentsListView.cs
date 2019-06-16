@@ -51,36 +51,8 @@ namespace CAS.UI.UIControls.ComponentControls
         {
             OldColumnIndex = 0;
             _parentBaseComponent = parentBaseComponent;
-			radGridView1.CellClick += RadGridView1_CellClick;
         }
 
-		private void RadGridView1_CellClick(object sender, GridViewCellEventArgs e)
-		{
-			if (e.ColumnIndex > -1)
-			{
-				var resultList = new List<BaseEntityObject>();
-				var list = radGridView1.Rows.Select(i => i).ToList();
-				list.Sort(new GridViewDataRowInfoComparer(e.ColumnIndex, SortMultiplier));
-				//добавление остальных подзадач
-				foreach (GridViewRowInfo item in list)
-				{
-					if (item.Tag is Component)
-					{
-						resultList.Add(item.Tag as BaseEntityObject);
-
-						Component component = (Component) item.Tag;
-						var items = list
-							.Where(lvi =>
-								lvi.Tag is ComponentDirective &&
-								((ComponentDirective) lvi.Tag).ComponentId == component.ItemId).Select(i => i.Tag);
-						resultList.AddRange(items.OfType<BaseEntityObject>());
-					}
-				}
-
-
-				SetItemsArray(resultList.ToArray());
-			}
-		}
 		#endregion
 
 		#endregion
@@ -342,137 +314,54 @@ namespace CAS.UI.UIControls.ComponentControls
 
 		#endregion
 
-		#region protected override void SortItems(int columnIndex)
+		#region protected override void CustomSort(int ColumnIndex)
 
-		//     protected override void SortItems(int columnIndex)
-		//     {
-		//         if (OldColumnIndex != columnIndex)
-		//             SortMultiplier = -1;
-		//         if (SortMultiplier == 1)
-		//             SortMultiplier = -1;
-		//         else
-		//             SortMultiplier = 1;
-		//         itemsListView.Items.Clear();
+		protected override void CustomSort(int ColumnIndex)
+		{
+			if (OldColumnIndex != ColumnIndex)
+				SortMultiplier = -1;
+			if (SortMultiplier == 1)
+				SortMultiplier = -1;
+			else
+				SortMultiplier = 1;
 
-		//         List<ListViewItem> resultList = new List<ListViewItem>();
+			var resultList = new List<BaseEntityObject>();
+			var list = radGridView1.Rows.Select(i => i).ToList();
+			list.Sort(new GridViewDataRowInfoComparer(ColumnIndex, SortMultiplier));
+			//добавление остальных подзадач
+			foreach (GridViewRowInfo item in list)
+			{
+				if (item.Tag is Component)
+				{
+					resultList.Add(item.Tag as BaseEntityObject);
 
-		//         if (columnIndex <= 6 || columnIndex == 19 || columnIndex == 20)
-		//         {
-		//             SetGroupsToItems(columnIndex);
-		//             ListViewItemList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
-		//             //добавление остальных подзадач
-		//             foreach (ListViewItem item in ListViewItemList)
-		//             {
-		//                 if (item.Tag is Component)
-		//                 {
-		//                     resultList.Add(item);
+					Component component = (Component) item.Tag;
+					var items = list
+						.Where(lvi =>
+							lvi.Tag is ComponentDirective &&
+							((ComponentDirective) lvi.Tag).ComponentId == component.ItemId).Select(i => i.Tag);
+					resultList.AddRange(items.OfType<BaseEntityObject>());
+				}
+				else if (item.Tag is ComponentDirective)
+				{
+					ComponentDirective dd = item.Tag as ComponentDirective;
+					Component d = dd.ParentComponent;
+					if (d == null)
+						resultList.Add(item.Tag as BaseEntityObject);
+					else
+					{
+						var lvi =
+							list.FirstOrDefault(lv => lv.Tag is Component && ((Component)lv.Tag).ItemId == d.ItemId);
+						if (lvi == null)
+							resultList.Add(item.Tag as BaseEntityObject);
+					}
+				}
+			}
 
-		//                     Component component = (Component)item.Tag;
-		//                     IEnumerable<ListViewItem> items =
-		//                         ListViewItemList
-		//                         .Where(lvi =>lvi.Tag is ComponentDirective && ((ComponentDirective) lvi.Tag).ComponentId == component.ItemId);
-		//                     foreach (ListViewItem listViewItem in items)
-		//                     {
-		//                         listViewItem.Group = item.Group;
-		//                     }
-		//                     resultList.AddRange(items);
-		//                 }
-		//                 else if(item.Tag is ComponentDirective)
-		//                 {
-		//                     ComponentDirective dd = item.Tag as ComponentDirective;
-		//                     Component d = dd.ParentComponent;
-		//                     if(d == null)
-		//                         resultList.Add(item);
-		//                     else
-		//                     {
-		//                         ListViewItem lvi =
-		//                             ListViewItemList.FirstOrDefault(lv => lv.Tag is Component && ((Component) lv.Tag).ItemId == d.ItemId);
-		//                         if(lvi == null)
-		//                             resultList.Add(item);
-		//                     }
-		//                 }
-		//	}
-		//         }
-		//         else if (columnIndex == 10)
-		//         {
-		//             foreach (ListViewItem item in ListViewItemList)
-		//             {
-		//                 if (item.Tag is Component)
-		//                 {
-		//                     resultList.Add(item);
 
-		//                     Component component = (Component)item.Tag;
-		//                     IEnumerable<ListViewItem> items =
-		//                         ListViewItemList
-		//                         .Where(lvi => lvi.Tag is ComponentDirective && ((ComponentDirective)lvi.Tag).ComponentId == component.ItemId);
-		//                     resultList.AddRange(items);
-		//                 }
-		//                 else if (item.Tag is ComponentDirective)
-		//                 {
-		//                     ComponentDirective dd = item.Tag as ComponentDirective;
-		//                     Component d = dd.ParentComponent;
-		//                     if (d == null)
-		//                         resultList.Add(item);
-		//                     else
-		//                     {
-		//                         ListViewItem lvi =
-		//                             ListViewItemList.FirstOrDefault(lv => lv.Tag is Component && ((Component)lv.Tag).ItemId == d.ItemId);
-		//                         if (lvi == null)
-		//                             resultList.Add(item);
-		//                     }
-		//                 }
-		//             }
+			SetItemsArray(resultList.ToArray());
 
-		//             resultList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
-
-		//             itemsListView.Groups.Clear();
-		//             foreach (var item in resultList)
-		//             {
-		//		var temp = ListViewGroupHelper.GetGroupStringByPerformanceDate(item.Tag);
-		//		itemsListView.Groups.Add(temp, temp);
-		//                 item.Group = itemsListView.Groups[temp];
-		//             }
-		//         }
-		//         else
-		//         {
-		//             SetGroupsToItems(columnIndex);
-		//             //добавление остальных подзадач
-		//             foreach (ListViewItem item in ListViewItemList)
-		//             {
-		//                 if (item.Tag is Component)
-		//                 {
-		//                     resultList.Add(item);
-
-		//                     Component component = (Component)item.Tag;
-		//                     IEnumerable<ListViewItem> items =
-		//                         ListViewItemList
-		//                         .Where(lvi => lvi.Tag is ComponentDirective && ((ComponentDirective)lvi.Tag).ComponentId == component.ItemId);
-		//                     foreach (ListViewItem listViewItem in items)
-		//                     {
-		//                         listViewItem.Group = item.Group;
-		//                     }
-		//                     resultList.AddRange(items);
-		//                 }
-		//                 else if (item.Tag is ComponentDirective)
-		//                 {
-		//                     ComponentDirective dd = item.Tag as ComponentDirective;
-		//                     Component d = dd.ParentComponent;
-		//                     if (d == null)
-		//                         resultList.Add(item);
-		//                     else
-		//                     {
-		//                         ListViewItem lvi =
-		//                             ListViewItemList.FirstOrDefault(lv => lv.Tag is Component && ((Component)lv.Tag).ItemId == d.ItemId);
-		//                         if (lvi == null)
-		//                             resultList.Add(item);
-		//                     }
-		//                 }
-		//             }
-		//             resultList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
-		//         }
-		//         itemsListView.Items.AddRange(resultList.Distinct().ToArray());
-		//OldColumnIndex = columnIndex;
-		//     }
+		}
 
 		#endregion
 

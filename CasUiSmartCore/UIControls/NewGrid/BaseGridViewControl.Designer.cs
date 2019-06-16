@@ -63,6 +63,7 @@
 			this.radGridView1.KeyDown += RadGridView1_KeyDown;
 			this.radGridView1.ContextMenuOpening += RadGridView1_ContextMenuOpening;
 			this.radGridView1.SelectionChanged += RadGridView1_SelectionChanged;
+			radGridView1.CellClick += RadGridView1_CellClick;
 			// 
 			// panelBottomContainer
 			// 

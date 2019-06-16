@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.Auxiliary.Comparers;
 using CASTerms;
 using Microsoft.VisualBasic.Devices;
 using SmartCore.Entities.Dictionaries;
@@ -489,6 +490,15 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#endregion
 
+		#region protected virtual void CustomSort(int ColumnIndex)
+
+		protected virtual void CustomSort(int ColumnIndex)
+		{
+
+		}
+
+		#endregion
+
 		protected virtual void GroupingItems()
 		{
 			Grouping();
@@ -503,6 +513,7 @@ namespace CAS.UI.UIControls.NewGrid
 			descriptor.GroupNames.Add(colName, direction);
 			this.radGridView1.GroupDescriptors.Add(descriptor);
 		}
+
 
 		//Events
 
@@ -627,6 +638,16 @@ namespace CAS.UI.UIControls.NewGrid
 		protected virtual void FillDisplayerRequestedParams(ReferenceEventArgs e)
 		{
 		}
+		#endregion
+
+		#region private void RadGridView1_CellClick(object sender, GridViewCellEventArgs e)
+
+		private void RadGridView1_CellClick(object sender, GridViewCellEventArgs e)
+		{
+			if (e.ColumnIndex > -1)
+				CustomSort(e.ColumnIndex);
+		}
+
 		#endregion
 	}
 
