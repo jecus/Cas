@@ -32,7 +32,7 @@
 			this.radGridView1 = new Telerik.WinControls.UI.RadGridView();
 			this.telerikMetroBlueTheme1 = new Telerik.WinControls.Themes.TelerikMetroBlueTheme();
 			this.panelBottomContainer = new System.Windows.Forms.Panel();
-			this.label1 = new System.Windows.Forms.Label();
+			this.labelTotal = new System.Windows.Forms.Label();
 			this.panel1 = new System.Windows.Forms.Panel();
 			((System.ComponentModel.ISupportInitialize)(this.radGridView1.MasterTemplate)).BeginInit();
 			this.panelBottomContainer.SuspendLayout();
@@ -67,7 +67,7 @@
 			// panelBottomContainer
 			// 
 			this.panelBottomContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-			this.panelBottomContainer.Controls.Add(this.label1);
+			this.panelBottomContainer.Controls.Add(this.labelTotal);
 			this.panelBottomContainer.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.panelBottomContainer.Location = new System.Drawing.Point(0, 575);
 			this.panelBottomContainer.Name = "panelBottomContainer";
@@ -76,16 +76,16 @@
 			// 
 			// label1
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Dock = System.Windows.Forms.DockStyle.Right;
-			this.label1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
-			this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.label1.Location = new System.Drawing.Point(722, 0);
-			this.label1.Name = "label1";
-			this.label1.Padding = new System.Windows.Forms.Padding(0, 5, 25, 0);
-			this.label1.Size = new System.Drawing.Size(78, 22);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "Total:";
+			this.labelTotal.AutoSize = true;
+			this.labelTotal.Dock = System.Windows.Forms.DockStyle.Right;
+			this.labelTotal.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.labelTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelTotal.Location = new System.Drawing.Point(722, 0);
+			this.labelTotal.Name = "label1";
+			this.labelTotal.Padding = new System.Windows.Forms.Padding(0, 5, 25, 0);
+			this.labelTotal.Size = new System.Drawing.Size(78, 22);
+			this.labelTotal.TabIndex = 0;
+			this.labelTotal.Text = "Total:";
 			// 
 			// panel1
 			// 
@@ -118,7 +118,7 @@
 		public Telerik.WinControls.UI.RadGridView radGridView1;
 		private Telerik.WinControls.Themes.TelerikMetroBlueTheme telerikMetroBlueTheme1;
 		private System.Windows.Forms.Panel panelBottomContainer;
-		public System.Windows.Forms.Label label1;
+		public System.Windows.Forms.Label labelTotal;
 		private System.Windows.Forms.Panel panel1;
 	}
 }
