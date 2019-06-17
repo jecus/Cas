@@ -28,6 +28,7 @@ namespace CAS.UI.UIControls.WorkPakage
         public WorkPackageListView()
         {
             InitializeComponent();
+            SortMultiplier = 1;
         }
         #endregion
 
@@ -38,52 +39,23 @@ namespace CAS.UI.UIControls.WorkPakage
         #region protected override List<PropertyInfo> GetTypeProperties()
         //protected override List<PropertyInfo> GetTypeProperties()
         //{
-        //    List<PropertyInfo> props = base.GetTypeProperties();
-        //    PropertyInfo prop = props.FirstOrDefault(p => p.Name.ToLower() == "aircraft");
-        //    props.Remove(prop);
+        protected override List<PropertyInfo> GetTypeProperties()
+        {
+            var props = base.GetTypeProperties();
+            var prop = props.FirstOrDefault(p => p.Name.ToLower() == "aircraft");
+            props.Remove(prop);
 
-        //    return props;
-        //}
-		#endregion
-
-		#region protected override void SetHeaders()
-		///// <summary>
-		///// Устанавливает заголовки
-		///// </summary>
-		//protected override void SetHeaders()
-		//{
-		//}
+            return props;
+        }
 		#endregion
 
 		#region protected override SetGroupsToItems(int columnIndex)
-		//protected override void SetGroupsToItems(int columnIndex)
-  //      {
-  //          itemsListView.Groups.Clear();
-  //          itemsListView.Groups.Add("GroupOpened", "Opened");
-  //          itemsListView.Groups.Add("GroupPublished", "Published");
-  //          itemsListView.Groups.Add("GroupClosed", "Closed");
-  //          itemsListView.Groups.Add("GroupUnknown", "Unknown");
 
-  //          foreach (ListViewItem item in ListViewItemList)
-  //          {
-  //              switch (((WorkPackage)item.Tag).Status)
-  //              {
-  //                  case WorkPackageStatus.Closed:
-  //                      item.Group = itemsListView.Groups[2];
-  //                      break;
-  //                  case WorkPackageStatus.Published:
-  //                      item.Group = itemsListView.Groups[1];
-  //                      break;
-  //                  case WorkPackageStatus.Opened:
-  //                      item.Group = itemsListView.Groups[0];
-  //                      break;
-  //                  default:
-  //                      item.Group = itemsListView.Groups[3];
-  //                      break;
-  //              }
-  //          }
-  //      }
-        #endregion
+		protected override void GroupingItems()
+		{
+			Grouping("Status");
+		}
+		#endregion
 
         #region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 
@@ -91,7 +63,7 @@ namespace CAS.UI.UIControls.WorkPakage
         {
             if (SelectedItem != null)
             {
-                WorkPackage item = SelectedItem;
+                var item = SelectedItem;
                 e.TypeOfReflection = ReflectionTypes.DisplayInNew;
                 e.DisplayerText = item.Aircraft != null ? item.Aircraft.RegistrationNumber + "." + item.Title : item.Title;
                 e.RequestedEntity = new WorkPackageScreen(item);

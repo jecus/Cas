@@ -17,6 +17,7 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;
+using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.WorkPakage
@@ -107,7 +108,7 @@ namespace CAS.UI.UIControls.WorkPakage
 
 			if (_toolStripMenuItemsWorkPackages != null)
 			{
-				foreach (RadMenuItem item in _toolStripMenuItemsWorkPackages)
+				foreach (var item in _toolStripMenuItemsWorkPackages)
 					item.Dispose();
 			}
 
@@ -278,16 +279,18 @@ namespace CAS.UI.UIControls.WorkPakage
 			_toolStripMenuItemsWorkPackages.Clear();
 			_toolStripMenuItemHighlight.Items.Clear();
 
-			foreach (Highlight highlight in Highlight.HighlightList)
+			foreach (var highlight in Highlight.HighlightList)
 			{
 				if (highlight == Highlight.Blue || highlight == Highlight.Yellow || highlight == Highlight.Red)
 					continue;
-				RadMenuItem item = new RadMenuItem(highlight.FullName);
+				var item = new RadMenuItem(highlight.FullName);
 				item.Click += HighlightItemClick;
 				item.Tag = highlight;
 				_toolStripMenuItemHighlight.Items.Add(item);
 			}
-			_contextMenuStrip.Items.AddRange(_toolStripMenuItemPublish,
+			_contextMenuStrip.Items.AddRange(new RadItem[]
+												{
+													_toolStripMenuItemPublish,
 													_toolStripMenuItemClose,
 													_toolStripSeparator1,
 													_toolStripMenuItemEdit,
@@ -300,6 +303,8 @@ namespace CAS.UI.UIControls.WorkPakage
 													_toolStripMenuItemPrintMaintenanceReport,
 													_toolStripSeparator2,
 													_toolStripMenuItemHighlight);
+													_toolStripMenuItemHighlight,
+												});
 		}
 
 		private void ToolStripMenuItemEditProviderClick(object sender, EventArgs e)
@@ -353,26 +358,13 @@ namespace CAS.UI.UIControls.WorkPakage
 		}
 		#endregion
 
-		#region private void ContextMenuStripOpen(object sender,CancelEventArgs e)
-		/// <summary>
-		/// Проверка на выделение 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-		{
-			
-		}
-
-		#endregion
-
 		#region private void HighlightItemClick(object sender, EventArgs e)
 
 		private void HighlightItemClick(object sender, EventArgs e)
 		{
-			for (int i = 0; i < _directivesViewer.SelectedItems.Count; i++)
+			for (var i = 0; i < _directivesViewer.SelectedItems.Count; i++)
 			{
-				Highlight highLight = (Highlight)((RadMenuItem)sender).Tag;
+				var highLight = (Highlight)((RadMenuItem)sender).Tag;
 				foreach (GridViewCellInfo cell in _directivesViewer.radGridView1.SelectedRows[i].Cells)
 				{
 					cell.Style.CustomizeFill = true;
@@ -387,9 +379,9 @@ namespace CAS.UI.UIControls.WorkPakage
 
 		private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
 		{
-			foreach (WorkPackage o in _directivesViewer.SelectedItems)
+			foreach (var o in _directivesViewer.SelectedItems)
 			{
-				ReferenceEventArgs refE = new ReferenceEventArgs();
+				var refE = new ReferenceEventArgs();
 				refE.TypeOfReflection = ReflectionTypes.DisplayInNew;
 				refE.DisplayerText = CurrentAircraft != null ? CurrentAircraft.RegistrationNumber + "." + o.Title : o.Title;
 				refE.RequestedEntity = new WorkPackageScreen(o);
@@ -427,9 +419,9 @@ namespace CAS.UI.UIControls.WorkPakage
 		/// <param name="e"></param>
 		private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
 		{
-			foreach (WorkPackage item in _directivesViewer.SelectedItems)
+			foreach (var item in _directivesViewer.SelectedItems)
 			{
-				WorkPackage wp = item;
+				var wp = item;
 				if (wp.Status != WorkPackageStatus.Closed)
 					GlobalObjects.WorkPackageCore.Publish(item, DateTime.Now, "");
 				else
@@ -478,11 +470,11 @@ namespace CAS.UI.UIControls.WorkPakage
 		{
 			if (_directivesViewer.SelectedItem == null) return;
 
-			WorkPackage wp = _directivesViewer.SelectedItem;
+			var wp = _directivesViewer.SelectedItem;
 			if (wp.WorkPackageItemsLoaded == false)
 				GlobalObjects.WorkPackageCore.GetWorkPackageItemsWithCalculate(wp);
 
-			SelectWPPrintTasksForm form = new SelectWPPrintTasksForm(wp);
+			var form = new SelectWPPrintTasksForm(wp);
 			form.ShowDialog();
 		}
 
@@ -494,15 +486,15 @@ namespace CAS.UI.UIControls.WorkPakage
 		{
 			if (_directivesViewer.SelectedItem == null) return;
 
-			WorkPackage wp = _directivesViewer.SelectedItem;
+			var wp = _directivesViewer.SelectedItem;
 			if (wp.WorkPackageItemsLoaded == false)
 				GlobalObjects.WorkPackageCore.GetWorkPackageItemsWithCalculate(wp);
 
-			SelectWorkscopePrintTasksForm form = new SelectWorkscopePrintTasksForm(wp);
+			var form = new SelectWorkscopePrintTasksForm(wp);
 			if (form.ShowDialog() != DialogResult.OK)
 				return;
 
-			ReferenceEventArgs refE = new ReferenceEventArgs();
+			var refE = new ReferenceEventArgs();
 
 			_workscopeReportBuilder.ReportedAircraft = CurrentAircraft;
 			_workscopeReportBuilder.WorkPackage = wp;
@@ -519,9 +511,9 @@ namespace CAS.UI.UIControls.WorkPakage
 
 		private void ToolStripMenuItemCloseClick(object sender, EventArgs e)
 		{
-			DialogResult dlgResult = DialogResult.No;
+			var dlgResult = DialogResult.No;
 
-			foreach (WorkPackage item in _directivesViewer.SelectedItems)
+			foreach (var item in _directivesViewer.SelectedItems)
 			{
 				if (item.Status == WorkPackageStatus.Closed)
 				{
@@ -534,7 +526,7 @@ namespace CAS.UI.UIControls.WorkPakage
 				if (item.WorkPackageItemsLoaded == false)
 					GlobalObjects.WorkPackageCore.GetWorkPackageItemsWithCalculate(item);
 
-				IEnumerable<WorkPackageRecord> blockedRecords =
+				var blockedRecords =
 				item.WorkPakageRecords
 				.Where(rec => rec.Task != null &&
 							  rec.Task.NextPerformances != null &&
@@ -543,10 +535,10 @@ namespace CAS.UI.UIControls.WorkPakage
 																	np.BlockedByPackage.ItemId != item.ItemId).Count() > 0);
 				if (item.CanClose == false || blockedRecords.Count() > 0)
 				{
-					string message = "This work package can not be closed";
-					foreach (WorkPackageRecord blockedRecord in blockedRecords)
+					var message = "This work package can not be closed";
+					foreach (var blockedRecord in blockedRecords)
 					{
-						NextPerformance np = blockedRecord.Task.NextPerformances.First(n => n.BlockedByPackage != null);
+						var np = blockedRecord.Task.NextPerformances.First(n => n.BlockedByPackage != null);
 						message += string.Format("\nTask: {0} blocked by work package {1}",
 													blockedRecord.Task,
 													np.BlockedByPackage);
@@ -562,7 +554,7 @@ namespace CAS.UI.UIControls.WorkPakage
 					continue;
 				}
 
-				WorkPackageClosingFormNew form = new WorkPackageClosingFormNew(item);
+				var form = new WorkPackageClosingFormNew(item);
 				form.ShowDialog();
 				if (form.DialogResult == DialogResult.OK)
 				{
@@ -616,10 +608,10 @@ namespace CAS.UI.UIControls.WorkPakage
 				{
 					_toolStripMenuItemOpen.Enabled = true;
 					_toolStripMenuItemEditProvider.Enabled = true;
-					_toolStripMenuItemPrintMaintenanceReport.Enabled =
-						_directivesViewer.SelectedItem.Status == WorkPackageStatus.Closed;
+					_toolStripMenuItemPrintMaintenanceReport.Enabled = _directivesViewer.SelectedItem.Status == WorkPackageStatus.Closed;
 				}
 			};
+
 			
 			panel1.Controls.Add(_directivesViewer);
 		}
@@ -632,7 +624,7 @@ namespace CAS.UI.UIControls.WorkPakage
 		{
 			if (_directivesViewer.SelectedItems == null || _directivesViewer.SelectedItems.Count == 0) return;
 
-			DialogResult confirmResult =
+			var confirmResult =
 				MessageBox.Show(_directivesViewer.SelectedItems.Count == 1
 						? "Do you really want to delete Work package " + _directivesViewer.SelectedItems[0].Title + "?"
 						: "Do you really want to delete selected Work packages? ", "Confirm delete operation",
@@ -642,7 +634,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			{
 				_directivesViewer.radGridView1.BeginUpdate();
 
-				foreach (WorkPackage item in _directivesViewer.SelectedItems)
+				foreach (var item in _directivesViewer.SelectedItems)
 				{
 					try
 					{
@@ -670,7 +662,7 @@ namespace CAS.UI.UIControls.WorkPakage
 
 		private void ButtonApplyFilterClick(object sender, EventArgs e)
 		{
-			CommonFilterForm form = new CommonFilterForm(_filter, _initialDirectiveArray);
+			var form = new CommonFilterForm(_filter, _initialDirectiveArray);
 
 			if (form.ShowDialog(this) == DialogResult.OK)
 			{
@@ -701,7 +693,7 @@ namespace CAS.UI.UIControls.WorkPakage
 
 			resultCollection.Clear();
 
-			foreach (WorkPackage pd in initialCollection)
+			foreach (var pd in initialCollection)
 			{
 				//if (pd.MaintenanceCheck != null && pd.MaintenanceCheck.Name == "2C")
 				//{
@@ -709,8 +701,8 @@ namespace CAS.UI.UIControls.WorkPakage
 				//}
 				if (_filter.FilterTypeAnd)
 				{
-					bool acceptable = true;
-					foreach (ICommonFilter filter in _filter)
+					var acceptable = true;
+					foreach (var filter in _filter)
 					{
 						acceptable = filter.Acceptable(pd); if (!acceptable) break;
 					}
@@ -718,8 +710,8 @@ namespace CAS.UI.UIControls.WorkPakage
 				}
 				else
 				{
-					bool acceptable = true;
-					foreach (ICommonFilter filter in _filter)
+					var acceptable = true;
+					foreach (var filter in _filter)
 					{
 						if (filter.Values == null || filter.Values.Length == 0)
 							continue;
@@ -765,7 +757,7 @@ namespace CAS.UI.UIControls.WorkPakage
 		private void HeaderControlButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
 			IEnumerable<WorkPackage> list = _directivesViewer.GetItemsArray();
-			WorkPackageListReportBuilder reportBuilder = new WorkPackageListReportBuilder { ReportedAircraft = CurrentAircraft };
+			var reportBuilder = new WorkPackageListReportBuilder { ReportedAircraft = CurrentAircraft };
 			reportBuilder.AddDirectives(list.ToArray());
 
 			e.DisplayerText = "Work Package List";
@@ -781,12 +773,12 @@ namespace CAS.UI.UIControls.WorkPakage
 		{
 			if (_directivesViewer.SelectedItem == null) return;
 
-			WorkPackage wp = _directivesViewer.SelectedItem;
+			var wp = _directivesViewer.SelectedItem;
 			GlobalObjects.WorkPackageCore.LoadWorkPackageItems(wp);
 
 			//ConcatenatePdfDocuments(wp);
 
-			SelectWPPrintTasksForm form = new SelectWPPrintTasksForm(wp);
+			var form = new SelectWPPrintTasksForm(wp);
 			form.ShowDialog();
 			//e.Cancel = true;
 		}
