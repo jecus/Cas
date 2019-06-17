@@ -273,7 +273,8 @@ namespace CAS.UI.UIControls.WorkPakage
 			// toolStripMenuItemPrintWorkscope
 			// 
 			_toolStripMenuItemPrintMaintenanceReport.Text = "Overview the maintenance report";
-			_toolStripMenuItemPrintMaintenanceReport.Click += _toolStripMenuItemPrintMaintenanceReport_Click; ;
+			_toolStripMenuItemPrintMaintenanceReport.Click += _toolStripMenuItemPrintMaintenanceReport_Click;
+			;
 
 			_contextMenuStrip.Items.Clear();
 			_toolStripMenuItemsWorkPackages.Clear();
@@ -288,23 +289,23 @@ namespace CAS.UI.UIControls.WorkPakage
 				item.Tag = highlight;
 				_toolStripMenuItemHighlight.Items.Add(item);
 			}
+
 			_contextMenuStrip.Items.AddRange(new RadItem[]
-												{
-													_toolStripMenuItemPublish,
-													_toolStripMenuItemClose,
-													_toolStripSeparator1,
-													_toolStripMenuItemEdit,
-													_toolStripMenuItemEditProvider,
-													_toolStripMenuItemOpen,
-													_toolStripMenuItemDelete,
-													_toolStripSeparator1,
-													_toolStripMenuItemPrintWP,
-													_toolStripMenuItemPrintWorkscope,
-													_toolStripMenuItemPrintMaintenanceReport,
-													_toolStripSeparator2,
-													_toolStripMenuItemHighlight);
-													_toolStripMenuItemHighlight,
-												});
+			{
+				_toolStripMenuItemPublish,
+				_toolStripMenuItemClose,
+				_toolStripSeparator1,
+				_toolStripMenuItemEdit,
+				_toolStripMenuItemEditProvider,
+				_toolStripMenuItemOpen,
+				_toolStripMenuItemDelete,
+				_toolStripSeparator1,
+				_toolStripMenuItemPrintWP,
+				_toolStripMenuItemPrintWorkscope,
+				_toolStripMenuItemPrintMaintenanceReport,
+				_toolStripSeparator2,
+				_toolStripMenuItemHighlight
+			});
 		}
 
 		private void ToolStripMenuItemEditProviderClick(object sender, EventArgs e)
