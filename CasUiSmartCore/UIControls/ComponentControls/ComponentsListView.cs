@@ -15,6 +15,7 @@ using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
+using SmartCore.Entities.General.Interfaces;
 using Telerik.WinControls.Data;
 using Telerik.WinControls.UI;
 using TempUIExtentions;
@@ -65,6 +66,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		/// </summary>
 		protected override void SetHeaders()
         {
+	        AddColumn("Type", (int)(radGridView1.Width * 0.2f));
 	        AddColumn("ATA", (int)(radGridView1.Width * 0.2f));
 	        AddColumn("Part. No", (int)(radGridView1.Width * 0.2f));
 	        AddColumn("Description", (int)(radGridView1.Width * 0.6f));
@@ -97,6 +99,11 @@ namespace CAS.UI.UIControls.ComponentControls
 		#endregion
 
 		#region protected override SetGroupsToItems(int columnIndex)
+		protected override void GroupingItems()
+		{
+			Grouping("Type");
+		}
+
 		//protected override void SetGroupsToItems(int columnIndex)
 		//      {
 		//	//TODO:(Evgenii Babak) перенести в ListViewHelper
@@ -187,6 +194,7 @@ namespace CAS.UI.UIControls.ComponentControls
                    serialNumber,
                    position,
 				   mpdString= "",
+				   type= "",
 				   mpdNumString= "",
                    lastPerformanceString = "",
 				   classString ="",
@@ -205,7 +213,8 @@ namespace CAS.UI.UIControls.ComponentControls
             {
                 Component componentItem = (Component)item;
                 approx = componentItem.NextPerformanceDate;
-                next = componentItem.NextPerformanceSource;
+                type = getGroupName(componentItem);
+				next = componentItem.NextPerformanceSource;
                 remains = componentItem.LLPCategories ? componentItem.LLPRemains:componentItem.Remains;
 	            ata = componentItem.Model != null ? componentItem.Model.ATAChapter : componentItem.ATAChapter;
                 partNumber = componentItem.PartNumber;
@@ -248,7 +257,8 @@ namespace CAS.UI.UIControls.ComponentControls
                 approx = dd.NextPerformanceDate;
                 next = dd.NextPerformanceSource;
                 remains = dd.Remains;
-                ata = dd.ParentComponent.Model != null ? dd.ParentComponent.Model.ATAChapter : dd.ParentComponent.ATAChapter;
+                type = getGroupName(dd);
+				ata = dd.ParentComponent.Model != null ? dd.ParentComponent.Model.ATAChapter : dd.ParentComponent.ATAChapter;
                 partNumber = "    " + dd.PartNumber;
 	            var desc = dd.ParentComponent.Model != null
 		            ? dd.ParentComponent.Model.Description
@@ -277,6 +287,7 @@ namespace CAS.UI.UIControls.ComponentControls
 	            }
 			}
 
+            subItems.Add(CreateRow(type, type));
             subItems.Add(CreateRow(ata.ToString(), ata));
             subItems.Add(CreateRow(partNumber, partNumber));
             subItems.Add(CreateRow(description, description));
@@ -404,6 +415,46 @@ namespace CAS.UI.UIControls.ComponentControls
         }
         #endregion
 
-        #endregion
-    }
+
+        private string getGroupName(BaseEntityObject entityObject)
+        {
+			var parent = (IDirective)entityObject;
+
+			if (parent is ComponentDirective)
+				parent = ((ComponentDirective)parent).ParentComponent;
+
+			string groupName = "";
+			if (parent is BaseComponent)
+			{
+				if (((BaseComponent)parent).BaseComponentType == BaseComponentType.Engine)
+					groupName = "Engines";
+				else if (((BaseComponent)parent).BaseComponentType == BaseComponentType.Apu)
+					groupName = "APU";
+				else if (((BaseComponent)parent).BaseComponentType == BaseComponentType.LandingGear)
+					groupName = "Landing gears";
+				else if (((BaseComponent)parent).BaseComponentType == BaseComponentType.Propeller)
+					groupName = "Propellers";
+				else if (((BaseComponent)parent).BaseComponentType == BaseComponentType.Frame)
+					groupName = "Frames";
+			}
+			else if (parent is Component)
+			{
+				groupName = "Component";
+
+				//Component component = (Component)parent;
+				//if (_parentBaseComponent != null &&
+				//   _parentBaseComponent.BaseComponentType == BaseComponentType.Engine) groupName = component.LLPMark ? "LLP Disk" : "Component";
+				//else
+				//{
+				//	var ata = component.Model != null ? component.Model.ATAChapter : component.ATAChapter;
+				//	groupName = ata.ShortName + " " + ata.FullName;
+				//}
+			}
+
+			return groupName;
+
+        }
+
+		#endregion
+	}
 }
