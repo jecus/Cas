@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
-using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.Auxiliary.Comparers;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
@@ -22,7 +20,7 @@ namespace CAS.UI.UIControls.StoresControls
     ///<summary>
     /// список для отображения событий системы безопасности полетов
     ///</summary>
-    public partial class StoreComponentsAllListView : BaseListViewControl<IBaseCoreObject>
+    public partial class StoreComponentsAllListView : BaseGridViewControl<IBaseCoreObject>
     {
         #region public StoreDetailsListView()
         ///<summary>
@@ -41,163 +39,57 @@ namespace CAS.UI.UIControls.StoresControls
         /// </summary>
         protected override void SetHeaders()
         {
-            itemsListView.Columns.Clear();
-            ColumnHeaderList.Clear();
-
-	        ColumnHeader columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Store" };
-	        ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "ATA" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Refference" };
-            ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Part. No" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Alt Part. No" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Standart" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Name" };
-            ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.3f), Text = "Description" };
-            ColumnHeaderList.Add(columnHeader);
-            //4
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Serial No" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Class" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Batch No" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "ID No" };
-            ColumnHeaderList.Add(columnHeader);
-            //5
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "State" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Status" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Location" };
-            ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Facility" };
-			ColumnHeaderList.Add(columnHeader);
-			
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "From" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Inst. date" };
-            ColumnHeaderList.Add(columnHeader);
-            //6
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "Work Type" };
-            ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "Need Wp Q-ty" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "Reserve" };
-			ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "Current" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "Should be" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "Qty In" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = 75, Text = "Unit Price" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = 75, Text = "Total Price" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = 75, Text = "Ship Price" };
-            ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = 75, Text = "SubTotal" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = 75, Text = "Tax" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = 75, Text = "Tax1" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = 75, Text = "Tax2" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = 75, Text = "Total" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = 75, Text = "Currency" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = 75, Text = "Supplier" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Code" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Remarks" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Effectivity" };
-            ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "IsPool" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "IsDangerous" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "M.P." };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = 75, Text = "M.H." };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Life limit/1st. Perf" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Rpt. int." };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = 0, Text = "Performances" };
-			ColumnHeaderList.Add(columnHeader);
-			//9
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Next" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Remain/Overdue" };
-			ColumnHeaderList.Add(columnHeader);
-			//11
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Last" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Warranty" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Kit" };
-			ColumnHeaderList.Add(columnHeader);
-			//19
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Hidden Remarks" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
-            ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+			AddColumn("Store", (int)(radGridView1.Width * 0.2f));
+			AddColumn("ATA", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Refference", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Part. No", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Alt Part. No", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Standart", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Name", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Description", (int)(radGridView1.Width * 0.6f));
+			AddColumn("Serial No", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Class", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Batch No", (int)(radGridView1.Width * 0.2f));
+			AddColumn("ID No", (int)(radGridView1.Width * 0.2f));
+			AddColumn("State", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Status", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Location", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Facility", (int)(radGridView1.Width * 0.2f));
+			AddColumn("From", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Inst. date", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Work Type", (int)(radGridView1.Width * 0.14f));
+			AddColumn("Need Wp Q-ty", (int)(radGridView1.Width * 0.14f));
+			AddColumn("Reserve", (int)(radGridView1.Width * 0.14f));
+			AddColumn("Current", (int)(radGridView1.Width * 0.14f));
+			AddColumn("Should be", (int)(radGridView1.Width * 0.14f));
+			AddColumn("Qty In", (int)(radGridView1.Width * 0.14f));
+			AddColumn("Unit Price", 75);
+			AddColumn("Total Price", 75);
+			AddColumn("Ship Price", 75);
+			AddColumn("SubTotal", 75);
+			AddColumn("Tax", 75);
+			AddColumn("Tax1", 75);
+			AddColumn("Tax2", 75);
+			AddColumn("Total", 75);
+			AddColumn("Currency", 75);
+			AddColumn("Supplier", 75);
+			AddColumn("Code", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Remarks", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Effectivity", (int)(radGridView1.Width * 0.2f));
+			AddColumn("IsPool", (int)(radGridView1.Width * 0.2f));
+			AddColumn("IsDangerous", (int)(radGridView1.Width * 0.2f));
+			AddColumn("M.P.", (int)(radGridView1.Width * 0.14f));
+			AddColumn("M.H.", 75);
+			AddColumn("Life limit/1st. Perf", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Rpt. int", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Performances", 0);
+			AddColumn("Next", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Remain/Overdue", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Last", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Warranty", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Kit", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Hidden Remarks", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
         }
         #endregion
 
@@ -206,26 +98,26 @@ namespace CAS.UI.UIControls.StoresControls
         /// Добавляет элементы в ListView
         /// </summary>
         /// <param name="itemsArray"></param>
-        protected override void AddItems(IBaseCoreObject[] itemsArray)
-        {
-            ColumnHeader ch = ColumnHeaderList.FirstOrDefault(h => h.Text == "Performances");
-            if (ch == null)
-            {
-                base.AddItems(itemsArray);
-                return;
-            }
+        //protected override void AddItems(IBaseCoreObject[] itemsArray)
+        //{
+        //    ColumnHeader ch = ColumnHeaderList.FirstOrDefault(h => h.Text == "Performances");
+        //    if (ch == null)
+        //    {
+        //        base.AddItems(itemsArray);
+        //        return;
+        //    }
             
-            if(itemsArray == null || itemsArray.Length == 0)
-            {
-                ch.Width = 0;
-                base.AddItems(itemsArray);
-                return;
-            }
-            ch.Width = itemsArray.OfType<IDirective>()
-                                 .Count(d => d.NextPerformances != null && d.NextPerformances.Count > 1) > 0 ? 100 : 0;
+        //    if(itemsArray == null || itemsArray.Length == 0)
+        //    {
+        //        ch.Width = 0;
+        //        base.AddItems(itemsArray);
+        //        return;
+        //    }
+        //    ch.Width = itemsArray.OfType<IDirective>()
+        //                         .Count(d => d.NextPerformances != null && d.NextPerformances.Count > 1) > 0 ? 100 : 0;
 
-            base.AddItems(itemsArray);
-        }
+        //    base.AddItems(itemsArray);
+        //}
 
 		#endregion
 
@@ -234,8 +126,8 @@ namespace CAS.UI.UIControls.StoresControls
 		/// <summary>
 		/// Возвращает название группы в списке агрегатов текущего склада, согласно тому, какого типа элемент
 		/// </summary>
-		protected override void SetGroupsToItems(int columnIndex)
-        {
+		//protected override void SetGroupsToItems(int columnIndex)
+  //      {
        //     itemsListView.Groups.Clear();
        //     itemsListView.Groups.AddRange(new[]
        //                                       {
@@ -292,15 +184,15 @@ namespace CAS.UI.UIControls.StoresControls
        //         }
        //         #endregion
        //     }
-        }
+        //}
 
         #endregion
 
         #region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(IBaseCoreObject item)
 
-        protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(IBaseCoreObject item)
+        protected override List<CustomCell> GetListViewSubItems(IBaseCoreObject item)
         {
-            var subItems = new List<ListViewItem.ListViewSubItem>();
+            var subItems = new List<CustomCell>();
             
 			DateTime? approx = null;
             AtaChapter ata;
@@ -372,7 +264,7 @@ namespace CAS.UI.UIControls.StoresControls
             {
                 parent = item as IDirective;
                 if (parent == null)
-                    return subItems.ToArray();
+                    return subItems;
                 timesString = parent.TimesToString;
                 times = parent.Times;
             }
@@ -518,225 +410,208 @@ namespace CAS.UI.UIControls.StoresControls
                 ata = (AtaChapter)GlobalObjects.CasEnvironment.GetDictionary<AtaChapter>().GetItemById(21);
             }
 
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = store?.ToString() ?? "N/A", Tag = store } ); 
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = ata.ToString(), Tag = ata } ); 
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = refference, Tag = refference } ); 
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = partNumber, Tag = partNumber } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = altPartNumber, Tag = altPartNumber } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = standart, Tag = standart } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = name, Tag = name } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = description, Tag = description } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = serialNumber, Tag = serialNumber } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = classString, Tag = classString });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = batchNumber, Tag = batchNumber });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = idNumber, Tag = idNumber });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = position?.ToString().ToUpper(), Tag = position } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = status, Tag = status });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = location, Tag = location });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = facility, Tag = facility });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = from, Tag = from });
-            subItems.Add(new ListViewItem.ListViewSubItem
-            {
-                Text = transferDate > DateTimeExtend.GetCASMinDateTime()
-					? SmartCore.Auxiliary.Convert.GetDateFormat(transferDate) : "",
-                Tag = transferDate
-            });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = workType, Tag = workType });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = needWpQuantity.ToString(), Tag = needWpQuantity });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = reserve.ToString(), Tag = reserve });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = quantityString, Tag = quantity });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = shouldBeOnStockString, Tag = shouldBeOnStock });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = quantityInString, Tag = quantityIn });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = unitPrice.ToString(), Tag = unitPrice } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = totalPrice.ToString(), Tag = totalPrice } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = shipPrice.ToString(), Tag = shipPrice } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = subTotal.ToString(), Tag = subTotal } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = tax1.ToString(), Tag = tax1 } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = tax2.ToString(), Tag = tax2 } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = tax3.ToString(), Tag = tax3 } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = total.ToString(), Tag = total } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = currency, Tag = currency } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = supplier, Tag = supplier } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = code, Tag = code });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = remarks, Tag = remarks } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = effectivity, Tag = effectivity } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = isPool ? "Yes" : "No", Tag = isPool } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = IsDangerous ? "Yes" : "No", Tag = IsDangerous } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = maintenanceTypeString, Tag = maintenanceTypeString });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = manHours.ToString(), Tag = manHours });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = firstPerformance.ToString(), Tag = firstPerformance });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = repeatInterval.ToString(), Tag = repeatInterval });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = timesString, Tag = times });
-			subItems.Add(new ListViewItem.ListViewSubItem
-            {
-	            Text = approx != null
-		            ? SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)approx) + " " + next
-		            : next != null && !next.IsNullOrZero()
-			            ? next.ToString()
-			            : "",
-	            Tag = approx == null ? DateTimeExtend.GetCASMinDateTime() : (DateTime)approx
-            });
-            subItems.Add(new ListViewItem.ListViewSubItem
-            {
-	            Text = remains != null && !remains.IsNullOrZero()
-		            ? remains.ToString()
-		            : "",
-	            Tag = remains ?? Lifelength.Null
-            });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = lastPerformanceString, Tag = lastPerformance });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = warranty.ToString(), Tag = warranty });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = kitRequieredString, Tag = kitCount });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = hiddenRemarks, Tag = hiddenRemarks } );
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
+            subItems.Add(CreateRow(store?.ToString() ?? "N/A", store )); 
+            subItems.Add(CreateRow(ata.ToString(), ata )); 
+            subItems.Add(CreateRow(refference, refference )); 
+            subItems.Add(CreateRow(partNumber, partNumber ));
+            subItems.Add(CreateRow(altPartNumber, altPartNumber ));
+            subItems.Add(CreateRow(standart, standart ));
+            subItems.Add(CreateRow(name, name ));
+            subItems.Add(CreateRow(description, description ));
+            subItems.Add(CreateRow(serialNumber, serialNumber ));
+            subItems.Add(CreateRow(classString, classString ));
+            subItems.Add(CreateRow(batchNumber, batchNumber ));
+            subItems.Add(CreateRow(idNumber, idNumber ));
+            subItems.Add(CreateRow(position?.ToString().ToUpper(), position ));
+            subItems.Add(CreateRow(status, status ));
+            subItems.Add(CreateRow(location, location ));
+            subItems.Add(CreateRow(facility, facility ));
+            subItems.Add(CreateRow(from, from ));
+            subItems.Add(CreateRow(transferDate > DateTimeExtend.GetCASMinDateTime()
+					? SmartCore.Auxiliary.Convert.GetDateFormat(transferDate) : "", transferDate));
+            subItems.Add(CreateRow(workType, Tag = workType ));
+			subItems.Add(CreateRow(needWpQuantity.ToString(), needWpQuantity ));
+			subItems.Add(CreateRow(reserve.ToString(), reserve ));
+            subItems.Add(CreateRow(quantityString, quantity ));
+			subItems.Add(CreateRow(shouldBeOnStockString, shouldBeOnStock ));
+			subItems.Add(CreateRow(quantityInString, quantityIn ));
+			subItems.Add(CreateRow(unitPrice.ToString(), unitPrice ));
+            subItems.Add(CreateRow(totalPrice.ToString(), totalPrice ));
+            subItems.Add(CreateRow(shipPrice.ToString(), shipPrice ));
+            subItems.Add(CreateRow(subTotal.ToString(), subTotal ));
+            subItems.Add(CreateRow(tax1.ToString(), tax1 ));
+            subItems.Add(CreateRow(tax2.ToString(), tax2 ));
+            subItems.Add(CreateRow(tax3.ToString(), tax3 ));
+            subItems.Add(CreateRow(total.ToString(), total ));
+            subItems.Add(CreateRow(currency, currency ));
+            subItems.Add(CreateRow(supplier, supplier ));
+            subItems.Add(CreateRow(code, code ));
+			subItems.Add(CreateRow(remarks, remarks ));
+            subItems.Add(CreateRow(effectivity, effectivity));
+            subItems.Add(CreateRow(isPool ? "Yes" : "No", isPool ));
+            subItems.Add(CreateRow(IsDangerous ? "Yes" : "No", IsDangerous ));
+            subItems.Add(CreateRow(maintenanceTypeString, maintenanceTypeString ));
+            subItems.Add(CreateRow(manHours.ToString(), manHours ));
+            subItems.Add(CreateRow(firstPerformance.ToString(), firstPerformance ));
+            subItems.Add(CreateRow(repeatInterval.ToString(), repeatInterval ));
+			subItems.Add(CreateRow(timesString, times ));
+			subItems.Add(CreateRow(approx != null ? SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)approx) + " " + next
+		            : next != null && !next.IsNullOrZero() ? next.ToString() : "", approx == null ? DateTimeExtend.GetCASMinDateTime() : (DateTime)approx));
+            subItems.Add(CreateRow(remains != null && !remains.IsNullOrZero() ? remains.ToString() : "", remains ?? Lifelength.Null));
+            subItems.Add(CreateRow(lastPerformanceString, lastPerformance ));
+            subItems.Add(CreateRow(warranty.ToString(), warranty ));
+            subItems.Add(CreateRow(kitRequieredString, kitCount ));
+			subItems.Add(CreateRow(hiddenRemarks, hiddenRemarks ));
+            subItems.Add(CreateRow(author, author ));
 
-			return subItems.ToArray();
+			return subItems;
         }
 
         #endregion
 
         #region protected override void SortItems(int columnIndex)
 
-        protected override void SortItems(int columnIndex)
-        {
-            if (OldColumnIndex != columnIndex)
-                SortMultiplier = -1;
-            if (SortMultiplier == 1)
-                SortMultiplier = -1;
-            else
-                SortMultiplier = 1;
-            itemsListView.Items.Clear();
-            OldColumnIndex = columnIndex;
+        //protected override void SortItems(int columnIndex)
+        //{
+        //    if (OldColumnIndex != columnIndex)
+        //        SortMultiplier = -1;
+        //    if (SortMultiplier == 1)
+        //        SortMultiplier = -1;
+        //    else
+        //        SortMultiplier = 1;
+        //    itemsListView.Items.Clear();
+        //    OldColumnIndex = columnIndex;
 
-            SetGroupsToItems(columnIndex);
+        //    SetGroupsToItems(columnIndex);
 
-            List<ListViewItem> resultList = new List<ListViewItem>();
+        //    List<ListViewItem> resultList = new List<ListViewItem>();
 
-            if (columnIndex != 13)
-            {
-                ListViewItemList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
-                //добавление остальных подзадач
-                foreach (ListViewItem item in ListViewItemList)
-                {
-                    if (item.Tag is Component)
-                    {
-                        resultList.Add(item);
-                        Component component = (Component) item.Tag;
-                        if (component.NextPerformances != null && component.NextPerformances.Count > 1)
-                        {
-                            //Если кол-во расчитанных выполнений больше одного
-                            //то в результирующую коллекцию добавлются строки след. выполений
-                            for (int i = 1; i < component.NextPerformances.Count; i++)
-                            {
-                                ListViewItem temp = new ListViewItem(GetListViewSubItems(component.NextPerformances[i]), null)
-                                {
-                                    Tag = component.NextPerformances[i],
-                                    Group = item.Group
-                                };
-                                resultList.Add(temp);
-                            }
-                        }
-                        //Если привязанным элементом является деталь
-                        //то в результирующий список следом за ней добавляются ее директивы
-                        IEnumerable<ListViewItem> items =
-                            ListViewItemList
-                            .Where(lvi => lvi.Tag is ComponentDirective && ((ComponentDirective)lvi.Tag).ComponentId == component.ItemId);
-                        foreach (ListViewItem listViewItem in items)
-                        {
-                            listViewItem.Group = item.Group;
-                            resultList.Add(listViewItem);
+        //    if (columnIndex != 13)
+        //    {
+        //        ListViewItemList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
+        //        //добавление остальных подзадач
+        //        foreach (ListViewItem item in ListViewItemList)
+        //        {
+        //            if (item.Tag is Component)
+        //            {
+        //                resultList.Add(item);
+        //                Component component = (Component) item.Tag;
+        //                if (component.NextPerformances != null && component.NextPerformances.Count > 1)
+        //                {
+        //                    //Если кол-во расчитанных выполнений больше одного
+        //                    //то в результирующую коллекцию добавлются строки след. выполений
+        //                    for (int i = 1; i < component.NextPerformances.Count; i++)
+        //                    {
+        //                        ListViewItem temp = new ListViewItem(GetListViewSubItems(component.NextPerformances[i]), null)
+        //                        {
+        //                            Tag = component.NextPerformances[i],
+        //                            Group = item.Group
+        //                        };
+        //                        resultList.Add(temp);
+        //                    }
+        //                }
+        //                //Если привязанным элементом является деталь
+        //                //то в результирующий список следом за ней добавляются ее директивы
+        //                IEnumerable<ListViewItem> items =
+        //                    ListViewItemList
+        //                    .Where(lvi => lvi.Tag is ComponentDirective && ((ComponentDirective)lvi.Tag).ComponentId == component.ItemId);
+        //                foreach (ListViewItem listViewItem in items)
+        //                {
+        //                    listViewItem.Group = item.Group;
+        //                    resultList.Add(listViewItem);
 
-                            ComponentDirective componentDirective = (ComponentDirective)listViewItem.Tag;
-                            if (componentDirective.NextPerformances == null || componentDirective.NextPerformances.Count <= 1) continue;
-                            //Если кол-во расчитанных выполнений больше одного
-                            //то в результирующую коллекцию добавлются строки след. выполений
-                            for (int i = 1; i < componentDirective.NextPerformances.Count; i++)
-                            {
-                                ListViewItem temp = new ListViewItem(GetListViewSubItems(componentDirective.NextPerformances[i]), null)
-                                {
-                                    Tag = componentDirective.NextPerformances[i],
-                                    Group = item.Group
-                                };
-                                resultList.Add(temp);
-                            }
-                        }
-                    }
-                }
-            }
-            else
-            {
-                foreach (ListViewItem item in ListViewItemList)
-                {
-                    if (item.Tag is Component)
-                    {
-                        //Если привязанным элементом является деталь
-                        //то в результирующий список следом за ней добавляются ее директивы
-                        resultList.Add(item);
-                        Component component = (Component)item.Tag;
-                        if (component.NextPerformances != null && component.NextPerformances.Count > 1)
-                        {
-                            //Если кол-во расчитанных выполнений больше одного
-                            //то в результирующую коллекцию добавлются строки след. выполений
-                            for (int i = 1; i < component.NextPerformances.Count; i++)
-                            {
-                                ListViewItem temp = new ListViewItem(GetListViewSubItems(component.NextPerformances[i]), null)
-                                {
-                                    Tag = component.NextPerformances[i],
-                                    Group = item.Group
-                                };
-                                resultList.Add(temp);
-                            }
-                        }
-                        IEnumerable<ListViewItem> items =
-                            ListViewItemList
-                            .Where(lvi => lvi.Tag is ComponentDirective && ((ComponentDirective)lvi.Tag).ComponentId == component.ItemId);
-                        foreach (ListViewItem listViewItem in items)
-                        {
-                            listViewItem.Group = item.Group;
-                            resultList.Add(listViewItem);
+        //                    ComponentDirective componentDirective = (ComponentDirective)listViewItem.Tag;
+        //                    if (componentDirective.NextPerformances == null || componentDirective.NextPerformances.Count <= 1) continue;
+        //                    //Если кол-во расчитанных выполнений больше одного
+        //                    //то в результирующую коллекцию добавлются строки след. выполений
+        //                    for (int i = 1; i < componentDirective.NextPerformances.Count; i++)
+        //                    {
+        //                        ListViewItem temp = new ListViewItem(GetListViewSubItems(componentDirective.NextPerformances[i]), null)
+        //                        {
+        //                            Tag = componentDirective.NextPerformances[i],
+        //                            Group = item.Group
+        //                        };
+        //                        resultList.Add(temp);
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        foreach (ListViewItem item in ListViewItemList)
+        //        {
+        //            if (item.Tag is Component)
+        //            {
+        //                //Если привязанным элементом является деталь
+        //                //то в результирующий список следом за ней добавляются ее директивы
+        //                resultList.Add(item);
+        //                Component component = (Component)item.Tag;
+        //                if (component.NextPerformances != null && component.NextPerformances.Count > 1)
+        //                {
+        //                    //Если кол-во расчитанных выполнений больше одного
+        //                    //то в результирующую коллекцию добавлются строки след. выполений
+        //                    for (int i = 1; i < component.NextPerformances.Count; i++)
+        //                    {
+        //                        ListViewItem temp = new ListViewItem(GetListViewSubItems(component.NextPerformances[i]), null)
+        //                        {
+        //                            Tag = component.NextPerformances[i],
+        //                            Group = item.Group
+        //                        };
+        //                        resultList.Add(temp);
+        //                    }
+        //                }
+        //                IEnumerable<ListViewItem> items =
+        //                    ListViewItemList
+        //                    .Where(lvi => lvi.Tag is ComponentDirective && ((ComponentDirective)lvi.Tag).ComponentId == component.ItemId);
+        //                foreach (ListViewItem listViewItem in items)
+        //                {
+        //                    listViewItem.Group = item.Group;
+        //                    resultList.Add(listViewItem);
 
-                            ComponentDirective componentDirective = (ComponentDirective)listViewItem.Tag;
-                            if (componentDirective.NextPerformances == null || componentDirective.NextPerformances.Count <= 1) continue;
-                            //Если кол-во расчитанных выполнений больше одного
-                            //то в результирующую коллекцию добавлются строки след. выполений
-                            for (int i = 1; i < componentDirective.NextPerformances.Count; i++)
-                            {
-                                ListViewItem temp = new ListViewItem(GetListViewSubItems(componentDirective.NextPerformances[i]), null)
-                                {
-                                    Tag = componentDirective.NextPerformances[i],
-                                    Group = item.Group
-                                };
-                                resultList.Add(temp);
-                            }
-                        }
-                    }
-                }
+        //                    ComponentDirective componentDirective = (ComponentDirective)listViewItem.Tag;
+        //                    if (componentDirective.NextPerformances == null || componentDirective.NextPerformances.Count <= 1) continue;
+        //                    //Если кол-во расчитанных выполнений больше одного
+        //                    //то в результирующую коллекцию добавлются строки след. выполений
+        //                    for (int i = 1; i < componentDirective.NextPerformances.Count; i++)
+        //                    {
+        //                        ListViewItem temp = new ListViewItem(GetListViewSubItems(componentDirective.NextPerformances[i]), null)
+        //                        {
+        //                            Tag = componentDirective.NextPerformances[i],
+        //                            Group = item.Group
+        //                        };
+        //                        resultList.Add(temp);
+        //                    }
+        //                }
+        //            }
+        //        }
 
-                resultList.Sort(new DirectiveListViewComparer(columnIndex, SortMultiplier));
-                itemsListView.Groups.Clear();
-                foreach (ListViewItem item in resultList)
-                {
-                    DateTime date = DateTimeExtend.GetCASMinDateTime();
-                    if (item.Tag is NextPerformance)
-                    {
-                        NextPerformance np = (NextPerformance)item.Tag;
-                        if (np.PerformanceDate != null)
-                            date = np.PerformanceDate.Value.Date;
-                    }
-                    else if(item.Tag is IDirective)
-                    {
-                        IDirective np = (IDirective)item.Tag;
-                        if (np.NextPerformanceDate != null)
-                            date = np.NextPerformanceDate.Value.Date;    
-                    }
+        //        resultList.Sort(new DirectiveListViewComparer(columnIndex, SortMultiplier));
+        //        itemsListView.Groups.Clear();
+        //        foreach (ListViewItem item in resultList)
+        //        {
+        //            DateTime date = DateTimeExtend.GetCASMinDateTime();
+        //            if (item.Tag is NextPerformance)
+        //            {
+        //                NextPerformance np = (NextPerformance)item.Tag;
+        //                if (np.PerformanceDate != null)
+        //                    date = np.PerformanceDate.Value.Date;
+        //            }
+        //            else if(item.Tag is IDirective)
+        //            {
+        //                IDirective np = (IDirective)item.Tag;
+        //                if (np.NextPerformanceDate != null)
+        //                    date = np.NextPerformanceDate.Value.Date;    
+        //            }
 
-                    string temp = date.Date > DateTimeExtend.GetCASMinDateTime().Date ? SmartCore.Auxiliary.Convert.GetDateFormat(date.Date) : "";
-                    itemsListView.Groups.Add(temp, temp);
-                    item.Group = itemsListView.Groups[temp];
-                }
+        //            string temp = date.Date > DateTimeExtend.GetCASMinDateTime().Date ? SmartCore.Auxiliary.Convert.GetDateFormat(date.Date) : "";
+        //            itemsListView.Groups.Add(temp, temp);
+        //            item.Group = itemsListView.Groups[temp];
+        //        }
 
-            }
-            itemsListView.Items.AddRange(resultList.Distinct().ToArray());
-        }
+        //    }
+        //    itemsListView.Items.AddRange(resultList.Distinct().ToArray());
+        //}
 
         #endregion
 
@@ -756,11 +631,11 @@ namespace CAS.UI.UIControls.StoresControls
 						if (dp.Form is ConsumablePartAndKitForm)
 						{
 							var changedJob = ((ConsumablePartAndKitForm)dp.Form)._consumablePart;
-							itemsListView.SelectedItems[0].Tag = changedJob;
+							radGridView1.SelectedRows[0].Tag = changedJob;
 
 							var subs = GetListViewSubItems(SelectedItem);
-							for (int i = 0; i < subs.Length; i++)
-								itemsListView.SelectedItems[0].SubItems[i].Text = subs[i].Text;
+							for (int i = 0; i < subs.Count; i++)
+								radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
 						}
 					}
 
@@ -771,51 +646,52 @@ namespace CAS.UI.UIControls.StoresControls
         #endregion
 
         #region protected override void SetItemColor(ListViewItem listViewItem, IBaseCoreObject item)
-        protected override void SetItemColor(ListViewItem listViewItem, IBaseCoreObject item)
-        {
-            if (item is NextPerformance)
-            {
-                listViewItem.ForeColor = Color.Gray;
-                if (((NextPerformance)item).BlockedByPackage != null)
-                {
-                    listViewItem.BackColor = Color.FromArgb(Highlight.Grey.Color);
-                    listViewItem.ToolTipText = "This performance is involved on Work Package:" + ((NextPerformance)item).BlockedByPackage.Title;
-                }
-            }
-            else if (item is IDirective)
-            {
-                listViewItem.ForeColor = Color.Black;
-                if (item is Component)
-                {
-                    Component component = (Component) item;
-                    if (component.Condition == ConditionState.NotEstimated)
-                        listViewItem.BackColor = Color.FromArgb(Highlight.Blue.Color);
-                    if (/*component.Current == component.ShouldBeOnStock && component.ShouldBeOnStock > 0||*/
-						component.Condition == ConditionState.Notify)
-                        listViewItem.BackColor = Color.FromArgb(Highlight.Yellow.Color);   
-                    if (/*component.Current < component.ShouldBeOnStock ||*/
-                        component.Condition == ConditionState.Overdue)
-                        listViewItem.BackColor = Color.FromArgb(Highlight.Red.Color); 
-                }
-                else if (item is ComponentDirective)
-                {
-                    ComponentDirective comp = (ComponentDirective)item;
-                    if (comp.Condition == ConditionState.NotEstimated)
-                        listViewItem.BackColor = Color.FromArgb(Highlight.Blue.Color);
-                    if (comp.Condition == ConditionState.Notify)
-                        listViewItem.BackColor = Color.FromArgb(Highlight.Yellow.Color);
-                    if (comp.Condition == ConditionState.Overdue)
-                        listViewItem.BackColor = Color.FromArgb(Highlight.Red.Color);
-                }
+		//TODO COLOR!
+      //  protected override void SetItemColor(ListViewItem listViewItem, IBaseCoreObject item)
+      //  {
+      //      if (item is NextPerformance)
+      //      {
+      //          listViewItem.ForeColor = Color.Gray;
+      //          if (((NextPerformance)item).BlockedByPackage != null)
+      //          {
+      //              listViewItem.BackColor = Color.FromArgb(Highlight.Grey.Color);
+      //              listViewItem.ToolTipText = "This performance is involved on Work Package:" + ((NextPerformance)item).BlockedByPackage.Title;
+      //          }
+      //      }
+      //      else if (item is IDirective)
+      //      {
+      //          listViewItem.ForeColor = Color.Black;
+      //          if (item is Component)
+      //          {
+      //              Component component = (Component) item;
+      //              if (component.Condition == ConditionState.NotEstimated)
+      //                  listViewItem.BackColor = Color.FromArgb(Highlight.Blue.Color);
+      //              if (/*component.Current == component.ShouldBeOnStock && component.ShouldBeOnStock > 0||*/
+						//component.Condition == ConditionState.Notify)
+      //                  listViewItem.BackColor = Color.FromArgb(Highlight.Yellow.Color);   
+      //              if (/*component.Current < component.ShouldBeOnStock ||*/
+      //                  component.Condition == ConditionState.Overdue)
+      //                  listViewItem.BackColor = Color.FromArgb(Highlight.Red.Color); 
+      //          }
+      //          else if (item is ComponentDirective)
+      //          {
+      //              ComponentDirective comp = (ComponentDirective)item;
+      //              if (comp.Condition == ConditionState.NotEstimated)
+      //                  listViewItem.BackColor = Color.FromArgb(Highlight.Blue.Color);
+      //              if (comp.Condition == ConditionState.Notify)
+      //                  listViewItem.BackColor = Color.FromArgb(Highlight.Yellow.Color);
+      //              if (comp.Condition == ConditionState.Overdue)
+      //                  listViewItem.BackColor = Color.FromArgb(Highlight.Red.Color);
+      //          }
 
-                IDirective dir = item as IDirective;
-                if (dir.NextPerformances.Count > 0 && dir.NextPerformances[0].BlockedByPackage != null)
-                {
-                    listViewItem.BackColor = Color.FromArgb(Highlight.Grey.Color);
-                    listViewItem.ToolTipText = "This performance is involved on Work Package:" + dir.NextPerformances[0].BlockedByPackage.Title;
-                }
-            }
-        }
+      //          IDirective dir = item as IDirective;
+      //          if (dir.NextPerformances.Count > 0 && dir.NextPerformances[0].BlockedByPackage != null)
+      //          {
+      //              listViewItem.BackColor = Color.FromArgb(Highlight.Grey.Color);
+      //              listViewItem.ToolTipText = "This performance is involved on Work Package:" + dir.NextPerformances[0].BlockedByPackage.Title;
+      //          }
+      //      }
+      //  }
         #endregion
 
         #endregion
