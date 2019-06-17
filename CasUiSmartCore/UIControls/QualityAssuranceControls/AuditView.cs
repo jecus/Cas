@@ -18,6 +18,7 @@ using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.Quality;
 using SmartCore.Entities.General.WorkPackage;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.QualityAssuranceControls
 {
@@ -62,6 +63,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
         /// </summary>
         protected override void SetHeaders()
         {
+	        AddColumn("Type", (int)(radGridView1.Width * 0.20f));
 	        AddColumn("ATA", (int)(radGridView1.Width * 0.20f));
 	        AddColumn("Title", (int)(radGridView1.Width * 0.32f));
 	        AddColumn("Description", (int)(radGridView1.Width * 0.16f));
@@ -77,120 +79,204 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
         }
 		#endregion
 
-		#region protected override SetGroupsToItems(int columnIndex)
-		/// <summary>
-		/// Выполняет группировку элементов
-		/// </summary>
-		//protected override void SetGroupsToItems(int columnIndex)
-  //      {
-  //          itemsListView.Groups.Clear();
-  //          foreach (var item in ListViewItemList)
-  //          {
-  //              var temp = ListViewGroupHelper.GetGroupString(item.Tag);
+		#region protected override void GroupingItems()
 
-		//		itemsListView.Groups.Add(temp, temp);
-		//		item.Group = itemsListView.Groups[temp];
+		protected override void GroupingItems()
+		{
+			Grouping("Type");
+		}
 
-		//	}
-  //      }
-        #endregion
+		#endregion
 
-        #region protected override void SetItemColor(ListViewItem listViewItem, BaseSmartCoreObject item)
-        //protected override void SetItemColor(ListViewItem listViewItem, BaseEntityObject item)
-        //{
-        //    if (item is NextPerformance)
-        //    {
-        //        NextPerformance nextPerformance = item as NextPerformance;
-        //        if(_currentDirective.Status != WorkPackageStatus.Closed)
-        //        {
-        //            if (nextPerformance.BlockedByPackage != null)
-        //            {
-        //                listViewItem.ToolTipText = "This performance blocked by work package:" +
-        //                   nextPerformance.BlockedByPackage.Title;
-        //                listViewItem.BackColor = Color.FromArgb(Highlight.Grey.Color);
-        //            }
-        //            else if (nextPerformance.Condition == ConditionState.Notify)
-        //                listViewItem.BackColor = Color.FromArgb(Highlight.Yellow.Color);
-        //            else if (nextPerformance.Condition == ConditionState.Overdue)
-        //                listViewItem.BackColor = Color.FromArgb(Highlight.Red.Color);    
-        //        }
-        //        else
-        //        {
-        //            //Если это следующее выполнение, но рабочий пакет при этом закрыт
-        //            //значит, выполнение для данной задачи в рамках данного рабочего пакета
-        //            //не было введено
+		#region protected override void SetItemColor(ListViewItem listViewItem, BaseSmartCoreObject item)
 
-        //            //пометка этого выполнения краным цветом
-        //            listViewItem.BackColor = Color.FromArgb(Highlight.Red.Color);
-        //            //подсказка о том, что выполнение не было введено
-        //            listViewItem.ToolTipText = "Performance for this directive within this work package is not entered.";
-        //            if (nextPerformance.BlockedByPackage != null)
-        //            {
-        //                //дополнитльная подсказака, если предшествующее выполнение 
-        //                //имеется в другом открытом рабочем пакете
-        //                listViewItem.ToolTipText += "\nThis performance blocked by work package:" +
-        //                   nextPerformance.BlockedByPackage.Title +
-        //                   "\nFirst, enter the performance of this directive as part of this work package ";
-        //            }    
-        //        }
+		protected override void SetItemColor(GridViewRowInfo listViewItem, BaseEntityObject item)
+		{
+			if (item is NextPerformance)
+			{
+				NextPerformance nextPerformance = item as NextPerformance;
+				if (_currentDirective.Status != WorkPackageStatus.Closed)
+				{
+					var color = radGridView1.BackColor;
+					if (nextPerformance.BlockedByPackage != null)
+						color = Color.FromArgb(Highlight.Grey.Color);
+					else if (nextPerformance.Condition == ConditionState.Notify)
+						color = Color.FromArgb(Highlight.Yellow.Color);
+					else if (nextPerformance.Condition == ConditionState.Overdue)
+						color = Color.FromArgb(Highlight.Red.Color);
 
-        //        if (nextPerformance.Parent.IsDeleted)
-        //        {
-        //            //запись так же может быть удаленной
+					foreach (GridViewCellInfo cell in listViewItem.Cells)
+					{
+						cell.Style.CustomizeFill = true;
+						cell.Style.BackColor = color;
+					}
+				}
+				else
+				{
+					//Если это следующее выполнение, но рабочий пакет при этом закрыт
+					//значит, выполнение для данной задачи в рамках данного рабочего пакета
+					//не было введено
 
-        //            //шрифт серым цветом
-        //            listViewItem.ForeColor = Color.Gray;
-        //            if (listViewItem.ToolTipText.Trim() != "")
-        //                listViewItem.ToolTipText += "\n";
-        //            listViewItem.ToolTipText += string.Format("This {0} is deleted",nextPerformance.Parent.SmartCoreObjectType);
-        //        }
-        //    }
-        //    else if (item is AbstractPerformanceRecord)
-        //    {
-        //        AbstractPerformanceRecord apr = (AbstractPerformanceRecord) item;
-        //        if (apr.Parent.IsDeleted)
-        //        {
-        //            //запись так же может быть удаленной
+					//пометка этого выполнения краным цветом
+					foreach (GridViewCellInfo cell in listViewItem.Cells)
+					{
+						cell.Style.CustomizeFill = true;
+						cell.Style.BackColor = Color.FromArgb(Highlight.Red.Color);
+					}
+				}
 
-        //            //шрифт серым цветом
-        //            listViewItem.ForeColor = Color.Gray;
-        //            if (listViewItem.ToolTipText.Trim() != "")
-        //                listViewItem.ToolTipText += "\n";
-        //            listViewItem.ToolTipText += string.Format("This {0} is deleted", apr.Parent.SmartCoreObjectType);
-        //        }    
-        //    }
-        //    else
-        //    {
-        //        if(!(item is NonRoutineJob))
-        //        {
-        //            //Если это не следующее выполнение, не запись о выполнении, и не рутинная работа
-        //            //значит, выполнение для данной задачи расчитать нельзя
+				if (nextPerformance.Parent.IsDeleted)
+				{
+					//запись так же может быть удаленной
 
-        //            //пометка этого выполнения синим цветом
-        //            listViewItem.BackColor = Color.FromArgb(Highlight.Blue.Color);
-        //            //подсказка о том, что выполнение не возможео расчитать
-        //            listViewItem.ToolTipText = "Performance for this directive can not be calculated";  
-        //        }
+					//шрифт серым цветом
+					foreach (GridViewCellInfo cell in listViewItem.Cells)
+					{
+						cell.Style.CustomizeFill = true;
+						cell.Style.ForeColor = Color.Gray;
+					}
+				}
+			}
+			else if (item is AbstractPerformanceRecord)
+			{
+				AbstractPerformanceRecord apr = (AbstractPerformanceRecord)item;
+				if (apr.Parent.IsDeleted)
+				{
+					//запись так же может быть удаленной
 
-        //        if (item.IsDeleted)
-        //        {
-        //            //запись так же может быть удаленной
+					//шрифт серым цветом
+					foreach (GridViewCellInfo cell in listViewItem.Cells)
+					{
+						cell.Style.CustomizeFill = true;
+						cell.Style.ForeColor = Color.Gray;
+					}
+				}
+			}
+			else
+			{
+				if (!(item is NonRoutineJob))
+				{
+					//Если это не следующее выполнение, не запись о выполнении, и не рутинная работа
+					//значит, выполнение для данной задачи расчитать нельзя
 
-        //            //шрифт серым цветом
-        //            listViewItem.ForeColor = Color.Gray;
-        //            if (listViewItem.ToolTipText.Trim() != "")
-        //                listViewItem.ToolTipText += "\n";
-        //            listViewItem.ToolTipText += string.Format("This {0} is deleted", item.SmartCoreObjectType);
-        //        }
-        //    }
-        //}
-        #endregion
+					//пометка этого выполнения синим цветом
+					foreach (GridViewCellInfo cell in listViewItem.Cells)
+					{
+						cell.Style.CustomizeFill = true;
+						cell.Style.BackColor = Color.FromArgb(Highlight.Blue.Color);
+					}
+				}
 
-        #region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(BaseSmartCoreObject item)
+				if (item.IsDeleted)
+				{
+					foreach (GridViewCellInfo cell in listViewItem.Cells)
+					{
+						cell.Style.CustomizeFill = true;
+						cell.Style.ForeColor = Color.Gray;
+					}
+				}
+			}
+		}
 
-        protected override List<CustomCell> GetListViewSubItems(BaseEntityObject item)
-        {
-            var subItems = new List<CustomCell>();
+		//protected override void SetItemColor(ListViewItem listViewItem, BaseEntityObject item)
+		//{
+		//    if (item is NextPerformance)
+		//    {
+		//        NextPerformance nextPerformance = item as NextPerformance;
+		//        if(_currentDirective.Status != WorkPackageStatus.Closed)
+		//        {
+		//            if (nextPerformance.BlockedByPackage != null)
+		//            {
+		//                listViewItem.ToolTipText = "This performance blocked by work package:" +
+		//                   nextPerformance.BlockedByPackage.Title;
+		//                listViewItem.BackColor = Color.FromArgb(Highlight.Grey.Color);
+		//            }
+		//            else if (nextPerformance.Condition == ConditionState.Notify)
+		//                listViewItem.BackColor = Color.FromArgb(Highlight.Yellow.Color);
+		//            else if (nextPerformance.Condition == ConditionState.Overdue)
+		//                listViewItem.BackColor = Color.FromArgb(Highlight.Red.Color);    
+		//        }
+		//        else
+		//        {
+		//            //Если это следующее выполнение, но рабочий пакет при этом закрыт
+		//            //значит, выполнение для данной задачи в рамках данного рабочего пакета
+		//            //не было введено
+
+		//            //пометка этого выполнения краным цветом
+		//            listViewItem.BackColor = Color.FromArgb(Highlight.Red.Color);
+		//            //подсказка о том, что выполнение не было введено
+		//            listViewItem.ToolTipText = "Performance for this directive within this work package is not entered.";
+		//            if (nextPerformance.BlockedByPackage != null)
+		//            {
+		//                //дополнитльная подсказака, если предшествующее выполнение 
+		//                //имеется в другом открытом рабочем пакете
+		//                listViewItem.ToolTipText += "\nThis performance blocked by work package:" +
+		//                   nextPerformance.BlockedByPackage.Title +
+		//                   "\nFirst, enter the performance of this directive as part of this work package ";
+		//            }    
+		//        }
+
+		//        if (nextPerformance.Parent.IsDeleted)
+		//        {
+		//            //запись так же может быть удаленной
+
+		//            //шрифт серым цветом
+		//            listViewItem.ForeColor = Color.Gray;
+		//            if (listViewItem.ToolTipText.Trim() != "")
+		//                listViewItem.ToolTipText += "\n";
+		//            listViewItem.ToolTipText += string.Format("This {0} is deleted",nextPerformance.Parent.SmartCoreObjectType);
+		//        }
+		//    }
+		//    else if (item is AbstractPerformanceRecord)
+		//    {
+		//        AbstractPerformanceRecord apr = (AbstractPerformanceRecord) item;
+		//        if (apr.Parent.IsDeleted)
+		//        {
+		//            //запись так же может быть удаленной
+
+		//            //шрифт серым цветом
+		//            listViewItem.ForeColor = Color.Gray;
+		//            if (listViewItem.ToolTipText.Trim() != "")
+		//                listViewItem.ToolTipText += "\n";
+		//            listViewItem.ToolTipText += string.Format("This {0} is deleted", apr.Parent.SmartCoreObjectType);
+		//        }    
+		//    }
+		//    else
+		//    {
+		//        if(!(item is NonRoutineJob))
+		//        {
+		//            //Если это не следующее выполнение, не запись о выполнении, и не рутинная работа
+		//            //значит, выполнение для данной задачи расчитать нельзя
+
+		//            //пометка этого выполнения синим цветом
+		//            listViewItem.BackColor = Color.FromArgb(Highlight.Blue.Color);
+		//            //подсказка о том, что выполнение не возможео расчитать
+		//            listViewItem.ToolTipText = "Performance for this directive can not be calculated";  
+		//        }
+
+		//        if (item.IsDeleted)
+		//        {
+		//            //запись так же может быть удаленной
+
+		//            //шрифт серым цветом
+		//            listViewItem.ForeColor = Color.Gray;
+		//            if (listViewItem.ToolTipText.Trim() != "")
+		//                listViewItem.ToolTipText += "\n";
+		//            listViewItem.ToolTipText += string.Format("This {0} is deleted", item.SmartCoreObjectType);
+		//        }
+		//    }
+		//}
+		#endregion
+
+		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(BaseSmartCoreObject item)
+
+		protected override List<CustomCell> GetListViewSubItems(BaseEntityObject item)
+		{
+			var temp = ListViewGroupHelper.GetGroupString(item);
+            var subItems = new List<CustomCell>()
+            {
+				CreateRow(temp,temp)
+            };
             var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 			//if(item.ItemId == 41043)
 			//{

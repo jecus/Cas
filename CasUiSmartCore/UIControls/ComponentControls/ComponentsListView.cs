@@ -104,47 +104,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			Grouping("Type");
 		}
 
-		//protected override void SetGroupsToItems(int columnIndex)
-		//      {
-		//	//TODO:(Evgenii Babak) перенести в ListViewHelper
-		//          itemsListView.Groups.Clear();
-		//          foreach (ListViewItem listViewItem in ListViewItemList.OrderBy(x => x.Text))
-		//          {
-		//		var parent = (IDirective)listViewItem.Tag;
-
-		//		if (parent is ComponentDirective)
-		//			parent = ((ComponentDirective)parent).ParentComponent;
-
-		//		string groupName = "";
-		//              if (parent is BaseComponent)
-		//              {
-		//                  if (((BaseComponent)parent).BaseComponentType == BaseComponentType.Engine)
-		//                      groupName = "Engines";
-		//                  else if (((BaseComponent)parent).BaseComponentType == BaseComponentType.Apu)
-		//                      groupName = "APU";
-		//                  else if (((BaseComponent)parent).BaseComponentType == BaseComponentType.LandingGear)
-		//                      groupName = "Landing gears";
-		//                  else if (((BaseComponent)parent).BaseComponentType == BaseComponentType.Propeller)
-		//                      groupName = "Propellers";
-		//			else if (((BaseComponent)parent).BaseComponentType == BaseComponentType.Frame)
-		//				groupName = "Frames";
-		//		}
-		//              else if (parent is Component) 
-		//              {
-		//                  Component component = (Component)parent;
-		//                  if (_parentBaseComponent != null &&
-		//                     _parentBaseComponent.BaseComponentType == BaseComponentType.Engine) groupName = component.LLPMark ? "LLP Disk" : "Component";
-		//                  else
-		//                  {
-		//                      var ata = component.Model != null ? component.Model.ATAChapter : component.ATAChapter;
-		//                      groupName = ata.ShortName + " " + ata.FullName;
-		//                  }
-		//              }
-		//              itemsListView.Groups.Add(groupName, groupName);
-		//              listViewItem.Group = itemsListView.Groups[groupName];
-
-		//	}
-		//      }
 		#endregion
 
 		#region protected override void SetItemColor(GridViewRowInfo listViewItem, BaseEntityObject item)
