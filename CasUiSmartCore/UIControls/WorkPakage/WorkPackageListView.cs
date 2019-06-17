@@ -37,6 +37,8 @@ namespace CAS.UI.UIControls.WorkPakage
         #region Methods
 
         #region protected override List<PropertyInfo> GetTypeProperties()
+        //protected override List<PropertyInfo> GetTypeProperties()
+        //{
         protected override List<PropertyInfo> GetTypeProperties()
         {
             var props = base.GetTypeProperties();

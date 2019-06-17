@@ -302,6 +302,7 @@ namespace CAS.UI.UIControls.WorkPakage
 													_toolStripMenuItemPrintWorkscope,
 													_toolStripMenuItemPrintMaintenanceReport,
 													_toolStripSeparator2,
+													_toolStripMenuItemHighlight);
 													_toolStripMenuItemHighlight,
 												});
 		}
@@ -611,6 +612,7 @@ namespace CAS.UI.UIControls.WorkPakage
 				}
 			};
 
+			
 			panel1.Controls.Add(_directivesViewer);
 		}
 
