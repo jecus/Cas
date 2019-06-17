@@ -97,7 +97,7 @@ namespace CAS.UI.UIControls.Users
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
 			_directivesViewer.SetItemsArray(_result.OrderByDescending(i => i.Date).ToArray());
-			headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
+			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 
 			_directivesViewer.Focus();
 		}
@@ -298,7 +298,6 @@ namespace CAS.UI.UIControls.Users
 				TabIndex = 2,
 				Location = new Point(panel1.Left, panel1.Top),
 				Dock = DockStyle.Fill,
-				//IgnoreAutoResize = true
 			};
 
 			panel1.Controls.Add(_directivesViewer);

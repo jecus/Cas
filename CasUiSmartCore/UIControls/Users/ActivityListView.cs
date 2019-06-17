@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Comparers;
+using CAS.UI.UIControls.NewGrid;
 using SmartCore.Activity;
 
 namespace CAS.UI.UIControls.Users
@@ -9,7 +11,7 @@ namespace CAS.UI.UIControls.Users
     ///<summary>
     /// список для отображения документов
     ///</summary>
-    public partial class ActivityListView : BaseListViewControl<ActivityDTO>
+    public partial class ActivityListView : BaseGridViewControl<ActivityDTO>
     {
 		#region public UserListView()
 		public ActivityListView()
@@ -22,64 +24,29 @@ namespace CAS.UI.UIControls.Users
 		#region Methods
 
 		#region protected override SetGroupsToItems()
-		protected override void SetGroupsToItems(int columnIndex)
+		protected override void GroupingItems()
 		{
-			itemsListView.Groups.Clear();
-			foreach (var item in ListViewItemList)
-			{
-				var activityDto = item.Tag as ActivityDTO;
-				var temp = SmartCore.Auxiliary.Convert.GetDateFormat(activityDto.Date);
-
-				itemsListView.Groups.Add(temp, temp);
-				item.Group = itemsListView.Groups[temp];
-			}
+			Grouping("Date");
 		}
-		#endregion
-
-		#region protected override void SortItems(int columnIndex)
-
-		protected override void SortItems(int columnIndex)
-		{
-			if (OldColumnIndex != columnIndex)
-				SortMultiplier = -1;
-			if (SortMultiplier == 1)
-				SortMultiplier = -1;
-			else
-				SortMultiplier = 1;
-			itemsListView.Items.Clear();
-			var resultList = new List<ListViewItem>();
-			SetGroupsToItems(columnIndex);
-
-			//добавление остальных подзадач
-			foreach (ListViewItem item in ListViewItemList)
-			{
-				resultList.Add(item);
-			}
-			resultList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
-		
-			itemsListView.Items.AddRange(resultList.ToArray());
-			OldColumnIndex = columnIndex;
-
-		}
-
 		#endregion
 
 		#region protected override ListViewItem.ListViewSubItem[] GetItemsString(Document item)
 
-		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(ActivityDTO item)
+		protected override List<CustomCell> GetListViewSubItems(ActivityDTO item)
 		{
-			var subItems = new List<ListViewItem.ListViewSubItem>();
+			var subItems = new List<CustomCell>()
+			{
+				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.Date), item.Date),
+				CreateRow(item.Date.ToString("HH:mm:ss"), item.Date),
+				CreateRow(item.User.ToString(), item.User),
+				CreateRow(item.Operation.ToString(), item.Operation),
+				CreateRow(item.Type.FullName, item.Type),
+				CreateRow(item.Aircraft.ToString(), item.Aircraft),
+				CreateRow(item.Title, item.Title),
+				CreateRow(item.Information, item.Information),
+			};
 			
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Date.ToString("HH:mm:ss"), Tag = item.Date });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.User.ToString(), Tag = item.User });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Operation.ToString(), Tag = item.Operation });
-			//subItems.Add(new ListViewItem.ListViewSubItem {Text = item.ObjectId.ToString(), Tag = item.ObjectId });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Type.FullName, Tag = item.Type });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Aircraft.ToString(), Tag = item.Aircraft });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Title, Tag = item.Title });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Information, Tag = item.Information });
-			
-			return subItems.ToArray();
+			return subItems;
 		}
 
 		#endregion
@@ -90,43 +57,27 @@ namespace CAS.UI.UIControls.Users
 		///// </summary>
 		protected override void SetHeaders()
 		{
-			ColumnHeaderList.Clear();
-
-			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Time" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "User" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Activity Type" };
-			ColumnHeaderList.Add(columnHeader);
-
-			//columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Object Id" };
-			//ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Object Type" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Aircraft" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Title" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.40f), Text = "Additional Information" };
-			ColumnHeaderList.Add(columnHeader);
-
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+			AddColumn("Date", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Time", (int)(radGridView1.Width * 0.20f));
+			AddColumn("User", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Activity Type", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Object Type", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Aircraft", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Title", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Additional Information", (int)(radGridView1.Width * 0.20f));
 		}
 		#endregion
 
-		#region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
-		protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-        #endregion
+
+		#region protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
+
+		protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
+		{
+
+		}
+
+		#endregion
+
 
 		#endregion
 	}
