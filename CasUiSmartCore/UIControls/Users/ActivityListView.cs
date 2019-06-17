@@ -30,7 +30,7 @@ namespace CAS.UI.UIControls.Users
 		}
 		#endregion
 
-		#region protected override ListViewItem.ListViewSubItem[] GetItemsString(Document item)
+		#region protected override List<CustomCell> GetItemsString(Document item)
 
 		protected override List<CustomCell> GetListViewSubItems(ActivityDTO item)
 		{

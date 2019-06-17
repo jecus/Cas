@@ -68,7 +68,7 @@ namespace CAS.UI.UIControls.Users
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
 			_directivesViewer.SetItemsArray(_result.ToArray());
-			headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
+			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 
 			_directivesViewer.Focus();
 		}
