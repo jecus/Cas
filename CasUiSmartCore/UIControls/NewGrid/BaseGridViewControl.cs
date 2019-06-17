@@ -18,7 +18,7 @@ using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.NewGrid
 {
-	public partial class BaseGridViewControl<T> : UserControl where T : class, IBaseCoreObject
+	public partial class BaseGridViewControl<T> : UserControl, IReference where T : class, IBaseCoreObject
 	{
 		#region Fields
 
@@ -185,7 +185,7 @@ namespace CAS.UI.UIControls.NewGrid
 		/// Получает свойства типа, на основе которых будут созданы колонки 
 		/// </summary>
 		/// <returns></returns>
-		private List<PropertyInfo> GetTypeProperties()
+		protected virtual List<PropertyInfo> GetTypeProperties()
 		{
 			//определение типа
 			var type = typeof(T);

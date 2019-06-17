@@ -18,6 +18,7 @@ using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.WorkPackage;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.WorkPakage
 {
@@ -62,6 +63,7 @@ namespace CAS.UI.UIControls.WorkPakage
         /// </summary>
         protected override void SetHeaders()
         {
+	        AddColumn("Type", (int)(radGridView1.Width * 0.1f));
 			AddColumn("ATA", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Title", (int)(radGridView1.Width * 0.32f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.16f));
@@ -81,149 +83,170 @@ namespace CAS.UI.UIControls.WorkPakage
 		#endregion
 
 		#region protected override SetGroupsToItems(int columnIndex)
-		/// <summary>
-		/// Выполняет группировку элементов
-		/// </summary>
-		//protected override void SetGroupsToItems(int columnIndex)
-  //      {
-  //          itemsListView.Groups.Clear();
-  //          foreach (var item in ListViewItemList)
-  //          {
-		//		var temp = ListViewGroupHelper.GetGroupString(item.Tag);
 
-		//		itemsListView.Groups.Add(temp, temp);
-		//		item.Group = itemsListView.Groups[temp];
+		protected override void GroupingItems()
+		{
+			Grouping("Type");
+		}
+		#endregion
 
-		//	}
-  //      }
-        #endregion
-
-        #region protected override void SetItemColor(ListViewItem listViewItem, BaseSmartCoreObject item)
-		//TODO COLOR! 
-   //     protected override void SetItemColor(ListViewItem listViewItem, BaseEntityObject item)
-   //     {
+		#region protected override void SetItemColor(ListViewItem listViewItem, BaseSmartCoreObject item)
+		protected override void SetItemColor(GridViewRowInfo listViewItem, BaseEntityObject item)
+		{
 			//listViewItem.ToolTipText = GetToolTipString(item);
 
-			//if (item is NextPerformance)
-   //         {
-   //             var nextPerformance = item as NextPerformance;
+			if (item is NextPerformance)
+			{
+				var nextPerformance = item as NextPerformance;
 
-	  //          var file = GetItemFile(nextPerformance.Parent); 
+				var file = GetItemFile(nextPerformance.Parent);
 
-	  //          if (file != null)
-	  //          {
-			//		if (_currentWorkPackage.Status != WorkPackageStatus.Closed)
-			//		{
-			//			if (nextPerformance.BlockedByPackage != null)
-			//				listViewItem.BackColor = Color.FromArgb(Highlight.Grey.Color);
-			//			else if (nextPerformance.Condition == ConditionState.Notify)
-			//				listViewItem.BackColor = Color.FromArgb(Highlight.Yellow.Color);
-			//			else if (nextPerformance.Condition == ConditionState.Overdue)
-			//				listViewItem.BackColor = Color.FromArgb(Highlight.Red.Color);
-			//		}
-			//		else
-			//		{
-			//			//Если это следующее выполнение, но рабочий пакет при этом закрыт
-			//			//значит, выполнение для данной задачи в рамках данного рабочего пакета
-			//			//не было введено
-			//			//пометка этого выполнения краным цветом
-			//			listViewItem.BackColor = Color.FromArgb(Highlight.Red.Color);
-			//		}
-			//		if (nextPerformance.Parent.IsDeleted)
-			//		{
-			//			//запись так же может быть удаленной
-			//			//шрифт серым цветом
-			//			listViewItem.ForeColor = Color.Gray;
-			//		}
-			//	}
-	  //          else
-	  //          {
-			//		listViewItem.UseItemStyleForSubItems = false;
-		 //           for (int i = 0; i < listViewItem.SubItems.Count; i++)
-		 //           {
-			//			if (_currentWorkPackage.Status != WorkPackageStatus.Closed)
-			//			{
-			//				if (nextPerformance.BlockedByPackage != null)
-			//					listViewItem.SubItems[i].BackColor = Color.FromArgb(Highlight.Grey.Color);
-			//				else if (nextPerformance.Condition == ConditionState.Notify)
-			//					listViewItem.SubItems[i].BackColor = Color.FromArgb(Highlight.Yellow.Color);
-			//				else if (nextPerformance.Condition == ConditionState.Overdue)
-			//					listViewItem.SubItems[i].BackColor = Color.FromArgb(Highlight.Red.Color);
-			//			}
-			//			else
-			//				listViewItem.SubItems[i].BackColor = Color.FromArgb(Highlight.Red.Color);
+				if (file != null)
+				{
+					if (_currentWorkPackage.Status != WorkPackageStatus.Closed)
+					{
+						var color = radGridView1.BackColor;
+						if (nextPerformance.BlockedByPackage != null)
+							color = Color.FromArgb(Highlight.Grey.Color);
+						else if (nextPerformance.Condition == ConditionState.Notify)
+							color = Color.FromArgb(Highlight.Yellow.Color);
+						else if (nextPerformance.Condition == ConditionState.Overdue)
+							color = Color.FromArgb(Highlight.Red.Color);
 
-			//			if (nextPerformance.Parent.IsDeleted)
-			//				listViewItem.SubItems[i].ForeColor = Color.Gray;
+						foreach (GridViewCellInfo cell in listViewItem.Cells)
+						{
+							cell.Style.CustomizeFill = true;
+							cell.Style.BackColor = color;
+						}
+					}
+					else
+					{
+						//Если это следующее выполнение, но рабочий пакет при этом закрыт
+						//значит, выполнение для данной задачи в рамках данного рабочего пакета
+						//не было введено
+						//пометка этого выполнения краным цветом
+						foreach (GridViewCellInfo cell in listViewItem.Cells)
+						{
+							cell.Style.CustomizeFill = true;
+							cell.Style.BackColor = Color.FromArgb(Highlight.Red.Color);
+						}
+					}
+					if (nextPerformance.Parent.IsDeleted)
+					{
+						//запись так же может быть удаленной
+						//шрифт серым цветом
+						foreach (GridViewCellInfo cell in listViewItem.Cells)
+						{
+							cell.Style.CustomizeFill = true;
+							cell.Style.ForeColor = Color.Gray;
+						}
+					}
+				}
+				else
+				{
+					for (int i = 0; i < listViewItem.Cells.Count; i++)
+					{
+						listViewItem.Cells[i].Style.CustomizeFill = true;
+						if (_currentWorkPackage.Status != WorkPackageStatus.Closed)
+						{
+							if (nextPerformance.BlockedByPackage != null)
+								listViewItem.Cells[i].Style.BackColor = Color.FromArgb(Highlight.Grey.Color);
+							else if (nextPerformance.Condition == ConditionState.Notify)
+								listViewItem.Cells[i].Style.BackColor = Color.FromArgb(Highlight.Yellow.Color);
+							else if (nextPerformance.Condition == ConditionState.Overdue)
+								listViewItem.Cells[i].Style.BackColor = Color.FromArgb(Highlight.Red.Color);
+						}
+						else
+							listViewItem.Cells[i].Style.BackColor = Color.FromArgb(Highlight.Red.Color);
 
-			//			if (i == 1)
-			//				listViewItem.SubItems[i].ForeColor = Color.MediumVioletRed;
-			//		}
-			//	}  
-   //         }
-   //         else if (item is AbstractPerformanceRecord)
-   //         {
-   //             var apr = (AbstractPerformanceRecord) item;
+						if (nextPerformance.Parent.IsDeleted)
+							listViewItem.Cells[i].Style.ForeColor = Color.Gray;
 
-			//	var file = GetItemFile(apr.Parent);
+						if (i == 2)
+							listViewItem.Cells[i].Style.ForeColor = Color.MediumVioletRed;
+					}
+				}
+			}
+			else if (item is AbstractPerformanceRecord)
+			{
+				var apr = (AbstractPerformanceRecord)item;
 
-	  //          if (file != null)
-	  //          {
-			//		if (apr.Parent.IsDeleted)
-			//			listViewItem.ForeColor = Color.Gray;
-			//	}
-	  //          else
-	  //          {
-			//		listViewItem.UseItemStyleForSubItems = false;
-		 //           for (int i = 0; i < listViewItem.SubItems.Count; i++)
-		 //           {
-			//			if (apr.Parent.IsDeleted)
-			//				listViewItem.SubItems[i].ForeColor = Color.Gray;
+				var file = GetItemFile(apr.Parent);
 
-			//			if (i == 1)
-			//				listViewItem.SubItems[i].ForeColor = Color.MediumVioletRed;
-			//		}
-			//	}
-   //         }
-   //         else
-   //         {
-			//	var file = GetItemFile(item);
+				if (file != null)
+				{
+					if (apr.Parent.IsDeleted)
+					{
+						foreach (GridViewCellInfo cell in listViewItem.Cells)
+						{
+							cell.Style.CustomizeFill = true;
+							cell.Style.ForeColor = Color.Gray;
+						}
+					}
+				}
+				else
+				{
+					for (int i = 0; i < listViewItem.Cells.Count; i++)
+					{
+						listViewItem.Cells[i].Style.CustomizeFill = true;
+						if (apr.Parent.IsDeleted)
+							listViewItem.Cells[i].Style.ForeColor = Color.Gray;
 
-	  //          if (file != null)
-	  //          {
-			//		if (!(item is NonRoutineJob))
-			//		{
-			//			//Если это не следующее выполнение, не запись о выполнении, и не рутинная работа
-			//			//значит, выполнение для данной задачи расчитать нельзя
-			//			//пометка этого выполнения синим цветом
-			//			listViewItem.BackColor = Color.FromArgb(Highlight.Blue.Color);
-			//		}
-			//		if (item.IsDeleted)
-			//			listViewItem.ForeColor = Color.Gray;
-			//	}
-	  //          else
-	  //          {
-			//		listViewItem.UseItemStyleForSubItems = false;
-		 //           for (int i = 0; i < listViewItem.SubItems.Count; i++)
-		 //           {
-			//			if (!(item is NonRoutineJob))
-			//			{
-			//				//Если это не следующее выполнение, не запись о выполнении, и не рутинная работа
-			//				//значит, выполнение для данной задачи расчитать нельзя
+						if (i == 2)
+							listViewItem.Cells[i].Style.ForeColor = Color.MediumVioletRed;
+					}
+				}
+			}
+			else
+			{
+				var file = GetItemFile(item);
 
-			//				//пометка этого выполнения синим цветом
-			//				listViewItem.SubItems[i].BackColor = Color.FromArgb(Highlight.Blue.Color);
-			//			}
+				if (file != null)
+				{
+					if (!(item is NonRoutineJob))
+					{
+						//Если это не следующее выполнение, не запись о выполнении, и не рутинная работа
+						//значит, выполнение для данной задачи расчитать нельзя
+						//пометка этого выполнения синим цветом
+						foreach (GridViewCellInfo cell in listViewItem.Cells)
+						{
+							cell.Style.CustomizeFill = true;
+							cell.Style.BackColor = Color.FromArgb(Highlight.Blue.Color);
+						}
+					}
 
-			//			if (item.IsDeleted)
-			//				listViewItem.SubItems[i].ForeColor = Color.Gray;
+					if (item.IsDeleted)
+					{
+						foreach (GridViewCellInfo cell in listViewItem.Cells)
+						{
+							cell.Style.CustomizeFill = true;
+							cell.Style.ForeColor = Color.Gray;
+						}
+					}
+				}
+				else
+				{
+					for (int i = 0; i < listViewItem.Cells.Count; i++)
+					{
+						listViewItem.Cells[i].Style.CustomizeFill = true;
+						if (!(item is NonRoutineJob))
+						{
+							//Если это не следующее выполнение, не запись о выполнении, и не рутинная работа
+							//значит, выполнение для данной задачи расчитать нельзя
 
-			//			if (i == 1)
-			//				listViewItem.SubItems[i].ForeColor = Color.MediumVioletRed;
-			//		}
-			//	}
-			//}
-   //     }
+							//пометка этого выполнения синим цветом
+							listViewItem.Cells[i].Style.BackColor = Color.FromArgb(Highlight.Blue.Color);
+						}
+
+						if (item.IsDeleted)
+							listViewItem.Cells[i].Style.ForeColor = Color.Gray;
+
+						if (i == 2)
+							listViewItem.Cells[i].Style.ForeColor = Color.MediumVioletRed;
+					}
+				}
+			}
+		}
 		#endregion
 
 		#region private AttachedFile GetItemFile(IBaseEntityObject obj)
@@ -291,21 +314,25 @@ namespace CAS.UI.UIControls.WorkPakage
 		    return toolTip;
 	    }
 
-	    #endregion
+		#endregion
 
-	    #region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(BaseSmartCoreObject item)
+		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(BaseSmartCoreObject item)
 
-		    protected override
-		    List<CustomCell> GetListViewSubItems(BaseEntityObject item)
+
+		protected override List<CustomCell> GetListViewSubItems(BaseEntityObject item)
         {
-            var subItems = new List<CustomCell>();
+	        var temp = ListViewGroupHelper.GetGroupString(item);
+			var subItems = new List<CustomCell>()
+            {
+				CreateRow(temp, temp)
+            };
             var author = "";
 			if (item is NextPerformance)
             {
-                NextPerformance np = (NextPerformance) item;
-                double manHours = np.Parent is IEngineeringDirective ? ((IEngineeringDirective)np.Parent).ManHours : 0;
-                double KmanHours = manHours*_currentWorkPackage.KMH;
-                double cost = np.Parent is IEngineeringDirective ? ((IEngineeringDirective)np.Parent).Cost : 0;
+                var np = (NextPerformance) item;
+                var manHours = np.Parent is IEngineeringDirective ? ((IEngineeringDirective)np.Parent).ManHours : 0;
+                var KmanHours = manHours*_currentWorkPackage.KMH;
+                var cost = np.Parent is IEngineeringDirective ? ((IEngineeringDirective)np.Parent).Cost : 0;
                 subItems.Add(CreateRow(np.ATAChapter.ToString(), np.ATAChapter));
                 if (np.Parent is ComponentDirective)
                 {
@@ -358,12 +385,12 @@ namespace CAS.UI.UIControls.WorkPakage
             else if (item is AbstractPerformanceRecord)
             {
                 //DirectiveRecord directiveRecord = (DirectiveRecord)item;
-                AbstractPerformanceRecord apr = (AbstractPerformanceRecord)item;
+                var apr = (AbstractPerformanceRecord)item;
                 author = GlobalObjects.CasEnvironment.GetCorrector(apr.CorrectorId);
-				double manHours = apr.Parent is IEngineeringDirective ? ((IEngineeringDirective)apr.Parent).ManHours : 0;
-				double KmanHours = manHours*_currentWorkPackage.KMH;
-                double cost = apr.Parent is IEngineeringDirective ? ((IEngineeringDirective)apr.Parent).Cost : 0;
-                Lifelength remains = Lifelength.Null;
+				var manHours = apr.Parent is IEngineeringDirective ? ((IEngineeringDirective)apr.Parent).ManHours : 0;
+				var KmanHours = manHours*_currentWorkPackage.KMH;
+                var cost = apr.Parent is IEngineeringDirective ? ((IEngineeringDirective)apr.Parent).Cost : 0;
+                var remains = Lifelength.Null;
                 subItems.Add(CreateRow(apr.ATAChapter.ToString(), apr.ATAChapter));
                 subItems.Add(CreateRow(apr.Title, apr.Title ));
                 subItems.Add(CreateRow(apr.Description, apr.Description));
@@ -382,11 +409,11 @@ namespace CAS.UI.UIControls.WorkPakage
 			}
             else if (item is Directive)
             {
-                Directive directive = (Directive)item;
+                var directive = (Directive)item;
 
-                AtaChapter ata = directive.ATAChapter;
+                var ata = directive.ATAChapter;
                 author = GlobalObjects.CasEnvironment.GetCorrector(directive.CorrectorId);
-                double KManHours = directive.ManHours * _currentWorkPackage.KMH;
+                var KManHours = directive.ManHours * _currentWorkPackage.KMH;
 				subItems.Add(CreateRow(ata.ToString(), ata));
                 subItems.Add(CreateRow($"{directive.EngineeringOrders} {directive.Title}", directive.Title));
                 subItems.Add(CreateRow(directive.Description, directive.Description));
@@ -467,10 +494,10 @@ namespace CAS.UI.UIControls.WorkPakage
 			}
             else if (item is BaseComponent)
             {
-                BaseComponent bd = (BaseComponent)item;
-                AtaChapter ata = bd.ATAChapter;
+                var bd = (BaseComponent)item;
+                var ata = bd.ATAChapter;
                 author = GlobalObjects.CasEnvironment.GetCorrector(bd.CorrectorId);
-                double KManHours = bd.ManHours * _currentWorkPackage.KMH;
+                var KManHours = bd.ManHours * _currentWorkPackage.KMH;
 				subItems.Add(CreateRow(ata.ToString(), ata));
                 subItems.Add(CreateRow(bd.PartNumber, bd.PartNumber));
                 subItems.Add(CreateRow(bd.Description, bd.Description));
@@ -489,10 +516,10 @@ namespace CAS.UI.UIControls.WorkPakage
 			}
             else if (item is Component)
             {
-                Component d = (Component)item;
-                AtaChapter ata = d.ATAChapter;
+                var d = (Component)item;
+                var ata = d.ATAChapter;
                 author = GlobalObjects.CasEnvironment.GetCorrector(d.CorrectorId);
-                double KManHours = d.ManHours * _currentWorkPackage.KMH;
+                var KManHours = d.ManHours * _currentWorkPackage.KMH;
 				subItems.Add(CreateRow(ata.ToString(), ata));
                 subItems.Add(CreateRow(d.PartNumber, d.PartNumber));
                 subItems.Add(CreateRow(d.Description, d.Description));
@@ -511,10 +538,10 @@ namespace CAS.UI.UIControls.WorkPakage
 			}
             else if (item is ComponentDirective)
             {
-                ComponentDirective dd = (ComponentDirective)item;
-                AtaChapter ata = dd.ParentComponent.ATAChapter;
+                var dd = (ComponentDirective)item;
+                var ata = dd.ParentComponent.ATAChapter;
                 author = GlobalObjects.CasEnvironment.GetCorrector(dd.CorrectorId);
-                double KManHours = dd.ManHours * _currentWorkPackage.KMH;
+                var KManHours = dd.ManHours * _currentWorkPackage.KMH;
 				subItems.Add(CreateRow(ata != null ? ata.ToString() : "", ata));
                 subItems.Add(CreateRow("", "" ));
                 subItems.Add(CreateRow(dd.Remarks, dd.Remarks));
@@ -556,9 +583,9 @@ namespace CAS.UI.UIControls.WorkPakage
 			}
             else if (item is MaintenanceCheck)
             {
-                MaintenanceCheck mc = (MaintenanceCheck)item;
+                var mc = (MaintenanceCheck)item;
                 author = GlobalObjects.CasEnvironment.GetCorrector(mc.CorrectorId);
-                double KManHours = mc.ManHours * _currentWorkPackage.KMH;
+                var KManHours = mc.ManHours * _currentWorkPackage.KMH;
 				subItems.Add(CreateRow("", null));
                 subItems.Add(CreateRow("", ""));
                 subItems.Add(CreateRow(mc.Name + (mc.Schedule ? " Shedule" : " Unshedule"), mc.Name));
@@ -577,10 +604,10 @@ namespace CAS.UI.UIControls.WorkPakage
 			}
             else if (item is MaintenanceDirective)
             {
-                MaintenanceDirective md = (MaintenanceDirective)item;
-                AtaChapter ata = md.ATAChapter;
+                var md = (MaintenanceDirective)item;
+                var ata = md.ATAChapter;
                 author = GlobalObjects.CasEnvironment.GetCorrector(md.CorrectorId);
-                double KManHours = md.ManHours * _currentWorkPackage.KMH;
+                var KManHours = md.ManHours * _currentWorkPackage.KMH;
 				subItems.Add(CreateRow(ata != null ? ata.ToString() : "", ata));
                 subItems.Add(CreateRow($"{md.TaskCardNumber} {md.TaskNumberCheck} {md.Description}", md.ToString()));
                 subItems.Add(CreateRow(md.Description, md.Description));
@@ -634,10 +661,10 @@ namespace CAS.UI.UIControls.WorkPakage
 			}
             else if (item is NonRoutineJob)
             {
-                NonRoutineJob job = (NonRoutineJob)item;
-                AtaChapter ata = job.ATAChapter;
+                var job = (NonRoutineJob)item;
+                var ata = job.ATAChapter;
                 author = GlobalObjects.CasEnvironment.GetCorrector(job.CorrectorId);
-                double KManHours = job.ManHours * _currentWorkPackage.KMH;
+                var KManHours = job.ManHours * _currentWorkPackage.KMH;
 				subItems.Add(CreateRow(ata != null ? ata.ToString() : "", ata));
                 subItems.Add(CreateRow(job.Title, job.Title));
                 subItems.Add(CreateRow(job.Description, job.Description));
@@ -679,8 +706,8 @@ namespace CAS.UI.UIControls.WorkPakage
 						var changedJob =GlobalObjects.CasEnvironment.NewLoader.GetObjectById<NonRoutineJobDTO,NonRoutineJob>(((NonRoutineJobForm)dp.Form).CurrentJob.ItemId, true);
 						radGridView1.SelectedRows[0].Tag = changedJob;
 
-						List<CustomCell> subs = GetListViewSubItems(SelectedItem);
-						for (int i = 0; i < subs.Capacity; i++)
+						var subs = GetListViewSubItems(SelectedItem);
+						for (var i = 0; i < subs.Capacity; i++)
 							radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
 					}
 				}

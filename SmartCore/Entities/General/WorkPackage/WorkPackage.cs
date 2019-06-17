@@ -169,7 +169,8 @@ namespace SmartCore.Entities.General.WorkPackage
         [TableColumn("Status")]
         [FormControl("Status:", Enabled = false)]
         [FilterAttribute("Status", Order = 20)]
-        public WorkPackageStatus Status
+        [ListViewData(0.08f, "Status")]
+		public WorkPackageStatus Status
         {
             get { return _status; }
             set { _status = value; }
