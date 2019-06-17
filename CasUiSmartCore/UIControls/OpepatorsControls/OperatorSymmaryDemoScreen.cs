@@ -69,6 +69,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
         private OperatorSymmaryDemoScreen()
         {
             InitializeComponent();
+            DoubleBuffered = true;
         }
         #endregion
 

@@ -56,6 +56,7 @@ namespace CAS.UI.UIControls.AircraftsControls
         private AircraftScreen()
         {
             InitializeComponent();
+            DoubleBuffered = true;
         }
 
         ///<summary>
