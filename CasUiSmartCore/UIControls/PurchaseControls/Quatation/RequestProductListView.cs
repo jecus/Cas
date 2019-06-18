@@ -84,7 +84,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 				{
 					var p = (Product)item.Tag;
 
-					temp = p.GoodsClass.ShortName;
+					temp = p.GoodsClass?.ShortName ?? "";
 					itemsListView.Groups.Add(temp, temp);
 					item.Group = itemsListView.Groups[temp];
 				}

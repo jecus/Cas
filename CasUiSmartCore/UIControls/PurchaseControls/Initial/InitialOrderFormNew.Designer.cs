@@ -1050,11 +1050,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.listViewInitialItems.Displayer = null;
 			this.listViewInitialItems.DisplayerText = null;
 			this.listViewInitialItems.Entity = null;
-			this.listViewInitialItems.IgnoreAutoResize = false;
 			this.listViewInitialItems.Location = new System.Drawing.Point(23, 443);
 			this.listViewInitialItems.Name = "listViewInitialItems";
 			this.listViewInitialItems.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewInitialItems.ShowGroups = true;
 			this.listViewInitialItems.Size = new System.Drawing.Size(687, 304);
 			this.listViewInitialItems.TabIndex = 294;
 			this.listViewInitialItems.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.listViewInitialItems_SelectedItemsChanged);
