@@ -4515,7 +4515,7 @@ namespace SmartCore.DtoHelper
 				DestinationObjectId = quotationrecord.DestinationObjectId,
 				DefferedCategoryId = quotationrecord.DeferredCategory.ItemId,
 				InitialReason = quotationrecord.InitialReason.ItemId,
-				DestinationObjectType = quotationrecord.DestinationObjectType.ItemId,
+				DestinationObjectType = quotationrecord.DestinationObjectType?.ItemId ?? -1,
 				LifeLimit = quotationrecord.LifeLimit?.ConvertToByteArray(),
 				LifeLimitNotify = quotationrecord.LifeLimitNotify?.ConvertToByteArray(),
 				SettingJSON = quotationrecord.SettingJSON,
