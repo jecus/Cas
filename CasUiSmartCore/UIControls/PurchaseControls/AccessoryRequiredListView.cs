@@ -177,16 +177,14 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		#endregion
 
-		//protected override void SetTotalText()
-		//{
+		protected override void SetTotalText()
+		{
+			var groupByDescription =
+				GetItemsArray().Where(l => l is AccessoryRequired)
+					.GroupBy(acr => ((AccessoryRequired)acr).Product);
 
-		//	var groupByDescription =
-		//		ListViewItemList.Where(l => l.Tag is AccessoryRequired)
-		//			.GroupBy(acr => ((AccessoryRequired)acr.Tag).Product);
-
-
-		//	this.labelTotal.Text = $"Total: {groupByDescription.Count()}/{itemsListView.Items.Count}";
-		//}
+			this.labelTotal.Text = $"Total: {groupByDescription.Count()}/{_items.Count}";
+		}
 
 		#endregion
 	}

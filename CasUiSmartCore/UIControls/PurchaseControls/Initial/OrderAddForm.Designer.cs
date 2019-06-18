@@ -1185,11 +1185,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.listViewKits.Displayer = null;
 			this.listViewKits.DisplayerText = null;
 			this.listViewKits.Entity = null;
-			this.listViewKits.IgnoreAutoResize = false;
 			this.listViewKits.Location = new System.Drawing.Point(12, 32);
 			this.listViewKits.Name = "listViewKits";
 			this.listViewKits.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewKits.ShowGroups = true;
 			this.listViewKits.Size = new System.Drawing.Size(687, 155);
 			this.listViewKits.TabIndex = 67;
 			// 

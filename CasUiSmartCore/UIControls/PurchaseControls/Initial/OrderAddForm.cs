@@ -472,7 +472,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				//сохранение запросного ордера
 				GlobalObjects.CasEnvironment.NewKeeper.Save(_addedInitial);
 
-				if (listViewKits.ListViewItemList.Count <= 0)
+				if (listViewKits.ItemsCount <= 0)
 				{
 					MessageBox.Show("Please select a kits for initional order", (string)new GlobalTermsProvider()["SystemName"],
 						MessageBoxButtons.OK,
@@ -523,7 +523,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				ApplyRequeslData();
 				GlobalObjects.CasEnvironment.NewKeeper.Save(_addedQuotation);
 
-				if (listViewKits.ListViewItemList.Count <= 0)
+				if (listViewKits.ItemsCount <= 0)
 				{
 					MessageBox.Show("Please select a kits for initional order", (string)new GlobalTermsProvider()["SystemName"],
 						MessageBoxButtons.OK,
