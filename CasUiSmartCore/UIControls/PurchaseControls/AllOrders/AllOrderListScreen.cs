@@ -15,6 +15,7 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Filters;
 using SmartCore.Purchase;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 {
@@ -30,14 +31,14 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
         private readonly BaseEntityObject _parent;
         
         private AllOrderListView _directivesViewer;
-        private ContextMenuStrip _contextMenuStrip;
-        private ToolStripMenuItem _toolStripMenuItemPublish;
-        private ToolStripMenuItem _toolStripMenuItemCreateQuatation;
-        private ToolStripMenuItem _toolStripMenuItemClose;
-        private ToolStripMenuItem _toolStripMenuItemDelete;
-        private ToolStripSeparator _toolStripSeparator1;
-        private ToolStripMenuItem _toolStripMenuItemEdit;
-        private ToolStripMenuItem _toolStripMenuItemCreatePurchase;
+        private RadDropDownMenu _contextMenuStrip;
+        private RadMenuItem _toolStripMenuItemPublish;
+        private RadMenuItem _toolStripMenuItemCreateQuatation;
+        private RadMenuItem _toolStripMenuItemClose;
+        private RadMenuItem _toolStripMenuItemDelete;
+        private RadMenuSeparatorItem _toolStripSeparator1;
+        private RadMenuItem _toolStripMenuItemEdit;
+        private RadMenuItem _toolStripMenuItemCreatePurchase;
 
         #endregion
         
@@ -88,7 +89,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
             _initialArray = null;
 
             if (_directivesViewer != null)
-	            _directivesViewer.DisposeView();
+	            _directivesViewer.Dispose();
 
             Dispose(true);
         }
@@ -110,7 +111,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
             }
             
             _directivesViewer.SetItemsArray(_resultArray.ToArray());
-            headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
+            headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 
             _directivesViewer.Focus();
         }
@@ -161,7 +162,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
         {
             _directivesViewer = new AllOrderListView()
                                     {
-										ContextMenuStrip = _contextMenuStrip,
+										CustomMenu = _contextMenuStrip,
                                         TabIndex = 2,
                                         Location = new Point(panel1.Left, panel1.Top),
                                         Dock = DockStyle.Fill
@@ -169,7 +170,58 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
             //события 
             _directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 
-            panel1.Controls.Add(_directivesViewer);
+            _directivesViewer.MenuOpeningAction = () =>
+            {
+	            if (_directivesViewer.SelectedItems.Count <= 0)
+		            return;
+	            else if (_directivesViewer.SelectedItems.Count == 1)
+	            {
+		            var wp = _directivesViewer.SelectedItem;
+		            if (wp.Status == WorkPackageStatus.Closed || wp.Status == WorkPackageStatus.Opened)
+		            {
+			            _toolStripMenuItemClose.Enabled = false;
+			            _toolStripMenuItemPublish.Enabled = true;
+		            }
+		            else if (wp.Status == WorkPackageStatus.Published)
+		            {
+			            _toolStripMenuItemClose.Enabled = true;
+			            _toolStripMenuItemPublish.Enabled = false;
+		            }
+		            else
+		            {
+			            _toolStripMenuItemClose.Enabled = true;
+			            _toolStripMenuItemPublish.Enabled = true;
+		            }
+
+		            _toolStripMenuItemCreateQuatation.Enabled = true;
+
+		            if (wp is InitialOrder)
+		            {
+			            _toolStripMenuItemCreatePurchase.Enabled = false;
+			            _toolStripMenuItemCreateQuatation.Enabled = true;
+		            }
+		            else if (wp is RequestForQuotation)
+		            {
+			            _toolStripMenuItemCreatePurchase.Enabled = true;
+			            _toolStripMenuItemCreateQuatation.Enabled = false;
+		            }
+		            else
+		            {
+			            _toolStripMenuItemCreatePurchase.Enabled = false;
+			            _toolStripMenuItemCreateQuatation.Enabled = false;
+		            }
+	            }
+
+	            else
+	            {
+		            _toolStripMenuItemCreateQuatation.Enabled = false;
+		            _toolStripMenuItemClose.Enabled = true;
+		            _toolStripMenuItemPublish.Enabled = true;
+		            _toolStripMenuItemCreatePurchase.Enabled = false;
+	            }
+            };
+
+			panel1.Controls.Add(_directivesViewer);
         }
 
 		#endregion
@@ -178,14 +230,14 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new ContextMenuStrip();
-			_toolStripMenuItemPublish = new ToolStripMenuItem();
-			_toolStripMenuItemCreateQuatation = new ToolStripMenuItem();
-			_toolStripMenuItemCreatePurchase = new ToolStripMenuItem();
-			_toolStripMenuItemClose = new ToolStripMenuItem();
-			_toolStripMenuItemDelete = new ToolStripMenuItem();
-			_toolStripSeparator1 = new ToolStripSeparator();
-			_toolStripMenuItemEdit = new ToolStripMenuItem();
+			_contextMenuStrip = new RadDropDownMenu();
+			_toolStripMenuItemPublish = new RadMenuItem();
+			_toolStripMenuItemCreateQuatation = new RadMenuItem();
+			_toolStripMenuItemCreatePurchase = new RadMenuItem();
+			_toolStripMenuItemClose = new RadMenuItem();
+			_toolStripMenuItemDelete = new RadMenuItem();
+			_toolStripSeparator1 = new RadMenuSeparatorItem();
+			_toolStripMenuItemEdit = new RadMenuItem();
 			// 
 			// contextMenuStrip
 			// 
@@ -221,21 +273,16 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			_toolStripMenuItemDelete.Click += _toolStripMenuItemDelete_Click;
 
 			_contextMenuStrip.Items.Clear();
-			_contextMenuStrip.Opening += _contextMenuStrip_Opening;
-			_contextMenuStrip.Items.AddRange(new ToolStripItem[]
-												{
-													//_toolStripMenuItemCreateQuatation,
-													//new ToolStripSeparator(),
-													_toolStripMenuItemCreatePurchase,
-													new ToolStripSeparator(),
+
+			
+			_contextMenuStrip.Items.AddRange(_toolStripMenuItemCreatePurchase,
+													new RadMenuSeparatorItem(),
 													_toolStripMenuItemPublish,
 													_toolStripMenuItemClose,
 													_toolStripSeparator1,
 													_toolStripMenuItemEdit,
 													_toolStripSeparator1,
-													_toolStripMenuItemDelete
-
-												});
+													_toolStripMenuItemDelete);
 		}
 
 		#endregion
@@ -258,53 +305,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 
 		private void _contextMenuStrip_Opening(object sender, CancelEventArgs e)
 		{
-			if (_directivesViewer.SelectedItems.Count <= 0)
-				e.Cancel = true;
-			else if (_directivesViewer.SelectedItems.Count == 1)
-			{
-				var wp = _directivesViewer.SelectedItem;
-				if (wp.Status == WorkPackageStatus.Closed || wp.Status == WorkPackageStatus.Opened)
-				{
-					_toolStripMenuItemClose.Enabled = false;
-					_toolStripMenuItemPublish.Enabled = true;
-				}
-				else if (wp.Status == WorkPackageStatus.Published)
-				{
-					_toolStripMenuItemClose.Enabled = true;
-					_toolStripMenuItemPublish.Enabled = false;
-				}
-				else
-				{
-					_toolStripMenuItemClose.Enabled = true;
-					_toolStripMenuItemPublish.Enabled = true;
-				}
-
-				_toolStripMenuItemCreateQuatation.Enabled = true;
-
-				if (wp is InitialOrder)
-				{
-					_toolStripMenuItemCreatePurchase.Enabled = false;
-					_toolStripMenuItemCreateQuatation.Enabled = true;
-				}
-				else if (wp is RequestForQuotation)
-				{
-					_toolStripMenuItemCreatePurchase.Enabled = true;
-					_toolStripMenuItemCreateQuatation.Enabled = false;
-				}
-				else
-				{
-					_toolStripMenuItemCreatePurchase.Enabled = false;
-					_toolStripMenuItemCreateQuatation.Enabled = false;
-				}
-			}
-
-			else
-			{
-				_toolStripMenuItemCreateQuatation.Enabled = false;
-				_toolStripMenuItemClose.Enabled = true;
-				_toolStripMenuItemPublish.Enabled = true;
-				_toolStripMenuItemCreatePurchase.Enabled = false;
-			}
+			
 		}
 
 		#endregion
