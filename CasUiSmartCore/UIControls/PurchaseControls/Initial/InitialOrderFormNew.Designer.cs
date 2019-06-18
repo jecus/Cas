@@ -1019,9 +1019,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.listViewKits.DisplayerText = null;
 			this.listViewKits.Entity = null;
 			this.listViewKits.Location = new System.Drawing.Point(23, 91);
+			this.listViewKits.MenuOpeningAction = null;
 			this.listViewKits.Name = "listViewKits";
+			this.listViewKits.OldColumnIndex = 2;
 			this.listViewKits.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.listViewKits.Size = new System.Drawing.Size(687, 315);
+			this.listViewKits.SortMultiplier = 1;
 			this.listViewKits.TabIndex = 68;
 			// 
 			// metroProgressSpinner1
@@ -1070,6 +1073,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.Name = "InitialOrderFormNew";
 			this.Resizable = false;
 			this.Text = "Initial Order Form";
+			this.Load += new System.EventHandler(this.InitialOrderFormNew_Load);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).EndInit();

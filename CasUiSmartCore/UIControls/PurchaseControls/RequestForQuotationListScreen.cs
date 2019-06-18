@@ -17,6 +17,8 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Filters;
 using SmartCore.Purchase;
+using Telerik.WinControls;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
@@ -32,13 +34,13 @@ namespace CAS.UI.UIControls.PurchaseControls
 
         private readonly BaseEntityObject _parent;
         private RequestForQuotationListView _directivesViewer;
-        private ContextMenuStrip _contextMenuStrip;
-        private ToolStripMenuItem _toolStripMenuItemPublish;
-        private ToolStripMenuItem _toolStripMenuItemEdit;
-        private ToolStripMenuItem _toolStripMenuItemCreatePurchase;
-        private ToolStripMenuItem _toolStripMenuItemClose;
-        private ToolStripMenuItem _toolStripMenuItemDelete;
-        private ToolStripSeparator _toolStripSeparator1;
+        private RadDropDownMenu _contextMenuStrip;
+        private RadMenuItem _toolStripMenuItemPublish;
+        private RadMenuItem _toolStripMenuItemEdit;
+        private RadMenuItem _toolStripMenuItemCreatePurchase;
+        private RadMenuItem _toolStripMenuItemClose;
+        private RadMenuItem _toolStripMenuItemDelete;
+        private RadMenuSeparatorItem _toolStripSeparator1;
 
         #endregion
         
@@ -114,7 +116,7 @@ namespace CAS.UI.UIControls.PurchaseControls
             if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
             if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
             if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
-            if (_directivesViewer != null) _directivesViewer.DisposeView();
+            if (_directivesViewer != null) _directivesViewer.Dispose();
 
             Dispose(true);
         }
@@ -136,7 +138,7 @@ namespace CAS.UI.UIControls.PurchaseControls
             }
             
             _directivesViewer.SetItemsArray(_quotatioArray.ToArray());
-            headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
+            headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 
             _directivesViewer.Focus();
         }
@@ -185,13 +187,13 @@ namespace CAS.UI.UIControls.PurchaseControls
 
         private void InitToolStripMenuItems()
         {
-            _contextMenuStrip = new ContextMenuStrip();
-            _toolStripMenuItemPublish = new ToolStripMenuItem();
-            _toolStripMenuItemClose = new ToolStripMenuItem();
-            _toolStripMenuItemDelete = new ToolStripMenuItem();
-            _toolStripSeparator1 = new ToolStripSeparator();
-            _toolStripMenuItemEdit = new ToolStripMenuItem();
-	        _toolStripMenuItemCreatePurchase = new ToolStripMenuItem();
+            _contextMenuStrip = new RadDropDownMenu();
+            _toolStripMenuItemPublish = new RadMenuItem();
+            _toolStripMenuItemClose = new RadMenuItem();
+            _toolStripMenuItemDelete = new RadMenuItem();
+            _toolStripSeparator1 = new RadMenuSeparatorItem();
+            _toolStripMenuItemEdit = new RadMenuItem();
+	        _toolStripMenuItemCreatePurchase = new RadMenuItem();
             // 
             // contextMenuStrip
             // 
@@ -220,11 +222,11 @@ namespace CAS.UI.UIControls.PurchaseControls
             _toolStripMenuItemDelete.Click += ToolStripMenuItemDeleteClick;
 
             _contextMenuStrip.Items.Clear();
-            _contextMenuStrip.Opening += ContextMenuStripOpen;
-            _contextMenuStrip.Items.AddRange(new ToolStripItem[]
+
+            _contextMenuStrip.Items.AddRange(new RadItem[]
                                                 {
 	                                                _toolStripMenuItemCreatePurchase,
-													new ToolStripSeparator(), 
+													new RadMenuSeparatorItem(), 
                                                     _toolStripMenuItemPublish,
                                                     _toolStripMenuItemClose,
                                                     _toolStripSeparator1,
@@ -237,45 +239,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		#endregion
 
-		#region private void ContextMenuStripOpen(object sender,CancelEventArgs e)
-		/// <summary>
-		/// Проверка на выделение 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-        {
-            if (_directivesViewer.SelectedItems.Count <= 0)
-                e.Cancel = true;
-            else if (_directivesViewer.SelectedItems.Count == 1)
-            {
-                RequestForQuotation wp = _directivesViewer.SelectedItem;
-                if (wp.Status == WorkPackageStatus.Closed || wp.Status == WorkPackageStatus.Opened)
-                {
-                    _toolStripMenuItemClose.Enabled = false;
-                    _toolStripMenuItemPublish.Enabled = true;
-                }
-                else if (wp.Status == WorkPackageStatus.Published)
-                {
-                    _toolStripMenuItemClose.Enabled = true;
-                    _toolStripMenuItemPublish.Enabled = false;
-                }
-                else
-                {
-                    _toolStripMenuItemClose.Enabled = true;
-                    _toolStripMenuItemPublish.Enabled = true;
-                }
-            }
-            else
-            {
-                _toolStripMenuItemClose.Enabled = true;
-                _toolStripMenuItemPublish.Enabled = true;
-            }
-        }
-
-        #endregion
-
-        #region private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
+		#region private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
         /// <summary>
         /// Публикует рабочий пакет
         /// </summary>
@@ -387,13 +351,43 @@ namespace CAS.UI.UIControls.PurchaseControls
         {
             _directivesViewer = new RequestForQuotationListView
                                     {
-                                        ContextMenuStrip = _contextMenuStrip,
+                                        CustomMenu = _contextMenuStrip,
                                         TabIndex = 2,
                                         Location = new Point(panel1.Left, panel1.Top),
                                         Dock = DockStyle.Fill
                                     };
             //события 
             _directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+
+            _directivesViewer.MenuOpeningAction = () =>
+            {
+	            if (_directivesViewer.SelectedItems.Count <= 0)
+		            return;
+	            else if (_directivesViewer.SelectedItems.Count == 1)
+	            {
+		            RequestForQuotation wp = _directivesViewer.SelectedItem;
+		            if (wp.Status == WorkPackageStatus.Closed || wp.Status == WorkPackageStatus.Opened)
+		            {
+			            _toolStripMenuItemClose.Enabled = false;
+			            _toolStripMenuItemPublish.Enabled = true;
+		            }
+		            else if (wp.Status == WorkPackageStatus.Published)
+		            {
+			            _toolStripMenuItemClose.Enabled = true;
+			            _toolStripMenuItemPublish.Enabled = false;
+		            }
+		            else
+		            {
+			            _toolStripMenuItemClose.Enabled = true;
+			            _toolStripMenuItemPublish.Enabled = true;
+		            }
+	            }
+	            else
+	            {
+		            _toolStripMenuItemClose.Enabled = true;
+		            _toolStripMenuItemPublish.Enabled = true;
+	            }
+			};
 
             panel1.Controls.Add(_directivesViewer);
         }

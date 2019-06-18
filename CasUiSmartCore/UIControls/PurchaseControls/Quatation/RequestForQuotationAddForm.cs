@@ -221,7 +221,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
                                         MessageBoxIcon.Exclamation);
                     return;
                 }
-                if(listViewAddedItems.ListViewItemList.Count <= 0)
+                if(listViewAddedItems.ItemsCount <= 0)
                 {
                     MessageBox.Show("Please select a kits for quotation order", (string)new GlobalTermsProvider()["SystemName"],
                                         MessageBoxButtons.OK,

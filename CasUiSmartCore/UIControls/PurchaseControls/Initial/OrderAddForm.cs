@@ -513,7 +513,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			}
 			else if (_formType == OrderFormType.Quotation)
 			{
-				if (listViewQuatationItems.ListViewItemList.Count <= 0)
+				if (listViewQuatationItems.ItemsCount <= 0)
 				{
 					MessageBox.Show("Please select a kits for initional order", (string)new GlobalTermsProvider()["SystemName"],
 						MessageBoxButtons.OK,

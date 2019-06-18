@@ -540,5 +540,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		}
 
 		#endregion
+
+		private void InitialOrderFormNew_Load(object sender, EventArgs e)
+		{
+
+		}
 	}
 }
