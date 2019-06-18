@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Auxiliary;
 using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
+using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Auxiliary;
@@ -14,6 +17,7 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.Store;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.StoresControls
 {
@@ -28,6 +32,7 @@ namespace CAS.UI.UIControls.StoresControls
         public StoreComponentsAllListView()
         {
             InitializeComponent();
+            OldColumnIndex = 1;
         }
         #endregion
 
@@ -91,33 +96,33 @@ namespace CAS.UI.UIControls.StoresControls
 			AddColumn("Hidden Remarks", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
         }
-        #endregion
+		#endregion
 
-        #region protected override void AddItems(IBaseCoreObject[] itemsArray)
-        /// <summary>
-        /// Добавляет элементы в ListView
-        /// </summary>
-        /// <param name="itemsArray"></param>
-        //protected override void AddItems(IBaseCoreObject[] itemsArray)
-        //{
-        //    ColumnHeader ch = ColumnHeaderList.FirstOrDefault(h => h.Text == "Performances");
-        //    if (ch == null)
-        //    {
-        //        base.AddItems(itemsArray);
-        //        return;
-        //    }
-            
-        //    if(itemsArray == null || itemsArray.Length == 0)
-        //    {
-        //        ch.Width = 0;
-        //        base.AddItems(itemsArray);
-        //        return;
-        //    }
-        //    ch.Width = itemsArray.OfType<IDirective>()
-        //                         .Count(d => d.NextPerformances != null && d.NextPerformances.Count > 1) > 0 ? 100 : 0;
+		#region protected override void AddItems(IBaseCoreObject[] itemsArray)
+		/// <summary>
+		/// Добавляет элементы в ListView
+		/// </summary>
+		/// <param name="itemsArray"></param>
+		//protected override void AddItems(IBaseCoreObject[] itemsArray)
+		//{
+		//    ColumnHeader ch = ColumnHeaderList.FirstOrDefault(h => h.Text == "Performances");
+		//    if (ch == null)
+		//    {
+		//        base.AddItems(itemsArray);
+		//        return;
+		//    }
 
-        //    base.AddItems(itemsArray);
-        //}
+		//    if(itemsArray == null || itemsArray.Length == 0)
+		//    {
+		//        ch.Width = 0;
+		//        base.AddItems(itemsArray);
+		//        return;
+		//    }
+		//    ch.Width = itemsArray.OfType<IDirective>()
+		//                         .Count(d => d.NextPerformances != null && d.NextPerformances.Count > 1) > 0 ? 100 : 0;
+
+		//    base.AddItems(itemsArray);
+		//}
 
 		#endregion
 
@@ -127,70 +132,70 @@ namespace CAS.UI.UIControls.StoresControls
 		/// Возвращает название группы в списке агрегатов текущего склада, согласно тому, какого типа элемент
 		/// </summary>
 		//protected override void SetGroupsToItems(int columnIndex)
-  //      {
-       //     itemsListView.Groups.Clear();
-       //     itemsListView.Groups.AddRange(new[]
-       //                                       {
-       //                                           new ListViewGroup("Engines", "Engines"),
-       //                                           new ListViewGroup("APU's", "APU's"),
-       //                                           new ListViewGroup("Landing Gears", "Landing Gears"),
-       //                                       });
-       //     foreach (ListViewItem item in ListViewItemList.OrderBy(x => x.Text))
-       //     {
-       //         String temp = "";
+		//      {
+		//     itemsListView.Groups.Clear();
+		//     itemsListView.Groups.AddRange(new[]
+		//                                       {
+		//                                           new ListViewGroup("Engines", "Engines"),
+		//                                           new ListViewGroup("APU's", "APU's"),
+		//                                           new ListViewGroup("Landing Gears", "Landing Gears"),
+		//                                       });
+		//     foreach (ListViewItem item in ListViewItemList.OrderBy(x => x.Text))
+		//     {
+		//         String temp = "";
 
-       //         if (!(item.Tag is IDirective)) continue;
+		//         if (!(item.Tag is IDirective)) continue;
 
-       //         IDirective parent = (IDirective)item.Tag;
+		//         IDirective parent = (IDirective)item.Tag;
 
-       //         #region Группировка по типу задачи
+		//         #region Группировка по типу задачи
 
-       //         if (parent is ComponentDirective)
-       //             parent = ((ComponentDirective) parent).ParentComponent;
-       //         if (parent is BaseComponent)
-       //         {
-       //             if (((BaseComponent)parent).BaseComponentType == BaseComponentType.Engine)
-       //                 temp = "Engines";
-       //             else if (((BaseComponent)parent).BaseComponentType == BaseComponentType.Apu)
-       //                 temp = "APU's";
-       //             else if (((BaseComponent)parent).BaseComponentType == BaseComponentType.LandingGear)
-       //                 temp = "Landing Gears";
+		//         if (parent is ComponentDirective)
+		//             parent = ((ComponentDirective) parent).ParentComponent;
+		//         if (parent is BaseComponent)
+		//         {
+		//             if (((BaseComponent)parent).BaseComponentType == BaseComponentType.Engine)
+		//                 temp = "Engines";
+		//             else if (((BaseComponent)parent).BaseComponentType == BaseComponentType.Apu)
+		//                 temp = "APU's";
+		//             else if (((BaseComponent)parent).BaseComponentType == BaseComponentType.LandingGear)
+		//                 temp = "Landing Gears";
 
-       //             item.Group = itemsListView.Groups[temp];
-       //         }
-       //         else if (parent is Component)
-       //         {
-       //             Component component = (Component)parent;
+		//             item.Group = itemsListView.Groups[temp];
+		//         }
+		//         else if (parent is Component)
+		//         {
+		//             Component component = (Component)parent;
 
-       //                 if (component.ParentBaseComponent != null)
-       //                 {
-       //                     BaseComponent baseComponent = component.ParentBaseComponent;//TODO:(Evgenii Babak) заменить на использование ComponentCore 
-							//temp = baseComponent + " Components";
-       //                 }
-       //                 else
-       //                 {
-	      //                  AtaChapter ata = null;
+		//                 if (component.ParentBaseComponent != null)
+		//                 {
+		//                     BaseComponent baseComponent = component.ParentBaseComponent;//TODO:(Evgenii Babak) заменить на использование ComponentCore 
+		//temp = baseComponent + " Components";
+		//                 }
+		//                 else
+		//                 {
+		//                  AtaChapter ata = null;
 
-							//if (component.Product != null)
-							//{
-							//	ata = component.Product.ATAChapter;
-							//}
-	      //                  else ata = component.ATAChapter;
-                            
-       //                     temp = ata.ShortName + " " + ata.FullName;
-       //                 }
-       //                 itemsListView.Groups.Add(temp, temp);
-       //             item.Group = itemsListView.Groups[temp];
-       //         }
-       //         #endregion
-       //     }
-        //}
+		//if (component.Product != null)
+		//{
+		//	ata = component.Product.ATAChapter;
+		//}
+		//                  else ata = component.ATAChapter;
 
-        #endregion
+		//                     temp = ata.ShortName + " " + ata.FullName;
+		//                 }
+		//                 itemsListView.Groups.Add(temp, temp);
+		//             item.Group = itemsListView.Groups[temp];
+		//         }
+		//         #endregion
+		//     }
+		//}
 
-        #region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(IBaseCoreObject item)
+		#endregion
 
-        protected override List<CustomCell> GetListViewSubItems(IBaseCoreObject item)
+		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(IBaseCoreObject item)
+
+		protected override List<CustomCell> GetListViewSubItems(IBaseCoreObject item)
         {
             var subItems = new List<CustomCell>();
             
@@ -410,7 +415,7 @@ namespace CAS.UI.UIControls.StoresControls
                 ata = (AtaChapter)GlobalObjects.CasEnvironment.GetDictionary<AtaChapter>().GetItemById(21);
             }
 
-            subItems.Add(CreateRow(store?.ToString() ?? "N/A", store )); 
+            subItems.Add(CreateRow(store?.ToString() ?? "N/A", store.ToString() )); 
             subItems.Add(CreateRow(ata.ToString(), ata )); 
             subItems.Add(CreateRow(refference, refference )); 
             subItems.Add(CreateRow(partNumber, partNumber ));
@@ -467,157 +472,68 @@ namespace CAS.UI.UIControls.StoresControls
 			return subItems;
         }
 
-        #endregion
+		#endregion
 
-        #region protected override void SortItems(int columnIndex)
+		#region protected override void CustomSort(int ColumnIndex)
 
-        //protected override void SortItems(int columnIndex)
-        //{
-        //    if (OldColumnIndex != columnIndex)
-        //        SortMultiplier = -1;
-        //    if (SortMultiplier == 1)
-        //        SortMultiplier = -1;
-        //    else
-        //        SortMultiplier = 1;
-        //    itemsListView.Items.Clear();
-        //    OldColumnIndex = columnIndex;
 
-        //    SetGroupsToItems(columnIndex);
+		protected override void Sorting(string colName = null)
+		{
+			
+		}
 
-        //    List<ListViewItem> resultList = new List<ListViewItem>();
+		protected override void CustomSort(int ColumnIndex)
+		{
+			if (OldColumnIndex != ColumnIndex)
+				SortMultiplier = -1;
+			if (SortMultiplier == 1)
+				SortMultiplier = -1;
+			else
+				SortMultiplier = 1;
 
-        //    if (columnIndex != 13)
-        //    {
-        //        ListViewItemList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
-        //        //добавление остальных подзадач
-        //        foreach (ListViewItem item in ListViewItemList)
-        //        {
-        //            if (item.Tag is Component)
-        //            {
-        //                resultList.Add(item);
-        //                Component component = (Component) item.Tag;
-        //                if (component.NextPerformances != null && component.NextPerformances.Count > 1)
-        //                {
-        //                    //Если кол-во расчитанных выполнений больше одного
-        //                    //то в результирующую коллекцию добавлются строки след. выполений
-        //                    for (int i = 1; i < component.NextPerformances.Count; i++)
-        //                    {
-        //                        ListViewItem temp = new ListViewItem(GetListViewSubItems(component.NextPerformances[i]), null)
-        //                        {
-        //                            Tag = component.NextPerformances[i],
-        //                            Group = item.Group
-        //                        };
-        //                        resultList.Add(temp);
-        //                    }
-        //                }
-        //                //Если привязанным элементом является деталь
-        //                //то в результирующий список следом за ней добавляются ее директивы
-        //                IEnumerable<ListViewItem> items =
-        //                    ListViewItemList
-        //                    .Where(lvi => lvi.Tag is ComponentDirective && ((ComponentDirective)lvi.Tag).ComponentId == component.ItemId);
-        //                foreach (ListViewItem listViewItem in items)
-        //                {
-        //                    listViewItem.Group = item.Group;
-        //                    resultList.Add(listViewItem);
+			var resultList = new List<BaseEntityObject>();
+			var list = radGridView1.Rows.Select(i => i).ToList();
+			list.Sort(new GridViewDataRowInfoComparer(ColumnIndex, SortMultiplier));
+			//добавление остальных подзадач
+			foreach (GridViewRowInfo item in list)
+			{
+				if (item.Tag is Component)
+				{
+					resultList.Add(item.Tag as BaseEntityObject);
 
-        //                    ComponentDirective componentDirective = (ComponentDirective)listViewItem.Tag;
-        //                    if (componentDirective.NextPerformances == null || componentDirective.NextPerformances.Count <= 1) continue;
-        //                    //Если кол-во расчитанных выполнений больше одного
-        //                    //то в результирующую коллекцию добавлются строки след. выполений
-        //                    for (int i = 1; i < componentDirective.NextPerformances.Count; i++)
-        //                    {
-        //                        ListViewItem temp = new ListViewItem(GetListViewSubItems(componentDirective.NextPerformances[i]), null)
-        //                        {
-        //                            Tag = componentDirective.NextPerformances[i],
-        //                            Group = item.Group
-        //                        };
-        //                        resultList.Add(temp);
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        foreach (ListViewItem item in ListViewItemList)
-        //        {
-        //            if (item.Tag is Component)
-        //            {
-        //                //Если привязанным элементом является деталь
-        //                //то в результирующий список следом за ней добавляются ее директивы
-        //                resultList.Add(item);
-        //                Component component = (Component)item.Tag;
-        //                if (component.NextPerformances != null && component.NextPerformances.Count > 1)
-        //                {
-        //                    //Если кол-во расчитанных выполнений больше одного
-        //                    //то в результирующую коллекцию добавлются строки след. выполений
-        //                    for (int i = 1; i < component.NextPerformances.Count; i++)
-        //                    {
-        //                        ListViewItem temp = new ListViewItem(GetListViewSubItems(component.NextPerformances[i]), null)
-        //                        {
-        //                            Tag = component.NextPerformances[i],
-        //                            Group = item.Group
-        //                        };
-        //                        resultList.Add(temp);
-        //                    }
-        //                }
-        //                IEnumerable<ListViewItem> items =
-        //                    ListViewItemList
-        //                    .Where(lvi => lvi.Tag is ComponentDirective && ((ComponentDirective)lvi.Tag).ComponentId == component.ItemId);
-        //                foreach (ListViewItem listViewItem in items)
-        //                {
-        //                    listViewItem.Group = item.Group;
-        //                    resultList.Add(listViewItem);
+					Component component = (Component)item.Tag;
+					var items = list
+						.Where(lvi =>
+							lvi.Tag is ComponentDirective &&
+							((ComponentDirective)lvi.Tag).ComponentId == component.ItemId).Select(i => i.Tag);
+					resultList.AddRange(items.OfType<BaseEntityObject>());
+				}
+				else if (item.Tag is ComponentDirective)
+				{
+					ComponentDirective dd = item.Tag as ComponentDirective;
+					Component d = dd.ParentComponent;
+					if (d == null)
+						resultList.Add(item.Tag as BaseEntityObject);
+					else
+					{
+						var lvi =
+							list.FirstOrDefault(lv => lv.Tag is Component && ((Component)lv.Tag).ItemId == d.ItemId);
+						if (lvi == null)
+							resultList.Add(item.Tag as BaseEntityObject);
+					}
+				}
+			}
 
-        //                    ComponentDirective componentDirective = (ComponentDirective)listViewItem.Tag;
-        //                    if (componentDirective.NextPerformances == null || componentDirective.NextPerformances.Count <= 1) continue;
-        //                    //Если кол-во расчитанных выполнений больше одного
-        //                    //то в результирующую коллекцию добавлются строки след. выполений
-        //                    for (int i = 1; i < componentDirective.NextPerformances.Count; i++)
-        //                    {
-        //                        ListViewItem temp = new ListViewItem(GetListViewSubItems(componentDirective.NextPerformances[i]), null)
-        //                        {
-        //                            Tag = componentDirective.NextPerformances[i],
-        //                            Group = item.Group
-        //                        };
-        //                        resultList.Add(temp);
-        //                    }
-        //                }
-        //            }
-        //        }
 
-        //        resultList.Sort(new DirectiveListViewComparer(columnIndex, SortMultiplier));
-        //        itemsListView.Groups.Clear();
-        //        foreach (ListViewItem item in resultList)
-        //        {
-        //            DateTime date = DateTimeExtend.GetCASMinDateTime();
-        //            if (item.Tag is NextPerformance)
-        //            {
-        //                NextPerformance np = (NextPerformance)item.Tag;
-        //                if (np.PerformanceDate != null)
-        //                    date = np.PerformanceDate.Value.Date;
-        //            }
-        //            else if(item.Tag is IDirective)
-        //            {
-        //                IDirective np = (IDirective)item.Tag;
-        //                if (np.NextPerformanceDate != null)
-        //                    date = np.NextPerformanceDate.Value.Date;    
-        //            }
+			SetItemsArray(resultList.ToArray());
 
-        //            string temp = date.Date > DateTimeExtend.GetCASMinDateTime().Date ? SmartCore.Auxiliary.Convert.GetDateFormat(date.Date) : "";
-        //            itemsListView.Groups.Add(temp, temp);
-        //            item.Group = itemsListView.Groups[temp];
-        //        }
+		}
 
-        //    }
-        //    itemsListView.Items.AddRange(resultList.Distinct().ToArray());
-        //}
+		#endregion
 
-        #endregion
+		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 
-        #region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
-
-        protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
         {
             if (SelectedItem != null)
 	        {
@@ -643,57 +559,35 @@ namespace CAS.UI.UIControls.StoresControls
 				}
 			}
         }
-        #endregion
+		#endregion
 
-        #region protected override void SetItemColor(ListViewItem listViewItem, IBaseCoreObject item)
-		//TODO COLOR!
-      //  protected override void SetItemColor(ListViewItem listViewItem, IBaseCoreObject item)
-      //  {
-      //      if (item is NextPerformance)
-      //      {
-      //          listViewItem.ForeColor = Color.Gray;
-      //          if (((NextPerformance)item).BlockedByPackage != null)
-      //          {
-      //              listViewItem.BackColor = Color.FromArgb(Highlight.Grey.Color);
-      //              listViewItem.ToolTipText = "This performance is involved on Work Package:" + ((NextPerformance)item).BlockedByPackage.Title;
-      //          }
-      //      }
-      //      else if (item is IDirective)
-      //      {
-      //          listViewItem.ForeColor = Color.Black;
-      //          if (item is Component)
-      //          {
-      //              Component component = (Component) item;
-      //              if (component.Condition == ConditionState.NotEstimated)
-      //                  listViewItem.BackColor = Color.FromArgb(Highlight.Blue.Color);
-      //              if (/*component.Current == component.ShouldBeOnStock && component.ShouldBeOnStock > 0||*/
-						//component.Condition == ConditionState.Notify)
-      //                  listViewItem.BackColor = Color.FromArgb(Highlight.Yellow.Color);   
-      //              if (/*component.Current < component.ShouldBeOnStock ||*/
-      //                  component.Condition == ConditionState.Overdue)
-      //                  listViewItem.BackColor = Color.FromArgb(Highlight.Red.Color); 
-      //          }
-      //          else if (item is ComponentDirective)
-      //          {
-      //              ComponentDirective comp = (ComponentDirective)item;
-      //              if (comp.Condition == ConditionState.NotEstimated)
-      //                  listViewItem.BackColor = Color.FromArgb(Highlight.Blue.Color);
-      //              if (comp.Condition == ConditionState.Notify)
-      //                  listViewItem.BackColor = Color.FromArgb(Highlight.Yellow.Color);
-      //              if (comp.Condition == ConditionState.Overdue)
-      //                  listViewItem.BackColor = Color.FromArgb(Highlight.Red.Color);
-      //          }
+		#region protected override void SetItemColor(GridViewRowInfo listViewItem, BaseEntityObject item)
 
-      //          IDirective dir = item as IDirective;
-      //          if (dir.NextPerformances.Count > 0 && dir.NextPerformances[0].BlockedByPackage != null)
-      //          {
-      //              listViewItem.BackColor = Color.FromArgb(Highlight.Grey.Color);
-      //              listViewItem.ToolTipText = "This performance is involved on Work Package:" + dir.NextPerformances[0].BlockedByPackage.Title;
-      //          }
-      //      }
-      //  }
-        #endregion
+		protected override void SetItemColor(GridViewRowInfo listViewItem, IBaseCoreObject item)
+		{
+			if (item is ComponentDirective)
+			{
+				foreach (GridViewCellInfo cell in listViewItem.Cells)
+				{
+					cell.Style.CustomizeFill = true;
+					cell.Style.ForeColor = Color.Gray;
+					cell.Style.BackColor = UsefulMethods.GetColor(item);
+				}
 
-        #endregion
-    }
+			}
+			if (item is Component)
+			{
+				foreach (GridViewCellInfo cell in listViewItem.Cells)
+				{
+					cell.Style.CustomizeFill = true;
+					cell.Style.ForeColor = Color.Black;
+					cell.Style.BackColor = UsefulMethods.GetColor(item);
+				}
+			}
+		}
+
+		#endregion
+
+		#endregion
+	}
 }

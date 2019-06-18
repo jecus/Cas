@@ -316,8 +316,22 @@ namespace CAS.UI.UIControls.StoresControls
 				buttonMoveTo.Enabled = false;
 				_itemPrintReportAvailableComponents.Enabled = false;
 			}
-			
-			_directivesViewer.SetItemsArray(_resultDirectiveArray.ToArray());
+
+	        var res = new List<BaseEntityObject>();
+	        foreach (var item in _resultDirectiveArray)
+	        {
+		        if (item is Component)
+		        {
+			        res.Add(item);
+
+			        var component = item as Component;
+			        var items = _resultDirectiveArray.Where(lvi =>
+				        lvi is ComponentDirective &&
+				        ((ComponentDirective)lvi).ComponentId == component.ItemId);
+			        res.AddRange(items);
+		        }
+	        }
+			_directivesViewer.SetItemsArray(res.ToArray());
 
             if (_removedComponents.Count > 0
                || _waitRemoveConfirmComponents.Count > 0

@@ -476,7 +476,7 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#region public void Sorting(string colName = null)
 
-		public void Sorting(string colName = null)
+		protected virtual void Sorting(string colName = null)
 		{
 			var radSortOrder = SortMultiplier == 0 ? RadSortOrder.Ascending : RadSortOrder.Descending;
 			if (!string.IsNullOrEmpty(colName))

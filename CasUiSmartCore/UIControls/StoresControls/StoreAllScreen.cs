@@ -296,8 +296,22 @@ namespace CAS.UI.UIControls.StoresControls
 				buttonMoveTo.Enabled = false;
 				_itemPrintReportAvailableComponents.Enabled = false;
 			}
-			
-			_directivesViewer.SetItemsArray(_resultDirectiveArray.Distinct().ToArray());
+
+	        var res = new List<BaseEntityObject>();
+	        foreach (var item in _resultDirectiveArray)
+	        {
+		        if (item is Component)
+		        {
+			        res.Add(item);
+
+			        var component = item as Component;
+			        var items = _resultDirectiveArray.Where(lvi =>
+				        lvi is ComponentDirective &&
+				        ((ComponentDirective)lvi).ComponentId == component.ItemId);
+			        res.AddRange(items);
+		        }
+	        }
+			_directivesViewer.SetItemsArray(res.Distinct().ToArray());
 
             if (_removedComponents.Count > 0
                || _waitRemoveConfirmComponents.Count > 0
@@ -371,8 +385,8 @@ namespace CAS.UI.UIControls.StoresControls
 			var componentCollection = new ComponentCollection();
 	        var baseComponentCollection = new BaseComponentCollection();
 
-	        Parallel.ForEach(_stores, currentStore =>
-	        {
+			Parallel.ForEach(_stores, currentStore =>
+			{
 				_shouldBeOnStock.Clear();
 				_shouldBeOnStock.AddRange(
 					GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<StockComponentInfoDTO, StockComponentInfo>(new Filter("StoreID", currentStore.ItemId), true).ToArray());
@@ -407,7 +421,7 @@ namespace CAS.UI.UIControls.StoresControls
 
 			        AnimatedThreadWorker.ReportProgress(60, "calculation of stock");
 
-			        GlobalObjects.StockCalculator.CalculateStock(resultCollection.ToArray(), CurrentStore);
+			        GlobalObjects.StockCalculator.CalculateStock(resultCollection.ToArray(), currentStore);
 				}
 		        else
 		        {

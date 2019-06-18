@@ -406,7 +406,10 @@ namespace CAS.UI.UIControls.StoresControls
 		#endregion
 
 		#region protected override void CustomSort(int ColumnIndex)
+		protected override void Sorting(string colName = null)
+		{
 
+		}
 		protected override void CustomSort(int ColumnIndex)
 		{
 			if (OldColumnIndex != ColumnIndex)
