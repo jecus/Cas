@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.NewGrid;
 using CAS.UI.UIControls.ScheduleControls.PlanOPS;
 using CASTerms;
 using SmartCore.Entities.Dictionaries;
@@ -10,7 +11,7 @@ using SmartCore.Entities.General.Schedule;
 
 namespace CAS.UI.UIControls.ScheduleControls.AircraftStatus
 {
-	public partial class AircraftScreenListView : BaseListViewControl<FlightPlanOpsRecords>
+	public partial class AircraftScreenListView : BaseGridViewControl<FlightPlanOpsRecords>
 	{
 		#region Fields
 
@@ -36,48 +37,25 @@ namespace CAS.UI.UIControls.ScheduleControls.AircraftStatus
 
 		protected override void SetHeaders()
 		{
-			ColumnHeaderList.Clear();
-
-			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Aircraft" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Status" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.15f), Text = "Delay" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.16f), Text = "Cancellation" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.13f), Text = "Flight №" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.15f), Text = "Flight Date" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Direction" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Downtime" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Remarks" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
-			ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+			AddColumn("Aircraft", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Status", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Delay", (int)(radGridView1.Width * 0.30f));
+			AddColumn("Cancellation", (int)(radGridView1.Width * 0.32f));
+			AddColumn("Flight №", (int)(radGridView1.Width * 0.26f));
+			AddColumn("Flight Date", (int)(radGridView1.Width * 0.30f));
+			AddColumn("Direction", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Downtime", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Remarks", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
 		}
 
 		#endregion
 
 		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(IFlightNumberParams item)
 
-		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(FlightPlanOpsRecords item)
+		protected override List<CustomCell> GetListViewSubItems(FlightPlanOpsRecords item)
 		{
-			var subItems = new List<ListViewItem.ListViewSubItem>();
+			var subItems = new List<CustomCell>();
 
 			var aircraft = $"{item.CurrentAircraft.RegistrationNumber} {item.CurrentAircraft.Model.ShortName}";
 			var reasonDelay = item.DelayReason?.ToString() ?? "";
@@ -106,42 +84,24 @@ namespace CAS.UI.UIControls.ScheduleControls.AircraftStatus
 					downTimeString = date.ToString("HH:mm");
 			}
 			
-			var subItem = new ListViewItem.ListViewSubItem { Text = aircraft, Tag = item.CurrentAircraft.ToString() };
-			subItems.Add(subItem);
+			subItems.Add(CreateRow(aircraft, item.CurrentAircraft.ToString()));
+			subItems.Add(CreateRow(status, item.Status));
+			subItems.Add(CreateRow(reasonDelay, reasonDelay));
+			subItems.Add(CreateRow(reasonCansellation, reasonCansellation));
+			subItems.Add(CreateRow(item.ParentFlight.FlightNumber.ToString(), item.ParentFlight.FlightNumber));
+			subItems.Add(CreateRow(item.ParentFlight.FlightDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString()), item.ParentFlight.FlightDate));
+			subItems.Add(CreateRow(direction, direction));
+			subItems.Add(CreateRow(downTimeString, downTimeString));
+			subItems.Add(CreateRow(item.Remarks, item.Remarks));
+			subItems.Add(CreateRow(author, author));
 
-			subItem = new ListViewItem.ListViewSubItem { Text = status, Tag = item.Status };
-			subItems.Add(subItem);
-
-			subItem = new ListViewItem.ListViewSubItem { Text = reasonDelay, Tag = reasonDelay };
-			subItems.Add(subItem);
-
-			subItem = new ListViewItem.ListViewSubItem { Text = reasonCansellation, Tag = reasonCansellation };
-			subItems.Add(subItem);
-
-			subItem = new ListViewItem.ListViewSubItem { Text = item.ParentFlight.FlightNumber.ToString(), Tag = item.ParentFlight.FlightNumber };
-			subItems.Add(subItem);
-
-			subItem = new ListViewItem.ListViewSubItem { Text = item.ParentFlight.FlightDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString()), Tag = item.ParentFlight.FlightDate };
-			subItems.Add(subItem);
-
-			subItem = new ListViewItem.ListViewSubItem { Text = direction, Tag = direction };
-			subItems.Add(subItem);
-
-			subItem = new ListViewItem.ListViewSubItem { Text = downTimeString, Tag = downTimeString };
-			subItems.Add(subItem);
-
-			subItem = new ListViewItem.ListViewSubItem { Text = item.Remarks, Tag = item.Remarks };
-			subItems.Add(subItem);
-
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
-
-			return subItems.ToArray();
+			return subItems;
 		}
 
 		#endregion
 
 		#region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
-		protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
+		protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
 		{
 			if (SelectedItem != null)
 			{
