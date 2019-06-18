@@ -67,11 +67,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.supplierListView.Displayer = null;
 			this.supplierListView.DisplayerText = null;
 			this.supplierListView.Entity = null;
-			this.supplierListView.IgnoreAutoResize = false;
 			this.supplierListView.Location = new System.Drawing.Point(23, 89);
 			this.supplierListView.Name = "supplierListView";
 			this.supplierListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.supplierListView.ShowGroups = true;
 			this.supplierListView.Size = new System.Drawing.Size(657, 237);
 			this.supplierListView.TabIndex = 69;
 			// 

@@ -19,6 +19,8 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;
 using SmartCore.Purchase;
+using Telerik.WinControls;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.SupplierControls
 {
@@ -40,11 +42,11 @@ namespace CAS.UI.UIControls.SupplierControls
 
         private CommonFilterCollection _filter = new CommonFilterCollection(typeof(Supplier));
 
-        private ContextMenuStrip _contextMenuStrip;
-        private ToolStripMenuItem _toolStripMenuItemOpen;
-        private ToolStripMenuItem _toolStripMenuItemDelete;
-        private ToolStripMenuItem _toolStripMenuItemHighlight;
-        private ToolStripSeparator _toolStripSeparator1;
+        private RadDropDownMenu _contextMenuStrip;
+        private RadMenuItem _toolStripMenuItemOpen;
+        private RadMenuItem _toolStripMenuItemDelete;
+        private RadMenuItem _toolStripMenuItemHighlight;
+        private RadMenuSeparatorItem _toolStripSeparator1;
 
 	    private ContextMenuStrip _buttonPrintMenuStrip;
 	    private ToolStripMenuItem _itemPrintReportListOfApprovedSuppliers;
@@ -122,17 +124,17 @@ namespace CAS.UI.UIControls.SupplierControls
             if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
             if (_toolStripMenuItemHighlight != null)
             {
-                foreach (ToolStripMenuItem ttmi in _toolStripMenuItemHighlight.DropDownItems)
+                foreach (var ttmi in _toolStripMenuItemHighlight.Items)
                 {
                     ttmi.Click -= HighlightItemClick;
                 }
-                _toolStripMenuItemHighlight.DropDownItems.Clear();
+                _toolStripMenuItemHighlight.Items.Clear();
                 _toolStripMenuItemHighlight.Dispose();
             }
             if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
             if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
 
-            if (_directivesViewer != null) _directivesViewer.DisposeView();
+            if (_directivesViewer != null) _directivesViewer.Dispose();
 
             Dispose(true);
         }
@@ -155,7 +157,7 @@ namespace CAS.UI.UIControls.SupplierControls
             }
 
             _directivesViewer.SetItemsArray(_resultDirectiveArray.ToArray());
-            headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
+            headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
             _directivesViewer.Focus();
         }
         #endregion
@@ -262,11 +264,11 @@ namespace CAS.UI.UIControls.SupplierControls
 
         private void InitToolStripMenuItems()
         {
-            _contextMenuStrip = new ContextMenuStrip();
-            _toolStripMenuItemOpen = new ToolStripMenuItem();
-            _toolStripMenuItemDelete = new ToolStripMenuItem();
-            _toolStripMenuItemHighlight = new ToolStripMenuItem();
-            _toolStripSeparator1 = new ToolStripSeparator();
+            _contextMenuStrip = new RadDropDownMenu();
+            _toolStripMenuItemOpen = new RadMenuItem();
+            _toolStripMenuItemDelete = new RadMenuItem();
+            _toolStripMenuItemHighlight = new RadMenuItem();
+            _toolStripSeparator1 = new RadMenuSeparatorItem();
             // 
             // contextMenuStrip
             // 
@@ -288,46 +290,28 @@ namespace CAS.UI.UIControls.SupplierControls
             _toolStripMenuItemDelete.Click += ButtonDeleteClick;
 
             _contextMenuStrip.Items.Clear();
-            _toolStripMenuItemHighlight.DropDownItems.Clear();
+            _toolStripMenuItemHighlight.Items.Clear();
 
             foreach (Highlight highlight in Highlight.HighlightList)
             {
                 if (highlight == Highlight.Blue || highlight == Highlight.Yellow || highlight == Highlight.Red)
                     continue;
-                ToolStripMenuItem item = new ToolStripMenuItem(highlight.FullName);
+                var item = new RadMenuItem(highlight.FullName);
                 item.Click += HighlightItemClick;
                 item.Tag = highlight;
-                _toolStripMenuItemHighlight.DropDownItems.Add(item);
+                _toolStripMenuItemHighlight.Items.Add(item);
             }
-            _contextMenuStrip.Items.AddRange(new ToolStripItem[]
+            _contextMenuStrip.Items.AddRange(new RadItem[]
                                                 {
                                                     _toolStripMenuItemOpen,
-                                                    new ToolStripSeparator(),
+                                                    new RadMenuSeparatorItem(),
                                                     _toolStripMenuItemHighlight,
                                                     _toolStripSeparator1,
                                                     _toolStripMenuItemDelete
                                                 });
-            _contextMenuStrip.Opening += ContextMenuStripOpen;
         }
         #endregion
 
-        #region private void ContextMenuStripOpen(object sender,CancelEventArgs e)
-        /// <summary>
-        /// Проверка на выделение 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-        {
-            if (_directivesViewer.SelectedItems.Count <= 0)
-                e.Cancel = true;
-            if (_directivesViewer.SelectedItems.Count == 1)
-            {
-                _toolStripMenuItemOpen.Enabled = true;
-            }
-        }
-
-        #endregion
 
         #region private void HighlightItemClick(object sender, EventArgs e)
 
@@ -335,10 +319,13 @@ namespace CAS.UI.UIControls.SupplierControls
         {
             for (int i = 0; i < _directivesViewer.SelectedItems.Count; i++)
             {
-                Highlight highLight = (Highlight)((ToolStripMenuItem)sender).Tag;
-                //_directivesViewer.SelectedItems[i].Highlight = highLight;
-                _directivesViewer.ItemListView.SelectedItems[i].BackColor = Color.FromArgb(highLight.Color);
-            }
+                Highlight highLight = (Highlight)((RadMenuItem)sender).Tag;
+                foreach (GridViewCellInfo cell in _directivesViewer.radGridView1.SelectedRows[i].Cells)
+				{
+					cell.Style.CustomizeFill = true;
+					cell.Style.BackColor = Color.FromArgb(highLight.Color);
+				}
+			}
         }
 
         #endregion
@@ -381,7 +368,7 @@ namespace CAS.UI.UIControls.SupplierControls
 
             if (confirmResult == DialogResult.Yes)
             {
-                _directivesViewer.ItemListView.BeginUpdate();
+                _directivesViewer.radGridView1.BeginUpdate();
                 foreach (Supplier directive in directives)
                 {
                     try
@@ -394,7 +381,7 @@ namespace CAS.UI.UIControls.SupplierControls
                         return;
                     }
                 }
-                _directivesViewer.ItemListView.EndUpdate();
+                _directivesViewer.radGridView1.EndUpdate();
 
                 AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
                 AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
@@ -412,7 +399,7 @@ namespace CAS.UI.UIControls.SupplierControls
         {
             _directivesViewer = new SupplierListView();
             _directivesViewer.TabIndex = 2;
-            _directivesViewer.ContextMenuStrip = _contextMenuStrip;
+            _directivesViewer.CustomMenu = _contextMenuStrip;
             _directivesViewer.Location = new Point(panel1.Left, panel1.Top);
             _directivesViewer.Dock = DockStyle.Fill;
             _directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
@@ -420,7 +407,18 @@ namespace CAS.UI.UIControls.SupplierControls
             //события 
             _directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 
-            panel1.Controls.Add(_directivesViewer);
+            _directivesViewer.MenuOpeningAction = () =>
+            {
+	            if (_directivesViewer.SelectedItems.Count <= 0)
+		            return;
+	            if (_directivesViewer.SelectedItems.Count == 1)
+	            {
+		            _toolStripMenuItemOpen.Enabled = true;
+	            }
+			};
+
+
+			panel1.Controls.Add(_directivesViewer);
         }
 
 		#endregion
