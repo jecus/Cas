@@ -23,7 +23,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
         public AllOrderListView()
         {
             OldColumnIndex = 0;
-            SortMultiplier = 1;
+            SortMultiplier = 0;
             InitializeComponent();
         }
 		#endregion
@@ -32,33 +32,49 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 
 		#region protected override SetGroupsToItems(int columnIndex)
 		//protected override void SetGroupsToItems(int columnIndex)
-  //      {
-  //          itemsListView.Groups.Clear();
-  //          itemsListView.Groups.Add("GroupInitial", "Initial");
-  //          itemsListView.Groups.Add("GroupQuotation", "Quotation");
-  //          itemsListView.Groups.Add("GroupPurchase", "Purchase");
-  //          itemsListView.Groups.Add("GroupUnknown", "Unknown");
+		//      {
+		//          itemsListView.Groups.Clear();
+		//          itemsListView.Groups.Add("GroupInitial", "Initial");
+		//          itemsListView.Groups.Add("GroupQuotation", "Quotation");
+		//          itemsListView.Groups.Add("GroupPurchase", "Purchase");
+		//          itemsListView.Groups.Add("GroupUnknown", "Unknown");
 
-  //          foreach (var item in ListViewItemList)
-  //          {
-  //              if (((ILogistic)item.Tag) is InitialOrder)
-  //                  item.Group = itemsListView.Groups[0];
-  //              else if (((ILogistic)item.Tag) is RequestForQuotation)
-  //                  item.Group = itemsListView.Groups[1];
-  //              else if (((ILogistic)item.Tag) is PurchaseOrder)
-  //                  item.Group = itemsListView.Groups[2];
-  //              else item.Group = itemsListView.Groups[3];
-  //          }   
-  //      }
-        #endregion
+		//          foreach (var item in ListViewItemList)
+		//          {
+		//              if (((ILogistic)item.Tag) is InitialOrder)
+		//                  item.Group = itemsListView.Groups[0];
+		//              else if (((ILogistic)item.Tag) is RequestForQuotation)
+		//                  item.Group = itemsListView.Groups[1];
+		//              else if (((ILogistic)item.Tag) is PurchaseOrder)
+		//                  item.Group = itemsListView.Groups[2];
+		//              else item.Group = itemsListView.Groups[3];
+		//          }   
+		//      }
+		#endregion
 
-        #region protected override ListViewItem.ListViewSubItem[] GetItemsString(InitialOrder item)
+		#region protected override SetGroupsToItems(int columnIndex)
+		protected override void GroupingItems()
+		{
+			Grouping("Type");
+		}
 
-        protected override List<CustomCell> GetListViewSubItems(ILogistic item)
+		#endregion
+
+		#region protected override ListViewItem.ListViewSubItem[] GetItemsString(InitialOrder item)
+
+		protected override List<CustomCell> GetListViewSubItems(ILogistic item)
         {
             var subItems = new List<CustomCell>();
             var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
+            var type = "";
+            if (item is InitialOrder)
+	            type = "Initial";
+			else if (item is RequestForQuotation)
+	            type = "Quotation";
+            else type = "Purchase";
+
+			subItems.Add(CreateRow(type, type));
 			subItems.Add(CreateRow(item.Status.ToString(), item.Status ));
 			subItems.Add(CreateRow(item.Number, item.Number ));
             subItems.Add(CreateRow(item.Title, item.Title ));
@@ -131,6 +147,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 
 		protected override void SetHeaders()
         {
+			AddColumn("Type", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Status", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Order No", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Title", (int)(radGridView1.Width * 0.30f));
