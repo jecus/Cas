@@ -36,7 +36,7 @@ namespace CAS.UI.UIControls.Users
 		{
 			var subItems = new List<CustomCell>()
 			{
-				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.Date), item.Date),
+				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.Date), item.Date.Date),
 				CreateRow(item.Date.ToString("HH:mm:ss"), item.Date),
 				CreateRow(item.User.ToString(), item.User),
 				CreateRow(item.Operation.ToString(), item.Operation),
@@ -57,7 +57,7 @@ namespace CAS.UI.UIControls.Users
 		///// </summary>
 		protected override void SetHeaders()
 		{
-			AddColumn("Date", (int)(radGridView1.Width * 0.20f));
+			AddDateColumn("Date", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Time", (int)(radGridView1.Width * 0.20f));
 			AddColumn("User", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Activity Type", (int)(radGridView1.Width * 0.20f));

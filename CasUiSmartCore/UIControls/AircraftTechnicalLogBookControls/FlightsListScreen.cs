@@ -13,6 +13,8 @@ using CASTerms;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Atlbs;
+using Telerik.WinControls;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 {
@@ -29,14 +31,14 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
         private FlightsListView _directivesViewer;
 
-        private ContextMenuStrip _contextMenuStrip;
-        private ToolStripMenuItem _toolStripMenuItemOpen;
-        private ToolStripMenuItem _toolStripMenuItemOpenLight;
-        private ToolStripMenuItem _toolStripMenuItemDelete;
-        private ToolStripMenuItem _toolStripMenuItemHighlight;
-        private ToolStripSeparator _toolStripSeparator1;
-        private ToolStripSeparator _toolStripSeparator2;
-        private ToolStripSeparator _toolStripSeparator4;
+        private RadDropDownMenu _contextMenuStrip;
+        private RadMenuItem _toolStripMenuItemOpen;
+        private RadMenuItem _toolStripMenuItemOpenLight;
+        private RadMenuItem _toolStripMenuItemDelete;
+        private RadMenuItem _toolStripMenuItemHighlight;
+        private RadMenuSeparatorItem _toolStripSeparator1;
+        private RadMenuSeparatorItem _toolStripSeparator2;
+        private RadMenuSeparatorItem _toolStripSeparator4;
 
         #endregion
 
@@ -111,7 +113,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             if(_toolStripSeparator4 != null) _toolStripSeparator4.Dispose();
             if(_contextMenuStrip != null) _contextMenuStrip.Dispose();
 
-            if (_directivesViewer != null) _directivesViewer.DisposeView();
+            if (_directivesViewer != null) _directivesViewer.Dispose();
 
             Dispose(true);
         }
@@ -123,7 +125,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         {
             UpdateTitle();
             _directivesViewer.SetItemsArray(_itemsArray.ToArray());
-            headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
+            headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
             _directivesViewer.Focus();
         }
         #endregion
@@ -168,14 +170,14 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
         private void InitToolStripMenuItems()
         {
-            _contextMenuStrip = new ContextMenuStrip();
-            _toolStripMenuItemOpen = new ToolStripMenuItem();
-            _toolStripMenuItemOpenLight = new ToolStripMenuItem();
-            _toolStripMenuItemDelete = new ToolStripMenuItem();
-            _toolStripMenuItemHighlight = new ToolStripMenuItem();
-            _toolStripSeparator1 = new ToolStripSeparator();
-            _toolStripSeparator2 = new ToolStripSeparator();
-            _toolStripSeparator4 = new ToolStripSeparator();
+            _contextMenuStrip = new RadDropDownMenu();
+            _toolStripMenuItemOpen = new RadMenuItem();
+            _toolStripMenuItemOpenLight = new RadMenuItem();
+            _toolStripMenuItemDelete = new RadMenuItem();
+            _toolStripMenuItemHighlight = new RadMenuItem();
+            _toolStripSeparator1 = new RadMenuSeparatorItem();
+            _toolStripSeparator2 = new RadMenuSeparatorItem();
+            _toolStripSeparator4 = new RadMenuSeparatorItem();
             // 
             // contextMenuStrip
             // 
@@ -202,46 +204,28 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             _toolStripMenuItemDelete.Click += ButtonDeleteClick;
 
             _contextMenuStrip.Items.Clear();
-            _toolStripMenuItemHighlight.DropDownItems.Clear();
+            _toolStripMenuItemHighlight.Items.Clear();
 
-            foreach (Highlight highlight in Highlight.HighlightList)
+            foreach (var highlight in Highlight.HighlightList)
             {
                 if (highlight == Highlight.Blue || highlight == Highlight.Yellow || highlight == Highlight.Red)
                     continue;
-                ToolStripMenuItem item = new ToolStripMenuItem(highlight.FullName);
+                var item = new RadMenuItem(highlight.FullName);
                 item.Click += HighlightItemClick;
                 item.Tag = highlight;
-                _toolStripMenuItemHighlight.DropDownItems.Add(item);
+                _toolStripMenuItemHighlight.Items.Add(item);
             }
-            _contextMenuStrip.Items.AddRange(new ToolStripItem[]
-                                                {
-                                                    _toolStripMenuItemOpen,
-                                                    _toolStripMenuItemOpenLight,
-                                                    _toolStripSeparator1,
-                                                    _toolStripMenuItemHighlight,
-                                                    _toolStripSeparator2,
-                                                    _toolStripMenuItemDelete
-                                                });
-            _contextMenuStrip.Opening += ContextMenuStripOpen;
-        }
-        #endregion
 
-        #region private void ContextMenuStripOpen(object sender,CancelEventArgs e)
-        /// <summary>
-        /// Проверка на выделение 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-        {
-            if (_directivesViewer.SelectedItems.Count <= 0)
-                e.Cancel = true;
-            if (_directivesViewer.SelectedItems.Count == 1)
+            _contextMenuStrip.Items.AddRange(new RadItem[]
             {
-                _toolStripMenuItemOpen.Enabled = true;
-            }
+	            _toolStripMenuItemOpen,
+	            _toolStripMenuItemOpenLight,
+	            _toolStripSeparator1,
+	            _toolStripMenuItemHighlight,
+	            _toolStripSeparator2,
+	            _toolStripMenuItemDelete
+            });
         }
-
         #endregion
 
         #region private void HighlightItemClick(object sender, EventArgs e)
@@ -250,11 +234,15 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         {
             for (int i = 0; i < _directivesViewer.SelectedItems.Count; i++)
             {
-                Highlight highLight = (Highlight)((ToolStripMenuItem)sender).Tag;
+                var highLight = (Highlight)((RadMenuItem)sender).Tag;
 
                 _directivesViewer.SelectedItems[i].Highlight = highLight;
-                _directivesViewer.ItemListView.SelectedItems[i].BackColor = Color.FromArgb(highLight.Color);
-            }
+				foreach (GridViewCellInfo cell in _directivesViewer.radGridView1.SelectedRows[i].Cells)
+				{
+					cell.Style.CustomizeFill = true;
+					cell.Style.BackColor = Color.FromArgb(highLight.Color);
+				}
+			}
         }
 
         #endregion
@@ -311,13 +299,13 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
                 try
                 {
                     List<AircraftFlight> selectedItems = new List<AircraftFlight>(_directivesViewer.SelectedItems);
-                    _directivesViewer.ItemListView.BeginUpdate();
+                    _directivesViewer.radGridView1.BeginUpdate();
                     for (int i = 0; i < count; i++)
                     {
                         GlobalObjects.AircraftFlightsCore.Delete(selectedItems[i]);
                     }
 					GlobalObjects.CasEnvironment.Calculator.ResetMath(CurrentAircraft);
-                    _directivesViewer.ItemListView.EndUpdate(); 
+                    _directivesViewer.radGridView1.EndUpdate(); 
                 }
                 catch (Exception ex)
                 {
@@ -336,10 +324,21 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         {
             _directivesViewer = new FlightsListView(CurrentAircraft, _allView);
             _directivesViewer.TabIndex = 2;
-            _directivesViewer.ContextMenuStrip = _contextMenuStrip;
+            _directivesViewer.CustomMenu = _contextMenuStrip;
             _directivesViewer.Location = new Point(panel1.Left, panel1.Top);
             _directivesViewer.Dock = DockStyle.Fill;
             _directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+
+            _directivesViewer.MenuOpeningAction = () =>
+            {
+	            if (_directivesViewer.SelectedItems.Count <= 0)
+		            return;
+	            if (_directivesViewer.SelectedItems.Count == 1)
+	            {
+		            _toolStripMenuItemOpen.Enabled = true;
+	            }
+			};
+
             Controls.Add(_directivesViewer);
             panel1.Controls.Add(_directivesViewer);
         }

@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.Auxiliary.Comparers;
 using CASTerms;
 using Microsoft.VisualBasic.Devices;
 using SmartCore.Entities.Dictionaries;
@@ -176,6 +177,22 @@ namespace CAS.UI.UIControls.NewGrid
 			else col.AutoSizeMode = BestFitColumnMode.DisplayedCells;
 
 			ColumnHeaderList.Add(col);
+
+		}
+
+		public void AddDateColumn(string title, int? size = null)
+		{
+			var col = new GridViewDateTimeColumn(title)
+			{
+				FormatString = "{0:dd.MM.yyyy}"
+			};
+
+			if (size.HasValue)
+				col.Width = size.Value;
+			else col.AutoSizeMode = BestFitColumnMode.DisplayedCells;
+
+			ColumnHeaderList.Add(col);
+
 		}
 
 		#endregion
@@ -330,7 +347,11 @@ namespace CAS.UI.UIControls.NewGrid
 
 					foreach (var cell in GetListViewSubItems(item))
 					{
-						rowInfo.Cells[i].Value = cell;
+						if (rowInfo.Cells[i].ColumnInfo is GridViewDateTimeColumn)
+							rowInfo.Cells[i].Value = cell.Tag;
+						else
+							rowInfo.Cells[i].Value = cell;
+
 						rowInfo.Cells[i].Tag = cell;
 
 						if(cell.ForeColor.HasValue)
@@ -523,6 +544,17 @@ namespace CAS.UI.UIControls.NewGrid
 
 		//Events
 
+		#region private void RadGridView1_GroupSummaryEvaluate(object sender, Telerik.WinControls.UI.GroupSummaryEvaluationEventArgs e)
+
+		private void RadGridView1_GroupSummaryEvaluate(object sender, GroupSummaryEvaluationEventArgs e)
+		{
+			if (e.Value is DateTime)
+				e.FormatString = $"{((DateTime) e.Value):dd.MM.yyyy}";
+			else e.FormatString = e.Value.ToString();
+		}
+
+		#endregion
+
 		#region private void RadGridView1_ContextMenuOpening(object sender, Telerik.WinControls.UI.ContextMenuOpeningEventArgs e)
 
 		private void RadGridView1_ContextMenuOpening(object sender, ContextMenuOpeningEventArgs e)
@@ -613,6 +645,9 @@ namespace CAS.UI.UIControls.NewGrid
 		/// </summary>
 		protected void OnDisplayerRequested()
 		{
+			if(SelectedItem == null)
+				return;
+
 			if (null != DisplayerRequested)
 			{
 				var reflection = ReflectionType;
@@ -620,7 +655,6 @@ namespace CAS.UI.UIControls.NewGrid
 				if (k.ShiftKeyDown && reflection == ReflectionTypes.DisplayInCurrent)
 					reflection = ReflectionTypes.DisplayInNew;
 				var e = null != Displayer ? new ReferenceEventArgs(Entity, reflection, Displayer, DisplayerText) : new ReferenceEventArgs(Entity, reflection, DisplayerText);
-
 				try
 				{
 					FillDisplayerRequestedParams(e);
@@ -655,6 +689,7 @@ namespace CAS.UI.UIControls.NewGrid
 		}
 
 		#endregion
+
 	}
 
 
