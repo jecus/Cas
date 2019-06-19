@@ -20,6 +20,7 @@ using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Purchase;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.ForecastControls
 {
@@ -47,13 +48,13 @@ namespace CAS.UI.UIControls.ForecastControls
         private ToolStripMenuItem itemPrintReportMaintenancePlan;
         private ToolStripMenuItem itemPrintReportEquipmentAndMaterials;
 
-        private ContextMenuStrip _contextMenuStrip;
-        private ToolStripSeparator _toolStripSeparator1;
-        private ToolStripMenuItem _createWorkPakageToolStripMenuItem;
-        private ToolStripMenuItem _createQuotationOrderStripMenuItem;
-        private ToolStripMenuItem _toolStripMenuItemHighlight;
-        private ToolStripMenuItem _toolStripMenuItemsWorkPackages;
-        private ToolStripMenuItem _toolStripMenuItemQuotations;
+        private RadDropDownMenu _contextMenuStrip;
+        private RadMenuSeparatorItem _toolStripSeparator1;
+        private RadMenuItem _createWorkPakageToolStripMenuItem;
+        private RadMenuItem _createQuotationOrderStripMenuItem;
+        private RadMenuItem _toolStripMenuItemHighlight;
+        private RadMenuItem _toolStripMenuItemsWorkPackages;
+        private RadMenuItem _toolStripMenuItemQuotations;
 
         #endregion
         
@@ -123,7 +124,7 @@ namespace CAS.UI.UIControls.ForecastControls
             }
 
             _directivesViewer.SetItemsArray(_forecastArray.ToArray());
-            headerControl.PrintButtonEnabled = _directivesViewer.ItemListView.Items.Count != 0;
+            headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
         }
         #endregion
 
@@ -340,35 +341,35 @@ namespace CAS.UI.UIControls.ForecastControls
             if (_toolStripMenuItemsWorkPackages != null) _toolStripMenuItemsWorkPackages.Dispose();
             if (_toolStripMenuItemHighlight != null)
             {
-                foreach (ToolStripMenuItem ttmi in _toolStripMenuItemHighlight.DropDownItems)
+                foreach (RadMenuItem ttmi in _toolStripMenuItemHighlight.Items)
                 {
                     ttmi.Click -= HighlightItemClick;
                 }
-                _toolStripMenuItemHighlight.DropDownItems.Clear();
+                _toolStripMenuItemHighlight.Items.Clear();
                 _toolStripMenuItemHighlight.Dispose();
             }
             if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
             if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
             if (_toolStripMenuItemQuotations != null)
             {
-                foreach (ToolStripMenuItem item in _toolStripMenuItemQuotations.DropDownItems)
+                foreach (RadMenuItem item in _toolStripMenuItemQuotations.Items)
                 {
                     item.Click -= AddToQuotationOrderItemClick;
                 }
-                _toolStripMenuItemQuotations.DropDownItems.Clear();
+                _toolStripMenuItemQuotations.Items.Clear();
                 _toolStripMenuItemQuotations.Dispose();
             }
             if (_toolStripMenuItemsWorkPackages != null)
             {
-                foreach (ToolStripMenuItem item in _toolStripMenuItemsWorkPackages.DropDownItems)
+                foreach (RadMenuItem item in _toolStripMenuItemsWorkPackages.Items)
                 {
                     item.Click -= AddToWorkPackageItemClick;
                 }
-                _toolStripMenuItemsWorkPackages.DropDownItems.Clear();
+                _toolStripMenuItemsWorkPackages.Items.Clear();
                 _toolStripMenuItemsWorkPackages.Dispose();
             }
 
-            if (_directivesViewer != null) _directivesViewer.DisposeView();
+            if (_directivesViewer != null) _directivesViewer.Dispose();
 
             Dispose(true);
         }
@@ -379,14 +380,13 @@ namespace CAS.UI.UIControls.ForecastControls
 
         private void InitToolStripMenuItems()
         {
-            _contextMenuStrip = new ContextMenuStrip();
-            _createWorkPakageToolStripMenuItem = new ToolStripMenuItem();
-            _createQuotationOrderStripMenuItem = new ToolStripMenuItem();
-            _contextMenuStrip = new ContextMenuStrip();
-            _toolStripMenuItemsWorkPackages = new ToolStripMenuItem();
-            _toolStripMenuItemHighlight = new ToolStripMenuItem();
-            _toolStripSeparator1 = new ToolStripSeparator();
-            _toolStripMenuItemQuotations = new ToolStripMenuItem();
+            _contextMenuStrip = new RadDropDownMenu();
+            _createWorkPakageToolStripMenuItem = new RadMenuItem();
+            _createQuotationOrderStripMenuItem = new RadMenuItem();
+            _toolStripMenuItemsWorkPackages = new RadMenuItem();
+            _toolStripMenuItemHighlight = new RadMenuItem();
+            _toolStripSeparator1 = new RadMenuSeparatorItem();
+            _toolStripMenuItemQuotations = new RadMenuItem();
             // 
             // contextMenuStrip
             // 
@@ -414,107 +414,28 @@ namespace CAS.UI.UIControls.ForecastControls
             _toolStripMenuItemQuotations.Text = "Add to Quotation Order";
 
             _contextMenuStrip.Items.Clear();
-            _toolStripMenuItemsWorkPackages.DropDownItems.Clear();
-            _toolStripMenuItemHighlight.DropDownItems.Clear();
+            _toolStripMenuItemsWorkPackages.Items.Clear();
+            _toolStripMenuItemHighlight.Items.Clear();
 
             foreach (Highlight highlight in Highlight.HighlightList)
             {
                 if (highlight == Highlight.Blue || highlight == Highlight.Yellow || highlight == Highlight.Red)
                     continue;
-                ToolStripMenuItem item = new ToolStripMenuItem(highlight.FullName);
+                var item = new RadMenuItem(highlight.FullName);
                 item.Click += HighlightItemClick;
                 item.Tag = highlight;
-                _toolStripMenuItemHighlight.DropDownItems.Add(item);
+                _toolStripMenuItemHighlight.Items.Add(item);
             }
-
-            _contextMenuStrip.Opening += ContextMenuStripOpen;
-            _contextMenuStrip.Items.AddRange(new ToolStripItem[]
-                                                {
-                                                    _toolStripMenuItemHighlight,
-                                                    new ToolStripSeparator(),
+			
+            _contextMenuStrip.Items.AddRange(_toolStripMenuItemHighlight,
+                                                    new RadMenuSeparatorItem(),
                                                     _createWorkPakageToolStripMenuItem,
                                                     _toolStripMenuItemsWorkPackages,
                                                     _toolStripSeparator1,
                                                     _createQuotationOrderStripMenuItem,
                                                     _toolStripMenuItemQuotations
-                                                });
+                                                );
         }
-        #endregion
-
-        #region private void ContextMenuStripOpen(object sender,CancelEventArgs e)
-        /// <summary>
-        /// Проверка на выделение 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-        {
-            if (_directivesViewer.SelectedItems.Count <= 0)
-                e.Cancel = true;
-            if (_directivesViewer.SelectedItems.Count == 1)
-            {
-                _createWorkPakageToolStripMenuItem.Enabled = true;
-
-                if (_toolStripMenuItemQuotations != null)
-                {
-                    foreach (ToolStripMenuItem item in _toolStripMenuItemQuotations.DropDownItems)
-                    {
-                        item.Click -= AddToQuotationOrderItemClick;
-                    }
-
-                    _toolStripMenuItemQuotations.DropDownItems.Clear();
-
-                    var pa = GlobalObjects.AircraftsCore.GetParentAircraft(_directivesViewer.SelectedItems[0].Parent);
-                    if (pa == null)
-                    {
-                        _toolStripMenuItemQuotations.Enabled = false;
-                        return;
-                    }
-                    foreach (RequestForQuotation workPackage in 
-                        _openPubQuotations.Where(wp => (wp.ParentType == SmartCoreType.Aircraft && wp.ParentId == pa.ItemId) || 
-                                                        wp.ParentType == SmartCoreType.Operator))
-                    {
-                        ToolStripMenuItem item = new ToolStripMenuItem(workPackage.Title);
-                        item.Click += AddToQuotationOrderItemClick;
-                        item.Tag = workPackage;
-                        _toolStripMenuItemQuotations.DropDownItems.Add(item);
-                    }
-
-                    if (_toolStripMenuItemQuotations.DropDownItems.Count > 0)
-                        _toolStripMenuItemQuotations.Enabled = true;
-
-                }
-
-                if (_toolStripMenuItemsWorkPackages != null)
-                {
-                    foreach (ToolStripMenuItem item in _toolStripMenuItemsWorkPackages.DropDownItems)
-                    {
-                        item.Click -= AddToWorkPackageItemClick;
-                    }
-
-                    _toolStripMenuItemsWorkPackages.DropDownItems.Clear();
-
-                    var pa =  GlobalObjects.AircraftsCore.GetParentAircraft(_directivesViewer.SelectedItems[0].Parent);
-                    if(pa == null)
-                    {
-                        _toolStripMenuItemsWorkPackages.Enabled = false;
-                        return;
-                    }
-                    foreach (WorkPackage workPackage in _openPubWorkPackages.Where(wp => wp.ParentId == pa.ItemId))
-                    {
-                        ToolStripMenuItem item = new ToolStripMenuItem(workPackage.Title);
-                        item.Click += AddToWorkPackageItemClick;
-                        item.Tag = workPackage;
-                        _toolStripMenuItemsWorkPackages.DropDownItems.Add(item);
-                    }
-
-                    if (_toolStripMenuItemsWorkPackages.DropDownItems.Count > 0)
-                        _toolStripMenuItemsWorkPackages.Enabled = true;
-
-                }
-            }
-        }
-
         #endregion
 
         #region private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
@@ -563,7 +484,7 @@ namespace CAS.UI.UIControls.ForecastControls
         {
             _directivesViewer = new AirFleetForecastListView
                                     {
-                                        ContextMenuStrip = _contextMenuStrip,
+                                        CustomMenu = _contextMenuStrip,
                                         TabIndex = 2,
                                         Location = new Point(panel1.Left, panel1.Top),
                                         Dock = DockStyle.Fill
@@ -571,7 +492,80 @@ namespace CAS.UI.UIControls.ForecastControls
             //события 
             _directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 
-            panel1.Controls.Add(_directivesViewer);
+            _directivesViewer.MenuOpeningAction = () =>
+            {
+	            if (_directivesViewer.SelectedItems.Count <= 0)
+		            return;
+	            if (_directivesViewer.SelectedItems.Count == 1)
+	            {
+		            _createWorkPakageToolStripMenuItem.Enabled = true;
+
+		            if (_toolStripMenuItemQuotations != null)
+		            {
+			            foreach (RadMenuItem item in _toolStripMenuItemQuotations.Items)
+			            {
+				            item.Click -= AddToQuotationOrderItemClick;
+			            }
+
+			            _toolStripMenuItemQuotations.Items.Clear();
+
+			            var pa = GlobalObjects.AircraftsCore.GetParentAircraft(
+				            _directivesViewer.SelectedItems[0].Parent);
+			            if (pa == null)
+			            {
+				            _toolStripMenuItemQuotations.Enabled = false;
+				            return;
+			            }
+
+			            foreach (RequestForQuotation workPackage in
+				            _openPubQuotations.Where(wp =>
+					            (wp.ParentType == SmartCoreType.Aircraft && wp.ParentId == pa.ItemId) ||
+					            wp.ParentType == SmartCoreType.Operator))
+			            {
+				            var item = new RadMenuItem(workPackage.Title);
+				            item.Click += AddToQuotationOrderItemClick;
+				            item.Tag = workPackage;
+				            _toolStripMenuItemQuotations.Items.Add(item);
+			            }
+
+			            if (_toolStripMenuItemQuotations.Items.Count > 0)
+				            _toolStripMenuItemQuotations.Enabled = true;
+
+		            }
+
+		            if (_toolStripMenuItemsWorkPackages != null)
+		            {
+			            foreach (RadMenuItem item in _toolStripMenuItemsWorkPackages.Items)
+			            {
+				            item.Click -= AddToWorkPackageItemClick;
+			            }
+
+			            _toolStripMenuItemsWorkPackages.Items.Clear();
+
+			            var pa = GlobalObjects.AircraftsCore.GetParentAircraft(
+				            _directivesViewer.SelectedItems[0].Parent);
+			            if (pa == null)
+			            {
+				            _toolStripMenuItemsWorkPackages.Enabled = false;
+				            return;
+			            }
+
+			            foreach (WorkPackage workPackage in _openPubWorkPackages.Where(wp => wp.ParentId == pa.ItemId))
+			            {
+				            var item = new RadMenuItem(workPackage.Title);
+				            item.Click += AddToWorkPackageItemClick;
+				            item.Tag = workPackage;
+				            _toolStripMenuItemsWorkPackages.Items.Add(item);
+			            }
+
+			            if (_toolStripMenuItemsWorkPackages.Items.Count > 0)
+				            _toolStripMenuItemsWorkPackages.Enabled = true;
+
+		            }
+	            }
+            };
+
+			panel1.Controls.Add(_directivesViewer);
         }
 
         #endregion
@@ -636,11 +630,15 @@ namespace CAS.UI.UIControls.ForecastControls
 
         private void HighlightItemClick(object sender, EventArgs e)
         {
-            Highlight highLight = (Highlight)((ToolStripMenuItem)sender).Tag;
+            Highlight highLight = (Highlight)((RadMenuItem)sender).Tag;
             for (int i = 0; i < _directivesViewer.SelectedItems.Count; i++)
             {
-                _directivesViewer.ItemListView.SelectedItems[i].BackColor = Color.FromArgb(highLight.Color);
-            }
+                foreach (GridViewCellInfo cell in _directivesViewer.radGridView1.SelectedRows[i].Cells)
+                {
+	                cell.Style.CustomizeFill = true;
+	                cell.Style.BackColor = Color.FromArgb(highLight.Color);
+                }
+			}
         }
 
         #endregion
@@ -768,15 +766,15 @@ namespace CAS.UI.UIControls.ForecastControls
                     //Добавление нового рабочего пакета в коллекцию открытых рабочих пакетов
                     _openPubWorkPackages.Add(wp);
                     //Создание пункта в меню открытых рабочих пакетов
-                    ToolStripMenuItem item = new ToolStripMenuItem(wp.Title);
+                    var item = new RadMenuItem(wp.Title);
                     item.Click += AddToWorkPackageItemClick;
                     item.Tag = wp;
-                    _toolStripMenuItemsWorkPackages.DropDownItems.Add(item);
+                    _toolStripMenuItemsWorkPackages.Items.Add(item);
 
                     foreach (NextPerformance nextPerformance in wpItems)
                     {
                         nextPerformance.BlockedByPackage = wp;
-                        _directivesViewer.UpdateItemColor(nextPerformance);
+                        _directivesViewer.UpdateItemColor();
                     }
                     ReferenceEventArgs refArgs = new ReferenceEventArgs();
                     refArgs.TypeOfReflection = ReflectionTypes.DisplayInNew;
@@ -798,7 +796,7 @@ namespace CAS.UI.UIControls.ForecastControls
         {
             if (_directivesViewer.SelectedItems.Count <= 0) return;
 
-            WorkPackage wp = (WorkPackage)((ToolStripMenuItem)sender).Tag;
+            WorkPackage wp = (WorkPackage)((RadMenuItem)sender).Tag;
 
             if (MessageBox.Show("Add item to Work Package: " + wp.Title + "?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) ==
                 DialogResult.Yes)
@@ -917,7 +915,7 @@ namespace CAS.UI.UIControls.ForecastControls
                     foreach (NextPerformance nextPerformance in wpItems)
                     {
                         nextPerformance.BlockedByPackage = wp;
-                        _directivesViewer.UpdateItemColor(nextPerformance);
+                        _directivesViewer.UpdateItemColor();
                     }
 
                     if (MessageBox.Show("Items added successfully. Open work package?", (string)new GlobalTermsProvider()["SystemName"],
@@ -945,7 +943,7 @@ namespace CAS.UI.UIControls.ForecastControls
         private void AddToQuotationOrderItemClick(object sender, EventArgs e)
         {
             if (_directivesViewer.SelectedItems.Count <= 0) return;
-            RequestForQuotation wp = (RequestForQuotation)((ToolStripMenuItem)sender).Tag;
+            RequestForQuotation wp = (RequestForQuotation)((RadMenuItem)sender).Tag;
 
             List<NextPerformance> wpItems = _directivesViewer.SelectedItems.ToList();
             ICommonCollection<Aircraft> pa = new CommonCollection<Aircraft>();

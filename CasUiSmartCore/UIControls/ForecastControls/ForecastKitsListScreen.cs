@@ -24,6 +24,7 @@ using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;
 using SmartCore.Purchase;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.ForecastControls
 {
@@ -50,12 +51,12 @@ namespace CAS.UI.UIControls.ForecastControls
         private ToolStripMenuItem itemPrintReportSchedule;
         private ToolStripMenuItem itemPrintReportMaintenancePlan;
 
-        private ContextMenuStrip _contextMenuStrip;
-        private ToolStripMenuItem _toolStripMenuItemComposeQuotation;
-        private ToolStripMenuItem _toolStripMenuItemQuotations;
-        private ToolStripMenuItem _toolStripMenuItemOpen;
-		private ToolStripMenuItem _toolStripMenuShowTaskCard;
-		private ToolStripMenuItem _toolStripMenuShowKits;
+        private RadDropDownMenu _contextMenuStrip;
+        private RadMenuItem _toolStripMenuItemComposeQuotation;
+        private RadMenuItem _toolStripMenuItemQuotations;
+        private RadMenuItem _toolStripMenuItemOpen;
+		private RadMenuItem _toolStripMenuShowTaskCard;
+		private RadMenuItem _toolStripMenuShowKits;
 		#endregion
 
 		#region Constructors
@@ -131,16 +132,16 @@ namespace CAS.UI.UIControls.ForecastControls
             if (_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
             if (_toolStripMenuItemQuotations != null)
             {
-                foreach (ToolStripMenuItem item in _toolStripMenuItemQuotations.DropDownItems)
+                foreach (RadMenuItem item in _toolStripMenuItemQuotations.Items)
                 {
                     item.Click -= AddToQuotationOrderItemClick;
                 }
-                _toolStripMenuItemQuotations.DropDownItems.Clear();
+                _toolStripMenuItemQuotations.Items.Clear();
                 _toolStripMenuItemQuotations.Dispose();
             }
             if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
 
-            if (_directivesViewer != null) _directivesViewer.DisposeView();
+            if (_directivesViewer != null) _directivesViewer.Dispose();
 
             Dispose(true);
         }
@@ -155,24 +156,24 @@ namespace CAS.UI.UIControls.ForecastControls
 
             if (_toolStripMenuItemQuotations != null)
             {
-                foreach (ToolStripMenuItem item in _toolStripMenuItemQuotations.DropDownItems)
+                foreach (RadMenuItem item in _toolStripMenuItemQuotations.Items)
                 {
                     item.Click -= AddToQuotationOrderItemClick;
                 }
 
-                _toolStripMenuItemQuotations.DropDownItems.Clear();
+                _toolStripMenuItemQuotations.Items.Clear();
 
                 foreach (RequestForQuotation quotation in _openPubQuotations)
                 {
-                    ToolStripMenuItem item = new ToolStripMenuItem(quotation.Title);
+                    var item = new RadMenuItem(quotation.Title);
                     item.Click += AddToQuotationOrderItemClick;
                     item.Tag = quotation;
-                    _toolStripMenuItemQuotations.DropDownItems.Add(item);
+                    _toolStripMenuItemQuotations.Items.Add(item);
                 }
             }
 
             _directivesViewer.SetItemsArray(_resultDirectiveArray.ToArray());
-            headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
+            headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
             _directivesViewer.Focus();
         }
         #endregion
@@ -342,12 +343,12 @@ namespace CAS.UI.UIControls.ForecastControls
 
         private void InitToolStripMenuItems()
         {
-            _contextMenuStrip = new ContextMenuStrip();
-            _toolStripMenuItemComposeQuotation = new ToolStripMenuItem();
-            _toolStripMenuItemOpen = new ToolStripMenuItem();
-            _toolStripMenuItemQuotations = new ToolStripMenuItem();
-			_toolStripMenuShowTaskCard = new ToolStripMenuItem();
-			_toolStripMenuShowKits = new ToolStripMenuItem();
+            _contextMenuStrip = new RadDropDownMenu();
+            _toolStripMenuItemComposeQuotation = new RadMenuItem();
+            _toolStripMenuItemOpen = new RadMenuItem();
+            _toolStripMenuItemQuotations = new RadMenuItem();
+			_toolStripMenuShowTaskCard = new RadMenuItem();
+			_toolStripMenuShowKits = new RadMenuItem();
 			// 
 			// contextMenuStrip
 			// 
@@ -377,52 +378,18 @@ namespace CAS.UI.UIControls.ForecastControls
 			_toolStripMenuItemQuotations.Text = "Add to Quotation Order";
 
             _contextMenuStrip.Items.Clear();
-            _contextMenuStrip.Opening += ContextMenuStripOpen;
-            _contextMenuStrip.Items.AddRange(new ToolStripItem[]
-            {
+            
+            _contextMenuStrip.Items.AddRange(
                 _toolStripMenuItemComposeQuotation,
                 _toolStripMenuItemQuotations,
 				_toolStripMenuShowTaskCard,
 				_toolStripMenuShowKits,
-				new ToolStripSeparator(),
+				new RadMenuSeparatorItem(),
                 _toolStripMenuItemOpen
-            });
+            );
         }
 
 	    #endregion
-
-        #region private void ContextMenuStripOpen(object sender,CancelEventArgs e)
-        /// <summary>
-        /// Проверка на выделение 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-        {
-            if (_directivesViewer.SelectedItems.Count <= 0)
-                e.Cancel = true;
-            if (_directivesViewer.SelectedItems.Count == 1)
-            {
-                _toolStripMenuItemOpen.Enabled = true;
-
-				var o = _directivesViewer.SelectedItems[0].ParentObject;
-
-				if (o is NextPerformance)
-				{
-					var np = o as NextPerformance;
-					_toolStripMenuShowTaskCard.Enabled = GetItemEnabled(np.Parent);
-				}
-				else if (o is AbstractPerformanceRecord)
-				{
-					var apr = o as AbstractPerformanceRecord;
-					_toolStripMenuShowTaskCard.Enabled = GetItemEnabled(apr.Parent);
-				}
-				else _toolStripMenuShowTaskCard.Enabled = GetItemEnabled(o);
-			}
-            _toolStripMenuItemComposeQuotation.Enabled = true;
-        }
-
-        #endregion
 
         #region private void CreateQuotationOrder()
 
@@ -451,7 +418,7 @@ namespace CAS.UI.UIControls.ForecastControls
         {
             if (_directivesViewer.SelectedItems.Count <= 0) return;
 
-            RequestForQuotation wp = (RequestForQuotation)((ToolStripMenuItem)sender).Tag;
+            RequestForQuotation wp = (RequestForQuotation)((RadMenuItem)sender).Tag;
 
             PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
         }
@@ -545,7 +512,7 @@ namespace CAS.UI.UIControls.ForecastControls
         {
             _directivesViewer = new ForecastKitsListView
                                     {
-                                        ContextMenuStrip = _contextMenuStrip,
+                                        CustomMenu = _contextMenuStrip,
                                         TabIndex = 2,
                                         Location = new Point(panel1.Left, panel1.Top),
                                         Dock = DockStyle.Fill
@@ -553,7 +520,33 @@ namespace CAS.UI.UIControls.ForecastControls
             //события 
             _directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 
-            panel1.Controls.Add(_directivesViewer);
+            _directivesViewer.MenuOpeningAction = () =>
+            {
+	            if (_directivesViewer.SelectedItems.Count <= 0)
+		            return;
+	            if (_directivesViewer.SelectedItems.Count == 1)
+	            {
+		            _toolStripMenuItemOpen.Enabled = true;
+
+		            var o = _directivesViewer.SelectedItems[0].ParentObject;
+
+		            if (o is NextPerformance)
+		            {
+			            var np = o as NextPerformance;
+			            _toolStripMenuShowTaskCard.Enabled = GetItemEnabled(np.Parent);
+		            }
+		            else if (o is AbstractPerformanceRecord)
+		            {
+			            var apr = o as AbstractPerformanceRecord;
+			            _toolStripMenuShowTaskCard.Enabled = GetItemEnabled(apr.Parent);
+		            }
+		            else _toolStripMenuShowTaskCard.Enabled = GetItemEnabled(o);
+	            }
+
+	            _toolStripMenuItemComposeQuotation.Enabled = true;
+            };
+
+			panel1.Controls.Add(_directivesViewer);
         }
 
         #endregion
