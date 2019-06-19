@@ -22,7 +22,7 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 		/// </summary>
 		protected override void SetHeaders()
 		{
-			AddColumn("Date", (int)(radGridView1.Width * 0.2f));
+			AddDateColumn("Date", (int)(radGridView1.Width * 0.2f));
 			AddColumn("From: => To:", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Off", (int)(radGridView1.Width * 0.6f));
 			AddColumn("On", (int)(radGridView1.Width * 0.6f));
@@ -99,8 +99,8 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 			}
 
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
-			var subItem = new ListViewItem.ListViewSubItem { Text = item.TransferDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString()), Tag = item.TransferDate };
 
+			subItems.Add(CreateRow(item.TransferDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString()), item.TransferDate));
 			subItems.Add(CreateRow(fromTo, fromTo));
 			subItems.Add(CreateRow(off, off));
 			subItems.Add(CreateRow(on, on));
