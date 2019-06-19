@@ -137,9 +137,22 @@ namespace CAS.UI.UIControls.NewGrid
 		public BaseGridViewControl()
 		{
 			InitializeComponent();
+			SetupGridView();
+			FirstLoad();
+		}
+
+		#endregion
+
+		#region private void SetupGridView()
+
+		private void SetupGridView()
+		{
 			radGridView1.SelectionMode = GridViewSelectionMode.FullRowSelect;
 			radGridView1.MultiSelect = true;
-			FirstLoad();
+
+			radGridView1.EnableFiltering = true;
+			radGridView1.MasterTemplate.ShowHeaderCellButtons = true;
+			radGridView1.MasterTemplate.ShowFilteringRow = false;
 		}
 
 		#endregion
