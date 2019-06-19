@@ -45,7 +45,7 @@ namespace CAS.UI.UIControls.ComponentChangeReport
         /// </summary>
         protected override void SetHeaders()
         {
-			AddColumn("Date", (int)(radGridView1.Width * 0.2f));
+			AddDateColumn("Date", (int)(radGridView1.Width * 0.2f));
 			AddColumn("From: => To:", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Qty", (int)(radGridView1.Width * 0.2f));
 			AddColumn("ATA:", (int)(radGridView1.Width * 0.2f));
@@ -63,7 +63,6 @@ namespace CAS.UI.UIControls.ComponentChangeReport
         }
 		#endregion
 
-		#region protected override void SetItemColor(ListViewItem listViewItem, TransferRecord item)
 		#region protected override void SetItemColor(GridViewRowInfo listViewItem, BaseEntityObject item)
 
 		protected override void SetItemColor(GridViewRowInfo listViewItem, TransferRecord item)
@@ -102,28 +101,6 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 
 		#endregion
 
-		//TODO COLOR!
-		//protected override void SetItemColor(ListViewItem listViewItem, TransferRecord item)
-		//{
-		//    if (!item.PODR && !item.DODR)
-		//    {
-		//        //запись НЕподтверждена НИ отправителем, НИ получателем
-		//        listViewItem.BackColor = Color.FromArgb(Highlight.Yellow.Color);
-		//    }
-
-		//    if (!item.PODR && item.DODR)
-		//    {
-		//        //запись НЕподтверждена отправителем, но подтверждена получателем
-		//        listViewItem.BackColor = Color.FromArgb(Highlight.Green.Color);
-		//    }
-
-		//    if(item.PODR && !item.DODR)
-		//    {
-		//        //запись подтверждена отправителем, но НЕподтверждена получателем
-		//        listViewItem.BackColor = Color.FromArgb(Highlight.Red.Color);
-		//    }
-		//}
-		#endregion
 
 		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(TransferRecord item)
 
