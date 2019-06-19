@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AircraftTechnicalLogBookControls;
-using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Entities.General.Atlbs;
 
@@ -14,7 +13,7 @@ namespace CAS.UI.UIControls.Discrepancies
     ///<summary>
     /// список для отображения ордеров запроса
     ///</summary>
-    public partial class DiscrepanciesListView : BaseListViewControl<Discrepancy>
+    public partial class DiscrepanciesListView : BaseGridViewControl<Discrepancy>
     {
         #region Fields
 
@@ -52,194 +51,87 @@ namespace CAS.UI.UIControls.Discrepancies
         /// </summary>
         protected override void SetHeaders()
         {
-            ColumnHeaderList.Clear();
-
-	        ColumnHeader columnHeader = new ColumnHeader { Width = 40, Text = "Reliability" };
-	        ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = 80, Text = "ATLB №" };
-	        ColumnHeaderList.Add(columnHeader);
-
-	        columnHeader = new ColumnHeader { Width = 80, Text = "Page №" };
-	        ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader {Width = 80, Text = "ATA"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 160, Text = "Description"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 160, Text = "Corr. Action"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 160, Text = "Corr. Action Add№"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 160, Text = "Flight Date"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 160, Text = "Route"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 160, Text = "Delay"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 160, Text = "Cancellation"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 120, Text = "MEL"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 120, Text = "Damage"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = 80, Text = "Repeat" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 120, Text = "Event Type"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 120, Text = "Event Class"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 80, Text = "Event Category"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 80, Text = "Risk Index"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 80, Text = "Accident/Incident"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 120, Text = "Condition"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 80, Text = "Filled By"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 80, Text = "Station"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 80, Text = "MRO"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 160, Text = "SRC Record Date"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 120, Text = "Auth. B1"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 120, Text = "Auth. B2"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = 160, Text = "Comp. Off P/N" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = 160, Text = "Comp. Off S/N" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 160, Text = "Comp. Off Life Limit Remains"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 160, Text = "Comp. Off Overhaul Remains"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 160, Text = "Comp. Off Warranty Remains"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 80, Text = "Comp. Off POOL"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = 120, Text = "Comp. Off Manuf. Date" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = 120, Text = "Comp. Off Since Install." };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 120, Text = "Comp. Off Manufacturer"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 120, Text = "Comp. Off Supplier"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 120, Text = "Comp. Off MP"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 120, Text = "Comp. Off Avionix."};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = 160, Text = "Comp. On P/N" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = 160, Text = "Comp. On S/N" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = 160, Text = "Comp. On Life Limit Remains" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = 160, Text = "Comp. On Overhaul Remains" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = 160, Text = "Comp. On Warranty Remains" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = 80, Text = "Comp. On POOL" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = 120, Text = "Comp. On Manuf. Date" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = 120, Text = "Comp. On Since Install." };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = 120, Text = "Comp. On Manufacturer" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = 120, Text = "Comp. On Supplier" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = 120, Text = "Comp. On MP" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = 120, Text = "Comp. On Avionix." };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = 80, Text = "Remarks"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
-            ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+			AddColumn("Reliability", 40);
+			AddColumn("ATLB №", 140);
+			AddColumn("Page №", 80);
+			AddColumn("ATA", 80);
+			AddColumn("Description", 160);
+			AddColumn("Corr. Action", 160);
+			AddColumn("Corr. Action Add№", 160);
+			AddColumn("Flight Date", 160);
+			AddColumn("Route", 160);
+			AddColumn("Delay", 160);
+			AddColumn("Cancellation", 160);
+			AddColumn("MEL", 120);
+			AddColumn("Damage", 120);
+			AddColumn("Repeat", 80);
+			AddColumn("Event Type", 120);
+			AddColumn("Event Class", 120);
+			AddColumn("Event Category", 80);
+			AddColumn("Risk Index", 80);
+			AddColumn("Accident/Incident", 80);
+			AddColumn("Condition", 120);
+			AddColumn("Filled By", 80);
+			AddColumn("Station", 80);
+			AddColumn("MRO", 80);
+			AddColumn("SRC Record Date", 160);
+			AddColumn("Auth. B1", 120);
+			AddColumn("Auth. B2", 120);
+			AddColumn("Comp. Off P/N", 160);
+			AddColumn("Comp. Off S/N", 160);
+			AddColumn("Comp. Off Life Limit Remains", 160);
+			AddColumn("Comp. Off Overhaul Remains", 160);
+			AddColumn("Comp. Off Warranty Remains", 160);
+			AddColumn("Comp. Off POOL", 80);
+			AddColumn("Comp. Off Manuf. Date", 120);
+			AddColumn("Comp. Off Since Install.", 120);
+			AddColumn("Comp. Off Manufacturer", 120);
+			AddColumn("Comp. Off Supplier", 120);
+			AddColumn("Comp.Off MP", 120);
+			AddColumn("Comp. Off Avionix.", 120);
+			AddColumn("Comp. On P/N", 160);
+			AddColumn("Comp. On S/N", 160);
+			AddColumn("Comp. On Life Limit Remains", 160);
+			AddColumn("Comp. On Overhaul Remains", 160);
+			AddColumn("Comp. On Warranty Remains", 160);
+			AddColumn("Comp. On POOL", 80);
+			AddColumn("Comp. On Manuf. Date", 120);
+			AddColumn("Comp. On Since Install.", 120);
+			AddColumn("Comp. On Manufacturer", 120);
+			AddColumn("Comp. On Supplier", 120);
+			AddColumn("Comp. On MP", 120);
+			AddColumn("Comp. On Avionix.", 120);
+			AddColumn("Remarks", 80);
+			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
         }
 		#endregion
 
 		#region protected override SetGroupsToItems(int columnIndex)
-		protected override void SetGroupsToItems(int columnIndex)
-        {
-            //itemsListView.Groups.Clear();
-            //itemsListView.Groups.Add("GroupOpened", "Opened");
-            //itemsListView.Groups.Add("GroupPublished", "Published");
-            //itemsListView.Groups.Add("GroupClosed", "Closed");
+		//protected override void SetGroupsToItems(int columnIndex)
+  //      {
+  //          //itemsListView.Groups.Clear();
+  //          //itemsListView.Groups.Add("GroupOpened", "Opened");
+  //          //itemsListView.Groups.Add("GroupPublished", "Published");
+  //          //itemsListView.Groups.Add("GroupClosed", "Closed");
 
-            //foreach (ListViewItem item in ListViewItemList)
-            //{
-            //    switch (((Discrepancy)item.Tag).Status)
-            //    {
-            //        case WorkPackageStatus.Closed:
-            //            item.Group = itemsListView.Groups[2];
-            //            break;
-            //        case WorkPackageStatus.Published:
-            //            item.Group = itemsListView.Groups[1];
-            //            break;
-            //        case WorkPackageStatus.Opened:
-            //            item.Group = itemsListView.Groups[0];
-            //            break;
-            //        default:
-            //            throw new ArgumentOutOfRangeException(String.Format("1135: Takes an argument has no known type {0}", item.GetType()));
-            //    }
-            //}
-        }
+  //          //foreach (ListViewItem item in ListViewItemList)
+  //          //{
+  //          //    switch (((Discrepancy)item.Tag).Status)
+  //          //    {
+  //          //        case WorkPackageStatus.Closed:
+  //          //            item.Group = itemsListView.Groups[2];
+  //          //            break;
+  //          //        case WorkPackageStatus.Published:
+  //          //            item.Group = itemsListView.Groups[1];
+  //          //            break;
+  //          //        case WorkPackageStatus.Opened:
+  //          //            item.Group = itemsListView.Groups[0];
+  //          //            break;
+  //          //        default:
+  //          //            throw new ArgumentOutOfRangeException(String.Format("1135: Takes an argument has no known type {0}", item.GetType()));
+  //          //    }
+  //          //}
+  //      }
         #endregion
 
         #region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
@@ -254,13 +146,13 @@ namespace CAS.UI.UIControls.Discrepancies
 	        e.RequestedEntity = new FlightScreen(SelectedItem.ParentFlight);
 	        e.DisplayerText = aircraft.RegistrationNumber + ". " + SelectedItem;
 		}
-        #endregion
+		#endregion
 
-        #region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Discrepancy item)
+		#region  protected override List<CustomCell> GetListViewSubItems(Discrepancy item)
 
-        protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Discrepancy item)
+		protected override List<CustomCell> GetListViewSubItems(Discrepancy item)
         {
-            List<ListViewItem.ListViewSubItem> subItems = new List<ListViewItem.ListViewSubItem>();
+            var subItems = new List<CustomCell>();
 
 			//if(item.ItemId == 41043)
 			//{
@@ -269,72 +161,72 @@ namespace CAS.UI.UIControls.Discrepancies
 
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.IsReliability ? "R" : "N", Tag = item.IsReliability });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ParentFlight.ParentATLB.ATLBNo, Tag = item.ParentFlight.ParentATLB.ATLBNo });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ParentFlight.PageNo, Tag = item.ParentFlight.PageNo });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ATAChapter != null ? item.ATAChapter.ToString() : "", Tag = item.ATAChapter != null ? item.ATAChapter.ToString() : "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Description, Tag = item.Description });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.CorrectiveActionDescription, Tag = item.CorrectiveActionDescription });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.CorrectiveActionAddNo, Tag = item.CorrectiveActionAddNo });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ParentFlightDate.Value.ToString(new GlobalTermsProvider()["DateFormat"].ToString()), Tag = item.ParentFlightDate });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ParentFlightRoute, Tag = item.ParentFlightRoute });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ParentFlightDelayReason, Tag = item.ParentFlightDelayReason });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ParentFlightCancellation, Tag = item.ParentFlightCancellation });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.DeferredCategory, Tag = item.DeferredCategory });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Damage, Tag = item.Damage });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.EventType, Tag = item.EventType });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.EventClass, Tag = item.EventClass });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.EventCategory, Tag = item.EventCategory });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.RiskIndex, Tag = item.RiskIndex });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Accident, Tag = item.Accident });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Condition, Tag = item.Condition });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.FilledByString, Tag = item.FilledByString });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.CertificateOfReleaseToServiceStation, Tag = item.CertificateOfReleaseToServiceStation });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.CertificateOfReleaseToServiceMRO, Tag = item.CertificateOfReleaseToServiceMRO });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.CertificateOfReleaseToServiceRecordDate.ToString(), Tag = item.CertificateOfReleaseToServiceRecordDate });
-            subItems.Add(new ListViewItem.ListViewSubItem
-            {
-                Text = item.CertificateOfReleaseToServiceAuthorizationB1 != null 
-                    ? item.CertificateOfReleaseToServiceAuthorizationB1.ToString() 
-                    : "",
-                Tag = item.CertificateOfReleaseToServiceAuthorizationB1
-            });
-            subItems.Add(new ListViewItem.ListViewSubItem
-            {
-                Text = item.CertificateOfReleaseToServiceAuthorizationB2 != null
-                    ? item.CertificateOfReleaseToServiceAuthorizationB2.ToString()
-                    : "",
-                Tag = item.CertificateOfReleaseToServiceAuthorizationB2
-            });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.CorrectiveAction.PartNumberOff, Tag = item.CorrectiveAction.PartNumberOff });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.CorrectiveAction.SerialNumberOff, Tag = item.CorrectiveAction.SerialNumberOff });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.CorrectiveAction.PartNumberOn, Tag = item.CorrectiveAction.PartNumberOn });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.CorrectiveAction.SerialNumberOn, Tag = item.CorrectiveAction.SerialNumberOn });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Remarks, Tag = item.Remarks });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
-
-			return subItems.ToArray();
+			return new List<CustomCell>
+			{
+				CreateRow(item.IsReliability ? "R" : "N", item.IsReliability),
+				CreateRow(item.ParentFlight.ParentATLB.ATLBNo, item.ParentFlight.ParentATLB.ATLBNo),
+				CreateRow(item.ParentFlight.PageNo, item.ParentFlight.PageNo),
+				CreateRow(item.ATAChapter != null ? item.ATAChapter.ToString() : "",
+					item.ATAChapter != null ? item.ATAChapter.ToString() : ""),
+				CreateRow(item.Description, item.Description),
+				CreateRow(item.CorrectiveActionDescription, item.CorrectiveActionDescription),
+				CreateRow(item.CorrectiveActionAddNo, item.CorrectiveActionAddNo),
+				CreateRow(item.ParentFlightDate.Value.ToString(new GlobalTermsProvider()["DateFormat"].ToString()),
+					item.ParentFlightDate),
+				CreateRow(item.ParentFlightRoute, item.ParentFlightRoute),
+				CreateRow(item.ParentFlightDelayReason, item.ParentFlightDelayReason),
+				CreateRow(item.ParentFlightCancellation, item.ParentFlightCancellation),
+				CreateRow(item.DeferredCategory, item.DeferredCategory),
+				CreateRow(item.Damage, item.Damage),
+				CreateRow("", ""),
+				CreateRow(item.EventType, item.EventType),
+				CreateRow(item.EventClass, item.EventClass),
+				CreateRow(item.EventCategory, item.EventCategory),
+				CreateRow(item.RiskIndex, item.RiskIndex),
+				CreateRow(item.Accident, item.Accident),
+				CreateRow(item.Condition, item.Condition),
+				CreateRow(item.FilledByString, item.FilledByString),
+				CreateRow(item.CertificateOfReleaseToServiceStation, item.CertificateOfReleaseToServiceStation),
+				CreateRow(item.CertificateOfReleaseToServiceMRO, item.CertificateOfReleaseToServiceMRO),
+				CreateRow(item.CertificateOfReleaseToServiceRecordDate.ToString(),
+					item.CertificateOfReleaseToServiceRecordDate),
+				CreateRow(
+					item.CertificateOfReleaseToServiceAuthorizationB1 != null
+						? item.CertificateOfReleaseToServiceAuthorizationB1.ToString()
+						: "",
+					item.CertificateOfReleaseToServiceAuthorizationB1),
+				CreateRow(
+					item.CertificateOfReleaseToServiceAuthorizationB2 != null
+						? item.CertificateOfReleaseToServiceAuthorizationB2.ToString()
+						: "",
+					item.CertificateOfReleaseToServiceAuthorizationB2),
+				CreateRow(item.CorrectiveAction.PartNumberOff, item.CorrectiveAction.PartNumberOff),
+				CreateRow(item.CorrectiveAction.SerialNumberOff, item.CorrectiveAction.SerialNumberOff),
+				CreateRow("", ""),
+				CreateRow("", ""),
+				CreateRow("", ""),
+				CreateRow("", ""),
+				CreateRow("", ""),
+				CreateRow("", ""),
+				CreateRow("", ""),
+				CreateRow("", ""),
+				CreateRow("", ""),
+				CreateRow("", ""),
+				CreateRow(item.CorrectiveAction.PartNumberOn, item.CorrectiveAction.PartNumberOn),
+				CreateRow(item.CorrectiveAction.SerialNumberOn, item.CorrectiveAction.SerialNumberOn),
+				CreateRow("", ""),
+				CreateRow("", ""),
+				CreateRow("", ""),
+				CreateRow("", ""),
+				CreateRow("", ""),
+				CreateRow("", ""),
+				CreateRow("", ""),
+				CreateRow("", ""),
+				CreateRow("", ""),
+				CreateRow("", ""),
+				CreateRow(item.Remarks, item.Remarks),
+				CreateRow(author, author)
+			};
         }
 
         #endregion
