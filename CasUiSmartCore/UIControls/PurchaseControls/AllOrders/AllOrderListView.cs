@@ -31,28 +31,6 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 		#region Methods
 
 		#region protected override SetGroupsToItems(int columnIndex)
-		//protected override void SetGroupsToItems(int columnIndex)
-		//      {
-		//          itemsListView.Groups.Clear();
-		//          itemsListView.Groups.Add("GroupInitial", "Initial");
-		//          itemsListView.Groups.Add("GroupQuotation", "Quotation");
-		//          itemsListView.Groups.Add("GroupPurchase", "Purchase");
-		//          itemsListView.Groups.Add("GroupUnknown", "Unknown");
-
-		//          foreach (var item in ListViewItemList)
-		//          {
-		//              if (((ILogistic)item.Tag) is InitialOrder)
-		//                  item.Group = itemsListView.Groups[0];
-		//              else if (((ILogistic)item.Tag) is RequestForQuotation)
-		//                  item.Group = itemsListView.Groups[1];
-		//              else if (((ILogistic)item.Tag) is PurchaseOrder)
-		//                  item.Group = itemsListView.Groups[2];
-		//              else item.Group = itemsListView.Groups[3];
-		//          }   
-		//      }
-		#endregion
-
-		#region protected override SetGroupsToItems(int columnIndex)
 		protected override void GroupingItems()
 		{
 			Grouping("Type");
