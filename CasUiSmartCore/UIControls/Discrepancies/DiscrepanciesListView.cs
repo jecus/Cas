@@ -27,6 +27,7 @@ namespace CAS.UI.UIControls.Discrepancies
         public DiscrepanciesListView()
         {
             InitializeComponent();
+            SortMultiplier = 1;
         }
         #endregion
 
@@ -51,6 +52,7 @@ namespace CAS.UI.UIControls.Discrepancies
         /// </summary>
         protected override void SetHeaders()
         {
+			AddColumn("Status", 40);
 			AddColumn("Reliability", 40);
 			AddColumn("ATLB №", 140);
 			AddColumn("Page №", 80);
@@ -58,7 +60,7 @@ namespace CAS.UI.UIControls.Discrepancies
 			AddColumn("Description", 160);
 			AddColumn("Corr. Action", 160);
 			AddColumn("Corr. Action Add№", 160);
-			AddColumn("Flight Date", 160);
+			AddDateColumn("Flight Date", 160);
 			AddColumn("Route", 160);
 			AddColumn("Delay", 160);
 			AddColumn("Cancellation", 160);
@@ -74,7 +76,7 @@ namespace CAS.UI.UIControls.Discrepancies
 			AddColumn("Filled By", 80);
 			AddColumn("Station", 80);
 			AddColumn("MRO", 80);
-			AddColumn("SRC Record Date", 160);
+			AddDateColumn("SRC Record Date", 160);
 			AddColumn("Auth. B1", 120);
 			AddColumn("Auth. B2", 120);
 			AddColumn("Comp. Off P/N", 160);
@@ -105,38 +107,17 @@ namespace CAS.UI.UIControls.Discrepancies
 			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
         }
 		#endregion
-
 		#region protected override SetGroupsToItems(int columnIndex)
-		//protected override void SetGroupsToItems(int columnIndex)
-  //      {
-  //          //itemsListView.Groups.Clear();
-  //          //itemsListView.Groups.Add("GroupOpened", "Opened");
-  //          //itemsListView.Groups.Add("GroupPublished", "Published");
-  //          //itemsListView.Groups.Add("GroupClosed", "Closed");
+		protected override void GroupingItems()
+		{
+			Grouping("Status");
+		}
 
-  //          //foreach (ListViewItem item in ListViewItemList)
-  //          //{
-  //          //    switch (((Discrepancy)item.Tag).Status)
-  //          //    {
-  //          //        case WorkPackageStatus.Closed:
-  //          //            item.Group = itemsListView.Groups[2];
-  //          //            break;
-  //          //        case WorkPackageStatus.Published:
-  //          //            item.Group = itemsListView.Groups[1];
-  //          //            break;
-  //          //        case WorkPackageStatus.Opened:
-  //          //            item.Group = itemsListView.Groups[0];
-  //          //            break;
-  //          //        default:
-  //          //            throw new ArgumentOutOfRangeException(String.Format("1135: Takes an argument has no known type {0}", item.GetType()));
-  //          //    }
-  //          //}
-  //      }
-        #endregion
+		#endregion
 
-        #region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 
-        protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
         {
 	        if (SelectedItem == null) return;
 
@@ -152,17 +133,11 @@ namespace CAS.UI.UIControls.Discrepancies
 
 		protected override List<CustomCell> GetListViewSubItems(Discrepancy item)
         {
-            var subItems = new List<CustomCell>();
-
-			//if(item.ItemId == 41043)
-			//{
-
-			//}
-
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+	        var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
 			return new List<CustomCell>
 			{
+				CreateRow(item.Status.ToString(), item.Status),
 				CreateRow(item.IsReliability ? "R" : "N", item.IsReliability),
 				CreateRow(item.ParentFlight.ParentATLB.ATLBNo, item.ParentFlight.ParentATLB.ATLBNo),
 				CreateRow(item.ParentFlight.PageNo, item.ParentFlight.PageNo),
