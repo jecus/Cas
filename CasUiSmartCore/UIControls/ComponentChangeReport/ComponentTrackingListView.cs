@@ -3,8 +3,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
-using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.ComplianceControls;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Entities.Dictionaries;
@@ -16,7 +16,7 @@ namespace CAS.UI.UIControls.ComponentChangeReport
     ///<summary>
     /// список для отображения ордеров запроса
     ///</summary>
-    public partial class ComponentTrackingListView : BaseListViewControl<TransferRecord>
+    public partial class ComponentTrackingListView : BaseGridViewControl<TransferRecord>
     {
 		public bool IsStore { get; set; }
 
@@ -43,86 +43,52 @@ namespace CAS.UI.UIControls.ComponentChangeReport
         /// </summary>
         protected override void SetHeaders()
         {
-            itemsListView.Columns.Clear();
-            ColumnHeaderList.Clear();
-
-            ColumnHeader columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Date" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "From: => To:" };
-            ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Qty:" };
-			ColumnHeaderList.Add(columnHeader);
-
-	        columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "ATA:" };
-	        ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Class:" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Off" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "On" };
-            ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Reason" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Description" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Remark" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Released" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Received" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "ReceivedForm" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "ReceivedDate" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
-			ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+			AddColumn("Date", (int)(radGridView1.Width * 0.2f));
+			AddColumn("From: => To:", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Qty", (int)(radGridView1.Width * 0.2f));
+			AddColumn("ATA:", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Class:", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Off", (int)(radGridView1.Width * 0.4f));
+			AddColumn("On", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Reason", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Description", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Remark", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Released", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Received", (int)(radGridView1.Width * 0.16f));
+			AddColumn("ReceivedForm", (int)(radGridView1.Width * 0.16f));
+			AddColumn("ReceivedDate", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
         }
         #endregion
 
         #region protected override void SetItemColor(ListViewItem listViewItem, TransferRecord item)
-        protected override void SetItemColor(ListViewItem listViewItem, TransferRecord item)
-        {
-            if (!item.PODR && !item.DODR)
-            {
-                //запись НЕподтверждена НИ отправителем, НИ получателем
-                listViewItem.BackColor = Color.FromArgb(Highlight.Yellow.Color);
-            }
+        //protected override void SetItemColor(ListViewItem listViewItem, TransferRecord item)
+        //{
+        //    if (!item.PODR && !item.DODR)
+        //    {
+        //        //запись НЕподтверждена НИ отправителем, НИ получателем
+        //        listViewItem.BackColor = Color.FromArgb(Highlight.Yellow.Color);
+        //    }
 
-            if (!item.PODR && item.DODR)
-            {
-                //запись НЕподтверждена отправителем, но подтверждена получателем
-                listViewItem.BackColor = Color.FromArgb(Highlight.Green.Color);
-            }
+        //    if (!item.PODR && item.DODR)
+        //    {
+        //        //запись НЕподтверждена отправителем, но подтверждена получателем
+        //        listViewItem.BackColor = Color.FromArgb(Highlight.Green.Color);
+        //    }
 
-            if(item.PODR && !item.DODR)
-            {
-                //запись подтверждена отправителем, но НЕподтверждена получателем
-                listViewItem.BackColor = Color.FromArgb(Highlight.Red.Color);
-            }
-        }
+        //    if(item.PODR && !item.DODR)
+        //    {
+        //        //запись подтверждена отправителем, но НЕподтверждена получателем
+        //        listViewItem.BackColor = Color.FromArgb(Highlight.Red.Color);
+        //    }
+        //}
         #endregion
 
         #region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(TransferRecord item)
 
-        protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(TransferRecord item)
+        protected override List<CustomCell> GetListViewSubItems(TransferRecord item)
         {
-            var subItems = new List<ListViewItem.ListViewSubItem>();
+            var subItems = new List<CustomCell>();
 
             var component = item.ParentComponent;
 	        string descriptionOn = "", descriptionOff = "";
@@ -164,7 +130,6 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 		                        + " P/N:" + component.PartNumber + " S/N: " + component.SerialNumber;
 	        }
 
-
 			if (item.FromAircraft == null && item.FromBaseComponent == null && item.FromStore == null && item.FromSupplier == null && item.FromSpecialist == null)
 			{
 				if (IsStore)
@@ -179,7 +144,6 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 					item.Position
 					+ " P/N:" + component.PartNumber + " S/N: " + component.SerialNumber;
 				}
-				
 			}
 
 			if (item.DestinationObject != null)
@@ -187,63 +151,44 @@ namespace CAS.UI.UIControls.ComponentChangeReport
                 if (fromTo != "") fromTo += " ";
                 fromTo += "=> " + DestinationHelper.GetDestinationObjectString(item);   
             }
-
-
+			
 	        string quantity;
 
 			if (item.ParentComponent is BaseComponent)
 		        quantity = $"{1:0.##}" + (item.ParentComponent.Measure != null ? " " + item.ParentComponent.Measure + "(s)" : "");
 		    else quantity = $"{item.ParentComponent.QuantityIn:0.##}" + (item.ParentComponent.Measure != null ? " " + item.ParentComponent.Measure + "(s)" : "");
-	       
 
 	        var released = item.ReleasedSpecialist?.ToString() ?? "";
 	        var received = item.ReceivedSpecialist?.ToString() ?? "";
 	        var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
-			var subItem = new ListViewItem.ListViewSubItem { Text = item.TransferDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString()), Tag = item.TransferDate };
-            subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = fromTo, Tag = fromTo };
-            subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = quantity, Tag = item.ParentComponent.QuantityIn };
-			subItems.Add(subItem);
-	        subItem = new ListViewItem.ListViewSubItem { Text = item.ParentComponent.ATAChapter.ToString(), Tag = item.ParentComponent.ATAChapter };
-	        subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = item.GoodsClass.ToString(), Tag = item.GoodsClass };
-			subItems.Add(subItem);
-
+	        CreateRow(item.TransferDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString()), item.TransferDate );
+	        CreateRow(fromTo, fromTo );
+			CreateRow(quantity, item.ParentComponent.QuantityIn );
+			CreateRow(item.ParentComponent.ATAChapter.ToString(), item.ParentComponent.ATAChapter );
+	        CreateRow(item.GoodsClass.ToString(), item.GoodsClass );
+			
 	        if (IsStore)
 	        {
-				subItem = new ListViewItem.ListViewSubItem { Text = descriptionOn, Tag = descriptionOn };
-				subItems.Add(subItem);
-				subItem = new ListViewItem.ListViewSubItem { Text = descriptionOff, Tag = descriptionOff };
-				subItems.Add(subItem);
-			}
+		        CreateRow(descriptionOn, descriptionOn );
+		        CreateRow(descriptionOff, descriptionOff );
+	        }
 	        else
 	        {
-				subItem = new ListViewItem.ListViewSubItem { Text = descriptionOff, Tag = descriptionOff };
-				subItems.Add(subItem);
-				subItem = new ListViewItem.ListViewSubItem { Text = descriptionOn, Tag = descriptionOn };
-				subItems.Add(subItem);
-			}
+		        CreateRow(descriptionOff, descriptionOff );
+				CreateRow(descriptionOn, descriptionOn );
+	        }
 
+	        CreateRow(item.Reason.ToString(), item.Reason );
+			CreateRow(item.Description, item.Description );
+			CreateRow(item.Remarks, item.Remarks );
+			CreateRow(released, released );
+			CreateRow(received, received );
+			CreateRow(item.ParentComponent.FromSupplier.ToString(), item.ParentComponent.FromSupplier );
+			CreateRow(fromSupplierReciveDate, item.ParentComponent.FromSupplierReciveDate );
+			CreateRow(author, author );
 
-			subItem = new ListViewItem.ListViewSubItem { Text = item.Reason.ToString(), Tag = item.Reason };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = item.Description, Tag = item.Description };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = item.Remarks, Tag = item.Remarks };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = released, Tag = released };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = received, Tag = received };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = item.ParentComponent.FromSupplier.ToString(), Tag = item.ParentComponent.FromSupplier };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = fromSupplierReciveDate, Tag = item.ParentComponent.FromSupplierReciveDate };
-			subItems.Add(subItem);
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
-
-			return subItems.ToArray();
+			return subItems;
         }
 
         #endregion
