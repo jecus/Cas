@@ -89,7 +89,6 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 		{
 			_directivesViewer = new ComponentChangeListView();
 			_directivesViewer.TabIndex = 2;
-			_directivesViewer.IgnoreAutoResize = true;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
 			Controls.Add(_directivesViewer);
