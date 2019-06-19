@@ -30,7 +30,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 		/// </summary>
 		protected override void SetHeaders()
 		{
-			AddColumn("Date", (int)(radGridView1.Width * 0.16f));
+			AddDateColumn("Date", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Aircraft", (int)(radGridView1.Width * 0.32f));
 			AddColumn("Work Type", (int)(radGridView1.Width * 0.34f));
 			AddColumn("Privileges", (int)(radGridView1.Width * 0.6f));
