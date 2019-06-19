@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
-using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.NewGrid;
 using CAS.UI.UIControls.WorkPakage;
 using CASTerms;
 using SmartCore.Auxiliary;
@@ -12,7 +11,7 @@ using SmartCore.Entities.General.WorkPackage;
 
 namespace CAS.UI.UIControls.PersonnelControls
 {
-	public partial class EmployeeWorkPackageListView : BaseListViewControl<WorkPackage>
+	public partial class EmployeeWorkPackageListView : BaseGridViewControl<WorkPackage>
 	{
 		public Specialist CurrentSpecialist { get; set; }
 
@@ -31,39 +30,21 @@ namespace CAS.UI.UIControls.PersonnelControls
 		/// </summary>
 		protected override void SetHeaders()
 		{
-			ColumnHeaderList.Clear();
-
-			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Date" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.16f), Text = "Aircraft" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.17f), Text = "Work Type" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.3f), Text = "Privileges" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.17f), Text = "Occupation" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.15f), Text = "Station" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
-			ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
-
+			AddColumn("Date", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Aircraft", (int)(radGridView1.Width * 0.32f));
+			AddColumn("Work Type", (int)(radGridView1.Width * 0.34f));
+			AddColumn("Privileges", (int)(radGridView1.Width * 0.6f));
+			AddColumn("Occupation", (int)(radGridView1.Width * 0.34f));
+			AddColumn("Station", (int)(radGridView1.Width * 0.30f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
 		}
 		#endregion
 
-		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(WorkPackage item)
+		#region protected override List<CustomCell> GetListViewSubItems(WorkPackage item)
 
-		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(WorkPackage item)
+		protected override List<CustomCell> GetListViewSubItems(WorkPackage item)
 		{
-			var subItems = new List<ListViewItem.ListViewSubItem>();
+			var subItems = new List<CustomCell>();
 
 			var ratingString = "";
 			foreach (var license in CurrentSpecialist.Licenses)
@@ -85,20 +66,16 @@ namespace CAS.UI.UIControls.PersonnelControls
 			var aircraft = GlobalObjects.AircraftsCore.GetAircraftById(item.ParentId);
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
-			var subItem = new ListViewItem.ListViewSubItem { Text = closingDate, Tag = item.ClosingDate };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = $"{aircraft?.RegistrationNumber} {aircraft?.Model.ShortName}", Tag = aircraft };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = $"Performed WP:{item.Title}", Tag = item.Title };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = ratingString, Tag = ratingString };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = CurrentSpecialist.Specialization.ToString(), Tag = CurrentSpecialist.Specialization };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = item.Station, Tag = item.Status };
-			subItems.Add(subItem);
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
-			return subItems.ToArray();
+			return new List<CustomCell>
+			{
+				CreateRow(closingDate, item.ClosingDate),
+				CreateRow($"{aircraft?.RegistrationNumber} {aircraft?.Model.ShortName}", aircraft),
+				CreateRow($"Performed WP:{item.Title}", item.Title),
+				CreateRow(ratingString, ratingString),
+				CreateRow(CurrentSpecialist.Specialization.ToString(), CurrentSpecialist.Specialization),
+				CreateRow(item.Station, item.Status),
+				CreateRow(author, author)
+			};
 		}
 
 		#endregion

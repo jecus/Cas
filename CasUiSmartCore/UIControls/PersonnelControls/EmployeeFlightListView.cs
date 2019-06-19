@@ -6,7 +6,7 @@ using Auxiliary;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AircraftTechnicalLogBookControls;
-using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
@@ -14,7 +14,7 @@ using SmartCore.Entities.General.Atlbs;
 
 namespace CAS.UI.UIControls.PersonnelControls
 {
-	public partial class EmployeeFlightListView : BaseListViewControl<AircraftFlight>
+	public partial class EmployeeFlightListView : BaseGridViewControl<AircraftFlight>
 	{
 		#region Properties
 
@@ -44,48 +44,24 @@ namespace CAS.UI.UIControls.PersonnelControls
 		/// </summary>
 		protected override void SetHeaders()
 		{
-			ColumnHeaderList.Clear();
-
-			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Date" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.17f), Text = "Aircraft" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.17f), Text = "Occupation" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Direction" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.15f), Text = "Flight time" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Block time" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Per Days (Flight)" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Per Days (Block)" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Night Time" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
-			ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
-
+			AddColumn("Date", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Aircraft", (int)(radGridView1.Width * 0.34f));
+			AddColumn("Occupation", (int)(radGridView1.Width * 0.34f));
+			AddColumn("Direction", (int)(radGridView1.Width * 0.10f));
+			AddColumn("Flight time", (int)(radGridView1.Width * 0.30f));
+			AddColumn("Block time", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Per Days (Flight)", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Per Days (Block)", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Night Time", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
 		}
 		#endregion
 
 		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(AircraftFlight item)
 
-		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(AircraftFlight item)
+		protected override List<CustomCell> GetListViewSubItems(AircraftFlight item)
 		{
-			var subItems = new List<ListViewItem.ListViewSubItem>();
+			var subItems = new List<CustomCell>();
 
 			var dateString = item.FlightDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
 			var date = item.FlightDate.Date.AddMinutes(item.OutTime);
@@ -107,27 +83,20 @@ namespace CAS.UI.UIControls.PersonnelControls
 			}
 
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
-			var subItem = new ListViewItem.ListViewSubItem { Text = dateString, Tag = date };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = aircraft, Tag = item.Aircraft };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = item.Specialization.ToString(), Tag = item.Specialization };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = route, Tag = route };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = flightTimeString, Tag = item.FlightTime };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = UsefulMethods.TimeToString(item.BlockTime), Tag = item.BlockTime };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = perDaysFlight.ToHoursMinutesAndCyclesFormat("", ""), Tag = perDaysFlight };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = perDaysBlock.ToHoursMinutesAndCyclesFormat("", ""), Tag = perDaysBlock };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = item.NightTime.ToString(), Tag = item.NightTime };
-			subItems.Add(subItem);
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
-
-			return subItems.ToArray();
+			
+			return new List<CustomCell>
+			{
+				CreateRow(dateString, Tag = date),
+				CreateRow(aircraft, item.Aircraft),
+				CreateRow(item.Specialization.ToString(), item.Specialization),
+				CreateRow(route, route),
+				CreateRow(flightTimeString, item.FlightTime),
+				CreateRow(UsefulMethods.TimeToString(item.BlockTime), item.BlockTime),
+				CreateRow(perDaysFlight.ToHoursMinutesAndCyclesFormat("", ""), perDaysFlight),
+				CreateRow(perDaysBlock.ToHoursMinutesAndCyclesFormat("", ""), perDaysBlock),
+				CreateRow(item.NightTime.ToString(), item.NightTime),
+				CreateRow(author, author)
+			};
 		}
 
 		#endregion

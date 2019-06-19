@@ -46,11 +46,9 @@
 			this.employeeFlightListView.DisplayerText = null;
 			this.employeeFlightListView.Entity = null;
 			this.employeeFlightListView.Flights = ((SmartCore.Entities.Collections.CommonCollection<SmartCore.Entities.General.Atlbs.AircraftFlight>)(resources.GetObject("employeeFlightListView.Flights")));
-			this.employeeFlightListView.IgnoreAutoResize = false;
 			this.employeeFlightListView.Location = new System.Drawing.Point(0, 51);
 			this.employeeFlightListView.Name = "employeeFlightListView";
 			this.employeeFlightListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.employeeFlightListView.ShowGroups = true;
 			this.employeeFlightListView.Size = new System.Drawing.Size(1231, 490);
 			this.employeeFlightListView.TabIndex = 0;
 			// 
