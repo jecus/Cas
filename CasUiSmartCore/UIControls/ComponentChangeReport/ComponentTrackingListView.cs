@@ -62,6 +62,7 @@ namespace CAS.UI.UIControls.ComponentChangeReport
         #endregion
 
         #region protected override void SetItemColor(ListViewItem listViewItem, TransferRecord item)
+		//TODO COLOR!
         //protected override void SetItemColor(ListViewItem listViewItem, TransferRecord item)
         //{
         //    if (!item.PODR && !item.DODR)
