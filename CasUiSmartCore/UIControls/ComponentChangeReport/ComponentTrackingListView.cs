@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Auxiliary;
 using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.ComplianceControls;
@@ -10,6 +11,7 @@ using SmartCore.Auxiliary;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.ComponentChangeReport
 {
@@ -59,35 +61,73 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 			AddColumn("ReceivedDate", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
         }
-        #endregion
+		#endregion
 
-        #region protected override void SetItemColor(ListViewItem listViewItem, TransferRecord item)
+		#region protected override void SetItemColor(ListViewItem listViewItem, TransferRecord item)
+		#region protected override void SetItemColor(GridViewRowInfo listViewItem, BaseEntityObject item)
+
+		protected override void SetItemColor(GridViewRowInfo listViewItem, TransferRecord item)
+		{
+
+			if (!item.PODR && !item.DODR)
+			{
+				//запись НЕподтверждена НИ отправителем, НИ получателем
+				foreach (GridViewCellInfo cell in listViewItem.Cells)
+				{
+					cell.Style.CustomizeFill = true;
+					cell.Style.BackColor = Color.FromArgb(Highlight.Yellow.Color);
+				}
+			}
+
+			if (!item.PODR && item.DODR)
+			{
+				//запись НЕподтверждена отправителем, но подтверждена получателем
+				foreach (GridViewCellInfo cell in listViewItem.Cells)
+				{
+					cell.Style.CustomizeFill = true;
+					cell.Style.BackColor = Color.FromArgb(Highlight.Green.Color);
+				}
+			}
+
+			if (item.PODR && !item.DODR)
+			{
+				//запись подтверждена отправителем, но НЕподтверждена получателем
+				foreach (GridViewCellInfo cell in listViewItem.Cells)
+				{
+					cell.Style.CustomizeFill = true;
+					cell.Style.BackColor = Color.FromArgb(Highlight.Red.Color);
+				}
+			}
+		}
+
+		#endregion
+
 		//TODO COLOR!
-        //protected override void SetItemColor(ListViewItem listViewItem, TransferRecord item)
-        //{
-        //    if (!item.PODR && !item.DODR)
-        //    {
-        //        //запись НЕподтверждена НИ отправителем, НИ получателем
-        //        listViewItem.BackColor = Color.FromArgb(Highlight.Yellow.Color);
-        //    }
+		//protected override void SetItemColor(ListViewItem listViewItem, TransferRecord item)
+		//{
+		//    if (!item.PODR && !item.DODR)
+		//    {
+		//        //запись НЕподтверждена НИ отправителем, НИ получателем
+		//        listViewItem.BackColor = Color.FromArgb(Highlight.Yellow.Color);
+		//    }
 
-        //    if (!item.PODR && item.DODR)
-        //    {
-        //        //запись НЕподтверждена отправителем, но подтверждена получателем
-        //        listViewItem.BackColor = Color.FromArgb(Highlight.Green.Color);
-        //    }
+		//    if (!item.PODR && item.DODR)
+		//    {
+		//        //запись НЕподтверждена отправителем, но подтверждена получателем
+		//        listViewItem.BackColor = Color.FromArgb(Highlight.Green.Color);
+		//    }
 
-        //    if(item.PODR && !item.DODR)
-        //    {
-        //        //запись подтверждена отправителем, но НЕподтверждена получателем
-        //        listViewItem.BackColor = Color.FromArgb(Highlight.Red.Color);
-        //    }
-        //}
-        #endregion
+		//    if(item.PODR && !item.DODR)
+		//    {
+		//        //запись подтверждена отправителем, но НЕподтверждена получателем
+		//        listViewItem.BackColor = Color.FromArgb(Highlight.Red.Color);
+		//    }
+		//}
+		#endregion
 
-        #region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(TransferRecord item)
+		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(TransferRecord item)
 
-        protected override List<CustomCell> GetListViewSubItems(TransferRecord item)
+		protected override List<CustomCell> GetListViewSubItems(TransferRecord item)
         {
             var subItems = new List<CustomCell>();
 
