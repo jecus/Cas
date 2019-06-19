@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using Auxiliary;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General;
+using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.Schedule;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.ScheduleControls
 {
@@ -198,6 +203,47 @@ namespace CAS.UI.UIControls.ScheduleControls
 			}
 
 			return subItems;
+		}
+
+		#endregion
+
+
+		#region Overrides of BaseGridViewControl<IFlightNumberParams>
+
+		protected override void Sorting(string colName = null)
+		{
+			
+		}
+
+		protected override void CustomSort(int ColumnIndex)
+		{
+			if (OldColumnIndex != ColumnIndex)
+				SortMultiplier = -1;
+			if (SortMultiplier == 1)
+				SortMultiplier = -1;
+			else
+				SortMultiplier = 1;
+
+			var resultList = new List<IFlightNumberParams>();
+			var list = radGridView1.Rows.Select(i => i).ToList();
+			list.Sort(new GridViewDataRowInfoComparer(ColumnIndex, SortMultiplier));
+			//добавление остальных подзадач
+			foreach (GridViewRowInfo item in list)
+			{
+				if (item.Tag is FlightNumber)
+				{
+					resultList.Add(item.Tag as FlightNumber);
+
+					var component = (FlightNumber)item.Tag;
+					var items = list
+						.Where(lvi =>
+							lvi.Tag is FlightNumberPeriod &&
+							((FlightNumberPeriod)lvi.Tag).FlightNumberId == component.ItemId).Select(i => i.Tag);
+					resultList.AddRange(items.OfType<FlightNumberPeriod>());
+				}
+			}
+
+			SetItemsArray(resultList.ToArray());
 		}
 
 		#endregion

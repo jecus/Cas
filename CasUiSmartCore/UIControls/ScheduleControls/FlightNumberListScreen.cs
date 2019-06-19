@@ -21,6 +21,7 @@ using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.Schedule;
 using SmartCore.Filters;
 using Telerik.WinControls.UI;
+using Component = SmartCore.Entities.General.Accessory.Component;
 
 namespace CAS.UI.UIControls.ScheduleControls
 {
@@ -135,7 +136,23 @@ namespace CAS.UI.UIControls.ScheduleControls
 				}	
 	        }
 
-			_directivesViewer.SetItemsArray(_result.ToArray());
+			var res = new List<IFlightNumberParams>();
+			foreach (var item in _result)
+			{
+				if (item is FlightNumber)
+				{
+					res.Add(item as FlightNumber);
+
+					var component = (FlightNumber)item;
+					var items = _result
+						.Where(lvi =>
+							lvi is FlightNumberPeriod &&
+							((FlightNumberPeriod)lvi).FlightNumberId == component.ItemId).Select(i => i);
+					res.AddRange(items.OfType<FlightNumberPeriod>());
+				}
+			}
+
+			_directivesViewer.SetItemsArray(res.ToArray());
 	        _directivesViewer.Focus();
 
             headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
