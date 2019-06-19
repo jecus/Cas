@@ -23,8 +23,6 @@ namespace SmartCore.Tests.ExcelImportExport
 	[TestClass]
 	public class ImportMpdTaskCardTest
 	{
-
-
 		[TestMethod]
 		public void Test()
 		{
@@ -166,6 +164,40 @@ namespace SmartCore.Tests.ExcelImportExport
 			}
 		}
 
+		[TestMethod]
+		public void Kit()
+		{
+			var env = GetEnviroment();
+
+			var itemRelationCore = new ItemsRelationsDataAccess(env);
+			var directiveCore = new DirectiveCore(env.NewKeeper, env.NewLoader, env.Keeper, env.Loader, itemRelationCore);
+			var aircraftfrom = env.NewLoader.GetObject<AircraftDTO, Aircraft>(new Filter("ItemId", 2345));
+			var directivesfrom = directiveCore.GetDirectives(aircraftfrom, DirectiveType.All);
+
+			var aircraftto = env.NewLoader.GetObject<AircraftDTO, Aircraft>(new Filter("ItemId", 2347));
+			var directivesfTo = directiveCore.GetDirectives(aircraftto, DirectiveType.All);
+
+			foreach (var dir in directivesfrom.Where(i => i.Kits.Count > 0))
+			{
+				Trace.WriteLine(dir.ToString());
+				var find = directivesfTo.FirstOrDefault(i => i.Title == dir.Title);
+				Trace.WriteLine(find?.ToString() ?? "!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				
+				if (find != null)
+				{
+					foreach (var kit in dir.Kits)
+					{
+						var kitCopy = kit.GetCopyUnsaved();
+						kitCopy.ParentId = find.ItemId;
+						env.Keeper.Save(kitCopy);
+						Trace.WriteLine(kitCopy.ToString());
+					}
+				}
+
+				Trace.WriteLine("");
+			}
+		}
+
 
 		[TestMethod]
 		public void ImportAdTAskCArdOrCrateNew()
@@ -191,7 +223,7 @@ namespace SmartCore.Tests.ExcelImportExport
 			{
 				var name = file.Name.Replace(" ", "").Replace(".pdf", "");
 				var directive = directiveList.FirstOrDefault(i => i.Title.Contains(name));
-               
+			   
 				if (directive != null)
 				{
 					var _fileData = UsefulMethods.GetByteArrayFromFile(file.FullName);
@@ -202,13 +234,13 @@ namespace SmartCore.Tests.ExcelImportExport
 						FileSize = _fileData.Length
 					};
 					directive.ADNoFile = attachedFile;
-                    env.NewKeeper.Save(directive);
-                }
+					env.NewKeeper.Save(directive);
+				}
 				else
 				{
 					var newDirective = new Directive
 					{
-                        Title = name,
+						Title = name,
 						DirectiveType =  DirectiveType.AirworthenessDirectives,
 						ADType = ADType.Airframe,
 						HiddenRemarks = "NEW",
@@ -224,8 +256,8 @@ namespace SmartCore.Tests.ExcelImportExport
 						FileSize = _fileData.Length
 					};
 					newDirective.ADNoFile = attachedFile;
-                    env.NewKeeper.Save(newDirective);
-                }
+					env.NewKeeper.Save(newDirective);
+				}
 			}
 
 		}
