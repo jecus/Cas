@@ -300,7 +300,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				return;
 			}
 
-			if (purchaseRecordListView1.ListViewItemList.Count <= 0)
+			if (purchaseRecordListView1.ItemsCount <= 0)
 			{
 				MessageBox.Show("Please select a price for purchase order", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,

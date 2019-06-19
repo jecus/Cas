@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls.Quatation
 {
-	public partial class PurchaseRecordListView : BaseListViewControl<PurchaseRequestRecord>
+	public partial class PurchaseRecordListView : BaseGridViewControl<PurchaseRequestRecord>
 	{
 		private readonly bool _orderBySupplies;
 
@@ -22,96 +23,38 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 		#endregion
 
-
 		#region protected override void SetHeaders()
 
 		protected override void SetHeaders()
 		{
-			ColumnHeaderList.Clear();
-			itemsListView.Columns.Clear();
-
-			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Supplier" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Q-ty" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Cost" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Condition" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Measure" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
-			ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+			AddColumn("Supplier", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Q-ty", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Cost", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Condition", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Measure", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
 		}
 
 		#endregion
 
 		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Product item)
 
-		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(PurchaseRequestRecord item)
+		protected override List<CustomCell> GetListViewSubItems(PurchaseRequestRecord item)
 		{
-			var subItems = new List<ListViewItem.ListViewSubItem>();
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
-			var subItem = new ListViewItem.ListViewSubItem { Text = item.Supplier.ToString(), Tag = item.Supplier };
-			subItems.Add(subItem);
-
-			subItem = new ListViewItem.ListViewSubItem { Text = item.Quantity.ToString(), Tag = item.Quantity };
-			subItems.Add(subItem);
-
-			subItem = new ListViewItem.ListViewSubItem { Text = item.Cost.ToString(), Tag = item.Cost };
-			subItems.Add(subItem);
-
-			subItem = new ListViewItem.ListViewSubItem { Text = item.CostCondition.ToString(), Tag = item.Measure };
-			subItems.Add(subItem);
-
-			subItem = new ListViewItem.ListViewSubItem { Text = item.Measure.ToString(), Tag = item.Measure };
-			subItems.Add(subItem);
-
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
-
-			return subItems.ToArray();
+			return new List<CustomCell>()
+			{
+				CreateRow(item.Supplier.ToString(),item.Supplier),
+				CreateRow(item.Quantity.ToString(),item.Quantity),
+				CreateRow(item.Cost.ToString(),item.Cost),
+				CreateRow(item.CostCondition.ToString(),item.CostCondition),
+				CreateRow(item.Measure.ToString(),item.Measure),
+				CreateRow(author,author),
+			};
 		}
 
 		#endregion
 
-
-		protected override void SetGroupsToItems(int columnIndex)
-		{
-			itemsListView.Groups.Clear();
-			foreach (ListViewItem item in itemsListView.Items)
-			{
-				string temp;
-				if (item.Tag is PurchaseRequestRecord)
-				{
-					var p = (PurchaseRequestRecord)item.Tag;
-
-					if (_orderBySupplies)
-					{
-						temp = $"{p.Supplier}";
-						itemsListView.Groups.Add(temp, temp);
-						item.Group = itemsListView.Groups[temp];
-					}
-					else
-					{
-						temp = $"{p.Product?.PartNumber}";
-						itemsListView.Groups.Add(temp, temp);
-						item.Group = itemsListView.Groups[temp];
-					}
-				}
-			}
-		}
-
-		protected override void SortItems(int columnIndex)
-		{
-			SetGroupsToItems(columnIndex);
-		}
 	}
 }

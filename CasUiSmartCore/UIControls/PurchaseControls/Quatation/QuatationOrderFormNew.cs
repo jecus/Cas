@@ -314,14 +314,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			//сохранение запросного ордера
 			GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
 
-			if (listViewKits.ItemsCount <= 0)
-			{
-				MessageBox.Show("Please select a kits for initional order", (string)new GlobalTermsProvider()["SystemName"],
-					MessageBoxButtons.OK,
-					MessageBoxIcon.Exclamation);
-				return;
-			}
-
 			foreach (var record in _addedQuatationOrderRecords)
 			{
 				record.ParentPackageId = _order.ItemId;

@@ -691,11 +691,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.purchaseRecordListView1.Displayer = null;
 			this.purchaseRecordListView1.DisplayerText = null;
 			this.purchaseRecordListView1.Entity = null;
-			this.purchaseRecordListView1.IgnoreAutoResize = false;
 			this.purchaseRecordListView1.Location = new System.Drawing.Point(23, 64);
 			this.purchaseRecordListView1.Name = "purchaseRecordListView1";
 			this.purchaseRecordListView1.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.purchaseRecordListView1.ShowGroups = true;
 			this.purchaseRecordListView1.Size = new System.Drawing.Size(687, 511);
 			this.purchaseRecordListView1.TabIndex = 296;
 			this.purchaseRecordListView1.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.PurchaseRecordListView1_SelectedItemsChanged);
