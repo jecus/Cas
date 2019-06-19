@@ -13,6 +13,7 @@ using SmartCore.Entities.General.Interfaces;
 using System.Linq;
 using CAS.UI.UIControls.PurchaseControls.Initial;
 using SmartCore.Purchase;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
@@ -29,18 +30,18 @@ namespace CAS.UI.UIControls.PurchaseControls
         private CommonCollection<RequestForQuotation> _openPubQuotations = new CommonCollection<RequestForQuotation>();
         private CommonCollection<PurchaseOrder> _openPubPurchases = new CommonCollection<PurchaseOrder>();
 
-        private ContextMenuStrip _contextMenuStrip;
-        private ToolStripMenuItem _toolStripMenuItemCostConditions;
-        private ToolStripMenuItem _toolStripMenuItemCostConditionNew;
-        private ToolStripMenuItem _toolStripMenuItemCostConditionServiceable;
-        private ToolStripMenuItem _toolStripMenuItemCostConditionOverhaul;
-        private ToolStripMenuItem _toolStripMenuItemAddKits;
+        private RadDropDownMenu _contextMenuStrip;
+        private RadMenuItem _toolStripMenuItemCostConditions;
+        private RadMenuItem _toolStripMenuItemCostConditionNew;
+        private RadMenuItem _toolStripMenuItemCostConditionServiceable;
+        private RadMenuItem _toolStripMenuItemCostConditionOverhaul;
+        private RadMenuItem _toolStripMenuItemAddKits;
         //private ToolStripMenuItem _toolStripMenuItemOpenKitParentItem;
-        private ToolStripSeparator _toolStripSeparator1;
-        private ToolStripMenuItem _toolStripMenuItemComposeQuotationOrder;
-        private ToolStripMenuItem _toolStripMenuItemQuotations;
-        private ToolStripMenuItem _toolStripMenuItemComposePurchaseOrder;
-        private ToolStripMenuItem _toolStripMenuItemPurchases;
+        private RadMenuSeparatorItem _toolStripSeparator1;
+        private RadMenuItem _toolStripMenuItemComposeQuotationOrder;
+        private RadMenuItem _toolStripMenuItemQuotations;
+        private RadMenuItem _toolStripMenuItemComposePurchaseOrder;
+        private RadMenuItem _toolStripMenuItemPurchases;
 
         #endregion
         
@@ -109,26 +110,26 @@ namespace CAS.UI.UIControls.PurchaseControls
             if (_toolStripMenuItemComposeQuotationOrder != null) _toolStripMenuItemComposeQuotationOrder.Dispose();
             if (_toolStripMenuItemQuotations != null)
             {
-                foreach (ToolStripMenuItem item in _toolStripMenuItemQuotations.DropDownItems)
+                foreach (var item in _toolStripMenuItemQuotations.Items)
                 {
                     item.Click -= AddToQuotationOrderItemClick;
                 }
-                _toolStripMenuItemQuotations.DropDownItems.Clear();
+                _toolStripMenuItemQuotations.Items.Clear();
                 _toolStripMenuItemQuotations.Dispose();
             }
 
             if (_toolStripMenuItemComposePurchaseOrder != null) _toolStripMenuItemComposePurchaseOrder.Dispose();
             if (_toolStripMenuItemPurchases != null)
             {
-                foreach (ToolStripMenuItem item in _toolStripMenuItemPurchases.DropDownItems)
+                foreach (var item in _toolStripMenuItemPurchases.Items)
                 {
                     item.Click -= AddToPurchaseOrderItemClick;
                 }
-                _toolStripMenuItemPurchases.DropDownItems.Clear();
+                _toolStripMenuItemPurchases.Items.Clear();
                 _toolStripMenuItemPurchases.Dispose();
             }
 
-            if (_directivesViewer != null) _directivesViewer.DisposeView();
+            if (_directivesViewer != null) _directivesViewer.Dispose();
 
             Dispose(true);
         }
@@ -196,41 +197,41 @@ namespace CAS.UI.UIControls.PurchaseControls
 
             if (_toolStripMenuItemQuotations != null)
             {
-                foreach (ToolStripMenuItem item in _toolStripMenuItemQuotations.DropDownItems)
+                foreach (var item in _toolStripMenuItemQuotations.Items)
                 {
                     item.Click -= AddToQuotationOrderItemClick;
                 }
 
-                _toolStripMenuItemQuotations.DropDownItems.Clear();
+                _toolStripMenuItemQuotations.Items.Clear();
 
                 foreach (RequestForQuotation quotation in _openPubQuotations)
                 {
-                    ToolStripMenuItem item = new ToolStripMenuItem(quotation.Title);
+                    var item = new RadMenuItem(quotation.Title);
                     item.Click += AddToQuotationOrderItemClick;
                     item.Tag = quotation;
-                    _toolStripMenuItemQuotations.DropDownItems.Add(item);
+                    _toolStripMenuItemQuotations.Items.Add(item);
                 }
             }
             if (_toolStripMenuItemPurchases != null)
             {
-                foreach (ToolStripMenuItem item in _toolStripMenuItemPurchases.DropDownItems)
+                foreach (var item in _toolStripMenuItemPurchases.Items)
                 {
                     item.Click -= AddToPurchaseOrderItemClick;
                 }
 
-                _toolStripMenuItemPurchases.DropDownItems.Clear();
+                _toolStripMenuItemPurchases.Items.Clear();
 
                 foreach (RequestForQuotation quotation in _openPubQuotations)
                 {
-                    ToolStripMenuItem item = new ToolStripMenuItem(quotation.Title);
+                    var item = new RadMenuItem(quotation.Title);
                     item.Click += AddToPurchaseOrderItemClick;
                     item.Tag = quotation;
-                    _toolStripMenuItemPurchases.DropDownItems.Add(item);
+                    _toolStripMenuItemPurchases.Items.Add(item);
                 }
             }
 
             _directivesViewer.SetItemsArray(_currentItem.PackageRecords.ToArray());
-            headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
+            headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
             _directivesViewer.Focus();
         }
         #endregion
@@ -306,18 +307,18 @@ namespace CAS.UI.UIControls.PurchaseControls
 
         private void InitToolStripMenuItems()
         {
-            _contextMenuStrip = new ContextMenuStrip();
-            _toolStripMenuItemAddKits = new ToolStripMenuItem();
+            _contextMenuStrip = new RadDropDownMenu();
+            _toolStripMenuItemAddKits = new RadMenuItem();
             //_toolStripMenuItemOpenKitParentItem = new ToolStripMenuItem();
-            _toolStripMenuItemCostConditions = new ToolStripMenuItem();
-            _toolStripMenuItemCostConditionNew = new ToolStripMenuItem();
-            _toolStripMenuItemCostConditionServiceable = new ToolStripMenuItem();
-            _toolStripMenuItemCostConditionOverhaul = new ToolStripMenuItem();
-            _toolStripSeparator1 = new ToolStripSeparator();
-            _toolStripMenuItemComposeQuotationOrder = new ToolStripMenuItem();
-            _toolStripMenuItemQuotations = new ToolStripMenuItem();
-            _toolStripMenuItemComposePurchaseOrder = new ToolStripMenuItem();
-            _toolStripMenuItemPurchases = new ToolStripMenuItem();
+            _toolStripMenuItemCostConditions = new RadMenuItem();
+            _toolStripMenuItemCostConditionNew = new RadMenuItem();
+            _toolStripMenuItemCostConditionServiceable = new RadMenuItem();
+            _toolStripMenuItemCostConditionOverhaul = new RadMenuItem();
+            _toolStripSeparator1 = new RadMenuSeparatorItem();
+            _toolStripMenuItemComposeQuotationOrder = new RadMenuItem();
+            _toolStripMenuItemQuotations = new RadMenuItem();
+            _toolStripMenuItemComposePurchaseOrder = new RadMenuItem();
+            _toolStripMenuItemPurchases = new RadMenuItem();
             // 
             // contextMenuStrip
             // 
@@ -374,72 +375,24 @@ namespace CAS.UI.UIControls.PurchaseControls
             //
             _toolStripMenuItemPurchases.Text = "Add to Purchase Order";
 
-            _toolStripMenuItemCostConditions.DropDownItems.Add(_toolStripMenuItemCostConditionNew);
-            _toolStripMenuItemCostConditions.DropDownItems.Add(_toolStripMenuItemCostConditionServiceable);
-            _toolStripMenuItemCostConditions.DropDownItems.Add(_toolStripMenuItemCostConditionOverhaul);
+            _toolStripMenuItemCostConditions.Items.Add(_toolStripMenuItemCostConditionNew);
+            _toolStripMenuItemCostConditions.Items.Add(_toolStripMenuItemCostConditionServiceable);
+            _toolStripMenuItemCostConditions.Items.Add(_toolStripMenuItemCostConditionOverhaul);
 
             _contextMenuStrip.Items.Clear();
-            _contextMenuStrip.Opening += ContextMenuStripOpen;
-            _contextMenuStrip.Items.AddRange(new ToolStripItem[]
-                                                {
-                                                    _toolStripMenuItemAddKits,
+            
+            _contextMenuStrip.Items.AddRange(_toolStripMenuItemAddKits,
                                                     //_toolStripMenuItemOpenKitParentItem,
                                                     _toolStripSeparator1,
                                                     _toolStripMenuItemCostConditions,
-                                                    new ToolStripSeparator(), 
+                                                    new RadMenuSeparatorItem(), 
                                                     _toolStripMenuItemComposeQuotationOrder,
                                                     _toolStripMenuItemQuotations,
-                                                    new ToolStripSeparator(), 
+                                                    new RadMenuSeparatorItem(), 
                                                     _toolStripMenuItemComposePurchaseOrder,
-                                                    _toolStripMenuItemPurchases,
-                                                });
+                                                    _toolStripMenuItemPurchases
+                                                );
         }
-        #endregion
-
-        #region private void ContextMenuStripOpen(object sender,CancelEventArgs e)
-        /// <summary>
-        /// Проверка на выделение 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-        {
-            if (_directivesViewer.SelectedItems.Count <= 0)
-            {
-                //_toolStripMenuItemOpenKitParentItem.Enabled = false;
-                _toolStripMenuItemCostConditions.Enabled = false;
-            }
-            //else if (_directivesViewer.SelectedItems.Count == 1)
-            //{
-            //    _toolStripMenuItemCostConditions.Enabled = true;
-                
-            //    InitionalOrderRecord rec =
-            //        _currentRfQ.PackageRecords.FirstOrDefault(r => r.PackageItemId == _directivesViewer.SelectedItem.Product.ItemId);
-            //    if(rec != null)
-            //    {
-            //        _toolStripMenuItemCostConditionNew.Checked = (rec.CostCondition & (Int16) KitCostCondition.New)!=0;
-            //        _toolStripMenuItemCostConditionServiceable.Checked = (rec.CostCondition & (Int16)KitCostCondition.Serviceable) != 0;
-            //        _toolStripMenuItemCostConditionOverhaul.Checked = (rec.CostCondition & (Int16)KitCostCondition.Overhaul) != 0;
-            //    }
-                  
-            //}
-            //else
-            //{
-            //    _toolStripMenuItemCostConditions.Enabled = true;
-
-            //    List<InitionalOrderRecord> records =
-            //        _currentRfQ.PackageRecords.Where(rec => _directivesViewer.SelectedItems.Any(kit => rec.PackageItemId == kit.Product.ItemId)).ToList();
-
-            //    if (records.Count != 0)
-            //    {
-            //        _toolStripMenuItemCostConditionNew.Checked = records.Any(rec=> (rec.CostCondition & (Int16)KitCostCondition.New) != 0);
-            //        _toolStripMenuItemCostConditionServiceable.Checked = records.Any(rec => (rec.CostCondition & (Int16)KitCostCondition.Serviceable) != 0);
-            //        _toolStripMenuItemCostConditionOverhaul.Checked = records.Any(rec => (rec.CostCondition & (Int16)KitCostCondition.Overhaul) != 0);
-            //    }
-            //}
-            _toolStripMenuItemComposeQuotationOrder.Enabled = true;
-        }
-
         #endregion
 
         #region private void ToolStripMenuItemAddKitsClick(object sender, EventArgs e)
@@ -728,7 +681,7 @@ namespace CAS.UI.UIControls.PurchaseControls
         {
             if (_directivesViewer.SelectedItems.Count <= 0) return;
 
-            RequestForQuotation wp = (RequestForQuotation)((ToolStripMenuItem)sender).Tag;
+            RequestForQuotation wp = (RequestForQuotation)((RadMenuItem)sender).Tag;
 
             PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
         }
@@ -754,7 +707,7 @@ namespace CAS.UI.UIControls.PurchaseControls
         {
             if (_directivesViewer.SelectedItems.Count <= 0) return;
 
-            RequestForQuotation wp = (RequestForQuotation)((ToolStripMenuItem)sender).Tag;
+            RequestForQuotation wp = (RequestForQuotation)((RadMenuItem)sender).Tag;
 
             PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
         }
@@ -771,11 +724,21 @@ namespace CAS.UI.UIControls.PurchaseControls
                                         Location = new Point(panel1.Left, panel1.Top),
                                         Dock = DockStyle.Fill
                                     };
-            _directivesViewer.ItemListView.ContextMenuStrip = _contextMenuStrip;
+            _directivesViewer.CustomMenu = _contextMenuStrip;
 
             //события 
             _directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
-            panel1.Controls.Add(_directivesViewer);
+
+            _directivesViewer.MenuOpeningAction = () =>
+            {
+				if (_directivesViewer.SelectedItems.Count <= 0)
+				{
+					_toolStripMenuItemCostConditions.Enabled = false;
+				}
+				_toolStripMenuItemComposeQuotationOrder.Enabled = true;
+			};
+
+			panel1.Controls.Add(_directivesViewer);
         }
 
         #endregion
