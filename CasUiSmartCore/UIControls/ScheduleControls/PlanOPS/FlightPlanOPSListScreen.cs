@@ -11,6 +11,7 @@ using EFCore.DTO.General;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Schedule;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 {
@@ -22,10 +23,10 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 
 		FlightPlanOpsListView _directivesViewer;
 
-		private ContextMenuStrip _contextMenuStrip;
-		private ToolStripMenuItem _toolStripMenuItemCopy;
-		private ToolStripMenuItem _toolStripMenuItemOpen;
-		private ToolStripMenuItem _toolStripMenuItemOpenWithCalculate;
+		private RadDropDownMenu _contextMenuStrip;
+		private RadMenuItem _toolStripMenuItemCopy;
+		private RadMenuItem _toolStripMenuItemOpen;
+		private RadMenuItem _toolStripMenuItemOpenWithCalculate;
 
 		#endregion
 
@@ -58,7 +59,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			_directivesViewer.SetItemsArray(_initialFlightOpsArray.ToArray());
 			_directivesViewer.Focus();
 
-			headerControl.PrintButtonEnabled = _directivesViewer.ItemListView.Items.Count != 0;
+			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 		}
 
 		#endregion
@@ -91,12 +92,15 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 		{
 			_directivesViewer = new FlightPlanOpsListView();
 			_directivesViewer.TabIndex = 2;
-			_directivesViewer.IgnoreAutoResize = true;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
-			_directivesViewer.ContextMenuStrip = _contextMenuStrip;
-			_directivesViewer.IgnoreAutoResize = true;
+			_directivesViewer.CustomMenu = _contextMenuStrip;
 
+			_directivesViewer.MenuOpeningAction = () =>
+			{
+				_toolStripMenuItemCopy.Enabled = _toolStripMenuItemOpen.Enabled =
+					_toolStripMenuItemOpenWithCalculate.Enabled = _directivesViewer.SelectedItems.Count == 1;
+			};
 
 			panel1.Controls.Add(_directivesViewer);
 		}
@@ -107,10 +111,10 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new ContextMenuStrip();
-			_toolStripMenuItemCopy = new ToolStripMenuItem();
-			_toolStripMenuItemOpen = new ToolStripMenuItem();
-			_toolStripMenuItemOpenWithCalculate = new ToolStripMenuItem();
+			_contextMenuStrip = new RadDropDownMenu();
+			_toolStripMenuItemCopy = new RadMenuItem();
+			_toolStripMenuItemOpen = new RadMenuItem();
+			_toolStripMenuItemOpenWithCalculate = new RadMenuItem();
 
 			// 
 			// contextMenuStrip
@@ -134,15 +138,12 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			_toolStripMenuItemCopy.Click += CopyItemsClick;
 
 			_contextMenuStrip.Items.Clear();
-			_contextMenuStrip.Items.AddRange(new ToolStripItem[]
-			{
+			_contextMenuStrip.Items.AddRange(
 				_toolStripMenuItemOpen,
 				_toolStripMenuItemOpenWithCalculate,
-				new ToolStripSeparator(), 
+				new RadMenuSeparatorItem(), 
 				_toolStripMenuItemCopy
-			});
-
-			_contextMenuStrip.Opening += _contextMenuStrip_Opening;
+			);
 		}
 
 		private void OpenCalItemClick(object sender, EventArgs e)
@@ -170,11 +171,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 
 			InvokeDisplayerRequested(refE);
 		}
-
-		private void _contextMenuStrip_Opening(object sender, CancelEventArgs e)
-		{
-			_toolStripMenuItemCopy.Enabled = _toolStripMenuItemOpen.Enabled = _toolStripMenuItemOpenWithCalculate.Enabled = _directivesViewer.SelectedItems.Count == 1;
-		}
+		
 
 		private void CopyItemsClick(object sender, EventArgs e)
 		{
@@ -231,7 +228,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			{
 				try
 				{
-					_directivesViewer.ItemListView.BeginUpdate();
+					_directivesViewer.radGridView1.BeginUpdate();
 
 					foreach (var item in _directivesViewer.SelectedItems)
 					{
@@ -239,7 +236,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 						GlobalObjects.CasEnvironment.NewKeeper.Delete(item);
 					}
 
-					_directivesViewer.ItemListView.EndUpdate();
+					_directivesViewer.radGridView1.EndUpdate();
 				}
 				catch (Exception ex)
 				{
