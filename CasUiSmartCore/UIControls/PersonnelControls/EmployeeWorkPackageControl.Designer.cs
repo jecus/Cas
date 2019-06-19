@@ -78,11 +78,9 @@
 			this.employeeWorkPackageListView.Displayer = null;
 			this.employeeWorkPackageListView.DisplayerText = null;
 			this.employeeWorkPackageListView.Entity = null;
-			this.employeeWorkPackageListView.IgnoreAutoResize = false;
 			this.employeeWorkPackageListView.Location = new System.Drawing.Point(3, 47);
 			this.employeeWorkPackageListView.Name = "employeeWorkPackageListView";
 			this.employeeWorkPackageListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.employeeWorkPackageListView.ShowGroups = true;
 			this.employeeWorkPackageListView.Size = new System.Drawing.Size(1231, 503);
 			this.employeeWorkPackageListView.TabIndex = 0;
 			// 
