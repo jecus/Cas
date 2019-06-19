@@ -28,15 +28,18 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
+			Telerik.WinControls.UI.TableViewDefinition tableViewDefinition2 = new Telerik.WinControls.UI.TableViewDefinition();
 			this.radGridView1 = new Telerik.WinControls.UI.RadGridView();
 			this.telerikMetroBlueTheme1 = new Telerik.WinControls.Themes.TelerikMetroBlueTheme();
 			this.panelBottomContainer = new System.Windows.Forms.Panel();
 			this.labelTotal = new System.Windows.Forms.Label();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.radButton1 = new Telerik.WinControls.UI.RadButton();
+			((System.ComponentModel.ISupportInitialize)(this.radGridView1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.radGridView1.MasterTemplate)).BeginInit();
 			this.panelBottomContainer.SuspendLayout();
 			this.panel1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.radButton1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// radGridView1
@@ -49,7 +52,7 @@
 			// 
 			// 
 			this.radGridView1.MasterTemplate.AllowAddNewRow = false;
-			this.radGridView1.MasterTemplate.ViewDefinition = tableViewDefinition1;
+			this.radGridView1.MasterTemplate.ViewDefinition = tableViewDefinition2;
 			this.radGridView1.Name = "radGridView1";
 			this.radGridView1.ReadOnly = true;
 			// 
@@ -59,16 +62,11 @@
 			this.radGridView1.Size = new System.Drawing.Size(800, 575);
 			this.radGridView1.TabIndex = 0;
 			this.radGridView1.ThemeName = "TelerikMetroBlue";
-			this.radGridView1.DoubleClick += RadGridView1_DoubleClick;
-			this.radGridView1.KeyDown += RadGridView1_KeyDown;
-			this.radGridView1.ContextMenuOpening += RadGridView1_ContextMenuOpening;
-			this.radGridView1.SelectionChanged += RadGridView1_SelectionChanged;
-			this.radGridView1.CellClick += RadGridView1_CellClick;
-			this.radGridView1.GroupSummaryEvaluate += RadGridView1_GroupSummaryEvaluate;
 			// 
 			// panelBottomContainer
 			// 
 			this.panelBottomContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this.panelBottomContainer.Controls.Add(this.radButton1);
 			this.panelBottomContainer.Controls.Add(this.labelTotal);
 			this.panelBottomContainer.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.panelBottomContainer.Location = new System.Drawing.Point(0, 575);
@@ -76,14 +74,14 @@
 			this.panelBottomContainer.Size = new System.Drawing.Size(800, 25);
 			this.panelBottomContainer.TabIndex = 3;
 			// 
-			// label1
+			// labelTotal
 			// 
 			this.labelTotal.AutoSize = true;
 			this.labelTotal.Dock = System.Windows.Forms.DockStyle.Right;
 			this.labelTotal.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.labelTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.labelTotal.Location = new System.Drawing.Point(722, 0);
-			this.labelTotal.Name = "label1";
+			this.labelTotal.Name = "labelTotal";
 			this.labelTotal.Padding = new System.Windows.Forms.Padding(0, 5, 25, 0);
 			this.labelTotal.Size = new System.Drawing.Size(78, 22);
 			this.labelTotal.TabIndex = 0;
@@ -99,6 +97,16 @@
 			this.panel1.Size = new System.Drawing.Size(800, 575);
 			this.panel1.TabIndex = 5;
 			// 
+			// radButton1
+			// 
+			this.radButton1.Location = new System.Drawing.Point(4, 1);
+			this.radButton1.Name = "radButton1";
+			this.radButton1.Size = new System.Drawing.Size(110, 24);
+			this.radButton1.TabIndex = 1;
+			this.radButton1.Text = "Export to Excel";
+			this.radButton1.ThemeName = "TelerikMetroBlue";
+			this.radButton1.Click += new System.EventHandler(this.RadButton1_Click);
+			// 
 			// BaseGridViewControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -108,9 +116,11 @@
 			this.Name = "BaseGridViewControl";
 			this.Size = new System.Drawing.Size(800, 600);
 			((System.ComponentModel.ISupportInitialize)(this.radGridView1.MasterTemplate)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.radGridView1)).EndInit();
 			this.panelBottomContainer.ResumeLayout(false);
 			this.panelBottomContainer.PerformLayout();
 			this.panel1.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.radButton1)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -122,5 +132,6 @@
 		private System.Windows.Forms.Panel panelBottomContainer;
 		public System.Windows.Forms.Label labelTotal;
 		private System.Windows.Forms.Panel panel1;
+		private Telerik.WinControls.UI.RadButton radButton1;
 	}
 }

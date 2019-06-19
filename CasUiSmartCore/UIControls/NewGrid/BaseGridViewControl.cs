@@ -15,6 +15,7 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
 using Telerik.WinControls.Data;
+using Telerik.WinControls.Export;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.NewGrid
@@ -703,6 +704,33 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#endregion
 
+		#region Export
+
+		private void RadButton1_Click(object sender, EventArgs e)
+		{
+			var sfd = new SaveFileDialog();
+			sfd.Filter = ".xlsx Files (*.xlsx)|*.xlsx";
+
+			if (sfd.ShowDialog() == DialogResult.OK)
+			{
+				var spreadStreamExport = new GridViewSpreadStreamExport(radGridView1);
+				spreadStreamExport.ExportVisualSettings = true;
+				spreadStreamExport.FreezeHeaderRow = true;
+				spreadStreamExport.CellFormatting += SpreadStreamExport_CellFormatting;
+				spreadStreamExport.RunExport(sfd.FileName,  new SpreadStreamExportRenderer());
+			}
+			
+		}
+
+		private void SpreadStreamExport_CellFormatting(object sender, SpreadStreamCellFormattingEventArgs e)
+		{
+			e.CellStyleInfo.LeftBorder = Color.Black;
+			e.CellStyleInfo.RightBorder = Color.Black;
+			e.CellStyleInfo.BottomBorder = Color.Black;
+			e.CellStyleInfo.TopBorder = Color.Black;
+		}
+
+		#endregion
 	}
 
 
