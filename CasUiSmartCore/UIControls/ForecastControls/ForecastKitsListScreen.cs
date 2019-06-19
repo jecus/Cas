@@ -391,19 +391,6 @@ namespace CAS.UI.UIControls.ForecastControls
 
 	    #endregion
 
-        #region private void ContextMenuStripOpen(object sender,CancelEventArgs e)
-        /// <summary>
-        /// Проверка на выделение 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-        {
-            
-        }
-
-        #endregion
-
         #region private void CreateQuotationOrder()
 
         private void CreateQuotationOrder()
