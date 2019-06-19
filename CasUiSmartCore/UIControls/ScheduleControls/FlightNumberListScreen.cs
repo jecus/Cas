@@ -20,6 +20,7 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.Schedule;
 using SmartCore.Filters;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.ScheduleControls
 {
@@ -47,11 +48,11 @@ namespace CAS.UI.UIControls.ScheduleControls
 
 		private FlightNumberScreenType _screenType;
 
-		private ContextMenuStrip _contextMenuStrip;
-		private ToolStripMenuItem _toolStripMenuItemCreateTrip;
-		private ToolStripMenuItem _toolStripMenuItemCopy;
-		private ToolStripMenuItem _toolStripMenuItemPaste;
-		private ToolStripSeparator _toolStripSeparator1;
+		private RadDropDownMenu _contextMenuStrip;
+		private RadMenuItem _toolStripMenuItemCreateTrip;
+		private RadMenuItem _toolStripMenuItemCopy;
+		private RadMenuItem _toolStripMenuItemPaste;
+		private RadMenuSeparatorItem _toolStripSeparator1;
 
 		#endregion
 
@@ -137,7 +138,7 @@ namespace CAS.UI.UIControls.ScheduleControls
 			_directivesViewer.SetItemsArray(_result.ToArray());
 	        _directivesViewer.Focus();
 
-            headerControl.PrintButtonEnabled = _directivesViewer.ItemListView.Items.Count != 0;
+            headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
         }
         #endregion
 
@@ -217,15 +218,20 @@ namespace CAS.UI.UIControls.ScheduleControls
         {
 	        _directivesViewer = new FlightNumberListView(_screenType);
 	        _directivesViewer.TabIndex = 2;
-	        _directivesViewer.IgnoreAutoResize = true;
-			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
+	        _directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 	        _directivesViewer.Dock = DockStyle.Fill;
-	        _directivesViewer.ContextMenuStrip = _contextMenuStrip;
-			_directivesViewer.IgnoreAutoResize = true;
+	        _directivesViewer.CustomMenu = _contextMenuStrip;
 
 			//_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+			
+			_directivesViewer.MenuOpeningAction = () =>
+			{
+				if (_directivesViewer.SelectedItems.All(i => i is FlightNumber))
+					_toolStripMenuItemCopy.Enabled = true;
+				else _toolStripMenuItemCopy.Enabled = false;
+			};
 
-            panel1.Controls.Add(_directivesViewer);
+			panel1.Controls.Add(_directivesViewer);
         }
 
 		#endregion
@@ -244,11 +250,11 @@ namespace CAS.UI.UIControls.ScheduleControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new ContextMenuStrip();
-			_toolStripMenuItemCreateTrip = new ToolStripMenuItem();
-			_toolStripMenuItemCopy = new ToolStripMenuItem();
-			_toolStripMenuItemPaste = new ToolStripMenuItem();
-			_toolStripSeparator1 = new ToolStripSeparator();
+			_contextMenuStrip = new RadDropDownMenu();
+			_toolStripMenuItemCreateTrip = new RadMenuItem();
+			_toolStripMenuItemCopy = new RadMenuItem();
+			_toolStripMenuItemPaste = new RadMenuItem();
+			_toolStripSeparator1 = new RadMenuSeparatorItem();
 
 			// 
 			// contextMenuStrip
@@ -274,14 +280,12 @@ namespace CAS.UI.UIControls.ScheduleControls
 			_toolStripMenuItemPaste.Click += PasteItemsClick;
 
 			_contextMenuStrip.Items.Clear();
-			_contextMenuStrip.Items.AddRange(new ToolStripItem[]
-			{
+			_contextMenuStrip.Items.AddRange(
 				_toolStripMenuItemCreateTrip,
 				_toolStripSeparator1,
 				_toolStripMenuItemCopy,
 				_toolStripMenuItemPaste
-			});
-			_contextMenuStrip.Opening += ContextMenuStripOpen;
+			);
 		}
 
 		#endregion
@@ -298,17 +302,6 @@ namespace CAS.UI.UIControls.ScheduleControls
 
 			var form = new TrackForm(_directivesViewer.SelectedItems);
 			form.ShowDialog();
-		}
-
-		#endregion
-
-		#region private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-
-		private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-		{
-			if (_directivesViewer.SelectedItems.All(i => i is FlightNumber))
-				_toolStripMenuItemCopy.Enabled = true;
-			else _toolStripMenuItemCopy.Enabled = false;
 		}
 
 		#endregion
@@ -511,7 +504,7 @@ namespace CAS.UI.UIControls.ScheduleControls
 
 			if (confirmResult == DialogResult.Yes)
 			{
-				_directivesViewer.ItemListView.BeginUpdate();
+				_directivesViewer.radGridView1.BeginUpdate();
 				foreach (var directive in _directivesViewer.SelectedItems)
 				{
 					try
@@ -524,7 +517,7 @@ namespace CAS.UI.UIControls.ScheduleControls
 						return;
 					}
 				}
-				_directivesViewer.ItemListView.EndUpdate();
+				_directivesViewer.radGridView1.EndUpdate();
 				AnimatedThreadWorker.RunWorkerAsync();
 			}
 		}
