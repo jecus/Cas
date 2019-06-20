@@ -201,6 +201,8 @@ namespace CAS.UI.UIControls.NewGrid
 			radGridView1.EnableFiltering = true;
 			radGridView1.MasterTemplate.ShowHeaderCellButtons = true;
 			radGridView1.MasterTemplate.ShowFilteringRow = false;
+
+			this.radGridView1.AllowSearchRow = true;
 		}
 
 		#endregion
