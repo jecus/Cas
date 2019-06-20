@@ -356,8 +356,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			//processingListView
 			//
 	        //this.processingListView.AutoSize = true;
-	        this.processingListView.IgnoreAutoResize = true;
-			this.processingListView.Name = "processingListView";
+	        this.processingListView.Name = "processingListView";
 	        this.processingListView.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 	        this.processingListView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
 	        //this.processingListView.MinimumSize = new System.Drawing.Size(1206, 300);
