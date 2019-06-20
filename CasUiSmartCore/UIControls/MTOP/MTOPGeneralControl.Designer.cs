@@ -132,11 +132,9 @@ namespace CAS.UI.UIControls.MTOP
 			this.mtopCheckListView1.Displayer = null;
 			this.mtopCheckListView1.DisplayerText = null;
 			this.mtopCheckListView1.Entity = null;
-			this.mtopCheckListView1.IgnoreAutoResize = false;
 			this.mtopCheckListView1.Location = new System.Drawing.Point(3, 53);
 			this.mtopCheckListView1.Name = "mtopCheckListView1";
 			this.mtopCheckListView1.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.mtopCheckListView1.ShowGroups = true;
 			this.mtopCheckListView1.Size = new System.Drawing.Size(924, 247);
 			this.mtopCheckListView1.TabIndex = 9;
 			this.mtopCheckListView1.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.mtopCheckListView1_SelectedItemsChanged_1);
