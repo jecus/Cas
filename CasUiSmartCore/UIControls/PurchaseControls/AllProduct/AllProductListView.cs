@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
@@ -51,6 +52,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		protected override void SetHeaders()
         {
+			AddColumn("Type", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Name", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Part Number", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Alt Part Number", (int)(radGridView1.Width * 0.20f));
@@ -71,6 +73,7 @@ namespace CAS.UI.UIControls.PurchaseControls
             var subItems = new List<CustomCell>();
             var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
+            subItems.Add(CreateRow(item.ProductType.ToString(), item.ProductType));
             subItems.Add(CreateRow(item.Name, item.Name));
             subItems.Add(CreateRow(item.PartNumber, item.PartNumber));
             subItems.Add(CreateRow(item.AltPartNumber, item.AltPartNumber));
@@ -88,18 +91,14 @@ namespace CAS.UI.UIControls.PurchaseControls
 			return subItems;
         }
 
-        //protected override void SetGroupsToItems(int columnIndex)
-        //{
-        //    itemsListView.Groups.Clear();
-        //    foreach (var item in ListViewItemList)
-        //    {
-        //        var product = item.Tag as Product;
-        //        var temp = product.ProductType.ToString();
+        #region Overrides of BaseGridViewControl<InitialOrderRecord>
 
-        //        itemsListView.Groups.Add(temp, temp);
-        //        item.Group = itemsListView.Groups[temp];
-        //    }
-        //}
-        
-    }
+        protected override void GroupingItems()
+        {
+	        Grouping("Type");
+        }
+
+        #endregion
+
+	}
 }
