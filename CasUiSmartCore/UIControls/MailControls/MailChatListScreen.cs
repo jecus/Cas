@@ -12,6 +12,7 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Mail;
 using SmartCore.Filters;
 using SmartCore.Queries;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.MailControls
 {
@@ -24,9 +25,9 @@ namespace CAS.UI.UIControls.MailControls
 		private ICommonCollection<MailChats> _resultDocumentArray = new CommonCollection<MailChats>();
 		private CommonFilterCollection _filter;
 
-		private ContextMenuStrip _contextMenuStrip;
-		private ToolStripMenuItem _toolStripMenuItemEdit;
-		private ToolStripMenuItem _toolStripMenuItemDelete;
+		private RadDropDownMenu _contextMenuStrip;
+		private RadMenuItem _toolStripMenuItemEdit;
+		private RadMenuItem _toolStripMenuItemDelete;
 
 		#endregion
 
@@ -106,7 +107,22 @@ namespace CAS.UI.UIControls.MailControls
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
-			_directivesViewer.ContextMenuStrip = _contextMenuStrip;
+			_directivesViewer.CustomMenu = _contextMenuStrip;
+
+			_directivesViewer.MenuOpeningAction = () =>
+			{
+				if (_directivesViewer.SelectedItem == null)
+				{
+					_toolStripMenuItemEdit.Enabled = false;
+					_toolStripMenuItemDelete.Enabled = _directivesViewer.SelectedItems.Count > 0;
+				}
+				else
+				{
+					_toolStripMenuItemDelete.Enabled = true;
+					_toolStripMenuItemEdit.Enabled = true;
+				}
+			};
+
 			panel1.Controls.Add(_directivesViewer);
 		}
 
@@ -116,9 +132,9 @@ namespace CAS.UI.UIControls.MailControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new ContextMenuStrip();
-			_toolStripMenuItemEdit = new ToolStripMenuItem();
-			_toolStripMenuItemDelete = new ToolStripMenuItem();
+			_contextMenuStrip = new RadDropDownMenu();
+			_toolStripMenuItemEdit = new RadMenuItem();
+			_toolStripMenuItemDelete = new RadMenuItem();
 
 			// 
 			// contextMenuStrip
@@ -136,32 +152,11 @@ namespace CAS.UI.UIControls.MailControls
 			_toolStripMenuItemEdit.Text = "Edit";
 			_toolStripMenuItemEdit.Click += _toolStripMenuItemEdit_Click;
 
-			_contextMenuStrip.Items.AddRange(new ToolStripItem[]
-			{
+			_contextMenuStrip.Items.AddRange(
 				_toolStripMenuItemEdit,
-				new ToolStripSeparator(),
+				new RadMenuSeparatorItem(), 
 				_toolStripMenuItemDelete
-			});
-
-			_contextMenuStrip.Opening += _contextMenuStrip_Opening;
-		}
-
-		#endregion
-
-		#region private void _contextMenuStrip_Opening(object sender, CancelEventArgs e)
-
-		private void _contextMenuStrip_Opening(object sender, CancelEventArgs e)
-		{
-			if (_directivesViewer.SelectedItem == null)
-			{
-				_toolStripMenuItemEdit.Enabled = false;
-				_toolStripMenuItemDelete.Enabled = _directivesViewer.SelectedItems.Count > 0;
-			}
-			else
-			{
-				_toolStripMenuItemDelete.Enabled = true;
-				_toolStripMenuItemEdit.Enabled = true;
-			}
+			);
 		}
 
 		#endregion
