@@ -63,29 +63,18 @@ namespace CAS.UI.UIControls.DirectivesControls
         }
 		#endregion
 
-		#region protected override SetGroupsToItems(int columnIndex)
-		//protected override void SetGroupsToItems(int columnIndex)
-  //      {
-		//	//TODO:(Evgenii Babak) вынести в ListViewGroupHelper 
-  //          itemsListView.Groups.Clear();
-  //          foreach (ListViewItem t in ListViewItemList)
-  //          {
-  //              string groupName;
-  //              if (t.Tag is DeferredItem)
-  //              {
-  //                  groupName = ((DeferredItem)t.Tag).DeferredCategory.ToString();
-  //              }
-  //              else continue;
+		#region Overrides of BaseGridViewControl<InitialOrderRecord>
 
-  //              itemsListView.Groups.Add(groupName, groupName);
-  //              t.Group = itemsListView.Groups[groupName];
-  //          }
-  //      }
-        #endregion
+		protected override void GroupingItems()
+		{
+			Grouping("Category");
+		}
 
-        #region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Directive item)
+		#endregion
 
-        protected override List<CustomCell> GetListViewSubItems(Directive item)
+		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Directive item)
+
+		protected override List<CustomCell> GetListViewSubItems(Directive item)
         {
             var subItems = new List<CustomCell>();
             var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);

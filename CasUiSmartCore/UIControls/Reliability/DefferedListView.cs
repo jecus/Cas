@@ -42,7 +42,8 @@ namespace CAS.UI.UIControls.Reliability
         /// </summary>
         protected override void SetHeaders()
         {
-			AddColumn("Deffered:", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Aircraft", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Deffered", (int)(radGridView1.Width * 0.24f));
 			AddColumn("SB No", (int)(radGridView1.Width * 0.24f));
 			AddColumn("EO No", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.24f));
@@ -67,32 +68,18 @@ namespace CAS.UI.UIControls.Reliability
         }
 		#endregion
 
-		#region protected override SetGroupsToItems(int columnIndex)
-		//protected override void SetGroupsToItems(int columnIndex)
-  //      {
-		//	//TODO:(Evgenii Babak) вынести в ListViewGroupHelper 
-  //          itemsListView.Groups.Clear();
-  //          foreach (ListViewItem t in ListViewItemList)
-  //          {
-  //              string groupName;
-  //              if (t.Tag is DeferredItem)
-  //              {
-	 //               var deffered = ((DeferredItem) t.Tag);
-	 //               var aircraft = GlobalObjects.AircraftsCore.GetAircraftById(deffered.ParentBaseComponent.ParentAircraftId);
+		#region Overrides of BaseGridViewControl<InitialOrderRecord>
 
-		//			groupName = $"{aircraft}";
-  //              }
-  //              else continue;
+		protected override void GroupingItems()
+		{
+			Grouping("Aircraft");
+		}
 
-  //              itemsListView.Groups.Add(groupName, groupName);
-  //              t.Group = itemsListView.Groups[groupName];
-  //          }
-  //      }
-        #endregion
+		#endregion
 
-        #region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Directive item)
+		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Directive item)
 
-        protected override List<CustomCell> GetListViewSubItems(Directive item)
+		protected override List<CustomCell> GetListViewSubItems(Directive item)
         {
             var subItems = new List<CustomCell>();
             var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
@@ -169,6 +156,16 @@ namespace CAS.UI.UIControls.Reliability
             var applicabilityString = pd.Applicability;
             var ata = pd.ATAChapter;
 
+            var groupName = "";
+            if (item is DeferredItem)
+			{
+				var aircraft = GlobalObjects.AircraftsCore.GetAircraftById(item.ParentBaseComponent.ParentAircraftId);
+
+				groupName = $"{aircraft}";
+			}
+
+
+			subItems.Add(CreateRow(groupName, groupName));
             subItems.Add(CreateRow(titleString, titleString));
             subItems.Add(CreateRow(sbString, sbString));
             subItems.Add(CreateRow(eoString, eoString));
