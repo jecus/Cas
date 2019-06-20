@@ -401,7 +401,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this._documentsReferenceContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this._documentsReferenceContainer.Name = "_documentsReferenceContainer";
 			this._documentsReferenceContainer.ReferenceLink = this.LinkRigestry;
-			this._documentsReferenceContainer.ReferenceLink02 = this.LinkRecords;
+			//this._documentsReferenceContainer.ReferenceLink02 = this.LinkRecords;
 			this._documentsReferenceContainer.ReferenceLink03 = this.LinkInternalDocuments;
 			this._documentsReferenceContainer.ReferenceLink04 = this.LinkNomenclatures;
 			this._documentsReferenceContainer.ReferenceLink05 = null;
