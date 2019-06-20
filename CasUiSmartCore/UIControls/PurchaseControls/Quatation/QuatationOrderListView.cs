@@ -22,6 +22,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		{
 			AddColumn("P/N", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.2f));
+			AddColumn("GoodClass", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Suppliers", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Measure", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Quantity", (int)(radGridView1.Width * 0.2f));
@@ -37,6 +38,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 			subItems.Add(CreateRow(item.Product?.PartNumber, item.Product?.PartNumber));
 			subItems.Add(CreateRow(item.Product?.Description, item.Product?.Description));
+			CreateRow(item.Product?.GoodsClass?.ShortName ?? "Another accessory", item.Product?.GoodsClass),
 			subItems.Add(CreateRow(item.Suppliers?.ToString(), item.Suppliers?.ToString()));
 			subItems.Add(CreateRow(item.Measure.ToString(), item.Measure.ToString()));
 			subItems.Add(CreateRow(item.Quantity.ToString(), item.Quantity.ToString()));
@@ -44,5 +46,14 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 			return subItems;
 		}
+
+		#region Overrides of BaseGridViewControl<InitialOrderRecord>
+
+		protected override void GroupingItems()
+		{
+			Grouping("GoodClass");
+		}
+
+		#endregion
 	}
 }
