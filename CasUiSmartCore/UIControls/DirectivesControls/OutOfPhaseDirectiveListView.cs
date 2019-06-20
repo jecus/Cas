@@ -66,15 +66,7 @@ namespace CAS.UI.UIControls.DirectivesControls
         }
 		#endregion
 
-		#region protected override SetGroupsToItems(int columnIndex)
-		//protected override void SetGroupsToItems(int columnIndex)
-  //      {
-  //          //группировать данные эдементы не нужно
-  //          itemsListView.Groups.Clear();
-  //      }
-        #endregion
-
-        #region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Directive item)
+		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Directive item)
 
         protected override List<CustomCell> GetListViewSubItems(Directive item)
         {
