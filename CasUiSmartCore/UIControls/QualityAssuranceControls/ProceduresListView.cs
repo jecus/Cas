@@ -8,6 +8,7 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Comparers;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
@@ -20,7 +21,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
     ///<summary>
     /// список для отображения ордеров запроса
     ///</summary>
-    public partial class ProceduresListView : BaseListViewControl<Procedure>
+    public partial class ProceduresListView : BaseGridViewControl<Procedure>
     {
         #region Fields
 
@@ -47,66 +48,25 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
         /// </summary>
         protected override void SetHeaders()
         {
-            ColumnHeaderList.Clear();
-
-            ColumnHeader columnHeader = new ColumnHeader { Width = (int) (itemsListView.Width*0.12f), Text = "Title" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Description" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Rating" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Level" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Audited Object" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Proc. Type" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "1st. Perf." };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Rpt. Intv." };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Next" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Remain/Overdue" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.05f), Text = "Last" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Status" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int) (itemsListView.Width*0.12f),  Text = "Ref. Docs." };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.05f), Text = "Kit"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.08f), Text = "M.H."};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.08f), Text = "Cost"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.12f), Text = "Remarks"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader {Width = (int) (itemsListView.Width*0.12f), Text = "Hidden remarks"};
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
-            ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+			AddColumn("Title", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Description", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Rating", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Level", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Audited Object", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Proc. Type", (int)(radGridView1.Width * 0.16f));
+			AddColumn("1st. Perf.", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Rpt. Intv.", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Next", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Remain/Overdue", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Last", (int)(radGridView1.Width * 0.10f));
+			AddColumn("Status", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Ref. Docs.", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Kit", (int)(radGridView1.Width * 0.10f));
+			AddColumn("M.H.", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Cost", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Remarks", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Hidden remarks", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
         }
 		#endregion
 
@@ -114,22 +74,23 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 		/// <summary>
 		/// 
 		/// </summary>
-		protected override void SetGroupsToItems(int columnIndex)
-        {
-        }
+		//protected override void SetGroupsToItems(int columnIndex)
+        //{
+        //}
         #endregion
 
         #region protected override void SetItemColor(ListViewItem listViewItem, Procedure item)
+		//TODO COLOR!
         /// <summary>
         /// 
         /// </summary>
         /// <param name="listViewItem"></param>
         /// <param name="item"></param>
-        protected override void SetItemColor(ListViewItem listViewItem, Procedure item)
-        {
-            listViewItem.ForeColor = Color.Black;
-            base.SetItemColor(listViewItem, item);
-        }
+        //protected override void SetItemColor(ListViewItem listViewItem, Procedure item)
+        //{
+        //    listViewItem.ForeColor = Color.Black;
+        //    base.SetItemColor(listViewItem, item);
+        //}
         #endregion
 
         #region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Procedure item)
@@ -138,9 +99,9 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Procedure item)
+        protected override List<CustomCell> GetListViewSubItems(Procedure item)
         {
-            List<ListViewItem.ListViewSubItem> subItems = new List<ListViewItem.ListViewSubItem>();
+            var subItems = new List<CustomCell>();
 
             //////////////////////////////////////////////////////////////////////////////////////
             //         Определение последнего выполнения директивы и KitRequiered               //
@@ -214,27 +175,27 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
             string reqiredDocuments = item.DocumentReferences.Count > 0 ? item.DocumentReferences.Aggregate("", (current, i) => current + (i.Document + "; ")): "N/A";
             DirectiveStatus status = item.Status;
 
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = title, Tag = title });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = description, Tag = description });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ProcedureRating.ToString(), Tag = item.ProcedureRating });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Level.ToString(), Tag = item.Level });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.AuditedObject, Tag = item.AuditedObject });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ProcedureType.ToString(), Tag = item.ProcedureType });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = firstPerformanceString, Tag = firstPerformanceString });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Threshold.RepeatInterval.ToString(), Tag = item.Threshold.RepeatInterval });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = nextComplianceString, Tag = nextComplianceDate });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = nextRemainString, Tag = nextRemainString });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = lastPerformanceString, Tag = lastComplianceDate });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = status.ToString(), Tag = status });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = reqiredDocuments, Tag = reqiredDocuments });
-            subItems.Add( new ListViewItem.ListViewSubItem { Text = kitRequieredString, Tag = kitRequieredString });
-            subItems.Add( new ListViewItem.ListViewSubItem { Text = item.ManHours <= 0 ? "" : item.ManHours.ToString(), Tag = item.ManHours });
-            subItems.Add( new ListViewItem.ListViewSubItem { Text = item.Cost <= 0 ? "" : item.Cost.ToString(), Tag = item.Cost });
-            subItems.Add( new ListViewItem.ListViewSubItem { Text = remarksString, Tag = remarksString });
-            subItems.Add( new ListViewItem.ListViewSubItem { Text = hiddenRemarksString, Tag = hiddenRemarksString});
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
+			subItems.Add(CreateRow(title, title ));
+			subItems.Add(CreateRow(description, description ));
+			subItems.Add(CreateRow(item.ProcedureRating.ToString(), item.ProcedureRating ));
+			subItems.Add(CreateRow(item.Level.ToString(), item.Level ));
+			subItems.Add(CreateRow(item.AuditedObject, item.AuditedObject ));
+			subItems.Add(CreateRow(item.ProcedureType.ToString(), item.ProcedureType ));
+			subItems.Add(CreateRow(firstPerformanceString, firstPerformanceString ));
+			subItems.Add(CreateRow(item.Threshold.RepeatInterval.ToString(), item.Threshold.RepeatInterval ));
+			subItems.Add(CreateRow(nextComplianceString, nextComplianceDate ));
+			subItems.Add(CreateRow(nextRemainString, nextRemainString ));
+			subItems.Add(CreateRow(lastPerformanceString, lastComplianceDate ));
+			subItems.Add(CreateRow(status.ToString(), status ));
+			subItems.Add(CreateRow(reqiredDocuments, reqiredDocuments ));
+			subItems.Add(CreateRow(kitRequieredString, kitRequieredString ));
+			subItems.Add(CreateRow(item.ManHours <= 0 ? "" : item.ManHours.ToString(), item.ManHours ));
+            subItems.Add(CreateRow(item.Cost <= 0 ? "" : item.Cost.ToString(), item.Cost ));
+			subItems.Add(CreateRow(remarksString, remarksString ));
+			subItems.Add(CreateRow(hiddenRemarksString, hiddenRemarksString ));
+			subItems.Add(CreateRow(author, author ));
 
-			return subItems.ToArray();
+			return subItems;
         }
 
         #endregion
@@ -244,44 +205,44 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
         /// 
         /// </summary>
         /// <param name="columnIndex"></param>
-        protected override void SortItems(int columnIndex)
-        {
-            if (OldColumnIndex != columnIndex)
-                SortMultiplier = -1;
-            if (SortMultiplier == 1)
-                SortMultiplier = -1;
-            else
-                SortMultiplier = 1;
-            itemsListView.Items.Clear();
-            SetGroupsToItems(columnIndex);
+     //   protected override void SortItems(int columnIndex)
+     //   {
+     //       if (OldColumnIndex != columnIndex)
+     //           SortMultiplier = -1;
+     //       if (SortMultiplier == 1)
+     //           SortMultiplier = -1;
+     //       else
+     //           SortMultiplier = 1;
+     //       itemsListView.Items.Clear();
+     //       SetGroupsToItems(columnIndex);
 
-            List<ListViewItem> resultList = new List<ListViewItem>();
+     //       List<ListViewItem> resultList = new List<ListViewItem>();
 
-            if (columnIndex == 8)
-            {
-                resultList.AddRange(ListViewItemList.Where(item => item.Tag is Procedure));
+     //       if (columnIndex == 8)
+     //       {
+     //           resultList.AddRange(ListViewItemList.Where(item => item.Tag is Procedure));
 
-                resultList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
+     //           resultList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
 
-                itemsListView.Groups.Clear();
-                foreach (var item in resultList)
-                {
-					var temp = ListViewGroupHelper.GetGroupStringByPerformanceDate(item.Tag);
-					itemsListView.Groups.Add(temp, temp);
-                    item.Group = itemsListView.Groups[temp];
-                }
+     //           itemsListView.Groups.Clear();
+     //           foreach (var item in resultList)
+     //           {
+					//var temp = ListViewGroupHelper.GetGroupStringByPerformanceDate(item.Tag);
+					//itemsListView.Groups.Add(temp, temp);
+     //               item.Group = itemsListView.Groups[temp];
+     //           }
 
-            }
-            else
-            {
-                itemsListView.Groups.Clear();
-                //добавление остальных подзадач
-                resultList.AddRange(ListViewItemList.Where(item => item.Tag is Procedure));
-                resultList.Sort(new DirectiveListViewComparer(columnIndex, SortMultiplier));
-            }
-            itemsListView.Items.AddRange(resultList.ToArray());
-            OldColumnIndex = columnIndex;
-        }
+     //       }
+     //       else
+     //       {
+     //           itemsListView.Groups.Clear();
+     //           //добавление остальных подзадач
+     //           resultList.AddRange(ListViewItemList.Where(item => item.Tag is Procedure));
+     //           resultList.Sort(new DirectiveListViewComparer(columnIndex, SortMultiplier));
+     //       }
+     //       itemsListView.Items.AddRange(resultList.ToArray());
+     //       OldColumnIndex = columnIndex;
+     //   }
 
         #endregion
 

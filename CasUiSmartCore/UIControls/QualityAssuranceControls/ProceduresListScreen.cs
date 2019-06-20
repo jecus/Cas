@@ -22,6 +22,7 @@ using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.Quality;
 using SmartCore.Filters;
 using SmartCore.Purchase;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.QualityAssuranceControls
 {
@@ -59,18 +60,18 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
         private ToolStripMenuItem itemPrintReportAMP;
         private ToolStripMenuItem itemPrintWorkscope;
 
-        private ContextMenuStrip _contextMenuStrip;
-        private ToolStripMenuItem _toolStripMenuItemOpen;
-        private ToolStripMenuItem _toolStripMenuItemComposeWorkPackage;
-        private ToolStripMenuItem _toolStripMenuItemComposeQuotationOrder;
-        private ToolStripMenuItem _toolStripMenuItemDelete;
-        private ToolStripMenuItem _toolStripMenuItemHighlight;
-        private ToolStripMenuItem _toolStripMenuItemShowTaskCard;
-        private ToolStripSeparator _toolStripSeparator1;
-        private ToolStripSeparator _toolStripSeparator2;
-        private ToolStripSeparator _toolStripSeparator4;
-        private ToolStripMenuItem _toolStripMenuItemsWorkPackages;
-        private ToolStripMenuItem _toolStripMenuItemQuotations;
+        private RadDropDownMenu _contextMenuStrip;
+        private RadMenuItem _toolStripMenuItemOpen;
+        private RadMenuItem _toolStripMenuItemComposeWorkPackage;
+        private RadMenuItem _toolStripMenuItemComposeQuotationOrder;
+        private RadMenuItem _toolStripMenuItemDelete;
+        private RadMenuItem _toolStripMenuItemHighlight;
+        private RadMenuItem _toolStripMenuItemShowTaskCard;
+        private RadMenuSeparatorItem _toolStripSeparator1;
+        private RadMenuSeparatorItem _toolStripSeparator2;
+        private RadMenuSeparatorItem _toolStripSeparator4;
+        private RadMenuItem _toolStripMenuItemsWorkPackages;
+        private RadMenuItem _toolStripMenuItemQuotations;
 
         #endregion
 
@@ -183,11 +184,11 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
             if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
             if (_toolStripMenuItemHighlight != null)
             {
-                foreach (ToolStripMenuItem ttmi in _toolStripMenuItemHighlight.DropDownItems)
+                foreach (var ttmi in _toolStripMenuItemHighlight.Items)
                 {
                     ttmi.Click -= HighlightItemClick;
                 }
-                _toolStripMenuItemHighlight.DropDownItems.Clear();
+                _toolStripMenuItemHighlight.Items.Clear();
                 _toolStripMenuItemHighlight.Dispose();
             }
             if (_toolStripMenuItemShowTaskCard != null) _toolStripMenuItemShowTaskCard.Dispose();
@@ -197,24 +198,24 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
             if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
             if (_toolStripMenuItemQuotations != null)
             {
-                foreach (ToolStripMenuItem item in _toolStripMenuItemQuotations.DropDownItems)
+                foreach (var item in _toolStripMenuItemQuotations.Items)
                 {
                     item.Click -= AddToQuotationOrderItemClick;
                 }
-                _toolStripMenuItemQuotations.DropDownItems.Clear();
+                _toolStripMenuItemQuotations.Items.Clear();
                 _toolStripMenuItemQuotations.Dispose();
             }
             if (_toolStripMenuItemsWorkPackages != null)
             {
-                foreach (ToolStripMenuItem item in _toolStripMenuItemsWorkPackages.DropDownItems)
+                foreach (var item in _toolStripMenuItemsWorkPackages.Items)
                 {
                     item.Click -= AddToWorkPackageItemClick;
                 }
-                _toolStripMenuItemsWorkPackages.DropDownItems.Clear();
+                _toolStripMenuItemsWorkPackages.Items.Clear();
                 _toolStripMenuItemsWorkPackages.Dispose();
             }
 
-            if (_directivesViewer != null) _directivesViewer.DisposeView();
+            if (_directivesViewer != null) _directivesViewer.Dispose();
 
             Dispose(true);
         }
@@ -240,41 +241,41 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
             }
             if (_toolStripMenuItemQuotations != null)
             {
-                foreach (ToolStripMenuItem item in _toolStripMenuItemQuotations.DropDownItems)
+                foreach (var item in _toolStripMenuItemQuotations.Items)
                 {
                     item.Click -= AddToQuotationOrderItemClick;
                 }
 
-                _toolStripMenuItemQuotations.DropDownItems.Clear();
+                _toolStripMenuItemQuotations.Items.Clear();
 
                 foreach (RequestForQuotation quotation in _openPubQuotations)
                 {
-                    ToolStripMenuItem item = new ToolStripMenuItem(quotation.Title);
+                    var item = new RadMenuItem(quotation.Title);
                     item.Click += AddToQuotationOrderItemClick;
                     item.Tag = quotation;
-                    _toolStripMenuItemQuotations.DropDownItems.Add(item);
+                    _toolStripMenuItemQuotations.Items.Add(item);
                 }
             }
             if (_toolStripMenuItemsWorkPackages != null)
             {
-                foreach (ToolStripMenuItem item in _toolStripMenuItemsWorkPackages.DropDownItems)
+                foreach (var item in _toolStripMenuItemsWorkPackages.Items)
                 {
                     item.Click -= AddToWorkPackageItemClick;
                 }
 
-                _toolStripMenuItemsWorkPackages.DropDownItems.Clear();
+                _toolStripMenuItemsWorkPackages.Items.Clear();
 
                 foreach (Audit workPackage in _openPubWorkPackages)
                 {
-                    ToolStripMenuItem item = new ToolStripMenuItem(workPackage.Title);
+                    var item = new RadMenuItem(workPackage.Title);
                     item.Click += AddToWorkPackageItemClick;
                     item.Tag = workPackage;
-                    _toolStripMenuItemsWorkPackages.DropDownItems.Add(item);
+                    _toolStripMenuItemsWorkPackages.Items.Add(item);
                 }
             }
 
             _directivesViewer.SetItemsArray(_resultDirectiveArray.ToArray());
-            headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
+            headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
             _directivesViewer.Focus();
         }
         #endregion
@@ -563,18 +564,18 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 
         private void InitToolStripMenuItems()
         {
-            _contextMenuStrip = new ContextMenuStrip();
-            _toolStripMenuItemOpen = new ToolStripMenuItem();
-            _toolStripMenuItemComposeWorkPackage = new ToolStripMenuItem();
-            _toolStripMenuItemsWorkPackages = new ToolStripMenuItem();
-            _toolStripMenuItemComposeQuotationOrder = new ToolStripMenuItem();
-            _toolStripMenuItemQuotations = new ToolStripMenuItem();
-            _toolStripMenuItemDelete = new ToolStripMenuItem();
-            _toolStripMenuItemHighlight = new ToolStripMenuItem();
-            _toolStripMenuItemShowTaskCard = new ToolStripMenuItem();
-            _toolStripSeparator1 = new ToolStripSeparator();
-            _toolStripSeparator2 = new ToolStripSeparator();
-            _toolStripSeparator4 = new ToolStripSeparator();
+            _contextMenuStrip = new RadDropDownMenu();
+            _toolStripMenuItemOpen = new RadMenuItem();
+            _toolStripMenuItemComposeWorkPackage = new RadMenuItem();
+            _toolStripMenuItemsWorkPackages = new RadMenuItem();
+            _toolStripMenuItemComposeQuotationOrder = new RadMenuItem();
+            _toolStripMenuItemQuotations = new RadMenuItem();
+            _toolStripMenuItemDelete = new RadMenuItem();
+            _toolStripMenuItemHighlight = new RadMenuItem();
+            _toolStripMenuItemShowTaskCard = new RadMenuItem();
+            _toolStripSeparator1 = new RadMenuSeparatorItem();
+            _toolStripSeparator2 = new RadMenuSeparatorItem();
+            _toolStripSeparator4 = new RadMenuSeparatorItem();
             // 
             // contextMenuStrip
             // 
@@ -614,9 +615,9 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
             _toolStripMenuItemDelete.Click += ButtonDeleteClick;
 
             _contextMenuStrip.Items.Clear();
-            _toolStripMenuItemsWorkPackages.DropDownItems.Clear();
-            _toolStripMenuItemQuotations.DropDownItems.Clear();
-            _toolStripMenuItemHighlight.DropDownItems.Clear();
+            _toolStripMenuItemsWorkPackages.Items.Clear();
+            _toolStripMenuItemQuotations.Items.Clear();
+            _toolStripMenuItemHighlight.Items.Clear();
 
             // 
             // _toolStripMenuItemShowTaskCard
@@ -628,16 +629,14 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
             {
                 if (highlight == Highlight.Blue || highlight == Highlight.Yellow || highlight == Highlight.Red)
                     continue;
-                ToolStripMenuItem item = new ToolStripMenuItem(highlight.FullName);
+                var item = new RadMenuItem(highlight.FullName);
                 item.Click += HighlightItemClick;
                 item.Tag = highlight;
-                _toolStripMenuItemHighlight.DropDownItems.Add(item);
+                _toolStripMenuItemHighlight.Items.Add(item);
             }
-            _contextMenuStrip.Items.AddRange(new ToolStripItem[]
-                                                {
-                                                    _toolStripMenuItemOpen,
+            _contextMenuStrip.Items.AddRange(_toolStripMenuItemOpen,
                                                     _toolStripMenuItemShowTaskCard,
-                                                    new ToolStripSeparator(),
+                                                    new RadMenuSeparatorItem(),
                                                     _toolStripMenuItemHighlight,
                                                     _toolStripSeparator2,
                                                     _toolStripMenuItemComposeWorkPackage,
@@ -646,34 +645,8 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
                                                     _toolStripMenuItemComposeQuotationOrder,
                                                     _toolStripMenuItemQuotations,
                                                     _toolStripSeparator4, 
-                                                    _toolStripMenuItemDelete
-                                                });
-            _contextMenuStrip.Opening += ContextMenuStripOpen;
+                                                    _toolStripMenuItemDelete);
         }
-        #endregion
-
-        #region private void ContextMenuStripOpen(object sender,CancelEventArgs e)
-        /// <summary>
-        /// Проверка на выделение 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-        {
-            if (_directivesViewer.SelectedItems.Count <= 0)
-                e.Cancel = true;
-            if (_directivesViewer.SelectedItems.Count == 1)
-            {
-                _toolStripMenuItemOpen.Enabled = true;
-
-                Procedure mpd = _directivesViewer.SelectedItems[0];
-                if (mpd != null && mpd.ProcedureFile != null)
-                    _toolStripMenuItemShowTaskCard.Enabled = true;
-                else _toolStripMenuItemShowTaskCard.Enabled = false;
-            }
-            _toolStripMenuItemComposeQuotationOrder.Enabled = true;
-        }
-
         #endregion
 
         #region private void HighlightItemClick(object sender, EventArgs e)
@@ -682,10 +655,14 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
         {
             for (int i = 0; i < _directivesViewer.SelectedItems.Count; i++)
             {
-                Highlight highLight = (Highlight)((ToolStripMenuItem)sender).Tag;
+                Highlight highLight = (Highlight)((RadMenuItem)sender).Tag;
                 _directivesViewer.SelectedItems[i].Highlight = highLight;
-                _directivesViewer.ItemListView.SelectedItems[i].BackColor = Color.FromArgb(highLight.Color);
-            }
+				foreach (GridViewCellInfo cell in _directivesViewer.radGridView1.SelectedRows[i].Cells)
+				{
+					cell.Style.CustomizeFill = true;
+					cell.Style.BackColor = Color.FromArgb(highLight.Color);
+				}
+			}
         }
 
         #endregion
@@ -715,15 +692,15 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
                     //Добавление нового рабочего пакета в коллекцию открытых рабочих пакетов
                     _openPubWorkPackages.Add(audit);
                     //Создание пункта в меню открытых рабочих пакетов
-                    ToolStripMenuItem item = new ToolStripMenuItem(audit.Title);
+                    var item = new RadMenuItem(audit.Title);
                     item.Click += AddToWorkPackageItemClick;
                     item.Tag = audit;
-                    _toolStripMenuItemsWorkPackages.DropDownItems.Add(item);
+                    _toolStripMenuItemsWorkPackages.Items.Add(item);
 
                     foreach (NextPerformance nextPerformance in wpItems)
                     {
                         nextPerformance.BlockedByPackage = audit;
-                        _directivesViewer.UpdateItemColor(nextPerformance.Parent as Procedure);
+                        _directivesViewer.UpdateItemColor();
                     }
                     ReferenceEventArgs refArgs = new ReferenceEventArgs
                                                      {
@@ -747,7 +724,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
         {
             if (_directivesViewer.SelectedItems.Count <= 0) return;
 
-            Audit wp = (Audit)((ToolStripMenuItem)sender).Tag;
+            Audit wp = (Audit)((RadMenuItem)sender).Tag;
 
             if (MessageBox.Show("Add item to Audit: " + wp.Title + "?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) ==
                 DialogResult.Yes)
@@ -770,7 +747,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
                     foreach (NextPerformance nextPerformance in wpItems)
                     {
                         nextPerformance.BlockedByPackage = wp;
-                        _directivesViewer.UpdateItemColor(nextPerformance.Parent as Procedure);
+                        _directivesViewer.UpdateItemColor();
                     }
 
                     if (MessageBox.Show("Items added successfully. Open Audit?", (string)new GlobalTermsProvider()["SystemName"],
@@ -812,7 +789,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
         {
             if (_directivesViewer.SelectedItems.Count <= 0) return;
 
-            RequestForQuotation wp = (RequestForQuotation)((ToolStripMenuItem)sender).Tag;
+            RequestForQuotation wp = (RequestForQuotation)((RadMenuItem)sender).Tag;
 
             PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
         }
@@ -897,7 +874,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 
             if (confirmResult == DialogResult.Yes)
             {
-                _directivesViewer.ItemListView.BeginUpdate();
+                _directivesViewer.radGridView1.BeginUpdate();
                 foreach (Procedure directive in directives)
                 {
                     try
@@ -910,7 +887,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
                         return;
                     }
                 }
-                _directivesViewer.ItemListView.EndUpdate();
+                _directivesViewer.radGridView1.EndUpdate();
 
                 AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
                 AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoForecastWork;
@@ -929,15 +906,31 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
         {
             _directivesViewer = new ProceduresListView();
             _directivesViewer.TabIndex = 2;
-            _directivesViewer.ContextMenuStrip = _contextMenuStrip;
+            _directivesViewer.CustomMenu = _contextMenuStrip;
             _directivesViewer.Location = new Point(panel1.Left, panel1.Top);
             _directivesViewer.Dock = DockStyle.Fill;
             _directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
             Controls.Add(_directivesViewer);
             //события 
             _directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+			
+            _directivesViewer.MenuOpeningAction = () =>
+            {
+	            if (_directivesViewer.SelectedItems.Count <= 0)
+		            return;
+	            if (_directivesViewer.SelectedItems.Count == 1)
+	            {
+		            _toolStripMenuItemOpen.Enabled = true;
 
-            panel1.Controls.Add(_directivesViewer);
+		            Procedure mpd = _directivesViewer.SelectedItems[0];
+		            if (mpd != null && mpd.ProcedureFile != null)
+			            _toolStripMenuItemShowTaskCard.Enabled = true;
+		            else _toolStripMenuItemShowTaskCard.Enabled = false;
+	            }
+	            _toolStripMenuItemComposeQuotationOrder.Enabled = true;
+			};
+
+			panel1.Controls.Add(_directivesViewer);
         }
 
         #endregion
