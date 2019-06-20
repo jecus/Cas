@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
-using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.NewGrid;
 using CAS.UI.UIControls.StoresControls;
 using CASTerms;
@@ -45,6 +42,7 @@ namespace CAS.UI.UIControls.SupplierControls
 			AddColumn("Description", (int)(radGridView1.Width * 0.8f));
 			AddColumn("Serial No", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Code", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Class", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Batch No", (int)(radGridView1.Width * 0.4f));
 			AddColumn("ID No", (int)(radGridView1.Width * 0.4f));
 			AddColumn("State", (int)(radGridView1.Width * 0.4f));
