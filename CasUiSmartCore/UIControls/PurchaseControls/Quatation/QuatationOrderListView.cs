@@ -38,7 +38,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 			subItems.Add(CreateRow(item.Product?.PartNumber, item.Product?.PartNumber));
 			subItems.Add(CreateRow(item.Product?.Description, item.Product?.Description));
-			CreateRow(item.Product?.GoodsClass?.ShortName ?? "Another accessory", item.Product?.GoodsClass),
+			CreateRow(item.Product?.GoodsClass?.ShortName ?? "Another accessory", item.Product?.GoodsClass);
 			subItems.Add(CreateRow(item.Suppliers?.ToString(), item.Suppliers?.ToString()));
 			subItems.Add(CreateRow(item.Measure.ToString(), item.Measure.ToString()));
 			subItems.Add(CreateRow(item.Quantity.ToString(), item.Quantity.ToString()));
