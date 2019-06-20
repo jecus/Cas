@@ -173,7 +173,9 @@ namespace CAS.UI.UIControls.NewGrid
 			foreach (var propertyInfo in properties)
 			{
 				var attr = (ListViewDataAttribute)propertyInfo.GetCustomAttributes(typeof(ListViewDataAttribute), false)[0];
-				columnHeader = new GridViewBrowseColumn(attr.Title);
+				if(propertyInfo.PropertyType == typeof(DateTime))
+					columnHeader = new GridViewDateTimeColumn(attr.Title){ FormatString = "{0:dd.MM.yyyy}" };
+				else columnHeader = new GridViewBrowseColumn(attr.Title);
 				columnHeader.Width = attr.HeaderWidth > 1 ? (int)attr.HeaderWidth : (int)(radGridView1.Width * attr.HeaderWidth);
 				columnHeader.Tag = propertyInfo.PropertyType;
 

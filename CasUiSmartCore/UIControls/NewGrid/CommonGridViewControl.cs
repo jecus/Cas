@@ -220,28 +220,15 @@ namespace CAS.UI.UIControls.NewGrid
 			foreach (var propertyInfo in properties)
 			{
 				var attr = (ListViewDataAttribute)propertyInfo.GetCustomAttributes(typeof(ListViewDataAttribute), false)[0];
-				columnHeader = new GridViewBrowseColumn(attr.Title);
+				if (propertyInfo.PropertyType == typeof(DateTime))
+					columnHeader = new GridViewDateTimeColumn(attr.Title) { FormatString = "{0:dd.MM.yyyy}" };
+				else columnHeader = new GridViewBrowseColumn(attr.Title);
 				columnHeader.Width = attr.HeaderWidth > 1 ? (int)attr.HeaderWidth : ((int)(radGridView1.Width * attr.HeaderWidth) * 2);
 				columnHeader.Tag = propertyInfo.PropertyType;
 
 				ColumnHeaderList.Add(columnHeader);
 			}
 		}
-		#endregion
-
-		#region public void AddHeader(string title, int? size = null)
-
-		public void AddHeader(string title, int? size = null)
-		{
-			var col = new GridViewBrowseColumn(title);
-
-			if (size.HasValue)
-				col.Width = size.Value;
-			else col.AutoSizeMode = BestFitColumnMode.DisplayedCells;
-
-			ColumnHeaderList.Add(col);
-		}
-
 		#endregion
 
 		#region private List<PropertyInfo> GetTypeProperties()
@@ -539,6 +526,17 @@ namespace CAS.UI.UIControls.NewGrid
 		#endregion
 
 		//Events
+		#region private void RadGridView1_GroupSummaryEvaluate(object sender, Telerik.WinControls.UI.GroupSummaryEvaluationEventArgs e)
+
+		private void RadGridView1_GroupSummaryEvaluate(object sender, GroupSummaryEvaluationEventArgs e)
+		{
+			if (e.Value is DateTime)
+				e.FormatString = $"{((DateTime)e.Value):dd.MM.yyyy}";
+			else e.FormatString = e.Value.ToString();
+		}
+
+		#endregion
+
 
 		#region private void RadGridView1_ContextMenuOpening(object sender, Telerik.WinControls.UI.ContextMenuOpeningEventArgs e)
 
