@@ -12,6 +12,7 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Mail;
 using SmartCore.Filters;
 using SmartCore.Purchase;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.MailControls
 {
@@ -28,12 +29,12 @@ namespace CAS.UI.UIControls.MailControls
 
 		private readonly MailChats _mailChat;
 
-		private ContextMenuStrip _contextMenuStrip;
-		private ToolStripMenuItem _toolStripMenuItemReply;
-		private ToolStripMenuItem _toolStripMenuItemAdd;
-		private ToolStripMenuItem _toolStripMenuItemDelete;
-		private ToolStripMenuItem _toolStripMenuItemPublish;
-		private ToolStripMenuItem _toolStripMenuItemClose;
+		private RadDropDownMenu _contextMenuStrip;
+		private RadMenuItem _toolStripMenuItemReply;
+		private RadMenuItem _toolStripMenuItemAdd;
+		private RadMenuItem _toolStripMenuItemDelete;
+		private RadMenuItem _toolStripMenuItemPublish;
+		private RadMenuItem _toolStripMenuItemClose;
 
 		#endregion
 
@@ -136,11 +137,30 @@ namespace CAS.UI.UIControls.MailControls
 		{
 			_directivesViewer = new MailListView();
 			_directivesViewer.TabIndex = 2;
-			_directivesViewer.IgnoreAutoResize = true;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
-			_directivesViewer.ContextMenuStrip = _contextMenuStrip;
+			_directivesViewer.CustomMenu = _contextMenuStrip;
 			Controls.Add(_directivesViewer);
+
+			_directivesViewer.MenuOpeningAction = () =>
+			{
+				if (_directivesViewer.SelectedItem == null)
+				{
+					_toolStripMenuItemReply.Enabled = false;
+					_toolStripMenuItemDelete.Enabled = _directivesViewer.SelectedItems.Count > 0;
+					_toolStripMenuItemPublish.Enabled = false;
+					_toolStripMenuItemClose.Enabled = false;
+				}
+				else
+				{
+					_toolStripMenuItemReply.Enabled = _mailChat.ItemId > 0;
+					_toolStripMenuItemDelete.Enabled = true;
+
+					_toolStripMenuItemPublish.Enabled = _directivesViewer.SelectedItem.Status != MailStatus.Published;
+					_toolStripMenuItemClose.Enabled = _directivesViewer.SelectedItem.Status != MailStatus.Closed;
+
+				}
+			};
 
 			panel1.Controls.Add(_directivesViewer);
 		}
@@ -151,11 +171,11 @@ namespace CAS.UI.UIControls.MailControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new ContextMenuStrip();
-			_toolStripMenuItemReply = new ToolStripMenuItem();
-			_toolStripMenuItemDelete = new ToolStripMenuItem();
-			_toolStripMenuItemPublish = new ToolStripMenuItem();
-			_toolStripMenuItemClose = new ToolStripMenuItem();
+			_contextMenuStrip = new RadDropDownMenu();
+			_toolStripMenuItemReply = new RadMenuItem();
+			_toolStripMenuItemDelete = new RadMenuItem();
+			_toolStripMenuItemPublish = new RadMenuItem();
+			_toolStripMenuItemClose = new RadMenuItem();
 
 			// 
 			// contextMenuStrip
@@ -182,37 +202,14 @@ namespace CAS.UI.UIControls.MailControls
 			_toolStripMenuItemClose.Click += ToolStripMenuItemCloseClick;
 
 
-			_contextMenuStrip.Items.AddRange(new ToolStripItem[]
-			{
+			_contextMenuStrip.Items.AddRange(
 				_toolStripMenuItemReply,
-				new ToolStripSeparator(),
+				new RadMenuSeparatorItem(), 
 				_toolStripMenuItemPublish,
 				_toolStripMenuItemClose,
-				new ToolStripSeparator(),
+				new RadMenuSeparatorItem(),
 				_toolStripMenuItemDelete
-			});
-
-			_contextMenuStrip.Opening += _contextMenuStrip_Opening;
-		}
-
-		private void _contextMenuStrip_Opening(object sender, CancelEventArgs e)
-		{
-			if (_directivesViewer.SelectedItem == null)
-			{
-				_toolStripMenuItemReply.Enabled = false;
-				_toolStripMenuItemDelete.Enabled = _directivesViewer.SelectedItems.Count > 0;
-				_toolStripMenuItemPublish.Enabled = false;
-				_toolStripMenuItemClose.Enabled = false;
-			}
-			else
-			{
-				_toolStripMenuItemReply.Enabled = _mailChat.ItemId > 0;
-				_toolStripMenuItemDelete.Enabled = true;
-
-				_toolStripMenuItemPublish.Enabled = _directivesViewer.SelectedItem.Status != MailStatus.Published;
-				_toolStripMenuItemClose.Enabled = _directivesViewer.SelectedItem.Status != MailStatus.Closed;
-
-			}
+			);
 		}
 
 		#endregion
