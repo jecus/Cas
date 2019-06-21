@@ -10,6 +10,7 @@ using CASTerms;
 using SmartCore.Entities.Dictionaries;
 using CASReports.Builders;
 using SmartCore.Purchase;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
@@ -23,8 +24,8 @@ namespace CAS.UI.UIControls.PurchaseControls
         private readonly PurchaseOrder _currentPurchaseOrder;
         private PurchaseOrderView _directivesViewer;
 
-        private ContextMenuStrip _contextMenuStrip;
-        private ToolStripMenuItem _toolStripMenuItemOpenParentQuotation;
+        private RadDropDownMenu _contextMenuStrip;
+        private RadMenuItem _toolStripMenuItemOpenParentQuotation;
         //private ToolStripMenuItem _toolStripMenuItemOpenKitParentItem;
 
         #endregion
@@ -76,8 +77,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 
         private void InitToolStripMenuItems()
         {
-            _contextMenuStrip = new ContextMenuStrip();
-            _toolStripMenuItemOpenParentQuotation = new ToolStripMenuItem();
+            _contextMenuStrip = new RadDropDownMenu();
+            _toolStripMenuItemOpenParentQuotation = new RadMenuItem();
             //_toolStripMenuItemOpenKitParentItem = new ToolStripMenuItem();
             // 
             // contextMenuStrip
@@ -102,27 +103,12 @@ namespace CAS.UI.UIControls.PurchaseControls
             //_toolStripMenuItemCostConditionOverhaul.CheckOnClick = true;
             //_toolStripMenuItemCostConditionOverhaul.Click += ToolStripMenuItemCostConditionOverhaulClick;
             _contextMenuStrip.Items.Clear();
-            _contextMenuStrip.Opening += ContextMenuStripOpen;
-            _contextMenuStrip.Items.AddRange(new ToolStripItem[]
-                                                {
-                                                    _toolStripMenuItemOpenParentQuotation
+            
+            _contextMenuStrip.Items.AddRange(_toolStripMenuItemOpenParentQuotation
                                                     //_toolStripMenuItemOpenKitParentItem,
                                                     //_toolStripMenuItemCostConditionOverhaul
-                                                });
+                                                );
         }
-        #endregion
-
-        #region private void ContextMenuStripOpen(object sender,CancelEventArgs e)
-        /// <summary>
-        /// Проверка на выделение 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-        {
-            //_toolStripMenuItemOpenKitParentItem.Enabled = _directivesViewer.SelectedItems.Count > 0;
-        }
-
         #endregion
 
         #region private void ToolStripMenuOpenParentQoutationClick(object sender, EventArgs e)
@@ -312,11 +298,17 @@ namespace CAS.UI.UIControls.PurchaseControls
                                         Location = new Point(panel1.Left, panel1.Top),
                                         Dock = DockStyle.Fill
                                     };
-            _directivesViewer.ItemListView.ContextMenuStrip = _contextMenuStrip;
+            _directivesViewer.CustomMenu = _contextMenuStrip;
 
             //события 
             _directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
-            panel1.Controls.Add(_directivesViewer);
+            
+            _directivesViewer.MenuOpeningAction = () =>
+            {
+
+            };
+
+			panel1.Controls.Add(_directivesViewer);
         }
 
         #endregion
@@ -359,7 +351,7 @@ namespace CAS.UI.UIControls.PurchaseControls
                     }
             }
             labelStatus.Text = "Status: " + _currentPurchaseOrder.Status;
-            headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
+            headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
         }
         #endregion
 
