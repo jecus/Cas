@@ -131,7 +131,7 @@ namespace CAS.UI.UIControls.WorkPakage
 		private void ButtonOk_Click(object sender, System.EventArgs e)
 		{
 			DialogResult = DialogResult.OK;
-			if (supplierListView1.ListViewItemList.Count <= 0)
+			if (supplierListView1.ItemsCount <= 0)
 			{
 				MessageBox.Show("Please select a suppliers for  order", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,

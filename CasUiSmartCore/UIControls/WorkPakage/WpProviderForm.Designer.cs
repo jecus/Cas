@@ -91,11 +91,9 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.supplierListView1.Displayer = null;
 			this.supplierListView1.DisplayerText = null;
 			this.supplierListView1.Entity = null;
-			this.supplierListView1.IgnoreAutoResize = false;
 			this.supplierListView1.Location = new System.Drawing.Point(23, 370);
 			this.supplierListView1.Name = "supplierListView1";
 			this.supplierListView1.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.supplierListView1.ShowGroups = true;
 			this.supplierListView1.Size = new System.Drawing.Size(782, 246);
 			this.supplierListView1.TabIndex = 70;
 			this.supplierListView1.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.SupplierListView1_SelectedItemsChanged);
