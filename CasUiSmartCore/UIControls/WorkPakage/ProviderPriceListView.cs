@@ -1,5 +1,5 @@
-﻿using System.Windows.Forms;
-using CAS.UI.UIControls.Auxiliary;
+﻿using System;
+using CAS.UI.UIControls.NewGrid;
 using SmartCore.Entities.General.WorkPackage;
 
 namespace CAS.UI.UIControls.WorkPakage
@@ -7,7 +7,7 @@ namespace CAS.UI.UIControls.WorkPakage
     ///<summary>
     /// список для отображения ордеров запроса
     ///</summary>
-    public partial class ProviderPriceListView : BaseListViewControl<ProviderPrice>
+    public partial class ProviderPriceListView : BaseGridViewControl<ProviderPrice>
     {
         #region Fields
 
@@ -31,8 +31,8 @@ namespace CAS.UI.UIControls.WorkPakage
 		#region Methods
 
         #region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
-        protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
-        {
+        protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
+		{
             
         }
         #endregion
