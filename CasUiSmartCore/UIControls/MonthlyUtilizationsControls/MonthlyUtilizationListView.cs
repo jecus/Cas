@@ -95,7 +95,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 		protected override void SetHeaders()
 		{
 			AddColumn("Page No", (int)(radGridView1.Width * 0.1f));
-			AddColumn("Date", (int)(radGridView1.Width * 0.1f));
+			AddDateColumn("Date", (int)(radGridView1.Width * 0.1f));
 			AddColumn("Flight No", (int)(radGridView1.Width * 0.1f));
 			AddColumn("Direction", (int)(radGridView1.Width * 0.1f));
 			AddColumn("Flight time", (int)(radGridView1.Width * 0.1f));
