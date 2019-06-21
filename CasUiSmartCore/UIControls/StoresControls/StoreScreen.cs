@@ -13,6 +13,7 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.BarCode;
 using CAS.UI.UIControls.ComponentChangeReport;
 using CAS.UI.UIControls.ComponentControls;
 using CAS.UI.UIControls.DirectivesControls;
@@ -69,6 +70,7 @@ namespace CAS.UI.UIControls.StoresControls
         private StoreComponentsListView _directivesViewer;
 
         private RadDropDownMenu _contextMenuStrip;
+        private RadMenuItem _toolStripMenuItemBarCode;
         private RadMenuItem _toolStripMenuItemComposeInitialOrder;
         private RadMenuItem _toolStripMenuItemComposeQuotationOrder;
         private RadMenuItem _toolStripMenuItemQuotations;
@@ -219,6 +221,7 @@ namespace CAS.UI.UIControls.StoresControls
             if (_currentForecast != null) _currentForecast.Clear();
             _currentForecast = null;
 
+            if (_toolStripMenuItemBarCode != null) _toolStripMenuItemBarCode.Dispose();
             if (_toolStripMenuItemComposeInitialOrder != null) _toolStripMenuItemComposeInitialOrder.Dispose();
             if (_toolStripMenuItemComposeQuotationOrder != null) _toolStripMenuItemComposeQuotationOrder.Dispose();
             if (_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
@@ -771,6 +774,7 @@ namespace CAS.UI.UIControls.StoresControls
         {
             _contextMenuStrip = new RadDropDownMenu();
             _toolStripMenuItemComposeInitialOrder = new RadMenuItem();
+            _toolStripMenuItemBarCode = new RadMenuItem();
             _toolStripMenuItemComposeQuotationOrder = new RadMenuItem();
             _toolStripMenuItemQuotations = new RadMenuItem();
             _toolStripMenuItemOpen = new RadMenuItem();
@@ -817,6 +821,11 @@ namespace CAS.UI.UIControls.StoresControls
             //
             _toolStripMenuItemComposeInitialOrder.Text = "Compose Initial order";
             _toolStripMenuItemComposeInitialOrder.Click += ToolStripMenuItemComposeInitialClick;
+			//
+			// _toolStripMenuItemBarCode
+			//
+			_toolStripMenuItemBarCode.Text = "Create barcode";
+			_toolStripMenuItemBarCode.Click += _toolStripMenuItemBarCode_Click;
             // 
             // toolStripMenuItemTitle
             // 
@@ -963,29 +972,46 @@ namespace CAS.UI.UIControls.StoresControls
             // 
             // contextMenuStrip
             // 
-            _contextMenuStrip.Items.AddRange(_toolStripMenuItemOpen,
-                                                     _toolStripSeparator1,
-                                                     _toolStripMenuItemHighlight,
-                                                     _toolStripSeparator2,
-                                                     _toolStripMenuItemComposeInitialOrder,
-                                                     _toolStripMenuItemComposeQuotationOrder,
-                                                     _toolStripMenuItemQuotations,
-                                                     _toolStripMenuItemMoveTo,
-                                                     _toolStripMenuItemShouldBeOnStock,
-                                                     new RadMenuSeparatorItem(), 
-													 _toolStripMenuItemPrint,
-													 _toolStripSeparator4,
-                                                     _toolStripMenuItemAdd,
-                                                     _toolStripMenuItemDelete,
-													 new RadMenuSeparatorItem(),
-													 _toolStripMenuItemCopy,
-													 _toolStripMenuItemPaste
+            _contextMenuStrip.Items.AddRange(
+											_toolStripMenuItemBarCode,
+											new RadMenuSeparatorItem(),
+											_toolStripMenuItemOpen,
+                                                _toolStripSeparator1,
+                                                _toolStripMenuItemHighlight,
+                                                _toolStripSeparator2,
+                                                _toolStripMenuItemComposeInitialOrder,
+                                                _toolStripMenuItemComposeQuotationOrder,
+                                                _toolStripMenuItemQuotations,
+                                                _toolStripMenuItemMoveTo,
+                                                _toolStripMenuItemShouldBeOnStock,
+                                                new RadMenuSeparatorItem(), 
+												_toolStripMenuItemPrint,
+												_toolStripSeparator4,
+                                                _toolStripMenuItemAdd,
+                                                _toolStripMenuItemDelete,
+												new RadMenuSeparatorItem(),
+												_toolStripMenuItemCopy,
+												_toolStripMenuItemPaste
                                                  );
 
             _contextMenuStrip.Size = new Size(179, 176);
            
 
         }
+
+		#endregion
+
+		#region private void _toolStripMenuItemBarCode_Click(object sender, EventArgs e)
+
+		private void _toolStripMenuItemBarCode_Click(object sender, EventArgs e)
+		{
+			if(_directivesViewer.SelectedItem == null && _directivesViewer.SelectedItem is Component)
+				return;
+			
+
+			var form = new BarcodeForm((_directivesViewer.SelectedItem as Component).PartNumber);
+			form.ShowDialog();
+		}
 
 		#endregion
 

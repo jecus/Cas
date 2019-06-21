@@ -935,6 +935,12 @@
     <Compile Include="UIControls\Auxiliary\TestControl.Designer.cs">
       <DependentUpon>TestControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\BarCode\BarcodeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\BarCode\BarcodeForm.Designer.cs">
+      <DependentUpon>BarcodeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\ComponentChangeReport\ComponentChangeListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -3947,6 +3953,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\Auxiliary\TestControl.resx">
       <DependentUpon>TestControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\BarCode\BarcodeForm.resx">
+      <DependentUpon>BarcodeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ComponentChangeReport\ComponentChangeReport.resx">
       <DependentUpon>ComponentChangeReport.cs</DependentUpon>
