@@ -45,7 +45,7 @@
 			// 
 			this.radBarcode1.Location = new System.Drawing.Point(8, 89);
 			this.radBarcode1.Name = "radBarcode1";
-			this.radBarcode1.Size = new System.Drawing.Size(369, 271);
+			this.radBarcode1.Size = new System.Drawing.Size(369, 200);
 			eaN1281.ShowText = true;
 			eaN1281.Stretch = true;
 			this.radBarcode1.Symbology = eaN1281;
@@ -58,6 +58,7 @@
 			this.QR.Name = "QR";
 			this.QR.Size = new System.Drawing.Size(39, 19);
 			this.QR.TabIndex = 1;
+			this.QR.IsChecked = true;
 			this.QR.Text = "QR";
 			this.QR.ThemeName = "TelerikMetroBlue";
 			this.QR.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.ToggleStateChanged);
@@ -89,7 +90,7 @@
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(302, 374);
+			this.buttonOk.Location = new System.Drawing.Point(302, 299);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 296;
@@ -99,7 +100,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(389, 417);
+			this.ClientSize = new System.Drawing.Size(389, 342);
 			this.Controls.Add(this.buttonOk);
 			this.Controls.Add(this.EAN128);
 			this.Controls.Add(this.Code128);
