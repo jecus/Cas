@@ -22,9 +22,9 @@ namespace CAS.UI.UIControls.BarCode
 			if(QR.IsChecked)
 				radBarcode1.Symbology = new QRCode();
 			else if(EAN128.IsChecked)
-				radBarcode1.Symbology = new EAN128();
+				radBarcode1.Symbology = new EAN128(){ShowText = true, Stretch = true};
 			else if (Code128.IsChecked)
-				radBarcode1.Symbology = new Code128();
+				radBarcode1.Symbology = new Code128() { ShowText = true, Stretch = true }; 
 
 			radBarcode1.Value = _value;
 		}

@@ -28,7 +28,6 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			Telerik.WinControls.UI.Barcode.Symbology.EAN128 eaN1281 = new Telerik.WinControls.UI.Barcode.Symbology.EAN128();
 			this.radBarcode1 = new Telerik.WinControls.UI.RadBarcode();
 			this.telerikMetroBlueTheme1 = new Telerik.WinControls.Themes.TelerikMetroBlueTheme();
 			this.QR = new Telerik.WinControls.UI.RadRadioButton();
@@ -46,9 +45,6 @@
 			this.radBarcode1.Location = new System.Drawing.Point(8, 89);
 			this.radBarcode1.Name = "radBarcode1";
 			this.radBarcode1.Size = new System.Drawing.Size(369, 200);
-			eaN1281.ShowText = true;
-			eaN1281.Stretch = true;
-			this.radBarcode1.Symbology = eaN1281;
 			this.radBarcode1.TabIndex = 0;
 			this.radBarcode1.Text = "radBarcode1";
 			// 
