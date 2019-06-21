@@ -13,6 +13,7 @@ using SmartCore.Entities.General.Accessory;
 using System.Linq;
 using CAS.UI.UIControls.PurchaseControls.Quatation;
 using SmartCore.Purchase;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
@@ -26,14 +27,14 @@ namespace CAS.UI.UIControls.PurchaseControls
         private readonly RequestForQuotation _currentRfQ;
         private RequestForQuotationView _directivesViewer;
 
-        private ContextMenuStrip _contextMenuStrip;
-        private ToolStripMenuItem _toolStripMenuItemCostConditions;
-        private ToolStripMenuItem _toolStripMenuItemCostConditionNew;
-        private ToolStripMenuItem _toolStripMenuItemCostConditionServiceable;
-        private ToolStripMenuItem _toolStripMenuItemCostConditionOverhaul;
-        private ToolStripMenuItem _toolStripMenuItemAddKits;
+        private RadDropDownMenu _contextMenuStrip;
+        private RadMenuItem _toolStripMenuItemCostConditions;
+        private RadMenuItem _toolStripMenuItemCostConditionNew;
+        private RadMenuItem _toolStripMenuItemCostConditionServiceable;
+        private RadMenuItem _toolStripMenuItemCostConditionOverhaul;
+        private RadMenuItem _toolStripMenuItemAddKits;
         //private ToolStripMenuItem _toolStripMenuItemOpenKitParentItem;
-        private ToolStripSeparator _toolStripSeparator1;
+        private RadMenuSeparatorItem _toolStripSeparator1;
 
         #endregion
         
@@ -84,14 +85,14 @@ namespace CAS.UI.UIControls.PurchaseControls
 
         private void InitToolStripMenuItems()
         {
-            _contextMenuStrip = new ContextMenuStrip();
-            _toolStripMenuItemAddKits = new ToolStripMenuItem();
+            _contextMenuStrip = new RadDropDownMenu();
+            _toolStripMenuItemAddKits = new RadMenuItem();
             //_toolStripMenuItemOpenKitParentItem = new ToolStripMenuItem();
-            _toolStripMenuItemCostConditions = new ToolStripMenuItem();
-            _toolStripMenuItemCostConditionNew = new ToolStripMenuItem();
-            _toolStripMenuItemCostConditionServiceable = new ToolStripMenuItem();
-            _toolStripMenuItemCostConditionOverhaul = new ToolStripMenuItem();
-            _toolStripSeparator1 = new ToolStripSeparator();
+            _toolStripMenuItemCostConditions = new RadMenuItem();
+            _toolStripMenuItemCostConditionNew = new RadMenuItem();
+            _toolStripMenuItemCostConditionServiceable = new RadMenuItem();
+            _toolStripMenuItemCostConditionOverhaul = new RadMenuItem();
+            _toolStripSeparator1 = new RadMenuSeparatorItem();
             // 
             // contextMenuStrip
             // 
@@ -130,19 +131,16 @@ namespace CAS.UI.UIControls.PurchaseControls
             _toolStripMenuItemCostConditionOverhaul.CheckOnClick = true;
             _toolStripMenuItemCostConditionOverhaul.Click += ToolStripMenuItemCostConditionOverhaulClick;
 
-            _toolStripMenuItemCostConditions.DropDownItems.Add(_toolStripMenuItemCostConditionNew);
-            _toolStripMenuItemCostConditions.DropDownItems.Add(_toolStripMenuItemCostConditionServiceable);
-            _toolStripMenuItemCostConditions.DropDownItems.Add(_toolStripMenuItemCostConditionOverhaul);
+            _toolStripMenuItemCostConditions.Items.Add(_toolStripMenuItemCostConditionNew);
+            _toolStripMenuItemCostConditions.Items.Add(_toolStripMenuItemCostConditionServiceable);
+            _toolStripMenuItemCostConditions.Items.Add(_toolStripMenuItemCostConditionOverhaul);
 
             _contextMenuStrip.Items.Clear();
-            _contextMenuStrip.Opening += ContextMenuStripOpen;
-            _contextMenuStrip.Items.AddRange(new ToolStripItem[]
-                                                {
-                                                    _toolStripMenuItemAddKits,
+            
+            _contextMenuStrip.Items.AddRange(_toolStripMenuItemAddKits,
                                                     //_toolStripMenuItemOpenKitParentItem,
                                                     _toolStripSeparator1,
-                                                    _toolStripMenuItemCostConditions
-                                                });
+                                                    _toolStripMenuItemCostConditions);
         }
         #endregion
 
@@ -174,51 +172,6 @@ namespace CAS.UI.UIControls.PurchaseControls
         //        }
         //    }
         //}
-        #endregion
-
-        #region private void ContextMenuStripOpen(object sender,CancelEventArgs e)
-        /// <summary>
-        /// Проверка на выделение 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-        {
-            if (_directivesViewer.SelectedItems.Count <= 0)
-            {
-                //_toolStripMenuItemOpenKitParentItem.Enabled = false;
-                _toolStripMenuItemCostConditions.Enabled = false;
-            }
-            else if (_directivesViewer.SelectedItems.Count == 1)
-            {
-                _toolStripMenuItemCostConditions.Enabled = true;
-                
-                RequestForQuotationRecord rec =
-                    _currentRfQ.PackageRecords.FirstOrDefault(r => r.PackageItemId == _directivesViewer.SelectedItem.Product.ItemId);
-                if(rec != null)
-                {
-                    _toolStripMenuItemCostConditionNew.Checked = (rec.CostCondition & ComponentStatus.New) != 0;
-                    _toolStripMenuItemCostConditionServiceable.Checked = (rec.CostCondition & ComponentStatus.Serviceable) != 0;
-                    _toolStripMenuItemCostConditionOverhaul.Checked = (rec.CostCondition & ComponentStatus.Overhaul) != 0;
-                }
-                  
-            }
-            else
-            {
-                _toolStripMenuItemCostConditions.Enabled = true;
-
-                List<RequestForQuotationRecord> records =
-                    _currentRfQ.PackageRecords.Where(rec => _directivesViewer.SelectedItems.Any(kit => rec.PackageItemId == kit.Product.ItemId)).ToList();
-
-                if (records.Count != 0)
-                {
-                    _toolStripMenuItemCostConditionNew.Checked = records.Any(rec => (rec.CostCondition & ComponentStatus.New) != 0);
-                    _toolStripMenuItemCostConditionServiceable.Checked = records.Any(rec => (rec.CostCondition & ComponentStatus.Serviceable) != 0);
-                    _toolStripMenuItemCostConditionOverhaul.Checked = records.Any(rec => (rec.CostCondition & ComponentStatus.Overhaul) != 0);
-                }
-            }
-        }
-
         #endregion
 
         #region private void ToolStripMenuItemAddKitsClick(object sender, EventArgs e)
@@ -515,11 +468,49 @@ namespace CAS.UI.UIControls.PurchaseControls
                                         Location = new Point(panel1.Left, panel1.Top),
                                         Dock = DockStyle.Fill
                                     };
-            _directivesViewer.ItemListView.ContextMenuStrip = _contextMenuStrip;
+            _directivesViewer.CustomMenu = _contextMenuStrip;
 
             //события 
             _directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
-            panel1.Controls.Add(_directivesViewer);
+
+            _directivesViewer.MenuOpeningAction = () =>
+            {
+	            if (_directivesViewer.SelectedItems.Count <= 0)
+	            {
+		            //_toolStripMenuItemOpenKitParentItem.Enabled = false;
+		            _toolStripMenuItemCostConditions.Enabled = false;
+	            }
+	            else if (_directivesViewer.SelectedItems.Count == 1)
+	            {
+		            _toolStripMenuItemCostConditions.Enabled = true;
+
+		            RequestForQuotationRecord rec =
+			            _currentRfQ.PackageRecords.FirstOrDefault(r => r.PackageItemId == _directivesViewer.SelectedItem.Product.ItemId);
+		            if (rec != null)
+		            {
+			            _toolStripMenuItemCostConditionNew.IsChecked = (rec.CostCondition & ComponentStatus.New) != 0;
+			            _toolStripMenuItemCostConditionServiceable.IsChecked = (rec.CostCondition & ComponentStatus.Serviceable) != 0;
+			            _toolStripMenuItemCostConditionOverhaul.IsChecked = (rec.CostCondition & ComponentStatus.Overhaul) != 0;
+		            }
+
+	            }
+	            else
+	            {
+		            _toolStripMenuItemCostConditions.Enabled = true;
+
+		            List<RequestForQuotationRecord> records =
+			            _currentRfQ.PackageRecords.Where(rec => _directivesViewer.SelectedItems.Any(kit => rec.PackageItemId == kit.Product.ItemId)).ToList();
+
+		            if (records.Count != 0)
+		            {
+			            _toolStripMenuItemCostConditionNew.IsChecked = records.Any(rec => (rec.CostCondition & ComponentStatus.New) != 0);
+			            _toolStripMenuItemCostConditionServiceable.IsChecked = records.Any(rec => (rec.CostCondition & ComponentStatus.Serviceable) != 0);
+			            _toolStripMenuItemCostConditionOverhaul.IsChecked = records.Any(rec => (rec.CostCondition & ComponentStatus.Overhaul) != 0);
+		            }
+	            }
+			};
+
+			panel1.Controls.Add(_directivesViewer);
         }
 
         #endregion
@@ -562,7 +553,7 @@ namespace CAS.UI.UIControls.PurchaseControls
                     }
             }
             labelStatus.Text = "Status: " + _currentRfQ.Status;
-            headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
+            headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
         }
         #endregion
 
