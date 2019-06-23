@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Windows.Forms;
+﻿using System;
+using System.Collections.Generic;
 using CAS.UI.Interfaces;
-using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.General.MTOP;
 
 namespace CAS.UI.UIControls.MTOP
 {
-	public partial class MTOPListView : BaseListViewControl<MTOPCheck>
+	public partial class MTOPListView : BaseGridViewControl<MTOPCheck>
 	{
 		private Dictionary<int, Lifelength> _groupLifelengths;
 
@@ -22,6 +22,7 @@ namespace CAS.UI.UIControls.MTOP
 		public MTOPListView(Dictionary<int, Lifelength> groupLifelengths) : this()
 		{
 			_groupLifelengths = groupLifelengths;
+			SetHeaders();
 		}
 
 		#endregion
@@ -30,37 +31,31 @@ namespace CAS.UI.UIControls.MTOP
 
 		protected override void SetHeaders()
 		{
-			ColumnHeaderList.Clear();
-			itemsListView.Columns.Clear();
-
-			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Group" };
-			ColumnHeaderList.Add(columnHeader);
-
+			if (_groupLifelengths == null)
+				return;
+			AddColumn("Group", (int)(radGridView1.Width * 0.2f));
+			
 			foreach (var lifelength in _groupLifelengths)
-			{
-				columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.025f), Text = lifelength.Key.ToString() };
-				ColumnHeaderList.Add(columnHeader);
-			}
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
-			ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+				AddColumn(lifelength.Key.ToString(), (int)(radGridView1.Width * 0.5f));
+			
+			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			
+			radGridView1.Columns.AddRange(ColumnHeaderList.ToArray());
 		}
 
 		#endregion
 
-		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(MTOPCheck item)
+		#region protected override List<CustomCell> GetListViewSubItems(MTOPCheck item)
 
-		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(MTOPCheck item)
+		protected override List<CustomCell> GetListViewSubItems(MTOPCheck item)
 		{
-			var subItems = new List<ListViewItem.ListViewSubItem>();
+			var subItems = new List<CustomCell>();
 
 			var tempHours = item.PhaseThresh.Hours;
 			var name = $"{item.Name}";
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
-			var subItem = new ListViewItem.ListViewSubItem { Text = name, Tag = name };
-			subItems.Add(subItem);
+			
+			subItems.Add(CreateRow(name, name));
 
 			foreach (var lifelength in _groupLifelengths)
 			{
@@ -69,8 +64,8 @@ namespace CAS.UI.UIControls.MTOP
 					if (item.PhaseRepeat != null && !item.PhaseRepeat.IsNullOrZero())
 						tempHours += item.PhaseRepeat.Hours;
 					else tempHours += item.PhaseThresh.Hours;
-
-					subItem = new ListViewItem.ListViewSubItem { Text = "x", Tag = "" };
+					
+					subItems.Add(CreateRow("x", ""));
 				}
 				else if (tempHours / _groupLifelengths[1].Hours == lifelength.Key)
 				{
@@ -78,47 +73,43 @@ namespace CAS.UI.UIControls.MTOP
 						tempHours += item.PhaseRepeat.Hours;
 					else tempHours += item.PhaseThresh.Hours;
 
-					subItem = new ListViewItem.ListViewSubItem { Text = "x", Tag = "" };
-
+					subItems.Add(CreateRow("x", ""));
 				}
-				else subItem = new ListViewItem.ListViewSubItem { Text = "", Tag = "" };
-
-				subItems.Add(subItem);
+				else subItems.Add(CreateRow("", ""));
 			}
-
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
-
-			return subItems.ToArray();
+			subItems.Add(CreateRow(author, author));
+			
+			return subItems;
 		}
 
 		#endregion
 
 		#region protected override void SetGroupsToItems(int columnIndex)
 
-		protected override void SetGroupsToItems(int columnIndex)
-		{
-			itemsListView.Groups.Clear();
+		//protected override void SetGroupsToItems(int columnIndex)
+		//{
+		//	itemsListView.Groups.Clear();
 
-			foreach (ListViewItem item in ListViewItemList)
-			{
-				string temp;
+		//	foreach (ListViewItem item in ListViewItemList)
+		//	{
+		//		string temp;
 
-				if (item.Tag is MTOPCheck)
-				{
-					var mtop = item.Tag as MTOPCheck;
+		//		if (item.Tag is MTOPCheck)
+		//		{
+		//			var mtop = item.Tag as MTOPCheck;
 
-					temp = $"{mtop.CheckType.FullName}";
-					itemsListView.Groups.Add(temp, temp);
-					item.Group = itemsListView.Groups[temp];
-				}
-			}
-		}
+		//			temp = $"{mtop.CheckType.FullName}";
+		//			itemsListView.Groups.Add(temp, temp);
+		//			item.Group = itemsListView.Groups[temp];
+		//		}
+		//	}
+		//}
 
 		#endregion
 
 		#region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
 
-		protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
+		protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
 		{
 
 		}

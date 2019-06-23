@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
-using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.Auxiliary.Comparers;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.General.MaintenanceWorkscope;
@@ -12,7 +10,7 @@ using SmartCore.Entities.General.MTOP;
 
 namespace CAS.UI.UIControls.MTOP
 {
-	public partial class MTOPDirectiveListView : BaseListViewControl<MaintenanceDirective>
+	public partial class MTOPDirectiveListView : BaseGridViewControl<MaintenanceDirective>
 	{
 		private Dictionary<int, Lifelength> _groupLifelengths;
 		private readonly List<MTOPCheck> _maintenanceChecks;
@@ -21,13 +19,15 @@ namespace CAS.UI.UIControls.MTOP
 
 		#region Constructor
 
-		public MTOPDirectiveListView()
+		//public MTOPDirectiveListView()
+		//{
+		//	InitializeComponent();
+		//}
+
+		public MTOPDirectiveListView(Dictionary<int, Lifelength> groupLifelengths, List<MTOPCheck> maintenanceChecks)
 		{
 			InitializeComponent();
-		}
 
-		public MTOPDirectiveListView(Dictionary<int, Lifelength> groupLifelengths, List<MTOPCheck> maintenanceChecks) : this()
-		{
 			_groupLifelengths = groupLifelengths;
 			_maintenanceChecks = maintenanceChecks;
 			_isZeroPhase = maintenanceChecks.All(i => i.IsZeroPhase);
@@ -42,7 +42,7 @@ namespace CAS.UI.UIControls.MTOP
 					_start = last.GroupName;
 
 			}
-
+			SetHeaders();
 		}
 
 		#endregion
@@ -51,23 +51,13 @@ namespace CAS.UI.UIControls.MTOP
 
 		protected override void SetHeaders()
 		{
-			ColumnHeaderList.Clear();
-			itemsListView.Columns.Clear();
-
-			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Task Card №" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Thresh" };
-			ColumnHeaderList.Add(columnHeader);
-
-			//columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "PhaseThresh" };
-			//ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Repeat" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.05f), Text = "Phase" };
-			ColumnHeaderList.Add(columnHeader);
+			if (_groupLifelengths == null )
+				return;
+			AddColumn("Task Card №", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Thresh", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Repeat", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Phase", (int)(radGridView1.Width * 0.10f));
+			
 
 			foreach (var lifelength in _groupLifelengths)
 			{
@@ -83,56 +73,47 @@ namespace CAS.UI.UIControls.MTOP
 				if (_isZeroPhase)
 				{
 					if (length == 1)
-						width = (int)(itemsListView.Width * 0.025f);
-					else width = (int)(itemsListView.Width * 0.04f);
+						width = (int)(radGridView1.Width * 0.05f);
+					else width = (int)(radGridView1.Width * 0.08f);
 				}
 				else
 				{
 					if (length == 2)
-						width = (int)(itemsListView.Width * 0.04f);
-					else width = (int)(itemsListView.Width * 0.025f);
+						width = (int)(radGridView1.Width * 0.08f);
+					else width = (int)(radGridView1.Width * 0.05f);
 
 				}
 				var text = _isZeroPhase ? $"0{lifelength.Key}" :lifelength.Key.ToString();
 
-				columnHeader = new ColumnHeader { Width = width, Text = text };
-				ColumnHeaderList.Add(columnHeader);
+				AddColumn(text, width);
 			}
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
-			ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+			AddColumn("Signer", (int)(radGridView1.Width * 0.02f));
+			radGridView1.Columns.AddRange(ColumnHeaderList.ToArray());
 		}
 
 		#endregion
 
 		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(MTOPCheck item)
 
-		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(MaintenanceDirective item)
+		protected override List<CustomCell> GetListViewSubItems(MaintenanceDirective item)
 		{
-			var subItems = new List<ListViewItem.ListViewSubItem>();
+			var subItems = new List<CustomCell>();
 
 			var phaseString = "";
 			if (item.MTOPPhase != null)
 				phaseString = item.MTOPPhase.ToString();
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
-			var subItem = new ListViewItem.ListViewSubItem { Text = item.TaskCardNumber, Tag = item.TaskCardNumber };
-			subItems.Add(subItem);
+			subItems.Add(CreateRow(item.TaskCardNumber, item.TaskCardNumber));
 
-			subItem = new ListViewItem.ListViewSubItem { Text = item.Threshold.FirstPerformanceSinceNew.ToRepeatIntervalsFormat(), Tag = item.Threshold.FirstPerformanceSinceNew };
-			subItems.Add(subItem);
-
+			subItems.Add(CreateRow(item.Threshold.FirstPerformanceSinceNew.ToRepeatIntervalsFormat(), item.Threshold.FirstPerformanceSinceNew ));
+			
 			//subItem = new ListViewItem.ListViewSubItem { Text = item.PhaseThresh.ToRepeatIntervalsFormat(), Tag = item.PhaseThresh };
 			//subItems.Add(subItem);
 
-			subItem = new ListViewItem.ListViewSubItem { Text = item.Threshold.RepeatInterval.ToRepeatIntervalsFormat(), Tag = item.Threshold.RepeatInterval };
-			subItems.Add(subItem);
-
-			subItem = new ListViewItem.ListViewSubItem { Text = phaseString, Tag = item.MTOPPhase };
-			subItems.Add(subItem);
-
+			subItems.Add(CreateRow(item.Threshold.RepeatInterval.ToRepeatIntervalsFormat(), item.Threshold.RepeatInterval ));
+			subItems.Add(CreateRow(phaseString, item.MTOPPhase ));
+			
 			var temp = 0;
 
 			foreach (var lifelength in _groupLifelengths)
@@ -158,66 +139,63 @@ namespace CAS.UI.UIControls.MTOP
 					//	subItem = new ListViewItem.ListViewSubItem { Text = "x", Tag = "" };
 					//}
 					if (item.MTOPPhase.Difference > 0 && lifelength.Key % item.MTOPPhase.Difference == 0)
-						subItem = new ListViewItem.ListViewSubItem {Text = "x", Tag = ""};
-					else subItem = new ListViewItem.ListViewSubItem { Text = "", Tag = "" };
+						subItems.Add(CreateRow("x", ""));
+					else subItems.Add(CreateRow("", "" ));
 				}
-				else subItem = new ListViewItem.ListViewSubItem { Text = "", Tag = "" };
-
-
-				subItems.Add(subItem);
+				else subItems.Add(CreateRow("", "" ));
 			}
 
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
+			subItems.Add(CreateRow(author, author ));
 
-			return subItems.ToArray();
+			return subItems;
 		}
 
 		#endregion
 
-		protected override void SetGroupsToItems(int columnIndex)
-		{
-			itemsListView.Groups.Clear();
+		//protected override void SetGroupsToItems(int columnIndex)
+		//{
+		//	itemsListView.Groups.Clear();
 
-			if (columnIndex == 3)
-			{
-				foreach (ListViewItem item in ListViewItemList.OrderBy(i => ((MaintenanceDirective)i.Tag).MTOPPhase?.FirstPhase ?? int.MaxValue))
-				{
-					string temp;
+		//	if (columnIndex == 3)
+		//	{
+		//		foreach (ListViewItem item in ListViewItemList.OrderBy(i => ((MaintenanceDirective)i.Tag).MTOPPhase?.FirstPhase ?? int.MaxValue))
+		//		{
+		//			string temp;
 
-					if (item.Tag is MaintenanceDirective)
-					{
-						var directive = item.Tag as MaintenanceDirective;
+		//			if (item.Tag is MaintenanceDirective)
+		//			{
+		//				var directive = item.Tag as MaintenanceDirective;
 
-						temp = directive.MTOPPhase?.ToString() ?? "1-0-0";
-						itemsListView.Groups.Add(temp, temp);
-						item.Group = itemsListView.Groups[temp];
-					}
-				}
-			}
-		}
+		//				temp = directive.MTOPPhase?.ToString() ?? "1-0-0";
+		//				itemsListView.Groups.Add(temp, temp);
+		//				item.Group = itemsListView.Groups[temp];
+		//			}
+		//		}
+		//	}
+		//}
 
 		#region protected override void SortItems(int columnIndex)
 
-		protected override void SortItems(int columnIndex)
-		{
-			if (OldColumnIndex != columnIndex)
-				SortMultiplier = -1;
-			if (SortMultiplier == 1)
-				SortMultiplier = -1;
-			else
-				SortMultiplier = 1;
-			itemsListView.Items.Clear();
-			SetGroupsToItems(columnIndex);
+		//protected override void SortItems(int columnIndex)
+		//{
+		//	if (OldColumnIndex != columnIndex)
+		//		SortMultiplier = -1;
+		//	if (SortMultiplier == 1)
+		//		SortMultiplier = -1;
+		//	else
+		//		SortMultiplier = 1;
+		//	itemsListView.Items.Clear();
+		//	SetGroupsToItems(columnIndex);
 
-			var resultList = new List<ListViewItem>();
+		//	var resultList = new List<ListViewItem>();
 
-			//добавление остальных подзадач
-			resultList.AddRange(ListViewItemList.Where(item => item.Tag is MaintenanceDirective));
-			resultList.Sort(new DirectiveListViewComparer(columnIndex, SortMultiplier));
+		//	//добавление остальных подзадач
+		//	resultList.AddRange(ListViewItemList.Where(item => item.Tag is MaintenanceDirective));
+		//	resultList.Sort(new DirectiveListViewComparer(columnIndex, SortMultiplier));
 
-			itemsListView.Items.AddRange(resultList.ToArray());
-			OldColumnIndex = columnIndex;
-		}
+		//	itemsListView.Items.AddRange(resultList.ToArray());
+		//	OldColumnIndex = columnIndex;
+		//}
 
 		#endregion
 
