@@ -702,7 +702,7 @@ namespace CAS.UI.UIControls.NewGrid
 
 		private void RadGridView1_CellClick(object sender, GridViewCellEventArgs e)
 		{
-			if (e.ColumnIndex > -1)
+			if (e.ColumnIndex > -1 && e.RowIndex == -1)
 				CustomSort(e.ColumnIndex);
 		}
 
