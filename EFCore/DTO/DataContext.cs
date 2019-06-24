@@ -164,34 +164,69 @@ namespace EFCore.DTO
 		{
 			#region DictionaryMap
 
-			modelBuilder.Configurations.Add(new NonRoutineJobMap());
-			modelBuilder.Configurations.Add(new AccessoryDescriptionMap());
-			modelBuilder.Configurations.Add(new AGWCategorieMap());
-			modelBuilder.Configurations.Add(new AircraftOtherParameterMap());
-			modelBuilder.Configurations.Add(new AirportCodeMap());
-			modelBuilder.Configurations.Add(new AirportMap());
-			modelBuilder.Configurations.Add(new ATAChapterMap());
-			modelBuilder.Configurations.Add(new CruiseLevelMap());
-			modelBuilder.Configurations.Add(new DamageChartMap());
-			modelBuilder.Configurations.Add(new DefferedCategorieMap());
-			modelBuilder.Configurations.Add(new DepartmentMap());
-			modelBuilder.Configurations.Add(new DocumentSubTypeMap());
-			modelBuilder.Configurations.Add(new EmployeeSubjectMap());
-			modelBuilder.Configurations.Add(new EventCategorieMap());
-			modelBuilder.Configurations.Add(new EventClassMap());
-			modelBuilder.Configurations.Add(new FlightNumMap());
-			modelBuilder.Configurations.Add(new GoodStandartMap());
-			modelBuilder.Configurations.Add(new LicenseRemarkRightMap());
-			modelBuilder.Configurations.Add(new LifeLimitCategorieMap());
-			modelBuilder.Configurations.Add(new LocationMap());
-			modelBuilder.Configurations.Add(new LocationsTypeMap());
-			modelBuilder.Configurations.Add(new NomenclatureMap());
-			modelBuilder.Configurations.Add(new ReasonMap());
-			modelBuilder.Configurations.Add(new RestrictionMap());
-			modelBuilder.Configurations.Add(new SchedulePeriodMap());
-			modelBuilder.Configurations.Add(new ServiceTypeMap());
-			modelBuilder.Configurations.Add(new SpecializationMap());
-			modelBuilder.Configurations.Add(new TripNameMap());
+			modelBuilder.Entity<NonRoutineJobDTO>()
+				.HasOne(i => i.ATAChapter)
+				.WithMany(i => i.NonRoutineJobDtos)
+				.HasForeignKey(i => i.ATAChapterId);
+
+
+			modelBuilder.Entity<AccessoryDescriptionDTO>()
+				.HasOne(i => i.ATAChapter)
+				.WithMany(i => i.AccessoryDescriptionDtos)
+				.HasForeignKey(i => i.AtaChapterId);
+			modelBuilder.Entity<AccessoryDescriptionDTO>()
+				.HasOne(i => i.GoodStandart)
+				.WithMany(i => i.AccessoryDescriptionDtos)
+				.HasForeignKey(i => i.StandartId);
+			modelBuilder.Entity<AccessoryDescriptionDTO>()
+				.HasMany(i => i.Files)
+				.WithOne(i => i.AccessoryDescription)
+				.HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<AccessoryDescriptionDTO>()
+				.HasMany(i => i.SupplierRelations)
+				.WithOne(i => i.AccessoryDescriptionDto)
+				.HasForeignKey(i => i.KitId);
+
+			modelBuilder.Entity<DamageChartDTO>()
+				.HasOne(i => i.AccessoryDescription)
+				.WithMany(i => i.DamageChartDtos)
+				.HasForeignKey(i => i.AircraftModelId);
+			modelBuilder.Entity<DamageChartDTO>()
+				.HasMany(i => i.Files)
+				.WithOne(i => i.DamageChart)
+				.HasForeignKey(i => i.ParentId);
+
+			modelBuilder.Entity<DefferedCategorieDTO>()
+				.HasOne(i => i.AccessoryDescription)
+				.WithMany(i => i.DefferedCategorieDtos)
+				.HasForeignKey(i => i.AircraftModelId);
+
+			modelBuilder.Entity<LifeLimitCategorieDTO>()
+				.HasOne(i => i.AccessoryDescription)
+				.WithMany(i => i.LifeLimitCategorieDtos)
+				.HasForeignKey(i => i.AircraftModelId);
+
+			modelBuilder.Entity<LocationDTO>()
+				.HasOne(i => i.LocationsType)
+				.WithMany(i => i.LocationDtos)
+				.HasForeignKey(i => i.LocationsTypeId);
+
+			modelBuilder.Entity<LocationsTypeDTO>()
+				.HasOne(i => i.Department)
+				.WithMany(i => i.LocationsTypeDtos)
+				.HasForeignKey(i => i.DepartmentId);
+
+
+			modelBuilder.Entity<NomenclatureDTO>()
+				.HasOne(i => i.Department)
+				.WithMany(i => i.NomenclatureDtos)
+				.HasForeignKey(i => i.DepartmentId);
+
+			modelBuilder.Entity<SpecializationDTO>()
+				.HasOne(i => i.Department)
+				.WithMany(i => i.SpecializationDtos)
+				.HasForeignKey(i => i.DepartmentId);
+
 
 			#endregion
 

@@ -9,7 +9,7 @@ namespace EFCore.DTO.General
 	public class KitSuppliersRelationDTO : BaseEntity
 	{
 		[DataMember]
-		public int KitId { get; set; }
+		public int? KitId { get; set; }
 
 		[DataMember]
 		public int? SupplierId { get; set; }

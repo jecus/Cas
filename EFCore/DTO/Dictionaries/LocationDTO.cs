@@ -22,7 +22,7 @@ namespace EFCore.DTO.Dictionaries
 
 	    [DataMember]
 	    [Column("LocationsTypeId")]
-		public int LocationsTypeId { get; set; }
+		public int? LocationsTypeId { get; set; }
 
 	    [DataMember]
 		[Child]

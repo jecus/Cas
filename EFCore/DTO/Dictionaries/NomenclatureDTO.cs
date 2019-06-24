@@ -14,7 +14,7 @@ namespace EFCore.DTO.Dictionaries
 	{
 		[DataMember]
 		[Column("DepartmentId"), Required]
-		public int DepartmentId { get; set; }
+		public int? DepartmentId { get; set; }
 
 	    [DataMember]
 	    [Column("Name"), MaxLength(50)]

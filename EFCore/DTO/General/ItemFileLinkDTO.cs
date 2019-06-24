@@ -8,7 +8,7 @@ namespace EFCore.DTO.General
 	public class ItemFileLinkDTO : BaseEntity
 	{
 		[DataMember]
-		public int ParentId { get; set; }
+		public int? ParentId { get; set; }
 
 		[DataMember]
 		public int ParentTypeId { get; set; }
