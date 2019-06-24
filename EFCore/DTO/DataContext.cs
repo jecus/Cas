@@ -230,11 +230,59 @@ namespace EFCore.DTO
 
 			#region dboMap
 
-			modelBuilder.Configurations.Add(new AccessoryRequiredMap());
-			modelBuilder.Configurations.Add(new ActualStateRecordMap());
-			modelBuilder.Configurations.Add(new AircraftMap());
-			modelBuilder.Configurations.Add(new AircraftEquipmentMap());
-			modelBuilder.Configurations.Add(new AircraftFlightMap());
+			modelBuilder.Entity<AccessoryRequiredDTO>()
+				.HasOne(i => i.Product)
+				.WithMany(i => i.AccessoryRequiredDtos)
+				.HasForeignKey(i => i.AccessoryDescriptionId);
+			modelBuilder.Entity<AccessoryRequiredDTO>()
+				.HasOne(i => i.Standart)
+				.WithMany(i => i.AccessoryRequiredDtos)
+				.HasForeignKey(i => i.GoodStandartId);
+
+			modelBuilder.Entity<AircraftDTO>()
+				.HasOne(i => i.Model)
+				.WithMany(i => i.AircraftDtos)
+				.HasForeignKey(i => i.ModelId);
+			modelBuilder.Entity<AircraftDTO>()
+				.HasMany(i => i.MaintenanceProgramChangeRecords)
+				.WithOne(i => i.ParentAircraftDto)
+				.HasForeignKey(i => i.ParentAircraftId);
+
+			modelBuilder.Entity<AircraftEquipmentDTO>()
+				.HasOne(i => i.AircraftOtherParameter)
+				.WithMany(i => i.AircraftEquipmentDtos)
+				.HasForeignKey(i => i.AircraftOtherParameterId);
+
+			modelBuilder.Entity<AircraftFlightDTO>()
+				.HasOne(i => i.FlightNumber)
+				.WithMany(i => i.AircraftFlightDtos)
+				.HasForeignKey(i => i.FlightNumberId);
+			modelBuilder.Entity<AircraftFlightDTO>()
+				.HasOne(i => i.Level)
+				.WithMany(i => i.AircraftFlightDtos)
+				.HasForeignKey(i => i.LevelId);
+			modelBuilder.Entity<AircraftFlightDTO>()
+				.HasOne(i => i.StationFromDto)
+				.WithMany(i => i.AircraftFlightsFrom)
+				.HasForeignKey(i => i.StationFromId);
+			modelBuilder.Entity<AircraftFlightDTO>()
+				.HasOne(i => i.StationToDto)
+				.WithMany(i => i.AircraftFlightsTo)
+				.HasForeignKey(i => i.StationToId);
+			modelBuilder.Entity<AircraftFlightDTO>()
+				.HasOne(i => i.CancelReason)
+				.WithMany(i => i.AircraftFlightsCancel)
+				.HasForeignKey(i => i.CancelReasonId);
+			modelBuilder.Entity<AircraftFlightDTO>()
+				.HasOne(i => i.DelayReason)
+				.WithMany(i => i.AircraftFlightsDelay)
+				.HasForeignKey(i => i.DelayReasonId);
+			modelBuilder.Entity<AircraftFlightDTO>()
+				.HasMany(i => i.Files)
+				.WithOne(i => i.AircraftFlight)
+				.HasForeignKey(i => i.ParentId);
+
+
 			modelBuilder.Configurations.Add(new AircraftWorkerCategoryMap());
 			modelBuilder.Configurations.Add(new ATLBMap());
 			modelBuilder.Configurations.Add(new AttachedFileMap());
