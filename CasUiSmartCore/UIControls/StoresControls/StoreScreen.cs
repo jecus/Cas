@@ -314,8 +314,8 @@ namespace CAS.UI.UIControls.StoresControls
 	        {
 		        comboBoxWorkPackage.SelectedItem = null;
 		        comboBoxWorkPackage.Text = "";
-				_directivesViewer.radGridView1.Columns[18].Width = 0;
-				_directivesViewer.radGridView1.Columns[19].Width = 0;
+				_directivesViewer.radGridView1.Columns[18].Width = 100;
+				_directivesViewer.radGridView1.Columns[19].Width = 1000;
 				buttonMoveTo.Enabled = false;
 				_itemPrintReportAvailableComponents.Enabled = false;
 			}
