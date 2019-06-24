@@ -11,6 +11,7 @@ using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Schedule;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 {
@@ -420,26 +421,14 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 		#endregion
 
 		#region protected override void SetItemColor(ListViewItem listViewItem, Directive item)
-		//TODO COLOR!
-		//protected override void SetItemColor(ListViewItem listViewItem, FlightPlanOpsRecords item)
-		//{
-		//	Color itemForeColor = Color.Gray;
-
-		//	listViewItem.BackColor = UsefulMethods.GetColor(item);
-		//	Color listViewForeColor = ItemListView.ForeColor;
-
-		//	if (listViewItem.SubItems.OfType<ListViewItem.ListViewSubItem>().Count(lvsi => lvsi.ForeColor.ToArgb() != listViewForeColor.ToArgb()) == 0)
-		//		listViewItem.ForeColor = itemForeColor;
-		//	else
-		//	{
-		//		listViewItem.UseItemStyleForSubItems = false;
-		//		foreach (ListViewItem.ListViewSubItem subItem in listViewItem.SubItems)
-		//		{
-		//			if (subItem.ForeColor.ToArgb() == listViewForeColor.ToArgb())
-		//				subItem.ForeColor = itemForeColor;
-		//		}
-		//	}
-		//}
+		protected override void SetItemColor(GridViewRowInfo listViewItem, FlightPlanOpsRecords item)
+		{
+			foreach (GridViewCellInfo cell in listViewItem.Cells)
+			{
+				cell.Style.CustomizeFill = true;
+				cell.Style.BackColor = UsefulMethods.GetColor(item);
+			}
+		}
 		#endregion
 
 		public void ClearFields()

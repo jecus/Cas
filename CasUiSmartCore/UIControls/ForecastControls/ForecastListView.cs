@@ -15,6 +15,7 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
+using Telerik.WinControls.UI;
 
 
 namespace CAS.UI.UIControls.ForecastControls
@@ -85,39 +86,55 @@ namespace CAS.UI.UIControls.ForecastControls
 		#endregion
 
 		#region protected override void SetItemColor(ListViewItem listViewItem, NextPerformance item)
-		//TODO COLOR!
-		//protected override void SetItemColor(ListViewItem listViewItem, NextPerformance item)
-		//{
-		//    if (item is MaintenanceNextPerformance)
-		//    {
-		//        MaintenanceNextPerformance mnp = item as MaintenanceNextPerformance;
-		//        listViewItem.ForeColor = mnp == ((MaintenanceCheck)item.Parent).GetPergormanceGroupWhereCheckIsSenior()[0] 
-		//            ? Color.Black 
-		//            : Color.Gray;
+		protected override void SetItemColor(GridViewRowInfo listViewItem, NextPerformance item)
+		{
+			if (item is MaintenanceNextPerformance)
+			{
+				MaintenanceNextPerformance mnp = item as MaintenanceNextPerformance;
+				foreach (GridViewCellInfo cell in listViewItem.Cells)
+				{
+					cell.Style.ForeColor = mnp == ((MaintenanceCheck)item.Parent).GetPergormanceGroupWhereCheckIsSenior()[0]
+						? Color.Black
+						: Color.Gray; 
+				}
 
-		//        if(mnp.CalcForHight)
-		//        {
-		//            listViewItem.BackColor = Color.FromArgb(Highlight.PurpleLight.Color);    
-		//        }
-		//    }
-		//    else
-		//    {
-		//        IDirective imd = item.Parent;
-		//        listViewItem.ForeColor = imd.NextPerformances.IndexOf(item) == 0 
-		//            ? Color.Black 
-		//            : Color.Gray;
-		//        if (imd.Condition == ConditionState.Notify)
-		//            listViewItem.BackColor = Color.FromArgb(Highlight.Yellow.Color);
-		//        if (imd.Percents != null && imd.Percents > 0)
-		//            listViewItem.BackColor = Color.FromArgb(Highlight.Green.Color); 
-		//    }
+				if (mnp.CalcForHight)
+				{
+					foreach (GridViewCellInfo cell in listViewItem.Cells)
+					{
+						cell.Style.CustomizeFill = true;
+						cell.Style.BackColor = Color.FromArgb(Highlight.PurpleLight.Color);
+					}
+				}
+			}
+			else
+			{
+				IDirective imd = item.Parent;
 
-		//    if(item.BlockedByPackage != null)
-		//    {
-		//        listViewItem.BackColor = Color.FromArgb(Highlight.Grey.Color);
-		//        listViewItem.ToolTipText = "This performance is involved on Work Package:" + item.BlockedByPackage.Title;
-		//    }
-		//}
+				foreach (GridViewCellInfo cell in listViewItem.Cells)
+				{
+					cell.Style.ForeColor = imd.NextPerformances.IndexOf(item) == 0
+						? Color.Black
+						: Color.Gray;
+					if (imd.Condition == ConditionState.Notify)
+						cell.Style.BackColor = Color.FromArgb(Highlight.Yellow.Color);
+					if (imd.Percents != null && imd.Percents > 0)
+						cell.Style.BackColor = Color.FromArgb(Highlight.Green.Color);
+				}
+
+				
+			}
+
+			if (item.BlockedByPackage != null)
+			{
+
+				foreach (GridViewCellInfo cell in listViewItem.Cells)
+				{
+					cell.Style.CustomizeFill = true;
+					cell.Style.BackColor = Color.FromArgb(Highlight.Grey.Color);
+				}
+			}
+		}
 		#endregion
 
 		#region protected override List<CustomCell> GetListViewSubItems(NextPerformance item)

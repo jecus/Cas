@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
@@ -13,6 +14,7 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Purchase;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.SupplierControls
 {
@@ -231,28 +233,38 @@ namespace CAS.UI.UIControls.SupplierControls
 		}
 		#endregion
 
-		#region protected override void SetItemColor(ListViewItem listViewItem, IBaseCoreObject item)
-		//TODO COLOR!
+		#region protected override void SetItemColor(GridViewRowInfo listViewItem, IBaseCoreObject item)
 
-		//protected override void SetItemColor(ListViewItem listViewItem, IBaseCoreObject item)
-		//{
-		//	if (item is Component)
-		//	{
-		//		var component = (Component)item;
-		//		var transferRecord = component.TransferRecords.GetLast();
+		protected override void SetItemColor(GridViewRowInfo listViewItem, IBaseCoreObject item)
+		{
+			if (item is Component)
+			{
+				var component = (Component)item;
+				var transferRecord = component.TransferRecords.GetLast();
 
-		//		if (transferRecord.SupplierNotify?.CalendarValue != null)
-		//		{
-		//			var notifyDate = transferRecord.SupplierReceiptDate.AddDays(transferRecord.SupplierNotify.CalendarValue.Value * -1);
+				if (transferRecord.SupplierNotify?.CalendarValue != null)
+				{
+					var notifyDate = transferRecord.SupplierReceiptDate.AddDays(transferRecord.SupplierNotify.CalendarValue.Value * -1);
 
-		//			if(DateTime.Today >= notifyDate && DateTime.Today <= transferRecord.SupplierReceiptDate)
-		//				listViewItem.BackColor = Color.FromArgb(Highlight.Yellow.Color);
-		//			else if(DateTime.Today > transferRecord.SupplierReceiptDate)
-		//				listViewItem.BackColor = Color.FromArgb(Highlight.Red.Color);
-
-		//		}
-		//	}
-		//}
+					if (DateTime.Today >= notifyDate && DateTime.Today <= transferRecord.SupplierReceiptDate)
+					{
+						foreach (GridViewCellInfo cell in listViewItem.Cells)
+						{
+							cell.Style.CustomizeFill = true;
+							cell.Style.BackColor = Color.FromArgb(Highlight.Yellow.Color);
+						}
+					}
+					else if (DateTime.Today > transferRecord.SupplierReceiptDate)
+					{
+						foreach (GridViewCellInfo cell in listViewItem.Cells)
+						{
+							cell.Style.CustomizeFill = true;
+							cell.Style.BackColor = Color.FromArgb(Highlight.Red.Color);
+						}
+					}
+				}
+			}
+		}
 
 		#endregion
 	}
