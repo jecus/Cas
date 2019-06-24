@@ -284,6 +284,7 @@ namespace EFCore.DTO
 			modelBuilder.Configurations.Add(new StoreMap());
 			modelBuilder.Configurations.Add(new SupplierDocumentMap());
 			modelBuilder.Configurations.Add(new SupplierMap());
+
 			modelBuilder.Configurations.Add(new TransferRecordMap());
 			modelBuilder.Configurations.Add(new VehicleMap());
 			modelBuilder.Configurations.Add(new WorkOrderMap());
