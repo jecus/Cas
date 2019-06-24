@@ -282,21 +282,108 @@ namespace EFCore.DTO
 				.WithOne(i => i.AircraftFlight)
 				.HasForeignKey(i => i.ParentId);
 
+			modelBuilder.Entity<ATLBDTO>()
+				.HasMany(i => i.Files)
+				.WithOne(i => i.Atlb)
+				.HasForeignKey(i => i.ParentId);
 
-			modelBuilder.Configurations.Add(new AircraftWorkerCategoryMap());
-			modelBuilder.Configurations.Add(new ATLBMap());
-			modelBuilder.Configurations.Add(new AttachedFileMap());
-			modelBuilder.Configurations.Add(new AuditMap());
-			modelBuilder.Configurations.Add(new AuditRecordMap());
-			modelBuilder.Configurations.Add(new CategoryRecordMap());
-			modelBuilder.Configurations.Add(new CertificateOfReleaseToServiceMap());
-			modelBuilder.Configurations.Add(new ComponentDirectiveMap());
-			modelBuilder.Configurations.Add(new ComponentLLPCategoryChangeRecordMap());
-			modelBuilder.Configurations.Add(new ComponentLLPCategoryDataMap());
-			modelBuilder.Configurations.Add(new ComponentMap());
-			modelBuilder.Configurations.Add(new ComponentOilConditionMap());
-			modelBuilder.Configurations.Add(new ComponentWorkInRegimeParamMap());
-			modelBuilder.Configurations.Add(new CorrectiveActionMap());
+			modelBuilder.Entity<AuditDTO>()
+				.HasMany(i => i.Files)
+				.WithOne(i => i.Audit)
+				.HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<AuditDTO>()
+				.HasMany(i => i.AuditRecords)
+				.WithOne(i => i.Audit)
+				.HasForeignKey(i => i.AuditId);
+
+			modelBuilder.Entity<CategoryRecordDTO>()
+			.HasOne(i => i.AircraftModel)
+				.WithMany(i => i.CategoryRecordDtos)
+				.HasForeignKey(i => i.AircraftTypeId);
+			modelBuilder.Entity<CategoryRecordDTO>()
+			.HasOne(i => i.AircraftWorkerCategory)
+				.WithMany(i => i.CategoryRecordDtos)
+				.HasForeignKey(i => i.AircraftWorkerCategoryId);
+
+			modelBuilder.Entity<CertificateOfReleaseToServiceDTO>()
+			.HasOne(i => i.AuthorizationB1)
+				.WithMany(i => i.CertificateOfReleaseToServiceB1Dtos)
+				.HasForeignKey(i => i.AuthorizationB1Id);
+			modelBuilder.Entity<CertificateOfReleaseToServiceDTO>()
+			.HasOne(i => i.AuthorizationB2)
+				.WithMany(i => i.CertificateOfReleaseToServiceB2Dtos)
+				.HasForeignKey(i => i.AuthorizationB2Id);
+
+
+			modelBuilder.Entity<ComponentDirectiveDTO>()
+				.HasMany(i => i.Files)
+				.WithOne(i => i.ComponentDirective)
+				.HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<ComponentDirectiveDTO>()
+				.HasMany(i => i.PerformanceRecords)
+				.WithOne(i => i.ComponentDirective)
+				.HasForeignKey(i => i.ParentID);
+			modelBuilder.Entity<ComponentDirectiveDTO>()
+				.HasMany(i => i.Kits)
+				.WithOne(i => i.ComponentDirective)
+				.HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<ComponentDirectiveDTO>()
+				.HasMany(i => i.CategoriesRecords)
+				.WithOne(i => i.ComponentDirective)
+				.HasForeignKey(i => i.ParentId);
+
+			modelBuilder.Entity<ComponentLLPCategoryChangeRecordDTO>()
+			.HasOne(i => i.ToCategory)
+				.WithMany(i => i.CategoryChangeRecordDto)
+				.HasForeignKey(i => i.ToCategoryId);
+			modelBuilder.Entity<ComponentLLPCategoryChangeRecordDTO>()
+				.HasMany(i => i.Files)
+				.WithOne(i => i.CategoryChangeRecord)
+				.HasForeignKey(i => i.ParentId);
+
+			modelBuilder.Entity<ComponentLLPCategoryDataDTO>()
+			.HasOne(i => i.ParentCategory)
+				.WithMany(i => i.CategoryDataDtos)
+				.HasForeignKey(i => i.LLPCategoryId);
+
+			modelBuilder.Entity<ComponentDTO>()
+			.HasOne(i => i.ATAChapter)
+				.WithMany(i => i.ComponentDtos)
+				.HasForeignKey(i => i.ATAChapterId);
+			modelBuilder.Entity<ComponentDTO>()
+				.HasOne(i => i.Model)
+				.WithMany(i => i.ComponentDtos)
+				.HasForeignKey(i => i.ModelId);
+			modelBuilder.Entity<ComponentDTO>()
+				.HasOne(i => i.Location)
+				.WithMany(i => i.ComponentDtos)
+				.HasForeignKey(i => i.LocationId);
+			modelBuilder.Entity<ComponentDTO>()
+				.HasOne(i => i.FromSupplier)
+				.WithMany(i => i.ComponentDtos)
+				.HasForeignKey(i => i.FromSupplierId);
+			modelBuilder.Entity<ComponentDTO>()
+				.HasMany(i => i.SupplierRelations).WithOne(i => i.Component).HasForeignKey(i => i.KitId);
+			modelBuilder.Entity<ComponentDTO>()
+				.HasMany(i => i.Files).WithOne(i => i.Component).HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<ComponentDTO>()
+				.HasMany(i => i.LLPData).WithOne(i => i.Component).HasForeignKey(i => i.ComponentId);
+			modelBuilder.Entity<ComponentDTO>()
+				.HasMany(i => i.CategoriesRecords).WithOne(i => i.Component).HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<ComponentDTO>()
+				.HasMany(i => i.Kits).WithOne(i => i.Component).HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<ComponentDTO>()
+				.HasMany(i => i.ActualStateRecords).WithOne(i => i.Component).HasForeignKey(i => i.ComponentId);
+			modelBuilder.Entity<ComponentDTO>()
+				.HasMany(i => i.TransferRecords).WithOne(i => i.Component).HasForeignKey(i => i.ParentID);
+			modelBuilder.Entity<ComponentDTO>()
+				.HasMany(i => i.ComponentDirectives).WithOne(i => i.Component).HasForeignKey(i => i.ComponentId);
+			modelBuilder.Entity<ComponentDTO>()
+				.HasMany(i => i.ChangeLLPCategoryRecords).WithOne(i => i.Component).HasForeignKey(i => i.ParentId);
+
+
+
+
 			modelBuilder.Configurations.Add(new DamageDocumentMap());
 			modelBuilder.Configurations.Add(new DamageSectorMap());
 			modelBuilder.Configurations.Add(new DirectiveMap());

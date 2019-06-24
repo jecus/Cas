@@ -12,7 +12,7 @@ namespace EFCore.DTO.General
 	{
 		[DataMember]
 		[Column("AuditId")]
-		public int AuditId { get; set; }
+		public int? AuditId { get; set; }
 
 		[DataMember]
 		[Column("DirectivesId")]

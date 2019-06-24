@@ -6,9 +6,7 @@ namespace EFCore.DTO.General.Maps
 	{
 		public ComponentLLPCategoryDataMap() : base()
 		{
-			HasRequired(i => i.ParentCategory)
-				.WithMany(i => i.CategoryDataDtos)
-				.HasForeignKey(i => i.LLPCategoryId);
+			
 
 		}
 	}
