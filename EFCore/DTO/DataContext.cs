@@ -1,9 +1,9 @@
-﻿using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
+﻿
 using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
 using EFCore.DTO.General.Maps;
 using EFCore.DTO.Maps;
+using Microsoft.EntityFrameworkCore;
 
 namespace EFCore.DTO
 {
@@ -13,162 +13,154 @@ namespace EFCore.DTO
 
 		#region Constructor
 
-		public DataContext() : base(_connection)
+		public DataContext() : base(new DbContextOptionsBuilder().UseSqlServer(_connection).Options)
 		{
-			this.Configuration.ProxyCreationEnabled = false;
-			this.Configuration.LazyLoadingEnabled = false;
-
-
-			Database.Log = s => System.Diagnostics.Trace.WriteLine(s);
-
-			((IObjectContextAdapter)this).ObjectContext.CommandTimeout = 180;
+			this.Database.SetCommandTimeout(180);
 		}
 
-		public DataContext(string connectionString) : base(connectionString)
+		public DataContext(string connectionString) : base(new DbContextOptionsBuilder().UseSqlServer(connectionString).Options)
 		{
-			this.Configuration.ProxyCreationEnabled = false;
-			this.Configuration.LazyLoadingEnabled = false;
-			((IObjectContextAdapter)this).ObjectContext.CommandTimeout = 180;
+			this.Database.SetCommandTimeout(180);
 		}
 
 		#endregion
 
 		#region Dictionary
 
-		public IDbSet<NonRoutineJobDTO> NonRoutineJobDtos { get; set; }
-		public IDbSet<AccessoryDescriptionDTO> AccessoryDescriptionDtos { get; set; }
-		public IDbSet<AGWCategorieDTO> AGWCategorieDtos { get; set; }
-		public IDbSet<AircraftOtherParameterDTO> AircraftOtherParameterDtos { get; set; }
-		public IDbSet<AirportCodeDTO> AirportCodeDtos { get; set; }
-		public IDbSet<AirportDTO> AirportDtos { get; set; }
-		public IDbSet<ATAChapterDTO> ATAChapterDtos { get; set; }
-		public IDbSet<CruiseLevelDTO> CruiseLevelDtos { get; set; }
-		public IDbSet<DamageChartDTO> DamageChartDtos { get; set; }
-		public IDbSet<DefferedCategorieDTO> DefferedCategorieDtos { get; set; }
-		public IDbSet<DepartmentDTO> DepartmentDtos { get; set; }
-		public IDbSet<DocumentSubTypeDTO> DocumentSubTypeDtos { get; set; }
-		public IDbSet<EmployeeSubjectDTO> EmployeeSubjectDtos { get; set; }
-		public IDbSet<EventCategorieDTO> EventCategorieDtos { get; set; }
-		public IDbSet<EventClassDTO> EventClassDtos { get; set; }
-		public IDbSet<FlightNumDTO> FlightNumDtos { get; set; }
-		public IDbSet<GoodStandartDTO> GoodStandartDtos { get; set; }
-		public IDbSet<LicenseRemarkRightDTO> LicenseRemarkRightDtos { get; set; }
-		public IDbSet<LifeLimitCategorieDTO> LifeLimitCategorieDtos { get; set; }
-		public IDbSet<LocationDTO> LocationDtos { get; set; }
-		public IDbSet<LocationsTypeDTO> LocationsTypeDtos { get; set; }
-		public IDbSet<NomenclatureDTO> NomenclatureDtos { get; set; }
-		public IDbSet<ReasonDTO> ReasonDtos { get; set; }
-		public IDbSet<RestrictionDTO> RestrictionDtos { get; set; }
-		public IDbSet<SchedulePeriodDTO> SchedulePeriodDtos { get; set; }
-		public IDbSet<ServiceTypeDTO> ServiceTypeDtos { get; set; }
-		public IDbSet<SpecializationDTO> SpecializationDtos { get; set; }
-		public IDbSet<TripNameDTO> TripNameDtos { get; set; }
+		public DbSet<NonRoutineJobDTO> NonRoutineJobDtos { get; set; }
+		public DbSet<AccessoryDescriptionDTO> AccessoryDescriptionDtos { get; set; }
+		public DbSet<AGWCategorieDTO> AGWCategorieDtos { get; set; }
+		public DbSet<AircraftOtherParameterDTO> AircraftOtherParameterDtos { get; set; }
+		public DbSet<AirportCodeDTO> AirportCodeDtos { get; set; }
+		public DbSet<AirportDTO> AirportDtos { get; set; }
+		public DbSet<ATAChapterDTO> ATAChapterDtos { get; set; }
+		public DbSet<CruiseLevelDTO> CruiseLevelDtos { get; set; }
+		public DbSet<DamageChartDTO> DamageChartDtos { get; set; }
+		public DbSet<DefferedCategorieDTO> DefferedCategorieDtos { get; set; }
+		public DbSet<DepartmentDTO> DepartmentDtos { get; set; }
+		public DbSet<DocumentSubTypeDTO> DocumentSubTypeDtos { get; set; }
+		public DbSet<EmployeeSubjectDTO> EmployeeSubjectDtos { get; set; }
+		public DbSet<EventCategorieDTO> EventCategorieDtos { get; set; }
+		public DbSet<EventClassDTO> EventClassDtos { get; set; }
+		public DbSet<FlightNumDTO> FlightNumDtos { get; set; }
+		public DbSet<GoodStandartDTO> GoodStandartDtos { get; set; }
+		public DbSet<LicenseRemarkRightDTO> LicenseRemarkRightDtos { get; set; }
+		public DbSet<LifeLimitCategorieDTO> LifeLimitCategorieDtos { get; set; }
+		public DbSet<LocationDTO> LocationDtos { get; set; }
+		public DbSet<LocationsTypeDTO> LocationsTypeDtos { get; set; }
+		public DbSet<NomenclatureDTO> NomenclatureDtos { get; set; }
+		public DbSet<ReasonDTO> ReasonDtos { get; set; }
+		public DbSet<RestrictionDTO> RestrictionDtos { get; set; }
+		public DbSet<SchedulePeriodDTO> SchedulePeriodDtos { get; set; }
+		public DbSet<ServiceTypeDTO> ServiceTypeDtos { get; set; }
+		public DbSet<SpecializationDTO> SpecializationDtos { get; set; }
+		public DbSet<TripNameDTO> TripNameDtos { get; set; }
 
 		#endregion
 
 		#region dbo
 
-		public IDbSet<AccessoryRequiredDTO> AccessoryRequiredDtos { get; set; }
-		public IDbSet<ActualStateRecordDTO> ActualStateRecordDtos { get; set; }
-		public IDbSet<AircraftDTO> AircraftDtos { get; set; }
-		public IDbSet<AircraftEquipmentDTO> AircraftEquipmentDtos { get; set; }
-		public IDbSet<AircraftFlightDTO> AircraftFlightDtos { get; set; }
-		public IDbSet<AircraftWorkerCategoryDTO> AircraftWorkerCategoryDtos  { get; set; }
-		public IDbSet<ATLBDTO> Atlbdtos { get; set; }
-		public IDbSet<AttachedFileDTO> AttachedFileDtos { get; set; }
-		public IDbSet<AuditDTO> AuditDtos { get; set; }
-		public IDbSet<AuditRecordDTO> AuditRecordDtos { get; set; }
-		public IDbSet<CategoryRecordDTO> CategoryRecordDtos { get; set; }
-		public IDbSet<CertificateOfReleaseToServiceDTO> CertificateOfReleaseToServiceDtos { get; set; }
-		public IDbSet<ComponentDirectiveDTO> ComponentDirectiveDtos { get; set; }
-		public IDbSet<ComponentDTO> ComponentDtos { get; set; }
-		public IDbSet<ComponentLLPCategoryChangeRecordDTO> ComponentLLPCategoryChangeRecordDtos { get; set; }
-		public IDbSet<ComponentLLPCategoryDataDTO> ComponentLLPCategoryDataDtos { get; set; }
-		public IDbSet<ComponentOilConditionDTO> ComponentOilConditionDtos { get; set; }
-		public IDbSet<ComponentWorkInRegimeParamDTO> ComponentWorkInRegimeParamDtos { get; set; }
-		public IDbSet<CorrectiveActionDTO> CorrectiveActionDtos { get; set; }
-		public IDbSet<DamageDocumentDTO> DamageDocumentDtos { get; set; }
-		public IDbSet<DamageSectorDTO> DamageSectorDtos { get; set; }
-		public IDbSet<DirectiveDTO> DirectiveDtos  { get; set; }
-		public IDbSet<DirectiveRecordDTO> DirectiveRecordDtos { get; set; }
-		public IDbSet<DiscrepancyDTO> DiscrepancyDtos { get; set; }
-		public IDbSet<DocumentDTO> DocumentDtos { get; set; }
-		public IDbSet<EngineAccelerationTimeDTO> EngineAccelerationTimeDtos { get; set; }
-		public IDbSet<EngineConditionDTO> EngineConditionDtos { get; set; }
-		public IDbSet<EngineTimeInRegimeDTO> EngineTimeInRegimeDtos { get; set; }
-		public IDbSet<EventConditionDTO> EventConditionDtos { get; set; }
-		public IDbSet<EventDTO> EventDtos { get; set; }
-		public IDbSet<EventTypeRiskLevelChangeRecordDTO> EventTypeRiskLevelChangeRecordDtos { get; set; }
-		public IDbSet<FlightCargoRecordDTO> FlightCargoRecordDtos { get; set; }
-		public IDbSet<FlightCrewRecordDTO> FlightCrewRecordDtos { get; set; }
-		public IDbSet<FlightNumberAircraftModelRelationDTO> FlightNumberAircraftModelRelationDtos { get; set; }
-		public IDbSet<FlightNumberAirportRelationDTO> FlightNumberAirportRelationDtos { get; set; }
-		public IDbSet<FlightNumberCrewRecordDTO> FlightNumberCrewRecordDtos { get; set; }
-		public IDbSet<FlightNumberDTO> FlightNumberDtos { get; set; }
-		public IDbSet<FlightNumberPeriodDTO> FlightNumberPeriodDtos { get; set; }
-		public IDbSet<FlightPassengerRecordDTO> FlightPassengerRecordDtos { get; set; }
-		public IDbSet<FlightPlanOpsDTO> FlightPlanOpsDtos { get; set; }
-		public IDbSet<FlightPlanOpsRecordsDTO> FlightPlanOpsRecordsDtos { get; set; }
-		public IDbSet<FlightTrackDTO> FlightTrackDtos { get; set; }
-		public IDbSet<FlightTrackRecordDTO> FlightTrackRecordDtos { get; set; }
-		public IDbSet<HangarDTO> HangarDtos { get; set; }
-		public IDbSet<HydraulicConditionDTO> HydraulicConditionDtos { get; set; }
-		public IDbSet<InitialOrderDTO> InitialOrderDtos { get; set; }
-		public IDbSet<InitialOrderRecordDTO> InitialOrderRecordDtos { get; set; }
-		public IDbSet<ItemFileLinkDTO> ItemFileLinkDtos { get; set; }
-		public IDbSet<ItemsRelationDTO> ItemsRelationDtos { get; set; }
-		public IDbSet<JobCardDTO> JobCardDtos { get; set; }
-		public IDbSet<JobCardTaskDTO> JobCardTaskDtos { get; set; }
-		public IDbSet<KitSuppliersRelationDTO> KitSuppliersRelationDtos { get; set; }
-		public IDbSet<KnowledgeModuleDTO> KnowledgeModuleDtos { get; set; }
-		public IDbSet<LandingGearConditionDTO> LandingGearConditionDtos { get; set; }
-		public IDbSet<MaintenanceCheckBindTaskRecordDTO> MaintenanceCheckBindTaskRecordDtos { get; set; }
-		public IDbSet<MaintenanceCheckDTO> MaintenanceCheckDtos { get; set; }
-		public IDbSet<MaintenanceCheckTypeDTO> MaintenanceCheckTypeDtos { get; set; }
-		public IDbSet<MaintenanceDirectiveDTO> MaintenanceDirectiveDtos { get; set; }
-		public IDbSet<MaintenanceProgramChangeRecordDTO> MaintenanceProgramChangeRecordDtos { get; set; }
-		public IDbSet<ModuleRecordDTO> ModuleRecordDtos { get; set; }
-		public IDbSet<MTOPCheckDTO> MtopCheckDtos { get; set; }
-		public IDbSet<MTOPCheckRecordDTO> MtopCheckRecordDtos { get; set; }
-		public IDbSet<OperatorDTO> OperatorDtos { get; set; }
-		public IDbSet<ProcedureDocumentReferenceDTO> ProcedureDocumentReferenceDtos { get; set; }
-		public IDbSet<ProcedureDTO> ProcedureDtos { get; set; }
-		public IDbSet<ProductCostDTO> ProductCostDtos { get; set; }
-		public IDbSet<PurchaseOrderDTO> PurchaseOrderDtos { get; set; }
-		public IDbSet<PurchaseRequestRecordDTO> PurchaseRequestRecordDtos { get; set; }
-		public IDbSet<RequestDTO> RequestDtos { get; set; }
-		public IDbSet<RequestForQuotationDTO> RequestForQuotationDtos { get; set; }
-		public IDbSet<RequestForQuotationRecordDTO> RequestForQuotationRecordDtos { get; set; }
-		public IDbSet<RequestRecordDTO> RequestRecordDtos { get; set; }
-		public IDbSet<RunUpDTO> RunUpDtos { get; set; }
-		public IDbSet<SmsEventTypeDTO> SmsEventTypeDtos { get; set; }
-		public IDbSet<SpecialistCAADTO> SpecialistCaadtos { get; set; }
-		public IDbSet<SpecialistDTO> SpecialistDtos { get; set; }
-		public IDbSet<SpecialistInstrumentRatingDTO> SpecialistInstrumentRatingDtos { get; set; }
-		public IDbSet<SpecialistLicenseDetailDTO> SpecialistLicenseDetailDtos { get; set; }
-		public IDbSet<SpecialistLicenseDTO> SpecialistLicenseDtos { get; set; }
-		public IDbSet<SpecialistLicenseRatingDTO> SpecialistLicenseRatingDtos { get; set; }
-		public IDbSet<SpecialistLicenseRemarkDTO> SpecialistLicenseRemarkDtos { get; set; }
-		public IDbSet<SpecialistMedicalRecordDTO> SpecialistMedicalRecordDtos { get; set; }
-		public IDbSet<SpecialistTrainingDTO> SpecialistTrainingDtos { get; set; }
-		public IDbSet<StockComponentInfoDTO> StockComponentInfoDtos { get; set; }
-		public IDbSet<StoreDTO> StoreDtos { get; set; }
-		public IDbSet<SupplierDocumentDTO> SupplierDocumentDtos { get; set; }
-		public IDbSet<SupplierDTO> SupplierDtos { get; set; }
-		public IDbSet<TransferRecordDTO> TransferRecordDtos { get; set; }
-		public IDbSet<VehicleDTO> VehicleDtos { get; set; }
-		public IDbSet<WorkOrderDTO> WorkOrderDtos { get; set; }
-		public IDbSet<WorkOrderRecordDTO> WorkOrderRecordDtos { get; set; }
-		public IDbSet<WorkPackageDTO> WorkPackageDtos { get; set; }
-		public IDbSet<WorkPackageRecordDTO> WorkPackageRecordDtos { get; set; }
-		public IDbSet<WorkPackageSpecialistsDTO> WorkPackageSpecialistsDtos { get; set; }
-		public IDbSet<WorkShopDTO> WorkShopDtos { get; set; }
-		public IDbSet<UserDTO> UserDtos { get; set; }
-		public IDbSet<QuotationCostDTO> QuotationCostDtos { get; set; }
+		public DbSet<AccessoryRequiredDTO> AccessoryRequiredDtos { get; set; }
+		public DbSet<ActualStateRecordDTO> ActualStateRecordDtos { get; set; }
+		public DbSet<AircraftDTO> AircraftDtos { get; set; }
+		public DbSet<AircraftEquipmentDTO> AircraftEquipmentDtos { get; set; }
+		public DbSet<AircraftFlightDTO> AircraftFlightDtos { get; set; }
+		public DbSet<AircraftWorkerCategoryDTO> AircraftWorkerCategoryDtos  { get; set; }
+		public DbSet<ATLBDTO> Atlbdtos { get; set; }
+		public DbSet<AttachedFileDTO> AttachedFileDtos { get; set; }
+		public DbSet<AuditDTO> AuditDtos { get; set; }
+		public DbSet<AuditRecordDTO> AuditRecordDtos { get; set; }
+		public DbSet<CategoryRecordDTO> CategoryRecordDtos { get; set; }
+		public DbSet<CertificateOfReleaseToServiceDTO> CertificateOfReleaseToServiceDtos { get; set; }
+		public DbSet<ComponentDirectiveDTO> ComponentDirectiveDtos { get; set; }
+		public DbSet<ComponentDTO> ComponentDtos { get; set; }
+		public DbSet<ComponentLLPCategoryChangeRecordDTO> ComponentLLPCategoryChangeRecordDtos { get; set; }
+		public DbSet<ComponentLLPCategoryDataDTO> ComponentLLPCategoryDataDtos { get; set; }
+		public DbSet<ComponentOilConditionDTO> ComponentOilConditionDtos { get; set; }
+		public DbSet<ComponentWorkInRegimeParamDTO> ComponentWorkInRegimeParamDtos { get; set; }
+		public DbSet<CorrectiveActionDTO> CorrectiveActionDtos { get; set; }
+		public DbSet<DamageDocumentDTO> DamageDocumentDtos { get; set; }
+		public DbSet<DamageSectorDTO> DamageSectorDtos { get; set; }
+		public DbSet<DirectiveDTO> DirectiveDtos  { get; set; }
+		public DbSet<DirectiveRecordDTO> DirectiveRecordDtos { get; set; }
+		public DbSet<DiscrepancyDTO> DiscrepancyDtos { get; set; }
+		public DbSet<DocumentDTO> DocumentDtos { get; set; }
+		public DbSet<EngineAccelerationTimeDTO> EngineAccelerationTimeDtos { get; set; }
+		public DbSet<EngineConditionDTO> EngineConditionDtos { get; set; }
+		public DbSet<EngineTimeInRegimeDTO> EngineTimeInRegimeDtos { get; set; }
+		public DbSet<EventConditionDTO> EventConditionDtos { get; set; }
+		public DbSet<EventDTO> EventDtos { get; set; }
+		public DbSet<EventTypeRiskLevelChangeRecordDTO> EventTypeRiskLevelChangeRecordDtos { get; set; }
+		public DbSet<FlightCargoRecordDTO> FlightCargoRecordDtos { get; set; }
+		public DbSet<FlightCrewRecordDTO> FlightCrewRecordDtos { get; set; }
+		public DbSet<FlightNumberAircraftModelRelationDTO> FlightNumberAircraftModelRelationDtos { get; set; }
+		public DbSet<FlightNumberAirportRelationDTO> FlightNumberAirportRelationDtos { get; set; }
+		public DbSet<FlightNumberCrewRecordDTO> FlightNumberCrewRecordDtos { get; set; }
+		public DbSet<FlightNumberDTO> FlightNumberDtos { get; set; }
+		public DbSet<FlightNumberPeriodDTO> FlightNumberPeriodDtos { get; set; }
+		public DbSet<FlightPassengerRecordDTO> FlightPassengerRecordDtos { get; set; }
+		public DbSet<FlightPlanOpsDTO> FlightPlanOpsDtos { get; set; }
+		public DbSet<FlightPlanOpsRecordsDTO> FlightPlanOpsRecordsDtos { get; set; }
+		public DbSet<FlightTrackDTO> FlightTrackDtos { get; set; }
+		public DbSet<FlightTrackRecordDTO> FlightTrackRecordDtos { get; set; }
+		public DbSet<HangarDTO> HangarDtos { get; set; }
+		public DbSet<HydraulicConditionDTO> HydraulicConditionDtos { get; set; }
+		public DbSet<InitialOrderDTO> InitialOrderDtos { get; set; }
+		public DbSet<InitialOrderRecordDTO> InitialOrderRecordDtos { get; set; }
+		public DbSet<ItemFileLinkDTO> ItemFileLinkDtos { get; set; }
+		public DbSet<ItemsRelationDTO> ItemsRelationDtos { get; set; }
+		public DbSet<JobCardDTO> JobCardDtos { get; set; }
+		public DbSet<JobCardTaskDTO> JobCardTaskDtos { get; set; }
+		public DbSet<KitSuppliersRelationDTO> KitSuppliersRelationDtos { get; set; }
+		public DbSet<KnowledgeModuleDTO> KnowledgeModuleDtos { get; set; }
+		public DbSet<LandingGearConditionDTO> LandingGearConditionDtos { get; set; }
+		public DbSet<MaintenanceCheckBindTaskRecordDTO> MaintenanceCheckBindTaskRecordDtos { get; set; }
+		public DbSet<MaintenanceCheckDTO> MaintenanceCheckDtos { get; set; }
+		public DbSet<MaintenanceCheckTypeDTO> MaintenanceCheckTypeDtos { get; set; }
+		public DbSet<MaintenanceDirectiveDTO> MaintenanceDirectiveDtos { get; set; }
+		public DbSet<MaintenanceProgramChangeRecordDTO> MaintenanceProgramChangeRecordDtos { get; set; }
+		public DbSet<ModuleRecordDTO> ModuleRecordDtos { get; set; }
+		public DbSet<MTOPCheckDTO> MtopCheckDtos { get; set; }
+		public DbSet<MTOPCheckRecordDTO> MtopCheckRecordDtos { get; set; }
+		public DbSet<OperatorDTO> OperatorDtos { get; set; }
+		public DbSet<ProcedureDocumentReferenceDTO> ProcedureDocumentReferenceDtos { get; set; }
+		public DbSet<ProcedureDTO> ProcedureDtos { get; set; }
+		public DbSet<ProductCostDTO> ProductCostDtos { get; set; }
+		public DbSet<PurchaseOrderDTO> PurchaseOrderDtos { get; set; }
+		public DbSet<PurchaseRequestRecordDTO> PurchaseRequestRecordDtos { get; set; }
+		public DbSet<RequestDTO> RequestDtos { get; set; }
+		public DbSet<RequestForQuotationDTO> RequestForQuotationDtos { get; set; }
+		public DbSet<RequestForQuotationRecordDTO> RequestForQuotationRecordDtos { get; set; }
+		public DbSet<RequestRecordDTO> RequestRecordDtos { get; set; }
+		public DbSet<RunUpDTO> RunUpDtos { get; set; }
+		public DbSet<SmsEventTypeDTO> SmsEventTypeDtos { get; set; }
+		public DbSet<SpecialistCAADTO> SpecialistCaadtos { get; set; }
+		public DbSet<SpecialistDTO> SpecialistDtos { get; set; }
+		public DbSet<SpecialistInstrumentRatingDTO> SpecialistInstrumentRatingDtos { get; set; }
+		public DbSet<SpecialistLicenseDetailDTO> SpecialistLicenseDetailDtos { get; set; }
+		public DbSet<SpecialistLicenseDTO> SpecialistLicenseDtos { get; set; }
+		public DbSet<SpecialistLicenseRatingDTO> SpecialistLicenseRatingDtos { get; set; }
+		public DbSet<SpecialistLicenseRemarkDTO> SpecialistLicenseRemarkDtos { get; set; }
+		public DbSet<SpecialistMedicalRecordDTO> SpecialistMedicalRecordDtos { get; set; }
+		public DbSet<SpecialistTrainingDTO> SpecialistTrainingDtos { get; set; }
+		public DbSet<StockComponentInfoDTO> StockComponentInfoDtos { get; set; }
+		public DbSet<StoreDTO> StoreDtos { get; set; }
+		public DbSet<SupplierDocumentDTO> SupplierDocumentDtos { get; set; }
+		public DbSet<SupplierDTO> SupplierDtos { get; set; }
+		public DbSet<TransferRecordDTO> TransferRecordDtos { get; set; }
+		public DbSet<VehicleDTO> VehicleDtos { get; set; }
+		public DbSet<WorkOrderDTO> WorkOrderDtos { get; set; }
+		public DbSet<WorkOrderRecordDTO> WorkOrderRecordDtos { get; set; }
+		public DbSet<WorkPackageDTO> WorkPackageDtos { get; set; }
+		public DbSet<WorkPackageRecordDTO> WorkPackageRecordDtos { get; set; }
+		public DbSet<WorkPackageSpecialistsDTO> WorkPackageSpecialistsDtos { get; set; }
+		public DbSet<WorkShopDTO> WorkShopDtos { get; set; }
+		public DbSet<UserDTO> UserDtos { get; set; }
+		public DbSet<QuotationCostDTO> QuotationCostDtos { get; set; }
 
 		#endregion
 		
-		protected override void OnModelCreating(DbModelBuilder modelBuilder)
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			#region DictionaryMap
 

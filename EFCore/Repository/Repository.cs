@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Validation;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
 using EFCore.Attributte;
+using EFCore.BulkExtensions;
 using EFCore.DTO;
 using EFCore.DTO.General;
 using EFCore.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Z.EntityFramework.Plus;
 
 
@@ -139,21 +139,6 @@ namespace EFCore.Repository
 
 				return entity.ItemId;
 			}
-			catch (DbEntityValidationException e)
-			{
-				foreach (var eve in e.EntityValidationErrors)
-				{
-					Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-						eve.Entry.Entity.GetType().Name, eve.Entry.State);
-					foreach (var ve in eve.ValidationErrors)
-					{
-						Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-							ve.PropertyName, ve.ErrorMessage);
-					}
-				}
-
-				throw;
-			}
 			catch (Exception exception)
 			{
 				throw exception;
@@ -165,7 +150,7 @@ namespace EFCore.Repository
 			if (!batchSize.HasValue)
 				batchSize = 250;
 
-			_context.BulkInsert(entity, config => { config.BatchSize = batchSize.Value; });
+			_context.BulkInsert(entity.ToList(), config => { config.BatchSize = batchSize.Value; });
 		}
 
 		public void BulkUpdate(IEnumerable<T> entity, int? batchSize = null)
@@ -173,7 +158,7 @@ namespace EFCore.Repository
 			if (!batchSize.HasValue)
 				batchSize = 250;
 
-			_context.BulkUpdate(entity, config => { config.BatchSize = batchSize.Value; });
+			_context.BulkUpdate(entity.ToList(), config => { config.BatchSize = batchSize.Value; });
 		}
 
 		public void BulkDelete(IEnumerable<T> entity, int? batchSize = null)
@@ -181,9 +166,8 @@ namespace EFCore.Repository
 			if (!batchSize.HasValue)
 				batchSize = 250;
 
-			_context.BulkDelete(entity, config => { config.BatchSize = batchSize.Value; });
+			_context.BulkDelete(entity.ToList(), config => { config.BatchSize = batchSize.Value; });
 		}
-
 
 
 		#region Async
@@ -224,20 +208,9 @@ namespace EFCore.Repository
 
 				return entity.ItemId;
 			}
-			catch (DbEntityValidationException e)
+			catch (Exception exception)
 			{
-				foreach (var eve in e.EntityValidationErrors)
-				{
-					Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-						eve.Entry.Entity.GetType().Name, eve.Entry.State);
-					foreach (var ve in eve.ValidationErrors)
-					{
-						Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-							ve.PropertyName, ve.ErrorMessage);
-					}
-				}
-
-				throw;
+				throw exception;
 			}
 		}
 
@@ -251,7 +224,6 @@ namespace EFCore.Repository
 		}
 
 		#endregion
-
 
 		private IQueryable<T> getAllQueryable(string filters = null, bool loadChild = false, bool getDeleted = false, bool getAll = false)
 		{
