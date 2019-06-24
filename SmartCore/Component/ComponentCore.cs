@@ -310,7 +310,7 @@ namespace SmartCore.Component
 		/// <returns></returns>
 		private ComponentCollection GetComponentsByQuery(string query, bool loadChild = true)
 		{
-			var components = new ComponentCollection(_loader.GetObjectListAll<Entities.General.Accessory.Component>(query, loadChild));
+			var components = new ComponentCollection(_loader.GetObjectListAll<Entities.General.Accessory.Component>(query, false));
 
 			LoadRelatedObjectds(components.ToArray(), loadChild);
 
@@ -1787,7 +1787,7 @@ namespace SmartCore.Component
 
 			#region Загружаем записи о перемещении
 			//TODO:(Evgenii Babak) нужно использовать TransferRecordsDataAccess
-			var transfers = _newLoader.GetObjectListAll<TransferRecordDTO, TransferRecord>(new Filter("ParentID", componentids),true).ToList();
+			var transfers = _newLoader.GetObjectListAll<TransferRecordDTO, TransferRecord>(new Filter("ParentID", componentids),false).ToList();
 			SetFromAndDestination(transfers);
 			ConnectTransfersWithComponents(components, transfers);
 
@@ -1816,7 +1816,9 @@ namespace SmartCore.Component
 				});
 
 				var ids = ksrs.Select(k => k.SupplierId).ToArray();
-				var suppliers = _newLoader.GetObjectListAll<SupplierDTO,Supplier>(new Filter("ItemId", ids));
+				var suppliers = new List<Supplier>();
+				if(ids.Length > 0)
+					suppliers.AddRange(_newLoader.GetObjectListAll<SupplierDTO,Supplier>(new Filter("ItemId", ids)));
 
 				#endregion
 
@@ -1862,45 +1864,45 @@ namespace SmartCore.Component
 
 				var types = new[] {SmartCoreType.Component.ItemId, SmartCoreType.ComponentDirective.ItemId};
 				//Загрузка документов
-				var documents = _newLoader.GetObjectListAll<DocumentDTO,Document>(new Filter("ParentTypeId", types), true);
+				//var documents = _newLoader.GetObjectListAll<DocumentDTO,Document>(new Filter("ParentTypeId", types), true);
 
 				
 				foreach (var component in components)
 				{
-					if (documents.Count > 0)
-					{
-						var crs = _casEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Component CRS Form") as DocumentSubType;
-						var shipping =
-							_casEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Shipping document") as DocumentSubType;
+					//if (documents.Count > 0)
+					//{
+					//	var crs = _casEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Component CRS Form") as DocumentSubType;
+					//	var shipping =
+					//		_casEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Shipping document") as DocumentSubType;
 
-						var docShipping = documents.FirstOrDefault(d =>
-							d.ParentId == component.ItemId && d.ParentTypeId == SmartCoreType.Component.ItemId &&
-							d.DocumentSubType == shipping);
-						if (docShipping != null)
-						{
-							component.Document = docShipping;
-							component.Document.Parent = component;
-						}
+					//	var docShipping = documents.FirstOrDefault(d =>
+					//		d.ParentId == component.ItemId && d.ParentTypeId == SmartCoreType.Component.ItemId &&
+					//		d.DocumentSubType == shipping);
+					//	if (docShipping != null)
+					//	{
+					//		component.Document = docShipping;
+					//		component.Document.Parent = component;
+					//	}
 
-						var docCrs = documents.FirstOrDefault(d =>
-							d.ParentId == component.ItemId && d.ParentTypeId == SmartCoreType.Component.ItemId && d.DocumentSubType == crs);
-						if (docCrs != null)
-						{
-							component.DocumentCRS = docCrs;
-							component.DocumentCRS.Parent = component;
-						}
+					//	var docCrs = documents.FirstOrDefault(d =>
+					//		d.ParentId == component.ItemId && d.ParentTypeId == SmartCoreType.Component.ItemId && d.DocumentSubType == crs);
+					//	if (docCrs != null)
+					//	{
+					//		component.DocumentCRS = docCrs;
+					//		component.DocumentCRS.Parent = component;
+					//	}
 
-						foreach (var directive in component.ComponentDirectives)
-						{
-							var docCd = documents.FirstOrDefault(d =>
-								d.ParentId == directive.ItemId && d.ParentTypeId == SmartCoreType.ComponentDirective.ItemId);
-							if (docCd != null)
-							{
-								directive.Document = docCd;
-								directive.Document.Parent = directive;
-							}
-						}
-					}
+					//	foreach (var directive in component.ComponentDirectives)
+					//	{
+					//		var docCd = documents.FirstOrDefault(d =>
+					//			d.ParentId == directive.ItemId && d.ParentTypeId == SmartCoreType.ComponentDirective.ItemId);
+					//		if (docCd != null)
+					//		{
+					//			directive.Document = docCd;
+					//			directive.Document.Parent = directive;
+					//		}
+					//	}
+					//}
 
 
 					if (kits.Count > 0)
