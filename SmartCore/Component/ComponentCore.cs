@@ -310,7 +310,7 @@ namespace SmartCore.Component
 		/// <returns></returns>
 		private ComponentCollection GetComponentsByQuery(string query, bool loadChild = true)
 		{
-			var components = new ComponentCollection(_loader.GetObjectListAll<Entities.General.Accessory.Component>(query, false));
+			var components = new ComponentCollection(_loader.GetObjectListAll<Entities.General.Accessory.Component>(query, loadChild));
 
 			LoadRelatedObjectds(components.ToArray(), loadChild);
 
