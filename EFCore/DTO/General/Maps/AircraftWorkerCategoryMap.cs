@@ -6,12 +6,7 @@ namespace EFCore.DTO.General.Maps
 	{
 		public AircraftWorkerCategoryMap() : base()
 		{
-			ToTable("dbo.AircraftWorkerCategories");
-
-			Property(i => i.Category)
-				.HasMaxLength(256)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("Category");
+			
 		}
 	}
 }

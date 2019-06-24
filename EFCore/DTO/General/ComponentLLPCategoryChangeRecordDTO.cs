@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using EFCore.Attributte;
 using EFCore.DTO.Dictionaries;
@@ -7,22 +9,28 @@ using EFCore.Interfaces;
 
 namespace EFCore.DTO.General
 {
+	[Table("ComponentLLPCategoryChangeRecords", Schema = "dbo")]
 	[DataContract(IsReference = true)]
 	public class ComponentLLPCategoryChangeRecordDTO : BaseEntity, IFileDtoContainer
 	{
 		[DataMember]
+		[Column("ParentId"), Required]
 		public int ParentId { get; set; }
 
 		[DataMember]
+		[Column("RecordDate")]
 		public DateTime? RecordDate { get; set; }
 
 		[DataMember]
+		[Column("ToCategoryId")]
 		public int? ToCategoryId { get; set; }
 
 		[DataMember]
+		[Column("OnLifeLength"), MaxLength(50)]
 		public byte[] OnLifeLength { get; set; }
 
 		[DataMember]
+		[Column("Remarks"), MaxLength(250)]
 		public string Remarks { get; set; }
 
 		[DataMember]
