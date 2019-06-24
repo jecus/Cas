@@ -79,20 +79,6 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
         //}
         #endregion
 
-        #region protected override void SetItemColor(ListViewItem listViewItem, Procedure item)
-		//TODO COLOR!
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="listViewItem"></param>
-        /// <param name="item"></param>
-        //protected override void SetItemColor(ListViewItem listViewItem, Procedure item)
-        //{
-        //    listViewItem.ForeColor = Color.Black;
-        //    base.SetItemColor(listViewItem, item);
-        //}
-        #endregion
-
         #region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Procedure item)
         /// <summary>
         /// 
