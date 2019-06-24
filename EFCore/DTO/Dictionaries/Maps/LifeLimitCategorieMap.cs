@@ -7,23 +7,7 @@ namespace EFCore.DTO.Maps
 	{
 		public LifeLimitCategorieMap() : base()
 		{
-			ToTable("Dictionaries.LifeLimitCategories");
-
-			Property(i => i.CategoryType)
-				.HasMaxLength(4)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("CategoryType");
-
-			Property(i => i.CategoryName)
-				.HasMaxLength(50)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("CategoryName");
-
-			Property(i => i.AircraftModelId)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("AircraftModelId");
-
-
+			
 			#region relation
 
 			HasRequired(i => i.AccessoryDescription)

@@ -7,18 +7,7 @@ namespace EFCore.DTO.Maps
 	{
 		public ServiceTypeMap() : base()
 		{
-			ToTable("Dictionaries.ServiceTypes");
-
-			Property(i => i.Name)
-				.IsRequired()
-				.HasMaxLength(50)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("Name");
-
-			Property(i => i.FullName)
-				.HasMaxLength(256)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("FullName");
+			
 		}
 	}
 }

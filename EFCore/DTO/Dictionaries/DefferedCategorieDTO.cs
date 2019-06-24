@@ -1,22 +1,27 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using EFCore.Attributte;
 using EFCore.DTO.General;
 
 namespace EFCore.DTO.Dictionaries
 {
-	//DefferedCategory
+	[Table("DefferedCategories", Schema = "Dictionaries")]
 	[DataContract(IsReference = true)]
 	[Condition("IsDeleted", 0)]
 	public class DefferedCategorieDTO : BaseEntity
 	{
 		[DataMember]
+		[Column("CategoryName"), MaxLength(50)]
 		public string CategoryName { get; set; }
 
 		[DataMember]
+		[Column("AircraftModelId")]
 		public int? AircraftModelId { get; set; }
 
 		[DataMember]
+		[Column("Threshold")]
 		public byte[] Threshold { get; set; }
 
 		[DataMember]

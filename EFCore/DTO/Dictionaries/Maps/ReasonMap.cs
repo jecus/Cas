@@ -7,17 +7,7 @@ namespace EFCore.DTO.Maps
 	{
 		public ReasonMap() : base()
 		{
-			ToTable("Dictionaries.Reasons");
-
-			Property(i => i.Name)
-				.HasMaxLength(50)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("Name");
-
-			Property(i => i.Category)
-				.HasMaxLength(50)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("Category");
+			
 		}
 	}
 }

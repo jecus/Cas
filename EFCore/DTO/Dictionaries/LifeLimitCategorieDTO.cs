@@ -1,21 +1,27 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using EFCore.Attributte;
 using EFCore.DTO.General;
 
 namespace EFCore.DTO.Dictionaries
 {
+	[Table("LifeLimitCategories", Schema = "Dictionaries")]
 	[DataContract(IsReference = true)]
 	[Condition("IsDeleted", 0)]
 	public class LifeLimitCategorieDTO : BaseEntity
 	{
 		[DataMember]
+		[Column("CategoryType"), MaxLength(4)]
 		public string CategoryType { get; set; }
 
 	    [DataMember]
+	    [Column("CategoryName"), MaxLength(50)]
 		public string CategoryName { get; set; }
 
 	    [DataMember]
+	    [Column("AircraftModelId")]
 		public int? AircraftModelId { get; set; }
 
 	    [DataMember]

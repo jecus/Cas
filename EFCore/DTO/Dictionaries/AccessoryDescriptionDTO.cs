@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using EFCore.Attributte;
 using EFCore.DTO.General;
@@ -6,99 +8,122 @@ using EFCore.Interfaces;
 
 namespace EFCore.DTO.Dictionaries
 {
-	//AircraftModel
-	//[Condition("ModelingObjectTypeId", "7")]
-	//ComponentModel
-	//[Condition("ModelingObjectTypeId", "5")]
-	//Product
-	//[Condition("ModelingObjectTypeId", "-1")]
+	[Table("AccessoryDescriptions", Schema = "Dictionaries")]
 	[DataContract(IsReference = true)]
 	[Condition("IsDeleted", 0)]
 	public class AccessoryDescriptionDTO : BaseEntity, IFileDtoContainer
     {
 		[DataMember]
+		[Column("Description")]
 	    public string Description { get; set; }
 
 	    [DataMember]
+	    [Column("PartNumber"), MaxLength(256)]
 		public string PartNumber { get; set; }
 
 		[DataMember]
+		[Column("AltPartNumber"), MaxLength(256)]
 		public string AltPartNumber { get; set; }
 
 		[DataMember]
+		[Column("Standart")]
 		public int? StandartId { get; set; }
 
-	    [DataMember]
+		[DataMember]
+		[Column("Manufacturer"), MaxLength(256)]
 		public string Manufacturer { get; set; }
 
-	    [DataMember]
+		[DataMember]
+		[Column("CostNew")]
 		public double? CostNew { get; set; }
 
-	    [DataMember]
+		[DataMember]
+		[Column("CostOverhaul")]
 		public double? CostOverhaul { get; set; }
 
-	    [DataMember]
+		[DataMember]
+		[Column("CostServiceable")]
 		public double? CostServiceable { get; set; }
 
-	    [DataMember]
+		[DataMember]
+		[Column("Measure")]
 		public int? Measure { get; set; }
 
-	    [DataMember]
+		[DataMember]
+		[Column("Remarks")]
 		public string Remarks { get; set; }
 
-	    [DataMember]
+		[DataMember]
+		[Column("DefaultProduct"), MaxLength(256)]
 		public string DefaultProduct { get; set; }
 
-	    [DataMember]
+		[DataMember]
+		[Column("ModelingObjectTypeId"), Required]
 		public int ModelingObjectTypeId { get; set; }
 
-	    [DataMember]
+		[DataMember]
+		[Column("ModelingObjectSubTypeId")]
 		public int? ModelingObjectSubTypeId { get; set; }
 
-	    [DataMember]
+		[DataMember]
+		[Column("Model"), MaxLength(256)]
 		public string Model { get; set; }
 
-	    [DataMember]
+		[DataMember]
+		[Column("SubModel"), MaxLength(256)]
 		public string SubModel { get; set; }
 
-	    [DataMember]
+		[DataMember]
+		[Column("FullName"), MaxLength(256)]
 		public string FullName { get; set; }
 
-	    [DataMember]
+		[DataMember]
+		[Column("ShortName"), MaxLength(256)]
 		public string ShortName { get; set; }
 
-	    [DataMember]
+		[DataMember]
+		[Column("Designer"), MaxLength(256)]
 		public string Designer { get; set; }
 
-	    [DataMember]
+		[DataMember]
+		[Column("Code"), MaxLength(256)]
 		public string Code { get; set; }
 
-	    [DataMember]
+		[DataMember]
+		[Column("AtaChapter")]
 		public int? AtaChapterId { get; set; }
 
-	    [DataMember]
+		[DataMember]
+		[Column("ComponentClass")]
 		public short? ComponentClass { get; set; }
 
-	    [DataMember]
+		[DataMember]
+		[Column("ComponentModel")]
 		public int? ComponentModel { get; set; }
 
 		[DataMember]
+		[Column("ComponentType")]
 		public int? ComponentType { get; set; }
 
-	    [DataMember]
+		[DataMember]
+		[Column("IsDangerous"), Required]
 		public bool IsDangerous { get; set; }
 
-	    [DataMember]
-	    public string DescRus { get; set; }
-
-	    [DataMember]
-	    public string HTS { get; set; }
-
-        [DataMember]
-        public string Reference { get; set; }
+		[DataMember]
+		[Column("DescRus")]
+		public string DescRus { get; set; }
 
 		[DataMember]
-        public string IsEffectivity { get; set; }
+		[Column("HTS")]
+		public string HTS { get; set; }
+
+		[DataMember]
+		[Column("Reference"), MaxLength(128)]
+		public string Reference { get; set; }
+
+        [DataMember]
+        [Column("IsEffectivity")]
+		public string IsEffectivity { get; set; }
 
         [DataMember]
         [Include]

@@ -7,12 +7,7 @@ namespace EFCore.DTO.Maps
 	{
 		public TripNameMap() : base()
 		{
-			ToTable("Dictionaries.TripName");
-
-			Property(i => i.TripName)
-				.HasMaxLength(256)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("TripName");
+			
 		}
 	}
 }

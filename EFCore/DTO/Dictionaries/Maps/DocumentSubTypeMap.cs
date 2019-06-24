@@ -7,17 +7,7 @@ namespace EFCore.DTO.Maps
 	{
 		public DocumentSubTypeMap() : base()
 		{
-			ToTable("Dictionaries.DocumentSubType");
 			
-			Property(i => i.DocumentTypeId)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("DocumentTypeId");
-
-			Property(i => i.Name)
-				.HasMaxLength(50)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("Name");
 		}
 	}
 }

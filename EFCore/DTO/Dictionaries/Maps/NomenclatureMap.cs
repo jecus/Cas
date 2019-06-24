@@ -7,24 +7,6 @@ namespace EFCore.DTO.Maps
 	{
 		public NomenclatureMap() : base()
 		{
-			ToTable("Dictionaries.Nomenclatures");
-
-			Property(i => i.DepartmentId)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("DepartmentId");
-
-			Property(i => i.Name)
-				.HasMaxLength(50)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("Name");
-
-			Property(i => i.FullName)
-				.IsRequired()
-				.HasMaxLength(256)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("FullName");
-
 			#region relation
 
 			HasRequired(i => i.Department)

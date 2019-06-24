@@ -7,21 +7,7 @@ namespace EFCore.DTO.Maps
 	{
 		public DefferedCategorieMap() : base()
 		{
-			ToTable("Dictionaries.DefferedCategories");
-
-			Property(i => i.CategoryName)
-				.HasMaxLength(50)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("CategoryName");
-
-			Property(i => i.AircraftModelId)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("AircraftModelId");
-
-			Property(i => i.Threshold)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("Threshold");
-
+			
 			#region relation
 
 			HasRequired(i => i.AccessoryDescription)

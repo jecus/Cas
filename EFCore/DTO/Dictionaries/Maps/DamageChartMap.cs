@@ -7,18 +7,6 @@ namespace EFCore.DTO.Maps
 	{
 		public DamageChartMap() : base()
 		{
-			ToTable("Dictionaries.DamageCharts");
-
-			Property(i => i.ChartName)
-				.HasMaxLength(50)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("ChartName");
-
-			Property(i => i.AircraftModelId)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("AircraftModelId");
-
-			
 			HasRequired(i => i.AccessoryDescription)
 				.WithMany(i => i.DamageChartDtos)
 				.HasForeignKey(i => i.AircraftModelId);

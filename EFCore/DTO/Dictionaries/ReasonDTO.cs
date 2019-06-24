@@ -1,16 +1,21 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using EFCore.DTO.General;
 
 namespace EFCore.DTO.Dictionaries
 {
+	[Table("Reasons", Schema = "Dictionaries")]
 	[DataContract(IsReference = true)]
 	public class ReasonDTO : BaseEntity
 	{
 		[DataMember]
+		[Column("Name"), MaxLength(50)]
 		public string Name { get; set; }
 
 	    [DataMember]
+	    [Column("Category"), MaxLength(50)]
 		public string Category { get; set; }
 
 

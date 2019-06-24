@@ -295,8 +295,6 @@ namespace EFCore.DTO
 			modelBuilder.Configurations.Add(new UserMap());
 			modelBuilder.Configurations.Add(new QuotationCostMap());
 
-
-
 			#endregion
 
 		}
