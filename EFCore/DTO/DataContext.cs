@@ -1,8 +1,6 @@
-﻿
-using EFCore.DTO.Dictionaries;
+﻿using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
 using EFCore.DTO.General.Maps;
-using EFCore.DTO.Maps;
 using Microsoft.EntityFrameworkCore;
 
 namespace EFCore.DTO
