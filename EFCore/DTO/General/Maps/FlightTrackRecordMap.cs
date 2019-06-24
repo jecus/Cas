@@ -6,15 +6,7 @@ namespace EFCore.DTO.General.Maps
 	{
 		public FlightTrackRecordMap() : base()
 		{
-			ToTable("dbo.FlightTripRecords");
-
-			Property(i => i.FlightTripId)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("FlightTripId");
-
-			Property(i => i.FlightPeriodId)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("FlightPeriodId");
+			
 		}
 	}
 }

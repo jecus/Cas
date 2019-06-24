@@ -6,20 +6,6 @@ namespace EFCore.DTO.General.Maps
 	{
 		public FlightNumberCrewRecordMap() : base()
 		{
-			ToTable("dbo.FlightNumberCrewRecords");
-
-			Property(i => i.FlightNumberId)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("FlightNumberId");
-
-			Property(i => i.SpecializationId)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("SpecializationId");
-
-			Property(i => i.Count)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("Count");
-
 			HasRequired(i => i.FlightNumber)
 				.WithMany(i => i.FlightNumberCrewRecordDtos)
 				.HasForeignKey(i => i.FlightNumberId);

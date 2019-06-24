@@ -1,22 +1,29 @@
-﻿using System.Runtime.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 using EFCore.Attributte;
 using EFCore.DTO.Dictionaries;
 
 namespace EFCore.DTO.General
 {
+	[Table("ItemsFilesLinks", Schema = "dbo")]
 	[DataContract(IsReference = true)]
 	public class ItemFileLinkDTO : BaseEntity
 	{
 		[DataMember]
+		[Column("ParentId"), Required]
 		public int? ParentId { get; set; }
 
 		[DataMember]
+		[Column("ParentTypeId"), Required]
 		public int ParentTypeId { get; set; }
 
 		[DataMember]
+		[Column("LinkType"), Required]
 		public short LinkType { get; set; }
 
 		[DataMember]
+		[Column("FileId")]
 		public int? FileId { get; set; }
 
 		[DataMember]

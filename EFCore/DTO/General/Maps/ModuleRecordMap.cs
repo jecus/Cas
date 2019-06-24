@@ -6,21 +6,6 @@ namespace EFCore.DTO.General.Maps
 	{
 		public ModuleRecordMap() : base()
 		{
-			ToTable("dbo.ModuleRecords");
-
-			Property(i => i.AircraftWorkerCategoryId)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("AircraftWorkerCategoryId");
-
-			Property(i => i.KnowledgeModuleId)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("KnowledgeModuleId");
-
-			Property(i => i.KnowledgeLevel)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("KnowledgeLevel");
-
-
 			HasRequired(i => i.AircraftWorkerCategory)
 				.WithMany(i => i.ModuleRecordDtos)
 				.HasForeignKey(i => i.AircraftWorkerCategoryId);

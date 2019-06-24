@@ -1,20 +1,25 @@
-﻿using System.Runtime.Serialization;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 using EFCore.Attributte;
 using EFCore.DTO.Dictionaries;
 
 namespace EFCore.DTO.General
 {
+	[Table("FlightNumberCrewRecords", Schema = "dbo")]
 	[DataContract(IsReference = true)]
 	[Condition("IsDeleted", 0)]
 	public class FlightNumberCrewRecordDTO : BaseEntity
 	{
 		[DataMember]
+		[Column("FlightNumberId")]
 		public int? FlightNumberId { get; set; }
 
 		[DataMember]
+		[Column("SpecializationId")]
 		public int? SpecializationId { get; set; }
 
 		[DataMember]
+		[Column("Count")]
 		public int? Count { get; set; }
 
 		[DataMember]

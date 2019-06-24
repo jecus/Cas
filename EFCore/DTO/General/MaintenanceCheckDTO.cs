@@ -1,41 +1,54 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using EFCore.Attributte;
 
 namespace EFCore.DTO.General
 {
+	[Table("Cas3MaintenanceCheck", Schema = "dbo")]
 	[DataContract(IsReference = true)]
 	[Condition("IsDeleted", 0)]
 	public class MaintenanceCheckDTO : BaseEntity
 	{
 		[DataMember]
+		[Column("Name"), MaxLength(50)]
 		public string Name { get; set; }
 
 		[DataMember]
+		[Column("Interval")]
 		public byte[] Interval { get; set; }
 
 		[DataMember]
+		[Column("Notify")]
 		public byte[] Notify { get; set; }
 
 		[DataMember]
+		[Column("ParentAircraft"), Required]
 		public int ParentAircraft { get; set; }
 
 		[DataMember]
+		[Column("CheckTypeId"), Required]
 		public int CheckTypeId { get; set; }
 
 		[DataMember]
+		[Column("Cost")]
 		public double? Cost { get; set; }
 
 		[DataMember]
+		[Column("ManHours")]
 		public double? ManHours { get; set; }
 
 		[DataMember]
+		[Column("Schedule")]
 		public bool? Schedule { get; set; }
 
 		[DataMember]
+		[Column("Resource"), Required]
 		public short Resource { get; set; }
 
 		[DataMember]
+		[Column("Grouping"), Required]
 		public bool Grouping { get; set; }
 
 		[DataMember]

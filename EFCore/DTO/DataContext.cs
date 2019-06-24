@@ -341,6 +341,7 @@ namespace EFCore.DTO
 			modelBuilder.Configurations.Add(new MTOPCheckMap());
 			modelBuilder.Configurations.Add(new MTOPCheckRecordMap());
 			modelBuilder.Configurations.Add(new OperatorMap());
+
 			modelBuilder.Configurations.Add(new ProcedureDocumentReferenceMap());
 			modelBuilder.Configurations.Add(new ProcedureMap());
 			modelBuilder.Configurations.Add(new ProductCostMap());

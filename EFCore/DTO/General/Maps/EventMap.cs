@@ -6,54 +6,6 @@ namespace EFCore.DTO.General.Maps
 	{
 		public EventMap() : base()
 		{
-			ToTable("dbo.Events");
-
-			Property(i => i.EventTypeId)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("EventTypeId");
-
-			Property(i => i.EventCategoryId)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("EventCategoryId");
-
-			Property(i => i.EventClassId)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("EventClassId");
-
-			Property(i => i.IncidentTypeId)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IncidentTypeId");
-
-			Property(i => i.RecordDate)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("RecordDate");
-
-			Property(i => i.ParentTypeId)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("ParentTypeId");
-
-			Property(i => i.ParentId)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("ParentId");
-
-			Property(i => i.Remarks)
-				.HasMaxLength(128)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("Remarks");
-
-			Property(i => i.Description)
-				.HasMaxLength(128)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("Description");
-
-			Property(i => i.EventStatusId)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("EventStatusId");
-
-			Property(i => i.AircraftId)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("AircraftId");
-
 			HasRequired(i => i.EventType)
 				.WithMany(i => i.EventDtos)
 				.HasForeignKey(i => i.EventTypeId);

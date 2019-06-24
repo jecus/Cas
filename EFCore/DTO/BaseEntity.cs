@@ -15,7 +15,7 @@ namespace EFCore.DTO
 		[DataMember]
 		[Column("ItemId")]
 		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int ItemId { get; set; }
+		public virtual int ItemId { get; set; }
 
 		[DataMember]
 		[Column("CorrectorId")]

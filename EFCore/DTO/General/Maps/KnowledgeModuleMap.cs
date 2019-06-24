@@ -6,22 +6,7 @@ namespace EFCore.DTO.General.Maps
 	{
 		public KnowledgeModuleMap() : base()
 		{
-			ToTable("dbo.KnowledgeModules");
-
-			Property(i => i.Number)
-				.HasMaxLength(256)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("Number");
-
-			Property(i => i.Title)
-				.HasMaxLength(256)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("Title");
-
-			Property(i => i.Description)
-				.HasMaxLength(2048)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("Description");
+			
 		}
 	}
 }
