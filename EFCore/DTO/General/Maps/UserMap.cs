@@ -6,36 +6,7 @@ namespace EFCore.DTO.General.Maps
 	{
 		public UserMap() : base()
 		{
-			ToTable("dbo.Users");
-
-			Property(i => i.Name)
-				.HasMaxLength(100)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("Name");
-
-			Property(i => i.Surname)
-				.HasMaxLength(100)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("Surname");
-
-
-			Property(i => i.Password)
-				.HasMaxLength(100)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("Password");
-
-			Property(i => i.Login)
-				.HasMaxLength(100)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("Login");
-
-			Property(i => i.UserType)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("UserType");
-
-			Property(i => i.UiType)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("UiType");
+			
 		}
 	}
 }

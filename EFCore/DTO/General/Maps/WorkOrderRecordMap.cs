@@ -6,19 +6,6 @@ namespace EFCore.DTO.General.Maps
 	{
 		public WorkOrderRecordMap() : base()
 		{
-			ToTable("dbo.WorkOrderRecords");
-
-			Property(i => i.ParentId)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("ParentId");
-
-			Property(i => i.DirectivesId)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("DirectivesId");
-
-			Property(i => i.PackageItemTypeId)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("PackageItemTypeId");
 		}
 	}
 }
