@@ -12,8 +12,8 @@ namespace EFCore.DTO.General
 	public class ComponentLLPCategoryDataDTO : BaseEntity
 	{
 		[DataMember]
-		[Column("LLPCategoryId"), Required]
-		public int LLPCategoryId { get; set; }
+		[Column("LLPCategoryId")]
+		public int? LLPCategoryId { get; set; }
 
 		[DataMember]
 		[Column("LLPLifeLength"), MaxLength(50)]

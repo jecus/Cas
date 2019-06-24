@@ -7,7 +7,7 @@ namespace EFCore.DTO.General.Maps
 		public ATLBMap() : base()
 		{
 			
-			HasMany(i => i.Files).WithRequired(i => i.Atlb).HasForeignKey(i => i.ParentId);
+			
 		}
 	}
 }

@@ -6,13 +6,7 @@ namespace EFCore.DTO.General.Maps
 	{
 		public ComponentDirectiveMap() : base()
 		{
-			HasMany(i => i.Files).WithRequired(i => i.ComponentDirective).HasForeignKey(i => i.ParentId);
-
-			HasMany(i => i.PerformanceRecords).WithRequired(i => i.ComponentDirective).HasForeignKey(i => i.ParentID);
-
-			HasMany(i => i.Kits).WithRequired(i => i.ComponentDirective).HasForeignKey(i => i.ParentId);
-
-			HasMany(i => i.CategoriesRecords).WithRequired(i => i.ComponentDirective).HasForeignKey(i => i.ParentId);
+			
 		}
 	}
 }
