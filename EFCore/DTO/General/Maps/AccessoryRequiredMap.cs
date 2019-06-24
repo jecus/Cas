@@ -7,13 +7,7 @@ namespace EFCore.DTO.General.Maps
 		public AccessoryRequiredMap() : base()
 		{
 			
-			HasRequired(i => i.Product)
-				.WithMany(i => i.AccessoryRequiredDtos)
-				.HasForeignKey(i => i.AccessoryDescriptionId);
-
-			HasRequired(i => i.Standart)
-				.WithMany(i => i.AccessoryRequiredDtos)
-				.HasForeignKey(i => i.GoodStandartId);
+			
 
 		}
 	}

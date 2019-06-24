@@ -6,9 +6,7 @@ namespace EFCore.DTO.General.Maps
 	{
 		public AircraftEquipmentMap() : base()
 		{
-			HasRequired(i => i.AircraftOtherParameter)
-				.WithMany(i => i.AircraftEquipmentDtos)
-				.HasForeignKey(i => i.AircraftOtherParameterId);
+			
 
 		}
 	}

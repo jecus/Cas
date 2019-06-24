@@ -155,16 +155,16 @@ namespace EFCore.DTO.General
 		public int? CancelReasonId { get; set; }
 
 		[DataMember]
-		[Column("StationFromId"), Required]
-		public int StationFromId { get; set; }
+		[Column("StationFromId")]
+		public int? StationFromId { get; set; }
 
 		[DataMember]
-		[Column("StationToId"), Required]
-		public int StationToId { get; set; }
+		[Column("StationToId")]
+		public int? StationToId { get; set; }
 
 		[DataMember]
-		[Column("FlightNumber"), Required]
-		public int FlightNumberId { get; set; }
+		[Column("FlightNumber")]
+		public int? FlightNumberId { get; set; }
 
 
 		[DataMember]
