@@ -32,7 +32,7 @@ namespace EFCore.Repository
 			
 		}
 
-		public IList<int> GetSelectColumnOnly(IEnumerable<Filter.Filter> filters, Expression<Func<T, int>> select)
+		public IList<int> GetSelectColumnOnly(IEnumerable<Filter.Filter> filters, string selectProperty)
 		{
 			using (_context)
 			{
@@ -56,7 +56,7 @@ namespace EFCore.Repository
 					}
 				}
 
-				return query.AsNoTracking().Select(select).ToList();
+				return query.AsNoTracking().Select(selectProperty).OfType<int>().ToList();
 			}
 		}
 

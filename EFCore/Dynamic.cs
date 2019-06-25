@@ -74,7 +74,19 @@ namespace System.Linq.Dynamic
                     source.Expression, Expression.Quote(lambda)));
         }
 
-        public static IQueryable<T> OrderBy<T>(this IQueryable<T> source, string ordering, params object[] values) {
+        public static IQueryable Select(this IQueryable source, string selector)
+        {
+	        if (source == null) throw new ArgumentNullException("source");
+	        if (selector == null) throw new ArgumentNullException("selector");
+	        LambdaExpression lambda = DynamicExpression.ParseLambda(source.ElementType, null, selector);
+	        return source.Provider.CreateQuery(
+		        Expression.Call(
+			        typeof(Queryable), "Select",
+			        new Type[] { source.ElementType, lambda.Body.Type },
+			        source.Expression, Expression.Quote(lambda)));
+        }
+
+		public static IQueryable<T> OrderBy<T>(this IQueryable<T> source, string ordering, params object[] values) {
             return (IQueryable<T>)OrderBy((IQueryable)source, ordering, values);
         }
 

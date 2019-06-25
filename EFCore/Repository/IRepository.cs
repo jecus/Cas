@@ -14,7 +14,7 @@ namespace EFCore.Repository
 		IList<TType> GetSelectColumnOnly<TType>(Expression<Func<T, bool>> where, Expression<Func<T, TType>> select) where TType : new();
 
 		[OperationContract]
-		IList<int> GetSelectColumnOnly(IEnumerable<Filter.Filter> filters, Expression<Func<T, int>> select);
+		IList<int> GetSelectColumnOnly(IEnumerable<Filter.Filter> filters, string selectProperty);
 
 		[OperationContract]
 		T GetObjectById(int id, bool loadChild = false);
