@@ -32,7 +32,7 @@ namespace EFCore.DTO.General
 		[Column("DamageChart2DImageName"), MaxLength(256)]
 		public string DamageChart2DImageName { get; set; }
 
-		[DataMember][Column("")]
+		[DataMember]
 		[Child(FilterType.Equal, "ParentTypeId", 1185)]
 		public ICollection<ItemFileLinkDTO> Files { get; set; }
 

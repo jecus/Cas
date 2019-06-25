@@ -21,7 +21,7 @@ namespace EFCore.DTO.Dictionaries
 		public string ShortName { get; set; }
 
 	    [DataMember]
-	    [Column("DepartmentId"), Required]
+	    [Column("DepartmentId")]
 		public int? DepartmentId { get; set; }
 
 	    [DataMember]

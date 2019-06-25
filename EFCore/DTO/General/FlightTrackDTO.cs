@@ -25,8 +25,8 @@ namespace EFCore.DTO.General
 		public int? TripNameId { get; set; }
 
 		[DataMember]
-		[Column("SupplierID"), Required]
-		public int SupplierID { get; set; }
+		[Column("SupplierID")]
+		public int? SupplierID { get; set; }
 
 		[DataMember]
 		[Include]

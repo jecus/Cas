@@ -165,27 +165,5 @@ namespace SmartCore.Aircrafts
 			return null;
 		}
 
-		private void LoadChild(IEnumerable<Aircraft> aircrafts)
-		{
-			if (aircrafts == null)
-				return;
-
-			var ids = aircrafts.Select(i => i.ItemId).ToList();
-			var aircraftEquipments = _newLoader.GetObjectList<AircraftEquipmentDTO, AircraftEquipments>(new Filter("AircraftId", ids), true);
-
-			foreach (var aircraft in aircrafts)
-			{
-				aircraft.AircraftEquipments.AddRange(aircraftEquipments.Where(i => i.AircraftId == aircraft.ItemId));
-				aircraft.AircraftFrameId = _newLoader.GetSelectColumnOnly<ComponentDTO, int>(i => !i.IsDeleted && i.IsBaseComponent &&
-																								  i.BaseComponentTypeId == BaseComponentType.Frame.ItemId &&
-																								  i.TransferRecords
-																									  .Where(t =>t.ParentType == 6 && t.DestinationObjectType == 7 &&
-																												 t.ParentID == i.ItemId).Select(y => y.DestinationObjectID)
-																									  .Any(q => q.Value == aircraft.ItemId),
-					i => i.ItemId).FirstOrDefault();
-
-			}
-		}
-
 	}
 }

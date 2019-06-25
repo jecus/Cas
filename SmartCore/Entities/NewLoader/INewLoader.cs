@@ -44,7 +44,7 @@ namespace SmartCore.Entities.NewLoader
 		IList<TU> GetSelectColumnOnly<T, TU>(Expression<Func<T, bool>> exp, Expression<Func<T, TU>> columns)
 			where T : BaseEntity where TU : new();
 
-		IList<int> GetSelectColumnOnly<T>(IEnumerable<Filter> filters, string selectProperty)
+		IList<int> GetSelectColumnOnly<T>(IEnumerable<Filter> filters, Expression<Func<T, int>> columns)
 			where T : BaseEntity;
 
 		TOut GetObjectById<T, TOut>(int id, bool loadChild = false) where T : BaseEntity, new() 

@@ -28,8 +28,8 @@ namespace EFCore.DTO.General
 		public int ParentAircraft { get; set; }
 
 		[DataMember]
-		[Column("CheckTypeId"), Required]
-		public int CheckTypeId { get; set; }
+		[Column("CheckTypeId")]
+		public int? CheckTypeId { get; set; }
 
 		[DataMember]
 		[Column("Cost")]

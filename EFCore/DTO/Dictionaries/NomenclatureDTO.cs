@@ -13,7 +13,7 @@ namespace EFCore.DTO.Dictionaries
 	public class NomenclatureDTO : BaseEntity
 	{
 		[DataMember]
-		[Column("DepartmentId"), Required]
+		[Column("DepartmentId")]
 		public int? DepartmentId { get; set; }
 
 	    [DataMember]

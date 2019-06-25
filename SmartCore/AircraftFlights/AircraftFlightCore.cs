@@ -736,7 +736,7 @@ namespace SmartCore.AircraftFlights
 		/// </summary>
 		public void LoadAllFlights()
 		{
-			var atldIds = _newLoader.GetSelectColumnOnly<ATLBDTO>(null, "ItemId");
+			var atldIds = _newLoader.GetSelectColumnOnly<ATLBDTO>(null, c => c.ItemId);
 			var flights = _newLoader.GetObjectList<AircraftFlightDTO, AircraftFlight>(new Filter("ATLBID", atldIds));
 
 			if (flights.Count == 0)
@@ -780,7 +780,7 @@ namespace SmartCore.AircraftFlights
 		/// </summary>
 		public void LoadAircraftFlights(int aircraftId)
 		{
-			var atldIds = _newLoader.GetSelectColumnOnly<ATLBDTO>(new []{ new Filter("AircraftID", aircraftId) }, "ItemId");
+			var atldIds = _newLoader.GetSelectColumnOnly<ATLBDTO>(new []{ new Filter("AircraftID", aircraftId) }, c => c.ItemId);
 
 			if(atldIds.Count == 0)
 				return;
@@ -825,7 +825,7 @@ namespace SmartCore.AircraftFlights
 
 		public void LoadAircraftFlightsLight(int aircraftId)
 		{
-			var atldIds = _newLoader.GetSelectColumnOnly<ATLBDTO>(new []{ new Filter("AircraftID", aircraftId) }, "ItemId");
+			var atldIds = _newLoader.GetSelectColumnOnly<ATLBDTO>(new []{ new Filter("AircraftID", aircraftId) }, c => c.ItemId);
 			var flights = _newLoader.GetObjectList<AircraftFlightDTO, AircraftFlight>(new Filter("ATLBID", atldIds));
 
 			if (_flights.ContainsKey(aircraftId))

@@ -11,7 +11,7 @@ namespace EFCore.DTO.General
 	{
 		[DataMember]
 		[Column("FlightTripId")]
-		public int FlightTripId { get; set; }
+		public int? FlightTripId { get; set; }
 
 		[DataMember]
 		[Column("FlightPeriodId")]

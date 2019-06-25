@@ -200,7 +200,7 @@ namespace SmartCore.TransferRec
 				{
 					new Filter("DestinationObjectID",aircraft.ItemId),
 					new Filter("DestinationObjectType",aircraft.SmartCoreObjectType.ItemId),
-				}, "ParentID");
+				}, c => c.ParentID.Value);
 
 				collection.AddRange(_newLoader.GetObjectListAll<TransferRecordDTO, TransferRecord>(new List<Filter>()
 				{
@@ -223,7 +223,7 @@ namespace SmartCore.TransferRec
 				{
 					new Filter("DestinationObjectID",s.ItemId),
 					new Filter("DestinationObjectType", s.SmartCoreObjectType.ItemId)
-				} , "ParentID");
+				} , c => c.ParentID.Value);
 
 				collection.AddRange(_newLoader.GetObjectListAll<TransferRecordDTO, TransferRecord>(new Filter("FromStoreID", s.ItemId), true).OrderByDescending(t => t.TransferDate));
 

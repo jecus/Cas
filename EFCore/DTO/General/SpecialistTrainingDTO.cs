@@ -15,14 +15,14 @@ namespace EFCore.DTO.General
 	{
 		[DataMember]
 		[Column("SpecialistId")]
-		public int SpecialistId { get; set; }
+		public int? SpecialistId { get; set; }
 
 		[DataMember]
 		[Column("TrainingId")]
 		public int? TrainingId { get; set; }
 
 		[DataMember]
-		[Column("SupplierId"), Required]
+		[Column("SupplierId")]
 		public int? SupplierId { get; set; }
 
 		[DataMember]
@@ -54,12 +54,12 @@ namespace EFCore.DTO.General
 		public bool? IsClosed { get; set; }
 
 		[DataMember]
-		[Column("AircraftTypeID"), Required]
-		public int AircraftTypeID { get; set; }
+		[Column("AircraftTypeID")]
+		public int? AircraftTypeID { get; set; }
 
 		[DataMember]
-		[Column("EmployeeSubjectID"), Required]
-		public int EmployeeSubjectID { get; set; }
+		[Column("EmployeeSubjectID")]
+		public int? EmployeeSubjectID { get; set; }
 
 		[DataMember]
 		[Include]

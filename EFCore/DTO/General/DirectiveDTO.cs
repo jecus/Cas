@@ -139,7 +139,7 @@ namespace EFCore.DTO.General
 
 		[DataMember]
 		[Column("DefferedCategory")]
-		public int DeferredCategoryId { get; set; }
+		public int? DeferredCategoryId { get; set; }
 
 		[DataMember]
 		[Column("Number")]

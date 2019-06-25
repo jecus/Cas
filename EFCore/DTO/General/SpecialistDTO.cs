@@ -24,8 +24,8 @@ namespace EFCore.DTO.General
 		public string ShortName { get; set; }
 
 		[DataMember]
-		[Column("SpecializationID"), Required]
-		public int SpecializationID { get; set; }
+		[Column("SpecializationID")]
+		public int? SpecializationID { get; set; }
 
 		[DataMember]
 		[Column("LastName"), MaxLength(256)]
@@ -80,8 +80,8 @@ namespace EFCore.DTO.General
 		public short Education { get; set; }
 
 		[DataMember]
-		[Column("Location"), Required]
-		public int Location { get; set; }
+		[Column("Location")]
+		public int? Location { get; set; }
 
 		[DataMember]
 		[Column("Status"), Required]

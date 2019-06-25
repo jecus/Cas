@@ -14,8 +14,8 @@ namespace EFCore.DTO.General
 	public class DocumentDTO : BaseEntity
 	{
 	    [DataMember]
-		[Column("ParentID"), Required]
-		public int ParentID { get; set; }
+		[Column("ParentID")]
+		public int? ParentID { get; set; }
 
 		[DataMember]
 		[Column("ParentTypeId"), Required]
@@ -26,8 +26,8 @@ namespace EFCore.DTO.General
 		public int DocTypeId { get; set; }
 
 		[DataMember]
-		[Column("SubTypeId"), Required]
-		public int SubTypeId { get; set; }
+		[Column("SubTypeId")]
+		public int? SubTypeId { get; set; }
 
 		[DataMember]
 		[Column("Description")]
@@ -110,20 +110,20 @@ namespace EFCore.DTO.General
 		public int? ServiceTypeId { get; set; }
 
 		[DataMember]
-		[Column("ResponsibleOccupationId"), Required]
-		public int ResponsibleOccupationId { get; set; }
+		[Column("ResponsibleOccupationId")]
+		public int? ResponsibleOccupationId { get; set; }
 
 		[DataMember]
 		[Column("Remarks")]
 		public string Remarks { get; set; }
 
 		[DataMember]
-		[Column("LocationId"), Required]
-		public int LocationId { get; set; }
+		[Column("LocationId")]
+		public int? LocationId { get; set; }
 
 		[DataMember]
-		[Column("SupplierId"), Required]
-		public int SupplierId { get; set; }
+		[Column("SupplierId")]
+		public int? SupplierId { get; set; }
 
 		[DataMember]
 		[Column("ParentAircraftId"), Required]

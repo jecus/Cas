@@ -15,7 +15,7 @@ namespace EFCore.DTO.General
 	{
 		[DataMember]
 		[Column("ParentID")]
-		public int ParentID { get; set; }
+		public int? ParentID { get; set; }
 
 		[DataMember]
 		[Column("ParentType")]

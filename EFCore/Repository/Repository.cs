@@ -32,7 +32,7 @@ namespace EFCore.Repository
 			
 		}
 
-		public IList<int> GetSelectColumnOnly(IEnumerable<Filter.Filter> filters, string selectProperty)
+		public IList<int> GetSelectColumnOnly(IEnumerable<Filter.Filter> filters, Expression<Func<T, int>> select)
 		{
 			using (_context)
 			{
@@ -56,7 +56,7 @@ namespace EFCore.Repository
 					}
 				}
 
-				return query.AsNoTracking().Select(selectProperty).ToList();
+				return query.AsNoTracking().Select(select).ToList();
 			}
 		}
 
@@ -225,101 +225,6 @@ namespace EFCore.Repository
 
 		#endregion
 
-		private IQueryable<T> getAllQueryable(string filters = null, bool loadChild = false, bool getDeleted = false, bool getAll = false)
-		{
-			IQueryable<T> query = _dbset;
-
-			if (!string.IsNullOrEmpty(filters))
-			{
-				query = query.Where(filters);
-			}
-
-			var conditionAttributes = typeof(T).GetCustomAttributes(typeof(ConditionAttribute), false).Cast<ConditionAttribute>().ToList();
-			foreach (var attribute in conditionAttributes)
-			{
-				if (getDeleted && attribute.ColumnName.ToLower() == "isdeleted")
-					continue;
-
-				var func = LambdaConstructor<T>(attribute.ColumnName, attribute.Condition, FilterType.Equal);
-				query = query.Where(func);
-			}
-
-
-			var includeProperties = typeof(T).GetProperties().Where(i => i.GetCustomAttributes(typeof(IncludeAttribute), false).Length != 0);
-			foreach (var property in includeProperties)
-			{
-				query = query.IncludeOptimizedByPath(property.Name);
-
-
-				IEnumerable<PropertyInfo> includeParentProperties;
-				if (property.PropertyType.IsGenericType)
-					includeParentProperties = property.PropertyType.GenericTypeArguments[0].GetProperties().Where(i => i.GetCustomAttributes(typeof(IncludeAttribute), false).Length != 0);
-				else includeParentProperties = property.PropertyType.GetProperties().Where(i => i.GetCustomAttributes(typeof(IncludeAttribute), false).Length != 0);
-
-				foreach (var propertyInfo in includeParentProperties)
-					query = query.IncludeOptimizedByPath($"{property.Name}.{propertyInfo.Name}");
-
-				if (getAll)
-				{
-					IEnumerable<PropertyInfo> childParentProperties;
-					if (property.PropertyType.IsGenericType)
-						childParentProperties = property.PropertyType.GenericTypeArguments[0].GetProperties().Where(i => i.GetCustomAttributes(typeof(ChildAttribute), false).Length != 0);
-					else childParentProperties = property.PropertyType.GetProperties().Where(i => i.GetCustomAttributes(typeof(IncludeAttribute), false).Length != 0);
-
-					foreach (var propertyInfo in childParentProperties)
-						query = query.IncludeOptimizedByPath($"{property.Name}.{propertyInfo.Name}");
-				}
-			}
-
-			if (loadChild)
-			{
-				var childProperties = typeof(T).GetProperties().Where(i => i.GetCustomAttributes(typeof(ChildAttribute), false).Length != 0);
-				foreach (var property in childProperties)
-				{
-					bool deletedCondition = false;
-
-					conditionAttributes = typeof(T).GetCustomAttributes(typeof(ConditionAttribute), false).Cast<ConditionAttribute>().ToList();
-					foreach (var a in conditionAttributes)
-					{
-						var value = (int)a.Condition;
-						deletedCondition = value != 0;
-
-					}
-
-					var attribute = (ChildAttribute)property.GetCustomAttributes(typeof(ChildAttribute), false).FirstOrDefault();
-					if (string.IsNullOrEmpty(attribute.ParentProperty) && attribute.ParentProperty == null)
-					{
-						if (property.PropertyType.GenericTypeArguments.Length > 0)
-							query = GetQuery(query, property.PropertyType.GenericTypeArguments[0].FullName, property.Name, deletedCondition);
-						else query = query.IncludeOptimizedByPath(property.Name);
-					}
-					else
-						query = GetQuery(query, property.PropertyType.GenericTypeArguments[0].FullName, property.Name, attribute.ParentProperty, attribute.ParentPropertyValue, attribute.Filter, deletedCondition);
-
-
-					IEnumerable<PropertyInfo> includeParentProperties;
-					if (property.PropertyType.IsGenericType)
-						includeParentProperties = property.PropertyType.GenericTypeArguments[0].GetProperties().Where(i => i.GetCustomAttributes(typeof(IncludeAttribute), false).Length != 0);
-					else includeParentProperties = property.PropertyType.GetProperties().Where(i => i.GetCustomAttributes(typeof(IncludeAttribute), false).Length != 0);
-
-					foreach (var propertyInfo in includeParentProperties)
-						query = query.IncludeOptimizedByPath($"{property.Name}.{propertyInfo.Name}");
-
-					if (getAll)
-					{
-						IEnumerable<PropertyInfo> childParentProperties;
-						if (property.PropertyType.IsGenericType)
-							childParentProperties = property.PropertyType.GenericTypeArguments[0].GetProperties().Where(i => i.GetCustomAttributes(typeof(ChildAttribute), false).Length != 0);
-						else childParentProperties = property.PropertyType.GetProperties().Where(i => i.GetCustomAttributes(typeof(IncludeAttribute), false).Length != 0);
-
-						foreach (var propertyInfo in childParentProperties)
-							query = query.IncludeOptimizedByPath($"{property.Name}.{propertyInfo.Name}");
-					}
-				}
-			}
-
-			return query;
-		}
 
 		private IQueryable<T> getAllQueryable(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false, bool getAll = false)
 		{

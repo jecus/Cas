@@ -27,8 +27,8 @@ namespace EFCore.DTO.General
 		public string PilotRemarks { get; set; }
 
 		[DataMember]
-		[Column("ATAChapterID"), Required]
-		public int ATAChapterID { get; set; }
+		[Column("ATAChapterID")]
+		public int? ATAChapterID { get; set; }
 
 		[DataMember]
 		[Column("DirectiveId")]
@@ -80,7 +80,7 @@ namespace EFCore.DTO.General
 
 		[DataMember]
 		[Column("Auth")]
-		public int AuthId { get; set; }
+		public int? AuthId { get; set; }
 
 		[DataMember]
 		[Column("BaseComponentId")]

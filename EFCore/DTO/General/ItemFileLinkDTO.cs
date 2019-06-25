@@ -11,7 +11,7 @@ namespace EFCore.DTO.General
 	public class ItemFileLinkDTO : BaseEntity
 	{
 		[DataMember]
-		[Column("ParentId"), Required]
+		[Column("ParentId")]
 		public int? ParentId { get; set; }
 
 		[DataMember]

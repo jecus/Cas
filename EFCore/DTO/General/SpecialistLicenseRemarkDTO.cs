@@ -17,20 +17,20 @@ namespace EFCore.DTO.General
 		public DateTime IssueDate { get; set; }
 
 		[DataMember]
-		[Column("RightsId"), Required]
-		public int RightsId { get; set; }
+		[Column("RightsId")]
+		public int? RightsId { get; set; }
 
 		[DataMember]
-		[Column("RestrictionId"), Required]
-		public int RestrictionId { get; set; }
+		[Column("RestrictionId")]
+		public int? RestrictionId { get; set; }
 
 		[DataMember]
-		[Column("SpecialistLicenseId"), Required]
-		public int SpecialistLicenseId { get; set; }
+		[Column("SpecialistLicenseId")]
+		public int? SpecialistLicenseId { get; set; }
 
 		[DataMember]
-		[Column("SpecialistId"), Required]
-		public int SpecialistId { get; set; }
+		[Column("SpecialistId")]
+		public int? SpecialistId { get; set; }
 
 		[DataMember]
 		[Include]

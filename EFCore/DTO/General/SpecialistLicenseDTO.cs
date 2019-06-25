@@ -22,12 +22,12 @@ namespace EFCore.DTO.General
 		public int LicenseTypeID { get; set; }
 
 		[DataMember]
-		[Column("AircraftTypeID"), Required]
-		public int AircraftTypeID { get; set; }
+		[Column("AircraftTypeID")]
+		public int? AircraftTypeID { get; set; }
 
 		[DataMember]
-		[Column("SpecialistId"), Required]
-		public int SpecialistId { get; set; }
+		[Column("SpecialistId")]
+		public int? SpecialistId { get; set; }
 
 		[DataMember]
 		[Column("Notify"), MaxLength(21)]

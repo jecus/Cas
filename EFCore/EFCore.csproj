@@ -411,7 +411,6 @@
     <Compile Include="Contract\ILoginService.cs" />
     <Compile Include="Contract\LoginService.cs" />
     <Compile Include="DTO\BaseEntity.cs" />
-    <Compile Include="DTO\BaseMap.cs" />
     <Compile Include="DTO\DataContext.cs" />
     <Compile Include="DTO\Dictionaries\AccessoryDescriptionDTO.cs" />
     <Compile Include="DTO\Dictionaries\AGWCategorieDTO.cs" />

@@ -5,7 +5,7 @@ using EFCore.Attributte;
 
 namespace EFCore.DTO.Dictionaries
 {
-	[Table("NonRoutineJobs", Schema = "Dictionaries")]
+	[Table("Airports", Schema = "Dictionaries")]
 	[DataContract(IsReference = true)]
 	[Condition("IsDeleted", 0)]
 	public class AirportDTO : BaseEntity

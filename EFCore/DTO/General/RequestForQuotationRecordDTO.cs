@@ -12,8 +12,8 @@ namespace EFCore.DTO.General
 	public class RequestForQuotationRecordDTO : BaseEntity
 	{
 		[DataMember]
-		[Column("ParentPackageId"),Required]
-		public int ParentPackageId { get; set; }
+		[Column("ParentPackageId")]
+		public int? ParentPackageId { get; set; }
 
 		[DataMember]
 		[Column("PackageItemId"), Required]
@@ -61,7 +61,7 @@ namespace EFCore.DTO.General
 
 		[DataMember]
 		[Column("DefferedCategory")]
-		public int DefferedCategoryId { get; set; }
+		public int? DefferedCategoryId { get; set; }
 
 		[DataMember]
 		[Column("DestinationObjectId")]

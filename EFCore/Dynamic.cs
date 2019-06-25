@@ -2,7 +2,6 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Text;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -72,22 +71,6 @@ namespace System.Linq.Dynamic
                 Expression.Call(
                     typeof(Queryable), "Where",
                     new Type[] { source.ElementType },
-                    source.Expression, Expression.Quote(lambda)));
-        }
-
-
-		public static List<int> Select<T>(this IQueryable<T> source, string predicate)
-	    {
-		    return ((DbQuery<int>)Select((IQueryable)source, predicate)).ToList();
-	    }
-		public static IQueryable Select(this IQueryable source, string selector) {
-            if (source == null) throw new ArgumentNullException("source");
-            if (selector == null) throw new ArgumentNullException("selector");
-            LambdaExpression lambda = DynamicExpression.ParseLambda(source.ElementType, null, selector);
-            return source.Provider.CreateQuery(
-                Expression.Call(
-                    typeof(Queryable), "Select",
-                    new Type[] { source.ElementType, lambda.Body.Type },
                     source.Expression, Expression.Quote(lambda)));
         }
 

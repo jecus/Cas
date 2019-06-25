@@ -18,7 +18,7 @@ namespace EFCore.DTO
 		public virtual int ItemId { get; set; }
 
 		[DataMember]
-		[Column("CorrectorId")]
+		[Column("Corrector")]
 		public int CorrectorId { get; set; }
 	}
 }

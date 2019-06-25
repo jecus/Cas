@@ -14,8 +14,8 @@ namespace EFCore.DTO.General
 	public class ComponentLLPCategoryChangeRecordDTO : BaseEntity, IFileDtoContainer
 	{
 		[DataMember]
-		[Column("ParentId"), Required]
-		public int ParentId { get; set; }
+		[Column("ParentId")]
+		public int? ParentId { get; set; }
 
 		[DataMember]
 		[Column("RecordDate")]

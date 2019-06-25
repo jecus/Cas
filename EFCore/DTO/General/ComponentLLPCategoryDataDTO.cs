@@ -28,8 +28,8 @@ namespace EFCore.DTO.General
 		public byte[] Notify { get; set; }
 
 		[DataMember]
-		[Column("ComponentId"), Required]
-		public int ComponentId { get; set; }
+		[Column("ComponentId")]
+		public int? ComponentId { get; set; }
 
 		[DataMember]
 		[Column("LLPLifeLengthCurrent"), MaxLength(50)]

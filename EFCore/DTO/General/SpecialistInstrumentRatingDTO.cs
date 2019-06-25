@@ -16,8 +16,8 @@ namespace EFCore.DTO.General
 		public DateTime IssueDate { get; set; }
 
 		[DataMember]
-		[Column("SpecialistLicenseId"), Required]
-		public int SpecialistLicenseId { get; set; }
+		[Column("SpecialistLicenseId")]
+		public int? SpecialistLicenseId { get; set; }
 
 		[DataMember]
 		[Column("IcaoId"), Required]

@@ -271,8 +271,8 @@ namespace EFCore.DTO.General
 		public double? QuantityInput { get; set; }
 
 		[DataMember]
-		[Column("FromSupplierId"), Required]
-		public int FromSupplierId { get; set; }
+		[Column("FromSupplierId")]
+		public int? FromSupplierId { get; set; }
 
 		[DataMember]
 		[Column("Received"), Required]

@@ -388,7 +388,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				destinations.AddRange(GlobalObjects.CasEnvironment.Stores.GetValidEntries());
 				destinations.AddRange(GlobalObjects.CasEnvironment.Hangars.GetValidEntries());
 
-				var specIds = GlobalObjects.CasEnvironment.NewLoader.GetSelectColumnOnly<SpecializationDTO>( new[] {new Filter("DepartmentId", 4)}, "ItemId");
+				var specIds = GlobalObjects.CasEnvironment.NewLoader.GetSelectColumnOnly<SpecializationDTO>( new[] {new Filter("DepartmentId", 4)}, c => c.ItemId);
 				if(specIds.Count > 0)
 					_specialists.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<SpecialistDTO, Specialist>(new Filter("SpecializationID", specIds)));
 

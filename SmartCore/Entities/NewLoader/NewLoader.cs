@@ -233,14 +233,14 @@ namespace SmartCore.Entities.NewLoader
 			return repo.GetSelectColumnOnly(exp, columns);
 		}
 
-		public IList<int> GetSelectColumnOnly<T>(IEnumerable<Filter> filters, string selectProperty) where T : BaseEntity
+		public IList<int> GetSelectColumnOnly<T>(IEnumerable<Filter> filters, Expression<Func<T, int>> columns) where T : BaseEntity
 		{
 			if (!typeof(T).IsSubclassOf(typeof(BaseEntity)))
 				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
 
 			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
 
-			return repo.GetSelectColumnOnly(filters, selectProperty);
+			return repo.GetSelectColumnOnly(filters, columns);
 		}
 
 		public TOut GetObjectById<T, TOut>(int id, bool loadChild = false) where T : BaseEntity, new() where TOut : BaseEntityObject, new()
