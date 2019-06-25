@@ -6,17 +6,7 @@ namespace EFCore.DTO.General.Maps
 	{
 		public SmsEventTypeMap() : base()
 		{
-			ToTable("dbo.SmsEventTypes");
-
-			Property(i => i.FullName)
-				.HasMaxLength(128)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("FullName");
-
-			Property(i => i.Description)
-				.HasMaxLength(128)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("Description");
+			
 		}
 	}
 }

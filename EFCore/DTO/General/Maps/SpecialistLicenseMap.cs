@@ -6,41 +6,6 @@ namespace EFCore.DTO.General.Maps
 	{
 		public SpecialistLicenseMap() : base()
 		{
-			ToTable("dbo.SpecialistsLicense");
-
-			Property(i => i.Confirmation)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("Confirmation");
-
-			Property(i => i.LicenseTypeID)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("LicenseTypeID");
-
-			Property(i => i.AircraftTypeID)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("AircraftTypeID");
-
-			Property(i => i.SpecialistId)
-				.IsRequired()
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("SpecialistId");
-
-			Property(i => i.Notify)
-				.HasMaxLength(21)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("Notify");
-
-			Property(i => i.IssueDate)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("IssueDate");
-
-			Property(i => i.ValidToDate)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("ValidToDate");
-
 			HasRequired(i => i.AircraftType)
 				.WithMany(i => i.SpecialistLicenseDtos)
 				.HasForeignKey(i => i.AircraftTypeID);

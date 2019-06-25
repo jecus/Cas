@@ -6,16 +6,6 @@ namespace EFCore.DTO.General.Maps
 	{
 		public ProcedureDocumentReferenceMap() : base()
 		{
-			ToTable("dbo.ProcedureDocumentReferences");
-
-			Property(i => i.ProcedureId)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("ProcedureId");
-
-			Property(i => i.DocumentId)
-				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-				.HasColumnName("DocumentId");
-
 			HasRequired(i => i.Procedure)
 				.WithMany(i => i.ProcedureDocumentReferenceDtos)
 				.HasForeignKey(i => i.ProcedureId);
