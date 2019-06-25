@@ -256,7 +256,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			            license.AircraftType = aircraftModels.FirstOrDefault(a => a.ItemId == license.AircraftTypeID);
 	            }
 
-	            var ids = GlobalObjects.CasEnvironment.NewLoader.GetSelectColumnOnly<FlightCrewRecordDTO>(new []{ new Filter("SpecialistID", _currentItem.ItemId) }, c => c.FlightID);
+	            var ids = GlobalObjects.CasEnvironment.NewLoader.GetSelectColumnOnly<FlightCrewRecordDTO>(new []{ new Filter("SpecialistID", _currentItem.ItemId) }, "FlightID");
 	            if (ids.Count > 0)
 	            {
 		            var flights = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AircraftFlightDTO, AircraftFlight>(new Filter("ItemId", ids));
@@ -275,7 +275,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 		            _currentItem.EmployeeFlights.AddRange(flights);
 				}
 
-	            var wpIds = GlobalObjects.CasEnvironment.NewLoader.GetSelectColumnOnly<WorkPackageSpecialistsDTO>(new []{ new Filter("SpecialistId", _currentItem.ItemId) }, c => c.WorkPackageId);
+	            var wpIds = GlobalObjects.CasEnvironment.NewLoader.GetSelectColumnOnly<WorkPackageSpecialistsDTO>(new []{ new Filter("SpecialistId", _currentItem.ItemId) }, "WorkPackageId");
 
 				_currentItem.SpecialistWorkPackages.Clear();
 				var workPackages = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<WorkPackageDTO, WorkPackage>(new List<Filter>()

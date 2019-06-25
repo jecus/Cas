@@ -2118,7 +2118,7 @@ namespace SmartCore.Component
 		/// </summary>
 		public void LoadBaseComponentsActualStateRecords()
 		{
-			var ids = _newLoader.GetSelectColumnOnly<ComponentDTO>(new []{ new Filter("IsBaseComponent", true) }, c => c.ItemId);
+			var ids = _newLoader.GetSelectColumnOnly<ComponentDTO>(new []{ new Filter("IsBaseComponent", true) }, "ItemId");
 			var actuals = _newLoader.GetObjectListAll<ActualStateRecordDTO,ActualStateRecord>(new Filter("ComponentId", ids));
 
 			foreach (var t in actuals)
@@ -2146,7 +2146,7 @@ namespace SmartCore.Component
 		public void LoadBaseComponentsTransferRecords()
 		{
 			//Строка запроса, выдающая идентификаторы базовых деталей
-			var ids = _newLoader.GetSelectColumnOnly<ComponentDTO>( new []{ new Filter("IsBaseComponent", true) }, c => c.ItemId);
+			var ids = _newLoader.GetSelectColumnOnly<ComponentDTO>( new []{ new Filter("IsBaseComponent", true) }, "ItemId");
 			var transfers = _newLoader.GetObjectListAll<TransferRecordDTO,TransferRecord>(new Filter("ParentID", ids));
 
 			foreach (var t in transfers)

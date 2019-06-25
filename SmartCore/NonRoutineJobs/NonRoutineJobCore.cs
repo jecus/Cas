@@ -37,7 +37,7 @@ namespace SmartCore.NonRoutineJobs
 			var preJobs = _nonRoutineJobDataAccess.GetNonRoutineJobDTOsFromAircraftWorkPackages(aircraft.ItemId);
 
 			//поиск всех записей о использовании нерутинных работ в рабочих пакетах данного самолета
-			var wpIds = _newLoader.GetSelectColumnOnly<WorkPackageDTO>(new []{ new Filter("ParentId", aircraft.ItemId) }, c => c.ItemId);
+			var wpIds = _newLoader.GetSelectColumnOnly<WorkPackageDTO>(new []{ new Filter("ParentId", aircraft.ItemId) }, "ItemId");
 			var wprList = _newLoader.GetObjectListAll<WorkPackageRecordDTO, WorkPackageRecord>(new List<Filter>()
 			{
 				new Filter("WorkPackageItemType",SmartCoreType.NonRoutineJob.ItemId),

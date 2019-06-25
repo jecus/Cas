@@ -88,13 +88,13 @@ namespace SmartCore.TrackCore
 
 		public List<FlightTrackRecord> GetAllFlightUnScheduleRecordsForPeriod(DateTime from, DateTime to, bool loadChild = false)
 		{
-			var flNumberIds = _newLoader.GetSelectColumnOnly<FlightNumberDTO>(new []{ new Filter("FlightType", FlightType.Schedule.ItemId) }, c => c.ItemId);
+			var flNumberIds = _newLoader.GetSelectColumnOnly<FlightNumberDTO>(new []{ new Filter("FlightType", FlightType.Schedule.ItemId) }, "ItemId");
 			var flightNumberPeriodIds = _newLoader.GetSelectColumnOnly<FlightNumberPeriodDTO>(new List<Filter>()
 			{
 				new Filter("FlightNumberId",flNumberIds),
 				new Filter("DepartureDate", FilterType.GratherOrEqual, from),
 				new Filter("DepartureDate", FilterType.LessOrEqual, to)
-			}, c => c.ItemId);
+			}, "ItemId");
 
 			var tripRecords = _newLoader.GetObjectListAll<FlightTrackRecordDTO,FlightTrackRecord>(new Filter("FlightPeriodId", flightNumberPeriodIds), loadChild).ToList();
 
