@@ -381,53 +381,297 @@ namespace EFCore.DTO
 			modelBuilder.Entity<ComponentDTO>()
 				.HasMany(i => i.ChangeLLPCategoryRecords).WithOne(i => i.Component).HasForeignKey(i => i.ParentId);
 
+			modelBuilder.Entity<DamageDocumentDTO>()
+				.HasMany(i => i.Files).WithOne(i => i.DamageDocument).HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<DamageDocumentDTO>()
+				.HasMany(i => i.DamageSectors).WithOne(i => i.DamageDocument).HasForeignKey(i => i.DamageDocumentId);
+
+			modelBuilder.Entity<DirectiveDTO>()
+				.HasOne(i => i.ATAChapter)
+				.WithMany(i => i.DirectiveDtos)
+				.HasForeignKey(i => i.ATAChapterId);
+			modelBuilder.Entity<DirectiveDTO>()
+				.HasOne(i => i.DeferredCategory)
+				.WithMany(i => i.DirectiveDtos)
+				.HasForeignKey(i => i.DeferredCategoryId);
+			modelBuilder.Entity<DirectiveDTO>()
+				.HasOne(i => i.BaseComponent)
+				.WithMany(i => i.DirectiveDtos)
+				.HasForeignKey(i => i.ComponentId);
+			modelBuilder.Entity<DirectiveDTO>()
+				.HasMany(i => i.Files).WithOne(i => i.Directive).HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<DirectiveDTO>()
+				.HasMany(i => i.DamageDocs).WithOne(i => i.Directive).HasForeignKey(i => i.DirectiveId);
+			modelBuilder.Entity<DirectiveDTO>()
+				.HasMany(i => i.PerformanceRecords).WithOne(i => i.Directive).HasForeignKey(i => i.ParentID);
+			modelBuilder.Entity<DirectiveDTO>()
+				.HasMany(i => i.CategoriesRecords).WithOne(i => i.Directive).HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<DirectiveDTO>()
+				.HasMany(i => i.Kits).WithOne(i => i.Directive).HasForeignKey(i => i.ParentId);
+
+			modelBuilder.Entity<DirectiveRecordDTO>()
+				.HasMany(i => i.Files).WithOne(i => i.DirectiveRecord).HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<DirectiveRecordDTO>()
+				.HasMany(i => i.FilesForMaintenanceCheckRecord).WithOne(i => i.MaintenanceCheckRecord).HasForeignKey(i => i.ParentId);
+
+			modelBuilder.Entity<DiscrepancyDTO>()
+				.HasOne(i => i.ATAChapter)
+				.WithMany(i => i.DiscrepancyDtos)
+				.HasForeignKey(i => i.ATAChapterID);
+			modelBuilder.Entity<DiscrepancyDTO>()
+				.HasOne(i => i.Auth)
+				.WithMany(i => i.DiscrepancyDtos)
+				.HasForeignKey(i => i.AuthId);
+
+			modelBuilder.Entity<DocumentDTO>()
+				.HasOne(i => i.DocumentSubType)
+				.WithMany(i => i.DocumentDtos)
+				.HasForeignKey(i => i.SubTypeId);
+			modelBuilder.Entity<DocumentDTO>()
+				.HasOne(i => i.Supplier)
+				.WithMany(i => i.DocumentDtos)
+				.HasForeignKey(i => i.SupplierId);
+			modelBuilder.Entity<DocumentDTO>()
+				.HasOne(i => i.ResponsibleOccupation)
+				.WithMany(i => i.DocumentDtos)
+				.HasForeignKey(i => i.ResponsibleOccupationId);
+			modelBuilder.Entity<DocumentDTO>()
+				.HasOne(i => i.Nomenсlature)
+				.WithMany(i => i.DocumentDtos)
+				.HasForeignKey(i => i.NomenсlatureId);
+			modelBuilder.Entity<DocumentDTO>()
+				.HasOne(i => i.ServiceType)
+				.WithMany(i => i.DocumentDtos)
+				.HasForeignKey(i => i.ServiceTypeId);
+			modelBuilder.Entity<DocumentDTO>()
+				.HasOne(i => i.Department)
+				.WithMany(i => i.DocumentDtos)
+				.HasForeignKey(i => i.DepartmentId);
+			modelBuilder.Entity<DocumentDTO>()
+				.HasOne(i => i.Location)
+				.WithMany(i => i.DocumentDtos)
+				.HasForeignKey(i => i.LocationId);
+
+			modelBuilder.Entity<EventDTO>()
+				.HasOne(i => i.EventType)
+				.WithMany(i => i.EventDtos)
+				.HasForeignKey(i => i.EventTypeId);
+			modelBuilder.Entity<EventDTO>()
+				.HasOne(i => i.EventCategory)
+				.WithMany(i => i.EventDtos)
+				.HasForeignKey(i => i.EventCategoryId);
+			modelBuilder.Entity<EventDTO>()
+				.HasOne(i => i.EventClass)
+				.WithMany(i => i.EventDtos)
+				.HasForeignKey(i => i.EventClassId);
+			modelBuilder.Entity<EventDTO>()
+				.HasMany(i => i.EventConditions).WithOne(i => i.Event).HasForeignKey(i => i.ParentId);
+
+			modelBuilder.Entity<EventTypeRiskLevelChangeRecordDTO>()
+				.HasOne(i => i.EventCategory)
+				.WithMany(i => i.ChangeRecordDtos)
+				.HasForeignKey(i => i.EventCategoryId);
+			modelBuilder.Entity<EventTypeRiskLevelChangeRecordDTO>()
+				.HasOne(i => i.EventClass)
+				.WithMany(i => i.ChangeRecordDtos)
+				.HasForeignKey(i => i.EventClassId);
+			modelBuilder.Entity<EventTypeRiskLevelChangeRecordDTO>()
+				.HasOne(i => i.ParentEventType)
+				.WithMany(i => i.ChangeRecordDtos)
+				.HasForeignKey(i => i.ParentId);
+
+			modelBuilder.Entity<FlightCrewRecordDTO>()
+				.HasOne(i => i.Specialist)
+				.WithMany(i => i.FlightCrewRecordDtos)
+				.HasForeignKey(i => i.SpecialistID);
+			modelBuilder.Entity<FlightCrewRecordDTO>()
+				.HasOne(i => i.Specialization)
+				.WithMany(i => i.FlightCrewRecordDtos)
+				.HasForeignKey(i => i.SpecializationID);
+
+			modelBuilder.Entity<FlightNumberAircraftModelRelationDTO>()
+				.HasOne(i => i.FlightNumber)
+				.WithMany(i => i.FlightNumberAircraftModelRelationDtos)
+				.HasForeignKey(i => i.FlightNumberId);
+			modelBuilder.Entity<FlightNumberAircraftModelRelationDTO>()
+				.HasOne(i => i.AircraftModel)
+				.WithMany(i => i.FlightNumberAircraftModelRelationDtos)
+				.HasForeignKey(i => i.AircraftModelId);
+
+			modelBuilder.Entity<FlightNumberAirportRelationDTO>()
+				.HasOne(i => i.FlightNumber)
+				.WithMany(i => i.AirportRelationDtos)
+				.HasForeignKey(i => i.FlightNumberId);
+			modelBuilder.Entity<FlightNumberAirportRelationDTO>()
+				.HasOne(i => i.Airport)
+				.WithMany(i => i.AirportRelationDtos)
+				.HasForeignKey(i => i.AirportId);
+
+			modelBuilder.Entity<FlightNumberCrewRecordDTO>()
+				.HasOne(i => i.FlightNumber)
+				.WithMany(i => i.FlightNumberCrewRecordDtos)
+				.HasForeignKey(i => i.FlightNumberId);
+			modelBuilder.Entity<FlightNumberCrewRecordDTO>()
+				.HasOne(i => i.Specialization)
+				.WithMany(i => i.FlightNumberCrewRecordDtos)
+				.HasForeignKey(i => i.SpecializationId);
+
+			modelBuilder.Entity<FlightNumberDTO>()
+				.HasOne(i => i.StationFrom)
+				.WithMany(i => i.From)
+				.HasForeignKey(i => i.StationFromId);
+			modelBuilder.Entity<FlightNumberDTO>()
+				.HasOne(i => i.StationTo)
+				.WithMany(i => i.To)
+				.HasForeignKey(i => i.StationToId);
+			modelBuilder.Entity<FlightNumberDTO>()
+				.HasOne(i => i.MinLevel)
+				.WithMany(i => i.FlightNumberDtos)
+				.HasForeignKey(i => i.MinLevelId);
+			modelBuilder.Entity<FlightNumberDTO>()
+				.HasOne(i => i.FlightNo)
+				.WithMany(i => i.FlightNumberDtos)
+				.HasForeignKey(i => i.FlightNoId);
+
+			modelBuilder.Entity<FlightPassengerRecordDTO>()
+				.HasOne(i => i.PassengerCategory)
+				.WithMany(i => i.FlightPassengerRecordDtos)
+				.HasForeignKey(i => i.PassengerCategoryId);
+
+			modelBuilder.Entity<FlightPlanOpsRecordsDTO>()
+				.HasOne(i => i.ParentFlightPlanOps)
+				.WithMany(i => i.FlightPlanOpsRecordsDtos)
+				.HasForeignKey(i => i.FlightPlanOpsId);
+			modelBuilder.Entity<FlightPlanOpsRecordsDTO>()
+				.HasOne(i => i.DelayReason)
+				.WithMany(i => i.DelayFlightPlanOpsRecordsDtos)
+				.HasForeignKey(i => i.DelayReasonId);
+			modelBuilder.Entity<FlightPlanOpsRecordsDTO>()
+				.HasOne(i => i.Reason)
+				.WithMany(i => i.ReasonFlightPlanOpsRecordsDtos)
+				.HasForeignKey(i => i.ReasonId);
+			modelBuilder.Entity<FlightPlanOpsRecordsDTO>()
+				.HasOne(i => i.CancelReason)
+				.WithMany(i => i.CancelFlightPlanOpsRecordsDtos)
+				.HasForeignKey(i => i.CancelReasonId);
+
+			modelBuilder.Entity<FlightTrackDTO>()
+				.HasOne(i => i.TripName)
+				.WithMany(i => i.FlightTrackDtos)
+				.HasForeignKey(i => i.TripNameId);
+			modelBuilder.Entity<FlightTrackDTO>()
+				.HasOne(i => i.Supplier)
+				.WithMany(i => i.FlightTrackDtos)
+				.HasForeignKey(i => i.SupplierID);
+			modelBuilder.Entity<FlightTrackDTO>()
+				.HasMany(i => i.FlightTripRecord).WithOne(i => i.FlightTrack).HasForeignKey(i => i.FlightTripId);
 
 
+			modelBuilder.Entity<InitialOrderDTO>()
+				.HasMany(i => i.Files).WithOne(i => i.InitialOrderDto).HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<InitialOrderDTO>()
+				.HasMany(i => i.PackageRecords).WithOne(i => i.InitialOrderDto).HasForeignKey(i => i.ParentPackageId);
 
-			modelBuilder.Configurations.Add(new DamageDocumentMap());
-			modelBuilder.Configurations.Add(new DamageSectorMap());
-			modelBuilder.Configurations.Add(new DirectiveMap());
-			modelBuilder.Configurations.Add(new DirectiveRecordMap());
-			modelBuilder.Configurations.Add(new DiscrepancyMap());
-			modelBuilder.Configurations.Add(new DocumentMap());
-			modelBuilder.Configurations.Add(new EngineAccelerationTimeMap());
-			modelBuilder.Configurations.Add(new EngineConditionMap());
-			modelBuilder.Configurations.Add(new EngineTimeInRegimeMap());
-			modelBuilder.Configurations.Add(new EventConditionMap());
-			modelBuilder.Configurations.Add(new EventMap());
-			modelBuilder.Configurations.Add(new EventTypeRiskLevelChangeRecordMap());
-			modelBuilder.Configurations.Add(new FlightCargoRecordMap());
-			modelBuilder.Configurations.Add(new FlightCrewRecordMap());
-			modelBuilder.Configurations.Add(new FlightNumberAircraftModelRelationMap());
-			modelBuilder.Configurations.Add(new FlightNumberAirportRelationMap());
-			modelBuilder.Configurations.Add(new FlightNumberCrewRecordMap());
-			modelBuilder.Configurations.Add(new FlightNumberMap());
-			modelBuilder.Configurations.Add(new FlightNumberPeriodMap());
-			modelBuilder.Configurations.Add(new FlightPassengerRecordMap());
-			modelBuilder.Configurations.Add(new FlightPlanOpsMap());
-			modelBuilder.Configurations.Add(new FlightPlanOpsRecordsMap());
-			modelBuilder.Configurations.Add(new FlightTrackMap());
-			modelBuilder.Configurations.Add(new FlightTrackRecordMap());
-			modelBuilder.Configurations.Add(new HangarMap());
-			modelBuilder.Configurations.Add(new HydraulicConditionMap());
-			modelBuilder.Configurations.Add(new InitialOrderMap());
-			modelBuilder.Configurations.Add(new InitialOrderRecordMap());
-			modelBuilder.Configurations.Add(new ItemFileLinkMap());
-			modelBuilder.Configurations.Add(new ItemsRelationMap());
-			modelBuilder.Configurations.Add(new JobCardMap());
-			modelBuilder.Configurations.Add(new JobCardTaskMap());
-			modelBuilder.Configurations.Add(new KitSuppliersRelationMap());
-			modelBuilder.Configurations.Add(new KnowledgeModuleMap());
-			modelBuilder.Configurations.Add(new LandingGearConditionMap());
-			modelBuilder.Configurations.Add(new MaintenanceCheckBindTaskRecordMap());
-			modelBuilder.Configurations.Add(new MaintenanceCheckMap());
-			modelBuilder.Configurations.Add(new MaintenanceCheckTypeMap());
-			modelBuilder.Configurations.Add(new MaintenanceDirectiveMap());
-			modelBuilder.Configurations.Add(new MaintenanceProgramChangeRecordMap());
-			modelBuilder.Configurations.Add(new ModuleRecordMap());
-			modelBuilder.Configurations.Add(new MTOPCheckMap());
-			modelBuilder.Configurations.Add(new MTOPCheckRecordMap());
-			modelBuilder.Configurations.Add(new OperatorMap());
+			modelBuilder.Entity<InitialOrderRecordDTO>()
+				.HasOne(i => i.DeferredCategory)
+				.WithMany(i => i.InitialOrderRecordDto)
+				.HasForeignKey(i => i.DefferedCategory);
+
+			modelBuilder.Entity<ItemFileLinkDTO>()
+				.HasOne(i => i.File)
+				.WithMany(i => i.ItemFileLinkDto)
+				.HasForeignKey(i => i.FileId);
+
+
+			modelBuilder.Entity<JobCardDTO>()
+				.HasOne(i => i.PreparedBy)
+				.WithMany(i => i.PreparedJobCardDtos)
+				.HasForeignKey(i => i.PreparedById);
+			modelBuilder.Entity<JobCardDTO>()
+				.HasOne(i => i.CheckedBy)
+				.WithMany(i => i.CheckedJobCardDtos)
+				.HasForeignKey(i => i.CheckedById);
+			modelBuilder.Entity<JobCardDTO>()
+				.HasOne(i => i.ApprovedBy)
+				.WithMany(i => i.ApprovedJobCardDtos)
+				.HasForeignKey(i => i.ApprovedById);
+			modelBuilder.Entity<JobCardDTO>()
+				.HasOne(i => i.AtaChapter)
+				.WithMany(i => i.JobCardDtos)
+				.HasForeignKey(i => i.AtaChapterId);
+			modelBuilder.Entity<JobCardDTO>()
+				.HasOne(i => i.Qualification)
+				.WithMany(i => i.JobCardDtos)
+				.HasForeignKey(i => i.QualificationId);
+			modelBuilder.Entity<JobCardDTO>()
+				.HasMany(i => i.Kits).WithOne(i => i.JobCardDto).HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<JobCardDTO>()
+				.HasMany(i => i.JobCardTasks).WithOne(i => i.JobCardDto).HasForeignKey(i => i.JobCardId);
+
+			modelBuilder.Entity<JobCardTaskDTO>()
+				.HasOne(i => i.JobCard)
+				.WithMany(i => i.JobCardTaskDtos)
+				.HasForeignKey(i => i.JobCardId);
+
+			modelBuilder.Entity<KitSuppliersRelationDTO>()
+				.HasOne(i => i.Supplier)
+				.WithMany(i => i.KitSuppliersRelationDtos)
+				.HasForeignKey(i => i.SupplierId);
+
+			modelBuilder.Entity<MaintenanceCheckDTO>()
+				.HasOne(i => i.CheckType)
+				.WithMany(i => i.MaintenanceCheckDtos)
+				.HasForeignKey(i => i.CheckTypeId);
+			modelBuilder.Entity<MaintenanceCheckDTO>()
+				.HasMany(i => i.PerformanceRecords).WithOne(i => i.MaintenanceCheckDto).HasForeignKey(i => i.ParentID);
+			modelBuilder.Entity<MaintenanceCheckDTO>()
+				.HasMany(i => i.CategoriesRecords).WithOne(i => i.MaintenanceCheckDto).HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<MaintenanceCheckDTO>()
+				.HasMany(i => i.Kits).WithOne(i => i.MaintenanceCheckDto).HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<MaintenanceCheckDTO>()
+				.HasMany(i => i.BindMpds).WithOne(i => i.MaintenanceCheckDto).HasForeignKey(i => i.MaintenanceCheckId);
+
+			modelBuilder.Entity<MaintenanceDirectiveDTO>()
+				.HasOne(i => i.ATAChapter)
+				.WithMany(i => i.MaintenanceDirectiveDtos)
+				.HasForeignKey(i => i.ATAChapterId);
+			modelBuilder.Entity<MaintenanceDirectiveDTO>()
+				.HasOne(i => i.BaseComponent)
+				.WithMany(i => i.MaintenanceDirectiveDtos)
+				.HasForeignKey(i => i.ComponentId);
+			modelBuilder.Entity<MaintenanceDirectiveDTO>()
+				.HasOne(i => i.MaintenanceCheck)
+				.WithMany(i => i.MaintenanceDirectiveDtos)
+				.HasForeignKey(i => i.MaintenanceCheckId);
+			modelBuilder.Entity<MaintenanceDirectiveDTO>()
+				.HasOne(i => i.JobCard)
+				.WithMany(i => i.MaintenanceDirectiveDtos)
+				.HasForeignKey(i => i.JobCardId);
+			modelBuilder.Entity<MaintenanceDirectiveDTO>()
+				.HasMany(i => i.Files).WithOne(i => i.MaintenanceDirective).HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<MaintenanceDirectiveDTO>()
+				.HasMany(i => i.PerformanceRecords).WithOne(i => i.MaintenanceDirective).HasForeignKey(i => i.ParentID);
+			modelBuilder.Entity<MaintenanceDirectiveDTO>()
+				.HasMany(i => i.CategoriesRecords).WithOne(i => i.MaintenanceDirective).HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<MaintenanceDirectiveDTO>()
+				.HasMany(i => i.Kits).WithOne(i => i.MaintenanceDirective).HasForeignKey(i => i.ParentId);
+
+			modelBuilder.Entity<ModuleRecordDTO>()
+				.HasOne(i => i.AircraftWorkerCategory)
+				.WithMany(i => i.ModuleRecordDtos)
+				.HasForeignKey(i => i.AircraftWorkerCategoryId);
+			modelBuilder.Entity<ModuleRecordDTO>()
+				.HasOne(i => i.KnowledgeModule)
+				.WithMany(i => i.ModuleRecordDtos)
+				.HasForeignKey(i => i.KnowledgeModuleId);
+
+			modelBuilder.Entity<MTOPCheckDTO>()
+				.HasOne(i => i.CheckType)
+				.WithMany(i => i.MtopCheckDtos)
+				.HasForeignKey(i => i.CheckTypeId);
+			modelBuilder.Entity<MTOPCheckDTO>()
+				.HasMany(i => i.PerformanceRecords).WithOne(i => i.MtopCheckDto).HasForeignKey(i => i.ParentId);
+
 
 			modelBuilder.Configurations.Add(new ProcedureDocumentReferenceMap());
 			modelBuilder.Configurations.Add(new ProcedureMap());
@@ -454,16 +698,44 @@ namespace EFCore.DTO
 			modelBuilder.Configurations.Add(new SupplierDocumentMap());
 			modelBuilder.Configurations.Add(new SupplierMap());
 
-			modelBuilder.Configurations.Add(new TransferRecordMap());
-			modelBuilder.Configurations.Add(new VehicleMap());
-			modelBuilder.Configurations.Add(new WorkOrderMap());
-			modelBuilder.Configurations.Add(new WorkOrderRecordMap());
-			modelBuilder.Configurations.Add(new WorkPackageMap());
-			modelBuilder.Configurations.Add(new WorkPackageRecordMap());
-			modelBuilder.Configurations.Add(new WorkPackageSpecialistsMap());
-			modelBuilder.Configurations.Add(new WorkShopMap());
-			modelBuilder.Configurations.Add(new UserMap());
-			modelBuilder.Configurations.Add(new QuotationCostMap());
+
+			modelBuilder.Entity<TransferRecordDTO>()
+				.HasOne(i => i.ReceivedSpecialist)
+				.WithMany(i => i.RecivedSpecialist)
+				.HasForeignKey(i => i.ReceivedSpecialistId);
+			modelBuilder.Entity<TransferRecordDTO>()
+				.HasOne(i => i.ReleasedSpecialist)
+				.WithMany(i => i.ReleasedSpecialist)
+				.HasForeignKey(i => i.ReleasedSpecialistId);
+			modelBuilder.Entity<TransferRecordDTO>()
+				.HasMany(i => i.Files).WithOne(i => i.TransferRecord).HasForeignKey(i => i.ParentId);
+
+			modelBuilder.Entity<VehicleDTO>()
+				.HasOne(i => i.Model)
+				.WithMany(i => i.VehicleDtos)
+				.HasForeignKey(i => i.ModelId);
+
+			modelBuilder.Entity<WorkOrderDTO>()
+				.HasOne(i => i.PreparedBy)
+				.WithMany(i => i.PreparedWorkOrderDtos)
+				.HasForeignKey(i => i.PreparedById);
+			modelBuilder.Entity<WorkOrderDTO>()
+				.HasOne(i => i.CheckedBy)
+				.WithMany(i => i.CheckedWorkOrderDtos)
+				.HasForeignKey(i => i.CheckedById);
+			modelBuilder.Entity<WorkOrderDTO>()
+				.HasOne(i => i.ApprovedBy)
+				.WithMany(i => i.ApprovedWorkOrderDtos)
+				.HasForeignKey(i => i.ApprovedById);
+			modelBuilder.Entity<WorkOrderDTO>()
+				.HasMany(i => i.Kits).WithOne(i => i.WorkOrder).HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<WorkOrderDTO>()
+				.HasMany(i => i.PackageRecords).WithOne(i => i.WorkOrder).HasForeignKey(i => i.ParentId);
+
+
+			modelBuilder.Entity<WorkPackageDTO>()
+				.HasMany(i => i.Files).WithOne(i => i.WorkPackage).HasForeignKey(i => i.ParentId);
+
 
 			#endregion
 
