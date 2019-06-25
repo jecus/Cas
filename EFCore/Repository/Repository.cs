@@ -91,13 +91,13 @@ namespace EFCore.Repository
 		public IList<T> GetObjectList(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false)
 		{
 			using (_context)
-				return getAllQueryable(filters, loadChild, getDeleted).ToList();
+				return getAllQueryable(filters, loadChild, getDeleted).AsNoTracking().ToList();
 		}
 
 		public IList<T> GetObjectListAll(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false)
 		{
 			using (_context)
-				return getAllQueryable(filters, loadChild, getDeleted, true).ToList();
+				return getAllQueryable(filters, loadChild, getDeleted, true).AsNoTracking().ToList();
 		}
 
 		public IQueryable<T> GetObjectQueryableAll(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false)

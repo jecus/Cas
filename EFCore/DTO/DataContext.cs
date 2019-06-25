@@ -672,32 +672,143 @@ namespace EFCore.DTO
 			modelBuilder.Entity<MTOPCheckDTO>()
 				.HasMany(i => i.PerformanceRecords).WithOne(i => i.MtopCheckDto).HasForeignKey(i => i.ParentId);
 
+			modelBuilder.Entity<ProcedureDocumentReferenceDTO>()
+				.HasOne(i => i.Procedure)
+				.WithMany(i => i.ProcedureDocumentReferenceDtos)
+				.HasForeignKey(i => i.ProcedureId);
+			modelBuilder.Entity<ProcedureDocumentReferenceDTO>()
+				.HasOne(i => i.Document)
+				.WithMany(i => i.ProcedureDocumentReferenceDtos)
+				.HasForeignKey(i => i.DocumentId);
 
-			modelBuilder.Configurations.Add(new ProcedureDocumentReferenceMap());
-			modelBuilder.Configurations.Add(new ProcedureMap());
-			modelBuilder.Configurations.Add(new ProductCostMap());
-			modelBuilder.Configurations.Add(new PurchaseOrderMap());
-			modelBuilder.Configurations.Add(new PurchaseRequestRecordMap());
-			modelBuilder.Configurations.Add(new RequestForQuotationMap());
-			modelBuilder.Configurations.Add(new RequestForQuotationRecordMap());
-			modelBuilder.Configurations.Add(new RequestMap());
-			modelBuilder.Configurations.Add(new RequestRecordMap());
-			modelBuilder.Configurations.Add(new RunUpMap());
-			modelBuilder.Configurations.Add(new SmsEventTypeMap());
-			modelBuilder.Configurations.Add(new SpecialistCAAMap());
-			modelBuilder.Configurations.Add(new SpecialistInstrumentRatingMap());
-			modelBuilder.Configurations.Add(new SpecialistLicenseDetailMap());
-			modelBuilder.Configurations.Add(new SpecialistLicenseMap());
-			modelBuilder.Configurations.Add(new SpecialistLicenseRatingMap());
-			modelBuilder.Configurations.Add(new SpecialistLicenseRemarkMap());
-			modelBuilder.Configurations.Add(new SpecialistMap());
-			modelBuilder.Configurations.Add(new SpecialistMedicalRecordMap());
-			modelBuilder.Configurations.Add(new SpecialistTrainingMap());
-			modelBuilder.Configurations.Add(new StockComponentInfoMap());
-			modelBuilder.Configurations.Add(new StoreMap());
-			modelBuilder.Configurations.Add(new SupplierDocumentMap());
-			modelBuilder.Configurations.Add(new SupplierMap());
+			modelBuilder.Entity<ProcedureDTO>()
+				.HasOne(i => i.JobCard)
+				.WithMany(i => i.Procedure)
+				.HasForeignKey(i => i.JobCardId);
+			modelBuilder.Entity<ProcedureDTO>()
+				.HasMany(i => i.Files).WithOne(i => i.Procedure).HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<ProcedureDTO>()
+				.HasMany(i => i.PerformanceRecords).WithOne(i => i.Procedure).HasForeignKey(i => i.ParentID);
+			modelBuilder.Entity<ProcedureDTO>()
+				.HasMany(i => i.DocumentReferences).WithOne(i => i.ProcedureDto).HasForeignKey(i => i.ProcedureId);
+			modelBuilder.Entity<ProcedureDTO>()
+				.HasMany(i => i.Kits).WithOne(i => i.Procedure).HasForeignKey(i => i.ParentId);
 
+			modelBuilder.Entity<PurchaseOrderDTO>()
+				.HasMany(i => i.Files).WithOne(i => i.PurchaseOrder).HasForeignKey(i => i.ParentId);
+
+			modelBuilder.Entity<PurchaseRequestRecordDTO>()
+				.HasMany(i => i.Files).WithOne(i => i.PurchaseRequestRecord).HasForeignKey(i => i.ParentId);
+
+			modelBuilder.Entity<RequestForQuotationDTO>()
+				.HasMany(i => i.Files).WithOne(i => i.RequestForQuotation).HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<RequestForQuotationDTO>()
+				.HasMany(i => i.PackageRecords).WithOne(i => i.RequestForQuotationDto).HasForeignKey(i => i.ParentPackageId);
+
+			modelBuilder.Entity<RequestForQuotationRecordDTO>()
+				.HasOne(i => i.DefferedCategory)
+				.WithMany(i => i.RequestForQuotationRecordDtos)
+				.HasForeignKey(i => i.DefferedCategoryId);
+
+			modelBuilder.Entity<RequestDTO>()
+				.HasOne(i => i.PreparedBy)
+				.WithMany(i => i.PreparedByRequestDtos)
+				.HasForeignKey(i => i.PreparedById);
+			modelBuilder.Entity<RequestDTO>()
+				.HasOne(i => i.CheckedBy)
+				.WithMany(i => i.CheckedByRequestDtos)
+				.HasForeignKey(i => i.CheckedById);
+			modelBuilder.Entity<RequestDTO>()
+				.HasOne(i => i.ApprovedBy)
+				.WithMany(i => i.ApprovedByRequestDtos)
+				.HasForeignKey(i => i.ApprovedById);
+			modelBuilder.Entity<RequestDTO>()
+				.HasMany(i => i.Kits).WithOne(i => i.RequestDto).HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<RequestDTO>()
+				.HasMany(i => i.PackageRecords).WithOne(i => i.RequestDto).HasForeignKey(i => i.ParentId);
+
+
+			modelBuilder.Entity<SpecialistLicenseDTO>()
+				.HasOne(i => i.AircraftType)
+				.WithMany(i => i.SpecialistLicenseDtos)
+				.HasForeignKey(i => i.AircraftTypeID);
+			modelBuilder.Entity<SpecialistLicenseDTO>()
+				.HasMany(i => i.CaaLicense).WithOne(i => i.SpecialistLicense).HasForeignKey(i => i.SpecialistLicenseId);
+			modelBuilder.Entity<SpecialistLicenseDTO>()
+				.HasMany(i => i.LicenseDetails).WithOne(i => i.SpecialistLicense).HasForeignKey(i => i.SpecialistLicenseId);
+			modelBuilder.Entity<SpecialistLicenseDTO>()
+				.HasMany(i => i.LicenseRatings).WithOne(i => i.SpecialistLicense).HasForeignKey(i => i.SpecialistLicenseId);
+			modelBuilder.Entity<SpecialistLicenseDTO>()
+				.HasMany(i => i.SpecialistInstrumentRatings).WithOne(i => i.SpecialistLicense).HasForeignKey(i => i.SpecialistLicenseId);
+			modelBuilder.Entity<SpecialistLicenseDTO>()
+				.HasMany(i => i.LicenseRemark).WithOne(i => i.SpecialistLicense).HasForeignKey(i => i.SpecialistLicenseId);
+
+			modelBuilder.Entity<SpecialistLicenseRemarkDTO>()
+				.HasOne(i => i.Rights)
+				.WithMany(i => i.LicenseRemarkDtos)
+				.HasForeignKey(i => i.RightsId);
+			modelBuilder.Entity<SpecialistLicenseRemarkDTO>()
+				.HasOne(i => i.LicenseRestriction)
+				.WithMany(i => i.LicenseRemarkDtos)
+				.HasForeignKey(i => i.RestrictionId);
+
+			modelBuilder.Entity<SpecialistDTO>()
+				.HasOne(i => i.AGWCategory)
+				.WithMany(i => i.SpecialistDtos)
+				.HasForeignKey(i => i.AGWCategoryId);
+			modelBuilder.Entity<SpecialistDTO>()
+				.HasOne(i => i.Facility)
+				.WithMany(i => i.SpecialistDtos)
+				.HasForeignKey(i => i.Location);
+			modelBuilder.Entity<SpecialistDTO>()
+				.HasOne(i => i.Specialization)
+				.WithMany(i => i.SpecialistDtos)
+				.HasForeignKey(i => i.SpecializationID);
+
+			modelBuilder.Entity<SpecialistDTO>()
+				.HasMany(i => i.Licenses).WithOne(i => i.SpecialistDto).HasForeignKey(i => i.SpecialistId);
+			modelBuilder.Entity<SpecialistDTO>()
+				.HasMany(i => i.SpecialistTrainings).WithOne(i => i.SpecialistDto).HasForeignKey(i => i.SpecialistId);
+			modelBuilder.Entity<SpecialistDTO>()
+				.HasMany(i => i.LicenseDetails).WithOne(i => i.SpecialistDto).HasForeignKey(i => i.SpecialistId);
+			modelBuilder.Entity<SpecialistDTO>()
+				.HasMany(i => i.LicenseRemark).WithOne(i => i.SpecialistDto).HasForeignKey(i => i.SpecialistId);
+			modelBuilder.Entity<SpecialistDTO>()
+				.HasMany(i => i.EmployeeDocuments).WithOne(i => i.SpecialistDto).HasForeignKey(i => i.ParentID);
+			modelBuilder.Entity<SpecialistDTO>()
+				.HasMany(i => i.CategoriesRecords).WithOne(i => i.SpecialistDto).HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<SpecialistDTO>()
+				.HasMany(i => i.Files).WithOne(i => i.SpecialistDto).HasForeignKey(i => i.ParentId);
+
+			modelBuilder.Entity<SpecialistTrainingDTO>()
+				.HasOne(i => i.AircraftType)
+				.WithMany(i => i.SpecialistTrainingDtos)
+				.HasForeignKey(i => i.AircraftTypeID);
+			modelBuilder.Entity<SpecialistTrainingDTO>()
+				.HasOne(i => i.EmployeeSubject)
+				.WithMany(i => i.SpecialistTrainingDtos)
+				.HasForeignKey(i => i.EmployeeSubjectID);
+			modelBuilder.Entity<SpecialistTrainingDTO>()
+				.HasOne(i => i.Supplier)
+				.WithMany(i => i.SpecialistTrainingDtos)
+				.HasForeignKey(i => i.SupplierId);
+			modelBuilder.Entity<SpecialistTrainingDTO>()
+				.HasMany(i => i.Files).WithOne(i => i.SpecialistTraining).HasForeignKey(i => i.ParentId);
+
+			modelBuilder.Entity<StockComponentInfoDTO>()
+				.HasOne(i => i.Standart)
+				.WithMany(i => i.StockComponentInfoDtos)
+				.HasForeignKey(i => i.GoodStandartId);
+			modelBuilder.Entity<StockComponentInfoDTO>()
+				.HasOne(i => i.AccessoryDescription)
+				.WithMany(i => i.StockComponentInfoDtos)
+				.HasForeignKey(i => i.ComponentModel);
+
+			modelBuilder.Entity<SupplierDocumentDTO>()
+				.HasMany(i => i.Files).WithOne(i => i.SupplierDocument).HasForeignKey(i => i.ParentId);
+
+			modelBuilder.Entity<SupplierDTO>()
+				.HasMany(i => i.SupplierDocs).WithOne(i => i.SupplieDto).HasForeignKey(i => i.ParentID);
 
 			modelBuilder.Entity<TransferRecordDTO>()
 				.HasOne(i => i.ReceivedSpecialist)
