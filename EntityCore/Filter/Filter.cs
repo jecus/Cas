@@ -38,16 +38,16 @@ namespace EntityCore.Filter
 		#endregion
 
 
-		[DataMember]
+		
 		public string FilterProperty { get; private set; }
 
-		[DataMember]
+		
 		public FilterType FilterType { get; private set; }
 
-		[DataMember]
+		
 		public object Value { get; private set; }
 
-		[DataMember]
+		
 		public IEnumerable<int> Values { get; private set; }
 	}
 }

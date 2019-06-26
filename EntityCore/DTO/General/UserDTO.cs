@@ -20,31 +20,31 @@ namespace EntityCore.DTO.General
 	}
 
 	[Table("Users", Schema = "dbo")]
-	[DataContract(IsReference = true)]
+	
 	[Condition("IsDeleted", 0)]
 	public class UserDTO : BaseEntity, IIdentityUser
 	{
-		[DataMember]
+		
 		[Column("Name"), MaxLength(100)]
 		public string Name { get; set; }
 
-		[DataMember]
+		
 		[Column("Surname"), MaxLength(100)]
 		public string Surname { get; set; }
 
-		[DataMember]
+		
 		[Column("Login"), MaxLength(100)]
 		public string Login { get; set; }
 
-		[DataMember]
+		
 		[Column("Password"), MaxLength(100)]
 		public string Password { get; set; }
 
-		[DataMember]
+		
 		[Column("UserType")]
 		public UsetType UserType { get; set; }
 
-		[DataMember]
+		
 		[Column("UiType")]
 		public UiType UiType { get; set; }
 

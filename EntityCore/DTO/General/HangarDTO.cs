@@ -6,23 +6,23 @@ using EntityCore.Attributte;
 namespace EntityCore.DTO.General
 {
 	[Table("Hangars", Schema = "dbo")]
-	[DataContract(IsReference = true)]
+	
 	[Condition("IsDeleted", 0)]
 	public class HangarDTO : BaseEntity
 	{
-		[DataMember]
+		
 		[Column("StoreName"), MaxLength(256)]
 		public string StoreName { get; set; }
 
-		[DataMember]
+		
 		[Column("Location"), MaxLength(256)]
 		public string Location { get; set; }
 
-		[DataMember]
+		
 		[Column("OperatorId")]
 		public int? OperatorId { get; set; }
 
-		[DataMember]
+		
 		[Column("Remarks"), MaxLength(256)]
 		public string Remarks { get; set; }
 	}

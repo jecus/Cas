@@ -8,27 +8,27 @@ using EntityCore.DTO.General;
 namespace EntityCore.DTO.Dictionaries
 {
 	[Table("CruiseLevels", Schema = "Dictionaries")]
-	[DataContract(IsReference = true)]
+	
 	[Condition("IsDeleted", 0)]
 	public class CruiseLevelDTO : BaseEntity
 	{
-		[DataMember]
+		
 		[Column("FullName"), MaxLength(128)]
 		public string FullName { get; set; }
 
-		[DataMember]
+		
 		[Column("Meter")]
 		public int? Meter { get; set; }
 
-		[DataMember]
+		
 		[Column("Feet")]
 		public int? Feet { get; set; }
 
-		[DataMember]
+		
 		[Column("IVFR"), MaxLength(128)]
 		public string IVFR { get; set; }
 
-		[DataMember]
+		
 		[Column("Track"), MaxLength(128)]
 		public string Track { get; set; }
 
@@ -36,9 +36,9 @@ namespace EntityCore.DTO.Dictionaries
 
 		#region Navigation Property
 
-	    [DataMember]
+	    
 		public ICollection<AircraftFlightDTO> AircraftFlightDtos { get; set; }
-	    [DataMember]
+	    
 		public ICollection<FlightNumberDTO> FlightNumberDtos { get; set; }
 
 		#endregion

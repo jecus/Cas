@@ -7,21 +7,21 @@ using EntityCore.Attributte;
 namespace EntityCore.DTO.General
 {
 	[Table("AircraftWorkerCategories", Schema = "dbo")]
-	[DataContract(IsReference = true)]
+	
 	[Condition("IsDeleted", 0)]
 	public class AircraftWorkerCategoryDTO : BaseEntity
 	{
-		[DataMember]
+		
 		[Column("Category"), MaxLength(128)]
 		public string Category { get; set; }
 
 		#region Navigation Property
 
-		[DataMember]
+		
 		public ICollection<ModuleRecordDTO> ModuleRecordDtos { get; set; }
-		[DataMember]
+		
 		public ICollection<CategoryRecordDTO> CategoryRecordDtos { get; set; }
-		[DataMember]
+		
 		public ICollection<JobCardDTO> JobCardDtos { get; set; }
 
 		#endregion
