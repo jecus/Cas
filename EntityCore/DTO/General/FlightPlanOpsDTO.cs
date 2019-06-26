@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.Serialization;
 using EntityCore.Attributte;
 
 namespace EntityCore.DTO.General

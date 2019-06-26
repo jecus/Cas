@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.Serialization;
 using EntityCore.Attributte;
 using EntityCore.DTO.Dictionaries;
 
