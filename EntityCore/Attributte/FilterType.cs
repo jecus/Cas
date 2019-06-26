@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace EntityCore.Attributte
 {
-	[DataContract]
+	
 	public enum FilterType
 	{
 		/// <summary>

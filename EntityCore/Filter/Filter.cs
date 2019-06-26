@@ -4,7 +4,7 @@ using EntityCore.Attributte;
 
 namespace EntityCore.Filter
 {
-	[DataContract]
+	
 	public class Filter
 	{
 		#region public Filter(string filterProperty, FilterType filterType, object value)
