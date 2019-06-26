@@ -8,7 +8,7 @@
     <PackageReference Include="EFCore.BulkExtensions" Version="2.4.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
-    <PackageReference Include="Z.EntityFramework.Plus.QueryIncludeOptimized.EF6" Version="1.8.1" />
+    <PackageReference Include="Z.EntityFramework.Plus.EFCore" Version="2.0.2" />
   </ItemGroup>
 
 </Project>

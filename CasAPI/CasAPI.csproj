@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -18,6 +18,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EntityCore\EntityCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="AppSettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

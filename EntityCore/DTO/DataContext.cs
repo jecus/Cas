@@ -5,26 +5,12 @@ using Microsoft.Extensions.Options;
 
 namespace EntityCore.DTO
 {
-	/// <summary>
-	/// Параметры подключения к БД
-	/// </summary>
-	public class DbCoreContextOptions
-	{
-		public string ConnectionString { get; set; }
-	}
-
 	public class DataContext : DbContext
 	{
-		private const string _connection = "data source=91.213.233.139;initial catalog=ScatDBTest;user id=casadmin;password=casadmin001;MultipleActiveResultSets=True;App=EntityFramework";
-
-		#region Constructor
-
-		public DataContext(string connectionString) : base(new DbContextOptionsBuilder().UseSqlServer(connectionString).Options)
+		public DataContext(DbContextOptions opt) : base(opt)
 		{
-			this.Database.SetCommandTimeout(180);
+			
 		}
-
-		#endregion
 
 		#region Dictionary
 

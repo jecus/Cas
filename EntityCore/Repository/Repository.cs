@@ -247,7 +247,7 @@ namespace EntityCore.Repository
 			var includeProperties = typeof(T).GetProperties().Where(i => i.GetCustomAttributes(typeof(IncludeAttribute), false).Length != 0);
 			foreach (var property in includeProperties)
 			{
-				query = query.IncludeOptimizedByPath(property.Name);
+				query = query.Include(property.Name);
 
 
 				IEnumerable<PropertyInfo> includeParentProperties;
@@ -256,7 +256,7 @@ namespace EntityCore.Repository
 				else includeParentProperties = property.PropertyType.GetProperties().Where(i => i.GetCustomAttributes(typeof(IncludeAttribute), false).Length != 0);
 
 				foreach (var propertyInfo in includeParentProperties)
-					query = query.IncludeOptimizedByPath($"{property.Name}.{propertyInfo.Name}");
+					query = query.Include($"{property.Name}.{propertyInfo.Name}");
 
 				if (getAll)
 				{
@@ -266,7 +266,7 @@ namespace EntityCore.Repository
 					else childParentProperties = property.PropertyType.GetProperties().Where(i => i.GetCustomAttributes(typeof(IncludeAttribute), false).Length != 0);
 
 					foreach (var propertyInfo in childParentProperties)
-						query = query.IncludeOptimizedByPath($"{property.Name}.{propertyInfo.Name}");
+						query = query.Include($"{property.Name}.{propertyInfo.Name}");
 				}
 			}
 
@@ -280,7 +280,7 @@ namespace EntityCore.Repository
 					{
 						if (property.PropertyType.GenericTypeArguments.Length > 0)
 							query = GetQuery(query, property.PropertyType.GenericTypeArguments[0].FullName, property.Name, false);
-						else query = query.IncludeOptimizedByPath(property.Name);
+						else query = query.Include(property.Name);
 					}
 					else
 						query = GetQuery(query, property.PropertyType.GenericTypeArguments[0].FullName, property.Name, attribute.ParentProperty, attribute.ParentPropertyValue, attribute.Filter, false);
@@ -292,7 +292,7 @@ namespace EntityCore.Repository
 					else includeParentProperties = property.PropertyType.GetProperties().Where(i => i.GetCustomAttributes(typeof(IncludeAttribute), false).Length != 0);
 					
 					foreach (var propertyInfo in includeParentProperties)
-						query = query.IncludeOptimizedByPath($"{property.Name}.{propertyInfo.Name}");
+						query = query.Include($"{property.Name}.{propertyInfo.Name}");
 
 					if (getAll)
 					{
@@ -302,7 +302,7 @@ namespace EntityCore.Repository
 						else childParentProperties = property.PropertyType.GetProperties().Where(i => i.GetCustomAttributes(typeof(IncludeAttribute), false).Length != 0);
 
 						foreach (var propertyInfo in childParentProperties)
-							query = query.IncludeOptimizedByPath($"{property.Name}.{propertyInfo.Name}");
+							query = query.Include($"{property.Name}.{propertyInfo.Name}");
 					}
 				}
 			}
@@ -431,100 +431,100 @@ namespace EntityCore.Repository
 			var lambda = Expression.Lambda(whereCall, aircraftFlightObject);
 
 			if (typeCollection.Contains("ItemFileLinkDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<ItemFileLinkDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<ItemFileLinkDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<ItemFileLinkDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("ComponentLLPCategoryDataDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<ComponentLLPCategoryDataDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<ComponentLLPCategoryDataDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<ComponentLLPCategoryDataDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("ComponentLLPCategoryChangeRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<ComponentLLPCategoryChangeRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<ComponentLLPCategoryChangeRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<ComponentLLPCategoryChangeRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("TransferRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<TransferRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<TransferRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<TransferRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("ComponentDirectiveDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<ComponentDirectiveDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<ComponentDirectiveDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<ComponentDirectiveDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("ActualStateRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<ActualStateRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<ActualStateRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<ActualStateRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("MaintenanceProgramChangeRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<MaintenanceProgramChangeRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<MaintenanceProgramChangeRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<MaintenanceProgramChangeRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("AuditRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<AuditRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<AuditRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<AuditRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("DirectiveRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<DirectiveRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<DirectiveRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<DirectiveRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("CategoryRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<CategoryRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<CategoryRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<CategoryRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("AccessoryRequiredDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<AccessoryRequiredDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<AccessoryRequiredDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<AccessoryRequiredDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("KitSuppliersRelationDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<KitSuppliersRelationDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<KitSuppliersRelationDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<KitSuppliersRelationDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("EventConditionDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<EventConditionDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<EventConditionDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<EventConditionDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("DocumentDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<DocumentDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<DocumentDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<DocumentDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("DamageSectorDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<DamageSectorDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<DamageSectorDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<DamageSectorDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("DamageDocumentDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<DamageDocumentDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<DamageDocumentDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<DamageDocumentDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("FlightTrackRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<FlightTrackRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<FlightTrackRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<FlightTrackRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("InitialOrderRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<InitialOrderRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<InitialOrderRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<InitialOrderRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("JobCardTaskDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<JobCardTaskDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<JobCardTaskDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<JobCardTaskDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("MaintenanceDirectiveDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<MaintenanceDirectiveDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<MaintenanceDirectiveDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<MaintenanceDirectiveDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("MTOPCheckRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<MTOPCheckRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<MTOPCheckRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<MTOPCheckRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("ProcedureDocumentReferenceDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<ProcedureDocumentReferenceDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<ProcedureDocumentReferenceDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<ProcedureDocumentReferenceDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("RequestRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<RequestRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<RequestRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<RequestRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("RequestForQuotationRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<RequestForQuotationRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<RequestForQuotationRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<RequestForQuotationRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("SpecialistLicenseDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<SpecialistLicenseDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<SpecialistLicenseDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<SpecialistLicenseDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("SpecialistTrainingDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<SpecialistTrainingDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<SpecialistTrainingDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<SpecialistTrainingDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("SpecialistLicenseDetailDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<SpecialistLicenseDetailDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<SpecialistLicenseDetailDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<SpecialistLicenseDetailDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("SpecialistLicenseRemarkDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<SpecialistLicenseRemarkDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<SpecialistLicenseRemarkDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<SpecialistLicenseRemarkDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("SpecialistCAADTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<SpecialistCAADTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<SpecialistCAADTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<SpecialistCAADTO>)), lambda.Parameters));
 			if (typeCollection.Contains("SpecialistLicenseRatingDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<SpecialistLicenseRatingDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<SpecialistLicenseRatingDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<SpecialistLicenseRatingDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("SpecialistInstrumentRatingDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<SpecialistInstrumentRatingDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<SpecialistInstrumentRatingDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<SpecialistInstrumentRatingDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("WorkOrderRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<WorkOrderRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<WorkOrderRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<WorkOrderRecordDTO>)), lambda.Parameters));
 			throw new Exception($"Type({typeCollection}) not Found!");
 		}
@@ -561,100 +561,100 @@ namespace EntityCore.Repository
 			var lambda = Expression.Lambda(whereCall, aircraftFlightObject);
 
 			if (typeCollection.Contains("ItemFileLinkDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<ItemFileLinkDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<ItemFileLinkDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<ItemFileLinkDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("ComponentLLPCategoryDataDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<ComponentLLPCategoryDataDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<ComponentLLPCategoryDataDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<ComponentLLPCategoryDataDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("ComponentLLPCategoryChangeRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<ComponentLLPCategoryChangeRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<ComponentLLPCategoryChangeRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<ComponentLLPCategoryChangeRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("TransferRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<TransferRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<TransferRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<TransferRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("ComponentDirectiveDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<ComponentDirectiveDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<ComponentDirectiveDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<ComponentDirectiveDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("ActualStateRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<ActualStateRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<ActualStateRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<ActualStateRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("MaintenanceProgramChangeRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<MaintenanceProgramChangeRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<MaintenanceProgramChangeRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<MaintenanceProgramChangeRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("AuditRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<AuditRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<AuditRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<AuditRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("DirectiveRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<DirectiveRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<DirectiveRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<DirectiveRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("CategoryRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<CategoryRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<CategoryRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<CategoryRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("AccessoryRequiredDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<AccessoryRequiredDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<AccessoryRequiredDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<AccessoryRequiredDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("KitSuppliersRelationDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<KitSuppliersRelationDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<KitSuppliersRelationDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<KitSuppliersRelationDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("EventConditionDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<EventConditionDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<EventConditionDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<EventConditionDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("DocumentDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<DocumentDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<DocumentDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<DocumentDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("DamageSectorDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<DamageSectorDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<DamageSectorDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<DamageSectorDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("DamageDocumentDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<DamageDocumentDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<DamageDocumentDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<DamageDocumentDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("FlightTrackRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<FlightTrackRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<FlightTrackRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<FlightTrackRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("InitialOrderRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<InitialOrderRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<InitialOrderRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<InitialOrderRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("JobCardTaskDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<JobCardTaskDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<JobCardTaskDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<JobCardTaskDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("MaintenanceDirectiveDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<MaintenanceDirectiveDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<MaintenanceDirectiveDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<MaintenanceDirectiveDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("MTOPCheckRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<MTOPCheckRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<MTOPCheckRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<MTOPCheckRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("ProcedureDocumentReferenceDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<ProcedureDocumentReferenceDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<ProcedureDocumentReferenceDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<ProcedureDocumentReferenceDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("RequestRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<RequestRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<RequestRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<RequestRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("RequestForQuotationRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<RequestForQuotationRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<RequestForQuotationRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<RequestForQuotationRecordDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("SpecialistLicenseDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<SpecialistLicenseDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<SpecialistLicenseDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<SpecialistLicenseDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("SpecialistTrainingDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<SpecialistTrainingDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<SpecialistTrainingDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<SpecialistTrainingDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("SpecialistLicenseDetailDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<SpecialistLicenseDetailDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<SpecialistLicenseDetailDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<SpecialistLicenseDetailDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("SpecialistLicenseRemarkDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<SpecialistLicenseRemarkDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<SpecialistLicenseRemarkDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<SpecialistLicenseRemarkDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("SpecialistCAADTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<SpecialistCAADTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<SpecialistCAADTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<SpecialistCAADTO>)), lambda.Parameters));
 			if (typeCollection.Contains("SpecialistLicenseRatingDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<SpecialistLicenseRatingDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<SpecialistLicenseRatingDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<SpecialistLicenseRatingDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("SpecialistInstrumentRatingDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<SpecialistInstrumentRatingDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<SpecialistInstrumentRatingDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<SpecialistInstrumentRatingDTO>)), lambda.Parameters));
 			if (typeCollection.Contains("WorkOrderRecordDTO"))
-				return query.IncludeOptimized(Expression.Lambda<Func<T, IEnumerable<WorkOrderRecordDTO>>>(
+				return query.IncludeFilter(Expression.Lambda<Func<T, IEnumerable<WorkOrderRecordDTO>>>(
 					Expression.Convert(lambda.Body, typeof(IEnumerable<WorkOrderRecordDTO>)), lambda.Parameters));
 			throw new Exception($"Type({typeCollection}) not Found!");
 		}

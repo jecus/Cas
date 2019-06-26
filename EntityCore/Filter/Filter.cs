@@ -35,6 +35,11 @@ namespace EntityCore.Filter
 		{
 		}
 
+		public Filter()
+		{
+			
+		}
+
 		#endregion
 
 

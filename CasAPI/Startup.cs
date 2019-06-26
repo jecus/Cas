@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace CasAPI
 {
@@ -37,26 +38,39 @@ namespace CasAPI
 					options.UseSqlServer(Configuration.GetConnectionString("CORE_CONNECTION_STRING"), builder =>
 						{
 							builder.CommandTimeout(180);
-							builder.EnableRetryOnFailure(2);
+							//builder.EnableRetryOnFailure(2);
 						});
-					options.EnableSensitiveDataLogging(false);
-					options.EnableDetailedErrors();
+					//options.EnableSensitiveDataLogging(false);
+					//options.EnableDetailedErrors();
 				});
+
+
+			services.AddSwaggerGen(c =>
+			{
+				c.SwaggerDoc("v1", new Info
+				{
+					Version = "v1",
+					Title = "API",
+					Description = "CAS API "
+				});
+			});
 		}
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 		{
 			if (env.IsDevelopment())
-			{
 				app.UseDeveloperExceptionPage();
-			}
-			else
-			{
-				app.UseHsts();
-			}
+			else app.UseHsts();
 
 			app.UseHttpsRedirection();
 			app.UseMvc();
+
+
+			app.UseSwagger();
+			app.UseSwaggerUI(c =>
+			{
+				c.SwaggerEndpoint("/swagger/v1/swagger.json", "Test API V1");
+			});
 		}
 	}
 }

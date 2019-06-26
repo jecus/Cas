@@ -28,7 +28,7 @@ namespace CasAPI.Controllers
 		}
 
 		[HttpPost("GetObjectById")]
-		public virtual ActionResult<T> GetObjectById(int id, bool loadChild = false)
+		public  ActionResult<T> GetObjectById(int id, bool loadChild = false)
 		{
 			var res = _repository.GetObjectById(id, loadChild);
 			return Ok(res);
