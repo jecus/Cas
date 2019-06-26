@@ -892,9 +892,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EFCore\EFCore.csproj">
+    <ProjectReference Include="..\EFCore\Entity.csproj">
       <Project>{6dddaf81-980a-4ebc-bf58-3ca93a059d7f}</Project>
-      <Name>EFCore</Name>
+      <Name>Entity</Name>
     </ProjectReference>
     <ProjectReference Include="..\TextProcessing\TextProcessing.csproj">
       <Project>{C56BB11D-5043-4A8B-8288-A7199B76B570}</Project>

@@ -5479,9 +5479,9 @@
       <Project>{0e490ce9-c51f-408c-a6fb-39a8ce185817}</Project>
       <Name>CASGlobalTerms</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EFCore\EFCore.csproj">
+    <ProjectReference Include="..\EFCore\Entity.csproj">
       <Project>{6dddaf81-980a-4ebc-bf58-3ca93a059d7f}</Project>
-      <Name>EFCore</Name>
+      <Name>Entity</Name>
     </ProjectReference>
     <ProjectReference Include="..\SmartControls\SmartControls.csproj">
       <Project>{9C7822B3-F9CC-436A-97A0-FDF02E31524D}</Project>
