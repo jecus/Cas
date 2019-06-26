@@ -22,8 +22,6 @@ namespace EntityCore.Repository
 
 		IList<T> GetObjectListAll(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false);
 
-		IQueryable<T> GetObjectQueryableAll(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false);
-
 		int Save(T entity);
 
 		void BulkInsert(IEnumerable<T> entity, int? batchSize = null);

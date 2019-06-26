@@ -98,12 +98,6 @@ namespace EntityCore.Repository
 				return getAllQueryable(filters, loadChild, getDeleted, true).AsNoTracking().ToList();
 		}
 
-		public IQueryable<T> GetObjectQueryableAll(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false)
-		{
-			using (_context)
-				return getAllQueryable(filters, loadChild, getDeleted);
-		}
-
 		private void Add(T entity)
 		{
 			_dbset.Add(entity);
