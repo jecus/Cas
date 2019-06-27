@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using EntityCore.Interfaces;
 using EntityCore.Interfaces.ExecutorServices;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Logging;
 namespace CasAPI.Controllers
 {
 	[ApiController]
+	[Route("executor")]
 	public class ExecutorController : ControllerBase
 	{
 		private readonly IExecutor _executor;
@@ -21,22 +23,50 @@ namespace CasAPI.Controllers
 			_logger = logger;
 		}
 
-		[HttpPost("execute")]
+		[HttpPost("query")]
 		public ActionResult<DataSet> Execute(string sql)
 		{
-			return _executor.Execute(sql);
+			try
+			{
+				return Ok(_executor.Execute(sql));
+			}
+			catch (Exception e)
+			{
+				_logger.LogError(e.Message);
+				return BadRequest();
+			}
 		}
 
-		[HttpPost("executeQueries")]
+		[HttpPost("queries")]
 		public ActionResult<DataSet> Execute(IEnumerable<DbQuery> dbQueries)
 		{
-			return _executor.Execute(dbQueries, out var results);
+			try
+			{
+				var res = _executor.Execute(dbQueries, out var results);
+				if (results.Count > 0)
+					return BadRequest();
+				return Ok(res);
+			}
+			catch (Exception e)
+			{
+				_logger.LogError(e.Message);
+				return BadRequest();
+			}
+			
 		}
 
-		[HttpPost("executeWithParams")]
+		[HttpPost("queryparams")]
 		public ActionResult<DataSet> Execute(string query, List<SerializedSqlParam> parameters)
 		{
-			return _executor.Execute(query, parameters);
+			try
+			{
+				return Ok(_executor.Execute(query, parameters));
+			}
+			catch (Exception e)
+			{
+				_logger.LogError(e.Message);
+				return BadRequest();
+			}
 		}
 	}
 }
