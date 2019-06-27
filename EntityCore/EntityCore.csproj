@@ -8,7 +8,23 @@
     <PackageReference Include="EFCore.BulkExtensions" Version="2.4.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
+    <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="150.18131.0" />
     <PackageReference Include="Z.EntityFramework.Plus.EFCore" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.SqlServer.ConnectionInfo">
+      <HintPath>..\DLL\Microsoft.SqlServer.ConnectionInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc">
+      <HintPath>..\DLL\Microsoft.SqlServer.Management.Sdk.Sfc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Smo">
+      <HintPath>..\DLL\Microsoft.SqlServer.Smo.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.SmoEnum">
+      <HintPath>..\DLL\Microsoft.SqlServer.SmoEnum.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
