@@ -1,4 +1,6 @@
 ﻿using EntityCore.DTO;
+using EntityCore.Interfaces;
+using EntityCore.Interfaces.ExecutorServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -60,9 +62,13 @@ namespace CasAPI
 		{
 			if (env.IsDevelopment())
 				app.UseDeveloperExceptionPage();
-			else app.UseHsts();
+			else
+			{
+				app.UseHsts();
+				app.UseHttpsRedirection();
+			}
 
-			app.UseHttpsRedirection();
+			
 			app.UseMvc();
 
 
