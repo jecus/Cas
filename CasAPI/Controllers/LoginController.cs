@@ -23,7 +23,7 @@ namespace CasAPI.Controllers
 			_logger = logger;
 		}
 
-		[HttpGet("getuser")]
+		[HttpGet("get")]
 		public async Task<ActionResult<UserDTO>> GetUser(string login, string password)
 		{
 			try
