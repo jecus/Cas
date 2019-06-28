@@ -22,7 +22,7 @@ namespace CasAPI.Controllers
 			_repository = new Repository<T>(context);
 		}
 
-		[HttpPost("GetSelectColumnOnly")]
+		[HttpPost("getcolumn")]
 		public virtual async Task<ActionResult<List<int>>> GetSelectColumnOnly(IEnumerable<Filter> filters, string selectProperty)
 		{
 			try
@@ -37,7 +37,7 @@ namespace CasAPI.Controllers
 			}
 		}
 
-		[HttpPost("GetObjectById")]
+		[HttpPost("getbyid")]
 		public async Task<ActionResult<T>> GetObjectById(int id, bool loadChild = false)
 		{
 			try
@@ -52,7 +52,7 @@ namespace CasAPI.Controllers
 			}
 		}
 
-		[HttpPost("GetObject")]
+		[HttpPost("get")]
 		public virtual async Task<ActionResult<T>> GetObject(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false, bool getAll = false)
 		{
 			try
@@ -67,7 +67,7 @@ namespace CasAPI.Controllers
 			}
 		}
 
-		[HttpPost("GetObjectList")]
+		[HttpPost("getlist")]
 		public virtual async Task<ActionResult<List<T>>> GetObjectList(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false)
 		{
 			try
@@ -82,7 +82,7 @@ namespace CasAPI.Controllers
 			}
 		}
 
-		[HttpPost("GetObjectListAll")]
+		[HttpPost("getlistall")]
 		public virtual async Task<ActionResult<List<T>>> GetObjectListAll(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false)
 		{
 			try
@@ -97,7 +97,7 @@ namespace CasAPI.Controllers
 			}
 		}
 
-		[HttpPost("Delete")]
+		[HttpPost("delete")]
 		public virtual async Task<ActionResult> Delete(T entity)
 		{
 			try
@@ -112,7 +112,7 @@ namespace CasAPI.Controllers
 			}
 		}
 
-		[HttpPost("Save")]
+		[HttpPost("save")]
 		public virtual async Task<ActionResult<int>> Save(T entity)
 		{
 			try
@@ -127,7 +127,7 @@ namespace CasAPI.Controllers
 			}
 		}
 
-		[HttpPost("BulkInsert")]
+		[HttpPost("bulkinsert")]
 		public virtual async Task<ActionResult> BulkInsert(IEnumerable<T> entity, int? batchSize = null)
 		{
 			try
@@ -142,7 +142,7 @@ namespace CasAPI.Controllers
 			}
 		}
 
-		[HttpPost("BulkUpdate")]
+		[HttpPost("bulkupdate")]
 		public virtual async Task<ActionResult> BulkUpdate(IEnumerable<T> entity, int? batchSize = null)
 		{
 			try
@@ -157,7 +157,7 @@ namespace CasAPI.Controllers
 			}
 		}
 
-		[HttpPost("BulkDelete")]
+		[HttpPost("bulkdelete")]
 		public virtual async Task<ActionResult> BulkDelete(IEnumerable<T> entity, int? batchSize = null)
 		{
 			try
