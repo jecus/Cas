@@ -30,18 +30,9 @@ namespace EntityCore.Interfaces
 		}
 
 
-		public DataSet Execute(IEnumerable<DbQuery> dbQueries, out List<ExecutionResultArgs> results)
+		public DataSet Execute(string query , SqlParameter[] parameters)
 		{
-			return _manager.Execute(dbQueries, out results);
-		}
-
-		public DataSet Execute(string query, List<SerializedSqlParam> parameters)
-		{
-			var p = new List<SqlParameter>();
-			foreach (var parameter in parameters)
-				p.Add(parameter.GetSqlParameter());
-
-			return _manager.Execute(query, p.ToArray());
+			return _manager.Execute(query, parameters);
 		}
 	}
 }

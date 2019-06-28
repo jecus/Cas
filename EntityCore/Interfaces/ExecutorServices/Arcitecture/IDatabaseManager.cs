@@ -14,8 +14,6 @@ namespace EntityCore.Interfaces.ExecutorServices.Arcitecture
 
 		DataSet Execute(Database database, String query);
 
-		DataSet Execute(IEnumerable<DbQuery> dbQueries, out List<ExecutionResultArgs> results);
-
 		DataSet Execute(String query, SqlParameter[] parameters);
 
 		DataSet Execute(Database database, String query, SqlParameter[] parameters);
