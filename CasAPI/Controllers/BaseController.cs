@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using EntityCore.DTO;
 using EntityCore.Filter;
 using EntityCore.Repository;
@@ -21,72 +22,72 @@ namespace CasAPI.Controllers
 		}
 
 		[HttpPost("GetSelectColumnOnly")]
-		public virtual ActionResult<List<int>> GetSelectColumnOnly(IEnumerable<EntityCore.Filter.Filter> filters, string selectProperty)
+		public virtual async Task<ActionResult<List<int>>> GetSelectColumnOnly(IEnumerable<Filter> filters, string selectProperty)
 		{
-			var res = _repository.GetSelectColumnOnly(filters, selectProperty);
+			var res = await _repository.GetSelectColumnOnlyAsync(filters, selectProperty);
 			return Ok(res);
 		}
 
 		[HttpPost("GetObjectById")]
-		public  ActionResult<T> GetObjectById(int id, bool loadChild = false)
+		public async Task<ActionResult<T>> GetObjectById(int id, bool loadChild = false)
 		{
-			var res = _repository.GetObjectById(id, loadChild);
+			var res = await _repository.GetObjectByIdAsync(id, loadChild);
 			return Ok(res);
 		}
 
 		[HttpPost("GetObject")]
-		public virtual ActionResult<T> GetObject(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false, bool getAll = false)
+		public virtual async Task<ActionResult<T>> GetObject(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false, bool getAll = false)
 		{
-			var res = _repository.GetObject(filters, loadChild, getDeleted, getAll);
+			var res = await _repository.GetObjectAsync(filters, loadChild, getDeleted, getAll);
 			return Ok(res);
 		}
 
 		[HttpPost("GetObjectList")]
-		public virtual ActionResult<List<T>> GetObjectList(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false)
+		public virtual async Task<ActionResult<List<T>>> GetObjectList(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false)
 		{
-			var res = _repository.GetObjectList(filters, loadChild, getDeleted);
+			var res = await _repository.GetObjectListAsync(filters, loadChild, getDeleted);
 			return Ok(res);
 		}
 
 		[HttpPost("GetObjectListAll")]
-		public virtual ActionResult<List<T>> GetObjectListAll(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false)
+		public virtual async Task<ActionResult<List<T>>> GetObjectListAll(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false)
 		{
-			var res = _repository.GetObjectListAll(filters, loadChild, getDeleted);
+			var res = await _repository.GetObjectListAllAsync(filters, loadChild, getDeleted);
 			return Ok(res);
 		}
 
 		[HttpPost("Delete")]
-		public virtual ActionResult Delete(T entity)
+		public virtual async Task<ActionResult> Delete(T entity)
 		{
-			_repository.Delete(entity);
+			await _repository.DeleteAsync(entity);
 			return Ok();
 		}
 
 		[HttpPost("Save")]
-		public virtual ActionResult<int> Save(T entity)
+		public virtual async Task<ActionResult<int>> Save(T entity)
 		{
-			var res = _repository.Save(entity);
+			var res = await _repository.SaveAsync(entity);
 			return Ok(res);
 		}
 
 		[HttpPost("BulkInsert")]
-		public virtual ActionResult BulkInsert(IEnumerable<T> entity, int? batchSize = null)
+		public virtual async Task<ActionResult> BulkInsert(IEnumerable<T> entity, int? batchSize = null)
 		{
-			_repository.BulkInsert(entity, batchSize);
+			await _repository.BulkInsertASync(entity, batchSize);
 			return Ok();
 		}
 
 		[HttpPost("BulkUpdate")]
-		public virtual ActionResult BulkUpdate(IEnumerable<T> entity, int? batchSize = null)
+		public virtual async Task<ActionResult> BulkUpdate(IEnumerable<T> entity, int? batchSize = null)
 		{
-			_repository.BulkUpdate(entity, batchSize);
+			await _repository.BulkUpdateAsync(entity, batchSize);
 			return Ok();
 		}
 
 		[HttpPost("BulkDelete")]
-		public virtual ActionResult BulkDelete(IEnumerable<T> entity, int? batchSize = null)
+		public virtual async Task<ActionResult> BulkDelete(IEnumerable<T> entity, int? batchSize = null)
 		{
-			_repository.BulkDelete(entity, batchSize);
+			await  _repository.BulkDeleteAsync(entity, batchSize);
 			return Ok();
 		}
 	}

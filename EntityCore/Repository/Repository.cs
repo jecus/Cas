@@ -30,7 +30,9 @@ namespace EntityCore.Repository
 			
 		}
 
-		public IList<int> GetSelectColumnOnly(IEnumerable<Filter.Filter> filters, string selectProperty)
+		#region Async
+
+		public async Task<IList<int>> GetSelectColumnOnlyAsync(IEnumerable<Filter.Filter> filters, string selectProperty)
 		{
 			using (_context)
 			{
@@ -54,138 +56,32 @@ namespace EntityCore.Repository
 					}
 				}
 
-				return query.AsNoTracking().Select(selectProperty).OfType<int>().ToList();
+				return await query.AsNoTracking().Select(selectProperty).OfType<int>().ToListAsync();
 			}
 		}
-
-		public IList<TType> GetSelectColumnOnly<TType>(Expression<Func<T, bool>> where, Expression<Func<T, TType>> select) where TType : new()
-		{
-			using (_context)
-			{
-				IQueryable<T> query = _dbset;
-
-				var conditionAttributes = typeof(T).GetCustomAttributes(typeof(ConditionAttribute), false).Cast<ConditionAttribute>().ToList();
-				foreach (var attribute in conditionAttributes)
-				{
-					var func = LambdaConstructor<T>(attribute.ColumnName, attribute.Condition, FilterType.Equal);
-					query = query.Where(func);
-				}
-				return query.Where(where).AsNoTracking().Select(select).ToList();
-			}
-		}
-
-		public T GetObjectById(int id, bool loadChild = false)
-		{
-			using (_context)
-				return getAllQueryable(new[] {new Filter.Filter("ItemId", id)}, loadChild).FirstOrDefault();
-		}
-
-		public T GetObject(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false, bool getAll = false)
-		{
-			using (_context)
-				return getAllQueryable(filters, loadChild, getDeleted, getAll).FirstOrDefault();
-		}
-
-		public IList<T> GetObjectList(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false)
-		{
-			using (_context)
-				return getAllQueryable(filters, loadChild, getDeleted).AsNoTracking().ToList();
-		}
-
-		public IList<T> GetObjectListAll(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false)
-		{
-			using (_context)
-				return getAllQueryable(filters, loadChild, getDeleted, true).AsNoTracking().ToList();
-		}
-
-		private void Add(T entity)
-		{
-			_dbset.Add(entity);
-			_context.Entry(entity).State = EntityState.Added;
-		}
-
-		private void Update(T entity)
-		{
-			_dbset.Attach(entity);
-			_context.Entry(entity).State = EntityState.Modified;
-		}
-
-		public void Delete(T entity)
-		{
-			_dbset.Attach(entity);
-			_dbset.Remove(entity);
-			_context.Entry(entity).State = EntityState.Deleted;
-
-			_context.SaveChanges();
-		}
-
-		public int Save(T entity)
-		{
-			try
-			{
-				if (entity.ItemId <= 0)
-					Add(entity);
-				else Update(entity);
-
-				_context.SaveChanges();
-
-				return entity.ItemId;
-			}
-			catch (Exception exception)
-			{
-				throw exception;
-			}
-		}
-
-		public void BulkInsert(IEnumerable<T> entity, int? batchSize = null)
-		{
-			if (!batchSize.HasValue)
-				batchSize = 250;
-
-			_context.BulkInsert(entity.ToList(), config => { config.BatchSize = batchSize.Value; });
-		}
-
-		public void BulkUpdate(IEnumerable<T> entity, int? batchSize = null)
-		{
-			if (!batchSize.HasValue)
-				batchSize = 250;
-
-			_context.BulkUpdate(entity.ToList(), config => { config.BatchSize = batchSize.Value; });
-		}
-
-		public void BulkDelete(IEnumerable<T> entity, int? batchSize = null)
-		{
-			if (!batchSize.HasValue)
-				batchSize = 250;
-
-			_context.BulkDelete(entity.ToList(), config => { config.BatchSize = batchSize.Value; });
-		}
-
-
-		#region Async
 
 		public async Task<T> GetObjectByIdAsync(int id, bool loadChild = false)
 		{
 			using (_context)
-				return await getAllQueryable(new[] { new Filter.Filter("ItemId", id) }, loadChild).FirstOrDefaultAsync();
+				return await getAllQueryable(new[] { new Filter.Filter("ItemId", id) }, loadChild).AsNoTracking().FirstOrDefaultAsync();
 		}
 
 		public async Task<T> GetObjectAsync(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false, bool getAll = false)
 		{
 			using (_context)
-				return await getAllQueryable(filters, loadChild, getDeleted, getAll).FirstOrDefaultAsync();
+				return await getAllQueryable(filters, loadChild, getDeleted, getAll).AsNoTracking().FirstOrDefaultAsync();
 		}
 
 		public async Task<IList<T>> GetObjectListAsync(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false)
 		{
 			using (_context)
-				return await getAllQueryable(filters, loadChild, getDeleted).ToListAsync();
+				return await getAllQueryable(filters, loadChild, getDeleted).AsNoTracking().ToListAsync();
 		}
 
 		public async Task<IList<T>> GetObjectListAllAsync(IEnumerable<Filter.Filter> filters = null, bool loadChild = false, bool getDeleted = false)
 		{
 			using (_context)
-				return await getAllQueryable(filters, loadChild, getDeleted, true).ToListAsync();
+				return await getAllQueryable(filters, loadChild, getDeleted, true).AsNoTracking().ToListAsync();
 		}
 
 		public async Task<int> SaveAsync(T entity)
@@ -213,6 +109,51 @@ namespace EntityCore.Repository
 			_context.Entry(entity).State = EntityState.Deleted;
 
 			await _context.SaveChangesAsync();
+		}
+
+		private void Add(T entity)
+		{
+			_dbset.Add(entity);
+			_context.Entry(entity).State = EntityState.Added;
+		}
+
+		private void Update(T entity)
+		{
+			_dbset.Attach(entity);
+			_context.Entry(entity).State = EntityState.Modified;
+		}
+
+		public void Delete(T entity)
+		{
+			_dbset.Attach(entity);
+			_dbset.Remove(entity);
+			_context.Entry(entity).State = EntityState.Deleted;
+
+			_context.SaveChanges();
+		}
+
+		public async Task BulkInsertASync(IEnumerable<T> entity, int? batchSize = null)
+		{
+			if (!batchSize.HasValue)
+				batchSize = 250;
+
+			await _context.BulkInsertAsync(entity.ToList(), config => { config.BatchSize = batchSize.Value; });
+		}
+
+		public async Task BulkUpdateAsync(IEnumerable<T> entity, int? batchSize = null)
+		{
+			if (!batchSize.HasValue)
+				batchSize = 250;
+
+			await _context.BulkUpdateAsync(entity.ToList(), config => { config.BatchSize = batchSize.Value; });
+		}
+
+		public async Task BulkDeleteAsync(IEnumerable<T> entity, int? batchSize = null)
+		{
+			if (!batchSize.HasValue)
+				batchSize = 250;
+
+			await _context.BulkDeleteAsync(entity.ToList(), config => { config.BatchSize = batchSize.Value; });
 		}
 
 		#endregion
