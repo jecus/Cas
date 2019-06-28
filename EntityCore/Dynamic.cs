@@ -43,7 +43,7 @@ namespace EntityCore
 		    var property = Expression.Property(containsLambdaParameter, targetType, propertyName);
 
 			//Create a constant with the -> IEnumerable<T> searchValues
-			var searchValuesAsConstant = Expression.Constant(searchValues, searchValues.GetType());
+			var searchValuesAsConstant = Expression.Constant(searchValues/*, searchValues.GetType()*/);
 
 		    var res = Expression.Convert(property, searchValuesType);
 
@@ -76,12 +76,12 @@ namespace EntityCore
                     source.Expression, Expression.Quote(lambda)));
         }
 
-        public static IQueryable Select(this IQueryable source, string selector)
+        public static IQueryable<int> Select(this IQueryable source, string selector)
         {
 	        if (source == null) throw new ArgumentNullException("source");
 	        if (selector == null) throw new ArgumentNullException("selector");
 	        LambdaExpression lambda = DynamicExpression.ParseLambda(source.ElementType, null, selector);
-	        return source.Provider.CreateQuery(
+	        return source.Provider.CreateQuery<int>(
 		        Expression.Call(
 			        typeof(Queryable), "Select",
 			        new Type[] { source.ElementType, lambda.Body.Type },

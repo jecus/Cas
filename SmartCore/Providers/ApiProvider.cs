@@ -11,7 +11,9 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Xml.Serialization;
 using EFCore.Contract;
+using EFCore.DTO;
 using EFCore.DTO.General;
+using EFCore.Filter;
 using SmartCore.Management;
 using SmartCore.Queries;
 
@@ -25,6 +27,7 @@ namespace CAS.UI.Helpers
 		{
 			_httpClient = new HttpClient() {BaseAddress = new Uri(serverName)};
 		}
+
 		#region User
 
 		public void GetAPIConnection()
@@ -62,6 +65,8 @@ namespace CAS.UI.Helpers
 
 		#endregion
 
+		#region Executor
+
 		public DataSet Execute(string sql)
 		{
 			var res = _httpClient.SendXMLAsync<QueryParams, DataSet>(HttpMethod.Post, "executor/query", new QueryParams(){Query = sql});
@@ -72,6 +77,71 @@ namespace CAS.UI.Helpers
 		{
 			var res = _httpClient.SendXMLAsync<QueryParams, DataSet>(HttpMethod.Post, "executor/queryparams", new QueryParams() { Query = query, SqlParams = parameters});
 			return res?.Data ?? new DataSet(){Tables = { new DataTable()}};
+		}
+
+		#endregion
+
+		public IList<int> GetSelectColumnOnly<T>(IEnumerable<Filter> filters, string selectProperty) where T: BaseEntity
+		{
+			var param = HttpUtility.ParseQueryString(string.Empty);
+			param.Add(new NameValueCollection()
+			{
+				["selectProperty"] = selectProperty,
+			});
+			var res = _httpClient.SendJsonAsync<IEnumerable<Filter>, List<int>>(HttpMethod.Post, $"{typeof(T).Name.Replace("DTO","").ToLower()}/getcolumn?{param}", filters);
+			return res?.Data;
+		}
+
+		public T GetObjectById<T>(int id, bool loadChild = false) where T : BaseEntity
+		{
+			var param = HttpUtility.ParseQueryString(string.Empty);
+			param.Add(new NameValueCollection()
+			{
+				["id"] = id.ToString(),
+				["loadChild"] = loadChild.ToString()
+			});
+			var res = _httpClient.GetJsonAsync<T>($"{typeof(T).Name.Replace("DTO", "").ToLower()}/getbyid?{param}");
+			return res?.Data;
+		}
+
+		public T GetObject<T>(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false,
+			bool getAll = false) where T : BaseEntity
+		{
+			var param = HttpUtility.ParseQueryString(string.Empty);
+			param.Add(new NameValueCollection()
+			{
+				["loadChild"] = loadChild.ToString(),
+				["getDeleted"] = getDeleted.ToString(),
+				["getAll"] = getAll.ToString(),
+			});
+			var res = _httpClient.SendJsonAsync<IEnumerable<Filter>, T>(HttpMethod.Post, $"{typeof(T).Name.Replace("DTO", "").ToLower()}/get?{param}", filters);
+			return res?.Data;
+		}
+
+		public List<T> GetObjectList<T>(IEnumerable<Filter> filters = null, bool loadChild = false,
+			bool getDeleted = false) where T : BaseEntity
+		{
+			var param = HttpUtility.ParseQueryString(string.Empty);
+			param.Add(new NameValueCollection()
+			{
+				["loadChild"] = loadChild.ToString(),
+				["getDeleted"] = getDeleted.ToString(),
+			});
+			var res = _httpClient.SendJsonAsync<IEnumerable<Filter>, List<T>>(HttpMethod.Post, $"{typeof(T).Name.Replace("DTO", "").ToLower()}/getlist?{param}", filters);
+			return res?.Data;
+		}
+
+		public List<T> GetObjectListAll<T>(IEnumerable<Filter> filters = null, bool loadChild = false,
+			bool getDeleted = false) where T : BaseEntity
+		{
+			var param = HttpUtility.ParseQueryString(string.Empty);
+			param.Add(new NameValueCollection()
+			{
+				["loadChild"] = loadChild.ToString(),
+				["getDeleted"] = getDeleted.ToString(),
+			});
+			var res = _httpClient.SendJsonAsync<IEnumerable<Filter>, List<T>>(HttpMethod.Post, $"{typeof(T).Name.Replace("DTO", "").ToLower()}/getlistall?{param}", filters);
+			return res?.Data;
 		}
 
 	}

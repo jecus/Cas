@@ -37,7 +37,7 @@ namespace CasAPI.Controllers
 			}
 		}
 
-		[HttpPost("getbyid")]
+		[HttpGet("getbyid")]
 		public async Task<ActionResult<T>> GetObjectById(int id, bool loadChild = false)
 		{
 			try

@@ -29,7 +29,9 @@ namespace CAS.UI.Helpers
 
 		public static ApiResult<TResult> SendJsonAsync<TModel, TResult>(this HttpClient client, HttpMethod httpMethod, string requestUri, TModel model)
 		{
-			var json = JsonConvert.SerializeObject(model);
+			var json = "[{}]";
+			if(model != null)
+				json = JsonConvert.SerializeObject(model);
 			var message = new HttpRequestMessage(httpMethod, requestUri)
 			{
 				Content = new StringContent(json, Encoding.UTF8, "application/json")

@@ -124,6 +124,7 @@ namespace SmartCore
 		public ApiProvider ApiProvider
 		{
 			get { return _apiProvider; }
+			set { _apiProvider = value; }
 		}
 
 
@@ -184,8 +185,7 @@ namespace SmartCore
         {
 	        _ipServer = serverName;
 
-	        _apiProvider = new ApiProvider(serverName);
-	        
+	        //_apiProvider = new ApiProvider(serverName);
 
 	        _apiProvider.GetAPIConnection();
 

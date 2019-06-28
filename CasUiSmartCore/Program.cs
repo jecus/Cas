@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Logging;
 using CAS.UI.Management.Dispatchering;
@@ -93,7 +94,7 @@ namespace CAS.UI
 
 			var environment = DbTypes.CasEnvironment = new CasEnvironment();
 			environment.AuditRepository = GlobalObjects.AuditRepository;
-
+			environment.ApiProvider = new ApiProvider((string)GlobalObjects.Config["ConnectionStrings"]["ScatTest"]);
 
 			var nonRoutineJobDataAccess = new NonRoutineJobDataAccess(environment.Loader, environment.Keeper);
 			var itemsRelationsDataAccess = new ItemsRelationsDataAccess(environment);
