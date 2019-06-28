@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
 using EntityCore.Interfaces;
 using EntityCore.Interfaces.ExecutorServices;
 using EntityCore.Interfaces.ExecutorServices.Arcitecture;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace CasAPI.Controllers
 {
@@ -23,12 +27,23 @@ namespace CasAPI.Controllers
 			_logger = logger;
 		}
 
-		[HttpGet("query")]
-		public ActionResult<DataSet> Execute(string sql)
+		[HttpPost("query")]
+		public ActionResult<string> Execute(QueryParams p)
 		{
 			try
 			{
-				return Ok(_executor.Execute(sql));
+				var s = new XmlSerializer(typeof(DataSet));
+				string xml;
+
+				using (var sww = new StringWriter())
+				{
+					using (var writer = XmlWriter.Create(sww))
+					{
+						s.Serialize(writer, _executor.Execute(p.Query));
+						xml = sww.ToString(); 
+					}
+				}
+				return Ok(xml);
 			}
 			catch (Exception e)
 			{
@@ -38,11 +53,22 @@ namespace CasAPI.Controllers
 		}
 
 		[HttpPost("queryparams")]
-		public ActionResult<DataSet> Execute(string query, List<SerializedSqlParam> parameters)
+		public ActionResult<string> ExecuteWithParams(QueryParams p)
 		{
 			try
 			{
-				return Ok(_executor.Execute(query, parameters));
+				var s = new XmlSerializer(typeof(DataSet));
+				string xml;
+
+				using (var sww = new StringWriter())
+				{
+					using (var writer = XmlWriter.Create(sww))
+					{
+						s.Serialize(writer, _executor.Execute(p.Query, p.SqlParams));
+						xml = sww.ToString();
+					}
+				}
+				return Ok(xml);
 			}
 			catch (Exception e)
 			{
