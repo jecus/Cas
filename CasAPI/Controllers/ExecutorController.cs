@@ -23,7 +23,7 @@ namespace CasAPI.Controllers
 			_logger = logger;
 		}
 
-		[HttpPost("query")]
+		[HttpGet("query")]
 		public ActionResult<DataSet> Execute(string sql)
 		{
 			try
