@@ -75,7 +75,7 @@ namespace CAS.UI.UIControls.Users
 		#endregion
 
 		#region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
-		protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
+		protected override async void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
 		{
 			_initial.Clear();
 			_result.Clear();
@@ -84,7 +84,7 @@ namespace CAS.UI.UIControls.Users
 
 			try
 			{
-				var userDto = GlobalObjects.CasEnvironment.GetAllUsers();
+				var userDto = GlobalObjects.CasEnvironment.ApiProvider.GetAllUsersAsync();
 				_initial.AddRange(userDto.Select(i => new User(i)));
 			}
 			catch(Exception ex)
