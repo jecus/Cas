@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.General
 {
-	[Route("smsEventType")]
+	[Route("smseventtype")]
 	public class SmsEventTypeController : BaseController<SmsEventTypeDTO>
 	{
 		public SmsEventTypeController(DataContext context, ILogger<BaseController<SmsEventTypeDTO>> logger) : base(context, logger)

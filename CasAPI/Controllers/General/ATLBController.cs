@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.General
 {
-	[Route("ATLB")]
+	[Route("atlb")]
 	public class ATLBController : BaseController<ATLBDTO>
 	{
 		public ATLBController(DataContext context, ILogger<BaseController<ATLBDTO>> logger) : base(context, logger)

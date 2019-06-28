@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.Dictionaries
 {
-	[Route("eventClass")]
+	[Route("eventclass")]
 	public class EventClassController : BaseController<EventClassDTO>
 	{
 		public EventClassController(DataContext context, ILogger<BaseController<EventClassDTO>> logger) : base(context, logger)

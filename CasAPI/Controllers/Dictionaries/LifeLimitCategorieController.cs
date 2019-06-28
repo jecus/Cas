@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.Dictionaries
 {
-	[Route("lifeLimitCategorie")]
+	[Route("lifeLimitcategorie")]
 	public class LifeLimitCategorieController : BaseController<LifeLimitCategorieDTO>
 	{
 		public LifeLimitCategorieController(DataContext context, ILogger<BaseController<LifeLimitCategorieDTO>> logger) : base(context, logger)

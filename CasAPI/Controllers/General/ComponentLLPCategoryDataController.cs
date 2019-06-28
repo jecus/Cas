@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.General
 {
-	[Route("componentLLPCategoryData")]
+	[Route("componentllpcategorydata")]
 	public class ComponentLLPCategoryDataController : BaseController<ComponentLLPCategoryDataDTO>
 	{
 		public ComponentLLPCategoryDataController(DataContext context, ILogger<BaseController<ComponentLLPCategoryDataDTO>> logger) : base(context, logger)

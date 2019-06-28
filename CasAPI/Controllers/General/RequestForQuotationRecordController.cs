@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.General
 {
-	[Route("requestForQuotationRecord")]
+	[Route("requestforquotationrecord")]
 	public class RequestForQuotationRecordController : BaseController<RequestForQuotationRecordDTO>
 	{
 		public RequestForQuotationRecordController(DataContext context, ILogger<BaseController<RequestForQuotationRecordDTO>> logger) : base(context, logger)

@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.Dictionaries
 {
-	[Route("cruiseLevel")]
+	[Route("cruiselevel")]
 	public class CruiseLevelController : BaseController<CruiseLevelDTO>
 	{
 		public CruiseLevelController(DataContext context, ILogger<BaseController<CruiseLevelDTO>> logger) : base(context, logger)

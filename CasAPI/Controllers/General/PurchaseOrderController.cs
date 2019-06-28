@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.General
 {
-	[Route("purchaseOrder")]
+	[Route("purchaseorder")]
 	public class PurchaseOrderController : BaseController<PurchaseOrderDTO>
 	{
 		public PurchaseOrderController(DataContext context, ILogger<BaseController<PurchaseOrderDTO>> logger) : base(context, logger)

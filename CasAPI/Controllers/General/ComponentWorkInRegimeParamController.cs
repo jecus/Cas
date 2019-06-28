@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.General
 {
-	[Route("componentWorkInRegimeParam")]
+	[Route("componentworkinregimeparam")]
 	public class ComponentWorkInRegimeParamController : BaseController<ComponentWorkInRegimeParamDTO>
 	{
 		public ComponentWorkInRegimeParamController(DataContext context, ILogger<BaseController<ComponentWorkInRegimeParamDTO>> logger) : base(context, logger)

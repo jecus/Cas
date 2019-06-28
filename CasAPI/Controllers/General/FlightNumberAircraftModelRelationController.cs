@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.General
 {
-	[Route("flightNumberAircraftModelRelation")]
+	[Route("flightnumberaircraftmodelrelation")]
 	public class FlightNumberAircraftModelRelationController : BaseController<FlightNumberAircraftModelRelationDTO>
 	{
 		public FlightNumberAircraftModelRelationController(DataContext context, ILogger<BaseController<FlightNumberAircraftModelRelationDTO>> logger) : base(context, logger)

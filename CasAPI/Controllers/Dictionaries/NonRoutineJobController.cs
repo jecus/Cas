@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.Dictionaries
 {
-	[Route("nonRoutineJob")]
+	[Route("nonroutinejob")]
 	public class NonRoutineJobController : BaseController<NonRoutineJobDTO>
 	{
 		public NonRoutineJobController(DataContext context, ILogger<BaseController<NonRoutineJobDTO>> logger) : base(context, logger)

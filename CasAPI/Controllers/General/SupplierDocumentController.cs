@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.General
 {
-	[Route("supplierDocument")]
+	[Route("supplierdocument")]
 	public class SupplierDocumentController : BaseController<SupplierDocumentDTO>
 	{
 		public SupplierDocumentController(DataContext context, ILogger<BaseController<SupplierDocumentDTO>> logger) : base(context, logger)

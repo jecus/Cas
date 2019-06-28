@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.Dictionaries
 {
-	[Route("schedulePeriod")]
+	[Route("scheduleperiod")]
 	public class SchedulePeriodController : BaseController<SchedulePeriodDTO>
 	{
 		public SchedulePeriodController(DataContext context, ILogger<BaseController<SchedulePeriodDTO>> logger) : base(context, logger)

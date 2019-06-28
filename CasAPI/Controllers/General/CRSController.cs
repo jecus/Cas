@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.General
 {
-	[Route("CRS")]
+	[Route("crs")]
 	public class CRSController : BaseController<CertificateOfReleaseToServiceDTO>
 	{
 		public CRSController(DataContext context, ILogger<BaseController<CertificateOfReleaseToServiceDTO>> logger) : base(context, logger)

@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.General
 {
-	[Route("specialistCAA")]
+	[Route("specialistcaa")]
 	public class SpecialistCAAController : BaseController<SpecialistCAADTO>
 	{
 		public SpecialistCAAController(DataContext context, ILogger<BaseController<SpecialistCAADTO>> logger) : base(context, logger)

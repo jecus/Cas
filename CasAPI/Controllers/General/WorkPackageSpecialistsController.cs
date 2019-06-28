@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.General
 {
-	[Route("workPackageSpecialists")]
+	[Route("workpackagespecialists")]
 	public class WorkPackageSpecialistsController : BaseController<WorkPackageSpecialistsDTO>
 	{
 		public WorkPackageSpecialistsController(DataContext context, ILogger<BaseController<WorkPackageSpecialistsDTO>> logger) : base(context, logger)
