@@ -37,24 +37,6 @@ namespace CasAPI.Controllers
 			}
 		}
 
-		[HttpPost("queries")]
-		public ActionResult<DataSet> Execute(IEnumerable<DbQuery> dbQueries)
-		{
-			try
-			{
-				var res = _executor.Execute(dbQueries, out var results);
-				if (results.Count > 0)
-					return BadRequest();
-				return Ok(res);
-			}
-			catch (Exception e)
-			{
-				_logger.LogError(e.Message);
-				return BadRequest();
-			}
-			
-		}
-
 		[HttpPost("queryparams")]
 		public ActionResult<DataSet> Execute(string query, List<SerializedSqlParam> parameters)
 		{
