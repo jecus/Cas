@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.General
 {
-	[Route("maintenanceCheckBindTaskRecord")]
+	[Route("maintenancecheckbindtaskrecord")]
 	public class MaintenanceCheckBindTaskRecordController : BaseController<MaintenanceCheckBindTaskRecordDTO>
 	{
 		public MaintenanceCheckBindTaskRecordController(DataContext context, ILogger<BaseController<MaintenanceCheckBindTaskRecordDTO>> logger) : base(context, logger)

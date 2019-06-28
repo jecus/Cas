@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.Dictionaries
 {
-	[Route("goodStandart")]
+	[Route("goodstandart")]
 	public class GoodStandartController : BaseController<GoodStandartDTO>
 	{
 		public GoodStandartController(DataContext context, ILogger<BaseController<GoodStandartDTO>> logger) : base(context, logger)

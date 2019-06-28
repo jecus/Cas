@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.General
 {
-	[Route("maintenanceDirective")]
+	[Route("maintenancedirective")]
 	public class MaintenanceDirectiveController : BaseController<MaintenanceDirectiveDTO>
 	{
 		public MaintenanceDirectiveController(DataContext context, ILogger<BaseController<MaintenanceDirectiveDTO>> logger) : base(context, logger)

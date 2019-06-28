@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.General
 {
-	[Route("transferRecord")]
+	[Route("transferrecord")]
 	public class TransferRecordController : BaseController<TransferRecordDTO>
 	{
 		public TransferRecordController(DataContext context, ILogger<BaseController<TransferRecordDTO>> logger) : base(context, logger)

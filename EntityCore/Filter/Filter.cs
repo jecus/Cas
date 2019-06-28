@@ -44,15 +44,15 @@ namespace EntityCore.Filter
 
 
 		
-		public string FilterProperty { get; private set; }
+		public string FilterProperty { get;  set; }
 
 		
-		public FilterType FilterType { get; private set; }
+		public FilterType FilterType { get;  set; }
 
 		
-		public object Value { get; private set; }
+		public object Value { get;  set; }
 
 		
-		public IEnumerable<int> Values { get; private set; }
+		public IEnumerable<int> Values { get;  set; }
 	}
 }

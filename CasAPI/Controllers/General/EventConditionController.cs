@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.General
 {
-	[Route("eventCondition")]
+	[Route("eventcondition")]
 	public class EventConditionController : BaseController<EventConditionDTO>
 	{
 		public EventConditionController(DataContext context, ILogger<BaseController<EventConditionDTO>> logger) : base(context, logger)

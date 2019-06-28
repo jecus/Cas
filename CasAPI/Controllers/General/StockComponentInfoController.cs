@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.General
 {
-	[Route("stockComponentInfo")]
+	[Route("stockcomponentinfo")]
 	public class StockComponentInfoController : BaseController<StockComponentInfoDTO>
 	{
 		public StockComponentInfoController(DataContext context, ILogger<BaseController<StockComponentInfoDTO>> logger) : base(context, logger)

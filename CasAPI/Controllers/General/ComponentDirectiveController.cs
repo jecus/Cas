@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.General
 {
-	[Route("componentDirective")]
+	[Route("componentdirective")]
 	public class ComponentDirectiveController : BaseController<ComponentDirectiveDTO>
 	{
 		public ComponentDirectiveController(DataContext context, ILogger<BaseController<ComponentDirectiveDTO>> logger) : base(context, logger)

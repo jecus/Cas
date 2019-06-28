@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.General
 {
-	[Route("productCost")]
+	[Route("productcost")]
 	public class ProductCostController : BaseController<ProductCostDTO>
 	{
 		public ProductCostController(DataContext context, ILogger<BaseController<ProductCostDTO>> logger) : base(context, logger)

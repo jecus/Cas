@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.General
 {
-	[Route("jobCardTask")]
+	[Route("jobcardtask")]
 	public class JobCardTaskController : BaseController<JobCardTaskDTO>
 	{
 		public JobCardTaskController(DataContext context, ILogger<BaseController<JobCardTaskDTO>> logger) : base(context, logger)

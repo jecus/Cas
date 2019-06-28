@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.General
 {
-	[Route("kitSuppliersRelation")]
+	[Route("kitsuppliersrelation")]
 	public class KitSuppliersRelationController : BaseController<KitSuppliersRelationDTO>
 	{
 		public KitSuppliersRelationController(DataContext context, ILogger<BaseController<KitSuppliersRelationDTO>> logger) : base(context, logger)

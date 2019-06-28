@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.General
 {
-	[Route("damageSector")]
+	[Route("damagesector")]
 	public class DamageSectorController : BaseController<DamageSectorDTO>
 	{
 		public DamageSectorController(DataContext context, ILogger<BaseController<DamageSectorDTO>> logger) : base(context, logger)

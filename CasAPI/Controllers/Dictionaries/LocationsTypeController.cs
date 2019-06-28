@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.Dictionaries
 {
-	[Route("locationsType")]
+	[Route("locationstype")]
 	public class LocationsTypeController : BaseController<LocationsTypeDTO>
 	{
 		public LocationsTypeController(DataContext context, ILogger<BaseController<LocationsTypeDTO>> logger) : base(context, logger)

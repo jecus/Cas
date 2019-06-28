@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.General
 {
-	[Route("engineTimeInRegime")]
+	[Route("enginetimeinregime")]
 	public class EngineTimeInRegimeController : BaseController<EngineTimeInRegimeDTO>
 	{
 		public EngineTimeInRegimeController(DataContext context, ILogger<BaseController<EngineTimeInRegimeDTO>> logger) : base(context, logger)

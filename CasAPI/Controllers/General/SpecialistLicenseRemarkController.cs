@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.General
 {
-	[Route("specialistLicenseRemark")]
+	[Route("specialistlicenseremark")]
 	public class SpecialistLicenseRemarkController : BaseController<SpecialistLicenseRemarkDTO>
 	{
 		public SpecialistLicenseRemarkController(DataContext context, ILogger<BaseController<SpecialistLicenseRemarkDTO>> logger) : base(context, logger)

@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.Dictionaries
 {
-	[Route(" aircraftOtherParameter")]
+	[Route(" aircraftotherparameter")]
 	public class AircraftOtherParameterController : BaseController<AircraftOtherParameterDTO>
 	{
 		public AircraftOtherParameterController(DataContext context, ILogger<BaseController<AircraftOtherParameterDTO>> logger) : base(context, logger)
