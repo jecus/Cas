@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
 using EntityCore.DTO.Dictionaries;
 using EntityCore.Interfaces;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -14,7 +15,7 @@ namespace EntityCore.DTO.General
 	public class ComponentDTO : BaseEntity,IFileDtoContainer
 	{
 		
-		[Column("ComponentCount"), Required]
+		[Column("ComponentCount")]
 		public int ComponentCount { get; set; }
 
 		
@@ -30,7 +31,7 @@ namespace EntityCore.DTO.General
 		public int? AccelerationAir { get; set; }
 
 		
-		[Column("JobCardsID"), Required]
+		[Column("JobCardsID")]
 		public int JobCardsID { get; set; }
 
 		
@@ -46,11 +47,11 @@ namespace EntityCore.DTO.General
 		public string Thrust { get; set; }
 
 		
-		[Column("BaseComponentTypeId"), Required]
+		[Column("BaseComponentTypeId")]
 		public int BaseComponentTypeId { get; set; }
 
 		
-		[Column("ComponentType"), Required]
+		[Column("ComponentType")]
 		public int ComponentType { get; set; }
 
 		
@@ -86,7 +87,7 @@ namespace EntityCore.DTO.General
 		public string IdNumber { get; set; }
 
 		
-		[Column("MaintenanceType"), Required]
+		[Column("MaintenanceType")]
 		public int MaintenanceType { get; set; }
 
 		
@@ -114,19 +115,19 @@ namespace EntityCore.DTO.General
 		public byte[] Lifelength { get; set; }
 
 		
-		[Column("LLPMark"), Required]
+		[Column("LLPMark")]
 		public bool LLPMark { get; set; }
 
 		
-		[Column("LLPCategories"), Required]
+		[Column("LLPCategories")]
 		public bool LLPCategories { get; set; }
 
 		
-		[Column("LandingGear"), Required]
+		[Column("LandingGear")]
 		public short LandingGear { get; set; }
 
 		
-		[Column("AvionicsInventory"), Required]
+		[Column("AvionicsInventory")]
 		public short AvionicsInventory { get; set; }
 
 		
@@ -158,7 +159,7 @@ namespace EntityCore.DTO.General
 		public int? Measure { get; set; }
 
 		
-		[Column("Quantity"), Required]
+		[Column("Quantity")]
 		public double Quantity { get; set; }
 
 		
@@ -242,15 +243,15 @@ namespace EntityCore.DTO.General
 		public short? Status { get; set; }
 
 		
-		[Column("IsBaseComponent"), Required]
+		[Column("IsBaseComponent")]
 		public bool IsBaseComponent { get; set; }
 
 		
-		[Column("LocationId"), Required]
+		[Column("LocationId")]
 		public int LocationId { get; set; }
 
 		
-		[Column("Incoming"), Required]
+		[Column("Incoming")]
 		public bool Incoming { get; set; }
 
 		
@@ -258,11 +259,11 @@ namespace EntityCore.DTO.General
 		public string Discrepancy { get; set; }
 
 		
-		[Column("IsPool"), Required]
+		[Column("IsPool")]
 		public bool IsPool { get; set; }
 
 		
-		[Column("IsDangerous"), Required]
+		[Column("IsDangerous")]
 		public bool IsDangerous { get; set; }
 
 		
@@ -274,7 +275,7 @@ namespace EntityCore.DTO.General
 		public int? FromSupplierId { get; set; }
 
 		
-		[Column("Received"), Required]
+		[Column("Received")]
 		public int Received { get; set; }
 
 		
@@ -340,10 +341,10 @@ namespace EntityCore.DTO.General
 
 		#region Navigation
 
-		
+		[JsonIgnore]
 		public ICollection<DirectiveDTO> DirectiveDtos { get; set; }
 
-		
+		[JsonIgnore]
 		public ICollection<MaintenanceDirectiveDTO> MaintenanceDirectiveDtos { get; set; }
 
 		#endregion

@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
 using EntityCore.DTO.Dictionaries;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -80,23 +81,23 @@ namespace EntityCore.DTO.General
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public ComponentDirectiveDTO ComponentDirective { get; set; }
-		
+		[JsonIgnore]
 		public ComponentDTO Component { get; set; }
-		
+		[JsonIgnore]
 		public DirectiveDTO Directive { get; set; }
-		
+		[JsonIgnore]
 		public WorkOrderDTO WorkOrder { get; set; }
-		
+		[JsonIgnore]
 		public RequestDTO RequestDto { get; set; }
-		
+		[JsonIgnore]
 		public ProcedureDTO Procedure { get; set; }
-		
+		[JsonIgnore]
 		public MaintenanceDirectiveDTO MaintenanceDirective { get; set; }
-		
+		[JsonIgnore]
 		public MaintenanceCheckDTO MaintenanceCheckDto { get; set; }
-		
+		[JsonIgnore]
 		public JobCardDTO JobCardDto { get; set; }
 
 

@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
 using EntityCore.Interfaces;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -41,7 +42,7 @@ namespace EntityCore.DTO.General
 
 
 
-		
+		[JsonIgnore]
 		public DirectiveDTO Directive { get; set; }
 	}
 }

@@ -9,11 +9,11 @@ namespace EntityCore.DTO.General
 	public class LandingGearConditionDTO : BaseEntity
 	{
 		
-		[Column("FlightID"), Required]
+		[Column("FlightID")]
 		public int FlightID { get; set; }
 
 		
-		[Column("LandingGearID"), Required]
+		[Column("LandingGearID")]
 		public int LandingGearID { get; set; }
 
 		

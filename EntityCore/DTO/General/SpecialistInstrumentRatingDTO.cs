@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -11,7 +12,7 @@ namespace EntityCore.DTO.General
 	public class SpecialistInstrumentRatingDTO : BaseEntity
 	{
 		
-		[Column("IssueDate"), Required]
+		[Column("IssueDate")]
 		public DateTime IssueDate { get; set; }
 
 		
@@ -19,28 +20,28 @@ namespace EntityCore.DTO.General
 		public int? SpecialistLicenseId { get; set; }
 
 		
-		[Column("IcaoId"), Required]
+		[Column("IcaoId")]
 		public int IcaoId { get; set; }
 
 		
-		[Column("MC"), Required]
+		[Column("MC")]
 		public int MC { get; set; }
 
 		
-		[Column("MV"), Required]
+		[Column("MV")]
 		public int MV { get; set; }
 
 		
-		[Column("RVR"), Required]
+		[Column("RVR")]
 		public int RVR { get; set; }
 
 		
-		[Column("TORVR"), Required]
+		[Column("TORVR")]
 		public int TORVR { get; set; }
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public SpecialistLicenseDTO SpecialistLicense { get; set; }
 
 		#endregion

@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -63,7 +64,7 @@ namespace EntityCore.DTO.General
 		public string Remarks { get; set; }
 
 		
-		[Column("SupplierClassId"), Required]
+		[Column("SupplierClassId")]
 		public int SupplierClassId { get; set; }
 
 		
@@ -77,15 +78,15 @@ namespace EntityCore.DTO.General
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public ICollection<ComponentDTO> ComponentDtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<DocumentDTO> DocumentDtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<FlightTrackDTO> FlightTrackDtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<SpecialistTrainingDTO> SpecialistTrainingDtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<KitSuppliersRelationDTO> KitSuppliersRelationDtos { get; set; }
 
 		#endregion

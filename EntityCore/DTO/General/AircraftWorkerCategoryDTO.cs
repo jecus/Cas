@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -16,11 +17,11 @@ namespace EntityCore.DTO.General
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public ICollection<ModuleRecordDTO> ModuleRecordDtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<CategoryRecordDTO> CategoryRecordDtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<JobCardDTO> JobCardDtos { get; set; }
 
 		#endregion

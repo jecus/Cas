@@ -41,7 +41,7 @@ namespace EntityCore.DTO.General
 		public int? PageFlightCount { get; set; }
 
 		
-		[Column("AtlbStatus"), Required]
+		[Column("AtlbStatus")]
 		public int AtlbStatus { get; set; }
 
 

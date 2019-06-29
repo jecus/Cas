@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
 using EntityCore.DTO.General;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.Dictionaries
 {
@@ -24,11 +25,11 @@ namespace EntityCore.DTO.Dictionaries
 		public int? DepartmentId { get; set; }
 
 	    
-	    [Column("Level"), Required]
+	    [Column("Level")]
 		public int Level { get; set; }
 
 	    
-	    [Column("KeyPersonel"), Required]
+	    [Column("KeyPersonel")]
 		public bool KeyPersonel { get; set; }
 
 
@@ -39,13 +40,13 @@ namespace EntityCore.DTO.Dictionaries
 
 		#region Navigation Property
 
-	    
+		[JsonIgnore]
 		public ICollection<DocumentDTO> DocumentDtos { get; set; }
-	    
+		[JsonIgnore]
 		public ICollection<FlightCrewRecordDTO> FlightCrewRecordDtos { get; set; }
-	    
+		[JsonIgnore]
 		public ICollection<FlightNumberCrewRecordDTO> FlightNumberCrewRecordDtos { get; set; }
-	    
+		[JsonIgnore]
 		public ICollection<SpecialistDTO> SpecialistDtos { get; set; }
 
 		#endregion

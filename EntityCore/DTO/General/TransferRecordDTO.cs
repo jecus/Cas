@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
 using EntityCore.Interfaces;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -21,11 +22,11 @@ namespace EntityCore.DTO.General
 		public int? ParentType { get; set; }
 
 		
-		[Column("FromAircraftID"), Required]
+		[Column("FromAircraftID")]
 		public int FromAircraftID { get; set; }
 
 		
-		[Column("FromStoreID"), Required]
+		[Column("FromStoreID")]
 		public int FromStoreID { get; set; }
 
 		
@@ -53,7 +54,7 @@ namespace EntityCore.DTO.General
 		public int? WorkPackageID { get; set; }
 
 		
-		[Column("PerformanceNum"), Required]
+		[Column("PerformanceNum")]
 		public int PerformanceNum { get; set; }
 
 		
@@ -89,7 +90,7 @@ namespace EntityCore.DTO.General
 		public string Description { get; set; }
 
 		
-		[Column("ReasonId"), Required]
+		[Column("ReasonId")]
 		public int ReasonId { get; set; }
 
 		
@@ -97,11 +98,11 @@ namespace EntityCore.DTO.General
 		public int? State { get; set; }
 
 		
-		[Column("ReplaceComponentId"), Required]
+		[Column("ReplaceComponentId")]
 		public int ReplaceComponentId { get; set; }
 
 		
-		[Column("IsReplaceComponentRemoved"), Required]
+		[Column("IsReplaceComponentRemoved")]
 		public bool IsReplaceComponentRemoved { get; set; }
 
 		
@@ -113,7 +114,7 @@ namespace EntityCore.DTO.General
 		public int? ReleasedSpecialistId { get; set; }
 
 		
-		[Column("FromSupplierId"), Required]
+		[Column("FromSupplierId")]
 		public int FromSupplierId { get; set; }
 
 		
@@ -125,7 +126,7 @@ namespace EntityCore.DTO.General
 		public byte[] SupplierNotify { get; set; }
 
 		
-		[Column("FromSpecialistId"), Required]
+		[Column("FromSpecialistId")]
 		public int FromSpecialistId { get; set; }
 
 		
@@ -142,7 +143,7 @@ namespace EntityCore.DTO.General
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public ComponentDTO Component { get; set; }
 
 		#endregion

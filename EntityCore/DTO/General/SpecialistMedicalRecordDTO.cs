@@ -15,7 +15,7 @@ namespace EntityCore.DTO.General
 		public int? ClassId { get; set; }
 
 		
-		[Column("IssueDate"), Required]
+		[Column("IssueDate")]
 		public DateTime IssueDate { get; set; }
 
 		

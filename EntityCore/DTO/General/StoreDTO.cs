@@ -10,7 +10,7 @@ namespace EntityCore.DTO.General
 	public class StoreDTO : BaseEntity
 	{
 		
-		[Column("OperatorID"), Required]
+		[Column("OperatorID")]
 		public int OperatorID { get; set; }
 
 		

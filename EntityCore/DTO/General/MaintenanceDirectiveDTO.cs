@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
 using EntityCore.DTO.Dictionaries;
 using EntityCore.Interfaces;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -110,7 +111,7 @@ namespace EntityCore.DTO.General
 		public int? MaintenanceCheckId { get; set; }
 
 		
-		[Column("PrintInWP"), Required]
+		[Column("PrintInWP")]
 		public bool PrintInWP { get; set; }
 
 		
@@ -118,11 +119,11 @@ namespace EntityCore.DTO.General
 		public int? JobCardId { get; set; }
 
 		
-		[Column("NDTType"), Required]
+		[Column("NDTType")]
 		public short NDTType { get; set; }
 
 		
-		[Column("KitsApplicable"), Required]
+		[Column("KitsApplicable")]
 		public bool KitsApplicable { get; set; }
 
 		
@@ -154,11 +155,11 @@ namespace EntityCore.DTO.General
 		public DateTime? MpdRevisionDate { get; set; }
 
 		
-		[Column("Category"), Required]
+		[Column("Category")]
 		public int Category { get; set; }
 
 		
-		[Column("Skill"), Required]
+		[Column("Skill")]
 		public int Skill { get; set; }
 
 		
@@ -224,7 +225,7 @@ namespace EntityCore.DTO.General
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public MaintenanceCheckDTO MaintenanceCheckDto { get; set; }
 
 		#endregion

@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
 using EntityCore.DTO.General;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.Dictionaries
 {
@@ -12,7 +13,7 @@ namespace EntityCore.DTO.Dictionaries
     public class AircraftOtherParameterDTO : BaseEntity
 	{
 		
-		[Column("Name"), MaxLength(50), Required]
+		[Column("Name"), MaxLength(50)]
 		public string Name { get; set; }
 
 	    
@@ -22,7 +23,7 @@ namespace EntityCore.DTO.Dictionaries
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public ICollection<AircraftEquipmentDTO> AircraftEquipmentDtos { get; set; }
 
 	    #endregion

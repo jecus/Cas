@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
 using EntityCore.DTO.General;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.Dictionaries
 {
@@ -29,12 +30,11 @@ namespace EntityCore.DTO.Dictionaries
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public ICollection<InitialOrderRecordDTO> InitialOrderRecordDto { get; set; }
-
-		
+		[JsonIgnore]
 		public ICollection<RequestForQuotationRecordDTO> RequestForQuotationRecordDtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<DirectiveDTO> DirectiveDtos { get; set; }
 
 		#endregion

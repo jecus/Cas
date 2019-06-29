@@ -16,7 +16,7 @@ namespace EntityCore.DTO.Dictionaries
 		public string Name { get; set; }
 
 	    
-	    [Column("FullName"), MaxLength(256), Required]
+	    [Column("FullName"), MaxLength(256)]
 		public string FullName { get; set; }
 
 	    

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -18,7 +19,7 @@ namespace EntityCore.DTO.General
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public FlightTrackDTO FlightTrack { get; set; }
 
 		#endregion

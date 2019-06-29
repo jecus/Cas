@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
 using EntityCore.DTO.Dictionaries;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -15,15 +16,15 @@ namespace EntityCore.DTO.General
 		public int? ParentPackageId { get; set; }
 
 		
-		[Column("PackageItemId"), Required]
+		[Column("PackageItemId")]
 		public int PackageItemId { get; set; }
 
 		
-		[Column("CostCondition"), Required]
+		[Column("CostCondition")]
 		public short CostCondition { get; set; }
 
 		
-		[Column("Processed"), Required]
+		[Column("Processed")]
 		public bool Processed { get; set; }
 
 		
@@ -96,7 +97,7 @@ namespace EntityCore.DTO.General
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public RequestForQuotationDTO RequestForQuotationDto { get; set; }
 
 		#endregion

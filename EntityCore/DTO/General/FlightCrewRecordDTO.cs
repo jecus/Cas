@@ -10,7 +10,7 @@ namespace EntityCore.DTO.General
 	public class FlightCrewRecordDTO : BaseEntity
 	{
 		
-		[Column("FlightID"), Required]
+		[Column("FlightID")]
 		public int FlightID { get; set; }
 
 		

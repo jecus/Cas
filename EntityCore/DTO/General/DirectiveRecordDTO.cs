@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
 using EntityCore.Interfaces;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -17,7 +18,7 @@ namespace EntityCore.DTO.General
 		public int? NumGroup { get; set; }
 
 		
-		[Column("RecordTypeID"), Required]
+		[Column("RecordTypeID")]
 		public int RecordTypeID { get; set; }
 
 		
@@ -25,7 +26,7 @@ namespace EntityCore.DTO.General
 		public int? ParentID { get; set; }
 
 		
-		[Column("ParentTypeId"), Required]
+		[Column("ParentTypeId")]
 		public int ParentTypeId { get; set; }
 
 		
@@ -33,7 +34,7 @@ namespace EntityCore.DTO.General
 		public string Remarks { get; set; }
 
 		
-		[Column("RecordDate"), Required]
+		[Column("RecordDate")]
 		public DateTime RecordDate { get; set; }
 
 		
@@ -85,7 +86,7 @@ namespace EntityCore.DTO.General
 		public int? PerformanceNum { get; set; }
 
 		
-		[Column("IsControlPoint"), Required]
+		[Column("IsControlPoint")]
 		public bool IsControlPoint { get; set; }
 
 		
@@ -108,15 +109,15 @@ namespace EntityCore.DTO.General
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public ComponentDirectiveDTO ComponentDirective { get; set; }
-		
+		[JsonIgnore]
 		public DirectiveDTO Directive { get; set; }
-		
+		[JsonIgnore]
 		public ProcedureDTO Procedure { get; set; }
-		
+		[JsonIgnore]
 		public MaintenanceDirectiveDTO MaintenanceDirective { get; set; }
-		
+		[JsonIgnore]
 		public MaintenanceCheckDTO MaintenanceCheckDto { get; set; }
 
 		#endregion

@@ -113,11 +113,11 @@ namespace EntityCore.DTO.General
 		public int? AircraftFlight { get; set; }
 
 		
-		[Column("NDTType"), Required]
+		[Column("NDTType")]
 		public short NDTType { get; set; }
 
 		
-		[Column("DirectiveOrder"), Required]
+		[Column("DirectiveOrder")]
 		public short DirectiveOrder { get; set; }
 
 		

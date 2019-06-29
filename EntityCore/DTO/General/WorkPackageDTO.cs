@@ -33,7 +33,7 @@ namespace EntityCore.DTO.General
 		public string Author { get; set; }
 
 		
-		[Column("OpeningDate"), Required]
+		[Column("OpeningDate")]
 		public DateTime OpeningDate { get; set; }
 
 		
@@ -53,11 +53,11 @@ namespace EntityCore.DTO.General
 		public string PublishingRemarks { get; set; }
 
 		
-		[Column("ClosingRemarks"), Required, MaxLength(256)]
+		[Column("ClosingRemarks"), MaxLength(256)]
 		public string ClosingRemarks { get; set; }
 
 		
-		[Column("OnceClosed"), Required]
+		[Column("OnceClosed")]
 		public bool OnceClosed { get; set; }
 
 		

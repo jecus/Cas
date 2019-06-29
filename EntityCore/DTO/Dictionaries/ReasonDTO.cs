@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.DTO.General;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.Dictionaries
 {
@@ -20,15 +21,15 @@ namespace EntityCore.DTO.Dictionaries
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public ICollection<AircraftFlightDTO> AircraftFlightsDelay { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<AircraftFlightDTO> AircraftFlightsCancel { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<FlightPlanOpsRecordsDTO> DelayFlightPlanOpsRecordsDtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<FlightPlanOpsRecordsDTO> ReasonFlightPlanOpsRecordsDtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<FlightPlanOpsRecordsDTO> CancelFlightPlanOpsRecordsDtos { get; set; }
 
 	    #endregion

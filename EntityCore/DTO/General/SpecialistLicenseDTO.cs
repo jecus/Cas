@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
 using EntityCore.DTO.Dictionaries;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -13,11 +14,11 @@ namespace EntityCore.DTO.General
 	public class SpecialistLicenseDTO : BaseEntity
 	{
 		
-		[Column("Confirmation"), Required]
+		[Column("Confirmation")]
 		public bool Confirmation { get; set; }
 
 		
-		[Column("LicenseTypeID"), Required]
+		[Column("LicenseTypeID")]
 		public int LicenseTypeID { get; set; }
 
 		
@@ -67,7 +68,7 @@ namespace EntityCore.DTO.General
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public SpecialistDTO SpecialistDto { get; set; }
 
 		#endregion

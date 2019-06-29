@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
 using EntityCore.DTO.General;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.Dictionaries
 {
@@ -37,9 +38,9 @@ namespace EntityCore.DTO.Dictionaries
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public ICollection<FlightPassengerRecordDTO> FlightPassengerRecordDtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<SpecialistDTO> SpecialistDtos { get; set; }
 
 		#endregion

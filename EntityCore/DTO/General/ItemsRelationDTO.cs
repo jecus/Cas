@@ -8,23 +8,23 @@ namespace EntityCore.DTO.General
 	public class ItemsRelationDTO : BaseEntity
 	{
 		
-		[Column("FirstItemId"), Required]
+		[Column("FirstItemId")]
 		public int FirstItemId { get; set; }
 
 		
-		[Column("FirtsItemTypeId"), Required]
+		[Column("FirtsItemTypeId")]
 		public int FirtsItemTypeId { get; set; }
 
 		
-		[Column("SecondItemId"), Required]
+		[Column("SecondItemId")]
 		public int SecondItemId { get; set; }
 
 		
-		[Column("SecondItemTypeId"), Required]
+		[Column("SecondItemTypeId")]
 		public int SecondItemTypeId { get; set; }
 
 		
-		[Column("RelationTypeId"), Required]
+		[Column("RelationTypeId")]
 		public int RelationTypeId { get; set; }
 	}
 }

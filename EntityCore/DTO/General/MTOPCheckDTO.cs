@@ -15,7 +15,7 @@ namespace EntityCore.DTO.General
 		public string Name { get; set; }
 
 		
-		[Column("ParentAircraftId"), Required]
+		[Column("ParentAircraftId")]
 		public int ParentAircraftId { get; set; }
 
 		

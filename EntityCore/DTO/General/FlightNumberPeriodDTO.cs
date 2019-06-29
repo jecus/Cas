@@ -59,7 +59,7 @@ namespace EntityCore.DTO.General
 		public DateTime? ArrivalDate { get; set; }
 
 		
-		[Column("Schedule"), Required]
+		[Column("Schedule")]
 		public int Schedule { get; set; }
 	}
 }

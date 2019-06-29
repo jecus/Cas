@@ -10,11 +10,11 @@ namespace EntityCore.DTO.General
 	public class WorkPackageSpecialistsDTO : BaseEntity
 	{
 		
-		[Column("WorkPackageId"), Required]
+		[Column("WorkPackageId")]
 		public int WorkPackageId { get; set; }
 
 		
-		[Column("SpecialistId"), Required]
+		[Column("SpecialistId")]
 		public int SpecialistId { get; set; }
 	}
 }

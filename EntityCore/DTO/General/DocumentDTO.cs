@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
 using EntityCore.DTO.Dictionaries;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -17,11 +18,11 @@ namespace EntityCore.DTO.General
 		public int? ParentID { get; set; }
 
 		
-		[Column("ParentTypeId"), Required]
+		[Column("ParentTypeId")]
 		public int ParentTypeId { get; set; }
 
 		
-		[Column("DocTypeId"), Required]
+		[Column("DocTypeId")]
 		public int DocTypeId { get; set; }
 
 		
@@ -33,7 +34,7 @@ namespace EntityCore.DTO.General
 		public string Description { get; set; }
 
 		
-		[Column("IssueDateValidFrom"), Required]
+		[Column("IssueDateValidFrom")]
 		public DateTime IssueDateValidFrom { get; set; }
 
 		
@@ -41,7 +42,7 @@ namespace EntityCore.DTO.General
 		public bool? IssueValidTo { get; set; }
 
 		
-		[Column("IssueDateValidTo"), Required]
+		[Column("IssueDateValidTo")]
 		public DateTime IssueDateValidTo { get; set; }
 
 		
@@ -85,11 +86,11 @@ namespace EntityCore.DTO.General
 		public int? RevisionNotify { get; set; }
 
 		
-		[Column("Aboard"), Required]
+		[Column("Aboard")]
 		public bool Aboard { get; set; }
 
 		
-		[Column("Privy"), Required]
+		[Column("Privy")]
 		public bool Privy { get; set; }
 
 		
@@ -125,7 +126,7 @@ namespace EntityCore.DTO.General
 		public int? SupplierId { get; set; }
 
 		
-		[Column("ParentAircraftId"), Required]
+		[Column("ParentAircraftId")]
 		public int? ParentAircraftId { get; set; }
 
         
@@ -163,11 +164,13 @@ namespace EntityCore.DTO.General
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public SupplierDTO SupplieDto { get; set; }
-		
+
+		[JsonIgnore]
 		public SpecialistDTO SpecialistDto { get; set; }
-		
+
+		[JsonIgnore]
 		public ICollection<ProcedureDocumentReferenceDTO> ProcedureDocumentReferenceDtos { get; set; }
 
 		#endregion

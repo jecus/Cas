@@ -9,11 +9,11 @@ namespace EntityCore.DTO.General
 	public class EngineConditionDTO : BaseEntity
 	{
 		
-		[Column("FlightID"), Required]
+		[Column("FlightID")]
 		public int FlightID { get; set; }
 
 		
-		[Column("EngineID"), Required]
+		[Column("EngineID")]
 		public int EngineID { get; set; }
 
 		

@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -15,15 +16,15 @@ namespace EntityCore.DTO.General
 		public string NumberCAA { get; set; }
 
 		
-		[Column("CAAId"), Required]
+		[Column("CAAId")]
 		public int CAAId { get; set; }
 
 		
-		[Column("CAAType"), Required]
+		[Column("CAAType")]
 		public int CAAType { get; set; }
 
 		
-		[Column("ValidTo"), Required]
+		[Column("ValidTo")]
 		public DateTime ValidTo { get; set; }
 
 		
@@ -40,7 +41,7 @@ namespace EntityCore.DTO.General
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public SpecialistLicenseDTO SpecialistLicense { get; set; }
 
 		#endregion

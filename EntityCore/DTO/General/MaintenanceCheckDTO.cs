@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -23,7 +24,7 @@ namespace EntityCore.DTO.General
 		public byte[] Notify { get; set; }
 
 		
-		[Column("ParentAircraft"), Required]
+		[Column("ParentAircraft")]
 		public int ParentAircraft { get; set; }
 
 		
@@ -43,11 +44,11 @@ namespace EntityCore.DTO.General
 		public bool? Schedule { get; set; }
 
 		
-		[Column("Resource"), Required]
+		[Column("Resource")]
 		public short Resource { get; set; }
 
 		
-		[Column("Grouping"), Required]
+		[Column("Grouping")]
 		public bool Grouping { get; set; }
 
 		
@@ -73,7 +74,7 @@ namespace EntityCore.DTO.General
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public ICollection<MaintenanceDirectiveDTO> MaintenanceDirectiveDtos { get; set; }
 
 		#endregion

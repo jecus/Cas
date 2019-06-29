@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -31,7 +32,7 @@ namespace EntityCore.DTO.General
 		public int? ParentId { get; set; }
 
 		
-		[Column("IsControlPoint"), Required]
+		[Column("IsControlPoint")]
 		public bool IsControlPoint { get; set; }
 
 		
@@ -44,7 +45,7 @@ namespace EntityCore.DTO.General
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public MTOPCheckDTO MtopCheckDto { get; set; }
 
 		#endregion

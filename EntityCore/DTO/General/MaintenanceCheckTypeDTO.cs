@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -22,9 +23,9 @@ namespace EntityCore.DTO.General
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public ICollection<MTOPCheckDTO> MtopCheckDtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<MaintenanceCheckDTO> MaintenanceCheckDtos { get; set; }
 
 		#endregion

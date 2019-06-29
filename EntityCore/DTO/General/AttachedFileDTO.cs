@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -21,7 +22,7 @@ namespace EntityCore.DTO.General
 		public long? FileSize { get; set; }
 
 		
-		[Column("StoreInDatabase"), Required]
+		[Column("StoreInDatabase")]
 		public bool StoreInDatabase { get; set; }
 
 		
@@ -31,7 +32,7 @@ namespace EntityCore.DTO.General
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public ICollection<ItemFileLinkDTO> ItemFileLinkDto { get; set; }
 
 		#endregion

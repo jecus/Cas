@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.DTO.General;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.Dictionaries
 {
@@ -10,7 +11,7 @@ namespace EntityCore.DTO.Dictionaries
 	public class DocumentSubTypeDTO : BaseEntity
 	{
 		
-		[Column("DocumentTypeId"), Required]
+		[Column("DocumentTypeId")]
 		public int DocumentTypeId { get; set; }
 
 	    
@@ -19,7 +20,7 @@ namespace EntityCore.DTO.Dictionaries
 
 		#region Navigation Property
 
-	    
+		[JsonIgnore]
 		public ICollection<DocumentDTO> DocumentDtos { get; set; }
 
 	    #endregion

@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
 using EntityCore.Interfaces;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -12,7 +13,7 @@ namespace EntityCore.DTO.General
 	public class ComponentDirectiveDTO : BaseEntity, IFileDtoContainer
 	{
 		
-		[Column("DirectiveType"), Required]
+		[Column("DirectiveType")]
 		public int DirectiveType { get; set; }
 
 		
@@ -56,7 +57,7 @@ namespace EntityCore.DTO.General
 		public int? MPDTaskTypeId { get; set; }
 
 		
-		[Column("NDTType"), Required]
+		[Column("NDTType")]
 		public short NDTType { get; set; }
 
 		
@@ -99,7 +100,7 @@ namespace EntityCore.DTO.General
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public ComponentDTO Component { get; set; }
 
 		#endregion

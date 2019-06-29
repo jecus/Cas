@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
 using EntityCore.DTO.General;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.Dictionaries
 {
@@ -30,9 +31,9 @@ namespace EntityCore.DTO.Dictionaries
 
 		#region Navigation Property
 
-	    
+		[JsonIgnore]
 		public ICollection<ComponentLLPCategoryChangeRecordDTO> CategoryChangeRecordDto { get; set; }
-	    
+		[JsonIgnore]
 		public ICollection<ComponentLLPCategoryDataDTO> CategoryDataDtos { get; set; }
 
 	    #endregion

@@ -12,7 +12,7 @@ namespace EntityCore.DTO.General
 		public override int ItemId { get; set; }
 
 		
-		[Column("Name"), MaxLength(50), Required]
+		[Column("Name"), MaxLength(50)]
 		public string Name { get; set; }
 
 		

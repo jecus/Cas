@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -18,9 +19,9 @@ namespace EntityCore.DTO.General
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public ICollection<EventDTO> EventDtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<EventTypeRiskLevelChangeRecordDTO> ChangeRecordDtos { get; set; }
 
 		#endregion

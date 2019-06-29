@@ -94,7 +94,7 @@ namespace EntityCore.DTO.General
 		public int? Highlight { get; set; }
 
 		
-		[Column("Correct"), Required]
+		[Column("Correct")]
 		public bool Correct { get; set; }
 
 		
@@ -102,7 +102,7 @@ namespace EntityCore.DTO.General
 		public string Reference { get; set; }
 
 		
-		[Column("Cycles"), Required]
+		[Column("Cycles")]
 		public int Cycles { get; set; }
 
 		
@@ -142,7 +142,7 @@ namespace EntityCore.DTO.General
 		public short? FlightCategory { get; set; }
 
 		
-		[Column("AtlbRecordType"), Required]
+		[Column("AtlbRecordType")]
 		public short AtlbRecordType { get; set; }
 
 		

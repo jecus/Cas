@@ -11,7 +11,7 @@ namespace EntityCore.DTO.Dictionaries
 	public class SchedulePeriodDTO : BaseEntity
 	{
 		
-		[Column("Schedule"), Required]
+		[Column("Schedule")]
 		public int Schedule { get; set; }
 
 	    

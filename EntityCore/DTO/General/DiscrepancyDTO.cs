@@ -10,11 +10,11 @@ namespace EntityCore.DTO.General
 	public class DiscrepancyDTO : BaseEntity
 	{
 		
-		[Column("FlightID"), Required]
+		[Column("FlightID")]
 		public int FlightID { get; set; }
 
 		
-		[Column("FilledBy"), Required]
+		[Column("FilledBy")]
 		public bool FilledBy { get; set; }
 
 		

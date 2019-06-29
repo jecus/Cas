@@ -1,7 +1,7 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -11,7 +11,7 @@ namespace EntityCore.DTO.General
 	public class ActualStateRecordDTO : BaseEntity
 	{
 		
-		[Column("FlightRegimeId"), Required]
+		[Column("FlightRegimeId")]
 		public int FlightRegimeId { get; set; }
 
 		
@@ -37,7 +37,7 @@ namespace EntityCore.DTO.General
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public ComponentDTO Component { get; set; }
 
 		#endregion

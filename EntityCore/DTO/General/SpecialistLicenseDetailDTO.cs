@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -15,7 +16,7 @@ namespace EntityCore.DTO.General
 		public string Description { get; set; }
 
 		
-		[Column("IssueDate"), Required]
+		[Column("IssueDate")]
 		public DateTime IssueDate { get; set; }
 
 		
@@ -28,10 +29,10 @@ namespace EntityCore.DTO.General
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public SpecialistLicenseDTO SpecialistLicense { get; set; }
 
-		
+		[JsonIgnore]
 		public SpecialistDTO SpecialistDto { get; set; }
 
 

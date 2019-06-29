@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
 using EntityCore.DTO.General;
 using EntityCore.Interfaces;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.Dictionaries
 {
@@ -57,7 +58,7 @@ namespace EntityCore.DTO.Dictionaries
 		public string DefaultProduct { get; set; }
 
 		
-		[Column("ModelingObjectTypeId"), Required]
+		[Column("ModelingObjectTypeId")]
 		public int ModelingObjectTypeId { get; set; }
 
 		
@@ -105,7 +106,7 @@ namespace EntityCore.DTO.Dictionaries
 		public int? ComponentType { get; set; }
 
 		
-		[Column("IsDangerous"), Required]
+		[Column("IsDangerous")]
 		public bool IsDangerous { get; set; }
 
 		
@@ -142,29 +143,29 @@ namespace EntityCore.DTO.Dictionaries
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public ICollection<DamageChartDTO> DamageChartDtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<LifeLimitCategorieDTO> LifeLimitCategorieDtos { get; set; }
-	    
+		[JsonIgnore]
 		public ICollection<DefferedCategorieDTO> DefferedCategorieDtos { get; set; }
-	    
+		[JsonIgnore]
 		public ICollection<AccessoryRequiredDTO> AccessoryRequiredDtos { get; set; }
-	    
+		[JsonIgnore]
 		public ICollection<AircraftDTO> AircraftDtos { get; set; }
-	    
+		[JsonIgnore]
 		public ICollection<ComponentDTO> ComponentDtos { get; set; }
-	    
+		[JsonIgnore]
 		public ICollection<VehicleDTO> VehicleDtos { get; set; }
-	    
+		[JsonIgnore]
 		public ICollection<StockComponentInfoDTO> StockComponentInfoDtos { get; set; }
-	    
+		[JsonIgnore]
 		public ICollection<SpecialistTrainingDTO> SpecialistTrainingDtos { get; set; }
-	    
+		[JsonIgnore]
 		public ICollection<SpecialistLicenseDTO> SpecialistLicenseDtos { get; set; }
-	    
+		[JsonIgnore]
 		public ICollection<FlightNumberAircraftModelRelationDTO> FlightNumberAircraftModelRelationDtos { get; set; }
-	    
+		[JsonIgnore]
 		public ICollection<CategoryRecordDTO> CategoryRecordDtos { get; set; }
 
 	    #endregion

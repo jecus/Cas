@@ -20,11 +20,11 @@ namespace EntityCore.DTO.General
 		public double APUFH { get; set; }
 
 		
-		[Column("OperatorID"), Required]
+		[Column("OperatorID")]
 		public int OperatorID { get; set; }
 
 		
-		[Column("AircraftTypeID"), Required]
+		[Column("AircraftTypeID")]
 		public int AircraftTypeID { get; set; }
 
 		
@@ -36,15 +36,15 @@ namespace EntityCore.DTO.General
 		public string TypeCertificateNumber { get; set; }
 
 		
-		[Column("ManufactureDate"), Required]
+		[Column("ManufactureDate")]
 		public DateTime ManufactureDate { get; set; }
 
 		
-		[Column("RegistrationNumber"), MaxLength(50), Required]
+		[Column("RegistrationNumber"), MaxLength(50)]
 		public string RegistrationNumber { get; set; }
 
 		
-		[Column("SerialNumber"), MaxLength(25), Required]
+		[Column("SerialNumber"), MaxLength(25)]
 		public string SerialNumber { get; set; }
 
 		
@@ -168,39 +168,39 @@ namespace EntityCore.DTO.General
 		public DateTime? AcceptanceDate { get; set; }
 
 		
-		[Column("Schedule"), Required]
+		[Column("Schedule")]
 		public bool Schedule { get; set; }
 
 		
-		[Column("MSG"), Required]
+		[Column("MSG")]
 		public short MSG { get; set; }
 
 		
-		[Column("CheckNaming"), Required]
+		[Column("CheckNaming")]
 		public bool CheckNaming { get; set; }
 
 		
-		[Column("NoiceCategory"), Required]
+		[Column("NoiceCategory")]
 		public int NoiceCategory { get; set; }
 
 		
-		[Column("FADEC"), Required]
+		[Column("FADEC")]
 		public bool FADEC { get; set; }
 
 		
-		[Column("LandingCategory"), Required]
+		[Column("LandingCategory")]
 		public int LandingCategory { get; set; }
 
 		
-		[Column("EFIS"), Required]
+		[Column("EFIS")]
 		public bool EFIS { get; set; }
 
 		
-		[Column("Brakes"), Required]
+		[Column("Brakes")]
 		public short Brakes { get; set; }
 
 		
-		[Column("Winglets"), Required]
+		[Column("Winglets")]
 		public bool Winglets { get; set; }
 
 		

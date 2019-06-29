@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
 using EntityCore.DTO.Dictionaries;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -40,17 +41,17 @@ namespace EntityCore.DTO.General
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public ComponentDirectiveDTO ComponentDirective { get; set; }
-		
+		[JsonIgnore]
 		public ComponentDTO Component{ get; set; }
-		
+		[JsonIgnore]
 		public DirectiveDTO Directive{ get; set; }
-		
+		[JsonIgnore]
 		public SpecialistDTO SpecialistDto { get; set; }
-		
+		[JsonIgnore]
 		public MaintenanceDirectiveDTO MaintenanceDirective { get; set; }
-		
+		[JsonIgnore]
 		public MaintenanceCheckDTO MaintenanceCheckDto { get; set; }
 
 		#endregion

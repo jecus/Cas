@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
 using EntityCore.DTO.Dictionaries;
 using EntityCore.Interfaces;
+using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
@@ -74,7 +75,7 @@ namespace EntityCore.DTO.General
 		public string Information { get; set; }
 
 		
-		[Column("Education"), Required]
+		[Column("Education")]
 		public short Education { get; set; }
 
 		
@@ -82,11 +83,11 @@ namespace EntityCore.DTO.General
 		public int? Location { get; set; }
 
 		
-		[Column("Status"), Required]
+		[Column("Status")]
 		public short Status { get; set; }
 
 		
-		[Column("Position"), Required]
+		[Column("Position")]
 		public short Position { get; set; }
 
 		
@@ -94,19 +95,19 @@ namespace EntityCore.DTO.General
 		public byte[] Sign { get; set; }
 
 		
-		[Column("FamilyStatus"), Required]
+		[Column("FamilyStatus")]
 		public short FamilyStatus { get; set; }
 
 		
-		[Column("Citizenship"), Required]
+		[Column("Citizenship")]
 		public short Citizenship { get; set; }
 
 		
-		[Column("PersonnelCategoryId"), Required]
+		[Column("PersonnelCategoryId")]
 		public int PersonnelCategoryId { get; set; }
 
 		
-		[Column("ClassNumber"), Required]
+		[Column("ClassNumber")]
 		public int ClassNumber { get; set; }
 
 		
@@ -114,7 +115,7 @@ namespace EntityCore.DTO.General
 		public DateTime? ClassIssueDate { get; set; }
 
 		
-		[Column("GradeNumber"), Required]
+		[Column("GradeNumber")]
 		public int GradeNumber { get; set; }
 
 		
@@ -171,35 +172,35 @@ namespace EntityCore.DTO.General
 
 		#region Navigation Property
 
-		
+		[JsonIgnore]
 		public ICollection<CertificateOfReleaseToServiceDTO> CertificateOfReleaseToServiceB1Dtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<CertificateOfReleaseToServiceDTO> CertificateOfReleaseToServiceB2Dtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<DiscrepancyDTO> DiscrepancyDtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<FlightCrewRecordDTO> FlightCrewRecordDtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<WorkOrderDTO> PreparedWorkOrderDtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<WorkOrderDTO> CheckedWorkOrderDtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<WorkOrderDTO> ApprovedWorkOrderDtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<TransferRecordDTO> ReleasedSpecialist { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<TransferRecordDTO> RecivedSpecialist { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<RequestDTO> PreparedByRequestDtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<RequestDTO> CheckedByRequestDtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<RequestDTO> ApprovedByRequestDtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<JobCardDTO> PreparedJobCardDtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<JobCardDTO> CheckedJobCardDtos { get; set; }
-		
+		[JsonIgnore]
 		public ICollection<JobCardDTO> ApprovedJobCardDtos { get; set; }
 
 		#endregion

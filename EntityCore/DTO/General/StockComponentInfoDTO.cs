@@ -19,7 +19,7 @@ namespace EntityCore.DTO.General
 		public string PartNumber { get; set; }
 
 		
-		[Column("Amount"), Required]
+		[Column("Amount")]
 		public double Amount { get; set; }
 
 		
