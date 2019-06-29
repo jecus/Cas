@@ -24,6 +24,7 @@ namespace CasAPI
 
 			return WebHost.CreateDefaultBuilder(args)
 				.ConfigureLogging(builder => builder.ClearProviders())
+				.UseIIS()
 				.UseSerilog((context, configuration) =>
 				{
 					configuration

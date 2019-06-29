@@ -56,7 +56,11 @@ namespace EntityCore.Repository
 					}
 				}
 
-				return await query.AsNoTracking().Select(selectProperty).OfType<int>().ToListAsync();
+				var any = query.Any();
+				if(any)
+					return await query.AsNoTracking().Select(selectProperty).ToListAsync();
+
+				return new List<int>();
 			}
 		}
 
