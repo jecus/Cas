@@ -36,8 +36,6 @@ namespace EntityCore.DTO.General
 		[JsonIgnore]
 		public AircraftFlightDTO AircraftFlight { get; set; }
 		[JsonIgnore]
-		public AccessoryDescriptionDTO AccessoryDescription { get; set; }
-		[JsonIgnore]
 		public ATLBDTO Atlb { get; set; }
 		[JsonIgnore]
 		public AuditDTO Audit { get; set; }

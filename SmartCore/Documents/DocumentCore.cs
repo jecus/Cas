@@ -254,7 +254,8 @@ namespace SmartCore.Documents
 								var d = dirctives.FirstOrDefault(e => e.ItemId == directive.ParentId);
 								if (d != null)
 								{
-									document.Parent = _aircraftsCore.GetAircraftById(d.ParentBaseComponent.ParentAircraftId);
+									if (d.ParentBaseComponent?.ParentAircraftId > 0)
+										document.Parent = _aircraftsCore.GetAircraftById(d.ParentBaseComponent.ParentAircraftId);
 								}
 							}
 						}

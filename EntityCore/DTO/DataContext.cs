@@ -166,10 +166,6 @@ namespace EntityCore.DTO
 				.WithMany(i => i.AccessoryDescriptionDtos)
 				.HasForeignKey(i => i.StandartId);
 			modelBuilder.Entity<AccessoryDescriptionDTO>()
-				.HasMany(i => i.Files)
-				.WithOne(i => i.AccessoryDescription)
-				.HasForeignKey(i => i.ParentId);
-			modelBuilder.Entity<AccessoryDescriptionDTO>()
 				.HasMany(i => i.SupplierRelations)
 				.WithOne(i => i.AccessoryDescriptionDto)
 				.HasForeignKey(i => i.KitId);

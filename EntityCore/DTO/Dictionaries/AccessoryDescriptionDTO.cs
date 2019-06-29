@@ -11,7 +11,7 @@ namespace EntityCore.DTO.Dictionaries
 	[Table("AccessoryDescriptions", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-	public class AccessoryDescriptionDTO : BaseEntity, IFileDtoContainer
+	public class AccessoryDescriptionDTO : BaseEntity
     {
 		
 		[Column("Description")]
@@ -134,8 +134,8 @@ namespace EntityCore.DTO.Dictionaries
 	    public GoodStandartDTO GoodStandart { get; set; }
 
 	    
-		[Child(FilterType.Equal, "ParentTypeId", 1005)]
-		public ICollection<ItemFileLinkDTO> Files { get; set; }
+		//[Child(FilterType.Equal, "ParentTypeId", 1005)]
+		//public ICollection<ItemFileLinkDTO> Files { get; set; }
 
 	    
 	    [Child(FilterType.Equal, "ParentTypeId", 1005)]
