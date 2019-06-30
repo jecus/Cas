@@ -1440,14 +1440,14 @@ namespace CAS.UI.UIControls.MaintananceProgram
         ///<param name="resultCollection"></param>
         private void FilterItems(IEnumerable<MaintenanceDirective> initialCollection, ICommonCollection<MaintenanceDirective> resultCollection)
         {
-            if (_additionalFilter == null || _additionalFilter.Count == 0)
-            {
+           if (_additionalFilter == null || _additionalFilter.All(i => i.Values.Length == 0))
+           {
                 resultCollection.Clear();
                 resultCollection.AddRange(initialCollection);
                 return;
-            }
+           }
 
-            resultCollection.Clear();
+           resultCollection.Clear();
 
             foreach (MaintenanceDirective pd in initialCollection)
             {

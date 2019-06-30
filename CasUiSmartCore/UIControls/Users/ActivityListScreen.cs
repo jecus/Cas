@@ -305,57 +305,57 @@ namespace CAS.UI.UIControls.Users
 
 		#endregion
 
-        #region private void HeaderControlButtonReloadClick(object sender, System.EventArgs e)
+		#region private void HeaderControlButtonReloadClick(object sender, System.EventArgs e)
 
-        private void HeaderControlButtonReloadClick(object sender, EventArgs e)
-        {
+		private void HeaderControlButtonReloadClick(object sender, EventArgs e)
+		{
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
 			AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
 			AnimatedThreadWorker.RunWorkerAsync();
-        }
-        #endregion
+		}
+		#endregion
 
 		#region private void ButtonApplyFilterClick(object sender, EventArgs e)
 
 		private void ButtonApplyFilterClick(object sender, EventArgs e)
-	    {
-		    var form = new CommonFilterForm(_filter, _initial);
+		{
+			var form = new CommonFilterForm(_filter, _initial);
 
-		    if (form.ShowDialog(this) == DialogResult.OK)
-		    {
-			    AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
-			    AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
-			    AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoFilteringWork;
+			if (form.ShowDialog(this) == DialogResult.OK)
+			{
+				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+				AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoFilteringWork;
 
-			    AnimatedThreadWorker.RunWorkerAsync();
-		    }
-	    }
+				AnimatedThreadWorker.RunWorkerAsync();
+			}
+		}
 
 		#endregion
 
 		#region private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
 
 		private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
-	    {
-		    _result.Clear();
+		{
+			_result.Clear();
 
-		    #region Фильтрация директив
-		    AnimatedThreadWorker.ReportProgress(50, "filter directives");
+			#region Фильтрация директив
+			AnimatedThreadWorker.ReportProgress(50, "filter directives");
 
-		    FilterItems(_initial, _result);
+			FilterItems(_initial, _result);
 
-		    if (AnimatedThreadWorker.CancellationPending)
-		    {
-			    e.Cancel = true;
-			    return;
-		    }
-		    #endregion
+			if (AnimatedThreadWorker.CancellationPending)
+			{
+				e.Cancel = true;
+				return;
+			}
+			#endregion
 
-		    AnimatedThreadWorker.ReportProgress(100, "Complete");
-	    }
+			AnimatedThreadWorker.ReportProgress(100, "Complete");
+		}
 
-	    #endregion
+		#endregion
 
 		#region private void FilterItems(IEnumerable<Document> initialCollection, ICommonCollection<Document> resultCollection)
 
@@ -365,7 +365,7 @@ namespace CAS.UI.UIControls.Users
 		///<param name="resultCollection"></param>
 		private void FilterItems(IEnumerable<ActivityDTO> initialCollection, ICommonCollection<ActivityDTO> resultCollection)
 		{
-			if (_filter == null || _filter.Count == 0)
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
 				resultCollection.Clear();
 				resultCollection.AddRange(initialCollection);

@@ -633,7 +633,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 		///<param name="resultCollection"></param>
 		private void FilterItems(IEnumerable<Document> initialCollection, ICommonCollection<Document> resultCollection)
 		{
-			if (_filter == null || _filter.Count == 0)
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
 				resultCollection.Clear();
 				resultCollection.AddRange(initialCollection);

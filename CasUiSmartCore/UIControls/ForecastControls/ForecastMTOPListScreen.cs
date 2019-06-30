@@ -783,8 +783,8 @@ namespace CAS.UI.UIControls.ForecastControls
 	    ///<param name="resultCollection"></param>
 	    private void FilterItems(IEnumerable<NextPerformance> initialCollection, ICommonCollection<NextPerformance> resultCollection)
 	    {
-		    if (_filter == null || _filter.Count == 0)
-		    {
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
+			{
 			    resultCollection.Clear();
 			    resultCollection.AddRange(initialCollection);
 			    return;

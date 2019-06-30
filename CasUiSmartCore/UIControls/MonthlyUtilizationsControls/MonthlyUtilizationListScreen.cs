@@ -598,7 +598,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 		///<param name="resultCollection"></param>
 		private void FilterItems(CommonCollection<AircraftFlight> initialCollection, CommonCollection<AircraftFlight> resultCollection)
 		{
-			if (_filter == null || _filter.Count == 0)
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
 				resultCollection.Clear();
 				foreach (var flight in initialCollection)

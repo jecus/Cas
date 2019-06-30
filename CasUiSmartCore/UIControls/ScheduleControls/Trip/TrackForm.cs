@@ -483,7 +483,7 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 		///<param name="resultCollection"></param>
 		private void FilterItems(IEnumerable<FlightNumber> initialCollection, ICommonCollection<FlightNumber> resultCollection)
 		{
-			if (_filter == null || _filter.Count == 0)
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
 				resultCollection.Clear();
 				resultCollection.AddRange(initialCollection);
@@ -526,7 +526,7 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 		///<param name="resultCollection"></param>
 		private void FilterItems(IEnumerable<FlightNumberPeriod> initialCollection, ICommonCollection<FlightNumberPeriod> resultCollection)
 		{
-			if (_filter == null || _filter.Count == 0)
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
 				resultCollection.Clear();
 				resultCollection.AddRange(initialCollection);
