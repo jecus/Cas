@@ -53,8 +53,8 @@ namespace EntityCore.DTO.General
 		public DirectiveDTO Directive { get; set; }
 		[JsonIgnore]
 		public DirectiveRecordDTO DirectiveRecord { get; set; }
-		[JsonIgnore]
-		public DirectiveRecordDTO MaintenanceCheckRecord { get; set; }
+		//[JsonIgnore]
+		//public DirectiveRecordDTO MaintenanceCheckRecord { get; set; }
 		[JsonIgnore]
 		public WorkPackageDTO WorkPackage { get; set; }
 		[JsonIgnore]

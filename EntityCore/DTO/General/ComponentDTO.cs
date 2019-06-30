@@ -248,7 +248,7 @@ namespace EntityCore.DTO.General
 
 		
 		[Column("LocationId")]
-		public int LocationId { get; set; }
+		public int? LocationId { get; set; }
 
 		
 		[Column("Incoming")]

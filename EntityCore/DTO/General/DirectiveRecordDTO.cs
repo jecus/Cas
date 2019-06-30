@@ -104,8 +104,8 @@ namespace EntityCore.DTO.General
 		public ICollection<ItemFileLinkDTO> Files { get; set; }
 
 		
-		[Child(FilterType.Equal, "ParentTypeId", 1680)]
-		public ICollection<ItemFileLinkDTO> FilesForMaintenanceCheckRecord { get; set; }
+		//[Child(FilterType.Equal, "ParentTypeId", 1680)]
+		//public ICollection<ItemFileLinkDTO> FilesForMaintenanceCheckRecord { get; set; }
 
 		#region Navigation Property
 

@@ -396,8 +396,8 @@ namespace EntityCore.DTO
 
 			modelBuilder.Entity<DirectiveRecordDTO>()
 				.HasMany(i => i.Files).WithOne(i => i.DirectiveRecord).HasForeignKey(i => i.ParentId);
-			modelBuilder.Entity<DirectiveRecordDTO>()
-				.HasMany(i => i.FilesForMaintenanceCheckRecord).WithOne(i => i.MaintenanceCheckRecord).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<DirectiveRecordDTO>()
+			//	.HasMany(i => i.FilesForMaintenanceCheckRecord).WithOne(i => i.MaintenanceCheckRecord).HasForeignKey(i => i.ParentId);
 
 			modelBuilder.Entity<DiscrepancyDTO>()
 				.HasOne(i => i.ATAChapter)
