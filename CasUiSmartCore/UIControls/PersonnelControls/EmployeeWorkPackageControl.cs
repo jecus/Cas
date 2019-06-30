@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.FiltersControls;
@@ -76,7 +77,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 		///<param name="resultCollection"></param>
 		private void FilterItems(IEnumerable<WorkPackage> initialCollection, ICommonCollection<WorkPackage> resultCollection)
 		{
-			if (_filter == null || _filter.Count == 0)
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
 				resultCollection.Clear();
 				resultCollection.AddRange(initialCollection);

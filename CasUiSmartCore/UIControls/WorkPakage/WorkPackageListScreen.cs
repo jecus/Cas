@@ -37,7 +37,7 @@ namespace CAS.UI.UIControls.WorkPakage
 		private CommonFilterCollection _filter = new CommonFilterCollection(typeof(WorkPackage));
 
 #if KAC
-        private WorkscopeReportBuilderKAC _workscopeReportBuilder = new WorkscopeReportBuilderKAC();
+		private WorkscopeReportBuilderKAC _workscopeReportBuilder = new WorkscopeReportBuilderKAC();
 #else
 		private WorkscopeReportBuilder _workscopeReportBuilder = new WorkscopeReportBuilder();
 		private MaintenanceReportBuilder _maintenanceReportBuilder = new MaintenanceReportBuilder();
@@ -685,7 +685,7 @@ namespace CAS.UI.UIControls.WorkPakage
 		///<param name="resultCollection"></param>
 		private void FilterItems(IEnumerable<WorkPackage> initialCollection, ICommonCollection<WorkPackage> resultCollection)
 		{
-			if (_filter == null || _filter.Count == 0)
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
 				resultCollection.Clear();
 				resultCollection.AddRange(initialCollection);

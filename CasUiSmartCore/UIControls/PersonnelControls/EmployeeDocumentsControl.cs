@@ -20,11 +20,11 @@ using SmartCore.Filters;
 
 namespace CAS.UI.UIControls.PersonnelControls
 {
-    ///<summary>
-    ///</summary>
-    [Designer(typeof(EmployeeDocumentsControlDesigner))]
-    public partial class EmployeeDocumentsControl : UserControl, IReference
-    {
+	///<summary>
+	///</summary>
+	[Designer(typeof(EmployeeDocumentsControlDesigner))]
+	public partial class EmployeeDocumentsControl : UserControl, IReference
+	{
 		#region Fields
 
 		private Specialist _currentItem;
@@ -50,206 +50,206 @@ namespace CAS.UI.UIControls.PersonnelControls
 		/// Создает объект для отображения информации о директиве
 		///</summary>
 		public EmployeeDocumentsControl()
-        {
-            InitializeComponent();
+		{
+			InitializeComponent();
 			_filter = new CommonFilterCollection(typeof(Document));
-	        InitToolStripMenuItems();
+			InitToolStripMenuItems();
 			documentationListView.ContextMenuStrip = _contextMenuStrip;
 		}
 
-        #endregion
+		#endregion
 
-        #endregion
+		#endregion
 
-        #region Properties
+		#region Properties
 
-        #region public Specialist CurrentItem
-        ///<summary>
-        ///Текущая директива
-        ///</summary>
-        public Specialist CurrentItem
-        {
-            set
-            {
-                _currentItem = value;
-                if (_currentItem != null)
-                {
-                    UpdateInformation();
-                }
-            }
-        }
+		#region public Specialist CurrentItem
+		///<summary>
+		///Текущая директива
+		///</summary>
+		public Specialist CurrentItem
+		{
+			set
+			{
+				_currentItem = value;
+				if (_currentItem != null)
+				{
+					UpdateInformation();
+				}
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region public void CancelAsync()
-        /// <summary>
-        /// Запрашивает отмену асинхронной операции
-        /// </summary>
-        public void CancelAsync()
-        {
-        }
-        #endregion
+		#region public void CancelAsync()
+		/// <summary>
+		/// Запрашивает отмену асинхронной операции
+		/// </summary>
+		public void CancelAsync()
+		{
+		}
+		#endregion
 
-        #region public bool GetChangeStatus()
-        ///<summary>
-        ///Возвращает значение, показывающее были ли изменения в данном элементе управления
-        ///</summary>
-        ///<returns></returns>
-        public bool GetChangeStatus()
-        {
-            if (_initialDocumentArray.Count != _currentItem.EmployeeDocuments.Count)
-                return true;
-            return false;
-        }
+		#region public bool GetChangeStatus()
+		///<summary>
+		///Возвращает значение, показывающее были ли изменения в данном элементе управления
+		///</summary>
+		///<returns></returns>
+		public bool GetChangeStatus()
+		{
+			if (_initialDocumentArray.Count != _currentItem.EmployeeDocuments.Count)
+				return true;
+			return false;
+		}
 
-        #endregion
+		#endregion
 
-        #region public bool ValidateData(out string message)
-        /// <summary>
-        /// Возвращает значение, показывающее является ли значение элемента управления допустимым
-        /// </summary>
-        /// <returns></returns>
-        public bool ValidateData(out string message)
-        {
-            message = "";
-            return true;
-        }
+		#region public bool ValidateData(out string message)
+		/// <summary>
+		/// Возвращает значение, показывающее является ли значение элемента управления допустимым
+		/// </summary>
+		/// <returns></returns>
+		public bool ValidateData(out string message)
+		{
+			message = "";
+			return true;
+		}
 
-        #endregion
+		#endregion
 
-        #region private void UpdateInformation()
+		#region private void UpdateInformation()
 
-        /// <summary>
-        /// Заполняет поля для редактирования директивы
-        /// </summary>
-        private void UpdateInformation()
-        {
-            if (_currentItem == null)
-                return;
+		/// <summary>
+		/// Заполняет поля для редактирования директивы
+		/// </summary>
+		private void UpdateInformation()
+		{
+			if (_currentItem == null)
+				return;
 
 			_initialDocumentArray.Clear();
 			_resultDocumentArray.Clear();
 
 			_initialDocumentArray.AddRange(_currentItem.EmployeeDocuments.ToArray());
 
-            foreach (Document document in _initialDocumentArray)
-                GlobalObjects.PerformanceCalculator.GetNextPerformance(document);
+			foreach (Document document in _initialDocumentArray)
+				GlobalObjects.PerformanceCalculator.GetNextPerformance(document);
 
 			FilterItems(_initialDocumentArray, _resultDocumentArray);
 
 			documentationListView.SetItemsArray(_resultDocumentArray.ToArray());
 
-            documentationListView.Focus();
-        }
+			documentationListView.Focus();
+		}
 
-        #endregion
+		#endregion
 
-        #region public void ApplyChanges()
+		#region public void ApplyChanges()
 
-        /// <summary>
-        /// Данные у директивы обновляются по введенным данным
-        /// </summary>
-        public void ApplyChanges()
-        {
-            foreach (Document document in _resultDocumentArray)
-            {
-                document.Parent = _currentItem;
-                document.ParentId = _currentItem.ItemId;
-                document.ParentTypeId = _currentItem.SmartCoreObjectType.ItemId;
-            }
-        }
+		/// <summary>
+		/// Данные у директивы обновляются по введенным данным
+		/// </summary>
+		public void ApplyChanges()
+		{
+			foreach (Document document in _resultDocumentArray)
+			{
+				document.Parent = _currentItem;
+				document.ParentId = _currentItem.ItemId;
+				document.ParentTypeId = _currentItem.SmartCoreObjectType.ItemId;
+			}
+		}
 		#endregion
 
 		#region public void SaveData()
 
 		public void SaveData()
-	    {
-		    var unsaved = documentationListView.GetItemsArray().Where(i => i.ItemId <= 0).ToList();
+		{
+			var unsaved = documentationListView.GetItemsArray().Where(i => i.ItemId <= 0).ToList();
 
-		    try
-		    {
-			    GlobalObjects.DocumentCore.SaveDocumentsList(_currentItem, unsaved);
-		    }
-		    catch (Exception ex)
-		    {
-			    Program.Provider.Logger.Log("Error while save document", ex);
-		    }
-	    }
+			try
+			{
+				GlobalObjects.DocumentCore.SaveDocumentsList(_currentItem, unsaved);
+			}
+			catch (Exception ex)
+			{
+				Program.Provider.Logger.Log("Error while save document", ex);
+			}
+		}
 
-	    #endregion
+		#endregion
 
-        #region public void ClearFields()
+		#region public void ClearFields()
 
-        /// <summary>
-        /// Очищает все поля
-        /// </summary>
-        public void ClearFields()
-        {
+		/// <summary>
+		/// Очищает все поля
+		/// </summary>
+		public void ClearFields()
+		{
 			_resultDocumentArray.Clear();
 
-            documentationListView.radGridView1.Rows.Clear();
-        }
+			documentationListView.radGridView1.Rows.Clear();
+		}
 
 		#endregion
 
 		#region private void InitToolStripMenuItems()
 
 		private void InitToolStripMenuItems()
-	    {
-		    _contextMenuStrip = new ContextMenuStrip();
-		    _toolStripMenuItemCopy = new ToolStripMenuItem();
-		    _toolStripMenuItemPaste = new ToolStripMenuItem();
-		    _toolStripMenuItemShowTaskCard = new ToolStripMenuItem();
-		    _toolStripMenuItemSaveAsTaskCard = new ToolStripMenuItem();
-		    _toolStripSeparator1 = new ToolStripSeparator();
+		{
+			_contextMenuStrip = new ContextMenuStrip();
+			_toolStripMenuItemCopy = new ToolStripMenuItem();
+			_toolStripMenuItemPaste = new ToolStripMenuItem();
+			_toolStripMenuItemShowTaskCard = new ToolStripMenuItem();
+			_toolStripMenuItemSaveAsTaskCard = new ToolStripMenuItem();
+			_toolStripSeparator1 = new ToolStripSeparator();
 
-		    // 
-		    // contextMenuStrip
-		    // 
-		    _contextMenuStrip.Name = "_contextMenuStrip";
-		    _contextMenuStrip.Size = new Size(179, 176);
+			// 
+			// contextMenuStrip
+			// 
+			_contextMenuStrip.Name = "_contextMenuStrip";
+			_contextMenuStrip.Size = new Size(179, 176);
 
-		    // 
-		    // toolStripMenuItemCopy
-		    // 
-		    _toolStripMenuItemCopy.Text = "Copy";
-		    _toolStripMenuItemCopy.Click += CopyItemsClick;
+			// 
+			// toolStripMenuItemCopy
+			// 
+			_toolStripMenuItemCopy.Text = "Copy";
+			_toolStripMenuItemCopy.Click += CopyItemsClick;
 
-		    // 
-		    // toolStripMenuItemPaste
-		    // 
-		    _toolStripMenuItemPaste.Text = "Paste";
-		    _toolStripMenuItemPaste.Click += PasteItemsClick;
+			// 
+			// toolStripMenuItemPaste
+			// 
+			_toolStripMenuItemPaste.Text = "Paste";
+			_toolStripMenuItemPaste.Click += PasteItemsClick;
 
-		    // 
-		    // toolStripMenuItemShowTaskCard
-		    // 
-		    _toolStripMenuItemShowTaskCard.Text = "Show document file";
-		    _toolStripMenuItemShowTaskCard.Click += ShowDocumentFileItemsClick;
+			// 
+			// toolStripMenuItemShowTaskCard
+			// 
+			_toolStripMenuItemShowTaskCard.Text = "Show document file";
+			_toolStripMenuItemShowTaskCard.Click += ShowDocumentFileItemsClick;
 
-		    // 
-		    // _toolStripMenuItemSaveAsTaskCard
-		    // 
-		    _toolStripMenuItemSaveAsTaskCard.Text = "Save as document file";
-		    _toolStripMenuItemSaveAsTaskCard.Click += _toolStripMenuItemSaveAsTaskCard_Click;
+			// 
+			// _toolStripMenuItemSaveAsTaskCard
+			// 
+			_toolStripMenuItemSaveAsTaskCard.Text = "Save as document file";
+			_toolStripMenuItemSaveAsTaskCard.Click += _toolStripMenuItemSaveAsTaskCard_Click;
 
-		    _contextMenuStrip.Items.AddRange(new ToolStripItem[]
-		    {
-			    _toolStripMenuItemSaveAsTaskCard,
-			    _toolStripMenuItemShowTaskCard,
-			    _toolStripSeparator1,
-			    _toolStripMenuItemCopy,
-			    _toolStripMenuItemPaste
-		    });
+			_contextMenuStrip.Items.AddRange(new ToolStripItem[]
+			{
+				_toolStripMenuItemSaveAsTaskCard,
+				_toolStripMenuItemShowTaskCard,
+				_toolStripSeparator1,
+				_toolStripMenuItemCopy,
+				_toolStripMenuItemPaste
+			});
 
-		    _contextMenuStrip.Opening += ContextMenuStripOpen;
-	    }
+			_contextMenuStrip.Opening += ContextMenuStripOpen;
+		}
 
-	    #endregion
+		#endregion
 
 		#region  private void PasteItemsClick(object sender, EventArgs e)
 
@@ -301,43 +301,43 @@ namespace CAS.UI.UIControls.PersonnelControls
 		#region private void _toolStripMenuItemSaveAsTaskCard_Click(object sender, EventArgs e)
 
 		private void _toolStripMenuItemSaveAsTaskCard_Click(object sender, EventArgs e)
-	    {
-		    if (documentationListView.SelectedItems == null ||
-		        documentationListView.SelectedItems.Count == 0) return;
+		{
+			if (documentationListView.SelectedItems == null ||
+				documentationListView.SelectedItems.Count == 0) return;
 
-		    var document = documentationListView.SelectedItems[0];
+			var document = documentationListView.SelectedItems[0];
 
-		    try
-		    {
-			    var saveFileDialog = new SaveFileDialog();
-			    saveFileDialog.FileName = document.AttachedFile.FileName;
-			    saveFileDialog.Filter = "Pdf Files|*.pdf";
+			try
+			{
+				var saveFileDialog = new SaveFileDialog();
+				saveFileDialog.FileName = document.AttachedFile.FileName;
+				saveFileDialog.Filter = "Pdf Files|*.pdf";
 
-			    if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
-				    return;
+				if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
+					return;
 
-			    string message;
-			    GlobalObjects.CasEnvironment.SaveAsFile(document.AttachedFile, saveFileDialog.FileName, out message);
-			    if (message != "")
-			    {
-				    MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
-					    MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
-					    MessageBoxDefaultButton.Button1);
-			    }
-			    else
-			    {
-				    MessageBox.Show("File saving was successful", (string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
-					    MessageBoxIcon.Information);
-			    }
-		    }
-		    catch (Exception ex)
-		    {
-			    string errorDescriptionSctring =
-				    $"Error while Save Attached File for {document}, id {document.ItemId}. \nFileId {document.AttachedFile.ItemId}";
-			    Program.Provider.Logger.Log(errorDescriptionSctring, ex);
-		    }
+				string message;
+				GlobalObjects.CasEnvironment.SaveAsFile(document.AttachedFile, saveFileDialog.FileName, out message);
+				if (message != "")
+				{
+					MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
+						MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+						MessageBoxDefaultButton.Button1);
+				}
+				else
+				{
+					MessageBox.Show("File saving was successful", (string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
+						MessageBoxIcon.Information);
+				}
+			}
+			catch (Exception ex)
+			{
+				string errorDescriptionSctring =
+					$"Error while Save Attached File for {document}, id {document.ItemId}. \nFileId {document.AttachedFile.ItemId}";
+				Program.Provider.Logger.Log(errorDescriptionSctring, ex);
+			}
 
-	    }
+		}
 
 		#endregion
 
@@ -361,98 +361,98 @@ namespace CAS.UI.UIControls.PersonnelControls
 
 		#region private void ButtonAddClick(object sender, EventArgs e)
 		private void ButtonAddClick(object sender, EventArgs e)
-        {
-            var form = new DocumentForm(new Document(), _currentItem);
+		{
+			var form = new DocumentForm(new Document(), _currentItem);
 
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                InvokeReload();
-            }
-        }
-        #endregion
+			if (form.ShowDialog() == DialogResult.OK)
+			{
+				InvokeReload();
+			}
+		}
+		#endregion
 
-        #region private void ButtonDeleteClick(object sender, EventArgs e)
-        private void ButtonDeleteClick(object sender, EventArgs e)
-        {
-            if (documentationListView.SelectedItems == null) return;
+		#region private void ButtonDeleteClick(object sender, EventArgs e)
+		private void ButtonDeleteClick(object sender, EventArgs e)
+		{
+			if (documentationListView.SelectedItems == null) return;
 
-            DialogResult confirmResult =
-                MessageBox.Show(
-                    documentationListView.SelectedItem != null
-                        ? "Do you really want to delete Document " + documentationListView.SelectedItem.Description + "?"
-                        : "Do you really want to delete selected Documents? ", "Confirm delete operation",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+			DialogResult confirmResult =
+				MessageBox.Show(
+					documentationListView.SelectedItem != null
+						? "Do you really want to delete Document " + documentationListView.SelectedItem.Description + "?"
+						: "Do you really want to delete selected Documents? ", "Confirm delete operation",
+					MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
 
-            if (confirmResult == DialogResult.Yes)
-            {
-                int count = documentationListView.SelectedItems.Count;
+			if (confirmResult == DialogResult.Yes)
+			{
+				int count = documentationListView.SelectedItems.Count;
 
-                List<Document> selectedItems = new List<Document>();
-                selectedItems.AddRange(documentationListView.SelectedItems.ToArray());
-                for (int i = 0; i < count; i++)
-                {
-                    try
-                    {
-                        GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems[i]);
-                    }
-                    catch (Exception ex)
-                    {
-                        Program.Provider.Logger.Log("Error while deleting data", ex);
-                        return;
-                    }
-                }
+				List<Document> selectedItems = new List<Document>();
+				selectedItems.AddRange(documentationListView.SelectedItems.ToArray());
+				for (int i = 0; i < count; i++)
+				{
+					try
+					{
+						GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems[i]);
+					}
+					catch (Exception ex)
+					{
+						Program.Provider.Logger.Log("Error while deleting data", ex);
+						return;
+					}
+				}
 
-                InvokeReload();
-            }
-            else
-            {
-                MessageBox.Show("Failed to delete Documents: Parent container is invalid", "Operation failed",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+				InvokeReload();
+			}
+			else
+			{
+				MessageBox.Show("Failed to delete Documents: Parent container is invalid", "Operation failed",
+								MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
 		#endregion
 
 		#region private void ButtonApplyFilterClick(object sender, EventArgs e)
 
 		private void ButtonApplyFilterClick(object sender, EventArgs e)
-	    {
-		    var form = new CommonFilterForm(_filter, _initialDocumentArray);
+		{
+			var form = new CommonFilterForm(_filter, _initialDocumentArray);
 
-		    if (form.ShowDialog(this) == DialogResult.OK)
-		    {
-			    AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
-			    AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoFilteringWork;
+			if (form.ShowDialog(this) == DialogResult.OK)
+			{
+				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+				AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoFilteringWork;
 
-			    AnimatedThreadWorker.RunWorkerAsync();
+				AnimatedThreadWorker.RunWorkerAsync();
 
-			    InvokeReload();
-		    }
-	    }
+				InvokeReload();
+			}
+		}
 
 		#endregion
 
 		#region private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
 
 		private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
-	    {
-		    _resultDocumentArray.Clear();
+		{
+			_resultDocumentArray.Clear();
 
-		    #region Фильтрация директив
-		    AnimatedThreadWorker.ReportProgress(50, "filter directives");
+			#region Фильтрация директив
+			AnimatedThreadWorker.ReportProgress(50, "filter directives");
 
-		    FilterItems(_initialDocumentArray, _resultDocumentArray);
+			FilterItems(_initialDocumentArray, _resultDocumentArray);
 
-		    if (AnimatedThreadWorker.CancellationPending)
-		    {
-			    e.Cancel = true;
-			    return;
-		    }
-		    #endregion
+			if (AnimatedThreadWorker.CancellationPending)
+			{
+				e.Cancel = true;
+				return;
+			}
+			#endregion
 
-		    AnimatedThreadWorker.ReportProgress(100, "Complete");
-	    }
+			AnimatedThreadWorker.ReportProgress(100, "Complete");
+		}
 
-	    #endregion
+		#endregion
 
 		#region private void FilterItems(IEnumerable<Document> initialCollection, ICommonCollection<Document> resultCollection)
 
@@ -462,7 +462,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 		///<param name="resultCollection"></param>
 		private void FilterItems(IEnumerable<Document> initialCollection, ICommonCollection<Document> resultCollection)
 		{
-			if (_filter == null || _filter.Count == 0)
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
 				resultCollection.Clear();
 				resultCollection.AddRange(initialCollection);
@@ -591,25 +591,25 @@ namespace CAS.UI.UIControls.PersonnelControls
 		/// </summary>
 		public IDisplayer Displayer { get; set; }
 
-        /// <summary>
-        /// Text of page's header that Reference lead to
-        /// </summary>
-        public string DisplayerText { get; set; }
+		/// <summary>
+		/// Text of page's header that Reference lead to
+		/// </summary>
+		public string DisplayerText { get; set; }
 
-        /// <summary>
-        /// Entity to display
-        /// </summary>
-        public IDisplayingEntity Entity { get; set; }
+		/// <summary>
+		/// Entity to display
+		/// </summary>
+		public IDisplayingEntity Entity { get; set; }
 
-        /// <summary>
-        /// Type of reflection
-        /// </summary>
-        public ReflectionTypes ReflectionType { get; set; }
+		/// <summary>
+		/// Type of reflection
+		/// </summary>
+		public ReflectionTypes ReflectionType { get; set; }
 
-        /// <summary>
-        /// Occurs when linked invoker requests displaying 
-        /// </summary>
-        public event EventHandler<ReferenceEventArgs> DisplayerRequested;
+		/// <summary>
+		/// Occurs when linked invoker requests displaying 
+		/// </summary>
+		public event EventHandler<ReferenceEventArgs> DisplayerRequested;
 
 		#endregion
 
@@ -630,15 +630,15 @@ namespace CAS.UI.UIControls.PersonnelControls
 	#region internal class EmployeeDocumentsControlDesigner : ControlDesigner
 
 	internal class EmployeeDocumentsControlDesigner : ControlDesigner
-    {
-        protected override void PostFilterProperties(IDictionary properties)
-        {
-            base.PostFilterProperties(properties);
-            properties.Remove("CurrentItem");
-            properties.Remove("DateOfBirth");
-            properties.Remove("DateOfIssue");
-            properties.Remove("ExpirationDate");
-        }
-    }
-    #endregion
+	{
+		protected override void PostFilterProperties(IDictionary properties)
+		{
+			base.PostFilterProperties(properties);
+			properties.Remove("CurrentItem");
+			properties.Remove("DateOfBirth");
+			properties.Remove("DateOfIssue");
+			properties.Remove("ExpirationDate");
+		}
+	}
+	#endregion
 }

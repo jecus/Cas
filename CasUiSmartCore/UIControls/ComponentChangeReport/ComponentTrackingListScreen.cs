@@ -509,7 +509,7 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 		///<param name="resultCollection"></param>
 		private void FilterItems(TransferRecordCollection initialCollection, TransferRecordCollection resultCollection)
 		{
-			if (_filter == null || _filter.Count == 0)
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
 				resultCollection.Clear();
 				resultCollection.AddRange(initialCollection.ToArray());

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using AvControls;
 using CAS.UI.Interfaces;
@@ -605,8 +606,8 @@ namespace CAS.UI.UIControls.Discrepancies
         ///<param name="resultCollection"></param>
         private void FilterItems(IEnumerable<Discrepancy> initialCollection, ICommonCollection<Discrepancy> resultCollection)
         {
-            if (_filter == null || _filter.Count == 0)
-            {
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
+			{
                 resultCollection.Clear();
                 resultCollection.AddRange(initialCollection);
                 return;

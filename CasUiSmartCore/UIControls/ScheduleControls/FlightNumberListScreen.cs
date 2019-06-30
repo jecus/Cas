@@ -25,11 +25,11 @@ using Component = SmartCore.Entities.General.Accessory.Component;
 
 namespace CAS.UI.UIControls.ScheduleControls
 {
-    ///<summary>
-    /// Экран для отображения записей о неснижаемом запасе
-    ///</summary>
-    [ToolboxItem(false)]
-    public partial class FlightNumberListScreen : ScreenControl
+	///<summary>
+	/// Экран для отображения записей о неснижаемом запасе
+	///</summary>
+	[ToolboxItem(false)]
+	public partial class FlightNumberListScreen : ScreenControl
 	{
 		#region Fields
 
@@ -64,9 +64,9 @@ namespace CAS.UI.UIControls.ScheduleControls
 		/// Конструктор по умолчанию
 		///</summary>
 		public FlightNumberListScreen()
-        {
-            InitializeComponent();
-        }
+		{
+			InitializeComponent();
+		}
 		#endregion
 
 		#region public FlightNumberListScreen(Store currentStore, PropertyInfo beginGroup = null) : this()
@@ -78,10 +78,10 @@ namespace CAS.UI.UIControls.ScheduleControls
 		///<param name="screenType"></param>
 		public FlightNumberListScreen(Operator currentOperator, FlightNumberScreenType screenType) : this()
 		{
-            if (currentOperator == null)
-                throw new ArgumentNullException("currentOperator");
-            aircraftHeaderControl1.Operator = currentOperator;
-            StatusTitle = "Flights";
+			if (currentOperator == null)
+				throw new ArgumentNullException("currentOperator");
+			aircraftHeaderControl1.Operator = currentOperator;
+			StatusTitle = "Flights";
 			statusControl.ShowStatus = false;
 			labelTitle.Visible = false;
 			_screenType = screenType;
@@ -94,47 +94,47 @@ namespace CAS.UI.UIControls.ScheduleControls
 			UpdateInformation();
 		}
 
-        #endregion
+		#endregion
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (e.Cancelled)
-                return;
+		#region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		{
+			if (e.Cancelled)
+				return;
 
-	        if (firstLoad)
-	        {
-		        if (_initialPeriodArray.Count > 0)
-		        {
-			        dateTimePickerDateFrom.Value = _initialPeriodArray.Min(f => f.DepartureDate);
-			        dateTimePickerDateTo.Value = _initialPeriodArray.Max(f => f.ArrivalDate);
-		        }
-		        else
-		        {
-			        dateTimePickerDateFrom.Value = DateTimeExtend.GetCASMinDateTime();
-			        dateTimePickerDateTo.Value = DateTime.Today;
-		        }
-	        }
+			if (firstLoad)
+			{
+				if (_initialPeriodArray.Count > 0)
+				{
+					dateTimePickerDateFrom.Value = _initialPeriodArray.Min(f => f.DepartureDate);
+					dateTimePickerDateTo.Value = _initialPeriodArray.Max(f => f.ArrivalDate);
+				}
+				else
+				{
+					dateTimePickerDateFrom.Value = DateTimeExtend.GetCASMinDateTime();
+					dateTimePickerDateTo.Value = DateTime.Today;
+				}
+			}
 
-	        firstLoad = false;
-	        filterPeriod = false;
+			firstLoad = false;
+			filterPeriod = false;
 
 			foreach (var flightNumber in _resultFlightsArray.OrderBy(f => f.FlightNo.FullName))
-	        {
-		        var periods = _resultPeriodArray.Where(f => f.FlightNumberId == flightNumber.ItemId);
-		        if (periods.Any())
-		        {
+			{
+				var periods = _resultPeriodArray.Where(f => f.FlightNumberId == flightNumber.ItemId);
+				if (periods.Any())
+				{
 					_result.Add(flightNumber);
-			        foreach (var period in periods)
-			        {
-				        _result.Add(period);
-			        }
+					foreach (var period in periods)
+					{
+						_result.Add(period);
+					}
 				}	
-	        }
+			}
 
 			var res = new List<IFlightNumberParams>();
 			foreach (var item in _result)
@@ -153,33 +153,33 @@ namespace CAS.UI.UIControls.ScheduleControls
 			}
 
 			_directivesViewer.SetItemsArray(res.ToArray());
-	        _directivesViewer.Focus();
+			_directivesViewer.Focus();
 
-            headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
-        }
-        #endregion
+			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
+		}
+		#endregion
 
-        #region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
-        protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
-        {
+		#region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
+		protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
+		{
 			#region Загрузка элементов
 
 			_initialFlightsArray.Clear();
-	        _resultFlightsArray.Clear();
-	        _result.Clear();
-	        _resultPeriodArray.Clear();
-	        _initialPeriodArray.Clear();
+			_resultFlightsArray.Clear();
+			_result.Clear();
+			_resultPeriodArray.Clear();
+			_initialPeriodArray.Clear();
 
 			AnimatedThreadWorker.ReportProgress(0, "load records");
 
-            try
-            {
+			try
+			{
 				var flightTypes = new List<int>();
-	            if (_screenType == FlightNumberScreenType.Schedule)
-		            flightTypes.AddRange(FlightType.Items.Where(i => i.ItemId == FlightType.Schedule.ItemId).Select(i => i.ItemId));
+				if (_screenType == FlightNumberScreenType.Schedule)
+					flightTypes.AddRange(FlightType.Items.Where(i => i.ItemId == FlightType.Schedule.ItemId).Select(i => i.ItemId));
 				else flightTypes.AddRange(FlightType.Items.Where(i => i.ItemId != FlightType.Schedule.ItemId).Select(i => i.ItemId));
 
-	            CommonFilter<int> filter;
+				CommonFilter<int> filter;
 				if(isAllRadioButton.Checked)
 					filter = new CommonFilter<int>(FlightNumberPeriod.ScheduleProperty, FilterType.In, new []{0,1, -1});
 				else if(isWinterRadioButton.Checked)
@@ -187,57 +187,57 @@ namespace CAS.UI.UIControls.ScheduleControls
 				else filter = new CommonFilter<int>(FlightNumberPeriod.ScheduleProperty, 1);
 
 				
-	            _initialFlightsArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<FlightNumberDTO, FlightNumber>(new Filter("FlightType", flightTypes), true));
-	            
-	            var ids = _initialFlightsArray.Select(f => f.ItemId);
+				_initialFlightsArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<FlightNumberDTO, FlightNumber>(new Filter("FlightType", flightTypes), true));
+				
+				var ids = _initialFlightsArray.Select(f => f.ItemId);
 
 				var periods = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<FlightNumberPeriodDTO, FlightNumberPeriod>(new Filter("FlightNumberId", ids), true);
-	            
+				
 				if (filterPeriod)
-	            {
-		            _initialPeriodArray.AddRange(periods.Where(t => t.DepartureDate >= dateTimePickerDateFrom.Value &&
-		                                                            t.ArrivalDate <= dateTimePickerDateTo.Value));
+				{
+					_initialPeriodArray.AddRange(periods.Where(t => t.DepartureDate >= dateTimePickerDateFrom.Value &&
+																	t.ArrivalDate <= dateTimePickerDateTo.Value));
 				}
-	            else _initialPeriodArray.AddRange(periods);
+				else _initialPeriodArray.AddRange(periods);
 
-	            foreach (var period in _initialPeriodArray)
-		            period.FlightNum = _initialFlightsArray.FirstOrDefault(f => f.ItemId == period.FlightNumberId);
-            }
-            catch (Exception exception)
-            {
-                Program.Provider.Logger.Log("Error while load records", exception);
-            }
+				foreach (var period in _initialPeriodArray)
+					period.FlightNum = _initialFlightsArray.FirstOrDefault(f => f.ItemId == period.FlightNumberId);
+			}
+			catch (Exception exception)
+			{
+				Program.Provider.Logger.Log("Error while load records", exception);
+			}
 
-            AnimatedThreadWorker.ReportProgress(40, "Calculate records");
+			AnimatedThreadWorker.ReportProgress(40, "Calculate records");
 
-            #region Фильтрация директив
+			#region Фильтрация директив
 
-            AnimatedThreadWorker.ReportProgress(70, "filter records");
+			AnimatedThreadWorker.ReportProgress(70, "filter records");
 
-            FilterItems(_initialFlightsArray, _resultFlightsArray);
-            FilterItems(_initialPeriodArray, _resultPeriodArray);
+			FilterItems(_initialFlightsArray, _resultFlightsArray);
+			FilterItems(_initialPeriodArray, _resultPeriodArray);
 
-            if (AnimatedThreadWorker.CancellationPending)
-            {
-                e.Cancel = true;
-                return;
-            }
+			if (AnimatedThreadWorker.CancellationPending)
+			{
+				e.Cancel = true;
+				return;
+			}
 			#endregion
 
 			AnimatedThreadWorker.ReportProgress(100, "Complete");
-            #endregion
-        }
+			#endregion
+		}
 		#endregion
 
 		#region protected override void InitListView(PropertyInfo beginGroup = null)
 
 		private void InitListView()
-        {
-	        _directivesViewer = new FlightNumberListView(_screenType);
-	        _directivesViewer.TabIndex = 2;
-	        _directivesViewer.Location = new Point(panel1.Left, panel1.Top);
-	        _directivesViewer.Dock = DockStyle.Fill;
-	        _directivesViewer.CustomMenu = _contextMenuStrip;
+		{
+			_directivesViewer = new FlightNumberListView(_screenType);
+			_directivesViewer.TabIndex = 2;
+			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
+			_directivesViewer.Dock = DockStyle.Fill;
+			_directivesViewer.CustomMenu = _contextMenuStrip;
 
 			//_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 			
@@ -249,7 +249,7 @@ namespace CAS.UI.UIControls.ScheduleControls
 			};
 
 			panel1.Controls.Add(_directivesViewer);
-        }
+		}
 
 		#endregion
 
@@ -426,7 +426,7 @@ namespace CAS.UI.UIControls.ScheduleControls
 		///<param name="resultCollection"></param>
 		private void FilterItems(IEnumerable<FlightNumber> initialCollection, ICommonCollection<FlightNumber> resultCollection)
 		{
-			if (_filter == null || _filter.Count == 0)
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
 				resultCollection.Clear();
 				resultCollection.AddRange(initialCollection);
@@ -469,7 +469,7 @@ namespace CAS.UI.UIControls.ScheduleControls
 		///<param name="resultCollection"></param>
 		private void FilterItems(IEnumerable<FlightNumberPeriod> initialCollection, ICommonCollection<FlightNumberPeriod> resultCollection)
 		{
-			if (_filter == null || _filter.Count == 0)
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
 				resultCollection.Clear();
 				resultCollection.AddRange(initialCollection);
@@ -509,7 +509,7 @@ namespace CAS.UI.UIControls.ScheduleControls
 		private void ButtonDeleteClick(object sender, EventArgs e)
 		{
 			if (_directivesViewer.SelectedItems == null ||
-			    _directivesViewer.SelectedItems.Count == 0) return;
+				_directivesViewer.SelectedItems.Count == 0) return;
 
 			string typeName = typeof(FlightNumber).Name;
 
@@ -609,8 +609,8 @@ namespace CAS.UI.UIControls.ScheduleControls
 		#endregion
 
 		/*
-         *  Копировать - Вставить - Вырезать
-         */
+		 *  Копировать - Вставить - Вырезать
+		 */
 
 		#region private void CopyToClipboard()
 		private void CopyToClipboard()
