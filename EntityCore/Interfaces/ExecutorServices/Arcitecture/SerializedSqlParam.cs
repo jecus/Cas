@@ -53,7 +53,7 @@ namespace EntityCore.Interfaces.ExecutorServices.Arcitecture
 
 		public string Value { get; set; }
 
-		public string ValueType { get; protected set; }
+		public string ValueType { get; set; }
 
 		public string XmlSchemaCollectionDatabase { get; set; }
 
@@ -61,25 +61,9 @@ namespace EntityCore.Interfaces.ExecutorServices.Arcitecture
 
 		public string XmlSchemaCollectionOwningSchema { get; set; }
 
-		public SerializedSqlParam(SqlParameter p)
+		public SerializedSqlParam()
 		{
-			this.CopyProperties(p);
-			this.SerializeParameterValue(p);
-		}
-
-		public static explicit operator SerializedSqlParam(SqlParameter p)
-		{
-			return new SerializedSqlParam(p);
-		}
-
-		public static explicit operator SqlParameter(SerializedSqlParam p)
-		{
-			return p.GetSqlParameter(p);
-		}
-
-		public SqlParameter GetSqlParameter()
-		{
-			return this.GetSqlParameter(this);
+			
 		}
 
 		public SqlParameter GetSqlParameter(SerializedSqlParam serialized)
@@ -112,72 +96,6 @@ namespace EntityCore.Interfaces.ExecutorServices.Arcitecture
 			return p;
 		}
 
-		private void SerializeParameterValue(SqlParameter p)
-		{
-			if (p.Value.GetType().IsSerializable)
-			{
-				this.ValueType = this.GetTypeAssemblyQualifiedName(p.Value);
-				this.Value = this.SerializeObject(p.Value);
-			}
-			else
-			{
-				throw new SerializationException("Cannot serialize the parameter value object. Recast that object into a primitive or class that can be serialized.");
-			}
-		}
-
-		private void CopyProperties(SqlParameter p)
-		{
-			this.ParameterName = p.ParameterName;
-			this.Precision = p.Precision;
-			this.Scale = p.Scale;
-			this.Size = p.Size;
-			this.IsNullable = p.IsNullable;
-			this.LocaleId = p.LocaleId;
-			this.Offset = p.Offset;
-			this.SourceColumn = p.SourceColumn;
-			this.SourceColumnNullMapping = p.SourceColumnNullMapping;
-
-			this.XmlSchemaCollectionDatabase = p.XmlSchemaCollectionDatabase;
-			this.XmlSchemaCollectionName = p.XmlSchemaCollectionName;
-			this.XmlSchemaCollectionOwningSchema = p.XmlSchemaCollectionOwningSchema;
-
-			this.TypeName = p.TypeName;
-			this.UdtTypeName = p.UdtTypeName;
-
-			this.Direction = p.Direction.ToString();
-			this.CompareInfo = p.CompareInfo.ToString();
-			this.SourceVersion = p.SourceVersion.ToString();
-
-			try
-			{
-				this.SqlDbType = p.SqlDbType.ToString();
-			}
-			catch
-			{
-				this.SqlDbType = null;
-			}
-		}
-
-		private string SerializeObject(object value)
-		{
-			if (value == null) return null;
-
-			XmlSerializer serializer = new XmlSerializer(value.GetType());
-			XmlWriterSettings settings = new XmlWriterSettings();
-
-			settings.Encoding = new UnicodeEncoding(false, false);
-			settings.Indent = false;
-			settings.OmitXmlDeclaration = false;
-
-			using (StringWriter textWriter = new StringWriter())
-			{
-				using (XmlWriter xmlWriter = XmlWriter.Create(textWriter, settings))
-				{
-					serializer.Serialize(xmlWriter, value);
-				}
-				return textWriter.ToString();
-			}
-		}
 
 		private object DeserializeObject(string xml, Type type)
 		{
@@ -193,11 +111,6 @@ namespace EntityCore.Interfaces.ExecutorServices.Arcitecture
 					return Convert.ChangeType(serializer.Deserialize(xmlReader), type);
 				}
 			}
-		}
-
-		private string GetTypeAssemblyQualifiedName(object obj)
-		{
-			return obj.GetType().AssemblyQualifiedName.ToString();
 		}
 	}
 }

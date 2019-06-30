@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
 using EntityCore.Interfaces;
@@ -57,6 +58,11 @@ namespace CasAPI.Controllers
 		{
 			try
 			{
+				var param = new List<SerializedSqlParam>();
+				var serializer = new XmlSerializer(typeof(List<SerializedSqlParam>));
+				using (TextReader reader = new StringReader(p.SqlParams))
+					param.AddRange((IEnumerable<SerializedSqlParam>) serializer.Deserialize(reader));
+
 				var s = new XmlSerializer(typeof(DataSet));
 				string xml;
 
@@ -64,7 +70,7 @@ namespace CasAPI.Controllers
 				{
 					using (var writer = XmlWriter.Create(sww))
 					{
-						s.Serialize(writer, _executor.Execute(p.Query, p.SqlParams));
+						s.Serialize(writer, _executor.Execute(p.Query, param.Select(i => i.GetSqlParameter(i)).ToArray()));
 						xml = sww.ToString();
 					}
 				}

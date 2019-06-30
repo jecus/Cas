@@ -4,18 +4,16 @@ using System.Collections.Specialized;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.ServiceModel;
-using System.Threading.Tasks;
 using System.Web;
+using System.Xml;
 using System.Xml.Serialization;
-using EFCore.Contract;
 using EFCore.DTO;
 using EFCore.DTO.General;
 using EFCore.Filter;
-using SmartCore.Management;
-using SmartCore.Queries;
+using SmartCore.Contract;
 
 namespace CAS.UI.Helpers
 {
@@ -75,7 +73,22 @@ namespace CAS.UI.Helpers
 
 		public DataSet Execute(string query, SqlParameter[] parameters)
 		{
-			var res = _httpClient.SendXMLAsync<QueryParams, DataSet>(HttpMethod.Post, "executor/queryparams", new QueryParams() { Query = query, SqlParams = parameters});
+			var p = new List<SerializedSqlParam>();
+			p.AddRange(parameters.Select(i => new SerializedSqlParam(i)));
+
+			var s = new XmlSerializer(typeof(List<SerializedSqlParam>));
+			string xml;
+
+			using (var sww = new StringWriter())
+			{
+				using (var writer = XmlWriter.Create(sww))
+				{
+					s.Serialize(writer, p);
+					xml = sww.ToString();
+				}
+			}
+
+			var res = _httpClient.SendXMLAsync<QueryParams, DataSet>(HttpMethod.Post, "executor/queryparams", new QueryParams() { Query = query, SqlParams = xml });
 			return res?.Data ?? new DataSet(){Tables = { new DataTable()}};
 		}
 
