@@ -157,7 +157,7 @@ namespace CAS.UI.UIControls.Users
 				{
 					try
 					{
-						GlobalObjects.CasEnvironment.GetSeviceUser().DeleteUser(selectedItems[i].ItemId);
+						GlobalObjects.CasEnvironment.ApiProvider.DeleteUser(selectedItems[i].ItemId);
 					}
 					catch (Exception ex)
 					{

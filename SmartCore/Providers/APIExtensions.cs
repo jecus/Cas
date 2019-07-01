@@ -52,6 +52,44 @@ namespace CAS.UI.Helpers
 			};
 		}
 
+		public static ApiResult SendJsonAsync<TModel>(this HttpClient client, HttpMethod httpMethod, string requestUri, TModel model)
+		{
+			var json = "[{}]";
+			if (model != null)
+				json = JsonConvert.SerializeObject(model);
+			var message = new HttpRequestMessage(httpMethod, requestUri)
+			{
+				Content = new StringContent(json, Encoding.UTF8, "application/json")
+			};
+			var res = client.SendAsync(message).Result;
+			var content = res.Content.ReadAsStringAsync().Result;
+
+			return new ApiResult
+			{
+				IsSuccessful = res.IsSuccessStatusCode,
+				StatusCode = res.StatusCode,
+				Error = res.IsSuccessStatusCode ? null : (content ?? res.ReasonPhrase)
+			};
+		}
+
+		public static ApiResult SendJsonAsync(this HttpClient client, HttpMethod httpMethod, string requestUri)
+		{
+			var json = "[{}]";
+			var message = new HttpRequestMessage(httpMethod, requestUri)
+			{
+				Content = new StringContent(json, Encoding.UTF8, "application/json")
+			};
+			var res = client.SendAsync(message).Result;
+			var content = res.Content.ReadAsStringAsync().Result;
+
+			return new ApiResult
+			{
+				IsSuccessful = res.IsSuccessStatusCode,
+				StatusCode = res.StatusCode,
+				Error = res.IsSuccessStatusCode ? null : (content ?? res.ReasonPhrase)
+			};
+		}
+
 
 		public static ApiResult<TResult> GetXMLAsync<TResult>(this HttpClient client, string requestUri)
 		{
@@ -108,13 +146,16 @@ namespace CAS.UI.Helpers
 	}
 
 
-	public class ApiResult<TView>
+	public class ApiResult<TView> : ApiResult
 	{
 		/// <summary>
 		/// Данные
 		/// </summary>
 		public TView Data { get; set; }
+	}
 
+	public class ApiResult
+	{
 		/// <summary>
 		/// Флаг успешности
 		/// </summary>

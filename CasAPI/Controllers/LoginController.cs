@@ -53,7 +53,7 @@ namespace CasAPI.Controllers
 			}
 		}
 
-		[HttpPatch("updatepaswword")]
+		[HttpPost("updatepaswword")]
 		public async Task<ActionResult> UpdatePassword(int id, string password)
 		{
 			try
@@ -70,7 +70,7 @@ namespace CasAPI.Controllers
 			}
 		}
 
-		[HttpDelete("delete")]
+		[HttpPost("delete")]
 		public async Task<ActionResult> DeleteUser(int id)
 		{
 			try

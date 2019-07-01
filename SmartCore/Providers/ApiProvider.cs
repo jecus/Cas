@@ -28,7 +28,7 @@ namespace CAS.UI.Helpers
 
 		#region User
 
-		public void GetAPIConnection()
+		public void CheckAPIConnection()
 		{
 			try
 			{
@@ -54,11 +54,36 @@ namespace CAS.UI.Helpers
 			return res?.Data;
 		}
 
-
-		public  List<UserDTO> GetAllUsersAsync()
+		public List<UserDTO> GetAllUsersAsync()
 		{
 			var res =  _httpClient.GetJsonAsync<List<UserDTO>>($"user/getall");
 			return res?.Data;
+		}
+
+		public void UpdatePassword(int id, string password)
+		{
+			var param = HttpUtility.ParseQueryString(string.Empty);
+			param.Add(new NameValueCollection()
+			{
+				["id"] = id.ToString(),
+				["password"] = password
+			});
+			_httpClient.SendJsonAsync(HttpMethod.Post, $"user/updatepaswword?{param}");
+		}
+
+		public void DeleteUser(int id)
+		{
+			var param = HttpUtility.ParseQueryString(string.Empty);
+			param.Add(new NameValueCollection()
+			{
+				["id"] = id.ToString(),
+			});
+			_httpClient.SendJsonAsync(HttpMethod.Post, $"user/delete?{param}");
+		}
+
+		public void AddOrUpdateUser(UserDTO user)
+		{
+			_httpClient.SendJsonAsync<UserDTO>(HttpMethod.Post, $"user/addorupdate", user);
 		}
 
 		#endregion
@@ -93,6 +118,8 @@ namespace CAS.UI.Helpers
 		}
 
 		#endregion
+
+		#region EFCore
 
 		public IList<int> GetSelectColumnOnly<T>(IEnumerable<Filter> filters, string selectProperty) where T: BaseEntity
 		{
@@ -156,6 +183,8 @@ namespace CAS.UI.Helpers
 			var res = _httpClient.SendJsonAsync<IEnumerable<Filter>, List<T>>(HttpMethod.Post, $"{typeof(T).Name.Replace("DTO", "").ToLower()}/getlistall?{param}", filters);
 			return res?.Data;
 		}
+
+		#endregion
 
 	}
 }

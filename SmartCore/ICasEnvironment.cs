@@ -60,8 +60,6 @@ namespace SmartCore
 
 		void Connect(String serverName, String userName, String pass, String database);
 
-		ILoginService GetSeviceUser();
-
 		string GetCorrector(int id);
 
 		void UpdateUser(string password);

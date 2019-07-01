@@ -187,7 +187,7 @@ namespace SmartCore
 
 	        //_apiProvider = new ApiProvider(serverName);
 
-	        _apiProvider.GetAPIConnection();
+	        _apiProvider.CheckAPIConnection();
 
 	        var user = _apiProvider.GetUserAsync(userName, pass);
 	        if(user == null)
@@ -201,18 +201,9 @@ namespace SmartCore
 		}
 		#endregion
 
-
-		public ILoginService GetSeviceUser()
-		{
-			var binding = new BasicHttpBinding();
-			var endPoint = new EndpointAddress($"http://{_ipServer}/LoginService/LoginService.svc");
-			var channelFactoryFoo = new ChannelFactory<ILoginService>(binding, endPoint);
-			return channelFactoryFoo.CreateChannel();
-		}
-
 		public void UpdateUser(string password)
 		{
-			GetSeviceUser().UpdatePassword(IdentityUser.ItemId, password);
+			_apiProvider.UpdatePassword(IdentityUser.ItemId, password);
 		}
 
 		#region public void CheckTablesFor(Type type)

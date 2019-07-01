@@ -102,7 +102,7 @@ namespace CAS.UI.UIControls.Users
 			if (Check())
 			{
 				ApplyChanges();
-				GlobalObjects.CasEnvironment.GetSeviceUser().AddOrUpdateUser(new UserDTO()
+				GlobalObjects.CasEnvironment.ApiProvider.AddOrUpdateUser(new UserDTO()
 				{
 					ItemId = _user.ItemId,
 					Login = _user.Login,
