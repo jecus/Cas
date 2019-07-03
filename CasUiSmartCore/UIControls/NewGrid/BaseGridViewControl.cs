@@ -273,12 +273,21 @@ namespace CAS.UI.UIControls.NewGrid
 				SortingItems();
 
 				radGridView1.RowFormatting += RadGridView1_RowFormatting;
+				radGridView1.CellFormatting += RadGridView1_CellFormatting;
 
 			}
 			catch (Exception ex)
 			{
 				Program.Provider.Logger.Log("Error while deleting data", ex);
 				return;
+			}
+		}
+
+		private void RadGridView1_CellFormatting(object sender, Telerik.WinControls.UI.CellFormattingEventArgs e)
+		{
+			if (e.CellElement.Value != null)
+			{
+				e.CellElement.ToolTipText = e.CellElement.Value.ToString();
 			}
 		}
 
@@ -366,6 +375,8 @@ namespace CAS.UI.UIControls.NewGrid
 
 					foreach (var cell in GetListViewSubItems(item))
 					{
+						cell.Text = cell.Text.Replace("\n", "");
+						
 						if (rowInfo.Cells[i].ColumnInfo is GridViewDateTimeColumn)
 							rowInfo.Cells[i].Value = cell.Tag;
 						else
