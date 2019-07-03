@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
+using CAS.UI.Management;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
@@ -612,25 +613,17 @@ namespace CAS.UI.UIControls.NewGrid
 		protected void OnDisplayerRequested()
 		{
 			if (SelectedItem == null)
-				return; 
+				return;
 
-			if (null != DisplayerRequested)
+			var form = ScreenAndFormManager.GetEditForm(SelectedItem);
+			if (form == null)
+				return;
+
+			if (form.ShowDialog(this) == DialogResult.OK)
 			{
-				var reflection = ReflectionType;
-				var k = new Keyboard();
-				if (k.ShiftKeyDown && reflection == ReflectionTypes.DisplayInCurrent)
-					reflection = ReflectionTypes.DisplayInNew;
-				var e = null != Displayer ? new ReferenceEventArgs(Entity, reflection, Displayer, DisplayerText) : new ReferenceEventArgs(Entity, reflection, DisplayerText);
-
-				try
-				{
-					FillDisplayerRequestedParams(e);
-					DisplayerRequested(this, e);
-				}
-				catch (Exception ex)
-				{
-					Program.Provider.Logger.Log("Error while opening record", ex);
-				}
+				var subs = GetListViewSubItems(SelectedItem);
+				for (int i = 0; i < subs.Count; i++)
+					radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
 			}
 		}
 

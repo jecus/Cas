@@ -265,6 +265,7 @@ namespace CAS.UI.UIControls.NewGrid
 
 			try
 			{
+				this.radGridView1.GroupDescriptors.Clear();
 				AddItems(itemsArray);
 				UpdateItemColor();
 				SetTotalText();
