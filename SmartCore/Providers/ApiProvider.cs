@@ -184,6 +184,35 @@ namespace CAS.UI.Helpers
 			return res?.Data;
 		}
 
+		public void Delete<T>(T entity) where T : BaseEntity
+		{
+			_httpClient.SendJsonAsync<T>(HttpMethod.Post, $"{ typeof(T).Name.Replace("DTO", "").ToLower()}/delete", entity);
+		}
+
+		public int Save<T>(T value, bool saveAttachedFile = true, bool writeAudit = true) where T : BaseEntity
+		{
+			var res = _httpClient.SendJsonAsync<T, int>(HttpMethod.Post, $"{typeof(T).Name.Replace("DTO", "").ToLower()}/save", value);
+			return res?.Data ?? -1;
+		}
+
+		public void BulkDelete<T>(IEnumerable<T> entity, int? batchSize = null) where T : BaseEntity
+		{
+			_httpClient.SendJsonAsync<IEnumerable<T>>(HttpMethod.Post,
+				$"{typeof(T).Name.Replace("DTO", "").ToLower()}/bulkdelete", entity);
+		}
+
+		public void BulkUpdate<T>(IEnumerable<T> entity, int? batchSize = null) where T : BaseEntity
+		{
+			_httpClient.SendJsonAsync<IEnumerable<T>>(HttpMethod.Post,
+				$"{typeof(T).Name.Replace("DTO", "").ToLower()}/bulkupdate", entity);
+		}
+
+		public void BulkInsert<T>(IEnumerable<T> entity, int? batchSize = null) where T : BaseEntity
+		{
+			_httpClient.SendJsonAsync<IEnumerable<T>>(HttpMethod.Post,
+				$"{typeof(T).Name.Replace("DTO", "").ToLower()}/bulkinsert", entity);
+		}
+
 		#endregion
 
 	}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using CAS.UI.Helpers;
 using EFCore.DTO;
 using EFCore.DTO.General;
 using SmartCore.AuditMongo.Repository;
@@ -20,6 +21,7 @@ namespace SmartCore.Entities
 		private readonly CasEnvironment _casEnvironment;
 		private readonly IAuditRepository _auditRepository;
 		private readonly FilesSmartCore _filesSmartCore;
+		private ApiProvider _apiProvider;
 
 		#endregion
 
@@ -30,6 +32,7 @@ namespace SmartCore.Entities
 			_casEnvironment = casEnvironment;
 			_auditRepository = auditRepository;
 			_filesSmartCore = new FilesSmartCore(_casEnvironment);
+			_apiProvider = casEnvironment.ApiProvider;
 		}
 
 		#endregion
@@ -45,15 +48,9 @@ namespace SmartCore.Entities
 			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var repo = _casEnvironment.UnitOfWork.GetRepository<TOut>();
-
-			if (repo == null)
-				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
-
-
 			var method = GetMethod(typeof(T), "Convert");
 			var res = InvokeConverter<T, TOut>(value, method);
-			var newId = repo.Save(res);
+			var newId = _apiProvider.Save(res);
 
 			value.ItemId = newId;
 
@@ -96,21 +93,13 @@ namespace SmartCore.Entities
 			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var repo = _casEnvironment.UnitOfWork.GetRepository<TOut>();
-
-			if (repo == null)
-				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
-
-
 			var method = GetMethod(typeof(T), "Convert");
 
 			var res = new List<TOut>();
 			foreach (var value in values)
-			{
 				res.Add(InvokeConverter<T, TOut>((T)value, method));
-			}
 
-			repo.BulkInsert(res, batchSize);
+			_apiProvider.BulkInsert(res, batchSize);
 
 		}
 		public void BulkInsert(List<BaseEntityObject> value, int? batchSize = null)
@@ -141,21 +130,13 @@ namespace SmartCore.Entities
 			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var repo = _casEnvironment.UnitOfWork.GetRepository<TOut>();
-
-			if (repo == null)
-				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
-
-
 			var method = GetMethod(typeof(T), "Convert");
 
 			var res = new List<TOut>();
 			foreach (var value in values)
-			{
 				res.Add(InvokeConverter<T, TOut>((T)value, method));
-			}
 
-			repo.BulkDelete(res, batchSize);
+			_apiProvider.BulkDelete(res, batchSize);
 
 		}
 		public void BulkDelete(List<BaseEntityObject> value,int? batchSize = null)
@@ -186,19 +167,14 @@ namespace SmartCore.Entities
 			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var repo = _casEnvironment.UnitOfWork.GetRepository<TOut>();
-
-			if (repo == null)
-				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
-
 			var method = GetMethod(typeof(T), "Convert");
 
 			if (isDeletedOnly)
 			{
 				value.IsDeleted = true;
-				repo.Save(InvokeConverter<T, TOut>(value, method));
+				_apiProvider.Save(InvokeConverter<T, TOut>(value, method));
 			}
-			else repo.Delete(InvokeConverter<T, TOut>(value, method));
+			else _apiProvider.Delete(InvokeConverter<T, TOut>(value, method));
 
 			if (value is IFileContainer && saveAttachedFile)
 				DeleteAttachedFile(value as IFileContainer);
