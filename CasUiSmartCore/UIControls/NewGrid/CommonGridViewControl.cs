@@ -284,12 +284,21 @@ namespace CAS.UI.UIControls.NewGrid
 				SetTotalText();
 
 				radGridView1.RowFormatting += RadGridView1_RowFormatting;
+				radGridView1.CellFormatting += RadGridView1_CellFormatting;
 
 			}
 			catch (Exception ex)
 			{
 				Program.Provider.Logger.Log("Error while deleting data", ex);
 				return;
+			}
+		}
+
+		private void RadGridView1_CellFormatting(object sender, CellFormattingEventArgs e)
+		{
+			if (e.CellElement.Value != null)
+			{
+				e.CellElement.ToolTipText = e.CellElement.Value.ToString();
 			}
 		}
 
@@ -393,6 +402,7 @@ namespace CAS.UI.UIControls.NewGrid
 
 					foreach (var cell in GetListViewSubItems(item))
 					{
+						cell.Text = cell.Text.Replace("\n", "");
 						rowInfo.Cells[i].Value = cell;
 
 						if(cell.ForeColor.HasValue)
