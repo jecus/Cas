@@ -195,10 +195,15 @@ namespace CAS.UI.Helpers
 			return res?.Data ?? -1;
 		}
 
-		public void BulkDelete<T>(IEnumerable<T> entity, int? batchSize = null) where T : BaseEntity
+		public void BulkDelete<T>(IEnumerable<T> entity, int? batchSize = null, bool isDeleted = true) where T : BaseEntity
 		{
-			_httpClient.SendJsonAsync<IEnumerable<T>>(HttpMethod.Post,
-				$"{typeof(T).Name.Replace("DTO", "").ToLower()}/bulkdelete", entity);
+			if (isDeleted)
+			{
+				foreach (var baseEntity in entity)
+					baseEntity.IsDeleted = true;
+				BulkUpdate(entity, batchSize);
+			}
+			else _httpClient.SendJsonAsync<IEnumerable<T>>(HttpMethod.Post, $"{typeof(T).Name.Replace("DTO", "").ToLower()}/bulkdelete", entity);
 		}
 
 		public void BulkUpdate<T>(IEnumerable<T> entity, int? batchSize = null) where T : BaseEntity

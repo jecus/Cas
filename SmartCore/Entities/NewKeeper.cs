@@ -119,7 +119,7 @@ namespace SmartCore.Entities
 		}
 		
 
-		public void BulkDelete<T, TOut>(List<BaseEntityObject> values, int? batchSize = null) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
+		public void BulkDelete<T, TOut>(List<BaseEntityObject> values, int? batchSize = null, bool isDeleted = true) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
 		{
 			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
 				return;
@@ -136,7 +136,7 @@ namespace SmartCore.Entities
 			foreach (var value in values)
 				res.Add(InvokeConverter<T, TOut>((T)value, method));
 
-			_apiProvider.BulkDelete(res, batchSize);
+			_apiProvider.BulkDelete(res, batchSize, isDeleted);
 
 		}
 		public void BulkDelete(List<BaseEntityObject> value,int? batchSize = null)

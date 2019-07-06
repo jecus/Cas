@@ -13,7 +13,7 @@ namespace SmartCore.Entities
 			where TOut : BaseEntity, new();
 		void DeleteGeneric<T, TOut>(T value, bool isDeletedOnly = false, bool saveAttachedFile = true)
 			where T : BaseEntityObject, new() where TOut : BaseEntity, new();
-		void BulkDelete<T, TOut>(List<BaseEntityObject> values, int? batchSize = null) where T : BaseEntityObject, new() where TOut : BaseEntity, new();
+		void BulkDelete<T, TOut>(List<BaseEntityObject> values, int? batchSize = null, bool isDeleted = true) where T : BaseEntityObject, new() where TOut : BaseEntity, new();
 
 		void Save(BaseEntityObject value, bool saveAttachedFile = true, bool writeAudit = true);
 
