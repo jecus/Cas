@@ -14,45 +14,45 @@ using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.DocumentationControls
 {
-    ///<summary>
-    /// список для отображения документов
-    ///</summary>
-    public partial class DocumentationListView : BaseGridViewControl<Document>
-    {
-        #region public DocumentationListView()
-        ///<summary>
-        ///</summary>
-        public DocumentationListView()
-        {
-            InitializeComponent();
-        }
-        #endregion
+	///<summary>
+	/// список для отображения документов
+	///</summary>
+	public partial class DocumentationListView : BaseGridViewControl<Document>
+	{
+		#region public DocumentationListView()
+		///<summary>
+		///</summary>
+		public DocumentationListView()
+		{
+			InitializeComponent();
+		}
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region protected override SetGroupsToItems()
-    //    protected override void SetGroupsToItems(int columnIndex)
-    //    {
-    //        itemsListView.Groups.Clear();
-    //        List<ListViewGroup> opGroups = new List<ListViewGroup>();
-    //        List<ListViewGroup> aircraftGroups = new List<ListViewGroup>();
+		#region protected override SetGroupsToItems()
+	//    protected override void SetGroupsToItems(int columnIndex)
+	//    {
+	//        itemsListView.Groups.Clear();
+	//        List<ListViewGroup> opGroups = new List<ListViewGroup>();
+	//        List<ListViewGroup> aircraftGroups = new List<ListViewGroup>();
 	   //     List<ListViewGroup> specialistGroups = new List<ListViewGroup>();
 
-    //        foreach (ListViewItem item in ListViewItemList)
-    //        {
-    //            Document doc = (Document) item.Tag;
-    //            ListViewGroup g = new ListViewGroup();
+	//        foreach (ListViewItem item in ListViewItemList)
+	//        {
+	//            Document doc = (Document) item.Tag;
+	//            ListViewGroup g = new ListViewGroup();
 				//if (doc.ParentAircraftId > 0 && doc.Parent.ItemId <= 0)
 		  //          doc.Parent = GlobalObjects.AircraftsCore.GetAircraftById(doc.ParentAircraftId);
 
-    //            string groupName = doc.Parent + " " + doc.DocType;
-    //            g.Name = groupName;
-    //            g.Header = groupName;
+	//            string groupName = doc.Parent + " " + doc.DocType;
+	//            g.Name = groupName;
+	//            g.Header = groupName;
 
-    //            if (doc.Parent is Operator)
-    //                opGroups.Add(g);
-    //            if (doc.Parent is Aircraft)
-    //                aircraftGroups.Add(g);
+	//            if (doc.Parent is Operator)
+	//                opGroups.Add(g);
+	//            if (doc.Parent is Aircraft)
+	//                aircraftGroups.Add(g);
 				//if (doc.Parent is Store)
 				//	aircraftGroups.Add(g);
 				//if (doc.Specialist != null)
@@ -62,21 +62,21 @@ namespace CAS.UI.UIControls.DocumentationControls
 		  //          g.Header = groupName;
 				//	specialistGroups.Add(g);
 				//}
-    //        }
-    //        itemsListView.Groups.AddRange(opGroups.ToArray());
-    //        itemsListView.Groups.AddRange(aircraftGroups.ToArray());
-    //        itemsListView.Groups.AddRange(specialistGroups.ToArray());
+	//        }
+	//        itemsListView.Groups.AddRange(opGroups.ToArray());
+	//        itemsListView.Groups.AddRange(aircraftGroups.ToArray());
+	//        itemsListView.Groups.AddRange(specialistGroups.ToArray());
 
-    //        foreach (ListViewItem item in ListViewItemList)
-    //        {
-    //            Document doc = (Document)item.Tag;
+	//        foreach (ListViewItem item in ListViewItemList)
+	//        {
+	//            Document doc = (Document)item.Tag;
 	   //         if (doc.Specialist != null)
 	   //         {
 				//	item.Group = itemsListView.Groups[$"{doc.Specialist.FirstName} {doc.Specialist.LastName} {doc.DocType}"];
 				//}
 				//else item.Group = itemsListView.Groups[doc.Parent + " " + doc.DocType];
-    //        }
-    //    }
+	//        }
+	//    }
 		#endregion
 
 		#region protected override ListViewItem.ListViewSubItem[] GetItemsString(Document item)
@@ -166,18 +166,18 @@ namespace CAS.UI.UIControls.DocumentationControls
 		#region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
 		protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
 		{
-            if (SelectedItem != null)
-            {
-                DocumentForm form = new DocumentForm(SelectedItem);
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-                    GlobalObjects.PerformanceCalculator.GetNextPerformance(SelectedItem);
-                    var subs = GetListViewSubItems(SelectedItem);
-                    for (int i = 0; i < subs.Count; i++)
-                        radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
-                }
-            }
-        }
+			if (SelectedItem != null)
+			{
+				DocumentForm form = new DocumentForm(SelectedItem);
+				if (form.ShowDialog() == DialogResult.OK)
+				{
+					GlobalObjects.PerformanceCalculator.GetNextPerformance(SelectedItem);
+					var subs = GetListViewSubItems(SelectedItem);
+					for (int i = 0; i < subs.Count; i++)
+						radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
+				}
+			}
+		}
 		#endregion
 
 		#region protected override void SetItemColor(GridViewRowInfo listViewItem, Document item)

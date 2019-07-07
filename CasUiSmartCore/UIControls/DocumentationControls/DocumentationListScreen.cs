@@ -170,8 +170,8 @@ namespace CAS.UI.UIControls.DocumentationControls
 			if (CurrentAircraft != null)
 			{
 				labelTitle.Text = "Date as of: " +
-				                  SmartCore.Auxiliary.Convert.GetDateFormat(DateTime.Today) + " Aircraft TSN/CSN: " +
-				                  GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(CurrentAircraft);
+								  SmartCore.Auxiliary.Convert.GetDateFormat(DateTime.Today) + " Aircraft TSN/CSN: " +
+								  GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(CurrentAircraft);
 			}
 			AnimatedThreadWorker.RunWorkerAsync();
 		}
@@ -302,7 +302,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 		private void ShowDocumentFileItemsClick(object sender, EventArgs e)
 		{
 			if (_directivesViewer.SelectedItems == null ||
-			    _directivesViewer.SelectedItems.Count == 0) return;
+				_directivesViewer.SelectedItems.Count == 0) return;
 
 			var document = _directivesViewer.SelectedItems[0];
 			try
@@ -328,7 +328,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 		private void _toolStripMenuItemSaveAsTaskCard_Click(object sender, EventArgs e)
 		{
 			if (_directivesViewer.SelectedItems == null ||
-			    _directivesViewer.SelectedItems.Count == 0) return;
+				_directivesViewer.SelectedItems.Count == 0) return;
 
 			var document = _directivesViewer.SelectedItems[0];
 
@@ -367,7 +367,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 
 		#region private void ButtonAddNonRoutineJobClick(object sender, EventArgs e)
 		private void ButtonAddNonRoutineJobClick(object sender, EventArgs e)
-        {
+		{
 			var form = new DocumentForm(new Document(), _parent);
 
 			if (form.ShowDialog() == DialogResult.OK)
@@ -379,95 +379,84 @@ namespace CAS.UI.UIControls.DocumentationControls
 				AnimatedThreadWorker.RunWorkerAsync();
 			}
 		}
-        #endregion
+		#endregion
 
-        #region private void ButtonDeleteClick(object sender, EventArgs e)
+		#region private void ButtonDeleteClick(object sender, EventArgs e)
+		
+		private void ButtonDeleteClick(object sender, EventArgs e)
+		{
+			if (_directivesViewer.SelectedItems == null) return;
 
-        private void ButtonDeleteClick(object sender, EventArgs e)
-        {
-            if (_directivesViewer.SelectedItems == null) return;
+			DialogResult confirmResult =
+				MessageBox.Show(
+					_directivesViewer.SelectedItem != null
+						? "Do you really want to delete Document " + _directivesViewer.SelectedItem.Description + "?"
+						: "Do you really want to delete selected Documents? ", "Confirm delete operation",
+					MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
 
-            DialogResult confirmResult =
-                MessageBox.Show(
-                    _directivesViewer.SelectedItem != null
-                        ? "Do you really want to delete Document " + _directivesViewer.SelectedItem.Description + "?"
-                        : "Do you really want to delete selected Documents? ", "Confirm delete operation",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+			if (confirmResult == DialogResult.Yes)
+			{
+				int count = _directivesViewer.SelectedItems.Count;
 
-            if (confirmResult == DialogResult.Yes)
-            {
-                int count = _directivesViewer.SelectedItems.Count;
-
-                List<Document> selectedItems = new List<Document>();
-                selectedItems.AddRange(_directivesViewer.SelectedItems.ToArray());
-                for (int i = 0; i < count; i++)
-                {
-                    try
-                    {
-                        GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems[i]);
-                    }
-                    catch (Exception ex)
-                    {
-                        Program.Provider.Logger.Log("Error while deleting data", ex);
-                        return;
-                    }
-                }
+				List<Document> selectedItems = new List<Document>();
+				selectedItems.AddRange(_directivesViewer.SelectedItems.ToArray());
+				GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
 
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
 				AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
 
 				AnimatedThreadWorker.RunWorkerAsync();
-            }
-            else
-            {
-                MessageBox.Show("Failed to delete Documents: Parent container is invalid", "Operation failed",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        #endregion
+			}
+			else
+			{
+				MessageBox.Show("Failed to delete Documents: Parent container is invalid", "Operation failed",
+								MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+		#endregion
 
-        #region private void HeaderControlButtonReloadClick(object sender, System.EventArgs e)
+		#region private void HeaderControlButtonReloadClick(object sender, System.EventArgs e)
 
-        private void HeaderControlButtonReloadClick(object sender, EventArgs e)
-        {
+		private void HeaderControlButtonReloadClick(object sender, EventArgs e)
+		{
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
 			AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
 			AnimatedThreadWorker.RunWorkerAsync();
-        }
-        #endregion
+		}
+		#endregion
 
-        #region private void headerControl_ButtonPrintDisplayerRequested(object sender, Interfaces.ReferenceEventArgs e)
-        private void headerControl_ButtonPrintDisplayerRequested(object sender, Interfaces.ReferenceEventArgs e)
-        {
+		#region private void headerControl_ButtonPrintDisplayerRequested(object sender, Interfaces.ReferenceEventArgs e)
+		private void headerControl_ButtonPrintDisplayerRequested(object sender, Interfaces.ReferenceEventArgs e)
+		{
 			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 
-	        if (sender == _itemPrintReportListOfDocuments)
-	        {
+			if (sender == _itemPrintReportListOfDocuments)
+			{
 				_listOfDocumentsReportBulder = new ListOfDocumentsReportBuilder(CurrentOperator, _directivesViewer.GetItemsArray());
-		        _listOfDocumentsReportBulder.FilterSelection = _filter;
+				_listOfDocumentsReportBulder.FilterSelection = _filter;
 				e.DisplayerText = aircraftHeaderControl1.Operator.Name + "." + "List of Documents";
 				e.RequestedEntity = new ReportScreen(_listOfDocumentsReportBulder);
 			}
 			else if (sender == _itemPrintReportNomenclature)
-	        {
-		        _nomenclatureReportBuilder = new NomenclatureReportBuilder(CurrentOperator, _directivesViewer.GetItemsArray());
+			{
+				_nomenclatureReportBuilder = new NomenclatureReportBuilder(CurrentOperator, _directivesViewer.GetItemsArray());
 				_nomenclatureReportBuilder.FilterSelection = _filter;
 				e.DisplayerText = aircraftHeaderControl1.Operator.Name + "." + "Nomenclature";
 				e.RequestedEntity = new ReportScreen(_nomenclatureReportBuilder);
 			}
 			else if (sender == _itemPrintReportRegisterOfDocument)
-	        {
-		        _registerOfDocumentReportBuilder = new RegisterOfDocumentReportBuilder(CurrentOperator, _directivesViewer.GetItemsArray());
+			{
+				_registerOfDocumentReportBuilder = new RegisterOfDocumentReportBuilder(CurrentOperator, _directivesViewer.GetItemsArray());
 				_registerOfDocumentReportBuilder.FilterSelection = _filter;
 				e.DisplayerText = aircraftHeaderControl1.Operator.Name + "." + "Register of Documents";
 				e.RequestedEntity = new ReportScreen(_registerOfDocumentReportBuilder);
 			}
-	        else
-	        {
+			else
+			{
 				_workScheduleReportBuilder = new WorkScheduleReportBuilder(CurrentOperator, _directivesViewer.GetItemsArray());
-		        _workScheduleReportBuilder.FilterSelection = _filter;
+				_workScheduleReportBuilder.FilterSelection = _filter;
 				e.DisplayerText = aircraftHeaderControl1.Operator.Name + "." + "Work Schedule";
 				e.RequestedEntity = new ReportScreen(_workScheduleReportBuilder);
 			}
@@ -477,24 +466,24 @@ namespace CAS.UI.UIControls.DocumentationControls
 		#region private void HeaderControlSaveButtonClick(object sender, EventArgs e)
 
 		private void HeaderControlSaveButtonClick(object sender, EventArgs e)
-	    {
-		    var unsaved = _directivesViewer.GetItemsArray().Where(i => i.ItemId <= 0).ToList();
+		{
+			var unsaved = _directivesViewer.GetItemsArray().Where(i => i.ItemId <= 0).ToList();
 
-		    try
-		    {
-			    GlobalObjects.DocumentCore.SaveDocumentsList(_parent, unsaved);
-			    MessageBox.Show("Saving was successful", "Message infomation", MessageBoxButtons.OK,
-				    MessageBoxIcon.Information);
+			try
+			{
+				GlobalObjects.DocumentCore.SaveDocumentsList(_parent, unsaved);
+				MessageBox.Show("Saving was successful", "Message infomation", MessageBoxButtons.OK,
+					MessageBoxIcon.Information);
 
-			    headerControl.ShowSaveButton = false;
-		    }
-		    catch (Exception ex)
-		    {
-			    Program.Provider.Logger.Log("Error while save document", ex);
-		    }
-	    }
+				headerControl.ShowSaveButton = false;
+			}
+			catch (Exception ex)
+			{
+				Program.Provider.Logger.Log("Error while save document", ex);
+			}
+		}
 
-	    #endregion
+		#endregion
 
 		#region private void CopyToClipboard()
 		private void CopyToClipboard()
@@ -587,43 +576,43 @@ namespace CAS.UI.UIControls.DocumentationControls
 		#region private void ButtonApplyFilterClick(object sender, EventArgs e)
 
 		private void ButtonApplyFilterClick(object sender, EventArgs e)
-	    {
-		    var form = new CommonFilterForm(_filter, _initialDocumentArray);
+		{
+			var form = new CommonFilterForm(_filter, _initialDocumentArray);
 
-		    if (form.ShowDialog(this) == DialogResult.OK)
-		    {
-			    AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
-			    AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
-			    AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoFilteringWork;
+			if (form.ShowDialog(this) == DialogResult.OK)
+			{
+				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+				AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoFilteringWork;
 
-			    AnimatedThreadWorker.RunWorkerAsync();
-		    }
-	    }
+				AnimatedThreadWorker.RunWorkerAsync();
+			}
+		}
 
 		#endregion
 
 		#region private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
 
 		private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
-	    {
-		    _resultDocumentArray.Clear();
+		{
+			_resultDocumentArray.Clear();
 
-		    #region Фильтрация директив
-		    AnimatedThreadWorker.ReportProgress(50, "filter directives");
+			#region Фильтрация директив
+			AnimatedThreadWorker.ReportProgress(50, "filter directives");
 
-		    FilterItems(_initialDocumentArray, _resultDocumentArray);
+			FilterItems(_initialDocumentArray, _resultDocumentArray);
 
-		    if (AnimatedThreadWorker.CancellationPending)
-		    {
-			    e.Cancel = true;
-			    return;
-		    }
-		    #endregion
+			if (AnimatedThreadWorker.CancellationPending)
+			{
+				e.Cancel = true;
+				return;
+			}
+			#endregion
 
-		    AnimatedThreadWorker.ReportProgress(100, "Complete");
-	    }
+			AnimatedThreadWorker.ReportProgress(100, "Complete");
+		}
 
-	    #endregion
+		#endregion
 
 		#region private void FilterItems(IEnumerable<Document> initialCollection, ICommonCollection<Document> resultCollection)
 

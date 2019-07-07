@@ -223,7 +223,7 @@ namespace CAS.UI.UIControls.MailControls
 		#endregion
 
 		#region private void ButtonDeleteClick(object sender, EventArgs e)
-
+		
 		private void ButtonDeleteClick(object sender, EventArgs e)
 		{
 			Delete();
@@ -246,29 +246,9 @@ namespace CAS.UI.UIControls.MailControls
 
 			if (confirmResult == DialogResult.Yes)
 			{
-				int count = _directivesViewer.SelectedItems.Count;
-
 				var selectedItems = new List<MailChats>();
 				selectedItems.AddRange(_directivesViewer.SelectedItems.OfType<MailChats>().ToArray());
-				for (int i = 0; i < count; i++)
-				{
-					try
-					{
-						GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems[i]);
-
-						var qr = BaseQueries.GetDeleteQuery<MailRecords>(new ICommonFilter[]
-						{
-							new CommonFilter<int>(MailRecords.MailChatIdProperty, selectedItems[i].ItemId),
-						});
-
-						GlobalObjects.CasEnvironment.Execute(qr);
-					}
-					catch (Exception ex)
-					{
-						Program.Provider.Logger.Log("Error while deleting data", ex);
-						return;
-					}
-				}
+				GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
 
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
