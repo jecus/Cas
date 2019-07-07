@@ -349,7 +349,7 @@ namespace CAS.UI.UIControls.NewGrid
 		{
 			return new CustomCell()
 			{
-				Text = text,
+				Text = text ?? "",
 				Tag = tag,
 				ForeColor = foreColor
 			};
@@ -375,7 +375,8 @@ namespace CAS.UI.UIControls.NewGrid
 
 					foreach (var cell in GetListViewSubItems(item))
 					{
-						cell.Text = cell.Text.Replace("\n", "");
+						if(cell != null)
+							cell.Text = cell.Text.Replace("\n", "");
 						
 						if (rowInfo.Cells[i].ColumnInfo is GridViewDateTimeColumn)
 							rowInfo.Cells[i].Value = cell.Tag;
