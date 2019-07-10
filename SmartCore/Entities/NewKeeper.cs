@@ -110,7 +110,7 @@ namespace SmartCore.Entities
 			foreach (var o in value)
 				o.CorrectorId = _casEnvironment.IdentityUser.ItemId;
 
-			var blType = value.GetType();
+			var blType = value.First().GetType();
 			var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
 			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "BulkInsert")?.MakeGenericMethod(blType, dto.Type);
 
@@ -146,7 +146,7 @@ namespace SmartCore.Entities
 			foreach (var o in value)
 				o.CorrectorId = _casEnvironment.IdentityUser.ItemId;
 
-			var blType = value.GetType();
+			var blType = value.First().GetType();
 			var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
 			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "BulkUpdate")?.MakeGenericMethod(blType, dto.Type);
 

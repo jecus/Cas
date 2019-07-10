@@ -1136,7 +1136,7 @@ namespace CAS.UI.UIControls.Auxiliary
 		#endregion
 
 		#region private void ButtonDeleteClick(object sender, EventArgs e)
-
+		
 		private void ButtonDeleteClick(object sender, EventArgs e)
 		{
 			if (DirectivesViewer.SelectedItems == null ||
@@ -1153,28 +1153,7 @@ namespace CAS.UI.UIControls.Auxiliary
 			if (confirmResult == DialogResult.Yes)
 			{
 				DirectivesViewer.radGridView1.BeginUpdate();
-				foreach (BaseEntityObject directive in DirectivesViewer.SelectedItems)
-				{
-					try
-					{
-						//TODO:(Evgenii Babak)  Не удалять по одному объекту, а передавать список выделенных элементов. Пересмотреть подход!!!!!
-						//TODO:(Evgenii Babak) нужен Helper
-						if (ViewedType.Name == typeof (NonRoutineJob).Name)
-						{
-							GlobalObjects.NonRoutineJobCore.Delete(directive as NonRoutineJob);
-						}
-						else
-						{
-							GlobalObjects.CasEnvironment.Manipulator.Delete(directive);
-						}
-						
-					}
-					catch (Exception ex)
-					{
-						Program.Provider.Logger.Log("Error while deleting data", ex);
-						return;
-					}
-				}
+				GlobalObjects.CasEnvironment.NewKeeper.Delete(DirectivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
 				DirectivesViewer.radGridView1.EndUpdate();
 
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;

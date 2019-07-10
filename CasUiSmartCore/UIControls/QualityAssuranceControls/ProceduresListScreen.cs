@@ -860,7 +860,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 		#endregion
 
 		#region private void ButtonDeleteClick(object sender, EventArgs e)
-
+		
 		private void ButtonDeleteClick(object sender, EventArgs e)
 		{
 			if (_directivesViewer.SelectedItems == null) return;
@@ -875,18 +875,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 			if (confirmResult == DialogResult.Yes)
 			{
 				_directivesViewer.radGridView1.BeginUpdate();
-				foreach (Procedure directive in directives)
-				{
-					try
-					{
-						GlobalObjects.CasEnvironment.Manipulator.Delete(directive);
-					}
-					catch (Exception ex)
-					{
-						Program.Provider.Logger.Log("Error while deleting data", ex);
-						return;
-					}
-				}
+				GlobalObjects.CasEnvironment.NewKeeper.Delete(directives.OfType<BaseEntityObject>().ToList(), true);
 				_directivesViewer.radGridView1.EndUpdate();
 
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;

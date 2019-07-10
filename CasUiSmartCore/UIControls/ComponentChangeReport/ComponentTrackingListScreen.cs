@@ -23,11 +23,11 @@ using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.ComponentChangeReport
 {
-    ///<summary>
-    ///</summary>
-    [ToolboxItem(false)]
-    public partial class ComponentTrackingListScreen : ScreenControl
-    {
+	///<summary>
+	///</summary>
+	[ToolboxItem(false)]
+	public partial class ComponentTrackingListScreen : ScreenControl
+	{
 		#region Fields
 
 		private CommonFilterCollection _filter = new CommonFilterCollection(typeof(ITransferRecordFilterParams));
@@ -36,10 +36,10 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 
 		private ComponentTrackingListView _directivesViewer;
 
-        private RadDropDownMenu _contextMenuStrip;
-        private RadMenuItem _toolStripMenuItemOpen;
-        private RadMenuSeparatorItem _toolStripSeparator1;
-        private RadMenuItem _toolStripMenuItemHighlight;
+		private RadDropDownMenu _contextMenuStrip;
+		private RadMenuItem _toolStripMenuItemOpen;
+		private RadMenuSeparatorItem _toolStripSeparator1;
+		private RadMenuItem _toolStripMenuItemHighlight;
 
 
 		private ContextMenuStrip _buttonPrintMenuStrip;
@@ -56,49 +56,49 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 		/// Конструктор по умолчанию
 		///</summary>
 		private ComponentTrackingListScreen()
-        {
-            InitializeComponent();
-        }
-        #endregion
+		{
+			InitializeComponent();
+		}
+		#endregion
 
-        #region public ComponentTrackingListScreen(Aircraft aircraft) : this()
-        ///<summary>
-        /// Создает элемент управления для отображения списка агрегатов
-        ///</summary>
-        ///<param name="aircraft">Самолет, соержащий полеты</param>
-        public ComponentTrackingListScreen(Aircraft aircraft) : this()
-        {
-            if (aircraft == null)
-                throw new ArgumentNullException("aircraft", "Cannot display null-aircraft");
+		#region public ComponentTrackingListScreen(Aircraft aircraft) : this()
+		///<summary>
+		/// Создает элемент управления для отображения списка агрегатов
+		///</summary>
+		///<param name="aircraft">Самолет, соержащий полеты</param>
+		public ComponentTrackingListScreen(Aircraft aircraft) : this()
+		{
+			if (aircraft == null)
+				throw new ArgumentNullException("aircraft", "Cannot display null-aircraft");
 
-            CurrentAircraft = aircraft;
-            StatusTitle = CurrentAircraft + " " + "Component change report";
+			CurrentAircraft = aircraft;
+			StatusTitle = CurrentAircraft + " " + "Component change report";
 
-	        InitToolStripPrintMenuItems();
+			InitToolStripPrintMenuItems();
 			InitToolStripMenuItems();
-            InitListView();
-            UpdateInformation();
-        }
+			InitListView();
+			UpdateInformation();
+		}
 
 		#endregion
 
 		#region public ComponentTrackingListScreen(Store store)
 
 		public ComponentTrackingListScreen(Store store) : this()
-	    {
-		    if (store == null)
-			    throw new ArgumentNullException("store", "Cannot display null-store");
+		{
+			if (store == null)
+				throw new ArgumentNullException("store", "Cannot display null-store");
 
-		    CurrentStore = store;
-		    StatusTitle = CurrentStore + " " + "Component change report";
+			CurrentStore = store;
+			StatusTitle = CurrentStore + " " + "Component change report";
 
 			InitToolStripPrintMenuItems();
 			InitToolStripMenuItems();
-		    InitListView();
-		    UpdateInformation();
-	    }
+			InitListView();
+			UpdateInformation();
+		}
 
-	    #endregion
+		#endregion
 
 		#endregion
 
@@ -106,155 +106,155 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 
 		#region public override void DisposeScreen()
 		public override void DisposeScreen()
-        {
-            if (AnimatedThreadWorker.IsBusy)
-                AnimatedThreadWorker.CancelAsync();
-            AnimatedThreadWorker.Dispose();
+		{
+			if (AnimatedThreadWorker.IsBusy)
+				AnimatedThreadWorker.CancelAsync();
+			AnimatedThreadWorker.Dispose();
 
-            _initialDirectiveArray.Clear();
-            _initialDirectiveArray = null;
+			_initialDirectiveArray.Clear();
+			_initialDirectiveArray = null;
 
-            if (_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
-            if(_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
-            if(_toolStripMenuItemHighlight != null) _toolStripMenuItemHighlight.Dispose();
-            if(_contextMenuStrip != null) _contextMenuStrip.Dispose();
+			if (_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
+			if(_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
+			if(_toolStripMenuItemHighlight != null) _toolStripMenuItemHighlight.Dispose();
+			if(_contextMenuStrip != null) _contextMenuStrip.Dispose();
 
-            if (_directivesViewer != null) _directivesViewer.Dispose();
+			if (_directivesViewer != null) _directivesViewer.Dispose();
 
-            Dispose(true);
-        }
+			Dispose(true);
+		}
 
-        #endregion
+		#endregion
 
-        #region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if(e.Cancelled)
-                return;
-            _directivesViewer.SetItemsArray(_resultDirectiveArray.ToArray());
-            headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
-            _directivesViewer.Focus();
-        }
-        #endregion
+		#region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		{
+			if(e.Cancelled)
+				return;
+			_directivesViewer.SetItemsArray(_resultDirectiveArray.ToArray());
+			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
+			_directivesViewer.Focus();
+		}
+		#endregion
 
-        #region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
-        protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
-        {
-            _initialDirectiveArray.Clear();
+		#region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
+		protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
+		{
+			_initialDirectiveArray.Clear();
 			_resultDirectiveArray.Clear();
 
 			AnimatedThreadWorker.ReportProgress(0, "load Transfer records");
 
-            if (AnimatedThreadWorker.CancellationPending)
-            {
-                e.Cancel = true;
-                return;
-            }
+			if (AnimatedThreadWorker.CancellationPending)
+			{
+				e.Cancel = true;
+				return;
+			}
 
-	        if (CurrentAircraft != null)
-	        {
+			if (CurrentAircraft != null)
+			{
 				_initialDirectiveArray.AddRange(GlobalObjects.TransferRecordCore.GetTransferRecordsFromAndTo(CurrentAircraft, null)
 								 .Where(tr => tr.StartTransferDate >= dateTimePickerDateFrom.Value && tr.TransferDate <= dateTimePickerDateTo.Value));
 			}
-	        else
-	        {
+			else
+			{
 				_initialDirectiveArray.AddRange(GlobalObjects.TransferRecordCore.GetTransferRecordsFromAndTo(null, CurrentStore)
 								  .Where(tr => tr.StartTransferDate >= dateTimePickerDateFrom.Value && tr.TransferDate <= dateTimePickerDateTo.Value));
 			}
-            
+			
 
-            if (AnimatedThreadWorker.CancellationPending)
-            {
-                e.Cancel = true;
-                return;
-            }
+			if (AnimatedThreadWorker.CancellationPending)
+			{
+				e.Cancel = true;
+				return;
+			}
 
-            AnimatedThreadWorker.ReportProgress(40, "filter Transfer records");
+			AnimatedThreadWorker.ReportProgress(40, "filter Transfer records");
 
-            AnimatedThreadWorker.ReportProgress(70, "filter Transfer records");
+			AnimatedThreadWorker.ReportProgress(70, "filter Transfer records");
 
 			AnimatedThreadWorker.ReportProgress(80, "filter documents");
 			FilterItems(_initialDirectiveArray, _resultDirectiveArray);
 
 			AnimatedThreadWorker.ReportProgress(100, "Complete");
-        }
-        #endregion
+		}
+		#endregion
 
-        #region private void InitToolStripMenuItems()
+		#region private void InitToolStripMenuItems()
 
-        private void InitToolStripMenuItems()
-        {
-            _contextMenuStrip = new RadDropDownMenu();
-            _toolStripMenuItemOpen = new RadMenuItem();
-            _toolStripSeparator1 = new RadMenuSeparatorItem();
-            _toolStripMenuItemHighlight = new RadMenuItem();
-            // 
-            // _toolStripMenuItemOpen
-            // 
-            _toolStripMenuItemOpen.Text = "Open";
-            _toolStripMenuItemOpen.Click += ToolStripMenuItemOpenClick;
-            _toolStripMenuItemOpen.Enabled = false;
-            // 
-            // toolStripMenuItemHighlight
-            // 
-            _toolStripMenuItemHighlight.Text = "Highlight";
-            // 
-            // contextMenuStrip
-            // 
-            _contextMenuStrip.Name = "_contextMenuStrip";
-            _contextMenuStrip.Size = new Size(179, 176);
-            _contextMenuStrip.Items.Clear();
-            _toolStripMenuItemHighlight.Items.Clear();
-            foreach (Highlight highlight in Highlight.HighlightList)
-            {
-                var item = new RadMenuItem(highlight.FullName);
-                item.Click += HighlightItemClick;
-                item.Tag = highlight;
-                _toolStripMenuItemHighlight.Items.Add(item);
-            }
-            // 
-            // contextMenuStrip
-            // 
-            _contextMenuStrip.Items.AddRange(_toolStripMenuItemOpen,
-                                                    _toolStripSeparator1,
-                                                    _toolStripMenuItemHighlight);
-            
-        }
-        #endregion
-
-        #region private void HighlightItemClick(object sender, EventArgs e)
-
-        private void HighlightItemClick(object sender, EventArgs e)
-        {
-            for (int i = 0; i < _directivesViewer.SelectedItems.Count; i++)
-            {
-                var highLight = (Highlight)((RadMenuItem)sender).Tag;
-
-                _directivesViewer.SelectedItems[i].Highlight = highLight;
-                foreach (GridViewCellInfo cell in _directivesViewer.radGridView1.SelectedRows[i].Cells)
-                {
-	                cell.Style.CustomizeFill = true;
-	                cell.Style.BackColor = Color.FromArgb(highLight.Color);
-                }
+		private void InitToolStripMenuItems()
+		{
+			_contextMenuStrip = new RadDropDownMenu();
+			_toolStripMenuItemOpen = new RadMenuItem();
+			_toolStripSeparator1 = new RadMenuSeparatorItem();
+			_toolStripMenuItemHighlight = new RadMenuItem();
+			// 
+			// _toolStripMenuItemOpen
+			// 
+			_toolStripMenuItemOpen.Text = "Open";
+			_toolStripMenuItemOpen.Click += ToolStripMenuItemOpenClick;
+			_toolStripMenuItemOpen.Enabled = false;
+			// 
+			// toolStripMenuItemHighlight
+			// 
+			_toolStripMenuItemHighlight.Text = "Highlight";
+			// 
+			// contextMenuStrip
+			// 
+			_contextMenuStrip.Name = "_contextMenuStrip";
+			_contextMenuStrip.Size = new Size(179, 176);
+			_contextMenuStrip.Items.Clear();
+			_toolStripMenuItemHighlight.Items.Clear();
+			foreach (Highlight highlight in Highlight.HighlightList)
+			{
+				var item = new RadMenuItem(highlight.FullName);
+				item.Click += HighlightItemClick;
+				item.Tag = highlight;
+				_toolStripMenuItemHighlight.Items.Add(item);
 			}
-        }
+			// 
+			// contextMenuStrip
+			// 
+			_contextMenuStrip.Items.AddRange(_toolStripMenuItemOpen,
+													_toolStripSeparator1,
+													_toolStripMenuItemHighlight);
+			
+		}
+		#endregion
 
-        #endregion
+		#region private void HighlightItemClick(object sender, EventArgs e)
 
-        #region private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
+		private void HighlightItemClick(object sender, EventArgs e)
+		{
+			for (int i = 0; i < _directivesViewer.SelectedItems.Count; i++)
+			{
+				var highLight = (Highlight)((RadMenuItem)sender).Tag;
 
-        private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
-        {
-            TransferRecordForm form = new TransferRecordForm(_directivesViewer.SelectedItem.ParentComponent, _directivesViewer.SelectedItem);
-            form.Show();
-        }
+				_directivesViewer.SelectedItems[i].Highlight = highLight;
+				foreach (GridViewCellInfo cell in _directivesViewer.radGridView1.SelectedRows[i].Cells)
+				{
+					cell.Style.CustomizeFill = true;
+					cell.Style.BackColor = Color.FromArgb(highLight.Color);
+				}
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region private void ButtonDeleteClick(object sender, EventArgs e)
+		#region private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
 
-        private void ButtonDeleteClick(object sender, EventArgs e)
-        {
+		private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
+		{
+			TransferRecordForm form = new TransferRecordForm(_directivesViewer.SelectedItem.ParentComponent, _directivesViewer.SelectedItem);
+			form.Show();
+		}
+
+		#endregion
+
+		#region private void ButtonDeleteClick(object sender, EventArgs e)
+		
+		private void ButtonDeleteClick(object sender, EventArgs e)
+		{
 			if (_directivesViewer.SelectedItems == null) return;
 
 			DialogResult confirmResult =
@@ -266,22 +266,9 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 
 			if (confirmResult == DialogResult.Yes)
 			{
-				int count = _directivesViewer.SelectedItems.Count;
-
 				var selectedItems = new List<TransferRecord>();
 				selectedItems.AddRange(_directivesViewer.SelectedItems.ToArray());
-				for (int i = 0; i < count; i++)
-				{
-					try
-					{
-						GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems[i]);
-					}
-					catch (Exception ex)
-					{
-						Program.Provider.Logger.Log("Error while deleting data", ex);
-						return;
-					}
-				}
+				GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
 
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
@@ -296,77 +283,77 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 			}
 		}
 
-        #endregion
+		#endregion
 
-        #region private void InitListView()
+		#region private void InitListView()
 
-        private void InitListView()
-        {
-            _directivesViewer = new ComponentTrackingListView();
-	        _directivesViewer.IsStore = CurrentStore != null;
-            _directivesViewer.TabIndex = 2;
-            _directivesViewer.CustomMenu = _contextMenuStrip;
-            _directivesViewer.Location = new Point(panel1.Left, panel1.Top);
-            _directivesViewer.Dock = DockStyle.Fill;
-            _directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
-            Controls.Add(_directivesViewer);
+		private void InitListView()
+		{
+			_directivesViewer = new ComponentTrackingListView();
+			_directivesViewer.IsStore = CurrentStore != null;
+			_directivesViewer.TabIndex = 2;
+			_directivesViewer.CustomMenu = _contextMenuStrip;
+			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
+			_directivesViewer.Dock = DockStyle.Fill;
+			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+			Controls.Add(_directivesViewer);
 
-            _directivesViewer.MenuOpeningAction = () =>
-            {
-	            if (_directivesViewer.SelectedItems.Count <= 0)
-		            return;
-	            if (_directivesViewer.SelectedItems.Count == 1)
-	            {
-		            _toolStripMenuItemOpen.Enabled = true;
-	            }
-            };
+			_directivesViewer.MenuOpeningAction = () =>
+			{
+				if (_directivesViewer.SelectedItems.Count <= 0)
+					return;
+				if (_directivesViewer.SelectedItems.Count == 1)
+				{
+					_toolStripMenuItemOpen.Enabled = true;
+				}
+			};
 
 			panel1.Controls.Add(_directivesViewer);
-        }
+		}
 
-        #endregion
+		#endregion
 
-        #region private void DirectivesViewerSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
+		#region private void DirectivesViewerSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
 
-        private void DirectivesViewerSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
-        {
-            headerControl.EditButtonEnabled = _directivesViewer.SelectedItems.Count > 0;
-        }
+		private void DirectivesViewerSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
+		{
+			headerControl.EditButtonEnabled = _directivesViewer.SelectedItems.Count > 0;
+		}
 
-        #endregion
+		#endregion
 
-        #region private void UpdateInformation()
-        /// <summary>
-        /// Происзодит обновление отображения элементов
-        /// </summary>
-        private void UpdateInformation()
-        {
-            if (CurrentAircraft != null)
-            {
-                labelTitle.Text = "Date as of: " +
-                    SmartCore.Auxiliary.Convert.GetDateFormat(DateTime.Today) + " Aircraft TSN/CSN: " +
-                    GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(CurrentAircraft);
-            }
-            else
-            {
-                labelTitle.Text = "";
-                labelTitle.Status = Statuses.NotActive;
-            }
+		#region private void UpdateInformation()
+		/// <summary>
+		/// Происзодит обновление отображения элементов
+		/// </summary>
+		private void UpdateInformation()
+		{
+			if (CurrentAircraft != null)
+			{
+				labelTitle.Text = "Date as of: " +
+					SmartCore.Auxiliary.Convert.GetDateFormat(DateTime.Today) + " Aircraft TSN/CSN: " +
+					GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(CurrentAircraft);
+			}
+			else
+			{
+				labelTitle.Text = "";
+				labelTitle.Status = Statuses.NotActive;
+			}
 
-            dateTimePickerDateFrom.Value = DateTime.Now.Month == 1 
-                ? new DateTime(DateTime.Now.Year - 1, 12, 1) 
-                : new DateTime(DateTime.Now.Year, DateTime.Now.Month - 1, 1);
-            
-            AnimatedThreadWorker.RunWorkerAsync();
-        }
-        #endregion
+			dateTimePickerDateFrom.Value = DateTime.Now.Month == 1 
+				? new DateTime(DateTime.Now.Year - 1, 12, 1) 
+				: new DateTime(DateTime.Now.Year, DateTime.Now.Month - 1, 1);
+			
+			AnimatedThreadWorker.RunWorkerAsync();
+		}
+		#endregion
 
-        #region private void HeaderControlButtonReloadClick(object sender, EventArgs e)
+		#region private void HeaderControlButtonReloadClick(object sender, EventArgs e)
 
-        private void HeaderControlButtonReloadClick(object sender, EventArgs e)
-        {
-            AnimatedThreadWorker.RunWorkerAsync();
-        }
+		private void HeaderControlButtonReloadClick(object sender, EventArgs e)
+		{
+			AnimatedThreadWorker.RunWorkerAsync();
+		}
 		#endregion
 
 		private void InitToolStripPrintMenuItems()
@@ -397,18 +384,18 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 
 		#region private void HeaderControlButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
 		private void HeaderControlButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
-        {
+		{
 			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 
-	        if (sender == _itemPrintComponentChangeReport)
-	        {
+			if (sender == _itemPrintComponentChangeReport)
+			{
 				var reportBuilder = new ComponentChangeReportBuilder(CurrentAircraft, _initialDirectiveArray.OrderByDescending(f => f.StartTransferDate).ToArray());
 				e.DisplayerText = CurrentAircraft.RegistrationNumber + " Component Change Report";
 				e.RequestedEntity = new ReportScreen(reportBuilder);
 				GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ComponentTrackingListScreen (Component Change Report)");
 			}
 			else if (sender == _itemPrintTrackingList)
-	        {
+			{
 				var reportBuilder = new TrackingListBuilder(CurrentOperator, _resultDirectiveArray.ToArray(),CurrentStore);
 				reportBuilder.FilterSelection = _filter;
 				e.DisplayerText = "Tracking List Report";
@@ -416,47 +403,47 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 				GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ComponentTrackingListScreen (Tracking List)");
 			}
 			else if (sender == _itemPrintRequest)
-	        {
-		        Specialist released = null;
-		        Specialist received = null;
+			{
+				Specialist released = null;
+				Specialist received = null;
 
 				if (_filter.Filters[9].Values.Length > 0)
 					released = _filter.Filters[9].Values[0] as Specialist;
 				if (_filter.Filters[8].Values.Length > 0)
 					received = _filter.Filters[8].Values[0] as Specialist;
 
-		        if (released != null && received != null)
-		        {
+				if (released != null && received != null)
+				{
 					var reportBuilder = new TrackingListBuilder(CurrentOperator, _resultDirectiveArray.ToArray(), CurrentStore, received, released);
 					reportBuilder.FilterSelection = _filter;
 					e.DisplayerText = "Request Report";
 					e.RequestedEntity = new ReportScreen(reportBuilder);
 					GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ComponentTrackingListScreen (Request)");
 				}
-	        }
+			}
 
-        }
-        #endregion
+		}
+		#endregion
 
-        #region private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
+		#region private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 
-        private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
-        {
-            //Aircraft a = CurrentAircraft;
+		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			//Aircraft a = CurrentAircraft;
 
-            //if (a == null) return;
-            //e.RequestedEntity = new FlightScreen(_currentATLB, a);
-            //e.DisplayerText = a.RegistrationNumber + ". New Flight";
-        }
+			//if (a == null) return;
+			//e.RequestedEntity = new FlightScreen(_currentATLB, a);
+			//e.DisplayerText = a.RegistrationNumber + ". New Flight";
+		}
 
-        #endregion
+		#endregion
 
-        #region private void ButtonOkClick(object sender, EventArgs e)
+		#region private void ButtonOkClick(object sender, EventArgs e)
 
-        private void ButtonOkClick(object sender, EventArgs e)
-        {
-            AnimatedThreadWorker.RunWorkerAsync();
-        }
+		private void ButtonOkClick(object sender, EventArgs e)
+		{
+			AnimatedThreadWorker.RunWorkerAsync();
+		}
 
 		#endregion
 
