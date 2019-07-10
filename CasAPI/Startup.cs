@@ -4,6 +4,7 @@ using EntityCore.Interfaces.ExecutorServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -46,7 +47,11 @@ namespace CasAPI
 					//options.EnableDetailedErrors();
 				});
 
-
+			services.AddResponseCompression(options =>
+			{
+				options.Providers.Add<BrotliCompressionProvider>();
+				options.Providers.Add<GzipCompressionProvider>();
+			});
 			services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("v1", new Info
@@ -62,13 +67,8 @@ namespace CasAPI
 		{
 			if (env.IsDevelopment())
 				app.UseDeveloperExceptionPage();
-			else
-			{
-				app.UseHsts();
-				app.UseHttpsRedirection();
-			}
 
-			
+			app.UseResponseCompression();
 			app.UseMvc();
 
 
