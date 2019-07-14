@@ -156,7 +156,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 										   new TimeSpan(0, 0, item.LDGTime, 0)) + ")";
 				Color flightTimeColor;
 				if (item.FlightTime.TotalMinutes == item.BlockTime.TotalMinutes)
-					flightTimeColor = Color.White;
+					flightTimeColor = Color.Black;
 				else
 				{
 					double persent = Math.Abs(1 - (item.FlightTime.TotalMinutes / item.BlockTime.TotalMinutes)) * 100;
@@ -221,14 +221,14 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 						baseComponentBlockLifeLenght = baseComponentFlightLifeLenght + (perDaysBlockForBd - perDaysFlightForBd);
 					}
 
-					Color baseComponentTimeColor = Color.White;
+					Color baseComponentTimeColor = Color.Black;
 
 					if (shouldFillSubItems && baseComponent.BaseComponentType != BaseComponentType.Apu)
 					{
 						var baseDetailFlightWorkTime = GlobalObjects.CasEnvironment.Calculator.GetFlightLifelength(item, baseComponent);
 
 						if (item.FlightTime.TotalMinutes == Convert.ToDouble(baseDetailFlightWorkTime.TotalMinutes))
-							baseComponentTimeColor = Color.White;
+							baseComponentTimeColor = Color.Black;
 						else
 						{
 							double persent = Math.Abs(1 - (Convert.ToDouble(baseDetailFlightWorkTime.TotalMinutes) / item.FlightTime.TotalMinutes)) * 100;
@@ -246,7 +246,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 						if (shouldFillSubItems)
 						{
 							subItems.Add(CreateListViewSubItem(baseComponentTimeColor, baseComponentFlightLifeLenght));
-							subItems.Add(CreateListViewSubItem(Color.White, baseComponentBlockLifeLenght));
+							subItems.Add(CreateListViewSubItem(Color.Black, baseComponentBlockLifeLenght));
 							if (baseDetailHaveOverhaulDirective)
 							{
 								if (lastOverhaul != null)
@@ -255,13 +255,13 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 										? baseComponentFlightLifeLenght - lastOverhaul.OnLifelength
 										: Lifelength.Null;
 
-									subItems.Add(CreateListViewSubItem(Color.White, sinceOverhaulFlight));
+									subItems.Add(CreateListViewSubItem(Color.Black, sinceOverhaulFlight));
 
 									var sinceOverhaulBlock = baseComponentBlockLifeLenght.IsGreater(lastOverhaul.OnLifelength)
 										? baseComponentBlockLifeLenght - lastOverhaul.OnLifelength
 										: Lifelength.Null;
 
-									subItems.Add(CreateListViewSubItem(Color.White, sinceOverhaulBlock));
+									subItems.Add(CreateListViewSubItem(Color.Black, sinceOverhaulBlock));
 								}
 								else
 								{
@@ -292,7 +292,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 								if (lastOverhaul != null)
 								{
 									var sinceOverhaulFlight = baseComponentFlightLifeLenght - lastOverhaul.OnLifelength;
-									subItems.Add(CreateListViewSubItem(Color.White, sinceOverhaulFlight));
+									subItems.Add(CreateListViewSubItem(Color.Black, sinceOverhaulFlight));
 								}
 								else subItems.Add(CreateListViewSubItem("N/A"));
 							}
