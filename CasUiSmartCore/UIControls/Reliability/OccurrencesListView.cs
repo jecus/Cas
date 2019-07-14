@@ -12,11 +12,11 @@ using SmartCore.Entities.General.Atlbs;
 
 namespace CAS.UI.UIControls.Discrepancies
 {
-    ///<summary>
-    /// список для отображения ордеров запроса
-    ///</summary>
-    public partial class OccurrencesListView : BaseGridViewControl<Discrepancy>
-    {
+	///<summary>
+	/// список для отображения ордеров запроса
+	///</summary>
+	public partial class OccurrencesListView : BaseGridViewControl<Discrepancy>
+	{
 		#region Fields
 
 		#endregion
@@ -27,83 +27,81 @@ namespace CAS.UI.UIControls.Discrepancies
 		///<summary>
 		///</summary>
 		public OccurrencesListView()
-        {
-            InitializeComponent();
+		{
+			InitializeComponent();
 
-            SortMultiplier = 1;
-            OldColumnIndex = 11;
-        }
-        #endregion
+			SortMultiplier = 1;
+			OldColumnIndex = 11;
+		}
+		#endregion
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region protected override List<PropertyInfo> GetTypeProperties()
-        protected override List<PropertyInfo> GetTypeProperties()
-        {
-            List<PropertyInfo> props = base.GetTypeProperties();
-            PropertyInfo prop = props.FirstOrDefault(p => p.Name.ToLower() == "aircraft");
-            props.Remove(prop);
+		#region protected override List<PropertyInfo> GetTypeProperties()
+		protected override List<PropertyInfo> GetTypeProperties()
+		{
+			List<PropertyInfo> props = base.GetTypeProperties();
+			PropertyInfo prop = props.FirstOrDefault(p => p.Name.ToLower() == "aircraft");
+			props.Remove(prop);
 
-            return props;
-        }
-        #endregion
+			return props;
+		}
+		#endregion
 
-        #region protected override void SetHeaders()
-        /// <summary>
-        /// Устанавливает заголовки
-        /// </summary>
-        protected override void SetHeaders()
-        {
-	        AddColumn("Reliability", 40);
-	        AddColumn("Aircraft", 120);
-	        AddColumn("Model", 140);
-	        AddColumn("ATLB №", 80);
-	        AddColumn("Block №", 80);
-	        AddColumn("Status", 80);
-	        AddColumn("Page №", 80);
-	        AddColumn("WO", 80);
-	        AddColumn("ATA", 120);
-	        AddColumn("Description", 160);
-	        AddColumn("Corr. Action", 160);
-	        AddColumn("Flight Date", 160);
-	        AddColumn("Route", 160);
-	        AddColumn("Phase", 160);
-	        AddColumn("Deffect Confirm", 190);
-	        AddColumn("Deffect CAT", 190);
-	        AddColumn("Action Type", 190);
-	        AddColumn("Fault Consequence", 190);
-	        AddColumn("OPS Consequence", 190);
-	        AddColumn("Engine Shut Up", 120);
-	        AddColumn("Deffect CAT", 190);
-	        AddColumn("Deffect CAT", 190);
-	        AddColumn("Consequence Type", 190);
-	        AddColumn("Occurrence Type", 190);
-	        AddColumn("Interruption Type", 190);
-	        AddColumn("Time Delay", 100);
-	        AddColumn("Substitution", 100);
-	        AddColumn("MEL", 120);
-	        AddColumn("Event Type", 120);
-	        AddColumn("Event Class", 120);
-	        AddColumn("Event Category", 80);
-	        AddColumn("Risk Index", 80);
-	        AddColumn("Filled By", 80);
-	        AddColumn("Station", 80);
-	        AddColumn("MRO", 80);
-	        AddColumn("SRC Record Date", 160);
-	        AddColumn("Auth. B1", 120);
-	        AddColumn("Auth. B2", 120);
-	        AddColumn("Comp. Off P/N", 160);
-	        AddColumn("Comp. Off S/N", 160);
-	        AddColumn("Comp. On P/N", 160);
-	        AddColumn("Comp. On S/N", 160);
-	        AddColumn("Messages", 120);
-	        AddColumn("Sent by", 120);
-	        AddColumn("FDR", 120);
-	        AddColumn("Remarks", 120);
+		#region protected override void SetHeaders()
+		/// <summary>
+		/// Устанавливает заголовки
+		/// </summary>
+		protected override void SetHeaders()
+		{
+			AddColumn("Reliability", 40);
+			AddColumn("Aircraft", 120);
+			AddColumn("Model", 140);
+			AddColumn("ATLB №", 80);
+			AddColumn("Block №", 80);
+			AddColumn("Status", 80);
+			AddColumn("Page №", 80);
+			AddColumn("WO", 80);
+			AddColumn("ATA", 120);
+			AddColumn("Description", 160);
+			AddColumn("Corr. Action", 160);
+			AddColumn("Flight Date", 160);
+			AddColumn("Route", 160);
+			AddColumn("Phase", 160);
+			AddColumn("Deffect Confirm", 190);
+			AddColumn("Deffect CAT", 190);
+			AddColumn("Action Type", 190);
+			AddColumn("Fault Consequence", 190);
+			AddColumn("OPS Consequence", 190);
+			AddColumn("Engine Shut Up", 120);
+			AddColumn("Consequence Type", 190);
+			AddColumn("Occurrence Type", 190);
+			AddColumn("Interruption Type", 190);
+			AddColumn("Time Delay", 100);
+			AddColumn("Substitution", 100);
+			AddColumn("MEL", 120);
+			AddColumn("Event Type", 120);
+			AddColumn("Event Class", 120);
+			AddColumn("Event Category", 80);
+			AddColumn("Risk Index", 80);
+			AddColumn("Filled By", 80);
+			AddColumn("Station", 80);
+			AddColumn("MRO", 80);
+			AddColumn("SRC Record Date", 160);
+			AddColumn("Auth. B1", 120);
+			AddColumn("Auth. B2", 120);
+			AddColumn("Comp. Off P/N", 160);
+			AddColumn("Comp. Off S/N", 160);
+			AddColumn("Comp. On P/N", 160);
+			AddColumn("Comp. On S/N", 160);
+			AddColumn("Messages", 120);
+			AddColumn("Sent by", 120);
+			AddColumn("FDR", 120);
+			AddColumn("Remarks", 120);
 			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
-        }
+		}
 		#endregion
 
 		#region protected override SetGroupsToItems(int columnIndex)
@@ -123,31 +121,31 @@ namespace CAS.UI.UIControls.Discrepancies
 		//	}
 		//}
 
-	    #endregion
+		#endregion
 
-        #region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 
-        protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
-        {
-	        if (SelectedItem == null) return;
+		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		{
+			if (SelectedItem == null) return;
 
-	        var aircraft = GlobalObjects.AircraftsCore.GetAircraftById(SelectedItem.ParentFlight.AircraftId);
+			var aircraft = GlobalObjects.AircraftsCore.GetAircraftById(SelectedItem.ParentFlight.AircraftId);
 
-	        e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-	        e.RequestedEntity = new FlightScreen(SelectedItem.ParentFlight, true);
-	        e.DisplayerText = aircraft.RegistrationNumber + ". " + SelectedItem;
+			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+			e.RequestedEntity = new FlightScreen(SelectedItem.ParentFlight, true);
+			e.DisplayerText = aircraft.RegistrationNumber + ". " + SelectedItem;
 		}
 		#endregion
 
 		#region protected override List<CustomCell> GetListViewSubItems(Discrepancy item)
 
 		protected override List<CustomCell> GetListViewSubItems(Discrepancy item)
-        {
-            var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+		{
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
-            return new List<CustomCell>
-            {
-	            CreateRow(item.IsReliability ? "R" : "N", item.IsReliability ),
+			return new List<CustomCell>
+			{
+				CreateRow(item.IsReliability ? "R" : "N", item.IsReliability ),
 				CreateRow(item.Aircraft.ToString(), item.Aircraft ),
 				CreateRow(item.Model.ShortName, item.Model ),
 				CreateRow(item.ParentFlight?.ParentATLB?.ATLBNo, item.ParentFlight?.ParentATLB?.ATLBNo ),
@@ -197,10 +195,10 @@ namespace CAS.UI.UIControls.Discrepancies
 				CreateRow(item.Remark, item.Remark ),
 				CreateRow(author, author )
 			};
-        }
+		}
 
-        #endregion
+		#endregion
 
-        #endregion
-    }
+		#endregion
+	}
 }
