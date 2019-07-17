@@ -12,24 +12,24 @@ using SmartCore.Entities.General.Personnel;
 
 namespace CAS.UI.UIControls.PersonnelControls
 {
-    ///<summary>
-    /// список для отображения сотрудников
-    ///</summary>
-    public partial class PersonnelListView : BaseGridViewControl<Specialist>
-    {
-        #region Fields
+	///<summary>
+	/// список для отображения сотрудников
+	///</summary>
+	public partial class PersonnelListView : BaseGridViewControl<Specialist>
+	{
+		#region Fields
 
-        #endregion
+		#endregion
 
-        #region Constructors
+		#region Constructors
 
-        #region public PersonnelListView()
-        ///<summary>
-        ///</summary>
-        public PersonnelListView()
-        {
-            InitializeComponent();
-	        SortMultiplier = 0;
+		#region public PersonnelListView()
+		///<summary>
+		///</summary>
+		public PersonnelListView()
+		{
+			InitializeComponent();
+			SortMultiplier = 0;
 			OldColumnIndex = 6;
 		}
 		#endregion
@@ -47,7 +47,6 @@ namespace CAS.UI.UIControls.PersonnelControls
 			AddColumn("Status", (int)(radGridView1.Width * 0.20f));
 			AddColumn("First Name", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Last Name", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Short Name", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Occupation", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Combination", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Department", (int)(radGridView1.Width * 0.3f));
@@ -61,8 +60,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			AddColumn("Address", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Family Status", (int)(radGridView1.Width * 0.24f));
 			AddColumn("PhoneMobile", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Phone", (int)(radGridView1.Width * 0.6f));
-			AddColumn("Email", (int)(radGridView1.Width * 0.14f));
+			AddColumn("Phone", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Email", (int)(radGridView1.Width * 0.14f));
 			AddColumn("Skype", (int)(radGridView1.Width * 0.14f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
@@ -72,8 +70,8 @@ namespace CAS.UI.UIControls.PersonnelControls
 		#region protected override List<CustomCell> GetListViewSubItems(Specialization item)
 
 		protected override List<CustomCell> GetListViewSubItems(Specialist item)
-	    {
-		    var ratingString = "";
+		{
+			var ratingString = "";
 			foreach (var license in item.Licenses)
 			{
 				if (license.LicenseRatings.Count == 0)
@@ -89,8 +87,8 @@ namespace CAS.UI.UIControls.PersonnelControls
 					ratingString += $"{rating.Key} ({string.Join(",", rating.Select(r => r.Rights.ShortName).ToArray())}) ";
 			}
 
-		    var department = item.Specialization?.Department ??  Department.Unknown;
-		    var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var department = item.Specialization?.Department ??  Department.Unknown;
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 			var phone = string.IsNullOrEmpty(item.Additional) ? item.Phone : $"{item.Phone} | Add.: {item.Additional}";
 
 
@@ -99,7 +97,6 @@ namespace CAS.UI.UIControls.PersonnelControls
 				CreateRow(item.Status.ToString(), item.Status),
 				CreateRow(item.FirstName, item.FirstName),
 				CreateRow(item.LastName, item.LastName),
-				CreateRow(item.ShortName, item.ShortName),
 				CreateRow(item.Specialization.ToString(), item.Specialization),
 				CreateRow(item.Combination, item.Combination),
 				CreateRow(department.ToString(), department),
@@ -127,17 +124,17 @@ namespace CAS.UI.UIControls.PersonnelControls
 		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 
 		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
-        {
-            if (SelectedItem != null)
-            {
-	            string regNumber = SelectedItem.FirstName + " " + SelectedItem.LastName;
-                e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-                e.DisplayerText = regNumber;
-                e.RequestedEntity = new EmployeeScreen(SelectedItem);
-            }
-        }
-        #endregion
+		{
+			if (SelectedItem != null)
+			{
+				string regNumber = SelectedItem.FirstName + " " + SelectedItem.LastName;
+				e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+				e.DisplayerText = regNumber;
+				e.RequestedEntity = new EmployeeScreen(SelectedItem);
+			}
+		}
+		#endregion
 
-        #endregion
-    }
+		#endregion
+	}
 }
