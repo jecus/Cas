@@ -11,7 +11,7 @@ namespace EntityCore.DTO.Dictionaries
 	[Table("AccessoryDescriptions", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-	public class AccessoryDescriptionDTO : BaseEntity
+	public class AccessoryDescriptionDTO : BaseEntity, IBaseDictionary
     {
 		
 		[Column("Description")]

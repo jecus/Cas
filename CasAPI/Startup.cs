@@ -1,4 +1,6 @@
-﻿using EntityCore.DTO;
+﻿using System.Threading.Tasks;
+using CasAPI.Infrastructure;
+using EntityCore.DTO;
 using EntityCore.Interfaces;
 using EntityCore.Interfaces.ExecutorServices;
 using Microsoft.AspNetCore.Builder;
@@ -24,6 +26,7 @@ namespace CasAPI
 
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddWorker<DictionaryWorker>();
 			services.AddMvc()
 				.AddJsonOptions(options =>
 				{
@@ -77,6 +80,18 @@ namespace CasAPI
 			{
 				c.SwaggerEndpoint("/swagger/v1/swagger.json", "Test API V1");
 			});
+
+			Initialize(app);
+		}
+
+
+		public virtual void Initialize(IApplicationBuilder app)
+		{
+			var scope = app.ApplicationServices.CreateScope();
+
+			var workers = scope.ServiceProvider.GetServices<IWorker>();
+			foreach (var worker in workers)
+				Task.Run(() => worker.Start());
 		}
 	}
 }
