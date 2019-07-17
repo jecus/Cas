@@ -47,7 +47,7 @@ namespace CasAPI.Infrastructure
 					GlobalObjects.Dictionaries.Add(res.Key, res.Value);
 
 
-				Thread.Sleep(TimeSpan.FromMinutes(5));
+				Thread.Sleep(TimeSpan.FromMinutes(30));
 			}
 		}
 

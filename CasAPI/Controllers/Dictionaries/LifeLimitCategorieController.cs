@@ -33,7 +33,7 @@ namespace CasAPI.Controllers.Dictionaries
 
 		public async override Task<ActionResult<List<LifeLimitCategorieDTO>>> GetObjectList(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false)
 		{
-			if (GlobalObjects.Dictionaries.ContainsKey(_type))
+			if (GlobalObjects.Dictionaries.ContainsKey(_type) && filters == null)
 				return GlobalObjects.Dictionaries[_type].Cast<LifeLimitCategorieDTO>().ToList();
 
 			return await base.GetObjectList(filters, loadChild, getDeleted);
