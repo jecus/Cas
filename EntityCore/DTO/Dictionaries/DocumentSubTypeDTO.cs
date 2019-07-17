@@ -8,13 +8,13 @@ namespace EntityCore.DTO.Dictionaries
 {
 	[Table("DocumentSubType", Schema = "Dictionaries")]
 	
-	public class DocumentSubTypeDTO : BaseEntity
+	public class DocumentSubTypeDTO : BaseEntity, IBaseDictionary
 	{
 		
 		[Column("DocumentTypeId")]
 		public int DocumentTypeId { get; set; }
 
-	    
+		
 		[Column("Name"), MaxLength(50)]
 		public string Name { get; set; }
 
@@ -23,6 +23,6 @@ namespace EntityCore.DTO.Dictionaries
 		[JsonIgnore]
 		public ICollection<DocumentDTO> DocumentDtos { get; set; }
 
-	    #endregion
-    }
+		#endregion
+	}
 }

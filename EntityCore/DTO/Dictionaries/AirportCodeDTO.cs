@@ -10,7 +10,7 @@ namespace EntityCore.DTO.Dictionaries
 	[Table("AirportsCodes", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-	public class AirportCodeDTO : BaseEntity
+	public class AirportCodeDTO : BaseEntity, IBaseDictionary
 	{
 		
 		[Column("Iata"), MaxLength(256)]

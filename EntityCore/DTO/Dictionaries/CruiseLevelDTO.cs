@@ -10,7 +10,7 @@ namespace EntityCore.DTO.Dictionaries
 	[Table("CruiseLevels", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-	public class CruiseLevelDTO : BaseEntity
+	public class CruiseLevelDTO : BaseEntity, IBaseDictionary
 	{
 		
 		[Column("FullName"), MaxLength(128)]

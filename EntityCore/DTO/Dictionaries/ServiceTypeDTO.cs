@@ -10,14 +10,14 @@ namespace EntityCore.DTO.Dictionaries
 	[Table("ServiceTypes", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-	public class ServiceTypeDTO : BaseEntity
-    {
+	public class ServiceTypeDTO : BaseEntity, IBaseDictionary
+	{
 
-	    
+		
 		[Column("Name"), MaxLength(50)]
 		public string Name { get; set; }
 
-	    
+		
 		[Column("FullName"), MaxLength(256)]
 		public string FullName { get; set; }
 
@@ -26,6 +26,6 @@ namespace EntityCore.DTO.Dictionaries
 		[JsonIgnore]
 		public ICollection<DocumentDTO> DocumentDtos { get; set; }
 
-	    #endregion
+		#endregion
 	}
 }

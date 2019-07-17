@@ -10,7 +10,7 @@ namespace EntityCore.DTO.Dictionaries
 	[Table("Specializations", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-	public class SpecializationDTO : BaseEntity
+	public class SpecializationDTO : BaseEntity, IBaseDictionary
 	{
 		
 		[Column("FullName"), MaxLength(128)]

@@ -10,7 +10,7 @@ namespace EntityCore.DTO.Dictionaries
 	[Table("GoodStandarts", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-	public class GoodStandartDTO : BaseEntity
+	public class GoodStandartDTO : BaseEntity, IBaseDictionary
 	{
 		
 		[Column("Name"), MaxLength(256)]

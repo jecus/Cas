@@ -10,7 +10,7 @@ namespace EntityCore.DTO.Dictionaries
 	[Table("DefferedCategories", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-	public class DefferedCategorieDTO : BaseEntity
+	public class DefferedCategorieDTO : BaseEntity, IBaseDictionary
 	{
 		
 		[Column("CategoryName"), MaxLength(50)]

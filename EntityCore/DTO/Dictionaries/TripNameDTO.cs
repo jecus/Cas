@@ -10,7 +10,7 @@ namespace EntityCore.DTO.Dictionaries
 	[Table("TripName", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-	public class TripNameDTO : BaseEntity
+	public class TripNameDTO : BaseEntity, IBaseDictionary
 	{
 		
 		[Column("TripName"), MaxLength(256)]

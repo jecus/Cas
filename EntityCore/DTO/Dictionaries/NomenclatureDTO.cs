@@ -10,7 +10,7 @@ namespace EntityCore.DTO.Dictionaries
 	[Table("Nomenclatures", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-	public class NomenclatureDTO : BaseEntity
+	public class NomenclatureDTO : BaseEntity, IBaseDictionary
 	{
 		
 		[Column("DepartmentId")]

@@ -10,14 +10,14 @@ namespace EntityCore.DTO.Dictionaries
 	[Table("AircraftOtherParameters", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-    public class AircraftOtherParameterDTO : BaseEntity
+	public class AircraftOtherParameterDTO : BaseEntity, IBaseDictionary
 	{
 		
 		[Column("Name"), MaxLength(50)]
 		public string Name { get; set; }
 
-	    
-	    [Column("FullName"), MaxLength(256)]
+		
+		[Column("FullName"), MaxLength(256)]
 		public string FullName { get; set; }
 
 
@@ -26,6 +26,6 @@ namespace EntityCore.DTO.Dictionaries
 		[JsonIgnore]
 		public ICollection<AircraftEquipmentDTO> AircraftEquipmentDtos { get; set; }
 
-	    #endregion
-    }
+		#endregion
+	}
 }

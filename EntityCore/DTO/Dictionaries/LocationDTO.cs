@@ -10,7 +10,7 @@ namespace EntityCore.DTO.Dictionaries
 	[Table("Locations", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-	public class LocationDTO : BaseEntity
+	public class LocationDTO : BaseEntity, IBaseDictionary
 	{
 		
 		[Column("Name"), MaxLength(50)]

@@ -10,7 +10,7 @@ namespace EntityCore.DTO.Dictionaries
 	[Table("Restriction", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-	public class RestrictionDTO : BaseEntity
+	public class RestrictionDTO : BaseEntity, IBaseDictionary
 	{
 		
 		[Column("Name"), MaxLength(50)]
