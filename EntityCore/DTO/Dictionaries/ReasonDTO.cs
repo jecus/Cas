@@ -8,7 +8,7 @@ namespace EntityCore.DTO.Dictionaries
 {
 	[Table("Reasons", Schema = "Dictionaries")]
 	
-	public class ReasonDTO : BaseEntity
+	public class ReasonDTO : BaseEntity, IBaseDictionary
 	{
 		
 		[Column("Name"), MaxLength(50)]

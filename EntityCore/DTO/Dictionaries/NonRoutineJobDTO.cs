@@ -7,7 +7,7 @@ namespace EntityCore.DTO.Dictionaries
 	[Table("NonRoutineJobs", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-	public class NonRoutineJobDTO : BaseEntity
+	public class NonRoutineJobDTO : BaseEntity, IBaseDictionary
 	{
 		
 		[Column("ATAChapterId")]

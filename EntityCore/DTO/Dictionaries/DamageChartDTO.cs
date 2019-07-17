@@ -9,7 +9,7 @@ namespace EntityCore.DTO.Dictionaries
 {
 	[Table("DamageCharts", Schema = "Dictionaries")]
 	
-	public class DamageChartDTO : BaseEntity, IFileDtoContainer
+	public class DamageChartDTO : BaseEntity, IFileDtoContainer, IBaseDictionary
 	{
 		
 		[Column("ChartName"), MaxLength(50)]
@@ -25,7 +25,7 @@ namespace EntityCore.DTO.Dictionaries
 
 		
 		[Child]
-	    public AccessoryDescriptionDTO AccessoryDescription { get; set; }
+		public AccessoryDescriptionDTO AccessoryDescription { get; set; }
 
-    }
+	}
 }

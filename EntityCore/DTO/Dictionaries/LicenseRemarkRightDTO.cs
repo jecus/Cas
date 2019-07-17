@@ -10,7 +10,7 @@ namespace EntityCore.DTO.Dictionaries
 	[Table("LicenseRemarkRights", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-	public class LicenseRemarkRightDTO : BaseEntity
+	public class LicenseRemarkRightDTO : BaseEntity, IBaseDictionary
 	{
 		
 		[Column("Name"), MaxLength(50)]

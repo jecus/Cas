@@ -10,14 +10,14 @@ namespace EntityCore.DTO.Dictionaries
 	[Table("EventCategories", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-    public class EventCategorieDTO : BaseEntity
+	public class EventCategorieDTO : BaseEntity, IBaseDictionary
 	{
 		
 		[Column("Weight")]
 		public int? Weight { get; set; }
 
-	    
-	    [Column("MinCompareOp")]
+		
+		[Column("MinCompareOp")]
 		public int? MinCompareOp { get; set; }
 
 		
@@ -48,7 +48,7 @@ namespace EntityCore.DTO.Dictionaries
 		[JsonIgnore]
 		public ICollection<EventTypeRiskLevelChangeRecordDTO> ChangeRecordDtos { get; set; }
 
-	    #endregion
+		#endregion
 
 	}
 }

@@ -10,7 +10,7 @@ namespace EntityCore.DTO.Dictionaries
 	[Table("EventClasses", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-	public class EventClassDTO : BaseEntity
+	public class EventClassDTO : BaseEntity, IBaseDictionary
 	{
 		
 		[Column("FullName"), MaxLength(128)]

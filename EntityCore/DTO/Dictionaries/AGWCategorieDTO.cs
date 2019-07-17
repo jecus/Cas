@@ -10,7 +10,7 @@ namespace EntityCore.DTO.Dictionaries
 	[Table("AGWCategories", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-	public class AGWCategorieDTO : BaseEntity
+	public class AGWCategorieDTO : BaseEntity, IBaseDictionary
 	{
 		
 		[Column("FullName"), MaxLength(128)]

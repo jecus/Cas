@@ -7,7 +7,7 @@ namespace EntityCore.DTO.Dictionaries
 	[Table("Airports", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-	public class AirportDTO : BaseEntity
+	public class AirportDTO : BaseEntity, IBaseDictionary
 	{
 		
 		[Column("ShortName"), MaxLength(256)]

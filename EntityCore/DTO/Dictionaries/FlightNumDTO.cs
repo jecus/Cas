@@ -10,7 +10,7 @@ namespace EntityCore.DTO.Dictionaries
 	[Table("FlightNum", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-	public class FlightNumDTO : BaseEntity
+	public class FlightNumDTO : BaseEntity, IBaseDictionary
 	{
 		
 		[Column("FlightNumber"), MaxLength(256)]

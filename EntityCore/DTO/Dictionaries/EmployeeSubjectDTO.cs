@@ -9,7 +9,7 @@ namespace EntityCore.DTO.Dictionaries
 	[Table("EmployeeSubjects", Schema = "Dictionaries")]
 	
 	[Condition("IsDeleted", 0)]
-	public class EmployeeSubjectDTO : BaseEntity
+	public class EmployeeSubjectDTO : BaseEntity, IBaseDictionary
 	{
 		
 		[Column("Name"), MaxLength(50)]

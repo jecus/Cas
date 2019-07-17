@@ -8,14 +8,14 @@ namespace EntityCore.DTO.Dictionaries
 {
 	[Table("ATAChapter", Schema = "Dictionaries")]
 	
-	public class ATAChapterDTO : BaseEntity
+	public class ATAChapterDTO : BaseEntity, IBaseDictionary
 	{
 		
 		[Column("ShortName"), MaxLength(100)]
 		public string ShortName { get; set; }
 
-	    
-	    [Column("FullName"), MaxLength(100)]
+		
+		[Column("FullName"), MaxLength(100)]
 		public string FullName { get; set; }
 
 		#region Navigation Property
@@ -35,6 +35,6 @@ namespace EntityCore.DTO.Dictionaries
 		[JsonIgnore]
 		public ICollection<JobCardDTO> JobCardDtos { get; set; }
 
-	    #endregion
-    }
+		#endregion
+	}
 }
