@@ -1662,7 +1662,9 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
 		private void ButtonAPUCalc_Click(object sender, EventArgs e)
 		{
-			throw new NotImplementedException();
+			var form = new MaintenanceDirectiveAPUCalculationForm(_initialDirectiveArray.ToList());
+			if(form.ShowDialog() == DialogResult.OK)
+				AnimatedThreadWorker.RunWorkerAsync();
 		}
 	}
 }
