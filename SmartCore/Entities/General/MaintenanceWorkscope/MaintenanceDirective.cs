@@ -19,70 +19,70 @@ using SmartCore.Relation;
 namespace SmartCore.Entities.General.MaintenanceWorkscope
 {
 
-    /// <summary>
-    /// Класс описывает директиву
-    /// </summary>
-    [Table("MaintenanceDirectives", "dbo", "ItemId")]
-    [Dto(typeof(MaintenanceDirectiveDTO))]
+	/// <summary>
+	/// Класс описывает директиву
+	/// </summary>
+	[Table("MaintenanceDirectives", "dbo", "ItemId")]
+	[Dto(typeof(MaintenanceDirectiveDTO))]
 	[Condition("IsDeleted", "0")]
-    [Serializable]
-    public class MaintenanceDirective : BaseEntityObject, IEngineeringDirective, IKitRequired,
-        IComparable<MaintenanceDirective>, IEquatable<MaintenanceDirective>, IFileContainer, IBindedItem, IWorkPackageItemFilterParams, IMaintenanceDirectiveFilterParams
+	[Serializable]
+	public class MaintenanceDirective : BaseEntityObject, IEngineeringDirective, IKitRequired,
+		IComparable<MaintenanceDirective>, IEquatable<MaintenanceDirective>, IFileContainer, IBindedItem, IWorkPackageItemFilterParams, IMaintenanceDirectiveFilterParams
 	{
-        private static Type _thisType;
-        /*
-        *  Свойства
-        */
+		private static Type _thisType;
+		/*
+		*  Свойства
+		*/
 
-        #region public String TaskNumberCheck { get; set; }
+		#region public String TaskNumberCheck { get; set; }
 
-        /// <summary>
-        /// Номер чека задачи
-        /// </summary>
-        [TableColumnAttribute("TaskNumberCheck"), ListViewData("MPD Item")]
-        [Filter("MPD Item:", Order = 1)]
-        public String TaskNumberCheck { get; set; }
+		/// <summary>
+		/// Номер чека задачи
+		/// </summary>
+		[TableColumnAttribute("TaskNumberCheck"), ListViewData("MPD Item")]
+		[Filter("MPD Item:", Order = 1)]
+		public String TaskNumberCheck { get; set; }
 
-        #endregion
+		#endregion
 
-        #region public MaintenanceDirectiveTaskType WorkType { get; set; }
+		#region public MaintenanceDirectiveTaskType WorkType { get; set; }
 
-        /// <summary>
-        /// Тип директивы
-        /// </summary>
-        [TableColumnAttribute("DirectiveTypeId"), ListViewData("Directive Type")]
-        [Filter("Work Type:", Order = 15)]
-        public MaintenanceDirectiveTaskType WorkType { get; set; }
+		/// <summary>
+		/// Тип директивы
+		/// </summary>
+		[TableColumnAttribute("DirectiveTypeId"), ListViewData("Directive Type")]
+		[Filter("Work Type:", Order = 16)]
+		public MaintenanceDirectiveTaskType WorkType { get; set; }
 
-        #endregion
+		#endregion
 
-        #region public String MPDTaskNumber { get; set; }
+		#region public String MPDTaskNumber { get; set; }
 
-        /// <summary>
-        /// Номер задачи MPD
-        /// </summary>
-        [TableColumnAttribute("MPDTaskNumber"), ListViewData("MPD Number")]
-        public String MPDTaskNumber { get; set; }
+		/// <summary>
+		/// Номер задачи MPD
+		/// </summary>
+		[TableColumnAttribute("MPDTaskNumber"), ListViewData("MPD Number")]
+		public String MPDTaskNumber { get; set; }
 
-        #endregion
+		#endregion
 
-        #region public String MPDNumber { get; set; }
+		#region public String MPDNumber { get; set; }
 
-        /// <summary>
-        /// Номер MPD
-        /// </summary>
-        [TableColumnAttribute("MPDNumber"), ListViewData("MPD №")]
-        public String MPDNumber { get; set; }
+		/// <summary>
+		/// Номер MPD
+		/// </summary>
+		[TableColumnAttribute("MPDNumber"), ListViewData("MPD №")]
+		public String MPDNumber { get; set; }
 
-        #endregion
+		#endregion
 
-        #region public String MaintenanceManual { get; set; }
+		#region public String MaintenanceManual { get; set; }
 
-        /// <summary>
-        /// Руководство к обслуживанию
-        /// </summary>
-        [TableColumnAttribute("MaintenanceManual", 512), ListViewData("Maint. Manual")]
-        public String MaintenanceManual { get; set; }
+		/// <summary>
+		/// Руководство к обслуживанию
+		/// </summary>
+		[TableColumnAttribute("MaintenanceManual", 512), ListViewData("Maint. Manual")]
+		public String MaintenanceManual { get; set; }
 
 		#endregion
 
@@ -113,29 +113,29 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		/// Зона
 		/// </summary>
 		[TableColumnAttribute("Zone"), ListViewData("Zone")]
-        [Filter("Zone:", Order = 4)]
-        public String Zone { get; set; }
+		[Filter("Zone:", Order = 4)]
+		public String Zone { get; set; }
 
-        #endregion
+		#endregion
 
-        #region public String Access { get; set; }
+		#region public String Access { get; set; }
 
-        /// <summary>
-        /// Доступ
-        /// </summary>
-        [TableColumnAttribute("Access"), ListViewData("Access")]
-        [Filter("Access:", Order = 5)]
-        public String Access { get; set; }
+		/// <summary>
+		/// Доступ
+		/// </summary>
+		[TableColumnAttribute("Access"), ListViewData("Access")]
+		[Filter("Access:", Order = 5)]
+		public String Access { get; set; }
 
-        #endregion
+		#endregion
 
-        #region public String Applicability { get; set; }
+		#region public String Applicability { get; set; }
 
-        /// <summary>
-        /// Применимость
-        /// </summary>
-        [TableColumnAttribute("Applicability"), ListViewData("Applicability")]
-        public String Applicability { get; set; }
+		/// <summary>
+		/// Применимость
+		/// </summary>
+		[TableColumnAttribute("Applicability"), ListViewData("Applicability")]
+		public String Applicability { get; set; }
 
 		#endregion
 
@@ -161,30 +161,30 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		/// ATA глава, к которой директива относится
 		/// </summary>
 		[TableColumnAttribute("ATAChapter"), ListViewData("ATA №")]
-        [Filter("ATA Chapter:", Order = 13)]
-        public AtaChapter ATAChapter { get; set; }
+		[Filter("ATA Chapter:", Order = 14)]
+		public AtaChapter ATAChapter { get; set; }
 
 		#endregion
 
 		#region public BaseComponent ParentBaseComponent { get; set; }
 
 		[NonSerialized]
-        private BaseComponent _parentBaseComponent;
+		private BaseComponent _parentBaseComponent;
 
-        /// <summary>
-        /// Обратная ссылка на базовый агрегат
-        /// </summary>
-        [TableColumnAttribute("ComponentId")]
-        public BaseComponent ParentBaseComponent
-        {
-            get { return _parentBaseComponent; }
-            set { _parentBaseComponent = value; }
-        }
+		/// <summary>
+		/// Обратная ссылка на базовый агрегат
+		/// </summary>
+		[TableColumnAttribute("ComponentId")]
+		public BaseComponent ParentBaseComponent
+		{
+			get { return _parentBaseComponent; }
+			set { _parentBaseComponent = value; }
+		}
 
-        public static PropertyInfo ParentBaseComponentProperty
-        {
-            get { return GetCurrentType().GetProperty("ParentBaseComponent"); }
-        }
+		public static PropertyInfo ParentBaseComponentProperty
+		{
+			get { return GetCurrentType().GetProperty("ParentBaseComponent"); }
+		}
 
 		#endregion
 
@@ -195,21 +195,21 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		/// <br/>(Обычно является одним из агрегатов родительского базового агрегата) 
 		/// </summary>
 		[TableColumnAttribute("ForComponentId")]
-        public int ForComponentId { get; set; }
+		public int ForComponentId { get; set; }
 
-        public static PropertyInfo ForComponentIdProperty
-        {
-            get { return GetCurrentType().GetProperty("ForComponentId"); }
-        }
+		public static PropertyInfo ForComponentIdProperty
+		{
+			get { return GetCurrentType().GetProperty("ForComponentId"); }
+		}
 
-        #endregion
+		#endregion
 
-        #region public String Description { get; set; }
+		#region public String Description { get; set; }
 
-        /// <summary>
-        /// Описание директивы
-        /// </summary>
-        [TableColumnAttribute("Description", 3072), ListViewData("Description")]
+		/// <summary>
+		/// Описание директивы
+		/// </summary>
+		[TableColumnAttribute("Description", 3072), ListViewData("Description")]
 		[Filter("Description:", Order = 9)]
 		public String Description { get; set; }
 
@@ -225,28 +225,29 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public bool APUCalc { get; set; }
 
 		[TableColumn("APUCalc")]
-	    public bool APUCalc { get; set; }
+		[Filter("APUCalc:", Order = 13)]
+		public bool APUCalc { get; set; }
 
 		#endregion
 
-        #region public String EngineeringOrders { get; set; }
+		#region public String EngineeringOrders { get; set; }
 
-        /// <summary>
-        /// Параметр Engineering orders
-        /// </summary>
-        [TableColumnAttribute("EngineeringOrders"), ListViewData("Engineering Orders")]
-        public String EngineeringOrders { get; set; }
+		/// <summary>
+		/// Параметр Engineering orders
+		/// </summary>
+		[TableColumnAttribute("EngineeringOrders"), ListViewData("Engineering Orders")]
+		public String EngineeringOrders { get; set; }
 
-        #endregion
+		#endregion
 
-        #region  public AttachedFile EngineeringOrderFile { get; set; }
-        [NonSerialized]
-        private AttachedFile _engineeringOrderFile;
-        /// <summary>
-        /// Связь с файлом описания инженерного ордера
-        /// </summary>
-        public AttachedFile EngineeringOrderFile
-        {
+		#region  public AttachedFile EngineeringOrderFile { get; set; }
+		[NonSerialized]
+		private AttachedFile _engineeringOrderFile;
+		/// <summary>
+		/// Связь с файлом описания инженерного ордера
+		/// </summary>
+		public AttachedFile EngineeringOrderFile
+		{
 			get
 			{
 				return _engineeringOrderFile ?? (Files.GetFileByFileLinkType(FileLinkType.EOFile));
@@ -258,15 +259,15 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 			}
 		}
 
-        #endregion
+		#endregion
 
-        #region public String ServiceBulletinNo { get; set; }
+		#region public String ServiceBulletinNo { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        [TableColumnAttribute("ServiceBulletinNo"), ListViewData("SB №")]
-        public String ServiceBulletinNo { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		[TableColumnAttribute("ServiceBulletinNo"), ListViewData("SB №")]
+		public String ServiceBulletinNo { get; set; }
 
 		#endregion
 
@@ -293,12 +294,12 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 
 		#region  public AttachedFile TaskNumberCheckFile { get; set; }
 		[NonSerialized]
-        private AttachedFile _taskNumberCheckFile;
-        /// <summary>
-        /// Связь с файлом описания директивы летной годности
-        /// </summary>
-        public AttachedFile TaskNumberCheckFile
-        {
+		private AttachedFile _taskNumberCheckFile;
+		/// <summary>
+		/// Связь с файлом описания директивы летной годности
+		/// </summary>
+		public AttachedFile TaskNumberCheckFile
+		{
 			get
 			{
 				return _taskNumberCheckFile ?? (Files.GetFileByFileLinkType(FileLinkType.MaintenanceTaskNumberCheckFile));
@@ -310,26 +311,26 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 			}
 		}
 
-        #endregion
+		#endregion
 
-        #region public String MRB { get; set; }
+		#region public String MRB { get; set; }
 
-        /// <summary>
-        /// Maintenance Review Board
-        /// </summary>
-        [TableColumnAttribute("MRB"), ListViewData("MRB")]
-        public String MRB { get; set; }
+		/// <summary>
+		/// Maintenance Review Board
+		/// </summary>
+		[TableColumnAttribute("MRB"), ListViewData("MRB")]
+		public String MRB { get; set; }
 
-        #endregion
+		#endregion
 
-        #region public AttachedFile MRBFile { get; set; }
-        [NonSerialized]
-        private AttachedFile _mrbFile;
-        /// <summary>
-        /// Связь с файлом описания директивы летной годности
-        /// </summary>
-        public AttachedFile MRBFile
-        {
+		#region public AttachedFile MRBFile { get; set; }
+		[NonSerialized]
+		private AttachedFile _mrbFile;
+		/// <summary>
+		/// Связь с файлом описания директивы летной годности
+		/// </summary>
+		public AttachedFile MRBFile
+		{
 			get
 			{
 				return _mrbFile ?? (Files.GetFileByFileLinkType(FileLinkType.MaintenanceMRBFile));
@@ -341,27 +342,27 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 			}
 		}
 
-        #endregion
+		#endregion
 
-        #region public String TaskCardNumber { get; set; }
+		#region public String TaskCardNumber { get; set; }
 
-        /// <summary>
-        /// Номер карты задачи
-        /// </summary>
-        [TableColumnAttribute("TaskCardNumber"), ListViewData("Task Card №")]
-        [Filter("Task Card №:", Order = 3)]
-        public String TaskCardNumber { get; set; }
+		/// <summary>
+		/// Номер карты задачи
+		/// </summary>
+		[TableColumnAttribute("TaskCardNumber"), ListViewData("Task Card №")]
+		[Filter("Task Card №:", Order = 3)]
+		public String TaskCardNumber { get; set; }
 
-        #endregion
+		#endregion
 
-        #region public AttachedFile TaskCardNumberFile { get; set; }
-        [NonSerialized]
-        private AttachedFile _taskCardNumberFile;
-        /// <summary>
-        /// Файл карты задачи
-        /// </summary>
-        public AttachedFile TaskCardNumberFile
-        {
+		#region public AttachedFile TaskCardNumberFile { get; set; }
+		[NonSerialized]
+		private AttachedFile _taskCardNumberFile;
+		/// <summary>
+		/// Файл карты задачи
+		/// </summary>
+		public AttachedFile TaskCardNumberFile
+		{
 			get
 			{
 				return _taskCardNumberFile ?? (Files.GetFileByFileLinkType(FileLinkType.MaintenanceTaskCardNumberFile));
@@ -381,7 +382,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		/// Программа (CPCP, Structure, System), к которой директива относится
 		/// </summary>
 		[TableColumnAttribute("Program"), ListViewData("Program")]
-		[Filter("Program:", Order = 14)]
+		[Filter("Program:", Order = 15)]
 		public MaintenanceDirectiveProgramType Program
 		{
 			get { return _program ?? MaintenanceDirectiveProgramType.Unknown; }
@@ -389,9 +390,9 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		}
 
 		public static PropertyInfo ProgramProperty
-        {
-            get { return GetCurrentType().GetProperty("Program"); }
-        }
+		{
+			get { return GetCurrentType().GetProperty("Program"); }
+		}
 
 		#endregion
 
@@ -426,52 +427,52 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public MaintenanceCheck MaintenanceCheck { get; set; }
 		[NonSerialized]
 		private MaintenanceCheck _maintenanceCheck;
-	    /// <summary>
-	    /// Чек программы обслуживания, к которому может относится директива
-	    /// </summary>
-	    [TableColumnAttribute("MaintenanceCheck"), ListViewData("Maintenance Check")]
-	    [Child(false)]
-	    [Filter("Check:")]
-	    public MaintenanceCheck MaintenanceCheck
-	    {
-		    get { return _maintenanceCheck; }
+		/// <summary>
+		/// Чек программы обслуживания, к которому может относится директива
+		/// </summary>
+		[TableColumnAttribute("MaintenanceCheck"), ListViewData("Maintenance Check")]
+		[Child(false)]
+		[Filter("Check:")]
+		public MaintenanceCheck MaintenanceCheck
+		{
+			get { return _maintenanceCheck; }
 			set { _maintenanceCheck = value; }
-	    }
+		}
 
-        public static PropertyInfo MaintenanceCheckProperty
-        {
-            get { return GetCurrentType().GetProperty("MaintenanceCheck"); }
-        }
+		public static PropertyInfo MaintenanceCheckProperty
+		{
+			get { return GetCurrentType().GetProperty("MaintenanceCheck"); }
+		}
 
-        #endregion
+		#endregion
 
-        #region public JobCard JobCard { get; set; }
+		#region public JobCard JobCard { get; set; }
 
-        private JobCard _jobCard;
+		private JobCard _jobCard;
 
-        /// <summary>
-        /// Рабочая карта данной директивы
-        /// </summary>
-        [TableColumnAttribute("JobCard"), ListViewData("Job Card")]
-        [Child(false)]
-        //[Filter("Check:", Order = 13)]
-        public JobCard JobCard
-        {
-            get { return _jobCard; }
-            set
-            {
-                _jobCard = value;
-                if (_jobCard != null)
-                {
-                    _jobCard.Parent = this;
-                }
-            }
-        }
+		/// <summary>
+		/// Рабочая карта данной директивы
+		/// </summary>
+		[TableColumnAttribute("JobCard"), ListViewData("Job Card")]
+		[Child(false)]
+		//[Filter("Check:", Order = 13)]
+		public JobCard JobCard
+		{
+			get { return _jobCard; }
+			set
+			{
+				_jobCard = value;
+				if (_jobCard != null)
+				{
+					_jobCard.Parent = this;
+				}
+			}
+		}
 
-        public static PropertyInfo JobCardProperty
-        {
-            get { return GetCurrentType().GetProperty("JobCard"); }
-        }
+		public static PropertyInfo JobCardProperty
+		{
+			get { return GetCurrentType().GetProperty("JobCard"); }
+		}
 
 		#endregion
 
@@ -529,7 +530,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public int Category { get; set; }
 
 		[TableColumn("Category")]
-		[Filter("Category:", Order = 19)]
+		[Filter("Category:", Order = 20)]
 		public MpdCategory Category
 		{
 			get { return _category ?? MpdCategory.UNK; }
@@ -599,8 +600,8 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#endregion
 
 		/*
-         * Дополнительные свойства
-         */
+		 * Дополнительные свойства
+		 */
 		#region public Highlight Highlight { get; set; }
 
 		/// <summary>
@@ -624,7 +625,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public Skill Skill { get; set; }
 
 		[TableColumn("Skill")]
-		[Filter("Skill:", Order = 17)]
+		[Filter("Skill:", Order = 18)]
 		public Skill Skill
 		{
 			get { return _skill ?? Skill.UNK; }
@@ -637,100 +638,100 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 
 		private MaintenanceDirectiveThreshold _threshold;
 
-        /// <summary>
-        /// Условие выполнения директивы
-        /// </summary>
-        [TableColumnAttribute("Threshold"), ListViewData("Threshold")]
-        public MaintenanceDirectiveThreshold Threshold
-        {
-            get { return _threshold; }
-            set { _threshold = value; }
-        }
+		/// <summary>
+		/// Условие выполнения директивы
+		/// </summary>
+		[TableColumnAttribute("Threshold"), ListViewData("Threshold")]
+		public MaintenanceDirectiveThreshold Threshold
+		{
+			get { return _threshold; }
+			set { _threshold = value; }
+		}
 
-        #endregion
+		#endregion
 
-        #region public Lifelength FirstPerformanceSinceNew { get; }
+		#region public Lifelength FirstPerformanceSinceNew { get; }
 
-        /// <summary>
-        /// Условие первого выполнения с момента производства детали/ВС
-        /// </summary>
-        [Filter("1st. Perf:")]
-        public Lifelength FirstPerformanceSinceNew
-        {
-            get { return _threshold != null ? _threshold.FirstPerformanceSinceNew : Lifelength.Null; }
-        }
+		/// <summary>
+		/// Условие первого выполнения с момента производства детали/ВС
+		/// </summary>
+		[Filter("1st. Perf:")]
+		public Lifelength FirstPerformanceSinceNew
+		{
+			get { return _threshold != null ? _threshold.FirstPerformanceSinceNew : Lifelength.Null; }
+		}
 
-        #endregion
+		#endregion
 
-        #region public Lifelength RepeatInterval{ get; }
+		#region public Lifelength RepeatInterval{ get; }
 
-        /// <summary>
-        /// Интервал выполнения директивы
-        /// </summary>
-        [Filter("Rpt. Int:")]
-        public Lifelength RepeatInterval
-        {
-            get { return _threshold != null ? _threshold.RepeatInterval : Lifelength.Null; }
-        }
+		/// <summary>
+		/// Интервал выполнения директивы
+		/// </summary>
+		[Filter("Rpt. Int:")]
+		public Lifelength RepeatInterval
+		{
+			get { return _threshold != null ? _threshold.RepeatInterval : Lifelength.Null; }
+		}
 
-        #endregion
+		#endregion
 
-        #region public String Remarks { get; set; }
+		#region public String Remarks { get; set; }
 
-        /// <summary>
-        /// Заметки по директиве
-        /// </summary>
-        [TableColumnAttribute("Remarks", 512), ListViewData("Remarks")]
-        [Filter("Remarks:", Order = 6)]
-        public String Remarks { get; set; }
+		/// <summary>
+		/// Заметки по директиве
+		/// </summary>
+		[TableColumnAttribute("Remarks", 512), ListViewData("Remarks")]
+		[Filter("Remarks:", Order = 6)]
+		public String Remarks { get; set; }
 
-        #endregion
+		#endregion
 
-        #region public String HiddenRemarks { get; set; }
+		#region public String HiddenRemarks { get; set; }
 
-        /// <summary>
-        /// Скрытые заметки
-        /// </summary>
-        [TableColumnAttribute("HiddenRemarks", 512), ListViewData("HiddenRemarks")]
-        [Filter("Hidden Remarks:", Order = 7)]
-        public String HiddenRemarks { get; set; }
+		/// <summary>
+		/// Скрытые заметки
+		/// </summary>
+		[TableColumnAttribute("HiddenRemarks", 512), ListViewData("HiddenRemarks")]
+		[Filter("Hidden Remarks:", Order = 7)]
+		public String HiddenRemarks { get; set; }
 
-        #endregion
+		#endregion
 
-        #region public DirectiveRecord LastPerformance { get; }
+		#region public DirectiveRecord LastPerformance { get; }
 
-        /// <summary>
-        /// Последнее выполнение 
-        /// </summary>
-        public DirectiveRecord LastPerformance
-        {
-            get { return PerformanceRecords.GetLast(); }
-        }
+		/// <summary>
+		/// Последнее выполнение 
+		/// </summary>
+		public DirectiveRecord LastPerformance
+		{
+			get { return PerformanceRecords.GetLast(); }
+		}
 
-        #endregion
+		#endregion
 
-        #region public BaseRecordCollection<DirectiveRecord> PerformanceRecords
+		#region public BaseRecordCollection<DirectiveRecord> PerformanceRecords
 
-        private BaseRecordCollection<DirectiveRecord> _performanceRecords;
+		private BaseRecordCollection<DirectiveRecord> _performanceRecords;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        [Child(RelationType.OneToMany, "ParentId", "ParentTypeId", 14, "Parent")]
-        public BaseRecordCollection<DirectiveRecord> PerformanceRecords
-        {
-            get { return _performanceRecords ?? (_performanceRecords = new BaseRecordCollection<DirectiveRecord>()); }
-            internal set
-            {
-                if (_performanceRecords != value)
-                {
-                    if (_performanceRecords != null)
-                        _performanceRecords.Clear();
-                    if (value != null)
-                        _performanceRecords = value;
-                }
-            }
-        }
+		/// <summary>
+		/// 
+		/// </summary>
+		[Child(RelationType.OneToMany, "ParentId", "ParentTypeId", 14, "Parent")]
+		public BaseRecordCollection<DirectiveRecord> PerformanceRecords
+		{
+			get { return _performanceRecords ?? (_performanceRecords = new BaseRecordCollection<DirectiveRecord>()); }
+			internal set
+			{
+				if (_performanceRecords != value)
+				{
+					if (_performanceRecords != null)
+						_performanceRecords.Clear();
+					if (value != null)
+						_performanceRecords = value;
+				}
+			}
+		}
 
 		#endregion
 
@@ -739,93 +740,93 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		/// <summary>
 		/// Статус директивы
 		/// </summary>
-		[Filter("Status:", Order = 16)]
-        public DirectiveStatus Status
-        {
-            get
-            {
-                if (IsClosed) return DirectiveStatus.Closed; //директива принудительно закрыта пользователем
-                if (LastPerformance == null)
-                {
-                    if (!_threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero() ||
-                        !_threshold.FirstPerformanceSinceNew.IsNullOrZero())
-                        return DirectiveStatus.Open;
+		[Filter("Status:", Order = 17)]
+		public DirectiveStatus Status
+		{
+			get
+			{
+				if (IsClosed) return DirectiveStatus.Closed; //директива принудительно закрыта пользователем
+				if (LastPerformance == null)
+				{
+					if (!_threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero() ||
+						!_threshold.FirstPerformanceSinceNew.IsNullOrZero())
+						return DirectiveStatus.Open;
 
-                    return DirectiveStatus.NotApplicable;
-                }
+					return DirectiveStatus.NotApplicable;
+				}
 
-                if (_threshold.RepeatInterval.IsNullOrZero()) return DirectiveStatus.Closed;
+				if (_threshold.RepeatInterval.IsNullOrZero()) return DirectiveStatus.Closed;
 
-                return DirectiveStatus.Repetative;
-            }
-        }
+				return DirectiveStatus.Repetative;
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region Implement of IEngineeringDirective
+		#region Implement of IEngineeringDirective
 
-        //Своиства интерфеися IMathData, они содержат вычисления мат аппарата для объектов
-        //у всех директив, деталей чеков и т.д. можно вычислить их текущее сотояние
-        // дату след. выполнения и наработку на которой это выполнение произоидет
+		//Своиства интерфеися IMathData, они содержат вычисления мат аппарата для объектов
+		//у всех директив, деталей чеков и т.д. можно вычислить их текущее сотояние
+		// дату след. выполнения и наработку на которой это выполнение произоидет
 
-        #region String Title { get; }
+		#region String Title { get; }
 
-        /// <summary>
-        /// Название директивы
-        /// </summary>
-        public String Title
-        {
-            get { return TaskNumberCheck; }
-        }
+		/// <summary>
+		/// Название директивы
+		/// </summary>
+		public String Title
+		{
+			get { return TaskNumberCheck; }
+		}
 
-        #endregion
+		#endregion
 
-        #region public StaticDictionary WorkType { get; }
+		#region public StaticDictionary WorkType { get; }
 
-        /// <summary>
-        /// Тип/Вид Работ
-        /// </summary>
-        StaticDictionary IEngineeringDirective.WorkType
-        {
-            get { return WorkType; }
-        }
+		/// <summary>
+		/// Тип/Вид Работ
+		/// </summary>
+		StaticDictionary IEngineeringDirective.WorkType
+		{
+			get { return WorkType; }
+		}
 
-        #endregion
+		#endregion
 
-        #region public String Phase { get; }
+		#region public String Phase { get; }
 
-        /// <summary>
-        /// Фаза
-        /// </summary>
-        public String Phase { get; set; }
+		/// <summary>
+		/// Фаза
+		/// </summary>
+		public String Phase { get; set; }
 
-        #endregion
+		#endregion
 
-        #region public CommonCollection<CategoryRecord> CategoriesRecords
+		#region public CommonCollection<CategoryRecord> CategoriesRecords
 
-        private CommonCollection<CategoryRecord> _aircraftWorkerCategories;
+		private CommonCollection<CategoryRecord> _aircraftWorkerCategories;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        [Child(RelationType.OneToMany, "ParentId", "ParentTypeId", 14, "Parent")]
-        public CommonCollection<CategoryRecord> CategoriesRecords
-        {
-            get
-            {
-                return _aircraftWorkerCategories ?? (_aircraftWorkerCategories = new CommonCollection<CategoryRecord>());
-            }
-            internal set
-            {
-                if (_aircraftWorkerCategories != value)
-                {
-                    if (_aircraftWorkerCategories != null)
-                        _aircraftWorkerCategories.Clear();
-                    if (value != null)
-                        _aircraftWorkerCategories = value;
-                }
-            }
-        }
+		/// <summary>
+		/// 
+		/// </summary>
+		[Child(RelationType.OneToMany, "ParentId", "ParentTypeId", 14, "Parent")]
+		public CommonCollection<CategoryRecord> CategoriesRecords
+		{
+			get
+			{
+				return _aircraftWorkerCategories ?? (_aircraftWorkerCategories = new CommonCollection<CategoryRecord>());
+			}
+			internal set
+			{
+				if (_aircraftWorkerCategories != value)
+				{
+					if (_aircraftWorkerCategories != null)
+						_aircraftWorkerCategories.Clear();
+					if (value != null)
+						_aircraftWorkerCategories = value;
+				}
+			}
+		}
 
 		#endregion
 
@@ -835,60 +836,60 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		/// Возвращает объект, для которого можно расчитать текущую наработку. Обычно Aircraft, BaseComponent или Component
 		/// </summary>
 		public BaseEntityObject LifeLengthParent
-        {
-            get { return ParentBaseComponent; }
-        }
+		{
+			get { return ParentBaseComponent; }
+		}
 
-        #endregion
+		#endregion
 
-        #region IThreshold IDirective.Threshold { get; set; }
+		#region IThreshold IDirective.Threshold { get; set; }
 
-        /// <summary>
-        /// порог первого и посделующего выполнений
-        /// </summary>
-        IThreshold IDirective.Threshold
-        {
-            get { return _threshold; }
-            set { _threshold = value as MaintenanceDirectiveThreshold; }
-        }
+		/// <summary>
+		/// порог первого и посделующего выполнений
+		/// </summary>
+		IThreshold IDirective.Threshold
+		{
+			get { return _threshold; }
+			set { _threshold = value as MaintenanceDirectiveThreshold; }
+		}
 
-        #endregion
+		#endregion
 
-        #region IRecordCollection IDirective.PerformanceRecords { get; set; }
+		#region IRecordCollection IDirective.PerformanceRecords { get; set; }
 
-        /// <summary>
-        /// Коллекция содержит все записи о выполнении директивы
-        /// </summary>
-        IRecordCollection IDirective.PerformanceRecords
-        {
-            get { return _performanceRecords; }
-        }
+		/// <summary>
+		/// Коллекция содержит все записи о выполнении директивы
+		/// </summary>
+		IRecordCollection IDirective.PerformanceRecords
+		{
+			get { return _performanceRecords; }
+		}
 
-        #endregion
+		#endregion
 
-        #region AbstractPerformanceRecord IDirective.LastPerformance { get; }
+		#region AbstractPerformanceRecord IDirective.LastPerformance { get; }
 
-        /// <summary>
-        /// Доступ к последней записи о выполнении задачи
-        /// </summary>
-        AbstractPerformanceRecord IDirective.LastPerformance
-        {
-            get { return PerformanceRecords.GetLast(); }
-        }
+		/// <summary>
+		/// Доступ к последней записи о выполнении задачи
+		/// </summary>
+		AbstractPerformanceRecord IDirective.LastPerformance
+		{
+			get { return PerformanceRecords.GetLast(); }
+		}
 
-        #endregion
+		#endregion
 
-        #region public List<NextPerformance> NextPerformances { get; set; }
-        [NonSerialized]
-        private List<NextPerformance> _nextPerformances;
+		#region public List<NextPerformance> NextPerformances { get; set; }
+		[NonSerialized]
+		private List<NextPerformance> _nextPerformances;
 
-        /// <summary>
-        /// Список последующих выполнений задачи
-        /// </summary>
-        public List<NextPerformance> NextPerformances
-        {
-            get { return _nextPerformances ?? (_nextPerformances = new List<NextPerformance>()); }
-        }
+		/// <summary>
+		/// Список последующих выполнений задачи
+		/// </summary>
+		public List<NextPerformance> NextPerformances
+		{
+			get { return _nextPerformances ?? (_nextPerformances = new List<NextPerformance>()); }
+		}
 
 		#endregion
 
@@ -900,181 +901,181 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		/// След. выполнение задачи
 		/// </summary>
 		public NextPerformance NextPerformance
-        {
-            get
-            {
-                if (_nextPerformances == null || _nextPerformances.Count == 0)
-                    return null;
-                return _nextPerformances[0];
-            }
-        }
+		{
+			get
+			{
+				if (_nextPerformances == null || _nextPerformances.Count == 0)
+					return null;
+				return _nextPerformances[0];
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region public ConditionState Condition { get; set; }
+		#region public ConditionState Condition { get; set; }
 
-        /// <summary>
-        /// Возвращает состояние ближайшего выполнения задачи (если оно расчитано) или ConditionState.NotEstimated
-        /// </summary>
-        [Filter("Condition:", Order = 18)]
-        public ConditionState Condition
-        {
-            get
-            {
-                if (_nextPerformances == null || _nextPerformances.Count == 0) return ConditionState.NotEstimated;
-                return _nextPerformances[0].Condition;
-            }
-        }
+		/// <summary>
+		/// Возвращает состояние ближайшего выполнения задачи (если оно расчитано) или ConditionState.NotEstimated
+		/// </summary>
+		[Filter("Condition:", Order = 19)]
+		public ConditionState Condition
+		{
+			get
+			{
+				if (_nextPerformances == null || _nextPerformances.Count == 0) return ConditionState.NotEstimated;
+				return _nextPerformances[0].Condition;
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region public Lifelength NextPerformanceSource { get; }
+		#region public Lifelength NextPerformanceSource { get; }
 
-        /// <summary>
-        /// Возвращает ресурс ближайшего выполнения задачи (если оно расчитано) или Lifelength.Null
-        /// </summary>
-        public Lifelength NextPerformanceSource
-        {
-            get
-            {
-                if (_nextPerformances == null || _nextPerformances.Count == 0)
-                    return Lifelength.Null;
-                return _nextPerformances[0].PerformanceSource;
-            }
-        }
+		/// <summary>
+		/// Возвращает ресурс ближайшего выполнения задачи (если оно расчитано) или Lifelength.Null
+		/// </summary>
+		public Lifelength NextPerformanceSource
+		{
+			get
+			{
+				if (_nextPerformances == null || _nextPerformances.Count == 0)
+					return Lifelength.Null;
+				return _nextPerformances[0].PerformanceSource;
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region public Lifelength Remains { get; set; }
+		#region public Lifelength Remains { get; set; }
 
-        /// <summary>
-        /// Возвращает остаток ресурса до ближайшего выполнения задачи (если оно расчитано) или Lifelength.Null
-        /// </summary>
-        public Lifelength Remains
-        {
-            get
-            {
-                if (_nextPerformances == null || _nextPerformances.Count == 0) return Lifelength.Null;
-                return _nextPerformances[0].Remains;
-            }
-        }
+		/// <summary>
+		/// Возвращает остаток ресурса до ближайшего выполнения задачи (если оно расчитано) или Lifelength.Null
+		/// </summary>
+		public Lifelength Remains
+		{
+			get
+			{
+				if (_nextPerformances == null || _nextPerformances.Count == 0) return Lifelength.Null;
+				return _nextPerformances[0].Remains;
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region public Lifelength BeforeForecastResourceRemain { get; set; }
+		#region public Lifelength BeforeForecastResourceRemain { get; set; }
 
-        /// <summary>
-        /// Остаток ресурса до прогноза (вычисляется только в прогнозе)
-        /// </summary>
-        public Lifelength BeforeForecastResourceRemain
-        {
-            get
-            {
-                if (_nextPerformances == null || _nextPerformances.Count == 0) return Lifelength.Null;
-                return _nextPerformances[0].BeforeForecastResourceRemain;
-            }
-        }
+		/// <summary>
+		/// Остаток ресурса до прогноза (вычисляется только в прогнозе)
+		/// </summary>
+		public Lifelength BeforeForecastResourceRemain
+		{
+			get
+			{
+				if (_nextPerformances == null || _nextPerformances.Count == 0) return Lifelength.Null;
+				return _nextPerformances[0].BeforeForecastResourceRemain;
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region public Lifelength ForecastLifelength { get; set; }
+		#region public Lifelength ForecastLifelength { get; set; }
 
-        //ресурс прогноза
-        public Lifelength ForecastLifelength { get; set; }
+		//ресурс прогноза
+		public Lifelength ForecastLifelength { get; set; }
 
-        #endregion
+		#endregion
 
-        #region public Lifelength AfterForecastResourceRemain { get; set; }
+		#region public Lifelength AfterForecastResourceRemain { get; set; }
 
-        /// <summary>
-        /// Остаток ресурса после прогноза (вычисляется только в прогнозе)
-        /// </summary>
-        public Lifelength AfterForecastResourceRemain { get; set; }
+		/// <summary>
+		/// Остаток ресурса после прогноза (вычисляется только в прогнозе)
+		/// </summary>
+		public Lifelength AfterForecastResourceRemain { get; set; }
 
-        #endregion
+		#endregion
 
-        #region public DateTime? NextComplianceDate{ get; set; }
+		#region public DateTime? NextComplianceDate{ get; set; }
 
-        /// <summary>
-        /// Возвращает прблизительную дату ближайшего выполнения задачи (если оно расчитано) или null
-        /// </summary>
-        public DateTime? NextPerformanceDate
-        {
-            get
-            {
-                if (_nextPerformances == null || _nextPerformances.Count == 0) return null;
-                return _nextPerformances[0].PerformanceDate;
-            }
-        }
+		/// <summary>
+		/// Возвращает прблизительную дату ближайшего выполнения задачи (если оно расчитано) или null
+		/// </summary>
+		public DateTime? NextPerformanceDate
+		{
+			get
+			{
+				if (_nextPerformances == null || _nextPerformances.Count == 0) return null;
+				return _nextPerformances[0].PerformanceDate;
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region public double? Percents { get; set; }
+		#region public double? Percents { get; set; }
 
-        /// <summary>
-        /// (AfterForecast / (AfterForecast + beforeForecast)) * 100
-        /// </summary>
-        public double? Percents { get; set; }
+		/// <summary>
+		/// (AfterForecast / (AfterForecast + beforeForecast)) * 100
+		/// </summary>
+		public double? Percents { get; set; }
 
-        #endregion
+		#endregion
 
-        #region public string TimesToString { get; }
+		#region public string TimesToString { get; }
 
-        /// <summary>
-        /// Возвращает строковое представление количества "след. выполнений"
-        /// </summary>
-        public string TimesToString
-        {
-            get { return Times <= 1 ? "" : Times + " times"; }
-        }
+		/// <summary>
+		/// Возвращает строковое представление количества "след. выполнений"
+		/// </summary>
+		public string TimesToString
+		{
+			get { return Times <= 1 ? "" : Times + " times"; }
+		}
 
-        #endregion
+		#endregion
 
-        #region public Int32 Times { get;}
+		#region public Int32 Times { get;}
 
-        /// <summary>
-        /// Сколько раз выполнится директива (применяется только в прогнозах)
-        /// </summary>
-        public Int32 Times
-        {
-            get { return _nextPerformances.Count > 1 ? _nextPerformances.Count : -1; }
-        }
+		/// <summary>
+		/// Сколько раз выполнится директива (применяется только в прогнозах)
+		/// </summary>
+		public Int32 Times
+		{
+			get { return _nextPerformances.Count > 1 ? _nextPerformances.Count : -1; }
+		}
 
-        #endregion
+		#endregion
 
-        #region public Boolean IsClosed { get; set; }
+		#region public Boolean IsClosed { get; set; }
 
-        /// <summary>
-        /// Логический флаг, показывающий, закрыта ли директива
-        /// </summary>
-        [TableColumnAttribute("IsClosed")]
-        public Boolean IsClosed { get; set; }
+		/// <summary>
+		/// Логический флаг, показывающий, закрыта ли директива
+		/// </summary>
+		[TableColumnAttribute("IsClosed")]
+		public Boolean IsClosed { get; set; }
 
-        #endregion
+		#endregion
 
-        #region public Boolean NextPerformanceIsBlocked { get; }
+		#region public Boolean NextPerformanceIsBlocked { get; }
 
-        /// <summary>
-        /// Логический флаг, показывающий, заблокировано ли след. выполенение директивы рабочим пакетом
-        /// </summary>
-        public Boolean NextPerformanceIsBlocked
-        {
-            get
-            {
-                if (_nextPerformances == null || _nextPerformances.Count == 0) return false;
-                return _nextPerformances[0].BlockedByPackage != null;
-            }
-        }
+		/// <summary>
+		/// Логический флаг, показывающий, заблокировано ли след. выполенение директивы рабочим пакетом
+		/// </summary>
+		public Boolean NextPerformanceIsBlocked
+		{
+			get
+			{
+				if (_nextPerformances == null || _nextPerformances.Count == 0) return false;
+				return _nextPerformances[0].BlockedByPackage != null;
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region public Double ManHours { get; set; }
+		#region public Double ManHours { get; set; }
 
-        /// <summary>
-        /// Параметр чистых трудозатрат
-        /// </summary>
-        [TableColumnAttribute("ManHours"), ListViewData("Man Hours"), MinMaxValue(0, 100000)]
-        public Double ManHours { get; set; }
+		/// <summary>
+		/// Параметр чистых трудозатрат
+		/// </summary>
+		[TableColumnAttribute("ManHours"), ListViewData("Man Hours"), MinMaxValue(0, 100000)]
+		public Double ManHours { get; set; }
 
 		public static PropertyInfo ManHoursProperty
 		{
@@ -1090,74 +1091,74 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		/// </summary>
 		public int Mans { get; set; }
 
-        #endregion
+		#endregion
 
-        #region public Double Elapsed { get; set; }
+		#region public Double Elapsed { get; set; }
 
-        /// <summary>
-        /// Параметр полных трудозатрат 
-        /// </summary>
-        [TableColumnAttribute("Elapsed"), ListViewData("Elapsed"), MinMaxValue(0, 100000)]
-        public Double Elapsed { get; set; }
+		/// <summary>
+		/// Параметр полных трудозатрат 
+		/// </summary>
+		[TableColumnAttribute("Elapsed"), ListViewData("Elapsed"), MinMaxValue(0, 100000)]
+		public Double Elapsed { get; set; }
 
-        #endregion
+		#endregion
 
-        #region public Double Cost { get; set; }
+		#region public Double Cost { get; set; }
 
-        /// <summary>
-        /// Стоимость выполения
-        /// </summary>
-        [TableColumnAttribute("Cost"), ListViewData("Cost"), MinMaxValue(0, 1000000000)]
-        public Double Cost { get; set; }
+		/// <summary>
+		/// Стоимость выполения
+		/// </summary>
+		[TableColumnAttribute("Cost"), ListViewData("Cost"), MinMaxValue(0, 1000000000)]
+		public Double Cost { get; set; }
 
-        #endregion
+		#endregion
 
-        #region public void ResetMathData()
+		#region public void ResetMathData()
 
-        public void ResetMathData()
-        {
-            AfterForecastResourceRemain = null;
-            NextPerformances.Clear();
-        }
+		public void ResetMathData()
+		{
+			AfterForecastResourceRemain = null;
+			NextPerformances.Clear();
+		}
 
-        #endregion
+		#endregion
 
-        #endregion
+		#endregion
 
-        #region Implement of IKitRequired
+		#region Implement of IKitRequired
 
-        #region public string KitParentString { get; }
+		#region public string KitParentString { get; }
 
-        /// <summary>
-        /// Возвращает строку для описания родителя КИТа
-        /// </summary>
-        public string KitParentString
-        {
-            //get { return string.Format("MPD.:{0}:{1}:{2}", TaskNumberCheck, MPDTaskNumber, Description); }
-            get { return string.Format("MPD.:{0}", TaskCardNumber); }
-        }
+		/// <summary>
+		/// Возвращает строку для описания родителя КИТа
+		/// </summary>
+		public string KitParentString
+		{
+			//get { return string.Format("MPD.:{0}:{1}:{2}", TaskNumberCheck, MPDTaskNumber, Description); }
+			get { return string.Format("MPD.:{0}", TaskCardNumber); }
+		}
 
-        #endregion
+		#endregion
 
-        #region public ICommonCollection<KitRequired> Kits
+		#region public ICommonCollection<KitRequired> Kits
 
-        private CommonCollection<AccessoryRequired> _kits;
+		private CommonCollection<AccessoryRequired> _kits;
 
-	    [Child(RelationType.OneToMany, "ParentId", "ParentTypeId", 14, "ParentObject")]
-        public CommonCollection<AccessoryRequired> Kits
-        {
-            get { return _kits ?? (_kits = new CommonCollection<AccessoryRequired>()); }
-            internal set
-            {
-                if (_kits != value)
-                {
-                    if (_kits != null)
-                        _kits.Clear();
-                    if (value != null)
-                        _kits = value;
-                }
-            }
-        }
+		[Child(RelationType.OneToMany, "ParentId", "ParentTypeId", 14, "ParentObject")]
+		public CommonCollection<AccessoryRequired> Kits
+		{
+			get { return _kits ?? (_kits = new CommonCollection<AccessoryRequired>()); }
+			internal set
+			{
+				if (_kits != value)
+				{
+					if (_kits != null)
+						_kits.Clear();
+					if (value != null)
+						_kits = value;
+				}
+			}
+		}
 
 		#endregion
 
@@ -1272,7 +1273,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 
 		public DateTime? BindedItemNextPerformanceDate { get; set; }
 
-	    #endregion
+		#endregion
 
 
 		#endregion
@@ -1285,35 +1286,35 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		/// </summary>
 		public int CountForPrint { get; set; }
 
-        #endregion
+		#endregion
 
-        #region Implement IPrintSettings
+		#region Implement IPrintSettings
 
-        #region public bool PrintInWorkPackage { get; set; }
+		#region public bool PrintInWorkPackage { get; set; }
 
-        /// <summary>
-        /// Возвращает или задает значение, показвающее настройку печати элемента в Рабочем пакете
-        /// </summary>
-        [TableColumnAttribute("PrintInWP")]
-        public bool PrintInWorkPackage { get; set; }
+		/// <summary>
+		/// Возвращает или задает значение, показвающее настройку печати элемента в Рабочем пакете
+		/// </summary>
+		[TableColumnAttribute("PrintInWP")]
+		public bool PrintInWorkPackage { get; set; }
 
-        #endregion
+		#endregion
 
-        #region public bool WorkPackageACCPrintTitle { get; set; }
+		#region public bool WorkPackageACCPrintTitle { get; set; }
 
-        /// <summary>
-        /// Возвращает или задает значение, показвающее печать НАЗВАНИЯ задачи в AccountabilitySheet рабочего пакета
-        /// </summary>
-        public bool WorkPackageACCPrintTitle { get; set; }
+		/// <summary>
+		/// Возвращает или задает значение, показвающее печать НАЗВАНИЯ задачи в AccountabilitySheet рабочего пакета
+		/// </summary>
+		public bool WorkPackageACCPrintTitle { get; set; }
 
-        #endregion
+		#endregion
 
-        #region public bool WorkPackageACCPrintTaskCard { get; set; }
+		#region public bool WorkPackageACCPrintTaskCard { get; set; }
 
-        /// <summary>
-        /// Возвращает или задает значение, показвающее печать РАБОЧЕЙ КАРТЫ задачи в AccountabilitySheet рабочего пакета
-        /// </summary>
-        public bool WorkPackageACCPrintTaskCard { get; set; }
+		/// <summary>
+		/// Возвращает или задает значение, показвающее печать РАБОЧЕЙ КАРТЫ задачи в AccountabilitySheet рабочего пакета
+		/// </summary>
+		public bool WorkPackageACCPrintTaskCard { get; set; }
 
 		#endregion
 
@@ -1353,8 +1354,8 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 
 		public ComponentDirective ParentComponentDirective { get; set; }
 		/*
-        *  Методы 
-        */
+		*  Методы 
+		*/
 
 
 		#region public MaintenanceDirective()
@@ -1363,131 +1364,131 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		/// Создает воздушное судно без дополнительной информации
 		/// </summary>
 		public MaintenanceDirective()
-        {
-            SmartCoreObjectType = SmartCoreType.MaintenanceDirective;
-            //задаем все ID в -1
-            ItemId = -1;
+		{
+			SmartCoreObjectType = SmartCoreType.MaintenanceDirective;
+			//задаем все ID в -1
+			ItemId = -1;
 
-            // Ad директива
-            WorkType = MaintenanceDirectiveTaskType.Unknown;
-            Program = MaintenanceDirectiveProgramType.Unknown;
-            CriticalSystem = CriticalSystemList.Unknown;
+			// Ad директива
+			WorkType = MaintenanceDirectiveTaskType.Unknown;
+			Program = MaintenanceDirectiveProgramType.Unknown;
+			CriticalSystem = CriticalSystemList.Unknown;
 			NDTType = NDTType.UNK;
 			MpdRevisionDate = DateTime.Today;
-	        ScheduleRevisionDate = DateTime.Today;
-            // Задаем все String
-            TaskNumberCheck = MPDTaskNumber = Remarks = Description = EngineeringOrders = HiddenRemarks = "";
+			ScheduleRevisionDate = DateTime.Today;
+			// Задаем все String
+			TaskNumberCheck = MPDTaskNumber = Remarks = Description = EngineeringOrders = HiddenRemarks = "";
 
-            ForComponentId = -1;
-            _performanceRecords = new BaseRecordCollection<DirectiveRecord>();
-            _threshold = new MaintenanceDirectiveThreshold();
+			ForComponentId = -1;
+			_performanceRecords = new BaseRecordCollection<DirectiveRecord>();
+			_threshold = new MaintenanceDirectiveThreshold();
 
-            PrintInWorkPackage = true;
-        }
+			PrintInWorkPackage = true;
+		}
 
-        #endregion
+		#endregion
 
-        #region private static Type GetCurrentType()
+		#region private static Type GetCurrentType()
 
-        private static Type GetCurrentType()
-        {
-            return _thisType ?? (_thisType = typeof (MaintenanceDirective));
-        }
+		private static Type GetCurrentType()
+		{
+			return _thisType ?? (_thisType = typeof (MaintenanceDirective));
+		}
 
-        #endregion
+		#endregion
 
-        #region public override string ToString()
+		#region public override string ToString()
 
-        /// <summary>
-        /// Перегружаем для отладки
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return TaskNumberCheck + " " + TaskCardNumber + " " + Description;
-        }
+		/// <summary>
+		/// Перегружаем для отладки
+		/// </summary>
+		/// <returns></returns>
+		public override string ToString()
+		{
+			return TaskNumberCheck + " " + TaskCardNumber + " " + Description;
+		}
 
-        #endregion
+		#endregion
 
-        #region public int CompareTo(MaintenanceDirective y)
+		#region public int CompareTo(MaintenanceDirective y)
 
-        public int CompareTo(MaintenanceDirective y)
-        {
-            return ItemId.CompareTo(y.ItemId);
-        }
+		public int CompareTo(MaintenanceDirective y)
+		{
+			return ItemId.CompareTo(y.ItemId);
+		}
 
-        #endregion
+		#endregion
 
-        #region public override int CompareTo(object y)
+		#region public override int CompareTo(object y)
 
-        public override int CompareTo(object y)
-        {
-            if (y is MaintenanceDirective) return ItemId.CompareTo(((MaintenanceDirective) y).ItemId);
-            return 0;
-        }
+		public override int CompareTo(object y)
+		{
+			if (y is MaintenanceDirective) return ItemId.CompareTo(((MaintenanceDirective) y).ItemId);
+			return 0;
+		}
 
-        #endregion
+		#endregion
 
-        #region public bool Equals(MaintenanceDirective other)
+		#region public bool Equals(MaintenanceDirective other)
 
-        public bool Equals(MaintenanceDirective other)
-        {
+		public bool Equals(MaintenanceDirective other)
+		{
 
-            //Check whether the compared object is null.
-            if (ReferenceEquals(other, null)) return false;
+			//Check whether the compared object is null.
+			if (ReferenceEquals(other, null)) return false;
 
-            //Check whether the compared object references the same data.
-            if (ReferenceEquals(this, other)) return true;
+			//Check whether the compared object references the same data.
+			if (ReferenceEquals(this, other)) return true;
 
-            //Check whether the products' properties are equal.
-            return ItemId == other.ItemId;
-        }
+			//Check whether the products' properties are equal.
+			return ItemId == other.ItemId;
+		}
 
-        #endregion
+		#endregion
 
-        #region public override int GetHashCode()
+		#region public override int GetHashCode()
 
-        public override int GetHashCode()
-        {
-            return ItemId.GetHashCode();
-        }
+		public override int GetHashCode()
+		{
+			return ItemId.GetHashCode();
+		}
 
 		#endregion
 
 		#region public new MaintenanceDirective GetCopyUnsaved()
 
 		public new MaintenanceDirective GetCopyUnsaved()
-        {
-            var maintenanceDirective = (MaintenanceDirective) MemberwiseClone();
-            maintenanceDirective.ItemId = -1;
-            maintenanceDirective.UnSetEvents();
+		{
+			var maintenanceDirective = (MaintenanceDirective) MemberwiseClone();
+			maintenanceDirective.ItemId = -1;
+			maintenanceDirective.UnSetEvents();
 
-            maintenanceDirective.ForComponentId = -1;
-            maintenanceDirective.ParentBaseComponent = null;
+			maintenanceDirective.ForComponentId = -1;
+			maintenanceDirective.ParentBaseComponent = null;
 
-            if (JobCard != null)
-            {
-                maintenanceDirective.JobCard = JobCard.GetCopyUnsaved();
-                JobCard.Parent = maintenanceDirective;
-            }
+			if (JobCard != null)
+			{
+				maintenanceDirective.JobCard = JobCard.GetCopyUnsaved();
+				JobCard.Parent = maintenanceDirective;
+			}
 
-            maintenanceDirective.Threshold = MaintenanceDirectiveThreshold.ConvertFromByteArray(_threshold.ToBinary());
+			maintenanceDirective.Threshold = MaintenanceDirectiveThreshold.ConvertFromByteArray(_threshold.ToBinary());
 
-            maintenanceDirective._performanceRecords = new BaseRecordCollection<DirectiveRecord>();
-            foreach (var directiveRecord in PerformanceRecords)
-            {
-                var newObject = directiveRecord.GetCopyUnsaved();
-                newObject.Parent = maintenanceDirective;
-                maintenanceDirective._performanceRecords.Add(newObject);
-            }
+			maintenanceDirective._performanceRecords = new BaseRecordCollection<DirectiveRecord>();
+			foreach (var directiveRecord in PerformanceRecords)
+			{
+				var newObject = directiveRecord.GetCopyUnsaved();
+				newObject.Parent = maintenanceDirective;
+				maintenanceDirective._performanceRecords.Add(newObject);
+			}
 
-            maintenanceDirective.CategoriesRecords = new CommonCollection<CategoryRecord>();
-            foreach (var categoryRecord in CategoriesRecords)
-            {
-                var newObject = categoryRecord.GetCopyUnsaved();
-                newObject.Parent = maintenanceDirective;
-                maintenanceDirective.CategoriesRecords.Add(newObject);
-            }
+			maintenanceDirective.CategoriesRecords = new CommonCollection<CategoryRecord>();
+			foreach (var categoryRecord in CategoriesRecords)
+			{
+				var newObject = categoryRecord.GetCopyUnsaved();
+				newObject.Parent = maintenanceDirective;
+				maintenanceDirective.CategoriesRecords.Add(newObject);
+			}
 
 			maintenanceDirective._files = new CommonCollection<ItemFileLink>();
 			foreach (var file in Files)
@@ -1497,14 +1498,14 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 			}
 
 			maintenanceDirective._kits = new CommonCollection<AccessoryRequired>();
-	        foreach (var kit in Kits)
-	        {
-		        var newObject = kit.GetCopyUnsaved();
+			foreach (var kit in Kits)
+			{
+				var newObject = kit.GetCopyUnsaved();
 				maintenanceDirective._kits.Add(newObject);
-	        }
+			}
 
 			return maintenanceDirective;
-        }
+		}
 
 		#endregion
 
