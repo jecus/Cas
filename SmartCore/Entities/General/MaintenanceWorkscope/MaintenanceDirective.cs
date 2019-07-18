@@ -220,7 +220,14 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		[TableColumnAttribute("KitsApplicable")]
 		public bool KitsApplicable { get; set; }
 
-	    #endregion
+		#endregion
+
+		#region public bool APUCalc { get; set; }
+
+		[TableColumn("APUCalc")]
+	    public bool APUCalc { get; set; }
+
+		#endregion
 
         #region public String EngineeringOrders { get; set; }
 

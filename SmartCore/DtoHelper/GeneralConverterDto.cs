@@ -5206,6 +5206,7 @@ namespace SmartCore.DtoHelper
 				Skill = maindirec.Skill?.ItemId ?? -1,
 				ScheduleItem = maindirec.ScheduleItem,
 				ScheduleRef = maindirec.ScheduleRef,
+				APUCalc = maindirec.APUCalc,
 				ScheduleRevisionNum = maindirec.ScheduleRevisionNum,
 				ScheduleRevisionDate = maindirec.ScheduleRevisionDate,
 				Files = maindirec.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
@@ -5264,6 +5265,7 @@ namespace SmartCore.DtoHelper
 				Skill = Skill.Items.GetItemById(maindirecdto.Skill),
 				ScheduleItem = maindirecdto.ScheduleItem,
 				ScheduleRef = maindirecdto.ScheduleRef,
+				APUCalc = maindirecdto.APUCalc,
 				ScheduleRevisionNum = maindirecdto.ScheduleRevisionNum,
 				ScheduleRevisionDate = maindirecdto.ScheduleRevisionDate ?? DateTimeExtend.GetCASMinDateTime()
 			};
