@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
@@ -13,7 +14,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
     ///<summary>
     /// форма для задания средней утилизации по всем основным агрегатам самолета
     ///</summary>
-    public partial class AverageUtilizationForm : Form
+    public partial class AverageUtilizationForm : MetroForm
     {
         private readonly Aircraft _currentAircraft;
         private List<AverageUtilizationItemControl> _averageControlItems = new List<AverageUtilizationItemControl>();
