@@ -112,7 +112,11 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
                 {
                     //добавление нового ЭУ в новую панель группы
                     AverageUtilizationItemControl item = new AverageUtilizationItemControl(baseDetail);
-                    baseDetailGroupPanel.Controls.Add(item);
+
+                    if (baseDetail.BaseComponentType == BaseComponentType.Apu)
+	                    item.Enabled = false;
+
+					baseDetailGroupPanel.Controls.Add(item);
                     _averageControlItems.Add(item);
                 } 
             }
