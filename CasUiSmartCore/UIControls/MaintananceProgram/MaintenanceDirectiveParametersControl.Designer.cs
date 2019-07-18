@@ -791,6 +791,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.checkBoxAPU.Size = new System.Drawing.Size(15, 14);
 			this.checkBoxAPU.TabIndex = 206;
 			this.checkBoxAPU.UseVisualStyleBackColor = true;
+			this.checkBoxAPU.CheckedChanged += new System.EventHandler(this.CheckBoxAPU_CheckedChanged);
 			// 
 			// MaintenanceDirectiveParametersControl
 			// 

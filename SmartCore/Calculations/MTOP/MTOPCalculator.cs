@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SmartCore.Aircrafts;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -13,12 +14,14 @@ namespace SmartCore.Calculations.MTOP
 	public class MTOPCalculator : IMTOPCalculator
 	{
 		private readonly ICalculator _calculator;
+		private readonly IAircraftsCore _aircraftsCore;
 
 		#region Constructor
 
-		public MTOPCalculator(ICalculator calculator)
+		public MTOPCalculator(ICalculator calculator, IAircraftsCore aircraftsCore)
 		{
 			_calculator = calculator;
+			_aircraftsCore = aircraftsCore;
 		}
 
 		#endregion
@@ -466,9 +469,6 @@ namespace SmartCore.Calculations.MTOP
 
 		public void CalculateDirective(MaintenanceDirective directive,AverageUtilization averageUtilization)
 		{
-			//if (directive.ItemId == 82342)
-				//MessageBox.Show("qwe");
-
 			double hours = 0, cycles = 0, days = 0;
 			double hoursPhase = -1, cyclesPhase = -1, daysPhase = -1;
 
@@ -550,7 +550,7 @@ namespace SmartCore.Calculations.MTOP
 			directive.PhaseThresh.Hours = (int)Math.Round(hoursPhase > -1 ? hoursPhase : hours);
 			directive.PhaseThresh.Cycles = (int)Math.Round(cyclesPhase > -1 ? cyclesPhase : cycles);
 			directive.PhaseThresh.Days = (int)Math.Round(daysPhase > -1 ? daysPhase : days);
-
+			
 			var repeat = directive.Threshold.RepeatInterval;
 			directive.PhaseRepeat = new Lifelength(0, 0, 0);
 
@@ -634,6 +634,13 @@ namespace SmartCore.Calculations.MTOP
 				directive.PhaseRepeat.Hours = (int)Math.Round(hoursPhase > -1 ? hoursPhase : hours);
 				directive.PhaseRepeat.Cycles = (int)Math.Round(cyclesPhase > -1 ? cyclesPhase : cycles);
 				directive.PhaseRepeat.Days = (int)Math.Round(daysPhase > -1 ? daysPhase : days);
+
+				if (directive.APUCalc && repeat.Hours.HasValue)
+				{
+					var aircraft = _aircraftsCore.GetAircraftById(directive.ParentBaseComponent.ParentAircraftId);
+					directive.PhaseRepeat = new Lifelength(repeat);
+					directive.PhaseRepeat.Hours = (int?) (directive.PhaseRepeat.Hours / aircraft.APUFH);
+				}
 			}
 
 		}
@@ -641,21 +648,13 @@ namespace SmartCore.Calculations.MTOP
 		public void CalculatePhase(CommonCollection<MaintenanceDirective> directives, List<MTOPCheck> checks, AverageUtilization averageUtilization, bool isZeroPhase = false)
 		{
 			foreach (var directive in directives)
-			{
-				//if (directive.ItemId == 82342)
-					//MessageBox.Show("qwe");
 				calculatePhase(directive, checks, averageUtilization, isZeroPhase);
-			}
 		}
 
 		public void CalculatePhaseWithPerformance(CommonCollection<MaintenanceDirective> directives, List<MTOPCheck> checks, AverageUtilization averageUtilization, DateTime from, DateTime to, bool isZeroPhase = false)
 		{
 			foreach (var directive in directives)
 			{
-				if (directive.ItemId == 82342)
-				{
-					//MessageBox.Show("qwe");
-				}
 				calculatePhase(directive, checks, averageUtilization, isZeroPhase);
 
 				directive.MtopNextPerformances = new List<NextPerformance>();

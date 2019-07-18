@@ -565,6 +565,18 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		}
 
 		#endregion
+
+		private void CheckBoxAPU_CheckedChanged(object sender, EventArgs e)
+		{
+			if (!lifelengthViewer_Repeat.Lifelength.Hours.HasValue)
+			{
+				checkBoxAPU.CheckedChanged -= CheckBoxAPU_CheckedChanged;
+				checkBoxAPU.Checked = false;
+				MessageBox.Show("Please input repeat interval(Hours)!", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				checkBoxAPU.CheckedChanged += CheckBoxAPU_CheckedChanged;
+			}
+			
+		}
 	}
 
 	#region internal class MaintenanceDirectiveParametersControlDesigner : ControlDesigner
