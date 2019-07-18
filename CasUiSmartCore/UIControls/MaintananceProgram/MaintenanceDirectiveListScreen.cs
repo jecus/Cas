@@ -1656,6 +1656,13 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			_exportProvider.Dispose();
 		}
 
+		
+
 		#endregion
+
+		private void ButtonAPUCalc_Click(object sender, EventArgs e)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }
