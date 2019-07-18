@@ -568,13 +568,14 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
 		private void CheckBoxAPU_CheckedChanged(object sender, EventArgs e)
 		{
-			checkBoxAPU.CheckStateChanged -= CheckBoxAPU_CheckedChanged;
 			if (!lifelengthViewer_Repeat.Lifelength.Hours.HasValue)
 			{
+				checkBoxAPU.CheckedChanged -= CheckBoxAPU_CheckedChanged;
 				checkBoxAPU.Checked = false;
 				MessageBox.Show("Please input repeat interval(Hours)!", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				checkBoxAPU.CheckedChanged += CheckBoxAPU_CheckedChanged;
 			}
-			checkBoxAPU.CheckStateChanged += CheckBoxAPU_CheckedChanged;
+			
 		}
 	}
 
