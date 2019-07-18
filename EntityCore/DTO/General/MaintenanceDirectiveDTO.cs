@@ -190,7 +190,10 @@ namespace EntityCore.DTO.General
 		[Column("ProgramIndicator")]
 		public int ProgramIndicator { get; set; }
 
-		
+		[Column("APUCalc")]
+		public bool APUCalc { get; set; }
+
+
 		[Include]
 		public ATAChapterDTO ATAChapter { get; set; }
 
