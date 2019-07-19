@@ -17,36 +17,36 @@ using Convert = System.Convert;
 
 namespace CAS.UI.UIControls.MaintananceProgram
 {
-    ///<summary>
-    /// список для отображения ордеров запроса
-    ///</summary>
-    public partial class MaintenanceDirectiveListView : BaseGridViewControl<MaintenanceDirective>
-    {
-        #region Fields
+	///<summary>
+	/// список для отображения ордеров запроса
+	///</summary>
+	public partial class MaintenanceDirectiveListView : BaseGridViewControl<MaintenanceDirective>
+	{
+		#region Fields
 
-        #endregion
+		#endregion
 
-        #region Constructors
+		#region Constructors
 
-        #region public MaintenanceDirectiveListView()
-        ///<summary>
-        ///</summary>
-        public MaintenanceDirectiveListView()
-        {
-            InitializeComponent();
-        }
-        #endregion
+		#region public MaintenanceDirectiveListView()
+		///<summary>
+		///</summary>
+		public MaintenanceDirectiveListView()
+		{
+			InitializeComponent();
+		}
+		#endregion
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region protected override void SetHeaders()
-        /// <summary>
-        /// Устанавливает заголовки
-        /// </summary>
-        protected override void SetHeaders()
-        {
+		#region protected override void SetHeaders()
+		/// <summary>
+		/// Устанавливает заголовки
+		/// </summary>
+		protected override void SetHeaders()
+		{
 			AddColumn("AMP", (int)(radGridView1.Width * 0.16f));
 			AddColumn("MPD Item", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Task Card №", (int)(radGridView1.Width * 0.16f));
@@ -56,6 +56,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			AddColumn("Work Type", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Check", (int)(radGridView1.Width * 0.16f));
 			AddColumn("1st. Perf.", (int)(radGridView1.Width * 0.24f));
+			AddColumn("APU Calc.", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Rpt. Intv.", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Next", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Remain/Overdue", (int)(radGridView1.Width * 0.24f));
@@ -81,7 +82,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Hidden remarks", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
-        }
+		}
 		#endregion
 
 		#region protected override void SetItemColor(ListViewItem listViewItem, MaintenanceDirective item)
@@ -110,76 +111,76 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(MaintenanceDirective item)
 
 		protected override List<CustomCell> GetListViewSubItems(MaintenanceDirective item)
-        {
-            var subItems = new List<CustomCell>();
+		{
+			var subItems = new List<CustomCell>();
 
-            //////////////////////////////////////////////////////////////////////////////////////
-            //         Определение последнего выполнения директивы и KitRequiered               //
-            //////////////////////////////////////////////////////////////////////////////////////
-            DateTime defaultDateTime = DateTimeExtend.GetCASMinDateTime();
-            DateTime lastComplianceDate = defaultDateTime;
-            DateTime nextComplianceDate = defaultDateTime;
-            Lifelength lastComplianceLifeLength = Lifelength.Zero;
-            //Lifelength nextComplianceLifelength = Lifelength.Null;
+			//////////////////////////////////////////////////////////////////////////////////////
+			//         Определение последнего выполнения директивы и KitRequiered               //
+			//////////////////////////////////////////////////////////////////////////////////////
+			DateTime defaultDateTime = DateTimeExtend.GetCASMinDateTime();
+			DateTime lastComplianceDate = defaultDateTime;
+			DateTime nextComplianceDate = defaultDateTime;
+			Lifelength lastComplianceLifeLength = Lifelength.Zero;
+			//Lifelength nextComplianceLifelength = Lifelength.Null;
 
-            string lastPerformanceString, firstPerformanceString = "N/A";
+			string lastPerformanceString, firstPerformanceString = "N/A";
 
-            Color tcnColor = radGridView1.ForeColor;
+			Color tcnColor = radGridView1.ForeColor;
 			Color kitColor = radGridView1.BackColor;
 			AtaChapter ata = item.ATAChapter;
-            if(item.LastPerformance != null)
-            {
-                lastComplianceDate = item.LastPerformance.RecordDate;
-                lastComplianceLifeLength = item.LastPerformance.OnLifelength;    
-            }
-            if (item.Threshold.FirstPerformanceSinceNew != null && !item.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
-            {
-                firstPerformanceString = "s/n: " + item.Threshold.FirstPerformanceSinceNew;
-            }
-            if (item.Threshold.FirstPerformanceSinceEffectiveDate != null &&
-                !item.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
-            {
-                if (firstPerformanceString != "N/A") firstPerformanceString += " or ";
-                else firstPerformanceString = "";
-                firstPerformanceString += "s/e.d: " + item.Threshold.FirstPerformanceSinceEffectiveDate;
-            }
+			if(item.LastPerformance != null)
+			{
+				lastComplianceDate = item.LastPerformance.RecordDate;
+				lastComplianceLifeLength = item.LastPerformance.OnLifelength;    
+			}
+			if (item.Threshold.FirstPerformanceSinceNew != null && !item.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
+			{
+				firstPerformanceString = "s/n: " + item.Threshold.FirstPerformanceSinceNew;
+			}
+			if (item.Threshold.FirstPerformanceSinceEffectiveDate != null &&
+				!item.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+			{
+				if (firstPerformanceString != "N/A") firstPerformanceString += " or ";
+				else firstPerformanceString = "";
+				firstPerformanceString += "s/e.d: " + item.Threshold.FirstPerformanceSinceEffectiveDate;
+			}
 
-           if (item.NextPerformanceDate != null && item.NextPerformanceDate > defaultDateTime)
-              nextComplianceDate = Convert.ToDateTime(item.NextPerformanceDate);
+		   if (item.NextPerformanceDate != null && item.NextPerformanceDate > defaultDateTime)
+			  nextComplianceDate = Convert.ToDateTime(item.NextPerformanceDate);
 
-            var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 			string kitRequieredString = item.KitsApplicable ? item.Kits.Count + " EA" : "N/A";
 			string ndtString = item.NDTType.ShortName;
 			string skillString = item.Skill.ShortName;
 			string categoryString = item.Category.ShortName;
-            string remarksString = item.Remarks;
-            string hiddenRemarksString = item.HiddenRemarks;
+			string remarksString = item.Remarks;
+			string hiddenRemarksString = item.HiddenRemarks;
 
-            if (lastComplianceDate <= defaultDateTime)
-                lastPerformanceString = "N/A";
-            else
-                lastPerformanceString = SmartCore.Auxiliary.Convert.GetDateFormat(lastComplianceDate) + " " +
-                                        lastComplianceLifeLength;
-            string nextComplianceString = ((nextComplianceDate <= defaultDateTime)
-                                               ? ""
-                                               : SmartCore.Auxiliary.Convert.GetDateFormat(nextComplianceDate) + " ") +
-                                          item.NextPerformanceSource;
-            string nextRemainString = item.Remains != null && !item.Remains.IsNullOrZero()
-                                          ? item.Remains.ToString()
-                                          : "N/A";
+			if (lastComplianceDate <= defaultDateTime)
+				lastPerformanceString = "N/A";
+			else
+				lastPerformanceString = SmartCore.Auxiliary.Convert.GetDateFormat(lastComplianceDate) + " " +
+										lastComplianceLifeLength;
+			string nextComplianceString = ((nextComplianceDate <= defaultDateTime)
+											   ? ""
+											   : SmartCore.Auxiliary.Convert.GetDateFormat(nextComplianceDate) + " ") +
+										  item.NextPerformanceSource;
+			string nextRemainString = item.Remains != null && !item.Remains.IsNullOrZero()
+										  ? item.Remains.ToString()
+										  : "N/A";
 
-            //////////////////////////////////////////////////////////////////////////////////////
-            string description = item.Description != "" ? item.Description : "N/A";
-            string app = item.IsApplicability ? $"APL {item.Applicability}" : $"N/A {item.Applicability}";
+			//////////////////////////////////////////////////////////////////////////////////////
+			string description = item.Description != "" ? item.Description : "N/A";
+			string app = item.IsApplicability ? $"APL {item.Applicability}" : $"N/A {item.Applicability}";
 			string taskNumber = item.MPDTaskNumber != "" ? item.MPDTaskNumber : "N/A";
-            string taskCheck = item.TaskNumberCheck != "" ? item.TaskNumberCheck : "N/A";
-            string maintManual = item.MaintenanceManual != "" ? item.MaintenanceManual : "N/A";
-            string mrb = item.MRB != "" ? item.MRB : "N/A";
-            string check = item.MaintenanceCheck != null ? item.MaintenanceCheck.Name : "N/A";
-            DirectiveStatus status = item.Status;
+			string taskCheck = item.TaskNumberCheck != "" ? item.TaskNumberCheck : "N/A";
+			string maintManual = item.MaintenanceManual != "" ? item.MaintenanceManual : "N/A";
+			string mrb = item.MRB != "" ? item.MRB : "N/A";
+			string check = item.MaintenanceCheck != null ? item.MaintenanceCheck.Name : "N/A";
+			DirectiveStatus status = item.Status;
 
-            if (item.TaskCardNumberFile == null)
-                tcnColor = Color.MediumVioletRed;
+			if (item.TaskCardNumberFile == null)
+				tcnColor = Color.MediumVioletRed;
 
 			if(item.KitsApplicable && item.Kits.Count == 0)
 				kitColor = Color.FromArgb(Highlight.Red.Color);
@@ -193,6 +194,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			subItems.Add(CreateRow(item.WorkType.ToString(), item.WorkType));
 			subItems.Add(CreateRow(check, check));
 			subItems.Add(CreateRow(firstPerformanceString, firstPerformanceString));
+			subItems.Add(CreateRow(item.APUCalc.ToString(), item.APUCalc));
 			subItems.Add(CreateRow(item.Threshold.RepeatInterval.ToString(), item.Threshold.RepeatInterval));
 			subItems.Add(CreateRow(nextComplianceString, nextComplianceDate));
 			subItems.Add(CreateRow(nextRemainString, nextRemainString));
@@ -220,20 +222,20 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			subItems.Add(CreateRow(author, author));
 
 			return subItems;
-        }
+		}
 
-        #endregion
+		#endregion
 
-        #region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 
-        protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
-        {
-            if (SelectedItem != null)
-            {
-	            var dp = ScreenAndFormManager.GetMaintenanceDirectiveScreen(SelectedItem);
+		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		{
+			if (SelectedItem != null)
+			{
+				var dp = ScreenAndFormManager.GetMaintenanceDirectiveScreen(SelectedItem);
 				e.SetParameters(dp);
-            }
-        }
+			}
+		}
 		#endregion
 
 		protected override void SetTotalText()
