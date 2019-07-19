@@ -144,6 +144,9 @@ namespace EFCore.DTO.General
 		public int ProgramIndicator { get; set; }
 
 		[DataMember]
+		public bool APUCalc { get; set; }
+
+		[DataMember]
 		[Include]
 		public ATAChapterDTO ATAChapter { get; set; }
 
