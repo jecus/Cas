@@ -91,6 +91,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.linkLabel3 = new System.Windows.Forms.LinkLabel();
 			this.textBox3 = new System.Windows.Forms.TextBox();
 			this.label5 = new System.Windows.Forms.Label();
+			this.label6 = new System.Windows.Forms.Label();
+			this.checkBoxAPU = new System.Windows.Forms.CheckBox();
 			this.groupBox_Repetative.SuspendLayout();
 			this.groupFirstPerformance.SuspendLayout();
 			this.groupBoxClose.SuspendLayout();
@@ -768,12 +770,36 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.label5.TabIndex = 202;
 			this.label5.Text = "For SB";
 			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.label6.Location = new System.Drawing.Point(537, 140);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(57, 14);
+			this.label6.TabIndex = 205;
+			this.label6.Text = "APU FH:";
+			// 
+			// checkBoxAPU
+			// 
+			this.checkBoxAPU.AutoSize = true;
+			this.checkBoxAPU.Font = new System.Drawing.Font("Verdana", 11.25F);
+			this.checkBoxAPU.ForeColor = System.Drawing.Color.DimGray;
+			this.checkBoxAPU.Location = new System.Drawing.Point(665, 140);
+			this.checkBoxAPU.Name = "checkBoxAPU";
+			this.checkBoxAPU.Size = new System.Drawing.Size(15, 14);
+			this.checkBoxAPU.TabIndex = 206;
+			this.checkBoxAPU.UseVisualStyleBackColor = true;
+			// 
 			// MaintenanceDirectiveParametersControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this.Controls.Add(this.checkBoxAPU);
+			this.Controls.Add(this.label6);
 			this.Controls.Add(this.linkLabel3);
 			this.Controls.Add(this.textBox3);
 			this.Controls.Add(this.label5);
@@ -874,5 +900,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		private System.Windows.Forms.LinkLabel linkLabel3;
 		private System.Windows.Forms.TextBox textBox3;
 		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.CheckBox checkBoxAPU;
 	}
 }

@@ -174,6 +174,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
                     directive.ManHours != manHours ||
                     directive.Elapsed != elapsed ||
                     directive.Cost != cost ||
+					checkBoxAPU.Checked != directive.APUCalc || 
 					directive.NDTType.ItemId != ((NDTType)comboBoxNdt.SelectedItem).ItemId ||
 					directive.Skill.ItemId != ((Skill)comboBoxSkill.SelectedItem).ItemId ||
                     directive.IsClosed != IsClosed ||
@@ -200,6 +201,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
         {
             if(_currentDirective == null)
                 return;
+
+            checkBoxAPU.Checked = _currentDirective.APUCalc;
 
 	        var relationType = ItemRelationHelper.ConvertBLItemRelationToUIITem(
 				_currentDirective.WorkItemsRelationType,
@@ -332,8 +335,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			directive.NDTType = comboBoxNdt.SelectedItem as NDTType;
 			directive.Skill = comboBoxSkill.SelectedItem as Skill;
 	        directive.KitsApplicable = checkBoxKitsApplicable.Checked;
-
-	        if (!checkBoxKitsApplicable.Checked && directive.Kits.Count > 0)
+	        directive.APUCalc = checkBoxAPU.Checked;
+			if (!checkBoxKitsApplicable.Checked && directive.Kits.Count > 0)
 	        {
 				foreach (var kit in directive.Kits)
 					kit.IsDeleted = true;
