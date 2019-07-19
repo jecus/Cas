@@ -1,7 +1,6 @@
 ﻿using EntityCore.DTO.Dictionaries;
 using EntityCore.DTO.General;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 namespace EntityCore.DTO
 {

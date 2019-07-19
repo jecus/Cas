@@ -11,7 +11,6 @@ using EntityCore.Interfaces.ExecutorServices.Arcitecture;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace CasAPI.Controllers
 {

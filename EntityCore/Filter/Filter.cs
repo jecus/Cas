@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 using EntityCore.Attributte;
 
 namespace EntityCore.Filter

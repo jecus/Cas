@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using Auxiliary;
-using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Store;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.DocumentationControls

@@ -10,7 +10,6 @@ using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using Telerik.WinControls.UI;
 using Convert = System.Convert;

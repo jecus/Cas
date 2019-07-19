@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Drawing;
-using System.Reflection;
 using System.Windows.Forms;
 using CAS.UI.Management;
-using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.NewGrid;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.WorkPackage;

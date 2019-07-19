@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Serialization;
-using System.Security.Principal;
 using EFCore.Attributte;
 using EFCore.Interfaces;
 

@@ -21,7 +21,6 @@ using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.Schedule;
 using SmartCore.Filters;
 using Telerik.WinControls.UI;
-using Component = SmartCore.Entities.General.Accessory.Component;
 
 namespace CAS.UI.UIControls.ScheduleControls
 {

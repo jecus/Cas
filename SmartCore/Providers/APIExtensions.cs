@@ -1,15 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.IO;
+﻿using System.IO;
 using System.Net;
 using System.Net.Http;
-using System.Net.Mime;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
-using SmartCore.Contract;
 
 namespace CAS.UI.Helpers
 {

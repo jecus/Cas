@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
-using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
-using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.DirectivesControls;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;

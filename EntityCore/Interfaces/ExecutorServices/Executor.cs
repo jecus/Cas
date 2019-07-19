@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
 using EntityCore.Interfaces.ExecutorServices;
 using EntityCore.Interfaces.ExecutorServices.Arcitecture;
 using Microsoft.Extensions.Configuration;
-using Microsoft.SqlServer.Management.Smo;
 
 namespace EntityCore.Interfaces
 {

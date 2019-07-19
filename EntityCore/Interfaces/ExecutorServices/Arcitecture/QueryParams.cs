@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data.SqlClient;
-
-namespace EntityCore.Interfaces.ExecutorServices.Arcitecture
+﻿namespace EntityCore.Interfaces.ExecutorServices.Arcitecture
 {
 	public class QueryParams
 	{

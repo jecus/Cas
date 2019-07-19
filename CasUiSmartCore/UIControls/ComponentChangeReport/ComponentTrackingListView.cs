@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Forms;
-using Auxiliary;
 using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.ComplianceControls;

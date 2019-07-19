@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows.Forms;
 using Auxiliary;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
-using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Calculations;

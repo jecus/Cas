@@ -1,7 +1,4 @@
-﻿using System;
-using System.Text;
-
-namespace EntityCore.Interfaces.ExecutorServices.Arcitecture
+﻿namespace EntityCore.Interfaces.ExecutorServices.Arcitecture
 {
 	public class DbQuery
 	{

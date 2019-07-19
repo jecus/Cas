@@ -8,7 +8,6 @@ using CAS.UI.UIControls.ProductControls;
 using CAS.UI.UIControls.PurchaseControls;
 using CASTerms;
 using EFCore.DTO.Dictionaries;
-using EFCore.DTO.General;
 using EFCore.Filter;
 using MetroFramework.Forms;
 using SmartCore.Auxiliary;

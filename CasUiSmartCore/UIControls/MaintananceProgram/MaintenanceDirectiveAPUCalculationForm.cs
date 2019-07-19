@@ -1,24 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
-using CAS.UI.Helpers;
-using CAS.UI.Interfaces;
-using CAS.UI.UIControls.AnimatedBackgroundWorker;
-using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using MetroFramework.Forms;
-using SmartCore.Auxiliary.Extentions;
-using SmartCore.Calculations;
-using SmartCore.Entities.Collections;
-using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.MaintenanceWorkscope;
-using SmartCore.Relation;
-using Component = SmartCore.Entities.General.Accessory.Component;
-using ComponentCollection = SmartCore.Entities.Collections.ComponentCollection;
 
 namespace CAS.UI.UIControls.MaintananceProgram
 {

@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
 using EntityCore.DTO.General;
-using EntityCore.Interfaces;
 using Newtonsoft.Json;
 
 namespace EntityCore.DTO.Dictionaries

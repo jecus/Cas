@@ -11,7 +11,6 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Mail;
 using SmartCore.Filters;
-using SmartCore.Queries;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.MailControls

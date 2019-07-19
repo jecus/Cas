@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using Auxiliary;
@@ -16,7 +15,6 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
-using Telerik.WinControls.Data;
 using Telerik.WinControls.UI;
 using TempUIExtentions;
 

@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
-using EFCore.DTO.Dictionaries;
 using EFCore.DTO.General;
 using EFCore.Filter;
 using SmartCore.Entities.Collections;

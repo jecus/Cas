@@ -12,7 +12,6 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Atlbs;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Files;
 using SmartCore.Management;
 

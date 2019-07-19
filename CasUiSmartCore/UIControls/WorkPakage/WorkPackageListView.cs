@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
-using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.NewGrid;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.WorkPackage;
 
 namespace CAS.UI.UIControls.WorkPakage

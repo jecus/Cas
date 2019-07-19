@@ -12,7 +12,6 @@ using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
-using SmartCore.Entities.General.MaintenanceWorkscope;
 using Telerik.WinControls.UI;
 using TempUIExtentions;
 

@@ -1,10 +1,7 @@
-﻿using System.Diagnostics;
-using System.Linq;
-using EFCore.DTO.General;
+﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Atlbs;
 using SmartCore.Management;
 
 namespace SmartCore.Tests.ExcelImportExport
