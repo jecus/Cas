@@ -97,6 +97,12 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			if(listViewMpdAll.SelectedItem == null)
 				return;
 
+			if (_calcItems.Any(i => i.ItemId == listViewMpdAll.SelectedItem.ItemId))
+			{
+				MessageBox.Show("This MPD is alredy added", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
+
 			listViewMpdApu.InsertItems(listViewMpdAll.SelectedItems.ToArray());
 			_calcItems.AddRange(listViewMpdAll.SelectedItems.ToArray());
 		}

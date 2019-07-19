@@ -314,6 +314,17 @@ namespace CAS.UI.UIControls.NewGrid
 
 				foreach (var cell in GetListViewSubItems(item))
 				{
+					if(cell != null)
+						cell.Text = cell.Text.Replace("\n", "");
+
+					if (rowInfo.Cells[i].ColumnInfo is GridViewDateTimeColumn)
+						rowInfo.Cells[i].Value = cell.Tag;
+					else
+						rowInfo.Cells[i].Value = cell;
+
+					rowInfo.Cells[i].Tag = cell;
+
+
 					rowInfo.Cells[i].Value = cell;
 
 					if (cell.ForeColor.HasValue)

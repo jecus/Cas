@@ -157,7 +157,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.Name = "MaintenanceDirectiveAPUCalculationForm";
 			this.Resizable = false;
 			this.ShowIcon = false;
-			this.Text = "Maintenance Directive Bind Components Form";
+			this.Text = "Maintenance Directive APU Calculation Form";
 			this.splitContainerMain.Panel1.ResumeLayout(false);
 			this.splitContainerMain.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).EndInit();
