@@ -194,7 +194,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			subItems.Add(CreateRow(item.WorkType.ToString(), item.WorkType));
 			subItems.Add(CreateRow(check, check));
 			subItems.Add(CreateRow(firstPerformanceString, firstPerformanceString));
-			subItems.Add(CreateRow(item.APUCalc.ToString(), item.APUCalc));
+			subItems.Add(CreateRow(item.APUCalc ? "Yes" : "No", item.APUCalc));
 			subItems.Add(CreateRow(item.Threshold.RepeatInterval.ToString(), item.Threshold.RepeatInterval));
 			subItems.Add(CreateRow(nextComplianceString, nextComplianceDate));
 			subItems.Add(CreateRow(nextRemainString, nextRemainString));
