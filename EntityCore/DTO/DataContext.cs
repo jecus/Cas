@@ -60,6 +60,7 @@ namespace EntityCore.DTO
 		public DbSet<CertificateOfReleaseToServiceDTO> CertificateOfReleaseToServiceDtos { get; set; }
 		public DbSet<ComponentDirectiveDTO> ComponentDirectiveDtos { get; set; }
 		public DbSet<ComponentDTO> ComponentDtos { get; set; }
+		public DbSet<BaseComponentDTO> BaseComponentDtos { get; set; }
 		public DbSet<ComponentLLPCategoryChangeRecordDTO> ComponentLLPCategoryChangeRecordDtos { get; set; }
 		public DbSet<ComponentLLPCategoryDataDTO> ComponentLLPCategoryDataDtos { get; set; }
 		public DbSet<ComponentOilConditionDTO> ComponentOilConditionDtos { get; set; }
@@ -148,6 +149,11 @@ namespace EntityCore.DTO
 		
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			modelBuilder.Entity<ComponentDTO>()
+				.HasDiscriminator<bool>(nameof(ComponentDTO.IsBaseComponent))
+				.HasValue<ComponentDTO>(false)
+				.HasValue<BaseComponentDTO>(true);
+
 			#region DictionaryMap
 
 			modelBuilder.Entity<NonRoutineJobDTO>()
