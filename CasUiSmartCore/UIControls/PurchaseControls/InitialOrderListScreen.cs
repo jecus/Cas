@@ -9,8 +9,8 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.PurchaseControls.Initial;
 using CASTerms;
-using EFCore.DTO.Dictionaries;
-using EFCore.DTO.General;
+using EntityCore.DTO.Dictionaries;
+using EntityCore.DTO.General;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -21,7 +21,7 @@ using SmartCore.Filters;
 using SmartCore.Purchase;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
-using Filter = EFCore.Filter.Filter;
+using Filter = EntityCore.Filter.Filter;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {

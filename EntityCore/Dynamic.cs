@@ -323,7 +323,7 @@ namespace EntityCore
                     FieldInfo[] fields = GenerateProperties(tb, properties);
                     GenerateEquals(tb, fields);
                     GenerateGetHashCode(tb, fields);
-                    Type result = tb.CreateType();
+                    Type result = tb.CreateTypeInfo();
                     classCount++;
                     return result;
                 }

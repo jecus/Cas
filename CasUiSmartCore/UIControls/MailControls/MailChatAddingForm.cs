@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using SmartCore.Entities.General.Mail;
 using SmartCore.Purchase;
 

@@ -7,7 +7,7 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Schedule;

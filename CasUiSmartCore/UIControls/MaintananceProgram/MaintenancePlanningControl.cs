@@ -11,6 +11,7 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.PurchaseControls;
 using CAS.UI.UIControls.WorkPakage;
 using CASTerms;
+using EntityCore.DTO.General;
 using SmartCore.Analyst;
 using SmartCore.Calculations;
 using SmartCore.Calculations.Maintenance;
@@ -1135,7 +1136,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
             {
                 var dir = (Directive)parent;
                 if (dir.EngineeringOrderFile != null && dir.EngineeringOrderFile.FileData == null)
-					dir.EngineeringOrderFile = GlobalObjects.CasEnvironment.NewLoader.GetObjectById<EFCore.DTO.General.AttachedFileDTO, AttachedFile>(dir.EngineeringOrderFile.ItemId, true);
+					dir.EngineeringOrderFile = GlobalObjects.CasEnvironment.NewLoader.GetObjectById<AttachedFileDTO, AttachedFile>(dir.EngineeringOrderFile.ItemId, true);
 				file = dir.EngineeringOrderFile;
             }
             else if (parent is BaseComponent)

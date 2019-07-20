@@ -2,7 +2,7 @@
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.JobCardControls;
 using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 
 namespace CAS.UI.UIControls.CommercialControls
 {

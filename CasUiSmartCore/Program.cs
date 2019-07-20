@@ -108,7 +108,7 @@ namespace CAS.UI
 			var averageUtilizationService = new AverageUtilizationCore(aircraftService, storeService, compontntService);
 			var directiveService = new DirectiveCore(environment.NewKeeper, environment.NewLoader, environment.Keeper,  environment.Loader, itemsRelationsDataAccess);
 			var aircraftFlightService = new AircraftFlightCore(environment, environment.Loader, environment.NewLoader, directiveService, environment.Manipulator, compontntService, environment.NewKeeper,aircraftService);
-			var flightTrackService = new FlightTrackCore(environment.NewLoader);
+			var flightTrackService = new FlightTrackCore(environment.NewLoader, environment.Loader, environment);
 			var calculator = new Calculator(environment,compontntService, aircraftFlightService, aircraftService);
 	        var mtopCalculator = new MTOPCalculator(calculator, aircraftService);
 			var planOpsCalculator = new PlanOpsCalculator(environment.NewLoader, environment.NewKeeper, aircraftService,flightTrackService);

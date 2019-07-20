@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
-using EFCore.DTO.Dictionaries;
+using EntityCore.DTO.Dictionaries;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Schedule;
 

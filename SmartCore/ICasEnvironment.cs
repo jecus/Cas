@@ -4,8 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using CAS.UI.Helpers;
-using EFCore.DTO.General;
-using EFCore.UnitOfWork;
+using EntityCore.DTO.General;
 using SmartCore.Aircrafts;
 using SmartCore.Calculations;
 using SmartCore.Entities;
@@ -43,7 +42,6 @@ namespace SmartCore
 		Calculator Calculator { get; }
 		Keeper Keeper { get; }
 		Manipulator Manipulator { get; }
-		UnitOfWork UnitOfWork { get; }
 
 
 		DataSet Execute(string sql);

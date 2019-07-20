@@ -12,7 +12,7 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASReports.Builders;
 using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using SmartCore.Calculations;
 using SmartCore.Calculations.Maintenance;
 using SmartCore.Entities.Collections;
@@ -25,7 +25,7 @@ using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
-using Filter = EFCore.Filter.Filter;
+using Filter = EntityCore.Filter.Filter;
 
 namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 {

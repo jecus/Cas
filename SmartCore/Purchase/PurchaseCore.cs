@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using EFCore.DTO.Dictionaries;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.DTO.Dictionaries;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
+using EntityCore.Filter;
 using SmartCore.Calculations.Maintenance;
 using SmartCore.Calculations.PerformanceCalculator;
 using SmartCore.Entities;

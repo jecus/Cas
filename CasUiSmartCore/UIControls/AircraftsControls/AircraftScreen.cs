@@ -26,8 +26,9 @@ using CAS.UI.UIControls.PurchaseControls;
 using CAS.UI.UIControls.SMSControls;
 using CAS.UI.UIControls.WorkPakage;
 using CASTerms;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
+using EntityCore.Attributte;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -108,7 +109,7 @@ namespace CAS.UI.UIControls.AircraftsControls
             AnimatedThreadWorker.ReportProgress(0, "Check Aircraft");
             GlobalObjects.AircraftsCore.ResetAircraft(CurrentAircraft);
 
-	        var aircraftEquip = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AircraftEquipmentDTO, AircraftEquipments>(new Filter("AircraftId", EFCore.Attributte.FilterType.Equal, CurrentAircraft.ItemId), true);
+	        var aircraftEquip = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AircraftEquipmentDTO, AircraftEquipments>(new Filter("AircraftId", EntityCore.Attributte.FilterType.Equal, CurrentAircraft.ItemId), true);
 	        CurrentAircraft.AircraftEquipments.Clear();
 	        CurrentAircraft.AircraftEquipments.AddRange(aircraftEquip);
 
@@ -1576,8 +1577,8 @@ namespace CAS.UI.UIControls.AircraftsControls
             CancelAsync();
 
             CommonFilter<AvionicsInventoryMarkType> avionixFilter = 
-                new CommonFilter<AvionicsInventoryMarkType>(Component.AvionicsInventoryProperty, 
-                                                            FilterType.In, 
+                new CommonFilter<AvionicsInventoryMarkType>(Component.AvionicsInventoryProperty,
+	                SmartCore.Filters.FilterType.In, 
                                                             new[]{AvionicsInventoryMarkType.Optional, 
                                                                   AvionicsInventoryMarkType.Required, 
                                                                   AvionicsInventoryMarkType.Unknown});

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
-using EFCore.DTO.Dictionaries;
+using EntityCore.DTO.Dictionaries;
 using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 

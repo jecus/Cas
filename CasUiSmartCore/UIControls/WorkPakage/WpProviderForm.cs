@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.WorkPackage;

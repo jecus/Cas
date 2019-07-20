@@ -9,7 +9,7 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Events;
 using CAS.UI.UIControls.WorkPakage;
 using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;

@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
-using EFCore.DTO.Dictionaries;
+using EntityCore.DTO.Dictionaries;
 using SmartCore.Auxiliary;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;

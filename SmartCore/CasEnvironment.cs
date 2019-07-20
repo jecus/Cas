@@ -11,11 +11,9 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
 using System.Threading;
 using CAS.UI.Helpers;
-using EFCore.DTO.Dictionaries;
-using EFCore.DTO.General;
-using EFCore.Filter;
-using EFCore.UnitOfWork;
-using EFCore.UnitOfWork.Providers;
+using EntityCore.DTO.General;
+using EntityCore.DTO.Dictionaries;
+using EntityCore.Filter;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Hangar;
 using SmartCore.Entities.General.Store;
@@ -189,7 +187,6 @@ namespace SmartCore
 	        IdentityUser = user;
 	        AuditRepository.WriteAsync(new Entities.User(user), AuditOperation.SignIn, user);
 
-	        _unitOfWork = new UnitOfWork(new WcfProvider("91.213.233.139:45617"));
 	        _newLoader = new NewLoader(this);
 		}
 		#endregion
@@ -996,16 +993,6 @@ namespace SmartCore
         }
 		#endregion
 
-
-		#region public UnitOfWork UnitOfWork {get;}
-
-		private UnitOfWork _unitOfWork;
-	    public UnitOfWork UnitOfWork
-	    {
-		    get { return _unitOfWork; }
-	    }
-
-		#endregion
 
 		#region public INewLoader NewLoader { get; }
 

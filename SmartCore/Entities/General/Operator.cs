@@ -1,7 +1,7 @@
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;

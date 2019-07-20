@@ -7,7 +7,7 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
-using EFCore.DTO.Dictionaries;
+using EntityCore.DTO.Dictionaries;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;

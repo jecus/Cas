@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary.DataGridViewElements;
 using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using MetroFramework.Forms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;

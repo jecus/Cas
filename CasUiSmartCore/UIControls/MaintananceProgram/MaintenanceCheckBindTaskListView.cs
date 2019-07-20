@@ -10,7 +10,7 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.WorkPakage;
 using CASTerms;
-using EFCore.DTO.Dictionaries;
+using EntityCore.DTO.Dictionaries;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;

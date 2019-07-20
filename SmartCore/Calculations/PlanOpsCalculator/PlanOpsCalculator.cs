@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.Attributte;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using SmartCore.Aircrafts;
 using SmartCore.Auxiliary;
 using SmartCore.Entities;
@@ -11,7 +12,6 @@ using SmartCore.Entities.General.Atlbs;
 using SmartCore.Entities.General.Schedule;
 using SmartCore.Entities.NewLoader;
 using SmartCore.TrackCore;
-using FilterType = EFCore.Attributte.FilterType;
 
 namespace SmartCore.Calculations.PlanOpsCalculator
 {

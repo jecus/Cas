@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using EFCore.DTO.Dictionaries;
+using EntityCore.DTO.Dictionaries;
+using EntityCore.DTO.Dictionaries;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;

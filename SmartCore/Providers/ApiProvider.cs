@@ -10,9 +10,9 @@ using System.Net.Http;
 using System.Web;
 using System.Xml;
 using System.Xml.Serialization;
-using EFCore.DTO;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.DTO;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using SmartCore.Contract;
 
 namespace CAS.UI.Helpers

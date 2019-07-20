@@ -1,22 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
-using EFCore.Attributte;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.Attributte;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
+using SmartCore.DtoHelper;
+using SmartCore.Entities;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Schedule;
 using SmartCore.Entities.NewLoader;
+using SmartCore.Queries;
 
 namespace SmartCore.TrackCore
 {
 	public class FlightTrackCore : IFlightTrackCore
 	{
 		private readonly INewLoader _newLoader;
+		private readonly ILoader _loader;
+		private readonly ICasEnvironment _environment;
 
-		public FlightTrackCore(INewLoader newLoader)
+		public FlightTrackCore(INewLoader newLoader, ILoader loader, ICasEnvironment environment)
 		{
 			_newLoader = newLoader;
+			_loader = loader;
+			_environment = environment;
 		}
 
 		#region public List<FlightTrackRecord> GetFlightTrackRecordsById(int itemId, bool loadChild = false)
@@ -69,12 +77,20 @@ namespace SmartCore.TrackCore
 
 		public List<FlightTrackRecord> GetAllFlightScheduleRecordsForPeriod(DateTime from, DateTime to, bool loadChild = false)
 		{
-			var flNumberIds = _newLoader.GetSelectColumnOnly<FlightNumberDTO, int>(i => i.FlightType == FlightType.Schedule.ItemId,i => i.ItemId);
-			var flightNumberPeriodIds = _newLoader.GetSelectColumnOnly<FlightNumberPeriodDTO, int>(i => flNumberIds.Contains(i.FlightNumberId) 
-			                                                                                            && (i.DepartureDate.Value <= from || i.DepartureDate <= to)
-																										&& (i.ArrivalDate >= from || i.ArrivalDate >= to), i => i.ItemId);
+			var fl = _newLoader.GetObjectList<FlightNumberDTO, FlightNumber>(new Filter("FlightType", FlightType.Schedule.ItemId));
+			var flNumberIds = fl.Select(i => i.ItemId);
 
-			var tripRecords = _newLoader.GetObjectListAll<FlightTrackRecordDTO, FlightTrackRecord>(new Filter("FlightPeriodId", flightNumberPeriodIds), loadChild).ToList();
+			var query = BaseQueries.GetSelectQueryColumnOnly<FlightTrackRecord>(FlightTrackRecord.ItemIdProperty);
+			query = $"{query} where FlightNumberId in ({string.Join(",", flNumberIds)}) " +
+			        $"and (DepartureDate <= {from.ToSqlDate()} || DepartureDate <= {to.ToSqlDate()}) " +
+			        $"and (ArrivalDate >= {from.ToSqlDate()}|| ArrivalDate >= {to.ToSqlDate()})";
+
+			var res = _environment.Execute(query);
+			var ids = new List<int>();
+			foreach (DataRow row in res.Tables[0].Rows)
+				ids.Add(Convert.ToInt32(row[0].ToString()));
+
+			var tripRecords = _newLoader.GetObjectListAll<FlightTrackRecordDTO, FlightTrackRecord>(new Filter("FlightPeriodId", ids), loadChild).ToList();
 
 			if (loadChild)
 				loadChildTrackRecords(tripRecords);

@@ -1,6 +1,6 @@
 ﻿using CAS.UI.UIControls.DirectivesControls;
 using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 
 namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 {

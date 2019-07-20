@@ -9,7 +9,7 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
-using EFCore.DTO.Dictionaries;
+using EntityCore.DTO.Dictionaries;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -18,7 +18,7 @@ using SmartCore.Entities.General.Personnel;
 using SmartCore.Filters;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
-using Filter = EFCore.Filter.Filter;
+using Filter = EntityCore.Filter.Filter;
 
 namespace CAS.UI.UIControls.PersonnelControls
 {

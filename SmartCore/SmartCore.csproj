@@ -455,6 +455,7 @@
     <Compile Include="Documents\DocumentCore.cs" />
     <Compile Include="Documents\IDocumentCore.cs" />
     <Compile Include="DtoHelper\DictionaryConverterDto.cs" />
+    <Compile Include="DtoHelper\Extentionsa.cs" />
     <Compile Include="DtoHelper\GeneralConverterDto.cs" />
     <Compile Include="Entities\Collections\ActuaStateRecordCollection.cs" />
     <Compile Include="Entities\Collections\AircraftCollection.cs" />
@@ -898,9 +899,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EFCore\Entity.csproj">
-      <Project>{6dddaf81-980a-4ebc-bf58-3ca93a059d7f}</Project>
-      <Name>Entity</Name>
+    <ProjectReference Include="..\EntityCore\EntityCore.csproj">
+      <Project>{a04296a8-8cbd-41e9-9e91-1a4a56004cde}</Project>
+      <Name>EntityCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\TextProcessing\TextProcessing.csproj">
       <Project>{C56BB11D-5043-4A8B-8288-A7199B76B570}</Project>
