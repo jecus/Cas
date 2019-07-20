@@ -42,7 +42,17 @@ namespace CasAPI.Controllers.Dictionaries
 		public async override Task<ActionResult<int>> Save(AircraftOtherParameterDTO entity)
 		{
 			if (GlobalObjects.Dictionaries.ContainsKey(_type))
-				GlobalObjects.Dictionaries[_type].Add(entity);
+			{
+				var find = GlobalObjects.Dictionaries[_type].FirstOrDefault(i => i.ItemId == entity.ItemId);
+				if (find == null)
+					GlobalObjects.Dictionaries[_type].Add(entity);
+				else
+				{
+					GlobalObjects.Dictionaries[_type].Remove(find);
+					GlobalObjects.Dictionaries[_type].Add(entity);
+				}
+
+			}
 
 			return await base.Save(entity);
 		}

@@ -24,7 +24,7 @@ namespace CasAPI
 
 		public void ConfigureServices(IServiceCollection services)
 		{
-			//services.AddWorker<DictionaryWorker>();
+			services.AddWorker<DictionaryWorker>();
 			services.AddWorker<BaseComponentWorker>();
 			services.AddMvc()
 				.AddJsonOptions(options =>
