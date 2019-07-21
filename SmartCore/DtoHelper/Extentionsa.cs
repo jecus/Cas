@@ -6,7 +6,8 @@ namespace SmartCore.DtoHelper
 	{
 		public static string ToSqlDate(this DateTime date)
 		{
-			return $"convert(datetime, '{date.Date}', 104)";
+			return date.Date.ToString("MM/dd/yyyy");
+			//return $"convert(datetime, '{date.Date}', 104)";
 		}
 	}
 }

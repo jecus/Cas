@@ -25,7 +25,6 @@ namespace SmartCore
 		/// <summary>
 		/// Свойства
 		/// </summary>
-		DatabaseManager DatabaseManager { get; }
 		ApiProvider ApiProvider { get; }
 		OperatorCollection Operators { get; }
 		CommonCollection<Vehicle> Vehicles { get; }

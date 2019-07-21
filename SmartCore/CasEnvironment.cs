@@ -45,9 +45,7 @@ namespace SmartCore
         /// </summary>
         public CasEnvironment()
         {
-            _databaseManager = new DatabaseManager();
-
-            _dictionaries = new CommonDictionariesCache();
+	        _dictionaries = new CommonDictionariesCache();
         }
         #endregion
 
@@ -96,22 +94,7 @@ namespace SmartCore
 
         #endregion
 
-        /*
-         * Работа с БД: Свойства, глобальные объекты
-         */
-
-        #region public DatabaseManager DatabaseManager { get; }
-        /// <summary>
-        /// Управление базой данных
-        /// </summary>
-        private DatabaseManager _databaseManager;
-        /// <summary>
-        /// Управление базой данных
-        /// </summary>
-        public DatabaseManager DatabaseManager { get { return _databaseManager ?? (_databaseManager = new DatabaseManager()); } }
-		#endregion
-
-		private ApiProvider _apiProvider;
+        private ApiProvider _apiProvider;
 		public ApiProvider ApiProvider
 		{
 			get { return _apiProvider; }
@@ -137,12 +120,6 @@ namespace SmartCore
         public void Disconnect()
         {
             _exit = true;
-
-            if (_databaseManager != null)
-            {
-                _databaseManager.Disconnect();
-				Reset();
-            }
 
             if(_tempFileMonitoringThread != null)
             {
@@ -199,14 +176,14 @@ namespace SmartCore
 		#region public void CheckTablesFor(Type type)
         public void CheckTablesFor(Type type)
         {
-            _databaseManager.CheckTableFor(type);
+           
         }
         #endregion
 
         #region public void CreateTablesFor(Type type)
         public void CreateTablesFor(Type type)
         {
-            _databaseManager.CreateTableFor(type);
+            
         }
         #endregion
 
@@ -218,7 +195,7 @@ namespace SmartCore
         public override string ToString()
         {
             //return "Orenair, CasDemo at Dev\\Dev2005, 15 aircrafts";
-            return _databaseManager.Database != null ? _databaseManager.Database.ToString() : "Not connected";
+            return "";
         }
 		#endregion
 

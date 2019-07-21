@@ -8,6 +8,7 @@ using EntityCore.Filter;
 using SmartCore.DtoHelper;
 using SmartCore.Entities;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General;
 using SmartCore.Entities.General.Schedule;
 using SmartCore.Entities.NewLoader;
 using SmartCore.Queries;
@@ -80,10 +81,10 @@ namespace SmartCore.TrackCore
 			var fl = _newLoader.GetObjectList<FlightNumberDTO, FlightNumber>(new Filter("FlightType", FlightType.Schedule.ItemId));
 			var flNumberIds = fl.Select(i => i.ItemId);
 
-			var query = BaseQueries.GetSelectQueryColumnOnly<FlightTrackRecord>(FlightTrackRecord.ItemIdProperty);
-			query = $"{query} where FlightNumberId in ({string.Join(",", flNumberIds)}) " +
-			        $"and (DepartureDate <= {from.ToSqlDate()} || DepartureDate <= {to.ToSqlDate()}) " +
-			        $"and (ArrivalDate >= {from.ToSqlDate()}|| ArrivalDate >= {to.ToSqlDate()})";
+			var query = BaseQueries.GetSelectQueryColumnOnly<FlightNumberPeriod>(BaseEntityObject.ItemIdProperty);
+			query = $"{query} and FlightNumberId in ({string.Join(",", flNumberIds)}) " +
+			        $"and (DepartureDate <= {from.ToSqlDate()} or DepartureDate <= {to.ToSqlDate()}) " +
+			        $"and (ArrivalDate >= {from.ToSqlDate()} or ArrivalDate >= {to.ToSqlDate()})";
 
 			var res = _environment.Execute(query);
 			var ids = new List<int>();
