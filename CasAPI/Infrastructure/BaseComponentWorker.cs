@@ -31,7 +31,7 @@ namespace CasAPI.Infrastructure
 				{
 					var context = s.ServiceProvider.GetRequiredService<DataContext>();
 					var repo = new Repository<BaseComponentDTO>(context);
-					var res = await repo.GetObjectListAsync(loadChild: true);
+					var res = await repo.GetObjectListAllAsync(loadChild: true);
 
 					GlobalObjects.BaseComponents.Clear();
 					GlobalObjects.BaseComponents.AddRange(res);

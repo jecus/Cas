@@ -32,11 +32,23 @@ namespace CasAPI.Controllers.General
 
 		public async override Task<ActionResult<List<BaseComponentDTO>>> GetObjectList(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false)
 		{
-			if (filters == null)
+			if (filters.IsNullOrEmpty())
 				return GlobalObjects.BaseComponents.ToList();
 
 			return await base.GetObjectList(filters, loadChild, getDeleted);
 		}
+
+		#region Overrides of BaseController<BaseComponentDTO>
+
+		public async override Task<ActionResult<List<BaseComponentDTO>>> GetObjectListAll(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false)
+		{
+			if (filters.IsNullOrEmpty())
+				return GlobalObjects.BaseComponents.ToList();
+
+			return await base.GetObjectList(filters, loadChild, getDeleted);
+		}
+
+		#endregion
 
 		public async override Task<ActionResult<int>> Save(BaseComponentDTO entity)
 		{

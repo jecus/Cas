@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Collections.Generic;
+using System.Linq;
+using EntityCore.Attributte;
+using EntityCore.Filter;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CasAPI.Infrastructure
 {
@@ -9,6 +13,11 @@ namespace CasAPI.Infrastructure
 		{
 			services.AddScoped<IWorker, TWorker>();
 			return services;
+		}
+
+		public static bool IsNullOrEmpty(this IEnumerable<Filter> filters)
+		{
+			return filters.All(i => i.Value == null && i.Values == null && i.FilterProperty == null);
 		}
 	}
 }

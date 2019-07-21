@@ -33,7 +33,7 @@ namespace CasAPI.Controllers.Dictionaries
 
 		public async override Task<ActionResult<List<AircraftOtherParameterDTO>>> GetObjectList(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false)
 		{
-			if (GlobalObjects.Dictionaries.ContainsKey(_type) && filters == null)
+			if (GlobalObjects.Dictionaries.ContainsKey(_type) && filters.IsNullOrEmpty())
 				return GlobalObjects.Dictionaries[_type].Cast<AircraftOtherParameterDTO>().ToList();
 
 			return await base.GetObjectList(filters, loadChild, getDeleted);
