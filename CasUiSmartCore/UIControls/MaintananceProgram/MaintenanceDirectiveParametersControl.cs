@@ -201,10 +201,11 @@ namespace CAS.UI.UIControls.MaintananceProgram
         {
             if(_currentDirective == null)
                 return;
+            checkBoxAPU.CheckedChanged -= CheckBoxAPU_CheckedChanged;
+			checkBoxAPU.Checked = _currentDirective.APUCalc;
+			checkBoxAPU.CheckedChanged += CheckBoxAPU_CheckedChanged;
 
-            checkBoxAPU.Checked = _currentDirective.APUCalc;
-
-	        var relationType = ItemRelationHelper.ConvertBLItemRelationToUIITem(
+			var relationType = ItemRelationHelper.ConvertBLItemRelationToUIITem(
 				_currentDirective.WorkItemsRelationType,
 				_currentDirective.IsFirst.HasValue && _currentDirective.IsFirst.Value);
 			SetControlsEnable(relationType != WorkItemsRelationTypeUI.ThisItemDependsFromAnother);

@@ -46,7 +46,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		{
 			if(_items == null)
 				throw new ArgumentNullException("maintenanceDirective", "must be not null");
-			_items.AddRange(directives.Where(i => i.Threshold.RepeatInterval.Hours.HasValue));
+			_items.AddRange(directives.Where(i => i.ATAChapter.ShortName == "43"));
 			_calcItems.AddRange(directives.Where(i => i.APUCalc));
 
 			UpdateConrols();
@@ -115,6 +115,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
 		private void buttonOk_Click(object sender, EventArgs e)
 		{
+			DialogResult = DialogResult.OK;
 			try
 			{
 				foreach (var item in _calcItems)

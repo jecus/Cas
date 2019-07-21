@@ -550,7 +550,14 @@ namespace SmartCore.Calculations.MTOP
 			directive.PhaseThresh.Hours = (int)Math.Round(hoursPhase > -1 ? hoursPhase : hours);
 			directive.PhaseThresh.Cycles = (int)Math.Round(cyclesPhase > -1 ? cyclesPhase : cycles);
 			directive.PhaseThresh.Days = (int)Math.Round(daysPhase > -1 ? daysPhase : days);
-			
+
+			if (directive.APUCalc && thresh.Hours.HasValue)
+			{
+				var aircraft = _aircraftsCore.GetAircraftById(directive.ParentBaseComponent.ParentAircraftId);
+				directive.PhaseThresh = new Lifelength(thresh);
+				directive.PhaseThresh.Hours = (int?)(directive.PhaseThresh.Hours / aircraft.APUFH);
+			}
+
 			var repeat = directive.Threshold.RepeatInterval;
 			directive.PhaseRepeat = new Lifelength(0, 0, 0);
 
