@@ -703,7 +703,7 @@ namespace SmartCore
             loadingState.CurrentPersentageDescription = "Loading Base Details";
             backgroundWorker.ReportProgress(1, loadingState);
 
-            BaseComponents = new BaseComponentCollection(NewLoader.GetObjectListAll<ComponentDTO, BaseComponent>(new Filter("IsBaseComponent", true),loadChild:true));
+            BaseComponents = new BaseComponentCollection(NewLoader.GetObjectListAll<ComponentDTO, BaseComponent>(loadChild:true));
             
             if (backgroundWorker.CancellationPending)
             {

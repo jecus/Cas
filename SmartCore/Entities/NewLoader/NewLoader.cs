@@ -294,7 +294,7 @@ namespace SmartCore.Entities.NewLoader
 			_casEnvironment.WorkShops = new CommonCollection<WorkShop>(GetObjectListAll<WorkShopDTO, WorkShop>());
 #endif
 			// Загрузка всех базовых агрегатов
-			_casEnvironment.BaseComponents = new BaseComponentCollection(GetObjectListAll<ComponentDTO, BaseComponent>(new Filter("IsBaseComponent", true),true)); //GetBaseDetails();
+			_casEnvironment.BaseComponents = new BaseComponentCollection(GetObjectListAll<BaseComponentDTO, BaseComponent>(loadChild:true)); //GetBaseDetails();
 
 			// Выставляем ссылки между объектами
 
@@ -433,7 +433,7 @@ namespace SmartCore.Entities.NewLoader
 				return;
 
 			//TODO пересмотреть подход!!!!!!!!!!
-			var bc = GetObjectListAll<ComponentDTO, BaseComponent>(new Filter("IsBaseComponent", true));
+			var bc = GetObjectListAll<BaseComponentDTO, BaseComponent>();
 			var baseComponents = bc.Where(i => i.TransferRecords.OrderBy(t => t.TransferDate).Any(q => q.DestinationObjectId == aircraft.ItemId));
 			
 			foreach (var baseComponent in baseComponents)
