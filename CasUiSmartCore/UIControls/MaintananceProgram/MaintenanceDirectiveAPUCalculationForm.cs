@@ -46,7 +46,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		{
 			if(_items == null)
 				throw new ArgumentNullException("maintenanceDirective", "must be not null");
-			_items.AddRange(directives.Where(i => i.ATAChapter.ShortName == "43"));
+			_items.AddRange(directives.Where(i => i.ATAChapter.ShortName == "49"));
 			_calcItems.AddRange(directives.Where(i => i.APUCalc));
 
 			UpdateConrols();
