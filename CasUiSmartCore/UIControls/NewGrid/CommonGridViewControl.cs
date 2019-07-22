@@ -284,6 +284,7 @@ namespace CAS.UI.UIControls.NewGrid
 
 				radGridView1.RowFormatting += RadGridView1_RowFormatting;
 				radGridView1.CellFormatting += RadGridView1_CellFormatting;
+				radGridView1.MasterTemplate.ViewChanged += MasterTemplate_ViewChanged;
 
 			}
 			catch (Exception ex)
@@ -291,6 +292,11 @@ namespace CAS.UI.UIControls.NewGrid
 				Program.Provider.Logger.Log("Error while deleting data", ex);
 				return;
 			}
+		}
+
+		private void MasterTemplate_ViewChanged(object sender, DataViewChangedEventArgs args)
+		{
+			SetTotalText();
 		}
 
 		private void RadGridView1_CellFormatting(object sender, CellFormattingEventArgs e)
