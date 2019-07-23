@@ -13,7 +13,7 @@ namespace SmartCore.Entities.Dictionaries
 		private static CommonDictionaryCollection<DirectiveAffects> _Items = new CommonDictionaryCollection<DirectiveAffects>();
 		#endregion
 
-		public static DirectiveAffects Unknown = new DirectiveAffects(-1, "Unknown", "Unknown");
+		public static DirectiveAffects Unknown = new DirectiveAffects(-1, "N/A", "N/A");
 
 
 		/*
