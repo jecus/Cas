@@ -866,7 +866,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.comboBoxOrder.Name = "comboBoxOrder";
 			this.comboBoxOrder.Size = new System.Drawing.Size(308, 21);
 			this.comboBoxOrder.TabIndex = 211;
-			this.comboBoxOrder.Visible = false;
 			// 
 			// label3
 			// 
@@ -878,7 +877,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.label3.TabIndex = 210;
 			this.label3.Text = "Order:";
 			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.label3.Visible = false;
 			// 
 			// label6
 			// 
@@ -977,7 +975,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.comboBoxAffects.Name = "comboBoxAffects";
 			this.comboBoxAffects.Size = new System.Drawing.Size(308, 21);
 			this.comboBoxAffects.TabIndex = 221;
-			this.comboBoxAffects.Visible = false;
 			// 
 			// labelAffects
 			// 
@@ -989,7 +986,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.labelAffects.TabIndex = 220;
 			this.labelAffects.Text = "Affects:";
 			this.labelAffects.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.labelAffects.Visible = false;
 			// 
 			// comboBoxReason
 			// 
@@ -999,7 +995,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.comboBoxReason.Name = "comboBoxReason";
 			this.comboBoxReason.Size = new System.Drawing.Size(308, 21);
 			this.comboBoxReason.TabIndex = 223;
-			this.comboBoxReason.Visible = false;
 			// 
 			// labelReason
 			// 
@@ -1011,7 +1006,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.labelReason.TabIndex = 222;
 			this.labelReason.Text = "Reason:";
 			this.labelReason.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.labelReason.Visible = false;
 			// 
 			// DirectiveParametersControl
 			// 
