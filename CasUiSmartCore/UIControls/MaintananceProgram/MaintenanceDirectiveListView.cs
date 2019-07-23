@@ -54,8 +54,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			AddColumn("Program Indicator", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Work Type", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Check", (int)(radGridView1.Width * 0.16f));
-			AddColumn("1st. Perf.", (int)(radGridView1.Width * 0.24f));
 			AddColumn("APU Calc.", (int)(radGridView1.Width * 0.16f));
+			AddColumn("1st. Perf.", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Rpt. Intv.", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Next", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Remain/Overdue", (int)(radGridView1.Width * 0.24f));
@@ -192,8 +192,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			subItems.Add(CreateRow(item.ProgramIndicator.ToString(), item.ProgramIndicator));
 			subItems.Add(CreateRow(item.WorkType.ToString(), item.WorkType));
 			subItems.Add(CreateRow(check, check));
-			subItems.Add(CreateRow(firstPerformanceString, firstPerformanceString));
 			subItems.Add(CreateRow(item.APUCalc ? "Yes" : "No", item.APUCalc));
+			subItems.Add(CreateRow(firstPerformanceString, firstPerformanceString));
 			subItems.Add(CreateRow(item.Threshold.RepeatInterval.ToString(), item.Threshold.RepeatInterval));
 			subItems.Add(CreateRow(nextComplianceString, nextComplianceDate));
 			subItems.Add(CreateRow(nextRemainString, nextRemainString));
