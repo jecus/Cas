@@ -216,7 +216,22 @@ namespace EntityCore.DTO.General
 		[Column("InspectionDocumentsNo")]
 		public string InspectionDocumentsNo { get; set; }
 
-		
+		[Column("SBSubjects")]
+		public string SBSubjects { get; set; }
+
+		[Column("AffectedBy")]
+		public int AffectedBy { get; set; }
+
+		[Column("Affects")]
+		public int Affects { get; set; }
+
+		[Column("Reason")]
+		public int Reason { get; set; }
+
+		[Column("Orders")]
+		public int Orders { get; set; }
+
+
 		[Include]
 		public DefferedCategorieDTO DeferredCategory { get; set; }
 

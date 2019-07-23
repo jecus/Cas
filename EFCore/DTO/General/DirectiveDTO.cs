@@ -147,8 +147,25 @@ namespace EFCore.DTO.General
 
 		[DataMember]
 		public string CorrectiveAction { get; set; }
+
 		[DataMember]
 		public string InspectionDocumentsNo { get; set; }
+
+		[DataMember]
+		public string SBSubjects { get; set; }
+
+		[DataMember]
+		public int AffectedBy { get; set; }
+
+		[DataMember]
+		public int Affects { get; set; }
+
+		[DataMember]
+		public int Reason { get; set; }
+
+		[DataMember]
+		public int Orders { get; set; }
+
 		[DataMember]
 		[Include]
 		public DefferedCategorieDTO DeferredCategory { get; set; }

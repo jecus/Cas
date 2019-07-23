@@ -224,6 +224,26 @@ namespace EFCore.DTO.General.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("InspectionDocumentsNo");
 
+			Property(i => i.SBSubjects)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("SBSubjects");
+
+			Property(i => i.AffectedBy)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("AffectedBy");
+
+			Property(i => i.Affects)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("Affects");
+
+			Property(i => i.Reason)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("Reason");
+
+			Property(i => i.Orders)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("Orders");
+
 
 			HasRequired(i => i.ATAChapter)
 				.WithMany(i => i.DirectiveDtos)
