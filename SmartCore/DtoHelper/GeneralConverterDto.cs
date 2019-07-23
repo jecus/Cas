@@ -2393,6 +2393,10 @@ namespace SmartCore.DtoHelper
 				Workarea = direc.Workarea,
 				ComponentId = direc.ParentBaseComponent?.ItemId,
 				ATAChapterId = direc.ATAChapter?.ItemId ?? -1,
+				AffectedBy = direc.AffectedBy,
+				SBSubjects = direc.SBSubjects,
+				Affects =  direc.Affects?.ItemId ?? -1,
+				Reason = direc.Reason?.ItemId ?? -1,
 				Files = direc.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
 				PerformanceRecords = direc.PerformanceRecords?.Select(i => i.Convert()) as ICollection<DirectiveRecordDTO>,
 				CategoriesRecords = direc.CategoriesRecords?.Select(i => i.Convert()) as ICollection<CategoryRecordDTO>,
@@ -2435,6 +2439,10 @@ namespace SmartCore.DtoHelper
 				SupersededId = direcdto.SupersededId,
 				SupersedesId = direcdto.SupersedesId,
 				Workarea = direcdto.Workarea,
+				AffectedBy = direcdto.AffectedBy,
+				SBSubjects = direcdto.SBSubjects,
+				Affects = DirectiveAffects.GetDirectiveAffectsById(direcdto.Affects),
+				Reason = DirectiveReason.GetDirectiveReasonById(direcdto.Reason),
 				ParentBaseComponent = direcdto.BaseComponent?.ConvertToBaseComponent(),
 				ATAChapter = direcdto.ATAChapter?.Convert()
 			};
