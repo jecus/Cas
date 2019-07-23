@@ -232,7 +232,18 @@ namespace SmartCore.Entities.General.Directives
 		[TableColumn("SupersededId")]
 		public int? SupersededId { get; set; }
 
+		[TableColumn("SBSubjects")]
+		public string SBSubjects { get; set; }
 
+		[TableColumn("AffectedBy")]
+		public string AffectedBy { get; set; }
+
+		[TableColumn("Affects")]
+		public DirectiveAffects Affects { get; set; }
+
+		[TableColumn("Reason")]
+		public DirectiveReason Reason { get; set; }
+		
 		#region  public AttachedFile ServiceBulletinFile { get; set; }
 		[NonSerialized]
 		private AttachedFile _serviceBulletinFile;
