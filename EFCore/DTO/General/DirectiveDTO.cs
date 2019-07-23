@@ -155,7 +155,7 @@ namespace EFCore.DTO.General
 		public string SBSubjects { get; set; }
 
 		[DataMember]
-		public int AffectedBy { get; set; }
+		public string AffectedBy { get; set; }
 
 		[DataMember]
 		public int Affects { get; set; }
@@ -163,8 +163,6 @@ namespace EFCore.DTO.General
 		[DataMember]
 		public int Reason { get; set; }
 
-		[DataMember]
-		public int Orders { get; set; }
 
 		[DataMember]
 		[Include]

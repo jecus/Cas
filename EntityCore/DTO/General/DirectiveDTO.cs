@@ -220,7 +220,7 @@ namespace EntityCore.DTO.General
 		public string SBSubjects { get; set; }
 
 		[Column("AffectedBy")]
-		public int AffectedBy { get; set; }
+		public string AffectedBy { get; set; }
 
 		[Column("Affects")]
 		public int Affects { get; set; }
@@ -228,8 +228,6 @@ namespace EntityCore.DTO.General
 		[Column("Reason")]
 		public int Reason { get; set; }
 
-		[Column("Orders")]
-		public int Orders { get; set; }
 
 
 		[Include]
