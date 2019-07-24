@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
@@ -80,6 +81,9 @@ namespace SmartCore.Calculations
 		/*
          * Расчет выполнения задачи
          */
+
+		void CalculateLifeLimit(ComponentLLPCategoryData calculatedData, List<LLPLifeLimitCategory> categories,
+			ComponentLLPDataCollection LLPData);
 
 		/*
          *  Maintenance

@@ -28,14 +28,16 @@ namespace CAS.UI.UIControls.ComponentControls
         #region Fields
 
         private readonly BaseComponent _parentBaseComponent;
-        #endregion
+		public bool ShowGroup { get; set; }
 
-        #region Constructors
+		#endregion
 
-        #region private DetailsListView()
-        ///<summary>
-        ///</summary>
-        private ComponentsListView()
+		#region Constructors
+
+		#region private DetailsListView()
+		///<summary>
+		///</summary>
+		private ComponentsListView()
         {
             InitializeComponent();
         }
@@ -50,7 +52,10 @@ namespace CAS.UI.UIControls.ComponentControls
         {
             OldColumnIndex = 0;
             _parentBaseComponent = parentBaseComponent;
+            ShowGroup = true;
         }
+
+		
 
 		#endregion
 
@@ -64,10 +69,12 @@ namespace CAS.UI.UIControls.ComponentControls
 		/// </summary>
 		protected override void SetHeaders()
         {
-	        AddColumn("Type", (int)(radGridView1.Width * 0.2f));
-	        AddColumn("ATA", (int)(radGridView1.Width * 0.2f));
+	        if (ShowGroup)
+				AddColumn("Type", (int)(radGridView1.Width * 0.2f));
+
+		    AddColumn("ATA", (int)(radGridView1.Width * 0.2f));
 	        AddColumn("Part. No", (int)(radGridView1.Width * 0.2f));
-	        AddColumn("Description", (int)(radGridView1.Width * 0.6f));
+	        AddColumn("Description", (int)(radGridView1.Width * 0.3f));
 	        AddColumn("Work Type", (int)(radGridView1.Width * 0.14f));
 	        AddColumn("Serial No", (int)(radGridView1.Width * 0.2f));
 	        AddColumn("MPD Item", (int)(radGridView1.Width * 0.2f));
@@ -99,7 +106,8 @@ namespace CAS.UI.UIControls.ComponentControls
 		#region protected override SetGroupsToItems(int columnIndex)
 		protected override void GroupingItems()
 		{
-			Grouping("Type");
+			if(ShowGroup)
+				Grouping("Type");
 		}
 
 		#endregion
@@ -172,7 +180,19 @@ namespace CAS.UI.UIControls.ComponentControls
                 approx = componentItem.NextPerformanceDate;
                 type = getGroupName(componentItem);
 				next = componentItem.NextPerformanceSource;
-                remains = componentItem.LLPCategories ? componentItem.LLPRemains:componentItem.Remains;
+
+				if (ShowGroup)
+				{
+					remains = componentItem.LLPCategories ? componentItem.LLPRemains : componentItem.Remains;
+				}
+				else
+				{
+					var selectedCategory = componentItem.ChangeLLPCategoryRecords.GetLast()?.ToCategory;
+					var llp = componentItem.LLPData.GetItemByCatagory(selectedCategory);
+					remains = llp?.Remain;
+				}
+
+                
 	            ata = componentItem.Model != null ? componentItem.Model.ATAChapter : componentItem.ATAChapter;
                 partNumber = componentItem.PartNumber;
                 description = componentItem.Model != null ? componentItem.Model.Description : componentItem.Description;
@@ -243,8 +263,8 @@ namespace CAS.UI.UIControls.ComponentControls
 		            mpdNumString = dd.MaintenanceDirective.TaskCardNumber;
 	            }
 			}
-
-            subItems.Add(CreateRow(type, type));
+            if (ShowGroup)
+				subItems.Add(CreateRow(type, type));
             subItems.Add(CreateRow(ata.ToString(), ata));
             subItems.Add(CreateRow(partNumber, partNumber));
             subItems.Add(CreateRow(description, description));
@@ -286,7 +306,7 @@ namespace CAS.UI.UIControls.ComponentControls
 
 		protected override void Sorting(string colName = null)
 		{
-
+			
 		}
 
 		protected override void CustomSort(int ColumnIndex)

@@ -14,6 +14,7 @@ using CAS.UI.Management;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.ForecastControls;
 using CAS.UI.UIControls.PurchaseControls;
@@ -499,7 +500,47 @@ namespace CAS.UI.UIControls.ComponentControls
 				}
 			}
 
+
 			_directivesViewer.SetItemsArray(res.ToArray());
+
+
+			if (_llpMark)
+			{
+				var resultList = new List<BaseEntityObject>();
+				var list = _directivesViewer.radGridView1.Rows.Select(i => i).ToList();
+				list.Sort(new GridViewDataRowInfoComparer(7, 1));
+				//добавление остальных подзадач
+				foreach (GridViewRowInfo item in list)
+				{
+					if (item.Tag is Component)
+					{
+						resultList.Add(item.Tag as BaseEntityObject);
+
+						Component component = (Component)item.Tag;
+						var items = list
+							.Where(lvi =>
+								lvi.Tag is ComponentDirective &&
+								((ComponentDirective)lvi.Tag).ComponentId == component.ItemId).Select(i => i.Tag);
+						resultList.AddRange(items.OfType<BaseEntityObject>());
+					}
+					else if (item.Tag is ComponentDirective)
+					{
+						ComponentDirective dd = item.Tag as ComponentDirective;
+						Component d = dd.ParentComponent;
+						if (d == null)
+							resultList.Add(item.Tag as BaseEntityObject);
+						else
+						{
+							var lvi =
+								list.FirstOrDefault(lv => lv.Tag is Component && ((Component)lv.Tag).ItemId == d.ItemId);
+							if (lvi == null)
+								resultList.Add(item.Tag as BaseEntityObject);
+						}
+					}
+				}
+				_directivesViewer.SetItemsArray(resultList.ToArray());
+			}
+
 			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 			_directivesViewer.Focus();
 
@@ -1663,6 +1704,10 @@ namespace CAS.UI.UIControls.ComponentControls
 			_directivesViewer = _currentBaseComponent != null 
 				? new ComponentsListView(_currentBaseComponent) 
 				: new ComponentsListView(_currentAircraft != null ? GlobalObjects.ComponentCore.GetBaseComponentById(_currentAircraft.AircraftFrameId) : null);
+			if (_llpMark)
+			{
+				_directivesViewer.ShowGroup = false;
+			}
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.CustomMenu = _contextMenuStrip;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
