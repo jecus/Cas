@@ -85,6 +85,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		private RadMenuItem _toolStripMenuItemQuotations;
 		private AnimatedThreadWorker _worker;
 		private ExcelExportProvider _exportProvider;
+		private RadMenuItem _toolStripMenuItemChangeToAd;
 
 		#endregion
 
@@ -634,6 +635,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		private void InitToolStripMenuItems()
 		{
 			_contextMenuStrip = new RadDropDownMenu();
+			_toolStripMenuItemChangeToAd = new RadMenuItem();
 			_toolStripMenuItemOpen = new RadMenuItem();
 			_toolStripMenuItemComposeWorkPackage = new RadMenuItem();
 			_toolStripMenuItemsWorkPackages = new RadMenuItem();
@@ -654,6 +656,11 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			_contextMenuStrip.Name = "_contextMenuStrip";
 			_contextMenuStrip.Size = new Size(179, 176);
+			// 
+			// toolStripMenuItemView
+			// 
+			_toolStripMenuItemChangeToAd.Text = "Change to AD";
+			_toolStripMenuItemChangeToAd.Click += _toolStripMenuItemChangeToAd_Click;
 			// 
 			// toolStripMenuItemView
 			// 
@@ -726,24 +733,33 @@ namespace CAS.UI.UIControls.DirectivesControls
 				item.Tag = highlight;
 				_toolStripMenuItemHighlight.Items.Add(item);
 			}
-			_contextMenuStrip.Items.AddRange(_toolStripMenuItemOpen,
-													_toolStripMenuItemShowADFile,
-													_toolStripMenuItemShowSBFile,
-													_toolStripMenuItemShowEOFile,
-													new RadMenuSeparatorItem(),
-													_toolStripMenuItemHighlight,
-													_toolStripSeparator2,
-													_toolStripMenuItemComposeWorkPackage,
-													_toolStripMenuItemsWorkPackages,
-													_toolStripSeparator1,
-													_toolStripMenuItemComposeQuotationOrder,
-													_toolStripMenuItemQuotations,
-													_toolStripSeparator4, 
-													_toolStripMenuItemCopy,
-													_toolStripMenuItemPaste,
-													_toolStripMenuItemDelete
-												);
+
+			_contextMenuStrip.Items.AddRange(
+				_toolStripMenuItemChangeToAd, 
+				_toolStripMenuItemOpen,
+				_toolStripMenuItemShowADFile,
+				_toolStripMenuItemShowSBFile,
+				_toolStripMenuItemShowEOFile,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemHighlight,
+				_toolStripSeparator2,
+				_toolStripMenuItemComposeWorkPackage,
+				_toolStripMenuItemsWorkPackages,
+				_toolStripSeparator1,
+				_toolStripMenuItemComposeQuotationOrder,
+				_toolStripMenuItemQuotations,
+				_toolStripSeparator4,
+				_toolStripMenuItemCopy,
+				_toolStripMenuItemPaste,
+				_toolStripMenuItemDelete
+			);
 		}
+
+		private void _toolStripMenuItemChangeToAd_Click(object sender, EventArgs e)
+		{
+			throw new NotImplementedException();
+		}
+
 		#endregion
 
 		#region private void InitPrintToolStripMenuItems()

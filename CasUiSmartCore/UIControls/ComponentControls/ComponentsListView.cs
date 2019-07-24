@@ -52,7 +52,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		{
 			OldColumnIndex = 0;
 			_parentBaseComponent = parentBaseComponent;
-            ShowGroup = true;
+			ShowGroup = true;
 		}
 
 		
@@ -69,12 +69,12 @@ namespace CAS.UI.UIControls.ComponentControls
 		/// </summary>
 		protected override void SetHeaders()
 		{
-	        if (ShowGroup)
+			if (ShowGroup)
 				AddColumn("Type", (int)(radGridView1.Width * 0.2f));
 
-		    AddColumn("ATA", (int)(radGridView1.Width * 0.2f));
-	        AddColumn("Part. No", (int)(radGridView1.Width * 0.2f));
-	        AddColumn("Description", (int)(radGridView1.Width * 0.3f));
+			AddColumn("ATA", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Part. No", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Description", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Work Type", (int)(radGridView1.Width * 0.14f));
 			AddColumn("Serial No", (int)(radGridView1.Width * 0.2f));
 			AddColumn("MPD Item", (int)(radGridView1.Width * 0.2f));
@@ -161,6 +161,7 @@ namespace CAS.UI.UIControls.ComponentControls
 				   mpdString= "",
 				   mpdNumString= "",
 				   lastPerformanceString = "",
+				   type = "",
 				   classString ="",
 				   kitRequieredString,
 				   remarks,
@@ -190,7 +191,7 @@ namespace CAS.UI.UIControls.ComponentControls
 					remains = llp?.Remain;
 				}
 
-                
+				
 				ata = componentItem.Model != null ? componentItem.Model.ATAChapter : componentItem.ATAChapter;
 				partNumber = componentItem.PartNumber;
 				description = componentItem.Model != null ? componentItem.Model.Description : componentItem.Description;
@@ -260,7 +261,7 @@ namespace CAS.UI.UIControls.ComponentControls
 					mpdNumString = dd.MaintenanceDirective.TaskCardNumber;
 				}
 			}
-            if (ShowGroup)
+			if (ShowGroup)
 				subItems.Add(CreateRow(type, type));
 			subItems.Add(CreateRow(ata.ToString(), ata));
 			subItems.Add(CreateRow(partNumber, partNumber));
