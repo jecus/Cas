@@ -20,25 +20,25 @@ using TempUIExtentions;
 
 namespace CAS.UI.UIControls.ComponentControls
 {
-    ///<summary>
-    /// список для отображения ордеров запроса
-    ///</summary>
-    public partial class ComponentsListView : BaseGridViewControl<BaseEntityObject>
-    {
-        #region Fields
+	///<summary>
+	/// список для отображения ордеров запроса
+	///</summary>
+	public partial class ComponentsListView : BaseGridViewControl<BaseEntityObject>
+	{
+		#region Fields
 
-        private readonly BaseComponent _parentBaseComponent;
-        #endregion
+		private readonly BaseComponent _parentBaseComponent;
+		#endregion
 
-        #region Constructors
+		#region Constructors
 
-        #region private DetailsListView()
-        ///<summary>
-        ///</summary>
-        private ComponentsListView()
-        {
-            InitializeComponent();
-        }
+		#region private DetailsListView()
+		///<summary>
+		///</summary>
+		private ComponentsListView()
+		{
+			InitializeComponent();
+		}
 
 		#endregion
 
@@ -46,11 +46,11 @@ namespace CAS.UI.UIControls.ComponentControls
 		///<summary>
 		///</summary>
 		public ComponentsListView(BaseComponent parentBaseComponent)
-            : this()
-        {
-            OldColumnIndex = 0;
-            _parentBaseComponent = parentBaseComponent;
-        }
+			: this()
+		{
+			OldColumnIndex = 0;
+			_parentBaseComponent = parentBaseComponent;
+		}
 
 		#endregion
 
@@ -63,43 +63,42 @@ namespace CAS.UI.UIControls.ComponentControls
 		/// Устанавливает заголовки
 		/// </summary>
 		protected override void SetHeaders()
-        {
-	        AddColumn("Type", (int)(radGridView1.Width * 0.2f));
-	        AddColumn("ATA", (int)(radGridView1.Width * 0.2f));
-	        AddColumn("Part. No", (int)(radGridView1.Width * 0.2f));
-	        AddColumn("Description", (int)(radGridView1.Width * 0.6f));
-	        AddColumn("Work Type", (int)(radGridView1.Width * 0.14f));
-	        AddColumn("Serial No", (int)(radGridView1.Width * 0.2f));
-	        AddColumn("MPD Item", (int)(radGridView1.Width * 0.2f));
-	        AddColumn("Task Card №", (int)(radGridView1.Width * 0.2f));
-	        AddColumn("Pos. No", (int)(radGridView1.Width * 0.2f));
-	        AddColumn("M.P.", (int)(radGridView1.Width * 0.14f));
-	        AddColumn("Zone-Area", (int)(radGridView1.Width * 0.14f));
-	        AddColumn("Access", (int)(radGridView1.Width * 0.14f));
-	        AddColumn("Inst. date", (int)(radGridView1.Width * 0.2f));
-	        AddColumn("Life limit/1st. Perf", (int)(radGridView1.Width * 0.2f));
-	        AddColumn("Rpt. int.", (int)(radGridView1.Width * 0.2f));
-	        AddColumn("Next", (int)(radGridView1.Width * 0.24f));
-	        AddColumn("Remain/Overdue", (int)(radGridView1.Width * 0.24f));
-	        AddColumn("Last", (int)(radGridView1.Width * 0.24f));
-	        AddColumn("Warranty", (int)(radGridView1.Width * 0.2f));
-	        AddColumn("Class", (int)(radGridView1.Width * 0.2f));
-	        AddColumn("Kit", (int)(radGridView1.Width * 0.2f));
-	        AddColumn("NDT", (int)(radGridView1.Width * 0.24f));
-	        AddColumn("M.H.", (int)(radGridView1.Width * 0.2f));
-	        AddColumn("Cost(new)", (int)(radGridView1.Width * 0.2f));
-	        AddColumn("Cost overhaul", (int)(radGridView1.Width * 0.2f));
-	        AddColumn("Cost serviceable", (int)(radGridView1.Width * 0.2f));
-	        AddColumn("Remarks", (int)(radGridView1.Width * 0.2f));
-	        AddColumn("Hidden Remarks", (int)(radGridView1.Width * 0.24f));
-	        AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
-        }
+		{
+			AddColumn("ATA", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Part. No", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Description", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Work Type", (int)(radGridView1.Width * 0.14f));
+			AddColumn("Serial No", (int)(radGridView1.Width * 0.2f));
+			AddColumn("MPD Item", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Task Card №", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Pos. No", (int)(radGridView1.Width * 0.2f));
+			AddColumn("M.P.", (int)(radGridView1.Width * 0.14f));
+			AddColumn("Zone-Area", (int)(radGridView1.Width * 0.14f));
+			AddColumn("Access", (int)(radGridView1.Width * 0.14f));
+			AddColumn("Inst. date", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Life limit/1st. Perf", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Rpt. int.", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Next", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Remain/Overdue", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Last", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Warranty", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Class", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Kit", (int)(radGridView1.Width * 0.2f));
+			AddColumn("NDT", (int)(radGridView1.Width * 0.24f));
+			AddColumn("M.H.", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Cost(new)", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Cost overhaul", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Cost serviceable", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Remarks", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Hidden Remarks", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+		}
 		#endregion
 
 		#region protected override SetGroupsToItems(int columnIndex)
 		protected override void GroupingItems()
 		{
-			Grouping("Type");
+			
 		}
 
 		#endregion
@@ -107,7 +106,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		#region protected override void SetItemColor(GridViewRowInfo listViewItem, BaseEntityObject item)
 
 		protected override void SetItemColor(GridViewRowInfo listViewItem, BaseEntityObject item)
-        {
+		{
 			if (item is ComponentDirective)
 			{
 				foreach (GridViewCellInfo cell in listViewItem.Cells)
@@ -134,151 +133,147 @@ namespace CAS.UI.UIControls.ComponentControls
 		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(BaseSmartCoreObject item)
 
 		protected override List<CustomCell> GetListViewSubItems(BaseEntityObject item)
-        {
+		{
 			var subItems = new List<CustomCell>();
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
 			DateTime? approx;
-            Lifelength remains, next;
-            AtaChapter ata;
-            MaintenanceControlProcess maintenanceType;
-            DateTime transferDate;
-            Lifelength firstPerformance = Lifelength.Null, 
-                       lastPerformance = Lifelength.Null,
-                       warranty, repeatInterval = Lifelength.Null;
-            string partNumber,
-                   description,
-                   serialNumber,
-                   position,
+			Lifelength remains, next;
+			AtaChapter ata;
+			MaintenanceControlProcess maintenanceType;
+			DateTime transferDate;
+			Lifelength firstPerformance = Lifelength.Null, 
+					   lastPerformance = Lifelength.Null,
+					   warranty, repeatInterval = Lifelength.Null;
+			string partNumber,
+				   description,
+				   serialNumber,
+				   position,
 				   mpdString= "",
-				   type= "",
 				   mpdNumString= "",
-                   lastPerformanceString = "",
+				   lastPerformanceString = "",
 				   classString ="",
-                   kitRequieredString,
-                   remarks,
-                   hiddenRemarks,
-                   workType = "",
-                   zone = "",
-                   access = "",
+				   kitRequieredString,
+				   remarks,
+				   hiddenRemarks,
+				   workType = "",
+				   zone = "",
+				   access = "",
 				   ndtString = "";
-            double manHours,
-                   cost,
-                   costServiceable = 0,
-                   costOverhaul = 0;
-            if (item is Component)
-            {
-                Component componentItem = (Component)item;
-                approx = componentItem.NextPerformanceDate;
-                type = getGroupName(componentItem);
+			double manHours,
+				   cost,
+				   costServiceable = 0,
+				   costOverhaul = 0;
+			if (item is Component)
+			{
+				Component componentItem = (Component)item;
+				approx = componentItem.NextPerformanceDate;
 				next = componentItem.NextPerformanceSource;
-                remains = componentItem.LLPCategories ? componentItem.LLPRemains:componentItem.Remains;
-	            ata = componentItem.Model != null ? componentItem.Model.ATAChapter : componentItem.ATAChapter;
-                partNumber = componentItem.PartNumber;
-                description = componentItem.Model != null ? componentItem.Model.Description : componentItem.Description;
-                serialNumber = componentItem.SerialNumber;
-                position = componentItem.TransferRecords.GetLast().Position.ToUpper();
-                maintenanceType = componentItem.MaintenanceControlProcess;
-                transferDate = componentItem.TransferRecords.GetLast().TransferDate;
-                firstPerformance = componentItem.LifeLimit;
-                warranty = componentItem.Warranty;
-	            classString = componentItem.GoodsClass != null ? componentItem.GoodsClass.ToString() : "";
+				remains = componentItem.LLPCategories ? componentItem.LLPRemains:componentItem.Remains;
+				ata = componentItem.Model != null ? componentItem.Model.ATAChapter : componentItem.ATAChapter;
+				partNumber = componentItem.PartNumber;
+				description = componentItem.Model != null ? componentItem.Model.Description : componentItem.Description;
+				serialNumber = componentItem.SerialNumber;
+				position = componentItem.TransferRecords.GetLast().Position.ToUpper();
+				maintenanceType = componentItem.MaintenanceControlProcess;
+				transferDate = componentItem.TransferRecords.GetLast().TransferDate;
+				firstPerformance = componentItem.LifeLimit;
+				warranty = componentItem.Warranty;
+				classString = componentItem.GoodsClass != null ? componentItem.GoodsClass.ToString() : "";
 				kitRequieredString = componentItem.Kits.Count + " kits";
-                manHours = componentItem.ManHours;
-                cost = componentItem.Cost;
-                costOverhaul = componentItem.CostOverhaul;
-                costServiceable = componentItem.CostServiceable;
-                remarks = componentItem.Remarks;
-                hiddenRemarks = componentItem.HiddenRemarks;
+				manHours = componentItem.ManHours;
+				cost = componentItem.Cost;
+				costOverhaul = componentItem.CostOverhaul;
+				costServiceable = componentItem.CostServiceable;
+				remarks = componentItem.Remarks;
+				hiddenRemarks = componentItem.HiddenRemarks;
 			}
-            else
-            {
-                ComponentDirective dd = (ComponentDirective)item;
-                if (dd.Threshold.FirstPerformanceSinceNew != null && !dd.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
-                {
-                    firstPerformance = dd.Threshold.FirstPerformanceSinceNew;
-                }
-                if (dd.LastPerformance != null)
-                {
-                    lastPerformanceString =
-                        SmartCore.Auxiliary.Convert.GetDateFormat(dd.LastPerformance.RecordDate) + " " +
-                        dd.LastPerformance.OnLifelength;
-                    lastPerformance = dd.LastPerformance.OnLifelength;
-                }
-                if (dd.Threshold.RepeatInterval != null && !dd.Threshold.RepeatInterval.IsNullOrZero())
-                {
-                    repeatInterval = dd.Threshold.RepeatInterval;
-                }
-                //GlobalObjects.CasEnvironment.Calculator.GetNextPerformance(dd, out next, out remains, out approx, out cond);
-                //GlobalObjects.CasEnvironment.Calculator.GetNextPerformance(dd);
-                approx = dd.NextPerformanceDate;
-                next = dd.NextPerformanceSource;
-                remains = dd.Remains;
-                type = getGroupName(dd);
+			else
+			{
+				ComponentDirective dd = (ComponentDirective)item;
+				if (dd.Threshold.FirstPerformanceSinceNew != null && !dd.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
+				{
+					firstPerformance = dd.Threshold.FirstPerformanceSinceNew;
+				}
+				if (dd.LastPerformance != null)
+				{
+					lastPerformanceString =
+						SmartCore.Auxiliary.Convert.GetDateFormat(dd.LastPerformance.RecordDate) + " " +
+						dd.LastPerformance.OnLifelength;
+					lastPerformance = dd.LastPerformance.OnLifelength;
+				}
+				if (dd.Threshold.RepeatInterval != null && !dd.Threshold.RepeatInterval.IsNullOrZero())
+				{
+					repeatInterval = dd.Threshold.RepeatInterval;
+				}
+				//GlobalObjects.CasEnvironment.Calculator.GetNextPerformance(dd, out next, out remains, out approx, out cond);
+				//GlobalObjects.CasEnvironment.Calculator.GetNextPerformance(dd);
+				approx = dd.NextPerformanceDate;
+				next = dd.NextPerformanceSource;
+				remains = dd.Remains;
 				ata = dd.ParentComponent.Model != null ? dd.ParentComponent.Model.ATAChapter : dd.ParentComponent.ATAChapter;
-                partNumber = "    " + dd.PartNumber;
-	            var desc = dd.ParentComponent.Model != null
-		            ? dd.ParentComponent.Model.Description
-		            : dd.ParentComponent.Description;
+				partNumber = "    " + dd.PartNumber;
+				var desc = dd.ParentComponent.Model != null
+					? dd.ParentComponent.Model.Description
+					: dd.ParentComponent.Description;
 
 				description = "    " + desc;
-                serialNumber = "    " + dd.SerialNumber;
-                position = "    " + dd.ParentComponent.TransferRecords.GetLast().Position.ToUpper();
-                transferDate = dd.ParentComponent.TransferRecords.GetLast().TransferDate;
-                maintenanceType = dd.ParentComponent.MaintenanceControlProcess;
-                warranty = dd.Threshold.Warranty;
+				serialNumber = "    " + dd.SerialNumber;
+				position = "    " + dd.ParentComponent.TransferRecords.GetLast().Position.ToUpper();
+				transferDate = dd.ParentComponent.TransferRecords.GetLast().TransferDate;
+				maintenanceType = dd.ParentComponent.MaintenanceControlProcess;
+				warranty = dd.Threshold.Warranty;
 				classString = dd.ParentComponent.GoodsClass != null ? dd.ParentComponent.GoodsClass.ToString() : "";
 				kitRequieredString = dd.Kits.Count + " kits";
-                manHours = dd.ManHours;
-                cost = dd.Cost;
-	            zone = dd.ZoneArea;
-	            access = dd.AccessDirective;
-                remarks = dd.Remarks;
-                hiddenRemarks = dd.HiddenRemarks;
-                workType = dd.DirectiveType.ToString();
-	            ndtString = dd.NDTType.ShortName;
-	            if (dd.MaintenanceDirective != null)
-	            {
-		            mpdString = dd.MaintenanceDirective.TaskNumberCheck;
-		            mpdNumString = dd.MaintenanceDirective.TaskCardNumber;
-	            }
+				manHours = dd.ManHours;
+				cost = dd.Cost;
+				zone = dd.ZoneArea;
+				access = dd.AccessDirective;
+				remarks = dd.Remarks;
+				hiddenRemarks = dd.HiddenRemarks;
+				workType = dd.DirectiveType.ToString();
+				ndtString = dd.NDTType.ShortName;
+				if (dd.MaintenanceDirective != null)
+				{
+					mpdString = dd.MaintenanceDirective.TaskNumberCheck;
+					mpdNumString = dd.MaintenanceDirective.TaskCardNumber;
+				}
 			}
 
-            subItems.Add(CreateRow(type, type));
-            subItems.Add(CreateRow(ata.ToString(), ata));
-            subItems.Add(CreateRow(partNumber, partNumber));
-            subItems.Add(CreateRow(description, description));
-            subItems.Add(CreateRow(workType, workType));
-            subItems.Add(CreateRow(serialNumber, serialNumber));
-            subItems.Add(CreateRow(mpdString, mpdString));
-            subItems.Add(CreateRow(mpdNumString, mpdNumString));
-            subItems.Add(CreateRow(position, position));
-            subItems.Add(CreateRow(maintenanceType.ShortName, maintenanceType));
-            subItems.Add(CreateRow(zone, zone));
-            subItems.Add(CreateRow(access, access));
-            subItems.Add(CreateRow(transferDate > DateTimeExtend.GetCASMinDateTime()
-	            ? SmartCore.Auxiliary.Convert.GetDateFormat(transferDate) : "", transferDate));
-            subItems.Add(CreateRow(firstPerformance?.ToString(), firstPerformance));
-            subItems.Add(CreateRow(repeatInterval.ToString(), repeatInterval));
-            subItems.Add(CreateRow(approx == null ? "" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)approx) + " " + next, 
-	            approx == null ? DateTimeExtend.GetCASMinDateTime() : (DateTime)approx));
-            subItems.Add(CreateRow(remains != null && !remains.IsNullOrZero() ? remains.ToString() : "",
-	            remains ?? Lifelength.Null));
-            subItems.Add(CreateRow(lastPerformanceString, lastPerformance));
-            subItems.Add(CreateRow(warranty.ToString(), warranty));
-            subItems.Add(CreateRow(classString, classString));
-            subItems.Add(CreateRow(kitRequieredString, kitRequieredString));
-            subItems.Add(CreateRow(ndtString, ndtString));
-            subItems.Add(CreateRow(manHours.ToString(), manHours));
-            subItems.Add(CreateRow(cost.ToString(), cost));
-            subItems.Add(CreateRow(costOverhaul.ToString(), costOverhaul));
-            subItems.Add(CreateRow(costServiceable.ToString(), costServiceable));
-            subItems.Add(CreateRow(remarks, remarks));
-            subItems.Add(CreateRow(hiddenRemarks, hiddenRemarks));
-            subItems.Add(CreateRow(author, author));
+			subItems.Add(CreateRow(ata.ToString(), ata));
+			subItems.Add(CreateRow(partNumber, partNumber));
+			subItems.Add(CreateRow(description, description));
+			subItems.Add(CreateRow(workType, workType));
+			subItems.Add(CreateRow(serialNumber, serialNumber));
+			subItems.Add(CreateRow(mpdString, mpdString));
+			subItems.Add(CreateRow(mpdNumString, mpdNumString));
+			subItems.Add(CreateRow(position, position));
+			subItems.Add(CreateRow(maintenanceType.ShortName, maintenanceType));
+			subItems.Add(CreateRow(zone, zone));
+			subItems.Add(CreateRow(access, access));
+			subItems.Add(CreateRow(transferDate > DateTimeExtend.GetCASMinDateTime()
+				? SmartCore.Auxiliary.Convert.GetDateFormat(transferDate) : "", transferDate));
+			subItems.Add(CreateRow(firstPerformance?.ToString(), firstPerformance));
+			subItems.Add(CreateRow(repeatInterval.ToString(), repeatInterval));
+			subItems.Add(CreateRow(approx == null ? "" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)approx) + " " + next, 
+				approx == null ? DateTimeExtend.GetCASMinDateTime() : (DateTime)approx));
+			subItems.Add(CreateRow(remains != null && !remains.IsNullOrZero() ? remains.ToString() : "",
+				remains ?? Lifelength.Null));
+			subItems.Add(CreateRow(lastPerformanceString, lastPerformance));
+			subItems.Add(CreateRow(warranty.ToString(), warranty));
+			subItems.Add(CreateRow(classString, classString));
+			subItems.Add(CreateRow(kitRequieredString, kitRequieredString));
+			subItems.Add(CreateRow(ndtString, ndtString));
+			subItems.Add(CreateRow(manHours.ToString(), manHours));
+			subItems.Add(CreateRow(cost.ToString(), cost));
+			subItems.Add(CreateRow(costOverhaul.ToString(), costOverhaul));
+			subItems.Add(CreateRow(costServiceable.ToString(), costServiceable));
+			subItems.Add(CreateRow(remarks, remarks));
+			subItems.Add(CreateRow(hiddenRemarks, hiddenRemarks));
+			subItems.Add(CreateRow(author, author));
 
 			return subItems;
-        }
+		}
 
 		#endregion
 
@@ -341,45 +336,45 @@ namespace CAS.UI.UIControls.ComponentControls
 		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 
 		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
-        {
-            if (SelectedItem != null)
-            {
-                e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-                if (SelectedItem is Component)
-                {
-                    Component d = (Component) SelectedItem;
-                    if (d.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.MaintenanceMaterials) ||
-                        d.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.Tools))
-                    {
-                        e.Cancel = true;
-                        ConsumablePartAndKitForm form = new ConsumablePartAndKitForm(d);
-                        form.ShowDialog();
-                    }
-                    else
-                    {
-                        var location = d.ParentAircraftId > 0
-                            ? $"{d.GetParentAircraftRegNumber()}."
+		{
+			if (SelectedItem != null)
+			{
+				e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+				if (SelectedItem is Component)
+				{
+					Component d = (Component) SelectedItem;
+					if (d.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.MaintenanceMaterials) ||
+						d.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.Tools))
+					{
+						e.Cancel = true;
+						ConsumablePartAndKitForm form = new ConsumablePartAndKitForm(d);
+						form.ShowDialog();
+					}
+					else
+					{
+						var location = d.ParentAircraftId > 0
+							? $"{d.GetParentAircraftRegNumber()}."
 							: d.ParentOperator != null ? $"{d.ParentOperator.Name}." : ""; //TODO:(Evgenii Babak) заменить на использование OperatorCore 
 						e.DisplayerText = location + " Component PN " + d.PartNumber;
-                        e.RequestedEntity = new ComponentScreenNew(d);
-                    }
-                }
-                else
-                {
-                    var d = ((ComponentDirective)SelectedItem).ParentComponent;
+						e.RequestedEntity = new ComponentScreenNew(d);
+					}
+				}
+				else
+				{
+					var d = ((ComponentDirective)SelectedItem).ParentComponent;
 					var location = d.ParentAircraftId > 0
-                            ? $"{d.GetParentAircraftRegNumber()}."
+							? $"{d.GetParentAircraftRegNumber()}."
 							: d.ParentOperator != null ? $"{d.ParentOperator.Name}." : "";//TODO:(Evgenii Babak) заменить на использование OperatorCore 
 					e.DisplayerText = location + " Component PN " + d.PartNumber;
-                    e.RequestedEntity = new ComponentScreenNew(d);
-                } 
-            }
-        }
-        #endregion
+					e.RequestedEntity = new ComponentScreenNew(d);
+				} 
+			}
+		}
+		#endregion
 
 
-        private string getGroupName(BaseEntityObject entityObject)
-        {
+		private string getGroupName(BaseEntityObject entityObject)
+		{
 			var parent = (IDirective)entityObject;
 
 			if (parent is ComponentDirective)
@@ -415,7 +410,7 @@ namespace CAS.UI.UIControls.ComponentControls
 
 			return groupName;
 
-        }
+		}
 
 		#endregion
 	}
