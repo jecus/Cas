@@ -1007,9 +1007,9 @@ namespace CAS.UI.UIControls.StoresControls
 		{
 			if(_directivesViewer.SelectedItem == null && _directivesViewer.SelectedItem is Component)
 				return;
-			
 
-			var form = new BarcodeForm((_directivesViewer.SelectedItem as Component).PartNumber);
+			var s = _directivesViewer.SelectedItem as Component;
+			var form = new BarcodeForm(s);
 			form.ShowDialog();
 		}
 
