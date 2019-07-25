@@ -17,6 +17,7 @@ using CAS.UI.UIControls.PurchaseControls;
 using CAS.UI.UIControls.WorkPakage;
 using CASReports.Builders;
 using CASTerms;
+using EntityCore.DTO.General;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -734,8 +735,14 @@ namespace CAS.UI.UIControls.DirectivesControls
 				_toolStripMenuItemHighlight.Items.Add(item);
 			}
 
+			if (_currentPrimaryDirectiveType == DirectiveType.SB)
+			{
+				_contextMenuStrip.Items.AddRange(
+					_toolStripMenuItemChangeToAd,
+					new RadMenuSeparatorItem());
+			}
+
 			_contextMenuStrip.Items.AddRange(
-				_toolStripMenuItemChangeToAd, 
 				_toolStripMenuItemOpen,
 				_toolStripMenuItemShowADFile,
 				_toolStripMenuItemShowSBFile,
@@ -757,7 +764,14 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 		private void _toolStripMenuItemChangeToAd_Click(object sender, EventArgs e)
 		{
-			throw new NotImplementedException();
+			if (_directivesViewer.SelectedItems.Count == 0)
+				return;
+
+			foreach (var directive in _directivesViewer.SelectedItems)
+				directive.DirectiveType = DirectiveType.AirworthenessDirectives;
+			
+			GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate<Directive, DirectiveDTO>(_directivesViewer.SelectedItems.Cast<BaseEntityObject>().ToList());
+			AnimatedThreadWorker.RunWorkerAsync();
 		}
 
 		#endregion

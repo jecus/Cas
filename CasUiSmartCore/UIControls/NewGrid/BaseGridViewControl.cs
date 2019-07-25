@@ -275,7 +275,7 @@ namespace CAS.UI.UIControls.NewGrid
 
 				radGridView1.RowFormatting += RadGridView1_RowFormatting;
 				radGridView1.CellFormatting += RadGridView1_CellFormatting;
-				radGridView1.MasterTemplate.ViewChanged += MasterTemplate_ViewChanged;
+				radGridView1.FilterChanged += RadGridView1_FilterChanged;
 			}
 			catch (Exception ex)
 			{
@@ -284,10 +284,11 @@ namespace CAS.UI.UIControls.NewGrid
 			}
 		}
 
-		private void MasterTemplate_ViewChanged(object sender, DataViewChangedEventArgs args)
+		private void RadGridView1_FilterChanged(object sender, GridViewCollectionChangedEventArgs e)
 		{
-			SetTotalText();
+			labelTotal.Text = "Total: " + e.GridViewTemplate.ChildRows.Count;
 		}
+
 
 		private void RadGridView1_CellFormatting(object sender, Telerik.WinControls.UI.CellFormattingEventArgs e)
 		{

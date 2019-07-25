@@ -267,10 +267,14 @@ namespace SmartCore.Queries
             else if (directiveType == DirectiveType.SB)
             {
                 state =
-                    new CommonFilter<string>(string.Format(@"(directives.ServiceBulletinNo <> '' 
-                                                           or directives.ServiceBulletinFileID > 0 
-                                                           or directives.DirectiveType = {0})", directiveType.ItemId));
-            }
+                    new CommonFilter<string>(string.Format(@"((directives.ServiceBulletinNo <> '' 
+                                                           or directives.ServiceBulletinFileID > 0 )
+                                                           and directives.DirectiveType = {0})", directiveType.ItemId));
+				//TODO: Было так но потом захотели sb в ad перемещать
+                //new CommonFilter<string>(string.Format(@"(directives.ServiceBulletinNo <> '' 
+                //                                           or directives.ServiceBulletinFileID > 0 
+                //                                           or directives.DirectiveType = {0})", directiveType.ItemId));
+			}
             else
             {
 				//state = new CommonFilter<DirectiveType>(Directive.DirectiveTypeProperty, directiveType);
