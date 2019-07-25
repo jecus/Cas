@@ -93,7 +93,10 @@ namespace EntityCore.Repository
 			try
 			{
 				if (entity.ItemId <= 0)
+				{
+					entity.ItemId = 0;
 					Add(entity);
+				}
 				else Update(entity);
 
 				await _context.SaveChangesAsync();

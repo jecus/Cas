@@ -168,6 +168,9 @@ namespace CAS.UI.UIControls.MaintananceProgram
 										  ? item.Remains.ToString()
 										  : "N/A";
 
+			if (item.APUCalc)
+				nextRemainString = nextRemainString.Replace("FH", "AH");
+
 			//////////////////////////////////////////////////////////////////////////////////////
 			string description = item.Description != "" ? item.Description : "N/A";
 			string app = item.IsApplicability ? $"APL {item.Applicability}" : $"N/A {item.Applicability}";
