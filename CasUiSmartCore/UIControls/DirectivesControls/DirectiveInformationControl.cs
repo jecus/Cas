@@ -149,6 +149,19 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 		#endregion
 
+		#region public SBType SBType
+
+		/// <summary>
+		/// Возвращает или устанавливает SBType
+		/// </summary>
+		public DirectiveSbType SBType
+		{
+			get { return (DirectiveSbType)ComboBoxSbType.SelectedItem; }
+			set { ComboBoxSbType.SelectedItem = value; }
+		}
+
+		#endregion
+
 		#region public string Title
 		///<summary>
 		///Имя текущей директивы
@@ -363,6 +376,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 						HiddenRemarks != _directive.HiddenRemarks ||
 						Title != _directive.Title ||
 						ADType != _directive.ADType ||
+						SBType != _directive.SBType ||
 						EffectiveDate != oldEffDate ||
 						ServiceBulletin != _directive.ServiceBulletinNo ||
 						STCApplicability != _directive.StcNo ||
@@ -450,6 +464,10 @@ namespace CAS.UI.UIControls.DirectivesControls
 				adTypeComboBox.Items.Add(o);
 
 			ADType = _directive.ADType;
+
+			ComboBoxSbType.Items.Clear();
+			ComboBoxSbType.Items.AddRange(DirectiveSbType.Items.ToArray());
+			ComboBoxSbType.SelectedItem = _directive.SBType;
 
 			dateTimePickerEffDate.ValueChanged += DateTimePickerEffDateValueChanged;
 		}
@@ -553,6 +571,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			directive.EngineeringOrders = EngOrderNumber;
 			directive.ServiceBulletinNo = ServiceBulletin;
 			directive.ADType = ADType;
+			directive.SBType = SBType;
 			directive.Description = Subject;
 			directive.Remarks = Remarks;
 			directive.SBSubjects = SBSubject;

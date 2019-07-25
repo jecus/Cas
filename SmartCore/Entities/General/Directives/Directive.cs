@@ -163,6 +163,9 @@ namespace SmartCore.Entities.General.Directives
 		[TableColumn("DirectiveOrder")]
 		public DirectiveOrder DirectiveOrder { get; set; }
 
+		[TableColumn("SBType")]
+		public DirectiveSbType SBType { get; set; }
+
 		#region public string Workarea { get; set; }
 
 		[Filter("Work Area:", Order = 8)]

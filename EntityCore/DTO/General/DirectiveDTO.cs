@@ -228,6 +228,9 @@ namespace EntityCore.DTO.General
 		[Column("Reason")]
 		public int Reason { get; set; }
 
+		[Column("SBType")]
+		public int SBType { get; set; }
+
 
 
 		[Include]

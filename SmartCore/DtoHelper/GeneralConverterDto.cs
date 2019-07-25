@@ -885,8 +885,8 @@ namespace SmartCore.DtoHelper
 				LocationId = document.Location?.ItemId ?? -1,
 				SupplierId = document.Supplier?.ItemId ?? -1,
 				ParentAircraftId = document.ParentAircraftId,
-                IdNumber = document.IdNumber
-            };
+				IdNumber = document.IdNumber
+			};
 		}
 
 		public static Document Convert(this DocumentDTO document)
@@ -919,8 +919,8 @@ namespace SmartCore.DtoHelper
 				IssueNumber = document.IssueNumber,
 				Remarks = document.Remarks,
 				ParentAircraftId = document.ParentAircraftId ?? default(int),
-                IdNumber = document.IdNumber,
-                Supplier = document.Supplier?.Convert(),
+				IdNumber = document.IdNumber,
+				Supplier = document.Supplier?.Convert(),
 				ResponsibleOccupation = document.ResponsibleOccupation?.Convert(),
 				Nomenсlature = document.Nomenсlature?.Convert(),
 				ServiceType = document.ServiceType?.Convert(),
@@ -2397,6 +2397,7 @@ namespace SmartCore.DtoHelper
 				SBSubjects = direc.SBSubjects,
 				Affects =  direc.Affects?.ItemId ?? -1,
 				Reason = direc.Reason?.ItemId ?? -1,
+				SBType = direc.SBType?.ItemId ?? -1,
 				Files = direc.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
 				PerformanceRecords = direc.PerformanceRecords?.Select(i => i.Convert()) as ICollection<DirectiveRecordDTO>,
 				CategoriesRecords = direc.CategoriesRecords?.Select(i => i.Convert()) as ICollection<CategoryRecordDTO>,
@@ -2443,6 +2444,7 @@ namespace SmartCore.DtoHelper
 				SBSubjects = direcdto.SBSubjects,
 				Affects = DirectiveAffects.GetDirectiveAffectsById(direcdto.Affects),
 				Reason = DirectiveReason.GetDirectiveReasonById(direcdto.Reason),
+				SBType = DirectiveSbType.GetDirectiveSbTypeById(direcdto.SBType),
 				ParentBaseComponent = direcdto.BaseComponent?.ConvertToBaseComponent(),
 				ATAChapter = direcdto.ATAChapter?.Convert()
 			};

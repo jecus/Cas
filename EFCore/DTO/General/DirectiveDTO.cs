@@ -163,6 +163,9 @@ namespace EFCore.DTO.General
 		[DataMember]
 		public int Reason { get; set; }
 
+		[DataMember]
+		public int SBType { get; set; }
+
 
 		[DataMember]
 		[Include]

@@ -240,6 +240,10 @@ namespace EFCore.DTO.General.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("Reason");
 
+			Property(i => i.SBType)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("SBType");
+
 			HasRequired(i => i.ATAChapter)
 				.WithMany(i => i.DirectiveDtos)
 				.HasForeignKey(i => i.ATAChapterId);
