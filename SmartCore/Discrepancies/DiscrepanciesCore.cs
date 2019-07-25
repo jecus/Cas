@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using EntityCore.DTO.General;
 using EntityCore.Filter;
@@ -43,7 +44,7 @@ namespace SmartCore.Discrepancies
 		///// <param name="loadWorkPackageItems">Флаг загрузки элементов рабочих пакетов</param>
 		///// <param name="includedTasks">Задачи, которые должны содержать пакеты (при передаче пустои коллекции запрос вернет 0 рабочих пакетов)</param>
 		/// <returns></returns>
-		public List<Discrepancy> GetDiscrepancies(Aircraft aircraft = null, DiscFilterType filterType = DiscFilterType.All) //TODO: Переделать на int? aircraftId = null
+		public List<Discrepancy> GetDiscrepancies(Aircraft aircraft = null, DiscFilterType filterType = DiscFilterType.All, DateTime? from = null, DateTime? to = null) //TODO: Переделать на int? aircraftId = null
 		{
 			var resultList = new List<Discrepancy>();
 			var preResultList = new List<Discrepancy>();
@@ -55,6 +56,16 @@ namespace SmartCore.Discrepancies
 				filters.Add(new CommonFilter<bool>(Discrepancy.IsReliabilityProperty, true));
 			else if(filterType == DiscFilterType.Occurrence)
 				filters.Add(new CommonFilter<bool>(Discrepancy.IsOccurrenceProperty, true));
+			else if(from.HasValue && to.HasValue)
+			{
+				var flights = _loader.GetObjectList<AircraftFlight>(new ICommonFilter[]
+				{
+					new CommonFilter<DateTime>(AircraftFlight.FlightDateProperty, FilterType.GratherOrEqual, new []{from.Value.Date}), 
+					new CommonFilter<DateTime>(AircraftFlight.FlightDateProperty, FilterType.LessOrEqual, new []{to.Value.Date}),
+				});
+
+				filters.Add(new CommonFilter<int>(Discrepancy.FlightIdProperty, FilterType.In, flights.Select(i => i.ItemId).ToArray()));
+			}
 
 			if (aircraft != null)
 			{
@@ -68,7 +79,7 @@ namespace SmartCore.Discrepancies
 				//что значения ключевого поля таблицы должны быть
 				//среди идентификаторов родительских задач КИТов
 			}
-			else preResultList.AddRange(_loader.GetObjectListAll<Discrepancy>(filters.ToArray()));
+			else preResultList.AddRange(_loader.GetObjectListAll<Discrepancy>(filters.ToArray(), loadChild:true));
 
 
 			#region//заполнение Discrepancies CorrectiveAction в Discrepancies нового полета//
@@ -128,8 +139,8 @@ namespace SmartCore.Discrepancies
 			var cetificates = new List<CertificateOfReleaseToService>();
 			var crsIds = correctiveActions.Select(i => i.CRSID).Distinct().ToArray();
 			if (crsIds.Length > 0)
-				//cetificates.AddRange(_loader.GetObjectList<CertificateOfReleaseToService>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, crsIds), true));
-				cetificates.AddRange(_newLoader.GetObjectList<CertificateOfReleaseToServiceDTO, CertificateOfReleaseToService>(new Filter("ItemId", crsIds), true));
+				cetificates.AddRange(_loader.GetObjectList<CertificateOfReleaseToService>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, crsIds), true));
+				//cetificates.AddRange(_newLoader.GetObjectList<CertificateOfReleaseToServiceDTO, CertificateOfReleaseToService>(new Filter("ItemId", crsIds), true));
 
 
 			foreach (var t in resultList)

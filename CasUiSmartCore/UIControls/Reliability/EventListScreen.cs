@@ -138,9 +138,8 @@ namespace CAS.UI.UIControls.Discrepancies
 
 			AnimatedThreadWorker.ReportProgress(0, "load Work Packages");
 
-			var discrip = GlobalObjects.DiscrepanciesCore.GetDiscrepancies().ToArray();
-			_initialDirectiveArray.AddRange(discrip.Where(t => t.ParentFlightDate >= dateTimePickerDateFrom.Value &&
-																t.ParentFlightDate <= dateTimePickerDateTo.Value));
+			var discrip = GlobalObjects.DiscrepanciesCore.GetDiscrepancies(from: dateTimePickerDateFrom.Value, to: dateTimePickerDateTo.Value).ToArray();
+			_initialDirectiveArray.AddRange(discrip);
 
 			foreach (var discrepancy in _initialDirectiveArray)
 				discrepancy.Aircraft = GlobalObjects.AircraftsCore.GetAircraftById(discrepancy.ParentFlight.AircraftId);
