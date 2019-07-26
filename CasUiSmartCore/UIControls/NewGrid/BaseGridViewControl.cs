@@ -271,7 +271,7 @@ namespace CAS.UI.UIControls.NewGrid
 				GroupingItems();
 				SortingItems();
 
-				radGridView1.MasterTemplate.CollapseAllGroups();
+				radGridView1.MasterTemplate.ExpandAllGroups();
 
 				radGridView1.RowFormatting += RadGridView1_RowFormatting;
 				radGridView1.CellFormatting += RadGridView1_CellFormatting;
