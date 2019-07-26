@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using Auxiliary;
+using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
+using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
 using Telerik.WinControls.UI;
@@ -20,7 +24,8 @@ namespace CAS.UI.UIControls.DirectivesControls
 	///<summary>
 	/// список для отображения ордеров запроса
 	///</summary>
-	public partial class PrimeDirectiveListView : BaseGridViewControl<Directive>
+	public partial class 
+		PrimeDirectiveListView : BaseGridViewControl<Directive>
 	{
 		#region Fields
 
@@ -297,72 +302,35 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 		#endregion
 
-		#region protected override void SortItems(int columnIndex)
+		#region Overrides of BaseGridViewControl<Directive>
+		protected override void Sorting(string colName = null)
+		{
 
-	 //   protected override void SortItems(int columnIndex)
-	 //   {
-	 //       if (OldColumnIndex != columnIndex)
-	 //           SortMultiplier = -1;
-	 //       if (SortMultiplier == 1)
-	 //           SortMultiplier = -1;
-	 //       else
-	 //           SortMultiplier = 1;
-	 //       itemsListView.Items.Clear();
+		}
 
-	 //       List<ListViewItem> resultList = new List<ListViewItem>();
+		protected override void CustomSort(int ColumnIndex)
+		{
+			if (OldColumnIndex != ColumnIndex)
+				SortMultiplier = -1;
+			if (SortMultiplier == 1)
+				SortMultiplier = -1;
+			else
+				SortMultiplier = 1;
 
-	 //       if (columnIndex <= 4 || columnIndex == 7 || columnIndex >= 18)
-	 //       {
-	 //           SetGroupsToItems(columnIndex);
-	 //           ListViewItemList.Sort(new DirectiveListViewComparer(columnIndex, SortMultiplier));
-	 //           //добавление остальных подзадач
-	 //           foreach (ListViewItem item in ListViewItemList)
-	 //           {
-	 //               if (item.Tag is Directive)
-	 //               {
-	 //                   resultList.Add(item);
-	 //               }
-	 //           }
-	 //       }
-	 //       else if (columnIndex == 10)
-	 //       {
-	 //           foreach (ListViewItem item in ListViewItemList)
-	 //           {
-	 //               if (item.Tag is Directive)
-	 //               {
-	 //                   resultList.Add(item);
-	 //               }
-	 //           }
+			var resultList = new List<Directive>();
+			var list = radGridView1.Rows.Select(i => i).ToList();
+			list.Sort(new DirectiveGridViewDataRowInfoComparer(ColumnIndex, SortMultiplier));
 
-	 //           resultList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
+			foreach (var item in list)
+				resultList.Add(item.Tag as Directive);
 
-	 //           itemsListView.Groups.Clear();
-	 //           foreach (var item in resultList)
-	 //           {
-					//var temp = ListViewGroupHelper.GetGroupStringByPerformanceDate(item.Tag);
-					//itemsListView.Groups.Add(temp, temp);
-	 //               item.Group = itemsListView.Groups[temp];
-	 //           }
-
-	 //       }
-	 //       else
-	 //       {
-	 //           SetGroupsToItems(columnIndex);
-	 //           //добавление остальных подзадач
-	 //           foreach (ListViewItem item in ListViewItemList)
-	 //           {
-	 //               if (item.Tag is Directive)
-	 //               {
-	 //                   resultList.Add(item);
-	 //               }
-	 //           }
-	 //           resultList.Sort(new DirectiveListViewComparer(columnIndex, SortMultiplier));
-	 //       }
-	 //       itemsListView.Items.AddRange(resultList.ToArray());
-	 //       OldColumnIndex = columnIndex;
-	 //   }
+			SetItemsArray(resultList.ToArray());
+			OldColumnIndex = ColumnIndex;
+		}
 
 		#endregion
+
+
 
 		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 

@@ -11,6 +11,7 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.ForecastControls;
 using CAS.UI.UIControls.PurchaseControls;
@@ -441,6 +442,16 @@ namespace CAS.UI.UIControls.DirectivesControls
 			}
 
 			_directivesViewer.SetItemsArray(_resultDirectiveArray.ToArray());
+
+			var resultList = new List<Directive>();
+			var list = _directivesViewer.radGridView1.Rows.Select(i => i).ToList();
+			list.Sort(new DirectiveGridViewDataRowInfoComparer(0, -1));
+
+			foreach (var item in list)
+				resultList.Add(item.Tag as Directive);
+
+			_directivesViewer.SetItemsArray(resultList.ToArray());
+
 			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 			_directivesViewer.Focus();
 		}
