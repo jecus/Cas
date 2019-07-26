@@ -778,6 +778,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			if (_directivesViewer.SelectedItems.Count == 0)
 				return;
 
+
 			foreach (var directive in _directivesViewer.SelectedItems)
 				directive.DirectiveType = DirectiveType.AirworthenessDirectives;
 			
@@ -1086,6 +1087,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			{
 				if (_directivesViewer.SelectedItems.Count <= 0)
 				{
+					_toolStripMenuItemChangeToAd.Enabled = false;
 					_toolStripMenuItemOpen.Enabled = false;
 					_toolStripMenuItemShowADFile.Enabled = false;
 					_toolStripMenuItemShowSBFile.Enabled = false;
@@ -1101,6 +1103,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 				if (_directivesViewer.SelectedItems.Count == 1)
 				{
+					_toolStripMenuItemChangeToAd.Enabled =
+						_directivesViewer.SelectedItem.DirectiveType == DirectiveType.SB;
+
 					_toolStripMenuItemOpen.Enabled = true;
 
 					BaseEntityObject o = _directivesViewer.SelectedItems[0];

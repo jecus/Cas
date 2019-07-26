@@ -169,7 +169,12 @@ namespace CAS.UI.UIControls.MaintananceProgram
 										  : "N/A";
 
 			if (item.APUCalc)
+			{
 				nextRemainString = nextRemainString.Replace("FH", "AH");
+				nextComplianceString = nextComplianceString.Replace("FH", "AH");
+				lastPerformanceString = lastPerformanceString.Replace("FH", "AH");
+				firstPerformanceString = firstPerformanceString.Replace("FH", "AH");
+			}
 
 			//////////////////////////////////////////////////////////////////////////////////////
 			string description = item.Description != "" ? item.Description : "N/A";
