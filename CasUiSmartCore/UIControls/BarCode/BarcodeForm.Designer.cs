@@ -51,6 +51,13 @@
 			this.textBoxAta = new System.Windows.Forms.TextBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.textBoxName = new System.Windows.Forms.TextBox();
+			this.labelATA = new System.Windows.Forms.Label();
+			this.labelSerialNo = new System.Windows.Forms.Label();
+			this.labelPartNo = new System.Windows.Forms.Label();
+			this.labelStatus = new System.Windows.Forms.Label();
+			this.labelBatchNo = new System.Windows.Forms.Label();
+			this.labelQuantity = new System.Windows.Forms.Label();
+			this.labelInst = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.radBarcode1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.QR)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.Code128)).BeginInit();
@@ -123,6 +130,13 @@
 			// panel1
 			// 
 			this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.panel1.Controls.Add(this.labelInst);
+			this.panel1.Controls.Add(this.labelQuantity);
+			this.panel1.Controls.Add(this.labelBatchNo);
+			this.panel1.Controls.Add(this.labelStatus);
+			this.panel1.Controls.Add(this.labelPartNo);
+			this.panel1.Controls.Add(this.labelSerialNo);
+			this.panel1.Controls.Add(this.labelATA);
 			this.panel1.Controls.Add(this.label8);
 			this.panel1.Controls.Add(this.label7);
 			this.panel1.Controls.Add(this.textBoxInstData);
@@ -168,11 +182,11 @@
 			this.textBoxInstData.BackColor = System.Drawing.SystemColors.Window;
 			this.textBoxInstData.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.textBoxInstData.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.textBoxInstData.Location = new System.Drawing.Point(190, 217);
+			this.textBoxInstData.Location = new System.Drawing.Point(188, 226);
 			this.textBoxInstData.Multiline = true;
 			this.textBoxInstData.Name = "textBoxInstData";
 			this.textBoxInstData.ReadOnly = true;
-			this.textBoxInstData.Size = new System.Drawing.Size(191, 34);
+			this.textBoxInstData.Size = new System.Drawing.Size(191, 25);
 			this.textBoxInstData.TabIndex = 310;
 			this.textBoxInstData.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
@@ -181,11 +195,11 @@
 			this.textBoxBatchNo.BackColor = System.Drawing.SystemColors.Window;
 			this.textBoxBatchNo.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.textBoxBatchNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.textBoxBatchNo.Location = new System.Drawing.Point(3, 217);
+			this.textBoxBatchNo.Location = new System.Drawing.Point(0, 226);
 			this.textBoxBatchNo.Multiline = true;
 			this.textBoxBatchNo.Name = "textBoxBatchNo";
 			this.textBoxBatchNo.ReadOnly = true;
-			this.textBoxBatchNo.Size = new System.Drawing.Size(181, 34);
+			this.textBoxBatchNo.Size = new System.Drawing.Size(181, 25);
 			this.textBoxBatchNo.TabIndex = 309;
 			this.textBoxBatchNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
@@ -202,11 +216,11 @@
 			this.textBoxPartNo.BackColor = System.Drawing.SystemColors.Window;
 			this.textBoxPartNo.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.textBoxPartNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-			this.textBoxPartNo.Location = new System.Drawing.Point(3, 132);
+			this.textBoxPartNo.Location = new System.Drawing.Point(3, 142);
 			this.textBoxPartNo.Multiline = true;
 			this.textBoxPartNo.Name = "textBoxPartNo";
 			this.textBoxPartNo.ReadOnly = true;
-			this.textBoxPartNo.Size = new System.Drawing.Size(378, 34);
+			this.textBoxPartNo.Size = new System.Drawing.Size(378, 25);
 			this.textBoxPartNo.TabIndex = 307;
 			this.textBoxPartNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
@@ -223,11 +237,11 @@
 			this.textBoxSerialNo.BackColor = System.Drawing.SystemColors.Window;
 			this.textBoxSerialNo.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.textBoxSerialNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.textBoxSerialNo.Location = new System.Drawing.Point(-1, 89);
+			this.textBoxSerialNo.Location = new System.Drawing.Point(3, 99);
 			this.textBoxSerialNo.Multiline = true;
 			this.textBoxSerialNo.Name = "textBoxSerialNo";
 			this.textBoxSerialNo.ReadOnly = true;
-			this.textBoxSerialNo.Size = new System.Drawing.Size(378, 34);
+			this.textBoxSerialNo.Size = new System.Drawing.Size(378, 25);
 			this.textBoxSerialNo.TabIndex = 305;
 			this.textBoxSerialNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
@@ -244,11 +258,11 @@
 			this.textBoxQty.BackColor = System.Drawing.SystemColors.Window;
 			this.textBoxQty.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.textBoxQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.textBoxQty.Location = new System.Drawing.Point(190, 175);
+			this.textBoxQty.Location = new System.Drawing.Point(188, 184);
 			this.textBoxQty.Multiline = true;
 			this.textBoxQty.Name = "textBoxQty";
 			this.textBoxQty.ReadOnly = true;
-			this.textBoxQty.Size = new System.Drawing.Size(191, 34);
+			this.textBoxQty.Size = new System.Drawing.Size(191, 25);
 			this.textBoxQty.TabIndex = 303;
 			this.textBoxQty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
@@ -257,11 +271,11 @@
 			this.textBoxStatus.BackColor = System.Drawing.SystemColors.Window;
 			this.textBoxStatus.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.textBoxStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.textBoxStatus.Location = new System.Drawing.Point(3, 175);
+			this.textBoxStatus.Location = new System.Drawing.Point(2, 184);
 			this.textBoxStatus.Multiline = true;
 			this.textBoxStatus.Name = "textBoxStatus";
 			this.textBoxStatus.ReadOnly = true;
-			this.textBoxStatus.Size = new System.Drawing.Size(181, 34);
+			this.textBoxStatus.Size = new System.Drawing.Size(181, 25);
 			this.textBoxStatus.TabIndex = 302;
 			this.textBoxStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
@@ -278,11 +292,11 @@
 			this.textBoxAta.BackColor = System.Drawing.SystemColors.Window;
 			this.textBoxAta.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.textBoxAta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.textBoxAta.Location = new System.Drawing.Point(3, 46);
+			this.textBoxAta.Location = new System.Drawing.Point(3, 53);
 			this.textBoxAta.Multiline = true;
 			this.textBoxAta.Name = "textBoxAta";
 			this.textBoxAta.ReadOnly = true;
-			this.textBoxAta.Size = new System.Drawing.Size(378, 34);
+			this.textBoxAta.Size = new System.Drawing.Size(378, 28);
 			this.textBoxAta.TabIndex = 300;
 			this.textBoxAta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
@@ -299,13 +313,76 @@
 			this.textBoxName.BackColor = System.Drawing.SystemColors.Window;
 			this.textBoxName.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.textBoxName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.textBoxName.Location = new System.Drawing.Point(3, 4);
+			this.textBoxName.Location = new System.Drawing.Point(3, 13);
 			this.textBoxName.Multiline = true;
 			this.textBoxName.Name = "textBoxName";
 			this.textBoxName.ReadOnly = true;
-			this.textBoxName.Size = new System.Drawing.Size(378, 34);
+			this.textBoxName.Size = new System.Drawing.Size(378, 25);
 			this.textBoxName.TabIndex = 298;
 			this.textBoxName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// labelATA
+			// 
+			this.labelATA.AutoSize = true;
+			this.labelATA.Location = new System.Drawing.Point(3, 43);
+			this.labelATA.Name = "labelATA";
+			this.labelATA.Size = new System.Drawing.Size(28, 13);
+			this.labelATA.TabIndex = 313;
+			this.labelATA.Text = "ATA";
+			// 
+			// labelSerialNo
+			// 
+			this.labelSerialNo.AutoSize = true;
+			this.labelSerialNo.Location = new System.Drawing.Point(3, 86);
+			this.labelSerialNo.Name = "labelSerialNo";
+			this.labelSerialNo.Size = new System.Drawing.Size(47, 13);
+			this.labelSerialNo.TabIndex = 314;
+			this.labelSerialNo.Text = "Serial №";
+			// 
+			// labelPartNo
+			// 
+			this.labelPartNo.AutoSize = true;
+			this.labelPartNo.Location = new System.Drawing.Point(3, 129);
+			this.labelPartNo.Name = "labelPartNo";
+			this.labelPartNo.Size = new System.Drawing.Size(40, 13);
+			this.labelPartNo.TabIndex = 315;
+			this.labelPartNo.Text = "Part №";
+			// 
+			// labelStatus
+			// 
+			this.labelStatus.AutoSize = true;
+			this.labelStatus.Location = new System.Drawing.Point(3, 173);
+			this.labelStatus.Name = "labelStatus";
+			this.labelStatus.Size = new System.Drawing.Size(37, 13);
+			this.labelStatus.TabIndex = 316;
+			this.labelStatus.Text = "Status";
+			// 
+			// labelBatchNo
+			// 
+			this.labelBatchNo.AutoSize = true;
+			this.labelBatchNo.Location = new System.Drawing.Point(3, 216);
+			this.labelBatchNo.Name = "labelBatchNo";
+			this.labelBatchNo.Size = new System.Drawing.Size(49, 13);
+			this.labelBatchNo.TabIndex = 317;
+			this.labelBatchNo.Text = "Batch №";
+			// 
+			// labelQuantity
+			// 
+			this.labelQuantity.AutoSize = true;
+			this.labelQuantity.Location = new System.Drawing.Point(185, 173);
+			this.labelQuantity.Name = "labelQuantity";
+			this.labelQuantity.Size = new System.Drawing.Size(46, 13);
+			this.labelQuantity.TabIndex = 318;
+			this.labelQuantity.Text = "Quantity";
+			// 
+			// labelInst
+			// 
+			this.labelInst.AutoSize = true;
+			this.labelInst.Location = new System.Drawing.Point(185, 216);
+			this.labelInst.Name = "labelInst";
+			this.labelInst.Size = new System.Drawing.Size(51, 13);
+			this.labelInst.TabIndex = 319;
+			this.labelInst.Text = "Inst. date";
 			// 
 			// BarcodeForm
 			// 
@@ -358,5 +435,12 @@
 		private System.Windows.Forms.TextBox textBoxQty;
 		private System.Windows.Forms.TextBox textBoxStatus;
 		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.Label labelInst;
+		private System.Windows.Forms.Label labelQuantity;
+		private System.Windows.Forms.Label labelBatchNo;
+		private System.Windows.Forms.Label labelStatus;
+		private System.Windows.Forms.Label labelPartNo;
+		private System.Windows.Forms.Label labelSerialNo;
+		private System.Windows.Forms.Label labelATA;
 	}
 }
