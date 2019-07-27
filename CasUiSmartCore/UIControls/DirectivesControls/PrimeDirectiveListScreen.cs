@@ -11,6 +11,7 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.ForecastControls;
 using CAS.UI.UIControls.PurchaseControls;
@@ -441,6 +442,16 @@ namespace CAS.UI.UIControls.DirectivesControls
 			}
 
 			_directivesViewer.SetItemsArray(_resultDirectiveArray.ToArray());
+
+			var resultList = new List<Directive>();
+			var list = _directivesViewer.radGridView1.Rows.Select(i => i).ToList();
+			list.Sort(new DirectiveGridViewDataRowInfoComparer(0, -1));
+
+			foreach (var item in list)
+				resultList.Add(item.Tag as Directive);
+
+			_directivesViewer.SetItemsArray(resultList.ToArray());
+
 			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 			_directivesViewer.Focus();
 		}
@@ -767,6 +778,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			if (_directivesViewer.SelectedItems.Count == 0)
 				return;
 
+
 			foreach (var directive in _directivesViewer.SelectedItems)
 				directive.DirectiveType = DirectiveType.AirworthenessDirectives;
 			
@@ -1075,6 +1087,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			{
 				if (_directivesViewer.SelectedItems.Count <= 0)
 				{
+					_toolStripMenuItemChangeToAd.Enabled = false;
 					_toolStripMenuItemOpen.Enabled = false;
 					_toolStripMenuItemShowADFile.Enabled = false;
 					_toolStripMenuItemShowSBFile.Enabled = false;
@@ -1090,6 +1103,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 				if (_directivesViewer.SelectedItems.Count == 1)
 				{
+					_toolStripMenuItemChangeToAd.Enabled =
+						_directivesViewer.SelectedItem.DirectiveType == DirectiveType.SB;
+
 					_toolStripMenuItemOpen.Enabled = true;
 
 					BaseEntityObject o = _directivesViewer.SelectedItems[0];

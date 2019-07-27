@@ -777,9 +777,9 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.label6.Location = new System.Drawing.Point(537, 140);
 			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(57, 14);
+			this.label6.Size = new System.Drawing.Size(71, 14);
 			this.label6.TabIndex = 205;
-			this.label6.Text = "APU FH:";
+			this.label6.Text = "APU Hour:";
 			// 
 			// checkBoxAPU
 			// 
