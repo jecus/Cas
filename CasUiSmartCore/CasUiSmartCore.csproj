@@ -5351,6 +5351,7 @@
     <None Include="Resources\AddIconLargeGray.png" />
     <Content Include="Resources\AddJobIcon.png" />
     <Content Include="Resources\AddJobIcon_gray.png" />
+    <None Include="Resources\APU.png" />
     <Content Include="Resources\B737300400500BS46Left.bmp" />
     <Content Include="Resources\B737300400500BS46Right.bmp" />
     <Content Include="Resources\B737300400500WingLowerSurface.bmp" />

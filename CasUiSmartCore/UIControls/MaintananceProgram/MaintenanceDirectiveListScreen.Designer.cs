@@ -298,7 +298,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.buttonAPUCalc.FontSecondary = new System.Drawing.Font("Verdana", 9.75F);
 			this.buttonAPUCalc.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
 			this.buttonAPUCalc.ForeColorSecondary = System.Drawing.SystemColors.ControlText;
-			this.buttonAPUCalc.Icon = global::CAS.UI.Properties.Resources.APUIcon;
+			this.buttonAPUCalc.Icon = global::CAS.UI.Properties.Resources.APU;
 			this.buttonAPUCalc.IconLayout = System.Windows.Forms.ImageLayout.Center;
 			this.buttonAPUCalc.IconNotEnabled = null;
 			this.buttonAPUCalc.Location = new System.Drawing.Point(0, 0);
