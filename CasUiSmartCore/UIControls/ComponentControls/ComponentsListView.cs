@@ -28,8 +28,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		#region Fields
 
 		private readonly BaseComponent _parentBaseComponent;
-		public bool ShowGroup { get; set; }
-
+		private bool ShowGroup;
 		#endregion
 
 		#region Constructors
@@ -47,12 +46,17 @@ namespace CAS.UI.UIControls.ComponentControls
 		#region public DetailsListView(BaseDetail parentBaseDetail) : this()
 		///<summary>
 		///</summary>
-		public ComponentsListView(BaseComponent parentBaseComponent)
+		public ComponentsListView(BaseComponent parentBaseComponent, bool showgroups = true)
 			: this()
 		{
 			OldColumnIndex = 0;
 			_parentBaseComponent = parentBaseComponent;
-			ShowGroup = true;
+			ShowGroup = showgroups;
+
+			ColumnHeaderList.Clear();
+			SetHeaders();
+			radGridView1.Columns.Clear();
+			radGridView1.Columns.AddRange(ColumnHeaderList.ToArray());
 		}
 
 		
@@ -161,7 +165,7 @@ namespace CAS.UI.UIControls.ComponentControls
 				   mpdString= "",
 				   mpdNumString= "",
 				   lastPerformanceString = "",
-				   type = "",
+				   type = getGroupName(item),
 				   classString ="",
 				   kitRequieredString,
 				   remarks,

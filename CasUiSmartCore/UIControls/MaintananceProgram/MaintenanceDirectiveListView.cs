@@ -54,7 +54,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			AddColumn("Program Indicator", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Work Type", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Check", (int)(radGridView1.Width * 0.16f));
-			AddColumn("APU Calc.", (int)(radGridView1.Width * 0.16f));
+			AddColumn("APU Hour", (int)(radGridView1.Width * 0.16f));
 			AddColumn("1st. Perf.", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Rpt. Intv.", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Next", (int)(radGridView1.Width * 0.24f));
@@ -167,13 +167,11 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			string nextRemainString = item.Remains != null && !item.Remains.IsNullOrZero()
 										  ? item.Remains.ToString()
 										  : "N/A";
-
+			var repeat = item.Threshold.RepeatInterval.ToString();
 			if (item.APUCalc)
 			{
-				nextRemainString = nextRemainString.Replace("FH", "AH");
-				nextComplianceString = nextComplianceString.Replace("FH", "AH");
-				lastPerformanceString = lastPerformanceString.Replace("FH", "AH");
 				firstPerformanceString = firstPerformanceString.Replace("FH", "AH");
+				repeat = repeat.Replace("FH", "AH");
 			}
 
 			//////////////////////////////////////////////////////////////////////////////////////
@@ -202,7 +200,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			subItems.Add(CreateRow(check, check));
 			subItems.Add(CreateRow(item.APUCalc ? "Yes" : "No", item.APUCalc));
 			subItems.Add(CreateRow(firstPerformanceString, firstPerformanceString));
-			subItems.Add(CreateRow(item.Threshold.RepeatInterval.ToString(), item.Threshold.RepeatInterval));
+			subItems.Add(CreateRow(repeat, item.Threshold.RepeatInterval));
 			subItems.Add(CreateRow(nextComplianceString, nextComplianceDate));
 			subItems.Add(CreateRow(nextRemainString, nextRemainString));
 			subItems.Add(CreateRow(lastPerformanceString, lastComplianceDate));

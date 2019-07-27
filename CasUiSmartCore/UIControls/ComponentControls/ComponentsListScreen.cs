@@ -1702,12 +1702,8 @@ namespace CAS.UI.UIControls.ComponentControls
 		private void InitListView()
 		{
 			_directivesViewer = _currentBaseComponent != null 
-				? new ComponentsListView(_currentBaseComponent) 
-				: new ComponentsListView(_currentAircraft != null ? GlobalObjects.ComponentCore.GetBaseComponentById(_currentAircraft.AircraftFrameId) : null);
-			if (_llpMark)
-			{
-				_directivesViewer.ShowGroup = false;
-			}
+				? new ComponentsListView(_currentBaseComponent, !_llpMark) 
+				: new ComponentsListView(_currentAircraft != null ? GlobalObjects.ComponentCore.GetBaseComponentById(_currentAircraft.AircraftFrameId) : null, !_llpMark);
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.CustomMenu = _contextMenuStrip;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
