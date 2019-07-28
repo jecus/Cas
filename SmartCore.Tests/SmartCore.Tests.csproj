@@ -157,9 +157,9 @@
       <Project>{8988CAE1-D7C1-499B-B595-9B544FCCF7FB}</Project>
       <Name>Auxiliary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EFCore\EFCore.csproj">
+    <ProjectReference Include="..\EFCore\Entity.csproj">
       <Project>{6dddaf81-980a-4ebc-bf58-3ca93a059d7f}</Project>
-      <Name>EFCore</Name>
+      <Name>Entity</Name>
     </ProjectReference>
     <ProjectReference Include="..\SmartCore\SmartCore.csproj">
       <Project>{48b63705-4573-4bb2-b04d-67a406b09ab6}</Project>

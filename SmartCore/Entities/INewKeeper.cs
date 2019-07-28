@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using EFCore.DTO;
+using EntityCore.DTO;
 using SmartCore.Entities.General;
 
 namespace SmartCore.Entities
@@ -8,6 +8,8 @@ namespace SmartCore.Entities
 	{
 
 		void BulkInsert<T, TOut>(List<BaseEntityObject> values, int? batchSize = null) where T : BaseEntityObject, new()
+			where TOut : BaseEntity, new();
+		void BulkUpdate<T, TOut>(List<BaseEntityObject> values, int? batchSize = null) where T : BaseEntityObject, new()
 			where TOut : BaseEntity, new();
 		void SaveGeneric<T, TOut>(T value, bool saveAttachedFile = true) where T : BaseEntityObject, new()
 			where TOut : BaseEntity, new();
@@ -21,8 +23,10 @@ namespace SmartCore.Entities
 		void SaveAttachedFile(IFileContainer container);
 		void BulkInsert(List<BaseEntityObject> value, int? batchSize = null);
 		void BulkDelete(List<BaseEntityObject> value, int? batchSize = null);
+		void Delete(List<BaseEntityObject> value, bool isDeletedOnly = false);
 
-		
+
+
 
 	}
 }

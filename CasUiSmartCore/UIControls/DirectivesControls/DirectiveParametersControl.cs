@@ -18,50 +18,50 @@ using SmartCore.Entities.General.Directives;
 
 namespace CAS.UI.UIControls.DirectivesControls
 {
-    /// <summary>
-    /// Класс для отображения атрибутов и дополнительной информации о директиве
-    /// </summary>
-    [Designer(typeof(DirectiveParametersControlDesigner))]
-    public class DirectiveParametersControl : UserControl
-    {
-        private LookupCombobox lookupComboboxForCompnt;
-        private RadioButton radio_FirstWhicheverLast;
-        private RadioButton radio_FirstWhicheverFirst;
-        private CheckBox checkBoxRepeat;
-        private LifelengthViewer lifelengthViewer_SinceEffDate;
-        private LifelengthViewer lifelengthViewer_SinceNew;
-        private LifelengthViewer lifelengthViewer_Repeat;
-        private LifelengthViewer lifelengthViewer_FirstNotify;
-        private Label labelForComponent;
-        public LinkLabel linkLabelEditKit;
-        private AvControls.StatusImageLink.StatusImageLinkLabel imageLinkLabelStatus;
-        private TextBox textBoxKitRequired;
-        private Label labelChart;
-        public LinkLabel linkLabelEditChart;
-        private TextBox textBoxChart;
-        private RadioButton radio_RepeatWhicheverFirst;
-        private Label labelKitRequired;
-        private GroupBox groupBoxClose;
-        private CheckBox checkBoxClose;
-        private Label labelParagraph;
-        private Label labelNDT;
-        private TextBox textBoxParagraph;
-        private CheckBox checkBoxIsTemporary;
-        private ComboBox comboBoxWorkType;
-        private TextBox _textboxCost;
-        private Label _labelCost;
-        private Label _labelIsTemporary;
-        private TextBox _textboxManHours;
-        private LifelengthViewer lifelengthViewer_RepeatNotify;
-        private GroupBox groupBox_Repetative;
-        private RadioButton radio_RepeatWhicheverLast;
-        private Label _labelManHours;
-        private GroupBox groupFirstPerformance;
-        private Label labelThreshold;
+	/// <summary>
+	/// Класс для отображения атрибутов и дополнительной информации о директиве
+	/// </summary>
+	[Designer(typeof(DirectiveParametersControlDesigner))]
+	public class DirectiveParametersControl : UserControl
+	{
+		private LookupCombobox lookupComboboxForCompnt;
+		private RadioButton radio_FirstWhicheverLast;
+		private RadioButton radio_FirstWhicheverFirst;
+		private CheckBox checkBoxRepeat;
+		private LifelengthViewer lifelengthViewer_SinceEffDate;
+		private LifelengthViewer lifelengthViewer_SinceNew;
+		private LifelengthViewer lifelengthViewer_Repeat;
+		private LifelengthViewer lifelengthViewer_FirstNotify;
+		private Label labelForComponent;
+		public LinkLabel linkLabelEditKit;
+		private AvControls.StatusImageLink.StatusImageLinkLabel imageLinkLabelStatus;
+		private TextBox textBoxKitRequired;
+		private Label labelChart;
+		public LinkLabel linkLabelEditChart;
+		private TextBox textBoxChart;
+		private RadioButton radio_RepeatWhicheverFirst;
+		private Label labelKitRequired;
+		private GroupBox groupBoxClose;
+		private CheckBox checkBoxClose;
+		private Label labelParagraph;
+		private Label labelNDT;
+		private TextBox textBoxParagraph;
+		private CheckBox checkBoxIsTemporary;
+		private ComboBox comboBoxWorkType;
+		private TextBox _textboxCost;
+		private Label _labelCost;
+		private Label _labelIsTemporary;
+		private TextBox _textboxManHours;
+		private LifelengthViewer lifelengthViewer_RepeatNotify;
+		private GroupBox groupBox_Repetative;
+		private RadioButton radio_RepeatWhicheverLast;
+		private Label _labelManHours;
+		private GroupBox groupFirstPerformance;
+		private Label labelThreshold;
 
-        #region Fields
+		#region Fields
 
-        private Directive _currentDirective;
+		private Directive _currentDirective;
 		private ComboBox comboBoxNdt;
 		private ComboBox comboBoxSupersedes;
 		private Label labelSupersedes;
@@ -75,46 +75,52 @@ namespace CAS.UI.UIControls.DirectivesControls
 		private TextBox textBoxZone;
 		private Label labelAccess;
 		private TextBox textBoxAccess;
+		private Label labelAffectedBy;
+		private TextBox textBoxAffectedBy;
+		private ComboBox comboBoxAffects;
+		private Label labelAffects;
+		private ComboBox comboBoxReason;
+		private Label labelReason;
 		private DateTime _effDate = DateTimeExtend.GetCASMinDateTime();
 
-        #endregion
+		#endregion
 
-        #region Constructors
+		#region Constructors
 
-        #region public DirectiveAttributesControl()
+		#region public DirectiveAttributesControl()
 
-        /// <summary>
-        /// Пустой конструктор
-        /// </summary>
-        public DirectiveParametersControl()
-        {
-            InitializeComponent();
-        }
-
-        #endregion
-
-        #region public DirectiveAttributesControl(Directive currentDirective) : this()
-
-        /// <summary>
-        /// Создает объект для отображения атрибутов и дополнительной информации о директиве
-        /// </summary>
-        /// <param name="currentDirective"></param>
-        public DirectiveParametersControl(Directive currentDirective) : this()
-        {
-            if (null == currentDirective)
-                throw new ArgumentNullException("currentDirective", "Argument cannot be null");
-            _currentDirective = currentDirective;
-
-            UpdateInformation();
-
-            
+		/// <summary>
+		/// Пустой конструктор
+		/// </summary>
+		public DirectiveParametersControl()
+		{
+			InitializeComponent();
 		}
 
-        private void Completed()
-        {
-	        comboBoxOrder.Items.Clear();
-	        comboBoxOrder.Items.AddRange(DirectiveOrder.Items.ToArray());
-	        comboBoxOrder.SelectedItem = _currentDirective.DirectiveOrder;
+		#endregion
+
+		#region public DirectiveAttributesControl(Directive currentDirective) : this()
+
+		/// <summary>
+		/// Создает объект для отображения атрибутов и дополнительной информации о директиве
+		/// </summary>
+		/// <param name="currentDirective"></param>
+		public DirectiveParametersControl(Directive currentDirective) : this()
+		{
+			if (null == currentDirective)
+				throw new ArgumentNullException("currentDirective", "Argument cannot be null");
+			_currentDirective = currentDirective;
+
+			UpdateInformation();
+
+			
+		}
+
+		private void Completed()
+		{
+			comboBoxOrder.Items.Clear();
+			comboBoxOrder.Items.AddRange(DirectiveOrder.Items.ToArray());
+			comboBoxOrder.SelectedItem = _currentDirective.DirectiveOrder;
 
 			comboBoxSuperseded.Items.Clear();
 			comboBoxSuperseded.Items.AddRange(Directives.ToArray());
@@ -129,104 +135,104 @@ namespace CAS.UI.UIControls.DirectivesControls
 				comboBoxSupersedes.SelectedItem = Directives.FirstOrDefault(i => i.ItemId == _currentDirective.SupersedesId);
 		}
 
-        private void DoWork()
-        {
-	        var aircraft =
-		        GlobalObjects.AircraftsCore.GetAircraftById(_currentDirective.ParentBaseComponent.ParentAircraftId);
-	        Directives.AddRange(GlobalObjects.DirectiveCore.GetDirectives(aircraft, DirectiveType.AirworthenessDirectives));
-        }
+		private void DoWork()
+		{
+			var aircraft =
+				GlobalObjects.AircraftsCore.GetAircraftById(_currentDirective.ParentBaseComponent.ParentAircraftId);
+			Directives.AddRange(GlobalObjects.DirectiveCore.GetDirectives(aircraft, DirectiveType.AirworthenessDirectives));
+		}
 
-        #endregion
+		#endregion
 
-        #endregion
+		#endregion
 
-        #region Properties
+		#region Properties
 
-        public List<Directive> Directives = new List<Directive>();
+		public List<Directive> Directives = new List<Directive>();
 
-        #region public string DamageChartLocation
-        /// <summary>
-        /// DamageChartLocation
-        /// </summary>
-        public string DamageChartLocation
-        {
-            get
-            {
-                return textBoxChart.Text;
-            }
-            set
-            {
-                textBoxChart.Text = value;
-            }
-        }
+		#region public string DamageChartLocation
+		/// <summary>
+		/// DamageChartLocation
+		/// </summary>
+		public string DamageChartLocation
+		{
+			get
+			{
+				return textBoxChart.Text;
+			}
+			set
+			{
+				textBoxChart.Text = value;
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region public Directive CurrentDirective
+		#region public Directive CurrentDirective
 
-        /// <summary>
-        /// текущая  директива
-        /// </summary>
-        public Directive CurrentDirective
-        {
-            set
-            {
-                _currentDirective = value;
+		/// <summary>
+		/// текущая  директива
+		/// </summary>
+		public Directive CurrentDirective
+		{
+			set
+			{
+				_currentDirective = value;
 
-                if (_currentDirective.DirectiveType == DirectiveType.AirworthenessDirectives)
-                {
-	                Task.Run(() => DoWork())
-		                .ContinueWith(task => Completed(), TaskScheduler.FromCurrentSynchronizationContext());
+				if (_currentDirective.DirectiveType == DirectiveType.AirworthenessDirectives)
+				{
+					Task.Run(() => DoWork())
+						.ContinueWith(task => Completed(), TaskScheduler.FromCurrentSynchronizationContext());
 				}
-                else
-                {
-	                labelSuperseded.Visible = false;
-	                labelSupersedes.Visible = false;
-	                label3.Visible = false;
-	                comboBoxSuperseded.Visible = false;
-	                comboBoxSupersedes.Visible = false;
-	                comboBoxOrder.Visible = false;
+				else
+				{
+					labelSuperseded.Visible = false;
+					labelSupersedes.Visible = false;
+					label3.Visible = false;
+					comboBoxSuperseded.Visible = false;
+					comboBoxSupersedes.Visible = false;
+					comboBoxOrder.Visible = false;
 
-                }
-                
+				}
+				
 				UpdateInformation();
 
-            }
-            get
-            {
-                return _currentDirective;
-            }
-        }
+			}
+			get
+			{
+				return _currentDirective;
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region public DirectiveThreshold Threshold { get; set; }
+		#region public DirectiveThreshold Threshold { get; set; }
 
-        /// <summary>
-        /// Выполнение директивы
-        /// </summary>
-        public DirectiveThreshold Threshold
-        {
-            get { return GetThreshold(); }
-            set { ApplyThreshold(value); }
-        }
+		/// <summary>
+		/// Выполнение директивы
+		/// </summary>
+		public DirectiveThreshold Threshold
+		{
+			get { return GetThreshold(); }
+			set { ApplyThreshold(value); }
+		}
 
-        #endregion
+		#endregion
 
-        #region public bool isClosed { get; set; }
+		#region public bool isClosed { get; set; }
 
-        public bool isClosed { get; set; }
-       
-        #endregion
+		public bool isClosed { get; set; }
+	   
+		#endregion
 
-        #region public DateTime EffectiveDate
-        /// <summary>
-        /// Дата начала использования текущей директивы
-        /// </summary>
-        public DateTime EffectiveDate
-        {
-            set { _effDate = value; }
-        }
+		#region public DateTime EffectiveDate
+		/// <summary>
+		/// Дата начала использования текущей директивы
+		/// </summary>
+		public DateTime EffectiveDate
+		{
+			set { _effDate = value; }
+		}
 
 		#endregion
 
@@ -237,7 +243,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		#region private void InitializeComponent()
 
 		private void InitializeComponent()
-        {
+		{
 			this.radio_FirstWhicheverLast = new System.Windows.Forms.RadioButton();
 			this.radio_FirstWhicheverFirst = new System.Windows.Forms.RadioButton();
 			this.checkBoxRepeat = new System.Windows.Forms.CheckBox();
@@ -285,6 +291,12 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.textBoxZone = new System.Windows.Forms.TextBox();
 			this.labelAccess = new System.Windows.Forms.Label();
 			this.textBoxAccess = new System.Windows.Forms.TextBox();
+			this.labelAffectedBy = new System.Windows.Forms.Label();
+			this.textBoxAffectedBy = new System.Windows.Forms.TextBox();
+			this.comboBoxAffects = new System.Windows.Forms.ComboBox();
+			this.labelAffects = new System.Windows.Forms.Label();
+			this.comboBoxReason = new System.Windows.Forms.ComboBox();
+			this.labelReason = new System.Windows.Forms.Label();
 			this.groupBoxClose.SuspendLayout();
 			this.groupBox_Repetative.SuspendLayout();
 			this.groupFirstPerformance.SuspendLayout();
@@ -805,7 +817,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			this.comboBoxSupersedes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.comboBoxSupersedes.FormattingEnabled = true;
-			this.comboBoxSupersedes.Location = new System.Drawing.Point(743, 63);
+			this.comboBoxSupersedes.Location = new System.Drawing.Point(743, 172);
 			this.comboBoxSupersedes.Name = "comboBoxSupersedes";
 			this.comboBoxSupersedes.Size = new System.Drawing.Size(308, 21);
 			this.comboBoxSupersedes.TabIndex = 207;
@@ -815,7 +827,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			this.labelSupersedes.Font = new System.Drawing.Font("Verdana", 9F);
 			this.labelSupersedes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelSupersedes.Location = new System.Drawing.Point(593, 60);
+			this.labelSupersedes.Location = new System.Drawing.Point(593, 169);
 			this.labelSupersedes.Name = "labelSupersedes";
 			this.labelSupersedes.Size = new System.Drawing.Size(121, 25);
 			this.labelSupersedes.TabIndex = 206;
@@ -828,7 +840,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.comboBoxSuperseded.Enabled = false;
 			this.comboBoxSuperseded.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.comboBoxSuperseded.FormattingEnabled = true;
-			this.comboBoxSuperseded.Location = new System.Drawing.Point(743, 90);
+			this.comboBoxSuperseded.Location = new System.Drawing.Point(743, 199);
 			this.comboBoxSuperseded.Name = "comboBoxSuperseded";
 			this.comboBoxSuperseded.Size = new System.Drawing.Size(308, 21);
 			this.comboBoxSuperseded.TabIndex = 209;
@@ -838,7 +850,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			this.labelSuperseded.Font = new System.Drawing.Font("Verdana", 9F);
 			this.labelSuperseded.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelSuperseded.Location = new System.Drawing.Point(593, 87);
+			this.labelSuperseded.Location = new System.Drawing.Point(593, 196);
 			this.labelSuperseded.Name = "labelSuperseded";
 			this.labelSuperseded.Size = new System.Drawing.Size(121, 25);
 			this.labelSuperseded.TabIndex = 208;
@@ -850,23 +862,21 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			this.comboBoxOrder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.comboBoxOrder.FormattingEnabled = true;
-			this.comboBoxOrder.Location = new System.Drawing.Point(743, 117);
+			this.comboBoxOrder.Location = new System.Drawing.Point(743, 145);
 			this.comboBoxOrder.Name = "comboBoxOrder";
 			this.comboBoxOrder.Size = new System.Drawing.Size(308, 21);
 			this.comboBoxOrder.TabIndex = 211;
-			this.comboBoxOrder.Visible = false;
 			// 
 			// label3
 			// 
 			this.label3.Font = new System.Drawing.Font("Verdana", 9F);
 			this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.label3.Location = new System.Drawing.Point(593, 114);
+			this.label3.Location = new System.Drawing.Point(593, 142);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(121, 25);
 			this.label3.TabIndex = 210;
 			this.label3.Text = "Order:";
 			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.label3.Visible = false;
 			// 
 			// label6
 			// 
@@ -935,12 +945,80 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.textBoxAccess.Size = new System.Drawing.Size(350, 22);
 			this.textBoxAccess.TabIndex = 213;
 			// 
+			// labelAffectedBy
+			// 
+			this.labelAffectedBy.AutoSize = true;
+			this.labelAffectedBy.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelAffectedBy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelAffectedBy.Location = new System.Drawing.Point(593, 66);
+			this.labelAffectedBy.Name = "labelAffectedBy";
+			this.labelAffectedBy.Size = new System.Drawing.Size(82, 14);
+			this.labelAffectedBy.TabIndex = 219;
+			this.labelAffectedBy.Text = "Affected by:";
+			// 
+			// textBoxAffectedBy
+			// 
+			this.textBoxAffectedBy.BackColor = System.Drawing.Color.White;
+			this.textBoxAffectedBy.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.textBoxAffectedBy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxAffectedBy.Location = new System.Drawing.Point(743, 63);
+			this.textBoxAffectedBy.MaxLength = 200;
+			this.textBoxAffectedBy.Name = "textBoxAffectedBy";
+			this.textBoxAffectedBy.Size = new System.Drawing.Size(308, 22);
+			this.textBoxAffectedBy.TabIndex = 218;
+			// 
+			// comboBoxAffects
+			// 
+			this.comboBoxAffects.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.comboBoxAffects.FormattingEnabled = true;
+			this.comboBoxAffects.Location = new System.Drawing.Point(743, 91);
+			this.comboBoxAffects.Name = "comboBoxAffects";
+			this.comboBoxAffects.Size = new System.Drawing.Size(308, 21);
+			this.comboBoxAffects.TabIndex = 221;
+			// 
+			// labelAffects
+			// 
+			this.labelAffects.Font = new System.Drawing.Font("Verdana", 9F);
+			this.labelAffects.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelAffects.Location = new System.Drawing.Point(593, 88);
+			this.labelAffects.Name = "labelAffects";
+			this.labelAffects.Size = new System.Drawing.Size(121, 25);
+			this.labelAffects.TabIndex = 220;
+			this.labelAffects.Text = "Affects:";
+			this.labelAffects.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// comboBoxReason
+			// 
+			this.comboBoxReason.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.comboBoxReason.FormattingEnabled = true;
+			this.comboBoxReason.Location = new System.Drawing.Point(743, 118);
+			this.comboBoxReason.Name = "comboBoxReason";
+			this.comboBoxReason.Size = new System.Drawing.Size(308, 21);
+			this.comboBoxReason.TabIndex = 223;
+			// 
+			// labelReason
+			// 
+			this.labelReason.Font = new System.Drawing.Font("Verdana", 9F);
+			this.labelReason.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelReason.Location = new System.Drawing.Point(593, 115);
+			this.labelReason.Name = "labelReason";
+			this.labelReason.Size = new System.Drawing.Size(121, 25);
+			this.labelReason.TabIndex = 222;
+			this.labelReason.Text = "Reason:";
+			this.labelReason.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
 			// DirectiveParametersControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this.Controls.Add(this.comboBoxReason);
+			this.Controls.Add(this.labelReason);
+			this.Controls.Add(this.comboBoxAffects);
+			this.Controls.Add(this.labelAffects);
+			this.Controls.Add(this.labelAffectedBy);
+			this.Controls.Add(this.textBoxAffectedBy);
 			this.Controls.Add(this.label6);
 			this.Controls.Add(this.textBoxWorkArea);
 			this.Controls.Add(this.labelZone);
@@ -988,523 +1066,542 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        #region private DirectiveThreshold GetThreshold()
-        /// <summary>
-        /// Считывает все контролы и формирует один Threshold
-        /// </summary>
-        private DirectiveThreshold GetThreshold()
-        {
-            DirectiveThreshold threshold = new DirectiveThreshold();
+		#region private DirectiveThreshold GetThreshold()
+		/// <summary>
+		/// Считывает все контролы и формирует один Threshold
+		/// </summary>
+		private DirectiveThreshold GetThreshold()
+		{
+			DirectiveThreshold threshold = new DirectiveThreshold();
 
-            // First performance
-            Lifelength sinceNew = new Lifelength(lifelengthViewer_SinceNew.Lifelength);
-            Lifelength sinceEffDate = new Lifelength(lifelengthViewer_SinceEffDate.Lifelength);
+			// First performance
+			Lifelength sinceNew = new Lifelength(lifelengthViewer_SinceNew.Lifelength);
+			Lifelength sinceEffDate = new Lifelength(lifelengthViewer_SinceEffDate.Lifelength);
 
-            threshold.FirstPerformanceSinceNew = sinceNew;
-            threshold.FirstPerformanceSinceEffectiveDate = sinceEffDate;
+			threshold.FirstPerformanceSinceNew = sinceNew;
+			threshold.FirstPerformanceSinceEffectiveDate = sinceEffDate;
 
-            threshold.PerformSinceNew = sinceNew.IsNullOrZero() ? false : true;
-            threshold.PerformSinceEffectiveDate = sinceEffDate.IsNullOrZero() ? false : true;
+			threshold.PerformSinceNew = sinceNew.IsNullOrZero() ? false : true;
+			threshold.PerformSinceEffectiveDate = sinceEffDate.IsNullOrZero() ? false : true;
 
-            Lifelength nfp = new Lifelength(lifelengthViewer_FirstNotify.Lifelength);
-            threshold.FirstNotification = nfp;
+			Lifelength nfp = new Lifelength(lifelengthViewer_FirstNotify.Lifelength);
+			threshold.FirstNotification = nfp;
 
-            if (radio_FirstWhicheverFirst.Checked) threshold.FirstPerformanceConditionType = ThresholdConditionType.WhicheverFirst;
-            if (radio_FirstWhicheverLast.Checked)threshold.FirstPerformanceConditionType = ThresholdConditionType.WhicheverLater;
+			if (radio_FirstWhicheverFirst.Checked) threshold.FirstPerformanceConditionType = ThresholdConditionType.WhicheverFirst;
+			if (radio_FirstWhicheverLast.Checked)threshold.FirstPerformanceConditionType = ThresholdConditionType.WhicheverLater;
 
-            // Repeat interval
-            if (checkBoxRepeat.Checked)
-            {
-                // директива выполняется повторно
-                Lifelength rp = new Lifelength(lifelengthViewer_Repeat.Lifelength);
-                Lifelength nrp = new Lifelength(lifelengthViewer_RepeatNotify.Lifelength);
+			// Repeat interval
+			if (checkBoxRepeat.Checked)
+			{
+				// директива выполняется повторно
+				Lifelength rp = new Lifelength(lifelengthViewer_Repeat.Lifelength);
+				Lifelength nrp = new Lifelength(lifelengthViewer_RepeatNotify.Lifelength);
 
-                threshold.PerformRepeatedly = true;
-                threshold.RepeatInterval = rp;
-                threshold.RepeatNotification = nrp;
+				threshold.PerformRepeatedly = true;
+				threshold.RepeatInterval = rp;
+				threshold.RepeatNotification = nrp;
 
-                if (radio_RepeatWhicheverFirst.Checked) threshold.RepeatPerformanceConditionType = ThresholdConditionType.WhicheverFirst;
-                if (radio_RepeatWhicheverLast.Checked) threshold.RepeatPerformanceConditionType = ThresholdConditionType.WhicheverLater;
-            }
+				if (radio_RepeatWhicheverFirst.Checked) threshold.RepeatPerformanceConditionType = ThresholdConditionType.WhicheverFirst;
+				if (radio_RepeatWhicheverLast.Checked) threshold.RepeatPerformanceConditionType = ThresholdConditionType.WhicheverLater;
+			}
 
-            return threshold;
-        }
-        #endregion
+			return threshold;
+		}
+		#endregion
 
-        #region private void ApplyThreshold(DirectiveThreshold treshold)
-        /// <summary>
-        /// Заполняет все контролы в связи с заданным Threshold
-        /// </summary>
-        private void ApplyThreshold(DirectiveThreshold threshold)
-        {
-            // First Performance 
-            radio_FirstWhicheverLast.Checked = 
-                threshold.FirstPerformanceConditionType != ThresholdConditionType.WhicheverFirst;
+		#region private void ApplyThreshold(DirectiveThreshold treshold)
+		/// <summary>
+		/// Заполняет все контролы в связи с заданным Threshold
+		/// </summary>
+		private void ApplyThreshold(DirectiveThreshold threshold)
+		{
+			// First Performance 
+			radio_FirstWhicheverLast.Checked = 
+				threshold.FirstPerformanceConditionType != ThresholdConditionType.WhicheverFirst;
 
-            if (threshold.FirstPerformanceSinceNew != null)
-            {
-                lifelengthViewer_SinceNew.Lifelength = threshold.FirstPerformanceSinceNew;
-            }
+			if (threshold.FirstPerformanceSinceNew != null)
+			{
+				lifelengthViewer_SinceNew.Lifelength = threshold.FirstPerformanceSinceNew;
+			}
 
-            if (threshold.FirstPerformanceSinceEffectiveDate != null)
-            {
-                lifelengthViewer_SinceEffDate.Lifelength = threshold.FirstPerformanceSinceEffectiveDate;
-            }
+			if (threshold.FirstPerformanceSinceEffectiveDate != null)
+			{
+				lifelengthViewer_SinceEffDate.Lifelength = threshold.FirstPerformanceSinceEffectiveDate;
+			}
 
-            if (threshold.FirstNotification != null)
-            {
-                lifelengthViewer_FirstNotify.Lifelength = threshold.FirstNotification;
-            }
+			if (threshold.FirstNotification != null)
+			{
+				lifelengthViewer_FirstNotify.Lifelength = threshold.FirstNotification;
+			}
 
-            // Repeat Interval
-            radio_RepeatWhicheverLast.Checked =
-                threshold.RepeatPerformanceConditionType != ThresholdConditionType.WhicheverFirst;
-            // Выбираем способ повторения директивы
-            checkBoxRepeat.Checked = threshold.PerformRepeatedly;
+			// Repeat Interval
+			radio_RepeatWhicheverLast.Checked =
+				threshold.RepeatPerformanceConditionType != ThresholdConditionType.WhicheverFirst;
+			// Выбираем способ повторения директивы
+			checkBoxRepeat.Checked = threshold.PerformRepeatedly;
 
-            radio_RepeatWhicheverFirst.Enabled =  radio_RepeatWhicheverLast.Enabled = 
-                lifelengthViewer_Repeat.Enabled = lifelengthViewer_RepeatNotify.Enabled = checkBoxRepeat.Checked;
+			radio_RepeatWhicheverFirst.Enabled =  radio_RepeatWhicheverLast.Enabled = 
+				lifelengthViewer_Repeat.Enabled = lifelengthViewer_RepeatNotify.Enabled = checkBoxRepeat.Checked;
 
-            if (threshold.RepeatInterval != null)
-                lifelengthViewer_Repeat.Lifelength = threshold.RepeatInterval;
+			if (threshold.RepeatInterval != null)
+				lifelengthViewer_Repeat.Lifelength = threshold.RepeatInterval;
 
-            if (threshold.RepeatNotification != null)
-                lifelengthViewer_RepeatNotify.Lifelength = threshold.RepeatNotification;
-            
-        }
+			if (threshold.RepeatNotification != null)
+				lifelengthViewer_RepeatNotify.Lifelength = threshold.RepeatNotification;
+			
+		}
 
-        #endregion
+		#endregion
 
-        #region public void EnableLifelengthControls(bool isEnable)
-        ///<summary>
-        ///</summary>
-        ///<param name="isEnable"></param>
-        public void EnableLifelengthControls(bool isEnable)
-        {
-            lifelengthViewer_SinceNew.Enabled = isEnable;
-            lifelengthViewer_SinceEffDate.Enabled = isEnable;
-            lifelengthViewer_FirstNotify.Enabled = isEnable;
-            lifelengthViewer_Repeat.Enabled = isEnable;
-            lifelengthViewer_RepeatNotify.Enabled = isEnable;
-        }
-        #endregion
+		#region public void EnableLifelengthControls(bool isEnable)
+		///<summary>
+		///</summary>
+		///<param name="isEnable"></param>
+		public void EnableLifelengthControls(bool isEnable)
+		{
+			lifelengthViewer_SinceNew.Enabled = isEnable;
+			lifelengthViewer_SinceEffDate.Enabled = isEnable;
+			lifelengthViewer_FirstNotify.Enabled = isEnable;
+			lifelengthViewer_Repeat.Enabled = isEnable;
+			lifelengthViewer_RepeatNotify.Enabled = isEnable;
+		}
+		#endregion
 
-        #region public void SetThresholdByCategory(DefferedCategory category)
-        ///<summary>
-        ///</summary>
-        ///<param name="category"></param>
-        public void SetThresholdByCategory(DeferredCategory category)
-        {
-            char name = char.ToUpper(category.FullName.ToCharArray()[0]);
-                
-            if(name == 'A')EnableLifelengthControls(true);
-            else
-            {
-                category.Threshold.FirstPerformanceConditionType = ThresholdConditionType.WhicheverFirst;
-                category.Threshold.RepeatPerformanceConditionType = ThresholdConditionType.WhicheverFirst;
-                category.Threshold.PerformRepeatedly = true;
-                category.Threshold.PerformSinceEffectiveDate = true;
-                category.Threshold.PerformSinceNew = true;
-                Threshold = category.Threshold;
-                EnableLifelengthControls(false);
-            }
-        }
-        #endregion
+		#region public void SetThresholdByCategory(DefferedCategory category)
+		///<summary>
+		///</summary>
+		///<param name="category"></param>
+		public void SetThresholdByCategory(DeferredCategory category)
+		{
+			char name = char.ToUpper(category.FullName.ToCharArray()[0]);
+				
+			if(name == 'A')EnableLifelengthControls(true);
+			else
+			{
+				category.Threshold.FirstPerformanceConditionType = ThresholdConditionType.WhicheverFirst;
+				category.Threshold.RepeatPerformanceConditionType = ThresholdConditionType.WhicheverFirst;
+				category.Threshold.PerformRepeatedly = true;
+				category.Threshold.PerformSinceEffectiveDate = true;
+				category.Threshold.PerformSinceNew = true;
+				Threshold = category.Threshold;
+				EnableLifelengthControls(false);
+			}
+		}
+		#endregion
 
-        #region public bool ValidateData( out string message )
+		#region public bool ValidateData( out string message )
 
-        public bool ValidateData( out string message )
-        {
-            message = "";
-            double manHours;
-            double cost;
-            if (!CheckManHours(out manHours))
-            {
-                message += "Man hours. Invalid value";
-            }
-            if (!CheckCost(out cost))
-            {
-                message = "Cost. Invalid value";
-            }
+		public bool ValidateData( out string message )
+		{
+			message = "";
+			double manHours;
+			double cost;
+			if (!CheckManHours(out manHours))
+			{
+				message += "Man hours. Invalid value";
+			}
+			if (!CheckCost(out cost))
+			{
+				message = "Cost. Invalid value";
+			}
 
-            if (comboBoxWorkType.SelectedItem == null)
-            {
-                message = "You must enter Work Type";
-            }
+			if (comboBoxWorkType.SelectedItem == null)
+			{
+				message = "You must enter Work Type";
+			}
 
-            if (message != "")
-                return false;
-            return true;    
-        }
-        #endregion
+			if (message != "")
+				return false;
+			return true;    
+		}
+		#endregion
 
-        #region public bool GetChangeStatus()
+		#region public bool GetChangeStatus()
 
-        /// <summary>
-        /// Возвращает значение, показывающее были ли изменения в данном элементе управления
-        /// </summary>
-        /// <returns></returns>
-        public bool GetChangeStatus()
-        {
-            double eps = 0.00001;
-            double manHours;
-            double cost;
-            if (!CheckManHours(out manHours))
-                return true;
-            if (!CheckCost(out cost))
-                return true;
-            DirectiveThreshold threshold = new DirectiveThreshold();
-            threshold.EffectiveDate = _effDate;
-            threshold.FirstPerformanceSinceNew = new Lifelength(lifelengthViewer_SinceNew.Lifelength);
-            threshold.FirstPerformanceSinceEffectiveDate = new Lifelength(lifelengthViewer_SinceEffDate.Lifelength);
-            threshold.FirstNotification = new Lifelength(lifelengthViewer_FirstNotify.Lifelength);
-            threshold.PerformRepeatedly = checkBoxRepeat.Checked;
-            threshold.RepeatInterval = new Lifelength(lifelengthViewer_Repeat.Lifelength);
-            threshold.RepeatNotification = new Lifelength(lifelengthViewer_RepeatNotify.Lifelength);
-            threshold.FirstPerformanceConditionType = radio_FirstWhicheverFirst.Checked
-                                                      ? ThresholdConditionType.WhicheverFirst
-                                                      : ThresholdConditionType.WhicheverLater;
-            threshold.RepeatPerformanceConditionType = radio_RepeatWhicheverFirst.Checked
-                                                      ? ThresholdConditionType.WhicheverFirst
-                                                      : ThresholdConditionType.WhicheverLater; 
+		/// <summary>
+		/// Возвращает значение, показывающее были ли изменения в данном элементе управления
+		/// </summary>
+		/// <returns></returns>
+		public bool GetChangeStatus()
+		{
+			double eps = 0.00001;
+			double manHours;
+			double cost;
+			if (!CheckManHours(out manHours))
+				return true;
+			if (!CheckCost(out cost))
+				return true;
+			DirectiveThreshold threshold = new DirectiveThreshold();
+			threshold.EffectiveDate = _effDate;
+			threshold.FirstPerformanceSinceNew = new Lifelength(lifelengthViewer_SinceNew.Lifelength);
+			threshold.FirstPerformanceSinceEffectiveDate = new Lifelength(lifelengthViewer_SinceEffDate.Lifelength);
+			threshold.FirstNotification = new Lifelength(lifelengthViewer_FirstNotify.Lifelength);
+			threshold.PerformRepeatedly = checkBoxRepeat.Checked;
+			threshold.RepeatInterval = new Lifelength(lifelengthViewer_Repeat.Lifelength);
+			threshold.RepeatNotification = new Lifelength(lifelengthViewer_RepeatNotify.Lifelength);
+			threshold.FirstPerformanceConditionType = radio_FirstWhicheverFirst.Checked
+													  ? ThresholdConditionType.WhicheverFirst
+													  : ThresholdConditionType.WhicheverLater;
+			threshold.RepeatPerformanceConditionType = radio_RepeatWhicheverFirst.Checked
+													  ? ThresholdConditionType.WhicheverFirst
+													  : ThresholdConditionType.WhicheverLater; 
 
-            if (_currentDirective != null && 
-                (_currentDirective.Threshold.ToString() != threshold.ToString() || 
-                 _currentDirective.IsClosed != isClosed ||
-                 _currentDirective.WorkType.ItemId != ((DirectiveWorkType)comboBoxWorkType.SelectedItem).ItemId ||
-                 _currentDirective.Paragraph != textBoxParagraph.Text ||
-                 Math.Abs(_currentDirective.ManHours - manHours) > eps || 
-                 Math.Abs(_currentDirective.Cost - cost) > eps ||
+			if (_currentDirective != null && 
+				(_currentDirective.Threshold.ToString() != threshold.ToString() || 
+				 _currentDirective.IsClosed != isClosed ||
+				 _currentDirective.WorkType.ItemId != ((DirectiveWorkType)comboBoxWorkType.SelectedItem).ItemId ||
+				 _currentDirective.Paragraph != textBoxParagraph.Text ||
+				 _currentDirective.AffectedBy != textBoxAffectedBy.Text ||
+				 Math.Abs(_currentDirective.ManHours - manHours) > eps || 
+				 Math.Abs(_currentDirective.Cost - cost) > eps ||
 				 _currentDirective.NDTType.ItemId != ((NDTType)comboBoxNdt.SelectedItem).ItemId ||
-                 _currentDirective is DamageItem && ((DamageItem)_currentDirective).IsTemporary != checkBoxIsTemporary.Checked ||
-                 _currentDirective.KitRequired != textBoxKitRequired.Text))
-                return true;
-            return false;
-        }
+				 _currentDirective.DirectiveOrder.ItemId != ((DirectiveOrder)comboBoxOrder.SelectedItem).ItemId ||
+				 _currentDirective.Reason.ItemId != ((DirectiveReason)comboBoxReason.SelectedItem).ItemId ||
+				 _currentDirective.Affects.ItemId != ((DirectiveAffects)comboBoxAffects.SelectedItem).ItemId ||
+				 _currentDirective is DamageItem && ((DamageItem)_currentDirective).IsTemporary != checkBoxIsTemporary.Checked ||
+				 _currentDirective.KitRequired != textBoxKitRequired.Text))
+				return true;
+			return false;
+		}
 
-        #endregion
+		#endregion
 
-        #region public void UpdateControl()
-        ///<summary>
-        ///</summary>
-        public void UpdateControl()
-        {
-	        lookupComboboxForCompnt.DisplayerText = _currentDirective.ParentBaseComponent + ". Component Status";
-            lookupComboboxForCompnt.LoadObjectsFunc = GlobalObjects.DirectiveCore.GetDirectives;
-            lookupComboboxForCompnt.FilterParam1 = _currentDirective.ParentBaseComponent;
-            lookupComboboxForCompnt.FilterParam2 = DirectiveType.DeferredItems;
-            //lookupComboboxForCompnt.UpdateInformation();
-            if(_currentDirective is DeferredItem)
-            {
-                lifelengthViewer_SinceNew.Visible = false;
-                lifelengthViewer_Repeat.Visible = false;
-                lifelengthViewer_RepeatNotify.Visible = false;
-                
-                lifelengthViewer_SinceEffDate.LeftHeader = "Since. disc. date";
-                lifelengthViewer_SinceEffDate.Location = new System.Drawing.Point(7, 31);
-                lifelengthViewer_SinceEffDate.Anchor = AnchorStyles.Top | AnchorStyles.Left;
-                groupFirstPerformance.Controls.Clear();
-                groupFirstPerformance.Controls.Add(lifelengthViewer_SinceEffDate);
-                groupFirstPerformance.Size = new System.Drawing.Size(501, 90);
-                groupFirstPerformance.Text = "FIRST PERFORMANCE";
-                groupFirstPerformance.ResumeLayout(false);
-                groupFirstPerformance.PerformLayout();
-                lifelengthViewer_SinceEffDate.Anchor = AnchorStyles.Right;
-                
-                lifelengthViewer_FirstNotify.Location = new System.Drawing.Point(31, 31);
-                lifelengthViewer_FirstNotify.Anchor = AnchorStyles.Top | AnchorStyles.Left;
-                groupBox_Repetative.Controls.Clear();
-                groupBox_Repetative.Controls.Add(lifelengthViewer_FirstNotify);
-                groupBox_Repetative.Size = new System.Drawing.Size(501, 90);
-                groupBox_Repetative.Text = "NOTIFY";
-                groupBox_Repetative.ResumeLayout(false);
-                groupBox_Repetative.PerformLayout();
-                lifelengthViewer_SinceEffDate.Anchor = AnchorStyles.Right;
-                
-                
-                groupBoxClose.Size = new System.Drawing.Size(86, 90);
-            }
+		#region public void UpdateControl()
+		///<summary>
+		///</summary>
+		public void UpdateControl()
+		{
+			lookupComboboxForCompnt.DisplayerText = _currentDirective.ParentBaseComponent + ". Component Status";
+			lookupComboboxForCompnt.LoadObjectsFunc = GlobalObjects.DirectiveCore.GetDirectives;
+			lookupComboboxForCompnt.FilterParam1 = _currentDirective.ParentBaseComponent;
+			lookupComboboxForCompnt.FilterParam2 = DirectiveType.DeferredItems;
+			//lookupComboboxForCompnt.UpdateInformation();
+			if(_currentDirective is DeferredItem)
+			{
+				lifelengthViewer_SinceNew.Visible = false;
+				lifelengthViewer_Repeat.Visible = false;
+				lifelengthViewer_RepeatNotify.Visible = false;
+				
+				lifelengthViewer_SinceEffDate.LeftHeader = "Since. disc. date";
+				lifelengthViewer_SinceEffDate.Location = new System.Drawing.Point(7, 31);
+				lifelengthViewer_SinceEffDate.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+				groupFirstPerformance.Controls.Clear();
+				groupFirstPerformance.Controls.Add(lifelengthViewer_SinceEffDate);
+				groupFirstPerformance.Size = new System.Drawing.Size(501, 90);
+				groupFirstPerformance.Text = "FIRST PERFORMANCE";
+				groupFirstPerformance.ResumeLayout(false);
+				groupFirstPerformance.PerformLayout();
+				lifelengthViewer_SinceEffDate.Anchor = AnchorStyles.Right;
+				
+				lifelengthViewer_FirstNotify.Location = new System.Drawing.Point(31, 31);
+				lifelengthViewer_FirstNotify.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+				groupBox_Repetative.Controls.Clear();
+				groupBox_Repetative.Controls.Add(lifelengthViewer_FirstNotify);
+				groupBox_Repetative.Size = new System.Drawing.Size(501, 90);
+				groupBox_Repetative.Text = "NOTIFY";
+				groupBox_Repetative.ResumeLayout(false);
+				groupBox_Repetative.PerformLayout();
+				lifelengthViewer_SinceEffDate.Anchor = AnchorStyles.Right;
+				
+				
+				groupBoxClose.Size = new System.Drawing.Size(86, 90);
+			}
 
-            if (_currentDirective is DamageItem)
-            {
-                _labelIsTemporary.Visible = checkBoxIsTemporary.Visible = true;
-                labelChart.Visible = true;
-                textBoxChart.Visible = true;
-                linkLabelEditChart.Visible = true;
-                lookupComboboxForCompnt.Visible = false;
-                labelForComponent.Visible = false;
-            }
-            else
-            {
-                _labelIsTemporary.Visible = checkBoxIsTemporary.Visible = false;   
-            }
-        }
-        #endregion
+			if (_currentDirective is DamageItem)
+			{
+				_labelIsTemporary.Visible = checkBoxIsTemporary.Visible = true;
+				labelChart.Visible = true;
+				textBoxChart.Visible = true;
+				linkLabelEditChart.Visible = true;
+				lookupComboboxForCompnt.Visible = false;
+				labelForComponent.Visible = false;
+			}
+			else
+			{
+				_labelIsTemporary.Visible = checkBoxIsTemporary.Visible = false;   
+			}
+		}
+		#endregion
 
-        #region public void UpdateInformation()
+		#region public void UpdateInformation()
 
-        /// <summary>
-        /// 3аполняет поля для редактирования директивы
-        /// </summary>
-        private void UpdateInformation()
-        {
-            UpdateControl();
+		/// <summary>
+		/// 3аполняет поля для редактирования директивы
+		/// </summary>
+		private void UpdateInformation()
+		{
+			UpdateControl();
 
 			comboBoxNdt.Items.Clear();
 			comboBoxNdt.Items.AddRange(NDTType.Items.ToArray());
-	        comboBoxNdt.SelectedItem = _currentDirective.NDTType;
+			comboBoxNdt.SelectedItem = _currentDirective.NDTType;
+			
+			comboBoxOrder.Items.Clear();
+			comboBoxOrder.Items.AddRange(DirectiveOrder.Items.ToArray());
+			comboBoxOrder.SelectedItem = _currentDirective.DirectiveOrder;
 
+			comboBoxReason.Items.Clear();
+			comboBoxReason.Items.AddRange(DirectiveReason.Items.ToArray());
+			comboBoxReason.SelectedItem = _currentDirective.Reason;
 
-	        textBoxZone.Text = _currentDirective.DirectiveZone;
-	        textBoxAccess.Text = _currentDirective.DirectiveAccess;
-	        textBoxWorkArea.Text = _currentDirective.Workarea;
+			comboBoxAffects.Items.Clear();
+			comboBoxAffects.Items.AddRange(DirectiveAffects.Items.ToArray());
+			comboBoxAffects.SelectedItem = _currentDirective.Affects;
 
+			textBoxZone.Text = _currentDirective.DirectiveZone;
+			textBoxAccess.Text = _currentDirective.DirectiveAccess;
+			textBoxWorkArea.Text = _currentDirective.Workarea;
+			textBoxAffectedBy.Text = _currentDirective.AffectedBy;
+			
 			comboBoxWorkType.Items.Clear();
-            var directiveTypes = DirectiveWorkType.Items.OrderBy(x => x.FullName).ToList();
-            for (int i = 0; i < directiveTypes.Count; i++)
-            {
-                comboBoxWorkType.Items.Add(directiveTypes[i]);
-                if (_currentDirective.WorkType.Equals(directiveTypes[i]))
-                    comboBoxWorkType.SelectedItem = directiveTypes[i];
-            }
-            if (comboBoxWorkType.SelectedItem == null)
-                comboBoxWorkType.SelectedIndex = 0;
+			var directiveTypes = DirectiveWorkType.Items.OrderBy(x => x.FullName).ToList();
+			for (int i = 0; i < directiveTypes.Count; i++)
+			{
+				comboBoxWorkType.Items.Add(directiveTypes[i]);
+				if (_currentDirective.WorkType.Equals(directiveTypes[i]))
+					comboBoxWorkType.SelectedItem = directiveTypes[i];
+			}
+			if (comboBoxWorkType.SelectedItem == null)
+				comboBoxWorkType.SelectedIndex = 0;
 
-            _effDate = _currentDirective.Threshold.EffectiveDate;
+			_effDate = _currentDirective.Threshold.EffectiveDate;
 
-            textBoxParagraph.Text = _currentDirective.Paragraph;
-            GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDirective);
+			textBoxParagraph.Text = _currentDirective.Paragraph;
+			GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDirective);
 
-            imageLinkLabelStatus.Text = "Work type";
-            if (_currentDirective.Condition == ConditionState.NotEstimated)
-                imageLinkLabelStatus.Status = Statuses.NotActive;
-            if (_currentDirective.Condition == ConditionState.Overdue)
-                imageLinkLabelStatus.Status = Statuses.NotSatisfactory;
-            if (_currentDirective.Condition == ConditionState.Notify)
-                imageLinkLabelStatus.Status = Statuses.Notify;
-            if (_currentDirective.Condition == ConditionState.Satisfactory)
-                imageLinkLabelStatus.Status = Statuses.Satisfactory;
+			imageLinkLabelStatus.Text = "Work type";
+			if (_currentDirective.Condition == ConditionState.NotEstimated)
+				imageLinkLabelStatus.Status = Statuses.NotActive;
+			if (_currentDirective.Condition == ConditionState.Overdue)
+				imageLinkLabelStatus.Status = Statuses.NotSatisfactory;
+			if (_currentDirective.Condition == ConditionState.Notify)
+				imageLinkLabelStatus.Status = Statuses.Notify;
+			if (_currentDirective.Condition == ConditionState.Satisfactory)
+				imageLinkLabelStatus.Status = Statuses.Satisfactory;
 
-            if (Math.Abs(_currentDirective.ManHours) > 0.000001)
-                _textboxManHours.Text = _currentDirective.ManHours.ToString();
-            if (Math.Abs(_currentDirective.Cost) > 0.000001)
-                _textboxCost.Text = _currentDirective.Cost.ToString();
+			if (Math.Abs(_currentDirective.ManHours) > 0.000001)
+				_textboxManHours.Text = _currentDirective.ManHours.ToString();
+			if (Math.Abs(_currentDirective.Cost) > 0.000001)
+				_textboxCost.Text = _currentDirective.Cost.ToString();
 
-            Threshold = _currentDirective.Threshold;
-            checkBoxClose.Checked = _currentDirective.IsClosed;
+			Threshold = _currentDirective.Threshold;
+			checkBoxClose.Checked = _currentDirective.IsClosed;
 
-            if(_currentDirective is DeferredItem)
-            {
-                DeferredItem defferedItem = (DeferredItem) _currentDirective;
-                DeferredCategory category = defferedItem.DeferredCategory;
-                if (category != null && category != DeferredCategory.Unknown)
-                {
-                    if (char.ToUpper(category.FullName.ToCharArray()[0]) != 'A')
-                    {
-                        SetThresholdByCategory(category);   
-                    }
-                    else
-                    {
-                        Threshold = _currentDirective.Threshold;   
-                    }
-                }
-            }
-            if (_currentDirective is DamageItem)
-            {
-                DamageItem damageItem = (DamageItem) _currentDirective;
-                textBoxChart.Text = damageItem.DamageDocs.ToString();
-                checkBoxIsTemporary.Checked = damageItem.IsTemporary;
-            }
+			if(_currentDirective is DeferredItem)
+			{
+				DeferredItem defferedItem = (DeferredItem) _currentDirective;
+				DeferredCategory category = defferedItem.DeferredCategory;
+				if (category != null && category != DeferredCategory.Unknown)
+				{
+					if (char.ToUpper(category.FullName.ToCharArray()[0]) != 'A')
+					{
+						SetThresholdByCategory(category);   
+					}
+					else
+					{
+						Threshold = _currentDirective.Threshold;   
+					}
+				}
+			}
+			if (_currentDirective is DamageItem)
+			{
+				DamageItem damageItem = (DamageItem) _currentDirective;
+				textBoxChart.Text = damageItem.DamageDocs.ToString();
+				checkBoxIsTemporary.Checked = damageItem.IsTemporary;
+			}
 
-            textBoxKitRequired.Text = _currentDirective.Kits.Count + " EA";
-            bool permission = true;//currentDirective.HasPermission(Users.IdentityUser, DataEvent.Update);
+			textBoxKitRequired.Text = _currentDirective.Kits.Count + " EA";
+			bool permission = true;//currentDirective.HasPermission(Users.IdentityUser, DataEvent.Update);
 
-            textBoxKitRequired.ReadOnly = !permission;
-        }
+			textBoxKitRequired.ReadOnly = !permission;
+		}
 
-        #endregion
+		#endregion
 
-        #region public bool ApplyChanges(Directive destinationDirective)
+		#region public bool ApplyChanges(Directive destinationDirective)
 
-        /// <summary>
-        /// Данные у директивы обновляются по введенным данным
-        /// </summary>
-        public bool ApplyChanges(Directive destinationDirective)
-        {
-            if (destinationDirective == null)
-                return false;
-            double manHours;
-            double cost;
-            if (!CheckManHours(out manHours))
-                return false;
-            if (!CheckCost(out cost))
-                return false;
+		/// <summary>
+		/// Данные у директивы обновляются по введенным данным
+		/// </summary>
+		public bool ApplyChanges(Directive destinationDirective)
+		{
+			if (destinationDirective == null)
+				return false;
+			double manHours;
+			double cost;
+			if (!CheckManHours(out manHours))
+				return false;
+			if (!CheckCost(out cost))
+				return false;
 
-            destinationDirective.WorkType = (DirectiveWorkType)comboBoxWorkType.SelectedItem;
-            destinationDirective.Paragraph = textBoxParagraph.Text;
-            destinationDirective.KitRequired = textBoxKitRequired.Text;
-            destinationDirective.ManHours = manHours;
-            destinationDirective.Cost = cost;
+			destinationDirective.WorkType = (DirectiveWorkType)comboBoxWorkType.SelectedItem;
+			destinationDirective.Paragraph = textBoxParagraph.Text;
+			destinationDirective.KitRequired = textBoxKitRequired.Text;
+			destinationDirective.ManHours = manHours;
+			destinationDirective.Cost = cost;
 			destinationDirective.NDTType = comboBoxNdt.SelectedItem as NDTType;
 			destinationDirective.DirectiveOrder = comboBoxOrder.SelectedItem as DirectiveOrder;
-            destinationDirective.KitRequired = textBoxKitRequired.Text;
-            destinationDirective.IsClosed = isClosed;
-            destinationDirective.DirectiveZone = textBoxZone.Text;
-            destinationDirective.DirectiveAccess = textBoxAccess.Text;
-            destinationDirective.Workarea = textBoxWorkArea.Text;
+			destinationDirective.Reason = comboBoxReason.SelectedItem as DirectiveReason;
+			destinationDirective.Affects = comboBoxAffects.SelectedItem as DirectiveAffects;
+			destinationDirective.KitRequired = textBoxKitRequired.Text;
+			destinationDirective.IsClosed = isClosed;
+			destinationDirective.DirectiveZone = textBoxZone.Text;
+			destinationDirective.DirectiveAccess = textBoxAccess.Text;
+			destinationDirective.Workarea = textBoxWorkArea.Text;
+			destinationDirective.AffectedBy = textBoxAffectedBy.Text;
 
 			if (comboBoxSupersedes.SelectedItem != null)
-	            _currentDirective.SupersedesId = ((Directive) comboBoxSupersedes.SelectedItem).ItemId;
-            var threshold = new DirectiveThreshold();
-            threshold.EffectiveDate = _effDate;
-            threshold.FirstPerformanceSinceNew = new Lifelength(lifelengthViewer_SinceNew.Lifelength);
-            threshold.FirstPerformanceSinceEffectiveDate = new Lifelength(lifelengthViewer_SinceEffDate.Lifelength);
-            threshold.FirstNotification = new Lifelength(lifelengthViewer_FirstNotify.Lifelength);
-            threshold.PerformRepeatedly = checkBoxRepeat.Checked;
-            threshold.RepeatInterval = new Lifelength(lifelengthViewer_Repeat.Lifelength);
-            threshold.RepeatNotification = new Lifelength(lifelengthViewer_RepeatNotify.Lifelength);
-            threshold.FirstPerformanceConditionType = radio_FirstWhicheverFirst.Checked
-                                                      ? ThresholdConditionType.WhicheverFirst
-                                                      : ThresholdConditionType.WhicheverLater;
-            threshold.RepeatPerformanceConditionType = radio_RepeatWhicheverFirst.Checked
-                                                     ? ThresholdConditionType.WhicheverFirst
-                                                     : ThresholdConditionType.WhicheverLater;
+				_currentDirective.SupersedesId = ((Directive) comboBoxSupersedes.SelectedItem).ItemId;
+			var threshold = new DirectiveThreshold();
+			threshold.EffectiveDate = _effDate;
+			threshold.FirstPerformanceSinceNew = new Lifelength(lifelengthViewer_SinceNew.Lifelength);
+			threshold.FirstPerformanceSinceEffectiveDate = new Lifelength(lifelengthViewer_SinceEffDate.Lifelength);
+			threshold.FirstNotification = new Lifelength(lifelengthViewer_FirstNotify.Lifelength);
+			threshold.PerformRepeatedly = checkBoxRepeat.Checked;
+			threshold.RepeatInterval = new Lifelength(lifelengthViewer_Repeat.Lifelength);
+			threshold.RepeatNotification = new Lifelength(lifelengthViewer_RepeatNotify.Lifelength);
+			threshold.FirstPerformanceConditionType = radio_FirstWhicheverFirst.Checked
+													  ? ThresholdConditionType.WhicheverFirst
+													  : ThresholdConditionType.WhicheverLater;
+			threshold.RepeatPerformanceConditionType = radio_RepeatWhicheverFirst.Checked
+													 ? ThresholdConditionType.WhicheverFirst
+													 : ThresholdConditionType.WhicheverLater;
 
-            if (destinationDirective.Threshold.ToString() != threshold.ToString())
-                destinationDirective.Threshold = threshold;
-            if (destinationDirective is DamageItem)
-                ((DamageItem) destinationDirective).IsTemporary = checkBoxIsTemporary.Checked;
+			if (destinationDirective.Threshold.ToString() != threshold.ToString())
+				destinationDirective.Threshold = threshold;
+			if (destinationDirective is DamageItem)
+				((DamageItem) destinationDirective).IsTemporary = checkBoxIsTemporary.Checked;
 
-            return true;
-        }
+			return true;
+		}
 
-        #endregion
+		#endregion
 
-        #region public void ClearFields()
+		#region public void ClearFields()
 
-        /// <summary>
-        /// Очищает все поля
-        /// </summary>
-        public void ClearFields()
-        {
-	        comboBoxNdt.SelectedItem = null;
-            checkBoxIsTemporary.Checked = false;
-            textBoxKitRequired.Text = "";
-        }
+		/// <summary>
+		/// Очищает все поля
+		/// </summary>
+		public void ClearFields()
+		{
+			comboBoxNdt.SelectedItem = null;
+			checkBoxIsTemporary.Checked = false;
+			textBoxKitRequired.Text = "";
+		}
 
-        #endregion
+		#endregion
 
-        #region public bool CheckManHours(out double manHours)
+		#region public bool CheckManHours(out double manHours)
 
-        /// <summary>
-        /// Проверяет значение ManHours
-        /// </summary>
-        /// <param name="manHours">Значение ManHours</param>
-        /// <returns>Возвращает true если значение можно преобразовать в тип double, иначе возвращает false</returns>
-        public bool CheckManHours(out double manHours)
-        {
-            if (_textboxManHours.Text == "")
-            {
-                manHours = 0;
-                return true;
-            }
-            if (double.TryParse(_textboxManHours.Text, NumberStyles.Float, new NumberFormatInfo(), out manHours) == false)
-            {
-                MessageBox.Show("Man Hours. Invalid value", (string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return false;
-            }
-            return true;
-        }
+		/// <summary>
+		/// Проверяет значение ManHours
+		/// </summary>
+		/// <param name="manHours">Значение ManHours</param>
+		/// <returns>Возвращает true если значение можно преобразовать в тип double, иначе возвращает false</returns>
+		public bool CheckManHours(out double manHours)
+		{
+			if (_textboxManHours.Text == "")
+			{
+				manHours = 0;
+				return true;
+			}
+			if (double.TryParse(_textboxManHours.Text, NumberStyles.Float, new NumberFormatInfo(), out manHours) == false)
+			{
+				MessageBox.Show("Man Hours. Invalid value", (string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+				return false;
+			}
+			return true;
+		}
 
-        #endregion
+		#endregion
 
-        #region public bool CheckCost(out double cost)
-        /// <summary>
-        /// Проверяет значение Cost
-        /// </summary>
-        /// <param name="cost">Значение Cost</param>
-        /// <returns>Возвращает true если значение можно преобразовать в тип double, иначе возвращает false</returns>
-        public bool CheckCost(out double cost)
-        {
-            if (_textboxCost.Text == "")
-            {
-                cost = 0;
-                return true;
-            }
-            if (double.TryParse(_textboxCost.Text, NumberStyles.Float, new NumberFormatInfo(), out cost) == false)
-            {
-                MessageBox.Show("Cost. Invalid value", (string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return false;
-            }
-            return true;
-        }
+		#region public bool CheckCost(out double cost)
+		/// <summary>
+		/// Проверяет значение Cost
+		/// </summary>
+		/// <param name="cost">Значение Cost</param>
+		/// <returns>Возвращает true если значение можно преобразовать в тип double, иначе возвращает false</returns>
+		public bool CheckCost(out double cost)
+		{
+			if (_textboxCost.Text == "")
+			{
+				cost = 0;
+				return true;
+			}
+			if (double.TryParse(_textboxCost.Text, NumberStyles.Float, new NumberFormatInfo(), out cost) == false)
+			{
+				MessageBox.Show("Cost. Invalid value", (string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+				return false;
+			}
+			return true;
+		}
 
-        #endregion
+		#endregion
 
-        #region private void checkBoxRepeat_CheckedChanged(object sender, EventArgs e)
+		#region private void checkBoxRepeat_CheckedChanged(object sender, EventArgs e)
 
-        private void CheckBoxRepeatCheckedChanged(object sender, EventArgs e)
-        {
-            radio_RepeatWhicheverFirst.Enabled = radio_RepeatWhicheverLast.Enabled = 
-                lifelengthViewer_Repeat.Enabled = 
-                lifelengthViewer_RepeatNotify.Enabled = checkBoxRepeat.Checked;
-        }
+		private void CheckBoxRepeatCheckedChanged(object sender, EventArgs e)
+		{
+			radio_RepeatWhicheverFirst.Enabled = radio_RepeatWhicheverLast.Enabled = 
+				lifelengthViewer_Repeat.Enabled = 
+				lifelengthViewer_RepeatNotify.Enabled = checkBoxRepeat.Checked;
+		}
 
-        #endregion
+		#endregion
 
-        #region private void checkBoxClose_CheckedChanged(object sender, EventArgs e)
-       
-        private void CheckBoxCloseCheckedChanged(object sender, EventArgs e)
-        {
-            isClosed = checkBoxClose.Checked;
-        }
-       
-        #endregion
+		#region private void checkBoxClose_CheckedChanged(object sender, EventArgs e)
+	   
+		private void CheckBoxCloseCheckedChanged(object sender, EventArgs e)
+		{
+			isClosed = checkBoxClose.Checked;
+		}
+	   
+		#endregion
 
-        #region private void LinkLabelEditChartLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        private void LinkLabelEditChartLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            DamageItem damageItem = _currentDirective as DamageItem;
-            if(damageItem == null)
-                return;
+		#region private void LinkLabelEditChartLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		private void LinkLabelEditChartLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			DamageItem damageItem = _currentDirective as DamageItem;
+			if(damageItem == null)
+				return;
 
-            //DamageChartFileDialog dlg = new DamageChartFileDialog(damageItem, _currentDirective.ParentBaseDetail.ParentAircraft);
-            //dlg.ShowDialog();
+			//DamageChartFileDialog dlg = new DamageChartFileDialog(damageItem, _currentDirective.ParentBaseDetail.ParentAircraft);
+			//dlg.ShowDialog();
 
-            var dlg = new DamageChart2DForm(damageItem, GlobalObjects.AircraftsCore.GetAircraftById(_currentDirective.ParentBaseComponent.ParentAircraftId));//TODO:(Evgenii Babak) пересмотреть использование ParentAircrafId здесь
+			var dlg = new DamageChart2DForm(damageItem, GlobalObjects.AircraftsCore.GetAircraftById(_currentDirective.ParentBaseComponent.ParentAircraftId));//TODO:(Evgenii Babak) пересмотреть использование ParentAircrafId здесь
 			dlg.ShowDialog();
 
-            textBoxChart.Text = damageItem.DamageDocs.ToString();
-        }
-        #endregion
+			textBoxChart.Text = damageItem.DamageDocs.ToString();
+		}
+		#endregion
 
-        #region private void LinkLabelEditKitLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        private void LinkLabelEditKitLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            KitForm dlg = new KitForm(_currentDirective);
-            if(dlg.ShowDialog() == DialogResult.OK)
-                textBoxKitRequired.Text = _currentDirective.Kits.Count + " EA";
-        }
-        #endregion
+		#region private void LinkLabelEditKitLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		private void LinkLabelEditKitLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			KitForm dlg = new KitForm(_currentDirective);
+			if(dlg.ShowDialog() == DialogResult.OK)
+				textBoxKitRequired.Text = _currentDirective.Kits.Count + " EA";
+		}
+		#endregion
 
-        #endregion
-    }
+		#endregion
+	}
 
-    #region internal class DirectiveParametersControlDesigner : ControlDesigner
+	#region internal class DirectiveParametersControlDesigner : ControlDesigner
 
-    internal class DirectiveParametersControlDesigner : ControlDesigner
-    {
-        protected override void PostFilterProperties(IDictionary properties)
-        {
-            base.PostFilterProperties(properties);
-            properties.Remove("CurrentDirective");
-            properties.Remove("Threshold");
-            properties.Remove("Type");
-        }
-    }
-    #endregion
+	internal class DirectiveParametersControlDesigner : ControlDesigner
+	{
+		protected override void PostFilterProperties(IDictionary properties)
+		{
+			base.PostFilterProperties(properties);
+			properties.Remove("CurrentDirective");
+			properties.Remove("Threshold");
+			properties.Remove("Type");
+		}
+	}
+	#endregion
 }

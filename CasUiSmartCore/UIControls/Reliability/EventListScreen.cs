@@ -138,9 +138,8 @@ namespace CAS.UI.UIControls.Discrepancies
 
 			AnimatedThreadWorker.ReportProgress(0, "load Work Packages");
 
-			var discrip = GlobalObjects.DiscrepanciesCore.GetDiscrepancies().ToArray();
-			_initialDirectiveArray.AddRange(discrip.Where(t => t.ParentFlightDate >= dateTimePickerDateFrom.Value &&
-																t.ParentFlightDate <= dateTimePickerDateTo.Value));
+			var discrip = GlobalObjects.DiscrepanciesCore.GetDiscrepancies(from: dateTimePickerDateFrom.Value, to: dateTimePickerDateTo.Value).ToArray();
+			_initialDirectiveArray.AddRange(discrip);
 
 			foreach (var discrepancy in _initialDirectiveArray)
 				discrepancy.Aircraft = GlobalObjects.AircraftsCore.GetAircraftById(discrepancy.ParentFlight.AircraftId);
@@ -469,7 +468,6 @@ namespace CAS.UI.UIControls.Discrepancies
 		#endregion
 
 		#region private void ButtonDeleteClick(object sender, EventArgs e)
-
 		private void ButtonDeleteClick(object sender, EventArgs e)
 		{
 			DeleteWorkPackage(); 
@@ -520,18 +518,7 @@ namespace CAS.UI.UIControls.Discrepancies
 			{
 				_directivesViewer.radGridView1.BeginUpdate();
 
-				foreach (Discrepancy item in _directivesViewer.SelectedItems)
-				{
-					try
-					{
-						GlobalObjects.CasEnvironment.Manipulator.Delete(item);
-					}
-					catch (Exception ex)
-					{
-						Program.Provider.Logger.Log("Error while deleting data", ex);
-						return;
-					}
-				}
+				GlobalObjects.CasEnvironment.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
 				_directivesViewer.radGridView1.EndUpdate();
 
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;

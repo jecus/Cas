@@ -9,8 +9,8 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.PurchaseControls.Initial;
 using CASTerms;
-using EFCore.DTO.Dictionaries;
-using EFCore.DTO.General;
+using EntityCore.DTO.Dictionaries;
+using EntityCore.DTO.General;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -21,7 +21,7 @@ using SmartCore.Filters;
 using SmartCore.Purchase;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
-using Filter = EFCore.Filter.Filter;
+using Filter = EntityCore.Filter.Filter;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
@@ -535,7 +535,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 		#endregion
 
 		#region private void ButtonDeleteClick(object sender, EventArgs e)
-
 		private void ButtonDeleteClick(object sender, EventArgs e)
 		{
 			if (_directivesViewer.SelectedItems == null) return;
@@ -549,22 +548,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 			if (confirmResult == DialogResult.Yes)
 			{
-				int count = _directivesViewer.SelectedItems.Count;
-
 				List<InitialOrder> selectedItems = new List<InitialOrder>();
 				selectedItems.AddRange(_directivesViewer.SelectedItems.ToArray());
-				for (int i = 0; i < count; i++)
-				{
-					try
-					{
-						GlobalObjects.CasEnvironment.Manipulator.Delete(selectedItems[i]);
-					}
-					catch (Exception ex)
-					{
-						Program.Provider.Logger.Log("Error while deleting data", ex);
-						return;
-					}
-				}
+				GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
 				AnimatedThreadWorker.RunWorkerAsync();
 			}
 			else

@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using EFCore.DTO;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using Newtonsoft.Json;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;

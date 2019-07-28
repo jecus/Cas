@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
-using Microsoft.VisualBasic.Devices;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -283,11 +280,11 @@ namespace CAS.UI.UIControls.NewGrid
 				SetItemsColor();
 				SetTotalText();
 
-				radGridView1.MasterTemplate.CollapseAllGroups();
+				radGridView1.MasterTemplate.ExpandAllGroups();
 
 				radGridView1.RowFormatting += RadGridView1_RowFormatting;
 				radGridView1.CellFormatting += RadGridView1_CellFormatting;
-				radGridView1.MasterTemplate.ViewChanged += MasterTemplate_ViewChanged;
+				radGridView1.FilterChanged += RadGridView1_FilterChanged;
 
 			}
 			catch (Exception ex)
@@ -297,9 +294,9 @@ namespace CAS.UI.UIControls.NewGrid
 			}
 		}
 
-		private void MasterTemplate_ViewChanged(object sender, DataViewChangedEventArgs args)
+		private void RadGridView1_FilterChanged(object sender, GridViewCollectionChangedEventArgs e)
 		{
-			SetTotalText();
+			label1.Text = "Total: " + e.GridViewTemplate.ChildRows.Count;
 		}
 
 		private void RadGridView1_CellFormatting(object sender, CellFormattingEventArgs e)

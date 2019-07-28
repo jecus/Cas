@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using EFCore.DTO.Dictionaries;
-using EFCore.DTO.General;
+using EntityCore.DTO.Dictionaries;
+using EntityCore.DTO.General;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;

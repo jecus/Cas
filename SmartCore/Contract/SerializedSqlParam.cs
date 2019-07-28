@@ -70,7 +70,7 @@ namespace SmartCore.Contract
 		public string Value { get; set; }
 
 		[DataMember]
-		public string ValueType { get; protected set; }
+		public string ValueType { get;  set; }
 
 		[DataMember]
 		public string XmlSchemaCollectionDatabase { get; set; }
@@ -83,6 +83,11 @@ namespace SmartCore.Contract
 		{
 			this.CopyProperties(p);
 			this.SerializeParameterValue(p);
+		}
+
+		public SerializedSqlParam()
+		{
+			
 		}
 
 		public static explicit operator SerializedSqlParam(SqlParameter p)
@@ -176,7 +181,7 @@ namespace SmartCore.Contract
 			}
 		}
 
-		private string SerializeObject(object value)
+		public string SerializeObject(object value)
 		{
 			if (value == null) return null;
 

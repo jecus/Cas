@@ -9,8 +9,8 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using MongoDB.Driver;
 using SmartCore.Activity;
 using SmartCore.AuditMongo.Repository;
@@ -104,7 +104,7 @@ namespace CAS.UI.UIControls.Users
 		#endregion
 
 		#region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
-		protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
+		protected override async void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
 		{
 			_initial.Clear();
 			_result.Clear();
@@ -117,7 +117,7 @@ namespace CAS.UI.UIControls.Users
 					.FindSync(i => i.Date >= dateTimePickerDateFrom.Value && i.Date <= dateTimePickerDateTo.Value)
 					.ToList();
 
-				var users = GlobalObjects.CasEnvironment.GetAllUsers();
+				var users =  GlobalObjects.CasEnvironment.ApiProvider.GetAllUsersAsync();
 
 				foreach (var bsonElement in activity)
 				{

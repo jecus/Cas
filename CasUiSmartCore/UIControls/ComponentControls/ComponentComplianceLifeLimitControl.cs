@@ -533,9 +533,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			            foreach (var category in sortrecords)
 			            {
 				            var llpData = d.LLPData.GetItemByCatagory(category);
-				            var selectedCategory = d.ChangeLLPCategoryRecords.GetLast()?.ToCategory;
-
-				            CalculateLifeLimit(llpData, sortrecords, d.LLPData, selectedCategory);
+				            GlobalObjects.CasEnvironment.Calculator.CalculateLifeLimit(llpData, sortrecords, d.LLPData);
 				            var newControl = new ComponentLifeLimitControlItem(llpData,
 					            llpData.ParentCategory == d.ChangeLLPCategoryRecords.GetLast().ToCategory);
 				            _lifeLimitItems.Add(newControl);
@@ -720,58 +718,6 @@ namespace CAS.UI.UIControls.ComponentControls
             }
         }
 		#endregion
-
-		private void CalculateLifeLimit(ComponentLLPCategoryData calculatedData, List<LLPLifeLimitCategory> categories, ComponentLLPDataCollection LLPData, LLPLifeLimitCategory selectedCategory)
-		{
-			double aCycle = 0, bCycle = 0, cCycle = 0, dCycle;
-
-			foreach (var category in categories)
-			{
-				var data = LLPData.GetItemByCatagory(category);
-
-				//TODO:Заплатка
-				if (data?.LLPCurrent == null)
-					data.LLPCurrent = data.LLPLifelengthCurrent ?? data.LLPLifeLengthForDate;
-
-				if (data?.LLPCurrent == null || data.LLPLifeLimit == null)
-					continue;
-				double currentCycle = data.LLPCurrent.Cycles.GetValueOrDefault();
-				double limitCycle = data.LLPLifeLimit.Cycles.GetValueOrDefault();
-				double resultCycle = currentCycle / limitCycle;
-
-				if (category.CategoryType == LLPLifeLimitCategoryType.A)
-				{
-					aCycle = !double.IsNaN(resultCycle) ? Math.Round(resultCycle, 5) : 0;
-					continue;
-				}
-				if (category.CategoryType == LLPLifeLimitCategoryType.B)
-				{
-					bCycle = !double.IsNaN(resultCycle) ? Math.Round(resultCycle, 5) : 0;
-					continue;
-				}
-				if (category.CategoryType == LLPLifeLimitCategoryType.C)
-				{
-					cCycle = !double.IsNaN(resultCycle) ? Math.Round(resultCycle, 5) : 0;
-					continue;
-				}
-
-				dCycle = !double.IsNaN(resultCycle) ? Math.Round(resultCycle, 5) : 0;
-
-				double resCycle = 1F;
-
-				if (aCycle != 0)
-					resCycle -= aCycle;
-				if (bCycle != 0)
-					resCycle -= bCycle;
-				if (cCycle != 0)
-					resCycle -= cCycle;
-				if (dCycle != 0)
-					resCycle -= dCycle;
-
-				//if(!double.IsNaN(resultCycle))
-					calculatedData.Remain.Cycles = (int) (resCycle * calculatedData.LLPLifeLimit.Cycles.GetValueOrDefault());
-			}
-		}
 
 		#endregion
     }

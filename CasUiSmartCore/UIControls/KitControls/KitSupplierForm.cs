@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using MetroFramework.Forms;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;

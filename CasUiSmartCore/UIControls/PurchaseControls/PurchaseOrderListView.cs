@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.NewGrid;
 using CAS.UI.UIControls.PurchaseControls.Purchase;
 using CASTerms;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls

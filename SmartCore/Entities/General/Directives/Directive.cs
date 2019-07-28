@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
@@ -16,55 +16,55 @@ using SmartCore.Relation;
 
 namespace SmartCore.Entities.General.Directives
 {
-    /// <summary>
-    /// Класс описывает директиву
-    /// </summary>
-    [Table("Directives", "dbo", "ItemId")]
-    [Dto(typeof(DirectiveDTO))]
+	/// <summary>
+	/// Класс описывает директиву
+	/// </summary>
+	[Table("Directives", "dbo", "ItemId")]
+	[Dto(typeof(DirectiveDTO))]
 	[Condition("IsDeleted", "0")]
-    [Serializable]
-    public class Directive : BaseEntityObject, IEngineeringDirective, IKitRequired, IComparable<Directive>, IFileContainer, IBindedItem, IWorkPackageItemFilterParams
+	[Serializable]
+	public class Directive : BaseEntityObject, IEngineeringDirective, IKitRequired, IComparable<Directive>, IFileContainer, IBindedItem, IWorkPackageItemFilterParams
 	{
-        private static Type _thisType;
+		private static Type _thisType;
 
 		#region public String Title { get; set; }
 		/// <summary>
 		/// Название директивы
 		/// </summary>
-        [TableColumn("Title")]
-        [Filter("AD No:", Order = 1)]
-        [ExcelImport("AD No:", Order = 1)]
-        public String Title { get; set; }
+		[TableColumn("Title")]
+		[Filter("AD No:", Order = 1)]
+		[ExcelImport("AD No:", Order = 1)]
+		public String Title { get; set; }
 		#endregion
 
-        #region  public AttachedFile ADNoFile { get; set; }
-        [NonSerialized]
-        private AttachedFile _aDNoFile;
-        /// <summary>
-        /// Связь с файлом описания директивы летной годности
-        /// </summary>    
-        public AttachedFile ADNoFile
-        {
-            get
-            {
+		#region  public AttachedFile ADNoFile { get; set; }
+		[NonSerialized]
+		private AttachedFile _aDNoFile;
+		/// <summary>
+		/// Связь с файлом описания директивы летной годности
+		/// </summary>    
+		public AttachedFile ADNoFile
+		{
+			get
+			{
 				//TODO:Требуется использование Dictionary. Необходимо разделить на объект Bl и DA
-	            return _aDNoFile ?? (Files.GetFileByFileLinkType(FileLinkType.ADFile));
-            }
-	        set
-	        {
+				return _aDNoFile ?? (Files.GetFileByFileLinkType(FileLinkType.ADFile));
+			}
+			set
+			{
 				_aDNoFile = value;
 				Files.SetFileByFileLinkType(SmartCoreObjectType.ItemId, value, FileLinkType.ADFile);
 			}
-        }
-        #endregion
+		}
+		#endregion
 
 		#region public String Applicability { get; set; }
 		/// <summary>
 		/// Применимость директивы
 		/// </summary>
 		[TableColumn("Applicability", -1)]
-        [ExcelImport("Applicability:", Order = 4)]
-        public String Applicability { get; set; }
+		[ExcelImport("Applicability:", Order = 4)]
+		public String Applicability { get; set; }
 		#endregion
 
 		#region public bool IsApplicability { get; set; }
@@ -80,75 +80,75 @@ namespace SmartCore.Entities.General.Directives
 		/// ATA глава, к которой директива относится
 		/// </summary>
 		[TableColumn("ATAChapter")]
-        [Filter("Ata Chapter:", Order = 10)]
-        [ExcelImport("Ata Chapter:", Order = 5)]
-        public AtaChapter ATAChapter { get; set; }
+		[Filter("Ata Chapter:", Order = 10)]
+		[ExcelImport("Ata Chapter:", Order = 5)]
+		public AtaChapter ATAChapter { get; set; }
 		#endregion
 
-        #region public DirectiveType DirectiveType { get; set; }
+		#region public DirectiveType DirectiveType { get; set; }
 
-        private DirectiveType _directiveType;
-        /// <summary>
-        /// Тип директивы
-        /// </summary>
-        [TableColumn("DirectiveType")]
-        public DirectiveType DirectiveType
-        {
-            get { return _directiveType ?? (_directiveType = DirectiveType.Unknown); }
-            set
-            {
-                if (_directiveType != value)
-                {
-                    _directiveType = value;
-                    OnPropertyChanged("DirectiveType");
-                }
-            }
-        } 
+		private DirectiveType _directiveType;
+		/// <summary>
+		/// Тип директивы
+		/// </summary>
+		[TableColumn("DirectiveType")]
+		public DirectiveType DirectiveType
+		{
+			get { return _directiveType ?? (_directiveType = DirectiveType.Unknown); }
+			set
+			{
+				if (_directiveType != value)
+				{
+					_directiveType = value;
+					OnPropertyChanged("DirectiveType");
+				}
+			}
+		} 
 
-        public static PropertyInfo DirectiveTypeProperty
-        {
-            get { return GetCurrentType().GetProperty("DirectiveType"); }
-        }
+		public static PropertyInfo DirectiveTypeProperty
+		{
+			get { return GetCurrentType().GetProperty("DirectiveType"); }
+		}
 
 		#endregion
 
-        #region public int16 ADType{ get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [TableColumn("ADType")]
-        [Filter("AD Type:", Order = 11)]
-        [ExcelImport("AD Type:")]
-        public ADType ADType { get; set; }
-        #endregion
+		#region public int16 ADType{ get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		[TableColumn("ADType")]
+		[Filter("AD Type:", Order = 11)]
+		[ExcelImport("AD Type:")]
+		public ADType ADType { get; set; }
+		#endregion
 
 		#region public String Description { get; set; }
 		/// <summary>
 		/// Описание директивы
 		/// </summary>
-        [TableColumn("Description", -1)]
-        [Filter("Description:", Order = 2)]
-        [ExcelImport("Description:", Order = 3)]
-        public String Description { get; set; }
+		[TableColumn("Description", -1)]
+		[Filter("Description:", Order = 2)]
+		[ExcelImport("Description:", Order = 3)]
+		public String Description { get; set; }
 
 		#endregion
 
-        #region public String Paragraph { get; set; }
-        /// <summary>
-        /// Параметр трудозатрат
-        /// </summary>
-        [TableColumn("Paragraph")]
-        [ExcelImport("Paragraph:", Order = 2)]
-        public String Paragraph { get; set; }
-        #endregion
+		#region public String Paragraph { get; set; }
+		/// <summary>
+		/// Параметр трудозатрат
+		/// </summary>
+		[TableColumn("Paragraph")]
+		[ExcelImport("Paragraph:", Order = 2)]
+		public String Paragraph { get; set; }
+		#endregion
 
-        #region public String Remarks { get; set; }
-        /// <summary>
-        /// Заметки по директиве
-        /// </summary>
-        [TableColumn("Remarks")]
-        [Filter("Remarks:")]
-        public String Remarks { get; set; }
+		#region public String Remarks { get; set; }
+		/// <summary>
+		/// Заметки по директиве
+		/// </summary>
+		[TableColumn("Remarks")]
+		[Filter("Remarks:")]
+		public String Remarks { get; set; }
 		#endregion
 
 		#region public NDTType NDTType { get; set; }
@@ -156,12 +156,15 @@ namespace SmartCore.Entities.General.Directives
 		/// Тип производимого Non-Destructive-Test
 		/// </summary>
 		[TableColumn("NDTType")]
-        [Filter("NDT:", Order = 15)]
-        public NDTType NDTType { get; set; }
+		[Filter("NDT:", Order = 15)]
+		public NDTType NDTType { get; set; }
 		#endregion
 
 		[TableColumn("DirectiveOrder")]
 		public DirectiveOrder DirectiveOrder { get; set; }
+
+		[TableColumn("SBType")]
+		public DirectiveSbType SBType { get; set; }
 
 		#region public string Workarea { get; set; }
 
@@ -192,9 +195,9 @@ namespace SmartCore.Entities.General.Directives
 		/// 
 		/// </summary>
 		[TableColumn("ServiceBulletinNo")]
-        [Filter("SB:", Order = 3)]
-        [ExcelImport("SB:")]
-        public String ServiceBulletinNo { get; set; }
+		[Filter("SB:", Order = 3)]
+		[ExcelImport("SB:")]
+		public String ServiceBulletinNo { get; set; }
 		#endregion
 
 		#region public string StcNo { get; set; }
@@ -232,57 +235,68 @@ namespace SmartCore.Entities.General.Directives
 		[TableColumn("SupersededId")]
 		public int? SupersededId { get; set; }
 
+		[TableColumn("SBSubjects")]
+		public string SBSubjects { get; set; }
 
+		[TableColumn("AffectedBy")]
+		public string AffectedBy { get; set; }
+
+		[TableColumn("Affects")]
+		public DirectiveAffects Affects { get; set; }
+
+		[TableColumn("Reason")]
+		public DirectiveReason Reason { get; set; }
+		
 		#region  public AttachedFile ServiceBulletinFile { get; set; }
 		[NonSerialized]
-        private AttachedFile _serviceBulletinFile;
-        /// <summary>
-        /// Связь с файлом описания сервисного бюллетеня
-        /// </summary>
-        public AttachedFile ServiceBulletinFile
-        {
-	        get
-	        {
+		private AttachedFile _serviceBulletinFile;
+		/// <summary>
+		/// Связь с файлом описания сервисного бюллетеня
+		/// </summary>
+		public AttachedFile ServiceBulletinFile
+		{
+			get
+			{
 				//TODO:Требуется использование Dictionary. Необходимо разделить на объект Bl и DA
 				return _serviceBulletinFile ?? (Files.GetFileByFileLinkType(FileLinkType.SBFile));
-	        }
+			}
 			set
 			{
 				_serviceBulletinFile = value;
 				Files.SetFileByFileLinkType(SmartCoreObjectType.ItemId, value, FileLinkType.SBFile);
 			}
 		}
-        #endregion
+		#endregion
 
-        #region public String EngineeringOrders { get; set; }
-        /// <summary>
-        /// Параметр Engineering orders
-        /// </summary>
-        [TableColumn("EngineeringOrders")]
-        [Filter("EO:", Order = 4)]
-        [ExcelImport("EO:")]
-        public String EngineeringOrders { get; set; }
+		#region public String EngineeringOrders { get; set; }
+		/// <summary>
+		/// Параметр Engineering orders
+		/// </summary>
+		[TableColumn("EngineeringOrders")]
+		[Filter("EO:", Order = 4)]
+		[ExcelImport("EO:")]
+		public String EngineeringOrders { get; set; }
 
-        public static PropertyInfo EngineeringOrdersProperty
-        {
-            get { return GetCurrentType().GetProperty("EngineeringOrders"); }
-        }
+		public static PropertyInfo EngineeringOrdersProperty
+		{
+			get { return GetCurrentType().GetProperty("EngineeringOrders"); }
+		}
 
-        #endregion
+		#endregion
 
-        #region  public AttachedFile EngineeringOrderFile { get; set; }
-        [NonSerialized]
-        private AttachedFile _engineeringOrderFile;
-        /// <summary>
-        /// Связь с файлом описания инженерного ордера
-        /// </summary>
-        public AttachedFile EngineeringOrderFile
-        {
-	        get
-	        {
+		#region  public AttachedFile EngineeringOrderFile { get; set; }
+		[NonSerialized]
+		private AttachedFile _engineeringOrderFile;
+		/// <summary>
+		/// Связь с файлом описания инженерного ордера
+		/// </summary>
+		public AttachedFile EngineeringOrderFile
+		{
+			get
+			{
 				//TODO:Требуется использование Dictionary. Необходимо разделить на объект Bl и DA
 				return _engineeringOrderFile ?? (Files.GetFileByFileLinkType(FileLinkType.EOFile));
-	        }
+			}
 			set
 			{
 				_engineeringOrderFile = value;
@@ -290,45 +304,45 @@ namespace SmartCore.Entities.General.Directives
 			}
 		}
 
-        public static PropertyInfo EngineeringOrderFileProperty
-        {
-            get { return GetCurrentType().GetProperty("EngineeringOrderFile"); }
-        }
+		public static PropertyInfo EngineeringOrderFileProperty
+		{
+			get { return GetCurrentType().GetProperty("EngineeringOrderFile"); }
+		}
 
-        #endregion
+		#endregion
 
-        #region public Highlight Highlight { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [TableColumn("Highlight")]
-        public Highlight Highlight { get; set; }
-        #endregion
+		#region public Highlight Highlight { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		[TableColumn("Highlight")]
+		public Highlight Highlight { get; set; }
+		#endregion
 
-        #region public String KitRequired { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [TableColumn("KitRequired")]
-        public String KitRequired { get; set; }
-        #endregion
+		#region public String KitRequired { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		[TableColumn("KitRequired")]
+		public String KitRequired { get; set; }
+		#endregion
 
-        #region public String HiddenRemarks { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [TableColumn("HiddenRemarks", -1)]
-        [Filter("Hidden Remarks:", Order = 6)]
-        public String HiddenRemarks { get; set; }
+		#region public String HiddenRemarks { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		[TableColumn("HiddenRemarks", -1)]
+		[Filter("Hidden Remarks:", Order = 6)]
+		public String HiddenRemarks { get; set; }
 		#endregion
 
 		#region public CommonCollection<ItemFileLink> Files { get; set; }
 
-	    private CommonCollection<ItemFileLink> _files;
+		private CommonCollection<ItemFileLink> _files;
 
 		[Child(RelationType.OneToMany, "ParentId", "ParentTypeId", 1)]
-	    public CommonCollection<ItemFileLink> Files
-	    {
+		public CommonCollection<ItemFileLink> Files
+		{
 			get { return _files ?? (_files = new CommonCollection<ItemFileLink>()); }
 			set
 			{
@@ -345,146 +359,146 @@ namespace SmartCore.Entities.General.Directives
 		#endregion
 
 		/*
-         * Дополнительные свойства
-         */
+		 * Дополнительные свойства
+		 */
 
 		#region public BaseComponent ParentBaseComponent { get; set; }
 
 		[NonSerialized]
-        private BaseComponent _parentBaseComponent;
+		private BaseComponent _parentBaseComponent;
 
-        /// <summary>
-        /// Обратная ссылка на базовый агрегат
-        /// </summary>
-        [TableColumn("ComponentId")]
-        [Filter("Base Detail:")]
-        public BaseComponent ParentBaseComponent
-        {
-            get { return _parentBaseComponent; }
-            set { _parentBaseComponent = value; }
-        }
+		/// <summary>
+		/// Обратная ссылка на базовый агрегат
+		/// </summary>
+		[TableColumn("ComponentId")]
+		[Filter("Base Detail:")]
+		public BaseComponent ParentBaseComponent
+		{
+			get { return _parentBaseComponent; }
+			set { _parentBaseComponent = value; }
+		}
 
-        public static PropertyInfo ParentBaseComponentProperty
-        {
-            get { return GetCurrentType().GetProperty("ParentBaseComponent"); }
-        }
+		public static PropertyInfo ParentBaseComponentProperty
+		{
+			get { return GetCurrentType().GetProperty("ParentBaseComponent"); }
+		}
 
-        #endregion
+		#endregion
 
-        #region public Int32 AircraftFlightId { get; set; }
-        /// <summary>
-        /// Id Полета, в рамках которого могло быть создано данное отклонение
-        /// </summary>
-        [TableColumn("AircraftFlight")]
-        public Int32 AircraftFlightId { get; internal set; }
+		#region public Int32 AircraftFlightId { get; set; }
+		/// <summary>
+		/// Id Полета, в рамках которого могло быть создано данное отклонение
+		/// </summary>
+		[TableColumn("AircraftFlight")]
+		public Int32 AircraftFlightId { get; internal set; }
 
-        public static PropertyInfo AircraftFlightIdProperty
-        {
-            get { return GetCurrentType().GetProperty("AircraftFlightId"); }
-        }
+		public static PropertyInfo AircraftFlightIdProperty
+		{
+			get { return GetCurrentType().GetProperty("AircraftFlightId"); }
+		}
 
-        #endregion
+		#endregion
 
-        #region public DirectiveWorkType WorkType { get; set; }
+		#region public DirectiveWorkType WorkType { get; set; }
 
-        private DirectiveWorkType _workType;
-        /// <summary>
-        /// Тип директивы
-        /// </summary>
-        [TableColumn("WorkType")]
-        [Filter("Work Type:")]
-        [ExcelImport("Work Type:")]
-        public DirectiveWorkType WorkType
-        {
-            get { return _workType ?? (_workType = DirectiveWorkType.Unknown); }
-            set
-            {
-                if (_workType != value)
-                {
-                    _workType = value;
-                    OnPropertyChanged("WorkType");
-                }
-            }
-        }
+		private DirectiveWorkType _workType;
+		/// <summary>
+		/// Тип директивы
+		/// </summary>
+		[TableColumn("WorkType")]
+		[Filter("Work Type:")]
+		[ExcelImport("Work Type:")]
+		public DirectiveWorkType WorkType
+		{
+			get { return _workType ?? (_workType = DirectiveWorkType.Unknown); }
+			set
+			{
+				if (_workType != value)
+				{
+					_workType = value;
+					OnPropertyChanged("WorkType");
+				}
+			}
+		}
 
-        public static PropertyInfo WorkTypeProperty
-        {
-            get { return GetCurrentType().GetProperty("WorkType"); }
-        }
+		public static PropertyInfo WorkTypeProperty
+		{
+			get { return GetCurrentType().GetProperty("WorkType"); }
+		}
 
-        #endregion
+		#endregion
 
-        #region public DirectiveThreshold Threshold { get; set; }
+		#region public DirectiveThreshold Threshold { get; set; }
 
-        private DirectiveThreshold _threshold;
-        /// <summary>
-        /// Условие выполнения директивы
-        /// </summary>
-        [TableColumn("Threshold")]
-        [ExcelImport("Threshold:")]
-        public DirectiveThreshold Threshold
-        {
-            get { return _threshold; }
-            set { _threshold = value; }
-        }
+		private DirectiveThreshold _threshold;
+		/// <summary>
+		/// Условие выполнения директивы
+		/// </summary>
+		[TableColumn("Threshold")]
+		[ExcelImport("Threshold:")]
+		public DirectiveThreshold Threshold
+		{
+			get { return _threshold; }
+			set { _threshold = value; }
+		}
 
-        [TableColumn("ThldTypeCond", 2)]
-        public byte[] ThrldTypeCond
-        {
-            get { return _threshold != null ? _threshold.ThrldTypeToBinary() : new byte[2]; }
-            set 
-            {
-                if(_threshold != null) 
-                    _threshold.ConvertToCondition(value); 
-            }
-        }
-        #endregion
+		[TableColumn("ThldTypeCond", 2)]
+		public byte[] ThrldTypeCond
+		{
+			get { return _threshold != null ? _threshold.ThrldTypeToBinary() : new byte[2]; }
+			set 
+			{
+				if(_threshold != null) 
+					_threshold.ConvertToCondition(value); 
+			}
+		}
+		#endregion
 
-        #region public Lifelength FirstPerformanceSinceNew { get; }
+		#region public Lifelength FirstPerformanceSinceNew { get; }
 
-        /// <summary>
-        /// Возвращает порог первого выполнения задачи
-        /// </summary>
-        [Filter("1st. Perf.:")]
-        public Lifelength FirstPerformanceSinceNew
-        {
-            get { return _threshold != null ? _threshold.FirstPerformanceSinceNew : Lifelength.Null; }
-        }
-        #endregion
+		/// <summary>
+		/// Возвращает порог первого выполнения задачи
+		/// </summary>
+		[Filter("1st. Perf.:")]
+		public Lifelength FirstPerformanceSinceNew
+		{
+			get { return _threshold != null ? _threshold.FirstPerformanceSinceNew : Lifelength.Null; }
+		}
+		#endregion
 
-        #region public Lifelength Interval { get; }
+		#region public Lifelength Interval { get; }
 
-        /// <summary>
-        /// Возвращает интервал повторного выполнения задачи или Lifelength.Null
-        /// </summary>
-        [Filter("Rpt. Int.:")]
-        public Lifelength Interval
-        {
-            get{ return _threshold != null ? _threshold.RepeatInterval : Lifelength.Null; }
-        }
-        #endregion
+		/// <summary>
+		/// Возвращает интервал повторного выполнения задачи или Lifelength.Null
+		/// </summary>
+		[Filter("Rpt. Int.:")]
+		public Lifelength Interval
+		{
+			get{ return _threshold != null ? _threshold.RepeatInterval : Lifelength.Null; }
+		}
+		#endregion
 
-        #region public BaseRecordCollection<DirectiveRecord>PerformanceRecords { get; private set; }
+		#region public BaseRecordCollection<DirectiveRecord>PerformanceRecords { get; private set; }
 
-        private BaseRecordCollection<DirectiveRecord> _performanceRecords;
-        /// <summary>
-        /// Коллекция содержит все записи о выполнении директивы
-        /// </summary>
-        [Child(RelationType.OneToMany, "ParentId", "ParentTypeId", 1, "Parent")]
-        public BaseRecordCollection<DirectiveRecord> PerformanceRecords
-        {
-            get { return _performanceRecords ?? (_performanceRecords = new BaseRecordCollection<DirectiveRecord>()); }
-            internal set
-            {
-                if (_performanceRecords != value)
-                {
-                    if (_performanceRecords != null)
-                        _performanceRecords.Clear();
-                    if (value != null)
-                        _performanceRecords = value;
-                }
-            }
-        }
+		private BaseRecordCollection<DirectiveRecord> _performanceRecords;
+		/// <summary>
+		/// Коллекция содержит все записи о выполнении директивы
+		/// </summary>
+		[Child(RelationType.OneToMany, "ParentId", "ParentTypeId", 1, "Parent")]
+		public BaseRecordCollection<DirectiveRecord> PerformanceRecords
+		{
+			get { return _performanceRecords ?? (_performanceRecords = new BaseRecordCollection<DirectiveRecord>()); }
+			internal set
+			{
+				if (_performanceRecords != value)
+				{
+					if (_performanceRecords != null)
+						_performanceRecords.Clear();
+					if (value != null)
+						_performanceRecords = value;
+				}
+			}
+		}
 		#endregion
 
 		#region public DirectiveRecord LastPerformance { get; }
@@ -492,12 +506,12 @@ namespace SmartCore.Entities.General.Directives
 		/// Последнее выполнение 
 		/// </summary>
 		[ExcelImport("Last Performance:")]
-        public DirectiveRecord LastPerformance { get { return PerformanceRecords.GetLast(); } }
+		public DirectiveRecord LastPerformance { get { return PerformanceRecords.GetLast(); } }
 		#endregion
 
 		/*
-         * Математический аппарат
-         */
+		 * Математический аппарат
+		 */
 
 		#region Implement of IEngineeringDirective
 		//Своиства интерфеися IMathData, они содержат вычисления мат аппарата для объектов
@@ -509,61 +523,61 @@ namespace SmartCore.Entities.General.Directives
 		/// Зона
 		/// </summary>
 		public String Zone { get; set; }
-        #endregion
+		#endregion
 
-        #region String Access { get; }
-        /// <summary>
-        /// Доступ
-        /// </summary>
-        public String Access { get; set; }
-        #endregion
+		#region String Access { get; }
+		/// <summary>
+		/// Доступ
+		/// </summary>
+		public String Access { get; set; }
+		#endregion
 
-        #region public MaintenanceDirectiveProgramType Program { get; }
+		#region public MaintenanceDirectiveProgramType Program { get; }
 
-        /// <summary>
-        /// Программа обслуживания
-        /// </summary>
-        public MaintenanceDirectiveProgramType Program
-        {
-            get { return MaintenanceDirectiveProgramType.Unknown; }
-        }
-        #endregion
+		/// <summary>
+		/// Программа обслуживания
+		/// </summary>
+		public MaintenanceDirectiveProgramType Program
+		{
+			get { return MaintenanceDirectiveProgramType.Unknown; }
+		}
+		#endregion
 
-        #region public StaticDictionary WorkType { get; }
-        /// <summary>
-        /// Тип/Вид Работ
-        /// </summary>
-        StaticDictionary IEngineeringDirective.WorkType { get { return WorkType; } }
-        #endregion
+		#region public StaticDictionary WorkType { get; }
+		/// <summary>
+		/// Тип/Вид Работ
+		/// </summary>
+		StaticDictionary IEngineeringDirective.WorkType { get { return WorkType; } }
+		#endregion
 
-        #region public String Phase { get; }
-        /// <summary>
-        /// Фаза
-        /// </summary>
-        public String Phase { get; set; }
-        #endregion
+		#region public String Phase { get; }
+		/// <summary>
+		/// Фаза
+		/// </summary>
+		public String Phase { get; set; }
+		#endregion
 
-        #region public CommonCollection<CategoryRecord> CategoriesRecords
+		#region public CommonCollection<CategoryRecord> CategoriesRecords
 
-        private CommonCollection<CategoryRecord> _aircraftWorkerCategories;
-        /// <summary>
-        /// 
-        /// </summary>
-        [Child(RelationType.OneToMany, "ParentId", "ParentTypeId", 1, "Parent")]
-        public CommonCollection<CategoryRecord> CategoriesRecords
-        {
-            get { return _aircraftWorkerCategories ?? (_aircraftWorkerCategories = new CommonCollection<CategoryRecord>()); }
-            internal set
-            {
-                if (_aircraftWorkerCategories != value)
-                {
-                    if (_aircraftWorkerCategories != null)
-                        _aircraftWorkerCategories.Clear();
-                    if (value != null)
-                        _aircraftWorkerCategories = value;
-                }
-            }
-        }
+		private CommonCollection<CategoryRecord> _aircraftWorkerCategories;
+		/// <summary>
+		/// 
+		/// </summary>
+		[Child(RelationType.OneToMany, "ParentId", "ParentTypeId", 1, "Parent")]
+		public CommonCollection<CategoryRecord> CategoriesRecords
+		{
+			get { return _aircraftWorkerCategories ?? (_aircraftWorkerCategories = new CommonCollection<CategoryRecord>()); }
+			internal set
+			{
+				if (_aircraftWorkerCategories != value)
+				{
+					if (_aircraftWorkerCategories != null)
+						_aircraftWorkerCategories.Clear();
+					if (value != null)
+						_aircraftWorkerCategories = value;
+				}
+			}
+		}
 		#endregion
 
 		#region BaseSmartCoreObject LifeLenghtParent { get; }
@@ -571,233 +585,233 @@ namespace SmartCore.Entities.General.Directives
 		/// Возвращает объект, для которого можно расчитать текущую наработку. Обычно Aircraft, BaseComponent или Component
 		/// </summary>
 		public BaseEntityObject LifeLengthParent
-        {
-            get { return ParentBaseComponent; }
-        }
-        #endregion
+		{
+			get { return ParentBaseComponent; }
+		}
+		#endregion
 
-        #region IThreshold IDirective.Threshold { get; set; }
-        /// <summary>
-        /// порог первого и посделующего выполнений
-        /// </summary>
-        IThreshold IDirective.Threshold
-        {
-            get { return _threshold; }
-            set { _threshold = value as DirectiveThreshold; }
-        }
-        #endregion
+		#region IThreshold IDirective.Threshold { get; set; }
+		/// <summary>
+		/// порог первого и посделующего выполнений
+		/// </summary>
+		IThreshold IDirective.Threshold
+		{
+			get { return _threshold; }
+			set { _threshold = value as DirectiveThreshold; }
+		}
+		#endregion
 
-        #region IRecordCollection IDirective.PerformanceRecords { get; set; }
-        /// <summary>
-        /// Коллекция содержит все записи о выполнении директивы
-        /// </summary>
-        IRecordCollection IDirective.PerformanceRecords
-        {
-            get { return _performanceRecords; }
-        }
-        #endregion
+		#region IRecordCollection IDirective.PerformanceRecords { get; set; }
+		/// <summary>
+		/// Коллекция содержит все записи о выполнении директивы
+		/// </summary>
+		IRecordCollection IDirective.PerformanceRecords
+		{
+			get { return _performanceRecords; }
+		}
+		#endregion
 
-        #region AbstractPerformanceRecord IDirective.LastPerformance { get; }
-        /// <summary>
-        /// Доступ к последней записи о выполнении задачи
-        /// </summary>
-        AbstractPerformanceRecord IDirective.LastPerformance { get { return PerformanceRecords.GetLast(); } }
-        #endregion
+		#region AbstractPerformanceRecord IDirective.LastPerformance { get; }
+		/// <summary>
+		/// Доступ к последней записи о выполнении задачи
+		/// </summary>
+		AbstractPerformanceRecord IDirective.LastPerformance { get { return PerformanceRecords.GetLast(); } }
+		#endregion
 
-        #region public List<NextPerformance> NextPerformances { get; set; }
-        [NonSerialized]
-        private List<NextPerformance> _nextPerformances;
-        /// <summary>
-        /// Список последующих выполнений задачи
-        /// </summary>
-        public List<NextPerformance> NextPerformances
-        {
-            get { return _nextPerformances ?? (_nextPerformances = new List<NextPerformance>()); }
-            set { _nextPerformances = value; }
-        }
-        #endregion
+		#region public List<NextPerformance> NextPerformances { get; set; }
+		[NonSerialized]
+		private List<NextPerformance> _nextPerformances;
+		/// <summary>
+		/// Список последующих выполнений задачи
+		/// </summary>
+		public List<NextPerformance> NextPerformances
+		{
+			get { return _nextPerformances ?? (_nextPerformances = new List<NextPerformance>()); }
+			set { _nextPerformances = value; }
+		}
+		#endregion
 
-        #region  public NextPerformance NextPerformance { get; }
-        /// <summary>
-        /// След. выполнение задачи
-        /// </summary>
-        public NextPerformance NextPerformance
-        {
-            get
-            {
-                if (_nextPerformances == null || _nextPerformances.Count == 0)
-                    return null;
-                return _nextPerformances[0];
-            }
-        }
-        #endregion
+		#region  public NextPerformance NextPerformance { get; }
+		/// <summary>
+		/// След. выполнение задачи
+		/// </summary>
+		public NextPerformance NextPerformance
+		{
+			get
+			{
+				if (_nextPerformances == null || _nextPerformances.Count == 0)
+					return null;
+				return _nextPerformances[0];
+			}
+		}
+		#endregion
 
-        #region public DirectiveStatus Status { get; }
-        /// <summary>
-        /// Статус директивы
-        /// </summary>
-        [Filter("Status:", Order = 13)]
-        public DirectiveStatus Status
-        {
-            get
-            {
-                if (IsClosed) return DirectiveStatus.Closed; //директива принудительно закрыта пользователем
-                if (LastPerformance == null)
-                {
-                    if (!_threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero() ||
-                       !_threshold.FirstPerformanceSinceNew.IsNullOrZero())
-                        return DirectiveStatus.Open;
+		#region public DirectiveStatus Status { get; }
+		/// <summary>
+		/// Статус директивы
+		/// </summary>
+		[Filter("Status:", Order = 13)]
+		public DirectiveStatus Status
+		{
+			get
+			{
+				if (IsClosed) return DirectiveStatus.Closed; //директива принудительно закрыта пользователем
+				if (LastPerformance == null)
+				{
+					if (!_threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero() ||
+					   !_threshold.FirstPerformanceSinceNew.IsNullOrZero())
+						return DirectiveStatus.Open;
 
-                    return DirectiveStatus.NotApplicable;
-                }
+					return DirectiveStatus.NotApplicable;
+				}
 
-                if (_threshold.RepeatInterval.IsNullOrZero()) return DirectiveStatus.Closed;
+				if (_threshold.RepeatInterval.IsNullOrZero()) return DirectiveStatus.Closed;
 
-                return DirectiveStatus.Repetative;
-            }
-        }
-        #endregion
+				return DirectiveStatus.Repetative;
+			}
+		}
+		#endregion
 
-        #region public ConditionState Condition { get; set; }
-        /// <summary>
-        /// Возвращает состояние ближайшего выполнения задачи (если оно расчитано) или ConditionState.NotEstimated
-        /// </summary>
-        [Filter("Condition:", Order = 14)]
-        public ConditionState Condition
-        {
-            get
-            {
-                if (_nextPerformances == null || _nextPerformances.Count == 0) return ConditionState.NotEstimated;
-                return _nextPerformances[0].Condition;
-            }
-        }
-        #endregion
+		#region public ConditionState Condition { get; set; }
+		/// <summary>
+		/// Возвращает состояние ближайшего выполнения задачи (если оно расчитано) или ConditionState.NotEstimated
+		/// </summary>
+		[Filter("Condition:", Order = 14)]
+		public ConditionState Condition
+		{
+			get
+			{
+				if (_nextPerformances == null || _nextPerformances.Count == 0) return ConditionState.NotEstimated;
+				return _nextPerformances[0].Condition;
+			}
+		}
+		#endregion
 
-        #region public Lifelength NextCompliance { get; }
+		#region public Lifelength NextCompliance { get; }
 
-        /// <summary>
-        /// Возвращает ресурс ближайшего выполнения задачи (если оно расчитано) или Lifelength.Null
-        /// </summary>
-        public Lifelength NextPerformanceSource
-        {
-            get
-            {
-                if (_nextPerformances == null || _nextPerformances.Count == 0) return Lifelength.Null;
-                return _nextPerformances[0].PerformanceSource;
-            }
-        }
-        #endregion
+		/// <summary>
+		/// Возвращает ресурс ближайшего выполнения задачи (если оно расчитано) или Lifelength.Null
+		/// </summary>
+		public Lifelength NextPerformanceSource
+		{
+			get
+			{
+				if (_nextPerformances == null || _nextPerformances.Count == 0) return Lifelength.Null;
+				return _nextPerformances[0].PerformanceSource;
+			}
+		}
+		#endregion
 
-        #region public Lifelength Remains { get; set; }
-        /// <summary>
-        /// Возвращает остаток ресурса до ближайшего выполнения задачи (если оно расчитано) или Lifelength.Null
-        /// </summary>
-        public Lifelength Remains
-        {
-            get
-            {
-                if (_nextPerformances == null || _nextPerformances.Count == 0) return Lifelength.Null;
-                return _nextPerformances[0].Remains;
-            }
-        }
-        #endregion
+		#region public Lifelength Remains { get; set; }
+		/// <summary>
+		/// Возвращает остаток ресурса до ближайшего выполнения задачи (если оно расчитано) или Lifelength.Null
+		/// </summary>
+		public Lifelength Remains
+		{
+			get
+			{
+				if (_nextPerformances == null || _nextPerformances.Count == 0) return Lifelength.Null;
+				return _nextPerformances[0].Remains;
+			}
+		}
+		#endregion
 
-        #region public Lifelength BeforeForecastResourceRemain { get; set; }
-        /// <summary>
-        /// Остаток ресурса до прогноза (вычисляется только в прогнозе)
-        /// </summary>
-        public Lifelength BeforeForecastResourceRemain
-        {
-            get
-            {
-                if (_nextPerformances == null || _nextPerformances.Count == 0) return Lifelength.Null;
-                return _nextPerformances[0].BeforeForecastResourceRemain;
-            }
-        }
-        #endregion
+		#region public Lifelength BeforeForecastResourceRemain { get; set; }
+		/// <summary>
+		/// Остаток ресурса до прогноза (вычисляется только в прогнозе)
+		/// </summary>
+		public Lifelength BeforeForecastResourceRemain
+		{
+			get
+			{
+				if (_nextPerformances == null || _nextPerformances.Count == 0) return Lifelength.Null;
+				return _nextPerformances[0].BeforeForecastResourceRemain;
+			}
+		}
+		#endregion
 
-        #region public Lifelength ForecastLifelength { get; set; }
-        //ресурс прогноза
-        public Lifelength ForecastLifelength { get; set; }
-        #endregion
+		#region public Lifelength ForecastLifelength { get; set; }
+		//ресурс прогноза
+		public Lifelength ForecastLifelength { get; set; }
+		#endregion
 
-        #region public Lifelength AfterForecastResourceRemain { get; set; }
-        /// <summary>
-        /// Остаток ресурса после прогноза (вычисляется только в прогнозе)
-        /// </summary>
-        public Lifelength AfterForecastResourceRemain { get; set; }
-        #endregion
+		#region public Lifelength AfterForecastResourceRemain { get; set; }
+		/// <summary>
+		/// Остаток ресурса после прогноза (вычисляется только в прогнозе)
+		/// </summary>
+		public Lifelength AfterForecastResourceRemain { get; set; }
+		#endregion
 
-        #region public DateTime? NextPerformanceDate{ get; set; }
-        /// <summary>
-        /// Возвращает прблизительную дату ближайшего выполнения задачи (если оно расчитано) или null
-        /// </summary>
-        public DateTime? NextPerformanceDate
-        {
-            get
-            {
-                if (_nextPerformances == null || _nextPerformances.Count == 0) return null;
-                return _nextPerformances[0].PerformanceDate;
-            }
-        }
-        #endregion
+		#region public DateTime? NextPerformanceDate{ get; set; }
+		/// <summary>
+		/// Возвращает прблизительную дату ближайшего выполнения задачи (если оно расчитано) или null
+		/// </summary>
+		public DateTime? NextPerformanceDate
+		{
+			get
+			{
+				if (_nextPerformances == null || _nextPerformances.Count == 0) return null;
+				return _nextPerformances[0].PerformanceDate;
+			}
+		}
+		#endregion
 
-        #region public double? Percents { get; set; }
-        /// <summary>
-        /// (AfterForecast / (AfterForecast + beforeForecast)) * 100
-        /// </summary>
-        public double? Percents { get; set; }
-        #endregion
+		#region public double? Percents { get; set; }
+		/// <summary>
+		/// (AfterForecast / (AfterForecast + beforeForecast)) * 100
+		/// </summary>
+		public double? Percents { get; set; }
+		#endregion
 
-        #region public string TimesToString { get; }
-        /// <summary>
-        /// Возвращает строковое представление количества "след. выполнений"
-        /// </summary>
-        public string TimesToString
-        {
-            get { return Times <= 1 ? "" : Times + " times"; }
-        }
-        #endregion
+		#region public string TimesToString { get; }
+		/// <summary>
+		/// Возвращает строковое представление количества "след. выполнений"
+		/// </summary>
+		public string TimesToString
+		{
+			get { return Times <= 1 ? "" : Times + " times"; }
+		}
+		#endregion
 
-        #region public Int32 Times { get;}
-        /// <summary>
-        /// Сколько раз выполнится директива (применяетмя только в прогнозах)
-        /// </summary>
-        public Int32 Times
-        {
-            get { return _nextPerformances.Count > 1 ? _nextPerformances.Count : -1; }
-        }
-        #endregion
+		#region public Int32 Times { get;}
+		/// <summary>
+		/// Сколько раз выполнится директива (применяетмя только в прогнозах)
+		/// </summary>
+		public Int32 Times
+		{
+			get { return _nextPerformances.Count > 1 ? _nextPerformances.Count : -1; }
+		}
+		#endregion
 
-        #region public Boolean IsClosed { get; set; }
-        /// <summary>
-        /// Логический флаг, показывающий, закрыта ли директива
-        /// </summary>
-        [TableColumn("IsClosed")]
-        public Boolean IsClosed { get; set; }
-        #endregion
+		#region public Boolean IsClosed { get; set; }
+		/// <summary>
+		/// Логический флаг, показывающий, закрыта ли директива
+		/// </summary>
+		[TableColumn("IsClosed")]
+		public Boolean IsClosed { get; set; }
+		#endregion
 
-        #region public Boolean NextPerformanceIsBlocked { get; }
-        ///
-        /// Логический флаг, показывающий, заблокировано ли след. выполенение директивы рабочим пакетом
-        /// 
-        public Boolean NextPerformanceIsBlocked
-        {
-            get
-            {
-                if (_nextPerformances == null || _nextPerformances.Count == 0) return false;
-                return _nextPerformances[0].BlockedByPackage != null;
-            }
-        }
+		#region public Boolean NextPerformanceIsBlocked { get; }
+		///
+		/// Логический флаг, показывающий, заблокировано ли след. выполенение директивы рабочим пакетом
+		/// 
+		public Boolean NextPerformanceIsBlocked
+		{
+			get
+			{
+				if (_nextPerformances == null || _nextPerformances.Count == 0) return false;
+				return _nextPerformances[0].BlockedByPackage != null;
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region public Double ManHours { get; set; }
-        /// <summary>
-        /// Параметр трудозатрат
-        /// </summary>
-        [TableColumn("ManHours")]
-        public double ManHours { get; set; }
+		#region public Double ManHours { get; set; }
+		/// <summary>
+		/// Параметр трудозатрат
+		/// </summary>
+		[TableColumn("ManHours")]
+		public double ManHours { get; set; }
 
 
 		public static PropertyInfo ManHoursProperty
@@ -811,97 +825,97 @@ namespace SmartCore.Entities.General.Directives
 		/// Количество сотрудников для выполнения задачи
 		/// </summary>
 		public int Mans{ get; set; }
-        #endregion
+		#endregion
 
-        #region public Double Elapsed { get; set; }
-        /// <summary>
-        /// Параметр полных трудозатрат 
-        /// </summary>
-        public double Elapsed { get; set; }
-        #endregion
+		#region public Double Elapsed { get; set; }
+		/// <summary>
+		/// Параметр полных трудозатрат 
+		/// </summary>
+		public double Elapsed { get; set; }
+		#endregion
 
-        #region public Double Cost { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [TableColumn("Cost")]
-        public Double Cost { get; set; }
-        #endregion
+		#region public Double Cost { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		[TableColumn("Cost")]
+		public Double Cost { get; set; }
+		#endregion
 
-        #region public void ResetMathData()
-        public void ResetMathData()
-        {
-            AfterForecastResourceRemain = null;
-            NextPerformances.Clear();
-        }
-        #endregion
+		#region public void ResetMathData()
+		public void ResetMathData()
+		{
+			AfterForecastResourceRemain = null;
+			NextPerformances.Clear();
+		}
+		#endregion
 
-        #endregion
+		#endregion
 
-        #region Implement of IKitRequired
+		#region Implement of IKitRequired
 
-        #region public string KitParentString { get; }
-        /// <summary>
-        /// Возвращает строку для описания родителя КИТа
-        /// </summary>
-        public string KitParentString
-        {
-            get { return string.Format("Dir.:{0}:{1}", Title, WorkType); }
-        }
-        #endregion
+		#region public string KitParentString { get; }
+		/// <summary>
+		/// Возвращает строку для описания родителя КИТа
+		/// </summary>
+		public string KitParentString
+		{
+			get { return string.Format("Dir.:{0}:{1}", Title, WorkType); }
+		}
+		#endregion
 
-        #region public CommonCollection<AccessoryRequired> Kits
+		#region public CommonCollection<AccessoryRequired> Kits
 
-        private CommonCollection<AccessoryRequired> _kits;
+		private CommonCollection<AccessoryRequired> _kits;
 
-	    [Child(RelationType.OneToMany, "ParentId", "ParentTypeId", 1, "ParentObject")]
-        public CommonCollection<AccessoryRequired> Kits
-        {
-            get { return _kits ?? (_kits = new CommonCollection<AccessoryRequired>()); }
-            internal set
-            {
-                if (_kits != value)
-                {
-                    if (_kits != null)
-                        _kits.Clear();
-                    if (value != null)
-                        _kits = value;
-                }
-            }
-        }
-        #endregion
+		[Child(RelationType.OneToMany, "ParentId", "ParentTypeId", 1, "ParentObject")]
+		public CommonCollection<AccessoryRequired> Kits
+		{
+			get { return _kits ?? (_kits = new CommonCollection<AccessoryRequired>()); }
+			internal set
+			{
+				if (_kits != value)
+				{
+					if (_kits != null)
+						_kits.Clear();
+					if (value != null)
+						_kits = value;
+				}
+			}
+		}
+		#endregion
 
-        #endregion
+		#endregion
 
-        #region Implement of ICompdreble
+		#region Implement of ICompdreble
 
-        public int CompareTo(Directive y)
-        {
-            return ItemId.CompareTo(y.ItemId);
-        }
+		public int CompareTo(Directive y)
+		{
+			return ItemId.CompareTo(y.ItemId);
+		}
 
-        #endregion
+		#endregion
 
-        #region Implement IPrintSettings
+		#region Implement IPrintSettings
 
-        #region public bool PrintInWorkPackage { get; set; }
-        /// <summary>
-        /// Возвращает или задает значение, показвающее настройку печати элемента в Рабочем пакете
-        /// </summary>
-        public bool PrintInWorkPackage { get; set; }
+		#region public bool PrintInWorkPackage { get; set; }
+		/// <summary>
+		/// Возвращает или задает значение, показвающее настройку печати элемента в Рабочем пакете
+		/// </summary>
+		public bool PrintInWorkPackage { get; set; }
 
-        #region public bool WorkPackageACCPrintTitle { get; set; }
-        /// <summary>
-        /// Возвращает или задает значение, показвающее печать НАЗВАНИЯ задачи в AccountabilitySheet рабочего пакета
-        /// </summary>
-        public bool WorkPackageACCPrintTitle { get; set; }
-        #endregion
+		#region public bool WorkPackageACCPrintTitle { get; set; }
+		/// <summary>
+		/// Возвращает или задает значение, показвающее печать НАЗВАНИЯ задачи в AccountabilitySheet рабочего пакета
+		/// </summary>
+		public bool WorkPackageACCPrintTitle { get; set; }
+		#endregion
 
-        #region public bool WorkPackageACCPrintTaskCard { get; set; }
-        /// <summary>
-        /// Возвращает или задает значение, показвающее печать РАБОЧЕЙ КАРТЫ задачи в AccountabilitySheet рабочего пакета
-        /// </summary>
-        public bool WorkPackageACCPrintTaskCard { get; set; }
+		#region public bool WorkPackageACCPrintTaskCard { get; set; }
+		/// <summary>
+		/// Возвращает или задает значение, показвающее печать РАБОЧЕЙ КАРТЫ задачи в AccountabilitySheet рабочего пакета
+		/// </summary>
+		public bool WorkPackageACCPrintTaskCard { get; set; }
 		#endregion
 
 		#endregion
@@ -1051,46 +1065,46 @@ namespace SmartCore.Entities.General.Directives
 		/// </summary>
 		/// <returns></returns>
 		public new Directive GetCopyUnsaved()
-        {
-            var directive = (Directive)MemberwiseClone();
-            directive.ItemId = -1;
-            directive.UnSetEvents();
+		{
+			var directive = (Directive)MemberwiseClone();
+			directive.ItemId = -1;
+			directive.UnSetEvents();
 
-            directive.Threshold = new DirectiveThreshold(Threshold.ToBinary(),ThrldTypeCond);
-            directive.ForecastLifelength = new Lifelength(ForecastLifelength);
-            directive.AfterForecastResourceRemain = new Lifelength(AfterForecastResourceRemain);
+			directive.Threshold = new DirectiveThreshold(Threshold.ToBinary(),ThrldTypeCond);
+			directive.ForecastLifelength = new Lifelength(ForecastLifelength);
+			directive.AfterForecastResourceRemain = new Lifelength(AfterForecastResourceRemain);
 
-            directive._performanceRecords = new BaseRecordCollection<DirectiveRecord>();
-            foreach (var performanceRecord in PerformanceRecords)
-            {
-                var newObject = performanceRecord.GetCopyUnsaved();
-                newObject.Parent = directive;
-                directive._performanceRecords.Add(newObject);
-            }
-            
-            directive._aircraftWorkerCategories = new CommonCollection<CategoryRecord>();
-            foreach (var categoryRecord in CategoriesRecords)
-            {
-                var newObject = categoryRecord.GetCopyUnsaved();
-                newObject.Parent = directive;
-                directive._aircraftWorkerCategories.Add(newObject);
-            }
+			directive._performanceRecords = new BaseRecordCollection<DirectiveRecord>();
+			foreach (var performanceRecord in PerformanceRecords)
+			{
+				var newObject = performanceRecord.GetCopyUnsaved();
+				newObject.Parent = directive;
+				directive._performanceRecords.Add(newObject);
+			}
+			
+			directive._aircraftWorkerCategories = new CommonCollection<CategoryRecord>();
+			foreach (var categoryRecord in CategoriesRecords)
+			{
+				var newObject = categoryRecord.GetCopyUnsaved();
+				newObject.Parent = directive;
+				directive._aircraftWorkerCategories.Add(newObject);
+			}
 
-            directive.NextPerformances = new List<NextPerformance>();
-            foreach (var nextPerformance in NextPerformances)
-            {
-                var newObject = nextPerformance.GetCopyUnsaved();
-                newObject.Parent = directive;
-                directive.NextPerformances.Add(newObject);
-            }
+			directive.NextPerformances = new List<NextPerformance>();
+			foreach (var nextPerformance in NextPerformances)
+			{
+				var newObject = nextPerformance.GetCopyUnsaved();
+				newObject.Parent = directive;
+				directive.NextPerformances.Add(newObject);
+			}
 
-            directive._kits = new CommonCollection<AccessoryRequired>();
-            foreach (var accessoryRequired in Kits)
-            {
-                var newObject = accessoryRequired.GetCopyUnsaved();
-                newObject.ParentObject = directive;
-                directive._kits.Add(newObject);
-            }
+			directive._kits = new CommonCollection<AccessoryRequired>();
+			foreach (var accessoryRequired in Kits)
+			{
+				var newObject = accessoryRequired.GetCopyUnsaved();
+				newObject.ParentObject = directive;
+				directive._kits.Add(newObject);
+			}
 
 			directive._files = new CommonCollection<ItemFileLink>();
 			foreach (var file in Files)
@@ -1100,7 +1114,7 @@ namespace SmartCore.Entities.General.Directives
 			}
 
 			return directive;
-        }
+		}
 		#endregion
 		/*
 		*  Методы 
@@ -1111,88 +1125,88 @@ namespace SmartCore.Entities.General.Directives
 		/// Создает директиву без дополнительной информации
 		/// </summary>
 		public Directive()
-        {
-            SmartCoreObjectType = SmartCoreType.Directive;
-            // Задаем все String
-            Title = Remarks = Applicability = Description = EngineeringOrders =
-                    KitRequired = HiddenRemarks = "";
+		{
+			SmartCoreObjectType = SmartCoreType.Directive;
+			// Задаем все String
+			Title = Remarks = Applicability = Description = EngineeringOrders =
+					KitRequired = HiddenRemarks = "";
 
-            ATAChapter = new AtaChapter {ItemId = -1}; 
-            
-            IsClosed = false;
-            // Ad директива
-            DirectiveType = DirectiveType.AirworthenessDirectives;
-            // тип работ данной директивы
-            WorkType = DirectiveWorkType.Inspection;
+			ATAChapter = new AtaChapter {ItemId = -1}; 
+			
+			IsClosed = false;
+			// Ad директива
+			DirectiveType = DirectiveType.AirworthenessDirectives;
+			// тип работ данной директивы
+			WorkType = DirectiveWorkType.Inspection;
 
-            // Задаем все String
-            Title = Remarks = EngineeringOrders = Paragraph = KitRequired = HiddenRemarks = "";
+			// Задаем все String
+			Title = Remarks = EngineeringOrders = Paragraph = KitRequired = HiddenRemarks = "";
 
-            // Создаем объекты, чтобы они были не null
-            _threshold = new DirectiveThreshold();
+			// Создаем объекты, чтобы они были не null
+			_threshold = new DirectiveThreshold();
 
-            // Создаем колелкции
-            _performanceRecords = new BaseRecordCollection<DirectiveRecord>();
-            Kits = new CommonCollection<AccessoryRequired>();
+			// Создаем колелкции
+			_performanceRecords = new BaseRecordCollection<DirectiveRecord>();
+			Kits = new CommonCollection<AccessoryRequired>();
 			NDTType = NDTType.UNK;
 			PrintInWorkPackage = true;
-        }
-        #endregion
+		}
+		#endregion
 
-        #region public Directive(TemplateDirective templateDirective) : this()
-        /// <summary>
-        /// Создает директиву на основе шаблона
-        /// </summary>
-        public Directive(TemplateDirective templateDirective) : this()
-        {
-            ADNoFile = templateDirective.ADNoFile;
-            ADType = templateDirective.ADType;
-            Applicability = templateDirective.Applicability;
-            ATAChapter = templateDirective.ATAChapter ?? new AtaChapter { ItemId = -1 };
-            Cost = templateDirective.Cost;
-            Description = templateDirective.Description;
-            DirectiveType = templateDirective.DirectiveType;
-            EngineeringOrders = templateDirective.EngineeringOrders;
-            EngineeringOrderFile = templateDirective.EngineeringOrderFile;
-		    Highlight = templateDirective.Highlight;
-		    HiddenRemarks = templateDirective.HiddenRemarks;
-            KitRequired = templateDirective.KitRequired;
-            ManHours = templateDirective.ManHours;
-            NDTType = templateDirective.NDTType;
-            Paragraph = templateDirective.Paragraph;
-            Remarks = templateDirective.Remarks;
-            ServiceBulletinNo = templateDirective.ServiceBulletinNo;
-            ServiceBulletinFile = templateDirective.ServiceBulletinFile;
-            Title = templateDirective.Title;
-            _threshold = templateDirective.Threshold;
-            WorkType = templateDirective.DirectiveWorkType;
-        }
-        #endregion
+		#region public Directive(TemplateDirective templateDirective) : this()
+		/// <summary>
+		/// Создает директиву на основе шаблона
+		/// </summary>
+		public Directive(TemplateDirective templateDirective) : this()
+		{
+			ADNoFile = templateDirective.ADNoFile;
+			ADType = templateDirective.ADType;
+			Applicability = templateDirective.Applicability;
+			ATAChapter = templateDirective.ATAChapter ?? new AtaChapter { ItemId = -1 };
+			Cost = templateDirective.Cost;
+			Description = templateDirective.Description;
+			DirectiveType = templateDirective.DirectiveType;
+			EngineeringOrders = templateDirective.EngineeringOrders;
+			EngineeringOrderFile = templateDirective.EngineeringOrderFile;
+			Highlight = templateDirective.Highlight;
+			HiddenRemarks = templateDirective.HiddenRemarks;
+			KitRequired = templateDirective.KitRequired;
+			ManHours = templateDirective.ManHours;
+			NDTType = templateDirective.NDTType;
+			Paragraph = templateDirective.Paragraph;
+			Remarks = templateDirective.Remarks;
+			ServiceBulletinNo = templateDirective.ServiceBulletinNo;
+			ServiceBulletinFile = templateDirective.ServiceBulletinFile;
+			Title = templateDirective.Title;
+			_threshold = templateDirective.Threshold;
+			WorkType = templateDirective.DirectiveWorkType;
+		}
+		#endregion
 
-        #region public override int CompareTo(object y)
-        public override int CompareTo(object y)
-        {
-            if(y is Directive) return ItemId.CompareTo(((Directive) y).ItemId);
-            return 0;
-        }
-        #endregion
+		#region public override int CompareTo(object y)
+		public override int CompareTo(object y)
+		{
+			if(y is Directive) return ItemId.CompareTo(((Directive) y).ItemId);
+			return 0;
+		}
+		#endregion
 
-        #region private static Type GetCurrentType()
-        private static Type GetCurrentType()
-        {
-            return _thisType ?? (_thisType = typeof(Directive));
-        }
-        #endregion
+		#region private static Type GetCurrentType()
+		private static Type GetCurrentType()
+		{
+			return _thisType ?? (_thisType = typeof(Directive));
+		}
+		#endregion
 
-        #region public override string ToString()
-        /// <summary>
-        /// Перегружаем для отладки
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return Title + " " + Description;
-        }
+		#region public override string ToString()
+		/// <summary>
+		/// Перегружаем для отладки
+		/// </summary>
+		/// <returns></returns>
+		public override string ToString()
+		{
+			return Title + " " + Description;
+		}
 		#endregion
 
 		#region public void NormalizeItemRelations()

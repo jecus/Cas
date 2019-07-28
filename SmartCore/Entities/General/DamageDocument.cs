@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Drawing;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;

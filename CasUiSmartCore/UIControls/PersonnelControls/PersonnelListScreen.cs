@@ -9,7 +9,7 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
-using EFCore.DTO.Dictionaries;
+using EntityCore.DTO.Dictionaries;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -18,7 +18,7 @@ using SmartCore.Entities.General.Personnel;
 using SmartCore.Filters;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
-using Filter = EFCore.Filter.Filter;
+using Filter = EntityCore.Filter.Filter;
 
 namespace CAS.UI.UIControls.PersonnelControls
 {
@@ -219,7 +219,6 @@ namespace CAS.UI.UIControls.PersonnelControls
 		#endregion
 
 		#region private void ButtonDeleteClick(object sender, EventArgs e)
-
 		private void ButtonDeleteClick(object sender, EventArgs e)
 		{
 			if (_directivesViewer.SelectedItems == null ||
@@ -236,18 +235,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			if (confirmResult == DialogResult.Yes)
 			{
 				_directivesViewer.radGridView1.BeginUpdate();
-				foreach (Specialist directive in _directivesViewer.SelectedItems)
-				{
-					try
-					{
-						GlobalObjects.CasEnvironment.NewKeeper.Delete(directive, true);
-					}
-					catch (Exception ex)
-					{
-						Program.Provider.Logger.Log("Error while deleting data", ex);
-						return;
-					}
-				}
+				GlobalObjects.CasEnvironment.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
 				_directivesViewer.radGridView1.EndUpdate();
 				AnimatedThreadWorker.RunWorkerAsync();
 			}

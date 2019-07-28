@@ -450,7 +450,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 		#endregion
 
 		#region private void ButtonDeleteClick(object sender, EventArgs e)
-
+		
 		private void ButtonDeleteClick(object sender, EventArgs e)
 		{
 			if (_directivesViewer.SelectedItems == null) return;
@@ -464,22 +464,9 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 
 			if (confirmResult == DialogResult.Yes)
 			{
-				int count = _directivesViewer.SelectedItems.Count;
-
 				var selectedItems = new List<ILogistic>();
 				selectedItems.AddRange(_directivesViewer.SelectedItems.ToArray());
-				for (int i = 0; i < count; i++)
-				{
-					try
-					{
-						GlobalObjects.CasEnvironment.Manipulator.Delete(selectedItems[i] as BaseEntityObject);
-					}
-					catch (Exception ex)
-					{
-						Program.Provider.Logger.Log("Error while deleting data", ex);
-						return;
-					}
-				}
+				GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
 				AnimatedThreadWorker.RunWorkerAsync();
 			}
 			else

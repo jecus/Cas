@@ -460,7 +460,6 @@ namespace CAS.UI.UIControls.Reliability
 		#endregion
 
 		#region private void ButtonDeleteClick(object sender, EventArgs e)
-
 		private void ButtonDeleteClick(object sender, EventArgs e)
 		{
 			DeleteWorkPackage(); 
@@ -511,18 +510,7 @@ namespace CAS.UI.UIControls.Reliability
 			{
 				_directivesViewer.radGridView1.BeginUpdate();
 
-				foreach (Discrepancy item in _directivesViewer.SelectedItems)
-				{
-					try
-					{
-						GlobalObjects.CasEnvironment.Manipulator.Delete(item);
-					}
-					catch (Exception ex)
-					{
-						Program.Provider.Logger.Log("Error while deleting data", ex);
-						return;
-					}
-				}
+				GlobalObjects.CasEnvironment.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
 				_directivesViewer.radGridView1.EndUpdate();
 
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;

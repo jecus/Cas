@@ -6,10 +6,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
-using EFCore.DTO;
-using EFCore.DTO.Dictionaries;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using CAS.UI.Helpers;
+using EntityCore.DTO.General;
+using EntityCore.DTO;
+using EntityCore.DTO.Dictionaries;
+using EntityCore.Filter;
 using SmartCore.DtoHelper;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -29,6 +30,7 @@ namespace SmartCore.Entities.NewLoader
 		#region Fields
 
 		private readonly CasEnvironment _casEnvironment;
+		private readonly ApiProvider _provider;
 
 		#endregion
 
@@ -37,210 +39,18 @@ namespace SmartCore.Entities.NewLoader
 		public NewLoader(CasEnvironment casEnvironment)
 		{
 			_casEnvironment = casEnvironment;
+			_provider = _casEnvironment.ApiProvider;
 		}
 
 		#endregion
 
-		#region Async
-
-		public async Task<TOut> GetObjectByIdAsync<T, TOut>(int id, bool loadChild = false) where T : BaseEntity, new() where TOut : BaseEntityObject, new()
-		{
-			if (!typeof(T).IsSubclassOf(typeof(BaseEntity)))
-				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
-
-			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntityObject)))
-				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
-
-			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
-
-			if (repo == null)
-				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
-
-			var dto = await repo.GetObjectByIdAsync(id, loadChild);
-
-			if (dto == null)
-				return null;
-
-			var methodName = GetConverterMethodName(typeof(TOut));
-			var method = GetMethod(typeof(T), methodName);
-
-			return InvokeConverter<T, TOut>(dto, method);
-		}
-
-		public async Task<TOut> GetObjectAsync<T, TOut>(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false, bool getAll = false) where T : BaseEntity, new() where TOut : BaseEntityObject, new()
-		{
-			if (!typeof(T).IsSubclassOf(typeof(BaseEntity)))
-				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
-
-			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntityObject)))
-				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
-
-			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
-
-			if (repo == null)
-				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
-
-			var dto = await repo.GetObjectAsync(filters, loadChild, getDeleted, getAll);
-
-			if (dto == null)
-				return null;
-
-			var methodName = GetConverterMethodName(typeof(TOut));
-			var method = GetMethod(typeof(T), methodName);
-			return InvokeConverter<T, TOut>(dto, method);
-		}
-
-		public async Task<TOut> GetObjectAsync<T, TOut>(Filter filter, bool loadChild = false, bool getDeleted = false, bool getAll = false) where T : BaseEntity, new() where TOut : BaseEntityObject, new()
-		{
-			if (!typeof(T).IsSubclassOf(typeof(BaseEntity)))
-				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
-
-			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntityObject)))
-				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
-
-			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
-
-			if (repo == null)
-				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
-
-			var dto = await repo.GetObjectAsync(new[] { filter }, loadChild, getDeleted, getAll);
-
-			if (dto == null)
-				return null;
-
-			var methodName = GetConverterMethodName(typeof(TOut));
-			var method = GetMethod(typeof(T), methodName);
-			return InvokeConverter<T, TOut>(dto, method);
-		}
-
-		public async Task<List<TOut>> GetObjectListAsync<T, TOut>(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false) where T : BaseEntity, new() where TOut : BaseEntityObject, new()
-		{
-			if (!typeof(T).IsSubclassOf(typeof(BaseEntity)))
-				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
-
-			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntityObject)))
-				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
-
-			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
-
-			if (repo == null)
-				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
-
-			var res = new List<TOut>();
-			var dtos = await repo.GetObjectListAsync(filters, loadChild, getDeleted);
-
-			if (dtos == null)
-				return res;
-
-			var methodName = GetConverterMethodName(typeof(TOut));
-			var method = GetMethod(typeof(T), methodName);
-			res.AddRange(dtos.Select(i => InvokeConverter<T, TOut>(i, method)));
-
-			return res;
-
-		}
-
-		public async Task<List<TOut>> GetObjectListAsync<T, TOut>(Filter filter, bool loadChild = false, bool getDeleted = false) where T : BaseEntity, new() where TOut : BaseEntityObject, new()
-		{
-			if (!typeof(T).IsSubclassOf(typeof(BaseEntity)))
-				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
-
-			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntityObject)))
-				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
-
-			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
-
-			if (repo == null)
-				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
-			var res = new List<TOut>();
-			var dtos = await repo.GetObjectListAsync(new[] { filter }, loadChild, getDeleted);
-
-			if (dtos == null)
-				return res;
-
-			var methodName = GetConverterMethodName(typeof(TOut));
-			var method = GetMethod(typeof(T), methodName);
-			res.AddRange(dtos.Select(i => InvokeConverter<T, TOut>(i, method)));
-
-			return res;
-
-		}
-
-		public async Task<List<TOut>> GetObjectListAllAsync<T, TOut>(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false) where T : BaseEntity, new() where TOut : BaseEntityObject, new()
-		{
-			if (!typeof(T).IsSubclassOf(typeof(BaseEntity)))
-				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
-
-			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntityObject)))
-				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
-
-			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
-
-			if (repo == null)
-				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
-
-			var res = new List<TOut>();
-			var dtos = await repo.GetObjectListAllAsync(filters, loadChild, getDeleted);
-
-			if (dtos == null)
-				return res;
-
-			var methodName = GetConverterMethodName(typeof(TOut));
-			var method = GetMethod(typeof(T), methodName);
-			res.AddRange(dtos.Select(i => InvokeConverter<T, TOut>(i, method)));
-
-			return res;
-
-		}
-
-		public async Task<List<TOut>> GetObjectListAllAsync<T, TOut>(Filter filter, bool loadChild = false, bool getDeleted = false) where T : BaseEntity, new() where TOut : BaseEntityObject, new()
-		{
-			if (!typeof(T).IsSubclassOf(typeof(BaseEntity)))
-				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
-
-			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntityObject)))
-				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
-
-			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
-
-			if (repo == null)
-				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
-
-			var res = new List<TOut>();
-			var dtos = await repo.GetObjectListAllAsync(filter != null ? new[] { filter } : null, loadChild, getDeleted);
-
-			if (dtos == null)
-				return res;
-
-			var methodName = GetConverterMethodName(typeof(TOut));
-			var method = GetMethod(typeof(T), methodName);
-			res.AddRange(dtos.Select(i => InvokeConverter<T, TOut>(i, method)));
-
-			return res;
-
-		}
-
-
-		#endregion
-
-		public IList<TU> GetSelectColumnOnly<T, TU>(Expression<Func<T, bool>> exp, Expression<Func<T, TU>> columns) where T : BaseEntity where TU : new()
-		{
-			if (!typeof(T).IsSubclassOf(typeof(BaseEntity)))
-				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
-
-			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
-
-			return repo.GetSelectColumnOnly(exp, columns);
-		}
 
 		public IList<int> GetSelectColumnOnly<T>(IEnumerable<Filter> filters, string selectProperty) where T : BaseEntity
 		{
 			if (!typeof(T).IsSubclassOf(typeof(BaseEntity)))
 				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
 
-			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
-
-			return repo.GetSelectColumnOnly(filters, selectProperty);
+			return _provider.GetSelectColumnOnly<T>(filters, selectProperty);
 		}
 
 		public TOut GetObjectById<T, TOut>(int id, bool loadChild = false) where T : BaseEntity, new() where TOut : BaseEntityObject, new()
@@ -251,12 +61,7 @@ namespace SmartCore.Entities.NewLoader
 			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
-
-			if (repo == null)
-				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
-
-			var dto = repo.GetObjectById(id, loadChild);
+			var dto = _provider.GetObjectById<T>(id, loadChild);
 
 			if (dto == null)
 				return null;
@@ -275,12 +80,7 @@ namespace SmartCore.Entities.NewLoader
 			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
-
-			if (repo == null)
-				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
-
-			var dto = repo.GetObject(filters, loadChild, getDeleted, getAll);
+			var dto = _provider.GetObject<T>(filters, loadChild, getDeleted, getAll);
 
 			if (dto == null)
 				return null;
@@ -292,25 +92,7 @@ namespace SmartCore.Entities.NewLoader
 
 		public TOut GetObject<T, TOut>(Filter filter, bool loadChild = false, bool getDeleted = false, bool getAll = false) where T : BaseEntity, new() where TOut : BaseEntityObject, new()
 		{
-			if (!typeof(T).IsSubclassOf(typeof(BaseEntity)))
-				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
-
-			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntityObject)))
-				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
-
-			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
-
-			if (repo == null)
-				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
-
-			var dto = repo.GetObject(new []{filter}, loadChild, getDeleted, getAll);
-
-			if (dto == null)
-				return null;
-
-			var methodName = GetConverterMethodName(typeof(TOut));
-			var method = GetMethod(typeof(T), methodName);
-			return InvokeConverter<T, TOut>(dto, method);
+			return GetObject<T, TOut>(new[] {filter}, loadChild, getDeleted, getAll);
 		}
 
 		public IList<TOut> GetObjectList<T, TOut>(IEnumerable<Filter> filters = null, bool loadChild = false, bool getDeleted = false) where T : BaseEntity, new() where TOut : BaseEntityObject, new()
@@ -321,13 +103,8 @@ namespace SmartCore.Entities.NewLoader
 			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
-
-			if (repo == null)
-				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
-
 			var res = new List<TOut>();
-			var dtos = repo.GetObjectList(filters, loadChild, getDeleted);
+			var dtos = _provider.GetObjectList<T>(filters, loadChild, getDeleted);
 
 			if (dtos == null)
 				return res;
@@ -342,28 +119,7 @@ namespace SmartCore.Entities.NewLoader
 
 		public IList<TOut> GetObjectList<T, TOut>(Filter filter, bool loadChild = false, bool getDeleted = false) where T : BaseEntity, new() where TOut : BaseEntityObject, new()
 		{
-			if (!typeof(T).IsSubclassOf(typeof(BaseEntity)))
-				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
-
-			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntityObject)))
-				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
-
-			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
-
-			if (repo == null)
-				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
-			var res = new List<TOut>();
-			var dtos = repo.GetObjectList(new []{ filter }, loadChild, getDeleted);
-
-			if (dtos == null)
-				return res;
-
-			var methodName = GetConverterMethodName(typeof(TOut));
-			var method = GetMethod(typeof(T), methodName);
-			res.AddRange(dtos.Select(i => InvokeConverter<T, TOut>(i, method)));
-
-			return res;
-
+			return GetObjectList<T, TOut>(new[] {filter}, loadChild, getDeleted);
 		}
 
 		public IList GetObjectList(Type dtoType, Type blType, bool loadChild = false, bool getDeleted = false)
@@ -394,13 +150,8 @@ namespace SmartCore.Entities.NewLoader
 			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
-
-			if (repo == null)
-				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
-
 			var res = new List<TOut>();
-			var dtos = repo.GetObjectListAll(filters, loadChild, getDeleted);
+			var dtos = _provider.GetObjectListAll<T>(filters, loadChild, getDeleted);
 
 			if (dtos == null)
 				return res;
@@ -415,31 +166,8 @@ namespace SmartCore.Entities.NewLoader
 
 		public IList<TOut> GetObjectListAll<T, TOut>(Filter filter, bool loadChild = false, bool getDeleted = false) where T : BaseEntity, new() where TOut : BaseEntityObject, new()
 		{
-			if (!typeof(T).IsSubclassOf(typeof(BaseEntity)))
-				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
-
-			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntityObject)))
-				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
-
-			var repo = _casEnvironment.UnitOfWork.GetRepository<T>();
-
-			if (repo == null)
-				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
-
-			var res = new List<TOut>();
-			var dtos = repo.GetObjectListAll( filter != null ? new[] { filter } : null, loadChild, getDeleted);
-
-			if (dtos == null)
-				return res;
-
-			var methodName = GetConverterMethodName(typeof(TOut));
-			var method = GetMethod(typeof(T), methodName);
-			res.AddRange(dtos.Select(i => InvokeConverter<T, TOut>(i, method)));
-
-			return res;
-
+			return GetObjectListAll<T, TOut>(new[] {filter}, loadChild, getDeleted);
 		}
-
 
 		public void GetDictionaries()
 		{
@@ -566,7 +294,7 @@ namespace SmartCore.Entities.NewLoader
 			_casEnvironment.WorkShops = new CommonCollection<WorkShop>(GetObjectListAll<WorkShopDTO, WorkShop>());
 #endif
 			// Загрузка всех базовых агрегатов
-			_casEnvironment.BaseComponents = new BaseComponentCollection(GetObjectListAll<ComponentDTO, BaseComponent>(new Filter("IsBaseComponent", true),true)); //GetBaseDetails();
+			_casEnvironment.BaseComponents = new BaseComponentCollection(GetObjectListAll<BaseComponentDTO, BaseComponent>(loadChild:true)); //GetBaseDetails();
 
 			// Выставляем ссылки между объектами
 
@@ -705,7 +433,7 @@ namespace SmartCore.Entities.NewLoader
 				return;
 
 			//TODO пересмотреть подход!!!!!!!!!!
-			var bc = GetObjectListAll<ComponentDTO, BaseComponent>(new Filter("IsBaseComponent", true));
+			var bc = GetObjectListAll<BaseComponentDTO, BaseComponent>();
 			var baseComponents = bc.Where(i => i.TransferRecords.OrderBy(t => t.TransferDate).Any(q => q.DestinationObjectId == aircraft.ItemId));
 			
 			foreach (var baseComponent in baseComponents)

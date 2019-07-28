@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using SmartCore.Entities.General.Interfaces;
 
 namespace SmartCore.AuditMongo.Repository

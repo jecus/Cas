@@ -11,8 +11,8 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.ScheduleControls.Trip;
 using CASTerms;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using SmartCore.Auxiliary;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -21,7 +21,6 @@ using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.Schedule;
 using SmartCore.Filters;
 using Telerik.WinControls.UI;
-using Component = SmartCore.Entities.General.Accessory.Component;
 
 namespace CAS.UI.UIControls.ScheduleControls
 {
@@ -505,7 +504,6 @@ namespace CAS.UI.UIControls.ScheduleControls
 		#endregion
 
 		#region private void ButtonDeleteClick(object sender, EventArgs e)
-
 		private void ButtonDeleteClick(object sender, EventArgs e)
 		{
 			if (_directivesViewer.SelectedItems == null ||
@@ -522,18 +520,7 @@ namespace CAS.UI.UIControls.ScheduleControls
 			if (confirmResult == DialogResult.Yes)
 			{
 				_directivesViewer.radGridView1.BeginUpdate();
-				foreach (var directive in _directivesViewer.SelectedItems)
-				{
-					try
-					{
-						GlobalObjects.CasEnvironment.NewKeeper.Delete(directive as BaseEntityObject, true);
-					}
-					catch (Exception ex)
-					{
-						Program.Provider.Logger.Log("Error while deleting data", ex);
-						return;
-					}
-				}
+				GlobalObjects.CasEnvironment.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
 				_directivesViewer.radGridView1.EndUpdate();
 				AnimatedThreadWorker.RunWorkerAsync();
 			}

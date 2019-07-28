@@ -75,7 +75,7 @@ namespace CAS.UI.UIControls.Users
 		#endregion
 
 		#region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
-		protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
+		protected override async void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
 		{
 			_initial.Clear();
 			_result.Clear();
@@ -84,7 +84,7 @@ namespace CAS.UI.UIControls.Users
 
 			try
 			{
-				var userDto = GlobalObjects.CasEnvironment.GetAllUsers();
+				var userDto = GlobalObjects.CasEnvironment.ApiProvider.GetAllUsersAsync();
 				_initial.AddRange(userDto.Select(i => new User(i)));
 			}
 			catch(Exception ex)
@@ -135,7 +135,6 @@ namespace CAS.UI.UIControls.Users
 		#endregion
 
 		#region private void ButtonDeleteClick(object sender, EventArgs e)
-
 		private void ButtonDeleteClick(object sender, EventArgs e)
 		{
 			if (_directivesViewer.SelectedItems == null) return;
@@ -149,22 +148,9 @@ namespace CAS.UI.UIControls.Users
 
 			if (confirmResult == DialogResult.Yes)
 			{
-				int count = _directivesViewer.SelectedItems.Count;
-
 				var selectedItems = new List<User>();
 				selectedItems.AddRange(_directivesViewer.SelectedItems.ToArray());
-				for (int i = 0; i < count; i++)
-				{
-					try
-					{
-						GlobalObjects.CasEnvironment.GetSeviceUser().DeleteUser(selectedItems[i].ItemId);
-					}
-					catch (Exception ex)
-					{
-						Program.Provider.Logger.Log("Error while deleting data", ex);
-						return;
-					}
-				}
+				GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
 
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;

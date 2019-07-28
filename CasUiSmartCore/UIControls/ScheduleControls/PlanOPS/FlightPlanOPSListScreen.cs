@@ -7,7 +7,7 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Schedule;
@@ -216,7 +216,6 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 		#endregion
 
 		#region private void ButtonDeleteClick(object sender, EventArgs e)
-
 		private void ButtonDeleteClick(object sender, EventArgs e)
 		{
 			if (_directivesViewer.SelectedItems == null)
@@ -230,11 +229,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 				{
 					_directivesViewer.radGridView1.BeginUpdate();
 
-					foreach (var item in _directivesViewer.SelectedItems)
-					{
-						GlobalObjects.CasEnvironment.Execute($"delete from FlightPlanOpsRecords where FlightPlanOpsId = {item.ItemId}");
-						GlobalObjects.CasEnvironment.NewKeeper.Delete(item);
-					}
+					GlobalObjects.CasEnvironment.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
 
 					_directivesViewer.radGridView1.EndUpdate();
 				}

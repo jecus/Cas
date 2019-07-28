@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using SmartCore.Calculations;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
@@ -163,28 +163,6 @@ namespace SmartCore.Aircrafts
 				throw new Exception($"1156: Parent object is not set to directive {directive.ItemId}");
 			}
 			return null;
-		}
-
-		private void LoadChild(IEnumerable<Aircraft> aircrafts)
-		{
-			if (aircrafts == null)
-				return;
-
-			var ids = aircrafts.Select(i => i.ItemId).ToList();
-			var aircraftEquipments = _newLoader.GetObjectList<AircraftEquipmentDTO, AircraftEquipments>(new Filter("AircraftId", ids), true);
-
-			foreach (var aircraft in aircrafts)
-			{
-				aircraft.AircraftEquipments.AddRange(aircraftEquipments.Where(i => i.AircraftId == aircraft.ItemId));
-				aircraft.AircraftFrameId = _newLoader.GetSelectColumnOnly<ComponentDTO, int>(i => !i.IsDeleted && i.IsBaseComponent &&
-																								  i.BaseComponentTypeId == BaseComponentType.Frame.ItemId &&
-																								  i.TransferRecords
-																									  .Where(t =>t.ParentType == 6 && t.DestinationObjectType == 7 &&
-																												 t.ParentID == i.ItemId).Select(y => y.DestinationObjectID)
-																									  .Any(q => q.Value == aircraft.ItemId),
-					i => i.ItemId).FirstOrDefault();
-
-			}
 		}
 
 	}

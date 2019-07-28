@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
-using EFCore.DTO.Dictionaries;
-using EFCore.Filter;
+using EntityCore.DTO.Dictionaries;
+using EntityCore.Filter;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 

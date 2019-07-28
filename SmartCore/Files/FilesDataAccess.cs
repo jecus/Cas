@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using SmartCore.Entities.NewLoader;
 
 namespace SmartCore.Files

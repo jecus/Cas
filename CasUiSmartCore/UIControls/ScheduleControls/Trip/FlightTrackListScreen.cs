@@ -227,7 +227,6 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 		#endregion
 
 		#region private void ButtonDeleteClick(object sender, EventArgs e)
-
 		private void ButtonDeleteClick(object sender, EventArgs e)
 		{
 			if (_directivesViewer.SelectedItems == null ||
@@ -243,20 +242,7 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 			if (confirmResult == DialogResult.Yes)
 			{
 				_directivesViewer.radGridView1.BeginUpdate();
-				foreach (var directive in _directivesViewer.SelectedItems)
-				{
-					try
-					{
-						GlobalObjects.CasEnvironment.NewKeeper.Delete(directive.FlightTrack);
-						foreach (var record in directive.FlightTrack.FlightTripRecord)
-							GlobalObjects.CasEnvironment.NewKeeper.Delete(record);
-					}
-					catch (Exception ex)
-					{
-						Program.Provider.Logger.Log("Error while deleting data", ex);
-						return;
-					}
-				}
+				GlobalObjects.CasEnvironment.NewKeeper.Delete(_directivesViewer.SelectedItems.OfType<BaseEntityObject>().ToList(), true);
 				_directivesViewer.radGridView1.EndUpdate();
 				AnimatedThreadWorker.RunWorkerAsync();
 			}

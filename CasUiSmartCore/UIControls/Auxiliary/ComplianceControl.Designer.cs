@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using AvControls.AvButtonT;
 using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 
 namespace CAS.UI.UIControls.Auxiliary
 {

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using SmartCore.Aircrafts;
 using SmartCore.Auxiliary;
 using SmartCore.Auxiliary.Extentions;
@@ -230,7 +230,7 @@ namespace SmartCore.Component
 				new Filter("IsBaseComponent",false),
 				new Filter("ItemId", componentIds)
 			}, getDeleted: getDeleted);
-			var baseComponents = _newLoader.GetObjectListAll<ComponentDTO, BaseComponent>(new List<Filter>()
+			var baseComponents = _newLoader.GetObjectListAll<BaseComponentDTO, BaseComponent>(new List<Filter>()
 			{
 				new Filter("IsBaseComponent", true),
 				new Filter("ItemId", componentIds)
@@ -2050,7 +2050,7 @@ namespace SmartCore.Component
 		public BaseComponent GetFullBaseComponent(int baseComponentId)
 		{
 			//// Загружаем агрегат 
-			var baseComponent = _newLoader.GetObject<ComponentDTO, BaseComponent>(new List<Filter>()
+			var baseComponent = _newLoader.GetObject<BaseComponentDTO, BaseComponent>(new List<Filter>()
 			{
 				new Filter("IsBaseComponent", true),
 				new Filter("ItemId",baseComponentId)
@@ -2118,7 +2118,7 @@ namespace SmartCore.Component
 		/// </summary>
 		public void LoadBaseComponentsActualStateRecords()
 		{
-			var ids = _newLoader.GetSelectColumnOnly<ComponentDTO>(new []{ new Filter("IsBaseComponent", true) }, "ItemId");
+			var ids = _newLoader.GetSelectColumnOnly<BaseComponentDTO>(new []{ new Filter("IsBaseComponent", true) }, "ItemId");
 			var actuals = _newLoader.GetObjectListAll<ActualStateRecordDTO,ActualStateRecord>(new Filter("ComponentId", ids));
 
 			foreach (var t in actuals)
@@ -2146,7 +2146,7 @@ namespace SmartCore.Component
 		public void LoadBaseComponentsTransferRecords()
 		{
 			//Строка запроса, выдающая идентификаторы базовых деталей
-			var ids = _newLoader.GetSelectColumnOnly<ComponentDTO>( new []{ new Filter("IsBaseComponent", true) }, "ItemId");
+			var ids = _newLoader.GetSelectColumnOnly<BaseComponentDTO>( new []{ new Filter("IsBaseComponent", true) }, "ItemId");
 			var transfers = _newLoader.GetObjectListAll<TransferRecordDTO,TransferRecord>(new Filter("ParentID", ids));
 
 			foreach (var t in transfers)

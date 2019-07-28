@@ -2,7 +2,7 @@
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.HangarControls;
 using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 
 namespace CAS.UI.UIControls.OpepatorsControls
 {

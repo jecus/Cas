@@ -8,7 +8,6 @@ using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.Auxiliary.Comparers;
 using CASTerms;
 using Microsoft.VisualBasic.Devices;
 using SmartCore.Entities.Dictionaries;
@@ -272,11 +271,11 @@ namespace CAS.UI.UIControls.NewGrid
 				GroupingItems();
 				SortingItems();
 
-				radGridView1.MasterTemplate.CollapseAllGroups();
+				radGridView1.MasterTemplate.ExpandAllGroups();
 
 				radGridView1.RowFormatting += RadGridView1_RowFormatting;
 				radGridView1.CellFormatting += RadGridView1_CellFormatting;
-				radGridView1.MasterTemplate.ViewChanged += MasterTemplate_ViewChanged;
+				radGridView1.FilterChanged += RadGridView1_FilterChanged;
 			}
 			catch (Exception ex)
 			{
@@ -285,10 +284,11 @@ namespace CAS.UI.UIControls.NewGrid
 			}
 		}
 
-		private void MasterTemplate_ViewChanged(object sender, DataViewChangedEventArgs args)
+		private void RadGridView1_FilterChanged(object sender, GridViewCollectionChangedEventArgs e)
 		{
-			SetTotalText();
+			labelTotal.Text = "Total: " + e.GridViewTemplate.ChildRows.Count;
 		}
+
 
 		private void RadGridView1_CellFormatting(object sender, Telerik.WinControls.UI.CellFormattingEventArgs e)
 		{
@@ -319,6 +319,17 @@ namespace CAS.UI.UIControls.NewGrid
 
 				foreach (var cell in GetListViewSubItems(item))
 				{
+					if(cell != null)
+						cell.Text = cell.Text.Replace("\n", "");
+
+					if (rowInfo.Cells[i].ColumnInfo is GridViewDateTimeColumn)
+						rowInfo.Cells[i].Value = cell.Tag;
+					else
+						rowInfo.Cells[i].Value = cell;
+
+					rowInfo.Cells[i].Tag = cell;
+
+
 					rowInfo.Cells[i].Value = cell;
 
 					if (cell.ForeColor.HasValue)

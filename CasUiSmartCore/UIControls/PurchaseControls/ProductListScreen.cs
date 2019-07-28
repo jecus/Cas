@@ -9,9 +9,9 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
-using EFCore.DTO.Dictionaries;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.DTO.Dictionaries;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
@@ -293,7 +293,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		#endregion
 
 		#region private void ButtonDeleteClick(object sender, EventArgs e)
-
+		
 		private void ButtonDeleteClick(object sender, EventArgs e)
 		{
 			Delete();
@@ -319,18 +319,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				var selectedItems = new List<Product>();
 				selectedItems.AddRange(_directivesViewer.SelectedItems.ToArray());
 
-				foreach (var product in selectedItems)
-				{
-					try
-					{
-						GlobalObjects.CasEnvironment.NewKeeper.Delete(product);
-					}
-					catch (Exception ex)
-					{
-						Program.Provider.Logger.Log("Error while deleting data", ex);
-						return;
-					}
-				}
+				GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
 
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;

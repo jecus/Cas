@@ -1,25 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using EFCore.DTO.General;
-using EFCore.Filter;
 using Excel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartCore.Aircrafts;
 using SmartCore.Auxiliary;
 using SmartCore.Component;
 using SmartCore.DataAccesses.ItemsRelation;
-using SmartCore.Entities;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Store;
 using SmartCore.Filters;
-using SmartCore.Maintenance;
 using SmartCore.Management;
 
 namespace SmartCore.Tests.ExcelImportExport

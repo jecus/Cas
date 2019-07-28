@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using EFCore.Attributte;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.Attributte;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using SmartCore.Aircrafts;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Calculations;

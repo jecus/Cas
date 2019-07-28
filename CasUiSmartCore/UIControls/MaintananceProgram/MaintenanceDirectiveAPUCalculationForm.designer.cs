@@ -49,11 +49,11 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.buttonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonAdd.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonAdd.Location = new System.Drawing.Point(587, 739);
+			this.buttonAdd.Location = new System.Drawing.Point(458, 678);
 			this.buttonAdd.Name = "buttonAdd";
-			this.buttonAdd.Size = new System.Drawing.Size(144, 33);
+			this.buttonAdd.Size = new System.Drawing.Size(273, 33);
 			this.buttonAdd.TabIndex = 12;
-			this.buttonAdd.Text = "Add to Directive";
+			this.buttonAdd.Text = "Add task to calculate By APU";
 			this.buttonAdd.Click += new System.EventHandler(this.ButtonAddClick);
 			// 
 			// buttonClose
@@ -63,7 +63,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonClose.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonClose.Location = new System.Drawing.Point(919, 738);
+			this.buttonClose.Location = new System.Drawing.Point(919, 677);
 			this.buttonClose.Name = "buttonClose";
 			this.buttonClose.Size = new System.Drawing.Size(75, 33);
 			this.buttonClose.TabIndex = 13;
@@ -87,8 +87,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			// 
 			this.splitContainerMain.Panel2.AutoScroll = true;
 			this.splitContainerMain.Panel2.Controls.Add(this.listViewMpdApu);
-			this.splitContainerMain.Size = new System.Drawing.Size(979, 666);
-			this.splitContainerMain.SplitterDistance = 392;
+			this.splitContainerMain.Size = new System.Drawing.Size(979, 605);
+			this.splitContainerMain.SplitterDistance = 356;
 			this.splitContainerMain.TabIndex = 14;
 			// 
 			// listViewMpdAll
@@ -99,9 +99,12 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.listViewMpdAll.Entity = null;
 			this.listViewMpdAll.Location = new System.Drawing.Point(0, 0);
 			this.listViewMpdAll.Margin = new System.Windows.Forms.Padding(4);
+			this.listViewMpdAll.MenuOpeningAction = null;
 			this.listViewMpdAll.Name = "listViewMpdAll";
+			this.listViewMpdAll.OldColumnIndex = 0;
 			this.listViewMpdAll.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewMpdAll.Size = new System.Drawing.Size(979, 392);
+			this.listViewMpdAll.Size = new System.Drawing.Size(979, 356);
+			this.listViewMpdAll.SortMultiplier = 0;
 			this.listViewMpdAll.TabIndex = 1;
 			// 
 			// listViewMpdApu
@@ -112,9 +115,12 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.listViewMpdApu.Entity = null;
 			this.listViewMpdApu.Location = new System.Drawing.Point(0, 0);
 			this.listViewMpdApu.Margin = new System.Windows.Forms.Padding(4);
+			this.listViewMpdApu.MenuOpeningAction = null;
 			this.listViewMpdApu.Name = "listViewMpdApu";
+			this.listViewMpdApu.OldColumnIndex = 0;
 			this.listViewMpdApu.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewMpdApu.Size = new System.Drawing.Size(979, 270);
+			this.listViewMpdApu.Size = new System.Drawing.Size(979, 245);
+			this.listViewMpdApu.SortMultiplier = 0;
 			this.listViewMpdApu.TabIndex = 2;
 			// 
 			// buttonDelete
@@ -123,7 +129,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.buttonDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonDelete.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonDelete.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonDelete.Location = new System.Drawing.Point(737, 738);
+			this.buttonDelete.Location = new System.Drawing.Point(737, 677);
 			this.buttonDelete.Name = "buttonDelete";
 			this.buttonDelete.Size = new System.Drawing.Size(85, 33);
 			this.buttonDelete.TabIndex = 15;
@@ -136,7 +142,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(828, 738);
+			this.buttonOk.Location = new System.Drawing.Point(828, 677);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(85, 33);
 			this.buttonOk.TabIndex = 17;
@@ -146,7 +152,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			// MaintenanceDirectiveAPUCalculationForm
 			// 
 			this.CancelButton = this.buttonClose;
-			this.ClientSize = new System.Drawing.Size(1006, 777);
+			this.ClientSize = new System.Drawing.Size(1006, 716);
 			this.Controls.Add(this.buttonOk);
 			this.Controls.Add(this.buttonDelete);
 			this.Controls.Add(this.splitContainerMain);
@@ -157,7 +163,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.Name = "MaintenanceDirectiveAPUCalculationForm";
 			this.Resizable = false;
 			this.ShowIcon = false;
-			this.Text = "Maintenance Directive Bind Components Form";
+			this.Text = "Maintenance Directive APU Calculation Form";
 			this.splitContainerMain.Panel1.ResumeLayout(false);
 			this.splitContainerMain.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).EndInit();

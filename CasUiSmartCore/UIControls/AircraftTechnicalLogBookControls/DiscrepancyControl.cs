@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.DirectivesControls;
 using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;

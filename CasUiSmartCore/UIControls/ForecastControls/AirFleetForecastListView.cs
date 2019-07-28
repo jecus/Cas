@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-using CAS.UI.Helpers;
-using CAS.UI.UIControls.Auxiliary.Comparers;
-using CASTerms;
-using SmartCore.Calculations;
-using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Directives;
-using SmartCore.Entities.General.MaintenanceWorkscope;
-
-namespace CAS.UI.UIControls.ForecastControls
+﻿namespace CAS.UI.UIControls.ForecastControls
 {
     ///<summary>
     /// список для отображения ордеров запроса

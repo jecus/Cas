@@ -248,9 +248,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EFCore\EFCore.csproj">
+    <ProjectReference Include="..\EFCore\Entity.csproj">
       <Project>{6dddaf81-980a-4ebc-bf58-3ca93a059d7f}</Project>
-      <Name>EFCore</Name>
+      <Name>Entity</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

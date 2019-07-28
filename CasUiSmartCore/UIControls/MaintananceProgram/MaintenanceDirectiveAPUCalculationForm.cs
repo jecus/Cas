@@ -1,24 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
-using CAS.UI.Helpers;
-using CAS.UI.Interfaces;
-using CAS.UI.UIControls.AnimatedBackgroundWorker;
-using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using MetroFramework.Forms;
-using SmartCore.Auxiliary.Extentions;
-using SmartCore.Calculations;
-using SmartCore.Entities.Collections;
-using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.MaintenanceWorkscope;
-using SmartCore.Relation;
-using Component = SmartCore.Entities.General.Accessory.Component;
-using ComponentCollection = SmartCore.Entities.Collections.ComponentCollection;
 
 namespace CAS.UI.UIControls.MaintananceProgram
 {
@@ -60,7 +46,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		{
 			if(_items == null)
 				throw new ArgumentNullException("maintenanceDirective", "must be not null");
-			_items.AddRange(directives.Where(i => i.Threshold.RepeatInterval.Hours.HasValue));
+			_items.AddRange(directives.Where(i => i.ATAChapter.ShortName == "49"));
 			_calcItems.AddRange(directives.Where(i => i.APUCalc));
 
 			UpdateConrols();
@@ -97,6 +83,12 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			if(listViewMpdAll.SelectedItem == null)
 				return;
 
+			if (_calcItems.Any(i => i.ItemId == listViewMpdAll.SelectedItem.ItemId))
+			{
+				MessageBox.Show("This MPD is alredy added", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
+
 			listViewMpdApu.InsertItems(listViewMpdAll.SelectedItems.ToArray());
 			_calcItems.AddRange(listViewMpdAll.SelectedItems.ToArray());
 		}
@@ -123,6 +115,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
 		private void buttonOk_Click(object sender, EventArgs e)
 		{
+			DialogResult = DialogResult.OK;
 			try
 			{
 				foreach (var item in _calcItems)

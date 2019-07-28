@@ -1,5 +1,5 @@
 using System;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
