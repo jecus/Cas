@@ -1010,7 +1010,16 @@ namespace CAS.UI.UIControls.StoresControls
 
 			var s = _directivesViewer.SelectedItem as Component;
 			var form = new BarcodeForm(s);
-			form.ShowDialog();
+			if (form.ShowDialog() == DialogResult.OK)
+			{
+				var refE = new ReferenceEventArgs();
+				var report = new StoreBarCodeReportBuilder();
+				report.Component = s;
+				report.BarCode = form.BarCode;
+				refE.RequestedEntity = new ReportScreen(report);
+				refE.TypeOfReflection = ReflectionTypes.DisplayInNew;
+				InvokeDisplayerRequested(refE);
+			}
 		}
 
 		#endregion

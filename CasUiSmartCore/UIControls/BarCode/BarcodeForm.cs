@@ -1,10 +1,10 @@
-﻿using System;
-using System.Drawing;
-using System.Drawing.Printing;
+﻿using System.Drawing.Imaging;
+using System.IO;
 using System.Windows.Forms;
 using MetroFramework.Forms;
 using SmartCore.Auxiliary;
 using SmartCore.Entities.General.Accessory;
+using SmartCore.Management;
 using Telerik.WinControls.UI.Barcode.Symbology;
 
 namespace CAS.UI.UIControls.BarCode
@@ -12,6 +12,8 @@ namespace CAS.UI.UIControls.BarCode
 	public partial class BarcodeForm : MetroForm
 	{
 		private Component _component;
+		public byte[] BarCode { get; set; }
+	
 
 		public BarcodeForm()
 		{
@@ -54,24 +56,12 @@ namespace CAS.UI.UIControls.BarCode
 			radBarcode1.Value = _component.ItemId.ToString();
 		}
 
-		private Bitmap bmp;
-
 		private void ButtonOk_Click(object sender, System.EventArgs e)
 		{
-			Graphics g = CreateGraphics();
-			bmp = new Bitmap(Size.Width, Size.Height, g);
-			Graphics mg = Graphics.FromImage(bmp);
-			mg.CopyFromScreen(Location.X, Location.Y+55, 0, 0, new Size(Size.Width, Size.Height-105));
-			var print = new PrintPreviewDialog();
-			var doc = new PrintDocument();
-			doc.PrintPage += Doc_PrintPage;
-			print.Document = doc;
-			print.ShowDialog();
+			BarCode = DbTypes.ImageToBytes(radBarcode1.ExportToImage(), ImageFormat.Jpeg);
+			DialogResult = DialogResult.OK;
 		}
 
-		private void Doc_PrintPage(object sender, PrintPageEventArgs e)
-		{
-			e.Graphics.DrawImage(bmp, 0, 0);
-		}
+
 	}
 }
