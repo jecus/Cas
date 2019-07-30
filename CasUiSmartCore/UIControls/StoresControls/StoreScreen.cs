@@ -13,7 +13,6 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.BarCode;
 using CAS.UI.UIControls.ComponentChangeReport;
 using CAS.UI.UIControls.ComponentControls;
 using CAS.UI.UIControls.DirectivesControls;
@@ -161,26 +160,14 @@ namespace CAS.UI.UIControls.StoresControls
 				_transferedComponentForm.ButtonDeleteClick += TransferedComponentFormButtonDeleteClick;
 				_transferedComponentForm.ButtonCancelClick += TransferedComponentFormButtonCancelClick;
 
+				this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
+
 				_transferedComponentForm.Show(this);
 			} 
 		}
 
 		#endregion
 
-		#region public StoreScreen(Operator currentOperator) : this()
-
-		/// <summary>
-		/// Создает элемент управления для отображения списка агрегатов всех складов эксплуатанта
-		/// </summary>
-		/// <param name="currentOperator">Эксплуатант</param>
-		public StoreScreen(Operator currentOperator) : this()
-		{
-			if (currentOperator == null)
-				throw new ArgumentNullException("currentOperator", "Cannot display null-currentOperator");
-			aircraftHeaderControl1.Operator = currentOperator;
-		}
-
-		#endregion
 
 		#endregion
 
@@ -2745,6 +2732,38 @@ namespace CAS.UI.UIControls.StoresControls
 
 			_exportProvider.Dispose();
 		}
+
+
+		#region BarCodeEvent
+
+		DateTime _lastKeystroke = new DateTime(0);
+		List<char> _barcode = new List<char>(10);
+
+		private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			// check timing (keystrokes within 100 ms)
+			TimeSpan elapsed = (DateTime.Now - _lastKeystroke);
+			if (elapsed.TotalMilliseconds > 100)
+				_barcode.Clear();
+
+			// record keystroke & timestamp
+			_barcode.Add(e.KeyChar);
+			_lastKeystroke = DateTime.Now;
+
+			// process barcode
+			if (e.KeyChar == 13 && _barcode.Count > 0)
+			{
+				string msg = new String(_barcode.ToArray());
+
+				if(int.TryParse(msg, out var id))
+					_directivesViewer.SetItemsArray(_preResultDirectiveArray.Where(i => i.ItemId == id).ToArray());
+
+				MessageBox.Show(msg);
+				_barcode.Clear();
+			}
+		}
+
+		#endregion
 
 		#endregion
 	}
