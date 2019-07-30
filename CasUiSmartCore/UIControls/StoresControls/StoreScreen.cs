@@ -1019,6 +1019,7 @@ namespace CAS.UI.UIControls.StoresControls
 			};
 			refE.RequestedEntity = new ReportScreen(report);
 			refE.TypeOfReflection = ReflectionTypes.DisplayInNew;
+			refE.DisplayerText = "BarCode";
 			InvokeDisplayerRequested(refE);
 		}
 
