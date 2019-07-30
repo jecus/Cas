@@ -28,7 +28,6 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.radBarcode1 = new Telerik.WinControls.UI.RadBarcode();
 			this.telerikMetroBlueTheme1 = new Telerik.WinControls.Themes.TelerikMetroBlueTheme();
 			this.QR = new Telerik.WinControls.UI.RadRadioButton();
 			this.Code128 = new Telerik.WinControls.UI.RadRadioButton();
@@ -36,6 +35,7 @@
 			this.buttonOk = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.label8 = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
 			this.textBoxInstData = new System.Windows.Forms.TextBox();
@@ -51,20 +51,12 @@
 			this.textBoxAta = new System.Windows.Forms.TextBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.textBoxName = new System.Windows.Forms.TextBox();
-			((System.ComponentModel.ISupportInitialize)(this.radBarcode1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.QR)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.Code128)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.EAN128)).BeginInit();
 			this.panel1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// radBarcode1
-			// 
-			this.radBarcode1.Location = new System.Drawing.Point(3, 259);
-			this.radBarcode1.Name = "radBarcode1";
-			this.radBarcode1.Size = new System.Drawing.Size(378, 118);
-			this.radBarcode1.TabIndex = 0;
-			this.radBarcode1.Text = "radBarcode1";
 			// 
 			// QR
 			// 
@@ -92,9 +84,9 @@
 			// 
 			this.EAN128.Location = new System.Drawing.Point(130, 64);
 			this.EAN128.Name = "EAN128";
-			this.EAN128.Size = new System.Drawing.Size(66, 19);
+			this.EAN128.Size = new System.Drawing.Size(59, 19);
 			this.EAN128.TabIndex = 3;
-			this.EAN128.Text = "EAN128";
+			this.EAN128.Text = "EAN13";
 			this.EAN128.ThemeName = "TelerikMetroBlue";
 			this.EAN128.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.ToggleStateChanged);
 			// 
@@ -105,7 +97,7 @@
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(302, 489);
+			this.buttonOk.Location = new System.Drawing.Point(302, 548);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 296;
@@ -123,6 +115,7 @@
 			// panel1
 			// 
 			this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.panel1.Controls.Add(this.pictureBox1);
 			this.panel1.Controls.Add(this.label8);
 			this.panel1.Controls.Add(this.label7);
 			this.panel1.Controls.Add(this.textBoxInstData);
@@ -139,11 +132,18 @@
 			this.panel1.Controls.Add(this.label2);
 			this.panel1.Controls.Add(this.textBoxName);
 			this.panel1.Controls.Add(this.label1);
-			this.panel1.Controls.Add(this.radBarcode1);
 			this.panel1.Location = new System.Drawing.Point(1, 90);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(386, 388);
+			this.panel1.Size = new System.Drawing.Size(386, 452);
 			this.panel1.TabIndex = 298;
+			// 
+			// pictureBox1
+			// 
+			this.pictureBox1.Location = new System.Drawing.Point(6, 260);
+			this.pictureBox1.Name = "pictureBox1";
+			this.pictureBox1.Size = new System.Drawing.Size(375, 187);
+			this.pictureBox1.TabIndex = 313;
+			this.pictureBox1.TabStop = false;
 			// 
 			// label8
 			// 
@@ -311,7 +311,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(389, 532);
+			this.ClientSize = new System.Drawing.Size(389, 591);
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.buttonOk);
 			this.Controls.Add(this.EAN128);
@@ -322,20 +322,18 @@
 			this.Name = "BarcodeForm";
 			this.Resizable = false;
 			this.Text = "BarcodeForm";
-			((System.ComponentModel.ISupportInitialize)(this.radBarcode1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.QR)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.Code128)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.EAN128)).EndInit();
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
 		}
 
 		#endregion
-
-		private Telerik.WinControls.UI.RadBarcode radBarcode1;
 		private Telerik.WinControls.Themes.TelerikMetroBlueTheme telerikMetroBlueTheme1;
 		private Telerik.WinControls.UI.RadRadioButton QR;
 		private Telerik.WinControls.UI.RadRadioButton Code128;
@@ -358,5 +356,6 @@
 		private System.Windows.Forms.TextBox textBoxQty;
 		private System.Windows.Forms.TextBox textBoxStatus;
 		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.PictureBox pictureBox1;
 	}
 }
