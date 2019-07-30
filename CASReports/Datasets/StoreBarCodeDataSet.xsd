@@ -12,7 +12,7 @@
   <xs:element name="StoreBarCodeDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="StoreBarCodeDataSet" msprop:Generator_UserDSName="StoreBarCodeDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Information" msprop:Generator_TableClassName="InformationDataTable" msprop:Generator_TableVarName="tableInformation" msprop:Generator_RowChangedName="InformationRowChanged" msprop:Generator_TablePropName="Information" msprop:Generator_RowDeletingName="InformationRowDeleting" msprop:Generator_RowChangingName="InformationRowChanging" msprop:Generator_RowEvHandlerName="InformationRowChangeEventHandler" msprop:Generator_RowDeletedName="InformationRowDeleted" msprop:Generator_RowClassName="InformationRow" msprop:Generator_UserTableName="Information" msprop:Generator_RowEvArgName="InformationRowChangeEvent">
+        <xs:element name="Information" msprop:Generator_TableClassName="InformationDataTable" msprop:Generator_TableVarName="tableInformation" msprop:Generator_TablePropName="Information" msprop:Generator_RowDeletingName="InformationRowDeleting" msprop:Generator_RowChangingName="InformationRowChanging" msprop:Generator_RowEvHandlerName="InformationRowChangeEventHandler" msprop:Generator_RowDeletedName="InformationRowDeleted" msprop:Generator_UserTableName="Information" msprop:Generator_RowChangedName="InformationRowChanged" msprop:Generator_RowEvArgName="InformationRowChangeEvent" msprop:Generator_RowClassName="InformationRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" minOccurs="0" />
@@ -23,6 +23,7 @@
               <xs:element name="ExpireDate" msprop:Generator_ColumnVarNameInTable="columnExpireDate" msprop:Generator_ColumnPropNameInRow="ExpireDate" msprop:Generator_ColumnPropNameInTable="ExpireDateColumn" msprop:Generator_UserColumnName="ExpireDate" type="xs:string" minOccurs="0" />
               <xs:element name="BatchNumber" msprop:Generator_ColumnVarNameInTable="columnBatchNumber" msprop:Generator_ColumnPropNameInRow="BatchNumber" msprop:Generator_ColumnPropNameInTable="BatchNumberColumn" msprop:Generator_UserColumnName="BatchNumber" type="xs:string" minOccurs="0" />
               <xs:element name="Status" msprop:Generator_ColumnVarNameInTable="columnStatus" msprop:Generator_ColumnPropNameInRow="Status" msprop:Generator_ColumnPropNameInTable="StatusColumn" msprop:Generator_UserColumnName="Status" type="xs:string" minOccurs="0" />
+              <xs:element name="Standart" msprop:Generator_ColumnVarNameInTable="columnStandart" msprop:Generator_ColumnPropNameInRow="Standart" msprop:Generator_ColumnPropNameInTable="StandartColumn" msprop:Generator_UserColumnName="Standart" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

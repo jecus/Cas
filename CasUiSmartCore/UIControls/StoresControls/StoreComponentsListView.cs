@@ -63,7 +63,7 @@ namespace CAS.UI.UIControls.StoresControls
 			AddColumn("Inst. date", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Work Type", (int)(radGridView1.Width * 0.14f));
 			AddColumn("Need Wp Q-ty", (int)(radGridView1.Width * 0.14f));
-			AddColumn("Reserve", (int)(radGridView1.Width * 0.14f));
+			AddColumn("Reserve", (int)(radGridView1.Width * 0.7f));
 			AddColumn("Current", (int)(radGridView1.Width * 0.14f));
 			AddColumn("Should be", (int)(radGridView1.Width * 0.14f));
 			AddColumn("Qty In", (int)(radGridView1.Width * 0.14f));

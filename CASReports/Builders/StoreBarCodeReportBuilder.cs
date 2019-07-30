@@ -59,10 +59,16 @@ namespace CASReports.Builders
         {
 	        var transferDate = Component.TransferRecords.GetLast().TransferDate;
 			var date = transferDate > DateTimeExtend.GetCASMinDateTime()
-		        ? SmartCore.Auxiliary.Convert.GetDateFormat(transferDate)
+		        ? Convert.GetDateFormat(transferDate)
 		        : "";
-			destinationDateSet.Information.AddInformationRow(Component.Name, Component.AtaSorted.ToString(), Component.PartNumber, Component.SerialNumber,
-		        BarCode, date, Component.BatchNumber, Component.ComponentStatus.ToString());
+
+			var expDate = Component.ExpirationDate > DateTimeExtend.GetCASMinDateTime()
+				? Convert.GetDateFormat(transferDate)
+				: ""; ;
+
+			var standart = Component.Product?.Standart?.ToString() ?? Component.Standart?.ToString();
+			destinationDateSet.Information.AddInformationRow(Component.Name, Component.AtaSorted.ShortName, Component.PartNumber, Component.SerialNumber,
+		        BarCode, expDate, Component.BatchNumber, Component.ComponentStatus.ToString(), standart);
 
         }
 

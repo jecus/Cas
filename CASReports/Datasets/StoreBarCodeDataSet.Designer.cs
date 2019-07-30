@@ -295,6 +295,8 @@ namespace CASReports.Datasets {
             
             private global::System.Data.DataColumn columnStatus;
             
+            private global::System.Data.DataColumn columnStandart;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public InformationDataTable() {
@@ -394,6 +396,14 @@ namespace CASReports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn StandartColumn {
+                get {
+                    return this.columnStandart;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -429,7 +439,7 @@ namespace CASReports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public InformationRow AddInformationRow(string Name, string ATA, string PartNumber, string SerialNumber, byte[] BarCode, string ExpireDate, string BatchNumber, string Status) {
+            public InformationRow AddInformationRow(string Name, string ATA, string PartNumber, string SerialNumber, byte[] BarCode, string ExpireDate, string BatchNumber, string Status, string Standart) {
                 InformationRow rowInformationRow = ((InformationRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Name,
@@ -439,7 +449,8 @@ namespace CASReports.Datasets {
                         BarCode,
                         ExpireDate,
                         BatchNumber,
-                        Status};
+                        Status,
+                        Standart};
                 rowInformationRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowInformationRow);
                 return rowInformationRow;
@@ -470,6 +481,7 @@ namespace CASReports.Datasets {
                 this.columnExpireDate = base.Columns["ExpireDate"];
                 this.columnBatchNumber = base.Columns["BatchNumber"];
                 this.columnStatus = base.Columns["Status"];
+                this.columnStandart = base.Columns["Standart"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -491,6 +503,8 @@ namespace CASReports.Datasets {
                 base.Columns.Add(this.columnBatchNumber);
                 this.columnStatus = new global::System.Data.DataColumn("Status", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnStatus);
+                this.columnStandart = new global::System.Data.DataColumn("Standart", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnStandart);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -761,6 +775,22 @@ namespace CASReports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Standart {
+                get {
+                    try {
+                        return ((string)(this[this.tableInformation.StandartColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Standart\' in table \'Information\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableInformation.StandartColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsNameNull() {
                 return this.IsNull(this.tableInformation.NameColumn);
             }
@@ -853,6 +883,18 @@ namespace CASReports.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetStatusNull() {
                 this[this.tableInformation.StatusColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsStandartNull() {
+                return this.IsNull(this.tableInformation.StandartColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetStandartNull() {
+                this[this.tableInformation.StandartColumn] = global::System.Convert.DBNull;
             }
         }
         
