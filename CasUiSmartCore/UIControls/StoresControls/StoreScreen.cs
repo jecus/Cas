@@ -33,6 +33,7 @@ using CASReports.Builders;
 using EntityCore.DTO.Dictionaries;
 using EntityCore.DTO.General;
 using EntityCore.Filter;
+using IronBarCode;
 using SmartCore.Filters;
 using SmartCore.Purchase;
 using Telerik.WinControls.UI;
@@ -1005,21 +1006,20 @@ namespace CAS.UI.UIControls.StoresControls
 
 		private void _toolStripMenuItemBarCode_Click(object sender, EventArgs e)
 		{
-			if(_directivesViewer.SelectedItem == null && _directivesViewer.SelectedItem is Component)
+			if (_directivesViewer.SelectedItem == null && _directivesViewer.SelectedItem is Component)
 				return;
 
 			var s = _directivesViewer.SelectedItem as Component;
-			var form = new BarcodeForm(s);
-			if (form.ShowDialog() == DialogResult.OK)
+			var code = BarcodeWriter.CreateBarcode(s.ItemId.ToString(), BarcodeEncoding.Code128);
+			var refE = new ReferenceEventArgs();
+			var report = new StoreBarCodeReportBuilder
 			{
-				var refE = new ReferenceEventArgs();
-				var report = new StoreBarCodeReportBuilder();
-				report.Component = s;
-				report.BarCode = form.BarCode;
-				refE.RequestedEntity = new ReportScreen(report);
-				refE.TypeOfReflection = ReflectionTypes.DisplayInNew;
-				InvokeDisplayerRequested(refE);
-			}
+				Component = s,
+				BarCode = code.ResizeTo(210, 37).ToPngBinaryData()
+			};
+			refE.RequestedEntity = new ReportScreen(report);
+			refE.TypeOfReflection = ReflectionTypes.DisplayInNew;
+			InvokeDisplayerRequested(refE);
 		}
 
 		#endregion

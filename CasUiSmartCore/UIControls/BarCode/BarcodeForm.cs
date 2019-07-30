@@ -58,14 +58,8 @@ namespace CAS.UI.UIControls.BarCode
 			//code.AddAnnotationTextAboveBarcode("Product ID:");
 			//code.AddBarcodeValueTextBelowBarcode();
 
-
-
 			pictureBox1.Image = code.ResizeTo(210, 50).Image;
 			pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
-
-
-
-
 		}
 
 		private void ButtonOk_Click(object sender, System.EventArgs e)

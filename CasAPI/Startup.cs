@@ -55,7 +55,7 @@ namespace CasAPI
 				options.Providers.Add<GzipCompressionProvider>();
 			});
 
-
+			services.AddHealthChecks();
 			services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("v1", new Info
