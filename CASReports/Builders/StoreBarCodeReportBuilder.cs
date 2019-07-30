@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using CASReports.Datasets;
 using CASReports.ReportTemplates;
+using SmartCore.Auxiliary;
 using SmartCore.Entities.General.Accessory;
 
 namespace CASReports.Builders
@@ -56,8 +57,12 @@ namespace CASReports.Builders
         /// <param name="destinationDateSet"></param>
         protected virtual void AddAdditionalDataToDataSet(StoreBarCodeDataSet destinationDateSet)
         {
-	        destinationDateSet.Information.AddInformationRow(Component.Name, Component.AtaSorted.ToString(), Component.PartNumber, Component.SerialNumber,
-		        BarCode);
+	        var transferDate = Component.TransferRecords.GetLast().TransferDate;
+			var date = transferDate > DateTimeExtend.GetCASMinDateTime()
+		        ? SmartCore.Auxiliary.Convert.GetDateFormat(transferDate)
+		        : "";
+			destinationDateSet.Information.AddInformationRow(Component.Name, Component.AtaSorted.ToString(), Component.PartNumber, Component.SerialNumber,
+		        BarCode, date, Component.BatchNumber, Component.ComponentStatus.ToString());
 
         }
 

@@ -56,11 +56,11 @@ namespace CAS.UI.UIControls.BarCode
 
 			
 			//code.AddAnnotationTextAboveBarcode("Product ID:");
-			code.AddBarcodeValueTextBelowBarcode();
+			//code.AddBarcodeValueTextBelowBarcode();
 
 
 
-			pictureBox1.Image = code.ResizeTo(300, 100).Image;
+			pictureBox1.Image = code.ResizeTo(210, 50).Image;
 			pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
 
 
@@ -71,7 +71,7 @@ namespace CAS.UI.UIControls.BarCode
 		private void ButtonOk_Click(object sender, System.EventArgs e)
 		{
 			//BarCode = DbTypes.ImageToBytes(radBarcode1.ExportToImage(), ImageFormat.Jpeg);
-			BarCode = code.ResizeTo(300, 200).ToPngBinaryData();
+			BarCode = code.ResizeTo(210, 37).ToPngBinaryData();
 			DialogResult = DialogResult.OK;
 		}
 
