@@ -54,6 +54,8 @@ namespace CasAPI
 				options.Providers.Add<BrotliCompressionProvider>();
 				options.Providers.Add<GzipCompressionProvider>();
 			});
+
+
 			services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("v1", new Info
@@ -70,15 +72,16 @@ namespace CasAPI
 			if (env.IsDevelopment())
 				app.UseDeveloperExceptionPage();
 
+			app.UseHealthChecks(Configuration["HealthCheck:Endpoint"]);
 			app.UseResponseCompression();
 			app.UseMvc();
 
 
-			app.UseSwagger();
-			app.UseSwaggerUI(c =>
-			{
-				c.SwaggerEndpoint("/swagger/v1/swagger.json", "Test API V1");
-			});
+			//app.UseSwagger();
+			//app.UseSwaggerUI(c =>
+			//{
+			//	c.SwaggerEndpoint("/swagger/v1/swagger.json", "Test API V1");
+			//});
 
 			Initialize(app);
 		}
