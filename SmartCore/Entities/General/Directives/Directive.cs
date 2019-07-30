@@ -1075,12 +1075,13 @@ namespace SmartCore.Entities.General.Directives
 			directive.AfterForecastResourceRemain = new Lifelength(AfterForecastResourceRemain);
 
 			directive._performanceRecords = new BaseRecordCollection<DirectiveRecord>();
-			foreach (var performanceRecord in PerformanceRecords)
-			{
-				var newObject = performanceRecord.GetCopyUnsaved();
-				newObject.Parent = directive;
-				directive._performanceRecords.Add(newObject);
-			}
+			//TODO:не копируем записи о перемещении если надо то раскоментить
+			//foreach (var performanceRecord in PerformanceRecords)
+			//{
+			//	var newObject = performanceRecord.GetCopyUnsaved();
+			//	newObject.Parent = directive;
+			//	directive._performanceRecords.Add(newObject);
+			//}
 			
 			directive._aircraftWorkerCategories = new CommonCollection<CategoryRecord>();
 			foreach (var categoryRecord in CategoriesRecords)
