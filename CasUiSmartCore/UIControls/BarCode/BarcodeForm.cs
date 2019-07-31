@@ -1,18 +1,12 @@
-﻿using System.Drawing.Imaging;
-using System.IO;
-using System.Windows.Forms;
-using IronBarCode;
+﻿using System.Windows.Forms;
 using MetroFramework.Forms;
 using SmartCore.Auxiliary;
 using SmartCore.Entities.General.Accessory;
-using SmartCore.Management;
-using Telerik.WinControls.UI.Barcode.Symbology;
 
 namespace CAS.UI.UIControls.BarCode
 {
 	public partial class BarcodeForm : MetroForm
 	{
-		GeneratedBarcode code;
 		private Component _component;
 		public byte[] BarCode { get; set; }
 	
@@ -47,26 +41,26 @@ namespace CAS.UI.UIControls.BarCode
 		private void ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
 		{
 			
-			if (QR.IsChecked)
-				code = BarcodeWriter.CreateBarcode(_component.ItemId.ToString(), BarcodeEncoding.QRCode);
-			else if(EAN128.IsChecked)
-				code = BarcodeWriter.CreateBarcode(_component.ItemId.ToString(), BarcodeEncoding.EAN13);
-			else if (Code128.IsChecked)
-				code = BarcodeWriter.CreateBarcode(_component.ItemId.ToString(), BarcodeEncoding.Code128);
+			//if (QR.IsChecked)
+			//	code = BarcodeWriter.CreateBarcode(_component.ItemId.ToString(), BarcodeEncoding.QRCode);
+			//else if(EAN128.IsChecked)
+			//	code = BarcodeWriter.CreateBarcode(_component.ItemId.ToString(), BarcodeEncoding.EAN13);
+			//else if (Code128.IsChecked)
+			//	code = BarcodeWriter.CreateBarcode(_component.ItemId.ToString(), BarcodeEncoding.Code128);
 
 			
-			//code.AddAnnotationTextAboveBarcode("Product ID:");
-			//code.AddBarcodeValueTextBelowBarcode();
+			////code.AddAnnotationTextAboveBarcode("Product ID:");
+			////code.AddBarcodeValueTextBelowBarcode();
 
-			pictureBox1.Image = code.ResizeTo(210, 50).Image;
-			pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+			//pictureBox1.Image = code.ResizeTo(210, 50).Image;
+			//pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
 		}
 
 		private void ButtonOk_Click(object sender, System.EventArgs e)
 		{
 			//BarCode = DbTypes.ImageToBytes(radBarcode1.ExportToImage(), ImageFormat.Jpeg);
-			BarCode = code.ResizeTo(210, 37).ToPngBinaryData();
-			DialogResult = DialogResult.OK;
+			//BarCode = code.ResizeTo(210, 37).ToPngBinaryData();
+			//DialogResult = DialogResult.OK;
 		}
 
 
