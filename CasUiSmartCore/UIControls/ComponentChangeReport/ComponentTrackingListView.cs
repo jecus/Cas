@@ -178,31 +178,31 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 	        var received = item.ReceivedSpecialist?.ToString() ?? "";
 	        var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
-	        CreateRow(item.TransferDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString()), item.TransferDate );
-	        CreateRow(fromTo, fromTo );
-			CreateRow(quantity, item.ParentComponent.QuantityIn );
-			CreateRow(item.ParentComponent.ATAChapter.ToString(), item.ParentComponent.ATAChapter );
-	        CreateRow(item.GoodsClass.ToString(), item.GoodsClass );
+	        subItems.Add(CreateRow(item.TransferDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString()), item.TransferDate ));
+	        subItems.Add(CreateRow(fromTo, fromTo));
+	        subItems.Add(CreateRow(quantity, item.ParentComponent.QuantityIn));
+	        subItems.Add(CreateRow(item.ParentComponent.ATAChapter.ToString(), item.ParentComponent.ATAChapter));
+	        subItems.Add(CreateRow(item.GoodsClass.ToString(), item.GoodsClass));
 			
 	        if (IsStore)
 	        {
-		        CreateRow(descriptionOn, descriptionOn );
-		        CreateRow(descriptionOff, descriptionOff );
+		        subItems.Add(CreateRow(descriptionOn, descriptionOn));
+		        subItems.Add(CreateRow(descriptionOff, descriptionOff));
 	        }
 	        else
 	        {
-		        CreateRow(descriptionOff, descriptionOff );
-				CreateRow(descriptionOn, descriptionOn );
+		        subItems.Add(CreateRow(descriptionOff, descriptionOff));
+		        subItems.Add(CreateRow(descriptionOn, descriptionOn));
 	        }
 
-	        CreateRow(item.Reason.ToString(), item.Reason );
-			CreateRow(item.Description, item.Description );
-			CreateRow(item.Remarks, item.Remarks );
-			CreateRow(released, released );
-			CreateRow(received, received );
-			CreateRow(item.ParentComponent.FromSupplier.ToString(), item.ParentComponent.FromSupplier );
-			CreateRow(fromSupplierReciveDate, item.ParentComponent.FromSupplierReciveDate );
-			CreateRow(author, author );
+	        subItems.Add(CreateRow(item.Reason.ToString(), item.Reason));
+	        subItems.Add(CreateRow(item.Description, item.Description ));
+	        subItems.Add(CreateRow(item.Remarks, item.Remarks));
+	        subItems.Add(CreateRow(released, released));
+	        subItems.Add(CreateRow(received, received));
+	        subItems.Add(CreateRow(item.ParentComponent.FromSupplier.ToString(), item.ParentComponent.FromSupplier));
+	        subItems.Add(CreateRow(fromSupplierReciveDate, item.ParentComponent.FromSupplierReciveDate));
+	        subItems.Add(CreateRow(author, author));
 
 			return subItems;
         }
