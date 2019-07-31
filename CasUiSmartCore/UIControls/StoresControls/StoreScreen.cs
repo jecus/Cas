@@ -138,11 +138,11 @@ namespace CAS.UI.UIControls.StoresControls
 			if (store == null)
 				throw new ArgumentNullException("store", "Cannot display null-currentStore");
 			CurrentStore = store;
-
+			
 			InitToolStripPrintMenuItems();
 			InitToolStripMenuItems();
 			InitListView();
-
+			_directivesViewer.radGridView1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
 			if (_removedComponents.Count > 0 || _waitRemoveConfirmComponents.Count > 0
 				|| _installedComponents.Count > 0)
 			{
@@ -160,7 +160,7 @@ namespace CAS.UI.UIControls.StoresControls
 				_transferedComponentForm.ButtonDeleteClick += TransferedComponentFormButtonDeleteClick;
 				_transferedComponentForm.ButtonCancelClick += TransferedComponentFormButtonCancelClick;
 
-				this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
+				
 
 				_transferedComponentForm.Show(this);
 			} 
