@@ -45,6 +45,7 @@ namespace CAS.UI.UIControls.StoresControls
         protected override void SetHeaders()
         {
 			AddColumn("Store", (int)(radGridView1.Width * 0.2f));
+			AddColumn("ID", (int)(radGridView1.Width * 0.1f));
 			AddColumn("ATA", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Refference", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Part. No", (int)(radGridView1.Width * 0.2f));
@@ -219,6 +220,7 @@ namespace CAS.UI.UIControls.StoresControls
 				   refference = "",
                    effectivity = "",
 				   code = "",
+				   id = "",
                    classString = "",
                    batchNumber = "",
                    idNumber = "",
@@ -277,6 +279,7 @@ namespace CAS.UI.UIControls.StoresControls
             if (parent is Component)
             {
                 Component componentItem = (Component)parent;
+                id = componentItem.ItemId.ToString();
 	            store = GlobalObjects.StoreCore.GetStoreById(componentItem.ParentStoreId);
 	            if (store == null)
 		            MessageBox.Show("qwe");
@@ -416,6 +419,7 @@ namespace CAS.UI.UIControls.StoresControls
             }
 
             subItems.Add(CreateRow(store?.ToString() ?? "N/A", store.ToString() )); 
+            subItems.Add(CreateRow(id, id)); 
             subItems.Add(CreateRow(ata.ToString(), ata )); 
             subItems.Add(CreateRow(refference, refference )); 
             subItems.Add(CreateRow(partNumber, partNumber ));

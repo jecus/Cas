@@ -44,6 +44,7 @@ namespace CAS.UI.UIControls.StoresControls
         /// </summary>
         protected override void SetHeaders()
         {
+			AddColumn("ID", (int)(radGridView1.Width * 0.1f));
 			AddColumn("ATA", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Refference", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Part. No", (int)(radGridView1.Width * 0.2f));
@@ -168,6 +169,7 @@ namespace CAS.UI.UIControls.StoresControls
 				currentString = "",
 		        shouldBeOnStockString = "",
 		        from = "",
+		        id = "",
 				quantityInString = "",
 		        author = "",
 				currency = "";
@@ -184,8 +186,9 @@ namespace CAS.UI.UIControls.StoresControls
                    current = 0,
 				   quantityIn = 0,
 				   shouldBeOnStock = 0, needWpQuantity = 0, reserve = 0;
-            int times, 
-                kitCount = 0;
+            int times,
+	            
+				kitCount = 0;
 			string position = ComponentStorePosition.UNK.ToString();
 			IDirective parent;
             if (item is NextPerformance)
@@ -209,6 +212,7 @@ namespace CAS.UI.UIControls.StoresControls
             if (parent is Component)
             {
                 Component componentItem = (Component)parent;
+                id = componentItem.ItemId.ToString();
                 author = GlobalObjects.CasEnvironment.GetCorrector(componentItem.CorrectorId);
 				approx = componentItem.NextPerformanceDate;
                 next = componentItem.NextPerformanceSource;
@@ -341,6 +345,7 @@ namespace CAS.UI.UIControls.StoresControls
                 ata = (AtaChapter)GlobalObjects.CasEnvironment.GetDictionary<AtaChapter>().GetItemById(21);
             }
 
+            subItems.Add(CreateRow(id, id));
             subItems.Add(CreateRow(ata.ToString(), ata));
             subItems.Add(CreateRow(refference, refference));
             subItems.Add(CreateRow(partNumber, partNumber));

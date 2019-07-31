@@ -33,6 +33,7 @@ using EntityCore.DTO.General;
 using EntityCore.Filter;
 using SmartCore.Filters;
 using SmartCore.Purchase;
+using Telerik.WinControls.Data;
 using Telerik.WinControls.UI;
 using Component = SmartCore.Entities.General.Accessory.Component;
 using ComponentCollection = SmartCore.Entities.Collections.ComponentCollection;
@@ -136,7 +137,7 @@ namespace CAS.UI.UIControls.StoresControls
 			InitToolStripPrintMenuItems();
 			InitToolStripMenuItems();
 			InitListView();
-
+			_directivesViewer.radGridView1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
 			if (_removedComponents.Count > 0 || _waitRemoveConfirmComponents.Count > 0
 				|| _installedComponents.Count > 0)
 			{
@@ -2290,6 +2291,42 @@ namespace CAS.UI.UIControls.StoresControls
 				AnimatedThreadWorker.RunWorkerAsync();
 			}
 		}
+
+
+		#region BarCodeEvent
+
+		DateTime _lastKeystroke = new DateTime(0);
+		List<char> _barcode = new List<char>(10);
+		private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar == (int)Keys.Escape)
+			{
+				_directivesViewer.radGridView1.FilterDescriptors.Clear();
+				return; ;
+			}
+
+			// check timing (keystrokes within 100 ms)
+			var elapsed = (DateTime.Now - _lastKeystroke);
+			if (elapsed.TotalMilliseconds > 100)
+				_barcode.Clear();
+
+			// record keystroke & timestamp
+			_barcode.Add(e.KeyChar);
+			_lastKeystroke = DateTime.Now;
+
+			// process barcode
+			if (e.KeyChar == (int)Keys.Enter && _barcode.Count > 0)
+			{
+				var msg = new string(_barcode.ToArray());
+
+				if (int.TryParse(msg, out var id))
+					_directivesViewer.radGridView1.FilterDescriptors.Add("ID", FilterOperator.IsEqualTo, id);
+				_barcode.Clear();
+			}
+		}
+
+
+		#endregion
 
 		#endregion
 	}

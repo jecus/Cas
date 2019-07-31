@@ -35,6 +35,7 @@ using EntityCore.Filter;
 using IronBarCode;
 using SmartCore.Filters;
 using SmartCore.Purchase;
+using Telerik.WinControls.Data;
 using Telerik.WinControls.UI;
 using Component = SmartCore.Entities.General.Accessory.Component;
 using ComponentCollection = SmartCore.Entities.Collections.ComponentCollection;
@@ -355,6 +356,7 @@ namespace CAS.UI.UIControls.StoresControls
 			}
 
 			headerControl.PrintButtonEnabled = _directivesViewer.radGridView1.RowCount != 0;
+			_directivesViewer.Focus();
 
 			if(_shouldBeOnStock.Count(s=>s.ShouldBeOnStock == 0) > 0)
 				_statusImageLinkLabel1.Status = Statuses.NotActive;
@@ -2740,11 +2742,16 @@ namespace CAS.UI.UIControls.StoresControls
 
 		DateTime _lastKeystroke = new DateTime(0);
 		List<char> _barcode = new List<char>(10);
-
 		private void Form1_KeyPress(object sender, KeyPressEventArgs e)
 		{
+			if (e.KeyChar == (int) Keys.Escape)
+			{
+				_directivesViewer.radGridView1.FilterDescriptors.Clear();
+				return;;
+			}
+
 			// check timing (keystrokes within 100 ms)
-			TimeSpan elapsed = (DateTime.Now - _lastKeystroke);
+			var elapsed = (DateTime.Now - _lastKeystroke);
 			if (elapsed.TotalMilliseconds > 100)
 				_barcode.Clear();
 
@@ -2753,17 +2760,16 @@ namespace CAS.UI.UIControls.StoresControls
 			_lastKeystroke = DateTime.Now;
 
 			// process barcode
-			if (e.KeyChar == 13 && _barcode.Count > 0)
+			if (e.KeyChar == (int)Keys.Enter && _barcode.Count > 0)
 			{
-				string msg = new String(_barcode.ToArray());
+				var msg = new string(_barcode.ToArray());
 
 				if(int.TryParse(msg, out var id))
-					_directivesViewer.SetItemsArray(_preResultDirectiveArray.Where(i => i.ItemId == id).ToArray());
-
-				//MessageBox.Show(msg);
+					_directivesViewer.radGridView1.FilterDescriptors.Add("ID", FilterOperator.IsEqualTo, id);
 				_barcode.Clear();
 			}
 		}
+
 
 		#endregion
 

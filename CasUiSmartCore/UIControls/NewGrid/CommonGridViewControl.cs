@@ -598,6 +598,7 @@ namespace CAS.UI.UIControls.NewGrid
 						else RadGridView1_DoubleClick(sender, e);
 					}
 					break;
+				case Keys.Escape: radGridView1.FilterDescriptors.Clear(); break;
 				default:
 					break;
 			}
