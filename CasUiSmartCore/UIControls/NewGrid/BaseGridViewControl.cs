@@ -126,6 +126,8 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#endregion
 
+		public bool IgnoreEnterPress { get; set; }
+
 		public int SortMultiplier { get; set; }
 
 		public int OldColumnIndex { get; set; }
@@ -637,6 +639,10 @@ namespace CAS.UI.UIControls.NewGrid
 
 		private void RadGridView1_KeyDown(object sender, KeyEventArgs e)
 		{
+			if(IgnoreEnterPress)
+				return;
+			
+
 			switch (e.KeyData)
 			{
 				case Keys.Enter:

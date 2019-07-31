@@ -1204,6 +1204,7 @@ namespace CAS.UI.UIControls.StoresControls
 										TabIndex = 2,
 										Location = new Point(panel1.Left, panel1.Top),
 										Dock = DockStyle.Fill,
+										IgnoreEnterPress = true
 										//ItemsListView = {ContextMenuStrip = _contextMenuStrip}
 									};
 			}
@@ -1214,6 +1215,7 @@ namespace CAS.UI.UIControls.StoresControls
 					TabIndex = 2,
 					Location = new Point(panel1.Left, panel1.Top),
 					Dock = DockStyle.Fill,
+					IgnoreEnterPress = true
 					//ItemsListView = { ContextMenuStrip = _contextMenuStrip }
 				};    
 			}
@@ -2758,7 +2760,7 @@ namespace CAS.UI.UIControls.StoresControls
 				if(int.TryParse(msg, out var id))
 					_directivesViewer.SetItemsArray(_preResultDirectiveArray.Where(i => i.ItemId == id).ToArray());
 
-				MessageBox.Show(msg);
+				//MessageBox.Show(msg);
 				_barcode.Clear();
 			}
 		}
