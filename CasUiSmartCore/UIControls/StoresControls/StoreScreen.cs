@@ -144,6 +144,7 @@ namespace CAS.UI.UIControls.StoresControls
 			InitToolStripMenuItems();
 			InitListView();
 			_directivesViewer.radGridView1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
+			//_directivesViewer.radGridView1.FilterPopupInitialized += RadGridView1_FilterPopupInitialized;
 			if (_removedComponents.Count > 0 || _waitRemoveConfirmComponents.Count > 0
 				|| _installedComponents.Count > 0)
 			{
@@ -2742,15 +2743,19 @@ namespace CAS.UI.UIControls.StoresControls
 
 		DateTime _lastKeystroke = new DateTime(0);
 		List<char> _barcode = new List<char>(10);
+		private List<int> _find = new List<int>();
 		private void Form1_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			if (e.KeyChar == (int) Keys.Escape)
 			{
 				_directivesViewer.radGridView1.FilterDescriptors.Clear();
+				_find.Clear();
+				foreach (var row in _directivesViewer.radGridView1.Rows)
+					row.IsVisible = true;
 				return;;
 			}
 
-			// check timing (keystrokes within 100 ms)
+			//check timing(keystrokes within 100 ms)
 			var elapsed = (DateTime.Now - _lastKeystroke);
 			if (elapsed.TotalMilliseconds > 100)
 				_barcode.Clear();
@@ -2764,11 +2769,87 @@ namespace CAS.UI.UIControls.StoresControls
 			{
 				var msg = new string(_barcode.ToArray());
 
-				if(int.TryParse(msg, out var id))
-					_directivesViewer.radGridView1.FilterDescriptors.Add("ID", FilterOperator.IsEqualTo, id);
+				if (int.TryParse(msg, out var id))
+				{
+					//var filterDescriptor = new FilterDescriptor("ID", FilterOperator.Contains, id.ToString());
+					//var cfd = new CompositeFilterDescriptor();
+					//cfd.LogicalOperator = FilterLogicalOperator.Or;
+					//cfd.FilterDescriptors.Add(filterDescriptor);
+					//cfd.IsFilterEditor = false;
+
+					//_directivesViewer.radGridView1.FilterDescriptors.Add(cfd);
+
+					_find.Add(id);
+					foreach (var row in _directivesViewer.radGridView1.Rows)
+					{
+						if (row.Tag is Component)
+						{
+							var item = row.Tag as BaseEntityObject;
+							if(!_find.Contains(item.ItemId))
+								row.IsVisible = false;
+							else row.IsVisible = true;
+						}
+						else if (row.Tag is ComponentDirective)
+						{
+							var item = row.Tag as ComponentDirective;
+							if (!_find.Contains(item.ParentComponent.ItemId))
+								row.IsVisible = false;
+							else row.IsVisible = true;
+						}
+
+					}
+				}
 				_barcode.Clear();
 			}
 		}
+
+		//GridViewColumnValuesCollection distinctValues;
+		//private void RadGridView1_FilterPopupInitialized(object sender, FilterPopupInitializedEventArgs e)
+		//{
+		//	distinctValues = e.Column.DistinctValues;
+		//	RadListFilterPopup popup = e.FilterPopup as RadListFilterPopup;
+		//	if (popup != null && e.Column.Name == "ID")
+		//	{
+		//		popup.PopupOpened -= popup_PopupOpened;
+		//		popup.PopupOpened += popup_PopupOpened;
+		//	}
+		//}
+
+
+		//private void popup_PopupOpened(object sender, EventArgs args)
+		//{
+		//	var popup = sender as RadListFilterPopup;
+		//	if (popup != null)
+		//	{
+		//		RadTreeNode root = popup.MenuTreeElement.TreeView.Nodes[2];
+		//		if (root.Text == "All" && root.Nodes.Count > 0)
+		//		{
+		//			foreach (RadTreeNode childNode in root.Nodes)
+		//			{
+		//				if (childNode.Text == "(Blanks)")
+		//					continue;
+		//				childNode.Value = childNode.Text;
+		//				childNode.Text = childNode.Text;
+		//			}
+
+
+		//			foreach (var value in distinctValues)
+		//			{
+		//				if(string.IsNullOrEmpty(value.ToString()))
+		//					continue;
+
+		//				if(root.Nodes.Contains(value.ToString()))
+		//					continue;
+
+		//				RadTreeNode additionalNode = new RadTreeNode();
+		//				additionalNode.Text = value.ToString();
+		//				additionalNode.Value = value;
+		//				//additionalNode.Enabled = true;
+		//				root.Nodes.Add(additionalNode);
+		//			}
+		//		}
+		//	}
+		//}
 
 
 		#endregion
