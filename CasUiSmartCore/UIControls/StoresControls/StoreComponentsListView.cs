@@ -25,10 +25,12 @@ namespace CAS.UI.UIControls.StoresControls
     ///</summary>
     public partial class StoreComponentsListView : BaseGridViewControl<IBaseCoreObject>
     {
-        #region public StoreDetailsListView()
-        ///<summary>
-        ///</summary>
-        public StoreComponentsListView()
+	    private bool first;
+
+		#region public StoreDetailsListView()
+		///<summary>
+		///</summary>
+		public StoreComponentsListView()
         {
             InitializeComponent();
             OldColumnIndex = 17;
@@ -61,10 +63,10 @@ namespace CAS.UI.UIControls.StoresControls
 			AddColumn("Location", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Facility", (int)(radGridView1.Width * 0.2f));
 			AddColumn("From", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Inst. date", (int)(radGridView1.Width * 0.2f));
+			AddDateColumn("Inst. date", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Work Type", (int)(radGridView1.Width * 0.14f));
 			AddColumn("Need Wp Q-ty", (int)(radGridView1.Width * 0.14f));
-			AddColumn("Reserve", (int)(radGridView1.Width * 0.7f));
+			AddColumn("Reserve", (int)(75));
 			AddColumn("Current", (int)(radGridView1.Width * 0.14f));
 			AddColumn("Should be", (int)(radGridView1.Width * 0.14f));
 			AddColumn("Qty In", (int)(radGridView1.Width * 0.14f));
@@ -413,7 +415,11 @@ namespace CAS.UI.UIControls.StoresControls
 		#region protected override void CustomSort(int ColumnIndex)
 		protected override void Sorting(string colName = null)
 		{
-
+			if (!first)
+			{
+				base.Sorting("Inst. date");
+				first = true;
+			}
 		}
 		protected override void CustomSort(int ColumnIndex)
 		{
