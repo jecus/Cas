@@ -31,7 +31,7 @@ namespace CAS.UI.UIControls.StoresControls
         public StoreComponentsListView()
         {
             InitializeComponent();
-            OldColumnIndex = 16;
+            OldColumnIndex = 17;
             SortMultiplier = 1;
         }
         #endregion

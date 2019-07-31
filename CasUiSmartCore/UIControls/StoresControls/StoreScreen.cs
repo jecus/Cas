@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -32,11 +34,15 @@ using CASReports.Builders;
 using EntityCore.DTO.Dictionaries;
 using EntityCore.DTO.General;
 using EntityCore.Filter;
+using GenCode128;
 using IronBarCode;
 using SmartCore.Filters;
+using SmartCore.Management;
 using SmartCore.Purchase;
 using Telerik.WinControls.Data;
 using Telerik.WinControls.UI;
+using ZXing;
+using BarcodeWriter = IronBarCode.BarcodeWriter;
 using Component = SmartCore.Entities.General.Accessory.Component;
 using ComponentCollection = SmartCore.Entities.Collections.ComponentCollection;
 
@@ -1001,12 +1007,27 @@ namespace CAS.UI.UIControls.StoresControls
 
 			var s = _directivesViewer.SelectedItem as Component;
 			var code = BarcodeWriter.CreateBarcode(s.ItemId.ToString(), BarcodeEncoding.Code128);
+
+
+			ZXing.BarcodeWriter w = new ZXing.BarcodeWriter();
+			w.Format = BarcodeFormat.CODE_128;
+			w.Options.PureBarcode = false;
+			w.Options. Width = 210;
+			w.Options.Height = 37;
+			var res = Image.FromHbitmap(w.Write(s.ItemId.ToString()).GetHbitmap());
+
 			var refE = new ReferenceEventArgs();
 			var report = new StoreBarCodeReportBuilder
 			{
 				Component = s,
-				BarCode = code.ResizeTo(210, 37).ToPngBinaryData()
+				//BarCode = code.ResizeTo(210, 37).ToPngBinaryData()
+				//BarCode = DbTypes.ImageToBytes(Code128Rendering.MakeBarcodeImage(s.ItemId.ToString(), 110, false), ImageFormat.Png)
+				BarCode = DbTypes.ImageToBytes(res, ImageFormat.Png)
 			};
+
+
+			
+
 			refE.RequestedEntity = new ReportScreen(report);
 			refE.TypeOfReflection = ReflectionTypes.DisplayInNew;
 			refE.DisplayerText = "BarCode";
@@ -1241,6 +1262,8 @@ namespace CAS.UI.UIControls.StoresControls
 							component.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.GroundEquipment) ||
 							component.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.Tools);
 
+						_toolStripMenuItemBarCode.Enabled = true;
+
 						_toolStripMenuItemPrintCondemnedTag.Enabled = true;
 						_toolStripMenuItemPrintIdentificationTag.Enabled = true;
 						_toolStripMenuItemPrintServisibleTag.Enabled =
@@ -1256,6 +1279,7 @@ namespace CAS.UI.UIControls.StoresControls
 					}
 					else
 					{
+						_toolStripMenuItemBarCode.Enabled = false;
 						_toolStripMenuItemPrintServisibleTag.Enabled = false;
 						_toolStripMenuItemPrintUnServisibleTag.Enabled = false;
 						_toolStripMenuItemPrintInspectionTag.Enabled = false;
@@ -1267,6 +1291,7 @@ namespace CAS.UI.UIControls.StoresControls
 				}
 				else
 				{
+					_toolStripMenuItemBarCode.Enabled = false;
 					_toolStripMenuItemPrintServisibleTag.Enabled = false;
 					_toolStripMenuItemPrintUnServisibleTag.Enabled = false;
 					_toolStripMenuItemPrintInspectionTag.Enabled = false;
