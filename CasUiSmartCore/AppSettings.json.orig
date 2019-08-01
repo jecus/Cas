@@ -1,0 +1,16 @@
+﻿{
+    "ConnectionStrings": {
+<<<<<<< HEAD
+        "Scat": "92.47.31.254:45617",
+        "Audit": "mongodb://92.47.31.254:27017/Audit"
+=======
+        "Audit": "mongodb://91.213.233.139:27017/Audit",
+        "ScatTest": "http://91.213.233.139:45619"
+>>>>>>> master
+    },
+    "Last" : {
+        "Server": "Scat",
+        "Login": "casadmin"
+    }
+    
+}
