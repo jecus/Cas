@@ -3902,7 +3902,7 @@ namespace SmartCore.DtoHelper
 				PerformanceRecords = maincheck.PerformanceRecords?.Select(i => i.Convert()) as ICollection<DirectiveRecordDTO>,
 				CategoriesRecords = maincheck.CategoriesRecords?.Select(i => i.Convert()) as ICollection<CategoryRecordDTO>,
 				Kits = maincheck.Kits?.Select(i => i.Convert()) as ICollection<AccessoryRequiredDTO>,
-				BindMpds = maincheck.BindMpds?.Select(i => i.Convert()) as ICollection<MaintenanceDirectiveDTO>
+				//BindMpds = maincheck.BindMpds?.Select(i => i.Convert()) as ICollection<MaintenanceDirectiveDTO>
 			};
 		}
 
@@ -3945,8 +3945,8 @@ namespace SmartCore.DtoHelper
 				}
 			}
 
-			if (maincheckdto.BindMpds != null)
-				value.BindMpds.AddRange(maincheckdto.BindMpds.Select(i => i.Convert()));
+			//if (maincheckdto.BindMpds != null)
+			//	value.BindMpds.AddRange(maincheckdto.BindMpds.Select(i => i.Convert()));
 
 			return value;
 		}
