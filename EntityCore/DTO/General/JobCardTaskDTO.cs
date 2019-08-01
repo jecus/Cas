@@ -44,8 +44,8 @@ namespace EntityCore.DTO.General
 
 		#region Navigation Property
 
-		[JsonIgnore]
-		public JobCardDTO JobCardDto { get; set; }
+		//[JsonIgnore]
+		//public JobCardDTO JobCardDto { get; set; }
 
 		#endregion
 

@@ -228,8 +228,8 @@ namespace EntityCore.DTO.General
 
 		#region Navigation Property
 
-		[JsonIgnore]
-		public MaintenanceCheckDTO MaintenanceCheckDto { get; set; }
+		//[JsonIgnore]
+		//public MaintenanceCheckDTO MaintenanceCheckDto { get; set; }
 
 		#endregion
 
