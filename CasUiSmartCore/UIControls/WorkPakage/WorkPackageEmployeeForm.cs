@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
-using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
 using EntityCore.DTO.Dictionaries;
 using EntityCore.DTO.General;
@@ -63,7 +61,7 @@ namespace CAS.UI.UIControls.WorkPakage
 
 		private void BackgroundWorkerRunWorkerLoadCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
-			workPackageEmployeeListViewAll.SetItemsArray(_resultDocumentArray.ToArray());
+			workPackageEmployeeListViewAll.SetItemsArray(_initialDocumentArray.ToArray());
 			workPackageEmployeeListView2.SetItemsArray(_wpSpecialists.ToArray());
 		}
 
@@ -76,10 +74,8 @@ namespace CAS.UI.UIControls.WorkPakage
 			_workPackageSpecialists.Clear();
 
 			_initialDocumentArray.Clear();
-			_resultDocumentArray.Clear();
 			_wpSpecialists.Clear();
 
-			_animatedThreadWorker.ReportProgress(0, "load Personnel");
 			_initialDocumentArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<SpecialistDTO,Specialist>(loadChild:true));
 			var aircraftModels = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO,AircraftModel>(new Filter("ModelingObjectTypeId", 7));
 
@@ -92,7 +88,6 @@ namespace CAS.UI.UIControls.WorkPakage
 				}
 			}
 
-			_animatedThreadWorker.ReportProgress(50, "load Work Package Personnel");
 
 			_workPackageSpecialists.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<WorkPackageSpecialistsDTO,WorkPackageSpecialists>(new Filter("WorkPackageId", _currentWorkPackage.ItemId)));
 
@@ -100,11 +95,8 @@ namespace CAS.UI.UIControls.WorkPakage
 			if (specialistIds.Length > 0)
 				_wpSpecialists.AddRange(_initialDocumentArray.Where(s => specialistIds.Any(id => id == s.ItemId)));
 
-			_animatedThreadWorker.ReportProgress(70, "filter specialists");
 
-			FilterItems(_initialDocumentArray, _resultDocumentArray);
 
-			_animatedThreadWorker.ReportProgress(100, "load complete");
 		}
 
 		#endregion
@@ -136,7 +128,9 @@ namespace CAS.UI.UIControls.WorkPakage
 				try
 				{
 					var wpSpecialist = new WorkPackageSpecialists {SpecialistId = selectedItem.ItemId, WorkPackageId = _currentWorkPackage.ItemId };
+					 _wpSpecialists.Add(selectedItem);
 					GlobalObjects.CasEnvironment.NewKeeper.Save(wpSpecialist);
+					_workPackageSpecialists.Add(wpSpecialist);
 				}
 				catch (Exception ex)
 				{
@@ -144,7 +138,8 @@ namespace CAS.UI.UIControls.WorkPakage
 				}
 			}
 
-			_animatedThreadWorker.RunWorkerAsync();
+
+			workPackageEmployeeListView2.SetItemsArray(_wpSpecialists.ToArray());
 		}
 
 		#endregion
@@ -160,17 +155,19 @@ namespace CAS.UI.UIControls.WorkPakage
 			{
 				try
 				{
+					
 					var wpSpecialist = _workPackageSpecialists.First(s => s.SpecialistId == selectedItem.ItemId);
 					if(wpSpecialist != null)
 						GlobalObjects.CasEnvironment.NewKeeper.Delete(wpSpecialist);
+
+					_wpSpecialists.Remove(selectedItem);
+					workPackageEmployeeListView2.SetItemsArray(_wpSpecialists.ToArray());
 				}
 				catch (Exception ex)
 				{
 					Program.Provider.Logger.Log("Error while save bind task record", ex);
 				}
 			}
-
-			_animatedThreadWorker.RunWorkerAsync();
 		}
 
 		#endregion
@@ -194,91 +191,6 @@ namespace CAS.UI.UIControls.WorkPakage
 		}
 
 		#endregion
-
-		#region private void ButtonFilter_Click(object sender, EventArgs e)
-
-		private void ButtonFilter_Click(object sender, EventArgs e)
-		{
-			var form = new CommonFilterForm(_filter, _initialDocumentArray);
-
-			if (form.ShowDialog(this) == DialogResult.OK)
-			{
-				_animatedThreadWorker.DoWork -= AnimatedThreadWorkerDoLoad;
-				_animatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
-				_animatedThreadWorker.DoWork += AnimatedThreadWorkerDoFilteringWork;
-
-				_animatedThreadWorker.RunWorkerAsync();
-			}
-		}
-
-		#endregion
-
-		#region private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
-
-		private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
-		{
-			_resultDocumentArray.Clear();
-
-			#region Фильтрация директив
-			_animatedThreadWorker.ReportProgress(50, "filter directives");
-
-			FilterItems(_initialDocumentArray, _resultDocumentArray);
-
-			if (_animatedThreadWorker.CancellationPending)
-			{
-				e.Cancel = true;
-				return;
-			}
-			#endregion
-
-			_animatedThreadWorker.ReportProgress(100, "Complete");
-		}
-
-		#endregion
-
-		#region private void FilterItems(IEnumerable<AircraftFlight> initialCollection, ICommonCollection<AircraftFlight> resultCollection)
-
-		///<summary>
-		///</summary>
-		///<param name="initialCollection"></param>
-		///<param name="resultCollection"></param>
-		private void FilterItems(IEnumerable<Specialist> initialCollection, ICommonCollection<Specialist> resultCollection)
-		{
-			if (_filter == null || _filter.All(i => i.Values.Length == 0))
-			{
-				resultCollection.Clear();
-				resultCollection.AddRange(initialCollection);
-				return;
-			}
-
-			resultCollection.Clear();
-
-			foreach (var pd in initialCollection)
-			{
-				if (_filter.FilterTypeAnd)
-				{
-					bool acceptable = true;
-					foreach (ICommonFilter filter in _filter)
-					{
-						acceptable = filter.Acceptable(pd); if (!acceptable) break;
-					}
-					if (acceptable) resultCollection.Add(pd);
-				}
-				else
-				{
-					bool acceptable = true;
-					foreach (ICommonFilter filter in _filter)
-					{
-						if (filter.Values == null || filter.Values.Length == 0)
-							continue;
-						acceptable = filter.Acceptable(pd); if (acceptable) break;
-					}
-					if (acceptable) resultCollection.Add(pd);
-				}
-			}
-		}
-		#endregion
-
 
 	}
 }
