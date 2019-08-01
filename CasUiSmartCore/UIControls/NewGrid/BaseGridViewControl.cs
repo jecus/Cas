@@ -331,9 +331,6 @@ namespace CAS.UI.UIControls.NewGrid
 
 					rowInfo.Cells[i].Tag = cell;
 
-
-					rowInfo.Cells[i].Value = cell;
-
 					if (cell.ForeColor.HasValue)
 						rowInfo.Cells[i].Style.ForeColor = cell.ForeColor.Value;
 
