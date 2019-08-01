@@ -11,7 +11,7 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Mail;
 using SmartCore.Filters;
-using SmartCore.Queries;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.MailControls
 {
@@ -24,9 +24,9 @@ namespace CAS.UI.UIControls.MailControls
 		private ICommonCollection<MailChats> _resultDocumentArray = new CommonCollection<MailChats>();
 		private CommonFilterCollection _filter;
 
-		private ContextMenuStrip _contextMenuStrip;
-		private ToolStripMenuItem _toolStripMenuItemEdit;
-		private ToolStripMenuItem _toolStripMenuItemDelete;
+		private RadDropDownMenu _contextMenuStrip;
+		private RadMenuItem _toolStripMenuItemEdit;
+		private RadMenuItem _toolStripMenuItemDelete;
 
 		#endregion
 
@@ -106,7 +106,22 @@ namespace CAS.UI.UIControls.MailControls
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
-			_directivesViewer.ContextMenuStrip = _contextMenuStrip;
+			_directivesViewer.CustomMenu = _contextMenuStrip;
+
+			_directivesViewer.MenuOpeningAction = () =>
+			{
+				if (_directivesViewer.SelectedItem == null)
+				{
+					_toolStripMenuItemEdit.Enabled = false;
+					_toolStripMenuItemDelete.Enabled = _directivesViewer.SelectedItems.Count > 0;
+				}
+				else
+				{
+					_toolStripMenuItemDelete.Enabled = true;
+					_toolStripMenuItemEdit.Enabled = true;
+				}
+			};
+
 			panel1.Controls.Add(_directivesViewer);
 		}
 
@@ -116,9 +131,9 @@ namespace CAS.UI.UIControls.MailControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new ContextMenuStrip();
-			_toolStripMenuItemEdit = new ToolStripMenuItem();
-			_toolStripMenuItemDelete = new ToolStripMenuItem();
+			_contextMenuStrip = new RadDropDownMenu();
+			_toolStripMenuItemEdit = new RadMenuItem();
+			_toolStripMenuItemDelete = new RadMenuItem();
 
 			// 
 			// contextMenuStrip
@@ -136,32 +151,11 @@ namespace CAS.UI.UIControls.MailControls
 			_toolStripMenuItemEdit.Text = "Edit";
 			_toolStripMenuItemEdit.Click += _toolStripMenuItemEdit_Click;
 
-			_contextMenuStrip.Items.AddRange(new ToolStripItem[]
-			{
+			_contextMenuStrip.Items.AddRange(
 				_toolStripMenuItemEdit,
-				new ToolStripSeparator(),
+				new RadMenuSeparatorItem(), 
 				_toolStripMenuItemDelete
-			});
-
-			_contextMenuStrip.Opening += _contextMenuStrip_Opening;
-		}
-
-		#endregion
-
-		#region private void _contextMenuStrip_Opening(object sender, CancelEventArgs e)
-
-		private void _contextMenuStrip_Opening(object sender, CancelEventArgs e)
-		{
-			if (_directivesViewer.SelectedItem == null)
-			{
-				_toolStripMenuItemEdit.Enabled = false;
-				_toolStripMenuItemDelete.Enabled = _directivesViewer.SelectedItems.Count > 0;
-			}
-			else
-			{
-				_toolStripMenuItemDelete.Enabled = true;
-				_toolStripMenuItemEdit.Enabled = true;
-			}
+			);
 		}
 
 		#endregion
@@ -228,7 +222,7 @@ namespace CAS.UI.UIControls.MailControls
 		#endregion
 
 		#region private void ButtonDeleteClick(object sender, EventArgs e)
-
+		
 		private void ButtonDeleteClick(object sender, EventArgs e)
 		{
 			Delete();
@@ -251,29 +245,9 @@ namespace CAS.UI.UIControls.MailControls
 
 			if (confirmResult == DialogResult.Yes)
 			{
-				int count = _directivesViewer.SelectedItems.Count;
-
 				var selectedItems = new List<MailChats>();
 				selectedItems.AddRange(_directivesViewer.SelectedItems.OfType<MailChats>().ToArray());
-				for (int i = 0; i < count; i++)
-				{
-					try
-					{
-						GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems[i]);
-
-						var qr = BaseQueries.GetDeleteQuery<MailRecords>(new ICommonFilter[]
-						{
-							new CommonFilter<int>(MailRecords.MailChatIdProperty, selectedItems[i].ItemId),
-						});
-
-						GlobalObjects.CasEnvironment.Execute(qr);
-					}
-					catch (Exception ex)
-					{
-						Program.Provider.Logger.Log("Error while deleting data", ex);
-						return;
-					}
-				}
+				GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
 
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
@@ -321,7 +295,7 @@ namespace CAS.UI.UIControls.MailControls
 		///<param name="resultCollection"></param>
 		private void FilterItems(IEnumerable<MailChats> initialCollection, ICommonCollection<MailChats> resultCollection)
 		{
-			if (_filter == null || _filter.Count == 0)
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
 				resultCollection.Clear();
 				resultCollection.AddRange(initialCollection);

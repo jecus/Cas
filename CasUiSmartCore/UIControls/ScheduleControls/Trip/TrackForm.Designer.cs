@@ -1,6 +1,6 @@
 ﻿using MetroFramework.Controls;
 using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 
 namespace CAS.UI.UIControls.ScheduleControls.Trip
 {
@@ -112,11 +112,9 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 			this.flightNumberListViewAll.Displayer = null;
 			this.flightNumberListViewAll.DisplayerText = null;
 			this.flightNumberListViewAll.Entity = null;
-			this.flightNumberListViewAll.IgnoreAutoResize = false;
 			this.flightNumberListViewAll.Location = new System.Drawing.Point(11, 119);
 			this.flightNumberListViewAll.Name = "flightNumberListViewAll";
 			this.flightNumberListViewAll.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.flightNumberListViewAll.ShowGroups = true;
 			this.flightNumberListViewAll.Size = new System.Drawing.Size(1244, 268);
 			this.flightNumberListViewAll.TabIndex = 38;
 			// 
@@ -125,11 +123,9 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 			this.flightNumberListView2.Displayer = null;
 			this.flightNumberListView2.DisplayerText = null;
 			this.flightNumberListView2.Entity = null;
-			this.flightNumberListView2.IgnoreAutoResize = false;
 			this.flightNumberListView2.Location = new System.Drawing.Point(11, 393);
 			this.flightNumberListView2.Name = "flightNumberListView2";
 			this.flightNumberListView2.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.flightNumberListView2.ShowGroups = true;
 			this.flightNumberListView2.Size = new System.Drawing.Size(1244, 272);
 			this.flightNumberListView2.TabIndex = 39;
 			// 

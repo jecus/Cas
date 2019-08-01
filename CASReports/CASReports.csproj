@@ -390,6 +390,7 @@
     <Compile Include="Builders\AirFleetBuilder.cs" />
     <Compile Include="Builders\ComponentAMReportBuilder.cs" />
     <Compile Include="Builders\ComponentTaskReportBuilderNew.cs" />
+    <Compile Include="Builders\StoreBarCodeReportBuilder.cs" />
     <Compile Include="Builders\DirectivesReportBuilderLitAVIAEng.cs" />
     <Compile Include="Builders\DirectivesReportBuilderLitAVIA.cs" />
     <Compile Include="Builders\DirectivesReportBuilder.cs" />
@@ -763,6 +764,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ShouldBeOnStockDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\StoreBarCodeDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StoreBarCodeDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Datasets\StoreDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1138,6 +1144,12 @@
     </Compile>
     <Compile Include="ReportTemplates\NonRoutineCardReportScat.cs">
       <DependentUpon>NonRoutineCardReportScat.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\StoreBarCodeReport.cs">
+      <DependentUpon>StoreBarCodeReport.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
@@ -1976,6 +1988,17 @@
     <None Include="Datasets\ShouldBeOnStockDataSet.xss">
       <DependentUpon>ShouldBeOnStockDataSet.xsd</DependentUpon>
     </None>
+    <None Include="Datasets\StoreBarCodeDataSet.xsc">
+      <DependentUpon>StoreBarCodeDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\StoreBarCodeDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>StoreBarCodeDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\StoreBarCodeDataSet.xss">
+      <DependentUpon>StoreBarCodeDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Datasets\StoreDataSet.xsc">
       <DependentUpon>StoreDataSet.xsd</DependentUpon>
     </None>
@@ -2341,6 +2364,10 @@
     <EmbeddedResource Include="ReportTemplates\NonRoutineCardReportScat.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>NonRoutineCardReportScat.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\StoreBarCodeReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>StoreBarCodeReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportTemplates\ToolTagReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

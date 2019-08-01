@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Windows.Forms;
-using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.NewGrid;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls
@@ -8,7 +7,7 @@ namespace CAS.UI.UIControls.PurchaseControls
     ///<summary>
     /// список для отображения категорий нерутинных работ
     ///</summary>
-    public partial class InitionalOrderView : BaseListViewControl<InitialOrderRecord>
+    public partial class InitionalOrderView : BaseGridViewControl<InitialOrderRecord>
     {
         #region public InitionalOrderView()
         ///<summary>
@@ -21,36 +20,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		#region Methods
 
-		#region protected override SetGroupsToItems(int columnIndex)
-		/// <summary>
-		/// Выполняет группировку элементов
-		/// </summary>
-		protected override void SetGroupsToItems(int columnIndex)
-        {
-            itemsListView.Groups.Clear();
-
-            foreach (ListViewItem item in ListViewItemList)
-            {
-                String temp;
-                InitialOrderRecord record = item.Tag as InitialOrderRecord;
-                if (record == null)
-                    return;
-                if (record.Product == null)
-                {
-                    temp = "Another accessory";
-                    itemsListView.Groups.Add(temp, temp);
-                    item.Group = itemsListView.Groups[temp];
-                }
-                else
-                {
-                    temp = record.Product.GoodsClass.ShortName;
-                    itemsListView.Groups.Add(temp, temp);
-                    item.Group = itemsListView.Groups[temp];
-                }
-            }
-        }
-        #endregion
-
+		
         #region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
 
         /// <summary>
@@ -58,8 +28,8 @@ namespace CAS.UI.UIControls.PurchaseControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
-        {
+        protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
+		{
             if (SelectedItem == null) return;
 
             InitialOrderRecordForm form = new InitialOrderRecordForm(SelectedItem);

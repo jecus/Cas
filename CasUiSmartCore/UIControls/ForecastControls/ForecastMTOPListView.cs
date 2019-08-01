@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Windows.Forms;
-using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
-using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.Auxiliary.Comparers;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
+using Telerik.WinControls.UI;
 
 
 namespace CAS.UI.UIControls.ForecastControls
@@ -21,7 +19,7 @@ namespace CAS.UI.UIControls.ForecastControls
     ///<summary>
     /// список для отображения ордеров запроса
     ///</summary>
-    public partial class ForecastMTOPListView : BaseListViewControl<NextPerformance>
+    public partial class ForecastMTOPListView : BaseGridViewControl<NextPerformance>
     {
 		#region public ForecastListView()
 		///<summary>
@@ -40,183 +38,144 @@ namespace CAS.UI.UIControls.ForecastControls
 		/// </summary>
 		protected override void SetHeaders()
 		{
-			ColumnHeaderList.Clear();
-
-			ColumnHeader columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.05f), Text = "ATA" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Title" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Description" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Times" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Work Type" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Check" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Next" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Fst.Perf" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Rpt. Intv." };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Overdue/Remain" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Kit" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "MH" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Cost" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Total MH" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Total Cost", };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "X1" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Forecast Data" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "X2" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
-			ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
-			itemsListView.Columns[3].AutoResize(ColumnHeaderAutoResizeStyle.None);
-			itemsListView.Columns[3].Width = 10;
+			AddColumn("ATA", (int)(radGridView1.Width * 0.10f));
+			AddColumn("Title", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Description", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Times", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Work Type", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Check", (int)(radGridView1.Width * 0.2f));
+			AddDateColumn("Next", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Fst.Perf", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Rpt. Intv.", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Overdue/Remain", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Kit", (int)(radGridView1.Width * 0.2f));
+			AddColumn("MH", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Cost", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Total MH", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Total Cost", (int)(radGridView1.Width * 0.2f));
+			AddColumn("X1", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Forecast Data", (int)(radGridView1.Width * 0.2f));
+			AddColumn("X2", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
 		}
 		#endregion
 
-	    protected override void SetGroupsToItems(List<ListViewItem> listViewItems, int colunmIndex)
-	    {
-			itemsListView.Groups.Clear();
-		    foreach (var item in listViewItems.OrderBy(lvi => Convert.ToDateTime(((NextPerformance)lvi.Tag).PerformanceDate).Date))
-		    {
-			    if (item.Tag is NextPerformance)
-			    {
-				    var np = item.Tag as NextPerformance;
-				    var temp = "";
+		//   protected override void SetGroupsToItems(List<ListViewItem> listViewItems, int colunmIndex)
+		//   {
+		//	itemsListView.Groups.Clear();
+		//    foreach (var item in listViewItems.OrderBy(lvi => Convert.ToDateTime(((NextPerformance)lvi.Tag).PerformanceDate).Date))
+		//    {
+		//	    if (item.Tag is NextPerformance)
+		//	    {
+		//		    var np = item.Tag as NextPerformance;
+		//		    var temp = "";
 
-					if (np.Parent is MaintenanceDirective)
-					    temp = $"Check: {np.Group}-{np.ParentCheck.Name} ";
-					else temp = $"{ListViewGroupHelper.GetGroupString(item.Tag)} | Date: {np.PerformanceDate?.ToString(new GlobalTermsProvider()["DateFormat"].ToString())}";
-				    itemsListView.Groups.Add(temp, temp);
-				    item.Group = itemsListView.Groups[temp];
-			    }
-		    }
-		}
+		//			if (np.Parent is MaintenanceDirective)
+		//			    temp = $"Check: {np.Group}-{np.ParentCheck.Name} ";
+		//			else temp = $"{ListViewGroupHelper.GetGroupString(item.Tag)} | Date: {np.PerformanceDate?.ToString(new GlobalTermsProvider()["DateFormat"].ToString())}";
+		//		    itemsListView.Groups.Add(temp, temp);
+		//		    item.Group = itemsListView.Groups[temp];
+		//	    }
+		//    }
+		//}
 
-	    #region protected override SetGroupsToItems(int columnIndex)
-		protected override void SetGroupsToItems(int columnIndex)
-		{
-			itemsListView.Groups.Clear();
-			foreach (var item in ListViewItemList)
-			{
-				if (item.Tag is NextPerformance)
-				{
-					var np = item.Tag as NextPerformance;
-					//var temp = $"Date:{np.PerformanceDate?.ToString(new GlobalTermsProvider()["DateFormat"].ToString())} | Check: {np.Group}-{np.ParentCheck.Name} ";
-					var temp = $"Date:{np.PerformanceDate?.ToString(new GlobalTermsProvider()["DateFormat"].ToString())}";
-					itemsListView.Groups.Add(temp, temp);
-					item.Group = itemsListView.Groups[temp];
-				}
-			}
-		}
+		#region protected override SetGroupsToItems(int columnIndex)
+		//protected override void SetGroupsToItems(int columnIndex)
+		//{
+		//	itemsListView.Groups.Clear();
+		//	foreach (var item in ListViewItemList)
+		//	{
+		//		if (item.Tag is NextPerformance)
+		//		{
+		//			var np = item.Tag as NextPerformance;
+		//			//var temp = $"Date:{np.PerformanceDate?.ToString(new GlobalTermsProvider()["DateFormat"].ToString())} | Check: {np.Group}-{np.ParentCheck.Name} ";
+		//			var temp = $"Date:{np.PerformanceDate?.ToString(new GlobalTermsProvider()["DateFormat"].ToString())}";
+		//			itemsListView.Groups.Add(temp, temp);
+		//			item.Group = itemsListView.Groups[temp];
+		//		}
+		//	}
+		//}
 		#endregion
 
 		#region protected override void SetItemColor(ListViewItem listViewItem, NextPerformance item)
-		protected override void SetItemColor(ListViewItem listViewItem, NextPerformance item)
+		protected override void  SetItemColor(GridViewRowInfo listViewItem, NextPerformance item)
 		{
 			Color itemForeColor = Color.Black;
 
 			if (item is MaintenanceNextPerformance)
 			{
 				MaintenanceNextPerformance mnp = item as MaintenanceNextPerformance;
-				listViewItem.ForeColor = mnp == ((MaintenanceCheck)item.Parent).GetPergormanceGroupWhereCheckIsSenior()[0]
-					? Color.Black
-					: Color.Gray;
+				foreach (GridViewCellInfo cell in listViewItem.Cells)
+				{
+					cell.Style.CustomizeFill = true;
+					cell.Style.ForeColor = mnp == ((MaintenanceCheck)item.Parent).GetPergormanceGroupWhereCheckIsSenior()[0]
+						? Color.Black
+						: Color.Gray;
+				}
 
 				if (mnp.CalcForHight)
 				{
-					listViewItem.ForeColor = itemForeColor;
-					listViewItem.BackColor = Color.FromArgb(Highlight.PurpleLight.Color);
+					foreach (GridViewCellInfo cell in listViewItem.Cells)
+					{
+						cell.Style.CustomizeFill = true;
+						cell.Style.BackColor = Color.FromArgb(Highlight.PurpleLight.Color);
+						cell.Style.ForeColor = itemForeColor;
+					}
 				}
 			}
 			else
 			{
 				IDirective imd = item.Parent;
-				listViewItem.ForeColor = imd.NextPerformances.IndexOf(item) == 0
-					? Color.Black
-					: Color.Gray;
-				if (imd.Condition == ConditionState.Notify)
-					listViewItem.BackColor = Color.FromArgb(Highlight.Yellow.Color);
-				if (imd.Condition == ConditionState.Overdue)
-					listViewItem.BackColor = Color.FromArgb(Highlight.Red.Color);
-				if (imd.Percents != null && imd.Percents > 0)
-					listViewItem.BackColor = Color.FromArgb(Highlight.Green.Color);
+				foreach (GridViewCellInfo cell in listViewItem.Cells)
+				{
+					cell.Style.CustomizeFill = true;
+					if (imd.Condition == ConditionState.Notify)
+						cell.Style.BackColor = Color.FromArgb(Highlight.Yellow.Color);
+					if (imd.Condition == ConditionState.Overdue)
+						cell.Style.BackColor = Color.FromArgb(Highlight.Red.Color);
+					if (imd.Percents != null && imd.Percents > 0)
+						cell.Style.BackColor = Color.FromArgb(Highlight.Green.Color);
 
-				listViewItem.ForeColor = itemForeColor;
+					cell.Style.ForeColor = imd.NextPerformances.IndexOf(item) == 0
+						? Color.Black
+						: Color.Gray; ;
+				}
 			}
 
 			if (item.BlockedByPackage != null)
 			{
-				listViewItem.ForeColor = itemForeColor;
-				listViewItem.BackColor = Color.FromArgb(Highlight.Grey.Color);
-				listViewItem.ToolTipText = "This performance is involved on Work Package:" + item.BlockedByPackage.Title;
+				foreach (GridViewCellInfo cell in listViewItem.Cells)
+				{
+					cell.Style.CustomizeFill = true;
+					cell.Style.BackColor = Color.FromArgb(Highlight.Grey.Color);
+					cell.Style.ForeColor = itemForeColor;
+				}
 			}
 
 
-			Color itemBacBlackolor = ItemListView.BackColor;
+			Color itemBacBlackolor = listViewItem.Cells[0].Style.BackColor;
 			if (item.Parent is MaintenanceDirective)
 			{
 				var mpd = item.Parent as MaintenanceDirective;
 				if (mpd.RecalculateTenPercent)
 				{
 					itemBacBlackolor = Color.DodgerBlue;
-					listViewItem.BackColor = itemBacBlackolor;
+					foreach (GridViewCellInfo cell in listViewItem.Cells)
+					{
+						cell.Style.CustomizeFill = true;
+						cell.Style.BackColor = itemBacBlackolor;
+					}
 				}
 			}
-
-
-			Color listViewForeColor = ItemListView.ForeColor;
-			Color listViewBackColor = ItemListView.BackColor;
-
-			listViewItem.UseItemStyleForSubItems = true;
-			foreach (ListViewItem.ListViewSubItem subItem in listViewItem.SubItems)
-			{
-				if (subItem.ForeColor.ToArgb() == listViewForeColor.ToArgb())
-					subItem.ForeColor = itemForeColor;
-				if (subItem.BackColor.ToArgb() == listViewBackColor.ToArgb())
-					subItem.BackColor = itemBacBlackolor;
-			}
-
 		}
 		#endregion
 
-		#region protected override ListViewItem.ListViewSubItem[] GetItemsString(NextPerformance item)
+		#region protected override List<CustomCell> GetListViewSubItems(NextPerformance item)
 
-		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(NextPerformance item)
+		protected override List<CustomCell> GetListViewSubItems(NextPerformance item)
 		{
-			List<ListViewItem.ListViewSubItem> subItems = new List<ListViewItem.ListViewSubItem>();
-			Color tcnColor = itemsListView.ForeColor;
+			var subItems = new List<CustomCell>();
+			Color tcnColor = radGridView1.ForeColor;
 			int index;
 			if (item is MaintenanceNextPerformance)
 			{
@@ -261,183 +220,182 @@ namespace CAS.UI.UIControls.ForecastControls
 			}
 
 
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ATAChapter?.ToString(), Tag = item.ATAChapter });
-			subItems.Add(new ListViewItem.ListViewSubItem { ForeColor = tcnColor, Text = title, Tag = title });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Description, Tag = item.Description });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = timesString, Tag = times });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.WorkType, Tag = item.WorkType });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.MaintenanceCheck != null ? item.MaintenanceCheck.ToString() : "", Tag = item.MaintenanceCheck });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.PerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)item.PerformanceDate), Tag = item.PerformanceDate });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.PerformanceSource?.ToString(), Tag = item.PerformanceSource });
+			subItems.Add(CreateRow(item.ATAChapter?.ToString(), item.ATAChapter ));
+			subItems.Add(CreateRow(title, title, tcnColor));
+			subItems.Add(CreateRow(item.Description, item.Description ));
+			subItems.Add(CreateRow(timesString, times ));
+			subItems.Add(CreateRow(item.WorkType, item.WorkType ));
+			subItems.Add(CreateRow(item.MaintenanceCheck != null ? item.MaintenanceCheck.ToString() : "", item.MaintenanceCheck ));
+			subItems.Add(CreateRow(item.PerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)item.PerformanceDate), item.PerformanceDate ));
+			subItems.Add(CreateRow(item.PerformanceSource?.ToString(), item.PerformanceSource ));
 			if (item.Parent is MaintenanceDirective)
 			{
 				var d = item.Parent as MaintenanceDirective;
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = d.PhaseRepeat?.ToString(), Tag = d.PhaseRepeat });
+				subItems.Add(CreateRow(d.PhaseRepeat?.ToString(), d.PhaseRepeat ));
 			}
-			else subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Parent.Threshold.RepeatInterval.ToString(), Tag = item.Parent.Threshold.RepeatInterval });
+			else subItems.Add(CreateRow(item.Parent.Threshold.RepeatInterval.ToString(), item.Parent.Threshold.RepeatInterval ));
+			subItems.Add(CreateRow(item.Remains.ToString(), item.Remains ));
+			subItems.Add(CreateRow(item.KitsToString, item.Kits?.Count ));
+			subItems.Add(CreateRow(manHours.ToString(), manHours ));
+			subItems.Add(CreateRow(cost.ToString(), cost ));
+			subItems.Add(CreateRow("", "" ));
+			subItems.Add(CreateRow("", "" ));
+			subItems.Add(CreateRow(item.BeforeForecastResourceRemain != null ? item.BeforeForecastResourceRemain?.ToString() : "", item.BeforeForecastResourceRemain ));
+			subItems.Add(CreateRow(item.Parent?.ForecastLifelength?.ToString(), item.Parent?.ForecastLifelength ));
+			subItems.Add(CreateRow(item.Parent.AfterForecastResourceRemain != null ? item.Parent.AfterForecastResourceRemain?.ToString() : "", item.Parent.AfterForecastResourceRemain ));
+			subItems.Add(CreateRow(author, author ));
 
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Remains.ToString(), Tag = item.Remains });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.KitsToString, Tag = item.Kits?.Count });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = manHours.ToString(), Tag = manHours });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = cost.ToString(), Tag = cost });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.BeforeForecastResourceRemain != null ? item.BeforeForecastResourceRemain?.ToString() : "", Tag = item.BeforeForecastResourceRemain });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Parent?.ForecastLifelength?.ToString(), Tag = item.Parent?.ForecastLifelength });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Parent.AfterForecastResourceRemain != null ? item.Parent.AfterForecastResourceRemain?.ToString() : "", Tag = item.Parent.AfterForecastResourceRemain });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
-
-			return subItems.ToArray();
+			return subItems;
 		}
 
 		#endregion
 
 		#region protected override void SortItems(int columnIndex)
 
-		protected override void SortItems(int columnIndex)
-		{
-			if (OldColumnIndex != columnIndex)
-				SortMultiplier = -1;
-			if (SortMultiplier == 1)
-				SortMultiplier = -1;
-			else
-				SortMultiplier = 1;
-			itemsListView.Items.Clear();
-			OldColumnIndex = columnIndex;
+		//protected override void SortItems(int columnIndex)
+		//{
+		//	if (OldColumnIndex != columnIndex)
+		//		SortMultiplier = -1;
+		//	if (SortMultiplier == 1)
+		//		SortMultiplier = -1;
+		//	else
+		//		SortMultiplier = 1;
+		//	itemsListView.Items.Clear();
+		//	OldColumnIndex = columnIndex;
 
-			List<ListViewItem> resultList = new List<ListViewItem>();
+		//	List<ListViewItem> resultList = new List<ListViewItem>();
 
-			if (columnIndex != 6)
-			{
-				//SetGroupsToItems(columnIndex);
+		//	if (columnIndex != 6)
+		//	{
+		//		//SetGroupsToItems(columnIndex);
 
-				//ListViewItemList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
-				//добавление остальных подзадач
-				foreach (ListViewItem item in ListViewItemList)
-				{
-					resultList.Add(item);
-					NextPerformance np = (NextPerformance)item.Tag;
-					//if (np.Parent is MaintenanceCheck && ((MaintenanceCheck)np.Parent).Grouping)
-					//{
-					//	MaintenanceCheck mc = (MaintenanceCheck)np.Parent;
-					//	List<MaintenanceNextPerformance> performances = mc.GetPergormanceGroupWhereCheckIsSenior();
-					//	if (performances == null || performances.Count == 1) continue;
-					//	for (int i = 1; i < performances.Count; i++)
-					//	{
-					//		ListViewItem temp = new ListViewItem(GetListViewSubItems(performances[i]), null)
-					//		{
-					//			Tag = performances[i],
-					//			Group = item.Group
-					//		};
-					//		resultList.Add(temp);
-					//	}
-					//}
-					if (np.Parent is MaintenanceDirective)
-					{
-						var directive = (MaintenanceDirective)np.Parent;
-						if (directive.MtopNextPerformances == null || directive.MtopNextPerformances.Count <= 1) continue;
-						for (int i = 1; i < directive.MtopNextPerformances.Count; i++)
-						{
-							ListViewItem temp = new ListViewItem(GetListViewSubItems(directive.MtopNextPerformances[i]), null)
-							{
-								Tag = directive.MtopNextPerformances[i],
-								Group = item.Group
-							};
-							resultList.Add(temp);
-						}
-					}
-					else
-					{
-						//первая подзадача описывает саму родитескую задачу, повторно ее добавлять ненадо
-						if (np.Parent.NextPerformances == null || np.Parent.NextPerformances.Count <= 1) continue;
-						for (int i = 1; i < np.Parent.NextPerformances.Count; i++)
-						{
-							ListViewItem temp = new ListViewItem(GetListViewSubItems(np.Parent.NextPerformances[i]), null)
-							{
-								Tag = np.Parent.NextPerformances[i],
-								Group = item.Group  
-							};
-							resultList.Add(temp);
-						}
-					}
-				}
-			}
-			else
-			{
-				foreach (ListViewItem item in ListViewItemList)
-				{
-					resultList.Add(item);
-					NextPerformance np = (NextPerformance)item.Tag;
-					if (np.Parent is MaintenanceCheck && ((MaintenanceCheck)np.Parent).Grouping)
-					{
-						MaintenanceCheck mc = (MaintenanceCheck)np.Parent;
-						List<MaintenanceNextPerformance> performances = mc.GetPergormanceGroupWhereCheckIsSenior();
-						if (performances == null || performances.Count == 1) continue;
-						for (int i = 1; i < performances.Count; i++)
-						{
-							ListViewItem temp = new ListViewItem(GetListViewSubItems(performances[i]), null)
-							{
-								Tag = performances[i],
-								Group = item.Group
-							};
-							resultList.Add(temp);
-						}
-					}
-					else
-					{
-						//первая подзадача описывает саму родитескую задачу, повторно ее добавлять ненадо
-						if (np.Parent.NextPerformances == null || np.Parent.NextPerformances.Count <= 1) continue;
-						for (int i = 1; i < np.Parent.NextPerformances.Count; i++)
-						{
-							ListViewItem temp = new ListViewItem(GetListViewSubItems(np.Parent.NextPerformances[i]), null)
-							{
-								Tag = np.Parent.NextPerformances[i],
-							};
-							resultList.Add(temp);
-						}
-					}
-				}
+		//		//ListViewItemList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
+		//		//добавление остальных подзадач
+		//		foreach (ListViewItem item in ListViewItemList)
+		//		{
+		//			resultList.Add(item);
+		//			NextPerformance np = (NextPerformance)item.Tag;
+		//			//if (np.Parent is MaintenanceCheck && ((MaintenanceCheck)np.Parent).Grouping)
+		//			//{
+		//			//	MaintenanceCheck mc = (MaintenanceCheck)np.Parent;
+		//			//	List<MaintenanceNextPerformance> performances = mc.GetPergormanceGroupWhereCheckIsSenior();
+		//			//	if (performances == null || performances.Count == 1) continue;
+		//			//	for (int i = 1; i < performances.Count; i++)
+		//			//	{
+		//			//		ListViewItem temp = new ListViewItem(GetListViewSubItems(performances[i]), null)
+		//			//		{
+		//			//			Tag = performances[i],
+		//			//			Group = item.Group
+		//			//		};
+		//			//		resultList.Add(temp);
+		//			//	}
+		//			//}
+		//			if (np.Parent is MaintenanceDirective)
+		//			{
+		//				var directive = (MaintenanceDirective)np.Parent;
+		//				if (directive.MtopNextPerformances == null || directive.MtopNextPerformances.Count <= 1) continue;
+		//				for (int i = 1; i < directive.MtopNextPerformances.Count; i++)
+		//				{
+		//					ListViewItem temp = new ListViewItem(GetListViewSubItems(directive.MtopNextPerformances[i]), null)
+		//					{
+		//						Tag = directive.MtopNextPerformances[i],
+		//						Group = item.Group
+		//					};
+		//					resultList.Add(temp);
+		//				}
+		//			}
+		//			else
+		//			{
+		//				//первая подзадача описывает саму родитескую задачу, повторно ее добавлять ненадо
+		//				if (np.Parent.NextPerformances == null || np.Parent.NextPerformances.Count <= 1) continue;
+		//				for (int i = 1; i < np.Parent.NextPerformances.Count; i++)
+		//				{
+		//					ListViewItem temp = new ListViewItem(GetListViewSubItems(np.Parent.NextPerformances[i]), null)
+		//					{
+		//						Tag = np.Parent.NextPerformances[i],
+		//						Group = item.Group  
+		//					};
+		//					resultList.Add(temp);
+		//				}
+		//			}
+		//		}
+		//	}
+		//	else
+		//	{
+		//		foreach (ListViewItem item in ListViewItemList)
+		//		{
+		//			resultList.Add(item);
+		//			NextPerformance np = (NextPerformance)item.Tag;
+		//			if (np.Parent is MaintenanceCheck && ((MaintenanceCheck)np.Parent).Grouping)
+		//			{
+		//				MaintenanceCheck mc = (MaintenanceCheck)np.Parent;
+		//				List<MaintenanceNextPerformance> performances = mc.GetPergormanceGroupWhereCheckIsSenior();
+		//				if (performances == null || performances.Count == 1) continue;
+		//				for (int i = 1; i < performances.Count; i++)
+		//				{
+		//					ListViewItem temp = new ListViewItem(GetListViewSubItems(performances[i]), null)
+		//					{
+		//						Tag = performances[i],
+		//						Group = item.Group
+		//					};
+		//					resultList.Add(temp);
+		//				}
+		//			}
+		//			else
+		//			{
+		//				//первая подзадача описывает саму родитескую задачу, повторно ее добавлять ненадо
+		//				if (np.Parent.NextPerformances == null || np.Parent.NextPerformances.Count <= 1) continue;
+		//				for (int i = 1; i < np.Parent.NextPerformances.Count; i++)
+		//				{
+		//					ListViewItem temp = new ListViewItem(GetListViewSubItems(np.Parent.NextPerformances[i]), null)
+		//					{
+		//						Tag = np.Parent.NextPerformances[i],
+		//					};
+		//					resultList.Add(temp);
+		//				}
+		//			}
+		//		}
 
-				resultList.Sort(new DirectiveListViewComparer(columnIndex, SortMultiplier));
-				itemsListView.Groups.Clear();
-				//foreach (ListViewItem item in resultList)
-				//{
-				//    DateTime date = new DateTime(1950, 1, 1);
-				//    if (item.Tag is NextPerformance)
-				//    {
-				//        NextPerformance np = (NextPerformance)item.Tag;
-				//        if (np.PerformanceDate != null)
-				//            date = np.PerformanceDate.Value.Date;
-				//    }
+		//		resultList.Sort(new DirectiveListViewComparer(columnIndex, SortMultiplier));
+		//		itemsListView.Groups.Clear();
+		//		//foreach (ListViewItem item in resultList)
+		//		//{
+		//		//    DateTime date = new DateTime(1950, 1, 1);
+		//		//    if (item.Tag is NextPerformance)
+		//		//    {
+		//		//        NextPerformance np = (NextPerformance)item.Tag;
+		//		//        if (np.PerformanceDate != null)
+		//		//            date = np.PerformanceDate.Value.Date;
+		//		//    }
 
-				//    string temp = date.Date > new DateTime(1950, 1, 1).Date ? SmartCore.Auxiliary.Convert.GetDateFormat(date.Date) : "";
-				//    itemsListView.Groups.Add(temp, temp);
-				//    item.Group = itemsListView.Groups[temp];
-				//}
+		//		//    string temp = date.Date > new DateTime(1950, 1, 1).Date ? SmartCore.Auxiliary.Convert.GetDateFormat(date.Date) : "";
+		//		//    itemsListView.Groups.Add(temp, temp);
+		//		//    item.Group = itemsListView.Groups[temp];
+		//		//}
 
-				//Группировка элементов по датам выполнения
-				IEnumerable<IGrouping<DateTime, ListViewItem>> groupedItems =
-					resultList.Where(lvi => lvi.Tag != null &&
-												  lvi.Tag is NextPerformance)
-									.GroupBy(lvi => Convert.ToDateTime(((NextPerformance)lvi.Tag).PerformanceDate).Date);
-				foreach (var groupedItem in groupedItems)
-				{
-					//Собрание всех выполнений на данную дату в одну коллекцию
-					var performances = groupedItem.Select(lvi => lvi.Tag as NextPerformance).ToList();
+		//		//Группировка элементов по датам выполнения
+		//		IEnumerable<IGrouping<DateTime, ListViewItem>> groupedItems =
+		//			resultList.Where(lvi => lvi.Tag != null &&
+		//										  lvi.Tag is NextPerformance)
+		//							.GroupBy(lvi => Convert.ToDateTime(((NextPerformance)lvi.Tag).PerformanceDate).Date);
+		//		foreach (var groupedItem in groupedItems)
+		//		{
+		//			//Собрание всех выполнений на данную дату в одну коллекцию
+		//			var performances = groupedItem.Select(lvi => lvi.Tag as NextPerformance).ToList();
 
-					var temp = ListViewGroupHelper.GetGroupStringByPerformanceDate(performances, groupedItem.Key.Date);
+		//			var temp = ListViewGroupHelper.GetGroupStringByPerformanceDate(performances, groupedItem.Key.Date);
 
-					itemsListView.Groups.Add(temp, temp);
-					foreach (var item in groupedItem)
-						item.Group = itemsListView.Groups[temp];
-				}
-				//SetGroupsToItems();
-			}
+		//			itemsListView.Groups.Add(temp, temp);
+		//			foreach (var item in groupedItem)
+		//				item.Group = itemsListView.Groups[temp];
+		//		}
+		//		//SetGroupsToItems();
+		//	}
 
-			SetGroupsToItems(resultList, columnIndex);
-			itemsListView.Items.AddRange(resultList.OrderBy(lvi => Convert.ToDateTime(((NextPerformance)lvi.Tag).PerformanceDate).Date).ToArray());
+		//	SetGroupsToItems(resultList, columnIndex);
+		//	itemsListView.Items.AddRange(resultList.OrderBy(lvi => Convert.ToDateTime(((NextPerformance)lvi.Tag).PerformanceDate).Date).ToArray());
 			
-		}
+		//}
 
 		#endregion
 

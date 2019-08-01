@@ -3,7 +3,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Reflection;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -53,16 +52,16 @@ namespace SmartCore.Entities
 				return;
 
 			List<ExecutionResultArgs> resultArgses;
-			List<DbQuery> qrs = BaseComponentQueries.GetSelectQueries(aircraft, loadChild: true);
-			DataSet ds = _casEnvironment.Execute(qrs, out resultArgses);
-			ExecutionResultArgs args = resultArgses.FirstOrDefault(r => r.Exception != null);
+			var qrs = BaseComponentQueries.GetSelectQueries(aircraft, loadChild: true);
+			var ds = _casEnvironment.Execute(qrs, out resultArgses);
+			var args = resultArgses.FirstOrDefault(r => r.Exception != null);
 			if (args != null)
 				throw args.Exception;
 			var baseComponents = BaseQueries.GetObjectList(ds, true, true);
 
 			#region Проверка на еквивалентность базовых агрегатов ВС содержащийхся в ядре
 
-			bool equals = true;
+			var equals = true;
 			foreach (BaseComponent baseComponent in baseComponents)
 			{
 				var envBaseComponent = _casEnvironment.BaseComponents.GetItemById(baseComponent.ItemId);//TODO(Evgenii Babak): использовать ComponentCore
@@ -177,11 +176,11 @@ namespace SmartCore.Entities
                 throw new ArgumentException("не определен атрибут таблицы для хранения в БД", "type");
             }
             List<ExecutionResultArgs> resultArgses;
-            List<DbQuery> qrs = 
+            var qrs = 
                 BaseQueries.GetSelectQueryWithWhereAll(type,
                                                        new ICommonFilter[] { new CommonFilter<int>(BaseEntityObject.ItemIdProperty, itemId) }, 
                                                        loadChild, checkType, getDeleted, getForced);
-            DataSet ds = _casEnvironment.Execute(qrs, out resultArgses);
+            var ds = _casEnvironment.Execute(qrs, out resultArgses);
             if (resultArgses.Count(r => r.Exception != null) > 0)
                 throw resultArgses.First(r => r.Exception != null).Exception;
             if (ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
@@ -224,11 +223,11 @@ namespace SmartCore.Entities
             }
 
             List<ExecutionResultArgs> resultArgses;
-            List<DbQuery> qrs =
+            var qrs =
                 BaseQueries.GetSelectQueryWithWhereAll(type,
                                                        filters,
                                                        loadChild, checkType, getDeleted, getForced);
-            DataSet ds = _casEnvironment.Execute(qrs, out resultArgses);
+            var ds = _casEnvironment.Execute(qrs, out resultArgses);
             if (resultArgses.Count(r => r.Exception != null) > 0)
                 throw resultArgses.First(r => r.Exception != null).Exception;
             if (ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
@@ -248,11 +247,9 @@ namespace SmartCore.Entities
         /// <returns>Список объектов переданного типа</returns>
         public List<T> GetObjectList<T>(ICommonFilter[] filters = null, bool loadChild = false, bool getDeleted = false) where T : BaseEntityObject, new()
         {
-            _casEnvironment.CheckType(typeof(T));
-
-            String qr = BaseQueries.GetSelectQueryWithWhere<T>(filters, loadChild, getDeleted);
-            DataSet ds = _casEnvironment.Execute(qr);
-            List<T> result = BaseQueries.GetObjectList<T>(ds.Tables[0],loadChild);
+	        var qr = BaseQueries.GetSelectQueryWithWhere<T>(filters, loadChild, getDeleted);
+            var ds = _casEnvironment.Execute(qr);
+            var result = BaseQueries.GetObjectList<T>(ds.Tables[0],loadChild);
 
             // возвращаем результат
             return result;
@@ -275,8 +272,7 @@ namespace SmartCore.Entities
                                            bool getDeleted = false,
                                            bool ignoreConditions = false) where T : BaseEntityObject, new()
         {
-	        _casEnvironment.CheckType(typeof(T));
-			// возвращаем результат
+	        // возвращаем результат
 			return (List<T>)GetObjectList(typeof(T), filters, loadChild, getDeleted, ignoreConditions : ignoreConditions);
         }
         #endregion
@@ -294,8 +290,7 @@ namespace SmartCore.Entities
         /// <returns>Список объектов переданного типа</returns>
         public List<T> GetObjectListAll<T>(ICommonFilter filter, bool loadChild = false, bool getDeleted = false, bool ignoreConditions = false) where T : BaseEntityObject, new()
         {
-            _casEnvironment.CheckType(typeof(T));
-			// возвращаем результат
+	        // возвращаем результат
 			return (List<T>)GetObjectList(typeof(T), new[] {filter}, loadChild, getDeleted, ignoreConditions : ignoreConditions);
         }
         #endregion
@@ -313,8 +308,7 @@ namespace SmartCore.Entities
         /// <returns>Список объектов переданного типа</returns>
         public List<T> GetObjectListAll<T>(PropertyInfo filterProperty, int filterPropertyValue, bool loadChild = false, bool getDeleted = false) where T : BaseEntityObject, new()
         {
-            _casEnvironment.CheckType(typeof(T));
-			// возвращаем результат
+	        // возвращаем результат
 			return (List<T>)GetObjectList(typeof(T), new ICommonFilter[] { new CommonFilter<int>(filterProperty, filterPropertyValue) }, loadChild, getDeleted);
         }
         #endregion
@@ -332,8 +326,7 @@ namespace SmartCore.Entities
         /// <returns>Список объектов переданного типа</returns>
         public List<T> GetObjectListAll<T>(PropertyInfo filterProperty, int[] filterPropertyValues, bool loadChild = false, bool getDeleted = false) where T : BaseEntityObject, new()
         {
-            _casEnvironment.CheckType(typeof(T));
-			// возвращаем результат
+	        // возвращаем результат
 			return (List<T>)GetObjectList(typeof(T), new ICommonFilter[] { new CommonFilter<int>(filterProperty, FilterType.In, filterPropertyValues) }, loadChild, getDeleted);
         }
         #endregion
@@ -346,7 +339,7 @@ namespace SmartCore.Entities
 
 			List<ExecutionResultArgs> resultArgses;
 			var ds = _casEnvironment.Execute(qrs, out resultArgses);
-			ExecutionResultArgs args = resultArgses.FirstOrDefault(r => r.Exception != null);
+			var args = resultArgses.FirstOrDefault(r => r.Exception != null);
 			if (args != null)
 				throw args.Exception;
 			return (List<T>)BaseQueries.GetObjectList(ds, loadChild, true, getForced);
@@ -386,11 +379,9 @@ namespace SmartCore.Entities
             where T : BaseEntityObject, new() 
             where TV : CommonCollection<T>, new()
         {
-            _casEnvironment.CheckType(typeof(T));
-
-			String qr = BaseQueries.GetSelectQueryWithWhere<T>(filters, loadChild, getDeleted);
-            DataSet ds = _casEnvironment.Execute(qr);
-            TV result = BaseQueries.GetObjectCollection<T, TV>(ds.Tables[0], loadChild);
+	        var qr = BaseQueries.GetSelectQueryWithWhere<T>(filters, loadChild, getDeleted);
+            var ds = _casEnvironment.Execute(qr);
+            var result = BaseQueries.GetObjectCollection<T, TV>(ds.Tables[0], loadChild);
 
             // возвращаем результат
             return result;
@@ -442,12 +433,12 @@ namespace SmartCore.Entities
             }
 
             List<ExecutionResultArgs> resultArgses;
-            List<DbQuery> qrs = BaseQueries.GetSelectQueryWithWhereAll(type, filters, loadChild, false, getDeleted, ignoreConditions:ignoreConditions);
-            DataSet ds = _casEnvironment.Execute(qrs, out resultArgses);
-            ExecutionResultArgs args = resultArgses.FirstOrDefault(r => r.Exception != null);
+            var qrs = BaseQueries.GetSelectQueryWithWhereAll(type, filters, loadChild, false, getDeleted, ignoreConditions:ignoreConditions);
+            var ds = _casEnvironment.Execute(qrs, out resultArgses);
+            var args = resultArgses.FirstOrDefault(r => r.Exception != null);
             if (args != null)
                 throw args.Exception;
-            IList result = BaseQueries.GetObjectList(ds, loadChild, true, getForced);
+            var result = BaseQueries.GetObjectList(ds, loadChild, true, getForced);
 
             // возвращаем результат
             return result;
@@ -484,11 +475,11 @@ namespace SmartCore.Entities
             }
 
             List<ExecutionResultArgs> resultArgses;
-            List<DbQuery> qrs = BaseQueries.GetSelectQueryWithWhereAll(type, filters, loadChild, false, getDeleted, ignoreConditions:ignoreConditions);
-            DataSet ds = _casEnvironment.Execute(qrs, out resultArgses);
+            var qrs = BaseQueries.GetSelectQueryWithWhereAll(type, filters, loadChild, false, getDeleted, ignoreConditions:ignoreConditions);
+            var ds = _casEnvironment.Execute(qrs, out resultArgses);
             if (resultArgses.Count(r => r.Exception != null) > 0)
                 throw resultArgses.First(r => r.Exception != null).Exception;
-            ICommonCollection result = BaseQueries.GetObjectCollection(ds, loadChild, true, getForced);
+            var result = BaseQueries.GetObjectCollection(ds, loadChild, true, getForced);
 
             // возвращаем результат
             return result;
@@ -536,9 +527,9 @@ namespace SmartCore.Entities
 		/// <returns></returns>
 		public T GetPerformances<T>(SmartCoreType parentType, int parentId, bool lastOnly = false) where T : AbstractPerformanceRecord, new()
         {
-            String qr = BaseQueries.GetPerformancesQuery<T>(parentType, parentId, lastOnly);
-            DataSet ds = _casEnvironment.Execute(qr);
-            T result = BaseQueries.GetObjectList<T>(ds.Tables[0])[0];
+            var qr = BaseQueries.GetPerformancesQuery<T>(parentType, parentId, lastOnly);
+            var ds = _casEnvironment.Execute(qr);
+            var result = BaseQueries.GetObjectList<T>(ds.Tables[0])[0];
 
             // возвращаем результат
             return result;
@@ -556,9 +547,9 @@ namespace SmartCore.Entities
 		/// <returns></returns>
 		public int GetCountPerformanceRecords<T>(SmartCoreType parentType, int parentId) where T : AbstractPerformanceRecord
         {
-            String qr = BaseQueries.GetCountPerformancesQuery<T>(parentType,parentId);
-            DataSet ds = _casEnvironment.Execute(qr);
-            int result = (int)ds.Tables[0].Rows[0][0];
+            var qr = BaseQueries.GetCountPerformancesQuery<T>(parentType,parentId);
+            var ds = _casEnvironment.Execute(qr);
+            var result = (int)ds.Tables[0].Rows[0][0];
             // возвращаем результат
             return result;   
         }

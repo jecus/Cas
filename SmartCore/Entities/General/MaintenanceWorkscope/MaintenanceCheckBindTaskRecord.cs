@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Reflection;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;

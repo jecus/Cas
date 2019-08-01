@@ -68,14 +68,14 @@ namespace CAS.UI.UIControls.Users
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
 			_directivesViewer.SetItemsArray(_result.ToArray());
-			headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
+			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 
 			_directivesViewer.Focus();
 		}
 		#endregion
 
 		#region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
-		protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
+		protected override async void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
 		{
 			_initial.Clear();
 			_result.Clear();
@@ -84,7 +84,7 @@ namespace CAS.UI.UIControls.Users
 
 			try
 			{
-				var userDto = GlobalObjects.CasEnvironment.GetAllUsers();
+				var userDto = GlobalObjects.CasEnvironment.ApiProvider.GetAllUsersAsync();
 				_initial.AddRange(userDto.Select(i => new User(i)));
 			}
 			catch(Exception ex)
@@ -120,7 +120,7 @@ namespace CAS.UI.UIControls.Users
 
 		#region private void ButtonAddNonRoutineJobClick(object sender, EventArgs e)
 		private void ButtonAddNonRoutineJobClick(object sender, EventArgs e)
-        {
+		{
 			var form = new UserForm(new User());
 
 			if (form.ShowDialog() == DialogResult.OK)
@@ -132,12 +132,11 @@ namespace CAS.UI.UIControls.Users
 				AnimatedThreadWorker.RunWorkerAsync();
 			}
 		}
-        #endregion
+		#endregion
 
-        #region private void ButtonDeleteClick(object sender, EventArgs e)
-
-        private void ButtonDeleteClick(object sender, EventArgs e)
-        {
+		#region private void ButtonDeleteClick(object sender, EventArgs e)
+		private void ButtonDeleteClick(object sender, EventArgs e)
+		{
 			if (_directivesViewer.SelectedItems == null) return;
 
 			var confirmResult =
@@ -149,22 +148,9 @@ namespace CAS.UI.UIControls.Users
 
 			if (confirmResult == DialogResult.Yes)
 			{
-				int count = _directivesViewer.SelectedItems.Count;
-
 				var selectedItems = new List<User>();
 				selectedItems.AddRange(_directivesViewer.SelectedItems.ToArray());
-				for (int i = 0; i < count; i++)
-				{
-					try
-					{
-						GlobalObjects.CasEnvironment.GetSeviceUser().DeleteUser(selectedItems[i].ItemId);
-					}
-					catch (Exception ex)
-					{
-						Program.Provider.Logger.Log("Error while deleting data", ex);
-						return;
-					}
-				}
+				GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
 
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
@@ -178,59 +164,59 @@ namespace CAS.UI.UIControls.Users
 								MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
-        #endregion
+		#endregion
 
-        #region private void HeaderControlButtonReloadClick(object sender, System.EventArgs e)
+		#region private void HeaderControlButtonReloadClick(object sender, System.EventArgs e)
 
-        private void HeaderControlButtonReloadClick(object sender, EventArgs e)
-        {
+		private void HeaderControlButtonReloadClick(object sender, EventArgs e)
+		{
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
 			AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
 			AnimatedThreadWorker.RunWorkerAsync();
-        }
-        #endregion
+		}
+		#endregion
 
 		#region private void ButtonApplyFilterClick(object sender, EventArgs e)
 
 		private void ButtonApplyFilterClick(object sender, EventArgs e)
-	    {
-		    var form = new CommonFilterForm(_filter, _initial);
+		{
+			var form = new CommonFilterForm(_filter, _initial);
 
-		    if (form.ShowDialog(this) == DialogResult.OK)
-		    {
-			    AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
-			    AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
-			    AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoFilteringWork;
+			if (form.ShowDialog(this) == DialogResult.OK)
+			{
+				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+				AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoFilteringWork;
 
-			    AnimatedThreadWorker.RunWorkerAsync();
-		    }
-	    }
+				AnimatedThreadWorker.RunWorkerAsync();
+			}
+		}
 
 		#endregion
 
 		#region private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
 
 		private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
-	    {
-		    _result.Clear();
+		{
+			_result.Clear();
 
-		    #region Фильтрация директив
-		    AnimatedThreadWorker.ReportProgress(50, "filter directives");
+			#region Фильтрация директив
+			AnimatedThreadWorker.ReportProgress(50, "filter directives");
 
-		    FilterItems(_initial, _result);
+			FilterItems(_initial, _result);
 
-		    if (AnimatedThreadWorker.CancellationPending)
-		    {
-			    e.Cancel = true;
-			    return;
-		    }
-		    #endregion
+			if (AnimatedThreadWorker.CancellationPending)
+			{
+				e.Cancel = true;
+				return;
+			}
+			#endregion
 
-		    AnimatedThreadWorker.ReportProgress(100, "Complete");
-	    }
+			AnimatedThreadWorker.ReportProgress(100, "Complete");
+		}
 
-	    #endregion
+		#endregion
 
 		#region private void FilterItems(IEnumerable<Document> initialCollection, ICommonCollection<Document> resultCollection)
 
@@ -240,7 +226,7 @@ namespace CAS.UI.UIControls.Users
 		///<param name="resultCollection"></param>
 		private void FilterItems(IEnumerable<User> initialCollection, ICommonCollection<User> resultCollection)
 		{
-			if (_filter == null || _filter.Count == 0)
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
 				resultCollection.Clear();
 				resultCollection.AddRange(initialCollection);

@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.Design;
 using Auxiliary;
 using CASTerms;
+using EntityCore.DTO.General;
 using SmartCore.Entities.General;
 
 namespace CAS.UI.UIControls.Auxiliary
@@ -415,7 +416,7 @@ namespace CAS.UI.UIControls.Auxiliary
             
             try
             {
-	            _file = GlobalObjects.CasEnvironment.NewLoader.GetObjectById<EFCore.DTO.General.AttachedFileDTO, AttachedFile>(_file.ItemId, true);
+	            _file = GlobalObjects.CasEnvironment.NewLoader.GetObjectById<AttachedFileDTO, AttachedFile>(_file.ItemId, true);
 			}
             catch (Exception ex)
             {

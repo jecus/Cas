@@ -29,13 +29,13 @@ namespace SmartCore.Calculations
 	//TODO (Evgenii Babak): нужно заменить название метода GetFlightsLifelength на GetOpeningFlightLifelength или GetClosingFlightLifelength
 	//TODO (Evgenii Babak): рассмотреть код и избавиться от повторений
 	public class Calculator : ICalculator
-    {
+	{
 		/*
-         * Связь с ядром
-         */
+		 * Связь с ядром
+		 */
 
-	    private readonly ICasEnvironment _environment;
-	    private readonly IComponentCore _componentCore;
+		private readonly ICasEnvironment _environment;
+		private readonly IComponentCore _componentCore;
 		private readonly IAircraftFlightCore _aircraftFlightCore;
 		private readonly IAircraftsCore _aircraftsCore;
 
@@ -45,138 +45,138 @@ namespace SmartCore.Calculations
 		/// </summary>
 		public Calculator(ICasEnvironment environment, IComponentCore componentCore,
 			IAircraftFlightCore aircraftFlightCore, IAircraftsCore aircraftsCore)
-        {
-	        _environment = environment;
-	        _componentCore = componentCore;
+		{
+			_environment = environment;
+			_componentCore = componentCore;
 			_aircraftFlightCore = aircraftFlightCore;
 			_aircraftsCore = aircraftsCore;
-        }
+		}
 
 		#endregion
 
 		/*
-         * Работа с калькулятором
-         */
+		 * Работа с калькулятором
+		 */
 
 		#region private void Init()
 		/// <summary>
 		/// Загружает все данные из базы, необходимые для расчета состояния агрегатов и воздушных судов
 		/// </summary>
 		private void Init()
-        {
-            // Загружаем математический аппарат единажды
-            if (_mathLoaded) return;
+		{
+			// Загружаем математический аппарат единажды
+			if (_mathLoaded) return;
 
-            // Вызываем метод загрузки мат аппарата
-            LoadCalculator();
+			// Вызываем метод загрузки мат аппарата
+			LoadCalculator();
 
-            // Ставим флаг о том, что математичесский аппарат загружен
-            _mathLoaded = true;
-        }
-        #endregion
+			// Ставим флаг о том, что математичесский аппарат загружен
+			_mathLoaded = true;
+		}
+		#endregion
 
-        #region public void Reset()
-        /// <summary>
-        /// Сбрасывает калькулятор - при следующем обращении к калькулятору, он будет занового загружен
-        /// </summary>
-        public void Reset()
-        {
-            _mathLoaded = false;
-        }
-        #endregion
+		#region public void Reset()
+		/// <summary>
+		/// Сбрасывает калькулятор - при следующем обращении к калькулятору, он будет занового загружен
+		/// </summary>
+		public void Reset()
+		{
+			_mathLoaded = false;
+		}
+		#endregion
 
-        #region public void InitAsync(BackgroundWorker backgroundWorker, LoadingState loadingState)
-        /// <summary>
-        /// Загружает все данные из базы, необходимые для расчета состояния агрегатов и воздушных судов
-        /// </summary>
-        public void InitAsync(BackgroundWorker backgroundWorker, LoadingState loadingState)
-        {
-            // для математического аппарата необходимо загрузить 
-            // 1) полеты всех воздушных судов
-            // 2) актуальные состояния базовых агрегатов
-            // 3) данные о перемещениях transfer records 
-            // 4) директивы базовых агрегатов
+		#region public void InitAsync(BackgroundWorker backgroundWorker, LoadingState loadingState)
+		/// <summary>
+		/// Загружает все данные из базы, необходимые для расчета состояния агрегатов и воздушных судов
+		/// </summary>
+		public void InitAsync(BackgroundWorker backgroundWorker, LoadingState loadingState)
+		{
+			// для математического аппарата необходимо загрузить 
+			// 1) полеты всех воздушных судов
+			// 2) актуальные состояния базовых агрегатов
+			// 3) данные о перемещениях transfer records 
+			// 4) директивы базовых агрегатов
 
-            // 0)
-            if (backgroundWorker == null) return;
+			// 0)
+			if (backgroundWorker == null) return;
 
-            if (loadingState == null)
-                loadingState = new LoadingState();
-            loadingState.MaxPersentage = 4;
+			if (loadingState == null)
+				loadingState = new LoadingState();
+			loadingState.MaxPersentage = 4;
 
 
-            loadingState.CurrentPersentage = 0;
-            loadingState.CurrentPersentageDescription = "Load Flights";
-            backgroundWorker.ReportProgress(1, loadingState);
+			loadingState.CurrentPersentage = 0;
+			loadingState.CurrentPersentageDescription = "Load Flights";
+			backgroundWorker.ReportProgress(1, loadingState);
 			// 1)
 			//TODO :(Evgenii Babak) Надо просмотреть концепцию загрузки данных здесь
 			//_aircraftFlightCore.LoadAllFlights();
 
-            if (backgroundWorker.CancellationPending)
-            {
-                return;
-            }
+			if (backgroundWorker.CancellationPending)
+			{
+				return;
+			}
 
-            loadingState.CurrentPersentage = 1;
-            loadingState.CurrentPersentageDescription = "Load Actual States";
-            backgroundWorker.ReportProgress(1, loadingState);
+			loadingState.CurrentPersentage = 1;
+			loadingState.CurrentPersentageDescription = "Load Actual States";
+			backgroundWorker.ReportProgress(1, loadingState);
 			// 2) 
 			//TODO :(Evgenii Babak) Надо просмотреть концепцию загрузки данных здесь
 			_componentCore.LoadBaseComponentsActualStateRecords();
 
-            if (backgroundWorker.CancellationPending)
-            {
-                return;
-            }
+			if (backgroundWorker.CancellationPending)
+			{
+				return;
+			}
 
-            loadingState.CurrentPersentage = 2;
-            loadingState.CurrentPersentageDescription = "Load Transfer Records";
-            backgroundWorker.ReportProgress(1, loadingState);
+			loadingState.CurrentPersentage = 2;
+			loadingState.CurrentPersentageDescription = "Load Transfer Records";
+			backgroundWorker.ReportProgress(1, loadingState);
 			// 3)
 			//TODO :(Evgenii Babak) Надо просмотреть концепцию загрузки данных здесь
 			//_componentCore.LoadBaseComponentsTransferRecords();
 
-            if (backgroundWorker.CancellationPending)
-            {
-                return;
-            }
+			if (backgroundWorker.CancellationPending)
+			{
+				return;
+			}
 
-            loadingState.CurrentPersentage = 3;
-            loadingState.CurrentPersentageDescription = "Load Detail Directives";
-            backgroundWorker.ReportProgress(1, loadingState);
+			loadingState.CurrentPersentage = 3;
+			loadingState.CurrentPersentageDescription = "Load Detail Directives";
+			backgroundWorker.ReportProgress(1, loadingState);
 			// 4) 
 			//TODO :(Evgenii Babak) Надо просмотреть концепцию загрузки данных здесь
 			_componentCore.LoadBaseComponentsDirectives();
 
-            if (backgroundWorker.CancellationPending)
-            {
-                return;
-            }
+			if (backgroundWorker.CancellationPending)
+			{
+				return;
+			}
 
-            loadingState.CurrentPersentage = 4;
-            loadingState.CurrentPersentageDescription = "Complete";
-            backgroundWorker.ReportProgress(1, loadingState);
+			loadingState.CurrentPersentage = 4;
+			loadingState.CurrentPersentageDescription = "Complete";
+			backgroundWorker.ReportProgress(1, loadingState);
 
-            _mathLoaded = true;
-        }
-        #endregion
+			_mathLoaded = true;
+		}
+		#endregion
 
-        /*
-         * Расчет дат
-         */
+		/*
+		 * Расчет дат
+		 */
 
-        #region public DateTime GetMaxDate(DateTime dateTime1, DateTime dateTime2)
+		#region public DateTime GetMaxDate(DateTime dateTime1, DateTime dateTime2)
 
-        /// <summary>
-        /// Возвращает максимальную дату из двух переданных дат
-        /// </summary>
-        /// <param name="dateTime1"></param>
-        /// <param name="dateTime2"></param>
-        /// <returns></returns>
-        public DateTime GetMaxDate(DateTime dateTime1, DateTime dateTime2)
-        {
-            return GetMaxDate(new[]{dateTime1, dateTime2});
-        }
+		/// <summary>
+		/// Возвращает максимальную дату из двух переданных дат
+		/// </summary>
+		/// <param name="dateTime1"></param>
+		/// <param name="dateTime2"></param>
+		/// <returns></returns>
+		public DateTime GetMaxDate(DateTime dateTime1, DateTime dateTime2)
+		{
+			return GetMaxDate(new[]{dateTime1, dateTime2});
+		}
 
 		#endregion
 
@@ -188,23 +188,23 @@ namespace SmartCore.Calculations
 		/// <param name="dateTimes"></param>
 		/// <returns></returns>
 		private DateTime GetMaxDate(DateTime[] dateTimes)
-        {
-            return dateTimes.Max();
-        }
+		{
+			return dateTimes.Max();
+		}
 
-        #endregion
+		#endregion
 
-        #region public DateTime GetManufactureDate(BaseSmartCoreObject source)
+		#region public DateTime GetManufactureDate(BaseSmartCoreObject source)
 
-        /// <summary>
-        /// Возвращает дату производства базового агрегата, агрегата или самолета
-        /// </summary>
-        /// <param name="source"></param>
-        /// <returns></returns>
-        public DateTime GetManufactureDate(BaseEntityObject source)
-        {
-	        return getManufactureDate(source);
-        }
+		/// <summary>
+		/// Возвращает дату производства базового агрегата, агрегата или самолета
+		/// </summary>
+		/// <param name="source"></param>
+		/// <returns></returns>
+		public DateTime GetManufactureDate(BaseEntityObject source)
+		{
+			return getManufactureDate(source);
+		}
 
 		#endregion
 
@@ -228,374 +228,374 @@ namespace SmartCore.Calculations
 
 		#region public DateTime GetStartDate(IDirective directive)
 		public DateTime GetStartDate(IDirective directive)
-        {
-            if (directive == null || directive.Threshold == null) return DateTimeExtend.GetCASMinDateTime();
+		{
+			if (directive == null || directive.Threshold == null) return DateTimeExtend.GetCASMinDateTime();
 
-            DateTime? sinceNew = null;
-            DateTime? sinceEffDate = null;
+			DateTime? sinceNew = null;
+			DateTime? sinceEffDate = null;
 
-            if (directive.Threshold.FirstPerformanceSinceEffectiveDate != null &&
-               !directive.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
-            {
-                sinceEffDate = directive.Threshold.EffectiveDate;
-            }
-            if (directive.Threshold.FirstPerformanceSinceNew != null &&
-               !directive.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
-            {
-                sinceNew = getManufactureDate(directive.LifeLengthParent);
-            }
+			if (directive.Threshold.FirstPerformanceSinceEffectiveDate != null &&
+			   !directive.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+			{
+				sinceEffDate = directive.Threshold.EffectiveDate;
+			}
+			if (directive.Threshold.FirstPerformanceSinceNew != null &&
+			   !directive.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
+			{
+				sinceNew = getManufactureDate(directive.LifeLengthParent);
+			}
 
-            if (sinceNew != null && sinceEffDate != null)
-            {
-                if (directive.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst)
-                {
-                    return sinceNew < sinceEffDate ? sinceNew.Value : sinceEffDate.Value;
-                }
-                return sinceNew > sinceEffDate ? sinceNew.Value : sinceEffDate.Value;
-            }
-            if (sinceNew != null) return sinceNew.Value;
-            if (sinceEffDate != null) return sinceEffDate.Value;
-            return DateTimeExtend.GetCASMinDateTime();
-        }
+			if (sinceNew != null && sinceEffDate != null)
+			{
+				if (directive.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst)
+				{
+					return sinceNew < sinceEffDate ? sinceNew.Value : sinceEffDate.Value;
+				}
+				return sinceNew > sinceEffDate ? sinceNew.Value : sinceEffDate.Value;
+			}
+			if (sinceNew != null) return sinceNew.Value;
+			if (sinceEffDate != null) return sinceEffDate.Value;
+			return DateTimeExtend.GetCASMinDateTime();
+		}
 		#endregion
 
 		//TODO: прототип альтернативного расчета приблизительной даты выполнения. Требуется доработать 
 		#region private DateTime? GetApproximateDate(BaseEntityObject source, Lifelength lifelength, ThresholdConditionType conditionType = ThresholdConditionType.WhicheverFirst)
 
 		private DateTime? GetApproximateDate(BaseEntityObject source, 
-                                             Lifelength lifelength,
-                                             Lifelength current,
-                                             ThresholdConditionType conditionType = ThresholdConditionType.WhicheverFirst)
-        {
-            if (source == null)
-                return null;
-            if (lifelength == null || lifelength.IsNullOrZero())
-                return getManufactureDate(source);
-            if (current == null || current.IsNullOrZero())
-                return null;
+											 Lifelength lifelength,
+											 Lifelength current,
+											 ThresholdConditionType conditionType = ThresholdConditionType.WhicheverFirst)
+		{
+			if (source == null)
+				return null;
+			if (lifelength == null || lifelength.IsNullOrZero())
+				return getManufactureDate(source);
+			if (current == null || current.IsNullOrZero())
+				return null;
 
-            #region
+			#region
 
-            //DateTime manufactureDate = GetManufactureDate(source);
-            //if(conditionType == ThresholdConditionType.WhicheverFirst)
-            //{
-            //    DateTime date;
-            //    for (date = DateTime.Today; date > manufactureDate; date = date.AddDays(-1))
-            //    {
-            //        Lifelength lastDetailLifelengthLessThanReq = GetLifelength(source, date);
-            //        lastDetailLifelengthLessThanReq.Resemble(lifelength);
-            //        //Если найденная наработка больше искомой хотя бы по одному параметру
-            //        //то поиск продолжается
-            //        if (lastDetailLifelengthLessThanReq.IsGreaterByAnyParameter(lifelength))
-            //            continue;
-            //        //Если найденная наработка меньше искомой по всем параметрам
-            //        //то нужно произвести дополнительный поиск наработки, которая
-            //        //будет меньше найденной хотя бы по одному параметру
-            //        //Это нужно для того что бы определить: 
-            //        //введена ли найденная наработка актуальным состоянием или же 
-            //        //не находится ли деталь на дату найденной наработки в простое (на складе или остановленном ВС)
-            //        //Найденная наработка будет использоваться как нижняя граница поиска
-            //        DateTime firstDetailLifelengthLessThanReqDate;
-            //        Lifelength firstDetailLifelengthLessThanReq = Lifelength.Null;
-            //        for (firstDetailLifelengthLessThanReqDate = date;
-            //             firstDetailLifelengthLessThanReqDate > manufactureDate;
-            //             firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(-1))
-            //        {
-            //            firstDetailLifelengthLessThanReq = GetLifelength(source, firstDetailLifelengthLessThanReqDate);
-            //            firstDetailLifelengthLessThanReq.Resemble(lifelength);
+			//DateTime manufactureDate = GetManufactureDate(source);
+			//if(conditionType == ThresholdConditionType.WhicheverFirst)
+			//{
+			//    DateTime date;
+			//    for (date = DateTime.Today; date > manufactureDate; date = date.AddDays(-1))
+			//    {
+			//        Lifelength lastDetailLifelengthLessThanReq = GetLifelength(source, date);
+			//        lastDetailLifelengthLessThanReq.Resemble(lifelength);
+			//        //Если найденная наработка больше искомой хотя бы по одному параметру
+			//        //то поиск продолжается
+			//        if (lastDetailLifelengthLessThanReq.IsGreaterByAnyParameter(lifelength))
+			//            continue;
+			//        //Если найденная наработка меньше искомой по всем параметрам
+			//        //то нужно произвести дополнительный поиск наработки, которая
+			//        //будет меньше найденной хотя бы по одному параметру
+			//        //Это нужно для того что бы определить: 
+			//        //введена ли найденная наработка актуальным состоянием или же 
+			//        //не находится ли деталь на дату найденной наработки в простое (на складе или остановленном ВС)
+			//        //Найденная наработка будет использоваться как нижняя граница поиска
+			//        DateTime firstDetailLifelengthLessThanReqDate;
+			//        Lifelength firstDetailLifelengthLessThanReq = Lifelength.Null;
+			//        for (firstDetailLifelengthLessThanReqDate = date;
+			//             firstDetailLifelengthLessThanReqDate > manufactureDate;
+			//             firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(-1))
+			//        {
+			//            firstDetailLifelengthLessThanReq = GetLifelength(source, firstDetailLifelengthLessThanReqDate);
+			//            firstDetailLifelengthLessThanReq.Resemble(lifelength);
 
-            //            if (firstDetailLifelengthLessThanReq.IsLessByAnyParameter(lastDetailLifelengthLessThanReq))
-            //            {
-            //                firstDetailLifelengthLessThanReqDate.AddDays(1);
-            //                firstDetailLifelengthLessThanReq = GetLifelength(source, firstDetailLifelengthLessThanReqDate);
-            //                firstDetailLifelengthLessThanReq.Resemble(lifelength);
-            //                break;
-            //            }
-            //        }
-            //        //Найденная в начале цикла наработка меньше искомой по всем параметрам
-            //        //значит, наработка на пред. шаге была больше хотя бы по одному параметру
-            //        //и эту наработку (на пред. шаге) надо использовать как верхнюю границу поиска
-            //        DateTime firstDetailLifelengthGratherThanReqDate = date.AddDays(1);
-            //        Lifelength firstDetailLifelengthGratherThanReq = GetLifelength(source, firstDetailLifelengthGratherThanReqDate);
-            //        firstDetailLifelengthGratherThanReq.Resemble(lifelength);
+			//            if (firstDetailLifelengthLessThanReq.IsLessByAnyParameter(lastDetailLifelengthLessThanReq))
+			//            {
+			//                firstDetailLifelengthLessThanReqDate.AddDays(1);
+			//                firstDetailLifelengthLessThanReq = GetLifelength(source, firstDetailLifelengthLessThanReqDate);
+			//                firstDetailLifelengthLessThanReq.Resemble(lifelength);
+			//                break;
+			//            }
+			//        }
+			//        //Найденная в начале цикла наработка меньше искомой по всем параметрам
+			//        //значит, наработка на пред. шаге была больше хотя бы по одному параметру
+			//        //и эту наработку (на пред. шаге) надо использовать как верхнюю границу поиска
+			//        DateTime firstDetailLifelengthGratherThanReqDate = date.AddDays(1);
+			//        Lifelength firstDetailLifelengthGratherThanReq = GetLifelength(source, firstDetailLifelengthGratherThanReqDate);
+			//        firstDetailLifelengthGratherThanReq.Resemble(lifelength);
 
-            //        if (firstDetailLifelengthLessThanReq.IsNullOrZero() &&
-            //            firstDetailLifelengthGratherThanReq.IsNullOrZero())
-            //        {
-            //            return null;
-            //        }
-            //        if(!firstDetailLifelengthLessThanReq.IsNullOrZero() &&
-            //           firstDetailLifelengthGratherThanReq.IsNullOrZero())
-            //        {
-            //            //Имеется нижний предел, но нет верхнего.
-            //            //Возможно, наработка введена актуальным состоянием
-                        
-            //            //Надо произвести цикличное добавление значения средней утилизации
-            //            //пока наработка не станет больше хотя бы по одному параметру
-            //            //выше искомой
-            //            AverageUtilization au = GetAverageUtillization(source as IDirective);
-            //            if (au == null)
-            //                return null;
-            //            int i = 1;
-            //            //firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1);
-            //            for (firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1);
-            //                 firstDetailLifelengthLessThanReqDate < firstDetailLifelengthGratherThanReqDate;
-            //                 firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1))
-            //            {
-            //                int totalMinutes = Convert.ToInt32(au.HoursPerDay * 60 * i);
-            //                int cycles = Convert.ToInt32(au.CyclesPerDay * i);
-            //                int days = i;
+			//        if (firstDetailLifelengthLessThanReq.IsNullOrZero() &&
+			//            firstDetailLifelengthGratherThanReq.IsNullOrZero())
+			//        {
+			//            return null;
+			//        }
+			//        if(!firstDetailLifelengthLessThanReq.IsNullOrZero() &&
+			//           firstDetailLifelengthGratherThanReq.IsNullOrZero())
+			//        {
+			//            //Имеется нижний предел, но нет верхнего.
+			//            //Возможно, наработка введена актуальным состоянием
+						
+			//            //Надо произвести цикличное добавление значения средней утилизации
+			//            //пока наработка не станет больше хотя бы по одному параметру
+			//            //выше искомой
+			//            AverageUtilization au = GetAverageUtillization(source as IDirective);
+			//            if (au == null)
+			//                return null;
+			//            int i = 1;
+			//            //firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1);
+			//            for (firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1);
+			//                 firstDetailLifelengthLessThanReqDate < firstDetailLifelengthGratherThanReqDate;
+			//                 firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1))
+			//            {
+			//                int totalMinutes = Convert.ToInt32(au.HoursPerDay * 60 * i);
+			//                int cycles = Convert.ToInt32(au.CyclesPerDay * i);
+			//                int days = i;
 
-            //                Lifelength res = firstDetailLifelengthLessThanReq + new Lifelength(days, cycles, totalMinutes);
-            //                res.Resemble(lifelength);
-            //                if (res.IsGreaterByAnyParameter(lifelength))
-            //                    return firstDetailLifelengthLessThanReqDate;
+			//                Lifelength res = firstDetailLifelengthLessThanReq + new Lifelength(days, cycles, totalMinutes);
+			//                res.Resemble(lifelength);
+			//                if (res.IsGreaterByAnyParameter(lifelength))
+			//                    return firstDetailLifelengthLessThanReqDate;
 
-            //                i++;
-            //                firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1);
-            //            }
-            //        }
-            //        else if (firstDetailLifelengthLessThanReq.IsNullOrZero() &&
-            //                 !firstDetailLifelengthGratherThanReq.IsNullOrZero())
-            //        {
-            //            //Имеется верхний предел, но нет нижнего.
+			//                i++;
+			//                firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1);
+			//            }
+			//        }
+			//        else if (firstDetailLifelengthLessThanReq.IsNullOrZero() &&
+			//                 !firstDetailLifelengthGratherThanReq.IsNullOrZero())
+			//        {
+			//            //Имеется верхний предел, но нет нижнего.
 
-            //            //Надо произвести цикличное вычитание значения средней утилизации
-            //            //пока наработка не станет строго меньше искомой
-            //            //и взять пред значение даты (пока хотя бы один параметр был больше искомой наработки)
-            //            AverageUtilization au = GetAverageUtillization(source as IDirective);
-            //            if (au == null)
-            //                return null;
-            //            int i = 1;
-            //            //firstDetailLifelengthGratherThanReqDate = firstDetailLifelengthGratherThanReqDate.AddDays(-1);
-            //            for (firstDetailLifelengthGratherThanReqDate = firstDetailLifelengthGratherThanReqDate.AddDays(0);
-            //                 firstDetailLifelengthGratherThanReqDate > firstDetailLifelengthLessThanReqDate;
-            //                 firstDetailLifelengthGratherThanReqDate = firstDetailLifelengthGratherThanReqDate.AddDays(-1))
-            //            {
-            //                int totalMinutes = Convert.ToInt32(au.HoursPerDay * 60 * i);
-            //                int cycles = Convert.ToInt32(au.CyclesPerDay * i);
-            //                int days = i;
+			//            //Надо произвести цикличное вычитание значения средней утилизации
+			//            //пока наработка не станет строго меньше искомой
+			//            //и взять пред значение даты (пока хотя бы один параметр был больше искомой наработки)
+			//            AverageUtilization au = GetAverageUtillization(source as IDirective);
+			//            if (au == null)
+			//                return null;
+			//            int i = 1;
+			//            //firstDetailLifelengthGratherThanReqDate = firstDetailLifelengthGratherThanReqDate.AddDays(-1);
+			//            for (firstDetailLifelengthGratherThanReqDate = firstDetailLifelengthGratherThanReqDate.AddDays(0);
+			//                 firstDetailLifelengthGratherThanReqDate > firstDetailLifelengthLessThanReqDate;
+			//                 firstDetailLifelengthGratherThanReqDate = firstDetailLifelengthGratherThanReqDate.AddDays(-1))
+			//            {
+			//                int totalMinutes = Convert.ToInt32(au.HoursPerDay * 60 * i);
+			//                int cycles = Convert.ToInt32(au.CyclesPerDay * i);
+			//                int days = i;
 
-            //                Lifelength res = firstDetailLifelengthGratherThanReq - new Lifelength(days, cycles, totalMinutes);
-            //                res.Resemble(lifelength);
-            //                if (res.IsLess(lifelength))
-            //                    return firstDetailLifelengthGratherThanReqDate;
-            //                i++;
-            //                firstDetailLifelengthGratherThanReqDate = firstDetailLifelengthGratherThanReqDate.AddDays(-1);
-            //            }    
-            //        }
-            //        else if (!firstDetailLifelengthLessThanReq.IsNullOrZero() &&
-            //                 !firstDetailLifelengthGratherThanReq.IsNullOrZero())
-            //        {
-            //            //Имеется верхний и нижний предел.
+			//                Lifelength res = firstDetailLifelengthGratherThanReq - new Lifelength(days, cycles, totalMinutes);
+			//                res.Resemble(lifelength);
+			//                if (res.IsLess(lifelength))
+			//                    return firstDetailLifelengthGratherThanReqDate;
+			//                i++;
+			//                firstDetailLifelengthGratherThanReqDate = firstDetailLifelengthGratherThanReqDate.AddDays(-1);
+			//            }    
+			//        }
+			//        else if (!firstDetailLifelengthLessThanReq.IsNullOrZero() &&
+			//                 !firstDetailLifelengthGratherThanReq.IsNullOrZero())
+			//        {
+			//            //Имеется верхний и нижний предел.
 
-            //            //Надо произвести цикличное вычитание значения средней утилизации
-            //            //пока наработка не станет строго меньше искомой
-            //            //и взять пред значение даты (пока хотя бы один параметр был больше искомой наработки)
-            //            AverageUtilization au = GetAverageUtillization(source as IDirective);
-            //            if (au == null)
-            //                return null;
-            //            int i = 1;
-            //            //firstDetailLifelengthGratherThanReqDate = firstDetailLifelengthGratherThanReqDate.AddDays(-1);
-            //            for (firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(0);
-            //                 firstDetailLifelengthLessThanReqDate < firstDetailLifelengthGratherThanReqDate;
-            //                 firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1))
-            //            {
-            //                int totalMinutes = Convert.ToInt32(au.HoursPerDay * 60 * i);
-            //                int cycles = Convert.ToInt32(au.CyclesPerDay * i);
-            //                int days = i;
+			//            //Надо произвести цикличное вычитание значения средней утилизации
+			//            //пока наработка не станет строго меньше искомой
+			//            //и взять пред значение даты (пока хотя бы один параметр был больше искомой наработки)
+			//            AverageUtilization au = GetAverageUtillization(source as IDirective);
+			//            if (au == null)
+			//                return null;
+			//            int i = 1;
+			//            //firstDetailLifelengthGratherThanReqDate = firstDetailLifelengthGratherThanReqDate.AddDays(-1);
+			//            for (firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(0);
+			//                 firstDetailLifelengthLessThanReqDate < firstDetailLifelengthGratherThanReqDate;
+			//                 firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1))
+			//            {
+			//                int totalMinutes = Convert.ToInt32(au.HoursPerDay * 60 * i);
+			//                int cycles = Convert.ToInt32(au.CyclesPerDay * i);
+			//                int days = i;
 
-            //                Lifelength res = firstDetailLifelengthLessThanReq + new Lifelength(days, cycles, totalMinutes);
-            //                res.Resemble(lifelength);
-            //                if (res.IsGreaterByAnyParameter(lifelength))
-            //                    return firstDetailLifelengthLessThanReqDate;
+			//                Lifelength res = firstDetailLifelengthLessThanReq + new Lifelength(days, cycles, totalMinutes);
+			//                res.Resemble(lifelength);
+			//                if (res.IsGreaterByAnyParameter(lifelength))
+			//                    return firstDetailLifelengthLessThanReqDate;
 
-            //                i++;
-            //                firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1);
-            //            }
-            //        }
-            //        break;
-            //    }
-            //}
-            //else
-            //{
-            //    DateTime date;
-            //    for (date = DateTime.Today; date > manufactureDate; date = date.AddDays(-1))
-            //    {
-            //        Lifelength lastDetailLifelengthLessThanReq = GetLifelength(source, date);
-            //        lastDetailLifelengthLessThanReq.Resemble(lifelength);
-            //        //Если найденная наработка больше искомой хотя бы по одному параметру
-            //        //то поиск продолжается
-            //        if (lastDetailLifelengthLessThanReq.IsGreater(lifelength))
-            //            continue;
-            //        //Если найденная наработка меньше искомой по всем параметрам
-            //        //то нужно произвести дополнительный поиск наработки, которая
-            //        //будет меньше найденной хотя бы по одному параметру
-            //        //Это нужно для того что бы определить: 
-            //        //введена ли найденная наработка актуальным состоянием или же 
-            //        //не находится ли деталь на дату найденной наработки в простое (на складе или остановленном ВС)
-            //        //Найденная наработка будет использоваться как нижняя граница поиска
-            //        DateTime firstDetailLifelengthLessThanReqDate;
-            //        Lifelength firstDetailLifelengthLessThanReq = Lifelength.Null;
-            //        for (firstDetailLifelengthLessThanReqDate = date;
-            //             firstDetailLifelengthLessThanReqDate > manufactureDate;
-            //             firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(-1))
-            //        {
-            //            firstDetailLifelengthLessThanReq = GetLifelength(source, firstDetailLifelengthLessThanReqDate);
-            //            firstDetailLifelengthLessThanReq.Resemble(lifelength);
+			//                i++;
+			//                firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1);
+			//            }
+			//        }
+			//        break;
+			//    }
+			//}
+			//else
+			//{
+			//    DateTime date;
+			//    for (date = DateTime.Today; date > manufactureDate; date = date.AddDays(-1))
+			//    {
+			//        Lifelength lastDetailLifelengthLessThanReq = GetLifelength(source, date);
+			//        lastDetailLifelengthLessThanReq.Resemble(lifelength);
+			//        //Если найденная наработка больше искомой хотя бы по одному параметру
+			//        //то поиск продолжается
+			//        if (lastDetailLifelengthLessThanReq.IsGreater(lifelength))
+			//            continue;
+			//        //Если найденная наработка меньше искомой по всем параметрам
+			//        //то нужно произвести дополнительный поиск наработки, которая
+			//        //будет меньше найденной хотя бы по одному параметру
+			//        //Это нужно для того что бы определить: 
+			//        //введена ли найденная наработка актуальным состоянием или же 
+			//        //не находится ли деталь на дату найденной наработки в простое (на складе или остановленном ВС)
+			//        //Найденная наработка будет использоваться как нижняя граница поиска
+			//        DateTime firstDetailLifelengthLessThanReqDate;
+			//        Lifelength firstDetailLifelengthLessThanReq = Lifelength.Null;
+			//        for (firstDetailLifelengthLessThanReqDate = date;
+			//             firstDetailLifelengthLessThanReqDate > manufactureDate;
+			//             firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(-1))
+			//        {
+			//            firstDetailLifelengthLessThanReq = GetLifelength(source, firstDetailLifelengthLessThanReqDate);
+			//            firstDetailLifelengthLessThanReq.Resemble(lifelength);
 
-            //            if (firstDetailLifelengthLessThanReq.IsLess(lastDetailLifelengthLessThanReq))
-            //            {
-            //                firstDetailLifelengthLessThanReqDate.AddDays(1);
-            //                firstDetailLifelengthLessThanReq = GetLifelength(source, firstDetailLifelengthLessThanReqDate);
-            //                firstDetailLifelengthLessThanReq.Resemble(lifelength);
-            //                break;
-            //            }
-            //        }
-            //        //Найденная в начале цикла наработка меньше искомой по всем параметрам
-            //        //значит, наработка на пред. шаге была больше хотя бы по одному параметру
-            //        //и эту наработку (на пред. шаге) надо использовать как верхнюю границу поиска
-            //        DateTime firstDetailLifelengthGratherThanReqDate = date.AddDays(1);
-            //        Lifelength firstDetailLifelengthGratherThanReq = GetLifelength(source, firstDetailLifelengthGratherThanReqDate);
-            //        firstDetailLifelengthGratherThanReq.Resemble(lifelength);
+			//            if (firstDetailLifelengthLessThanReq.IsLess(lastDetailLifelengthLessThanReq))
+			//            {
+			//                firstDetailLifelengthLessThanReqDate.AddDays(1);
+			//                firstDetailLifelengthLessThanReq = GetLifelength(source, firstDetailLifelengthLessThanReqDate);
+			//                firstDetailLifelengthLessThanReq.Resemble(lifelength);
+			//                break;
+			//            }
+			//        }
+			//        //Найденная в начале цикла наработка меньше искомой по всем параметрам
+			//        //значит, наработка на пред. шаге была больше хотя бы по одному параметру
+			//        //и эту наработку (на пред. шаге) надо использовать как верхнюю границу поиска
+			//        DateTime firstDetailLifelengthGratherThanReqDate = date.AddDays(1);
+			//        Lifelength firstDetailLifelengthGratherThanReq = GetLifelength(source, firstDetailLifelengthGratherThanReqDate);
+			//        firstDetailLifelengthGratherThanReq.Resemble(lifelength);
 
-            //        if (firstDetailLifelengthLessThanReq.IsNullOrZero() &&
-            //            firstDetailLifelengthGratherThanReq.IsNullOrZero())
-            //        {
-            //            return null;
-            //        }
-            //        if (!firstDetailLifelengthLessThanReq.IsNullOrZero() &&
-            //           firstDetailLifelengthGratherThanReq.IsNullOrZero())
-            //        {
-            //            //Имеется нижний предел, но нет верхнего.
-            //            //Возможно, наработка введена актуальным состоянием
+			//        if (firstDetailLifelengthLessThanReq.IsNullOrZero() &&
+			//            firstDetailLifelengthGratherThanReq.IsNullOrZero())
+			//        {
+			//            return null;
+			//        }
+			//        if (!firstDetailLifelengthLessThanReq.IsNullOrZero() &&
+			//           firstDetailLifelengthGratherThanReq.IsNullOrZero())
+			//        {
+			//            //Имеется нижний предел, но нет верхнего.
+			//            //Возможно, наработка введена актуальным состоянием
 
-            //            //Надо произвести цикличное добавление значения средней утилизации
-            //            //пока наработка не станет больше хотя бы по одному параметру
-            //            //выше искомой
-            //            AverageUtilization au = GetAverageUtillization(source as IDirective);
-            //            if (au == null)
-            //                return null;
-            //            int i = 1;
-            //            //firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1);
-            //            for (firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1);
-            //                 firstDetailLifelengthLessThanReqDate < firstDetailLifelengthGratherThanReqDate;
-            //                 firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1))
-            //            {
-            //                int totalMinutes = Convert.ToInt32(au.HoursPerDay * 60 * i);
-            //                int cycles = Convert.ToInt32(au.CyclesPerDay * i);
-            //                int days = i;
+			//            //Надо произвести цикличное добавление значения средней утилизации
+			//            //пока наработка не станет больше хотя бы по одному параметру
+			//            //выше искомой
+			//            AverageUtilization au = GetAverageUtillization(source as IDirective);
+			//            if (au == null)
+			//                return null;
+			//            int i = 1;
+			//            //firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1);
+			//            for (firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1);
+			//                 firstDetailLifelengthLessThanReqDate < firstDetailLifelengthGratherThanReqDate;
+			//                 firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1))
+			//            {
+			//                int totalMinutes = Convert.ToInt32(au.HoursPerDay * 60 * i);
+			//                int cycles = Convert.ToInt32(au.CyclesPerDay * i);
+			//                int days = i;
 
-            //                Lifelength res = firstDetailLifelengthLessThanReq + new Lifelength(days, cycles, totalMinutes);
-            //                res.Resemble(lifelength);
-            //                if (res.IsGreater(lifelength))
-            //                    return firstDetailLifelengthLessThanReqDate;
+			//                Lifelength res = firstDetailLifelengthLessThanReq + new Lifelength(days, cycles, totalMinutes);
+			//                res.Resemble(lifelength);
+			//                if (res.IsGreater(lifelength))
+			//                    return firstDetailLifelengthLessThanReqDate;
 
-            //                i++;
-            //                firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1);
-            //            }
-            //        }
-            //        else if (firstDetailLifelengthLessThanReq.IsNullOrZero() &&
-            //                 !firstDetailLifelengthGratherThanReq.IsNullOrZero())
-            //        {
-            //            //Имеется верхний предел, но нет нижнего.
+			//                i++;
+			//                firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1);
+			//            }
+			//        }
+			//        else if (firstDetailLifelengthLessThanReq.IsNullOrZero() &&
+			//                 !firstDetailLifelengthGratherThanReq.IsNullOrZero())
+			//        {
+			//            //Имеется верхний предел, но нет нижнего.
 
-            //            //Надо произвести цикличное вычитание значения средней утилизации
-            //            //пока наработка не станет строго меньше искомой
-            //            //и взять пред значение даты (пока хотя бы один параметр был больше искомой наработки)
-            //            AverageUtilization au = GetAverageUtillization(source as IDirective);
-            //            if (au == null)
-            //                return null;
-            //            int i = 1;
-            //            //firstDetailLifelengthGratherThanReqDate = firstDetailLifelengthGratherThanReqDate.AddDays(-1);
-            //            for (firstDetailLifelengthGratherThanReqDate = firstDetailLifelengthGratherThanReqDate.AddDays(0);
-            //                 firstDetailLifelengthGratherThanReqDate > firstDetailLifelengthLessThanReqDate;
-            //                 firstDetailLifelengthGratherThanReqDate = firstDetailLifelengthGratherThanReqDate.AddDays(-1))
-            //            {
-            //                int totalMinutes = Convert.ToInt32(au.HoursPerDay * 60 * i);
-            //                int cycles = Convert.ToInt32(au.CyclesPerDay * i);
-            //                int days = i;
+			//            //Надо произвести цикличное вычитание значения средней утилизации
+			//            //пока наработка не станет строго меньше искомой
+			//            //и взять пред значение даты (пока хотя бы один параметр был больше искомой наработки)
+			//            AverageUtilization au = GetAverageUtillization(source as IDirective);
+			//            if (au == null)
+			//                return null;
+			//            int i = 1;
+			//            //firstDetailLifelengthGratherThanReqDate = firstDetailLifelengthGratherThanReqDate.AddDays(-1);
+			//            for (firstDetailLifelengthGratherThanReqDate = firstDetailLifelengthGratherThanReqDate.AddDays(0);
+			//                 firstDetailLifelengthGratherThanReqDate > firstDetailLifelengthLessThanReqDate;
+			//                 firstDetailLifelengthGratherThanReqDate = firstDetailLifelengthGratherThanReqDate.AddDays(-1))
+			//            {
+			//                int totalMinutes = Convert.ToInt32(au.HoursPerDay * 60 * i);
+			//                int cycles = Convert.ToInt32(au.CyclesPerDay * i);
+			//                int days = i;
 
-            //                Lifelength res = firstDetailLifelengthGratherThanReq - new Lifelength(days, cycles, totalMinutes);
-            //                res.Resemble(lifelength);
-            //                if (res.IsLessByAnyParameter(lifelength))
-            //                    return firstDetailLifelengthGratherThanReqDate;
-            //                i++;
-            //                firstDetailLifelengthGratherThanReqDate = firstDetailLifelengthGratherThanReqDate.AddDays(-1);
-            //            }
-            //        }
-            //        else if (!firstDetailLifelengthLessThanReq.IsNullOrZero() &&
-            //                 !firstDetailLifelengthGratherThanReq.IsNullOrZero())
-            //        {
-            //            //Имеется верхний и нижний предел.
+			//                Lifelength res = firstDetailLifelengthGratherThanReq - new Lifelength(days, cycles, totalMinutes);
+			//                res.Resemble(lifelength);
+			//                if (res.IsLessByAnyParameter(lifelength))
+			//                    return firstDetailLifelengthGratherThanReqDate;
+			//                i++;
+			//                firstDetailLifelengthGratherThanReqDate = firstDetailLifelengthGratherThanReqDate.AddDays(-1);
+			//            }
+			//        }
+			//        else if (!firstDetailLifelengthLessThanReq.IsNullOrZero() &&
+			//                 !firstDetailLifelengthGratherThanReq.IsNullOrZero())
+			//        {
+			//            //Имеется верхний и нижний предел.
 
-            //            //Надо произвести цикличное вычитание значения средней утилизации
-            //            //пока наработка не станет строго меньше искомой
-            //            //и взять пред значение даты (пока хотя бы один параметр был больше искомой наработки)
-            //            AverageUtilization au = GetAverageUtillization(source as IDirective);
-            //            if (au == null)
-            //                return null;
-            //            int i = 1;
-            //            //firstDetailLifelengthGratherThanReqDate = firstDetailLifelengthGratherThanReqDate.AddDays(-1);
-            //            for (firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(0);
-            //                 firstDetailLifelengthLessThanReqDate < firstDetailLifelengthGratherThanReqDate;
-            //                 firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1))
-            //            {
-            //                int totalMinutes = Convert.ToInt32(au.HoursPerDay * 60 * i);
-            //                int cycles = Convert.ToInt32(au.CyclesPerDay * i);
-            //                int days = i;
+			//            //Надо произвести цикличное вычитание значения средней утилизации
+			//            //пока наработка не станет строго меньше искомой
+			//            //и взять пред значение даты (пока хотя бы один параметр был больше искомой наработки)
+			//            AverageUtilization au = GetAverageUtillization(source as IDirective);
+			//            if (au == null)
+			//                return null;
+			//            int i = 1;
+			//            //firstDetailLifelengthGratherThanReqDate = firstDetailLifelengthGratherThanReqDate.AddDays(-1);
+			//            for (firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(0);
+			//                 firstDetailLifelengthLessThanReqDate < firstDetailLifelengthGratherThanReqDate;
+			//                 firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1))
+			//            {
+			//                int totalMinutes = Convert.ToInt32(au.HoursPerDay * 60 * i);
+			//                int cycles = Convert.ToInt32(au.CyclesPerDay * i);
+			//                int days = i;
 
-            //                Lifelength res = firstDetailLifelengthLessThanReq + new Lifelength(days, cycles, totalMinutes);
-            //                res.Resemble(lifelength);
-            //                if (res.IsGreater(lifelength))
-            //                    return firstDetailLifelengthLessThanReqDate;
+			//                Lifelength res = firstDetailLifelengthLessThanReq + new Lifelength(days, cycles, totalMinutes);
+			//                res.Resemble(lifelength);
+			//                if (res.IsGreater(lifelength))
+			//                    return firstDetailLifelengthLessThanReqDate;
 
-            //                i++;
-            //                firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1);
-            //            }
-            //        }
-            //        break;
-            //    }
-            //}
-            #endregion
+			//                i++;
+			//                firstDetailLifelengthLessThanReqDate = firstDetailLifelengthLessThanReqDate.AddDays(1);
+			//            }
+			//        }
+			//        break;
+			//    }
+			//}
+			#endregion
 
-            DateTime manufactureDate = getManufactureDate(source);
-            DateTime lowerDate = manufactureDate;
-            DateTime upperLimit = DateTime.Today;
+			DateTime manufactureDate = getManufactureDate(source);
+			DateTime lowerDate = manufactureDate;
+			DateTime upperLimit = DateTime.Today;
 
-            //int difference = (DateTime.Today - lowerDate).Days;
-            //if (conditionType == ThresholdConditionType.WhicheverFirst)
-            //{
-            //    //расчет ведется по формуле Nn+1 = (M - Nn)*(K - KNn)/(KM - KNn), где:
-            //    //M - верхняя граница даты
-            //    //KM - наработка на верхнюю дату
-            //    //N - нижняя граница даты
-            //    //KN - наработка на нижнюю дату
-            //    //K - искомая наработка
-            //    Lifelength kn = GetLifelength(source, lowerDate);
-            //    kn.Resemble(lifelength);
-            //    Lifelength km = GetLifelength(source, upperLimit);
-            //    km.Resemble(lifelength);
+			//int difference = (DateTime.Today - lowerDate).Days;
+			//if (conditionType == ThresholdConditionType.WhicheverFirst)
+			//{
+			//    //расчет ведется по формуле Nn+1 = (M - Nn)*(K - KNn)/(KM - KNn), где:
+			//    //M - верхняя граница даты
+			//    //KM - наработка на верхнюю дату
+			//    //N - нижняя граница даты
+			//    //KN - наработка на нижнюю дату
+			//    //K - искомая наработка
+			//    Lifelength kn = GetLifelength(source, lowerDate);
+			//    kn.Resemble(lifelength);
+			//    Lifelength km = GetLifelength(source, upperLimit);
+			//    km.Resemble(lifelength);
 
-            //    AverageUtilization auFact = 
-            //        new AverageUtilization(Convert.ToInt32(km.Cycles / difference), 
-            //                               Convert.ToInt32(km.Hours / difference), 
-            //                               UtilizationInterval.Dayly);
-            //    if (auFact == null)
-            //        return null;
-            //    for (; ; )
-            //    {
-            //        lowerDate = (DateTime.Today - lowerDate).Days * (lifelength - kn) / (km - kn);
-            //        break;
-            //    }
-            //}
-            return null;
-        }
+			//    AverageUtilization auFact = 
+			//        new AverageUtilization(Convert.ToInt32(km.Cycles / difference), 
+			//                               Convert.ToInt32(km.Hours / difference), 
+			//                               UtilizationInterval.Dayly);
+			//    if (auFact == null)
+			//        return null;
+			//    for (; ; )
+			//    {
+			//        lowerDate = (DateTime.Today - lowerDate).Days * (lifelength - kn) / (km - kn);
+			//        break;
+			//    }
+			//}
+			return null;
+		}
 		#endregion
 
 		/*
-         * Подсчет ресурсов
-         */
+		 * Подсчет ресурсов
+		 */
 
 		#region public Lifelength GetCurrentFlightLifelength(BaseSmartCoreObject source, ForecastData forecastData = null)
 
@@ -606,15 +606,15 @@ namespace SmartCore.Calculations
 		/// <param name="forecastData"></param>
 		/// <returns></returns>
 		public Lifelength GetCurrentFlightLifelength(BaseEntityObject source, ForecastData forecastData = null)
-        {
-            if (source == null) return Lifelength.Null;
-            if (forecastData == null) return getFlightLifelengthOnEndOfDay(source, DateTime.Today);
-            if (forecastData.ForecastDate <= DateTime.Today) return getFlightLifelengthOnEndOfDay(source, forecastData.ForecastDate);
-            
-            var res = getFlightLifelengthOnEndOfDay(source, DateTime.Today); 
-            res += AnalystHelper.GetUtilization(forecastData.AverageUtilization,(forecastData.ForecastDate - DateTime.Today).Days);
-            return res;
-        }
+		{
+			if (source == null) return Lifelength.Null;
+			if (forecastData == null) return getFlightLifelengthOnEndOfDay(source, DateTime.Today);
+			if (forecastData.ForecastDate <= DateTime.Today) return getFlightLifelengthOnEndOfDay(source, forecastData.ForecastDate);
+			
+			var res = getFlightLifelengthOnEndOfDay(source, DateTime.Today); 
+			res += AnalystHelper.GetUtilization(forecastData.AverageUtilization,(forecastData.ForecastDate - DateTime.Today).Days);
+			return res;
+		}
 
 		#endregion
 
@@ -711,18 +711,18 @@ namespace SmartCore.Calculations
 		/// <param name="forecastData"></param>
 		/// <returns></returns>
 		public Lifelength GetFlightLifelengthOnStartOfDay(BaseEntityObject source, ForecastData forecastData = null)
-        {
-            //if (source == null) return Lifelength.Null;
-            if (source == null)
-                return new Lifelength { Days = GetDays(DateTimeExtend.GetCASMinDateTime(), DateTime.Today) };
+		{
+			//if (source == null) return Lifelength.Null;
+			if (source == null)
+				return new Lifelength { Days = GetDays(DateTimeExtend.GetCASMinDateTime(), DateTime.Today) };
 
-            if (forecastData == null) return getFlightLifelengthOnStartOfDay(source, DateTime.Today);
-            if (forecastData.ForecastDate <= DateTime.Today) return getFlightLifelengthOnStartOfDay(source, forecastData.ForecastDate);
+			if (forecastData == null) return getFlightLifelengthOnStartOfDay(source, DateTime.Today);
+			if (forecastData.ForecastDate <= DateTime.Today) return getFlightLifelengthOnStartOfDay(source, forecastData.ForecastDate);
 
-            var res = getFlightLifelengthOnStartOfDay(source, DateTime.Today);
-            res += AnalystHelper.GetUtilization(forecastData.AverageUtilization, (forecastData.ForecastDate - DateTime.Today).Days);
-            return res;
-        }
+			var res = getFlightLifelengthOnStartOfDay(source, DateTime.Today);
+			res += AnalystHelper.GetUtilization(forecastData.AverageUtilization, (forecastData.ForecastDate - DateTime.Today).Days);
+			return res;
+		}
 
 		#endregion
 
@@ -738,9 +738,9 @@ namespace SmartCore.Calculations
 		/// <param name="dateTo"></param>
 		/// <returns></returns>
 		private Lifelength getFlightsLifelengthByPeriod(Aircraft aircraft, DateTime dateFrom, DateTime dateTo)
-        {
-            dateFrom = dateFrom.Date;
-            dateTo = dateTo.Date;
+		{
+			dateFrom = dateFrom.Date;
+			dateTo = dateTo.Date;
 
 			var flights = _aircraftFlightCore.GetAircraftFlightsByAircraftId(aircraft.ItemId);
 
@@ -748,9 +748,9 @@ namespace SmartCore.Calculations
 			// пробегаемся по всем полетам
 			var res = getFlightLifelengthByPeriod(flights, aircraftFrame, dateFrom, dateTo);
 
-            res.Days = GetDays(dateFrom, dateTo);
-            return res;
-        }
+			res.Days = GetDays(dateFrom, dateTo);
+			return res;
+		}
 		#endregion
 
 		#region public Lifelength GetFlightLifelengthOnStartOfDay(Aircraft aircraft, DateTime date)
@@ -913,32 +913,32 @@ namespace SmartCore.Calculations
 		/// <param name="flight"></param>
 		/// <returns></returns>
 		public Lifelength GetFlightLifelengthIncludingThisFlight(AircraftFlight flight)
-        {
-            var aircraft = _aircraftsCore.GetAircraftById(flight.AircraftId);
-            if (aircraft == null) throw new Exception($"Flight {flight.ItemId} has no aircraft related");
+		{
+			var aircraft = _aircraftsCore.GetAircraftById(flight.AircraftId);
+			if (aircraft == null) throw new Exception($"Flight {flight.ItemId} has no aircraft related");
 
-            // Если это был последний полет за указанный день возвращаем налет вс на конец дня
-            if (flight.LDGTime < flight.TakeOffTime) return getFlightLifelengthOnEndOfDay(aircraft, flight.FlightDate);
+			// Если это был последний полет за указанный день возвращаем налет вс на конец дня
+			if (flight.LDGTime < flight.TakeOffTime) return getFlightLifelengthOnEndOfDay(aircraft, flight.FlightDate);
 
-            // Сначала получаем налет воздушного судна на заданную дату 
-            var initial = getFlightLifelengthOnStartOfDay(aircraft, flight.FlightDate);
+			// Сначала получаем налет воздушного судна на заданную дату 
+			var initial = getFlightLifelengthOnStartOfDay(aircraft, flight.FlightDate);
 
-            // Пробегаемся по всем полетам, которые идут до этого полета
-            foreach (var t in _aircraftFlightCore.GetAircraftFlightsByAircraftId(aircraft.ItemId).Where(f => f.AtlbRecordType != AtlbRecordType.Maintenance))
-            {
-                if (t.FlightDate.Date == flight.FlightDate.Date)
-                    initial.Add(t.FlightTimeLifelength);
+			// Пробегаемся по всем полетам, которые идут до этого полета
+			foreach (var t in _aircraftFlightCore.GetAircraftFlightsByAircraftId(aircraft.ItemId).Where(f => f.AtlbRecordType != AtlbRecordType.Maintenance))
+			{
+				if (t.FlightDate.Date == flight.FlightDate.Date)
+					initial.Add(t.FlightTimeLifelength);
 
-                // возвращаемся если дошли до заданного полета
-                if (t.ItemId == flight.ItemId) break;
-            }
+				// возвращаемся если дошли до заданного полета
+				if (t.ItemId == flight.ItemId) break;
+			}
 
-            // Календарь
-            initial.Days = GetDays(aircraft.ManufactureDate, flight.FlightDate);
+			// Календарь
+			initial.Days = GetDays(aircraft.ManufactureDate, flight.FlightDate);
 
-            // initial хранит в себе налет вс на начало соответсвующего дня + все полеты по заданный включительно
-            return initial;
-        }
+			// initial хранит в себе налет вс на начало соответсвующего дня + все полеты по заданный включительно
+			return initial;
+		}
 		#endregion
 
 		#region public Lifelength GetCurrentFlightLifelength(Aircraft aircraft)
@@ -948,9 +948,9 @@ namespace SmartCore.Calculations
 		/// <param name="aircraft"></param>
 		/// <returns></returns>
 		public Lifelength GetCurrentFlightLifelength(Aircraft aircraft)
-        {
-            return getFlightLifelengthOnEndOfDay(aircraft, DateTime.Today);
-        }
+		{
+			return getFlightLifelengthOnEndOfDay(aircraft, DateTime.Today);
+		}
 		#endregion
 
 		
@@ -965,16 +965,16 @@ namespace SmartCore.Calculations
 		/// <param name="flight"></param>
 		/// <returns></returns>
 		public Lifelength GetFlightLifelengthIncludingThisFlight(BaseComponent baseComponent, AircraftFlight flight)
-        {
-            if (baseComponent == null) throw new Exception($"Flight {flight.ItemId} has no base component related");
-            var aircraft = _aircraftsCore.GetAircraftById(baseComponent.ParentAircraftId);
+		{
+			if (baseComponent == null) throw new Exception($"Flight {flight.ItemId} has no base component related");
+			var aircraft = _aircraftsCore.GetAircraftById(baseComponent.ParentAircraftId);
 			if (aircraft == null) throw new Exception($"Flight {flight.ItemId} has no aircraft related");
 
-            // Если это был последний полет за указанный день возвращаем налет вс на конец дня
-            if (flight.LDGTime < flight.TakeOffTime) return getFlightLifelengthOnEndOfDay(baseComponent, flight.FlightDate);
+			// Если это был последний полет за указанный день возвращаем налет вс на конец дня
+			if (flight.LDGTime < flight.TakeOffTime) return getFlightLifelengthOnEndOfDay(baseComponent, flight.FlightDate);
 
-            // Сначала получаем налет базовой детали, полученный днем ранее
-            var initial = getFlightLifelengthOnEndOfDay(baseComponent, flight.FlightDate.Date.AddDays(-1));
+			// Сначала получаем налет базовой детали, полученный днем ранее
+			var initial = getFlightLifelengthOnEndOfDay(baseComponent, flight.FlightDate.Date.AddDays(-1));
 			//TODO:(Evgenii Babak) Заметка для бага 598. Требуется учитывать актуальное состояние в этом методе для разрешения бага
 			//без учета актуального состояния initial будет LifeLenght.Zero если даты полета и установки базового агрегата совпадают
 			//требуется стори для изменения подхода в расчете наработки бд. Нужно избавиться от вычитания одного дня
@@ -982,24 +982,24 @@ namespace SmartCore.Calculations
 
 			// Пробегаемся по всем полетам, которые идут до этого полета
 			foreach (var t in flights)
-            {
+			{
 				var add = getFlightLifelength(t, baseComponent);
-	            if (baseComponent.BaseComponentType == BaseComponentType.Apu)
-	            {
-		            initial.Add(new Lifelength(0, 1, (int?)(t.FlightTimeLifelength.TotalMinutes * aircraft.APUFH)));
-	            }
+				if (baseComponent.BaseComponentType == BaseComponentType.Apu)
+				{
+					initial.Add(new Lifelength(0, 1, (int?)(t.FlightTimeLifelength.TotalMinutes * aircraft.APUFH)));
+				}
 				else initial.Add(add);
 
 				// возвращаемся если дошли до заданного полета
 				if (t.ItemId == flight.ItemId) break;
-            }
+			}
 
-            // Календарь
-            initial.Days = GetDays(baseComponent.ManufactureDate, flight.FlightDate);
+			// Календарь
+			initial.Days = GetDays(baseComponent.ManufactureDate, flight.FlightDate);
 
-            // initial хранит в себе налет вс на начало соответсвующего дня + все полеты по заданный включительно
-            return initial;
-        }
+			// initial хранит в себе налет вс на начало соответсвующего дня + все полеты по заданный включительно
+			return initial;
+		}
 		#endregion
 
 		#region public Lifelength GetFlightLifelengthOnStartOfDay(BaseComponent baseComponent, DateTime date)
@@ -1063,37 +1063,37 @@ namespace SmartCore.Calculations
 		/// <param name="flightRegime">режим работы агрегата</param>
 		/// <returns></returns>
 		public Lifelength GetFlightLifelengthOnStartOfDay(BaseComponent baseComponent, DateTime date, FlightRegime flightRegime)
-        {
-            //наработка по режимам работы расчитывается только для Двигателей, Пропеллеров и ВСУ
-            //по другим типам деталей наработка по режимам не ведется
-            if( baseComponent.BaseComponentType != BaseComponentType.Apu &&
-                baseComponent.BaseComponentType != BaseComponentType.Engine &&
-                baseComponent.BaseComponentType != BaseComponentType.Propeller)
-            {
-                return getFlightLifelengthOnStartOfDay(baseComponent, date);
-            }
+		{
+			//наработка по режимам работы расчитывается только для Двигателей, Пропеллеров и ВСУ
+			//по другим типам деталей наработка по режимам не ведется
+			if( baseComponent.BaseComponentType != BaseComponentType.Apu &&
+				baseComponent.BaseComponentType != BaseComponentType.Engine &&
+				baseComponent.BaseComponentType != BaseComponentType.Propeller)
+			{
+				return getFlightLifelengthOnStartOfDay(baseComponent, date);
+			}
 
-            if (flightRegime == null)
-                flightRegime = FlightRegime.UNK;
-            if (flightRegime == FlightRegime.UNK)
-            {
-                //при режиме UNK возвращается наработка базовой детали во всех режимах
-                return getFlightLifelengthOnStartOfDay(baseComponent, date);
-            }
+			if (flightRegime == null)
+				flightRegime = FlightRegime.UNK;
+			if (flightRegime == FlightRegime.UNK)
+			{
+				//при режиме UNK возвращается наработка базовой детали во всех режимах
+				return getFlightLifelengthOnStartOfDay(baseComponent, date);
+			}
 
-            // ресурс на момент производства равен нулю
-            date = date.Date;
-            if (date <= baseComponent.ManufactureDate) return Lifelength.Zero;
+			// ресурс на момент производства равен нулю
+			date = date.Date;
+			if (date <= baseComponent.ManufactureDate) return Lifelength.Zero;
 
-            // если наработка уже подсчитана - возвращаем ее
-            var saved = baseComponent.LifelengthCalculated.GetLifelengthOnStartOfDay(date, flightRegime);
-            if (saved != null) return new Lifelength(saved);
+			// если наработка уже подсчитана - возвращаем ее
+			var saved = baseComponent.LifelengthCalculated.GetLifelengthOnStartOfDay(date, flightRegime);
+			if (saved != null) return new Lifelength(saved);
 
-            // вычисляем результат
-            var res = getFlightLifelengthOnEndOfDay(baseComponent, date.AddDays(-1), flightRegime);
+			// вычисляем результат
+			var res = getFlightLifelengthOnEndOfDay(baseComponent, date.AddDays(-1), flightRegime);
 
-            return new Lifelength(res);
-        }
+			return new Lifelength(res);
+		}
 
 		#endregion
 
@@ -1104,9 +1104,9 @@ namespace SmartCore.Calculations
 		/// <param name="baseComponent"></param>
 		/// <returns></returns>
 		public Lifelength GetCurrentFlightLifelength(BaseComponent baseComponent)
-        {
-            return getFlightLifelengthOnEndOfDay(baseComponent, DateTime.Today);
-        }
+		{
+			return getFlightLifelengthOnEndOfDay(baseComponent, DateTime.Today);
+		}
 		#endregion
 
 		#region public Lifelength GetFlightLifelengthOnEndOfDay(BaseComponent baseComponent, DateTime effectiveDate)
@@ -1192,13 +1192,13 @@ namespace SmartCore.Calculations
 					// суммируем 
 					//Lifelength delta = GetLifelength(a, dateFrom, dateTo);
 #if KAC
-                    Lifelength delta;
-                    Lifelength period = GetLifelength(a, dateFrom, dateTo);
-                    if (baseDetail.BaseDetailType == BaseDetailType.Apu && a.RegistrationNumber != "EX-37401")
-                    {
-                        delta = new Lifelength(period.Days, period.Cycles, Convert.ToInt32(period.Cycles*60*1.3));
-                    }
-                    else delta = period;
+					Lifelength delta;
+					Lifelength period = GetLifelength(a, dateFrom, dateTo);
+					if (baseDetail.BaseDetailType == BaseDetailType.Apu && a.RegistrationNumber != "EX-37401")
+					{
+						delta = new Lifelength(period.Days, period.Cycles, Convert.ToInt32(period.Cycles*60*1.3));
+					}
+					else delta = period;
 
 #else
 					var delta = Lifelength.Zero;
@@ -1275,29 +1275,29 @@ namespace SmartCore.Calculations
 		/// <param name="flightRegime">режим работв агрегата</param>
 		/// <returns>наработка или Lifelength.Null в случае неверных параметров</returns>
 		public Lifelength GetFlightLifelengthForPeriod(BaseComponent baseComponent, DateTime fromDate, DateTime toDate, FlightRegime flightRegime)
-        {
-            if (baseComponent == null) return Lifelength.Null;
+		{
+			if (baseComponent == null) return Lifelength.Null;
 
-            if (baseComponent.BaseComponentType != BaseComponentType.Apu &&
-                baseComponent.BaseComponentType != BaseComponentType.Engine &&
-                baseComponent.BaseComponentType != BaseComponentType.Propeller)
-            {
-                return getFlightLifelengthForPeriod(baseComponent, fromDate, toDate);
-            }
+			if (baseComponent.BaseComponentType != BaseComponentType.Apu &&
+				baseComponent.BaseComponentType != BaseComponentType.Engine &&
+				baseComponent.BaseComponentType != BaseComponentType.Propeller)
+			{
+				return getFlightLifelengthForPeriod(baseComponent, fromDate, toDate);
+			}
 
-            if (flightRegime == null)
-                flightRegime = FlightRegime.UNK;
-            if (flightRegime == FlightRegime.UNK)
-            {
-                //при режиме UNK возвращается наработка базовой детали во всех режимах
-                return getFlightLifelengthForPeriod(baseComponent, fromDate, toDate);
-            }
+			if (flightRegime == null)
+				flightRegime = FlightRegime.UNK;
+			if (flightRegime == FlightRegime.UNK)
+			{
+				//при режиме UNK возвращается наработка базовой детали во всех режимах
+				return getFlightLifelengthForPeriod(baseComponent, fromDate, toDate);
+			}
 
-            var res = getFlightLifelengthOnEndOfDay(baseComponent, toDate, flightRegime);
-            res.Substract(getFlightLifelengthOnEndOfDay(baseComponent, fromDate, flightRegime));
-            res.Days = Convert.ToInt32((toDate.Date.Ticks - fromDate.Date.Ticks) / TimeSpan.TicksPerDay);
-            return res;
-        }
+			var res = getFlightLifelengthOnEndOfDay(baseComponent, toDate, flightRegime);
+			res.Substract(getFlightLifelengthOnEndOfDay(baseComponent, fromDate, flightRegime));
+			res.Days = Convert.ToInt32((toDate.Date.Ticks - fromDate.Date.Ticks) / TimeSpan.TicksPerDay);
+			return res;
+		}
 		#endregion
 
 		#region private Lifelength getFlightLifelengthOnEndOfDay(BaseComponent baseComponent, DateTime effectiveDate, FlightRegime flightRegime)
@@ -1440,14 +1440,14 @@ namespace SmartCore.Calculations
 						return new Lifelength(null, 1, parentAircraft.ApuUtizationPerFlightinMinutes);
 				}
 #if KAC
-                if (bd.BaseDetailType == BaseDetailType.Apu)
-                {
-                    Lifelength period = FlightTimeLifelength;
-                    Lifelength delta = ParentAircraft.RegistrationNumber == "EX-37401"
-                        ? period
-                        : new Lifelength(period.Days, period.Cycles, Convert.ToInt32(period.Cycles * 60 * 1.3));
-                    return delta;
-                }
+				if (bd.BaseDetailType == BaseDetailType.Apu)
+				{
+					Lifelength period = FlightTimeLifelength;
+					Lifelength delta = ParentAircraft.RegistrationNumber == "EX-37401"
+						? period
+						: new Lifelength(period.Days, period.Cycles, Convert.ToInt32(period.Cycles * 60 * 1.3));
+					return delta;
+				}
 #endif
 				foreach (var t in runs)
 					res.Add(t.Lifelength);
@@ -1511,12 +1511,12 @@ namespace SmartCore.Calculations
 		/// <param name="component"></param>
 		/// <returns></returns>
 		public Lifelength GetCurrentFlightLifelength(Entities.General.Accessory.Component component)
-        {
-            if (component is BaseComponent) 
-                return getFlightLifelengthOnEndOfDay((BaseComponent) component, DateTime.Today);
-            
-            return getFlightLifelengthOnEndOfDay(component, DateTime.Today);
-        }
+		{
+			if (component is BaseComponent) 
+				return getFlightLifelengthOnEndOfDay((BaseComponent) component, DateTime.Today);
+			
+			return getFlightLifelengthOnEndOfDay(component, DateTime.Today);
+		}
 		#endregion
 
 		#region public Lifelength GetFlightLifelengthOnEndOfDay(Component component, DateTime effectiveDate)
@@ -1812,17 +1812,17 @@ namespace SmartCore.Calculations
 						var llp = categoryData.LLPCurrent ?? categoryData.LLPTemp;
 
 						if (categoryData.LLPLifeLimit?.Hours != null && llp?.Hours != null &&
-						    categoryData.LLPLifeLimit?.Hours != 0)
+							categoryData.LLPLifeLimit?.Hours != 0)
 						{
 							hours -= (double)llp?.Hours / (double)categoryData.LLPLifeLimit.Hours;
 						}
 						if (categoryData.LLPLifeLimit?.Cycles != null && llp?.Cycles != null &&
-						    categoryData.LLPLifeLimit?.Cycles != 0)
+							categoryData.LLPLifeLimit?.Cycles != 0)
 						{
 							cycles -= (double)llp?.Cycles / (double)categoryData.LLPLifeLimit.Cycles;
 						}
 						if (categoryData.LLPLifeLimit?.Days != null && llp?.Days != null &&
-						    categoryData.LLPLifeLimit?.Days != 0)
+							categoryData.LLPLifeLimit?.Days != 0)
 						{
 							days -= (double)llp?.Days / (double)categoryData.LLPLifeLimit.Days;
 						}
@@ -1837,8 +1837,9 @@ namespace SmartCore.Calculations
 
 					if(data.LLPLifeLimit != null)
 						data.Remain.Resemble(data.LLPLifeLimit);
-				}
 
+					CalculateLifeLimit(data, lifeLimitCategories, component.LLPData);
+				}
 			}
 
 			return new Lifelength(res);
@@ -1862,7 +1863,7 @@ namespace SmartCore.Calculations
 		public int GetTotalCycles(AircraftFlightCollection flights)
 		{
 			return (int) flights.Where(ItWasRealFlight)
-						        .Sum(aircraftFlight => aircraftFlight.FlightTimeLifelength.Cycles);
+								.Sum(aircraftFlight => aircraftFlight.FlightTimeLifelength.Cycles);
 		}
 
 		#endregion
@@ -2014,9 +2015,63 @@ namespace SmartCore.Calculations
 
 		// Вспомогательные - которые могут пригодиться в интерфейсе
 
+
+		public void CalculateLifeLimit(ComponentLLPCategoryData calculatedData, List<LLPLifeLimitCategory> categories, ComponentLLPDataCollection LLPData)
+		{
+			double aCycle = 0, bCycle = 0, cCycle = 0, dCycle;
+
+			foreach (var category in categories)
+			{
+				var data = LLPData.GetItemByCatagory(category);
+
+				//TODO:Заплатка
+				if (data?.LLPCurrent == null)
+					data.LLPCurrent = data.LLPLifelengthCurrent ?? data.LLPLifeLengthForDate;
+
+				if (data?.LLPCurrent == null || data.LLPLifeLimit == null)
+					continue;
+				double currentCycle = data.LLPCurrent.Cycles.GetValueOrDefault();
+				double limitCycle = data.LLPLifeLimit.Cycles.GetValueOrDefault();
+				double resultCycle = currentCycle / limitCycle;
+
+				if (category.CategoryType == LLPLifeLimitCategoryType.A)
+				{
+					aCycle = !double.IsNaN(resultCycle) ? Math.Round(resultCycle, 5) : 0;
+					continue;
+				}
+				if (category.CategoryType == LLPLifeLimitCategoryType.B)
+				{
+					bCycle = !double.IsNaN(resultCycle) ? Math.Round(resultCycle, 5) : 0;
+					continue;
+				}
+				if (category.CategoryType == LLPLifeLimitCategoryType.C)
+				{
+					cCycle = !double.IsNaN(resultCycle) ? Math.Round(resultCycle, 5) : 0;
+					continue;
+				}
+
+				dCycle = !double.IsNaN(resultCycle) ? Math.Round(resultCycle, 5) : 0;
+
+				double resCycle = 1F;
+
+				if (aCycle != 0)
+					resCycle -= aCycle;
+				if (bCycle != 0)
+					resCycle -= bCycle;
+				if (cCycle != 0)
+					resCycle -= cCycle;
+				if (dCycle != 0)
+					resCycle -= dCycle;
+
+				//if(!double.IsNaN(resultCycle))
+				if(calculatedData.Remain != null && calculatedData.LLPLifeLimit?.Cycles != null)
+					calculatedData.Remain.Cycles = (int)(resCycle * calculatedData.LLPLifeLimit.Cycles.GetValueOrDefault());
+			}
+		}
+
 		/*
-         * Калькуляция наработки для записей о выполнении задачи
-         */
+		 * Калькуляция наработки для записей о выполнении задачи
+		 */
 
 		#region public Lifelength GetFlightLifelengthOnEndOfDay(DirectiveRecord record)
 		/// <summary>
@@ -2025,47 +2080,47 @@ namespace SmartCore.Calculations
 		/// <param name="record"></param>
 		/// <returns></returns>
 		public Lifelength GetFlightLifelengthOnEndOfDay(DirectiveRecord record)
-        {
+		{
 
-            object parent = record.Parent;
-            if (parent == null) throw new Exception($"1537: Performance record {record.RecordType} ({record.ItemId}:{record.ParentId}) referst to null object");
+			object parent = record.Parent;
+			if (parent == null) throw new Exception($"1537: Performance record {record.RecordType} ({record.ItemId}:{record.ParentId}) referst to null object");
 
-            //
-            var date = record.RecordDate;
+			//
+			var date = record.RecordDate;
 
-            // Обрабатываем объекты
-            if (parent is ComponentDirective)
-            {
-                // Запись принадлежит работе по агрегату
-                // Агрегат / Базовый агрегат
-                var componentDirective = parent as ComponentDirective;
-                if (componentDirective.ParentComponent.IsBaseComponent) return getFlightLifelengthOnEndOfDay((BaseComponent)componentDirective.ParentComponent, date);
-                if (!componentDirective.ParentComponent.IsBaseComponent) return getFlightLifelengthOnEndOfDay(componentDirective.ParentComponent, date);
-                throw new Exception($"1543: Can not get parent object for component directive {componentDirective.ItemId}");
-            }
-            if (parent is Directive)
-            {
-                var directive = parent as Directive;
-                var bd = directive.ParentBaseComponent;
-                if (bd == null) throw new Exception($"1550: Parent object for directive {directive.ItemId} is set to null");
-                return getFlightLifelengthOnEndOfDay(bd, date);
-            }
-            if (parent is MaintenanceDirective)
-            {
-                var directive = parent as MaintenanceDirective;
-                var a = directive.ParentBaseComponent;
-                if (a == null) throw new Exception($"1550: Parent object for directive {directive.ItemId} is set to null");
-                return getFlightLifelengthOnEndOfDay(a, date);
-            }
-            if (parent is Procedure)
-            {
-                var p = parent as Procedure;
-                var op = p.ParentOperator;
-                if (op == null) throw new Exception($"1550: Parent object for directive {p.ItemId} is set to null");
-                return getFlightLifelengthOnEndOfDay(op, date);
-            }
-            throw new Exception($"1545: Can not recognize parent object {parent.GetType()} for record {record.RecordType} ({record.ItemId}:{record.ParentId})");
-        }
+			// Обрабатываем объекты
+			if (parent is ComponentDirective)
+			{
+				// Запись принадлежит работе по агрегату
+				// Агрегат / Базовый агрегат
+				var componentDirective = parent as ComponentDirective;
+				if (componentDirective.ParentComponent.IsBaseComponent) return getFlightLifelengthOnEndOfDay((BaseComponent)componentDirective.ParentComponent, date);
+				if (!componentDirective.ParentComponent.IsBaseComponent) return getFlightLifelengthOnEndOfDay(componentDirective.ParentComponent, date);
+				throw new Exception($"1543: Can not get parent object for component directive {componentDirective.ItemId}");
+			}
+			if (parent is Directive)
+			{
+				var directive = parent as Directive;
+				var bd = directive.ParentBaseComponent;
+				if (bd == null) throw new Exception($"1550: Parent object for directive {directive.ItemId} is set to null");
+				return getFlightLifelengthOnEndOfDay(bd, date);
+			}
+			if (parent is MaintenanceDirective)
+			{
+				var directive = parent as MaintenanceDirective;
+				var a = directive.ParentBaseComponent;
+				if (a == null) throw new Exception($"1550: Parent object for directive {directive.ItemId} is set to null");
+				return getFlightLifelengthOnEndOfDay(a, date);
+			}
+			if (parent is Procedure)
+			{
+				var p = parent as Procedure;
+				var op = p.ParentOperator;
+				if (op == null) throw new Exception($"1550: Parent object for directive {p.ItemId} is set to null");
+				return getFlightLifelengthOnEndOfDay(op, date);
+			}
+			throw new Exception($"1545: Can not recognize parent object {parent.GetType()} for record {record.RecordType} ({record.ItemId}:{record.ParentId})");
+		}
 		#endregion
 
 		#region public Lifelength GetFlightLifelengthOnEndOfDay(TransferRecord record)
@@ -2075,36 +2130,36 @@ namespace SmartCore.Calculations
 		/// <param name="record"></param>
 		/// <returns></returns>
 		public Lifelength GetFlightLifelengthOnEndOfDay(TransferRecord record)
-        {
-            if (record.ParentComponent != null)
-            {
-                return record.ParentComponent is BaseComponent
-                           ? getFlightLifelengthOnEndOfDay((BaseComponent) record.ParentComponent, record.TransferDate)
-                           : getFlightLifelengthOnEndOfDay(record.ParentComponent, record.TransferDate);
-            }
-            throw new Exception($"Transfer record {record.ItemId} for {record.ParentId} has no parent");
-        }
+		{
+			if (record.ParentComponent != null)
+			{
+				return record.ParentComponent is BaseComponent
+						   ? getFlightLifelengthOnEndOfDay((BaseComponent) record.ParentComponent, record.TransferDate)
+						   : getFlightLifelengthOnEndOfDay(record.ParentComponent, record.TransferDate);
+			}
+			throw new Exception($"Transfer record {record.ItemId} for {record.ParentId} has no parent");
+		}
 
 		#endregion
 
 		/*
-         * Расчет выполнения задачи
-         */
+		 * Расчет выполнения задачи
+		 */
 
-        /*
-         * Реализация
-         */
+		/*
+		 * Реализация
+		 */
 
-        #region private Boolean _MathLoaded;
-        /// <summary>
-        /// Загружены ли данные, необходимые для математичесского аппарата
-        /// </summary>
-        private Boolean _mathLoaded;
+		#region private Boolean _MathLoaded;
+		/// <summary>
+		/// Загружены ли данные, необходимые для математичесского аппарата
+		/// </summary>
+		private Boolean _mathLoaded;
 		#endregion
 
 		/*
-         * Обнуление данных
-         */
+		 * Обнуление данных
+		 */
 
 		#region internal void ResetMath(BaseComponent baseComponent)
 		/// <summary>
@@ -2112,11 +2167,11 @@ namespace SmartCore.Calculations
 		/// </summary>
 		/// <param name="baseComponent"></param>
 		public void ResetMath(BaseComponent baseComponent)
-        {
-            if(baseComponent.LifelengthCalculated != null)
-                baseComponent.LifelengthCalculated.Clear();
-            else baseComponent.LifelengthCalculated = new LifelengthCollection(baseComponent.ManufactureDate);
-        }
+		{
+			if(baseComponent.LifelengthCalculated != null)
+				baseComponent.LifelengthCalculated.Clear();
+			else baseComponent.LifelengthCalculated = new LifelengthCollection(baseComponent.ManufactureDate);
+		}
 		#endregion
 
 		#region public void ResetMath(Aircraft aircraft)
@@ -2126,48 +2181,48 @@ namespace SmartCore.Calculations
 		/// </summary>
 		/// <param name="aircraft"></param>
 		public void ResetMath(Aircraft aircraft)
-        {
-            foreach (BaseComponent baseComponent in _componentCore.GetAicraftBaseComponents(aircraft.ItemId))
-                ResetMath(baseComponent);
-        }
-        #endregion
+		{
+			foreach (BaseComponent baseComponent in _componentCore.GetAicraftBaseComponents(aircraft.ItemId))
+				ResetMath(baseComponent);
+		}
+		#endregion
 
-        /*
-         * Дополнительно
-         */
+		/*
+		 * Дополнительно
+		 */
 
-        #region public bool IsEqual(double x,double y)
-        /// <summary>
-        /// Сравнивает два числа типа double с эпсилон равное 0.0001
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
-        public bool IsEqual(double x, double y)
-        {
-            double eps = 0.0001;
-            if (Math.Abs(x - y) < eps) return true;
-            return false;
-        }
+		#region public bool IsEqual(double x,double y)
+		/// <summary>
+		/// Сравнивает два числа типа double с эпсилон равное 0.0001
+		/// </summary>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		/// <returns></returns>
+		public bool IsEqual(double x, double y)
+		{
+			double eps = 0.0001;
+			if (Math.Abs(x - y) < eps) return true;
+			return false;
+		}
 
-        #endregion
+		#endregion
 
-        #region public static Int32 GetDays(DateTime dateFrom, DateTime dateTo)
-        /// <summary>
-        /// Возвращает количество дней между двумя датами 
-        /// </summary>
-        /// <param name="dateFrom"></param>
-        /// <param name="dateTo"></param>
-        /// <returns></returns>
-        public static Int32 GetDays(DateTime dateFrom, DateTime dateTo)
-        {
-            return Convert.ToInt32((dateTo.Date.Ticks - dateFrom.Date.Ticks) / TimeSpan.TicksPerDay);
-        }
-        #endregion
+		#region public static Int32 GetDays(DateTime dateFrom, DateTime dateTo)
+		/// <summary>
+		/// Возвращает количество дней между двумя датами 
+		/// </summary>
+		/// <param name="dateFrom"></param>
+		/// <param name="dateTo"></param>
+		/// <returns></returns>
+		public static Int32 GetDays(DateTime dateFrom, DateTime dateTo)
+		{
+			return Convert.ToInt32((dateTo.Date.Ticks - dateFrom.Date.Ticks) / TimeSpan.TicksPerDay);
+		}
+		#endregion
 
-        /*
-         *  Maintenance
-         */
+		/*
+		 *  Maintenance
+		 */
 
 		#region public void LoadCalculator()
 

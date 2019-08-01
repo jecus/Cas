@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
-using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.Auxiliary.Comparers;
-using CASTerms;
+using CAS.UI.UIControls.NewGrid;
 using SmartCore.Entities;
 
 namespace CAS.UI.UIControls.Users
@@ -10,7 +9,7 @@ namespace CAS.UI.UIControls.Users
     ///<summary>
     /// список для отображения документов
     ///</summary>
-    public partial class UserListView : BaseListViewControl<User>
+    public partial class UserListView : BaseGridViewControl<User>
     {
 		#region public UserListView()
 		public UserListView()
@@ -23,62 +22,27 @@ namespace CAS.UI.UIControls.Users
 		#region Methods
 
 		#region protected override SetGroupsToItems()
-		protected override void SetGroupsToItems(int columnIndex)
+		protected override void GroupingItems()
 		{
-			itemsListView.Groups.Clear();
-			foreach (var item in ListViewItemList)
-			{
-				var temp = ((User)item.Tag).UserType.ToString();
-
-				itemsListView.Groups.Add(temp, temp);
-				item.Group = itemsListView.Groups[temp];
-			}
+			Grouping("User Type");
 		}
-		#endregion
-
-		#region protected override void SortItems(int columnIndex)
-
-		protected override void SortItems(int columnIndex)
-		{
-			if (OldColumnIndex != columnIndex)
-				SortMultiplier = -1;
-			if (SortMultiplier == 1)
-				SortMultiplier = -1;
-			else
-				SortMultiplier = 1;
-			itemsListView.Items.Clear();
-			var resultList = new List<ListViewItem>();
-			SetGroupsToItems(columnIndex);
-
-			//добавление остальных подзадач
-			foreach (ListViewItem item in ListViewItemList)
-			{
-				resultList.Add(item);
-			}
-			resultList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
-		
-			itemsListView.Items.AddRange(resultList.ToArray());
-			OldColumnIndex = columnIndex;
-
-		}
-
 		#endregion
 
 		#region protected override ListViewItem.ListViewSubItem[] GetItemsString(Document item)
 
-		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(User item)
+		protected override List<CustomCell> GetListViewSubItems(User item)
 		{
-			var subItems = new List<ListViewItem.ListViewSubItem>();
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 			var userName = $"{item.Surname} {item.Name}";
+			var subItems = new List<CustomCell>()
+			{
+				CreateRow(userName,userName),
+				CreateRow(item.Login,item.Login),
+				CreateRow(item.Password,item.Password),
+				CreateRow(item.UserType.ToString(),item.UserType),
+				CreateRow(item.UiType.ToString(),item.UiType),
+			};
 
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = userName, Tag = userName });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Login, Tag = item.Login });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Password, Tag = item.Password });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.UiType.ToString(), Tag = item.UiType });
-			//subItems.Add(new ListViewItem.ListViewSubItem {Text = item.UserType.ToString(), Tag = item.UserType });
-			
-			return subItems.ToArray();
+			return subItems;
 		}
 
 		#endregion
@@ -89,41 +53,27 @@ namespace CAS.UI.UIControls.Users
 		///// </summary>
 		protected override void SetHeaders()
 		{
-			ColumnHeaderList.Clear();
-
-			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "UserName" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Login" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Password" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Ui Type" };
-			ColumnHeaderList.Add(columnHeader);
-
-			//columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "UserType" };
-			//ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+			AddColumn("UserName", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Login", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Password", (int)(radGridView1.Width * 0.20f));
+			AddColumn("User Type", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Ui Type", (int)(radGridView1.Width * 0.20f));
 		}
 		#endregion
 
-		#region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
-		protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
-        {
+		#region protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
+		protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
+		{
             if (SelectedItem != null)
             {
 				var form = new UserForm(SelectedItem);
 				if (form.ShowDialog() == DialogResult.OK)
 				{
-					ListViewItem.ListViewSubItem[] subs = GetListViewSubItems(SelectedItem);
-					for (int i = 0; i < subs.Length; i++)
-						itemsListView.SelectedItems[0].SubItems[i].Text = subs[i].Text;
+					var subs = GetListViewSubItems(SelectedItem);
+					for (int i = 0; i < subs.Count; i++)
+						radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
 				}
-				itemsListView.SelectedItems[0].Group = itemsListView.Groups[SelectedItem.UserType.ToString()];
-			}
+            }
         }
         #endregion
 

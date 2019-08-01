@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
-using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.ComponentControls;
+using CAS.UI.UIControls.NewGrid;
 using CAS.UI.UIControls.StoresControls;
 using CASTerms;
 using SmartCore.Auxiliary;
@@ -15,7 +14,7 @@ using Component = SmartCore.Entities.General.Accessory.Component;
 
 namespace CAS.UI.UIControls.PowerPlants
 {
-	public partial class PowerPlantListView : BaseListViewControl<BaseComponent>
+	public partial class PowerPlantListView : BaseGridViewControl<BaseComponent>
 	{
 		public PowerPlantListView()
 		{
@@ -28,46 +27,21 @@ namespace CAS.UI.UIControls.PowerPlants
 		///// </summary>
 		protected override void SetHeaders()
 		{
-			ColumnHeaderList.Clear();
-
-			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Aircraft" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Engine" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Position" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Part No" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Serial No" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Manuf. Date" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Install. Date" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Aircraft (Flight)" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Engine (Flight)" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
-			ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+			AddColumn("Aircraft", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Engine", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Position", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Part No", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Serial No", (int)(radGridView1.Width * 0.20f));
+			AddDateColumn("Manuf. Date", (int)(radGridView1.Width * 0.20f));
+			AddDateColumn("Install. Date", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Aircraft (Flight)", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Engine (Flight)", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
 		}
 		#endregion
 
-		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(BaseComponent item)
+		protected override List<CustomCell> GetListViewSubItems(BaseComponent item)
 		{
-			var subItems = new List<ListViewItem.ListViewSubItem>();
-
 			var tcsnLifeLenght = Lifelength.Zero;
 			var aircraft = GlobalObjects.AircraftsCore.GetAircraftById(item.ParentAircraftId);
 			if(aircraft != null)
@@ -77,23 +51,19 @@ namespace CAS.UI.UIControls.PowerPlants
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 			var transferDate = item.TransferRecords.GetLast().TransferDate;
 
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = aircraft.ToString(), Tag = aircraft });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Description, Tag = item.Description });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.PositionNumber, Tag = item.PositionNumber });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.PartNumber, Tag = item.PartNumber });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.SerialNumber, Tag = item.SerialNumber });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = SmartCore.Auxiliary.Convert.GetDateFormat(item.ManufactureDate), Tag = item.ManufactureDate });
-			subItems.Add(new ListViewItem.ListViewSubItem
+			return new List<CustomCell>
 			{
-				Text = transferDate > DateTimeExtend.GetCASMinDateTime()
-					? SmartCore.Auxiliary.Convert.GetDateFormat(transferDate) : "",
-				Tag = transferDate
-			});
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = tcsnLifeLenght.ToString(), Tag = tcsnLifeLenght });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = temp.ToString(), Tag = temp });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
-
-			return subItems.ToArray();
+				CreateRow(aircraft.ToString(), aircraft ),
+				CreateRow(item.Description, item.Description ),
+				CreateRow(item.PositionNumber, item.PositionNumber ),
+				CreateRow(item.PartNumber, item.PartNumber ),
+				CreateRow(item.SerialNumber, item.SerialNumber ),
+				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.ManufactureDate), item.ManufactureDate ),
+				CreateRow(transferDate > DateTimeExtend.GetCASMinDateTime() ? SmartCore.Auxiliary.Convert.GetDateFormat(transferDate) : "", transferDate),
+				CreateRow(tcsnLifeLenght.ToString(), tcsnLifeLenght ),
+				CreateRow(temp.ToString(), temp ),
+				CreateRow(author, author )
+			};
 		}
 
 		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
@@ -15,162 +16,214 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Filters;
 using SmartCore.Purchase;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 {
-    ///<summary>
-    ///</summary>
-    [ToolboxItem(false)]
-    public partial class AllOrderListScreen : ScreenControl
-    {
-        #region Fields
-        private CommonFilterCollection _filter = new CommonFilterCollection(typeof(ILogistic));
-        private ICommonCollection<ILogistic> _initialArray = new CommonCollection<ILogistic>();
-        private ICommonCollection<ILogistic> _resultArray = new CommonCollection<ILogistic>();
-        private readonly BaseEntityObject _parent;
-        
-        private AllOrderListView _directivesViewer;
-        private ContextMenuStrip _contextMenuStrip;
-        private ToolStripMenuItem _toolStripMenuItemPublish;
-        private ToolStripMenuItem _toolStripMenuItemCreateQuatation;
-        private ToolStripMenuItem _toolStripMenuItemClose;
-        private ToolStripMenuItem _toolStripMenuItemDelete;
-        private ToolStripSeparator _toolStripSeparator1;
-        private ToolStripMenuItem _toolStripMenuItemEdit;
-        private ToolStripMenuItem _toolStripMenuItemCreatePurchase;
+	///<summary>
+	///</summary>
+	[ToolboxItem(false)]
+	public partial class AllOrderListScreen : ScreenControl
+	{
+		#region Fields
+		private CommonFilterCollection _filter = new CommonFilterCollection(typeof(ILogistic));
+		private ICommonCollection<ILogistic> _initialArray = new CommonCollection<ILogistic>();
+		private ICommonCollection<ILogistic> _resultArray = new CommonCollection<ILogistic>();
+		private readonly BaseEntityObject _parent;
+		
+		private AllOrderListView _directivesViewer;
+		private RadDropDownMenu _contextMenuStrip;
+		private RadMenuItem _toolStripMenuItemPublish;
+		private RadMenuItem _toolStripMenuItemCreateQuatation;
+		private RadMenuItem _toolStripMenuItemClose;
+		private RadMenuItem _toolStripMenuItemDelete;
+		private RadMenuSeparatorItem _toolStripSeparator1;
+		private RadMenuItem _toolStripMenuItemEdit;
+		private RadMenuItem _toolStripMenuItemCreatePurchase;
 
-        #endregion
-        
-        #region Constructors
+		#endregion
+		
+		#region Constructors
 
-        #region private InitialOrderListScreen()
-        ///<summary>
-        /// Конструктор по умолчанию
-        ///</summary>
-        private AllOrderListScreen()
-        {
-            InitializeComponent();
-        }
-        #endregion
+		#region private InitialOrderListScreen()
+		///<summary>
+		/// Конструктор по умолчанию
+		///</summary>
+		private AllOrderListScreen()
+		{
+			InitializeComponent();
+		}
+		#endregion
 
-        #region public InitialOrderListScreen(Operator currentOperator) : this()
-        ///<summary>
-        /// Создаёт экземпляр элемента управления, отображающего список директив
-        ///</summary>
-        ///<param name="currentOperator">Оператор, которому принадлежат директивы</param>
-        public AllOrderListScreen(Operator currentOperator)
-            : this()
-        {
-            if (currentOperator == null)
-                throw new ArgumentNullException("currentOperator");
-            _parent = currentOperator;
-            aircraftHeaderControl1.Operator = currentOperator;
-            StatusTitle = "Operator Initials";
-            labelTitle.Visible = false;
+		#region public InitialOrderListScreen(Operator currentOperator) : this()
+		///<summary>
+		/// Создаёт экземпляр элемента управления, отображающего список директив
+		///</summary>
+		///<param name="currentOperator">Оператор, которому принадлежат директивы</param>
+		public AllOrderListScreen(Operator currentOperator)
+			: this()
+		{
+			if (currentOperator == null)
+				throw new ArgumentNullException("currentOperator");
+			_parent = currentOperator;
+			aircraftHeaderControl1.Operator = currentOperator;
+			StatusTitle = "Operator Initials";
+			labelTitle.Visible = false;
 			InitToolStripMenuItems();
-            InitListView();
-        }
+			InitListView();
+		}
 
-        #endregion
+		#endregion
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region public override void DisposeScreen()
-        public override void DisposeScreen()
-        {
-            if (AnimatedThreadWorker.IsBusy)
-                AnimatedThreadWorker.CancelAsync();
-            AnimatedThreadWorker.Dispose();
+		#region public override void DisposeScreen()
+		public override void DisposeScreen()
+		{
+			if (AnimatedThreadWorker.IsBusy)
+				AnimatedThreadWorker.CancelAsync();
+			AnimatedThreadWorker.Dispose();
 
-            _initialArray.Clear();
-            _initialArray = null;
+			_initialArray.Clear();
+			_initialArray = null;
 
-            if (_directivesViewer != null)
-	            _directivesViewer.DisposeView();
+			if (_directivesViewer != null)
+				_directivesViewer.Dispose();
 
-            Dispose(true);
-        }
+			Dispose(true);
+		}
 
-        #endregion
+		#endregion
 
-        #region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (CurrentAircraft != null)
-            {
-                labelTitle.Text = "Date as of: " +
-                    SmartCore.Auxiliary.Convert.GetDateFormat(DateTime.Today) + " Aircraft TSN/CSN: " +
-                    GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(CurrentAircraft);
-            }
-            else
-            {
-                labelTitle.Text = "Date as of: " + SmartCore.Auxiliary.Convert.GetDateFormat(DateTime.Today);
-            }
-            
-            _directivesViewer.SetItemsArray(_resultArray.ToArray());
-            headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
-
-            _directivesViewer.Focus();
-        }
-        #endregion
-
-        #region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
-        protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
-        {
-            if (_parent == null) return;
-            _initialArray.Clear();
-            _resultArray.Clear();
-
-            AnimatedThreadWorker.ReportProgress(0, "load Orders");
-
-            try
-            {
-                _initialArray.AddRange(GlobalObjects.PurchaseCore.GetInitialOrders(null));
-                _initialArray.AddRange(GlobalObjects.PurchaseCore.GetRequestForQuotation(null));
-                _initialArray.AddRange(GlobalObjects.PurchaseCore.GetPurchaseOrders(null));
+		#region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		{
+			if (CurrentAircraft != null)
+			{
+				labelTitle.Text = "Date as of: " +
+					SmartCore.Auxiliary.Convert.GetDateFormat(DateTime.Today) + " Aircraft TSN/CSN: " +
+					GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(CurrentAircraft);
 			}
-            catch (Exception ex)
-            {
-                Program.Provider.Logger.Log("Error while load Orders", ex);
-            }
+			else
+			{
+				labelTitle.Text = "Date as of: " + SmartCore.Auxiliary.Convert.GetDateFormat(DateTime.Today);
+			}
+			
+			_directivesViewer.SetItemsArray(_resultArray.ToArray());
+			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 
-            AnimatedThreadWorker.ReportProgress(70, "filter Orders");
-            FilterItems(_initialArray, _resultArray);
-            AnimatedThreadWorker.ReportProgress(100, "Complete");
-        }
-        #endregion
+			_directivesViewer.Focus();
+		}
+		#endregion
 
-        #region public override void OnInitCompletion(object sender)
-        /// <summary>
-        /// Метод, вызывается после добавления содежимого на отображатель(вкладку)
-        /// </summary>
-        /// <returns></returns>
-        public override void OnInitCompletion(object sender)
-        {
-            AnimatedThreadWorker.RunWorkerAsync();
+		#region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
+		protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
+		{
+			if (_parent == null) return;
+			_initialArray.Clear();
+			_resultArray.Clear();
 
-            base.OnInitCompletion(sender);
-        }
-        #endregion
-        
-        #region private void InitListView()
+			AnimatedThreadWorker.ReportProgress(0, "load Orders");
 
-        private void InitListView()
-        {
-            _directivesViewer = new AllOrderListView()
-                                    {
-										ContextMenuStrip = _contextMenuStrip,
-                                        TabIndex = 2,
-                                        Location = new Point(panel1.Left, panel1.Top),
-                                        Dock = DockStyle.Fill
-                                    };
-            //события 
-            _directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+			try
+			{
+				_initialArray.AddRange(GlobalObjects.PurchaseCore.GetInitialOrders(null));
+				_initialArray.AddRange(GlobalObjects.PurchaseCore.GetRequestForQuotation(null));
+				_initialArray.AddRange(GlobalObjects.PurchaseCore.GetPurchaseOrders(null));
+			}
+			catch (Exception ex)
+			{
+				Program.Provider.Logger.Log("Error while load Orders", ex);
+			}
 
-            panel1.Controls.Add(_directivesViewer);
-        }
+			AnimatedThreadWorker.ReportProgress(70, "filter Orders");
+			FilterItems(_initialArray, _resultArray);
+			AnimatedThreadWorker.ReportProgress(100, "Complete");
+		}
+		#endregion
+
+		#region public override void OnInitCompletion(object sender)
+		/// <summary>
+		/// Метод, вызывается после добавления содежимого на отображатель(вкладку)
+		/// </summary>
+		/// <returns></returns>
+		public override void OnInitCompletion(object sender)
+		{
+			AnimatedThreadWorker.RunWorkerAsync();
+
+			base.OnInitCompletion(sender);
+		}
+		#endregion
+		
+		#region private void InitListView()
+
+		private void InitListView()
+		{
+			_directivesViewer = new AllOrderListView()
+									{
+										CustomMenu = _contextMenuStrip,
+										TabIndex = 2,
+										Location = new Point(panel1.Left, panel1.Top),
+										Dock = DockStyle.Fill
+									};
+			//события 
+			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+
+			_directivesViewer.MenuOpeningAction = () =>
+			{
+				if (_directivesViewer.SelectedItems.Count <= 0)
+					return;
+				else if (_directivesViewer.SelectedItems.Count == 1)
+				{
+					var wp = _directivesViewer.SelectedItem;
+					if (wp.Status == WorkPackageStatus.Closed || wp.Status == WorkPackageStatus.Opened)
+					{
+						_toolStripMenuItemClose.Enabled = false;
+						_toolStripMenuItemPublish.Enabled = true;
+					}
+					else if (wp.Status == WorkPackageStatus.Published)
+					{
+						_toolStripMenuItemClose.Enabled = true;
+						_toolStripMenuItemPublish.Enabled = false;
+					}
+					else
+					{
+						_toolStripMenuItemClose.Enabled = true;
+						_toolStripMenuItemPublish.Enabled = true;
+					}
+
+					_toolStripMenuItemCreateQuatation.Enabled = true;
+
+					if (wp is InitialOrder)
+					{
+						_toolStripMenuItemCreatePurchase.Enabled = false;
+						_toolStripMenuItemCreateQuatation.Enabled = true;
+					}
+					else if (wp is RequestForQuotation)
+					{
+						_toolStripMenuItemCreatePurchase.Enabled = true;
+						_toolStripMenuItemCreateQuatation.Enabled = false;
+					}
+					else
+					{
+						_toolStripMenuItemCreatePurchase.Enabled = false;
+						_toolStripMenuItemCreateQuatation.Enabled = false;
+					}
+				}
+
+				else
+				{
+					_toolStripMenuItemCreateQuatation.Enabled = false;
+					_toolStripMenuItemClose.Enabled = true;
+					_toolStripMenuItemPublish.Enabled = true;
+					_toolStripMenuItemCreatePurchase.Enabled = false;
+				}
+			};
+
+			panel1.Controls.Add(_directivesViewer);
+		}
 
 		#endregion
 
@@ -178,14 +231,14 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new ContextMenuStrip();
-			_toolStripMenuItemPublish = new ToolStripMenuItem();
-			_toolStripMenuItemCreateQuatation = new ToolStripMenuItem();
-			_toolStripMenuItemCreatePurchase = new ToolStripMenuItem();
-			_toolStripMenuItemClose = new ToolStripMenuItem();
-			_toolStripMenuItemDelete = new ToolStripMenuItem();
-			_toolStripSeparator1 = new ToolStripSeparator();
-			_toolStripMenuItemEdit = new ToolStripMenuItem();
+			_contextMenuStrip = new RadDropDownMenu();
+			_toolStripMenuItemPublish = new RadMenuItem();
+			_toolStripMenuItemCreateQuatation = new RadMenuItem();
+			_toolStripMenuItemCreatePurchase = new RadMenuItem();
+			_toolStripMenuItemClose = new RadMenuItem();
+			_toolStripMenuItemDelete = new RadMenuItem();
+			_toolStripSeparator1 = new RadMenuSeparatorItem();
+			_toolStripMenuItemEdit = new RadMenuItem();
 			// 
 			// contextMenuStrip
 			// 
@@ -221,21 +274,16 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			_toolStripMenuItemDelete.Click += _toolStripMenuItemDelete_Click;
 
 			_contextMenuStrip.Items.Clear();
-			_contextMenuStrip.Opening += _contextMenuStrip_Opening;
-			_contextMenuStrip.Items.AddRange(new ToolStripItem[]
-												{
-													//_toolStripMenuItemCreateQuatation,
-													//new ToolStripSeparator(),
-													_toolStripMenuItemCreatePurchase,
-													new ToolStripSeparator(),
+
+			
+			_contextMenuStrip.Items.AddRange(_toolStripMenuItemCreatePurchase,
+													new RadMenuSeparatorItem(),
 													_toolStripMenuItemPublish,
 													_toolStripMenuItemClose,
 													_toolStripSeparator1,
 													_toolStripMenuItemEdit,
 													_toolStripSeparator1,
-													_toolStripMenuItemDelete
-
-												});
+													_toolStripMenuItemDelete);
 		}
 
 		#endregion
@@ -258,53 +306,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 
 		private void _contextMenuStrip_Opening(object sender, CancelEventArgs e)
 		{
-			if (_directivesViewer.SelectedItems.Count <= 0)
-				e.Cancel = true;
-			else if (_directivesViewer.SelectedItems.Count == 1)
-			{
-				var wp = _directivesViewer.SelectedItem;
-				if (wp.Status == WorkPackageStatus.Closed || wp.Status == WorkPackageStatus.Opened)
-				{
-					_toolStripMenuItemClose.Enabled = false;
-					_toolStripMenuItemPublish.Enabled = true;
-				}
-				else if (wp.Status == WorkPackageStatus.Published)
-				{
-					_toolStripMenuItemClose.Enabled = true;
-					_toolStripMenuItemPublish.Enabled = false;
-				}
-				else
-				{
-					_toolStripMenuItemClose.Enabled = true;
-					_toolStripMenuItemPublish.Enabled = true;
-				}
-
-				_toolStripMenuItemCreateQuatation.Enabled = true;
-
-				if (wp is InitialOrder)
-				{
-					_toolStripMenuItemCreatePurchase.Enabled = false;
-					_toolStripMenuItemCreateQuatation.Enabled = true;
-				}
-				else if (wp is RequestForQuotation)
-				{
-					_toolStripMenuItemCreatePurchase.Enabled = true;
-					_toolStripMenuItemCreateQuatation.Enabled = false;
-				}
-				else
-				{
-					_toolStripMenuItemCreatePurchase.Enabled = false;
-					_toolStripMenuItemCreateQuatation.Enabled = false;
-				}
-			}
-
-			else
-			{
-				_toolStripMenuItemCreateQuatation.Enabled = false;
-				_toolStripMenuItemClose.Enabled = true;
-				_toolStripMenuItemPublish.Enabled = true;
-				_toolStripMenuItemCreatePurchase.Enabled = false;
-			}
+			
 		}
 
 		#endregion
@@ -432,173 +434,160 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 		#region private void DirectivesViewerSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
 
 		private void DirectivesViewerSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
-        {
-            if (_directivesViewer.SelectedItems.Count > 0)
-            {
-                buttonDeleteSelected.Enabled = true;
-                headerControl.EditButtonEnabled = true;
-            }
-            else
-            {
-                headerControl.EditButtonEnabled = false;
-                buttonDeleteSelected.Enabled = false;
-            }
-        }
+		{
+			if (_directivesViewer.SelectedItems.Count > 0)
+			{
+				buttonDeleteSelected.Enabled = true;
+				headerControl.EditButtonEnabled = true;
+			}
+			else
+			{
+				headerControl.EditButtonEnabled = false;
+				buttonDeleteSelected.Enabled = false;
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region private void ButtonDeleteClick(object sender, EventArgs e)
+		#region private void ButtonDeleteClick(object sender, EventArgs e)
+		
+		private void ButtonDeleteClick(object sender, EventArgs e)
+		{
+			if (_directivesViewer.SelectedItems == null) return;
 
-        private void ButtonDeleteClick(object sender, EventArgs e)
-        {
-            if (_directivesViewer.SelectedItems == null) return;
+			var confirmResult =
+				MessageBox.Show(
+					_directivesViewer.SelectedItem != null
+						? "Do you really want to delete Order " + _directivesViewer.SelectedItem.Title + "?"
+						: "Do you really want to delete Orders? ", "Confirm delete operation",
+					MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
 
-            var confirmResult =
-                MessageBox.Show(
-                    _directivesViewer.SelectedItem != null
-                        ? "Do you really want to delete Order " + _directivesViewer.SelectedItem.Title + "?"
-                        : "Do you really want to delete Orders? ", "Confirm delete operation",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+			if (confirmResult == DialogResult.Yes)
+			{
+				var selectedItems = new List<ILogistic>();
+				selectedItems.AddRange(_directivesViewer.SelectedItems.ToArray());
+				GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
+				AnimatedThreadWorker.RunWorkerAsync();
+			}
+			else
+			{
+				MessageBox.Show("Failed to delete directive: Parent container is invalid", "Operation failed",
+								MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+		#endregion
 
-            if (confirmResult == DialogResult.Yes)
-            {
-                int count = _directivesViewer.SelectedItems.Count;
+		#region private void ButtonAddNewClick(object sender, EventArgs e)
 
-                var selectedItems = new List<ILogistic>();
-                selectedItems.AddRange(_directivesViewer.SelectedItems.ToArray());
-                for (int i = 0; i < count; i++)
-                {
-                    try
-                    {
-                        GlobalObjects.CasEnvironment.Manipulator.Delete(selectedItems[i] as BaseEntityObject);
-                    }
-                    catch (Exception ex)
-                    {
-                        Program.Provider.Logger.Log("Error while deleting data", ex);
-                        return;
-                    }
-                }
-                AnimatedThreadWorker.RunWorkerAsync();
-            }
-            else
-            {
-                MessageBox.Show("Failed to delete directive: Parent container is invalid", "Operation failed",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        #endregion
+		private void ButtonAddNewClick(object sender, EventArgs e)
+		{
+			//var form = new InitialOrderFormNew(new InitialOrder(){ParentId = CurrentParent.ItemId, ParentType = CurrentParent.SmartCoreObjectType});
+			//if(form.ShowDialog() == DialogResult.OK)
+			//    AnimatedThreadWorker.RunWorkerAsync(); 
+		}
+		#endregion
 
-        #region private void ButtonAddNewClick(object sender, EventArgs e)
+		#region private void HeaderControlButtonReloadClick(object sender, EventArgs e)
 
-        private void ButtonAddNewClick(object sender, EventArgs e)
-        {
-            //var form = new InitialOrderFormNew(new InitialOrder(){ParentId = CurrentParent.ItemId, ParentType = CurrentParent.SmartCoreObjectType});
-            //if(form.ShowDialog() == DialogResult.OK)
-            //    AnimatedThreadWorker.RunWorkerAsync(); 
-        }
-        #endregion
+		private void HeaderControlButtonReloadClick(object sender, EventArgs e)
+		{
+			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+			AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
+			AnimatedThreadWorker.RunWorkerAsync();
+		}
+		#endregion
 
-        #region private void HeaderControlButtonReloadClick(object sender, EventArgs e)
+		#region private void HeaderControlButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
+		private void HeaderControlButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			
+		}
+		#endregion
 
-        private void HeaderControlButtonReloadClick(object sender, EventArgs e)
-        {
-            AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
-            AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
-            AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
-            AnimatedThreadWorker.RunWorkerAsync();
-        }
-        #endregion
+		#region private void ButtonApplyFilterClick(object sender, EventArgs e)
 
-        #region private void HeaderControlButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
-        private void HeaderControlButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
-        {
-            
-        }
-        #endregion
+		private void ButtonApplyFilterClick(object sender, EventArgs e)
+		{
+			var form = new CommonFilterForm(_filter, _initialArray);
 
-        #region private void ButtonApplyFilterClick(object sender, EventArgs e)
+			if (form.ShowDialog(this) == DialogResult.OK)
+			{
+				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+				AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoFilteringWork;
 
-        private void ButtonApplyFilterClick(object sender, EventArgs e)
-        {
-            var form = new CommonFilterForm(_filter, _initialArray);
+				AnimatedThreadWorker.RunWorkerAsync();
+			}
+		}
 
-            if (form.ShowDialog(this) == DialogResult.OK)
-            {
-                AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
-                AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
-                AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoFilteringWork;
+		#endregion
 
-                AnimatedThreadWorker.RunWorkerAsync();
-            }
-        }
+		#region private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
 
-        #endregion
+		private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
+		{
+			_resultArray.Clear();
 
-        #region private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
+			#region Фильтрация директив
+			AnimatedThreadWorker.ReportProgress(50, "filter directives");
 
-        private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
-        {
-            _resultArray.Clear();
+			FilterItems(_initialArray, _resultArray);
 
-            #region Фильтрация директив
-            AnimatedThreadWorker.ReportProgress(50, "filter directives");
+			if (AnimatedThreadWorker.CancellationPending)
+			{
+				e.Cancel = true;
+				return;
+			}
+			#endregion
 
-            FilterItems(_initialArray, _resultArray);
+			AnimatedThreadWorker.ReportProgress(100, "Complete");
+		}
 
-            if (AnimatedThreadWorker.CancellationPending)
-            {
-                e.Cancel = true;
-                return;
-            }
-            #endregion
+		#endregion
 
-            AnimatedThreadWorker.ReportProgress(100, "Complete");
-        }
+		#region private void FilterItems(IEnumerable<InitialOrder> initialCollection, ICommonCollection<Document> resultCollection)
 
-        #endregion
+		///<summary>
+		///</summary>
+		///<param name="initialCollection"></param>
+		///<param name="resultCollection"></param>
+		private void FilterItems(IEnumerable<ILogistic> initialCollection, ICommonCollection<ILogistic> resultCollection)
+		{
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
+			{
+				resultCollection.Clear();
+				resultCollection.AddRange(initialCollection);
+				return;
+			}
 
-        #region private void FilterItems(IEnumerable<InitialOrder> initialCollection, ICommonCollection<Document> resultCollection)
+			resultCollection.Clear();
 
-        ///<summary>
-        ///</summary>
-        ///<param name="initialCollection"></param>
-        ///<param name="resultCollection"></param>
-        private void FilterItems(IEnumerable<ILogistic> initialCollection, ICommonCollection<ILogistic> resultCollection)
-        {
-            if (_filter == null || _filter.Count == 0)
-            {
-                resultCollection.Clear();
-                resultCollection.AddRange(initialCollection);
-                return;
-            }
+			foreach (var pd in initialCollection)
+			{
+				if (_filter.FilterTypeAnd)
+				{
+					var acceptable = true;
+					foreach (var filter in _filter)
+						acceptable = filter.Acceptable(pd as BaseEntityObject); if (!acceptable) break;
 
-            resultCollection.Clear();
+					if (acceptable) resultCollection.Add(pd);
+				}
+				else
+				{
+					var acceptable = true;
+					foreach (var filter in _filter)
+					{
+						if (filter.Values == null || filter.Values.Length == 0)
+							continue;
+						acceptable = filter.Acceptable(pd as BaseEntityObject); if (acceptable) break;
+					}
+					if (acceptable) resultCollection.Add(pd);
+				}
+			}
+		}
+		#endregion
 
-            foreach (var pd in initialCollection)
-            {
-                if (_filter.FilterTypeAnd)
-                {
-                    var acceptable = true;
-                    foreach (var filter in _filter)
-                        acceptable = filter.Acceptable(pd as BaseEntityObject); if (!acceptable) break;
-
-                    if (acceptable) resultCollection.Add(pd);
-                }
-                else
-                {
-                    var acceptable = true;
-                    foreach (var filter in _filter)
-                    {
-                        if (filter.Values == null || filter.Values.Length == 0)
-                            continue;
-                        acceptable = filter.Acceptable(pd as BaseEntityObject); if (acceptable) break;
-                    }
-                    if (acceptable) resultCollection.Add(pd);
-                }
-            }
-        }
-        #endregion
-
-        #endregion
-    }
+		#endregion
+	}
 }

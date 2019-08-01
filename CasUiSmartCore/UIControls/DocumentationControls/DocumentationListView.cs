@@ -1,88 +1,86 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using Auxiliary;
-using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Store;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.DocumentationControls
 {
-    ///<summary>
-    /// список для отображения документов
-    ///</summary>
-    public partial class DocumentationListView : BaseListViewControl<Document>
-    {
-        #region public DocumentationListView()
-        ///<summary>
-        ///</summary>
-        public DocumentationListView()
-        {
-            InitializeComponent();
-        }
-        #endregion
+	///<summary>
+	/// список для отображения документов
+	///</summary>
+	public partial class DocumentationListView : BaseGridViewControl<Document>
+	{
+		#region public DocumentationListView()
+		///<summary>
+		///</summary>
+		public DocumentationListView()
+		{
+			InitializeComponent();
+		}
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region protected override SetGroupsToItems()
-        protected override void SetGroupsToItems(int columnIndex)
-        {
-            itemsListView.Groups.Clear();
-            List<ListViewGroup> opGroups = new List<ListViewGroup>();
-            List<ListViewGroup> aircraftGroups = new List<ListViewGroup>();
-	        List<ListViewGroup> specialistGroups = new List<ListViewGroup>();
+		#region protected override SetGroupsToItems()
+	//    protected override void SetGroupsToItems(int columnIndex)
+	//    {
+	//        itemsListView.Groups.Clear();
+	//        List<ListViewGroup> opGroups = new List<ListViewGroup>();
+	//        List<ListViewGroup> aircraftGroups = new List<ListViewGroup>();
+	   //     List<ListViewGroup> specialistGroups = new List<ListViewGroup>();
 
-            foreach (ListViewItem item in ListViewItemList)
-            {
-                Document doc = (Document) item.Tag;
-                ListViewGroup g = new ListViewGroup();
-				if (doc.ParentAircraftId > 0 && doc.Parent.ItemId <= 0)
-		            doc.Parent = GlobalObjects.AircraftsCore.GetAircraftById(doc.ParentAircraftId);
+	//        foreach (ListViewItem item in ListViewItemList)
+	//        {
+	//            Document doc = (Document) item.Tag;
+	//            ListViewGroup g = new ListViewGroup();
+				//if (doc.ParentAircraftId > 0 && doc.Parent.ItemId <= 0)
+		  //          doc.Parent = GlobalObjects.AircraftsCore.GetAircraftById(doc.ParentAircraftId);
 
-                string groupName = doc.Parent + " " + doc.DocType;
-                g.Name = groupName;
-                g.Header = groupName;
+	//            string groupName = doc.Parent + " " + doc.DocType;
+	//            g.Name = groupName;
+	//            g.Header = groupName;
 
-                if (doc.Parent is Operator)
-                    opGroups.Add(g);
-                if (doc.Parent is Aircraft)
-                    aircraftGroups.Add(g);
-				if (doc.Parent is Store)
-					aircraftGroups.Add(g);
-				if (doc.Specialist != null)
-	            {
-		            groupName = $"{doc.Specialist.FirstName} {doc.Specialist.LastName} {doc.DocType}";
-					g.Name = groupName;
-		            g.Header = groupName;
-					specialistGroups.Add(g);
-				}
-            }
-            itemsListView.Groups.AddRange(opGroups.ToArray());
-            itemsListView.Groups.AddRange(aircraftGroups.ToArray());
-            itemsListView.Groups.AddRange(specialistGroups.ToArray());
+	//            if (doc.Parent is Operator)
+	//                opGroups.Add(g);
+	//            if (doc.Parent is Aircraft)
+	//                aircraftGroups.Add(g);
+				//if (doc.Parent is Store)
+				//	aircraftGroups.Add(g);
+				//if (doc.Specialist != null)
+	   //         {
+		  //          groupName = $"{doc.Specialist.FirstName} {doc.Specialist.LastName} {doc.DocType}";
+				//	g.Name = groupName;
+		  //          g.Header = groupName;
+				//	specialistGroups.Add(g);
+				//}
+	//        }
+	//        itemsListView.Groups.AddRange(opGroups.ToArray());
+	//        itemsListView.Groups.AddRange(aircraftGroups.ToArray());
+	//        itemsListView.Groups.AddRange(specialistGroups.ToArray());
 
-            foreach (ListViewItem item in ListViewItemList)
-            {
-                Document doc = (Document)item.Tag;
-	            if (doc.Specialist != null)
-	            {
-					item.Group = itemsListView.Groups[$"{doc.Specialist.FirstName} {doc.Specialist.LastName} {doc.DocType}"];
-				}
-				else item.Group = itemsListView.Groups[doc.Parent + " " + doc.DocType];
-            }
-        }
+	//        foreach (ListViewItem item in ListViewItemList)
+	//        {
+	//            Document doc = (Document)item.Tag;
+	   //         if (doc.Specialist != null)
+	   //         {
+				//	item.Group = itemsListView.Groups[$"{doc.Specialist.FirstName} {doc.Specialist.LastName} {doc.DocType}"];
+				//}
+				//else item.Group = itemsListView.Groups[doc.Parent + " " + doc.DocType];
+	//        }
+	//    }
 		#endregion
 
 		#region protected override ListViewItem.ListViewSubItem[] GetItemsString(Document item)
 
-		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Document item)
+		protected override List<CustomCell> GetListViewSubItems(Document item)
 		{
-			var subItems = new List<ListViewItem.ListViewSubItem>();
-
-			var titleColor = itemsListView.ForeColor;
+			Color? titleColor = null;
 			if(!item.HaveFile)
 				titleColor = Color.MediumVioletRed;
 
@@ -96,33 +94,34 @@ namespace CAS.UI.UIControls.DocumentationControls
 			var privy = item.Privy ? "Yes" : "No";
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.DocType.FullName, Tag = item.DocType.FullName });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.DocumentSubType.FullName, Tag = item.DocumentSubType.FullName, ForeColor = titleColor });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.ContractNumber, Tag = item.ContractNumber });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Description, Tag = item.Description });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = SmartCore.Auxiliary.Convert.GetDateFormat(item.IssueDateValidFrom), Tag = item.IssueDateValidFrom });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.IssueNumber, Tag = item.IssueNumber });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = issueDateValidToString, Tag = item.IssueDateValidTo });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = remainsString, Tag = remainsString });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = revisionDateValidFromString, Tag = item.RevisionDateFrom });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.RevisionNumder, Tag = item.RevisionNumder });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = revisionDateValidToString, Tag = item.RevisionDateValidTo });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = revisionRemainsString, Tag = revisionRemainsString });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Department.FullName, Tag = item.Department.FullName });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.ResponsibleOccupation.FullName, Tag = item.ResponsibleOccupation.FullName });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.ServiceType.FullName, Tag = item.ServiceType.FullName });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = aboard, Tag = aboard });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = privy, Tag = privy });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Nomenсlature.ToString(), Tag = item.Nomenсlature.ToString() });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Location.ToString(), Tag = item.Location.ToString() });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.ProlongationWay.ToString(), Tag = item.ProlongationWay.ToString() });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Supplier.ToString(), Tag = item.Supplier });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Status.FullName, Tag = item.Status.FullName });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.IdNumber, Tag = item.IdNumber });
-			subItems.Add(new ListViewItem.ListViewSubItem {Text = item.Remarks, Tag = item.Remarks });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
-
-			return subItems.ToArray();
+			return new List<CustomCell>()
+			{
+				CreateRow(item.DocType.FullName, item.DocType.FullName),
+				CreateRow(item.DocumentSubType.FullName, item.DocumentSubType.FullName, titleColor),
+				CreateRow(item.ContractNumber, item.ContractNumber),
+				CreateRow(item.Description, item.Description),
+				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.IssueDateValidFrom), item.IssueDateValidFrom),
+				CreateRow(item.IssueNumber, item.IssueNumber),
+				CreateRow(issueDateValidToString, item.IssueDateValidTo),
+				CreateRow(remainsString, remainsString),
+				CreateRow(revisionDateValidFromString, item.RevisionDateFrom),
+				CreateRow(item.RevisionNumder, item.RevisionNumder),
+				CreateRow(revisionDateValidToString, item.RevisionDateValidTo),
+				CreateRow(revisionRemainsString, revisionRemainsString),
+				CreateRow(item.Department.FullName, item.Department.FullName),
+				CreateRow(item.ResponsibleOccupation.FullName, item.ResponsibleOccupation.FullName),
+				CreateRow(item.ServiceType.FullName, item.ServiceType.FullName),
+				CreateRow(aboard, aboard),
+				CreateRow(privy, privy),
+				CreateRow(item.Nomenсlature.ToString(), item.Nomenсlature.ToString()),
+				CreateRow(item.Location.ToString(), item.Location.ToString()),
+				CreateRow(item.ProlongationWay.ToString(), item.ProlongationWay.ToString()),
+				CreateRow(item.Supplier.ToString(), item.Supplier),
+				CreateRow(item.Status.FullName, item.Status.FullName),
+				CreateRow(item.IdNumber, item.IdNumber),
+				CreateRow(item.Remarks, item.Remarks),
+				CreateRow(author, author)
+			};
 		}
 
 		#endregion
@@ -133,134 +132,73 @@ namespace CAS.UI.UIControls.DocumentationControls
 		///// </summary>
 		protected override void SetHeaders()
 		{
-			ColumnHeaderList.Clear();
-
-			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Type" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Title" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "№" };
-			ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Description" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "Issue" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.03f), Text = "№ Issue" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "Valid To" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Remain" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "Rev.Date" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.03f), Text = "№ Rev." };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.07f), Text = "Valid To" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Remain" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Department" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Responsible" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Service Type" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.04f), Text = "Aboard" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.04f), Text = "Privy" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Nomenclature" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Location" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Prolongation" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Contractor" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.04f), Text = "Status" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "ID №" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Remarks" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
-			ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+			AddColumn("Type", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Title", (int)(radGridView1.Width * 0.20f));
+			AddColumn("№", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Description", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Issue", (int)(radGridView1.Width * 0.14f));
+			AddColumn("№ Issue", (int)(radGridView1.Width * 0.06f));
+			AddColumn("Valid To", (int)(radGridView1.Width * 0.14f));
+			AddColumn("Remain", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Rev.Date", (int)(radGridView1.Width * 0.14f));
+			AddColumn("№ Rev.", (int)(radGridView1.Width * 0.06f));
+			AddColumn("Valid To", (int)(radGridView1.Width * 0.14f));
+			AddColumn("Remain", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Department", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Responsible", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Service Type", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Aboard", (int)(radGridView1.Width * 0.08f));
+			AddColumn("Privy", (int)(radGridView1.Width * 0.08f));
+			AddColumn("Nomenclature", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Location", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Prolongation", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Contractor", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Status", (int)(radGridView1.Width * 0.08f));
+			AddColumn("ID №", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Remarks", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.02f));
 		}
 		#endregion
 
 		#region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
-		protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (SelectedItem != null)
-            {
-                DocumentForm form = new DocumentForm(SelectedItem);
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-                    GlobalObjects.PerformanceCalculator.GetNextPerformance(SelectedItem);
-                    ListViewItem.ListViewSubItem[] subs = GetListViewSubItems(SelectedItem);
-                    for (int i = 0; i < subs.Length; i++)
-                        itemsListView.SelectedItems[0].SubItems[i].Text = subs[i].Text;
-                }
-                itemsListView.SelectedItems[0].Group = itemsListView.Groups[SelectedItem.Parent + " " + SelectedItem.DocType];
-            }
-        }
-        #endregion
+		protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
+		{
+			if (SelectedItem != null)
+			{
+				DocumentForm form = new DocumentForm(SelectedItem);
+				if (form.ShowDialog() == DialogResult.OK)
+				{
+					GlobalObjects.PerformanceCalculator.GetNextPerformance(SelectedItem);
+					var subs = GetListViewSubItems(SelectedItem);
+					for (int i = 0; i < subs.Count; i++)
+						radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
+				}
+			}
+		}
+		#endregion
 
-		#region protected override void SetItemColor(ListViewItem listViewItem, MaintenanceDirective item)
-		protected override void SetItemColor(ListViewItem listViewItem, Document item)
+		#region protected override void SetItemColor(GridViewRowInfo listViewItem, Document item)
+
+		protected override void SetItemColor(GridViewRowInfo listViewItem, Document item)
 		{
 			var itemBackColor = UsefulMethods.GetColor(item);
 			var itemForeColor = Color.Gray;
 
-			listViewItem.BackColor = UsefulMethods.GetColor(item);
-
-			var listViewForeColor = ItemListView.ForeColor;
-			var listViewBackColor = ItemListView.BackColor;
-
-			if (listViewItem.SubItems.OfType<ListViewItem.ListViewSubItem>().All(lvsi => lvsi.ForeColor.ToArgb() == listViewForeColor.ToArgb()
-																						 && lvsi.BackColor.ToArgb() == listViewBackColor.ToArgb()))
+			foreach (GridViewCellInfo cell in listViewItem.Cells)
 			{
-				listViewItem.ForeColor = itemForeColor;
-				listViewItem.BackColor = itemBackColor;
-			}
-			else
-			{
-				listViewItem.UseItemStyleForSubItems = false;
-				foreach (ListViewItem.ListViewSubItem subItem in listViewItem.SubItems)
-				{
-					if (subItem.ForeColor.ToArgb() == listViewForeColor.ToArgb())
-						subItem.ForeColor = itemForeColor;
-					if (subItem.BackColor.ToArgb() == listViewBackColor.ToArgb())
-						subItem.BackColor = itemBackColor;
-				}
+				cell.Style.DrawFill = true;
+				cell.Style.CustomizeFill = true;
+				cell.Style.BackColor = UsefulMethods.GetColor(item);
+
+				var listViewForeColor = cell.Style.ForeColor;
+
+				if (listViewForeColor != Color.MediumVioletRed)
+					cell.Style.ForeColor = itemForeColor;
+				cell.Style.BackColor = itemBackColor;
 			}
 		}
+
+
 		#endregion
 
 		#endregion

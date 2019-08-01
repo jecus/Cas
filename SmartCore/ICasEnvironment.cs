@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using EFCore.Contract;
-using EFCore.DTO.General;
-using EFCore.UnitOfWork;
-using Microsoft.SqlServer.Management.Smo;
+using CAS.UI.Helpers;
+using EntityCore.DTO.General;
 using SmartCore.Aircrafts;
 using SmartCore.Calculations;
 using SmartCore.Entities;
@@ -27,7 +25,7 @@ namespace SmartCore
 		/// <summary>
 		/// Свойства
 		/// </summary>
-		DatabaseManager DatabaseManager { get; }
+		ApiProvider ApiProvider { get; }
 		OperatorCollection Operators { get; }
 		CommonCollection<Vehicle> Vehicles { get; }
 		CommonCollection<Store> Stores { get; }
@@ -43,11 +41,9 @@ namespace SmartCore
 		Calculator Calculator { get; }
 		Keeper Keeper { get; }
 		Manipulator Manipulator { get; }
-		UnitOfWork UnitOfWork { get; }
 
 
 		DataSet Execute(string sql);
-		DataSet Execute(Database database, String query);
 		DataSet Execute(IEnumerable<DbQuery> dbQueries, out List<ExecutionResultArgs> results);
 		DataSet Execute(String query, SqlParameter[] parameters);
 
@@ -57,10 +53,6 @@ namespace SmartCore
 		void Disconnect();
 
 		void Connect(String serverName, String userName, String pass, String database);
-
-		ILoginService GetSeviceUser();
-
-		List<UserDTO> GetAllUsers();
 
 		string GetCorrector(int id);
 
@@ -80,7 +72,6 @@ namespace SmartCore
 
 		void Reset();
 
-		void LoadCashForWeb();
 		void InitAsync(BackgroundWorker backgroundWorker, LoadingState loadingState);
 
 		void OpenFile(AttachedFile attachedFile, out string message);

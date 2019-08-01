@@ -1,5 +1,5 @@
 ﻿using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 
 namespace CAS.UI.UIControls.PurchaseControls.Quatation
 {
@@ -652,11 +652,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.listViewAddedItems.Displayer = null;
 			this.listViewAddedItems.DisplayerText = null;
 			this.listViewAddedItems.Entity = null;
-			this.listViewAddedItems.IgnoreAutoResize = false;
 			this.listViewAddedItems.Location = new System.Drawing.Point(12, 256);
 			this.listViewAddedItems.Name = "listViewAddedItems";
 			this.listViewAddedItems.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewAddedItems.ShowGroups = true;
 			this.listViewAddedItems.Size = new System.Drawing.Size(724, 205);
 			this.listViewAddedItems.TabIndex = 246;
 			this.listViewAddedItems.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.listViewAddedItems_SelectedItemsChanged_1);
@@ -666,11 +664,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.listViewKits.Displayer = null;
 			this.listViewKits.DisplayerText = null;
 			this.listViewKits.Entity = null;
-			this.listViewKits.IgnoreAutoResize = false;
 			this.listViewKits.Location = new System.Drawing.Point(12, 32);
 			this.listViewKits.Name = "listViewKits";
 			this.listViewKits.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewKits.ShowGroups = true;
 			this.listViewKits.Size = new System.Drawing.Size(724, 190);
 			this.listViewKits.TabIndex = 67;
 			// 

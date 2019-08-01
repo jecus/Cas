@@ -705,57 +705,56 @@ namespace CAS.UI.UIControls.Auxiliary
             ConnectionSettingsContainer settings = obj as ConnectionSettingsContainer;
             if (settings != null)
             {
-                AuthenticationType authentication = AuthenticationType.Windows;
-                if (settings.IsSimple)
-                    authentication = AuthenticationType.SqlServer;
-                OnConnecting();
-                string message;
-                //if (settings.ServerName.Split('@').Length >= 2)
-                //{
-                //    string serverName = settings.ServerName.Split('@')[0];
-                //    string baseName = settings.ServerName.Split('@')[1];
+	            AuthenticationType authentication = AuthenticationType.Windows;
+	            if (settings.IsSimple)
+		            authentication = AuthenticationType.SqlServer;
+	            OnConnecting();
+	            string message;
+	            //if (settings.ServerName.Split('@').Length >= 2)
+	            //{
+	            //    string serverName = settings.ServerName.Split('@')[0];
+	            //    string baseName = settings.ServerName.Split('@')[1];
 
-                    try
-                    {
-                        //GlobalObjects.CasEnvironment.Connect(serverName, settings.Username, settings.Password, baseName);
-                        GlobalObjects.CasEnvironment.Connect(settings.ServerName, settings.Username, settings.Password, "");
-						SaveJsonSetting(settings.Username);
-                    }
-                    catch (ConnectionFailureException ex)
-                    {
-                        if(ex.InnerException != null)
-                        {
-                            SqlException sqlException = ex.InnerException as SqlException;
-                            if(sqlException != null)
-                                MessageBox.Show(sqlException.Message, "Failed to connect server", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            else MessageBox.Show("Server was not found or is not available", "Failed to connect server", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Server was not found or is not available", "Failed to connect server", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        return;
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message,"Failed to connect server",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                        return;
-                    }
-                                      
+	            try
+	            {
+		            //GlobalObjects.CasEnvironment.Connect(serverName, settings.Username, settings.Password, baseName);
+		            GlobalObjects.CasEnvironment.Connect(settings.ServerName, settings.Username, settings.Password, "");
+		            SaveJsonSetting(settings.Username);
+	            }
+	            catch (ConnectionFailureException ex)
+	            {
+		            if (ex.InnerException != null)
+		            {
+			            SqlException sqlException = ex.InnerException as SqlException;
+			            if (sqlException != null)
+				            MessageBox.Show(sqlException.Message, "Failed to connect server", MessageBoxButtons.OK,
+					            MessageBoxIcon.Error);
+			            else
+				            MessageBox.Show("Server was not found or is not available", "Failed to connect server",
+					            MessageBoxButtons.OK, MessageBoxIcon.Error);
+		            }
+		            else
+		            {
+			            MessageBox.Show("Server was not found or is not available", "Failed to connect server",
+				            MessageBoxButtons.OK, MessageBoxIcon.Error);
+		            }
 
-                    if (GlobalObjects.CasEnvironment.DatabaseManager!=null)
-                    {
-                        //нажатие клавиши Enter
-                        buttonExit.Enabled = false;
+		            return;
+	            }
+	            catch (Exception ex)
+	            {
+		            MessageBox.Show(ex.Message, "Failed to connect server", MessageBoxButtons.OK, MessageBoxIcon.Error);
+		            return;
+	            }
 
-                        _loadForm.Show();
-                        backgroundWorker.RunWorkerAsync();
-                    }
-                //}
-                //else
-                //{
-                //    OnFailed("");
-                //}
+
+
+	            //нажатие клавиши Enter
+	            buttonExit.Enabled = false;
+
+	            _loadForm.Show();
+	            backgroundWorker.RunWorkerAsync();
+
             }
             else
             {

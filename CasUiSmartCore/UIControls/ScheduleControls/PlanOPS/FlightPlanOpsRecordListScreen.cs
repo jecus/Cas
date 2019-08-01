@@ -16,6 +16,7 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.Schedule;
 using SmartCore.Filters;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 {
@@ -34,9 +35,9 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 
 		private CommonFilterCollection _filter;
 
-		private ContextMenuStrip _contextMenuStrip;
-		private ToolStripMenuItem _toolStripMenuItemAddAircraft;
-		private ToolStripMenuItem _toolStripMenuItemOpenFlight;
+		private RadDropDownMenu _contextMenuStrip;
+		private RadMenuItem _toolStripMenuItemAddAircraft;
+		private RadMenuItem _toolStripMenuItemOpenFlight;
 
 		#endregion
 
@@ -71,7 +72,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			_directivesViewer.SetItemsArray(_resultFlightOpsRecordArray.Where(i => i.FlightTrackRecord != null).ToArray());
 			_directivesViewer.Focus();
 
-			headerControl.PrintButtonEnabled = _directivesViewer.ItemListView.Items.Count != 0;
+			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 		}
 
 		protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
@@ -141,12 +142,21 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 		{
 			_directivesViewer = new FlightPlanOpsRecordListView(_calculated, AnimatedThreadWorker);
 			_directivesViewer.TabIndex = 2;
-			_directivesViewer.IgnoreAutoResize = true;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
-			_directivesViewer.ContextMenuStrip = _contextMenuStrip;
-			_directivesViewer.IgnoreAutoResize = true;
+			_directivesViewer.CustomMenu = _contextMenuStrip;
 
+			_directivesViewer.MenuOpeningAction = () =>
+			{
+				if (_directivesViewer.SelectedItems.Count <= 0)
+					return;
+
+				if (_directivesViewer.SelectedItems.Count == 1)
+					_toolStripMenuItemOpenFlight.Enabled = _directivesViewer.SelectedItem.ParentFlight != null;
+				else _toolStripMenuItemOpenFlight.Enabled = false;
+
+				_toolStripMenuItemAddAircraft.Enabled = _directivesViewer.SelectedItems.Count > 0;
+			};
 
 			panel1.Controls.Add(_directivesViewer);
 		}
@@ -228,7 +238,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 		///<param name="resultCollection"></param>
 		private void FilterItems(IEnumerable<FlightPlanOpsRecords> initialCollection, ICommonCollection<FlightPlanOpsRecords> resultCollection)
 		{
-			if (_filter == null || _filter.Count == 0)
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
 				resultCollection.Clear();
 				resultCollection.AddRange(initialCollection);
@@ -267,9 +277,9 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new ContextMenuStrip();
-			_toolStripMenuItemAddAircraft = new ToolStripMenuItem();
-			_toolStripMenuItemOpenFlight = new ToolStripMenuItem();
+			_contextMenuStrip = new RadDropDownMenu();
+			_toolStripMenuItemAddAircraft = new RadMenuItem();
+			_toolStripMenuItemOpenFlight = new RadMenuItem();
 
 			// 
 			// contextMenuStrip
@@ -289,15 +299,11 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			_toolStripMenuItemOpenFlight.Click += _toolStripMenuItemOpenFlight_Click;
 
 			_contextMenuStrip.Items.Clear();
-			_contextMenuStrip.Items.AddRange(new ToolStripItem[]
-			{
+			_contextMenuStrip.Items.AddRange(
 				_toolStripMenuItemOpenFlight,
-				new ToolStripSeparator(), 
-				_toolStripMenuItemAddAircraft,
-			});
-
-			_contextMenuStrip.Opening += _contextMenuStrip_Opening;
-
+				new RadMenuSeparatorItem(), 
+				_toolStripMenuItemAddAircraft
+			);
 		}
 
 		private void _toolStripMenuItemOpenFlight_Click(object sender, EventArgs e)
@@ -312,19 +318,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			};
 			InvokeDisplayerRequested(refE);
 		}
-
-		private void _contextMenuStrip_Opening(object sender, CancelEventArgs e)
-		{
-			if (_directivesViewer.SelectedItems.Count <= 0)
-				e.Cancel = true;
-
-			if (_directivesViewer.SelectedItems.Count == 1)
-				_toolStripMenuItemOpenFlight.Enabled = _directivesViewer.SelectedItem.ParentFlight != null;
-			else _toolStripMenuItemOpenFlight.Enabled = false;
-
-			_toolStripMenuItemAddAircraft.Enabled = _directivesViewer.SelectedItems.Count > 0;
-		}
-
+		
 		#endregion
 
 		#region private void _toolStripMenuItemAddAircraft_Click(object sender, EventArgs e)

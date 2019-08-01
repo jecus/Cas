@@ -1,5 +1,5 @@
 ﻿using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 
 namespace CAS.UI.UIControls.PurchaseControls.Initial
 {
@@ -1172,11 +1172,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.listViewInitialItems.Displayer = null;
 			this.listViewInitialItems.DisplayerText = null;
 			this.listViewInitialItems.Entity = null;
-			this.listViewInitialItems.IgnoreAutoResize = false;
 			this.listViewInitialItems.Location = new System.Drawing.Point(12, 209);
 			this.listViewInitialItems.Name = "listViewInitialItems";
 			this.listViewInitialItems.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewInitialItems.ShowGroups = true;
 			this.listViewInitialItems.Size = new System.Drawing.Size(684, 166);
 			this.listViewInitialItems.TabIndex = 247;
 			this.listViewInitialItems.Visible = false;
@@ -1187,11 +1185,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.listViewKits.Displayer = null;
 			this.listViewKits.DisplayerText = null;
 			this.listViewKits.Entity = null;
-			this.listViewKits.IgnoreAutoResize = false;
 			this.listViewKits.Location = new System.Drawing.Point(12, 32);
 			this.listViewKits.Name = "listViewKits";
 			this.listViewKits.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewKits.ShowGroups = true;
 			this.listViewKits.Size = new System.Drawing.Size(687, 155);
 			this.listViewKits.TabIndex = 67;
 			// 
@@ -1208,11 +1204,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.listViewQuatationItems.Displayer = null;
 			this.listViewQuatationItems.DisplayerText = null;
 			this.listViewQuatationItems.Entity = null;
-			this.listViewQuatationItems.IgnoreAutoResize = false;
 			this.listViewQuatationItems.Location = new System.Drawing.Point(12, 209);
 			this.listViewQuatationItems.Name = "listViewQuatationItems";
 			this.listViewQuatationItems.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewQuatationItems.ShowGroups = true;
 			this.listViewQuatationItems.Size = new System.Drawing.Size(684, 166);
 			this.listViewQuatationItems.TabIndex = 282;
 			this.listViewQuatationItems.Visible = false;

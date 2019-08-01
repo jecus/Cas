@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using CAS.UI.UIControls.Auxiliary;
+﻿using System.Collections.Generic;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Entities.General.Accessory;
 
 namespace CAS.UI.UIControls.PurchaseControls.Quatation
 {
-	public partial class RequestProductListView : BaseListViewControl<Product>
+	public partial class RequestProductListView : BaseGridViewControl<Product>
 	{
 		#region Constructor
 
@@ -20,86 +18,45 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 		#endregion
 
-
 		#region protected override void SetHeaders()
 
 		protected override void SetHeaders()
 		{
-			ColumnHeaderList.Clear();
-			itemsListView.Columns.Clear();
-
-			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "P/N" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Standart" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.25f), Text = "Description" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "ATA" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
-			ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+			AddColumn("P/N", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Standart", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Description", (int)(radGridView1.Width * 0.2f));
+			AddColumn("GoodClass", (int)(radGridView1.Width * 0.2f));
+			AddColumn("ATA", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
 		}
 
 		#endregion
 
 		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Product item)
 
-		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Product item)
+		protected override List<CustomCell> GetListViewSubItems(Product item)
 		{
-			var subItems = new List<ListViewItem.ListViewSubItem>();
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
-
-			var subItem = new ListViewItem.ListViewSubItem { Text = item.PartNumber, Tag = item.PartNumber };
-			subItems.Add(subItem);
-
-			subItem = new ListViewItem.ListViewSubItem { Text = item.Standart?.ToString(), Tag = item.Standart };
-			subItems.Add(subItem);
-
-			subItem = new ListViewItem.ListViewSubItem { Text = item.Description, Tag = item.Description };
-			subItems.Add(subItem);
-
-			subItem = new ListViewItem.ListViewSubItem { Text = item.ATAChapter?.ToString(), Tag = item.ATAChapter?.ToString() };
-			subItems.Add(subItem);
-
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
-
-			return subItems.ToArray();
+			return new List<CustomCell>()
+			{
+				CreateRow(item.PartNumber, item.PartNumber),
+				CreateRow(item.Standart?.ToString(), item.Standart),
+				CreateRow(item.Description, item.Description),
+				CreateRow( item?.GoodsClass?.ShortName ?? "Another accessory",  item?.GoodsClass),
+				CreateRow(item.ATAChapter?.ToString(), item.ATAChapter?.ToString()),
+				CreateRow(author, author),
+			};
 		}
 
 		#endregion
 
-		protected override void SetGroupsToItems(int columnIndex)
-		{
-			itemsListView.Groups.Clear();
-			foreach (ListViewItem item in itemsListView.Items)
-			{
-				String temp;
-				if (item.Tag is Product)
-				{
-					var p = (Product)item.Tag;
+		#region Overrides of BaseGridViewControl<InitialOrderRecord>
 
-					temp = p.GoodsClass.ShortName;
-					itemsListView.Groups.Add(temp, temp);
-					item.Group = itemsListView.Groups[temp];
-				}
-				else
-				{
-					temp = "Another accessory";
-					itemsListView.Groups.Add(temp, temp);
-					item.Group = itemsListView.Groups[temp];
-				}
-			}
+		protected override void GroupingItems()
+		{
+			Grouping("GoodClass");
 		}
 
-		protected override void SortItems(int columnIndex)
-		{
-			SetGroupsToItems(columnIndex);
-		}
+		#endregion
 	}
 }

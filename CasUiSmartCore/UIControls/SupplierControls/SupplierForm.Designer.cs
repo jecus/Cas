@@ -1,6 +1,6 @@
 ﻿using MetroFramework.Controls;
 using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 
 namespace CAS.UI.UIControls.SupplierControls
 {
@@ -644,12 +644,10 @@ namespace CAS.UI.UIControls.SupplierControls
 			this.documentationListView.Displayer = null;
 			this.documentationListView.DisplayerText = null;
 			this.documentationListView.Entity = null;
-			this.documentationListView.IgnoreAutoResize = false;
 			this.documentationListView.Location = new System.Drawing.Point(5, 373);
 			this.documentationListView.Margin = new System.Windows.Forms.Padding(4);
 			this.documentationListView.Name = "documentationListView";
 			this.documentationListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.documentationListView.ShowGroups = true;
 			this.documentationListView.Size = new System.Drawing.Size(989, 142);
 			this.documentationListView.TabIndex = 15;
 			// 

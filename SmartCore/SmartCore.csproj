@@ -358,6 +358,9 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>C:\Users\Evgenii\.nuget\packages\microsoft.aspnet.webapi.client\5.2.6\lib\netstandard2.0\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
       <Private>True</Private>
@@ -365,6 +368,7 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
@@ -451,6 +455,7 @@
     <Compile Include="Documents\DocumentCore.cs" />
     <Compile Include="Documents\IDocumentCore.cs" />
     <Compile Include="DtoHelper\DictionaryConverterDto.cs" />
+    <Compile Include="DtoHelper\Extentionsa.cs" />
     <Compile Include="DtoHelper\GeneralConverterDto.cs" />
     <Compile Include="Entities\Collections\ActuaStateRecordCollection.cs" />
     <Compile Include="Entities\Collections\AircraftCollection.cs" />
@@ -501,6 +506,9 @@
     <Compile Include="Entities\Dictionaries\ConditionState.cs" />
     <Compile Include="Entities\Dictionaries\ConsequenceFaults.cs" />
     <Compile Include="Entities\Dictionaries\ConsequenceOPS.cs" />
+    <Compile Include="Entities\Dictionaries\DirectiveSbType.cs" />
+    <Compile Include="Entities\Dictionaries\DirectiveAffects.cs" />
+    <Compile Include="Entities\Dictionaries\DirectiveReason.cs" />
     <Compile Include="Entities\Dictionaries\DirectiveOrder.cs" />
     <Compile Include="Entities\Dictionaries\IncoTerm.cs" />
     <Compile Include="Entities\Dictionaries\OccurrenceType.cs" />
@@ -768,6 +776,7 @@
     <Compile Include="Entities\NewLoader\NewLoader.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\XlsReader.cs" />
+    <Compile Include="Providers\APIExtensions.cs" />
     <Compile Include="Files\FilesDataAccess.cs" />
     <Compile Include="Files\FilesSmartCore.cs" />
     <Compile Include="Files\IFilesDataAccess.cs" />
@@ -816,6 +825,7 @@
     <Compile Include="Personnel\IPersonnelCore.cs" />
     <Compile Include="Personnel\PersonnelCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\ApiProvider.cs" />
     <Compile Include="Purchase\InitionalOrder.cs" />
     <Compile Include="Purchase\InitionalOrderRecord.cs" />
     <Compile Include="Purchase\IORQORRelation.cs" />
@@ -892,9 +902,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EFCore\EFCore.csproj">
-      <Project>{6dddaf81-980a-4ebc-bf58-3ca93a059d7f}</Project>
-      <Name>EFCore</Name>
+    <ProjectReference Include="..\EntityCore\EntityCore.csproj">
+      <Project>{a04296a8-8cbd-41e9-9e91-1a4a56004cde}</Project>
+      <Name>EntityCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\TextProcessing\TextProcessing.csproj">
       <Project>{C56BB11D-5043-4A8B-8288-A7199B76B570}</Project>

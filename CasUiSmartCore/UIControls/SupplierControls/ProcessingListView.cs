@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
-using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.NewGrid;
 using CAS.UI.UIControls.StoresControls;
 using CASTerms;
 using SmartCore.Auxiliary;
@@ -15,10 +14,11 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Purchase;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.SupplierControls
 {
-	public partial class ProcessingListView : BaseListViewControl<IBaseCoreObject>
+	public partial class ProcessingListView : BaseGridViewControl<IBaseCoreObject>
 	{
 		#region public ProcessingListView()
 
@@ -33,88 +33,38 @@ namespace CAS.UI.UIControls.SupplierControls
 
 		protected override void SetHeaders()
 		{
-			itemsListView.Columns.Clear();
-			ColumnHeaderList.Clear();
-
-			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.3f), Text = "To" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.3f), Text = "From" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Supplier Type" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Approved" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Date of shipment" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Date of receipt" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Reason" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Part. No" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.4f), Text = "Description" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Serial No" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Code" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Class" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Batch No" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "ID No" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "State" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Status" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Warranty" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Qty" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = 75, Text = "Supplier" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "IsPool" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "IsDangerous" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Remarks" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
-			ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+			AddColumn("To", (int)(radGridView1.Width * 0.6f));
+			AddColumn("From", (int)(radGridView1.Width * 0.6f));
+			AddColumn("Supplier Type", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Approved", (int)(radGridView1.Width * 0.2f));
+			AddDateColumn("Date of shipment", (int)(radGridView1.Width * 0.4f));
+			AddDateColumn("Date of receipt", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Reason", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Part. No", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Description", (int)(radGridView1.Width * 0.8f));
+			AddColumn("Serial No", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Code", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Class", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Batch No", (int)(radGridView1.Width * 0.4f));
+			AddColumn("ID No", (int)(radGridView1.Width * 0.4f));
+			AddColumn("State", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Status", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Warranty", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Qty", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Supplier", 75);
+			AddColumn("IsPool", (int)(radGridView1.Width * 0.2f));
+			AddColumn("IsDangerous", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Remarks", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
 		}
 
 		#endregion
 
-		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(IBaseCoreObject item)
+		#region protected override List<CustomCell> GetListViewSubItems(IBaseCoreObject item)
 
-		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(IBaseCoreObject item)
+		protected override List<CustomCell> GetListViewSubItems(IBaseCoreObject item)
 		{
-			var subItems = new List<ListViewItem.ListViewSubItem>();
+			var subItems = new List<CustomCell>();
 			
 			string from = "", to = "", supplierType = "", approved = "", reason = "",
 				partNumber = "", description = "", serialNumber = "",
@@ -128,7 +78,7 @@ namespace CAS.UI.UIControls.SupplierControls
 
 			var parent = item as IDirective;
 			if (parent == null)
-				return subItems.ToArray();
+				return subItems;
 
 			string author = "";
 
@@ -174,33 +124,33 @@ namespace CAS.UI.UIControls.SupplierControls
 				isPool = componentItem.IsPOOL;
 				isDangerous = componentItem.IsDangerous;
 				remarks = componentItem.Remarks;
-
 			}
 
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = to, Tag = to });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = from, Tag = from });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = supplierType, Tag = supplierType });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = approved, Tag = approved });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = shipment.ToString(new GlobalTermsProvider()["DateFormat"].ToString()), Tag = shipment });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = receipt.ToString(new GlobalTermsProvider()["DateFormat"].ToString()), Tag = receipt });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = reason, Tag = reason });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = partNumber, Tag = partNumber });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = description, Tag = description });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = serialNumber, Tag = serialNumber });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = code, Tag = code });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = classString, Tag = classString });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = batchNumber, Tag = batchNumber });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = idNumber, Tag = idNumber });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = position.ToString().ToUpper(), Tag = position });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = status, Tag = status });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = warranty.ToString(), Tag = warranty });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = qty, Tag = qty });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = supplier, Tag = supplier });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = isPool ? "Yes" : "No", Tag = isPool });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = isDangerous ? "Yes" : "No", Tag = isDangerous });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = remarks, Tag = remarks });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
-			return subItems.ToArray();
+			subItems.Add(CreateRow(to, to ));
+			subItems.Add(CreateRow(from, from ));
+			subItems.Add(CreateRow(supplierType, supplierType ));
+			subItems.Add(CreateRow(approved, approved ));
+			subItems.Add(CreateRow(shipment.ToString(new GlobalTermsProvider()["DateFormat"].ToString()), shipment ));
+			subItems.Add(CreateRow(receipt.ToString(new GlobalTermsProvider()["DateFormat"].ToString()), receipt ));
+			subItems.Add(CreateRow(reason, reason ));
+			subItems.Add(CreateRow(partNumber, partNumber ));
+			subItems.Add(CreateRow(description, description ));
+			subItems.Add(CreateRow(serialNumber, serialNumber ));
+			subItems.Add(CreateRow(code, code ));
+			subItems.Add(CreateRow(classString, classString ));
+			subItems.Add(CreateRow(batchNumber, batchNumber ));
+			subItems.Add(CreateRow(idNumber, idNumber ));
+			subItems.Add(CreateRow(position.ToString().ToUpper(), position ));
+			subItems.Add(CreateRow(status, status ));
+			subItems.Add(CreateRow(warranty.ToString(), warranty ));
+			subItems.Add(CreateRow(qty, qty ));
+			subItems.Add(CreateRow(supplier, supplier ));
+			subItems.Add(CreateRow(isPool ? "Yes" : "No", isPool ));
+			subItems.Add(CreateRow(isDangerous ? "Yes" : "No", isDangerous ));
+			subItems.Add(CreateRow(remarks, remarks ));
+			subItems.Add(CreateRow(author, author ));
+
+			return subItems;
 		}
 
 		#endregion
@@ -210,46 +160,46 @@ namespace CAS.UI.UIControls.SupplierControls
 		/// <summary>
 		/// Возвращает название группы в списке агрегатов текущего склада, согласно тому, какого типа элемент
 		/// </summary>
-		protected override void SetGroupsToItems(int columnIndex)
-		{
-			itemsListView.Groups.Clear();
-			itemsListView.Groups.AddRange(new[]
-			{
-				new ListViewGroup("Engines", "Engines"),
-				new ListViewGroup("APU's", "APU's"),
-				new ListViewGroup("Landing Gears", "Landing Gears"),
-			});
-			foreach (ListViewItem item in ListViewItemList.OrderBy(x => x.Text))
-			{
-				var temp = "";
+		//protected override void SetGroupsToItems(int columnIndex)
+		//{
+		//	itemsListView.Groups.Clear();
+		//	itemsListView.Groups.AddRange(new[]
+		//	{
+		//		new ListViewGroup("Engines", "Engines"),
+		//		new ListViewGroup("APU's", "APU's"),
+		//		new ListViewGroup("Landing Gears", "Landing Gears"),
+		//	});
+		//	foreach (ListViewItem item in ListViewItemList.OrderBy(x => x.Text))
+		//	{
+		//		var temp = "";
 
-				if (!(item.Tag is IDirective)) continue;
+		//		if (!(item.Tag is IDirective)) continue;
 
-				var parent = (IDirective)item.Tag;
+		//		var parent = (IDirective)item.Tag;
 
-				#region Группировка по типу задачи
+		//		#region Группировка по типу задачи
 
-				if (parent is Component)
-				{
-					var component = (Component)parent;
+		//		if (parent is Component)
+		//		{
+		//			var component = (Component)parent;
 
-					if (component.ParentBaseComponent != null)
-					{
-						var baseComponent = component.ParentBaseComponent;//TODO:(Evgenii Babak) заменить на использование ComponentCore 
-						var tr = baseComponent.TransferRecords.GetLast();
-						temp = tr.DestinationObjectType.ToString();
-					}
-					else
-					{
-						var tr = component.TransferRecords.GetLast();
-						temp = tr.DestinationObjectType == SmartCoreType.Supplier ? "Customer/Vendor" : tr.DestinationObjectType.ToString();
-					}
-					itemsListView.Groups.Add(temp, temp);
-					item.Group = itemsListView.Groups[temp];
-				}
-				#endregion
-			}
-		}
+		//			if (component.ParentBaseComponent != null)
+		//			{
+		//				var baseComponent = component.ParentBaseComponent;//TODO:(Evgenii Babak) заменить на использование ComponentCore 
+		//				var tr = baseComponent.TransferRecords.GetLast();
+		//				temp = tr.DestinationObjectType.ToString();
+		//			}
+		//			else
+		//			{
+		//				var tr = component.TransferRecords.GetLast();
+		//				temp = tr.DestinationObjectType == SmartCoreType.Supplier ? "Customer/Vendor" : tr.DestinationObjectType.ToString();
+		//			}
+		//			itemsListView.Groups.Add(temp, temp);
+		//			item.Group = itemsListView.Groups[temp];
+		//		}
+		//		#endregion
+		//	}
+		//}
 
 		#endregion
 
@@ -269,11 +219,11 @@ namespace CAS.UI.UIControls.SupplierControls
 						if (dp.Form is ConsumablePartAndKitForm)
 						{
 							var changedJob = ((ConsumablePartAndKitForm)dp.Form)._consumablePart;
-							itemsListView.SelectedItems[0].Tag = changedJob;
+							radGridView1.SelectedRows[0].Tag = changedJob;
 
 							var subs = GetListViewSubItems(SelectedItem);
-							for (int i = 0; i < subs.Length; i++)
-								itemsListView.SelectedItems[0].SubItems[i].Text = subs[i].Text;
+							for (int i = 0; i < subs.Count; i++)
+								radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
 						}
 					}
 
@@ -283,9 +233,9 @@ namespace CAS.UI.UIControls.SupplierControls
 		}
 		#endregion
 
-		#region protected override void SetItemColor(ListViewItem listViewItem, IBaseCoreObject item)
+		#region protected override void SetItemColor(GridViewRowInfo listViewItem, IBaseCoreObject item)
 
-		protected override void SetItemColor(ListViewItem listViewItem, IBaseCoreObject item)
+		protected override void SetItemColor(GridViewRowInfo listViewItem, IBaseCoreObject item)
 		{
 			if (item is Component)
 			{
@@ -296,11 +246,22 @@ namespace CAS.UI.UIControls.SupplierControls
 				{
 					var notifyDate = transferRecord.SupplierReceiptDate.AddDays(transferRecord.SupplierNotify.CalendarValue.Value * -1);
 
-					if(DateTime.Today >= notifyDate && DateTime.Today <= transferRecord.SupplierReceiptDate)
-						listViewItem.BackColor = Color.FromArgb(Highlight.Yellow.Color);
-					else if(DateTime.Today > transferRecord.SupplierReceiptDate)
-						listViewItem.BackColor = Color.FromArgb(Highlight.Red.Color);
-
+					if (DateTime.Today >= notifyDate && DateTime.Today <= transferRecord.SupplierReceiptDate)
+					{
+						foreach (GridViewCellInfo cell in listViewItem.Cells)
+						{
+							cell.Style.CustomizeFill = true;
+							cell.Style.BackColor = Color.FromArgb(Highlight.Yellow.Color);
+						}
+					}
+					else if (DateTime.Today > transferRecord.SupplierReceiptDate)
+					{
+						foreach (GridViewCellInfo cell in listViewItem.Cells)
+						{
+							cell.Style.CustomizeFill = true;
+							cell.Style.BackColor = Color.FromArgb(Highlight.Red.Color);
+						}
+					}
 				}
 			}
 		}

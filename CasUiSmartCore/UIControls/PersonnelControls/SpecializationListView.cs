@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.NewGrid;
 using SmartCore.Entities.Dictionaries;
 
 namespace CAS.UI.UIControls.PersonnelControls
@@ -8,7 +9,7 @@ namespace CAS.UI.UIControls.PersonnelControls
     ///<summary>
     /// список для отображения ордеров запроса
     ///</summary>
-    public partial class SpecializationListView : BaseListViewControl<Specialization>
+    public partial class SpecializationListView : BaseGridViewControl<Specialization>
     {
         #region Fields
 
@@ -75,12 +76,13 @@ namespace CAS.UI.UIControls.PersonnelControls
             if (SelectedItem != null)
             {
                 e.Cancel = true;
-                CommonEditorForm form = new CommonEditorForm(SelectedItem);
+                var form = new CommonEditorForm(SelectedItem);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    itemsListView.Items[itemsListView.Items.IndexOf(itemsListView.SelectedItems[0])] =
-                        new ListViewItem(GetListViewSubItems(SelectedItem), null) { Tag = SelectedItem };
-                }
+					var subs = GetListViewSubItems(SelectedItem);
+					for (int i = 0; i < subs.Count; i++)
+						radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
+				}
             }
         }
         #endregion

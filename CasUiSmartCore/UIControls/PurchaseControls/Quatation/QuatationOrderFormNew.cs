@@ -8,9 +8,9 @@ using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.PurchaseControls.Quatation;
 using CASTerms;
-using EFCore.DTO.Dictionaries;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.DTO.Dictionaries;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using MetroFramework.Forms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
@@ -20,6 +20,7 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Filters;
 using SmartCore.Purchase;
+using SmartCore.Queries;
 
 namespace CAS.UI.UIControls.PurchaseControls.Initial
 {
@@ -107,15 +108,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			destinations.Clear();
 			_suppliers.Clear();
 
-			if (_currentAircraftKits.Count == 0)
-				_currentAircraftKits = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, Product>(loadChild: true).ToList();
-			_collectionFilter.InitialCollection = _currentAircraftKits;
-
 			if (_order != null && _order.ItemId > 0)
 			{
 				_quotationCosts.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<QuotationCostDTO, QuotationCost>(new Filter("QuotationId", _order.ItemId)));
 				_addedQuatationOrderRecords.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationRecordDTO, RequestForQuotationRecord>(new Filter("ParentPackageId", _order.ItemId)));
 				var ids = _addedQuatationOrderRecords.Select(i => i.PackageItemId);
+				var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()));
 				var supplierId = _addedQuatationOrderRecords.SelectMany(i => i.SupplierPrice).Select(i => i.SupplierId);
 				var suppliers = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<SupplierDTO, Supplier>(new Filter("ItemId",supplierId));
 
@@ -123,7 +121,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				{
 					foreach (var addedInitialOrderRecord in _addedQuatationOrderRecords)
 					{
-						var product = _currentAircraftKits.FirstOrDefault(i => i.ItemId == addedInitialOrderRecord.PackageItemId);
+						var product = products.FirstOrDefault(i => i.ItemId == addedInitialOrderRecord.PackageItemId);
 
 						foreach (var relation in product.SupplierRelations)
 						{
@@ -282,26 +280,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		#endregion
 
-		#region private void textBoxSearchPartNumber_TextChanged(object sender, EventArgs e)
-
-		private void textBoxSearchPartNumber_TextChanged(object sender, EventArgs e)
-		{
-			_partNumberFilter.Mask = textBoxSearchPartNumber.Text;
-			UpdateListViewItems();
-		}
-
-		#endregion
-
-		#region private void textBoxSearchStandart_TextChanged(object sender, EventArgs e)
-
-		private void textBoxSearchStandart_TextChanged(object sender, EventArgs e)
-		{
-			_standartFilter.Mask = textBoxSearchStandart.Text;
-			UpdateListViewItems();
-		}
-
-		#endregion
-
 		#region private void buttonCancel_Click(object sender, EventArgs e)
 
 		private void buttonCancel_Click(object sender, EventArgs e)
@@ -324,7 +302,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				return;
 			}
 
-			if (listViewInitialItems.ListViewItemList.Count <= 0)
+			if (listViewInitialItems.ItemsCount <= 0)
 			{
 				MessageBox.Show("Please select a kits for initional order", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
@@ -335,14 +313,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			ApplyInitialData();
 			//сохранение запросного ордера
 			GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
-
-			if (listViewKits.ListViewItemList.Count <= 0)
-			{
-				MessageBox.Show("Please select a kits for initional order", (string)new GlobalTermsProvider()["SystemName"],
-					MessageBoxButtons.OK,
-					MessageBoxIcon.Exclamation);
-				return;
-			}
 
 			foreach (var record in _addedQuatationOrderRecords)
 			{
@@ -705,6 +675,28 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				res.AddRange(record.SupplierPrice);
 			}
 			return res;
+		}
+
+		private void Button3_Click(object sender, EventArgs e)
+		{
+			metroProgressSpinner1.Visible = true;
+			Task.Run(() =>
+				{
+					_currentAircraftKits.Clear();
+					var res = BaseQueries.GetSelectQueryWithWhere<Product>() + $" AND ( Model like '%{textBoxSearchPartNumber.Text}%' OR " +
+					          $"PartNumber like '%{textBoxSearchPartNumber.Text}%' OR " +
+					          $"Description like '%{textBoxSearchPartNumber.Text}%' OR " +
+					          $"AltPartNumber like '%{textBoxSearchPartNumber.Text}%' OR " +
+					          $"Reference like '%{textBoxSearchPartNumber.Text}%')";
+
+					var ds = GlobalObjects.CasEnvironment.Execute(res);
+					_currentAircraftKits.AddRange(BaseQueries.GetObjectList<Product>(ds.Tables[0]));
+				})
+				.ContinueWith(task =>
+				{
+					listViewKits.SetItemsArray(_currentAircraftKits.ToArray());
+					metroProgressSpinner1.Visible = false;
+				}, TaskScheduler.FromCurrentSynchronizationContext());
 		}
 	}
 }

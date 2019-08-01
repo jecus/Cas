@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using EFCore.DTO;
-using EFCore.DTO.General;
+using CAS.UI.Helpers;
+using EntityCore.DTO;
+using EntityCore.DTO.General;
 using SmartCore.AuditMongo.Repository;
 using SmartCore.DataAccesses;
 using SmartCore.DtoHelper;
@@ -20,6 +21,7 @@ namespace SmartCore.Entities
 		private readonly CasEnvironment _casEnvironment;
 		private readonly IAuditRepository _auditRepository;
 		private readonly FilesSmartCore _filesSmartCore;
+		private ApiProvider _apiProvider;
 
 		#endregion
 
@@ -30,6 +32,7 @@ namespace SmartCore.Entities
 			_casEnvironment = casEnvironment;
 			_auditRepository = auditRepository;
 			_filesSmartCore = new FilesSmartCore(_casEnvironment);
+			_apiProvider = casEnvironment.ApiProvider;
 		}
 
 		#endregion
@@ -45,15 +48,9 @@ namespace SmartCore.Entities
 			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var repo = _casEnvironment.UnitOfWork.GetRepository<TOut>();
-
-			if (repo == null)
-				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
-
-
 			var method = GetMethod(typeof(T), "Convert");
 			var res = InvokeConverter<T, TOut>(value, method);
-			var newId = repo.Save(res);
+			var newId = _apiProvider.Save(res);
 
 			value.ItemId = newId;
 
@@ -96,21 +93,13 @@ namespace SmartCore.Entities
 			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var repo = _casEnvironment.UnitOfWork.GetRepository<TOut>();
-
-			if (repo == null)
-				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
-
-
 			var method = GetMethod(typeof(T), "Convert");
 
 			var res = new List<TOut>();
 			foreach (var value in values)
-			{
 				res.Add(InvokeConverter<T, TOut>((T)value, method));
-			}
 
-			repo.BulkInsert(res, batchSize);
+			_apiProvider.BulkInsert(res, batchSize);
 
 		}
 		public void BulkInsert(List<BaseEntityObject> value, int? batchSize = null)
@@ -121,14 +110,50 @@ namespace SmartCore.Entities
 			foreach (var o in value)
 				o.CorrectorId = _casEnvironment.IdentityUser.ItemId;
 
-			var blType = value.GetType();
+			var blType = value.First().GetType();
 			var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
 			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "BulkInsert")?.MakeGenericMethod(blType, dto.Type);
 
 			method.Invoke(this, new object[] { value, batchSize });
 
 		}
-		
+
+		public void BulkUpdate<T, TOut>(List<BaseEntityObject> values, int? batchSize = null) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
+		{
+			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
+				return;
+
+			if (!typeof(TOut).IsSubclassOf(typeof(BaseEntity)))
+				throw new ArgumentException("T", "не является наследником " + typeof(BaseEntity).Name);
+
+			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
+				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
+
+			var method = GetMethod(typeof(T), "Convert");
+
+			var res = new List<TOut>();
+			foreach (var value in values)
+				res.Add(InvokeConverter<T, TOut>((T)value, method));
+
+			_apiProvider.BulkUpdate(res, batchSize);
+
+		}
+		public void BulkUpdate(List<BaseEntityObject> value, int? batchSize = null)
+		{
+			if (_casEnvironment.IdentityUser.UserType == UsetType.ReadOnly)
+				return;
+
+			foreach (var o in value)
+				o.CorrectorId = _casEnvironment.IdentityUser.ItemId;
+
+			var blType = value.First().GetType();
+			var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
+			var method = typeof(INewKeeper).GetMethods().FirstOrDefault(i => i.Name == "BulkUpdate")?.MakeGenericMethod(blType, dto.Type);
+
+			method.Invoke(this, new object[] { value, batchSize });
+
+		}
+
 
 		public void BulkDelete<T, TOut>(List<BaseEntityObject> values, int? batchSize = null) where T : BaseEntityObject, new() where TOut : BaseEntity, new()
 		{
@@ -141,22 +166,13 @@ namespace SmartCore.Entities
 			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var repo = _casEnvironment.UnitOfWork.GetRepository<TOut>();
-
-			if (repo == null)
-				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
-
-
 			var method = GetMethod(typeof(T), "Convert");
 
 			var res = new List<TOut>();
 			foreach (var value in values)
-			{
 				res.Add(InvokeConverter<T, TOut>((T)value, method));
-			}
 
-			repo.BulkDelete(res, batchSize);
-
+			_apiProvider.BulkDelete(res, batchSize);
 		}
 		public void BulkDelete(List<BaseEntityObject> value,int? batchSize = null)
 		{
@@ -186,19 +202,14 @@ namespace SmartCore.Entities
 			if (!typeof(T).IsSubclassOf(typeof(BaseEntityObject)))
 				throw new ArgumentException("TOut", "не является наследником " + typeof(BaseEntityObject).Name);
 
-			var repo = _casEnvironment.UnitOfWork.GetRepository<TOut>();
-
-			if (repo == null)
-				throw new ArgumentNullException("repo", $"В репозитории не содержится тип {nameof(T)}");
-
 			var method = GetMethod(typeof(T), "Convert");
 
 			if (isDeletedOnly)
 			{
 				value.IsDeleted = true;
-				repo.Save(InvokeConverter<T, TOut>(value, method));
+				_apiProvider.Save(InvokeConverter<T, TOut>(value, method));
 			}
-			else repo.Delete(InvokeConverter<T, TOut>(value, method));
+			else _apiProvider.Delete(InvokeConverter<T, TOut>(value, method));
 
 			if (value is IFileContainer && saveAttachedFile)
 				DeleteAttachedFile(value as IFileContainer);
@@ -223,7 +234,27 @@ namespace SmartCore.Entities
 
 		}
 
-		
+
+		public void Delete(List<BaseEntityObject> value, bool isDeletedOnly = false)
+		{
+			if (value.Count > 1)
+			{
+				if (isDeletedOnly)
+				{
+					foreach (var entity in value)
+						entity.IsDeleted = true;
+					BulkUpdate(value);
+				}
+				else BulkDelete(value);
+			}
+			else
+			{
+				foreach (var entity in value)
+					Delete(entity, isDeletedOnly);
+			}
+		}
+
+
 		#region private void DeleteAttachedFileDTO(IFileContainer container)
 
 		private void DeleteAttachedFile(IFileContainer container)

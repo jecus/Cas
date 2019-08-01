@@ -1,23 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
+using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using Microsoft.VisualBasic.Devices;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
+using Telerik.WinControls.Data;
+using Telerik.WinControls.Export;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.NewGrid
 {
-	public partial class BaseGridViewControl<T> : UserControl where T : class, IBaseCoreObject
+	public partial class BaseGridViewControl<T> : UserControl, IReference where T : class, IBaseCoreObject
 	{
 		#region Fields
 
@@ -25,7 +27,7 @@ namespace CAS.UI.UIControls.NewGrid
 		protected readonly List<GridViewDataColumn> ColumnHeaderList = new List<GridViewDataColumn>();
 		//коллекция выделенных элементов
 		private readonly List<T> _selectedItemsList = new List<T>();
-		private readonly List<T> _items = new List<T>();
+		protected readonly List<T> _items = new List<T>();
 		private RadDropDownMenu _customMenu;
 
 		#endregion
@@ -124,6 +126,12 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#endregion
 
+		public bool IgnoreEnterPress { get; set; }
+
+		public int SortMultiplier { get; set; }
+
+		public int OldColumnIndex { get; set; }
+
 		#endregion
 
 		#region Constructor
@@ -131,14 +139,27 @@ namespace CAS.UI.UIControls.NewGrid
 		public BaseGridViewControl()
 		{
 			InitializeComponent();
-			radGridView1.SelectionMode = GridViewSelectionMode.FullRowSelect;
-			radGridView1.MultiSelect = true;
+			SetupGridView();
 			FirstLoad();
 		}
 
-
 		#endregion
 
+		#region private void SetupGridView()
+
+		private void SetupGridView()
+		{
+			radGridView1.SelectionMode = GridViewSelectionMode.FullRowSelect;
+			radGridView1.MultiSelect = true;
+
+			radGridView1.EnableFiltering = true;
+			radGridView1.MasterTemplate.ShowHeaderCellButtons = true;
+			radGridView1.MasterTemplate.ShowFilteringRow = false;
+
+			this.radGridView1.AllowSearchRow = true;
+		}
+
+		#endregion
 
 		#region protected virtual void SetHeaders()
 		/// <summary>
@@ -153,7 +174,9 @@ namespace CAS.UI.UIControls.NewGrid
 			foreach (var propertyInfo in properties)
 			{
 				var attr = (ListViewDataAttribute)propertyInfo.GetCustomAttributes(typeof(ListViewDataAttribute), false)[0];
-				columnHeader = new GridViewBrowseColumn(attr.Title);
+				if(propertyInfo.PropertyType == typeof(DateTime))
+					columnHeader = new GridViewDateTimeColumn(attr.Title){ FormatString = "{0:dd.MM.yyyy}" };
+				else columnHeader = new GridViewBrowseColumn(attr.Title);
 				columnHeader.Width = attr.HeaderWidth > 1 ? (int)attr.HeaderWidth : (int)(radGridView1.Width * attr.HeaderWidth);
 				columnHeader.Tag = propertyInfo.PropertyType;
 
@@ -173,6 +196,22 @@ namespace CAS.UI.UIControls.NewGrid
 			else col.AutoSizeMode = BestFitColumnMode.DisplayedCells;
 
 			ColumnHeaderList.Add(col);
+
+		}
+
+		public void AddDateColumn(string title, int? size = null)
+		{
+			var col = new GridViewDateTimeColumn(title)
+			{
+				FormatString = "{0:dd.MM.yyyy}"
+			};
+
+			if (size.HasValue)
+				col.Width = size.Value;
+			else col.AutoSizeMode = BestFitColumnMode.DisplayedCells;
+
+			ColumnHeaderList.Add(col);
+
 		}
 
 		#endregion
@@ -182,7 +221,7 @@ namespace CAS.UI.UIControls.NewGrid
 		/// Получает свойства типа, на основе которых будут созданы колонки 
 		/// </summary>
 		/// <returns></returns>
-		private List<PropertyInfo> GetTypeProperties()
+		protected virtual List<PropertyInfo> GetTypeProperties()
 		{
 			//определение типа
 			var type = typeof(T);
@@ -214,6 +253,8 @@ namespace CAS.UI.UIControls.NewGrid
 		}
 		#endregion
 
+		#region public virtual void SetItemsArray(T[] itemsArray)
+
 		public virtual void SetItemsArray(T[] itemsArray)
 		{
 			if(itemsArray == null)
@@ -225,12 +266,18 @@ namespace CAS.UI.UIControls.NewGrid
 
 			try
 			{
+				this.radGridView1.GroupDescriptors.Clear();
 				AddItems(itemsArray);
-				SetItemsColor();
+				UpdateItemColor();
 				SetTotalText();
+				GroupingItems();
+				SortingItems();
+
+				radGridView1.MasterTemplate.ExpandAllGroups();
 
 				radGridView1.RowFormatting += RadGridView1_RowFormatting;
-
+				radGridView1.CellFormatting += RadGridView1_CellFormatting;
+				radGridView1.FilterChanged += RadGridView1_FilterChanged;
 			}
 			catch (Exception ex)
 			{
@@ -238,6 +285,22 @@ namespace CAS.UI.UIControls.NewGrid
 				return;
 			}
 		}
+
+		private void RadGridView1_FilterChanged(object sender, GridViewCollectionChangedEventArgs e)
+		{
+			labelTotal.Text = "Total: " + e.GridViewTemplate.ChildRows.Count;
+		}
+
+
+		private void RadGridView1_CellFormatting(object sender, Telerik.WinControls.UI.CellFormattingEventArgs e)
+		{
+			if (e.CellElement.Value != null)
+			{
+				e.CellElement.ToolTipText = e.CellElement.Value.ToString();
+			}
+		}
+
+		#endregion
 
 		#region public virtual void InsertItems(T[] itemsArray)
 		/// <summary>
@@ -258,7 +321,15 @@ namespace CAS.UI.UIControls.NewGrid
 
 				foreach (var cell in GetListViewSubItems(item))
 				{
-					rowInfo.Cells[i].Value = cell;
+					if(cell != null)
+						cell.Text = cell.Text.Replace("\n", "");
+
+					if (rowInfo.Cells[i].ColumnInfo is GridViewDateTimeColumn)
+						rowInfo.Cells[i].Value = cell.Tag;
+					else
+						rowInfo.Cells[i].Value = cell;
+
+					rowInfo.Cells[i].Tag = cell;
 
 					if (cell.ForeColor.HasValue)
 						rowInfo.Cells[i].Style.ForeColor = cell.ForeColor.Value;
@@ -272,7 +343,7 @@ namespace CAS.UI.UIControls.NewGrid
 			radGridView1.Rows.AddRange(temp.ToArray());
 			radGridView1.EndUpdate();
 
-			SetItemsColor();
+			UpdateItemColor();
 			SetTotalText();
 		}
 
@@ -295,7 +366,7 @@ namespace CAS.UI.UIControls.NewGrid
 		{
 			return new CustomCell()
 			{
-				Text = text,
+				Text = text ?? "",
 				Tag = tag,
 				ForeColor = foreColor
 			};
@@ -321,7 +392,15 @@ namespace CAS.UI.UIControls.NewGrid
 
 					foreach (var cell in GetListViewSubItems(item))
 					{
-						rowInfo.Cells[i].Value = cell;
+						if(cell != null)
+							cell.Text = cell.Text.Replace("\n", "");
+						
+						if (rowInfo.Cells[i].ColumnInfo is GridViewDateTimeColumn)
+							rowInfo.Cells[i].Value = cell.Tag;
+						else
+							rowInfo.Cells[i].Value = cell;
+
+						rowInfo.Cells[i].Tag = cell;
 
 						if(cell.ForeColor.HasValue)
 							rowInfo.Cells[i].Style.ForeColor = cell.ForeColor.Value;
@@ -389,8 +468,8 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#endregion
 
-		#region private void SetItemsColor()
-		private void SetItemsColor()
+		#region public void UpdateItemColor()
+		public void UpdateItemColor()
 		{
 			foreach (var item in radGridView1.Rows)
 				SetItemColor(item, (T)item.Tag);
@@ -425,13 +504,13 @@ namespace CAS.UI.UIControls.NewGrid
 		}
 		#endregion
 
-		#region private void SetTotalText()
+		#region protected virtual void SetTotalText()
 		/// <summary>
 		/// Устанавивает информацию об общем количестве элементов в нижней панели
 		/// </summary>
-		private void SetTotalText()
+		protected virtual void SetTotalText()
 		{
-			label1.Text = "Total: " + radGridView1.Rows.Count;
+			labelTotal.Text = "Total: " + radGridView1.Rows.Count;
 		}
 
 		#endregion
@@ -455,28 +534,74 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#endregion
 
-		public void ExportToExcel()
+		#region protected virtual void SortingItems()
+
+		private void SortingItems()
 		{
-			using (var ms = new System.IO.MemoryStream())
-			{
-				var exporter = new Telerik.WinControls.Export.GridViewSpreadExport(radGridView1);
-				var renderer = new Telerik.WinControls.Export.SpreadExportRenderer();
-				 exporter.RunExport(ms, renderer);
-
-				 var sfd = new SaveFileDialog {Filter = ".xlsx Files (*.xlsx)|*.xlsx"};
-
-				 if (sfd.ShowDialog() == DialogResult.OK)
-				{
-					using (var fileStream = new FileStream(sfd.FileName, FileMode.Create, FileAccess.Write))
-					{
-						ms.WriteTo(fileStream);
-					}
-					MessageBox.Show("File was success saved!");
-				}
-			}
+			Sorting();
 		}
 
+		#endregion
+
+		#region public void Sorting(string colName = null)
+
+		protected virtual void Sorting(string colName = null)
+		{
+			var radSortOrder = SortMultiplier == 0 ? RadSortOrder.Ascending : RadSortOrder.Descending;
+			if (!string.IsNullOrEmpty(colName))
+				radGridView1.Columns[colName].SortOrder = radSortOrder;
+			radGridView1.Columns[OldColumnIndex].SortOrder = radSortOrder;
+		}
+
+		#endregion
+
+		#region protected virtual void CustomSort(int ColumnIndex)
+
+		protected virtual void CustomSort(int ColumnIndex)
+		{
+
+		}
+
+		#endregion
+
+		#region protected virtual void GroupingItems()
+
+		protected virtual void GroupingItems()
+		{
+			Grouping();
+		}
+
+		#endregion
+
+		#region public void Grouping(string colName = null)
+
+		public void Grouping(string colName = null)
+		{
+			if (string.IsNullOrEmpty(colName))
+				return;
+
+			var radSortOrder = SortMultiplier == 0 ? ListSortDirection.Ascending : ListSortDirection.Descending;
+
+			var descriptor = new GroupDescriptor();
+			descriptor.GroupNames.Add(colName, radSortOrder);
+			this.radGridView1.GroupDescriptors.Add(descriptor);
+		}
+
+		#endregion
+
+
 		//Events
+
+		#region private void RadGridView1_GroupSummaryEvaluate(object sender, Telerik.WinControls.UI.GroupSummaryEvaluationEventArgs e)
+
+		private void RadGridView1_GroupSummaryEvaluate(object sender, GroupSummaryEvaluationEventArgs e)
+		{
+			if (e.Value is DateTime)
+				e.FormatString = $"{((DateTime) e.Value):dd.MM.yyyy}";
+			else e.FormatString = e.Value.ToString();
+		}
+
+		#endregion
 
 		#region private void RadGridView1_ContextMenuOpening(object sender, Telerik.WinControls.UI.ContextMenuOpeningEventArgs e)
 
@@ -511,6 +636,10 @@ namespace CAS.UI.UIControls.NewGrid
 
 		private void RadGridView1_KeyDown(object sender, KeyEventArgs e)
 		{
+			if(IgnoreEnterPress)
+				return;
+			
+
 			switch (e.KeyData)
 			{
 				case Keys.Enter:
@@ -521,6 +650,7 @@ namespace CAS.UI.UIControls.NewGrid
 						else RadGridView1_DoubleClick(sender, e);
 					}
 					break;
+				case Keys.Escape: radGridView1.FilterDescriptors.Clear();break;
 				default:
 					break;
 			}
@@ -545,12 +675,32 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#endregion
 
+		#region public event EventHandler<SelectedItemsChangeEventArgs> SelectedItemsChanged;
+		/// <summary>
+		/// Событие возникающее при изменении массива выбранных элементов в списке.
+		/// </summary>
+		public event EventHandler<SelectedItemsChangeEventArgs> SelectedItemsChanged;
+		#endregion
+
+		#region private void RadGridView1_SelectionChanged(object sender, System.EventArgs e)
+
+		private void RadGridView1_SelectionChanged(object sender, EventArgs e)
+		{
+			if (SelectedItemsChanged != null)
+				SelectedItemsChanged.Invoke(this, new SelectedItemsChangeEventArgs(_selectedItemsList.Count));
+		}
+
+		#endregion
+
 		#region protected void OnDisplayerRequested()
 		/// <summary>
 		/// Метод, возбуждающий событие DisplayerRequested
 		/// </summary>
 		protected void OnDisplayerRequested()
 		{
+			if(SelectedItem == null)
+				return;
+
 			if (null != DisplayerRequested)
 			{
 				var reflection = ReflectionType;
@@ -558,7 +708,6 @@ namespace CAS.UI.UIControls.NewGrid
 				if (k.ShiftKeyDown && reflection == ReflectionTypes.DisplayInCurrent)
 					reflection = ReflectionTypes.DisplayInNew;
 				var e = null != Displayer ? new ReferenceEventArgs(Entity, reflection, Displayer, DisplayerText) : new ReferenceEventArgs(Entity, reflection, DisplayerText);
-
 				try
 				{
 					FillDisplayerRequestedParams(e);
@@ -582,6 +731,45 @@ namespace CAS.UI.UIControls.NewGrid
 		protected virtual void FillDisplayerRequestedParams(ReferenceEventArgs e)
 		{
 		}
+		#endregion
+
+		#region private void RadGridView1_CellClick(object sender, GridViewCellEventArgs e)
+
+		private void RadGridView1_CellClick(object sender, GridViewCellEventArgs e)
+		{
+			if (e.ColumnIndex > -1 && e.RowIndex == -1 &&  sender is GridHeaderCellElement && ((GridHeaderCellElement)sender).ZIndex != 0)
+				CustomSort(e.ColumnIndex);
+			
+		}
+
+		#endregion
+
+		#region Export
+
+		private void RadButton1_Click(object sender, EventArgs e)
+		{
+			var sfd = new SaveFileDialog();
+			sfd.Filter = ".xlsx Files (*.xlsx)|*.xlsx";
+
+			if (sfd.ShowDialog() == DialogResult.OK)
+			{
+				var spreadStreamExport = new GridViewSpreadStreamExport(radGridView1);
+				spreadStreamExport.ExportVisualSettings = true;
+				spreadStreamExport.FreezeHeaderRow = true;
+				spreadStreamExport.CellFormatting += SpreadStreamExport_CellFormatting;
+				spreadStreamExport.RunExport(sfd.FileName,  new SpreadStreamExportRenderer());
+			}
+			
+		}
+
+		private void SpreadStreamExport_CellFormatting(object sender, SpreadStreamCellFormattingEventArgs e)
+		{
+			e.CellStyleInfo.LeftBorder = Color.Black;
+			e.CellStyleInfo.RightBorder = Color.Black;
+			e.CellStyleInfo.BottomBorder = Color.Black;
+			e.CellStyleInfo.TopBorder = Color.Black;
+		}
+
 		#endregion
 	}
 

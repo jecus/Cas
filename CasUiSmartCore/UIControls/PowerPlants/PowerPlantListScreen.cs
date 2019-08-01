@@ -64,8 +64,7 @@ namespace CAS.UI.UIControls.PowerPlants
 			{
 				TabIndex = 2,
 				Location = new Point(panel1.Left, panel1.Top),
-				Dock = DockStyle.Fill,
-				IgnoreAutoResize = true
+				Dock = DockStyle.Fill
 			};
 
 			panel1.Controls.Add(_directivesViewer);

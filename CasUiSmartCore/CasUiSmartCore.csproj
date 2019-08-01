@@ -695,17 +695,17 @@
       <HintPath>..\DLL\Microsoft.SqlServer.ConnectionInfo.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="MongoDB.Bson, Version=2.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MongoDB.Bson.2.8.0\lib\net452\MongoDB.Bson.dll</HintPath>
+    <Reference Include="MongoDB.Bson, Version=2.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Bson.2.8.1\lib\net452\MongoDB.Bson.dll</HintPath>
     </Reference>
-    <Reference Include="MongoDB.Driver, Version=2.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MongoDB.Driver.2.8.0\lib\net452\MongoDB.Driver.dll</HintPath>
+    <Reference Include="MongoDB.Driver, Version=2.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.2.8.1\lib\net452\MongoDB.Driver.dll</HintPath>
     </Reference>
-    <Reference Include="MongoDB.Driver.Core, Version=2.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MongoDB.Driver.Core.2.8.0\lib\net452\MongoDB.Driver.Core.dll</HintPath>
+    <Reference Include="MongoDB.Driver.Core, Version=2.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.Core.2.8.1\lib\net452\MongoDB.Driver.Core.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PdfSharp, Version=1.50.4000.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp.1.50.4000-beta3b\lib\net20\PdfSharp.dll</HintPath>
@@ -727,6 +727,9 @@
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.4.1\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -746,6 +749,7 @@
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
@@ -781,6 +785,12 @@
     </Reference>
     <Reference Include="WindowsFormsIntegration">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="zxing, Version=0.16.4.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.4\lib\net47\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.16.4.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.4\lib\net47\zxing.presentation.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -922,6 +932,7 @@
     <Compile Include="UIControls\ATLBEvent\AllATLBListScreen.Designer.cs">
       <DependentUpon>AllATLBListScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\Auxiliary\Comparers\GridViewDataRowInfoComparer.cs" />
     <Compile Include="UIControls\Auxiliary\DataGridViewElements\DataGridViewLookupCell.cs" />
     <Compile Include="UIControls\Auxiliary\DataGridViewElements\DataGridViewLookupColumn.cs" />
     <Compile Include="UIControls\Auxiliary\DataGridViewElements\DataGridViewCalendarEditingControl.cs">
@@ -932,6 +943,12 @@
     </Compile>
     <Compile Include="UIControls\Auxiliary\TestControl.Designer.cs">
       <DependentUpon>TestControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\BarCode\BarcodeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\BarCode\BarcodeForm.Designer.cs">
+      <DependentUpon>BarcodeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UIControls\ComponentChangeReport\ComponentChangeListView.cs">
       <SubType>UserControl</SubType>
@@ -1022,6 +1039,12 @@
     </Compile>
     <Compile Include="UIControls\MailControls\MailListView.Designer.cs">
       <DependentUpon>MailListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\MaintananceProgram\MaintenanceDirectiveAPUCalculationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\MaintananceProgram\MaintenanceDirectiveAPUCalculationForm.designer.cs">
+      <DependentUpon>MaintenanceDirectiveAPUCalculationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UIControls\MTOP\MTOPComplainceForm.cs">
       <SubType>Form</SubType>
@@ -3946,6 +3969,9 @@
     <EmbeddedResource Include="UIControls\Auxiliary\TestControl.resx">
       <DependentUpon>TestControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\BarCode\BarcodeForm.resx">
+      <DependentUpon>BarcodeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ComponentChangeReport\ComponentChangeReport.resx">
       <DependentUpon>ComponentChangeReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -3982,6 +4008,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\MailControls\MailForm.resx">
       <DependentUpon>MailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\MaintananceProgram\MaintenanceDirectiveAPUCalculationForm.resx">
+      <DependentUpon>MaintenanceDirectiveAPUCalculationForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\MTOP\MTOPComplainceForm.resx">
       <DependentUpon>MTOPComplainceForm.cs</DependentUpon>
@@ -5327,6 +5357,7 @@
     <None Include="Resources\AddIconLargeGray.png" />
     <Content Include="Resources\AddJobIcon.png" />
     <Content Include="Resources\AddJobIcon_gray.png" />
+    <None Include="Resources\APU.png" />
     <Content Include="Resources\B737300400500BS46Left.bmp" />
     <Content Include="Resources\B737300400500BS46Right.bmp" />
     <Content Include="Resources\B737300400500WingLowerSurface.bmp" />
@@ -5468,9 +5499,9 @@
       <Project>{0e490ce9-c51f-408c-a6fb-39a8ce185817}</Project>
       <Name>CASGlobalTerms</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EFCore\EFCore.csproj">
-      <Project>{6dddaf81-980a-4ebc-bf58-3ca93a059d7f}</Project>
-      <Name>EFCore</Name>
+    <ProjectReference Include="..\EntityCore\EntityCore.csproj">
+      <Project>{A04296A8-8CBD-41E9-9E91-1A4A56004CDE}</Project>
+      <Name>EntityCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\SmartControls\SmartControls.csproj">
       <Project>{9C7822B3-F9CC-436A-97A0-FDF02E31524D}</Project>

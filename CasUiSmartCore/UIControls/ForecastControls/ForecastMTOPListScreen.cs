@@ -11,8 +11,8 @@ using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.PurchaseControls;
 using CAS.UI.UIControls.WorkPakage;
 using CASTerms;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -25,6 +25,7 @@ using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;
 using SmartCore.Purchase;
 using SmartCore.Relation;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.ForecastControls
 {
@@ -48,14 +49,14 @@ namespace CAS.UI.UIControls.ForecastControls
 		private Forecast _currentForecast;
 		private ForecastMTOPListView _directivesViewer;
 
-	    private ContextMenuStrip _contextMenuStrip;
-	    private ToolStripSeparator _toolStripSeparator1;
-	    private ToolStripMenuItem _createWorkPakageToolStripMenuItem;
-	    private ToolStripMenuItem _createInitialOrderStripMenuItem;
-	    private ToolStripMenuItem _createQuotationOrderStripMenuItem;
-	    private ToolStripMenuItem _toolStripMenuItemHighlight;
-	    private ToolStripMenuItem _toolStripMenuItemsWorkPackages;
-	    private ToolStripMenuItem _toolStripMenuItemQuotations;
+	    private RadDropDownMenu _contextMenuStrip;
+	    private RadMenuSeparatorItem _toolStripSeparator1;
+	    private RadMenuItem _createWorkPakageToolStripMenuItem;
+	    private RadMenuItem _createInitialOrderStripMenuItem;
+	    private RadMenuItem _createQuotationOrderStripMenuItem;
+	    private RadMenuItem _toolStripMenuItemHighlight;
+	    private RadMenuItem _toolStripMenuItemsWorkPackages;
+	    private RadMenuItem _toolStripMenuItemQuotations;
 
 	    private CommonCollection<WorkPackage> _openPubWorkPackages = new CommonCollection<WorkPackage>();
 	    private CommonCollection<RequestForQuotation> _openPubQuotations = new CommonCollection<RequestForQuotation>();
@@ -132,37 +133,37 @@ namespace CAS.UI.UIControls.ForecastControls
 
 			if (_toolStripMenuItemsWorkPackages != null)
 			{
-				foreach (ToolStripMenuItem item in _toolStripMenuItemsWorkPackages.DropDownItems)
+				foreach (RadMenuItem item in _toolStripMenuItemsWorkPackages.Items)
 				{
 					item.Click -= AddToWorkPackageItemClick;
 				}
 
-				_toolStripMenuItemsWorkPackages.DropDownItems.Clear();
+				_toolStripMenuItemsWorkPackages.Items.Clear();
 
 				foreach (WorkPackage workPackage in _openPubWorkPackages)
 				{
-					ToolStripMenuItem item = new ToolStripMenuItem($"{workPackage.Title} {workPackage.Number}");
+					var item = new RadMenuItem($"{workPackage.Title} {workPackage.Number}");
 					item.Click += AddToWorkPackageItemClick;
 					item.Tag = workPackage;
-					_toolStripMenuItemsWorkPackages.DropDownItems.Add(item);
+					_toolStripMenuItemsWorkPackages.Items.Add(item);
 				}
 			}
 
 	        if (_toolStripMenuItemQuotations != null)
 	        {
-		        foreach (ToolStripMenuItem item in _toolStripMenuItemQuotations.DropDownItems)
+		        foreach (RadMenuItem item in _toolStripMenuItemQuotations.Items)
 		        {
 			        item.Click -= AddToQuotationOrderItemClick;
 		        }
 
-		        _toolStripMenuItemQuotations.DropDownItems.Clear();
+		        _toolStripMenuItemQuotations.Items.Clear();
 
 		        foreach (RequestForQuotation quotation in _openPubQuotations)
 		        {
-			        ToolStripMenuItem item = new ToolStripMenuItem(quotation.Title);
+			        var item = new RadMenuItem(quotation.Title);
 			        item.Click += AddToQuotationOrderItemClick;
 			        item.Tag = quotation;
-			        _toolStripMenuItemQuotations.DropDownItems.Add(item);
+			        _toolStripMenuItemQuotations.Items.Add(item);
 		        }
 	        }
 
@@ -174,7 +175,7 @@ namespace CAS.UI.UIControls.ForecastControls
 	    {
 			if (_directivesViewer.SelectedItems.Count <= 0) return;
 
-			WorkPackage wp = (WorkPackage)((ToolStripMenuItem)sender).Tag;
+			WorkPackage wp = (WorkPackage)((RadMenuItem)sender).Tag;
 
 			if (MessageBox.Show("Add item to Work Package: " + wp.Title + "?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) ==
 				DialogResult.Yes)
@@ -266,7 +267,7 @@ namespace CAS.UI.UIControls.ForecastControls
 					foreach (NextPerformance nextPerformance in wpItems)
 					{
 						nextPerformance.BlockedByPackage = wp;
-						_directivesViewer.UpdateItemColor(nextPerformance);
+						_directivesViewer.UpdateItemColor();
 					}
 
 					if (MessageBox.Show("Items added successfully. Open work package?", (string)new GlobalTermsProvider()["SystemName"],
@@ -483,14 +484,25 @@ namespace CAS.UI.UIControls.ForecastControls
 	    {
 		    _directivesViewer = new ForecastMTOPListView
 		    {
-			    ContextMenuStrip = _contextMenuStrip,
+			    CustomMenu = _contextMenuStrip,
 				TabIndex = 2,
 			    Location = new Point(panel1.Left, panel1.Top),
 			    Dock = DockStyle.Fill
 		    };
-		    //события 
+			//события 
 
-		    panel1.Controls.Add(_directivesViewer);
+			_directivesViewer.MenuOpeningAction = () =>
+			{
+				if (_directivesViewer.SelectedItems.Count <= 0)
+					return;
+				if (_directivesViewer.SelectedItems.Count == 1)
+					_createWorkPakageToolStripMenuItem.Enabled = true;
+
+				_createInitialOrderStripMenuItem.Enabled = true;
+				_createQuotationOrderStripMenuItem.Enabled = true;
+			};
+
+			panel1.Controls.Add(_directivesViewer);
 	    }
 
 		#endregion
@@ -499,15 +511,14 @@ namespace CAS.UI.UIControls.ForecastControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new ContextMenuStrip();
-			_createWorkPakageToolStripMenuItem = new ToolStripMenuItem();
-			_createInitialOrderStripMenuItem = new ToolStripMenuItem();
-			_createQuotationOrderStripMenuItem = new ToolStripMenuItem();
-			_contextMenuStrip = new ContextMenuStrip();
-			_toolStripMenuItemsWorkPackages = new ToolStripMenuItem();
-			_toolStripMenuItemQuotations = new ToolStripMenuItem();
-			_toolStripMenuItemHighlight = new ToolStripMenuItem();
-			_toolStripSeparator1 = new ToolStripSeparator();
+			_contextMenuStrip = new RadDropDownMenu();
+			_createWorkPakageToolStripMenuItem = new RadMenuItem();
+			_createInitialOrderStripMenuItem = new RadMenuItem();
+			_createQuotationOrderStripMenuItem = new RadMenuItem();
+			_toolStripMenuItemsWorkPackages = new RadMenuItem();
+			_toolStripMenuItemQuotations = new RadMenuItem();
+			_toolStripMenuItemHighlight = new RadMenuItem();
+			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			// 
 			// contextMenuStrip
 			// 
@@ -540,59 +551,46 @@ namespace CAS.UI.UIControls.ForecastControls
 			_toolStripMenuItemQuotations.Text = "Add to Quotation Order";
 
 			_contextMenuStrip.Items.Clear();
-			_toolStripMenuItemsWorkPackages.DropDownItems.Clear();
-			_toolStripMenuItemQuotations.DropDownItems.Clear();
-			_toolStripMenuItemHighlight.DropDownItems.Clear();
+			_toolStripMenuItemsWorkPackages.Items.Clear();
+			_toolStripMenuItemQuotations.Items.Clear();
+			_toolStripMenuItemHighlight.Items.Clear();
 
 			foreach (Highlight highlight in Highlight.HighlightList)
 			{
 				if (highlight == Highlight.Blue || highlight == Highlight.Yellow || highlight == Highlight.Red)
 					continue;
-				ToolStripMenuItem item = new ToolStripMenuItem(highlight.FullName);
+				var item = new RadMenuItem(highlight.FullName);
 				item.Click += HighlightItemClick;
 				item.Tag = highlight;
-				_toolStripMenuItemHighlight.DropDownItems.Add(item);
+				_toolStripMenuItemHighlight.Items.Add(item);
 			}
 
-			_contextMenuStrip.Opening += ContextMenuStripOpen;
-			_contextMenuStrip.Items.AddRange(new ToolStripItem[]
-												{
-													_toolStripMenuItemHighlight,
-													new ToolStripSeparator(),
+			_contextMenuStrip.Items.AddRange(_toolStripMenuItemHighlight,
+													new RadMenuSeparatorItem(), 
 													_createWorkPakageToolStripMenuItem,
 													_toolStripMenuItemsWorkPackages,
 													_toolStripSeparator1,
 													_createInitialOrderStripMenuItem,
 													_createQuotationOrderStripMenuItem,
-													_toolStripMenuItemQuotations,
-												});
+													_toolStripMenuItemQuotations
+												);
 		}
 
 		#endregion
-
-		#region private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-
-		private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-	    {
-		    if (_directivesViewer.SelectedItems.Count <= 0)
-			    e.Cancel = true;
-		    if (_directivesViewer.SelectedItems.Count == 1)
-			    _createWorkPakageToolStripMenuItem.Enabled = true;
-
-		    _createInitialOrderStripMenuItem.Enabled = true;
-		    _createQuotationOrderStripMenuItem.Enabled = true;
-	    }
-
-	    #endregion
 
 		#region private void HighlightItemClick(object sender, EventArgs e)
 
 		private void HighlightItemClick(object sender, EventArgs e)
 	    {
-		    var highLight = (Highlight)((ToolStripMenuItem)sender).Tag;
+		    var highLight = (Highlight)((RadMenuItem)sender).Tag;
 		    for (int i = 0; i < _directivesViewer.SelectedItems.Count; i++)
-			    _directivesViewer.ItemListView.SelectedItems[i].BackColor = Color.FromArgb(highLight.Color);
-	    }
+			    
+		    foreach (GridViewCellInfo cell in _directivesViewer.radGridView1.SelectedRows[i].Cells)
+		    {
+			    cell.Style.CustomizeFill = true;
+			    cell.Style.BackColor = Color.FromArgb(highLight.Color);
+		    }
+		}
 
 	    #endregion
 
@@ -610,7 +608,7 @@ namespace CAS.UI.UIControls.ForecastControls
 	    {
 		    if (_directivesViewer.SelectedItems.Count <= 0) return;
 
-		    RequestForQuotation wp = (RequestForQuotation)((ToolStripMenuItem)sender).Tag;
+		    RequestForQuotation wp = (RequestForQuotation)((RadMenuItem)sender).Tag;
 
 		    PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
 	    }
@@ -710,15 +708,15 @@ namespace CAS.UI.UIControls.ForecastControls
 				    //Добавление нового рабочего пакета в коллекцию открытых рабочих пакетов
 				    _openPubWorkPackages.Add(wp);
 				    //Создание пункта в меню открытых рабочих пакетов
-				    ToolStripMenuItem item = new ToolStripMenuItem(wp.Title);
+				    var item = new RadMenuItem(wp.Title);
 				    item.Click += AddToWorkPackageItemClick;
 				    item.Tag = wp;
-				    _toolStripMenuItemsWorkPackages.DropDownItems.Add(item);
+				    _toolStripMenuItemsWorkPackages.Items.Add(item);
 
 				    foreach (NextPerformance nextPerformance in wpItems)
 				    {
 					    nextPerformance.BlockedByPackage = wp;
-					    _directivesViewer.UpdateItemColor(nextPerformance);
+					    _directivesViewer.UpdateItemColor();
 				    }
 				    ReferenceEventArgs refArgs = new ReferenceEventArgs();
 				    refArgs.TypeOfReflection = ReflectionTypes.DisplayInNew;
@@ -785,8 +783,8 @@ namespace CAS.UI.UIControls.ForecastControls
 	    ///<param name="resultCollection"></param>
 	    private void FilterItems(IEnumerable<NextPerformance> initialCollection, ICommonCollection<NextPerformance> resultCollection)
 	    {
-		    if (_filter == null || _filter.Count == 0)
-		    {
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
+			{
 			    resultCollection.Clear();
 			    resultCollection.AddRange(initialCollection);
 			    return;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
@@ -13,23 +14,23 @@ using SmartCore.Entities.General.Atlbs;
 
 namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 {
-    ///<summary>
-    ///</summary>
-    [ToolboxItem(false)]
-    public partial class AllATLBListScreen : ScreenControl
-    {
-        #region Fields
+	///<summary>
+	///</summary>
+	[ToolboxItem(false)]
+	public partial class AllATLBListScreen : ScreenControl
+	{
+		#region Fields
 
-        private CommonCollection<ATLB> _itemsArray = new CommonCollection<ATLB>();
+		private CommonCollection<ATLB> _itemsArray = new CommonCollection<ATLB>();
 
-        private ATLBListView _directivesViewer;
+		private ATLBListView _directivesViewer;
 
-        private ContextMenuStrip _contextMenuStrip;
-        private ToolStripMenuItem _toolStripMenuItemTitle;
-       
-        private ToolStripMenuItem _toolStripMenuItemProperties;
-        private ToolStripSeparator _toolStripSeparator1;
-        private ToolStripSeparator _toolStripSeparator2;
+		private ContextMenuStrip _contextMenuStrip;
+		private ToolStripMenuItem _toolStripMenuItemTitle;
+	   
+		private ToolStripMenuItem _toolStripMenuItemProperties;
+		private ToolStripSeparator _toolStripSeparator1;
+		private ToolStripSeparator _toolStripSeparator2;
 
 		#endregion
 
@@ -40,9 +41,9 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 		/// Конструктор по умолчанию
 		///</summary>
 		private AllATLBListScreen()
-        {
-            InitializeComponent();
-        }
+		{
+			InitializeComponent();
+		}
 		#endregion
 
 		#region public AllATLBListScreen(ATLB currentAtlb)  : this()
@@ -51,17 +52,17 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 		///</summary>
 		///<param name="currentOperator">Бортовой журнал, соержащий полеты</param>
 		public AllATLBListScreen(Operator oper)
-            : this()
-        {
-            if (oper == null)
-                throw new ArgumentNullException("currentOperator", "Cannot display null-currentOperator");
+			: this()
+		{
+			if (oper == null)
+				throw new ArgumentNullException("currentOperator", "Cannot display null-currentOperator");
 
-            CurrentOperator = oper;
-            StatusTitle = "ATLBEvent";
+			CurrentOperator = oper;
+			StatusTitle = "ATLBEvent";
 
-            InitListView();
-            UpdateInformation();
-        }
+			InitListView();
+			UpdateInformation();
+		}
 
 		#endregion
 
@@ -91,45 +92,45 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
 		#region public override void DisposeScreen()
 		public override void DisposeScreen()
-        {
-            if (AnimatedThreadWorker.IsBusy)
-                AnimatedThreadWorker.CancelAsync();
-            AnimatedThreadWorker.Dispose();
+		{
+			if (AnimatedThreadWorker.IsBusy)
+				AnimatedThreadWorker.CancelAsync();
+			AnimatedThreadWorker.Dispose();
 
-            _itemsArray.Clear();
-            _itemsArray = null;
+			_itemsArray.Clear();
+			_itemsArray = null;
 
-            
-            if (_toolStripMenuItemTitle != null) _toolStripMenuItemTitle.Dispose();
-            if (_toolStripMenuItemProperties != null) _toolStripMenuItemProperties.Dispose();
-            if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
-            if (_toolStripSeparator2 != null) _toolStripSeparator2.Dispose();
-            if(_contextMenuStrip != null) _contextMenuStrip.Dispose();
+			
+			if (_toolStripMenuItemTitle != null) _toolStripMenuItemTitle.Dispose();
+			if (_toolStripMenuItemProperties != null) _toolStripMenuItemProperties.Dispose();
+			if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
+			if (_toolStripSeparator2 != null) _toolStripSeparator2.Dispose();
+			if(_contextMenuStrip != null) _contextMenuStrip.Dispose();
 
-            if (_directivesViewer != null) _directivesViewer.DisposeView();
+			if (_directivesViewer != null) _directivesViewer.Dispose();
 
-            Dispose(true);
-        }
+			Dispose(true);
+		}
 
-        #endregion
+		#endregion
 
-        #region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if(e.Cancelled)
-                return;
+		#region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		{
+			if(e.Cancelled)
+				return;
 			_directivesViewer.SetItemsArray(_itemsArray.ToArray());
-            headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
-            _directivesViewer.Focus();
-        }
-        #endregion
+			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
+			_directivesViewer.Focus();
+		}
+		#endregion
 
-        #region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
-        protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
-        {
-            _itemsArray.Clear();
+		#region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
+		protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
+		{
+			_itemsArray.Clear();
 
-            AnimatedThreadWorker.ReportProgress(0, "load ATLBs");
+			AnimatedThreadWorker.ReportProgress(0, "load ATLBs");
 
 			//         var aircrafts = GlobalObjects.AircraftsCore.GetAllAircrafts();
 			//         foreach (var aircraft in aircrafts)
@@ -141,133 +142,129 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
 			AnimatedThreadWorker.ReportProgress(40, "filter ATLBs");
 
-            AnimatedThreadWorker.ReportProgress(70, "filter ATLBs");
+			AnimatedThreadWorker.ReportProgress(70, "filter ATLBs");
 
-            AnimatedThreadWorker.ReportProgress(100, "Complete");
-        }
-        #endregion
+			AnimatedThreadWorker.ReportProgress(100, "Complete");
+		}
+		#endregion
 
-        #region private void AddNew()
-        private void AddNew()
-        {
-            ATLB newATLB = new ATLB(CurrentAircraft);
-            CommonEditorForm form = new CommonEditorForm(newATLB);
-            form.ShowDialog();
-            if (newATLB.ItemId > 0)
-            {
-                AnimatedThreadWorker.RunWorkerAsync();
-            }
-        }
-        #endregion
+		#region private void AddNew()
+		private void AddNew()
+		{
+			ATLB newATLB = new ATLB(CurrentAircraft);
+			CommonEditorForm form = new CommonEditorForm(newATLB);
+			form.ShowDialog();
+			if (newATLB.ItemId > 0)
+			{
+				AnimatedThreadWorker.RunWorkerAsync();
+			}
+		}
+		#endregion
 
-        #region private void DeleteSelected()
-        private void DeleteSelected()
-        {
-            if (_directivesViewer.SelectedItems == null)
-                return;
-            DialogResult confirmResult = MessageBox.Show(_directivesViewer.SelectedItem != null
-                        ? "Do you really want to delete ATLB " + _directivesViewer.SelectedItem.ATLBNo + "?"
-                        : "Do you really want to delete selected ATLBs? ", "Confirm delete operation",
-                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-            if (confirmResult == DialogResult.Yes)
-            {
-                int count = _directivesViewer.SelectedItems.Count;
-                try
-                {
+		#region private void DeleteSelected()
+		private void DeleteSelected()
+		{
+			if (_directivesViewer.SelectedItems == null)
+				return;
+			DialogResult confirmResult = MessageBox.Show(_directivesViewer.SelectedItem != null
+						? "Do you really want to delete ATLB " + _directivesViewer.SelectedItem.ATLBNo + "?"
+						: "Do you really want to delete selected ATLBs? ", "Confirm delete operation",
+					MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+			if (confirmResult == DialogResult.Yes)
+			{
+				int count = _directivesViewer.SelectedItems.Count;
+				try
+				{
 
-                    List<ATLB> selectedItems = new List<ATLB>(_directivesViewer.SelectedItems);
-                    _directivesViewer.ItemListView.BeginUpdate();
-                    for (int i = 0; i < count; i++)
-                    {
-                        GlobalObjects.CasEnvironment.Manipulator.Delete(selectedItems[i]);
-                    }
-                    _directivesViewer.ItemListView.EndUpdate();
-                }
-                catch (Exception ex)
-                {
-                    Program.Provider.Logger.Log("Error while deleting data", ex);
-                    return;
-                }
-                AnimatedThreadWorker.RunWorkerAsync();
-            }
-        }
-        #endregion
+					List<ATLB> selectedItems = new List<ATLB>(_directivesViewer.SelectedItems);
+					_directivesViewer.radGridView1.BeginUpdate();
+					GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
+					_directivesViewer.radGridView1.EndUpdate();
+				}
+				catch (Exception ex)
+				{
+					Program.Provider.Logger.Log("Error while deleting data", ex);
+					return;
+				}
+				AnimatedThreadWorker.RunWorkerAsync();
+			}
+		}
+		#endregion
 
-        #region private void ButtonDeleteClick(object sender, EventArgs e)
+		#region private void ButtonDeleteClick(object sender, EventArgs e)
+		
+		private void ButtonDeleteClick(object sender, EventArgs e)
+		{
+			DeleteSelected();
+		}
 
-        private void ButtonDeleteClick(object sender, EventArgs e)
-        {
-            DeleteSelected();
-        }
+		#endregion
 
-        #endregion
+		#region private void InitListView()
 
-        #region private void InitListView()
-
-        private void InitListView()
-        {
-            _directivesViewer = new ATLBListView(CurrentAircraft, true);
-            _directivesViewer.TabIndex = 2;
-            _directivesViewer.ContextMenuStrip = _contextMenuStrip;
-            _directivesViewer.Location = new Point(panel1.Left, panel1.Top);
-            _directivesViewer.Dock = DockStyle.Fill;
-			_directivesViewer.IgnoreAutoResize = true;
+		private void InitListView()
+		{
+			_directivesViewer = new ATLBListView(CurrentAircraft, true);
+			_directivesViewer.TabIndex = 2;
+			_directivesViewer.ContextMenuStrip = _contextMenuStrip;
+			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
+			_directivesViewer.Dock = DockStyle.Fill;
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
-            Controls.Add(_directivesViewer);
-            panel1.Controls.Add(_directivesViewer);
-        }
+			Controls.Add(_directivesViewer);
+			panel1.Controls.Add(_directivesViewer);
+		}
 
-        #endregion
+		#endregion
 
-        #region private void DirectivesViewerSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
+		#region private void DirectivesViewerSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
 
-        private void DirectivesViewerSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
-        {
-            headerControl.EditButtonEnabled = _directivesViewer.SelectedItems.Count > 0;
-            headerControl.PrintButtonEnabled = _directivesViewer.SelectedItems.Count > 0;
-        }
+		private void DirectivesViewerSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
+		{
+			headerControl.EditButtonEnabled = _directivesViewer.SelectedItems.Count > 0;
+			headerControl.PrintButtonEnabled = _directivesViewer.SelectedItems.Count > 0;
+		}
 
-        #endregion
+		#endregion
 
-        #region private void UpdateInformation()
-        /// <summary>
-        /// Происзодит обновление отображения элементов
-        /// </summary>
-        private void UpdateInformation()
-        {
-           AnimatedThreadWorker.RunWorkerAsync();
-        }
-        #endregion
+		#region private void UpdateInformation()
+		/// <summary>
+		/// Происзодит обновление отображения элементов
+		/// </summary>
+		private void UpdateInformation()
+		{
+		   AnimatedThreadWorker.RunWorkerAsync();
+		}
+		#endregion
 
-        #region private void HeaderControlButtonReloadClick(object sender, EventArgs e)
+		#region private void HeaderControlButtonReloadClick(object sender, EventArgs e)
 
-        private void HeaderControlButtonReloadClick(object sender, EventArgs e)
-        {
-            AnimatedThreadWorker.RunWorkerAsync();
-        }
-        #endregion
+		private void HeaderControlButtonReloadClick(object sender, EventArgs e)
+		{
+			AnimatedThreadWorker.RunWorkerAsync();
+		}
+		#endregion
 
-        #region private void HeaderControlButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
-        private void HeaderControlButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
-        {
-            ReferenceEventArgs args = new ReferenceEventArgs();
-            args.TypeOfReflection = ReflectionTypes.DisplayInNew;
-            args.DisplayerText = ". ATLB List Report";
-            //args.RequestedEntity = new DispatcheredATLBReport(new ATLBBuilder(ATLBFlightsViewer.SelectedItem));
-            e.Cancel = true;
-        }
-        #endregion
+		#region private void HeaderControlButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
+		private void HeaderControlButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			ReferenceEventArgs args = new ReferenceEventArgs();
+			args.TypeOfReflection = ReflectionTypes.DisplayInNew;
+			args.DisplayerText = ". ATLB List Report";
+			//args.RequestedEntity = new DispatcheredATLBReport(new ATLBBuilder(ATLBFlightsViewer.SelectedItem));
+			e.Cancel = true;
+		}
+		#endregion
 
-        #region private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
+		#region private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 
-        private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
-        {
-            AddNew();
-            e.Cancel = true;
-        }
+		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			AddNew();
+			e.Cancel = true;
+		}
 
-        #endregion
+		#endregion
 
-        #endregion
-    }
+		#endregion
+	}
 }

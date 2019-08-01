@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Reflection;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using SmartCore.Auxiliary;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Entities.Collections;
@@ -12,7 +12,6 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Atlbs;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Files;
 using SmartCore.Management;
 

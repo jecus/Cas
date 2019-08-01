@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
+using EntityCore.DTO.General;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.General.Attributes;
@@ -16,7 +17,7 @@ namespace SmartCore.Entities.General.Accessory
     /// Класс описывает воздушное судно
     /// </summary>
     [Table("Components","dbo","ItemId")]
-	[Dto(typeof(ComponentDTO))]
+	[Dto(typeof(BaseComponentDTO))]
     [Condition("IsBaseComponent", "1")]
     [Condition("IsDeleted", "0")]
     public class BaseComponent: Component, IComparable<BaseComponent>, IComponentContainer, IWorkPackageItemFilterParams

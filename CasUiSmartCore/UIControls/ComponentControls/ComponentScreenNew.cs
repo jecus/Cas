@@ -9,8 +9,6 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CASReports.Builders;
 using CASTerms;
-using EFCore.DTO.General;
-using EFCore.Filter;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;

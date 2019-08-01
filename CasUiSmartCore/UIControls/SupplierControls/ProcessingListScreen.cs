@@ -16,6 +16,7 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Filters;
+using Telerik.WinControls.UI;
 using Component = SmartCore.Entities.General.Accessory.Component;
 using ComponentCollection = SmartCore.Entities.Collections.ComponentCollection;
 
@@ -42,8 +43,8 @@ namespace CAS.UI.UIControls.SupplierControls
 		private TransferRecordCollection _waitRemoveConfirmTransfers = new TransferRecordCollection();
 
 
-		private ContextMenuStrip _contextMenuStrip;
-		private ToolStripMenuItem _toolStripMenuItemMoveTo;
+		private RadDropDownMenu _contextMenuStrip;
+		private RadMenuItem _toolStripMenuItemMoveTo;
 
 		#endregion
 
@@ -87,9 +88,15 @@ namespace CAS.UI.UIControls.SupplierControls
 				TabIndex = 2,
 				Location = new Point(panel1.Left, panel1.Top),
 				Dock = DockStyle.Fill,
-				ContextMenuStrip = _contextMenuStrip,
-				IgnoreAutoResize = true
+				CustomMenu = _contextMenuStrip
 			};
+			
+			_directivesViewer.MenuOpeningAction = () =>
+			{
+				if (_directivesViewer.SelectedItems.Count <= 0)
+					return;
+			};
+
 			panel1.Controls.Add(_directivesViewer);
 		}
 
@@ -99,8 +106,8 @@ namespace CAS.UI.UIControls.SupplierControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new ContextMenuStrip();
-			_toolStripMenuItemMoveTo = new ToolStripMenuItem();
+			_contextMenuStrip = new RadDropDownMenu();
+			_toolStripMenuItemMoveTo = new RadMenuItem();
 
 			// 
 			// toolStripMenuItemInstallToAnAircraft
@@ -112,12 +119,8 @@ namespace CAS.UI.UIControls.SupplierControls
 			// 
 			// contextMenuStrip
 			// 
-			_contextMenuStrip.Items.AddRange(new ToolStripItem[]
-			{
-				_toolStripMenuItemMoveTo
-			});
+			_contextMenuStrip.Items.AddRange(_toolStripMenuItemMoveTo);
 			_contextMenuStrip.Size = new Size(179, 176);
-			_contextMenuStrip.Opening += ContextMenuStripOpen;
 		}
 
 		#endregion
@@ -325,16 +328,6 @@ namespace CAS.UI.UIControls.SupplierControls
 				}
 			}
 		}
-		#endregion
-
-		#region private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-
-		private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-		{
-			if (_directivesViewer.SelectedItems.Count <= 0)
-				e.Cancel = true;
-		}
-
 		#endregion
 
 		#region private void ToolStripMenuItemInstallToAnAircraftClick(object sender, EventArgs e)

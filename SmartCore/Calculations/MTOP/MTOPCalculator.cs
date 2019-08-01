@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SmartCore.Aircrafts;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -13,12 +14,14 @@ namespace SmartCore.Calculations.MTOP
 	public class MTOPCalculator : IMTOPCalculator
 	{
 		private readonly ICalculator _calculator;
+		private readonly IAircraftsCore _aircraftsCore;
 
 		#region Constructor
 
-		public MTOPCalculator(ICalculator calculator)
+		public MTOPCalculator(ICalculator calculator, IAircraftsCore aircraftsCore)
 		{
 			_calculator = calculator;
+			_aircraftsCore = aircraftsCore;
 		}
 
 		#endregion
@@ -466,9 +469,6 @@ namespace SmartCore.Calculations.MTOP
 
 		public void CalculateDirective(MaintenanceDirective directive,AverageUtilization averageUtilization)
 		{
-			//if (directive.ItemId == 82342)
-				//MessageBox.Show("qwe");
-
 			double hours = 0, cycles = 0, days = 0;
 			double hoursPhase = -1, cyclesPhase = -1, daysPhase = -1;
 
@@ -476,17 +476,24 @@ namespace SmartCore.Calculations.MTOP
 
 			var thresh = !directive.Threshold.FirstPerformanceSinceNew.IsNullOrZero() ? directive.Threshold.FirstPerformanceSinceNew : directive.Threshold.FirstPerformanceSinceEffectiveDate;
 
+			var threshHours = thresh.Hours;
+			if (directive.APUCalc && threshHours.HasValue)
+			{
+				var aircraft = _aircraftsCore.GetAircraftById(directive.ParentBaseComponent.ParentAircraftId);
+				threshHours = (int?)(thresh.Hours / aircraft.APUFH);
+			}
+
 			if (thresh.Days.HasValue)
 			{
 				hours = (double)(thresh.Days * averageUtilization.Hours);
 				cycles = hours / averageUtilization.Cycles;
 				days = (double) thresh.Days;
 			}
-			else if (thresh.Hours.HasValue)
+			else if (threshHours.HasValue)
 			{
-				hours = (double) thresh.Hours;
+				hours = (double)threshHours;
 				cycles = hours / averageUtilization.Cycles;
-				days = (double)(thresh.Hours / averageUtilization.HoursPerDay);
+				days = (double)(threshHours / averageUtilization.HoursPerDay);
 			}
 			else if(thresh.Cycles.HasValue)
 			{
@@ -496,13 +503,13 @@ namespace SmartCore.Calculations.MTOP
 			}
 
 
-			if (cycles > thresh.Cycles && hours > thresh.Hours)
+			if (cycles > thresh.Cycles && hours > threshHours)
 			{
 				var cycleDays = (int)(cycles / (averageUtilization.Hours / averageUtilization.CyclesPerDay));
 
 				if (cycleDays > days)
 				{
-					daysPhase = (int) (thresh.Hours / averageUtilization.HoursPerDay);
+					daysPhase = (int) (threshHours / averageUtilization.HoursPerDay);
 					cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
 					hoursPhase = daysPhase * averageUtilization.Hours;
 				}
@@ -512,9 +519,9 @@ namespace SmartCore.Calculations.MTOP
 					cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
 					hoursPhase = daysPhase * averageUtilization.Hours;
 
-					if (hoursPhase > thresh.Hours)
+					if (hoursPhase > threshHours)
 					{
-						daysPhase = (int)(thresh.Hours / averageUtilization.HoursPerDay);
+						daysPhase = (int)(threshHours / averageUtilization.HoursPerDay);
 						cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
 						hoursPhase = daysPhase * averageUtilization.Hours;
 					}
@@ -526,16 +533,16 @@ namespace SmartCore.Calculations.MTOP
 				cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
 				hoursPhase = daysPhase * averageUtilization.Hours;
 
-				if (hoursPhase > thresh.Hours)
+				if (hoursPhase > threshHours)
 				{
-					daysPhase = (int)(thresh.Hours / averageUtilization.HoursPerDay);
+					daysPhase = (int)(threshHours / averageUtilization.HoursPerDay);
 					cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
 					hoursPhase = daysPhase * averageUtilization.Hours;
 				}
 			}
-			else if (hours > thresh.Hours)
+			else if (hours > threshHours)
 			{
-				daysPhase = (int)(thresh.Hours / averageUtilization.HoursPerDay);
+				daysPhase = (int)(threshHours / averageUtilization.HoursPerDay);
 				cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
 				hoursPhase = daysPhase * averageUtilization.Hours;
 
@@ -551,11 +558,23 @@ namespace SmartCore.Calculations.MTOP
 			directive.PhaseThresh.Cycles = (int)Math.Round(cyclesPhase > -1 ? cyclesPhase : cycles);
 			directive.PhaseThresh.Days = (int)Math.Round(daysPhase > -1 ? daysPhase : days);
 
+			
+
 			var repeat = directive.Threshold.RepeatInterval;
 			directive.PhaseRepeat = new Lifelength(0, 0, 0);
 
 			if (!repeat.IsNullOrZero())
 			{
+
+				var repeatHours = repeat.Hours;
+
+				if (directive.APUCalc && repeatHours.HasValue)
+				{
+					var aircraft = _aircraftsCore.GetAircraftById(directive.ParentBaseComponent.ParentAircraftId);
+					//directive.PhaseRepeat = new Lifelength(repeat);
+					repeatHours = (int?)(repeatHours / aircraft.APUFH);
+				}
+
 				hoursPhase = -1;
 				cyclesPhase = -1;
 				daysPhase = -1;
@@ -566,11 +585,11 @@ namespace SmartCore.Calculations.MTOP
 					cycles = hours / averageUtilization.Cycles;
 					days = (double) repeat.Days;
 				}
-				else if (repeat.Hours.HasValue)
+				else if (repeatHours.HasValue)
 				{
-					hours = (double) repeat.Hours;
+					hours = (double)repeatHours;
 					cycles = hours / averageUtilization.Cycles;
-					days = (double)(repeat.Hours / averageUtilization.HoursPerDay);
+					days = (double)(repeatHours / averageUtilization.HoursPerDay);
 				}
 				else if (repeat.Cycles.HasValue)
 				{
@@ -580,13 +599,13 @@ namespace SmartCore.Calculations.MTOP
 				}
 
 
-				if (cycles > repeat.Cycles && hours > repeat.Hours)
+				if (cycles > repeat.Cycles && hours > repeatHours)
 				{
 					var cycleDays = (int) (cycles / (averageUtilization.Hours / averageUtilization.CyclesPerDay));
 
 					if (cycleDays > days)
 					{
-						daysPhase = (int)(repeat.Hours / averageUtilization.HoursPerDay);
+						daysPhase = (int)(repeatHours / averageUtilization.HoursPerDay);
 						cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
 						hoursPhase = daysPhase * averageUtilization.Hours;
 					}
@@ -596,9 +615,9 @@ namespace SmartCore.Calculations.MTOP
 						cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
 						hoursPhase = daysPhase * averageUtilization.Hours;
 
-						if (hoursPhase > repeat.Hours)
+						if (hoursPhase > repeatHours)
 						{
-							daysPhase = (int)(repeat.Hours / averageUtilization.HoursPerDay);
+							daysPhase = (int)(repeatHours / averageUtilization.HoursPerDay);
 							cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
 							hoursPhase = daysPhase * averageUtilization.Hours;
 						}
@@ -610,16 +629,16 @@ namespace SmartCore.Calculations.MTOP
 					cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
 					hoursPhase = daysPhase * averageUtilization.Hours;
 
-					if (hoursPhase > repeat.Hours)
+					if (hoursPhase > repeatHours)
 					{
-						daysPhase = (int)(repeat.Hours / averageUtilization.HoursPerDay);
+						daysPhase = (int)(repeatHours / averageUtilization.HoursPerDay);
 						cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
 						hoursPhase = daysPhase * averageUtilization.Hours;
 					}
 				}
-				else if (hours > repeat.Hours)
+				else if (hours > repeatHours)
 				{
-					daysPhase = (int)(repeat.Hours / averageUtilization.HoursPerDay);
+					daysPhase = (int)(repeatHours / averageUtilization.HoursPerDay);
 					cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
 					hoursPhase = daysPhase * averageUtilization.Hours;
 
@@ -641,21 +660,13 @@ namespace SmartCore.Calculations.MTOP
 		public void CalculatePhase(CommonCollection<MaintenanceDirective> directives, List<MTOPCheck> checks, AverageUtilization averageUtilization, bool isZeroPhase = false)
 		{
 			foreach (var directive in directives)
-			{
-				//if (directive.ItemId == 82342)
-					//MessageBox.Show("qwe");
 				calculatePhase(directive, checks, averageUtilization, isZeroPhase);
-			}
 		}
 
 		public void CalculatePhaseWithPerformance(CommonCollection<MaintenanceDirective> directives, List<MTOPCheck> checks, AverageUtilization averageUtilization, DateTime from, DateTime to, bool isZeroPhase = false)
 		{
 			foreach (var directive in directives)
 			{
-				if (directive.ItemId == 82342)
-				{
-					//MessageBox.Show("qwe");
-				}
 				calculatePhase(directive, checks, averageUtilization, isZeroPhase);
 
 				directive.MtopNextPerformances = new List<NextPerformance>();

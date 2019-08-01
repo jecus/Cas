@@ -8,9 +8,9 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.DataGridViewElements;
 using CASTerms;
-using EFCore.DTO.Dictionaries;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.DTO.Dictionaries;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
@@ -460,7 +460,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			if (_formType == OrderFormType.Initial)
 			{
 
-				if (listViewInitialItems.ListViewItemList.Count <= 0)
+				if (listViewInitialItems.ItemsCount <= 0)
 				{
 					MessageBox.Show("Please select a kits for initional order", (string)new GlobalTermsProvider()["SystemName"],
 						MessageBoxButtons.OK,
@@ -472,7 +472,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				//сохранение запросного ордера
 				GlobalObjects.CasEnvironment.NewKeeper.Save(_addedInitial);
 
-				if (listViewKits.ListViewItemList.Count <= 0)
+				if (listViewKits.ItemsCount <= 0)
 				{
 					MessageBox.Show("Please select a kits for initional order", (string)new GlobalTermsProvider()["SystemName"],
 						MessageBoxButtons.OK,
@@ -513,7 +513,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			}
 			else if (_formType == OrderFormType.Quotation)
 			{
-				if (listViewQuatationItems.ListViewItemList.Count <= 0)
+				if (listViewQuatationItems.ItemsCount <= 0)
 				{
 					MessageBox.Show("Please select a kits for initional order", (string)new GlobalTermsProvider()["SystemName"],
 						MessageBoxButtons.OK,
@@ -523,7 +523,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				ApplyRequeslData();
 				GlobalObjects.CasEnvironment.NewKeeper.Save(_addedQuotation);
 
-				if (listViewKits.ListViewItemList.Count <= 0)
+				if (listViewKits.ItemsCount <= 0)
 				{
 					MessageBox.Show("Please select a kits for initional order", (string)new GlobalTermsProvider()["SystemName"],
 						MessageBoxButtons.OK,

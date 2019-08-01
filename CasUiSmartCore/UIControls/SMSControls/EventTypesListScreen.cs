@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
@@ -61,7 +62,7 @@ namespace CAS.UI.UIControls.SMSControls
         {
             if (e.Cancelled)
                 return;
-            DirectivesViewer.SetItemsArray(InitialDirectiveArray);
+            DirectivesViewer.SetItemsArray(InitialDirectiveArray.OfType<BaseEntityObject>());
 
             if (CurrentAircraft != null)
             {
@@ -71,7 +72,7 @@ namespace CAS.UI.UIControls.SMSControls
             }
             DirectivesViewer.Focus();
 
-            headerControl.PrintButtonEnabled = DirectivesViewer.ItemListView.Items.Count != 0;
+            headerControl.PrintButtonEnabled = DirectivesViewer.ItemsCount != 0;
         }
         #endregion
 

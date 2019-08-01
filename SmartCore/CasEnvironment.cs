@@ -8,16 +8,12 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.ServiceModel;
 using System.Text.RegularExpressions;
 using System.Threading;
-using EFCore.Contract;
-using EFCore.DTO.Dictionaries;
-using EFCore.DTO.General;
-using EFCore.Filter;
-using EFCore.UnitOfWork;
-using EFCore.UnitOfWork.Providers;
-using Microsoft.SqlServer.Management.Smo;
+using CAS.UI.Helpers;
+using EntityCore.DTO.General;
+using EntityCore.DTO.Dictionaries;
+using EntityCore.Filter;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Hangar;
 using SmartCore.Entities.General.Store;
@@ -28,19 +24,15 @@ using SmartCore.AuditMongo.Repository;
 using SmartCore.Entities.General;
 using SmartCore.Entities.Collections;
 using SmartCore.Calculations;
-using SmartCore.Contract;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities;
 using SmartCore.Entities.NewLoader;
 using SmartCore.ObjectCache;
 using SmartCore.Queries;
-using User = Microsoft.SqlServer.Management.Smo.User;
 
 namespace SmartCore
 {
-
-
-    /// <summary>
+	/// <summary>
     /// Окружение системы CAS. Движок CAS
     /// </summary>
     public class CasEnvironment:ICasEnvironment
@@ -53,9 +45,7 @@ namespace SmartCore
         /// </summary>
         public CasEnvironment()
         {
-            _databaseManager = new DatabaseManager();
-
-            _dictionaries = new CommonDictionariesCache();
+	        _dictionaries = new CommonDictionariesCache();
         }
         #endregion
 
@@ -104,20 +94,12 @@ namespace SmartCore
 
         #endregion
 
-        /*
-         * Работа с БД: Свойства, глобальные объекты
-         */
-
-        #region public DatabaseManager DatabaseManager { get; }
-        /// <summary>
-        /// Управление базой данных
-        /// </summary>
-        private DatabaseManager _databaseManager;
-        /// <summary>
-        /// Управление базой данных
-        /// </summary>
-        public DatabaseManager DatabaseManager { get { return _databaseManager ?? (_databaseManager = new DatabaseManager()); } }
-		#endregion
+        private ApiProvider _apiProvider;
+		public ApiProvider ApiProvider
+		{
+			get { return _apiProvider; }
+			set { _apiProvider = value; }
+		}
 
 
 		#region public IAuditRepository AuditRepository { get; set; }
@@ -138,12 +120,6 @@ namespace SmartCore
         public void Disconnect()
         {
             _exit = true;
-
-            if (_databaseManager != null)
-            {
-                _databaseManager.Disconnect();
-				Reset();
-            }
 
             if(_tempFileMonitoringThread != null)
             {
@@ -173,105 +149,41 @@ namespace SmartCore
         /// <param name="userName"></param>
         /// <param name="pass"></param>
         /// <param name="database"></param>
-        public void Connect(String serverName, String userName, String pass, String database)
+        public void Connect(string serverName, string userName, string pass, string database)
         {
-			//var section = ConfigurationManager.GetSection("connectionSettings") as NameValueCollection;
-	       // _ipServer = section["IpServer"];
 	        _ipServer = serverName;
 
-	        var connection = GetWcfConnection();
+	        //_apiProvider = new ApiProvider(serverName);
 
-	        var user = GetUser(userName, pass);
+	        _apiProvider.CheckAPIConnection();
+
+	        var user = _apiProvider.GetUserAsync(userName, pass);
 	        if(user == null)
 		        throw new Exception($"Invalid combination of login and password");
 
 	        IdentityUser = user;
-
 	        AuditRepository.WriteAsync(new Entities.User(user), AuditOperation.SignIn, user);
 
-			//_unitOfWork = new UnitOfWork(new DatabaseProvider());
-			_unitOfWork = new UnitOfWork(new WcfProvider(_ipServer));
 	        _newLoader = new NewLoader(this);
-
-	        
 		}
 		#endregion
-
-
-		public ILoginService GetSeviceUser()
-		{
-			var binding = new BasicHttpBinding();
-			var endPoint = new EndpointAddress($"http://{_ipServer}/LoginService/LoginService.svc");
-			var channelFactoryFoo = new ChannelFactory<ILoginService>(binding, endPoint);
-			return channelFactoryFoo.CreateChannel();
-		}
-
-		public List<UserDTO> GetAllUsers()
-		{
-			var binding = new BasicHttpBinding()
-			{
-				CloseTimeout = new TimeSpan(0, 10, 0),
-				OpenTimeout = new TimeSpan(0, 10, 0),
-				ReceiveTimeout = new TimeSpan(0, 10, 0),
-				SendTimeout = new TimeSpan(0, 10, 0),
-				MaxBufferPoolSize = Int32.MaxValue,
-				MaxBufferSize = Int32.MaxValue,
-				MaxReceivedMessageSize = Int32.MaxValue,
-				TransferMode = TransferMode.Streamed,
-				ReaderQuotas =
-				{
-					MaxArrayLength = Int32.MaxValue,
-					MaxBytesPerRead = Int32.MaxValue,
-					MaxDepth = Int32.MaxValue,
-					MaxStringContentLength = Int32.MaxValue,
-					MaxNameTableCharCount = Int32.MaxValue
-				}
-			};
-			var endPoint = new EndpointAddress($"http://{_ipServer}/LoginService/LoginService.svc");
-			var channelFactoryFoo = new ChannelFactory<ILoginService>(binding, endPoint);
-			return channelFactoryFoo.CreateChannel().GetAllList();
-		}
-
-		private UserDTO GetUser(string login, string password)
-	    {
-		    return GetSeviceUser().GetUser(login, password);
-	    }
 
 		public void UpdateUser(string password)
 		{
-			GetSeviceUser().UpdatePassword(IdentityUser.ItemId, password);
+			_apiProvider.UpdatePassword(IdentityUser.ItemId, password);
 		}
 
-		#region public Connection GetWcfConnection()
-
-		private Connection GetWcfConnection()
-		{
-			try
-			{
-				var binding = new BasicHttpBinding();
-				var endPoint = new EndpointAddress($"http://{_ipServer}/ConnectionSevice/ConnectionService.svc");
-				var channelFactoryFoo = new ChannelFactory<IConnectionService>(binding, endPoint);
-				return channelFactoryFoo.CreateChannel().GetConnection();
-			}
-			catch
-			{
-				throw new Exception($"WCF was not found on server");
-			}
-		}
-
-		#endregion
-
-        #region public void CheckTablesFor(Type type)
+		#region public void CheckTablesFor(Type type)
         public void CheckTablesFor(Type type)
         {
-            _databaseManager.CheckTableFor(type);
+           
         }
         #endregion
 
         #region public void CreateTablesFor(Type type)
         public void CreateTablesFor(Type type)
         {
-            _databaseManager.CreateTableFor(type);
+            
         }
         #endregion
 
@@ -283,7 +195,7 @@ namespace SmartCore
         public override string ToString()
         {
             //return "Orenair, CasDemo at Dev\\Dev2005, 15 aircrafts";
-            return _databaseManager.Database != null ? _databaseManager.Database.ToString() : "Not connected";
+            return "";
         }
 		#endregion
 
@@ -302,174 +214,43 @@ namespace SmartCore
 
 	    public DataSet Execute(string sql)
 	    {
-			try
-			{
-				var binding = new BasicHttpBinding()
-				{
-					CloseTimeout = new TimeSpan(0, 10, 0),
-					OpenTimeout = new TimeSpan(0, 10, 0),
-					ReceiveTimeout = new TimeSpan(0, 10, 0),
-					SendTimeout = new TimeSpan(0, 10, 0),
-					MaxBufferPoolSize = Int32.MaxValue,
-					MaxBufferSize = Int32.MaxValue,
-					MaxReceivedMessageSize = Int32.MaxValue,
-					TransferMode = TransferMode.Streamed,
-					ReaderQuotas =
-					{
-						MaxArrayLength = Int32.MaxValue,
-						MaxBytesPerRead = Int32.MaxValue,
-						MaxDepth = Int32.MaxValue,
-						MaxStringContentLength = Int32.MaxValue,
-						MaxNameTableCharCount = Int32.MaxValue
-					}
-				};
-				var endPoint = new EndpointAddress($"http://{_ipServer}/ExecutorService/ExecutorService.svc");
-				var channelFactoryFoo = new ChannelFactory<IExecutor>(binding, endPoint);
-				return channelFactoryFoo.CreateChannel().Execute(sql);
-			}
-			catch(Exception ex)
-			{
-				throw new Exception(ex.Message);
-			}
-		}
-
-	    public DataSet Execute(Database database, String query)
-	    {
-		    try
-		    {
-			    var binding = new BasicHttpBinding()
-			    {
-				    CloseTimeout = new TimeSpan(0, 10, 0),
-				    OpenTimeout = new TimeSpan(0, 10, 0),
-				    ReceiveTimeout = new TimeSpan(0, 10, 0),
-				    SendTimeout = new TimeSpan(0, 10, 0),
-				    MaxBufferPoolSize = Int32.MaxValue,
-				    MaxBufferSize = Int32.MaxValue,
-				    MaxReceivedMessageSize = Int32.MaxValue,
-				    TransferMode = TransferMode.Streamed,
-				    ReaderQuotas =
-				    {
-					    MaxArrayLength = Int32.MaxValue,
-					    MaxBytesPerRead = Int32.MaxValue,
-					    MaxDepth = Int32.MaxValue,
-					    MaxStringContentLength = Int32.MaxValue,
-					    MaxNameTableCharCount = Int32.MaxValue
-				    }
-			    };
-				var endPoint = new EndpointAddress($"http://{_ipServer}/ExecutorService/ExecutorService.svc");
-			    var channelFactoryFoo = new ChannelFactory<IExecutor>(binding, endPoint);
-			    return channelFactoryFoo.CreateChannel().Execute(database, query);
-		    }
-		    catch (Exception ex)
-		    {
-			    throw new Exception(ex.Message);
-		    }
+		    return _apiProvider.Execute(sql);
 	    }
 
 	    public DataSet Execute(IEnumerable<DbQuery> dbQueries, out List<ExecutionResultArgs> results)
 	    {
-		    try
-		    {
-			    var binding = new BasicHttpBinding()
-			    {
-				    CloseTimeout = new TimeSpan(0, 10, 0),
-				    OpenTimeout = new TimeSpan(0, 10, 0),
-				    ReceiveTimeout = new TimeSpan(0, 10, 0),
-				    SendTimeout = new TimeSpan(0, 10, 0),
-				    MaxBufferPoolSize = Int32.MaxValue,
-				    MaxBufferSize = Int32.MaxValue,
-				    MaxReceivedMessageSize = Int32.MaxValue,
-				    TransferMode = TransferMode.Streamed,
-				    ReaderQuotas =
-				    {
-					    MaxArrayLength = Int32.MaxValue,
-					    MaxBytesPerRead = Int32.MaxValue,
-					    MaxDepth = Int32.MaxValue,
-					    MaxStringContentLength = Int32.MaxValue,
-					    MaxNameTableCharCount = Int32.MaxValue
-				    }
-			    };
-				var endPoint = new EndpointAddress($"http://{_ipServer}/ExecutorService/ExecutorService.svc");
-			    var channelFactoryFoo = new ChannelFactory<IExecutor>(binding, endPoint);
-			    var res = channelFactoryFoo.CreateChannel();
+		    results = new List<ExecutionResultArgs>();
 
-			    int counter = 0;
+			int counter = 0;
 
-			    var dataset = new DataSet();
+			var dataset = new DataSet();
 
-			    foreach (var query in dbQueries)
-			    {
-				    var dt = res.Execute(query.QueryString).Tables[0];
+			foreach (var query in dbQueries)
+			{
+				var dt = _apiProvider.Execute(query.QueryString).Tables[0];
 
-				    var casTable = new CasDataTable(query.ElementType, query.Branch, query.Branch);
+				var casTable = new CasDataTable(query.ElementType, query.Branch, query.Branch);
 
-				    foreach (DataColumn row in dt.Columns)
-					    casTable.Columns.Add(new DataColumn(row.ColumnName, row.DataType));
+				foreach (DataColumn row in dt.Columns)
+					casTable.Columns.Add(new DataColumn(row.ColumnName, row.DataType));
 
-				    foreach (DataRow row in dt.Rows)
-					    casTable.ImportRow(row);
+				foreach (DataRow row in dt.Rows)
+					casTable.ImportRow(row);
 
-				    dataset.Tables.Add(casTable);
+				dataset.Tables.Add(casTable);
 
-				    counter++;
-			    }
-
-			    results = new List<ExecutionResultArgs>();
-			    return dataset;
+				counter++;
 			}
-		    catch (Exception ex)
-		    {
-			    throw new Exception(ex.Message);
-		    }
+
+			return dataset;
 	    }
 
-	    public DataSet Execute(String query, SqlParameter[] parameters)
+	    public DataSet Execute(string query, SqlParameter[] parameters)
 	    {
-		    try
-		    {
-			    var binding = new BasicHttpBinding()
-			    {
-				    CloseTimeout = new TimeSpan(0, 10, 0),
-				    OpenTimeout = new TimeSpan(0, 10, 0),
-				    ReceiveTimeout = new TimeSpan(0, 10, 0),
-				    SendTimeout = new TimeSpan(0, 10, 0),
-				    MaxBufferPoolSize = Int32.MaxValue,
-				    MaxBufferSize = Int32.MaxValue,
-				    MaxReceivedMessageSize = Int32.MaxValue,
-				    TransferMode = TransferMode.Streamed,
-				    ReaderQuotas =
-				    {
-					    MaxArrayLength = Int32.MaxValue,
-					    MaxBytesPerRead = Int32.MaxValue,
-					    MaxDepth = Int32.MaxValue,
-					    MaxStringContentLength = Int32.MaxValue,
-					    MaxNameTableCharCount = Int32.MaxValue
-				    }
-			    };
-				var endPoint = new EndpointAddress($"http://{_ipServer}/ExecutorService/ExecutorService.svc");
-			    var channelFactoryFoo = new ChannelFactory<IExecutor>(binding, endPoint);
-
-
-			    var p = new List<SerializedSqlParam>();
-			    foreach (var parameter in parameters)
-				    p.Add(new SerializedSqlParam(parameter));
-				return channelFactoryFoo.CreateChannel().Execute(query, p);
-		    }
-		    catch (Exception ex)
-		    {
-			    throw new Exception(ex.Message);
-		    }
+		    return _apiProvider.Execute(query, parameters);
 	    }
 
-	    public bool CheckType(Type t)
-	    {
-		    var binding = new BasicHttpBinding();
-			var endPoint = new EndpointAddress($"http://{_ipServer}/ExecutorService/ExecutorService.svc");
-		    var channelFactoryFoo = new ChannelFactory<IExecutor>(binding, endPoint);
-		    return channelFactoryFoo.CreateChannel().CheckType(t.Name);
-		}
-
-		/*
+	    /*
          * Свойства, глобальные объекты
          */
 
@@ -765,18 +546,7 @@ namespace SmartCore
         }
         #endregion
 
-	    public void LoadCashForWeb()
-	    {
-		    NewLoader.GetDictionaries();
-		    Operators = new OperatorCollection(_newLoader.GetObjectList<OperatorDTO, Operator>().ToArray());
-			_aircraftsCore.LoadAllAircrafts();
-		    Stores = new CommonCollection<Store>(_newLoader.GetObjectList<StoreDTO, Store>());
-		    BaseComponents = new BaseComponentCollection(NewLoader.GetObjectListAll<ComponentDTO, BaseComponent>(new Filter("IsBaseComponent", true), loadChild: true));
-		    _newLoader.SetParentsToStores();
-		    _newLoader.SetParentsToBaseComponents();
 
-
-		}
 
 		#region public void InitAsync(BackgroundWorker backgroundWorker, LoadingState loadingState)
 		/// <summary>
@@ -795,7 +565,7 @@ namespace SmartCore
             loadingState.CurrentPersentageDescription = "Loading Users";
             backgroundWorker.ReportProgress(1, loadingState);
 
-            var users = GetAllUsers();
+            var users =  ApiProvider.GetAllUsersAsync();
             Users = new Dictionary<int, string>();
 			foreach (var user in users)
 				Users.Add(user.ItemId, user.ToString());
@@ -910,7 +680,7 @@ namespace SmartCore
             loadingState.CurrentPersentageDescription = "Loading Base Details";
             backgroundWorker.ReportProgress(1, loadingState);
 
-            BaseComponents = new BaseComponentCollection(NewLoader.GetObjectListAll<ComponentDTO, BaseComponent>(new Filter("IsBaseComponent", true),loadChild:true));
+            BaseComponents = new BaseComponentCollection(NewLoader.GetObjectListAll<BaseComponentDTO, BaseComponent>(loadChild:true));
             
             if (backgroundWorker.CancellationPending)
             {
@@ -1200,16 +970,6 @@ namespace SmartCore
         }
 		#endregion
 
-
-		#region public UnitOfWork UnitOfWork {get;}
-
-		private UnitOfWork _unitOfWork;
-	    public UnitOfWork UnitOfWork
-	    {
-		    get { return _unitOfWork; }
-	    }
-
-		#endregion
 
 		#region public INewLoader NewLoader { get; }
 

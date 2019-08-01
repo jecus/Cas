@@ -6,9 +6,9 @@ using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
-using EFCore.DTO.Dictionaries;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.DTO.Dictionaries;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using MetroFramework.Forms;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -244,7 +244,7 @@ namespace CAS.UI.UIControls.WorkPakage
 		///<param name="resultCollection"></param>
 		private void FilterItems(IEnumerable<Specialist> initialCollection, ICommonCollection<Specialist> resultCollection)
 		{
-			if (_filter == null || _filter.Count == 0)
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
 				resultCollection.Clear();
 				resultCollection.AddRange(initialCollection);

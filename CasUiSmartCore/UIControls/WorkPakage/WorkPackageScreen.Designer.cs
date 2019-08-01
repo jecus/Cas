@@ -1,5 +1,5 @@
 ﻿using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using System.Windows.Forms;
 
 namespace CAS.UI.UIControls.WorkPakage

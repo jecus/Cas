@@ -1,6 +1,6 @@
 ﻿using MetroFramework.Controls;
 using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 
 namespace CAS.UI.UIControls.PurchaseControls.Initial
 {
@@ -32,9 +32,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
         /// </summary>
         private void InitializeComponent()
         {
-	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
-			this.labelSearchSupplier = new MetroFramework.Controls.MetroLabel();
-			this.textBoxSearchStandart = new MetroFramework.Controls.MetroTextBox();
 			this.labelSearchPartNumber = new MetroFramework.Controls.MetroLabel();
 			this.textBoxSearchPartNumber = new MetroFramework.Controls.MetroTextBox();
 			this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
@@ -92,61 +89,21 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.listViewInitialItems = new CAS.UI.UIControls.PurchaseControls.Initial.InitialOrderListView();
 			this.listViewKits = new CAS.UI.UIControls.PurchaseControls.Quatation.RequestProductListView();
+			this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
+			this.button2 = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// labelSearchSupplier
-			// 
-			this.labelSearchSupplier.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.labelSearchSupplier.Location = new System.Drawing.Point(265, 63);
-			this.labelSearchSupplier.Name = "labelSearchSupplier";
-			this.labelSearchSupplier.Size = new System.Drawing.Size(66, 23);
-			this.labelSearchSupplier.TabIndex = 286;
-			this.labelSearchSupplier.Text = "Standart:";
-			this.labelSearchSupplier.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// textBoxSearchStandart
-			// 
-			// 
-			// 
-			// 
-			this.textBoxSearchStandart.CustomButton.Image = null;
-			this.textBoxSearchStandart.CustomButton.Location = new System.Drawing.Point(150, 2);
-			this.textBoxSearchStandart.CustomButton.Name = "";
-			this.textBoxSearchStandart.CustomButton.Size = new System.Drawing.Size(17, 17);
-			this.textBoxSearchStandart.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.textBoxSearchStandart.CustomButton.TabIndex = 1;
-			this.textBoxSearchStandart.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.textBoxSearchStandart.CustomButton.UseSelectable = true;
-			this.textBoxSearchStandart.CustomButton.Visible = false;
-			this.textBoxSearchStandart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxSearchStandart.Lines = new string[0];
-			this.textBoxSearchStandart.Location = new System.Drawing.Point(337, 64);
-			this.textBoxSearchStandart.MaxLength = 32767;
-			this.textBoxSearchStandart.Name = "textBoxSearchStandart";
-			this.textBoxSearchStandart.PasswordChar = '\0';
-			this.textBoxSearchStandart.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.textBoxSearchStandart.SelectedText = "";
-			this.textBoxSearchStandart.SelectionLength = 0;
-			this.textBoxSearchStandart.SelectionStart = 0;
-			this.textBoxSearchStandart.ShortcutsEnabled = true;
-			this.textBoxSearchStandart.Size = new System.Drawing.Size(170, 22);
-			this.textBoxSearchStandart.TabIndex = 287;
-			this.textBoxSearchStandart.UseSelectable = true;
-			this.textBoxSearchStandart.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.textBoxSearchStandart.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			this.textBoxSearchStandart.TextChanged += new System.EventHandler(this.textBoxSearchStandart_TextChanged);
 			// 
 			// labelSearchPartNumber
 			// 
 			this.labelSearchPartNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
 			this.labelSearchPartNumber.Location = new System.Drawing.Point(23, 63);
 			this.labelSearchPartNumber.Name = "labelSearchPartNumber";
-			this.labelSearchPartNumber.Size = new System.Drawing.Size(36, 23);
+			this.labelSearchPartNumber.Size = new System.Drawing.Size(59, 23);
 			this.labelSearchPartNumber.TabIndex = 284;
-			this.labelSearchPartNumber.Text = "P/N:";
+			this.labelSearchPartNumber.Text = "Search:";
 			this.labelSearchPartNumber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// textBoxSearchPartNumber
@@ -165,7 +122,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.textBoxSearchPartNumber.CustomButton.Visible = false;
 			this.textBoxSearchPartNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.textBoxSearchPartNumber.Lines = new string[0];
-			this.textBoxSearchPartNumber.Location = new System.Drawing.Point(65, 63);
+			this.textBoxSearchPartNumber.Location = new System.Drawing.Point(88, 63);
 			this.textBoxSearchPartNumber.MaxLength = 32767;
 			this.textBoxSearchPartNumber.Name = "textBoxSearchPartNumber";
 			this.textBoxSearchPartNumber.PasswordChar = '\0';
@@ -179,7 +136,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.textBoxSearchPartNumber.UseSelectable = true;
 			this.textBoxSearchPartNumber.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.textBoxSearchPartNumber.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			this.textBoxSearchPartNumber.TextChanged += new System.EventHandler(this.textBoxSearchPartNumber_TextChanged);
 			// 
 			// ButtonAdd
 			// 
@@ -208,7 +164,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.ButtonAdd.TextSecondary = "";
 			this.ButtonAdd.ToolTipText = "";
 			this.ButtonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
-			this.ButtonAdd.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// ButtonDelete
 			// 
@@ -237,7 +192,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.ButtonDelete.TextSecondary = "";
 			this.ButtonDelete.ToolTipText = "";
 			this.ButtonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
-			this.ButtonDelete.Enabled = !(userType == UsetType.ReadOnly || userType == UsetType.SaveOnly);
 			// 
 			// groupBox1
 			// 
@@ -1029,7 +983,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.buttonOk.TabIndex = 293;
 			this.buttonOk.Text = "OK";
 			this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
-			this.buttonOk.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// buttonCancel
 			// 
@@ -1050,12 +1003,13 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.listViewInitialItems.Displayer = null;
 			this.listViewInitialItems.DisplayerText = null;
 			this.listViewInitialItems.Entity = null;
-			this.listViewInitialItems.IgnoreAutoResize = false;
 			this.listViewInitialItems.Location = new System.Drawing.Point(23, 443);
+			this.listViewInitialItems.MenuOpeningAction = null;
 			this.listViewInitialItems.Name = "listViewInitialItems";
+			this.listViewInitialItems.OldColumnIndex = 0;
 			this.listViewInitialItems.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewInitialItems.ShowGroups = true;
 			this.listViewInitialItems.Size = new System.Drawing.Size(687, 304);
+			this.listViewInitialItems.SortMultiplier = 0;
 			this.listViewInitialItems.TabIndex = 294;
 			this.listViewInitialItems.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.listViewInitialItems_SelectedItemsChanged);
 			// 
@@ -1064,19 +1018,46 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.listViewKits.Displayer = null;
 			this.listViewKits.DisplayerText = null;
 			this.listViewKits.Entity = null;
-			this.listViewKits.IgnoreAutoResize = false;
 			this.listViewKits.Location = new System.Drawing.Point(23, 91);
+			this.listViewKits.MenuOpeningAction = null;
 			this.listViewKits.Name = "listViewKits";
+			this.listViewKits.OldColumnIndex = 2;
 			this.listViewKits.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewKits.ShowGroups = true;
 			this.listViewKits.Size = new System.Drawing.Size(687, 315);
+			this.listViewKits.SortMultiplier = 1;
 			this.listViewKits.TabIndex = 68;
+			// 
+			// metroProgressSpinner1
+			// 
+			this.metroProgressSpinner1.Location = new System.Drawing.Point(256, 147);
+			this.metroProgressSpinner1.Maximum = 100;
+			this.metroProgressSpinner1.Name = "metroProgressSpinner1";
+			this.metroProgressSpinner1.Size = new System.Drawing.Size(180, 156);
+			this.metroProgressSpinner1.Speed = 2F;
+			this.metroProgressSpinner1.TabIndex = 302;
+			this.metroProgressSpinner1.UseSelectable = true;
+			this.metroProgressSpinner1.Visible = false;
+			// 
+			// button2
+			// 
+			this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.button2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.button2.Location = new System.Drawing.Point(635, 52);
+			this.button2.Name = "button2";
+			this.button2.Size = new System.Drawing.Size(75, 33);
+			this.button2.TabIndex = 303;
+			this.button2.Text = "Find";
+			this.button2.Click += new System.EventHandler(this.Button2_Click);
 			// 
 			// InitialOrderFormNew
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1086, 792);
+			this.Controls.Add(this.button2);
+			this.Controls.Add(this.metroProgressSpinner1);
 			this.Controls.Add(this.listViewInitialItems);
 			this.Controls.Add(this.buttonOk);
 			this.Controls.Add(this.buttonCancel);
@@ -1084,8 +1065,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.ButtonAdd);
 			this.Controls.Add(this.ButtonDelete);
-			this.Controls.Add(this.labelSearchSupplier);
-			this.Controls.Add(this.textBoxSearchStandart);
 			this.Controls.Add(this.labelSearchPartNumber);
 			this.Controls.Add(this.textBoxSearchPartNumber);
 			this.Controls.Add(this.listViewKits);
@@ -1094,6 +1073,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.Name = "InitialOrderFormNew";
 			this.Resizable = false;
 			this.Text = "Initial Order Form";
+			this.Load += new System.EventHandler(this.InitialOrderFormNew_Load);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).EndInit();
@@ -1105,8 +1085,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		#endregion
 
 		private Quatation.RequestProductListView listViewKits;
-        private MetroLabel labelSearchSupplier;
-        private MetroTextBox textBoxSearchStandart;
         private MetroLabel labelSearchPartNumber;
         private MetroTextBox textBoxSearchPartNumber;
         private AvControls.AvButtonT.AvButtonT ButtonAdd;
@@ -1163,5 +1141,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private MetroTextBox textBoxPublishedBy;
 		private MetroTextBox metroTextBoxNumber;
 		private MetroLabel metroLabelNumber;
+		private MetroProgressSpinner metroProgressSpinner1;
+		private System.Windows.Forms.Button button2;
 	}
 }

@@ -5,9 +5,9 @@ using System.Windows.Forms;
 using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
-using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
-using EFCore.DTO.Dictionaries;
+using EntityCore.DTO.Dictionaries;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
@@ -17,13 +17,14 @@ using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.WorkPackage;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.WorkPakage
 {
     ///<summary>
     /// список для отображения ордеров запроса
     ///</summary>
-    public partial class WorkPackageView : BaseListViewControl<BaseEntityObject>
+    public partial class WorkPackageView : BaseGridViewControl<BaseEntityObject>
     {
         #region Fields
 
@@ -61,96 +62,61 @@ namespace CAS.UI.UIControls.WorkPakage
         /// </summary>
         protected override void SetHeaders()
         {
-            ColumnHeaderList.Clear();
-
-            ColumnHeader columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "ATA" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.16f), Text = "Title" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Description" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Kit Required" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Performance" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Rpt. Intv." };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Overdue/Remain" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Work Type" };
-            ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "NDT" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Calculation Perf. Date" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.08f), Text = "Perf. Date" };
-            ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.06f), Text = "MH" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.06f), Text = "K*MH" };
-            ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.06f), Text = "Cost" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
-            ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+	        AddColumn("Type", (int)(radGridView1.Width * 0.1f));
+			AddColumn("ATA", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Title", (int)(radGridView1.Width * 0.32f));
+			AddColumn("Description", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Kit Required", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Performance", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Rpt. Intv.", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Overdue/Remain", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Work Type", (int)(radGridView1.Width * 0.16f));
+			AddColumn("NDT", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Calculation Perf. Date", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Perf. Date", (int)(radGridView1.Width * 0.16f));
+			AddColumn("MH", (int)(radGridView1.Width * 0.12f));
+			AddColumn("K*MH", (int)(radGridView1.Width * 0.12f));
+			AddColumn("Cost", (int)(radGridView1.Width * 0.12f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
         }
 		#endregion
 
 		#region protected override SetGroupsToItems(int columnIndex)
-		/// <summary>
-		/// Выполняет группировку элементов
-		/// </summary>
-		protected override void SetGroupsToItems(int columnIndex)
-        {
-            itemsListView.Groups.Clear();
-            foreach (var item in ListViewItemList)
-            {
-				var temp = ListViewGroupHelper.GetGroupString(item.Tag);
 
-				itemsListView.Groups.Add(temp, temp);
-				item.Group = itemsListView.Groups[temp];
+		protected override void GroupingItems()
+		{
+			Grouping("Type");
+		}
+		#endregion
 
-			}
-        }
-        #endregion
-
-        #region protected override void SetItemColor(ListViewItem listViewItem, BaseSmartCoreObject item)
-        protected override void SetItemColor(ListViewItem listViewItem, BaseEntityObject item)
-        {
-			listViewItem.ToolTipText = GetToolTipString(item);
+		#region protected override void SetItemColor(ListViewItem listViewItem, BaseSmartCoreObject item)
+		protected override void SetItemColor(GridViewRowInfo listViewItem, BaseEntityObject item)
+		{
+			//listViewItem.ToolTipText = GetToolTipString(item);
 
 			if (item is NextPerformance)
-            {
-                var nextPerformance = item as NextPerformance;
+			{
+				var nextPerformance = item as NextPerformance;
 
-	            var file = GetItemFile(nextPerformance.Parent); 
+				var file = GetItemFile(nextPerformance.Parent);
 
-	            if (file != null)
-	            {
+				if (file != null)
+				{
 					if (_currentWorkPackage.Status != WorkPackageStatus.Closed)
 					{
+						var color = radGridView1.BackColor;
 						if (nextPerformance.BlockedByPackage != null)
-							listViewItem.BackColor = Color.FromArgb(Highlight.Grey.Color);
+							color = Color.FromArgb(Highlight.Grey.Color);
 						else if (nextPerformance.Condition == ConditionState.Notify)
-							listViewItem.BackColor = Color.FromArgb(Highlight.Yellow.Color);
+							color = Color.FromArgb(Highlight.Yellow.Color);
 						else if (nextPerformance.Condition == ConditionState.Overdue)
-							listViewItem.BackColor = Color.FromArgb(Highlight.Red.Color);
+							color = Color.FromArgb(Highlight.Red.Color);
+
+						foreach (GridViewCellInfo cell in listViewItem.Cells)
+						{
+							cell.Style.CustomizeFill = true;
+							cell.Style.BackColor = color;
+						}
 					}
 					else
 					{
@@ -158,103 +124,128 @@ namespace CAS.UI.UIControls.WorkPakage
 						//значит, выполнение для данной задачи в рамках данного рабочего пакета
 						//не было введено
 						//пометка этого выполнения краным цветом
-						listViewItem.BackColor = Color.FromArgb(Highlight.Red.Color);
+						foreach (GridViewCellInfo cell in listViewItem.Cells)
+						{
+							cell.Style.CustomizeFill = true;
+							cell.Style.BackColor = Color.FromArgb(Highlight.Red.Color);
+						}
 					}
 					if (nextPerformance.Parent.IsDeleted)
 					{
 						//запись так же может быть удаленной
 						//шрифт серым цветом
-						listViewItem.ForeColor = Color.Gray;
+						foreach (GridViewCellInfo cell in listViewItem.Cells)
+						{
+							cell.Style.CustomizeFill = true;
+							cell.Style.ForeColor = Color.Gray;
+						}
 					}
 				}
-	            else
-	            {
-					listViewItem.UseItemStyleForSubItems = false;
-		            for (int i = 0; i < listViewItem.SubItems.Count; i++)
-		            {
+				else
+				{
+					for (int i = 0; i < listViewItem.Cells.Count; i++)
+					{
+						listViewItem.Cells[i].Style.CustomizeFill = true;
 						if (_currentWorkPackage.Status != WorkPackageStatus.Closed)
 						{
 							if (nextPerformance.BlockedByPackage != null)
-								listViewItem.SubItems[i].BackColor = Color.FromArgb(Highlight.Grey.Color);
+								listViewItem.Cells[i].Style.BackColor = Color.FromArgb(Highlight.Grey.Color);
 							else if (nextPerformance.Condition == ConditionState.Notify)
-								listViewItem.SubItems[i].BackColor = Color.FromArgb(Highlight.Yellow.Color);
+								listViewItem.Cells[i].Style.BackColor = Color.FromArgb(Highlight.Yellow.Color);
 							else if (nextPerformance.Condition == ConditionState.Overdue)
-								listViewItem.SubItems[i].BackColor = Color.FromArgb(Highlight.Red.Color);
+								listViewItem.Cells[i].Style.BackColor = Color.FromArgb(Highlight.Red.Color);
 						}
 						else
-							listViewItem.SubItems[i].BackColor = Color.FromArgb(Highlight.Red.Color);
+							listViewItem.Cells[i].Style.BackColor = Color.FromArgb(Highlight.Red.Color);
 
 						if (nextPerformance.Parent.IsDeleted)
-							listViewItem.SubItems[i].ForeColor = Color.Gray;
+							listViewItem.Cells[i].Style.ForeColor = Color.Gray;
 
-						if (i == 1)
-							listViewItem.SubItems[i].ForeColor = Color.MediumVioletRed;
+						if (i == 2)
+							listViewItem.Cells[i].Style.ForeColor = Color.MediumVioletRed;
 					}
-				}  
-            }
-            else if (item is AbstractPerformanceRecord)
-            {
-                var apr = (AbstractPerformanceRecord) item;
+				}
+			}
+			else if (item is AbstractPerformanceRecord)
+			{
+				var apr = (AbstractPerformanceRecord)item;
 
 				var file = GetItemFile(apr.Parent);
 
-	            if (file != null)
-	            {
+				if (file != null)
+				{
 					if (apr.Parent.IsDeleted)
-						listViewItem.ForeColor = Color.Gray;
-				}
-	            else
-	            {
-					listViewItem.UseItemStyleForSubItems = false;
-		            for (int i = 0; i < listViewItem.SubItems.Count; i++)
-		            {
-						if (apr.Parent.IsDeleted)
-							listViewItem.SubItems[i].ForeColor = Color.Gray;
-
-						if (i == 1)
-							listViewItem.SubItems[i].ForeColor = Color.MediumVioletRed;
+					{
+						foreach (GridViewCellInfo cell in listViewItem.Cells)
+						{
+							cell.Style.CustomizeFill = true;
+							cell.Style.ForeColor = Color.Gray;
+						}
 					}
 				}
-            }
-            else
-            {
+				else
+				{
+					for (int i = 0; i < listViewItem.Cells.Count; i++)
+					{
+						listViewItem.Cells[i].Style.CustomizeFill = true;
+						if (apr.Parent.IsDeleted)
+							listViewItem.Cells[i].Style.ForeColor = Color.Gray;
+
+						if (i == 2)
+							listViewItem.Cells[i].Style.ForeColor = Color.MediumVioletRed;
+					}
+				}
+			}
+			else
+			{
 				var file = GetItemFile(item);
 
-	            if (file != null)
-	            {
+				if (file != null)
+				{
 					if (!(item is NonRoutineJob))
 					{
 						//Если это не следующее выполнение, не запись о выполнении, и не рутинная работа
 						//значит, выполнение для данной задачи расчитать нельзя
 						//пометка этого выполнения синим цветом
-						listViewItem.BackColor = Color.FromArgb(Highlight.Blue.Color);
+						foreach (GridViewCellInfo cell in listViewItem.Cells)
+						{
+							cell.Style.CustomizeFill = true;
+							cell.Style.BackColor = Color.FromArgb(Highlight.Blue.Color);
+						}
 					}
+
 					if (item.IsDeleted)
-						listViewItem.ForeColor = Color.Gray;
+					{
+						foreach (GridViewCellInfo cell in listViewItem.Cells)
+						{
+							cell.Style.CustomizeFill = true;
+							cell.Style.ForeColor = Color.Gray;
+						}
+					}
 				}
-	            else
-	            {
-					listViewItem.UseItemStyleForSubItems = false;
-		            for (int i = 0; i < listViewItem.SubItems.Count; i++)
-		            {
+				else
+				{
+					for (int i = 0; i < listViewItem.Cells.Count; i++)
+					{
+						listViewItem.Cells[i].Style.CustomizeFill = true;
 						if (!(item is NonRoutineJob))
 						{
 							//Если это не следующее выполнение, не запись о выполнении, и не рутинная работа
 							//значит, выполнение для данной задачи расчитать нельзя
 
 							//пометка этого выполнения синим цветом
-							listViewItem.SubItems[i].BackColor = Color.FromArgb(Highlight.Blue.Color);
+							listViewItem.Cells[i].Style.BackColor = Color.FromArgb(Highlight.Blue.Color);
 						}
 
 						if (item.IsDeleted)
-							listViewItem.SubItems[i].ForeColor = Color.Gray;
+							listViewItem.Cells[i].Style.ForeColor = Color.Gray;
 
-						if (i == 1)
-							listViewItem.SubItems[i].ForeColor = Color.MediumVioletRed;
+						if (i == 2)
+							listViewItem.Cells[i].Style.ForeColor = Color.MediumVioletRed;
 					}
 				}
 			}
-        }
+		}
 		#endregion
 
 		#region private AttachedFile GetItemFile(IBaseEntityObject obj)
@@ -322,33 +313,37 @@ namespace CAS.UI.UIControls.WorkPakage
 		    return toolTip;
 	    }
 
-	    #endregion
+		#endregion
 
-	    #region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(BaseSmartCoreObject item)
+		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(BaseSmartCoreObject item)
 
-		    protected override
-		    ListViewItem.ListViewSubItem[] GetListViewSubItems(BaseEntityObject item)
+
+		protected override List<CustomCell> GetListViewSubItems(BaseEntityObject item)
         {
-            List<ListViewItem.ListViewSubItem> subItems = new List<ListViewItem.ListViewSubItem>();
+	        var temp = ListViewGroupHelper.GetGroupString(item);
+			var subItems = new List<CustomCell>()
+            {
+				CreateRow(temp, temp)
+            };
             var author = "";
 			if (item is NextPerformance)
             {
-                NextPerformance np = (NextPerformance) item;
-                double manHours = np.Parent is IEngineeringDirective ? ((IEngineeringDirective)np.Parent).ManHours : 0;
-                double KmanHours = manHours*_currentWorkPackage.KMH;
-                double cost = np.Parent is IEngineeringDirective ? ((IEngineeringDirective)np.Parent).Cost : 0;
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = np.ATAChapter.ToString(), Tag = np.ATAChapter });
+                var np = (NextPerformance) item;
+                var manHours = np.Parent is IEngineeringDirective ? ((IEngineeringDirective)np.Parent).ManHours : 0;
+                var KmanHours = manHours*_currentWorkPackage.KMH;
+                var cost = np.Parent is IEngineeringDirective ? ((IEngineeringDirective)np.Parent).Cost : 0;
+                subItems.Add(CreateRow(np.ATAChapter.ToString(), np.ATAChapter));
                 if (np.Parent is ComponentDirective)
                 {
 	                var cd = np.Parent as ComponentDirective;
 	                author = GlobalObjects.CasEnvironment.GetCorrector(cd.CorrectorId);
-					subItems.Add(new ListViewItem.ListViewSubItem { Text = $"{cd.MaintenanceDirective?.TaskCardNumber} {np.Title}", Tag = np.Title });
+					subItems.Add(CreateRow($"{cd.MaintenanceDirective?.TaskCardNumber} {np.Title}", np.Title ));
 				}
                 else if (np.Parent is MaintenanceDirective)
                 {
 	                var md = np.Parent as MaintenanceDirective;
 	                author = GlobalObjects.CasEnvironment.GetCorrector(md.CorrectorId);
-					subItems.Add(new ListViewItem.ListViewSubItem { Text = $"{md.TaskCardNumber} {md.TaskNumberCheck} {md.Description}", Tag = np.Title });
+					subItems.Add(CreateRow($"{md.TaskCardNumber} {md.TaskNumberCheck} {md.Description}", np.Title ));
 				}
 				else if (np.Parent is Directive)
                 {
@@ -359,80 +354,76 @@ namespace CAS.UI.UIControls.WorkPakage
 	                if (!string.IsNullOrEmpty(directive.Title))
 		                title += $"AD:{directive.Title} ";
 	                author = GlobalObjects.CasEnvironment.GetCorrector(directive.CorrectorId);
-					subItems.Add(new ListViewItem.ListViewSubItem { Text = title, Tag = directive.Title });
+					subItems.Add(CreateRow(title, directive.Title));
 				}
-                else subItems.Add(new ListViewItem.ListViewSubItem { Text = np.Title, Tag = np.Title });
+                else subItems.Add(CreateRow(np.Title, np.Title ));
 
                 
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = np.Description, Tag = np.Description });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = np.KitsToString, Tag = np.Kits.Count });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = np.PerformanceSource.ToString(), Tag = np.PerformanceSource });
+                subItems.Add(CreateRow(np.Description, Tag = np.Description ));
+                subItems.Add(CreateRow(np.KitsToString, Tag = np.Kits.Count ));
+                subItems.Add(CreateRow(np.PerformanceSource.ToString(), np.PerformanceSource));
 
 
 	            if (np.Parent is MaintenanceDirective)
 	            {
 		            var d = np.Parent as MaintenanceDirective;
-		            subItems.Add(new ListViewItem.ListViewSubItem { Text = d.PhaseRepeat?.ToString(), Tag = d.PhaseRepeat });
+		            subItems.Add(CreateRow(d.PhaseRepeat?.ToString(), d.PhaseRepeat));
 	            }
-	            else subItems.Add(new ListViewItem.ListViewSubItem { Text = np.Parent.Threshold.RepeatInterval.ToString(), Tag = np.Parent.Threshold.RepeatInterval });
+	            else subItems.Add(CreateRow(np.Parent.Threshold.RepeatInterval.ToString(), np.Parent.Threshold.RepeatInterval));
 
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = np.Remains.ToString(), Tag = np.Remains });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = np.WorkType, Tag = np.WorkType });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = np.NDTString, Tag = np.NDTString });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = np.PerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)np.PerformanceDate), Tag = np.PerformanceDate });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = _currentWorkPackage.PerformDate, Tag = _currentWorkPackage.PerformDate });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = manHours.ToString(), Tag = manHours });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = KmanHours.ToString("F"), Tag = KmanHours });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = cost.ToString(), Tag = cost });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
+                subItems.Add(CreateRow(np.Remains.ToString(), np.Remains ));
+                subItems.Add(CreateRow(np.WorkType, np.WorkType ));
+				subItems.Add(CreateRow(np.NDTString, np.NDTString ));
+				subItems.Add(CreateRow(np.PerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)np.PerformanceDate), np.PerformanceDate));
+				subItems.Add(CreateRow(_currentWorkPackage.PerformDate, _currentWorkPackage.PerformDate));
+                subItems.Add(CreateRow(manHours.ToString(), manHours));
+                subItems.Add(CreateRow(KmanHours.ToString("F"), KmanHours));
+                subItems.Add(CreateRow(cost.ToString(), cost ));
+                subItems.Add(CreateRow(author, author));
 			}
             else if (item is AbstractPerformanceRecord)
             {
                 //DirectiveRecord directiveRecord = (DirectiveRecord)item;
-                AbstractPerformanceRecord apr = (AbstractPerformanceRecord)item;
+                var apr = (AbstractPerformanceRecord)item;
                 author = GlobalObjects.CasEnvironment.GetCorrector(apr.CorrectorId);
-				double manHours = apr.Parent is IEngineeringDirective ? ((IEngineeringDirective)apr.Parent).ManHours : 0;
-				double KmanHours = manHours*_currentWorkPackage.KMH;
-                double cost = apr.Parent is IEngineeringDirective ? ((IEngineeringDirective)apr.Parent).Cost : 0;
-                Lifelength remains = Lifelength.Null;
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = apr.ATAChapter.ToString(), Tag = apr.ATAChapter });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = apr.Title, Tag = apr.Title });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = apr.Description, Tag = apr.Description });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = apr.KitsToString, Tag = apr.Kits.Count });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = apr.OnLifelength.ToString(), Tag = apr.OnLifelength });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = apr.Parent.Threshold.RepeatInterval.ToString(), Tag = apr.Parent.Threshold.RepeatInterval });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = remains.ToString(), Tag = remains });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = apr.WorkType, Tag = apr.WorkType });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = apr.NDTString, Tag = apr.NDTString });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = SmartCore.Auxiliary.Convert.GetDateFormat(apr.RecordDate), Tag = apr.RecordDate });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = _currentWorkPackage.PerformDate, Tag = _currentWorkPackage.PerformDate });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = manHours.ToString(), Tag = manHours });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = KmanHours.ToString("F"), Tag = KmanHours });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = cost.ToString(), Tag = cost });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
+				var manHours = apr.Parent is IEngineeringDirective ? ((IEngineeringDirective)apr.Parent).ManHours : 0;
+				var KmanHours = manHours*_currentWorkPackage.KMH;
+                var cost = apr.Parent is IEngineeringDirective ? ((IEngineeringDirective)apr.Parent).Cost : 0;
+                var remains = Lifelength.Null;
+                subItems.Add(CreateRow(apr.ATAChapter.ToString(), apr.ATAChapter));
+                subItems.Add(CreateRow(apr.Title, apr.Title ));
+                subItems.Add(CreateRow(apr.Description, apr.Description));
+                subItems.Add(CreateRow(apr.KitsToString, apr.Kits.Count));
+                subItems.Add(CreateRow(apr.OnLifelength.ToString(), apr.OnLifelength));
+                subItems.Add(CreateRow(apr.Parent.Threshold.RepeatInterval.ToString(), apr.Parent.Threshold.RepeatInterval));
+                subItems.Add(CreateRow(remains.ToString(), remains));
+                subItems.Add(CreateRow(apr.WorkType, apr.WorkType));
+				subItems.Add(CreateRow(apr.NDTString, apr.NDTString));
+				subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(apr.RecordDate), apr.RecordDate));
+				subItems.Add(CreateRow(_currentWorkPackage.PerformDate, _currentWorkPackage.PerformDate));
+				subItems.Add(CreateRow(manHours.ToString(), manHours));
+                subItems.Add(CreateRow(KmanHours.ToString("F"), KmanHours));
+                subItems.Add(CreateRow(cost.ToString(), cost));
+                subItems.Add(CreateRow(author, Tag = author));
 			}
             else if (item is Directive)
             {
-                Directive directive = (Directive)item;
+                var directive = (Directive)item;
 
-                AtaChapter ata = directive.ATAChapter;
+                var ata = directive.ATAChapter;
                 author = GlobalObjects.CasEnvironment.GetCorrector(directive.CorrectorId);
-                double KManHours = directive.ManHours * _currentWorkPackage.KMH;
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = ata.ToString(), Tag = ata });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = $"{directive.EngineeringOrders} {directive.Title}", Tag = directive.Title });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = directive.Description, Tag = directive.Description });
+                var KManHours = directive.ManHours * _currentWorkPackage.KMH;
+				subItems.Add(CreateRow(ata.ToString(), ata));
+                subItems.Add(CreateRow($"{directive.EngineeringOrders} {directive.Title}", directive.Title));
+                subItems.Add(CreateRow(directive.Description, directive.Description));
 
                 #region Определение текста для колонки "КИТы"
-                subItems.Add(new ListViewItem.ListViewSubItem
-                {
-                    Text = directive.Kits.Count > 0 ? directive.Kits.Count + " kits" : "",
-                    Tag = directive.Kits.Count
-                });
+                subItems.Add(CreateRow(directive.Kits.Count > 0 ? directive.Kits.Count + " kits" : "", directive.Kits.Count));
                 #endregion
 
                 #region Определение текста для колонки "Первое выполнение"
 
-                ListViewItem.ListViewSubItem subItem = new ListViewItem.ListViewSubItem();
+                var subItem = new CustomCell();
                 if (directive.Threshold.FirstPerformanceSinceNew != null && !directive.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
                 {
                     subItem.Text = "s/n: " + directive.Threshold.FirstPerformanceSinceNew;
@@ -455,7 +446,7 @@ namespace CAS.UI.UIControls.WorkPakage
 
                 #region Определение текста для колонки "повторяющийся интервал"
 
-                subItem = new ListViewItem.ListViewSubItem();
+                subItem = new CustomCell();
                 if (!directive.Threshold.RepeatInterval.IsNullOrZero())
                 {
                     subItem.Text = directive.Threshold.RepeatInterval.ToString();
@@ -470,99 +461,93 @@ namespace CAS.UI.UIControls.WorkPakage
                 #endregion
 
                 #region Определение текста для колонки "Остаток/Просрочено на сегодня"
-                subItems.Add(new ListViewItem.ListViewSubItem
-                {
-                    Text = directive.Remains.ToString(),
-                    Tag = directive.Remains
-                });
+                subItems.Add(CreateRow(directive.Remains.ToString(), directive.Remains));
                 #endregion
 
                 #region Определение текста для колонки "Тип работ"
 
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = directive.WorkType.ToString(), Tag = directive.WorkType });
+                subItems.Add(CreateRow(directive.WorkType.ToString(), Tag = directive.WorkType));
 				#endregion
 
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = directive.NDTType.ShortName, Tag = directive.NDTType.ShortName });
+				subItems.Add(CreateRow(directive.NDTType.ShortName, directive.NDTType.ShortName));
 
 				#region Определение текста для колонки "Следующее выполнение"
-				subItems.Add(new ListViewItem.ListViewSubItem
-                {
-                    Text = directive.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)directive.NextPerformanceDate),
-                    Tag = directive.NextPerformanceDate
-                });
+				subItems.Add(CreateRow(directive.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)directive.NextPerformanceDate),
+                    directive.NextPerformanceDate
+                ));
 				#endregion
 
 				#region Определение текста для колонки "Человек/Часы"
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = _currentWorkPackage.PerformDate, Tag = _currentWorkPackage.PerformDate });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = directive.ManHours.ToString(), Tag = directive.ManHours });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = KManHours.ToString(), Tag = KManHours });
+				subItems.Add(CreateRow(_currentWorkPackage.PerformDate, _currentWorkPackage.PerformDate ));
+				subItems.Add(CreateRow(directive.ManHours.ToString(), directive.ManHours ));
+                subItems.Add(CreateRow(KManHours.ToString(), KManHours ));
                 #endregion
 
                 #region Определение текста для колонки "Стоимость"
 
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = directive.Cost.ToString(), Tag = directive.Cost });
+                subItems.Add(CreateRow(directive.Cost.ToString(), directive.Cost));
 				#endregion
 
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
+				subItems.Add(CreateRow(author, author ));
 
 			}
             else if (item is BaseComponent)
             {
-                BaseComponent bd = (BaseComponent)item;
-                AtaChapter ata = bd.ATAChapter;
+                var bd = (BaseComponent)item;
+                var ata = bd.ATAChapter;
                 author = GlobalObjects.CasEnvironment.GetCorrector(bd.CorrectorId);
-                double KManHours = bd.ManHours * _currentWorkPackage.KMH;
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = ata.ToString(), Tag = ata });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = bd.PartNumber, Tag = bd.PartNumber });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = bd.Description, Tag = bd.Description });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = bd.Kits.Count > 0 ? bd.Kits.Count + " kits" : "", Tag = bd.Kits.Count });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = bd.LifeLimit.ToString(), Tag = bd.LifeLimit });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = Lifelength.Null });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = bd.Remains.ToString(), Tag = bd.Remains });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = ComponentRecordType.Remove.ToString(), Tag = ComponentRecordType.Remove });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = bd.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)bd.NextPerformanceDate), Tag = bd.NextPerformanceDate });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = _currentWorkPackage.PerformDate, Tag = _currentWorkPackage.PerformDate });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = bd.ManHours.ToString(), Tag = bd.ManHours });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = KManHours.ToString("F"), Tag = KManHours });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = bd.Cost.ToString(), Tag = bd.Cost });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
+                var KManHours = bd.ManHours * _currentWorkPackage.KMH;
+				subItems.Add(CreateRow(ata.ToString(), ata));
+                subItems.Add(CreateRow(bd.PartNumber, bd.PartNumber));
+                subItems.Add(CreateRow(bd.Description, bd.Description));
+                subItems.Add(CreateRow(bd.Kits.Count > 0 ? bd.Kits.Count + " kits" : "", bd.Kits.Count));
+                subItems.Add(CreateRow(bd.LifeLimit.ToString(), bd.LifeLimit));
+                subItems.Add(CreateRow( "", Lifelength.Null));
+                subItems.Add(CreateRow(bd.Remains.ToString(), bd.Remains));
+                subItems.Add(CreateRow(ComponentRecordType.Remove.ToString(), ComponentRecordType.Remove));
+				subItems.Add(CreateRow( "", "" ));
+				subItems.Add(CreateRow(bd.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)bd.NextPerformanceDate), bd.NextPerformanceDate));
+				subItems.Add(CreateRow(_currentWorkPackage.PerformDate, _currentWorkPackage.PerformDate));
+				subItems.Add(CreateRow(bd.ManHours.ToString(), bd.ManHours));
+                subItems.Add(CreateRow(KManHours.ToString("F"), KManHours));
+                subItems.Add(CreateRow(bd.Cost.ToString(), bd.Cost));
+                subItems.Add(CreateRow(author, author));
 			}
             else if (item is Component)
             {
-                Component d = (Component)item;
-                AtaChapter ata = d.ATAChapter;
+                var d = (Component)item;
+                var ata = d.ATAChapter;
                 author = GlobalObjects.CasEnvironment.GetCorrector(d.CorrectorId);
-                double KManHours = d.ManHours * _currentWorkPackage.KMH;
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = ata.ToString(), Tag = ata });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = d.PartNumber, Tag = d.PartNumber });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = d.Description, Tag = d.Description });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = d.Kits.Count > 0 ? d.Kits.Count + " kits" : "", Tag = d.Kits.Count });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = d.LifeLimit != null ? d.LifeLimit.ToString() : "", Tag = d.LifeLimit });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = Lifelength.Null });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = d.Remains != null ? d.Remains.ToString() : "", Tag = d.Remains });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = ComponentRecordType.Remove.ToString(), Tag = ComponentRecordType.Remove });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = d.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)d.NextPerformanceDate), Tag = d.NextPerformanceDate });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = _currentWorkPackage.PerformDate, Tag = _currentWorkPackage.PerformDate });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = d.ManHours.ToString(), Tag = d.ManHours });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = KManHours.ToString("F"), Tag = KManHours });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = d.Cost.ToString(), Tag = d.Cost });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
+                var KManHours = d.ManHours * _currentWorkPackage.KMH;
+				subItems.Add(CreateRow(ata.ToString(), ata));
+                subItems.Add(CreateRow(d.PartNumber, d.PartNumber));
+                subItems.Add(CreateRow(d.Description, d.Description));
+                subItems.Add(CreateRow(d.Kits.Count > 0 ? d.Kits.Count + " kits" : "", d.Kits.Count));
+                subItems.Add(CreateRow(d.LifeLimit != null ? d.LifeLimit.ToString() : "", d.LifeLimit));
+                subItems.Add(CreateRow("", Lifelength.Null));
+                subItems.Add(CreateRow(d.Remains != null ? d.Remains.ToString() : "", d.Remains));
+                subItems.Add(CreateRow(ComponentRecordType.Remove.ToString(), ComponentRecordType.Remove));
+				subItems.Add(CreateRow("", "" ));
+				subItems.Add(CreateRow(d.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)d.NextPerformanceDate), d.NextPerformanceDate));
+				subItems.Add(CreateRow(_currentWorkPackage.PerformDate, _currentWorkPackage.PerformDate));
+				subItems.Add(CreateRow(d.ManHours.ToString(), d.ManHours));
+                subItems.Add(CreateRow(KManHours.ToString("F"), KManHours));
+                subItems.Add(CreateRow(d.Cost.ToString(), d.Cost));
+                subItems.Add(CreateRow(author, author));
 			}
             else if (item is ComponentDirective)
             {
-                ComponentDirective dd = (ComponentDirective)item;
-                AtaChapter ata = dd.ParentComponent.ATAChapter;
+                var dd = (ComponentDirective)item;
+                var ata = dd.ParentComponent.ATAChapter;
                 author = GlobalObjects.CasEnvironment.GetCorrector(dd.CorrectorId);
-                double KManHours = dd.ManHours * _currentWorkPackage.KMH;
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = ata != null ? ata.ToString() : "", Tag = ata });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = dd.Remarks, Tag = dd.Remarks });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = dd.Kits.Count > 0 ? dd.Kits.Count + " kits" : "", Tag = dd.Kits.Count });
+                var KManHours = dd.ManHours * _currentWorkPackage.KMH;
+				subItems.Add(CreateRow(ata != null ? ata.ToString() : "", ata));
+                subItems.Add(CreateRow("", "" ));
+                subItems.Add(CreateRow(dd.Remarks, dd.Remarks));
+                subItems.Add(CreateRow(dd.Kits.Count > 0 ? dd.Kits.Count + " kits" : "", dd.Kits.Count));
                 #region Определение текста для колонки "Первое выполнение"
 
-                ListViewItem.ListViewSubItem subItem = new ListViewItem.ListViewSubItem();
+                var subItem = new CustomCell();
                 if (dd.Threshold.FirstPerformanceSinceNew != null && !dd.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
                 {
                     subItem.Text = "s/n: " + dd.Threshold.FirstPerformanceSinceNew;
@@ -572,7 +557,7 @@ namespace CAS.UI.UIControls.WorkPakage
                 #endregion
                 #region Определение текста для колонки "повторяющийся интервал"
 
-                subItem = new ListViewItem.ListViewSubItem();
+                subItem = new CustomCell();
                 if (!dd.Threshold.RepeatInterval.IsNullOrZero())
                 {
                     subItem.Text = dd.Threshold.RepeatInterval.ToString();
@@ -585,50 +570,50 @@ namespace CAS.UI.UIControls.WorkPakage
                 }
                 subItems.Add(subItem);
                 #endregion
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = dd.Remains.ToString(), Tag = dd.Remains });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = dd.DirectiveType.ToString(), Tag = dd.DirectiveType });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = dd.NDTType.ShortName, Tag = dd.NDTType.ShortName });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = dd.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)dd.NextPerformanceDate), Tag = dd.NextPerformanceDate });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = _currentWorkPackage.PerformDate, Tag = _currentWorkPackage.PerformDate });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = dd.ManHours.ToString(), Tag = dd.ManHours });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = KManHours.ToString("F"), Tag =KManHours });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = dd.Cost.ToString(), Tag = dd.Cost });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
+                subItems.Add(CreateRow(dd.Remains.ToString(), dd.Remains));
+                subItems.Add(CreateRow(dd.DirectiveType.ToString(), dd.DirectiveType));
+				subItems.Add(CreateRow(dd.NDTType.ShortName, dd.NDTType.ShortName));
+				subItems.Add(CreateRow(dd.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)dd.NextPerformanceDate), dd.NextPerformanceDate));
+				subItems.Add(CreateRow(_currentWorkPackage.PerformDate, _currentWorkPackage.PerformDate));
+				subItems.Add(CreateRow(dd.ManHours.ToString(), dd.ManHours));
+                subItems.Add(CreateRow(KManHours.ToString("F"), KManHours));
+                subItems.Add(CreateRow(dd.Cost.ToString(), dd.Cost));
+                subItems.Add(CreateRow(author, author));
 			}
             else if (item is MaintenanceCheck)
             {
-                MaintenanceCheck mc = (MaintenanceCheck)item;
+                var mc = (MaintenanceCheck)item;
                 author = GlobalObjects.CasEnvironment.GetCorrector(mc.CorrectorId);
-                double KManHours = mc.ManHours * _currentWorkPackage.KMH;
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = null });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = mc.Name + (mc.Schedule ? " Shedule" : " Unshedule"), Tag = mc.Name });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = mc.Kits.Count > 0 ? mc.Kits.Count + " kits" : "", Tag = mc.Kits.Count });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = mc.Interval.ToString(), Tag = mc.Interval });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = Lifelength.Null });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = mc.Remains.ToString(), Tag = mc.Remains });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = mc.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)mc.NextPerformanceDate), Tag = mc.NextPerformanceDate });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = _currentWorkPackage.PerformDate, Tag = _currentWorkPackage.PerformDate });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = mc.ManHours.ToString(), Tag = mc.ManHours });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = KManHours.ToString("F"), Tag = KManHours });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = mc.Cost.ToString(), Tag = mc.Cost });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
+                var KManHours = mc.ManHours * _currentWorkPackage.KMH;
+				subItems.Add(CreateRow("", null));
+                subItems.Add(CreateRow("", ""));
+                subItems.Add(CreateRow(mc.Name + (mc.Schedule ? " Shedule" : " Unshedule"), mc.Name));
+                subItems.Add(CreateRow(mc.Kits.Count > 0 ? mc.Kits.Count + " kits" : "", mc.Kits.Count));
+                subItems.Add(CreateRow(mc.Interval.ToString(), mc.Interval));
+                subItems.Add(CreateRow( "", Lifelength.Null));
+                subItems.Add(CreateRow(mc.Remains.ToString(), mc.Remains));
+                subItems.Add(CreateRow( "", "" ));
+				subItems.Add(CreateRow( "", "" ));
+				subItems.Add(CreateRow(mc.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)mc.NextPerformanceDate), mc.NextPerformanceDate));
+				subItems.Add(CreateRow(_currentWorkPackage.PerformDate, _currentWorkPackage.PerformDate));
+				subItems.Add(CreateRow(mc.ManHours.ToString(), mc.ManHours));
+                subItems.Add(CreateRow(KManHours.ToString("F"), KManHours));
+                subItems.Add(CreateRow(mc.Cost.ToString(), mc.Cost));
+                subItems.Add(CreateRow(author, author));
 			}
             else if (item is MaintenanceDirective)
             {
-                MaintenanceDirective md = (MaintenanceDirective)item;
-                AtaChapter ata = md.ATAChapter;
+                var md = (MaintenanceDirective)item;
+                var ata = md.ATAChapter;
                 author = GlobalObjects.CasEnvironment.GetCorrector(md.CorrectorId);
-                double KManHours = md.ManHours * _currentWorkPackage.KMH;
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = ata != null ? ata.ToString() : "", Tag = ata });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = $"{md.TaskCardNumber} {md.TaskNumberCheck} {md.Description}", Tag = md.ToString() });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = md.Description, Tag = md.Description, });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = md.Kits.Count > 0 ? md.Kits.Count + " kits" : "", Tag = md.Kits.Count });
+                var KManHours = md.ManHours * _currentWorkPackage.KMH;
+				subItems.Add(CreateRow(ata != null ? ata.ToString() : "", ata));
+                subItems.Add(CreateRow($"{md.TaskCardNumber} {md.TaskNumberCheck} {md.Description}", md.ToString()));
+                subItems.Add(CreateRow(md.Description, md.Description));
+                subItems.Add(CreateRow(md.Kits.Count > 0 ? md.Kits.Count + " kits" : "", md.Kits.Count));
                 #region Определение текста для колонки "Первое выполнение"
 
-                ListViewItem.ListViewSubItem subItem = new ListViewItem.ListViewSubItem();
+                var subItem = new CustomCell();
                 if (md.Threshold.FirstPerformanceSinceNew != null && !md.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
                 {
                     subItem.Text = "s/n: " + md.Threshold.FirstPerformanceSinceNew;
@@ -650,7 +635,7 @@ namespace CAS.UI.UIControls.WorkPakage
                 #endregion
                 #region Определение текста для колонки "повторяющийся интервал"
 
-                subItem = new ListViewItem.ListViewSubItem();
+                subItem = new CustomCell();
                 if (!md.Threshold.RepeatInterval.IsNullOrZero())
                 {
                     subItem.Text = md.Threshold.RepeatInterval.ToString();
@@ -663,41 +648,41 @@ namespace CAS.UI.UIControls.WorkPakage
                 }
                 subItems.Add(subItem);
                 #endregion
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = md.Remains.ToString(), Tag = md.Remains });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = md.WorkType.ToString(), Tag = md.WorkType });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = md.NDTType.ShortName, Tag = md.NDTType.ShortName });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = md.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)md.NextPerformanceDate), Tag = md.NextPerformanceDate });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = _currentWorkPackage.PerformDate, Tag = _currentWorkPackage.PerformDate });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = md.ManHours.ToString(), Tag = md.ManHours });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = KManHours.ToString("F"), Tag = KManHours });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = md.Cost.ToString(), Tag = md.Cost });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
+                subItems.Add(CreateRow(md.Remains.ToString(), md.Remains));
+                subItems.Add(CreateRow(md.WorkType.ToString(), md.WorkType));
+				subItems.Add(CreateRow(md.NDTType.ShortName, Tag = md.NDTType.ShortName));
+				subItems.Add(CreateRow(md.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)md.NextPerformanceDate), md.NextPerformanceDate));
+				subItems.Add(CreateRow(_currentWorkPackage.PerformDate, _currentWorkPackage.PerformDate));
+				subItems.Add(CreateRow(md.ManHours.ToString(), md.ManHours));
+                subItems.Add(CreateRow(KManHours.ToString("F"), KManHours));
+                subItems.Add(CreateRow(md.Cost.ToString(), md.Cost));
+                subItems.Add(CreateRow(author, author));
 			}
             else if (item is NonRoutineJob)
             {
-                NonRoutineJob job = (NonRoutineJob)item;
-                AtaChapter ata = job.ATAChapter;
+                var job = (NonRoutineJob)item;
+                var ata = job.ATAChapter;
                 author = GlobalObjects.CasEnvironment.GetCorrector(job.CorrectorId);
-                double KManHours = job.ManHours * _currentWorkPackage.KMH;
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = ata != null ? ata.ToString() : "", Tag = ata });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = job.Title, Tag = job.Title });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = job.Description, Tag = job.Description });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = job.Kits.Count > 0 ? job.Kits.Count + " kits" : "", Tag = job.Kits.Count });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = Lifelength.Null });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = Lifelength.Null });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = Lifelength.Null });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = "" });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = "", Tag = DateTimeExtend.GetCASMinDateTime() });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = _currentWorkPackage.PerformDate, Tag = _currentWorkPackage.PerformDate });
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = job.ManHours.ToString(), Tag = job.ManHours });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = KManHours.ToString("F"), Tag = KManHours });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = job.Cost.ToString(), Tag = job.Cost });
-                subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
+                var KManHours = job.ManHours * _currentWorkPackage.KMH;
+				subItems.Add(CreateRow(ata != null ? ata.ToString() : "", ata));
+                subItems.Add(CreateRow(job.Title, job.Title));
+                subItems.Add(CreateRow(job.Description, job.Description));
+                subItems.Add(CreateRow(job.Kits.Count > 0 ? job.Kits.Count + " kits" : "", job.Kits.Count));
+                subItems.Add(CreateRow("", Lifelength.Null));
+                subItems.Add(CreateRow("", Lifelength.Null));
+                subItems.Add(CreateRow("", Lifelength.Null));
+                subItems.Add(CreateRow("", "" ));
+				subItems.Add(CreateRow("", "" ));
+				subItems.Add(CreateRow("", DateTimeExtend.GetCASMinDateTime()));
+				subItems.Add(CreateRow(_currentWorkPackage.PerformDate, _currentWorkPackage.PerformDate));
+				subItems.Add(CreateRow(job.ManHours.ToString(), job.ManHours));
+                subItems.Add(CreateRow(KManHours.ToString("F"), KManHours ));
+                subItems.Add(CreateRow(job.Cost.ToString(), job.Cost ));
+                subItems.Add(CreateRow(author, author));
 			}
             else throw new ArgumentOutOfRangeException(String.Format("1135: Takes an argument has no known type {0}", item.GetType()));
 
-            return subItems.ToArray();
+            return subItems;
         }
 
         #endregion
@@ -718,11 +703,11 @@ namespace CAS.UI.UIControls.WorkPakage
 					if (dp.Form is NonRoutineJobForm)
 					{
 						var changedJob =GlobalObjects.CasEnvironment.NewLoader.GetObjectById<NonRoutineJobDTO,NonRoutineJob>(((NonRoutineJobForm)dp.Form).CurrentJob.ItemId, true);
-						itemsListView.SelectedItems[0].Tag = changedJob;
+						radGridView1.SelectedRows[0].Tag = changedJob;
 
-						ListViewItem.ListViewSubItem[] subs = GetListViewSubItems(SelectedItem);
-						for (int i = 0; i < subs.Length; i++)
-							itemsListView.SelectedItems[0].SubItems[i].Text = subs[i].Text;
+						var subs = GetListViewSubItems(SelectedItem);
+						for (var i = 0; i < subs.Capacity; i++)
+							radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
 					}
 				}
 				e.Cancel = true;

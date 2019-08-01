@@ -13,6 +13,7 @@ using CASReports.Builders;
 using CASReports.ReportTemplates;
 using CASTerms;
 using CrystalDecisions.Shared;
+using EntityCore.DTO.General;
 using MetroFramework.Forms;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
@@ -2136,7 +2137,7 @@ if (!_isWorkOrder)
             try
             {
                 if (file.FileData == null)
-					file = GlobalObjects.CasEnvironment.NewLoader.GetObjectById<EFCore.DTO.General.AttachedFileDTO, AttachedFile>(file.ItemId, true);
+					file = GlobalObjects.CasEnvironment.NewLoader.GetObjectById<AttachedFileDTO, AttachedFile>(file.ItemId, true);
 				if (file.FileData != null)
                 {
                     // Open the document to import pages from it.

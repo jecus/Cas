@@ -1,5 +1,5 @@
 ﻿using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using CAS.UI.UIControls.Auxiliary;
 
 namespace CAS.UI.UIControls.StoresControls

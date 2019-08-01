@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
+using CAS.UI.Management;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
-using Microsoft.VisualBasic.Devices;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -184,13 +182,28 @@ namespace CAS.UI.UIControls.NewGrid
 		public CommonGridViewControl()
 		{
 			InitializeComponent();
-			radGridView1.SelectionMode = GridViewSelectionMode.FullRowSelect;
-			radGridView1.MultiSelect = true;
+			SetupGridView();
 		}
 
 
 		#endregion
 
+
+		#region private void SetupGridView()
+
+		private void SetupGridView()
+		{
+			radGridView1.SelectionMode = GridViewSelectionMode.FullRowSelect;
+			radGridView1.MultiSelect = true;
+
+			radGridView1.EnableFiltering = true;
+			radGridView1.MasterTemplate.ShowHeaderCellButtons = true;
+			radGridView1.MasterTemplate.ShowFilteringRow = false;
+
+			this.radGridView1.AllowSearchRow = true;
+		}
+
+		#endregion
 
 		#region protected virtual void SetHeaders()
 		/// <summary>
@@ -205,28 +218,15 @@ namespace CAS.UI.UIControls.NewGrid
 			foreach (var propertyInfo in properties)
 			{
 				var attr = (ListViewDataAttribute)propertyInfo.GetCustomAttributes(typeof(ListViewDataAttribute), false)[0];
-				columnHeader = new GridViewBrowseColumn(attr.Title);
+				if (propertyInfo.PropertyType == typeof(DateTime))
+					columnHeader = new GridViewDateTimeColumn(attr.Title) { FormatString = "{0:dd.MM.yyyy}" };
+				else columnHeader = new GridViewBrowseColumn(attr.Title);
 				columnHeader.Width = attr.HeaderWidth > 1 ? (int)attr.HeaderWidth : ((int)(radGridView1.Width * attr.HeaderWidth) * 2);
 				columnHeader.Tag = propertyInfo.PropertyType;
 
 				ColumnHeaderList.Add(columnHeader);
 			}
 		}
-		#endregion
-
-		#region public void AddHeader(string title, int? size = null)
-
-		public void AddHeader(string title, int? size = null)
-		{
-			var col = new GridViewBrowseColumn(title);
-
-			if (size.HasValue)
-				col.Width = size.Value;
-			else col.AutoSizeMode = BestFitColumnMode.DisplayedCells;
-
-			ColumnHeaderList.Add(col);
-		}
-
 		#endregion
 
 		#region private List<PropertyInfo> GetTypeProperties()
@@ -280,13 +280,30 @@ namespace CAS.UI.UIControls.NewGrid
 				SetItemsColor();
 				SetTotalText();
 
+				radGridView1.MasterTemplate.ExpandAllGroups();
+
 				radGridView1.RowFormatting += RadGridView1_RowFormatting;
+				radGridView1.CellFormatting += RadGridView1_CellFormatting;
+				radGridView1.FilterChanged += RadGridView1_FilterChanged;
 
 			}
 			catch (Exception ex)
 			{
 				Program.Provider.Logger.Log("Error while deleting data", ex);
 				return;
+			}
+		}
+
+		private void RadGridView1_FilterChanged(object sender, GridViewCollectionChangedEventArgs e)
+		{
+			label1.Text = "Total: " + e.GridViewTemplate.ChildRows.Count;
+		}
+
+		private void RadGridView1_CellFormatting(object sender, CellFormattingEventArgs e)
+		{
+			if (e.CellElement.Value != null)
+			{
+				e.CellElement.ToolTipText = e.CellElement.Value.ToString();
 			}
 		}
 
@@ -364,7 +381,7 @@ namespace CAS.UI.UIControls.NewGrid
 		{
 			return new CustomCell()
 			{
-				Text = text,
+				Text = text ?? "",
 				Tag = tag,
 				ForeColor = foreColor
 			};
@@ -390,6 +407,8 @@ namespace CAS.UI.UIControls.NewGrid
 
 					foreach (var cell in GetListViewSubItems(item))
 					{
+						if (cell != null)
+							cell.Text = cell.Text.Replace("\n", "");
 						rowInfo.Cells[i].Value = cell;
 
 						if(cell.ForeColor.HasValue)
@@ -523,28 +542,18 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#endregion
 
-		public void ExportToExcel()
+		//Events
+		#region private void RadGridView1_GroupSummaryEvaluate(object sender, Telerik.WinControls.UI.GroupSummaryEvaluationEventArgs e)
+
+		private void RadGridView1_GroupSummaryEvaluate(object sender, GroupSummaryEvaluationEventArgs e)
 		{
-			using (var ms = new System.IO.MemoryStream())
-			{
-				var exporter = new Telerik.WinControls.Export.GridViewSpreadExport(radGridView1);
-				var renderer = new Telerik.WinControls.Export.SpreadExportRenderer();
-				 exporter.RunExport(ms, renderer);
-
-				 var sfd = new SaveFileDialog {Filter = ".xlsx Files (*.xlsx)|*.xlsx"};
-
-				 if (sfd.ShowDialog() == DialogResult.OK)
-				{
-					using (var fileStream = new FileStream(sfd.FileName, FileMode.Create, FileAccess.Write))
-					{
-						ms.WriteTo(fileStream);
-					}
-					MessageBox.Show("File was success saved!");
-				}
-			}
+			if (e.Value is DateTime)
+				e.FormatString = $"{((DateTime)e.Value):dd.MM.yyyy}";
+			else e.FormatString = e.Value.ToString();
 		}
 
-		//Events
+		#endregion
+
 
 		#region private void RadGridView1_ContextMenuOpening(object sender, Telerik.WinControls.UI.ContextMenuOpeningEventArgs e)
 
@@ -563,7 +572,7 @@ namespace CAS.UI.UIControls.NewGrid
 		#region private void RadGridView1_RowFormatting(object sender, RowFormattingEventArgs e)
 
 		//Колхоз но по другому не знаю как сделать что бы при выделении цвет менял
-		private void RadGridView1_RowFormatting(object sender, RowFormattingEventArgs e)
+		public void RadGridView1_RowFormatting(object sender, RowFormattingEventArgs e)
 		{
 			if (e.RowElement.IsSelected)
 			{
@@ -589,6 +598,7 @@ namespace CAS.UI.UIControls.NewGrid
 						else RadGridView1_DoubleClick(sender, e);
 					}
 					break;
+				case Keys.Escape: radGridView1.FilterDescriptors.Clear(); break;
 				default:
 					break;
 			}
@@ -619,24 +629,36 @@ namespace CAS.UI.UIControls.NewGrid
 		/// </summary>
 		protected void OnDisplayerRequested()
 		{
-			if (null != DisplayerRequested)
-			{
-				var reflection = ReflectionType;
-				var k = new Keyboard();
-				if (k.ShiftKeyDown && reflection == ReflectionTypes.DisplayInCurrent)
-					reflection = ReflectionTypes.DisplayInNew;
-				var e = null != Displayer ? new ReferenceEventArgs(Entity, reflection, Displayer, DisplayerText) : new ReferenceEventArgs(Entity, reflection, DisplayerText);
+			if (SelectedItem == null)
+				return;
 
-				try
-				{
-					FillDisplayerRequestedParams(e);
-					DisplayerRequested(this, e);
-				}
-				catch (Exception ex)
-				{
-					Program.Provider.Logger.Log("Error while opening record", ex);
-				}
+			var form = ScreenAndFormManager.GetEditForm(SelectedItem);
+			if (form == null)
+				return;
+
+			if (form.ShowDialog(this) == DialogResult.OK)
+			{
+				var subs = GetListViewSubItems(SelectedItem);
+				for (int i = 0; i < subs.Count; i++)
+					radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
 			}
+		}
+
+		#endregion
+
+		#region public event EventHandler<SelectedItemsChangeEventArgs> SelectedItemsChanged;
+		/// <summary>
+		/// Событие возникающее при изменении массива выбранных элементов в списке.
+		/// </summary>
+		public event EventHandler<SelectedItemsChangeEventArgs> SelectedItemsChanged;
+		#endregion
+
+		#region private void RadGridView1_SelectionChanged(object sender, System.EventArgs e)
+
+		private void RadGridView1_SelectionChanged(object sender, EventArgs e)
+		{
+			if (SelectedItemsChanged != null)
+				SelectedItemsChanged.Invoke(this, new SelectedItemsChangeEventArgs(_selectedItemsList.Count));
 		}
 
 		#endregion

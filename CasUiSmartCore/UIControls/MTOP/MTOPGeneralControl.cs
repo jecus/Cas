@@ -79,12 +79,12 @@ namespace CAS.UI.UIControls.MTOP
 			{
 				try
 				{
-					mtopCheckListView1.ItemListView.BeginUpdate();
+					mtopCheckListView1.radGridView1.BeginUpdate();
 
 					foreach (var item in mtopCheckListView1.SelectedItems)
 						GlobalObjects.CasEnvironment.NewKeeper.Delete(item, true);
 
-					mtopCheckListView1.ItemListView.EndUpdate();
+					mtopCheckListView1.radGridView1.EndUpdate();
 				}
 				catch (Exception ex)
 				{

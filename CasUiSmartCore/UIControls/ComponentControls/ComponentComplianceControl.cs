@@ -11,7 +11,7 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.WorkPakage;
 using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;

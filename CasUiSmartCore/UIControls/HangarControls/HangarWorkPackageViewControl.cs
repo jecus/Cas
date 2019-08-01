@@ -11,7 +11,7 @@ using CAS.UI.Management;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.WorkPakage;
 using CASTerms;
-using EFCore.DTO.Dictionaries;
+using EntityCore.DTO.Dictionaries;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;

@@ -62,6 +62,10 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.textBoxStc = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.checkBoxIsApplicability = new System.Windows.Forms.CheckBox();
+			this.labelSBSubject = new System.Windows.Forms.Label();
+			this.textBoxSBSubject = new System.Windows.Forms.TextBox();
+			this.ComboBoxSbType = new CAS.UI.UIControls.Auxiliary.ATAChapterComboBox();
+			this.labelSbType = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// labelATAChapter
@@ -118,7 +122,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			this.labelSubject.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelSubject.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelSubject.Location = new System.Drawing.Point(10, 317);
+			this.labelSubject.Location = new System.Drawing.Point(10, 331);
 			this.labelSubject.Name = "labelSubject";
 			this.labelSubject.Size = new System.Drawing.Size(150, 25);
 			this.labelSubject.TabIndex = 0;
@@ -129,7 +133,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.textboxSubject.BackColor = System.Drawing.Color.White;
 			this.textboxSubject.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.textboxSubject.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textboxSubject.Location = new System.Drawing.Point(160, 317);
+			this.textboxSubject.Location = new System.Drawing.Point(160, 331);
 			this.textboxSubject.MaxLength = 1000;
 			this.textboxSubject.Multiline = true;
 			this.textboxSubject.Name = "textboxSubject";
@@ -164,7 +168,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			this.labelRemarks.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelRemarks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelRemarks.Location = new System.Drawing.Point(600, 317);
+			this.labelRemarks.Location = new System.Drawing.Point(600, 331);
 			this.labelRemarks.Name = "labelRemarks";
 			this.labelRemarks.Size = new System.Drawing.Size(100, 23);
 			this.labelRemarks.TabIndex = 0;
@@ -207,7 +211,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.textboxRemarks.BackColor = System.Drawing.Color.White;
 			this.textboxRemarks.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.textboxRemarks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textboxRemarks.Location = new System.Drawing.Point(750, 317);
+			this.textboxRemarks.Location = new System.Drawing.Point(750, 331);
 			this.textboxRemarks.MaxLength = 34000;
 			this.textboxRemarks.Multiline = true;
 			this.textboxRemarks.Name = "textboxRemarks";
@@ -319,7 +323,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			this.labelADType.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelADType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelADType.Location = new System.Drawing.Point(600, 289);
+			this.labelADType.Location = new System.Drawing.Point(600, 303);
 			this.labelADType.Name = "labelADType";
 			this.labelADType.Size = new System.Drawing.Size(150, 25);
 			this.labelADType.TabIndex = 14;
@@ -348,7 +352,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.adTypeComboBox.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.adTypeComboBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.adTypeComboBox.FormattingEnabled = true;
-			this.adTypeComboBox.Location = new System.Drawing.Point(750, 286);
+			this.adTypeComboBox.Location = new System.Drawing.Point(750, 300);
 			this.adTypeComboBox.Name = "adTypeComboBox";
 			this.adTypeComboBox.Size = new System.Drawing.Size(350, 25);
 			this.adTypeComboBox.TabIndex = 15;
@@ -401,10 +405,58 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.checkBoxIsApplicability.UseVisualStyleBackColor = true;
 			this.checkBoxIsApplicability.CheckedChanged += new System.EventHandler(this.checkBoxIsApplicability_CheckedChanged);
 			// 
+			// labelSBSubject
+			// 
+			this.labelSBSubject.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.labelSBSubject.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelSBSubject.Location = new System.Drawing.Point(10, 270);
+			this.labelSBSubject.Name = "labelSBSubject";
+			this.labelSBSubject.Size = new System.Drawing.Size(100, 23);
+			this.labelSBSubject.TabIndex = 61;
+			this.labelSBSubject.Text = "SB Subject";
+			// 
+			// textBoxSBSubject
+			// 
+			this.textBoxSBSubject.BackColor = System.Drawing.Color.White;
+			this.textBoxSBSubject.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.textBoxSBSubject.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxSBSubject.Location = new System.Drawing.Point(160, 269);
+			this.textBoxSBSubject.MaxLength = 34000;
+			this.textBoxSBSubject.Multiline = true;
+			this.textBoxSBSubject.Name = "textBoxSBSubject";
+			this.textBoxSBSubject.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.textBoxSBSubject.Size = new System.Drawing.Size(350, 56);
+			this.textBoxSBSubject.TabIndex = 62;
+			// 
+			// ComboBoxSbType
+			// 
+			this.ComboBoxSbType.BackColor = System.Drawing.Color.White;
+			this.ComboBoxSbType.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.ComboBoxSbType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.ComboBoxSbType.FormattingEnabled = true;
+			this.ComboBoxSbType.Location = new System.Drawing.Point(750, 269);
+			this.ComboBoxSbType.Name = "ComboBoxSbType";
+			this.ComboBoxSbType.Size = new System.Drawing.Size(350, 25);
+			this.ComboBoxSbType.TabIndex = 64;
+			// 
+			// labelSbType
+			// 
+			this.labelSbType.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelSbType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelSbType.Location = new System.Drawing.Point(600, 272);
+			this.labelSbType.Name = "labelSbType";
+			this.labelSbType.Size = new System.Drawing.Size(150, 25);
+			this.labelSbType.TabIndex = 63;
+			this.labelSbType.Text = "SB Type";
+			// 
 			// DirectiveInformationControl
 			// 
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this.Controls.Add(this.ComboBoxSbType);
+			this.Controls.Add(this.labelSbType);
+			this.Controls.Add(this.labelSBSubject);
+			this.Controls.Add(this.textBoxSBSubject);
 			this.Controls.Add(this.checkBoxIsApplicability);
 			this.Controls.Add(this.attachedFileControlSTC);
 			this.Controls.Add(this.textBoxStc);
@@ -470,5 +522,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 		private TextBox textBoxStc;
 		private Label label1;
 		private CheckBox checkBoxIsApplicability;
+		private Label labelSBSubject;
+		private TextBox textBoxSBSubject;
+		private ATAChapterComboBox ComboBoxSbType;
+		private Label labelSbType;
 	}
 }

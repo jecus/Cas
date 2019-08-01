@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using CASTerms;
 using System.Linq;
 using CAS.UI.UIControls.ProductControls;
 using CAS.UI.UIControls.PurchaseControls;
@@ -10,7 +8,6 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
-using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.KitControls
 {

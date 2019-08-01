@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -300,7 +300,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				return;
 			}
 
-			if (purchaseRecordListView1.ListViewItemList.Count <= 0)
+			if (purchaseRecordListView1.ItemsCount <= 0)
 			{
 				MessageBox.Show("Please select a price for purchase order", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,

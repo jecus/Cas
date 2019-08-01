@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
-using EFCore.DTO.Dictionaries;
+using EntityCore.DTO.Dictionaries;
 using SmartCore.Auxiliary;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -221,7 +221,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
                                         MessageBoxIcon.Exclamation);
                     return;
                 }
-                if(listViewAddedItems.ListViewItemList.Count <= 0)
+                if(listViewAddedItems.ItemsCount <= 0)
                 {
                     MessageBox.Show("Please select a kits for quotation order", (string)new GlobalTermsProvider()["SystemName"],
                                         MessageBoxButtons.OK,
@@ -235,7 +235,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
             }
             else
             {
-                if (listViewKits.ListViewItemList.Count <= 0)
+                if (listViewKits.ItemsCount <= 0)
                 {
                     MessageBox.Show("Please select a kits for quotation order", (string)new GlobalTermsProvider()["SystemName"],
                                         MessageBoxButtons.OK,

@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
-using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Entities.General.Mail;
 using SmartCore.Purchase;
@@ -10,7 +9,7 @@ using Convert = SmartCore.Auxiliary.Convert;
 
 namespace CAS.UI.UIControls.MailControls
 {
-	public partial class MailChatListView : BaseListViewControl<MailChats>
+	public partial class MailChatListView : BaseGridViewControl<MailChats>
 	{
 		#region Constrcuctor
 
@@ -25,28 +24,18 @@ namespace CAS.UI.UIControls.MailControls
 
 		protected override void SetHeaders()
 		{
-			ColumnHeaderList.Clear();
-
-			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "From - To" };
-			ColumnHeaderList.Add(columnHeader);
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Description" };
-			ColumnHeaderList.Add(columnHeader);
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "CreateDate" };
-			ColumnHeaderList.Add(columnHeader);
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
-			ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+			AddColumn("From - To", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Description", (int)(radGridView1.Width * 0.2f));
+			AddColumn("CreateDate", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
 		}
 
 		#endregion
 
 		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(MailChats item)
 
-		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(MailChats item)
+		protected override List<CustomCell> GetListViewSubItems(MailChats item)
 		{
-			var subItems = new List<ListViewItem.ListViewSubItem>();
-
 			var operatorName = GlobalObjects.CasEnvironment.Operators[0].Name;
 			var from = item.SupplierFrom != Supplier.Unknown ? item.SupplierFrom.ToString() : operatorName;
 			var to = item.SupplierTo != Supplier.Unknown ? item.SupplierTo.ToString() : operatorName;
@@ -54,15 +43,13 @@ namespace CAS.UI.UIControls.MailControls
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 			var fromTo = $"{from} - {to}";
 
-			var subItem = new ListViewItem.ListViewSubItem { Text = fromTo, Tag = fromTo };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = item.Description, Tag = item.Description };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = Convert.GetDateFormat(item.CreateDate), Tag = item.CreateDate };
-			subItems.Add(subItem);
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
-
-			return subItems.ToArray();
+			return new List<CustomCell>
+			{
+				CreateRow(fromTo, fromTo ),
+				CreateRow(item.Description, item.Description ),
+				CreateRow(Convert.GetDateFormat(item.CreateDate), item.CreateDate ),
+				CreateRow(author, author )
+			};
 		}
 
 		#endregion

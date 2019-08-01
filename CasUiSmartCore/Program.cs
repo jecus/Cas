@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Logging;
 using CAS.UI.Management.Dispatchering;
@@ -93,7 +94,7 @@ namespace CAS.UI
 
 			var environment = DbTypes.CasEnvironment = new CasEnvironment();
 			environment.AuditRepository = GlobalObjects.AuditRepository;
-
+			environment.ApiProvider = new ApiProvider((string)GlobalObjects.Config["ConnectionStrings"]["ScatTest"]);
 
 			var nonRoutineJobDataAccess = new NonRoutineJobDataAccess(environment.Loader, environment.Keeper);
 			var itemsRelationsDataAccess = new ItemsRelationsDataAccess(environment);
@@ -107,9 +108,9 @@ namespace CAS.UI
 			var averageUtilizationService = new AverageUtilizationCore(aircraftService, storeService, compontntService);
 			var directiveService = new DirectiveCore(environment.NewKeeper, environment.NewLoader, environment.Keeper,  environment.Loader, itemsRelationsDataAccess);
 			var aircraftFlightService = new AircraftFlightCore(environment, environment.Loader, environment.NewLoader, directiveService, environment.Manipulator, compontntService, environment.NewKeeper,aircraftService);
-			var flightTrackService = new FlightTrackCore(environment.NewLoader);
+			var flightTrackService = new FlightTrackCore(environment.NewLoader, environment.Loader, environment);
 			var calculator = new Calculator(environment,compontntService, aircraftFlightService, aircraftService);
-	        var mtopCalculator = new MTOPCalculator(calculator);
+	        var mtopCalculator = new MTOPCalculator(calculator, aircraftService);
 			var planOpsCalculator = new PlanOpsCalculator(environment.NewLoader, environment.NewKeeper, aircraftService,flightTrackService);
 			var performanceCalculator = new PerformanceCalculator(calculator, averageUtilizationService, mtopCalculator);
 			var packageService = new PackagesCore(environment, environment.NewKeeper, environment.Loader, aircraftService, compontntService);

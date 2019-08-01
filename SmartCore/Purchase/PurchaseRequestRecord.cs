@@ -1,7 +1,6 @@
 using System;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using SmartCore.Auxiliary.Extentions;
-using SmartCore.Calculations;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;

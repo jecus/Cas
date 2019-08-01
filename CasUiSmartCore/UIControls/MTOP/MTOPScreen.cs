@@ -7,8 +7,8 @@ using AvControls;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -383,7 +383,7 @@ namespace CAS.UI.UIControls.MTOP
 		///<param name="resultCollection"></param>
 		private void FilterItems(IEnumerable<MaintenanceDirective> initialCollection, ICommonCollection<MaintenanceDirective> resultCollection)
 		{
-			if (_filter == null || _filter.Count == 0)
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
 				resultCollection.Clear();
 				resultCollection.AddRange(initialCollection);
@@ -426,7 +426,7 @@ namespace CAS.UI.UIControls.MTOP
 		///<param name="resultCollection"></param>
 		private void FilterZeroItems(IEnumerable<MaintenanceDirective> initialCollection, ICommonCollection<MaintenanceDirective> resultCollection)
 		{
-			if (_filterZero == null || _filterZero.Count == 0)
+			if (_filterZero == null || _filterZero.All(i => i.Values.Length == 0))
 			{
 				resultCollection.Clear();
 				resultCollection.AddRange(initialCollection);

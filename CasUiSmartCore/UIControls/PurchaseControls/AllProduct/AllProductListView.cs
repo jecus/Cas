@@ -1,26 +1,28 @@
-﻿using System.Collections.Generic;
+﻿
+using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
-using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
-	public partial class AllProductListView : BaseListViewControl<Product>
+	public partial class AllProductListView : BaseGridViewControl<Product>
 	{
 		#region public ProductListView()
 
 		public AllProductListView()
         {
             SortMultiplier = 1;
-            IgnoreAutoResize = true;
+            //IgnoreAutoResize = true;
 			InitializeComponent();
 		}
 
 		#endregion
 
-		protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
+		protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
 		{
 			if (SelectedItem == null) return;
 
@@ -30,8 +32,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 				if (editForm.ShowDialog() == DialogResult.OK)
 				{
 					var subs = GetListViewSubItems(SelectedItem);
-					for (int i = 0; i < subs.Length; i++)
-						itemsListView.SelectedItems[0].SubItems[i].Text = subs[i].Text;
+					for (int i = 0; i < subs.Count; i++)
+						radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
 				}
 			}
 			else
@@ -40,8 +42,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 				if (editForm.ShowDialog() == DialogResult.OK)
 				{
 					var subs = GetListViewSubItems(SelectedItem);
-					for (int i = 0; i < subs.Length; i++)
-						itemsListView.SelectedItems[0].SubItems[i].Text = subs[i].Text;
+					for (int i = 0; i < subs.Count; i++)
+						radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
 				}
 			}
 		}
@@ -49,85 +51,53 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		protected override void SetHeaders()
         {
-            ColumnHeaderList.Clear();
-
-
-            var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Name" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Part Number" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Alt Part Number" };
-            ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Standart" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Description" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Reference" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Suppliers" };
-            ColumnHeaderList.Add(columnHeader);
-			
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Code" };
-            ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "ATA" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "Class" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.10f), Text = "IsDangerous" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Remarks" };
-            ColumnHeaderList.Add(columnHeader);
-
-            columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
-            ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+			AddColumn("Type", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Name", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Part Number", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Alt Part Number", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Standart", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Description", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Reference", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Suppliers", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Code", (int)(radGridView1.Width * 0.20f));
+			AddColumn("ATA", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Class", (int)(radGridView1.Width * 0.20f));
+			AddColumn("IsDangerous", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Remarks", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
         }
 
-        protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Product item)
+        protected override List<CustomCell> GetListViewSubItems(Product item)
         {
-            var subItems = new List<ListViewItem.ListViewSubItem>();
+            var subItems = new List<CustomCell>();
             var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Name, Tag = item.Name });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.PartNumber, Tag = item.PartNumber });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.AltPartNumber, Tag = item.AltPartNumber });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Standart?.ToString(), Tag = item.Standart });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Description, Tag = item.Description });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Reference, Tag = item.Reference });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Suppliers?.ToString(), Tag = item.Suppliers });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Code, Tag = item.Code });
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.ATAChapter?.ToString(), Tag = item.ATAChapter });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.GoodsClass?.ToString(), Tag = item.GoodsClass });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.IsDangerous.ToString(), Tag = item.IsDangerous });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Remarks, Tag = item.Remarks });
-            subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
+            subItems.Add(CreateRow(item.ProductType.ToString(), item.ProductType));
+            subItems.Add(CreateRow(item.Name, item.Name));
+            subItems.Add(CreateRow(item.PartNumber, item.PartNumber));
+            subItems.Add(CreateRow(item.AltPartNumber, item.AltPartNumber));
+            subItems.Add(CreateRow(item.Standart?.ToString(), item.Standart));
+            subItems.Add(CreateRow(item.Description, item.Description));
+            subItems.Add(CreateRow(item.Reference, item.Reference));
+            subItems.Add(CreateRow(item.Suppliers?.ToString(), item.Suppliers));
+            subItems.Add(CreateRow(item.Code, item.Code));
+            subItems.Add(CreateRow(item.ATAChapter?.ToString(), item.ATAChapter));
+            subItems.Add(CreateRow(item.GoodsClass?.ToString(), item.GoodsClass));
+            subItems.Add(CreateRow(item.IsDangerous.ToString(), item.IsDangerous));
+            subItems.Add(CreateRow(item.Remarks, item.Remarks));
+            subItems.Add(CreateRow(author, author));
 
-			return subItems.ToArray();
+			return subItems;
         }
 
-        protected override void SetGroupsToItems(int columnIndex)
+        #region Overrides of BaseGridViewControl<InitialOrderRecord>
+
+        protected override void GroupingItems()
         {
-            itemsListView.Groups.Clear();
-            foreach (var item in ListViewItemList)
-            {
-                var product = item.Tag as Product;
-                var temp = product.ProductType.ToString();
-
-                itemsListView.Groups.Add(temp, temp);
-                item.Group = itemsListView.Groups[temp];
-            }
+	        Grouping("Type");
         }
-        
-    }
+
+        #endregion
+
+	}
 }

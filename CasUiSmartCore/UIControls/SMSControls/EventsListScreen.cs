@@ -1,13 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -64,7 +65,7 @@ namespace CAS.UI.UIControls.SMSControls
         {
             if (e.Cancelled)
                 return;
-            DirectivesViewer.SetItemsArray(InitialDirectiveArray);
+            DirectivesViewer.SetItemsArray(InitialDirectiveArray.OfType<BaseEntityObject>());
 
             if (CurrentAircraft != null)
             {
@@ -74,7 +75,7 @@ namespace CAS.UI.UIControls.SMSControls
             }
             DirectivesViewer.Focus();
 
-            headerControl.PrintButtonEnabled = DirectivesViewer.ItemListView.Items.Count != 0;
+            headerControl.PrintButtonEnabled = DirectivesViewer.ItemsCount != 0;
             buttonDeleteSelected.Enabled = DirectivesViewer.SelectedItem != null;
         }
         #endregion
@@ -122,7 +123,7 @@ namespace CAS.UI.UIControls.SMSControls
 
         protected override void InitListView(PropertyInfo beginGroup = null)
         {
-            DirectivesViewer = new EventsListView(beginGroup);
+            DirectivesViewer = new EventsListView();
             DirectivesViewer.TabIndex = 2;
             DirectivesViewer.Location = new Point(panel1.Left, panel1.Top);
             DirectivesViewer.Dock = DockStyle.Fill;

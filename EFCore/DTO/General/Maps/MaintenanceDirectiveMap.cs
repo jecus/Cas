@@ -208,6 +208,10 @@ namespace EFCore.DTO.General.Maps
 				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
 				.HasColumnName("ProgramIndicator");
 
+			Property(i => i.APUCalc)
+				.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+				.HasColumnName("APUCalc");
+
 			HasRequired(i => i.ATAChapter)
 				.WithMany(i => i.MaintenanceDirectiveDtos)
 				.HasForeignKey(i => i.ATAChapterId);

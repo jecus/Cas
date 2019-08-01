@@ -1,16 +1,13 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
-using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.Auxiliary.Comparers;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Entities.General.Schedule;
 
 namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 {
-	public partial class FlightPlanOpsListView : BaseListViewControl<FlightPlanOps>
+	public partial class FlightPlanOpsListView : BaseGridViewControl<FlightPlanOps>
 	{
 		#region public FlightPlanOpsListView()
 
@@ -28,37 +25,26 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 
 		protected override void SetHeaders()
 		{
-			ColumnHeaderList.Clear();
-
-			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.4f), Text = "From - To" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.8f), Text = "Remarks" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
-			ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+			AddColumn("From - To", (int)(radGridView1.Width * 0.8f));
+			AddColumn("Remarks", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
 		}
 
 		#endregion
 
-		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(IFlightNumberParams item)
+		#region protected override List<CustomCell> GetListViewSubItems(FlightPlanOps item)
 
-		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(FlightPlanOps item)
+		protected override List<CustomCell> GetListViewSubItems(FlightPlanOps item)
 		{
-			var subItems = new List<ListViewItem.ListViewSubItem>();
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 			var period = $"{item.From:dd-MMMM-yyyy} - {item.To:dd-MMMM-yyyy}";
 
-			var subItem = new ListViewItem.ListViewSubItem { Text = period, Tag = period };
-			subItems.Add(subItem);
-
-			subItem = new ListViewItem.ListViewSubItem { Text = item.Remarks, Tag = item.Remarks };
-			subItems.Add(subItem);
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
-			return subItems.ToArray();
+			return new List<CustomCell>
+			{
+				CreateRow(period, Tag = period),
+				CreateRow(item.Remarks, Tag = item.Remarks),
+				CreateRow(author, Tag = author)
+			};
 		}
 
 		#endregion
@@ -80,30 +66,30 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 
 		#region protected override void SortItems(int columnIndex)
 
-		protected override void SortItems(int columnIndex)
-		{
-			if (OldColumnIndex != columnIndex)
-				SortMultiplier = -1;
-			if (SortMultiplier == 1)
-				SortMultiplier = -1;
-			else
-				SortMultiplier = 1;
-			itemsListView.Items.Clear();
-			SetGroupsToItems(columnIndex);
+		//protected override void SortItems(int columnIndex)
+		//{
+		//	if (OldColumnIndex != columnIndex)
+		//		SortMultiplier = -1;
+		//	if (SortMultiplier == 1)
+		//		SortMultiplier = -1;
+		//	else
+		//		SortMultiplier = 1;
+		//	itemsListView.Items.Clear();
+		//	SetGroupsToItems(columnIndex);
 
-			if (columnIndex == 0)
-			{
-				itemsListView.Items.AddRange(ListViewItemList.OrderByDescending(i => ((FlightPlanOps)i.Tag).From).ToArray());
-			}
-			else
-			{
-				ListViewItemList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
-				itemsListView.Items.AddRange(ListViewItemList.ToArray());
-			}
+		//	if (columnIndex == 0)
+		//	{
+		//		itemsListView.Items.AddRange(ListViewItemList.OrderByDescending(i => ((FlightPlanOps)i.Tag).From).ToArray());
+		//	}
+		//	else
+		//	{
+		//		ListViewItemList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
+		//		itemsListView.Items.AddRange(ListViewItemList.ToArray());
+		//	}
 
-			OldColumnIndex = columnIndex;
-			SetItemsColor();
-		}
+		//	OldColumnIndex = columnIndex;
+		//	SetItemsColor();
+		//}
 
 		#endregion
 	}

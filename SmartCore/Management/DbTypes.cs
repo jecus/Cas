@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using SmartCore.Aircrafts;
 using SmartCore.Calculations;
+using SmartCore.DtoHelper;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
@@ -157,9 +158,10 @@ namespace SmartCore.Management
                 return ((IBaseEntityObject)o).ItemId;
 		    if (o is DateTime)
 		    {
-                return (((DateTime)o).Day + "." + ((DateTime)o).Month + "." + ((DateTime)o).Year + " " +
-                        ((DateTime)o).TimeOfDay.Hours + ":" + ((DateTime)o).TimeOfDay.Minutes + ":" + ((DateTime)o).TimeOfDay.Seconds);
-               
+			    //return ((DateTime) o).ToSqlDate();
+			    return (((DateTime)o).Day + "." + ((DateTime)o).Month + "." + ((DateTime)o).Year + " " +
+			          ((DateTime)o).TimeOfDay.Hours + ":" + ((DateTime)o).TimeOfDay.Minutes + ":" + ((DateTime)o).TimeOfDay.Seconds);
+
 		    }
             if (o is TimeSpan) return TimeToInt((TimeSpan) o);
             if (o is AverageUtilization) 

@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
+using System.Linq;
 using Auxiliary;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
-using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.Auxiliary.Comparers;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.Schedule;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.ScheduleControls
 {
     ///<summary>
     /// список для отображения событий системы безопасности полетов
     ///</summary>
-    public partial class FlightNumberListView : BaseListViewControl<IFlightNumberParams>
+    public partial class FlightNumberListView : BaseGridViewControl<IFlightNumberParams>
 	{
 		#region Fields
 
@@ -59,123 +61,55 @@ namespace CAS.UI.UIControls.ScheduleControls
 
 		protected override void SetHeaders()
 		{
-			ColumnHeaderList.Clear();
-
-			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Flight №" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.3f), Text = "Period" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.15f), Text = "Day of the Week" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Departure" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Departure Time" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Arrival" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Arrival Time" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Flight Time" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Aircraft" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.15f), Text = "Distance" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "AC Code" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "FL Type" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.15f), Text = "FL Cat." };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Description" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Remarks" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "HiddenRemarks" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
-			ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+			AddColumn("Flight №", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Period", (int)(radGridView1.Width * 0.6f));
+			AddColumn("Day of the Week", (int)(radGridView1.Width * 0.30f));
+			AddColumn("Departure", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Departure Time", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Arrival", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Arrival Time", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Flight Time", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Aircraft", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Distance", (int)(radGridView1.Width * 0.30f));
+			AddColumn("AC Code", (int)(radGridView1.Width * 0.2f));
+			AddColumn("FL Type", (int)(radGridView1.Width * 0.2f));
+			AddColumn("FL Cat.", (int)(radGridView1.Width * 0.30f));
+			AddColumn("Description", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Remarks", (int)(radGridView1.Width * 0.4f));
+			AddColumn("HiddenRemarks", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
 		}
 
 		#endregion
 
-		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(IFlightNumberParams item)
+		#region protected override List<CustomCell> GetListViewSubItems(IFlightNumberParams item)
 
-		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(IFlightNumberParams item)
+		protected override List<CustomCell> GetListViewSubItems(IFlightNumberParams item)
 		{
-			var subItems = new List<ListViewItem.ListViewSubItem>();
+			var subItems = new List<CustomCell>();
 
 			if (item is FlightNumber)
 			{
 				var flightNumber = item as FlightNumber;
 				var author = GlobalObjects.CasEnvironment.GetCorrector(flightNumber.CorrectorId);
-				var subItem = new ListViewItem.ListViewSubItem {Text = flightNumber.FlightNo.ToString(), Tag = flightNumber.FlightNo};
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem {Text = "", Tag = ""};
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem {Text = "", Tag = ""};
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = "", Tag = "" };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = "", Tag = "" };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = "", Tag = "" };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = "", Tag = "" };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = "", Tag = "" };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = "", Tag = "" };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = "", Tag = "" };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = "", Tag = "" };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = "", Tag = "" };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = "", Tag = "" };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = flightNumber.Description, Tag = flightNumber.Description };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = flightNumber.Remarks, Tag = flightNumber.Remarks };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = flightNumber.HiddenRemarks, Tag = flightNumber.HiddenRemarks };
-				subItems.Add(subItem);
-
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
+				
+				subItems.Add(CreateRow(flightNumber.FlightNo.ToString(), Tag = flightNumber.FlightNo ));
+				subItems.Add(CreateRow("", "" ));
+				subItems.Add(CreateRow("", "" ));
+				subItems.Add(CreateRow("", "" ));
+				subItems.Add(CreateRow("", "" ));
+				subItems.Add(CreateRow("", "" ));
+				subItems.Add(CreateRow("", "" ));
+				subItems.Add(CreateRow("", "" ));
+				subItems.Add(CreateRow("", "" ));
+				subItems.Add(CreateRow("", "" ));
+				subItems.Add(CreateRow("", "" ));
+				subItems.Add(CreateRow("", "" ));
+				subItems.Add(CreateRow("", "" ));
+				subItems.Add(CreateRow(flightNumber.Description, flightNumber.Description ));
+				subItems.Add(CreateRow(flightNumber.Remarks, flightNumber.Remarks ));
+				subItems.Add(CreateRow(flightNumber.HiddenRemarks, flightNumber.HiddenRemarks ));
+				subItems.Add(CreateRow(author, author ));
 			}
 			else
 			{
@@ -245,69 +179,78 @@ namespace CAS.UI.UIControls.ScheduleControls
 
 				var distance = $"{flightNumberPeriod.FlightNum.Distance} {flightNumberPeriod.FlightNum.DistanceMeasure}";
 
-				var subItem = new ListViewItem.ListViewSubItem { Text = "", Tag = "" };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = period, Tag = period };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = days, Tag = days };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = flightNumberPeriod.FlightNum.StationFrom.ToString(), Tag = flightNumberPeriod.FlightNum.StationFrom };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = departure.ToString("HH:mm"), Tag = departure };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = flightNumberPeriod.FlightNum.StationTo.ToString(), Tag = flightNumberPeriod.FlightNum.StationTo };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = arrival.ToString("HH:mm"), Tag = arrival };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = flightTime, Tag = flightTime };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = aircrafts, Tag = aircrafts };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = distance, Tag = flightNumberPeriod.FlightNum.Distance };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = flightNumberPeriod.FlightNum.FlightAircraftCode.ToString(), Tag = flightNumberPeriod.FlightNum.FlightAircraftCode };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = flightNumberPeriod.FlightNum.FlightType.ToString(), Tag = flightNumberPeriod.FlightNum.FlightType };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = flightNumberPeriod.FlightNum.FlightCategory.ToString(), Tag = flightNumberPeriod.FlightNum.FlightCategory };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = "", Tag = "" };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = "", Tag = "" };
-				subItems.Add(subItem);
-
-				subItem = new ListViewItem.ListViewSubItem { Text = "", Tag = "" };
-				subItems.Add(subItem);
-
-				subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
+				subItems.Add(CreateRow("", "" ));
+				subItems.Add(CreateRow(period, period ));
+				subItems.Add(CreateRow(days, days ));
+				subItems.Add(CreateRow(flightNumberPeriod.FlightNum.StationFrom.ToString(), flightNumberPeriod.FlightNum.StationFrom ));
+				subItems.Add(CreateRow(departure.ToString("HH:mm"), departure ));
+				subItems.Add(CreateRow(flightNumberPeriod.FlightNum.StationTo.ToString(), flightNumberPeriod.FlightNum.StationTo ));
+				subItems.Add(CreateRow(arrival.ToString("HH:mm"), arrival ));
+				subItems.Add(CreateRow(flightTime, flightTime ));
+				subItems.Add(CreateRow(aircrafts, aircrafts ));
+				subItems.Add(CreateRow(distance, flightNumberPeriod.FlightNum.Distance ));
+				subItems.Add(CreateRow(flightNumberPeriod.FlightNum.FlightAircraftCode.ToString(), flightNumberPeriod.FlightNum.FlightAircraftCode ));
+				subItems.Add(CreateRow(flightNumberPeriod.FlightNum.FlightType.ToString(), flightNumberPeriod.FlightNum.FlightType ));
+				subItems.Add(CreateRow(flightNumberPeriod.FlightNum.FlightCategory.ToString(), flightNumberPeriod.FlightNum.FlightCategory ));
+				subItems.Add(CreateRow("", "" ));
+				subItems.Add(CreateRow("", "" ));
+				subItems.Add(CreateRow("", "" ));
+				subItems.Add(CreateRow(author, author ));
 			}
 
-			return subItems.ToArray();
+			return subItems;
+		}
+
+		#endregion
+
+
+		#region Overrides of BaseGridViewControl<IFlightNumberParams>
+
+		protected override void Sorting(string colName = null)
+		{
+			
+		}
+
+		protected override void CustomSort(int ColumnIndex)
+		{
+			if (OldColumnIndex != ColumnIndex)
+				SortMultiplier = -1;
+			if (SortMultiplier == 1)
+				SortMultiplier = -1;
+			else
+				SortMultiplier = 1;
+
+			var resultList = new List<IFlightNumberParams>();
+			var list = radGridView1.Rows.Select(i => i).ToList();
+			list.Sort(new GridViewDataRowInfoComparer(ColumnIndex, SortMultiplier));
+			//добавление остальных подзадач
+			foreach (GridViewRowInfo item in list)
+			{
+				if (item.Tag is FlightNumber)
+				{
+					resultList.Add(item.Tag as FlightNumber);
+
+					var component = (FlightNumber)item.Tag;
+					var items = list
+						.Where(lvi =>
+							lvi.Tag is FlightNumberPeriod &&
+							((FlightNumberPeriod)lvi.Tag).FlightNumberId == component.ItemId).Select(i => i.Tag);
+					resultList.AddRange(items.OfType<FlightNumberPeriod>());
+				}
+			}
+
+			SetItemsArray(resultList.ToArray());
 		}
 
 		#endregion
 
 		#region protected override void SortItems(int columnIndex)
 
-		protected override void SortItems(int columnIndex)
-		{
-			itemsListView.Items.Clear();
-			itemsListView.Items.AddRange(ListViewItemList.ToArray());
-		}
+		//protected override void SortItems(int columnIndex)
+		//{
+		//	itemsListView.Items.Clear();
+		//	itemsListView.Items.AddRange(ListViewItemList.ToArray());
+		//}
 
 		#endregion
 

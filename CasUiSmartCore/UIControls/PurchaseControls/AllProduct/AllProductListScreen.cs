@@ -7,11 +7,12 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
+using CAS.UI.UIControls.NewGrid;
 using CAS.UI.UIControls.PurchaseControls.Initial;
 using CASTerms;
-using EFCore.DTO.Dictionaries;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.DTO.Dictionaries;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -19,6 +20,7 @@ using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Filters;
 using SmartCore.Purchase;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
@@ -28,30 +30,30 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private ICommonCollection<Product> _initialProductArray = new CommonCollection<Product>();
 		private ICommonCollection<Product> _resultProductArray = new CommonCollection<Product>();
-        private List<InitialOrder> _initialOrders = new List<InitialOrder>();
-        private List<RequestForQuotation> _requestForQuotations = new List<RequestForQuotation>();
+		private List<InitialOrder> _initialOrders = new List<InitialOrder>();
+		private List<RequestForQuotation> _requestForQuotations = new List<RequestForQuotation>();
 
-		private BaseListViewControl<Product> _directivesViewer;
+		private BaseGridViewControl<Product> _directivesViewer;
 
 		private CommonFilterCollection _filter;
 
-		private ContextMenuStrip _contextMenuStrip;
-		private ToolStripMenuItem _toolStripMenuItemCopy;
-		private ToolStripMenuItem _toolStripMenuItemPaste;
-		private ToolStripMenuItem _toolStripMenuItemShowImages;
-		private ToolStripMenuItem _toolStripMenuItemDelete;
-        private ToolStripMenuItem _toolStripMenuItemComposeInitial;
-        private ToolStripMenuItem _toolStripMenuItemAddInitial;
-        private ToolStripMenuItem _toolStripMenuItemComposeQuotation;
-        private ToolStripMenuItem _toolStripMenuItemAddQuotation;
+		private RadDropDownMenu _contextMenuStrip;
+		private RadMenuItem _toolStripMenuItemCopy;
+		private RadMenuItem _toolStripMenuItemPaste;
+		private RadMenuItem _toolStripMenuItemShowImages;
+		private RadMenuItem _toolStripMenuItemDelete;
+		private RadMenuItem _toolStripMenuItemComposeInitial;
+		private RadMenuItem _toolStripMenuItemAddInitial;
+		private RadMenuItem _toolStripMenuItemComposeQuotation;
+		private RadMenuItem _toolStripMenuItemAddQuotation;
 
-        #endregion
+		#endregion
 
-        #region Constructor
+		#region Constructor
 
-        #region public ProductListScreen()
+		#region public ProductListScreen()
 
-        public AllProductListScreen()
+		public AllProductListScreen()
 		{
 			InitializeComponent();
 		}
@@ -82,21 +84,21 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
-            _toolStripMenuItemAddInitial.DropDownItems.Clear();
-            foreach (var initialOrder in _initialOrders)
-            {
-                var item = new ToolStripMenuItem(initialOrder.Title);
-                _toolStripMenuItemAddInitial.DropDownItems.Add(item);
-            }
+			_toolStripMenuItemAddInitial.Items.Clear();
+			foreach (var initialOrder in _initialOrders)
+			{
+				var item = new RadMenuItem(initialOrder.Title);
+				_toolStripMenuItemAddInitial.Items.Add(item);
+			}
 
-            _toolStripMenuItemAddQuotation.DropDownItems.Clear();
-            foreach (var requestForQuotation in _requestForQuotations)
-            {
-                var item = new ToolStripMenuItem(requestForQuotation.Title);
-                _toolStripMenuItemAddQuotation.DropDownItems.Add(item);
-            }
+			_toolStripMenuItemAddQuotation.Items.Clear();
+			foreach (var requestForQuotation in _requestForQuotations)
+			{
+				var item = new RadMenuItem(requestForQuotation.Title);
+				_toolStripMenuItemAddQuotation.Items.Add(item);
+			}
 
-            _directivesViewer.SetItemsArray(_resultProductArray.ToArray());
+			_directivesViewer.SetItemsArray(_resultProductArray.ToArray());
 			_directivesViewer.Focus();
 		}
 
@@ -108,15 +110,15 @@ namespace CAS.UI.UIControls.PurchaseControls
 		{
 			_initialProductArray.Clear();
 			_resultProductArray.Clear();
-            _initialOrders.Clear();
-            _requestForQuotations.Clear();
+			_initialOrders.Clear();
+			_requestForQuotations.Clear();
 
 			AnimatedThreadWorker.ReportProgress(0, "load products");
 
 			try
 			{
-                _initialOrders.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderDTO, InitialOrder>(new Filter("Status", 1)));
-                _requestForQuotations.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>(new Filter("Status", 1)));
+				_initialOrders.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderDTO, InitialOrder>(new Filter("Status", 1)));
+				_requestForQuotations.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>(new Filter("Status", 1)));
 				_initialProductArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, Product>(new Filter("ModelingObjectTypeId",-1),loadChild:true));
 				_initialProductArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, ComponentModel>(new Filter("ModelingObjectTypeId", 5), loadChild: true));
 
@@ -178,7 +180,22 @@ namespace CAS.UI.UIControls.PurchaseControls
 				Dock = DockStyle.Fill
 			};
 
-			_directivesViewer.ContextMenuStrip = _contextMenuStrip;
+			_directivesViewer.CustomMenu = _contextMenuStrip;
+
+			_directivesViewer.MenuOpeningAction = () =>
+			{
+				if (_directivesViewer.SelectedItems.Count <= 0)
+				{
+					_toolStripMenuItemShowImages.Enabled = false;
+				}
+
+				if (_directivesViewer.SelectedItems.Count == 1)
+				{
+					var product = _directivesViewer.SelectedItems[0];
+					_toolStripMenuItemShowImages.Enabled = product.ImageFile != null;
+				}
+			};
+
 			panel1.Controls.Add(_directivesViewer);
 		}
 
@@ -188,15 +205,15 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new ContextMenuStrip();
-			_toolStripMenuItemCopy = new ToolStripMenuItem();
-			_toolStripMenuItemPaste = new ToolStripMenuItem();
-			_toolStripMenuItemDelete = new ToolStripMenuItem();
-			_toolStripMenuItemShowImages = new ToolStripMenuItem();
-			_toolStripMenuItemComposeInitial = new ToolStripMenuItem();
-			_toolStripMenuItemAddInitial = new ToolStripMenuItem();
-			_toolStripMenuItemComposeQuotation = new ToolStripMenuItem();
-			_toolStripMenuItemAddQuotation = new ToolStripMenuItem();
+			_contextMenuStrip = new RadDropDownMenu();
+			_toolStripMenuItemCopy = new RadMenuItem();
+			_toolStripMenuItemPaste = new RadMenuItem();
+			_toolStripMenuItemDelete = new RadMenuItem();
+			_toolStripMenuItemShowImages = new RadMenuItem();
+			_toolStripMenuItemComposeInitial = new RadMenuItem();
+			_toolStripMenuItemAddInitial = new RadMenuItem();
+			_toolStripMenuItemComposeQuotation = new RadMenuItem();
+			_toolStripMenuItemAddQuotation = new RadMenuItem();
 
 			// 
 			// contextMenuStrip
@@ -225,84 +242,61 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// 
 			_toolStripMenuItemShowImages.Text = "Show Image";
 			_toolStripMenuItemShowImages.Click += ShowImageItemsClick;
-            // 
-            // toolStripMenuItemComposeInitialOrder
-            // 
-            _toolStripMenuItemComposeInitial.Text = "Compose Initial Order";
-            _toolStripMenuItemComposeInitial.Click += _toolStripMenuItemComposeInitial_Click;
-            // 
-            // toolStripMenuItemAddtoInitialOrder
-            // 
-            _toolStripMenuItemAddInitial.Text = "Add to Initial Order";
-            
-            // 
-            // toolStripMenuItemComposeQuotationOrder
-            // 
-            _toolStripMenuItemComposeQuotation.Text = "Compose Quotation Order";
-            _toolStripMenuItemComposeQuotation.Click += _toolStripMenuItemComposeQuotation_Click;
-            // 
-            // toolStripMenuItemAddtoQuotationOrder
-            // 
-            _toolStripMenuItemAddQuotation.Text = "Add to Quotation Order";
-            
+			// 
+			// toolStripMenuItemComposeInitialOrder
+			// 
+			_toolStripMenuItemComposeInitial.Text = "Compose Initial Order";
+			_toolStripMenuItemComposeInitial.Click += _toolStripMenuItemComposeInitial_Click;
+			// 
+			// toolStripMenuItemAddtoInitialOrder
+			// 
+			_toolStripMenuItemAddInitial.Text = "Add to Initial Order";
+			
+			// 
+			// toolStripMenuItemComposeQuotationOrder
+			// 
+			_toolStripMenuItemComposeQuotation.Text = "Compose Quotation Order";
+			_toolStripMenuItemComposeQuotation.Click += _toolStripMenuItemComposeQuotation_Click;
+			// 
+			// toolStripMenuItemAddtoQuotationOrder
+			// 
+			_toolStripMenuItemAddQuotation.Text = "Add to Quotation Order";
+			
 
-            _contextMenuStrip.Items.AddRange(new ToolStripItem[]
-			{
-
+			_contextMenuStrip.Items.AddRange(
 				_toolStripMenuItemComposeInitial,
 				_toolStripMenuItemAddInitial,
-				new ToolStripSeparator(),
-                _toolStripMenuItemComposeQuotation,
-                _toolStripMenuItemAddQuotation,
-				new ToolStripSeparator(),
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemComposeQuotation,
+				_toolStripMenuItemAddQuotation,
+				new RadMenuSeparatorItem(),
 				_toolStripMenuItemCopy,
 				_toolStripMenuItemPaste,
 				_toolStripMenuItemDelete
-				
-			});
-
-			_contextMenuStrip.Opening += ContextMenuStripOpen;
+				);
 		}
 
-        
+		
 
 
-        #endregion
+		#endregion
 
-        #region private void _toolStripMenuItemComposeInitial_Click1(object sender, EventArgs e)
+		#region private void _toolStripMenuItemComposeInitial_Click1(object sender, EventArgs e)
 
-        private void _toolStripMenuItemComposeQuotation_Click(object sender, EventArgs e)
-        {
+		private void _toolStripMenuItemComposeQuotation_Click(object sender, EventArgs e)
+		{
 			var form = new QuatationOrderFormNew(new RequestForQuotation() { ParentId = aircraftHeaderControl1.Operator.ItemId, ParentType = aircraftHeaderControl1.Operator.SmartCoreObjectType }, _directivesViewer.SelectedItems);
 			form.ShowDialog();
 		}
 
-        #endregion
+		#endregion
 
-        #region private void _toolStripMenuItemComposeInitial_Click(object sender, EventArgs e)
+		#region private void _toolStripMenuItemComposeInitial_Click(object sender, EventArgs e)
 
-        private void _toolStripMenuItemComposeInitial_Click(object sender, EventArgs e)
-        {
-            var form = new InitialOrderFormNew(new InitialOrder(){ParentId = aircraftHeaderControl1.Operator.ItemId, ParentType = aircraftHeaderControl1.Operator.SmartCoreObjectType}, _directivesViewer.SelectedItems);
-            form.ShowDialog();
-        }
-
-        #endregion
-
-        #region private void ContextMenuStripOpen(object sender, CancelEventArgs e)
-
-        private void ContextMenuStripOpen(object sender, CancelEventArgs e)
+		private void _toolStripMenuItemComposeInitial_Click(object sender, EventArgs e)
 		{
-			if (_directivesViewer.SelectedItems.Count <= 0)
-			{
-				_toolStripMenuItemShowImages.Enabled = false;
-			}
-
-			if (_directivesViewer.SelectedItems.Count == 1)
-			{
-				var product = _directivesViewer.SelectedItems[0];
-				_toolStripMenuItemShowImages.Enabled =  product.ImageFile != null;
-			}
+			var form = new InitialOrderFormNew(new InitialOrder(){ParentId = aircraftHeaderControl1.Operator.ItemId, ParentType = aircraftHeaderControl1.Operator.SmartCoreObjectType}, _directivesViewer.SelectedItems);
+			form.ShowDialog();
 		}
 
 		#endregion
@@ -312,7 +306,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private void ShowImageItemsClick(object sender, EventArgs e)
 		{
 			if (_directivesViewer.SelectedItems == null ||
-			    _directivesViewer.SelectedItems.Count == 0) return;
+				_directivesViewer.SelectedItems.Count == 0) return;
 
 			var product = _directivesViewer.SelectedItems[0];
 			try
@@ -378,7 +372,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 		#endregion
 
 		#region private void ButtonDeleteClick(object sender, EventArgs e)
-
 		private void ButtonDeleteClick(object sender, EventArgs e)
 		{
 			Delete();
@@ -404,18 +397,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				var selectedItems = new List<Product>();
 				selectedItems.AddRange(_directivesViewer.SelectedItems.ToArray());
 
-				foreach (var product in selectedItems)
-				{
-					try
-					{
-						GlobalObjects.CasEnvironment.NewKeeper.Delete(product);
-					}
-					catch (Exception ex)
-					{
-						Program.Provider.Logger.Log("Error while deleting data", ex);
-						return;
-					}
-				}
+				GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
 
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
@@ -499,7 +481,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		///<param name="resultCollection"></param>
 		private void FilterItems(IEnumerable<Product> initialCollection, ICommonCollection<Product> resultCollection)
 		{
-			if (_filter == null || _filter.Count == 0)
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
 				resultCollection.Clear();
 				resultCollection.AddRange(initialCollection);

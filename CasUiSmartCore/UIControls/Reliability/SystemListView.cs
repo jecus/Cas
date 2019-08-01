@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
 using CAS.UI.Helpers;
-using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Entities.General;
 
 namespace CAS.UI.UIControls.Reliability
 {
-	public partial class SystemListView : BaseListViewControl<TransferRecord>
+	public partial class SystemListView : BaseGridViewControl<TransferRecord>
 	{
 		public SystemListView()
 		{
@@ -21,45 +21,23 @@ namespace CAS.UI.UIControls.Reliability
 		/// </summary>
 		protected override void SetHeaders()
 		{
-			itemsListView.Columns.Clear();
-			ColumnHeaderList.Clear();
-
-			ColumnHeader columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Date" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "From: => To:" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.3f), Text = "Off" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.3f), Text = "On" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "ATA" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Class" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Description" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.2f), Text = "Reason" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
-			ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+			AddDateColumn("Date", (int)(radGridView1.Width * 0.2f));
+			AddColumn("From: => To:", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Off", (int)(radGridView1.Width * 0.6f));
+			AddColumn("On", (int)(radGridView1.Width * 0.6f));
+			AddColumn("ATA", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Class", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Description", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Reason", (int)(radGridView1.Width * 0.4f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
 		}
 		#endregion
 
 		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(TransferRecord item)
 
-		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(TransferRecord item)
+		protected override List<CustomCell> GetListViewSubItems(TransferRecord item)
 		{
-			var subItems = new List<ListViewItem.ListViewSubItem>();
+			var subItems = new List<CustomCell>();
 			string on, off,  ata, goodClass, reason = "", description = "", fromTo = "";
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 			if (item.IsReplaceComponentRemoved)
@@ -118,35 +96,25 @@ namespace CAS.UI.UIControls.Reliability
 				}
 				fromTo += $"{from} => {DestinationHelper.GetDestinationObjectString(item)}";
 			}
-
-
-			var subItem = new ListViewItem.ListViewSubItem { Text = item.TransferDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString()), Tag = item.TransferDate };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = fromTo, Tag = fromTo };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = off, Tag = off };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = on, Tag = on };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = ata, Tag = ata };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = goodClass, Tag = goodClass };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = description, Tag = description };
-			subItems.Add(subItem);
-			subItem = new ListViewItem.ListViewSubItem { Text = reason, Tag = reason };
-			subItems.Add(subItem);
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
-
-
-			return subItems.ToArray();
+			
+			subItems.Add(CreateRow(item.TransferDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString()), item.TransferDate ));
+			subItems.Add(CreateRow(fromTo, fromTo ));
+			subItems.Add(CreateRow(off, off ));
+			subItems.Add(CreateRow(on, on ));
+			subItems.Add(CreateRow(ata, ata ));
+			subItems.Add(CreateRow(goodClass, goodClass ));
+			subItems.Add(CreateRow(description, description ));
+			subItems.Add(CreateRow(reason, reason ));
+			subItems.Add(CreateRow(author, author ));
+			
+			return subItems;
 		}
 
 		#endregion
 
 		#region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
 
-		protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
+		protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
 		{
 			
 		}

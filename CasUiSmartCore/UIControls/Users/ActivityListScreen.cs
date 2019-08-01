@@ -9,8 +9,8 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using MongoDB.Driver;
 using SmartCore.Activity;
 using SmartCore.AuditMongo.Repository;
@@ -97,14 +97,14 @@ namespace CAS.UI.UIControls.Users
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
 			_directivesViewer.SetItemsArray(_result.OrderByDescending(i => i.Date).ToArray());
-			headerControl.PrintButtonEnabled = _directivesViewer.ListViewItemList.Count != 0;
+			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 
 			_directivesViewer.Focus();
 		}
 		#endregion
 
 		#region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
-		protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
+		protected override async void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
 		{
 			_initial.Clear();
 			_result.Clear();
@@ -117,7 +117,7 @@ namespace CAS.UI.UIControls.Users
 					.FindSync(i => i.Date >= dateTimePickerDateFrom.Value && i.Date <= dateTimePickerDateTo.Value)
 					.ToList();
 
-				var users = GlobalObjects.CasEnvironment.GetAllUsers();
+				var users =  GlobalObjects.CasEnvironment.ApiProvider.GetAllUsersAsync();
 
 				foreach (var bsonElement in activity)
 				{
@@ -298,7 +298,6 @@ namespace CAS.UI.UIControls.Users
 				TabIndex = 2,
 				Location = new Point(panel1.Left, panel1.Top),
 				Dock = DockStyle.Fill,
-				//IgnoreAutoResize = true
 			};
 
 			panel1.Controls.Add(_directivesViewer);
@@ -306,57 +305,57 @@ namespace CAS.UI.UIControls.Users
 
 		#endregion
 
-        #region private void HeaderControlButtonReloadClick(object sender, System.EventArgs e)
+		#region private void HeaderControlButtonReloadClick(object sender, System.EventArgs e)
 
-        private void HeaderControlButtonReloadClick(object sender, EventArgs e)
-        {
+		private void HeaderControlButtonReloadClick(object sender, EventArgs e)
+		{
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
 			AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
 			AnimatedThreadWorker.RunWorkerAsync();
-        }
-        #endregion
+		}
+		#endregion
 
 		#region private void ButtonApplyFilterClick(object sender, EventArgs e)
 
 		private void ButtonApplyFilterClick(object sender, EventArgs e)
-	    {
-		    var form = new CommonFilterForm(_filter, _initial);
+		{
+			var form = new CommonFilterForm(_filter, _initial);
 
-		    if (form.ShowDialog(this) == DialogResult.OK)
-		    {
-			    AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
-			    AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
-			    AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoFilteringWork;
+			if (form.ShowDialog(this) == DialogResult.OK)
+			{
+				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+				AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoFilteringWork;
 
-			    AnimatedThreadWorker.RunWorkerAsync();
-		    }
-	    }
+				AnimatedThreadWorker.RunWorkerAsync();
+			}
+		}
 
 		#endregion
 
 		#region private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
 
 		private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
-	    {
-		    _result.Clear();
+		{
+			_result.Clear();
 
-		    #region Фильтрация директив
-		    AnimatedThreadWorker.ReportProgress(50, "filter directives");
+			#region Фильтрация директив
+			AnimatedThreadWorker.ReportProgress(50, "filter directives");
 
-		    FilterItems(_initial, _result);
+			FilterItems(_initial, _result);
 
-		    if (AnimatedThreadWorker.CancellationPending)
-		    {
-			    e.Cancel = true;
-			    return;
-		    }
-		    #endregion
+			if (AnimatedThreadWorker.CancellationPending)
+			{
+				e.Cancel = true;
+				return;
+			}
+			#endregion
 
-		    AnimatedThreadWorker.ReportProgress(100, "Complete");
-	    }
+			AnimatedThreadWorker.ReportProgress(100, "Complete");
+		}
 
-	    #endregion
+		#endregion
 
 		#region private void FilterItems(IEnumerable<Document> initialCollection, ICommonCollection<Document> resultCollection)
 
@@ -366,7 +365,7 @@ namespace CAS.UI.UIControls.Users
 		///<param name="resultCollection"></param>
 		private void FilterItems(IEnumerable<ActivityDTO> initialCollection, ICommonCollection<ActivityDTO> resultCollection)
 		{
-			if (_filter == null || _filter.Count == 0)
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
 				resultCollection.Clear();
 				resultCollection.AddRange(initialCollection);

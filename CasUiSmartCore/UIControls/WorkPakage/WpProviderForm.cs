@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.WorkPackage;
@@ -131,7 +131,7 @@ namespace CAS.UI.UIControls.WorkPakage
 		private void ButtonOk_Click(object sender, System.EventArgs e)
 		{
 			DialogResult = DialogResult.OK;
-			if (supplierListView1.ListViewItemList.Count <= 0)
+			if (supplierListView1.ItemsCount <= 0)
 			{
 				MessageBox.Show("Please select a suppliers for  order", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,

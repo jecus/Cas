@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using EFCore.Attributte;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.Attributte;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using SmartCore.Aircrafts;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Calculations;
 using SmartCore.Component;
+using SmartCore.DtoHelper;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -200,21 +201,23 @@ namespace SmartCore.TransferRec
 				{
 					new Filter("DestinationObjectID",aircraft.ItemId),
 					new Filter("DestinationObjectType",aircraft.SmartCoreObjectType.ItemId),
+
 				}, "ParentID");
 
 				collection.AddRange(_newLoader.GetObjectListAll<TransferRecordDTO, TransferRecord>(new List<Filter>()
 				{
 					new Filter("FromAircraftID",aircraft.ItemId),
-					new Filter("FromStoreID", 0)
+					new Filter("FromStoreID", 0),
 				}, true).OrderByDescending(t => t.TransferDate));
 
 				collection.AddRange(_newLoader.GetObjectListAll<TransferRecordDTO, TransferRecord>(new List<Filter>()
 				{
 					new Filter("DestinationObjectID",aircraft.ItemId),
-					new Filter("DestinationObjectType", aircraft.SmartCoreObjectType.ItemId)
+					new Filter("DestinationObjectType", aircraft.SmartCoreObjectType.ItemId),
 				}, true).OrderByDescending(t => t.TransferDate));
 
-				collection.AddRange(_newLoader.GetObjectListAll<TransferRecordDTO, TransferRecord>(new Filter("DestinationObjectID", parentIds), true).OrderByDescending(t => t.TransferDate));
+				if (parentIds != null)
+					collection.AddRange(_newLoader.GetObjectListAll<TransferRecordDTO, TransferRecord>(new Filter("DestinationObjectID", parentIds), true).OrderByDescending(t => t.TransferDate));
 
 			}
 			else
@@ -222,7 +225,7 @@ namespace SmartCore.TransferRec
 				var parentIds = _newLoader.GetSelectColumnOnly<TransferRecordDTO>(new List<Filter>()
 				{
 					new Filter("DestinationObjectID",s.ItemId),
-					new Filter("DestinationObjectType", s.SmartCoreObjectType.ItemId)
+					new Filter("DestinationObjectType", s.SmartCoreObjectType.ItemId),
 				} , "ParentID");
 
 				collection.AddRange(_newLoader.GetObjectListAll<TransferRecordDTO, TransferRecord>(new Filter("FromStoreID", s.ItemId), true).OrderByDescending(t => t.TransferDate));
@@ -230,10 +233,12 @@ namespace SmartCore.TransferRec
 				collection.AddRange(_newLoader.GetObjectListAll<TransferRecordDTO, TransferRecord>(new List<Filter>()
 				{
 					new Filter("DestinationObjectID",s.ItemId),
-					new Filter("DestinationObjectType", s.SmartCoreObjectType.ItemId)
+					new Filter("DestinationObjectType", s.SmartCoreObjectType.ItemId),
 				}, true).OrderByDescending(t => t.TransferDate));
 
-				collection.AddRange(_newLoader.GetObjectListAll<TransferRecordDTO, TransferRecord>(new Filter("DestinationObjectID", parentIds), true).OrderByDescending(t => t.TransferDate));
+
+				if(parentIds != null)
+					collection.AddRange(_newLoader.GetObjectListAll<TransferRecordDTO, TransferRecord>(new Filter("DestinationObjectID", parentIds), true).OrderByDescending(t => t.TransferDate));
 
 
 			}

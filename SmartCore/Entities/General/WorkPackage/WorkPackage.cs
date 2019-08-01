@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using Newtonsoft.Json;
 using SmartCore.Auxiliary;
 using SmartCore.Auxiliary.Extentions;
@@ -169,7 +169,8 @@ namespace SmartCore.Entities.General.WorkPackage
         [TableColumn("Status")]
         [FormControl("Status:", Enabled = false)]
         [FilterAttribute("Status", Order = 20)]
-        public WorkPackageStatus Status
+        [ListViewData(0.08f, "Status")]
+		public WorkPackageStatus Status
         {
             get { return _status; }
             set { _status = value; }

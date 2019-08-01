@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 using MetroFramework.Forms;
 using SmartCore.Entities;
 
@@ -102,7 +102,7 @@ namespace CAS.UI.UIControls.Users
 			if (Check())
 			{
 				ApplyChanges();
-				GlobalObjects.CasEnvironment.GetSeviceUser().AddOrUpdateUser(new UserDTO()
+				GlobalObjects.CasEnvironment.ApiProvider.AddOrUpdateUser(new UserDTO()
 				{
 					ItemId = _user.ItemId,
 					Login = _user.Login,

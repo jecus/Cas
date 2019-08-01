@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using CAS.UI.UIControls.Auxiliary;
+﻿using System.Collections.Generic;
+using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls.Quatation
 {
-	public partial class QuatationOrderListView : BaseListViewControl<RequestForQuotationRecord>
+	public partial class QuatationOrderListView : BaseGridViewControl<RequestForQuotationRecord>
 	{
 		public QuatationOrderListView()
 		{
@@ -19,83 +17,40 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 		protected override void SetHeaders()
 		{
-			ColumnHeaderList.Clear();
-			itemsListView.Columns.Clear();
-
-			var columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "P/N" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.15f), Text = "Description" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Suppliers" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Measure" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.12f), Text = "Quantity" };
-			ColumnHeaderList.Add(columnHeader);
-
-			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Signer" };
-			ColumnHeaderList.Add(columnHeader);
-
-			itemsListView.Columns.AddRange(ColumnHeaderList.ToArray());
+			AddColumn("P/N", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Description", (int)(radGridView1.Width * 0.2f));
+			AddColumn("GoodClass", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Suppliers", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Measure", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Quantity", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
 		}
 
 		#endregion
 
-		protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(RequestForQuotationRecord item)
+		protected override List<CustomCell> GetListViewSubItems(RequestForQuotationRecord item)
 		{
-			var subItems = new List<ListViewItem.ListViewSubItem>();
+			var subItems = new List<CustomCell>();
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
-			var subItem = new ListViewItem.ListViewSubItem { Text = item.Product?.PartNumber, Tag = item.Product?.PartNumber };
-			subItems.Add(subItem);
 
-			subItem = new ListViewItem.ListViewSubItem { Text = item.Product?.Description, Tag = item.Product?.Description };
-			subItems.Add(subItem);
+			subItems.Add(CreateRow(item.Product?.PartNumber, item.Product?.PartNumber));
+			subItems.Add(CreateRow(item.Product?.Description, item.Product?.Description));
+			CreateRow(item.Product?.GoodsClass?.ShortName ?? "Another accessory", item.Product?.GoodsClass);
+			subItems.Add(CreateRow(item.Suppliers?.ToString(), item.Suppliers?.ToString()));
+			subItems.Add(CreateRow(item.Measure.ToString(), item.Measure.ToString()));
+			subItems.Add(CreateRow(item.Quantity.ToString(), item.Quantity.ToString()));
+			subItems.Add(CreateRow(author, author));
 
-			subItem = new ListViewItem.ListViewSubItem { Text = item.Suppliers?.ToString(), Tag = item.Suppliers?.ToString() };
-			subItems.Add(subItem);
-
-			subItem = new ListViewItem.ListViewSubItem { Text = item.Measure.ToString(), Tag = item.Measure.ToString() };
-			subItems.Add(subItem);
-
-			subItem = new ListViewItem.ListViewSubItem { Text = item.Quantity.ToString(), Tag = item.Quantity.ToString() };
-			subItems.Add(subItem);
-
-			subItems.Add(new ListViewItem.ListViewSubItem { Text = author, Tag = author });
-
-			return subItems.ToArray();
+			return subItems;
 		}
 
-		protected override void SetGroupsToItems(int columnIndex)
+		#region Overrides of BaseGridViewControl<InitialOrderRecord>
+
+		protected override void GroupingItems()
 		{
-			itemsListView.Groups.Clear();
-			foreach (ListViewItem item in itemsListView.Items)
-			{
-				String temp;
-				if (item.Tag is RequestForQuotationRecord)
-				{
-					var q= (RequestForQuotationRecord)item.Tag;
-					var p =  q.Product;
-
-					temp = p.GoodsClass.ShortName;
-					itemsListView.Groups.Add(temp, temp);
-					item.Group = itemsListView.Groups[temp];
-				}
-				else
-				{
-					temp = "Another accessory";
-					itemsListView.Groups.Add(temp, temp);
-					item.Group = itemsListView.Groups[temp];
-				}
-			}
+			Grouping("GoodClass");
 		}
 
-		protected override void SortItems(int columnIndex)
-		{
-			SetGroupsToItems(columnIndex);
-		}
+		#endregion
 	}
 }

@@ -1,6 +1,6 @@
 ﻿using MetroFramework.Controls;
 using CASTerms;
-using EFCore.DTO.General;
+using EntityCore.DTO.General;
 
 namespace CAS.UI.UIControls.WorkPakage
 {
@@ -136,11 +136,9 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.workPackageEmployeeListView2.Displayer = null;
 			this.workPackageEmployeeListView2.DisplayerText = null;
 			this.workPackageEmployeeListView2.Entity = null;
-			this.workPackageEmployeeListView2.IgnoreAutoResize = false;
 			this.workPackageEmployeeListView2.Location = new System.Drawing.Point(12, 380);
 			this.workPackageEmployeeListView2.Name = "workPackageEmployeeListView2";
 			this.workPackageEmployeeListView2.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.workPackageEmployeeListView2.ShowGroups = true;
 			this.workPackageEmployeeListView2.Size = new System.Drawing.Size(897, 259);
 			this.workPackageEmployeeListView2.TabIndex = 1;
 			// 
@@ -149,11 +147,9 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.workPackageEmployeeListViewAll.Displayer = null;
 			this.workPackageEmployeeListViewAll.DisplayerText = null;
 			this.workPackageEmployeeListViewAll.Entity = null;
-			this.workPackageEmployeeListViewAll.IgnoreAutoResize = false;
 			this.workPackageEmployeeListViewAll.Location = new System.Drawing.Point(12, 115);
 			this.workPackageEmployeeListViewAll.Name = "workPackageEmployeeListViewAll";
 			this.workPackageEmployeeListViewAll.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.workPackageEmployeeListViewAll.ShowGroups = true;
 			this.workPackageEmployeeListViewAll.Size = new System.Drawing.Size(897, 259);
 			this.workPackageEmployeeListViewAll.TabIndex = 0;
 			// 

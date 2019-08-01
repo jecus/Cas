@@ -9,9 +9,10 @@ using CAS.UI.Interfaces;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using SmartCore.Entities.Collections;
+using SmartCore.Entities.General;
 using SmartCore.Entities.General.Store;
 using ComponentCollection = SmartCore.Entities.Collections.ComponentCollection;
 
@@ -74,7 +75,7 @@ namespace CAS.UI.UIControls.StoresControls
         {
             if (e.Cancelled)
                 return;
-            DirectivesViewer.SetItemsArray(InitialDirectiveArray);
+            DirectivesViewer.SetItemsArray(InitialDirectiveArray.OfType<BaseEntityObject>());
 
             if (CurrentStore != null)
             {
@@ -82,7 +83,7 @@ namespace CAS.UI.UIControls.StoresControls
             }
             DirectivesViewer.Focus();
 
-            headerControl.PrintButtonEnabled = DirectivesViewer.ItemListView.Items.Count != 0;
+            headerControl.PrintButtonEnabled = DirectivesViewer.ItemsCount != 0;
             buttonDeleteSelected.Enabled = DirectivesViewer.SelectedItem != null;
         }
         #endregion
@@ -142,7 +143,7 @@ namespace CAS.UI.UIControls.StoresControls
 
         protected override void InitListView(PropertyInfo beginGroup = null)
         {
-            DirectivesViewer = new ShouldBeOnStockListView(beginGroup);
+            DirectivesViewer = new ShouldBeOnStockListView();
             DirectivesViewer.TabIndex = 2;
             DirectivesViewer.Location = new Point(panel1.Left, panel1.Top);
             DirectivesViewer.Dock = DockStyle.Fill;
