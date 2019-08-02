@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CasAPI.Controllers.Dictionaries
 {
-	[Route("arportcode")]
+	[Route("airportcode")]
 	public class AirportCodeController : BaseController<AirportCodeDTO>
 	{
 		private Type _type = typeof(AirportCodeDTO);
