@@ -421,6 +421,8 @@ namespace CAS.UI.UIControls.StoresControls
 					baseComponentCollection.AddRange(GlobalObjects.ComponentCore.GetStoreBaseComponents(store.ItemId));
 			}
 
+			IEnumerable<Component> lastInstalledDetails  = new List<Component>();
+			IEnumerable<BaseComponent> lastInstalledBaseDetails = new List<BaseComponent>(); 
 			if (!metroCheckBox1.Checked)
 			{
 				resultCollection.AddRange(baseComponentCollection.ToArray());
@@ -441,13 +443,12 @@ namespace CAS.UI.UIControls.StoresControls
 				AnimatedThreadWorker.ReportProgress(60, "calculation of stock");
 
 				GlobalObjects.StockCalculator.CalculateStock(resultCollection.ToArray(), CurrentStore);
-			}
-			else
-			{
+
+
 				//////////////////////////////////////////////////////
 				//   проверка на установленные базовые компоненты   //
 				//////////////////////////////////////////////////////
-				var lastInstalledBaseDetails =
+				lastInstalledBaseDetails =
 					GlobalObjects.CasEnvironment.BaseComponents.GetLastInstalledComponentsOn(CurrentStore);
 				foreach (var baseDetail in lastInstalledBaseDetails)
 				{
@@ -487,7 +488,7 @@ namespace CAS.UI.UIControls.StoresControls
 				//////////////////////////////////////////////////////
 				//     проверка на установленные компоненты         //
 				//////////////////////////////////////////////////////
-				var lastInstalledDetails = componentCollection.GetLastInstalledComponentsOn(CurrentStore);
+				lastInstalledDetails = componentCollection.GetLastInstalledComponentsOn(CurrentStore);
 				foreach (var component in lastInstalledDetails)
 				{
 					_installedComponents.Add(component);
@@ -531,6 +532,11 @@ namespace CAS.UI.UIControls.StoresControls
 
 				#endregion
 
+
+			}
+			else
+			{
+				
 				#region Калькуляция общего запаса компонентов
 
 				AnimatedThreadWorker.ReportProgress(40, "calculation of stock");
@@ -1350,7 +1356,7 @@ namespace CAS.UI.UIControls.StoresControls
 				try
 				{
 					_directivesViewer.radGridView1.BeginUpdate();
-					GlobalObjects.CasEnvironment.NewKeeper.Delete(directives.OfType<BaseEntityObject>().ToList(), true);
+					GlobalObjects.CasEnvironment.NewKeeper.Delete(directives.Where(i => i is Component).OfType<BaseEntityObject>().ToList(), true);
 					_directivesViewer.radGridView1.EndUpdate();
 
 					AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
