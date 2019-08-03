@@ -121,21 +121,9 @@
     <Compile Include="AircraftFlightCoreTests.cs" />
     <Compile Include="BaseQueriesTest.cs" />
     <Compile Include="BindedItemsCoreTest.cs" />
-    <Compile Include="DataAccess\DataContext.cs" />
-    <Compile Include="DataAccess\EfTest.cs" />
-    <Compile Include="DataAccess\ItemFileLink.cs" />
-    <Compile Include="DataAccess\ItemFileLinkMap.cs" />
-    <Compile Include="DataAccess\NonRoutineJobMap.cs" />
-    <Compile Include="DataAccess\NonRoutineJob.cs" />
     <Compile Include="DepartmentDATest.cs" />
     <Compile Include="DirectiveTest.cs" />
     <Compile Include="DocumentDATests.cs" />
-    <Compile Include="EntityFrameTest\DictionaryTest.cs" />
-    <Compile Include="EntityFrameTest\DictionaryDtoConverterTest.cs" />
-    <Compile Include="EntityFrameTest\GeneralDtoConverterTest.cs" />
-    <Compile Include="EntityFrameTest\GeneralTest.cs" />
-    <Compile Include="EntityFrameTest\PerformanceTest.cs" />
-    <Compile Include="EntityFrameTest\RepositoryTest.cs" />
     <Compile Include="ExcelImportExport\ProductImport.cs" />
     <Compile Include="ExcelImportExport\TestStandart.cs" />
     <Compile Include="ExcelImportExport\AirportCodeConverterTest.cs" />
@@ -157,9 +145,9 @@
       <Project>{8988CAE1-D7C1-499B-B595-9B544FCCF7FB}</Project>
       <Name>Auxiliary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EFCore\Entity.csproj">
-      <Project>{6dddaf81-980a-4ebc-bf58-3ca93a059d7f}</Project>
-      <Name>Entity</Name>
+    <ProjectReference Include="..\EntityCore\EntityCore.csproj">
+      <Project>{a04296a8-8cbd-41e9-9e91-1a4a56004cde}</Project>
+      <Name>EntityCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\SmartCore\SmartCore.csproj">
       <Project>{48b63705-4573-4bb2-b04d-67a406b09ab6}</Project>

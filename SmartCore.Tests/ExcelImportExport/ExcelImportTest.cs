@@ -3,7 +3,7 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using EFCore.DTO.Dictionaries;
+using EntityCore.DTO.Dictionaries;
 using Excel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartCore.AircraftFlights;

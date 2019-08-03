@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartCore.Aircrafts;
 using SmartCore.Component;

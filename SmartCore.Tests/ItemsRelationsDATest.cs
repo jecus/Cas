@@ -1,4 +1,5 @@
-﻿using EFCore.DTO.General;
+﻿
+using EntityCore.DTO.General;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartCore.DataAccesses.ItemsRelation;
 using SmartCore.Entities.Dictionaries;
