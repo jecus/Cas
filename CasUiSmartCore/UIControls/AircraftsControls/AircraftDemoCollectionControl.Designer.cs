@@ -154,6 +154,7 @@
             this.ReferenceButtonAdd.Displayer = null;
             this.ReferenceButtonAdd.DisplayerText = "";
             this.ReferenceButtonAdd.Entity = null;
+            this.ReferenceButtonAdd.Enabled = false;
             this.ReferenceButtonAdd.FontMain = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.ReferenceButtonAdd.FontSecondary = new System.Drawing.Font("Verdana", 9.75F);
             this.ReferenceButtonAdd.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
@@ -182,7 +183,8 @@
             // 
             this.ButtonDelete.ActiveBackColor = System.Drawing.Color.Transparent;
             this.ButtonDelete.ActiveBackgroundImage = null;
-            this.ButtonDelete.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ButtonDelete.Enabled = false;
+			this.ButtonDelete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ButtonDelete.FontMain = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.ButtonDelete.FontSecondary = new System.Drawing.Font("Verdana", 9.75F);
             this.ButtonDelete.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
