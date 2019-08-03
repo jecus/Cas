@@ -12,8 +12,8 @@ namespace CasAPI.Controllers
 	[ApiController]
 	public class BaseController<T> : ControllerBase where  T : BaseEntity
 	{
-		private readonly ILogger<BaseController<T>> _logger;
-		private readonly Repository<T> _repository;
+		protected readonly ILogger<BaseController<T>> _logger;
+		protected readonly Repository<T> _repository;
 
 		public BaseController(DataContext context, ILogger<BaseController<T>> logger)
 		{

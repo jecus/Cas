@@ -41,20 +41,30 @@ namespace CasAPI.Controllers.Dictionaries
 
 		public async override Task<ActionResult<int>> Save(LocationDTO entity)
 		{
-			if (GlobalObjects.Dictionaries.ContainsKey(_type))
+			try
 			{
-				var find = GlobalObjects.Dictionaries[_type].FirstOrDefault(i => i.ItemId == entity.ItemId);
-				if (find == null)
-					GlobalObjects.Dictionaries[_type].Add(entity);
-				else
+				var res = await _repository.SaveAsync(entity);
+
+				if (GlobalObjects.Dictionaries.ContainsKey(_type))
 				{
-					GlobalObjects.Dictionaries[_type].Remove(find);
-					GlobalObjects.Dictionaries[_type].Add(entity);
+					var find = GlobalObjects.Dictionaries[_type].FirstOrDefault(i => i.ItemId == entity.ItemId);
+					if (find == null)
+						GlobalObjects.Dictionaries[_type].Add(entity);
+					else
+					{
+						GlobalObjects.Dictionaries[_type].Remove(find);
+						GlobalObjects.Dictionaries[_type].Add(entity);
+					}
+
 				}
 
+				return Ok(res);
 			}
-
-			return await base.Save(entity);
+			catch (Exception e)
+			{
+				_logger.LogError(e.Message);
+				return BadRequest();
+			}
 		}
 
 		public async override Task<ActionResult> Delete(LocationDTO entity)
