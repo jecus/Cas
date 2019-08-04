@@ -572,6 +572,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 		#endregion
 
 
-
+		private void ButtonFilterClick(object sender, EventArgs e)
+		{
+			
+		}
 	}
 }
