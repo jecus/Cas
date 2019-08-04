@@ -595,13 +595,13 @@ namespace EntityCore.DTO
 				.HasForeignKey(i => i.QualificationId);
 			modelBuilder.Entity<JobCardDTO>()
 				.HasMany(i => i.Kits).WithOne(i => i.JobCardDto).HasForeignKey(i => i.ParentId);
-			modelBuilder.Entity<JobCardDTO>()
-				.HasMany(i => i.JobCardTasks).WithOne(i => i.JobCardDto).HasForeignKey(i => i.JobCardId);
+			//modelBuilder.Entity<JobCardDTO>()
+			//	.HasMany(i => i.JobCardTasks).WithOne(i => i.JobCardDto).HasForeignKey(i => i.JobCardId);
 
-			modelBuilder.Entity<JobCardTaskDTO>()
-				.HasOne(i => i.JobCard)
-				.WithMany(i => i.JobCardTaskDtos)
-				.HasForeignKey(i => i.JobCardId);
+			//modelBuilder.Entity<JobCardTaskDTO>()
+			//	.HasOne(i => i.JobCard)
+			//	.WithMany(i => i.JobCardTaskDtos)
+			//	.HasForeignKey(i => i.JobCardId);
 
 			modelBuilder.Entity<KitSuppliersRelationDTO>()
 				.HasOne(i => i.Supplier)
@@ -618,8 +618,8 @@ namespace EntityCore.DTO
 				.HasMany(i => i.CategoriesRecords).WithOne(i => i.MaintenanceCheckDto).HasForeignKey(i => i.ParentId);
 			modelBuilder.Entity<MaintenanceCheckDTO>()
 				.HasMany(i => i.Kits).WithOne(i => i.MaintenanceCheckDto).HasForeignKey(i => i.ParentId);
-			modelBuilder.Entity<MaintenanceCheckDTO>()
-				.HasMany(i => i.BindMpds).WithOne(i => i.MaintenanceCheckDto).HasForeignKey(i => i.MaintenanceCheckId);
+			//modelBuilder.Entity<MaintenanceCheckDTO>()
+			//	.HasMany(i => i.BindMpds).WithOne(i => i.MaintenanceCheckDto).HasForeignKey(i => i.MaintenanceCheckId);
 
 			modelBuilder.Entity<MaintenanceDirectiveDTO>()
 				.HasOne(i => i.ATAChapter)

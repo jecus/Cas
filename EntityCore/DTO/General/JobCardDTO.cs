@@ -188,8 +188,8 @@ namespace EntityCore.DTO.General
 		public ICollection<ProcedureDTO> Procedure { get; set; }
 		[JsonIgnore]
 		public ICollection<MaintenanceDirectiveDTO> MaintenanceDirectiveDtos { get; set; }
-		[JsonIgnore]
-		public ICollection<JobCardTaskDTO> JobCardTaskDtos { get; set; }
+		//[JsonIgnore]
+		//public ICollection<JobCardTaskDTO> JobCardTaskDtos { get; set; }
 
 		#endregion
 	}

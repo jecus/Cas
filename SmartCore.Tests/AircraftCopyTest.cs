@@ -1,12 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using EFCore.DTO.General;
-using EFCore.Filter;
+using CAS.UI.Helpers;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartCore.Aircrafts;
 using SmartCore.Component;
 using SmartCore.DataAccesses.ItemsRelation;
 using SmartCore.Directives;
+using SmartCore.DtoHelper;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -21,6 +25,8 @@ namespace SmartCore.Tests
 	[TestClass]
 	public class AircraftCopyTest
 	{
+
+
 
 		[TestMethod]
 		public void CopyAircraft()
@@ -38,9 +44,9 @@ namespace SmartCore.Tests
 			var maintenanceDirective = new List<MaintenanceDirective>();
 
 			//Грузим ВС, делаем с него копию и сохраняем
-			var aircrafts = env.NewLoader.GetObject<AircraftDTO, Aircraft>(new Filter("ItemId", 2315), true);
+			var aircrafts = env.NewLoader.GetObject<AircraftDTO, Aircraft>(new Filter("ItemId", 2346), true);
 			var newAircraft = aircrafts.GetCopyUnsaved();
-			newAircraft.RegistrationNumber += "- 13";
+			//newAircraft.RegistrationNumber += "- COPY";
 
 			env.NewKeeper.Save(newAircraft);
 
@@ -52,6 +58,7 @@ namespace SmartCore.Tests
 			{
 				var newComponent = (BaseComponent)baseComponent.GetCopyUnsaved();
 				newComponent.ParentAircraftId = newAircraft.ItemId;
+
 
 				env.NewKeeper.Save(newComponent);
 				newBaseComponent.Add(newComponent);
@@ -114,6 +121,10 @@ namespace SmartCore.Tests
 				var newDirective = directive.GetCopyUnsaved();
 				newDirective.ParentBaseComponent = newBaseComponent.FirstOrDefault(b => b.SerialNumber == newDirective.ParentBaseComponent.SerialNumber);
 
+
+				newDirective.PerformanceRecords.Clear();
+				newDirective.CategoriesRecords.Clear();
+
 				env.NewKeeper.Save(newDirective);
 			}
 
@@ -125,6 +136,9 @@ namespace SmartCore.Tests
 				var newDirective = directive.GetCopyUnsaved();
 				if (directive.ParentBaseComponent != null)
 					newDirective.ParentBaseComponent = newBaseComponent.FirstOrDefault(b => b.SerialNumber == directive.ParentBaseComponent.SerialNumber);
+
+				newDirective.PerformanceRecords.Clear();
+				newDirective.CategoriesRecords.Clear();
 
 				env.NewKeeper.Save(newDirective);
 			}
@@ -182,7 +196,8 @@ namespace SmartCore.Tests
 		private CasEnvironment GetEnviroment()
 		{
 			var cas = new CasEnvironment();
-			cas.Connect("91.213.233.139", "casadmin", "casadmin001", "ScatDB");
+			cas.ApiProvider = new ApiProvider("http://92.47.31.254:45616");
+			cas.Connect("92.47.31.254:45616", "Admin", "Rfcgfhjkm", "ScatDB");
 			DbTypes.CasEnvironment = cas;
 			cas.NewLoader.FirstLoad();
 

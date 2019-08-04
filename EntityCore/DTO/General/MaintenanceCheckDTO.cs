@@ -68,8 +68,8 @@ namespace EntityCore.DTO.General
 		public ICollection<AccessoryRequiredDTO> Kits { get; set; }
 
 		
-		[Child]
-		public ICollection<MaintenanceDirectiveDTO> BindMpds { get; set; }
+		//[Child]
+		//public ICollection<MaintenanceDirectiveDTO> BindMpds { get; set; }
 
 
 		#region Navigation Property

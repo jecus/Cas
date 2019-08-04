@@ -1,5 +1,6 @@
-﻿using EFCore.DTO.General;
-using EFCore.Filter;
+﻿
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartCore.DataAccesses.WorkPackageRecords;
 using SmartCore.Entities.General;

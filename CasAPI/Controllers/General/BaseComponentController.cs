@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CasAPI.Infrastructure;
@@ -52,17 +53,27 @@ namespace CasAPI.Controllers.General
 
 		public async override Task<ActionResult<int>> Save(BaseComponentDTO entity)
 		{
-			var find = GlobalObjects.BaseComponents.FirstOrDefault(i => i.ItemId == entity.ItemId);
-
-			if(find == null)
-				GlobalObjects.BaseComponents.Add(entity);
-			else
+			try
 			{
-				GlobalObjects.BaseComponents.Remove(find);
-				GlobalObjects.BaseComponents.Add(entity);
-			}
+				var res = await _repository.SaveAsync(entity);
 
-			return await base.Save(entity);
+				var find = GlobalObjects.BaseComponents.FirstOrDefault(i => i.ItemId == entity.ItemId);
+				if (find == null)
+					GlobalObjects.BaseComponents.Add(entity);
+				else
+				{
+					GlobalObjects.BaseComponents.Remove(find);
+					GlobalObjects.BaseComponents.Add(entity);
+				}
+
+
+				return Ok(res);
+			}
+			catch (Exception e)
+			{
+				_logger.LogError(e.Message);
+				return BadRequest();
+			}
 		}
 
 		public async override Task<ActionResult> Delete(BaseComponentDTO entity)

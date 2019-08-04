@@ -1571,7 +1571,7 @@ namespace SmartCore.DtoHelper
 				KitRequired = comp.KitRequired,
 				StartLifelength = comp.StartLifelength?.ConvertToByteArray(),
 				Code = comp.Code,
-				Status = (short?)comp.Status?.ItemId,
+				Status = (short?)comp.ComponentStatus,
 				IsBaseComponent = comp.IsBaseComponent,
 				LocationId = comp.Location?.ItemId ?? -1,
 				Incoming = comp.Incoming,
@@ -1755,6 +1755,7 @@ namespace SmartCore.DtoHelper
 				SerialNumber = comp.SerialNumber,
 				BatchNumber = comp.BatchNumber,
 				IdNumber = comp.IdNumber,
+				Status = (short?)comp.ComponentStatus,
 				MaintenanceType = comp.MaintenanceControlProcess?.ItemId ?? -1,
 				Remarks = comp.Remarks,
 				ModelId = comp.Model?.ItemId,
@@ -1790,7 +1791,6 @@ namespace SmartCore.DtoHelper
 				KitRequired = comp.KitRequired,
 				StartLifelength = comp.StartLifelength?.ConvertToByteArray(),
 				Code = comp.Code,
-				Status = (short?)comp.Status?.ItemId,
 				IsBaseComponent = comp.IsBaseComponent,
 				LocationId = comp.Location?.ItemId ?? -1,
 				Incoming = comp.Incoming,
@@ -3902,7 +3902,7 @@ namespace SmartCore.DtoHelper
 				PerformanceRecords = maincheck.PerformanceRecords?.Select(i => i.Convert()) as ICollection<DirectiveRecordDTO>,
 				CategoriesRecords = maincheck.CategoriesRecords?.Select(i => i.Convert()) as ICollection<CategoryRecordDTO>,
 				Kits = maincheck.Kits?.Select(i => i.Convert()) as ICollection<AccessoryRequiredDTO>,
-				BindMpds = maincheck.BindMpds?.Select(i => i.Convert()) as ICollection<MaintenanceDirectiveDTO>
+				//BindMpds = maincheck.BindMpds?.Select(i => i.Convert()) as ICollection<MaintenanceDirectiveDTO>
 			};
 		}
 
@@ -3945,8 +3945,8 @@ namespace SmartCore.DtoHelper
 				}
 			}
 
-			if (maincheckdto.BindMpds != null)
-				value.BindMpds.AddRange(maincheckdto.BindMpds.Select(i => i.Convert()));
+			//if (maincheckdto.BindMpds != null)
+			//	value.BindMpds.AddRange(maincheckdto.BindMpds.Select(i => i.Convert()));
 
 			return value;
 		}

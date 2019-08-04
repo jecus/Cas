@@ -415,11 +415,11 @@ namespace CAS.UI.UIControls.StoresControls
 		#region protected override void CustomSort(int ColumnIndex)
 		protected override void Sorting(string colName = null)
 		{
-			if (!first)
-			{
-				base.Sorting("Inst. date");
-				first = true;
-			}
+			//if (!first)
+			//{
+			//	base.Sorting("Inst. date");
+			//	first = true;
+			//}
 		}
 		protected override void CustomSort(int ColumnIndex)
 		{
