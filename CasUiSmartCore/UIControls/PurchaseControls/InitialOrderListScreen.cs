@@ -159,7 +159,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 			try
 			{
-				_initialArray.AddRange(GlobalObjects.PurchaseCore.GetInitialOrders(_parent as Aircraft));
+				_initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderDTO, InitialOrder>());
 			}
 			catch (Exception ex)
 			{

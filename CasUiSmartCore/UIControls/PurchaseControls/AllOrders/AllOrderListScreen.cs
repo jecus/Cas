@@ -10,6 +10,7 @@ using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.PurchaseControls.Initial;
 using CAS.UI.UIControls.PurchaseControls.Purchase;
 using CASTerms;
+using EntityCore.DTO.General;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -129,9 +130,9 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 
 			try
 			{
-				_initialArray.AddRange(GlobalObjects.PurchaseCore.GetInitialOrders(null));
-				_initialArray.AddRange(GlobalObjects.PurchaseCore.GetRequestForQuotation(null));
-				_initialArray.AddRange(GlobalObjects.PurchaseCore.GetPurchaseOrders(null));
+				_initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderDTO, InitialOrder>());
+				_initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>());
+				_initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>());
 			}
 			catch (Exception ex)
 			{
