@@ -9,6 +9,7 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
+using EntityCore.DTO.General;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -151,7 +152,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 			try
 			{
-				_purchaseArray.AddRange(GlobalObjects.PurchaseCore.GetPurchaseOrders(_parent as Aircraft));
+				_purchaseArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>());
 			}
 			catch (Exception ex)
 			{

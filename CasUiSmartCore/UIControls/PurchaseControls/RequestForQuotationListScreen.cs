@@ -12,6 +12,7 @@ using CAS.UI.UIControls.PurchaseControls.Initial;
 using CAS.UI.UIControls.PurchaseControls.Purchase;
 using CASReports.Builders;
 using CASTerms;
+using EntityCore.DTO.General;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -156,7 +157,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 			try
 			{
-				_quotatioArray.AddRange(GlobalObjects.PurchaseCore.GetRequestForQuotation(_parent as Aircraft));
+				_quotatioArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>());
 			}
 			catch (Exception ex)
 			{

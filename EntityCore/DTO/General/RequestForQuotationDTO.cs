@@ -57,11 +57,11 @@ namespace EntityCore.DTO.General
 
 		
 		[Column("PublishedById")]
-		public int PublishedById { get; set; }
+		public int? PublishedById { get; set; }
 
 		
 		[Column("ClosedById")]
-		public int ClosedById { get; set; }
+		public int? ClosedById { get; set; }
 
 		
 		[Column("PublishedByUser"), MaxLength(128)]
