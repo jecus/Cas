@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -19,8 +20,10 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Filters;
 using SmartCore.Purchase;
+using SmartCore.Queries;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
+using Filter = EntityCore.Filter.Filter;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
@@ -44,8 +47,10 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 
+		private Filter filter = null;
+
 		#endregion
-		
+
 		#region Constructors
 
 		#region private RequestForQuotationListScreen()
@@ -157,7 +162,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 			try
 			{
-				_quotatioArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>());
+				if (filter != null)
+					_quotatioArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>(filter));
+				else _quotatioArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>());
 			}
 			catch (Exception ex)
 			{
@@ -499,6 +506,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private void HeaderQuotationButtonReloadClick(object sender, EventArgs e)
 		{
+			filter = null;
+			TextBoxFilter.Clear();
+
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
 			AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
@@ -602,7 +612,19 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private void ButtonFilterClick(object sender, EventArgs e)
 		{
-			
+			if (string.IsNullOrEmpty(TextBoxFilter.Text))
+			{
+				filter = null;
+				AnimatedThreadWorker.RunWorkerAsync();
+				return;
+			}
+			var res = GlobalObjects.CasEnvironment.Execute(OrdersQueries.QuotationSearch(TextBoxFilter.Text));
+			var ids = new List<int>();
+			foreach (DataRow dRow in res.Tables[0].Rows)
+				ids.Add(int.Parse(dRow[0].ToString()));
+
+			filter = new Filter("ItemId", ids);
+			AnimatedThreadWorker.RunWorkerAsync();
 		}
 	}
 }

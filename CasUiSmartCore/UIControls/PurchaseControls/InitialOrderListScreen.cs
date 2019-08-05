@@ -582,7 +582,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private void HeaderControlButtonReloadClick(object sender, EventArgs e)
 		{
-			_filter = null;
+			filter = null;
 			TextBoxFilter.Clear();
 
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
@@ -688,6 +688,12 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private void ButtonFilterClick(object sender, EventArgs e)
 		{
+			if (string.IsNullOrEmpty(TextBoxFilter.Text))
+			{
+				filter = null;
+				AnimatedThreadWorker.RunWorkerAsync();
+				return;
+			}
 			var res = GlobalObjects.CasEnvironment.Execute(OrdersQueries.InitialSearch(TextBoxFilter.Text));
 			var ids = new List<int>();
 			foreach (DataRow dRow in res.Tables[0].Rows)
