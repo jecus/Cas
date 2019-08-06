@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -17,7 +18,9 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Filters;
 using SmartCore.Purchase;
+using SmartCore.Queries;
 using Telerik.WinControls.UI;
+using Filter = EntityCore.Filter.Filter;
 
 namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 {
@@ -42,8 +45,12 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 		private RadMenuItem _toolStripMenuItemEdit;
 		private RadMenuItem _toolStripMenuItemCreatePurchase;
 
+		private Filter initialfilter = null;
+		private Filter quotationfilter = null;
+		private Filter purchasefilter = null;
+
 		#endregion
-		
+
 		#region Constructors
 
 		#region private InitialOrderListScreen()
@@ -130,9 +137,18 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 
 			try
 			{
-				_initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderDTO, InitialOrder>());
-				_initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>());
-				_initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>());
+				if (initialfilter != null)
+					_initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderDTO, InitialOrder>(initialfilter));
+				else _initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderDTO, InitialOrder>());
+
+				if (quotationfilter != null)
+					_initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>(quotationfilter));
+				else _initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>());
+
+				if (purchasefilter != null)
+					_initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>(purchasefilter));
+				else _initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>());
+
 			}
 			catch (Exception ex)
 			{
@@ -492,6 +508,11 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 
 		private void HeaderControlButtonReloadClick(object sender, EventArgs e)
 		{
+			initialfilter = null;
+			quotationfilter = null;
+			purchasefilter = null;
+			TextBoxFilter.Clear();
+
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
 			AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
@@ -593,7 +614,34 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 
 		private void ButtonFilterClick(object sender, EventArgs e)
 		{
-			
+			if (string.IsNullOrEmpty(TextBoxFilter.Text))
+			{
+				initialfilter = null;
+				quotationfilter = null;
+				purchasefilter = null;
+				AnimatedThreadWorker.RunWorkerAsync();
+				return;
+			}
+			var initial = GlobalObjects.CasEnvironment.Execute(OrdersQueries.InitialSearch(TextBoxFilter.Text));
+			var quotation = GlobalObjects.CasEnvironment.Execute(OrdersQueries.QuotationSearch(TextBoxFilter.Text));
+			var purchase = GlobalObjects.CasEnvironment.Execute(OrdersQueries.PurchaseSearch(TextBoxFilter.Text));
+
+			var initialids = new List<int>();
+			foreach (DataRow dRow in initial.Tables[0].Rows)
+				initialids.Add(int.Parse(dRow[0].ToString()));
+
+			var quotationids = new List<int>();
+			foreach (DataRow dRow in quotation.Tables[0].Rows)
+				quotationids.Add(int.Parse(dRow[0].ToString()));
+
+			var purchaseids = new List<int>();
+			foreach (DataRow dRow in purchase.Tables[0].Rows)
+				purchaseids.Add(int.Parse(dRow[0].ToString()));
+
+			initialfilter = new Filter("ItemId", initialids);
+			quotationfilter = new Filter("ItemId", quotationids);
+			purchasefilter = new Filter("ItemId", purchaseids);
+			AnimatedThreadWorker.RunWorkerAsync();
 		}
 	}
 }
