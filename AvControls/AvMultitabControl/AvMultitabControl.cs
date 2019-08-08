@@ -1299,7 +1299,8 @@ namespace AvControls.AvMultitabControl
                     if (!pageAlreadyAdded)
                     {
                         PageAddedViaPropertyGrid = false;
-                        List.Insert(index, page);
+                        //List.Insert(index, page);вставка в начало
+                        List.Insert(0, page);
                         PageAddedViaPropertyGrid = true;
                     }
                     QueueList.Insert(0, page);
