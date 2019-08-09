@@ -92,6 +92,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			aircraftHeaderControl1.Operator = currentOperator;
 			StatusTitle = "Operator Purchases";
 			labelTitle.Visible = false;
+			InitToolStripMenuItems();
 			InitListView();
 		}
 
