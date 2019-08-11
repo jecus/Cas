@@ -409,9 +409,13 @@ namespace CAS.UI.UIControls.NewGrid
 					{
 						if (cell != null)
 							cell.Text = cell.Text.Replace("\n", "");
-						rowInfo.Cells[i].Value = cell;
 
-						if(cell.ForeColor.HasValue)
+						if (rowInfo.Cells[i].ColumnInfo is GridViewDateTimeColumn)
+							rowInfo.Cells[i].Value = cell.Tag;
+						else
+							rowInfo.Cells[i].Value = cell;
+
+						if (cell.ForeColor.HasValue)
 							rowInfo.Cells[i].Style.ForeColor = cell.ForeColor.Value;
 
 						i++;
