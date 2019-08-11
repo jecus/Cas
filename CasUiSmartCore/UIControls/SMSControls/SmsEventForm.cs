@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.SMS;
 
@@ -11,7 +12,7 @@ namespace CAS.UI.UIControls.SMSControls
     ///<summary>
     /// Форма для редактирования типа события системы безопасности полетов
     ///</summary>
-    public partial class SmsEventForm : Form
+    public partial class SmsEventForm : MetroForm
     {
         private Event _smsEvent;
 
