@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
-using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.SMS;
@@ -15,7 +14,7 @@ namespace CAS.UI.UIControls.SMSControls
     ///<summary>
     /// Форма для редактирования типа события системы безопасности полетов
     ///</summary>
-    public partial class SmsEventTypeForm : MetroForm
+    public partial class SmsEventTypeForm : Form
     {
         private readonly Type _viewedType = typeof (EventTypeRiskLevelChangeRecord);
         private readonly SmsEventType _smsEventType;
