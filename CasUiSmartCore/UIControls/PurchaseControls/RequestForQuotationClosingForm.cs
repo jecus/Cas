@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Windows.Forms;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
     ///<summary>
     ///</summary>
-    public partial class RequestForQuotationClosingForm : Form
+    public partial class RequestForQuotationClosingForm : MetroForm
     {
         #region Fields
 
