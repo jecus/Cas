@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 
 namespace CAS.UI.UIControls.Auxiliary
@@ -10,7 +11,7 @@ namespace CAS.UI.UIControls.Auxiliary
     ///<summary>
     /// Форма для редактирования добавления и удаления подтипов документов
     ///</summary>
-    public partial class ReasonAddingForm : Form
+    public partial class ReasonAddingForm : MetroForm
     {
         #region Fields
 
