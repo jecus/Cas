@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 
@@ -11,7 +12,7 @@ namespace CAS.UI.UIControls.DirectivesControls
     ///<summary>
     ///Форма отображает список листов повреждений 
     ///</summary>
-    public partial class DamageChartsForm : Form
+    public partial class DamageChartsForm : MetroForm
     {
         #region Fields
 
