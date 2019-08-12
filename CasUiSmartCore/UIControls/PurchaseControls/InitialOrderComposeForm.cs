@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -16,7 +17,7 @@ namespace CAS.UI.UIControls.PurchaseControls
     /// <summary>
     /// Форма для формирования начального акта
     /// </summary>
-    public partial class InitialOrderComposeForm : Form
+    public partial class InitialOrderComposeForm : MetroForm
     {
         #region Fields
 
