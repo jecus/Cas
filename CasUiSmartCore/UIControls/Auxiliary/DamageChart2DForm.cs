@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Directives;
 
 namespace CAS.UI.UIControls.Auxiliary
 {
-    public partial class DamageChart2DForm : Form
+    public partial class DamageChart2DForm : MetroForm
     {
         #region Fields
 
