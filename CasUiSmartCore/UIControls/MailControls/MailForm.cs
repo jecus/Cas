@@ -6,6 +6,7 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using EntityCore.DTO.Dictionaries;
 using EntityCore.DTO.General;
+using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Mail;
 using SmartCore.Entities.General.Personnel;
@@ -13,7 +14,7 @@ using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.MailControls
 {
-	public partial class MailForm : Form
+	public partial class MailForm : MetroForm
 	{
 		#region Fields
 
