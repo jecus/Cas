@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
@@ -15,7 +16,7 @@ namespace CAS.UI.UIControls.Auxiliary
     ///<summary>
     /// Форма для редактирования актуального состояния
     ///</summary>
-    public partial class ActualStateDialog : Form
+    public partial class ActualStateDialog : MetroForm
     {
         #region Fields
 
