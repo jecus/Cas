@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Directives;
 
@@ -9,7 +10,7 @@ namespace CAS.UI.UIControls.Auxiliary
 {
     ///<summary>
     ///</summary>
-    public partial class DamageChartFileDialog : Form
+    public partial class DamageChartFileDialog : MetroForm
     {
         #region Fields
         private DamageItem _currentDirctive;
