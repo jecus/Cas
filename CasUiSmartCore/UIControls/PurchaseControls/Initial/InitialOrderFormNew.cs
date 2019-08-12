@@ -21,8 +21,8 @@ using SmartCore.Queries;
 
 namespace CAS.UI.UIControls.PurchaseControls.Initial
 {
-    public partial class InitialOrderFormNew : MetroForm
-    {
+	public partial class InitialOrderFormNew : MetroForm
+	{
 		#region Fields
 
 		private List<InitialOrderRecord> _addedInitialOrderRecords = new List<InitialOrderRecord>();
@@ -51,29 +51,29 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		#region Constructor
 
 		public InitialOrderFormNew()
-	    {
-		    InitializeComponent();
-	    }
+		{
+			InitializeComponent();
+		}
 
-	    public InitialOrderFormNew(InitialOrder order, IEnumerable<Product> selectedProducts = null) : this()
-	    {
-		    if (selectedProducts != null)
-		    {
-			    foreach (var product in selectedProducts)
-			    {
+		public InitialOrderFormNew(InitialOrder order, IEnumerable<Product> selectedProducts = null) : this()
+		{
+			if (selectedProducts != null)
+			{
+				foreach (var product in selectedProducts)
+				{
 					var newRequest = new InitialOrderRecord(-1, product, 1);
 					newRequest.Product = product;
 					_addedInitialOrderRecords.Add(newRequest);
 				}
-		    }
+			}
 
 			_order = order;
 
-		    _collectionFilter.Filters.Add(_partNumberFilter);
-		    _collectionFilter.Filters.Add(_standartFilter);
+			_collectionFilter.Filters.Add(_partNumberFilter);
+			_collectionFilter.Filters.Add(_standartFilter);
 
 			Task.Run(() => DoWork())
-			    .ContinueWith(task => Completed(), TaskScheduler.FromCurrentSynchronizationContext());
+				.ContinueWith(task => Completed(), TaskScheduler.FromCurrentSynchronizationContext());
 		}
 
 		#endregion
@@ -395,7 +395,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			var destination =
 				destinations.FirstOrDefault(d => d.SmartCoreObjectType == listViewInitialItems.SelectedItem.DestinationObjectType
-				                                 && d.ItemId == listViewInitialItems.SelectedItem.DestinationObjectId);
+												 && d.ItemId == listViewInitialItems.SelectedItem.DestinationObjectId);
 
 			comboBoxDestination.SelectedItem = destination;
 			comboBoxPriority.SelectedItem = listViewInitialItems.SelectedItem.Priority;
@@ -524,10 +524,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				{
 					_currentAircraftKits.Clear();
 					var res = BaseQueries.GetSelectQueryWithWhere<Product>() + $" AND ( Model like '%{textBoxSearchPartNumber.Text}%' OR " +
-					          $"PartNumber like '%{textBoxSearchPartNumber.Text}%' OR " +
-					          $"Description like '%{textBoxSearchPartNumber.Text}%' OR " +
-					          $"AltPartNumber like '%{textBoxSearchPartNumber.Text}%' OR " +
-					          $"Reference like '%{textBoxSearchPartNumber.Text}%')";
+							  $"PartNumber like '%{textBoxSearchPartNumber.Text}%' OR " +
+							  $"Description like '%{textBoxSearchPartNumber.Text}%' OR " +
+							  $"AltPartNumber like '%{textBoxSearchPartNumber.Text}%' OR " +
+							  $"Reference like '%{textBoxSearchPartNumber.Text}%')";
 
 					var ds = GlobalObjects.CasEnvironment.Execute(res);
 					_currentAircraftKits.AddRange(BaseQueries.GetObjectList<Product>(ds.Tables[0]));
@@ -544,6 +544,14 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private void InitialOrderFormNew_Load(object sender, EventArgs e)
 		{
 
+		}
+
+		
+
+		private void ButtonAddProduct_Click(object sender, EventArgs e)
+		{
+			var form = new ProductForm(new Product());
+			form.ShowDialog();
 		}
 	}
 }
