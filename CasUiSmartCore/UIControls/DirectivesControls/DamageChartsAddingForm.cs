@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 
@@ -8,7 +9,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 {
     ///<summary>
     ///</summary>
-    public partial class DamageChartsAddingForm : Form
+    public partial class DamageChartsAddingForm : MetroForm
     {
         #region Fields
 
