@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -18,7 +19,7 @@ namespace CAS.UI.UIControls.Auxiliary.Importing
     /// <summary>
     /// Общая Форма для редактирования объектов
     /// </summary>
-    public partial class CommonExcelImportForm : Form
+    public partial class CommonExcelImportForm : MetroForm
     {
         #region Fields
 
