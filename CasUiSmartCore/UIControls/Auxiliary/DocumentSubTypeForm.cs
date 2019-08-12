@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 
@@ -10,7 +11,7 @@ namespace CAS.UI.UIControls.Auxiliary
     ///<summary>
     /// Форма для редактирования добавления и удаления подтипов документов
     ///</summary>
-    public partial class DocumentSubTypeForm : Form
+    public partial class DocumentSubTypeForm : MetroForm
     {
         #region Fields
 
