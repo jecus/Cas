@@ -237,21 +237,21 @@ namespace SmartCore.Entities
 
 		public void Delete(List<BaseEntityObject> value, bool isDeletedOnly = false)
 		{
-			if (value.Count > 1)
-			{
-				if (isDeletedOnly)
-				{
-					foreach (var entity in value)
-						entity.IsDeleted = true;
-					BulkUpdate(value);
-				}
-				else BulkDelete(value);
-			}
-			else
-			{
+			//if (value.Count > 1)
+			//{
+			//	if (isDeletedOnly)
+			//	{
+			//		foreach (var entity in value)
+			//			entity.IsDeleted = true;
+			//		BulkUpdate(value);
+			//	}
+			//	else BulkDelete(value);
+			//}
+			//else
+			//{
 				foreach (var entity in value)
 					Delete(entity, isDeletedOnly);
-			}
+			//}
 		}
 
 
