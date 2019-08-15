@@ -40,7 +40,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private readonly BaseEntityObject _parent;
 		private RequestForQuotationListView _directivesViewer;
 		private RadDropDownMenu _contextMenuStrip;
-		private RadMenuItem _toolStripMenuItemPublish;
 		private RadMenuItem _toolStripMenuItemEdit;
 		private RadMenuItem _toolStripMenuItemCreatePurchase;
 		private RadMenuItem _toolStripMenuItemClose;
@@ -116,7 +115,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_quotatioArray.Clear();
 			_quotatioArray = null;
 
-			if (_toolStripMenuItemPublish != null) _toolStripMenuItemPublish.Dispose();
 			if (_toolStripMenuItemCreatePurchase != null) _toolStripMenuItemCreatePurchase.Dispose();
 			if (_toolStripMenuItemEdit != null) _toolStripMenuItemEdit.Dispose();
 			if (_toolStripMenuItemClose != null) _toolStripMenuItemClose.Dispose();
@@ -197,7 +195,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private void InitToolStripMenuItems()
 		{
 			_contextMenuStrip = new RadDropDownMenu();
-			_toolStripMenuItemPublish = new RadMenuItem();
 			_toolStripMenuItemClose = new RadMenuItem();
 			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
@@ -214,11 +211,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 			_toolStripMenuItemEdit.Text = "Edit";
 			_toolStripMenuItemEdit.Click += ToolStripMenuItemEditClick;
-			// 
-			// toolStripMenuItemView
-			// 
-			_toolStripMenuItemPublish.Text = "Publish";
-			_toolStripMenuItemPublish.Click += ToolStripMenuItemPublishClick;
+			
 			// 
 			// toolStripMenuItemClose
 			// 
@@ -235,8 +228,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_contextMenuStrip.Items.AddRange(new RadItem[]
 												{
 													_toolStripMenuItemCreatePurchase,
-													new RadMenuSeparatorItem(), 
-													_toolStripMenuItemPublish,
+													new RadMenuSeparatorItem(),
 													_toolStripMenuItemClose,
 													_toolStripSeparator1,
 													_toolStripMenuItemEdit,
@@ -244,35 +236,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 													_toolStripMenuItemDelete
 
 												});
-		}
-
-		#endregion
-
-		#region private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
-		/// <summary>
-		/// Публикует рабочий пакет
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
-		{
-			foreach (var rfq in _directivesViewer.SelectedItems)
-			{
-				if (rfq.Status == WorkPackageStatus.Published)
-				{
-					MessageBox.Show("Initional Order " + rfq.Title + " is already publisher.",
-						(string) new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
-						MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-					continue;
-				}
-
-				rfq.Status = WorkPackageStatus.Published;
-				rfq.PublishingDate = DateTime.Now;
-				rfq.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
-				rfq.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
-				GlobalObjects.CasEnvironment.NewKeeper.Save(rfq);
-			}
-			AnimatedThreadWorker.RunWorkerAsync();
 		}
 
 		#endregion
@@ -336,6 +299,12 @@ namespace CAS.UI.UIControls.PurchaseControls
 			{
 				MessageBox.Show("Create purchase successful", "Message infomation", MessageBoxButtons.OK,
 					MessageBoxIcon.Information);
+
+				_directivesViewer.SelectedItems[0].Status = WorkPackageStatus.Published;
+				_directivesViewer.SelectedItems[0].PublishingDate = DateTime.Now;
+				_directivesViewer.SelectedItems[0].PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
+				_directivesViewer.SelectedItems[0].PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
+				GlobalObjects.CasEnvironment.NewKeeper.Save(_directivesViewer.SelectedItems[0]);
 			}
 		}
 
@@ -378,25 +347,21 @@ namespace CAS.UI.UIControls.PurchaseControls
 					if (wp.Status == WorkPackageStatus.Closed || wp.Status == WorkPackageStatus.Opened)
 					{
 						_toolStripMenuItemClose.Enabled = false;
-						_toolStripMenuItemPublish.Enabled = true;
 					}
 					else if (wp.Status == WorkPackageStatus.Published)
 					{
 						_toolStripMenuItemClose.Enabled = true;
-						_toolStripMenuItemPublish.Enabled = false;
 					}
 					else
 					{
 						_toolStripMenuItemClose.Enabled = true;
-						_toolStripMenuItemPublish.Enabled = true;
 					}
 
-					_toolStripMenuItemCreatePurchase.Enabled = wp.Status != WorkPackageStatus.Closed;
+					_toolStripMenuItemCreatePurchase.Enabled = wp.Status == WorkPackageStatus.Opened;
 				}
 				else
 				{
 					_toolStripMenuItemClose.Enabled = true;
-					_toolStripMenuItemPublish.Enabled = true;
 				}
 			};
 

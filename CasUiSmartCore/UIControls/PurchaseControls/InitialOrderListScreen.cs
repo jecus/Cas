@@ -42,7 +42,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private InitialOrderListView _directivesViewer;
 
 		private RadDropDownMenu _contextMenuStrip;
-		private RadMenuItem _toolStripMenuItemPublish;
 		private RadMenuItem _toolStripMenuItemEdit;
 		private RadMenuItem _toolStripMenuItemClose;
 		private RadMenuItem _toolStripMenuItemDelete;
@@ -118,7 +117,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_initialArray.Clear();
 			_initialArray = null;
 
-			if (_toolStripMenuItemPublish != null) _toolStripMenuItemPublish.Dispose();
 			if (_toolStripMenuItemCreateQuatation != null) _toolStripMenuItemCreateQuatation.Dispose();
 			if (_toolStripMenuItemEdit != null) _toolStripMenuItemEdit.Dispose();
 			if (_toolStripMenuItemClose != null) _toolStripMenuItemClose.Dispose();
@@ -199,7 +197,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private void InitToolStripMenuItems()
 		{
 			_contextMenuStrip = new RadDropDownMenu();
-			_toolStripMenuItemPublish = new RadMenuItem();
 			_toolStripMenuItemCreateQuatation = new RadMenuItem();
 			_toolStripMenuItemClose = new RadMenuItem();
 			_toolStripMenuItemDelete = new RadMenuItem();
@@ -213,11 +210,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 			_toolStripMenuItemEdit.Text = "Edit";
 			_toolStripMenuItemEdit.Click += ToolStripMenuItemEditClick;
-			// 
-			// toolStripMenuItemView
-			// 
-			_toolStripMenuItemPublish.Text = "Publish";
-			_toolStripMenuItemPublish.Click += ToolStripMenuItemPublishClick;
 
 			_toolStripMenuItemCreateQuatation.Text = "Create Quatation Order";
 			_toolStripMenuItemCreateQuatation.Click += _toolStripMenuItemCreateQuatation_Click; ;
@@ -236,8 +228,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_contextMenuStrip.Items.AddRange(new RadItem[]
 												{
 													_toolStripMenuItemCreateQuatation,
-													new RadMenuSeparatorItem(), 
-													_toolStripMenuItemPublish,
+													new RadMenuSeparatorItem(),
 													_toolStripMenuItemClose,
 													_toolStripSeparator1,
 													_toolStripMenuItemEdit,
@@ -295,7 +286,20 @@ namespace CAS.UI.UIControls.PurchaseControls
 					newquatationRecord.LifeLimitNotify = new Lifelength(record.LifeLimitNotify);
 
 					GlobalObjects.CasEnvironment.Keeper.Save(newquatationRecord);
+
+					MessageBox.Show("Create quatation successful", "Message infomation", MessageBoxButtons.OK,
+						MessageBoxIcon.Information);
+
+					var form = new QuatationOrderFormNew(quatation);
+					form.ShowDialog();
 				}
+
+
+				initial.Status = WorkPackageStatus.Published;
+				initial.PublishingDate = DateTime.Now;
+				initial.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
+				initial.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
+				GlobalObjects.CasEnvironment.NewKeeper.Save(initial);
 			}
 			catch (Exception ex)
 			{
@@ -303,54 +307,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				throw;
 			}
 
-			MessageBox.Show("Create quatation successful", "Message infomation", MessageBoxButtons.OK,
-				MessageBoxIcon.Information);
-		}
-
-		#endregion
-
-		#region private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
-		/// <summary>
-		/// Публикует рабочий пакет
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
-		{
-			foreach (var rfq in _directivesViewer.SelectedItems)
-			{
-				if (rfq.Status == WorkPackageStatus.Published)
-				{
-					MessageBox.Show("Initional Order " + rfq.Title + " is already publisher.",
-						(string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
-						MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-					continue;
-				}
-
-				rfq.Status = WorkPackageStatus.Published;
-					rfq.PublishingDate = DateTime.Now;
-					rfq.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
-					rfq.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
-					GlobalObjects.CasEnvironment.NewKeeper.Save(rfq);
-				//}
-			 //   else
-			 //   {
-			 //       switch (MessageBox.Show(@"This initial order is already closed," +
-			 //                                "\nif you want to republish it," +
-			 //                                "\nInformation entered at the closing will be erased." + "\n\n Republish " + rfq.Title + " initial order?", (string)new GlobalTermsProvider()["SystemName"],
-			 //                           MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation,
-			 //                           MessageBoxDefaultButton.Button2))
-			 //       {
-			 //           case DialogResult.Yes:
-			 //               GlobalObjects.PackageCore.PublishPackage<InitialOrder, InitialOrderRecord>(rfq, DateTime.Now);
-			 //               break;
-			 //           case DialogResult.No:
-			 //               //arguments.Cancel = true;
-			 //               break;
-			 //       }
-			 //   }
-			}
-			AnimatedThreadWorker.RunWorkerAsync();
+			
 		}
 
 		#endregion
@@ -494,26 +451,22 @@ namespace CAS.UI.UIControls.PurchaseControls
 					if (wp.Status == WorkPackageStatus.Closed || wp.Status == WorkPackageStatus.Opened)
 					{
 						_toolStripMenuItemClose.Enabled = false;
-						_toolStripMenuItemPublish.Enabled = true;
 					}
 					else if (wp.Status == WorkPackageStatus.Published)
 					{
 						_toolStripMenuItemClose.Enabled = true;
-						_toolStripMenuItemPublish.Enabled = false;
 					}
 					else
 					{
 						_toolStripMenuItemClose.Enabled = true;
-						_toolStripMenuItemPublish.Enabled = true;
 					}
 
-					_toolStripMenuItemCreateQuatation.Enabled = wp.Status != WorkPackageStatus.Closed;
+					_toolStripMenuItemCreateQuatation.Enabled = wp.Status == WorkPackageStatus.Opened;
 				}
 				else
 				{
 					_toolStripMenuItemCreateQuatation.Enabled = false;
 					_toolStripMenuItemClose.Enabled = true;
-					_toolStripMenuItemPublish.Enabled = true;
 				}
 			};
 
