@@ -390,6 +390,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 						_toolStripMenuItemClose.Enabled = true;
 						_toolStripMenuItemPublish.Enabled = true;
 					}
+
+					_toolStripMenuItemCreatePurchase.Enabled = wp.Status != WorkPackageStatus.Closed;
 				}
 				else
 				{

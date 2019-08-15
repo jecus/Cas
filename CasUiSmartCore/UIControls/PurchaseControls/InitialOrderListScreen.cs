@@ -507,7 +507,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 						_toolStripMenuItemPublish.Enabled = true;
 					}
 
-					_toolStripMenuItemCreateQuatation.Enabled = true;
+					_toolStripMenuItemCreateQuatation.Enabled = wp.Status != WorkPackageStatus.Closed;
 				}
 				else
 				{
