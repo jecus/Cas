@@ -45,6 +45,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.textboxRemark = new MetroFramework.Controls.MetroTextBox();
 			this.labelAddress = new MetroFramework.Controls.MetroLabel();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
+			this.ButtonFilter = new AvControls.AvButtonT.AvButtonT();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -205,12 +206,42 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.pictureBox2.TabIndex = 45;
 			this.pictureBox2.TabStop = false;
 			// 
+			// ButtonFilter
+			// 
+			this.ButtonFilter.ActiveBackColor = System.Drawing.Color.Transparent;
+			this.ButtonFilter.ActiveBackgroundImage = null;
+			this.ButtonFilter.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.ButtonFilter.FontMain = new System.Drawing.Font("Verdana", 14.25F);
+			this.ButtonFilter.FontSecondary = new System.Drawing.Font("Verdana", 9.75F);
+			this.ButtonFilter.ForeColorMain = System.Drawing.SystemColors.ControlText;
+			this.ButtonFilter.ForeColorSecondary = System.Drawing.SystemColors.ControlText;
+			this.ButtonFilter.Icon = global::CAS.UI.Properties.Resources.ApplyFilterIcon;
+			this.ButtonFilter.IconLayout = System.Windows.Forms.ImageLayout.Center;
+			this.ButtonFilter.IconNotEnabled = global::CAS.UI.Properties.Resources.AddIconGraySmall;
+			this.ButtonFilter.Location = new System.Drawing.Point(865, 69);
+			this.ButtonFilter.Margin = new System.Windows.Forms.Padding(5);
+			this.ButtonFilter.Name = "ButtonFilter";
+			this.ButtonFilter.NormalBackgroundImage = null;
+			this.ButtonFilter.PaddingMain = new System.Windows.Forms.Padding(0);
+			this.ButtonFilter.PaddingSecondary = new System.Windows.Forms.Padding(0);
+			this.ButtonFilter.ShowToolTip = true;
+			this.ButtonFilter.Size = new System.Drawing.Size(42, 38);
+			this.ButtonFilter.TabIndex = 44;
+			this.ButtonFilter.TextAlignMain = System.Drawing.ContentAlignment.MiddleLeft;
+			this.ButtonFilter.TextAlignSecondary = System.Drawing.ContentAlignment.MiddleLeft;
+			this.ButtonFilter.TextMain = "";
+			this.ButtonFilter.TextSecondary = "";
+			this.ButtonFilter.ToolTipText = "Add Item";
+			this.ButtonFilter.Click += new System.EventHandler(this.ButtonFilter_Click);
+			// 
+			// 
 			// WorkPackageEmployeeForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(921, 722);
 			this.Controls.Add(this.pictureBox2);
+			this.Controls.Add(this.ButtonFilter);
 			this.Controls.Add(this.textboxRemark);
 			this.Controls.Add(this.labelAddress);
 			this.Controls.Add(this.labelWpTitle);
@@ -249,5 +280,6 @@ namespace CAS.UI.UIControls.WorkPakage
 		private MetroTextBox textboxRemark;
 		private MetroLabel labelAddress;
 		private System.Windows.Forms.PictureBox pictureBox2;
+		private AvControls.AvButtonT.AvButtonT ButtonFilter;
 	}
 }
