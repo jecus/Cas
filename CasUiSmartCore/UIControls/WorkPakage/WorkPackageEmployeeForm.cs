@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
+using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
 using EntityCore.DTO.Dictionaries;
 using EntityCore.DTO.General;
@@ -61,8 +63,10 @@ namespace CAS.UI.UIControls.WorkPakage
 
 		private void BackgroundWorkerRunWorkerLoadCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
-			workPackageEmployeeListViewAll.SetItemsArray(_initialDocumentArray.ToArray());
+			workPackageEmployeeListViewAll.SetItemsArray(_resultDocumentArray.ToArray());
 			workPackageEmployeeListView2.SetItemsArray(_wpSpecialists.ToArray());
+
+			this.Focus();
 		}
 
 		#endregion
@@ -96,7 +100,7 @@ namespace CAS.UI.UIControls.WorkPakage
 				_wpSpecialists.AddRange(_initialDocumentArray.Where(s => specialistIds.Any(id => id == s.ItemId)));
 
 
-
+			FilterItems(_initialDocumentArray, _resultDocumentArray);
 		}
 
 		#endregion
@@ -190,6 +194,90 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.Close();
 		}
 
+		#endregion
+
+		#region private void ButtonFilter_Click(object sender, EventArgs e)
+
+		private void ButtonFilter_Click(object sender, EventArgs e)
+		{
+			var form = new CommonFilterForm(_filter, _initialDocumentArray);
+
+			if (form.ShowDialog(this) == DialogResult.OK)
+			{
+				_animatedThreadWorker.DoWork -= AnimatedThreadWorkerDoLoad;
+				_animatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+				_animatedThreadWorker.DoWork += AnimatedThreadWorkerDoFilteringWork;
+
+				_animatedThreadWorker.RunWorkerAsync();
+			}
+		}
+
+		#endregion
+
+		#region private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
+
+		private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
+		{
+			_resultDocumentArray.Clear();
+
+			#region Фильтрация директив
+			_animatedThreadWorker.ReportProgress(50, "filter directives");
+
+			FilterItems(_initialDocumentArray, _resultDocumentArray);
+
+			if (_animatedThreadWorker.CancellationPending)
+			{
+				e.Cancel = true;
+				return;
+			}
+			#endregion
+
+			_animatedThreadWorker.ReportProgress(100, "Complete");
+		}
+
+		#endregion
+
+		#region private void FilterItems(IEnumerable<AircraftFlight> initialCollection, ICommonCollection<AircraftFlight> resultCollection)
+
+		///<summary>
+		///</summary>
+		///<param name="initialCollection"></param>
+		///<param name="resultCollection"></param>
+		private void FilterItems(IEnumerable<Specialist> initialCollection, ICommonCollection<Specialist> resultCollection)
+		{
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
+			{
+				resultCollection.Clear();
+				resultCollection.AddRange(initialCollection);
+				return;
+			}
+
+			resultCollection.Clear();
+
+			foreach (var pd in initialCollection)
+			{
+				if (_filter.FilterTypeAnd)
+				{
+					bool acceptable = true;
+					foreach (ICommonFilter filter in _filter)
+					{
+						acceptable = filter.Acceptable(pd); if (!acceptable) break;
+					}
+					if (acceptable) resultCollection.Add(pd);
+				}
+				else
+				{
+					bool acceptable = true;
+					foreach (ICommonFilter filter in _filter)
+					{
+						if (filter.Values == null || filter.Values.Length == 0)
+							continue;
+						acceptable = filter.Acceptable(pd); if (acceptable) break;
+					}
+					if (acceptable) resultCollection.Add(pd);
+				}
+			}
+		}
 		#endregion
 
 	}
