@@ -82,10 +82,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void Completed()
 		{
-			listViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
-
 			UpdateControls();
 			UpdateInitialControls();
+
+			listViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
 		}
 
 		#endregion
@@ -99,7 +99,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			{
 				_addedInitialOrderRecords.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(new Filter("ParentPackageId", _order.ItemId)));
 				var ids = _addedInitialOrderRecords.Select(i => i.ProductId);
-				var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()));
+				var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), true);
 
 				if (ids.Count() > 0)
 				{
@@ -265,14 +265,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			ApplyInitialData();
 			//сохранение запросного ордера
 			GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
-
-			if (listViewKits.ItemsCount <= 0)
-			{
-				MessageBox.Show("Please select a kits for initional order", (string)new GlobalTermsProvider()["SystemName"],
-					MessageBoxButtons.OK,
-					MessageBoxIcon.Exclamation);
-				return;
-			}
 
 			foreach (var record in _addedInitialOrderRecords)
 			{
@@ -523,14 +515,14 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			Task.Run(() =>
 				{
 					_currentAircraftKits.Clear();
-					var res = BaseQueries.GetSelectQueryWithWhere<Product>() + $" AND ( Model like '%{textBoxSearchPartNumber.Text}%' OR " +
-							  $"PartNumber like '%{textBoxSearchPartNumber.Text}%' OR " +
-							  $"Description like '%{textBoxSearchPartNumber.Text}%' OR " +
-							  $"AltPartNumber like '%{textBoxSearchPartNumber.Text}%' OR " +
-							  $"Reference like '%{textBoxSearchPartNumber.Text}%')";
+					var res = BaseQueries.GetSelectQueryWithWhere<Product>(loadChild:true) + $" AND ( AccessoryDescriptions.Model like '%{textBoxSearchPartNumber.Text}%' OR " +
+							  $"AccessoryDescriptions.PartNumber like '%{textBoxSearchPartNumber.Text}%' OR " +
+							  $"AccessoryDescriptions.Description like '%{textBoxSearchPartNumber.Text}%' OR " +
+							  $"AccessoryDescriptions.AltPartNumber like '%{textBoxSearchPartNumber.Text}%' OR " +
+							  $"AccessoryDescriptions.Reference like '%{textBoxSearchPartNumber.Text}%')";
 
 					var ds = GlobalObjects.CasEnvironment.Execute(res);
-					_currentAircraftKits.AddRange(BaseQueries.GetObjectList<Product>(ds.Tables[0]));
+					_currentAircraftKits.AddRange(BaseQueries.GetObjectList<Product>(ds.Tables[0],true));
 				})
 				.ContinueWith(task =>
 				{

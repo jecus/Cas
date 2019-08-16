@@ -24,8 +24,8 @@ using SmartCore.Queries;
 
 namespace CAS.UI.UIControls.PurchaseControls.Initial
 {
-    public partial class QuatationOrderFormNew : MetroForm
-    {
+	public partial class QuatationOrderFormNew : MetroForm
+	{
 		#region Fields
 
 		private List<RequestForQuotationRecord> _addedQuatationOrderRecords = new List<RequestForQuotationRecord>();
@@ -58,29 +58,29 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		#region Constructor
 
 		public QuatationOrderFormNew()
-	    {
-		    InitializeComponent();
-	    }
+		{
+			InitializeComponent();
+		}
 
-	    public QuatationOrderFormNew(RequestForQuotation order, IEnumerable<Product> selectedProducts = null) : this()
-	    {
-		    if (selectedProducts != null)
-		    {
-			    foreach (var product in selectedProducts)
-			    {
+		public QuatationOrderFormNew(RequestForQuotation order, IEnumerable<Product> selectedProducts = null) : this()
+		{
+			if (selectedProducts != null)
+			{
+				foreach (var product in selectedProducts)
+				{
 					var newRequest = new RequestForQuotationRecord(-1, product, 1);
 					newRequest.Product = product;
 					_addedQuatationOrderRecords.Add(newRequest);
 				}
-		    }
+			}
 
 			_order = order;
 
-		    _collectionFilter.Filters.Add(_partNumberFilter);
-		    _collectionFilter.Filters.Add(_standartFilter);
+			_collectionFilter.Filters.Add(_partNumberFilter);
+			_collectionFilter.Filters.Add(_standartFilter);
 
 			Task.Run(() => DoWork())
-			    .ContinueWith(task => Completed(), TaskScheduler.FromCurrentSynchronizationContext());
+				.ContinueWith(task => Completed(), TaskScheduler.FromCurrentSynchronizationContext());
 
 			InitToolStripMenuItems();
 		}
@@ -447,7 +447,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			var destination =
 				destinations.FirstOrDefault(d => d.SmartCoreObjectType == record.DestinationObjectType
-				                                 && d.ItemId == record.DestinationObjectId);
+												 && d.ItemId == record.DestinationObjectId);
 
 			comboBoxDestination.SelectedItem = destination;
 			comboBoxPriority.SelectedItem = record.Priority;
@@ -683,14 +683,14 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			Task.Run(() =>
 				{
 					_currentAircraftKits.Clear();
-					var res = BaseQueries.GetSelectQueryWithWhere<Product>() + $" AND ( Model like '%{textBoxSearchPartNumber.Text}%' OR " +
-					          $"PartNumber like '%{textBoxSearchPartNumber.Text}%' OR " +
-					          $"Description like '%{textBoxSearchPartNumber.Text}%' OR " +
-					          $"AltPartNumber like '%{textBoxSearchPartNumber.Text}%' OR " +
-					          $"Reference like '%{textBoxSearchPartNumber.Text}%')";
+					var res = BaseQueries.GetSelectQueryWithWhere<Product>(loadChild:true) + $" AND ( AccessoryDescriptions.Model like '%{textBoxSearchPartNumber.Text}%' OR " +
+							  $"AccessoryDescriptions.PartNumber like '%{textBoxSearchPartNumber.Text}%' OR " +
+							  $"AccessoryDescriptions.Description like '%{textBoxSearchPartNumber.Text}%' OR " +
+							  $"AccessoryDescriptions.AltPartNumber like '%{textBoxSearchPartNumber.Text}%' OR " +
+							  $"AccessoryDescriptions.Reference like '%{textBoxSearchPartNumber.Text}%')";
 
 					var ds = GlobalObjects.CasEnvironment.Execute(res);
-					_currentAircraftKits.AddRange(BaseQueries.GetObjectList<Product>(ds.Tables[0]));
+					_currentAircraftKits.AddRange(BaseQueries.GetObjectList<Product>(ds.Tables[0], true));
 				})
 				.ContinueWith(task =>
 				{
