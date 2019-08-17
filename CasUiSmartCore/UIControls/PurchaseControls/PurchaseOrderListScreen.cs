@@ -9,6 +9,7 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
+using CAS.UI.UIControls.StoresControls;
 using CASTerms;
 using EntityCore.DTO.General;
 using SmartCore.Entities.Collections;
@@ -38,9 +39,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private PurchaseOrderListView _directivesViewer;
 
 		private RadDropDownMenu _contextMenuStrip;
-		private RadMenuItem _toolStripMenuItemPublish;
+		private RadMenuItem _toolStripMenuItemMoveTo;
 		private RadMenuItem _toolStripMenuItemEdit;
-		private RadMenuItem _toolStripMenuItemClose;
 		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 		private Filter filter;
@@ -112,9 +112,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_purchaseArray.Clear();
 			_purchaseArray = null;
 
-			if (_toolStripMenuItemPublish != null) _toolStripMenuItemPublish.Dispose();
+			if (_toolStripMenuItemMoveTo != null) _toolStripMenuItemMoveTo.Dispose();
 			if (_toolStripMenuItemEdit != null) _toolStripMenuItemEdit.Dispose();
-			if (_toolStripMenuItemClose != null) _toolStripMenuItemClose.Dispose();
 			if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
 			if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
 			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
@@ -192,8 +191,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private void InitToolStripMenuItems()
 		{
 			_contextMenuStrip = new RadDropDownMenu();
-			_toolStripMenuItemPublish = new RadMenuItem();
-			_toolStripMenuItemClose = new RadMenuItem();
+			_toolStripMenuItemMoveTo = new RadMenuItem();
 			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			_toolStripMenuItemEdit = new RadMenuItem();
@@ -208,13 +206,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// 
 			// toolStripMenuItemView
 			// 
-			_toolStripMenuItemPublish.Text = "Publish";
-			_toolStripMenuItemPublish.Click += ToolStripMenuItemPublishClick;
-			// 
-			// toolStripMenuItemClose
-			// 
-			_toolStripMenuItemClose.Text = "Close";
-			_toolStripMenuItemClose.Click += ToolStripMenuItemCloseClick;
+			_toolStripMenuItemMoveTo.Text = "Move to Store";
+			_toolStripMenuItemMoveTo.Click += ToolStripMenuItemMoveToClick;
 			// 
 			// toolStripMenuItemDelete
 			// 
@@ -224,8 +217,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_contextMenuStrip.Items.Clear();
 			_contextMenuStrip.Items.AddRange(new RadItem[]
 												{
-													_toolStripMenuItemPublish,
-													_toolStripMenuItemClose,
+													_toolStripMenuItemMoveTo,
 													_toolStripSeparator1,
 													_toolStripMenuItemEdit,
 													_toolStripMenuItemDelete
@@ -235,31 +227,16 @@ namespace CAS.UI.UIControls.PurchaseControls
 		#endregion
 
 
-		#region private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
+		#region private void ToolStripMenuItemMoveToClick(object sender, EventArgs e)
 		/// <summary>
 		/// Публикует рабочий пакет
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
+		private void ToolStripMenuItemMoveToClick(object sender, EventArgs e)
 		{
-			foreach (var rfq in _directivesViewer.SelectedItems)
-			{
-				if (rfq.Status == WorkPackageStatus.Published)
-				{
-					MessageBox.Show("Purchase Order " + rfq.Title + " is already publisher.",
-						(string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
-						MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-					continue;
-				}
-
-				rfq.Status = WorkPackageStatus.Published;
-				rfq.PublishingDate = DateTime.Now;
-				rfq.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
-				rfq.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
-				GlobalObjects.CasEnvironment.NewKeeper.Save(rfq);
-			}
-			AnimatedThreadWorker.RunWorkerAsync();
+			var form = new MoveProductForm(_directivesViewer.SelectedItem);
+			form.ShowDialog();
 		}
 
 		#endregion
@@ -357,25 +334,21 @@ namespace CAS.UI.UIControls.PurchaseControls
 					PurchaseOrder po = _directivesViewer.SelectedItem;
 					if (po.Status == WorkPackageStatus.Closed || po.Status == WorkPackageStatus.Opened)
 					{
-						_toolStripMenuItemClose.Enabled = false;
-						_toolStripMenuItemPublish.Enabled = true;
+						_toolStripMenuItemMoveTo.Enabled = true;
 					}
 					else if (po.Status == WorkPackageStatus.Published)
 					{
-						_toolStripMenuItemClose.Enabled = true;
-						_toolStripMenuItemPublish.Enabled = false;
+						_toolStripMenuItemMoveTo.Enabled = false;
 					}
 					else
 					{
-						_toolStripMenuItemClose.Enabled = true;
-						_toolStripMenuItemPublish.Enabled = true;
+						_toolStripMenuItemMoveTo.Enabled = true;
 					}
 
 				}
 				else
 				{
-					_toolStripMenuItemClose.Enabled = true;
-					_toolStripMenuItemPublish.Enabled = true;
+					_toolStripMenuItemMoveTo.Enabled = true;
 				}
 			};
 

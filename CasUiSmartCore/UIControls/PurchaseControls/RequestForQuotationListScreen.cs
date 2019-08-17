@@ -294,6 +294,14 @@ namespace CAS.UI.UIControls.PurchaseControls
 		{
 			if (_directivesViewer.SelectedItems.Count != 1) return;
 
+			var records = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationRecordDTO, RequestForQuotationRecord>(new Filter("ParentPackageId", _directivesViewer.SelectedItem.ItemId));
+
+			if (records.Any(i => i.SupplierPrice.Count == 0))
+			{
+				MessageBox.Show("Please add supplier for all products.", "Message infomation", MessageBoxButtons.OK,
+					MessageBoxIcon.Information);
+				return;
+			}
 			var editForm = new CreatePurchaseOrderForm(_directivesViewer.SelectedItems[0]);
 			if (editForm.ShowDialog() == DialogResult.OK)
 			{
@@ -305,6 +313,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				_directivesViewer.SelectedItems[0].PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
 				_directivesViewer.SelectedItems[0].PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
 				GlobalObjects.CasEnvironment.NewKeeper.Save(_directivesViewer.SelectedItems[0]);
+				AnimatedThreadWorker.RunWorkerAsync();
 			}
 		}
 

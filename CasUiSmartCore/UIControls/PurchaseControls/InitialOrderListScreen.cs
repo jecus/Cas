@@ -286,20 +286,19 @@ namespace CAS.UI.UIControls.PurchaseControls
 					newquatationRecord.LifeLimitNotify = new Lifelength(record.LifeLimitNotify);
 
 					GlobalObjects.CasEnvironment.Keeper.Save(newquatationRecord);
-
-					MessageBox.Show("Create quatation successful", "Message infomation", MessageBoxButtons.OK,
-						MessageBoxIcon.Information);
-
-					var form = new QuatationOrderFormNew(quatation);
-					form.ShowDialog();
 				}
-
+				MessageBox.Show("Create quatation successful", "Message infomation", MessageBoxButtons.OK,
+					MessageBoxIcon.Information);
 
 				initial.Status = WorkPackageStatus.Published;
 				initial.PublishingDate = DateTime.Now;
 				initial.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
 				initial.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
 				GlobalObjects.CasEnvironment.NewKeeper.Save(initial);
+
+				var form = new QuatationOrderFormNew(quatation);
+				form.ShowDialog();
+				AnimatedThreadWorker.RunWorkerAsync();
 			}
 			catch (Exception ex)
 			{

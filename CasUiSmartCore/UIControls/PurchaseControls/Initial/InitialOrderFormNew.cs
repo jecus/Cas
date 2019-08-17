@@ -296,6 +296,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			foreach (var record in _deleteExistInitialOrderRecords)
 				GlobalObjects.CasEnvironment.NewKeeper.Delete(record);
+			DialogResult = DialogResult.OK;
 		}
 
 		#endregion
