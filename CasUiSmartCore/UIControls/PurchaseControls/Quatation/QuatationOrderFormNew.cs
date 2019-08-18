@@ -505,6 +505,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
 
+			listViewInitialItems.radGridView1.ClearSelection();
 			Reset();
 		}
 

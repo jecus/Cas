@@ -442,6 +442,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			listViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
 
+			listViewInitialItems.radGridView1.ClearSelection();
 			Reset();
 		}
 
