@@ -62,6 +62,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			AddColumn("Code", (int)(radGridView1.Width * 0.20f));
 			AddColumn("ATA", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Class", (int)(radGridView1.Width * 0.20f));
+			AddColumn("IsForbidden", (int)(radGridView1.Width * 0.20f));
 			AddColumn("IsDangerous", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
@@ -83,6 +84,7 @@ namespace CAS.UI.UIControls.PurchaseControls
             subItems.Add(CreateRow(item.Code, item.Code));
             subItems.Add(CreateRow(item.ATAChapter?.ToString(), item.ATAChapter));
             subItems.Add(CreateRow(item.GoodsClass?.ToString(), item.GoodsClass));
+            subItems.Add(CreateRow(item.IsForbiddenString, item.IsForbidden));
             subItems.Add(CreateRow(item.IsDangerous.ToString(), item.IsDangerous));
             subItems.Add(CreateRow(item.Remarks, item.Remarks));
             subItems.Add(CreateRow(author, author));
