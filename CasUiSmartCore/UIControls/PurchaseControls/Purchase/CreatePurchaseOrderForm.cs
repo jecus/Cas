@@ -135,6 +135,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		private void ButtonAdd_Click(object sender, EventArgs e)
 		{
+			
+
 			foreach (var price in quatationSupplierPriceListView1.SelectedItems.ToArray())
 			{
 				var newRequest = new PurchaseRequestRecord(-1, price.Parent.Product, 1);
@@ -144,6 +146,29 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				newRequest.Quantity = 1;
 				newRequest.SupplierId = price.Supplier.ItemId;
 				newRequest.Price = price;
+				newRequest.Cost = (double) price.CostNew;
+				newRequest.Currency = price.СurrencyNew;
+
+
+				if (_addedRecord.Any(i =>
+					i.Product.ItemId == price.Parent.Product.ItemId && i.SupplierId == price.SupplierId))
+				{
+					MessageBox.Show("Supplier price for product alredy added!", (string)new GlobalTermsProvider()["SystemName"],
+						MessageBoxButtons.OK,
+						MessageBoxIcon.Exclamation);
+					return;
+				}
+				var res = purchaseRecordListView1.GetItemsArray().Where(i =>
+					i.Product.ItemId == purchaseRecordListView1.SelectedItem.Product.ItemId).Select(i => i.Quantity).Sum();
+
+				if (newRequest.Price.Parent.Quantity < newRequest.Quantity + res)
+				{
+					MessageBox.Show($"Q-ty is greathe then need for this product!", (string)new GlobalTermsProvider()["SystemName"],
+						MessageBoxButtons.OK,
+						MessageBoxIcon.Exclamation);
+					return;
+				}
+
 				_addedRecord.Add(newRequest);
 			}
 
@@ -263,6 +288,17 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private void Button1_Click(object sender, EventArgs e)
 		{
 			if (purchaseRecordListView1.SelectedItem == null) return;
+
+			var res = _addedRecord.Where(i =>
+				i.Product.ItemId == purchaseRecordListView1.SelectedItem.Product.ItemId && i.Price != purchaseRecordListView1.SelectedItem.Price).Select(i => i.Quantity).Sum();
+
+			if (purchaseRecordListView1.SelectedItem.Price.Parent.Quantity < (double) numericUpDownQuantity.Value + res)
+			{
+				MessageBox.Show($"Q-ty is greathe then need for this product!", (string)new GlobalTermsProvider()["SystemName"],
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Exclamation);
+				return;
+			}
 
 			purchaseRecordListView1.SelectedItem.CostCondition = (ComponentStatus) comboBoxCondition.SelectedItem;
 			purchaseRecordListView1.SelectedItem.Measure = (Measure) comboBoxMeasure.SelectedItem;
