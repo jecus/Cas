@@ -231,6 +231,7 @@ namespace SmartCore.DtoHelper
 				Code = componentModel.Code,
 				DescRus = componentModel.DescRus,
 				IsEffectivity = componentModel.IsEffectivity,
+				IsForbidden = componentModel.IsForbidden,
 				HTS = componentModel.HTS,
 				ComponentClass = (short?) componentModel.GoodsClass?.ItemId,
 				IsDangerous = componentModel.IsDangerous,
@@ -266,6 +267,7 @@ namespace SmartCore.DtoHelper
 				GoodsClass = componentModelDto.ComponentClass.HasValue ? GoodsClass.Items.GetItemById(componentModelDto.ComponentClass.Value) : GoodsClass.Unknown,
 				IsDangerous = componentModelDto.IsDangerous,
 				IsEffectivity = componentModelDto.IsEffectivity,
+				IsForbidden = componentModelDto.IsForbidden,
 				DescRus = componentModelDto.DescRus,
 				HTS = componentModelDto.HTS,
 			};
@@ -304,6 +306,7 @@ namespace SmartCore.DtoHelper
 				HTS = product.HTS,
 				Reference = product.Reference,
 				IsEffectivity = product.IsEffectivity,
+				IsForbidden = product.IsForbidden,
 				SupplierRelations = product.SupplierRelations?.Select(i => i.Convert()) as ICollection<KitSuppliersRelationDTO>,
 			};
 		}
@@ -334,6 +337,7 @@ namespace SmartCore.DtoHelper
 				HTS = productDto.HTS,
 				Reference = productDto.Reference,
 				IsEffectivity = productDto.IsEffectivity,
+				IsForbidden = productDto.IsForbidden,
 				ProductType = productDto.ModelingObjectTypeId == -1 ? ProductType.EquipmentandMaterial: ProductType.ComponentModel
 			};
 

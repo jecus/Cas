@@ -11,13 +11,13 @@ namespace EntityCore.DTO.Dictionaries
 	
 	[Condition("IsDeleted", 0)]
 	public class AccessoryDescriptionDTO : BaseEntity, IBaseDictionary
-    {
+	{
 		
 		[Column("Description")]
-	    public string Description { get; set; }
+		public string Description { get; set; }
 
-	    
-	    [Column("PartNumber"), MaxLength(256)]
+		
+		[Column("PartNumber"), MaxLength(256)]
 		public string PartNumber { get; set; }
 
 		
@@ -120,25 +120,28 @@ namespace EntityCore.DTO.Dictionaries
 		[Column("Reference"), MaxLength(128)]
 		public string Reference { get; set; }
 
-        
-        [Column("IsEffectivity")]
+		
+		[Column("IsEffectivity")]
 		public string IsEffectivity { get; set; }
 
-        
-        [Include]
-	    public ATAChapterDTO ATAChapter { get; set; }
+		[Column("IsForbidden")]
+		public bool IsForbidden { get; set; }
 
-	    
+
+		[Include]
+		public ATAChapterDTO ATAChapter { get; set; }
+
+		
 		[Child]
-	    public GoodStandartDTO GoodStandart { get; set; }
+		public GoodStandartDTO GoodStandart { get; set; }
 
-	    
+		
 		//[Child(FilterType.Equal, "ParentTypeId", 1005)]
 		//public ICollection<ItemFileLinkDTO> Files { get; set; }
 
-	    
-	    [Child(FilterType.Equal, "ParentTypeId", 1005)]
-	    public ICollection<KitSuppliersRelationDTO> SupplierRelations { get; set; }
+		
+		[Child(FilterType.Equal, "ParentTypeId", 1005)]
+		public ICollection<KitSuppliersRelationDTO> SupplierRelations { get; set; }
 
 		#region Navigation Property
 
@@ -167,6 +170,6 @@ namespace EntityCore.DTO.Dictionaries
 		[JsonIgnore]
 		public ICollection<CategoryRecordDTO> CategoryRecordDtos { get; set; }
 
-	    #endregion
+		#endregion
 	}
 }

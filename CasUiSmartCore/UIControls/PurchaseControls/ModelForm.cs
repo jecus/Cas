@@ -45,24 +45,24 @@ namespace CAS.UI.UIControls.PurchaseControls
 					DoLoad();
 				}).ContinueWith(task => UpdateInformation(), TaskScheduler.FromCurrentSynchronizationContext());
 			}
-            
-        }
+			
+		}
 
-        #endregion
+		#endregion
 
-        private void DoLoad()
-        {
-            var links = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DocumentDTO, Document>(new List<Filter>()
-            {
-                new Filter("ParentID",_currentModel.ItemId),
-                new Filter("ParentTypeId",_currentModel.SmartCoreObjectType.ItemId)
-            }, true);
+		private void DoLoad()
+		{
+			var links = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DocumentDTO, Document>(new List<Filter>()
+			{
+				new Filter("ParentID",_currentModel.ItemId),
+				new Filter("ParentTypeId",_currentModel.SmartCoreObjectType.ItemId)
+			}, true);
 
-            _currentModel.Document = links.FirstOrDefault();
-        }
-        #region private void UpdateInformation()
+			_currentModel.Document = links.FirstOrDefault();
+		}
+		#region private void UpdateInformation()
 
-        private void UpdateInformation()
+		private void UpdateInformation()
 		{
 			comboBoxAtaChapter.UpdateInformation();
 			comboBoxAtaChapter.ATAChapter = _currentModel.ATAChapter;
@@ -92,7 +92,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				"This record does not contain a image. Enclose Image file to prove the compliance.",
 				"Attached file proves the Image.");
 
-            textBoxFullName.Text = _currentModel.FullName;
+			textBoxFullName.Text = _currentModel.FullName;
 			textBoxShortName.Text = _currentModel.ShortName;
 
 			if (_currentModel.Name.EndsWith("Copy"))
@@ -112,6 +112,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			textBoxSeries.Text = _currentModel.Series;
 
 			checkBoxDangerous.Checked = _currentModel.IsDangerous;
+			checkBoxIsForbidden.Checked = _currentModel.IsForbidden;
 
 			documentControl1.CurrentDocument = _currentModel.Document;
 			documentControl1.Added += DocumentControl1_Added;
@@ -177,6 +178,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				|| comboBoxAtaChapter.ATAChapter != _currentModel.ATAChapter
 				|| (comboBoxDetailClass.SelectedItem != _currentModel.GoodsClass)
 				|| (checkBoxDangerous.Checked != _currentModel.IsDangerous)
+				|| (checkBoxIsForbidden.Checked != _currentModel.IsForbidden)
 				|| dataGridViewControlSuppliers.GetChangeStatus()
 				|| fileControlImage.GetChangeStatus())
 				return true;
@@ -257,6 +259,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_currentModel.Standart = comboBoxAccessoryStandard.SelectedItem as GoodStandart;
 			_currentModel.ATAChapter = comboBoxAtaChapter.ATAChapter;
 			_currentModel.IsDangerous = checkBoxDangerous.Checked;
+			_currentModel.IsForbidden = checkBoxIsForbidden.Checked;
 			_currentModel.ManufactureReg = comboBoxManufRegion.SelectedItem as ManufactureRegion;
 
 			_currentModel.PartNumber = string.IsNullOrEmpty(textBoxPartNumber.Text) ? "N/A" : textBoxPartNumber.Text;
@@ -279,7 +282,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			fileControlImage.ApplyChanges();
 			_currentModel.ImageFile = fileControlImage.AttachedFile;
 
-            _currentModel.SupplierRelations.Clear();
+			_currentModel.SupplierRelations.Clear();
 			_currentModel.SupplierRelations.AddRange(dataGridViewControlSuppliers.GetItemsArray());
 		}
 		#endregion
