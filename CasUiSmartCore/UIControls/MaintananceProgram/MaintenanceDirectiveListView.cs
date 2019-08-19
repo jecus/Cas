@@ -195,7 +195,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			subItems.Add(CreateRow(item.TaskCardNumber, item.TaskCardNumber, tcnColor));
 			subItems.Add(CreateRow(description, description));
 			subItems.Add(CreateRow(item.Program.ToString(), item.Program));
-			subItems.Add(CreateRow(item.ProgramIndicator.ToString(), item.ProgramIndicator));
+			subItems.Add(CreateRow(item.ProgramIndicator.ShortName, item.ProgramIndicator));
 			subItems.Add(CreateRow(item.WorkType.ToString(), item.WorkType));
 			subItems.Add(CreateRow(check, check));
 			subItems.Add(CreateRow(item.APUCalc ? "Yes" : "No", item.APUCalc));
