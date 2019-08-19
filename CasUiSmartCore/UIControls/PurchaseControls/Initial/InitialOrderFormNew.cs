@@ -143,6 +143,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void comboBoxDestination_SelectedIndexChanged(object sender, EventArgs e)
 		{
+			if(listViewInitialItems.SelectedItem != null)
+				return;
+
 			comboBoxDefferedCategory.Items.Clear();
 			comboBoxDIR.Items.Clear();
 
