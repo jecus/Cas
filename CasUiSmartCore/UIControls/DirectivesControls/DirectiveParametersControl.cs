@@ -1471,7 +1471,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 													 ? ThresholdConditionType.WhicheverFirst
 													 : ThresholdConditionType.WhicheverLater;
 
-			if (destinationDirective.Threshold.ToString() != threshold.ToString())
+			//if (destinationDirective.Threshold.ToString() != threshold.ToString())
 				destinationDirective.Threshold = threshold;
 			if (destinationDirective is DamageItem)
 				((DamageItem) destinationDirective).IsTemporary = checkBoxIsTemporary.Checked;

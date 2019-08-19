@@ -91,8 +91,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void Completed()
 		{
-			   var filteredCollection = _collectionFilter.GatherDirectives();
-			listViewKits.SetItemsArray(filteredCollection.ToArray());
 			listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
 
 			UpdateControls();
@@ -241,14 +239,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		}
 		#endregion
 
-		#region private void UpdateListViewItems()
-		private void UpdateListViewItems()
-		{
-			var filteredCollection = _collectionFilter.GatherDirectives();
-			listViewKits.SetItemsArray(filteredCollection.ToArray());
-		}
-		#endregion
-
 		#region private void UpdateInitialControls()
 
 		private void UpdateInitialControls()
@@ -378,22 +368,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				_order.PublishingDate = dateTimePickerPublishDate.Value;
 			}
 		}
-		#endregion
-
-		#region private void ButtonAdd_Click(object sender, EventArgs e)
-
-		private void ButtonAdd_Click(object sender, EventArgs e)
-		{
-			foreach (var product in listViewKits.SelectedItems.ToArray())
-			{
-				var newRequest = new RequestForQuotationRecord(-1, product, 1);
-				newRequest.Product = product;
-				_addedQuatationOrderRecords.Add(newRequest);
-			}
-
-			listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
-		}
-
 		#endregion
 
 		#region private void ButtonDelete_Click(object sender, EventArgs e)
@@ -678,26 +652,5 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			return res;
 		}
 
-		private void Button3_Click(object sender, EventArgs e)
-		{
-			metroProgressSpinner1.Visible = true;
-			Task.Run(() =>
-				{
-					_currentAircraftKits.Clear();
-					var res = BaseQueries.GetSelectQueryWithWhere<Product>(loadChild:true) + $" AND ( AccessoryDescriptions.Model like '%{textBoxSearchPartNumber.Text}%' OR " +
-							  $"AccessoryDescriptions.PartNumber like '%{textBoxSearchPartNumber.Text}%' OR " +
-							  $"AccessoryDescriptions.Description like '%{textBoxSearchPartNumber.Text}%' OR " +
-							  $"AccessoryDescriptions.AltPartNumber like '%{textBoxSearchPartNumber.Text}%' OR " +
-							  $"AccessoryDescriptions.Reference like '%{textBoxSearchPartNumber.Text}%')";
-
-					var ds = GlobalObjects.CasEnvironment.Execute(res);
-					_currentAircraftKits.AddRange(BaseQueries.GetObjectList<Product>(ds.Tables[0], true));
-				})
-				.ContinueWith(task =>
-				{
-					listViewKits.SetItemsArray(_currentAircraftKits.ToArray());
-					metroProgressSpinner1.Visible = false;
-				}, TaskScheduler.FromCurrentSynchronizationContext());
-		}
 	}
 }

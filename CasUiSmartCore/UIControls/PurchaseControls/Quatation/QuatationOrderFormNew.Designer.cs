@@ -32,9 +32,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
         /// </summary>
         private void InitializeComponent()
         {
-			this.labelSearchPartNumber = new MetroFramework.Controls.MetroLabel();
-			this.textBoxSearchPartNumber = new MetroFramework.Controls.MetroTextBox();
-			this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
 			this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.button2 = new System.Windows.Forms.Button();
@@ -89,82 +86,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.buttonOk = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.listViewInitialItems = new CAS.UI.UIControls.PurchaseControls.Quatation.QuatationOrderListViewNew();
-			this.listViewKits = new CAS.UI.UIControls.PurchaseControls.Quatation.RequestProductListView();
-			this.button3 = new System.Windows.Forms.Button();
-			this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// labelSearchPartNumber
-			// 
-			this.labelSearchPartNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.labelSearchPartNumber.Location = new System.Drawing.Point(23, 63);
-			this.labelSearchPartNumber.Name = "labelSearchPartNumber";
-			this.labelSearchPartNumber.Size = new System.Drawing.Size(52, 23);
-			this.labelSearchPartNumber.TabIndex = 284;
-			this.labelSearchPartNumber.Text = "Search:";
-			this.labelSearchPartNumber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// textBoxSearchPartNumber
-			// 
-			// 
-			// 
-			// 
-			this.textBoxSearchPartNumber.CustomButton.Image = null;
-			this.textBoxSearchPartNumber.CustomButton.Location = new System.Drawing.Point(150, 2);
-			this.textBoxSearchPartNumber.CustomButton.Name = "";
-			this.textBoxSearchPartNumber.CustomButton.Size = new System.Drawing.Size(17, 17);
-			this.textBoxSearchPartNumber.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.textBoxSearchPartNumber.CustomButton.TabIndex = 1;
-			this.textBoxSearchPartNumber.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.textBoxSearchPartNumber.CustomButton.UseSelectable = true;
-			this.textBoxSearchPartNumber.CustomButton.Visible = false;
-			this.textBoxSearchPartNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxSearchPartNumber.Lines = new string[0];
-			this.textBoxSearchPartNumber.Location = new System.Drawing.Point(81, 63);
-			this.textBoxSearchPartNumber.MaxLength = 32767;
-			this.textBoxSearchPartNumber.Name = "textBoxSearchPartNumber";
-			this.textBoxSearchPartNumber.PasswordChar = '\0';
-			this.textBoxSearchPartNumber.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.textBoxSearchPartNumber.SelectedText = "";
-			this.textBoxSearchPartNumber.SelectionLength = 0;
-			this.textBoxSearchPartNumber.SelectionStart = 0;
-			this.textBoxSearchPartNumber.ShortcutsEnabled = true;
-			this.textBoxSearchPartNumber.Size = new System.Drawing.Size(170, 22);
-			this.textBoxSearchPartNumber.TabIndex = 285;
-			this.textBoxSearchPartNumber.UseSelectable = true;
-			this.textBoxSearchPartNumber.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.textBoxSearchPartNumber.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			// 
-			// ButtonAdd
-			// 
-			this.ButtonAdd.ActiveBackColor = System.Drawing.Color.Transparent;
-			this.ButtonAdd.ActiveBackgroundImage = null;
-			this.ButtonAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.ButtonAdd.FontMain = new System.Drawing.Font("Verdana", 8F);
-			this.ButtonAdd.FontSecondary = new System.Drawing.Font("Verdana", 8F);
-			this.ButtonAdd.ForeColorMain = System.Drawing.SystemColors.ControlText;
-			this.ButtonAdd.ForeColorSecondary = System.Drawing.SystemColors.ControlText;
-			this.ButtonAdd.Icon = global::CAS.UI.Properties.Resources.AddIconSmall;
-			this.ButtonAdd.IconLayout = System.Windows.Forms.ImageLayout.Center;
-			this.ButtonAdd.IconNotEnabled = null;
-			this.ButtonAdd.Location = new System.Drawing.Point(594, 413);
-			this.ButtonAdd.Margin = new System.Windows.Forms.Padding(4);
-			this.ButtonAdd.Name = "ButtonAdd";
-			this.ButtonAdd.NormalBackgroundImage = null;
-			this.ButtonAdd.PaddingMain = new System.Windows.Forms.Padding(0);
-			this.ButtonAdd.PaddingSecondary = new System.Windows.Forms.Padding(0);
-			this.ButtonAdd.ShowToolTip = false;
-			this.ButtonAdd.Size = new System.Drawing.Size(116, 33);
-			this.ButtonAdd.TabIndex = 288;
-			this.ButtonAdd.TextAlignMain = System.Drawing.ContentAlignment.MiddleLeft;
-			this.ButtonAdd.TextAlignSecondary = System.Drawing.ContentAlignment.MiddleLeft;
-			this.ButtonAdd.TextMain = "Add Selected";
-			this.ButtonAdd.TextSecondary = "";
-			this.ButtonAdd.ToolTipText = "";
-			this.ButtonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
 			// 
 			// ButtonDelete
 			// 
@@ -1019,68 +944,28 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.listViewInitialItems.Displayer = null;
 			this.listViewInitialItems.DisplayerText = null;
 			this.listViewInitialItems.Entity = null;
-			this.listViewInitialItems.Location = new System.Drawing.Point(23, 443);
+			this.listViewInitialItems.IgnoreEnterPress = false;
+			this.listViewInitialItems.Location = new System.Drawing.Point(23, 63);
+			this.listViewInitialItems.MenuOpeningAction = null;
 			this.listViewInitialItems.Name = "listViewInitialItems";
+			this.listViewInitialItems.OldColumnIndex = 0;
 			this.listViewInitialItems.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewInitialItems.Size = new System.Drawing.Size(687, 304);
+			this.listViewInitialItems.Size = new System.Drawing.Size(687, 684);
+			this.listViewInitialItems.SortMultiplier = 0;
 			this.listViewInitialItems.TabIndex = 294;
 			this.listViewInitialItems.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.listViewInitialItems_SelectedItemsChanged);
-			// 
-			// listViewKits
-			// 
-			this.listViewKits.Displayer = null;
-			this.listViewKits.DisplayerText = null;
-			this.listViewKits.Entity = null;
-			this.listViewKits.Location = new System.Drawing.Point(23, 91);
-			this.listViewKits.MenuOpeningAction = null;
-			this.listViewKits.Name = "listViewKits";
-			this.listViewKits.OldColumnIndex = 2;
-			this.listViewKits.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewKits.Size = new System.Drawing.Size(687, 315);
-			this.listViewKits.SortMultiplier = 1;
-			this.listViewKits.TabIndex = 68;
-			// 
-			// button3
-			// 
-			this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.button3.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button3.Location = new System.Drawing.Point(635, 52);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(75, 33);
-			this.button3.TabIndex = 304;
-			this.button3.Text = "Find";
-			this.button3.Click += new System.EventHandler(this.Button3_Click);
-			// 
-			// metroProgressSpinner1
-			// 
-			this.metroProgressSpinner1.Location = new System.Drawing.Point(273, 161);
-			this.metroProgressSpinner1.Maximum = 100;
-			this.metroProgressSpinner1.Name = "metroProgressSpinner1";
-			this.metroProgressSpinner1.Size = new System.Drawing.Size(180, 156);
-			this.metroProgressSpinner1.Speed = 2F;
-			this.metroProgressSpinner1.TabIndex = 305;
-			this.metroProgressSpinner1.UseSelectable = true;
-			this.metroProgressSpinner1.Visible = false;
 			// 
 			// QuatationOrderFormNew
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1086, 792);
-			this.Controls.Add(this.metroProgressSpinner1);
-			this.Controls.Add(this.button3);
 			this.Controls.Add(this.listViewInitialItems);
 			this.Controls.Add(this.buttonOk);
 			this.Controls.Add(this.buttonCancel);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
-			this.Controls.Add(this.ButtonAdd);
 			this.Controls.Add(this.ButtonDelete);
-			this.Controls.Add(this.labelSearchPartNumber);
-			this.Controls.Add(this.textBoxSearchPartNumber);
-			this.Controls.Add(this.listViewKits);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "QuatationOrderFormNew";
@@ -1095,11 +980,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
         }
 
 		#endregion
-
-		private Quatation.RequestProductListView listViewKits;
-        private MetroLabel labelSearchPartNumber;
-        private MetroTextBox textBoxSearchPartNumber;
-        private AvControls.AvButtonT.AvButtonT ButtonAdd;
         private AvControls.AvButtonT.AvButtonT ButtonDelete;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox comboBoxPriority;
@@ -1154,7 +1034,5 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private MetroTextBox metroTextBoxNumber;
 		private MetroLabel metroLabelNumber;
 		private System.Windows.Forms.Button button2;
-		private System.Windows.Forms.Button button3;
-		private MetroProgressSpinner metroProgressSpinner1;
 	}
 }
