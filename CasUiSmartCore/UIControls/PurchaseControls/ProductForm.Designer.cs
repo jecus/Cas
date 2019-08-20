@@ -68,6 +68,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.documentControl1 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.labelIsEffectivity = new System.Windows.Forms.Label();
 			this.textBoxIsEffectivity = new System.Windows.Forms.TextBox();
+			this.checkBoxIsForbidden = new System.Windows.Forms.CheckBox();
 			this.SuspendLayout();
 			// 
 			// comboBoxDetailClass
@@ -126,7 +127,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.labelSuppliers.AutoSize = true;
 			this.labelSuppliers.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelSuppliers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelSuppliers.Location = new System.Drawing.Point(386, 396);
+			this.labelSuppliers.Location = new System.Drawing.Point(414, 405);
 			this.labelSuppliers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.labelSuppliers.Name = "labelSuppliers";
 			this.labelSuppliers.Size = new System.Drawing.Size(70, 14);
@@ -341,7 +342,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.checkBoxDangerous.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.checkBoxDangerous.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.checkBoxDangerous.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.checkBoxDangerous.Location = new System.Drawing.Point(111, 392);
+			this.checkBoxDangerous.Location = new System.Drawing.Point(110, 386);
 			this.checkBoxDangerous.Name = "checkBoxDangerous";
 			this.checkBoxDangerous.Size = new System.Drawing.Size(108, 18);
 			this.checkBoxDangerous.TabIndex = 143;
@@ -483,6 +484,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.panelMain.Controls.Add(this.textBoxAltPartNum);
 			this.panelMain.Controls.Add(this.textBoxIsEffectivity);
 			this.panelMain.Controls.Add(this.labelIsEffectivity);
+			this.panelMain.Controls.Add(this.checkBoxIsForbidden);
 			// 
 			// label4
 			// 
@@ -536,6 +538,19 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxIsEffectivity.Size = new System.Drawing.Size(313, 52);
 			this.textBoxIsEffectivity.TabIndex = 162;
 			// 
+			// checkBoxIsForbidden
+			// 
+			this.checkBoxIsForbidden.AutoSize = true;
+			this.checkBoxIsForbidden.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.checkBoxIsForbidden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.checkBoxIsForbidden.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.checkBoxIsForbidden.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.checkBoxIsForbidden.Location = new System.Drawing.Point(315, 386);
+			this.checkBoxIsForbidden.Name = "checkBoxIsForbidden";
+			this.checkBoxIsForbidden.Size = new System.Drawing.Size(102, 18);
+			this.checkBoxIsForbidden.TabIndex = 164;
+			this.checkBoxIsForbidden.Text = "Is Forbidden";
+			// 
 			// ProductForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -583,13 +598,14 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private System.Windows.Forms.TextBox textBoxDescRus;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.TextBox textBoxHTS;
-        private System.Windows.Forms.Label labelReference;
-        private System.Windows.Forms.TextBox textBoxReference;
-        private System.Windows.Forms.Label labelDoc;
+		private System.Windows.Forms.Label labelReference;
+		private System.Windows.Forms.TextBox textBoxReference;
+		private System.Windows.Forms.Label labelDoc;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.TextBox textBoxAltPartNum;
 		private DocumentationControls.DocumentControl documentControl1;
 		private System.Windows.Forms.Label labelIsEffectivity;
 		private System.Windows.Forms.TextBox textBoxIsEffectivity;
+		private System.Windows.Forms.CheckBox checkBoxIsForbidden;
 	}
 }

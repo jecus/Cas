@@ -504,7 +504,7 @@ namespace CAS.UI.Management.Dispatchering
             DispatcheredTabPage tabPage = e.Displayer as DispatcheredTabPage;
             if (tabPage != null && !tabPage.IsDisposed)
             {
-                tabPage.Dispose();
+                //tabPage.Dispose();
             }
             //nextPositonsDisplayrList.Remove(e.Displayer);
             //previousPositonsDisplayrList.Remove(e.Displayer);

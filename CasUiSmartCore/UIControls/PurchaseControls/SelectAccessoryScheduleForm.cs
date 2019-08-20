@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
@@ -15,7 +16,7 @@ namespace CAS.UI.UIControls.PurchaseControls
     /// Форма, позволяющая делать выбор между компонентами и их расходниками для включения
     /// <br/> в запросный/закупочный акт
     ///</summary>
-    public partial class SelectAccessoryScheduleForm : Form
+    public partial class SelectAccessoryScheduleForm : MetroForm
     {
         #region Fields
 

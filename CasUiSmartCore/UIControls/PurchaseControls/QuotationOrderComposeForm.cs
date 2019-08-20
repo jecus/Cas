@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Purchase;
@@ -13,7 +14,7 @@ namespace CAS.UI.UIControls.PurchaseControls
     /// <summary>
     /// Форма для формирования котировочного акта
     /// </summary>
-    public partial class QuotationOrderComposeForm : Form
+    public partial class QuotationOrderComposeForm : MetroForm
     {
         #region Fields
 

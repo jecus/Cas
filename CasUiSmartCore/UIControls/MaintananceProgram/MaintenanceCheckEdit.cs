@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using CAS.UI.UIControls.KitControls;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -11,7 +12,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 {
     ///<summary>
     ///</summary>
-    public partial class MaintenanceCheckEdit : Form
+    public partial class MaintenanceCheckEdit : MetroForm
     {
         #region Fields
         private MaintenanceCheck _maintenanceLiminationItem;

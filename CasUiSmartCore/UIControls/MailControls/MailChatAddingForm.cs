@@ -5,12 +5,13 @@ using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using EntityCore.DTO.General;
+using MetroFramework.Forms;
 using SmartCore.Entities.General.Mail;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.MailControls
 {
-	public partial class MailChatAddingForm : Form
+	public partial class MailChatAddingForm : MetroForm
 	{
 		#region Fields
 

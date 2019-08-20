@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Calculations;
 using SmartCore.Calculations.Maintenance;
 using SmartCore.Entities.Dictionaries;
@@ -14,7 +15,7 @@ namespace CAS.UI.UIControls.Auxiliary
     ///<summary>
     /// Форма для редактирования записи о смене программы обслуживания
     ///</summary>
-    public partial class MaintenanceProgramChangeDialog : Form
+    public partial class MaintenanceProgramChangeDialog : MetroForm
     {
         #region Fields
 

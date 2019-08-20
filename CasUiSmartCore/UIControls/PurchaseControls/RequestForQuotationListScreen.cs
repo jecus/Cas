@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -12,14 +13,17 @@ using CAS.UI.UIControls.PurchaseControls.Initial;
 using CAS.UI.UIControls.PurchaseControls.Purchase;
 using CASReports.Builders;
 using CASTerms;
+using EntityCore.DTO.General;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Filters;
 using SmartCore.Purchase;
+using SmartCore.Queries;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
+using Filter = EntityCore.Filter.Filter;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
@@ -36,15 +40,16 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private readonly BaseEntityObject _parent;
 		private RequestForQuotationListView _directivesViewer;
 		private RadDropDownMenu _contextMenuStrip;
-		private RadMenuItem _toolStripMenuItemPublish;
 		private RadMenuItem _toolStripMenuItemEdit;
 		private RadMenuItem _toolStripMenuItemCreatePurchase;
 		private RadMenuItem _toolStripMenuItemClose;
 		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 
+		private Filter filter = null;
+
 		#endregion
-		
+
 		#region Constructors
 
 		#region private RequestForQuotationListScreen()
@@ -110,7 +115,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_quotatioArray.Clear();
 			_quotatioArray = null;
 
-			if (_toolStripMenuItemPublish != null) _toolStripMenuItemPublish.Dispose();
 			if (_toolStripMenuItemCreatePurchase != null) _toolStripMenuItemCreatePurchase.Dispose();
 			if (_toolStripMenuItemEdit != null) _toolStripMenuItemEdit.Dispose();
 			if (_toolStripMenuItemClose != null) _toolStripMenuItemClose.Dispose();
@@ -156,7 +160,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 			try
 			{
-				_quotatioArray.AddRange(GlobalObjects.PurchaseCore.GetRequestForQuotation(_parent as Aircraft));
+				if (filter != null)
+					_quotatioArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>(filter));
+				else _quotatioArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>());
 			}
 			catch (Exception ex)
 			{
@@ -189,7 +195,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private void InitToolStripMenuItems()
 		{
 			_contextMenuStrip = new RadDropDownMenu();
-			_toolStripMenuItemPublish = new RadMenuItem();
 			_toolStripMenuItemClose = new RadMenuItem();
 			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
@@ -206,11 +211,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 			_toolStripMenuItemEdit.Text = "Edit";
 			_toolStripMenuItemEdit.Click += ToolStripMenuItemEditClick;
-			// 
-			// toolStripMenuItemView
-			// 
-			_toolStripMenuItemPublish.Text = "Publish";
-			_toolStripMenuItemPublish.Click += ToolStripMenuItemPublishClick;
+			
 			// 
 			// toolStripMenuItemClose
 			// 
@@ -227,8 +228,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_contextMenuStrip.Items.AddRange(new RadItem[]
 												{
 													_toolStripMenuItemCreatePurchase,
-													new RadMenuSeparatorItem(), 
-													_toolStripMenuItemPublish,
+													new RadMenuSeparatorItem(),
 													_toolStripMenuItemClose,
 													_toolStripSeparator1,
 													_toolStripMenuItemEdit,
@@ -236,35 +236,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 													_toolStripMenuItemDelete
 
 												});
-		}
-
-		#endregion
-
-		#region private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
-		/// <summary>
-		/// Публикует рабочий пакет
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
-		{
-			foreach (var rfq in _directivesViewer.SelectedItems)
-			{
-				if (rfq.Status == WorkPackageStatus.Published)
-				{
-					MessageBox.Show("Initional Order " + rfq.Title + " is already publisher.",
-						(string) new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
-						MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-					continue;
-				}
-
-				rfq.Status = WorkPackageStatus.Published;
-				rfq.PublishingDate = DateTime.Now;
-				rfq.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
-				rfq.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
-				GlobalObjects.CasEnvironment.NewKeeper.Save(rfq);
-			}
-			AnimatedThreadWorker.RunWorkerAsync();
 		}
 
 		#endregion
@@ -323,11 +294,26 @@ namespace CAS.UI.UIControls.PurchaseControls
 		{
 			if (_directivesViewer.SelectedItems.Count != 1) return;
 
+			var records = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationRecordDTO, RequestForQuotationRecord>(new Filter("ParentPackageId", _directivesViewer.SelectedItem.ItemId));
+
+			if (records.Any(i => i.SupplierPrice.Count == 0))
+			{
+				MessageBox.Show("Please add supplier for all products.", "Message infomation", MessageBoxButtons.OK,
+					MessageBoxIcon.Information);
+				return;
+			}
 			var editForm = new CreatePurchaseOrderForm(_directivesViewer.SelectedItems[0]);
 			if (editForm.ShowDialog() == DialogResult.OK)
 			{
 				MessageBox.Show("Create purchase successful", "Message infomation", MessageBoxButtons.OK,
 					MessageBoxIcon.Information);
+
+				_directivesViewer.SelectedItems[0].Status = WorkPackageStatus.Published;
+				_directivesViewer.SelectedItems[0].PublishingDate = DateTime.Now;
+				_directivesViewer.SelectedItems[0].PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
+				_directivesViewer.SelectedItems[0].PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
+				GlobalObjects.CasEnvironment.NewKeeper.Save(_directivesViewer.SelectedItems[0]);
+				AnimatedThreadWorker.RunWorkerAsync();
 			}
 		}
 
@@ -370,23 +356,21 @@ namespace CAS.UI.UIControls.PurchaseControls
 					if (wp.Status == WorkPackageStatus.Closed || wp.Status == WorkPackageStatus.Opened)
 					{
 						_toolStripMenuItemClose.Enabled = false;
-						_toolStripMenuItemPublish.Enabled = true;
 					}
 					else if (wp.Status == WorkPackageStatus.Published)
 					{
 						_toolStripMenuItemClose.Enabled = true;
-						_toolStripMenuItemPublish.Enabled = false;
 					}
 					else
 					{
 						_toolStripMenuItemClose.Enabled = true;
-						_toolStripMenuItemPublish.Enabled = true;
 					}
+
+					_toolStripMenuItemCreatePurchase.Enabled = wp.Status == WorkPackageStatus.Opened;
 				}
 				else
 				{
 					_toolStripMenuItemClose.Enabled = true;
-					_toolStripMenuItemPublish.Enabled = true;
 				}
 			};
 
@@ -498,6 +482,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private void HeaderQuotationButtonReloadClick(object sender, EventArgs e)
 		{
+			filter = null;
+			TextBoxFilter.Clear();
+
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
 			AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
@@ -599,5 +586,21 @@ namespace CAS.UI.UIControls.PurchaseControls
 		#endregion
 
 
+		private void ButtonFilterClick(object sender, EventArgs e)
+		{
+			if (string.IsNullOrEmpty(TextBoxFilter.Text))
+			{
+				filter = null;
+				AnimatedThreadWorker.RunWorkerAsync();
+				return;
+			}
+			var res = GlobalObjects.CasEnvironment.Execute(OrdersQueries.QuotationSearch(TextBoxFilter.Text));
+			var ids = new List<int>();
+			foreach (DataRow dRow in res.Tables[0].Rows)
+				ids.Add(int.Parse(dRow[0].ToString()));
+
+			filter = new Filter("ItemId", ids);
+			AnimatedThreadWorker.RunWorkerAsync();
+		}
 	}
 }

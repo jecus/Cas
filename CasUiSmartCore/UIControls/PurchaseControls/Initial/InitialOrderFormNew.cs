@@ -21,8 +21,8 @@ using SmartCore.Queries;
 
 namespace CAS.UI.UIControls.PurchaseControls.Initial
 {
-    public partial class InitialOrderFormNew : MetroForm
-    {
+	public partial class InitialOrderFormNew : MetroForm
+	{
 		#region Fields
 
 		private List<InitialOrderRecord> _addedInitialOrderRecords = new List<InitialOrderRecord>();
@@ -51,29 +51,29 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		#region Constructor
 
 		public InitialOrderFormNew()
-	    {
-		    InitializeComponent();
-	    }
+		{
+			InitializeComponent();
+		}
 
-	    public InitialOrderFormNew(InitialOrder order, IEnumerable<Product> selectedProducts = null) : this()
-	    {
-		    if (selectedProducts != null)
-		    {
-			    foreach (var product in selectedProducts)
-			    {
+		public InitialOrderFormNew(InitialOrder order, IEnumerable<Product> selectedProducts = null) : this()
+		{
+			if (selectedProducts != null)
+			{
+				foreach (var product in selectedProducts)
+				{
 					var newRequest = new InitialOrderRecord(-1, product, 1);
 					newRequest.Product = product;
 					_addedInitialOrderRecords.Add(newRequest);
 				}
-		    }
+			}
 
 			_order = order;
 
-		    _collectionFilter.Filters.Add(_partNumberFilter);
-		    _collectionFilter.Filters.Add(_standartFilter);
+			_collectionFilter.Filters.Add(_partNumberFilter);
+			_collectionFilter.Filters.Add(_standartFilter);
 
 			Task.Run(() => DoWork())
-			    .ContinueWith(task => Completed(), TaskScheduler.FromCurrentSynchronizationContext());
+				.ContinueWith(task => Completed(), TaskScheduler.FromCurrentSynchronizationContext());
 		}
 
 		#endregion
@@ -82,10 +82,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void Completed()
 		{
-			listViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
-
 			UpdateControls();
 			UpdateInitialControls();
+
+			listViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
 		}
 
 		#endregion
@@ -99,7 +99,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			{
 				_addedInitialOrderRecords.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(new Filter("ParentPackageId", _order.ItemId)));
 				var ids = _addedInitialOrderRecords.Select(i => i.ProductId);
-				var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()));
+				var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), true);
 
 				if (ids.Count() > 0)
 				{
@@ -143,6 +143,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void comboBoxDestination_SelectedIndexChanged(object sender, EventArgs e)
 		{
+			if(listViewInitialItems.SelectedItem != null)
+				return;
+
 			comboBoxDefferedCategory.Items.Clear();
 			comboBoxDIR.Items.Clear();
 
@@ -266,14 +269,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			//сохранение запросного ордера
 			GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
 
-			if (listViewKits.ItemsCount <= 0)
-			{
-				MessageBox.Show("Please select a kits for initional order", (string)new GlobalTermsProvider()["SystemName"],
-					MessageBoxButtons.OK,
-					MessageBoxIcon.Exclamation);
-				return;
-			}
-
 			foreach (var record in _addedInitialOrderRecords)
 			{
 				record.ParentPackageId = _order.ItemId;
@@ -304,6 +299,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			foreach (var record in _deleteExistInitialOrderRecords)
 				GlobalObjects.CasEnvironment.NewKeeper.Delete(record);
+			DialogResult = DialogResult.OK;
 		}
 
 		#endregion
@@ -395,7 +391,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			var destination =
 				destinations.FirstOrDefault(d => d.SmartCoreObjectType == listViewInitialItems.SelectedItem.DestinationObjectType
-				                                 && d.ItemId == listViewInitialItems.SelectedItem.DestinationObjectId);
+												 && d.ItemId == listViewInitialItems.SelectedItem.DestinationObjectId);
 
 			comboBoxDestination.SelectedItem = destination;
 			comboBoxPriority.SelectedItem = listViewInitialItems.SelectedItem.Priority;
@@ -449,6 +445,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			listViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
 
+			listViewInitialItems.radGridView1.ClearSelection();
 			Reset();
 		}
 
@@ -523,14 +520,14 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			Task.Run(() =>
 				{
 					_currentAircraftKits.Clear();
-					var res = BaseQueries.GetSelectQueryWithWhere<Product>() + $" AND ( Model like '%{textBoxSearchPartNumber.Text}%' OR " +
-					          $"PartNumber like '%{textBoxSearchPartNumber.Text}%' OR " +
-					          $"Description like '%{textBoxSearchPartNumber.Text}%' OR " +
-					          $"AltPartNumber like '%{textBoxSearchPartNumber.Text}%' OR " +
-					          $"Reference like '%{textBoxSearchPartNumber.Text}%')";
+					var res = BaseQueries.GetSelectQueryWithWhere<Product>(loadChild:true) + $" AND ( AccessoryDescriptions.Model like '%{textBoxSearchPartNumber.Text}%' OR " +
+							  $"AccessoryDescriptions.PartNumber like '%{textBoxSearchPartNumber.Text}%' OR " +
+							  $"AccessoryDescriptions.Description like '%{textBoxSearchPartNumber.Text}%' OR " +
+							  $"AccessoryDescriptions.AltPartNumber like '%{textBoxSearchPartNumber.Text}%' OR " +
+							  $"AccessoryDescriptions.Reference like '%{textBoxSearchPartNumber.Text}%')";
 
 					var ds = GlobalObjects.CasEnvironment.Execute(res);
-					_currentAircraftKits.AddRange(BaseQueries.GetObjectList<Product>(ds.Tables[0]));
+					_currentAircraftKits.AddRange(BaseQueries.GetObjectList<Product>(ds.Tables[0],true));
 				})
 				.ContinueWith(task =>
 				{
@@ -544,6 +541,14 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private void InitialOrderFormNew_Load(object sender, EventArgs e)
 		{
 
+		}
+
+		
+
+		private void ButtonAddProduct_Click(object sender, EventArgs e)
+		{
+			var form = new ProductForm(new Product());
+			form.ShowDialog();
 		}
 	}
 }

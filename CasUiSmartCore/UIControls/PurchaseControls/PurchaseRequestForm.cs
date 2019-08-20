@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using SmartCore.Entities.Dictionaries;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Auxiliary;
 using SmartCore.Purchase;
 
@@ -11,7 +12,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 {
     ///<summary>
     ///</summary>
-    public partial class PurchaseRequestForm : Form
+    public partial class PurchaseRequestForm : MetroForm
     {
         #region Fields
 

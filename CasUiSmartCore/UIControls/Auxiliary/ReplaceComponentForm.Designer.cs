@@ -1,43 +1,44 @@
 ﻿using System.Collections.Generic;
+using MetroFramework.Controls;
 
 namespace CAS.UI.UIControls.Auxiliary
 {
-    partial class ReplaceComponentForm
-    {
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class ReplaceComponentForm
+	{
+		/// <summary> 
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary> 
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Component Designer generated code
+		#region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary> 
+		/// Required method for Designer support - do not modify 
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.flowLayoutPanelMain = new System.Windows.Forms.FlowLayoutPanel();
 			this.panelButtons = new System.Windows.Forms.Panel();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.buttonOK = new System.Windows.Forms.Button();
-			this.labelConfirmDate = new System.Windows.Forms.Label();
-			this.labelReplacedDetail = new System.Windows.Forms.Label();
-			this.labelReplaceByDetail = new System.Windows.Forms.Label();
-			this.labelReplaceByDate = new System.Windows.Forms.Label();
+			this.labelConfirmDate = new MetroFramework.Controls.MetroLabel();
+			this.labelReplacedDetail = new MetroFramework.Controls.MetroLabel();
+			this.labelReplaceByDetail = new MetroFramework.Controls.MetroLabel();
+			this.labelReplaceByDate = new MetroFramework.Controls.MetroLabel();
 			this.panelButtons.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -46,7 +47,7 @@ namespace CAS.UI.UIControls.Auxiliary
 			this.flowLayoutPanelMain.AutoScroll = true;
 			this.flowLayoutPanelMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
 			this.flowLayoutPanelMain.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-			this.flowLayoutPanelMain.Location = new System.Drawing.Point(0, 22);
+			this.flowLayoutPanelMain.Location = new System.Drawing.Point(2, 82);
 			this.flowLayoutPanelMain.Name = "flowLayoutPanelMain";
 			this.flowLayoutPanelMain.Size = new System.Drawing.Size(1280, 300);
 			this.flowLayoutPanelMain.TabIndex = 0;
@@ -56,17 +57,20 @@ namespace CAS.UI.UIControls.Auxiliary
 			this.panelButtons.Controls.Add(this.buttonCancel);
 			this.panelButtons.Controls.Add(this.buttonOK);
 			this.panelButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panelButtons.Location = new System.Drawing.Point(0, 322);
+			this.panelButtons.Location = new System.Drawing.Point(20, 388);
 			this.panelButtons.Name = "panelButtons";
-			this.panelButtons.Size = new System.Drawing.Size(1284, 34);
+			this.panelButtons.Size = new System.Drawing.Size(1244, 40);
 			this.panelButtons.TabIndex = 1;
 			// 
 			// buttonCancel
 			// 
 			this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonCancel.Location = new System.Drawing.Point(1197, 6);
+			this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.buttonCancel.Location = new System.Drawing.Point(1157, 3);
 			this.buttonCancel.Name = "buttonCancel";
-			this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+			this.buttonCancel.Size = new System.Drawing.Size(75, 33);
 			this.buttonCancel.TabIndex = 1;
 			this.buttonCancel.Text = "Cancel";
 			this.buttonCancel.UseVisualStyleBackColor = true;
@@ -75,9 +79,12 @@ namespace CAS.UI.UIControls.Auxiliary
 			// buttonOK
 			// 
 			this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonOK.Location = new System.Drawing.Point(1116, 6);
+			this.buttonOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonOK.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonOK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.buttonOK.Location = new System.Drawing.Point(1076, 3);
 			this.buttonOK.Name = "buttonOK";
-			this.buttonOK.Size = new System.Drawing.Size(75, 23);
+			this.buttonOK.Size = new System.Drawing.Size(75, 33);
 			this.buttonOK.TabIndex = 0;
 			this.buttonOK.Text = "OK";
 			this.buttonOK.UseVisualStyleBackColor = true;
@@ -85,9 +92,8 @@ namespace CAS.UI.UIControls.Auxiliary
 			// 
 			// labelConfirmDate
 			// 
-			this.labelConfirmDate.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelConfirmDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelConfirmDate.Location = new System.Drawing.Point(5, 0);
+			this.labelConfirmDate.Location = new System.Drawing.Point(7, 60);
 			this.labelConfirmDate.Name = "labelConfirmDate";
 			this.labelConfirmDate.Size = new System.Drawing.Size(123, 19);
 			this.labelConfirmDate.TabIndex = 28;
@@ -96,9 +102,8 @@ namespace CAS.UI.UIControls.Auxiliary
 			// 
 			// labelReplacedDetail
 			// 
-			this.labelReplacedDetail.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelReplacedDetail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelReplacedDetail.Location = new System.Drawing.Point(131, 0);
+			this.labelReplacedDetail.Location = new System.Drawing.Point(133, 60);
 			this.labelReplacedDetail.Name = "labelReplacedDetail";
 			this.labelReplacedDetail.Size = new System.Drawing.Size(100, 19);
 			this.labelReplacedDetail.TabIndex = 70;
@@ -107,9 +112,8 @@ namespace CAS.UI.UIControls.Auxiliary
 			// 
 			// labelReplaceByDetail
 			// 
-			this.labelReplaceByDetail.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelReplaceByDetail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelReplaceByDetail.Location = new System.Drawing.Point(645, 0);
+			this.labelReplaceByDetail.Location = new System.Drawing.Point(647, 60);
 			this.labelReplaceByDetail.Name = "labelReplaceByDetail";
 			this.labelReplaceByDetail.Size = new System.Drawing.Size(101, 19);
 			this.labelReplaceByDetail.TabIndex = 71;
@@ -118,9 +122,8 @@ namespace CAS.UI.UIControls.Auxiliary
 			// 
 			// labelReplaceByDate
 			// 
-			this.labelReplaceByDate.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelReplaceByDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelReplaceByDate.Location = new System.Drawing.Point(1159, 0);
+			this.labelReplaceByDate.Location = new System.Drawing.Point(1161, 60);
 			this.labelReplaceByDate.Name = "labelReplaceByDate";
 			this.labelReplaceByDate.Size = new System.Drawing.Size(100, 19);
 			this.labelReplaceByDate.TabIndex = 72;
@@ -131,8 +134,7 @@ namespace CAS.UI.UIControls.Auxiliary
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-			this.ClientSize = new System.Drawing.Size(1284, 356);
+			this.ClientSize = new System.Drawing.Size(1284, 448);
 			this.Controls.Add(this.labelReplaceByDate);
 			this.Controls.Add(this.labelReplaceByDetail);
 			this.Controls.Add(this.labelReplacedDetail);
@@ -145,23 +147,21 @@ namespace CAS.UI.UIControls.Auxiliary
 			this.MinimumSize = new System.Drawing.Size(670, 200);
 			this.Name = "ReplaceComponentForm";
 			this.ShowIcon = false;
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Replace details:";
 			this.panelButtons.ResumeLayout(false);
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
-        #endregion
+		#endregion
 
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelMain;
-        private System.Windows.Forms.Panel panelButtons;
-        private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Button buttonOK;
-		private System.Windows.Forms.Label labelConfirmDate;
-		private System.Windows.Forms.Label labelReplacedDetail;
-		private System.Windows.Forms.Label labelReplaceByDetail;
-		private System.Windows.Forms.Label labelReplaceByDate;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelMain;
+		private System.Windows.Forms.Panel panelButtons;
+		private System.Windows.Forms.Button buttonCancel;
+		private System.Windows.Forms.Button buttonOK;
+		private MetroLabel labelConfirmDate;
+		private MetroLabel labelReplacedDetail;
+		private MetroLabel labelReplaceByDetail;
+		private MetroLabel labelReplaceByDate;
 	}
 }

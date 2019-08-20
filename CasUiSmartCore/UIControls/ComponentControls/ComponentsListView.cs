@@ -151,7 +151,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
 
 			DateTime? approx;
-			Lifelength remains, next;
+			Lifelength remains = Lifelength.Null, next;
 			AtaChapter ata;
 			MaintenanceControlProcess maintenanceType;
 			DateTime transferDate;
@@ -191,8 +191,11 @@ namespace CAS.UI.UIControls.ComponentControls
 				else
 				{
 					var selectedCategory = componentItem.ChangeLLPCategoryRecords.GetLast()?.ToCategory;
-					var llp = componentItem.LLPData.GetItemByCatagory(selectedCategory);
-					remains = llp?.Remain;
+					if (selectedCategory != null) {
+						var llp = componentItem.LLPData.GetItemByCatagory(selectedCategory);
+						remains = llp?.Remain;
+					}
+					
 				}
 
 				

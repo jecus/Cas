@@ -2,13 +2,14 @@
 using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
+using MetroFramework.Forms;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
     ///<summary>
     ///</summary>
-    public partial class PurchaseOrderClosingForm : Form
+    public partial class PurchaseOrderClosingForm : MetroForm
     {
         #region  Fields
 

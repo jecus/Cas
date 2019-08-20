@@ -4,34 +4,34 @@ using EntityCore.DTO.General;
 
 namespace CAS.UI.UIControls.PurchaseControls.Initial
 {
-    partial class InitialOrderFormNew
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class InitialOrderFormNew
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.labelSearchPartNumber = new MetroFramework.Controls.MetroLabel();
 			this.textBoxSearchPartNumber = new MetroFramework.Controls.MetroTextBox();
 			this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
@@ -91,6 +91,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.listViewKits = new CAS.UI.UIControls.PurchaseControls.Quatation.RequestProductListView();
 			this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
 			this.button2 = new System.Windows.Forms.Button();
+			this.buttonAddProd = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.groupBox2.SuspendLayout();
@@ -330,10 +331,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.numericUpDownQuantity.DecimalPlaces = 2;
 			this.numericUpDownQuantity.Location = new System.Drawing.Point(118, 223);
 			this.numericUpDownQuantity.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownQuantity.Name = "numericUpDownQuantity";
 			this.numericUpDownQuantity.Size = new System.Drawing.Size(65, 20);
 			this.numericUpDownQuantity.TabIndex = 142;
@@ -1051,12 +1052,25 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.button2.Text = "Find";
 			this.button2.Click += new System.EventHandler(this.Button2_Click);
 			// 
+			// buttonAddProd
+			// 
+			this.buttonAddProd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonAddProd.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonAddProd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.buttonAddProd.Location = new System.Drawing.Point(760, 746);
+			this.buttonAddProd.Name = "buttonAddProd";
+			this.buttonAddProd.Size = new System.Drawing.Size(151, 33);
+			this.buttonAddProd.TabIndex = 304;
+			this.buttonAddProd.Text = "Add New Product";
+			this.buttonAddProd.Click += new System.EventHandler(this.ButtonAddProduct_Click);
+			// 
 			// InitialOrderFormNew
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1086, 792);
 			this.Controls.Add(this.button2);
+			this.Controls.Add(this.buttonAddProd);
 			this.Controls.Add(this.metroProgressSpinner1);
 			this.Controls.Add(this.listViewInitialItems);
 			this.Controls.Add(this.buttonOk);
@@ -1080,57 +1094,57 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.groupBox2.ResumeLayout(false);
 			this.ResumeLayout(false);
 
-        }
+		}
 
 		#endregion
 
 		private Quatation.RequestProductListView listViewKits;
-        private MetroLabel labelSearchPartNumber;
-        private MetroTextBox textBoxSearchPartNumber;
-        private AvControls.AvButtonT.AvButtonT ButtonAdd;
-        private AvControls.AvButtonT.AvButtonT ButtonDelete;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox comboBoxPriority;
-        private MetroLabel label19;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.NumericUpDown numericUpDownQuantity;
-        private MetroLabel labelQuantity;
-        private System.Windows.Forms.ComboBox comboBoxMeasure;
-        private MetroLabel labelMeasure;
-        private MetroLabel labelTotal;
-        private MetroTextBox textBoxTotal;
-        private Auxiliary.LifelengthViewer lifelengthViewerNotify;
-        private Auxiliary.LifelengthViewer lifelengthViewerLifeLimit;
-        private System.Windows.Forms.ComboBox comboBoxDefferedCategory;
-        private MetroLabel labelDefferedCategory;
-        private MetroLabel labelReason;
-        private System.Windows.Forms.ComboBox comboBoxReason;
-        private MetroLabel labelDestination;
-        private System.Windows.Forms.ComboBox comboBoxDestination;
-        private MetroCheckBox checkBoxRepair;
-        private MetroCheckBox checkBoxOverhaul;
-        private MetroCheckBox checkBoxServiceable;
-        private MetroCheckBox checkBoxNew;
-        private MetroLabel labelPriority;
-        private MetroLabel labelNotify;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private MetroTextBox textBoxTitle;
-        private MetroLabel labelQOTitle;
-        private MetroTextBox textBoxAuthor;
-        private MetroLabel labelAuthor;
-        private MetroLabel labelStatus;
-        private System.Windows.Forms.DateTimePicker dateTimePickerOpeningDate;
-        private MetroLabel labelOpeningDate;
-        private MetroLabel label5;
-        private MetroLabel labelPublishDate;
-        private System.Windows.Forms.DateTimePicker dateTimePickerPublishDate;
-        private MetroLabel labelClosingDate;
-        private System.Windows.Forms.DateTimePicker dateTimePickerClosingDate;
-        private MetroLabel labelClosedBy;
-        private MetroTextBox textBoxRemarks;
-        private MetroLabel labelRemarks;
-        private System.Windows.Forms.Button buttonOk;
-        private System.Windows.Forms.Button buttonCancel;
+		private MetroLabel labelSearchPartNumber;
+		private MetroTextBox textBoxSearchPartNumber;
+		private AvControls.AvButtonT.AvButtonT ButtonAdd;
+		private AvControls.AvButtonT.AvButtonT ButtonDelete;
+		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.ComboBox comboBoxPriority;
+		private MetroLabel label19;
+		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.NumericUpDown numericUpDownQuantity;
+		private MetroLabel labelQuantity;
+		private System.Windows.Forms.ComboBox comboBoxMeasure;
+		private MetroLabel labelMeasure;
+		private MetroLabel labelTotal;
+		private MetroTextBox textBoxTotal;
+		private Auxiliary.LifelengthViewer lifelengthViewerNotify;
+		private Auxiliary.LifelengthViewer lifelengthViewerLifeLimit;
+		private System.Windows.Forms.ComboBox comboBoxDefferedCategory;
+		private MetroLabel labelDefferedCategory;
+		private MetroLabel labelReason;
+		private System.Windows.Forms.ComboBox comboBoxReason;
+		private MetroLabel labelDestination;
+		private System.Windows.Forms.ComboBox comboBoxDestination;
+		private MetroCheckBox checkBoxRepair;
+		private MetroCheckBox checkBoxOverhaul;
+		private MetroCheckBox checkBoxServiceable;
+		private MetroCheckBox checkBoxNew;
+		private MetroLabel labelPriority;
+		private MetroLabel labelNotify;
+		private System.Windows.Forms.GroupBox groupBox2;
+		private MetroTextBox textBoxTitle;
+		private MetroLabel labelQOTitle;
+		private MetroTextBox textBoxAuthor;
+		private MetroLabel labelAuthor;
+		private MetroLabel labelStatus;
+		private System.Windows.Forms.DateTimePicker dateTimePickerOpeningDate;
+		private MetroLabel labelOpeningDate;
+		private MetroLabel label5;
+		private MetroLabel labelPublishDate;
+		private System.Windows.Forms.DateTimePicker dateTimePickerPublishDate;
+		private MetroLabel labelClosingDate;
+		private System.Windows.Forms.DateTimePicker dateTimePickerClosingDate;
+		private MetroLabel labelClosedBy;
+		private MetroTextBox textBoxRemarks;
+		private MetroLabel labelRemarks;
+		private System.Windows.Forms.Button buttonOk;
+		private System.Windows.Forms.Button buttonCancel;
 		private InitialOrderListView listViewInitialItems;
 		private System.Windows.Forms.ComboBox comboBoxStatus;
 		private MetroTextBox metroTextBox1;
@@ -1143,5 +1157,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private MetroLabel metroLabelNumber;
 		private MetroProgressSpinner metroProgressSpinner1;
 		private System.Windows.Forms.Button button2;
+		private System.Windows.Forms.Button buttonAddProd;
 	}
 }

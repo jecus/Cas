@@ -849,6 +849,7 @@
     <Compile Include="Queries\MaintenanceDirectiveQueries.cs" />
     <Compile Include="Queries\ObjectMapper.cs" />
     <Compile Include="Queries\OperatorQueries.cs" />
+    <Compile Include="Queries\OrdersQueries.cs" />
     <Compile Include="Queries\StockComponentInfoQueries.cs" />
     <Compile Include="Queries\TransferRecordQueries.cs" />
     <Compile Include="Queries\UsersPermissionQueries.cs" />

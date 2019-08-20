@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Windows.Documents;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary;
@@ -19,6 +21,7 @@ using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Filters;
 using SmartCore.Purchase;
+using SmartCore.Queries;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 using Filter = EntityCore.Filter.Filter;
@@ -39,15 +42,16 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private InitialOrderListView _directivesViewer;
 
 		private RadDropDownMenu _contextMenuStrip;
-		private RadMenuItem _toolStripMenuItemPublish;
 		private RadMenuItem _toolStripMenuItemEdit;
 		private RadMenuItem _toolStripMenuItemClose;
 		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuItem _toolStripMenuItemCreateQuatation;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 
+		private Filter filter = null;
+
 		#endregion
-		
+
 		#region Constructors
 
 		#region private InitialOrderListScreen()
@@ -113,7 +117,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_initialArray.Clear();
 			_initialArray = null;
 
-			if (_toolStripMenuItemPublish != null) _toolStripMenuItemPublish.Dispose();
 			if (_toolStripMenuItemCreateQuatation != null) _toolStripMenuItemCreateQuatation.Dispose();
 			if (_toolStripMenuItemEdit != null) _toolStripMenuItemEdit.Dispose();
 			if (_toolStripMenuItemClose != null) _toolStripMenuItemClose.Dispose();
@@ -159,7 +162,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 			try
 			{
-				_initialArray.AddRange(GlobalObjects.PurchaseCore.GetInitialOrders(_parent as Aircraft));
+				if(filter != null)
+					_initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderDTO, InitialOrder>(filter));
+				else _initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderDTO, InitialOrder>());
 			}
 			catch (Exception ex)
 			{
@@ -192,7 +197,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private void InitToolStripMenuItems()
 		{
 			_contextMenuStrip = new RadDropDownMenu();
-			_toolStripMenuItemPublish = new RadMenuItem();
 			_toolStripMenuItemCreateQuatation = new RadMenuItem();
 			_toolStripMenuItemClose = new RadMenuItem();
 			_toolStripMenuItemDelete = new RadMenuItem();
@@ -206,11 +210,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 			_toolStripMenuItemEdit.Text = "Edit";
 			_toolStripMenuItemEdit.Click += ToolStripMenuItemEditClick;
-			// 
-			// toolStripMenuItemView
-			// 
-			_toolStripMenuItemPublish.Text = "Publish";
-			_toolStripMenuItemPublish.Click += ToolStripMenuItemPublishClick;
 
 			_toolStripMenuItemCreateQuatation.Text = "Create Quatation Order";
 			_toolStripMenuItemCreateQuatation.Click += _toolStripMenuItemCreateQuatation_Click; ;
@@ -229,8 +228,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_contextMenuStrip.Items.AddRange(new RadItem[]
 												{
 													_toolStripMenuItemCreateQuatation,
-													new RadMenuSeparatorItem(), 
-													_toolStripMenuItemPublish,
+													new RadMenuSeparatorItem(),
 													_toolStripMenuItemClose,
 													_toolStripSeparator1,
 													_toolStripMenuItemEdit,
@@ -289,6 +287,18 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 					GlobalObjects.CasEnvironment.Keeper.Save(newquatationRecord);
 				}
+				MessageBox.Show("Create quatation successful", "Message infomation", MessageBoxButtons.OK,
+					MessageBoxIcon.Information);
+
+				initial.Status = WorkPackageStatus.Published;
+				initial.PublishingDate = DateTime.Now;
+				initial.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
+				initial.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
+				GlobalObjects.CasEnvironment.NewKeeper.Save(initial);
+
+				var form = new QuatationOrderFormNew(quatation);
+				form.ShowDialog();
+				AnimatedThreadWorker.RunWorkerAsync();
 			}
 			catch (Exception ex)
 			{
@@ -296,54 +306,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				throw;
 			}
 
-			MessageBox.Show("Create quatation successful", "Message infomation", MessageBoxButtons.OK,
-				MessageBoxIcon.Information);
-		}
-
-		#endregion
-
-		#region private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
-		/// <summary>
-		/// Публикует рабочий пакет
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
-		{
-			foreach (var rfq in _directivesViewer.SelectedItems)
-			{
-				if (rfq.Status == WorkPackageStatus.Published)
-				{
-					MessageBox.Show("Initional Order " + rfq.Title + " is already publisher.",
-						(string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
-						MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-					continue;
-				}
-
-				rfq.Status = WorkPackageStatus.Published;
-					rfq.PublishingDate = DateTime.Now;
-					rfq.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
-					rfq.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
-					GlobalObjects.CasEnvironment.NewKeeper.Save(rfq);
-				//}
-			 //   else
-			 //   {
-			 //       switch (MessageBox.Show(@"This initial order is already closed," +
-			 //                                "\nif you want to republish it," +
-			 //                                "\nInformation entered at the closing will be erased." + "\n\n Republish " + rfq.Title + " initial order?", (string)new GlobalTermsProvider()["SystemName"],
-			 //                           MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation,
-			 //                           MessageBoxDefaultButton.Button2))
-			 //       {
-			 //           case DialogResult.Yes:
-			 //               GlobalObjects.PackageCore.PublishPackage<InitialOrder, InitialOrderRecord>(rfq, DateTime.Now);
-			 //               break;
-			 //           case DialogResult.No:
-			 //               //arguments.Cancel = true;
-			 //               break;
-			 //       }
-			 //   }
-			}
-			AnimatedThreadWorker.RunWorkerAsync();
+			
 		}
 
 		#endregion
@@ -487,26 +450,22 @@ namespace CAS.UI.UIControls.PurchaseControls
 					if (wp.Status == WorkPackageStatus.Closed || wp.Status == WorkPackageStatus.Opened)
 					{
 						_toolStripMenuItemClose.Enabled = false;
-						_toolStripMenuItemPublish.Enabled = true;
 					}
 					else if (wp.Status == WorkPackageStatus.Published)
 					{
 						_toolStripMenuItemClose.Enabled = true;
-						_toolStripMenuItemPublish.Enabled = false;
 					}
 					else
 					{
 						_toolStripMenuItemClose.Enabled = true;
-						_toolStripMenuItemPublish.Enabled = true;
 					}
 
-					_toolStripMenuItemCreateQuatation.Enabled = true;
+					_toolStripMenuItemCreateQuatation.Enabled = wp.Status == WorkPackageStatus.Opened;
 				}
 				else
 				{
 					_toolStripMenuItemCreateQuatation.Enabled = false;
 					_toolStripMenuItemClose.Enabled = true;
-					_toolStripMenuItemPublish.Enabled = true;
 				}
 			};
 
@@ -575,6 +534,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private void HeaderControlButtonReloadClick(object sender, EventArgs e)
 		{
+			filter = null;
+			TextBoxFilter.Clear();
+
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
 			AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
@@ -676,5 +638,21 @@ namespace CAS.UI.UIControls.PurchaseControls
 		#endregion
 
 
+		private void ButtonFilterClick(object sender, EventArgs e)
+		{
+			if (string.IsNullOrEmpty(TextBoxFilter.Text))
+			{
+				filter = null;
+				AnimatedThreadWorker.RunWorkerAsync();
+				return;
+			}
+			var res = GlobalObjects.CasEnvironment.Execute(OrdersQueries.InitialSearch(TextBoxFilter.Text));
+			var ids = new List<int>();
+			foreach (DataRow dRow in res.Tables[0].Rows)
+				ids.Add(int.Parse(dRow[0].ToString()));
+
+			filter = new Filter("ItemId", ids);
+			AnimatedThreadWorker.RunWorkerAsync();
+		}
 	}
 }

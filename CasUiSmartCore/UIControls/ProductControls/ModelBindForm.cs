@@ -51,14 +51,14 @@ namespace CAS.UI.UIControls.ProductControls
 		private void DoWork()
 		{
 			_result.Clear();
-			var res = BaseQueries.GetSelectQueryWithWhere<ComponentModel>() + $" AND ( Model like '%{textBoxPartNumber.Text}%' OR " +
-			          $"PartNumber like '%{textBoxPartNumber.Text}%' OR " +
-			          $"Description like '%{textBoxPartNumber.Text}%' OR " +
-			          $"AltPartNumber like '%{textBoxPartNumber.Text}%' OR " +
-			          $"Reference like '%{textBoxPartNumber.Text}%')";
+			var res = BaseQueries.GetSelectQueryWithWhere<ComponentModel>(loadChild:true) + $" AND ( AccessoryDescriptions.Model like '%{textBoxPartNumber.Text}%' OR " +
+			          $"AccessoryDescriptions.PartNumber like '%{textBoxPartNumber.Text}%' OR " +
+			          $"AccessoryDescriptions.Description like '%{textBoxPartNumber.Text}%' OR " +
+			          $"AccessoryDescriptions.AltPartNumber like '%{textBoxPartNumber.Text}%' OR " +
+			          $"AccessoryDescriptions.Reference like '%{textBoxPartNumber.Text}%')";
 
 			var ds = GlobalObjects.CasEnvironment.Execute(res);
-			_result.AddRange(BaseQueries.GetObjectList<ComponentModel>(ds.Tables[0]));
+			_result.AddRange(BaseQueries.GetObjectList<ComponentModel>(ds.Tables[0], true));
 
 			
 			//_result.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, ComponentModel>(new Filter[]
