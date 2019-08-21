@@ -274,9 +274,6 @@ namespace CAS.UI
             mainForm.Closing += MainFormClosing;
             //Screen startScreen = new Screen();
 
-			Form1 f = new Form1();
-			f.ShowDialog();
-
             _mainDispatcher = new Dispatcher(mainForm.dispatcheredMultitabControl, mainForm);
             return mainForm;
         }
