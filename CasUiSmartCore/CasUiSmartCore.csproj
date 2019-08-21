@@ -763,6 +763,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DLL\Telerik\Telerik.WinControls.GridView.dll</HintPath>
     </Reference>
+    <Reference Include="Telerik.WinControls.Themes.TelerikMetro, Version=2019.1.115.20, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
     <Reference Include="Telerik.WinControls.Themes.TelerikMetroBlue, Version=2019.1.115.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DLL\Telerik\Telerik.WinControls.Themes.TelerikMetroBlue.dll</HintPath>

@@ -13,17 +13,24 @@ namespace CAS.UI
 		{
 			InitializeComponent();
 
+			Initialize();
+			FillData();
+
+		}
+
+		private void FillData()
+		{
 			var dates = new DateTime(2018, 1, 1).Range(new DateTime(2018, 12, 31));
 
 			//BarSeries barSeries2 = new BarSeries("Performance", "RepresentativeName");
 			//barSeries2.Name = "Q2";
 
-			LineSeries lineSeries = new LineSeries()
+			var lineSeries = new LineSeries()
 			{
 				ShowLabels = true,
 				Spline = true
 			};
-			LineSeries lineSeries1 = new LineSeries()
+			var lineSeries1 = new LineSeries()
 			{
 				ShowLabels = true,
 			};
@@ -35,21 +42,26 @@ namespace CAS.UI
 				lineSeries1.DataPoints.Add(new CategoricalDataPoint(random.Next(-100, 200), date.ToString("d")));
 			}
 
-			
-			var panZoomController = new ChartPanZoomController();
-			panZoomController.PanZoomMode = ChartPanZoomMode.Horizontal;
+			//this.radChartView1.Series.Add(barSeries2);
+			radChartView1.Series.Add(lineSeries);
+			radChartView1.Series.Add(lineSeries1);
+		}
+
+
+		private void Initialize()
+		{
+			var panZoomController = new ChartPanZoomController { PanZoomMode = ChartPanZoomMode.Horizontal };
 			radChartView1.Controllers.Add(panZoomController);
 
 			radChartView1.ShowPanZoom = true;
+			radChartView1.ShowGrid = true;
 
 			radChartView1.Controllers.Add(new ChartTooltipController());
 			radChartView1.Controllers.Add(new ChartTrackballController());
 			radChartView1.ShowToolTip = true;
 			radChartView1.Zoom(25, 1);
-			//this.radChartView1.Series.Add(barSeries2);
-			this.radChartView1.Series.Add(lineSeries);
-			this.radChartView1.Series.Add(lineSeries1);
-
 		}
+
+
 	}
 }
