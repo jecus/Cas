@@ -29,6 +29,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 		private BaseComponentCollection _enginesAndAPU = new BaseComponentCollection();
 		private ICommonCollection<ATLB> _atbs;
 		private AircraftFlightCollection _flights = new AircraftFlightCollection();
+		public IList<ComponentWorkInRegimeParams> WorkParams { get; set; }
 
 		#endregion
 
@@ -54,6 +55,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 			_parentAircraft = parentAircraft;
 			_atbs = atlbCollection;
 		}
+
 		#endregion
 
 		#endregion
@@ -328,6 +330,8 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 
 				foreach (var baseComponent in _enginesAndAPU)
 				{
+
+					
 					if (baseComponent.BaseComponentType == BaseComponentType.Engine)
 					{
 						subItems.Add(CreateRow("", ""));
