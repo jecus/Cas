@@ -18,6 +18,7 @@ using SmartCore.Calculations.Maintenance;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Atlbs;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
@@ -56,6 +57,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 		private RadMenuSeparatorItem _toolStripSeparator1;
 		private RadMenuItem _toolStripMenuItemHighlight;
 		private RadMenuSeparatorItem _toolStripSeparator2;
+		private IList<ComponentWorkInRegimeParams> _workParams = new List<ComponentWorkInRegimeParams>();
 
 		#endregion
 
@@ -175,6 +177,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 
 			labelAvgUtilization.Text = "Avg. Utilz. Plan:" + plan.CustomToString() + " Avg. Utilz. Fact per period: " + factPerPeriod;
 
+			_directivesViewer.WorkParams = _workParams;
 			_directivesViewer.SetItemsArray(_resultDirectiveArray.OrderBy(i => i.TakeOffTime).ToArray());
 			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 			_directivesViewer.Focus();
@@ -198,6 +201,15 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 				new Filter("ParentAircraft",CurrentAircraft.ItemId),
 				new Filter("Grouping", true)
 			},true));
+
+			var ids = GlobalObjects.ComponentCore.GetAicraftBaseComponents(CurrentAircraft.ItemId).
+				Where(d => d.BaseComponentType == BaseComponentType.Engine).Select(i => i.ItemId);
+
+			_workParams =
+				GlobalObjects.CasEnvironment.NewLoader
+					.GetObjectList<ComponentWorkInRegimeParamDTO, ComponentWorkInRegimeParams>(new Filter("ComponentId",
+						ids));
+
 			AnimatedThreadWorker.ReportProgress(40, "filter Fligths");
 
 			AnimatedThreadWorker.ReportProgress(70, "filter Fligths");
