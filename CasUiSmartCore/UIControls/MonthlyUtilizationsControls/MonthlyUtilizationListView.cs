@@ -118,12 +118,12 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 						AddColumn(baseComponent + " SLSV Block", (int)(radGridView1.Width * 0.1f));
 					}
 				}
-				else if (baseComponent.BaseComponentType == BaseComponentType.Apu)
-				{
-					AddColumn($"{baseComponent}", (int)(radGridView1.Width * 0.1f));
-					if (baseComponent.ComponentDirectives.Count(dd => dd.DirectiveType == ComponentRecordType.Overhaul) > 0)
-						AddColumn(baseComponent + " SLSV", (int)(radGridView1.Width * 0.1f));
-				}
+				//else if (baseComponent.BaseComponentType == BaseComponentType.Apu)
+				//{
+				//	AddColumn($"{baseComponent}", (int)(radGridView1.Width * 0.1f));
+				//	if (baseComponent.ComponentDirectives.Count(dd => dd.DirectiveType == ComponentRecordType.Overhaul) > 0)
+				//		AddColumn(baseComponent + " SLSV", (int)(radGridView1.Width * 0.1f));
+				//}
 				
 			}
 			#endregion
@@ -191,7 +191,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 
 				#region колонки для отображения наработок по двигателям и ВСУ
 
-				foreach (BaseComponent baseComponent in _enginesAndAPU)
+				foreach (BaseComponent baseComponent in _enginesAndAPU.Where(i => i.BaseComponentType == BaseComponentType.Engine))
 				{
 					bool shouldFillSubItems = false;
 
@@ -221,22 +221,22 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 
 					Color baseComponentTimeColor = Color.Black;
 
-					if (shouldFillSubItems && baseComponent.BaseComponentType != BaseComponentType.Apu)
-					{
-						var baseDetailFlightWorkTime = GlobalObjects.CasEnvironment.Calculator.GetFlightLifelength(item, baseComponent);
+					//if (shouldFillSubItems && baseComponent.BaseComponentType != BaseComponentType.Apu)
+					//{
+					//	var baseDetailFlightWorkTime = GlobalObjects.CasEnvironment.Calculator.GetFlightLifelength(item, baseComponent);
 
-						if (item.FlightTime.TotalMinutes == Convert.ToDouble(baseDetailFlightWorkTime.TotalMinutes))
-							baseComponentTimeColor = Color.Black;
-						else
-						{
-							double persent = Math.Abs(1 - (Convert.ToDouble(baseDetailFlightWorkTime.TotalMinutes) / item.FlightTime.TotalMinutes)) * 100;
-							if (persent <= 3)
-								baseComponentTimeColor = Color.FromArgb(Highlight.Green.Color);
-							else if (persent <= 10)
-								baseComponentTimeColor = Color.FromArgb(Highlight.Yellow.Color);
-							else baseComponentTimeColor = Color.FromArgb(Highlight.Red.Color);
-						}
-					}
+					//	if (item.FlightTime.TotalMinutes == Convert.ToDouble(baseDetailFlightWorkTime.TotalMinutes))
+					//		baseComponentTimeColor = Color.Black;
+					//	else
+					//	{
+					//		double persent = Math.Abs(1 - (Convert.ToDouble(baseDetailFlightWorkTime.TotalMinutes) / item.FlightTime.TotalMinutes)) * 100;
+					//		if (persent <= 3)
+					//			baseComponentTimeColor = Color.FromArgb(Highlight.Green.Color);
+					//		else if (persent <= 10)
+					//			baseComponentTimeColor = Color.FromArgb(Highlight.Yellow.Color);
+					//		else baseComponentTimeColor = Color.FromArgb(Highlight.Red.Color);
+					//	}
+					//}
 					var baseDetailHaveOverhaulDirective = BaseDetailHaveOverhaul(baseComponent);
 					var lastOverhaul = GetLastOverhaul(baseComponent);
 					if (baseComponent.BaseComponentType == BaseComponentType.Engine)
@@ -280,28 +280,28 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 							}
 						}
 					}
-					else if (baseComponent.BaseComponentType == BaseComponentType.Apu)
-					{
-						if (shouldFillSubItems)
-						{
-							subItems.Add(CreateListViewSubItem(baseComponentTimeColor, baseComponentFlightLifeLenght));
-							if (baseDetailHaveOverhaulDirective)
-							{
-								if (lastOverhaul != null)
-								{
-									var sinceOverhaulFlight = baseComponentFlightLifeLenght - lastOverhaul.OnLifelength;
-									subItems.Add(CreateListViewSubItem(Color.Black, sinceOverhaulFlight));
-								}
-								else subItems.Add(CreateListViewSubItem("N/A"));
-							}
-						}
-						else
-						{
-							subItems.Add(CreateListViewSubItem(string.Empty));
-							if (baseDetailHaveOverhaulDirective)
-								subItems.Add(CreateListViewSubItem(string.Empty));
-						}
-					}
+					//else if (baseComponent.BaseComponentType == BaseComponentType.Apu)
+					//{
+					//	if (shouldFillSubItems)
+					//	{
+					//		subItems.Add(CreateListViewSubItem(baseComponentTimeColor, baseComponentFlightLifeLenght));
+					//		if (baseDetailHaveOverhaulDirective)
+					//		{
+					//			if (lastOverhaul != null)
+					//			{
+					//				var sinceOverhaulFlight = baseComponentFlightLifeLenght - lastOverhaul.OnLifelength;
+					//				subItems.Add(CreateListViewSubItem(Color.Black, sinceOverhaulFlight));
+					//			}
+					//			else subItems.Add(CreateListViewSubItem("N/A"));
+					//		}
+					//	}
+					//	else
+					//	{
+					//		subItems.Add(CreateListViewSubItem(string.Empty));
+					//		if (baseDetailHaveOverhaulDirective)
+					//			subItems.Add(CreateListViewSubItem(string.Empty));
+					//	}
+					//}
 				}
 
 				#endregion
@@ -338,12 +338,12 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 							subItems.Add(CreateRow("", ""));
 						}
 					}
-					else if (baseComponent.BaseComponentType == BaseComponentType.Apu)
-					{
-						subItems.Add(CreateRow("", ""));
-						if (baseComponent.ComponentDirectives.Count(dd => dd.DirectiveType == ComponentRecordType.Overhaul) > 0)
-							subItems.Add(CreateRow("", ""));
-					}
+					//else if (baseComponent.BaseComponentType == BaseComponentType.Apu)
+					//{
+					//	subItems.Add(CreateRow("", ""));
+					//	if (baseComponent.ComponentDirectives.Count(dd => dd.DirectiveType == ComponentRecordType.Overhaul) > 0)
+					//		subItems.Add(CreateRow("", ""));
+					//}
 
 				}
 
