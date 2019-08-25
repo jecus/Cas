@@ -58,6 +58,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 		private RadMenuItem _toolStripMenuItemHighlight;
 		private RadMenuSeparatorItem _toolStripSeparator2;
 		private IList<ComponentWorkInRegimeParams> _workParams = new List<ComponentWorkInRegimeParams>();
+		private IList<RunUp> _runUps = new List<RunUp>();
 
 		#endregion
 
@@ -178,6 +179,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 			labelAvgUtilization.Text = "Avg. Utilz. Plan:" + plan.CustomToString() + " Avg. Utilz. Fact per period: " + factPerPeriod;
 
 			_directivesViewer.WorkParams = _workParams;
+			_directivesViewer.RunUps = _runUps;
 			_directivesViewer.SetItemsArray(_resultDirectiveArray.OrderBy(i => i.TakeOffTime).ToArray());
 			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 			_directivesViewer.Focus();
@@ -209,6 +211,14 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 				GlobalObjects.CasEnvironment.NewLoader
 					.GetObjectList<ComponentWorkInRegimeParamDTO, ComponentWorkInRegimeParams>(new Filter("ComponentId",
 						ids));
+
+			_runUps = GlobalObjects.CasEnvironment.NewLoader
+				.GetObjectList<RunUpDTO, RunUp>(new Filter[]
+				{
+					new Filter("BaseComponentId", ids),
+					new Filter("FlightId", flights.Select(i => i.ItemId))
+
+				});
 
 			AnimatedThreadWorker.ReportProgress(40, "filter Fligths");
 

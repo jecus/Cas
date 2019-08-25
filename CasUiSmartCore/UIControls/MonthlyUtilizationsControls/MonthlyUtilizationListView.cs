@@ -30,6 +30,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 		private ICommonCollection<ATLB> _atbs;
 		private AircraftFlightCollection _flights = new AircraftFlightCollection();
 		public IList<ComponentWorkInRegimeParams> WorkParams { get; set; }
+		public IList<RunUp> RunUps { get; set; }
 
 		#endregion
 
