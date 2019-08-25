@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
+﻿using System;
+
+namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 {
     partial class PowerUnitTimeInRegimeControlItem
     {
@@ -131,6 +133,7 @@
             0,
             0,
             0});
+            this.numericUpDownTimeInRegimeGroundAir.Minimum = Decimal.MinValue;
             this.numericUpDownTimeInRegimeGroundAir.Name = "numericUpDownTimeInRegimeGroundAir";
             this.numericUpDownTimeInRegimeGroundAir.Size = new System.Drawing.Size(70, 20);
             this.numericUpDownTimeInRegimeGroundAir.TabIndex = 184;
@@ -155,6 +158,7 @@
             0,
             0,
             0});
+            this.numericUpDownTimeInRegime.Minimum = Decimal.MinValue;
             this.numericUpDownTimeInRegime.Name = "numericUpDownTimeInRegime";
             this.numericUpDownTimeInRegime.Size = new System.Drawing.Size(70, 20);
             this.numericUpDownTimeInRegime.TabIndex = 183;
@@ -328,6 +332,7 @@
             0,
             0,
             0});
+            this.numericUpDownPersentSN.Minimum = decimal.MinValue;
             this.numericUpDownPersentSN.Name = "numericUpDownPersentSN";
             this.numericUpDownPersentSN.Size = new System.Drawing.Size(70, 20);
             this.numericUpDownPersentSN.TabIndex = 182;
