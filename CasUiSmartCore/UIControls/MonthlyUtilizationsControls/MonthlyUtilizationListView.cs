@@ -30,6 +30,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 		private ICommonCollection<ATLB> _atbs;
 		private AircraftFlightCollection _flights = new AircraftFlightCollection();
 		public IList<ComponentWorkInRegimeParams> WorkParams { get; set; }
+		public IList<ComponentOilCondition> OilConditions { get; set; }
 
 		#endregion
 
@@ -113,6 +114,12 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 				{
 					AddColumn($"{baseComponent} (Flight)", (int)(radGridView1.Width * 0.1f));
 					AddColumn($"{baseComponent} (Block)", (int)(radGridView1.Width * 0.1f));
+					AddColumn("UpLift", (int)(radGridView1.Width * 0.1f));
+					AddColumn("Min", (int)(radGridView1.Width * 0.1f));
+					AddColumn("Norm", (int)(radGridView1.Width * 0.1f));
+					AddColumn("Max", (int)(radGridView1.Width * 0.1f));
+					AddColumn("Oil Flow", (int)(radGridView1.Width * 0.1f));
+					AddColumn("Exceeding", (int)(radGridView1.Width * 0.1f));
 
 					if (baseComponent.ComponentDirectives.Count(dd => dd.DirectiveType == ComponentRecordType.Overhaul) > 0)
 					{
@@ -151,9 +158,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 			{
 				
 				var route = item.StationFromId.ShortName + " - " + item.StationToId.ShortName;
-				var flightTimeString = UsefulMethods.TimeToString(new TimeSpan(0, 0, item.FlightTimeTotalMinutes, 0)) + " (" +
-									   UsefulMethods.TimePeriodToString(new TimeSpan(0, 0, item.TakeOffTime, 0),
-										   new TimeSpan(0, 0, item.LDGTime, 0)) + ")";
+				var flightTimeString = UsefulMethods.TimeToString(new TimeSpan(0, 0, item.FlightTimeTotalMinutes, 0));
 				Color flightTimeColor;
 				if (item.FlightTime.TotalMinutes == item.BlockTime.TotalMinutes)
 					flightTimeColor = Color.Black;
@@ -247,6 +252,23 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 						{
 							subItems.Add(CreateListViewSubItem(baseComponentTimeColor, baseComponentFlightLifeLenght));
 							subItems.Add(CreateListViewSubItem(Color.Black, baseComponentBlockLifeLenght));
+							var cp = WorkParams.FirstOrDefault(i => i.ComponentId == baseComponent.ItemId);
+							var cc = OilConditions.FirstOrDefault(i => i.ComponentId == baseComponent.ItemId);
+
+							var oilFlowMin = cp?.OilFlowMin ?? 0;
+							var oilFlowNorm = cp?.OilFlowRecomended ?? 0;
+							var oilFlowMax = cp?.OilFlowMax ?? 0;
+							var oilAdded = cc?.OilAdded ?? 0;
+							var oilFlow = cp?.OilFlowMin ?? 0;
+							var exceeding = oilFlowMax - oilFlow;
+
+							subItems.Add(CreateListViewSubItem(oilAdded.ToString()));
+							subItems.Add(CreateListViewSubItem(oilFlowMin.ToString()));
+							subItems.Add(CreateListViewSubItem(oilFlowNorm.ToString()));
+							subItems.Add(CreateListViewSubItem(oilFlowMax.ToString()));
+							subItems.Add(CreateListViewSubItem(oilFlow.ToString()));
+							subItems.Add(CreateListViewSubItem(exceeding.ToString()));
+
 							if (baseDetailHaveOverhaulDirective)
 							{
 								if (lastOverhaul != null)
@@ -267,6 +289,12 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 								{
 									subItems.Add(CreateListViewSubItem("N/A"));
 									subItems.Add(CreateListViewSubItem("N/A"));
+									subItems.Add(CreateListViewSubItem("N/A"));
+									subItems.Add(CreateListViewSubItem("N/A"));
+									subItems.Add(CreateListViewSubItem("N/A"));
+									subItems.Add(CreateListViewSubItem("N/A"));
+									subItems.Add(CreateListViewSubItem("N/A"));
+									subItems.Add(CreateListViewSubItem("N/A"));
 								}
 							}
 
@@ -275,8 +303,20 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 						{
 							subItems.Add(CreateListViewSubItem(string.Empty));
 							subItems.Add(CreateListViewSubItem(string.Empty));
+							subItems.Add(CreateListViewSubItem(string.Empty));
+							subItems.Add(CreateListViewSubItem(string.Empty));
+							subItems.Add(CreateListViewSubItem(string.Empty));
+							subItems.Add(CreateListViewSubItem(string.Empty));
+							subItems.Add(CreateListViewSubItem(string.Empty));
+							subItems.Add(CreateListViewSubItem(string.Empty));
 							if (baseDetailHaveOverhaulDirective)
 							{
+								subItems.Add(CreateListViewSubItem(string.Empty));
+								subItems.Add(CreateListViewSubItem(string.Empty));
+								subItems.Add(CreateListViewSubItem(string.Empty));
+								subItems.Add(CreateListViewSubItem(string.Empty));
+								subItems.Add(CreateListViewSubItem(string.Empty));
+								subItems.Add(CreateListViewSubItem(string.Empty));
 								subItems.Add(CreateListViewSubItem(string.Empty));
 								subItems.Add(CreateListViewSubItem(string.Empty));
 							}
@@ -336,8 +376,20 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 					{
 						subItems.Add(CreateRow("", ""));
 						subItems.Add(CreateRow("", ""));
+						subItems.Add(CreateRow("", ""));
+						subItems.Add(CreateRow("", ""));
+						subItems.Add(CreateRow("", ""));
+						subItems.Add(CreateRow("", ""));
+						subItems.Add(CreateRow("", ""));
+						subItems.Add(CreateRow("", ""));
 						if (baseComponent.ComponentDirectives.Count(dd => dd.DirectiveType == ComponentRecordType.Overhaul) > 0)
 						{
+							subItems.Add(CreateRow("", ""));
+							subItems.Add(CreateRow("", ""));
+							subItems.Add(CreateRow("", ""));
+							subItems.Add(CreateRow("", ""));
+							subItems.Add(CreateRow("", ""));
+							subItems.Add(CreateRow("", ""));
 							subItems.Add(CreateRow("", ""));
 							subItems.Add(CreateRow("", ""));
 						}

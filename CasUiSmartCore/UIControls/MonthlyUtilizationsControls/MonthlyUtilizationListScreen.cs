@@ -58,6 +58,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 		private RadMenuItem _toolStripMenuItemHighlight;
 		private RadMenuSeparatorItem _toolStripSeparator2;
 		private IList<ComponentWorkInRegimeParams> _workParams = new List<ComponentWorkInRegimeParams>();
+		private IList<ComponentOilCondition> _oilConditions = new List<ComponentOilCondition>();
 
 		#endregion
 
@@ -178,6 +179,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 			labelAvgUtilization.Text = "Avg. Utilz. Plan:" + plan.CustomToString() + " Avg. Utilz. Fact per period: " + factPerPeriod;
 
 			_directivesViewer.WorkParams = _workParams;
+			_directivesViewer.OilConditions = _oilConditions;
 			_directivesViewer.SetItemsArray(_resultDirectiveArray.OrderBy(i => i.TakeOffTime).ToArray());
 			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 			_directivesViewer.Focus();
@@ -208,6 +210,11 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 			_workParams =
 				GlobalObjects.CasEnvironment.NewLoader
 					.GetObjectList<ComponentWorkInRegimeParamDTO, ComponentWorkInRegimeParams>(new Filter("ComponentId",
+						ids));
+
+			_oilConditions =
+				GlobalObjects.CasEnvironment.NewLoader
+					.GetObjectList<ComponentOilConditionDTO, ComponentOilCondition>(new Filter("ComponentId",
 						ids));
 
 			AnimatedThreadWorker.ReportProgress(40, "filter Fligths");
