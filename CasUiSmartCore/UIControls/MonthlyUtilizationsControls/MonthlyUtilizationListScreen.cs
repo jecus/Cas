@@ -216,8 +216,12 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 
 			_oilConditions =
 				GlobalObjects.CasEnvironment.NewLoader
-					.GetObjectList<ComponentOilConditionDTO, ComponentOilCondition>(new Filter("ComponentId",
-						ids));
+					.GetObjectList<ComponentOilConditionDTO, ComponentOilCondition>(new Filter[]
+					{
+						new Filter("ComponentId", ids),
+						new Filter("FlightId", flights.Select(i => i.ItemId))
+
+					});
 
 			_runUps = GlobalObjects.CasEnvironment.NewLoader
 				.GetObjectList<RunUpDTO, RunUp>(new Filter[]

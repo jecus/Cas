@@ -147,6 +147,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 
 		protected override List<CustomCell> GetListViewSubItems(AircraftFlight item)
 		{
+
 			//TODO (Evgenii Babak) : Вся логика должна быть в классе Calculator
 			var subItems = new List<CustomCell>();
 
@@ -254,14 +255,19 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 							subItems.Add(CreateListViewSubItem(baseComponentTimeColor, baseComponentFlightLifeLenght));
 							subItems.Add(CreateListViewSubItem(Color.Black, baseComponentBlockLifeLenght));
 							var cp = WorkParams.FirstOrDefault(i => i.ComponentId == baseComponent.ItemId);
-							var cc = OilConditions.FirstOrDefault(i => i.ComponentId == baseComponent.ItemId);
+							var cc = OilConditions.FirstOrDefault(i => i.ComponentId == baseComponent.ItemId && i.FlightId == item.ItemId);
+							var workRegime = RunUps.FirstOrDefault(i => i.BaseComponentId == baseComponent.ItemId && i.FlightId == item.ItemId);
+
+							
 
 							var oilFlowMin = cp?.OilFlowMin ?? 0;
 							var oilFlowNorm = cp?.OilFlowRecomended ?? 0;
 							var oilFlowMax = cp?.OilFlowMax ?? 0;
 							var oilAdded = cc?.OilAdded ?? 0;
-							var oilFlow = cp?.OilFlowMin ?? 0;
+							var oilFlow = (cc?.Spent / workRegime?.TotalMinutes) * 60.0 ?? 0;
 							var exceeding = oilFlowMax - oilFlow;
+
+
 
 							subItems.Add(CreateListViewSubItem(oilAdded.ToString()));
 							subItems.Add(CreateListViewSubItem(oilFlowMin.ToString()));
