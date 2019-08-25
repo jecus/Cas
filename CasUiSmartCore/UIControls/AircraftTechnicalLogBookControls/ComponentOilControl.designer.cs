@@ -138,7 +138,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             this.labelFlow.Name = "labelFlow";
             this.labelFlow.Size = new System.Drawing.Size(67, 13);
             this.labelFlow.TabIndex = 180;
-            this.labelFlow.Text = "Flow Lt./H";
+            this.labelFlow.Text = "Oil Flow";
             // 
             // numericUpDownRemain
             // 
