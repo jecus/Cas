@@ -1127,6 +1127,18 @@
     <Compile Include="UIControls\NewGrid\BaseGridViewControl.Designer.cs">
       <DependentUpon>BaseGridViewControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\OilControls\OilListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\OilControls\OilListScreen.Designer.cs">
+      <DependentUpon>OilListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\OilControls\OilListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\OilControls\OilListView.Designer.cs">
+      <DependentUpon>OilListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\OpepatorsControls\PasswordChangeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -4060,6 +4072,10 @@
       <DependentUpon>BaseGridViewControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\NonRoutineJobsControls\NonRoutineJobsListScreen.resx" />
+    <EmbeddedResource Include="UIControls\OilControls\OilListScreen.resx">
+      <DependentUpon>OilListScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIControls\OpepatorsControls\PasswordChangeForm.resx">
       <DependentUpon>PasswordChangeForm.cs</DependentUpon>
     </EmbeddedResource>
