@@ -270,7 +270,7 @@ namespace CAS.UI
 
         private static formMain InitProgram()
         {
-            formMain mainForm = new formMain();
+	        formMain mainForm = new formMain();
             mainForm.Closing += MainFormClosing;
             //Screen startScreen = new Screen();
 

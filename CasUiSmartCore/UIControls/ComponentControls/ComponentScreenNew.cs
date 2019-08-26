@@ -9,6 +9,8 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CASReports.Builders;
 using CASTerms;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -35,6 +37,7 @@ namespace CAS.UI.UIControls.ComponentControls
         private ToolStripMenuItem _itemPrintReportHistory;
 
         private BaseComponentHeaderControl _baseComponentHeaderControl;
+        private IList<ComponentWorkInRegimeParams> _workParams = new List<ComponentWorkInRegimeParams>();
 
         #region Constructors
 
@@ -165,7 +168,15 @@ namespace CAS.UI.UIControls.ComponentControls
 
             //обновление информации об ражимах работы агрегата
             if (_currentComponent is BaseComponent && _detailWorkParamsControl != null)
-                _detailWorkParamsControl.BaseComponent = (BaseComponent)_currentComponent;
+            {
+	            var bc = _currentComponent as BaseComponent;
+
+	            foreach (var param in _workParams)
+		            param.Engine = bc;
+
+	            bc.ComponentWorkParams.AddRange(_workParams); 
+				_detailWorkParamsControl.BaseComponent = bc;
+            }
 	        //обновление информации подзадач директивы
 	        _performanceControl.CurrentComponent = _currentComponent;
 			//обновление информации об выполнении директивы
@@ -208,6 +219,14 @@ namespace CAS.UI.UIControls.ComponentControls
 							new CommonFilter<int>(Document.ParentIdProperty, _currentComponent.ItemId),
 							new CommonFilter<int>(Document.ParentTypeIdProperty, FilterType.In, types)
 						});
+
+
+						_workParams = GlobalObjects.CasEnvironment.NewLoader
+							.GetObjectList<ComponentWorkInRegimeParamDTO, ComponentWorkInRegimeParams>(new List<Filter>()
+							{
+								new Filter("ComponentId", _currentComponent.ItemId)
+							});
+
 
 						if (documents.Count > 0)
 	                    {
@@ -682,6 +701,7 @@ namespace CAS.UI.UIControls.ComponentControls
 
 				GlobalObjects.ComponentCore.UpdateComponent(_currentComponent, installationDate, position, state, installationLifelength);
 	            _performanceControl.SaveData(_currentComponent);
+	            _detailWorkParamsControl.SaveData();
 			}
             catch (Exception ex)
             {

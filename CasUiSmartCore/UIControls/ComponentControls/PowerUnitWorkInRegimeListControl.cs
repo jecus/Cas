@@ -84,6 +84,13 @@ namespace CAS.UI.UIControls.DetailsControls
         }
         #endregion
 
+        public override void SaveData()
+        {
+	        foreach (var workParam in BaseComponent.ComponentWorkParams)
+		        GlobalObjects.CasEnvironment.NewKeeper.Save(workParam);
+
+        }
+
         #region public override bool CheckData()
         /// <summary>
         /// Проверяет введенные данные.
