@@ -1,33 +1,33 @@
 ﻿namespace CAS.UI.UIControls.ComponentControls
 {
-    partial class ComponentChangeLLPCategoryRecordForm
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class ComponentChangeLLPCategoryRecordForm
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.labelLLPCategory = new System.Windows.Forms.Label();
 			this.comboBoxCategories = new System.Windows.Forms.ComboBox();
 			this.groupBox1.SuspendLayout();
@@ -47,6 +47,19 @@
 			// 
 			// textBox_Remarks
 			// 
+			// 
+			// 
+			// 
+			this.textBox_Remarks.CustomButton.Image = null;
+			this.textBox_Remarks.CustomButton.Location = new System.Drawing.Point(250, 2);
+			this.textBox_Remarks.CustomButton.Name = "";
+			this.textBox_Remarks.CustomButton.Size = new System.Drawing.Size(99, 99);
+			this.textBox_Remarks.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBox_Remarks.CustomButton.TabIndex = 1;
+			this.textBox_Remarks.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBox_Remarks.CustomButton.UseSelectable = true;
+			this.textBox_Remarks.CustomButton.Visible = false;
+			this.textBox_Remarks.Lines = new string[0];
 			this.textBox_Remarks.Location = new System.Drawing.Point(126, 151);
 			// 
 			// fileControl
@@ -56,17 +69,17 @@
 			// 
 			// buttonOk
 			// 
-			this.buttonOk.Location = new System.Drawing.Point(258, 366);
+			this.buttonOk.Location = new System.Drawing.Point(258, 417);
 			this.buttonOk.Click += new System.EventHandler(this.ButtonOkClick);
 			// 
 			// buttonCancel
 			// 
-			this.buttonCancel.Location = new System.Drawing.Point(339, 366);
+			this.buttonCancel.Location = new System.Drawing.Point(339, 417);
 			this.buttonCancel.Click += new System.EventHandler(this.ButtonCancelClick);
 			// 
 			// buttonApply
 			// 
-			this.buttonApply.Location = new System.Drawing.Point(420, 366);
+			this.buttonApply.Location = new System.Drawing.Point(420, 417);
 			this.buttonApply.Click += new System.EventHandler(this.ButtonApplyClick);
 			// 
 			// delimiter1
@@ -124,18 +137,19 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(489, 388);
+			this.ClientSize = new System.Drawing.Size(505, 460);
+			this.Location = new System.Drawing.Point(0, 0);
 			this.Name = "ComponentChangeLLPCategoryRecordForm";
 			this.Text = "DetailChangeLLPCategoryRecordForm";
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			this.ResumeLayout(false);
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private System.Windows.Forms.ComboBox comboBoxCategories;
-        private System.Windows.Forms.Label labelLLPCategory;
-    }
+		private System.Windows.Forms.ComboBox comboBoxCategories;
+		private System.Windows.Forms.Label labelLLPCategory;
+	}
 }
