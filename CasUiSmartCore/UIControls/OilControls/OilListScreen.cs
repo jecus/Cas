@@ -10,6 +10,8 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AircraftTechnicalLogBookControls;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
+using CAS.UI.UIControls.OilControls;
+using CAS.UI.UIControls.OilControls.Model;
 using CASReports.Builders;
 using CASTerms;
 using EntityCore.DTO.General;
@@ -60,6 +62,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 		private IList<ComponentWorkInRegimeParams> _workParams = new List<ComponentWorkInRegimeParams>();
 		private IList<ComponentOilCondition> _oilConditions = new List<ComponentOilCondition>();
 		private IList<RunUp> _runUps = new List<RunUp>();
+		private OilGraphicModel _graph = new OilGraphicModel();
 
 		#endregion
 
@@ -191,6 +194,8 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 		#region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
 		protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
 		{
+			_graph = new OilGraphicModel();
+			_directivesViewer._graph = _graph;
 			_initialDirectiveArray.Clear();
 
 			AnimatedThreadWorker.ReportProgress(0, "load Fligths");
@@ -391,7 +396,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 		private void InitListView()
 		{
 			var col = new CommonCollection<ATLB>(GlobalObjects.AircraftFlightsCore.GetATLBsByAircraftId(CurrentAircraft.ItemId));
-			_directivesViewer = new OilListView(CurrentAircraft,col);
+			_directivesViewer = new OilListView(CurrentAircraft,col, _graph);
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.CustomMenu = _contextMenuStrip;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
@@ -664,8 +669,11 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 		}
 		#endregion
 
+		private void buttonGraphClick(object sender, EventArgs e)
+		{
+			new OilGraphForm(_graph).ShowDialog();
+		}
+
 		#endregion
-
-
 	}
 }

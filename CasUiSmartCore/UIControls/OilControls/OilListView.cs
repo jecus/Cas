@@ -8,6 +8,7 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AircraftTechnicalLogBookControls;
 using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.NewGrid;
+using CAS.UI.UIControls.OilControls.Model;
 using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
@@ -16,7 +17,7 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Atlbs;
 
-namespace CAS.UI.UIControls.MonthlyUtilizationsControls
+namespace CAS.UI.UIControls.OilControls
 {
 	///<summary>
 	/// список для отображения ордеров запроса
@@ -28,6 +29,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 		private readonly Aircraft _parentAircraft;
 		private BaseComponentCollection _enginesAndAPU = new BaseComponentCollection();
 		private ICommonCollection<ATLB> _atbs;
+		public  OilGraphicModel _graph;
 		private AircraftFlightCollection _flights = new AircraftFlightCollection();
 		public IList<ComponentWorkInRegimeParams> WorkParams { get; set; }
 		public IList<ComponentOilCondition> OilConditions { get; set; }
@@ -49,13 +51,14 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 		#region public OilListView(Aircraft parentAircraft) : this()
 		///<summary>
 		///</summary>
-		public OilListView(Aircraft parentAircraft, ICommonCollection<ATLB> atlbCollection)
+		public OilListView(Aircraft parentAircraft, ICommonCollection<ATLB> atlbCollection, OilGraphicModel graph)
 			: this()
 		{
 			SortMultiplier = 0;
 			OldColumnIndex = 1;
 			_parentAircraft = parentAircraft;
 			_atbs = atlbCollection;
+			_graph = graph;
 		}
 
 		#endregion
@@ -223,7 +226,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 						{
 							subItems.Add(CreateListViewSubItem(baseComponentTimeColor, baseComponentFlightLifeLenght));
 							subItems.Add(CreateListViewSubItem(Color.Black, baseComponentBlockLifeLenght));
-							var cp = WorkParams.FirstOrDefault(i => i.ComponentId == baseComponent.ItemId);
+							var cp = WorkParams.FirstOrDefault(i => i.ComponentId == baseComponent.ItemId && i.GroundAir == GroundAir.Air);
 							var cc = OilConditions.FirstOrDefault(i => i.ComponentId == baseComponent.ItemId && i.FlightId == item.ItemId);
 							var workRegime = RunUps.FirstOrDefault(i => i.BaseComponentId == baseComponent.ItemId && i.FlightId == item.ItemId);
 
@@ -243,6 +246,19 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 							subItems.Add(CreateListViewSubItem(oilFlowMax.ToString()));
 							subItems.Add(CreateListViewSubItem(oilFlow.ToString()));
 							subItems.Add(CreateListViewSubItem(exceeding.ToString()));
+
+
+							_graph.Max = oilFlowMax;
+							_graph.Min = oilFlowMin;
+							_graph.Normal = oilFlowNorm;
+
+							if(!_graph.Graph.ContainsKey(baseComponent))
+								_graph.Graph.Add(baseComponent, new Dictionary<Lifelength, double>());
+
+
+							if(!_graph.Graph[baseComponent].ContainsKey(baseComponentFlightLifeLenght))
+								_graph.Graph[baseComponent].Add(baseComponentFlightLifeLenght, oilFlow);
+							else throw new Exception("Такая наработка уже есть!");
 
 							if (baseDetailHaveOverhaulDirective)
 							{
@@ -340,12 +356,6 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 							subItems.Add(CreateRow("", ""));
 						}
 					}
-					//else if (baseComponent.BaseComponentType == BaseComponentType.Apu)
-					//{
-					//	subItems.Add(CreateRow("", ""));
-					//	if (baseComponent.ComponentDirectives.Count(dd => dd.DirectiveType == ComponentRecordType.Overhaul) > 0)
-					//		subItems.Add(CreateRow("", ""));
-					//}
 
 				}
 

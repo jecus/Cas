@@ -174,6 +174,7 @@ namespace CAS.UI.UIControls.ComponentControls
 	            foreach (var param in _workParams)
 		            param.Engine = bc;
 
+	            bc.ComponentWorkParams.Clear(); 
 	            bc.ComponentWorkParams.AddRange(_workParams); 
 				_detailWorkParamsControl.BaseComponent = bc;
             }
@@ -701,8 +702,7 @@ namespace CAS.UI.UIControls.ComponentControls
 
 				GlobalObjects.ComponentCore.UpdateComponent(_currentComponent, installationDate, position, state, installationLifelength);
 	            _performanceControl.SaveData(_currentComponent);
-	            _detailWorkParamsControl.SaveData();
-			}
+            }
             catch (Exception ex)
             {
                 Program.Provider.Logger.Log("Error while saving data", ex);

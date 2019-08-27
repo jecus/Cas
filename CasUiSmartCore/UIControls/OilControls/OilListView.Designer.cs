@@ -1,4 +1,4 @@
-﻿namespace CAS.UI.UIControls.MonthlyUtilizationsControls
+﻿namespace CAS.UI.UIControls.OilControls
 {
     partial class OilListView
 	{

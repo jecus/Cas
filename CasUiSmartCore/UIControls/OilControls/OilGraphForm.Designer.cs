@@ -1,6 +1,6 @@
-﻿namespace CAS.UI
+﻿namespace CAS.UI.UIControls.OilControls
 {
-	partial class Form1
+	partial class OilGraphForm
 	{
 		/// <summary>
 		/// Required designer variable.

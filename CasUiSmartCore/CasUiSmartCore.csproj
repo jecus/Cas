@@ -800,11 +800,12 @@
     <Compile Include="ExcelExport\DirectiveComparer.cs" />
     <Compile Include="ExcelExport\ExcelExportProvider.cs" />
     <Compile Include="Extentions.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="UIControls\OilControls\Model\OilGraphicModel.cs" />
+    <Compile Include="UIControls\OilControls\OilGraphForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="UIControls\OilControls\OilGraphForm.Designer.cs">
+      <DependentUpon>OilGraphForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\ItemRelationHelper.cs" />
@@ -3929,8 +3930,8 @@
     <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="UIControls\OilControls\OilGraphForm.resx">
+      <DependentUpon>OilGraphForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="UIControls\AircraftsControls\AircraftGeneralDataControls\AircraftApprovalControl.resx">
@@ -5408,6 +5409,7 @@
     <Resource Include="Resources\ImageIcon_Small_Gray.png" />
     <None Include="Resources\ImageIcon_Small1.png" />
     <None Include="Resources\ImageIcon_Small_Gray1.png" />
+    <None Include="Resources\graph.png" />
     <Content Include="Resources\KitsIcon.png" />
     <Content Include="Resources\KitsIcon_gray.png" />
     <None Include="Resources\PreTransfer.png" />
