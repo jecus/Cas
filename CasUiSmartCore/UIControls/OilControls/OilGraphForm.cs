@@ -1,5 +1,11 @@
-﻿using CAS.UI.UIControls.OilControls.Model;
+﻿using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using CAS.UI.UIControls.OilControls.Model;
+using MetroFramework.Controls;
 using MetroFramework.Forms;
+using SmartCore.Entities.General.Accessory;
 using Telerik.Charting;
 using Telerik.WinControls.UI;
 
@@ -17,10 +23,9 @@ namespace CAS.UI.UIControls.OilControls
 
 		public OilGraphForm(OilGraphicModel graph)
 		{
-			_graph = graph;
 			InitializeComponent();
 
-			Initialize();
+			_graph = graph;
 			FillData();
 		}
 
@@ -30,22 +35,57 @@ namespace CAS.UI.UIControls.OilControls
 		{
 			foreach (var baseComponent in _graph.Graph)
 			{
-				var lineSeries = new LineSeries()
+				var radio = new MetroRadioButton()
 				{
-					ShowLabels = true,
-					Spline = true,
-					Name = baseComponent.Key.ToString()
+					Text = baseComponent.Key.ToString(),
+					Tag = baseComponent.Key,
+					Width = 150,
 				};
-
-				foreach (var values in baseComponent.Value)
-					lineSeries.DataPoints.Add(new CategoricalDataPoint(values.Value, values.Key.ToString()));
-
-				radChartView1.Series.Add(lineSeries);
+				radio.CheckedChanged += Radio_CheckedChanged;
+				flowLayoutPanel1.Controls.Add(radio);
 			}
 
-			AddScale();
+			var first = flowLayoutPanel1.Controls.OfType<MetroRadioButton>().FirstOrDefault();
+			if(first!= null)
+				first.Checked = true;
 		}
 
+		private void Radio_CheckedChanged(object sender, System.EventArgs e)
+		{
+			Initialize();
+
+			var radio = sender as MetroRadioButton;
+			var comp = radio.Tag as BaseComponent;
+			var lineSeries = new LineSeries()
+			{
+				ShowLabels = true,
+				LegendTitle = "Oil"
+				//Spline = true, // закруглять углы
+			};
+
+			var lineSeriesMin = new LineSeries {BorderColor = Color.Red, LegendTitle = "Min"};
+			var lineSeriesNorm = new LineSeries {BorderColor = Color.Yellow, LegendTitle = "Normal"};
+			var lineSeriesMax = new LineSeries {BorderColor = Color.Green, LegendTitle = "Max" };
+
+			radChartView1.Series.Clear();
+
+			foreach (var values in _graph.Graph[comp])
+			{
+				lineSeries.DataPoints.Add(new CategoricalDataPoint(values.Value, values.Key.ToString()));
+				lineSeriesMin.DataPoints.Add(new CategoricalDataPoint(_graph.Min, values.Key.ToString()));
+				lineSeriesNorm.DataPoints.Add(new CategoricalDataPoint(_graph.Normal, values.Key.ToString()));
+				lineSeriesMax.DataPoints.Add(new CategoricalDataPoint(_graph.Max, values.Key.ToString()));
+			}
+
+			radChartView1.Series.AddRange(lineSeries, lineSeriesMin, lineSeriesMax, lineSeriesNorm);
+
+			radRangeSelector1.AssociatedControl = this.radChartView1;
+			var categoricalAxis = radChartView1.Axes[0] as CategoricalAxis;
+			categoricalAxis.PlotMode = AxisPlotMode.OnTicksPadded;
+			categoricalAxis.LabelFitMode = AxisLabelFitMode.Rotate;
+			categoricalAxis.LabelRotationAngle = 300;
+
+		}
 
 		private void Initialize()
 		{
@@ -59,20 +99,10 @@ namespace CAS.UI.UIControls.OilControls
 			radChartView1.Controllers.Add(new ChartTrackballController());
 			radChartView1.ShowToolTip = true;
 			radChartView1.Zoom(25, 1);
+
+
+			radChartView1.ShowLegend = true;
+			this.radChartView1.LegendTitle = "Legend";
 		}
-
-		void AddScale()
-		{
-			var verticalAxis = radChartView1.Axes.Get<LinearAxis>(1);
-
-			var scaleBreakItem = new AxisScaleBreak { Name = "Min", From = _graph.Min };
-			var scaleBreakItem1 = new AxisScaleBreak { Name = "Normal", From = _graph.Normal };
-			var scaleBreakItem2 = new AxisScaleBreak { Name = "Max", From = _graph.Max };
-			verticalAxis.ScaleBreaks.Add(scaleBreakItem);
-			verticalAxis.ScaleBreaks.Add(scaleBreakItem1);
-			verticalAxis.ScaleBreaks.Add(scaleBreakItem2);
-		}
-
-
 	}
 }

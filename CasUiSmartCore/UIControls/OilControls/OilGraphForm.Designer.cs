@@ -28,12 +28,14 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			Telerik.WinControls.UI.CartesianArea cartesianArea1 = new Telerik.WinControls.UI.CartesianArea();
+			Telerik.WinControls.UI.CartesianArea cartesianArea2 = new Telerik.WinControls.UI.CartesianArea();
 			this.radChartView1 = new Telerik.WinControls.UI.RadChartView();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.radRangeSelector1 = new Telerik.WinControls.UI.RadRangeSelector();
 			this.telerikMetroTheme1 = new Telerik.WinControls.Themes.TelerikMetroTheme();
+			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			((System.ComponentModel.ISupportInitialize)(this.radChartView1)).BeginInit();
+			this.radChartView1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -43,7 +45,8 @@
 			// 
 			// radChartView1
 			// 
-			this.radChartView1.AreaDesign = cartesianArea1;
+			this.radChartView1.AreaDesign = cartesianArea2;
+			this.radChartView1.Controls.Add(this.flowLayoutPanel1);
 			this.radChartView1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.radChartView1.Location = new System.Drawing.Point(0, 0);
 			this.radChartView1.Name = "radChartView1";
@@ -81,15 +84,23 @@
 			this.radRangeSelector1.TabIndex = 0;
 			this.radRangeSelector1.ThemeName = "TelerikMetro";
 			// 
-			// Form1
+			// flowLayoutPanel1
+			// 
+			this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+			this.flowLayoutPanel1.Size = new System.Drawing.Size(1111, 26);
+			this.flowLayoutPanel1.TabIndex = 0;
+			// 
+			// OilGraphForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1151, 677);
 			this.Controls.Add(this.splitContainer1);
-			this.Name = "Form1";
+			this.Name = "OilGraphForm";
 			this.Text = "Form1";
 			((System.ComponentModel.ISupportInitialize)(this.radChartView1)).EndInit();
+			this.radChartView1.ResumeLayout(false);
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -105,5 +116,6 @@
 		private System.Windows.Forms.SplitContainer splitContainer1;
 		private Telerik.WinControls.UI.RadRangeSelector radRangeSelector1;
 		private Telerik.WinControls.Themes.TelerikMetroTheme telerikMetroTheme1;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
 	}
 }
