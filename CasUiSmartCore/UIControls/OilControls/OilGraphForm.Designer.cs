@@ -28,12 +28,12 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			Telerik.WinControls.UI.CartesianArea cartesianArea2 = new Telerik.WinControls.UI.CartesianArea();
+			Telerik.WinControls.UI.CartesianArea cartesianArea1 = new Telerik.WinControls.UI.CartesianArea();
 			this.radChartView1 = new Telerik.WinControls.UI.RadChartView();
+			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.radRangeSelector1 = new Telerik.WinControls.UI.RadRangeSelector();
 			this.telerikMetroTheme1 = new Telerik.WinControls.Themes.TelerikMetroTheme();
-			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			((System.ComponentModel.ISupportInitialize)(this.radChartView1)).BeginInit();
 			this.radChartView1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -45,7 +45,7 @@
 			// 
 			// radChartView1
 			// 
-			this.radChartView1.AreaDesign = cartesianArea2;
+			this.radChartView1.AreaDesign = cartesianArea1;
 			this.radChartView1.Controls.Add(this.flowLayoutPanel1);
 			this.radChartView1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.radChartView1.Location = new System.Drawing.Point(0, 0);
@@ -55,6 +55,13 @@
 			this.radChartView1.Size = new System.Drawing.Size(1111, 476);
 			this.radChartView1.TabIndex = 0;
 			this.radChartView1.ThemeName = "TelerikMetro";
+			// 
+			// flowLayoutPanel1
+			// 
+			this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+			this.flowLayoutPanel1.Size = new System.Drawing.Size(1111, 26);
+			this.flowLayoutPanel1.TabIndex = 0;
 			// 
 			// splitContainer1
 			// 
@@ -84,13 +91,6 @@
 			this.radRangeSelector1.TabIndex = 0;
 			this.radRangeSelector1.ThemeName = "TelerikMetro";
 			// 
-			// flowLayoutPanel1
-			// 
-			this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-			this.flowLayoutPanel1.Size = new System.Drawing.Size(1111, 26);
-			this.flowLayoutPanel1.TabIndex = 0;
-			// 
 			// OilGraphForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -98,7 +98,7 @@
 			this.ClientSize = new System.Drawing.Size(1151, 677);
 			this.Controls.Add(this.splitContainer1);
 			this.Name = "OilGraphForm";
-			this.Text = "Form1";
+			this.Text = "Oil Chart";
 			((System.ComponentModel.ISupportInitialize)(this.radChartView1)).EndInit();
 			this.radChartView1.ResumeLayout(false);
 			this.splitContainer1.Panel1.ResumeLayout(false);

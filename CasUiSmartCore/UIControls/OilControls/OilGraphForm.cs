@@ -63,9 +63,9 @@ namespace CAS.UI.UIControls.OilControls
 				//Spline = true, // закруглять углы
 			};
 
-			var lineSeriesMin = new LineSeries {BorderColor = Color.Red, LegendTitle = "Min"};
+			var lineSeriesMin = new LineSeries {BorderColor = Color.Green, LegendTitle = "Min"};
 			var lineSeriesNorm = new LineSeries {BorderColor = Color.Yellow, LegendTitle = "Normal"};
-			var lineSeriesMax = new LineSeries {BorderColor = Color.Green, LegendTitle = "Max" };
+			var lineSeriesMax = new LineSeries {BorderColor = Color.Red, LegendTitle = "Max" };
 
 			radChartView1.Series.Clear();
 
@@ -98,7 +98,7 @@ namespace CAS.UI.UIControls.OilControls
 			radChartView1.Controllers.Add(new ChartTooltipController());
 			radChartView1.Controllers.Add(new ChartTrackballController());
 			radChartView1.ShowToolTip = true;
-			radChartView1.Zoom(25, 1);
+			radChartView1.Zoom(5, 1);
 
 
 			radChartView1.ShowLegend = true;
