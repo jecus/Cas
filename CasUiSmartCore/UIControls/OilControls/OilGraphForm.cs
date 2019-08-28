@@ -59,7 +59,8 @@ namespace CAS.UI.UIControls.OilControls
 			var lineSeries = new LineSeries()
 			{
 				ShowLabels = true,
-				LegendTitle = "Oil"
+				LegendTitle = "Oil",
+				LabelFormat = "{0:F}"
 				//Spline = true, // закруглять углы
 			};
 
