@@ -72,7 +72,7 @@ namespace CAS.UI.UIControls.OilControls
 
 			foreach (var values in _graph.Graph[comp])
 			{
-				lineSeries.DataPoints.Add(new CategoricalDataPoint(values.Value, values.Key.ToString()));
+				lineSeries.DataPoints.Add(new CategoricalDataPoint(values.Value, values.Key.ToHoursMinutesFormat()));
 				lineSeriesMin.DataPoints.Add(new CategoricalDataPoint(_graph.Min, values.Key.ToString()));
 				lineSeriesNorm.DataPoints.Add(new CategoricalDataPoint(_graph.Normal, values.Key.ToString()));
 				lineSeriesMax.DataPoints.Add(new CategoricalDataPoint(_graph.Max, values.Key.ToString()));

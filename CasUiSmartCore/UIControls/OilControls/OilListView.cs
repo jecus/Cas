@@ -119,20 +119,8 @@ namespace CAS.UI.UIControls.OilControls
 					AddColumn("Max", (int)(radGridView1.Width * 0.05f));
 					AddColumn("Oil Flow", (int)(radGridView1.Width * 0.05f));
 					AddColumn("Exceeding", (int)(radGridView1.Width * 0.05f));
-
-					if (baseComponent.ComponentDirectives.Count(dd => dd.DirectiveType == ComponentRecordType.Overhaul) > 0)
-					{
-						AddColumn(baseComponent + " SLSV Flight", (int)(radGridView1.Width * 0.1f));
-						AddColumn(baseComponent + " SLSV Block", (int)(radGridView1.Width * 0.1f));
-					}
 				}
-				//else if (baseComponent.BaseComponentType == BaseComponentType.Apu)
-				//{
-				//	AddColumn($"{baseComponent}", (int)(radGridView1.Width * 0.1f));
-				//	if (baseComponent.ComponentDirectives.Count(dd => dd.DirectiveType == ComponentRecordType.Overhaul) > 0)
-				//		AddColumn(baseComponent + " SLSV", (int)(radGridView1.Width * 0.1f));
-				//}
-				
+
 			}
 			#endregion
 			AddColumn("ATLB No", (int)(radGridView1.Width * 0.1f));
@@ -259,36 +247,6 @@ namespace CAS.UI.UIControls.OilControls
 							if(!_graph.Graph[baseComponent].ContainsKey(baseComponentFlightLifeLenght))
 								_graph.Graph[baseComponent].Add(baseComponentFlightLifeLenght, oilFlow);
 							else throw new Exception("Такая наработка уже есть!");
-
-							if (baseDetailHaveOverhaulDirective)
-							{
-								if (lastOverhaul != null)
-								{
-									var sinceOverhaulFlight = baseComponentFlightLifeLenght.IsGreater(lastOverhaul.OnLifelength)
-										? baseComponentFlightLifeLenght - lastOverhaul.OnLifelength
-										: Lifelength.Null;
-
-									subItems.Add(CreateListViewSubItem(Color.Black, sinceOverhaulFlight));
-
-									var sinceOverhaulBlock = baseComponentBlockLifeLenght.IsGreater(lastOverhaul.OnLifelength)
-										? baseComponentBlockLifeLenght - lastOverhaul.OnLifelength
-										: Lifelength.Null;
-
-									subItems.Add(CreateListViewSubItem(Color.Black, sinceOverhaulBlock));
-								}
-								else
-								{
-									subItems.Add(CreateListViewSubItem("N/A"));
-									subItems.Add(CreateListViewSubItem("N/A"));
-									subItems.Add(CreateListViewSubItem("N/A"));
-									subItems.Add(CreateListViewSubItem("N/A"));
-									subItems.Add(CreateListViewSubItem("N/A"));
-									subItems.Add(CreateListViewSubItem("N/A"));
-									subItems.Add(CreateListViewSubItem("N/A"));
-									subItems.Add(CreateListViewSubItem("N/A"));
-								}
-							}
-
 						}
 						else
 						{
@@ -300,17 +258,6 @@ namespace CAS.UI.UIControls.OilControls
 							subItems.Add(CreateListViewSubItem(string.Empty));
 							subItems.Add(CreateListViewSubItem(string.Empty));
 							subItems.Add(CreateListViewSubItem(string.Empty));
-							if (baseDetailHaveOverhaulDirective)
-							{
-								subItems.Add(CreateListViewSubItem(string.Empty));
-								subItems.Add(CreateListViewSubItem(string.Empty));
-								subItems.Add(CreateListViewSubItem(string.Empty));
-								subItems.Add(CreateListViewSubItem(string.Empty));
-								subItems.Add(CreateListViewSubItem(string.Empty));
-								subItems.Add(CreateListViewSubItem(string.Empty));
-								subItems.Add(CreateListViewSubItem(string.Empty));
-								subItems.Add(CreateListViewSubItem(string.Empty));
-							}
 						}
 					}
 				}
@@ -344,17 +291,6 @@ namespace CAS.UI.UIControls.OilControls
 						subItems.Add(CreateRow("", ""));
 						subItems.Add(CreateRow("", ""));
 						subItems.Add(CreateRow("", ""));
-						if (baseComponent.ComponentDirectives.Count(dd => dd.DirectiveType == ComponentRecordType.Overhaul) > 0)
-						{
-							subItems.Add(CreateRow("", ""));
-							subItems.Add(CreateRow("", ""));
-							subItems.Add(CreateRow("", ""));
-							subItems.Add(CreateRow("", ""));
-							subItems.Add(CreateRow("", ""));
-							subItems.Add(CreateRow("", ""));
-							subItems.Add(CreateRow("", ""));
-							subItems.Add(CreateRow("", ""));
-						}
 					}
 
 				}
