@@ -2134,7 +2134,7 @@ namespace CAS.UI.UIControls.ComponentControls
 												Forecast = _currentForecast
 											};
 #endif
-						llpBuilder.AddDirectives(_directivesViewer.GetItemsArray().Cast<Component>().OrderBy(i => Convert.ToInt32(i.Position)).ToArray());
+						llpBuilder.AddDirectives(_directivesViewer.GetItemsArray().Cast<Component>().ToArray());
 						e.RequestedEntity = new ReportScreen(llpBuilder);
 						GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ComponentsListScreen (LLP)");
 					}
