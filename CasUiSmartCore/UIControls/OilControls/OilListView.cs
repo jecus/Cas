@@ -104,7 +104,6 @@ namespace CAS.UI.UIControls.OilControls
 			AddColumn("Flight No", (int)(radGridView1.Width * 0.1f));
 			AddColumn("Direction", (int)(radGridView1.Width * 0.1f));
 			AddColumn("Flight time", (int)(radGridView1.Width * 0.1f));
-
 			#region колонки для отображения наработок по двигателям и ВСУ
 
 			foreach (var baseComponent in _enginesAndAPU)
@@ -118,6 +117,7 @@ namespace CAS.UI.UIControls.OilControls
 					AddColumn("Norm", (int)(radGridView1.Width * 0.05f));
 					AddColumn("Max", (int)(radGridView1.Width * 0.05f));
 					AddColumn("Consumption", (int)(radGridView1.Width * 0.05f));
+					AddColumn("Engine Status", (int)(radGridView1.Width * 0.1f));
 					AddColumn("Exceeding", (int)(radGridView1.Width * 0.05f));
 				}
 
@@ -233,23 +233,34 @@ namespace CAS.UI.UIControls.OilControls
 							subItems.Add(CreateListViewSubItem(oilFlowNorm.ToString()));
 							subItems.Add(CreateListViewSubItem(oilFlowMax.ToString()));
 							subItems.Add(CreateListViewSubItem(oilFlow.ToString()));
+							subItems.Add(CreateListViewSubItem(GetStatus(oilFlowMin, oilFlowNorm, oilFlowMax, oilFlow).ToString()));
 							subItems.Add(CreateListViewSubItem(exceeding.ToString()));
 
+							if (item.AtlbRecordType == AtlbRecordType.Flight)
+							{
 
-							_graph.Max = oilFlowMax;
-							_graph.Min = oilFlowMin;
-							_graph.Normal = oilFlowNorm;
+								if (!_graph.Limits.ContainsKey(baseComponent))
+								{
+									_graph.Limits.Add(baseComponent, new OilLimits()
+									{
+										Max = oilFlowMax,
+										Min = oilFlowMin,
+										Normal = oilFlowNorm
+									});
+								}
 
-							if(!_graph.Graph.ContainsKey(baseComponent))
-								_graph.Graph.Add(baseComponent, new Dictionary<Lifelength, double>());
+								if (!_graph.Graph.ContainsKey(baseComponent))
+									_graph.Graph.Add(baseComponent, new Dictionary<Lifelength, double>());
 
 
-							if(!_graph.Graph[baseComponent].ContainsKey(baseComponentFlightLifeLenght))
-								_graph.Graph[baseComponent].Add(baseComponentFlightLifeLenght, oilFlow);
-							else throw new Exception("Такая наработка уже есть!");
+								if (!_graph.Graph[baseComponent].ContainsKey(baseComponentFlightLifeLenght))
+									_graph.Graph[baseComponent].Add(baseComponentFlightLifeLenght, oilFlow);
+								else throw new Exception("Такая наработка уже есть!");
+							}
 						}
 						else
 						{
+							subItems.Add(CreateListViewSubItem(string.Empty));
 							subItems.Add(CreateListViewSubItem(string.Empty));
 							subItems.Add(CreateListViewSubItem(string.Empty));
 							subItems.Add(CreateListViewSubItem(string.Empty));
@@ -279,10 +290,9 @@ namespace CAS.UI.UIControls.OilControls
 
 				foreach (var baseComponent in _enginesAndAPU)
 				{
-
-					
 					if (baseComponent.BaseComponentType == BaseComponentType.Engine)
 					{
+						subItems.Add(CreateRow("", ""));
 						subItems.Add(CreateRow("", ""));
 						subItems.Add(CreateRow("", ""));
 						subItems.Add(CreateRow("", ""));
@@ -304,6 +314,19 @@ namespace CAS.UI.UIControls.OilControls
 
 			return subItems;
 		}
+
+		private EngineStatus GetStatus(double oilFlowMin, double oilFlowNorm, double oilFlowMax, double oilFlow)
+		{
+			if (oilFlow > oilFlowMax)
+				return EngineStatus.AOG;
+			if (oilFlow > oilFlowNorm && oilFlow <= oilFlowMax)
+				return EngineStatus.Controled;
+			if (oilFlow > oilFlowMin && oilFlow <= oilFlowNorm)
+				return EngineStatus.Attention;
+
+			return EngineStatus.Satisfaction;
+		}
+
 		#endregion
 
 		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
@@ -392,6 +415,15 @@ namespace CAS.UI.UIControls.OilControls
 
 		#endregion
 
+
 		#endregion
+	}
+
+	enum EngineStatus
+	{
+		AOG,
+		Controled,
+		Attention,
+		Satisfaction
 	}
 }

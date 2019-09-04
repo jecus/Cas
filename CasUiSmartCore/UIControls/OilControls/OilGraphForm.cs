@@ -70,12 +70,12 @@ namespace CAS.UI.UIControls.OilControls
 
 			radChartView1.Series.Clear();
 
-			foreach (var values in _graph.Graph[comp])
+			foreach (var values in _graph.Graph[comp].OrderBy(i => i.Key.Hours))
 			{
-				lineSeries.DataPoints.Add(new CategoricalDataPoint(values.Value, values.Key.ToHoursMinutesFormat()));
-				lineSeriesMin.DataPoints.Add(new CategoricalDataPoint(_graph.Min, values.Key.ToString()));
-				lineSeriesNorm.DataPoints.Add(new CategoricalDataPoint(_graph.Normal, values.Key.ToString()));
-				lineSeriesMax.DataPoints.Add(new CategoricalDataPoint(_graph.Max, values.Key.ToString()));
+				lineSeries.DataPoints.Add(new CategoricalDataPoint(values.Value, $"{values.Key.Hours}FH"));
+				lineSeriesMin.DataPoints.Add(new CategoricalDataPoint(_graph.Limits[comp].Min, $"{values.Key.Hours}FH"));
+				lineSeriesNorm.DataPoints.Add(new CategoricalDataPoint(_graph.Limits[comp].Normal, $"{values.Key.Hours}FH"));
+				lineSeriesMax.DataPoints.Add(new CategoricalDataPoint(_graph.Limits[comp].Max, $"{values.Key.Hours}FH"));
 			}
 
 			radChartView1.Series.AddRange(lineSeries, lineSeriesMin, lineSeriesMax, lineSeriesNorm);
@@ -99,7 +99,7 @@ namespace CAS.UI.UIControls.OilControls
 			radChartView1.Controllers.Add(new ChartTooltipController());
 			radChartView1.Controllers.Add(new ChartTrackballController());
 			radChartView1.ShowToolTip = true;
-			radChartView1.Zoom(5, 1);
+			radChartView1.Zoom(25, 1);
 
 
 			radChartView1.ShowLegend = true;
