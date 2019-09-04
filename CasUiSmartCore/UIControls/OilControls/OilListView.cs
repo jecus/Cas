@@ -117,7 +117,7 @@ namespace CAS.UI.UIControls.OilControls
 					AddColumn("Min", (int)(radGridView1.Width * 0.05f));
 					AddColumn("Norm", (int)(radGridView1.Width * 0.05f));
 					AddColumn("Max", (int)(radGridView1.Width * 0.05f));
-					AddColumn("Oil Flow", (int)(radGridView1.Width * 0.05f));
+					AddColumn("Consumption", (int)(radGridView1.Width * 0.05f));
 					AddColumn("Exceeding", (int)(radGridView1.Width * 0.05f));
 				}
 

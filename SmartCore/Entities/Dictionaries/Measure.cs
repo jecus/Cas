@@ -205,7 +205,15 @@ namespace SmartCore.Entities.Dictionaries
 
 		public static Measure GallonHour = new Measure(97, "GallonH", "Gallon/h", MeasureCategory.MassFlowRate);
 
-	    #endregion
+		#endregion
+
+		#region public static Measure PercentHour = new Measure(97, "PercentH", "%/h", MeasureCategory.MassFlowRate);
+
+		public static Measure PercentHour = new Measure(98, "PercentH", "%/h", MeasureCategory.MassFlowRate);
+
+		#endregion
+
+
 
 		#region public static Measure LiterHour = new Measure(101, "LtH", "Lt/h", MeasureCategory.FlowRate);
 		/// <summary>
