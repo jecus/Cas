@@ -317,6 +317,8 @@ namespace CAS.UI.UIControls.NewGrid
 			if (itemsArray.Count == 0)
 				return;
 
+			_items.AddRange(itemsArray);
+
 			var temp = new List<GridViewDataRowInfo>();
 			foreach (var item in itemsArray)
 			{
