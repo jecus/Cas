@@ -233,7 +233,7 @@ namespace CAS.UI.UIControls.OilControls
 							subItems.Add(CreateListViewSubItem(oilFlowMax.ToString()));
 							subItems.Add(CreateListViewSubItem(oilFlow.ToString("F")));
 							subItems.Add(CreateListViewSubItem(GetStatus(oilFlowMin, oilFlowNorm, oilFlowMax, oilFlow).ToString()));
-							subItems.Add(CreateListViewSubItem(exceeding.ToString()));
+							subItems.Add(CreateListViewSubItem(exceeding.ToString("F")));
 
 							if (item.AtlbRecordType == AtlbRecordType.Flight)
 							{

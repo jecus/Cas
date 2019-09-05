@@ -72,10 +72,10 @@ namespace CAS.UI.UIControls.OilControls
 
 			foreach (var values in _graph.Graph[comp].OrderBy(i => i.Key.Hours))
 			{
-				lineSeries.DataPoints.Add(new CategoricalDataPoint(values.Value, $"{values.Key.Hours}FH"));
-				lineSeriesMin.DataPoints.Add(new CategoricalDataPoint(_graph.Limits[comp].Min, $"{values.Key.Hours}FH"));
-				lineSeriesNorm.DataPoints.Add(new CategoricalDataPoint(_graph.Limits[comp].Normal, $"{values.Key.Hours}FH"));
-				lineSeriesMax.DataPoints.Add(new CategoricalDataPoint(_graph.Limits[comp].Max, $"{values.Key.Hours}FH"));
+				lineSeries.DataPoints.Add(new CategoricalDataPoint(values.Value, $"{values.Key.ToHoursMinutesFormat()}"));
+				lineSeriesMin.DataPoints.Add(new CategoricalDataPoint(_graph.Limits[comp].Min, $"{values.Key.ToHoursMinutesFormat()}"));
+				lineSeriesNorm.DataPoints.Add(new CategoricalDataPoint(_graph.Limits[comp].Normal, $"{values.Key.ToHoursMinutesFormat()}"));
+				lineSeriesMax.DataPoints.Add(new CategoricalDataPoint(_graph.Limits[comp].Max, $"{values.Key.ToHoursMinutesFormat()}"));
 			}
 
 			radChartView1.Series.AddRange(lineSeries, lineSeriesMin, lineSeriesMax, lineSeriesNorm);
