@@ -147,10 +147,15 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         {
             InvokeTakeOffTimeChanget(e.Date);
         }
-        #endregion
+		#endregion
 
-        #region private void FlightCrewControl1CrewChanged(CrewChangedEventArgs e)
-        private void FlightCrewControl1CrewChanged(CrewChangedEventArgs e)
+		private void FlightTimeControl1_FlightTimeChanget(object sender, System.EventArgs e)
+		{
+			InvokeFlightTimeChanget(sender);
+		}
+
+		#region private void FlightCrewControl1CrewChanged(CrewChangedEventArgs e)
+		private void FlightCrewControl1CrewChanged(CrewChangedEventArgs e)
         {
             InvokeCrewChanged(e);    
         }
@@ -239,10 +244,17 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         [Description("Возникает при изменении времени посадки")]
         public event DateChangedEventHandler LDGTimeChanget;
 
-        /// <summary>
-        /// Событие, возникающее при изменении состава экипажа
-        /// </summary>
-        [Category("Crew data")]
+        ///<summary>
+        /// Возникает при изменении времени посадки
+        ///</summary>
+        [Category("Flight data")]
+        [Description("Возникает при изменении времени полета")]
+        public event EventHandler FlightTimeChanget;
+
+		/// <summary>
+		/// Событие, возникающее при изменении состава экипажа
+		/// </summary>
+		[Category("Crew data")]
         [Description("Событие, возникающее при изменении экипажа")]
         public event CrewChangedEventHandler CrewChanged;
 
@@ -305,11 +317,17 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             DateChangedEventHandler handler = LDGTimeChanget;
             if (handler != null) handler(new DateChangedEventArgs(e));
         }
-        
-        /// <summary>
-        /// Сигнализирует об изменении экипажа
-        /// </summary>
-        private void InvokeCrewChanged(CrewChangedEventArgs e)
+
+        private void InvokeFlightTimeChanget(object e)
+        {
+	        EventHandler handler = FlightTimeChanget;
+	        if (handler != null) handler(e, new EventArgs());
+        }
+
+		/// <summary>
+		/// Сигнализирует об изменении экипажа
+		/// </summary>
+		private void InvokeCrewChanged(CrewChangedEventArgs e)
         {
             if (CrewChanged != null) CrewChanged(e);
         }

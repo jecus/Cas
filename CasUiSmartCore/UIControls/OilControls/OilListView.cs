@@ -33,7 +33,6 @@ namespace CAS.UI.UIControls.OilControls
 		private AircraftFlightCollection _flights = new AircraftFlightCollection();
 		public IList<ComponentWorkInRegimeParams> WorkParams { get; set; }
 		public IList<ComponentOilCondition> OilConditions { get; set; }
-		public IList<RunUp> RunUps { get; set; }
 
 		#endregion
 
@@ -216,15 +215,15 @@ namespace CAS.UI.UIControls.OilControls
 							subItems.Add(CreateListViewSubItem(Color.Black, baseComponentBlockLifeLenght));
 							var cp = WorkParams.FirstOrDefault(i => i.ComponentId == baseComponent.ItemId && i.GroundAir == GroundAir.Air);
 							var cc = OilConditions.FirstOrDefault(i => i.ComponentId == baseComponent.ItemId && i.FlightId == item.ItemId);
-							var workRegime = RunUps.FirstOrDefault(i => i.BaseComponentId == baseComponent.ItemId && i.FlightId == item.ItemId);
-
-							
 
 							var oilFlowMin = cp?.OilFlowMin ?? 0;
 							var oilFlowNorm = cp?.OilFlowRecomended ?? 0;
 							var oilFlowMax = cp?.OilFlowMax ?? 0;
 							var oilAdded = cc?.OilAdded ?? 0;
-							var oilFlow = (cc?.Spent / workRegime?.TotalMinutes) * 60.0 ?? 0;
+
+							var flTime = UsefulMethods.GetDifference(new TimeSpan(0, item.LDGTime, 0),
+								new TimeSpan(0, item.TakeOffTime, 0));
+							var oilFlow = (cc?.Spent / flTime.TotalMinutes) * 60.0 ?? 0;
 							var exceeding = oilFlowMax - oilFlow;
 
 

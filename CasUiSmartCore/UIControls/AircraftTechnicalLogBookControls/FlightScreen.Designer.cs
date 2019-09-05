@@ -193,6 +193,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             this.flightGeneralInformatonControl.TakeOffTimeChanget += new CAS.UI.UIControls.Auxiliary.Events.DateChangedEventHandler(this.FlightTimeControlTakeOffTimeChanget);
             this.flightGeneralInformatonControl.LDGTimeChanget += new CAS.UI.UIControls.Auxiliary.Events.DateChangedEventHandler(this.FlightTimeControlLDGTimeChanget);
             this.flightGeneralInformatonControl.CrewChanged += new Auxiliary.Events.CrewChangedEventHandler(FlightGeneralInformatonControlCrewChanged);
+            this.flightGeneralInformatonControl.FlightTimeChanget += FlightGeneralInformatonControlOnFlightTimeChanget;
             
             // 
             // extendableRichContainerFuel

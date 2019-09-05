@@ -264,7 +264,8 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
             if (sender == dateTimePickerTakeOff) InvokeTakeOffTimeChanget(dateTimePickerTakeOff.Value);
             if (sender == dateTimePickerLDG) InvokeLDGTimeChanget(dateTimePickerLDG.Value);
-        }
+            InvokeFlightTimeChanget(flightDifference);
+		}
         #endregion
 
         #region private void DateTimePickerNightValueChanged(object sender, EventArgs e)
@@ -310,6 +311,13 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         [Category("Flight data")]
         [Description("¬озникает при изменении времени посадки")]
         public event DateChangedEventHandler LDGTimeChanget;
+        
+        ///<summary>
+        /// ¬озникает при изменении времени посадки
+        ///</summary>
+        [Category("Flight data")]
+        [Description("¬озникает при изменении времени полета")]
+        public event EventHandler FlightTimeChanget;
 
         ///<summary>
         /// —игнализирует об изменении времени вывода из ангара
@@ -349,6 +357,12 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         {
             DateChangedEventHandler handler = LDGTimeChanget;
             if (handler != null) handler(new DateChangedEventArgs(e));
+        }
+
+        private void InvokeFlightTimeChanget(TimeSpan e)
+        {
+            EventHandler handler = FlightTimeChanget;
+            if (handler != null) handler(e, new EventArgs());
         }
 
         #endregion

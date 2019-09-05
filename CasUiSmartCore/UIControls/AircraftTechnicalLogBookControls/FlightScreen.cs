@@ -172,8 +172,13 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
 			extendableRichContainerDiscrepancies.Extended = _showDeffects;
 
+			fuelTireOilInformationControl.AttachedObject = _currentFlight;
+
 			foreach (Control c in flowLayoutPanelMain.Controls)
 			{
+				if(c is FuelTireOilInformationControl)
+					continue;
+
 				if (c is DiscrepanciesListControl)
 				{
 					var control = c as DiscrepanciesListControl;
@@ -641,6 +646,12 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 		}
 		#endregion
 
+		private void FlightGeneralInformatonControlOnFlightTimeChanget(object sender, EventArgs e)
+		{
+			var time = (TimeSpan)sender;
+			fuelTireOilInformationControl.SetPowerUnitWorkTime(time);
+		}
+
 		#region private void FlightTimeControl1TakeOffTimeChanget(DateChangedEventArgs e)
 		private void FlightTimeControlTakeOffTimeChanget(DateChangedEventArgs e)
 		{
@@ -698,7 +709,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
 			BaseComponent powerUnit = (BaseComponent)sender;
 			TimeSpan workTime = (TimeSpan)((ValueChangedEventArgs)e).Value;
-			fuelTireOilInformationControl.SetPowerUnitWorkTime(powerUnit, workTime);
+			//fuelTireOilInformationControl.SetPowerUnitWorkTime(powerUnit, workTime);
 		}
 		#endregion
 
@@ -733,5 +744,5 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 	    }
 
 		#endregion
-	}
+    }
 }

@@ -61,7 +61,6 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 		private RadMenuSeparatorItem _toolStripSeparator2;
 		private IList<ComponentWorkInRegimeParams> _workParams = new List<ComponentWorkInRegimeParams>();
 		private IList<ComponentOilCondition> _oilConditions = new List<ComponentOilCondition>();
-		private IList<RunUp> _runUps = new List<RunUp>();
 		private OilGraphicModel _graph = new OilGraphicModel();
 
 		#endregion
@@ -184,7 +183,6 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 
 			_directivesViewer.WorkParams = _workParams;
 			_directivesViewer.OilConditions = _oilConditions;
-			_directivesViewer.RunUps = _runUps;
 			_directivesViewer.SetItemsArray(_resultDirectiveArray.OrderBy(i => i.TakeOffTime).ToArray());
 			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 			_directivesViewer.Focus();
@@ -228,17 +226,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 
 					});
 
-			_runUps = GlobalObjects.CasEnvironment.NewLoader
-				.GetObjectList<RunUpDTO, RunUp>(new Filter[]
-				{
-					new Filter("BaseComponentId", ids),
-					new Filter("FlightId", flights.Select(i => i.ItemId))
-
-				});
-
 			AnimatedThreadWorker.ReportProgress(40, "filter Fligths");
-
-			AnimatedThreadWorker.ReportProgress(70, "filter Fligths");
 
 			FilterItems(_initialDirectiveArray, _resultDirectiveArray);
 

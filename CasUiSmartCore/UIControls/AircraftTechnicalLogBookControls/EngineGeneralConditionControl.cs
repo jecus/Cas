@@ -117,14 +117,28 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
             SetOilFlow(powerUnit.ItemId, flow);
         }
-        #endregion
 
-        #region public void SetPowerUnitWorkTime(BaseDetail powerUnit, double workTime)
-        ///<summary>
-        /// Изменяет время работы определенной силовой установки
-        ///</summary>
-        ///<param name="oilFlowInfo">Силовая установка</param>
-        public void SetComponentOilFlow(Dictionary<int, double> oilFlowInfo )
+        public void SetComponentOilFlow(List<BaseComponent> powerUnits, double flow)
+        {
+	        foreach (var powerUnit in powerUnits)
+	        {
+				if (powerUnit == null) return;
+				if (_componentOilFlow.ContainsKey(powerUnit.ItemId))
+					_componentOilFlow[powerUnit.ItemId] = flow;
+				else _componentOilFlow.Add(powerUnit.ItemId, flow);
+
+				SetOilFlow(powerUnit.ItemId, flow);
+			}
+        }
+
+		#endregion
+
+		#region public void SetPowerUnitWorkTime(BaseDetail powerUnit, double workTime)
+		///<summary>
+		/// Изменяет время работы определенной силовой установки
+		///</summary>
+		///<param name="oilFlowInfo">Силовая установка</param>
+		public void SetComponentOilFlow(Dictionary<int, double> oilFlowInfo )
         {
             _componentOilFlow.Clear();
             if (oilFlowInfo == null) return;
