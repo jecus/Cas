@@ -231,7 +231,7 @@ namespace CAS.UI.UIControls.OilControls
 							subItems.Add(CreateListViewSubItem(oilFlowMin.ToString()));
 							subItems.Add(CreateListViewSubItem(oilFlowNorm.ToString()));
 							subItems.Add(CreateListViewSubItem(oilFlowMax.ToString()));
-							subItems.Add(CreateListViewSubItem(oilFlow.ToString()));
+							subItems.Add(CreateListViewSubItem(oilFlow.ToString("F")));
 							subItems.Add(CreateListViewSubItem(GetStatus(oilFlowMin, oilFlowNorm, oilFlowMax, oilFlow).ToString()));
 							subItems.Add(CreateListViewSubItem(exceeding.ToString()));
 
