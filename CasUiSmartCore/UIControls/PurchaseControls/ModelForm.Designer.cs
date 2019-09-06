@@ -307,7 +307,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.comboBoxManufRegion.FormattingEnabled = true;
 			this.comboBoxManufRegion.Location = new System.Drawing.Point(125, 116);
 			this.comboBoxManufRegion.Name = "comboBoxManufRegion";
-			this.comboBoxManufRegion.Size = new System.Drawing.Size(312, 22);
+			this.comboBoxManufRegion.Size = new System.Drawing.Size(312, 21);
 			this.comboBoxManufRegion.TabIndex = 102;
 			// 
 			// labelManufRegion
@@ -391,7 +391,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxDescription.MaxLength = 100;
 			this.textBoxDescription.Multiline = true;
 			this.textBoxDescription.Name = "textBoxDescription";
-			this.textBoxDescription.Size = new System.Drawing.Size(313, 44);
+			this.textBoxDescription.Size = new System.Drawing.Size(313, 90);
 			this.textBoxDescription.TabIndex = 151;
 			// 
 			// labelImage
@@ -399,7 +399,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.labelImage.AutoSize = true;
 			this.labelImage.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelImage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelImage.Location = new System.Drawing.Point(449, 273);
+			this.labelImage.Location = new System.Drawing.Point(449, 369);
 			this.labelImage.Name = "labelImage";
 			this.labelImage.Size = new System.Drawing.Size(52, 14);
 			this.labelImage.TabIndex = 144;
@@ -415,7 +415,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.fileControlImage.Filter = null;
 			this.fileControlImage.Icon = global::CAS.UI.Properties.Resources.ImageIcon_Small;
 			this.fileControlImage.IconNotEnabled = global::CAS.UI.Properties.Resources.ImageIcon_Small_Gray;
-			this.fileControlImage.Location = new System.Drawing.Point(559, 268);
+			this.fileControlImage.Location = new System.Drawing.Point(559, 364);
 			this.fileControlImage.MaximumSize = new System.Drawing.Size(350, 100);
 			this.fileControlImage.Name = "fileControlImage";
 			this.fileControlImage.ShowLinkLabelBrowse = true;
@@ -440,7 +440,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// 
 			this.labelSuppliers.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelSuppliers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelSuppliers.Location = new System.Drawing.Point(391, 415);
+			this.labelSuppliers.Location = new System.Drawing.Point(391, 462);
 			this.labelSuppliers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.labelSuppliers.Name = "labelSuppliers";
 			this.labelSuppliers.Size = new System.Drawing.Size(75, 25);
@@ -453,19 +453,19 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxDescRus.BackColor = System.Drawing.Color.White;
 			this.textBoxDescRus.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.textBoxDescRus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxDescRus.Location = new System.Drawing.Point(559, 217);
+			this.textBoxDescRus.Location = new System.Drawing.Point(559, 269);
 			this.textBoxDescRus.Margin = new System.Windows.Forms.Padding(4);
 			this.textBoxDescRus.MaxLength = 100;
 			this.textBoxDescRus.Multiline = true;
 			this.textBoxDescRus.Name = "textBoxDescRus";
-			this.textBoxDescRus.Size = new System.Drawing.Size(313, 44);
+			this.textBoxDescRus.Size = new System.Drawing.Size(313, 90);
 			this.textBoxDescRus.TabIndex = 154;
 			// 
 			// label1
 			// 
 			this.label1.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.label1.Location = new System.Drawing.Point(449, 217);
+			this.label1.Location = new System.Drawing.Point(449, 269);
 			this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(100, 44);
@@ -479,7 +479,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.dataGridViewControlSuppliers.Displayer = null;
 			this.dataGridViewControlSuppliers.DisplayerText = null;
 			this.dataGridViewControlSuppliers.Entity = null;
-			this.dataGridViewControlSuppliers.Location = new System.Drawing.Point(9, 442);
+			this.dataGridViewControlSuppliers.Location = new System.Drawing.Point(9, 489);
 			this.dataGridViewControlSuppliers.Name = "dataGridViewControlSuppliers";
 			this.dataGridViewControlSuppliers.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.dataGridViewControlSuppliers.RowHeadersVisible = false;
@@ -515,7 +515,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.labelDoc.AutoSize = true;
 			this.labelDoc.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelDoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelDoc.Location = new System.Drawing.Point(452, 345);
+			this.labelDoc.Location = new System.Drawing.Point(449, 432);
 			this.labelDoc.Name = "labelDoc";
 			this.labelDoc.Size = new System.Drawing.Size(35, 14);
 			this.labelDoc.TabIndex = 159;
@@ -525,7 +525,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// documentControl1
 			// 
 			this.documentControl1.CurrentDocument = null;
-			this.documentControl1.Location = new System.Drawing.Point(556, 345);
+			this.documentControl1.Location = new System.Drawing.Point(558, 432);
 			this.documentControl1.Name = "documentControl1";
 			this.documentControl1.Size = new System.Drawing.Size(314, 41);
 			this.documentControl1.TabIndex = 160;
@@ -638,7 +638,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(885, 624);
+			this.ClientSize = new System.Drawing.Size(905, 744);
 			this.MaximumSize = new System.Drawing.Size(1023, 766);
 			this.MinimumSize = new System.Drawing.Size(284, 164);
 			this.Name = "ModelForm";
