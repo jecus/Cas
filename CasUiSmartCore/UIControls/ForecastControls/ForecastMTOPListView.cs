@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
 using CAS.UI.UIControls.NewGrid;
@@ -38,6 +39,7 @@ namespace CAS.UI.UIControls.ForecastControls
 		/// </summary>
 		protected override void SetHeaders()
 		{
+			AddColumn("Check", (int)(radGridView1.Width * 0.10f));
 			AddColumn("ATA", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Title", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.2f));
@@ -80,21 +82,12 @@ namespace CAS.UI.UIControls.ForecastControls
 		//}
 
 		#region protected override SetGroupsToItems(int columnIndex)
-		//protected override void SetGroupsToItems(int columnIndex)
-		//{
-		//	itemsListView.Groups.Clear();
-		//	foreach (var item in ListViewItemList)
-		//	{
-		//		if (item.Tag is NextPerformance)
-		//		{
-		//			var np = item.Tag as NextPerformance;
-		//			//var temp = $"Date:{np.PerformanceDate?.ToString(new GlobalTermsProvider()["DateFormat"].ToString())} | Check: {np.Group}-{np.ParentCheck.Name} ";
-		//			var temp = $"Date:{np.PerformanceDate?.ToString(new GlobalTermsProvider()["DateFormat"].ToString())}";
-		//			itemsListView.Groups.Add(temp, temp);
-		//			item.Group = itemsListView.Groups[temp];
-		//		}
-		//	}
-		//}
+
+		protected override void GroupingItems()
+		{
+			Grouping("Check");
+		}
+
 		#endregion
 
 		#region protected override void SetItemColor(ListViewItem listViewItem, NextPerformance item)
@@ -219,7 +212,12 @@ namespace CAS.UI.UIControls.ForecastControls
 
 			}
 
+			var temp = "";
+			if (item.Parent is MaintenanceDirective)
+				temp = $"Check: {item.Group}-{item.ParentCheck.Name} ";
+			else temp = $"{ListViewGroupHelper.GetGroupString(item)} | Date: {item.PerformanceDate?.ToString(new GlobalTermsProvider()["DateFormat"].ToString())}";
 
+				subItems.Add(CreateRow(temp, temp ));
 			subItems.Add(CreateRow(item.ATAChapter?.ToString(), item.ATAChapter ));
 			subItems.Add(CreateRow(title, title, tcnColor));
 			subItems.Add(CreateRow(item.Description, item.Description ));

@@ -8,6 +8,7 @@ using MetroFramework.Forms;
 using SmartCore.Entities.General.Accessory;
 using Telerik.Charting;
 using Telerik.WinControls.UI;
+using Telerik.WinControls.UI.RangeSelector.InterfacesAndEnum;
 
 namespace CAS.UI.UIControls.OilControls
 {
@@ -56,36 +57,43 @@ namespace CAS.UI.UIControls.OilControls
 
 			var radio = sender as MetroRadioButton;
 			var comp = radio.Tag as BaseComponent;
-			var lineSeries = new LineSeries()
+			var lineSeries = new ScatterLineSeries()
 			{
 				ShowLabels = true,
 				LegendTitle = "Oil",
-				LabelFormat = "{0:F}"
 				//Spline = true, // закруглять углы
 			};
 
-			var lineSeriesMin = new LineSeries {BorderColor = Color.Green, LegendTitle = "Min"};
-			var lineSeriesNorm = new LineSeries {BorderColor = Color.Yellow, LegendTitle = "Normal"};
-			var lineSeriesMax = new LineSeries {BorderColor = Color.Red, LegendTitle = "Max" };
+			var lineSeriesMin = new ScatterLineSeries { BorderColor = Color.Green, LegendTitle = "Min"};
+			var lineSeriesNorm = new ScatterLineSeries { BorderColor = Color.Yellow, LegendTitle = "Normal"};
+			var lineSeriesMax = new ScatterLineSeries { BorderColor = Color.Red, LegendTitle = "Max" };
 
 			radChartView1.Series.Clear();
 
 			foreach (var values in _graph.Graph[comp].OrderBy(i => i.Key.Hours))
 			{
-				lineSeries.DataPoints.Add(new CategoricalDataPoint(values.Value, $"{values.Key.ToHoursMinutesFormat()}"));
-				lineSeriesMin.DataPoints.Add(new CategoricalDataPoint(_graph.Limits[comp].Min, $"{values.Key.ToHoursMinutesFormat()}"));
-				lineSeriesNorm.DataPoints.Add(new CategoricalDataPoint(_graph.Limits[comp].Normal, $"{values.Key.ToHoursMinutesFormat()}"));
-				lineSeriesMax.DataPoints.Add(new CategoricalDataPoint(_graph.Limits[comp].Max, $"{values.Key.ToHoursMinutesFormat()}"));
+				lineSeries.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value,values.Value));
+				lineSeriesMin.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, _graph.Limits[comp].Min));
+				lineSeriesNorm.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, _graph.Limits[comp].Normal));
+				lineSeriesMax.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, _graph.Limits[comp].Max));
 			}
 
 			radChartView1.Series.AddRange(lineSeries, lineSeriesMin, lineSeriesMax, lineSeriesNorm);
 
-			radRangeSelector1.AssociatedControl = this.radChartView1;
-			var categoricalAxis = radChartView1.Axes[0] as CategoricalAxis;
-			categoricalAxis.PlotMode = AxisPlotMode.OnTicksPadded;
-			categoricalAxis.LabelFitMode = AxisLabelFitMode.Rotate;
-			categoricalAxis.LabelRotationAngle = 300;
 
+			LinearAxis horizontalAxis = radChartView1.Axes.Get<LinearAxis>(0);
+			horizontalAxis.Minimum = (double) _graph.Graph[comp].OrderBy(i => i.Key.Hours).FirstOrDefault().Key.Hours;
+			horizontalAxis.Maximum = (double)_graph.Graph[comp].OrderBy(i => i.Key.Hours).LastOrDefault().Key.Hours;
+			horizontalAxis.MajorStep = 10;
+			horizontalAxis.LabelFitMode = AxisLabelFitMode.Rotate;
+			horizontalAxis.LabelRotationAngle = 300;
+
+			LinearAxis verticalAxis = radChartView1.Axes.Get<LinearAxis>(1);
+			verticalAxis.Minimum = _graph.Graph[comp].Min(i => i.Value);
+			verticalAxis.Maximum = _graph.Graph[comp].Max(i => i.Value);
+			verticalAxis.MajorStep = 0.5;
+
+			radRangeSelector1.AssociatedControl = radChartView1;
 		}
 
 		private void Initialize()
@@ -94,7 +102,7 @@ namespace CAS.UI.UIControls.OilControls
 			radChartView1.Controllers.Add(panZoomController);
 
 			radChartView1.ShowPanZoom = true;
-			radChartView1.ShowGrid = true;
+			radChartView1.ShowGrid = false;
 
 			radChartView1.Controllers.Add(new ChartTooltipController());
 			radChartView1.Controllers.Add(new ChartTrackballController());

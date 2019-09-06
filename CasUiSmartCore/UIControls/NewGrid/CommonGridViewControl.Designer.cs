@@ -34,9 +34,11 @@
 			this.panelBottomContainer = new System.Windows.Forms.Panel();
 			this.label1 = new System.Windows.Forms.Label();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.radButton1 = new Telerik.WinControls.UI.RadButton();
 			((System.ComponentModel.ISupportInitialize)(this.radGridView1.MasterTemplate)).BeginInit();
 			this.panelBottomContainer.SuspendLayout();
 			this.panel1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.radButton1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// radGridView1
@@ -68,6 +70,7 @@
 			// panelBottomContainer
 			// 
 			this.panelBottomContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this.panelBottomContainer.Controls.Add(this.radButton1);
 			this.panelBottomContainer.Controls.Add(this.label1);
 			this.panelBottomContainer.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.panelBottomContainer.Location = new System.Drawing.Point(0, 575);
@@ -87,6 +90,16 @@
 			this.label1.Size = new System.Drawing.Size(78, 22);
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Total:";
+			// 
+			// radButton1
+			// 
+			this.radButton1.Location = new System.Drawing.Point(4, 1);
+			this.radButton1.Name = "radButton1";
+			this.radButton1.Size = new System.Drawing.Size(110, 24);
+			this.radButton1.TabIndex = 1;
+			this.radButton1.Text = "Export to Excel";
+			this.radButton1.ThemeName = "TelerikMetroBlue";
+			this.radButton1.Click += new System.EventHandler(this.RadButton1_Click);
 			// 
 			// panel1
 			// 
@@ -108,6 +121,7 @@
 			this.Size = new System.Drawing.Size(800, 600);
 			((System.ComponentModel.ISupportInitialize)(this.radGridView1.MasterTemplate)).EndInit();
 			this.panelBottomContainer.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.radButton1)).EndInit();
 			this.panelBottomContainer.PerformLayout();
 			this.panel1.ResumeLayout(false);
 			this.ResumeLayout(false);
@@ -121,5 +135,6 @@
 		private System.Windows.Forms.Panel panelBottomContainer;
 		public System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Panel panel1;
+		private Telerik.WinControls.UI.RadButton radButton1;
 	}
 }
