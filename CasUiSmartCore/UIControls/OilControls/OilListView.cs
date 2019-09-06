@@ -254,7 +254,7 @@ namespace CAS.UI.UIControls.OilControls
 
 								if (!_graph.Graph[baseComponent].ContainsKey(baseComponentFlightLifeLenght))
 									_graph.Graph[baseComponent].Add(baseComponentFlightLifeLenght, oilFlow);
-								else throw new Exception("Такая наработка уже есть!");
+								//else throw new Exception("Такая наработка уже есть!");
 							}
 						}
 						else
