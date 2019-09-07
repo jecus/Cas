@@ -118,6 +118,18 @@ namespace SmartCore.Queries
         }
 		#endregion
 
+		public static List<DbQuery> GetSelectQuery(
+			DirectiveType directiveType, string text,
+			bool loadChild = false,
+			bool getDeleted = false)
+		{
+			List<ICommonFilter> allFilters = new List<ICommonFilter> ();
+			allFilters.Add(GetWhereStatementForAll(directiveType, text));
+			List<DbQuery> qrs = BaseQueries.GetSelectQueryWithWhereAll<Directive>(allFilters.ToArray(), loadChild, getDeleted);
+			return qrs;
+
+		}
+
 		#region public static List<DbQuery> GetSelectQuery(BaseComponent parentBaseComponent, DirectiveType directiveType, IEnumerable<IQueryFilter> filters = null, bool loadChild = false, bool getDeleted = false)
 
 		/// <summary>
@@ -285,7 +297,22 @@ namespace SmartCore.Queries
             return state;
         }
 
-        #endregion
+		#endregion
+
+		public static ICommonFilter GetWhereStatementForAll(DirectiveType directiveType, string text)
+		{
+			if (directiveType == null)
+				throw new ArgumentNullException("directiveType", "must be not null");
+			if (DirectiveType.GetDirectiveTypeById(directiveType.ItemId) == DirectiveType.Unknown)
+				throw new ArgumentException("unknown directive type", "directiveType");
+
+			ICommonFilter state;
+
+				state =
+					new CommonFilter<string>(string.Format($@"(directives.Title != 'N/A' and directives.Title like '%{text}%'
+                                                           and directives.DirectiveType = {directiveType.ItemId})"));
+				return state;
+		}
 
 	} 
 }

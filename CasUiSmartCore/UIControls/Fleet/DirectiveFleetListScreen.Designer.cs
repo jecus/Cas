@@ -1,7 +1,7 @@
 ﻿using CASTerms;
 using EntityCore.DTO.General;
 
-namespace CAS.UI.UIControls.DirectivesControls
+namespace CAS.UI.UIControls.Fleet
 {
 	partial class DirectiveFleetListScreen
 	{
@@ -35,7 +35,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
 			this.pictureBoxS2 = new System.Windows.Forms.PictureBox();
-			this.buttonAddNew = new CAS.UI.Management.Dispatchering.RichReferenceButton();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.buttonImportExcel = new AvControls.AvButtonT.AvButtonT();
 			this.pictureBoxS3 = new System.Windows.Forms.PictureBox();
@@ -54,13 +53,11 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// headerControl
 			// 
 			this.headerControl.Margin = new System.Windows.Forms.Padding(5);
-			this.headerControl.ShowForecastButton = true;
-			this.headerControl.ShowPrintButton = true;
+			this.headerControl.ShowForecastButton = false;
+			this.headerControl.ShowPrintButton = false;
 			this.headerControl.Size = new System.Drawing.Size(773, 58);
 			this.headerControl.SaveButtonClick += new System.EventHandler(HeaderControlSaveButtonClick);
-			this.headerControl.ForecastContextMenuClick += new System.EventHandler(this.ForecastMenuClick);
 			this.headerControl.ReloadButtonClick += new System.EventHandler(this.HeaderControlButtonReloadClick);
-			this.headerControl.PrintButtonDisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.HeaderControlButtonPrintDisplayerRequested);
 			this.headerControl.Controls.SetChildIndex(this.aircraftHeaderControl1, 0);
 			// 
 			// panel1
@@ -81,8 +78,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.flowLayoutPanel1.Controls.Add(this.buttonDeleteSelected);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBoxS2);
 			this.flowLayoutPanel1.Controls.Add(this.buttonImportExcel);
-			this.flowLayoutPanel1.Controls.Add(this.pictureBoxS3);
-			this.flowLayoutPanel1.Controls.Add(this.buttonAddNew);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox2);
 			this.flowLayoutPanel1.Controls.Add(this.buttonApplyFilter);
 			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
@@ -178,39 +173,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.pictureBoxS3.Size = new System.Drawing.Size(5, 50);
 			this.pictureBoxS3.TabIndex = 20;
 			this.pictureBoxS3.TabStop = false;
-			// 
-			// buttonAddNew
-			// 
-			this.buttonAddNew.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-			this.buttonAddNew.ActiveBackgroundImage = null;
-			this.buttonAddNew.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonAddNew.Displayer = null;
-			this.buttonAddNew.DisplayerText = "";
-			this.buttonAddNew.Entity = null;
-			this.buttonAddNew.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-			this.buttonAddNew.FontSecondary = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-			this.buttonAddNew.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
-			this.buttonAddNew.ForeColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
-			this.buttonAddNew.Icon = global::CAS.UI.Properties.Resources.AddIcon;
-			this.buttonAddNew.IconLayout = System.Windows.Forms.ImageLayout.Center;
-			this.buttonAddNew.IconNotEnabled = global::CAS.UI.Properties.Resources.AddIcon_gray;
-			this.buttonAddNew.Location = new System.Drawing.Point(63, 0);
-			this.buttonAddNew.Margin = new System.Windows.Forms.Padding(0);
-			this.buttonAddNew.Name = "buttonAddNew";
-			this.buttonAddNew.NormalBackgroundImage = null;
-			this.buttonAddNew.PaddingMain = new System.Windows.Forms.Padding(0);
-			this.buttonAddNew.PaddingSecondary = new System.Windows.Forms.Padding(0);
-			this.buttonAddNew.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInNew;
-			this.buttonAddNew.ShowToolTip = true;
-			this.buttonAddNew.Size = new System.Drawing.Size(52, 57);
-			this.buttonAddNew.TabIndex = 19;
-			this.buttonAddNew.TextAlignMain = System.Drawing.ContentAlignment.MiddleLeft;
-			this.buttonAddNew.TextAlignSecondary = System.Drawing.ContentAlignment.TopLeft;
-			this.buttonAddNew.TextMain = "";
-			this.buttonAddNew.TextSecondary = "";
-			this.buttonAddNew.ToolTipText = "Add new";
-			this.buttonAddNew.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.ButtonAddDisplayerRequested);
-			this.buttonAddNew.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// pictureBox2
 			// 
@@ -324,7 +286,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 		#endregion
 
 		private AvControls.StatusImageLink.StatusImageLinkLabel labelTitle;
-		private CAS.UI.Management.Dispatchering.RichReferenceButton buttonAddNew;
 		private AvControls.AvButtonT.AvButtonT buttonDeleteSelected;
 		private AvControls.AvButtonT.AvButtonT buttonApplyFilter;
 		private AvControls.AvButtonT.AvButtonT buttonImportExcel;

@@ -11,6 +11,7 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.ComponentControls;
 using CAS.UI.UIControls.DirectivesControls;
+using CAS.UI.UIControls.Fleet;
 using CAS.UI.UIControls.ForecastControls;
 using CAS.UI.UIControls.MonthlyUtilizationsControls;
 using CAS.UI.UIControls.PowerPlants;
@@ -469,7 +470,7 @@ namespace CAS.UI.UIControls.AircraftsControls
 		{
 			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 			e.DisplayerText = "Ad Fleet";
-			e.RequestedEntity = new DirectiveFleetListScreen();
+			e.RequestedEntity = new DirectiveFleetListScreen(GlobalObjects.CasEnvironment.Operators[0]);
 		}
 
 		private void LinkComponentFleet(object sender, ReferenceEventArgs e)

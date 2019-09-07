@@ -66,6 +66,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		/// </summary>
 		protected override void SetHeaders()
 		{
+			AddColumn("Aircraft", (int)(radGridView1.Width * 0.24f));
 			AddColumn(CurrentPrimatyDirectiveType == DirectiveType.AirworthenessDirectives ||
 					  CurrentPrimatyDirectiveType == DirectiveType.ModificationStatus
 				? "AD No"
@@ -228,7 +229,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			var sbno = item.ServiceBulletinNo != "" ? item.ServiceBulletinNo : "N/A";
 			var eono = item.EngineeringOrders != "" ? item.EngineeringOrders : "N/A";
 			var stcno = item.StcNo != "" ? item.StcNo : "N/A";
-			var baseDetail = item.ParentBaseComponent.ToString();
+			var baseDetail = item.ParentBaseComponent?.ToString() ?? "";
 			var status = item.Status;
 			var workType = item.WorkType;
 			var access = item.DirectiveAccess;
@@ -267,6 +268,10 @@ namespace CAS.UI.UIControls.DirectivesControls
 				c1 = eoColor; c2 = sbColor; c3 = adColor;      
 			}
 
+			var aircrraft =
+				GlobalObjects.AircraftsCore.GetAircraftById(item.ParentBaseComponent?.ParentAircraftId ?? -1);
+
+			subItems.Add(CreateRow(aircrraft?.ToString() ?? "", aircrraft));
 			subItems.Add(CreateRow(s1, s1, c1));
 			subItems.Add(CreateRow(s2, s2, c2));
 			subItems.Add(CreateRow(s3, s3, c3));
@@ -330,7 +335,14 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 		#endregion
 
+		#region Overrides of BaseGridViewControl<ATLB>
 
+		protected override void GroupingItems()
+		{
+			Grouping("Aircraft");
+		}
+
+		#endregion
 
 		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 

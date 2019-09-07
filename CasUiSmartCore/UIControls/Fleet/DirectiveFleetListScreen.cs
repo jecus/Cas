@@ -5,35 +5,28 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
-using AvControls;
 using CAS.UI.ExcelExport;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Comparers;
+using CAS.UI.UIControls.DirectivesControls;
 using CAS.UI.UIControls.FiltersControls;
-using CAS.UI.UIControls.ForecastControls;
-using CAS.UI.UIControls.PurchaseControls;
-using CAS.UI.UIControls.WorkPakage;
-using CASReports.Builders;
 using CASTerms;
 using EntityCore.DTO.General;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;
-using SmartCore.Purchase;
 using Telerik.WinControls.UI;
 using TempUIExtentions;
 using Point = System.Drawing.Point;
 
-namespace CAS.UI.UIControls.DirectivesControls
+namespace CAS.UI.UIControls.Fleet
 {
 	///<summary>
 	///</summary>
@@ -41,69 +34,25 @@ namespace CAS.UI.UIControls.DirectivesControls
 	public partial class DirectiveFleetListScreen : ScreenControl
 	{
 		#region Fields
-
-		private readonly ADType _adType;
-		private DirectiveType _currentPrimaryDirectiveType;
 		private ICommonCollection<Directive> _initialDirectiveArray = new DirectiveCollection();
 		private ICommonCollection<Directive> _resultDirectiveArray = new CommonCollection<Directive>();
-		private CommonCollection<WorkPackage> _openPubWorkPackages = new CommonCollection<WorkPackage>();
-		private CommonCollection<RequestForQuotation> _openPubQuotations = new CommonCollection<RequestForQuotation>();
 
-		private Aircraft _currentAircraft;
-		private BaseComponent _currentBaseComponent;
-		private Forecast _currentForecast;
-
-		private PrimeDirectiveListView _directivesViewer;
+		private DirectiveFleetListView _directivesViewer;
 
 		private CommonFilterCollection _filter;
 
-		private DirectivesReportBuilder _builder;
-		private DirectivesReportBuilderLitAVIA _builderLitAVIA;
-		private DirectivesReportBuilderLitAVIAEng _builderLitAviaEng;
-		private DirectivesAMReportBuilder _amReportBuilder = new DirectivesAMReportBuilder();
-
-		private ContextMenuStrip buttonPrintMenuStrip;
-		private ToolStripMenuItem itemPrintReportAD;
-		private ToolStripMenuItem itemPrintReportAMP;
-		private ToolStripMenuItem itemPrintReportADLitAVIA;
-		private ToolStripMenuItem itemPrintReportADLitAVIAEng;
-
-
 		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemOpen;
-		private RadMenuItem _toolStripMenuItemComposeWorkPackage;
-		private RadMenuItem _toolStripMenuItemComposeQuotationOrder;
-		private RadMenuItem _toolStripMenuItemCopy;
-		private RadMenuItem _toolStripMenuItemPaste;
 		private RadMenuItem _toolStripMenuItemDelete;
-		private RadMenuItem _toolStripMenuItemHighlight;
 		private RadMenuItem _toolStripMenuItemShowADFile;
 		private RadMenuItem _toolStripMenuItemShowSBFile;
 		private RadMenuItem _toolStripMenuItemShowEOFile;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 		private RadMenuSeparatorItem _toolStripSeparator2;
 		private RadMenuSeparatorItem _toolStripSeparator4;
-		private RadMenuItem _toolStripMenuItemsWorkPackages;
-		private RadMenuItem _toolStripMenuItemQuotations;
 		private AnimatedThreadWorker _worker;
 		private ExcelExportProvider _exportProvider;
 		private RadMenuItem _toolStripMenuItemChangeToAd;
-
-		#endregion
-
-		#region Properties
-		/// <summary>
-		/// Контейнер директив
-		/// </summary>
-		private object DirectiveSource
-		{
-			get
-			{
-				if (_currentBaseComponent != null)
-					return _currentBaseComponent;
-				return CurrentAircraft;
-			}
-		}
 
 		#endregion
 
@@ -119,188 +68,18 @@ namespace CAS.UI.UIControls.DirectivesControls
 		}
 		#endregion
 
-		#region public DirectiveFleetListScreen(BaseDetail baseDetail,PrimaryDirectiveType primaryDirectiveType, ADType adType = ADType.None) : this()
-
-		///<summary>
-		/// Создаёт экземпляр элемента управления, отображающего список директив
-		///</summary>
-		///<param name="baseComponentазовый агрегат, которому принадлежат директивы</param>
-		///<param name="primaryDirectiveType"></param>
-		///<param name="adType"></param>
-		public DirectiveFleetListScreen(BaseComponent baseComponent, DirectiveType primaryDirectiveType, ADType adType = ADType.None)
-			: this()
+		public DirectiveFleetListScreen(Operator currentOperator) : this()
 		{
-			if (baseComponent == null)
-				throw new ArgumentNullException("baseComponent", "Cannot display null-baseDetail");
+			if (currentOperator == null)
+				throw new ArgumentNullException("currentOperator");
+			aircraftHeaderControl1.Operator = currentOperator;
+			statusControl.ShowStatus = false;
+			labelTitle.Visible = false;
 
-			var parentAircraft = GlobalObjects.AircraftsCore.GetAircraftById(baseComponent.ParentAircraftId);//TODO:(Evgenii Babak) пересмотреть использование ParentAircrafId здесь
-			var parentStore = GlobalObjects.StoreCore.GetStoreById(baseComponent.ParentStoreId);
-
-			if (parentAircraft != null)
-				CurrentAircraft = parentAircraft;
-			else CurrentStore = parentStore;
-			StatusTitle = baseComponent + " " + primaryDirectiveType.CommonName;
-
-			_currentBaseComponent = baseComponent;
-			_currentPrimaryDirectiveType = primaryDirectiveType;
-			_adType = adType;
-			_builderLitAVIA = new DirectivesReportBuilderLitAVIA();
-			_builderLitAviaEng = new DirectivesReportBuilderLitAVIAEng();
-			PrimeDirectiveListView directiveList;
-			if (primaryDirectiveType == DirectiveType.DamagesRequiring)
-			{
-				directiveList = new DamageDirectiveListView();
-				_filter = new CommonFilterCollection(typeof(DamageItem));
-#if KAC
-				_builder = new DirectivesReportBuilderKAC();
-#else
-				_builder = new DirectivesReportBuilder();
-#endif
-				_builder.ReportTitle = _currentPrimaryDirectiveType.CommonName;
-			}
-			else if (primaryDirectiveType == DirectiveType.DeferredItems)
-			{
-				directiveList = new DefferedDirectiveListView();
-				_filter = new CommonFilterCollection(typeof(DeferredItem));
-				_builder = new DeferredListReportBuilder();
-			}
-			else if (primaryDirectiveType == DirectiveType.ModificationStatus)
-			{
-				directiveList = new PrimeDirectiveListView(primaryDirectiveType);
-				buttonDeleteSelected.Visible = false;
-				_filter = new CommonFilterCollection(typeof(Directive));
-#if KAC
-				_builder = new DirectivesReportBuilderKAC();
-#else
-				_builder = new DirectivesReportBuilder();
-#endif
-				_builder.ReportTitle = _currentPrimaryDirectiveType.CommonName;
-			}
-			else if (primaryDirectiveType == DirectiveType.OutOfPhase)
-			{
-				directiveList = new OutOfPhaseDirectiveListView();
-				_filter = new CommonFilterCollection(typeof(Directive));
-#if KAC
-				_builder = new DirectivesReportBuilderKAC();
-#else
-				_builder = new DirectivesReportBuilder();
-#endif
-				_builder.ReportTitle = _currentPrimaryDirectiveType.CommonName;
-			}
-			else
-			{
-				directiveList = new PrimeDirectiveListView(primaryDirectiveType);
-				_filter = new CommonFilterCollection(typeof(Directive));
-#if KAC
-				_builder = new DirectivesReportBuilderKAC();
-				
-				if (primaryDirectiveType == DirectiveType.SB)
-					_builder.ReportTitle = "SB Status";
-				else if (primaryDirectiveType == DirectiveType.AirworthenessDirectives)
-					_builder.ReportTitle = adType == ADType.None ? "AD Status" : adType == ADType.Airframe ? "Airframe AD Status" : "Appliance AD \nStatus";
-				else _builder.ReportTitle = _currentPrimaryDirectiveType.CommonName;
-#else
-				_builder = new DirectivesReportBuilder();
-				_builder.ReportTitle = _currentPrimaryDirectiveType.CommonName;
-#endif
-			}
-#if !DEBUG
-			buttonImportExcel.Visible = false;
-			pictureBoxS3.Visible = false;
-#endif
 			InitToolStripMenuItems();
-			InitPrintToolStripMenuItems();
-			InitListView(directiveList);
+			InitListView(new DirectiveFleetListView(DirectiveType.AirworthenessDirectives));
 		}
 
-		#endregion
-
-		#region public DirectiveFleetListScreen(Aircraft currentAircraft, PrimaryDirectiveType primaryDirectiveType, ADType adType = ADType.None)
-
-		///<summary>
-		/// Создаёт экземпляр элемента управления, отображающего список директив
-		///</summary>
-		///<param name="currentAircraft">ВС, которому принадлежат директивы</param>
-		///<param name="primaryDirectiveType"></param>
-		///<param name="adType"></param>
-		public DirectiveFleetListScreen(Aircraft currentAircraft, DirectiveType primaryDirectiveType, ADType adType = ADType.None) : this()
-		{
-			if (currentAircraft == null)
-				throw new ArgumentNullException("currentAircraft");
-			CurrentAircraft = currentAircraft;
-			StatusTitle = currentAircraft.RegistrationNumber + " " + primaryDirectiveType.CommonName;
-
-			_currentAircraft = currentAircraft;
-			_currentPrimaryDirectiveType = primaryDirectiveType;
-			_adType = adType;
-
-			PrimeDirectiveListView directiveList;
-			if (primaryDirectiveType == DirectiveType.DamagesRequiring)
-			{
-				directiveList = new DamageDirectiveListView();
-				_filter = new CommonFilterCollection(typeof(DamageItem));
-#if KAC
-				_builder = new DirectivesReportBuilderKAC();
-#else
-				_builder = new DirectivesReportBuilder();
-#endif
-				_builder.ReportTitle = _currentPrimaryDirectiveType.CommonName;
-			}
-			else if (primaryDirectiveType == DirectiveType.DeferredItems)
-			{
-				directiveList = new DefferedDirectiveListView();
-				_filter = new CommonFilterCollection(typeof(DeferredItem));
-				_builder = new DeferredListReportBuilder();
-			}
-			else if (primaryDirectiveType == DirectiveType.ModificationStatus)
-			{
-				directiveList = new PrimeDirectiveListView(primaryDirectiveType);
-				buttonAddNew.Visible = false;
-				_filter = new CommonFilterCollection(typeof(Directive));
-#if KAC
-				_builder = new DirectivesReportBuilderKAC();
-#else
-				_builder = new DirectivesReportBuilder();
-#endif
-				_builder.ReportTitle = _currentPrimaryDirectiveType.CommonName;
-			}
-			else if (primaryDirectiveType == DirectiveType.OutOfPhase)
-			{
-				directiveList = new OutOfPhaseDirectiveListView();
-				_filter = new CommonFilterCollection(typeof(Directive));
-#if KAC
-				_builder = new DirectivesReportBuilderKAC();
-#else
-				_builder = new DirectivesReportBuilder();
-#endif
-				_builder.ReportTitle = _currentPrimaryDirectiveType.CommonName;
-			}
-			else
-			{
-				directiveList = new PrimeDirectiveListView(primaryDirectiveType);
-				_filter = new CommonFilterCollection(typeof(Directive));
-#if KAC
-				_builder = new DirectivesReportBuilderKAC();
-				if(primaryDirectiveType == DirectiveType.SB)
-					_builder.ReportTitle = "SB Status";
-				else if(primaryDirectiveType == DirectiveType.AirworthenessDirectives)
-					_builder.ReportTitle = adType == ADType.None ? "AD Status" : adType == ADType.Airframe ? "Airframe AD Status" : "Appliance AD \nStatus";
-				else _builder.ReportTitle = _currentPrimaryDirectiveType.CommonName;
-#else
-				_builder = new DirectivesReportBuilder();
-				_builder.ReportTitle = _currentPrimaryDirectiveType.CommonName;
-#endif
-			}
-#if !DEBUG
-			buttonImportExcel.Visible = false;
-			pictureBoxS3.Visible = false;
-#endif
-			InitToolStripMenuItems();
-			InitPrintToolStripMenuItems();
-			InitListView(directiveList);
-		}
-
-		#endregion
 
 		#endregion
 
@@ -323,62 +102,15 @@ namespace CAS.UI.UIControls.DirectivesControls
 			_initialDirectiveArray.Clear();
 			_initialDirectiveArray = null;
 
-			_openPubWorkPackages.Clear();
-			_openPubWorkPackages = null;
-
-			_openPubQuotations.Clear();
-			_openPubQuotations = null;
-
-			if (_currentForecast != null)
-			{
-				_currentForecast.Dispose();
-				_currentForecast = null;
-			}
-
-			if (_currentForecast != null) _currentForecast.Clear();
-			_currentForecast = null;
-
 			if (_toolStripMenuItemShowADFile != null) _toolStripMenuItemShowADFile.Dispose();
 			if (_toolStripMenuItemShowSBFile != null) _toolStripMenuItemShowSBFile.Dispose();
 			if (_toolStripMenuItemShowEOFile != null) _toolStripMenuItemShowEOFile.Dispose();
 			if (_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
-			if (_toolStripMenuItemComposeWorkPackage != null) _toolStripMenuItemComposeWorkPackage.Dispose();
-			if (_toolStripMenuItemComposeQuotationOrder != null) _toolStripMenuItemComposeQuotationOrder.Dispose();
-			if (_toolStripMenuItemCopy != null) _toolStripMenuItemCopy.Dispose();
-			if (_toolStripMenuItemPaste != null) _toolStripMenuItemPaste.Dispose();
 			if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
-			if (_toolStripMenuItemHighlight != null)
-			{
-				foreach (RadMenuItem ttmi in _toolStripMenuItemHighlight.Items)
-				{
-					ttmi.Click -= HighlightItemClick;
-				}
-				_toolStripMenuItemHighlight.Items.Clear();
-				_toolStripMenuItemHighlight.Dispose();
-			}
 			if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
 			if (_toolStripSeparator2 != null) _toolStripSeparator2.Dispose();
 			if (_toolStripSeparator4 != null) _toolStripSeparator4.Dispose();
 			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
-			if (_toolStripMenuItemQuotations != null)
-			{
-				foreach (RadMenuItem item in _toolStripMenuItemQuotations.Items)
-				{
-					item.Click -= AddToQuotationOrderItemClick;
-				}
-				_toolStripMenuItemQuotations.Items.Clear();
-				_toolStripMenuItemQuotations.Dispose();
-			}
-			if (_toolStripMenuItemsWorkPackages != null)
-			{
-				foreach (RadMenuItem item in _toolStripMenuItemsWorkPackages.Items)
-				{
-					item.Click -= AddToWorkPackageItemClick;
-				}
-				_toolStripMenuItemsWorkPackages.Items.Clear();
-				_toolStripMenuItemsWorkPackages.Dispose();
-			}
-
 			if (_directivesViewer != null) _directivesViewer.Dispose();
 
 			Dispose(true);
@@ -390,7 +122,19 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
+			_directivesViewer.SetItemsArray(_resultDirectiveArray.ToArray());
 
+			var resultList = new List<Directive>();
+			var list = _directivesViewer.radGridView1.Rows.Select(i => i).ToList();
+			list.Sort(new DirectiveGridViewDataRowInfoComparer(0, -1));
+
+			foreach (var item in list)
+				resultList.Add(item.Tag as Directive);
+
+			_directivesViewer.SetItemsArray(resultList.ToArray());
+
+			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
+			_directivesViewer.Focus();
 		}
 
 		#endregion
@@ -398,7 +142,60 @@ namespace CAS.UI.UIControls.DirectivesControls
 		#region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
 		protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
 		{
+			AnimatedThreadWorker.ReportProgress(0, "load directives");
 
+			if (!string.IsNullOrEmpty(TextBoxFilter.Text))
+			{
+				var dir = new List<Directive>();
+
+				try
+				{
+					dir.AddRange(GlobalObjects.DirectiveCore.GetDirectivesFromAllAircrafts(DirectiveType.AirworthenessDirectives, TextBoxFilter.Text));
+				}
+				catch (Exception ex)
+				{
+					Program.Provider.Logger.Log("Error while loading directives", ex);
+				}
+
+
+				AnimatedThreadWorker.ReportProgress(40, "filter directives");
+
+				#region Калькуляция состояния директив
+
+				AnimatedThreadWorker.ReportProgress(60, "calculation of directives");
+
+				foreach (Directive pd in dir)
+				{
+					var aircrraft =
+						GlobalObjects.AircraftsCore.GetAircraftById(pd.ParentBaseComponent?.ParentAircraftId ?? -1);
+
+					if (aircrraft != null)
+					{
+						GlobalObjects.PerformanceCalculator.GetNextPerformance(pd);
+						_initialDirectiveArray.Add(pd);
+					}
+				}
+
+				AnimatedThreadWorker.ReportProgress(70, "filter directives");
+
+				FilterItems(_initialDirectiveArray, _resultDirectiveArray);
+
+				if (AnimatedThreadWorker.CancellationPending)
+				{
+					e.Cancel = true;
+					return;
+				}
+
+
+				if (AnimatedThreadWorker.CancellationPending)
+				{
+					e.Cancel = true;
+					return;
+				}
+				#endregion
+
+				AnimatedThreadWorker.ReportProgress(100, "Complete");
+			}
 		}
 		#endregion
 
@@ -443,14 +240,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemChangeToAd = new RadMenuItem();
 			_toolStripMenuItemOpen = new RadMenuItem();
-			_toolStripMenuItemComposeWorkPackage = new RadMenuItem();
-			_toolStripMenuItemsWorkPackages = new RadMenuItem();
-			_toolStripMenuItemComposeQuotationOrder = new RadMenuItem();
-			_toolStripMenuItemQuotations = new RadMenuItem();
-			_toolStripMenuItemCopy = new RadMenuItem();
-			_toolStripMenuItemPaste = new RadMenuItem();
 			_toolStripMenuItemDelete = new RadMenuItem();
-			_toolStripMenuItemHighlight = new RadMenuItem();
 			_toolStripMenuItemShowADFile = new RadMenuItem();
 			_toolStripMenuItemShowSBFile = new RadMenuItem();
 			_toolStripMenuItemShowEOFile = new RadMenuItem();
@@ -473,10 +263,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			_toolStripMenuItemOpen.Text = "Open";
 			_toolStripMenuItemOpen.Click += ToolStripMenuItemOpenClick;
 			// 
-			// toolStripMenuItemHighlight
-			// 
-			_toolStripMenuItemHighlight.Text = "Highlight";
-			// 
 			// _toolStripMenuItemShowADFile
 			// 
 			_toolStripMenuItemShowADFile.Text = "Show AD File";
@@ -491,61 +277,14 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			_toolStripMenuItemShowEOFile.Text = "Show EO File";
 			_toolStripMenuItemShowEOFile.Click += ToolStripMenuItemShowTaskCardClick;
-			//
-			// toolStripMenuItemComposeWorkPackage
-			//
-			_toolStripMenuItemComposeWorkPackage.Text = "Compose a work package";
-			_toolStripMenuItemComposeWorkPackage.Click += ButtonCreateWorkPakageClick;
-			//
-			// _toolStripMenuItemsWorkPackages
-			//
-			_toolStripMenuItemsWorkPackages.Text = "Add to Work package";
-			//
-			// toolStripMenuItemComposeWorkPackage
-			//
-			_toolStripMenuItemComposeQuotationOrder.Text = "Compose quotation order";
-			_toolStripMenuItemComposeQuotationOrder.Click += ToolStripMenuItemComposeQuotationClick;
-			//
-			// toolStripMenuItemComposeWorkPackage
-			//
-			_toolStripMenuItemQuotations.Text = "Add to Quotation Order";
 			// 
 			// toolStripMenuItemDelete
 			// 
 			_toolStripMenuItemDelete.Text = "Delete";
 			_toolStripMenuItemDelete.Click += ButtonDeleteClick;
-			// 
-			// toolStripMenuItemCopy
-			// 
-			_toolStripMenuItemCopy.Text = "Copy";
-			_toolStripMenuItemCopy.Click += CopyItemsClick;
 
-			// 
-			// toolStripMenuItemPaste
-			// 
-			_toolStripMenuItemPaste.Text = "Paste";
-			_toolStripMenuItemPaste.Click += PasteItemsClick;
 
 			_contextMenuStrip.Items.Clear();
-			_toolStripMenuItemsWorkPackages.Items.Clear();
-			_toolStripMenuItemHighlight.Items.Clear();
-
-			foreach (Highlight highlight in Highlight.HighlightList)
-			{
-				if (highlight == Highlight.Blue || highlight == Highlight.Yellow || highlight == Highlight.Red)
-					continue;
-				RadMenuItem item = new RadMenuItem(highlight.FullName);
-				item.Click += HighlightItemClick;
-				item.Tag = highlight;
-				_toolStripMenuItemHighlight.Items.Add(item);
-			}
-
-			if (_currentPrimaryDirectiveType == DirectiveType.SB)
-			{
-				_contextMenuStrip.Items.AddRange(
-					_toolStripMenuItemChangeToAd,
-					new RadMenuSeparatorItem());
-			}
 
 			_contextMenuStrip.Items.AddRange(
 				_toolStripMenuItemOpen,
@@ -553,16 +292,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 				_toolStripMenuItemShowSBFile,
 				_toolStripMenuItemShowEOFile,
 				new RadMenuSeparatorItem(),
-				_toolStripMenuItemHighlight,
-				_toolStripSeparator2,
-				_toolStripMenuItemComposeWorkPackage,
-				_toolStripMenuItemsWorkPackages,
-				_toolStripSeparator1,
-				_toolStripMenuItemComposeQuotationOrder,
-				_toolStripMenuItemQuotations,
 				_toolStripSeparator4,
-				_toolStripMenuItemCopy,
-				_toolStripMenuItemPaste,
 				_toolStripMenuItemDelete
 			);
 		}
@@ -578,182 +308,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 			GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate<Directive, DirectiveDTO>(_directivesViewer.SelectedItems.Cast<BaseEntityObject>().ToList());
 			AnimatedThreadWorker.RunWorkerAsync();
-		}
-
-		#endregion
-
-		#region private void InitPrintToolStripMenuItems()
-
-		private void InitPrintToolStripMenuItems()
-		{
-			buttonPrintMenuStrip = new ContextMenuStrip();
-			itemPrintReportAD = new ToolStripMenuItem { Text = "AD All" };
-			itemPrintReportAMP = new ToolStripMenuItem { Text = "MP AD, SB, STC & REPAIR" };
-			itemPrintReportADLitAVIA = new ToolStripMenuItem { Text = "AD LA" };
-			itemPrintReportADLitAVIAEng = new ToolStripMenuItem { Text = "AD Eng LA" };
-
-
-			if (_currentBaseComponent != null && _currentBaseComponent.BaseComponentType == BaseComponentType.Frame)
-				buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { itemPrintReportAD, itemPrintReportAMP, itemPrintReportADLitAVIA });
-			else if (_currentBaseComponent != null && _currentBaseComponent.BaseComponentType == BaseComponentType.Engine)
-				buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { itemPrintReportAD, itemPrintReportAMP, itemPrintReportADLitAVIAEng });
-			else buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { itemPrintReportAD, itemPrintReportAMP });
-
-			ButtonPrintMenuStrip = buttonPrintMenuStrip;
-		}
-
-		#endregion
-
-		#region private void HighlightItemClick(object sender, EventArgs e)
-
-		private void HighlightItemClick(object sender, EventArgs e)
-		{
-			for (int i = 0; i < _directivesViewer.SelectedItems.Count; i++)
-			{
-				Highlight highLight = (Highlight)((RadMenuItem)sender).Tag;
-
-				_directivesViewer.SelectedItems[i].Highlight = highLight;
-				foreach (GridViewCellInfo cell in _directivesViewer.radGridView1.SelectedRows[i].Cells)
-				{
-					cell.Style.CustomizeFill = true;
-					cell.Style.BackColor = Color.FromArgb(highLight.Color);
-				}
-			}
-		}
-
-		#endregion
-
-		#region private void ButtonCreateWorkPakageClick(object sender, EventArgs e)
-
-		private void ButtonCreateWorkPakageClick(object sender, EventArgs e)
-		{
-			if (_directivesViewer.SelectedItems.Count <= 0) return;
-
-			if (MessageBox.Show("Create and save a Work Package?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-			{
-				List<NextPerformance> wpItems = _directivesViewer.SelectedItems
-					.Where(i => i.NextPerformances.Count > 0)
-					.Select(i => i.NextPerformance)
-					.ToList();
-
-				try
-				{
-					//TODO:(Evgenii Babak) запрещать создавать WP, если агрегат на складе
-					var a = _currentAircraft != null
-								? _currentAircraft
-								: GlobalObjects.AircraftsCore.GetAircraftById(_currentBaseComponent.ParentAircraftId);
-					string message;
-					var wp = GlobalObjects.WorkPackageCore.AddWorkPakage(wpItems, a, out message);
-					if (wp == null)
-					{
-						MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
-										MessageBoxButtons.OK, MessageBoxIcon.Error);
-						return;
-					}
-					//Добавление нового рабочего пакета в коллекцию открытых рабочих пакетов
-					_openPubWorkPackages.Add(wp);
-					//Создание пункта в меню открытых рабочих пакетов
-					RadMenuItem item = new RadMenuItem(wp.Title);
-					item.Click += AddToWorkPackageItemClick;
-					item.Tag = wp;
-					_toolStripMenuItemsWorkPackages.Items.Add(item);
-
-					foreach (NextPerformance nextPerformance in wpItems)
-					{
-						nextPerformance.BlockedByPackage = wp;
-						_directivesViewer.UpdateItemColor();
-					}
-					ReferenceEventArgs refArgs = new ReferenceEventArgs();
-					refArgs.TypeOfReflection = ReflectionTypes.DisplayInNew;
-					refArgs.DisplayerText = CurrentAircraft != null ? CurrentAircraft.RegistrationNumber + "." + wp.Title : wp.Title;
-					refArgs.RequestedEntity = new WorkPackageScreen(wp);
-					InvokeDisplayerRequested(refArgs);
-				}
-				catch (Exception ex)
-				{
-					Program.Provider.Logger.Log("error while create Work Package", ex);
-				}
-			}
-		}
-		#endregion
-
-		#region private void AddToWorkPackageItemClick(object sender, EventArgs e)
-
-		private void AddToWorkPackageItemClick(object sender, EventArgs e)
-		{
-			if (_directivesViewer.SelectedItems.Count <= 0) return;
-
-			var wp = (WorkPackage)((RadMenuItem)sender).Tag;
-
-			if (MessageBox.Show("Add item to Work Package: " + wp.Title + "?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) ==
-				DialogResult.Yes)
-			{
-				List<NextPerformance> wpItems = _directivesViewer.SelectedItems
-					.Where(i => i.NextPerformances.Count > 0)
-					.Select(i => i.NextPerformance)
-					.ToList();
-
-				try
-				{
-					string message;
-					var a = _currentAircraft != null
-								? _currentAircraft
-								: GlobalObjects.AircraftsCore.GetAircraftById(_currentBaseComponent.ParentAircraftId);
-					if (!GlobalObjects.WorkPackageCore.AddToWorkPakage(wpItems, wp.ItemId, a, out message))
-					{
-						MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
-										MessageBoxButtons.OK, MessageBoxIcon.Error);
-						return;
-					}
-
-					foreach (NextPerformance nextPerformance in wpItems)
-					{
-						nextPerformance.BlockedByPackage = wp;
-						_directivesViewer.UpdateItemColor();
-					}
-
-					if (MessageBox.Show("Items added successfully. Open work package?", (string)new GlobalTermsProvider()["SystemName"],
-										 MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2)
-										== DialogResult.Yes)
-					{
-						ReferenceEventArgs refArgs = new ReferenceEventArgs();
-						refArgs.TypeOfReflection = ReflectionTypes.DisplayInNew;
-						refArgs.DisplayerText = CurrentAircraft != null ? CurrentAircraft.RegistrationNumber + "." + wp.Title : wp.Title;
-						refArgs.RequestedEntity = new WorkPackageScreen(wp);
-						InvokeDisplayerRequested(refArgs);
-					}
-				}
-				catch (Exception ex)
-				{
-					Program.Provider.Logger.Log("error while create Work Package", ex);
-				}
-			}
-		}
-
-		#endregion
-
-		#region private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
-		/// <summary>
-		/// Создает закупочный ордер
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
-		{
-			PurchaseManager.ComposeQuotationOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
-		}
-
-		#endregion
-
-		#region private void AddToQuotationOrderItemClick(object sender, EventArgs e)
-
-		private void AddToQuotationOrderItemClick(object sender, EventArgs e)
-		{
-			if (_directivesViewer.SelectedItems.Count <= 0) return;
-
-			RequestForQuotation wp = (RequestForQuotation)((RadMenuItem)sender).Tag;
-
-			PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
 		}
 
 		#endregion
@@ -845,27 +399,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 		#endregion
 
-		#region private void CopyItemsClick(object sender, EventArgs e)
-
-		private void CopyItemsClick(object sender, EventArgs e)
-		{
-			CopyToClipboard();
-		}
-
-		#endregion
-
-		#region private void PasteItemsClick(object sender, EventArgs e)
-
-		private void PasteItemsClick(object sender, EventArgs e)
-		{
-			GetFromClipboard();
-		}
-
-		#endregion
-
 		#region private void InitListView()
 
-		private void InitListView(PrimeDirectiveListView directiveListView)
+		private void InitListView(DirectiveFleetListView directiveListView)
 		{
 			_directivesViewer = directiveListView;
 			_directivesViewer.TabIndex = 2;
@@ -886,11 +422,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 					_toolStripMenuItemShowADFile.Enabled = false;
 					_toolStripMenuItemShowSBFile.Enabled = false;
 					_toolStripMenuItemShowEOFile.Enabled = false;
-					_toolStripMenuItemHighlight.Enabled = false;
-					_toolStripMenuItemComposeWorkPackage.Enabled = false;
-					_toolStripMenuItemsWorkPackages.Enabled = false;
-					_toolStripMenuItemComposeQuotationOrder.Enabled = false;
-					_toolStripMenuItemQuotations.Enabled = false;
 					_toolStripMenuItemDelete.Enabled = false;
 
 				}
@@ -931,11 +462,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 				if (_directivesViewer.SelectedItems.Count > 0)
 				{
 					_toolStripMenuItemOpen.Enabled = true;
-					_toolStripMenuItemHighlight.Enabled = true;
-					_toolStripMenuItemComposeWorkPackage.Enabled = true;
-					_toolStripMenuItemsWorkPackages.Enabled = true;
-					_toolStripMenuItemComposeQuotationOrder.Enabled = true;
-					_toolStripMenuItemQuotations.Enabled = true;
 					_toolStripMenuItemDelete.Enabled = true;
 				}
 			};
@@ -966,83 +492,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 		}
 		#endregion
 
-		#region private void HeaderControlButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
-		private void HeaderControlButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
-		{
-			if (_currentAircraft != null)
-				e.DisplayerText = _currentAircraft.RegistrationNumber + ". " + ReportText + " Report";
-			else if (_currentBaseComponent != null)
-				e.DisplayerText = _currentBaseComponent + ". " + ReportText + " Report";
-			else
-				e.DisplayerText = ReportText + " Report";
-			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-
-			_builder.DateAsOf = DateTime.Today.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
-			_builder.DirectiveType = _currentPrimaryDirectiveType;
-
-
-			if (sender == itemPrintReportAMP)
-			{
-				_amReportBuilder.ReportedAircraft = CurrentAircraft;
-				_amReportBuilder.ReportTitle = "SECTION 6 –ADs, SBs, STCs & REPAIRs INSTRUCTIONS FOR CONTINUED AIRWORTHINESS (ICA)";
-				_amReportBuilder.AddDirectives(_directivesViewer.GetItemsArray());
-				e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "MP AD, SB, STC & REPAIR";
-				e.RequestedEntity = new ReportScreen(_amReportBuilder);
-				GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "DirectiveFleetListScreen (MP AD, SB, STC & REPAIR)");
-			}
-			else if (sender == itemPrintReportADLitAVIA)
-			{
-				_builderLitAVIA.DateAsOf = DateTime.Today.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
-				_builderLitAVIA.ReportedAircraft = CurrentAircraft;
-				_builderLitAVIA.AddDirectives(_directivesViewer.GetItemsArray());
-				e.RequestedEntity = new ReportScreen(_builderLitAVIA);
-				GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "DirectiveFleetListScreen (AD LA)");
-			}
-			else if (sender == itemPrintReportADLitAVIAEng)
-			{
-				_builderLitAviaEng.DateAsOf = DateTime.Today.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
-				_builderLitAviaEng.ReportedBaseComponent = _currentBaseComponent;
-				_builderLitAviaEng.AddDirectives(_directivesViewer.GetItemsArray());
-				e.RequestedEntity = new ReportScreen(_builderLitAviaEng);
-				GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "DirectiveFleetListScreen (AD Eng LA)");
-			}
-			else if (sender == itemPrintReportAD)
-			{
-				if (_currentAircraft != null)
-				{
-					_builder.ReportedAircraft = CurrentAircraft;
-					_builder.FilterSelection = _filter;
-					_builder.AddDirectives(_directivesViewer.GetItemsArray());
-					_builder.Forecast = _currentForecast;
-					e.RequestedEntity = new ReportScreen(_builder);
-					GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "DirectiveFleetListScreen (AD All)");
-				}
-				else
-				{
-					if (_currentBaseComponent != null)
-					{
-						_builder.LifelengthAircraftSinceNew =
-							GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(CurrentAircraft);
-						_builder.ReportedBaseComponent = _currentBaseComponent;
-						_builder.FilterSelection = _filter;
-						_builder.AddDirectives(_directivesViewer.GetItemsArray());
-						_builder.Forecast = _currentForecast;
-						e.RequestedEntity = new ReportScreen(_builder);
-						GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "DirectiveFleetListScreen (AD All)");
-					}
-					else
-					{
-						e.Cancel = true;
-					}
-				}
-			}
-			else
-			{
-				e.Cancel = true;
-			}
-		}
-		#endregion
-
 		#region private void HeaderControlSaveButtonClick(object sender, System.EventArgs e)
 		private void HeaderControlSaveButtonClick(object sender, System.EventArgs e)
 		{
@@ -1065,43 +514,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 				Program.Provider.Logger.Log("Error while save directive from directives list", ex);
 			}
 		}
-		#endregion
-
-		#region private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
-
-		private void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
-		{
-			e.DisplayerText = CurrentAircraft != null
-				? CurrentAircraft.RegistrationNumber
-				: CurrentStore != null ? CurrentStore.Name : "";
-			if (_currentBaseComponent != null && _currentBaseComponent.BaseComponentType != BaseComponentType.Frame)
-				e.DisplayerText += ". " + _currentBaseComponent;
-			e.DisplayerText += ". " + _currentPrimaryDirectiveType.CommonName + ". New Directive";
-			if (_currentBaseComponent != null)
-			{
-				var parentAircraft = GlobalObjects.AircraftsCore.GetAircraftById(_currentBaseComponent.ParentAircraftId);//TODO:(Evgenii Babak) пересмотреть использование ParentAircrafId здесь
-				if (_currentPrimaryDirectiveType == DirectiveType.OutOfPhase)
-					e.RequestedEntity = new OutOfPhaseReferenceScreen(parentAircraft);
-				else if (_currentPrimaryDirectiveType == DirectiveType.DamagesRequiring)
-					e.RequestedEntity = new DamageDirectiveScreen(parentAircraft);
-				else if (_currentPrimaryDirectiveType == DirectiveType.DeferredItems)
-					e.RequestedEntity = new DeferredScreen(parentAircraft);
-				else
-					e.RequestedEntity = new DirectiveScreen(_currentBaseComponent, _currentPrimaryDirectiveType);
-			}
-			else
-			{
-				if (_currentPrimaryDirectiveType == DirectiveType.OutOfPhase)
-					e.RequestedEntity = new OutOfPhaseReferenceScreen(CurrentAircraft);
-				else if (_currentPrimaryDirectiveType == DirectiveType.DamagesRequiring)
-					e.RequestedEntity = new DamageDirectiveScreen(CurrentAircraft);
-				else if (_currentPrimaryDirectiveType == DirectiveType.DeferredItems)
-					e.RequestedEntity = new DeferredScreen(CurrentAircraft);
-				else
-					e.RequestedEntity = new DirectiveScreen(CurrentAircraft, _currentPrimaryDirectiveType);
-			}
-		}
-
 		#endregion
 
 		#region private void ButtonApplyFilterClick(object sender, EventArgs e)
@@ -1211,285 +623,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 		#endregion
 
-		#region private void ForecastMenuClick(object sender, EventArgs e)
-		private void ForecastMenuClick(object sender, EventArgs e)
-		{
-			List<BaseComponent> aircraftBaseComponents;
-			if (_currentForecast != null) _currentForecast.ForecastDatas.Clear();
-
-			switch ((string)sender)
-			{
-				case "No Forecast":
-					{
-						_currentForecast = null;
-						labelDateAsOf.Visible = false;
-					}
-					break;
-				case "Today":
-					{
-						if (_currentAircraft != null)
-						{
-							_currentForecast = new Forecast { Aircraft = _currentAircraft, ForecastDate = DateTime.Today };
-							//поиск деталей данного самолета 
-							aircraftBaseComponents = new List<BaseComponent>(GlobalObjects.ComponentCore.GetAicraftBaseComponents(CurrentAircraft.ItemId));
-							//составление нового массива данных по прогноза
-							foreach (var baseComponent in aircraftBaseComponents)
-							{
-								//определение ресурсов прогноза для каждой базовой детали
-								ForecastData forecastData =
-									new ForecastData(DateTime.Today,
-													 baseComponent,
-													 GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(baseComponent));
-								//дабавление в массив
-								_currentForecast.ForecastDatas.Add(forecastData);
-							}
-							ForecastData main = _currentForecast.GetForecastDataFrame() ??
-												_currentForecast.ForecastDatas[0];
-
-							labelDateAsOf.Visible = true;
-							labelDateAsOf.Text =
-								"Forecast date: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.ForecastDate) +
-								 " Aircraft TSN/CSN: " + main.ForecastLifelength +
-								 "\nAvg. utlz: " + main.AverageUtilization;
-						}
-						else if (_currentBaseComponent != null)
-						{
-							_currentForecast = new Forecast { Aircraft = _currentAircraft, ForecastDate = DateTime.Today };
-							ForecastData forecastData =
-									new ForecastData(DateTime.Today,
-													 _currentBaseComponent,
-													 GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(_currentBaseComponent));
-							_currentForecast.ForecastDatas.Add(forecastData);
-							labelDateAsOf.Visible = true;
-							labelDateAsOf.Text =
-								"Forecast date: " + SmartCore.Auxiliary.Convert.GetDateFormat(forecastData.ForecastDate) +
-								 " Component TSN/CSN: " + forecastData.ForecastLifelength +
-								 "\nAvg. utlz: " + forecastData.AverageUtilization;
-						}
-					}
-					break;
-				case "This week":
-					{
-						if (_currentAircraft != null)
-						{
-							_currentForecast = new Forecast
-							{
-								Aircraft = _currentAircraft,
-								ForecastDate = DateTime.Today.AddDays(7)
-							};
-							//поиск деталей данного самолета 
-							aircraftBaseComponents = new List<BaseComponent>(GlobalObjects.ComponentCore.GetAicraftBaseComponents(CurrentAircraft.ItemId));
-							//составление нового массива данных по прогноза
-							foreach (var baseComponent in aircraftBaseComponents)
-							{
-								//определение ресурсов прогноза для каждой базовой детали
-								ForecastData forecastData =
-									new ForecastData(DateTime.Today.AddDays(7),
-													 baseComponent,
-													 GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(baseComponent));
-								//дабавление в массив
-								_currentForecast.ForecastDatas.Add(forecastData);
-							}
-							ForecastData main = _currentForecast.GetForecastDataFrame() ??
-												_currentForecast.ForecastDatas[0];
-
-							labelDateAsOf.Visible = true;
-							labelDateAsOf.Text =
-								"Forecast date: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.ForecastDate) +
-								 " Aircraft TSN/CSN: " + main.ForecastLifelength +
-								 "\nAvg. utlz: " + main.AverageUtilization;
-						}
-						else if (_currentBaseComponent != null)
-						{
-							_currentForecast = new Forecast { Aircraft = _currentAircraft, ForecastDate = DateTime.Today.AddDays(7) };
-							ForecastData forecastData =
-									new ForecastData(DateTime.Today.AddDays(7),
-													 _currentBaseComponent,
-													 GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(_currentBaseComponent));
-							_currentForecast.ForecastDatas.Add(forecastData);
-							labelDateAsOf.Visible = true;
-							labelDateAsOf.Text =
-								"Forecast date: " + SmartCore.Auxiliary.Convert.GetDateFormat(forecastData.ForecastDate) +
-								 " Component TSN/CSN: " + forecastData.ForecastLifelength +
-								 "\nAvg. utlz: " + forecastData.AverageUtilization;
-						}
-					}
-					break;
-				case "Two weeks":
-					{
-						if (_currentAircraft != null)
-						{
-							_currentForecast = new Forecast { Aircraft = _currentAircraft, ForecastDate = DateTime.Today.AddDays(14) };
-							//поиск деталей данного самолета 
-							aircraftBaseComponents = new List<BaseComponent>(GlobalObjects.ComponentCore.GetAicraftBaseComponents(CurrentAircraft.ItemId));
-							//составление нового массива данных по прогноза
-							foreach (var baseComponent in aircraftBaseComponents)
-							{
-								//определение ресурсов прогноза для каждой базовой детали
-								ForecastData forecastData =
-									new ForecastData(DateTime.Today.AddDays(14),
-													 baseComponent,
-													 GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(baseComponent));
-								//дабавление в массив
-								_currentForecast.ForecastDatas.Add(forecastData);
-							}
-							ForecastData main = _currentForecast.GetForecastDataFrame() ??
-												_currentForecast.ForecastDatas[0];
-
-							labelDateAsOf.Visible = true;
-							labelDateAsOf.Text =
-								"Forecast date: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.ForecastDate) +
-								 " Aircraft TSN/CSN: " + main.ForecastLifelength +
-								 "\nAvg. utlz: " + main.AverageUtilization;
-						}
-						else if (_currentBaseComponent != null)
-						{
-							_currentForecast = new Forecast { Aircraft = _currentAircraft, ForecastDate = DateTime.Today.AddDays(14) };
-							ForecastData forecastData =
-									new ForecastData(DateTime.Today.AddDays(14),
-													 _currentBaseComponent,
-													 GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(_currentBaseComponent));
-							_currentForecast.ForecastDatas.Add(forecastData);
-							labelDateAsOf.Visible = true;
-							labelDateAsOf.Text =
-								"Forecast date: " + SmartCore.Auxiliary.Convert.GetDateFormat(forecastData.ForecastDate) +
-								 " Component TSN/CSN: " + forecastData.ForecastLifelength +
-								 "\nAvg. utlz: " + forecastData.AverageUtilization;
-						}
-					}
-					break;
-				case "Month":
-					{
-						if (_currentAircraft != null)
-						{
-							_currentForecast = new Forecast { Aircraft = _currentAircraft, ForecastDate = DateTime.Today.AddMonths(1) };
-							//поиск деталей данного самолета 
-							aircraftBaseComponents = new List<BaseComponent>(GlobalObjects.ComponentCore.GetAicraftBaseComponents(CurrentAircraft.ItemId));
-							//составление нового массива данных по прогноза
-							foreach (var baseComponent in aircraftBaseComponents)
-							{
-								//определение ресурсов прогноза для каждой базовой детали
-								ForecastData forecastData =
-									new ForecastData(DateTime.Today.AddMonths(1),
-													 baseComponent,
-													 GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(baseComponent));
-								//дабавление в массив
-								_currentForecast.ForecastDatas.Add(forecastData);
-							}
-							ForecastData main = _currentForecast.GetForecastDataFrame() ??
-												_currentForecast.ForecastDatas[0];
-
-							labelDateAsOf.Visible = true;
-							labelDateAsOf.Text =
-								"Forecast date: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.ForecastDate) +
-								 " Aircraft TSN/CSN: " + main.ForecastLifelength +
-								 "\nAvg. utlz: " + main.AverageUtilization;
-						}
-						else if (_currentBaseComponent != null)
-						{
-							_currentForecast = new Forecast { Aircraft = _currentAircraft, ForecastDate = DateTime.Today.AddMonths(1) };
-							ForecastData forecastData =
-									new ForecastData(DateTime.Today.AddMonths(1),
-													 _currentBaseComponent,
-													 GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(_currentBaseComponent));
-							_currentForecast.ForecastDatas.Add(forecastData);
-							labelDateAsOf.Visible = true;
-							labelDateAsOf.Text =
-								"Forecast date: " + SmartCore.Auxiliary.Convert.GetDateFormat(forecastData.ForecastDate) +
-								 " Component TSN/CSN: " + forecastData.ForecastLifelength +
-								 "\nAvg. utlz: " + forecastData.AverageUtilization;
-						}
-					}
-					break;
-				case "Custom":
-					{
-						if (_currentAircraft != null)
-						{
-							_currentForecast = new Forecast { Aircraft = _currentAircraft };
-							//поиск деталей данного самолета 
-							aircraftBaseComponents = new List<BaseComponent>(GlobalObjects.ComponentCore.GetAicraftBaseComponents(CurrentAircraft.ItemId));
-							//составление нового массива данных по прогноза
-							foreach (var baseComponent in aircraftBaseComponents)
-							{
-								//определение ресурсов прогноза для каждой базовой детали
-								ForecastData forecastData =
-									new ForecastData(DateTime.Today,
-													 baseComponent,
-													 GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(baseComponent));
-								//дабавление в массив
-								_currentForecast.ForecastDatas.Add(forecastData);
-							}
-						}
-						else if (_currentBaseComponent != null)
-						{
-							_currentForecast = new Forecast { Aircraft = _currentAircraft };
-							ForecastData forecastData =
-									new ForecastData(DateTime.Today,
-													 _currentBaseComponent,
-													 GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(_currentBaseComponent));
-							_currentForecast.ForecastDatas.Add(forecastData);
-						}
-						else return;
-
-						ForecastData main = _currentForecast.GetForecastDataFrame() ?? _currentForecast.ForecastDatas[0];
-						ForecastCustomsWriteData form = new ForecastCustomsWriteData(_currentForecast);
-						ForecastCustomsAdvancedForm advancedForm = new ForecastCustomsAdvancedForm(_currentForecast);
-
-						form.ShowDialog();
-
-						if (form.DialogResult != DialogResult.OK && form.CallAdvanced)
-							advancedForm.ShowDialog();
-
-						if (form.DialogResult == DialogResult.OK || advancedForm.DialogResult == DialogResult.OK)
-						{
-							if (main.SelectedForecastType == ForecastType.ForecastByDate)
-							{
-								if (CurrentAircraft != null)
-									labelDateAsOf.Text =
-										"Forecast date: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.ForecastDate) +
-										 " Aircraft TSN/CSN: " + main.ForecastLifelength +
-										 "\nAvg. utlz: " + main.AverageUtilization;
-								else
-									labelDateAsOf.Text =
-										"Forecast date: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.ForecastDate) +
-										 " Component TSN/CSN: " + main.ForecastLifelength +
-										 "\nAvg. utlz: " + main.AverageUtilization;
-							}
-							else if (main.SelectedForecastType == ForecastType.ForecastByPeriod)
-							{
-								labelDateAsOf.Text =
-										"Forecast Period From: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.LowerLimit) +
-										" To: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.ForecastDate) +
-										"\nAvg. utlz: " + main.AverageUtilization;
-							}
-							else if (main.SelectedForecastType == ForecastType.ForecastByCheck)
-							{
-								if (main.NextPerformanceByDate)
-								{
-									labelDateAsOf.Text = "Forecast: " + main.NextPerformanceString;
-								}
-								else
-								{
-									labelDateAsOf.Text =
-										string.Format("Forecast: {0}. {1}",
-													   main.CheckName,
-													   main.NextPerformance);
-								}
-							}
-						}
-						else return;
-					}
-					break;
-			}
-			//UpdateDirectives();
-			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
-			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
-			AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
-
-			AnimatedThreadWorker.RunWorkerAsync();
-		}
-		#endregion
-
 		#region private void FilterItems(IEnumerable<Directive> initialCollection, ICommonCollection<Directive> resultCollection)
 
 		///<summary>
@@ -1537,143 +670,14 @@ namespace CAS.UI.UIControls.DirectivesControls
 		}
 		#endregion
 
-		//TODO:(Evgenii Babak) метод не юзается
-		private void releaseObject(object obj)
-		{
-			try
-			{
-				System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
-				obj = null;
-			}
-			catch (Exception ex)
-			{
-				obj = null;
-				MessageBox.Show("Unable to release the object " + ex.ToString());
-			}
-			finally
-			{
-				GC.Collect();
-			}
-		}
-
-		/*
-		 *  Копировать - Вставить - Вырезать
-		 */
-
-		#region private void CopyToClipboard()
-		private void CopyToClipboard()
-		{
-			// регистрация формата данных либо получаем его, если он уже зарегистрирован
-			DataFormats.Format format = DataFormats.GetFormat(typeof(Directive[]).FullName);
-
-			if (_directivesViewer.SelectedItems == null || _directivesViewer.SelectedItems.Count == 0)
-				return;
-
-			//List<Directive> pds = _directivesViewer.SelectedItems;
-			List<Directive> pds = new List<Directive>();
-			var selectedItems = _directivesViewer.SelectedItems.ToArray();
-			foreach (Directive directive in selectedItems)
-			{
-				pds.Add(directive.GetCopyUnsaved());
-			}
-
-			if (pds.Count <= 0)
-				return;
-
-			//todo:(EvgeniiBabak) Нужен другой способ проверки сереализуемости объекта
-			using (System.IO.MemoryStream mem = new System.IO.MemoryStream())
-			{
-				BinaryFormatter bin = new BinaryFormatter();
-				try
-				{
-					bin.Serialize(mem, pds);
-				}
-				catch (Exception ex)
-				{
-					MessageBox.Show("Объект не может быть сериализован. \n" + ex);
-					return;
-				}
-			}
-			// копирование в буфер обмена
-			IDataObject dataObj = new DataObject();
-			dataObj.SetData(format.Name, false, pds.ToArray());
-			Clipboard.SetDataObject(dataObj, false);
-
-			pds.Clear();
-		}
-		#endregion
-
-		#region private void GetFromClipboard()
-
-		private void GetFromClipboard()
-		{
-			try
-			{
-				string format = typeof(Directive[]).FullName;
-
-				if (string.IsNullOrEmpty(format))
-					return;
-				if (!Clipboard.ContainsData(format))
-					return;
-				var pds = (Directive[])Clipboard.GetData(format);
-				if (pds == null)
-					return;
-
-				var objectsToPaste = new List<Directive>();
-				var bd = DirectiveSource is BaseComponent ? (BaseComponent)DirectiveSource : GlobalObjects.ComponentCore.GetBaseComponentById(((Aircraft)DirectiveSource).AircraftFrameId);
-				foreach (Directive pd in pds)
-				{
-					pd.ParentBaseComponent = bd;
-
-					GlobalObjects.PerformanceCalculator.GetNextPerformance(pd);
-					_initialDirectiveArray.Add(pd);
-					_resultDirectiveArray.Add(pd);
-
-					//pd.Title = pd.Title.Insert(0, "Copy of ");
-					if (pd.Title != "N/A")
-						pd.Title += " Copy";
-					else if (!string.IsNullOrEmpty(pd.ServiceBulletinNo))
-						pd.ServiceBulletinNo += " Copy";
-					else pd.EngineeringOrders += " Copy";
-
-					if (bd.BaseComponentType == BaseComponentType.Apu)
-						pd.ADType = ADType.APU;
-					else if (bd.BaseComponentType == BaseComponentType.Engine)
-						pd.ADType = ADType.Engine;
-					else if (bd.BaseComponentType == BaseComponentType.LandingGear)
-						pd.ADType = ADType.LandingGear;
-					else if (bd.BaseComponentType == BaseComponentType.Frame)
-						pd.ADType = ADType.Airframe;
-
-					objectsToPaste.Add(pd);
-				}
-
-				if (objectsToPaste.Count > 0)
-				{
-					_directivesViewer.InsertItems(objectsToPaste.ToArray());
-
-					headerControl.ShowSaveButton = true;
-				}
-
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Объект не может быть сериализован. \n" + ex);
-
-				headerControl.ShowSaveButton = false;
-			}
-			finally
-			{
-				Clipboard.Clear();
-			}
-		}
-		#endregion
-
 		#endregion
 
 		private void ButtonFilterClick(object sender, EventArgs e)
 		{
-			throw new NotImplementedException();
+			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+			AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
+			AnimatedThreadWorker.RunWorkerAsync();
 		}
 	}
 }
