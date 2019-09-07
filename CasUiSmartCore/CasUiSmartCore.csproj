@@ -800,6 +800,30 @@
     <Compile Include="ExcelExport\DirectiveComparer.cs" />
     <Compile Include="ExcelExport\ExcelExportProvider.cs" />
     <Compile Include="Extentions.cs" />
+    <Compile Include="UIControls\Fleet\ComponentsFleetListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Fleet\ComponentsFleetListScreen.Designer.cs">
+      <DependentUpon>ComponentsFleetListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Fleet\ComponentsFleetListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Fleet\ComponentsFleetListView.Designer.cs">
+      <DependentUpon>ComponentsFleetListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Fleet\DirectiveFleetListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Fleet\DirectiveFleetListScreen.Designer.cs">
+      <DependentUpon>DirectiveFleetListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Fleet\DirectiveFleetListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Fleet\DirectiveFleetListView.Designer.cs">
+      <DependentUpon>DirectiveFleetListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\OilControls\Model\OilGraphicModel.cs" />
     <Compile Include="UIControls\OilControls\OilGraphForm.cs">
       <SubType>Form</SubType>
@@ -3930,6 +3954,15 @@
     <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="UIControls\Fleet\ComponentsFleetListScreen.resx">
+      <DependentUpon>ComponentsFleetListScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Fleet\ComponentsFleetListView.resx">
+      <DependentUpon>ComponentsFleetListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Fleet\DirectiveFleetListScreen.resx">
+      <DependentUpon>DirectiveFleetListScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIControls\OilControls\OilGraphForm.resx">
       <DependentUpon>OilGraphForm.cs</DependentUpon>
     </EmbeddedResource>
