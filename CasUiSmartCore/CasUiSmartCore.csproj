@@ -800,6 +800,7 @@
     <Compile Include="ExcelExport\DirectiveComparer.cs" />
     <Compile Include="ExcelExport\ExcelExportProvider.cs" />
     <Compile Include="Extentions.cs" />
+    <Compile Include="Helpers\CmbScrollHelper.cs" />
     <Compile Include="UIControls\Fleet\ComponentsFleetListScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>

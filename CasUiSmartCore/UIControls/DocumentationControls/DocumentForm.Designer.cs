@@ -1,4 +1,5 @@
-﻿using CAS.UI.UIControls.Auxiliary;
+﻿using CAS.UI.Helpers;
+using CAS.UI.UIControls.Auxiliary;
 using  MetroFramework.Controls;
 
 namespace CAS.UI.UIControls.DocumentationControls
@@ -430,6 +431,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 			this.comboBoxDocumentType.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxDocumentType.TabIndex = 16;
 			this.comboBoxDocumentType.SelectedIndexChanged += new System.EventHandler(this.ComboBoxDocumentTypeSelectedIndexChanged);
+			this.comboBoxDocumentType.MouseWheel += CmbScrollHelper.ComboBoxDocumentType_MouseWheel;
 			// 
 			// textBoxContractNumber
 			// 
@@ -931,6 +933,8 @@ namespace CAS.UI.UIControls.DocumentationControls
 			this.PerformLayout();
 
 		}
+
+		
 
 		#endregion
 
