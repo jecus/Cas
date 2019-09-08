@@ -134,6 +134,11 @@ namespace SmartCore.Component
 
 		#endregion
 
+		public ComponentCollection GetComponentsAll(string text)
+		{
+			return GetComponentsByQuery(ComponentQueries.GetSelectQueryAll(text, loadChild: true ));
+		}
+
 		#region public ComponentCollection GetComponents(BaseComponent baseComponent, bool llpMark)
 
 		/// <summary>

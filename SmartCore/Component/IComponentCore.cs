@@ -25,6 +25,8 @@ namespace SmartCore.Component
 
 		ComponentCollection GetComponents(List<BaseComponent> baseComponents);
 
+		ComponentCollection GetComponentsAll(string text);
+
 		ComponentCollection GetComponents(BaseComponent baseComponent, bool llpMark);
 
 		ComponentCollection GetStoreComponents(Store store);

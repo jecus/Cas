@@ -19,6 +19,7 @@ namespace SmartCore.Entities.General.Accessory
     /// </summary>
     [Table("ComponentLLPCategoryChangeRecords", "dbo", "ItemId")]
     [Dto(typeof(ComponentLLPCategoryChangeRecordDTO))]
+    [Condition("IsDeleted", "0")]
 	[Serializable]
     public class ComponentLLPCategoryChangeRecord : AbstractPerformanceRecord, IFileContainer
 	{

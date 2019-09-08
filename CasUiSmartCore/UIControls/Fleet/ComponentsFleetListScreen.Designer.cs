@@ -36,14 +36,11 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.buttonDeleteSelected = new AvControls.AvButtonT.AvButtonT();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.pictureBoxSeparatorEx = new System.Windows.Forms.PictureBox();
-			this.buttonAddNew = new CAS.UI.Management.Dispatchering.RichReferenceButton();
 			this.buttonExport = new CAS.UI.Management.Dispatchering.RichReferenceButton();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
-			this.buttonPreTransferFilter = new AvControls.AvButtonT.AvButtonT();
 			this.pictureBox3 = new System.Windows.Forms.PictureBox();
 			this.pictureBox4 = new System.Windows.Forms.PictureBox();
-			this.buttonTransferDetails = new AvControls.AvButtonT.AvButtonT();
 			this.labelDateAsOf = new System.Windows.Forms.Label();
 			this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
 			this.labelFilter = new System.Windows.Forms.Label();
@@ -61,12 +58,10 @@ namespace CAS.UI.UIControls.ComponentControls
 			// headerControl
 			// 
 			this.headerControl.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-			this.headerControl.ShowForecastButton = true;
-			this.headerControl.ShowPrintButton = true;
+			this.headerControl.ShowForecastButton = false;
+			this.headerControl.ShowPrintButton = false;
 			this.headerControl.Size = new System.Drawing.Size(773, 58);
-			this.headerControl.ForecastContextMenuClick += new System.EventHandler(this.ForecastMenuClick);
 			this.headerControl.ReloadButtonClick += new System.EventHandler(this.HeaderControlButtonReloadClick);
-			this.headerControl.PrintButtonDisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.HeaderControlButtonPrintDisplayerRequested);
 			this.headerControl.Controls.SetChildIndex(this.aircraftHeaderControl1, 0);
 			this.headerControl.SaveButtonClick += new System.EventHandler(HeaderControlSaveButtonClick);
 			// 
@@ -89,13 +84,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox1);
 			this.flowLayoutPanel1.Controls.Add(this.buttonExport);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBoxSeparatorEx);
-			this.flowLayoutPanel1.Controls.Add(this.buttonAddNew);
-			this.flowLayoutPanel1.Controls.Add(this.pictureBox2);
 			this.flowLayoutPanel1.Controls.Add(this.buttonApplyFilter);
-			this.flowLayoutPanel1.Controls.Add(this.pictureBox3);
-			this.flowLayoutPanel1.Controls.Add(this.buttonTransferDetails);
-			this.flowLayoutPanel1.Controls.Add(this.pictureBox4);
-			this.flowLayoutPanel1.Controls.Add(this.buttonPreTransferFilter);
 			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
 			this.flowLayoutPanel1.Location = new System.Drawing.Point(530, 0);
@@ -196,39 +185,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.buttonExport.ToolTipText = "Export";
 			this.buttonExport.Click += new System.EventHandler(this.ButtonExportComponent_Click);
 			// 
-			// buttonAddNew
-			// 
-			this.buttonAddNew.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-			this.buttonAddNew.ActiveBackgroundImage = null;
-			this.buttonAddNew.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonAddNew.Displayer = null;
-			this.buttonAddNew.DisplayerText = "";
-			this.buttonAddNew.Entity = null;
-			this.buttonAddNew.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-			this.buttonAddNew.FontSecondary = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-			this.buttonAddNew.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
-			this.buttonAddNew.ForeColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
-			this.buttonAddNew.Icon = global::CAS.UI.Properties.Resources.AddIcon;
-			this.buttonAddNew.IconLayout = System.Windows.Forms.ImageLayout.Center;
-			this.buttonAddNew.IconNotEnabled = global::CAS.UI.Properties.Resources.AddIcon_gray;
-			this.buttonAddNew.Location = new System.Drawing.Point(126, 0);
-			this.buttonAddNew.Margin = new System.Windows.Forms.Padding(0);
-			this.buttonAddNew.Name = "buttonAddNew";
-			this.buttonAddNew.NormalBackgroundImage = null;
-			this.buttonAddNew.PaddingMain = new System.Windows.Forms.Padding(0);
-			this.buttonAddNew.PaddingSecondary = new System.Windows.Forms.Padding(0);
-			this.buttonAddNew.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInNew;
-			this.buttonAddNew.ShowToolTip = true;
-			this.buttonAddNew.Size = new System.Drawing.Size(52, 57);
-			this.buttonAddNew.TabIndex = 19;
-			this.buttonAddNew.TextAlignMain = System.Drawing.ContentAlignment.BottomCenter;
-			this.buttonAddNew.TextAlignSecondary = System.Drawing.ContentAlignment.TopCenter;
-			this.buttonAddNew.TextMain = "";
-			this.buttonAddNew.TextSecondary = "";
-			this.buttonAddNew.ToolTipText = "Add New";
-			this.buttonAddNew.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.ButtonAddDisplayerRequested);
-			this.buttonAddNew.Enabled = !(userType == UsetType.ReadOnly);
-			// 
 			// pictureBox2
 			// 
 			this.pictureBox2.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
@@ -267,34 +223,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.buttonApplyFilter.ToolTipText = "Apply filter";
 			this.buttonApplyFilter.Click += new System.EventHandler(this.ButtonApplyFilterClick);
 			// 
-			// buttonPreTransferFilter
-			// 
-			this.buttonPreTransferFilter.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-			this.buttonPreTransferFilter.ActiveBackgroundImage = null;
-			this.buttonPreTransferFilter.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonPreTransferFilter.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-			this.buttonPreTransferFilter.FontSecondary = new System.Drawing.Font("Verdana", 9.75F);
-			this.buttonPreTransferFilter.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
-			this.buttonPreTransferFilter.ForeColorSecondary = System.Drawing.SystemColors.ControlText;
-			this.buttonPreTransferFilter.Icon = global::CAS.UI.Properties.Resources.PreTransfer;
-			this.buttonPreTransferFilter.IconLayout = System.Windows.Forms.ImageLayout.Center;
-			this.buttonPreTransferFilter.IconNotEnabled = null;
-			this.buttonPreTransferFilter.Location = new System.Drawing.Point(63, 0);
-			this.buttonPreTransferFilter.Margin = new System.Windows.Forms.Padding(0);
-			this.buttonPreTransferFilter.Name = "buttonApplyFilter";
-			this.buttonPreTransferFilter.NormalBackgroundImage = null;
-			this.buttonPreTransferFilter.PaddingMain = new System.Windows.Forms.Padding(0);
-			this.buttonPreTransferFilter.PaddingSecondary = new System.Windows.Forms.Padding(0);
-			this.buttonPreTransferFilter.ShowToolTip = true;
-			this.buttonPreTransferFilter.Size = new System.Drawing.Size(52, 57);
-			this.buttonPreTransferFilter.TabIndex = 18;
-			this.buttonPreTransferFilter.TextAlignMain = System.Drawing.ContentAlignment.MiddleLeft;
-			this.buttonPreTransferFilter.TextAlignSecondary = System.Drawing.ContentAlignment.MiddleLeft;
-			this.buttonPreTransferFilter.TextMain = "";
-			this.buttonPreTransferFilter.TextSecondary = "";
-			this.buttonPreTransferFilter.ToolTipText = "Apply filter";
-			this.buttonPreTransferFilter.Click += ButtonPreTransferFilter_Click;
-			// 
 			// pictureBox3
 			// 
 			this.pictureBox3.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
@@ -314,35 +242,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.pictureBox4.Size = new System.Drawing.Size(5, 50);
 			this.pictureBox4.TabIndex = 22;
 			this.pictureBox4.TabStop = false;
-			// 
-			// buttonTransferDetails
-			// 
-			this.buttonTransferDetails.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-			this.buttonTransferDetails.ActiveBackgroundImage = null;
-			this.buttonTransferDetails.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonTransferDetails.Enabled = false;
-			this.buttonTransferDetails.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-			this.buttonTransferDetails.FontSecondary = new System.Drawing.Font("Verdana", 9.75F);
-			this.buttonTransferDetails.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
-			this.buttonTransferDetails.ForeColorSecondary = System.Drawing.SystemColors.ControlText;
-			this.buttonTransferDetails.Icon = global::CAS.UI.Properties.Resources.TransferComponentRed;
-			this.buttonTransferDetails.IconLayout = System.Windows.Forms.ImageLayout.Center;
-			this.buttonTransferDetails.IconNotEnabled = global::CAS.UI.Properties.Resources.TransferComponentGray;
-			this.buttonTransferDetails.Location = new System.Drawing.Point(0, 0);
-			this.buttonTransferDetails.Margin = new System.Windows.Forms.Padding(0);
-			this.buttonTransferDetails.Name = "buttonTransferDetails";
-			this.buttonTransferDetails.NormalBackgroundImage = null;
-			this.buttonTransferDetails.PaddingMain = new System.Windows.Forms.Padding(0);
-			this.buttonTransferDetails.PaddingSecondary = new System.Windows.Forms.Padding(0);
-			this.buttonTransferDetails.ShowToolTip = true;
-			this.buttonTransferDetails.Size = new System.Drawing.Size(52, 57);
-			this.buttonTransferDetails.TabIndex = 18;
-			this.buttonTransferDetails.TextAlignMain = System.Drawing.ContentAlignment.MiddleLeft;
-			this.buttonTransferDetails.TextAlignSecondary = System.Drawing.ContentAlignment.MiddleLeft;
-			this.buttonTransferDetails.TextMain = "";
-			this.buttonTransferDetails.TextSecondary = "";
-			this.buttonTransferDetails.ToolTipText = "Transfered Components";
-			this.buttonTransferDetails.Click += new System.EventHandler(this.ButtonTransferedDetailsClick);
 			// 
 			// labelFilter
 			// 
@@ -434,11 +333,8 @@ namespace CAS.UI.UIControls.ComponentControls
 
 		private AvControls.StatusImageLink.StatusImageLinkLabel labelTitle;
 		private CAS.UI.Management.Dispatchering.RichReferenceButton buttonExport;
-		private CAS.UI.Management.Dispatchering.RichReferenceButton buttonAddNew;
 		private AvControls.AvButtonT.AvButtonT buttonDeleteSelected;
 		private AvControls.AvButtonT.AvButtonT buttonApplyFilter;
-		private AvControls.AvButtonT.AvButtonT buttonPreTransferFilter;
-		private AvControls.AvButtonT.AvButtonT buttonTransferDetails;
 		private System.Windows.Forms.Label labelDateAsOf;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
 		private System.Windows.Forms.PictureBox pictureBoxSeparatorEx;

@@ -477,7 +477,7 @@ namespace CAS.UI.UIControls.AircraftsControls
 		{
 			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 			e.DisplayerText = "Component Fleet";
-			e.RequestedEntity = new ComponentsFleetListScreen(GlobalObjects.CasEnvironment.Operators[0], null);
+			e.RequestedEntity = new ComponentsFleetListScreen(GlobalObjects.CasEnvironment.Operators[0]);
 		}
 	}
 }

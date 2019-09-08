@@ -25,33 +25,16 @@ namespace CAS.UI.UIControls.ComponentControls
 	///</summary>
 	public partial class ComponentsFleetListView : BaseGridViewControl<BaseEntityObject>
 	{
-		#region Fields
-
-		private readonly BaseComponent _parentBaseComponent;
-		private bool ShowGroup;
-		#endregion
 
 		#region Constructors
 
 		#region private DetailsListView()
 		///<summary>
 		///</summary>
-		private ComponentsFleetListView()
+		public ComponentsFleetListView()
 		{
 			InitializeComponent();
-		}
-
-		#endregion
-
-		#region public DetailsListView(BaseDetail parentBaseDetail) : this()
-		///<summary>
-		///</summary>
-		public ComponentsFleetListView(BaseComponent parentBaseComponent, bool showgroups = true)
-			: this()
-		{
 			OldColumnIndex = 0;
-			_parentBaseComponent = parentBaseComponent;
-			ShowGroup = showgroups;
 
 			ColumnHeaderList.Clear();
 			SetHeaders();
@@ -59,9 +42,9 @@ namespace CAS.UI.UIControls.ComponentControls
 			radGridView1.Columns.AddRange(ColumnHeaderList.ToArray());
 		}
 
-		
-
 		#endregion
+
+
 
 		#endregion
 
@@ -73,9 +56,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		/// </summary>
 		protected override void SetHeaders()
 		{
-			if (ShowGroup)
-				AddColumn("Type", (int)(radGridView1.Width * 0.2f));
-
+			AddColumn("Destination", (int)(radGridView1.Width * 0.2f));
 			AddColumn("ATA", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Part. No", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.3f));
@@ -110,8 +91,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		#region protected override SetGroupsToItems(int columnIndex)
 		protected override void GroupingItems()
 		{
-			if(ShowGroup)
-				Grouping("Type");
+			Grouping("Destination");
 		}
 
 		#endregion
@@ -172,34 +152,36 @@ namespace CAS.UI.UIControls.ComponentControls
 				   hiddenRemarks,
 				   workType = "",
 				   zone = "",
+				   destination = "",
 				   access = "",
 				   ndtString = "";
 			double manHours,
 				   cost,
 				   costServiceable = 0,
 				   costOverhaul = 0;
+
 			if (item is Component)
 			{
 				Component componentItem = (Component)item;
 				approx = componentItem.NextPerformanceDate;
 				next = componentItem.NextPerformanceSource;
 
-				if (ShowGroup)
-				{
-					remains = componentItem.LLPCategories ? componentItem.LLPRemains : componentItem.Remains;
-				}
-				else
-				{
+				if (componentItem.ParentStoreId > 0)
+					description = GlobalObjects.StoreCore.GetStoreById(componentItem.ParentStoreId)?.ToString();
+				else 
+					destination = GlobalObjects.AircraftsCore.GetAircraftById(componentItem.ParentBaseComponent?.ParentAircraftId ?? -1)?.ToString();
+				
 					var selectedCategory = componentItem.ChangeLLPCategoryRecords.GetLast()?.ToCategory;
-					if (selectedCategory != null) {
+					if (selectedCategory != null)
+					{
 						var llp = componentItem.LLPData.GetItemByCatagory(selectedCategory);
 						remains = llp?.Remain;
 					}
-					
-				}
 
-				
-				ata = componentItem.Model != null ? componentItem.Model.ATAChapter : componentItem.ATAChapter;
+
+
+
+					ata = componentItem.Model != null ? componentItem.Model.ATAChapter : componentItem.ATAChapter;
 				partNumber = componentItem.PartNumber;
 				description = componentItem.Model != null ? componentItem.Model.Description : componentItem.Description;
 				serialNumber = componentItem.SerialNumber;
@@ -220,6 +202,12 @@ namespace CAS.UI.UIControls.ComponentControls
 			else
 			{
 				ComponentDirective dd = (ComponentDirective)item;
+
+				if (dd.ParentComponent.ParentStoreId > 0)
+					description = GlobalObjects.StoreCore.GetStoreById(dd.ParentComponent.ParentStoreId)?.ToString();
+				else
+					destination = GlobalObjects.AircraftsCore.GetAircraftById(dd.ParentComponent.ParentBaseComponent?.ParentAircraftId ?? -1)?.ToString();
+
 				if (dd.Threshold.FirstPerformanceSinceNew != null && !dd.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
 				{
 					firstPerformance = dd.Threshold.FirstPerformanceSinceNew;
@@ -268,8 +256,8 @@ namespace CAS.UI.UIControls.ComponentControls
 					mpdNumString = dd.MaintenanceDirective.TaskCardNumber;
 				}
 			}
-			if (ShowGroup)
-				subItems.Add(CreateRow(type, type));
+
+			subItems.Add(CreateRow(destination, destination));
 			subItems.Add(CreateRow(ata.ToString(), ata));
 			subItems.Add(CreateRow(partNumber, partNumber));
 			subItems.Add(CreateRow(description, description));
