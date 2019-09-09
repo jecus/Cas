@@ -122,6 +122,7 @@ namespace CAS.UI.UIControls.ForecastControls
 				foreach (GridViewCellInfo cell in listViewItem.Cells)
 				{
 					cell.Style.CustomizeFill = true;
+					cell.Style.BackColor = Color.White;
 					if (imd.Condition == ConditionState.Notify)
 						cell.Style.BackColor = Color.FromArgb(Highlight.Yellow.Color);
 					if (imd.Condition == ConditionState.Overdue)
