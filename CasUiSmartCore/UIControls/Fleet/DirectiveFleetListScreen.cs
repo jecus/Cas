@@ -142,6 +142,8 @@ namespace CAS.UI.UIControls.Fleet
 		#region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
 		protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
 		{
+			_initialDirectiveArray.Clear();
+			_resultDirectiveArray.Clear();
 			AnimatedThreadWorker.ReportProgress(0, "load directives");
 
 			if (!string.IsNullOrEmpty(TextBoxFilter.Text))

@@ -160,6 +160,12 @@ namespace CAS.UI.UIControls.ComponentControls
 			{
 				if (item is Component)
 				{
+					var c = item as Component;
+					var a = GlobalObjects.AircraftsCore.GetAircraftById(c.ParentBaseComponent?.ParentAircraftId ?? -1);
+
+					if(a == null)
+						continue;
+
 					res.Add(item);
 
 					var component = item as Component;
@@ -179,11 +185,13 @@ namespace CAS.UI.UIControls.ComponentControls
 
 		protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
 		{
+			_initialDirectiveArray.Clear();
+			_preResultDirectiveArray.Clear();
+			_resultDirectiveArray.Clear();
+
 			if (!string.IsNullOrEmpty(TextBoxFilter.Text))
 			{
-				_initialDirectiveArray.Clear();
-				_preResultDirectiveArray.Clear();
-				_resultDirectiveArray.Clear();
+				
 
 				ComponentCollection preResult = new ComponentCollection();
 				ComponentCollection componentCollection = new ComponentCollection();
@@ -198,8 +206,6 @@ namespace CAS.UI.UIControls.ComponentControls
 
 					if(lastTr?.DestinationObjectType == SmartCoreType.BaseComponent)
 						component.ParentBaseComponent = GlobalObjects.ComponentCore.GetBaseComponentById(lastTr.DestinationObjectId);
-					else if (lastTr?.DestinationObjectType == SmartCoreType.Store)
-						component.ParentStoreId = lastTr.DestinationObjectId;
 
 					foreach (var componentDirective in component.ComponentDirectives)
 					{

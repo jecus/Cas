@@ -166,9 +166,6 @@ namespace CAS.UI.UIControls.ComponentControls
 				approx = componentItem.NextPerformanceDate;
 				next = componentItem.NextPerformanceSource;
 
-				if (componentItem.ParentStoreId > 0)
-					description = GlobalObjects.StoreCore.GetStoreById(componentItem.ParentStoreId)?.ToString();
-				else 
 					destination = GlobalObjects.AircraftsCore.GetAircraftById(componentItem.ParentBaseComponent?.ParentAircraftId ?? -1)?.ToString();
 				
 					var selectedCategory = componentItem.ChangeLLPCategoryRecords.GetLast()?.ToCategory;
@@ -203,9 +200,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			{
 				ComponentDirective dd = (ComponentDirective)item;
 
-				if (dd.ParentComponent.ParentStoreId > 0)
-					description = GlobalObjects.StoreCore.GetStoreById(dd.ParentComponent.ParentStoreId)?.ToString();
-				else
+				
 					destination = GlobalObjects.AircraftsCore.GetAircraftById(dd.ParentComponent.ParentBaseComponent?.ParentAircraftId ?? -1)?.ToString();
 
 				if (dd.Threshold.FirstPerformanceSinceNew != null && !dd.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
