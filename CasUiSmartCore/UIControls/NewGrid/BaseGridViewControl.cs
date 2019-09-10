@@ -487,7 +487,7 @@ namespace CAS.UI.UIControls.NewGrid
 			foreach (GridViewCellInfo cell in listViewItem.Cells)
 			{
 				cell.Style.CustomizeFill = true;
-
+				cell.Style.BackColor = Color.White;
 				if (imd.NextPerformanceIsBlocked)
 				{
 					cell.Style.BackColor = Color.FromArgb(Highlight.Grey.Color);
