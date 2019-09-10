@@ -110,7 +110,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.comboBoxAccessoryStandard.Size = new System.Drawing.Size(312, 21);
 			this.comboBoxAccessoryStandard.TabIndex = 89;
 			this.comboBoxAccessoryStandard.Type = null;
-			this.comboBoxAccessoryStandard.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelStandard
 			// 
@@ -268,7 +267,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.comboBoxDetailClass.RootNodesNames = null;
 			this.comboBoxDetailClass.Size = new System.Drawing.Size(313, 21);
 			this.comboBoxDetailClass.TabIndex = 145;
-			this.comboBoxDetailClass.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelClass
 			// 
@@ -304,7 +302,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.comboBoxAtaChapter.Name = "comboBoxAtaChapter";
 			this.comboBoxAtaChapter.Size = new System.Drawing.Size(313, 22);
 			this.comboBoxAtaChapter.TabIndex = 148;
-			this.comboBoxAtaChapter.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxManufRegion
 			// 
@@ -313,7 +310,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.comboBoxManufRegion.Name = "comboBoxManufRegion";
 			this.comboBoxManufRegion.Size = new System.Drawing.Size(312, 21);
 			this.comboBoxManufRegion.TabIndex = 102;
-			this.comboBoxManufRegion.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelManufRegion
 			// 
@@ -368,9 +364,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxRemarks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.textBoxRemarks.Location = new System.Drawing.Point(125, 201);
 			this.textBoxRemarks.Margin = new System.Windows.Forms.Padding(4);
-			this.textBoxRemarks.MaxLength = 100;
 			this.textBoxRemarks.Multiline = true;
 			this.textBoxRemarks.Name = "textBoxRemarks";
+			this.textBoxRemarks.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.textBoxRemarks.Size = new System.Drawing.Size(312, 90);
 			this.textBoxRemarks.TabIndex = 89;
 			// 
@@ -393,9 +389,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxDescription.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.textBoxDescription.Location = new System.Drawing.Point(559, 171);
 			this.textBoxDescription.Margin = new System.Windows.Forms.Padding(4);
-			this.textBoxDescription.MaxLength = 100;
 			this.textBoxDescription.Multiline = true;
 			this.textBoxDescription.Name = "textBoxDescription";
+			this.textBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.textBoxDescription.Size = new System.Drawing.Size(313, 90);
 			this.textBoxDescription.TabIndex = 151;
 			// 
@@ -460,9 +456,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxDescRus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.textBoxDescRus.Location = new System.Drawing.Point(559, 269);
 			this.textBoxDescRus.Margin = new System.Windows.Forms.Padding(4);
-			this.textBoxDescRus.MaxLength = 100;
 			this.textBoxDescRus.Multiline = true;
 			this.textBoxDescRus.Name = "textBoxDescRus";
+			this.textBoxDescRus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.textBoxDescRus.Size = new System.Drawing.Size(313, 90);
 			this.textBoxDescRus.TabIndex = 154;
 			// 
@@ -620,9 +616,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxIsEffectivity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.textBoxIsEffectivity.Location = new System.Drawing.Point(125, 299);
 			this.textBoxIsEffectivity.Margin = new System.Windows.Forms.Padding(4);
-			this.textBoxIsEffectivity.MaxLength = 100;
 			this.textBoxIsEffectivity.Multiline = true;
 			this.textBoxIsEffectivity.Name = "textBoxIsEffectivity";
+			this.textBoxIsEffectivity.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.textBoxIsEffectivity.Size = new System.Drawing.Size(312, 60);
 			this.textBoxIsEffectivity.TabIndex = 163;
 			// 

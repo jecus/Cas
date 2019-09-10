@@ -84,7 +84,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.comboBoxDetailClass.RootNodesNames = null;
 			this.comboBoxDetailClass.Size = new System.Drawing.Size(312, 21);
 			this.comboBoxDetailClass.TabIndex = 1;
-			this.comboBoxDetailClass.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelClass
 			// 
@@ -120,6 +119,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxRemarks.Margin = new System.Windows.Forms.Padding(4);
 			this.textBoxRemarks.Multiline = true;
 			this.textBoxRemarks.Name = "textBoxRemarks";
+			this.textBoxRemarks.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.textBoxRemarks.Size = new System.Drawing.Size(313, 90);
 			this.textBoxRemarks.TabIndex = 8;
 			this.textBoxRemarks.Text = "Line1\r\nLin2\r\nLine3\r\nLine4\r\nLine5\r\nLine 6";
@@ -178,6 +178,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxDescription.Location = new System.Drawing.Point(110, 328);
 			this.textBoxDescription.Multiline = true;
 			this.textBoxDescription.Name = "textBoxDescription";
+			this.textBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.textBoxDescription.Size = new System.Drawing.Size(313, 90);
 			this.textBoxDescription.TabIndex = 4;
 			// 
@@ -211,7 +212,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.comboBoxMeasure.Name = "comboBoxMeasure";
 			this.comboBoxMeasure.Size = new System.Drawing.Size(294, 21);
 			this.comboBoxMeasure.TabIndex = 7;
-			this.comboBoxMeasure.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelMeasure
 			// 
@@ -249,7 +249,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.comboBoxAccessoryStandard.TabIndex = 0;
 			this.comboBoxAccessoryStandard.Type = null;
 			this.comboBoxAccessoryStandard.SelectedIndexChanged += new System.EventHandler(this.DictComboStandardSelectedIndexChanged);
-			this.comboBoxAccessoryStandard.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelProductCode
 			// 
@@ -373,7 +372,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.comboBoxAtaChapter.Name = "comboBoxAtaChapter";
 			this.comboBoxAtaChapter.Size = new System.Drawing.Size(313, 22);
 			this.comboBoxAtaChapter.TabIndex = 144;
-			this.comboBoxAtaChapter.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label2
 			// 
@@ -394,6 +392,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxDescRus.Location = new System.Drawing.Point(557, 143);
 			this.textBoxDescRus.Multiline = true;
 			this.textBoxDescRus.Name = "textBoxDescRus";
+			this.textBoxDescRus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.textBoxDescRus.Size = new System.Drawing.Size(294, 90);
 			this.textBoxDescRus.TabIndex = 145;
 			// 
@@ -540,6 +539,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxIsEffectivity.Location = new System.Drawing.Point(110, 270);
 			this.textBoxIsEffectivity.Multiline = true;
 			this.textBoxIsEffectivity.Name = "textBoxIsEffectivity";
+			this.textBoxIsEffectivity.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.textBoxIsEffectivity.Size = new System.Drawing.Size(313, 52);
 			this.textBoxIsEffectivity.TabIndex = 162;
 			// 
