@@ -192,12 +192,18 @@ namespace CAS.UI.UIControls.ComponentControls
 
 			if (!string.IsNullOrEmpty(TextBoxFilter.Text))
 			{
-				
 
 				ComponentCollection preResult = new ComponentCollection();
 				ComponentCollection componentCollection = new ComponentCollection();
 
-				componentCollection.AddRange(GlobalObjects.ComponentCore.GetComponentsAll(TextBoxFilter.Text).ToArray());
+				var temp = GlobalObjects.ComponentCore.GetComponentsAll(TextBoxFilter.Text).ToArray();
+
+				foreach (var component in temp)
+				{
+					var a = GlobalObjects.AircraftsCore.GetAircraftById(component.ParentBaseComponent?.ParentAircraftId ?? -1);
+					if(a != null)
+						componentCollection.Add(component);
+				}
 
 				var ids = new List<int>();
 
