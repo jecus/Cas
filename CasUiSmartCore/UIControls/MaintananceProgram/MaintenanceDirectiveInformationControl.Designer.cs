@@ -1,40 +1,41 @@
 ﻿using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.MaintananceProgram
 {
-    partial class MaintenanceDirectiveInformationControl
-    {
-        /// <summary> 
-        /// Требуется переменная конструктора.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class MaintenanceDirectiveInformationControl
+	{
+		/// <summary> 
+		/// Требуется переменная конструктора.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Освободить все используемые ресурсы.
-        /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
+		/// <summary> 
+		/// Освободить все используемые ресурсы.
+		/// </summary>
+		/// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
 
-            dateTimePickerEffDate.ValueChanged -= DateTimePickerEffDateValueChanged;
-            lookupComboboxJobCard.SelectedIndexChanged -= LookupComboboxMaintenanceCheckSelectedIndexChanged;
+			dateTimePickerEffDate.ValueChanged -= DateTimePickerEffDateValueChanged;
+			lookupComboboxJobCard.SelectedIndexChanged -= LookupComboboxMaintenanceCheckSelectedIndexChanged;
 
-            base.Dispose(disposing);
-        }
+			base.Dispose(disposing);
+		}
 
-        #region Код, автоматически созданный конструктором компонентов
+		#region Код, автоматически созданный конструктором компонентов
 
-        /// <summary> 
-        /// Обязательный метод для поддержки конструктора - не изменяйте 
-        /// содержимое данного метода при помощи редактора кода.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary> 
+		/// Обязательный метод для поддержки конструктора - не изменяйте 
+		/// содержимое данного метода при помощи редактора кода.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.labelATAChapter = new System.Windows.Forms.Label();
 			this.labelTaskNumberCheck = new System.Windows.Forms.Label();
 			this.labelEffectivityDate = new System.Windows.Forms.Label();
@@ -462,6 +463,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.comboBoxProgram.Name = "comboBoxProgram";
 			this.comboBoxProgram.Size = new System.Drawing.Size(350, 22);
 			this.comboBoxProgram.TabIndex = 20;
+			this.comboBoxProgram.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxCriticalSystem
 			// 
@@ -472,6 +474,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.comboBoxCriticalSystem.Name = "comboBoxCriticalSystem";
 			this.comboBoxCriticalSystem.Size = new System.Drawing.Size(350, 22);
 			this.comboBoxCriticalSystem.TabIndex = 21;
+			this.comboBoxCriticalSystem.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBox1
 			// 
@@ -483,6 +486,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.comboBox1.Size = new System.Drawing.Size(350, 22);
 			this.comboBox1.TabIndex = 36;
 			this.comboBox1.Visible = false;
+			this.comboBox1.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label1
 			// 
@@ -611,6 +615,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.comboBoxCategory.Name = "comboBoxCategory";
 			this.comboBoxCategory.Size = new System.Drawing.Size(350, 22);
 			this.comboBoxCategory.TabIndex = 49;
+			this.comboBoxCategory.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label7
 			// 
@@ -752,6 +757,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.lookupComboboxJobCard.Size = new System.Drawing.Size(350, 22);
 			this.lookupComboboxJobCard.TabIndex = 38;
 			this.lookupComboboxJobCard.Type = null;
+			this.lookupComboboxJobCard.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// FileControlMRB
 			// 
@@ -850,6 +856,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.ataChapterComboBox.Name = "ataChapterComboBox";
 			this.ataChapterComboBox.Size = new System.Drawing.Size(350, 22);
 			this.ataChapterComboBox.TabIndex = 1;
+			this.ataChapterComboBox.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxProgramIndicator
 			// 
@@ -860,6 +867,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.comboBoxProgramIndicator.Name = "comboBoxProgramIndicator";
 			this.comboBoxProgramIndicator.Size = new System.Drawing.Size(350, 22);
 			this.comboBoxProgramIndicator.TabIndex = 62;
+			this.comboBoxProgramIndicator.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label13
 			// 
@@ -946,52 +954,52 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private Label labelATAChapter;
-        private Label labelTaskNumberCheck;
-        private Label labelEffectivityDate;
-        private Label labelApplicability;
-        private Label labelBiWeeklyReport;
-        private Label labelSubject;
-        private Label labelRemarks;
-        private Label labelHiddenRemarks;
-        private TextBox textboxTaskNumberCheck;
-        private DateTimePicker dateTimePickerEffDate;
-        private TextBox textboxApplicability;
-        private TextBox textboxBiWeeklyReport;
-        private TextBox textboxDescription;
-        private TextBox textboxRemarks;
-        private TextBox textboxHiddenRemarks;
-        private Label labelEngOrderNo;
-        private TextBox textBoxEngOrderNo;
-        private ATAChapterComboBox ataChapterComboBox;
-        private Label labelMPDTaskNumber;
-        private TextBox textBoxMpdTaskNumber;
-        private Label labelMaintManual;
-        private TextBox textBoxMaintenanceManual;
-        private Label labelAccess;
-        private TextBox textBoxAccess;
-        private Label labelZone;
-        private TextBox textBoxZone;
-        private AttachedFileControl fileControlTaskNumberCheck;
-        private AttachedFileControl fileControlEO;
-        private AttachedFileControl fileControlTaskCardNumber;
-        private Label labelTaskCardNumber;
-        private TextBox textBoxTaskCardNumber;
-        private AttachedFileControl fileControlMaintenanceManual;
-        private AttachedFileControl FileControlMRB;
-        private Label labelMRB;
-        private TextBox textBoxMRB;
-        private Label labelCriticalSystem;
-        private Label labelProgram;
-        private ComboBox comboBoxProgram;
-        private ComboBox comboBoxCriticalSystem;
-        private ComboBox comboBox1;
-        private Label label1;
-        private LookupCombobox lookupComboboxJobCard;
+		private Label labelATAChapter;
+		private Label labelTaskNumberCheck;
+		private Label labelEffectivityDate;
+		private Label labelApplicability;
+		private Label labelBiWeeklyReport;
+		private Label labelSubject;
+		private Label labelRemarks;
+		private Label labelHiddenRemarks;
+		private TextBox textboxTaskNumberCheck;
+		private DateTimePicker dateTimePickerEffDate;
+		private TextBox textboxApplicability;
+		private TextBox textboxBiWeeklyReport;
+		private TextBox textboxDescription;
+		private TextBox textboxRemarks;
+		private TextBox textboxHiddenRemarks;
+		private Label labelEngOrderNo;
+		private TextBox textBoxEngOrderNo;
+		private ATAChapterComboBox ataChapterComboBox;
+		private Label labelMPDTaskNumber;
+		private TextBox textBoxMpdTaskNumber;
+		private Label labelMaintManual;
+		private TextBox textBoxMaintenanceManual;
+		private Label labelAccess;
+		private TextBox textBoxAccess;
+		private Label labelZone;
+		private TextBox textBoxZone;
+		private AttachedFileControl fileControlTaskNumberCheck;
+		private AttachedFileControl fileControlEO;
+		private AttachedFileControl fileControlTaskCardNumber;
+		private Label labelTaskCardNumber;
+		private TextBox textBoxTaskCardNumber;
+		private AttachedFileControl fileControlMaintenanceManual;
+		private AttachedFileControl FileControlMRB;
+		private Label labelMRB;
+		private TextBox textBoxMRB;
+		private Label labelCriticalSystem;
+		private Label labelProgram;
+		private ComboBox comboBoxProgram;
+		private ComboBox comboBoxCriticalSystem;
+		private ComboBox comboBox1;
+		private Label label1;
+		private LookupCombobox lookupComboboxJobCard;
 		private Label label2;
 		private TextBox textBoxMpdRef;
 		private Label label3;

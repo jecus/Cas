@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 {
 	partial class EmployeeLicenceControl
 	{
@@ -82,6 +84,7 @@
 			this.comboBoxPersonnel.Size = new System.Drawing.Size(564, 25);
 			this.comboBoxPersonnel.TabIndex = 31;
 			this.comboBoxPersonnel.SelectedIndexChanged += new System.EventHandler(this.comboBoxPersonnel_SelectedIndexChanged);
+			this.comboBoxPersonnel.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// linkLabelAddGeneralControl
 			// 
@@ -269,6 +272,7 @@
 			this.comboBoxClass.Name = "comboBoxClass";
 			this.comboBoxClass.Size = new System.Drawing.Size(88, 25);
 			this.comboBoxClass.TabIndex = 52;
+			this.comboBoxClass.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelIssue
 			// 
@@ -311,6 +315,7 @@
 			this.comboBoxGrade.Name = "comboBoxGrade";
 			this.comboBoxGrade.Size = new System.Drawing.Size(88, 25);
 			this.comboBoxGrade.TabIndex = 52;
+			this.comboBoxGrade.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label5
 			// 

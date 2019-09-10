@@ -1,3 +1,5 @@
+using CAS.UI.Helpers;
+
 namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 {
     partial class FlightSmsEventControl
@@ -176,10 +178,11 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             this.comboBoxIncident.Name = "comboBoxIncident";
             this.comboBoxIncident.Size = new System.Drawing.Size(158, 21);
             this.comboBoxIncident.TabIndex = 4;
-            // 
-            // textBoxRemarks
-            // 
-            this.textBoxRemarks.Location = new System.Drawing.Point(71, 108);
+            this.comboBoxIncident.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// textBoxRemarks
+			// 
+			this.textBoxRemarks.Location = new System.Drawing.Point(71, 108);
             this.textBoxRemarks.MaxLength = 256;
             this.textBoxRemarks.Multiline = true;
             this.textBoxRemarks.Name = "textBoxRemarks";

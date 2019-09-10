@@ -1,37 +1,38 @@
 ﻿using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.DataGridViewElements;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.ScheduleControls
 {
-    partial class FlightNumberInformationControl
-    {
-        /// <summary> 
-        /// Требуется переменная конструктора.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class FlightNumberInformationControl
+	{
+		/// <summary> 
+		/// Требуется переменная конструктора.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Освободить все используемые ресурсы.
-        /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary> 
+		/// Освободить все используемые ресурсы.
+		/// </summary>
+		/// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Код, автоматически созданный конструктором компонентов
+		#region Код, автоматически созданный конструктором компонентов
 
-        /// <summary> 
-        /// Обязательный метод для поддержки конструктора - не изменяйте 
-        /// содержимое данного метода при помощи редактора кода.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary> 
+		/// Обязательный метод для поддержки конструктора - не изменяйте 
+		/// содержимое данного метода при помощи редактора кода.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FlightNumberInformationControl));
 			this.labelAircraftCode = new System.Windows.Forms.Label();
 			this.comboBoxAircraftCode = new System.Windows.Forms.ComboBox();
@@ -73,6 +74,7 @@ namespace CAS.UI.UIControls.ScheduleControls
 			this.comboBoxAircraftCode.Name = "comboBoxAircraftCode";
 			this.comboBoxAircraftCode.Size = new System.Drawing.Size(190, 21);
 			this.comboBoxAircraftCode.TabIndex = 4;
+			this.comboBoxAircraftCode.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelFlightCategory
 			// 
@@ -91,6 +93,7 @@ namespace CAS.UI.UIControls.ScheduleControls
 			this.comboBoxFlightCategory.Name = "comboBoxFlightCategory";
 			this.comboBoxFlightCategory.Size = new System.Drawing.Size(190, 21);
 			this.comboBoxFlightCategory.TabIndex = 3;
+			this.comboBoxFlightCategory.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label2
 			// 
@@ -109,6 +112,7 @@ namespace CAS.UI.UIControls.ScheduleControls
 			this.comboBoxFlightType.Name = "comboBoxFlightType";
 			this.comboBoxFlightType.Size = new System.Drawing.Size(190, 21);
 			this.comboBoxFlightType.TabIndex = 2;
+			this.comboBoxFlightType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelStationFrom
 			// 
@@ -243,6 +247,7 @@ namespace CAS.UI.UIControls.ScheduleControls
 			this.dictionaryComboBoxFlightNo.Size = new System.Drawing.Size(192, 21);
 			this.dictionaryComboBoxFlightNo.TabIndex = 130;
 			this.dictionaryComboBoxFlightNo.Type = null;
+			this.dictionaryComboBoxFlightNo.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// dictComboBoxStationFrom
 			// 
@@ -255,6 +260,7 @@ namespace CAS.UI.UIControls.ScheduleControls
 			this.dictComboBoxStationFrom.Size = new System.Drawing.Size(192, 21);
 			this.dictComboBoxStationFrom.TabIndex = 131;
 			this.dictComboBoxStationFrom.Type = null;
+			this.dictComboBoxStationFrom.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// dictComboBoxStationTo
 			// 
@@ -267,6 +273,7 @@ namespace CAS.UI.UIControls.ScheduleControls
 			this.dictComboBoxStationTo.Size = new System.Drawing.Size(192, 21);
 			this.dictComboBoxStationTo.TabIndex = 132;
 			this.dictComboBoxStationTo.Type = null;
+			this.dictComboBoxStationTo.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// FlightNumberInformationControl
 			// 
@@ -299,28 +306,28 @@ namespace CAS.UI.UIControls.ScheduleControls
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private Label labelAircraftCode;
-        private ComboBox comboBoxAircraftCode;
-        private Label labelFlightCategory;
-        private ComboBox comboBoxFlightCategory;
-        private Label label2;
-        private ComboBox comboBoxFlightType;
-        private Label labelStationFrom;
-        private Label label3;
-        private Label labelTo;
-        private Delimiter delimiter2;
-        private Label labelDescription;
-        private TextBox textBoxDescription;
-        private Label labelRemarks;
-        private TextBox textBoxRemarks;
-        private Label labelHiddenRemarks;
-        private TextBox textBoxHiddenRemarks;
-        private Delimiter delimiter1;
-	    private FlightNumberPeriodListControl _flightNumberPeriodListControl;
+		private Label labelAircraftCode;
+		private ComboBox comboBoxAircraftCode;
+		private Label labelFlightCategory;
+		private ComboBox comboBoxFlightCategory;
+		private Label label2;
+		private ComboBox comboBoxFlightType;
+		private Label labelStationFrom;
+		private Label label3;
+		private Label labelTo;
+		private Delimiter delimiter2;
+		private Label labelDescription;
+		private TextBox textBoxDescription;
+		private Label labelRemarks;
+		private TextBox textBoxRemarks;
+		private Label labelHiddenRemarks;
+		private TextBox textBoxHiddenRemarks;
+		private Delimiter delimiter1;
+		private FlightNumberPeriodListControl _flightNumberPeriodListControl;
 		private LookupCombobox dictionaryComboBoxFlightNo;
 		private LookupCombobox dictComboBoxStationFrom;
 		private LookupCombobox dictComboBoxStationTo;

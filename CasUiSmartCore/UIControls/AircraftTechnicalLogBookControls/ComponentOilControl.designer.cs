@@ -1,33 +1,35 @@
+using CAS.UI.Helpers;
+
 namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 {
-    partial class ComponentOilControl
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class ComponentOilControl
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.labelOnAdded = new System.Windows.Forms.Label();
 			this.labelRemain = new System.Windows.Forms.Label();
 			this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
@@ -119,10 +121,10 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.numericUpDownFlow.Location = new System.Drawing.Point(454, 16);
 			this.numericUpDownFlow.Margin = new System.Windows.Forms.Padding(0);
 			this.numericUpDownFlow.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
+			100000,
+			0,
+			0,
+			0});
 			this.numericUpDownFlow.Name = "numericUpDownFlow";
 			this.numericUpDownFlow.Size = new System.Drawing.Size(74, 20);
 			this.numericUpDownFlow.TabIndex = 178;
@@ -146,10 +148,10 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.numericUpDownRemain.Location = new System.Drawing.Point(84, 16);
 			this.numericUpDownRemain.Margin = new System.Windows.Forms.Padding(0);
 			this.numericUpDownRemain.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
+			100000,
+			0,
+			0,
+			0});
 			this.numericUpDownRemain.Name = "numericUpDownRemain";
 			this.numericUpDownRemain.Size = new System.Drawing.Size(74, 20);
 			this.numericUpDownRemain.TabIndex = 2;
@@ -173,10 +175,10 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.numericUpDownRemainAfter.Location = new System.Drawing.Point(380, 16);
 			this.numericUpDownRemainAfter.Margin = new System.Windows.Forms.Padding(0);
 			this.numericUpDownRemainAfter.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
+			100000,
+			0,
+			0,
+			0});
 			this.numericUpDownRemainAfter.Name = "numericUpDownRemainAfter";
 			this.numericUpDownRemainAfter.Size = new System.Drawing.Size(74, 20);
 			this.numericUpDownRemainAfter.TabIndex = 6;
@@ -214,6 +216,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.comboBoxDetail.Size = new System.Drawing.Size(78, 21);
 			this.comboBoxDetail.TabIndex = 1;
 			this.comboBoxDetail.SelectedIndexChanged += new System.EventHandler(this.ComboBoxDetailSelectedIndexChanged);
+			this.comboBoxDetail.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelSpent
 			// 
@@ -232,10 +235,10 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.numericUpDownSpent.Location = new System.Drawing.Point(306, 16);
 			this.numericUpDownSpent.Margin = new System.Windows.Forms.Padding(0);
 			this.numericUpDownSpent.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
+			100000,
+			0,
+			0,
+			0});
 			this.numericUpDownSpent.Name = "numericUpDownSpent";
 			this.numericUpDownSpent.Size = new System.Drawing.Size(74, 20);
 			this.numericUpDownSpent.TabIndex = 5;
@@ -248,10 +251,10 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.numericUpDownCorrenction.Location = new System.Drawing.Point(158, 16);
 			this.numericUpDownCorrenction.Margin = new System.Windows.Forms.Padding(0);
 			this.numericUpDownCorrenction.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
+			100000,
+			0,
+			0,
+			0});
 			this.numericUpDownCorrenction.Name = "numericUpDownCorrenction";
 			this.numericUpDownCorrenction.Size = new System.Drawing.Size(74, 20);
 			this.numericUpDownCorrenction.TabIndex = 3;
@@ -265,10 +268,10 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.numericUpDownOnBoard.Location = new System.Drawing.Point(232, 16);
 			this.numericUpDownOnBoard.Margin = new System.Windows.Forms.Padding(0);
 			this.numericUpDownOnBoard.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
+			100000,
+			0,
+			0,
+			0});
 			this.numericUpDownOnBoard.Name = "numericUpDownOnBoard";
 			this.numericUpDownOnBoard.Size = new System.Drawing.Size(74, 20);
 			this.numericUpDownOnBoard.TabIndex = 4;
@@ -307,25 +310,25 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private System.Windows.Forms.Label labelOnAdded;
-        private System.Windows.Forms.Label labelRemain;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMain;
-        private System.Windows.Forms.Button buttonDelete;
-        private System.Windows.Forms.Label labelDetail;
-        private System.Windows.Forms.ComboBox comboBoxDetail;
-        private System.Windows.Forms.Label labelRemainAfter;
-        private System.Windows.Forms.Label labelSpent;
-        private System.Windows.Forms.NumericUpDown numericUpDownSpent;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown numericUpDownRemainAfter;
-        private System.Windows.Forms.NumericUpDown numericUpDownRemain;
-        private System.Windows.Forms.NumericUpDown numericUpDownCorrenction;
-        private System.Windows.Forms.NumericUpDown numericUpDownOnBoard;
-        private System.Windows.Forms.NumericUpDown numericUpDownFlow;
-        private System.Windows.Forms.Label labelFlow;
-    }
+		private System.Windows.Forms.Label labelOnAdded;
+		private System.Windows.Forms.Label labelRemain;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMain;
+		private System.Windows.Forms.Button buttonDelete;
+		private System.Windows.Forms.Label labelDetail;
+		private System.Windows.Forms.ComboBox comboBoxDetail;
+		private System.Windows.Forms.Label labelRemainAfter;
+		private System.Windows.Forms.Label labelSpent;
+		private System.Windows.Forms.NumericUpDown numericUpDownSpent;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.NumericUpDown numericUpDownRemainAfter;
+		private System.Windows.Forms.NumericUpDown numericUpDownRemain;
+		private System.Windows.Forms.NumericUpDown numericUpDownCorrenction;
+		private System.Windows.Forms.NumericUpDown numericUpDownOnBoard;
+		private System.Windows.Forms.NumericUpDown numericUpDownFlow;
+		private System.Windows.Forms.Label labelFlow;
+	}
 }

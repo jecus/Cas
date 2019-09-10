@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 {
 	partial class EmployeeLicenceRatingControl
 	{
@@ -57,6 +59,7 @@
 			this.comboBoxFunction.Name = "comboBoxFunction";
 			this.comboBoxFunction.Size = new System.Drawing.Size(288, 25);
 			this.comboBoxFunction.TabIndex = 39;
+			this.comboBoxFunction.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label1
 			// 
@@ -109,6 +112,7 @@
 			this.comboBoxRights.Name = "comboBoxRights";
 			this.comboBoxRights.Size = new System.Drawing.Size(280, 25);
 			this.comboBoxRights.TabIndex = 49;
+			this.comboBoxRights.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// EmployeeLicenceRatingControl
 			// 

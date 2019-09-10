@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.ComponentControls
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.ComponentControls
 {
 	partial class ComponentChangeLLPCategoryRecordForm
 	{
@@ -132,6 +134,7 @@
 			this.comboBoxCategories.Name = "comboBoxCategories";
 			this.comboBoxCategories.Size = new System.Drawing.Size(352, 21);
 			this.comboBoxCategories.TabIndex = 12;
+			this.comboBoxCategories.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// ComponentChangeLLPCategoryRecordForm
 			// 

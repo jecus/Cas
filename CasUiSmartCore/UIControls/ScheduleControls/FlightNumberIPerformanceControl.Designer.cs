@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.ScheduleControls
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.ScheduleControls
 {
 	partial class FlightNumberIPerformanceControl
 	{
@@ -74,10 +76,10 @@
 			this.numericUpDownDistance.Location = new System.Drawing.Point(72, 3);
 			this.numericUpDownDistance.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
 			this.numericUpDownDistance.Maximum = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
+			10000000,
+			0,
+			0,
+			0});
 			this.numericUpDownDistance.Name = "numericUpDownDistance";
 			this.numericUpDownDistance.Size = new System.Drawing.Size(194, 20);
 			this.numericUpDownDistance.TabIndex = 80;
@@ -109,6 +111,7 @@
 			this.comboBoxMeasure.Name = "comboBoxMeasure";
 			this.comboBoxMeasure.Size = new System.Drawing.Size(193, 21);
 			this.comboBoxMeasure.TabIndex = 82;
+			this.comboBoxMeasure.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelMeasure
 			// 
@@ -125,10 +128,10 @@
 			this.numericUpDownFuelRemainAfter.Location = new System.Drawing.Point(420, 26);
 			this.numericUpDownFuelRemainAfter.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
 			this.numericUpDownFuelRemainAfter.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownFuelRemainAfter.Name = "numericUpDownFuelRemainAfter";
 			this.numericUpDownFuelRemainAfter.Size = new System.Drawing.Size(100, 20);
 			this.numericUpDownFuelRemainAfter.TabIndex = 129;
@@ -160,10 +163,10 @@
 			this.numericUpDownPayload.Location = new System.Drawing.Point(420, 98);
 			this.numericUpDownPayload.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
 			this.numericUpDownPayload.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownPayload.Name = "numericUpDownPayload";
 			this.numericUpDownPayload.Size = new System.Drawing.Size(100, 20);
 			this.numericUpDownPayload.TabIndex = 127;
@@ -174,10 +177,10 @@
 			this.numericUpDownPassengers.Location = new System.Drawing.Point(420, 51);
 			this.numericUpDownPassengers.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
 			this.numericUpDownPassengers.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
+			1000,
+			0,
+			0,
+			0});
 			this.numericUpDownPassengers.Name = "numericUpDownPassengers";
 			this.numericUpDownPassengers.Size = new System.Drawing.Size(100, 20);
 			this.numericUpDownPassengers.TabIndex = 125;
@@ -199,10 +202,10 @@
 			this.numericUpDownTakeOffWeight.Location = new System.Drawing.Point(420, 122);
 			this.numericUpDownTakeOffWeight.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
 			this.numericUpDownTakeOffWeight.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownTakeOffWeight.Name = "numericUpDownTakeOffWeight";
 			this.numericUpDownTakeOffWeight.Size = new System.Drawing.Size(100, 20);
 			this.numericUpDownTakeOffWeight.TabIndex = 121;
@@ -224,10 +227,10 @@
 			this.numericUpDownFuel.Location = new System.Drawing.Point(420, 2);
 			this.numericUpDownFuel.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
 			this.numericUpDownFuel.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownFuel.Name = "numericUpDownFuel";
 			this.numericUpDownFuel.Size = new System.Drawing.Size(100, 20);
 			this.numericUpDownFuel.TabIndex = 120;
@@ -249,10 +252,10 @@
 			this.numericUpDownCargo.Location = new System.Drawing.Point(420, 74);
 			this.numericUpDownCargo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
 			this.numericUpDownCargo.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownCargo.Name = "numericUpDownCargo";
 			this.numericUpDownCargo.Size = new System.Drawing.Size(100, 20);
 			this.numericUpDownCargo.TabIndex = 119;
@@ -274,10 +277,10 @@
 			this.numericUpDownMaxLandWeight.Location = new System.Drawing.Point(420, 145);
 			this.numericUpDownMaxLandWeight.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
 			this.numericUpDownMaxLandWeight.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownMaxLandWeight.Name = "numericUpDownMaxLandWeight";
 			this.numericUpDownMaxLandWeight.Size = new System.Drawing.Size(100, 20);
 			this.numericUpDownMaxLandWeight.TabIndex = 131;
@@ -420,6 +423,7 @@
 			this.dictComboBoxMinLevel.Size = new System.Drawing.Size(193, 21);
 			this.dictComboBoxMinLevel.TabIndex = 144;
 			this.dictComboBoxMinLevel.Type = null;
+			this.dictComboBoxMinLevel.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// FlightNumberIPerformanceControl
 			// 

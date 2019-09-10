@@ -1,35 +1,36 @@
 ﻿using MetroFramework.Controls;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.KitControls
 {
-    partial class KitSupplierFormItem
-    {
-        /// <summary> 
-        /// Требуется переменная конструктора.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class KitSupplierFormItem
+	{
+		/// <summary> 
+		/// Требуется переменная конструктора.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Освободить все используемые ресурсы.
-        /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary> 
+		/// Освободить все используемые ресурсы.
+		/// </summary>
+		/// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Код, автоматически созданный конструктором компонентов
+		#region Код, автоматически созданный конструктором компонентов
 
-        /// <summary> 
-        /// Обязательный метод для поддержки конструктора - не изменяйте 
-        /// содержимое данного метода при помощи редактора кода.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary> 
+		/// Обязательный метод для поддержки конструктора - не изменяйте 
+		/// содержимое данного метода при помощи редактора кода.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.panelExtendable = new MetroFramework.Controls.MetroPanel();
 			this.extendableRichContainer = new CAS.UI.UIControls.ReferenceControls.ExtendableRichContainer();
@@ -114,6 +115,7 @@ namespace CAS.UI.UIControls.KitControls
 			this.comboBoxKitSupplier.Size = new System.Drawing.Size(239, 21);
 			this.comboBoxKitSupplier.TabIndex = 0;
 			this.comboBoxKitSupplier.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ComboBoxKitSupplierDrawItem);
+			this.comboBoxKitSupplier.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// buttonDelete
 			// 
@@ -162,16 +164,16 @@ namespace CAS.UI.UIControls.KitControls
 			// 
 			this.numericCostOverhaul.DecimalPlaces = 2;
 			this.numericCostOverhaul.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
+			1,
+			0,
+			0,
+			131072});
 			this.numericCostOverhaul.Location = new System.Drawing.Point(110, 59);
 			this.numericCostOverhaul.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericCostOverhaul.Name = "numericCostOverhaul";
 			this.numericCostOverhaul.Size = new System.Drawing.Size(131, 20);
 			this.numericCostOverhaul.TabIndex = 100;
@@ -191,16 +193,16 @@ namespace CAS.UI.UIControls.KitControls
 			// 
 			this.numericCostServiceable.DecimalPlaces = 2;
 			this.numericCostServiceable.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
+			1,
+			0,
+			0,
+			131072});
 			this.numericCostServiceable.Location = new System.Drawing.Point(110, 31);
 			this.numericCostServiceable.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericCostServiceable.Name = "numericCostServiceable";
 			this.numericCostServiceable.Size = new System.Drawing.Size(131, 20);
 			this.numericCostServiceable.TabIndex = 99;
@@ -220,16 +222,16 @@ namespace CAS.UI.UIControls.KitControls
 			// 
 			this.numericCostNew.DecimalPlaces = 2;
 			this.numericCostNew.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
+			1,
+			0,
+			0,
+			131072});
 			this.numericCostNew.Location = new System.Drawing.Point(110, 3);
 			this.numericCostNew.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericCostNew.Name = "numericCostNew";
 			this.numericCostNew.Size = new System.Drawing.Size(131, 20);
 			this.numericCostNew.TabIndex = 98;
@@ -255,21 +257,21 @@ namespace CAS.UI.UIControls.KitControls
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private System.Windows.Forms.ComboBox comboBoxKitSupplier;
-        private ReferenceControls.ExtendableRichContainer extendableRichContainer;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private MetroPanel panelExtendable;
-        private MetroPanel panelMain;
-        private System.Windows.Forms.Button buttonDelete;
-        private MetroLabel labelCostOverhaul;
-        private System.Windows.Forms.NumericUpDown numericCostOverhaul;
-        private MetroLabel labelCostServiceable;
-        private System.Windows.Forms.NumericUpDown numericCostServiceable;
-        private MetroLabel labelCoatNew;
-        private System.Windows.Forms.NumericUpDown numericCostNew;
-    }
+		private System.Windows.Forms.ComboBox comboBoxKitSupplier;
+		private ReferenceControls.ExtendableRichContainer extendableRichContainer;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+		private MetroPanel panelExtendable;
+		private MetroPanel panelMain;
+		private System.Windows.Forms.Button buttonDelete;
+		private MetroLabel labelCostOverhaul;
+		private System.Windows.Forms.NumericUpDown numericCostOverhaul;
+		private MetroLabel labelCostServiceable;
+		private System.Windows.Forms.NumericUpDown numericCostServiceable;
+		private MetroLabel labelCoatNew;
+		private System.Windows.Forms.NumericUpDown numericCostNew;
+	}
 }

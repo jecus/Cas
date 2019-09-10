@@ -1,35 +1,36 @@
 using System.Drawing;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.Auxiliary
 {
-    partial class LifelengthViewer
-    {
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class LifelengthViewer
+	{
+		/// <summary> 
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary> 
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Component Designer generated code
+		#region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary> 
+		/// Required method for Designer support - do not modify 
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.labelLeftHeader = new System.Windows.Forms.Label();
 			this.labelHoursHeader = new System.Windows.Forms.Label();
 			this.labelCyclesHeader = new System.Windows.Forms.Label();
@@ -122,15 +123,16 @@ namespace CAS.UI.UIControls.Auxiliary
 			this.comboBoxCalendarType.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.comboBoxCalendarType.FormattingEnabled = true;
 			this.comboBoxCalendarType.Items.AddRange(new object[] {
-            "Days",
-            "Months",
-            "Years"});
+			"Days",
+			"Months",
+			"Years"});
 			this.comboBoxCalendarType.Location = new System.Drawing.Point(406, 20);
 			this.comboBoxCalendarType.Margin = new System.Windows.Forms.Padding(2);
 			this.comboBoxCalendarType.Name = "comboBoxCalendarType";
 			this.comboBoxCalendarType.Size = new System.Drawing.Size(74, 24);
 			this.comboBoxCalendarType.TabIndex = 3;
 			this.comboBoxCalendarType.SelectedIndexChanged += new System.EventHandler(this.ComboBoxCalendarTypeSelectedIndexChanged);
+			this.comboBoxCalendarType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// textBoxCycles
 			// 
@@ -217,21 +219,21 @@ namespace CAS.UI.UIControls.Auxiliary
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private System.Windows.Forms.Label labelLeftHeader;
-        private System.Windows.Forms.Label labelHoursHeader;
-        private System.Windows.Forms.Label labelCyclesHeader;
-        private System.Windows.Forms.Label CalendarHeader;
-	    private System.Windows.Forms.Label FormattedCalendarHeader;
+		private System.Windows.Forms.Label labelLeftHeader;
+		private System.Windows.Forms.Label labelHoursHeader;
+		private System.Windows.Forms.Label labelCyclesHeader;
+		private System.Windows.Forms.Label CalendarHeader;
+		private System.Windows.Forms.Label FormattedCalendarHeader;
 		private System.Windows.Forms.TextBox textBoxCalendar;
-        private System.Windows.Forms.ComboBox comboBoxCalendarType;
-        private System.Windows.Forms.TextBox textBoxCycles;
-        private System.Windows.Forms.TextBox textBoxHours;
-	    private System.Windows.Forms.TextBox textBoxFormattedCalendar;
+		private System.Windows.Forms.ComboBox comboBoxCalendarType;
+		private System.Windows.Forms.TextBox textBoxCycles;
+		private System.Windows.Forms.TextBox textBoxHours;
+		private System.Windows.Forms.TextBox textBoxFormattedCalendar;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMain;
 
-    }
+	}
 }

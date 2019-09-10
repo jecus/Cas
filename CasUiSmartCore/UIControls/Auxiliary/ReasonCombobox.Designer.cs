@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.Auxiliary
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.Auxiliary
 {
     partial class ReasonComboBox
     {
@@ -44,10 +46,11 @@
             this.comboBoxReason.Size = new System.Drawing.Size(121, 21);
             this.comboBoxReason.TabIndex = 0;
             this.comboBoxReason.SelectedIndexChanged += new System.EventHandler(this.ComboBoxReasonSelectedIndexChanged);
-            // 
-            // buttonEdit
-            // 
-            this.buttonEdit.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.comboBoxReason.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// buttonEdit
+			// 
+			this.buttonEdit.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.buttonEdit.Location = new System.Drawing.Point(121, 0);
             this.buttonEdit.Margin = new System.Windows.Forms.Padding(0);
             this.buttonEdit.Name = "buttonEdit";

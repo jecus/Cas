@@ -1,38 +1,39 @@
 using System.Threading;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 {
-    partial class DiscrepancyControl
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class DiscrepancyControl
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            lookupComboboxDeferred.CancelAsync();
-            lookupComboboxDeferred.SelectedIndexChanged -= LookupComboboxDeferredSelectedIndexChanged;
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			lookupComboboxDeferred.CancelAsync();
+			lookupComboboxDeferred.SelectedIndexChanged -= LookupComboboxDeferredSelectedIndexChanged;
 
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DiscrepancyControl));
 			this.labelDiscrepancy = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
@@ -489,6 +490,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.lookupComboboxDeferred.TabIndex = 180;
 			this.lookupComboboxDeferred.Type = null;
 			this.lookupComboboxDeferred.SelectedIndexChanged += new System.EventHandler(this.LookupComboboxDeferredSelectedIndexChanged);
+			this.lookupComboboxDeferred.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboSpecialist1
 			// 
@@ -498,6 +500,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.comboSpecialist1.Name = "comboSpecialist1";
 			this.comboSpecialist1.Size = new System.Drawing.Size(194, 21);
 			this.comboSpecialist1.TabIndex = 181;
+			this.comboSpecialist1.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboSpecialist2
 			// 
@@ -507,6 +510,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.comboSpecialist2.Name = "comboSpecialist2";
 			this.comboSpecialist2.Size = new System.Drawing.Size(194, 21);
 			this.comboSpecialist2.TabIndex = 183;
+			this.comboSpecialist2.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelAuthB2
 			// 
@@ -548,6 +552,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.lookupComboboxFlight.TabIndex = 186;
 			this.lookupComboboxFlight.Type = null;
 			this.lookupComboboxFlight.Visible = false;
+			this.lookupComboboxFlight.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// panelMain
 			// 
@@ -621,6 +626,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.comboBoxActinType.Size = new System.Drawing.Size(194, 21);
 			this.comboBoxActinType.TabIndex = 219;
 			this.comboBoxActinType.Visible = false;
+			this.comboBoxActinType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelDeffectCat
 			// 
@@ -642,6 +648,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.comboBoxDeffectCat.Size = new System.Drawing.Size(194, 21);
 			this.comboBoxDeffectCat.TabIndex = 217;
 			this.comboBoxDeffectCat.Visible = false;
+			this.comboBoxDeffectCat.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelDeffectConfirm
 			// 
@@ -663,6 +670,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.comboBoxDeffectConfirm.Size = new System.Drawing.Size(194, 21);
 			this.comboBoxDeffectConfirm.TabIndex = 215;
 			this.comboBoxDeffectConfirm.Visible = false;
+			this.comboBoxDeffectConfirm.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelPhase
 			// 
@@ -697,6 +705,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.comboBoxPhase.Size = new System.Drawing.Size(194, 21);
 			this.comboBoxPhase.TabIndex = 187;
 			this.comboBoxPhase.Visible = false;
+			this.comboBoxPhase.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// linkLabelEditChart
 			// 
@@ -730,6 +739,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.comboBoxWP.Size = new System.Drawing.Size(651, 21);
 			this.comboBoxWP.TabIndex = 186;
 			this.comboBoxWP.SelectedIndexChanged += new System.EventHandler(this.ComboBoxWP_SelectedIndexChanged);
+			this.comboBoxWP.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label14
 			// 
@@ -760,6 +770,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.comboBoxComp.TabIndex = 204;
 			this.comboBoxComp.SelectedIndexChanged += new System.EventHandler(this.comboBoxComp_SelectedIndexChanged);
 			this.comboBoxComp.TextUpdate += new System.EventHandler(this.comboBoxComp_TextUpdate);
+			this.comboBoxComp.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// TemplateComboBox
 			// 
@@ -770,6 +781,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.TemplateComboBox.TabIndex = 211;
 			this.TemplateComboBox.SelectedIndexChanged += new System.EventHandler(this.TemplateComboBox_SelectedIndexChanged);
 			this.TemplateComboBox.TextUpdate += new System.EventHandler(this.TemplateComboBox_TextUpdate);
+			this.TemplateComboBox.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// ataChapterComboBox
 			// 
@@ -778,30 +790,31 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.ataChapterComboBox.Name = "ataChapterComboBox";
 			this.ataChapterComboBox.Size = new System.Drawing.Size(173, 21);
 			this.ataChapterComboBox.TabIndex = 208;
+			this.ataChapterComboBox.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// numericUpDownIndex
 			// 
 			this.numericUpDownIndex.Location = new System.Drawing.Point(98, 3);
 			this.numericUpDownIndex.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownIndex.Maximum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
+			4,
+			0,
+			0,
+			0});
 			this.numericUpDownIndex.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+			1,
+			0,
+			0,
+			0});
 			this.numericUpDownIndex.Name = "numericUpDownIndex";
 			this.numericUpDownIndex.Size = new System.Drawing.Size(38, 20);
 			this.numericUpDownIndex.TabIndex = 207;
 			this.numericUpDownIndex.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numericUpDownIndex.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+			1,
+			0,
+			0,
+			0});
 			// 
 			// panelExtendable
 			// 
@@ -889,10 +902,10 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.numericUpDownExtTimes.TabIndex = 209;
 			this.numericUpDownExtTimes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numericUpDownExtTimes.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+			1,
+			0,
+			0,
+			0});
 			// 
 			// labelExtension
 			// 
@@ -1114,6 +1127,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.comboBoxEngine.Size = new System.Drawing.Size(160, 21);
 			this.comboBoxEngine.TabIndex = 245;
 			this.comboBoxEngine.Visible = false;
+			this.comboBoxEngine.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelEngine
 			// 
@@ -1156,6 +1170,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.comboBoxOccurrence.Size = new System.Drawing.Size(278, 21);
 			this.comboBoxOccurrence.TabIndex = 242;
 			this.comboBoxOccurrence.Visible = false;
+			this.comboBoxOccurrence.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxAuth
 			// 
@@ -1167,6 +1182,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.comboBoxAuth.Size = new System.Drawing.Size(194, 21);
 			this.comboBoxAuth.TabIndex = 240;
 			this.comboBoxAuth.Visible = false;
+			this.comboBoxAuth.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelAuth
 			// 
@@ -1299,6 +1315,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.comboBoxInterruptionType.Size = new System.Drawing.Size(796, 21);
 			this.comboBoxInterruptionType.TabIndex = 228;
 			this.comboBoxInterruptionType.Visible = false;
+			this.comboBoxInterruptionType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelConsequenceType
 			// 
@@ -1320,6 +1337,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.comboBoxConsequenceType.Size = new System.Drawing.Size(278, 21);
 			this.comboBoxConsequenceType.TabIndex = 226;
 			this.comboBoxConsequenceType.Visible = false;
+			this.comboBoxConsequenceType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelOPSConsequence
 			// 
@@ -1341,6 +1359,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.comboBoxOPSConsequence.Size = new System.Drawing.Size(278, 21);
 			this.comboBoxOPSConsequence.TabIndex = 224;
 			this.comboBoxOPSConsequence.Visible = false;
+			this.comboBoxOPSConsequence.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// checkBoxOccurrence
 			// 
@@ -1386,6 +1405,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.comboBoxFaultConsequence.Size = new System.Drawing.Size(278, 21);
 			this.comboBoxFaultConsequence.TabIndex = 221;
 			this.comboBoxFaultConsequence.Visible = false;
+			this.comboBoxFaultConsequence.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// delimiter1
 			// 
@@ -1426,72 +1446,72 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
 		#endregion
 
 		private System.Windows.Forms.Label labelDiscrepancy;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textSNOn;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textSNOff;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textPNOff;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RadioButton radioClose;
-        private System.Windows.Forms.RadioButton radioOpen;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textADDNo;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textPNOn;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox textStation;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label labelAuthB1;
-        private CAS.UI.UIControls.Auxiliary.Delimiter delimiter3;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.RadioButton radioMaintenanceStaff;
-        private System.Windows.Forms.RadioButton radioCrew;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textCorrectiveAction;
-        private CAS.UI.UIControls.Auxiliary.Delimiter delimiter4;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label13;
-        private CAS.UI.UIControls.Auxiliary.Delimiter delimiter5;
-        private System.Windows.Forms.TextBox textDescription;
-        private System.Windows.Forms.Button buttonDelete;
-        private System.Windows.Forms.DateTimePicker dateTimePickerRTSDate;
-        private Auxiliary.LookupCombobox lookupComboboxDeferred;
-        private System.Windows.Forms.ComboBox comboSpecialist1;
-        private System.Windows.Forms.ComboBox comboSpecialist2;
-        private System.Windows.Forms.Label labelAuthB2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label labelFlight;
-        private Auxiliary.LookupCombobox lookupComboboxFlight;
-        private System.Windows.Forms.Panel panelMain;
-        private System.Windows.Forms.Panel panelExtendable;
-        private ReferenceControls.ExtendableRichContainer extendableRichContainer;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelMain;
-        private System.Windows.Forms.NumericUpDown numericUpDownIndex;
-        private Auxiliary.ATAChapterComboBox ataChapterComboBox;
-        private System.Windows.Forms.Panel panelDeferredInfo;
-        private System.Windows.Forms.TextBox textBoxMelCdl;
-        private System.Windows.Forms.Label labelMelCdl;
-        private System.Windows.Forms.Panel panelRelease;
-        private System.Windows.Forms.Label labelOpenDate;
-        private System.Windows.Forms.DateTimePicker dateTimePickerOpenDate;
-        private System.Windows.Forms.TextBox textBoxDeferredCategory;
-        private System.Windows.Forms.Label labelDefferedCategory;
-        private System.Windows.Forms.Label labelExtTimes;
-        private System.Windows.Forms.NumericUpDown numericUpDownExtTimes;
-        private System.Windows.Forms.Label labelExtension;
-        private System.Windows.Forms.DateTimePicker dateTimePickerExtension;
-        private Auxiliary.LifelengthViewer lifelengthViewerRemains;
-        private System.Windows.Forms.Label labelClosingDate;
-        private System.Windows.Forms.DateTimePicker dateTimePickerClosingDate;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.TextBox textSNOn;
+		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.TextBox textSNOff;
+		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.TextBox textPNOff;
+		private System.Windows.Forms.Label label9;
+		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.RadioButton radioClose;
+		private System.Windows.Forms.RadioButton radioOpen;
+		private System.Windows.Forms.Label label11;
+		private System.Windows.Forms.TextBox textADDNo;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.TextBox textPNOn;
+		private System.Windows.Forms.Label label16;
+		private System.Windows.Forms.TextBox textStation;
+		private System.Windows.Forms.Label label17;
+		private System.Windows.Forms.Label labelAuthB1;
+		private CAS.UI.UIControls.Auxiliary.Delimiter delimiter3;
+		private System.Windows.Forms.Panel panel2;
+		private System.Windows.Forms.RadioButton radioMaintenanceStaff;
+		private System.Windows.Forms.RadioButton radioCrew;
+		private System.Windows.Forms.Label label12;
+		private System.Windows.Forms.TextBox textCorrectiveAction;
+		private CAS.UI.UIControls.Auxiliary.Delimiter delimiter4;
+		private System.Windows.Forms.Label label10;
+		private System.Windows.Forms.Label label13;
+		private CAS.UI.UIControls.Auxiliary.Delimiter delimiter5;
+		private System.Windows.Forms.TextBox textDescription;
+		private System.Windows.Forms.Button buttonDelete;
+		private System.Windows.Forms.DateTimePicker dateTimePickerRTSDate;
+		private Auxiliary.LookupCombobox lookupComboboxDeferred;
+		private System.Windows.Forms.ComboBox comboSpecialist1;
+		private System.Windows.Forms.ComboBox comboSpecialist2;
+		private System.Windows.Forms.Label labelAuthB2;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label labelFlight;
+		private Auxiliary.LookupCombobox lookupComboboxFlight;
+		private System.Windows.Forms.Panel panelMain;
+		private System.Windows.Forms.Panel panelExtendable;
+		private ReferenceControls.ExtendableRichContainer extendableRichContainer;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelMain;
+		private System.Windows.Forms.NumericUpDown numericUpDownIndex;
+		private Auxiliary.ATAChapterComboBox ataChapterComboBox;
+		private System.Windows.Forms.Panel panelDeferredInfo;
+		private System.Windows.Forms.TextBox textBoxMelCdl;
+		private System.Windows.Forms.Label labelMelCdl;
+		private System.Windows.Forms.Panel panelRelease;
+		private System.Windows.Forms.Label labelOpenDate;
+		private System.Windows.Forms.DateTimePicker dateTimePickerOpenDate;
+		private System.Windows.Forms.TextBox textBoxDeferredCategory;
+		private System.Windows.Forms.Label labelDefferedCategory;
+		private System.Windows.Forms.Label labelExtTimes;
+		private System.Windows.Forms.NumericUpDown numericUpDownExtTimes;
+		private System.Windows.Forms.Label labelExtension;
+		private System.Windows.Forms.DateTimePicker dateTimePickerExtension;
+		private Auxiliary.LifelengthViewer lifelengthViewerRemains;
+		private System.Windows.Forms.Label labelClosingDate;
+		private System.Windows.Forms.DateTimePicker dateTimePickerClosingDate;
 		private System.Windows.Forms.Label label3;
 		private Auxiliary.ATAChapterComboBox TemplateComboBox;
 		private Auxiliary.Delimiter delimiter1;

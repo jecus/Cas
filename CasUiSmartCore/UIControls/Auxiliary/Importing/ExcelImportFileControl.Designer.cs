@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.Auxiliary.Importing
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.Auxiliary.Importing
 {
     partial class ExcelImportFileControl
     {
@@ -59,10 +61,11 @@
             this.comboBoxSheets.Size = new System.Drawing.Size(350, 26);
             this.comboBoxSheets.TabIndex = 35;
             this.comboBoxSheets.SelectedIndexChanged += new System.EventHandler(this.ComboBoxSheetsSelectedIndexChanged);
-            // 
-            // labelSheet
-            // 
-            this.labelSheet.AutoSize = true;
+            this.comboBoxSheets.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// labelSheet
+			// 
+			this.labelSheet.AutoSize = true;
             this.labelSheet.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelSheet.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.labelSheet.Location = new System.Drawing.Point(3, 38);

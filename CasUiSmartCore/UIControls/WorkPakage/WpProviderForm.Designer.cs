@@ -1,9 +1,7 @@
-﻿
-
-
-using CAS.UI.UIControls.Auxiliary;
+﻿using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using EntityCore.DTO.General;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.WorkPakage
 {
@@ -369,6 +367,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.comboBoxOffering.Name = "comboBoxOffering";
 			this.comboBoxOffering.Size = new System.Drawing.Size(88, 20);
 			this.comboBoxOffering.TabIndex = 299;
+			this.comboBoxOffering.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// numericUpDownAD
 			// 

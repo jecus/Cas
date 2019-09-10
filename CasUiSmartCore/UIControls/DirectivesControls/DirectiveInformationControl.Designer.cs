@@ -1,38 +1,39 @@
 ﻿using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.DirectivesControls
 {
-    partial class DirectiveInformationControl
-    {
-        /// <summary> 
-        /// Требуется переменная конструктора.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class DirectiveInformationControl
+	{
+		/// <summary> 
+		/// Требуется переменная конструктора.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Освободить все используемые ресурсы.
-        /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            dateTimePickerEffDate.ValueChanged -= DateTimePickerEffDateValueChanged;
+		/// <summary> 
+		/// Освободить все используемые ресурсы.
+		/// </summary>
+		/// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			dateTimePickerEffDate.ValueChanged -= DateTimePickerEffDateValueChanged;
 
-            base.Dispose(disposing);
-        }
+			base.Dispose(disposing);
+		}
 
-        #region Код, автоматически созданный конструктором компонентов
+		#region Код, автоматически созданный конструктором компонентов
 
-        /// <summary> 
-        /// Обязательный метод для поддержки конструктора - не изменяйте 
-        /// содержимое данного метода при помощи редактора кода.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary> 
+		/// Обязательный метод для поддержки конструктора - не изменяйте 
+		/// содержимое данного метода при помощи редактора кода.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.labelATAChapter = new System.Windows.Forms.Label();
 			this.labelTitle = new System.Windows.Forms.Label();
 			this.labelEffectivityDate = new System.Windows.Forms.Label();
@@ -297,6 +298,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.ataChapterComboBox.Name = "ataChapterComboBox";
 			this.ataChapterComboBox.Size = new System.Drawing.Size(350, 25);
 			this.ataChapterComboBox.TabIndex = 1;
+			this.ataChapterComboBox.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelEngOrderNo
 			// 
@@ -356,6 +358,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.adTypeComboBox.Name = "adTypeComboBox";
 			this.adTypeComboBox.Size = new System.Drawing.Size(350, 25);
 			this.adTypeComboBox.TabIndex = 15;
+			this.adTypeComboBox.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// attachedFileControlSTC
 			// 
@@ -438,6 +441,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.ComboBoxSbType.Name = "ComboBoxSbType";
 			this.ComboBoxSbType.Size = new System.Drawing.Size(350, 25);
 			this.ComboBoxSbType.TabIndex = 64;
+			this.ComboBoxSbType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelSbType
 			// 
@@ -489,34 +493,34 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private Label labelATAChapter;
-        private Label labelTitle;
-        private Label labelEffectivityDate;
-        private Label labelApplicability;
-        private Label labelBiWeeklyReport;
-        private Label labelSubject;
-        private Label labelRemarks;
-        private Label labelHiddenRemarks;
-        private TextBox textboxTitle;
-        private DateTimePicker dateTimePickerEffDate;
-        private TextBox textboxApplicability;
-        private TextBox textboxBiWeeklyReport;
-        private TextBox textboxSubject;
-        private TextBox textboxRemarks;
-        private TextBox textboxHiddenRemarks;
-        private Label labelSB;
-        private TextBox textBoxServiceBulletin;
-        private AttachedFileControl fileControlADNo;
-        private AttachedFileControl fileControlSB;
-        private Label labelEngOrderNo;
-        private TextBox textBoxEngOrderNo;
-        private Label labelADType;
-        private AttachedFileControl fileControlEO;
-        private ATAChapterComboBox ataChapterComboBox;
+		private Label labelATAChapter;
+		private Label labelTitle;
+		private Label labelEffectivityDate;
+		private Label labelApplicability;
+		private Label labelBiWeeklyReport;
+		private Label labelSubject;
+		private Label labelRemarks;
+		private Label labelHiddenRemarks;
+		private TextBox textboxTitle;
+		private DateTimePicker dateTimePickerEffDate;
+		private TextBox textboxApplicability;
+		private TextBox textboxBiWeeklyReport;
+		private TextBox textboxSubject;
+		private TextBox textboxRemarks;
+		private TextBox textboxHiddenRemarks;
+		private Label labelSB;
+		private TextBox textBoxServiceBulletin;
+		private AttachedFileControl fileControlADNo;
+		private AttachedFileControl fileControlSB;
+		private Label labelEngOrderNo;
+		private TextBox textBoxEngOrderNo;
+		private Label labelADType;
+		private AttachedFileControl fileControlEO;
+		private ATAChapterComboBox ataChapterComboBox;
 		private ATAChapterComboBox adTypeComboBox;
 		private AttachedFileControl attachedFileControlSTC;
 		private TextBox textBoxStc;

@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.QualityAssuranceControls
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.QualityAssuranceControls
 {
     partial class ProcedureDocRefControl
     {
@@ -119,10 +121,11 @@
             this.comboBoxDocument.Size = new System.Drawing.Size(301, 21);
             this.comboBoxDocument.TabIndex = 7;
             this.comboBoxDocument.SelectedIndexChanged += new System.EventHandler(this.DictionaryComboBoxModuleSelectedIndexChanged);
-            // 
-            // ProcedureDocRefControl
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.comboBoxDocument.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// ProcedureDocRefControl
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;

@@ -1,39 +1,41 @@
 ﻿using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.Helpers;
+
 namespace CAS.UI.UIControls.DirectivesControls
 {
-    partial class DamageGeneralInformationControl
-    {
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class DamageGeneralInformationControl
+	{
+		/// <summary> 
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
+		/// <summary> 
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
 
-            dateTimePickerEffDate.ValueChanged -= DateTimePickerEffDateValueChanged;
-            lookupComboboxJobCard.SelectedIndexChanged -= LookupComboboxJobCardSelectedIndexChanged;
+			dateTimePickerEffDate.ValueChanged -= DateTimePickerEffDateValueChanged;
+			lookupComboboxJobCard.SelectedIndexChanged -= LookupComboboxJobCardSelectedIndexChanged;
 
-            base.Dispose(disposing);
-        }
+			base.Dispose(disposing);
+		}
 
-        #region Component Designer generated code
+		#region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary> 
+		/// Required method for Designer support - do not modify 
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.labelATAChapter = new System.Windows.Forms.Label();
 			this.labelTitle = new System.Windows.Forms.Label();
 			this.labelEffectivityDate = new System.Windows.Forms.Label();
@@ -416,6 +418,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.comboBoxDamageType.Size = new System.Drawing.Size(350, 22);
 			this.comboBoxDamageType.TabIndex = 36;
 			this.comboBoxDamageType.SelectedIndexChanged += new System.EventHandler(this.ComboBoxDamageTypeSelectedIndexChanged);
+			this.comboBoxDamageType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelDamageType
 			// 
@@ -437,10 +440,10 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.numericUpDownLenght.Location = new System.Drawing.Point(750, 162);
 			this.numericUpDownLenght.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.numericUpDownLenght.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
+			100000,
+			0,
+			0,
+			0});
 			this.numericUpDownLenght.Name = "numericUpDownLenght";
 			this.numericUpDownLenght.Size = new System.Drawing.Size(135, 22);
 			this.numericUpDownLenght.TabIndex = 39;
@@ -465,10 +468,10 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.numericUpDownDepth.Location = new System.Drawing.Point(750, 214);
 			this.numericUpDownDepth.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.numericUpDownDepth.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
+			100000,
+			0,
+			0,
+			0});
 			this.numericUpDownDepth.Name = "numericUpDownDepth";
 			this.numericUpDownDepth.Size = new System.Drawing.Size(135, 22);
 			this.numericUpDownDepth.TabIndex = 41;
@@ -494,10 +497,10 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.numericUpDownWidth.Location = new System.Drawing.Point(750, 188);
 			this.numericUpDownWidth.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.numericUpDownWidth.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
+			100000,
+			0,
+			0,
+			0});
 			this.numericUpDownWidth.Name = "numericUpDownWidth";
 			this.numericUpDownWidth.Size = new System.Drawing.Size(135, 22);
 			this.numericUpDownWidth.TabIndex = 43;
@@ -523,10 +526,10 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.numericUpDownLenghtLimit.Location = new System.Drawing.Point(964, 162);
 			this.numericUpDownLenghtLimit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.numericUpDownLenghtLimit.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
+			100000,
+			0,
+			0,
+			0});
 			this.numericUpDownLenghtLimit.Name = "numericUpDownLenghtLimit";
 			this.numericUpDownLenghtLimit.Size = new System.Drawing.Size(135, 22);
 			this.numericUpDownLenghtLimit.TabIndex = 45;
@@ -551,10 +554,10 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.numericUpDownDepthLimit.Location = new System.Drawing.Point(964, 214);
 			this.numericUpDownDepthLimit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.numericUpDownDepthLimit.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
+			100000,
+			0,
+			0,
+			0});
 			this.numericUpDownDepthLimit.Name = "numericUpDownDepthLimit";
 			this.numericUpDownDepthLimit.Size = new System.Drawing.Size(135, 22);
 			this.numericUpDownDepthLimit.TabIndex = 47;
@@ -579,10 +582,10 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.numericUpDownWidthLimit.Location = new System.Drawing.Point(964, 188);
 			this.numericUpDownWidthLimit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.numericUpDownWidthLimit.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
+			100000,
+			0,
+			0,
+			0});
 			this.numericUpDownWidthLimit.Name = "numericUpDownWidthLimit";
 			this.numericUpDownWidthLimit.Size = new System.Drawing.Size(135, 22);
 			this.numericUpDownWidthLimit.TabIndex = 49;
@@ -609,6 +612,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.comboBoxMeasure.Name = "comboBoxMeasure";
 			this.comboBoxMeasure.Size = new System.Drawing.Size(136, 22);
 			this.comboBoxMeasure.TabIndex = 50;
+			this.comboBoxMeasure.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelMeasure
 			// 
@@ -631,10 +635,10 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.numericUpDownAY.Location = new System.Drawing.Point(750, 241);
 			this.numericUpDownAY.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.numericUpDownAY.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
+			100000,
+			0,
+			0,
+			0});
 			this.numericUpDownAY.Name = "numericUpDownAY";
 			this.numericUpDownAY.Size = new System.Drawing.Size(135, 22);
 			this.numericUpDownAY.TabIndex = 53;
@@ -673,6 +677,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.comboBoxClass.Name = "comboBoxClass";
 			this.comboBoxClass.Size = new System.Drawing.Size(350, 22);
 			this.comboBoxClass.TabIndex = 57;
+			this.comboBoxClass.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label5
 			// 
@@ -700,6 +705,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.lookupComboboxJobCard.TabIndex = 56;
 			this.lookupComboboxJobCard.Type = null;
 			this.lookupComboboxJobCard.SelectedIndexChanged += new System.EventHandler(this.LookupComboboxJobCardSelectedIndexChanged);
+			this.lookupComboboxJobCard.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// fileControlInspectionDocs
 			// 
@@ -766,6 +772,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.ataChapterComboBox.Name = "ataChapterComboBox";
 			this.ataChapterComboBox.Size = new System.Drawing.Size(350, 25);
 			this.ataChapterComboBox.TabIndex = 1;
+			this.ataChapterComboBox.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// fileControlEO
 			// 
@@ -881,63 +888,63 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private Label labelATAChapter;
-        private Label labelTitle;
-        private Label labelEffectivityDate;
-        private Label labelApplicability;
-        private Label labelBiWeeklyReport;
-        private Label labelSubject;
-        private Label labelRemarks;
-        private Label labelHiddenRemarks;
-        private TextBox textboxTitle;
-        private DateTimePicker dateTimePickerEffDate;
-        private TextBox textboxApplicability;
-        private TextBox textboxBiWeeklyReport;
-        private TextBox textboxSubject;
-        private TextBox textboxRemarks;
-        private TextBox textboxHiddenRemarks;
-        private Label labelSB;
-        private TextBox textBoxServiceBulletin;
-        private AttachedFileControl fileControlADNo;
-        private AttachedFileControl fileControlSB;
-        private Label labelEngOrderNo;
-        private TextBox textBoxEngOrderNo;
-        private RadioButton radioButtonAppliance;
-        private RadioButton radioButtonAirFrame;
-        private Label labelADType;
-        private AttachedFileControl fileControlEO;
-        private ATAChapterComboBox ataChapterComboBox;
-        private AttachedFileControl fileControlInspectionDocs;
-        private TextBox textBoxInspectionDocs;
-        private Label labelInspectionDocs;
-        private Label labelNumber;
-        private TextBox textBoxDamageNumber;
-        private Label labelLocation;
-        private TextBox textBoxLocation;
-        private ComboBox comboBoxDamageType;
-        private Label labelDamageType;
-        private NumericUpDown numericUpDownLenght;
-        private Label labelDamageLenght;
-        private NumericUpDown numericUpDownDepth;
-        private Label labelDepth;
-        private NumericUpDown numericUpDownWidth;
-        private Label labelWidth;
-        private NumericUpDown numericUpDownLenghtLimit;
-        private Label label1;
-        private NumericUpDown numericUpDownDepthLimit;
-        private Label label2;
-        private NumericUpDown numericUpDownWidthLimit;
-        private Label label3;
-        private ComboBox comboBoxMeasure;
-        private Label labelMeasure;
-        private NumericUpDown numericUpDownAY;
-        private Label label4;
-        private LookupCombobox lookupComboboxJobCard;
-        private Label labelJobCard;
+		private Label labelATAChapter;
+		private Label labelTitle;
+		private Label labelEffectivityDate;
+		private Label labelApplicability;
+		private Label labelBiWeeklyReport;
+		private Label labelSubject;
+		private Label labelRemarks;
+		private Label labelHiddenRemarks;
+		private TextBox textboxTitle;
+		private DateTimePicker dateTimePickerEffDate;
+		private TextBox textboxApplicability;
+		private TextBox textboxBiWeeklyReport;
+		private TextBox textboxSubject;
+		private TextBox textboxRemarks;
+		private TextBox textboxHiddenRemarks;
+		private Label labelSB;
+		private TextBox textBoxServiceBulletin;
+		private AttachedFileControl fileControlADNo;
+		private AttachedFileControl fileControlSB;
+		private Label labelEngOrderNo;
+		private TextBox textBoxEngOrderNo;
+		private RadioButton radioButtonAppliance;
+		private RadioButton radioButtonAirFrame;
+		private Label labelADType;
+		private AttachedFileControl fileControlEO;
+		private ATAChapterComboBox ataChapterComboBox;
+		private AttachedFileControl fileControlInspectionDocs;
+		private TextBox textBoxInspectionDocs;
+		private Label labelInspectionDocs;
+		private Label labelNumber;
+		private TextBox textBoxDamageNumber;
+		private Label labelLocation;
+		private TextBox textBoxLocation;
+		private ComboBox comboBoxDamageType;
+		private Label labelDamageType;
+		private NumericUpDown numericUpDownLenght;
+		private Label labelDamageLenght;
+		private NumericUpDown numericUpDownDepth;
+		private Label labelDepth;
+		private NumericUpDown numericUpDownWidth;
+		private Label labelWidth;
+		private NumericUpDown numericUpDownLenghtLimit;
+		private Label label1;
+		private NumericUpDown numericUpDownDepthLimit;
+		private Label label2;
+		private NumericUpDown numericUpDownWidthLimit;
+		private Label label3;
+		private ComboBox comboBoxMeasure;
+		private Label labelMeasure;
+		private NumericUpDown numericUpDownAY;
+		private Label label4;
+		private LookupCombobox lookupComboboxJobCard;
+		private Label labelJobCard;
 		private ComboBox comboBoxClass;
 		private Label label5;
 		private Label label6;

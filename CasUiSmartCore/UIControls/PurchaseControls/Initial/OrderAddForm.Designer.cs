@@ -1,6 +1,7 @@
 ﻿using CASTerms;
 using EntityCore.DTO.General;
 using MetroFramework.Controls;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.PurchaseControls.Initial
 {
@@ -560,6 +561,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxPriority.Name = "comboBoxPriority";
 			this.comboBoxPriority.Size = new System.Drawing.Size(421, 25);
 			this.comboBoxPriority.TabIndex = 250;
+			this.comboBoxPriority.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label19
 			// 
@@ -762,6 +764,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxMeasure.Size = new System.Drawing.Size(421, 21);
 			this.comboBoxMeasure.TabIndex = 141;
 			this.comboBoxMeasure.SelectedIndexChanged += new System.EventHandler(this.comboBoxMeasure_SelectedIndexChanged);
+			this.comboBoxMeasure.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelMeasure
 			// 
@@ -803,6 +806,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.dictionaryComboProduct.Size = new System.Drawing.Size(423, 21);
 			this.dictionaryComboProduct.TabIndex = 135;
 			this.dictionaryComboProduct.Type = null;
+			this.dictionaryComboProduct.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelProduct
 			// 
@@ -927,6 +931,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxDefferedCategory.Name = "comboBoxDefferedCategory";
 			this.comboBoxDefferedCategory.Size = new System.Drawing.Size(421, 25);
 			this.comboBoxDefferedCategory.TabIndex = 145;
+			this.comboBoxDefferedCategory.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelDefferedCategory
 			// 
@@ -957,6 +962,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxReason.Name = "comboBoxReason";
 			this.comboBoxReason.Size = new System.Drawing.Size(421, 25);
 			this.comboBoxReason.TabIndex = 169;
+			this.comboBoxReason.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelDestination
 			// 
@@ -978,6 +984,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxDestination.Size = new System.Drawing.Size(421, 25);
 			this.comboBoxDestination.TabIndex = 171;
 			this.comboBoxDestination.SelectedIndexChanged += new System.EventHandler(this.comboBoxDestination_SelectedIndexChanged);
+			this.comboBoxDestination.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// checkBoxRepair
 			// 
@@ -1072,6 +1079,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxTypeOfOperation.Name = "comboBoxTypeOfOperation";
 			this.comboBoxTypeOfOperation.Size = new System.Drawing.Size(229, 21);
 			this.comboBoxTypeOfOperation.TabIndex = 250;
+			this.comboBoxTypeOfOperation.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxApprovedBy
 			// 
@@ -1080,6 +1088,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxApprovedBy.Name = "comboBoxApprovedBy";
 			this.comboBoxApprovedBy.Size = new System.Drawing.Size(229, 21);
 			this.comboBoxApprovedBy.TabIndex = 252;
+			this.comboBoxApprovedBy.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label4
 			// 
@@ -1098,6 +1107,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxPublishedBy.Name = "comboBoxPublishedBy";
 			this.comboBoxPublishedBy.Size = new System.Drawing.Size(229, 21);
 			this.comboBoxPublishedBy.TabIndex = 254;
+			this.comboBoxPublishedBy.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label5
 			// 
@@ -1116,6 +1126,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxClosedBy.Name = "comboBoxClosedBy";
 			this.comboBoxClosedBy.Size = new System.Drawing.Size(229, 21);
 			this.comboBoxClosedBy.TabIndex = 256;
+			this.comboBoxClosedBy.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label6
 			// 
@@ -1298,6 +1309,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxShipBy.Name = "comboBoxShipBy";
 			this.comboBoxShipBy.Size = new System.Drawing.Size(229, 21);
 			this.comboBoxShipBy.TabIndex = 266;
+			this.comboBoxShipBy.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label11
 			// 
@@ -1360,6 +1372,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxIncoTerm.Name = "comboBoxIncoTerm";
 			this.comboBoxIncoTerm.Size = new System.Drawing.Size(229, 21);
 			this.comboBoxIncoTerm.TabIndex = 270;
+			this.comboBoxIncoTerm.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label13
 			// 
@@ -1388,6 +1401,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxCarrier.Name = "comboBoxCarrier";
 			this.comboBoxCarrier.Size = new System.Drawing.Size(229, 21);
 			this.comboBoxCarrier.TabIndex = 274;
+			this.comboBoxCarrier.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label15
 			// 
@@ -1564,6 +1578,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxCountry.Name = "comboBoxCountry";
 			this.comboBoxCountry.Size = new System.Drawing.Size(229, 21);
 			this.comboBoxCountry.TabIndex = 281;
+			this.comboBoxCountry.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// listViewQuatationItems
 			// 

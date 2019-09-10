@@ -1,35 +1,36 @@
 ﻿using MetroFramework.Controls;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.WorkPakage
 {
-    partial class SelectWPPrintTasksForm
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class SelectWPPrintTasksForm
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectWPPrintTasksForm));
@@ -55,16 +56,16 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.dataGridViewItems.AllowUserToAddRows = false;
 			this.dataGridViewItems.AllowUserToDeleteRows = false;
 			this.dataGridViewItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Left) 
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.dataGridViewItems.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
 			this.dataGridViewItems.BackgroundColor = System.Drawing.SystemColors.Window;
 			this.dataGridViewItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridViewItems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnDescription,
-            this.ColumnTaskCard,
-            this.ColumnPrintInWP,
-            this.ColumnQty});
+			this.ColumnDescription,
+			this.ColumnTaskCard,
+			this.ColumnPrintInWP,
+			this.ColumnQty});
 			this.dataGridViewItems.Location = new System.Drawing.Point(10, 62);
 			this.dataGridViewItems.Margin = new System.Windows.Forms.Padding(2);
 			this.dataGridViewItems.Name = "dataGridViewItems";
@@ -86,8 +87,8 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			this.ColumnQty.HeaderText = "Q-ty";
 			this.ColumnQty.Items.AddRange(new object[] {
-            "One for all",
-            "One for One"});
+			"One for all",
+			"One for One"});
 			this.ColumnQty.Name = "ColumnQty";
 			this.ColumnQty.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.ColumnQty.Width = 80;
@@ -181,6 +182,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.comboBoxRoutingTaskGrouping.Name = "comboBoxRoutingTaskGrouping";
 			this.comboBoxRoutingTaskGrouping.Size = new System.Drawing.Size(187, 21);
 			this.comboBoxRoutingTaskGrouping.TabIndex = 5;
+			this.comboBoxRoutingTaskGrouping.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelRtGrouping
 			// 
@@ -248,18 +250,18 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private System.Windows.Forms.DataGridView dataGridViewItems;
-        private System.Windows.Forms.Button buttonOK;
-        private MetroCheckBox checkBoxPrintDupliates;
-        private MetroCheckBox checkBoxPrintIncoming;
-        private MetroTextBox textBoxNumber;
-        private MetroLabel labelJONumber;
-        private System.Windows.Forms.ComboBox comboBoxRoutingTaskGrouping;
-        private MetroLabel labelRtGrouping;
+		private System.Windows.Forms.DataGridView dataGridViewItems;
+		private System.Windows.Forms.Button buttonOK;
+		private MetroCheckBox checkBoxPrintDupliates;
+		private MetroCheckBox checkBoxPrintIncoming;
+		private MetroTextBox textBoxNumber;
+		private MetroLabel labelJONumber;
+		private System.Windows.Forms.ComboBox comboBoxRoutingTaskGrouping;
+		private MetroLabel labelRtGrouping;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTaskCard;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn ColumnPrintInWP;

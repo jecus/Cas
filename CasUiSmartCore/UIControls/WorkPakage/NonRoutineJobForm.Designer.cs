@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using MetroFramework.Controls;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.WorkPakage
 {
@@ -412,6 +413,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.comboBoxCategories.TabIndex = 18;
 			this.comboBoxCategories.Visible = false;
 			this.comboBoxCategories.SelectedIndexChanged += new System.EventHandler(this.ComboBoxCategoriesSelectedIndexChanged);
+			this.comboBoxCategories.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// buttonsPanel
 			// 
@@ -480,6 +482,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.ataChapterComboBox.Name = "ataChapterComboBox";
 			this.ataChapterComboBox.Size = new System.Drawing.Size(300, 22);
 			this.ataChapterComboBox.TabIndex = 7;
+			this.ataChapterComboBox.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// fileControl
 			// 

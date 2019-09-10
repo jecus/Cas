@@ -1,4 +1,5 @@
 ﻿using MetroFramework.Controls;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.ScheduleControls.Trip
 {
@@ -79,23 +80,24 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 			this.comboBox1.TabIndex = 30;
 			this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
 			this.comboBox1.TextUpdate += new System.EventHandler(this.comboBox1_TextUpdate);
+			this.comboBox1.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// dataGridViewFlights
 			// 
 			this.dataGridViewFlights.AllowUserToAddRows = false;
 			this.dataGridViewFlights.AllowUserToDeleteRows = false;
 			this.dataGridViewFlights.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.dataGridViewFlights.BackgroundColor = System.Drawing.SystemColors.Window;
 			this.dataGridViewFlights.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridViewFlights.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnCheck,
-            this.ColumnFlightNo,
-            this.ColumnFrom,
-            this.ColumnTo,
-            this.ColumnFlightDate,
-            this.ColumnTakeOff,
-            this.ColumnLDG});
+			this.ColumnCheck,
+			this.ColumnFlightNo,
+			this.ColumnFrom,
+			this.ColumnTo,
+			this.ColumnFlightDate,
+			this.ColumnTakeOff,
+			this.ColumnLDG});
 			this.dataGridViewFlights.Location = new System.Drawing.Point(7, 120);
 			this.dataGridViewFlights.Margin = new System.Windows.Forms.Padding(2);
 			this.dataGridViewFlights.Name = "dataGridViewFlights";

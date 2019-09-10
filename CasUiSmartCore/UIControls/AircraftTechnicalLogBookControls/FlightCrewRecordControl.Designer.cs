@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 {
     partial class FlightCrewRecordControl
     {
@@ -46,10 +48,11 @@
             this.comboSpecialization.Size = new System.Drawing.Size(200, 24);
             this.comboSpecialization.TabIndex = 3;
             this.comboSpecialization.SelectedIndexChanged += new System.EventHandler(this.ComboSpecializationSelectedIndexChanged);
-            // 
-            // labelSpecialization
-            // 
-            this.labelSpecialization.AutoSize = true;
+            this.comboSpecialization.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// labelSpecialization
+			// 
+			this.labelSpecialization.AutoSize = true;
             this.labelSpecialization.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelSpecialization.Location = new System.Drawing.Point(4, 0);
             this.labelSpecialization.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -112,10 +115,11 @@
             this.comboSpecialist.Size = new System.Drawing.Size(200, 24);
             this.comboSpecialist.TabIndex = 4;
             this.comboSpecialist.SelectedIndexChanged += new System.EventHandler(this.ComboSpecialistSelectedIndexChanged);
-            // 
-            // FlightCrewRecordControl
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.comboSpecialist.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// FlightCrewRecordControl
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;

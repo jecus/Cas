@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.Auxiliary.Importing
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.Auxiliary.Importing
 {
     partial class ImportDirectiveThresholdControl
     {
@@ -100,10 +102,11 @@
             this.comboBoxHoursRepeat.Name = "comboBoxHoursRepeat";
             this.comboBoxHoursRepeat.Size = new System.Drawing.Size(113, 26);
             this.comboBoxHoursRepeat.TabIndex = 44;
-            // 
-            // comboBoxWORepeat
-            // 
-            this.comboBoxWORepeat.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.comboBoxHoursRepeat.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// comboBoxWORepeat
+			// 
+			this.comboBoxWORepeat.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.comboBoxWORepeat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxWORepeat.Font = new System.Drawing.Font("Verdana", 9F);
             this.comboBoxWORepeat.ForeColor = System.Drawing.Color.DimGray;
@@ -112,10 +115,11 @@
             this.comboBoxWORepeat.Name = "comboBoxWORepeat";
             this.comboBoxWORepeat.Size = new System.Drawing.Size(113, 26);
             this.comboBoxWORepeat.TabIndex = 48;
-            // 
-            // labelRepeat
-            // 
-            this.labelRepeat.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.comboBoxWORepeat.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// labelRepeat
+			// 
+			this.labelRepeat.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelRepeat.AutoSize = true;
             this.labelRepeat.Font = new System.Drawing.Font("Verdana", 9F);
             this.labelRepeat.ForeColor = System.Drawing.Color.DimGray;
@@ -170,10 +174,11 @@
             this.comboBoxCalendarRepeat.Name = "comboBoxCalendarRepeat";
             this.comboBoxCalendarRepeat.Size = new System.Drawing.Size(113, 26);
             this.comboBoxCalendarRepeat.TabIndex = 46;
-            // 
-            // comboBox10
-            // 
-            this.comboBox10.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.comboBoxCalendarRepeat.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// comboBox10
+			// 
+			this.comboBox10.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.comboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox10.Font = new System.Drawing.Font("Verdana", 9F);
             this.comboBox10.ForeColor = System.Drawing.Color.DimGray;
@@ -182,10 +187,11 @@
             this.comboBox10.Name = "comboBox10";
             this.comboBox10.Size = new System.Drawing.Size(113, 26);
             this.comboBox10.TabIndex = 45;
-            // 
-            // groupFirstPerformance
-            // 
-            this.groupFirstPerformance.AutoSize = true;
+            this.comboBox10.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// groupFirstPerformance
+			// 
+			this.groupFirstPerformance.AutoSize = true;
             this.groupFirstPerformance.Controls.Add(this.label2);
             this.groupFirstPerformance.Controls.Add(this.comboBoxWO);
             this.groupFirstPerformance.Controls.Add(this.label1);
@@ -231,10 +237,11 @@
             this.comboBoxWO.Name = "comboBoxWO";
             this.comboBoxWO.Size = new System.Drawing.Size(113, 26);
             this.comboBoxWO.TabIndex = 35;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
+            this.comboBoxWO.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 9F);
             this.label1.ForeColor = System.Drawing.Color.DimGray;
             this.label1.Location = new System.Drawing.Point(245, 26);
@@ -277,10 +284,11 @@
             this.comboBoxCalandarNew.Name = "comboBoxCalandarNew";
             this.comboBoxCalandarNew.Size = new System.Drawing.Size(113, 26);
             this.comboBoxCalandarNew.TabIndex = 33;
-            // 
-            // comboBox5
-            // 
-            this.comboBox5.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.comboBoxCalandarNew.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// comboBox5
+			// 
+			this.comboBox5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.comboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox5.Font = new System.Drawing.Font("Verdana", 9F);
             this.comboBox5.ForeColor = System.Drawing.Color.DimGray;
@@ -289,10 +297,11 @@
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(113, 26);
             this.comboBox5.TabIndex = 32;
-            // 
-            // comboBoxNewHours
-            // 
-            this.comboBoxNewHours.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.comboBox5.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// comboBoxNewHours
+			// 
+			this.comboBoxNewHours.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.comboBoxNewHours.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxNewHours.Font = new System.Drawing.Font("Verdana", 9F);
             this.comboBoxNewHours.ForeColor = System.Drawing.Color.DimGray;
@@ -301,10 +310,11 @@
             this.comboBoxNewHours.Name = "comboBoxNewHours";
             this.comboBoxNewHours.Size = new System.Drawing.Size(113, 26);
             this.comboBoxNewHours.TabIndex = 31;
-            // 
-            // labelSinceEffDate
-            // 
-            this.labelSinceEffDate.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.comboBoxNewHours.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// labelSinceEffDate
+			// 
+			this.labelSinceEffDate.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelSinceEffDate.AutoSize = true;
             this.labelSinceEffDate.Font = new System.Drawing.Font("Verdana", 9F);
             this.labelSinceEffDate.ForeColor = System.Drawing.Color.DimGray;
@@ -325,10 +335,11 @@
             this.comboBoxCanendarEffDate.Name = "comboBoxCanendarEffDate";
             this.comboBoxCanendarEffDate.Size = new System.Drawing.Size(113, 26);
             this.comboBoxCanendarEffDate.TabIndex = 29;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.comboBoxCanendarEffDate.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// comboBox2
+			// 
+			this.comboBox2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.Font = new System.Drawing.Font("Verdana", 9F);
             this.comboBox2.ForeColor = System.Drawing.Color.DimGray;
@@ -337,10 +348,11 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(113, 26);
             this.comboBox2.TabIndex = 28;
-            // 
-            // comboBoxEffDateHours
-            // 
-            this.comboBoxEffDateHours.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.comboBox2.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// comboBoxEffDateHours
+			// 
+			this.comboBoxEffDateHours.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.comboBoxEffDateHours.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxEffDateHours.Font = new System.Drawing.Font("Verdana", 9F);
             this.comboBoxEffDateHours.ForeColor = System.Drawing.Color.DimGray;
@@ -349,10 +361,11 @@
             this.comboBoxEffDateHours.Name = "comboBoxEffDateHours";
             this.comboBoxEffDateHours.Size = new System.Drawing.Size(113, 26);
             this.comboBoxEffDateHours.TabIndex = 26;
-            // 
-            // labelSinceNew
-            // 
-            this.labelSinceNew.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.comboBoxEffDateHours.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// labelSinceNew
+			// 
+			this.labelSinceNew.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelSinceNew.AutoSize = true;
             this.labelSinceNew.Font = new System.Drawing.Font("Verdana", 9F);
             this.labelSinceNew.ForeColor = System.Drawing.Color.DimGray;

@@ -1,39 +1,40 @@
 ﻿using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.ComponentControls
 {
-    partial class ComponentAddingGeneralInformationControl
-    {
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class ComponentAddingGeneralInformationControl
+	{
+		/// <summary> 
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();  
-            }
+		/// <summary> 
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();  
+			}
 
-            comboBoxModel.SelectedIndexChanged -= DictionaryComboProductSelectedIndexChanged;
+			comboBoxModel.SelectedIndexChanged -= DictionaryComboProductSelectedIndexChanged;
 
-            base.Dispose(disposing);
-        }
+			base.Dispose(disposing);
+		}
 
-        #region Component Designer generated code
+		#region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary> 
+		/// Required method for Designer support - do not modify 
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComponentAddingGeneralInformationControl));
 			this.labelMPDItem = new System.Windows.Forms.Label();
 			this.labelAtaChapter = new System.Windows.Forms.Label();
@@ -442,6 +443,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxModel.TabIndex = 0;
 			this.comboBoxModel.Type = null;
 			this.comboBoxModel.SelectedIndexChanged += new System.EventHandler(this.DictionaryComboProductSelectedIndexChanged);
+			this.comboBoxModel.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// textBoxALTPN
 			// 
@@ -462,6 +464,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxAtaChapter.Name = "comboBoxAtaChapter";
 			this.comboBoxAtaChapter.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxAtaChapter.TabIndex = 14;
+			this.comboBoxAtaChapter.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// delimiter1
 			// 
@@ -637,6 +640,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxMaintenenceType.Name = "comboBoxMaintenenceType";
 			this.comboBoxMaintenenceType.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxMaintenenceType.TabIndex = 24;
+			this.comboBoxMaintenenceType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelMaintenenceType
 			// 
@@ -687,6 +691,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxStorePosition.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxStorePosition.TabIndex = 11;
 			this.comboBoxStorePosition.Visible = false;
+			this.comboBoxStorePosition.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxComponentType
 			// 
@@ -704,6 +709,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxComponentType.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxComponentType.TabIndex = 25;
 			this.comboBoxComponentType.SelectedIndexChanged += new System.EventHandler(this.ComboBoxComponentTypeSelectedIndexChanged);
+			this.comboBoxComponentType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelComponentType
 			// 
@@ -721,10 +727,10 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.numericUpDownQuantity.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.numericUpDownQuantity.Location = new System.Drawing.Point(898, 91);
 			this.numericUpDownQuantity.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownQuantity.Name = "numericUpDownQuantity";
 			this.numericUpDownQuantity.Size = new System.Drawing.Size(252, 22);
 			this.numericUpDownQuantity.TabIndex = 26;
@@ -835,6 +841,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxStatus.Name = "comboBoxStatus";
 			this.comboBoxStatus.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxStatus.TabIndex = 90;
+			this.comboBoxStatus.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelStatus
 			// 
@@ -860,6 +867,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.dictionaryComboBoxLocation.Size = new System.Drawing.Size(250, 21);
 			this.dictionaryComboBoxLocation.TabIndex = 92;
 			this.dictionaryComboBoxLocation.Visible = false;
+			this.dictionaryComboBoxLocation.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// ComponentAddingGeneralInformationControl
 			// 
@@ -932,68 +940,68 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private System.Windows.Forms.Label labelMPDItem;
-        private System.Windows.Forms.Label labelAtaChapter;
-        private System.Windows.Forms.Label labelDescription;
-        private System.Windows.Forms.Label labelPartNo;
-        private System.Windows.Forms.Label labelSerialNo;
-        private System.Windows.Forms.Label labelInstallationData;
-        private System.Windows.Forms.Label labelInstallationDate;
-        private System.Windows.Forms.Label labelComponentTSNCSN;
-        private System.Windows.Forms.Label labelAircraftTSNCSN;
-        private System.Windows.Forms.Label labelActualState;
-        private System.Windows.Forms.Label labelDateAsOf;
-        private System.Windows.Forms.Label labelComponentCurrentTSNCSN;
-        private System.Windows.Forms.Label labelTCSI;
-        private System.Windows.Forms.TextBox textBoxMPDItem;
-        private ATAChapterComboBox comboBoxAtaChapter;
-        private System.Windows.Forms.TextBox textBoxDescription;
-        private System.Windows.Forms.TextBox textBoxPartNo;
-        private System.Windows.Forms.TextBox textBoxSerialNo;
-        private DateTimePicker dateTimePickerInstallationDate;
-        private LifelengthViewer lifelengthViewerComponentTCSNOnInstall;
-        private LifelengthViewer lifelengthViewerAircraftTCSNOnInstall;
-        private DateTimePicker dateTimePickerDateAsOf;
-        private LifelengthViewer lifelengthViewerComponentCurrentTSNCSN;
-        private LifelengthViewer lifelengthViewerComponentTCSI;
-        private System.Windows.Forms.ComboBox comboBoxStorePosition;
-        private Delimiter delimiter1;
-        private Delimiter delimiter2;
-        private Label labelManufactureDate;
-        private DateTimePicker dateTimePickerManufactureDate;
-        //private LifelengthViewer lifelengthViewerComponentTSNCSN;
-        private Label labelDeliveryDate;
-        private DateTimePicker dateTimePickerDeliveryDate;
-        private Label labelPosition;
-        private Label labelManufacturer;
-        private TextBox textBoxPosition;
-        private TextBox textBoxManufacturer;
-        private Label labelModel;
-        private LookupCombobox comboBoxModel;
-        private TextBox textBoxALTPN;
-        private Label labelAltPn;
-        private CheckBox checkBoxLLPMark;
-        private ComboBox comboBoxMaintenenceType;
-        private Label labelMaintenenceType;
-        private Label labelLocation;
-        private Label labelQuantity;
-        private TreeDictionaryComboBox comboBoxComponentType;
-        private Label labelComponentType;
-        private NumericUpDown numericUpDownQuantity;
-        private Label labelBatchNumber;
-        private TextBox textBoxBatchNumber;
-        private Label labelIdNumber;
-        private TextBox textBoxIdNumber;
-        private CheckBox checkBoxPOOL;
-        private CheckBox checkBoxDangerous;
-        private Label labelProductCode;
-        private TextBox textBoxProductCode;
-        private ComboBox comboBoxStatus;
-        private Label labelStatus;
+		private System.Windows.Forms.Label labelMPDItem;
+		private System.Windows.Forms.Label labelAtaChapter;
+		private System.Windows.Forms.Label labelDescription;
+		private System.Windows.Forms.Label labelPartNo;
+		private System.Windows.Forms.Label labelSerialNo;
+		private System.Windows.Forms.Label labelInstallationData;
+		private System.Windows.Forms.Label labelInstallationDate;
+		private System.Windows.Forms.Label labelComponentTSNCSN;
+		private System.Windows.Forms.Label labelAircraftTSNCSN;
+		private System.Windows.Forms.Label labelActualState;
+		private System.Windows.Forms.Label labelDateAsOf;
+		private System.Windows.Forms.Label labelComponentCurrentTSNCSN;
+		private System.Windows.Forms.Label labelTCSI;
+		private System.Windows.Forms.TextBox textBoxMPDItem;
+		private ATAChapterComboBox comboBoxAtaChapter;
+		private System.Windows.Forms.TextBox textBoxDescription;
+		private System.Windows.Forms.TextBox textBoxPartNo;
+		private System.Windows.Forms.TextBox textBoxSerialNo;
+		private DateTimePicker dateTimePickerInstallationDate;
+		private LifelengthViewer lifelengthViewerComponentTCSNOnInstall;
+		private LifelengthViewer lifelengthViewerAircraftTCSNOnInstall;
+		private DateTimePicker dateTimePickerDateAsOf;
+		private LifelengthViewer lifelengthViewerComponentCurrentTSNCSN;
+		private LifelengthViewer lifelengthViewerComponentTCSI;
+		private System.Windows.Forms.ComboBox comboBoxStorePosition;
+		private Delimiter delimiter1;
+		private Delimiter delimiter2;
+		private Label labelManufactureDate;
+		private DateTimePicker dateTimePickerManufactureDate;
+		//private LifelengthViewer lifelengthViewerComponentTSNCSN;
+		private Label labelDeliveryDate;
+		private DateTimePicker dateTimePickerDeliveryDate;
+		private Label labelPosition;
+		private Label labelManufacturer;
+		private TextBox textBoxPosition;
+		private TextBox textBoxManufacturer;
+		private Label labelModel;
+		private LookupCombobox comboBoxModel;
+		private TextBox textBoxALTPN;
+		private Label labelAltPn;
+		private CheckBox checkBoxLLPMark;
+		private ComboBox comboBoxMaintenenceType;
+		private Label labelMaintenenceType;
+		private Label labelLocation;
+		private Label labelQuantity;
+		private TreeDictionaryComboBox comboBoxComponentType;
+		private Label labelComponentType;
+		private NumericUpDown numericUpDownQuantity;
+		private Label labelBatchNumber;
+		private TextBox textBoxBatchNumber;
+		private Label labelIdNumber;
+		private TextBox textBoxIdNumber;
+		private CheckBox checkBoxPOOL;
+		private CheckBox checkBoxDangerous;
+		private Label labelProductCode;
+		private TextBox textBoxProductCode;
+		private ComboBox comboBoxStatus;
+		private Label labelStatus;
 		private DictionaryComboBox dictionaryComboBoxLocation;
 	}
 }
