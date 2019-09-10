@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 {
 	partial class EmployeeLicenseInstrumentRatingControl
 	{
@@ -83,6 +85,7 @@
 			this.comboBoxIcao.Name = "comboBoxIcao";
 			this.comboBoxIcao.Size = new System.Drawing.Size(227, 25);
 			this.comboBoxIcao.TabIndex = 50;
+			this.comboBoxIcao.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelFunction
 			// 
@@ -104,6 +107,7 @@
 			this.comboBoxMCDH.Name = "comboBoxMCDH";
 			this.comboBoxMCDH.Size = new System.Drawing.Size(82, 25);
 			this.comboBoxMCDH.TabIndex = 55;
+			this.comboBoxMCDH.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label1
 			// 
@@ -125,6 +129,7 @@
 			this.comboBoxMV.Name = "comboBoxMV";
 			this.comboBoxMV.Size = new System.Drawing.Size(82, 25);
 			this.comboBoxMV.TabIndex = 57;
+			this.comboBoxMV.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label2
 			// 
@@ -146,6 +151,7 @@
 			this.comboBoxRVR.Name = "comboBoxRVR";
 			this.comboBoxRVR.Size = new System.Drawing.Size(82, 25);
 			this.comboBoxRVR.TabIndex = 59;
+			this.comboBoxRVR.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label3
 			// 
@@ -167,6 +173,7 @@
 			this.comboBoxToRVR.Name = "comboBoxToRVR";
 			this.comboBoxToRVR.Size = new System.Drawing.Size(82, 25);
 			this.comboBoxToRVR.TabIndex = 61;
+			this.comboBoxToRVR.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label4
 			// 

@@ -1,36 +1,37 @@
-﻿using System.Windows.Forms;
+﻿using CAS.UI.Helpers;
+using System.Windows.Forms;
 using CAS.UI.Management.Dispatchering;
 
 namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
 {
-    partial class AircraftControl
-    {
-        /// <summary> 
-        /// Требуется переменная конструктора.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class AircraftControl
+	{
+		/// <summary> 
+		/// Требуется переменная конструктора.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Освободить все используемые ресурсы.
-        /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary> 
+		/// Освободить все используемые ресурсы.
+		/// </summary>
+		/// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Код, автоматически созданный конструктором компонентов
+		#region Код, автоматически созданный конструктором компонентов
 
-        /// <summary> 
-        /// Обязательный метод для поддержки конструктора - не изменяйте 
-        /// содержимое данного метода при помощи редактора кода.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary> 
+		/// Обязательный метод для поддержки конструктора - не изменяйте 
+		/// содержимое данного метода при помощи редактора кода.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			System.Windows.Forms.Label labelAircraftTSNCSN;
 			System.Windows.Forms.Label label1;
 			this.labelAircraftModel = new System.Windows.Forms.Label();
@@ -352,6 +353,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
 			this.dictionaryComboBoxAircraftModel.Size = new System.Drawing.Size(269, 25);
 			this.dictionaryComboBoxAircraftModel.TabIndex = 28;
 			this.dictionaryComboBoxAircraftModel.Type = null;
+			this.dictionaryComboBoxAircraftModel.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxMSG
 			// 
@@ -362,6 +364,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
 			this.comboBoxMSG.Name = "comboBoxMSG";
 			this.comboBoxMSG.Size = new System.Drawing.Size(271, 25);
 			this.comboBoxMSG.TabIndex = 28;
+			this.comboBoxMSG.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelMSG
 			// 
@@ -414,6 +417,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
 			this.comboBoxApuWorktime.TabIndex = 31;
 			this.comboBoxApuWorktime.Visible = false;
 			this.comboBoxApuWorktime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxApuWorktime_KeyPress);
+			this.comboBoxApuWorktime.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// numericUpDownAPU
 			// 
@@ -421,10 +425,10 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
 			this.numericUpDownAPU.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.numericUpDownAPU.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.numericUpDownAPU.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
+			1,
+			0,
+			0,
+			131072});
 			this.numericUpDownAPU.Location = new System.Drawing.Point(672, 184);
 			this.numericUpDownAPU.Name = "numericUpDownAPU";
 			this.numericUpDownAPU.Size = new System.Drawing.Size(91, 25);
@@ -552,36 +556,36 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
 
-        private Label labelAircraftModel;
-        private Label labelAircraftTypeCertificateNo;
-        private Label labelManufactureDate;
-        private Label labelSerialNumber;
-        private Label labelVariableNumber;
-        private Label labelLineNumber;
-        private Label labelRegistrationNumber;
-        private Label labelOwner;
-        private Label labelOperator;
-        private TextBox textBoxAircraftTypeCertificateNo;
-        private TextBox textBoxSerialNumber;
-        private TextBox textBoxVariableNumber;
-        private TextBox textBoxLineNumber;
-        private TextBox textBoxRegistrationNumber;
-        private TextBox textBoxOwner;
-        private TextBox textBoxOperator;
-        private DateTimePicker dateTimePickerManufactureDate;
-        private ReferenceLinkLabel linkMonthlyUtilization;
-        #endregion
-        private TableLayoutPanel tableLayoutPanel1;
-        private CAS.UI.UIControls.Auxiliary.LifelengthViewer lifelengthViewerStart;
-        private DateTimePicker dateTimePickerStart;
-        private DateTimePicker dateTimePickerTD;
-        private CAS.UI.UIControls.Auxiliary.LifelengthViewer lifelengthViewerToday;
-        private Auxiliary.LookupCombobox dictionaryComboBoxAircraftModel;
-        private ComboBox comboBoxMSG;
-        private Label labelMSG;
+		private Label labelAircraftModel;
+		private Label labelAircraftTypeCertificateNo;
+		private Label labelManufactureDate;
+		private Label labelSerialNumber;
+		private Label labelVariableNumber;
+		private Label labelLineNumber;
+		private Label labelRegistrationNumber;
+		private Label labelOwner;
+		private Label labelOperator;
+		private TextBox textBoxAircraftTypeCertificateNo;
+		private TextBox textBoxSerialNumber;
+		private TextBox textBoxVariableNumber;
+		private TextBox textBoxLineNumber;
+		private TextBox textBoxRegistrationNumber;
+		private TextBox textBoxOwner;
+		private TextBox textBoxOperator;
+		private DateTimePicker dateTimePickerManufactureDate;
+		private ReferenceLinkLabel linkMonthlyUtilization;
+		#endregion
+		private TableLayoutPanel tableLayoutPanel1;
+		private CAS.UI.UIControls.Auxiliary.LifelengthViewer lifelengthViewerStart;
+		private DateTimePicker dateTimePickerStart;
+		private DateTimePicker dateTimePickerTD;
+		private CAS.UI.UIControls.Auxiliary.LifelengthViewer lifelengthViewerToday;
+		private Auxiliary.LookupCombobox dictionaryComboBoxAircraftModel;
+		private ComboBox comboBoxMSG;
+		private Label labelMSG;
 		private ComboBox comboBoxApuWorktime;
 		private Label label2;
 		private Label label3;

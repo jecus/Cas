@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 {
 	partial class EmployeeMedicalControl
 	{
@@ -62,6 +64,7 @@
 			this.comboBoxClass.Name = "comboBoxClass";
 			this.comboBoxClass.Size = new System.Drawing.Size(88, 25);
 			this.comboBoxClass.TabIndex = 80;
+			this.comboBoxClass.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelIssue
 			// 

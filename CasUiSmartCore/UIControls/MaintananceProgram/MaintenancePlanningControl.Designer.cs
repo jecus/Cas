@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using AvControls.AvButtonT;
 using SmartCore.Entities.General.MaintenanceWorkscope;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.MaintananceProgram
 {
@@ -124,10 +125,11 @@ namespace CAS.UI.UIControls.MaintananceProgram
             this.comboBoxCheck.Size = new System.Drawing.Size(137, 25);
             this.comboBoxCheck.TabIndex = 2;
             this.comboBoxCheck.SelectedIndexChanged += new System.EventHandler(this.ComboBoxCheckSelectedIndexChanged);
-            // 
-            // comboBoxPerformance
-            // 
-            this.comboBoxPerformance.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCheck.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// comboBoxPerformance
+			// 
+			this.comboBoxPerformance.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxPerformance.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBoxPerformance.FormattingEnabled = true;
             this.comboBoxPerformance.Location = new System.Drawing.Point(319, 2);
@@ -135,10 +137,11 @@ namespace CAS.UI.UIControls.MaintananceProgram
             this.comboBoxPerformance.Name = "comboBoxPerformance";
             this.comboBoxPerformance.Size = new System.Drawing.Size(249, 25);
             this.comboBoxPerformance.TabIndex = 3;
-            // 
-            // labelCheck
-            // 
-            this.labelCheck.AutoSize = true;
+            this.comboBoxPerformance.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// labelCheck
+			// 
+			this.labelCheck.AutoSize = true;
             this.labelCheck.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelCheck.ForeColor = System.Drawing.Color.DimGray;
             this.labelCheck.Location = new System.Drawing.Point(25, 5);
@@ -255,10 +258,11 @@ namespace CAS.UI.UIControls.MaintananceProgram
             this.comboBoxByDate.Name = "comboBoxByDate";
             this.comboBoxByDate.Size = new System.Drawing.Size(487, 25);
             this.comboBoxByDate.TabIndex = 2;
-            // 
-            // dateTimePickerTo
-            // 
-            this.dateTimePickerTo.Enabled = false;
+            this.comboBoxByDate.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// dateTimePickerTo
+			// 
+			this.dateTimePickerTo.Enabled = false;
             this.dateTimePickerTo.Font = new System.Drawing.Font("Verdana", 10.2F);
             this.dateTimePickerTo.Location = new System.Drawing.Point(342, 58);
             this.dateTimePickerTo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);

@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 {
     partial class PowerUnitAccelerationControlItem
     {
@@ -115,10 +117,11 @@
             this.comboBoxEngine.Size = new System.Drawing.Size(150, 21);
             this.comboBoxEngine.TabIndex = 141;
             this.comboBoxEngine.SelectedIndexChanged += new System.EventHandler(this.ComboBoxEngineSelectedIndexChanged);
-            // 
-            // labelAccelerationTime
-            // 
-            this.labelAccelerationTime.AutoSize = true;
+            this.comboBoxEngine.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// labelAccelerationTime
+			// 
+			this.labelAccelerationTime.AutoSize = true;
             this.labelAccelerationTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelAccelerationTime.Location = new System.Drawing.Point(159, 0);
             this.labelAccelerationTime.Name = "labelAccelerationTime";

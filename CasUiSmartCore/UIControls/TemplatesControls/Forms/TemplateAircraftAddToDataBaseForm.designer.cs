@@ -3,38 +3,38 @@ using System.Windows.Forms;
 using Auxiliary;
 using CAS.UI.UIControls.Auxiliary;
 using SmartCore.Entities.General.Templates;
-
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.TemplatesControls.Forms
 {
-    partial class TemplateAircraftAddToDataBaseForm
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class TemplateAircraftAddToDataBaseForm
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.labelTemplate = new System.Windows.Forms.Label();
 			this.comboBoxTemplates = new System.Windows.Forms.ComboBox();
 			this.buttonCreateAircraft = new System.Windows.Forms.Button();
@@ -67,6 +67,7 @@ namespace CAS.UI.UIControls.TemplatesControls.Forms
 			this.comboBoxTemplates.Size = new System.Drawing.Size(379, 25);
 			this.comboBoxTemplates.TabIndex = 1;
 			this.comboBoxTemplates.SelectedIndexChanged += new System.EventHandler(this.ComboBoxTemplatesSelectedIndexChanged);
+			this.comboBoxTemplates.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// buttonCreateAircraft
 			// 
@@ -98,8 +99,8 @@ namespace CAS.UI.UIControls.TemplatesControls.Forms
 			// splitContainerMain
 			// 
 			this.splitContainerMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Left) 
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.splitContainerMain.Location = new System.Drawing.Point(15, 95);
 			this.splitContainerMain.Name = "splitContainerMain";
 			// 
@@ -146,15 +147,15 @@ namespace CAS.UI.UIControls.TemplatesControls.Forms
 			this.splitContainerMain.ResumeLayout(false);
 			this.ResumeLayout(false);
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private SplitContainer splitContainerMain;
-        private TreeView treeViewTemplate;
-        private Label labelTemplate;
-        private ComboBox comboBoxTemplates;
-        private Button buttonCreateAircraft;
-        private Button buttonCancel;
-    }
+		private SplitContainer splitContainerMain;
+		private TreeView treeViewTemplate;
+		private Label labelTemplate;
+		private ComboBox comboBoxTemplates;
+		private Button buttonCreateAircraft;
+		private Button buttonCancel;
+	}
 }

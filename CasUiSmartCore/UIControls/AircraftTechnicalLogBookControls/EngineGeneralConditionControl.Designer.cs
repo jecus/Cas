@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 {
     partial class EngineGeneralConditionControl
     {
@@ -214,10 +216,11 @@
             this.comboBoxFlightRegime.Size = new System.Drawing.Size(128, 21);
             this.comboBoxFlightRegime.TabIndex = 149;
             this.comboBoxFlightRegime.SelectedIndexChanged += new System.EventHandler(this.ComboBoxFlightRegimeSelectionChangeCommitted);
-            // 
-            // labelFlightRegime
-            // 
-            this.labelFlightRegime.AutoSize = true;
+            this.comboBoxFlightRegime.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// labelFlightRegime
+			// 
+			this.labelFlightRegime.AutoSize = true;
             this.labelFlightRegime.Location = new System.Drawing.Point(441, 34);
             this.labelFlightRegime.Name = "labelFlightRegime";
             this.labelFlightRegime.Size = new System.Drawing.Size(74, 13);
@@ -411,10 +414,11 @@
             this.comboBoxGroundAir.Size = new System.Drawing.Size(128, 21);
             this.comboBoxGroundAir.TabIndex = 179;
             this.comboBoxGroundAir.SelectedIndexChanged += new System.EventHandler(this.ComboBoxGroundAirSelectedIndexChanged);
-            // 
-            // EngineGeneralConditionControl
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.comboBoxGroundAir.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// EngineGeneralConditionControl
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;

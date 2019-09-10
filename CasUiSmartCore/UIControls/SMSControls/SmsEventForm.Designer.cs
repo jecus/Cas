@@ -1,4 +1,5 @@
 ﻿using MetroFramework.Controls;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.SMSControls
 {
@@ -221,6 +222,7 @@ namespace CAS.UI.UIControls.SMSControls
 			this.comboBoxIncident.Name = "comboBoxIncident";
 			this.comboBoxIncident.Size = new System.Drawing.Size(356, 21);
 			this.comboBoxIncident.TabIndex = 6;
+			this.comboBoxIncident.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// textBoxRemarks
 			// 
@@ -366,6 +368,7 @@ namespace CAS.UI.UIControls.SMSControls
 			this.dictionaryComboBoxCategory.Size = new System.Drawing.Size(356, 21);
 			this.dictionaryComboBoxCategory.TabIndex = 245;
 			this.dictionaryComboBoxCategory.SelectedIndexChanged += new System.EventHandler(this.DictionaryComboBoxCategorySelectedIndexChanged);
+			this.dictionaryComboBoxCategory.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelDescription
 			// 

@@ -1,4 +1,5 @@
 ﻿using MetroFramework.Controls;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.MailControls
 {
@@ -87,6 +88,7 @@ namespace CAS.UI.UIControls.MailControls
 			this.comboBoxSupplierFrom.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxSupplierFrom.TabIndex = 204;
 			this.comboBoxSupplierFrom.SelectedIndexChanged += new System.EventHandler(this.comboBoxSupplierFrom_SelectedIndexChanged);
+			this.comboBoxSupplierFrom.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label1
 			// 
@@ -109,6 +111,7 @@ namespace CAS.UI.UIControls.MailControls
 			this.comboBoxSupplierTo.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxSupplierTo.TabIndex = 206;
 			this.comboBoxSupplierTo.SelectedIndexChanged += new System.EventHandler(this.comboBoxSupplierTo_SelectedIndexChanged);
+			this.comboBoxSupplierTo.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// textBoxDescription
 			// 

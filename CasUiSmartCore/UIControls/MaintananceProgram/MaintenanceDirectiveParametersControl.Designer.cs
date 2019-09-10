@@ -1,49 +1,50 @@
 ﻿using AvControls.StatusImageLink;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.MaintananceProgram
 {
-    partial class MaintenanceDirectiveParametersControl
-    {
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class MaintenanceDirectiveParametersControl
+	{
+		/// <summary> 
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if(lookupComboboxMaintenanceCheck != null)
-            {
-                lookupComboboxMaintenanceCheck.CancelAsync();
-                lookupComboboxMaintenanceCheck.SelectedIndexChanged -= LookupComboboxMaintenanceCheckSelectedIndexChanged;
-            }
+		/// <summary> 
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if(lookupComboboxMaintenanceCheck != null)
+			{
+				lookupComboboxMaintenanceCheck.CancelAsync();
+				lookupComboboxMaintenanceCheck.SelectedIndexChanged -= LookupComboboxMaintenanceCheckSelectedIndexChanged;
+			}
 
 			if(checkBoxKitsApplicable != null)
 				checkBoxKitsApplicable.CheckedChanged -= new System.EventHandler(checkBoxKitsApplicable_CheckedChanged);
 
 			checkBoxClose.CheckedChanged -= CheckBoxCloseCheckedChanged;
-            linkLabelEditKit.LinkClicked -= LinkLabelEditKitLinkClicked;
-            linkLabelEditComponents.LinkClicked -= LinkLabelEditComponentsLinkClicked;
+			linkLabelEditKit.LinkClicked -= LinkLabelEditKitLinkClicked;
+			linkLabelEditComponents.LinkClicked -= LinkLabelEditComponentsLinkClicked;
 		
 			if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Component Designer generated code
+		#region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary> 
+		/// Required method for Designer support - do not modify 
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.lifelengthViewer_RepeatNotify = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.radio_RepeatWhicheverFirst = new System.Windows.Forms.RadioButton();
 			this.groupBox_Repetative = new System.Windows.Forms.GroupBox();
@@ -427,6 +428,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.comboBoxWorkType.Name = "comboBoxWorkType";
 			this.comboBoxWorkType.Size = new System.Drawing.Size(262, 22);
 			this.comboBoxWorkType.TabIndex = 0;
+			this.comboBoxWorkType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// textBoxKitRequired
 			// 
@@ -564,6 +566,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.lookupComboboxMaintenanceCheck.TabIndex = 188;
 			this.lookupComboboxMaintenanceCheck.Type = null;
 			this.lookupComboboxMaintenanceCheck.SelectedIndexChanged += new System.EventHandler(this.LookupComboboxMaintenanceCheckSelectedIndexChanged);
+			this.lookupComboboxMaintenanceCheck.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelCheck
 			// 
@@ -611,6 +614,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.comboBoxNdt.Name = "comboBoxNdt";
 			this.comboBoxNdt.Size = new System.Drawing.Size(293, 22);
 			this.comboBoxNdt.TabIndex = 192;
+			this.comboBoxNdt.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// checkBoxKitsApplicable
 			// 
@@ -658,6 +662,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.comboBoxSkill.Name = "comboBoxSkill";
 			this.comboBoxSkill.Size = new System.Drawing.Size(351, 22);
 			this.comboBoxSkill.TabIndex = 195;
+			this.comboBoxSkill.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// linkLabel1
 			// 
@@ -850,43 +855,43 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private LifelengthViewer lifelengthViewer_RepeatNotify;
-        private System.Windows.Forms.RadioButton radio_RepeatWhicheverFirst;
-        private System.Windows.Forms.GroupBox groupBox_Repetative;
-        private System.Windows.Forms.RadioButton radio_RepeatWhicheverLast;
-        private LifelengthViewer lifelengthViewer_Repeat;
-        private System.Windows.Forms.GroupBox groupFirstPerformance;
-        private System.Windows.Forms.RadioButton radio_FirstWhicheverLast;
-        private System.Windows.Forms.RadioButton radio_FirstWhicheverFirst;
-        private LifelengthViewer lifelengthViewer_SinceEffDate;
-        private LifelengthViewer lifelengthViewer_SinceNew;
-        private LifelengthViewer lifelengthViewer_FirstNotify;
-        private System.Windows.Forms.Label labelThreshold;
-        private StatusImageLinkLabel imageLinkLabelStatus;
-        private System.Windows.Forms.LinkLabel linkLabelEditKit;
-        private System.Windows.Forms.Label labelParagraph;
-        private System.Windows.Forms.CheckBox checkBoxClose;
-        private System.Windows.Forms.GroupBox groupBoxClose;
-        private System.Windows.Forms.TextBox textBoxParagraph;
-        private System.Windows.Forms.ComboBox comboBoxWorkType;
-        private System.Windows.Forms.TextBox textBoxKitRequired;
-        private System.Windows.Forms.Label labelKitRequired;
-        private System.Windows.Forms.TextBox textBoxCost;
-        private System.Windows.Forms.Label labelCost;
-        private System.Windows.Forms.TextBox textBoxManHours;
-        private System.Windows.Forms.Label labelManHours;
-        private System.Windows.Forms.Label labelForComponent;
-        private System.Windows.Forms.TextBox textBoxElapsed;
-        private System.Windows.Forms.Label labelElapsed;
-        private System.Windows.Forms.Label labelNDT;
-        private LookupCombobox lookupComboboxMaintenanceCheck;
-        private System.Windows.Forms.Label labelCheck;
-        private System.Windows.Forms.LinkLabel linkLabelEditComponents;
-        private System.Windows.Forms.TextBox textBoxComponents;
+		private LifelengthViewer lifelengthViewer_RepeatNotify;
+		private System.Windows.Forms.RadioButton radio_RepeatWhicheverFirst;
+		private System.Windows.Forms.GroupBox groupBox_Repetative;
+		private System.Windows.Forms.RadioButton radio_RepeatWhicheverLast;
+		private LifelengthViewer lifelengthViewer_Repeat;
+		private System.Windows.Forms.GroupBox groupFirstPerformance;
+		private System.Windows.Forms.RadioButton radio_FirstWhicheverLast;
+		private System.Windows.Forms.RadioButton radio_FirstWhicheverFirst;
+		private LifelengthViewer lifelengthViewer_SinceEffDate;
+		private LifelengthViewer lifelengthViewer_SinceNew;
+		private LifelengthViewer lifelengthViewer_FirstNotify;
+		private System.Windows.Forms.Label labelThreshold;
+		private StatusImageLinkLabel imageLinkLabelStatus;
+		private System.Windows.Forms.LinkLabel linkLabelEditKit;
+		private System.Windows.Forms.Label labelParagraph;
+		private System.Windows.Forms.CheckBox checkBoxClose;
+		private System.Windows.Forms.GroupBox groupBoxClose;
+		private System.Windows.Forms.TextBox textBoxParagraph;
+		private System.Windows.Forms.ComboBox comboBoxWorkType;
+		private System.Windows.Forms.TextBox textBoxKitRequired;
+		private System.Windows.Forms.Label labelKitRequired;
+		private System.Windows.Forms.TextBox textBoxCost;
+		private System.Windows.Forms.Label labelCost;
+		private System.Windows.Forms.TextBox textBoxManHours;
+		private System.Windows.Forms.Label labelManHours;
+		private System.Windows.Forms.Label labelForComponent;
+		private System.Windows.Forms.TextBox textBoxElapsed;
+		private System.Windows.Forms.Label labelElapsed;
+		private System.Windows.Forms.Label labelNDT;
+		private LookupCombobox lookupComboboxMaintenanceCheck;
+		private System.Windows.Forms.Label labelCheck;
+		private System.Windows.Forms.LinkLabel linkLabelEditComponents;
+		private System.Windows.Forms.TextBox textBoxComponents;
 		private System.Windows.Forms.ComboBox comboBoxNdt;
 		private System.Windows.Forms.CheckBox checkBoxKitsApplicable;
 		private System.Windows.Forms.Label label1;

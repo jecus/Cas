@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.PersonnelControls.EmployeeControls
 {
 	partial class EmployeeLicenceCaaControl
 	{
@@ -72,6 +74,7 @@
 			this.comboBoxCAA.Name = "comboBoxCAA";
 			this.comboBoxCAA.Size = new System.Drawing.Size(342, 25);
 			this.comboBoxCAA.TabIndex = 38;
+			this.comboBoxCAA.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelCAA
 			// 

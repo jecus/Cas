@@ -1,5 +1,6 @@
 ﻿using CAS.UI.UIControls.Auxiliary.DataGridViewElements;
 using MetroFramework.Controls;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
@@ -83,7 +84,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// dateTimePickerDate
 			// 
 			this.dateTimePickerDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.dateTimePickerDate.CalendarForeColor = System.Drawing.Color.DimGray;
 			this.dateTimePickerDate.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateTimePickerDate.Location = new System.Drawing.Point(172, 63);
@@ -104,7 +105,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// textBoxRemarks
 			// 
 			this.textBoxRemarks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			// 
 			// 
 			// 
@@ -166,7 +167,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// comboBoxStore
 			// 
 			this.comboBoxStore.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxStore.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.comboBoxStore.ForeColor = System.Drawing.Color.DimGray;
 			this.comboBoxStore.FormattingEnabled = true;
@@ -174,6 +175,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.comboBoxStore.Name = "comboBoxStore";
 			this.comboBoxStore.Size = new System.Drawing.Size(610, 24);
 			this.comboBoxStore.TabIndex = 20;
+			this.comboBoxStore.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelMoveToStore
 			// 
@@ -190,13 +192,13 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.dataGridViewComponents.AllowUserToAddRows = false;
 			this.dataGridViewComponents.AllowUserToDeleteRows = false;
 			this.dataGridViewComponents.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.dataGridViewComponents.BackgroundColor = System.Drawing.SystemColors.Window;
 			this.dataGridViewComponents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridViewComponents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColNumber,
-            this.ColumnDescription,
-            this.ColumnAll});
+			this.ColNumber,
+			this.ColumnDescription,
+			this.ColumnAll});
 			this.dataGridViewComponents.Location = new System.Drawing.Point(172, 109);
 			this.dataGridViewComponents.Margin = new System.Windows.Forms.Padding(2);
 			this.dataGridViewComponents.Name = "dataGridViewComponents";
@@ -211,7 +213,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// textBoxDescription
 			// 
 			this.textBoxDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			// 
 			// 
 			// 
@@ -262,15 +264,15 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// 
 			this.dataGridViewNumericUpDownColumn1.HeaderText = "All";
 			this.dataGridViewNumericUpDownColumn1.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
+			100000,
+			0,
+			0,
+			0});
 			this.dataGridViewNumericUpDownColumn1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+			1,
+			0,
+			0,
+			0});
 			this.dataGridViewNumericUpDownColumn1.Name = "dataGridViewNumericUpDownColumn1";
 			this.dataGridViewNumericUpDownColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.dataGridViewNumericUpDownColumn1.ThousandsSeparator = true;
@@ -280,15 +282,15 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// 
 			this.dataGridViewNumericUpDownColumn2.HeaderText = "Replace";
 			this.dataGridViewNumericUpDownColumn2.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
+			100000,
+			0,
+			0,
+			0});
 			this.dataGridViewNumericUpDownColumn2.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+			1,
+			0,
+			0,
+			0});
 			this.dataGridViewNumericUpDownColumn2.Name = "dataGridViewNumericUpDownColumn2";
 			this.dataGridViewNumericUpDownColumn2.ThousandsSeparator = true;
 			this.dataGridViewNumericUpDownColumn2.Width = 60;
@@ -316,11 +318,11 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// fileControl
 			// 
 			this.fileControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.fileControl.AutoSize = true;
 			this.fileControl.BackColor = System.Drawing.Color.Transparent;
 			this.fileControl.Description1 = "This record does not contain a file proving the tranfering of the component. Encl" +
-    "ose PDF file to prove the transfer of the component.";
+	"ose PDF file to prove the transfer of the component.";
 			this.fileControl.Description2 = "Attached file proves the transfer of the component.";
 			this.fileControl.Filter = "Adobe PDF Files|*.pdf";
 			this.fileControl.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -342,6 +344,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.comboBoxRecived.Name = "comboBoxRecived";
 			this.comboBoxRecived.Size = new System.Drawing.Size(268, 21);
 			this.comboBoxRecived.TabIndex = 33;
+			this.comboBoxRecived.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelReceived
 			// 
@@ -360,6 +363,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.comboBoxReleased.Name = "comboBoxReleased";
 			this.comboBoxReleased.Size = new System.Drawing.Size(270, 21);
 			this.comboBoxReleased.TabIndex = 35;
+			this.comboBoxReleased.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelReleased
 			// 
@@ -388,10 +392,10 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// 
 			this.ColumnAll.HeaderText = "Q-ty";
 			this.ColumnAll.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
+			100000,
+			0,
+			0,
+			0});
 			this.ColumnAll.Name = "ColumnAll";
 			this.ColumnAll.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.ColumnAll.ThousandsSeparator = true;

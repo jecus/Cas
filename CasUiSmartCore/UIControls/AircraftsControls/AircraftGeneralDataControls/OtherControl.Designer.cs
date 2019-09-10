@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
 {
@@ -237,10 +238,11 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
             this.comboBoxBrakes.Name = "comboBoxBrakes";
             this.comboBoxBrakes.Size = new System.Drawing.Size(199, 25);
             this.comboBoxBrakes.TabIndex = 38;
-            // 
-            // OtherControl
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.comboBoxBrakes.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// OtherControl
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.comboBoxBrakes);
             this.Controls.Add(this.labelBrakes);

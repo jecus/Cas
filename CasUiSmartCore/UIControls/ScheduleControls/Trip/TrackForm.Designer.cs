@@ -1,6 +1,7 @@
 ﻿using MetroFramework.Controls;
 using CASTerms;
 using EntityCore.DTO.General;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.ScheduleControls.Trip
 {
@@ -196,6 +197,7 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 			this.comboBoxDayOfWeek.Name = "comboBoxDayOfWeek";
 			this.comboBoxDayOfWeek.Size = new System.Drawing.Size(320, 21);
 			this.comboBoxDayOfWeek.TabIndex = 212;
+			this.comboBoxDayOfWeek.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// buttonOk
 			// 
@@ -223,6 +225,7 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 			this.lookupComboboxTrip.Size = new System.Drawing.Size(320, 21);
 			this.lookupComboboxTrip.TabIndex = 244;
 			this.lookupComboboxTrip.Type = null;
+			this.lookupComboboxTrip.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxCustomer
 			// 
@@ -232,6 +235,7 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 			this.comboBoxCustomer.Name = "comboBoxCustomer";
 			this.comboBoxCustomer.Size = new System.Drawing.Size(320, 21);
 			this.comboBoxCustomer.TabIndex = 246;
+			this.comboBoxCustomer.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// panel1
 			// 

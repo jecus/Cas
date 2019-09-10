@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 {
     partial class EngineMonitoringControlItem
     {
@@ -204,10 +206,11 @@
             this.comboBoxEngine.Size = new System.Drawing.Size(93, 21);
             this.comboBoxEngine.TabIndex = 141;
             this.comboBoxEngine.SelectedIndexChanged += new System.EventHandler(this.ComboBoxEngineSelectedIndexChanged);
-            // 
-            // numericUpDownOilPress
-            // 
-            this.numericUpDownOilPress.DecimalPlaces = 1;
+            this.comboBoxEngine.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// numericUpDownOilPress
+			// 
+			this.numericUpDownOilPress.DecimalPlaces = 1;
             this.numericUpDownOilPress.Location = new System.Drawing.Point(634, 13);
             this.numericUpDownOilPress.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.numericUpDownOilPress.Maximum = new decimal(new int[] {

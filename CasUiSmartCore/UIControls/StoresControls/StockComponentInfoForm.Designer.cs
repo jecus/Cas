@@ -1,36 +1,37 @@
 ﻿using MetroFramework.Controls;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.StoresControls
 {
-    partial class StockComponentInfoForm
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class StockComponentInfoForm
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
 
-	        if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockComponentInfoForm));
 			this.textBoxPartNumber = new MetroFramework.Controls.MetroTextBox();
 			this.textBoxDescription = new MetroFramework.Controls.MetroTextBox();
@@ -54,7 +55,7 @@ namespace CAS.UI.UIControls.StoresControls
 			// textBoxPartNumber
 			// 
 			this.textBoxPartNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			// 
 			// 
 			// 
@@ -86,7 +87,7 @@ namespace CAS.UI.UIControls.StoresControls
 			// textBoxDescription
 			// 
 			this.textBoxDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			// 
 			// 
 			// 
@@ -175,7 +176,7 @@ namespace CAS.UI.UIControls.StoresControls
 			// comboBoxDetailClass
 			// 
 			this.comboBoxDetailClass.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxDetailClass.Displayer = null;
 			this.comboBoxDetailClass.DisplayerText = null;
 			this.comboBoxDetailClass.DropDownHeight = 106;
@@ -188,6 +189,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.comboBoxDetailClass.Size = new System.Drawing.Size(324, 21);
 			this.comboBoxDetailClass.TabIndex = 2;
 			this.comboBoxDetailClass.SelectedIndexChanged += new System.EventHandler(this.ComboBoxDetailClassSelectedIndexChanged);
+			this.comboBoxDetailClass.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelDetailModel
 			// 
@@ -210,13 +212,14 @@ namespace CAS.UI.UIControls.StoresControls
 			// comboBoxMeasure
 			// 
 			this.comboBoxMeasure.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxMeasure.FormattingEnabled = true;
 			this.comboBoxMeasure.Location = new System.Drawing.Point(100, 238);
 			this.comboBoxMeasure.Name = "comboBoxMeasure";
 			this.comboBoxMeasure.Size = new System.Drawing.Size(324, 21);
 			this.comboBoxMeasure.TabIndex = 7;
 			this.comboBoxMeasure.SelectedIndexChanged += new System.EventHandler(this.ComboBoxMeasureSelectedIndexChanged);
+			this.comboBoxMeasure.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelQuantity
 			// 
@@ -231,10 +234,10 @@ namespace CAS.UI.UIControls.StoresControls
 			// 
 			this.numericUpDownQuantity.Location = new System.Drawing.Point(100, 267);
 			this.numericUpDownQuantity.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownQuantity.Name = "numericUpDownQuantity";
 			this.numericUpDownQuantity.Size = new System.Drawing.Size(324, 20);
 			this.numericUpDownQuantity.TabIndex = 8;
@@ -243,7 +246,7 @@ namespace CAS.UI.UIControls.StoresControls
 			// textBoxStandart
 			// 
 			this.textBoxStandart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			// 
 			// 
 			// 
@@ -285,7 +288,7 @@ namespace CAS.UI.UIControls.StoresControls
 			// metroTextBox1
 			// 
 			this.metroTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			// 
 			// 
 			// 
@@ -350,25 +353,25 @@ namespace CAS.UI.UIControls.StoresControls
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private MetroTextBox textBoxPartNumber;
-        private MetroTextBox textBoxDescription;
-        private System.Windows.Forms.Button buttonOK;
-        private System.Windows.Forms.Button buttonCancel;
-        private MetroLabel labelPartNumber;
-        private MetroLabel labelDescription;
-        private MetroLabel labelProduct;
-        private Auxiliary.TreeDictionaryComboBox comboBoxDetailClass;
-        private MetroLabel labelDetailModel;
-        private MetroLabel labelMeasure;
-        private System.Windows.Forms.ComboBox comboBoxMeasure;
-        private MetroLabel labelQuantity;
-        private System.Windows.Forms.NumericUpDown numericUpDownQuantity;
-        private MetroTextBox textBoxStandart;
-        private MetroLabel labelStandart;
+		private MetroTextBox textBoxPartNumber;
+		private MetroTextBox textBoxDescription;
+		private System.Windows.Forms.Button buttonOK;
+		private System.Windows.Forms.Button buttonCancel;
+		private MetroLabel labelPartNumber;
+		private MetroLabel labelDescription;
+		private MetroLabel labelProduct;
+		private Auxiliary.TreeDictionaryComboBox comboBoxDetailClass;
+		private MetroLabel labelDetailModel;
+		private MetroLabel labelMeasure;
+		private System.Windows.Forms.ComboBox comboBoxMeasure;
+		private MetroLabel labelQuantity;
+		private System.Windows.Forms.NumericUpDown numericUpDownQuantity;
+		private MetroTextBox textBoxStandart;
+		private MetroLabel labelStandart;
 		private MetroTextBox metroTextBox1;
 	}
 }

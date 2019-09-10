@@ -1,4 +1,5 @@
 ﻿using SmartCore.Entities.Dictionaries;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
@@ -109,6 +110,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.comboBoxAccessoryStandard.Size = new System.Drawing.Size(312, 21);
 			this.comboBoxAccessoryStandard.TabIndex = 89;
 			this.comboBoxAccessoryStandard.Type = null;
+			this.comboBoxAccessoryStandard.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelStandard
 			// 
@@ -266,6 +268,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.comboBoxDetailClass.RootNodesNames = null;
 			this.comboBoxDetailClass.Size = new System.Drawing.Size(313, 21);
 			this.comboBoxDetailClass.TabIndex = 145;
+			this.comboBoxDetailClass.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelClass
 			// 
@@ -301,6 +304,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.comboBoxAtaChapter.Name = "comboBoxAtaChapter";
 			this.comboBoxAtaChapter.Size = new System.Drawing.Size(313, 22);
 			this.comboBoxAtaChapter.TabIndex = 148;
+			this.comboBoxAtaChapter.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxManufRegion
 			// 
@@ -309,6 +313,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.comboBoxManufRegion.Name = "comboBoxManufRegion";
 			this.comboBoxManufRegion.Size = new System.Drawing.Size(312, 21);
 			this.comboBoxManufRegion.TabIndex = 102;
+			this.comboBoxManufRegion.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelManufRegion
 			// 

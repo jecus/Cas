@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.FiltersControls
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.FiltersControls
 {
     partial class CommonLifelengthFilterControl
     {
@@ -75,10 +77,11 @@
             this.comboBoxFilterType.Name = "comboBoxFilterType";
             this.comboBoxFilterType.Size = new System.Drawing.Size(66, 21);
             this.comboBoxFilterType.TabIndex = 1;
-            // 
-            // lifelengthViewerLifelength
-            // 
-            this.lifelengthViewerLifelength.AutoSize = true;
+            this.comboBoxFilterType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// lifelengthViewerLifelength
+			// 
+			this.lifelengthViewerLifelength.AutoSize = true;
             this.lifelengthViewerLifelength.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.lifelengthViewerLifelength.CalendarApplicable = false;
             this.lifelengthViewerLifelength.CyclesApplicable = false;

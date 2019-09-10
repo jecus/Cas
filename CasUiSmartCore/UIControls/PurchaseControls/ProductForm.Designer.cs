@@ -1,4 +1,5 @@
 ﻿using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
@@ -83,6 +84,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.comboBoxDetailClass.RootNodesNames = null;
 			this.comboBoxDetailClass.Size = new System.Drawing.Size(312, 21);
 			this.comboBoxDetailClass.TabIndex = 1;
+			this.comboBoxDetailClass.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelClass
 			// 
@@ -209,6 +211,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.comboBoxMeasure.Name = "comboBoxMeasure";
 			this.comboBoxMeasure.Size = new System.Drawing.Size(294, 21);
 			this.comboBoxMeasure.TabIndex = 7;
+			this.comboBoxMeasure.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelMeasure
 			// 
@@ -246,6 +249,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.comboBoxAccessoryStandard.TabIndex = 0;
 			this.comboBoxAccessoryStandard.Type = null;
 			this.comboBoxAccessoryStandard.SelectedIndexChanged += new System.EventHandler(this.DictComboStandardSelectedIndexChanged);
+			this.comboBoxAccessoryStandard.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelProductCode
 			// 
@@ -369,6 +373,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.comboBoxAtaChapter.Name = "comboBoxAtaChapter";
 			this.comboBoxAtaChapter.Size = new System.Drawing.Size(313, 22);
 			this.comboBoxAtaChapter.TabIndex = 144;
+			this.comboBoxAtaChapter.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label2
 			// 

@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.PersonnelControls.EmployeeTraining
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.PersonnelControls.EmployeeTraining
 {
 	partial class EmployeeTrainingControl
 	{
@@ -146,6 +148,7 @@
 			this.comboBoxTrainingType.Name = "comboBoxTrainingType";
 			this.comboBoxTrainingType.Size = new System.Drawing.Size(351, 22);
 			this.comboBoxTrainingType.TabIndex = 26;
+			this.comboBoxTrainingType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// linkLabelRemove
 			// 
@@ -233,6 +236,7 @@
 			this.lookupComboboxSubject.Size = new System.Drawing.Size(353, 21);
 			this.lookupComboboxSubject.TabIndex = 206;
 			this.lookupComboboxSubject.Type = null;
+			this.lookupComboboxSubject.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label2
 			// 
@@ -267,6 +271,7 @@
 			this.comboBoxAircraftModel.Name = "comboBoxAircraftModel";
 			this.comboBoxAircraftModel.Size = new System.Drawing.Size(352, 22);
 			this.comboBoxAircraftModel.TabIndex = 202;
+			this.comboBoxAircraftModel.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelSupplier
 			// 
@@ -289,6 +294,7 @@
 			this.comboBoxSupplier.Name = "comboBoxSupplier";
 			this.comboBoxSupplier.Size = new System.Drawing.Size(351, 22);
 			this.comboBoxSupplier.TabIndex = 200;
+			this.comboBoxSupplier.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// textBoxDescription
 			// 

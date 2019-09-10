@@ -1,6 +1,7 @@
 ﻿using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using EntityCore.DTO.General;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.PurchaseControls.Quatation
 {
@@ -199,10 +200,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.numericUpDownCostRepair.DecimalPlaces = 2;
 			this.numericUpDownCostRepair.Location = new System.Drawing.Point(102, 93);
 			this.numericUpDownCostRepair.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownCostRepair.Name = "numericUpDownCostRepair";
 			this.numericUpDownCostRepair.Size = new System.Drawing.Size(88, 20);
 			this.numericUpDownCostRepair.TabIndex = 254;
@@ -223,10 +224,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.numericUpDownCostOH.DecimalPlaces = 2;
 			this.numericUpDownCostOH.Location = new System.Drawing.Point(102, 67);
 			this.numericUpDownCostOH.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownCostOH.Name = "numericUpDownCostOH";
 			this.numericUpDownCostOH.Size = new System.Drawing.Size(88, 20);
 			this.numericUpDownCostOH.TabIndex = 252;
@@ -247,10 +248,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.numericUpDownCostNew.DecimalPlaces = 2;
 			this.numericUpDownCostNew.Location = new System.Drawing.Point(103, 15);
 			this.numericUpDownCostNew.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownCostNew.Name = "numericUpDownCostNew";
 			this.numericUpDownCostNew.Size = new System.Drawing.Size(87, 20);
 			this.numericUpDownCostNew.TabIndex = 250;
@@ -284,10 +285,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.numericUpDownCostServ.DecimalPlaces = 2;
 			this.numericUpDownCostServ.Location = new System.Drawing.Point(102, 41);
 			this.numericUpDownCostServ.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownCostServ.Name = "numericUpDownCostServ";
 			this.numericUpDownCostServ.Size = new System.Drawing.Size(88, 20);
 			this.numericUpDownCostServ.TabIndex = 142;
@@ -354,6 +355,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.comboBoxCostNew.Name = "comboBoxCostNew";
 			this.comboBoxCostNew.Size = new System.Drawing.Size(99, 20);
 			this.comboBoxCostNew.TabIndex = 299;
+			this.comboBoxCostNew.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxCostServ
 			// 
@@ -364,6 +366,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.comboBoxCostServ.Name = "comboBoxCostServ";
 			this.comboBoxCostServ.Size = new System.Drawing.Size(99, 20);
 			this.comboBoxCostServ.TabIndex = 300;
+			this.comboBoxCostServ.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxCostOH
 			// 
@@ -374,6 +377,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.comboBoxCostOH.Name = "comboBoxCostOH";
 			this.comboBoxCostOH.Size = new System.Drawing.Size(99, 20);
 			this.comboBoxCostOH.TabIndex = 301;
+			this.comboBoxCostOH.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxCostRepair
 			// 
@@ -384,6 +388,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.comboBoxCostRepair.Name = "comboBoxCostRepair";
 			this.comboBoxCostRepair.Size = new System.Drawing.Size(99, 20);
 			this.comboBoxCostRepair.TabIndex = 302;
+			this.comboBoxCostRepair.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// QuotationSupplierForm
 			// 

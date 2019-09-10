@@ -1,33 +1,35 @@
+using CAS.UI.Helpers;
+
 namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls.AircraftFlightLight
 {
-    partial class FlightDateRouteControlLight
+	partial class FlightDateRouteControlLight
 	{
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.label1 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
@@ -140,6 +142,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls.AircraftFlightLight
 			this.comboBoxRecordType.Size = new System.Drawing.Size(137, 21);
 			this.comboBoxRecordType.TabIndex = 20;
 			this.comboBoxRecordType.SelectedIndexChanged += new System.EventHandler(this.comboBoxRecordType_SelectedIndexChanged);
+			this.comboBoxRecordType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// dateTimePickerTakeOff
 			// 
@@ -243,6 +246,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls.AircraftFlightLight
 			this.lookupComboboxFrom.Size = new System.Drawing.Size(218, 21);
 			this.lookupComboboxFrom.TabIndex = 42;
 			this.lookupComboboxFrom.Type = null;
+			this.lookupComboboxFrom.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// lookupComboboxTo
 			// 
@@ -255,6 +259,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls.AircraftFlightLight
 			this.lookupComboboxTo.Size = new System.Drawing.Size(218, 21);
 			this.lookupComboboxTo.TabIndex = 43;
 			this.lookupComboboxTo.Type = null;
+			this.lookupComboboxTo.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label6
 			// 
@@ -276,6 +281,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls.AircraftFlightLight
 			this.lookupComboboxFlightNumber.Size = new System.Drawing.Size(218, 21);
 			this.lookupComboboxFlightNumber.TabIndex = 45;
 			this.lookupComboboxFlightNumber.Type = null;
+			this.lookupComboboxFlightNumber.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// checkBoxRC
 			// 
@@ -364,19 +370,19 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls.AircraftFlightLight
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label labelPageNum;
-        private System.Windows.Forms.TextBox textBoxPageNum;
-        private System.Windows.Forms.DateTimePicker dateTimePickerFlightDate;
-        private System.Windows.Forms.Label labelRecordType;
-        private System.Windows.Forms.ComboBox comboBoxRecordType;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.Label labelPageNum;
+		private System.Windows.Forms.TextBox textBoxPageNum;
+		private System.Windows.Forms.DateTimePicker dateTimePickerFlightDate;
+		private System.Windows.Forms.Label labelRecordType;
+		private System.Windows.Forms.ComboBox comboBoxRecordType;
 		private System.Windows.Forms.DateTimePicker dateTimePickerTakeOff;
 		private System.Windows.Forms.DateTimePicker dateTimePickerLDG;
 		private System.Windows.Forms.Label label14;

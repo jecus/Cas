@@ -1,4 +1,5 @@
 ﻿using MetroFramework.Controls;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.WorkPakage
 {
@@ -858,6 +859,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.comboBoxWorkType.Name = "comboBoxWorkType";
 			this.comboBoxWorkType.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxWorkType.TabIndex = 252;
+			this.comboBoxWorkType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// groupBox1
 			// 
@@ -887,6 +889,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.lookupComboboxFlightNum.Size = new System.Drawing.Size(317, 21);
 			this.lookupComboboxFlightNum.TabIndex = 35;
 			this.lookupComboboxFlightNum.Type = null;
+			this.lookupComboboxFlightNum.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// lookupComboboxTo
 			// 
@@ -899,6 +902,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.lookupComboboxTo.Size = new System.Drawing.Size(317, 21);
 			this.lookupComboboxTo.TabIndex = 34;
 			this.lookupComboboxTo.Type = null;
+			this.lookupComboboxTo.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label19
 			// 
@@ -920,6 +924,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.lookupComboboxFrom.Size = new System.Drawing.Size(317, 21);
 			this.lookupComboboxFrom.TabIndex = 32;
 			this.lookupComboboxFrom.Type = null;
+			this.lookupComboboxFrom.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// dateTimePickerFlightDate
 			// 

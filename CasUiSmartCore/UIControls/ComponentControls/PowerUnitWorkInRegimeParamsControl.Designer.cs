@@ -1,33 +1,35 @@
-﻿namespace CAS.UI.UIControls.DetailsControls
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.DetailsControls
 {
-    partial class PowerUnitWorkInRegimeParamsControl
-    {
-        /// <summary> 
-        /// Требуется переменная конструктора.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class PowerUnitWorkInRegimeParamsControl
+	{
+		/// <summary> 
+		/// Требуется переменная конструктора.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Освободить все используемые ресурсы.
-        /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary> 
+		/// Освободить все используемые ресурсы.
+		/// </summary>
+		/// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Код, автоматически созданный конструктором компонентов
+		#region Код, автоматически созданный конструктором компонентов
 
-        /// <summary> 
-        /// Обязательный метод для поддержки конструктора - не изменяйте 
-        /// содержимое данного метода при помощи редактора кода.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary> 
+		/// Обязательный метод для поддержки конструктора - не изменяйте 
+		/// содержимое данного метода при помощи редактора кода.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
 			this.checkBoxOilFlowRecEnabled = new System.Windows.Forms.CheckBox();
 			this.checkBoxFuelPressRecEnabled = new System.Windows.Forms.CheckBox();
@@ -446,10 +448,10 @@
 			this.numericUpDownRecOillPress.Location = new System.Drawing.Point(353, 136);
 			this.numericUpDownRecOillPress.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownRecOillPress.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownRecOillPress.Name = "numericUpDownRecOillPress";
 			this.numericUpDownRecOillPress.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownRecOillPress.TabIndex = 224;
@@ -473,10 +475,10 @@
 			this.numericUpDownRecOilPressTorque.Location = new System.Drawing.Point(450, 136);
 			this.numericUpDownRecOilPressTorque.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownRecOilPressTorque.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownRecOilPressTorque.Name = "numericUpDownRecOilPressTorque";
 			this.numericUpDownRecOilPressTorque.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownRecOilPressTorque.TabIndex = 223;
@@ -488,10 +490,10 @@
 			this.numericUpDownRecOilFlow.Location = new System.Drawing.Point(547, 136);
 			this.numericUpDownRecOilFlow.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownRecOilFlow.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownRecOilFlow.Name = "numericUpDownRecOilFlow";
 			this.numericUpDownRecOilFlow.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownRecOilFlow.TabIndex = 222;
@@ -503,10 +505,10 @@
 			this.numericUpDownRecFuelPress.Location = new System.Drawing.Point(653, 136);
 			this.numericUpDownRecFuelPress.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownRecFuelPress.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownRecFuelPress.Name = "numericUpDownRecFuelPress";
 			this.numericUpDownRecFuelPress.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownRecFuelPress.TabIndex = 223;
@@ -517,10 +519,10 @@
 			this.numericUpDownRecFuelFlow.Location = new System.Drawing.Point(750, 136);
 			this.numericUpDownRecFuelFlow.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownRecFuelFlow.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownRecFuelFlow.Name = "numericUpDownRecFuelFlow";
 			this.numericUpDownRecFuelFlow.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownRecFuelFlow.TabIndex = 224;
@@ -543,10 +545,10 @@
 			this.numericUpDownRecFuelBurn.Location = new System.Drawing.Point(847, 136);
 			this.numericUpDownRecFuelBurn.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownRecFuelBurn.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownRecFuelBurn.Name = "numericUpDownRecFuelBurn";
 			this.numericUpDownRecFuelBurn.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownRecFuelBurn.TabIndex = 225;
@@ -641,6 +643,7 @@
 			this.comboBoxMeasureOilFlow.Name = "comboBoxMeasureOilFlow";
 			this.comboBoxMeasureOilFlow.Size = new System.Drawing.Size(70, 21);
 			this.comboBoxMeasureOilFlow.TabIndex = 178;
+			this.comboBoxMeasureOilFlow.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// checkBoxEPRRecEnabled
 			// 
@@ -660,10 +663,10 @@
 			this.numericUpDownRecV2.Location = new System.Drawing.Point(847, 36);
 			this.numericUpDownRecV2.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownRecV2.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownRecV2.Name = "numericUpDownRecV2";
 			this.numericUpDownRecV2.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownRecV2.TabIndex = 221;
@@ -699,10 +702,10 @@
 			this.numericUpDownRecV1.Location = new System.Drawing.Point(750, 36);
 			this.numericUpDownRecV1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownRecV1.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownRecV1.Name = "numericUpDownRecV1";
 			this.numericUpDownRecV1.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownRecV1.TabIndex = 220;
@@ -714,10 +717,10 @@
 			this.numericUpDownMaxOilFlow.Location = new System.Drawing.Point(547, 116);
 			this.numericUpDownMaxOilFlow.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMaxOilFlow.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMaxOilFlow.Name = "numericUpDownMaxOilFlow";
 			this.numericUpDownMaxOilFlow.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMaxOilFlow.TabIndex = 178;
@@ -729,10 +732,10 @@
 			this.numericUpDowRecN25.Location = new System.Drawing.Point(653, 36);
 			this.numericUpDowRecN25.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDowRecN25.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDowRecN25.Name = "numericUpDowRecN25";
 			this.numericUpDowRecN25.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDowRecN25.TabIndex = 218;
@@ -743,10 +746,10 @@
 			this.numericUpDownRecEGT.Location = new System.Drawing.Point(547, 36);
 			this.numericUpDownRecEGT.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownRecEGT.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownRecEGT.Name = "numericUpDownRecEGT";
 			this.numericUpDownRecEGT.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownRecEGT.TabIndex = 219;
@@ -758,10 +761,10 @@
 			this.numericUpDownMinOilFlow.Location = new System.Drawing.Point(547, 156);
 			this.numericUpDownMinOilFlow.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMinOilFlow.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMinOilFlow.Name = "numericUpDownMinOilFlow";
 			this.numericUpDownMinOilFlow.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMinOilFlow.TabIndex = 179;
@@ -783,10 +786,10 @@
 			this.numericUpDownRecN1.Location = new System.Drawing.Point(450, 36);
 			this.numericUpDownRecN1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownRecN1.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownRecN1.Name = "numericUpDownRecN1";
 			this.numericUpDownRecN1.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownRecN1.TabIndex = 217;
@@ -810,10 +813,10 @@
 			this.numericUpDownRecEPR.Location = new System.Drawing.Point(353, 36);
 			this.numericUpDownRecEPR.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownRecEPR.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownRecEPR.Name = "numericUpDownRecEPR";
 			this.numericUpDownRecEPR.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownRecEPR.TabIndex = 216;
@@ -836,10 +839,10 @@
 			this.numericUpDownRecOilTemp.Location = new System.Drawing.Point(256, 136);
 			this.numericUpDownRecOilTemp.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownRecOilTemp.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownRecOilTemp.Name = "numericUpDownRecOilTemp";
 			this.numericUpDownRecOilTemp.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownRecOilTemp.TabIndex = 215;
@@ -860,10 +863,10 @@
 			this.numericUpDownRecTLA.Location = new System.Drawing.Point(256, 36);
 			this.numericUpDownRecTLA.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownRecTLA.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownRecTLA.Name = "numericUpDownRecTLA";
 			this.numericUpDownRecTLA.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownRecTLA.TabIndex = 214;
@@ -874,10 +877,10 @@
 			this.numericUpDownMaxTLA.Location = new System.Drawing.Point(256, 13);
 			this.numericUpDownMaxTLA.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMaxTLA.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMaxTLA.Name = "numericUpDownMaxTLA";
 			this.numericUpDownMaxTLA.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMaxTLA.TabIndex = 205;
@@ -888,10 +891,10 @@
 			this.numericUpDownMinTLA.Location = new System.Drawing.Point(256, 56);
 			this.numericUpDownMinTLA.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMinTLA.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMinTLA.Name = "numericUpDownMinTLA";
 			this.numericUpDownMinTLA.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMinTLA.TabIndex = 206;
@@ -913,10 +916,10 @@
 			this.numericUpDownMaxERP.Location = new System.Drawing.Point(353, 13);
 			this.numericUpDownMaxERP.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMaxERP.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMaxERP.Name = "numericUpDownMaxERP";
 			this.numericUpDownMaxERP.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMaxERP.TabIndex = 7;
@@ -928,10 +931,10 @@
 			this.numericUpDownMinEPR.Location = new System.Drawing.Point(353, 56);
 			this.numericUpDownMinEPR.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMinEPR.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMinEPR.Name = "numericUpDownMinEPR";
 			this.numericUpDownMinEPR.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMinEPR.TabIndex = 8;
@@ -977,10 +980,10 @@
 			this.numericUpDownMaxN1.Location = new System.Drawing.Point(450, 13);
 			this.numericUpDownMaxN1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMaxN1.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMaxN1.Name = "numericUpDownMaxN1";
 			this.numericUpDownMaxN1.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMaxN1.TabIndex = 10;
@@ -992,10 +995,10 @@
 			this.numericUpDownMinN1.Location = new System.Drawing.Point(450, 56);
 			this.numericUpDownMinN1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMinN1.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMinN1.Name = "numericUpDownMinN1";
 			this.numericUpDownMinN1.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMinN1.TabIndex = 11;
@@ -1040,10 +1043,10 @@
 			this.numericUpDownMaxEGT.Location = new System.Drawing.Point(547, 13);
 			this.numericUpDownMaxEGT.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMaxEGT.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMaxEGT.Name = "numericUpDownMaxEGT";
 			this.numericUpDownMaxEGT.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMaxEGT.TabIndex = 13;
@@ -1054,10 +1057,10 @@
 			this.numericUpDownMinEGT.Location = new System.Drawing.Point(547, 56);
 			this.numericUpDownMinEGT.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMinEGT.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMinEGT.Name = "numericUpDownMinEGT";
 			this.numericUpDownMinEGT.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMinEGT.TabIndex = 14;
@@ -1070,6 +1073,7 @@
 			this.comboBoxMeasureEGT.Name = "comboBoxMeasureEGT";
 			this.comboBoxMeasureEGT.Size = new System.Drawing.Size(70, 21);
 			this.comboBoxMeasureEGT.TabIndex = 15;
+			this.comboBoxMeasureEGT.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// checkBoxEGTMaxEnabled
 			// 
@@ -1101,10 +1105,10 @@
 			this.numericUpDownMaxN2.Location = new System.Drawing.Point(653, 13);
 			this.numericUpDownMaxN2.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMaxN2.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMaxN2.Name = "numericUpDownMaxN2";
 			this.numericUpDownMaxN2.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMaxN2.TabIndex = 16;
@@ -1116,10 +1120,10 @@
 			this.numericUpDownMinN2.Location = new System.Drawing.Point(653, 56);
 			this.numericUpDownMinN2.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMinN2.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMinN2.Name = "numericUpDownMinN2";
 			this.numericUpDownMinN2.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMinN2.TabIndex = 17;
@@ -1174,15 +1178,15 @@
 			this.numericUpDownMaxOilTemp.Location = new System.Drawing.Point(256, 116);
 			this.numericUpDownMaxOilTemp.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMaxOilTemp.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMaxOilTemp.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
+			100,
+			0,
+			0,
+			-2147483648});
 			this.numericUpDownMaxOilTemp.Name = "numericUpDownMaxOilTemp";
 			this.numericUpDownMaxOilTemp.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMaxOilTemp.TabIndex = 19;
@@ -1193,15 +1197,15 @@
 			this.numericUpDownMinOilTemp.Location = new System.Drawing.Point(256, 156);
 			this.numericUpDownMinOilTemp.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMinOilTemp.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMinOilTemp.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
+			100,
+			0,
+			0,
+			-2147483648});
 			this.numericUpDownMinOilTemp.Name = "numericUpDownMinOilTemp";
 			this.numericUpDownMinOilTemp.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMinOilTemp.TabIndex = 20;
@@ -1223,10 +1227,10 @@
 			this.numericUpDownMaxVibrationOverload.Location = new System.Drawing.Point(750, 13);
 			this.numericUpDownMaxVibrationOverload.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMaxVibrationOverload.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMaxVibrationOverload.Name = "numericUpDownMaxVibrationOverload";
 			this.numericUpDownMaxVibrationOverload.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMaxVibrationOverload.TabIndex = 37;
@@ -1238,10 +1242,10 @@
 			this.numericUpDownMinVibroOverload.Location = new System.Drawing.Point(750, 56);
 			this.numericUpDownMinVibroOverload.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMinVibroOverload.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMinVibroOverload.Name = "numericUpDownMinVibroOverload";
 			this.numericUpDownMinVibroOverload.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMinVibroOverload.TabIndex = 38;
@@ -1254,6 +1258,7 @@
 			this.comboBoxMeasureOilTemp.Name = "comboBoxMeasureOilTemp";
 			this.comboBoxMeasureOilTemp.Size = new System.Drawing.Size(70, 21);
 			this.comboBoxMeasureOilTemp.TabIndex = 21;
+			this.comboBoxMeasureOilTemp.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// checkBoxOilTempMaxEnabled
 			// 
@@ -1319,10 +1324,10 @@
 			this.numericUpDownMaxOilPress.Location = new System.Drawing.Point(353, 116);
 			this.numericUpDownMaxOilPress.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMaxOilPress.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMaxOilPress.Name = "numericUpDownMaxOilPress";
 			this.numericUpDownMaxOilPress.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMaxOilPress.TabIndex = 22;
@@ -1334,10 +1339,10 @@
 			this.numericUpDownMinOilPress.Location = new System.Drawing.Point(353, 156);
 			this.numericUpDownMinOilPress.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMinOilPress.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMinOilPress.Name = "numericUpDownMinOilPress";
 			this.numericUpDownMinOilPress.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMinOilPress.TabIndex = 23;
@@ -1350,6 +1355,7 @@
 			this.comboBoxMeasureOilPress.Name = "comboBoxMeasureOilPress";
 			this.comboBoxMeasureOilPress.Size = new System.Drawing.Size(70, 21);
 			this.comboBoxMeasureOilPress.TabIndex = 24;
+			this.comboBoxMeasureOilPress.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// checkBoxOilPressMaxEnabled
 			// 
@@ -1391,10 +1397,10 @@
 			this.numericUpDownMaxVibrationOverload2.Location = new System.Drawing.Point(847, 13);
 			this.numericUpDownMaxVibrationOverload2.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMaxVibrationOverload2.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMaxVibrationOverload2.Name = "numericUpDownMaxVibrationOverload2";
 			this.numericUpDownMaxVibrationOverload2.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMaxVibrationOverload2.TabIndex = 40;
@@ -1406,10 +1412,10 @@
 			this.numericUpDownMinVibroOverload2.Location = new System.Drawing.Point(847, 56);
 			this.numericUpDownMinVibroOverload2.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMinVibroOverload2.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMinVibroOverload2.Name = "numericUpDownMinVibroOverload2";
 			this.numericUpDownMinVibroOverload2.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMinVibroOverload2.TabIndex = 41;
@@ -1455,10 +1461,10 @@
 			this.numericUpDownMaxOilPressTorque.Location = new System.Drawing.Point(450, 116);
 			this.numericUpDownMaxOilPressTorque.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMaxOilPressTorque.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMaxOilPressTorque.Name = "numericUpDownMaxOilPressTorque";
 			this.numericUpDownMaxOilPressTorque.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMaxOilPressTorque.TabIndex = 25;
@@ -1470,10 +1476,10 @@
 			this.numericUpDownMinOilPressTorque.Location = new System.Drawing.Point(450, 156);
 			this.numericUpDownMinOilPressTorque.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMinOilPressTorque.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMinOilPressTorque.Name = "numericUpDownMinOilPressTorque";
 			this.numericUpDownMinOilPressTorque.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMinOilPressTorque.TabIndex = 26;
@@ -1486,6 +1492,7 @@
 			this.comboBoxMeasureOilPressTorque.Name = "comboBoxMeasureOilPressTorque";
 			this.comboBoxMeasureOilPressTorque.Size = new System.Drawing.Size(70, 21);
 			this.comboBoxMeasureOilPressTorque.TabIndex = 27;
+			this.comboBoxMeasureOilPressTorque.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// checkBoxOilPressTorqMaxEnabled
 			// 
@@ -1539,10 +1546,10 @@
 			this.numericUpDownMaxFuelPress.Location = new System.Drawing.Point(653, 116);
 			this.numericUpDownMaxFuelPress.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMaxFuelPress.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMaxFuelPress.Name = "numericUpDownMaxFuelPress";
 			this.numericUpDownMaxFuelPress.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMaxFuelPress.TabIndex = 28;
@@ -1554,10 +1561,10 @@
 			this.numericUpDownMinFuelPress.Location = new System.Drawing.Point(653, 156);
 			this.numericUpDownMinFuelPress.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMinFuelPress.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMinFuelPress.Name = "numericUpDownMinFuelPress";
 			this.numericUpDownMinFuelPress.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMinFuelPress.TabIndex = 29;
@@ -1570,6 +1577,7 @@
 			this.comboBoxMeasureFuelPress.Name = "comboBoxMeasureFuelPress";
 			this.comboBoxMeasureFuelPress.Size = new System.Drawing.Size(70, 21);
 			this.comboBoxMeasureFuelPress.TabIndex = 30;
+			this.comboBoxMeasureFuelPress.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// checkBoxFuelPressMaxEnabled
 			// 
@@ -1610,10 +1618,10 @@
 			this.numericUpDownMaxFuelFlow.Location = new System.Drawing.Point(750, 116);
 			this.numericUpDownMaxFuelFlow.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMaxFuelFlow.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMaxFuelFlow.Name = "numericUpDownMaxFuelFlow";
 			this.numericUpDownMaxFuelFlow.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMaxFuelFlow.TabIndex = 31;
@@ -1624,10 +1632,10 @@
 			this.numericUpDownMinFuelFlow.Location = new System.Drawing.Point(750, 156);
 			this.numericUpDownMinFuelFlow.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMinFuelFlow.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMinFuelFlow.Name = "numericUpDownMinFuelFlow";
 			this.numericUpDownMinFuelFlow.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMinFuelFlow.TabIndex = 32;
@@ -1640,6 +1648,7 @@
 			this.comboBoxMeasureFuelFlow.Name = "comboBoxMeasureFuelFlow";
 			this.comboBoxMeasureFuelFlow.Size = new System.Drawing.Size(70, 21);
 			this.comboBoxMeasureFuelFlow.TabIndex = 33;
+			this.comboBoxMeasureFuelFlow.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// checkBoxFuelFlowMaxEnabled
 			// 
@@ -1680,10 +1689,10 @@
 			this.numericUpDownMaxFuelBurn.Location = new System.Drawing.Point(847, 116);
 			this.numericUpDownMaxFuelBurn.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMaxFuelBurn.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMaxFuelBurn.Name = "numericUpDownMaxFuelBurn";
 			this.numericUpDownMaxFuelBurn.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMaxFuelBurn.TabIndex = 34;
@@ -1694,10 +1703,10 @@
 			this.numericUpDownMinFuelBurn.Location = new System.Drawing.Point(847, 156);
 			this.numericUpDownMinFuelBurn.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownMinFuelBurn.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownMinFuelBurn.Name = "numericUpDownMinFuelBurn";
 			this.numericUpDownMinFuelBurn.Size = new System.Drawing.Size(70, 20);
 			this.numericUpDownMinFuelBurn.TabIndex = 35;
@@ -1710,6 +1719,7 @@
 			this.comboBoxMeasureFuelBurn.Name = "comboBoxMeasureFuelBurn";
 			this.comboBoxMeasureFuelBurn.Size = new System.Drawing.Size(70, 21);
 			this.comboBoxMeasureFuelBurn.TabIndex = 36;
+			this.comboBoxMeasureFuelBurn.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// checkBoxFuelBurnMaxEnabled
 			// 
@@ -1865,6 +1875,7 @@
 			this.comboBoxFlightRegime.Size = new System.Drawing.Size(70, 21);
 			this.comboBoxFlightRegime.TabIndex = 1;
 			this.comboBoxFlightRegime.SelectedIndexChanged += new System.EventHandler(this.ComboBoxFlightRegimeSelectedIndexChanged);
+			this.comboBoxFlightRegime.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelMaxTimeInRegime
 			// 
@@ -1905,6 +1916,7 @@
 			this.comboBoxGroundAir.Name = "comboBoxGroundAir";
 			this.comboBoxGroundAir.Size = new System.Drawing.Size(70, 21);
 			this.comboBoxGroundAir.TabIndex = 178;
+			this.comboBoxGroundAir.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelPersentTime
 			// 
@@ -1945,6 +1957,7 @@
 			this.comboBoxResourceProvider.Size = new System.Drawing.Size(85, 21);
 			this.comboBoxResourceProvider.TabIndex = 210;
 			this.comboBoxResourceProvider.SelectedIndexChanged += new System.EventHandler(this.ComboBoxResourceProviderSelectedIndexChanged);
+			this.comboBoxResourceProvider.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// flowLayoutPanelMain
 			// 
@@ -2054,141 +2067,141 @@
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMain;
-        private System.Windows.Forms.Button buttonDelete;
-        private System.Windows.Forms.Label labelFuelBurn;
-        private System.Windows.Forms.Label labelOilTemp;
-        private System.Windows.Forms.Label labelN2;
-        private System.Windows.Forms.Label labelEGT;
-        private System.Windows.Forms.Label labelERP;
-        private System.Windows.Forms.Label labelN1;
-        private System.Windows.Forms.Label labelFuelFlow;
-        private System.Windows.Forms.Label labelOilPress;
-        private System.Windows.Forms.NumericUpDown numericUpDownMaxERP;
-        private System.Windows.Forms.NumericUpDown numericUpDownMaxN1;
-        private System.Windows.Forms.NumericUpDown numericUpDownMaxEGT;
-        private System.Windows.Forms.NumericUpDown numericUpDownMaxN2;
-        private System.Windows.Forms.NumericUpDown numericUpDownMaxOilTemp;
-        private System.Windows.Forms.NumericUpDown numericUpDownMaxOilPress;
-        private System.Windows.Forms.NumericUpDown numericUpDownMaxFuelFlow;
-        private System.Windows.Forms.NumericUpDown numericUpDownMaxFuelBurn;
-        private System.Windows.Forms.Label labelFuelPress;
-        private System.Windows.Forms.Label labelVibrationOverload1;
-        private System.Windows.Forms.Label labelMaxTimeInRegime;
-        private System.Windows.Forms.Label labelOilPressTorque;
-        private System.Windows.Forms.NumericUpDown numericUpDownMaxVibrationOverload;
-        private System.Windows.Forms.NumericUpDown numericUpDownMaxFuelPress;
-        private System.Windows.Forms.NumericUpDown numericUpDownMaxOilPressTorque;
-        private System.Windows.Forms.NumericUpDown numericUpDownMaxVibrationOverload2;
-        private System.Windows.Forms.Label labelVibrationOverload2;
-        private System.Windows.Forms.Label labelMeasure;
-        private System.Windows.Forms.Label labelMax;
-        private System.Windows.Forms.Label labelMin;
-        private System.Windows.Forms.NumericUpDown numericUpDownMinN1;
-        private System.Windows.Forms.NumericUpDown numericUpDownMinEPR;
-        private System.Windows.Forms.NumericUpDown numericUpDownMinEGT;
-        private System.Windows.Forms.ComboBox comboBoxMeasureEGT;
-        private System.Windows.Forms.NumericUpDown numericUpDownMinOilTemp;
-        private System.Windows.Forms.NumericUpDown numericUpDownMinN2;
-        private System.Windows.Forms.NumericUpDown numericUpDownMinOilPress;
-        private System.Windows.Forms.ComboBox comboBoxMeasureOilTemp;
-        private System.Windows.Forms.NumericUpDown numericUpDownMinOilPressTorque;
-        private System.Windows.Forms.NumericUpDown numericUpDownMinFuelPress;
-        private System.Windows.Forms.NumericUpDown numericUpDownMinFuelFlow;
-        private System.Windows.Forms.NumericUpDown numericUpDownMinFuelBurn;
-        private System.Windows.Forms.NumericUpDown numericUpDownMinVibroOverload;
-        private System.Windows.Forms.ComboBox comboBoxMeasureFuelBurn;
-        private System.Windows.Forms.ComboBox comboBoxMeasureFuelFlow;
-        private System.Windows.Forms.ComboBox comboBoxMeasureFuelPress;
-        private System.Windows.Forms.ComboBox comboBoxMeasureOilPressTorque;
-        private System.Windows.Forms.ComboBox comboBoxMeasureOilPress;
-        private System.Windows.Forms.NumericUpDown numericUpDownMinVibroOverload2;
-        private System.Windows.Forms.Label labelFlightRegime;
-        private System.Windows.Forms.ComboBox comboBoxFlightRegime;
-        private System.Windows.Forms.DateTimePicker dateTimePickerTime;
-        private System.Windows.Forms.CheckBox checkBoxVO2MaxEnabled;
-        private System.Windows.Forms.CheckBox checkBoxVO2MinEnabled;
-        private System.Windows.Forms.CheckBox checkBoxVO1MaxEnabled;
-        private System.Windows.Forms.CheckBox checkBoxVO1MinEnabled;
-        private System.Windows.Forms.CheckBox checkBoxFuelBurnMinEnabled;
-        private System.Windows.Forms.CheckBox checkBoxFuelBurnMaxEnabled;
-        private System.Windows.Forms.CheckBox checkBoxFuelPressMinEnabled;
-        private System.Windows.Forms.CheckBox checkBoxFuelPressMaxEnabled;
-        private System.Windows.Forms.CheckBox checkBoxFuelFlowMinEnabled;
-        private System.Windows.Forms.CheckBox checkBoxFuelFlowMaxEnabled;
-        private System.Windows.Forms.CheckBox checkBoxTLAMaxEnabled;
-        private System.Windows.Forms.CheckBox checkBoxTLAMinEnabled;
-        private System.Windows.Forms.Label labelTLA;
-        private System.Windows.Forms.NumericUpDown numericUpDownMaxTLA;
-        private System.Windows.Forms.NumericUpDown numericUpDownMinTLA;
-        private System.Windows.Forms.CheckBox checkBoxEPRMaxEnabled;
-        private System.Windows.Forms.CheckBox checkBoxEPRMinEnabled;
-        private System.Windows.Forms.CheckBox checkBoxN1MaxEnabled;
-        private System.Windows.Forms.CheckBox checkBoxN1MinEnabled;
-        private System.Windows.Forms.CheckBox checkBoxEGTMaxEnabled;
-        private System.Windows.Forms.CheckBox checkBoxEGTMinEnabled;
-        private System.Windows.Forms.CheckBox checkBoxN2MaxEnabled;
-        private System.Windows.Forms.CheckBox checkBoxN2MinEnabled;
-        private System.Windows.Forms.CheckBox checkBoxOilTempMaxEnabled;
-        private System.Windows.Forms.CheckBox checkBoxOilTempMinEnabled;
-        private System.Windows.Forms.CheckBox checkBoxOilPressMaxEnabled;
-        private System.Windows.Forms.CheckBox checkBoxOilPressMinEnabled;
-        private System.Windows.Forms.CheckBox checkBoxOilPressTorqMaxEnabled;
-        private System.Windows.Forms.CheckBox checkBoxOilPressTorqMinEnabled;
-        private System.Windows.Forms.ComboBox comboBoxMeasureOilFlow;
-        private System.Windows.Forms.CheckBox checkBoxOilFlowMaxEnabled;
-        private System.Windows.Forms.NumericUpDown numericUpDownMaxOilFlow;
-        private System.Windows.Forms.NumericUpDown numericUpDownMinOilFlow;
-        private System.Windows.Forms.Label labelOilFlow;
-        private System.Windows.Forms.CheckBox checkBoxOilFlowMinEnabled;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label labelRemarks;
-        private System.Windows.Forms.NumericUpDown numericUpDownPersentTime;
-        private System.Windows.Forms.ComboBox comboBoxGroundAir;
-        private System.Windows.Forms.Label labelGroundAir;
-        private System.Windows.Forms.Label labelPersentTime;
-        private System.Windows.Forms.Label labelPersentFrom;
-        private System.Windows.Forms.ComboBox comboBoxResourceProvider;
-        private System.Windows.Forms.TextBox textBoxRemarks;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelMain;
-        private System.Windows.Forms.Panel panelLabel;
-        private ReferenceControls.ExtendableRichContainer extendableRichContainer1;
-        private System.Windows.Forms.NumericUpDown numericUpDownRecOilTemp;
-        private System.Windows.Forms.NumericUpDown numericUpDownRecTLA;
-        private System.Windows.Forms.NumericUpDown numericUpDownRecEPR;
-        private System.Windows.Forms.NumericUpDown numericUpDownRecN1;
-        private System.Windows.Forms.NumericUpDown numericUpDowRecN25;
-        private System.Windows.Forms.NumericUpDown numericUpDownRecEGT;
-        private System.Windows.Forms.NumericUpDown numericUpDownRecV1;
-        private System.Windows.Forms.NumericUpDown numericUpDownRecV2;
-        private System.Windows.Forms.NumericUpDown numericUpDownRecOilFlow;
-        private System.Windows.Forms.NumericUpDown numericUpDownRecFuelPress;
-        private System.Windows.Forms.NumericUpDown numericUpDownRecFuelFlow;
-        private System.Windows.Forms.NumericUpDown numericUpDownRecFuelBurn;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.CheckBox checkBoxOilFlowRecEnabled;
-        private System.Windows.Forms.CheckBox checkBoxFuelPressRecEnabled;
-        private System.Windows.Forms.CheckBox checkBoxOilPressTorqueRecEnabled;
-        private System.Windows.Forms.CheckBox checkBoxFuelFlowRecEnabled;
-        private System.Windows.Forms.CheckBox checkBoxFuelBurnRecEnabled;
-        private System.Windows.Forms.CheckBox checkBoxOilPressRecEnabled;
-        private System.Windows.Forms.NumericUpDown numericUpDownRecOillPress;
-        private System.Windows.Forms.CheckBox checkBoxOilTempRecEnabled;
-        private System.Windows.Forms.NumericUpDown numericUpDownRecOilPressTorque;
-        private System.Windows.Forms.CheckBox checkBoxV2RecEnabled;
-        private System.Windows.Forms.CheckBox checkBoxV1RecEnabled;
-        private System.Windows.Forms.CheckBox checkBoxN2RecEnabled;
-        private System.Windows.Forms.CheckBox checkBoxEGTRecEnabled;
-        private System.Windows.Forms.CheckBox checkBoxN1RecEnabled;
-        private System.Windows.Forms.CheckBox checkBoxEPRRecEnabled;
-        private System.Windows.Forms.CheckBox checkBoxTLARecEnabled;
-    }
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMain;
+		private System.Windows.Forms.Button buttonDelete;
+		private System.Windows.Forms.Label labelFuelBurn;
+		private System.Windows.Forms.Label labelOilTemp;
+		private System.Windows.Forms.Label labelN2;
+		private System.Windows.Forms.Label labelEGT;
+		private System.Windows.Forms.Label labelERP;
+		private System.Windows.Forms.Label labelN1;
+		private System.Windows.Forms.Label labelFuelFlow;
+		private System.Windows.Forms.Label labelOilPress;
+		private System.Windows.Forms.NumericUpDown numericUpDownMaxERP;
+		private System.Windows.Forms.NumericUpDown numericUpDownMaxN1;
+		private System.Windows.Forms.NumericUpDown numericUpDownMaxEGT;
+		private System.Windows.Forms.NumericUpDown numericUpDownMaxN2;
+		private System.Windows.Forms.NumericUpDown numericUpDownMaxOilTemp;
+		private System.Windows.Forms.NumericUpDown numericUpDownMaxOilPress;
+		private System.Windows.Forms.NumericUpDown numericUpDownMaxFuelFlow;
+		private System.Windows.Forms.NumericUpDown numericUpDownMaxFuelBurn;
+		private System.Windows.Forms.Label labelFuelPress;
+		private System.Windows.Forms.Label labelVibrationOverload1;
+		private System.Windows.Forms.Label labelMaxTimeInRegime;
+		private System.Windows.Forms.Label labelOilPressTorque;
+		private System.Windows.Forms.NumericUpDown numericUpDownMaxVibrationOverload;
+		private System.Windows.Forms.NumericUpDown numericUpDownMaxFuelPress;
+		private System.Windows.Forms.NumericUpDown numericUpDownMaxOilPressTorque;
+		private System.Windows.Forms.NumericUpDown numericUpDownMaxVibrationOverload2;
+		private System.Windows.Forms.Label labelVibrationOverload2;
+		private System.Windows.Forms.Label labelMeasure;
+		private System.Windows.Forms.Label labelMax;
+		private System.Windows.Forms.Label labelMin;
+		private System.Windows.Forms.NumericUpDown numericUpDownMinN1;
+		private System.Windows.Forms.NumericUpDown numericUpDownMinEPR;
+		private System.Windows.Forms.NumericUpDown numericUpDownMinEGT;
+		private System.Windows.Forms.ComboBox comboBoxMeasureEGT;
+		private System.Windows.Forms.NumericUpDown numericUpDownMinOilTemp;
+		private System.Windows.Forms.NumericUpDown numericUpDownMinN2;
+		private System.Windows.Forms.NumericUpDown numericUpDownMinOilPress;
+		private System.Windows.Forms.ComboBox comboBoxMeasureOilTemp;
+		private System.Windows.Forms.NumericUpDown numericUpDownMinOilPressTorque;
+		private System.Windows.Forms.NumericUpDown numericUpDownMinFuelPress;
+		private System.Windows.Forms.NumericUpDown numericUpDownMinFuelFlow;
+		private System.Windows.Forms.NumericUpDown numericUpDownMinFuelBurn;
+		private System.Windows.Forms.NumericUpDown numericUpDownMinVibroOverload;
+		private System.Windows.Forms.ComboBox comboBoxMeasureFuelBurn;
+		private System.Windows.Forms.ComboBox comboBoxMeasureFuelFlow;
+		private System.Windows.Forms.ComboBox comboBoxMeasureFuelPress;
+		private System.Windows.Forms.ComboBox comboBoxMeasureOilPressTorque;
+		private System.Windows.Forms.ComboBox comboBoxMeasureOilPress;
+		private System.Windows.Forms.NumericUpDown numericUpDownMinVibroOverload2;
+		private System.Windows.Forms.Label labelFlightRegime;
+		private System.Windows.Forms.ComboBox comboBoxFlightRegime;
+		private System.Windows.Forms.DateTimePicker dateTimePickerTime;
+		private System.Windows.Forms.CheckBox checkBoxVO2MaxEnabled;
+		private System.Windows.Forms.CheckBox checkBoxVO2MinEnabled;
+		private System.Windows.Forms.CheckBox checkBoxVO1MaxEnabled;
+		private System.Windows.Forms.CheckBox checkBoxVO1MinEnabled;
+		private System.Windows.Forms.CheckBox checkBoxFuelBurnMinEnabled;
+		private System.Windows.Forms.CheckBox checkBoxFuelBurnMaxEnabled;
+		private System.Windows.Forms.CheckBox checkBoxFuelPressMinEnabled;
+		private System.Windows.Forms.CheckBox checkBoxFuelPressMaxEnabled;
+		private System.Windows.Forms.CheckBox checkBoxFuelFlowMinEnabled;
+		private System.Windows.Forms.CheckBox checkBoxFuelFlowMaxEnabled;
+		private System.Windows.Forms.CheckBox checkBoxTLAMaxEnabled;
+		private System.Windows.Forms.CheckBox checkBoxTLAMinEnabled;
+		private System.Windows.Forms.Label labelTLA;
+		private System.Windows.Forms.NumericUpDown numericUpDownMaxTLA;
+		private System.Windows.Forms.NumericUpDown numericUpDownMinTLA;
+		private System.Windows.Forms.CheckBox checkBoxEPRMaxEnabled;
+		private System.Windows.Forms.CheckBox checkBoxEPRMinEnabled;
+		private System.Windows.Forms.CheckBox checkBoxN1MaxEnabled;
+		private System.Windows.Forms.CheckBox checkBoxN1MinEnabled;
+		private System.Windows.Forms.CheckBox checkBoxEGTMaxEnabled;
+		private System.Windows.Forms.CheckBox checkBoxEGTMinEnabled;
+		private System.Windows.Forms.CheckBox checkBoxN2MaxEnabled;
+		private System.Windows.Forms.CheckBox checkBoxN2MinEnabled;
+		private System.Windows.Forms.CheckBox checkBoxOilTempMaxEnabled;
+		private System.Windows.Forms.CheckBox checkBoxOilTempMinEnabled;
+		private System.Windows.Forms.CheckBox checkBoxOilPressMaxEnabled;
+		private System.Windows.Forms.CheckBox checkBoxOilPressMinEnabled;
+		private System.Windows.Forms.CheckBox checkBoxOilPressTorqMaxEnabled;
+		private System.Windows.Forms.CheckBox checkBoxOilPressTorqMinEnabled;
+		private System.Windows.Forms.ComboBox comboBoxMeasureOilFlow;
+		private System.Windows.Forms.CheckBox checkBoxOilFlowMaxEnabled;
+		private System.Windows.Forms.NumericUpDown numericUpDownMaxOilFlow;
+		private System.Windows.Forms.NumericUpDown numericUpDownMinOilFlow;
+		private System.Windows.Forms.Label labelOilFlow;
+		private System.Windows.Forms.CheckBox checkBoxOilFlowMinEnabled;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label labelRemarks;
+		private System.Windows.Forms.NumericUpDown numericUpDownPersentTime;
+		private System.Windows.Forms.ComboBox comboBoxGroundAir;
+		private System.Windows.Forms.Label labelGroundAir;
+		private System.Windows.Forms.Label labelPersentTime;
+		private System.Windows.Forms.Label labelPersentFrom;
+		private System.Windows.Forms.ComboBox comboBoxResourceProvider;
+		private System.Windows.Forms.TextBox textBoxRemarks;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelMain;
+		private System.Windows.Forms.Panel panelLabel;
+		private ReferenceControls.ExtendableRichContainer extendableRichContainer1;
+		private System.Windows.Forms.NumericUpDown numericUpDownRecOilTemp;
+		private System.Windows.Forms.NumericUpDown numericUpDownRecTLA;
+		private System.Windows.Forms.NumericUpDown numericUpDownRecEPR;
+		private System.Windows.Forms.NumericUpDown numericUpDownRecN1;
+		private System.Windows.Forms.NumericUpDown numericUpDowRecN25;
+		private System.Windows.Forms.NumericUpDown numericUpDownRecEGT;
+		private System.Windows.Forms.NumericUpDown numericUpDownRecV1;
+		private System.Windows.Forms.NumericUpDown numericUpDownRecV2;
+		private System.Windows.Forms.NumericUpDown numericUpDownRecOilFlow;
+		private System.Windows.Forms.NumericUpDown numericUpDownRecFuelPress;
+		private System.Windows.Forms.NumericUpDown numericUpDownRecFuelFlow;
+		private System.Windows.Forms.NumericUpDown numericUpDownRecFuelBurn;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.CheckBox checkBoxOilFlowRecEnabled;
+		private System.Windows.Forms.CheckBox checkBoxFuelPressRecEnabled;
+		private System.Windows.Forms.CheckBox checkBoxOilPressTorqueRecEnabled;
+		private System.Windows.Forms.CheckBox checkBoxFuelFlowRecEnabled;
+		private System.Windows.Forms.CheckBox checkBoxFuelBurnRecEnabled;
+		private System.Windows.Forms.CheckBox checkBoxOilPressRecEnabled;
+		private System.Windows.Forms.NumericUpDown numericUpDownRecOillPress;
+		private System.Windows.Forms.CheckBox checkBoxOilTempRecEnabled;
+		private System.Windows.Forms.NumericUpDown numericUpDownRecOilPressTorque;
+		private System.Windows.Forms.CheckBox checkBoxV2RecEnabled;
+		private System.Windows.Forms.CheckBox checkBoxV1RecEnabled;
+		private System.Windows.Forms.CheckBox checkBoxN2RecEnabled;
+		private System.Windows.Forms.CheckBox checkBoxEGTRecEnabled;
+		private System.Windows.Forms.CheckBox checkBoxN1RecEnabled;
+		private System.Windows.Forms.CheckBox checkBoxEPRRecEnabled;
+		private System.Windows.Forms.CheckBox checkBoxTLARecEnabled;
+	}
 }

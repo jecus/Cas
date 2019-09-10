@@ -1,35 +1,36 @@
 ﻿using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.ComponentControls
 {
-    partial class ComponentAddCompliancePerformanceControl
-    {
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class ComponentAddCompliancePerformanceControl
+	{
+		/// <summary> 
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary> 
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Component Designer generated code
+		#region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary> 
+		/// Required method for Designer support - do not modify 
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.labelWorkType = new System.Windows.Forms.Label();
 			this.comboBoxWorkType = new System.Windows.Forms.ComboBox();
 			this.radio_WhicheverFirst = new System.Windows.Forms.RadioButton();
@@ -83,6 +84,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxWorkType.Size = new System.Drawing.Size(350, 22);
 			this.comboBoxWorkType.TabIndex = 1;
 			this.comboBoxWorkType.SelectedIndexChanged += new System.EventHandler(this.ComboBoxWorkTypeSelectedIndexChanged);
+			this.comboBoxWorkType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// radio_WhicheverFirst
 			// 
@@ -474,6 +476,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.lookupComboboxMaintenanceDirective.Size = new System.Drawing.Size(351, 22);
 			this.lookupComboboxMaintenanceDirective.TabIndex = 194;
 			this.lookupComboboxMaintenanceDirective.SelectedIndexChanged += new System.EventHandler(this.LookupComboboxMaintenanceDirectiveSelectedIndexChanged);
+			this.lookupComboboxMaintenanceDirective.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelMPDItem
 			// 
@@ -495,6 +498,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxMpdTaskType.Name = "comboBoxMpdTaskType";
 			this.comboBoxMpdTaskType.Size = new System.Drawing.Size(350, 22);
 			this.comboBoxMpdTaskType.TabIndex = 193;
+			this.comboBoxMpdTaskType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// fileControl
 			// 
@@ -562,39 +566,39 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private System.Windows.Forms.Label labelWorkType;
-        private System.Windows.Forms.ComboBox comboBoxWorkType;
-        private LifelengthViewer lifelengthViewerRptInterval;
-        private LifelengthViewer lifelengthViewerRptNotify;
-        private LifelengthViewer lifelengthViewer_FirstPerformance;
-        private LifelengthViewer lifelengthViewer_FirstNotify;
-        private System.Windows.Forms.RadioButton radio_WhicheverFirst;
-        private System.Windows.Forms.RadioButton radio_WhicheverLater;
-        private System.Windows.Forms.CheckBox checkBox_Repeat;
-        private LifelengthViewer lifelengthViewerWarranty;
-        private LifelengthViewer lifelengthViewerWarrantyNotify;
-        private System.Windows.Forms.Label labelManHours;
-        private System.Windows.Forms.Label labelKitRequired;
-        private System.Windows.Forms.TextBox textBoxManHours;
-        private System.Windows.Forms.TextBox textBoxKitRequired;
-        private System.Windows.Forms.Label labelCost;
-        private System.Windows.Forms.TextBox textBoxCost;
-        private System.Windows.Forms.Label labelFAAForm;
-        private System.Windows.Forms.Label labelRemarks;
-        private System.Windows.Forms.Label labelHiddenRemarks;
-        private System.Windows.Forms.TextBox textBoxRemarks;
-        private System.Windows.Forms.TextBox textBoxHiddenRemarks;
-        private System.Windows.Forms.Label labelEffectivityDate;
-        private System.Windows.Forms.DateTimePicker dateTimePickerEffDate;
-        private System.Windows.Forms.Label labelMPDTaskType;
-        private LookupCombobox lookupComboboxMaintenanceDirective;
-        private System.Windows.Forms.Label labelMPDItem;
-        private System.Windows.Forms.ComboBox comboBoxMpdTaskType;
-        private AttachedFileControl fileControl;
+		private System.Windows.Forms.Label labelWorkType;
+		private System.Windows.Forms.ComboBox comboBoxWorkType;
+		private LifelengthViewer lifelengthViewerRptInterval;
+		private LifelengthViewer lifelengthViewerRptNotify;
+		private LifelengthViewer lifelengthViewer_FirstPerformance;
+		private LifelengthViewer lifelengthViewer_FirstNotify;
+		private System.Windows.Forms.RadioButton radio_WhicheverFirst;
+		private System.Windows.Forms.RadioButton radio_WhicheverLater;
+		private System.Windows.Forms.CheckBox checkBox_Repeat;
+		private LifelengthViewer lifelengthViewerWarranty;
+		private LifelengthViewer lifelengthViewerWarrantyNotify;
+		private System.Windows.Forms.Label labelManHours;
+		private System.Windows.Forms.Label labelKitRequired;
+		private System.Windows.Forms.TextBox textBoxManHours;
+		private System.Windows.Forms.TextBox textBoxKitRequired;
+		private System.Windows.Forms.Label labelCost;
+		private System.Windows.Forms.TextBox textBoxCost;
+		private System.Windows.Forms.Label labelFAAForm;
+		private System.Windows.Forms.Label labelRemarks;
+		private System.Windows.Forms.Label labelHiddenRemarks;
+		private System.Windows.Forms.TextBox textBoxRemarks;
+		private System.Windows.Forms.TextBox textBoxHiddenRemarks;
+		private System.Windows.Forms.Label labelEffectivityDate;
+		private System.Windows.Forms.DateTimePicker dateTimePickerEffDate;
+		private System.Windows.Forms.Label labelMPDTaskType;
+		private LookupCombobox lookupComboboxMaintenanceDirective;
+		private System.Windows.Forms.Label labelMPDItem;
+		private System.Windows.Forms.ComboBox comboBoxMpdTaskType;
+		private AttachedFileControl fileControl;
 		private DocumentationControls.DocumentControl documentControl1;
 	}
 }

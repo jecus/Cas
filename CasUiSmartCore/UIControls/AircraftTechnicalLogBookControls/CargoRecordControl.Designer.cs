@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 {
     partial class CargoRecordControl
     {
@@ -85,10 +87,11 @@
             this.comboBoxCargoCategory.Name = "comboBoxCargoCategory";
             this.comboBoxCargoCategory.Size = new System.Drawing.Size(199, 24);
             this.comboBoxCargoCategory.TabIndex = 1;
-            // 
-            // buttonDelete
-            // 
-            this.buttonDelete.Location = new System.Drawing.Point(537, 17);
+            this.comboBoxCargoCategory.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// buttonDelete
+			// 
+			this.buttonDelete.Location = new System.Drawing.Point(537, 17);
             this.buttonDelete.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(35, 28);
@@ -143,10 +146,11 @@
             this.comboBoxMeasure.Size = new System.Drawing.Size(199, 24);
             this.comboBoxMeasure.TabIndex = 3;
             this.comboBoxMeasure.SelectedIndexChanged += new System.EventHandler(this.ComboBoxMeasureSelectedIndexChanged);
-            // 
-            // CargoRecordControl
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.comboBoxMeasure.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// CargoRecordControl
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
