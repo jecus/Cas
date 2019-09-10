@@ -43,7 +43,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.pictureBox4 = new System.Windows.Forms.PictureBox();
 			this.labelDateAsOf = new System.Windows.Forms.Label();
 			this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
-			this.labelFilter = new System.Windows.Forms.Label();
 			this.TextBoxFilter = new System.Windows.Forms.TextBox();
 			this.buttonFilter = new System.Windows.Forms.Button();
 			this.headerControl.SuspendLayout();
@@ -99,7 +98,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.panelTopContainer.Controls.Add(this.labelTitle);
 			this.panelTopContainer.Controls.Add(this.labelDateAsOf);
 			this.panelTopContainer.Controls.Add(this.flowLayoutPanel1);
-			this.panelTopContainer.Controls.Add(this.labelFilter);
 			this.panelTopContainer.Controls.Add(this.TextBoxFilter);
 			this.panelTopContainer.Controls.Add(this.buttonFilter);
 			// 
@@ -243,25 +241,13 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.pictureBox4.TabIndex = 22;
 			this.pictureBox4.TabStop = false;
 			// 
-			// labelFilter
-			// 
-			this.labelFilter.AutoSize = true;
-			this.labelFilter.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelFilter.Location = new System.Drawing.Point(10, 33);
-			this.labelFilter.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
-			this.labelFilter.Name = "labelFilter";
-			this.labelFilter.Size = new System.Drawing.Size(33, 14);
-			this.labelFilter.TabIndex = 72;
-			this.labelFilter.Text = "Filter:";
-			// 
 			// TextBoxFilter
 			// 
 			this.TextBoxFilter.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.TextBoxFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.TextBoxFilter.Location = new System.Drawing.Point(55, 29);
+			this.TextBoxFilter.Location = new System.Drawing.Point(37, 29);
 			this.TextBoxFilter.Name = "TextBoxFilter";
-			this.TextBoxFilter.Size = new System.Drawing.Size(510, 25);
+			this.TextBoxFilter.Size = new System.Drawing.Size(528, 25);
 			this.TextBoxFilter.TabIndex = 73;
 			// 
 			// buttonFilter
@@ -342,7 +328,6 @@ namespace CAS.UI.UIControls.ComponentControls
 		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.PictureBox pictureBox3;
 		private System.Windows.Forms.PictureBox pictureBox4;
-		private System.Windows.Forms.Label labelFilter;
 		private System.Windows.Forms.TextBox TextBoxFilter;
 		private System.Windows.Forms.Button buttonFilter;
 	}

@@ -469,7 +469,7 @@ namespace CAS.UI.UIControls.AircraftsControls
 		private void LinkAdFleet(object sender, ReferenceEventArgs e)
 		{
 			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-			e.DisplayerText = "Ad Fleet";
+			e.DisplayerText = "AD Fleet";
 			e.RequestedEntity = new DirectiveFleetListScreen(GlobalObjects.CasEnvironment.Operators[0]);
 		}
 

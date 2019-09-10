@@ -159,7 +159,7 @@
 			this.aDFleet.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.aDFleet.Size = new System.Drawing.Size(250, 20);
 			this.aDFleet.TabIndex = 14;
-			this.aDFleet.Text = "Ad Fleet";
+			this.aDFleet.Text = "AD Fleet";
 			this.aDFleet.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.aDFleet.TextFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.aDFleet.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkAdFleet);

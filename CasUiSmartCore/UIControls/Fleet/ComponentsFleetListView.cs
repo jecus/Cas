@@ -56,7 +56,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		/// </summary>
 		protected override void SetHeaders()
 		{
-			AddColumn("Destination", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Aircraft", (int)(radGridView1.Width * 0.2f));
 			AddColumn("ATA", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Part. No", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.3f));
@@ -91,7 +91,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		#region protected override SetGroupsToItems(int columnIndex)
 		protected override void GroupingItems()
 		{
-			Grouping("Destination");
+			Grouping("Aircraft");
 		}
 
 		#endregion

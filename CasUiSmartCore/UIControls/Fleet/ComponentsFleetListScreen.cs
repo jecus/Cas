@@ -100,6 +100,7 @@ namespace CAS.UI.UIControls.ComponentControls
 
 			aircraftHeaderControl1.Operator = currentOperator;
 			headerControl.ShowForecastButton = false;
+			labelTitle.Visible = false;
 
 			InitToolStripMenuItems();
 			InitListView();
