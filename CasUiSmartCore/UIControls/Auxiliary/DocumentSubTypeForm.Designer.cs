@@ -84,7 +84,6 @@
 			this.MinimizeBox = false;
 			this.Name = "DocumentSubTypeForm";
 			this.ShowIcon = false;
-			this.ShowInTaskbar = false;
 			this.Text = "Edit Document Sub Types";
 			this.ResumeLayout(false);
 			this.PerformLayout();

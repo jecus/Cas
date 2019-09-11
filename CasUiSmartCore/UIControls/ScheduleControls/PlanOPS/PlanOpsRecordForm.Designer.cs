@@ -801,7 +801,6 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			this.Name = "PlanOpsRecordForm";
 			this.Resizable = false;
 			this.ShowIcon = false;
-			this.ShowInTaskbar = false;
 			this.Text = "Plan Ops Record Form";
 			this.Load += new System.EventHandler(this.PlanOpsRecordForm_Load);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewFlights)).EndInit();

@@ -4,34 +4,34 @@ using EntityCore.DTO.General;
 
 namespace CAS.UI.UIControls.DirectivesControls
 {
-    partial class DamageChartsForm
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class DamageChartsForm
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.listViewDamageCharts = new System.Windows.Forms.ListView();
 			this.columnChartName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnAircraftModel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -43,9 +43,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// listViewDamageCharts
 			// 
 			this.listViewDamageCharts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnChartName,
-            this.columnAircraftModel,
-            this.columnChartFileName});
+			this.columnChartName,
+			this.columnAircraftModel,
+			this.columnChartFileName});
 			this.listViewDamageCharts.FullRowSelect = true;
 			this.listViewDamageCharts.HideSelection = false;
 			this.listViewDamageCharts.Location = new System.Drawing.Point(7, 63);
@@ -145,19 +145,18 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.MinimumSize = new System.Drawing.Size(600, 300);
 			this.Name = "DamageChartsForm";
 			this.ShowIcon = false;
-			this.ShowInTaskbar = false;
 			this.Text = "Damage charts";
 			this.ResumeLayout(false);
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private System.Windows.Forms.ListView listViewDamageCharts;
-        private System.Windows.Forms.ColumnHeader columnChartName;
-        private System.Windows.Forms.ColumnHeader columnChartFileName;
-        private System.Windows.Forms.ColumnHeader columnAircraftModel;
-        public AvButtonT ButtonDelete;
-        public AvButtonT ButtonAdd;
-    }
+		private System.Windows.Forms.ListView listViewDamageCharts;
+		private System.Windows.Forms.ColumnHeader columnChartName;
+		private System.Windows.Forms.ColumnHeader columnChartFileName;
+		private System.Windows.Forms.ColumnHeader columnAircraftModel;
+		public AvButtonT ButtonDelete;
+		public AvButtonT ButtonAdd;
+	}
 }

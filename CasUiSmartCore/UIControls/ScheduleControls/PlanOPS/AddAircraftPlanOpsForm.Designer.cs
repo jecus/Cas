@@ -102,7 +102,6 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			this.Name = "AddAircraftPlanOpsForm";
 			this.Resizable = false;
 			this.ShowIcon = false;
-			this.ShowInTaskbar = false;
 			this.Text = "Add Aircraft Plan Ops Form";
 			this.ResumeLayout(false);
 			this.PerformLayout();

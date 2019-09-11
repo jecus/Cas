@@ -933,7 +933,6 @@ namespace CAS.UI.UIControls.DocumentationControls
 			this.Name = "DocumentForm";
 			this.Resizable = false;
 			this.ShowIcon = false;
-			this.ShowInTaskbar = false;
 			this.Text = "Document Form";
 			this.Load += new System.EventHandler(this.DocumentForm_Load);
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownIssueNotify)).EndInit();

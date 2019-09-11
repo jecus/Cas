@@ -383,7 +383,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.Controls.Add(this._buttonCancel);
 			this.Name = "MaintenanceCheckEdit";
 			this.ShowIcon = false;
-			this.ShowInTaskbar = false;
 			this.Text = "MaintenanceCheckEdit";
 			this.Load += new System.EventHandler(this.MaintenanceLimitationEditLoad);
 			groupBox2.ResumeLayout(false);

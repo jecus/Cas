@@ -4,35 +4,35 @@ using EntityCore.DTO.General;
 
 namespace CAS.UI.UIControls.ComponentControls
 {
-    partial class TransferedComponentForm
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class TransferedComponentForm
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-	        var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
+			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("Removed", System.Windows.Forms.HorizontalAlignment.Left);
 			System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("Installed", System.Windows.Forms.HorizontalAlignment.Left);
 			System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("Wait remove confirm", System.Windows.Forms.HorizontalAlignment.Left);
@@ -48,12 +48,12 @@ namespace CAS.UI.UIControls.ComponentControls
 			// listViewTransferedDetails
 			// 
 			this.listViewTransferedDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Left) 
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.listViewTransferedDetails.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnDescription,
-            this.columnTransferTo,
-            this.columnTransferDate});
+			this.columnDescription,
+			this.columnTransferTo,
+			this.columnTransferDate});
 			this.listViewTransferedDetails.FullRowSelect = true;
 			listViewGroup4.Header = "Removed";
 			listViewGroup4.Name = "listViewGroupRemoved";
@@ -62,9 +62,9 @@ namespace CAS.UI.UIControls.ComponentControls
 			listViewGroup6.Header = "Wait remove confirm";
 			listViewGroup6.Name = "listViewGroupWaitRemove";
 			this.listViewTransferedDetails.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup4,
-            listViewGroup5,
-            listViewGroup6});
+			listViewGroup4,
+			listViewGroup5,
+			listViewGroup6});
 			this.listViewTransferedDetails.Location = new System.Drawing.Point(13, 63);
 			this.listViewTransferedDetails.Name = "listViewTransferedDetails";
 			this.listViewTransferedDetails.Size = new System.Drawing.Size(1269, 341);
@@ -194,21 +194,20 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.Name = "TransferedComponentForm";
 			this.Resizable = false;
 			this.ShowIcon = false;
-			this.ShowInTaskbar = false;
 			this.Text = "Transfered Detail Form";
 			this.TopMost = true;
 			this.ResumeLayout(false);
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private System.Windows.Forms.ListView listViewTransferedDetails;
-        private System.Windows.Forms.ColumnHeader columnDescription;
-        private System.Windows.Forms.ColumnHeader columnTransferDate;
-        private System.Windows.Forms.ColumnHeader columnTransferTo;
-        public AvButtonT ButtonDelete;
-        public AvButtonT ButtonAdd;
-        public AvButtonT ButtonCancel;
-    }
+		private System.Windows.Forms.ListView listViewTransferedDetails;
+		private System.Windows.Forms.ColumnHeader columnDescription;
+		private System.Windows.Forms.ColumnHeader columnTransferDate;
+		private System.Windows.Forms.ColumnHeader columnTransferTo;
+		public AvButtonT ButtonDelete;
+		public AvButtonT ButtonAdd;
+		public AvButtonT ButtonCancel;
+	}
 }

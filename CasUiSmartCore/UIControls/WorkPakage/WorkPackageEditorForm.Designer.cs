@@ -1090,7 +1090,6 @@ namespace CAS.UI.UIControls.WorkPakage
 			this.Name = "WorkPackageEditorForm";
 			this.Resizable = false;
 			this.ShowIcon = false;
-			this.ShowInTaskbar = false;
 			this.Text = "Work Package Editor Form";
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();

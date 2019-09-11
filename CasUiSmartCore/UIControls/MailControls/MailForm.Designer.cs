@@ -646,7 +646,6 @@ namespace CAS.UI.UIControls.MailControls
 			this.MinimumSize = new System.Drawing.Size(722, 550);
 			this.Name = "MailForm";
 			this.ShowIcon = false;
-			this.ShowInTaskbar = false;
 			this.Text = "Receive Mail Form";
 			this.Load += new System.EventHandler(this.ReceiveMailForm_Load);
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownRevisionNotify)).EndInit();

@@ -202,7 +202,6 @@ namespace CAS.UI.UIControls.MailControls
 			this.MinimumSize = new System.Drawing.Size(375, 280);
 			this.Name = "MailChatAddingForm";
 			this.ShowIcon = false;
-			this.ShowInTaskbar = false;
 			this.Text = "MailChatAddingForm";
 			this.Load += new System.EventHandler(this.MailChatAddingForm_Load);
 			this.ResumeLayout(false);

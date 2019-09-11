@@ -148,7 +148,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.MinimumSize = new System.Drawing.Size(600, 300);
 			this.Name = "DeferredCategoriesForm";
 			this.ShowIcon = false;
-			this.ShowInTaskbar = false;
 			this.Text = "Deffered categories";
 			this.ResumeLayout(false);
 

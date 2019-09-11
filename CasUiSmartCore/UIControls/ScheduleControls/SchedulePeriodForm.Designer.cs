@@ -213,7 +213,6 @@ namespace CAS.UI.UIControls.ScheduleControls
 			this.Name = "SchedulePeriodForm";
 			this.Resizable = false;
 			this.ShowIcon = false;
-			this.ShowInTaskbar = false;
 			this.Text = "Schedule Period";
 			this.Load += new System.EventHandler(this.SchedulePeriodForm_Load);
 			this.ResumeLayout(false);
