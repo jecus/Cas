@@ -118,13 +118,13 @@ namespace SmartCore.Queries
         }
 		#endregion
 
-		public static List<DbQuery> GetSelectQuery(
-			DirectiveType directiveType, string text,
+		public static List<DbQuery> GetSelectQuery(DirectiveType directiveType, string text,
+			string paragraph,
 			bool loadChild = false,
 			bool getDeleted = false)
 		{
 			List<ICommonFilter> allFilters = new List<ICommonFilter> ();
-			allFilters.Add(GetWhereStatementForAll(directiveType, text));
+			allFilters.Add(GetWhereStatementForAll(directiveType, text, paragraph));
 			List<DbQuery> qrs = BaseQueries.GetSelectQueryWithWhereAll<Directive>(allFilters.ToArray(), loadChild, getDeleted);
 			return qrs;
 
@@ -299,7 +299,7 @@ namespace SmartCore.Queries
 
 		#endregion
 
-		public static ICommonFilter GetWhereStatementForAll(DirectiveType directiveType, string text)
+		public static ICommonFilter GetWhereStatementForAll(DirectiveType directiveType, string text, string paragraph)
 		{
 			if (directiveType == null)
 				throw new ArgumentNullException("directiveType", "must be not null");
@@ -309,7 +309,7 @@ namespace SmartCore.Queries
 			ICommonFilter state;
 
 				state =
-					new CommonFilter<string>(string.Format($@"(directives.Title != 'N/A' and directives.Title like '%{text}%'
+					new CommonFilter<string>(string.Format($@"(directives.Title != 'N/A' and directives.Title like '%{text}%' and directives.Paragraph like '%{paragraph}%'
                                                            and directives.DirectiveType = {directiveType.ItemId})"));
 				return state;
 		}

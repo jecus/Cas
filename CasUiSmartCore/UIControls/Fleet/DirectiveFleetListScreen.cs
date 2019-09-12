@@ -152,7 +152,7 @@ namespace CAS.UI.UIControls.Fleet
 
 				try
 				{
-					dir.AddRange(GlobalObjects.DirectiveCore.GetDirectivesFromAllAircrafts(DirectiveType.AirworthenessDirectives, TextBoxFilter.Text));
+					dir.AddRange(GlobalObjects.DirectiveCore.GetDirectivesFromAllAircrafts(DirectiveType.AirworthenessDirectives, TextBoxFilter.Text, TextBoxFilterParagraph.Text));
 				}
 				catch (Exception ex)
 				{

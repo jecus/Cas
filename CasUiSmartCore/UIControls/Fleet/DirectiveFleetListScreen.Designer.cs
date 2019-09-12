@@ -38,10 +38,13 @@ namespace CAS.UI.UIControls.Fleet
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.buttonImportExcel = new AvControls.AvButtonT.AvButtonT();
 			this.pictureBoxS3 = new System.Windows.Forms.PictureBox();
+			this.labelFilter = new System.Windows.Forms.Label();
+			this.labelFilterParagraph = new System.Windows.Forms.Label();
 			this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
 			this.labelDateAsOf = new System.Windows.Forms.Label();
 			this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
 			this.TextBoxFilter = new System.Windows.Forms.TextBox();
+			this.TextBoxFilterParagraph = new System.Windows.Forms.TextBox();
 			this.buttonFilter = new System.Windows.Forms.Button();
 			this.headerControl.SuspendLayout();
 			this.flowLayoutPanel1.SuspendLayout();
@@ -94,7 +97,10 @@ namespace CAS.UI.UIControls.Fleet
 			this.panelTopContainer.Controls.Add(this.labelTitle);
 			this.panelTopContainer.Controls.Add(this.labelDateAsOf);
 			this.panelTopContainer.Controls.Add(this.flowLayoutPanel1);
+			this.panelTopContainer.Controls.Add(this.labelFilter);
+			this.panelTopContainer.Controls.Add(this.labelFilterParagraph);
 			this.panelTopContainer.Controls.Add(this.TextBoxFilter);
+			this.panelTopContainer.Controls.Add(this.TextBoxFilterParagraph);
 			this.panelTopContainer.Controls.Add(this.buttonFilter);
 			// 
 			// buttonDeleteSelected
@@ -246,16 +252,49 @@ namespace CAS.UI.UIControls.Fleet
 			// 
 			this.TextBoxFilter.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.TextBoxFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.TextBoxFilter.Location = new System.Drawing.Point(37, 29);
+			this.TextBoxFilter.Location = new System.Drawing.Point(90, 2);
 			this.TextBoxFilter.Name = "TextBoxFilter";
 			this.TextBoxFilter.Size = new System.Drawing.Size(528, 25);
 			this.TextBoxFilter.TabIndex = 73;
+			// 
+			// TextBoxFilterParagraph
+			// 
+			this.TextBoxFilterParagraph.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.TextBoxFilterParagraph.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.TextBoxFilterParagraph.Location = new System.Drawing.Point(90, 29);
+			this.TextBoxFilterParagraph.Name = "TextBoxFilterParagraph";
+			this.TextBoxFilterParagraph.Size = new System.Drawing.Size(528, 25);
+			this.TextBoxFilterParagraph.TabIndex = 73;
+			// 
+			// labelFilter
+			// 
+			this.labelFilter.AutoSize = true;
+			this.labelFilter.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelFilter.Location = new System.Drawing.Point(10, 6);
+			this.labelFilter.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
+			this.labelFilter.Name = "labelFilter";
+			this.labelFilter.Size = new System.Drawing.Size(33, 14);
+			this.labelFilter.TabIndex = 72;
+			this.labelFilter.Text = "Title:";
+			// 
+			// labelFilterParagraph
+			// 
+			this.labelFilterParagraph.AutoSize = true;
+			this.labelFilterParagraph.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelFilterParagraph.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelFilterParagraph.Location = new System.Drawing.Point(10, 33);
+			this.labelFilterParagraph.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
+			this.labelFilterParagraph.Name = "labelFilterParagraph";
+			this.labelFilterParagraph.Size = new System.Drawing.Size(33, 14);
+			this.labelFilterParagraph.TabIndex = 72;
+			this.labelFilterParagraph.Text = "Paragraph:";
 			// 
 			// buttonFilter
 			// 
 			this.buttonFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonFilter.ForeColor = System.Drawing.Color.DimGray;
-			this.buttonFilter.Location = new System.Drawing.Point(570, 30);
+			this.buttonFilter.Location = new System.Drawing.Point(625, 30);
 			this.buttonFilter.Name = "buttonFilter";
 			this.buttonFilter.Size = new System.Drawing.Size(70, 23);
 			this.buttonFilter.TabIndex = 43;
@@ -295,6 +334,9 @@ namespace CAS.UI.UIControls.Fleet
 		private System.Windows.Forms.PictureBox pictureBox2;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
 		private System.Windows.Forms.TextBox TextBoxFilter;
+		private System.Windows.Forms.TextBox TextBoxFilterParagraph;
 		private System.Windows.Forms.Button buttonFilter;
+		private System.Windows.Forms.Label labelFilter;
+		private System.Windows.Forms.Label labelFilterParagraph;
 	}
 }

@@ -15,7 +15,7 @@ namespace SmartCore.Directives
 		DirectiveCollection GetDirectives(params object[] parametres);
 		DirectiveCollection GetDirectives(Aircraft parentAircraft, DirectiveType directiveType);
 		DirectiveCollection GetDirectives(BaseComponent parentBaseComponent, DirectiveType directiveType);
-		DirectiveCollection GetDirectivesFromAllAircrafts(DirectiveType directiveType, string text);
+		DirectiveCollection GetDirectivesFromAllAircrafts(DirectiveType directiveType, string text, string paragraph);
 		DirectiveCollection GetDeferredItems(params object[] parametres);
 		DirectiveCollection GetDeferredItems(BaseComponent parentBaseComponent = null, Aircraft parentAircraft = null,
 											 AircraftFlight parentFlight = null,

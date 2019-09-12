@@ -297,13 +297,12 @@ namespace SmartCore.Directives
 
 		#endregion
 
-		public DirectiveCollection GetDirectivesFromAllAircrafts(DirectiveType directiveType, string text)
+		public DirectiveCollection GetDirectivesFromAllAircrafts(DirectiveType directiveType, string text, string paragraph)
 		{
 			if (directiveType == null)
 				directiveType = DirectiveType.AirworthenessDirectives;
 
-			var qrs = DirectiveQueries.GetSelectQuery(directiveType,text, loadChild: true);
-			//qrs[0].QueryString = qrs[0].QueryString + $" and Directives.Title like '%{text}%'";
+			var qrs = DirectiveQueries.GetSelectQuery(directiveType,text, paragraph, loadChild: true);
 
 			var directives = new DirectiveCollection();
 			directives.AddRange(_loader.GetObjectListAll<Directive>(qrs, true));
