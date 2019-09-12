@@ -39,7 +39,7 @@ namespace CAS.UI.UIControls.Fleet
 
 		private DirectiveFleetListView _directivesViewer;
 
-		private CommonFilterCollection _filter;
+		private CommonFilterCollection _filter = new CommonFilterCollection(typeof(Directive));
 
 		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemOpen;
