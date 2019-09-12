@@ -638,14 +638,10 @@ namespace CAS.UI.UIControls.NewGrid
 
 		private void RadGridView1_KeyDown(object sender, KeyEventArgs e)
 		{
-			if(IgnoreEnterPress)
-				return;
-			
-
 			switch (e.KeyData)
 			{
 				case Keys.Enter:
-					if (SelectedItem != null)
+					if (!IgnoreEnterPress && SelectedItem != null)
 					{
 						if(DisplayerRequested != null)
 							OnDisplayerRequested();
