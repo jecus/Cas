@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Windows;
 using Auxiliary;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
@@ -205,8 +206,6 @@ namespace CAS.UI.UIControls.OilControls
 					}
 
 					Color baseComponentTimeColor = Color.Black;
-					var baseDetailHaveOverhaulDirective = BaseDetailHaveOverhaul(baseComponent);
-					var lastOverhaul = GetLastOverhaul(baseComponent);
 					if (baseComponent.BaseComponentType == BaseComponentType.Engine)
 					{
 						if (shouldFillSubItems)
@@ -223,7 +222,41 @@ namespace CAS.UI.UIControls.OilControls
 
 							var flTime = UsefulMethods.GetDifference(new TimeSpan(0, item.LDGTime, 0),
 								new TimeSpan(0, item.TakeOffTime, 0));
-							var oilFlow = (cc?.Spent / flTime.TotalMinutes) * 60.0 ?? 0;
+
+							var q = GlobalObjects.AircraftFlightsCore.GetAircraftFlightsByAircraftId(item.AircraftId)
+								.Where(f => f.AtlbRecordType != AtlbRecordType.Maintenance &&
+								            f.FlightDate.Date.AddMinutes(f.TakeOffTime) <
+								            item.FlightDate.Date.AddMinutes(item.TakeOffTime))
+								.OrderByDescending(i => i.FlightDate).ThenByDescending(i => i.TakeOffTime)
+								.ToList();
+
+							double spent = cc?.Spent ?? 0;
+							double counter = 0;
+
+							if (oilAdded > 0)
+							{
+								spent = oilAdded / flTime.TotalMinutes;
+							}
+							else
+							{
+								foreach (AircraftFlight flight in q)
+								{
+									counter += flight.FlightTime.TotalMinutes;
+									var oil = flight.OilConditionCollection.FirstOrDefault(i => i.ComponentId == baseComponent.ItemId);
+									if (oil?.OilAdded > 0)
+									{
+										if (counter > 0)
+											spent = oil.OilAdded / (counter + item.FlightTime.TotalMinutes);
+										break;
+									}
+									
+
+								}
+							}
+							
+
+							//var oilFlow = (spent / flTime.TotalMinutes) * 60.0;
+							var oilFlow = spent * 60.0;
 							var exceeding = oilFlowMax - oilFlow;
 
 
