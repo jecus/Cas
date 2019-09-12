@@ -400,7 +400,23 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 		#endregion
 
-		
+		protected override void SetTotalText()
+		{
+			var dir = GetItemsArray().Select(i => i);
+
+			var dict = new List<string>();
+			foreach (var directive in dir)
+			{
+				var value = directive.Title;
+				if (!dict.Contains(value))
+					dict.Add(value);
+			}
+
+
+			this.labelTotal.Text = $"Total: {dict.Count}/{radGridView1.Rows.Count}";
+		}
+
+
 		#endregion
 	}
 }
