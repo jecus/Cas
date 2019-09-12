@@ -166,8 +166,11 @@ namespace CAS.UI.UIControls.ComponentControls
 			_maintenanceTypes = maintenanceTypes;
 			_llpMark = llpMark;
 
-			if(_currentBaseComponent.ParentAircraftId > 0)
+			if (_currentBaseComponent.ParentAircraftId > 0)
+			{
 				CurrentAircraft = GlobalObjects.AircraftsCore.GetAircraftById(_currentBaseComponent.ParentAircraftId);
+				_currentAircraft = CurrentAircraft;
+			}
 			if (_currentBaseComponent.ParentStoreId > 0)
 				CurrentStore = GlobalObjects.StoreCore.GetStoreById(_currentBaseComponent.ParentStoreId);
 
