@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -74,7 +75,7 @@ namespace CAS.UI.UIControls.OilControls
 
 			foreach (var values in _graph.Graph[comp].OrderBy(i => i.Key.Hours))
 			{
-				lineSeries.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value,values.Value));
+				lineSeries.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, values.Value));
 				lineSeriesMin.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, _graph.Limits[comp].Min));
 				lineSeriesNorm.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, _graph.Limits[comp].Normal));
 				lineSeriesMax.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, _graph.Limits[comp].Max));
@@ -109,8 +110,12 @@ namespace CAS.UI.UIControls.OilControls
 
 			radChartView1.ShowPanZoom = true;
 
+			ChartTrackballController controler = new ChartTrackballController();
+			controler.TextNeeded += controler_TextNeeded;
+			radChartView1.Controllers.Add(controler);
+
 			radChartView1.Controllers.Add(new ChartTooltipController());
-			radChartView1.Controllers.Add(new ChartTrackballController());
+			
 			radChartView1.ShowToolTip = true;
 			//radChartView1.Zoom(25, 1);
 			//radChartView1.Pan(300, 0);
@@ -122,7 +127,7 @@ namespace CAS.UI.UIControls.OilControls
 
 
 			//setup the Cartesian Grid
-			var area = this.radChartView1.GetArea<CartesianArea>();
+			var area = radChartView1.GetArea<CartesianArea>();
 			area.ShowGrid = true;
 			CartesianGrid grid = area.GetGrid<CartesianGrid>();
 			grid.DrawHorizontalFills = true;
@@ -134,6 +139,22 @@ namespace CAS.UI.UIControls.OilControls
 			grid.AlternatingHorizontalColor = true;
 			grid.AlternatingBackColor = Color.White;
 			grid.AlternatingBackColor2 = Color.White;
+		}
+
+		//private Font font = new Font("Segoe Script", 12, FontStyle.Regular);
+		private void controler_TextNeeded(object sender, TextNeededEventArgs e)
+		{
+			e.Element.BackColor = ColorTranslator.FromHtml("#ffffff");
+			//e.Element.ForeColor = ColorTranslator.FromHtml("#bb2525");
+			e.Element.BorderColor = ColorTranslator.FromHtml("#000000");
+			e.Element.Padding = new Padding(10);
+			//e.Element.Font = font;
+			//e.Element.NumberOfColors = 1;
+			e.Element.BorderGradientStyle = Telerik.WinControls.GradientStyles.Solid;
+			ScatterDataPoint dataPoint = e.Points[0].DataPoint as ScatterDataPoint;
+			
+			e.Text = string.Format(@"<html><color='gray'>HRS:{0} Oil:{1}",
+				dataPoint.XValue, dataPoint.YValue);
 		}
 	}
 }
