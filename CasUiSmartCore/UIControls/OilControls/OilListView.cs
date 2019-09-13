@@ -257,7 +257,13 @@ namespace CAS.UI.UIControls.OilControls
 
 							//var oilFlow = (spent / flTime.TotalMinutes) * 60.0;
 							var oilFlow = spent * 60.0;
-							var exceeding = oilFlowMax - oilFlow;
+
+
+							var exceeding = oilFlow - oilFlowMax;
+							if (oilFlow <= oilFlowMax)
+								exceeding = 0;
+
+
 
 
 							subItems.Add(CreateListViewSubItem(oilAdded.ToString()));
