@@ -254,7 +254,7 @@ namespace CAS.UI.UIControls.Fleet
 			this.TextBoxFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.TextBoxFilter.Location = new System.Drawing.Point(90, 2);
 			this.TextBoxFilter.Name = "TextBoxFilter";
-			this.TextBoxFilter.Size = new System.Drawing.Size(528, 25);
+			this.TextBoxFilter.Size = new System.Drawing.Size(110, 25);
 			this.TextBoxFilter.TabIndex = 73;
 			// 
 			// TextBoxFilterParagraph
@@ -263,7 +263,7 @@ namespace CAS.UI.UIControls.Fleet
 			this.TextBoxFilterParagraph.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.TextBoxFilterParagraph.Location = new System.Drawing.Point(90, 29);
 			this.TextBoxFilterParagraph.Name = "TextBoxFilterParagraph";
-			this.TextBoxFilterParagraph.Size = new System.Drawing.Size(528, 25);
+			this.TextBoxFilterParagraph.Size = new System.Drawing.Size(110, 25);
 			this.TextBoxFilterParagraph.TabIndex = 73;
 			// 
 			// labelFilter
@@ -294,7 +294,7 @@ namespace CAS.UI.UIControls.Fleet
 			// 
 			this.buttonFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonFilter.ForeColor = System.Drawing.Color.DimGray;
-			this.buttonFilter.Location = new System.Drawing.Point(625, 30);
+			this.buttonFilter.Location = new System.Drawing.Point(210, 30);
 			this.buttonFilter.Name = "buttonFilter";
 			this.buttonFilter.Size = new System.Drawing.Size(70, 23);
 			this.buttonFilter.TabIndex = 43;
