@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using CAS.UI.UIControls.OilControls.Model;
 using MetroFramework.Controls;
@@ -53,53 +55,63 @@ namespace CAS.UI.UIControls.OilControls
 
 		private void Radio_CheckedChanged(object sender, System.EventArgs e)
 		{
-			radRangeSelector1.AssociatedControl = null;
 			Initialize();
 
 			var radio = sender as MetroRadioButton;
 			var comp = radio.Tag as BaseComponent;
 			var lineSeries = new ScatterLineSeries()
 			{
-				ShowLabels = false,
+				ShowLabels = true,
 				LegendTitle = "Consumption",
-				Name = "Consumption:"
+				Name = "Consumption:",
+				LabelFormat = "{0:F}",
 				//Spline = true, // закруглять углы
 			};
 
-			var lineSeriesMin = new ScatterLineSeries { BorderColor = Color.Green, LegendTitle = "Min", ShowLabels = false};
-			var lineSeriesNorm = new ScatterLineSeries { BorderColor = Color.Yellow, LegendTitle = "Normal", ShowLabels = false };
-			var lineSeriesMax = new ScatterLineSeries { BorderColor = Color.Red, LegendTitle = "Max", ShowLabels = false };
+			var lineSeriesMin = new ScatterLineSeries { BorderColor = Color.Green, LegendTitle = "Min", ShowLabels = false, PointSize = new SizeF(0,0)};
+			var lineSeriesNorm = new ScatterLineSeries { BorderColor = Color.Yellow, LegendTitle = "Normal", ShowLabels = false, PointSize = new SizeF(0, 0) };
+			var lineSeriesMax = new ScatterLineSeries { BorderColor = Color.Red, LegendTitle = "Max", ShowLabels = false, PointSize = new SizeF(0, 0) };
 
 			radChartView1.Series.Clear();
 
 			foreach (var values in _graph.Graph[comp].OrderBy(i => i.Key.Hours))
 			{
 				lineSeries.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value,values.Value));
-				lineSeriesMin.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, _graph.Limits[comp].Min));
-				lineSeriesNorm.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, _graph.Limits[comp].Normal));
-				lineSeriesMax.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, _graph.Limits[comp].Max));
+
+				if (_graph.Limits[comp].Min > 0)
+					lineSeriesMin.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, _graph.Limits[comp].Min));
+				if(_graph.Limits[comp].Normal > 0)
+					lineSeriesNorm.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, _graph.Limits[comp].Normal));
+				if (_graph.Limits[comp].Max > 0)
+					lineSeriesMax.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, _graph.Limits[comp].Max));
 			}
 
-			radChartView1.Series.AddRange(lineSeries);
+			radChartView1.Series.Clear();
+			radChartView1.Series.Add(lineSeries);
+			if (lineSeriesMin.DataPoints.Count > 0)
+				radChartView1.Series.Add(lineSeriesMin);
+			if (lineSeriesNorm.DataPoints.Count > 0)
+				radChartView1.Series.Add(lineSeriesNorm);
+			if (lineSeriesMax.DataPoints.Count > 0)
+				radChartView1.Series.Add(lineSeriesMax);
 
 			LinearAxis horizontalAxis = radChartView1.Axes.Get<LinearAxis>(0);
-			horizontalAxis.Minimum = (double)_graph.Graph[comp].OrderBy(i => i.Key.Hours).FirstOrDefault().Key.Hours;
-			horizontalAxis.Maximum = (double)_graph.Graph[comp].OrderBy(i => i.Key.Hours).LastOrDefault().Key.Hours;
-			horizontalAxis.MajorStep = 10;
+			//horizontalAxis.Minimum = (double)_graph.Graph[comp].OrderBy(i => i.Key.Hours).FirstOrDefault().Key.Hours;
+			//horizontalAxis.Maximum = (double)_graph.Graph[comp].OrderBy(i => i.Key.Hours).LastOrDefault().Key.Hours;
+			//horizontalAxis.MajorStep = 10;
+			horizontalAxis.LastLabelVisibility = AxisLastLabelVisibility.Clip;
+
 			horizontalAxis.LabelFitMode = AxisLabelFitMode.Rotate;
 			horizontalAxis.LabelRotationAngle = 300;
-
+			
 			LinearAxis verticalAxis = radChartView1.Axes.Get<LinearAxis>(1);
-			verticalAxis.Minimum = _graph.Graph[comp].Min(i => i.Value);
-			verticalAxis.Maximum = _graph.Graph[comp].Max(i => i.Value);
+			//verticalAxis.Minimum = _graph.Graph[comp].Min(i => i.Value);
+			//verticalAxis.Maximum = _graph.Graph[comp].Max(i => i.Value);
 			verticalAxis.MajorStep = 0.5;
 
-			radChartView1.Series.Clear();
-			radChartView1.Series.AddRange(lineSeries, lineSeriesMax, lineSeriesMin, lineSeriesNorm);
-
+			radChartView1.Refresh();
+			radChartView1.Update();
 			radRangeSelector1.AssociatedControl = radChartView1;
-			//radRangeSelector1.RangeSelectorElement.InitializeElements();
-			//radRangeSelector1.RangeSelectorElement.ResetLayout(true);
 		}
 
 		private void Initialize()
@@ -111,9 +123,9 @@ namespace CAS.UI.UIControls.OilControls
 
 			radChartView1.Controllers.Add(new ChartTooltipController());
 			radChartView1.Controllers.Add(new ChartTrackballController());
-			radChartView1.ShowToolTip = true;
-			//radChartView1.Zoom(25, 1);
-			//radChartView1.Pan(300, 0);
+			radChartView1.ShowToolTip = false;
+			radChartView1.Zoom(85, 1);
+			radChartView1.Pan(1000, 0);
 
 
 			radChartView1.ShowLegend = true;

@@ -54,7 +54,7 @@ namespace CAS.UI.UIControls.OilControls
 		public OilListView(Aircraft parentAircraft, ICommonCollection<ATLB> atlbCollection, OilGraphicModel graph)
 			: this()
 		{
-			SortMultiplier = 0;
+			SortMultiplier = 1;
 			OldColumnIndex = 1;
 			_parentAircraft = parentAircraft;
 			_atbs = atlbCollection;

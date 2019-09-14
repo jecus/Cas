@@ -50,6 +50,7 @@ namespace CAS.UI.UIControls.ForecastControls
 			AddColumn("Fst.Perf", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Rpt. Intv.", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Overdue/Remain", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Last", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Kit", (int)(radGridView1.Width * 0.2f));
 			AddColumn("MH", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Cost", (int)(radGridView1.Width * 0.2f));
@@ -226,14 +227,20 @@ namespace CAS.UI.UIControls.ForecastControls
 			subItems.Add(CreateRow(item.WorkType, item.WorkType ));
 			subItems.Add(CreateRow(item.MaintenanceCheck != null ? item.MaintenanceCheck.ToString() : "", item.MaintenanceCheck ));
 			subItems.Add(CreateRow(item.PerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)item.PerformanceDate), item.PerformanceDate ));
+
+			item.PerformanceSource?.Resemble(item.Parent.Threshold.FirstPerformanceSinceNew);
+			
 			subItems.Add(CreateRow(item.PerformanceSource?.ToString(), item.PerformanceSource ));
 			if (item.Parent is MaintenanceDirective)
 			{
 				var d = item.Parent as MaintenanceDirective;
+				d.PhaseRepeat?.Resemble(item.Parent.Threshold.RepeatInterval);
 				subItems.Add(CreateRow(d.PhaseRepeat?.ToString(), d.PhaseRepeat ));
 			}
 			else subItems.Add(CreateRow(item.Parent.Threshold.RepeatInterval.ToString(), item.Parent.Threshold.RepeatInterval ));
 			subItems.Add(CreateRow(item.Remains.ToString(), item.Remains ));
+			subItems.Add(CreateRow(item.Parent.LastPerformance?.ToString(), item.Parent.LastPerformance));
+
 			subItems.Add(CreateRow(item.KitsToString, item.Kits?.Count ));
 			subItems.Add(CreateRow(manHours.ToString(), manHours ));
 			subItems.Add(CreateRow(cost.ToString(), cost ));
