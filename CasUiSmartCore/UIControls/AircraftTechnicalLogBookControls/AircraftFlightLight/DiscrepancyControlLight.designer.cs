@@ -1,33 +1,35 @@
+using CAS.UI.Helpers;
+
 namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls.AircraftFlightLight
 {
-    partial class DiscrepancyControlLight
+	partial class DiscrepancyControlLight
 	{
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DiscrepancyControlLight));
 			this.labelDiscrepancy = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
@@ -349,6 +351,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls.AircraftFlightLight
 			this.comboSpecialist1.Name = "comboSpecialist1";
 			this.comboSpecialist1.Size = new System.Drawing.Size(194, 21);
 			this.comboSpecialist1.TabIndex = 181;
+			this.comboSpecialist1.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboSpecialist2
 			// 
@@ -358,6 +361,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls.AircraftFlightLight
 			this.comboSpecialist2.Name = "comboSpecialist2";
 			this.comboSpecialist2.Size = new System.Drawing.Size(194, 21);
 			this.comboSpecialist2.TabIndex = 183;
+			this.comboSpecialist2.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelAuthB2
 			// 
@@ -417,24 +421,24 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls.AircraftFlightLight
 			this.numericUpDownIndex.Location = new System.Drawing.Point(98, 3);
 			this.numericUpDownIndex.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
 			this.numericUpDownIndex.Maximum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
+			4,
+			0,
+			0,
+			0});
 			this.numericUpDownIndex.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+			1,
+			0,
+			0,
+			0});
 			this.numericUpDownIndex.Name = "numericUpDownIndex";
 			this.numericUpDownIndex.Size = new System.Drawing.Size(38, 20);
 			this.numericUpDownIndex.TabIndex = 207;
 			this.numericUpDownIndex.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numericUpDownIndex.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+			1,
+			0,
+			0,
+			0});
 			// 
 			// panelExtendable
 			// 
@@ -549,45 +553,45 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls.AircraftFlightLight
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
 		#endregion
 
 		private System.Windows.Forms.Label labelDiscrepancy;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textSNOn;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textSNOff;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textPNOff;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textPNOn;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox textStation;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label labelAuthB1;
-        private CAS.UI.UIControls.Auxiliary.Delimiter delimiter3;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox textCorrectiveAction;
-        private CAS.UI.UIControls.Auxiliary.Delimiter delimiter4;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label13;
-        private CAS.UI.UIControls.Auxiliary.Delimiter delimiter5;
-        private System.Windows.Forms.TextBox textDescription;
-        private System.Windows.Forms.DateTimePicker dateTimePickerRTSDate;
-        private System.Windows.Forms.ComboBox comboSpecialist1;
-        private System.Windows.Forms.ComboBox comboSpecialist2;
-        private System.Windows.Forms.Label labelAuthB2;
-        private System.Windows.Forms.Panel panelMain;
-        private System.Windows.Forms.Panel panelExtendable;
-        private ReferenceControls.ExtendableRichContainer extendableRichContainer;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelMain;
-        private System.Windows.Forms.NumericUpDown numericUpDownIndex;
-        private Auxiliary.ATAChapterComboBox ataChapterComboBox;
-        private System.Windows.Forms.Panel panelRelease;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.TextBox textSNOn;
+		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.TextBox textSNOff;
+		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.TextBox textPNOff;
+		private System.Windows.Forms.Label label9;
+		private System.Windows.Forms.Label label15;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.TextBox textPNOn;
+		private System.Windows.Forms.Label label16;
+		private System.Windows.Forms.TextBox textStation;
+		private System.Windows.Forms.Label label17;
+		private System.Windows.Forms.Label labelAuthB1;
+		private CAS.UI.UIControls.Auxiliary.Delimiter delimiter3;
+		private System.Windows.Forms.Panel panel2;
+		private System.Windows.Forms.TextBox textCorrectiveAction;
+		private CAS.UI.UIControls.Auxiliary.Delimiter delimiter4;
+		private System.Windows.Forms.Label label10;
+		private System.Windows.Forms.Label label13;
+		private CAS.UI.UIControls.Auxiliary.Delimiter delimiter5;
+		private System.Windows.Forms.TextBox textDescription;
+		private System.Windows.Forms.DateTimePicker dateTimePickerRTSDate;
+		private System.Windows.Forms.ComboBox comboSpecialist1;
+		private System.Windows.Forms.ComboBox comboSpecialist2;
+		private System.Windows.Forms.Label labelAuthB2;
+		private System.Windows.Forms.Panel panelMain;
+		private System.Windows.Forms.Panel panelExtendable;
+		private ReferenceControls.ExtendableRichContainer extendableRichContainer;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelMain;
+		private System.Windows.Forms.NumericUpDown numericUpDownIndex;
+		private Auxiliary.ATAChapterComboBox ataChapterComboBox;
+		private System.Windows.Forms.Panel panelRelease;
 		private System.Windows.Forms.RadioButton radioMaintenanceStaff;
 		private System.Windows.Forms.RadioButton radioCrew;
 		private System.Windows.Forms.Label label12;

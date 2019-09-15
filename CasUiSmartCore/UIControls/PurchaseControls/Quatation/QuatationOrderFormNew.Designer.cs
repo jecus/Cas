@@ -1,37 +1,38 @@
 ﻿using  MetroFramework.Controls;
 using CASTerms;
 using EntityCore.DTO.General;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.PurchaseControls.Initial
 {
-    partial class QuatationOrderFormNew
+	partial class QuatationOrderFormNew
 	{
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.button2 = new System.Windows.Forms.Button();
@@ -231,6 +232,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxDIR.Name = "comboBoxDIR";
 			this.comboBoxDIR.Size = new System.Drawing.Size(234, 25);
 			this.comboBoxDIR.TabIndex = 252;
+			this.comboBoxDIR.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxPriority
 			// 
@@ -241,6 +243,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxPriority.Name = "comboBoxPriority";
 			this.comboBoxPriority.Size = new System.Drawing.Size(234, 25);
 			this.comboBoxPriority.TabIndex = 250;
+			this.comboBoxPriority.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label19
 			// 
@@ -271,10 +274,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.numericUpDownQuantity.DecimalPlaces = 2;
 			this.numericUpDownQuantity.Location = new System.Drawing.Point(118, 223);
 			this.numericUpDownQuantity.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownQuantity.Name = "numericUpDownQuantity";
 			this.numericUpDownQuantity.Size = new System.Drawing.Size(65, 20);
 			this.numericUpDownQuantity.TabIndex = 142;
@@ -301,6 +304,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxMeasure.Size = new System.Drawing.Size(234, 25);
 			this.comboBoxMeasure.TabIndex = 141;
 			this.comboBoxMeasure.SelectedIndexChanged += new System.EventHandler(this.comboBoxMeasure_SelectedIndexChanged);
+			this.comboBoxMeasure.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelMeasure
 			// 
@@ -429,6 +433,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxDefferedCategory.Name = "comboBoxDefferedCategory";
 			this.comboBoxDefferedCategory.Size = new System.Drawing.Size(234, 25);
 			this.comboBoxDefferedCategory.TabIndex = 145;
+			this.comboBoxDefferedCategory.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelDefferedCategory
 			// 
@@ -459,6 +464,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxReason.Name = "comboBoxReason";
 			this.comboBoxReason.Size = new System.Drawing.Size(234, 25);
 			this.comboBoxReason.TabIndex = 169;
+			this.comboBoxReason.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelDestination
 			// 
@@ -480,6 +486,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxDestination.Size = new System.Drawing.Size(234, 25);
 			this.comboBoxDestination.TabIndex = 171;
 			this.comboBoxDestination.SelectedIndexChanged += new System.EventHandler(this.comboBoxDestination_SelectedIndexChanged);
+			this.comboBoxDestination.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// checkBoxRepair
 			// 
@@ -698,6 +705,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxStatus.Size = new System.Drawing.Size(233, 25);
 			this.comboBoxStatus.TabIndex = 265;
 			this.comboBoxStatus.SelectedIndexChanged += new System.EventHandler(this.comboBoxStatus_SelectedIndexChanged);
+			this.comboBoxStatus.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// textBoxRemarks
 			// 
@@ -977,52 +985,52 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.groupBox2.ResumeLayout(false);
 			this.ResumeLayout(false);
 
-        }
+		}
 
 		#endregion
-        private AvControls.AvButtonT.AvButtonT ButtonDelete;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox comboBoxPriority;
-        private MetroLabel label19;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.NumericUpDown numericUpDownQuantity;
-        private MetroLabel labelQuantity;
-        private System.Windows.Forms.ComboBox comboBoxMeasure;
-        private MetroLabel labelMeasure;
-        private MetroLabel labelTotal;
-        private MetroTextBox textBoxTotal;
-        private Auxiliary.LifelengthViewer lifelengthViewerNotify;
-        private Auxiliary.LifelengthViewer lifelengthViewerLifeLimit;
-        private System.Windows.Forms.ComboBox comboBoxDefferedCategory;
-        private MetroLabel labelDefferedCategory;
-        private MetroLabel labelReason;
-        private System.Windows.Forms.ComboBox comboBoxReason;
-        private MetroLabel labelDestination;
-        private System.Windows.Forms.ComboBox comboBoxDestination;
-        private MetroCheckBox checkBoxRepair;
-        private MetroCheckBox checkBoxOverhaul;
-        private MetroCheckBox checkBoxServiceable;
-        private MetroCheckBox checkBoxNew;
-        private MetroLabel labelPriority;
-        private MetroLabel labelNotify;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private MetroTextBox textBoxTitle;
-        private MetroLabel labelQOTitle;
-        private MetroTextBox textBoxAuthor;
-        private MetroLabel labelAuthor;
-        private MetroLabel labelStatus;
-        private System.Windows.Forms.DateTimePicker dateTimePickerOpeningDate;
-        private MetroLabel labelOpeningDate;
-        private MetroLabel label5;
-        private MetroLabel labelPublishDate;
-        private System.Windows.Forms.DateTimePicker dateTimePickerPublishDate;
-        private MetroLabel labelClosingDate;
-        private System.Windows.Forms.DateTimePicker dateTimePickerClosingDate;
-        private MetroLabel labelClosedBy;
-        private MetroTextBox textBoxRemarks;
-        private MetroLabel labelRemarks;
-        private System.Windows.Forms.Button buttonOk;
-        private System.Windows.Forms.Button buttonCancel;
+		private AvControls.AvButtonT.AvButtonT ButtonDelete;
+		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.ComboBox comboBoxPriority;
+		private MetroLabel label19;
+		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.NumericUpDown numericUpDownQuantity;
+		private MetroLabel labelQuantity;
+		private System.Windows.Forms.ComboBox comboBoxMeasure;
+		private MetroLabel labelMeasure;
+		private MetroLabel labelTotal;
+		private MetroTextBox textBoxTotal;
+		private Auxiliary.LifelengthViewer lifelengthViewerNotify;
+		private Auxiliary.LifelengthViewer lifelengthViewerLifeLimit;
+		private System.Windows.Forms.ComboBox comboBoxDefferedCategory;
+		private MetroLabel labelDefferedCategory;
+		private MetroLabel labelReason;
+		private System.Windows.Forms.ComboBox comboBoxReason;
+		private MetroLabel labelDestination;
+		private System.Windows.Forms.ComboBox comboBoxDestination;
+		private MetroCheckBox checkBoxRepair;
+		private MetroCheckBox checkBoxOverhaul;
+		private MetroCheckBox checkBoxServiceable;
+		private MetroCheckBox checkBoxNew;
+		private MetroLabel labelPriority;
+		private MetroLabel labelNotify;
+		private System.Windows.Forms.GroupBox groupBox2;
+		private MetroTextBox textBoxTitle;
+		private MetroLabel labelQOTitle;
+		private MetroTextBox textBoxAuthor;
+		private MetroLabel labelAuthor;
+		private MetroLabel labelStatus;
+		private System.Windows.Forms.DateTimePicker dateTimePickerOpeningDate;
+		private MetroLabel labelOpeningDate;
+		private MetroLabel label5;
+		private MetroLabel labelPublishDate;
+		private System.Windows.Forms.DateTimePicker dateTimePickerPublishDate;
+		private MetroLabel labelClosingDate;
+		private System.Windows.Forms.DateTimePicker dateTimePickerClosingDate;
+		private MetroLabel labelClosedBy;
+		private MetroTextBox textBoxRemarks;
+		private MetroLabel labelRemarks;
+		private System.Windows.Forms.Button buttonOk;
+		private System.Windows.Forms.Button buttonCancel;
 		private CAS.UI.UIControls.PurchaseControls.Quatation.QuatationOrderListViewNew listViewInitialItems;
 		private System.Windows.Forms.ComboBox comboBoxStatus;
 		private MetroTextBox metroTextBox1;

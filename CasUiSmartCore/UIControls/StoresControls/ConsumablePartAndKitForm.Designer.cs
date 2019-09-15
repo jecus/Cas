@@ -1,43 +1,44 @@
 ﻿using MetroFramework.Controls;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.StoresControls
 {
-    partial class ConsumablePartAndKitForm
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class ConsumablePartAndKitForm
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
 
-            comboBoxStandart.SelectedIndexChanged -= ComboBoxStandartSelectedIndexChanged;
-            comboBoxDetailClass.SelectedIndexChanged -= ComboBoxDetailClassSelectedIndexChanged;
-            comboBoxMeasure.SelectedIndexChanged -= ComboBoxMeasureSelectedIndexChanged;
-            dateTimePickerInstallDate.ValueChanged -= DateTimePickerInstallationDateValueChanged;
-            dateTimePickerManufactureDate.ValueChanged -= DateTimePickerManufactureDateValueChanged;
-            numericUpDownQuantity.ValueChanged -= NumericUpDownQuantityValueChanged;
+			comboBoxStandart.SelectedIndexChanged -= ComboBoxStandartSelectedIndexChanged;
+			comboBoxDetailClass.SelectedIndexChanged -= ComboBoxDetailClassSelectedIndexChanged;
+			comboBoxMeasure.SelectedIndexChanged -= ComboBoxMeasureSelectedIndexChanged;
+			dateTimePickerInstallDate.ValueChanged -= DateTimePickerInstallationDateValueChanged;
+			dateTimePickerManufactureDate.ValueChanged -= DateTimePickerManufactureDateValueChanged;
+			numericUpDownQuantity.ValueChanged -= NumericUpDownQuantityValueChanged;
 
-            base.Dispose(disposing);
-        }
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConsumablePartAndKitForm));
 			this.labelInstallDate = new MetroFramework.Controls.MetroLabel();
 			this.dateTimePickerInstallDate = new System.Windows.Forms.DateTimePicker();
@@ -171,6 +172,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.comboBoxMeasure.Size = new System.Drawing.Size(200, 21);
 			this.comboBoxMeasure.TabIndex = 7;
 			this.comboBoxMeasure.SelectedIndexChanged += new System.EventHandler(this.ComboBoxMeasureSelectedIndexChanged);
+			this.comboBoxMeasure.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelLocation
 			// 
@@ -190,6 +192,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.comboBoxPosition.Name = "comboBoxPosition";
 			this.comboBoxPosition.Size = new System.Drawing.Size(200, 21);
 			this.comboBoxPosition.TabIndex = 3;
+			this.comboBoxPosition.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelPosition
 			// 
@@ -322,10 +325,10 @@ namespace CAS.UI.UIControls.StoresControls
 			this.numericUpDownQuantity.DecimalPlaces = 2;
 			this.numericUpDownQuantity.Location = new System.Drawing.Point(706, 147);
 			this.numericUpDownQuantity.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownQuantity.Name = "numericUpDownQuantity";
 			this.numericUpDownQuantity.Size = new System.Drawing.Size(200, 20);
 			this.numericUpDownQuantity.TabIndex = 9;
@@ -683,6 +686,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.comboBoxStatus.Name = "comboBoxStatus";
 			this.comboBoxStatus.Size = new System.Drawing.Size(200, 21);
 			this.comboBoxStatus.TabIndex = 122;
+			this.comboBoxStatus.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelStatus
 			// 
@@ -871,6 +875,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.comboBoxSupplier.Size = new System.Drawing.Size(678, 21);
 			this.comboBoxSupplier.TabIndex = 143;
 			this.comboBoxSupplier.SelectedIndexChanged += new System.EventHandler(this.comboBoxSupplier_SelectedIndexChanged);
+			this.comboBoxSupplier.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// dateTimePickerReciveDate
 			// 
@@ -942,6 +947,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.comboBoxReceived.Name = "comboBoxReceived";
 			this.comboBoxReceived.Size = new System.Drawing.Size(200, 21);
 			this.comboBoxReceived.TabIndex = 154;
+			this.comboBoxReceived.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// metroLabelReceived
 			// 
@@ -1155,6 +1161,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.ataChapterComboBox.Name = "ataChapterComboBox";
 			this.ataChapterComboBox.Size = new System.Drawing.Size(200, 21);
 			this.ataChapterComboBox.TabIndex = 129;
+			this.ataChapterComboBox.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// dictionaryComboBoxLocation
 			// 
@@ -1166,6 +1173,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.dictionaryComboBoxLocation.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.dictionaryComboBoxLocation.Size = new System.Drawing.Size(200, 21);
 			this.dictionaryComboBoxLocation.TabIndex = 127;
+			this.dictionaryComboBoxLocation.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// dataGridViewControlSuppliers
 			// 
@@ -1196,6 +1204,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.comboBoxStandart.TabIndex = 109;
 			this.comboBoxStandart.Type = null;
 			this.comboBoxStandart.SelectedIndexChanged += new System.EventHandler(this.ComboBoxStandartSelectedIndexChanged);
+			this.comboBoxStandart.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// lifelengthViewerWarranty
 			// 
@@ -1333,6 +1342,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.comboBoxDetailClass.Size = new System.Drawing.Size(200, 21);
 			this.comboBoxDetailClass.TabIndex = 1;
 			this.comboBoxDetailClass.SelectedIndexChanged += new System.EventHandler(this.ComboBoxDetailClassSelectedIndexChanged);
+			this.comboBoxDetailClass.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// ConsumablePartAndKitForm
 			// 
@@ -1428,56 +1438,56 @@ namespace CAS.UI.UIControls.StoresControls
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private Auxiliary.LifelengthViewer lifelengthViewerNotify;
-        private Auxiliary.LifelengthViewer lifelengthViewerLifeLimit;
-        private MetroLabel labelInstallDate;
-        private System.Windows.Forms.DateTimePicker dateTimePickerInstallDate;
-        private MetroLabel labelManufactureDate;
-        private System.Windows.Forms.DateTimePicker dateTimePickerManufactureDate;
-        private System.Windows.Forms.ComboBox comboBoxMeasure;
-        private MetroLabel labelLocation;
-        private System.Windows.Forms.ComboBox comboBoxPosition;
-        private MetroLabel labelPosition;
-        private MetroLabel labelBatchNumber;
-        private MetroTextBox textBoxBatchNumber;
-        private MetroLabel labelIdNumber;
-        private MetroTextBox textBoxIdNumber;
-        private Auxiliary.TreeDictionaryComboBox comboBoxDetailClass;
-        private System.Windows.Forms.Button buttonOK;
-        private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.NumericUpDown numericUpDownQuantity;
-        private MetroLabel labelType;
-        private MetroLabel labelSerialNumber;
-        private MetroTextBox textBoxSerialNumber;
+		private Auxiliary.LifelengthViewer lifelengthViewerNotify;
+		private Auxiliary.LifelengthViewer lifelengthViewerLifeLimit;
+		private MetroLabel labelInstallDate;
+		private System.Windows.Forms.DateTimePicker dateTimePickerInstallDate;
+		private MetroLabel labelManufactureDate;
+		private System.Windows.Forms.DateTimePicker dateTimePickerManufactureDate;
+		private System.Windows.Forms.ComboBox comboBoxMeasure;
+		private MetroLabel labelLocation;
+		private System.Windows.Forms.ComboBox comboBoxPosition;
+		private MetroLabel labelPosition;
+		private MetroLabel labelBatchNumber;
+		private MetroTextBox textBoxBatchNumber;
+		private MetroLabel labelIdNumber;
+		private MetroTextBox textBoxIdNumber;
+		private Auxiliary.TreeDictionaryComboBox comboBoxDetailClass;
+		private System.Windows.Forms.Button buttonOK;
+		private System.Windows.Forms.Button buttonCancel;
+		private System.Windows.Forms.NumericUpDown numericUpDownQuantity;
+		private MetroLabel labelType;
+		private MetroLabel labelSerialNumber;
+		private MetroTextBox textBoxSerialNumber;
 		private MetroLabel labelPartNumber;
-        private MetroTextBox textBoxPartNumber;
-        private MetroLabel labelDescription;
-        private MetroTextBox textBoxDescription;
-        private MetroLabel labelMeasure;
-        private MetroLabel labelQuantity;
-        private MetroLabel labelSeparator;
-        private MetroLabel labelRemarks;
-        private MetroTextBox textBoxRemarks;
-        private MetroLabel labelProduct;
-        private MetroLabel labelSupplier;
-        private Auxiliary.LifelengthViewer lifelengthViewerWarranty;
-        private Auxiliary.LifelengthViewer lifelengthViewerWarrantyNotify;
-        private MetroLabel labelStandart;
-        private Auxiliary.LookupCombobox comboBoxStandart;
-        private MetroLabel labelManufacturer;
-        private MetroTextBox textBoxManufacturer;
-        private MetroLabel labelProductCode;
-        private MetroTextBox textBoxProductCode;
-        private System.Windows.Forms.Button buttonSaveAndAdd;
-        private System.Windows.Forms.ComboBox comboBoxStatus;
-        private MetroLabel labelStatus;
-        private Auxiliary.CommonDataGridViewControl dataGridViewControlSuppliers;
-        private MetroLabel labelTotal;
-        private MetroTextBox textBoxTotal;
+		private MetroTextBox textBoxPartNumber;
+		private MetroLabel labelDescription;
+		private MetroTextBox textBoxDescription;
+		private MetroLabel labelMeasure;
+		private MetroLabel labelQuantity;
+		private MetroLabel labelSeparator;
+		private MetroLabel labelRemarks;
+		private MetroTextBox textBoxRemarks;
+		private MetroLabel labelProduct;
+		private MetroLabel labelSupplier;
+		private Auxiliary.LifelengthViewer lifelengthViewerWarranty;
+		private Auxiliary.LifelengthViewer lifelengthViewerWarrantyNotify;
+		private MetroLabel labelStandart;
+		private Auxiliary.LookupCombobox comboBoxStandart;
+		private MetroLabel labelManufacturer;
+		private MetroTextBox textBoxManufacturer;
+		private MetroLabel labelProductCode;
+		private MetroTextBox textBoxProductCode;
+		private System.Windows.Forms.Button buttonSaveAndAdd;
+		private System.Windows.Forms.ComboBox comboBoxStatus;
+		private MetroLabel labelStatus;
+		private Auxiliary.CommonDataGridViewControl dataGridViewControlSuppliers;
+		private MetroLabel labelTotal;
+		private MetroTextBox textBoxTotal;
 		private Auxiliary.DictionaryComboBox dictionaryComboBoxLocation;
 		private MetroLabel label1;
 		private Auxiliary.ATAChapterComboBox ataChapterComboBox;

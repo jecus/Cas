@@ -83,6 +83,7 @@ namespace CAS.UI.UIControls.AircraftsControls
             this.LinkForecastMtop = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             this.LinkForecastKits = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             this.LinkMonthlyUtilization = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+            this.LinkOil = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             this.LinkWorkPackages = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
             this.ContainerPurchase = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
             this.LinkEquipmentAndMaterials = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -1010,8 +1011,8 @@ namespace CAS.UI.UIControls.AircraftsControls
             this.ContainerPlanning.ReferenceLink07 = this.LinkForecastMtop;
             this.ContainerPlanning.ReferenceLink08 = this.LinkForecastKits;
             this.ContainerPlanning.ReferenceLink09 = this.LinkMonthlyUtilization;
-            this.ContainerPlanning.ReferenceLink10 = this.LinkWorkPackages;
-            this.ContainerPlanning.ReferenceLink11 = null;
+            this.ContainerPlanning.ReferenceLink10 = this.LinkOil;
+            this.ContainerPlanning.ReferenceLink11 = this.LinkWorkPackages;
             this.ContainerPlanning.ReferenceLink12 = null;
             this.ContainerPlanning.ReferenceLink13 = null;
             this.ContainerPlanning.ReferenceLink14 = null;
@@ -1236,6 +1237,30 @@ namespace CAS.UI.UIControls.AircraftsControls
             this.LinkMonthlyUtilization.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.LinkMonthlyUtilization.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
             this.LinkMonthlyUtilization.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkMonthlyUtilizationDisplayerRequested);
+            // 
+            // LinkMonthlyUtilization
+            // 
+            this.LinkOil.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkOil.Displayer = null;
+            this.LinkOil.DisplayerText = null;
+            this.LinkOil.Entity = null;
+            this.LinkOil.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+            this.LinkOil.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(163)))), ((int)(((byte)(255)))));
+            this.LinkOil.ImageBackColor = System.Drawing.Color.Transparent;
+            this.LinkOil.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.LinkOil.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+            this.LinkOil.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+            this.LinkOil.Location = new System.Drawing.Point(1000, 0);
+            this.LinkOil.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.LinkOil.Name = "LinkOil";
+            this.LinkOil.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+            this.LinkOil.Size = new System.Drawing.Size(188, 20);
+            this.LinkOil.Status = AvControls.Statuses.Satisfactory;
+            this.LinkOil.TabIndex = 28;
+            this.LinkOil.Text = "Oil Statistics";
+            this.LinkOil.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.LinkOil.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+            this.LinkOil.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkOilDisplayerRequested);
             // 
             // LinkWorkPackages
             // 
@@ -1595,6 +1620,7 @@ namespace CAS.UI.UIControls.AircraftsControls
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRegisterFlightLight;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkAverageUtilization;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkMonthlyUtilization;
+        private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkOil;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkForecast;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkForecastMtop;
         private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkForecastKits;

@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.PersonnelControls
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.PersonnelControls
 {
     partial class CategoryRecordControl
     {
@@ -83,10 +85,11 @@
             this.dictionaryComboBoxACType.Size = new System.Drawing.Size(160, 25);
             this.dictionaryComboBoxACType.TabIndex = 8;
             this.dictionaryComboBoxACType.SelectedIndexChanged += new System.EventHandler(this.DictionaryComboBoxAcTypeSelectedIndexChanged);
-            // 
-            // buttonDelete
-            // 
-            this.buttonDelete.Location = new System.Drawing.Point(584, 17);
+            this.dictionaryComboBoxACType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// buttonDelete
+			// 
+			this.buttonDelete.Location = new System.Drawing.Point(584, 17);
             this.buttonDelete.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(35, 28);
@@ -118,10 +121,11 @@
             this.dictionaryComboBoxCategory.Size = new System.Drawing.Size(400, 25);
             this.dictionaryComboBoxCategory.TabIndex = 7;
             this.dictionaryComboBoxCategory.SelectedIndexChanged += new System.EventHandler(this.DictionaryComboBoxModuleSelectedIndexChanged);
-            // 
-            // CategoryRecordControl
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.dictionaryComboBoxCategory.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// CategoryRecordControl
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;

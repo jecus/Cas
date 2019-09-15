@@ -16,7 +16,8 @@ namespace SmartCore.Entities.General
     /// </summary>
     [Serializable]
     [Table("Aircrafts", "dbo", "ItemId")]
-    [Dto(typeof(AircraftDTO))]
+    [Condition("IsDeleted", "0")]
+	[Dto(typeof(AircraftDTO))]
 	public class Aircraft : BaseEntityObject, IComparable<Aircraft>, IComponentContainer
     {
 

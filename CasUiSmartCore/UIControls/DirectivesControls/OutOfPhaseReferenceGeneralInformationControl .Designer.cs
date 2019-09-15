@@ -1,5 +1,7 @@
 ﻿using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.Helpers;
+
 namespace CAS.UI.UIControls.DirectivesControls
 {
     partial class OutOfPhaseReferenceGeneralInformationControl
@@ -287,10 +289,11 @@ namespace CAS.UI.UIControls.DirectivesControls
             this.ataChapterComboBox.Name = "ataChapterComboBox";
             this.ataChapterComboBox.Size = new System.Drawing.Size(350, 25);
             this.ataChapterComboBox.TabIndex = 1;
-            // 
-            // labelEngOrderNo
-            // 
-            this.labelEngOrderNo.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ataChapterComboBox.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// labelEngOrderNo
+			// 
+			this.labelEngOrderNo.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelEngOrderNo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.labelEngOrderNo.Location = new System.Drawing.Point(10, 166);
             this.labelEngOrderNo.Name = "labelEngOrderNo";

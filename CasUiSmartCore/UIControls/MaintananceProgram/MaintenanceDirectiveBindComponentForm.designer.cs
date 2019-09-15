@@ -1,35 +1,36 @@
 using System.Windows.Forms;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.MaintananceProgram
 {
-    partial class MaintenanceDirectiveBindComponentForm
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class MaintenanceDirectiveBindComponentForm
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.buttonAdd = new System.Windows.Forms.Button();
 			this.buttonClose = new System.Windows.Forms.Button();
 			this.splitContainerMain = new System.Windows.Forms.SplitContainer();
@@ -74,8 +75,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			// splitContainerMain
 			// 
 			this.splitContainerMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Left) 
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.splitContainerMain.Location = new System.Drawing.Point(15, 63);
 			this.splitContainerMain.Name = "splitContainerMain";
 			this.splitContainerMain.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -133,6 +134,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.comboBoxRelationType.Name = "comboBoxRelationType";
 			this.comboBoxRelationType.Size = new System.Drawing.Size(196, 22);
 			this.comboBoxRelationType.TabIndex = 16;
+			this.comboBoxRelationType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// buttonDelete
 			// 
@@ -184,15 +186,15 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.splitContainerMain.ResumeLayout(false);
 			this.ResumeLayout(false);
 
-        }
-        #endregion
+		}
+		#endregion
 
-        private SplitContainer splitContainerMain;
-        private Button buttonAdd;
-        private Button buttonClose;
-        private Button buttonDelete;
-        private MaintenanceDirectiveBindComponentListView listViewTasksForSelect;
-        private MaintenanceDirectiveBindComponentListView listViewBindedTasks;
+		private SplitContainer splitContainerMain;
+		private Button buttonAdd;
+		private Button buttonClose;
+		private Button buttonDelete;
+		private MaintenanceDirectiveBindComponentListView listViewTasksForSelect;
+		private MaintenanceDirectiveBindComponentListView listViewBindedTasks;
 		private ComboBox comboBoxRelationType;
 		private Button buttonOk;
 	}

@@ -1,4 +1,5 @@
 ﻿using MetroFramework.Controls;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.Auxiliary
 {
@@ -81,6 +82,7 @@ namespace CAS.UI.UIControls.Auxiliary
 			this.comboBoxFlightRegime.Size = new System.Drawing.Size(352, 26);
 			this.comboBoxFlightRegime.TabIndex = 10;
 			this.comboBoxFlightRegime.SelectedIndexChanged += new System.EventHandler(this.ComboBoxFlightRegimeSelectedIndexChanged);
+			this.comboBoxFlightRegime.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// lifelengthViewer_LastCompliance
 			// 

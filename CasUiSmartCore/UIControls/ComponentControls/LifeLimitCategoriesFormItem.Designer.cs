@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.DetailsControls
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.DetailsControls
 {
     partial class LifeLimitCategoriesFormItem
     {
@@ -67,10 +69,11 @@
             this.dictionaryComboBoxAircraftModel.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this.dictionaryComboBoxAircraftModel.Size = new System.Drawing.Size(153, 23);
             this.dictionaryComboBoxAircraftModel.TabIndex = 47;
-            // 
-            // LifeLimitCategoriesFormItem
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.dictionaryComboBoxAircraftModel.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// LifeLimitCategoriesFormItem
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dictionaryComboBoxAircraftModel);
             this.Controls.Add(this.textBoxCategoryName);

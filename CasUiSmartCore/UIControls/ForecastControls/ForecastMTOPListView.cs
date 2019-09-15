@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
+using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Calculations;
@@ -11,6 +14,7 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
+using Telerik.WinControls.Data;
 using Telerik.WinControls.UI;
 
 
@@ -38,6 +42,7 @@ namespace CAS.UI.UIControls.ForecastControls
 		/// </summary>
 		protected override void SetHeaders()
 		{
+			AddColumn("Check", (int)(radGridView1.Width * 0.10f));
 			AddColumn("ATA", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Title", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.2f));
@@ -48,6 +53,7 @@ namespace CAS.UI.UIControls.ForecastControls
 			AddColumn("Fst.Perf", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Rpt. Intv.", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Overdue/Remain", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Last", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Kit", (int)(radGridView1.Width * 0.2f));
 			AddColumn("MH", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Cost", (int)(radGridView1.Width * 0.2f));
@@ -80,21 +86,12 @@ namespace CAS.UI.UIControls.ForecastControls
 		//}
 
 		#region protected override SetGroupsToItems(int columnIndex)
-		//protected override void SetGroupsToItems(int columnIndex)
-		//{
-		//	itemsListView.Groups.Clear();
-		//	foreach (var item in ListViewItemList)
-		//	{
-		//		if (item.Tag is NextPerformance)
-		//		{
-		//			var np = item.Tag as NextPerformance;
-		//			//var temp = $"Date:{np.PerformanceDate?.ToString(new GlobalTermsProvider()["DateFormat"].ToString())} | Check: {np.Group}-{np.ParentCheck.Name} ";
-		//			var temp = $"Date:{np.PerformanceDate?.ToString(new GlobalTermsProvider()["DateFormat"].ToString())}";
-		//			itemsListView.Groups.Add(temp, temp);
-		//			item.Group = itemsListView.Groups[temp];
-		//		}
-		//	}
-		//}
+
+		protected override void GroupingItems()
+		{
+			Grouping("Check");
+		}
+
 		#endregion
 
 		#region protected override void SetItemColor(ListViewItem listViewItem, NextPerformance item)
@@ -129,6 +126,7 @@ namespace CAS.UI.UIControls.ForecastControls
 				foreach (GridViewCellInfo cell in listViewItem.Cells)
 				{
 					cell.Style.CustomizeFill = true;
+					cell.Style.BackColor = Color.White;
 					if (imd.Condition == ConditionState.Notify)
 						cell.Style.BackColor = Color.FromArgb(Highlight.Yellow.Color);
 					if (imd.Condition == ConditionState.Overdue)
@@ -219,7 +217,12 @@ namespace CAS.UI.UIControls.ForecastControls
 
 			}
 
+			var temp = "";
+			if (item.Parent is MaintenanceDirective)
+				temp = $"Check: {item.Group}-{item.ParentCheck.Name} ";
+			else temp = $"{ListViewGroupHelper.GetGroupString(item)} | Date: {item.PerformanceDate?.ToString(new GlobalTermsProvider()["DateFormat"].ToString())}";
 
+				subItems.Add(CreateRow(temp, temp ));
 			subItems.Add(CreateRow(item.ATAChapter?.ToString(), item.ATAChapter ));
 			subItems.Add(CreateRow(title, title, tcnColor));
 			subItems.Add(CreateRow(item.Description, item.Description ));
@@ -227,14 +230,20 @@ namespace CAS.UI.UIControls.ForecastControls
 			subItems.Add(CreateRow(item.WorkType, item.WorkType ));
 			subItems.Add(CreateRow(item.MaintenanceCheck != null ? item.MaintenanceCheck.ToString() : "", item.MaintenanceCheck ));
 			subItems.Add(CreateRow(item.PerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)item.PerformanceDate), item.PerformanceDate ));
+
+			//item.PerformanceSource?.Resemble(item.Parent.Threshold.FirstPerformanceSinceNew);
+			
 			subItems.Add(CreateRow(item.PerformanceSource?.ToString(), item.PerformanceSource ));
 			if (item.Parent is MaintenanceDirective)
 			{
 				var d = item.Parent as MaintenanceDirective;
+				d.PhaseRepeat?.Resemble(item.Parent.Threshold.RepeatInterval);
 				subItems.Add(CreateRow(d.PhaseRepeat?.ToString(), d.PhaseRepeat ));
 			}
 			else subItems.Add(CreateRow(item.Parent.Threshold.RepeatInterval.ToString(), item.Parent.Threshold.RepeatInterval ));
 			subItems.Add(CreateRow(item.Remains.ToString(), item.Remains ));
+			subItems.Add(CreateRow(item.Parent.LastPerformance?.ToString(), item.Parent.LastPerformance));
+
 			subItems.Add(CreateRow(item.KitsToString, item.Kits?.Count ));
 			subItems.Add(CreateRow(manHours.ToString(), manHours ));
 			subItems.Add(CreateRow(cost.ToString(), cost ));
@@ -394,7 +403,7 @@ namespace CAS.UI.UIControls.ForecastControls
 
 		//	SetGroupsToItems(resultList, columnIndex);
 		//	itemsListView.Items.AddRange(resultList.OrderBy(lvi => Convert.ToDateTime(((NextPerformance)lvi.Tag).PerformanceDate).Date).ToArray());
-			
+
 		//}
 
 		#endregion

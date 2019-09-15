@@ -297,6 +297,31 @@ namespace SmartCore.Directives
 
 		#endregion
 
+		public DirectiveCollection GetDirectivesFromAllAircrafts(DirectiveType directiveType, string text, string paragraph)
+		{
+			if (directiveType == null)
+				directiveType = DirectiveType.AirworthenessDirectives;
+
+			var qrs = DirectiveQueries.GetSelectQuery(directiveType,text, paragraph, loadChild: true);
+
+			var directives = new DirectiveCollection();
+			directives.AddRange(_loader.GetObjectListAll<Directive>(qrs, true));
+
+			if (directives.Count == 0)
+				return directives;
+
+			var directiveIds = directives.Select(d => d.ItemId).ToList();
+			var itemsRelations = _itemsRelationsDataAccess.GetRelations(directiveIds, SmartCoreType.Directive.ItemId);
+
+			if (itemsRelations.Count > 0)
+			{
+				foreach (var directive in directives)
+					directive.ItemRelations.AddRange(itemsRelations.Where(i => i.FirstItemId == directive.ItemId || i.SecondItemId == directive.ItemId));
+			}
+
+			return directives;
+		}
+
 		#region public void AddDamageDocument(DamageDocument damageDocument)
 		/// <summary>
 		/// Добавляет DamageChart на воздушное судно

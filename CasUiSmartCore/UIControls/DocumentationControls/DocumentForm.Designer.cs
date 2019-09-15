@@ -1,36 +1,37 @@
-﻿using CAS.UI.UIControls.Auxiliary;
+﻿using CAS.UI.Helpers;
+using CAS.UI.UIControls.Auxiliary;
 using  MetroFramework.Controls;
 
 namespace CAS.UI.UIControls.DocumentationControls
 {
-    partial class DocumentForm
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class DocumentForm
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			MetroFramework.Controls.MetroLabel labelSubType;
 			MetroFramework.Controls.MetroLabel labelDescription;
 			MetroFramework.Controls.MetroLabel labelValidFrom;
@@ -364,6 +365,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 			this.comboBoxSubType.TabIndex = 0;
 			this.comboBoxSubType.SelectedIndexChanged += new System.EventHandler(this.comboBoxSubType_SelectedIndexChanged);
 			this.comboBoxSubType.TextUpdate += new System.EventHandler(this.comboBoxSubType_TextUpdate);
+			this.comboBoxSubType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// textBoxDescription
 			// 
@@ -430,6 +432,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 			this.comboBoxDocumentType.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxDocumentType.TabIndex = 16;
 			this.comboBoxDocumentType.SelectedIndexChanged += new System.EventHandler(this.ComboBoxDocumentTypeSelectedIndexChanged);
+			this.comboBoxDocumentType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// textBoxContractNumber
 			// 
@@ -481,10 +484,10 @@ namespace CAS.UI.UIControls.DocumentationControls
 			this.numericUpDownIssueNotify.ForeColor = System.Drawing.Color.DimGray;
 			this.numericUpDownIssueNotify.Location = new System.Drawing.Point(106, 423);
 			this.numericUpDownIssueNotify.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownIssueNotify.Name = "numericUpDownIssueNotify";
 			this.numericUpDownIssueNotify.Size = new System.Drawing.Size(250, 22);
 			this.numericUpDownIssueNotify.TabIndex = 31;
@@ -565,6 +568,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 			this.comboBoxTemplate.Size = new System.Drawing.Size(601, 22);
 			this.comboBoxTemplate.TabIndex = 40;
 			this.comboBoxTemplate.SelectedIndexChanged += new System.EventHandler(this.ComboBoxTemplateSelectedIndexChanged);
+			this.comboBoxTemplate.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// checkBoxClosed
 			// 
@@ -586,6 +590,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 			this.comboBoxPrologWay.Name = "comboBoxPrologWay";
 			this.comboBoxPrologWay.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxPrologWay.TabIndex = 45;
+			this.comboBoxPrologWay.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxDepartment
 			// 
@@ -597,6 +602,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 			this.comboBoxDepartment.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxDepartment.TabIndex = 48;
 			this.comboBoxDepartment.SelectedIndexChanged += new System.EventHandler(this.comboBoxDepartment_SelectedIndexChanged);
+			this.comboBoxDepartment.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxNomenclature
 			// 
@@ -608,6 +614,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 			this.comboBoxNomenclature.Size = new System.Drawing.Size(250, 21);
 			this.comboBoxNomenclature.TabIndex = 51;
 			this.comboBoxNomenclature.TextUpdate += new System.EventHandler(this.comboBoxNomenclature_TextUpdate);
+			this.comboBoxNomenclature.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// textBoxNumberIssue
 			// 
@@ -647,10 +654,10 @@ namespace CAS.UI.UIControls.DocumentationControls
 			this.numericUpDownRevisionNotify.ForeColor = System.Drawing.Color.DimGray;
 			this.numericUpDownRevisionNotify.Location = new System.Drawing.Point(457, 423);
 			this.numericUpDownRevisionNotify.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
+			10000,
+			0,
+			0,
+			0});
 			this.numericUpDownRevisionNotify.Name = "numericUpDownRevisionNotify";
 			this.numericUpDownRevisionNotify.Size = new System.Drawing.Size(250, 22);
 			this.numericUpDownRevisionNotify.TabIndex = 58;
@@ -700,6 +707,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 			this.comboBoxResponsible.Name = "comboBoxResponsible";
 			this.comboBoxResponsible.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxResponsible.TabIndex = 61;
+			this.comboBoxResponsible.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// textBoxRemarks
 			// 
@@ -742,6 +750,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 			this.comboBoxSupplier.Name = "comboBoxSupplier";
 			this.comboBoxSupplier.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxSupplier.TabIndex = 67;
+			this.comboBoxSupplier.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// checkBoxPrivy
 			// 
@@ -764,6 +773,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 			this.dictionaryComboBoxLocation.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.dictionaryComboBoxLocation.Size = new System.Drawing.Size(250, 21);
 			this.dictionaryComboBoxLocation.TabIndex = 66;
+			this.dictionaryComboBoxLocation.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// dictComboBoxServiceType
 			// 
@@ -778,6 +788,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 			this.dictComboBoxServiceType.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.dictComboBoxServiceType.Size = new System.Drawing.Size(248, 22);
 			this.dictComboBoxServiceType.TabIndex = 62;
+			this.dictComboBoxServiceType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// fileControl
 			// 
@@ -922,7 +933,6 @@ namespace CAS.UI.UIControls.DocumentationControls
 			this.Name = "DocumentForm";
 			this.Resizable = false;
 			this.ShowIcon = false;
-			this.ShowInTaskbar = false;
 			this.Text = "Document Form";
 			this.Load += new System.EventHandler(this.DocumentForm_Load);
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownIssueNotify)).EndInit();
@@ -932,23 +942,25 @@ namespace CAS.UI.UIControls.DocumentationControls
 
 		}
 
+		
+
 		#endregion
 
 		private System.Windows.Forms.ComboBox comboBoxSubType;
-        private MetroTextBox textBoxDescription;
-        private System.Windows.Forms.DateTimePicker dateTimePickerIssueValidFrom;
-        private System.Windows.Forms.DateTimePicker dateTimePickerIssueValidTo;
-        private System.Windows.Forms.ComboBox comboBoxDocumentType;
-        private MetroTextBox textBoxContractNumber;
-        public AttachedFileControl fileControl;
-        private MetroCheckBox checkBoxIssueValidTo;
-        private System.Windows.Forms.NumericUpDown numericUpDownIssueNotify;
-        private System.Windows.Forms.Button _buttonEditTypes;
-        private MetroCheckBox checkBoxRevision;
-        private System.Windows.Forms.DateTimePicker dateTimePickerRevisionDateFrom;
-        private MetroTextBox textBoxRevNumber;
-        private System.Windows.Forms.ComboBox comboBoxTemplate;
-        private MetroCheckBox checkBoxClosed;
+		private MetroTextBox textBoxDescription;
+		private System.Windows.Forms.DateTimePicker dateTimePickerIssueValidFrom;
+		private System.Windows.Forms.DateTimePicker dateTimePickerIssueValidTo;
+		private System.Windows.Forms.ComboBox comboBoxDocumentType;
+		private MetroTextBox textBoxContractNumber;
+		public AttachedFileControl fileControl;
+		private MetroCheckBox checkBoxIssueValidTo;
+		private System.Windows.Forms.NumericUpDown numericUpDownIssueNotify;
+		private System.Windows.Forms.Button _buttonEditTypes;
+		private MetroCheckBox checkBoxRevision;
+		private System.Windows.Forms.DateTimePicker dateTimePickerRevisionDateFrom;
+		private MetroTextBox textBoxRevNumber;
+		private System.Windows.Forms.ComboBox comboBoxTemplate;
+		private MetroCheckBox checkBoxClosed;
 		private System.Windows.Forms.ComboBox comboBoxPrologWay;
 		private System.Windows.Forms.ComboBox comboBoxDepartment;
 		private System.Windows.Forms.ComboBox comboBoxNomenclature;
@@ -963,7 +975,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 		private DictionaryComboBox dictionaryComboBoxLocation;
 		private System.Windows.Forms.ComboBox comboBoxSupplier;
 		private MetroCheckBox checkBoxPrivy;
-        private MetroTextBox textBoxIdNumber;
+		private MetroTextBox textBoxIdNumber;
 		private System.Windows.Forms.Button buttonOk;
 		private System.Windows.Forms.Button buttonCancel;
 	}

@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 {
     partial class EngineFailureDataControl
     {
@@ -641,10 +643,11 @@
             this.comboBoxFlightRegime.Name = "comboBoxFlightRegime";
             this.comboBoxFlightRegime.Size = new System.Drawing.Size(128, 21);
             this.comboBoxFlightRegime.TabIndex = 139;
-            // 
-            // labelTimeInRegime
-            // 
-            this.labelTimeInRegime.AutoSize = true;
+            this.comboBoxFlightRegime.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// labelTimeInRegime
+			// 
+			this.labelTimeInRegime.AutoSize = true;
             this.labelTimeInRegime.Location = new System.Drawing.Point(538, 188);
             this.labelTimeInRegime.Name = "labelTimeInRegime";
             this.labelTimeInRegime.Size = new System.Drawing.Size(84, 13);

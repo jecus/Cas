@@ -166,8 +166,11 @@ namespace CAS.UI.UIControls.ComponentControls
 			_maintenanceTypes = maintenanceTypes;
 			_llpMark = llpMark;
 
-			if(_currentBaseComponent.ParentAircraftId > 0)
+			if (_currentBaseComponent.ParentAircraftId > 0)
+			{
 				CurrentAircraft = GlobalObjects.AircraftsCore.GetAircraftById(_currentBaseComponent.ParentAircraftId);
+				_currentAircraft = CurrentAircraft;
+			}
 			if (_currentBaseComponent.ParentStoreId > 0)
 				CurrentStore = GlobalObjects.StoreCore.GetStoreById(_currentBaseComponent.ParentStoreId);
 
@@ -2134,7 +2137,7 @@ namespace CAS.UI.UIControls.ComponentControls
 												Forecast = _currentForecast
 											};
 #endif
-						llpBuilder.AddDirectives(_directivesViewer.GetItemsArray().Cast<Component>().OrderBy(i => Convert.ToInt32(i.Position)).ToArray());
+						llpBuilder.AddDirectives(_directivesViewer.GetItemsArray().Cast<Component>().ToArray());
 						e.RequestedEntity = new ReportScreen(llpBuilder);
 						GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "ComponentsListScreen (LLP)");
 					}

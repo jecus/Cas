@@ -432,13 +432,29 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
             SetOilFlow(powerUnit,workTime);
         }
-        #endregion
 
-        #region Events
-        ///<summary>
-        /// ¬озникает при изменении расхода масла
-        ///</summary>
-        [Category("Oil data")]
+        public void SetPowerUnitWorkTime(List<BaseComponent> powerUnits, TimeSpan workTime)
+        {
+	        foreach (var powerUnit in powerUnits)
+	        {
+				if (powerUnit == null) return;
+				if (_powerUnitsWorkTime.ContainsKey(powerUnit.ItemId))
+					_powerUnitsWorkTime[powerUnit.ItemId] = workTime;
+				else _powerUnitsWorkTime.Add(powerUnit.ItemId, workTime);
+
+				SetOilFlow(powerUnit, workTime);
+			}
+	        
+        }
+
+
+		#endregion
+
+		#region Events
+		///<summary>
+		/// ¬озникает при изменении расхода масла
+		///</summary>
+		[Category("Oil data")]
         [Description("¬озникает при изменении расхода масла")]
         public event EventHandler OilFlowChanget;
 

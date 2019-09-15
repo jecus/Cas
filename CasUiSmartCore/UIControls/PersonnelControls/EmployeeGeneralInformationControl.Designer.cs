@@ -1,39 +1,40 @@
 ﻿using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.PersonnelControls
 {
-    partial class EmployeeGeneralInformationControl
-    {
-        /// <summary> 
-        /// Требуется переменная конструктора.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class EmployeeGeneralInformationControl
+	{
+		/// <summary> 
+		/// Требуется переменная конструктора.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Освободить все используемые ресурсы.
-        /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
+		/// <summary> 
+		/// Освободить все используемые ресурсы.
+		/// </summary>
+		/// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
 
-            //dateTimePickerDateOfBirth.ValueChanged -= DateTimePickerEffDateValueChanged;
+			//dateTimePickerDateOfBirth.ValueChanged -= DateTimePickerEffDateValueChanged;
 
-            base.Dispose(disposing);
-        }
+			base.Dispose(disposing);
+		}
 
-        #region Код, автоматически созданный конструктором компонентов
+		#region Код, автоматически созданный конструктором компонентов
 
-        /// <summary> 
-        /// Обязательный метод для поддержки конструктора - не изменяйте 
-        /// содержимое данного метода при помощи редактора кода.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary> 
+		/// Обязательный метод для поддержки конструктора - не изменяйте 
+		/// содержимое данного метода при помощи редактора кода.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.labelBirthDate = new System.Windows.Forms.Label();
 			this.labelBiWeeklyReport = new System.Windows.Forms.Label();
 			this.labelAddress = new System.Windows.Forms.Label();
@@ -240,6 +241,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			this.comboBoxGender.Name = "comboBoxGender";
 			this.comboBoxGender.Size = new System.Drawing.Size(350, 25);
 			this.comboBoxGender.TabIndex = 3;
+			this.comboBoxGender.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelGender
 			// 
@@ -458,6 +460,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			this.comboBoxfamilyStatus.Name = "comboBoxfamilyStatus";
 			this.comboBoxfamilyStatus.Size = new System.Drawing.Size(350, 25);
 			this.comboBoxfamilyStatus.TabIndex = 67;
+			this.comboBoxfamilyStatus.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxEducation
 			// 
@@ -468,6 +471,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			this.comboBoxEducation.Name = "comboBoxEducation";
 			this.comboBoxEducation.Size = new System.Drawing.Size(350, 25);
 			this.comboBoxEducation.TabIndex = 68;
+			this.comboBoxEducation.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// textBoxNationality
 			// 
@@ -489,6 +493,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			this.comboBoxNationality.Name = "comboBoxNationality";
 			this.comboBoxNationality.Size = new System.Drawing.Size(350, 25);
 			this.comboBoxNationality.TabIndex = 69;
+			this.comboBoxNationality.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelPosition
 			// 
@@ -511,6 +516,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			this.comboBoxPosition.Name = "comboBoxPosition";
 			this.comboBoxPosition.Size = new System.Drawing.Size(350, 25);
 			this.comboBoxPosition.TabIndex = 71;
+			this.comboBoxPosition.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label2
 			// 
@@ -545,6 +551,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			this.comboBoxStatus.Name = "comboBoxStatus";
 			this.comboBoxStatus.Size = new System.Drawing.Size(350, 25);
 			this.comboBoxStatus.TabIndex = 75;
+			this.comboBoxStatus.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// dictionaryComboBoxLocation
 			// 
@@ -559,6 +566,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			this.dictionaryComboBoxLocation.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.dictionaryComboBoxLocation.Size = new System.Drawing.Size(350, 22);
 			this.dictionaryComboBoxLocation.TabIndex = 72;
+			this.dictionaryComboBoxLocation.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// dictionaryComboBoxOccupation
 			// 
@@ -573,6 +581,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			this.dictionaryComboBoxOccupation.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.dictionaryComboBoxOccupation.Size = new System.Drawing.Size(350, 22);
 			this.dictionaryComboBoxOccupation.TabIndex = 16;
+			this.dictionaryComboBoxOccupation.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// fileControlResume
 			// 
@@ -733,39 +742,39 @@ namespace CAS.UI.UIControls.PersonnelControls
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
-        private Label labelBirthDate;
-        private Label labelBiWeeklyReport;
-        private Label labelAddress;
-        private DateTimePicker dateTimePickerDateOfBirth;
-        private TextBox textboxBiWeeklyReport;
-        private TextBox textboxAddress;
-        private Label labelFirstName;
-        private TextBox textBoxFirstName;
-        private Label labelFamilyStatus;
-        private Label LabelLastName;
-        private TextBox textBoxLastName;
-        private AttachedFileControl fileControlPassportCopy;
-        private AttachedFileControl fileControlResume;
-        private Label labelPassportCopy;
-        private Label labelNationality;
-        private ComboBox comboBoxGender;
-        private Label labelGender;
-        private Label labelPhoto;
-        private PictureBox _pictureBoxTransparentLogotype;
-        private Label labelResume;
-        private DictionaryComboBox dictionaryComboBoxOccupation;
-        private Label labelOccupation;
-        private Label labelPhoneMobile;
-        private TextBox textBoxPhoneMobile;
-        private Label labelPhone;
-        private TextBox textBoxPhone;
-        private Label labelEmail;
-        private TextBox textBoxEmail;
-        private Label labelSkype;
-        private TextBox textBoxSkype;
+		#endregion
+		private Label labelBirthDate;
+		private Label labelBiWeeklyReport;
+		private Label labelAddress;
+		private DateTimePicker dateTimePickerDateOfBirth;
+		private TextBox textboxBiWeeklyReport;
+		private TextBox textboxAddress;
+		private Label labelFirstName;
+		private TextBox textBoxFirstName;
+		private Label labelFamilyStatus;
+		private Label LabelLastName;
+		private TextBox textBoxLastName;
+		private AttachedFileControl fileControlPassportCopy;
+		private AttachedFileControl fileControlResume;
+		private Label labelPassportCopy;
+		private Label labelNationality;
+		private ComboBox comboBoxGender;
+		private Label labelGender;
+		private Label labelPhoto;
+		private PictureBox _pictureBoxTransparentLogotype;
+		private Label labelResume;
+		private DictionaryComboBox dictionaryComboBoxOccupation;
+		private Label labelOccupation;
+		private Label labelPhoneMobile;
+		private TextBox textBoxPhoneMobile;
+		private Label labelPhone;
+		private TextBox textBoxPhone;
+		private Label labelEmail;
+		private TextBox textBoxEmail;
+		private Label labelSkype;
+		private TextBox textBoxSkype;
 		private Label labelEducation;
 		private TextBox textBoxInformation;
 		private Label labelInformation;

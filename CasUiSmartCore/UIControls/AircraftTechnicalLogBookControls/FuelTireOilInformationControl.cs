@@ -1,8 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.UIControls.Auxiliary.Events;
+using CASTerms;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Atlbs;
 
@@ -32,13 +35,19 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         {
             componentOilListControl1.SetPowerUnitWorkTime(powerUnit, workTime);
         }
-        #endregion
 
-        #region public FuelTireOilInformationControl()
-        ///<summary>
-        /// Конструктор по умолчанию
-        ///</summary>
-        public FuelTireOilInformationControl()
+        public void SetPowerUnitWorkTime(TimeSpan workTime)
+        {
+	        componentOilListControl1.SetPowerUnitWorkTime(GlobalObjects.ComponentCore.GetAicraftBaseComponents(Flight.AircraftId, BaseComponentType.Engine.ItemId).ToList(),workTime);
+        }
+
+		#endregion
+
+		#region public FuelTireOilInformationControl()
+		///<summary>
+		/// Конструктор по умолчанию
+		///</summary>
+		public FuelTireOilInformationControl()
         {
             InitializeComponent();
         }

@@ -487,7 +487,7 @@ namespace CAS.UI.UIControls.NewGrid
 			foreach (GridViewCellInfo cell in listViewItem.Cells)
 			{
 				cell.Style.CustomizeFill = true;
-
+				cell.Style.BackColor = Color.White;
 				if (imd.NextPerformanceIsBlocked)
 				{
 					cell.Style.BackColor = Color.FromArgb(Highlight.Grey.Color);
@@ -638,14 +638,10 @@ namespace CAS.UI.UIControls.NewGrid
 
 		private void RadGridView1_KeyDown(object sender, KeyEventArgs e)
 		{
-			if(IgnoreEnterPress)
-				return;
-			
-
 			switch (e.KeyData)
 			{
 				case Keys.Enter:
-					if (SelectedItem != null)
+					if (!IgnoreEnterPress && SelectedItem != null)
 					{
 						if(DisplayerRequested != null)
 							OnDisplayerRequested();

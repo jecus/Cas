@@ -342,8 +342,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// flowLayoutPanelFileControls
 			// 
 			this.flowLayoutPanelFileControls.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Left) 
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.flowLayoutPanelFileControls.AutoScroll = true;
 			this.flowLayoutPanelFileControls.Location = new System.Drawing.Point(1, 295);
 			this.flowLayoutPanelFileControls.MinimumSize = new System.Drawing.Size(381, 2);
@@ -385,7 +385,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.MinimizeBox = false;
 			this.Name = "PurchaseRequestForm";
 			this.ShowIcon = false;
-			this.ShowInTaskbar = false;
 			this.Text = "Purchase Order Form";
 			this.panelMain.ResumeLayout(false);
 			this.panelButtons.ResumeLayout(false);

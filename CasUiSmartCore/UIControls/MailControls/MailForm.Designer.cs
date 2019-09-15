@@ -1,4 +1,5 @@
 ﻿using MetroFramework.Controls;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.MailControls
 {
@@ -198,6 +199,7 @@ namespace CAS.UI.UIControls.MailControls
 			this.comboBoxDocumentType.Name = "comboBoxDocumentType";
 			this.comboBoxDocumentType.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxDocumentType.TabIndex = 18;
+			this.comboBoxDocumentType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// textBoxNumber
 			// 
@@ -251,6 +253,7 @@ namespace CAS.UI.UIControls.MailControls
 			this.comboBoxSupplier.Name = "comboBoxSupplier";
 			this.comboBoxSupplier.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxSupplier.TabIndex = 202;
+			this.comboBoxSupplier.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// textBoxReferenceNumber
 			// 
@@ -427,6 +430,7 @@ namespace CAS.UI.UIControls.MailControls
 			this.comboBoxDepartment.Name = "comboBoxDepartment";
 			this.comboBoxDepartment.Size = new System.Drawing.Size(239, 22);
 			this.comboBoxDepartment.TabIndex = 220;
+			this.comboBoxDepartment.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelResponsible
 			// 
@@ -448,6 +452,7 @@ namespace CAS.UI.UIControls.MailControls
 			this.comboBoxOccupation.Name = "comboBoxOccupation";
 			this.comboBoxOccupation.Size = new System.Drawing.Size(239, 22);
 			this.comboBoxOccupation.TabIndex = 222;
+			this.comboBoxOccupation.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelExecutor
 			// 
@@ -469,6 +474,7 @@ namespace CAS.UI.UIControls.MailControls
 			this.comboBoxSpecialist.Name = "comboBoxSpecialist";
 			this.comboBoxSpecialist.Size = new System.Drawing.Size(239, 22);
 			this.comboBoxSpecialist.TabIndex = 224;
+			this.comboBoxSpecialist.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// buttonClose
 			// 
@@ -509,6 +515,7 @@ namespace CAS.UI.UIControls.MailControls
 			this.comboBoxDocumentClass.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxDocumentClass.TabIndex = 231;
 			this.comboBoxDocumentClass.SelectedIndexChanged += new System.EventHandler(this.comboBoxDocumentClass_SelectedIndexChanged);
+			this.comboBoxDocumentClass.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// textBoxDescription
 			// 
@@ -562,6 +569,7 @@ namespace CAS.UI.UIControls.MailControls
 			this.comboBoxNomenclature.Name = "comboBoxNomenclature";
 			this.comboBoxNomenclature.Size = new System.Drawing.Size(239, 22);
 			this.comboBoxNomenclature.TabIndex = 237;
+			this.comboBoxNomenclature.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// dictionaryComboBoxLocation
 			// 
@@ -573,6 +581,7 @@ namespace CAS.UI.UIControls.MailControls
 			this.dictionaryComboBoxLocation.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.dictionaryComboBoxLocation.Size = new System.Drawing.Size(239, 21);
 			this.dictionaryComboBoxLocation.TabIndex = 239;
+			this.dictionaryComboBoxLocation.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// fileControl
 			// 
@@ -637,7 +646,6 @@ namespace CAS.UI.UIControls.MailControls
 			this.MinimumSize = new System.Drawing.Size(722, 550);
 			this.Name = "MailForm";
 			this.ShowIcon = false;
-			this.ShowInTaskbar = false;
 			this.Text = "Receive Mail Form";
 			this.Load += new System.EventHandler(this.ReceiveMailForm_Load);
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownRevisionNotify)).EndInit();

@@ -1,36 +1,37 @@
 ﻿using CAS.UI.UIControls.Auxiliary.DataGridViewElements;
 using MetroFramework.Controls;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.StoresControls
 {
-    partial class MoveComponentForm
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class MoveComponentForm
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveComponentForm));
 			this.labelComponent = new MetroFramework.Controls.MetroLabel();
 			this.labelDate = new MetroFramework.Controls.MetroLabel();
@@ -106,7 +107,7 @@ namespace CAS.UI.UIControls.StoresControls
 			// dateTimePickerDate
 			// 
 			this.dateTimePickerDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.dateTimePickerDate.CalendarForeColor = System.Drawing.Color.DimGray;
 			this.dateTimePickerDate.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateTimePickerDate.Location = new System.Drawing.Point(172, 63);
@@ -138,13 +139,14 @@ namespace CAS.UI.UIControls.StoresControls
 			// comboBoxBaseComponent
 			// 
 			this.comboBoxBaseComponent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxBaseComponent.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.comboBoxBaseComponent.FormattingEnabled = true;
 			this.comboBoxBaseComponent.Location = new System.Drawing.Point(172, 327);
 			this.comboBoxBaseComponent.Name = "comboBoxBaseComponent";
 			this.comboBoxBaseComponent.Size = new System.Drawing.Size(610, 24);
 			this.comboBoxBaseComponent.TabIndex = 8;
+			this.comboBoxBaseComponent.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelRemarks
 			// 
@@ -159,7 +161,7 @@ namespace CAS.UI.UIControls.StoresControls
 			// textBoxRemarks
 			// 
 			this.textBoxRemarks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			// 
 			// 
 			// 
@@ -235,7 +237,7 @@ namespace CAS.UI.UIControls.StoresControls
 			// comboBoxStore
 			// 
 			this.comboBoxStore.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxStore.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.comboBoxStore.ForeColor = System.Drawing.Color.DimGray;
 			this.comboBoxStore.FormattingEnabled = true;
@@ -243,6 +245,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.comboBoxStore.Name = "comboBoxStore";
 			this.comboBoxStore.Size = new System.Drawing.Size(610, 24);
 			this.comboBoxStore.TabIndex = 20;
+			this.comboBoxStore.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelMoveToStore
 			// 
@@ -291,14 +294,14 @@ namespace CAS.UI.UIControls.StoresControls
 			this.dataGridViewComponents.AllowUserToAddRows = false;
 			this.dataGridViewComponents.AllowUserToDeleteRows = false;
 			this.dataGridViewComponents.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.dataGridViewComponents.BackgroundColor = System.Drawing.SystemColors.Window;
 			this.dataGridViewComponents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridViewComponents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnComponent,
-            this.ColumnDescription,
-            this.ColumnAll,
-            this.ColumnReplace});
+			this.ColumnComponent,
+			this.ColumnDescription,
+			this.ColumnAll,
+			this.ColumnReplace});
 			this.dataGridViewComponents.Location = new System.Drawing.Point(172, 109);
 			this.dataGridViewComponents.Margin = new System.Windows.Forms.Padding(2);
 			this.dataGridViewComponents.Name = "dataGridViewComponents";
@@ -329,10 +332,10 @@ namespace CAS.UI.UIControls.StoresControls
 			// 
 			this.ColumnAll.HeaderText = "All";
 			this.ColumnAll.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
+			100000,
+			0,
+			0,
+			0});
 			this.ColumnAll.Name = "ColumnAll";
 			this.ColumnAll.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.ColumnAll.ThousandsSeparator = true;
@@ -342,10 +345,10 @@ namespace CAS.UI.UIControls.StoresControls
 			// 
 			this.ColumnReplace.HeaderText = "Replace";
 			this.ColumnReplace.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
+			100000,
+			0,
+			0,
+			0});
 			this.ColumnReplace.Name = "ColumnReplace";
 			this.ColumnReplace.ThousandsSeparator = true;
 			this.ColumnReplace.Width = 60;
@@ -386,7 +389,7 @@ namespace CAS.UI.UIControls.StoresControls
 			// textBoxDescription
 			// 
 			this.textBoxDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			// 
 			// 
 			// 
@@ -444,6 +447,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.comboBoxReason.Name = "comboBoxReason";
 			this.comboBoxReason.Size = new System.Drawing.Size(610, 21);
 			this.comboBoxReason.TabIndex = 31;
+			this.comboBoxReason.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// dataGridViewTextBoxColumn1
 			// 
@@ -455,15 +459,15 @@ namespace CAS.UI.UIControls.StoresControls
 			// 
 			this.dataGridViewNumericUpDownColumn1.HeaderText = "All";
 			this.dataGridViewNumericUpDownColumn1.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
+			100000,
+			0,
+			0,
+			0});
 			this.dataGridViewNumericUpDownColumn1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+			1,
+			0,
+			0,
+			0});
 			this.dataGridViewNumericUpDownColumn1.Name = "dataGridViewNumericUpDownColumn1";
 			this.dataGridViewNumericUpDownColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.dataGridViewNumericUpDownColumn1.ThousandsSeparator = true;
@@ -473,15 +477,15 @@ namespace CAS.UI.UIControls.StoresControls
 			// 
 			this.dataGridViewNumericUpDownColumn2.HeaderText = "Replace";
 			this.dataGridViewNumericUpDownColumn2.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
+			100000,
+			0,
+			0,
+			0});
 			this.dataGridViewNumericUpDownColumn2.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+			1,
+			0,
+			0,
+			0});
 			this.dataGridViewNumericUpDownColumn2.Name = "dataGridViewNumericUpDownColumn2";
 			this.dataGridViewNumericUpDownColumn2.ThousandsSeparator = true;
 			this.dataGridViewNumericUpDownColumn2.Width = 60;
@@ -509,11 +513,11 @@ namespace CAS.UI.UIControls.StoresControls
 			// fileControl
 			// 
 			this.fileControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.fileControl.AutoSize = true;
 			this.fileControl.BackColor = System.Drawing.Color.Transparent;
 			this.fileControl.Description1 = "This record does not contain a file proving the tranfering of the component. Encl" +
-    "ose PDF file to prove the transfer of the component.";
+	"ose PDF file to prove the transfer of the component.";
 			this.fileControl.Description2 = "Attached file proves the transfer of the component.";
 			this.fileControl.Filter = "Adobe PDF Files|*.pdf";
 			this.fileControl.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -535,6 +539,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.comboBoxRecived.Name = "comboBoxRecived";
 			this.comboBoxRecived.Size = new System.Drawing.Size(268, 21);
 			this.comboBoxRecived.TabIndex = 33;
+			this.comboBoxRecived.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelReceived
 			// 
@@ -553,6 +558,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.comboBoxReleased.Name = "comboBoxReleased";
 			this.comboBoxReleased.Size = new System.Drawing.Size(270, 21);
 			this.comboBoxReleased.TabIndex = 35;
+			this.comboBoxReleased.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelReleased
 			// 
@@ -578,13 +584,14 @@ namespace CAS.UI.UIControls.StoresControls
 			// comboBoxSupplier
 			// 
 			this.comboBoxSupplier.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxSupplier.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.comboBoxSupplier.FormattingEnabled = true;
 			this.comboBoxSupplier.Location = new System.Drawing.Point(172, 357);
 			this.comboBoxSupplier.Name = "comboBoxSupplier";
 			this.comboBoxSupplier.Size = new System.Drawing.Size(610, 24);
 			this.comboBoxSupplier.TabIndex = 38;
+			this.comboBoxSupplier.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label1
 			// 
@@ -609,7 +616,7 @@ namespace CAS.UI.UIControls.StoresControls
 			// ReceiptDatedateTimePicker
 			// 
 			this.ReceiptDatedateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.ReceiptDatedateTimePicker.CalendarForeColor = System.Drawing.Color.DimGray;
 			this.ReceiptDatedateTimePicker.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.ReceiptDatedateTimePicker.Location = new System.Drawing.Point(172, 419);
@@ -651,13 +658,14 @@ namespace CAS.UI.UIControls.StoresControls
 			// comboBoxStaff
 			// 
 			this.comboBoxStaff.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxStaff.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.comboBoxStaff.FormattingEnabled = true;
 			this.comboBoxStaff.Location = new System.Drawing.Point(172, 387);
 			this.comboBoxStaff.Name = "comboBoxStaff";
 			this.comboBoxStaff.Size = new System.Drawing.Size(610, 24);
 			this.comboBoxStaff.TabIndex = 44;
+			this.comboBoxStaff.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label3
 			// 
@@ -683,7 +691,7 @@ namespace CAS.UI.UIControls.StoresControls
 			// comboBoxAircraft
 			// 
 			this.comboBoxAircraft.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxAircraft.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.comboBoxAircraft.ForeColor = System.Drawing.Color.DimGray;
 			this.comboBoxAircraft.FormattingEnabled = true;
@@ -692,6 +700,7 @@ namespace CAS.UI.UIControls.StoresControls
 			this.comboBoxAircraft.Size = new System.Drawing.Size(610, 24);
 			this.comboBoxAircraft.TabIndex = 46;
 			this.comboBoxAircraft.SelectedIndexChanged += new System.EventHandler(this.ComboBoxAircraftSelectedIndexChanged);
+			this.comboBoxAircraft.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// MoveComponentForm
 			// 
@@ -749,33 +758,33 @@ namespace CAS.UI.UIControls.StoresControls
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private MetroLabel labelComponent;
-        private MetroLabel labelDate;
-        private System.Windows.Forms.DateTimePicker dateTimePickerDate;
-        private MetroLabel labelMoveToAircraft;
-        private MetroLabel labelMoveToBaseDetail;
-        private System.Windows.Forms.ComboBox comboBoxBaseComponent;
-        private MetroLabel labelRemarks;
-        private MetroTextBox textBoxRemarks;
-        private System.Windows.Forms.Button buttonOK;
-        private System.Windows.Forms.Button buttonApply;
-        private System.Windows.Forms.Button buttonCancel;
-        private CAS.UI.UIControls.Auxiliary.AttachedFileControl fileControl;
-        private CAS.UI.UIControls.Auxiliary.Delimiter delimiter1;
-        private CAS.UI.UIControls.Auxiliary.Delimiter delimiter2;
-        private System.Windows.Forms.ComboBox comboBoxStore;
-        private MetroLabel labelMoveToStore;
-        private MetroRadioButton radioButtonStore;
-        private MetroRadioButton radioButtonAircraft;
-        private MetroLabel labelMoveTo;
-        private System.Windows.Forms.DataGridView dataGridViewComponents;
-        private MetroRadioButton radioButton1;
-        private MetroRadioButton radioButton2;
-        private MetroRadioButton radioButton3;
+		private MetroLabel labelComponent;
+		private MetroLabel labelDate;
+		private System.Windows.Forms.DateTimePicker dateTimePickerDate;
+		private MetroLabel labelMoveToAircraft;
+		private MetroLabel labelMoveToBaseDetail;
+		private System.Windows.Forms.ComboBox comboBoxBaseComponent;
+		private MetroLabel labelRemarks;
+		private MetroTextBox textBoxRemarks;
+		private System.Windows.Forms.Button buttonOK;
+		private System.Windows.Forms.Button buttonApply;
+		private System.Windows.Forms.Button buttonCancel;
+		private CAS.UI.UIControls.Auxiliary.AttachedFileControl fileControl;
+		private CAS.UI.UIControls.Auxiliary.Delimiter delimiter1;
+		private CAS.UI.UIControls.Auxiliary.Delimiter delimiter2;
+		private System.Windows.Forms.ComboBox comboBoxStore;
+		private MetroLabel labelMoveToStore;
+		private MetroRadioButton radioButtonStore;
+		private MetroRadioButton radioButtonAircraft;
+		private MetroLabel labelMoveTo;
+		private System.Windows.Forms.DataGridView dataGridViewComponents;
+		private MetroRadioButton radioButton1;
+		private MetroRadioButton radioButton2;
+		private MetroRadioButton radioButton3;
 		private MetroTextBox textBoxDescription;
 		private MetroLabel labelDescription;
 		private MetroLabel labelReason;

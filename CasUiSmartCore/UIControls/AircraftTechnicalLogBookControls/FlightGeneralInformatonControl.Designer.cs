@@ -54,6 +54,7 @@
 			this.flightTimeControl1.OutTimeChanget += new CAS.UI.UIControls.Auxiliary.Events.DateChangedEventHandler(this.FlightTimeControl1OutTimeChanget);
 			this.flightTimeControl1.InTimeChanget += new CAS.UI.UIControls.Auxiliary.Events.DateChangedEventHandler(this.FlightTimeControl1InTimeChanget);
 			this.flightTimeControl1.TakeOffTimeChanget += new CAS.UI.UIControls.Auxiliary.Events.DateChangedEventHandler(this.FlightTimeControl1TakeOffTimeChanget);
+			this.flightTimeControl1.FlightTimeChanget += FlightTimeControl1_FlightTimeChanget;
 			this.flightTimeControl1.LDGTimeChanget += new CAS.UI.UIControls.Auxiliary.Events.DateChangedEventHandler(this.FlightTimeControl1LDGTimeChanget);
 			// 
 			// flightDateRouteControl1
@@ -195,7 +196,7 @@
 
         }
 
-		#endregion
+        #endregion
 
 		private FlightTimeControl flightTimeControl1;
         private FlightDateRouteControl flightDateRouteControl1;

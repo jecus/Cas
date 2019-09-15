@@ -655,7 +655,7 @@ namespace CAS.UI.UIControls.ForecastControls
 
 				        if (directive.MtopNextPerformances.Count <= 0)
 					        continue;
-				        _initialDirectiveArray.Add(directive.MtopNextPerformances.First());
+				        _initialDirectiveArray.AddRange(directive.MtopNextPerformances);
 
 
 				        //Проход по всем след. выполнениям чека и записям в рабочих пакетах

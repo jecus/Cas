@@ -1,51 +1,52 @@
 ﻿using System.Threading;
 using MetroFramework.Controls;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.ForecastControls
 {
-    partial class ForecastCustomsWriteData
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class ForecastCustomsWriteData
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                if (_animatedThreadWorker.IsBusy)
-                    _animatedThreadWorker.CancelAsync();
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				if (_animatedThreadWorker.IsBusy)
+					_animatedThreadWorker.CancelAsync();
 
-                while (_animatedThreadWorker.IsBusy)
-                {
-                    Thread.Sleep(500);
-                }
+				while (_animatedThreadWorker.IsBusy)
+				{
+					Thread.Sleep(500);
+				}
 
-                _animatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
-                _animatedThreadWorker.RunWorkerCompleted -= AnimatedThreadWorkerRunWorkerCompleted;
-                _animatedThreadWorker.Dispose();
+				_animatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+				_animatedThreadWorker.RunWorkerCompleted -= AnimatedThreadWorkerRunWorkerCompleted;
+				_animatedThreadWorker.Dispose();
 
-                if (_checkItems != null)
-                    _checkItems.Clear();
+				if (_checkItems != null)
+					_checkItems.Clear();
 
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.dateTimePickerForecastDate = new System.Windows.Forms.DateTimePicker();
 			this.label1 = new MetroFramework.Controls.MetroLabel();
 			this.button1 = new System.Windows.Forms.Button();
@@ -359,6 +360,7 @@ namespace CAS.UI.UIControls.ForecastControls
 			this.comboBoxPerformance.Name = "comboBoxPerformance";
 			this.comboBoxPerformance.Size = new System.Drawing.Size(347, 25);
 			this.comboBoxPerformance.TabIndex = 19;
+			this.comboBoxPerformance.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// numericUpDownApprovals
 			// 
@@ -366,23 +368,23 @@ namespace CAS.UI.UIControls.ForecastControls
 			this.numericUpDownApprovals.Location = new System.Drawing.Point(106, 92);
 			this.numericUpDownApprovals.Margin = new System.Windows.Forms.Padding(2);
 			this.numericUpDownApprovals.Maximum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
+			50,
+			0,
+			0,
+			0});
 			this.numericUpDownApprovals.Minimum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
+			10,
+			0,
+			0,
+			0});
 			this.numericUpDownApprovals.Name = "numericUpDownApprovals";
 			this.numericUpDownApprovals.Size = new System.Drawing.Size(347, 24);
 			this.numericUpDownApprovals.TabIndex = 18;
 			this.numericUpDownApprovals.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
+			10,
+			0,
+			0,
+			0});
 			// 
 			// labelPerformance
 			// 
@@ -441,6 +443,7 @@ namespace CAS.UI.UIControls.ForecastControls
 			this.comboBoxByDate.Name = "comboBoxByDate";
 			this.comboBoxByDate.Size = new System.Drawing.Size(347, 25);
 			this.comboBoxByDate.TabIndex = 15;
+			this.comboBoxByDate.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// radioButtonByDate
 			// 
@@ -475,6 +478,7 @@ namespace CAS.UI.UIControls.ForecastControls
 			this.comboBoxCheck.Size = new System.Drawing.Size(347, 25);
 			this.comboBoxCheck.TabIndex = 14;
 			this.comboBoxCheck.SelectedIndexChanged += new System.EventHandler(this.ComboBoxCheckSelectedIndexChanged);
+			this.comboBoxCheck.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelCycles
 			// 
@@ -492,25 +496,25 @@ namespace CAS.UI.UIControls.ForecastControls
 			this.numericUpDownCycles.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.numericUpDownCycles.ForeColor = System.Drawing.Color.DimGray;
 			this.numericUpDownCycles.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
+			1,
+			0,
+			0,
+			65536});
 			this.numericUpDownCycles.Location = new System.Drawing.Point(111, 291);
 			this.numericUpDownCycles.Maximum = new decimal(new int[] {
-            900,
-            0,
-            0,
-            0});
+			900,
+			0,
+			0,
+			0});
 			this.numericUpDownCycles.Name = "numericUpDownCycles";
 			this.numericUpDownCycles.Size = new System.Drawing.Size(256, 22);
 			this.numericUpDownCycles.TabIndex = 49;
 			this.numericUpDownCycles.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numericUpDownCycles.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+			1,
+			0,
+			0,
+			0});
 			this.numericUpDownCycles.ValueChanged += new System.EventHandler(this.NumericUpDownsValueChanged);
 			// 
 			// labelHours
@@ -529,25 +533,25 @@ namespace CAS.UI.UIControls.ForecastControls
 			this.numericUpDownHours.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.numericUpDownHours.ForeColor = System.Drawing.Color.DimGray;
 			this.numericUpDownHours.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
+			1,
+			0,
+			0,
+			65536});
 			this.numericUpDownHours.Location = new System.Drawing.Point(111, 264);
 			this.numericUpDownHours.Maximum = new decimal(new int[] {
-            744,
-            0,
-            0,
-            0});
+			744,
+			0,
+			0,
+			0});
 			this.numericUpDownHours.Name = "numericUpDownHours";
 			this.numericUpDownHours.Size = new System.Drawing.Size(256, 22);
 			this.numericUpDownHours.TabIndex = 48;
 			this.numericUpDownHours.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numericUpDownHours.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+			1,
+			0,
+			0,
+			0});
 			this.numericUpDownHours.ValueChanged += new System.EventHandler(this.NumericUpDownsValueChanged);
 			// 
 			// radioButtonDayly
@@ -594,19 +598,19 @@ namespace CAS.UI.UIControls.ForecastControls
 			this.numericUpDownPercents.ForeColor = System.Drawing.Color.DimGray;
 			this.numericUpDownPercents.Location = new System.Drawing.Point(397, 323);
 			this.numericUpDownPercents.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+			1,
+			0,
+			0,
+			0});
 			this.numericUpDownPercents.Name = "numericUpDownPercents";
 			this.numericUpDownPercents.Size = new System.Drawing.Size(61, 22);
 			this.numericUpDownPercents.TabIndex = 46;
 			this.numericUpDownPercents.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numericUpDownPercents.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
+			5,
+			0,
+			0,
+			0});
 			// 
 			// checkBoxIncludePercents
 			// 
@@ -655,44 +659,44 @@ namespace CAS.UI.UIControls.ForecastControls
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private System.Windows.Forms.DateTimePicker dateTimePickerForecastDate;
-        private MetroLabel label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        public Auxiliary.LifelengthViewer lifelengthViewer_ForecastResource;
-        public Auxiliary.LifelengthViewer lifelengthViewerDifferentSource;
-        public Auxiliary.LifelengthViewer lifelengthViewerCurrent;
-        private System.Windows.Forms.Button buttonAdvanced;
-        private System.Windows.Forms.TabControl tabControlMain;
-        private System.Windows.Forms.TabPage tabPageDateResource;
-        private System.Windows.Forms.TabPage tabPageCheck;
+		private System.Windows.Forms.DateTimePicker dateTimePickerForecastDate;
+		private MetroLabel label1;
+		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button button2;
+		public Auxiliary.LifelengthViewer lifelengthViewer_ForecastResource;
+		public Auxiliary.LifelengthViewer lifelengthViewerDifferentSource;
+		public Auxiliary.LifelengthViewer lifelengthViewerCurrent;
+		private System.Windows.Forms.Button buttonAdvanced;
+		private System.Windows.Forms.TabControl tabControlMain;
+		private System.Windows.Forms.TabPage tabPageDateResource;
+		private System.Windows.Forms.TabPage tabPageCheck;
 		private MetroLabel labelByDate;
-        private MetroRadioButton radioButtonByPerformance;
-        private System.Windows.Forms.ComboBox comboBoxByDate;
-        private MetroRadioButton radioButtonByDate;
-        private MetroLabel labelCheck;
-        private System.Windows.Forms.ComboBox comboBoxCheck;
-        private System.Windows.Forms.ComboBox comboBoxPerformance;
-        private System.Windows.Forms.NumericUpDown numericUpDownApprovals;
-        private MetroLabel labelPerformance;
-        private MetroLabel labelApprovals;
-        private System.Windows.Forms.DateTimePicker dateTimePickerTo;
-        private MetroLabel labelTo;
-        private System.Windows.Forms.DateTimePicker dateTimePickerFrom;
-        private MetroRadioButton radioButtonByPeriod;
-        private MetroLabel labelPeriodFrom;
-        private MetroLabel labelCycles;
-        private System.Windows.Forms.NumericUpDown numericUpDownCycles;
-        private MetroLabel labelHours;
-        private System.Windows.Forms.NumericUpDown numericUpDownHours;
-        private MetroRadioButton radioButtonDayly;
-        private MetroCheckBox checkBoxNotifyes;
-        private MetroRadioButton radioButtonMonthly;
-        private System.Windows.Forms.NumericUpDown numericUpDownPercents;
-        private MetroCheckBox checkBoxIncludePercents;
-    }
+		private MetroRadioButton radioButtonByPerformance;
+		private System.Windows.Forms.ComboBox comboBoxByDate;
+		private MetroRadioButton radioButtonByDate;
+		private MetroLabel labelCheck;
+		private System.Windows.Forms.ComboBox comboBoxCheck;
+		private System.Windows.Forms.ComboBox comboBoxPerformance;
+		private System.Windows.Forms.NumericUpDown numericUpDownApprovals;
+		private MetroLabel labelPerformance;
+		private MetroLabel labelApprovals;
+		private System.Windows.Forms.DateTimePicker dateTimePickerTo;
+		private MetroLabel labelTo;
+		private System.Windows.Forms.DateTimePicker dateTimePickerFrom;
+		private MetroRadioButton radioButtonByPeriod;
+		private MetroLabel labelPeriodFrom;
+		private MetroLabel labelCycles;
+		private System.Windows.Forms.NumericUpDown numericUpDownCycles;
+		private MetroLabel labelHours;
+		private System.Windows.Forms.NumericUpDown numericUpDownHours;
+		private MetroRadioButton radioButtonDayly;
+		private MetroCheckBox checkBoxNotifyes;
+		private MetroRadioButton radioButtonMonthly;
+		private System.Windows.Forms.NumericUpDown numericUpDownPercents;
+		private MetroCheckBox checkBoxIncludePercents;
+	}
 }

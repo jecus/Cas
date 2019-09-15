@@ -1,3 +1,5 @@
+using CAS.UI.Helpers;
+
 namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 {
     partial class FlightDistanceControl
@@ -115,10 +117,11 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
             this.comboBoxMeasure.Name = "comboBoxMeasure";
             this.comboBoxMeasure.Size = new System.Drawing.Size(137, 21);
             this.comboBoxMeasure.TabIndex = 18;
-            // 
-            // delimiter5
-            // 
-            this.delimiter5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("delimiter5.BackgroundImage")));
+            this.comboBoxMeasure.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// delimiter5
+			// 
+			this.delimiter5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("delimiter5.BackgroundImage")));
             this.delimiter5.Location = new System.Drawing.Point(404, 36);
             this.delimiter5.Margin = new System.Windows.Forms.Padding(4);
             this.delimiter5.Name = "delimiter5";

@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.Auxiliary
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.Auxiliary
 {
 	partial class MaintenanceProgramChangeDialog
 	{
@@ -79,6 +81,7 @@
 			this.comboBoxMSG.Name = "comboBoxMSG";
 			this.comboBoxMSG.Size = new System.Drawing.Size(352, 26);
 			this.comboBoxMSG.TabIndex = 10;
+			this.comboBoxMSG.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// lifelengthViewer_LastCompliance
 			// 
@@ -141,6 +144,7 @@
 			this.comboBoxCheckRecord.Size = new System.Drawing.Size(352, 26);
 			this.comboBoxCheckRecord.TabIndex = 2;
 			this.comboBoxCheckRecord.SelectedIndexChanged += new System.EventHandler(this.ComboBoxCheckRecordSelectedIndexChanged);
+			this.comboBoxCheckRecord.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label2
 			// 

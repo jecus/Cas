@@ -10,6 +10,7 @@ namespace SmartCore.Entities.General.Accessory
 {
     [Table("ComponentLLPCategoryData", "dbo", "ItemId")]
     [Dto(typeof(ComponentLLPCategoryDataDTO))]
+    [Condition("IsDeleted", "0")]
 	[Serializable]
     public class ComponentLLPCategoryData : BaseEntityObject
     {

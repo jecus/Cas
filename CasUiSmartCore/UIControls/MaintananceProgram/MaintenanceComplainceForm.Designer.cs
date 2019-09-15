@@ -2,46 +2,46 @@
 
 namespace CAS.UI.UIControls.MaintananceProgram
 {
-    partial class MaintenanceComplainceForm
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class MaintenanceComplainceForm
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
 
-                if(_animatedThreadWorker != null)
-                {
-                    if(_animatedThreadWorker.IsBusy)
-                    {
-                        _animatedThreadWorker.CancelAsync();
-                    }
-                    
-                    ResetAnimatedThreadWorkerEvents();
+				if(_animatedThreadWorker != null)
+				{
+					if(_animatedThreadWorker.IsBusy)
+					{
+						_animatedThreadWorker.CancelAsync();
+					}
+					
+					ResetAnimatedThreadWorkerEvents();
 
-                    _animatedThreadWorker.Dispose();
-                }
-            }
-            base.Dispose(disposing);
-        }
+					_animatedThreadWorker.Dispose();
+				}
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MaintenanceComplainceForm));
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.buttonOk = new System.Windows.Forms.Button();
@@ -95,8 +95,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			// flowLayoutPanelContainer
 			// 
 			this.flowLayoutPanelContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Left) 
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.flowLayoutPanelContainer.AutoScroll = true;
 			this.flowLayoutPanelContainer.Controls.Add(this.compliancePDFitem1);
 			this.flowLayoutPanelContainer.Controls.Add(this.compliancePDFitem2);
@@ -177,8 +177,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			// groupBox1
 			// 
 			this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Left) 
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.groupBox1.Controls.Add(this.labelCheckName);
 			this.groupBox1.Controls.Add(this.textBoxCheckName);
 			this.groupBox1.Controls.Add(this.labelControlPoint);
@@ -335,7 +335,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.MinimumSize = new System.Drawing.Size(552, 499);
 			this.Name = "MaintenanceComplainceForm";
 			this.ShowIcon = false;
-			this.ShowInTaskbar = false;
 			this.Text = "Maintenance Compliance";
 			this.Activated += new System.EventHandler(this.MaintenanceComplainceFormActivated);
 			this.Deactivate += new System.EventHandler(this.MaintenanceComplainceFormDeactivate);
@@ -347,25 +346,25 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.groupBox1.PerformLayout();
 			this.ResumeLayout(false);
 
-        }
-        #endregion
+		}
+		#endregion
 
-        public System.Windows.Forms.Button buttonCancel;
-        public System.Windows.Forms.Button buttonOk;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelContainer;
-        private CompliancePDFItem compliancePDFitem1;
-        private CompliancePDFItem compliancePDFitem2;
-        public Auxiliary.LifelengthViewer lifelengthViewer_LastCompliance;
-        public SmartControls.General.Delimiter delimiter2;
-        public MetroLabel label1;
-        public System.Windows.Forms.GroupBox groupBox1;
-        public SmartControls.General.Delimiter delimiter1;
-        public System.Windows.Forms.DateTimePicker dateTimePicker1;
-        public MetroLabel label2;
-        public MetroTextBox textBox_Remarks;
-        public MetroLabel labelCheckName;
-        public MetroTextBox textBoxCheckName;
-        public MetroLabel labelControlPoint;
-        private MetroCheckBox checkBoxControlPoint;
-    }
+		public System.Windows.Forms.Button buttonCancel;
+		public System.Windows.Forms.Button buttonOk;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelContainer;
+		private CompliancePDFItem compliancePDFitem1;
+		private CompliancePDFItem compliancePDFitem2;
+		public Auxiliary.LifelengthViewer lifelengthViewer_LastCompliance;
+		public SmartControls.General.Delimiter delimiter2;
+		public MetroLabel label1;
+		public System.Windows.Forms.GroupBox groupBox1;
+		public SmartControls.General.Delimiter delimiter1;
+		public System.Windows.Forms.DateTimePicker dateTimePicker1;
+		public MetroLabel label2;
+		public MetroTextBox textBox_Remarks;
+		public MetroLabel labelCheckName;
+		public MetroTextBox textBoxCheckName;
+		public MetroLabel labelControlPoint;
+		private MetroCheckBox checkBoxControlPoint;
+	}
 }

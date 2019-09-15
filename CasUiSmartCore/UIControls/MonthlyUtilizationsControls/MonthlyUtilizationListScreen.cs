@@ -118,11 +118,11 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 			_initialDirectiveArray = null;
 
 			if (_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
-			if(_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
-			if(_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
-			if(_toolStripSeparator2 != null) _toolStripSeparator2.Dispose();
-			if(_toolStripMenuItemHighlight != null) _toolStripMenuItemHighlight.Dispose();
-			if(_contextMenuStrip != null) _contextMenuStrip.Dispose();
+			if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
+			if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
+			if (_toolStripSeparator2 != null) _toolStripSeparator2.Dispose();
+			if (_toolStripMenuItemHighlight != null) _toolStripMenuItemHighlight.Dispose();
+			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
 
 			if (_directivesViewer != null) _directivesViewer.Dispose();
 
@@ -134,7 +134,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 		#region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
-			if(e.Cancelled)
+			if (e.Cancelled)
 				return;
 
 			//вычисление периода в днях
@@ -150,15 +150,15 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 			var plan = GlobalObjects.AverageUtilizationCore.GetAverageUtillization(aircraftFrame); ;
 			//вычисление фактической утилизации
 			AverageUtilization factPerPeriod;
-			if(plan.SelectedInterval == UtilizationInterval.Dayly)
+			if (plan.SelectedInterval == UtilizationInterval.Dayly)
 			{
-				factPerPeriod = new AverageUtilization(avgCyclesPerDay, avgHoursPerDay, 
+				factPerPeriod = new AverageUtilization(avgCyclesPerDay, avgHoursPerDay,
 													   UtilizationInterval.Dayly);
 			}
 			else
 			{
-				factPerPeriod = new AverageUtilization(avgCyclesPerDay * 30, avgHoursPerDay * 30, 
-													   UtilizationInterval.Monthly);  
+				factPerPeriod = new AverageUtilization(avgCyclesPerDay * 30, avgHoursPerDay * 30,
+													   UtilizationInterval.Monthly);
 			}
 
 			if (CurrentAircraft != null)
@@ -197,7 +197,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 			{
 				new Filter("ParentAircraft",CurrentAircraft.ItemId),
 				new Filter("Grouping", true)
-			},true));
+			}, true));
 			AnimatedThreadWorker.ReportProgress(40, "filter Fligths");
 
 			AnimatedThreadWorker.ReportProgress(70, "filter Fligths");
@@ -310,11 +310,11 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 			foreach (AircraftFlight o in _directivesViewer.SelectedItems)
 			{
 				ReferenceEventArgs refE = new ReferenceEventArgs
-											  {
-												  TypeOfReflection = ReflectionTypes.DisplayInNew,
-												  DisplayerText = CurrentAircraft.RegistrationNumber + ". " + o,
-												  RequestedEntity = new FlightScreen(o)
-											  };
+				{
+					TypeOfReflection = ReflectionTypes.DisplayInNew,
+					DisplayerText = CurrentAircraft.RegistrationNumber + ". " + o,
+					RequestedEntity = new FlightScreen(o)
+				};
 				InvokeDisplayerRequested(refE);
 			}
 		}
@@ -340,7 +340,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 
 					GlobalObjects.CasEnvironment.Calculator.ResetMath(CurrentAircraft);
 
-					_directivesViewer.radGridView1.EndUpdate(); 
+					_directivesViewer.radGridView1.EndUpdate();
 				}
 				catch (Exception ex)
 				{
@@ -358,7 +358,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 		private void InitListView()
 		{
 			var col = new CommonCollection<ATLB>(GlobalObjects.AircraftFlightsCore.GetATLBsByAircraftId(CurrentAircraft.ItemId));
-			_directivesViewer = new MouthlyUtilizationListView(CurrentAircraft,col);
+			_directivesViewer = new MouthlyUtilizationListView(CurrentAircraft, col);
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.CustomMenu = _contextMenuStrip;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
@@ -403,13 +403,13 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 				{
 					dateTimePickerDateFrom.Value = f.FlightDate.Month == 1
 						? new DateTime(f.FlightDate.Year - 1, 12, 1)
-						: new DateTime(f.FlightDate.Year, f.FlightDate.Month - 1, 1); 
+						: new DateTime(f.FlightDate.Year, f.FlightDate.Month - 1, 1);
 				}
 				else
 				{
 					dateTimePickerDateFrom.Value = DateTime.Now.Month == 1
 						? new DateTime(DateTime.Now.Year - 1, 12, 1)
-						: new DateTime(DateTime.Now.Year, DateTime.Now.Month - 1, 1);    
+						: new DateTime(DateTime.Now.Year, DateTime.Now.Month - 1, 1);
 				}
 			}
 			else
@@ -418,7 +418,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 					? new DateTime(DateTime.Now.Year - 1, 12, 1)
 					: new DateTime(DateTime.Now.Year, DateTime.Now.Month - 1, 1);
 			}
-			
+
 			AnimatedThreadWorker.RunWorkerAsync();
 		}
 		#endregion
@@ -457,11 +457,11 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 												  _initialDirectiveArray.TotalHoursClear,
 												  _initialDirectiveArray.TotalCyclesClear);
 #else
-				MonthlyUtilizationBuilder reportBuilder = 
-					new MonthlyUtilizationBuilder(CurrentAircraft, 
-												  dateTimePickerDateFrom.Value, 
-												  dateTimePickerDateTo.Value, 
-												  GlobalObjects.CasEnvironment.Calculator.GetTotalHours(_initialDirectiveArray), 
+				MonthlyUtilizationBuilder reportBuilder =
+					new MonthlyUtilizationBuilder(CurrentAircraft,
+												  dateTimePickerDateFrom.Value,
+												  dateTimePickerDateTo.Value,
+												  GlobalObjects.CasEnvironment.Calculator.GetTotalHours(_initialDirectiveArray),
 												  GlobalObjects.CasEnvironment.Calculator.GetTotalCycles(_initialDirectiveArray));
 #endif
 				reportBuilder.Flights = _initialDirectiveArray.OrderByDescending(f => f.FlightDate.AddMinutes(f.FlightTime.TotalMinutes)).ToList();
@@ -526,9 +526,9 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 					}
 				}
 
-				OperationTimeReportBuilder reportBuilder = 
+				OperationTimeReportBuilder reportBuilder =
 					new OperationTimeReportBuilder(CurrentAircraft,
-												   maintenanceCheckRecordGroups, 
+												   maintenanceCheckRecordGroups,
 												   GlobalObjects.ComponentCore.GetAicraftBaseComponents(CurrentAircraft.ItemId),
 												   lastCCheckRecord,
 												   _workPackages,

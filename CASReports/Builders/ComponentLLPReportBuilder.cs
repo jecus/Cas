@@ -494,7 +494,9 @@ namespace CASReports.Builders
             //var total = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(reportedComponent);
 
 	        int i = 0;
-	        foreach (var data in reportedComponent.LLPData.Where(l => l.ParentCategory != LLPLifeLimitCategory.Unknown))
+
+
+	        foreach (var data in reportedComponent.LLPData.Where(l => l.ParentCategory != LLPLifeLimitCategory.Unknown).Reverse().Take(4))
 	        {
 				llpData[i] = data;
 		        i++;

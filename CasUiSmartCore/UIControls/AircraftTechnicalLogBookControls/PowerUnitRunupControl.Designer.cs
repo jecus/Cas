@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 {
     partial class PowerUnitRunupControl
     {
@@ -70,10 +72,11 @@
             this.comboBoxEngine.Size = new System.Drawing.Size(150, 21);
             this.comboBoxEngine.TabIndex = 0;
             this.comboBoxEngine.SelectedIndexChanged += new System.EventHandler(this.ComboBoxEngineSelectedIndexChanged);
-            // 
-            // labelFlightEngine
-            // 
-            this.labelFlightEngine.AutoSize = true;
+            this.comboBoxEngine.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// labelFlightEngine
+			// 
+			this.labelFlightEngine.AutoSize = true;
             this.labelFlightEngine.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelFlightEngine.Location = new System.Drawing.Point(3, 0);
             this.labelFlightEngine.Name = "labelFlightEngine";
@@ -177,10 +180,11 @@
             this.comboBoxOffPhase.Name = "comboBoxOffPhase";
             this.comboBoxOffPhase.Size = new System.Drawing.Size(87, 21);
             this.comboBoxOffPhase.TabIndex = 5;
-            // 
-            // labelOffPhase
-            // 
-            this.labelOffPhase.AutoSize = true;
+            this.comboBoxOffPhase.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// labelOffPhase
+			// 
+			this.labelOffPhase.AutoSize = true;
             this.labelOffPhase.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelOffPhase.Location = new System.Drawing.Point(476, 0);
             this.labelOffPhase.Name = "labelOffPhase";
@@ -216,10 +220,11 @@
             this.comboBoxRunupType.Name = "comboBoxRunupType";
             this.comboBoxRunupType.Size = new System.Drawing.Size(80, 21);
             this.comboBoxRunupType.TabIndex = 2;
-            // 
-            // labelRunupType
-            // 
-            this.labelRunupType.AutoSize = true;
+            this.comboBoxRunupType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// labelRunupType
+			// 
+			this.labelRunupType.AutoSize = true;
             this.labelRunupType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelRunupType.Location = new System.Drawing.Point(228, 0);
             this.labelRunupType.Name = "labelRunupType";
@@ -235,10 +240,11 @@
             this.comboBoxRunupPhase.Name = "comboBoxRunupPhase";
             this.comboBoxRunupPhase.Size = new System.Drawing.Size(87, 21);
             this.comboBoxRunupPhase.TabIndex = 3;
-            // 
-            // labelShutdownType
-            // 
-            this.labelShutdownType.AutoSize = true;
+            this.comboBoxRunupPhase.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// labelShutdownType
+			// 
+			this.labelShutdownType.AutoSize = true;
             this.labelShutdownType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelShutdownType.Location = new System.Drawing.Point(662, 0);
             this.labelShutdownType.Name = "labelShutdownType";
@@ -266,28 +272,31 @@
             this.reasonComboBox.SelectedReason = null;
             this.reasonComboBox.Size = new System.Drawing.Size(120, 29);
             this.reasonComboBox.TabIndex = 8;
-            // 
-            // comboBoxRunupCond
-            // 
-            this.comboBoxRunupCond.FormattingEnabled = true;
+            this.reasonComboBox.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// comboBoxRunupCond
+			// 
+			this.comboBoxRunupCond.FormattingEnabled = true;
             this.comboBoxRunupCond.Location = new System.Drawing.Point(569, 13);
             this.comboBoxRunupCond.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.comboBoxRunupCond.Name = "comboBoxRunupCond";
             this.comboBoxRunupCond.Size = new System.Drawing.Size(87, 21);
             this.comboBoxRunupCond.TabIndex = 6;
-            // 
-            // comboBoxShutDownType
-            // 
-            this.comboBoxShutDownType.FormattingEnabled = true;
+            this.comboBoxRunupCond.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// comboBoxShutDownType
+			// 
+			this.comboBoxShutDownType.FormattingEnabled = true;
             this.comboBoxShutDownType.Location = new System.Drawing.Point(662, 13);
             this.comboBoxShutDownType.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.comboBoxShutDownType.Name = "comboBoxShutDownType";
             this.comboBoxShutDownType.Size = new System.Drawing.Size(87, 21);
             this.comboBoxShutDownType.TabIndex = 7;
-            // 
-            // dateTimePickerStart
-            // 
-            this.dateTimePickerStart.CustomFormat = "HH:mm";
+            this.comboBoxShutDownType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// dateTimePickerStart
+			// 
+			this.dateTimePickerStart.CustomFormat = "HH:mm";
             this.dateTimePickerStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerStart.Location = new System.Drawing.Point(158, 15);
             this.dateTimePickerStart.Margin = new System.Windows.Forms.Padding(2);

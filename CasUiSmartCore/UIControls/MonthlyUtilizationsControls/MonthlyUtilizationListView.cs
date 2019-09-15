@@ -124,7 +124,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 					if (baseComponent.ComponentDirectives.Count(dd => dd.DirectiveType == ComponentRecordType.Overhaul) > 0)
 						AddColumn(baseComponent + " SLSV", (int)(radGridView1.Width * 0.1f));
 				}
-				
+
 			}
 			#endregion
 			AddColumn("ATLB No", (int)(radGridView1.Width * 0.1f));
@@ -147,7 +147,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 
 			if (item.AtlbRecordType == AtlbRecordType.Flight)
 			{
-				
+
 				var route = item.StationFromId.ShortName + " - " + item.StationToId.ShortName;
 				var flightTimeString = UsefulMethods.TimeToString(new TimeSpan(0, 0, item.FlightTimeTotalMinutes, 0)) + " (" +
 									   UsefulMethods.TimePeriodToString(new TimeSpan(0, 0, item.TakeOffTime, 0),
@@ -316,7 +316,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 				subItems.Add(CreateRow(dateString, date));
 				subItems.Add(CreateRow(item.FlightNumber.ToString(), item.FlightNumber));
 				subItems.Add(CreateRow(item.StationToId.ShortName, item.StationToId.ShortName));
-				subItems.Add(CreateRow("",""));
+				subItems.Add(CreateRow("", ""));
 				subItems.Add(CreateRow("", ""));
 				subItems.Add(CreateRow("", ""));
 				subItems.Add(CreateRow("", ""));
@@ -353,7 +353,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 				subItems.Add(CreateRow(item.ListViewChecksPerformed, item.ListViewChecksPerformed));
 				subItems.Add(CreateRow(author, author));
 			}
-			
+
 
 			return subItems;
 		}
@@ -367,7 +367,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 			{
 				e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 				e.RequestedEntity = new FlightScreen(SelectedItem);
-				e.DisplayerText = _parentAircraft.RegistrationNumber + ". " + SelectedItem; 
+				e.DisplayerText = _parentAircraft.RegistrationNumber + ". " + SelectedItem;
 			}
 		}
 		#endregion

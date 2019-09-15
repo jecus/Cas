@@ -56,7 +56,20 @@
 			// 
 			// textBox_Remarks
 			// 
+			// 
+			// 
+			// 
+			this.textBox_Remarks.CustomButton.Image = null;
+			this.textBox_Remarks.CustomButton.Location = new System.Drawing.Point(250, 2);
+			this.textBox_Remarks.CustomButton.Name = "";
+			this.textBox_Remarks.CustomButton.Size = new System.Drawing.Size(99, 99);
+			this.textBox_Remarks.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBox_Remarks.CustomButton.TabIndex = 1;
+			this.textBox_Remarks.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBox_Remarks.CustomButton.UseSelectable = true;
+			this.textBox_Remarks.CustomButton.Visible = false;
 			this.textBox_Remarks.ForeColor = System.Drawing.Color.DimGray;
+			this.textBox_Remarks.Lines = new string[0];
 			this.textBox_Remarks.Margin = new System.Windows.Forms.Padding(4);
 			// 
 			// fileControl
@@ -68,21 +81,21 @@
 			// buttonOk
 			// 
 			this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonOk.Location = new System.Drawing.Point(257, 361);
+			this.buttonOk.Location = new System.Drawing.Point(257, 401);
 			this.buttonOk.Margin = new System.Windows.Forms.Padding(4);
 			this.buttonOk.Click += new System.EventHandler(this.ButtonOkClick);
 			// 
 			// buttonCancel
 			// 
 			this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonCancel.Location = new System.Drawing.Point(338, 361);
+			this.buttonCancel.Location = new System.Drawing.Point(338, 401);
 			this.buttonCancel.Margin = new System.Windows.Forms.Padding(4);
 			this.buttonCancel.Click += new System.EventHandler(this.ButtonCancelClick);
 			// 
 			// buttonApply
 			// 
 			this.buttonApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonApply.Location = new System.Drawing.Point(419, 361);
+			this.buttonApply.Location = new System.Drawing.Point(419, 401);
 			this.buttonApply.Margin = new System.Windows.Forms.Padding(4);
 			this.buttonApply.Click += new System.EventHandler(this.ButtonApplyClick);
 			// 
@@ -146,7 +159,7 @@
 			this.label3.AutoSize = true;
 			this.label3.Font = new System.Drawing.Font("Verdana", 11.25F);
 			this.label3.ForeColor = System.Drawing.Color.DimGray;
-			this.label3.Location = new System.Drawing.Point(497, 39);
+			this.label3.Location = new System.Drawing.Point(497, 40);
 			this.label3.Margin = new System.Windows.Forms.Padding(20, 0, 3, 0);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(55, 18);
@@ -166,18 +179,18 @@
 			this.checkBox1.Text = "Close With Mtop Check";
 			this.checkBox1.UseVisualStyleBackColor = true;
 			this.checkBox1.Visible = false;
-			this.checkBox1.Checked = false;
 			// 
 			// DirectiveComplianceDialog
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-			this.ClientSize = new System.Drawing.Size(489, 388);
+			this.ClientSize = new System.Drawing.Size(505, 448);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.checkedListBox1);
+			this.Location = new System.Drawing.Point(0, 0);
 			this.Margin = new System.Windows.Forms.Padding(4);
-			this.MaximumSize = new System.Drawing.Size(805, 428);
+			this.MaximumSize = new System.Drawing.Size(805, 448);
+			this.MinimumSize = new System.Drawing.Size(505, 448);
 			this.Name = "DirectiveComplianceDialog";
 			this.Text = "Directive Compliance";
 			this.Load += new System.EventHandler(this.DirectiveComplianceDialog_Load);

@@ -1,4 +1,5 @@
 ﻿using MetroFramework.Controls;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.MaintananceProgram
 {
@@ -299,6 +300,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this._comboBoxCheckType.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this._comboBoxCheckType.Size = new System.Drawing.Size(188, 21);
 			this._comboBoxCheckType.TabIndex = 11;
+			this._comboBoxCheckType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// checkBoxGrouping
 			// 
@@ -325,6 +327,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.comboBoxMainSource.Name = "comboBoxMainSource";
 			this.comboBoxMainSource.Size = new System.Drawing.Size(187, 21);
 			this.comboBoxMainSource.TabIndex = 14;
+			this.comboBoxMainSource.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// checkBoxSchedule
 			// 
@@ -380,7 +383,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.Controls.Add(this._buttonCancel);
 			this.Name = "MaintenanceCheckEdit";
 			this.ShowIcon = false;
-			this.ShowInTaskbar = false;
 			this.Text = "MaintenanceCheckEdit";
 			this.Load += new System.EventHandler(this.MaintenanceLimitationEditLoad);
 			groupBox2.ResumeLayout(false);

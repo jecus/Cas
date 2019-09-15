@@ -1,4 +1,7 @@
-﻿namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
+﻿using System;
+using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 {
     partial class PowerUnitTimeInRegimeControlItem
     {
@@ -131,6 +134,7 @@
             0,
             0,
             0});
+            this.numericUpDownTimeInRegimeGroundAir.Minimum = Decimal.MinValue;
             this.numericUpDownTimeInRegimeGroundAir.Name = "numericUpDownTimeInRegimeGroundAir";
             this.numericUpDownTimeInRegimeGroundAir.Size = new System.Drawing.Size(70, 20);
             this.numericUpDownTimeInRegimeGroundAir.TabIndex = 184;
@@ -155,6 +159,7 @@
             0,
             0,
             0});
+            this.numericUpDownTimeInRegime.Minimum = Decimal.MinValue;
             this.numericUpDownTimeInRegime.Name = "numericUpDownTimeInRegime";
             this.numericUpDownTimeInRegime.Size = new System.Drawing.Size(70, 20);
             this.numericUpDownTimeInRegime.TabIndex = 183;
@@ -236,10 +241,11 @@
             this.comboBoxGroundAir.Size = new System.Drawing.Size(93, 21);
             this.comboBoxGroundAir.TabIndex = 178;
             this.comboBoxGroundAir.SelectedIndexChanged += new System.EventHandler(this.ComboBoxGroundAirSelectedIndexChanged);
-            // 
-            // labelGroundAir
-            // 
-            this.labelGroundAir.AutoSize = true;
+            this.comboBoxGroundAir.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// labelGroundAir
+			// 
+			this.labelGroundAir.AutoSize = true;
             this.labelGroundAir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelGroundAir.Location = new System.Drawing.Point(258, 0);
             this.labelGroundAir.Name = "labelGroundAir";
@@ -266,10 +272,11 @@
             this.comboBoxEngine.Size = new System.Drawing.Size(150, 21);
             this.comboBoxEngine.TabIndex = 141;
             this.comboBoxEngine.SelectedIndexChanged += new System.EventHandler(this.ComboBoxEngineSelectedIndexChanged);
-            // 
-            // labelTimeInRegime
-            // 
-            this.labelTimeInRegime.AutoSize = true;
+            this.comboBoxEngine.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// labelTimeInRegime
+			// 
+			this.labelTimeInRegime.AutoSize = true;
             this.labelTimeInRegime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelTimeInRegime.Location = new System.Drawing.Point(357, 0);
             this.labelTimeInRegime.Name = "labelTimeInRegime";
@@ -307,10 +314,11 @@
             this.comboBoxFlightRegime.Size = new System.Drawing.Size(93, 21);
             this.comboBoxFlightRegime.TabIndex = 142;
             this.comboBoxFlightRegime.SelectedIndexChanged += new System.EventHandler(this.ComboBoxFlightRegimeSelectedIndexChanged);
-            // 
-            // textBoxTimeInRegimeSN
-            // 
-            this.textBoxTimeInRegimeSN.Enabled = false;
+            this.comboBoxFlightRegime.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// textBoxTimeInRegimeSN
+			// 
+			this.textBoxTimeInRegimeSN.Enabled = false;
             this.textBoxTimeInRegimeSN.Location = new System.Drawing.Point(509, 13);
             this.textBoxTimeInRegimeSN.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.textBoxTimeInRegimeSN.Name = "textBoxTimeInRegimeSN";
@@ -328,6 +336,7 @@
             0,
             0,
             0});
+            this.numericUpDownPersentSN.Minimum = decimal.MinValue;
             this.numericUpDownPersentSN.Name = "numericUpDownPersentSN";
             this.numericUpDownPersentSN.Size = new System.Drawing.Size(70, 20);
             this.numericUpDownPersentSN.TabIndex = 182;

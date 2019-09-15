@@ -1,4 +1,5 @@
 ﻿using MetroFramework.Controls;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 {
@@ -205,6 +206,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			this.comboBoxAircrafts.Size = new System.Drawing.Size(236, 22);
 			this.comboBoxAircrafts.TabIndex = 10;
 			this.comboBoxAircrafts.SelectedIndexChanged += new System.EventHandler(this.comboBoxAircrafts_SelectedIndexChanged);
+			this.comboBoxAircrafts.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxAircraftExchange
 			// 
@@ -216,6 +218,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			this.comboBoxAircraftExchange.Size = new System.Drawing.Size(236, 22);
 			this.comboBoxAircraftExchange.TabIndex = 12;
 			this.comboBoxAircraftExchange.SelectedIndexChanged += new System.EventHandler(this.comboBoxAircrafts_SelectedIndexChanged);
+			this.comboBoxAircraftExchange.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// delayComboBox
 			// 
@@ -227,6 +230,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			this.delayComboBox.SelectedReason = null;
 			this.delayComboBox.Size = new System.Drawing.Size(236, 24);
 			this.delayComboBox.TabIndex = 15;
+			this.delayComboBox.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// reasonComboBoxCancel
 			// 
@@ -238,6 +242,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			this.reasonComboBoxCancel.SelectedReason = null;
 			this.reasonComboBoxCancel.Size = new System.Drawing.Size(236, 24);
 			this.reasonComboBoxCancel.TabIndex = 17;
+			this.reasonComboBoxCancel.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// buttonOk
 			// 
@@ -338,7 +343,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			this.textFlightS.CustomButton.UseSelectable = true;
 			this.textFlightS.CustomButton.Visible = false;
 			this.textFlightS.Lines = new string[] {
-        "03:40"};
+		"03:40"};
 			this.textFlightS.Location = new System.Drawing.Point(674, 64);
 			this.textFlightS.MaxLength = 32767;
 			this.textFlightS.Name = "textFlightS";
@@ -426,7 +431,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			this.textFlightD.CustomButton.UseSelectable = true;
 			this.textFlightD.CustomButton.Visible = false;
 			this.textFlightD.Lines = new string[] {
-        "03:40"};
+		"03:40"};
 			this.textFlightD.Location = new System.Drawing.Point(1070, 64);
 			this.textFlightD.MaxLength = 32767;
 			this.textFlightD.Name = "textFlightD";
@@ -483,18 +488,18 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			this.dataGridViewFlights.AllowUserToAddRows = false;
 			this.dataGridViewFlights.AllowUserToDeleteRows = false;
 			this.dataGridViewFlights.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.dataGridViewFlights.BackgroundColor = System.Drawing.SystemColors.Window;
 			this.dataGridViewFlights.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridViewFlights.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnCheck,
-            this.ColumnFlightNo,
-            this.PageNoColumn,
-            this.ColumnFrom,
-            this.ColumnTo,
-            this.ColumnFlightDate,
-            this.ColumnTakeOff,
-            this.ColumnLDG});
+			this.ColumnCheck,
+			this.ColumnFlightNo,
+			this.PageNoColumn,
+			this.ColumnFrom,
+			this.ColumnTo,
+			this.ColumnFlightDate,
+			this.ColumnTakeOff,
+			this.ColumnLDG});
 			this.dataGridViewFlights.Location = new System.Drawing.Point(387, 94);
 			this.dataGridViewFlights.Margin = new System.Windows.Forms.Padding(2);
 			this.dataGridViewFlights.Name = "dataGridViewFlights";
@@ -566,6 +571,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			this.reasonComboBox.SelectedReason = null;
 			this.reasonComboBox.Size = new System.Drawing.Size(236, 24);
 			this.reasonComboBox.TabIndex = 269;
+			this.reasonComboBox.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// textBoxRemarks
 			// 
@@ -737,6 +743,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			this.comboBoxStatus.Name = "comboBoxStatus";
 			this.comboBoxStatus.Size = new System.Drawing.Size(236, 22);
 			this.comboBoxStatus.TabIndex = 288;
+			this.comboBoxStatus.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// PlanOpsRecordForm
 			// 
@@ -794,7 +801,6 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			this.Name = "PlanOpsRecordForm";
 			this.Resizable = false;
 			this.ShowIcon = false;
-			this.ShowInTaskbar = false;
 			this.Text = "Plan Ops Record Form";
 			this.Load += new System.EventHandler(this.PlanOpsRecordForm_Load);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewFlights)).EndInit();

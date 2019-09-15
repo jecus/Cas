@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 {
     partial class ApuFailureDataControl
     {
@@ -616,10 +618,11 @@
             this.comboBoxFlightRegime.Name = "comboBoxFlightRegime";
             this.comboBoxFlightRegime.Size = new System.Drawing.Size(128, 21);
             this.comboBoxFlightRegime.TabIndex = 238;
-            // 
-            // labelFlightRegime
-            // 
-            this.labelFlightRegime.AutoSize = true;
+            this.comboBoxFlightRegime.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// labelFlightRegime
+			// 
+			this.labelFlightRegime.AutoSize = true;
             this.labelFlightRegime.Location = new System.Drawing.Point(287, 189);
             this.labelFlightRegime.Name = "labelFlightRegime";
             this.labelFlightRegime.Size = new System.Drawing.Size(74, 13);

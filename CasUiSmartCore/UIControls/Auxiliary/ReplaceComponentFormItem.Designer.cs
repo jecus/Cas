@@ -1,33 +1,35 @@
-﻿namespace CAS.UI.UIControls.Auxiliary
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.Auxiliary
 {
-    partial class ReplaceComponentFormItem
-    {
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class ReplaceComponentFormItem
+	{
+		/// <summary> 
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary> 
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Component Designer generated code
+		#region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary> 
+		/// Required method for Designer support - do not modify 
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.dateTimePickerConfirmDate = new System.Windows.Forms.DateTimePicker();
 			this.comboBoxReplaceByDetail = new System.Windows.Forms.ComboBox();
 			this.dateTimePickerReplaceByDate = new System.Windows.Forms.DateTimePicker();
@@ -54,6 +56,7 @@
 			this.comboBoxReplaceByDetail.Size = new System.Drawing.Size(510, 21);
 			this.comboBoxReplaceByDetail.TabIndex = 67;
 			this.comboBoxReplaceByDetail.SelectedIndexChanged += new System.EventHandler(this.ComboBoxReplaceByDetailSelectedIndexChanged);
+			this.comboBoxReplaceByDetail.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// dateTimePickerReplaceByDate
 			// 
@@ -89,13 +92,13 @@
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private System.Windows.Forms.DateTimePicker dateTimePickerConfirmDate;
-        public System.Windows.Forms.ComboBox comboBoxReplaceByDetail;
-        private System.Windows.Forms.DateTimePicker dateTimePickerReplaceByDate;
-        private System.Windows.Forms.TextBox textBoxReplacedDetails;
-    }
+		private System.Windows.Forms.DateTimePicker dateTimePickerConfirmDate;
+		public System.Windows.Forms.ComboBox comboBoxReplaceByDetail;
+		private System.Windows.Forms.DateTimePicker dateTimePickerReplaceByDate;
+		private System.Windows.Forms.TextBox textBoxReplacedDetails;
+	}
 }

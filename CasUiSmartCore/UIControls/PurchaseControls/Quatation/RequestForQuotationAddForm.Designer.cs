@@ -1,6 +1,7 @@
 ﻿using CASTerms;
 using EntityCore.DTO.General;
 using MetroFramework.Controls;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.PurchaseControls.Quatation
 {
@@ -596,6 +597,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.dictionaryComboProduct.Size = new System.Drawing.Size(312, 21);
 			this.dictionaryComboProduct.TabIndex = 147;
 			this.dictionaryComboProduct.Type = null;
+			this.dictionaryComboProduct.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// dictionaryComboStandard
 			// 
@@ -609,6 +611,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.dictionaryComboStandard.Size = new System.Drawing.Size(312, 21);
 			this.dictionaryComboStandard.TabIndex = 129;
 			this.dictionaryComboStandard.Type = null;
+			this.dictionaryComboStandard.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxDetailClass
 			// 
@@ -623,6 +626,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.comboBoxDetailClass.RootNodesNames = null;
 			this.comboBoxDetailClass.Size = new System.Drawing.Size(312, 21);
 			this.comboBoxDetailClass.TabIndex = 130;
+			this.comboBoxDetailClass.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelClass
 			// 
@@ -869,6 +873,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.comboBoxMeasure.Size = new System.Drawing.Size(313, 21);
 			this.comboBoxMeasure.TabIndex = 140;
 			this.comboBoxMeasure.SelectedIndexChanged += new System.EventHandler(this.comboBoxMeasure_SelectedIndexChanged);
+			this.comboBoxMeasure.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelMeasure
 			// 

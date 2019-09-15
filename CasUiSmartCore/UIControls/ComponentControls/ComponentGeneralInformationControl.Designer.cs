@@ -1,38 +1,39 @@
 ﻿using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.ComponentControls
 {
-    partial class ComponentGeneralInformationControl
-    {
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class ComponentGeneralInformationControl
+	{
+		/// <summary> 
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
+		/// <summary> 
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
 
-            //comboBoxModel.SelectedIndexChanged -= DictionaryComboProductSelectedIndexChanged;
+			//comboBoxModel.SelectedIndexChanged -= DictionaryComboProductSelectedIndexChanged;
 
-            base.Dispose(disposing);
-        }
+			base.Dispose(disposing);
+		}
 
-        #region Component Designer generated code
+		#region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary> 
+		/// Required method for Designer support - do not modify 
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			System.Windows.Forms.GroupBox groupBoxStart;
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComponentGeneralInformationControl));
 			this.lifelengthViewerStart = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
@@ -707,6 +708,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxStorePosition.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxStorePosition.TabIndex = 7;
 			this.comboBoxStorePosition.Visible = false;
+			this.comboBoxStorePosition.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// checkBoxLLPMark
 			// 
@@ -741,10 +743,10 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.numericUpDownQuantity.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.numericUpDownQuantity.Location = new System.Drawing.Point(937, 224);
 			this.numericUpDownQuantity.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownQuantity.Name = "numericUpDownQuantity";
 			this.numericUpDownQuantity.Size = new System.Drawing.Size(252, 22);
 			this.numericUpDownQuantity.TabIndex = 26;
@@ -760,6 +762,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxMaintProc.Name = "comboBoxMaintProc";
 			this.comboBoxMaintProc.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxMaintProc.TabIndex = 24;
+			this.comboBoxMaintProc.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelComponentType
 			// 
@@ -938,6 +941,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxStatus.Name = "comboBoxStatus";
 			this.comboBoxStatus.Size = new System.Drawing.Size(249, 22);
 			this.comboBoxStatus.TabIndex = 96;
+			this.comboBoxStatus.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelDiscrepancy
 			// 
@@ -1024,6 +1028,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxSupplier.Size = new System.Drawing.Size(140, 22);
 			this.comboBoxSupplier.TabIndex = 148;
 			this.comboBoxSupplier.SelectedIndexChanged += new System.EventHandler(this.comboBoxSupplier_SelectedIndexChanged);
+			this.comboBoxSupplier.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// dateTimePickerReciveDate
 			// 
@@ -1577,6 +1582,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.dictionaryComboBoxLocation.Size = new System.Drawing.Size(249, 21);
 			this.dictionaryComboBoxLocation.TabIndex = 98;
 			this.dictionaryComboBoxLocation.Visible = false;
+			this.dictionaryComboBoxLocation.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxComponentType
 			// 
@@ -1594,6 +1600,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxComponentType.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxComponentType.TabIndex = 25;
 			this.comboBoxComponentType.SelectedIndexChanged += new System.EventHandler(this.ComboBoxComponentTypeSelectedIndexChanged);
+			this.comboBoxComponentType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxAtaChapter
 			// 
@@ -1605,6 +1612,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxAtaChapter.Name = "comboBoxAtaChapter";
 			this.comboBoxAtaChapter.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxAtaChapter.TabIndex = 12;
+			this.comboBoxAtaChapter.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// lifelengthNotify
 			// 
@@ -1755,6 +1763,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxReceived.Name = "comboBoxReceived";
 			this.comboBoxReceived.Size = new System.Drawing.Size(252, 22);
 			this.comboBoxReceived.TabIndex = 199;
+			this.comboBoxReceived.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelReceived
 			// 
@@ -1886,76 +1895,76 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private System.Windows.Forms.Label labelAtaChapter;
-        private System.Windows.Forms.Label labelDescription;
-        private System.Windows.Forms.Label labelMaintFreq;
-        private System.Windows.Forms.Label labelManufacturer;
-        private System.Windows.Forms.Label labelModel;
-        private System.Windows.Forms.Label labelPartNo;
-        private System.Windows.Forms.Label labelPosition;
-        private System.Windows.Forms.Label labelSerialNo;
-        private System.Windows.Forms.Label labelMPDItem;
-        private System.Windows.Forms.Label labelManufactureDate;
-        private System.Windows.Forms.Label labelInstallationDate;
-        private System.Windows.Forms.Label labelMaxTakeOffWeight;
-        private System.Windows.Forms.CheckBox checkBoxAvionicsInventory;
-        private System.Windows.Forms.Label labelHushKit;
-        private System.Windows.Forms.Label labelALTPN;
+		private System.Windows.Forms.Label labelAtaChapter;
+		private System.Windows.Forms.Label labelDescription;
+		private System.Windows.Forms.Label labelMaintFreq;
+		private System.Windows.Forms.Label labelManufacturer;
+		private System.Windows.Forms.Label labelModel;
+		private System.Windows.Forms.Label labelPartNo;
+		private System.Windows.Forms.Label labelPosition;
+		private System.Windows.Forms.Label labelSerialNo;
+		private System.Windows.Forms.Label labelMPDItem;
+		private System.Windows.Forms.Label labelManufactureDate;
+		private System.Windows.Forms.Label labelInstallationDate;
+		private System.Windows.Forms.Label labelMaxTakeOffWeight;
+		private System.Windows.Forms.CheckBox checkBoxAvionicsInventory;
+		private System.Windows.Forms.Label labelHushKit;
+		private System.Windows.Forms.Label labelALTPN;
 
-        private System.Windows.Forms.TextBox textBoxALTPN;
-        private System.Windows.Forms.TextBox textBoxHushKit;
-        private System.Windows.Forms.Panel panelAvionicsInventory;
-        private System.Windows.Forms.RadioButton radioButtonInventoryOptional;
-        private System.Windows.Forms.RadioButton radioButtonInventoryRequired;
-        private System.Windows.Forms.RadioButton radioButtonAvionicsInventoryUnknown;
-        private ATAChapterComboBox comboBoxAtaChapter;
-        private System.Windows.Forms.TextBox textBoxDescription;
-        private System.Windows.Forms.TextBox textBoxManufacturer;
-        private System.Windows.Forms.TextBox textBoxPartNo;
-        private System.Windows.Forms.TextBox textBoxPosition;
-        private System.Windows.Forms.Panel panelLandingGearMark;
-        private System.Windows.Forms.RadioButton radioButtonLLG;
-        private System.Windows.Forms.RadioButton radioButtonNLG;
-        private System.Windows.Forms.RadioButton radioButtonRLG;
-        private System.Windows.Forms.TextBox textBoxSerialNo;
-        private System.Windows.Forms.TextBox textBoxMPDItem;
-        private System.Windows.Forms.TextBox textBoxMaxTakeOffWeight;
-        private System.Windows.Forms.DateTimePicker dateTimePickerManufactureDate;
-        private System.Windows.Forms.DateTimePicker dateTimePickerInstallationDate;
-        private System.Windows.Forms.Label labelCurrentTSNCSN;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
-        private LifelengthViewer lifelengthNotify;
-        private System.Windows.Forms.Label labelNotify;
-        private System.Windows.Forms.Label labelDeliverDate;
-        private System.Windows.Forms.DateTimePicker dateTimePickerDeliveryDate;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private LifelengthViewer lifelengthViewer1;
-        private System.Windows.Forms.ComboBox comboBoxStorePosition;
-        private System.Windows.Forms.CheckBox checkBoxLLPMark;
-        private System.Windows.Forms.CheckBox checkBoxLLPCategories;
-        private System.Windows.Forms.NumericUpDown numericUpDownQuantity;
-        private System.Windows.Forms.ComboBox comboBoxMaintProc;
-        private System.Windows.Forms.Label labelComponentType;
-        private TreeDictionaryComboBox comboBoxComponentType;
-        private System.Windows.Forms.Label labelQuantity;
-        private System.Windows.Forms.Label labelLocation;
-        private System.Windows.Forms.Label labelBatchNumber;
-        private System.Windows.Forms.TextBox textBoxBatchNumber;
-        private System.Windows.Forms.Label labelIdNumber;
-        private System.Windows.Forms.TextBox textBoxIdNumber;
-        private System.Windows.Forms.Label labelThrust;
-        private System.Windows.Forms.TextBox textBoxThrust;
-        private System.Windows.Forms.CheckBox checkBoxDangerous;
-        private System.Windows.Forms.CheckBox checkBoxPOOL;
-        private System.Windows.Forms.Label labelProductCode;
-        private System.Windows.Forms.TextBox textBoxProductCode;
-        private System.Windows.Forms.Label labelStatus;
-        private System.Windows.Forms.ComboBox comboBoxStatus;
+		private System.Windows.Forms.TextBox textBoxALTPN;
+		private System.Windows.Forms.TextBox textBoxHushKit;
+		private System.Windows.Forms.Panel panelAvionicsInventory;
+		private System.Windows.Forms.RadioButton radioButtonInventoryOptional;
+		private System.Windows.Forms.RadioButton radioButtonInventoryRequired;
+		private System.Windows.Forms.RadioButton radioButtonAvionicsInventoryUnknown;
+		private ATAChapterComboBox comboBoxAtaChapter;
+		private System.Windows.Forms.TextBox textBoxDescription;
+		private System.Windows.Forms.TextBox textBoxManufacturer;
+		private System.Windows.Forms.TextBox textBoxPartNo;
+		private System.Windows.Forms.TextBox textBoxPosition;
+		private System.Windows.Forms.Panel panelLandingGearMark;
+		private System.Windows.Forms.RadioButton radioButtonLLG;
+		private System.Windows.Forms.RadioButton radioButtonNLG;
+		private System.Windows.Forms.RadioButton radioButtonRLG;
+		private System.Windows.Forms.TextBox textBoxSerialNo;
+		private System.Windows.Forms.TextBox textBoxMPDItem;
+		private System.Windows.Forms.TextBox textBoxMaxTakeOffWeight;
+		private System.Windows.Forms.DateTimePicker dateTimePickerManufactureDate;
+		private System.Windows.Forms.DateTimePicker dateTimePickerInstallationDate;
+		private System.Windows.Forms.Label labelCurrentTSNCSN;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.TextBox textBox2;
+		private LifelengthViewer lifelengthNotify;
+		private System.Windows.Forms.Label labelNotify;
+		private System.Windows.Forms.Label labelDeliverDate;
+		private System.Windows.Forms.DateTimePicker dateTimePickerDeliveryDate;
+		private System.Windows.Forms.DateTimePicker dateTimePicker1;
+		private LifelengthViewer lifelengthViewer1;
+		private System.Windows.Forms.ComboBox comboBoxStorePosition;
+		private System.Windows.Forms.CheckBox checkBoxLLPMark;
+		private System.Windows.Forms.CheckBox checkBoxLLPCategories;
+		private System.Windows.Forms.NumericUpDown numericUpDownQuantity;
+		private System.Windows.Forms.ComboBox comboBoxMaintProc;
+		private System.Windows.Forms.Label labelComponentType;
+		private TreeDictionaryComboBox comboBoxComponentType;
+		private System.Windows.Forms.Label labelQuantity;
+		private System.Windows.Forms.Label labelLocation;
+		private System.Windows.Forms.Label labelBatchNumber;
+		private System.Windows.Forms.TextBox textBoxBatchNumber;
+		private System.Windows.Forms.Label labelIdNumber;
+		private System.Windows.Forms.TextBox textBoxIdNumber;
+		private System.Windows.Forms.Label labelThrust;
+		private System.Windows.Forms.TextBox textBoxThrust;
+		private System.Windows.Forms.CheckBox checkBoxDangerous;
+		private System.Windows.Forms.CheckBox checkBoxPOOL;
+		private System.Windows.Forms.Label labelProductCode;
+		private System.Windows.Forms.TextBox textBoxProductCode;
+		private System.Windows.Forms.Label labelStatus;
+		private System.Windows.Forms.ComboBox comboBoxStatus;
 		private DictionaryComboBox dictionaryComboBoxLocation;
 		private System.Windows.Forms.Label labelDiscrepancy;
 		private System.Windows.Forms.TextBox textBoxDiscrepancy;

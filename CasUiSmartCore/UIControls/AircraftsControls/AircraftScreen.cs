@@ -1905,10 +1905,18 @@ namespace CAS.UI.UIControls.AircraftsControls
             e.DisplayerText = CurrentAircraft.RegistrationNumber + ". Monthly Utilization";
             e.RequestedEntity = new MonthlyUtilizationListScreen(CurrentAircraft);
         }
-        #endregion
+		#endregion
 
-        #region private void LinkNonRoutineJobsCategoriesDisplayerRequested(object sender, Interfaces.ReferenceEventArgs e)
-        private void LinkNonRoutineJobsCategoriesDisplayerRequested(object sender, Interfaces.ReferenceEventArgs e)
+		private void LinkOilDisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			CancelAsync();
+
+			e.DisplayerText = CurrentAircraft.RegistrationNumber + ". Oil Statistics";
+			e.RequestedEntity = new OilListScreen(CurrentAircraft);
+		}
+
+		#region private void LinkNonRoutineJobsCategoriesDisplayerRequested(object sender, Interfaces.ReferenceEventArgs e)
+		private void LinkNonRoutineJobsCategoriesDisplayerRequested(object sender, Interfaces.ReferenceEventArgs e)
         {
             CancelAsync();
 
@@ -2052,5 +2060,7 @@ namespace CAS.UI.UIControls.AircraftsControls
 			e.DisplayerText = "ATLB Event";
 			e.RequestedEntity = new AllATLBListScreen(CurrentAircraft);
 		}
-	}
+
+		
+    }
 }

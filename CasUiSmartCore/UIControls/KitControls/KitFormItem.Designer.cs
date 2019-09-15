@@ -1,38 +1,39 @@
 ﻿using CASTerms;
 using EntityCore.DTO.General;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.KitControls
 {
-    partial class KitFormItem
-    {
-        /// <summary> 
-        /// Требуется переменная конструктора.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class KitFormItem
+	{
+		/// <summary> 
+		/// Требуется переменная конструктора.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Освободить все используемые ресурсы.
-        /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
-        protected override void Dispose(bool disposing)
-        {
-	        comboBoxStandart.SelectedIndexChanged -= ComboBoxStandartSelectedIndexChanged;
+		/// <summary> 
+		/// Освободить все используемые ресурсы.
+		/// </summary>
+		/// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+		protected override void Dispose(bool disposing)
+		{
+			comboBoxStandart.SelectedIndexChanged -= ComboBoxStandartSelectedIndexChanged;
 
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Код, автоматически созданный конструктором компонентов
+		#region Код, автоматически созданный конструктором компонентов
 
-        /// <summary> 
-        /// Обязательный метод для поддержки конструктора - не изменяйте 
-        /// содержимое данного метода при помощи редактора кода.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary> 
+		/// Обязательный метод для поддержки конструктора - не изменяйте 
+		/// содержимое данного метода при помощи редактора кода.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.labelPartNumber = new System.Windows.Forms.Label();
 			this.textBoxPartNumber = new System.Windows.Forms.TextBox();
 			this.labelDescription = new System.Windows.Forms.Label();
@@ -134,10 +135,10 @@ namespace CAS.UI.UIControls.KitControls
 			this.numericCount.DecimalPlaces = 2;
 			this.numericCount.Location = new System.Drawing.Point(436, 86);
 			this.numericCount.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericCount.Name = "numericCount";
 			this.numericCount.Size = new System.Drawing.Size(114, 20);
 			this.numericCount.TabIndex = 6;
@@ -194,6 +195,7 @@ namespace CAS.UI.UIControls.KitControls
 			this.comboBoxDetailClass.RootNodesNames = null;
 			this.comboBoxDetailClass.Size = new System.Drawing.Size(228, 21);
 			this.comboBoxDetailClass.TabIndex = 2;
+			this.comboBoxDetailClass.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelType
 			// 
@@ -226,6 +228,7 @@ namespace CAS.UI.UIControls.KitControls
 			this.comboBoxMeasure.Name = "comboBoxMeasure";
 			this.comboBoxMeasure.Size = new System.Drawing.Size(116, 21);
 			this.comboBoxMeasure.TabIndex = 5;
+			this.comboBoxMeasure.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelMeasure
 			// 
@@ -284,6 +287,7 @@ namespace CAS.UI.UIControls.KitControls
 			this.comboBoxStandart.TabIndex = 1;
 			this.comboBoxStandart.Type = null;
 			this.comboBoxStandart.SelectedIndexChanged += new System.EventHandler(this.ComboBoxStandartSelectedIndexChanged);
+			this.comboBoxStandart.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// TextBoxProduct
 			// 
@@ -393,28 +397,28 @@ namespace CAS.UI.UIControls.KitControls
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private System.Windows.Forms.Label labelPartNumber;
-        private System.Windows.Forms.TextBox textBoxPartNumber;
-        private System.Windows.Forms.Label labelDescription;
-        private System.Windows.Forms.TextBox textBoxDescription;
-        private System.Windows.Forms.Label labelRemarks;
-        private System.Windows.Forms.TextBox textBoxRemarks;
-        private System.Windows.Forms.NumericUpDown numericCount;
-        private System.Windows.Forms.Label labelCount;
-        private AvControls.AvButtonT.AvButtonT ButtonDelete;
-        private Auxiliary.TreeDictionaryComboBox comboBoxDetailClass;
-        private System.Windows.Forms.Label labelType;
-        private System.Windows.Forms.Label labelAccessoryDescription;
-        private System.Windows.Forms.ComboBox comboBoxMeasure;
-        private System.Windows.Forms.Label labelMeasure;
-        private System.Windows.Forms.Label labelStandart;
-        private System.Windows.Forms.Label labelReference;
-        private System.Windows.Forms.TextBox textBoxReference;
-        private Auxiliary.LookupCombobox comboBoxStandart;
+		private System.Windows.Forms.Label labelPartNumber;
+		private System.Windows.Forms.TextBox textBoxPartNumber;
+		private System.Windows.Forms.Label labelDescription;
+		private System.Windows.Forms.TextBox textBoxDescription;
+		private System.Windows.Forms.Label labelRemarks;
+		private System.Windows.Forms.TextBox textBoxRemarks;
+		private System.Windows.Forms.NumericUpDown numericCount;
+		private System.Windows.Forms.Label labelCount;
+		private AvControls.AvButtonT.AvButtonT ButtonDelete;
+		private Auxiliary.TreeDictionaryComboBox comboBoxDetailClass;
+		private System.Windows.Forms.Label labelType;
+		private System.Windows.Forms.Label labelAccessoryDescription;
+		private System.Windows.Forms.ComboBox comboBoxMeasure;
+		private System.Windows.Forms.Label labelMeasure;
+		private System.Windows.Forms.Label labelStandart;
+		private System.Windows.Forms.Label labelReference;
+		private System.Windows.Forms.TextBox textBoxReference;
+		private Auxiliary.LookupCombobox comboBoxStandart;
 		private MetroFramework.Controls.MetroTextBox TextBoxProduct;
 		private System.Windows.Forms.LinkLabel linkLabel2;
 		private System.Windows.Forms.LinkLabel linkLabel1;

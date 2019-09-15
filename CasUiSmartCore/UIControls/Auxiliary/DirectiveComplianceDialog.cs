@@ -130,10 +130,10 @@ namespace CAS.UI.UIControls.Auxiliary
 			UpdateInformation();
 			if (_currentDirective is MaintenanceDirective || _currentDirective is Directive || _currentDirective is ComponentDirective)
 			{
-				this.ClientSize = new System.Drawing.Size(789, 388);
-				this.buttonOk.Location = new System.Drawing.Point(557, 361);
-				this.buttonCancel.Location = new System.Drawing.Point(638, 361);
-				this.buttonApply.Location = new System.Drawing.Point(719, 361);
+				this.Size = new System.Drawing.Size(789, 388);
+				//this.buttonOk.Location = new System.Drawing.Point(557, 401);
+				//this.buttonCancel.Location = new System.Drawing.Point(638, 401);
+				//this.buttonApply.Location = new System.Drawing.Point(719, 401);
 			}
 		}
 

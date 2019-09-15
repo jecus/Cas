@@ -751,16 +751,19 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="Telerik.WinControls, Version=2019.1.115.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DLL\Telerik\Telerik.WinControls.dll</HintPath>
     </Reference>
+    <Reference Include="Telerik.WinControls.ChartView, Version=2019.1.115.20, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
     <Reference Include="Telerik.WinControls.GridView, Version=2019.1.115.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DLL\Telerik\Telerik.WinControls.GridView.dll</HintPath>
     </Reference>
+    <Reference Include="Telerik.WinControls.Themes.TelerikMetro, Version=2019.1.115.20, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
     <Reference Include="Telerik.WinControls.Themes.TelerikMetroBlue, Version=2019.1.115.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DLL\Telerik\Telerik.WinControls.Themes.TelerikMetroBlue.dll</HintPath>
@@ -797,6 +800,38 @@
     <Compile Include="ExcelExport\DirectiveComparer.cs" />
     <Compile Include="ExcelExport\ExcelExportProvider.cs" />
     <Compile Include="Extentions.cs" />
+    <Compile Include="Helpers\CmbScrollHelper.cs" />
+    <Compile Include="UIControls\Fleet\ComponentsFleetListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Fleet\ComponentsFleetListScreen.Designer.cs">
+      <DependentUpon>ComponentsFleetListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Fleet\ComponentsFleetListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Fleet\ComponentsFleetListView.Designer.cs">
+      <DependentUpon>ComponentsFleetListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Fleet\DirectiveFleetListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Fleet\DirectiveFleetListScreen.Designer.cs">
+      <DependentUpon>DirectiveFleetListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Fleet\DirectiveFleetListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Fleet\DirectiveFleetListView.Designer.cs">
+      <DependentUpon>DirectiveFleetListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\OilControls\Model\OilGraphicModel.cs" />
+    <Compile Include="UIControls\OilControls\OilGraphForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\OilControls\OilGraphForm.Designer.cs">
+      <DependentUpon>OilGraphForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\ItemRelationHelper.cs" />
     <Compile Include="Helpers\ListViewGroupHelper.cs" />
@@ -1117,6 +1152,18 @@
     </Compile>
     <Compile Include="UIControls\NewGrid\BaseGridViewControl.Designer.cs">
       <DependentUpon>BaseGridViewControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\OilControls\OilListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\OilControls\OilListScreen.Designer.cs">
+      <DependentUpon>OilListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\OilControls\OilListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\OilControls\OilListView.Designer.cs">
+      <DependentUpon>OilListView.cs</DependentUpon>
     </Compile>
     <Compile Include="UIControls\OpepatorsControls\PasswordChangeForm.cs">
       <SubType>Form</SubType>
@@ -3908,6 +3955,18 @@
     <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="UIControls\Fleet\ComponentsFleetListScreen.resx">
+      <DependentUpon>ComponentsFleetListScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Fleet\ComponentsFleetListView.resx">
+      <DependentUpon>ComponentsFleetListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Fleet\DirectiveFleetListScreen.resx">
+      <DependentUpon>DirectiveFleetListScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\OilControls\OilGraphForm.resx">
+      <DependentUpon>OilGraphForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="UIControls\AircraftsControls\AircraftGeneralDataControls\AircraftApprovalControl.resx">
       <DependentUpon>AircraftApprovalControl.cs</DependentUpon>
@@ -4048,6 +4107,10 @@
       <DependentUpon>BaseGridViewControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\NonRoutineJobsControls\NonRoutineJobsListScreen.resx" />
+    <EmbeddedResource Include="UIControls\OilControls\OilListScreen.resx">
+      <DependentUpon>OilListScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIControls\OpepatorsControls\PasswordChangeForm.resx">
       <DependentUpon>PasswordChangeForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -5380,6 +5443,7 @@
     <Resource Include="Resources\ImageIcon_Small_Gray.png" />
     <None Include="Resources\ImageIcon_Small1.png" />
     <None Include="Resources\ImageIcon_Small_Gray1.png" />
+    <None Include="Resources\graph.png" />
     <Content Include="Resources\KitsIcon.png" />
     <Content Include="Resources\KitsIcon_gray.png" />
     <None Include="Resources\PreTransfer.png" />

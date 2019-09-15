@@ -92,7 +92,6 @@
 			this.Name = "AverageUtilizationForm";
 			this.Resizable = false;
 			this.ShowIcon = false;
-			this.ShowInTaskbar = false;
 			this.Text = "Average Utilization Form";
 			this.ResumeLayout(false);
 			this.PerformLayout();

@@ -750,6 +750,13 @@ namespace SmartCore.AircraftFlights
 			var flightsCrsIds = flights.Select(f => f.CrsId).Distinct().ToArray();
 			var crs = _newLoader.GetObjectList<CertificateOfReleaseToServiceDTO, CertificateOfReleaseToService>(new Filter("ItemId", flightsCrsIds));
 
+
+
+			var oilCondition = _newLoader.GetObjectList<ComponentOilConditionDTO, ComponentOilCondition>(new Filter("IteFlightIdmId", flightsIds));
+			foreach (var oil in oilCondition)
+				oil.BaseComponent = _componentCore.GetBaseComponentById(oil.ComponentId);
+
+
 			foreach (var flightRun in runUps)
 				flightRun.BaseComponent = _componentCore.GetBaseComponentById(flightRun.BaseComponentId);
 
@@ -761,6 +768,7 @@ namespace SmartCore.AircraftFlights
 
 			foreach (var t in flights)
 			{
+				t.OilConditionCollection = new CommonCollection<ComponentOilCondition>(oilCondition.Where(i => i.FlightId == t.ItemId));
 				t.RunupsCollection.AddRange(runUps.Where(r => r.FlightId == t.ItemId).ToArray());
 				t.PowerUnitTimeInRegimeCollection.AddRange(engimeInRegimeRecords.Where(r => r.FlightId == t.ItemId).ToArray());
 				t.CertificateOfReleaseToService = crs.FirstOrDefault(service => service.ItemId == t.CrsId);
@@ -798,6 +806,11 @@ namespace SmartCore.AircraftFlights
 			var flightsCrsIds = flights.Select(f => f.CrsId).Distinct().ToArray();
 			var crs = _newLoader.GetObjectList<CertificateOfReleaseToServiceDTO, CertificateOfReleaseToService>(new Filter("ItemId", flightsCrsIds));
 
+			var oilCondition = _newLoader.GetObjectList<ComponentOilConditionDTO, ComponentOilCondition>(new Filter("FlightId", flightsIds));
+			foreach (var oil in oilCondition)
+				oil.BaseComponent = _componentCore.GetBaseComponentById(oil.ComponentId);
+
+
 			foreach (var flightRun in runUps)
 				flightRun.BaseComponent = _componentCore.GetBaseComponentById(flightRun.BaseComponentId);
 
@@ -806,6 +819,7 @@ namespace SmartCore.AircraftFlights
 
 			foreach (var t in flights)
 			{
+				t.OilConditionCollection = new CommonCollection<ComponentOilCondition>(oilCondition.Where(i => i.FlightId == t.ItemId));
 				t.RunupsCollection.AddRange(runUps.Where(r => r.FlightId == t.ItemId).ToArray());
 				t.PowerUnitTimeInRegimeCollection.AddRange(engimeInRegimeRecords.Where(r => r.FlightId == t.ItemId).ToArray());
 				t.CertificateOfReleaseToService = crs.FirstOrDefault(service => service.ItemId == t.CrsId);

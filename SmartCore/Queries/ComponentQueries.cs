@@ -263,6 +263,17 @@ namespace SmartCore.Queries
         }
 		#endregion
 
+		public static string GetSelectQueryAll(
+			string text,
+			bool loadChild = false,
+			bool getDeleted = false)
+		{
+			List<ICommonFilter> allFilters = new List<ICommonFilter>();
+			string qrs = BaseQueries.GetSelectQueryWithWhere<Entities.General.Accessory.Component>(allFilters.ToArray(), loadChild, getDeleted);
+			return qrs + $" and (Components.PartNumber like '%{text}%' or Components.SerialNumber like '%{text}%' or Components.Description like '%{text}%')";
+
+		}
+
 		#region public static String GetSelectQuery(BaseComponent component, bool llpMark)
 		/// <summary>
 		/// Возвращает строку SQL запроса на селектирование данных из БД 

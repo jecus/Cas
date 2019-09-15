@@ -373,7 +373,8 @@ namespace SmartCore.Entities.NewLoader
 		{
 			TransferRecord lastTransfer = component.TransferRecords.GetLast();
 			if (lastTransfer == null)
-				throw new Exception($"1513: Component {component.ItemId} has no transfer records");
+				return;
+				//throw new Exception($"1513: Component {component.ItemId} has no transfer records");
 			//
 			if (lastTransfer.DestinationObjectType == SmartCoreType.Store)
 			{

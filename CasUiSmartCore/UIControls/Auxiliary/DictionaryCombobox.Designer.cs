@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.Auxiliary
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.Auxiliary
 {
     partial class DictionaryComboBox
     {
@@ -54,10 +56,11 @@
             this.comboBoxReason.TabIndex = 1;
             this.comboBoxReason.SelectedIndexChanged += new System.EventHandler(this.ComboBoxReasonSelectedIndexChanged);
             this.comboBoxReason.TextUpdate += new System.EventHandler(ComboBoxReasonTextUpdate);
-            // 
-            // buttonEdit
-            // 
-            this.buttonEdit.Dock = System.Windows.Forms.DockStyle.Right;
+            this.comboBoxReason.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// buttonEdit
+			// 
+			this.buttonEdit.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonEdit.Location = new System.Drawing.Point(146, 0);
             this.buttonEdit.Margin = new System.Windows.Forms.Padding(0);
             this.buttonEdit.Name = "buttonEdit";

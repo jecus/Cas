@@ -1,4 +1,5 @@
 ﻿using MetroFramework.Controls;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 {
@@ -57,6 +58,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			this.comboBoxAircrafts.Name = "comboBoxAircrafts";
 			this.comboBoxAircrafts.Size = new System.Drawing.Size(236, 22);
 			this.comboBoxAircrafts.TabIndex = 12;
+			this.comboBoxAircrafts.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// buttonOk
 			// 
@@ -100,7 +102,6 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			this.Name = "AddAircraftPlanOpsForm";
 			this.Resizable = false;
 			this.ShowIcon = false;
-			this.ShowInTaskbar = false;
 			this.Text = "Add Aircraft Plan Ops Form";
 			this.ResumeLayout(false);
 			this.PerformLayout();

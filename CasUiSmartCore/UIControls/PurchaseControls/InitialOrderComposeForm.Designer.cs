@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.PurchaseControls
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.PurchaseControls
 {
 	partial class InitialOrderComposeForm
 	{
@@ -103,6 +105,7 @@
 			this.comboBoxPriority.Size = new System.Drawing.Size(74, 21);
 			this.comboBoxPriority.TabIndex = 62;
 			this.comboBoxPriority.SelectedIndexChanged += new System.EventHandler(this.ComboBoxPrioritySelectedIndexChanged);
+			this.comboBoxPriority.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelPriority
 			// 
@@ -119,20 +122,20 @@
 			this.dataGridViewItems.AllowUserToAddRows = false;
 			this.dataGridViewItems.AllowUserToDeleteRows = false;
 			this.dataGridViewItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Left) 
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.dataGridViewItems.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
 			this.dataGridViewItems.BackgroundColor = System.Drawing.SystemColors.Window;
 			this.dataGridViewItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridViewItems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnProduct,
-            this.ColumnTask,
-            this.ColumnQuantity,
-            this.ColumnPriority,
-            this.ColumnNew,
-            this.ColumnServiceable,
-            this.ColumnOH,
-            this.ColumnRepair});
+			this.ColumnProduct,
+			this.ColumnTask,
+			this.ColumnQuantity,
+			this.ColumnPriority,
+			this.ColumnNew,
+			this.ColumnServiceable,
+			this.ColumnOH,
+			this.ColumnRepair});
 			this.dataGridViewItems.Location = new System.Drawing.Point(2, 83);
 			this.dataGridViewItems.Margin = new System.Windows.Forms.Padding(2);
 			this.dataGridViewItems.Name = "dataGridViewItems";
@@ -167,10 +170,10 @@
 			this.ColumnQuantity.DefaultCellStyle = dataGridViewCellStyle1;
 			this.ColumnQuantity.HeaderText = "Q-ty";
 			this.ColumnQuantity.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.ColumnQuantity.Name = "ColumnQuantity";
 			this.ColumnQuantity.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.ColumnQuantity.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;

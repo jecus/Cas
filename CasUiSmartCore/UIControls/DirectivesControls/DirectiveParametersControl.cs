@@ -15,6 +15,7 @@ using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Directives;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.DirectivesControls
 {
@@ -531,6 +532,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.comboBoxWorkType.Name = "comboBoxWorkType";
 			this.comboBoxWorkType.Size = new System.Drawing.Size(210, 22);
 			this.comboBoxWorkType.TabIndex = 196;
+			this.comboBoxWorkType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// _textboxCost
 			// 
@@ -798,6 +800,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.comboBoxNdt.Name = "comboBoxNdt";
 			this.comboBoxNdt.Size = new System.Drawing.Size(210, 21);
 			this.comboBoxNdt.TabIndex = 205;
+			this.comboBoxNdt.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// lookupComboboxForCompnt
 			// 
@@ -812,6 +815,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.lookupComboboxForCompnt.Size = new System.Drawing.Size(350, 22);
 			this.lookupComboboxForCompnt.TabIndex = 204;
 			this.lookupComboboxForCompnt.Type = null;
+			this.lookupComboboxForCompnt.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxSupersedes
 			// 
@@ -822,6 +826,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.comboBoxSupersedes.Size = new System.Drawing.Size(308, 21);
 			this.comboBoxSupersedes.TabIndex = 207;
 			this.comboBoxSupersedes.Visible = false;
+			this.comboBoxSupersedes.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelSupersedes
 			// 
@@ -845,6 +850,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.comboBoxSuperseded.Size = new System.Drawing.Size(308, 21);
 			this.comboBoxSuperseded.TabIndex = 209;
 			this.comboBoxSuperseded.Visible = false;
+			this.comboBoxSuperseded.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelSuperseded
 			// 
@@ -866,6 +872,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.comboBoxOrder.Name = "comboBoxOrder";
 			this.comboBoxOrder.Size = new System.Drawing.Size(308, 21);
 			this.comboBoxOrder.TabIndex = 211;
+			this.comboBoxOrder.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label3
 			// 
@@ -975,6 +982,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.comboBoxAffects.Name = "comboBoxAffects";
 			this.comboBoxAffects.Size = new System.Drawing.Size(308, 21);
 			this.comboBoxAffects.TabIndex = 221;
+			this.comboBoxAffects.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelAffects
 			// 
@@ -995,6 +1003,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.comboBoxReason.Name = "comboBoxReason";
 			this.comboBoxReason.Size = new System.Drawing.Size(308, 21);
 			this.comboBoxReason.TabIndex = 223;
+			this.comboBoxReason.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelReason
 			// 

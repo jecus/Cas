@@ -1,4 +1,6 @@
-﻿namespace CAS.UI.UIControls.FiltersControls
+﻿using CAS.UI.Helpers;
+
+namespace CAS.UI.UIControls.FiltersControls
 {
     partial class CommonStringFilterControl
     {
@@ -41,10 +43,11 @@
             this.comboBoxFilterType.Name = "comboBoxFilterType";
             this.comboBoxFilterType.Size = new System.Drawing.Size(61, 21);
             this.comboBoxFilterType.TabIndex = 1;
-            // 
-            // textBoxFilter
-            // 
-            this.textBoxFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.comboBoxFilterType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
+			// 
+			// textBoxFilter
+			// 
+			this.textBoxFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxFilter.Location = new System.Drawing.Point(67, 2);

@@ -1,52 +1,53 @@
 ﻿using AvControls.StatusImageLink;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.ComponentControls
 {
-    partial class ComponentCompliancePerformanceControl
-    {
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class ComponentCompliancePerformanceControl
+	{
+		/// <summary> 
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (lookupComboboxMaintenanceDirective != null)
-            {
-                lookupComboboxMaintenanceDirective.CancelAsync();
-                lookupComboboxMaintenanceDirective.SelectedIndexChanged -= LookupComboboxMaintenanceDirectiveSelectedIndexChanged;
-            }
-            if (disposing)
-            {
-                comboBoxMpdTaskType.Items.Clear();
-                comboBoxWorkType.Items.Clear();
-                comboBoxWorkType.SelectedIndexChanged -= ComboBoxWorkTypeSelectedIndexChanged;
-                linkLabelJobCard.LinkClicked -= LinkLabelJobCardLinkClicked;
-                linkLabelRemove.LinkClicked -= LinkLabelClearLinkClicked;
-                linkLabelEditKit.LinkClicked -= LinkLabelEditKitLinkClicked;
-                checkBoxClose.CheckedChanged -= CheckBoxCloseCheckedChanged;
-                extendableRichContainer.Extending -= ExtendableRichContainerExtending;
-            }
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary> 
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (lookupComboboxMaintenanceDirective != null)
+			{
+				lookupComboboxMaintenanceDirective.CancelAsync();
+				lookupComboboxMaintenanceDirective.SelectedIndexChanged -= LookupComboboxMaintenanceDirectiveSelectedIndexChanged;
+			}
+			if (disposing)
+			{
+				comboBoxMpdTaskType.Items.Clear();
+				comboBoxWorkType.Items.Clear();
+				comboBoxWorkType.SelectedIndexChanged -= ComboBoxWorkTypeSelectedIndexChanged;
+				linkLabelJobCard.LinkClicked -= LinkLabelJobCardLinkClicked;
+				linkLabelRemove.LinkClicked -= LinkLabelClearLinkClicked;
+				linkLabelEditKit.LinkClicked -= LinkLabelEditKitLinkClicked;
+				checkBoxClose.CheckedChanged -= CheckBoxCloseCheckedChanged;
+				extendableRichContainer.Extending -= ExtendableRichContainerExtending;
+			}
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Component Designer generated code
+		#region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary> 
+		/// Required method for Designer support - do not modify 
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.imageLinkLabelStatus = new AvControls.StatusImageLink.StatusImageLinkLabel();
 			this.comboBoxWorkType = new System.Windows.Forms.ComboBox();
 			this.labelParagraph = new System.Windows.Forms.Label();
@@ -132,6 +133,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxWorkType.Size = new System.Drawing.Size(263, 22);
 			this.comboBoxWorkType.TabIndex = 26;
 			this.comboBoxWorkType.SelectedIndexChanged += new System.EventHandler(this.ComboBoxWorkTypeSelectedIndexChanged);
+			this.comboBoxWorkType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelParagraph
 			// 
@@ -745,6 +747,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxRelationType.Name = "comboBoxRelationType";
 			this.comboBoxRelationType.Size = new System.Drawing.Size(351, 22);
 			this.comboBoxRelationType.TabIndex = 196;
+			this.comboBoxRelationType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxNdt
 			// 
@@ -755,6 +758,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxNdt.Name = "comboBoxNdt";
 			this.comboBoxNdt.Size = new System.Drawing.Size(306, 22);
 			this.comboBoxNdt.TabIndex = 194;
+			this.comboBoxNdt.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelNdt
 			// 
@@ -812,6 +816,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.lookupComboboxMaintenanceDirective.TabIndex = 190;
 			this.lookupComboboxMaintenanceDirective.Type = null;
 			this.lookupComboboxMaintenanceDirective.SelectedIndexChanged += new System.EventHandler(this.LookupComboboxMaintenanceDirectiveSelectedIndexChanged);
+			this.lookupComboboxMaintenanceDirective.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelMPDItem
 			// 
@@ -834,6 +839,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxMpdTaskType.Name = "comboBoxMpdTaskType";
 			this.comboBoxMpdTaskType.Size = new System.Drawing.Size(350, 22);
 			this.comboBoxMpdTaskType.TabIndex = 68;
+			this.comboBoxMpdTaskType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelEffectivityDate
 			// 
@@ -922,49 +928,49 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private StatusImageLinkLabel imageLinkLabelStatus;
-        private System.Windows.Forms.Label labelParagraph;
-        private System.Windows.Forms.TextBox textBoxParagraph;
-        private System.Windows.Forms.ComboBox comboBoxWorkType;
-        private System.Windows.Forms.Label labelManHours;
-        private System.Windows.Forms.Label labelCost;
-        private System.Windows.Forms.Label labelKitRequired;
-        private System.Windows.Forms.Label labelRemarks;
-        private System.Windows.Forms.LinkLabel linkLabelJobCard;
-        private System.Windows.Forms.TextBox textBoxManHours;
-        private System.Windows.Forms.TextBox textBoxCost;
-        private System.Windows.Forms.TextBox textBoxKitRequired;
-        private System.Windows.Forms.TextBox textBoxRemarks;
-        private LifelengthViewer lifelengthViewerRptInterval;
-        private LifelengthViewer lifelengthViewerRptNotify;
-        private LifelengthViewer lifelengthViewerWarranty;
-        private LifelengthViewer lifelengthViewerWarrantyNotify;
-        private System.Windows.Forms.LinkLabel linkLabelRemove;
-        private System.Windows.Forms.Label labelFAAForm;
-        private System.Windows.Forms.Label labelHiddenRemarks;
-        private System.Windows.Forms.TextBox textBoxHiddenRemarks;
-        private LifelengthViewer lifelengthViewer_FirstNotify;
-        private LifelengthViewer lifelengthViewer_FirstPerformance;
-        private System.Windows.Forms.RadioButton radio_WhicheverLater;
-        private System.Windows.Forms.RadioButton radio_WhicheverFirst;
-        public System.Windows.Forms.LinkLabel linkLabelEditKit;
-        private System.Windows.Forms.CheckBox checkBoxClose;
-        private System.Windows.Forms.GroupBox groupBoxClose;
-        private System.Windows.Forms.Panel _mainPanel;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Panel panelExtendable;
-        private ReferenceControls.ExtendableRichContainer extendableRichContainer;
-        private System.Windows.Forms.Label labelEffectivityDate;
-        private System.Windows.Forms.DateTimePicker dateTimePickerEffDate;
-        private System.Windows.Forms.ComboBox comboBoxMpdTaskType;
-        private LookupCombobox lookupComboboxMaintenanceDirective;
-        private System.Windows.Forms.Label labelMPDItem;
-        private System.Windows.Forms.Label labelMPDTaskType;
-        private AttachedFileControl fileControl;
+		private StatusImageLinkLabel imageLinkLabelStatus;
+		private System.Windows.Forms.Label labelParagraph;
+		private System.Windows.Forms.TextBox textBoxParagraph;
+		private System.Windows.Forms.ComboBox comboBoxWorkType;
+		private System.Windows.Forms.Label labelManHours;
+		private System.Windows.Forms.Label labelCost;
+		private System.Windows.Forms.Label labelKitRequired;
+		private System.Windows.Forms.Label labelRemarks;
+		private System.Windows.Forms.LinkLabel linkLabelJobCard;
+		private System.Windows.Forms.TextBox textBoxManHours;
+		private System.Windows.Forms.TextBox textBoxCost;
+		private System.Windows.Forms.TextBox textBoxKitRequired;
+		private System.Windows.Forms.TextBox textBoxRemarks;
+		private LifelengthViewer lifelengthViewerRptInterval;
+		private LifelengthViewer lifelengthViewerRptNotify;
+		private LifelengthViewer lifelengthViewerWarranty;
+		private LifelengthViewer lifelengthViewerWarrantyNotify;
+		private System.Windows.Forms.LinkLabel linkLabelRemove;
+		private System.Windows.Forms.Label labelFAAForm;
+		private System.Windows.Forms.Label labelHiddenRemarks;
+		private System.Windows.Forms.TextBox textBoxHiddenRemarks;
+		private LifelengthViewer lifelengthViewer_FirstNotify;
+		private LifelengthViewer lifelengthViewer_FirstPerformance;
+		private System.Windows.Forms.RadioButton radio_WhicheverLater;
+		private System.Windows.Forms.RadioButton radio_WhicheverFirst;
+		public System.Windows.Forms.LinkLabel linkLabelEditKit;
+		private System.Windows.Forms.CheckBox checkBoxClose;
+		private System.Windows.Forms.GroupBox groupBoxClose;
+		private System.Windows.Forms.Panel _mainPanel;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+		private System.Windows.Forms.Panel panelExtendable;
+		private ReferenceControls.ExtendableRichContainer extendableRichContainer;
+		private System.Windows.Forms.Label labelEffectivityDate;
+		private System.Windows.Forms.DateTimePicker dateTimePickerEffDate;
+		private System.Windows.Forms.ComboBox comboBoxMpdTaskType;
+		private LookupCombobox lookupComboboxMaintenanceDirective;
+		private System.Windows.Forms.Label labelMPDItem;
+		private System.Windows.Forms.Label labelMPDTaskType;
+		private AttachedFileControl fileControl;
 		private System.Windows.Forms.ComboBox comboBoxNdt;
 		private System.Windows.Forms.Label labelNdt;
 		private System.Windows.Forms.ComboBox comboBoxRelationType;
