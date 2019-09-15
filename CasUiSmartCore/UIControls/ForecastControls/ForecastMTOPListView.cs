@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
+using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Calculations;
@@ -12,6 +14,7 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
+using Telerik.WinControls.Data;
 using Telerik.WinControls.UI;
 
 
@@ -228,7 +231,7 @@ namespace CAS.UI.UIControls.ForecastControls
 			subItems.Add(CreateRow(item.MaintenanceCheck != null ? item.MaintenanceCheck.ToString() : "", item.MaintenanceCheck ));
 			subItems.Add(CreateRow(item.PerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)item.PerformanceDate), item.PerformanceDate ));
 
-			item.PerformanceSource?.Resemble(item.Parent.Threshold.FirstPerformanceSinceNew);
+			//item.PerformanceSource?.Resemble(item.Parent.Threshold.FirstPerformanceSinceNew);
 			
 			subItems.Add(CreateRow(item.PerformanceSource?.ToString(), item.PerformanceSource ));
 			if (item.Parent is MaintenanceDirective)
@@ -400,7 +403,7 @@ namespace CAS.UI.UIControls.ForecastControls
 
 		//	SetGroupsToItems(resultList, columnIndex);
 		//	itemsListView.Items.AddRange(resultList.OrderBy(lvi => Convert.ToDateTime(((NextPerformance)lvi.Tag).PerformanceDate).Date).ToArray());
-			
+
 		//}
 
 		#endregion
