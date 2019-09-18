@@ -825,6 +825,18 @@
     <Compile Include="UIControls\Fleet\DirectiveFleetListView.Designer.cs">
       <DependentUpon>DirectiveFleetListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\ForecastControls\ForecastListScreenMtopOld.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ForecastControls\ForecastListScreenMtopOld.Designer.cs">
+      <DependentUpon>ForecastListScreenMtopOld.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\ForecastControls\ForecastMTOPListViewOld.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ForecastControls\ForecastMTOPListViewOld.Designer.cs">
+      <DependentUpon>ForecastMTOPListViewOld.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\OilControls\Model\OilGraphicModel.cs" />
     <Compile Include="UIControls\OilControls\OilGraphForm.cs">
       <SubType>Form</SubType>
@@ -3963,6 +3975,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\Fleet\DirectiveFleetListScreen.resx">
       <DependentUpon>DirectiveFleetListScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ForecastControls\ForecastListScreenMtopOld.resx">
+      <DependentUpon>ForecastListScreenMtopOld.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\OilControls\OilGraphForm.resx">
       <DependentUpon>OilGraphForm.cs</DependentUpon>
