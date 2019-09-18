@@ -165,8 +165,8 @@ namespace CAS.UI.UIControls.OilControls
 			e.Element.BorderGradientStyle = Telerik.WinControls.GradientStyles.Solid;
 			ScatterDataPoint dataPoint = e.Points[0].DataPoint as ScatterDataPoint;
 			
-			e.Text = string.Format(@"<html><color='gray'>HRS:{0} Oil:{1}",
-				dataPoint.XValue, dataPoint.YValue);
+			e.Text = string.Format(@"<html><color='gray'>HRS:{0} Oil:{1:F}",
+				dataPoint.XValue, dataPoint.YValue.Value);
 		}
 	}
 }

@@ -690,6 +690,10 @@ namespace CAS.UI.UIControls.ComponentControls
 						foreach (BaseComponent baseDetail in baseComponentCollection)
 							if (types.Contains(baseDetail.MaintenanceControlProcess))preResult.Add(baseDetail);
 					}
+
+					((BaseComponent)DirectiveSource).ChangeLLPCategoryRecords
+						.AddRange(GlobalObjects.CasEnvironment.NewLoader
+							.GetObjectList<ComponentLLPCategoryChangeRecordDTO, ComponentLLPCategoryChangeRecord>(new Filter("ParentId", DirectiveSource.ItemId)));
 				}
 
 				if (DirectiveSource is Aircraft)
@@ -933,7 +937,6 @@ namespace CAS.UI.UIControls.ComponentControls
 							preResult.Add(detail);
 					}
 				}
-
 
 				var ids = new List<int>();
 
@@ -1979,7 +1982,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 
 			_builder.DateAsOf = DateTime.Today.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
-			if (_currentAircraft != null)
+			if (_currentAircraft != null && _currentBaseComponent == null)
 			{
 				if (sender == itemPrintReportMP)
 				{

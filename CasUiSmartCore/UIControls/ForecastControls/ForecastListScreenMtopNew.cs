@@ -473,7 +473,7 @@ namespace CAS.UI.UIControls.ForecastControls
 								i.ParentAircraftId == CurrentAircraft.ItemId && Equals(i.BaseComponentType, BaseComponentType.Frame));
 							var avg = _currentForecast.ForecastDatas[0].AverageUtilization;
 
-							var lastCompliance = checks.SelectMany(i => i.PerformanceRecords).OrderByDescending(i => i.RecordDate)
+							var lastCompliance = checks.Where(i => !i.IsZeroPhase).SelectMany(i => i.PerformanceRecords).OrderByDescending(i => i.RecordDate)
 								.FirstOrDefault();
 
 
@@ -497,6 +497,8 @@ namespace CAS.UI.UIControls.ForecastControls
 									.FirstOrDefault();
 								if (lowerZeroCheck != null)
 								{
+									lastCompliance = checks.Where(i => i.IsZeroPhase).SelectMany(i => i.PerformanceRecords).OrderByDescending(i => i.RecordDate)
+										.FirstOrDefault();
 									GlobalObjects.MTOPCalculator.CalculateMtopChecks(maintenanceZeroChecks, avg);
 
 									_groupLifelengthsForZeroCheck = GlobalObjects.MTOPCalculator.CalculateGroupNew(checks.Where(i => !i.Thresh.IsNullOrZero() && i.IsZeroPhase).ToList());

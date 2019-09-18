@@ -149,7 +149,7 @@ namespace CAS.UI.UIControls.MTOP
 					i.ParentAircraftId == CurrentAircraft.ItemId && Equals(i.BaseComponentType, BaseComponentType.Frame));
 				_averageUtilization = frame.AverageUtilization;
 
-				var lastCompliance = _maintenanceChecks.SelectMany(i => i.PerformanceRecords).OrderByDescending(i => i.RecordDate).FirstOrDefault();
+				var lastCompliance = _maintenanceChecks.Where(i => !i.IsZeroPhase).SelectMany(i => i.PerformanceRecords).OrderByDescending(i => i.RecordDate).FirstOrDefault();
 
 				GlobalObjects.MTOPCalculator.CalculateMtopChecks(_maintenanceChecks, _averageUtilization);
 
@@ -166,6 +166,8 @@ namespace CAS.UI.UIControls.MTOP
 				var lowerZeroCheck = _maintenanceZeroChecks.Where(i => !i.Thresh.IsNullOrZero()).OrderBy(i => i.Thresh).FirstOrDefault();
 				if (lowerZeroCheck != null)
 				{
+					lastCompliance = _maintenanceChecks.Where(i => i.IsZeroPhase).SelectMany(i => i.PerformanceRecords).OrderByDescending(i => i.RecordDate).FirstOrDefault();
+
 					GlobalObjects.MTOPCalculator.CalculateMtopChecks(_maintenanceZeroChecks, _averageUtilization);
 
 					_groupLifelengthsForZeroCheck = GlobalObjects.MTOPCalculator.CalculateGroupNew(_maintenanceZeroChecks);

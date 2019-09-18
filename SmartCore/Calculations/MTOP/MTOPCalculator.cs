@@ -288,7 +288,7 @@ namespace SmartCore.Calculations.MTOP
 
 				foreach (var lifelength in groupLifelengths)
 					{
-						if (tempHours.Days == lifelength.Value.Days)
+						if (tempHours.Hours == lifelength.Value.Hours)
 						{
 							if (lifelength.Key >= lastGroup)
 							{
@@ -340,8 +340,6 @@ namespace SmartCore.Calculations.MTOP
 								if (current.Hours == value.Hours || current.Cycles == value.Cycles || current.Days == value.Days)
 									np.Condition = ConditionState.Notify;
 
-
-
 								check.NextPerformances.Add(np);
 							}
 
@@ -359,7 +357,7 @@ namespace SmartCore.Calculations.MTOP
 					foreach (var lifelength in groupLifelengths)
 					{
 						//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-						if (tempHours.Days == lifelength.Value.Days)
+						if (tempHours.Hours == lifelength.Value.Hours)
 						{
 							var np = new NextPerformance();
 							np.PerformanceSource = new Lifelength();
@@ -452,9 +450,9 @@ namespace SmartCore.Calculations.MTOP
 
 			var preRes = new Dictionary<int, Lifelength>();
 			var q = 1;
-			foreach (var lifelength in list.OrderBy(i => i.Days))
+			foreach (var lifelength in list.OrderBy(i => i.Hours))
 			{
-				if (!preRes.Any(i => i.Value.Days == lifelength.Days))
+				if (!preRes.Any(i => i.Value.Hours == lifelength.Hours))
 				{
 					preRes.Add(q, lifelength);
 					res.Add(q, lifelength);
@@ -991,7 +989,7 @@ namespace SmartCore.Calculations.MTOP
 			directive.MTOPPhase = new Phase();
 			directive.MTOPPhase.IsZeroPhase = isZeroPhase;
 
-			var check = checks.LastOrDefault(i => i.PhaseThresh.Days <= tempHours.Days);
+			var check = checks.LastOrDefault(i => i.PhaseThresh.Hours <= tempHours.Hours);
 			if(check?.NextPerformancesWithIgnorLast == null) return;
 
 			foreach (var n in check.NextPerformancesWithIgnorLast)
@@ -1000,7 +998,7 @@ namespace SmartCore.Calculations.MTOP
 					break;
 
 				if (directive.MTOPPhase.FirstPhase == 0)
-					directive.MTOPPhase.FirstPhase = check.NextPerformancesWithIgnorLast.LastOrDefault(i => i.PerformanceSource.Days.Value <= tempHours.Days)?.Group ?? 0;
+					directive.MTOPPhase.FirstPhase = check.NextPerformancesWithIgnorLast.LastOrDefault(i => i.PerformanceSource.Hours.Value <= tempHours.Hours)?.Group ?? 0;
 				else if (directive.MTOPPhase.SecondPhase == 0 || directive.MTOPPhase.FirstPhase == directive.MTOPPhase.SecondPhase)
 				{
 
@@ -1010,9 +1008,9 @@ namespace SmartCore.Calculations.MTOP
 					}
 					else
 					{
-						if (check.NextPerformancesWithIgnorLast.LastOrDefault().PerformanceSource.Days >= tempHours.Days)
+						if (check.NextPerformancesWithIgnorLast.LastOrDefault().PerformanceSource.Hours >= tempHours.Hours)
 							directive.MTOPPhase.SecondPhase = check.NextPerformancesWithIgnorLast
-								.LastOrDefault(i => i.PerformanceSource.Days.Value <= tempHours.Days).Group;
+								.LastOrDefault(i => i.PerformanceSource.Hours.Value <= tempHours.Hours).Group;
 						else
 							directive.MTOPPhase.SecondPhase = directive.MTOPPhase.FirstPhase * 2;
 					}

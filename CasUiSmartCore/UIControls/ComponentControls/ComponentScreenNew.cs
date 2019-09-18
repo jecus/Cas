@@ -221,6 +221,9 @@ namespace CAS.UI.UIControls.ComponentControls
 							new CommonFilter<int>(Document.ParentTypeIdProperty, FilterType.In, types)
 						});
 
+						_currentComponent.ChangeLLPCategoryRecords
+							.AddRange(GlobalObjects.CasEnvironment.NewLoader
+								.GetObjectList<ComponentLLPCategoryChangeRecordDTO, ComponentLLPCategoryChangeRecord>(new Filter("ParentId", _currentComponent.ItemId)));
 
 						_workParams = GlobalObjects.CasEnvironment.NewLoader
 							.GetObjectList<ComponentWorkInRegimeParamDTO, ComponentWorkInRegimeParams>(new List<Filter>()
