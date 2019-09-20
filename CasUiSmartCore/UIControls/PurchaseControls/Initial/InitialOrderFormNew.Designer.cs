@@ -342,10 +342,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.numericUpDownQuantity.DecimalPlaces = 2;
 			this.numericUpDownQuantity.Location = new System.Drawing.Point(118, 223);
 			this.numericUpDownQuantity.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownQuantity.Name = "numericUpDownQuantity";
 			this.numericUpDownQuantity.Size = new System.Drawing.Size(50, 20);
 			this.numericUpDownQuantity.TabIndex = 142;
@@ -1078,21 +1078,21 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.buttonAddProd.Text = "Add New Product";
 			this.buttonAddProd.Click += new System.EventHandler(this.ButtonAddProduct_Click);
 			// 
-			// documentControl2
-			// 
-			this.documentControl2.CurrentDocument = null;
-			this.documentControl2.Location = new System.Drawing.Point(1016, 29);
-			this.documentControl2.Name = "documentControl2";
-			this.documentControl2.Size = new System.Drawing.Size(268, 41);
-			this.documentControl2.TabIndex = 305;
-			// 
 			// documentControl1
 			// 
 			this.documentControl1.CurrentDocument = null;
-			this.documentControl1.Location = new System.Drawing.Point(1016, 76);
+			this.documentControl1.Location = new System.Drawing.Point(1016, 29);
 			this.documentControl1.Name = "documentControl1";
 			this.documentControl1.Size = new System.Drawing.Size(268, 41);
-			this.documentControl1.TabIndex = 306;
+			this.documentControl1.TabIndex = 305;
+			// 
+			// documentControl2
+			// 
+			this.documentControl2.CurrentDocument = null;
+			this.documentControl2.Location = new System.Drawing.Point(1016, 76);
+			this.documentControl2.Name = "documentControl2";
+			this.documentControl2.Size = new System.Drawing.Size(268, 41);
+			this.documentControl2.TabIndex = 306;
 			// 
 			// documentControl3
 			// 

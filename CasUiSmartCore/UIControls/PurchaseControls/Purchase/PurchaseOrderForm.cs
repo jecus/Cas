@@ -4,7 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -14,26 +17,29 @@ using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {
-    public partial class PurchaseOrderForm : MetroForm
-    {
+	public partial class PurchaseOrderForm : MetroForm
+	{
 		#region Fields
 
 		private List<PurchaseRequestRecord> _addedRecord = new List<PurchaseRequestRecord>();
 
 		private PurchaseOrder _order;
+		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
 
 		#endregion
 
 		#region Constructor
 
 		public PurchaseOrderForm()
-	    {
-		    InitializeComponent();
+		{
+			InitializeComponent();
 		}
 
 		public PurchaseOrderForm(PurchaseOrder order):this()
 		{
 			_order = order;
+
+			DocumentControls.AddRange(new[] { documentControl1, documentControl2, documentControl3, documentControl4, documentControl5, documentControl6, documentControl7, documentControl8, documentControl9, documentControl10 });
 
 			Task.Run(() => DoWork())
 				.ContinueWith(task => Completed(), TaskScheduler.FromCurrentSynchronizationContext());
@@ -68,6 +74,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				record.Product = products.FirstOrDefault(i => i.ItemId == record.PackageItemId);
 				record.Supplier = suppliers.FirstOrDefault(i => i.ItemId == record.SupplierId);
 			}
+			var documents = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DocumentDTO, Document>(new Filter("ParentID", _order.ItemId), true);
+			_order.ClosingDocument.Clear();
+			_order.ClosingDocument.AddRange(documents);
 
 			_addedRecord.AddRange(records);
 		}
@@ -107,6 +116,45 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 			comboBoxCurrency.Items.Clear();
 			comboBoxCurrency.Items.AddRange(Сurrency.Items.ToArray());
+
+			foreach (var control in DocumentControls)
+				control.Added += DocumentControl1_Added;
+
+			for (int i = 0; i < _order.ClosingDocument.Count; i++)
+			{
+				var control = DocumentControls[i];
+				control.CurrentDocument = _order.ClosingDocument[i];
+			}
+		}
+
+		#endregion
+
+		#region private void DocumentControl1_Added(object sender, EventArgs e)
+
+		private void DocumentControl1_Added(object sender, EventArgs e)
+		{
+			var control = sender as DocumentControl;
+			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Work package") as DocumentSubType;
+			var newDocument = new Document
+			{
+				Parent = _order,
+				ParentId = _order.ItemId,
+				ParentTypeId = _order.SmartCoreObjectType.ItemId,
+				DocType = DocumentType.TechnicalRecords,
+				DocumentSubType = docSubType,
+				IsClosed = true,
+				ContractNumber = $"{_order.Number}",
+				Description = _order.Title,
+				ParentAircraftId = _order.ParentId
+			};
+
+			var form = new DocumentForm(newDocument, false);
+			if (form.ShowDialog() == DialogResult.OK)
+			{
+				_order.ClosingDocument.Add(newDocument);
+				control.CurrentDocument = newDocument;
+
+			}
 		}
 
 		#endregion

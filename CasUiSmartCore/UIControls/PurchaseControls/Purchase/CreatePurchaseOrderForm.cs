@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
 using EntityCore.DTO.General;
 using EntityCore.Filter;
@@ -16,8 +17,8 @@ using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {
-    public partial class CreatePurchaseOrderForm : MetroForm
-    {
+	public partial class CreatePurchaseOrderForm : MetroForm
+	{
 		#region Fields
 
 		private List<PurchaseRequestRecord> _addedRecord = new List<PurchaseRequestRecord>();
@@ -25,14 +26,15 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private readonly RequestForQuotation _quotation;
 		private List<SupplierPrice> _prices = new List<SupplierPrice>();
 		private PurchaseOrder _order;
+		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
 
 		#endregion
 
 		#region Constructor
 
 		public CreatePurchaseOrderForm()
-	    {
-		    InitializeComponent();
+		{
+			InitializeComponent();
 		}
 
 		public CreatePurchaseOrderForm(RequestForQuotation quotation):this()
@@ -48,7 +50,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				Author = _quotation.Author,
 				Remarks = _quotation.Remarks,
 				Number = _quotation.Number,
-			}; 
+			};
+
+			DocumentControls.AddRange(new[] { documentControl1, documentControl2, documentControl3, documentControl4, documentControl5, documentControl6, documentControl7, documentControl8, documentControl9, documentControl10 });
 
 			Task.Run(() => DoWork())
 				.ContinueWith(task => Completed(), TaskScheduler.FromCurrentSynchronizationContext());
@@ -127,6 +131,39 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 			comboBoxCurrency.Items.Clear();
 			comboBoxCurrency.Items.AddRange(Сurrency.Items.ToArray());
+
+			foreach (var control in DocumentControls)
+				control.Added += DocumentControl1_Added;
+		}
+
+		#endregion
+
+		#region private void DocumentControl1_Added(object sender, EventArgs e)
+
+		private void DocumentControl1_Added(object sender, EventArgs e)
+		{
+			var control = sender as DocumentControl;
+			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Work package") as DocumentSubType;
+			var newDocument = new Document
+			{
+				Parent = _order,
+				ParentId = _order.ItemId,
+				ParentTypeId = _order.SmartCoreObjectType.ItemId,
+				DocType = DocumentType.TechnicalRecords,
+				DocumentSubType = docSubType,
+				IsClosed = true,
+				ContractNumber = $"{_order.Number}",
+				Description = _order.Title,
+				ParentAircraftId = _order.ParentId
+			};
+
+			var form = new DocumentForm(newDocument, false);
+			if (form.ShowDialog() == DialogResult.OK)
+			{
+				_order.ClosingDocument.Add(newDocument);
+				control.CurrentDocument = newDocument;
+
+			}
 		}
 
 		#endregion

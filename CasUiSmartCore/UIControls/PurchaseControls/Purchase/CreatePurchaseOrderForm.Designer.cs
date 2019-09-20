@@ -759,21 +759,21 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.quatationSupplierPriceListView1.SortMultiplier = 1;
 			this.quatationSupplierPriceListView1.TabIndex = 295;
 			// 
-			// documentControl2
-			// 
-			this.documentControl2.CurrentDocument = null;
-			this.documentControl2.Location = new System.Drawing.Point(1016, 66);
-			this.documentControl2.Name = "documentControl2";
-			this.documentControl2.Size = new System.Drawing.Size(259, 41);
-			this.documentControl2.TabIndex = 296;
-			// 
 			// documentControl1
 			// 
 			this.documentControl1.CurrentDocument = null;
-			this.documentControl1.Location = new System.Drawing.Point(1016, 113);
+			this.documentControl1.Location = new System.Drawing.Point(1016, 66);
 			this.documentControl1.Name = "documentControl1";
 			this.documentControl1.Size = new System.Drawing.Size(259, 41);
-			this.documentControl1.TabIndex = 297;
+			this.documentControl1.TabIndex = 296;
+			// 
+			// documentControl2
+			// 
+			this.documentControl2.CurrentDocument = null;
+			this.documentControl2.Location = new System.Drawing.Point(1016, 113);
+			this.documentControl2.Name = "documentControl2";
+			this.documentControl2.Size = new System.Drawing.Size(259, 41);
+			this.documentControl2.TabIndex = 297;
 			// 
 			// documentControl3
 			// 
