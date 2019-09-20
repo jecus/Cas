@@ -72,6 +72,9 @@ namespace CAS.UI.UIControls.ForecastControls
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Overdue/Remain" };
 			ColumnHeaderList.Add(columnHeader);
 
+			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Last" };
+			ColumnHeaderList.Add(columnHeader);
+
 			columnHeader = new ColumnHeader { Width = (int)(itemsListView.Width * 0.1f), Text = "Kit" };
 			ColumnHeaderList.Add(columnHeader);
 
@@ -277,6 +280,7 @@ namespace CAS.UI.UIControls.ForecastControls
 			else subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Parent.Threshold.RepeatInterval.ToString(), Tag = item.Parent.Threshold.RepeatInterval });
 
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Remains.ToString(), Tag = item.Remains });
+			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.Parent.LastPerformance?.ToString(), Tag = item.Parent.LastPerformance });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = item.KitsToString, Tag = item.Kits?.Count });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = manHours.ToString(), Tag = manHours });
 			subItems.Add(new ListViewItem.ListViewSubItem { Text = cost.ToString(), Tag = cost });
