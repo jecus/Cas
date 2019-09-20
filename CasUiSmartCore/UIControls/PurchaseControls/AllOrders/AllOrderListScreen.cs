@@ -11,10 +11,13 @@ using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.PurchaseControls.Initial;
 using CAS.UI.UIControls.PurchaseControls.Purchase;
 using CASTerms;
+using EntityCore.DTO.Dictionaries;
 using EntityCore.DTO.General;
+using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Filters;
 using SmartCore.Purchase;
@@ -293,9 +296,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			_contextMenuStrip.Items.Clear();
 
 			
-			_contextMenuStrip.Items.AddRange(_toolStripMenuItemCreatePurchase,
-													new RadMenuSeparatorItem(),
-													_toolStripMenuItemPublish,
+			_contextMenuStrip.Items.AddRange(_toolStripMenuItemPublish,
 													_toolStripMenuItemClose,
 													_toolStripSeparator1,
 													_toolStripMenuItemEdit,
@@ -309,12 +310,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 
 		private void _toolStripMenuItemCreatePurchase_Click(object sender, EventArgs e)
 		{
-			var editForm = new CreatePurchaseOrderForm(_directivesViewer.SelectedItems[0] as RequestForQuotation);
-			if (editForm.ShowDialog() == DialogResult.OK)
-			{
-				MessageBox.Show("Create purchase successful", "Message infomation", MessageBoxButtons.OK,
-					MessageBoxIcon.Information);
-			}
+			
 		}
 
 		#endregion
@@ -393,23 +389,89 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 
 		private void _toolStripMenuItemPublish_Click(object sender, EventArgs e)
 		{
-			foreach (var rfq in _directivesViewer.SelectedItems)
+			if (_directivesViewer.SelectedItems[0] is RequestForQuotation)
 			{
-				if (rfq.Status == WorkPackageStatus.Published)
+				var editForm = new CreatePurchaseOrderForm(_directivesViewer.SelectedItems[0] as RequestForQuotation);
+				if (editForm.ShowDialog() == DialogResult.OK)
 				{
-					MessageBox.Show("Initional Order " + rfq.Title + " is already publisher.",
-						(string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
-						MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-					continue;
+					MessageBox.Show("Create purchase successful", "Message infomation", MessageBoxButtons.OK,
+						MessageBoxIcon.Information);
+
+					foreach (var rfq in _directivesViewer.SelectedItems)
+					{
+						if (rfq.Status == WorkPackageStatus.Published)
+						{
+							MessageBox.Show("Initional Order " + rfq.Title + " is already publisher.",
+								(string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
+								MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+							continue;
+						}
+
+						rfq.Status = WorkPackageStatus.Published;
+						rfq.PublishingDate = DateTime.Now;
+						rfq.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
+						rfq.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
+						GlobalObjects.CasEnvironment.NewKeeper.Save(rfq as BaseEntityObject);
+					}
+					AnimatedThreadWorker.RunWorkerAsync();
+				}
+			}
+			else if (_directivesViewer.SelectedItems[0] is InitialOrder)
+			{
+				var initial = _directivesViewer.SelectedItems[0] as InitialOrder;
+				var quatation = new RequestForQuotation
+				{
+					Parent = initial,
+					ParentType = initial.SmartCoreObjectType,
+					Title = initial.Title,
+					OpeningDate = DateTime.Now,
+					Author = initial.Author,
+					Remarks = initial.Remarks,
+					Number = initial.Number,
+				};
+
+				GlobalObjects.CasEnvironment.NewKeeper.Save(quatation);
+
+				var initialRecords = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(new Filter("ParentPackageId", initial.ItemId));
+				var ids = initialRecords.Select(i => i.ProductId);
+				if (ids.Count() > 0)
+				{
+					var product = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AccessoryDescriptionDTO, Product>(new Filter("ItemId", ids));
+					foreach (var addedInitialOrderRecord in initialRecords)
+						addedInitialOrderRecord.Product = product.FirstOrDefault(i => i.ItemId == addedInitialOrderRecord.ProductId);
 				}
 
-				rfq.Status = WorkPackageStatus.Published;
-				rfq.PublishingDate = DateTime.Now;
-				rfq.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
-				rfq.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
-				GlobalObjects.CasEnvironment.NewKeeper.Save(rfq as BaseEntityObject);
+				foreach (var record in initialRecords)
+				{
+					var newquatationRecord = new RequestForQuotationRecord(quatation.ItemId, record.Product, record.Quantity);
+					newquatationRecord.Priority = record.Priority;
+					newquatationRecord.Measure = record.Measure;
+					newquatationRecord.DeferredCategory = record.DeferredCategory;
+					newquatationRecord.CostCondition = record.CostCondition;
+					newquatationRecord.DestinationObjectType = record.DestinationObjectType;
+					newquatationRecord.DestinationObjectId = record.DestinationObjectId;
+					newquatationRecord.InitialReason = record.InitialReason;
+					newquatationRecord.Remarks = record.Remarks;
+					newquatationRecord.LifeLimit = new Lifelength(record.LifeLimit);
+					newquatationRecord.LifeLimitNotify = new Lifelength(record.LifeLimitNotify);
+
+					GlobalObjects.CasEnvironment.Keeper.Save(newquatationRecord);
+				}
+				
+				initial.Status = WorkPackageStatus.Published;
+				initial.PublishingDate = DateTime.Now;
+				initial.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
+				initial.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
+				GlobalObjects.CasEnvironment.NewKeeper.Save(initial);
+
+				var form = new QuatationOrderFormNew(quatation);
+				if (form.ShowDialog() == DialogResult.OK)
+				{
+					MessageBox.Show("Create quatation successful", "Message infomation", MessageBoxButtons.OK,
+						MessageBoxIcon.Information);
+					AnimatedThreadWorker.RunWorkerAsync();
+				}
 			}
-			AnimatedThreadWorker.RunWorkerAsync();
 		}
 
 		#endregion
@@ -498,9 +560,9 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 
 		private void ButtonAddNewClick(object sender, EventArgs e)
 		{
-			//var form = new InitialOrderFormNew(new InitialOrder(){ParentId = CurrentParent.ItemId, ParentType = CurrentParent.SmartCoreObjectType});
-			//if(form.ShowDialog() == DialogResult.OK)
-			//    AnimatedThreadWorker.RunWorkerAsync(); 
+			var form = new InitialOrderFormNew(new InitialOrder() { ParentId = CurrentParent.ItemId, ParentType = CurrentParent.SmartCoreObjectType });
+			if (form.ShowDialog() == DialogResult.OK)
+				AnimatedThreadWorker.RunWorkerAsync();
 		}
 		#endregion
 

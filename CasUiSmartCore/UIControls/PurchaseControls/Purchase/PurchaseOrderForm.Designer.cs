@@ -72,7 +72,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.labelQOTitle = new MetroFramework.Controls.MetroLabel();
 			this.buttonOk = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
-			this.purchaseRecordListView1 = new CAS.UI.UIControls.PurchaseControls.Quatation.PurchaseRecordListView(true);
+			this.purchaseRecordListView1 = new CAS.UI.UIControls.PurchaseControls.Purchase.PurchaseRecordListView(true);
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
@@ -765,7 +765,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private MetroLabel metroLabelNumber;
 		private System.Windows.Forms.NumericUpDown numericUpDown1;
 		private MetroLabel metroLabel1;
-		private Quatation.PurchaseRecordListView purchaseRecordListView1;
+		private Purchase.PurchaseRecordListView purchaseRecordListView1;
 		private System.Windows.Forms.ComboBox comboBoxCurrency;
 		private MetroLabel metroLabel2;
 	}

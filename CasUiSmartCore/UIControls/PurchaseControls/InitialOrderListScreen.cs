@@ -211,7 +211,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_toolStripMenuItemEdit.Text = "Edit";
 			_toolStripMenuItemEdit.Click += ToolStripMenuItemEditClick;
 
-			_toolStripMenuItemCreateQuatation.Text = "Create Quatation Order";
+			_toolStripMenuItemCreateQuatation.Text = "Publish";
 			_toolStripMenuItemCreateQuatation.Click += _toolStripMenuItemCreateQuatation_Click; ;
 			// 
 			// toolStripMenuItemClose
@@ -228,7 +228,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_contextMenuStrip.Items.AddRange(new RadItem[]
 												{
 													_toolStripMenuItemCreateQuatation,
-													new RadMenuSeparatorItem(),
 													_toolStripMenuItemClose,
 													_toolStripSeparator1,
 													_toolStripMenuItemEdit,

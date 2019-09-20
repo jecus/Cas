@@ -3,7 +3,7 @@ using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Purchase;
 
-namespace CAS.UI.UIControls.PurchaseControls.Quatation
+namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {
 	public partial class PurchaseRecordListView : BaseGridViewControl<PurchaseRequestRecord>
 	{

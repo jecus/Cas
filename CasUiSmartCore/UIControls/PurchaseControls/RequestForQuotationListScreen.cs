@@ -206,7 +206,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_contextMenuStrip.Name = "_contextMenuStrip";
 			_contextMenuStrip.Size = new Size(179, 176);
 
-			_toolStripMenuItemCreatePurchase.Text = "Create Purchase Order";
+			_toolStripMenuItemCreatePurchase.Text = "Publish";
 			_toolStripMenuItemCreatePurchase.Click += _toolStripMenuItemCreatePurchase_Click; ;
 
 			_toolStripMenuItemEdit.Text = "Edit";
@@ -228,7 +228,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_contextMenuStrip.Items.AddRange(new RadItem[]
 												{
 													_toolStripMenuItemCreatePurchase,
-													new RadMenuSeparatorItem(),
 													_toolStripMenuItemClose,
 													_toolStripSeparator1,
 													_toolStripMenuItemEdit,
