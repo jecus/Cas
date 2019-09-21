@@ -391,6 +391,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				GlobalObjects.CasEnvironment.Keeper.Save(record);
 			}
 
+			foreach (var doc in _order.ClosingDocument)
+			{
+				doc.ParentId = _order.ItemId;
+				GlobalObjects.CasEnvironment.Keeper.Save(doc);
+			}
+
 			DialogResult = DialogResult.OK;
 		}
 
