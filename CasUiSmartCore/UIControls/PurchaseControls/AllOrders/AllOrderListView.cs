@@ -23,7 +23,10 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
         {
             OldColumnIndex = 0;
             SortMultiplier = 0;
-            InitializeComponent();
+
+            IgnoreEnterPress = true;
+
+			InitializeComponent();
         }
 		#endregion
 
@@ -140,6 +143,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
         }
 
         #endregion
+
 
         #endregion
     }
