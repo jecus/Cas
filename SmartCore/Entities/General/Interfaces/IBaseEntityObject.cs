@@ -29,15 +29,19 @@ namespace SmartCore.Entities.General.Interfaces
         /// Идентификатор записи
         /// </summary>
         Int32 ItemId { get; set; }
-        #endregion
+		#endregion
 
-        #region IBaseEntityObject GetCopyUnsaved();
-        /// <summary>
-        /// Возвращает полную копию объекта (полностью копирую вложенные элементы и коллекции),
-        /// <br/>с ItemId равным -1
-        /// </summary>
-        /// <returns></returns>
-        IBaseEntityObject GetCopyUnsaved();
+		DateTime Updated { get; }
+
+		int CorrectorId { get; set; }
+
+		#region IBaseEntityObject GetCopyUnsaved();
+		/// <summary>
+		/// Возвращает полную копию объекта (полностью копирую вложенные элементы и коллекции),
+		/// <br/>с ItemId равным -1
+		/// </summary>
+		/// <returns></returns>
+		IBaseEntityObject GetCopyUnsaved();
         #endregion
     }
 }

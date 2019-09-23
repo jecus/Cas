@@ -45,7 +45,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 		protected override List<CustomCell> GetListViewSubItems(ILogistic item)
         {
             var subItems = new List<CustomCell>();
-            var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+            var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
             var type = "";
             if (item is InitialOrder)

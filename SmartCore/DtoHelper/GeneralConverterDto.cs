@@ -60,6 +60,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = required.ItemId,
 				IsDeleted = required.IsDeleted,
+				Updated = required.Updated,
 				CorrectorId = required.CorrectorId,
 				ParentId = required.ParentId ?? -1,
 				ParentTypeId = required.ParentTypeId ?? default(int),

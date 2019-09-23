@@ -26,6 +26,7 @@ using SmartCore.Entities.Collections;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities;
+using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.NewLoader;
 using SmartCore.ObjectCache;
 using SmartCore.Queries;
@@ -206,13 +207,18 @@ namespace SmartCore
 			return Users.ContainsKey(id) ? Users[id] : "Unknown";
 		}
 
+		public string GetCorrector(IBaseEntityObject entity)
+		{
+			return Users.ContainsKey(entity.CorrectorId) ? $"{Users[entity.CorrectorId]} ({Auxiliary.Convert.GetDateFormat(entity.Updated)})" : "Unknown";
+		}
+
 		#endregion
 
 		/*
 		* Выполнение запросов
 		*/
 
-	    public DataSet Execute(string sql)
+		public DataSet Execute(string sql)
 	    {
 		    return _apiProvider.Execute(sql);
 	    }

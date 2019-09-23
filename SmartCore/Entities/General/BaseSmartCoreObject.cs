@@ -41,13 +41,20 @@ namespace SmartCore.Entities.General
                 }
             }
         }
-        #endregion
+		#endregion
 
-        #region public Int32 ItemId { get; set; }
-        /// <summary>
-        /// Идентификатор записи
-        /// </summary>
-        private int _itemId;
+		#region public DateTime Updated { get; set; }
+
+		[TableColumnAttribute("Updated")]
+		public DateTime Updated { get; set; }
+
+		#endregion
+
+		#region public Int32 ItemId { get; set; }
+		/// <summary>
+		/// Идентификатор записи
+		/// </summary>
+		private int _itemId;
         [TableColumnAttribute("ItemId",ColumnAccessType.ReadOnly)]
         public Int32 ItemId
         {
