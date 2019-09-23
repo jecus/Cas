@@ -1121,7 +1121,7 @@ namespace SmartCore.Entities.General.WorkPackage
     }
 
 	[JsonObject]
-	public class ProviderPrice : BaseCoreObject
+	public class ProviderPrice : BaseEntityObject
 	{
 		[JsonIgnore] public Supplier Supplier { get; set; }
 

@@ -23,7 +23,7 @@ namespace CAS.UI.UIControls.StoresControls
 	///<summary>
 	/// список для отображения событий системы безопасности полетов
 	///</summary>
-	public partial class StoreComponentsListView : BaseGridViewControl<IBaseCoreObject>
+	public partial class StoreComponentsListView : BaseGridViewControl<IBaseEntityObject>
 	{
 		private bool first;
 
@@ -131,7 +131,7 @@ namespace CAS.UI.UIControls.StoresControls
 
 		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(IBaseCoreObject item)
 
-		protected override List<CustomCell> GetListViewSubItems(IBaseCoreObject item)
+		protected override List<CustomCell> GetListViewSubItems(IBaseEntityObject item)
 		{
 			var subItems = new List<CustomCell>();
 
@@ -502,7 +502,7 @@ namespace CAS.UI.UIControls.StoresControls
 
 		#region protected override void SetItemColor(GridViewRowInfo listViewItem, BaseEntityObject item)
 
-		protected override void SetItemColor(GridViewRowInfo listViewItem, IBaseCoreObject item)
+		protected override void SetItemColor(GridViewRowInfo listViewItem, IBaseEntityObject item)
 		{
 			if (item is ComponentDirective)
 			{

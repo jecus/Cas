@@ -19,7 +19,7 @@ using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.NewGrid
 {
-	public partial class BaseGridViewControl<T> : UserControl, IReference where T : class, IBaseCoreObject
+	public partial class BaseGridViewControl<T> : UserControl, IReference where T : class, IBaseCoreObject, IBaseEntityObject
 	{
 		#region Fields
 
@@ -441,7 +441,7 @@ namespace CAS.UI.UIControls.NewGrid
 				if (value != null)
 				{
 					if (property.Name == "CorrectorId")
-						value = GlobalObjects.CasEnvironment.GetCorrector((int)value);
+						value = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 					string valueString;
 					if (value is DateTime)
