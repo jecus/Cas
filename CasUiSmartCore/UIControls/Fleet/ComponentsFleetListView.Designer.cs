@@ -1,4 +1,4 @@
-﻿namespace CAS.UI.UIControls.ComponentControls
+﻿namespace CAS.UI.UIControls.Fleet
 {
     partial class ComponentsFleetListView
     {

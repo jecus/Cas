@@ -4,22 +4,21 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Auxiliary;
-using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary.Comparers;
+using CAS.UI.UIControls.DirectivesControls;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
 using Telerik.WinControls.UI;
 using TempUIExtentions;
 
-namespace CAS.UI.UIControls.DirectivesControls
+namespace CAS.UI.UIControls.Fleet
 {
 	///<summary>
 	/// список для отображения ордеров запроса

@@ -1,4 +1,4 @@
-﻿namespace CAS.UI.UIControls.DirectivesControls
+﻿namespace CAS.UI.UIControls.Fleet
 {
     partial class DirectiveFleetListView
     {

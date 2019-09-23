@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using AvControls;
 using CAS.UI.ExcelExport;
@@ -12,10 +10,9 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.ComponentControls;
 using CAS.UI.UIControls.FiltersControls;
-using CASReports.Builders;
 using CASTerms;
-using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -28,7 +25,7 @@ using Telerik.WinControls.UI;
 using Component = SmartCore.Entities.General.Accessory.Component;
 using ComponentCollection = SmartCore.Entities.Collections.ComponentCollection;
 
-namespace CAS.UI.UIControls.ComponentControls
+namespace CAS.UI.UIControls.Fleet
 {
 	///<summary>
 	///</summary>

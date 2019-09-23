@@ -6,6 +6,7 @@ using Auxiliary;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary.Comparers;
+using CAS.UI.UIControls.ComponentControls;
 using CAS.UI.UIControls.NewGrid;
 using CAS.UI.UIControls.StoresControls;
 using CASTerms;
@@ -18,7 +19,7 @@ using SmartCore.Entities.General.Interfaces;
 using Telerik.WinControls.UI;
 using TempUIExtentions;
 
-namespace CAS.UI.UIControls.ComponentControls
+namespace CAS.UI.UIControls.Fleet
 {
 	///<summary>
 	/// список для отображения ордеров запроса
