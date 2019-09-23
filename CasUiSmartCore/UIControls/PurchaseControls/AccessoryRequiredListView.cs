@@ -125,7 +125,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			AddColumn("Cost OH", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Cost Serv.", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 

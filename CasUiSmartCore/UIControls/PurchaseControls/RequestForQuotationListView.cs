@@ -91,7 +91,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			AddColumn("Published By", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Closed By", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Remark", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 
 		}
 

@@ -27,7 +27,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			AddColumn("Description", (int)(radGridView1.Width * 0.2f));
 			AddColumn("GoodClass", (int)(radGridView1.Width * 0.2f));
 			AddColumn("ATA", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 
 		#endregion

@@ -52,7 +52,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			AddColumn("Per Days (Flight)", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Per Days (Block)", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Night Time", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 

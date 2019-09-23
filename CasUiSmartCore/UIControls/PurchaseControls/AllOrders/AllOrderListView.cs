@@ -11,23 +11,23 @@ using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 {
-    ///<summary>
-    /// список для отображения ордеров запроса
-    ///</summary>
-    public partial class AllOrderListView : BaseGridViewControl<ILogistic>
-    {
-        #region public InitialOrderListView()
-        ///<summary>
-        ///</summary>
-        public AllOrderListView()
-        {
-            OldColumnIndex = 0;
-            SortMultiplier = 0;
+	///<summary>
+	/// список для отображения ордеров запроса
+	///</summary>
+	public partial class AllOrderListView : BaseGridViewControl<ILogistic>
+	{
+		#region public InitialOrderListView()
+		///<summary>
+		///</summary>
+		public AllOrderListView()
+		{
+			OldColumnIndex = 0;
+			SortMultiplier = 0;
 
-            IgnoreEnterPress = true;
+			IgnoreEnterPress = true;
 
 			InitializeComponent();
-        }
+		}
 		#endregion
 
 		#region Methods
@@ -43,43 +43,43 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 		#region protected override ListViewItem.ListViewSubItem[] GetItemsString(InitialOrder item)
 
 		protected override List<CustomCell> GetListViewSubItems(ILogistic item)
-        {
-            var subItems = new List<CustomCell>();
-            var author = GlobalObjects.CasEnvironment.GetCorrector(item);
+		{
+			var subItems = new List<CustomCell>();
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
-            var type = "";
-            if (item is InitialOrder)
-	            type = "Initial";
+			var type = "";
+			if (item is InitialOrder)
+				type = "Initial";
 			else if (item is RequestForQuotation)
-	            type = "Quotation";
-            else type = "Purchase";
+				type = "Quotation";
+			else type = "Purchase";
 
 			subItems.Add(CreateRow(type, type));
 			subItems.Add(CreateRow(item.Status.ToString(), item.Status ));
 			subItems.Add(CreateRow(item.Number, item.Number ));
-            subItems.Add(CreateRow(item.Title, item.Title ));
+			subItems.Add(CreateRow(item.Title, item.Title ));
 			subItems.Add(CreateRow( "", "" ));
-            subItems.Add(CreateRow(item.OpeningDate == (new DateTime(1852, 01, 01))
-                    ? ""
-                    : SmartCore.Auxiliary.Convert.GetDateFormat(item.OpeningDate), item.OpeningDate));
-            subItems.Add(CreateRow(item.Status != WorkPackageStatus.Opened
-                    ? item.PublishingDate == (new DateTime(1852, 01, 01))
-                        ? ""
-                        : SmartCore.Auxiliary.Convert.GetDateFormat(item.PublishingDate)
-                    : "", item.PublishingDate));
-            subItems.Add(CreateRow(item.Status == WorkPackageStatus.Closed
-                    ? item.ClosingDate == (new DateTime(1852, 01, 01))
-                        ? ""
-                        : SmartCore.Auxiliary.Convert.GetDateFormat(item.ClosingDate)
-                    : "", item.ClosingDate));
-            subItems.Add(CreateRow(item.Author, item.Author ));
-            subItems.Add(CreateRow(item.PublishedByUser, item.PublishedByUser ));
-            subItems.Add(CreateRow(item.CloseByUser, item.CloseByUser ));
-            subItems.Add(CreateRow(item.Remarks, item.Remarks ));
-            subItems.Add(CreateRow(author, author ));
+			subItems.Add(CreateRow(item.OpeningDate == (new DateTime(1852, 01, 01))
+					? ""
+					: SmartCore.Auxiliary.Convert.GetDateFormat(item.OpeningDate), item.OpeningDate));
+			subItems.Add(CreateRow(item.Status != WorkPackageStatus.Opened
+					? item.PublishingDate == (new DateTime(1852, 01, 01))
+						? ""
+						: SmartCore.Auxiliary.Convert.GetDateFormat(item.PublishingDate)
+					: "", item.PublishingDate));
+			subItems.Add(CreateRow(item.Status == WorkPackageStatus.Closed
+					? item.ClosingDate == (new DateTime(1852, 01, 01))
+						? ""
+						: SmartCore.Auxiliary.Convert.GetDateFormat(item.ClosingDate)
+					: "", item.ClosingDate));
+			subItems.Add(CreateRow(item.Author, item.Author ));
+			subItems.Add(CreateRow(item.PublishedByUser, item.PublishedByUser ));
+			subItems.Add(CreateRow(item.CloseByUser, item.CloseByUser ));
+			subItems.Add(CreateRow(item.Remarks, item.Remarks ));
+			subItems.Add(CreateRow(author, author ));
 
 			return subItems;
-        }
+		}
 
 		#endregion
 
@@ -126,7 +126,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 		#region protected override void SetHeaders()
 
 		protected override void SetHeaders()
-        {
+		{
 			AddColumn("Type", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Status", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Order No", (int)(radGridView1.Width * 0.24f));
@@ -139,12 +139,12 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			AddColumn("Published By", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Closed By", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Remark", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
-        }
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
+		}
 
-        #endregion
+		#endregion
 
 
-        #endregion
-    }
+		#endregion
+	}
 }

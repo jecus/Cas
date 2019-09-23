@@ -65,7 +65,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			AddColumn("IsForbidden", (int)(radGridView1.Width * 0.20f));
 			AddColumn("IsDangerous", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 
 		protected override List<CustomCell> GetListViewSubItems(Product item)

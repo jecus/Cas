@@ -65,7 +65,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			AddColumn("Cost", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Hidden remarks", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 

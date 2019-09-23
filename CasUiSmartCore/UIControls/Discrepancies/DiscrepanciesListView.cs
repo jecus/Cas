@@ -104,7 +104,7 @@ namespace CAS.UI.UIControls.Discrepancies
 			AddColumn("Comp. On MP", 120);
 			AddColumn("Comp. On Avionix.", 120);
 			AddColumn("Remarks", 80);
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 		#region protected override SetGroupsToItems(int columnIndex)

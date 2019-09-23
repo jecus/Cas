@@ -89,7 +89,7 @@ namespace CAS.UI.UIControls.ForecastControls
 			AddColumn("Task Q-ty.", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Class", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 

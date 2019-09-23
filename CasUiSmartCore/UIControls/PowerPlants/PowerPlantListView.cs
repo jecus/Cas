@@ -36,7 +36,7 @@ namespace CAS.UI.UIControls.PowerPlants
 			AddDateColumn("Install. Date", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Aircraft (Flight)", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Engine (Flight)", (int)(radGridView1.Width * 0.20f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 

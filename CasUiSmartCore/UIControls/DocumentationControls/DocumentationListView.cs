@@ -156,7 +156,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 			AddColumn("Status", (int)(radGridView1.Width * 0.08f));
 			AddColumn("ID №", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.20f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.02f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 

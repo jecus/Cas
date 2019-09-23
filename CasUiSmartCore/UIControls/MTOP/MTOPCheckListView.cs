@@ -31,7 +31,7 @@ namespace CAS.UI.UIControls.MTOP
 			AddColumn("Estimated Thresh Limit", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Estimated Repeat", (int)(radGridView1.Width * 0.36f));
 			AddColumn("Estimated Repeat Limit", (int)(radGridView1.Width * 0.4f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 
 		#endregion

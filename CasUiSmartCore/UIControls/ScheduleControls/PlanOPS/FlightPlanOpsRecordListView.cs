@@ -83,7 +83,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			AddColumn("Flight Cat", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Hidden Remarks", (int)(radGridView1.Width * 0.16f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 
 		#endregion

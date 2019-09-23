@@ -62,7 +62,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			AddDateColumn("Date", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Time", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Route", (int)(radGridView1.Width * 0.20f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 

@@ -63,7 +63,7 @@ namespace CAS.UI.UIControls.MaintenanceControlCenterControls
 			AddColumn("Title", 100);
 			AddColumn("Description", 125);
 			AddColumn("MH", 60);
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 

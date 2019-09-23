@@ -67,7 +67,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			AddColumn("ATLB No", (int)(radGridView1.Width * 0.30f));
 			AddColumn("Pages", (int)(radGridView1.Width * 0.3f));
 			AddColumn("Date", (int)(radGridView1.Width * 0.3f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 

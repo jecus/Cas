@@ -73,7 +73,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 			AddColumn("Perf. Date", (int)(radGridView1.Width * 0.16f));
 			AddColumn("MH", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Cost", (int)(radGridView1.Width * 0.16f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 

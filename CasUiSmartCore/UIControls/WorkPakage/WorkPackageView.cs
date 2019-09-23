@@ -77,7 +77,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			AddColumn("MH", (int)(radGridView1.Width * 0.12f));
 			AddColumn("K*MH", (int)(radGridView1.Width * 0.12f));
 			AddColumn("Cost", (int)(radGridView1.Width * 0.12f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 

@@ -38,7 +38,7 @@ namespace CAS.UI.UIControls.MTOP
 			foreach (var lifelength in _groupLifelengths)
 				AddColumn(lifelength.Key.ToString(), (int)(radGridView1.Width * 0.5f));
 			
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 			
 			radGridView1.Columns.AddRange(ColumnHeaderList.ToArray());
 		}

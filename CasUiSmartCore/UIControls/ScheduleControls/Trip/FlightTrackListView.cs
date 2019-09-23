@@ -65,7 +65,7 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 			AddColumn("Description", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.4f));
 			AddColumn("HiddenRemarks", (int)(radGridView1.Width * 0.4f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 
 		#endregion

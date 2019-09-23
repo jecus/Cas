@@ -27,7 +27,7 @@ namespace CAS.UI.UIControls.MailControls
 			AddColumn("From - To", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.2f));
 			AddColumn("CreateDate", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 
 		#endregion

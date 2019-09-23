@@ -98,7 +98,7 @@ namespace CAS.UI.UIControls.Discrepancies
 			AddColumn("Sent by", 120);
 			AddColumn("FDR", 120);
 			AddColumn("Remarks", 120);
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 
