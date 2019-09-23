@@ -108,13 +108,13 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 					foreach (var addedInitialOrderRecord in _addedInitialOrderRecords)
 						addedInitialOrderRecord.Product = products.FirstOrDefault(i => i.ItemId == addedInitialOrderRecord.ProductId);
 				}
+				var documents = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DocumentDTO, Document>(new Filter("ParentID", _order.ItemId), true);
+				_order.ClosingDocument.Clear();
+				_order.ClosingDocument.AddRange(documents);
 			}
 
 			_defferedCategories.Clear();
 			_defferedCategories.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DefferedCategorieDTO, DeferredCategory>(loadChild: true));
-			var documents = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DocumentDTO, Document>(new Filter("ParentID", _order.ItemId), true);
-			_order.ClosingDocument.Clear();
-			_order.ClosingDocument.AddRange(documents);
 
 			destinations.AddRange(GlobalObjects.AircraftsCore.GetAllAircrafts().ToArray());
 			destinations.AddRange(GlobalObjects.CasEnvironment.Stores.GetValidEntries());
@@ -148,6 +148,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				var control = DocumentControls[i];
 				control.CurrentDocument = _order.ClosingDocument[i];
 			}
+
 		}
 
 		#endregion
