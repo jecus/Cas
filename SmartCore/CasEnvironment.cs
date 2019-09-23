@@ -209,7 +209,9 @@ namespace SmartCore
 
 		public string GetCorrector(IBaseEntityObject entity)
 		{
-			return Users.ContainsKey(entity.CorrectorId) ? $"{Users[entity.CorrectorId]} ({Auxiliary.Convert.GetDateFormat(entity.Updated)})" : "Unknown";
+			return Users.ContainsKey(entity.CorrectorId) ?
+				$"{Users[entity.CorrectorId]} ({Auxiliary.Convert.GetDateFormat(entity.Updated)} {entity.Updated.TimeOfDay.Hours}:{entity.Updated.TimeOfDay.Minutes}:{entity.Updated.TimeOfDay.Seconds})"
+				: "Unknown";
 		}
 
 		#endregion

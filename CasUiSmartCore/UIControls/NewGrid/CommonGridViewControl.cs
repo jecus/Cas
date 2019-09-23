@@ -456,7 +456,7 @@ namespace CAS.UI.UIControls.NewGrid
 				if (value != null)
 				{
 					if (property.Name == "CorrectorId")
-						value = GlobalObjects.CasEnvironment.GetCorrector((int)value);
+						value = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 					string valueString;
 					if (value is DateTime)

@@ -640,9 +640,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		}
 
 
-		private List<BaseCoreObject> UpdateLW(List<RequestForQuotationRecord> records)
+		private List<BaseEntityObject> UpdateLW(List<RequestForQuotationRecord> records)
 		{
-			var res = new List<BaseCoreObject>();
+			var res = new List<BaseEntityObject>();
 
 			foreach (var record in records)
 			{

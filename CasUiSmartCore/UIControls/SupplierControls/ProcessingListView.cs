@@ -18,7 +18,7 @@ using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.SupplierControls
 {
-	public partial class ProcessingListView : BaseGridViewControl<IBaseCoreObject>
+	public partial class ProcessingListView : BaseGridViewControl<IBaseEntityObject>
 	{
 		#region public ProcessingListView()
 
@@ -62,7 +62,7 @@ namespace CAS.UI.UIControls.SupplierControls
 
 		#region protected override List<CustomCell> GetListViewSubItems(IBaseCoreObject item)
 
-		protected override List<CustomCell> GetListViewSubItems(IBaseCoreObject item)
+		protected override List<CustomCell> GetListViewSubItems(IBaseEntityObject item)
 		{
 			var subItems = new List<CustomCell>();
 			
@@ -235,7 +235,7 @@ namespace CAS.UI.UIControls.SupplierControls
 
 		#region protected override void SetItemColor(GridViewRowInfo listViewItem, IBaseCoreObject item)
 
-		protected override void SetItemColor(GridViewRowInfo listViewItem, IBaseCoreObject item)
+		protected override void SetItemColor(GridViewRowInfo listViewItem, IBaseEntityObject item)
 		{
 			if (item is Component)
 			{

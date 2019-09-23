@@ -4,12 +4,13 @@ using Auxiliary;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Interfaces;
 using SmartCore.Purchase;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.PurchaseControls.Quatation
 {
-	public partial class QuatationOrderListViewNew : BaseGridViewControl<BaseCoreObject>
+	public partial class QuatationOrderListViewNew : BaseGridViewControl<IBaseEntityObject>
 	{
 		public QuatationOrderListViewNew()
 		{
@@ -31,7 +32,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 		#endregion
 
-		protected override List<CustomCell> GetListViewSubItems(BaseCoreObject item)
+		protected override List<CustomCell> GetListViewSubItems(IBaseEntityObject item)
 		{
 			var subItems = new List<CustomCell>();
 			if (item is RequestForQuotationRecord)
@@ -61,7 +62,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		}
 
 		#region protected override void SetItemColor(ListViewItem listViewItem, BaseSmartCoreObject item)
-		protected override void SetItemColor(GridViewRowInfo listViewItem, BaseCoreObject item)
+		protected override void SetItemColor(GridViewRowInfo listViewItem, IBaseEntityObject item)
 		{
 			if (item is SupplierPrice)
 			{

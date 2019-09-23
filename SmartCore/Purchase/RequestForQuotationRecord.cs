@@ -459,8 +459,8 @@ namespace SmartCore.Purchase
     }
 
 	[JsonObject]
-	public class SupplierPrice : BaseCoreObject
-    {
+	public class SupplierPrice : BaseEntityObject
+	{
 	    [JsonIgnore]
 		public Supplier Supplier { get; set; }
 

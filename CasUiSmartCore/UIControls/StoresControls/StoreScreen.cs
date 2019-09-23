@@ -1493,7 +1493,7 @@ namespace CAS.UI.UIControls.StoresControls
 				{
 					var changedJob = form._consumablePart;
 					
-					_directivesViewer.InsertItems(new IBaseCoreObject[]{changedJob});
+					_directivesViewer.InsertItems(new IBaseEntityObject[]{changedJob});
 					_preResultDirectiveArray.Add(changedJob);
 				}
 			}
@@ -1916,7 +1916,7 @@ namespace CAS.UI.UIControls.StoresControls
 				if (form.ShowDialog() == DialogResult.OK)
 				{
 					var changedJob = form._consumablePart;
-					_directivesViewer.InsertItems(new IBaseCoreObject[] { changedJob });
+					_directivesViewer.InsertItems(new IBaseEntityObject[] { changedJob });
 					_preResultDirectiveArray.Add(changedJob);
 				}
 			}
