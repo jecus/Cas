@@ -29,7 +29,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		protected override List<CustomCell> GetListViewSubItems(InitialOrderRecord item)
 		{
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			return new List<CustomCell>()
 			{
 				CreateRow(item.Product?.PartNumber, item.Product?.PartNumber),

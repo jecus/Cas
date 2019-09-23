@@ -81,7 +81,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 				perDaysBlock.Add(aircraftFlight.BlockTimeLifelenght);
 			}
 
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			
 			return new List<CustomCell>
 			{

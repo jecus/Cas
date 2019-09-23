@@ -64,7 +64,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 
 			var closingDate = item.ClosingDate <= DateTimeExtend.GetCASMinDateTime().Date ? "" : item.ClosingDate.ToString("dd.MM.yyyy");
 			var aircraft = GlobalObjects.AircraftsCore.GetAircraftById(item.ParentId);
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			return new List<CustomCell>
 			{

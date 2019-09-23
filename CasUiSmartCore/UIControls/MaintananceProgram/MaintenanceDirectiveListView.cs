@@ -147,7 +147,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		   if (item.NextPerformanceDate != null && item.NextPerformanceDate > defaultDateTime)
 			  nextComplianceDate = Convert.ToDateTime(item.NextPerformanceDate);
 
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			string kitRequieredString = item.KitsApplicable ? item.Kits.Count + " EA" : "N/A";
 			string ndtString = item.NDTType.ShortName;
 			string skillString = item.Skill.ShortName;

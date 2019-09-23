@@ -65,7 +65,7 @@ namespace CAS.UI.UIControls.ScheduleControls.AircraftStatus
 
 			var time = DateTime.Now.Subtract(item.ParentFlight.FlightDate.AddMinutes(item.ParentFlight.LDGTime));
 
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			if (time.TotalHours > 0)
 			{

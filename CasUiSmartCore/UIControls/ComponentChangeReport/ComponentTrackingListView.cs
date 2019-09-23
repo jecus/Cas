@@ -13,36 +13,36 @@ using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.ComponentChangeReport
 {
-    ///<summary>
-    /// список для отображения ордеров запроса
-    ///</summary>
-    public partial class ComponentTrackingListView : BaseGridViewControl<TransferRecord>
-    {
+	///<summary>
+	/// список для отображения ордеров запроса
+	///</summary>
+	public partial class ComponentTrackingListView : BaseGridViewControl<TransferRecord>
+	{
 		public bool IsStore { get; set; }
 
-        #region Constructors
+		#region Constructors
 
-        #region public ComponentsChangeListView()
-        ///<summary>
-        ///</summary>
-        public ComponentTrackingListView()
-        {
-            InitializeComponent();
+		#region public ComponentsChangeListView()
+		///<summary>
+		///</summary>
+		public ComponentTrackingListView()
+		{
+			InitializeComponent();
 
-            SortMultiplier = 1;
-        }
-        #endregion
+			SortMultiplier = 1;
+		}
+		#endregion
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region protected override void SetHeaders()
-        /// <summary>
-        /// Устанавливает заголовки
-        /// </summary>
-        protected override void SetHeaders()
-        {
+		#region protected override void SetHeaders()
+		/// <summary>
+		/// Устанавливает заголовки
+		/// </summary>
+		protected override void SetHeaders()
+		{
 			AddDateColumn("Date", (int)(radGridView1.Width * 0.2f));
 			AddColumn("From: => To:", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Qty", (int)(radGridView1.Width * 0.2f));
@@ -58,7 +58,7 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 			AddColumn("ReceivedForm", (int)(radGridView1.Width * 0.16f));
 			AddColumn("ReceivedDate", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
-        }
+		}
 		#endregion
 
 		#region protected override void SetItemColor(GridViewRowInfo listViewItem, BaseEntityObject item)
@@ -103,48 +103,48 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(TransferRecord item)
 
 		protected override List<CustomCell> GetListViewSubItems(TransferRecord item)
-        {
-            var subItems = new List<CustomCell>();
+		{
+			var subItems = new List<CustomCell>();
 
-            var component = item.ParentComponent;
-	        string descriptionOn = "", descriptionOff = "";
+			var component = item.ParentComponent;
+			string descriptionOn = "", descriptionOff = "";
 
-	        var fromSupplierReciveDate = item.ParentComponent.FromSupplierReciveDate >= DateTimeExtend.GetCASMinDateTime() ? item.ParentComponent.FromSupplierReciveDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString()) : "";
+			var fromSupplierReciveDate = item.ParentComponent.FromSupplierReciveDate >= DateTimeExtend.GetCASMinDateTime() ? item.ParentComponent.FromSupplierReciveDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString()) : "";
 
 			string fromTo = "";
-	        if (item.FromAircraft != null)
-	        {
+			if (item.FromAircraft != null)
+			{
 				fromTo = "Aircraft: " + item.FromAircraft;
 			}
-	        if (item.FromStore != null)
-	        {
+			if (item.FromStore != null)
+			{
 				fromTo = "Store: " + item.FromStore;
 				descriptionOn = component.Description + " " +
 					item.Position
 					+ " P/N:" + component.PartNumber + " S/N: " + component.SerialNumber;
 			} 
-            if (item.FromBaseComponent != null)
-            {
-                if(fromTo != "" ) fromTo += " ";
-                fromTo += "Base Component:" + item.FromBaseComponent;
+			if (item.FromBaseComponent != null)
+			{
+				if(fromTo != "" ) fromTo += " ";
+				fromTo += "Base Component:" + item.FromBaseComponent;
 				descriptionOff = component.Description + " " +
 					item.Position
 					+ " P/N:" + component.PartNumber + " S/N: " + component.SerialNumber;
 			}
-	        if (item.FromSupplier != null)
-	        {
+			if (item.FromSupplier != null)
+			{
 				fromTo = "Supplier: " + item.FromSupplier;
-		        descriptionOff = component.Description + " " +
-		                        item.Position
-		                        + " P/N:" + component.PartNumber + " S/N: " + component.SerialNumber;
+				descriptionOff = component.Description + " " +
+								item.Position
+								+ " P/N:" + component.PartNumber + " S/N: " + component.SerialNumber;
 			}
-	        if (item.FromSpecialist != null)
-	        {
-		        fromTo = "Employee: " + item.FromSpecialist;
-		        descriptionOff = component.Description + " " +
-		                        item.Position
-		                        + " P/N:" + component.PartNumber + " S/N: " + component.SerialNumber;
-	        }
+			if (item.FromSpecialist != null)
+			{
+				fromTo = "Employee: " + item.FromSpecialist;
+				descriptionOff = component.Description + " " +
+								item.Position
+								+ " P/N:" + component.PartNumber + " S/N: " + component.SerialNumber;
+			}
 
 			if (item.FromAircraft == null && item.FromBaseComponent == null && item.FromStore == null && item.FromSupplier == null && item.FromSpecialist == null)
 			{
@@ -163,66 +163,66 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 			}
 
 			if (item.DestinationObject != null)
-            {
-                if (fromTo != "") fromTo += " ";
-                fromTo += "=> " + DestinationHelper.GetDestinationObjectString(item);   
-            }
+			{
+				if (fromTo != "") fromTo += " ";
+				fromTo += "=> " + DestinationHelper.GetDestinationObjectString(item);   
+			}
 			
-	        string quantity;
+			string quantity;
 
 			if (item.ParentComponent is BaseComponent)
-		        quantity = $"{1:0.##}" + (item.ParentComponent.Measure != null ? " " + item.ParentComponent.Measure + "(s)" : "");
-		    else quantity = $"{item.ParentComponent.QuantityIn:0.##}" + (item.ParentComponent.Measure != null ? " " + item.ParentComponent.Measure + "(s)" : "");
+				quantity = $"{1:0.##}" + (item.ParentComponent.Measure != null ? " " + item.ParentComponent.Measure + "(s)" : "");
+			else quantity = $"{item.ParentComponent.QuantityIn:0.##}" + (item.ParentComponent.Measure != null ? " " + item.ParentComponent.Measure + "(s)" : "");
 
-	        var released = item.ReleasedSpecialist?.ToString() ?? "";
-	        var received = item.ReceivedSpecialist?.ToString() ?? "";
-	        var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var released = item.ReleasedSpecialist?.ToString() ?? "";
+			var received = item.ReceivedSpecialist?.ToString() ?? "";
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
-	        subItems.Add(CreateRow(item.TransferDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString()), item.TransferDate ));
-	        subItems.Add(CreateRow(fromTo, fromTo));
-	        subItems.Add(CreateRow(quantity, item.ParentComponent.QuantityIn));
-	        subItems.Add(CreateRow(item.ParentComponent.ATAChapter.ToString(), item.ParentComponent.ATAChapter));
-	        subItems.Add(CreateRow(item.GoodsClass.ToString(), item.GoodsClass));
+			subItems.Add(CreateRow(item.TransferDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString()), item.TransferDate ));
+			subItems.Add(CreateRow(fromTo, fromTo));
+			subItems.Add(CreateRow(quantity, item.ParentComponent.QuantityIn));
+			subItems.Add(CreateRow(item.ParentComponent.ATAChapter.ToString(), item.ParentComponent.ATAChapter));
+			subItems.Add(CreateRow(item.GoodsClass.ToString(), item.GoodsClass));
 			
-	        if (IsStore)
-	        {
-		        subItems.Add(CreateRow(descriptionOn, descriptionOn));
-		        subItems.Add(CreateRow(descriptionOff, descriptionOff));
-	        }
-	        else
-	        {
-		        subItems.Add(CreateRow(descriptionOff, descriptionOff));
-		        subItems.Add(CreateRow(descriptionOn, descriptionOn));
-	        }
+			if (IsStore)
+			{
+				subItems.Add(CreateRow(descriptionOn, descriptionOn));
+				subItems.Add(CreateRow(descriptionOff, descriptionOff));
+			}
+			else
+			{
+				subItems.Add(CreateRow(descriptionOff, descriptionOff));
+				subItems.Add(CreateRow(descriptionOn, descriptionOn));
+			}
 
-	        subItems.Add(CreateRow(item.Reason.ToString(), item.Reason));
-	        subItems.Add(CreateRow(item.Description, item.Description ));
-	        subItems.Add(CreateRow(item.Remarks, item.Remarks));
-	        subItems.Add(CreateRow(released, released));
-	        subItems.Add(CreateRow(received, received));
-	        subItems.Add(CreateRow(item.ParentComponent.FromSupplier.ToString(), item.ParentComponent.FromSupplier));
-	        subItems.Add(CreateRow(fromSupplierReciveDate, item.ParentComponent.FromSupplierReciveDate));
-	        subItems.Add(CreateRow(author, author));
+			subItems.Add(CreateRow(item.Reason.ToString(), item.Reason));
+			subItems.Add(CreateRow(item.Description, item.Description ));
+			subItems.Add(CreateRow(item.Remarks, item.Remarks));
+			subItems.Add(CreateRow(released, released));
+			subItems.Add(CreateRow(received, received));
+			subItems.Add(CreateRow(item.ParentComponent.FromSupplier.ToString(), item.ParentComponent.FromSupplier));
+			subItems.Add(CreateRow(fromSupplierReciveDate, item.ParentComponent.FromSupplierReciveDate));
+			subItems.Add(CreateRow(author, author));
 
 			return subItems;
-        }
+		}
 
-        #endregion
+		#endregion
 
-        #region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 
-        protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
-        {
-            if (SelectedItem != null)
-            {
-                e.Cancel = true;
-                TransferRecordForm form = new TransferRecordForm(SelectedItem.ParentComponent, SelectedItem);
-                form.ShowDialog();
-            }
-        }
-        #endregion
+		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		{
+			if (SelectedItem != null)
+			{
+				e.Cancel = true;
+				TransferRecordForm form = new TransferRecordForm(SelectedItem.ParentComponent, SelectedItem);
+				form.ShowDialog();
+			}
+		}
+		#endregion
 
 
-	    #endregion
-    }
+		#endregion
+	}
 }

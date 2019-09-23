@@ -143,7 +143,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 			var dateString = item.FlightDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
 			var date = item.FlightDate.Date.AddMinutes(item.OutTime);
 			var atlb = _atbs.GetItemById(item.ATLBId);
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			if (item.AtlbRecordType == AtlbRecordType.Flight)
 			{

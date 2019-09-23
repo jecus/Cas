@@ -103,7 +103,7 @@ namespace CAS.UI.UIControls.SupplierControls
 
 				supplierType = transferRecord.DestinationObjectType == SmartCoreType.Supplier ? (transferRecord.DestinationObject as Supplier).SupplierClass.ToString() : componentItem.FromSupplier.SupplierClass.ToString();
 
-				author = GlobalObjects.CasEnvironment.GetCorrector(componentItem.CorrectorId);
+				author = GlobalObjects.CasEnvironment.GetCorrector(componentItem);
 
 				approved = componentItem.FromSupplier.Approved ? "Yes" : "No";
 				shipment = transferRecord.TransferDate;

@@ -48,7 +48,7 @@ namespace CAS.UI.UIControls.PowerPlants
 				tcsnLifeLenght = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(aircraft);
 
 			var temp = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(item);
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var transferDate = item.TransferRecords.GetLast().TransferDate;
 
 			return new List<CustomCell>

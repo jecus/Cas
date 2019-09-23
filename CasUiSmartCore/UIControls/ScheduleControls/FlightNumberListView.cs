@@ -14,10 +14,10 @@ using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.ScheduleControls
 {
-    ///<summary>
-    /// список для отображения событий системы безопасности полетов
-    ///</summary>
-    public partial class FlightNumberListView : BaseGridViewControl<IFlightNumberParams>
+	///<summary>
+	/// список для отображения событий системы безопасности полетов
+	///</summary>
+	public partial class FlightNumberListView : BaseGridViewControl<IFlightNumberParams>
 	{
 		#region Fields
 
@@ -31,9 +31,9 @@ namespace CAS.UI.UIControls.ScheduleControls
 		/// </summary>
 		/// <param name="screenType"></param>
 		public FlightNumberListView()
-        {
-            InitializeComponent();
-        }
+		{
+			InitializeComponent();
+		}
 
 		public FlightNumberListView(FlightNumberScreenType screenType) : this()
 		{
@@ -46,15 +46,15 @@ namespace CAS.UI.UIControls.ScheduleControls
 		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 
 		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
-        {
-            if (SelectedItem != null)
-            {
+		{
+			if (SelectedItem != null)
+			{
 				var regNumber = GlobalObjects.CasEnvironment.Operators[0].Name + ".Flights. " + SelectedItem.FlightNum.FlightNo;
-		        e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-		        e.DisplayerText = regNumber;
-		        e.RequestedEntity = new FlightNumberScreen(SelectedItem.FlightNum, _screenType);
-            }
-        }
+				e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+				e.DisplayerText = regNumber;
+				e.RequestedEntity = new FlightNumberScreen(SelectedItem.FlightNum, _screenType);
+			}
+		}
 		#endregion
 
 		#region protected override void SetHeaders()
@@ -91,7 +91,7 @@ namespace CAS.UI.UIControls.ScheduleControls
 			if (item is FlightNumber)
 			{
 				var flightNumber = item as FlightNumber;
-				var author = GlobalObjects.CasEnvironment.GetCorrector(flightNumber.CorrectorId);
+				var author = GlobalObjects.CasEnvironment.GetCorrector(flightNumber);
 				
 				subItems.Add(CreateRow(flightNumber.FlightNo.ToString(), Tag = flightNumber.FlightNo ));
 				subItems.Add(CreateRow("", "" ));
@@ -114,7 +114,7 @@ namespace CAS.UI.UIControls.ScheduleControls
 			else
 			{
 				var flightNumberPeriod = item as FlightNumberPeriod;
-				var author = GlobalObjects.CasEnvironment.GetCorrector(flightNumberPeriod.CorrectorId);
+				var author = GlobalObjects.CasEnvironment.GetCorrector(flightNumberPeriod);
 				string period;
 				if (flightNumberPeriod.FlightType == FlightType.Schedule)
 					period = $"{flightNumberPeriod.DepartureDate:dd-MMMM-yyyy} - {flightNumberPeriod.ArrivalDate:dd-MMMM-yyyy}";
@@ -255,5 +255,5 @@ namespace CAS.UI.UIControls.ScheduleControls
 		#endregion
 
 		#endregion
-    }
+	}
 }

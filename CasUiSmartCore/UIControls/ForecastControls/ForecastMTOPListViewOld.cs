@@ -243,7 +243,7 @@ namespace CAS.UI.UIControls.ForecastControls
 			int times = index == 0 ? item.Parent.Times : index + 1;
 			double manHours = item.Parent is IEngineeringDirective ? ((IEngineeringDirective)item.Parent).ManHours : 0;
 			double cost = item.Parent is IEngineeringDirective ? ((IEngineeringDirective)item.Parent).Cost : 0;
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var title = item.Title;
 			if (item.Parent is Directive)
 			{

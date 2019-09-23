@@ -96,7 +96,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			var dates = (first != null ? UsefulMethods.NormalizeDate(first.FlightDate.Date) : "YY:MM:DD") + " - " +
 						   (last != null ? UsefulMethods.NormalizeDate(last.FlightDate.Date) : "YY:MM:DD");
 
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			return new List<CustomCell>()
 			{

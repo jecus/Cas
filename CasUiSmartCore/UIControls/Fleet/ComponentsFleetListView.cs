@@ -128,7 +128,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		protected override List<CustomCell> GetListViewSubItems(BaseEntityObject item)
 		{
 			var subItems = new List<CustomCell>();
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			DateTime? approx;
 			Lifelength remains = Lifelength.Null, next;

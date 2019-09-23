@@ -37,7 +37,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			if (item is RequestForQuotationRecord)
 			{
 				var record = item as RequestForQuotationRecord;
-				var author = GlobalObjects.CasEnvironment.GetCorrector(record.CorrectorId);
+				var author = GlobalObjects.CasEnvironment.GetCorrector(record);
 
 				subItems.Add(CreateRow(record.Product?.PartNumber, record.Product?.PartNumber));
 				subItems.Add(CreateRow(record.Suppliers?.ToString(), record.Suppliers?.ToString()));

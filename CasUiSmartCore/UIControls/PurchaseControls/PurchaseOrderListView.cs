@@ -8,17 +8,17 @@ using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
-    ///<summary>
-    ///</summary>
-    public partial class PurchaseOrderListView : BaseGridViewControl<PurchaseOrder>
-    {
-        #region public PurchaseOrderListView()
-        ///<summary>
-        ///</summary>
-        public PurchaseOrderListView()
-        {
-	        InitializeComponent();
-        }
+	///<summary>
+	///</summary>
+	public partial class PurchaseOrderListView : BaseGridViewControl<PurchaseOrder>
+	{
+		#region public PurchaseOrderListView()
+		///<summary>
+		///</summary>
+		public PurchaseOrderListView()
+		{
+			InitializeComponent();
+		}
 		#endregion
 
 		#region Methods
@@ -37,8 +37,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 		#region protected override ListViewItem.ListViewSubItem[] GetItemsString(PurchaseOrder item)
 
 		protected override List<CustomCell> GetListViewSubItems(PurchaseOrder item)
-        {
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+		{
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			return new List<CustomCell>
 			{
@@ -82,7 +82,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		#region protected override void SetHeaders()
 
 		protected override void SetHeaders()
-        {
+		{
 			AddColumn("Status", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Order No", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Title", (int)(radGridView1.Width * 0.3f));
@@ -96,8 +96,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
 		}
 
-        #endregion
+		#endregion
 
-        #endregion
-    }
+		#endregion
+	}
 }

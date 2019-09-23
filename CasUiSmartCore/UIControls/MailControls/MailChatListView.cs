@@ -40,7 +40,7 @@ namespace CAS.UI.UIControls.MailControls
 			var from = item.SupplierFrom != Supplier.Unknown ? item.SupplierFrom.ToString() : operatorName;
 			var to = item.SupplierTo != Supplier.Unknown ? item.SupplierTo.ToString() : operatorName;
 
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var fromTo = $"{from} - {to}";
 
 			return new List<CustomCell>

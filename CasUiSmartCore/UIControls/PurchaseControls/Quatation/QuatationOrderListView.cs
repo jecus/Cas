@@ -31,7 +31,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		protected override List<CustomCell> GetListViewSubItems(RequestForQuotationRecord item)
 		{
 			var subItems = new List<CustomCell>();
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			subItems.Add(CreateRow(item.Product?.PartNumber, item.Product?.PartNumber));
 			subItems.Add(CreateRow(item.Product?.Description, item.Product?.Description));

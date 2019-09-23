@@ -139,7 +139,7 @@ namespace CAS.UI.UIControls.Discrepancies
 
 		protected override List<CustomCell> GetListViewSubItems(Discrepancy item)
 		{
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			return new List<CustomCell>
 			{

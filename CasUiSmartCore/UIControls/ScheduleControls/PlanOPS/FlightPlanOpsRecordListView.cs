@@ -117,7 +117,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			var depDelayString = "";
 			var arrDelayString = "";
 			var arrEstimatedString = "";
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			if (item.IsDispatcherEdit && item.IsDispatcherEditLdg)
 			{

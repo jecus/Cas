@@ -97,7 +97,7 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 				fromTo += $"{from} => {DestinationHelper.GetDestinationObjectString(item)}";
 			}
 
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			subItems.Add(CreateRow(item.TransferDate.ToString(new GlobalTermsProvider()["DateFormat"].ToString()), item.TransferDate));
 			subItems.Add(CreateRow(fromTo, fromTo));

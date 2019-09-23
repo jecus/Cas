@@ -150,7 +150,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			var quantity = isComponent ? 1 : item.Quantity;
 			var quantityString = $"{quantity} {item.Measure.ShortName}";
 			var taskQuantity = Math.Round(item.TaskQuantity, 2).ToString();
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var reference = item.Product?.Reference;
 
 			subItems.Add(CreateRow(reference, reference));

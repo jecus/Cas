@@ -36,7 +36,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 
 		protected override List<CustomCell> GetListViewSubItems(FlightPlanOps item)
 		{
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var period = $"{item.From:dd-MMMM-yyyy} - {item.To:dd-MMMM-yyyy}";
 
 			return new List<CustomCell>

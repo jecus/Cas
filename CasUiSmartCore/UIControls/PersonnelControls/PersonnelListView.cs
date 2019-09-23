@@ -85,7 +85,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			}
 
 			var department = item.Specialization?.Department ??  Department.Unknown;
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var phone = string.IsNullOrEmpty(item.Additional) ? item.Phone : $"{item.Phone} | Add.: {item.Additional}";
 
 

@@ -82,7 +82,7 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 
 			var departure = item.FlightNumberPeriod.DepartureDate.Date.AddMinutes(item.FlightNumberPeriod.PeriodFrom);
 			var arrival = item.FlightNumberPeriod.DepartureDate.Date.AddMinutes(item.FlightNumberPeriod.PeriodTo);
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var distance = $"{item.FlightNumberPeriod.FlightNum.Distance} {item.FlightNumberPeriod.FlightNum.DistanceMeasure}";
 
 			foreach (var model in item.FlightNumberPeriod.FlightNum.AircraftModels)

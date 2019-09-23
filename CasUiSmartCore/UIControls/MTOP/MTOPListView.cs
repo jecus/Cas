@@ -53,7 +53,7 @@ namespace CAS.UI.UIControls.MTOP
 
 			var tempHours = item.PhaseThresh.Hours;
 			var name = $"{item.Name}";
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			
 			subItems.Add(CreateRow(name, name));
 

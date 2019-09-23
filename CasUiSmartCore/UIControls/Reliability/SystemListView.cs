@@ -39,7 +39,7 @@ namespace CAS.UI.UIControls.Reliability
 		{
 			var subItems = new List<CustomCell>();
 			string on, off,  ata, goodClass, reason = "", description = "", fromTo = "";
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			if (item.IsReplaceComponentRemoved)
 			{
 				off = item.ReplaceComponent.ToString();

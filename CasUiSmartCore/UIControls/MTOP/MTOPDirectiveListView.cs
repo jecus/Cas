@@ -102,7 +102,7 @@ namespace CAS.UI.UIControls.MTOP
 			var phaseString = "";
 			if (item.MTOPPhase != null)
 				phaseString = item.MTOPPhase.ToString();
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			subItems.Add(CreateRow(item.TaskCardNumber, item.TaskCardNumber));
 

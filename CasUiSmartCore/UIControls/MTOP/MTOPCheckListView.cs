@@ -40,7 +40,7 @@ namespace CAS.UI.UIControls.MTOP
 
 		protected override List<CustomCell> GetListViewSubItems(MTOPCheck item)
 		{
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var temp = "";
 			if (item.IsZeroPhase)
 				temp = $"Zero Phase: {item.CheckType.FullName}";

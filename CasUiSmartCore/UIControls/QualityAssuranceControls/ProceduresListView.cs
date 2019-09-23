@@ -13,36 +13,36 @@ using Convert = System.Convert;
 
 namespace CAS.UI.UIControls.QualityAssuranceControls
 {
-    ///<summary>
-    /// список для отображения ордеров запроса
-    ///</summary>
-    public partial class ProceduresListView : BaseGridViewControl<Procedure>
-    {
-        #region Fields
+	///<summary>
+	/// список для отображения ордеров запроса
+	///</summary>
+	public partial class ProceduresListView : BaseGridViewControl<Procedure>
+	{
+		#region Fields
 
-        #endregion
+		#endregion
 
-        #region Constructors
+		#region Constructors
 
-        #region public ProceduresListView()
-        ///<summary>
-        ///</summary>
-        public ProceduresListView()
-        {
-            InitializeComponent();
-        }
-        #endregion
+		#region public ProceduresListView()
+		///<summary>
+		///</summary>
+		public ProceduresListView()
+		{
+			InitializeComponent();
+		}
+		#endregion
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region protected override void SetHeaders()
-        /// <summary>
-        /// Устанавливает заголовки
-        /// </summary>
-        protected override void SetHeaders()
-        {
+		#region protected override void SetHeaders()
+		/// <summary>
+		/// Устанавливает заголовки
+		/// </summary>
+		protected override void SetHeaders()
+		{
 			AddColumn("Title", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Rating", (int)(radGridView1.Width * 0.16f));
@@ -62,7 +62,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Hidden remarks", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
-        }
+		}
 		#endregion
 
 		#region protected override SetGroupsToItems(int columnIndex)
@@ -70,91 +70,91 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 		/// 
 		/// </summary>
 		//protected override void SetGroupsToItems(int columnIndex)
-        //{
-        //}
-        #endregion
+		//{
+		//}
+		#endregion
 
-        #region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Procedure item)
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        protected override List<CustomCell> GetListViewSubItems(Procedure item)
-        {
-            var subItems = new List<CustomCell>();
+		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Procedure item)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="item"></param>
+		/// <returns></returns>
+		protected override List<CustomCell> GetListViewSubItems(Procedure item)
+		{
+			var subItems = new List<CustomCell>();
 
-            //////////////////////////////////////////////////////////////////////////////////////
-            //         Определение последнего выполнения директивы и KitRequiered               //
-            //////////////////////////////////////////////////////////////////////////////////////
-            DateTime defaultDateTime = DateTimeExtend.GetCASMinDateTime();
-            DateTime lastComplianceDate = defaultDateTime;
-            DateTime nextComplianceDate = defaultDateTime;
-            Lifelength lastComplianceLifeLength = Lifelength.Zero;
+			//////////////////////////////////////////////////////////////////////////////////////
+			//         Определение последнего выполнения директивы и KitRequiered               //
+			//////////////////////////////////////////////////////////////////////////////////////
+			DateTime defaultDateTime = DateTimeExtend.GetCASMinDateTime();
+			DateTime lastComplianceDate = defaultDateTime;
+			DateTime nextComplianceDate = defaultDateTime;
+			Lifelength lastComplianceLifeLength = Lifelength.Zero;
 
-            string lastPerformanceString, firstPerformanceString = "N/A";
+			string lastPerformanceString, firstPerformanceString = "N/A";
 
-            if(item.LastPerformance != null)
-            {
-                lastComplianceDate = item.LastPerformance.RecordDate;
-                lastComplianceLifeLength = item.LastPerformance.OnLifelength;    
-            }
-            if (item.Threshold.FirstPerformanceSinceNew != null && !item.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
-            {
-                firstPerformanceString = "s/n: " + item.Threshold.FirstPerformanceSinceNew;
-            }
-            if (item.Threshold.FirstPerformanceSinceEffectiveDate != null &&
-                !item.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
-            {
-                if (firstPerformanceString != "N/A") firstPerformanceString += " or ";
-                else firstPerformanceString = "";
-                firstPerformanceString += "s/e.d: " + item.Threshold.FirstPerformanceSinceEffectiveDate;
-            }
+			if(item.LastPerformance != null)
+			{
+				lastComplianceDate = item.LastPerformance.RecordDate;
+				lastComplianceLifeLength = item.LastPerformance.OnLifelength;    
+			}
+			if (item.Threshold.FirstPerformanceSinceNew != null && !item.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
+			{
+				firstPerformanceString = "s/n: " + item.Threshold.FirstPerformanceSinceNew;
+			}
+			if (item.Threshold.FirstPerformanceSinceEffectiveDate != null &&
+				!item.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+			{
+				if (firstPerformanceString != "N/A") firstPerformanceString += " or ";
+				else firstPerformanceString = "";
+				firstPerformanceString += "s/e.d: " + item.Threshold.FirstPerformanceSinceEffectiveDate;
+			}
 
-            //if (item.BindDetailDirectives.Count == 0)
-            //{
-                if (item.NextPerformanceDate != null && item.NextPerformanceDate > defaultDateTime)
-                    nextComplianceDate = Convert.ToDateTime(item.NextPerformanceDate);
-            //    nextComplianceLifelength = item.NextCompliance;
-            //}
-            //else
-            //{
-            //    DetailDirective firstLimitter =
-            //            item.BindDetailDirectives.Where(bdd => bdd.NextComplianceDate != null &&
-            //                                                   bdd.NextComplianceDate > defaultDateTime)
-            //                                     .OrderBy(d => d)
-            //                                     .FirstOrDefault();
-            //    if (firstLimitter != null)
-            //    {
-            //        nextComplianceDate = Convert.ToDateTime(firstLimitter.NextComplianceDate);
-            //        nextComplianceLifelength = firstLimitter.NextCompliance;
-            //    }
-            //}
+			//if (item.BindDetailDirectives.Count == 0)
+			//{
+				if (item.NextPerformanceDate != null && item.NextPerformanceDate > defaultDateTime)
+					nextComplianceDate = Convert.ToDateTime(item.NextPerformanceDate);
+			//    nextComplianceLifelength = item.NextCompliance;
+			//}
+			//else
+			//{
+			//    DetailDirective firstLimitter =
+			//            item.BindDetailDirectives.Where(bdd => bdd.NextComplianceDate != null &&
+			//                                                   bdd.NextComplianceDate > defaultDateTime)
+			//                                     .OrderBy(d => d)
+			//                                     .FirstOrDefault();
+			//    if (firstLimitter != null)
+			//    {
+			//        nextComplianceDate = Convert.ToDateTime(firstLimitter.NextComplianceDate);
+			//        nextComplianceLifelength = firstLimitter.NextCompliance;
+			//    }
+			//}
 
-            string kitRequieredString = item.Kits.Count + " kits";
-            string remarksString = item.Remarks;
-            string hiddenRemarksString = item.HiddenRemarks;
+			string kitRequieredString = item.Kits.Count + " kits";
+			string remarksString = item.Remarks;
+			string hiddenRemarksString = item.HiddenRemarks;
 
-            if (lastComplianceDate <= defaultDateTime)
-                lastPerformanceString = "N/A";
-            else
-                lastPerformanceString = SmartCore.Auxiliary.Convert.GetDateFormat(lastComplianceDate) + " " +
-                                        lastComplianceLifeLength;
-            string nextComplianceString = ((nextComplianceDate <= defaultDateTime)
-                                               ? ""
-                                               : SmartCore.Auxiliary.Convert.GetDateFormat(nextComplianceDate) + " ") +
-                                          item.NextPerformanceSource;
-            string nextRemainString = item.Remains != null && !item.Remains.IsNullOrZero()
-                                          ? item.Remains.ToString()
-                                          : "N/A";
+			if (lastComplianceDate <= defaultDateTime)
+				lastPerformanceString = "N/A";
+			else
+				lastPerformanceString = SmartCore.Auxiliary.Convert.GetDateFormat(lastComplianceDate) + " " +
+										lastComplianceLifeLength;
+			string nextComplianceString = ((nextComplianceDate <= defaultDateTime)
+											   ? ""
+											   : SmartCore.Auxiliary.Convert.GetDateFormat(nextComplianceDate) + " ") +
+										  item.NextPerformanceSource;
+			string nextRemainString = item.Remains != null && !item.Remains.IsNullOrZero()
+										  ? item.Remains.ToString()
+										  : "N/A";
 
 			//////////////////////////////////////////////////////////////////////////////////////
 
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			string description = item.Description != "" ? item.Description : "N/A";
-            string title = item.Title != "" ? item.Title : "N/A";
-            string reqiredDocuments = item.DocumentReferences.Count > 0 ? item.DocumentReferences.Aggregate("", (current, i) => current + (i.Document + "; ")): "N/A";
-            DirectiveStatus status = item.Status;
+			string title = item.Title != "" ? item.Title : "N/A";
+			string reqiredDocuments = item.DocumentReferences.Count > 0 ? item.DocumentReferences.Aggregate("", (current, i) => current + (i.Document + "; ")): "N/A";
+			DirectiveStatus status = item.Status;
 
 			subItems.Add(CreateRow(title, title ));
 			subItems.Add(CreateRow(description, description ));
@@ -171,79 +171,79 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 			subItems.Add(CreateRow(reqiredDocuments, reqiredDocuments ));
 			subItems.Add(CreateRow(kitRequieredString, kitRequieredString ));
 			subItems.Add(CreateRow(item.ManHours <= 0 ? "" : item.ManHours.ToString(), item.ManHours ));
-            subItems.Add(CreateRow(item.Cost <= 0 ? "" : item.Cost.ToString(), item.Cost ));
+			subItems.Add(CreateRow(item.Cost <= 0 ? "" : item.Cost.ToString(), item.Cost ));
 			subItems.Add(CreateRow(remarksString, remarksString ));
 			subItems.Add(CreateRow(hiddenRemarksString, hiddenRemarksString ));
 			subItems.Add(CreateRow(author, author ));
 
 			return subItems;
-        }
+		}
 
-        #endregion
+		#endregion
 
-        #region protected override void SortItems(int columnIndex)
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="columnIndex"></param>
-     //   protected override void SortItems(int columnIndex)
-     //   {
-     //       if (OldColumnIndex != columnIndex)
-     //           SortMultiplier = -1;
-     //       if (SortMultiplier == 1)
-     //           SortMultiplier = -1;
-     //       else
-     //           SortMultiplier = 1;
-     //       itemsListView.Items.Clear();
-     //       SetGroupsToItems(columnIndex);
+		#region protected override void SortItems(int columnIndex)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="columnIndex"></param>
+	 //   protected override void SortItems(int columnIndex)
+	 //   {
+	 //       if (OldColumnIndex != columnIndex)
+	 //           SortMultiplier = -1;
+	 //       if (SortMultiplier == 1)
+	 //           SortMultiplier = -1;
+	 //       else
+	 //           SortMultiplier = 1;
+	 //       itemsListView.Items.Clear();
+	 //       SetGroupsToItems(columnIndex);
 
-     //       List<ListViewItem> resultList = new List<ListViewItem>();
+	 //       List<ListViewItem> resultList = new List<ListViewItem>();
 
-     //       if (columnIndex == 8)
-     //       {
-     //           resultList.AddRange(ListViewItemList.Where(item => item.Tag is Procedure));
+	 //       if (columnIndex == 8)
+	 //       {
+	 //           resultList.AddRange(ListViewItemList.Where(item => item.Tag is Procedure));
 
-     //           resultList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
+	 //           resultList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
 
-     //           itemsListView.Groups.Clear();
-     //           foreach (var item in resultList)
-     //           {
+	 //           itemsListView.Groups.Clear();
+	 //           foreach (var item in resultList)
+	 //           {
 					//var temp = ListViewGroupHelper.GetGroupStringByPerformanceDate(item.Tag);
 					//itemsListView.Groups.Add(temp, temp);
-     //               item.Group = itemsListView.Groups[temp];
-     //           }
+	 //               item.Group = itemsListView.Groups[temp];
+	 //           }
 
-     //       }
-     //       else
-     //       {
-     //           itemsListView.Groups.Clear();
-     //           //добавление остальных подзадач
-     //           resultList.AddRange(ListViewItemList.Where(item => item.Tag is Procedure));
-     //           resultList.Sort(new DirectiveListViewComparer(columnIndex, SortMultiplier));
-     //       }
-     //       itemsListView.Items.AddRange(resultList.ToArray());
-     //       OldColumnIndex = columnIndex;
-     //   }
+	 //       }
+	 //       else
+	 //       {
+	 //           itemsListView.Groups.Clear();
+	 //           //добавление остальных подзадач
+	 //           resultList.AddRange(ListViewItemList.Where(item => item.Tag is Procedure));
+	 //           resultList.Sort(new DirectiveListViewComparer(columnIndex, SortMultiplier));
+	 //       }
+	 //       itemsListView.Items.AddRange(resultList.ToArray());
+	 //       OldColumnIndex = columnIndex;
+	 //   }
 
-        #endregion
+		#endregion
 
-        #region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
-        {
-            if (SelectedItem != null)
-            {
-                string regNumber = SelectedItem.Title;
-                e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-                e.DisplayerText = regNumber;
-                e.RequestedEntity = new ProcedureScreen(SelectedItem);
-            }
-        }
-        #endregion
+		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		{
+			if (SelectedItem != null)
+			{
+				string regNumber = SelectedItem.Title;
+				e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+				e.DisplayerText = regNumber;
+				e.RequestedEntity = new ProcedureScreen(SelectedItem);
+			}
+		}
+		#endregion
 
-        #endregion
-    }
+		#endregion
+	}
 }

@@ -92,7 +92,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 			var issueDateValidToString = item.IssueValidTo ? SmartCore.Auxiliary.Convert.GetDateFormat(item.IssueDateValidTo) : "";
 			var aboard = item.Aboard ? "Yes" : "No";
 			var privy = item.Privy ? "Yes" : "No";
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			return new List<CustomCell>()
 			{

@@ -14,9 +14,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 		#region public ProductListView()
 
 		public AllProductListView()
-        {
-            SortMultiplier = 1;
-            //IgnoreAutoResize = true;
+		{
+			SortMultiplier = 1;
+			//IgnoreAutoResize = true;
 			InitializeComponent();
 		}
 
@@ -50,7 +50,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 
 		protected override void SetHeaders()
-        {
+		{
 			AddColumn("Type", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Name", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Part Number", (int)(radGridView1.Width * 0.20f));
@@ -66,40 +66,40 @@ namespace CAS.UI.UIControls.PurchaseControls
 			AddColumn("IsDangerous", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
-        }
+		}
 
-        protected override List<CustomCell> GetListViewSubItems(Product item)
-        {
-            var subItems = new List<CustomCell>();
-            var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+		protected override List<CustomCell> GetListViewSubItems(Product item)
+		{
+			var subItems = new List<CustomCell>();
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
-            subItems.Add(CreateRow(item.ProductType.ToString(), item.ProductType));
-            subItems.Add(CreateRow(item.Name, item.Name));
-            subItems.Add(CreateRow(item.PartNumber, item.PartNumber));
-            subItems.Add(CreateRow(item.AltPartNumber, item.AltPartNumber));
-            subItems.Add(CreateRow(item.Standart?.ToString(), item.Standart));
-            subItems.Add(CreateRow(item.Description, item.Description));
-            subItems.Add(CreateRow(item.Reference, item.Reference));
-            subItems.Add(CreateRow(item.Suppliers?.ToString(), item.Suppliers));
-            subItems.Add(CreateRow(item.Code, item.Code));
-            subItems.Add(CreateRow(item.ATAChapter?.ToString(), item.ATAChapter));
-            subItems.Add(CreateRow(item.GoodsClass?.ToString(), item.GoodsClass));
-            subItems.Add(CreateRow(item.IsForbiddenString, item.IsForbidden));
-            subItems.Add(CreateRow(item.IsDangerous.ToString(), item.IsDangerous));
-            subItems.Add(CreateRow(item.Remarks, item.Remarks));
-            subItems.Add(CreateRow(author, author));
+			subItems.Add(CreateRow(item.ProductType.ToString(), item.ProductType));
+			subItems.Add(CreateRow(item.Name, item.Name));
+			subItems.Add(CreateRow(item.PartNumber, item.PartNumber));
+			subItems.Add(CreateRow(item.AltPartNumber, item.AltPartNumber));
+			subItems.Add(CreateRow(item.Standart?.ToString(), item.Standart));
+			subItems.Add(CreateRow(item.Description, item.Description));
+			subItems.Add(CreateRow(item.Reference, item.Reference));
+			subItems.Add(CreateRow(item.Suppliers?.ToString(), item.Suppliers));
+			subItems.Add(CreateRow(item.Code, item.Code));
+			subItems.Add(CreateRow(item.ATAChapter?.ToString(), item.ATAChapter));
+			subItems.Add(CreateRow(item.GoodsClass?.ToString(), item.GoodsClass));
+			subItems.Add(CreateRow(item.IsForbiddenString, item.IsForbidden));
+			subItems.Add(CreateRow(item.IsDangerous.ToString(), item.IsDangerous));
+			subItems.Add(CreateRow(item.Remarks, item.Remarks));
+			subItems.Add(CreateRow(author, author));
 
 			return subItems;
-        }
+		}
 
-        #region Overrides of BaseGridViewControl<InitialOrderRecord>
+		#region Overrides of BaseGridViewControl<InitialOrderRecord>
 
-        protected override void GroupingItems()
-        {
-	        Grouping("Type");
-        }
+		protected override void GroupingItems()
+		{
+			Grouping("Type");
+		}
 
-        #endregion
+		#endregion
 
 	}
 }

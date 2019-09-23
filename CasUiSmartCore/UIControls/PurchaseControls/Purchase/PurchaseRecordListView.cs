@@ -40,7 +40,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		protected override List<CustomCell> GetListViewSubItems(PurchaseRequestRecord item)
 		{
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			return new List<CustomCell>()
 			{

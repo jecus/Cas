@@ -235,7 +235,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			var access = item.DirectiveAccess;
 			var zone = item.DirectiveZone;
 			var workarea = item.Workarea;
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			if (item.ADNoFile == null)
 				adColor = Color.MediumVioletRed;
