@@ -484,7 +484,7 @@ namespace CAS.UI.UIControls.AircraftsControls
 		private void LinkMaintenanceDirectiveFleet(object sender, ReferenceEventArgs e)
 		{
 			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-			e.DisplayerText = "Routine Tasks Fleet";
+			e.DisplayerText = "AMP Program";
 			e.RequestedEntity = new MaintenanceDirectiveFleetListScreen(GlobalObjects.CasEnvironment.Operators[0]);
 		}
 	}

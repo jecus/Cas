@@ -46,6 +46,7 @@ namespace CAS.UI.UIControls.Fleet
 		/// </summary>
 		protected override void SetHeaders()
 		{
+			AddColumn("Aircraft", (int)(radGridView1.Width * 0.24f));
 			AddColumn("AMP", (int)(radGridView1.Width * 0.16f));
 			AddColumn("MPD Item", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Task Card №", (int)(radGridView1.Width * 0.16f));
@@ -190,6 +191,7 @@ namespace CAS.UI.UIControls.Fleet
 			if(item.KitsApplicable && item.Kits.Count == 0)
 				kitColor = Color.FromArgb(Highlight.Red.Color);
 
+			subItems.Add(CreateRow(item.ParentAircraft?.ToString() ?? "", item.ParentAircraft));
 			subItems.Add(CreateRow(item.ScheduleItem, item.ScheduleItem));
 			subItems.Add(CreateRow(taskCheck, taskCheck));
 			subItems.Add(CreateRow(item.TaskCardNumber, item.TaskCardNumber, tcnColor));
@@ -227,6 +229,15 @@ namespace CAS.UI.UIControls.Fleet
 			subItems.Add(CreateRow(author, author));
 
 			return subItems;
+		}
+
+		#endregion
+
+		#region Overrides of BaseGridViewControl<ATLB>
+
+		protected override void GroupingItems()
+		{
+			Grouping("Aircraft");
 		}
 
 		#endregion

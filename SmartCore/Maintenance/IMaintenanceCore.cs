@@ -18,6 +18,7 @@ namespace SmartCore.Maintenance
 		ICommonCollection<MaintenanceDirective> GetMaintenanceDirectives(params object[] parametres);
 
 		List<MaintenanceDirective> GetMaintenanceDirectives(BaseEntityObject parent, IEnumerable<ICommonFilter> filters = null);
+		List<MaintenanceDirective> GetMaintenanceDirectives(string text);
 
 		MaintenanceDirective GetMaintenanceDirective(Int32 itemId, int? parentAircraftId = null);
 
