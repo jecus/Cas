@@ -4352,6 +4352,14 @@ namespace SmartCore.DtoHelper
 				PublishedByUser = purchase.PublishedByUser,
 				CloseByUser = purchase.CloseByUser,
 				Number = purchase.Number,
+				DesignationId = purchase.Designation?.ItemId ?? -1,
+				PayTermId = (int)purchase.PayTerm,
+				IncoTermId = purchase.IncoTerm?.ItemId ?? -1,
+				ShipCompanyId = purchase.ShipCompanyId,
+				ShipTo = purchase.ShipTo,
+				CargoVolume = purchase.CargoVolume,
+				BruttoWeight = purchase.BruttoWeight,
+				NettoWeight = purchase.NettoWeight,
 				Files = purchase.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>
 			};
 		}
@@ -4379,7 +4387,15 @@ namespace SmartCore.DtoHelper
 				ClosedById = purchasedto.ClosedById ?? -1,
 				PublishedByUser = purchasedto.PublishedByUser,
 				CloseByUser = purchasedto.CloseByUser,
-				Number = purchasedto.Number
+				Number = purchasedto.Number,
+				Designation = Designation.GetItemById(purchasedto.DesignationId),
+				PayTerm = (PayTerm)purchasedto.PayTermId,
+				IncoTerm = IncoTerm.GetItemById(purchasedto.IncoTermId),
+				ShipCompanyId = purchasedto.ShipCompanyId,
+				ShipTo = purchasedto.ShipTo,
+				CargoVolume = purchasedto.CargoVolume,
+				BruttoWeight = purchasedto.BruttoWeight,
+				NettoWeight = purchasedto.NettoWeight
 			};
 
 			if (purchasedto.Files != null)

@@ -100,6 +100,13 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			textBoxPublishedBy.Text = _order.PublishedByUser;
 			textBoxAuthor.Text = GlobalObjects.CasEnvironment.IdentityUser.ToString();
 			textBoxRemarks.Text = _order.Remarks;
+			comboBoxIncoTerm.SelectedItem = _order.IncoTerm;
+			comboBoxDesignation.SelectedItem = _order.Designation;
+			comboBoxPayTerm.SelectedItem = _order.PayTerm;
+			numericBruttoWeight.Value = (decimal) _order.BruttoWeight;
+			numericCargoVolume.Value = (decimal) _order.CargoVolume;
+			numericNettoWeight.Value = (decimal) _order.NettoWeight;
+			textBoxShipTo.Text = _order.ShipTo;
 		}
 
 		#endregion
@@ -110,6 +117,18 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		{
 			comboBoxMeasure.Items.Clear();
 			comboBoxMeasure.Items.AddRange(Measure.GetByCategories(new[] { MeasureCategory.Mass, MeasureCategory.EconomicEntity }));
+
+			comboBoxDesignation.Items.Clear();
+			comboBoxDesignation.Items.AddRange(Designation.Items.ToArray());
+
+			comboBoxIncoTerm.Items.Clear();
+			comboBoxIncoTerm.Items.AddRange(IncoTerm.Items.ToArray());
+
+			comboBoxShipComp.Items.Clear();
+			//comboBoxShipComp.Items.AddRange(SupplierClass.Items.ToArray());
+
+			comboBoxPayTerm.Items.Clear();
+			comboBoxPayTerm.DataSource = Enum.GetValues(typeof(PayTerm));
 
 			comboBoxCondition.Items.Clear();
 			comboBoxCondition.DataSource = Enum.GetValues(typeof(ComponentStatus));
@@ -347,6 +366,13 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			_order.Number = metroTextBoxNumber.Text;
 			_order.Status = (WorkPackageStatus)comboBoxStatus.SelectedItem;
 			_order.Remarks = textBoxRemarks.Text;
+			_order.IncoTerm = (IncoTerm) comboBoxIncoTerm.SelectedItem;
+			_order.Designation = (Designation) comboBoxDesignation.SelectedItem;
+			_order.PayTerm = (PayTerm) comboBoxPayTerm.SelectedItem;
+			_order.BruttoWeight = (double) numericBruttoWeight.Value;
+			_order.CargoVolume = (double) numericCargoVolume.Value;
+			_order.NettoWeight = (double) numericNettoWeight.Value;
+			_order.ShipTo = textBoxShipTo.Text;
 
 			if (_order.ItemId <= 0)
 				_order.Author = GlobalObjects.CasEnvironment.IdentityUser.ToString();

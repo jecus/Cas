@@ -506,6 +506,7 @@
     <Compile Include="Entities\Dictionaries\ConditionState.cs" />
     <Compile Include="Entities\Dictionaries\ConsequenceFaults.cs" />
     <Compile Include="Entities\Dictionaries\ConsequenceOPS.cs" />
+    <Compile Include="Entities\Dictionaries\Designation.cs" />
     <Compile Include="Entities\Dictionaries\DirectiveSbType.cs" />
     <Compile Include="Entities\Dictionaries\DirectiveAffects.cs" />
     <Compile Include="Entities\Dictionaries\DirectiveReason.cs" />

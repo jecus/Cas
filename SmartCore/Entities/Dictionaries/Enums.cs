@@ -665,4 +665,10 @@ namespace SmartCore.Entities.Dictionaries
 		UnSchedule = 1
 	}
 
+	public enum PayTerm
+	{
+		PrePay = 0,
+		PostPay = 1
+	}
+
 }
