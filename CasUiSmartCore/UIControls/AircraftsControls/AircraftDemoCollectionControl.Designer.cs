@@ -212,8 +212,8 @@
 			this.maintenanceDirectiveFleet.Name = "componentFleet";
 			this.maintenanceDirectiveFleet.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.maintenanceDirectiveFleet.Size = new System.Drawing.Size(250, 20);
-			this.maintenanceDirectiveFleet.TabIndex = 12;
-			this.maintenanceDirectiveFleet.Text = "Routine Tasks Fleet";
+			this.maintenanceDirectiveFleet.TabIndex = 13;
+			this.maintenanceDirectiveFleet.Text = "AMP Program";
 			this.maintenanceDirectiveFleet.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.maintenanceDirectiveFleet.TextFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.maintenanceDirectiveFleet.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkMaintenanceDirectiveFleet);

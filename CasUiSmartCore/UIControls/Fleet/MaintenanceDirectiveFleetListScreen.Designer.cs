@@ -45,7 +45,6 @@ namespace CAS.UI.UIControls.Fleet
 			this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
 			this.TextBoxFilter = new System.Windows.Forms.TextBox();
 			this.buttonFilter = new System.Windows.Forms.Button();
-			this.buttonAddShowEquipmentAndMaterials = new CAS.UI.Management.Dispatchering.RichReferenceButton();
 			this.headerControl.SuspendLayout();
 			this.flowLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSeparatorBD)).BeginInit();
@@ -61,9 +60,7 @@ namespace CAS.UI.UIControls.Fleet
 			this.headerControl.ShowForecastButton = false;
 			this.headerControl.ShowPrintButton = false;
 			this.headerControl.Size = new System.Drawing.Size(735, 58);
-			this.headerControl.ForecastContextMenuClick += new System.EventHandler(this.ForecastMenuClick);
 			this.headerControl.ReloadButtonClick += new System.EventHandler(this.HeaderControlButtonReloadClick);
-			this.headerControl.PrintButtonDisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.HeaderControlButtonPrintDisplayerRequested);
 			this.headerControl.Controls.SetChildIndex(this.aircraftHeaderControl1, 0);
 			this.headerControl.SaveButtonClick += new System.EventHandler(this.HeaderControlSaveButtonClick);
 			// 
@@ -93,8 +90,6 @@ namespace CAS.UI.UIControls.Fleet
 			this.flowLayoutPanel1.Controls.Add(this.buttonDeleteSelected);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBoxSeparatorBD);
 			this.flowLayoutPanel1.Controls.Add(this.buttonExport);
-			this.flowLayoutPanel1.Controls.Add(this.pictureBoxSeperato);
-			this.flowLayoutPanel1.Controls.Add(this.buttonAddShowEquipmentAndMaterials);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBoxSeperatorBAN);
 			this.flowLayoutPanel1.Controls.Add(this.buttonApplyFilter);
 			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
@@ -303,38 +298,6 @@ namespace CAS.UI.UIControls.Fleet
 			this.labelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.labelTitle.TextFont = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			// 
-			// buttonAddShowEquipmentAndMaterials
-			// 
-			this.buttonAddShowEquipmentAndMaterials.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-			this.buttonAddShowEquipmentAndMaterials.ActiveBackgroundImage = null;
-			this.buttonAddShowEquipmentAndMaterials.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonAddShowEquipmentAndMaterials.Displayer = null;
-			this.buttonAddShowEquipmentAndMaterials.DisplayerText = "";
-			this.buttonAddShowEquipmentAndMaterials.Entity = null;
-			this.buttonAddShowEquipmentAndMaterials.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-			this.buttonAddShowEquipmentAndMaterials.FontSecondary = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-			this.buttonAddShowEquipmentAndMaterials.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
-			this.buttonAddShowEquipmentAndMaterials.ForeColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
-			this.buttonAddShowEquipmentAndMaterials.Icon = global::CAS.UI.Properties.Resources.KitsIcon;
-			this.buttonAddShowEquipmentAndMaterials.IconLayout = System.Windows.Forms.ImageLayout.Center;
-			this.buttonAddShowEquipmentAndMaterials.IconNotEnabled = global::CAS.UI.Properties.Resources.KitsIcon_gray;
-			this.buttonAddShowEquipmentAndMaterials.Location = new System.Drawing.Point(63, 0);
-			this.buttonAddShowEquipmentAndMaterials.Margin = new System.Windows.Forms.Padding(0);
-			this.buttonAddShowEquipmentAndMaterials.Name = "buttonAddShowEquipmentAndMaterials";
-			this.buttonAddShowEquipmentAndMaterials.NormalBackgroundImage = null;
-			this.buttonAddShowEquipmentAndMaterials.PaddingMain = new System.Windows.Forms.Padding(0);
-			this.buttonAddShowEquipmentAndMaterials.PaddingSecondary = new System.Windows.Forms.Padding(0);
-			this.buttonAddShowEquipmentAndMaterials.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInNew;
-			this.buttonAddShowEquipmentAndMaterials.ShowToolTip = true;
-			this.buttonAddShowEquipmentAndMaterials.Size = new System.Drawing.Size(52, 57);
-			this.buttonAddShowEquipmentAndMaterials.TabIndex = 19;
-			this.buttonAddShowEquipmentAndMaterials.TextAlignMain = System.Drawing.ContentAlignment.MiddleLeft;
-			this.buttonAddShowEquipmentAndMaterials.TextAlignSecondary = System.Drawing.ContentAlignment.TopLeft;
-			this.buttonAddShowEquipmentAndMaterials.TextMain = "";
-			this.buttonAddShowEquipmentAndMaterials.TextSecondary = "";
-			this.buttonAddShowEquipmentAndMaterials.ToolTipText = "Show Equipment And Materials";
-			this.buttonAddShowEquipmentAndMaterials.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.ButtonShowEquipmentAndMaterialsDisplayerRequested);
-			// 
 			// MaintenanceDirectiveFleetListScreen
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -371,7 +334,6 @@ namespace CAS.UI.UIControls.Fleet
 		private System.Windows.Forms.PictureBox pictureBoxSeperatorBAN;
 		private System.Windows.Forms.PictureBox pictureBoxSeperato;
 		private System.Windows.Forms.PictureBox pictureBoxSeperator;
-		private CAS.UI.Management.Dispatchering.RichReferenceButton buttonAddShowEquipmentAndMaterials;
 		private System.Windows.Forms.TextBox TextBoxFilter;
 		private System.Windows.Forms.Button buttonFilter;
 	}
