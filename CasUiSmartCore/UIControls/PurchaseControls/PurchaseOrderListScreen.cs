@@ -236,7 +236,15 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private void ToolStripMenuItemMoveToClick(object sender, EventArgs e)
 		{
 			var form = new MoveProductForm(_directivesViewer.SelectedItem);
-			form.ShowDialog();
+			if (form.ShowDialog() == DialogResult.OK)
+			{
+				_directivesViewer.SelectedItem.Status = WorkPackageStatus.Published;
+				_directivesViewer.SelectedItem.ClosingDate = DateTime.Now;
+				_directivesViewer.SelectedItem.CloseByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
+				_directivesViewer.SelectedItem.ClosedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
+				GlobalObjects.CasEnvironment.NewKeeper.Save(_directivesViewer.SelectedItem);
+				AnimatedThreadWorker.RunWorkerAsync();
+			}
 		}
 
 		#endregion

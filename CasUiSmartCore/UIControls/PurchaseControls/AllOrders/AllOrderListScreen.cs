@@ -394,7 +394,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 				{
 					if (rfq.Status == WorkPackageStatus.Closed)
 					{
-						MessageBox.Show("Initional Order " + rfq.Title + " is already closed.",
+						MessageBox.Show("Order " + rfq.Title + " is already closed.",
 							(string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
 							MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
 						continue;
@@ -507,6 +507,20 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 				{
 					MessageBox.Show("Create quatation successful", "Message infomation", MessageBoxButtons.OK,
 						MessageBoxIcon.Information);
+					AnimatedThreadWorker.RunWorkerAsync();
+				}
+			}
+			else if (_directivesViewer.SelectedItems[0] is PurchaseOrder)
+			{
+				var purch = _directivesViewer.SelectedItem as PurchaseOrder;
+				var form = new MoveProductForm(purch);
+				if (form.ShowDialog() == DialogResult.OK)
+				{
+					purch.Status = WorkPackageStatus.Published;
+					purch.ClosingDate = DateTime.Now;
+					purch.CloseByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
+					purch.ClosedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
+					GlobalObjects.CasEnvironment.NewKeeper.Save(purch);
 					AnimatedThreadWorker.RunWorkerAsync();
 				}
 			}
