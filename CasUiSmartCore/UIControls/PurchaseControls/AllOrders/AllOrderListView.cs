@@ -58,7 +58,8 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			var status = "1.Opened";
 			if (item.Status == WorkPackageStatus.Published)
 				status = "2.Published";
-			else status = "3.Closed";
+			else if (item.Status == WorkPackageStatus.Closed) 
+				status = "3.Closed";
 
 			subItems.Add(CreateRow(type, type));
 			subItems.Add(CreateRow(status, item.Status ));

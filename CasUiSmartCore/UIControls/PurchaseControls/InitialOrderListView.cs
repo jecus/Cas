@@ -45,7 +45,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 			var status = "1.Opened";
 			if (item.Status == WorkPackageStatus.Published)
 				status = "2.Published";
-			else status = "3.Closed";
+			else if (item.Status == WorkPackageStatus.Closed)
+				status = "3.Closed";
 
 			return new List<CustomCell>
 			{

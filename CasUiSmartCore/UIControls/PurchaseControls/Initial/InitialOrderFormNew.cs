@@ -187,7 +187,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void comboBoxDestination_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if(listViewInitialItems.SelectedItem != null)
+			if(listViewInitialItems.SelectedItem == null)
 				return;
 
 			comboBoxDefferedCategory.Items.Clear();
@@ -205,7 +205,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 					categories.Add(DeferredCategory.Unknown);
 
 					comboBoxDefferedCategory.Items.AddRange(categories.ToArray());
-					comboBoxDefferedCategory.SelectedItem = categories.FirstOrDefault(c => c.Equals(listViewInitialItems.SelectedItem.DeferredCategory)) ?? DeferredCategory.Unknown;
+					comboBoxDefferedCategory.SelectedItem = categories.FirstOrDefault(c => c.Equals(listViewInitialItems.SelectedItem?.DeferredCategory)) ?? DeferredCategory.Unknown;
 				}
 			}
 			else comboBoxDefferedCategory.Enabled = false;
@@ -298,6 +298,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				MessageBox.Show("Please, enter a Title", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Exclamation);
+
 				return;
 			}
 
