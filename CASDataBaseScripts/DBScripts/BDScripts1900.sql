@@ -49,7 +49,7 @@ if not exists ( select  *
 					and c.name = 'CargoVolume' ) 
 
 	alter table dbo.PurchaseOrders
-	add CargoVolume float not null default 0
+	add CargoVolume nvarchar (MAX)
 GO
 
 if not exists ( select  *
@@ -58,7 +58,7 @@ if not exists ( select  *
 					and c.name = 'BruttoWeight' ) 
 
 	alter table dbo.PurchaseOrders
-	add BruttoWeight float not null default 0
+	add BruttoWeight nvarchar (MAX)
 GO
 
 if not exists ( select  *
@@ -67,5 +67,5 @@ if not exists ( select  *
 					and c.name = 'NettoWeight' ) 
 
 	alter table dbo.PurchaseOrders
-	add NettoWeight float not null default 0
+	add NettoWeight nvarchar (MAX) 
 GO

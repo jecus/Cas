@@ -58,13 +58,13 @@ namespace SmartCore.Purchase
 		public string ShipTo { get; set; }
 
 		[TableColumn("CargoVolume")]
-		public double CargoVolume { get; set; }
+		public string CargoVolume { get; set; }
 
 		[TableColumn("BruttoWeight")]
-		public double BruttoWeight { get; set; }
+		public string BruttoWeight { get; set; }
 
 		[TableColumn("NettoWeight")]
-		public double NettoWeight { get; set; }
+		public string NettoWeight { get; set; }
 
 		/// <summary>
 		/// 

@@ -95,13 +95,13 @@ namespace EntityCore.DTO.General
 		public string ShipTo { get; set; }
 
 		[Column("CargoVolume")]
-		public double CargoVolume { get; set; }
+		public string CargoVolume { get; set; }
 
 		[Column("BruttoWeight")]
-		public double BruttoWeight { get; set; }
+		public string BruttoWeight { get; set; }
 
 		[Column("NettoWeight")]
-		public double NettoWeight { get; set; }
+		public string NettoWeight { get; set; }
 
 		[Child(FilterType.Equal, "ParentTypeId", 1860)]
 		public ICollection<ItemFileLinkDTO> Files { get; set; }

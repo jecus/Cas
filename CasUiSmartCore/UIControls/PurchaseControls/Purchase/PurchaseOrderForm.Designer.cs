@@ -94,11 +94,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.metroLabelShippingCompany = new MetroFramework.Controls.MetroLabel();
 			this.textBoxShipTo = new MetroFramework.Controls.MetroTextBox();
 			this.metroLabelShipTo = new MetroFramework.Controls.MetroLabel();
-			this.numericCargoVolume = new NumericUpDown();
+			this.textBoxCargoVolume = new MetroTextBox();
 			this.metroLabelCargoVolume = new MetroFramework.Controls.MetroLabel();
-			this.numericBruttoWeight = new NumericUpDown();
+			this.textBoxBruttoWeight = new MetroTextBox();
 			this.metroLabelBruttoWeight = new MetroFramework.Controls.MetroLabel();
-			this.numericNettoWeight = new NumericUpDown();
+			this.textBoxNettoWeight = new MetroTextBox();
 			this.metroLabelNettoWeight = new MetroFramework.Controls.MetroLabel();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -934,17 +934,16 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.metroLabelShipTo.Text = "Ship To:";
 			this.metroLabelShipTo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// numericCargoVolume
+			// textBoxCargoVolume
 			// 
 			// 
 			// 
 			// 
-			this.numericCargoVolume.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.numericCargoVolume.Location = new System.Drawing.Point(544, 483);
-			this.numericCargoVolume.Name = "numericCargoVolume";
-			this.numericCargoVolume.Size = new System.Drawing.Size(166, 22);
-			this.numericCargoVolume.TabIndex = 317;
-			this.numericCargoVolume.DecimalPlaces = 2;
+			this.textBoxCargoVolume.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxCargoVolume.Location = new System.Drawing.Point(544, 483);
+			this.textBoxCargoVolume.Name = "textBoxCargoVolume";
+			this.textBoxCargoVolume.Size = new System.Drawing.Size(166, 22);
+			this.textBoxCargoVolume.TabIndex = 317;
 			// 
 			// metroLabelCargoVolume
 			// 
@@ -956,17 +955,16 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.metroLabelCargoVolume.Text = "Cargo volume:";
 			this.metroLabelCargoVolume.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// numericBruttoWeight
+			// textBoxBruttoWeight
 			// 
 			// 
 			// 
 			// 
-			this.numericBruttoWeight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.numericBruttoWeight.Location = new System.Drawing.Point(544, 514);
-			this.numericBruttoWeight.Name = "numericBruttoWeight";
-			this.numericBruttoWeight.Size = new System.Drawing.Size(166, 22);
-			this.numericBruttoWeight.TabIndex = 319;
-			this.numericCargoVolume.DecimalPlaces = 2;
+			this.textBoxBruttoWeight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxBruttoWeight.Location = new System.Drawing.Point(544, 514);
+			this.textBoxBruttoWeight.Name = "textBoxBruttoWeight";
+			this.textBoxBruttoWeight.Size = new System.Drawing.Size(166, 22);
+			this.textBoxBruttoWeight.TabIndex = 319;
 			// 
 			// metroLabelBruttoWeight
 			// 
@@ -978,17 +976,16 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.metroLabelBruttoWeight.Text = "Brutto weight:";
 			this.metroLabelBruttoWeight.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// numericNettoWeight
+			// textBoxNettoWeight
 			// 
 			// 
 			// 
 			// 
-			this.numericNettoWeight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.numericNettoWeight.Location = new System.Drawing.Point(544, 545);
-			this.numericNettoWeight.Name = "numericNettoWeight";
-			this.numericNettoWeight.Size = new System.Drawing.Size(166, 22);
-			this.numericNettoWeight.TabIndex = 321;
-			this.numericCargoVolume.DecimalPlaces = 2;
+			this.textBoxNettoWeight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxNettoWeight.Location = new System.Drawing.Point(544, 545);
+			this.textBoxNettoWeight.Name = "textBoxNettoWeight";
+			this.textBoxNettoWeight.Size = new System.Drawing.Size(166, 22);
+			this.textBoxNettoWeight.TabIndex = 321;
 			// 
 			// metroLabelNettoWeight
 			// 
@@ -1005,11 +1002,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1288, 623);
-			this.Controls.Add(this.numericNettoWeight);
+			this.Controls.Add(this.textBoxNettoWeight);
 			this.Controls.Add(this.metroLabelNettoWeight);
-			this.Controls.Add(this.numericBruttoWeight);
+			this.Controls.Add(this.textBoxBruttoWeight);
 			this.Controls.Add(this.metroLabelBruttoWeight);
-			this.Controls.Add(this.numericCargoVolume);
+			this.Controls.Add(this.textBoxCargoVolume);
 			this.Controls.Add(this.metroLabelCargoVolume);
 			this.Controls.Add(this.textBoxShipTo);
 			this.Controls.Add(this.metroLabelShipTo);
@@ -1111,11 +1108,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private MetroLabel metroLabelShippingCompany;
 		private MetroTextBox textBoxShipTo;
 		private MetroLabel metroLabelShipTo;
-		private NumericUpDown numericCargoVolume;
+		private MetroTextBox textBoxCargoVolume;
 		private MetroLabel metroLabelCargoVolume;
-		private NumericUpDown numericBruttoWeight;
+		private MetroTextBox textBoxBruttoWeight;
 		private MetroLabel metroLabelBruttoWeight;
-		private NumericUpDown numericNettoWeight;
+		private MetroTextBox textBoxNettoWeight;
 		private MetroLabel metroLabelNettoWeight;
 	}
 }

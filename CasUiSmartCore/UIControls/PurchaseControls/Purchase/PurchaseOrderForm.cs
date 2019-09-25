@@ -108,9 +108,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			comboBoxIncoTerm.SelectedItem = _order.IncoTerm;
 			comboBoxDesignation.SelectedItem = _order.Designation;
 			comboBoxPayTerm.SelectedItem = _order.PayTerm;
-			numericBruttoWeight.Value = (decimal) _order.BruttoWeight;
-			numericCargoVolume.Value = (decimal) _order.CargoVolume;
-			numericNettoWeight.Value = (decimal) _order.NettoWeight;
+			textBoxBruttoWeight.Text = _order.BruttoWeight;
+			textBoxCargoVolume.Text =  _order.CargoVolume;
+			textBoxNettoWeight.Text =  _order.NettoWeight;
 			textBoxShipTo.Text = _order.ShipTo;
 		}
 
@@ -375,9 +375,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			_order.IncoTerm = (IncoTerm) comboBoxIncoTerm.SelectedItem;
 			_order.Designation = (Designation) comboBoxDesignation.SelectedItem;
 			_order.PayTerm = (PayTerm) comboBoxPayTerm.SelectedItem;
-			_order.BruttoWeight = (double) numericBruttoWeight.Value;
-			_order.CargoVolume = (double) numericCargoVolume.Value;
-			_order.NettoWeight = (double) numericNettoWeight.Value;
+			_order.BruttoWeight =  textBoxBruttoWeight.Text;
+			_order.CargoVolume =  textBoxCargoVolume.Text;
+			_order.NettoWeight =  textBoxNettoWeight.Text;
 			_order.ShipCompanyId = ((Supplier) comboBoxShipComp.SelectedItem).ItemId;
 			_order.ShipTo = textBoxShipTo.Text;
 
