@@ -54,8 +54,14 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 				type = "Quotation";
 			else type = "Purchase";
 
+			
+			var status = "1.Opened";
+			if (item.Status == WorkPackageStatus.Published)
+				status = "2.Published";
+			else status = "3.Closed";
+
 			subItems.Add(CreateRow(type, type));
-			subItems.Add(CreateRow(item.Status.ToString(), item.Status ));
+			subItems.Add(CreateRow(status, item.Status ));
 			subItems.Add(CreateRow(item.Number, item.Number ));
 			subItems.Add(CreateRow(item.Title, item.Title ));
 			subItems.Add(CreateRow( "", "" ));

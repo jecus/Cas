@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using CAS.UI.UIControls.NewGrid;
 using CAS.UI.UIControls.PurchaseControls.Initial;
 using CASTerms;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls
@@ -41,10 +42,14 @@ namespace CAS.UI.UIControls.PurchaseControls
 		protected override List<CustomCell> GetListViewSubItems(InitialOrder item)
 		{
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
+			var status = "1.Opened";
+			if (item.Status == WorkPackageStatus.Published)
+				status = "2.Published";
+			else status = "3.Closed";
 
 			return new List<CustomCell>
 			{
-				CreateRow(item.Status.ToString(), item.Status),
+				CreateRow(status, item.Status),
 				CreateRow(item.Number, item.Number),
 				CreateRow(item.Title, item.Title),
 				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.OpeningDate), item.OpeningDate),
