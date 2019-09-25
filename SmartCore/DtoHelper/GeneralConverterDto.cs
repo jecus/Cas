@@ -36,6 +36,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = required.ItemId,
 				IsDeleted = required.IsDeleted,
+				Updated = required.Updated,
 				CorrectorId = required.CorrectorId,
 				ParentId = required.ParentId,
 				ParentTypeId = required.ParentTypeId,
@@ -79,6 +80,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = record.ItemId,
 				IsDeleted = record.IsDeleted,
+				Updated = record.Updated,
 				CorrectorId = record.CorrectorId,
 				FlightRegimeId = record.WorkRegime?.ItemId ?? -1,
 				Remarks = record.Remarks,
@@ -112,6 +114,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = aircraft.ItemId,
 				IsDeleted = aircraft.IsDeleted,
+				Updated = aircraft.Updated,
 				CorrectorId = aircraft.CorrectorId,
 				AircraftFrameId = aircraft.AircraftFrameId,
 				OperatorID = aircraft.OperatorId,
@@ -236,6 +239,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = condition.ItemId,
 				IsDeleted = condition.IsDeleted,
+				Updated = condition.Updated,
 				CorrectorId = condition.CorrectorId,
 				FlightID = condition.FlightId,
 				EngineID = condition.EngineId,
@@ -311,6 +315,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = record.ItemId,
 				IsDeleted = record.IsDeleted,
+				Updated = record.Updated,
 				CorrectorId = record.CorrectorId,
 				ParentAircraftId = record.ParentAircraftId,
 				MSG = (short?) record.MSG,
@@ -348,6 +353,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = card.ItemId,
 				IsDeleted = card.IsDeleted,
+				Updated = card.Updated,
 				CorrectorId = card.CorrectorId,
 				ParentId = card.ParentId,
 				WorkArea = card.WorkArea,
@@ -457,6 +463,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = cardTask.ItemId,
 				IsDeleted = cardTask.IsDeleted,
+				Updated = cardTask.Updated,
 				CorrectorId = cardTask.CorrectorId,
 				JobCardId = cardTask.JobCard?.ItemId,
 				ParentTaskId = cardTask.ParentTaskId,
@@ -492,6 +499,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = specialist.ItemId,
 				IsDeleted = specialist.IsDeleted,
+				Updated = specialist.Updated,
 				CorrectorId = specialist.CorrectorId,
 				FirstName = specialist.FirstName,
 				ShortName = specialist.ShortName,
@@ -601,6 +609,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = specialistTraining.ItemId,
 				IsDeleted = specialistTraining.IsDeleted,
+				Updated = specialistTraining.Updated,
 				CorrectorId = specialistTraining.CorrectorId,
 				SpecialistId = specialistTraining.SpecialistId,
 				TrainingId = specialistTraining.TrainingType?.ItemId,
@@ -653,6 +662,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = license.ItemId,
 				IsDeleted = license.IsDeleted,
+				Updated = license.Updated,
 				CorrectorId = license.CorrectorId,
 				Confirmation = license.Confirmation,
 				LicenseTypeID = license.EmployeeLicenceType?.ItemId ?? -1,
@@ -711,6 +721,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = licenseRemark.ItemId,
 				IsDeleted = licenseRemark.IsDeleted,
+				Updated = licenseRemark.Updated,
 				CorrectorId = licenseRemark.CorrectorId,
 				IssueDate = licenseRemark.IssueDate,
 				RightsId = licenseRemark.Rights?.ItemId ?? -1,
@@ -742,6 +753,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = instrumentRating.ItemId,
 				IsDeleted = instrumentRating.IsDeleted,
+				Updated = instrumentRating.Updated,
 				CorrectorId = instrumentRating.CorrectorId,
 				IssueDate = instrumentRating.IssueDate,
 				SpecialistLicenseId = instrumentRating.SpecialistLicenseId,
@@ -777,6 +789,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = licenseRating.ItemId,
 				IsDeleted = licenseRating.IsDeleted,
+				Updated = licenseRating.Updated,
 				CorrectorId = licenseRating.CorrectorId,
 				SpecialistLicenseId = licenseRating.SpecialistLicenseId,
 				IssueDate = licenseRating.IssueDate,
@@ -806,6 +819,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = licenseDetail.ItemId,
 				IsDeleted = licenseDetail.IsDeleted,
+				Updated = licenseDetail.Updated,
 				CorrectorId = licenseDetail.CorrectorId,
 				Description = licenseDetail.Description,
 				IssueDate = licenseDetail.IssueDate,
@@ -835,6 +849,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = specialistCaa.ItemId,
 				IsDeleted = specialistCaa.IsDeleted,
+				Updated = specialistCaa.Updated,
 				CorrectorId = specialistCaa.CorrectorId,
 				NumberCAA = specialistCaa.CAANumber,
 				CAAId = specialistCaa.Caa?.ItemId ?? -1,
@@ -870,6 +885,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = document.ItemId,
 				IsDeleted = document.IsDeleted,
+				Updated = document.Updated,
 				CorrectorId = document.CorrectorId,
 				ParentID = document.ParentId,
 				ParentTypeId = document.ParentTypeId,
@@ -957,6 +973,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = supplier.ItemId,
 				IsDeleted = supplier.IsDeleted,
+				Updated = supplier.Updated,
 				CorrectorId = supplier.CorrectorId,
 				Name = supplier.Name,
 				ShortName = supplier.ShortName,
@@ -1017,6 +1034,7 @@ namespace SmartCore.DtoHelper
 
 				ItemId = record.ItemId,
 				IsDeleted = record.IsDeleted,
+				Updated = record.Updated,
 				CorrectorId = record.CorrectorId,
 				AircraftWorkerCategoryId = record.AircraftWorkerCategory?.ItemId,
 				AircraftTypeId = record.AircraftModel?.ItemId,
@@ -1051,6 +1069,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = category.ItemId,
 				IsDeleted = category.IsDeleted,
+				Updated = category.Updated,
 				CorrectorId = category.CorrectorId,
 				Category = category.Category
 			};
@@ -1075,6 +1094,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = link.ItemId, 
 				IsDeleted = link.IsDeleted,
+				Updated = link.Updated,
 				CorrectorId = link.CorrectorId,
 				ParentId = link.ParentId,
 				ParentTypeId = link.ParentTypeId,
@@ -1106,6 +1126,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = file.ItemId,
 				IsDeleted = file.IsDeleted,
+				Updated = file.Updated,
 				CorrectorId = file.CorrectorId,
 				FileName = file.FileName,
 				FileData = file.FileData,
@@ -1133,6 +1154,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = audit.ItemId,
 				IsDeleted = audit.IsDeleted,
+				Updated = audit.Updated,
 				CorrectorId = audit.CorrectorId,
 				ParentId = audit.ParentId,
 				Number = audit.Number,
@@ -1207,6 +1229,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = auditrec.ItemId,
 				IsDeleted = auditrec.IsDeleted,
+				Updated = auditrec.Updated,
 				CorrectorId = auditrec.CorrectorId,
 				AuditId = auditrec.AuditId,
 				DirectivesId = auditrec.DirectiveId,
@@ -1243,6 +1266,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = aireq.ItemId,
 				IsDeleted = aireq.IsDeleted,
+				Updated = aireq.Updated,
 				CorrectorId = aireq.CorrectorId,
 				Description = aireq.Description,
 				AircraftId = aireq.AircraftId,
@@ -1274,6 +1298,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = arcf.ItemId,
 				IsDeleted = arcf.IsDeleted,
+				Updated = arcf.Updated,
 				CorrectorId = arcf.CorrectorId,
 				ATLBID = arcf.ATLBId,
 				AircraftId = arcf.AircraftId,
@@ -1376,6 +1401,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = atl.ItemId,
 				IsDeleted = atl.IsDeleted,
+				Updated = atl.Updated,
 				CorrectorId = atl.CorrectorId,
 				AircraftID = atl.ParentAircraftId,
 				ATLBNo = atl.ATLBNo,
@@ -1421,6 +1447,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = corts.ItemId,
 				IsDeleted = corts.IsDeleted,
+				Updated = corts.Updated,
 				CorrectorId = corts.CorrectorId,
 				Station = corts.Station ,
 				RecordDate = corts.RecordDate,
@@ -1455,6 +1482,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = comdir.ItemId,
 				IsDeleted = comdir.IsDeleted,
+				Updated = comdir.Updated,
 				CorrectorId = comdir.CorrectorId,
 				DirectiveType = comdir.DirectiveTypeId,
 				Threshold = comdir.Threshold?.ToBinary(),
@@ -1556,6 +1584,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = comp.ItemId,
 				IsDeleted = comp.IsDeleted,
+				Updated = comp.Updated,
 				CorrectorId = comp.CorrectorId,
 				StartDate = comp.StartDate,
 				ATAChapterId = comp.ATAChapter?.ItemId,
@@ -1770,6 +1799,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = comp.ItemId,
 				IsDeleted = comp.IsDeleted,
+				Updated = comp.Updated,
 				CorrectorId = comp.CorrectorId,
 				StartDate = comp.StartDate,
 				BaseComponentTypeId = comp.BaseComponentTypeId,
@@ -1992,6 +2022,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = cllpcr.ItemId,
 				IsDeleted = cllpcr.IsDeleted,
+				Updated = cllpcr.Updated,
 				CorrectorId = cllpcr.CorrectorId,
 				ParentId = cllpcr.ParentId,
 				RecordDate = cllpcr.RecordDate,
@@ -2031,6 +2062,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = cllpcd.ItemId,
 				IsDeleted = cllpcd.IsDeleted,
+				Updated = cllpcd.Updated,
 				CorrectorId = cllpcd.CorrectorId,
 				LLPCategoryId = cllpcd.ParentCategory?.ItemId ?? -1,
 				LLPLifeLength = cllpcd.LLPLifelength?.ConvertToByteArray(),
@@ -2071,6 +2103,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = coc.ItemId,
 				IsDeleted = coc.IsDeleted,
+				Updated = coc.Updated,
 				CorrectorId = coc.CorrectorId,
 				FlightId = coc.FlightId,
 				OilAdded = coc.OilAdded,
@@ -2106,6 +2139,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = cwirp.ItemId,
 				IsDeleted = cwirp.IsDeleted,
+				Updated = cwirp.Updated,
 				CorrectorId = cwirp.CorrectorId,
 				FlightRegime = cwirp.FlightRegime?.ItemId,
 				TimeInRegimeMax = (int?)cwirp.TimeInRegimeMax.Ticks,
@@ -2323,6 +2357,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = dmgdoc.ItemId,
 				IsDeleted = dmgdoc.IsDeleted,
+				Updated = dmgdoc.Updated,
 				CorrectorId = dmgdoc.CorrectorId,
 				DirectiveId = dmgdoc.ParentDirectiveId,
 				DamageChartId = dmgdoc.DamageChartId,
@@ -2366,6 +2401,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = dmgsec.ItemId,
 				IsDeleted = dmgsec.IsDeleted,
+				Updated = dmgsec.Updated,
 				CorrectorId = dmgsec.CorrectorId,
 				DamageChartColumn = dmgsec.DamageChartColumn,
 				DamageChartRow = dmgsec.DamageChartRow,
@@ -2396,6 +2432,7 @@ namespace SmartCore.DtoHelper
 				ItemId = direc.ItemId,
 				Title = direc.Title,
 				IsDeleted = direc.IsDeleted,
+				Updated = direc.Updated,
 				CorrectorId = direc.CorrectorId,
 				IsApplicability = direc.IsApplicability,
 				ManHours = direc.ManHours,
@@ -2524,6 +2561,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = direc.ItemId,
 				IsDeleted = direc.IsDeleted,
+				Updated = direc.Updated,
 				CorrectorId = direc.CorrectorId,
 				Title = direc.Title,
 				IsApplicability = direc.IsApplicability,
@@ -2648,6 +2686,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = direc.ItemId,
 				IsDeleted = direc.IsDeleted,
+				Updated = direc.Updated,
 				CorrectorId = direc.CorrectorId,
 				Title = direc.Title,
 				IsApplicability = direc.IsApplicability,
@@ -2831,6 +2870,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = dirrec.ItemId,
 				IsDeleted = dirrec.IsDeleted,
+				Updated = dirrec.Updated,
 				CorrectorId = dirrec.CorrectorId,
 				NumGroup = dirrec.PerformanceNum,
 				RecordTypeID = dirrec.RecordTypeId,
@@ -2886,6 +2926,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = dirrecdto.ItemId,
 				IsDeleted = dirrecdto.IsDeleted,
+				Updated = dirrecdto.Updated,
 				CorrectorId = dirrecdto.CorrectorId,
 				IsControlPoint = dirrecdto.IsControlPoint,
 				CalculatedPerformanceSource = dirrecdto.CalculatedPerformanceSource?.ConvertToByteArray(),
@@ -2908,6 +2949,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = disc.ItemId,
 				IsDeleted = disc.IsDeleted,
+				Updated = disc.Updated,
 				CorrectorId = disc.CorrectorId,
 				FlightID = disc.FlightId,
 				FilledBy = disc.FilledBy,
@@ -2987,6 +3029,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = engacctime.ItemId,
 				IsDeleted = engacctime.IsDeleted,
+				Updated = engacctime.Updated,
 				CorrectorId = engacctime.CorrectorId,
 				FlightId = engacctime.FlightId,
 				EngineId = engacctime.BaseComponentId,
@@ -3019,6 +3062,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = engtimeinregime.ItemId,
 				IsDeleted = engtimeinregime.IsDeleted,
+				Updated = engtimeinregime.Updated,
 				CorrectorId = engtimeinregime.CorrectorId,
 				FlightId = engtimeinregime.FlightId,
 				EngineId = engtimeinregime.BaseComponentId,
@@ -3053,6 +3097,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = evtcond.ItemId,
 				IsDeleted = evtcond.IsDeleted,
+				Updated = evtcond.Updated,
 				CorrectorId = evtcond.CorrectorId,
 				EventConditionTypeId = evtcond.EventConditionType?.ItemId,
 				ValueId = (int?)evtcond.Value,
@@ -3082,6 +3127,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = evnt.ItemId,
 				IsDeleted = evnt.IsDeleted,
+				Updated = evnt.Updated,
 				CorrectorId = evnt.CorrectorId,
 				EventTypeId = evnt.EventType?.ItemId,
 				EventCategoryId = evnt.EventCategory?.ItemId,
@@ -3132,6 +3178,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = evtrisklvl.ItemId,
 				IsDeleted = evtrisklvl.IsDeleted,
+				Updated = evtrisklvl.Updated,
 				CorrectorId = evtrisklvl.CorrectorId,
 				EventCategoryId = evtrisklvl.EventCategory?.ItemId,
 				EventClassId = evtrisklvl.EventClass?.ItemId,
@@ -3165,6 +3212,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = cargorec.ItemId,
 				IsDeleted = cargorec.IsDeleted,
+				Updated = cargorec.Updated,
 				CorrectorId = cargorec.CorrectorId,
 				FlightId = cargorec.FlightId,
 				CargoCategory = cargorec.CargoCategory?.ItemId,
@@ -3197,6 +3245,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = crewrec.ItemId,
 				IsDeleted = crewrec.IsDeleted,
+				Updated = crewrec.Updated,
 				CorrectorId = crewrec.CorrectorId,
 				FlightID = crewrec.FlightId,
 				SpecialistID = crewrec.Specialist?.ItemId,
@@ -3231,6 +3280,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = airmodrel.ItemId,
 				IsDeleted = airmodrel.IsDeleted,
+				Updated = airmodrel.Updated,
 				CorrectorId = airmodrel.CorrectorId,
 				AircraftModelId = airmodrel.AircraftModel?.ItemId,
 				FlightNumberId = airmodrel.FlightNumber?.ItemId,
@@ -3258,6 +3308,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = airprelation.ItemId,
 				IsDeleted = airprelation.IsDeleted,
+				Updated = airprelation.Updated,
 				CorrectorId = airprelation.CorrectorId,
 				FlightNumberId = airprelation.FlightNumber?.ItemId,
 				AirportId = airprelation.Airport?.ItemId,
@@ -3284,6 +3335,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = flightcrewrec.ItemId,
 				IsDeleted = flightcrewrec.IsDeleted,
+				Updated = flightcrewrec.Updated,
 				CorrectorId = flightcrewrec.CorrectorId,
 				FlightNumberId = flightcrewrec.FlightNumber?.ItemId,
 				SpecializationId = flightcrewrec.Specialization?.ItemId,
@@ -3312,6 +3364,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = flightnum.ItemId,
 				IsDeleted = flightnum.IsDeleted,
+				Updated = flightnum.Updated,
 				CorrectorId = flightnum.CorrectorId,
 				FlightNoId = flightnum.FlightNo?.ItemId ?? -1,
 				Remarks = flightnum.Description,
@@ -3373,6 +3426,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = numperiod.ItemId,
 				IsDeleted = numperiod.IsDeleted,
+				Updated = numperiod.Updated,
 				CorrectorId = numperiod.CorrectorId,
 				FlightNumberId = numperiod.FlightNumberId,
 				PeriodFrom = numperiod.PeriodFrom,
@@ -3420,6 +3474,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = passengerrec.ItemId,
 				IsDeleted = passengerrec.IsDeleted,
+				Updated = passengerrec.Updated,
 				CorrectorId = passengerrec.CorrectorId,
 				FlightId = passengerrec.FlightId,
 				PassengerCategoryId = passengerrec.PassengerCategory?.ItemId,
@@ -3453,6 +3508,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = planops.ItemId,
 				IsDeleted = planops.IsDeleted,
+				Updated = planops.Updated,
 				CorrectorId = planops.CorrectorId,
 				Remarks = planops.Remarks,
 				DateFrom = planops.From,
@@ -3481,6 +3537,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = planopsrec.ItemId,
 				IsDeleted = planopsrec.IsDeleted,
+				Updated = planopsrec.Updated,
 				CorrectorId = planopsrec.CorrectorId,
 				FlightPlanOpsId = planopsrec.ParentFlightPlanOps?.ItemId,
 				AircraftId = planopsrec.AircraftId,
@@ -3534,6 +3591,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = fltrack.ItemId,
 				IsDeleted = fltrack.IsDeleted,
+				Updated = fltrack.Updated,
 				CorrectorId = fltrack.CorrectorId,
 				Remarks = fltrack.Remarks,
 				DayOfWeek = fltrack.DayOfWeek?.ItemId,
@@ -3569,6 +3627,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = trackrec.ItemId,
 				IsDeleted = trackrec.IsDeleted,
+				Updated = trackrec.Updated,
 				CorrectorId = trackrec.CorrectorId,
 				FlightTripId = trackrec.FlightTripId,
 				FlightPeriodId = trackrec.FlightPeriodId
@@ -3595,6 +3654,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = hangar.ItemId,
 				IsDeleted = hangar.IsDeleted,
+				Updated = hangar.Updated,
 				CorrectorId = hangar.CorrectorId,
 				StoreName = hangar.Name,
 				Location = hangar.Location,
@@ -3624,6 +3684,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = hydrcondition.ItemId,
 				IsDeleted = hydrcondition.IsDeleted,
+				Updated = hydrcondition.Updated,
 				CorrectorId = hydrcondition.CorrectorId,
 				FlightId = hydrcondition.FlightId,
 				Remain = hydrcondition.Remain,
@@ -3659,6 +3720,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = initorder.ItemId,
 				IsDeleted = initorder.IsDeleted,
+				Updated = initorder.Updated,
 				CorrectorId = initorder.CorrectorId,
 				Title = initorder.Title,
 				PublishedById = initorder.PublishedById,
@@ -3723,6 +3785,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = orderrec.ItemId,
 				IsDeleted = orderrec.IsDeleted,
+				Updated = orderrec.Updated,
 				CorrectorId = orderrec.CorrectorId,
 				InitialReason = orderrec.InitialReason?.ItemId,
 				Priority = orderrec.Priority.ItemId,
@@ -3792,6 +3855,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = itemsrel.ItemId,
 				IsDeleted = itemsrel.IsDeleted,
+				Updated = itemsrel.Updated,
 				CorrectorId = itemsrel.CorrectorId,
 				FirstItemId = itemsrel.FirstItemId,
 				FirtsItemTypeId = itemsrel.FirtsItemTypeId,
@@ -3824,6 +3888,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = supprelation.ItemId,
 				IsDeleted = supprelation.IsDeleted,
+				Updated = supprelation.Updated,
 				CorrectorId = supprelation.CorrectorId,
 				KitId = supprelation.KitId,
 				SupplierId = supprelation.SupplierId,
@@ -3858,6 +3923,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = knowmod.ItemId,
 				IsDeleted = knowmod.IsDeleted,
+				Updated = knowmod.Updated,
 				CorrectorId = knowmod.CorrectorId,
 				Number = knowmod.Number,
 				Title = knowmod.Title,
@@ -3885,6 +3951,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = gearcondition.ItemId,
 				IsDeleted = gearcondition.IsDeleted,
+				Updated = gearcondition.Updated,
 				CorrectorId = gearcondition.CorrectorId,
 				FlightID = gearcondition.FlightId,
 				LandingGearID = gearcondition.LandingGearId,
@@ -3917,6 +3984,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = maincbtrec.ItemId,
 				IsDeleted = maincbtrec.IsDeleted,
+				Updated = maincbtrec.Updated,
 				CorrectorId = maincbtrec.CorrectorId,
 				CheckId = maincbtrec.CheckId,
 				CheckPerformaceNum = maincbtrec.CheckPerformaceNum,
@@ -3956,6 +4024,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = maincheck.ItemId,
 				IsDeleted = maincheck.IsDeleted,
+				Updated = maincheck.Updated,
 				CorrectorId = maincheck.CorrectorId,
 				Name = maincheck.Name,
 				Interval = maincheck.Interval?.ConvertToByteArray(),
@@ -4026,6 +4095,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = mainchecktype.ItemId,
 				IsDeleted = mainchecktype.IsDeleted,
+				Updated = mainchecktype.Updated,
 				CorrectorId = mainchecktype.CorrectorId,
 				Name = mainchecktype.FullName,
 				Priority = mainchecktype.Priority,
@@ -4055,6 +4125,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = modulerec.ItemId,
 				IsDeleted = modulerec.IsDeleted,
+				Updated = modulerec.Updated,
 				CorrectorId = modulerec.CorrectorId,
 				AircraftWorkerCategoryId = modulerec.AircraftWorkerCategory?.ItemId,
 				KnowledgeModuleId = modulerec.KnowledgeModule?.ItemId,
@@ -4082,6 +4153,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = mtop.ItemId,
 				IsDeleted = mtop.IsDeleted,
+				Updated = mtop.Updated,
 				CorrectorId = mtop.CorrectorId,
 				Name = mtop.Name,
 				ParentAircraftId = mtop.ParentAircraftId,
@@ -4123,6 +4195,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = mtopcheckrec.ItemId,
 				IsDeleted = mtopcheckrec.IsDeleted,
+				Updated = mtopcheckrec.Updated,
 				CorrectorId = mtopcheckrec.CorrectorId,
 				CheckName = mtopcheckrec.CheckName,
 				Remarks = mtopcheckrec.Remarks,
@@ -4160,6 +4233,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = docreference.ItemId,
 				IsDeleted = docreference.IsDeleted,
+				Updated = docreference.Updated,
 				CorrectorId = docreference.CorrectorId,
 				ProcedureId = docreference.Procedure?.ItemId,
 				DocumentId = docreference.Document?.ItemId,
@@ -4185,6 +4259,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = procedure.ItemId,
 				IsDeleted = procedure.IsDeleted,
+				Updated = procedure.Updated,
 				CorrectorId = procedure.CorrectorId,
 				Title = procedure.Title,
 				ProcedureTypeId = procedure.ProcedureType?.ItemId,
@@ -4284,6 +4359,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = prodcost.ItemId,
 				IsDeleted = prodcost.IsDeleted,
+				Updated = prodcost.Updated,
 				CorrectorId = prodcost.CorrectorId,
 				SupplierId = prodcost.SupplierId,
 				KitId = prodcost.KitId,
@@ -4334,6 +4410,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = purchase.ItemId,
 				IsDeleted = purchase.IsDeleted,
+				Updated = purchase.Updated,
 				CorrectorId = purchase.CorrectorId,
 				Title = purchase.Title,
 				Description = purchase.Description,
@@ -4410,6 +4487,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = purchaserec.ItemId,
 				IsDeleted = purchaserec.IsDeleted,
+				Updated = purchaserec.Updated,
 				CorrectorId = purchaserec.CorrectorId,
 				ParentPackageId = purchaserec.ParentPackageId,
 				PackageItemId = purchaserec.PackageItemId,
@@ -4460,6 +4538,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = request.ItemId,
 				IsDeleted = request.IsDeleted,
+				Updated = request.Updated,
 				CorrectorId = request.CorrectorId,
 				PreparedByDate = request.PreparedByDate,
 				PreparedById = request.PreparedBy?.ItemId,
@@ -4544,6 +4623,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = reqquotation.ItemId,
 				IsDeleted = reqquotation.IsDeleted,
+				Updated = reqquotation.Updated,
 				CorrectorId = reqquotation.CorrectorId,
 				PublishedById = reqquotation.PublishedById,
 				ClosedById = reqquotation.ClosedById,
@@ -4606,6 +4686,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = quotationrecord.ItemId,
 				IsDeleted = quotationrecord.IsDeleted,
+				Updated = quotationrecord.Updated,
 				CorrectorId = quotationrecord.CorrectorId,
 				ParentPackageId = quotationrecord.ParentPackageId,
 				PackageItemId = quotationrecord.PackageItemId,
@@ -4665,6 +4746,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = requestrec.ItemId,
 				IsDeleted = requestrec.IsDeleted,
+				Updated = requestrec.Updated,
 				CorrectorId = requestrec.CorrectorId,
 				ParentId = requestrec.ParentId,
 				DirectivesId = requestrec.DirectiveId,
@@ -4693,6 +4775,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = runup.ItemId,
 				IsDeleted = runup.IsDeleted,
+				Updated = runup.Updated,
 				CorrectorId = runup.CorrectorId,
 				FlightId = runup.FlightId,
 				StartTime = (int?)runup.StartTime.TotalMinutes,
@@ -4742,6 +4825,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = smsevent.ItemId,
 				IsDeleted = smsevent.IsDeleted,
+				Updated = smsevent.Updated,
 				CorrectorId = smsevent.CorrectorId,
 				FullName = smsevent.FullName,
 				Description = smsevent.Description
@@ -4767,6 +4851,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = info.ItemId,
 				IsDeleted = info.IsDeleted,
+				Updated = info.Updated,
 				CorrectorId = info.CorrectorId,
 				StoreID = info.StoreId,
 				PartNumber = info.PartNumber,
@@ -4804,6 +4889,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = store.ItemId,
 				IsDeleted = store.IsDeleted,
+				Updated = store.Updated,
 				CorrectorId = store.CorrectorId,
 				OperatorID = store.OperatorId,
 				StoreName = store.Name,
@@ -4843,6 +4929,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = supplierdoc.ItemId,
 				IsDeleted = supplierdoc.IsDeleted,
+				Updated = supplierdoc.Updated,
 				CorrectorId = supplierdoc.CorrectorId,
 				SupplierId = supplierdoc.SupplierId,
 				Name = supplierdoc.Name,
@@ -4877,6 +4964,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = transrec.ItemId,
 				IsDeleted = transrec.IsDeleted,
+				Updated = transrec.Updated,
 				CorrectorId = transrec.CorrectorId,
 				PreConfirmTransfer = transrec.PreConfirmTransfer,
 				ParentID = transrec.ParentId,
@@ -4962,6 +5050,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = vehicle.ItemId,
 				IsDeleted = vehicle.IsDeleted,
+				Updated = vehicle.Updated,
 				CorrectorId = vehicle.CorrectorId,
 				OperatorId = vehicle.OperatorId,
 				RegistrationNumber = vehicle.RegistrationNumber,
@@ -5001,6 +5090,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = work.ItemId,
 				IsDeleted = work.IsDeleted,
+				Updated = work.Updated,
 				CorrectorId = work.CorrectorId,
 				PreparedByDate = work.PreparedByDate,
 				PreparedById = work.PreparedBy?.ItemId,
@@ -5085,6 +5175,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = workorder.ItemId,
 				IsDeleted = workorder.IsDeleted,
+				Updated = workorder.Updated,
 				CorrectorId = workorder.CorrectorId,
 				ParentId = workorder.ParentId,
 				DirectivesId = workorder.DirectiveId,
@@ -5112,6 +5203,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = workpack.ItemId,
 				IsDeleted = workpack.IsDeleted,
+				Updated = workpack.Updated,
 				CorrectorId = workpack.CorrectorId,
 				ParentId = workpack.ParentId,
 				Title = workpack.Title,
@@ -5191,6 +5283,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = workpackrec.ItemId,
 				IsDeleted = workpackrec.IsDeleted,
+				Updated = workpackrec.Updated,
 				CorrectorId = workpackrec.CorrectorId,
 				WorkPakageId = workpackrec.WorkPakageId,
 				DirectivesId = workpackrec.DirectiveId,
@@ -5230,6 +5323,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = workspec.ItemId,
 				IsDeleted = workspec.IsDeleted,
+				Updated = workspec.Updated,
 				CorrectorId = workspec.CorrectorId,
 				WorkPackageId = workspec.WorkPackageId,
 				SpecialistId = workspec.SpecialistId
@@ -5255,6 +5349,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = workshop.ItemId,
 				IsDeleted = workshop.IsDeleted,
+				Updated = workshop.Updated,
 				CorrectorId = workshop.CorrectorId,
 				StoreName = workshop.Name,
 				Location = workshop.Location,
@@ -5284,6 +5379,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = maindirec.ItemId,
 				IsDeleted = maindirec.IsDeleted,
+				Updated = maindirec.Updated,
 				CorrectorId = maindirec.CorrectorId,
 				IsApplicability = maindirec.IsApplicability,
 				IsOperatorTask = maindirec.IsOperatorTask,
@@ -5427,6 +5523,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = oper.ItemId,
 				IsDeleted = oper.IsDeleted,
+				Updated = oper.Updated,
 				CorrectorId = oper.CorrectorId,
 				Name = oper.Name,
 				LogoType = oper.LogoType,
@@ -5469,6 +5566,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = coract.ItemId,
 				IsDeleted = coract.IsDeleted,
+				Updated = coract.Updated,
 				CorrectorId = coract.CorrectorId,
 				DiscrepancyID = coract.DiscrepancyId,
 				Description = coract.Description,
@@ -5527,6 +5625,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = medicalRecord.ItemId,
 				IsDeleted = medicalRecord.IsDeleted,
+				Updated = medicalRecord.Updated,
 				CorrectorId = medicalRecord.CorrectorId,
 				Repeat = medicalRecord.RepeatLifelength?.ConvertToByteArray(),
 				Notify = medicalRecord.NotifyLifelength?.ConvertToByteArray(),
@@ -5561,6 +5660,7 @@ namespace SmartCore.DtoHelper
 			{
 				ItemId = quot.ItemId,
 				IsDeleted = quot.IsDeleted,
+				Updated = quot.Updated,
 				CorrectorId = quot.CorrectorId,
 				CostNew = quot.Cost,
 				ProductId = quot.ProductId,
