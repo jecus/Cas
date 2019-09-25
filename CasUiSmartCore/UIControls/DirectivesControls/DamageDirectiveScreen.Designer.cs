@@ -140,7 +140,7 @@
             // 
             // _damageInformation
             // 
-            this._damageInformation.ADType = SmartCore.Entities.Dictionaries.ADType.Apliance;
+            this._damageInformation.ADType = SmartCore.Entities.Dictionaries.ADType.Appliance;
             this._damageInformation.Applicability = "";
             this._damageInformation.AutoSize = true;
             this._damageInformation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));

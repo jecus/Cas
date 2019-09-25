@@ -69,6 +69,7 @@ namespace SmartCore.Entities
 				return;
 
 	        obj.CorrectorId = _casEnvironment.IdentityUser.ItemId;
+	        obj.Updated = DateTime.Now;
 
             if (obj.ItemId <= 0)
             {

@@ -142,7 +142,7 @@ namespace CAS.UI.UIControls.DirectivesControls
             // 
             // _outOfPhaseReferenceGeneralInformation
             // 
-            this._outOfPhaseReferenceGeneralInformation.ADType = SmartCore.Entities.Dictionaries.ADType.Apliance;
+            this._outOfPhaseReferenceGeneralInformation.ADType = SmartCore.Entities.Dictionaries.ADType.Appliance;
             this._outOfPhaseReferenceGeneralInformation.Applicability = "";
             this._outOfPhaseReferenceGeneralInformation.AutoSize = true;
             this._outOfPhaseReferenceGeneralInformation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));

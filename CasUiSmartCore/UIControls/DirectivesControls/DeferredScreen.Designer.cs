@@ -140,7 +140,7 @@
             // 
             // _defferedGeneralInformation
             // 
-            this._defferedGeneralInformation.ADType = SmartCore.Entities.Dictionaries.ADType.Apliance;
+            this._defferedGeneralInformation.ADType = SmartCore.Entities.Dictionaries.ADType.Appliance;
             this._defferedGeneralInformation.Applicability = "";
             this._defferedGeneralInformation.AutoSize = true;
             this._defferedGeneralInformation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
