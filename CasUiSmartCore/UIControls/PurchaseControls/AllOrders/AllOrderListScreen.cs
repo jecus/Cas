@@ -166,15 +166,29 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 					_initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>(new []
 					{
 						purchasefilter,
-						new Filter("Status", WorkPackageStatus.Opened),
 						new Filter("Status", WorkPackageStatus.Published)
 					}));
+					_initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>(new[]
+					{
+						purchasefilter,
+						new Filter("Status", WorkPackageStatus.Opened),
+					}));
 				}
-				else _initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>(new []
+				else
 				{
-					new Filter("Status", WorkPackageStatus.Opened), 
-					new Filter("Status", WorkPackageStatus.Published)
-				}));
+					_initialArray.AddRange(
+						GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>(new[]
+						{
+							new Filter("Status", WorkPackageStatus.Published)
+						}));
+					_initialArray.AddRange(
+						GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>(new[]
+						{
+							new Filter("Status", WorkPackageStatus.Opened),
+
+						}));
+
+				}
 
 			}
 			catch (Exception ex)
