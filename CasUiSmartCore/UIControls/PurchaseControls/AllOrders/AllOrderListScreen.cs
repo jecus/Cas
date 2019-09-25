@@ -141,16 +141,40 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			try
 			{
 				if (initialfilter != null)
-					_initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderDTO, InitialOrder>(initialfilter));
-				else _initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderDTO, InitialOrder>());
+				{
+					_initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderDTO, InitialOrder>(new []
+					{
+						initialfilter, 
+						new Filter("Status", WorkPackageStatus.Opened)
+					}));
+				}
+				else _initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderDTO, InitialOrder>(new Filter("Status", WorkPackageStatus.Opened)));
 
 				if (quotationfilter != null)
-					_initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>(quotationfilter));
-				else _initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>());
+				{
+					_initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>(new []
+					{
+						quotationfilter,
+						new Filter("Status", WorkPackageStatus.Opened)
+					}));
+
+				}
+				else _initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>(new Filter("Status", WorkPackageStatus.Opened)));
 
 				if (purchasefilter != null)
-					_initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>(purchasefilter));
-				else _initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>());
+				{
+					_initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>(new []
+					{
+						purchasefilter,
+						new Filter("Status", WorkPackageStatus.Opened),
+						new Filter("Status", WorkPackageStatus.Published)
+					}));
+				}
+				else _initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>(new []
+				{
+					new Filter("Status", WorkPackageStatus.Opened), 
+					new Filter("Status", WorkPackageStatus.Published)
+				}));
 
 			}
 			catch (Exception ex)

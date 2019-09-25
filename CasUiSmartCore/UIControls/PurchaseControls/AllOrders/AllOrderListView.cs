@@ -35,7 +35,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 		#region protected override SetGroupsToItems(int columnIndex)
 		protected override void GroupingItems()
 		{
-			Grouping("Order No");
+			Grouping("Type");
 		}
 
 		#endregion

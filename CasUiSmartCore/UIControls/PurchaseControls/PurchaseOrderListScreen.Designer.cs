@@ -65,8 +65,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.flowLayoutPanel1.Controls.Add(this.buttonDeleteSelected);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox1);
-			this.flowLayoutPanel1.Controls.Add(this.buttonAddNew);
-			this.flowLayoutPanel1.Controls.Add(this.pictureBox2);
 			this.flowLayoutPanel1.Controls.Add(this.buttonApplyFilter);
 			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
