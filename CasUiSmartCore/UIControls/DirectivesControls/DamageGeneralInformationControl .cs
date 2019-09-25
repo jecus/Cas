@@ -173,7 +173,7 @@ namespace CAS.UI.UIControls.DirectivesControls
             {
                 if (radioButtonAirFrame.Checked)
                     return ADType.Airframe;
-                return ADType.Apliance;
+                return ADType.Appliance;
             }
             set
             {

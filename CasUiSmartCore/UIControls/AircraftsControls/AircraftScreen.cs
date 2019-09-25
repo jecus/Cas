@@ -837,7 +837,7 @@ namespace CAS.UI.UIControls.AircraftsControls
 					BeginInvoke(new Action<Statuses>(s => LinkADStatusAF.Status = s), adStatusAF);
 
 					Statuses adStatusAP = Statuses.NotActive;
-					IEnumerable<Directive> adaps = ads.Where(p => p.ADType == ADType.Apliance);
+					IEnumerable<Directive> adaps = ads.Where(p => p.ADType == ADType.Appliance);
 					foreach (Directive primaryDirective in adaps)
 					{
 						ConditionState directiveCond = GlobalObjects.PerformanceCalculator.GetConditionState(primaryDirective);
@@ -1502,7 +1502,7 @@ namespace CAS.UI.UIControls.AircraftsControls
 			CancelAsync();
 
 			e.DisplayerText = CurrentAircraft.RegistrationNumber + ". " + DirectiveType.AirworthenessDirectives.CommonName;
-			e.RequestedEntity = new PrimeDirectiveListScreen(CurrentAircraft, DirectiveType.AirworthenessDirectives, ADType.Apliance);
+			e.RequestedEntity = new PrimeDirectiveListScreen(CurrentAircraft, DirectiveType.AirworthenessDirectives, ADType.Appliance);
 		}
 		#endregion
 
