@@ -8,7 +8,7 @@ namespace SmartCore.Entities.Dictionaries
     public enum ADType : short
     {
         Airframe = 0,
-        Apliance = 1,
+        Appliance = 1,
         None = 2,
 		LandingGear = 3,
         Engine = 4,

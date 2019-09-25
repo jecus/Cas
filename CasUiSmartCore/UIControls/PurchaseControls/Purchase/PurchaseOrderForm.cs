@@ -25,6 +25,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		private PurchaseOrder _order;
 		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
+		private List<Supplier> _supplierShipper = new List<Supplier>();
 
 		#endregion
 
@@ -69,6 +70,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			var suppliers = GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[]{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, ids), });
 			var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new ICommonFilter[]{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, productIds), });
 
+			_supplierShipper.Clear();
+			_supplierShipper.AddRange(GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[] { new CommonFilter<int>(Supplier.SupplierClassProperty, SupplierClass.Shipper.ItemId) }));
+
 			foreach (var record in records)
 			{
 				record.Product = products.FirstOrDefault(i => i.ItemId == record.PackageItemId);
@@ -99,6 +103,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			textBoxClosingBy.Text = _order.CloseByUser;
 			textBoxPublishedBy.Text = _order.PublishedByUser;
 			textBoxAuthor.Text = GlobalObjects.CasEnvironment.IdentityUser.ToString();
+			comboBoxShipComp.SelectedItem = _supplierShipper.FirstOrDefault(i => i.ItemId == _order.ShipCompanyId) ?? Supplier.Unknown;
 			textBoxRemarks.Text = _order.Remarks;
 			comboBoxIncoTerm.SelectedItem = _order.IncoTerm;
 			comboBoxDesignation.SelectedItem = _order.Designation;
@@ -125,7 +130,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			comboBoxIncoTerm.Items.AddRange(IncoTerm.Items.ToArray());
 
 			comboBoxShipComp.Items.Clear();
-			//comboBoxShipComp.Items.AddRange(SupplierClass.Items.ToArray());
+			comboBoxShipComp.Items.AddRange(_supplierShipper.ToArray());
+			comboBoxShipComp.Items.Add(Supplier.Unknown);
 
 			comboBoxPayTerm.Items.Clear();
 			comboBoxPayTerm.DataSource = Enum.GetValues(typeof(PayTerm));
@@ -372,6 +378,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			_order.BruttoWeight = (double) numericBruttoWeight.Value;
 			_order.CargoVolume = (double) numericCargoVolume.Value;
 			_order.NettoWeight = (double) numericNettoWeight.Value;
+			_order.ShipCompanyId = ((Supplier) comboBoxShipComp.SelectedItem).ItemId;
 			_order.ShipTo = textBoxShipTo.Text;
 
 			if (_order.ItemId <= 0)
