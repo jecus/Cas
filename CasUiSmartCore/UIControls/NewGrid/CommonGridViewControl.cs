@@ -278,6 +278,12 @@ namespace CAS.UI.UIControls.NewGrid
 
 			try
 			{
+				if (!CheckHeders())
+				{
+					radGridView1.Columns.Clear();
+					radGridView1.Columns.AddRange(ColumnHeaderList.ToArray());
+				}
+
 				AddItems(itemsArray);
 				SetItemsColor();
 				SetTotalText();
@@ -294,6 +300,17 @@ namespace CAS.UI.UIControls.NewGrid
 				Program.Provider.Logger.Log("Error while deleting data", ex);
 				return;
 			}
+		}
+
+		private bool CheckHeders()
+		{
+			for (int i = 0; i < ColumnHeaderList.Count; i++)
+			{
+				if (!ColumnHeaderList[i].HeaderText.Equals(radGridView1.Columns[i].HeaderText))
+					return false;
+			}
+
+			return true;
 		}
 
 		private void RadGridView1_FilterChanged(object sender, GridViewCollectionChangedEventArgs e)
