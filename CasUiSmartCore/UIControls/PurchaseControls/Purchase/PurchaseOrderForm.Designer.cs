@@ -696,7 +696,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(1127, 582);
+			this.buttonOk.Location = new System.Drawing.Point(1127, 599);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 293;
@@ -710,7 +710,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonCancel.Location = new System.Drawing.Point(1208, 582);
+			this.buttonCancel.Location = new System.Drawing.Point(1208, 599);
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.Size = new System.Drawing.Size(75, 33);
 			this.buttonCancel.TabIndex = 292;
@@ -820,7 +820,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.comboBoxDesignation.ItemHeight = 17;
 			this.comboBoxDesignation.Location = new System.Drawing.Point(161, 452);
 			this.comboBoxDesignation.Name = "comboBoxDesignation";
-			this.comboBoxDesignation.Size = new System.Drawing.Size(245, 25);
+			this.comboBoxDesignation.Size = new System.Drawing.Size(200, 25);
 			this.comboBoxDesignation.TabIndex = 308;
 			// 
 			// metroLabelDesignation
@@ -840,7 +840,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.comboBoxPayTerm.ItemHeight = 17;
 			this.comboBoxPayTerm.Location = new System.Drawing.Point(161, 483);
 			this.comboBoxPayTerm.Name = "comboBoxPayTerm";
-			this.comboBoxPayTerm.Size = new System.Drawing.Size(245, 25);
+			this.comboBoxPayTerm.Size = new System.Drawing.Size(200, 25);
 			this.comboBoxPayTerm.TabIndex = 310;
 			// 
 			// metroLabelPayTerm
@@ -860,7 +860,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.comboBoxIncoTerm.ItemHeight = 17;
 			this.comboBoxIncoTerm.Location = new System.Drawing.Point(161, 514);
 			this.comboBoxIncoTerm.Name = "comboBoxIncoTerm";
-			this.comboBoxIncoTerm.Size = new System.Drawing.Size(245, 25);
+			this.comboBoxIncoTerm.Size = new System.Drawing.Size(200, 25);
 			this.comboBoxIncoTerm.TabIndex = 312;
 			// 
 			// metroLabelIncoTerm
@@ -878,15 +878,15 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.comboBoxShipComp.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.comboBoxShipComp.FormattingEnabled = true;
 			this.comboBoxShipComp.ItemHeight = 17;
-			this.comboBoxShipComp.Location = new System.Drawing.Point(161, 545);
+			this.comboBoxShipComp.Location = new System.Drawing.Point(513, 450);
 			this.comboBoxShipComp.Name = "comboBoxShipComp";
-			this.comboBoxShipComp.Size = new System.Drawing.Size(245, 25);
+			this.comboBoxShipComp.Size = new System.Drawing.Size(196, 25);
 			this.comboBoxShipComp.TabIndex = 314;
 			// 
 			// metroLabelShippingCompany
 			// 
 			this.metroLabelShippingCompany.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabelShippingCompany.Location = new System.Drawing.Point(23, 545);
+			this.metroLabelShippingCompany.Location = new System.Drawing.Point(375, 452);
 			this.metroLabelShippingCompany.Name = "metroLabelShippingCompany";
 			this.metroLabelShippingCompany.Size = new System.Drawing.Size(132, 23);
 			this.metroLabelShippingCompany.TabIndex = 313;
@@ -899,9 +899,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// 
 			// 
 			this.textBoxShipTo.CustomButton.Image = null;
-			this.textBoxShipTo.CustomButton.Location = new System.Drawing.Point(114, 2);
+			this.textBoxShipTo.CustomButton.Location = new System.Drawing.Point(105, 1);
 			this.textBoxShipTo.CustomButton.Name = "";
-			this.textBoxShipTo.CustomButton.Size = new System.Drawing.Size(49, 49);
+			this.textBoxShipTo.CustomButton.Size = new System.Drawing.Size(91, 91);
 			this.textBoxShipTo.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
 			this.textBoxShipTo.CustomButton.TabIndex = 1;
 			this.textBoxShipTo.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -909,7 +909,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.textBoxShipTo.CustomButton.Visible = false;
 			this.textBoxShipTo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.textBoxShipTo.Lines = new string[0];
-			this.textBoxShipTo.Location = new System.Drawing.Point(544, 452);
+			this.textBoxShipTo.Location = new System.Drawing.Point(513, 483);
 			this.textBoxShipTo.MaxLength = 32767;
 			this.textBoxShipTo.Multiline = true;
 			this.textBoxShipTo.Name = "textBoxShipTo";
@@ -919,7 +919,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.textBoxShipTo.SelectionLength = 0;
 			this.textBoxShipTo.SelectionStart = 0;
 			this.textBoxShipTo.ShortcutsEnabled = true;
-			this.textBoxShipTo.Size = new System.Drawing.Size(166, 54);
+			this.textBoxShipTo.Size = new System.Drawing.Size(197, 93);
 			this.textBoxShipTo.TabIndex = 315;
 			this.textBoxShipTo.UseSelectable = true;
 			this.textBoxShipTo.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -928,7 +928,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// metroLabelShipTo
 			// 
 			this.metroLabelShipTo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabelShipTo.Location = new System.Drawing.Point(413, 448);
+			this.metroLabelShipTo.Location = new System.Drawing.Point(375, 479);
 			this.metroLabelShipTo.Name = "metroLabelShipTo";
 			this.metroLabelShipTo.Size = new System.Drawing.Size(120, 27);
 			this.metroLabelShipTo.TabIndex = 316;
@@ -941,7 +941,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// 
 			// 
 			this.textBoxCargoVolume.CustomButton.Image = null;
-			this.textBoxCargoVolume.CustomButton.Location = new System.Drawing.Point(146, 2);
+			this.textBoxCargoVolume.CustomButton.Location = new System.Drawing.Point(181, 2);
 			this.textBoxCargoVolume.CustomButton.Name = "";
 			this.textBoxCargoVolume.CustomButton.Size = new System.Drawing.Size(17, 17);
 			this.textBoxCargoVolume.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -951,7 +951,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.textBoxCargoVolume.CustomButton.Visible = false;
 			this.textBoxCargoVolume.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.textBoxCargoVolume.Lines = new string[0];
-			this.textBoxCargoVolume.Location = new System.Drawing.Point(544, 514);
+			this.textBoxCargoVolume.Location = new System.Drawing.Point(161, 545);
 			this.textBoxCargoVolume.MaxLength = 32767;
 			this.textBoxCargoVolume.Name = "textBoxCargoVolume";
 			this.textBoxCargoVolume.PasswordChar = '\0';
@@ -960,7 +960,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.textBoxCargoVolume.SelectionLength = 0;
 			this.textBoxCargoVolume.SelectionStart = 0;
 			this.textBoxCargoVolume.ShortcutsEnabled = true;
-			this.textBoxCargoVolume.Size = new System.Drawing.Size(166, 22);
+			this.textBoxCargoVolume.Size = new System.Drawing.Size(201, 22);
 			this.textBoxCargoVolume.TabIndex = 317;
 			this.textBoxCargoVolume.UseSelectable = true;
 			this.textBoxCargoVolume.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -969,7 +969,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// metroLabelCargoVolume
 			// 
 			this.metroLabelCargoVolume.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabelCargoVolume.Location = new System.Drawing.Point(413, 510);
+			this.metroLabelCargoVolume.Location = new System.Drawing.Point(23, 541);
 			this.metroLabelCargoVolume.Name = "metroLabelCargoVolume";
 			this.metroLabelCargoVolume.Size = new System.Drawing.Size(120, 27);
 			this.metroLabelCargoVolume.TabIndex = 318;
@@ -982,7 +982,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// 
 			// 
 			this.textBoxBruttoWeight.CustomButton.Image = null;
-			this.textBoxBruttoWeight.CustomButton.Location = new System.Drawing.Point(146, 2);
+			this.textBoxBruttoWeight.CustomButton.Location = new System.Drawing.Point(181, 2);
 			this.textBoxBruttoWeight.CustomButton.Name = "";
 			this.textBoxBruttoWeight.CustomButton.Size = new System.Drawing.Size(17, 17);
 			this.textBoxBruttoWeight.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -992,7 +992,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.textBoxBruttoWeight.CustomButton.Visible = false;
 			this.textBoxBruttoWeight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.textBoxBruttoWeight.Lines = new string[0];
-			this.textBoxBruttoWeight.Location = new System.Drawing.Point(544, 545);
+			this.textBoxBruttoWeight.Location = new System.Drawing.Point(161, 576);
 			this.textBoxBruttoWeight.MaxLength = 32767;
 			this.textBoxBruttoWeight.Name = "textBoxBruttoWeight";
 			this.textBoxBruttoWeight.PasswordChar = '\0';
@@ -1001,7 +1001,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.textBoxBruttoWeight.SelectionLength = 0;
 			this.textBoxBruttoWeight.SelectionStart = 0;
 			this.textBoxBruttoWeight.ShortcutsEnabled = true;
-			this.textBoxBruttoWeight.Size = new System.Drawing.Size(166, 22);
+			this.textBoxBruttoWeight.Size = new System.Drawing.Size(201, 22);
 			this.textBoxBruttoWeight.TabIndex = 319;
 			this.textBoxBruttoWeight.UseSelectable = true;
 			this.textBoxBruttoWeight.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -1010,7 +1010,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// metroLabelBruttoWeight
 			// 
 			this.metroLabelBruttoWeight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabelBruttoWeight.Location = new System.Drawing.Point(413, 541);
+			this.metroLabelBruttoWeight.Location = new System.Drawing.Point(23, 572);
 			this.metroLabelBruttoWeight.Name = "metroLabelBruttoWeight";
 			this.metroLabelBruttoWeight.Size = new System.Drawing.Size(120, 27);
 			this.metroLabelBruttoWeight.TabIndex = 320;
@@ -1023,7 +1023,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// 
 			// 
 			this.textBoxNettoWeight.CustomButton.Image = null;
-			this.textBoxNettoWeight.CustomButton.Location = new System.Drawing.Point(146, 2);
+			this.textBoxNettoWeight.CustomButton.Location = new System.Drawing.Point(181, 2);
 			this.textBoxNettoWeight.CustomButton.Name = "";
 			this.textBoxNettoWeight.CustomButton.Size = new System.Drawing.Size(17, 17);
 			this.textBoxNettoWeight.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -1033,7 +1033,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.textBoxNettoWeight.CustomButton.Visible = false;
 			this.textBoxNettoWeight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.textBoxNettoWeight.Lines = new string[0];
-			this.textBoxNettoWeight.Location = new System.Drawing.Point(544, 576);
+			this.textBoxNettoWeight.Location = new System.Drawing.Point(161, 607);
 			this.textBoxNettoWeight.MaxLength = 32767;
 			this.textBoxNettoWeight.Name = "textBoxNettoWeight";
 			this.textBoxNettoWeight.PasswordChar = '\0';
@@ -1042,7 +1042,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.textBoxNettoWeight.SelectionLength = 0;
 			this.textBoxNettoWeight.SelectionStart = 0;
 			this.textBoxNettoWeight.ShortcutsEnabled = true;
-			this.textBoxNettoWeight.Size = new System.Drawing.Size(166, 22);
+			this.textBoxNettoWeight.Size = new System.Drawing.Size(201, 22);
 			this.textBoxNettoWeight.TabIndex = 321;
 			this.textBoxNettoWeight.UseSelectable = true;
 			this.textBoxNettoWeight.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -1051,7 +1051,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// metroLabelNettoWeight
 			// 
 			this.metroLabelNettoWeight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabelNettoWeight.Location = new System.Drawing.Point(413, 572);
+			this.metroLabelNettoWeight.Location = new System.Drawing.Point(23, 603);
 			this.metroLabelNettoWeight.Name = "metroLabelNettoWeight";
 			this.metroLabelNettoWeight.Size = new System.Drawing.Size(120, 27);
 			this.metroLabelNettoWeight.TabIndex = 322;
@@ -1062,7 +1062,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1288, 623);
+			this.ClientSize = new System.Drawing.Size(1288, 640);
 			this.Controls.Add(this.textBoxNettoWeight);
 			this.Controls.Add(this.metroLabelNettoWeight);
 			this.Controls.Add(this.textBoxBruttoWeight);
