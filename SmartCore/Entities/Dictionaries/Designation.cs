@@ -13,14 +13,14 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 
-		public static Designation Purchase = new Designation(1, "Purchase", "Purchase");
-		public static Designation Exchange = new Designation(2, "Exchange", "Exchange");
-		public static Designation PurchaseConsumablesWithout = new Designation(3, "Purchase of consumables without S/N", "Purchase of consumables without S/N");
-		public static Designation TechnicalServices = new Designation(4, "Technical services", "Technical services");
-		public static Designation DocumentationOrder = new Designation(5, "Documentation Order", "Documentation Order");
-		public static Designation RepairOrder = new Designation(6, "Repair Order", "Repair Order");
-		public static Designation TransportationServices = new Designation(7, "Transportation services", "Transportation services");
-		public static Designation LoantOrRent = new Designation(8, "Loant or Rent", "Loant or Rent");
+		public static Designation Purchase = new Designation(1, "Purchase", "1 - Purchase");
+		public static Designation Exchange = new Designation(2, "Exchange", "2 - Exchange");
+		public static Designation PurchaseConsumablesWithout = new Designation(3, "Purchase of consumables without S/N", "3 - Purchase of consumables without S/N");
+		public static Designation TechnicalServices = new Designation(4, "Technical services", "4 - Technical services");
+		public static Designation DocumentationOrder = new Designation(5, "Documentation Order", "5 - Documentation Order");
+		public static Designation RepairOrder = new Designation(6, "Repair Order", "6 - Repair Order");
+		public static Designation TransportationServices = new Designation(7, "Transportation services", "7 - Transportation services");
+		public static Designation LoantOrRent = new Designation(8, "Loant or Rent", "8 - Loant or Rent");
 		
 		#region public static Designation UNK = new Designation(-1, "N/A", "Not applicable");
 		/// <summary>
