@@ -171,13 +171,14 @@ namespace CAS.UI.UIControls.PurchaseControls
 					IsDangerous = record.Key.IsDangerous,
 					Manufacturer = record.Key.Manufacturer,
 					ATAChapter = record.Key.ATAChapter,
+					ManufactureDate = DateTime.Today,
 					Code = record.Key.Code,
 					Product = record.Key,
 					Quantity = record.Select(i => i.Quantity).Sum(),
 					QuantityIn = record.Select(i => i.Quantity).Sum()
 				};
 
-				//GlobalObjects.ComponentCore.AddComponent(component, (Store)comboBoxStore.SelectedItem, dateTimePickerDate.Value, "", ComponentStorePosition.UNK, destinationResponsible: true);
+				GlobalObjects.ComponentCore.AddComponent(component, (Store)comboBoxStore.SelectedItem, dateTimePickerDate.Value.Date, "", ComponentStorePosition.UNK, destinationResponsible: true);
 
 			}
 		}

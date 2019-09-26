@@ -192,9 +192,9 @@ namespace CAS.UI.UIControls.StoresControls
 			State = _consumablePart.State;
 
 			dateTimePickerManufactureDate.MinDate = DateTimeExtend.GetCASMinDateTime();
-			dateTimePickerManufactureDate.MaxDate = DateTime.Now;
+			dateTimePickerManufactureDate.MaxDate = DateTime.MaxValue;
 			dateTimePickerInstallDate.MinDate = DateTimeExtend.GetCASMinDateTime();
-			dateTimePickerInstallDate.MaxDate = DateTime.Now;
+			dateTimePickerInstallDate.MaxDate = DateTime.MaxValue;
 
 			comboBoxDetailClass.SelectedItem = _consumablePart.GoodsClass;
 			textBoxDiscrepancy.Text = _consumablePart.Discrepancy;
