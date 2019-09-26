@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls.Purchase
@@ -30,7 +31,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			AddColumn("Cost", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Condition", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Measure", (int)(radGridView1.Width * 0.2f));
-			AddColumn("P/N", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Product", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 
@@ -41,7 +42,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		protected override List<CustomCell> GetListViewSubItems(PurchaseRequestRecord item)
 		{
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
+			var destiantion = "";
+			if (item?.ParentInitialRecord?.DestinationObjectType == SmartCoreType.Aircraft)
+				destiantion = GlobalObjects.AircraftsCore.GetAircraftById(item?.ParentInitialRecord?.DestinationObjectId ?? -1)?.ToString();
+			else destiantion = GlobalObjects.StoreCore.GetStoreById(item?.ParentInitialRecord?.DestinationObjectId ?? -1)?.ToString();
 
+			var temp = $"{item?.Product?.PartNumber} | Q-ty:{item?.Quantity} | Reason: {item?.ParentInitialRecord?.InitialReason} | Destination: {destiantion} | Priority: {item?.ParentInitialRecord?.Priority}";
 			return new List<CustomCell>()
 			{
 				CreateRow(item.Supplier.ToString(),item.Supplier),
@@ -49,7 +55,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				CreateRow(item.Cost.ToString(),item.Cost),
 				CreateRow(item.CostCondition.ToString(),item.CostCondition),
 				CreateRow(item.Measure.ToString(),item.Measure),
-				CreateRow(item.Product?.PartNumber,item.Product?.PartNumber),
+				CreateRow(temp,temp),
 				CreateRow(author,author),
 			};
 		}
@@ -60,7 +66,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		protected override void GroupingItems()
 		{
-			Grouping("P/N");
+			Grouping("Product");
 		}
 
 		#endregion

@@ -363,6 +363,8 @@ namespace SmartCore.Purchase
 			set { PackageItem = value; }
 		}
 
+		public InitialOrderRecord ParentInitialRecord { get; set; }
+
 		#endregion
 
 		/*

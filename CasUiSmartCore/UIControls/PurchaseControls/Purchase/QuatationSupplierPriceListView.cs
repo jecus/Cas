@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using CAS.UI.UIControls.NewGrid;
+using CASTerms;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls.Quatation
@@ -36,7 +38,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 		protected override List<CustomCell> GetListViewSubItems(SupplierPrice item)
 		{
-			var temp = $"{item.Parent?.Product?.PartNumber} | Q-ty:{item.Parent?.Quantity}";
+			var destiantion = "";
+			if(item.Parent?.ParentInitialRecord?.DestinationObjectType == SmartCoreType.Aircraft)
+				destiantion = GlobalObjects.AircraftsCore.GetAircraftById(item.Parent?.ParentInitialRecord?.DestinationObjectId ?? -1)?.ToString();
+			else destiantion = GlobalObjects.StoreCore.GetStoreById(item.Parent?.ParentInitialRecord?.DestinationObjectId ?? -1)?.ToString();
+
+			var temp = $"{item.Parent?.Product?.PartNumber} | Q-ty:{item.Parent?.Quantity} | Reason: {item.Parent?.ParentInitialRecord?.InitialReason} | Destination: {destiantion} | Priority: {item.Parent?.ParentInitialRecord?.Priority}";
 			return new List<CustomCell>()
 			{
 				CreateRow(item.Supplier.ToString(),item.Supplier),

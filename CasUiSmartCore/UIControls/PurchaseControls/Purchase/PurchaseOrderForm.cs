@@ -73,8 +73,15 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			_supplierShipper.Clear();
 			_supplierShipper.AddRange(GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[] { new CommonFilter<int>(Supplier.SupplierClassProperty, SupplierClass.Shipper.ItemId) }));
 
+
+			var parentInitialId = (int)GlobalObjects.CasEnvironment.Execute($@"select i.ItemId from PurchaseOrders p
+			left join RequestsForQuotation q on q.ItemID = p.ParentID
+			left join InitialOrders i on i.ItemID = q.ParentID where p.ItemId = {_order.ItemId}").Tables[0].Rows[0][0];
+			var initialRecords = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(new Filter("ParentPackageId", parentInitialId));
+
 			foreach (var record in records)
 			{
+				record.ParentInitialRecord = initialRecords.FirstOrDefault(i => i.ProductId == record.PackageItemId);
 				record.Product = products.FirstOrDefault(i => i.ItemId == record.PackageItemId);
 				record.Supplier = suppliers.FirstOrDefault(i => i.ItemId == record.SupplierId);
 			}

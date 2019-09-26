@@ -184,6 +184,7 @@ namespace SmartCore.Purchase
 		}
 
 		public SupplierPrice Price { get; set; }
+		public InitialOrderRecord ParentInitialRecord { get; set; }
 
 		#endregion
 

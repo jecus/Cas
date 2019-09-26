@@ -83,8 +83,14 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			var suppliers = GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[]{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, ids), });
 			var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new ICommonFilter[]{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, productIds), });
 
+
+			var parentInitialId = (int)GlobalObjects.CasEnvironment.Execute($@"select i.ItemId from RequestsForQuotation q
+			left join InitialOrders i on i.ItemID = q.ParentID where q.ItemId = {_quotation.ItemId}").Tables[0].Rows[0][0];
+			var initialRecords = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(new Filter("ParentPackageId", parentInitialId));
+
 			foreach (var record in records)
 			{
+				record.ParentInitialRecord = initialRecords.FirstOrDefault(i => i.ProductId == record.PackageItemId);
 				record.Product = products.FirstOrDefault(i => i.ItemId == record.PackageItemId);
 				foreach (var price in record.SupplierPrice)
 				{
