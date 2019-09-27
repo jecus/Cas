@@ -71,7 +71,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		private void ButtonAdd_Click(object sender, System.EventArgs e)
 		{
 			foreach (var supplier in supplierListView.SelectedItems.ToArray())
-				_prices.Add(new SupplierPrice{Supplier = supplier, SupplierId = supplier.ItemId, Parent = _selectedItem});
+			{
+				if(_prices.FirstOrDefault(i => i.SupplierId == supplier.ItemId) == null)
+					_prices.Add(new SupplierPrice{Supplier = supplier, SupplierId = supplier.ItemId, Parent = _selectedItem});
+			}
 
 			supplierListView1.SetItemsArray(_prices.ToArray());
 		}

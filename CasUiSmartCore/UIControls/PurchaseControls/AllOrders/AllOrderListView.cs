@@ -65,7 +65,6 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			subItems.Add(CreateRow(item.Status.ToString(), item.Status ));
 			subItems.Add(CreateRow(item.Number, item.Number ));
 			subItems.Add(CreateRow(item.Title, item.Title ));
-			subItems.Add(CreateRow( "", "" ));
 			subItems.Add(CreateRow(item.OpeningDate == (new DateTime(1852, 01, 01))
 					? ""
 					: SmartCore.Auxiliary.Convert.GetDateFormat(item.OpeningDate), item.OpeningDate));
@@ -138,7 +137,6 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			AddColumn("Status", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Order No", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Title", (int)(radGridView1.Width * 0.30f));
-			AddColumn("Create Date", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Opening date", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Publishing date", (int)(radGridView1.Width * 0.26f));
 			AddColumn("Closing date", (int)(radGridView1.Width * 0.24f));
