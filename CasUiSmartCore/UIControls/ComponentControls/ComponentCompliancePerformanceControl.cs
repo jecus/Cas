@@ -160,6 +160,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			threshold.RepeatNotification = lifelengthViewerRptNotify.Lifelength;
 			threshold.Warranty = lifelengthViewerWarranty.Lifelength;
 			threshold.WarrantyNotification = lifelengthViewerWarrantyNotify.Lifelength;
+			threshold.ExpiryRemainNotify = lifelengthViewerExpiryRemain.Lifelength;
 			threshold.FirstPerformanceConditionType = radio_WhicheverFirst.Checked
 													  ? ThresholdConditionType.WhicheverFirst
 													  : ThresholdConditionType.WhicheverLater;
@@ -184,10 +185,11 @@ namespace CAS.UI.UIControls.ComponentControls
 					_currentComponentDirective.IsClosed != IsClosed ||
 					_currentComponentDirective.KitRequired != textBoxKitRequired.Text ||
 					_currentComponentDirective.Remarks != textBoxRemarks.Text ||
-				    textBoxZoneArea.Text != _currentComponentDirective.ZoneArea ||
+					textBoxZoneArea.Text != _currentComponentDirective.ZoneArea ||
 					textBoxAcess.Text != _currentComponentDirective.AccessDirective ||
 					textBoxAAM.Text != _currentComponentDirective.AAM ||
 					textBoxCMM.Text != _currentComponentDirective.CMM ||
+					dateTimePickerExpiryDate.Value != _currentComponentDirective.ExpiryDate ||
 					_currentComponentDirective.NDTType.ItemId != ((NDTType)comboBoxNdt.SelectedItem).ItemId ||
 					_currentComponentDirective.Threshold.ToString() != threshold.ToString() ||
 					_currentComponentDirective.FaaFormFile != fileControl.AttachedFile ||
@@ -321,6 +323,8 @@ namespace CAS.UI.UIControls.ComponentControls
 			textBoxAcess.Text = _currentComponentDirective.AccessDirective;
 			textBoxAAM.Text = _currentComponentDirective.AAM;
 			textBoxCMM.Text = _currentComponentDirective.CMM;
+			if (_currentComponentDirective?.ExpiryDate != null)
+				dateTimePickerExpiryDate.Value = _currentComponentDirective.ExpiryDate.Value;
 
 
 			#region ItemRelationCombobox
@@ -356,7 +360,7 @@ namespace CAS.UI.UIControls.ComponentControls
 				var mpdId = -1;
 				WorkItemsRelationTypeUI relationType;
 				if (itemRelation != null && (itemRelation.FirtsItemTypeId == SmartCoreType.MaintenanceDirective.ItemId ||
-				                             itemRelation.SecondItemTypeId == SmartCoreType.MaintenanceDirective.ItemId))
+											 itemRelation.SecondItemTypeId == SmartCoreType.MaintenanceDirective.ItemId))
 				{
 					mpdId = _currentComponentDirective.IsFirst == true ? itemRelation.SecondItemId : itemRelation.FirstItemId;
 					relationType = ItemRelationHelper.ConvertBLItemRelationToUIITem(_currentComponentDirective.WorkItemsRelationType, _currentComponentDirective.IsFirst.HasValue && _currentComponentDirective.IsFirst.Value);
@@ -393,6 +397,7 @@ namespace CAS.UI.UIControls.ComponentControls
 				lifelengthViewerRptNotify.Lifelength = _currentComponentDirective.Threshold.RepeatNotification;
 				lifelengthViewerWarranty.Lifelength = _currentComponentDirective.Threshold.Warranty;
 				lifelengthViewerWarrantyNotify.Lifelength = _currentComponentDirective.Threshold.WarrantyNotification;
+				lifelengthViewerExpiryRemain.Lifelength = _currentComponentDirective.Threshold.ExpiryRemainNotify;
 
 				if (_currentComponentDirective.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst)
 					radio_WhicheverFirst.Checked = true;
@@ -486,6 +491,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			_currentComponentDirective.AccessDirective = textBoxAcess.Text;
 			_currentComponentDirective.AAM = textBoxAAM.Text;
 			_currentComponentDirective.CMM = textBoxCMM.Text;
+			_currentComponentDirective.ExpiryDate = dateTimePickerExpiryDate.Value;
 			_currentComponentDirective.MPDTaskType = ((MaintenanceDirectiveTaskType) comboBoxMpdTaskType.SelectedItem);
 			_currentComponentDirective.NDTType = comboBoxNdt.SelectedItem as NDTType;
 
@@ -509,6 +515,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			threshold.RepeatNotification = lifelengthViewerRptNotify.Lifelength;
 			threshold.Warranty = lifelengthViewerWarranty.Lifelength;
 			threshold.WarrantyNotification = lifelengthViewerWarrantyNotify.Lifelength;
+			threshold.ExpiryRemainNotify = lifelengthViewerExpiryRemain.Lifelength;
 			threshold.FirstPerformanceConditionType = radio_WhicheverFirst.Checked
 				? ThresholdConditionType.WhicheverFirst
 				: ThresholdConditionType.WhicheverLater;
@@ -661,11 +668,11 @@ namespace CAS.UI.UIControls.ComponentControls
 		private void LinkLabelJobCardLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
 			/* MaintenanceJobCardForm form;
-             if (currentDetailDirective.JobCard == null)
-                 form = new MaintenanceJobCardForm(currentDetailDirective);
-             else
-                 form = new MaintenanceJobCardForm(currentDetailDirective.JobCard);
-             form.ShowDialog();*/
+			 if (currentDetailDirective.JobCard == null)
+				 form = new MaintenanceJobCardForm(currentDetailDirective);
+			 else
+				 form = new MaintenanceJobCardForm(currentDetailDirective.JobCard);
+			 form.ShowDialog();*/
 		}
 
 		#endregion

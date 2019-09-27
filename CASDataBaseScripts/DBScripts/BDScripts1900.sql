@@ -69,3 +69,14 @@ if not exists ( select  *
 	alter table dbo.PurchaseOrders
 	add NettoWeight nvarchar (MAX) 
 GO
+
+------------------------------------------------------------------------------------
+
+if not exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('dbo.ComponentDirectives')
+					and c.name = 'ExpiryDate' ) 
+
+	alter table dbo.ComponentDirectives
+	add ExpiryDate datetime2
+GO

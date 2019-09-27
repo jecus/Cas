@@ -92,6 +92,8 @@ namespace CAS.UI.UIControls.ComponentControls
 			AddColumn("Rpt. int.", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Next", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Remain/Overdue", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Expiry Date", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Expiry Remain", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Last", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Warranty", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Class", (int)(radGridView1.Width * 0.2f));
@@ -157,6 +159,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			DateTime transferDate;
 			Lifelength firstPerformance = Lifelength.Null, 
 					   lastPerformance = Lifelength.Null,
+					   expiryRemain = Lifelength.Null,
 					   warranty, repeatInterval = Lifelength.Null;
 			string partNumber,
 				   description,
@@ -173,6 +176,7 @@ namespace CAS.UI.UIControls.ComponentControls
 				   workType = "",
 				   zone = "",
 				   access = "",
+				   expiryDate = "",
 				   ndtString = "";
 			double manHours,
 				   cost,
@@ -216,6 +220,8 @@ namespace CAS.UI.UIControls.ComponentControls
 				costServiceable = componentItem.CostServiceable;
 				remarks = componentItem.Remarks;
 				hiddenRemarks = componentItem.HiddenRemarks;
+				expiryDate = " ";
+				expiryRemain = Lifelength.Null;
 			}
 			else
 			{
@@ -262,6 +268,8 @@ namespace CAS.UI.UIControls.ComponentControls
 				hiddenRemarks = dd.HiddenRemarks;
 				workType = dd.DirectiveType.ToString();
 				ndtString = dd.NDTType.ShortName;
+				expiryDate = dd.ExpiryDate.HasValue ? SmartCore.Auxiliary.Convert.GetDateFormat(dd.ExpiryDate.Value) : "";
+				expiryRemain = dd.Threshold.ExpiryRemainNotify;
 				if (dd.MaintenanceDirective != null)
 				{
 					mpdString = dd.MaintenanceDirective.TaskNumberCheck;
@@ -289,6 +297,8 @@ namespace CAS.UI.UIControls.ComponentControls
 				approx == null ? DateTimeExtend.GetCASMinDateTime() : (DateTime)approx));
 			subItems.Add(CreateRow(remains != null && !remains.IsNullOrZero() ? remains.ToString() : "",
 				remains ?? Lifelength.Null));
+			subItems.Add(CreateRow(expiryDate, expiryDate));
+			subItems.Add(CreateRow(expiryRemain?.ToString(), expiryRemain));
 			subItems.Add(CreateRow(lastPerformanceString, lastPerformance));
 			subItems.Add(CreateRow(warranty.ToString(), warranty));
 			subItems.Add(CreateRow(classString, classString));

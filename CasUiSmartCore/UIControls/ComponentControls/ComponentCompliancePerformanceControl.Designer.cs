@@ -77,6 +77,9 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.checkBoxClose = new System.Windows.Forms.CheckBox();
 			this.groupBoxClose = new System.Windows.Forms.GroupBox();
 			this._mainPanel = new System.Windows.Forms.Panel();
+			this.labelExpiryDate = new System.Windows.Forms.Label();
+			this.dateTimePickerExpiryDate = new System.Windows.Forms.DateTimePicker();
+			this.lifelengthViewerExpiryRemain = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.textBoxCMM = new System.Windows.Forms.TextBox();
 			this.labelCMM = new System.Windows.Forms.Label();
 			this.textBoxAAM = new System.Windows.Forms.TextBox();
@@ -133,7 +136,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxWorkType.Size = new System.Drawing.Size(263, 22);
 			this.comboBoxWorkType.TabIndex = 26;
 			this.comboBoxWorkType.SelectedIndexChanged += new System.EventHandler(this.ComboBoxWorkTypeSelectedIndexChanged);
-			this.comboBoxWorkType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelParagraph
 			// 
@@ -285,7 +287,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.lifelengthViewerRptInterval.HeaderHours = "Hours";
 			this.lifelengthViewerRptInterval.HoursApplicable = false;
 			this.lifelengthViewerRptInterval.LeftHeader = "Repeat every:";
-			this.lifelengthViewerRptInterval.Location = new System.Drawing.Point(42, 463);
+			this.lifelengthViewerRptInterval.Location = new System.Drawing.Point(41, 463);
 			this.lifelengthViewerRptInterval.Margin = new System.Windows.Forms.Padding(2);
 			this.lifelengthViewerRptInterval.Modified = false;
 			this.lifelengthViewerRptInterval.Name = "lifelengthViewerRptInterval";
@@ -347,7 +349,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.lifelengthViewerWarranty.HeaderHours = "Hours";
 			this.lifelengthViewerWarranty.HoursApplicable = false;
 			this.lifelengthViewerWarranty.LeftHeader = "Warranty:";
-			this.lifelengthViewerWarranty.Location = new System.Drawing.Point(70, 502);
+			this.lifelengthViewerWarranty.Location = new System.Drawing.Point(68, 502);
 			this.lifelengthViewerWarranty.Margin = new System.Windows.Forms.Padding(2);
 			this.lifelengthViewerWarranty.Modified = false;
 			this.lifelengthViewerWarranty.Name = "lifelengthViewerWarranty";
@@ -574,6 +576,9 @@ namespace CAS.UI.UIControls.ComponentControls
 			// 
 			// _mainPanel
 			// 
+			this._mainPanel.Controls.Add(this.labelExpiryDate);
+			this._mainPanel.Controls.Add(this.dateTimePickerExpiryDate);
+			this._mainPanel.Controls.Add(this.lifelengthViewerExpiryRemain);
 			this._mainPanel.Controls.Add(this.textBoxCMM);
 			this._mainPanel.Controls.Add(this.labelCMM);
 			this._mainPanel.Controls.Add(this.textBoxAAM);
@@ -626,6 +631,60 @@ namespace CAS.UI.UIControls.ComponentControls
 			this._mainPanel.Size = new System.Drawing.Size(1143, 612);
 			this._mainPanel.TabIndex = 65;
 			this._mainPanel.Visible = false;
+			// 
+			// labelExpiryDate
+			// 
+			this.labelExpiryDate.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelExpiryDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelExpiryDate.Location = new System.Drawing.Point(52, 546);
+			this.labelExpiryDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.labelExpiryDate.Name = "labelExpiryDate";
+			this.labelExpiryDate.Size = new System.Drawing.Size(99, 20);
+			this.labelExpiryDate.TabIndex = 209;
+			this.labelExpiryDate.Text = "Expiry date:";
+			this.labelExpiryDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// dateTimePickerExpiryDate
+			// 
+			this.dateTimePickerExpiryDate.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.dateTimePickerExpiryDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.dateTimePickerExpiryDate.Location = new System.Drawing.Point(153, 542);
+			this.dateTimePickerExpiryDate.MinDate = new System.DateTime(1950, 1, 1, 0, 0, 0, 0);
+			this.dateTimePickerExpiryDate.Name = "dateTimePickerExpiryDate";
+			this.dateTimePickerExpiryDate.Size = new System.Drawing.Size(352, 25);
+			this.dateTimePickerExpiryDate.TabIndex = 208;
+			// 
+			// lifelengthViewerExpiryRemain
+			// 
+			this.lifelengthViewerExpiryRemain.Anchor = System.Windows.Forms.AnchorStyles.Right;
+			this.lifelengthViewerExpiryRemain.AutoSize = true;
+			this.lifelengthViewerExpiryRemain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.lifelengthViewerExpiryRemain.CalendarApplicable = false;
+			this.lifelengthViewerExpiryRemain.CyclesApplicable = false;
+			this.lifelengthViewerExpiryRemain.EnabledCalendar = true;
+			this.lifelengthViewerExpiryRemain.EnabledCycle = true;
+			this.lifelengthViewerExpiryRemain.EnabledHours = true;
+			this.lifelengthViewerExpiryRemain.FieldsBackColor = System.Drawing.SystemColors.Window;
+			this.lifelengthViewerExpiryRemain.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.lifelengthViewerExpiryRemain.HeaderCalendar = "Calendar";
+			this.lifelengthViewerExpiryRemain.HeaderCycles = "Cycles";
+			this.lifelengthViewerExpiryRemain.HeaderFormattedCalendar = "Calendar";
+			this.lifelengthViewerExpiryRemain.HeaderHours = "Hours";
+			this.lifelengthViewerExpiryRemain.HoursApplicable = false;
+			this.lifelengthViewerExpiryRemain.LeftHeader = "Notify:";
+			this.lifelengthViewerExpiryRemain.Location = new System.Drawing.Point(814, 541);
+			this.lifelengthViewerExpiryRemain.Margin = new System.Windows.Forms.Padding(2);
+			this.lifelengthViewerExpiryRemain.Modified = false;
+			this.lifelengthViewerExpiryRemain.Name = "lifelengthViewerExpiryRemain";
+			this.lifelengthViewerExpiryRemain.ReadOnly = false;
+			this.lifelengthViewerExpiryRemain.ShowCalendar = true;
+			this.lifelengthViewerExpiryRemain.ShowCalendarOnly = true;
+			this.lifelengthViewerExpiryRemain.ShowFormattedCalendar = false;
+			this.lifelengthViewerExpiryRemain.ShowHeaders = false;
+			this.lifelengthViewerExpiryRemain.ShowMinutes = false;
+			this.lifelengthViewerExpiryRemain.Size = new System.Drawing.Size(231, 35);
+			this.lifelengthViewerExpiryRemain.SystemCalculated = true;
+			this.lifelengthViewerExpiryRemain.TabIndex = 207;
 			// 
 			// textBoxCMM
 			// 
@@ -747,7 +806,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxRelationType.Name = "comboBoxRelationType";
 			this.comboBoxRelationType.Size = new System.Drawing.Size(351, 22);
 			this.comboBoxRelationType.TabIndex = 196;
-			this.comboBoxRelationType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxNdt
 			// 
@@ -758,7 +816,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxNdt.Name = "comboBoxNdt";
 			this.comboBoxNdt.Size = new System.Drawing.Size(306, 22);
 			this.comboBoxNdt.TabIndex = 194;
-			this.comboBoxNdt.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelNdt
 			// 
@@ -816,7 +873,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.lookupComboboxMaintenanceDirective.TabIndex = 190;
 			this.lookupComboboxMaintenanceDirective.Type = null;
 			this.lookupComboboxMaintenanceDirective.SelectedIndexChanged += new System.EventHandler(this.LookupComboboxMaintenanceDirectiveSelectedIndexChanged);
-			this.lookupComboboxMaintenanceDirective.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelMPDItem
 			// 
@@ -839,7 +895,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxMpdTaskType.Name = "comboBoxMpdTaskType";
 			this.comboBoxMpdTaskType.Size = new System.Drawing.Size(350, 22);
 			this.comboBoxMpdTaskType.TabIndex = 68;
-			this.comboBoxMpdTaskType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelEffectivityDate
 			// 
@@ -984,5 +1039,8 @@ namespace CAS.UI.UIControls.ComponentControls
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.TextBox textBoxZoneArea;
 		private System.Windows.Forms.Label label2;
+		private LifelengthViewer lifelengthViewerExpiryRemain;
+		private System.Windows.Forms.Label labelExpiryDate;
+		private System.Windows.Forms.DateTimePicker dateTimePickerExpiryDate;
 	}
 }

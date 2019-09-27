@@ -1500,6 +1500,7 @@ namespace SmartCore.DtoHelper
 				AccessDirective = comdir.AccessDirective,
 				AAM = comdir.AAM,
 				CMM = comdir.CMM,
+				ExpiryDate = comdir.ExpiryDate,
 				Files = comdir.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
 				PerformanceRecords = comdir.PerformanceRecords?.Select(i => i.Convert()) as ICollection<DirectiveRecordDTO>,
 				CategoriesRecords = comdir.CategoriesRecords?.Select(i => i.Convert()) as ICollection<CategoryRecordDTO>,
@@ -1516,7 +1517,7 @@ namespace SmartCore.DtoHelper
 				Updated = comdirdto.Updated,
 				CorrectorId = comdirdto.CorrectorId,
 				DirectiveTypeId = comdirdto.DirectiveType,
-
+				
 				//TODO:Разобраться почему private set
 				Threshold = new ComponentDirectiveThreshold(comdirdto.Threshold),
 				ManHours = comdirdto.ManHours ?? default(double),
@@ -1532,7 +1533,8 @@ namespace SmartCore.DtoHelper
 				ZoneArea = comdirdto.ZoneArea,
 				AccessDirective = comdirdto.AccessDirective,
 				AAM = comdirdto.AAM,
-				CMM = comdirdto.CMM
+				CMM = comdirdto.CMM,
+				ExpiryDate = comdirdto.ExpiryDate
 			};
 
 

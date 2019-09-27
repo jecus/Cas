@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
@@ -80,8 +81,11 @@ namespace EntityCore.DTO.General
 		[Column("CMM"), MaxLength(256)]
 		public string CMM { get; set; }
 
+		[Column("ExpiryDate")]
+		public DateTime? ExpiryDate { get; set; }
 
-		
+
+
 		[Child(FilterType.Equal, "ParentTypeId", 2)]
 		public ICollection<ItemFileLinkDTO> Files { get; set; }
 
