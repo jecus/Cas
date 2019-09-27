@@ -203,7 +203,8 @@ namespace SmartCore.Calculations
             data.AddRange(RepeatNotification.ConvertToByteArray());
             data.AddRange(Warranty.ConvertToByteArray());
             data.AddRange(WarrantyNotification.ConvertToByteArray());
-            data.AddRange(ExpiryRemainNotify.ConvertToByteArray());
+			if(ExpiryRemainNotify != null)
+				data.AddRange(ExpiryRemainNotify.ConvertToByteArray());
             data.Add((byte)(_performRepeatedly ? 1 : 0));
             data.Add((byte)(FirstPerformanceConditionType == ThresholdConditionType.WhicheverLater ? 1 : 0));
             data.AddRange(DbTypes.Int64ToByteArray(EffectiveDate.Ticks));
