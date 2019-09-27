@@ -175,35 +175,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		#endregion
 
-		#region private void comboBoxDestination_SelectedIndexChanged(object sender, System.EventArgs e)
-
-		private void comboBoxDestination_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			comboBoxDefferedCategory.Items.Clear();
-			comboBoxDIR.Items.Clear();
-
-			var a = comboBoxDestination.SelectedItem as Aircraft;
-
-			if (a != null)
-			{
-				comboBoxDefferedCategory.Enabled = true;
-
-				if (a.Model != null)
-				{
-					var categories = _defferedCategories.Where(c => a.Model.Equals(c.AircraftModel)).ToList();
-					categories.Add(DeferredCategory.Unknown);
-
-					comboBoxDefferedCategory.Items.AddRange(categories.ToArray());
-
-					if(listViewInitialItems.SelectedItem is RequestForQuotationRecord)
-						comboBoxDefferedCategory.SelectedItem = categories.FirstOrDefault(c => c.Equals(((RequestForQuotationRecord)listViewInitialItems.SelectedItem).DeferredCategory)) ?? DeferredCategory.Unknown;
-				}
-			}
-			else comboBoxDefferedCategory.Enabled = false;
-		}
-
-		#endregion
-
 		#region private void comboBoxMeasure_SelectedIndexChanged(object sender, System.EventArgs e)
 
 		private void comboBoxMeasure_SelectedIndexChanged(object sender, EventArgs e)
@@ -447,7 +418,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			record.Priority = comboBoxPriority.SelectedItem as Priority ?? Priority.UNK;
 			record.Measure = comboBoxMeasure.SelectedItem as Measure ?? Measure.Unknown;
 			record.Quantity = (double)numericUpDownQuantity.Value;
-			record.DeferredCategory = comboBoxDefferedCategory.SelectedItem as DeferredCategory ?? DeferredCategory.Unknown;
 			record.Remarks = metroTextBox1.Text;
 
 			ComponentStatus costCondition = ComponentStatus.Unknown;
