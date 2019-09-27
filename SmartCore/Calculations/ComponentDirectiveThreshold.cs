@@ -136,6 +136,8 @@ namespace SmartCore.Calculations
 
 		#endregion
 
+		public Lifelength ExpiryRemainNotify { get; set; }
+
 		/*
 		* Методы
 		*/
@@ -153,6 +155,7 @@ namespace SmartCore.Calculations
             RepeatInterval = new Lifelength ();
             RepeatNotification = new Lifelength();
             Warranty = new Lifelength();
+            ExpiryRemainNotify = new Lifelength();
             WarrantyNotification = new Lifelength();
             EffectiveDate = DateTimeExtend.GetCASMinDateTime();
         }
@@ -164,6 +167,7 @@ namespace SmartCore.Calculations
             RepeatPerformanceConditionType = source.RepeatPerformanceConditionType;
             PerformRepeatedly = source.PerformRepeatedly;
             EffectiveDate = source.EffectiveDate;
+            ExpiryRemainNotify = source.ExpiryRemainNotify;
             FirstPerformanceSinceNew = source.FirstPerformanceSinceNew;
             FirstPerformanceSinceEffectiveDate = source.FirstPerformanceSinceEffectiveDate;
             FirstNotification = source.FirstNotification;
@@ -199,6 +203,7 @@ namespace SmartCore.Calculations
             data.AddRange(RepeatNotification.ConvertToByteArray());
             data.AddRange(Warranty.ConvertToByteArray());
             data.AddRange(WarrantyNotification.ConvertToByteArray());
+            data.AddRange(ExpiryRemainNotify.ConvertToByteArray());
             data.Add((byte)(_performRepeatedly ? 1 : 0));
             data.Add((byte)(FirstPerformanceConditionType == ThresholdConditionType.WhicheverLater ? 1 : 0));
             data.AddRange(DbTypes.Int64ToByteArray(EffectiveDate.Ticks));
