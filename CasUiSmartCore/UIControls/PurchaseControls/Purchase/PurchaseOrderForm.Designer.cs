@@ -34,6 +34,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.purchaseRecordListView1 = new CAS.UI.UIControls.PurchaseControls.Purchase.PurchaseRecordListView(true);
 			this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.comboBoxCurrency = new System.Windows.Forms.ComboBox();

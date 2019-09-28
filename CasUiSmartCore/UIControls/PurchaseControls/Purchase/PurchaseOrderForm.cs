@@ -33,7 +33,15 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		public PurchaseOrderForm()
 		{
-			InitializeComponent();
+			try
+			{
+				InitializeComponent();
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e);
+				throw;
+			}
 		}
 
 		public PurchaseOrderForm(PurchaseOrder order):this()
@@ -81,7 +89,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 			foreach (var record in records)
 			{
-				record.ShipCompany = _supplierShipper.FirstOrDefault(i => i.ItemId == purchaseRecordListView1.SelectedItem.ShipCompanyId) ?? Supplier.Unknown;
+				record.ShipCompany = _supplierShipper.FirstOrDefault(i => i.ItemId == record.ShipCompanyId) ?? Supplier.Unknown;
 				record.ParentInitialRecord = initialRecords.FirstOrDefault(i => i.ProductId == record.PackageItemId);
 				record.Product = products.FirstOrDefault(i => i.ItemId == record.PackageItemId);
 				record.Supplier = suppliers.FirstOrDefault(i => i.ItemId == record.SupplierId);
