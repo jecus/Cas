@@ -37,19 +37,35 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.purchaseRecordListView1 = new CAS.UI.UIControls.PurchaseControls.Purchase.PurchaseRecordListView(true);
 			this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.textBoxNettoWeight = new MetroFramework.Controls.MetroTextBox();
 			this.comboBoxCurrency = new System.Windows.Forms.ComboBox();
+			this.metroLabelNettoWeight = new MetroFramework.Controls.MetroLabel();
 			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+			this.textBoxBruttoWeight = new MetroFramework.Controls.MetroTextBox();
 			this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+			this.metroLabelBruttoWeight = new MetroFramework.Controls.MetroLabel();
 			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+			this.textBoxCargoVolume = new MetroFramework.Controls.MetroTextBox();
 			this.button1 = new System.Windows.Forms.Button();
+			this.metroLabelCargoVolume = new MetroFramework.Controls.MetroLabel();
 			this.numericUpDownQuantity = new System.Windows.Forms.NumericUpDown();
+			this.textBoxShipTo = new MetroFramework.Controls.MetroTextBox();
 			this.labelQuantity = new MetroFramework.Controls.MetroLabel();
+			this.metroLabelShipTo = new MetroFramework.Controls.MetroLabel();
 			this.comboBoxMeasure = new System.Windows.Forms.ComboBox();
+			this.comboBoxShipComp = new System.Windows.Forms.ComboBox();
 			this.labelMeasure = new MetroFramework.Controls.MetroLabel();
+			this.metroLabelShippingCompany = new MetroFramework.Controls.MetroLabel();
 			this.labelTotal = new MetroFramework.Controls.MetroLabel();
+			this.comboBoxIncoTerm = new System.Windows.Forms.ComboBox();
 			this.textBoxTotal = new MetroFramework.Controls.MetroTextBox();
+			this.metroLabelIncoTerm = new MetroFramework.Controls.MetroLabel();
 			this.labelReason = new MetroFramework.Controls.MetroLabel();
+			this.comboBoxPayTerm = new System.Windows.Forms.ComboBox();
 			this.comboBoxCondition = new System.Windows.Forms.ComboBox();
+			this.metroLabelPayTerm = new MetroFramework.Controls.MetroLabel();
+			this.metroLabelDesignation = new MetroFramework.Controls.MetroLabel();
+			this.comboBoxDesignation = new System.Windows.Forms.ComboBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.metroTextBoxNumber = new MetroFramework.Controls.MetroTextBox();
 			this.metroLabelNumber = new MetroFramework.Controls.MetroLabel();
@@ -83,28 +99,27 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.documentControl8 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.documentControl9 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.documentControl10 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.comboBoxDesignation = new System.Windows.Forms.ComboBox();
-			this.metroLabelDesignation = new MetroFramework.Controls.MetroLabel();
-			this.comboBoxPayTerm = new System.Windows.Forms.ComboBox();
-			this.metroLabelPayTerm = new MetroFramework.Controls.MetroLabel();
-			this.comboBoxIncoTerm = new System.Windows.Forms.ComboBox();
-			this.metroLabelIncoTerm = new MetroFramework.Controls.MetroLabel();
-			this.comboBoxShipComp = new System.Windows.Forms.ComboBox();
-			this.metroLabelShippingCompany = new MetroFramework.Controls.MetroLabel();
-			this.textBoxShipTo = new MetroFramework.Controls.MetroTextBox();
-			this.metroLabelShipTo = new MetroFramework.Controls.MetroLabel();
-			this.textBoxCargoVolume = new MetroFramework.Controls.MetroTextBox();
-			this.metroLabelCargoVolume = new MetroFramework.Controls.MetroLabel();
-			this.textBoxBruttoWeight = new MetroFramework.Controls.MetroTextBox();
-			this.metroLabelBruttoWeight = new MetroFramework.Controls.MetroLabel();
-			this.textBoxNettoWeight = new MetroFramework.Controls.MetroTextBox();
-			this.metroLabelNettoWeight = new MetroFramework.Controls.MetroLabel();
-			this.button2 = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
+			// 
+			// purchaseRecordListView1
+			// 
+			this.purchaseRecordListView1.Displayer = null;
+			this.purchaseRecordListView1.DisplayerText = null;
+			this.purchaseRecordListView1.Entity = null;
+			this.purchaseRecordListView1.IgnoreEnterPress = false;
+			this.purchaseRecordListView1.Location = new System.Drawing.Point(23, 64);
+			this.purchaseRecordListView1.MenuOpeningAction = null;
+			this.purchaseRecordListView1.Name = "purchaseRecordListView1";
+			this.purchaseRecordListView1.OldColumnIndex = 2;
+			this.purchaseRecordListView1.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.purchaseRecordListView1.Size = new System.Drawing.Size(687, 350);
+			this.purchaseRecordListView1.SortMultiplier = 1;
+			this.purchaseRecordListView1.TabIndex = 296;
+			this.purchaseRecordListView1.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.PurchaseRecordListView1_SelectedItemsChanged);
 			// 
 			// ButtonDelete
 			// 
@@ -118,7 +133,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.ButtonDelete.Icon = global::CAS.UI.Properties.Resources.DeleteIconSmall;
 			this.ButtonDelete.IconLayout = System.Windows.Forms.ImageLayout.Center;
 			this.ButtonDelete.IconNotEnabled = null;
-			this.ButtonDelete.Location = new System.Drawing.Point(588, 423);
+			this.ButtonDelete.Location = new System.Drawing.Point(588, 422);
 			this.ButtonDelete.Margin = new System.Windows.Forms.Padding(4);
 			this.ButtonDelete.Name = "ButtonDelete";
 			this.ButtonDelete.NormalBackgroundImage = null;
@@ -136,25 +151,72 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.textBoxNettoWeight);
 			this.groupBox1.Controls.Add(this.comboBoxCurrency);
+			this.groupBox1.Controls.Add(this.metroLabelNettoWeight);
 			this.groupBox1.Controls.Add(this.metroLabel2);
+			this.groupBox1.Controls.Add(this.textBoxBruttoWeight);
 			this.groupBox1.Controls.Add(this.numericUpDown1);
+			this.groupBox1.Controls.Add(this.metroLabelBruttoWeight);
 			this.groupBox1.Controls.Add(this.metroLabel1);
+			this.groupBox1.Controls.Add(this.textBoxCargoVolume);
 			this.groupBox1.Controls.Add(this.button1);
+			this.groupBox1.Controls.Add(this.metroLabelCargoVolume);
 			this.groupBox1.Controls.Add(this.numericUpDownQuantity);
+			this.groupBox1.Controls.Add(this.textBoxShipTo);
 			this.groupBox1.Controls.Add(this.labelQuantity);
+			this.groupBox1.Controls.Add(this.metroLabelShipTo);
 			this.groupBox1.Controls.Add(this.comboBoxMeasure);
+			this.groupBox1.Controls.Add(this.comboBoxShipComp);
 			this.groupBox1.Controls.Add(this.labelMeasure);
+			this.groupBox1.Controls.Add(this.metroLabelShippingCompany);
 			this.groupBox1.Controls.Add(this.labelTotal);
+			this.groupBox1.Controls.Add(this.comboBoxIncoTerm);
 			this.groupBox1.Controls.Add(this.textBoxTotal);
+			this.groupBox1.Controls.Add(this.metroLabelIncoTerm);
 			this.groupBox1.Controls.Add(this.labelReason);
+			this.groupBox1.Controls.Add(this.comboBoxPayTerm);
 			this.groupBox1.Controls.Add(this.comboBoxCondition);
-			this.groupBox1.Location = new System.Drawing.Point(717, 37);
+			this.groupBox1.Controls.Add(this.metroLabelPayTerm);
+			this.groupBox1.Controls.Add(this.metroLabelDesignation);
+			this.groupBox1.Controls.Add(this.comboBoxDesignation);
+			this.groupBox1.Location = new System.Drawing.Point(23, 445);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(290, 229);
+			this.groupBox1.Size = new System.Drawing.Size(984, 203);
 			this.groupBox1.TabIndex = 290;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Selected Product";
+			// 
+			// textBoxNettoWeight
+			// 
+			// 
+			// 
+			// 
+			this.textBoxNettoWeight.CustomButton.Image = null;
+			this.textBoxNettoWeight.CustomButton.Location = new System.Drawing.Point(181, 2);
+			this.textBoxNettoWeight.CustomButton.Name = "";
+			this.textBoxNettoWeight.CustomButton.Size = new System.Drawing.Size(17, 17);
+			this.textBoxNettoWeight.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxNettoWeight.CustomButton.TabIndex = 1;
+			this.textBoxNettoWeight.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxNettoWeight.CustomButton.UseSelectable = true;
+			this.textBoxNettoWeight.CustomButton.Visible = false;
+			this.textBoxNettoWeight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxNettoWeight.Lines = new string[0];
+			this.textBoxNettoWeight.Location = new System.Drawing.Point(427, 173);
+			this.textBoxNettoWeight.MaxLength = 32767;
+			this.textBoxNettoWeight.Name = "textBoxNettoWeight";
+			this.textBoxNettoWeight.PasswordChar = '\0';
+			this.textBoxNettoWeight.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textBoxNettoWeight.SelectedText = "";
+			this.textBoxNettoWeight.SelectionLength = 0;
+			this.textBoxNettoWeight.SelectionStart = 0;
+			this.textBoxNettoWeight.ShortcutsEnabled = true;
+			this.textBoxNettoWeight.Size = new System.Drawing.Size(201, 22);
+			this.textBoxNettoWeight.TabIndex = 321;
+			this.textBoxNettoWeight.UseSelectable = true;
+			this.textBoxNettoWeight.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxNettoWeight.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// comboBoxCurrency
 			// 
@@ -167,6 +229,16 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.comboBoxCurrency.Size = new System.Drawing.Size(165, 25);
 			this.comboBoxCurrency.TabIndex = 252;
 			// 
+			// metroLabelNettoWeight
+			// 
+			this.metroLabelNettoWeight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.metroLabelNettoWeight.Location = new System.Drawing.Point(289, 169);
+			this.metroLabelNettoWeight.Name = "metroLabelNettoWeight";
+			this.metroLabelNettoWeight.Size = new System.Drawing.Size(120, 27);
+			this.metroLabelNettoWeight.TabIndex = 322;
+			this.metroLabelNettoWeight.Text = "Netto weight:";
+			this.metroLabelNettoWeight.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
 			// metroLabel2
 			// 
 			this.metroLabel2.AutoSize = true;
@@ -178,19 +250,60 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.metroLabel2.Text = "Currency:";
 			this.metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// textBoxBruttoWeight
+			// 
+			// 
+			// 
+			// 
+			this.textBoxBruttoWeight.CustomButton.Image = null;
+			this.textBoxBruttoWeight.CustomButton.Location = new System.Drawing.Point(181, 2);
+			this.textBoxBruttoWeight.CustomButton.Name = "";
+			this.textBoxBruttoWeight.CustomButton.Size = new System.Drawing.Size(17, 17);
+			this.textBoxBruttoWeight.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxBruttoWeight.CustomButton.TabIndex = 1;
+			this.textBoxBruttoWeight.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxBruttoWeight.CustomButton.UseSelectable = true;
+			this.textBoxBruttoWeight.CustomButton.Visible = false;
+			this.textBoxBruttoWeight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxBruttoWeight.Lines = new string[0];
+			this.textBoxBruttoWeight.Location = new System.Drawing.Point(427, 142);
+			this.textBoxBruttoWeight.MaxLength = 32767;
+			this.textBoxBruttoWeight.Name = "textBoxBruttoWeight";
+			this.textBoxBruttoWeight.PasswordChar = '\0';
+			this.textBoxBruttoWeight.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textBoxBruttoWeight.SelectedText = "";
+			this.textBoxBruttoWeight.SelectionLength = 0;
+			this.textBoxBruttoWeight.SelectionStart = 0;
+			this.textBoxBruttoWeight.ShortcutsEnabled = true;
+			this.textBoxBruttoWeight.Size = new System.Drawing.Size(201, 22);
+			this.textBoxBruttoWeight.TabIndex = 319;
+			this.textBoxBruttoWeight.UseSelectable = true;
+			this.textBoxBruttoWeight.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxBruttoWeight.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+			// 
 			// numericUpDown1
 			// 
 			this.numericUpDown1.DecimalPlaces = 2;
 			this.numericUpDown1.Enabled = false;
 			this.numericUpDown1.Location = new System.Drawing.Point(118, 136);
 			this.numericUpDown1.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDown1.Name = "numericUpDown1";
 			this.numericUpDown1.Size = new System.Drawing.Size(165, 20);
 			this.numericUpDown1.TabIndex = 250;
+			// 
+			// metroLabelBruttoWeight
+			// 
+			this.metroLabelBruttoWeight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.metroLabelBruttoWeight.Location = new System.Drawing.Point(289, 138);
+			this.metroLabelBruttoWeight.Name = "metroLabelBruttoWeight";
+			this.metroLabelBruttoWeight.Size = new System.Drawing.Size(120, 27);
+			this.metroLabelBruttoWeight.TabIndex = 320;
+			this.metroLabelBruttoWeight.Text = "Brutto weight:";
+			this.metroLabelBruttoWeight.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// metroLabel1
 			// 
@@ -203,32 +316,105 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.metroLabel1.Text = "Cost:";
 			this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// textBoxCargoVolume
+			// 
+			// 
+			// 
+			// 
+			this.textBoxCargoVolume.CustomButton.Image = null;
+			this.textBoxCargoVolume.CustomButton.Location = new System.Drawing.Point(181, 2);
+			this.textBoxCargoVolume.CustomButton.Name = "";
+			this.textBoxCargoVolume.CustomButton.Size = new System.Drawing.Size(17, 17);
+			this.textBoxCargoVolume.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxCargoVolume.CustomButton.TabIndex = 1;
+			this.textBoxCargoVolume.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxCargoVolume.CustomButton.UseSelectable = true;
+			this.textBoxCargoVolume.CustomButton.Visible = false;
+			this.textBoxCargoVolume.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxCargoVolume.Lines = new string[0];
+			this.textBoxCargoVolume.Location = new System.Drawing.Point(427, 111);
+			this.textBoxCargoVolume.MaxLength = 32767;
+			this.textBoxCargoVolume.Name = "textBoxCargoVolume";
+			this.textBoxCargoVolume.PasswordChar = '\0';
+			this.textBoxCargoVolume.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textBoxCargoVolume.SelectedText = "";
+			this.textBoxCargoVolume.SelectionLength = 0;
+			this.textBoxCargoVolume.SelectionStart = 0;
+			this.textBoxCargoVolume.ShortcutsEnabled = true;
+			this.textBoxCargoVolume.Size = new System.Drawing.Size(201, 22);
+			this.textBoxCargoVolume.TabIndex = 317;
+			this.textBoxCargoVolume.UseSelectable = true;
+			this.textBoxCargoVolume.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxCargoVolume.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+			// 
 			// button1
 			// 
 			this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button1.Location = new System.Drawing.Point(207, 190);
+			this.button1.Location = new System.Drawing.Point(900, 162);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(75, 33);
 			this.button1.TabIndex = 249;
 			this.button1.Text = "Apply";
 			this.button1.Click += new System.EventHandler(this.Button1_Click);
 			// 
+			// metroLabelCargoVolume
+			// 
+			this.metroLabelCargoVolume.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.metroLabelCargoVolume.Location = new System.Drawing.Point(289, 107);
+			this.metroLabelCargoVolume.Name = "metroLabelCargoVolume";
+			this.metroLabelCargoVolume.Size = new System.Drawing.Size(120, 27);
+			this.metroLabelCargoVolume.TabIndex = 318;
+			this.metroLabelCargoVolume.Text = "Cargo volume:";
+			this.metroLabelCargoVolume.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
 			// numericUpDownQuantity
 			// 
 			this.numericUpDownQuantity.DecimalPlaces = 2;
 			this.numericUpDownQuantity.Location = new System.Drawing.Point(118, 110);
 			this.numericUpDownQuantity.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownQuantity.Name = "numericUpDownQuantity";
 			this.numericUpDownQuantity.Size = new System.Drawing.Size(165, 20);
 			this.numericUpDownQuantity.TabIndex = 142;
 			this.numericUpDownQuantity.ValueChanged += new System.EventHandler(this.NumericUpDownQuantity_ValueChanged);
+			// 
+			// textBoxShipTo
+			// 
+			// 
+			// 
+			// 
+			this.textBoxShipTo.CustomButton.Image = null;
+			this.textBoxShipTo.CustomButton.Location = new System.Drawing.Point(105, 1);
+			this.textBoxShipTo.CustomButton.Name = "";
+			this.textBoxShipTo.CustomButton.Size = new System.Drawing.Size(91, 91);
+			this.textBoxShipTo.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxShipTo.CustomButton.TabIndex = 1;
+			this.textBoxShipTo.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxShipTo.CustomButton.UseSelectable = true;
+			this.textBoxShipTo.CustomButton.Visible = false;
+			this.textBoxShipTo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxShipTo.Lines = new string[0];
+			this.textBoxShipTo.Location = new System.Drawing.Point(779, 49);
+			this.textBoxShipTo.MaxLength = 32767;
+			this.textBoxShipTo.Multiline = true;
+			this.textBoxShipTo.Name = "textBoxShipTo";
+			this.textBoxShipTo.PasswordChar = '\0';
+			this.textBoxShipTo.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textBoxShipTo.SelectedText = "";
+			this.textBoxShipTo.SelectionLength = 0;
+			this.textBoxShipTo.SelectionStart = 0;
+			this.textBoxShipTo.ShortcutsEnabled = true;
+			this.textBoxShipTo.Size = new System.Drawing.Size(197, 93);
+			this.textBoxShipTo.TabIndex = 315;
+			this.textBoxShipTo.UseSelectable = true;
+			this.textBoxShipTo.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxShipTo.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// labelQuantity
 			// 
@@ -240,6 +426,16 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.labelQuantity.TabIndex = 158;
 			this.labelQuantity.Text = "Quantity:";
 			this.labelQuantity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// metroLabelShipTo
+			// 
+			this.metroLabelShipTo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.metroLabelShipTo.Location = new System.Drawing.Point(641, 45);
+			this.metroLabelShipTo.Name = "metroLabelShipTo";
+			this.metroLabelShipTo.Size = new System.Drawing.Size(120, 27);
+			this.metroLabelShipTo.TabIndex = 316;
+			this.metroLabelShipTo.Text = "Ship To:";
+			this.metroLabelShipTo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// comboBoxMeasure
 			// 
@@ -253,6 +449,16 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.comboBoxMeasure.TabIndex = 141;
 			this.comboBoxMeasure.SelectedIndexChanged += new System.EventHandler(this.ComboBoxMeasure_SelectedIndexChanged);
 			// 
+			// comboBoxShipComp
+			// 
+			this.comboBoxShipComp.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.comboBoxShipComp.FormattingEnabled = true;
+			this.comboBoxShipComp.ItemHeight = 17;
+			this.comboBoxShipComp.Location = new System.Drawing.Point(779, 16);
+			this.comboBoxShipComp.Name = "comboBoxShipComp";
+			this.comboBoxShipComp.Size = new System.Drawing.Size(196, 25);
+			this.comboBoxShipComp.TabIndex = 314;
+			// 
 			// labelMeasure
 			// 
 			this.labelMeasure.AutoSize = true;
@@ -264,6 +470,16 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.labelMeasure.Text = "Measure:";
 			this.labelMeasure.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// metroLabelShippingCompany
+			// 
+			this.metroLabelShippingCompany.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.metroLabelShippingCompany.Location = new System.Drawing.Point(641, 18);
+			this.metroLabelShippingCompany.Name = "metroLabelShippingCompany";
+			this.metroLabelShippingCompany.Size = new System.Drawing.Size(132, 23);
+			this.metroLabelShippingCompany.TabIndex = 313;
+			this.metroLabelShippingCompany.Text = "Shipping company:";
+			this.metroLabelShippingCompany.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
 			// labelTotal
 			// 
 			this.labelTotal.AutoSize = true;
@@ -274,6 +490,16 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.labelTotal.TabIndex = 168;
 			this.labelTotal.Text = "Total:";
 			this.labelTotal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// comboBoxIncoTerm
+			// 
+			this.comboBoxIncoTerm.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.comboBoxIncoTerm.FormattingEnabled = true;
+			this.comboBoxIncoTerm.ItemHeight = 17;
+			this.comboBoxIncoTerm.Location = new System.Drawing.Point(427, 80);
+			this.comboBoxIncoTerm.Name = "comboBoxIncoTerm";
+			this.comboBoxIncoTerm.Size = new System.Drawing.Size(200, 25);
+			this.comboBoxIncoTerm.TabIndex = 312;
 			// 
 			// textBoxTotal
 			// 
@@ -308,6 +534,16 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.textBoxTotal.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.textBoxTotal.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
+			// metroLabelIncoTerm
+			// 
+			this.metroLabelIncoTerm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.metroLabelIncoTerm.Location = new System.Drawing.Point(289, 80);
+			this.metroLabelIncoTerm.Name = "metroLabelIncoTerm";
+			this.metroLabelIncoTerm.Size = new System.Drawing.Size(132, 23);
+			this.metroLabelIncoTerm.TabIndex = 311;
+			this.metroLabelIncoTerm.Text = "Inco Term:";
+			this.metroLabelIncoTerm.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
 			// labelReason
 			// 
 			this.labelReason.AutoSize = true;
@@ -317,6 +553,16 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.labelReason.Size = new System.Drawing.Size(69, 19);
 			this.labelReason.TabIndex = 170;
 			this.labelReason.Text = "Condition:";
+			// 
+			// comboBoxPayTerm
+			// 
+			this.comboBoxPayTerm.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.comboBoxPayTerm.FormattingEnabled = true;
+			this.comboBoxPayTerm.ItemHeight = 17;
+			this.comboBoxPayTerm.Location = new System.Drawing.Point(427, 49);
+			this.comboBoxPayTerm.Name = "comboBoxPayTerm";
+			this.comboBoxPayTerm.Size = new System.Drawing.Size(200, 25);
+			this.comboBoxPayTerm.TabIndex = 310;
 			// 
 			// comboBoxCondition
 			// 
@@ -328,6 +574,36 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.comboBoxCondition.Size = new System.Drawing.Size(165, 25);
 			this.comboBoxCondition.TabIndex = 169;
 			this.comboBoxCondition.SelectedIndexChanged += new System.EventHandler(this.ComboBoxCondition_SelectedIndexChanged);
+			// 
+			// metroLabelPayTerm
+			// 
+			this.metroLabelPayTerm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.metroLabelPayTerm.Location = new System.Drawing.Point(289, 49);
+			this.metroLabelPayTerm.Name = "metroLabelPayTerm";
+			this.metroLabelPayTerm.Size = new System.Drawing.Size(132, 23);
+			this.metroLabelPayTerm.TabIndex = 309;
+			this.metroLabelPayTerm.Text = "Pay Term:";
+			this.metroLabelPayTerm.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// metroLabelDesignation
+			// 
+			this.metroLabelDesignation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.metroLabelDesignation.Location = new System.Drawing.Point(289, 18);
+			this.metroLabelDesignation.Name = "metroLabelDesignation";
+			this.metroLabelDesignation.Size = new System.Drawing.Size(132, 23);
+			this.metroLabelDesignation.TabIndex = 307;
+			this.metroLabelDesignation.Text = "Designation:";
+			this.metroLabelDesignation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// comboBoxDesignation
+			// 
+			this.comboBoxDesignation.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.comboBoxDesignation.FormattingEnabled = true;
+			this.comboBoxDesignation.ItemHeight = 17;
+			this.comboBoxDesignation.Location = new System.Drawing.Point(427, 18);
+			this.comboBoxDesignation.Name = "comboBoxDesignation";
+			this.comboBoxDesignation.Size = new System.Drawing.Size(200, 25);
+			this.comboBoxDesignation.TabIndex = 308;
 			// 
 			// groupBox2
 			// 
@@ -351,9 +627,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.groupBox2.Controls.Add(this.labelAuthor);
 			this.groupBox2.Controls.Add(this.textBoxTitle);
 			this.groupBox2.Controls.Add(this.labelQOTitle);
-			this.groupBox2.Location = new System.Drawing.Point(717, 272);
+			this.groupBox2.Location = new System.Drawing.Point(716, 64);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(290, 304);
+			this.groupBox2.Size = new System.Drawing.Size(291, 304);
 			this.groupBox2.TabIndex = 291;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Purchase";
@@ -692,7 +968,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(1127, 599);
+			this.buttonOk.Location = new System.Drawing.Point(1127, 608);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 293;
@@ -706,33 +982,17 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonCancel.Location = new System.Drawing.Point(1208, 599);
+			this.buttonCancel.Location = new System.Drawing.Point(1208, 608);
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.Size = new System.Drawing.Size(75, 33);
 			this.buttonCancel.TabIndex = 292;
 			this.buttonCancel.Text = "Cancel";
 			this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
 			// 
-			// purchaseRecordListView1
-			// 
-			this.purchaseRecordListView1.Displayer = null;
-			this.purchaseRecordListView1.DisplayerText = null;
-			this.purchaseRecordListView1.Entity = null;
-			this.purchaseRecordListView1.IgnoreEnterPress = false;
-			this.purchaseRecordListView1.Location = new System.Drawing.Point(23, 64);
-			this.purchaseRecordListView1.MenuOpeningAction = null;
-			this.purchaseRecordListView1.Name = "purchaseRecordListView1";
-			this.purchaseRecordListView1.OldColumnIndex = 2;
-			this.purchaseRecordListView1.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.purchaseRecordListView1.Size = new System.Drawing.Size(687, 350);
-			this.purchaseRecordListView1.SortMultiplier = 1;
-			this.purchaseRecordListView1.TabIndex = 296;
-			this.purchaseRecordListView1.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.PurchaseRecordListView1_SelectedItemsChanged);
-			// 
 			// documentControl1
 			// 
 			this.documentControl1.CurrentDocument = null;
-			this.documentControl1.Location = new System.Drawing.Point(1013, 39);
+			this.documentControl1.Location = new System.Drawing.Point(1013, 66);
 			this.documentControl1.Name = "documentControl1";
 			this.documentControl1.Size = new System.Drawing.Size(270, 41);
 			this.documentControl1.TabIndex = 297;
@@ -740,7 +1000,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// documentControl2
 			// 
 			this.documentControl2.CurrentDocument = null;
-			this.documentControl2.Location = new System.Drawing.Point(1013, 86);
+			this.documentControl2.Location = new System.Drawing.Point(1013, 113);
 			this.documentControl2.Name = "documentControl2";
 			this.documentControl2.Size = new System.Drawing.Size(270, 41);
 			this.documentControl2.TabIndex = 298;
@@ -748,7 +1008,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// documentControl3
 			// 
 			this.documentControl3.CurrentDocument = null;
-			this.documentControl3.Location = new System.Drawing.Point(1013, 133);
+			this.documentControl3.Location = new System.Drawing.Point(1013, 160);
 			this.documentControl3.Name = "documentControl3";
 			this.documentControl3.Size = new System.Drawing.Size(270, 41);
 			this.documentControl3.TabIndex = 299;
@@ -756,7 +1016,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// documentControl4
 			// 
 			this.documentControl4.CurrentDocument = null;
-			this.documentControl4.Location = new System.Drawing.Point(1013, 180);
+			this.documentControl4.Location = new System.Drawing.Point(1013, 207);
 			this.documentControl4.Name = "documentControl4";
 			this.documentControl4.Size = new System.Drawing.Size(270, 41);
 			this.documentControl4.TabIndex = 300;
@@ -764,7 +1024,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// documentControl5
 			// 
 			this.documentControl5.CurrentDocument = null;
-			this.documentControl5.Location = new System.Drawing.Point(1013, 227);
+			this.documentControl5.Location = new System.Drawing.Point(1013, 254);
 			this.documentControl5.Name = "documentControl5";
 			this.documentControl5.Size = new System.Drawing.Size(270, 41);
 			this.documentControl5.TabIndex = 301;
@@ -772,7 +1032,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// documentControl6
 			// 
 			this.documentControl6.CurrentDocument = null;
-			this.documentControl6.Location = new System.Drawing.Point(1013, 274);
+			this.documentControl6.Location = new System.Drawing.Point(1013, 301);
 			this.documentControl6.Name = "documentControl6";
 			this.documentControl6.Size = new System.Drawing.Size(270, 41);
 			this.documentControl6.TabIndex = 302;
@@ -780,7 +1040,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// documentControl7
 			// 
 			this.documentControl7.CurrentDocument = null;
-			this.documentControl7.Location = new System.Drawing.Point(1013, 321);
+			this.documentControl7.Location = new System.Drawing.Point(1013, 348);
 			this.documentControl7.Name = "documentControl7";
 			this.documentControl7.Size = new System.Drawing.Size(270, 41);
 			this.documentControl7.TabIndex = 303;
@@ -788,7 +1048,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// documentControl8
 			// 
 			this.documentControl8.CurrentDocument = null;
-			this.documentControl8.Location = new System.Drawing.Point(1013, 368);
+			this.documentControl8.Location = new System.Drawing.Point(1013, 395);
 			this.documentControl8.Name = "documentControl8";
 			this.documentControl8.Size = new System.Drawing.Size(270, 41);
 			this.documentControl8.TabIndex = 304;
@@ -796,7 +1056,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// documentControl9
 			// 
 			this.documentControl9.CurrentDocument = null;
-			this.documentControl9.Location = new System.Drawing.Point(1013, 415);
+			this.documentControl9.Location = new System.Drawing.Point(1013, 442);
 			this.documentControl9.Name = "documentControl9";
 			this.documentControl9.Size = new System.Drawing.Size(270, 41);
 			this.documentControl9.TabIndex = 305;
@@ -804,291 +1064,16 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// documentControl10
 			// 
 			this.documentControl10.CurrentDocument = null;
-			this.documentControl10.Location = new System.Drawing.Point(1013, 462);
+			this.documentControl10.Location = new System.Drawing.Point(1013, 489);
 			this.documentControl10.Name = "documentControl10";
 			this.documentControl10.Size = new System.Drawing.Size(270, 41);
 			this.documentControl10.TabIndex = 306;
-			// 
-			// comboBoxDesignation
-			// 
-			this.comboBoxDesignation.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
-			this.comboBoxDesignation.FormattingEnabled = true;
-			this.comboBoxDesignation.ItemHeight = 17;
-			this.comboBoxDesignation.Location = new System.Drawing.Point(161, 452);
-			this.comboBoxDesignation.Name = "comboBoxDesignation";
-			this.comboBoxDesignation.Size = new System.Drawing.Size(200, 25);
-			this.comboBoxDesignation.TabIndex = 308;
-			// 
-			// metroLabelDesignation
-			// 
-			this.metroLabelDesignation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabelDesignation.Location = new System.Drawing.Point(23, 452);
-			this.metroLabelDesignation.Name = "metroLabelDesignation";
-			this.metroLabelDesignation.Size = new System.Drawing.Size(132, 23);
-			this.metroLabelDesignation.TabIndex = 307;
-			this.metroLabelDesignation.Text = "Designation:";
-			this.metroLabelDesignation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// comboBoxPayTerm
-			// 
-			this.comboBoxPayTerm.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
-			this.comboBoxPayTerm.FormattingEnabled = true;
-			this.comboBoxPayTerm.ItemHeight = 17;
-			this.comboBoxPayTerm.Location = new System.Drawing.Point(161, 483);
-			this.comboBoxPayTerm.Name = "comboBoxPayTerm";
-			this.comboBoxPayTerm.Size = new System.Drawing.Size(200, 25);
-			this.comboBoxPayTerm.TabIndex = 310;
-			// 
-			// metroLabelPayTerm
-			// 
-			this.metroLabelPayTerm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabelPayTerm.Location = new System.Drawing.Point(23, 483);
-			this.metroLabelPayTerm.Name = "metroLabelPayTerm";
-			this.metroLabelPayTerm.Size = new System.Drawing.Size(132, 23);
-			this.metroLabelPayTerm.TabIndex = 309;
-			this.metroLabelPayTerm.Text = "Pay Term:";
-			this.metroLabelPayTerm.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// comboBoxIncoTerm
-			// 
-			this.comboBoxIncoTerm.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
-			this.comboBoxIncoTerm.FormattingEnabled = true;
-			this.comboBoxIncoTerm.ItemHeight = 17;
-			this.comboBoxIncoTerm.Location = new System.Drawing.Point(161, 514);
-			this.comboBoxIncoTerm.Name = "comboBoxIncoTerm";
-			this.comboBoxIncoTerm.Size = new System.Drawing.Size(200, 25);
-			this.comboBoxIncoTerm.TabIndex = 312;
-			// 
-			// metroLabelIncoTerm
-			// 
-			this.metroLabelIncoTerm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabelIncoTerm.Location = new System.Drawing.Point(23, 514);
-			this.metroLabelIncoTerm.Name = "metroLabelIncoTerm";
-			this.metroLabelIncoTerm.Size = new System.Drawing.Size(132, 23);
-			this.metroLabelIncoTerm.TabIndex = 311;
-			this.metroLabelIncoTerm.Text = "Inco Term:";
-			this.metroLabelIncoTerm.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// comboBoxShipComp
-			// 
-			this.comboBoxShipComp.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
-			this.comboBoxShipComp.FormattingEnabled = true;
-			this.comboBoxShipComp.ItemHeight = 17;
-			this.comboBoxShipComp.Location = new System.Drawing.Point(513, 450);
-			this.comboBoxShipComp.Name = "comboBoxShipComp";
-			this.comboBoxShipComp.Size = new System.Drawing.Size(196, 25);
-			this.comboBoxShipComp.TabIndex = 314;
-			// 
-			// metroLabelShippingCompany
-			// 
-			this.metroLabelShippingCompany.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabelShippingCompany.Location = new System.Drawing.Point(375, 452);
-			this.metroLabelShippingCompany.Name = "metroLabelShippingCompany";
-			this.metroLabelShippingCompany.Size = new System.Drawing.Size(132, 23);
-			this.metroLabelShippingCompany.TabIndex = 313;
-			this.metroLabelShippingCompany.Text = "Shipping company:";
-			this.metroLabelShippingCompany.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// textBoxShipTo
-			// 
-			// 
-			// 
-			// 
-			this.textBoxShipTo.CustomButton.Image = null;
-			this.textBoxShipTo.CustomButton.Location = new System.Drawing.Point(105, 1);
-			this.textBoxShipTo.CustomButton.Name = "";
-			this.textBoxShipTo.CustomButton.Size = new System.Drawing.Size(91, 91);
-			this.textBoxShipTo.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.textBoxShipTo.CustomButton.TabIndex = 1;
-			this.textBoxShipTo.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.textBoxShipTo.CustomButton.UseSelectable = true;
-			this.textBoxShipTo.CustomButton.Visible = false;
-			this.textBoxShipTo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxShipTo.Lines = new string[0];
-			this.textBoxShipTo.Location = new System.Drawing.Point(513, 483);
-			this.textBoxShipTo.MaxLength = 32767;
-			this.textBoxShipTo.Multiline = true;
-			this.textBoxShipTo.Name = "textBoxShipTo";
-			this.textBoxShipTo.PasswordChar = '\0';
-			this.textBoxShipTo.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.textBoxShipTo.SelectedText = "";
-			this.textBoxShipTo.SelectionLength = 0;
-			this.textBoxShipTo.SelectionStart = 0;
-			this.textBoxShipTo.ShortcutsEnabled = true;
-			this.textBoxShipTo.Size = new System.Drawing.Size(197, 93);
-			this.textBoxShipTo.TabIndex = 315;
-			this.textBoxShipTo.UseSelectable = true;
-			this.textBoxShipTo.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.textBoxShipTo.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			// 
-			// metroLabelShipTo
-			// 
-			this.metroLabelShipTo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabelShipTo.Location = new System.Drawing.Point(375, 479);
-			this.metroLabelShipTo.Name = "metroLabelShipTo";
-			this.metroLabelShipTo.Size = new System.Drawing.Size(120, 27);
-			this.metroLabelShipTo.TabIndex = 316;
-			this.metroLabelShipTo.Text = "Ship To:";
-			this.metroLabelShipTo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// textBoxCargoVolume
-			// 
-			// 
-			// 
-			// 
-			this.textBoxCargoVolume.CustomButton.Image = null;
-			this.textBoxCargoVolume.CustomButton.Location = new System.Drawing.Point(181, 2);
-			this.textBoxCargoVolume.CustomButton.Name = "";
-			this.textBoxCargoVolume.CustomButton.Size = new System.Drawing.Size(17, 17);
-			this.textBoxCargoVolume.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.textBoxCargoVolume.CustomButton.TabIndex = 1;
-			this.textBoxCargoVolume.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.textBoxCargoVolume.CustomButton.UseSelectable = true;
-			this.textBoxCargoVolume.CustomButton.Visible = false;
-			this.textBoxCargoVolume.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxCargoVolume.Lines = new string[0];
-			this.textBoxCargoVolume.Location = new System.Drawing.Point(161, 545);
-			this.textBoxCargoVolume.MaxLength = 32767;
-			this.textBoxCargoVolume.Name = "textBoxCargoVolume";
-			this.textBoxCargoVolume.PasswordChar = '\0';
-			this.textBoxCargoVolume.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.textBoxCargoVolume.SelectedText = "";
-			this.textBoxCargoVolume.SelectionLength = 0;
-			this.textBoxCargoVolume.SelectionStart = 0;
-			this.textBoxCargoVolume.ShortcutsEnabled = true;
-			this.textBoxCargoVolume.Size = new System.Drawing.Size(201, 22);
-			this.textBoxCargoVolume.TabIndex = 317;
-			this.textBoxCargoVolume.UseSelectable = true;
-			this.textBoxCargoVolume.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.textBoxCargoVolume.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			// 
-			// metroLabelCargoVolume
-			// 
-			this.metroLabelCargoVolume.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabelCargoVolume.Location = new System.Drawing.Point(23, 541);
-			this.metroLabelCargoVolume.Name = "metroLabelCargoVolume";
-			this.metroLabelCargoVolume.Size = new System.Drawing.Size(120, 27);
-			this.metroLabelCargoVolume.TabIndex = 318;
-			this.metroLabelCargoVolume.Text = "Cargo volume:";
-			this.metroLabelCargoVolume.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// textBoxBruttoWeight
-			// 
-			// 
-			// 
-			// 
-			this.textBoxBruttoWeight.CustomButton.Image = null;
-			this.textBoxBruttoWeight.CustomButton.Location = new System.Drawing.Point(181, 2);
-			this.textBoxBruttoWeight.CustomButton.Name = "";
-			this.textBoxBruttoWeight.CustomButton.Size = new System.Drawing.Size(17, 17);
-			this.textBoxBruttoWeight.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.textBoxBruttoWeight.CustomButton.TabIndex = 1;
-			this.textBoxBruttoWeight.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.textBoxBruttoWeight.CustomButton.UseSelectable = true;
-			this.textBoxBruttoWeight.CustomButton.Visible = false;
-			this.textBoxBruttoWeight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxBruttoWeight.Lines = new string[0];
-			this.textBoxBruttoWeight.Location = new System.Drawing.Point(161, 576);
-			this.textBoxBruttoWeight.MaxLength = 32767;
-			this.textBoxBruttoWeight.Name = "textBoxBruttoWeight";
-			this.textBoxBruttoWeight.PasswordChar = '\0';
-			this.textBoxBruttoWeight.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.textBoxBruttoWeight.SelectedText = "";
-			this.textBoxBruttoWeight.SelectionLength = 0;
-			this.textBoxBruttoWeight.SelectionStart = 0;
-			this.textBoxBruttoWeight.ShortcutsEnabled = true;
-			this.textBoxBruttoWeight.Size = new System.Drawing.Size(201, 22);
-			this.textBoxBruttoWeight.TabIndex = 319;
-			this.textBoxBruttoWeight.UseSelectable = true;
-			this.textBoxBruttoWeight.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.textBoxBruttoWeight.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			// 
-			// metroLabelBruttoWeight
-			// 
-			this.metroLabelBruttoWeight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabelBruttoWeight.Location = new System.Drawing.Point(23, 572);
-			this.metroLabelBruttoWeight.Name = "metroLabelBruttoWeight";
-			this.metroLabelBruttoWeight.Size = new System.Drawing.Size(120, 27);
-			this.metroLabelBruttoWeight.TabIndex = 320;
-			this.metroLabelBruttoWeight.Text = "Brutto weight:";
-			this.metroLabelBruttoWeight.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// textBoxNettoWeight
-			// 
-			// 
-			// 
-			// 
-			this.textBoxNettoWeight.CustomButton.Image = null;
-			this.textBoxNettoWeight.CustomButton.Location = new System.Drawing.Point(181, 2);
-			this.textBoxNettoWeight.CustomButton.Name = "";
-			this.textBoxNettoWeight.CustomButton.Size = new System.Drawing.Size(17, 17);
-			this.textBoxNettoWeight.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.textBoxNettoWeight.CustomButton.TabIndex = 1;
-			this.textBoxNettoWeight.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.textBoxNettoWeight.CustomButton.UseSelectable = true;
-			this.textBoxNettoWeight.CustomButton.Visible = false;
-			this.textBoxNettoWeight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxNettoWeight.Lines = new string[0];
-			this.textBoxNettoWeight.Location = new System.Drawing.Point(161, 607);
-			this.textBoxNettoWeight.MaxLength = 32767;
-			this.textBoxNettoWeight.Name = "textBoxNettoWeight";
-			this.textBoxNettoWeight.PasswordChar = '\0';
-			this.textBoxNettoWeight.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.textBoxNettoWeight.SelectedText = "";
-			this.textBoxNettoWeight.SelectionLength = 0;
-			this.textBoxNettoWeight.SelectionStart = 0;
-			this.textBoxNettoWeight.ShortcutsEnabled = true;
-			this.textBoxNettoWeight.Size = new System.Drawing.Size(201, 22);
-			this.textBoxNettoWeight.TabIndex = 321;
-			this.textBoxNettoWeight.UseSelectable = true;
-			this.textBoxNettoWeight.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.textBoxNettoWeight.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			// 
-			// metroLabelNettoWeight
-			// 
-			this.metroLabelNettoWeight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabelNettoWeight.Location = new System.Drawing.Point(23, 603);
-			this.metroLabelNettoWeight.Name = "metroLabelNettoWeight";
-			this.metroLabelNettoWeight.Size = new System.Drawing.Size(120, 27);
-			this.metroLabelNettoWeight.TabIndex = 322;
-			this.metroLabelNettoWeight.Text = "Netto weight:";
-			this.metroLabelNettoWeight.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// button2
-			// 
-			this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.button2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button2.Location = new System.Drawing.Point(635, 599);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(75, 33);
-			this.button2.TabIndex = 254;
-			this.button2.Text = "Apply";
-			this.button2.Click += new System.EventHandler(this.button2_Click);
 			// 
 			// PurchaseOrderForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1288, 640);
-			this.Controls.Add(this.button2);
-			this.Controls.Add(this.textBoxNettoWeight);
-			this.Controls.Add(this.metroLabelNettoWeight);
-			this.Controls.Add(this.textBoxBruttoWeight);
-			this.Controls.Add(this.metroLabelBruttoWeight);
-			this.Controls.Add(this.textBoxCargoVolume);
-			this.Controls.Add(this.metroLabelCargoVolume);
-			this.Controls.Add(this.textBoxShipTo);
-			this.Controls.Add(this.metroLabelShipTo);
-			this.Controls.Add(this.comboBoxShipComp);
-			this.Controls.Add(this.metroLabelShippingCompany);
-			this.Controls.Add(this.comboBoxIncoTerm);
-			this.Controls.Add(this.metroLabelIncoTerm);
-			this.Controls.Add(this.comboBoxPayTerm);
-			this.Controls.Add(this.metroLabelPayTerm);
-			this.Controls.Add(this.comboBoxDesignation);
-			this.Controls.Add(this.metroLabelDesignation);
+			this.ClientSize = new System.Drawing.Size(1288, 649);
 			this.Controls.Add(this.documentControl10);
 			this.Controls.Add(this.documentControl9);
 			this.Controls.Add(this.documentControl8);
@@ -1185,6 +1170,5 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private MetroLabel metroLabelBruttoWeight;
 		private MetroTextBox textBoxNettoWeight;
 		private MetroLabel metroLabelNettoWeight;
-		private Button button2;
 	}
 }
