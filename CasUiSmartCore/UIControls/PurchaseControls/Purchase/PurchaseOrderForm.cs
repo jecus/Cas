@@ -81,6 +81,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 			foreach (var record in records)
 			{
+				record.ShipCompany = _supplierShipper.FirstOrDefault(i => i.ItemId == purchaseRecordListView1.SelectedItem.ShipCompanyId) ?? Supplier.Unknown;
 				record.ParentInitialRecord = initialRecords.FirstOrDefault(i => i.ProductId == record.PackageItemId);
 				record.Product = products.FirstOrDefault(i => i.ItemId == record.PackageItemId);
 				record.Supplier = suppliers.FirstOrDefault(i => i.ItemId == record.SupplierId);
@@ -110,15 +111,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			textBoxClosingBy.Text = _order.CloseByUser;
 			textBoxPublishedBy.Text = _order.PublishedByUser;
 			textBoxAuthor.Text = GlobalObjects.CasEnvironment.IdentityUser.ToString();
-			comboBoxShipComp.SelectedItem = _supplierShipper.FirstOrDefault(i => i.ItemId == _order.ShipCompanyId) ?? Supplier.Unknown;
 			textBoxRemarks.Text = _order.Remarks;
-			comboBoxIncoTerm.SelectedItem = _order.IncoTerm;
-			comboBoxDesignation.SelectedItem = _order.Designation;
-			comboBoxPayTerm.SelectedItem = _order.PayTerm;
-			textBoxBruttoWeight.Text = _order.BruttoWeight;
-			textBoxCargoVolume.Text =  _order.CargoVolume;
-			textBoxNettoWeight.Text =  _order.NettoWeight;
-			textBoxShipTo.Text = _order.ShipTo;
 		}
 
 		#endregion
@@ -305,6 +298,15 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			comboBoxCondition.SelectedItem = purchaseRecordListView1.SelectedItem.CostCondition;
 			comboBoxMeasure.SelectedItem = purchaseRecordListView1.SelectedItem.Measure;
 			numericUpDownQuantity.Value = (decimal)purchaseRecordListView1.SelectedItem.Quantity;
+
+			comboBoxIncoTerm.SelectedItem = purchaseRecordListView1.SelectedItem.IncoTerm;
+			comboBoxDesignation.SelectedItem = purchaseRecordListView1.SelectedItem.Designation;
+			comboBoxPayTerm.SelectedItem = purchaseRecordListView1.SelectedItem.PayTerm;
+			textBoxBruttoWeight.Text = purchaseRecordListView1.SelectedItem.BruttoWeight;
+			textBoxCargoVolume.Text = purchaseRecordListView1.SelectedItem.CargoVolume;
+			textBoxNettoWeight.Text = purchaseRecordListView1.SelectedItem.NettoWeight;
+			textBoxShipTo.Text = purchaseRecordListView1.SelectedItem.ShipTo;
+			comboBoxShipComp.SelectedItem = _supplierShipper.FirstOrDefault(i => i.ItemId == purchaseRecordListView1.SelectedItem.ShipCompanyId) ?? Supplier.Unknown;
 		}
 		#endregion
 
@@ -379,14 +381,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			_order.Number = metroTextBoxNumber.Text;
 			_order.Status = (WorkPackageStatus)comboBoxStatus.SelectedItem;
 			_order.Remarks = textBoxRemarks.Text;
-			_order.IncoTerm = (IncoTerm) comboBoxIncoTerm.SelectedItem;
-			_order.Designation = (Designation) comboBoxDesignation.SelectedItem;
-			_order.PayTerm = (PayTerm) comboBoxPayTerm.SelectedItem;
-			_order.BruttoWeight =  textBoxBruttoWeight.Text;
-			_order.CargoVolume =  textBoxCargoVolume.Text;
-			_order.NettoWeight =  textBoxNettoWeight.Text;
-			_order.ShipCompanyId = ((Supplier) comboBoxShipComp.SelectedItem).ItemId;
-			_order.ShipTo = textBoxShipTo.Text;
 
 			if (_order.ItemId <= 0)
 				_order.Author = GlobalObjects.CasEnvironment.IdentityUser.ToString();
@@ -411,5 +405,20 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			}
 		}
 		#endregion
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+			if (purchaseRecordListView1.SelectedItem == null) return;
+
+			purchaseRecordListView1.SelectedItem.IncoTerm = (IncoTerm)comboBoxIncoTerm.SelectedItem;
+			purchaseRecordListView1.SelectedItem.Designation = (Designation)comboBoxDesignation.SelectedItem;
+			purchaseRecordListView1.SelectedItem.PayTerm = (PayTerm)comboBoxPayTerm.SelectedItem;
+			purchaseRecordListView1.SelectedItem.BruttoWeight = textBoxBruttoWeight.Text;
+			purchaseRecordListView1.SelectedItem.CargoVolume = textBoxCargoVolume.Text;
+			purchaseRecordListView1.SelectedItem.NettoWeight = textBoxNettoWeight.Text;
+			purchaseRecordListView1.SelectedItem.ShipCompanyId = ((Supplier)comboBoxShipComp.SelectedItem).ItemId;
+			purchaseRecordListView1.SelectedItem.ShipCompany = (Supplier)comboBoxShipComp.SelectedItem;
+			purchaseRecordListView1.SelectedItem.ShipTo = textBoxShipTo.Text;
+		}
 	}
 }

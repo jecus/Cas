@@ -34,7 +34,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		/// </summary>
 		private void InitializeComponent()
 		{
-			var userType = GlobalObjects.CasEnvironment.IdentityUser.UserType;
 			this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.comboBoxCurrency = new System.Windows.Forms.ComboBox();
@@ -73,7 +72,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.labelQOTitle = new MetroFramework.Controls.MetroLabel();
 			this.buttonOk = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
-			this.purchaseRecordListView1 = new CAS.UI.UIControls.PurchaseControls.Purchase.PurchaseRecordListView(true);
 			this.documentControl1 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.documentControl2 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.documentControl3 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
@@ -100,6 +98,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.metroLabelBruttoWeight = new MetroFramework.Controls.MetroLabel();
 			this.textBoxNettoWeight = new MetroFramework.Controls.MetroTextBox();
 			this.metroLabelNettoWeight = new MetroFramework.Controls.MetroLabel();
+			this.button2 = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
@@ -166,7 +165,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.comboBoxCurrency.Name = "comboBoxCurrency";
 			this.comboBoxCurrency.Size = new System.Drawing.Size(165, 25);
 			this.comboBoxCurrency.TabIndex = 252;
-			this.comboBoxCurrency.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// metroLabel2
 			// 
@@ -185,10 +183,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.numericUpDown1.Enabled = false;
 			this.numericUpDown1.Location = new System.Drawing.Point(118, 136);
 			this.numericUpDown1.Maximum = new decimal(new int[] {
-			1000000,
-			0,
-			0,
-			0});
+            1000000,
+            0,
+            0,
+            0});
 			this.numericUpDown1.Name = "numericUpDown1";
 			this.numericUpDown1.Size = new System.Drawing.Size(165, 20);
 			this.numericUpDown1.TabIndex = 250;
@@ -222,10 +220,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.numericUpDownQuantity.DecimalPlaces = 2;
 			this.numericUpDownQuantity.Location = new System.Drawing.Point(118, 110);
 			this.numericUpDownQuantity.Maximum = new decimal(new int[] {
-			1000000,
-			0,
-			0,
-			0});
+            1000000,
+            0,
+            0,
+            0});
 			this.numericUpDownQuantity.Name = "numericUpDownQuantity";
 			this.numericUpDownQuantity.Size = new System.Drawing.Size(165, 20);
 			this.numericUpDownQuantity.TabIndex = 142;
@@ -253,7 +251,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.comboBoxMeasure.Size = new System.Drawing.Size(165, 25);
 			this.comboBoxMeasure.TabIndex = 141;
 			this.comboBoxMeasure.SelectedIndexChanged += new System.EventHandler(this.ComboBoxMeasure_SelectedIndexChanged);
-			this.comboBoxMeasure.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelMeasure
 			// 
@@ -330,7 +327,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.comboBoxCondition.Size = new System.Drawing.Size(165, 25);
 			this.comboBoxCondition.TabIndex = 169;
 			this.comboBoxCondition.SelectedIndexChanged += new System.EventHandler(this.ComboBoxCondition_SelectedIndexChanged);
-			this.comboBoxCondition.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// groupBox2
 			// 
@@ -476,7 +472,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.comboBoxStatus.Name = "comboBoxStatus";
 			this.comboBoxStatus.Size = new System.Drawing.Size(165, 25);
 			this.comboBoxStatus.TabIndex = 265;
-			this.comboBoxStatus.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// textBoxRemarks
 			// 
@@ -1058,11 +1053,25 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.metroLabelNettoWeight.Text = "Netto weight:";
 			this.metroLabelNettoWeight.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// button2
+			// 
+			this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.button2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.button2.Location = new System.Drawing.Point(635, 599);
+			this.button2.Name = "button2";
+			this.button2.Size = new System.Drawing.Size(75, 33);
+			this.button2.TabIndex = 254;
+			this.button2.Text = "Apply";
+			this.button2.Click += new System.EventHandler(this.button2_Click);
+			// 
 			// PurchaseOrderForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1288, 640);
+			this.Controls.Add(this.button2);
 			this.Controls.Add(this.textBoxNettoWeight);
 			this.Controls.Add(this.metroLabelNettoWeight);
 			this.Controls.Add(this.textBoxBruttoWeight);
@@ -1175,5 +1184,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private MetroLabel metroLabelBruttoWeight;
 		private MetroTextBox textBoxNettoWeight;
 		private MetroLabel metroLabelNettoWeight;
+		private Button button2;
 	}
 }

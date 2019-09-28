@@ -42,30 +42,6 @@ namespace SmartCore.Purchase
 		[TableColumn("Number")]
 		public string Number { get; set; }
 
-		[TableColumn("DesignationId")]
-		public Designation Designation { get; set; }
-
-		[TableColumn("PayTermId")]
-		public PayTerm PayTerm { get; set; }
-
-		[TableColumn("IncoTermId")]
-		public IncoTerm IncoTerm { get; set; }
-
-		[TableColumn("ShipCompanyId")]
-		public int ShipCompanyId { get; set; }
-
-		[TableColumn("ShipTo")]
-		public string ShipTo { get; set; }
-
-		[TableColumn("CargoVolume")]
-		public string CargoVolume { get; set; }
-
-		[TableColumn("BruttoWeight")]
-		public string BruttoWeight { get; set; }
-
-		[TableColumn("NettoWeight")]
-		public string NettoWeight { get; set; }
-
 		/// <summary>
 		/// 
 		/// </summary>
