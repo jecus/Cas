@@ -675,6 +675,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 		{
 			var form = new PurchaseSettingForm();
 			form.ShowDialog();
+			e.Cancel = true;
 		}
 	}
 }
