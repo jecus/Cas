@@ -44,6 +44,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.ExportMonthly = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel(true);
 			this.Users = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.Activity = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+			this.Purchase = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.ExportATLB = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel(true);
 			this.LinkRecords = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkInternalDocuments = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -124,6 +125,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this._workShops = new CAS.UI.UIControls.StoresControls.WorkShopCollectionControl();
 			this._exportContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
 			this._adminContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
+			this._settingContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
 			this.headerControl.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.flowLayoutPanelReferences.SuspendLayout();
@@ -198,6 +200,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 #else
 			this.flowLayoutPanelExport.Controls.Add(this._exportContainer);
 			this.flowLayoutPanelExport.Controls.Add(this._adminContainer);
+			this.flowLayoutPanelExport.Controls.Add(this._settingContainer);
 #endif
 			this.flowLayoutPanelExport.Dock = System.Windows.Forms.DockStyle.Left;
 			this.flowLayoutPanelExport.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
@@ -293,6 +296,38 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this._adminContainer.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
 			this._adminContainer.Visible = GlobalObjects.CasEnvironment.IdentityUser.UserType == UsetType.Admin;
 			// 
+			// _settingContainer
+			// 
+			this._settingContainer.AutoSize = true;
+			this._settingContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this._settingContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this._settingContainer.Caption = "Setting";
+			this._settingContainer.DescriptionTextColor = System.Drawing.Color.DimGray;
+			this._settingContainer.Extended = false;
+			this._settingContainer.Location = new System.Drawing.Point(3, 232);
+			this._settingContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this._settingContainer.Name = "_settingContainer";
+			this._settingContainer.ReferenceLink = this.Purchase;
+			this._settingContainer.ReferenceLink02 = null;
+			this._settingContainer.ReferenceLink03 = null;
+			this._settingContainer.ReferenceLink04 = null;
+			this._settingContainer.ReferenceLink05 = null;
+			this._settingContainer.ReferenceLink06 = null;
+			this._settingContainer.ReferenceLink07 = null;
+			this._settingContainer.ReferenceLink08 = null;
+			this._settingContainer.ReferenceLink09 = null;
+			this._settingContainer.ReferenceLink10 = null;
+			this._settingContainer.ReferenceLink11 = null;
+			this._settingContainer.ReferenceLink12 = null;
+			this._settingContainer.ReferenceLink13 = null;
+			this._settingContainer.ReferenceLink14 = null;
+			this._settingContainer.ReferenceLink15 = null;
+			this._settingContainer.ReferenceLink16 = null;
+			this._settingContainer.Size = new System.Drawing.Size(105, 42);
+			this._settingContainer.TabIndex = 1;
+			this._settingContainer.UpperLeftIcon = global::CAS.UI.Properties.Resources.GrayArrow;
+			this._settingContainer.Visible = GlobalObjects.CasEnvironment.IdentityUser.UserType == UsetType.Admin;
+			// 
 			// ExportMonthly
 			// 
 			this.ExportMonthly.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
@@ -340,6 +375,30 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.Activity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.Activity.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.Activity.DisplayerRequested += Activity_DisplayerRequested;
+			// 
+			// Activity
+			// 
+			this.Purchase.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.Purchase.Displayer = null;
+			this.Purchase.DisplayerText = null;
+			this.Purchase.Entity = null;
+			this.Purchase.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.Purchase.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.Purchase.ImageBackColor = System.Drawing.Color.Transparent;
+			this.Purchase.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.Purchase.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.Purchase.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.Purchase.Location = new System.Drawing.Point(10, 0);
+			this.Purchase.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.Purchase.Name = "Purchase";
+			this.Purchase.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.Purchase.Size = new System.Drawing.Size(188, 20);
+			this.Purchase.Status = AvControls.Statuses.Satisfactory;
+			this.Purchase.TabIndex = 2;
+			this.Purchase.Text = "Purchase";
+			this.Purchase.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.Purchase.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.Purchase.DisplayerRequested += Purchase_DisplayerRequested;
 			// 
 			// Users
 			// 
@@ -2446,6 +2505,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 		private ReferenceControls.ReferenceLinkLabelCollectionContainer _qualityAssuranceReferenceContainer;
 		private ReferenceControls.ReferenceLinkLabelCollectionContainer _exportContainer;
 		private ReferenceControls.ReferenceLinkLabelCollectionContainer _adminContainer;
+		private ReferenceControls.ReferenceLinkLabelCollectionContainer _settingContainer;
 		private ReferenceControls.ReferenceLinkLabelCollectionContainer _smsReferenceContainer;
 		private ReferenceControls.ReferenceLinkLabelCollectionContainer _mccReferenceContainer;
 		private ReferenceControls.ReferenceLinkLabelCollectionContainer _programPlanningAndControlReferenceContainer;
@@ -2461,6 +2521,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel Users;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel ExportATLB;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel Activity;
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel Purchase;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRecords;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkInternalDocuments;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkNomenclatures;
