@@ -670,6 +670,12 @@ namespace CAS.UI.UIControls.OpepatorsControls
 				new Filter("DocTypeId", DocumentType.Invoice.ItemId)
 			});
 		}
+
+		private void Purchase_DisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			var form = new PurchaseSettingForm();
+			form.ShowDialog();
+		}
 	}
 }
 
