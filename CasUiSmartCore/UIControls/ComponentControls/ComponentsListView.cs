@@ -269,7 +269,7 @@ namespace CAS.UI.UIControls.ComponentControls
 				workType = dd.DirectiveType.ToString();
 				ndtString = dd.NDTType.ShortName;
 				expiryDate = dd.ExpiryDate.HasValue ? SmartCore.Auxiliary.Convert.GetDateFormat(dd.ExpiryDate.Value) : "";
-				expiryRemain = dd.Threshold.ExpiryRemainNotify;
+				expiryRemain = dd.ExpiryRemainNotify;
 				if (dd.MaintenanceDirective != null)
 				{
 					mpdString = dd.MaintenanceDirective.TaskNumberCheck;
