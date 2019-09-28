@@ -160,7 +160,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			threshold.RepeatNotification = lifelengthViewerRptNotify.Lifelength;
 			threshold.Warranty = lifelengthViewerWarranty.Lifelength;
 			threshold.WarrantyNotification = lifelengthViewerWarrantyNotify.Lifelength;
-			threshold.ExpiryRemainNotify = lifelengthViewerExpiryRemain.Lifelength;
+			_currentComponentDirective.ExpiryRemainNotify = lifelengthViewerExpiryRemain.Lifelength;
 			threshold.FirstPerformanceConditionType = radio_WhicheverFirst.Checked
 													  ? ThresholdConditionType.WhicheverFirst
 													  : ThresholdConditionType.WhicheverLater;
@@ -397,7 +397,7 @@ namespace CAS.UI.UIControls.ComponentControls
 				lifelengthViewerRptNotify.Lifelength = _currentComponentDirective.Threshold.RepeatNotification;
 				lifelengthViewerWarranty.Lifelength = _currentComponentDirective.Threshold.Warranty;
 				lifelengthViewerWarrantyNotify.Lifelength = _currentComponentDirective.Threshold.WarrantyNotification;
-				lifelengthViewerExpiryRemain.Lifelength = _currentComponentDirective.Threshold.ExpiryRemainNotify;
+				lifelengthViewerExpiryRemain.Lifelength = _currentComponentDirective.ExpiryRemainNotify;
 
 				if (_currentComponentDirective.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst)
 					radio_WhicheverFirst.Checked = true;
@@ -515,7 +515,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			threshold.RepeatNotification = lifelengthViewerRptNotify.Lifelength;
 			threshold.Warranty = lifelengthViewerWarranty.Lifelength;
 			threshold.WarrantyNotification = lifelengthViewerWarrantyNotify.Lifelength;
-			threshold.ExpiryRemainNotify = lifelengthViewerExpiryRemain.Lifelength;
+			_currentComponentDirective.ExpiryRemainNotify = lifelengthViewerExpiryRemain.Lifelength;
 			threshold.FirstPerformanceConditionType = radio_WhicheverFirst.Checked
 				? ThresholdConditionType.WhicheverFirst
 				: ThresholdConditionType.WhicheverLater;

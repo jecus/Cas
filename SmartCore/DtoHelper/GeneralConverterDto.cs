@@ -1486,6 +1486,7 @@ namespace SmartCore.DtoHelper
 				CorrectorId = comdir.CorrectorId,
 				DirectiveType = comdir.DirectiveTypeId,
 				Threshold = comdir.Threshold?.ToBinary(),
+				ExpiryRemainNotify = comdir.ExpiryRemainNotify?.ConvertToByteArray(),
 				ManHours = comdir.ManHours,
 				Remarks = comdir.Remarks,
 				Cost = comdir.Cost,
@@ -1520,6 +1521,7 @@ namespace SmartCore.DtoHelper
 				
 				//TODO:Разобраться почему private set
 				Threshold = new ComponentDirectiveThreshold(comdirdto.Threshold),
+				ExpiryRemainNotify = Lifelength.ConvertFromByteArray(comdirdto.ExpiryRemainNotify) ?? Lifelength.Null,
 				ManHours = comdirdto.ManHours ?? default(double),
 				Remarks = comdirdto.Remarks,
 				Cost = comdirdto.Cost ?? default(double),

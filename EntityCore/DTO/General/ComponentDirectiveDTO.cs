@@ -21,7 +21,10 @@ namespace EntityCore.DTO.General
 		[Column("Threshold"), MaxLength(200)]
 		public byte[] Threshold { get; set; }
 
-		
+		[Column("ExpiryRemainNotify")
+		public byte[]  ExpiryRemainNotify { get; set; }
+
+
 		[Column("ManHours")]
 		public double? ManHours { get; set; }
 

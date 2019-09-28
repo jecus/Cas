@@ -194,6 +194,9 @@ namespace SmartCore.Entities.General.Accessory
 		}
 		#endregion
 
+		[TableColumnAttribute("ExpiryRemainNotify")]
+		public Lifelength ExpiryRemainNotify { get; set; }
+
 		#region public Component ParentComponent { get; internal set; }
 		/// <summary>
 		/// јгрегат, дл€ которого задана данна€ работа - Ќужно смотреть оба свойства ParentComponent и ParentBaseComponent - одно из них будет null

@@ -80,3 +80,13 @@ if not exists ( select  *
 	alter table dbo.ComponentDirectives
 	add ExpiryDate datetime2
 GO
+
+if not exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('dbo.ComponentDirectives')
+					and c.name = 'ExpiryRemainNotify' ) 
+
+	alter table dbo.ComponentDirectives
+	add ExpiryRemainNotify varbinary(21)
+GO
+
