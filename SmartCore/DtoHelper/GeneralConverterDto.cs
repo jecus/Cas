@@ -25,6 +25,7 @@ using SmartCore.Relation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using SmartCore.Entities.General.Setting;
 
 namespace SmartCore.DtoHelper
 {
@@ -5673,6 +5674,31 @@ namespace SmartCore.DtoHelper
 				CurrencyId = quot.Currency.ItemId,
 				CostOverhaul = quot.CostOverhaul,
 				CostServisible = quot.CostServisible
+			};
+		}
+
+
+		public static Settings Convert(this SettingDTO quotDto)
+		{
+			return new Settings
+			{
+				ItemId = quotDto.ItemId,
+				IsDeleted = quotDto.IsDeleted,
+				Updated = quotDto.Updated,
+				CorrectorId = quotDto.CorrectorId,
+				SettingsJSON = quotDto.SettingsJSON,
+			};
+		}
+
+		public static SettingDTO Convert(this Settings quot)
+		{
+			return new SettingDTO()
+			{
+				ItemId = quot.ItemId,
+				IsDeleted = quot.IsDeleted,
+				Updated = quot.Updated,
+				CorrectorId = quot.CorrectorId,
+				SettingsJSON = quot.SettingsJSON,
 			};
 		}
 	}

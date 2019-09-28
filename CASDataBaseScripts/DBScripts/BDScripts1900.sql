@@ -90,3 +90,14 @@ if not exists ( select  *
 	add ExpiryRemainNotify varbinary(21)
 GO
 
+------------------------------------------------------------------------------------
+if object_id('dbo.Setting') is null
+
+    create table dbo.Setting (
+          ItemId int IDENTITY PRIMARY KEY not null 
+		, IsDeleted  bit not null DEFAULT 0
+        , Corrector INT not null default 1
+		, Updated datetime2(7) not null default sysutcdatetime()
+        , SettingsJSON varchar(MAX)
+	)
+go
