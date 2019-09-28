@@ -26,7 +26,7 @@ namespace SmartCore.Entities.General.Setting
 
 		public PurchaseSetting PurchaseSettings
 		{
-			get => _purchaseSettings ?? (_purchaseSettings = new PurchaseSetting());;
+			get => _purchaseSettings ?? (_purchaseSettings = new PurchaseSetting());
 			set => _purchaseSettings = value;
 		}
 	}
