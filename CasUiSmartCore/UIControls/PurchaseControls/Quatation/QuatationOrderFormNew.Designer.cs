@@ -48,8 +48,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.labelMeasure = new MetroFramework.Controls.MetroLabel();
 			this.labelTotal = new MetroFramework.Controls.MetroLabel();
 			this.textBoxTotal = new MetroFramework.Controls.MetroTextBox();
-			this.lifelengthViewerNotify = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
-			this.lifelengthViewerLifeLimit = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.labelDefferedCategory = new MetroFramework.Controls.MetroLabel();
 			this.labelReason = new MetroFramework.Controls.MetroLabel();
 			this.comboBoxReason = new System.Windows.Forms.ComboBox();
@@ -59,8 +57,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.checkBoxOverhaul = new MetroFramework.Controls.MetroCheckBox();
 			this.checkBoxServiceable = new MetroFramework.Controls.MetroCheckBox();
 			this.checkBoxNew = new MetroFramework.Controls.MetroCheckBox();
-			this.labelPriority = new MetroFramework.Controls.MetroLabel();
-			this.labelNotify = new MetroFramework.Controls.MetroLabel();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.metroTextBoxNumber = new MetroFramework.Controls.MetroTextBox();
 			this.metroLabelNumber = new MetroFramework.Controls.MetroLabel();
@@ -133,8 +129,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.groupBox1.Controls.Add(this.labelMeasure);
 			this.groupBox1.Controls.Add(this.labelTotal);
 			this.groupBox1.Controls.Add(this.textBoxTotal);
-			this.groupBox1.Controls.Add(this.lifelengthViewerNotify);
-			this.groupBox1.Controls.Add(this.lifelengthViewerLifeLimit);
 			this.groupBox1.Controls.Add(this.labelDefferedCategory);
 			this.groupBox1.Controls.Add(this.labelReason);
 			this.groupBox1.Controls.Add(this.comboBoxReason);
@@ -144,8 +138,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.groupBox1.Controls.Add(this.checkBoxOverhaul);
 			this.groupBox1.Controls.Add(this.checkBoxServiceable);
 			this.groupBox1.Controls.Add(this.checkBoxNew);
-			this.groupBox1.Controls.Add(this.labelPriority);
-			this.groupBox1.Controls.Add(this.labelNotify);
 			this.groupBox1.Location = new System.Drawing.Point(717, 24);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(357, 364);
@@ -183,7 +175,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.metroTextBox1.CustomButton.Visible = false;
 			this.metroTextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.metroTextBox1.Lines = new string[0];
-			this.metroTextBox1.Location = new System.Drawing.Point(118, 292);
+			this.metroTextBox1.Location = new System.Drawing.Point(118, 219);
 			this.metroTextBox1.MaxLength = 32767;
 			this.metroTextBox1.Name = "metroTextBox1";
 			this.metroTextBox1.PasswordChar = '\0';
@@ -201,7 +193,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// metroLabel2
 			// 
 			this.metroLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabel2.Location = new System.Drawing.Point(21, 291);
+			this.metroLabel2.Location = new System.Drawing.Point(21, 218);
 			this.metroLabel2.Name = "metroLabel2";
 			this.metroLabel2.Size = new System.Drawing.Size(69, 23);
 			this.metroLabel2.TabIndex = 266;
@@ -218,7 +210,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxDIR.Name = "comboBoxDIR";
 			this.comboBoxDIR.Size = new System.Drawing.Size(234, 25);
 			this.comboBoxDIR.TabIndex = 252;
-			this.comboBoxDIR.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxPriority
 			// 
@@ -229,7 +220,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxPriority.Name = "comboBoxPriority";
 			this.comboBoxPriority.Size = new System.Drawing.Size(234, 25);
 			this.comboBoxPriority.TabIndex = 250;
-			this.comboBoxPriority.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label19
 			// 
@@ -260,10 +250,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.numericUpDownQuantity.DecimalPlaces = 2;
 			this.numericUpDownQuantity.Location = new System.Drawing.Point(118, 192);
 			this.numericUpDownQuantity.Maximum = new decimal(new int[] {
-			1000000,
-			0,
-			0,
-			0});
+            1000000,
+            0,
+            0,
+            0});
 			this.numericUpDownQuantity.Name = "numericUpDownQuantity";
 			this.numericUpDownQuantity.Size = new System.Drawing.Size(65, 20);
 			this.numericUpDownQuantity.TabIndex = 142;
@@ -290,7 +280,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxMeasure.Size = new System.Drawing.Size(234, 25);
 			this.comboBoxMeasure.TabIndex = 141;
 			this.comboBoxMeasure.SelectedIndexChanged += new System.EventHandler(this.comboBoxMeasure_SelectedIndexChanged);
-			this.comboBoxMeasure.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelMeasure
 			// 
@@ -347,68 +336,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.textBoxTotal.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.textBoxTotal.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
-			// lifelengthViewerNotify
-			// 
-			this.lifelengthViewerNotify.AutoSize = true;
-			this.lifelengthViewerNotify.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.lifelengthViewerNotify.CalendarApplicable = false;
-			this.lifelengthViewerNotify.CyclesApplicable = false;
-			this.lifelengthViewerNotify.EnabledCalendar = true;
-			this.lifelengthViewerNotify.EnabledCycle = false;
-			this.lifelengthViewerNotify.EnabledHours = false;
-			this.lifelengthViewerNotify.FieldsBackColor = System.Drawing.SystemColors.Window;
-			this.lifelengthViewerNotify.ForeColor = System.Drawing.Color.DimGray;
-			this.lifelengthViewerNotify.HeaderCalendar = "Calendar";
-			this.lifelengthViewerNotify.HeaderCycles = "Cycles";
-			this.lifelengthViewerNotify.HeaderFormattedCalendar = "Calendar";
-			this.lifelengthViewerNotify.HeaderHours = "Hours";
-			this.lifelengthViewerNotify.HoursApplicable = false;
-			this.lifelengthViewerNotify.LeftHeader = "";
-			this.lifelengthViewerNotify.Location = new System.Drawing.Point(112, 252);
-			this.lifelengthViewerNotify.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.lifelengthViewerNotify.Modified = false;
-			this.lifelengthViewerNotify.Name = "lifelengthViewerNotify";
-			this.lifelengthViewerNotify.ReadOnly = false;
-			this.lifelengthViewerNotify.ShowCalendar = true;
-			this.lifelengthViewerNotify.ShowCalendarOnly = true;
-			this.lifelengthViewerNotify.ShowFormattedCalendar = false;
-			this.lifelengthViewerNotify.ShowHeaders = false;
-			this.lifelengthViewerNotify.ShowMinutes = false;
-			this.lifelengthViewerNotify.Size = new System.Drawing.Size(176, 35);
-			this.lifelengthViewerNotify.SystemCalculated = true;
-			this.lifelengthViewerNotify.TabIndex = 147;
-			// 
-			// lifelengthViewerLifeLimit
-			// 
-			this.lifelengthViewerLifeLimit.AutoSize = true;
-			this.lifelengthViewerLifeLimit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.lifelengthViewerLifeLimit.CalendarApplicable = false;
-			this.lifelengthViewerLifeLimit.CyclesApplicable = false;
-			this.lifelengthViewerLifeLimit.EnabledCalendar = true;
-			this.lifelengthViewerLifeLimit.EnabledCycle = false;
-			this.lifelengthViewerLifeLimit.EnabledHours = false;
-			this.lifelengthViewerLifeLimit.FieldsBackColor = System.Drawing.SystemColors.Window;
-			this.lifelengthViewerLifeLimit.ForeColor = System.Drawing.Color.DimGray;
-			this.lifelengthViewerLifeLimit.HeaderCalendar = "Calendar";
-			this.lifelengthViewerLifeLimit.HeaderCycles = "Cycles";
-			this.lifelengthViewerLifeLimit.HeaderFormattedCalendar = "Calendar";
-			this.lifelengthViewerLifeLimit.HeaderHours = "Hours";
-			this.lifelengthViewerLifeLimit.HoursApplicable = false;
-			this.lifelengthViewerLifeLimit.LeftHeader = "";
-			this.lifelengthViewerLifeLimit.Location = new System.Drawing.Point(112, 213);
-			this.lifelengthViewerLifeLimit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.lifelengthViewerLifeLimit.Modified = false;
-			this.lifelengthViewerLifeLimit.Name = "lifelengthViewerLifeLimit";
-			this.lifelengthViewerLifeLimit.ReadOnly = false;
-			this.lifelengthViewerLifeLimit.ShowCalendar = true;
-			this.lifelengthViewerLifeLimit.ShowCalendarOnly = true;
-			this.lifelengthViewerLifeLimit.ShowFormattedCalendar = false;
-			this.lifelengthViewerLifeLimit.ShowHeaders = false;
-			this.lifelengthViewerLifeLimit.ShowMinutes = false;
-			this.lifelengthViewerLifeLimit.Size = new System.Drawing.Size(176, 35);
-			this.lifelengthViewerLifeLimit.SystemCalculated = true;
-			this.lifelengthViewerLifeLimit.TabIndex = 146;
-			// 
 			// labelDefferedCategory
 			// 
 			this.labelDefferedCategory.AutoSize = true;
@@ -438,7 +365,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxReason.Name = "comboBoxReason";
 			this.comboBoxReason.Size = new System.Drawing.Size(234, 25);
 			this.comboBoxReason.TabIndex = 169;
-			this.comboBoxReason.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelDestination
 			// 
@@ -459,7 +385,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxDestination.Name = "comboBoxDestination";
 			this.comboBoxDestination.Size = new System.Drawing.Size(234, 25);
 			this.comboBoxDestination.TabIndex = 171;
-			this.comboBoxDestination.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// checkBoxRepair
 			// 
@@ -512,26 +437,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.checkBoxNew.TabIndex = 150;
 			this.checkBoxNew.Text = "New";
 			this.checkBoxNew.UseSelectable = true;
-			// 
-			// labelPriority
-			// 
-			this.labelPriority.AutoSize = true;
-			this.labelPriority.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelPriority.Location = new System.Drawing.Point(20, 222);
-			this.labelPriority.Name = "labelPriority";
-			this.labelPriority.Size = new System.Drawing.Size(54, 19);
-			this.labelPriority.TabIndex = 173;
-			this.labelPriority.Text = "Priority:";
-			// 
-			// labelNotify
-			// 
-			this.labelNotify.AutoSize = true;
-			this.labelNotify.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelNotify.Location = new System.Drawing.Point(20, 259);
-			this.labelNotify.Name = "labelNotify";
-			this.labelNotify.Size = new System.Drawing.Size(47, 19);
-			this.labelNotify.TabIndex = 174;
-			this.labelNotify.Text = "Notify:";
 			// 
 			// groupBox2
 			// 
@@ -678,7 +583,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxStatus.Size = new System.Drawing.Size(233, 25);
 			this.comboBoxStatus.TabIndex = 265;
 			this.comboBoxStatus.SelectedIndexChanged += new System.EventHandler(this.comboBoxStatus_SelectedIndexChanged);
-			this.comboBoxStatus.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// textBoxRemarks
 			// 
@@ -972,8 +876,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private MetroLabel labelMeasure;
 		private MetroLabel labelTotal;
 		private MetroTextBox textBoxTotal;
-		private Auxiliary.LifelengthViewer lifelengthViewerNotify;
-		private Auxiliary.LifelengthViewer lifelengthViewerLifeLimit;
 		private MetroLabel labelDefferedCategory;
 		private MetroLabel labelReason;
 		private System.Windows.Forms.ComboBox comboBoxReason;
@@ -983,8 +885,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private MetroCheckBox checkBoxOverhaul;
 		private MetroCheckBox checkBoxServiceable;
 		private MetroCheckBox checkBoxNew;
-		private MetroLabel labelPriority;
-		private MetroLabel labelNotify;
 		private System.Windows.Forms.GroupBox groupBox2;
 		private MetroTextBox textBoxTitle;
 		private MetroLabel labelQOTitle;

@@ -398,9 +398,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			comboBoxPriority.SelectedItem = record.Priority;
 			metroTextBox1.Text = record.Remarks;
 
-			lifelengthViewerLifeLimit.Lifelength = new Lifelength(record.LifeLimit);
-			lifelengthViewerNotify.Lifelength = new Lifelength(record.LifeLimitNotify);
-
 		}
 
 		#endregion
@@ -444,8 +441,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				record.DestinationObjectId = -1;
 			}
 			record.InitialReason = comboBoxReason.SelectedItem as InitialReason ?? InitialReason.Unknown;
-			record.LifeLimit = lifelengthViewerLifeLimit.Lifelength;
-			record.LifeLimitNotify = lifelengthViewerNotify.Lifelength;
 
 			listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
 
@@ -469,8 +464,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			checkBoxRepair.Checked = false;
 			checkBoxServiceable.Checked = false;
 			comboBoxDestination.SelectedItem = null;
-			lifelengthViewerLifeLimit.Lifelength = new Lifelength();
-			lifelengthViewerNotify.Lifelength = new Lifelength();
 		}
 
 		#endregion
