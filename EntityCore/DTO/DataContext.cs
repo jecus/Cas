@@ -144,6 +144,7 @@ namespace EntityCore.DTO
 		public DbSet<WorkShopDTO> WorkShopDtos { get; set; }
 		public DbSet<UserDTO> UserDtos { get; set; }
 		public DbSet<QuotationCostDTO> QuotationCostDtos { get; set; }
+		public DbSet<SettingDTO> SettingDtos { get; set; }
 
 		#endregion
 		
