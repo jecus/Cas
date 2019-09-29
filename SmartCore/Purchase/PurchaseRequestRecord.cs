@@ -228,6 +228,14 @@ namespace SmartCore.Purchase
             ParentPackageId = -1;
             Remarks = "";
             AttachedFile = null;
+			Designation = Designation.UNK;
+			ShipCompanyId = -1;
+			ShipTo = "";
+			CargoVolume ="";
+			BruttoWeight = "";
+			NettoWeight ="";
+
+
         }
         #endregion
 

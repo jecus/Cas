@@ -392,13 +392,13 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				foreach (var record in _addedRecord)
 				{
 					record.ParentPackageId = _order.ItemId;
-					GlobalObjects.CasEnvironment.Keeper.Save(record);
+					GlobalObjects.CasEnvironment.NewKeeper.Save(record);
 				}
 
 				foreach (var doc in _order.ClosingDocument)
 				{
 					doc.ParentId = _order.ItemId;
-					GlobalObjects.CasEnvironment.Keeper.Save(doc);
+					GlobalObjects.CasEnvironment.NewKeeper.Save(doc);
 				}
 
 				DialogResult = DialogResult.OK;
