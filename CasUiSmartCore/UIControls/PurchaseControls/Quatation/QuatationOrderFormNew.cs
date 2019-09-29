@@ -260,51 +260,55 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				MessageBox.Show("Please, enter a Title", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Exclamation);
-				return;
 			}
 
-			if (listViewInitialItems.ItemsCount <= 0)
+			else if (listViewInitialItems.ItemsCount <= 0)
 			{
 				MessageBox.Show("Please select a kits for initional order", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Exclamation);
-				return;
 			}
-			//запись новой информации в запросный ордер
-			ApplyInitialData();
-			//сохранение запросного ордера
-			GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
-
-			foreach (var record in _addedQuatationOrderRecords)
+			else
 			{
-				record.ParentPackageId = _order.ItemId;
-				GlobalObjects.CasEnvironment.NewKeeper.Save(record);
+				//запись новой информации в запросный ордер
+				ApplyInitialData();
+				//сохранение запросного ордера
+				GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
 
-				if (record.Product != null)
+				foreach (var record in _addedQuatationOrderRecords)
 				{
-					foreach (var ksr in record.Product.SupplierRelations)
-					{
-						if (ksr.SupplierId != 0)
-						{
-							ksr.KitId = record.Product.ItemId;
-							ksr.ParentTypeId = record.Product.SmartCoreObjectType.ItemId;
+					record.ParentPackageId = _order.ItemId;
+					GlobalObjects.CasEnvironment.NewKeeper.Save(record);
 
-							try
+					if (record.Product != null)
+					{
+						foreach (var ksr in record.Product.SupplierRelations)
+						{
+							if (ksr.SupplierId != 0)
 							{
-								GlobalObjects.CasEnvironment.NewKeeper.Save(ksr);
-							}
-							catch (Exception ex)
-							{
-								Program.Provider.Logger.Log("Error while saving data", ex);
-								return;
+								ksr.KitId = record.Product.ItemId;
+								ksr.ParentTypeId = record.Product.SmartCoreObjectType.ItemId;
+
+								try
+								{
+									GlobalObjects.CasEnvironment.NewKeeper.Save(ksr);
+								}
+								catch (Exception ex)
+								{
+									Program.Provider.Logger.Log("Error while saving data", ex);
+									return;
+								}
 							}
 						}
 					}
 				}
-			}
 
-			foreach (var record in _deleteExistQuatationOrderRecords)
-				GlobalObjects.CasEnvironment.NewKeeper.Delete(record);
+				foreach (var record in _deleteExistQuatationOrderRecords)
+					GlobalObjects.CasEnvironment.NewKeeper.Delete(record);
+
+				DialogResult = System.Windows.Forms.DialogResult.OK;
+			}
+			
 		}
 
 		#endregion

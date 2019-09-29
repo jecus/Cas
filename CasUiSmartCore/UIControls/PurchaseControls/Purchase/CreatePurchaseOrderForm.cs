@@ -178,8 +178,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		private void ButtonAdd_Click(object sender, EventArgs e)
 		{
-			
-
 			foreach (var price in quatationSupplierPriceListView1.SelectedItems.ToArray())
 			{
 				var newRequest = new PurchaseRequestRecord(-1, price.Parent.Product, 1);
@@ -376,34 +374,36 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				MessageBox.Show("Please, enter a Title", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Exclamation);
-				return;
 			}
 
-			if (purchaseRecordListView1.ItemsCount <= 0)
+			else if (purchaseRecordListView1.ItemsCount <= 0)
 			{
 				MessageBox.Show("Please select a price for purchase order", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Exclamation);
-				return;
 			}
-			//запись новой информации в запросный ордер
-			ApplyPurchaseData();
-			//сохранение запросного ордера
-			GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
-
-			foreach (var record in _addedRecord)
+			else
 			{
-				record.ParentPackageId = _order.ItemId;
-				GlobalObjects.CasEnvironment.Keeper.Save(record);
-			}
+				//запись новой информации в запросный ордер
+				ApplyPurchaseData();
+				//сохранение запросного ордера
+				GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
 
-			foreach (var doc in _order.ClosingDocument)
-			{
-				doc.ParentId = _order.ItemId;
-				GlobalObjects.CasEnvironment.Keeper.Save(doc);
-			}
+				foreach (var record in _addedRecord)
+				{
+					record.ParentPackageId = _order.ItemId;
+					GlobalObjects.CasEnvironment.Keeper.Save(record);
+				}
 
-			DialogResult = DialogResult.OK;
+				foreach (var doc in _order.ClosingDocument)
+				{
+					doc.ParentId = _order.ItemId;
+					GlobalObjects.CasEnvironment.Keeper.Save(doc);
+				}
+
+				DialogResult = DialogResult.OK;
+			}
+			
 		}
 
 		#endregion

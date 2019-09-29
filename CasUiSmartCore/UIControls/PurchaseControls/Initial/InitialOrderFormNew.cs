@@ -268,53 +268,54 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				MessageBox.Show("Please, enter a Title", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Exclamation);
-
-				return;
 			}
 
-			if (listViewInitialItems.ItemsCount <= 0)
+			else if (listViewInitialItems.ItemsCount <= 0)
 			{
 				MessageBox.Show("Please select a kits for initional order", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Exclamation);
-				return;
 			}
-			//запись новой информации в запросный ордер
-			ApplyInitialData();
-			//сохранение запросного ордера
-			GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
-
-			foreach (var record in _addedInitialOrderRecords)
+			else
 			{
-				record.ParentPackageId = _order.ItemId;
-				GlobalObjects.CasEnvironment.NewKeeper.Save(record);
+				//запись новой информации в запросный ордер
+				ApplyInitialData();
+				//сохранение запросного ордера
+				GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
 
-				if (record.Product != null)
+				foreach (var record in _addedInitialOrderRecords)
 				{
-					foreach (var ksr in record.Product.SupplierRelations)
-					{
-						if (ksr.SupplierId != 0)
-						{
-							ksr.KitId = record.Product.ItemId;
-							ksr.ParentTypeId = record.Product.SmartCoreObjectType.ItemId;
+					record.ParentPackageId = _order.ItemId;
+					GlobalObjects.CasEnvironment.NewKeeper.Save(record);
 
-							try
+					if (record.Product != null)
+					{
+						foreach (var ksr in record.Product.SupplierRelations)
+						{
+							if (ksr.SupplierId != 0)
 							{
-								GlobalObjects.CasEnvironment.NewKeeper.Save(ksr);
-							}
-							catch (Exception ex)
-							{
-								Program.Provider.Logger.Log("Error while saving data", ex);
-								return;
+								ksr.KitId = record.Product.ItemId;
+								ksr.ParentTypeId = record.Product.SmartCoreObjectType.ItemId;
+
+								try
+								{
+									GlobalObjects.CasEnvironment.NewKeeper.Save(ksr);
+								}
+								catch (Exception ex)
+								{
+									Program.Provider.Logger.Log("Error while saving data", ex);
+									return;
+								}
 							}
 						}
 					}
 				}
-			}
 
-			foreach (var record in _deleteExistInitialOrderRecords)
-				GlobalObjects.CasEnvironment.NewKeeper.Delete(record);
-			DialogResult = DialogResult.OK;
+				foreach (var record in _deleteExistInitialOrderRecords)
+					GlobalObjects.CasEnvironment.NewKeeper.Delete(record);
+				DialogResult = DialogResult.OK;
+			}
+			
 		}
 
 		#endregion
@@ -411,10 +412,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			comboBoxDestination.SelectedItem = destination;
 			comboBoxPriority.SelectedItem = listViewInitialItems.SelectedItem.Priority;
 			metroTextBox1.Text = listViewInitialItems.SelectedItem.Remarks;
-
-			lifelengthViewerLifeLimit.Lifelength = new Lifelength(listViewInitialItems.SelectedItem.LifeLimit);
-			lifelengthViewerNotify.Lifelength = new Lifelength(listViewInitialItems.SelectedItem.LifeLimitNotify);
-
 		}
 
 		#endregion
@@ -454,8 +451,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				listViewInitialItems.SelectedItem.DestinationObjectId = -1;
 			}
 			listViewInitialItems.SelectedItem.InitialReason = comboBoxReason.SelectedItem as InitialReason ?? InitialReason.Unknown;
-			listViewInitialItems.SelectedItem.LifeLimit = lifelengthViewerLifeLimit.Lifelength;
-			listViewInitialItems.SelectedItem.LifeLimitNotify = lifelengthViewerNotify.Lifelength;
 
 			listViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
 
@@ -479,8 +474,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			checkBoxRepair.Checked = false;
 			checkBoxServiceable.Checked = false;
 			comboBoxDestination.SelectedItem = null;
-			lifelengthViewerLifeLimit.Lifelength = new Lifelength();
-			lifelengthViewerNotify.Lifelength = new Lifelength();
 		}
 
 		#endregion

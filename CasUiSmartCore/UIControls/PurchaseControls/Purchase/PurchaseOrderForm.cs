@@ -358,27 +358,30 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				MessageBox.Show("Please, enter a Title", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Exclamation);
-				return;
 			}
 
-			if (purchaseRecordListView1.ItemsCount <= 0)
+			else if (purchaseRecordListView1.ItemsCount <= 0)
 			{
 				MessageBox.Show("Please select a price for purchase order", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Exclamation);
-				return;
 			}
-			//запись новой информации в запросный ордер
-			ApplyPurchaseData();
-			//сохранение запросного ордера
-			GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
-
-			foreach (var record in _addedRecord)
+			else
 			{
-				GlobalObjects.CasEnvironment.NewKeeper.Save(record);
-			}
+				//запись новой информации в запросный ордер
+				ApplyPurchaseData();
+				//сохранение запросного ордера
+				GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
 
-			DialogResult = DialogResult.OK;
+				foreach (var record in _addedRecord)
+				{
+					GlobalObjects.CasEnvironment.NewKeeper.Save(record);
+				}
+
+				DialogResult = DialogResult.OK;
+
+			}
+			
 		}
 
 		#endregion

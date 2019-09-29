@@ -54,8 +54,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			if (item?.ParentInitialRecord?.DestinationObjectType == SmartCoreType.Aircraft)
 				destiantion = GlobalObjects.AircraftsCore.GetAircraftById(item?.ParentInitialRecord?.DestinationObjectId ?? -1)?.ToString();
 			else destiantion = GlobalObjects.StoreCore.GetStoreById(item?.ParentInitialRecord?.DestinationObjectId ?? -1)?.ToString();
-
-			var temp = $"{item?.Product?.PartNumber} | Q-ty:{item?.ParentInitialRecord?.Quantity} | Reason: {item?.ParentInitialRecord?.InitialReason} | Destination: {destiantion} | Priority: {item?.ParentInitialRecord?.Priority}";
+			var temp = $"{item?.Product?.PartNumber}";
+			if (item?.ParentInitialRecord != null)
+			 temp += $" | Q-ty:{item?.ParentInitialRecord?.Quantity} | Reason: {item?.ParentInitialRecord?.InitialReason} | Destination: {destiantion} | Priority: {item?.ParentInitialRecord?.Priority}";
 			return new List<CustomCell>()
 			{
 				CreateRow(item.Supplier.ToString(),item.Supplier),
@@ -64,14 +65,14 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				CreateRow(item.CostCondition.ToString(),item.CostCondition),
 				CreateRow(item.Measure.ToString(),item.Measure),
 				CreateRow(temp,temp),
-				CreateRow(item.IncoTerm.ToString(),item.IncoTerm),
-				CreateRow(item.Designation.ToString(),item.Designation),
+				CreateRow(item.IncoTerm?.ToString(),item.IncoTerm),
+				CreateRow(item.Designation?.ToString(),item.Designation),
 				CreateRow(item.PayTerm.ToString(),item.PayTerm),
-				CreateRow(item.BruttoWeight.ToString(),item.BruttoWeight),
-				CreateRow(item.CargoVolume.ToString(),item.CargoVolume),
-				CreateRow(item.NettoWeight.ToString(),item.NettoWeight),
+				CreateRow(item.BruttoWeight?.ToString(),item.BruttoWeight),
+				CreateRow(item.CargoVolume?.ToString(),item.CargoVolume),
+				CreateRow(item.NettoWeight?.ToString(),item.NettoWeight),
 				CreateRow(item.ShipCompany?.ToString(),item.ShipCompany),
-				CreateRow(item.ShipTo.ToString(),item.ShipTo),
+				CreateRow(item.ShipTo?.ToString(),item.ShipTo),
 				CreateRow(author,author),
 			};
 		}
