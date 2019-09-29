@@ -22,7 +22,7 @@ namespace CAS.UI.UIControls.SupplierControls
         {
             InitializeComponent();
 
-            SortMultiplier = 1;
+            SortMultiplier = 0;
         }
 		#endregion
 
