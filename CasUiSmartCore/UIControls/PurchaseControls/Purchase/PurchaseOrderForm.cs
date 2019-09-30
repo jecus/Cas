@@ -240,8 +240,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			else numericUpDownQuantity.DecimalPlaces = 2;
 
 			var quantity = numericUpDownQuantity.Value;
+			var cost = numericUpDownCost.Value;
 
-			textBoxTotal.Text = $"{quantity:0.##}" + (measure != null ? " " + measure + "(s)" : "");
+			textBoxTotal.Text = $"{quantity * cost:0.##} {(Сurrency)comboBoxCurrency.SelectedItem}";
 		}
 		#endregion
 
