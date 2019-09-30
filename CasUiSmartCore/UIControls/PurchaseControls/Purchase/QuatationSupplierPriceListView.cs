@@ -25,10 +25,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		protected override void SetHeaders()
 		{
 			AddColumn("Suppliers", (int)(radGridView1.Width * 0.2f));
-			AddColumn("CostNew", (int)(radGridView1.Width * 0.2f));
-			AddColumn("CostOverhaul", (int)(radGridView1.Width * 0.2f));
-			AddColumn("CostServiceable", (int)(radGridView1.Width * 0.2f));
-			AddColumn("CostRepair", (int)(radGridView1.Width * 0.2f));
+			AddColumn("New", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Overhaul", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Serviceable", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Repair", (int)(radGridView1.Width * 0.15f));
 			AddColumn("Product", (int)(radGridView1.Width * 0.2f));
 		}
 

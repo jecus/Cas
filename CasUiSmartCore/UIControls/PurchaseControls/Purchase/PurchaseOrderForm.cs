@@ -298,6 +298,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			comboBoxCondition.SelectedItem = purchaseRecordListView1.SelectedItem.CostCondition;
 			comboBoxMeasure.SelectedItem = purchaseRecordListView1.SelectedItem.Measure;
 			numericUpDownQuantity.Value = (decimal)purchaseRecordListView1.SelectedItem.Quantity;
+			numericUpDownCost.Value = (decimal)purchaseRecordListView1.SelectedItem.Cost;
 
 			comboBoxIncoTerm.SelectedItem = purchaseRecordListView1.SelectedItem.IncoTerm;
 			comboBoxDesignation.SelectedItem = purchaseRecordListView1.SelectedItem.Designation;
@@ -319,7 +320,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			purchaseRecordListView1.SelectedItem.CostCondition = (ComponentStatus) comboBoxCondition.SelectedItem;
 			purchaseRecordListView1.SelectedItem.Measure = (Measure) comboBoxMeasure.SelectedItem;
 			purchaseRecordListView1.SelectedItem.Quantity = (double) numericUpDownQuantity.Value;
-			purchaseRecordListView1.SelectedItem.Cost = (double)numericUpDown1.Value;
+			purchaseRecordListView1.SelectedItem.Cost = (double)numericUpDownCost.Value;
 			purchaseRecordListView1.SelectedItem.Currency = (Сurrency) comboBoxCurrency.SelectedItem;
 			purchaseRecordListView1.SelectedItem.IncoTerm = (IncoTerm)comboBoxIncoTerm.SelectedItem;
 			purchaseRecordListView1.SelectedItem.Designation = (Designation)comboBoxDesignation.SelectedItem;
@@ -344,7 +345,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			comboBoxCondition.SelectedItem = null;
 			comboBoxMeasure.SelectedItem = null;
 			numericUpDownQuantity.Value = 0;
-			numericUpDown1.Value = 0;
+			numericUpDownCost.Value = 0;
 		}
 
 		#endregion

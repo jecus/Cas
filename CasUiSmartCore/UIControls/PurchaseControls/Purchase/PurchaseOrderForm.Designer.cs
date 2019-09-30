@@ -42,7 +42,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.metroLabelNettoWeight = new MetroFramework.Controls.MetroLabel();
 			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
 			this.textBoxBruttoWeight = new MetroFramework.Controls.MetroTextBox();
-			this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+			this.numericUpDownCost = new System.Windows.Forms.NumericUpDown();
 			this.metroLabelBruttoWeight = new MetroFramework.Controls.MetroLabel();
 			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
 			this.textBoxCargoVolume = new MetroFramework.Controls.MetroTextBox();
@@ -100,7 +100,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.documentControl9 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.documentControl10 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.groupBox1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCost)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
@@ -156,7 +156,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.groupBox1.Controls.Add(this.metroLabelNettoWeight);
 			this.groupBox1.Controls.Add(this.metroLabel2);
 			this.groupBox1.Controls.Add(this.textBoxBruttoWeight);
-			this.groupBox1.Controls.Add(this.numericUpDown1);
+			this.groupBox1.Controls.Add(this.numericUpDownCost);
 			this.groupBox1.Controls.Add(this.metroLabelBruttoWeight);
 			this.groupBox1.Controls.Add(this.metroLabel1);
 			this.groupBox1.Controls.Add(this.textBoxCargoVolume);
@@ -281,19 +281,19 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.textBoxBruttoWeight.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.textBoxBruttoWeight.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
-			// numericUpDown1
+			// numericUpDownCost
 			// 
-			this.numericUpDown1.DecimalPlaces = 2;
-			this.numericUpDown1.Enabled = false;
-			this.numericUpDown1.Location = new System.Drawing.Point(118, 136);
-			this.numericUpDown1.Maximum = new decimal(new int[] {
-			1000000,
-			0,
-			0,
-			0});
-			this.numericUpDown1.Name = "numericUpDown1";
-			this.numericUpDown1.Size = new System.Drawing.Size(165, 20);
-			this.numericUpDown1.TabIndex = 250;
+			this.numericUpDownCost.DecimalPlaces = 2;
+			this.numericUpDownCost.Enabled = false;
+			this.numericUpDownCost.Location = new System.Drawing.Point(118, 136);
+			this.numericUpDownCost.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+			this.numericUpDownCost.Name = "numericUpDownCost";
+			this.numericUpDownCost.Size = new System.Drawing.Size(165, 20);
+			this.numericUpDownCost.TabIndex = 250;
 			// 
 			// metroLabelBruttoWeight
 			// 
@@ -375,10 +375,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.numericUpDownQuantity.DecimalPlaces = 2;
 			this.numericUpDownQuantity.Location = new System.Drawing.Point(118, 110);
 			this.numericUpDownQuantity.Maximum = new decimal(new int[] {
-			1000000,
-			0,
-			0,
-			0});
+            1000000,
+            0,
+            0,
+            0});
 			this.numericUpDownQuantity.Name = "numericUpDownQuantity";
 			this.numericUpDownQuantity.Size = new System.Drawing.Size(165, 20);
 			this.numericUpDownQuantity.TabIndex = 142;
@@ -1097,7 +1097,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.Text = "Purchase Order Form";
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCost)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).EndInit();
 			this.groupBox2.ResumeLayout(false);
 			this.ResumeLayout(false);
@@ -1139,7 +1139,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private MetroTextBox textBoxPublishedBy;
 		private MetroTextBox metroTextBoxNumber;
 		private MetroLabel metroLabelNumber;
-		private System.Windows.Forms.NumericUpDown numericUpDown1;
+		private System.Windows.Forms.NumericUpDown numericUpDownCost;
 		private MetroLabel metroLabel1;
 		private Purchase.PurchaseRecordListView purchaseRecordListView1;
 		private System.Windows.Forms.ComboBox comboBoxCurrency;

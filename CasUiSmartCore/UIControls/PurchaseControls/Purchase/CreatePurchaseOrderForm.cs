@@ -180,8 +180,18 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		{
 			foreach (var price in quatationSupplierPriceListView1.SelectedItems.ToArray())
 			{
+				var q = price.Parent?.ParentInitialRecord?.CostCondition.ToString().Split(',');
+				var q1 = price.Parent?.CostCondition.ToString().Split(',');
+				if (q.Any(i => q1.Contains(i)))
+				{
+					MessageBox.Show($"Please select supplier price with condition {price.Parent?.CostCondition}", (string)new GlobalTermsProvider()["SystemName"],
+						MessageBoxButtons.OK,
+						MessageBoxIcon.Exclamation);
+					return;
+				}
+
 				var newRequest = new PurchaseRequestRecord(-1, price.Parent.Product, 1);
-				newRequest.CostCondition = ComponentStatus.New;
+				newRequest.CostCondition = price.Parent.CostCondition;
 				newRequest.Product = price.Parent.Product;
 				newRequest.Supplier = price.Supplier;
 				newRequest.Quantity = 1;
@@ -199,7 +209,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 						MessageBoxIcon.Exclamation);
 					return;
 				}
-				var res = purchaseRecordListView1.GetItemsArray().Where(i =>
+
+				var list = purchaseRecordListView1.GetItemsArray();
+				var res = list.Where(i =>
 					i.Product.ItemId == purchaseRecordListView1.SelectedItem.Product.ItemId).Select(i => i.Quantity).Sum();
 
 				if (newRequest.Price.Parent.Quantity < newRequest.Quantity + res)

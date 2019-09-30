@@ -46,8 +46,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.labelQuantity = new MetroFramework.Controls.MetroLabel();
 			this.comboBoxMeasure = new System.Windows.Forms.ComboBox();
 			this.labelMeasure = new MetroFramework.Controls.MetroLabel();
-			this.labelTotal = new MetroFramework.Controls.MetroLabel();
-			this.textBoxTotal = new MetroFramework.Controls.MetroTextBox();
 			this.labelDefferedCategory = new MetroFramework.Controls.MetroLabel();
 			this.labelReason = new MetroFramework.Controls.MetroLabel();
 			this.comboBoxReason = new System.Windows.Forms.ComboBox();
@@ -127,8 +125,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.groupBox1.Controls.Add(this.labelQuantity);
 			this.groupBox1.Controls.Add(this.comboBoxMeasure);
 			this.groupBox1.Controls.Add(this.labelMeasure);
-			this.groupBox1.Controls.Add(this.labelTotal);
-			this.groupBox1.Controls.Add(this.textBoxTotal);
 			this.groupBox1.Controls.Add(this.labelDefferedCategory);
 			this.groupBox1.Controls.Add(this.labelReason);
 			this.groupBox1.Controls.Add(this.comboBoxReason);
@@ -181,10 +177,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.metroTextBox1.PasswordChar = '\0';
 			this.metroTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.None;
 			this.metroTextBox1.SelectedText = "";
+			this.metroTextBox1.Multiline = true;
 			this.metroTextBox1.SelectionLength = 0;
 			this.metroTextBox1.SelectionStart = 0;
 			this.metroTextBox1.ShortcutsEnabled = true;
-			this.metroTextBox1.Size = new System.Drawing.Size(234, 22);
+			this.metroTextBox1.Size = new System.Drawing.Size(234, 88);
 			this.metroTextBox1.TabIndex = 267;
 			this.metroTextBox1.UseSelectable = true;
 			this.metroTextBox1.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -250,12 +247,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.numericUpDownQuantity.DecimalPlaces = 2;
 			this.numericUpDownQuantity.Location = new System.Drawing.Point(118, 192);
 			this.numericUpDownQuantity.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownQuantity.Name = "numericUpDownQuantity";
-			this.numericUpDownQuantity.Size = new System.Drawing.Size(65, 20);
+			this.numericUpDownQuantity.Size = new System.Drawing.Size(234, 20);
 			this.numericUpDownQuantity.TabIndex = 142;
 			this.numericUpDownQuantity.ValueChanged += new System.EventHandler(this.numericUpDownQuantity_ValueChanged);
 			// 
@@ -291,50 +288,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.labelMeasure.TabIndex = 165;
 			this.labelMeasure.Text = "Measure:";
 			this.labelMeasure.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// labelTotal
-			// 
-			this.labelTotal.AutoSize = true;
-			this.labelTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelTotal.Location = new System.Drawing.Point(190, 193);
-			this.labelTotal.Name = "labelTotal";
-			this.labelTotal.Size = new System.Drawing.Size(39, 19);
-			this.labelTotal.TabIndex = 168;
-			this.labelTotal.Text = "Total:";
-			this.labelTotal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// textBoxTotal
-			// 
-			this.textBoxTotal.BackColor = System.Drawing.Color.White;
-			// 
-			// 
-			// 
-			this.textBoxTotal.CustomButton.Image = null;
-			this.textBoxTotal.CustomButton.Location = new System.Drawing.Point(99, 2);
-			this.textBoxTotal.CustomButton.Name = "";
-			this.textBoxTotal.CustomButton.Size = new System.Drawing.Size(15, 15);
-			this.textBoxTotal.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.textBoxTotal.CustomButton.TabIndex = 1;
-			this.textBoxTotal.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.textBoxTotal.CustomButton.UseSelectable = true;
-			this.textBoxTotal.CustomButton.Visible = false;
-			this.textBoxTotal.ForeColor = System.Drawing.Color.Black;
-			this.textBoxTotal.Lines = new string[0];
-			this.textBoxTotal.Location = new System.Drawing.Point(235, 192);
-			this.textBoxTotal.MaxLength = 128;
-			this.textBoxTotal.Name = "textBoxTotal";
-			this.textBoxTotal.PasswordChar = '\0';
-			this.textBoxTotal.ReadOnly = true;
-			this.textBoxTotal.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.textBoxTotal.SelectedText = "";
-			this.textBoxTotal.SelectionLength = 0;
-			this.textBoxTotal.SelectionStart = 0;
-			this.textBoxTotal.ShortcutsEnabled = true;
-			this.textBoxTotal.Size = new System.Drawing.Size(117, 20);
-			this.textBoxTotal.TabIndex = 143;
-			this.textBoxTotal.UseSelectable = true;
-			this.textBoxTotal.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.textBoxTotal.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
 			// labelDefferedCategory
 			// 
@@ -606,6 +559,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.textBoxRemarks.PasswordChar = '\0';
 			this.textBoxRemarks.ScrollBars = System.Windows.Forms.ScrollBars.None;
 			this.textBoxRemarks.SelectedText = "";
+			this.textBoxRemarks.Multiline = true;
 			this.textBoxRemarks.SelectionLength = 0;
 			this.textBoxRemarks.SelectionStart = 0;
 			this.textBoxRemarks.ShortcutsEnabled = true;
@@ -873,8 +827,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private MetroLabel labelQuantity;
 		private System.Windows.Forms.ComboBox comboBoxMeasure;
 		private MetroLabel labelMeasure;
-		private MetroLabel labelTotal;
-		private MetroTextBox textBoxTotal;
 		private MetroLabel labelDefferedCategory;
 		private MetroLabel labelReason;
 		private System.Windows.Forms.ComboBox comboBoxReason;

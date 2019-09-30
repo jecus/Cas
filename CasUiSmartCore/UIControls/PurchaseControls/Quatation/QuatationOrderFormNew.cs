@@ -111,7 +111,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				_quotationCosts.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<QuotationCostDTO, QuotationCost>(new Filter("QuotationId", _order.ItemId)));
 				_addedQuatationOrderRecords.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationRecordDTO, RequestForQuotationRecord>(new Filter("ParentPackageId", _order.ItemId)));
 				var ids = _addedQuatationOrderRecords.Select(i => i.PackageItemId);
-				var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()));
+				var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), true);
 				var supplierId = _addedQuatationOrderRecords.SelectMany(i => i.SupplierPrice).Select(i => i.SupplierId);
 				var suppliers = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<SupplierDTO, Supplier>(new Filter("ItemId",supplierId));
 
@@ -179,7 +179,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void comboBoxMeasure_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			SetForMeasure();
+			
 		}
 
 		#endregion
@@ -188,26 +188,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void numericUpDownQuantity_ValueChanged(object sender, EventArgs e)
 		{
-			SetForMeasure();
+			
 		}
 
-		#endregion
-
-		#region private void SetForMeasure()
-		/// <summary>
-		/// Изменяет контрол в соотствествии с выбранной единицей измерения
-		/// </summary>
-		private void SetForMeasure()
-		{
-			var measure = comboBoxMeasure.SelectedItem as Measure;
-			if (measure == null || measure.MeasureCategory != MeasureCategory.Mass)
-				numericUpDownQuantity.DecimalPlaces = 0;
-			else numericUpDownQuantity.DecimalPlaces = 2;
-
-			var quantity = numericUpDownQuantity.Value;
-
-			textBoxTotal.Text = $"{quantity:0.##}" + (measure != null ? " " + measure + "(s)" : "");
-		}
 		#endregion
 
 		#region private void UpdateInitialControls()
