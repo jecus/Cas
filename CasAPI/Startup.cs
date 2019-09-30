@@ -27,7 +27,7 @@ namespace CasAPI
 			services.AddWorker<DictionaryWorker>();
 			services.AddWorker<BaseComponentWorker>();
 			services.AddMvc()
-				.AddNewtonsoftJson(options =>
+				.AddJsonOptions(options =>
 				{
 					options.AllowInputFormatterExceptionMessages = true;
 					//options.SerializerSettings.Converters.Add(new StringEnumConverter());
@@ -36,7 +36,7 @@ namespace CasAPI
 					options.SerializerSettings.ObjectCreationHandling = ObjectCreationHandling.Reuse;
 					options.UseMemberCasing();
 				})
-				.SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+				.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
 			services.AddDbContext<DataContext>(options =>
 				{
@@ -74,7 +74,7 @@ namespace CasAPI
 
 			app.UseHealthChecks(Configuration["HealthCheck:Endpoint"]);
 			app.UseResponseCompression();
-			app.UseRouting();
+			app.UseMvc();
 
 
 			//app.UseSwagger();
