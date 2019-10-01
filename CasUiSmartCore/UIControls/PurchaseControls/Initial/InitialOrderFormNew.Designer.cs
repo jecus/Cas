@@ -321,7 +321,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
             0,
             0});
 			this.numericUpDownQuantity.Name = "numericUpDownQuantity";
-			this.numericUpDownQuantity.Size = new System.Drawing.Size(50, 20);
+			this.numericUpDownQuantity.Size = new System.Drawing.Size(170, 20);
 			this.numericUpDownQuantity.TabIndex = 142;
 			this.numericUpDownQuantity.ValueChanged += new System.EventHandler(this.numericUpDownQuantity_ValueChanged);
 			// 

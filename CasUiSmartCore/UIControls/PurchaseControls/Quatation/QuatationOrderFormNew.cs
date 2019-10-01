@@ -160,7 +160,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private void UpdateControls()
 		{
 			comboBoxMeasure.Items.Clear();
-			comboBoxMeasure.Items.AddRange(Measure.GetByCategories(new[] { MeasureCategory.Mass, MeasureCategory.EconomicEntity }));
+			//comboBoxMeasure.Items.AddRange(Measure.GetByCategories(new[] { MeasureCategory.Mass, MeasureCategory.EconomicEntity }));
+			comboBoxMeasure.Items.AddRange(Measure.Items.ToArray());
 
 			comboBoxDestination.Items.Clear();
 			comboBoxDestination.Items.AddRange(destinations.ToArray());

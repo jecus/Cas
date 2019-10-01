@@ -130,7 +130,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private void UpdateControls()
 		{
 			comboBoxMeasure.Items.Clear();
-			comboBoxMeasure.Items.AddRange(Measure.GetByCategories(new[] { MeasureCategory.Mass, MeasureCategory.EconomicEntity }));
+			//comboBoxMeasure.Items.AddRange(Measure.GetByCategories(new[] { MeasureCategory.Mass, MeasureCategory.EconomicEntity }));
+			comboBoxMeasure.Items.AddRange(Measure.Items.ToArray());
 
 			comboBoxCondition.Items.Clear();
 			comboBoxCondition.DataSource = Enum.GetValues(typeof(ComponentStatus));
@@ -180,23 +181,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		{
 			foreach (var price in quatationSupplierPriceListView1.SelectedItems.ToArray())
 			{
-				var q = price.Parent?.ParentInitialRecord?.CostCondition.ToString().Replace(" ","").Split(',');
-				var q1 = price.Parent?.CostCondition.ToString().Replace(" ", "").Split(',');
-				bool flag = false;
-				foreach (var s in q)
-				{
-					if (q1.Contains(s))
-						flag = true;
-				}
-
-				if (!q.Any(i => q1.Contains(i)))
-				{
-					MessageBox.Show($"Please select supplier price with condition {price.Parent?.CostCondition}", (string)new GlobalTermsProvider()["SystemName"],
-						MessageBoxButtons.OK,
-						MessageBoxIcon.Exclamation);
-					return;
-				}
-
 				var newRequest = new PurchaseRequestRecord(-1, price.Parent.Product, 1);
 				newRequest.CostCondition = price.Parent.CostCondition;
 				newRequest.Product = price.Parent.Product;
@@ -383,6 +367,27 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Exclamation);
 				return;
+			}
+
+			var q = purchaseRecordListView1.SelectedItem.Price.Parent?.ParentInitialRecord?.CostCondition.ToString().Replace(" ", "").Split(',');
+			var q1 = ((ComponentStatus)comboBoxCondition.SelectedItem).ToString();
+			bool flag = false;
+			foreach (var s in q)
+			{
+				if (q1.Contains(s))
+					flag = true;
+			}
+
+			if (!q.Any(i => q1.Contains(i)))
+			{
+				if (MessageBox.Show(
+					    $"You ordered {purchaseRecordListView1.SelectedItem.Price.Parent?.CostCondition}! Do you really want ordered {(ComponentStatus) comboBoxCondition.SelectedItem}?",
+					    (string) new GlobalTermsProvider()["SystemName"],
+					    MessageBoxButtons.YesNo,
+					    MessageBoxIcon.Exclamation) == DialogResult.No)
+				{
+					return;
+				}
 			}
 
 			purchaseRecordListView1.SelectedItem.CostCondition = (ComponentStatus) comboBoxCondition.SelectedItem;
