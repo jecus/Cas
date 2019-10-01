@@ -187,7 +187,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void comboBoxMeasure_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			SetForMeasure();
+			
 		}
 
 		#endregion
@@ -196,26 +196,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void numericUpDownQuantity_ValueChanged(object sender, EventArgs e)
 		{
-			SetForMeasure();
+			
 		}
 
-		#endregion
-
-		#region private void SetForMeasure()
-		/// <summary>
-		/// Изменяет контрол в соотствествии с выбранной единицей измерения
-		/// </summary>
-		private void SetForMeasure()
-		{
-			var measure = comboBoxMeasure.SelectedItem as Measure;
-			if (measure == null || measure.MeasureCategory != MeasureCategory.Mass)
-				numericUpDownQuantity.DecimalPlaces = 0;
-			else numericUpDownQuantity.DecimalPlaces = 2;
-
-			var quantity = numericUpDownQuantity.Value;
-
-			textBoxTotal.Text = $"{quantity:0.##}" + (measure != null ? " " + measure + "(s)" : "");
-		}
 		#endregion
 
 		#region private void UpdateInitialControls()
