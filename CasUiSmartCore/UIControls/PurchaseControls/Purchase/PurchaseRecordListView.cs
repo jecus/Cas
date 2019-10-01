@@ -29,6 +29,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			AddColumn("Supplier", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Q-ty", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Cost", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Total Cost", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Condition", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Measure", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Product", (int)(radGridView1.Width * 0.2f));
@@ -57,11 +58,15 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			var temp = $"{item?.Product?.PartNumber}";
 			if (item?.ParentInitialRecord != null)
 			 temp += $" | Q-ty:{item?.ParentInitialRecord?.Quantity} | Reason: {item?.ParentInitialRecord?.InitialReason} | Destination: {destiantion} | Priority: {item?.ParentInitialRecord?.Priority}";
+
+			var total = item.Quantity * item.Cost;
+
 			return new List<CustomCell>()
 			{
 				CreateRow(item.Supplier.ToString(),item.Supplier),
 				CreateRow(item.Quantity.ToString(),item.Quantity),
 				CreateRow(item.Cost.ToString(),item.Cost),
+				CreateRow(total.ToString($"{total:0.##}"), total),
 				CreateRow(item.CostCondition.ToString(),item.CostCondition),
 				CreateRow(item.Measure.ToString(),item.Measure),
 				CreateRow(temp,temp),
