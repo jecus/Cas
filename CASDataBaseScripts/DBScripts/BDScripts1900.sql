@@ -93,11 +93,21 @@ GO
 ------------------------------------------------------------------------------------
 if object_id('dbo.Setting') is null
 
-    create table dbo.Setting (
-          ItemId int IDENTITY PRIMARY KEY not null 
+	create table dbo.Setting (
+		  ItemId int IDENTITY PRIMARY KEY not null 
 		, IsDeleted  bit not null DEFAULT 0
-        , Corrector INT not null default 1
+		, Corrector INT not null default 1
 		, Updated datetime2(7) not null default sysutcdatetime()
-        , SettingsJSON varchar(MAX)
+		, SettingsJSON varchar(MAX)
 	)
+go
+
+-------------------------------------------------------------------------------------
+if not exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('dbo.ComponentDirectives')
+					and c.name = 'IsExpiry' ) 
+
+	alter table dbo.ComponentDirectives
+	add IsExpiry bit not null DEFAULT 0
 go

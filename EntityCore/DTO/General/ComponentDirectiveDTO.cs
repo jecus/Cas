@@ -87,6 +87,9 @@ namespace EntityCore.DTO.General
 		[Column("ExpiryDate")]
 		public DateTime? ExpiryDate { get; set; }
 
+		[Column("IsExpiry")]
+		public bool? IsExpiry { get; set; }
+
 
 
 		[Child(FilterType.Equal, "ParentTypeId", 2)]

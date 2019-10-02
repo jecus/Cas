@@ -77,6 +77,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.checkBoxClose = new System.Windows.Forms.CheckBox();
 			this.groupBoxClose = new System.Windows.Forms.GroupBox();
 			this._mainPanel = new System.Windows.Forms.Panel();
+			this.checkBoxIsExpiry = new System.Windows.Forms.CheckBox();
 			this.labelExpiryDate = new System.Windows.Forms.Label();
 			this.dateTimePickerExpiryDate = new System.Windows.Forms.DateTimePicker();
 			this.lifelengthViewerExpiryRemain = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
@@ -576,6 +577,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			// 
 			// _mainPanel
 			// 
+			this._mainPanel.Controls.Add(this.checkBoxIsExpiry);
 			this._mainPanel.Controls.Add(this.labelExpiryDate);
 			this._mainPanel.Controls.Add(this.dateTimePickerExpiryDate);
 			this._mainPanel.Controls.Add(this.lifelengthViewerExpiryRemain);
@@ -631,6 +633,18 @@ namespace CAS.UI.UIControls.ComponentControls
 			this._mainPanel.Size = new System.Drawing.Size(1143, 612);
 			this._mainPanel.TabIndex = 65;
 			this._mainPanel.Visible = false;
+			// 
+			// checkBoxIsExpiry
+			// 
+			this.checkBoxIsExpiry.AutoSize = true;
+			this.checkBoxIsExpiry.Font = new System.Drawing.Font("Verdana", 11.25F);
+			this.checkBoxIsExpiry.ForeColor = System.Drawing.Color.DimGray;
+			this.checkBoxIsExpiry.Location = new System.Drawing.Point(32, 550);
+			this.checkBoxIsExpiry.Name = "checkBoxIsExpiry";
+			this.checkBoxIsExpiry.Size = new System.Drawing.Size(15, 14);
+			this.checkBoxIsExpiry.TabIndex = 210;
+			this.checkBoxIsExpiry.UseVisualStyleBackColor = true;
+			this.checkBoxIsExpiry.CheckedChanged += new System.EventHandler(this.checkBoxIsExpiry_CheckedChanged);
 			// 
 			// labelExpiryDate
 			// 
@@ -1042,5 +1056,6 @@ namespace CAS.UI.UIControls.ComponentControls
 		private LifelengthViewer lifelengthViewerExpiryRemain;
 		private System.Windows.Forms.Label labelExpiryDate;
 		private System.Windows.Forms.DateTimePicker dateTimePickerExpiryDate;
+		private System.Windows.Forms.CheckBox checkBoxIsExpiry;
 	}
 }
