@@ -1503,6 +1503,7 @@ namespace SmartCore.DtoHelper
 				AAM = comdir.AAM,
 				CMM = comdir.CMM,
 				ExpiryDate = comdir.ExpiryDate,
+				IsExpiry = comdir.IsExpiry,
 				Files = comdir.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
 				PerformanceRecords = comdir.PerformanceRecords?.Select(i => i.Convert()) as ICollection<DirectiveRecordDTO>,
 				CategoriesRecords = comdir.CategoriesRecords?.Select(i => i.Convert()) as ICollection<CategoryRecordDTO>,
@@ -1537,7 +1538,8 @@ namespace SmartCore.DtoHelper
 				AccessDirective = comdirdto.AccessDirective,
 				AAM = comdirdto.AAM,
 				CMM = comdirdto.CMM,
-				ExpiryDate = comdirdto.ExpiryDate
+				ExpiryDate = comdirdto.ExpiryDate,
+				IsExpiry = comdirdto.IsExpiry ?? default
 			};
 
 

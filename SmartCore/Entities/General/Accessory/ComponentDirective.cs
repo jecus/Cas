@@ -590,6 +590,13 @@ namespace SmartCore.Entities.General.Accessory
 		public DateTime? ExpiryDate { get; set; }
 		#endregion
 
+		#region public Boolean IsExpiry { get; set; }
+		
+		[TableColumnAttribute("IsExpiry")]
+		public Boolean IsExpiry { get; set; }
+
+		#endregion
+
 		public string Reference => ParentComponent?.Reference;
 		public string IsEffectivity => ParentComponent?.IsEffectivity;
 		public string ALTPartNumber => ParentComponent?.ALTPartNumber;

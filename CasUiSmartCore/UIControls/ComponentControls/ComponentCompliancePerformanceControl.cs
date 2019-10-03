@@ -116,6 +116,12 @@ namespace CAS.UI.UIControls.ComponentControls
 		}
 		#endregion
 
+		#region public bool IsExpiry { get; set; }
+
+		public bool IsExpiry { get; set; }
+
+		#endregion
+
 		#endregion
 
 		#region Methods
@@ -183,6 +189,7 @@ namespace CAS.UI.UIControls.ComponentControls
 					(WorkItemsRelationTypeUI) comboBoxRelationType.SelectedValue != bindedItemRelationType ||
 					_currentComponentDirective.Cost != cost ||
 					_currentComponentDirective.IsClosed != IsClosed ||
+					_currentComponentDirective.IsExpiry != IsExpiry ||
 					_currentComponentDirective.KitRequired != textBoxKitRequired.Text ||
 					_currentComponentDirective.Remarks != textBoxRemarks.Text ||
 					textBoxZoneArea.Text != _currentComponentDirective.ZoneArea ||
@@ -318,6 +325,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			textBoxRemarks.Text = _currentComponentDirective.Remarks;
 			textBoxHiddenRemarks.Text = _currentComponentDirective.HiddenRemarks;
 			checkBoxClose.Checked = _currentComponentDirective.IsClosed;
+			checkBoxIsExpiry.Checked = _currentComponentDirective.IsExpiry;
 
 			textBoxZoneArea.Text = _currentComponentDirective.ZoneArea;
 			textBoxAcess.Text = _currentComponentDirective.AccessDirective;
@@ -484,6 +492,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			_currentComponentDirective.ManHours = manHours;
 			_currentComponentDirective.Cost = cost;
 			_currentComponentDirective.IsClosed = IsClosed;
+			_currentComponentDirective.IsExpiry = IsExpiry;
 			_currentComponentDirective.KitRequired = textBoxKitRequired.Text;
 			_currentComponentDirective.Remarks = textBoxRemarks.Text;
 			_currentComponentDirective.HiddenRemarks = textBoxHiddenRemarks.Text;
@@ -700,6 +709,16 @@ namespace CAS.UI.UIControls.ComponentControls
 		}
 		#endregion
 
+		#region private void checkBoxIsExpiry_CheckedChanged(object sender, EventArgs e)
+
+		private void checkBoxIsExpiry_CheckedChanged(object sender, EventArgs e)
+		{
+			IsExpiry = checkBoxIsExpiry.Checked;
+		}
+
+		#endregion
+		
+
 		#region private void LookupComboboxMaintenanceDirectiveSelectedIndexChanged(object sender, EventArgs e)
 		private void LookupComboboxMaintenanceDirectiveSelectedIndexChanged(object sender, EventArgs e)
 		{
@@ -827,5 +846,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		public event EventHandler Deleted;
 
 		#endregion
+
+		
 	}
 }
