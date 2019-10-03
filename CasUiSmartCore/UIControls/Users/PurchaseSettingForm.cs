@@ -31,12 +31,12 @@ namespace CAS.UI.UIControls.Users
 
 		private void Completed()
 		{
-			lifelengthViewerDeadlineAOG.Lifelength = _setting.PurchaseSettings.Parameters["AOG"][0];
-			lifelengthViewerNotifyAOG.Lifelength = _setting.PurchaseSettings.Parameters["AOG"][1];
-			lifelengthViewerDeadlineUrgent.Lifelength = _setting.PurchaseSettings.Parameters["Urgent"][0];
-			lifelengthViewerNotifyUrgent.Lifelength = _setting.PurchaseSettings.Parameters["Urgent"][1];
-			lifelengthViewerDeadlineRoutine.Lifelength = _setting.PurchaseSettings.Parameters["Routine"][0];
-			lifelengthViewerNotifyRoutine.Lifelength = _setting.PurchaseSettings.Parameters["Routine"][1];
+			lifelengthViewerDeadlineAOG.Lifelength = _setting.GlobalSetting.PurchaseSettings.Parameters["AOG"][0];
+			lifelengthViewerNotifyAOG.Lifelength = _setting.GlobalSetting.PurchaseSettings.Parameters["AOG"][1];
+			lifelengthViewerDeadlineUrgent.Lifelength = _setting.GlobalSetting.PurchaseSettings.Parameters["Urgent"][0];
+			lifelengthViewerNotifyUrgent.Lifelength = _setting.GlobalSetting.PurchaseSettings.Parameters["Urgent"][1];
+			lifelengthViewerDeadlineRoutine.Lifelength = _setting.GlobalSetting.PurchaseSettings.Parameters["Routine"][0];
+			lifelengthViewerNotifyRoutine.Lifelength = _setting.GlobalSetting.PurchaseSettings.Parameters["Routine"][1];
 		}
 
 		private void DoWork()
@@ -45,15 +45,19 @@ namespace CAS.UI.UIControls.Users
 			if(_setting == null)
 				_setting = new Settings
 				{
-					PurchaseSettings = new PurchaseSetting
+					GlobalSetting = new GlobalSetting()
 					{
-						Parameters = new Dictionary<string, List<Lifelength>>
+						PurchaseSettings = new PurchaseSetting
 						{
-							["AOG"] = new List<Lifelength>{ Lifelength.Null , Lifelength.Null },
-							["Urgent"] = new List<Lifelength> { Lifelength.Null, Lifelength.Null },
-							["Routine"] = new List<Lifelength> { Lifelength.Null, Lifelength.Null },
+							Parameters = new Dictionary<string, List<Lifelength>>
+							{
+								["AOG"] = new List<Lifelength> { Lifelength.Null, Lifelength.Null },
+								["Urgent"] = new List<Lifelength> { Lifelength.Null, Lifelength.Null },
+								["Routine"] = new List<Lifelength> { Lifelength.Null, Lifelength.Null },
+							}
 						}
 					}
+					
 				};
 		}
 
@@ -61,12 +65,12 @@ namespace CAS.UI.UIControls.Users
 
 		private void buttonOk_Click(object sender, EventArgs e)
 		{
-			_setting.PurchaseSettings.Parameters["AOG"][0] = lifelengthViewerDeadlineAOG.Lifelength;
-			_setting.PurchaseSettings.Parameters["AOG"][1] = lifelengthViewerNotifyAOG.Lifelength;
-			_setting.PurchaseSettings.Parameters["Urgent"][0] = lifelengthViewerDeadlineUrgent.Lifelength;
-			 _setting.PurchaseSettings.Parameters["Urgent"][1] = lifelengthViewerNotifyUrgent.Lifelength;
-			 _setting.PurchaseSettings.Parameters["Routine"][0] = lifelengthViewerDeadlineRoutine.Lifelength;
-			 _setting.PurchaseSettings.Parameters["Routine"][1] = lifelengthViewerNotifyRoutine.Lifelength;
+			_setting.GlobalSetting.PurchaseSettings.Parameters["AOG"][0] = lifelengthViewerDeadlineAOG.Lifelength;
+			_setting.GlobalSetting.PurchaseSettings.Parameters["AOG"][1] = lifelengthViewerNotifyAOG.Lifelength;
+			_setting.GlobalSetting.PurchaseSettings.Parameters["Urgent"][0] = lifelengthViewerDeadlineUrgent.Lifelength;
+			 _setting.GlobalSetting.PurchaseSettings.Parameters["Urgent"][1] = lifelengthViewerNotifyUrgent.Lifelength;
+			 _setting.GlobalSetting.PurchaseSettings.Parameters["Routine"][0] = lifelengthViewerDeadlineRoutine.Lifelength;
+			 _setting.GlobalSetting.PurchaseSettings.Parameters["Routine"][1] = lifelengthViewerNotifyRoutine.Lifelength;
 
 			GlobalObjects.CasEnvironment.NewKeeper.Save(_setting);
 
