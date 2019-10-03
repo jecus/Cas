@@ -21,6 +21,7 @@ using CAS.UI.UIControls.MonthlyUtilizationsControls;
 using CAS.UI.UIControls.PersonnelControls;
 using CAS.UI.UIControls.PurchaseControls;
 using CAS.UI.UIControls.PurchaseControls.AllOrders;
+using CAS.UI.UIControls.PurchaseControls.Quatation;
 using CAS.UI.UIControls.QualityAssuranceControls;
 using CAS.UI.UIControls.Reliability;
 using CAS.UI.UIControls.ScheduleControls;
@@ -674,6 +675,13 @@ namespace CAS.UI.UIControls.OpepatorsControls
 		private void Purchase_DisplayerRequested(object sender, ReferenceEventArgs e)
 		{
 			var form = new PurchaseSettingForm();
+			form.ShowDialog();
+			e.Cancel = true;
+		}
+
+		private void QuotationSupp_DisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			var form = new QuotationSupplierForAllForm();
 			form.ShowDialog();
 			e.Cancel = true;
 		}

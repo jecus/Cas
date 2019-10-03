@@ -89,6 +89,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.documentControl8 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.documentControl9 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.documentControl10 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
+			this.comboBox1 = new System.Windows.Forms.ComboBox();
+			this.buttonAddSupplierForAll = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.groupBox2.SuspendLayout();
@@ -257,10 +259,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.numericUpDownQuantity.DecimalPlaces = 2;
 			this.numericUpDownQuantity.Location = new System.Drawing.Point(118, 192);
 			this.numericUpDownQuantity.Maximum = new decimal(new int[] {
-			1000000,
-			0,
-			0,
-			0});
+            1000000,
+            0,
+            0,
+            0});
 			this.numericUpDownQuantity.Name = "numericUpDownQuantity";
 			this.numericUpDownQuantity.Size = new System.Drawing.Size(167, 20);
 			this.numericUpDownQuantity.TabIndex = 142;
@@ -884,11 +886,37 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.documentControl10.Size = new System.Drawing.Size(268, 41);
 			this.documentControl10.TabIndex = 315;
 			// 
+			// comboBox1
+			// 
+			this.comboBox1.Enabled = false;
+			this.comboBox1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.comboBox1.FormattingEnabled = true;
+			this.comboBox1.ItemHeight = 17;
+			this.comboBox1.Location = new System.Drawing.Point(23, 710);
+			this.comboBox1.Name = "comboBox1";
+			this.comboBox1.Size = new System.Drawing.Size(233, 25);
+			this.comboBox1.TabIndex = 316;
+			// 
+			// buttonAddSupplierForAll
+			// 
+			this.buttonAddSupplierForAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonAddSupplierForAll.Enabled = false;
+			this.buttonAddSupplierForAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonAddSupplierForAll.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonAddSupplierForAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.buttonAddSupplierForAll.Location = new System.Drawing.Point(262, 705);
+			this.buttonAddSupplierForAll.Name = "buttonAddSupplierForAll";
+			this.buttonAddSupplierForAll.Size = new System.Drawing.Size(160, 33);
+			this.buttonAddSupplierForAll.TabIndex = 317;
+			this.buttonAddSupplierForAll.Text = "Add Supplier For All";
+			// 
 			// QuatationOrderFormNew
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1288, 752);
+			this.Controls.Add(this.buttonAddSupplierForAll);
+			this.Controls.Add(this.comboBox1);
 			this.Controls.Add(this.documentControl10);
 			this.Controls.Add(this.documentControl9);
 			this.Controls.Add(this.documentControl8);
@@ -909,7 +937,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.MinimizeBox = false;
 			this.Name = "QuatationOrderFormNew";
 			this.Resizable = false;
-			this.Text = "Quatation Order Form";
+			this.Text = "Quotation Order Form";
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).EndInit();
@@ -975,5 +1003,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private DocumentationControls.DocumentControl documentControl8;
 		private DocumentationControls.DocumentControl documentControl9;
 		private DocumentationControls.DocumentControl documentControl10;
+		private System.Windows.Forms.ComboBox comboBox1;
+		private System.Windows.Forms.Button buttonAddSupplierForAll;
 	}
 }

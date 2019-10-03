@@ -45,6 +45,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.Users = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.Activity = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.Purchase = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+			this.QuotationSupp = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.ExportATLB = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel(true);
 			this.LinkRecords = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkInternalDocuments = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -308,7 +309,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this._settingContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this._settingContainer.Name = "_settingContainer";
 			this._settingContainer.ReferenceLink = this.Purchase;
-			this._settingContainer.ReferenceLink02 = null;
+			this._settingContainer.ReferenceLink02 = this.QuotationSupp;
 			this._settingContainer.ReferenceLink03 = null;
 			this._settingContainer.ReferenceLink04 = null;
 			this._settingContainer.ReferenceLink05 = null;
@@ -376,7 +377,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.Activity.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.Activity.DisplayerRequested += Activity_DisplayerRequested;
 			// 
-			// Activity
+			// Purchase
 			// 
 			this.Purchase.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
 			this.Purchase.Displayer = null;
@@ -399,6 +400,30 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.Purchase.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.Purchase.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.Purchase.DisplayerRequested += Purchase_DisplayerRequested;
+			// 
+			// QuotationSupp
+			// 
+			this.QuotationSupp.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.QuotationSupp.Displayer = null;
+			this.QuotationSupp.DisplayerText = null;
+			this.QuotationSupp.Entity = null;
+			this.QuotationSupp.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.QuotationSupp.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.QuotationSupp.ImageBackColor = System.Drawing.Color.Transparent;
+			this.QuotationSupp.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.QuotationSupp.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.QuotationSupp.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.QuotationSupp.Location = new System.Drawing.Point(10, 0);
+			this.QuotationSupp.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.QuotationSupp.Name = "QuotationSupp";
+			this.QuotationSupp.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.QuotationSupp.Size = new System.Drawing.Size(188, 20);
+			this.QuotationSupp.Status = AvControls.Statuses.Satisfactory;
+			this.QuotationSupp.TabIndex = 2;
+			this.QuotationSupp.Text = "Quotation Supplier";
+			this.QuotationSupp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.QuotationSupp.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.QuotationSupp.DisplayerRequested += QuotationSupp_DisplayerRequested;
 			// 
 			// Users
 			// 
@@ -2522,6 +2547,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel ExportATLB;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel Activity;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel Purchase;
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel QuotationSupp;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRecords;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkInternalDocuments;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkNomenclatures;
