@@ -59,14 +59,14 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			if (item?.ParentInitialRecord != null)
 			 temp += $" | Q-ty:{item?.ParentInitialRecord?.Quantity} | Reason: {item?.ParentInitialRecord?.InitialReason} | Destination: {destiantion} | Priority: {item?.ParentInitialRecord?.Priority}";
 
-			var total = item.Quantity * item.Cost;
+			double total = item.Quantity * item.Cost;
 
 			return new List<CustomCell>()
 			{
 				CreateRow(item.Supplier.ToString(),item.Supplier),
 				CreateRow(item.Quantity.ToString(),item.Quantity),
 				CreateRow(item.Cost.ToString(),item.Cost),
-				CreateRow(total.ToString($"{total:0.##}"), total),
+				CreateRow(total.ToString($"{total}"), total),
 				CreateRow(item.CostCondition.ToString(),item.CostCondition),
 				CreateRow(item.Measure.ToString(),item.Measure),
 				CreateRow(temp,temp),
