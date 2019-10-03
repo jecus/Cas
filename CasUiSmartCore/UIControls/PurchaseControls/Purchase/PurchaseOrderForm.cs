@@ -301,7 +301,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			comboBoxMeasure.SelectedItem = purchaseRecordListView1.SelectedItem.Measure;
 			numericUpDownQuantity.Value = (decimal)purchaseRecordListView1.SelectedItem.Quantity;
 			numericUpDownCost.Value = (decimal)purchaseRecordListView1.SelectedItem.Cost;
-
+			comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Currency;
 			comboBoxIncoTerm.SelectedItem = purchaseRecordListView1.SelectedItem.IncoTerm;
 			comboBoxDesignation.SelectedItem = purchaseRecordListView1.SelectedItem.Designation;
 			comboBoxPayTerm.SelectedItem = purchaseRecordListView1.SelectedItem.PayTerm;
@@ -310,6 +310,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			textBoxNettoWeight.Text = purchaseRecordListView1.SelectedItem.NettoWeight;
 			textBoxShipTo.Text = purchaseRecordListView1.SelectedItem.ShipTo;
 			comboBoxShipComp.SelectedItem = _supplierShipper.FirstOrDefault(i => i.ItemId == purchaseRecordListView1.SelectedItem.ShipCompanyId) ?? Supplier.Unknown;
+
+			SetForMeasure();
 		}
 		#endregion
 

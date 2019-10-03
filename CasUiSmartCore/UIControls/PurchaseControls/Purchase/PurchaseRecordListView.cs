@@ -65,8 +65,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			{
 				CreateRow(item.Supplier.ToString(),item.Supplier),
 				CreateRow(item.Quantity.ToString(),item.Quantity),
-				CreateRow(item.Cost.ToString(),item.Cost),
-				CreateRow(total.ToString($"{total}"), total),
+				CreateRow($"{item.Cost} {item.Currency}",item.Cost),
+				CreateRow($"{total:0.##} {item.Currency}", total),
 				CreateRow(item.CostCondition.ToString(),item.CostCondition),
 				CreateRow(item.Measure.ToString(),item.Measure),
 				CreateRow(temp,temp),
