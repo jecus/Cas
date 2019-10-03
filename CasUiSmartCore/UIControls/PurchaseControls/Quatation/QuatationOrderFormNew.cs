@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.DocumentationControls;
 using CAS.UI.UIControls.PurchaseControls.Quatation;
 using CASTerms;
 using EntityCore.DTO.Dictionaries;
@@ -43,6 +44,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private ToolStripMenuItem _toolStripMenuItemAddSuppliers;
 		private ToolStripMenuItem _toolStripMenuItemAddSuppliersAll;
 		private List<Supplier> _suppliers = new List<Supplier>();
+		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
 
 		#endregion
 
@@ -75,6 +77,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			}
 
 			_order = order;
+
+			DocumentControls.AddRange(new[] { documentControl1, documentControl2, documentControl3, documentControl4, documentControl5, documentControl6, documentControl7, documentControl8, documentControl9, documentControl10 });
 
 			_collectionFilter.Filters.Add(_partNumberFilter);
 			_collectionFilter.Filters.Add(_standartFilter);
@@ -143,6 +147,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				}
 			}
 
+			var documents = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DocumentDTO, Document>(new Filter("ParentID", _order.ItemId), true);
+			_order.ClosingDocument.Clear();
+			_order.ClosingDocument.AddRange(documents);
+
 			_defferedCategories.Clear();
 			_defferedCategories.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DefferedCategorieDTO, DeferredCategory>(loadChild: true));
 
@@ -171,7 +179,44 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			comboBoxReason.Items.Clear();
 			comboBoxReason.Items.AddRange(InitialReason.Items.ToArray());
-			
+
+			foreach (var control in DocumentControls)
+				control.Added += DocumentControl1_Added;
+
+			for (int i = 0; i < _order.ClosingDocument.Count; i++)
+			{
+				var control = DocumentControls[i];
+				control.CurrentDocument = _order.ClosingDocument[i];
+			}
+		}
+
+		#endregion
+
+		#region private void DocumentControl1_Added(object sender, EventArgs e)
+
+		private void DocumentControl1_Added(object sender, EventArgs e)
+		{
+			var control = sender as DocumentControl;
+			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Work package") as DocumentSubType;
+			var newDocument = new Document
+			{
+				Parent = _order,
+				ParentId = _order.ItemId,
+				ParentTypeId = _order.SmartCoreObjectType.ItemId,
+				DocType = DocumentType.TechnicalRecords,
+				DocumentSubType = docSubType,
+				IsClosed = true,
+				ContractNumber = $"{_order.Number}",
+				Description = _order.Title,
+				ParentAircraftId = _order.ParentId
+			};
+
+			var form = new DocumentForm(newDocument, false);
+			if (form.ShowDialog() == DialogResult.OK)
+			{
+				_order.ClosingDocument.Add(newDocument);
+				control.CurrentDocument = newDocument;
+			}
 		}
 
 		#endregion
