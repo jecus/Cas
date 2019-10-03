@@ -38,6 +38,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.buttonOk = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.button2 = new System.Windows.Forms.Button();
 			this.textBox1 = new MetroFramework.Controls.MetroTextBox();
 			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
 			this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -45,9 +46,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.button1 = new System.Windows.Forms.Button();
 			this.labelSearchName = new MetroFramework.Controls.MetroLabel();
 			this.textBoxSearchName = new MetroFramework.Controls.MetroTextBox();
-			this.button2 = new System.Windows.Forms.Button();
 			this.supplierListView1 = new CAS.UI.UIControls.SupplierControls.SupplierPriceListView();
 			this.supplierListView = new CAS.UI.UIControls.SupplierControls.SupplierListView();
+			this.button3 = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -137,6 +138,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.button3);
 			this.groupBox1.Controls.Add(this.button2);
 			this.groupBox1.Controls.Add(this.textBox1);
 			this.groupBox1.Controls.Add(this.metroLabel2);
@@ -148,6 +150,19 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.groupBox1.Size = new System.Drawing.Size(301, 120);
 			this.groupBox1.TabIndex = 296;
 			this.groupBox1.TabStop = false;
+			// 
+			// button2
+			// 
+			this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.button2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.button2.Location = new System.Drawing.Point(220, 74);
+			this.button2.Name = "button2";
+			this.button2.Size = new System.Drawing.Size(75, 33);
+			this.button2.TabIndex = 302;
+			this.button2.Text = "Remove";
+			this.button2.Click += new System.EventHandler(this.button2_Click);
 			// 
 			// textBox1
 			// 
@@ -268,19 +283,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.textBoxSearchName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			this.textBoxSearchName.TextChanged += new System.EventHandler(this.textBoxSearchPartNumber_TextChanged);
 			// 
-			// button2
-			// 
-			this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.button2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button2.Location = new System.Drawing.Point(220, 74);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(75, 33);
-			this.button2.TabIndex = 302;
-			this.button2.Text = "Remove";
-			this.button2.Click += new System.EventHandler(this.button2_Click);
-			// 
 			// supplierListView1
 			// 
 			this.supplierListView1.Displayer = null;
@@ -310,6 +312,19 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.supplierListView.Size = new System.Drawing.Size(657, 237);
 			this.supplierListView.SortMultiplier = 0;
 			this.supplierListView.TabIndex = 69;
+			// 
+			// button3
+			// 
+			this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.button3.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.button3.Location = new System.Drawing.Point(58, 74);
+			this.button3.Name = "button3";
+			this.button3.Size = new System.Drawing.Size(75, 33);
+			this.button3.TabIndex = 303;
+			this.button3.Text = "Add";
+			this.button3.Click += new System.EventHandler(this.button3_Click);
 			// 
 			// QuotationSupplierForAllForm
 			// 
@@ -353,5 +368,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		private MetroFramework.Controls.MetroLabel metroLabel2;
 		private MetroFramework.Controls.MetroTextBox textBox1;
 		private System.Windows.Forms.Button button2;
+		private System.Windows.Forms.Button button3;
 	}
 }

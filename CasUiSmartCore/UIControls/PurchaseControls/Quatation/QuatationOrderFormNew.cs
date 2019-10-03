@@ -19,6 +19,7 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
+using SmartCore.Entities.General.Setting;
 using SmartCore.Filters;
 using SmartCore.Purchase;
 using SmartCore.Queries;
@@ -45,6 +46,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private ToolStripMenuItem _toolStripMenuItemAddSuppliersAll;
 		private List<Supplier> _suppliers = new List<Supplier>();
 		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
+		private Settings _setting;
 
 		#endregion
 
@@ -118,6 +120,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), true);
 				var supplierId = _addedQuatationOrderRecords.SelectMany(i => i.SupplierPrice).Select(i => i.SupplierId);
 				var suppliers = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<SupplierDTO, Supplier>(new Filter("ItemId",supplierId));
+				_setting = GlobalObjects.CasEnvironment.NewLoader.GetObject<SettingDTO, Settings>();
+
+				if(_setting == null)
+					_setting = new Settings();
 
 				if (ids.Count() > 0)
 				{
@@ -167,6 +173,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void UpdateControls()
 		{
+			comboBox1.Items.Clear();
+			comboBox1.Items.AddRange(_setting.GlobalSetting.QuotationSupplierSetting.Parameters.Select(i => i.Key).ToArray());
+
 			comboBoxMeasure.Items.Clear();
 			//comboBoxMeasure.Items.AddRange(Measure.GetByCategories(new[] { MeasureCategory.Mass, MeasureCategory.EconomicEntity }));
 			comboBoxMeasure.Items.AddRange(Measure.Items.ToArray());
@@ -648,5 +657,29 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			return res;
 		}
 
+		private void buttonAddSupplierForAll_Click(object sender, EventArgs e)
+		{
+			if(comboBox1.SelectedItem == null)
+				return;
+
+			if(listViewInitialItems.ItemsCount == 0)
+				return;
+
+			var ids = _setting.GlobalSetting.QuotationSupplierSetting.Parameters[comboBox1.SelectedItem.ToString()];
+			var s = _suppliers.Where(i => ids.Contains(i.ItemId));
+
+			foreach (var record in listViewInitialItems.SelectedItems.Cast<RequestForQuotationRecord>())
+			{
+				var res = s.Select(i => new SupplierPrice() {SupplierId = i.ItemId, Supplier = i});
+
+				foreach (var supplierPrice in res)
+				{
+					if(record.SupplierPrice.FirstOrDefault(i => i.SupplierId == supplierPrice.SupplierId) == null)
+						record.SupplierPrice.Add(supplierPrice);
+				}
+				
+			}
+			listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
+		}
 	}
 }

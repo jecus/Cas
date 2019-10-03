@@ -99,23 +99,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 				return;
 			}
 
-			if (string.IsNullOrEmpty(textBox1.Text))
-			{
-				MessageBox.Show("Please input setting name!", (string)new GlobalTermsProvider()["SystemName"],
-					MessageBoxButtons.OK,
-					MessageBoxIcon.Exclamation);
-				return;
-			}
-
-			if (_settings.GlobalSetting.QuotationSupplierSetting.Parameters.ContainsKey(textBox1.Text))
-			{
-				MessageBox.Show($"Setting with Name:{textBox1.Text} alredy exist!", (string)new GlobalTermsProvider()["SystemName"],
-					MessageBoxButtons.OK,
-					MessageBoxIcon.Exclamation);
-				return;
-			}
-
-			_settings.GlobalSetting.QuotationSupplierSetting.Parameters.Add(textBox1.Text, _prices.Select(i => i.SupplierId).ToList());
+			var res = _settings.GlobalSetting.QuotationSupplierSetting.Parameters[textBox1.Text];
+			res.Clear();
+			res.AddRange(_prices.Select(i => i.SupplierId).ToList());
+			
 			UpdateControls();
 			textBox1.Text = "";
 			supplierListView1.radGridView1.Rows.Clear();
@@ -145,13 +132,17 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			if(comboBox1.SelectedItem == null)
 				return;
 
+			textBox1.Text = comboBox1.SelectedItem.ToString();
 			supplierListView1.radGridView1.Rows.Clear();
 
 			var ids = _settings.GlobalSetting.QuotationSupplierSetting.Parameters[comboBox1.SelectedItem.ToString()];
-			supplierListView1.SetItemsArray(_suppliers
+			var price = _suppliers
 				.Where(i => ids.Contains(i.ItemId))
-				.Select(supplier => new SupplierPrice{SupplierId = supplier.ItemId, Supplier = supplier})
-				.ToArray());
+				.Select(supplier => new SupplierPrice {SupplierId = supplier.ItemId, Supplier = supplier})
+				.ToArray();
+			supplierListView1.SetItemsArray(price);
+			_prices.Clear();
+			_prices.AddRange(price);
 		}
 
 		private void button2_Click(object sender, System.EventArgs e)
@@ -162,6 +153,28 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			_settings.GlobalSetting.QuotationSupplierSetting.Parameters.Remove(comboBox1.SelectedItem.ToString());
 			UpdateControls();
 
+		}
+
+		private void button3_Click(object sender, System.EventArgs e)
+		{
+			if (string.IsNullOrEmpty(textBox1.Text))
+			{
+				MessageBox.Show("Please input setting name!", (string)new GlobalTermsProvider()["SystemName"],
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Exclamation);
+				return;
+			}
+
+			if (_settings.GlobalSetting.QuotationSupplierSetting.Parameters.ContainsKey(textBox1.Text))
+			{
+				MessageBox.Show($"Setting with Name:{textBox1.Text} alredy exist!", (string)new GlobalTermsProvider()["SystemName"],
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Exclamation);
+				return;
+			}
+
+			_settings.GlobalSetting.QuotationSupplierSetting.Parameters.Add(textBox1.Text, new List<int>());
+			comboBox1.SelectedItem = _settings.GlobalSetting.QuotationSupplierSetting.Parameters[textBox1.Text];
 		}
 	}
 }

@@ -888,7 +888,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// comboBox1
 			// 
-			this.comboBox1.Enabled = false;
 			this.comboBox1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.comboBox1.FormattingEnabled = true;
 			this.comboBox1.ItemHeight = 17;
@@ -900,7 +899,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// buttonAddSupplierForAll
 			// 
 			this.buttonAddSupplierForAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonAddSupplierForAll.Enabled = false;
 			this.buttonAddSupplierForAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonAddSupplierForAll.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonAddSupplierForAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
@@ -909,6 +907,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.buttonAddSupplierForAll.Size = new System.Drawing.Size(160, 33);
 			this.buttonAddSupplierForAll.TabIndex = 317;
 			this.buttonAddSupplierForAll.Text = "Add Supplier For All";
+			this.buttonAddSupplierForAll.Click += new System.EventHandler(this.buttonAddSupplierForAll_Click);
 			// 
 			// QuatationOrderFormNew
 			// 
