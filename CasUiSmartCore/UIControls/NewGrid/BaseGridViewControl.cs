@@ -278,8 +278,6 @@ namespace CAS.UI.UIControls.NewGrid
 				SetTotalText();
 				GroupingItems();
 				SortingItems();
-				if(radGridView1.Rows.Count > 0)
-					radGridView1.CurrentRow = radGridView1.Rows[0];
 
 				radGridView1.MasterTemplate.ExpandAllGroups();
 
