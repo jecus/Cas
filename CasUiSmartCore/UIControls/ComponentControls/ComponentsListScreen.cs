@@ -1676,7 +1676,15 @@ namespace CAS.UI.UIControls.ComponentControls
 				{
 					_directivesViewer.radGridView1.BeginUpdate();
 					GlobalObjects.CasEnvironment.NewKeeper.Delete(_directivesViewer.SelectedItems.Where(i => i is Component).OfType<BaseEntityObject>().ToList(), true);
-					GlobalObjects.CasEnvironment.NewKeeper.Delete(_directivesViewer.SelectedItems.Where(i => i is ComponentDirective).OfType<BaseEntityObject>().ToList(), true);
+					foreach (var baseEntityObject in _directivesViewer.SelectedItems.Where(i => i is ComponentDirective).Cast<ComponentDirective>())
+					{
+						GlobalObjects.CasEnvironment.NewKeeper.Delete(baseEntityObject, true);
+						foreach (var relation in baseEntityObject.ItemRelations)
+						{
+							GlobalObjects.CasEnvironment.NewKeeper.Delete(relation, true);
+						}
+					}
+
 					_directivesViewer.radGridView1.EndUpdate();
 
 					AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
