@@ -1,22 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
 using SmartCore.Entities;
+using SmartCore.Entities.Collections;
+using SmartCore.Entities.General.Personnel;
 
 namespace CAS.UI.UIControls.Users
 {
-    ///<summary>
-    /// список для отображения документов
-    ///</summary>
-    public partial class UserListView : BaseGridViewControl<User>
-    {
+	///<summary>
+	/// список для отображения документов
+	///</summary>
+	public partial class UserListView : BaseGridViewControl<User>
+	{
 		#region public UserListView()
 		public UserListView()
 		{
 			SortMultiplier = 1;
 			InitializeComponent();
-        }
+		}
+
+		public CommonCollection<Specialist> Specialists { get; set; }
+		public AnimatedThreadWorker AnimatedThreadWorker { get; set; }
+
 		#endregion
 
 		#region Methods
@@ -38,6 +45,7 @@ namespace CAS.UI.UIControls.Users
 				CreateRow(userName,userName),
 				CreateRow(item.Login,item.Login),
 				CreateRow(item.Password,item.Password),
+				CreateRow(item.Personnel.ToString(),item.Personnel),
 				CreateRow(item.UserType.ToString(),item.UserType),
 				CreateRow(item.UiType.ToString(),item.UiType),
 			};
@@ -56,6 +64,7 @@ namespace CAS.UI.UIControls.Users
 			AddColumn("UserName", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Login", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Password", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Personnel", (int)(radGridView1.Width * 0.20f));
 			AddColumn("User Type", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Ui Type", (int)(radGridView1.Width * 0.20f));
 		}
@@ -64,18 +73,20 @@ namespace CAS.UI.UIControls.Users
 		#region protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
 		protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
 		{
-            if (SelectedItem != null)
-            {
-				var form = new UserForm(SelectedItem);
+			if (SelectedItem != null)
+			{
+				var form = new UserForm(SelectedItem, Specialists);
 				if (form.ShowDialog() == DialogResult.OK)
 				{
 					var subs = GetListViewSubItems(SelectedItem);
 					for (int i = 0; i < subs.Count; i++)
 						radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
+
+					AnimatedThreadWorker.RunWorkerAsync();
 				}
-            }
-        }
-        #endregion
+			}
+		}
+		#endregion
 
 		#endregion
 	}

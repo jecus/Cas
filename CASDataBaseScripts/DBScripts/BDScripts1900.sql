@@ -111,3 +111,14 @@ if not exists ( select  *
 	alter table dbo.ComponentDirectives
 	add IsExpiry bit not null DEFAULT 0
 go
+
+-----------------------------------------------------------------------------------------
+
+if not exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('dbo.Users')
+					and c.name = 'PersonnelId' ) 
+
+	alter table dbo.Users
+	add PersonnelId int not null default -1
+GO

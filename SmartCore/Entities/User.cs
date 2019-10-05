@@ -2,6 +2,7 @@
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
+using SmartCore.Entities.General.Personnel;
 
 namespace SmartCore.Entities
 {
@@ -25,6 +26,11 @@ namespace SmartCore.Entities
 		[Filter("UiType:")]
 		public UiType UiType { get; set; }
 
+		public int PersonnelId { get; set; }
+
+		[Filter("Personnel:")]
+		public Specialist Personnel { get; set; }
+
 		public User(IIdentityUser user)
 		{
 			ItemId = user.ItemId;
@@ -35,6 +41,7 @@ namespace SmartCore.Entities
 			Password = user.Password;
 			UserType = user.UserType;
 			UiType = user.UiType;
+			PersonnelId = user.PersonnelId;
 		}
 
 		public User()

@@ -7,9 +7,11 @@ using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
+using EntityCore.DTO.General;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Personnel;
 using SmartCore.Filters;
 
 namespace CAS.UI.UIControls.Users
@@ -22,6 +24,7 @@ namespace CAS.UI.UIControls.Users
 		#region Fields
 
 		private CommonCollection<User> _initial = new CommonCollection<User>();
+		private CommonCollection<Specialist> _specialists = new CommonCollection<Specialist>();
 		private CommonCollection<User> _result = new CommonCollection<User>();
 		private UserListView _directivesViewer;
 
@@ -78,6 +81,7 @@ namespace CAS.UI.UIControls.Users
 		protected override async void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
 		{
 			_initial.Clear();
+			_specialists.Clear();
 			_result.Clear();
 
 			AnimatedThreadWorker.ReportProgress(0, "load documents");
@@ -86,6 +90,13 @@ namespace CAS.UI.UIControls.Users
 			{
 				var userDto = GlobalObjects.CasEnvironment.ApiProvider.GetAllUsersAsync();
 				_initial.AddRange(userDto.Select(i => new User(i)));
+
+				_specialists.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<SpecialistDTO, Specialist>());
+				foreach (var user in _initial)
+				{
+					user.Personnel = _specialists.FirstOrDefault(i => i.ItemId == user.PersonnelId) ??
+					                 Specialist.Unknown;
+				}
 			}
 			catch(Exception ex)
 			{
@@ -112,7 +123,8 @@ namespace CAS.UI.UIControls.Users
 				Dock = DockStyle.Fill,
 				//IgnoreAutoResize = true
 			};
-
+			_directivesViewer.Specialists = _specialists;
+			_directivesViewer.AnimatedThreadWorker = AnimatedThreadWorker;
 			panel1.Controls.Add(_directivesViewer);
 		}
 
@@ -121,7 +133,7 @@ namespace CAS.UI.UIControls.Users
 		#region private void ButtonAddNonRoutineJobClick(object sender, EventArgs e)
 		private void ButtonAddNonRoutineJobClick(object sender, EventArgs e)
 		{
-			var form = new UserForm(new User());
+			var form = new UserForm(new User(), _specialists);
 
 			if (form.ShowDialog() == DialogResult.OK)
 			{

@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
+using EntityCore.DTO;
 using EntityCore.DTO.General;
 using MetroFramework.Forms;
 using SmartCore.Entities;
+using SmartCore.Entities.Collections;
+using SmartCore.Entities.General;
+using SmartCore.Entities.General.Personnel;
 
 namespace CAS.UI.UIControls.Users
 {
@@ -12,6 +17,7 @@ namespace CAS.UI.UIControls.Users
 		#region Fields
 
 		private User _user;
+		private readonly CommonCollection<Specialist> _specialists;
 
 		#endregion
 
@@ -22,10 +28,11 @@ namespace CAS.UI.UIControls.Users
 			InitializeComponent();
 		}
 
-		public UserForm(User user)
+		public UserForm(User user, CommonCollection<Specialist> specialists)
 		{
 			InitializeComponent();
 			_user = user;
+			_specialists = specialists;
 			UpdateInformation();
 		}
 
@@ -45,6 +52,10 @@ namespace CAS.UI.UIControls.Users
 
 			metroComboBoxUiType.DataSource = Enum.GetValues(typeof(UiType));
 			metroComboBoxUiType.SelectedItem = _user.UiType;
+
+			metroComboBoxPersonnel.Items.AddRange(_specialists.OrderBy(i => i.LastName).ToArray());
+			metroComboBoxPersonnel.Items.Add(Specialist.Unknown);
+			metroComboBoxPersonnel.SelectedItem = _user.Personnel;
 		}
 
 		#endregion
@@ -59,6 +70,7 @@ namespace CAS.UI.UIControls.Users
 			_user.Password = textBoxPassword.Text;
 			_user.UserType = (UsetType)metroComboBox1.SelectedItem;
 			_user.UiType = (UiType)metroComboBoxUiType.SelectedItem;
+			_user.PersonnelId = ((BaseEntityObject) metroComboBoxPersonnel.SelectedItem).ItemId;
 		}
 
 		#endregion
@@ -110,7 +122,8 @@ namespace CAS.UI.UIControls.Users
 					Surname = _user.Surname,
 					Name = _user.Name,
 					UserType = _user.UserType,
-					UiType = _user.UiType
+					UiType = _user.UiType,
+					PersonnelId = _user.PersonnelId
 				}); 
 				DialogResult = DialogResult.OK;
 				Close();

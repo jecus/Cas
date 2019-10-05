@@ -47,6 +47,9 @@ namespace EntityCore.DTO.General
 		[Column("UiType")]
 		public UiType UiType { get; set; }
 
+		[Column("PersonnelId")]
+		public int PersonnelId { get; set; }
+
 		public override string ToString()
 		{
 			return Name.Equals(Surname) ? Name : $"{Surname} {Name}";
@@ -61,6 +64,6 @@ namespace EntityCore.DTO.General
 		string Password { get; set; }
 		UsetType UserType { get; set; }
 		UiType UiType { get; set; }
-
+		int PersonnelId { get; set; }
 	}
 }
