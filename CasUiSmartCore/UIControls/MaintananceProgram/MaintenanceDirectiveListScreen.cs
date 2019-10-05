@@ -827,6 +827,13 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			{
 				_directivesViewer.radGridView1.BeginUpdate();
 				GlobalObjects.CasEnvironment.NewKeeper.Delete(directives.OfType<BaseEntityObject>().ToList(), true);
+				foreach (var directive in directives)
+				{
+					foreach (var relation in directive.ItemRelations)
+					{
+						GlobalObjects.CasEnvironment.NewKeeper.Delete(relation, true);
+					}
+				}
 				_directivesViewer.radGridView1.EndUpdate();
 
 				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;

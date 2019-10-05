@@ -130,10 +130,9 @@ namespace CAS.UI.UIControls.MaintananceProgram
             try
             {
                 dc = GlobalObjects.ComponentCore.GetComponents(_currentAircraft.ItemId);
-
                 //Определение списка привязанных задач и компонентов
 
-                List<ComponentDirective> bindedDirectives = 
+				List<ComponentDirective> bindedDirectives = 
                     dc.SelectMany(d => d.ComponentDirectives.Where(dd => dd.ItemRelations.IsAnyRelationWith(_maintenanceDirective)))
 					  .ToList();
 
