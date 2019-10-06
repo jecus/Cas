@@ -54,6 +54,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		{
 			comboBox1.Items.Clear();
 			comboBox1.Items.AddRange(_settings.GlobalSetting.QuotationSupplierSetting.Parameters.Select(i => i.Key).ToArray());
+			comboBox1.SelectedItem = null;
+			comboBox1.Text = "";
 		}
 
 		private void ButtonAdd_Click(object sender, System.EventArgs e)
@@ -152,6 +154,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 			_settings.GlobalSetting.QuotationSupplierSetting.Parameters.Remove(comboBox1.SelectedItem.ToString());
 			UpdateControls();
+			supplierListView1.radGridView1.Rows.Clear();
 
 		}
 
@@ -174,7 +177,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			}
 
 			_settings.GlobalSetting.QuotationSupplierSetting.Parameters.Add(textBox1.Text, new List<int>());
-			comboBox1.SelectedItem = _settings.GlobalSetting.QuotationSupplierSetting.Parameters[textBox1.Text];
+			UpdateControls();
+			comboBox1.SelectedItem = textBox1.Text;
+			
 		}
 	}
 }
