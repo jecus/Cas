@@ -470,6 +470,12 @@ namespace SmartCore.Purchase
 			ÑurrencyOH = Ñurrency.USD;
 			ÑurrencyRepair = Ñurrency.USD;
 		}
+
+		[JsonIgnore]
+		public bool IsLowest { get; set; }
+		[JsonIgnore]
+		public bool IsHighest { get; set; }
+
 		[JsonIgnore]
 		public Supplier Supplier { get; set; }
 

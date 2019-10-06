@@ -97,6 +97,17 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 					price.Supplier = suppliers.FirstOrDefault(i => i.ItemId == price.SupplierId);
 					price.Parent = record;
 				}
+
+				if (record.SupplierPrice.Any(i => i.CostNew != record?.SupplierPrice?.FirstOrDefault()?.CostNew))
+				{
+					var lowest = record.SupplierPrice.OrderBy(i => i.CostNew).FirstOrDefault();
+					if(lowest != null)
+						lowest.IsLowest = true;
+					var highest = record.SupplierPrice.OrderBy(i => i.CostNew).LastOrDefault();
+					if (highest != null)
+						highest.IsHighest = true;
+				}
+				
 			}
 
 			_prices.AddRange(records.SelectMany(i => i.SupplierPrice));

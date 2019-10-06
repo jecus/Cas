@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Entities.Dictionaries;
@@ -44,13 +45,22 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			else destiantion = GlobalObjects.StoreCore.GetStoreById(item.Parent?.ParentInitialRecord?.DestinationObjectId ?? -1)?.ToString();
 
 			var temp = $"{item.Parent?.Product?.PartNumber} | Q-ty:{item.Parent?.Quantity} | Reason: {item.Parent?.ParentInitialRecord?.InitialReason} | Destination: {destiantion} | Priority: {item.Parent?.ParentInitialRecord?.Priority}";
+
+			Color? color = null;
+
+			if(item.IsHighest)
+				color = Color.Red;
+			if(item.IsLowest)
+				color= Color.Green;
+
+
 			return new List<CustomCell>()
 			{
-				CreateRow(item.Supplier.ToString(),item.Supplier),
-				CreateRow(item.CostNew.ToString(),item.CostNew),
-				CreateRow(item.CostOverhaul.ToString(),item.CostOverhaul),
-				CreateRow(item.CostServiceable.ToString(),item.CostServiceable),
-				CreateRow(item.CostRepair.ToString(),item.CostRepair),
+				CreateRow(item.Supplier.ToString(),item.Supplier, color),
+				CreateRow(item.CostNew.ToString(),item.CostNew, color),
+				CreateRow(item.CostOverhaul.ToString(),item.CostOverhaul, color),
+				CreateRow(item.CostServiceable.ToString(),item.CostServiceable, color),
+				CreateRow(item.CostRepair.ToString(),item.CostRepair, color),
 				CreateRow(temp,temp),
 			};
 		}
