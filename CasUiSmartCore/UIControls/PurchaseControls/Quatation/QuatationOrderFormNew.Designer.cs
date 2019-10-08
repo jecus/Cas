@@ -936,7 +936,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.MinimizeBox = false;
 			this.Name = "QuatationOrderFormNew";
 			this.Resizable = false;
-			this.Text = "Quotation Order Form";
+			this.Text = "Quotation Request Form";
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).EndInit();

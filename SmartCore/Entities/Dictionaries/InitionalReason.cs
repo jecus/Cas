@@ -126,8 +126,13 @@ namespace SmartCore.Entities.Dictionaries
 
 		public static InitialReason ResourceLimitation = new InitialReason(17, "Resource limitation", "Resource limitation", "");
 
-	    #endregion
+		#endregion
 
+		#region public static InitialReason MEL = new InitialReason(18, "MEL", "MEL", "");
+
+		public static InitialReason MEL = new InitialReason(18, "MEL", "MEL", "");
+
+		#endregion
 
 		#region public static InitionalReason All = new InitionalReason(-2, "All", "All", "All");
 		/// <summary> 
