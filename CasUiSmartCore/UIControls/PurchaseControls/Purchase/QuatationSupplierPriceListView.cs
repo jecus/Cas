@@ -58,17 +58,17 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 			if (item.IsHighestCostOH)
 				colorOH = Color.Red;
-			if (item.IsHighestCostOH)
+			if (item.IsLowestCostOH)
 				colorOH = Color.Green;
 
 			if (item.IsHighestCostServ)
 				colorServ = Color.Red;
-			if (item.IsHighestCostServ)
+			if (item.IsLowestCostServ)
 				colorServ = Color.Green;
 
 			if (item.IsHighestCostRepair)
 				colorRep = Color.Red;
-			if (item.IsHighestCostRepair)
+			if (item.IsLowestCostRepair)
 				colorRep = Color.Green;
 
 
