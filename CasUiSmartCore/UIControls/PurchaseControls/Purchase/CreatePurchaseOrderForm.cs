@@ -467,19 +467,20 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			{
 				//запись новой информации в запросный ордер
 				ApplyPurchaseData();
-				//сохранение запросного ордера
-				GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
-
-				foreach (var record in _addedRecord)
+				//для каждого supplier свой ордер!
+				foreach (var g in _addedRecord.GroupBy(i => i.Supplier))
 				{
-					record.ParentPackageId = _order.ItemId;
-					GlobalObjects.CasEnvironment.NewKeeper.Save(record);
-				}
+					var copy = (PurchaseOrder)_order.GetCopyUnsaved();
+					copy.Title += g.Key.ToString();
 
-				foreach (var doc in _order.ClosingDocument)
-				{
-					doc.ParentId = _order.ItemId;
-					GlobalObjects.CasEnvironment.NewKeeper.Save(doc);
+					//сохранение запросного ордера
+					GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
+
+					foreach (var record in g)
+					{
+						record.ParentPackageId = copy.ItemId;
+						GlobalObjects.CasEnvironment.NewKeeper.Save(record);
+					}
 				}
 
 				DialogResult = DialogResult.OK;
