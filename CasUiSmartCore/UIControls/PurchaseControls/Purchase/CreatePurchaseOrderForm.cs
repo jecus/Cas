@@ -459,7 +459,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 					copy.Title += g.Key.ToString();
 
 					//сохранение запросного ордера
-					GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
+					GlobalObjects.CasEnvironment.NewKeeper.Save(copy);
 
 					foreach (var record in g)
 					{
