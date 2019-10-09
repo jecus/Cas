@@ -451,8 +451,8 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 						rfq.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
 						GlobalObjects.CasEnvironment.NewKeeper.Save(rfq as BaseEntityObject);
 					}
-					AnimatedThreadWorker.RunWorkerAsync();
 				}
+				AnimatedThreadWorker.RunWorkerAsync();
 			}
 			else if (_directivesViewer.SelectedItems[0] is InitialOrder)
 			{
@@ -507,8 +507,8 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 				{
 					MessageBox.Show("Create quatation successful", "Message infomation", MessageBoxButtons.OK,
 						MessageBoxIcon.Information);
-					AnimatedThreadWorker.RunWorkerAsync();
 				}
+				AnimatedThreadWorker.RunWorkerAsync();
 			}
 			else if (_directivesViewer.SelectedItems[0] is PurchaseOrder)
 			{
@@ -521,8 +521,8 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 					purch.CloseByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
 					purch.ClosedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
 					GlobalObjects.CasEnvironment.NewKeeper.Save(purch);
-					AnimatedThreadWorker.RunWorkerAsync();
 				}
+				AnimatedThreadWorker.RunWorkerAsync();
 			}
 		}
 

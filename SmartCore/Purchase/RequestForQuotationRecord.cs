@@ -472,9 +472,22 @@ namespace SmartCore.Purchase
 		}
 
 		[JsonIgnore]
-		public bool IsLowest { get; set; }
+		public bool IsLowestCostNew { get; set; }
 		[JsonIgnore]
-		public bool IsHighest { get; set; }
+		public bool IsHighestCostNew { get; set; }
+		[JsonIgnore]
+		public bool IsLowestCostServ { get; set; }
+		[JsonIgnore]
+		public bool IsHighestCostServ { get; set; }
+		[JsonIgnore]
+		public bool IsLowestCostOH { get; set; }
+		[JsonIgnore]
+		public bool IsHighestCostOH { get; set; }
+		[JsonIgnore]
+		public bool IsLowestCostRepair { get; set; }
+		[JsonIgnore]
+		public bool IsHighestCostRepair { get; set; }
+
 
 		[JsonIgnore]
 		public Supplier Supplier { get; set; }

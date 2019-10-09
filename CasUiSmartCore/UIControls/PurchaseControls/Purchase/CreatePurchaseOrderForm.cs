@@ -102,10 +102,31 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				{
 					var lowest = record.SupplierPrice.OrderBy(i => i.CostNew).FirstOrDefault();
 					if(lowest != null)
-						lowest.IsLowest = true;
+						lowest.IsLowestCostNew = true;
 					var highest = record.SupplierPrice.OrderBy(i => i.CostNew).LastOrDefault();
 					if (highest != null)
-						highest.IsHighest = true;
+						highest.IsHighestCostNew = true;
+
+					lowest = record.SupplierPrice.OrderBy(i => i.CostOverhaul).FirstOrDefault();
+					if (lowest != null)
+						lowest.IsLowestCostOH = true;
+					highest = record.SupplierPrice.OrderBy(i => i.CostOverhaul).LastOrDefault();
+					if (highest != null)
+						highest.IsHighestCostOH = true;
+
+					lowest = record.SupplierPrice.OrderBy(i => i.CostRepair).FirstOrDefault();
+					if (lowest != null)
+						lowest.IsLowestCostRepair = true;
+					highest = record.SupplierPrice.OrderBy(i => i.CostRepair).LastOrDefault();
+					if (highest != null)
+						highest.IsLowestCostRepair = true;
+
+					lowest = record.SupplierPrice.OrderBy(i => i.CostServiceable).FirstOrDefault();
+					if (lowest != null)
+						lowest.IsLowestCostServ = true;
+					highest = record.SupplierPrice.OrderBy(i => i.CostServiceable).LastOrDefault();
+					if (highest != null)
+						highest.IsLowestCostServ = true;
 				}
 				
 			}

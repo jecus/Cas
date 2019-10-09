@@ -668,7 +668,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			var ids = _setting.GlobalSetting.QuotationSupplierSetting.Parameters[comboBox1.SelectedItem.ToString()];
 			var s = _suppliers.Where(i => ids.Contains(i.ItemId));
 
-			foreach (var record in listViewInitialItems.SelectedItems.Cast<RequestForQuotationRecord>())
+			foreach (var record in listViewInitialItems.SelectedItems.Where(i => i is RequestForQuotationRecord).Cast<RequestForQuotationRecord>())
 			{
 				var res = s.Select(i => new SupplierPrice() {SupplierId = i.ItemId, Supplier = i});
 
