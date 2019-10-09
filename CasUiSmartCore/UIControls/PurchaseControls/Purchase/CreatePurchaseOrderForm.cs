@@ -138,7 +138,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 						lowest.IsLowestCostRepair = true;
 					var highest = record.SupplierPrice.OrderBy(i => i.CostRepair).LastOrDefault();
 					if (highest != null)
-						highest.IsLowestCostRepair = true;
+						highest.IsHighestCostRepair = true;
 
 				}
 
@@ -149,7 +149,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 						lowest.IsLowestCostServ = true;
 					var highest = record.SupplierPrice.OrderBy(i => i.CostServiceable).LastOrDefault();
 					if (highest != null)
-						highest.IsLowestCostServ = true;
+						highest.IsHighestCostServ = true;
 				}
 			}
 
@@ -494,7 +494,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				//для каждого supplier свой ордер!
 				foreach (var g in _addedRecord.GroupBy(i => i.Supplier))
 				{
-					var copy = (PurchaseOrder)_order.GetCopyUnsaved();
+					var copy = _order.GetCopyUnsaved();
 					copy.Title += g.Key.ToString();
 
 					//сохранение запросного ордера

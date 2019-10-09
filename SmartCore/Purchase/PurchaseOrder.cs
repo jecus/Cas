@@ -205,5 +205,14 @@ namespace SmartCore.Purchase
 		}
 
 		#endregion
+
+		public new PurchaseOrder GetCopyUnsaved()
+		{
+			var clone = (PurchaseOrder)MemberwiseClone();
+			clone.ItemId = -1;
+			clone.UnSetEvents();
+
+			return clone;
+		}
 	}
 }
