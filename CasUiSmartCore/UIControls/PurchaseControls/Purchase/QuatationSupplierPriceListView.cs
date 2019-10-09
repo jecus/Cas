@@ -46,21 +46,39 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 			var temp = $"{item.Parent?.Product?.PartNumber} | Q-ty:{item.Parent?.Quantity} | Reason: {item.Parent?.ParentInitialRecord?.InitialReason} | Destination: {destiantion} | Priority: {item.Parent?.ParentInitialRecord?.Priority}";
 
-			Color? color = null;
+			Color? colorNew = null;
+			Color? colorOH = null;
+			Color? colorServ = null;
+			Color? colorRep = null;
 
-			if(item.IsHighest)
-				color = Color.Red;
-			if(item.IsLowest)
-				color= Color.Green;
+			if(item.IsHighestCostNew)
+				colorNew = Color.Red;
+			if(item.IsLowestCostNew)
+				colorNew = Color.Green;
+
+			if (item.IsHighestCostOH)
+				colorOH = Color.Red;
+			if (item.IsHighestCostOH)
+				colorOH = Color.Green;
+
+			if (item.IsHighestCostServ)
+				colorServ = Color.Red;
+			if (item.IsHighestCostServ)
+				colorServ = Color.Green;
+
+			if (item.IsHighestCostRepair)
+				colorRep = Color.Red;
+			if (item.IsHighestCostRepair)
+				colorRep = Color.Green;
 
 
 			return new List<CustomCell>()
 			{
-				CreateRow(item.Supplier.ToString(),item.Supplier, color),
-				CreateRow(item.CostNew.ToString(),item.CostNew, color),
-				CreateRow(item.CostOverhaul.ToString(),item.CostOverhaul, color),
-				CreateRow(item.CostServiceable.ToString(),item.CostServiceable, color),
-				CreateRow(item.CostRepair.ToString(),item.CostRepair, color),
+				CreateRow(item.Supplier.ToString(),item.Supplier),
+				CreateRow(item.CostNew.ToString(),item.CostNew, colorNew),
+				CreateRow(item.CostOverhaul.ToString(),item.CostOverhaul, colorOH),
+				CreateRow(item.CostServiceable.ToString(),item.CostServiceable, colorServ),
+				CreateRow(item.CostRepair.ToString(),item.CostRepair, colorRep),
 				CreateRow(temp,temp),
 			};
 		}
