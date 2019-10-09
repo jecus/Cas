@@ -37,7 +37,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			InitializeComponent();
 		}
 
-		public CreatePurchaseOrderForm(RequestForQuotation quotation):this()
+		public CreatePurchaseOrderForm(RequestForQuotation quotation) : this()
 		{
 			_quotation = quotation;
 
@@ -75,16 +75,25 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		{
 			_prices.Clear();
 
-			var records = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationRecordDTO, RequestForQuotationRecord>(new Filter("ParentPackageId", _quotation.ItemId));
+			var records =
+				GlobalObjects.CasEnvironment.NewLoader
+					.GetObjectList<RequestForQuotationRecordDTO, RequestForQuotationRecord>(
+						new Filter("ParentPackageId", _quotation.ItemId));
 			var ids = records.SelectMany(i => i.SupplierPrice).Select(s => s.SupplierId).Distinct().ToArray();
 			var productIds = records.Select(s => s.PackageItemId).Distinct().ToArray();
-			var suppliers = GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[]{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, ids), });
-			var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new ICommonFilter[]{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, productIds), });
+			var suppliers = GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[]
+				{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, ids),});
+			var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new ICommonFilter[]
+				{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, productIds),});
 
 
-			var parentInitialId = (int)GlobalObjects.CasEnvironment.Execute($@"select i.ItemId from RequestsForQuotation q
-			left join InitialOrders i on i.ItemID = q.ParentID where q.ItemId = {_quotation.ItemId}").Tables[0].Rows[0][0];
-			var initialRecords = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(new Filter("ParentPackageId", parentInitialId));
+			var parentInitialId = (int) GlobalObjects.CasEnvironment.Execute(
+					$@"select i.ItemId from RequestsForQuotation q
+			left join InitialOrders i on i.ItemID = q.ParentID where q.ItemId = {_quotation.ItemId}").Tables[0]
+				.Rows[0][0];
+			var initialRecords =
+				GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(
+					new Filter("ParentPackageId", parentInitialId));
 
 			foreach (var record in records)
 			{
@@ -99,40 +108,51 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				if (record.SupplierPrice.Any(i => i.CostNew != record?.SupplierPrice?.FirstOrDefault()?.CostNew))
 				{
 					var lowest = record.SupplierPrice.OrderBy(i => i.CostNew).FirstOrDefault();
-					if(lowest != null)
+					if (lowest != null)
 						lowest.IsLowestCostNew = true;
 					var highest = record.SupplierPrice.OrderBy(i => i.CostNew).LastOrDefault();
 					if (highest != null)
 						highest.IsHighestCostNew = true;
+				}
 
-					lowest = record.SupplierPrice.OrderBy(i => i.CostOverhaul).FirstOrDefault();
+				if (record.SupplierPrice.Any(i => i.CostOverhaul != record?.SupplierPrice?.FirstOrDefault()?.CostOverhaul))
+				{
+					var lowest = record.SupplierPrice.OrderBy(i => i.CostOverhaul).FirstOrDefault();
 					if (lowest != null)
 						lowest.IsLowestCostOH = true;
-					highest = record.SupplierPrice.OrderBy(i => i.CostOverhaul).LastOrDefault();
+					var highest = record.SupplierPrice.OrderBy(i => i.CostOverhaul).LastOrDefault();
 					if (highest != null)
 						highest.IsHighestCostOH = true;
+				}
 
-					lowest = record.SupplierPrice.OrderBy(i => i.CostRepair).FirstOrDefault();
+				if (record.SupplierPrice.Any(i => i.CostRepair != record?.SupplierPrice?.FirstOrDefault()?.CostRepair))
+				{
+					var lowest = record.SupplierPrice.OrderBy(i => i.CostRepair).FirstOrDefault();
 					if (lowest != null)
 						lowest.IsLowestCostRepair = true;
-					highest = record.SupplierPrice.OrderBy(i => i.CostRepair).LastOrDefault();
+					var highest = record.SupplierPrice.OrderBy(i => i.CostRepair).LastOrDefault();
 					if (highest != null)
 						highest.IsLowestCostRepair = true;
 
-					lowest = record.SupplierPrice.OrderBy(i => i.CostServiceable).FirstOrDefault();
+				}
+
+				if (record.SupplierPrice.Any(i => i.CostServiceable != record?.SupplierPrice?.FirstOrDefault()?.CostServiceable))
+				{
+					var lowest = record.SupplierPrice.OrderBy(i => i.CostServiceable).FirstOrDefault();
 					if (lowest != null)
 						lowest.IsLowestCostServ = true;
-					highest = record.SupplierPrice.OrderBy(i => i.CostServiceable).LastOrDefault();
+					var highest = record.SupplierPrice.OrderBy(i => i.CostServiceable).LastOrDefault();
 					if (highest != null)
 						highest.IsLowestCostServ = true;
 				}
-				
 			}
 
-			_prices.AddRange(records.SelectMany(i => i.SupplierPrice));
-		}
+		
 
-		#endregion
+		_prices.AddRange(records.SelectMany(i => i.SupplierPrice));
+	}
+
+	#endregion
 
 		#region private void UpdateInitialControls()
 
