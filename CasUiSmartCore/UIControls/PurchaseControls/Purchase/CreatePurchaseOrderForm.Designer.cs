@@ -75,16 +75,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.purchaseRecordListView1 = new CAS.UI.UIControls.PurchaseControls.Purchase.PurchaseRecordListView();
 			this.quatationSupplierPriceListView1 = new CAS.UI.UIControls.PurchaseControls.Quatation.QuatationSupplierPriceListView();
-			this.documentControl2 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl1 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl3 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl4 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl5 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl6 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl7 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl8 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl9 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl10 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
@@ -710,7 +700,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(1119, 610);
+			this.buttonOk.Location = new System.Drawing.Point(854, 610);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 293;
@@ -725,7 +715,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonCancel.Location = new System.Drawing.Point(1200, 610);
+			this.buttonCancel.Location = new System.Drawing.Point(935, 610);
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.Size = new System.Drawing.Size(75, 33);
 			this.buttonCancel.TabIndex = 292;
@@ -759,102 +749,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.quatationSupplierPriceListView1.SortMultiplier = 1;
 			this.quatationSupplierPriceListView1.TabIndex = 295;
 			// 
-			// documentControl1
-			// 
-			this.documentControl1.CurrentDocument = null;
-			this.documentControl1.Location = new System.Drawing.Point(1016, 66);
-			this.documentControl1.Name = "documentControl1";
-			this.documentControl1.Size = new System.Drawing.Size(259, 41);
-			this.documentControl1.TabIndex = 296;
-			// 
-			// documentControl2
-			// 
-			this.documentControl2.CurrentDocument = null;
-			this.documentControl2.Location = new System.Drawing.Point(1016, 113);
-			this.documentControl2.Name = "documentControl2";
-			this.documentControl2.Size = new System.Drawing.Size(259, 41);
-			this.documentControl2.TabIndex = 297;
-			// 
-			// documentControl3
-			// 
-			this.documentControl3.CurrentDocument = null;
-			this.documentControl3.Location = new System.Drawing.Point(1016, 160);
-			this.documentControl3.Name = "documentControl3";
-			this.documentControl3.Size = new System.Drawing.Size(259, 41);
-			this.documentControl3.TabIndex = 298;
-			// 
-			// documentControl4
-			// 
-			this.documentControl4.CurrentDocument = null;
-			this.documentControl4.Location = new System.Drawing.Point(1016, 207);
-			this.documentControl4.Name = "documentControl4";
-			this.documentControl4.Size = new System.Drawing.Size(259, 41);
-			this.documentControl4.TabIndex = 299;
-			// 
-			// documentControl5
-			// 
-			this.documentControl5.CurrentDocument = null;
-			this.documentControl5.Location = new System.Drawing.Point(1016, 254);
-			this.documentControl5.Name = "documentControl5";
-			this.documentControl5.Size = new System.Drawing.Size(259, 41);
-			this.documentControl5.TabIndex = 300;
-			// 
-			// documentControl6
-			// 
-			this.documentControl6.CurrentDocument = null;
-			this.documentControl6.Location = new System.Drawing.Point(1016, 301);
-			this.documentControl6.Name = "documentControl6";
-			this.documentControl6.Size = new System.Drawing.Size(259, 41);
-			this.documentControl6.TabIndex = 301;
-			// 
-			// documentControl7
-			// 
-			this.documentControl7.CurrentDocument = null;
-			this.documentControl7.Location = new System.Drawing.Point(1016, 348);
-			this.documentControl7.Name = "documentControl7";
-			this.documentControl7.Size = new System.Drawing.Size(259, 41);
-			this.documentControl7.TabIndex = 302;
-			// 
-			// documentControl8
-			// 
-			this.documentControl8.CurrentDocument = null;
-			this.documentControl8.Location = new System.Drawing.Point(1016, 395);
-			this.documentControl8.Name = "documentControl8";
-			this.documentControl8.Size = new System.Drawing.Size(259, 41);
-			this.documentControl8.TabIndex = 303;
-			// 
-			// documentControl9
-			// 
-			this.documentControl9.CurrentDocument = null;
-			this.documentControl9.Location = new System.Drawing.Point(1016, 442);
-			this.documentControl9.Name = "documentControl9";
-			this.documentControl9.Size = new System.Drawing.Size(259, 41);
-			this.documentControl9.TabIndex = 304;
-			// 
-			// documentControl10
-			// 
-			this.documentControl10.CurrentDocument = null;
-			this.documentControl10.Location = new System.Drawing.Point(1016, 489);
-			this.documentControl10.Name = "documentControl10";
-			this.documentControl10.Size = new System.Drawing.Size(259, 41);
-			this.documentControl10.TabIndex = 305;
-			// 
 			// CreatePurchaseOrderForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1288, 656);
+			this.ClientSize = new System.Drawing.Size(1023, 656);
 			this.Controls.Add(this.purchaseRecordListView1);
-			this.Controls.Add(this.documentControl10);
-			this.Controls.Add(this.documentControl9);
-			this.Controls.Add(this.documentControl8);
-			this.Controls.Add(this.documentControl7);
-			this.Controls.Add(this.documentControl6);
-			this.Controls.Add(this.documentControl5);
-			this.Controls.Add(this.documentControl4);
-			this.Controls.Add(this.documentControl3);
-			this.Controls.Add(this.documentControl1);
-			this.Controls.Add(this.documentControl2);
 			this.Controls.Add(this.quatationSupplierPriceListView1);
 			this.Controls.Add(this.buttonOk);
 			this.Controls.Add(this.buttonCancel);
@@ -918,15 +818,5 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private Purchase.PurchaseRecordListView purchaseRecordListView1;
 		private System.Windows.Forms.ComboBox comboBoxCurrency;
 		private MetroLabel metroLabel2;
-		private DocumentationControls.DocumentControl documentControl2;
-		private DocumentationControls.DocumentControl documentControl1;
-		private DocumentationControls.DocumentControl documentControl3;
-		private DocumentationControls.DocumentControl documentControl4;
-		private DocumentationControls.DocumentControl documentControl5;
-		private DocumentationControls.DocumentControl documentControl6;
-		private DocumentationControls.DocumentControl documentControl7;
-		private DocumentationControls.DocumentControl documentControl8;
-		private DocumentationControls.DocumentControl documentControl9;
-		private DocumentationControls.DocumentControl documentControl10;
 	}
 }
