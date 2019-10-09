@@ -456,7 +456,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				foreach (var g in _addedRecord.GroupBy(i => i.Supplier))
 				{
 					var copy = _order.GetCopyUnsaved();
-					copy.Title += g.Key.ToString();
+					copy.Title += $" {g.Key}";
 
 					//сохранение запросного ордера
 					GlobalObjects.CasEnvironment.NewKeeper.Save(copy);
