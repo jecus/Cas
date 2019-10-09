@@ -79,6 +79,30 @@ namespace EntityCore.DTO.General
 		[Column("Number"), MaxLength(128)]
 		public string Number { get; set; }
 
+		[Column("DesignationId")]
+		public int DesignationId { get; set; }
+
+		[Column("PayTermId")]
+		public int PayTermId { get; set; }
+
+		[Column("IncoTermId")]
+		public int IncoTermId { get; set; }
+
+		[Column("ShipCompanyId")]
+		public int ShipCompanyId { get; set; }
+
+		[Column("ShipTo")]
+		public string ShipTo { get; set; }
+
+		[Column("CargoVolume")]
+		public string CargoVolume { get; set; }
+
+		[Column("BruttoWeight")]
+		public string BruttoWeight { get; set; }
+
+		[Column("NettoWeight")]
+		public string NettoWeight { get; set; }
+
 		[Child(FilterType.Equal, "ParentTypeId", 1860)]
 		public ICollection<ItemFileLinkDTO> Files { get; set; }
 	}

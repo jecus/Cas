@@ -33,14 +33,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			AddColumn("Condition", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Measure", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Product", (int)(radGridView1.Width * 0.2f));
-			AddColumn("IncoTerm", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Designation", (int)(radGridView1.Width * 0.2f));
-			AddColumn("PayTerm", (int)(radGridView1.Width * 0.2f));
-			AddColumn("BruttoWeight", (int)(radGridView1.Width * 0.2f));
-			AddColumn("CargoVolume", (int)(radGridView1.Width * 0.2f));
-			AddColumn("NettoWeight", (int)(radGridView1.Width * 0.2f));
-			AddColumn("ShipCompany", (int)(radGridView1.Width * 0.2f));
-			AddColumn("ShipTo", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 
@@ -70,14 +62,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				CreateRow(item.CostCondition.ToString(),item.CostCondition),
 				CreateRow(item.Measure.ToString(),item.Measure),
 				CreateRow(temp,temp),
-				CreateRow(item.IncoTerm?.ToString(),item.IncoTerm),
-				CreateRow(item.Designation?.ToString(),item.Designation),
-				CreateRow(item.PayTerm.ToString(),item.PayTerm),
-				CreateRow(item.BruttoWeight?.ToString(),item.BruttoWeight),
-				CreateRow(item.CargoVolume?.ToString(),item.CargoVolume),
-				CreateRow(item.NettoWeight?.ToString(),item.NettoWeight),
-				CreateRow(item.ShipCompany?.ToString(),item.ShipCompany),
-				CreateRow(item.ShipTo?.ToString(),item.ShipTo),
 				CreateRow(author,author),
 			};
 		}

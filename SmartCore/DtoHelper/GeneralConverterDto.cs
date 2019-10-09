@@ -4436,6 +4436,14 @@ namespace SmartCore.DtoHelper
 				PublishedByUser = purchase.PublishedByUser,
 				CloseByUser = purchase.CloseByUser,
 				Number = purchase.Number,
+				DesignationId = purchase.Designation?.ItemId ?? -1,
+				PayTermId = (int)purchase.PayTerm,
+				IncoTermId = purchase.IncoTerm?.ItemId ?? -1,
+				ShipCompanyId = purchase.ShipCompanyId,
+				ShipTo = purchase.ShipTo,
+				CargoVolume = purchase.CargoVolume,
+				BruttoWeight = purchase.BruttoWeight,
+				NettoWeight = purchase.NettoWeight,
 				Files = purchase.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>
 			};
 		}
@@ -4464,6 +4472,14 @@ namespace SmartCore.DtoHelper
 				PublishedByUser = purchasedto.PublishedByUser,
 				CloseByUser = purchasedto.CloseByUser,
 				Number = purchasedto.Number,
+				Designation = Designation.GetItemById(purchasedto.DesignationId),
+				PayTerm = (PayTerm)purchasedto.PayTermId,
+				IncoTerm = IncoTerm.GetItemById(purchasedto.IncoTermId),
+				ShipCompanyId = purchasedto.ShipCompanyId,
+				ShipTo = purchasedto.ShipTo,
+				CargoVolume = purchasedto.CargoVolume,
+				BruttoWeight = purchasedto.BruttoWeight,
+				NettoWeight = purchasedto.NettoWeight
 			};
 
 			if (purchasedto.Files != null)
@@ -4491,14 +4507,6 @@ namespace SmartCore.DtoHelper
 				Cost = purchaserec.Cost,
 				CostCondition = (short?)purchaserec.CostCondition,
 				Processed = purchaserec.Processed,
-				DesignationId = purchaserec.Designation?.ItemId ?? -1,
-				PayTermId = (int)purchaserec.PayTerm,
-				IncoTermId = purchaserec.IncoTerm?.ItemId ?? -1,
-				ShipCompanyId = purchaserec.ShipCompanyId,
-				ShipTo = purchaserec.ShipTo,
-				CargoVolume = purchaserec.CargoVolume,
-				BruttoWeight = purchaserec.BruttoWeight,
-				NettoWeight = purchaserec.NettoWeight,
 				Files = purchaserec.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>
 			};
 		}
@@ -4522,14 +4530,6 @@ namespace SmartCore.DtoHelper
 				Cost = purchaserecdto.Cost ?? default(double),
 				CostCondition = purchaserecdto.CostCondition.HasValue ? (ComponentStatus)purchaserecdto.CostCondition.Value : ComponentStatus.Unknown,
 				Processed = purchaserecdto.Processed ?? default(bool),
-				Designation = Designation.GetItemById(purchaserecdto.DesignationId),
-				PayTerm = (PayTerm)purchaserecdto.PayTermId,
-				IncoTerm = IncoTerm.GetItemById(purchaserecdto.IncoTermId),
-				ShipCompanyId = purchaserecdto.ShipCompanyId,
-				ShipTo = purchaserecdto.ShipTo,
-				CargoVolume = purchaserecdto.CargoVolume,
-				BruttoWeight = purchaserecdto.BruttoWeight,
-				NettoWeight = purchaserecdto.NettoWeight
 			};
 
 			if (purchaserecdto.Files != null)
