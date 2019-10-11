@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Windows.Forms;
 using CAS.UI.ExcelExport;
 using CAS.UI.Interfaces;
@@ -682,6 +684,13 @@ namespace CAS.UI.UIControls.OpepatorsControls
 		private void QuotationSupp_DisplayerRequested(object sender, ReferenceEventArgs e)
 		{
 			var form = new QuotationSupplierForAllForm();
+			form.ShowDialog();
+			e.Cancel = true;
+		}
+
+		private void mail_DisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			var form = new MailSettingFrom();
 			form.ShowDialog();
 			e.Cancel = true;
 		}

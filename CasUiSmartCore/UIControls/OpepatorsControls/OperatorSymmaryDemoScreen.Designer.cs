@@ -46,6 +46,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.Activity = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.Purchase = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.QuotationSupp = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+			this.mail = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.ExportATLB = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel(true);
 			this.LinkRecords = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkInternalDocuments = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -310,7 +311,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this._settingContainer.Name = "_settingContainer";
 			this._settingContainer.ReferenceLink = this.Purchase;
 			this._settingContainer.ReferenceLink02 = this.QuotationSupp;
-			this._settingContainer.ReferenceLink03 = null;
+			this._settingContainer.ReferenceLink03 = this.mail;
 			this._settingContainer.ReferenceLink04 = null;
 			this._settingContainer.ReferenceLink05 = null;
 			this._settingContainer.ReferenceLink06 = null;
@@ -424,6 +425,30 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.QuotationSupp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.QuotationSupp.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.QuotationSupp.DisplayerRequested += QuotationSupp_DisplayerRequested;
+			// 
+			// mail
+			// 
+			this.mail.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.mail.Displayer = null;
+			this.mail.DisplayerText = null;
+			this.mail.Entity = null;
+			this.mail.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.mail.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.mail.ImageBackColor = System.Drawing.Color.Transparent;
+			this.mail.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.mail.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.mail.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.mail.Location = new System.Drawing.Point(10, 0);
+			this.mail.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.mail.Name = "E-mail settings";
+			this.mail.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.mail.Size = new System.Drawing.Size(188, 20);
+			this.mail.Status = AvControls.Statuses.Satisfactory;
+			this.mail.TabIndex = 2;
+			this.mail.Text = "E-mail settings";
+			this.mail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.mail.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.mail.DisplayerRequested += mail_DisplayerRequested;
 			// 
 			// Users
 			// 
@@ -2548,6 +2573,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel Activity;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel Purchase;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel QuotationSupp;
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel mail;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRecords;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkInternalDocuments;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkNomenclatures;
