@@ -43,7 +43,8 @@ namespace CAS.UI.UIControls.SupplierControls
 				Grouping("Supplier");
 			else
 			{
-				radGridView1.Columns["Product"].Width = 0;
+				radGridView1.Columns[0].MinWidth = 1;
+				radGridView1.Columns[0].Width = 1;
 			}
 		}
 
