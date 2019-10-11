@@ -618,7 +618,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void _toolStripMenuItemAddSuppliersAll_Click(object sender, EventArgs e)
 		{
-			var form = new QuotationSupplierForm(_suppliers, listViewInitialItems.SelectedItems.Select(i => i is RequestForQuotationRecord).Cast<RequestForQuotationRecord>().ToList());
+			var form = new QuotationSupplierForm(_suppliers, listViewInitialItems.SelectedItems.Where(i => i is RequestForQuotationRecord).Cast<RequestForQuotationRecord>().ToList());
 			if (form.ShowDialog() == DialogResult.OK)
 				listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
 		}
@@ -670,7 +670,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			foreach (var record in listViewInitialItems.SelectedItems.Where(i => i is RequestForQuotationRecord).Cast<RequestForQuotationRecord>())
 			{
-				var res = s.Select(i => new SupplierPrice() {SupplierId = i.ItemId, Supplier = i});
+				var res = s.Select(i => new SupplierPrice() {SupplierId = i.ItemId, Supplier = i, Parent = record});
 
 				foreach (var supplierPrice in res)
 				{
@@ -680,6 +680,14 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				
 			}
 			listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
+		}
+
+		private void button3_Click(object sender, EventArgs e)
+		{
+
+			var form = new QuotationCostForm(_suppliers, listViewInitialItems.GetItemsArray().Where(i => i is RequestForQuotationRecord).Cast<RequestForQuotationRecord>().ToList());
+			if (form.ShowDialog() == DialogResult.OK)
+				listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
 		}
 	}
 }

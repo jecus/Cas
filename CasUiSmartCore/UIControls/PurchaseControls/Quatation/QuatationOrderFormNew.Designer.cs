@@ -91,6 +91,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.documentControl10 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			this.buttonAddSupplierForAll = new System.Windows.Forms.Button();
+			this.button3 = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.groupBox2.SuspendLayout();
@@ -126,6 +127,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.button3);
 			this.groupBox1.Controls.Add(this.button2);
 			this.groupBox1.Controls.Add(this.metroTextBox1);
 			this.groupBox1.Controls.Add(this.metroLabel2);
@@ -148,7 +150,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.groupBox1.Controls.Add(this.checkBoxNew);
 			this.groupBox1.Location = new System.Drawing.Point(717, 40);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(294, 320);
+			this.groupBox1.Size = new System.Drawing.Size(294, 349);
 			this.groupBox1.TabIndex = 290;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Selected Product";
@@ -160,7 +162,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button2.Location = new System.Drawing.Point(79, 281);
+			this.button2.Location = new System.Drawing.Point(79, 275);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(125, 33);
 			this.button2.TabIndex = 268;
@@ -247,7 +249,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button1.Location = new System.Drawing.Point(210, 281);
+			this.button1.Location = new System.Drawing.Point(210, 275);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(75, 33);
 			this.button1.TabIndex = 249;
@@ -426,7 +428,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.groupBox2.Controls.Add(this.labelAuthor);
 			this.groupBox2.Controls.Add(this.textBoxTitle);
 			this.groupBox2.Controls.Add(this.labelQOTitle);
-			this.groupBox2.Location = new System.Drawing.Point(717, 366);
+			this.groupBox2.Location = new System.Drawing.Point(717, 392);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(294, 332);
 			this.groupBox2.TabIndex = 291;
@@ -909,6 +911,20 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.buttonAddSupplierForAll.Text = "Add Supplier For All";
 			this.buttonAddSupplierForAll.Click += new System.EventHandler(this.buttonAddSupplierForAll_Click);
 			// 
+			// button3
+			// 
+			this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.button3.Enabled = true;
+			this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.button3.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.button3.Location = new System.Drawing.Point(160, 310);
+			this.button3.Name = "button3";
+			this.button3.Size = new System.Drawing.Size(125, 33);
+			this.button3.TabIndex = 269;
+			this.button3.Text = "Edit Prices";
+			this.button3.Click += new System.EventHandler(this.button3_Click);
+			// 
 			// QuatationOrderFormNew
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1004,5 +1020,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private DocumentationControls.DocumentControl documentControl10;
 		private System.Windows.Forms.ComboBox comboBox1;
 		private System.Windows.Forms.Button buttonAddSupplierForAll;
+		private System.Windows.Forms.Button button3;
 	}
 }

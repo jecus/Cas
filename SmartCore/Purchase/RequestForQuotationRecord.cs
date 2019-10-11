@@ -495,8 +495,14 @@ namespace SmartCore.Purchase
 		[JsonIgnore]
 		public RequestForQuotationRecord Parent { get; set; }
 
+		[ListViewData(200, "Product", 1)]
+		public string ProductName
+		{
+			get => Parent?.Product?.PartNumber;
+		}
+
 		[JsonIgnore]
-		[ListViewData(200, "Supplier",1)]
+		[ListViewData(200, "Supplier",2)]
 		public string SupplierName
 		{
 			get => Supplier?.Name ?? Supplier.Unknown.Name;
@@ -505,19 +511,19 @@ namespace SmartCore.Purchase
 		[JsonProperty]
 		public int SupplierId { get; set; }
 
-		[ListViewData(80,"CostNew", 2)]
+		[ListViewData(80,"CostNew", 3)]
 		[JsonProperty]
 		public decimal CostNew { get; set; }
 
-		[ListViewData(80, "CostServ",4)]
+		[ListViewData(80, "CostServ",5)]
 		[JsonProperty]
 		public decimal CostServiceable { get; set; }
 
-		[ListViewData(80, "CostOH",6)]
+		[ListViewData(80, "CostOH",7)]
 		[JsonProperty]
 		public decimal CostOverhaul { get; set; }
 
-		[ListViewData(80, "CostRepair",8)]
+		[ListViewData(80, "CostRepair",9)]
 		[JsonProperty]
 		public decimal CostRepair { get; set; }
 
@@ -526,7 +532,7 @@ namespace SmartCore.Purchase
 		public int ÑurrencyNewId { get; set; }
 
 		[JsonIgnore]
-		[ListViewData(80, "Currency",3)]
+		[ListViewData(80, "Currency",4)]
 		public Ñurrency ÑurrencyNew
 		{
 			get => Ñurrency.GetItemById(ÑurrencyNewId);
@@ -537,7 +543,7 @@ namespace SmartCore.Purchase
 		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
 		public int ÑurrencyServId { get; set; }
 
-		[ListViewData(80, "Currency",5)]
+		[ListViewData(80, "Currency",6)]
 		[JsonIgnore]
 		public Ñurrency ÑurrencyServ
 		{
@@ -550,7 +556,7 @@ namespace SmartCore.Purchase
 		public int ÑurrencyOHId { get; set; }
 
 		[JsonIgnore]
-		[ListViewData(80, "Currency",7)]
+		[ListViewData(80, "Currency",8)]
 		public Ñurrency ÑurrencyOH
 		{
 			get => Ñurrency.GetItemById(ÑurrencyOHId);
@@ -562,7 +568,7 @@ namespace SmartCore.Purchase
 		public int ÑurrencyRepairId { get; set; }
 
 		[JsonIgnore]
-		[ListViewData(80, "Currency",9)]
+		[ListViewData(80, "Currency",10)]
 		public Ñurrency ÑurrencyRepair
 		{
 			get => Ñurrency.GetItemById(ÑurrencyRepairId);

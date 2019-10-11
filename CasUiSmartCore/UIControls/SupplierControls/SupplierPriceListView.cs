@@ -9,9 +9,7 @@ namespace CAS.UI.UIControls.SupplierControls
     ///</summary>
     public partial class SupplierPriceListView : BaseGridViewControl<SupplierPrice>
     {
-        #region Fields
-
-        #endregion
+        public bool GroupBySupplie { get; set; }
 
         #region Constructors
 
@@ -35,8 +33,21 @@ namespace CAS.UI.UIControls.SupplierControls
 		{
             
         }
-        #endregion
 
-        #endregion
-    }
+		#endregion
+
+
+		protected override void GroupingItems()
+		{
+			if(GroupBySupplie)
+				Grouping("Supplier");
+			else
+			{
+				radGridView1.Columns["Product"].Width = 0;
+			}
+		}
+
+
+		#endregion
+	}
 }
