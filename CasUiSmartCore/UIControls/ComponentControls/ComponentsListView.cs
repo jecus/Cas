@@ -268,8 +268,8 @@ namespace CAS.UI.UIControls.ComponentControls
 				hiddenRemarks = dd.HiddenRemarks;
 				workType = dd.DirectiveType.ToString();
 				ndtString = dd.NDTType.ShortName;
-				expiryDate = dd.ExpiryDate.HasValue ? SmartCore.Auxiliary.Convert.GetDateFormat(dd.ExpiryDate.Value) : "";
-				expiryRemain = dd.ExpiryRemainNotify;
+				expiryDate = dd.IsExpiry ? (dd.ExpiryDate.HasValue ? SmartCore.Auxiliary.Convert.GetDateFormat(dd.ExpiryDate.Value) : "") : "";
+				expiryRemain = dd.IsExpiry ?  dd.ExpiryRemainNotify : Lifelength.Null;
 				if (dd.MaintenanceDirective != null)
 				{
 					mpdString = dd.MaintenanceDirective.TaskNumberCheck;
