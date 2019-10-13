@@ -268,8 +268,16 @@ namespace CAS.UI.UIControls.ComponentControls
 				hiddenRemarks = dd.HiddenRemarks;
 				workType = dd.DirectiveType.ToString();
 				ndtString = dd.NDTType.ShortName;
-				expiryDate = dd.IsExpiry ? (dd.ExpiryDate.HasValue ? SmartCore.Auxiliary.Convert.GetDateFormat(dd.ExpiryDate.Value) : "") : "";
-				expiryRemain = dd.IsExpiry ?  dd.ExpiryRemainNotify : Lifelength.Null;
+				
+
+				
+
+				if (dd.IsExpiry)
+				{
+					expiryDate = dd.IsExpiry ? (dd.ExpiryDate.HasValue ? SmartCore.Auxiliary.Convert.GetDateFormat(dd.ExpiryDate.Value) : "") : "";
+					expiryRemain = dd.IsExpiry ? new Lifelength(dd.ExpiryDate.Value.Day - DateTime.Today.Day,0,0) : Lifelength.Null;
+				}
+				
 				if (dd.MaintenanceDirective != null)
 				{
 					mpdString = dd.MaintenanceDirective.TaskNumberCheck;
@@ -298,7 +306,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			subItems.Add(CreateRow(remains != null && !remains.IsNullOrZero() ? remains.ToString() : "",
 				remains ?? Lifelength.Null));
 			subItems.Add(CreateRow(expiryDate, expiryDate));
-			subItems.Add(CreateRow(expiryRemain?.ToString(), expiryRemain));
+			subItems.Add(CreateRow(!expiryRemain.IsNullOrZero() ? $"{expiryRemain?.Days}d" : "", expiryRemain));
 			subItems.Add(CreateRow(lastPerformanceString, lastPerformance));
 			subItems.Add(CreateRow(warranty.ToString(), warranty));
 			subItems.Add(CreateRow(classString, classString));
