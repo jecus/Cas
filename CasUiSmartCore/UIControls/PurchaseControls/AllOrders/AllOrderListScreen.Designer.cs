@@ -41,6 +41,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.TextBoxFilter = new System.Windows.Forms.TextBox();
 			this.buttonFilter = new System.Windows.Forms.Button();
+			this.checkBoxAll = new System.Windows.Forms.CheckBox();
 			this.SuspendLayout();
 			this.flowLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -83,6 +84,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			this.panelTopContainer.Controls.Add(this.flowLayoutPanel1);
 			this.panelTopContainer.Controls.Add(this.TextBoxFilter);
 			this.panelTopContainer.Controls.Add(this.buttonFilter);
+			this.panelTopContainer.Controls.Add(this.checkBoxAll);
 
 			// 
 			// aircraftHeaderControl1
@@ -199,6 +201,16 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			this.buttonFilter.UseVisualStyleBackColor = true;
 			this.buttonFilter.Click += new System.EventHandler(this.ButtonFilterClick);
 			// 
+			// checkBoxAll
+			// 
+			this.checkBoxAll.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.checkBoxAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.checkBoxAll.Location = new System.Drawing.Point(10, 35);
+			this.checkBoxAll.Name = "checkBoxAll";
+			this.checkBoxAll.Size = new System.Drawing.Size(89, 25);
+			this.checkBoxAll.TabIndex = 55;
+			this.checkBoxAll.Text = "All";
+			// 
 			// pictureBox1
 			// 
 			this.pictureBox1.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
@@ -245,5 +257,6 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
 		private System.Windows.Forms.TextBox TextBoxFilter;
 		private System.Windows.Forms.Button buttonFilter;
+		private System.Windows.Forms.CheckBox checkBoxAll;
 	}
 }
