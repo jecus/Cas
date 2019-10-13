@@ -275,7 +275,7 @@ namespace CAS.UI.UIControls.ComponentControls
 				if (dd.IsExpiry)
 				{
 					expiryDate = dd.IsExpiry ? (dd.ExpiryDate.HasValue ? SmartCore.Auxiliary.Convert.GetDateFormat(dd.ExpiryDate.Value) : "") : "";
-					expiryRemain = dd.IsExpiry ? new Lifelength(dd.ExpiryDate.Value.Day - DateTime.Today.Day,0,0) : Lifelength.Null;
+					expiryRemain = dd.IsExpiry ? new Lifelength((int)(dd.ExpiryDate.Value - DateTime.Today).TotalDays,0,0) : Lifelength.Null;
 				}
 				
 				if (dd.MaintenanceDirective != null)
