@@ -126,6 +126,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 
 			_directivesViewer.Focus();
+			checkBoxAll.Enabled = true;
 		}
 		#endregion
 
@@ -140,56 +141,79 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 
 			try
 			{
-				if (initialfilter != null)
+				if (!checkBoxAll.Checked)
 				{
-					_initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderDTO, InitialOrder>(new []
+					if (initialfilter != null)
 					{
-						initialfilter, 
-						new Filter("Status", WorkPackageStatus.Opened)
-					}));
-				}
-				else _initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderDTO, InitialOrder>(new Filter("Status", WorkPackageStatus.Opened)));
+						_initialArray.AddRange(
+							GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderDTO, InitialOrder>(new[]
+							{
+								initialfilter,
+								new Filter("Status", WorkPackageStatus.Opened)
+							}));
+					}
+					else
+						_initialArray.AddRange(
+							GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderDTO, InitialOrder>(
+								new Filter("Status", WorkPackageStatus.Opened)));
 
-				if (quotationfilter != null)
-				{
-					_initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>(new []
+					if (quotationfilter != null)
 					{
-						quotationfilter,
-						new Filter("Status", WorkPackageStatus.Opened)
-					}));
+						_initialArray.AddRange(
+							GlobalObjects.CasEnvironment.NewLoader
+								.GetObjectList<RequestForQuotationDTO, RequestForQuotation>(new[]
+								{
+									quotationfilter,
+									new Filter("Status", WorkPackageStatus.Opened)
+								}));
 
-				}
-				else _initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>(new Filter("Status", WorkPackageStatus.Opened)));
+					}
+					else
+						_initialArray.AddRange(
+							GlobalObjects.CasEnvironment.NewLoader
+								.GetObjectList<RequestForQuotationDTO, RequestForQuotation>(new Filter("Status",
+									WorkPackageStatus.Opened)));
 
-				if (purchasefilter != null)
-				{
-					_initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>(new []
+					if (purchasefilter != null)
 					{
-						purchasefilter,
-						new Filter("Status", WorkPackageStatus.Published)
-					}));
-					_initialArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>(new[]
+						_initialArray.AddRange(
+							GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>(new[]
+							{
+								purchasefilter,
+								new Filter("Status", WorkPackageStatus.Published)
+							}));
+						_initialArray.AddRange(
+							GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>(new[]
+							{
+								purchasefilter,
+								new Filter("Status", WorkPackageStatus.Opened),
+							}));
+					}
+					else
 					{
-						purchasefilter,
-						new Filter("Status", WorkPackageStatus.Opened),
-					}));
+						_initialArray.AddRange(
+							GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>(new[]
+							{
+								new Filter("Status", WorkPackageStatus.Published)
+							}));
+						_initialArray.AddRange(
+							GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>(new[]
+							{
+								new Filter("Status", WorkPackageStatus.Opened),
+
+							}));
+
+					}
 				}
 				else
 				{
 					_initialArray.AddRange(
-						GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>(new[]
-						{
-							new Filter("Status", WorkPackageStatus.Published)
-						}));
+						GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderDTO, InitialOrder>());
 					_initialArray.AddRange(
-						GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>(new[]
-						{
-							new Filter("Status", WorkPackageStatus.Opened),
-
-						}));
-
+						GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>());
+					_initialArray.AddRange(
+						GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>());
 				}
-
 			}
 			catch (Exception ex)
 			{
@@ -755,6 +779,12 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			initialfilter = new Filter("ItemId", initialids);
 			quotationfilter = new Filter("ItemId", quotationids);
 			purchasefilter = new Filter("ItemId", purchaseids);
+			AnimatedThreadWorker.RunWorkerAsync();
+		}
+
+		private void CheckBoxAll_CheckedChanged(object sender, System.EventArgs e)
+		{
+			checkBoxAll.Enabled = false;
 			AnimatedThreadWorker.RunWorkerAsync();
 		}
 	}
