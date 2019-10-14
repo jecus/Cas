@@ -4,7 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
+using EntityCore.DTO.General;
+using EntityCore.Filter;
 using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -14,26 +17,30 @@ using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {
-    public partial class PurchaseOrderForm : MetroForm
-    {
+	public partial class PurchaseOrderForm : MetroForm
+	{
 		#region Fields
 
 		private List<PurchaseRequestRecord> _addedRecord = new List<PurchaseRequestRecord>();
 
 		private PurchaseOrder _order;
+		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
+		private List<Supplier> _supplierShipper = new List<Supplier>();
 
 		#endregion
 
 		#region Constructor
 
 		public PurchaseOrderForm()
-	    {
-		    InitializeComponent();
+		{
+			InitializeComponent();
 		}
 
 		public PurchaseOrderForm(PurchaseOrder order):this()
 		{
 			_order = order;
+
+			DocumentControls.AddRange(new[] { documentControl1, documentControl2, documentControl3, documentControl4, documentControl5, documentControl6, documentControl7, documentControl8, documentControl9 });
 
 			Task.Run(() => DoWork())
 				.ContinueWith(task => Completed(), TaskScheduler.FromCurrentSynchronizationContext());
@@ -63,11 +70,24 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			var suppliers = GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[]{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, ids), });
 			var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new ICommonFilter[]{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, productIds), });
 
+			_supplierShipper.Clear();
+			_supplierShipper.AddRange(GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[] { new CommonFilter<int>(Supplier.SupplierClassProperty, SupplierClass.Shipper.ItemId) }));
+			_order.ShipCompany = _supplierShipper.FirstOrDefault(i => i.ItemId == _order.ShipCompanyId) ?? Supplier.Unknown;
+
+			var parentInitialId = (int)GlobalObjects.CasEnvironment.Execute($@"select i.ItemId from PurchaseOrders p
+			left join RequestsForQuotation q on q.ItemID = p.ParentID
+			left join InitialOrders i on i.ItemID = q.ParentID where p.ItemId = {_order.ItemId}").Tables[0].Rows[0][0];
+			var initialRecords = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(new Filter("ParentPackageId", parentInitialId));
+
 			foreach (var record in records)
 			{
+				record.ParentInitialRecord = initialRecords.FirstOrDefault(i => i.ProductId == record.PackageItemId);
 				record.Product = products.FirstOrDefault(i => i.ItemId == record.PackageItemId);
 				record.Supplier = suppliers.FirstOrDefault(i => i.ItemId == record.SupplierId);
 			}
+			var documents = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DocumentDTO, Document>(new Filter("ParentID", _order.ItemId), true);
+			_order.ClosingDocument.Clear();
+			_order.ClosingDocument.AddRange(documents);
 
 			_addedRecord.AddRange(records);
 		}
@@ -100,13 +120,75 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private void UpdateControls()
 		{
 			comboBoxMeasure.Items.Clear();
-			comboBoxMeasure.Items.AddRange(Measure.GetByCategories(new[] { MeasureCategory.Mass, MeasureCategory.EconomicEntity }));
+			//comboBoxMeasure.Items.AddRange(Measure.GetByCategories(new[] { MeasureCategory.Mass, MeasureCategory.EconomicEntity }));
+			comboBoxMeasure.Items.AddRange(Measure.Items.ToArray());
+
+			comboBoxDesignation.Items.Clear();
+			comboBoxDesignation.Items.AddRange(Designation.Items.ToArray());
+
+			comboBoxIncoTerm.Items.Clear();
+			comboBoxIncoTerm.Items.AddRange(IncoTerm.Items.ToArray());
+
+			comboBoxShipComp.Items.Clear();
+			comboBoxShipComp.Items.AddRange(_supplierShipper.ToArray());
+			comboBoxShipComp.Items.Add(Supplier.Unknown);
+
+			comboBoxPayTerm.Items.Clear();
+			comboBoxPayTerm.DataSource = Enum.GetValues(typeof(PayTerm));
 
 			comboBoxCondition.Items.Clear();
 			comboBoxCondition.DataSource = Enum.GetValues(typeof(ComponentStatus));
 
 			comboBoxCurrency.Items.Clear();
 			comboBoxCurrency.Items.AddRange(Сurrency.Items.ToArray());
+
+			foreach (var control in DocumentControls)
+				control.Added += DocumentControl1_Added;
+
+			for (int i = 0; i < _order.ClosingDocument.Count; i++)
+			{
+				var control = DocumentControls[i];
+				control.CurrentDocument = _order.ClosingDocument[i];
+			}
+
+			comboBoxIncoTerm.SelectedItem = _order.IncoTerm;
+			comboBoxDesignation.SelectedItem = _order.Designation;
+			comboBoxPayTerm.SelectedItem = _order.PayTerm;
+			textBoxBruttoWeight.Text = _order.BruttoWeight;
+			textBoxCargoVolume.Text = _order.CargoVolume;
+			textBoxNettoWeight.Text = _order.NettoWeight;
+			textBoxShipTo.Text = _order.ShipTo;
+			comboBoxShipComp.SelectedItem = _supplierShipper.FirstOrDefault(i => i.ItemId == _order.ShipCompanyId) ?? Supplier.Unknown;
+		}
+
+		#endregion
+
+		#region private void DocumentControl1_Added(object sender, EventArgs e)
+
+		private void DocumentControl1_Added(object sender, EventArgs e)
+		{
+			var control = sender as DocumentControl;
+			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Work package") as DocumentSubType;
+			var newDocument = new Document
+			{
+				Parent = _order,
+				ParentId = _order.ItemId,
+				ParentTypeId = _order.SmartCoreObjectType.ItemId,
+				DocType = DocumentType.TechnicalRecords,
+				DocumentSubType = docSubType,
+				IsClosed = true,
+				ContractNumber = $"{_order.Number}",
+				Description = _order.Title,
+				ParentAircraftId = _order.ParentId
+			};
+
+			var form = new DocumentForm(newDocument, false);
+			if (form.ShowDialog() == DialogResult.OK)
+			{
+				_order.ClosingDocument.Add(newDocument);
+				control.CurrentDocument = newDocument;
+
+			}
 		}
 
 		#endregion
@@ -167,8 +249,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			else numericUpDownQuantity.DecimalPlaces = 2;
 
 			var quantity = numericUpDownQuantity.Value;
+			var cost = numericUpDownCost.Value;
 
-			textBoxTotal.Text = $"{quantity:0.##}" + (measure != null ? " " + measure + "(s)" : "");
+			textBoxTotal.Text = $"{quantity * cost:0.##} {(Сurrency)comboBoxCurrency.SelectedItem}";
 		}
 		#endregion
 
@@ -225,6 +308,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			comboBoxCondition.SelectedItem = purchaseRecordListView1.SelectedItem.CostCondition;
 			comboBoxMeasure.SelectedItem = purchaseRecordListView1.SelectedItem.Measure;
 			numericUpDownQuantity.Value = (decimal)purchaseRecordListView1.SelectedItem.Quantity;
+			numericUpDownCost.Value = (decimal)purchaseRecordListView1.SelectedItem.Cost;
+			comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Currency;
+			
+			SetForMeasure();
 		}
 		#endregion
 
@@ -237,9 +324,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			purchaseRecordListView1.SelectedItem.CostCondition = (ComponentStatus) comboBoxCondition.SelectedItem;
 			purchaseRecordListView1.SelectedItem.Measure = (Measure) comboBoxMeasure.SelectedItem;
 			purchaseRecordListView1.SelectedItem.Quantity = (double) numericUpDownQuantity.Value;
-			purchaseRecordListView1.SelectedItem.Cost = (double)numericUpDown1.Value;
+			purchaseRecordListView1.SelectedItem.Cost = (double)numericUpDownCost.Value;
 			purchaseRecordListView1.SelectedItem.Currency = (Сurrency) comboBoxCurrency.SelectedItem;
-
+			
 			purchaseRecordListView1.SetItemsArray(_addedRecord.ToArray());
 		}
 
@@ -253,7 +340,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			comboBoxCondition.SelectedItem = null;
 			comboBoxMeasure.SelectedItem = null;
 			numericUpDownQuantity.Value = 0;
-			numericUpDown1.Value = 0;
+			numericUpDownCost.Value = 0;
 		}
 
 		#endregion
@@ -267,27 +354,30 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				MessageBox.Show("Please, enter a Title", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Exclamation);
-				return;
 			}
 
-			if (purchaseRecordListView1.ItemsCount <= 0)
+			else if (purchaseRecordListView1.ItemsCount <= 0)
 			{
 				MessageBox.Show("Please select a price for purchase order", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Exclamation);
-				return;
 			}
-			//запись новой информации в запросный ордер
-			ApplyPurchaseData();
-			//сохранение запросного ордера
-			GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
-
-			foreach (var record in _addedRecord)
+			else
 			{
-				GlobalObjects.CasEnvironment.NewKeeper.Save(record);
-			}
+				//запись новой информации в запросный ордер
+				ApplyPurchaseData();
+				//сохранение запросного ордера
+				GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
 
-			DialogResult = DialogResult.OK;
+				foreach (var record in _addedRecord)
+				{
+					GlobalObjects.CasEnvironment.NewKeeper.Save(record);
+				}
+
+				DialogResult = DialogResult.OK;
+
+			}
+			
 		}
 
 		#endregion
@@ -299,6 +389,16 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			_order.Number = metroTextBoxNumber.Text;
 			_order.Status = (WorkPackageStatus)comboBoxStatus.SelectedItem;
 			_order.Remarks = textBoxRemarks.Text;
+
+			_order.IncoTerm = (IncoTerm)comboBoxIncoTerm.SelectedItem;
+			_order.Designation = (Designation)comboBoxDesignation.SelectedItem;
+			_order.PayTerm = (PayTerm)comboBoxPayTerm.SelectedItem;
+			_order.BruttoWeight = textBoxBruttoWeight.Text;
+			_order.CargoVolume = textBoxCargoVolume.Text;
+			_order.NettoWeight = textBoxNettoWeight.Text;
+			_order.ShipCompanyId = ((Supplier)comboBoxShipComp.SelectedItem).ItemId;
+			_order.ShipCompany = (Supplier)comboBoxShipComp.SelectedItem;
+			_order.ShipTo = textBoxShipTo.Text;
 
 			if (_order.ItemId <= 0)
 				_order.Author = GlobalObjects.CasEnvironment.IdentityUser.ToString();
@@ -323,5 +423,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			}
 		}
 		#endregion
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+			if (purchaseRecordListView1.SelectedItem == null) return;
+
+			
+		}
 	}
 }

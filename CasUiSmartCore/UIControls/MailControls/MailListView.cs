@@ -41,7 +41,7 @@ namespace CAS.UI.UIControls.MailControls
 			AddColumn("Department", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Responsible", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Executor", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 
 		#endregion
@@ -54,7 +54,7 @@ namespace CAS.UI.UIControls.MailControls
 
 			var status = item.IsClosed ? "Closed" : "Open";
 			var parformUpToDate = item.PerformeUpTo ? Convert.GetDateFormat(item.PerformeUpToDate) : "";
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			subItems.Add(CreateRow(item.Status.ToString(), item.Status));
 			subItems.Add(CreateRow(item.DocClass.ToString(), item.DocClass));

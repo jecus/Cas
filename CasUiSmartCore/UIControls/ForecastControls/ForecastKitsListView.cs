@@ -8,37 +8,37 @@ using SmartCore.Entities.General.Accessory;
 
 namespace CAS.UI.UIControls.ForecastControls
 {
-    ///<summary>
-    /// список для отображения ордеров запроса
-    ///</summary>
-    public partial class ForecastKitsListView : BaseGridViewControl<AccessoryRequired>
-    {
-        #region public ForecastKitsListView()
-        ///<summary>
-        ///</summary>
-        public ForecastKitsListView()
-        {
-            InitializeComponent();
-        }
-        #endregion
-
-        #region Methods
-
-        #region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
-
-        protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
+	///<summary>
+	/// список для отображения ордеров запроса
+	///</summary>
+	public partial class ForecastKitsListView : BaseGridViewControl<AccessoryRequired>
+	{
+		#region public ForecastKitsListView()
+		///<summary>
+		///</summary>
+		public ForecastKitsListView()
 		{
-            if (SelectedItem == null) return;
+			InitializeComponent();
+		}
+		#endregion
 
-            var form = new KitForm(SelectedItem);
+		#region Methods
 
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                List<CustomCell> subs = GetListViewSubItems(SelectedItem);
-                for (int i = 0; i < subs.Capacity; i++)
-                    radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
-            }
-        }
+		#region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
+
+		protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
+		{
+			if (SelectedItem == null) return;
+
+			var form = new KitForm(SelectedItem);
+
+			if (form.ShowDialog() == DialogResult.OK)
+			{
+				List<CustomCell> subs = GetListViewSubItems(SelectedItem);
+				for (int i = 0; i < subs.Capacity; i++)
+					radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
+			}
+		}
 		#endregion
 
 		#region protected override SetGroupsToItems(int columnIndex)
@@ -89,44 +89,44 @@ namespace CAS.UI.UIControls.ForecastControls
 			AddColumn("Task Q-ty.", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Class", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 
 		#region protected override List<CustomCell> GetListViewSubItems(AccessoryRequired item)
 
 		protected override List<CustomCell> GetListViewSubItems(AccessoryRequired item)
-	    {
-		    var check = item.MaintenanceCheck != null ? item.MaintenanceCheck.ToString() : "";
-		    var standart = item.Standart != null ? item.Standart.ToString() : "";
-		    var product = item.Product != null ? item.Product.ToString() : "";
-		    var supplier = item.Suppliers != null ? item.Suppliers.ToString() : "";
-		    var quantity = Math.Round(item.Quantity, 2).ToString();
-		    var taskQuantity = Math.Round(item.TaskQuantity, 2).ToString();
-		    var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+		{
+			var check = item.MaintenanceCheck != null ? item.MaintenanceCheck.ToString() : "";
+			var standart = item.Standart != null ? item.Standart.ToString() : "";
+			var product = item.Product != null ? item.Product.ToString() : "";
+			var supplier = item.Suppliers != null ? item.Suppliers.ToString() : "";
+			var quantity = Math.Round(item.Quantity, 2).ToString();
+			var taskQuantity = Math.Round(item.TaskQuantity, 2).ToString();
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
-		    return new List<CustomCell>
-		    {
-			    CreateRow(standart, standart),
-			    CreateRow(item.PartNumber, item.PartNumber),
-			    CreateRow(product, product),
-			    CreateRow(item.Manufacturer, item.Manufacturer),
-			    CreateRow(supplier, supplier),
-			    CreateRow(check, check),
-			    CreateRow(item.ParentString, item.ParentString),
-			    CreateRow(item.CostNew.ToString(), item.CostNew),
-			    CreateRow(item.CostOverhaul.ToString(), item.CostOverhaul),
-			    CreateRow(item.CostServiceable.ToString(), item.CostServiceable),
-			    CreateRow(quantity, item.Quantity),
-			    CreateRow(taskQuantity, item.TaskQuantity),
-			    CreateRow(item.GoodsClass.ToString(), item.GoodsClass),
-			    CreateRow(item.Remarks, item.Remarks),
-			    CreateRow(author, author)
-		    };
-	    }
+			return new List<CustomCell>
+			{
+				CreateRow(standart, standart),
+				CreateRow(item.PartNumber, item.PartNumber),
+				CreateRow(product, product),
+				CreateRow(item.Manufacturer, item.Manufacturer),
+				CreateRow(supplier, supplier),
+				CreateRow(check, check),
+				CreateRow(item.ParentString, item.ParentString),
+				CreateRow(item.CostNew.ToString(), item.CostNew),
+				CreateRow(item.CostOverhaul.ToString(), item.CostOverhaul),
+				CreateRow(item.CostServiceable.ToString(), item.CostServiceable),
+				CreateRow(quantity, item.Quantity),
+				CreateRow(taskQuantity, item.TaskQuantity),
+				CreateRow(item.GoodsClass.ToString(), item.GoodsClass),
+				CreateRow(item.Remarks, item.Remarks),
+				CreateRow(author, author)
+			};
+		}
 
-	    #endregion
+		#endregion
 
-	    #endregion
+		#endregion
 	}
 }

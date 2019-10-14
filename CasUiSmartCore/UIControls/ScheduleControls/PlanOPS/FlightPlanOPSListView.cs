@@ -27,7 +27,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 		{
 			AddColumn("From - To", (int)(radGridView1.Width * 0.8f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.16f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 
 		#endregion
@@ -36,7 +36,7 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 
 		protected override List<CustomCell> GetListViewSubItems(FlightPlanOps item)
 		{
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var period = $"{item.From:dd-MMMM-yyyy} - {item.To:dd-MMMM-yyyy}";
 
 			return new List<CustomCell>

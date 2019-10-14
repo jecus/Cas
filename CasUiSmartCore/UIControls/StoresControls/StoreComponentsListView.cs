@@ -20,32 +20,32 @@ using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.StoresControls
 {
-    ///<summary>
-    /// список для отображения событий системы безопасности полетов
-    ///</summary>
-    public partial class StoreComponentsListView : BaseGridViewControl<IBaseCoreObject>
-    {
-	    private bool first;
+	///<summary>
+	/// список для отображения событий системы безопасности полетов
+	///</summary>
+	public partial class StoreComponentsListView : BaseGridViewControl<IBaseEntityObject>
+	{
+		private bool first;
 
 		#region public StoreDetailsListView()
 		///<summary>
 		///</summary>
 		public StoreComponentsListView()
-        {
-            InitializeComponent();
-            OldColumnIndex = 17;
-            SortMultiplier = 1;
-        }
-        #endregion
+		{
+			InitializeComponent();
+			OldColumnIndex = 17;
+			SortMultiplier = 1;
+		}
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region protected override void SetHeaders()
-        /// <summary>
-        /// Устанавливает заголовки
-        /// </summary>
-        protected override void SetHeaders()
-        {
+		#region protected override void SetHeaders()
+		/// <summary>
+		/// Устанавливает заголовки
+		/// </summary>
+		protected override void SetHeaders()
+		{
 			AddColumn("ID", (int)(radGridView1.Width * 0.1f));
 			AddColumn("ATA", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Refference", (int)(radGridView1.Width * 0.2f));
@@ -97,83 +97,83 @@ namespace CAS.UI.UIControls.StoresControls
 			AddColumn("Warranty Remain", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Kit", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Hidden Remarks", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
-        }
-        #endregion
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
+		}
+		#endregion
 
-        #region protected override void AddItems(IBaseCoreObject[] itemsArray)
-        /// <summary>
-        /// Добавляет элементы в ListView
-        /// </summary>
-        /// <param name="itemsArray"></param>
-        //protected override void AddItems(IBaseCoreObject[] itemsArray)
-        //{
-        //    ColumnHeader ch = ColumnHeaderList.FirstOrDefault(h => h.Text == "Performances");
-        //    if (ch == null)
-        //    {
-        //        base.AddItems(itemsArray);
-        //        return;
-        //    }
-            
-        //    if(itemsArray == null || itemsArray.Length == 0)
-        //    {
-        //        ch.Width = 0;
-        //        base.AddItems(itemsArray);
-        //        return;
-        //    }
-        //    ch.Width = itemsArray.OfType<IDirective>()
-        //                         .Count(d => d.NextPerformances != null && d.NextPerformances.Count > 1) > 0 ? 100 : 0;
+		#region protected override void AddItems(IBaseCoreObject[] itemsArray)
+		/// <summary>
+		/// Добавляет элементы в ListView
+		/// </summary>
+		/// <param name="itemsArray"></param>
+		//protected override void AddItems(IBaseCoreObject[] itemsArray)
+		//{
+		//    ColumnHeader ch = ColumnHeaderList.FirstOrDefault(h => h.Text == "Performances");
+		//    if (ch == null)
+		//    {
+		//        base.AddItems(itemsArray);
+		//        return;
+		//    }
+			
+		//    if(itemsArray == null || itemsArray.Length == 0)
+		//    {
+		//        ch.Width = 0;
+		//        base.AddItems(itemsArray);
+		//        return;
+		//    }
+		//    ch.Width = itemsArray.OfType<IDirective>()
+		//                         .Count(d => d.NextPerformances != null && d.NextPerformances.Count > 1) > 0 ? 100 : 0;
 
-        //    base.AddItems(itemsArray);
-        //}
+		//    base.AddItems(itemsArray);
+		//}
 
 		#endregion
 
-        #region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(IBaseCoreObject item)
+		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(IBaseCoreObject item)
 
-        protected override List<CustomCell> GetListViewSubItems(IBaseCoreObject item)
-        {
-            var subItems = new List<CustomCell>();
+		protected override List<CustomCell> GetListViewSubItems(IBaseEntityObject item)
+		{
+			var subItems = new List<CustomCell>();
 
-            DateTime? approx = null;
-            AtaChapter ata;
-            string maintenanceTypeString = "";
-            DateTime transferDate = DateTimeExtend.GetCASMinDateTime();
-	        bool isPool = false, IsDangerous = false;
-            Lifelength firstPerformance = Lifelength.Null,
-                       lastPerformance = Lifelength.Null,
-                       remains = null,
-                       next = null,
-                       warranty = Lifelength.Null, warrantyRemain = Lifelength.Null, repeatInterval = Lifelength.Null;
-	        string partNumber = "",
-                   description = "",
-                   altPartNumber = "",
-                   standart = "",
-                   name = "",
+			DateTime? approx = null;
+			AtaChapter ata;
+			string maintenanceTypeString = "";
+			DateTime transferDate = DateTimeExtend.GetCASMinDateTime();
+			bool isPool = false, IsDangerous = false;
+			Lifelength firstPerformance = Lifelength.Null,
+					   lastPerformance = Lifelength.Null,
+					   remains = null,
+					   next = null,
+					   warranty = Lifelength.Null, warrantyRemain = Lifelength.Null, repeatInterval = Lifelength.Null;
+			string partNumber = "",
+				   description = "",
+				   altPartNumber = "",
+				   standart = "",
+				   name = "",
 				   refference = "",
-                   effectivity = "",
+				   effectivity = "",
 				   serialNumber = "",
-                   code = "",
-                   classString = "",
-                   batchNumber = "",
-                   idNumber = "",
-                   supplier = "";
-	        string status = "",
-		        location = "",
-		        facility = "",
-		        lastPerformanceString = "",
-		        kitRequieredString = "",
-		        remarks = "",
-		        hiddenRemarks = "",
-		        workType = "",
-		        timesString,
+				   code = "",
+				   classString = "",
+				   batchNumber = "",
+				   idNumber = "",
+				   supplier = "";
+			string status = "",
+				location = "",
+				facility = "",
+				lastPerformanceString = "",
+				kitRequieredString = "",
+				remarks = "",
+				hiddenRemarks = "",
+				workType = "",
+				timesString,
 				quantityString = "",
 				currentString = "",
-		        shouldBeOnStockString = "",
-		        from = "",
-		        id = "",
+				shouldBeOnStockString = "",
+				from = "",
+				id = "",
 				quantityInString = "",
-		        author = "",
+				author = "",
 				currency = "";
 			double manHours = 0,
 				   unitPrice = 0,
@@ -185,41 +185,41 @@ namespace CAS.UI.UIControls.StoresControls
 				   tax3 = 0,
 				   total = 0,
 				   quantity = 0,
-                   current = 0,
+				   current = 0,
 				   quantityIn = 0,
 				   shouldBeOnStock = 0, needWpQuantity = 0, reserve = 0;
-            int times,
-	            
+			int times,
+				
 				kitCount = 0;
 			string position = ComponentStorePosition.UNK.ToString();
 			IDirective parent;
-            if (item is NextPerformance)
-            {
-                NextPerformance np = (NextPerformance) item;
-                parent = np.Parent;
+			if (item is NextPerformance)
+			{
+				NextPerformance np = (NextPerformance) item;
+				parent = np.Parent;
 
-                int index = np.Parent.NextPerformances.IndexOf(np);
-                timesString = index == 0 ? np.Parent.TimesToString : "#" + (index + 1);
-                times = index == 0 ? np.Parent.Times : index + 1;
-            }
-            else
-            {
-                parent = item as IDirective;
-                if (parent == null)
-                    return subItems;
-                timesString = parent.TimesToString;
-                times = parent.Times;
-            }
+				int index = np.Parent.NextPerformances.IndexOf(np);
+				timesString = index == 0 ? np.Parent.TimesToString : "#" + (index + 1);
+				times = index == 0 ? np.Parent.Times : index + 1;
+			}
+			else
+			{
+				parent = item as IDirective;
+				if (parent == null)
+					return subItems;
+				timesString = parent.TimesToString;
+				times = parent.Times;
+			}
 
-            if (parent is Component)
-            {
-                Component componentItem = (Component)parent;
-                id = componentItem.ItemId.ToString();
-                author = GlobalObjects.CasEnvironment.GetCorrector(componentItem.CorrectorId);
+			if (parent is Component)
+			{
+				Component componentItem = (Component)parent;
+				id = componentItem.ItemId.ToString();
+				author = GlobalObjects.CasEnvironment.GetCorrector(componentItem);
 				approx = componentItem.NextPerformanceDate;
-                next = componentItem.NextPerformanceSource;
-                remains = componentItem.Remains;
-                ata = componentItem.Product?.ATAChapter ?? componentItem.ATAChapter;
+				next = componentItem.NextPerformanceSource;
+				remains = componentItem.Remains;
+				ata = componentItem.Product?.ATAChapter ?? componentItem.ATAChapter;
 				partNumber = componentItem.Product?.PartNumber ?? componentItem.PartNumber;
 				altPartNumber = componentItem.Product?.AltPartNumber ?? componentItem.ALTPartNumber;
 				standart = componentItem.Product?.Standart?.ToString() ?? componentItem.Standart?.ToString();
@@ -227,53 +227,53 @@ namespace CAS.UI.UIControls.StoresControls
 				effectivity = componentItem.Product?.IsEffectivity;
 				name = componentItem.Product?.Name;
 				description = componentItem.Description;
-                serialNumber = componentItem.SerialNumber;
-                code = componentItem.Product != null ? componentItem.Product.Code :componentItem.Code;
-                classString = componentItem.GoodsClass.ToString();
-                batchNumber = componentItem.BatchNumber;
-                idNumber = componentItem.IdNumber;
-                position = componentItem.TransferRecords.GetLast()?.State?.ToString();
-                status = componentItem.ComponentStatus.ToString();
-                location = componentItem.Location.ToString();
-                facility = componentItem.Location.LocationsType?.ToString() ?? LocationsType.Unknown.ToString();
-                maintenanceTypeString = 
-                    componentItem.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.ComponentsAndParts) 
-                        ? componentItem.MaintenanceControlProcess.ShortName
-                        : componentItem.LifeLimit.IsNullOrZero() 
-                            ? ""
-                            : MaintenanceControlProcess.HT.ShortName;
-                transferDate = componentItem.TransferRecords.GetLast().TransferDate;
-                firstPerformance = componentItem.LifeLimit;
-                warranty = componentItem.Warranty;
-                warrantyRemain = componentItem.NextPerformance?.WarrantlyRemains ?? Lifelength.Null;
-                kitRequieredString = componentItem.Kits.Count > 0 ? componentItem.Kits.Count + " kits" : "";
-                kitCount = componentItem.Kits.Count;
-                bool isComponent =
-                    componentItem.GoodsClass.IsNodeOrSubNodeOf(new IDictionaryTreeItem[]
-                    {
-                        GoodsClass.ComponentsAndParts,
-                        GoodsClass.ProductionAuxiliaryEquipment,
-                    });
+				serialNumber = componentItem.SerialNumber;
+				code = componentItem.Product != null ? componentItem.Product.Code :componentItem.Code;
+				classString = componentItem.GoodsClass.ToString();
+				batchNumber = componentItem.BatchNumber;
+				idNumber = componentItem.IdNumber;
+				position = componentItem.TransferRecords.GetLast()?.State?.ToString();
+				status = componentItem.ComponentStatus.ToString();
+				location = componentItem.Location.ToString();
+				facility = componentItem.Location.LocationsType?.ToString() ?? LocationsType.Unknown.ToString();
+				maintenanceTypeString = 
+					componentItem.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.ComponentsAndParts) 
+						? componentItem.MaintenanceControlProcess.ShortName
+						: componentItem.LifeLimit.IsNullOrZero() 
+							? ""
+							: MaintenanceControlProcess.HT.ShortName;
+				transferDate = componentItem.TransferRecords.GetLast().TransferDate;
+				firstPerformance = componentItem.LifeLimit;
+				warranty = componentItem.Warranty;
+				warrantyRemain = componentItem.NextPerformance?.WarrantlyRemains ?? Lifelength.Null;
+				kitRequieredString = componentItem.Kits.Count > 0 ? componentItem.Kits.Count + " kits" : "";
+				kitCount = componentItem.Kits.Count;
+				bool isComponent =
+					componentItem.GoodsClass.IsNodeOrSubNodeOf(new IDictionaryTreeItem[]
+					{
+						GoodsClass.ComponentsAndParts,
+						GoodsClass.ProductionAuxiliaryEquipment,
+					});
 
-                quantity = isComponent && componentItem.ItemId > 0 ? 1 : componentItem.Quantity;
+				quantity = isComponent && componentItem.ItemId > 0 ? 1 : componentItem.Quantity;
 				quantityString = quantity.ToString();
 				quantityIn = isComponent && componentItem.ItemId > 0 ? 1 : componentItem.QuantityIn;
-	            quantityInString = $"{quantityIn:0.##}" + (componentItem.Measure != null ? " " + componentItem.Measure + "(s)" : "") + componentItem.Packing;
-	            needWpQuantity = Math.Round(componentItem.NeedWpQuantity, 2);
-	            reserve = quantity - needWpQuantity;
+				quantityInString = $"{quantityIn:0.##}" + (componentItem.Measure != null ? " " + componentItem.Measure + "(s)" : "") + componentItem.Packing;
+				needWpQuantity = Math.Round(componentItem.NeedWpQuantity, 2);
+				reserve = quantity - needWpQuantity;
 				shouldBeOnStock = componentItem.ShouldBeOnStock;
-                shouldBeOnStockString = componentItem.ShouldBeOnStock > 0 ? "Yes" : "No";
-                manHours = componentItem.ManHours;
-                remarks = componentItem.Remarks;
-                hiddenRemarks = componentItem.HiddenRemarks;
-	            isPool = componentItem.IsPOOL;
-	            IsDangerous = componentItem.IsDangerous;
-	            supplier = componentItem.FromSupplier.ToString();
+				shouldBeOnStockString = componentItem.ShouldBeOnStock > 0 ? "Yes" : "No";
+				manHours = componentItem.ManHours;
+				remarks = componentItem.Remarks;
+				hiddenRemarks = componentItem.HiddenRemarks;
+				isPool = componentItem.IsPOOL;
+				IsDangerous = componentItem.IsDangerous;
+				supplier = componentItem.FromSupplier.ToString();
 
 				if (componentItem.ProductCosts.Count > 0)
-	            {
-		            var productost = componentItem.ProductCosts.FirstOrDefault();
-		            unitPrice = productost.UnitPrice;
+				{
+					var productost = componentItem.ProductCosts.FirstOrDefault();
+					unitPrice = productost.UnitPrice;
 					totalPrice = productost.TotalPrice;
 					shipPrice = productost.ShipPrice;
 					subTotal = productost.SubTotal;
@@ -282,54 +282,54 @@ namespace CAS.UI.UIControls.StoresControls
 					tax3 = productost.Tax2;
 					total = productost.Total;
 					currency = productost.Currency.ToString();
-	            }
+				}
 
 
 				TransferRecord tr = componentItem.TransferRecords.GetLast();
-                if (tr.FromAircraftId == 0 &&
-                    tr.FromBaseComponentId == 0 &&
-                    tr.FromStoreId == 0 &&
+				if (tr.FromAircraftId == 0 &&
+					tr.FromBaseComponentId == 0 &&
+					tr.FromStoreId == 0 &&
 					tr.FromSupplierId == 0 &&
 					tr.FromSpecialistId == 0)
-                {
-                    from = componentItem.Suppliers.ToString();
-                }
-                else
-                {
-                    from = DestinationHelper.FromObjectString(tr);
-                }
-            }
-            else if (parent is ComponentDirective)
-            {
-                ComponentDirective dd = (ComponentDirective)parent;
-                author = GlobalObjects.CasEnvironment.GetCorrector(dd.CorrectorId);
+				{
+					from = componentItem.Suppliers.ToString();
+				}
+				else
+				{
+					from = DestinationHelper.FromObjectString(tr);
+				}
+			}
+			else if (parent is ComponentDirective)
+			{
+				ComponentDirective dd = (ComponentDirective)parent;
+				author = GlobalObjects.CasEnvironment.GetCorrector(dd);
 				if (dd.Threshold.FirstPerformanceSinceNew != null && !dd.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
-                {
-                    firstPerformance = dd.Threshold.FirstPerformanceSinceNew;
-                }
-                if (dd.LastPerformance != null)
-                {
-                    lastPerformanceString =
-                        SmartCore.Auxiliary.Convert.GetDateFormat(dd.LastPerformance.RecordDate) + " " +
-                        dd.LastPerformance.OnLifelength;
-                    lastPerformance = dd.LastPerformance.OnLifelength;
-                }
-                if (dd.Threshold.RepeatInterval != null && !dd.Threshold.RepeatInterval.IsNullOrZero())
-                {
-                    repeatInterval = dd.Threshold.RepeatInterval;
-                }
-                approx = dd.NextPerformanceDate;
-                next = dd.NextPerformanceSource;
-                remains = dd.Remains;
-                ata = dd.ParentComponent.Product?.ATAChapter ?? dd.ParentComponent.ATAChapter;
-                maintenanceTypeString = dd.ParentComponent.MaintenanceControlProcess.ShortName;
-                warranty = dd.Threshold.Warranty;
-                kitRequieredString = dd.Kits.Count > 0 ? dd.Kits.Count + " kits" : "";
-                kitCount = dd.Kits.Count;
-                manHours = dd.ManHours;
-                remarks = dd.Remarks;
-                hiddenRemarks = dd.HiddenRemarks;
-                workType = dd.DirectiveType.ToString();
+				{
+					firstPerformance = dd.Threshold.FirstPerformanceSinceNew;
+				}
+				if (dd.LastPerformance != null)
+				{
+					lastPerformanceString =
+						SmartCore.Auxiliary.Convert.GetDateFormat(dd.LastPerformance.RecordDate) + " " +
+						dd.LastPerformance.OnLifelength;
+					lastPerformance = dd.LastPerformance.OnLifelength;
+				}
+				if (dd.Threshold.RepeatInterval != null && !dd.Threshold.RepeatInterval.IsNullOrZero())
+				{
+					repeatInterval = dd.Threshold.RepeatInterval;
+				}
+				approx = dd.NextPerformanceDate;
+				next = dd.NextPerformanceSource;
+				remains = dd.Remains;
+				ata = dd.ParentComponent.Product?.ATAChapter ?? dd.ParentComponent.ATAChapter;
+				maintenanceTypeString = dd.ParentComponent.MaintenanceControlProcess.ShortName;
+				warranty = dd.Threshold.Warranty;
+				kitRequieredString = dd.Kits.Count > 0 ? dd.Kits.Count + " kits" : "";
+				kitCount = dd.Kits.Count;
+				manHours = dd.ManHours;
+				remarks = dd.Remarks;
+				hiddenRemarks = dd.HiddenRemarks;
+				workType = dd.DirectiveType.ToString();
 				position = "    " + dd.ParentComponent.TransferRecords.GetLast()?.State?.ToString();
 				isPool = dd.IsPOOL;
 				IsDangerous = dd.IsDangerous;
@@ -342,73 +342,73 @@ namespace CAS.UI.UIControls.StoresControls
 				classString = dd.ParentComponent.GoodsClass.ToString();
 				warrantyRemain = dd.NextPerformance?.WarrantlyRemains ?? Lifelength.Null;
 			}
-            else
-            {
-                ata = (AtaChapter)GlobalObjects.CasEnvironment.GetDictionary<AtaChapter>().GetItemById(21);
-            }
+			else
+			{
+				ata = (AtaChapter)GlobalObjects.CasEnvironment.GetDictionary<AtaChapter>().GetItemById(21);
+			}
 
-            subItems.Add(CreateRow(id, id));
-            subItems.Add(CreateRow(ata.ToString(), ata));
-            subItems.Add(CreateRow(refference, refference));
-            subItems.Add(CreateRow(partNumber, partNumber));
-            subItems.Add(CreateRow(altPartNumber, altPartNumber));
-            subItems.Add(CreateRow(standart, standart));
-            subItems.Add(CreateRow(name, name));
-            subItems.Add(CreateRow(description, description));
-            subItems.Add(CreateRow(serialNumber, serialNumber));
-            subItems.Add(CreateRow(classString, classString));
-            subItems.Add(CreateRow(batchNumber, batchNumber));
-            subItems.Add(CreateRow(idNumber, idNumber));
-            subItems.Add(CreateRow(position.ToUpper(), position));
-            subItems.Add(CreateRow(status, status));
-            subItems.Add(CreateRow(location, location));
-            subItems.Add(CreateRow(facility, facility));
-            subItems.Add(CreateRow(from, from));
-            subItems.Add(CreateRow(transferDate > DateTimeExtend.GetCASMinDateTime()
-	            ? SmartCore.Auxiliary.Convert.GetDateFormat(transferDate) : "", transferDate));
-            subItems.Add(CreateRow(workType, workType));
-            subItems.Add(CreateRow(needWpQuantity.ToString(), needWpQuantity));
-            subItems.Add(CreateRow(reserve.ToString(), reserve));
-            subItems.Add(CreateRow(quantityString, quantity));
-            subItems.Add(CreateRow(shouldBeOnStockString, shouldBeOnStock));
-            subItems.Add(CreateRow(quantityInString, quantityIn));
-            subItems.Add(CreateRow(unitPrice.ToString(), unitPrice));
-            subItems.Add(CreateRow(totalPrice.ToString(), totalPrice));
-            subItems.Add(CreateRow(shipPrice.ToString(), shipPrice));
-            subItems.Add(CreateRow(subTotal.ToString(), subTotal));
-            subItems.Add(CreateRow(tax1.ToString(), tax1));
-            subItems.Add(CreateRow(tax2.ToString(), tax2));
-            subItems.Add(CreateRow(tax3.ToString(), tax3));
-            subItems.Add(CreateRow(total.ToString(), total));
-            subItems.Add(CreateRow(currency, currency));
-            subItems.Add(CreateRow(supplier, supplier));
-            subItems.Add(CreateRow(code, code));
-            subItems.Add(CreateRow(remarks, remarks));
-            subItems.Add(CreateRow(effectivity, effectivity));
-            subItems.Add(CreateRow(isPool ? "Yes" : "No", isPool));
-            subItems.Add(CreateRow(IsDangerous ? "Yes" : "No", IsDangerous));
-            subItems.Add(CreateRow(maintenanceTypeString, maintenanceTypeString));
-            subItems.Add(CreateRow(manHours.ToString(), manHours));
-            subItems.Add(CreateRow(firstPerformance.ToString(), firstPerformance));
-            subItems.Add(CreateRow(repeatInterval.ToString(), repeatInterval));
-            subItems.Add(CreateRow(timesString, times));
-            subItems.Add(CreateRow(approx != null
-	            ? SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)approx) + " " + next
-	            : next != null && !next.IsNullOrZero()
-		            ? next.ToString()
-		            : "", approx == null ? DateTimeExtend.GetCASMinDateTime() : (DateTime)approx));
-            subItems.Add(CreateRow(remains != null && !remains.IsNullOrZero()
-	            ? remains.ToString()
-	            : "", remains ?? Lifelength.Null));
-            subItems.Add(CreateRow(lastPerformanceString, lastPerformance));
-            subItems.Add(CreateRow(warranty.ToString(), warranty));
-            subItems.Add(CreateRow(warrantyRemain.ToString(), warrantyRemain));
-            subItems.Add(CreateRow(kitRequieredString, kitCount));
-            subItems.Add(CreateRow(hiddenRemarks, hiddenRemarks));
-            subItems.Add(CreateRow(author, author));
+			subItems.Add(CreateRow(id, id));
+			subItems.Add(CreateRow(ata.ToString(), ata));
+			subItems.Add(CreateRow(refference, refference));
+			subItems.Add(CreateRow(partNumber, partNumber));
+			subItems.Add(CreateRow(altPartNumber, altPartNumber));
+			subItems.Add(CreateRow(standart, standart));
+			subItems.Add(CreateRow(name, name));
+			subItems.Add(CreateRow(description, description));
+			subItems.Add(CreateRow(serialNumber, serialNumber));
+			subItems.Add(CreateRow(classString, classString));
+			subItems.Add(CreateRow(batchNumber, batchNumber));
+			subItems.Add(CreateRow(idNumber, idNumber));
+			subItems.Add(CreateRow(position.ToUpper(), position));
+			subItems.Add(CreateRow(status, status));
+			subItems.Add(CreateRow(location, location));
+			subItems.Add(CreateRow(facility, facility));
+			subItems.Add(CreateRow(from, from));
+			subItems.Add(CreateRow(transferDate > DateTimeExtend.GetCASMinDateTime()
+				? SmartCore.Auxiliary.Convert.GetDateFormat(transferDate) : "", transferDate));
+			subItems.Add(CreateRow(workType, workType));
+			subItems.Add(CreateRow(needWpQuantity.ToString(), needWpQuantity));
+			subItems.Add(CreateRow(reserve.ToString(), reserve));
+			subItems.Add(CreateRow(quantityString, quantity));
+			subItems.Add(CreateRow(shouldBeOnStockString, shouldBeOnStock));
+			subItems.Add(CreateRow(quantityInString, quantityIn));
+			subItems.Add(CreateRow(unitPrice.ToString(), unitPrice));
+			subItems.Add(CreateRow(totalPrice.ToString(), totalPrice));
+			subItems.Add(CreateRow(shipPrice.ToString(), shipPrice));
+			subItems.Add(CreateRow(subTotal.ToString(), subTotal));
+			subItems.Add(CreateRow(tax1.ToString(), tax1));
+			subItems.Add(CreateRow(tax2.ToString(), tax2));
+			subItems.Add(CreateRow(tax3.ToString(), tax3));
+			subItems.Add(CreateRow(total.ToString(), total));
+			subItems.Add(CreateRow(currency, currency));
+			subItems.Add(CreateRow(supplier, supplier));
+			subItems.Add(CreateRow(code, code));
+			subItems.Add(CreateRow(remarks, remarks));
+			subItems.Add(CreateRow(effectivity, effectivity));
+			subItems.Add(CreateRow(isPool ? "Yes" : "No", isPool));
+			subItems.Add(CreateRow(IsDangerous ? "Yes" : "No", IsDangerous));
+			subItems.Add(CreateRow(maintenanceTypeString, maintenanceTypeString));
+			subItems.Add(CreateRow(manHours.ToString(), manHours));
+			subItems.Add(CreateRow(firstPerformance.ToString(), firstPerformance));
+			subItems.Add(CreateRow(repeatInterval.ToString(), repeatInterval));
+			subItems.Add(CreateRow(timesString, times));
+			subItems.Add(CreateRow(approx != null
+				? SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)approx) + " " + next
+				: next != null && !next.IsNullOrZero()
+					? next.ToString()
+					: "", approx == null ? DateTimeExtend.GetCASMinDateTime() : (DateTime)approx));
+			subItems.Add(CreateRow(remains != null && !remains.IsNullOrZero()
+				? remains.ToString()
+				: "", remains ?? Lifelength.Null));
+			subItems.Add(CreateRow(lastPerformanceString, lastPerformance));
+			subItems.Add(CreateRow(warranty.ToString(), warranty));
+			subItems.Add(CreateRow(warrantyRemain.ToString(), warrantyRemain));
+			subItems.Add(CreateRow(kitRequieredString, kitCount));
+			subItems.Add(CreateRow(hiddenRemarks, hiddenRemarks));
+			subItems.Add(CreateRow(author, author));
 
-            return subItems;
-        }
+			return subItems;
+		}
 
 		#endregion
 
@@ -473,13 +473,13 @@ namespace CAS.UI.UIControls.StoresControls
 		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 
 		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
-        {
-            if (SelectedItem != null)
-	        {
-		        var dp = ScreenAndFormManager.GetEditScreenOrForm((BaseEntityObject) SelectedItem);
-		        if (dp.DisplayerType == DisplayerType.Screen)
-			        e.SetParameters(dp);
-		        else
+		{
+			if (SelectedItem != null)
+			{
+				var dp = ScreenAndFormManager.GetEditScreenOrForm((BaseEntityObject) SelectedItem);
+				if (dp.DisplayerType == DisplayerType.Screen)
+					e.SetParameters(dp);
+				else
 				{
 					if (dp.Form.ShowDialog() == DialogResult.OK)
 					{
@@ -497,12 +497,12 @@ namespace CAS.UI.UIControls.StoresControls
 					e.Cancel = true;
 				}
 			}
-        }
+		}
 		#endregion
 
 		#region protected override void SetItemColor(GridViewRowInfo listViewItem, BaseEntityObject item)
 
-		protected override void SetItemColor(GridViewRowInfo listViewItem, IBaseCoreObject item)
+		protected override void SetItemColor(GridViewRowInfo listViewItem, IBaseEntityObject item)
 		{
 			if (item is ComponentDirective)
 			{

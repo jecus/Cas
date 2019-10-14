@@ -600,7 +600,7 @@ namespace CAS.UI.UIControls.Auxiliary
                 if(value != null)
                 {
 	                if (properties[i].Name == "CorrectorId")
-		                value = GlobalObjects.CasEnvironment.GetCorrector((int)value);
+		                value = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 					string valueString;
                     if (value is DateTime)

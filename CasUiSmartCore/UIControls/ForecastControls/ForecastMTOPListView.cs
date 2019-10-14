@@ -20,11 +20,11 @@ using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.ForecastControls
 {
-    ///<summary>
-    /// список для отображения ордеров запроса
-    ///</summary>
-    public partial class ForecastMTOPListView : BaseGridViewControl<NextPerformance>
-    {
+	///<summary>
+	/// список для отображения ордеров запроса
+	///</summary>
+	public partial class ForecastMTOPListView : BaseGridViewControl<NextPerformance>
+	{
 		#region public ForecastListView()
 		///<summary>
 		///</summary>
@@ -62,7 +62,7 @@ namespace CAS.UI.UIControls.ForecastControls
 			AddColumn("X1", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Forecast Data", (int)(radGridView1.Width * 0.2f));
 			AddColumn("X2", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 
@@ -197,7 +197,7 @@ namespace CAS.UI.UIControls.ForecastControls
 			int times = index == 0 ? item.Parent.Times : index + 1;
 			double manHours = item.Parent is IEngineeringDirective ? ((IEngineeringDirective)item.Parent).ManHours : 0;
 			double cost = item.Parent is IEngineeringDirective ? ((IEngineeringDirective)item.Parent).Cost : 0;
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var title = item.Title;
 			if (item.Parent is Directive)
 			{

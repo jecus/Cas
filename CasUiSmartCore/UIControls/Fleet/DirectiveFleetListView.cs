@@ -4,22 +4,21 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Auxiliary;
-using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary.Comparers;
+using CAS.UI.UIControls.DirectivesControls;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
 using Telerik.WinControls.UI;
 using TempUIExtentions;
 
-namespace CAS.UI.UIControls.DirectivesControls
+namespace CAS.UI.UIControls.Fleet
 {
 	///<summary>
 	/// список для отображения ордеров запроса
@@ -118,7 +117,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			AddColumn("M.H.", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Cost", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Hidden remarks", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 
@@ -235,7 +234,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			var access = item.DirectiveAccess;
 			var zone = item.DirectiveZone;
 			var workarea = item.Workarea;
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			if (item.ADNoFile == null)
 				adColor = Color.MediumVioletRed;

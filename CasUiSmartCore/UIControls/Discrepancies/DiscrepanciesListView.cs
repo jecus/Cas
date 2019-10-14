@@ -10,48 +10,48 @@ using SmartCore.Entities.General.Atlbs;
 
 namespace CAS.UI.UIControls.Discrepancies
 {
-    ///<summary>
-    /// список для отображения ордеров запроса
-    ///</summary>
-    public partial class DiscrepanciesListView : BaseGridViewControl<Discrepancy>
-    {
-        #region Fields
+	///<summary>
+	/// список для отображения ордеров запроса
+	///</summary>
+	public partial class DiscrepanciesListView : BaseGridViewControl<Discrepancy>
+	{
+		#region Fields
 
-        #endregion
+		#endregion
 
-        #region Constructors
+		#region Constructors
 
-        #region public DiscrepanciesListView()
-        ///<summary>
-        ///</summary>
-        public DiscrepanciesListView()
-        {
-            InitializeComponent();
-            SortMultiplier = 1;
-        }
-        #endregion
+		#region public DiscrepanciesListView()
+		///<summary>
+		///</summary>
+		public DiscrepanciesListView()
+		{
+			InitializeComponent();
+			SortMultiplier = 1;
+		}
+		#endregion
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region protected override List<PropertyInfo> GetTypeProperties()
-        protected override List<PropertyInfo> GetTypeProperties()
-        {
-            List<PropertyInfo> props = base.GetTypeProperties();
-            PropertyInfo prop = props.FirstOrDefault(p => p.Name.ToLower() == "aircraft");
-            props.Remove(prop);
+		#region protected override List<PropertyInfo> GetTypeProperties()
+		protected override List<PropertyInfo> GetTypeProperties()
+		{
+			List<PropertyInfo> props = base.GetTypeProperties();
+			PropertyInfo prop = props.FirstOrDefault(p => p.Name.ToLower() == "aircraft");
+			props.Remove(prop);
 
-            return props;
-        }
-        #endregion
+			return props;
+		}
+		#endregion
 
-        #region protected override void SetHeaders()
-        /// <summary>
-        /// Устанавливает заголовки
-        /// </summary>
-        protected override void SetHeaders()
-        {
+		#region protected override void SetHeaders()
+		/// <summary>
+		/// Устанавливает заголовки
+		/// </summary>
+		protected override void SetHeaders()
+		{
 			AddColumn("Status", 40);
 			AddColumn("Reliability", 40);
 			AddColumn("ATLB №", 140);
@@ -104,8 +104,8 @@ namespace CAS.UI.UIControls.Discrepancies
 			AddColumn("Comp. On MP", 120);
 			AddColumn("Comp. On Avionix.", 120);
 			AddColumn("Remarks", 80);
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
-        }
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
+		}
 		#endregion
 		#region protected override SetGroupsToItems(int columnIndex)
 		protected override void GroupingItems()
@@ -118,22 +118,22 @@ namespace CAS.UI.UIControls.Discrepancies
 		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 
 		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
-        {
-	        if (SelectedItem == null) return;
+		{
+			if (SelectedItem == null) return;
 
-	        var aircraft = GlobalObjects.AircraftsCore.GetAircraftById(SelectedItem.ParentFlight.AircraftId);
+			var aircraft = GlobalObjects.AircraftsCore.GetAircraftById(SelectedItem.ParentFlight.AircraftId);
 
-	        e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-	        e.RequestedEntity = new FlightScreen(SelectedItem.ParentFlight);
-	        e.DisplayerText = aircraft.RegistrationNumber + ". " + SelectedItem;
+			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+			e.RequestedEntity = new FlightScreen(SelectedItem.ParentFlight);
+			e.DisplayerText = aircraft.RegistrationNumber + ". " + SelectedItem;
 		}
 		#endregion
 
 		#region  protected override List<CustomCell> GetListViewSubItems(Discrepancy item)
 
 		protected override List<CustomCell> GetListViewSubItems(Discrepancy item)
-        {
-	        var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+		{
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			return new List<CustomCell>
 			{
@@ -202,10 +202,10 @@ namespace CAS.UI.UIControls.Discrepancies
 				CreateRow(item.Remarks, item.Remarks),
 				CreateRow(author, author)
 			};
-        }
+		}
 
-        #endregion
+		#endregion
 
-        #endregion
-    }
+		#endregion
+	}
 }

@@ -29,7 +29,7 @@ namespace CAS.UI.UIControls.Reliability
 			AddColumn("Class", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Reason", (int)(radGridView1.Width * 0.4f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 
@@ -39,7 +39,7 @@ namespace CAS.UI.UIControls.Reliability
 		{
 			var subItems = new List<CustomCell>();
 			string on, off,  ata, goodClass, reason = "", description = "", fromTo = "";
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			if (item.IsReplaceComponentRemoved)
 			{
 				off = item.ReplaceComponent.ToString();

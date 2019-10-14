@@ -80,7 +80,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			AddColumn("Applicability", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Hidden remarks", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 
@@ -147,7 +147,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		   if (item.NextPerformanceDate != null && item.NextPerformanceDate > defaultDateTime)
 			  nextComplianceDate = Convert.ToDateTime(item.NextPerformanceDate);
 
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			string kitRequieredString = item.KitsApplicable ? item.Kits.Count + " EA" : "N/A";
 			string ndtString = item.NDTType.ShortName;
 			string skillString = item.Skill.ShortName;

@@ -161,6 +161,35 @@ namespace SmartCore.Maintenance
 
 		#endregion
 
+		public List<MaintenanceDirective> GetMaintenanceDirectives(string text)
+		{
+			var qrs = MaintenanceDirectiveQueries.GetSelectQuery(text, true);
+			List<ExecutionResultArgs> resultArgses;
+			var ds = _casEnvironment.Execute(qrs, out resultArgses);
+			if (resultArgses.Count(r => r.Exception != null) > 0)
+				throw resultArgses.First(r => r.Exception != null).Exception;
+			var directives = BaseQueries.GetObjectList<MaintenanceDirective>(ds, true);
+
+			if (directives.Count == 0)
+				return directives;
+
+			var directiveIds = directives.Select(d => d.ItemId).ToList();
+
+			//Загрузка задач по компонентам привязанных к задачам из MPD
+			//Компонент, для которого привязаны задачи должен находится на том ВС что и задачи MPD
+			var itemsRelations = _itemsRelationsDataAccess.GetRelations(directiveIds, SmartCoreType.MaintenanceDirective.ItemId);
+
+			if (itemsRelations.Count > 0)
+			{
+				foreach (var mpd in directives)
+				{
+					mpd.ItemRelations.AddRange(itemsRelations.Where(i => i.FirstItemId == mpd.ItemId || i.SecondItemId == mpd.ItemId));
+				}
+			}
+
+			return directives;
+		}
+
 		#region public MaintenanceDirective GetMaintenanceDirective(Int32 itemId, Aircraft parentAircraft = null)
 		/// <summary>
 		/// Возвращает все директивы базового агрегата, или самолета

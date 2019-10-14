@@ -28,15 +28,17 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 		public QuotationSupplierForm(List<Supplier> suppliers, List<RequestForQuotationRecord> selectedItems) : this()
 		{
+			UpdateControls();
+
 			_suppliers = suppliers;
 			_selectedItems = selectedItems;
 			supplierListView.SetItemsArray(suppliers.ToArray());
-
-			UpdateControls();
 		}
 
 		public QuotationSupplierForm(List<Supplier> suppliers, RequestForQuotationRecord selectedItem) : this()
 		{
+			UpdateControls();
+
 			_suppliers = suppliers;
 			_selectedItem = selectedItem;
 
@@ -47,8 +49,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			if(_prices.Count > 0)
 				supplierListView1.SetItemsArray(_prices.ToArray());
 			supplierListView.SetItemsArray(suppliers.ToArray());
-
-			UpdateControls();
 		}
 
 		#endregion
@@ -57,7 +57,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		{
 			comboBoxCostNew.Items.Clear();
 			comboBoxCostNew.Items.AddRange(Сurrency.Items.ToArray());
-
+			
 			comboBoxCostOH.Items.Clear();
 			comboBoxCostOH.Items.AddRange(Сurrency.Items.ToArray());
 
@@ -70,8 +70,23 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 		private void ButtonAdd_Click(object sender, System.EventArgs e)
 		{
+			bool showMsg = false;
 			foreach (var supplier in supplierListView.SelectedItems.ToArray())
-				_prices.Add(new SupplierPrice{Supplier = supplier, SupplierId = supplier.ItemId, Parent = _selectedItem});
+			{
+				if (_prices.FirstOrDefault(i => i.SupplierId == supplier.ItemId) == null)
+
+					_prices.Add(new SupplierPrice
+						{Supplier = supplier, SupplierId = supplier.ItemId, Parent = _selectedItem});
+
+				else
+					showMsg = true;
+
+			}
+
+			if(showMsg)
+				MessageBox.Show($"Supplier alredy added!", (string)new GlobalTermsProvider()["SystemName"],
+				MessageBoxButtons.OK,
+				MessageBoxIcon.Exclamation);
 
 			supplierListView1.SetItemsArray(_prices.ToArray());
 		}
@@ -127,10 +142,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			numericUpDownCostOH.Value = 0;
 			numericUpDownCostRepair.Value = 0;
 			numericUpDownCostServ.Value = 0;
-			comboBoxCostNew.SelectedItem = Сurrency.UNK;
-			comboBoxCostOH.SelectedItem = Сurrency.UNK;
-			comboBoxCostRepair.SelectedItem = Сurrency.UNK;
-			comboBoxCostServ.SelectedItem = Сurrency.UNK;
+			comboBoxCostNew.SelectedItem = Сurrency.USD;
+			comboBoxCostOH.SelectedItem = Сurrency.USD;
+			comboBoxCostRepair.SelectedItem = Сurrency.USD;
+			comboBoxCostServ.SelectedItem = Сurrency.USD;
 		}
 
 		private void ButtonCancel_Click(object sender, System.EventArgs e)

@@ -36,7 +36,7 @@ namespace CAS.UI.UIControls.PowerPlants
 			AddDateColumn("Install. Date", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Aircraft (Flight)", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Engine (Flight)", (int)(radGridView1.Width * 0.20f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 
@@ -48,7 +48,7 @@ namespace CAS.UI.UIControls.PowerPlants
 				tcsnLifeLenght = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(aircraft);
 
 			var temp = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(item);
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var transferDate = item.TransferRecords.GetLast().TransferDate;
 
 			return new List<CustomCell>

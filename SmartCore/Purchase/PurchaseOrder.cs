@@ -15,13 +15,13 @@ using SmartCore.Packages;
 namespace SmartCore.Purchase
 {
 
-    /// <summary>
-    /// Класс описывает закупочный ордер
-    /// </summary>
-    [Table("PurchaseOrders", "dbo", "ItemId")]
-    [Dto(typeof(PurchaseOrderDTO))]
+	/// <summary>
+	/// Класс описывает закупочный ордер
+	/// </summary>
+	[Table("PurchaseOrders", "dbo", "ItemId")]
+	[Dto(typeof(PurchaseOrderDTO))]
 	[Condition("IsDeleted", "0")]
-    public class PurchaseOrder : AbstractPackage<PurchaseRequestRecord>, IComparable<PurchaseOrder>, IFileContainer, ILogistic
+	public class PurchaseOrder : AbstractPackage<PurchaseRequestRecord>, IComparable<PurchaseOrder>, IFileContainer, ILogistic
 	{
 
 		/*
@@ -42,57 +42,81 @@ namespace SmartCore.Purchase
 		[TableColumn("Number")]
 		public string Number { get; set; }
 
+		[TableColumn("DesignationId")]
+		public Designation Designation { get; set; }
+
+		[TableColumn("PayTermId")]
+		public PayTerm PayTerm { get; set; }
+
+		[TableColumn("IncoTermId")]
+		public IncoTerm IncoTerm { get; set; }
+
+		[TableColumn("ShipCompanyId")]
+		public int ShipCompanyId { get; set; }
+
+		[TableColumn("ShipTo")]
+		public string ShipTo { get; set; }
+
+		[TableColumn("CargoVolume")]
+		public string CargoVolume { get; set; }
+
+		[TableColumn("BruttoWeight")]
+		public string BruttoWeight { get; set; }
+
+		[TableColumn("NettoWeight")]
+		public string NettoWeight { get; set; }
+
 		/// <summary>
 		/// 
 		/// </summary>
 		public PorProcessType Processed { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public String PorNo { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [TableColumn("ParentQuotationId")]
-        public Int32 ParentQuotationId { get; set; }
-        /// <summary>
-        /// Запрашиваемые комплектующие
-        /// </summary>
-        public List<Product> Products { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		public String PorNo { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		[TableColumn("ParentQuotationId")]
+		public Int32 ParentQuotationId { get; set; }
+		/// <summary>
+		/// Запрашиваемые комплектующие
+		/// </summary>
+		public List<Product> Products { get; set; }
 
-        #region public override CommonCollection<PurchaseRequestRecord> PackageRecords
+		#region public override CommonCollection<PurchaseRequestRecord> PackageRecords
 
-        private CommonCollection<PurchaseRequestRecord> _packageRecords;
-        /// <summary>
-        /// Содержит массив элементов для привязки директив к рабочему пакету
-        /// </summary>
-        [Child(RelationType.OneToMany, "ParentPackageId")]
-        public override CommonCollection<PurchaseRequestRecord> PackageRecords
-        {
-            get { return _packageRecords ?? (_packageRecords = new CommonCollection<PurchaseRequestRecord>()); }
-            internal set
-            {
-                if (_packageRecords != value)
-                {
-                    if (_packageRecords != null)
-                        _packageRecords.Clear();
-                    if (value != null)
-                        _packageRecords = value;
+		private CommonCollection<PurchaseRequestRecord> _packageRecords;
+		/// <summary>
+		/// Содержит массив элементов для привязки директив к рабочему пакету
+		/// </summary>
+		[Child(RelationType.OneToMany, "ParentPackageId")]
+		public override CommonCollection<PurchaseRequestRecord> PackageRecords
+		{
+			get { return _packageRecords ?? (_packageRecords = new CommonCollection<PurchaseRequestRecord>()); }
+			internal set
+			{
+				if (_packageRecords != value)
+				{
+					if (_packageRecords != null)
+						_packageRecords.Clear();
+					if (value != null)
+						_packageRecords = value;
 
-                    OnPropertyChanged("PackageRecords");
-                }
-            }
-        }
-        #endregion
+					OnPropertyChanged("PackageRecords");
+				}
+			}
+		}
+		#endregion
 
-        public RequestForQuotation ParentRequest { get; internal set; }
+		public RequestForQuotation ParentRequest { get; internal set; }
 
-        #region public Supplier Supplier { get; set; }
+		#region public Supplier Supplier { get; set; }
 
-        [ListViewData(0.2f, "Supplier")]
-        [TableColumn("SupplierId")]
-        [Child(false)]
-        public Supplier Supplier { get; set; }
+		[ListViewData(0.2f, "Supplier")]
+		[TableColumn("SupplierId")]
+		[Child(false)]
+		public Supplier Supplier { get; set; }
 		#endregion
 
 
@@ -138,6 +162,8 @@ namespace SmartCore.Purchase
 			}
 		}
 
+		public Supplier ShipCompany { get; set; }
+
 		#endregion
 
 
@@ -150,34 +176,43 @@ namespace SmartCore.Purchase
 		/// Создает закупочный ордер без дополнительной информации
 		/// </summary>
 		public PurchaseOrder()
-        {
-            ItemId = -1;
+		{
+			ItemId = -1;
 			SmartCoreObjectType = SmartCoreType.PurchaseOrder;
-            Remarks = "";
-            Description = "";
-            Status = WorkPackageStatus.Opened;
-            Products = new List<Product>();
-        }
-        #endregion
-      
-        #region public override string ToString()
-        /// <summary>
-        /// Перегружаем для отладки
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return "";
-        }
-        #endregion   
+			Remarks = "";
+			Description = "";
+			Status = WorkPackageStatus.Opened;
+			Products = new List<Product>();
+		}
+		#endregion
+	  
+		#region public override string ToString()
+		/// <summary>
+		/// Перегружаем для отладки
+		/// </summary>
+		/// <returns></returns>
+		public override string ToString()
+		{
+			return "";
+		}
+		#endregion   
 
-        #region public int CompareTo(PurchaseOrder y)
+		#region public int CompareTo(PurchaseOrder y)
 
-        public int CompareTo(PurchaseOrder y)
-        {
-            return ItemId.CompareTo(y.ItemId);
-        }
+		public int CompareTo(PurchaseOrder y)
+		{
+			return ItemId.CompareTo(y.ItemId);
+		}
 
 		#endregion
+
+		public new PurchaseOrder GetCopyUnsaved()
+		{
+			var clone = (PurchaseOrder)MemberwiseClone();
+			clone.ItemId = -1;
+			clone.UnSetEvents();
+
+			return clone;
+		}
 	}
 }

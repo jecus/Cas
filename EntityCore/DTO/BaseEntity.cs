@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Interfaces;
 
@@ -19,5 +20,8 @@ namespace EntityCore.DTO
 		
 		[Column("Corrector")]
 		public int CorrectorId { get; set; }
+
+		[Column("Updated")]
+		public DateTime Updated { get; set; }
 	}
 }

@@ -34,6 +34,7 @@
 			this.linkReliability = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.aDFleet = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.componentFleet = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+			this.maintenanceDirectiveFleet = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.panelButtons = new System.Windows.Forms.Panel();
 			this.ReferenceButtonAdd = new CAS.UI.Management.Dispatchering.RichReferenceButton();
 			this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
@@ -51,6 +52,7 @@
 			this.flowLayoutPanelAircrafts.Controls.Add(this.linkReliability);
 			this.flowLayoutPanelAircrafts.Controls.Add(this.aDFleet);
 			this.flowLayoutPanelAircrafts.Controls.Add(this.componentFleet);
+			this.flowLayoutPanelAircrafts.Controls.Add(this.maintenanceDirectiveFleet);
 			this.flowLayoutPanelAircrafts.Controls.Add(this.panelButtons);
 			this.flowLayoutPanelAircrafts.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
 			this.flowLayoutPanelAircrafts.Location = new System.Drawing.Point(2, 44);
@@ -190,6 +192,32 @@
 			this.componentFleet.TextFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.componentFleet.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkComponentFleet);
 			// 
+			// maintenanceDirectiveFleet
+			// 
+			this.maintenanceDirectiveFleet.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.maintenanceDirectiveFleet.AutoSize = true;
+			this.maintenanceDirectiveFleet.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.maintenanceDirectiveFleet.Displayer = null;
+			this.maintenanceDirectiveFleet.DisplayerText = null;
+			this.maintenanceDirectiveFleet.Enabled = true;
+			this.maintenanceDirectiveFleet.Entity = null;
+			this.maintenanceDirectiveFleet.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
+			this.maintenanceDirectiveFleet.ImageBackColor = System.Drawing.Color.Transparent;
+			this.maintenanceDirectiveFleet.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.maintenanceDirectiveFleet.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.maintenanceDirectiveFleet.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.maintenanceDirectiveFleet.Location = new System.Drawing.Point(4, 116);
+			this.maintenanceDirectiveFleet.Margin = new System.Windows.Forms.Padding(4);
+			this.maintenanceDirectiveFleet.MaximumSize = new System.Drawing.Size(250, 20);
+			this.maintenanceDirectiveFleet.Name = "componentFleet";
+			this.maintenanceDirectiveFleet.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.maintenanceDirectiveFleet.Size = new System.Drawing.Size(250, 20);
+			this.maintenanceDirectiveFleet.TabIndex = 13;
+			this.maintenanceDirectiveFleet.Text = "Routine Fleet";
+			this.maintenanceDirectiveFleet.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.maintenanceDirectiveFleet.TextFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.maintenanceDirectiveFleet.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkMaintenanceDirectiveFleet);
+			// 
 			// panelButtons
 			// 
 			this.panelButtons.AutoSize = true;
@@ -318,5 +346,6 @@
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel linkReliability;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel componentFleet;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel aDFleet;
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel maintenanceDirectiveFleet;
 	}
 }

@@ -65,7 +65,7 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 			AddColumn("Description", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.4f));
 			AddColumn("HiddenRemarks", (int)(radGridView1.Width * 0.4f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 
 		#endregion
@@ -82,7 +82,7 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 
 			var departure = item.FlightNumberPeriod.DepartureDate.Date.AddMinutes(item.FlightNumberPeriod.PeriodFrom);
 			var arrival = item.FlightNumberPeriod.DepartureDate.Date.AddMinutes(item.FlightNumberPeriod.PeriodTo);
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var distance = $"{item.FlightNumberPeriod.FlightNum.Distance} {item.FlightNumberPeriod.FlightNum.DistanceMeasure}";
 
 			foreach (var model in item.FlightNumberPeriod.FlightNum.AircraftModels)

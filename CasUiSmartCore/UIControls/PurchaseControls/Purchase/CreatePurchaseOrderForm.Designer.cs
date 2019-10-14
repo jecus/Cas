@@ -73,7 +73,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.labelQOTitle = new MetroFramework.Controls.MetroLabel();
 			this.buttonOk = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
-			this.purchaseRecordListView1 = new CAS.UI.UIControls.PurchaseControls.Quatation.PurchaseRecordListView();
+			this.purchaseRecordListView1 = new CAS.UI.UIControls.PurchaseControls.Purchase.PurchaseRecordListView();
 			this.quatationSupplierPriceListView1 = new CAS.UI.UIControls.PurchaseControls.Quatation.QuatationSupplierPriceListView();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -156,7 +156,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.groupBox1.Controls.Add(this.comboBoxCondition);
 			this.groupBox1.Location = new System.Drawing.Point(717, 64);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(525, 201);
+			this.groupBox1.Size = new System.Drawing.Size(293, 230);
 			this.groupBox1.TabIndex = 290;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Selected Product";
@@ -169,7 +169,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.comboBoxCurrency.ItemHeight = 17;
 			this.comboBoxCurrency.Location = new System.Drawing.Point(118, 80);
 			this.comboBoxCurrency.Name = "comboBoxCurrency";
-			this.comboBoxCurrency.Size = new System.Drawing.Size(400, 25);
+			this.comboBoxCurrency.Size = new System.Drawing.Size(166, 25);
 			this.comboBoxCurrency.TabIndex = 252;
 			this.comboBoxCurrency.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
@@ -195,7 +195,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			0,
 			0});
 			this.numericUpDown1.Name = "numericUpDown1";
-			this.numericUpDown1.Size = new System.Drawing.Size(165, 20);
+			this.numericUpDown1.Size = new System.Drawing.Size(166, 20);
 			this.numericUpDown1.TabIndex = 250;
 			// 
 			// metroLabel1
@@ -215,7 +215,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button1.Location = new System.Drawing.Point(444, 155);
+			this.button1.Location = new System.Drawing.Point(209, 190);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(75, 33);
 			this.button1.TabIndex = 249;
@@ -232,7 +232,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			0,
 			0});
 			this.numericUpDownQuantity.Name = "numericUpDownQuantity";
-			this.numericUpDownQuantity.Size = new System.Drawing.Size(165, 20);
+			this.numericUpDownQuantity.Size = new System.Drawing.Size(166, 20);
 			this.numericUpDownQuantity.TabIndex = 142;
 			this.numericUpDownQuantity.ValueChanged += new System.EventHandler(this.NumericUpDownQuantity_ValueChanged);
 			// 
@@ -255,7 +255,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.comboBoxMeasure.ItemHeight = 17;
 			this.comboBoxMeasure.Location = new System.Drawing.Point(118, 49);
 			this.comboBoxMeasure.Name = "comboBoxMeasure";
-			this.comboBoxMeasure.Size = new System.Drawing.Size(400, 25);
+			this.comboBoxMeasure.Size = new System.Drawing.Size(166, 25);
 			this.comboBoxMeasure.TabIndex = 141;
 			this.comboBoxMeasure.SelectedIndexChanged += new System.EventHandler(this.ComboBoxMeasure_SelectedIndexChanged);
 			this.comboBoxMeasure.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
@@ -275,7 +275,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// 
 			this.labelTotal.AutoSize = true;
 			this.labelTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelTotal.Location = new System.Drawing.Point(296, 111);
+			this.labelTotal.Location = new System.Drawing.Point(21, 163);
 			this.labelTotal.Name = "labelTotal";
 			this.labelTotal.Size = new System.Drawing.Size(39, 19);
 			this.labelTotal.TabIndex = 168;
@@ -291,7 +291,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.textBoxTotal.CustomButton.Image = null;
 			this.textBoxTotal.CustomButton.Location = new System.Drawing.Point(147, 2);
 			this.textBoxTotal.CustomButton.Name = "";
-			this.textBoxTotal.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.textBoxTotal.CustomButton.Size = new System.Drawing.Size(17, 17);
 			this.textBoxTotal.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
 			this.textBoxTotal.CustomButton.TabIndex = 1;
 			this.textBoxTotal.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -299,7 +299,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.textBoxTotal.CustomButton.Visible = false;
 			this.textBoxTotal.ForeColor = System.Drawing.Color.Black;
 			this.textBoxTotal.Lines = new string[0];
-			this.textBoxTotal.Location = new System.Drawing.Point(353, 110);
+			this.textBoxTotal.Location = new System.Drawing.Point(118, 162);
 			this.textBoxTotal.MaxLength = 128;
 			this.textBoxTotal.Name = "textBoxTotal";
 			this.textBoxTotal.PasswordChar = '\0';
@@ -309,7 +309,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.textBoxTotal.SelectionLength = 0;
 			this.textBoxTotal.SelectionStart = 0;
 			this.textBoxTotal.ShortcutsEnabled = true;
-			this.textBoxTotal.Size = new System.Drawing.Size(165, 20);
+			this.textBoxTotal.Size = new System.Drawing.Size(167, 22);
 			this.textBoxTotal.TabIndex = 143;
 			this.textBoxTotal.UseSelectable = true;
 			this.textBoxTotal.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -332,7 +332,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.comboBoxCondition.ItemHeight = 17;
 			this.comboBoxCondition.Location = new System.Drawing.Point(118, 18);
 			this.comboBoxCondition.Name = "comboBoxCondition";
-			this.comboBoxCondition.Size = new System.Drawing.Size(400, 25);
+			this.comboBoxCondition.Size = new System.Drawing.Size(166, 25);
 			this.comboBoxCondition.TabIndex = 169;
 			this.comboBoxCondition.SelectedIndexChanged += new System.EventHandler(this.ComboBoxCondition_SelectedIndexChanged);
 			this.comboBoxCondition.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
@@ -359,9 +359,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.groupBox2.Controls.Add(this.labelAuthor);
 			this.groupBox2.Controls.Add(this.textBoxTitle);
 			this.groupBox2.Controls.Add(this.labelQOTitle);
-			this.groupBox2.Location = new System.Drawing.Point(716, 271);
+			this.groupBox2.Location = new System.Drawing.Point(717, 300);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(525, 304);
+			this.groupBox2.Size = new System.Drawing.Size(293, 304);
 			this.groupBox2.TabIndex = 291;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Purchase";
@@ -372,7 +372,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// 
 			// 
 			this.metroTextBoxNumber.CustomButton.Image = null;
-			this.metroTextBoxNumber.CustomButton.Location = new System.Drawing.Point(380, 2);
+			this.metroTextBoxNumber.CustomButton.Location = new System.Drawing.Point(147, 2);
 			this.metroTextBoxNumber.CustomButton.Name = "";
 			this.metroTextBoxNumber.CustomButton.Size = new System.Drawing.Size(17, 17);
 			this.metroTextBoxNumber.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -391,7 +391,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.metroTextBoxNumber.SelectionLength = 0;
 			this.metroTextBoxNumber.SelectionStart = 0;
 			this.metroTextBoxNumber.ShortcutsEnabled = true;
-			this.metroTextBoxNumber.Size = new System.Drawing.Size(400, 22);
+			this.metroTextBoxNumber.Size = new System.Drawing.Size(167, 22);
 			this.metroTextBoxNumber.TabIndex = 268;
 			this.metroTextBoxNumber.UseSelectable = true;
 			this.metroTextBoxNumber.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -413,7 +413,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// 
 			// 
 			this.textBoxClosingBy.CustomButton.Image = null;
-			this.textBoxClosingBy.CustomButton.Location = new System.Drawing.Point(381, 2);
+			this.textBoxClosingBy.CustomButton.Location = new System.Drawing.Point(147, 2);
 			this.textBoxClosingBy.CustomButton.Name = "";
 			this.textBoxClosingBy.CustomButton.Size = new System.Drawing.Size(17, 17);
 			this.textBoxClosingBy.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -433,7 +433,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.textBoxClosingBy.SelectionLength = 0;
 			this.textBoxClosingBy.SelectionStart = 0;
 			this.textBoxClosingBy.ShortcutsEnabled = true;
-			this.textBoxClosingBy.Size = new System.Drawing.Size(401, 22);
+			this.textBoxClosingBy.Size = new System.Drawing.Size(167, 22);
 			this.textBoxClosingBy.TabIndex = 267;
 			this.textBoxClosingBy.UseSelectable = true;
 			this.textBoxClosingBy.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -445,7 +445,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// 
 			// 
 			this.textBoxPublishedBy.CustomButton.Image = null;
-			this.textBoxPublishedBy.CustomButton.Location = new System.Drawing.Point(381, 2);
+			this.textBoxPublishedBy.CustomButton.Location = new System.Drawing.Point(147, 2);
 			this.textBoxPublishedBy.CustomButton.Name = "";
 			this.textBoxPublishedBy.CustomButton.Size = new System.Drawing.Size(17, 17);
 			this.textBoxPublishedBy.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -465,7 +465,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.textBoxPublishedBy.SelectionLength = 0;
 			this.textBoxPublishedBy.SelectionStart = 0;
 			this.textBoxPublishedBy.ShortcutsEnabled = true;
-			this.textBoxPublishedBy.Size = new System.Drawing.Size(401, 22);
+			this.textBoxPublishedBy.Size = new System.Drawing.Size(167, 22);
 			this.textBoxPublishedBy.TabIndex = 266;
 			this.textBoxPublishedBy.UseSelectable = true;
 			this.textBoxPublishedBy.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -479,7 +479,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.comboBoxStatus.ItemHeight = 17;
 			this.comboBoxStatus.Location = new System.Drawing.Point(118, 102);
 			this.comboBoxStatus.Name = "comboBoxStatus";
-			this.comboBoxStatus.Size = new System.Drawing.Size(400, 25);
+			this.comboBoxStatus.Size = new System.Drawing.Size(166, 25);
 			this.comboBoxStatus.TabIndex = 265;
 			this.comboBoxStatus.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
@@ -489,7 +489,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// 
 			// 
 			this.textBoxRemarks.CustomButton.Image = null;
-			this.textBoxRemarks.CustomButton.Location = new System.Drawing.Point(381, 2);
+			this.textBoxRemarks.CustomButton.Location = new System.Drawing.Point(147, 2);
 			this.textBoxRemarks.CustomButton.Name = "";
 			this.textBoxRemarks.CustomButton.Size = new System.Drawing.Size(17, 17);
 			this.textBoxRemarks.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -508,7 +508,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.textBoxRemarks.SelectionLength = 0;
 			this.textBoxRemarks.SelectionStart = 0;
 			this.textBoxRemarks.ShortcutsEnabled = true;
-			this.textBoxRemarks.Size = new System.Drawing.Size(401, 22);
+			this.textBoxRemarks.Size = new System.Drawing.Size(167, 22);
 			this.textBoxRemarks.TabIndex = 264;
 			this.textBoxRemarks.UseSelectable = true;
 			this.textBoxRemarks.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -550,7 +550,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.dateTimePickerClosingDate.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateTimePickerClosingDate.Location = new System.Drawing.Point(118, 214);
 			this.dateTimePickerClosingDate.Name = "dateTimePickerClosingDate";
-			this.dateTimePickerClosingDate.Size = new System.Drawing.Size(400, 22);
+			this.dateTimePickerClosingDate.Size = new System.Drawing.Size(166, 22);
 			this.dateTimePickerClosingDate.TabIndex = 259;
 			// 
 			// labelPublishDate
@@ -569,7 +569,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.dateTimePickerPublishDate.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateTimePickerPublishDate.Location = new System.Drawing.Point(118, 159);
 			this.dateTimePickerPublishDate.Name = "dateTimePickerPublishDate";
-			this.dateTimePickerPublishDate.Size = new System.Drawing.Size(400, 22);
+			this.dateTimePickerPublishDate.Size = new System.Drawing.Size(166, 22);
 			this.dateTimePickerPublishDate.TabIndex = 257;
 			// 
 			// label5
@@ -588,7 +588,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.dateTimePickerOpeningDate.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateTimePickerOpeningDate.Location = new System.Drawing.Point(118, 131);
 			this.dateTimePickerOpeningDate.Name = "dateTimePickerOpeningDate";
-			this.dateTimePickerOpeningDate.Size = new System.Drawing.Size(400, 22);
+			this.dateTimePickerOpeningDate.Size = new System.Drawing.Size(166, 22);
 			this.dateTimePickerOpeningDate.TabIndex = 162;
 			// 
 			// labelOpeningDate
@@ -617,7 +617,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// 
 			// 
 			this.textBoxAuthor.CustomButton.Image = null;
-			this.textBoxAuthor.CustomButton.Location = new System.Drawing.Point(380, 2);
+			this.textBoxAuthor.CustomButton.Location = new System.Drawing.Point(147, 2);
 			this.textBoxAuthor.CustomButton.Name = "";
 			this.textBoxAuthor.CustomButton.Size = new System.Drawing.Size(17, 17);
 			this.textBoxAuthor.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -637,7 +637,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.textBoxAuthor.SelectionLength = 0;
 			this.textBoxAuthor.SelectionStart = 0;
 			this.textBoxAuthor.ShortcutsEnabled = true;
-			this.textBoxAuthor.Size = new System.Drawing.Size(400, 22);
+			this.textBoxAuthor.Size = new System.Drawing.Size(167, 22);
 			this.textBoxAuthor.TabIndex = 159;
 			this.textBoxAuthor.UseSelectable = true;
 			this.textBoxAuthor.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -659,7 +659,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// 
 			// 
 			this.textBoxTitle.CustomButton.Image = null;
-			this.textBoxTitle.CustomButton.Location = new System.Drawing.Point(380, 2);
+			this.textBoxTitle.CustomButton.Location = new System.Drawing.Point(147, 2);
 			this.textBoxTitle.CustomButton.Name = "";
 			this.textBoxTitle.CustomButton.Size = new System.Drawing.Size(17, 17);
 			this.textBoxTitle.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -678,7 +678,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.textBoxTitle.SelectionLength = 0;
 			this.textBoxTitle.SelectionStart = 0;
 			this.textBoxTitle.ShortcutsEnabled = true;
-			this.textBoxTitle.Size = new System.Drawing.Size(400, 22);
+			this.textBoxTitle.Size = new System.Drawing.Size(167, 22);
 			this.textBoxTitle.TabIndex = 2;
 			this.textBoxTitle.UseSelectable = true;
 			this.textBoxTitle.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -700,7 +700,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(1086, 610);
+			this.buttonOk.Location = new System.Drawing.Point(854, 610);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 293;
@@ -715,7 +715,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonCancel.Location = new System.Drawing.Point(1167, 610);
+			this.buttonCancel.Location = new System.Drawing.Point(935, 610);
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.Size = new System.Drawing.Size(75, 33);
 			this.buttonCancel.TabIndex = 292;
@@ -739,17 +739,21 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.quatationSupplierPriceListView1.Displayer = null;
 			this.quatationSupplierPriceListView1.DisplayerText = null;
 			this.quatationSupplierPriceListView1.Entity = null;
+			this.quatationSupplierPriceListView1.IgnoreEnterPress = false;
 			this.quatationSupplierPriceListView1.Location = new System.Drawing.Point(23, 64);
+			this.quatationSupplierPriceListView1.MenuOpeningAction = null;
 			this.quatationSupplierPriceListView1.Name = "quatationSupplierPriceListView1";
+			this.quatationSupplierPriceListView1.OldColumnIndex = 2;
 			this.quatationSupplierPriceListView1.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.quatationSupplierPriceListView1.Size = new System.Drawing.Size(687, 266);
+			this.quatationSupplierPriceListView1.SortMultiplier = 1;
 			this.quatationSupplierPriceListView1.TabIndex = 295;
 			// 
 			// CreatePurchaseOrderForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1255, 656);
+			this.ClientSize = new System.Drawing.Size(1023, 656);
 			this.Controls.Add(this.purchaseRecordListView1);
 			this.Controls.Add(this.quatationSupplierPriceListView1);
 			this.Controls.Add(this.buttonOk);
@@ -811,7 +815,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private Quatation.QuatationSupplierPriceListView quatationSupplierPriceListView1;
 		private System.Windows.Forms.NumericUpDown numericUpDown1;
 		private MetroLabel metroLabel1;
-		private Quatation.PurchaseRecordListView purchaseRecordListView1;
+		private Purchase.PurchaseRecordListView purchaseRecordListView1;
 		private System.Windows.Forms.ComboBox comboBoxCurrency;
 		private MetroLabel metroLabel2;
 	}

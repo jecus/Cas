@@ -92,7 +92,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 			var issueDateValidToString = item.IssueValidTo ? SmartCore.Auxiliary.Convert.GetDateFormat(item.IssueDateValidTo) : "";
 			var aboard = item.Aboard ? "Yes" : "No";
 			var privy = item.Privy ? "Yes" : "No";
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			return new List<CustomCell>()
 			{
@@ -156,7 +156,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 			AddColumn("Status", (int)(radGridView1.Width * 0.08f));
 			AddColumn("ID №", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.20f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.02f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 

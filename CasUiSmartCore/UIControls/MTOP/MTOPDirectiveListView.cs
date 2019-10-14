@@ -87,7 +87,7 @@ namespace CAS.UI.UIControls.MTOP
 
 				AddColumn(text, width);
 			}
-			AddColumn("Signer", (int)(radGridView1.Width * 0.02f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.03f));
 			radGridView1.Columns.AddRange(ColumnHeaderList.ToArray());
 		}
 
@@ -102,7 +102,7 @@ namespace CAS.UI.UIControls.MTOP
 			var phaseString = "";
 			if (item.MTOPPhase != null)
 				phaseString = item.MTOPPhase.ToString();
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			subItems.Add(CreateRow(item.TaskCardNumber, item.TaskCardNumber));
 

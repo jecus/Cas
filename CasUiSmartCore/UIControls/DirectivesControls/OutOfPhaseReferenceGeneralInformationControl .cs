@@ -130,7 +130,7 @@ namespace CAS.UI.UIControls.DirectivesControls
         /// </summary>
         public ADType ADType
         {
-            get { return radioButtonAirFrame.Checked ? ADType.Airframe : ADType.Apliance; }
+            get { return radioButtonAirFrame.Checked ? ADType.Airframe : ADType.Appliance; }
             set
             {
                 if (value == ADType.Airframe)

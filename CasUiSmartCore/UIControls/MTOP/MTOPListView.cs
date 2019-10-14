@@ -38,7 +38,7 @@ namespace CAS.UI.UIControls.MTOP
 			foreach (var lifelength in _groupLifelengths)
 				AddColumn(lifelength.Key.ToString(), (int)(radGridView1.Width * 0.5f));
 			
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 			
 			radGridView1.Columns.AddRange(ColumnHeaderList.ToArray());
 		}
@@ -53,7 +53,7 @@ namespace CAS.UI.UIControls.MTOP
 
 			var tempHours = item.PhaseThresh.Hours;
 			var name = $"{item.Name}";
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			
 			subItems.Add(CreateRow(name, name));
 

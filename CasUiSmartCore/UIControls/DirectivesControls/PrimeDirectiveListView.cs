@@ -117,7 +117,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			AddColumn("M.H.", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Cost", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Hidden remarks", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 
@@ -234,7 +234,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			var access = item.DirectiveAccess;
 			var zone = item.DirectiveZone;
 			var workarea = item.Workarea;
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			if (item.ADNoFile == null)
 				adColor = Color.MediumVioletRed;

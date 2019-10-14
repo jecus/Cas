@@ -20,61 +20,61 @@ using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.QualityAssuranceControls
 {
-    ///<summary>
-    /// список для отображения ордеров запроса
-    ///</summary>
-    public partial class AuditView : BaseGridViewControl<BaseEntityObject>
-    {
-        #region Fields
+	///<summary>
+	/// список для отображения ордеров запроса
+	///</summary>
+	public partial class AuditView : BaseGridViewControl<BaseEntityObject>
+	{
+		#region Fields
 
-        private Audit _currentDirective;
+		private Audit _currentDirective;
 
-        #endregion
+		#endregion
 
-        #region Constructors
+		#region Constructors
 
-        #region private AuditView()
-        ///<summary>
-        ///</summary>
-        private AuditView()
-        {
-            InitializeComponent();
-        }
-        #endregion
+		#region private AuditView()
+		///<summary>
+		///</summary>
+		private AuditView()
+		{
+			InitializeComponent();
+		}
+		#endregion
 
-        #region public AuditView()
-        ///<summary>
-        ///</summary>
-        public AuditView(Audit currebtDirective) : this ()
-        {
-            _currentDirective = currebtDirective;
-        }
-        #endregion
+		#region public AuditView()
+		///<summary>
+		///</summary>
+		public AuditView(Audit currebtDirective) : this ()
+		{
+			_currentDirective = currebtDirective;
+		}
+		#endregion
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region protected override void SetHeaders()
-        /// <summary>
-        /// Устанавливает заголовки
-        /// </summary>
-        protected override void SetHeaders()
-        {
-	        AddColumn("Type", (int)(radGridView1.Width * 0.20f));
-	        AddColumn("ATA", (int)(radGridView1.Width * 0.20f));
-	        AddColumn("Title", (int)(radGridView1.Width * 0.32f));
-	        AddColumn("Description", (int)(radGridView1.Width * 0.16f));
-	        AddColumn("Kit Required", (int)(radGridView1.Width * 0.16f));
-	        AddColumn("Performance", (int)(radGridView1.Width * 0.16f));
-	        AddColumn("Rpt. Intv.", (int)(radGridView1.Width * 0.16f));
-	        AddColumn("Overdue/Remain", (int)(radGridView1.Width * 0.16f));
-	        AddColumn("Work Type", (int)(radGridView1.Width * 0.16f));
-	        AddColumn("Perf. Date", (int)(radGridView1.Width * 0.16f));
-	        AddColumn("MH", (int)(radGridView1.Width * 0.16f));
-	        AddColumn("Cost", (int)(radGridView1.Width * 0.16f));
-	        AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
-        }
+		#region protected override void SetHeaders()
+		/// <summary>
+		/// Устанавливает заголовки
+		/// </summary>
+		protected override void SetHeaders()
+		{
+			AddColumn("Type", (int)(radGridView1.Width * 0.20f));
+			AddColumn("ATA", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Title", (int)(radGridView1.Width * 0.32f));
+			AddColumn("Description", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Kit Required", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Performance", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Rpt. Intv.", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Overdue/Remain", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Work Type", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Perf. Date", (int)(radGridView1.Width * 0.16f));
+			AddColumn("MH", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Cost", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
+		}
 		#endregion
 
 		#region protected override void GroupingItems()
@@ -271,388 +271,388 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 		protected override List<CustomCell> GetListViewSubItems(BaseEntityObject item)
 		{
 			var temp = ListViewGroupHelper.GetGroupString(item);
-            var subItems = new List<CustomCell>()
-            {
+			var subItems = new List<CustomCell>()
+			{
 				CreateRow(temp,temp)
-            };
-            var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			};
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			//if(item.ItemId == 41043)
 			//{
 
 			//}
 			if (item is NextPerformance)
-            {
-                NextPerformance np = (NextPerformance) item;
+			{
+				NextPerformance np = (NextPerformance) item;
 
-                double manHours = np.Parent is IEngineeringDirective ? ((IEngineeringDirective)np.Parent).ManHours : 0;
-                double cost = np.Parent is IEngineeringDirective ? ((IEngineeringDirective)np.Parent).Cost : 0;
+				double manHours = np.Parent is IEngineeringDirective ? ((IEngineeringDirective)np.Parent).ManHours : 0;
+				double cost = np.Parent is IEngineeringDirective ? ((IEngineeringDirective)np.Parent).Cost : 0;
 
-                subItems.Add(CreateRow(np.ATAChapter.ToString(), np.ATAChapter));
-                subItems.Add(CreateRow(np.Title, np.Title));
-                subItems.Add(CreateRow(np.Description, np.Description));
-                subItems.Add(CreateRow(np.KitsToString, np.Kits.Count));
-                subItems.Add(CreateRow(np.PerformanceSource.ToString(), np.PerformanceSource));
-                subItems.Add(CreateRow(np.Parent.Threshold.RepeatInterval.ToString(), np.Parent.Threshold.RepeatInterval));
-                subItems.Add(CreateRow(np.Remains.ToString(), np.Remains));
-                subItems.Add(CreateRow(np.WorkType, Tag = np.WorkType));
-                subItems.Add(CreateRow(np.PerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)np.PerformanceDate), np.PerformanceDate));
-                subItems.Add(CreateRow(manHours.ToString(), manHours));
-                subItems.Add(CreateRow(cost.ToString(), cost));
+				subItems.Add(CreateRow(np.ATAChapter.ToString(), np.ATAChapter));
+				subItems.Add(CreateRow(np.Title, np.Title));
+				subItems.Add(CreateRow(np.Description, np.Description));
+				subItems.Add(CreateRow(np.KitsToString, np.Kits.Count));
+				subItems.Add(CreateRow(np.PerformanceSource.ToString(), np.PerformanceSource));
+				subItems.Add(CreateRow(np.Parent.Threshold.RepeatInterval.ToString(), np.Parent.Threshold.RepeatInterval));
+				subItems.Add(CreateRow(np.Remains.ToString(), np.Remains));
+				subItems.Add(CreateRow(np.WorkType, Tag = np.WorkType));
+				subItems.Add(CreateRow(np.PerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)np.PerformanceDate), np.PerformanceDate));
+				subItems.Add(CreateRow(manHours.ToString(), manHours));
+				subItems.Add(CreateRow(cost.ToString(), cost));
 				subItems.Add(CreateRow(author, author));
 			}
-            else if (item is AbstractPerformanceRecord)
-            {
-                //DirectiveRecord directiveRecord = (DirectiveRecord)item;
-                AbstractPerformanceRecord apr = (AbstractPerformanceRecord)item;
-                Lifelength remains = Lifelength.Null;
-                double manHours = apr.Parent is IEngineeringDirective ? ((IEngineeringDirective)apr.Parent).ManHours : 0;
-                double cost = apr.Parent is IEngineeringDirective ? ((IEngineeringDirective)apr.Parent).Cost : 0;
+			else if (item is AbstractPerformanceRecord)
+			{
+				//DirectiveRecord directiveRecord = (DirectiveRecord)item;
+				AbstractPerformanceRecord apr = (AbstractPerformanceRecord)item;
+				Lifelength remains = Lifelength.Null;
+				double manHours = apr.Parent is IEngineeringDirective ? ((IEngineeringDirective)apr.Parent).ManHours : 0;
+				double cost = apr.Parent is IEngineeringDirective ? ((IEngineeringDirective)apr.Parent).Cost : 0;
 
-                subItems.Add(CreateRow(apr.ATAChapter.ToString(), apr.ATAChapter));
-                subItems.Add(CreateRow(apr.Title, apr.Title));
-                subItems.Add(CreateRow(apr.Description, apr.Description));
-                subItems.Add(CreateRow(apr.KitsToString, apr.Kits.Count));
-                subItems.Add(CreateRow(apr.OnLifelength.ToString(), apr.OnLifelength));
-                subItems.Add(CreateRow(apr.Parent.Threshold.RepeatInterval.ToString(), apr.Parent.Threshold.RepeatInterval));
-                subItems.Add(CreateRow(remains.ToString(), remains));
-                subItems.Add(CreateRow(apr.WorkType, apr.WorkType));
-                subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(apr.RecordDate), apr.RecordDate));
-                subItems.Add(CreateRow(manHours.ToString(), manHours));
-                subItems.Add(CreateRow(cost.ToString(), cost));
-                subItems.Add(CreateRow(author, author));
+				subItems.Add(CreateRow(apr.ATAChapter.ToString(), apr.ATAChapter));
+				subItems.Add(CreateRow(apr.Title, apr.Title));
+				subItems.Add(CreateRow(apr.Description, apr.Description));
+				subItems.Add(CreateRow(apr.KitsToString, apr.Kits.Count));
+				subItems.Add(CreateRow(apr.OnLifelength.ToString(), apr.OnLifelength));
+				subItems.Add(CreateRow(apr.Parent.Threshold.RepeatInterval.ToString(), apr.Parent.Threshold.RepeatInterval));
+				subItems.Add(CreateRow(remains.ToString(), remains));
+				subItems.Add(CreateRow(apr.WorkType, apr.WorkType));
+				subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(apr.RecordDate), apr.RecordDate));
+				subItems.Add(CreateRow(manHours.ToString(), manHours));
+				subItems.Add(CreateRow(cost.ToString(), cost));
+				subItems.Add(CreateRow(author, author));
 			}
-            else if (item is Directive)
-            {
-                Directive directive = (Directive)item;
+			else if (item is Directive)
+			{
+				Directive directive = (Directive)item;
 
-                AtaChapter ata = directive.ATAChapter;
-                subItems.Add(CreateRow(ata.ToString(), ata));
-                subItems.Add(CreateRow(directive.Title, directive.Title));
-                subItems.Add(CreateRow(directive.Description, directive.Description));
+				AtaChapter ata = directive.ATAChapter;
+				subItems.Add(CreateRow(ata.ToString(), ata));
+				subItems.Add(CreateRow(directive.Title, directive.Title));
+				subItems.Add(CreateRow(directive.Description, directive.Description));
 
-                #region Определение текста для колонки "КИТы"
-                subItems.Add(CreateRow(directive.Kits.Count > 0 ? directive.Kits.Count + " kits" : "", directive.Kits.Count));
-                #endregion
+				#region Определение текста для колонки "КИТы"
+				subItems.Add(CreateRow(directive.Kits.Count > 0 ? directive.Kits.Count + " kits" : "", directive.Kits.Count));
+				#endregion
 
-                #region Определение текста для колонки "Первое выполнение"
+				#region Определение текста для колонки "Первое выполнение"
 
-                var subItem = new CustomCell();
-                if (directive.Threshold.FirstPerformanceSinceNew != null && !directive.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
-                {
-                    subItem.Text = "s/n: " + directive.Threshold.FirstPerformanceSinceNew;
-                    subItem.Tag = directive.Threshold.FirstPerformanceSinceNew;
-                }
-                if (directive.Threshold.FirstPerformanceSinceEffectiveDate != null &&
-                    !directive.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
-                {
-                    if (subItem.Text != "") subItem.Text += " or ";
-                    else
-                    {
-                        subItem.Text = "";
-                        subItem.Tag = directive.Threshold.FirstPerformanceSinceEffectiveDate;
-                    }
-                    subItem.Text += "s/e.d: " + directive.Threshold.FirstPerformanceSinceEffectiveDate;
-                }
+				var subItem = new CustomCell();
+				if (directive.Threshold.FirstPerformanceSinceNew != null && !directive.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
+				{
+					subItem.Text = "s/n: " + directive.Threshold.FirstPerformanceSinceNew;
+					subItem.Tag = directive.Threshold.FirstPerformanceSinceNew;
+				}
+				if (directive.Threshold.FirstPerformanceSinceEffectiveDate != null &&
+					!directive.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+				{
+					if (subItem.Text != "") subItem.Text += " or ";
+					else
+					{
+						subItem.Text = "";
+						subItem.Tag = directive.Threshold.FirstPerformanceSinceEffectiveDate;
+					}
+					subItem.Text += "s/e.d: " + directive.Threshold.FirstPerformanceSinceEffectiveDate;
+				}
 
-                subItems.Add(subItem);
-                #endregion
+				subItems.Add(subItem);
+				#endregion
 
-                #region Определение текста для колонки "повторяющийся интервал"
+				#region Определение текста для колонки "повторяющийся интервал"
 
-                subItem = new CustomCell();
-                if (!directive.Threshold.RepeatInterval.IsNullOrZero())
-                {
-                    subItem.Text = directive.Threshold.RepeatInterval.ToString();
-                    subItem.Tag = directive.Threshold.RepeatInterval;
-                }
-                else
-                {
-                    subItem.Text = "";
-                    subItem.Tag = Lifelength.Null;
-                }
-                subItems.Add(subItem);
-                #endregion
+				subItem = new CustomCell();
+				if (!directive.Threshold.RepeatInterval.IsNullOrZero())
+				{
+					subItem.Text = directive.Threshold.RepeatInterval.ToString();
+					subItem.Tag = directive.Threshold.RepeatInterval;
+				}
+				else
+				{
+					subItem.Text = "";
+					subItem.Tag = Lifelength.Null;
+				}
+				subItems.Add(subItem);
+				#endregion
 
-                #region Определение текста для колонки "Остаток/Просрочено на сегодня"
-                subItems.Add(CreateRow(directive.Remains.ToString(), directive.Remains));
-                #endregion
+				#region Определение текста для колонки "Остаток/Просрочено на сегодня"
+				subItems.Add(CreateRow(directive.Remains.ToString(), directive.Remains));
+				#endregion
 
-                #region Определение текста для колонки "Тип работ"
+				#region Определение текста для колонки "Тип работ"
 
-                subItems.Add(CreateRow(directive.WorkType.ToString(), directive.WorkType));
-                #endregion
+				subItems.Add(CreateRow(directive.WorkType.ToString(), directive.WorkType));
+				#endregion
 
-                #region Определение текста для колонки "Следующее выполнение"
-                subItems.Add(CreateRow(directive.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)directive.NextPerformanceDate), directive.NextPerformanceDate));
-                #endregion
+				#region Определение текста для колонки "Следующее выполнение"
+				subItems.Add(CreateRow(directive.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)directive.NextPerformanceDate), directive.NextPerformanceDate));
+				#endregion
 
-                #region Определение текста для колонки "Человек/Часы"
+				#region Определение текста для колонки "Человек/Часы"
 
-                subItems.Add(CreateRow(directive.ManHours.ToString(), directive.ManHours));
-                #endregion
+				subItems.Add(CreateRow(directive.ManHours.ToString(), directive.ManHours));
+				#endregion
 
-                #region Определение текста для колонки "Стоимость"
+				#region Определение текста для колонки "Стоимость"
 
-                subItems.Add(CreateRow(directive.Cost.ToString(), directive.Cost));
+				subItems.Add(CreateRow(directive.Cost.ToString(), directive.Cost));
 				#endregion
 				subItems.Add(CreateRow(author, author));
 			}
-            else if (item is BaseComponent)
-            {
-                BaseComponent bd = (BaseComponent)item;
-                AtaChapter ata = bd.ATAChapter;
+			else if (item is BaseComponent)
+			{
+				BaseComponent bd = (BaseComponent)item;
+				AtaChapter ata = bd.ATAChapter;
 
-                subItems.Add(CreateRow(ata.ToString(), ata));
-                subItems.Add(CreateRow(bd.PartNumber, bd.PartNumber));
-                subItems.Add(CreateRow(bd.Description, bd.Description));
-                subItems.Add(CreateRow(bd.Kits.Count > 0 ? bd.Kits.Count + " kits" : "", bd.Kits.Count));
-                subItems.Add(CreateRow(bd.LifeLimit.ToString(), bd.LifeLimit));
-                subItems.Add(CreateRow("", Lifelength.Null));
-                subItems.Add(CreateRow(bd.Remains.ToString(), bd.Remains));
-                subItems.Add(CreateRow(ComponentRecordType.Remove.ToString(), ComponentRecordType.Remove));
-                subItems.Add(CreateRow(bd.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)bd.NextPerformanceDate), bd.NextPerformanceDate));
-                subItems.Add(CreateRow(bd.ManHours.ToString(), bd.ManHours));
-                subItems.Add(CreateRow(bd.Cost.ToString(), bd.Cost));
-                subItems.Add(CreateRow(author, author));
+				subItems.Add(CreateRow(ata.ToString(), ata));
+				subItems.Add(CreateRow(bd.PartNumber, bd.PartNumber));
+				subItems.Add(CreateRow(bd.Description, bd.Description));
+				subItems.Add(CreateRow(bd.Kits.Count > 0 ? bd.Kits.Count + " kits" : "", bd.Kits.Count));
+				subItems.Add(CreateRow(bd.LifeLimit.ToString(), bd.LifeLimit));
+				subItems.Add(CreateRow("", Lifelength.Null));
+				subItems.Add(CreateRow(bd.Remains.ToString(), bd.Remains));
+				subItems.Add(CreateRow(ComponentRecordType.Remove.ToString(), ComponentRecordType.Remove));
+				subItems.Add(CreateRow(bd.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)bd.NextPerformanceDate), bd.NextPerformanceDate));
+				subItems.Add(CreateRow(bd.ManHours.ToString(), bd.ManHours));
+				subItems.Add(CreateRow(bd.Cost.ToString(), bd.Cost));
+				subItems.Add(CreateRow(author, author));
 			}
-            else if (item is Component)
-            {
-                Component d = (Component)item;
-                AtaChapter ata = d.ATAChapter;
+			else if (item is Component)
+			{
+				Component d = (Component)item;
+				AtaChapter ata = d.ATAChapter;
 
-                subItems.Add(CreateRow(ata.ToString(), ata));
-                subItems.Add(CreateRow(d.PartNumber, d.PartNumber));
-                subItems.Add(CreateRow(d.Description, d.Description));
-                subItems.Add(CreateRow(d.Kits.Count > 0 ? d.Kits.Count + " kits" : "", d.Kits.Count));
-                subItems.Add(CreateRow(d.LifeLimit != null ? d.LifeLimit.ToString() : "", d.LifeLimit));
-                subItems.Add(CreateRow("", Lifelength.Null));
-                subItems.Add(CreateRow(d.Remains != null ? d.Remains.ToString() : "", d.Remains));
-                subItems.Add(CreateRow(ComponentRecordType.Remove.ToString(), ComponentRecordType.Remove));
-                subItems.Add(CreateRow(d.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)d.NextPerformanceDate), d.NextPerformanceDate));
-                subItems.Add(CreateRow(d.ManHours.ToString(), d.ManHours));
-                subItems.Add(CreateRow(d.Cost.ToString(), d.Cost));
-                subItems.Add(CreateRow(author, Tag = author));
+				subItems.Add(CreateRow(ata.ToString(), ata));
+				subItems.Add(CreateRow(d.PartNumber, d.PartNumber));
+				subItems.Add(CreateRow(d.Description, d.Description));
+				subItems.Add(CreateRow(d.Kits.Count > 0 ? d.Kits.Count + " kits" : "", d.Kits.Count));
+				subItems.Add(CreateRow(d.LifeLimit != null ? d.LifeLimit.ToString() : "", d.LifeLimit));
+				subItems.Add(CreateRow("", Lifelength.Null));
+				subItems.Add(CreateRow(d.Remains != null ? d.Remains.ToString() : "", d.Remains));
+				subItems.Add(CreateRow(ComponentRecordType.Remove.ToString(), ComponentRecordType.Remove));
+				subItems.Add(CreateRow(d.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)d.NextPerformanceDate), d.NextPerformanceDate));
+				subItems.Add(CreateRow(d.ManHours.ToString(), d.ManHours));
+				subItems.Add(CreateRow(d.Cost.ToString(), d.Cost));
+				subItems.Add(CreateRow(author, Tag = author));
 			}
-            else if (item is ComponentDirective)
-            {
-                ComponentDirective dd = (ComponentDirective)item;
-                AtaChapter ata = dd.ParentComponent.ATAChapter;
+			else if (item is ComponentDirective)
+			{
+				ComponentDirective dd = (ComponentDirective)item;
+				AtaChapter ata = dd.ParentComponent.ATAChapter;
 
-                subItems.Add(CreateRow(ata != null ? ata.ToString() : "", ata));
-                subItems.Add(CreateRow("", "" ));
-                subItems.Add(CreateRow(dd.Remarks, dd.Remarks));
-                subItems.Add(CreateRow(dd.Kits.Count > 0 ? dd.Kits.Count + " kits" : "", dd.Kits.Count));
-                #region Определение текста для колонки "Первое выполнение"
+				subItems.Add(CreateRow(ata != null ? ata.ToString() : "", ata));
+				subItems.Add(CreateRow("", "" ));
+				subItems.Add(CreateRow(dd.Remarks, dd.Remarks));
+				subItems.Add(CreateRow(dd.Kits.Count > 0 ? dd.Kits.Count + " kits" : "", dd.Kits.Count));
+				#region Определение текста для колонки "Первое выполнение"
 
-                var subItem = new CustomCell();
-                if (dd.Threshold.FirstPerformanceSinceNew != null && !dd.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
-                {
-                    subItem.Text = "s/n: " + dd.Threshold.FirstPerformanceSinceNew;
-                    subItem.Tag = dd.Threshold.FirstPerformanceSinceNew;
-                }
-                subItems.Add(subItem);
-                #endregion
-                #region Определение текста для колонки "повторяющийся интервал"
+				var subItem = new CustomCell();
+				if (dd.Threshold.FirstPerformanceSinceNew != null && !dd.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
+				{
+					subItem.Text = "s/n: " + dd.Threshold.FirstPerformanceSinceNew;
+					subItem.Tag = dd.Threshold.FirstPerformanceSinceNew;
+				}
+				subItems.Add(subItem);
+				#endregion
+				#region Определение текста для колонки "повторяющийся интервал"
 
-                subItem = new CustomCell();
-                if (!dd.Threshold.RepeatInterval.IsNullOrZero())
-                {
-                    subItem.Text = dd.Threshold.RepeatInterval.ToString();
-                    subItem.Tag = dd.Threshold.RepeatInterval;
-                }
-                else
-                {
-                    subItem.Text = "";
-                    subItem.Tag = Lifelength.Null;
-                }
-                subItems.Add(subItem);
-                #endregion
-                subItems.Add( CreateRow(dd.Remains.ToString(), dd.Remains));
-                subItems.Add(CreateRow(dd.DirectiveType.ToString(), dd.DirectiveType));
-                subItems.Add(CreateRow(dd.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)dd.NextPerformanceDate), dd.NextPerformanceDate));
-                subItems.Add(CreateRow(dd.ManHours.ToString(), dd.ManHours));
-                subItems.Add(CreateRow(dd.Cost.ToString(), dd.Cost));
-                subItems.Add(CreateRow(author, author));
+				subItem = new CustomCell();
+				if (!dd.Threshold.RepeatInterval.IsNullOrZero())
+				{
+					subItem.Text = dd.Threshold.RepeatInterval.ToString();
+					subItem.Tag = dd.Threshold.RepeatInterval;
+				}
+				else
+				{
+					subItem.Text = "";
+					subItem.Tag = Lifelength.Null;
+				}
+				subItems.Add(subItem);
+				#endregion
+				subItems.Add( CreateRow(dd.Remains.ToString(), dd.Remains));
+				subItems.Add(CreateRow(dd.DirectiveType.ToString(), dd.DirectiveType));
+				subItems.Add(CreateRow(dd.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)dd.NextPerformanceDate), dd.NextPerformanceDate));
+				subItems.Add(CreateRow(dd.ManHours.ToString(), dd.ManHours));
+				subItems.Add(CreateRow(dd.Cost.ToString(), dd.Cost));
+				subItems.Add(CreateRow(author, author));
 			}
-            else if (item is MaintenanceCheck)
-            {
-                MaintenanceCheck mc = (MaintenanceCheck)item;
-                subItems.Add(CreateRow("", null));
-                subItems.Add(CreateRow("", ""));
-                subItems.Add(CreateRow(mc.Name + (mc.Schedule ? " Shedule" : " Unshedule"), mc.Name));
-                subItems.Add(CreateRow(mc.Kits.Count > 0 ? mc.Kits.Count + " kits" : "", mc.Kits.Count));
-                subItems.Add(CreateRow(mc.Interval.ToString(), mc.Interval));
-                subItems.Add(CreateRow("", Lifelength.Null));
-                subItems.Add(CreateRow(mc.Remains.ToString(), mc.Remains));
-                subItems.Add(CreateRow("", ""));
-                subItems.Add(CreateRow(mc.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)mc.NextPerformanceDate), mc.NextPerformanceDate));
-                subItems.Add(CreateRow(mc.ManHours.ToString(), mc.ManHours));
-                subItems.Add(CreateRow(mc.Cost.ToString(), mc.Cost));
-                subItems.Add(CreateRow(author, author));
+			else if (item is MaintenanceCheck)
+			{
+				MaintenanceCheck mc = (MaintenanceCheck)item;
+				subItems.Add(CreateRow("", null));
+				subItems.Add(CreateRow("", ""));
+				subItems.Add(CreateRow(mc.Name + (mc.Schedule ? " Shedule" : " Unshedule"), mc.Name));
+				subItems.Add(CreateRow(mc.Kits.Count > 0 ? mc.Kits.Count + " kits" : "", mc.Kits.Count));
+				subItems.Add(CreateRow(mc.Interval.ToString(), mc.Interval));
+				subItems.Add(CreateRow("", Lifelength.Null));
+				subItems.Add(CreateRow(mc.Remains.ToString(), mc.Remains));
+				subItems.Add(CreateRow("", ""));
+				subItems.Add(CreateRow(mc.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)mc.NextPerformanceDate), mc.NextPerformanceDate));
+				subItems.Add(CreateRow(mc.ManHours.ToString(), mc.ManHours));
+				subItems.Add(CreateRow(mc.Cost.ToString(), mc.Cost));
+				subItems.Add(CreateRow(author, author));
 			}
-            else if (item is MaintenanceDirective)
-            {
-                MaintenanceDirective md = (MaintenanceDirective)item;
-                AtaChapter ata = md.ATAChapter;
+			else if (item is MaintenanceDirective)
+			{
+				MaintenanceDirective md = (MaintenanceDirective)item;
+				AtaChapter ata = md.ATAChapter;
 
-                subItems.Add(CreateRow(ata != null ? ata.ToString() : "", ata));
-                subItems.Add(CreateRow(md.ToString(),  md.ToString()));
-                subItems.Add(CreateRow(md.Description, md.Description));
-                subItems.Add(CreateRow(md.Kits.Count > 0 ? md.Kits.Count + " kits" : "", md.Kits.Count));
-                #region Определение текста для колонки "Первое выполнение"
+				subItems.Add(CreateRow(ata != null ? ata.ToString() : "", ata));
+				subItems.Add(CreateRow(md.ToString(),  md.ToString()));
+				subItems.Add(CreateRow(md.Description, md.Description));
+				subItems.Add(CreateRow(md.Kits.Count > 0 ? md.Kits.Count + " kits" : "", md.Kits.Count));
+				#region Определение текста для колонки "Первое выполнение"
 
-                var subItem = new CustomCell();
-                if (md.Threshold.FirstPerformanceSinceNew != null && !md.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
-                {
-                    subItem.Text = "s/n: " + md.Threshold.FirstPerformanceSinceNew;
-                    subItem.Tag = md.Threshold.FirstPerformanceSinceNew;
-                }
-                if (md.Threshold.FirstPerformanceSinceEffectiveDate != null &&
-                    !md.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
-                {
-                    if (subItem.Text != "") subItem.Text += " or ";
-                    else
-                    {
-                        subItem.Text = "";
-                        subItem.Tag = md.Threshold.FirstPerformanceSinceEffectiveDate;
-                    }
-                    subItem.Text += "s/e.d: " + md.Threshold.FirstPerformanceSinceEffectiveDate;
-                }
+				var subItem = new CustomCell();
+				if (md.Threshold.FirstPerformanceSinceNew != null && !md.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
+				{
+					subItem.Text = "s/n: " + md.Threshold.FirstPerformanceSinceNew;
+					subItem.Tag = md.Threshold.FirstPerformanceSinceNew;
+				}
+				if (md.Threshold.FirstPerformanceSinceEffectiveDate != null &&
+					!md.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+				{
+					if (subItem.Text != "") subItem.Text += " or ";
+					else
+					{
+						subItem.Text = "";
+						subItem.Tag = md.Threshold.FirstPerformanceSinceEffectiveDate;
+					}
+					subItem.Text += "s/e.d: " + md.Threshold.FirstPerformanceSinceEffectiveDate;
+				}
 
-                subItems.Add(subItem);
-                #endregion
-                #region Определение текста для колонки "повторяющийся интервал"
+				subItems.Add(subItem);
+				#endregion
+				#region Определение текста для колонки "повторяющийся интервал"
 
-                subItem = new CustomCell();
-                if (!md.Threshold.RepeatInterval.IsNullOrZero())
-                {
-                    subItem.Text = md.Threshold.RepeatInterval.ToString();
-                    subItem.Tag = md.Threshold.RepeatInterval;
-                }
-                else
-                {
-                    subItem.Text = "";
-                    subItem.Tag = Lifelength.Null;
-                }
-                subItems.Add(subItem);
-                #endregion
-                subItems.Add(CreateRow(md.Remains.ToString(), md.Remains));
-                subItems.Add(CreateRow(md.WorkType.ToString(), md.WorkType));
-                subItems.Add(CreateRow(md.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)md.NextPerformanceDate), md.NextPerformanceDate));
-                subItems.Add(CreateRow(md.ManHours.ToString(), md.ManHours));
-                subItems.Add(CreateRow(md.Cost.ToString(), md.Cost));
-                subItems.Add(CreateRow(author, author));
+				subItem = new CustomCell();
+				if (!md.Threshold.RepeatInterval.IsNullOrZero())
+				{
+					subItem.Text = md.Threshold.RepeatInterval.ToString();
+					subItem.Tag = md.Threshold.RepeatInterval;
+				}
+				else
+				{
+					subItem.Text = "";
+					subItem.Tag = Lifelength.Null;
+				}
+				subItems.Add(subItem);
+				#endregion
+				subItems.Add(CreateRow(md.Remains.ToString(), md.Remains));
+				subItems.Add(CreateRow(md.WorkType.ToString(), md.WorkType));
+				subItems.Add(CreateRow(md.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)md.NextPerformanceDate), md.NextPerformanceDate));
+				subItems.Add(CreateRow(md.ManHours.ToString(), md.ManHours));
+				subItems.Add(CreateRow(md.Cost.ToString(), md.Cost));
+				subItems.Add(CreateRow(author, author));
 			}
-            else if (item is Procedure)
-            {
-                Procedure md = (Procedure)item;
+			else if (item is Procedure)
+			{
+				Procedure md = (Procedure)item;
 
-                subItems.Add(CreateRow("", ""));
-                subItems.Add(CreateRow(md.ToString(), md.ToString()));
-                subItems.Add(CreateRow(md.Description, md.Description));
-                subItems.Add(CreateRow(md.Kits.Count > 0 ? md.Kits.Count + " kits" : "", md.Kits.Count));
-                
-                #region Определение текста для колонки "Первое выполнение"
+				subItems.Add(CreateRow("", ""));
+				subItems.Add(CreateRow(md.ToString(), md.ToString()));
+				subItems.Add(CreateRow(md.Description, md.Description));
+				subItems.Add(CreateRow(md.Kits.Count > 0 ? md.Kits.Count + " kits" : "", md.Kits.Count));
+				
+				#region Определение текста для колонки "Первое выполнение"
 
-                var subItem = new CustomCell();
-                if (md.Threshold.FirstPerformanceSinceNew != null && !md.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
-                {
-                    subItem.Text = "s/n: " + md.Threshold.FirstPerformanceSinceNew;
-                    subItem.Tag = md.Threshold.FirstPerformanceSinceNew;
-                }
-                if (md.Threshold.FirstPerformanceSinceEffectiveDate != null &&
-                    !md.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
-                {
-                    if (subItem.Text != "") subItem.Text += " or ";
-                    else
-                    {
-                        subItem.Text = "";
-                        subItem.Tag = md.Threshold.FirstPerformanceSinceEffectiveDate;
-                    }
-                    subItem.Text += "s/e.d: " + md.Threshold.FirstPerformanceSinceEffectiveDate;
-                }
+				var subItem = new CustomCell();
+				if (md.Threshold.FirstPerformanceSinceNew != null && !md.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
+				{
+					subItem.Text = "s/n: " + md.Threshold.FirstPerformanceSinceNew;
+					subItem.Tag = md.Threshold.FirstPerformanceSinceNew;
+				}
+				if (md.Threshold.FirstPerformanceSinceEffectiveDate != null &&
+					!md.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+				{
+					if (subItem.Text != "") subItem.Text += " or ";
+					else
+					{
+						subItem.Text = "";
+						subItem.Tag = md.Threshold.FirstPerformanceSinceEffectiveDate;
+					}
+					subItem.Text += "s/e.d: " + md.Threshold.FirstPerformanceSinceEffectiveDate;
+				}
 
-                subItems.Add(subItem);
-                #endregion
-               
-                #region Определение текста для колонки "повторяющийся интервал"
+				subItems.Add(subItem);
+				#endregion
+			   
+				#region Определение текста для колонки "повторяющийся интервал"
 
-                subItem = new CustomCell();
-                if (!md.Threshold.RepeatInterval.IsNullOrZero())
-                {
-                    subItem.Text = md.Threshold.RepeatInterval.ToString();
-                    subItem.Tag = md.Threshold.RepeatInterval;
-                }
-                else
-                {
-                    subItem.Text = "";
-                    subItem.Tag = Lifelength.Null;
-                }
-                subItems.Add(subItem);
-                #endregion
-                
-                subItems.Add(CreateRow(md.Remains.ToString(), md.Remains));
-                subItems.Add(CreateRow(md.ProcedureType.ToString(), md.ProcedureType));
-                subItems.Add(CreateRow(md.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)md.NextPerformanceDate), md.NextPerformanceDate));
-                subItems.Add(CreateRow(md.ManHours.ToString(), md.ManHours));
-                subItems.Add(CreateRow(md.Cost.ToString(),  md.Cost));
-                subItems.Add(CreateRow(author, author));
+				subItem = new CustomCell();
+				if (!md.Threshold.RepeatInterval.IsNullOrZero())
+				{
+					subItem.Text = md.Threshold.RepeatInterval.ToString();
+					subItem.Tag = md.Threshold.RepeatInterval;
+				}
+				else
+				{
+					subItem.Text = "";
+					subItem.Tag = Lifelength.Null;
+				}
+				subItems.Add(subItem);
+				#endregion
+				
+				subItems.Add(CreateRow(md.Remains.ToString(), md.Remains));
+				subItems.Add(CreateRow(md.ProcedureType.ToString(), md.ProcedureType));
+				subItems.Add(CreateRow(md.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)md.NextPerformanceDate), md.NextPerformanceDate));
+				subItems.Add(CreateRow(md.ManHours.ToString(), md.ManHours));
+				subItems.Add(CreateRow(md.Cost.ToString(),  md.Cost));
+				subItems.Add(CreateRow(author, author));
 			}
-            else if (item is NonRoutineJob)
-            {
-                NonRoutineJob job = (NonRoutineJob)item;
-                AtaChapter ata = job.ATAChapter;
-                subItems.Add(CreateRow(ata != null ? ata.ToString() : "", ata));
-                subItems.Add(CreateRow(job.Title, job.Title));
-                subItems.Add(CreateRow(job.Description, job.Description));
-                subItems.Add(CreateRow(job.Kits.Count > 0 ? job.Kits.Count + " kits" : "", job.Kits.Count));
-                subItems.Add(CreateRow("", Lifelength.Null));
-                subItems.Add(CreateRow("", Lifelength.Null));
-                subItems.Add(CreateRow("", Lifelength.Null));
-                subItems.Add(CreateRow("", ""));
-                subItems.Add(CreateRow("", DateTimeExtend.GetCASMinDateTime()));
-                subItems.Add(CreateRow(job.ManHours.ToString(), job.ManHours));
-                subItems.Add(CreateRow(job.Cost.ToString(), job.Cost));
-                subItems.Add(CreateRow(author, author));
+			else if (item is NonRoutineJob)
+			{
+				NonRoutineJob job = (NonRoutineJob)item;
+				AtaChapter ata = job.ATAChapter;
+				subItems.Add(CreateRow(ata != null ? ata.ToString() : "", ata));
+				subItems.Add(CreateRow(job.Title, job.Title));
+				subItems.Add(CreateRow(job.Description, job.Description));
+				subItems.Add(CreateRow(job.Kits.Count > 0 ? job.Kits.Count + " kits" : "", job.Kits.Count));
+				subItems.Add(CreateRow("", Lifelength.Null));
+				subItems.Add(CreateRow("", Lifelength.Null));
+				subItems.Add(CreateRow("", Lifelength.Null));
+				subItems.Add(CreateRow("", ""));
+				subItems.Add(CreateRow("", DateTimeExtend.GetCASMinDateTime()));
+				subItems.Add(CreateRow(job.ManHours.ToString(), job.ManHours));
+				subItems.Add(CreateRow(job.Cost.ToString(), job.Cost));
+				subItems.Add(CreateRow(author, author));
 			}
-            else throw new ArgumentOutOfRangeException(String.Format("1135: Takes an argument has no known type {0}", item.GetType()));
+			else throw new ArgumentOutOfRangeException(String.Format("1135: Takes an argument has no known type {0}", item.GetType()));
 
-            return subItems;
-        }
+			return subItems;
+		}
 
-        #endregion
+		#endregion
 
-        #region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 
-        protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
-        {
-            if (SelectedItem == null) return;
+		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		{
+			if (SelectedItem == null) return;
 
-            IBaseEntityObject parent;
-            if (SelectedItem is NextPerformance)
-            {
-                parent = ((NextPerformance)SelectedItem).Parent;
-            }
-            else if (SelectedItem is AbstractPerformanceRecord)
-            {
-                parent = ((AbstractPerformanceRecord)SelectedItem).Parent;
-            }
-            else parent = SelectedItem;
-               
-            if (parent is Procedure)
-            {
-                Procedure baseDetail = (Procedure)parent;
-                e.DisplayerText = baseDetail.Title;
-                e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-                e.RequestedEntity = new ProcedureScreen(baseDetail);
-            }
-            else
-            {
-                e.Cancel = true;
-            }
-        }
-        #endregion
+			IBaseEntityObject parent;
+			if (SelectedItem is NextPerformance)
+			{
+				parent = ((NextPerformance)SelectedItem).Parent;
+			}
+			else if (SelectedItem is AbstractPerformanceRecord)
+			{
+				parent = ((AbstractPerformanceRecord)SelectedItem).Parent;
+			}
+			else parent = SelectedItem;
+			   
+			if (parent is Procedure)
+			{
+				Procedure baseDetail = (Procedure)parent;
+				e.DisplayerText = baseDetail.Title;
+				e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+				e.RequestedEntity = new ProcedureScreen(baseDetail);
+			}
+			else
+			{
+				e.Cancel = true;
+			}
+		}
+		#endregion
 
-        #endregion
-    }
+		#endregion
+	}
 }

@@ -60,7 +60,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			AddColumn("Phone", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Email", (int)(radGridView1.Width * 0.14f));
 			AddColumn("Skype", (int)(radGridView1.Width * 0.14f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 
@@ -85,7 +85,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			}
 
 			var department = item.Specialization?.Department ??  Department.Unknown;
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var phone = string.IsNullOrEmpty(item.Additional) ? item.Phone : $"{item.Phone} | Add.: {item.Additional}";
 
 

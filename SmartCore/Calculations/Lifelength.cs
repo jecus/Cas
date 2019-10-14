@@ -1009,6 +1009,9 @@ namespace SmartCore.Calculations
         /// <param name="lifelength"></param>
         public void Substract(Lifelength lifelength)
         {
+			if(lifelength == null)
+				return;
+
             Lifelength lifelength2 = new Lifelength(-lifelength.Days, -lifelength.Cycles, -lifelength.TotalMinutes);
             Add(lifelength2);
         }

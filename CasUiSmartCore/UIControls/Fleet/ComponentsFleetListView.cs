@@ -6,6 +6,7 @@ using Auxiliary;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary.Comparers;
+using CAS.UI.UIControls.ComponentControls;
 using CAS.UI.UIControls.NewGrid;
 using CAS.UI.UIControls.StoresControls;
 using CASTerms;
@@ -18,7 +19,7 @@ using SmartCore.Entities.General.Interfaces;
 using Telerik.WinControls.UI;
 using TempUIExtentions;
 
-namespace CAS.UI.UIControls.ComponentControls
+namespace CAS.UI.UIControls.Fleet
 {
 	///<summary>
 	/// список для отображения ордеров запроса
@@ -84,7 +85,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			AddColumn("Cost serviceable", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Hidden Remarks", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 
@@ -128,7 +129,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		protected override List<CustomCell> GetListViewSubItems(BaseEntityObject item)
 		{
 			var subItems = new List<CustomCell>();
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			DateTime? approx;
 			Lifelength remains = Lifelength.Null, next;

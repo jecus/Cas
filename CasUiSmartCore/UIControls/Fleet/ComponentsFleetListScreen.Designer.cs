@@ -1,7 +1,7 @@
 ﻿using CASTerms;
 using EntityCore.DTO.General;
 
-namespace CAS.UI.UIControls.ComponentControls
+namespace CAS.UI.UIControls.Fleet
 {
 	partial class ComponentsFleetListScreen
 	{

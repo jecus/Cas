@@ -506,6 +506,7 @@
     <Compile Include="Entities\Dictionaries\ConditionState.cs" />
     <Compile Include="Entities\Dictionaries\ConsequenceFaults.cs" />
     <Compile Include="Entities\Dictionaries\ConsequenceOPS.cs" />
+    <Compile Include="Entities\Dictionaries\Designation.cs" />
     <Compile Include="Entities\Dictionaries\DirectiveSbType.cs" />
     <Compile Include="Entities\Dictionaries\DirectiveAffects.cs" />
     <Compile Include="Entities\Dictionaries\DirectiveReason.cs" />
@@ -859,6 +860,7 @@
     <Compile Include="Relation\IBindedItem.cs" />
     <Compile Include="Relation\IBindedItemsCore.cs" />
     <Compile Include="Relation\ItemsRelation.cs" />
+    <Compile Include="Entities\General\Setting\Setting.cs" />
     <Compile Include="Sms\ISMSCore.cs" />
     <Compile Include="Sms\SMSCore.cs" />
     <Compile Include="Stores\IStoreCore.cs" />

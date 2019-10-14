@@ -52,7 +52,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			AddColumn("Per Days (Flight)", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Per Days (Block)", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Night Time", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 
@@ -81,7 +81,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 				perDaysBlock.Add(aircraftFlight.BlockTimeLifelenght);
 			}
 
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			
 			return new List<CustomCell>
 			{

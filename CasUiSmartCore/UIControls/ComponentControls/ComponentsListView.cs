@@ -92,6 +92,8 @@ namespace CAS.UI.UIControls.ComponentControls
 			AddColumn("Rpt. int.", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Next", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Remain/Overdue", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Expiry Date", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Expiry Remain", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Last", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Warranty", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Class", (int)(radGridView1.Width * 0.2f));
@@ -103,7 +105,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			AddColumn("Cost serviceable", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Hidden Remarks", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 
@@ -148,7 +150,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		protected override List<CustomCell> GetListViewSubItems(BaseEntityObject item)
 		{
 			var subItems = new List<CustomCell>();
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			DateTime? approx;
 			Lifelength remains = Lifelength.Null, next;
@@ -157,6 +159,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			DateTime transferDate;
 			Lifelength firstPerformance = Lifelength.Null, 
 					   lastPerformance = Lifelength.Null,
+					   expiryRemain = Lifelength.Null,
 					   warranty, repeatInterval = Lifelength.Null;
 			string partNumber,
 				   description,
@@ -173,6 +176,7 @@ namespace CAS.UI.UIControls.ComponentControls
 				   workType = "",
 				   zone = "",
 				   access = "",
+				   expiryDate = "",
 				   ndtString = "";
 			double manHours,
 				   cost,
@@ -216,6 +220,8 @@ namespace CAS.UI.UIControls.ComponentControls
 				costServiceable = componentItem.CostServiceable;
 				remarks = componentItem.Remarks;
 				hiddenRemarks = componentItem.HiddenRemarks;
+				expiryDate = " ";
+				expiryRemain = Lifelength.Null;
 			}
 			else
 			{
@@ -262,6 +268,16 @@ namespace CAS.UI.UIControls.ComponentControls
 				hiddenRemarks = dd.HiddenRemarks;
 				workType = dd.DirectiveType.ToString();
 				ndtString = dd.NDTType.ShortName;
+				
+
+				
+
+				if (dd.IsExpiry)
+				{
+					expiryDate = dd.IsExpiry ? (dd.ExpiryDate.HasValue ? SmartCore.Auxiliary.Convert.GetDateFormat(dd.ExpiryDate.Value) : "") : "";
+					expiryRemain = dd.IsExpiry ? new Lifelength((int)(dd.ExpiryDate.Value - DateTime.Today).TotalDays,0,0) : Lifelength.Null;
+				}
+				
 				if (dd.MaintenanceDirective != null)
 				{
 					mpdString = dd.MaintenanceDirective.TaskNumberCheck;
@@ -289,6 +305,8 @@ namespace CAS.UI.UIControls.ComponentControls
 				approx == null ? DateTimeExtend.GetCASMinDateTime() : (DateTime)approx));
 			subItems.Add(CreateRow(remains != null && !remains.IsNullOrZero() ? remains.ToString() : "",
 				remains ?? Lifelength.Null));
+			subItems.Add(CreateRow(expiryDate, expiryDate));
+			subItems.Add(CreateRow(!expiryRemain.IsNullOrZero() ? $"{expiryRemain?.Days}d" : "", expiryRemain));
 			subItems.Add(CreateRow(lastPerformanceString, lastPerformance));
 			subItems.Add(CreateRow(warranty.ToString(), warranty));
 			subItems.Add(CreateRow(classString, classString));

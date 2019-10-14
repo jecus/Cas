@@ -55,7 +55,6 @@ namespace EntityCore.DTO.General
 		public bool? Processed { get; set; }
 
 
-		
 		[Child(FilterType.Equal, "ParentTypeId", 1860)]
 		public ICollection<ItemFileLinkDTO> Files { get; set; }
 	}

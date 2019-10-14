@@ -4,12 +4,13 @@ using Auxiliary;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Interfaces;
 using SmartCore.Purchase;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.PurchaseControls.Quatation
 {
-	public partial class QuatationOrderListViewNew : BaseGridViewControl<BaseCoreObject>
+	public partial class QuatationOrderListViewNew : BaseGridViewControl<IBaseEntityObject>
 	{
 		public QuatationOrderListViewNew()
 		{
@@ -23,27 +24,29 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		{
 			AddColumn("P/N", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Suppliers", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Description", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Name", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Measure", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Quantity", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Specification", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 
 		#endregion
 
-		protected override List<CustomCell> GetListViewSubItems(BaseCoreObject item)
+		protected override List<CustomCell> GetListViewSubItems(IBaseEntityObject item)
 		{
 			var subItems = new List<CustomCell>();
 			if (item is RequestForQuotationRecord)
 			{
 				var record = item as RequestForQuotationRecord;
-				var author = GlobalObjects.CasEnvironment.GetCorrector(record.CorrectorId);
+				var author = GlobalObjects.CasEnvironment.GetCorrector(record);
 
 				subItems.Add(CreateRow(record.Product?.PartNumber, record.Product?.PartNumber));
 				subItems.Add(CreateRow(record.Suppliers?.ToString(), record.Suppliers?.ToString()));
-				subItems.Add(CreateRow(record.Product?.Description, record.Product?.Description));
+				subItems.Add(CreateRow(record.Product?.Name, record.Product?.Name));
 				subItems.Add(CreateRow(record.Measure.ToString(), record.Measure.ToString()));
 				subItems.Add(CreateRow(record.Quantity.ToString(), record.Quantity.ToString()));
+				subItems.Add(CreateRow(record.Product?.Standart?.ToString(), record.Product?.Standart?.ToString()));
 				subItems.Add(CreateRow(author, author));
 			}
 			else
@@ -54,6 +57,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 				subItems.Add(CreateRow($"New:{record.CostNew} {record.СurrencyNew}".ToString(), record.CostNew));
 				subItems.Add(CreateRow($"OH:{record.CostOverhaul} {record.СurrencyOH}".ToString(), record.CostOverhaul));
 				subItems.Add(CreateRow($"Serv:{record.CostServiceable} {record.СurrencyServ}".ToString(), record.CostServiceable));
+				subItems.Add(CreateRow("", ""));
 				subItems.Add(CreateRow($"Rep:{record.CostRepair} {record.СurrencyRepair}", record.CostRepair));
 			}
 
@@ -61,7 +65,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		}
 
 		#region protected override void SetItemColor(ListViewItem listViewItem, BaseSmartCoreObject item)
-		protected override void SetItemColor(GridViewRowInfo listViewItem, BaseCoreObject item)
+		protected override void SetItemColor(GridViewRowInfo listViewItem, IBaseEntityObject item)
 		{
 			if (item is SupplierPrice)
 			{

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.DocumentationControls;
 using CAS.UI.UIControls.PurchaseControls.Quatation;
 using CASTerms;
 using EntityCore.DTO.Dictionaries;
@@ -18,6 +19,7 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
+using SmartCore.Entities.General.Setting;
 using SmartCore.Filters;
 using SmartCore.Purchase;
 using SmartCore.Queries;
@@ -43,6 +45,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private ToolStripMenuItem _toolStripMenuItemAddSuppliers;
 		private ToolStripMenuItem _toolStripMenuItemAddSuppliersAll;
 		private List<Supplier> _suppliers = new List<Supplier>();
+		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
+		private Settings _setting;
 
 		#endregion
 
@@ -75,6 +79,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			}
 
 			_order = order;
+
+			DocumentControls.AddRange(new[] { documentControl1, documentControl2, documentControl3, documentControl4, documentControl5, documentControl6, documentControl7, documentControl8, documentControl9, documentControl10 });
 
 			_collectionFilter.Filters.Add(_partNumberFilter);
 			_collectionFilter.Filters.Add(_standartFilter);
@@ -111,9 +117,13 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				_quotationCosts.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<QuotationCostDTO, QuotationCost>(new Filter("QuotationId", _order.ItemId)));
 				_addedQuatationOrderRecords.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationRecordDTO, RequestForQuotationRecord>(new Filter("ParentPackageId", _order.ItemId)));
 				var ids = _addedQuatationOrderRecords.Select(i => i.PackageItemId);
-				var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()));
+				var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), true);
 				var supplierId = _addedQuatationOrderRecords.SelectMany(i => i.SupplierPrice).Select(i => i.SupplierId);
 				var suppliers = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<SupplierDTO, Supplier>(new Filter("ItemId",supplierId));
+				_setting = GlobalObjects.CasEnvironment.NewLoader.GetObject<SettingDTO, Settings>();
+
+				if(_setting == null)
+					_setting = new Settings();
 
 				if (ids.Count() > 0)
 				{
@@ -143,6 +153,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				}
 			}
 
+			var documents = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DocumentDTO, Document>(new Filter("ParentID", _order.ItemId), true);
+			_order.ClosingDocument.Clear();
+			_order.ClosingDocument.AddRange(documents);
+
 			_defferedCategories.Clear();
 			_defferedCategories.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DefferedCategorieDTO, DeferredCategory>(loadChild: true));
 
@@ -159,8 +173,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void UpdateControls()
 		{
+			comboBox1.Items.Clear();
+			comboBox1.Items.AddRange(_setting.GlobalSetting.QuotationSupplierSetting.Parameters.Select(i => i.Key).ToArray());
+
 			comboBoxMeasure.Items.Clear();
-			comboBoxMeasure.Items.AddRange(Measure.GetByCategories(new[] { MeasureCategory.Mass, MeasureCategory.EconomicEntity }));
+			//comboBoxMeasure.Items.AddRange(Measure.GetByCategories(new[] { MeasureCategory.Mass, MeasureCategory.EconomicEntity }));
+			comboBoxMeasure.Items.AddRange(Measure.Items.ToArray());
 
 			comboBoxDestination.Items.Clear();
 			comboBoxDestination.Items.AddRange(destinations.ToArray());
@@ -170,36 +188,44 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			comboBoxReason.Items.Clear();
 			comboBoxReason.Items.AddRange(InitialReason.Items.ToArray());
-			
+
+			foreach (var control in DocumentControls)
+				control.Added += DocumentControl1_Added;
+
+			for (int i = 0; i < _order.ClosingDocument.Count; i++)
+			{
+				var control = DocumentControls[i];
+				control.CurrentDocument = _order.ClosingDocument[i];
+			}
 		}
 
 		#endregion
 
-		#region private void comboBoxDestination_SelectedIndexChanged(object sender, System.EventArgs e)
+		#region private void DocumentControl1_Added(object sender, EventArgs e)
 
-		private void comboBoxDestination_SelectedIndexChanged(object sender, EventArgs e)
+		private void DocumentControl1_Added(object sender, EventArgs e)
 		{
-			comboBoxDefferedCategory.Items.Clear();
-			comboBoxDIR.Items.Clear();
-
-			var a = comboBoxDestination.SelectedItem as Aircraft;
-
-			if (a != null)
+			var control = sender as DocumentControl;
+			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Work package") as DocumentSubType;
+			var newDocument = new Document
 			{
-				comboBoxDefferedCategory.Enabled = true;
+				Parent = _order,
+				ParentId = _order.ItemId,
+				ParentTypeId = _order.SmartCoreObjectType.ItemId,
+				DocType = DocumentType.TechnicalRecords,
+				DocumentSubType = docSubType,
+				IsClosed = true,
+				ContractNumber = $"{_order.Number}",
+				Description = _order.Title,
+				ParentAircraftId = _order.ParentId
+			};
 
-				if (a.Model != null)
-				{
-					var categories = _defferedCategories.Where(c => a.Model.Equals(c.AircraftModel)).ToList();
-					categories.Add(DeferredCategory.Unknown);
-
-					comboBoxDefferedCategory.Items.AddRange(categories.ToArray());
-
-					if(listViewInitialItems.SelectedItem is RequestForQuotationRecord)
-						comboBoxDefferedCategory.SelectedItem = categories.FirstOrDefault(c => c.Equals(((RequestForQuotationRecord)listViewInitialItems.SelectedItem).DeferredCategory)) ?? DeferredCategory.Unknown;
-				}
+			var form = new DocumentForm(newDocument, false);
+			if (form.ShowDialog() == DialogResult.OK)
+			{
+				_order.ClosingDocument.Add(newDocument);
+				control.CurrentDocument = newDocument;
 			}
-			else comboBoxDefferedCategory.Enabled = false;
 		}
 
 		#endregion
@@ -208,7 +234,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void comboBoxMeasure_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			SetForMeasure();
+			
 		}
 
 		#endregion
@@ -217,26 +243,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void numericUpDownQuantity_ValueChanged(object sender, EventArgs e)
 		{
-			SetForMeasure();
+			
 		}
 
-		#endregion
-
-		#region private void SetForMeasure()
-		/// <summary>
-		/// Изменяет контрол в соотствествии с выбранной единицей измерения
-		/// </summary>
-		private void SetForMeasure()
-		{
-			var measure = comboBoxMeasure.SelectedItem as Measure;
-			if (measure == null || measure.MeasureCategory != MeasureCategory.Mass)
-				numericUpDownQuantity.DecimalPlaces = 0;
-			else numericUpDownQuantity.DecimalPlaces = 2;
-
-			var quantity = numericUpDownQuantity.Value;
-
-			textBoxTotal.Text = $"{quantity:0.##}" + (measure != null ? " " + measure + "(s)" : "");
-		}
 		#endregion
 
 		#region private void UpdateInitialControls()
@@ -289,51 +298,55 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				MessageBox.Show("Please, enter a Title", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Exclamation);
-				return;
 			}
 
-			if (listViewInitialItems.ItemsCount <= 0)
+			else if (listViewInitialItems.ItemsCount <= 0)
 			{
 				MessageBox.Show("Please select a kits for initional order", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Exclamation);
-				return;
 			}
-			//запись новой информации в запросный ордер
-			ApplyInitialData();
-			//сохранение запросного ордера
-			GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
-
-			foreach (var record in _addedQuatationOrderRecords)
+			else
 			{
-				record.ParentPackageId = _order.ItemId;
-				GlobalObjects.CasEnvironment.NewKeeper.Save(record);
+				//запись новой информации в запросный ордер
+				ApplyInitialData();
+				//сохранение запросного ордера
+				GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
 
-				if (record.Product != null)
+				foreach (var record in _addedQuatationOrderRecords)
 				{
-					foreach (var ksr in record.Product.SupplierRelations)
-					{
-						if (ksr.SupplierId != 0)
-						{
-							ksr.KitId = record.Product.ItemId;
-							ksr.ParentTypeId = record.Product.SmartCoreObjectType.ItemId;
+					record.ParentPackageId = _order.ItemId;
+					GlobalObjects.CasEnvironment.NewKeeper.Save(record);
 
-							try
+					if (record.Product != null)
+					{
+						foreach (var ksr in record.Product.SupplierRelations)
+						{
+							if (ksr.SupplierId != 0)
 							{
-								GlobalObjects.CasEnvironment.NewKeeper.Save(ksr);
-							}
-							catch (Exception ex)
-							{
-								Program.Provider.Logger.Log("Error while saving data", ex);
-								return;
+								ksr.KitId = record.Product.ItemId;
+								ksr.ParentTypeId = record.Product.SmartCoreObjectType.ItemId;
+
+								try
+								{
+									GlobalObjects.CasEnvironment.NewKeeper.Save(ksr);
+								}
+								catch (Exception ex)
+								{
+									Program.Provider.Logger.Log("Error while saving data", ex);
+									return;
+								}
 							}
 						}
 					}
 				}
-			}
 
-			foreach (var record in _deleteExistQuatationOrderRecords)
-				GlobalObjects.CasEnvironment.NewKeeper.Delete(record);
+				foreach (var record in _deleteExistQuatationOrderRecords)
+					GlobalObjects.CasEnvironment.NewKeeper.Delete(record);
+
+				DialogResult = System.Windows.Forms.DialogResult.OK;
+			}
+			
 		}
 
 		#endregion
@@ -427,9 +440,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			comboBoxPriority.SelectedItem = record.Priority;
 			metroTextBox1.Text = record.Remarks;
 
-			lifelengthViewerLifeLimit.Lifelength = new Lifelength(record.LifeLimit);
-			lifelengthViewerNotify.Lifelength = new Lifelength(record.LifeLimitNotify);
-
 		}
 
 		#endregion
@@ -447,7 +457,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			record.Priority = comboBoxPriority.SelectedItem as Priority ?? Priority.UNK;
 			record.Measure = comboBoxMeasure.SelectedItem as Measure ?? Measure.Unknown;
 			record.Quantity = (double)numericUpDownQuantity.Value;
-			record.DeferredCategory = comboBoxDefferedCategory.SelectedItem as DeferredCategory ?? DeferredCategory.Unknown;
 			record.Remarks = metroTextBox1.Text;
 
 			ComponentStatus costCondition = ComponentStatus.Unknown;
@@ -474,8 +483,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				record.DestinationObjectId = -1;
 			}
 			record.InitialReason = comboBoxReason.SelectedItem as InitialReason ?? InitialReason.Unknown;
-			record.LifeLimit = lifelengthViewerLifeLimit.Lifelength;
-			record.LifeLimitNotify = lifelengthViewerNotify.Lifelength;
 
 			listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
 
@@ -499,8 +506,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			checkBoxRepair.Checked = false;
 			checkBoxServiceable.Checked = false;
 			comboBoxDestination.SelectedItem = null;
-			lifelengthViewerLifeLimit.Lifelength = new Lifelength();
-			lifelengthViewerNotify.Lifelength = new Lifelength();
 		}
 
 		#endregion
@@ -613,7 +618,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void _toolStripMenuItemAddSuppliersAll_Click(object sender, EventArgs e)
 		{
-			var form = new QuotationSupplierForm(_suppliers, listViewInitialItems.SelectedItems.Select(i => i is RequestForQuotationRecord).Cast<RequestForQuotationRecord>().ToList());
+			var form = new QuotationSupplierForm(_suppliers, listViewInitialItems.SelectedItems.Where(i => i is RequestForQuotationRecord).Cast<RequestForQuotationRecord>().ToList());
 			if (form.ShowDialog() == DialogResult.OK)
 				listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
 		}
@@ -640,9 +645,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		}
 
 
-		private List<BaseCoreObject> UpdateLW(List<RequestForQuotationRecord> records)
+		private List<BaseEntityObject> UpdateLW(List<RequestForQuotationRecord> records)
 		{
-			var res = new List<BaseCoreObject>();
+			var res = new List<BaseEntityObject>();
 
 			foreach (var record in records)
 			{
@@ -652,5 +657,37 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			return res;
 		}
 
+		private void buttonAddSupplierForAll_Click(object sender, EventArgs e)
+		{
+			if(comboBox1.SelectedItem == null)
+				return;
+
+			if(listViewInitialItems.ItemsCount == 0)
+				return;
+
+			var ids = _setting.GlobalSetting.QuotationSupplierSetting.Parameters[comboBox1.SelectedItem.ToString()];
+			var s = _suppliers.Where(i => ids.Contains(i.ItemId));
+
+			foreach (var record in listViewInitialItems.SelectedItems.Where(i => i is RequestForQuotationRecord).Cast<RequestForQuotationRecord>())
+			{
+				var res = s.Select(i => new SupplierPrice() {SupplierId = i.ItemId, Supplier = i, Parent = record});
+
+				foreach (var supplierPrice in res)
+				{
+					if(record.SupplierPrice.FirstOrDefault(i => i.SupplierId == supplierPrice.SupplierId) == null)
+						record.SupplierPrice.Add(supplierPrice);
+				}
+				
+			}
+			listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
+		}
+
+		private void button3_Click(object sender, EventArgs e)
+		{
+
+			var form = new QuotationCostForm(_suppliers, listViewInitialItems.GetItemsArray().Where(i => i is RequestForQuotationRecord).Cast<RequestForQuotationRecord>().ToList());
+			if (form.ShowDialog() == DialogResult.OK)
+				listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
+		}
 	}
 }

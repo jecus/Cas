@@ -22,7 +22,7 @@ namespace CAS.UI.UIControls.Auxiliary
     /// ЭУ для предствления списков объектов определенного типа, унаследованных от <see cref="IBaseCoreObject"/>
     ///</summary>
     [Designer(typeof(BaseListViewControlDesigner))]
-    public partial class BaseListViewControl<T> : UserControl, IReference where T : class, IBaseCoreObject
+    public partial class BaseListViewControl<T> : UserControl, IReference where T : class, IBaseCoreObject, IBaseEntityObject
     {
         #region Fields
         
@@ -390,7 +390,7 @@ namespace CAS.UI.UIControls.Auxiliary
                 if(value != null)
                 {
 	                if (properties[i].Name == "CorrectorId")
-		                value = GlobalObjects.CasEnvironment.GetCorrector((int) value);
+		                value = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 					string valueString;
                     if (value is DateTime)

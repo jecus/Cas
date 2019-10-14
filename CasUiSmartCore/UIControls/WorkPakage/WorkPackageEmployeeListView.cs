@@ -23,7 +23,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			AddColumn("Last Name", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Occupation", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Privileges", (int)(radGridView1.Width * 0.8f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 
@@ -32,7 +32,7 @@ namespace CAS.UI.UIControls.WorkPakage
 		protected override List<CustomCell> GetListViewSubItems(Specialist item)
 		{
 			var subItems = new List<CustomCell>();
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var ratingString = "";
 			foreach (var license in item.Licenses)
 			{

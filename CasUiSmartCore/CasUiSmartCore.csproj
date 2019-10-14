@@ -825,6 +825,36 @@
     <Compile Include="UIControls\Fleet\DirectiveFleetListView.Designer.cs">
       <DependentUpon>DirectiveFleetListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\Fleet\MaintenanceDirectiveFleetListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Fleet\MaintenanceDirectiveFleetListScreen.Designer.cs">
+      <DependentUpon>MaintenanceDirectiveFleetListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Fleet\MaintenanceDirectiveFleetListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Fleet\MaintenanceDirectiveFleetListView.Designer.cs">
+      <DependentUpon>MaintenanceDirectiveFleetListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\ForecastControls\ForecastListScreenMtopOld.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ForecastControls\ForecastListScreenMtopOld.Designer.cs">
+      <DependentUpon>ForecastListScreenMtopOld.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\ForecastControls\ForecastMTOPListViewOld.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ForecastControls\ForecastMTOPListViewOld.Designer.cs">
+      <DependentUpon>ForecastMTOPListViewOld.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\MailControls\MailSettingFrom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\MailControls\MailSettingFrom.Designer.cs">
+      <DependentUpon>MailSettingFrom.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\OilControls\Model\OilGraphicModel.cs" />
     <Compile Include="UIControls\OilControls\OilGraphForm.cs">
       <SubType>Form</SubType>
@@ -1404,6 +1434,18 @@
     </Compile>
     <Compile Include="UIControls\PurchaseControls\Quatation\QuatationOrderListView.Designer.cs">
       <DependentUpon>QuatationOrderListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Quatation\QuotationSupplierForAllForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Quatation\QuotationSupplierForAllForm.Designer.cs">
+      <DependentUpon>QuotationSupplierForAllForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Quatation\QuotationCostForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Quatation\QuotationCostForm.Designer.cs">
+      <DependentUpon>QuotationCostForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UIControls\PurchaseControls\Quatation\QuotationSupplierForm.cs">
       <SubType>Form</SubType>
@@ -2817,6 +2859,12 @@
     <Compile Include="UIControls\SupplierControls\SupplierListView.Designer.cs">
       <DependentUpon>SupplierListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\Users\PurchaseSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\Users\PurchaseSettingForm.Designer.cs">
+      <DependentUpon>PurchaseSettingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\Users\UserForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3964,6 +4012,17 @@
     <EmbeddedResource Include="UIControls\Fleet\DirectiveFleetListScreen.resx">
       <DependentUpon>DirectiveFleetListScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Fleet\MaintenanceDirectiveFleetListScreen.resx">
+      <DependentUpon>MaintenanceDirectiveFleetListScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ForecastControls\ForecastListScreenMtopOld.resx">
+      <DependentUpon>ForecastListScreenMtopOld.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\MailControls\MailSettingFrom.resx">
+      <DependentUpon>MailSettingFrom.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIControls\OilControls\OilGraphForm.resx">
       <DependentUpon>OilGraphForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -4205,6 +4264,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PurchaseControls\Quatation\QuatationOrderFormNew.resx">
       <DependentUpon>QuatationOrderFormNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\PurchaseControls\Quatation\QuotationSupplierForAllForm.resx">
+      <DependentUpon>QuotationSupplierForAllForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\PurchaseControls\Quatation\QuotationCostForm.resx">
+      <DependentUpon>QuotationCostForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PurchaseControls\Quatation\QuotationSupplierForm.resx">
       <DependentUpon>QuotationSupplierForm.cs</DependentUpon>
@@ -4795,6 +4860,9 @@
     <EmbeddedResource Include="UIControls\SupplierControls\SupplierListScreen.resx">
       <DependentUpon>SupplierListScreen.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Users\PurchaseSettingForm.resx">
+      <DependentUpon>PurchaseSettingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\Users\UserForm.resx">
       <DependentUpon>UserForm.cs</DependentUpon>

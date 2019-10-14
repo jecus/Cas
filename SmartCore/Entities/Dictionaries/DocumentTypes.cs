@@ -5,81 +5,81 @@ using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.Entities.Dictionaries
 {
-    [Serializable]
-    public class DocumentType : StaticDictionary
-    {
-        #region private static List<DocumentType> _Items = new List<DocumentType>();
-        /// <summary>
-        /// Содержит все элементы
-        /// </summary>
-        private static CommonDictionaryCollection<DocumentType> _Items = new CommonDictionaryCollection<DocumentType>();
-        #endregion
+	[Serializable]
+	public class DocumentType : StaticDictionary
+	{
+		#region private static List<DocumentType> _Items = new List<DocumentType>();
+		/// <summary>
+		/// Содержит все элементы
+		/// </summary>
+		private static CommonDictionaryCollection<DocumentType> _Items = new CommonDictionaryCollection<DocumentType>();
+		#endregion
 
-        /*
-         * Предопределенные типы
-         */
+		/*
+		 * Предопределенные типы
+		 */
 
-        #region public static DocumentType Document = new DocumentType(1, "Doc.", "Document");
-        /// <summary>
-        /// 
-        /// </summary>
-        public static DocumentType Document = new DocumentType(1, "Doc.", "Document");
-        #endregion
+		#region public static DocumentType Document = new DocumentType(1, "Doc.", "Document");
+		/// <summary>
+		/// 
+		/// </summary>
+		public static DocumentType Document = new DocumentType(1, "Doc.", "Document");
+		#endregion
 
-        #region public static DocumentType Contract = new DocumentType(2, "Cont.", "Contract");
-        /// <summary>
-        /// 
-        /// </summary>
-        public static DocumentType Contract = new DocumentType(2, "Cont.", "Contract");
-        #endregion
+		#region public static DocumentType Contract = new DocumentType(2, "Cont.", "Contract");
+		/// <summary>
+		/// 
+		/// </summary>
+		public static DocumentType Contract = new DocumentType(2, "Cont.", "Contract");
+		#endregion
 
-        #region public static DocumentType Certificate = new DocumentType(3, "Cert", "Certificate");
-        /// <summary>
-        /// 
-        /// </summary>
-        public static DocumentType Certificate = new DocumentType(3, "Cert", "Certificate");
-        #endregion
+		#region public static DocumentType Certificate = new DocumentType(3, "Cert", "Certificate");
+		/// <summary>
+		/// 
+		/// </summary>
+		public static DocumentType Certificate = new DocumentType(3, "Cert", "Certificate");
+		#endregion
 
-        #region public static DocumentType Equipment = new DocumentType(4, "Equip", "Equipment");
-        /// <summary>
-        /// 
-        /// </summary>
-        public static DocumentType Equipment = new DocumentType(4, "Equip", "Equipment");
-        #endregion
+		#region public static DocumentType Equipment = new DocumentType(4, "Equip", "Equipment");
+		/// <summary>
+		/// 
+		/// </summary>
+		public static DocumentType Equipment = new DocumentType(4, "Equip", "Equipment");
+		#endregion
 
-        #region public static DocumentType Forms = new DocumentType(5, "Form", "Forms");
-        /// <summary>
-        /// 
-        /// </summary>
-        public static DocumentType Forms = new DocumentType(5, "Form", "Forms");
-        #endregion
+		#region public static DocumentType Forms = new DocumentType(5, "Form", "Forms");
+		/// <summary>
+		/// 
+		/// </summary>
+		public static DocumentType Forms = new DocumentType(5, "Form", "Forms");
+		#endregion
 
-        #region public static DocumentType Patent = new DocumentType(6, "Patent", "Patent");
-        /// <summary>
-        /// 
-        /// </summary>
-        public static DocumentType Patent = new DocumentType(6, "Patent", "Patent");
-        #endregion
+		#region public static DocumentType Patent = new DocumentType(6, "Patent", "Patent");
+		/// <summary>
+		/// 
+		/// </summary>
+		public static DocumentType Patent = new DocumentType(6, "Patent", "Patent");
+		#endregion
 
-        #region public static DocumentType License = new DocumentType(7, "License", "License");
-        /// <summary>
-        /// 
-        /// </summary>
-        public static DocumentType License = new DocumentType(7, "License", "License");
-        #endregion
+		#region public static DocumentType License = new DocumentType(7, "License", "License");
+		/// <summary>
+		/// 
+		/// </summary>
+		public static DocumentType License = new DocumentType(7, "License", "License");
+		#endregion
 
-        #region public static DocumentType Manuals = new DocumentType(8, "Manual", "Manual");
-        /// <summary>
-        /// 
-        /// </summary>
-        public static DocumentType Manuals = new DocumentType(8, "Manual", "Manual");
-        #endregion
+		#region public static DocumentType Manuals = new DocumentType(8, "Manual", "Manual");
+		/// <summary>
+		/// 
+		/// </summary>
+		public static DocumentType Manuals = new DocumentType(8, "Manual", "Manual");
+		#endregion
 
-        #region public static DocumentType Requirements = new DocumentType(9, "Requirements", "Requirements");
-        /// <summary>
-        /// 
-        /// </summary>
-        public static DocumentType Requirements = new DocumentType(9, "Requirements", "Requirements");
+		#region public static DocumentType Requirements = new DocumentType(9, "Requirements", "Requirements");
+		/// <summary>
+		/// 
+		/// </summary>
+		public static DocumentType Requirements = new DocumentType(9, "Requirements", "Requirements");
 		#endregion
 		
 		#region public static DocumentType TechnicalPublication = new DocumentType(10, "Technical Publication", "Technical Publication");
@@ -168,190 +168,191 @@ namespace SmartCore.Entities.Dictionaries
 
 		#endregion
 
-	    public static DocumentType Permission = new DocumentType(24, "Permission", "Permission");
-	    public static DocumentType StoreRecord = new DocumentType(25, "Store Record", "Store Record");
+		public static DocumentType Permission = new DocumentType(24, "Permission", "Permission");
+		public static DocumentType StoreRecord = new DocumentType(25, "Store Record", "Store Record");
+		public static DocumentType Invoice = new DocumentType(26, "Invoice", "Invoice");
 
 		#region public static DocumentType Other = new DocumentType(-1, "Oth", "Other");
 		/// <summary> 
 		/// Неизвестный объект
 		/// </summary>
 		public static DocumentType Other = new DocumentType(-1, "Oth", "Other");
-        #endregion
+		#endregion
 
-        /*
-         * Методы
-         */
+		/*
+		 * Методы
+		 */
 
-        #region public static DocumentType GetDocumentTypeById(Int32 DocumentTypeId)
-        /// <summary>
-        /// Возвращает тип диерктивы по его Id
-        /// </summary>
-        /// <param name="documentTypeId"></param>
-        /// <returns></returns>
-        public static DocumentType GetDocumentTypeById(int documentTypeId)
-        {
-            for (int i = 0; i < _Items.Count; i++)
-                if (_Items[i].ItemId == documentTypeId)
-                    return _Items[i];
-            //
-            return Other;
-        }
-        #endregion
+		#region public static DocumentType GetDocumentTypeById(Int32 DocumentTypeId)
+		/// <summary>
+		/// Возвращает тип диерктивы по его Id
+		/// </summary>
+		/// <param name="documentTypeId"></param>
+		/// <returns></returns>
+		public static DocumentType GetDocumentTypeById(int documentTypeId)
+		{
+			for (int i = 0; i < _Items.Count; i++)
+				if (_Items[i].ItemId == documentTypeId)
+					return _Items[i];
+			//
+			return Other;
+		}
+		#endregion
 
-        #region static public List<DocumentType> Items
-        /// <summary>
-        /// Возвращает список  элементов коллекции
-        /// </summary>
-        public static CommonDictionaryCollection<DocumentType> Items
-        {
-            get { return _Items; }
-        }
-        #endregion
+		#region static public List<DocumentType> Items
+		/// <summary>
+		/// Возвращает список  элементов коллекции
+		/// </summary>
+		public static CommonDictionaryCollection<DocumentType> Items
+		{
+			get { return _Items; }
+		}
+		#endregion
 
-        #region public override string ToString()
-        /// <summary>
-        /// Переводит тип директивы в строку
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return FullName;
-        }
-        #endregion
+		#region public override string ToString()
+		/// <summary>
+		/// Переводит тип директивы в строку
+		/// </summary>
+		/// <returns></returns>
+		public override string ToString()
+		{
+			return FullName;
+		}
+		#endregion
 
-        /*
-         * Реализация
-         */
+		/*
+		 * Реализация
+		 */
 
-        #region public DocumentType(Int16 ItemId, String shortName, String fullName)
-        /// <summary>
-        /// Конструктор создает объект типа директивы
-        /// </summary>
-        /// <param name="itemId"></param>
-        /// <param name="shortName"></param>
-        /// <param name="fullName"></param>
-        public DocumentType(short itemId, string shortName, string fullName)
-        {
-            ItemId = itemId;
-            ShortName = shortName;
-            FullName = fullName;
-            _Items.Add(this);
-        }
+		#region public DocumentType(Int16 ItemId, String shortName, String fullName)
+		/// <summary>
+		/// Конструктор создает объект типа директивы
+		/// </summary>
+		/// <param name="itemId"></param>
+		/// <param name="shortName"></param>
+		/// <param name="fullName"></param>
+		public DocumentType(short itemId, string shortName, string fullName)
+		{
+			ItemId = itemId;
+			ShortName = shortName;
+			FullName = fullName;
+			_Items.Add(this);
+		}
 		#endregion
 
 		#region public DocumentType()
 
 		public DocumentType()
-	    {
-		    
-	    }
+		{
+			
+		}
 
-	    #endregion
-    }
+		#endregion
+	}
 
-    [Table("DocumentSubType", "Dictionaries", "ItemId")]
+	[Table("DocumentSubType", "Dictionaries", "ItemId")]
 	[Dto(typeof(DocumentSubTypeDTO))]
-    [DictionaryCollection(typeof(DocumentSubTypeCollection))]
-    [Serializable]
-    public class DocumentSubType : AbstractDictionary
-    {
+	[DictionaryCollection(typeof(DocumentSubTypeCollection))]
+	[Serializable]
+	public class DocumentSubType : AbstractDictionary
+	{
 		private static DocumentSubType _unknown;
 		/*
-         *  Свойства
-         */
+		 *  Свойства
+		 */
 		#region public Int32 DocumentTypeId
 		/// <summary>
 		/// Id типа документа родителя (контракт, сертификат и т.д.)
 		/// </summary>
 		private Int32 _documentTypeId;
-        [TableColumnAttribute("DocumentTypeId")]
-        public Int32 DocumentTypeId
-        {
-            get { return _documentTypeId; }
-            set
-            {
-                if (_documentTypeId != value)
-                {
-                    _documentTypeId = value;
-                    OnPropertyChanged("Name");
-                }
-            }
-        }
-        #endregion
+		[TableColumnAttribute("DocumentTypeId")]
+		public Int32 DocumentTypeId
+		{
+			get { return _documentTypeId; }
+			set
+			{
+				if (_documentTypeId != value)
+				{
+					_documentTypeId = value;
+					OnPropertyChanged("Name");
+				}
+			}
+		}
+		#endregion
 
-        #region public String Name { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        private string _name;
-        [TableColumnAttribute("Name")]
-        public override string FullName
-        {
-            get { return _name; }
-            set
-            {
-                if (_name != value)
-                {
-                    _name = value;
-                    OnPropertyChanged("FullName");
-                }
-            }
-        }
-        #endregion
+		#region public String Name { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		private string _name;
+		[TableColumnAttribute("Name")]
+		public override string FullName
+		{
+			get { return _name; }
+			set
+			{
+				if (_name != value)
+				{
+					_name = value;
+					OnPropertyChanged("FullName");
+				}
+			}
+		}
+		#endregion
 
-        #region public override string ShortName  { get; set }
+		#region public override string ShortName  { get; set }
 
-        /// <summary>
-        /// Короткое имя
-        /// </summary>
-        public override string ShortName
-        {
-            get { return _name; }
-            set
-            {
-                if (_name != value)
-                {
-                    _name = value;
-                    OnPropertyChanged("FullName");
-                }
-            }
-        }
-        #endregion
+		/// <summary>
+		/// Короткое имя
+		/// </summary>
+		public override string ShortName
+		{
+			get { return _name; }
+			set
+			{
+				if (_name != value)
+				{
+					_name = value;
+					OnPropertyChanged("FullName");
+				}
+			}
+		}
+		#endregion
 
-        #region public override string CommonName  { get; set }
-        /// <summary>
-        /// Общее имя 
-        /// </summary>
-        public override string CommonName 
-        {
-            get { return _name; }
-            set
-            {
-                if (_name != value)
-                {
-                    _name = value;
-                    OnPropertyChanged("FullName");
-                }
-            }
-        }
-        #endregion
+		#region public override string CommonName  { get; set }
+		/// <summary>
+		/// Общее имя 
+		/// </summary>
+		public override string CommonName 
+		{
+			get { return _name; }
+			set
+			{
+				if (_name != value)
+				{
+					_name = value;
+					OnPropertyChanged("FullName");
+				}
+			}
+		}
+		#endregion
 
-        #region public override string Category  { get; set }
-        /// <summary>
-        /// категория записи
-        /// </summary>
-        public override string Category
-        {
-            get { return _name; }
-            set
-            {
-                if (_name != value)
-                {
-                    _name = value;
-                    OnPropertyChanged("FullName");
-                }
-            }
-        }
+		#region public override string Category  { get; set }
+		/// <summary>
+		/// категория записи
+		/// </summary>
+		public override string Category
+		{
+			get { return _name; }
+			set
+			{
+				if (_name != value)
+				{
+					_name = value;
+					OnPropertyChanged("FullName");
+				}
+			}
+		}
 		#endregion
 
 		#region public static DocumentSubType Unknown
@@ -377,44 +378,44 @@ namespace SmartCore.Entities.Dictionaries
 		*/
 		#region public override void SetProperties(AbstractDictionary dictionary)
 		public override void SetProperties(AbstractDictionary dictionary)
-        {
-            if (dictionary is DocumentSubType)
-                SetProperties((DocumentSubType)dictionary);
-        }
-        #endregion
+		{
+			if (dictionary is DocumentSubType)
+				SetProperties((DocumentSubType)dictionary);
+		}
+		#endregion
 
-        #region public void SetProperties(DocumentSubType dictionary)
-        public void SetProperties(DocumentSubType dictionary)
-        {
-            DocumentTypeId = dictionary.DocumentTypeId;
-            FullName = dictionary.FullName;
-            ShortName = dictionary.ShortName;
-            CommonName = dictionary.CommonName;
-            Category = dictionary.Category;
-        }
-        #endregion
+		#region public void SetProperties(DocumentSubType dictionary)
+		public void SetProperties(DocumentSubType dictionary)
+		{
+			DocumentTypeId = dictionary.DocumentTypeId;
+			FullName = dictionary.FullName;
+			ShortName = dictionary.ShortName;
+			CommonName = dictionary.CommonName;
+			Category = dictionary.Category;
+		}
+		#endregion
 
-        #region public override string ToString()
-        /// <summary>
-        /// Перегружаем для отладки
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return FullName;
-        }
-        #endregion
+		#region public override string ToString()
+		/// <summary>
+		/// Перегружаем для отладки
+		/// </summary>
+		/// <returns></returns>
+		public override string ToString()
+		{
+			return FullName;
+		}
+		#endregion
 
-        #region public DocumentSubType()
-        /// <summary>
-        /// Конструктор создает объект с параметрами по умолчанию
-        /// </summary>
-        public DocumentSubType()
-        {
-            ItemId = -1;
-            _documentTypeId = -1;
-            SmartCoreObjectType = SmartCoreType.DocumentSubType;
-        }
-        #endregion
-    }
+		#region public DocumentSubType()
+		/// <summary>
+		/// Конструктор создает объект с параметрами по умолчанию
+		/// </summary>
+		public DocumentSubType()
+		{
+			ItemId = -1;
+			_documentTypeId = -1;
+			SmartCoreObjectType = SmartCoreType.DocumentSubType;
+		}
+		#endregion
+	}
 }

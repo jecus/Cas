@@ -1,4 +1,5 @@
-﻿using CAS.UI.UIControls.Auxiliary.DataGridViewElements;
+﻿using System.Windows.Forms;
+using CAS.UI.UIControls.Auxiliary.DataGridViewElements;
 using MetroFramework.Controls;
 using CAS.UI.Helpers;
 
@@ -140,6 +141,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// 
 			this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonOK.DialogResult = DialogResult.OK;
 			this.buttonOK.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
 			this.buttonOK.Location = new System.Drawing.Point(627, 643);
@@ -154,6 +156,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// 
 			this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonCancel.DialogResult = DialogResult.Cancel;
 			this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
 			this.buttonCancel.Location = new System.Drawing.Point(708, 643);

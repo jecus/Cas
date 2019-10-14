@@ -19,7 +19,7 @@ using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.NewGrid
 {
-	public partial class BaseGridViewControl<T> : UserControl, IReference where T : class, IBaseCoreObject
+	public partial class BaseGridViewControl<T> : UserControl, IReference where T : class, IBaseCoreObject, IBaseEntityObject
 	{
 		#region Fields
 
@@ -266,6 +266,12 @@ namespace CAS.UI.UIControls.NewGrid
 
 			try
 			{
+				if (!CheckHeders())
+				{
+					radGridView1.Columns.Clear();
+					radGridView1.Columns.AddRange(ColumnHeaderList.ToArray());
+				}
+
 				this.radGridView1.GroupDescriptors.Clear();
 				AddItems(itemsArray);
 				UpdateItemColor();
@@ -284,6 +290,17 @@ namespace CAS.UI.UIControls.NewGrid
 				Program.Provider.Logger.Log("Error while deleting data", ex);
 				return;
 			}
+		}
+
+		private bool CheckHeders()
+		{
+			for (int i = 0; i < ColumnHeaderList.Count; i++)
+			{
+				if(!ColumnHeaderList[i].HeaderText.Equals(radGridView1.Columns[i].HeaderText))
+					return false;
+			}
+
+			return true;
 		}
 
 		private void RadGridView1_FilterChanged(object sender, GridViewCollectionChangedEventArgs e)
@@ -441,7 +458,7 @@ namespace CAS.UI.UIControls.NewGrid
 				if (value != null)
 				{
 					if (property.Name == "CorrectorId")
-						value = GlobalObjects.CasEnvironment.GetCorrector((int)value);
+						value = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 					string valueString;
 					if (value is DateTime)

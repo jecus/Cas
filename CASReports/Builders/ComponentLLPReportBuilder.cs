@@ -496,7 +496,7 @@ namespace CASReports.Builders
 	        int i = 0;
 
 
-	        foreach (var data in reportedComponent.LLPData.Where(l => l.ParentCategory != LLPLifeLimitCategory.Unknown).Reverse().Take(4))
+	        foreach (var data in reportedComponent.LLPData.Where(l => l.ParentCategory != LLPLifeLimitCategory.Unknown).Take(4))
 	        {
 				llpData[i] = data;
 		        i++;

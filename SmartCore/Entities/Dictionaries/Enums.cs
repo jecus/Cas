@@ -8,7 +8,7 @@ namespace SmartCore.Entities.Dictionaries
     public enum ADType : short
     {
         Airframe = 0,
-        Apliance = 1,
+        Appliance = 1,
         None = 2,
 		LandingGear = 3,
         Engine = 4,
@@ -663,6 +663,12 @@ namespace SmartCore.Entities.Dictionaries
 	{
 		Schedule = 0,
 		UnSchedule = 1
+	}
+
+	public enum PayTerm
+	{
+		PrePay = 0,
+		PostPay = 1
 	}
 
 }

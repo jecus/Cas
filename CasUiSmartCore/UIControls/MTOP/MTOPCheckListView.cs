@@ -31,7 +31,7 @@ namespace CAS.UI.UIControls.MTOP
 			AddColumn("Estimated Thresh Limit", (int)(radGridView1.Width * 0.4f));
 			AddColumn("Estimated Repeat", (int)(radGridView1.Width * 0.36f));
 			AddColumn("Estimated Repeat Limit", (int)(radGridView1.Width * 0.4f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 
 		#endregion
@@ -40,7 +40,7 @@ namespace CAS.UI.UIControls.MTOP
 
 		protected override List<CustomCell> GetListViewSubItems(MTOPCheck item)
 		{
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var temp = "";
 			if (item.IsZeroPhase)
 				temp = $"Zero Phase: {item.CheckType.FullName}";

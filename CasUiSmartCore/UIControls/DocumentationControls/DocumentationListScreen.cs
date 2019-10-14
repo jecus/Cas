@@ -10,11 +10,14 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CASReports.Builders;
 using CASTerms;
+using EntityCore.DTO.General;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Filters;
+using Telerik.WinControls;
 using Telerik.WinControls.UI;
+using Filter = EntityCore.Filter.Filter;
 
 namespace CAS.UI.UIControls.DocumentationControls
 {
@@ -23,6 +26,8 @@ namespace CAS.UI.UIControls.DocumentationControls
 	[ToolboxItem(false)]
 	public partial class DocumentationListScreen : ScreenControl
 	{
+		private readonly List<Filter> _filters;
+
 		#region Fields
 
 		private ICommonCollection<Document> _initialDocumentArray = new CommonCollection<Document>();
@@ -111,6 +116,12 @@ namespace CAS.UI.UIControls.DocumentationControls
 			UpdateInformation();
 		}
 
+		public DocumentationListScreen(Operator currentOperator, List<Filter> filters)
+			: this(currentOperator)
+		{
+			_filters = filters;
+		}
+
 		#endregion
 
 		#endregion
@@ -139,10 +150,17 @@ namespace CAS.UI.UIControls.DocumentationControls
 			try
 			{
 				GlobalObjects.CasEnvironment.Loader.ReloadDictionary(typeof(DocumentSubType), typeof(ServiceType), typeof(Nomenclatures), typeof(Department), typeof(Specialization));
-				if (_parent is Aircraft)
-					_initialDocumentArray.AddRange(GlobalObjects.DocumentCore.GetAircraftDocuments((Aircraft)_parent).ToArray());
-				if (_parent is Operator)
-					_initialDocumentArray.AddRange(GlobalObjects.DocumentCore.GetOperatorDocuments((Operator)_parent).ToArray());
+				if (_filters == null)
+				{
+					if (_parent is Aircraft)
+						_initialDocumentArray.AddRange(GlobalObjects.DocumentCore.GetAircraftDocuments((Aircraft)_parent).ToArray());
+					if (_parent is Operator)
+						_initialDocumentArray.AddRange(GlobalObjects.DocumentCore.GetOperatorDocuments((Operator)_parent).ToArray());
+				}
+				else
+				{
+					_initialDocumentArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DocumentDTO, Document>(_filters, true));
+				}
 			}
 			catch(Exception ex)
 			{

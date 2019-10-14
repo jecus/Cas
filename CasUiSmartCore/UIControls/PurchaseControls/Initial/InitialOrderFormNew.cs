@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
 using EntityCore.DTO.Dictionaries;
 using EntityCore.DTO.General;
@@ -36,6 +37,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private readonly ProductCollectionFilter _collectionFilter = new ProductCollectionFilter();
 		private readonly ProductStandartFilter _standartFilter = new ProductStandartFilter();
 		private List<Product> _currentAircraftKits = new List<Product>();
+		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
 
 		#endregion
 
@@ -71,7 +73,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			_collectionFilter.Filters.Add(_partNumberFilter);
 			_collectionFilter.Filters.Add(_standartFilter);
-
+			DocumentControls.AddRange(new[] { documentControl1, documentControl2, documentControl3, documentControl4, documentControl5, documentControl6, documentControl7, documentControl8, documentControl9, documentControl10 });
 			Task.Run(() => DoWork())
 				.ContinueWith(task => Completed(), TaskScheduler.FromCurrentSynchronizationContext());
 		}
@@ -106,6 +108,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 					foreach (var addedInitialOrderRecord in _addedInitialOrderRecords)
 						addedInitialOrderRecord.Product = products.FirstOrDefault(i => i.ItemId == addedInitialOrderRecord.ProductId);
 				}
+				var documents = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DocumentDTO, Document>(new Filter("ParentID", _order.ItemId), true);
+				_order.ClosingDocument.Clear();
+				_order.ClosingDocument.AddRange(documents);
 			}
 
 			_defferedCategories.Clear();
@@ -124,7 +129,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private void UpdateControls()
 		{
 			comboBoxMeasure.Items.Clear();
-			comboBoxMeasure.Items.AddRange(Measure.GetByCategories(new[] { MeasureCategory.Mass, MeasureCategory.EconomicEntity }));
+			//comboBoxMeasure.Items.AddRange(Measure.GetByCategories(new[] { MeasureCategory.Mass, MeasureCategory.EconomicEntity }));
+			comboBoxMeasure.Items.AddRange(Measure.Items.ToArray());
 
 			comboBoxDestination.Items.Clear();
 			comboBoxDestination.Items.AddRange(destinations.ToArray());
@@ -134,37 +140,46 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			comboBoxReason.Items.Clear();
 			comboBoxReason.Items.AddRange(InitialReason.Items.ToArray());
-			
+
+			foreach (var control in DocumentControls)
+				control.Added += DocumentControl1_Added;
+
+			for (int i = 0; i < _order.ClosingDocument.Count; i++)
+			{
+				var control = DocumentControls[i];
+				control.CurrentDocument = _order.ClosingDocument[i];
+			}
+
 		}
 
 		#endregion
 
-		#region private void comboBoxDestination_SelectedIndexChanged(object sender, System.EventArgs e)
+		#region private void DocumentControl1_Added(object sender, EventArgs e)
 
-		private void comboBoxDestination_SelectedIndexChanged(object sender, EventArgs e)
+		private void DocumentControl1_Added(object sender, EventArgs e)
 		{
-			if(listViewInitialItems.SelectedItem != null)
-				return;
-
-			comboBoxDefferedCategory.Items.Clear();
-			comboBoxDIR.Items.Clear();
-
-			var a = comboBoxDestination.SelectedItem as Aircraft;
-
-			if (a != null)
+			var control = sender as DocumentControl;
+			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Work package") as DocumentSubType;
+			var newDocument = new Document
 			{
-				comboBoxDefferedCategory.Enabled = true;
+				Parent = _order,
+				ParentId = _order.ItemId,
+				ParentTypeId = _order.SmartCoreObjectType.ItemId,
+				DocType = DocumentType.TechnicalRecords,
+				DocumentSubType = docSubType,
+				IsClosed = true,
+				ContractNumber = $"{_order.Number}",
+				Description = _order.Title,
+				ParentAircraftId = _order.ParentId
+			};
 
-				if (a.Model != null)
-				{
-					var categories = _defferedCategories.Where(c => a.Model.Equals(c.AircraftModel)).ToList();
-					categories.Add(DeferredCategory.Unknown);
+			var form = new DocumentForm(newDocument, false);
+			if (form.ShowDialog() == DialogResult.OK)
+			{
+				_order.ClosingDocument.Add(newDocument);
+				control.CurrentDocument = newDocument;
 
-					comboBoxDefferedCategory.Items.AddRange(categories.ToArray());
-					comboBoxDefferedCategory.SelectedItem = categories.FirstOrDefault(c => c.Equals(listViewInitialItems.SelectedItem.DeferredCategory)) ?? DeferredCategory.Unknown;
-				}
 			}
-			else comboBoxDefferedCategory.Enabled = false;
 		}
 
 		#endregion
@@ -173,7 +188,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void comboBoxMeasure_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			SetForMeasure();
+			
 		}
 
 		#endregion
@@ -182,26 +197,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void numericUpDownQuantity_ValueChanged(object sender, EventArgs e)
 		{
-			SetForMeasure();
+			
 		}
 
-		#endregion
-
-		#region private void SetForMeasure()
-		/// <summary>
-		/// Изменяет контрол в соотствествии с выбранной единицей измерения
-		/// </summary>
-		private void SetForMeasure()
-		{
-			var measure = comboBoxMeasure.SelectedItem as Measure;
-			if (measure == null || measure.MeasureCategory != MeasureCategory.Mass)
-				numericUpDownQuantity.DecimalPlaces = 0;
-			else numericUpDownQuantity.DecimalPlaces = 2;
-
-			var quantity = numericUpDownQuantity.Value;
-
-			textBoxTotal.Text = $"{quantity:0.##}" + (measure != null ? " " + measure + "(s)" : "");
-		}
 		#endregion
 
 		#region private void UpdateInitialControls()
@@ -254,52 +252,54 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				MessageBox.Show("Please, enter a Title", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Exclamation);
-				return;
 			}
 
-			if (listViewInitialItems.ItemsCount <= 0)
+			else if (listViewInitialItems.ItemsCount <= 0)
 			{
 				MessageBox.Show("Please select a kits for initional order", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Exclamation);
-				return;
 			}
-			//запись новой информации в запросный ордер
-			ApplyInitialData();
-			//сохранение запросного ордера
-			GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
-
-			foreach (var record in _addedInitialOrderRecords)
+			else
 			{
-				record.ParentPackageId = _order.ItemId;
-				GlobalObjects.CasEnvironment.NewKeeper.Save(record);
+				//запись новой информации в запросный ордер
+				ApplyInitialData();
+				//сохранение запросного ордера
+				GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
 
-				if (record.Product != null)
+				foreach (var record in _addedInitialOrderRecords)
 				{
-					foreach (var ksr in record.Product.SupplierRelations)
-					{
-						if (ksr.SupplierId != 0)
-						{
-							ksr.KitId = record.Product.ItemId;
-							ksr.ParentTypeId = record.Product.SmartCoreObjectType.ItemId;
+					record.ParentPackageId = _order.ItemId;
+					GlobalObjects.CasEnvironment.NewKeeper.Save(record);
 
-							try
+					if (record.Product != null)
+					{
+						foreach (var ksr in record.Product.SupplierRelations)
+						{
+							if (ksr.SupplierId != 0)
 							{
-								GlobalObjects.CasEnvironment.NewKeeper.Save(ksr);
-							}
-							catch (Exception ex)
-							{
-								Program.Provider.Logger.Log("Error while saving data", ex);
-								return;
+								ksr.KitId = record.Product.ItemId;
+								ksr.ParentTypeId = record.Product.SmartCoreObjectType.ItemId;
+
+								try
+								{
+									GlobalObjects.CasEnvironment.NewKeeper.Save(ksr);
+								}
+								catch (Exception ex)
+								{
+									Program.Provider.Logger.Log("Error while saving data", ex);
+									return;
+								}
 							}
 						}
 					}
 				}
-			}
 
-			foreach (var record in _deleteExistInitialOrderRecords)
-				GlobalObjects.CasEnvironment.NewKeeper.Delete(record);
-			DialogResult = DialogResult.OK;
+				foreach (var record in _deleteExistInitialOrderRecords)
+					GlobalObjects.CasEnvironment.NewKeeper.Delete(record);
+				DialogResult = DialogResult.OK;
+			}
+			
 		}
 
 		#endregion
@@ -344,6 +344,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			{
 				var newRequest = new InitialOrderRecord(-1, product, 1);
 				newRequest.Product = product;
+				newRequest.Measure = product.Measure;
 				_addedInitialOrderRecords.Add(newRequest);
 			}
 
@@ -396,10 +397,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			comboBoxDestination.SelectedItem = destination;
 			comboBoxPriority.SelectedItem = listViewInitialItems.SelectedItem.Priority;
 			metroTextBox1.Text = listViewInitialItems.SelectedItem.Remarks;
-
-			lifelengthViewerLifeLimit.Lifelength = new Lifelength(listViewInitialItems.SelectedItem.LifeLimit);
-			lifelengthViewerNotify.Lifelength = new Lifelength(listViewInitialItems.SelectedItem.LifeLimitNotify);
-
 		}
 
 		#endregion
@@ -413,7 +410,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			listViewInitialItems.SelectedItem.Priority = comboBoxPriority.SelectedItem as Priority ?? Priority.UNK;
 			listViewInitialItems.SelectedItem.Measure = comboBoxMeasure.SelectedItem as Measure ?? Measure.Unknown;
 			listViewInitialItems.SelectedItem.Quantity = (double)numericUpDownQuantity.Value;
-			listViewInitialItems.SelectedItem.DeferredCategory = comboBoxDefferedCategory.SelectedItem as DeferredCategory ?? DeferredCategory.Unknown;
 			listViewInitialItems.SelectedItem.Remarks = metroTextBox1.Text;
 
 			ComponentStatus costCondition = ComponentStatus.Unknown;
@@ -440,8 +436,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				listViewInitialItems.SelectedItem.DestinationObjectId = -1;
 			}
 			listViewInitialItems.SelectedItem.InitialReason = comboBoxReason.SelectedItem as InitialReason ?? InitialReason.Unknown;
-			listViewInitialItems.SelectedItem.LifeLimit = lifelengthViewerLifeLimit.Lifelength;
-			listViewInitialItems.SelectedItem.LifeLimitNotify = lifelengthViewerNotify.Lifelength;
 
 			listViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
 
@@ -465,8 +459,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			checkBoxRepair.Checked = false;
 			checkBoxServiceable.Checked = false;
 			comboBoxDestination.SelectedItem = null;
-			lifelengthViewerLifeLimit.Lifelength = new Lifelength();
-			lifelengthViewerNotify.Lifelength = new Lifelength();
 		}
 
 		#endregion

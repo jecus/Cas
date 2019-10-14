@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
 using EntityCore.DTO.General;
 using EntityCore.Filter;
@@ -16,8 +17,8 @@ using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {
-    public partial class CreatePurchaseOrderForm : MetroForm
-    {
+	public partial class CreatePurchaseOrderForm : MetroForm
+	{
 		#region Fields
 
 		private List<PurchaseRequestRecord> _addedRecord = new List<PurchaseRequestRecord>();
@@ -25,17 +26,18 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private readonly RequestForQuotation _quotation;
 		private List<SupplierPrice> _prices = new List<SupplierPrice>();
 		private PurchaseOrder _order;
+		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
 
 		#endregion
 
 		#region Constructor
 
 		public CreatePurchaseOrderForm()
-	    {
-		    InitializeComponent();
+		{
+			InitializeComponent();
 		}
 
-		public CreatePurchaseOrderForm(RequestForQuotation quotation):this()
+		public CreatePurchaseOrderForm(RequestForQuotation quotation) : this()
 		{
 			_quotation = quotation;
 
@@ -48,7 +50,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				Author = _quotation.Author,
 				Remarks = _quotation.Remarks,
 				Number = _quotation.Number,
-			}; 
+			};
 
 			Task.Run(() => DoWork())
 				.ContinueWith(task => Completed(), TaskScheduler.FromCurrentSynchronizationContext());
@@ -73,26 +75,84 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		{
 			_prices.Clear();
 
-			var records = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationRecordDTO, RequestForQuotationRecord>(new Filter("ParentPackageId", _quotation.ItemId));
+			var records =
+				GlobalObjects.CasEnvironment.NewLoader
+					.GetObjectList<RequestForQuotationRecordDTO, RequestForQuotationRecord>(
+						new Filter("ParentPackageId", _quotation.ItemId));
 			var ids = records.SelectMany(i => i.SupplierPrice).Select(s => s.SupplierId).Distinct().ToArray();
 			var productIds = records.Select(s => s.PackageItemId).Distinct().ToArray();
-			var suppliers = GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[]{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, ids), });
-			var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new ICommonFilter[]{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, productIds), });
+			var suppliers = GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[]
+				{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, ids),});
+			var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new ICommonFilter[]
+				{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, productIds),});
+
+
+			var parentInitialId = (int) GlobalObjects.CasEnvironment.Execute(
+					$@"select i.ItemId from RequestsForQuotation q
+			left join InitialOrders i on i.ItemID = q.ParentID where q.ItemId = {_quotation.ItemId}").Tables[0]
+				.Rows[0][0];
+			var initialRecords =
+				GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(
+					new Filter("ParentPackageId", parentInitialId));
 
 			foreach (var record in records)
 			{
+				record.ParentInitialRecord = initialRecords.FirstOrDefault(i => i.ProductId == record.PackageItemId);
 				record.Product = products.FirstOrDefault(i => i.ItemId == record.PackageItemId);
 				foreach (var price in record.SupplierPrice)
 				{
 					price.Supplier = suppliers.FirstOrDefault(i => i.ItemId == price.SupplierId);
 					price.Parent = record;
 				}
+
+				if (record.SupplierPrice.Any(i => i.CostNew != record?.SupplierPrice?.FirstOrDefault()?.CostNew))
+				{
+					var lowest = record.SupplierPrice.OrderBy(i => i.CostNew).FirstOrDefault();
+					if (lowest != null)
+						lowest.IsLowestCostNew = true;
+					var highest = record.SupplierPrice.OrderBy(i => i.CostNew).LastOrDefault();
+					if (highest != null)
+						highest.IsHighestCostNew = true;
+				}
+
+				if (record.SupplierPrice.Any(i => i.CostOverhaul != record?.SupplierPrice?.FirstOrDefault()?.CostOverhaul))
+				{
+					var lowest = record.SupplierPrice.OrderBy(i => i.CostOverhaul).FirstOrDefault();
+					if (lowest != null)
+						lowest.IsLowestCostOH = true;
+					var highest = record.SupplierPrice.OrderBy(i => i.CostOverhaul).LastOrDefault();
+					if (highest != null)
+						highest.IsHighestCostOH = true;
+				}
+
+				if (record.SupplierPrice.Any(i => i.CostRepair != record?.SupplierPrice?.FirstOrDefault()?.CostRepair))
+				{
+					var lowest = record.SupplierPrice.OrderBy(i => i.CostRepair).FirstOrDefault();
+					if (lowest != null)
+						lowest.IsLowestCostRepair = true;
+					var highest = record.SupplierPrice.OrderBy(i => i.CostRepair).LastOrDefault();
+					if (highest != null)
+						highest.IsHighestCostRepair = true;
+
+				}
+
+				if (record.SupplierPrice.Any(i => i.CostServiceable != record?.SupplierPrice?.FirstOrDefault()?.CostServiceable))
+				{
+					var lowest = record.SupplierPrice.OrderBy(i => i.CostServiceable).FirstOrDefault();
+					if (lowest != null)
+						lowest.IsLowestCostServ = true;
+					var highest = record.SupplierPrice.OrderBy(i => i.CostServiceable).LastOrDefault();
+					if (highest != null)
+						highest.IsHighestCostServ = true;
+				}
 			}
 
-			_prices.AddRange(records.SelectMany(i => i.SupplierPrice));
-		}
+		
 
-		#endregion
+		_prices.AddRange(records.SelectMany(i => i.SupplierPrice));
+	}
+
+	#endregion
 
 		#region private void UpdateInitialControls()
 
@@ -120,7 +180,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private void UpdateControls()
 		{
 			comboBoxMeasure.Items.Clear();
-			comboBoxMeasure.Items.AddRange(Measure.GetByCategories(new[] { MeasureCategory.Mass, MeasureCategory.EconomicEntity }));
+			//comboBoxMeasure.Items.AddRange(Measure.GetByCategories(new[] { MeasureCategory.Mass, MeasureCategory.EconomicEntity }));
+			comboBoxMeasure.Items.AddRange(Measure.Items.ToArray());
 
 			comboBoxCondition.Items.Clear();
 			comboBoxCondition.DataSource = Enum.GetValues(typeof(ComponentStatus));
@@ -135,12 +196,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		private void ButtonAdd_Click(object sender, EventArgs e)
 		{
-			
-
 			foreach (var price in quatationSupplierPriceListView1.SelectedItems.ToArray())
 			{
 				var newRequest = new PurchaseRequestRecord(-1, price.Parent.Product, 1);
-				newRequest.CostCondition = ComponentStatus.New;
+				newRequest.CostCondition = price.Parent.CostCondition;
 				newRequest.Product = price.Parent.Product;
 				newRequest.Supplier = price.Supplier;
 				newRequest.Quantity = 1;
@@ -158,8 +217,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 						MessageBoxIcon.Exclamation);
 					return;
 				}
+
 				var res = purchaseRecordListView1.GetItemsArray().Where(i =>
-					i.Product.ItemId == purchaseRecordListView1.SelectedItem.Product.ItemId).Select(i => i.Quantity).Sum();
+					i.Product.ItemId == price.Parent.Product.ItemId).ToArray().Select(i => i.Quantity).Sum();
 
 				if (newRequest.Price.Parent.Quantity < newRequest.Quantity + res)
 				{
@@ -222,8 +282,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			else numericUpDownQuantity.DecimalPlaces = 2;
 
 			var quantity = numericUpDownQuantity.Value;
-
-			textBoxTotal.Text = $"{quantity:0.##}" + (measure != null ? " " + measure + "(s)" : "");
+			var cost = numericUpDown1.Value;
+			
+			textBoxTotal.Text = $"{quantity * cost:0.##} {(Сurrency)comboBoxCurrency.SelectedItem}";
 		}
 		#endregion
 
@@ -280,6 +341,31 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			comboBoxCondition.SelectedItem = purchaseRecordListView1.SelectedItem.CostCondition;
 			comboBoxMeasure.SelectedItem = purchaseRecordListView1.SelectedItem.Measure;
 			numericUpDownQuantity.Value = (decimal)purchaseRecordListView1.SelectedItem.Quantity;
+
+			var selected = (ComponentStatus)comboBoxCondition.SelectedItem;
+
+			if (selected == ComponentStatus.New)
+			{
+				numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostNew;
+				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyNew;
+			}
+			else if (selected == ComponentStatus.Overhaul)
+			{
+				numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostOverhaul;
+				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyOH;
+			}
+			else if (selected == ComponentStatus.Repair)
+			{
+				numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostRepair;
+				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyRepair;
+			}
+			else if (selected == ComponentStatus.Serviceable)
+			{
+				numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostServiceable;
+				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyServ;
+			}
+
+			SetForMeasure();
 		}
 		#endregion
 
@@ -298,6 +384,27 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Exclamation);
 				return;
+			}
+
+			var q = purchaseRecordListView1.SelectedItem.Price.Parent?.ParentInitialRecord?.CostCondition.ToString().Replace(" ", "").Split(',');
+			var q1 = ((ComponentStatus)comboBoxCondition.SelectedItem).ToString();
+			bool flag = false;
+			foreach (var s in q)
+			{
+				if (q1.Contains(s))
+					flag = true;
+			}
+
+			if (!q.Any(i => q1.Contains(i)))
+			{
+				if (MessageBox.Show(
+					    $"You ordered {purchaseRecordListView1.SelectedItem.Price.Parent?.CostCondition}! Do you really want ordered {(ComponentStatus) comboBoxCondition.SelectedItem}?",
+					    (string) new GlobalTermsProvider()["SystemName"],
+					    MessageBoxButtons.YesNo,
+					    MessageBoxIcon.Exclamation) == DialogResult.No)
+				{
+					return;
+				}
 			}
 
 			purchaseRecordListView1.SelectedItem.CostCondition = (ComponentStatus) comboBoxCondition.SelectedItem;
@@ -333,28 +440,37 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				MessageBox.Show("Please, enter a Title", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Exclamation);
-				return;
 			}
 
-			if (purchaseRecordListView1.ItemsCount <= 0)
+			else if (purchaseRecordListView1.ItemsCount <= 0)
 			{
 				MessageBox.Show("Please select a price for purchase order", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Exclamation);
-				return;
 			}
-			//запись новой информации в запросный ордер
-			ApplyPurchaseData();
-			//сохранение запросного ордера
-			GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
-
-			foreach (var record in _addedRecord)
+			else
 			{
-				record.ParentPackageId = _order.ItemId;
-				GlobalObjects.CasEnvironment.Keeper.Save(record);
-			}
+				//запись новой информации в запросный ордер
+				ApplyPurchaseData();
+				//для каждого supplier свой ордер!
+				foreach (var g in _addedRecord.GroupBy(i => i.Supplier))
+				{
+					var copy = _order.GetCopyUnsaved();
+					copy.Title += $" {g.Key}";
 
-			DialogResult = DialogResult.OK;
+					//сохранение запросного ордера
+					GlobalObjects.CasEnvironment.NewKeeper.Save(copy);
+
+					foreach (var record in g)
+					{
+						record.ParentPackageId = copy.ItemId;
+						GlobalObjects.CasEnvironment.NewKeeper.Save(record);
+					}
+				}
+
+				DialogResult = DialogResult.OK;
+			}
+			
 		}
 
 		#endregion

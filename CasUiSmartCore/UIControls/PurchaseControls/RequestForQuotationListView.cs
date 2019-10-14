@@ -4,22 +4,23 @@ using System.Windows.Forms;
 using CAS.UI.UIControls.NewGrid;
 using CAS.UI.UIControls.PurchaseControls.Initial;
 using CASTerms;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
-    ///<summary>
-    /// список для отображения ордеров запроса
-    ///</summary>
-    public partial class RequestForQuotationListView : BaseGridViewControl<RequestForQuotation>
-    {
-        #region public RequestForQuotationListView()
-        ///<summary>
-        ///</summary>
-        public RequestForQuotationListView()
-        {
-	        InitializeComponent();
-	        SortMultiplier = 0;
+	///<summary>
+	/// список для отображения ордеров запроса
+	///</summary>
+	public partial class RequestForQuotationListView : BaseGridViewControl<RequestForQuotation>
+	{
+		#region public RequestForQuotationListView()
+		///<summary>
+		///</summary>
+		public RequestForQuotationListView()
+		{
+			InitializeComponent();
+			SortMultiplier = 0;
 		}
 		#endregion
 
@@ -39,23 +40,27 @@ namespace CAS.UI.UIControls.PurchaseControls
 		#region protected override ListViewItem.ListViewSubItem[] GetItemsString(RequestForQuotation item)
 
 		protected override List<CustomCell> GetListViewSubItems(RequestForQuotation item)
-        {
-	        var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
-
-            return new List<CustomCell>
-            {
-	            CreateRow(item.Status.ToString(), item.Status),
-	            CreateRow(item.Number, item.Number),
-	            CreateRow(item.Title, item.Title),
-	            CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.OpeningDate), item.OpeningDate),
-	            CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.PublishingDate), item.PublishingDate),
-	            CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.ClosingDate), item.ClosingDate),
-	            CreateRow(item.Author, item.Author),
-	            CreateRow(item.PublishedByUser, item.PublishedByUser),
-	            CreateRow(item.CloseByUser, item.CloseByUser),
-	            CreateRow(item.Remarks, item.Remarks),
-	            CreateRow(author, author),
-            };
+		{
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
+			var status = "1.Opened";
+			if (item.Status == WorkPackageStatus.Published)
+				status = "2.Published";
+			else if (item.Status == WorkPackageStatus.Closed)
+				status = "3.Closed";
+			return new List<CustomCell>
+			{
+				CreateRow(status, item.Status),
+				CreateRow(item.Number, item.Number),
+				CreateRow(item.Title, item.Title),
+				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.OpeningDate), item.OpeningDate),
+				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.PublishingDate), item.PublishingDate),
+				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.ClosingDate), item.ClosingDate),
+				CreateRow(item.Author, item.Author),
+				CreateRow(item.PublishedByUser, item.PublishedByUser),
+				CreateRow(item.CloseByUser, item.CloseByUser),
+				CreateRow(item.Remarks, item.Remarks),
+				CreateRow(author, author),
+			};
 		}
 
 		#endregion
@@ -80,7 +85,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		#region protected override void SetHeaders()
 
 		protected override void SetHeaders()
-        {
+		{
 			AddColumn("Status", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Order No", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Title", (int)(radGridView1.Width * 0.3f));
@@ -91,11 +96,11 @@ namespace CAS.UI.UIControls.PurchaseControls
 			AddColumn("Published By", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Closed By", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Remark", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 
-        }
+		}
 
-        #endregion
-        #endregion
-    }
+		#endregion
+		#endregion
+	}
 }

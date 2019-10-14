@@ -12,6 +12,7 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Hangar;
+using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.Store;
 using SmartCore.Entities.General.WorkShop;
 using SmartCore.Entities.NewLoader;
@@ -55,6 +56,7 @@ namespace SmartCore
 		void Connect(String serverName, String userName, String pass, String database);
 
 		string GetCorrector(int id);
+		string GetCorrector(IBaseEntityObject entity);
 
 		void UpdateUser(string password);
 

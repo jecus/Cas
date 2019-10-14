@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using CAS.UI.UIControls.NewGrid;
+using CASTerms;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls.Quatation
@@ -23,10 +26,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		protected override void SetHeaders()
 		{
 			AddColumn("Suppliers", (int)(radGridView1.Width * 0.2f));
-			AddColumn("CostNew", (int)(radGridView1.Width * 0.2f));
-			AddColumn("CostOverhaul", (int)(radGridView1.Width * 0.2f));
-			AddColumn("CostServiceable", (int)(radGridView1.Width * 0.2f));
-			AddColumn("CostRepair", (int)(radGridView1.Width * 0.2f));
+			AddColumn("New", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Overhaul", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Serviceable", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Repair", (int)(radGridView1.Width * 0.15f));
 			AddColumn("Product", (int)(radGridView1.Width * 0.2f));
 		}
 
@@ -36,14 +39,46 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 		protected override List<CustomCell> GetListViewSubItems(SupplierPrice item)
 		{
-			var temp = $"{item.Parent?.Product?.PartNumber} | Q-ty:{item.Parent?.Quantity}";
+			var destiantion = "";
+			if(item.Parent?.ParentInitialRecord?.DestinationObjectType == SmartCoreType.Aircraft)
+				destiantion = GlobalObjects.AircraftsCore.GetAircraftById(item.Parent?.ParentInitialRecord?.DestinationObjectId ?? -1)?.ToString();
+			else destiantion = GlobalObjects.StoreCore.GetStoreById(item.Parent?.ParentInitialRecord?.DestinationObjectId ?? -1)?.ToString();
+
+			var temp = $"{item.Parent?.Product?.PartNumber} | Q-ty:{item.Parent?.Quantity} | Reason: {item.Parent?.ParentInitialRecord?.InitialReason} | Destination: {destiantion} | Priority: {item.Parent?.ParentInitialRecord?.Priority}";
+
+			Color? colorNew = null;
+			Color? colorOH = null;
+			Color? colorServ = null;
+			Color? colorRep = null;
+
+			if(item.IsHighestCostNew)
+				colorNew = Color.Red;
+			if(item.IsLowestCostNew)
+				colorNew = Color.Green;
+
+			if (item.IsHighestCostOH)
+				colorOH = Color.Red;
+			if (item.IsLowestCostOH)
+				colorOH = Color.Green;
+
+			if (item.IsHighestCostServ)
+				colorServ = Color.Red;
+			if (item.IsLowestCostServ)
+				colorServ = Color.Green;
+
+			if (item.IsHighestCostRepair)
+				colorRep = Color.Red;
+			if (item.IsLowestCostRepair)
+				colorRep = Color.Green;
+
+
 			return new List<CustomCell>()
 			{
 				CreateRow(item.Supplier.ToString(),item.Supplier),
-				CreateRow(item.CostNew.ToString(),item.CostNew),
-				CreateRow(item.CostOverhaul.ToString(),item.CostOverhaul),
-				CreateRow(item.CostServiceable.ToString(),item.CostServiceable),
-				CreateRow(item.CostRepair.ToString(),item.CostRepair),
+				CreateRow(item.CostNew.ToString(),item.CostNew, colorNew),
+				CreateRow(item.CostOverhaul.ToString(),item.CostOverhaul, colorOH),
+				CreateRow(item.CostServiceable.ToString(),item.CostServiceable, colorServ),
+				CreateRow(item.CostRepair.ToString(),item.CostRepair, colorRep),
 				CreateRow(temp,temp),
 			};
 		}

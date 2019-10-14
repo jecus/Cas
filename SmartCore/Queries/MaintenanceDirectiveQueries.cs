@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using SmartCore.Entities.General;
@@ -95,8 +96,26 @@ namespace SmartCore.Queries
             return BaseQueries.GetSelectQueryWithWhereAll<MaintenanceDirective>(allFilters.ToArray(), loadChild, getDeleted);
 
         }
-        #endregion
-	} 
+		#endregion
+
+		public static List<DbQuery> GetSelectQuery(string text,
+			bool loadChild = false,
+			bool getDeleted = false)
+		{
+			List<ICommonFilter> allFilters = new List<ICommonFilter>();
+			allFilters.Add(GetWhereStatementForAll(text));
+			List<DbQuery> qrs = BaseQueries.GetSelectQueryWithWhereAll<MaintenanceDirective>(allFilters.ToArray(), loadChild, getDeleted);
+			return qrs;
+
+		}
+
+		public static ICommonFilter GetWhereStatementForAll(string text)
+		{
+			ICommonFilter state = new CommonFilter<string>($"(MaintenanceDirectives.ScheduleItem like '%{text}%' or MaintenanceDirectives.TaskNumberCheck like '%{text}%' or MaintenanceDirectives.TaskCardNumber like '%{text}%' or MaintenanceDirectives.Description like '%{text}%')");
+			return state;
+		}
+
+	}
 }
   
   

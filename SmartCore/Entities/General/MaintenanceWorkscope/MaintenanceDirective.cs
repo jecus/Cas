@@ -166,6 +166,8 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 
 		#endregion
 
+		public Aircraft ParentAircraft { get; set; }
+
 		#region public BaseComponent ParentBaseComponent { get; set; }
 
 		[NonSerialized]

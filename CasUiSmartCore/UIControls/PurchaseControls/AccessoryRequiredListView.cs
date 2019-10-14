@@ -125,7 +125,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			AddColumn("Cost OH", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Cost Serv.", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 
@@ -150,7 +150,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			var quantity = isComponent ? 1 : item.Quantity;
 			var quantityString = $"{quantity} {item.Measure.ShortName}";
 			var taskQuantity = Math.Round(item.TaskQuantity, 2).ToString();
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var reference = item.Product?.Reference;
 
 			subItems.Add(CreateRow(reference, reference));

@@ -36,7 +36,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			AddColumn("Privileges", (int)(radGridView1.Width * 0.6f));
 			AddColumn("Occupation", (int)(radGridView1.Width * 0.34f));
 			AddColumn("Station", (int)(radGridView1.Width * 0.30f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 
@@ -64,7 +64,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 
 			var closingDate = item.ClosingDate <= DateTimeExtend.GetCASMinDateTime().Date ? "" : item.ClosingDate.ToString("dd.MM.yyyy");
 			var aircraft = GlobalObjects.AircraftsCore.GetAircraftById(item.ParentId);
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			return new List<CustomCell>
 			{

@@ -22,14 +22,14 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			AddColumn("GoodClass", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Measure", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Quantity", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 
 		#endregion
 
 		protected override List<CustomCell> GetListViewSubItems(InitialOrderRecord item)
 		{
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			return new List<CustomCell>()
 			{
 				CreateRow(item.Product?.PartNumber, item.Product?.PartNumber),

@@ -66,6 +66,7 @@ namespace SmartCore.Entities
 				return;
 
 			value.CorrectorId = _casEnvironment.IdentityUser.ItemId;
+			value.Updated = DateTime.Now;
 
 			var type = AuditOperation.Created;
 			if (value.ItemId > 0)
@@ -108,7 +109,10 @@ namespace SmartCore.Entities
 				return;
 
 			foreach (var o in value)
+			{
 				o.CorrectorId = _casEnvironment.IdentityUser.ItemId;
+				o.Updated = DateTime.Now;
+			}
 
 			var blType = value.First().GetType();
 			var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
@@ -144,7 +148,10 @@ namespace SmartCore.Entities
 				return;
 
 			foreach (var o in value)
+			{
 				o.CorrectorId = _casEnvironment.IdentityUser.ItemId;
+				o.Updated = DateTime.Now;
+			}
 
 			var blType = value.First().GetType();
 			var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();
@@ -223,6 +230,7 @@ namespace SmartCore.Entities
 				return;
 
 			value.CorrectorId = _casEnvironment.IdentityUser.ItemId;
+			value.Updated = DateTime.Now;
 
 			var blType = value.GetType();
 			var dto = (DtoAttribute)blType.GetCustomAttributes(typeof(DtoAttribute), false).FirstOrDefault();

@@ -45,7 +45,7 @@ namespace CAS.UI.UIControls.ScheduleControls.AircraftStatus
 			AddColumn("Direction", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Downtime", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 
 		#endregion
@@ -65,7 +65,7 @@ namespace CAS.UI.UIControls.ScheduleControls.AircraftStatus
 
 			var time = DateTime.Now.Subtract(item.ParentFlight.FlightDate.AddMinutes(item.ParentFlight.LDGTime));
 
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			if (time.TotalHours > 0)
 			{

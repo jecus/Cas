@@ -98,7 +98,7 @@ namespace CAS.UI.UIControls.Discrepancies
 			AddColumn("Sent by", 120);
 			AddColumn("FDR", 120);
 			AddColumn("Remarks", 120);
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
 
@@ -139,7 +139,7 @@ namespace CAS.UI.UIControls.Discrepancies
 
 		protected override List<CustomCell> GetListViewSubItems(Discrepancy item)
 		{
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			return new List<CustomCell>
 			{

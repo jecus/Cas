@@ -104,6 +104,7 @@ namespace CasAPI.Controllers
 					updateUser.Password = user.Password;
 					updateUser.UserType = user.UserType;
 					updateUser.UiType = user.UiType;
+					updateUser.PersonnelId = user.PersonnelId;
 				}
 				else
 				{
@@ -114,6 +115,7 @@ namespace CasAPI.Controllers
 					newUser.Surname = user.Surname;
 					newUser.UserType = user.UserType;
 					newUser.UiType = user.UiType;
+					newUser.PersonnelId = user.PersonnelId;
 
 					_context.UserDtos.Add(newUser);
 

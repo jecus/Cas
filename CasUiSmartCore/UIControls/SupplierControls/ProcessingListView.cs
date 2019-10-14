@@ -18,7 +18,7 @@ using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.SupplierControls
 {
-	public partial class ProcessingListView : BaseGridViewControl<IBaseCoreObject>
+	public partial class ProcessingListView : BaseGridViewControl<IBaseEntityObject>
 	{
 		#region public ProcessingListView()
 
@@ -55,14 +55,14 @@ namespace CAS.UI.UIControls.SupplierControls
 			AddColumn("IsPool", (int)(radGridView1.Width * 0.2f));
 			AddColumn("IsDangerous", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.4f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 
 		#endregion
 
 		#region protected override List<CustomCell> GetListViewSubItems(IBaseCoreObject item)
 
-		protected override List<CustomCell> GetListViewSubItems(IBaseCoreObject item)
+		protected override List<CustomCell> GetListViewSubItems(IBaseEntityObject item)
 		{
 			var subItems = new List<CustomCell>();
 			
@@ -103,7 +103,7 @@ namespace CAS.UI.UIControls.SupplierControls
 
 				supplierType = transferRecord.DestinationObjectType == SmartCoreType.Supplier ? (transferRecord.DestinationObject as Supplier).SupplierClass.ToString() : componentItem.FromSupplier.SupplierClass.ToString();
 
-				author = GlobalObjects.CasEnvironment.GetCorrector(componentItem.CorrectorId);
+				author = GlobalObjects.CasEnvironment.GetCorrector(componentItem);
 
 				approved = componentItem.FromSupplier.Approved ? "Yes" : "No";
 				shipment = transferRecord.TransferDate;
@@ -235,7 +235,7 @@ namespace CAS.UI.UIControls.SupplierControls
 
 		#region protected override void SetItemColor(GridViewRowInfo listViewItem, IBaseCoreObject item)
 
-		protected override void SetItemColor(GridViewRowInfo listViewItem, IBaseCoreObject item)
+		protected override void SetItemColor(GridViewRowInfo listViewItem, IBaseEntityObject item)
 		{
 			if (item is Component)
 			{

@@ -166,7 +166,7 @@ namespace CAS.UI.UIControls.DirectivesControls
             {
                 if (radioButtonAirFrame.Checked)
                     return ADType.Airframe;
-                return ADType.Apliance;
+                return ADType.Appliance;
             }
             set
             {
@@ -503,7 +503,7 @@ namespace CAS.UI.UIControls.DirectivesControls
             comboBoxDefferedCategory.Items.AddRange(defferedCategories.ToArray());
             comboBoxDefferedCategory.SelectedItem = _currentDefferedItem.DeferredCategory;
 
-            ADType = _currentDefferedItem.ADType == 0 ? ADType.Airframe : ADType.Apliance;
+            ADType = _currentDefferedItem.ADType == 0 ? ADType.Airframe : ADType.Appliance;
             Title = _currentDefferedItem.Title;
             EffectiveDate = _currentDefferedItem.Threshold.EffectiveDate;
             ServiceBulletin = _currentDefferedItem.ServiceBulletinNo;

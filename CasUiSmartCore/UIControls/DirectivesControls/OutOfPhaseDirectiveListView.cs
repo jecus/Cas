@@ -13,32 +13,32 @@ using TempUIExtentions;
 
 namespace CAS.UI.UIControls.DirectivesControls
 {
-    ///<summary>
-    /// список для отображения ордеров запроса
-    ///</summary>
-    public partial class OutOfPhaseDirectiveListView : PrimeDirectiveListView
-    {
-        #region Constructors
+	///<summary>
+	/// список для отображения ордеров запроса
+	///</summary>
+	public partial class OutOfPhaseDirectiveListView : PrimeDirectiveListView
+	{
+		#region Constructors
 
-        #region public OutOfPhaseDirectiveListView()
-        ///<summary>
-        ///</summary>
-        public OutOfPhaseDirectiveListView()
-        {
-            CurrentPrimatyDirectiveType = DirectiveType.OutOfPhase;
-        }
-        #endregion
+		#region public OutOfPhaseDirectiveListView()
+		///<summary>
+		///</summary>
+		public OutOfPhaseDirectiveListView()
+		{
+			CurrentPrimatyDirectiveType = DirectiveType.OutOfPhase;
+		}
+		#endregion
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region protected override void SetHeaders()
-        /// <summary>
-        /// Устанавливает заголовки
-        /// </summary>
-        protected override void SetHeaders()
-        {
+		#region protected override void SetHeaders()
+		/// <summary>
+		/// Устанавливает заголовки
+		/// </summary>
+		protected override void SetHeaders()
+		{
 			AddColumn("Title", (int)(radGridView1.Width * 0.24f));
 			AddColumn("SB No", (int)(radGridView1.Width * 0.24f));
 			AddColumn("EO No", (int)(radGridView1.Width * 0.24f));
@@ -59,16 +59,16 @@ namespace CAS.UI.UIControls.DirectivesControls
 			AddColumn("Cost", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Hidden remarks", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
-        }
+			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
+		}
 		#endregion
 
 		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(Directive item)
 
-        protected override List<CustomCell> GetListViewSubItems(Directive item)
-        {
-            var subItems = new List<CustomCell>();
-            var author = GlobalObjects.CasEnvironment.GetCorrector(item.CorrectorId);
+		protected override List<CustomCell> GetListViewSubItems(Directive item)
+		{
+			var subItems = new List<CustomCell>();
+			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var sbColor = radGridView1.ForeColor;
 			var eoColor = radGridView1.ForeColor;
 
@@ -76,74 +76,74 @@ namespace CAS.UI.UIControls.DirectivesControls
 			//         Определение последнего выполнения директивы и KitRequiered               //
 			//////////////////////////////////////////////////////////////////////////////////////
 			var lastComplianceDate = DateTimeExtend.GetCASMinDateTime();
-            var nextComplianceDate = DateTimeExtend.GetCASMinDateTime();
-            var lastComplianceLifeLength = Lifelength.Zero;
-            var nextComplianceRemain = Lifelength.Null;
+			var nextComplianceDate = DateTimeExtend.GetCASMinDateTime();
+			var lastComplianceLifeLength = Lifelength.Zero;
+			var nextComplianceRemain = Lifelength.Null;
 
-            string lastPerformanceString, firstPerformanceString = "N/A";
+			string lastPerformanceString, firstPerformanceString = "N/A";
 
-            var status = item.Status;
-            //////////////////////////////////////////////////////////////////////////////////////
-            //         Определение последнего выполнения директивы и KitRequiered               //
-            //////////////////////////////////////////////////////////////////////////////////////
+			var status = item.Status;
+			//////////////////////////////////////////////////////////////////////////////////////
+			//         Определение последнего выполнения директивы и KitRequiered               //
+			//////////////////////////////////////////////////////////////////////////////////////
 
-            var par = "  §: " + item.Paragraph;
-            //Последнее выполнение
-            if (item.LastPerformance != null &&
-                item.LastPerformance.RecordDate > lastComplianceDate)
-            {
-                lastComplianceDate = item.LastPerformance.RecordDate;
+			var par = "  §: " + item.Paragraph;
+			//Последнее выполнение
+			if (item.LastPerformance != null &&
+				item.LastPerformance.RecordDate > lastComplianceDate)
+			{
+				lastComplianceDate = item.LastPerformance.RecordDate;
 				lastComplianceLifeLength = item.LastPerformance.OnLifelength;
 			}
 
-            //Следующее выполнение
-            //GlobalObjects.CasEnvironment.Calculator.GetNextPerformance(item);
-            var nextComplianceLifeLength = item.NextPerformanceSource;
-            if (item.NextPerformanceDate != null)
-                nextComplianceDate = (DateTime)item.NextPerformanceDate;
-            if (item.Remains != null)
-                nextComplianceRemain = item.Remains;
-            if (item.Threshold.FirstPerformanceSinceNew != null && !item.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
-            {
-                firstPerformanceString = "s/n: " + item.Threshold.FirstPerformanceSinceNew;
-            }
-            if (item.Threshold.FirstPerformanceSinceEffectiveDate != null &&
-                !item.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
-            {
-                if (firstPerformanceString != "N/A") firstPerformanceString += " or ";
-                else firstPerformanceString = "";
-                firstPerformanceString += "s/e.d: " + item.Threshold.FirstPerformanceSinceEffectiveDate;
-            }
-            var repeatInterval = item.Threshold.RepeatInterval;
-            var kitRequieredString = item.Kits.Count + " kits";
-            var ndtString = item.NDTType.ShortName;
-            var workType = item.WorkType;
-            var effDate = item.Threshold.EffectiveDate;
-            var manHours = item.ManHours;
-            var cost = item.Cost;
+			//Следующее выполнение
+			//GlobalObjects.CasEnvironment.Calculator.GetNextPerformance(item);
+			var nextComplianceLifeLength = item.NextPerformanceSource;
+			if (item.NextPerformanceDate != null)
+				nextComplianceDate = (DateTime)item.NextPerformanceDate;
+			if (item.Remains != null)
+				nextComplianceRemain = item.Remains;
+			if (item.Threshold.FirstPerformanceSinceNew != null && !item.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
+			{
+				firstPerformanceString = "s/n: " + item.Threshold.FirstPerformanceSinceNew;
+			}
+			if (item.Threshold.FirstPerformanceSinceEffectiveDate != null &&
+				!item.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+			{
+				if (firstPerformanceString != "N/A") firstPerformanceString += " or ";
+				else firstPerformanceString = "";
+				firstPerformanceString += "s/e.d: " + item.Threshold.FirstPerformanceSinceEffectiveDate;
+			}
+			var repeatInterval = item.Threshold.RepeatInterval;
+			var kitRequieredString = item.Kits.Count + " kits";
+			var ndtString = item.NDTType.ShortName;
+			var workType = item.WorkType;
+			var effDate = item.Threshold.EffectiveDate;
+			var manHours = item.ManHours;
+			var cost = item.Cost;
 
-            var remarksString = item.Remarks;
-            var hiddenRemarksString = item.HiddenRemarks;
+			var remarksString = item.Remarks;
+			var hiddenRemarksString = item.HiddenRemarks;
 
-            if (lastComplianceDate <= DateTimeExtend.GetCASMinDateTime())
-                lastPerformanceString = "N/A";
-            else
-                lastPerformanceString = SmartCore.Auxiliary.Convert.GetDateFormat(lastComplianceDate) + " " +
-                                        lastComplianceLifeLength;
+			if (lastComplianceDate <= DateTimeExtend.GetCASMinDateTime())
+				lastPerformanceString = "N/A";
+			else
+				lastPerformanceString = SmartCore.Auxiliary.Convert.GetDateFormat(lastComplianceDate) + " " +
+										lastComplianceLifeLength;
 
-            var nextComplianceString = ((nextComplianceDate <= DateTimeExtend.GetCASMinDateTime())
-                                               ? ""
-                                               : SmartCore.Auxiliary.Convert.GetDateFormat(nextComplianceDate)) + " " +
-                                          nextComplianceLifeLength;
-            var nextRemainString = nextComplianceRemain != null && !nextComplianceRemain.IsNullOrZero()
-                                          ? nextComplianceRemain.ToString()
-                                          : "N/A";
-            var titleString = item.Title != "" ? item.Title + par : "N/A";
-            var sbString = item.ServiceBulletinNo != "" ? item.ServiceBulletinNo : "N/A";
-            var eoString = item.EngineeringOrders != "" ? item.EngineeringOrders : "N/A";
-            var descriptionString = item.Description;
-            var applicabilityString = item.Applicability;
-            var ata = item.ATAChapter;
+			var nextComplianceString = ((nextComplianceDate <= DateTimeExtend.GetCASMinDateTime())
+											   ? ""
+											   : SmartCore.Auxiliary.Convert.GetDateFormat(nextComplianceDate)) + " " +
+										  nextComplianceLifeLength;
+			var nextRemainString = nextComplianceRemain != null && !nextComplianceRemain.IsNullOrZero()
+										  ? nextComplianceRemain.ToString()
+										  : "N/A";
+			var titleString = item.Title != "" ? item.Title + par : "N/A";
+			var sbString = item.ServiceBulletinNo != "" ? item.ServiceBulletinNo : "N/A";
+			var eoString = item.EngineeringOrders != "" ? item.EngineeringOrders : "N/A";
+			var descriptionString = item.Description;
+			var applicabilityString = item.Applicability;
+			var ata = item.ATAChapter;
 
 			if (item.ServiceBulletinFile == null)
 				sbColor = Color.MediumVioletRed;
@@ -174,90 +174,90 @@ namespace CAS.UI.UIControls.DirectivesControls
 			subItems.Add(CreateRow(author, author));
 			
 			return subItems;
-        }
+		}
 
-        #endregion
+		#endregion
 
-        #region protected override void SortItems(int columnIndex)
+		#region protected override void SortItems(int columnIndex)
 
-     //   protected override void SortItems(int columnIndex)
-     //   {
-     //       if (OldColumnIndex != columnIndex)
-     //           SortMultiplier = -1;
-     //       if (SortMultiplier == 1)
-     //           SortMultiplier = -1;
-     //       else
-     //           SortMultiplier = 1;
-     //       itemsListView.Items.Clear();
+	 //   protected override void SortItems(int columnIndex)
+	 //   {
+	 //       if (OldColumnIndex != columnIndex)
+	 //           SortMultiplier = -1;
+	 //       if (SortMultiplier == 1)
+	 //           SortMultiplier = -1;
+	 //       else
+	 //           SortMultiplier = 1;
+	 //       itemsListView.Items.Clear();
 
-     //       List<ListViewItem> resultList = new List<ListViewItem>();
+	 //       List<ListViewItem> resultList = new List<ListViewItem>();
 
-     //       if (columnIndex <= 4 || columnIndex == 6 || columnIndex >= 16)
-     //       {
-     //           SetGroupsToItems(columnIndex);
-     //           ListViewItemList.Sort(new CPCPDirectiveListViewComparer(columnIndex, SortMultiplier));
-     //           //добавление остальных подзадач
-     //           foreach (ListViewItem item in ListViewItemList)
-     //           {
-     //               resultList.Add(item);
-     //           }
-     //       }
-     //       else if (columnIndex == 10)
-     //       {
-     //           foreach (ListViewItem item in ListViewItemList)
-     //           {
-     //               resultList.Add(item);
-     //           }
+	 //       if (columnIndex <= 4 || columnIndex == 6 || columnIndex >= 16)
+	 //       {
+	 //           SetGroupsToItems(columnIndex);
+	 //           ListViewItemList.Sort(new CPCPDirectiveListViewComparer(columnIndex, SortMultiplier));
+	 //           //добавление остальных подзадач
+	 //           foreach (ListViewItem item in ListViewItemList)
+	 //           {
+	 //               resultList.Add(item);
+	 //           }
+	 //       }
+	 //       else if (columnIndex == 10)
+	 //       {
+	 //           foreach (ListViewItem item in ListViewItemList)
+	 //           {
+	 //               resultList.Add(item);
+	 //           }
 
-     //           resultList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
+	 //           resultList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
 
-     //           itemsListView.Groups.Clear();
-     //           foreach (var item in resultList)
-     //           {
+	 //           itemsListView.Groups.Clear();
+	 //           foreach (var item in resultList)
+	 //           {
 					//var temp = ListViewGroupHelper.GetGroupStringByPerformanceDate(item.Tag);
 					//itemsListView.Groups.Add(temp, temp);
-     //               item.Group = itemsListView.Groups[temp];
-     //           }
-     //       }
-     //       else
-     //       {
-     //           SetGroupsToItems(columnIndex);
-     //           //добавление остальных подзадач
-     //           foreach (ListViewItem item in ListViewItemList)
-     //           {
-     //               resultList.Add(item);
-     //           }
-     //           resultList.Sort(new CPCPDirectiveListViewComparer(columnIndex, SortMultiplier));
-     //       }
-     //       itemsListView.Items.AddRange(resultList.ToArray());
-     //       OldColumnIndex = columnIndex;
-     //   }
+	 //               item.Group = itemsListView.Groups[temp];
+	 //           }
+	 //       }
+	 //       else
+	 //       {
+	 //           SetGroupsToItems(columnIndex);
+	 //           //добавление остальных подзадач
+	 //           foreach (ListViewItem item in ListViewItemList)
+	 //           {
+	 //               resultList.Add(item);
+	 //           }
+	 //           resultList.Sort(new CPCPDirectiveListViewComparer(columnIndex, SortMultiplier));
+	 //       }
+	 //       itemsListView.Items.AddRange(resultList.ToArray());
+	 //       OldColumnIndex = columnIndex;
+	 //   }
 
-        #endregion
+		#endregion
 
-        #region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 
-        protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
-        {
-            if (SelectedItem == null) 
-                return;
-            
-            string regNumber = "";
-            if (SelectedItem.ParentBaseComponent.BaseComponentType.ItemId == 4)
-                regNumber = SelectedItem.ParentBaseComponent.ToString();
-            else
-            {
-                if (SelectedItem.ParentBaseComponent.ParentAircraftId > 0)
-                    regNumber = SelectedItem.ParentBaseComponent.GetParentAircraftRegNumber() + ". " + 
+		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		{
+			if (SelectedItem == null) 
+				return;
+			
+			string regNumber = "";
+			if (SelectedItem.ParentBaseComponent.BaseComponentType.ItemId == 4)
+				regNumber = SelectedItem.ParentBaseComponent.ToString();
+			else
+			{
+				if (SelectedItem.ParentBaseComponent.ParentAircraftId > 0)
+					regNumber = SelectedItem.ParentBaseComponent.GetParentAircraftRegNumber() + ". " + 
 								SelectedItem.ParentBaseComponent;
-            }
-            e.DisplayerText = regNumber + ". Out of phase. " + SelectedItem.Title;
-            OutOfPhaseReferenceScreen directiveScreen = new OutOfPhaseReferenceScreen(SelectedItem);
-            e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-            e.RequestedEntity = directiveScreen;
-        }
-        #endregion
+			}
+			e.DisplayerText = regNumber + ". Out of phase. " + SelectedItem.Title;
+			OutOfPhaseReferenceScreen directiveScreen = new OutOfPhaseReferenceScreen(SelectedItem);
+			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+			e.RequestedEntity = directiveScreen;
+		}
+		#endregion
 
-        #endregion
-    }
+		#endregion
+	}
 }

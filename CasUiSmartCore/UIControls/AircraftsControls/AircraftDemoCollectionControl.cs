@@ -224,6 +224,7 @@ namespace CAS.UI.UIControls.AircraftsControls
 			flowLayoutPanelAircrafts.Controls.Add(linkReliability);
 			flowLayoutPanelAircrafts.Controls.Add(aDFleet);
 			flowLayoutPanelAircrafts.Controls.Add(componentFleet);
+			flowLayoutPanelAircrafts.Controls.Add(maintenanceDirectiveFleet);
 			flowLayoutPanelAircrafts.Controls.Add(panelButtons);
 		}
 
@@ -478,6 +479,13 @@ namespace CAS.UI.UIControls.AircraftsControls
 			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 			e.DisplayerText = "Component Fleet";
 			e.RequestedEntity = new ComponentsFleetListScreen(GlobalObjects.CasEnvironment.Operators[0]);
+		}
+
+		private void LinkMaintenanceDirectiveFleet(object sender, ReferenceEventArgs e)
+		{
+			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+			e.DisplayerText = "Routine Fleet";
+			e.RequestedEntity = new MaintenanceDirectiveFleetListScreen(GlobalObjects.CasEnvironment.Operators[0]);
 		}
 	}
 }
