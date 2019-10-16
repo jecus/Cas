@@ -101,7 +101,7 @@ namespace CasAPI.Controllers
 					updateUser.Login = user.Login;
 					updateUser.Password = user.Password;
 					updateUser.Name = user.Name;
-					updateUser.Password = user.Password;
+					updateUser.Surname = user.Surname;
 					updateUser.UserType = user.UserType;
 					updateUser.UiType = user.UiType;
 					updateUser.PersonnelId = user.PersonnelId;
