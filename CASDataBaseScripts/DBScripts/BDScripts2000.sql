@@ -42,3 +42,21 @@ if not exists ( select  *
 	alter table Dictionaries.Departments
 	add Website nvarchar (256) 
 GO
+
+if not exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('dbo.InitionalOrderRecords')
+					and c.name = 'AirportCodeId' ) 
+
+	alter table dbo.InitionalOrderRecords
+	add AirportCodeId int not null default -1 
+GO
+
+if not exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('dbo.InitionalOrderRecords')
+					and c.name = 'Reference' ) 
+
+	alter table dbo.InitionalOrderRecords
+	add Reference nvarchar (MAX)
+GO

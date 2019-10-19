@@ -104,7 +104,13 @@ namespace EntityCore.DTO.General
 		[Column("Remarks")]
 		public string Remarks { get; set; }
 
-		
+		[Column("AirportCodeId")]
+		public int AirportCodeId { get; set; }
+
+		[Column("Reference")]
+		public string Reference { get; set; }
+
+
 		[Include]
 		public DefferedCategorieDTO DeferredCategory { get; set; }
 

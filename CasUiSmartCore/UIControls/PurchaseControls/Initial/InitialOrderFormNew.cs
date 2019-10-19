@@ -38,6 +38,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private readonly ProductStandartFilter _standartFilter = new ProductStandartFilter();
 		private List<Product> _currentAircraftKits = new List<Product>();
 		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
+		private List<AirportsCodes> _airportsCodes = new List<AirportsCodes>();
 
 		#endregion
 
@@ -116,6 +117,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			_defferedCategories.Clear();
 			_defferedCategories.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DefferedCategorieDTO, DeferredCategory>(loadChild: true));
 
+			_airportsCodes.Clear();
+			_airportsCodes.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<AirportCodeDTO, AirportsCodes>().OrderBy(i => i.ShortName));
+			_airportsCodes.Add(AirportsCodes.Unknown);
+
 			destinations.AddRange(GlobalObjects.AircraftsCore.GetAllAircrafts().ToArray());
 			destinations.AddRange(GlobalObjects.CasEnvironment.Stores.GetValidEntries());
 			destinations.AddRange(GlobalObjects.CasEnvironment.Hangars.GetValidEntries());
@@ -140,6 +145,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			comboBoxReason.Items.Clear();
 			comboBoxReason.Items.AddRange(InitialReason.Items.ToArray());
+
+			comboBoxStation.Items.Clear();
+			comboBoxStation.Items.AddRange(_airportsCodes.ToArray());
 
 			foreach (var control in DocumentControls)
 				control.Added += DocumentControl1_Added;
@@ -397,6 +405,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			comboBoxDestination.SelectedItem = destination;
 			comboBoxPriority.SelectedItem = listViewInitialItems.SelectedItem.Priority;
 			metroTextBox1.Text = listViewInitialItems.SelectedItem.Remarks;
+			comboBoxStation.SelectedItem =
+				_airportsCodes.FirstOrDefault(i => listViewInitialItems.SelectedItem.AirportCodeId == i.ItemId);
+			metroTextBoxReference.Text = listViewInitialItems.SelectedItem.Reference;
 		}
 
 		#endregion
@@ -411,6 +422,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			listViewInitialItems.SelectedItem.Measure = comboBoxMeasure.SelectedItem as Measure ?? Measure.Unknown;
 			listViewInitialItems.SelectedItem.Quantity = (double)numericUpDownQuantity.Value;
 			listViewInitialItems.SelectedItem.Remarks = metroTextBox1.Text;
+			listViewInitialItems.SelectedItem.AirportCodeId = ((AirportsCodes)comboBoxStation.SelectedItem).ItemId;
+			listViewInitialItems.SelectedItem.Reference = metroTextBoxReference.Text;
 
 			ComponentStatus costCondition = ComponentStatus.Unknown;
 			if (checkBoxNew.Checked)

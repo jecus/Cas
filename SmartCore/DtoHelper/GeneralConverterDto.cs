@@ -3816,7 +3816,9 @@ namespace SmartCore.DtoHelper
 				FromRecordId = orderrec.FromRecordId,
 				IsClosed = orderrec.IsClosed,
 				IsSchedule = orderrec.IsSchedule,
-				Remarks = orderrec.Remarks
+				Remarks = orderrec.Remarks,
+				AirportCodeId = orderrec.AirportCodeId,
+				Reference = orderrec.Reference
 			};
 		}
 
@@ -3851,7 +3853,9 @@ namespace SmartCore.DtoHelper
 				Remarks = orderrecdto.Remarks,
 				FromRecordId = orderrecdto.FromRecordId ?? default(int),
 				IsClosed = orderrecdto.IsClosed ?? default(bool),
-				IsSchedule = orderrecdto.IsSchedule ?? default(bool)
+				IsSchedule = orderrecdto.IsSchedule ?? default(bool),
+				AirportCodeId = orderrecdto.AirportCodeId,
+				Reference = orderrecdto.Reference
 			};
 		}
 

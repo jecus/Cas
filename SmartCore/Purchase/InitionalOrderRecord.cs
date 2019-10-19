@@ -734,15 +734,21 @@ namespace SmartCore.Purchase
 		[TableColumn("Remarks")]
 		public string Remarks { get; set; }
 
-        /*
+		[TableColumn("AirportCodeId")]
+		public int AirportCodeId { get; set; }
+
+		[TableColumn("Reference")]
+		public string Reference { get; set; }
+
+		/*
 		*  Методы 
 		*/
 
-        #region public InitionalOrderRecord()
-        /// <summary>
-        /// Создает воздушное судно без дополнительной информации
-        /// </summary>
-        public InitialOrderRecord()
+		#region public InitionalOrderRecord()
+		/// <summary>
+		/// Создает воздушное судно без дополнительной информации
+		/// </summary>
+		public InitialOrderRecord()
         {
             ItemId = -1;
             ParentPackageId = -1;
