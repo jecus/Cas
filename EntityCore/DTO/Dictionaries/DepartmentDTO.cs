@@ -15,10 +15,25 @@ namespace EntityCore.DTO.Dictionaries
 		
 		[Column("Name"), MaxLength(50)]
 		public string Name { get; set; }
-
-	    
+		
 	    [Column("FullName"), MaxLength(256)]
 		public string FullName { get; set; }
+
+		[Column("Address"), MaxLength(256)]
+		public string Address { get; set; }
+
+		[Column("Phone"), MaxLength(256)]
+		public string Phone { get; set; }
+
+		[Column("Fax"), MaxLength(256)]
+		public string Fax { get; set; }
+
+		[Column("Email"), MaxLength(256)]
+		public string Email { get; set; }
+
+		[Column("Website"), MaxLength(256)]
+		public string Website { get; set; }
+
 
 
 		#region Navigation Property

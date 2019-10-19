@@ -522,7 +522,12 @@ namespace SmartCore.DtoHelper
 				Updated = department.Updated,
 				CorrectorId = department.CorrectorId,
 				Name = department.ShortName,
-				FullName = department.FullName
+				FullName = department.FullName,
+				Address = department.Address,
+				Phone = department.Phone,
+				Fax = department.Fax,
+				Email = department.Email,
+				Website = department.Website
 			};
 		}
 
@@ -535,7 +540,12 @@ namespace SmartCore.DtoHelper
 				Updated = departmentDto.Updated,
 				CorrectorId = departmentDto.CorrectorId,
 				ShortName = departmentDto.Name,
-				FullName = departmentDto.FullName
+				FullName = departmentDto.FullName,
+				Address = departmentDto.Address,
+				Phone = departmentDto.Phone,
+				Fax = departmentDto.Fax,
+				Email = departmentDto.Email,
+				Website = departmentDto.Website
 			};
 		}
 

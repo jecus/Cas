@@ -14,15 +14,15 @@ namespace SmartCore.Entities.Dictionaries
 		private static Type _thisType;
 		private static Department _unknown;
 
-        #region public Department()
+		#region public Department()
 
-        public Department()
-        {
-            ItemId = -1;
-            SmartCoreObjectType = SmartCoreType.Department;
-        }
+		public Department()
+		{
+			ItemId = -1;
+			SmartCoreObjectType = SmartCoreType.Department;
+		}
 
-        #endregion
+		#endregion
 
 		#region Implement of Dictionary
 
@@ -31,8 +31,9 @@ namespace SmartCore.Entities.Dictionaries
 		private string _shortName;
 
 		[TableColumn("Name", 50)]
-		[FormControl(150, "Short Name", 1, Order = 1)]
+		[FormControl(250, "Short Name", 1, Order = 1)]
 		[ListViewData(0.2f, "Short Name", 1)]
+		[Filter("Short Name:", Order = 1)]
 		[NotNull]
 		public override string ShortName
 		{
@@ -54,8 +55,9 @@ namespace SmartCore.Entities.Dictionaries
 		/// Полное название Категории
 		/// </summary>
 		[TableColumn("FullName", 256)]
-		[FormControl(150, "Full Name", 5, Order = 2)]
+		[FormControl(250, "Full Name", 5, Order = 2)]
 		[ListViewData(0.2f, "Full Name", 2)]
+		[Filter("Full Name:", Order = 2)]
 		[NotNull]
 		public override string FullName
 		{
@@ -77,6 +79,36 @@ namespace SmartCore.Entities.Dictionaries
 		}
 
 		#endregion
+
+		[TableColumn("Address", 50)]
+		[FormControl(250, "Address", 3, Order = 3)]
+		[ListViewData(0.12f, "Address", 3)]
+		[Filter("Address:", Order = 3)]
+		public string Address { get; set; }
+
+		[TableColumn("Phone", 50)]
+		[FormControl(250, "Phone", 1, Order = 4)]
+		[ListViewData(0.12f, "Phone", 4)]
+		[Filter("Phone:", Order = 4)]
+		public string Phone { get; set; }
+
+		[TableColumn("Fax", 50)]
+		[FormControl(250, "Fax", 1, Order = 5)]
+		[ListViewData(0.12f, "Fax", 5)]
+		[Filter("Fax:", Order = 5)]
+		public string Fax { get; set; }
+
+		[TableColumn("Email", 50)]
+		[FormControl(250, "Email", 1, Order = 6)]
+		[ListViewData(0.12f, "Email", 6)]
+		[Filter("Email:", Order = 6)]
+		public string Email { get; set; }
+
+		[TableColumn("Website", 50)]
+		[FormControl(250, "Website", 1, Order = 7)]
+		[ListViewData(0.12f, "Website", 7)]
+		[Filter("Website:", Order = 7)]
+		public string Website { get; set; }
 
 		#region public override string CommonName { get; set; }
 
@@ -107,6 +139,11 @@ namespace SmartCore.Entities.Dictionaries
 		{
 			FullName = dictionary.FullName;
 			ShortName = dictionary.ShortName;
+			Address = dictionary.Address;
+			Phone = dictionary.Phone;
+			Fax = dictionary.Fax;
+			Email = dictionary.Email;
+			Website = dictionary.Website;
 		}
 
 		#endregion
