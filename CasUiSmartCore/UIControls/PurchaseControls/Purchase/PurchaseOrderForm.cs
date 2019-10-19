@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
+using EntityCore.DTO.Dictionaries;
 using EntityCore.DTO.General;
 using EntityCore.Filter;
 using MetroFramework.Forms;
@@ -26,6 +27,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private PurchaseOrder _order;
 		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
 		private List<Supplier> _supplierShipper = new List<Supplier>();
+		private List<AirportsCodes> _airportsCodes = new List<AirportsCodes>();
 
 		#endregion
 
@@ -72,6 +74,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			_supplierShipper.Clear();
 			_supplierShipper.AddRange(GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[] { new CommonFilter<int>(Supplier.SupplierClassProperty, SupplierClass.Shipper.ItemId) }));
 			_order.ShipCompany = _supplierShipper.FirstOrDefault(i => i.ItemId == _order.ShipCompanyId) ?? Supplier.Unknown;
+
+			_airportsCodes.Clear();
+			_airportsCodes.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<AirportCodeDTO, AirportsCodes>().OrderBy(i => i.ShortName));
+			_airportsCodes.Add(AirportsCodes.Unknown);
 
 			var parentInitialId = (int)GlobalObjects.CasEnvironment.Execute($@"select i.ItemId from PurchaseOrders p
 			left join RequestsForQuotation q on q.ItemID = p.ParentID
@@ -331,7 +337,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		
 		private void buttonSettings_Click(object sender, EventArgs e)
 		{
-			var form = new PurchaseOrderSettingForm(_order, _supplierShipper);
+			var form = new PurchaseOrderSettingForm(_order, _supplierShipper, _airportsCodes);
 			form.ShowDialog();
 		}
 	}

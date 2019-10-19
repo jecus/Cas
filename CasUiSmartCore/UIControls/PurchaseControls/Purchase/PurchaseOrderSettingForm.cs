@@ -18,16 +18,19 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 	{
 		private readonly PurchaseOrder _order;
 		private readonly List<Supplier> _supplierShipper;
+		private readonly List<AirportsCodes> _airportsCodes;
 
 		public PurchaseOrderSettingForm()
 		{
 			InitializeComponent();
 		}
 
-		public PurchaseOrderSettingForm(PurchaseOrder order, List<Supplier> supplierShipper) : this()
+		public PurchaseOrderSettingForm(PurchaseOrder order, List<Supplier> supplierShipper,
+			List<AirportsCodes> airportsCodes) : this()
 		{
 			_order = order;
 			_supplierShipper = supplierShipper;
+			_airportsCodes = airportsCodes;
 			UpdateControls();
 			UpdateInitialControls();
 		}
@@ -67,9 +70,15 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			comboBoxShipComp.Items.AddRange(_supplierShipper.ToArray());
 			comboBoxShipComp.Items.Add(Supplier.Unknown);
 
+			comboBoxShipTo.Items.Clear();
+			comboBoxShipTo.Items.AddRange(_supplierShipper.ToArray());
+			comboBoxShipTo.Items.Add(Supplier.Unknown);
+
 			comboBoxPayTerm.Items.Clear();
 			comboBoxPayTerm.DataSource = Enum.GetValues(typeof(PayTerm));
 
+			comboBoxStation.Items.Clear();
+			comboBoxStation.Items.AddRange(_airportsCodes.ToArray());
 			
 			comboBoxIncoTerm.SelectedItem = _order.IncoTerm;
 			comboBoxDesignation.SelectedItem = _order.Designation;
@@ -77,8 +86,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			textBoxBruttoWeight.Text = _order.BruttoWeight;
 			textBoxCargoVolume.Text = _order.CargoVolume;
 			textBoxNettoWeight.Text = _order.NettoWeight;
-			textBoxShipTo.Text = _order.ShipTo;
+			numericUpDownNet.Value = (decimal) _order.Net;
+			metroTextBoxIncoTermRef.Text = _order.IncoTermRef;
+			metroTextBoxTrackingNo.Text = _order.TrackingNo;
+			comboBoxShipTo.SelectedItem = _supplierShipper.FirstOrDefault(i => i.ItemId == _order.ShipToId) ?? Supplier.Unknown;
 			comboBoxShipComp.SelectedItem = _supplierShipper.FirstOrDefault(i => i.ItemId == _order.ShipCompanyId) ?? Supplier.Unknown;
+			comboBoxStation.SelectedItem = _airportsCodes.FirstOrDefault(i => i.ItemId == _order.StationId) ?? AirportsCodes.Unknown;
 		}
 
 		#endregion
@@ -99,7 +112,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			_order.NettoWeight = textBoxNettoWeight.Text;
 			_order.ShipCompanyId = ((Supplier)comboBoxShipComp.SelectedItem).ItemId;
 			_order.ShipCompany = (Supplier)comboBoxShipComp.SelectedItem;
-			_order.ShipTo = textBoxShipTo.Text;
+			_order.ShipToId = ((Supplier)comboBoxShipTo.SelectedItem).ItemId;
+			_order.Net = (float) numericUpDownNet.Value;
+			_order.IncoTermRef = metroTextBoxIncoTermRef.Text;
+			_order.StationId = ((AirportsCodes)comboBoxStation.SelectedItem).ItemId;
+			_order.TrackingNo = metroTextBoxTrackingNo.Text;
 
 			if (_order.ItemId <= 0)
 				_order.Author = GlobalObjects.CasEnvironment.IdentityUser.ToString();

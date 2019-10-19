@@ -54,9 +54,6 @@ namespace SmartCore.Purchase
 		[TableColumn("ShipCompanyId")]
 		public int ShipCompanyId { get; set; }
 
-		[TableColumn("ShipTo")]
-		public string ShipTo { get; set; }
-
 		[TableColumn("CargoVolume")]
 		public string CargoVolume { get; set; }
 
@@ -65,6 +62,21 @@ namespace SmartCore.Purchase
 
 		[TableColumn("NettoWeight")]
 		public string NettoWeight { get; set; }
+
+		[TableColumn("ShipToId")]
+		public int ShipToId { get; set; }
+
+		[TableColumn("Net")]
+		public double Net { get; set; }
+
+		[TableColumn("IncoTermRef")]
+		public string IncoTermRef { get; set; }
+
+		[TableColumn("StationId")]
+		public int StationId { get; set; }
+
+		[TableColumn("TrackingNo")]
+		public string TrackingNo { get; set; }
 
 		/// <summary>
 		/// 
