@@ -25,8 +25,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			AddColumn("P/N", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Standart", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.2f));
-			AddColumn("GoodClass", (int)(radGridView1.Width * 0.2f));
-			AddColumn("ATA", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Class", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 
@@ -41,9 +40,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			{
 				CreateRow(item.PartNumber, item.PartNumber),
 				CreateRow(item.Standart?.ToString(), item.Standart),
-				CreateRow(item.Description, item.Description),
+				CreateRow(item.Name, item.Name),
 				CreateRow( item?.GoodsClass?.ShortName ?? "Another accessory",  item?.GoodsClass),
-				CreateRow(item.ATAChapter?.ToString(), item.ATAChapter?.ToString()),
 				CreateRow(author, author),
 			};
 		}

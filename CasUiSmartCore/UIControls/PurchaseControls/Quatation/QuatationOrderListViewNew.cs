@@ -28,6 +28,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			AddColumn("Measure", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Quantity", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Specification", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Class", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 
@@ -47,6 +48,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 				subItems.Add(CreateRow(record.Measure.ToString(), record.Measure.ToString()));
 				subItems.Add(CreateRow(record.Quantity.ToString(), record.Quantity.ToString()));
 				subItems.Add(CreateRow(record.Product?.Standart?.ToString(), record.Product?.Standart?.ToString()));
+				subItems.Add(CreateRow(record.Product?.GoodsClass?.ToString() ?? "Another accessory", record.Product?.GoodsClass?.ToString()));
 				subItems.Add(CreateRow(author, author));
 			}
 			else
@@ -57,8 +59,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 				subItems.Add(CreateRow($"New:{record.CostNew} {record.СurrencyNew}".ToString(), record.CostNew));
 				subItems.Add(CreateRow($"OH:{record.CostOverhaul} {record.СurrencyOH}".ToString(), record.CostOverhaul));
 				subItems.Add(CreateRow($"Serv:{record.CostServiceable} {record.СurrencyServ}".ToString(), record.CostServiceable));
-				subItems.Add(CreateRow("", ""));
 				subItems.Add(CreateRow($"Rep:{record.CostRepair} {record.СurrencyRepair}", record.CostRepair));
+				subItems.Add(CreateRow("", ""));
+				subItems.Add(CreateRow("", ""));
 			}
 
 			return subItems;
