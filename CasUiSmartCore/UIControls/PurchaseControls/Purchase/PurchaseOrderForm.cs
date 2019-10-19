@@ -53,7 +53,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private void Completed()
 		{
 			UpdateControls();
-			UpdateInitialControls();
 			purchaseRecordListView1.SetItemsArray(_addedRecord.ToArray());
 		}
 
@@ -93,28 +92,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		}
 
 		#endregion
-
-		#region private void UpdateInitialControls()
-
-		private void UpdateInitialControls()
-		{
-			comboBoxStatus.Items.Clear();
-			comboBoxStatus.DataSource = Enum.GetValues(typeof(WorkPackageStatus));
-			comboBoxStatus.SelectedItem = _order.Status;
-
-			textBoxTitle.Text = _order.Title;
-			metroTextBoxNumber.Text = _order.Number;
-			dateTimePickerOpeningDate.Value = _order.OpeningDate;
-			dateTimePickerClosingDate.Value = _order.ClosingDate;
-			dateTimePickerPublishDate.Value = _order.PublishingDate;
-			textBoxClosingBy.Text = _order.CloseByUser;
-			textBoxPublishedBy.Text = _order.PublishedByUser;
-			textBoxAuthor.Text = GlobalObjects.CasEnvironment.IdentityUser.ToString();
-			textBoxRemarks.Text = _order.Remarks;
-		}
-
-		#endregion
-
+		
 		#region private void UpdateControls()
 
 		private void UpdateControls()
@@ -122,19 +100,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			comboBoxMeasure.Items.Clear();
 			//comboBoxMeasure.Items.AddRange(Measure.GetByCategories(new[] { MeasureCategory.Mass, MeasureCategory.EconomicEntity }));
 			comboBoxMeasure.Items.AddRange(Measure.Items.ToArray());
-
-			comboBoxDesignation.Items.Clear();
-			comboBoxDesignation.Items.AddRange(Designation.Items.ToArray());
-
-			comboBoxIncoTerm.Items.Clear();
-			comboBoxIncoTerm.Items.AddRange(IncoTerm.Items.ToArray());
-
-			comboBoxShipComp.Items.Clear();
-			comboBoxShipComp.Items.AddRange(_supplierShipper.ToArray());
-			comboBoxShipComp.Items.Add(Supplier.Unknown);
-
-			comboBoxPayTerm.Items.Clear();
-			comboBoxPayTerm.DataSource = Enum.GetValues(typeof(PayTerm));
 
 			comboBoxCondition.Items.Clear();
 			comboBoxCondition.DataSource = Enum.GetValues(typeof(ComponentStatus));
@@ -150,15 +115,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				var control = DocumentControls[i];
 				control.CurrentDocument = _order.ClosingDocument[i];
 			}
-
-			comboBoxIncoTerm.SelectedItem = _order.IncoTerm;
-			comboBoxDesignation.SelectedItem = _order.Designation;
-			comboBoxPayTerm.SelectedItem = _order.PayTerm;
-			textBoxBruttoWeight.Text = _order.BruttoWeight;
-			textBoxCargoVolume.Text = _order.CargoVolume;
-			textBoxNettoWeight.Text = _order.NettoWeight;
-			textBoxShipTo.Text = _order.ShipTo;
-			comboBoxShipComp.SelectedItem = _supplierShipper.FirstOrDefault(i => i.ItemId == _order.ShipCompanyId) ?? Supplier.Unknown;
 		}
 
 		#endregion
@@ -349,14 +305,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		private void ButtonOk_Click(object sender, EventArgs e)
 		{
-			if (textBoxTitle.Text == "")
-			{
-				MessageBox.Show("Please, enter a Title", (string)new GlobalTermsProvider()["SystemName"],
-					MessageBoxButtons.OK,
-					MessageBoxIcon.Exclamation);
-			}
-
-			else if (purchaseRecordListView1.ItemsCount <= 0)
+			if (purchaseRecordListView1.ItemsCount <= 0)
 			{
 				MessageBox.Show("Please select a price for purchase order", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
@@ -364,10 +313,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			}
 			else
 			{
-				//запись новой информации в запросный ордер
-				ApplyPurchaseData();
 				//сохранение запросного ордера
-				GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
+				//GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
 
 				foreach (var record in _addedRecord)
 				{
@@ -381,54 +328,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		}
 
 		#endregion
-
-		#region private void ApplyOrderData()
-		private void ApplyPurchaseData()
+		
+		private void buttonSettings_Click(object sender, EventArgs e)
 		{
-			_order.Title = textBoxTitle.Text;
-			_order.Number = metroTextBoxNumber.Text;
-			_order.Status = (WorkPackageStatus)comboBoxStatus.SelectedItem;
-			_order.Remarks = textBoxRemarks.Text;
-
-			_order.IncoTerm = (IncoTerm)comboBoxIncoTerm.SelectedItem;
-			_order.Designation = (Designation)comboBoxDesignation.SelectedItem;
-			_order.PayTerm = (PayTerm)comboBoxPayTerm.SelectedItem;
-			_order.BruttoWeight = textBoxBruttoWeight.Text;
-			_order.CargoVolume = textBoxCargoVolume.Text;
-			_order.NettoWeight = textBoxNettoWeight.Text;
-			_order.ShipCompanyId = ((Supplier)comboBoxShipComp.SelectedItem).ItemId;
-			_order.ShipCompany = (Supplier)comboBoxShipComp.SelectedItem;
-			_order.ShipTo = textBoxShipTo.Text;
-
-			if (_order.ItemId <= 0)
-				_order.Author = GlobalObjects.CasEnvironment.IdentityUser.ToString();
-
-			if (_order.Status == WorkPackageStatus.All)
-			{
-				_order.OpeningDate = dateTimePickerOpeningDate.Value;
-				_order.ClosingDate = dateTimePickerClosingDate.Value;
-				_order.PublishingDate = dateTimePickerPublishDate.Value;
-			}
-			else if (_order.Status == WorkPackageStatus.Opened)
-			{
-				_order.OpeningDate = dateTimePickerOpeningDate.Value;
-			}
-			else if (_order.Status == WorkPackageStatus.Closed)
-			{
-				_order.ClosingDate = dateTimePickerClosingDate.Value;
-			}
-			else if (_order.Status == WorkPackageStatus.Published)
-			{
-				_order.PublishingDate = dateTimePickerPublishDate.Value;
-			}
-		}
-		#endregion
-
-		private void button2_Click(object sender, EventArgs e)
-		{
-			if (purchaseRecordListView1.SelectedItem == null) return;
-
-			
+			var form = new PurchaseOrderSettingForm(_order, _supplierShipper);
+			form.ShowDialog();
 		}
 	}
 }

@@ -1405,6 +1405,12 @@
     <Compile Include="UIControls\PurchaseControls\Purchase\CreatePurchaseOrderForm.Designer.cs">
       <DependentUpon>CreatePurchaseOrderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\PurchaseControls\Purchase\PurchaseOrderSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Purchase\PurchaseOrderSettingForm.Designer.cs">
+      <DependentUpon>PurchaseOrderSettingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\PurchaseControls\Purchase\PurchaseRecordListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4261,6 +4267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PurchaseControls\Purchase\CreatePurchaseOrderForm.resx">
       <DependentUpon>CreatePurchaseOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\PurchaseControls\Purchase\PurchaseOrderSettingForm.resx">
+      <DependentUpon>PurchaseOrderSettingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PurchaseControls\Quatation\QuatationOrderFormNew.resx">
       <DependentUpon>QuatationOrderFormNew.cs</DependentUpon>
