@@ -121,7 +121,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.buttonSettings.Name = "buttonSettings";
 			this.buttonSettings.Size = new System.Drawing.Size(85, 33);
 			this.buttonSettings.TabIndex = 323;
-			this.buttonSettings.Text = "Settings";
+			this.buttonSettings.Text = "Extended";
 			this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
 			// 
 			// buttonOk
