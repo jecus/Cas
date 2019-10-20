@@ -407,6 +407,7 @@
     <Compile Include="Builders\RegisterOfDocumentReportBuilder.cs" />
     <Compile Include="Builders\InspectionTagReportBuilder.cs" />
     <Compile Include="Builders\IdentificationTagReportBuilder.cs" />
+    <Compile Include="Builders\InitialOrderReportBuilder.cs" />
     <Compile Include="Builders\ToolTagReportBuilder.cs" />
     <Compile Include="Builders\UnServisibleTagReportBuilder.cs" />
     <Compile Include="Builders\ServisibleTagReportBuilder.cs" />
@@ -535,6 +536,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ComponentsDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\InitialRecordDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InitialRecordDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Datasets\DefferedListDataSet.cs">
       <DependentUpon>DefferedListDataSet.xsd</DependentUpon>
@@ -1088,6 +1094,12 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="ReportTemplates\InitialOrderReport.cs">
+      <DependentUpon>InitialOrderReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="ReportTemplates\MaintenanceDirectiveReportLitAvia.cs">
       <DependentUpon>MaintenanceDirectiveReportLitAvia.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1626,6 +1638,17 @@
     </None>
     <None Include="Datasets\ComponentsDataSet.xss">
       <DependentUpon>ComponentsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\InitialRecordDataSet.xsc">
+      <DependentUpon>InitialRecordDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\InitialRecordDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>InitialRecordDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Datasets\InitialRecordDataSet.xss">
+      <DependentUpon>InitialRecordDataSet.xsd</DependentUpon>
     </None>
     <None Include="Datasets\DefferedListDataSet.xsc">
       <DependentUpon>DefferedListDataSet.xsd</DependentUpon>
@@ -2324,6 +2347,10 @@
     <EmbeddedResource Include="ReportTemplates\MaintenanceDirectiveComponentReportLitAvia.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>MaintenanceDirectiveComponentReportLitAvia.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\InitialOrderReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InitialOrderReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportTemplates\MaintenanceDirectiveReportLitAvia.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

@@ -7,9 +7,13 @@ using System.Linq;
 using System.Windows.Documents;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
+using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
+using CAS.UI.UIControls.MaintananceProgram;
 using CAS.UI.UIControls.PurchaseControls.Initial;
+using CASReports.Builders;
+using CASReports.ReportTemplates;
 using CASTerms;
 using EntityCore.DTO.Dictionaries;
 using EntityCore.DTO.General;
@@ -43,6 +47,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemEdit;
+		private RadMenuItem _toolStripMenuItemReport;
 		private RadMenuItem _toolStripMenuItemClose;
 		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuItem _toolStripMenuItemCreateQuatation;
@@ -202,6 +207,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			_toolStripMenuItemEdit = new RadMenuItem();
+			_toolStripMenuItemReport = new RadMenuItem();
 			// 
 			// contextMenuStrip
 			// 
@@ -210,6 +216,10 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 			_toolStripMenuItemEdit.Text = "Edit";
 			_toolStripMenuItemEdit.Click += ToolStripMenuItemEditClick;
+
+
+			_toolStripMenuItemReport.Text = "Show Report";
+			_toolStripMenuItemReport.Click += _toolStripMenuItemReport_Click; ;
 
 			_toolStripMenuItemCreateQuatation.Text = "Publish";
 			_toolStripMenuItemCreateQuatation.Click += _toolStripMenuItemCreateQuatation_Click; ;
@@ -230,6 +240,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 													_toolStripMenuItemCreateQuatation,
 													_toolStripMenuItemClose,
 													_toolStripSeparator1,
+													_toolStripMenuItemReport,
+													_toolStripSeparator1,
 													_toolStripMenuItemEdit,
 													_toolStripSeparator1,
 													_toolStripMenuItemDelete
@@ -239,6 +251,43 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 
 		#endregion
+
+
+		private void _toolStripMenuItemReport_Click(object sender, EventArgs e)
+		{
+			if(_directivesViewer.SelectedItem == null)
+				return;;
+
+			var records = new List<InitialOrderRecord>();
+			records.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(new Filter("ParentPackageId", _directivesViewer.SelectedItem.ItemId)));
+			var ids = records.Select(i => i.ProductId);
+			var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), true);
+
+			var destinations = new List<BaseEntityObject>();
+			destinations.AddRange(GlobalObjects.AircraftsCore.GetAllAircrafts().ToArray());
+			destinations.AddRange(GlobalObjects.CasEnvironment.Stores.GetValidEntries());
+			destinations.AddRange(GlobalObjects.CasEnvironment.Hangars.GetValidEntries());
+
+			var airportCodeIds = records.Select(i => i.AirportCodeId);
+			var codes = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<AirportCodeDTO, AirportsCodes>(new Filter("ItemId", airportCodeIds));
+
+			foreach (var record in records)
+			{
+				record.Product = products.FirstOrDefault(i => i.ItemId == record.ProductId);
+				record.DestinationObject = destinations.FirstOrDefault(i =>
+					i.ItemId == record.DestinationObjectId &&
+					record.DestinationObjectType.ItemId == i.SmartCoreObjectType.ItemId);
+				record.AirportCode = codes.FirstOrDefault(i => i.ItemId == record.AirportCodeId);
+			}
+
+			var builder = new InitialOrderReportBuilder(GlobalObjects.CasEnvironment.Operators[0], records, _directivesViewer.SelectedItem);
+			var refArgs = new ReferenceEventArgs();
+			refArgs.TypeOfReflection = ReflectionTypes.DisplayInNew;
+			refArgs.DisplayerText = "initialOrderReport";
+			refArgs.RequestedEntity = new ReportScreen(builder);
+			Program.MainDispatcher.DisplayerRequest(refArgs);
+
+		}
 
 
 		#region private void _toolStripMenuItemCreateQuatation_Click(object sender, EventArgs e)

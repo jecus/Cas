@@ -740,6 +740,8 @@ namespace SmartCore.Purchase
 		[TableColumn("Reference")]
 		public string Reference { get; set; }
 
+		public AirportsCodes AirportCode { get; set; }
+
 		/*
 		*  Ìועמהû 
 		*/

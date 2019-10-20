@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using CASReports.Datasets;
 using CASReports.ReportTemplates;
@@ -15,6 +16,9 @@ namespace CASReports.Builders
         #region Fields
 
         private Operator _operator;
+        private readonly List<InitialOrderRecord> _orderRecords;
+        private readonly InitialOrder _order;
+
         #endregion
 
         #region Properties
@@ -41,9 +45,11 @@ namespace CASReports.Builders
         /// </summary>
         /// <param name="op"></param>
         /// <param name="items"></param>
-        public InitialOrderReportBuilder(Operator op)
+        public InitialOrderReportBuilder(Operator op, List<InitialOrderRecord> orderRecords, InitialOrder order)
         {
-            _operator = op;
+	        _operator = op;
+	        _orderRecords = orderRecords;
+	        _order = order;
         }
 
         #endregion
@@ -71,7 +77,41 @@ namespace CASReports.Builders
         {
             var dataSet = new InitialRecordDataSet();
             AddOperatorInformationToDataSet(dataSet);
+            AddInitialOrderToDataSet(dataSet);
+            AddInitialOrderRecordsToDataSet(dataSet);
             return dataSet;
+        }
+
+        private void AddInitialOrderRecordsToDataSet(InitialRecordDataSet dataSet)
+        {
+	        int i = 1;
+			
+
+	        foreach (var record in _orderRecords)
+	        {
+		        var destination = record.DestinationObject is Aircraft
+			        ? ((Aircraft) record.DestinationObject).ToString()
+			        : "";
+		        var model = record.DestinationObject is Aircraft
+			        ? ((Aircraft)record.DestinationObject)?.Model?.ShortName
+			        : "";
+
+		        dataSet.InitialOrderRecord.AddInitialOrderRecordRow(i.ToString(), record.AirportCode?.ToString(),
+			        model, destination, record.AccessoryDescription, record.Product.PartNumber, "",
+			        record.Quantity.ToString("F1"), record.Priority.ToString(), record.Reference,
+			        record.Remarks);
+
+		        i++;
+	        }
+        }
+
+        private void AddInitialOrderToDataSet(InitialRecordDataSet dataSet)
+        {
+	        dataSet.InitialOrder.AddInitialOrderRow(_order.Number,
+		        _order.Author,
+		        SmartCore.Auxiliary.Convert.GetDateFormat(_order.OpeningDate),
+		        SmartCore.Auxiliary.Convert.GetDateFormat(_order.PublishingDate),
+		        _order.PublishedByUser);
         }
 
         #endregion
