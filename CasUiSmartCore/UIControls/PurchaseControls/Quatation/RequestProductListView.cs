@@ -24,7 +24,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		{
 			AddColumn("P/N", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Standart", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Description", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Name", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Class", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}

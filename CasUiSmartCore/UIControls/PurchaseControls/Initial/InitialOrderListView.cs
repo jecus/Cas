@@ -18,7 +18,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		{
 			AddColumn("P/N", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Standart", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Description", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Name", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Class", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Measure", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Quantity", (int)(radGridView1.Width * 0.2f));
