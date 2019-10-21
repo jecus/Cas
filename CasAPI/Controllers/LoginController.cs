@@ -53,6 +53,21 @@ namespace CasAPI.Controllers
 			}
 		}
 
+		[HttpGet("{userId}")]
+		public async Task<ActionResult<UserDTO>> GetById(int userId)
+		{
+			try
+			{
+				var res = await _context.UserDtos.Where(i => !i.IsDeleted).FirstOrDefaultAsync(i => !i.IsDeleted && i.ItemId == userId);
+				return Ok(res);
+			}
+			catch (Exception e)
+			{
+				_logger.LogError(e.Message);
+				return BadRequest();
+			}
+		}
+
 		[HttpPost("updatepaswword")]
 		public async Task<ActionResult> UpdatePassword(int id, string password)
 		{

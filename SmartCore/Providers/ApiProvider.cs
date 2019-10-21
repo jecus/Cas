@@ -60,6 +60,12 @@ namespace CAS.UI.Helpers
 			return res?.Data;
 		}
 
+		public UserDTO GetByIdAsync(int userId)
+		{
+			var res = _httpClient.GetJsonAsync<UserDTO>($"user/{userId}");
+			return res?.Data;
+		}
+
 		public void UpdatePassword(int id, string password)
 		{
 			var param = HttpUtility.ParseQueryString(string.Empty);

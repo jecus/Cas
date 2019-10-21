@@ -272,7 +272,10 @@ namespace CAS.UI.UIControls.PurchaseControls
 			var airportCodeIds = records.Select(i => i.AirportCodeId);
 			var codes = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<AirportCodeDTO, AirportsCodes>(new Filter("ItemId", airportCodeIds));
 
-			ids = new List<int>() { _directivesViewer.SelectedItem.AuthorId, _directivesViewer.SelectedItem.PublishedById};
+			var authorId = GlobalObjects.CasEnvironment.ApiProvider.GetByIdAsync(_directivesViewer.SelectedItem.AuthorId)?.PersonnelId ?? -1;
+			var publisherId = GlobalObjects.CasEnvironment.ApiProvider.GetByIdAsync(_directivesViewer.SelectedItem.PublishedById)?.PersonnelId ?? -1;
+
+			ids = new List<int>() { authorId, publisherId };
 			var personnel = GlobalObjects.CasEnvironment.Loader.GetObjectList<Specialist>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()));
 
 			foreach (var record in records)
@@ -283,6 +286,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 					record.DestinationObjectType.ItemId == i.SmartCoreObjectType.ItemId);
 				record.AirportCode = codes.FirstOrDefault(i => i.ItemId == record.AirportCodeId);
 			}
+
+			
 
 			var builder = new InitialOrderReportBuilder(GlobalObjects.CasEnvironment.Operators[0], records, _directivesViewer.SelectedItem)
 			{
