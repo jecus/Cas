@@ -634,6 +634,8 @@ namespace CASReports.Datasets {
             
             private global::System.Data.DataColumn columnPublishedBy;
             
+            private global::System.Data.DataColumn columnRemark;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public InitialOrderDataTable() {
@@ -709,6 +711,14 @@ namespace CASReports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn RemarkColumn {
+                get {
+                    return this.columnRemark;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -744,14 +754,15 @@ namespace CASReports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public InitialOrderRow AddInitialOrderRow(string Number, string Author, string OpenDate, string PublishDate, string PublishedBy) {
+            public InitialOrderRow AddInitialOrderRow(string Number, string Author, string OpenDate, string PublishDate, string PublishedBy, string Remark) {
                 InitialOrderRow rowInitialOrderRow = ((InitialOrderRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Number,
                         Author,
                         OpenDate,
                         PublishDate,
-                        PublishedBy};
+                        PublishedBy,
+                        Remark};
                 rowInitialOrderRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowInitialOrderRow);
                 return rowInitialOrderRow;
@@ -779,6 +790,7 @@ namespace CASReports.Datasets {
                 this.columnOpenDate = base.Columns["OpenDate"];
                 this.columnPublishDate = base.Columns["PublishDate"];
                 this.columnPublishedBy = base.Columns["PublishedBy"];
+                this.columnRemark = base.Columns["Remark"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -794,6 +806,8 @@ namespace CASReports.Datasets {
                 base.Columns.Add(this.columnPublishDate);
                 this.columnPublishedBy = new global::System.Data.DataColumn("PublishedBy", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPublishedBy);
+                this.columnRemark = new global::System.Data.DataColumn("Remark", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRemark);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1506,6 +1520,22 @@ namespace CASReports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Remark {
+                get {
+                    try {
+                        return ((string)(this[this.tableInitialOrder.RemarkColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Remark\' in table \'InitialOrder\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableInitialOrder.RemarkColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsNumberNull() {
                 return this.IsNull(this.tableInitialOrder.NumberColumn);
             }
@@ -1562,6 +1592,18 @@ namespace CASReports.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetPublishedByNull() {
                 this[this.tableInitialOrder.PublishedByColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsRemarkNull() {
+                return this.IsNull(this.tableInitialOrder.RemarkColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetRemarkNull() {
+                this[this.tableInitialOrder.RemarkColumn] = global::System.Convert.DBNull;
             }
         }
         
