@@ -355,6 +355,10 @@ namespace CASReports.Datasets {
             
             private global::System.Data.DataColumn columnOperatorAddress;
             
+            private global::System.Data.DataColumn columnAuthorSign;
+            
+            private global::System.Data.DataColumn columnPublishSign;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public HeaderTableDataTable() {
@@ -414,6 +418,22 @@ namespace CASReports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn AuthorSignColumn {
+                get {
+                    return this.columnAuthorSign;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn PublishSignColumn {
+                get {
+                    return this.columnPublishSign;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -449,12 +469,14 @@ namespace CASReports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public HeaderTableRow AddHeaderTableRow(byte[] OperatorLogotype, string OperatorName, string OperatorAddress) {
+            public HeaderTableRow AddHeaderTableRow(byte[] OperatorLogotype, string OperatorName, string OperatorAddress, byte[] AuthorSign, byte[] PublishSign) {
                 HeaderTableRow rowHeaderTableRow = ((HeaderTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         OperatorLogotype,
                         OperatorName,
-                        OperatorAddress};
+                        OperatorAddress,
+                        AuthorSign,
+                        PublishSign};
                 rowHeaderTableRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowHeaderTableRow);
                 return rowHeaderTableRow;
@@ -480,6 +502,8 @@ namespace CASReports.Datasets {
                 this.columnOperatorLogotype = base.Columns["OperatorLogotype"];
                 this.columnOperatorName = base.Columns["OperatorName"];
                 this.columnOperatorAddress = base.Columns["OperatorAddress"];
+                this.columnAuthorSign = base.Columns["AuthorSign"];
+                this.columnPublishSign = base.Columns["PublishSign"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -491,6 +515,10 @@ namespace CASReports.Datasets {
                 base.Columns.Add(this.columnOperatorName);
                 this.columnOperatorAddress = new global::System.Data.DataColumn("OperatorAddress", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnOperatorAddress);
+                this.columnAuthorSign = new global::System.Data.DataColumn("AuthorSign", typeof(byte[]), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAuthorSign);
+                this.columnPublishSign = new global::System.Data.DataColumn("PublishSign", typeof(byte[]), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPublishSign);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1389,6 +1417,38 @@ namespace CASReports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public byte[] AuthorSign {
+                get {
+                    try {
+                        return ((byte[])(this[this.tableHeaderTable.AuthorSignColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'AuthorSign\' in table \'HeaderTable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHeaderTable.AuthorSignColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public byte[] PublishSign {
+                get {
+                    try {
+                        return ((byte[])(this[this.tableHeaderTable.PublishSignColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PublishSign\' in table \'HeaderTable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHeaderTable.PublishSignColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsOperatorLogotypeNull() {
                 return this.IsNull(this.tableHeaderTable.OperatorLogotypeColumn);
             }
@@ -1421,6 +1481,30 @@ namespace CASReports.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetOperatorAddressNull() {
                 this[this.tableHeaderTable.OperatorAddressColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsAuthorSignNull() {
+                return this.IsNull(this.tableHeaderTable.AuthorSignColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetAuthorSignNull() {
+                this[this.tableHeaderTable.AuthorSignColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsPublishSignNull() {
+                return this.IsNull(this.tableHeaderTable.PublishSignColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetPublishSignNull() {
+                this[this.tableHeaderTable.PublishSignColumn] = global::System.Convert.DBNull;
             }
         }
         

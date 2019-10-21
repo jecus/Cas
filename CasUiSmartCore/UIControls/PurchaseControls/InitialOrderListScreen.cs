@@ -23,6 +23,7 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
+using SmartCore.Entities.General.Personnel;
 using SmartCore.Filters;
 using SmartCore.Purchase;
 using SmartCore.Queries;
@@ -271,6 +272,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 			var airportCodeIds = records.Select(i => i.AirportCodeId);
 			var codes = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<AirportCodeDTO, AirportsCodes>(new Filter("ItemId", airportCodeIds));
 
+			ids = new List<int>() { _directivesViewer.SelectedItem.AuthorId, _directivesViewer.SelectedItem.PublishedById};
+			var personnel = GlobalObjects.CasEnvironment.Loader.GetObjectList<Specialist>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()));
+
 			foreach (var record in records)
 			{
 				record.Product = products.FirstOrDefault(i => i.ItemId == record.ProductId);
@@ -280,7 +284,11 @@ namespace CAS.UI.UIControls.PurchaseControls
 				record.AirportCode = codes.FirstOrDefault(i => i.ItemId == record.AirportCodeId);
 			}
 
-			var builder = new InitialOrderReportBuilder(GlobalObjects.CasEnvironment.Operators[0], records, _directivesViewer.SelectedItem);
+			var builder = new InitialOrderReportBuilder(GlobalObjects.CasEnvironment.Operators[0], records, _directivesViewer.SelectedItem)
+			{
+				AuthorSign = personnel.FirstOrDefault(i => i.ItemId == _directivesViewer.SelectedItem.AuthorId)?.Sign,
+				PublishSign = personnel.FirstOrDefault(i => i.ItemId == _directivesViewer.SelectedItem.PublishedById)?.Sign,
+			};
 			var refArgs = new ReferenceEventArgs();
 			refArgs.TypeOfReflection = ReflectionTypes.DisplayInNew;
 			refArgs.DisplayerText = "initialOrderReport";

@@ -30,6 +30,9 @@ namespace CASReports.Builders
 		}
 		#endregion
 
+		public byte[] AuthorSign { get; set; }
+		public byte[] PublishSign { get; set; }
+
 		#endregion
 
 		#region Constructor
@@ -123,7 +126,7 @@ namespace CASReports.Builders
 			byte[] operatorLogotype = _operator.LogotypeReportVeryLarge;
 			string operatorName = _operator.Name;
 			string operatorAddress = _operator.Address;
-			destinationDataSet.HeaderTable.AddHeaderTableRow(operatorLogotype, operatorName, operatorAddress);
+			destinationDataSet.HeaderTable.AddHeaderTableRow(operatorLogotype, operatorName, operatorAddress, AuthorSign, PublishSign);
 		}
 
 		#endregion
