@@ -100,7 +100,7 @@ namespace CASReports.Builders
 					: "";
 
 				dataSet.InitialOrderRecord.AddInitialOrderRecordRow(i.ToString(), record.AirportCode?.ToString(),
-					model, destination, record.AccessoryDescription, record.Product.PartNumber, "",
+					model, destination, record.AccessoryDescription, record.Product.PartNumber, record.Product.GoodsClass.ToString(),
 					record.Quantity.ToString("F1"), record.Priority.ToString(), record.Reference,
 					record.Remarks);
 
