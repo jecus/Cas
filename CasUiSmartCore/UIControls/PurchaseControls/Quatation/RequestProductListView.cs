@@ -52,7 +52,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 		protected override void GroupingItems()
 		{
-			Grouping("GoodClass");
+			Grouping("Class");
 		}
 
 		#endregion
