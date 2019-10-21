@@ -118,6 +118,9 @@ namespace SmartCore.Purchase
 		[TableColumn("Number")]
 		public string Number { get; set; }
 
+		[TableColumn("AuthorId")]
+		public int AuthorId { get; set; }
+
 		/*
 		*  Ìועמהû 
 		*/

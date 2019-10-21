@@ -117,3 +117,14 @@ if not exists ( select  *
 	alter table dbo.PurchaseOrders
 	add TrackingNo nvarchar(MAX)
 GO
+
+-----------------------------------------------------------------------------
+
+if not exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('dbo.InitialOrders')
+					and c.name = 'AuthorId' ) 
+
+	alter table dbo.InitialOrders
+	add AuthorId int not null default -1
+GO

@@ -3744,6 +3744,7 @@ namespace SmartCore.DtoHelper
 				PublishedByUser = initorder.PublishedByUser,
 				CloseByUser = initorder.CloseByUser,
 				Number = initorder.Number,
+				AuthorId = initorder.AuthorId,
 				Files = initorder.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
 				PackageRecords = initorder.PackageRecords?.Select(i => i.Convert()) as ICollection<InitialOrderRecordDTO>
 			};
@@ -3773,6 +3774,7 @@ namespace SmartCore.DtoHelper
 				PublishedByUser = initorderdto.PublishedByUser,
 				CloseByUser = initorderdto.CloseByUser,
 				Number = initorderdto.Number,
+				AuthorId = initorderdto.AuthorId
 			};
 
 			if (initorderdto.Files != null)

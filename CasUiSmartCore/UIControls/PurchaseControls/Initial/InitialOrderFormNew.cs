@@ -321,7 +321,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			_order.Remarks = textBoxRemarks.Text;
 
 			if (_order.ItemId <= 0)
+			{
 				_order.Author = GlobalObjects.CasEnvironment.IdentityUser.ToString();
+				_order.AuthorId = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
+			}
 
 			if (_order.Status == WorkPackageStatus.All)
 			{
