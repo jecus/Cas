@@ -291,8 +291,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 			var builder = new InitialOrderReportBuilder(GlobalObjects.CasEnvironment.Operators[0], records, _directivesViewer.SelectedItem)
 			{
-				AuthorSign = personnel.FirstOrDefault(i => i.ItemId == _directivesViewer.SelectedItem.AuthorId)?.Sign,
-				PublishSign = personnel.FirstOrDefault(i => i.ItemId == _directivesViewer.SelectedItem.PublishedById)?.Sign,
+				AuthorSign = personnel.FirstOrDefault(i => i.ItemId == authorId)?.Sign,
+				PublishSign = personnel.FirstOrDefault(i => i.ItemId == publisherId)?.Sign,
 			};
 			var refArgs = new ReferenceEventArgs();
 			refArgs.TypeOfReflection = ReflectionTypes.DisplayInNew;
