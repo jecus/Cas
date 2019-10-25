@@ -390,6 +390,7 @@
     <Compile Include="Builders\AirFleetBuilder.cs" />
     <Compile Include="Builders\ComponentAMReportBuilder.cs" />
     <Compile Include="Builders\ComponentTaskReportBuilderNew.cs" />
+    <Compile Include="Builders\PurchaseOrderReportNewBuilder.cs" />
     <Compile Include="Builders\StoreBarCodeReportBuilder.cs" />
     <Compile Include="Builders\DirectivesReportBuilderLitAVIAEng.cs" />
     <Compile Include="Builders\DirectivesReportBuilderLitAVIA.cs" />
@@ -536,6 +537,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ComponentsDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datasets\PurchaseRecordNewDataSet.Designer.cs">
+      <DependentUpon>PurchaseRecordNewDataSet.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Datasets\InitialRecordDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1072,6 +1078,12 @@
     </Compile>
     <Compile Include="ReportTemplates\CalibrationTagReport.cs">
       <DependentUpon>CalibrationTagReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\PurchaseOrderReportNew.cs">
+      <DependentUpon>PurchaseOrderReportNew.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
@@ -1638,6 +1650,17 @@
     </None>
     <None Include="Datasets\ComponentsDataSet.xss">
       <DependentUpon>ComponentsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\PurchaseRecordNewDataSet.xsc">
+      <DependentUpon>PurchaseRecordNewDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\PurchaseRecordNewDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PurchaseRecordNewDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Datasets\PurchaseRecordNewDataSet.xss">
+      <DependentUpon>PurchaseRecordNewDataSet.xsd</DependentUpon>
     </None>
     <None Include="Datasets\InitialRecordDataSet.xsc">
       <DependentUpon>InitialRecordDataSet.xsd</DependentUpon>
@@ -2335,6 +2358,10 @@
     <EmbeddedResource Include="ReportTemplates\CalibrationTagReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CalibrationTagReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\PurchaseOrderReportNew.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PurchaseOrderReportNew.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportTemplates\LandingGearLLPReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
