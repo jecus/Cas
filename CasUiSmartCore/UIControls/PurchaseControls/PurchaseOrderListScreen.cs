@@ -11,7 +11,9 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.StoresControls;
 using CASReports.Builders;
+using CASReports.ReportTemplates;
 using CASTerms;
+using CrystalDecisions.Shared;
 using EntityCore.DTO.Dictionaries;
 using EntityCore.DTO.General;
 using SmartCore.Entities.Collections;
@@ -164,6 +166,13 @@ namespace CAS.UI.UIControls.PurchaseControls
 				if (filter != null)
 					_purchaseArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>(filter));
 				else _purchaseArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<PurchaseOrderDTO, PurchaseOrder>());
+
+				var supplierShipper =  GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[] { new CommonFilter<int>(Supplier.SupplierClassProperty, SupplierClass.Shipper.ItemId) });
+				foreach (var order in _purchaseArray)
+				{
+					order.ShipCompany = supplierShipper.FirstOrDefault(i => i.ItemId == order.ShipCompanyId) ?? Supplier.Unknown;
+				}
+				
 			}
 			catch (Exception ex)
 			{

@@ -15,6 +15,7 @@ using CAS.UI.UIControls.PurchaseControls.Initial;
 using CASReports.Builders;
 using CASReports.ReportTemplates;
 using CASTerms;
+using CrystalDecisions.Shared;
 using EntityCore.DTO.Dictionaries;
 using EntityCore.DTO.General;
 using SmartCore.Calculations;
@@ -300,6 +301,20 @@ namespace CAS.UI.UIControls.PurchaseControls
 			refArgs.DisplayerText = $"initialOrderReport {_directivesViewer.SelectedItem.Title}";
 			refArgs.RequestedEntity = new ReportScreen(builder);
 			Program.MainDispatcher.DisplayerRequest(refArgs);
+
+
+			var doc = (InitialOrderReport)builder.GenerateReport();
+			var CrDiskFileDestinationOptions = new DiskFileDestinationOptions();
+			var CrFormatTypeOptions = new PdfRtfWordFormatOptions();
+			CrDiskFileDestinationOptions.DiskFileName = "D:\\SampleReport.pdf";
+			var CrExportOptions = doc.ExportOptions;
+			{
+				CrExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
+				CrExportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
+				CrExportOptions.DestinationOptions = CrDiskFileDestinationOptions;
+				CrExportOptions.FormatOptions = CrFormatTypeOptions;
+			}
+			doc.Export();
 
 		}
 
