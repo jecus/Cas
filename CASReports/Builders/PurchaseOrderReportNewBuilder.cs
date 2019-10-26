@@ -21,7 +21,6 @@ namespace CASReports.Builders
 		private readonly List<PurchaseRequestRecord> _orderRecords;
 		private readonly PurchaseOrder _order;
 		private readonly Department _department;
-		private readonly Supplier _supplier;
 		private readonly Specialist _specialist;
 
 		#endregion
@@ -52,12 +51,17 @@ namespace CASReports.Builders
 		/// Создается построитель отчета Release To Service 
 		/// </summary>
 		/// <param name="op"></param>
+		/// <param name="orderRecords"></param>
+		/// <param name="order"></param>
+		/// <param name="department"></param>
 		/// <param name="items"></param>
-		public PurchaseOrderReportNewBuilder(Operator op, List<PurchaseRequestRecord> orderRecords, PurchaseOrder order)
+		public PurchaseOrderReportNewBuilder(Operator op, List<PurchaseRequestRecord> orderRecords, PurchaseOrder order,
+			Department department)
 		{
 			_operator = op;
 			_orderRecords = orderRecords;
 			_order = order;
+			_department = department;
 		}
 
 		#endregion
@@ -126,6 +130,7 @@ namespace CASReports.Builders
 
 		private void AddSupplierToDataSet(PurchaseRecordNewDataSet dataSet)
 		{
+			var _supplier = _order.Supplier;
 			dataSet.Supplier.AddSupplierRow(_supplier.AirCode, _supplier.Name, _supplier.ContactPerson, _supplier.Phone, _supplier.Email);
 		}
 
