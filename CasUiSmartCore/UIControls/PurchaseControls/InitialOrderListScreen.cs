@@ -296,7 +296,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			};
 			var refArgs = new ReferenceEventArgs();
 			refArgs.TypeOfReflection = ReflectionTypes.DisplayInNew;
-			refArgs.DisplayerText = $"initialOrderReport + {_directivesViewer.SelectedItem.Title}";
+			refArgs.DisplayerText = $"initialOrderReport {_directivesViewer.SelectedItem.Title}";
 			refArgs.RequestedEntity = new ReportScreen(builder);
 			Program.MainDispatcher.DisplayerRequest(refArgs);
 
