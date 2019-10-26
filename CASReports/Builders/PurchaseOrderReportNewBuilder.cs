@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using CASReports.Datasets;
 using CASReports.ReportTemplates;
 using SmartCore.Entities.Dictionaries;
@@ -109,10 +110,10 @@ namespace CASReports.Builders
 					? ((Aircraft)record.ParentInitialRecord.DestinationObject).ToString()
 					: "";
 				var total = record.Cost * record.Quantity;
-
+				
 				dataSet.PurchaseRequestsRecords.AddPurchaseRequestsRecordsRow(i.ToString(), record.Quantity.ToString("F1"), 
 					record.Measure.ShortName, record.Cost.ToString("F1"), total.ToString("F1"), record.CostCondition.ToString(), 
-					record.Product.Name,destination, record.Product.PartNumber);
+					record.Product.Name,destination, record.Product.PartNumber, record.Currency.ToString(), record.ParentInitialRecord.Priority.ToString());
 
 				i++;
 			}
@@ -120,9 +121,10 @@ namespace CASReports.Builders
 
 		private void AddPurchaseOrderToDataSet(PurchaseRecordNewDataSet dataSet)
 		{
+			var total = _orderRecords.Sum(i => i.Cost * i.Quantity);
 				dataSet.PurchaseOrder.AddPurchaseOrderRow(_order.Designation.ItemId.ToString(), _order.IncoTerm.ToString(), 
-					_order.IncoTermRef, _order.ShipToId.ToString(), _order.PublishingDate.ToLongDateString(), _order.ShipCompany.Name, 
-					_order.PayTerm.ToString());
+					_order.IncoTermRef, _order.ShipTo.Name, _order.PublishingDate.ToString("dd/MM/yyyy"), _order.ShipCompany.Name, 
+					_order.PayTerm.ToString(), _order.OpeningDate.Year.ToString().Substring(2), total.ToString("F1"));
 		}
 
 		private void AddDepartmentToDataSet(PurchaseRecordNewDataSet dataSet)
@@ -139,7 +141,7 @@ namespace CASReports.Builders
 		private void AddPersonnelToDataSet(PurchaseRecordNewDataSet dataSet)
 		{
 			dataSet.Personnel.AddPersonnelRow(_specialist.ShortName, _specialist.Email, _specialist.PhoneMobile, 
-				_specialist.Phone, _specialist.Additional, _specialist.Specialization.ToString());
+				_specialist.Phone, string.IsNullOrEmpty(_specialist.Additional) ? "" : $"({_specialist.Additional})", _specialist.Specialization.ToString());
 		}
 		#endregion
 

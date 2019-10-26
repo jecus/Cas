@@ -172,6 +172,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				foreach (var order in _purchaseArray)
 				{
 					order.ShipCompany = supplierShipper.FirstOrDefault(i => i.ItemId == order.ShipCompanyId) ?? Supplier.Unknown;
+					order.ShipTo = supplierShipper.FirstOrDefault(i => i.ItemId == order.ShipToId) ?? Supplier.Unknown;
 				}
 				
 			}

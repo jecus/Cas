@@ -175,6 +175,7 @@ namespace SmartCore.Purchase
 		}
 
 		public Supplier ShipCompany { get; set; }
+		public Supplier ShipTo{ get; set; }
 
 		#endregion
 
