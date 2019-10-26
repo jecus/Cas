@@ -207,6 +207,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemMoveTo = new RadMenuItem();
 			_toolStripMenuItemDelete = new RadMenuItem();
+			_toolStripMenuItemReport = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			_toolStripMenuItemEdit = new RadMenuItem();
 			// 
@@ -268,6 +269,10 @@ namespace CAS.UI.UIControls.PurchaseControls
 			var initialRecords = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(new Filter("ParentPackageId", parentInitialId));
 			var initial = GlobalObjects.CasEnvironment.NewLoader.GetObject<InitialOrderDTO, InitialOrder>(new Filter("ItemId", parentInitialId));
 
+			var publisherId = GlobalObjects.CasEnvironment.ApiProvider.GetByIdAsync(_directivesViewer.SelectedItem.PublishedById)?.PersonnelId ?? -1;
+
+			var personnel = GlobalObjects.CasEnvironment.Loader.GetObject<Specialist>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, publisherId));
+			
 			foreach (var record in records)
 			{
 				record.ParentInitialRecord = initialRecords.FirstOrDefault(i => i.ProductId == record.PackageItemId);
@@ -277,7 +282,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 				record.Supplier = suppliers.FirstOrDefault(i => i.ItemId == record.SupplierId);
 			}
 
-			var builder = new PurchaseOrderReportNewBuilder(GlobalObjects.CasEnvironment.Operators[0], records, _order, department);
+			_order.Supplier = records.FirstOrDefault(i => i.Supplier != null).Supplier;
+
+			var builder = new PurchaseOrderReportNewBuilder(GlobalObjects.CasEnvironment.Operators[0], records, _order, department, personnel);
 			var refArgs = new ReferenceEventArgs();
 			refArgs.TypeOfReflection = ReflectionTypes.DisplayInNew;
 			refArgs.DisplayerText = $"iPurchaseOrderReport {_directivesViewer.SelectedItem.Title}";

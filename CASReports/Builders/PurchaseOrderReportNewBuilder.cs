@@ -54,14 +54,16 @@ namespace CASReports.Builders
 		/// <param name="orderRecords"></param>
 		/// <param name="order"></param>
 		/// <param name="department"></param>
+		/// <param name="personnel"></param>
 		/// <param name="items"></param>
 		public PurchaseOrderReportNewBuilder(Operator op, List<PurchaseRequestRecord> orderRecords, PurchaseOrder order,
-			Department department)
+			Department department, Specialist personnel)
 		{
 			_operator = op;
 			_orderRecords = orderRecords;
 			_order = order;
 			_department = department;
+			_specialist = personnel;
 		}
 
 		#endregion
