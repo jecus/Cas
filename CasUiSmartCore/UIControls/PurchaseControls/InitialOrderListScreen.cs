@@ -53,7 +53,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuItem _toolStripMenuItemCreateQuatation;
 		private RadMenuSeparatorItem _toolStripSeparator1;
-
+		
 		private Filter filter = null;
 
 		#endregion
@@ -206,7 +206,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_toolStripMenuItemCreateQuatation = new RadMenuItem();
 			_toolStripMenuItemClose = new RadMenuItem();
 			_toolStripMenuItemDelete = new RadMenuItem();
-			_toolStripSeparator1 = new RadMenuSeparatorItem();
+			_toolStripSeparator1 = new RadMenuSeparatorItem();			
 			_toolStripMenuItemEdit = new RadMenuItem();
 			_toolStripMenuItemReport = new RadMenuItem();
 			// 
@@ -242,9 +242,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 													_toolStripMenuItemClose,
 													_toolStripSeparator1,
 													_toolStripMenuItemReport,
-													_toolStripSeparator1,
+													new RadMenuSeparatorItem(),
 													_toolStripMenuItemEdit,
-													_toolStripSeparator1,
 													_toolStripMenuItemDelete
 
 												});
@@ -253,6 +252,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		#endregion
 
+
+		#region private void _toolStripMenuItemReport_Click(object sender, EventArgs e)
 
 		private void _toolStripMenuItemReport_Click(object sender, EventArgs e)
 		{
@@ -302,6 +303,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		}
 
+		#endregion
 
 		#region private void _toolStripMenuItemCreateQuatation_Click(object sender, EventArgs e)
 
@@ -519,6 +521,15 @@ namespace CAS.UI.UIControls.PurchaseControls
 					else
 					{
 						_toolStripMenuItemClose.Enabled = true;
+					}
+
+					if (wp.Status == WorkPackageStatus.Published || wp.Status == WorkPackageStatus.Closed)
+					{
+						_toolStripMenuItemReport.Enabled = true;
+					}
+					else
+					{
+						_toolStripMenuItemReport.Enabled = false;
 					}
 
 					_toolStripMenuItemCreateQuatation.Enabled = wp.Status == WorkPackageStatus.Opened;
