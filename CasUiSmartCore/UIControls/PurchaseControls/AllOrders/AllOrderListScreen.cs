@@ -537,15 +537,15 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			else if (_directivesViewer.SelectedItems[0] is PurchaseOrder)
 			{
 				var purch = _directivesViewer.SelectedItem as PurchaseOrder;
-				var form = new MoveProductForm(purch);
-				if (form.ShowDialog() == DialogResult.OK)
-				{
+				//var form = new MoveProductForm(purch);
+				//if (form.ShowDialog() == DialogResult.OK)
+				//{
 					purch.Status = WorkPackageStatus.Published;
-					purch.ClosingDate = DateTime.Now;
-					purch.CloseByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
-					purch.ClosedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
+					purch.PublishingDate = DateTime.Now;
+					purch.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
+					purch.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
 					GlobalObjects.CasEnvironment.NewKeeper.Save(purch);
-				}
+				//}
 				AnimatedThreadWorker.RunWorkerAsync();
 			}
 		}

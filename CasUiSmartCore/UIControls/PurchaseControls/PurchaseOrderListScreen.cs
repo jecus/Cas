@@ -45,6 +45,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private PurchaseOrderListView _directivesViewer;
 
 		private RadDropDownMenu _contextMenuStrip;
+		private RadMenuItem _toolStripMenuItemPublish;
 		private RadMenuItem _toolStripMenuItemMoveTo;
 		private RadMenuItem _toolStripMenuItemEdit;
 		private RadMenuItem _toolStripMenuItemDelete;
@@ -205,6 +206,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private void InitToolStripMenuItems()
 		{
 			_contextMenuStrip = new RadDropDownMenu();
+			_toolStripMenuItemPublish = new RadMenuItem();
 			_toolStripMenuItemMoveTo = new RadMenuItem();
 			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripMenuItemReport = new RadMenuItem();
@@ -218,6 +220,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 			_toolStripMenuItemEdit.Text = "Edit";
 			_toolStripMenuItemEdit.Click += ToolStripMenuItemEditClick;
+
+			_toolStripMenuItemPublish.Text = "Publish";
+			_toolStripMenuItemPublish.Click += ToolStripMenuItemPublishClick;
 			// 
 			// toolStripMenuItemView
 			// 
@@ -245,6 +250,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 												});
 		}
+
+
 		#endregion
 
 		#region private void _toolStripMenuItemReport_Click(object sender, EventArgs e)
@@ -293,6 +300,20 @@ namespace CAS.UI.UIControls.PurchaseControls
 		}
 
 		#endregion
+
+		private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
+		{
+			if (_directivesViewer.SelectedItem == null)
+				return;
+
+			_directivesViewer.SelectedItem.Status = WorkPackageStatus.Published;
+			_directivesViewer.SelectedItem.PublishingDate = DateTime.Now;
+			_directivesViewer.SelectedItem.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
+			_directivesViewer.SelectedItem.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
+			GlobalObjects.CasEnvironment.NewKeeper.Save(_directivesViewer.SelectedItem);
+			
+			AnimatedThreadWorker.RunWorkerAsync();
+		}
 
 
 		#region private void ToolStripMenuItemMoveToClick(object sender, EventArgs e)
@@ -411,14 +432,20 @@ namespace CAS.UI.UIControls.PurchaseControls
 					if (po.Status == WorkPackageStatus.Closed || po.Status == WorkPackageStatus.Opened)
 					{
 						_toolStripMenuItemMoveTo.Enabled = true;
+						_toolStripMenuItemPublish.Enabled = true;
+						_toolStripMenuItemReport.Enabled = false;
 					}
 					else if (po.Status == WorkPackageStatus.Published)
 					{
 						_toolStripMenuItemMoveTo.Enabled = false;
+						_toolStripMenuItemPublish.Enabled = false;
+						_toolStripMenuItemReport.Enabled = true;
 					}
 					else
 					{
 						_toolStripMenuItemMoveTo.Enabled = true;
+						_toolStripMenuItemPublish.Enabled = true;
+						_toolStripMenuItemReport.Enabled = false;
 					}
 
 				}
