@@ -241,6 +241,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_contextMenuStrip.Items.AddRange(new RadItem[]
 												{
 													_toolStripMenuItemMoveTo,
+													new RadMenuSeparatorItem(),
+													_toolStripMenuItemPublish,
 													_toolStripSeparator1,
 													_toolStripMenuItemReport,
 													new RadMenuSeparatorItem(),
