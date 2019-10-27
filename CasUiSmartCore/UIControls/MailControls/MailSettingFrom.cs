@@ -10,7 +10,7 @@ namespace CAS.UI.UIControls.MailControls
 {
 	public partial class MailSettingFrom : MetroForm
 	{
-		private readonly GlobalSetting _op;
+		private readonly Settings _op;
 
 		#region Constructor
 
@@ -19,7 +19,7 @@ namespace CAS.UI.UIControls.MailControls
 			InitializeComponent();
 		}
 
-		public MailSettingFrom(GlobalSetting op)
+		public MailSettingFrom(Settings op)
 		{
 			_op = op;
 			UpdateInformation();
@@ -29,11 +29,11 @@ namespace CAS.UI.UIControls.MailControls
 
 		private void UpdateInformation()
 		{
-			textBoxHost.Text = _op.MailSettings?.Host;
-			metroTextBoxPassword.Text = _op.MailSettings?.Password;
-			metroTextBox2.Text = _op.MailSettings?.Mail;
-			metroLabelPort.Text = _op.MailSettings?.Port.ToString() ?? "";
-			checkBoxSSL.Checked = _op.MailSettings?.SSl ?? false;
+			textBoxHost.Text = _op.GlobalSetting?.MailSettings?.Host;
+			metroTextBoxPassword.Text = _op.GlobalSetting?.MailSettings?.Password;
+			metroTextBox2.Text = _op.GlobalSetting?.MailSettings?.Mail;
+			metroLabelPort.Text = _op.GlobalSetting?.MailSettings?.Port.ToString() ?? "";
+			checkBoxSSL.Checked = _op.GlobalSetting?.MailSettings?.SSl ?? false;
 			
 		}
 
@@ -51,7 +51,7 @@ namespace CAS.UI.UIControls.MailControls
 
 		private void ApplyChanges()
 		{
-			_op.MailSettings = new MailSettings
+			_op.GlobalSetting.MailSettings = new MailSettings
 			{
 				Host = textBoxHost.Text,
 				Password = metroTextBoxPassword.Text,
