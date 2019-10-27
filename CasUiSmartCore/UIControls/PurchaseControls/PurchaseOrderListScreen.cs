@@ -282,6 +282,11 @@ namespace CAS.UI.UIControls.PurchaseControls
 			var publisherId = GlobalObjects.CasEnvironment.ApiProvider.GetByIdAsync(_directivesViewer.SelectedItem.PublishedById)?.PersonnelId ?? -1;
 
 			var personnel = GlobalObjects.CasEnvironment.Loader.GetObject<Specialist>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, publisherId));
+
+			var destinations = new List<BaseEntityObject>();
+			destinations.AddRange(GlobalObjects.AircraftsCore.GetAllAircrafts().ToArray());
+			destinations.AddRange(GlobalObjects.CasEnvironment.Stores.GetValidEntries());
+			destinations.AddRange(GlobalObjects.CasEnvironment.Hangars.GetValidEntries());
 			
 			foreach (var record in records)
 			{
@@ -290,6 +295,11 @@ namespace CAS.UI.UIControls.PurchaseControls
 					record.ParentInitialRecord.ParentPackage = initial;
 				record.Product = products.FirstOrDefault(i => i.ItemId == record.PackageItemId);
 				record.Supplier = suppliers.FirstOrDefault(i => i.ItemId == record.SupplierId);
+
+				if (record.ParentInitialRecord != null)
+					record.ParentInitialRecord.DestinationObject = destinations.FirstOrDefault(i =>
+						i.ItemId == record.ParentInitialRecord.DestinationObjectId &&
+						record.ParentInitialRecord.DestinationObjectType.ItemId == i.SmartCoreObjectType.ItemId);
 			}
 
 			_order.Supplier = records.FirstOrDefault(i => i.Supplier != null).Supplier;

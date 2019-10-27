@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CASReports.Datasets;
 using CASReports.ReportTemplates;
+using SmartCore.Auxiliary;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Personnel;
@@ -152,7 +153,9 @@ namespace CASReports.Builders
 			byte[] operatorLogotype = _operator.LogotypeReportVeryLarge;
 			string operatorName = _operator.Name;
 			string operatorAddress = _operator.Address;
-			destinationDataSet.HeaderTable.AddHeaderTableRow(operatorLogotype, operatorName, operatorAddress, AuthorSign, PublishSign);
+			var todayDate = SmartCore.Auxiliary.Convert.GetDateFormat(DateTime.Today);
+			
+			destinationDataSet.HeaderTable.AddHeaderTableRow(operatorLogotype, operatorName, operatorAddress, AuthorSign, PublishSign, todayDate);
 		}
 
 		#endregion

@@ -464,6 +464,8 @@ namespace CASReports.Datasets {
             
             private global::System.Data.DataColumn columnPublishSign;
             
+            private global::System.Data.DataColumn columnTodayDate;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public HeaderTableDataTable() {
@@ -539,6 +541,14 @@ namespace CASReports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn TodayDateColumn {
+                get {
+                    return this.columnTodayDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -574,14 +584,15 @@ namespace CASReports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public HeaderTableRow AddHeaderTableRow(byte[] OperatorLogotype, string OperatorName, string OperatorAddress, byte[] AuthorSign, byte[] PublishSign) {
+            public HeaderTableRow AddHeaderTableRow(byte[] OperatorLogotype, string OperatorName, string OperatorAddress, byte[] AuthorSign, byte[] PublishSign, string TodayDate) {
                 HeaderTableRow rowHeaderTableRow = ((HeaderTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         OperatorLogotype,
                         OperatorName,
                         OperatorAddress,
                         AuthorSign,
-                        PublishSign};
+                        PublishSign,
+                        TodayDate};
                 rowHeaderTableRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowHeaderTableRow);
                 return rowHeaderTableRow;
@@ -609,6 +620,7 @@ namespace CASReports.Datasets {
                 this.columnOperatorAddress = base.Columns["OperatorAddress"];
                 this.columnAuthorSign = base.Columns["AuthorSign"];
                 this.columnPublishSign = base.Columns["PublishSign"];
+                this.columnTodayDate = base.Columns["TodayDate"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -624,6 +636,8 @@ namespace CASReports.Datasets {
                 base.Columns.Add(this.columnAuthorSign);
                 this.columnPublishSign = new global::System.Data.DataColumn("PublishSign", typeof(byte[]), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPublishSign);
+                this.columnTodayDate = new global::System.Data.DataColumn("TodayDate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTodayDate);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2501,6 +2515,22 @@ namespace CASReports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string TodayDate {
+                get {
+                    try {
+                        return ((string)(this[this.tableHeaderTable.TodayDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TodayDate\' in table \'HeaderTable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHeaderTable.TodayDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsOperatorLogotypeNull() {
                 return this.IsNull(this.tableHeaderTable.OperatorLogotypeColumn);
             }
@@ -2557,6 +2587,18 @@ namespace CASReports.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetPublishSignNull() {
                 this[this.tableHeaderTable.PublishSignColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsTodayDateNull() {
+                return this.IsNull(this.tableHeaderTable.TodayDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetTodayDateNull() {
+                this[this.tableHeaderTable.TodayDateColumn] = global::System.Convert.DBNull;
             }
         }
         
