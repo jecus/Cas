@@ -777,6 +777,7 @@
     <Compile Include="Entities\NewLoader\NewLoader.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\XlsReader.cs" />
+    <Compile Include="Mail\IMailSender.cs" />
     <Compile Include="Providers\APIExtensions.cs" />
     <Compile Include="Files\FilesDataAccess.cs" />
     <Compile Include="Files\FilesSmartCore.cs" />
@@ -924,6 +925,7 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
