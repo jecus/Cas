@@ -692,7 +692,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void buttonAddQualificationNumber_Click(object sender, EventArgs e)
 		{
-			var form = new QualificationNumberForm();
+			var suppliers = listViewInitialItems.GetItemsArray().Where(i => i is RequestForQuotationRecord)
+				.Cast<RequestForQuotationRecord>().SelectMany(i => i.SupplierPrice.Select(p => p.Supplier)).Distinct();
+
+			   var form = new QualificationNumberForm(_order,suppliers);
 			form.ShowDialog();
 		}
 	}

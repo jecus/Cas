@@ -4665,7 +4665,7 @@ namespace SmartCore.DtoHelper
 				CloseByUser = reqquotation.CloseByUser,
 				ParentTypeId = reqquotation.ParentType?.ItemId,
 				Number = reqquotation.Number,
-				AdditionalInformation = reqquotation.AdditionalInformation,
+				AdditionalInformation = reqquotation.AdditionalInformationJSON,
 				Files = reqquotation.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
 				PackageRecords = reqquotation.PackageRecords?.Select(i => i.Convert()) as ICollection<RequestForQuotationRecordDTO>
 			};
@@ -4693,7 +4693,7 @@ namespace SmartCore.DtoHelper
 				PublishedByUser = reqquotationdto.PublishedByUser,
 				CloseByUser = reqquotationdto.CloseByUser,
 				Number = reqquotationdto.Number,
-				AdditionalInformation = reqquotationdto.AdditionalInformation,
+				AdditionalInformationJSON = reqquotationdto.AdditionalInformation,
 				ParentType = reqquotationdto.ParentTypeId.HasValue ? SmartCoreType.Items.GetItemById(reqquotationdto.ParentTypeId.Value) : SmartCoreType.Unknown,
 			};
 

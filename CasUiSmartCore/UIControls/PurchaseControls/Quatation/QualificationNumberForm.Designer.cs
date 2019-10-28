@@ -31,7 +31,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		private void InitializeComponent()
 		{
 			this.buttonOk = new System.Windows.Forms.Button();
-			this.buttonCancel = new System.Windows.Forms.Button();
+			this.buttonApply = new System.Windows.Forms.Button();
 			this.comboBoxSupplier = new System.Windows.Forms.ComboBox();
 			this.labelSupplier = new MetroFramework.Controls.MetroLabel();
 			this.textBoxQualificationNumber = new MetroFramework.Controls.MetroTextBox();
@@ -45,26 +45,25 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(171, 158);
+			this.buttonOk.Location = new System.Drawing.Point(253, 158);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 295;
 			this.buttonOk.Text = "OK";
 			this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
 			// 
-			// buttonCancel
+			// buttonApply
 			// 
-			this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonCancel.Location = new System.Drawing.Point(252, 158);
-			this.buttonCancel.Name = "buttonCancel";
-			this.buttonCancel.Size = new System.Drawing.Size(75, 33);
-			this.buttonCancel.TabIndex = 294;
-			this.buttonCancel.Text = "Cancel";
-			this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+			this.buttonApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonApply.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonApply.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.buttonApply.Location = new System.Drawing.Point(172, 158);
+			this.buttonApply.Name = "buttonApply";
+			this.buttonApply.Size = new System.Drawing.Size(75, 33);
+			this.buttonApply.TabIndex = 294;
+			this.buttonApply.Text = "Apply";
+			this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
 			// 
 			// comboBoxSupplier
 			// 
@@ -75,6 +74,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.comboBoxSupplier.Name = "comboBoxSupplier";
 			this.comboBoxSupplier.Size = new System.Drawing.Size(200, 25);
 			this.comboBoxSupplier.TabIndex = 299;
+			this.comboBoxSupplier.SelectedIndexChanged += new System.EventHandler(this.comboBoxSupplier_SelectedIndexChanged);
 			// 
 			// labelSupplier
 			// 
@@ -137,7 +137,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.Controls.Add(this.textBoxQualificationNumber);
 			this.Controls.Add(this.labelQualificationNumber);
 			this.Controls.Add(this.buttonOk);
-			this.Controls.Add(this.buttonCancel);
+			this.Controls.Add(this.buttonApply);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "QualificationNumberForm";
@@ -150,7 +150,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		#endregion
 
 		private System.Windows.Forms.Button buttonOk;
-		private System.Windows.Forms.Button buttonCancel;
+		private System.Windows.Forms.Button buttonApply;
 		private System.Windows.Forms.ComboBox comboBoxSupplier;
 		private MetroFramework.Controls.MetroLabel labelSupplier;
 		private MetroFramework.Controls.MetroTextBox textBoxQualificationNumber;

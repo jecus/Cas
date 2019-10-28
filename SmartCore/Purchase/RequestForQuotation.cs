@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using EntityCore.DTO.General;
+using Newtonsoft.Json;
 using SmartCore.Auxiliary;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Entities;
@@ -10,6 +11,7 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
+using SmartCore.Entities.General.Setting;
 using SmartCore.Files;
 using SmartCore.Packages;
 
@@ -142,7 +144,18 @@ namespace SmartCore.Purchase
 		public string Number { get; set; }
 
 		[TableColumn("AdditionalInformation")]
-		public string AdditionalInformation { get; set; }
+		public string AdditionalInformationJSON
+		{
+			get => JsonConvert.SerializeObject(AdditionalInformation, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+			set => AdditionalInformation = JsonConvert.DeserializeObject<QuatationSettings>(value ?? "", new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+		}
+
+		private QuatationSettings _additionalInformation;
+		public QuatationSettings AdditionalInformation
+		{
+			get => _additionalInformation ?? (_additionalInformation = new QuatationSettings());
+			set => _additionalInformation = value;
+		}
 
 
 		/*
@@ -180,5 +193,17 @@ namespace SmartCore.Purchase
 			return ItemId.CompareTo(y.ItemId);
 		}
 
+	}
+
+	[JsonObject]
+	public class QuatationSettings
+	{
+		private Dictionary<int, string> _qualificationNumbers;
+
+		public Dictionary<int, string> QualificationNumbers
+		{
+			get => _qualificationNumbers ?? (_qualificationNumbers = new Dictionary<int, string>());
+			set => _qualificationNumbers = value;
+		}
 	}
 }
