@@ -32,10 +32,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		{
 			this.buttonOk = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
-			this.comboBoxStatus = new System.Windows.Forms.ComboBox();
-			this.labelStatus = new MetroFramework.Controls.MetroLabel();
-			this.textBoxAuthor = new MetroFramework.Controls.MetroTextBox();
-			this.labelAuthor = new MetroFramework.Controls.MetroLabel();
+			this.comboBoxSupplier = new System.Windows.Forms.ComboBox();
+			this.labelSupplier = new MetroFramework.Controls.MetroLabel();
+			this.textBoxQualificationNumber = new MetroFramework.Controls.MetroTextBox();
+			this.labelQualificationNumber = new MetroFramework.Controls.MetroLabel();
 			this.SuspendLayout();
 			// 
 			// buttonOk
@@ -66,76 +66,76 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.buttonCancel.Text = "Cancel";
 			this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
 			// 
-			// comboBoxStatus
+			// comboBoxSupplier
 			// 
-			this.comboBoxStatus.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
-			this.comboBoxStatus.FormattingEnabled = true;
-			this.comboBoxStatus.ItemHeight = 17;
-			this.comboBoxStatus.Location = new System.Drawing.Point(127, 75);
-			this.comboBoxStatus.Name = "comboBoxStatus";
-			this.comboBoxStatus.Size = new System.Drawing.Size(200, 25);
-			this.comboBoxStatus.TabIndex = 299;
+			this.comboBoxSupplier.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.comboBoxSupplier.FormattingEnabled = true;
+			this.comboBoxSupplier.ItemHeight = 17;
+			this.comboBoxSupplier.Location = new System.Drawing.Point(127, 75);
+			this.comboBoxSupplier.Name = "comboBoxSupplier";
+			this.comboBoxSupplier.Size = new System.Drawing.Size(200, 25);
+			this.comboBoxSupplier.TabIndex = 299;
 			// 
-			// labelStatus
+			// labelSupplier
 			// 
-			this.labelStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelStatus.Location = new System.Drawing.Point(7, 75);
-			this.labelStatus.Name = "labelStatus";
-			this.labelStatus.Size = new System.Drawing.Size(87, 23);
-			this.labelStatus.TabIndex = 298;
-			this.labelStatus.Text = "Status:";
-			this.labelStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.labelSupplier.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelSupplier.Location = new System.Drawing.Point(7, 75);
+			this.labelSupplier.Name = "labelSupplier";
+			this.labelSupplier.Size = new System.Drawing.Size(87, 23);
+			this.labelSupplier.TabIndex = 298;
+			this.labelSupplier.Text = "Supplier:";
+			this.labelSupplier.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// textBoxAuthor
-			// 
-			// 
+			// textBoxQualificationNumber
 			// 
 			// 
-			this.textBoxAuthor.CustomButton.Image = null;
-			this.textBoxAuthor.CustomButton.Location = new System.Drawing.Point(177, 1);
-			this.textBoxAuthor.CustomButton.Name = "";
-			this.textBoxAuthor.CustomButton.Size = new System.Drawing.Size(23, 23);
-			this.textBoxAuthor.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.textBoxAuthor.CustomButton.TabIndex = 1;
-			this.textBoxAuthor.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.textBoxAuthor.CustomButton.UseSelectable = true;
-			this.textBoxAuthor.CustomButton.Visible = false;
-			this.textBoxAuthor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxAuthor.Lines = new string[0];
-			this.textBoxAuthor.Location = new System.Drawing.Point(127, 106);
-			this.textBoxAuthor.MaxLength = 32767;
-			this.textBoxAuthor.Name = "textBoxAuthor";
-			this.textBoxAuthor.PasswordChar = '\0';
-			this.textBoxAuthor.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.textBoxAuthor.SelectedText = "";
-			this.textBoxAuthor.SelectionLength = 0;
-			this.textBoxAuthor.SelectionStart = 0;
-			this.textBoxAuthor.ShortcutsEnabled = true;
-			this.textBoxAuthor.Size = new System.Drawing.Size(201, 25);
-			this.textBoxAuthor.TabIndex = 297;
-			this.textBoxAuthor.UseSelectable = true;
-			this.textBoxAuthor.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.textBoxAuthor.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			// 
-			// labelAuthor
 			// 
-			this.labelAuthor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelAuthor.Location = new System.Drawing.Point(7, 106);
-			this.labelAuthor.Name = "labelAuthor";
-			this.labelAuthor.Size = new System.Drawing.Size(87, 23);
-			this.labelAuthor.TabIndex = 296;
-			this.labelAuthor.Text = "Author:";
-			this.labelAuthor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.textBoxQualificationNumber.CustomButton.Image = null;
+			this.textBoxQualificationNumber.CustomButton.Location = new System.Drawing.Point(177, 1);
+			this.textBoxQualificationNumber.CustomButton.Name = "";
+			this.textBoxQualificationNumber.CustomButton.Size = new System.Drawing.Size(23, 23);
+			this.textBoxQualificationNumber.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxQualificationNumber.CustomButton.TabIndex = 1;
+			this.textBoxQualificationNumber.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxQualificationNumber.CustomButton.UseSelectable = true;
+			this.textBoxQualificationNumber.CustomButton.Visible = false;
+			this.textBoxQualificationNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxQualificationNumber.Lines = new string[0];
+			this.textBoxQualificationNumber.Location = new System.Drawing.Point(127, 106);
+			this.textBoxQualificationNumber.MaxLength = 32767;
+			this.textBoxQualificationNumber.Name = "textBoxQualificationNumber";
+			this.textBoxQualificationNumber.PasswordChar = '\0';
+			this.textBoxQualificationNumber.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textBoxQualificationNumber.SelectedText = "";
+			this.textBoxQualificationNumber.SelectionLength = 0;
+			this.textBoxQualificationNumber.SelectionStart = 0;
+			this.textBoxQualificationNumber.ShortcutsEnabled = true;
+			this.textBoxQualificationNumber.Size = new System.Drawing.Size(201, 25);
+			this.textBoxQualificationNumber.TabIndex = 297;
+			this.textBoxQualificationNumber.UseSelectable = true;
+			this.textBoxQualificationNumber.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxQualificationNumber.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+			// 
+			// labelQualificationNumber
+			// 
+			this.labelQualificationNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelQualificationNumber.Location = new System.Drawing.Point(7, 106);
+			this.labelQualificationNumber.Name = "labelQualificationNumber";
+			this.labelQualificationNumber.Size = new System.Drawing.Size(104, 23);
+			this.labelQualificationNumber.TabIndex = 296;
+			this.labelQualificationNumber.Text = "Qualification #:";
+			this.labelQualificationNumber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// QualificationNumberForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(335, 204);
-			this.Controls.Add(this.comboBoxStatus);
-			this.Controls.Add(this.labelStatus);
-			this.Controls.Add(this.textBoxAuthor);
-			this.Controls.Add(this.labelAuthor);
+			this.Controls.Add(this.comboBoxSupplier);
+			this.Controls.Add(this.labelSupplier);
+			this.Controls.Add(this.textBoxQualificationNumber);
+			this.Controls.Add(this.labelQualificationNumber);
 			this.Controls.Add(this.buttonOk);
 			this.Controls.Add(this.buttonCancel);
 			this.MaximizeBox = false;
@@ -151,9 +151,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 		private System.Windows.Forms.Button buttonOk;
 		private System.Windows.Forms.Button buttonCancel;
-		private System.Windows.Forms.ComboBox comboBoxStatus;
-		private MetroFramework.Controls.MetroLabel labelStatus;
-		private MetroFramework.Controls.MetroTextBox textBoxAuthor;
-		private MetroFramework.Controls.MetroLabel labelAuthor;
+		private System.Windows.Forms.ComboBox comboBoxSupplier;
+		private MetroFramework.Controls.MetroLabel labelSupplier;
+		private MetroFramework.Controls.MetroTextBox textBoxQualificationNumber;
+		private MetroFramework.Controls.MetroLabel labelQualificationNumber;
 	}
 }
