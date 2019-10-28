@@ -115,8 +115,8 @@ namespace EntityCore.DTO.General
 		[Column("TrackingNo")]
 		public string TrackingNo { get; set; }
 
-		[Column("AdditionalInformation")]
-		public string AdditionalInformation { get; set; }
+		[Column("AdditionalInformationJSON")]
+		public string AdditionalInformationJSON { get; set; }
 
 		[Child(FilterType.Equal, "ParentTypeId", 1860)]
 		public ICollection<ItemFileLinkDTO> Files { get; set; }

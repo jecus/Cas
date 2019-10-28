@@ -143,7 +143,7 @@ namespace SmartCore.Purchase
 		[TableColumn("Number")]
 		public string Number { get; set; }
 
-		[TableColumn("AdditionalInformation")]
+		[TableColumn("AdditionalInformationJSON")]
 		public string AdditionalInformationJSON
 		{
 			get => JsonConvert.SerializeObject(AdditionalInformation, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });

@@ -121,8 +121,8 @@ namespace SmartCore.Purchase
 		[TableColumn("AuthorId")]
 		public int AuthorId { get; set; }
 
-		[TableColumn("AdditionalInformation")]
-		public string AdditionalInformation { get; set; }
+		[TableColumn("AdditionalInformationJSON")]
+		public string AdditionalInformationJSON { get; set; }
 
 		/*
 		*  Ìועמהû 

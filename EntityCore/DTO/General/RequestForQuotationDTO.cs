@@ -75,8 +75,8 @@ namespace EntityCore.DTO.General
 		[Column("Number"), MaxLength(128)]
 		public string Number { get; set; }
 
-		[Column("AdditionalInformation")]
-		public string AdditionalInformation { get; set; }
+		[Column("AdditionalInformationJSON")]
+		public string AdditionalInformationJSON { get; set; }
 
 
 		[Child(FilterType.Equal, "ParentTypeId", 1900)]

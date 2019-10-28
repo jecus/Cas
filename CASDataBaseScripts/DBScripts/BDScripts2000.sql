@@ -134,26 +134,26 @@ GO
 if not exists ( select  *
 			from    sys.columns c                        
 			where   c.object_id = object_id('dbo.InitialOrders')
-					and c.name = 'AdditionalInformation' ) 
+					and c.name = 'AdditionalInformationJSON' ) 
 
 	alter table dbo.InitialOrders
-	add AdditionalInformation nvarchar(MAX)
+	add AdditionalInformationJSON nvarchar(MAX)
 GO
 
 if not exists ( select  *
 			from    sys.columns c                        
 			where   c.object_id = object_id('dbo.PurchaseOrders')
-					and c.name = 'AdditionalInformation' ) 
+					and c.name = 'AdditionalInformationJSON' ) 
 
 	alter table dbo.PurchaseOrders
-	add AdditionalInformation nvarchar(MAX)
+	add AdditionalInformationJSON nvarchar(MAX)
 GO
 
 if not exists ( select  *
 			from    sys.columns c                        
 			where   c.object_id = object_id('dbo.RequestsForQuotation')
-					and c.name = 'AdditionalInformation' ) 
+					and c.name = 'AdditionalInformationJSON' ) 
 
 	alter table dbo.RequestsForQuotation
-	add AdditionalInformation nvarchar(MAX)
+	add AdditionalInformationJSON nvarchar(MAX)
 GO

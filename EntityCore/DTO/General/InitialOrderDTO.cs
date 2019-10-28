@@ -74,8 +74,8 @@ namespace EntityCore.DTO.General
 		[Column("AuthorId")]
 		public int AuthorId { get; set; }
 
-		[Column("AdditionalInformation")]
-		public string AdditionalInformation { get; set; }
+		[Column("AdditionalInformationJSON")]
+		public string AdditionalInformationJSON { get; set; }
 
 
 		//
