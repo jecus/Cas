@@ -78,6 +78,9 @@ namespace SmartCore.Purchase
 		[TableColumn("TrackingNo")]
 		public string TrackingNo { get; set; }
 
+		[TableColumn("AdditionalInformation")]
+		public string AdditionalInformation { get; set; }
+
 		/// <summary>
 		/// 
 		/// </summary>

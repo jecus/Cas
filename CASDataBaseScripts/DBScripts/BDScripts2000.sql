@@ -128,3 +128,32 @@ if not exists ( select  *
 	alter table dbo.InitialOrders
 	add AuthorId int not null default -1
 GO
+
+---------------------------------------------------------------------------
+
+if not exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('dbo.InitialOrders')
+					and c.name = 'AdditionalInformation' ) 
+
+	alter table dbo.InitialOrders
+	add AdditionalInformation nvarchar(MAX)
+GO
+
+if not exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('dbo.PurchaseOrders')
+					and c.name = 'AdditionalInformation' ) 
+
+	alter table dbo.PurchaseOrders
+	add AdditionalInformation nvarchar(MAX)
+GO
+
+if not exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('dbo.RequestsForQuotation')
+					and c.name = 'AdditionalInformation' ) 
+
+	alter table dbo.RequestsForQuotation
+	add AdditionalInformation nvarchar(MAX)
+GO

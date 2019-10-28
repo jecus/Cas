@@ -74,6 +74,9 @@ namespace EntityCore.DTO.General
 		[Column("AuthorId")]
 		public int AuthorId { get; set; }
 
+		[Column("AdditionalInformation")]
+		public string AdditionalInformation { get; set; }
+
 
 		//
 		//[Include]

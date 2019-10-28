@@ -3745,6 +3745,7 @@ namespace SmartCore.DtoHelper
 				CloseByUser = initorder.CloseByUser,
 				Number = initorder.Number,
 				AuthorId = initorder.AuthorId,
+				AdditionalInformation = initorder.AdditionalInformation,
 				Files = initorder.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
 				PackageRecords = initorder.PackageRecords?.Select(i => i.Convert()) as ICollection<InitialOrderRecordDTO>
 			};
@@ -3774,7 +3775,8 @@ namespace SmartCore.DtoHelper
 				PublishedByUser = initorderdto.PublishedByUser,
 				CloseByUser = initorderdto.CloseByUser,
 				Number = initorderdto.Number,
-				AuthorId = initorderdto.AuthorId
+				AuthorId = initorderdto.AuthorId,
+				AdditionalInformation = initorderdto.AdditionalInformation
 			};
 
 			if (initorderdto.Files != null)
@@ -4454,6 +4456,7 @@ namespace SmartCore.DtoHelper
 				CargoVolume = purchase.CargoVolume,
 				BruttoWeight = purchase.BruttoWeight,
 				NettoWeight = purchase.NettoWeight,
+				AdditionalInformation = purchase.AdditionalInformation,
 				Files = purchase.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>
 			};
 		}
@@ -4493,7 +4496,8 @@ namespace SmartCore.DtoHelper
 				TrackingNo = purchasedto.TrackingNo,
 				CargoVolume = purchasedto.CargoVolume,
 				BruttoWeight = purchasedto.BruttoWeight,
-				NettoWeight = purchasedto.NettoWeight
+				NettoWeight = purchasedto.NettoWeight,
+				AdditionalInformation = purchasedto.AdditionalInformation
 			};
 
 			if (purchasedto.Files != null)
@@ -4661,6 +4665,7 @@ namespace SmartCore.DtoHelper
 				CloseByUser = reqquotation.CloseByUser,
 				ParentTypeId = reqquotation.ParentType?.ItemId,
 				Number = reqquotation.Number,
+				AdditionalInformation = reqquotation.AdditionalInformation,
 				Files = reqquotation.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
 				PackageRecords = reqquotation.PackageRecords?.Select(i => i.Convert()) as ICollection<RequestForQuotationRecordDTO>
 			};
@@ -4688,6 +4693,7 @@ namespace SmartCore.DtoHelper
 				PublishedByUser = reqquotationdto.PublishedByUser,
 				CloseByUser = reqquotationdto.CloseByUser,
 				Number = reqquotationdto.Number,
+				AdditionalInformation = reqquotationdto.AdditionalInformation,
 				ParentType = reqquotationdto.ParentTypeId.HasValue ? SmartCoreType.Items.GetItemById(reqquotationdto.ParentTypeId.Value) : SmartCoreType.Unknown,
 			};
 
