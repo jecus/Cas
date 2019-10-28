@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using EntityCore.DTO.General;
+using Newtonsoft.Json;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
@@ -79,7 +80,18 @@ namespace SmartCore.Purchase
 		public string TrackingNo { get; set; }
 
 		[TableColumn("AdditionalInformationJSON")]
-		public string AdditionalInformationJSON { get; set; }
+		public string AdditionalInformationJSON
+		{
+			get => JsonConvert.SerializeObject(AdditionalInformation, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+			set => AdditionalInformation = JsonConvert.DeserializeObject<PurchaseSettings>(value ?? "", new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+		}
+
+		private PurchaseSettings _additionalInformation;
+		public PurchaseSettings AdditionalInformation
+		{
+			get => _additionalInformation ?? (_additionalInformation = new PurchaseSettings());
+			set => _additionalInformation = value;
+		}
 
 		/// <summary>
 		/// 
@@ -230,5 +242,12 @@ namespace SmartCore.Purchase
 
 			return clone;
 		}
+	}
+
+	[JsonObject]
+	public class PurchaseSettings
+	{
+		public string QualificationNumber { get; set; }
+		
 	}
 }

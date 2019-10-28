@@ -458,6 +458,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 					var copy = _order.GetCopyUnsaved();
 					copy.Title += $" {g.Key}";
 
+					if (_quotation.AdditionalInformation.QualificationNumbers.ContainsKey(g.Key.ItemId))
+						copy.AdditionalInformation.QualificationNumber =
+							_quotation.AdditionalInformation.QualificationNumbers[g.Key.ItemId];
+
 					//сохранение запросного ордера
 					GlobalObjects.CasEnvironment.NewKeeper.Save(copy);
 
