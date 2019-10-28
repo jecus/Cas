@@ -1338,8 +1338,18 @@ namespace SmartCore.Calculations.PerformanceCalculator
 				}
 
 
+				if (whicheverFirst == ThresholdConditionType.WhicheverFirst)
+				{
 					if (current.IsGreaterByAnyParameter(limitOverdue))
 						return ConditionState.Overdue;
+				}
+				else
+				{
+					if (current.IsGreater(limitOverdue))
+						return ConditionState.Overdue;
+				}
+
+					
 
 					if (limitOverdue.IsGreaterByAnyParameter(current) && current.IsGreaterByAnyParameter(limitNotify))
 						return ConditionState.Notify;

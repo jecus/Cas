@@ -45,6 +45,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 		private void buttonApply_Click(object sender, EventArgs e)
 		{
+			if (comboBoxSupplier.SelectedItem == null)
+				return;
+
 			var supplierId = ((BaseEntityObject)comboBoxSupplier.SelectedItem).ItemId;
 
 			if (_order.AdditionalInformation.QualificationNumbers.ContainsKey(supplierId))
@@ -60,6 +63,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 		private void comboBoxSupplier_SelectedIndexChanged(object sender, EventArgs e)
 		{
+			if(comboBoxSupplier.SelectedItem == null)
+				return;
+
 			if (_order.AdditionalInformation.QualificationNumbers.ContainsKey(
 				((BaseEntityObject) comboBoxSupplier.SelectedItem).ItemId))
 				textBoxQualificationNumber.Text =

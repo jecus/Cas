@@ -1,4 +1,5 @@
-﻿using CAS.UI.UIControls.Auxiliary;
+﻿using System.Windows.Forms;
+using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.ComponentControls
@@ -34,7 +35,6 @@ namespace CAS.UI.UIControls.ComponentControls
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Windows.Forms.GroupBox groupBoxStart;
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComponentGeneralInformationControl));
 			this.lifelengthViewerStart = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.dateTimePickerStart = new System.Windows.Forms.DateTimePicker();
@@ -150,26 +150,11 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.linkLabelEditComponents = new System.Windows.Forms.LinkLabel();
 			this.comboBoxReceived = new System.Windows.Forms.ComboBox();
 			this.labelReceived = new System.Windows.Forms.Label();
-			groupBoxStart = new System.Windows.Forms.GroupBox();
-			groupBoxStart.SuspendLayout();
 			this.panelAvionicsInventory.SuspendLayout();
 			this.panelLandingGearMark.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// groupBoxStart
-			// 
-			groupBoxStart.Controls.Add(this.lifelengthViewerStart);
-			groupBoxStart.Controls.Add(this.dateTimePickerStart);
-			groupBoxStart.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			groupBoxStart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			groupBoxStart.Location = new System.Drawing.Point(3, 395);
-			groupBoxStart.Name = "groupBoxStart";
-			groupBoxStart.Size = new System.Drawing.Size(371, 112);
-			groupBoxStart.TabIndex = 172;
-			groupBoxStart.TabStop = false;
-			groupBoxStart.Text = "Start";
-			groupBoxStart.Visible = false;
+
 			// 
 			// lifelengthViewerStart
 			// 
@@ -1791,7 +1776,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.Controls.Add(this.textBoxModel);
 			this.Controls.Add(this.labelAltPartNum);
 			this.Controls.Add(this.textBoxAltPartNum);
-			this.Controls.Add(groupBoxStart);
 			this.Controls.Add(this.labelCheck);
 			this.Controls.Add(this.radioButtonD);
 			this.Controls.Add(this.radioButtonC);
@@ -1885,8 +1869,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.Controls.Add(this.textBoxHushKit);
 			this.Name = "ComponentGeneralInformationControl";
 			this.Size = new System.Drawing.Size(1195, 718);
-			groupBoxStart.ResumeLayout(false);
-			groupBoxStart.PerformLayout();
 			this.panelAvionicsInventory.ResumeLayout(false);
 			this.panelAvionicsInventory.PerformLayout();
 			this.panelLandingGearMark.ResumeLayout(false);
@@ -2008,7 +1990,6 @@ namespace CAS.UI.UIControls.ComponentControls
 		private System.Windows.Forms.DateTimePicker dateTimePickerStart;
 		private System.Windows.Forms.Label labelAltPartNum;
 		private System.Windows.Forms.TextBox textBoxAltPartNum;
-		private System.Windows.Forms.GroupBox groupBoxStart;
 		private System.Windows.Forms.TextBox textBoxModel;
 		private System.Windows.Forms.LinkLabel linkLabel2;
 		private System.Windows.Forms.LinkLabel linkLabel1;

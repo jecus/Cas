@@ -829,8 +829,7 @@ namespace CAS.UI.UIControls.ComponentControls
 	                {
 		                dateTimePickerStart.Visible = true;
 		                lifelengthViewerStart.Visible = true;
-		                groupBoxStart.Visible = true;
-					}
+	                }
                 }
                 else
                 {
@@ -1013,7 +1012,9 @@ namespace CAS.UI.UIControls.ComponentControls
             {
 	            if (_currentComponent.ParentBaseComponent != null && _currentComponent.ParentBaseComponent.BaseComponentType == BaseComponentType.LandingGear)
 	            {
-		            dateTimePickerStart.Value = _currentComponent.StartDate;
+		            if (_currentComponent.StartDate < DateTimeExtend.GetCASMinDateTime())
+			            _currentComponent.StartDate = DateTimeExtend.GetCASMinDateTime();
+					dateTimePickerStart.Value = _currentComponent.StartDate;
 		            lifelengthViewerStart.Lifelength = _currentComponent.StartLifelength;
 				}
 
