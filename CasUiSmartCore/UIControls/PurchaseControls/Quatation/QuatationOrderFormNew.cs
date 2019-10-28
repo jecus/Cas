@@ -689,5 +689,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			if (form.ShowDialog() == DialogResult.OK)
 				listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
 		}
+
+		private void buttonAddQualificationNumber_Click(object sender, EventArgs e)
+		{
+			var form = new QualificationNumberForm();
+			form.ShowDialog();
+		}
 	}
 }

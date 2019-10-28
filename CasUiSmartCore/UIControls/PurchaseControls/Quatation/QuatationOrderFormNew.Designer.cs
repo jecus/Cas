@@ -35,6 +35,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		{
 			this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.button3 = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
 			this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
 			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
@@ -91,7 +92,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.documentControl10 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			this.buttonAddSupplierForAll = new System.Windows.Forms.Button();
-			this.button3 = new System.Windows.Forms.Button();
+			this.buttonAddQualificationNumber = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.groupBox2.SuspendLayout();
@@ -148,12 +149,25 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.groupBox1.Controls.Add(this.checkBoxOverhaul);
 			this.groupBox1.Controls.Add(this.checkBoxServiceable);
 			this.groupBox1.Controls.Add(this.checkBoxNew);
-			this.groupBox1.Location = new System.Drawing.Point(717, 40);
+			this.groupBox1.Location = new System.Drawing.Point(717, 14);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(294, 349);
 			this.groupBox1.TabIndex = 290;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Selected Product";
+			// 
+			// button3
+			// 
+			this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.button3.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.button3.Location = new System.Drawing.Point(160, 310);
+			this.button3.Name = "button3";
+			this.button3.Size = new System.Drawing.Size(125, 33);
+			this.button3.TabIndex = 269;
+			this.button3.Text = "Edit Prices";
+			this.button3.Click += new System.EventHandler(this.button3_Click);
 			// 
 			// button2
 			// 
@@ -428,7 +442,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.groupBox2.Controls.Add(this.labelAuthor);
 			this.groupBox2.Controls.Add(this.textBoxTitle);
 			this.groupBox2.Controls.Add(this.labelQOTitle);
-			this.groupBox2.Location = new System.Drawing.Point(717, 392);
+			this.groupBox2.Location = new System.Drawing.Point(717, 366);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(294, 332);
 			this.groupBox2.TabIndex = 291;
@@ -911,25 +925,25 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.buttonAddSupplierForAll.Text = "Add Supplier For All";
 			this.buttonAddSupplierForAll.Click += new System.EventHandler(this.buttonAddSupplierForAll_Click);
 			// 
-			// button3
+			// buttonAddQualificationNumber
 			// 
-			this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.button3.Enabled = true;
-			this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.button3.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button3.Location = new System.Drawing.Point(160, 310);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(125, 33);
-			this.button3.TabIndex = 269;
-			this.button3.Text = "Edit Prices";
-			this.button3.Click += new System.EventHandler(this.button3_Click);
+			this.buttonAddQualificationNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonAddQualificationNumber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonAddQualificationNumber.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonAddQualificationNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.buttonAddQualificationNumber.Location = new System.Drawing.Point(916, 705);
+			this.buttonAddQualificationNumber.Name = "buttonAddQualificationNumber";
+			this.buttonAddQualificationNumber.Size = new System.Drawing.Size(197, 33);
+			this.buttonAddQualificationNumber.TabIndex = 318;
+			this.buttonAddQualificationNumber.Text = "Add Qualification Number";
+			this.buttonAddQualificationNumber.Click += new System.EventHandler(this.buttonAddQualificationNumber_Click);
 			// 
 			// QuatationOrderFormNew
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1288, 752);
+			this.Controls.Add(this.buttonAddQualificationNumber);
 			this.Controls.Add(this.buttonAddSupplierForAll);
 			this.Controls.Add(this.comboBox1);
 			this.Controls.Add(this.documentControl10);
@@ -1021,5 +1035,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private System.Windows.Forms.ComboBox comboBox1;
 		private System.Windows.Forms.Button buttonAddSupplierForAll;
 		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.Button buttonAddQualificationNumber;
 	}
 }
