@@ -123,10 +123,11 @@ namespace CASReports.Builders
 		private void AddPurchaseOrderToDataSet(PurchaseRecordNewDataSet dataSet)
 		{
 			var qualification = _order.AdditionalInformation.QualificationNumber;
+			var designation = _order.Designation.ItemId > -1 ? _order.Designation.ItemId.ToString() : "#";
 			var total = _orderRecords.Sum(i => i.Cost * i.Quantity);
-				dataSet.PurchaseOrder.AddPurchaseOrderRow(_order.Designation.ItemId.ToString(), _order.IncoTerm.ToString(), 
+				dataSet.PurchaseOrder.AddPurchaseOrderRow(designation, _order.IncoTerm.ToString(), 
 					_order.IncoTermRef, _order.ShipTo.Name, _order.PublishingDate.ToString("dd/MM/yyyy"), _order.ShipCompany.Name, 
-					_order.PayTerm.ToString(), _order.OpeningDate.Year.ToString().Substring(2), total.ToString("F1"));
+					_order.PayTerm.ToString(), _order.OpeningDate.Year.ToString().Substring(2), total.ToString("F1"), qualification);
 		}
 
 		private void AddDepartmentToDataSet(PurchaseRecordNewDataSet dataSet)

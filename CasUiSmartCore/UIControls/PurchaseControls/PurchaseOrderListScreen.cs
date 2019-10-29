@@ -303,7 +303,13 @@ namespace CAS.UI.UIControls.PurchaseControls
 			}
 
 			_order.Supplier = records.FirstOrDefault(i => i.Supplier != null).Supplier;
-
+			if (personnel == null)
+			{
+				MessageBox.Show($"Please attach personnel for user ({_directivesViewer.SelectedItem.PublishedByUser})",
+					"Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+				return;
+			}
+			
 			var builder = new PurchaseOrderReportNewBuilder(GlobalObjects.CasEnvironment.Operators[0], records, _order, department, personnel);
 			var refArgs = new ReferenceEventArgs();
 			refArgs.TypeOfReflection = ReflectionTypes.DisplayInNew;
