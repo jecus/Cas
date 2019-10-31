@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using CASTerms;
+using EntityCore.DTO.General;
 using MetroFramework.Forms;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Setting;
@@ -10,7 +12,7 @@ namespace CAS.UI.UIControls.MailControls
 {
 	public partial class MailSettingFrom : MetroForm
 	{
-		private readonly Settings _op;
+		private Settings _op;
 
 		#region Constructor
 
@@ -22,7 +24,14 @@ namespace CAS.UI.UIControls.MailControls
 		public MailSettingFrom(Settings op)
 		{
 			_op = op;
-			UpdateInformation();
+			Task.Run(() => DoWork())
+				.ContinueWith(task => UpdateInformation(), TaskScheduler.FromCurrentSynchronizationContext());
+			
+		}
+
+		private void DoWork()
+		{
+			_op = GlobalObjects.CasEnvironment.NewLoader.GetObject<SettingDTO, Settings>();
 		}
 
 		#endregion
