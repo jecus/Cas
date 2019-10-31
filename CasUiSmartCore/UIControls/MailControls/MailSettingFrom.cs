@@ -19,19 +19,16 @@ namespace CAS.UI.UIControls.MailControls
 		public MailSettingFrom()
 		{
 			InitializeComponent();
-		}
-
-		public MailSettingFrom(Settings op)
-		{
-			_op = op;
 			Task.Run(() => DoWork())
 				.ContinueWith(task => UpdateInformation(), TaskScheduler.FromCurrentSynchronizationContext());
-			
 		}
 
 		private void DoWork()
 		{
 			_op = GlobalObjects.CasEnvironment.NewLoader.GetObject<SettingDTO, Settings>();
+
+			if(_op == null)
+				_op = new Settings();
 		}
 
 		#endregion
