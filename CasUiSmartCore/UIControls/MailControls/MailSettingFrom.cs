@@ -38,7 +38,7 @@ namespace CAS.UI.UIControls.MailControls
 			textBoxHost.Text = _op.GlobalSetting?.MailSettings?.Host;
 			metroTextBoxPassword.Text = _op.GlobalSetting?.MailSettings?.Password;
 			metroTextBox2.Text = _op.GlobalSetting?.MailSettings?.Mail;
-			metroLabelPort.Text = _op.GlobalSetting?.MailSettings?.Port.ToString() ?? "";
+			metroTextBoxPort.Text = _op.GlobalSetting?.MailSettings?.Port.ToString() ?? "";
 			checkBoxSSL.Checked = _op.GlobalSetting?.MailSettings?.SSl ?? false;
 			
 		}
@@ -62,7 +62,7 @@ namespace CAS.UI.UIControls.MailControls
 				Host = textBoxHost.Text,
 				Password = metroTextBoxPassword.Text,
 				Mail = metroTextBox2.Text,
-				Port = int.Parse(metroLabelPort.Text),
+				Port = int.Parse(metroTextBoxPort.Text),
 				SSl = checkBoxSSL.Checked
 			};
 		}
