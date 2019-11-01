@@ -46,7 +46,7 @@ namespace SmartCore.Mail
 					},
 					Subject = "",
 					IsBodyHtml = true,
-					Body = GeneratePurchaseTemplate(orderRecords)
+					Body = GeneratePurchaseTemplate(orderRecords, personnel)
 
 				};
 
@@ -74,7 +74,7 @@ namespace SmartCore.Mail
 
 		#endregion
 
-		private string GeneratePurchaseTemplate(List<PurchaseRequestRecord> orderRecords)
+		private string GeneratePurchaseTemplate(List<PurchaseRequestRecord> orderRecords, Specialist specialist)
 		{
 			var data = "";
 			foreach (var record in orderRecords)
@@ -91,17 +91,32 @@ namespace SmartCore.Mail
 					</tr>";
 			}
 
-			return _purchaseTemplate.Replace("{Data}", data);
+			var personnel = specialist.FirstName + " " + specialist.LastName;
+			var specialization = specialist.Specialization.ToString();
+
+			return _purchaseTemplate.Replace("{Data}", data).Replace("{Personnel}", personnel).Replace("{Specialization}", specialization);
 		}
 
-		private static string _purchaseTemplate => @"<table border=""1px""> 
-				<tr>
-				<td>A/C</td>
-				<td>DESCRIPTION</td>
-				<td>P/N</td>
-				<td>Q-TY</td>
-				<td>PRIORITY</td>
-				</tr> {Data} </table>";
-
+		private static string _purchaseTemplate => @"
+			<p><em>Dear Colleagues,</em></p>
+				<p>&nbsp;</p>
+			<p><em>Please quote:</em></p>				
+		<table style=""width:100%; text-align:center;"" border=""1px"" >
+		<tbody>
+		<tr>
+		<td width=""20%""><strong><em>A/C</em></strong></td>
+		<td width=""26%""><strong><em>DESCRIPTION</em></strong></td>
+		<td width=""23%""><strong><em>P/N</em></strong></td>
+		<td width=""12%""><strong><em>Q-TY</em></strong></td>
+		<td width=""23%""><strong><em>PRIORITY</em></strong></td>
+		</tr>
+		{Data}
+		</tbody>
+		</table>
+			<p>&nbsp;</p>
+		<p><em>Best regards,</em></p>
+		<p><em>{Personnel}</em></p>
+			<p>&nbsp;</p>
+		<p><em>{Specialization}</em></p>";
 	}
 }
