@@ -860,8 +860,18 @@ namespace SmartCore.Calculations.PerformanceCalculator
 				{
 					if (directive.LastPerformance != null)
 					{
-						np.LimitOverdue = new Lifelength(directive.Threshold.RepeatInterval);
-						np.LimitNotify = new Lifelength(directive.Threshold.RepeatInterval);
+						if (directive is MaintenanceDirective)
+						{
+							var d = directive as MaintenanceDirective;
+							np.LimitOverdue = new Lifelength(d.PhaseRepeat);
+							np.LimitNotify = new Lifelength(d.PhaseRepeat);
+						}
+						else
+						{
+							np.LimitOverdue = new Lifelength(directive.Threshold.RepeatInterval);
+							np.LimitNotify = new Lifelength(directive.Threshold.RepeatInterval);
+						}
+
 						np.LimitNotify.Substract(directive.Threshold.FirstNotification);
 
 						np.LimitOverdue.Add(directive.LastPerformance.OnLifelength);
@@ -1337,22 +1347,39 @@ namespace SmartCore.Calculations.PerformanceCalculator
 											: ConditionState.Satisfactory);
 				}
 
+				var optimizedCurrent = new Lifelength(current);
+				optimizedCurrent.Resemble(limitOverdue);
+
+				//var optimizedCurrentNotify = new Lifelength(current);
+				//optimizedCurrentNotify.Resemble(limitNotify);
+
+				var optimizedCurrentNotify = new Lifelength(notify);
+				optimizedCurrentNotify.Resemble(remains);
 
 				if (whicheverFirst == ThresholdConditionType.WhicheverFirst)
 				{
-					if (current.IsGreaterByAnyParameter(limitOverdue))
+					if (optimizedCurrent.IsGreaterByAnyParameter(limitOverdue))
 						return ConditionState.Overdue;
+
+					//if (optimizedCurrentNotify.IsLessByAnyParameter(limitNotify))
+					//	return ConditionState.Notify;
+
+					if (remains.IsLessByAnyParameter(optimizedCurrentNotify))
+						return ConditionState.Notify;
 				}
 				else
 				{
-					if (current.IsGreater(limitOverdue))
+					
+					if (optimizedCurrent.IsGreaterNew(limitOverdue))
 						return ConditionState.Overdue;
+
+					//if (limitNotify.IsLessNew(current))
+					//	return ConditionState.Notify;
+
+					if (remains.IsLessNew(optimizedCurrentNotify))
+						return ConditionState.Notify;
 				}
 
-					
-
-					if (limitOverdue.IsGreaterByAnyParameter(current) && current.IsGreaterByAnyParameter(limitNotify))
-						return ConditionState.Notify;
 
 				return ConditionState.Satisfactory;
 				

@@ -679,16 +679,86 @@ namespace SmartCore.Calculations
 
             return true;
         }
-        #endregion
+		#endregion
 
-        #region public bool IsGratherIgnoreNulls(Lifelength lifelength)
-        /// <summary>
-        /// Метод проверяет, является ли данная наработка строго большей заданной по всем трем параметрам
-        /// <br/> Null параметры обеих наработок игнорируются при сравнении
-        /// </summary>
-        /// <param name="lifelength"></param>
-        /// <returns></returns>
-        public bool IsGratherIgnoreNulls(Lifelength lifelength)
+		public bool IsGreaterNew(Lifelength lifelength)
+		{
+			// 10, 10, 10 > 5, 5, 5
+			// 10, 10, 10 !> 5, 20, 5
+			if (Cycles != null)
+			{
+				if (lifelength.Cycles != null)
+				{
+					if (Cycles <= lifelength.Cycles) return false;
+				}
+				else return false;
+			}
+
+			if (TotalMinutes != null)
+			{
+				if (lifelength.TotalMinutes != null)
+				{
+					if (TotalMinutes <= lifelength.TotalMinutes) return false;
+				}
+				else return false;
+			}
+
+			if (Days != null)
+			{
+				if (lifelength.Days != null)
+				{
+					if (Days <= lifelength.Days) return false;
+				}
+				else return false;
+			}
+
+			return true;
+		}
+
+
+		public bool IsLessNew(Lifelength lifelength)
+		{
+			// 10, 10, 10 > 5, 5, 5
+			// 10, 10, 10 !> 5, 20, 5
+			if (Cycles != null)
+			{
+				if (lifelength.Cycles != null)
+				{
+					if (Cycles > lifelength.Cycles) return false;
+				}
+				else return false;
+			}
+
+			if (TotalMinutes != null)
+			{
+				if (lifelength.TotalMinutes != null)
+				{
+					if (TotalMinutes > lifelength.TotalMinutes) return false;
+				}
+				else return false;
+			}
+
+			if (Days != null)
+			{
+				if (lifelength.Days != null)
+				{
+					if (Days > lifelength.Days) return false;
+				}
+				else return false;
+			}
+
+			return true;
+		}
+
+
+		#region public bool IsGratherIgnoreNulls(Lifelength lifelength)
+		/// <summary>
+		/// Метод проверяет, является ли данная наработка строго большей заданной по всем трем параметрам
+		/// <br/> Null параметры обеих наработок игнорируются при сравнении
+		/// </summary>
+		/// <param name="lifelength"></param>
+		/// <returns></returns>
+		public bool IsGratherIgnoreNulls(Lifelength lifelength)
         {
             if (lifelength == null) lifelength = Null;
             if (IsNullOrZero() && !lifelength.IsNullOrZero())
