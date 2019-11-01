@@ -142,7 +142,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.MinimizeBox = false;
 			this.Name = "QualificationNumberForm";
 			this.Resizable = false;
-			this.Text = "Qualification Number Form";
+			this.Text = "Quotation Order № Form";
 			this.ResumeLayout(false);
 
 		}

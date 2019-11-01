@@ -128,6 +128,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.buttonAddQualificationNumber);
 			this.groupBox1.Controls.Add(this.button3);
 			this.groupBox1.Controls.Add(this.button2);
 			this.groupBox1.Controls.Add(this.metroTextBox1);
@@ -162,7 +163,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button3.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button3.Location = new System.Drawing.Point(160, 310);
+			this.button3.Location = new System.Drawing.Point(62, 314);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(125, 33);
 			this.button3.TabIndex = 269;
@@ -176,7 +177,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button2.Location = new System.Drawing.Point(79, 275);
+			this.button2.Location = new System.Drawing.Point(62, 275);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(125, 33);
 			this.button2.TabIndex = 268;
@@ -263,9 +264,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button1.Location = new System.Drawing.Point(210, 275);
+			this.button1.Location = new System.Drawing.Point(193, 314);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 33);
+			this.button1.Size = new System.Drawing.Size(95, 33);
 			this.button1.TabIndex = 249;
 			this.button1.Text = "Apply";
 			this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -931,11 +932,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.buttonAddQualificationNumber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonAddQualificationNumber.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonAddQualificationNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonAddQualificationNumber.Location = new System.Drawing.Point(916, 705);
+			this.buttonAddQualificationNumber.Location = new System.Drawing.Point(193, 276);
 			this.buttonAddQualificationNumber.Name = "buttonAddQualificationNumber";
-			this.buttonAddQualificationNumber.Size = new System.Drawing.Size(197, 33);
+			this.buttonAddQualificationNumber.Size = new System.Drawing.Size(95, 33);
 			this.buttonAddQualificationNumber.TabIndex = 318;
-			this.buttonAddQualificationNumber.Text = "Add Qualification Number";
+			this.buttonAddQualificationNumber.Text = "Add QO №";
 			this.buttonAddQualificationNumber.Click += new System.EventHandler(this.buttonAddQualificationNumber_Click);
 			// 
 			// QuatationOrderFormNew
@@ -943,7 +944,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1288, 752);
-			this.Controls.Add(this.buttonAddQualificationNumber);
 			this.Controls.Add(this.buttonAddSupplierForAll);
 			this.Controls.Add(this.comboBox1);
 			this.Controls.Add(this.documentControl10);
