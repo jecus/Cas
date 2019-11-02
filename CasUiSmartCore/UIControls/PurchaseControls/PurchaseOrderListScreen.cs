@@ -244,7 +244,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_toolStripMenuItemDelete.Click += ToolStripMenuItemDeleteClick;
 
 			_toolStripMenuItemReport.Text = "Show Report";
-			_toolStripMenuItemReport.Click += _toolStripMenuItemReport_Click; ;
+			_toolStripMenuItemReport.Click += _toolStripMenuItemReport_Click; 
 
 			_contextMenuStrip.Items.Clear();
 			_contextMenuStrip.Items.AddRange(new RadItem[]
@@ -265,50 +265,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private void ToolStripMenuItemSendMailClick(object sender, EventArgs e)
 		{
-			if (_directivesViewer.SelectedItem == null)
-				return; ;
-
-			var _order = _directivesViewer.SelectedItem;
-			var records = GlobalObjects.CasEnvironment.Loader.GetObjectList<PurchaseRequestRecord>(new ICommonFilter[] { new CommonFilter<int>(PurchaseRequestRecord.ParentPackageIdProperty, _order.ItemId) });
-			var ids = records.Select(s => s.SupplierId).Distinct().ToArray();
-			var productIds = records.Select(s => s.PackageItemId).Distinct().ToArray();
-			var suppliers = GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[] { new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids), });
-			var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new ICommonFilter[] { new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, productIds), });
+			PrepareOrder(true);
 
 			
-			var parentInitialId = (int)GlobalObjects.CasEnvironment.Execute($@"select i.ItemId from PurchaseOrders p
-			left join RequestsForQuotation q on q.ItemID = p.ParentID
-			left join InitialOrders i on i.ItemID = q.ParentID where p.ItemId = {_order.ItemId}").Tables[0].Rows[0][0];
-			var initialRecords = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(new Filter("ParentPackageId", parentInitialId));
-			var initial = GlobalObjects.CasEnvironment.NewLoader.GetObject<InitialOrderDTO, InitialOrder>(new Filter("ItemId", parentInitialId));
-
-			var publisherId = GlobalObjects.CasEnvironment.ApiProvider.GetByIdAsync(_directivesViewer.SelectedItem.PublishedById)?.PersonnelId ?? -1;
-
-			var personnel = GlobalObjects.CasEnvironment.Loader.GetObject<Specialist>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, publisherId));
-
-			var destinations = new List<BaseEntityObject>();
-			destinations.AddRange(GlobalObjects.AircraftsCore.GetAllAircrafts().ToArray());
-			destinations.AddRange(GlobalObjects.CasEnvironment.Stores.GetValidEntries());
-			destinations.AddRange(GlobalObjects.CasEnvironment.Hangars.GetValidEntries());
-
-			foreach (var record in records)
-			{
-				record.ParentInitialRecord = initialRecords.FirstOrDefault(i => i.ProductId == record.PackageItemId);
-				if (record.ParentInitialRecord != null)
-					record.ParentInitialRecord.ParentPackage = initial;
-				record.Product = products.FirstOrDefault(i => i.ItemId == record.PackageItemId);
-				record.Supplier = suppliers.FirstOrDefault(i => i.ItemId == record.SupplierId);
-
-				if (record.ParentInitialRecord != null)
-					record.ParentInitialRecord.DestinationObject = destinations.FirstOrDefault(i =>
-						i.ItemId == record.ParentInitialRecord.DestinationObjectId &&
-						record.ParentInitialRecord.DestinationObjectType.ItemId == i.SmartCoreObjectType.ItemId);
-			}
-
-			_order.Supplier = records.FirstOrDefault(i => i.Supplier != null).Supplier;
-			var setting = GlobalObjects.CasEnvironment.NewLoader.GetObject<SettingDTO, Settings>();
-			var sendMail = new MailSender(setting.GlobalSetting.MailSettings);
-			sendMail.SendEmail(records,"mgladilov@mail.ru", personnel);
 			
 		}
 
@@ -317,6 +276,13 @@ namespace CAS.UI.UIControls.PurchaseControls
 		#region private void _toolStripMenuItemReport_Click(object sender, EventArgs e)
 
 		private void _toolStripMenuItemReport_Click(object sender, EventArgs e)
+		{
+			PrepareOrder();
+		}
+
+		#endregion
+
+		private void PrepareOrder(bool isMailSend = false)
 		{
 			if (_directivesViewer.SelectedItem == null)
 				return; ;
@@ -344,7 +310,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			destinations.AddRange(GlobalObjects.AircraftsCore.GetAllAircrafts().ToArray());
 			destinations.AddRange(GlobalObjects.CasEnvironment.Stores.GetValidEntries());
 			destinations.AddRange(GlobalObjects.CasEnvironment.Hangars.GetValidEntries());
-			
+
 			foreach (var record in records)
 			{
 				record.ParentInitialRecord = initialRecords.FirstOrDefault(i => i.ProductId == record.PackageItemId);
@@ -366,16 +332,40 @@ namespace CAS.UI.UIControls.PurchaseControls
 					"Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 				return;
 			}
-			
-			var builder = new PurchaseOrderReportNewBuilder(GlobalObjects.CasEnvironment.Operators[0], records, _order, department, personnel);
-			var refArgs = new ReferenceEventArgs();
-			refArgs.TypeOfReflection = ReflectionTypes.DisplayInNew;
-			refArgs.DisplayerText = $"iPurchaseOrderReport {_directivesViewer.SelectedItem.Title}";
-			refArgs.RequestedEntity = new ReportScreen(builder);
-			Program.MainDispatcher.DisplayerRequest(refArgs);
-		}
 
-		#endregion
+			var builder = new PurchaseOrderReportNewBuilder(GlobalObjects.CasEnvironment.Operators[0], records, _order, department, personnel);
+
+			PdfRtfWordFormatOptions CrFormatTypeOptions = new PdfRtfWordFormatOptions();
+			if (!isMailSend)
+			{
+				var refArgs = new ReferenceEventArgs();
+				refArgs.TypeOfReflection = ReflectionTypes.DisplayInNew;
+				refArgs.DisplayerText = $"iPurchaseOrderReport {_directivesViewer.SelectedItem.Title}";
+				refArgs.RequestedEntity = new ReportScreen(builder);
+				Program.MainDispatcher.DisplayerRequest(refArgs);
+				refArgs.Cancel = false;
+			}
+			else
+			{
+				var doc = (PurchaseOrderReportNew)builder.GenerateReport();
+				ExportOptions CrExportOptions;
+				var CrDiskFileDestinationOptions = new DiskFileDestinationOptions();
+				CrDiskFileDestinationOptions.DiskFileName = "C:\\SampleReport.pdf";
+				CrExportOptions = doc.ExportOptions;
+				{
+					CrExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
+					CrExportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
+					CrExportOptions.DestinationOptions = CrDiskFileDestinationOptions;
+					CrExportOptions.FormatOptions = CrFormatTypeOptions;
+				}
+				var stream = doc.ExportToStream(ExportFormatType.PortableDocFormat);
+
+				var setting = GlobalObjects.CasEnvironment.NewLoader.GetObject<SettingDTO, Settings>();
+				var sendMail = new MailSender(setting.GlobalSetting.MailSettings);
+				sendMail.SendEmail(records, "evgenii.babak@gmail.com", personnel, stream);
+			}
+			
+		}
 
 		private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
 		{

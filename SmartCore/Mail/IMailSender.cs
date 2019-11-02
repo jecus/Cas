@@ -51,7 +51,7 @@ namespace SmartCore.Mail
 				};
 
 				if (stream != null)
-					mail.Attachments.Add(new Attachment(stream, "pdf"));
+					mail.Attachments.Add(new Attachment(stream, "Order.pdf"));
 
 				client.Host = _settings.Host;
 				client.Port = _settings.Port;
