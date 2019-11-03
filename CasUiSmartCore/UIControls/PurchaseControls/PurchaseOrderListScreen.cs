@@ -360,8 +360,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				}
 				var stream = doc.ExportToStream(ExportFormatType.PortableDocFormat);
 
-				var setting = GlobalObjects.CasEnvironment.NewLoader.GetObject<SettingDTO, Settings>();
-				var sendMail = new MailSender(setting.GlobalSetting.MailSettings);
+				var sendMail = new MailSender(GlobalObjects.CasEnvironment.NewLoader);
 				sendMail.SendPurchaseEmail(records, "", personnel, stream);
 			}
 			

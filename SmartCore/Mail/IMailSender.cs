@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Windows.Forms;
+using EntityCore.DTO.General;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Personnel;
 using SmartCore.Entities.General.Setting;
+using SmartCore.Entities.NewLoader;
 using SmartCore.Purchase;
 
 namespace SmartCore.Mail
@@ -15,19 +18,19 @@ namespace SmartCore.Mail
 	{
 		bool CheckForInternetConnection();
 		void SendPurchaseEmail(List<PurchaseRequestRecord> records, string to, Specialist personnel, Stream stream = null);
-		void SendQuotationEmail(List<RequestForQuotationRecord> records, string to, Specialist personnel);
+		void SendQuotationEmail(List<PurchaseRequestRecord> records, string to, Specialist personnel);
 	}
 
 
 	public class MailSender : IMailSender
 	{
 		private readonly MailSettings _settings;
-		
-		public MailSender(MailSettings settings)
+
+		public MailSender(INewLoader loader)
 		{
-			_settings = settings;
+			_settings = loader.GetObject<SettingDTO, Settings>()?.GlobalSetting.MailSettings; 
 		}
-		
+
 		#region Implementation of IMailSender
 
 		public void SendPurchaseEmail(List<PurchaseRequestRecord> records, string to, Specialist personnel, Stream stream = null)
@@ -35,7 +38,7 @@ namespace SmartCore.Mail
 			sendMessage(to, "", "", stream);
 		}
 
-		public void SendQuotationEmail(List<RequestForQuotationRecord> records, string to, Specialist personnel)
+		public void SendQuotationEmail(List<PurchaseRequestRecord> records, string to, Specialist personnel)
 		{
 			sendMessage(to, GenerateQuotationTemplate(records, personnel), "");
 		}
@@ -50,7 +53,7 @@ namespace SmartCore.Mail
 					From = new MailAddress(_settings.Mail),
 					To =
 					{
-						new MailAddress("avalon-company@mail.ru")
+						new MailAddress("evgenii.babak@gmail.com")
 					},
 					Subject = subject,
 					IsBodyHtml = true,
@@ -89,7 +92,7 @@ namespace SmartCore.Mail
 
 		#endregion
 
-		private string GenerateQuotationTemplate(List<RequestForQuotationRecord> orderRecords, Specialist specialist)
+		private string GenerateQuotationTemplate(List<PurchaseRequestRecord> orderRecords, Specialist specialist)
 		{
 			var data = "";
 			foreach (var record in orderRecords)
@@ -102,7 +105,7 @@ namespace SmartCore.Mail
 					<td>{record.Product.Name}</td>
 					<td>{record.Product.PartNumber}</td>
 					<td>{record.Quantity:F1}</td> 
-					<td>{record.ParentInitialRecord.Priority}</td>т
+					<td>{record.ParentInitialRecord.Priority}</td>
 					</tr>";
 			}
 
@@ -116,11 +119,7 @@ namespace SmartCore.Mail
 				["{Specialization}"] = specialization,
 			};
 
-			var res = "";
-			foreach (var placeholder in placeholders)
-				res = _quotationTemplate.Replace(placeholder.Key, placeholder.Value);
-
-			return res;
+			return placeholders.Aggregate(_quotationTemplate, (current, placeholder) => current.Replace(placeholder.Key, placeholder.Value));
 		}
 
 		private static string _quotationTemplate => @"

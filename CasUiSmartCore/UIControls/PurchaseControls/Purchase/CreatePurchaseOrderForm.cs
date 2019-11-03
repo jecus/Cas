@@ -30,6 +30,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private List<SupplierPrice> _prices = new List<SupplierPrice>();
 		private PurchaseOrder _order;
 		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
+		private IList<InitialOrderRecord> _initialRecords = new List<InitialOrderRecord>();
 
 		#endregion
 
@@ -94,13 +95,13 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 					$@"select i.ItemId from RequestsForQuotation q
 			left join InitialOrders i on i.ItemID = q.ParentID where q.ItemId = {_quotation.ItemId}").Tables[0]
 				.Rows[0][0];
-			var initialRecords =
+			_initialRecords =
 				GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(
 					new Filter("ParentPackageId", parentInitialId));
 
 			foreach (var record in records)
 			{
-				record.ParentInitialRecord = initialRecords.FirstOrDefault(i => i.ProductId == record.PackageItemId);
+				record.ParentInitialRecord = _initialRecords.FirstOrDefault(i => i.ProductId == record.PackageItemId);
 				record.Product = products.FirstOrDefault(i => i.ItemId == record.PackageItemId);
 				foreach (var price in record.SupplierPrice)
 				{
@@ -438,11 +439,15 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		private void ButtonOk_Click(object sender, EventArgs e)
 		{
-			var personnel = GlobalObjects.CasEnvironment.Loader.GetObject<Specialist>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, _order.PublishedById));
+			var personnel = GlobalObjects.CasEnvironment.Loader.GetObject<Specialist>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, GlobalObjects.CasEnvironment.IdentityUser.PersonnelId));
+			var destinations = new List<BaseEntityObject>();
+			destinations.AddRange(GlobalObjects.AircraftsCore.GetAllAircrafts().ToArray());
+			destinations.AddRange(GlobalObjects.CasEnvironment.Stores.GetValidEntries());
+			destinations.AddRange(GlobalObjects.CasEnvironment.Hangars.GetValidEntries());
 
 			if (personnel == null)
 			{
-				MessageBox.Show($"Please attach personnel for user ({_order.PublishedByUser})",
+				MessageBox.Show($"Please attach personnel for user ({GlobalObjects.CasEnvironment.IdentityUser.ItemId})",
 					"Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 			}
 
@@ -480,12 +485,17 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 					{
 						record.ParentPackageId = copy.ItemId;
 						GlobalObjects.CasEnvironment.NewKeeper.Save(record);
+
+						record.ParentInitialRecord = _initialRecords.FirstOrDefault(i => i.ProductId == record.PackageItemId);
+						if (record.ParentInitialRecord != null)
+							record.ParentInitialRecord.DestinationObject = destinations.FirstOrDefault(i =>
+								i.ItemId == record.ParentInitialRecord.DestinationObjectId &&
+								record.ParentInitialRecord.DestinationObjectType.ItemId == i.SmartCoreObjectType.ItemId);
 					}
 
 					//рассылаем письма
-					var setting = GlobalObjects.CasEnvironment.NewLoader.GetObject<SettingDTO, Settings>();
-					var sendMail = new MailSender(setting.GlobalSetting.MailSettings);
-					sendMail.SendPurchaseEmail(g.ToList(), "", personnel);
+					var sendMail = new MailSender(GlobalObjects.CasEnvironment.NewLoader);
+					sendMail.SendQuotationEmail(g.ToList(), "", personnel);
 				}
 
 				DialogResult = DialogResult.OK;
