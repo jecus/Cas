@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SmartCore.Calculations.MTOP.Interfaces;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.MaintenanceWorkscope;
@@ -17,12 +18,12 @@ namespace SmartCore.Calculations.MTOP
 
 		Dictionary<int, Lifelength> CalculateGroupNew(List<MTOPCheck> checks);
 
-		void CalculateDirective(MaintenanceDirective directive, AverageUtilization averageUtilization);
+		void CalculateDirective(IMtopCalc directive, AverageUtilization averageUtilization);
 
-		void CalculatePhase(CommonCollection<MaintenanceDirective> directives, List<MTOPCheck> checks,
+		void CalculatePhase(IEnumerable<IMtopCalc> directives, List<MTOPCheck> checks,
 			AverageUtilization averageUtilization, bool isZeroPhase = false);
 
-		void CalculatePhaseWithPerformance(CommonCollection<MaintenanceDirective> directives, List<MTOPCheck> checks,
+		void CalculatePhaseWithPerformance(IEnumerable<IMtopCalc> directives, List<MTOPCheck> checks,
 			AverageUtilization averageUtilization, DateTime from, DateTime to, bool isZeroPhase = false);
 	}
 }

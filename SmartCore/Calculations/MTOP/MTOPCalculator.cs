@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using SmartCore.Aircrafts;
-using SmartCore.Entities.Collections;
+using SmartCore.Calculations.MTOP.Interfaces;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.MTOP;
 
 namespace SmartCore.Calculations.MTOP
@@ -465,19 +464,19 @@ namespace SmartCore.Calculations.MTOP
 			return res;
 		}
 
-		public void CalculateDirective(MaintenanceDirective directive,AverageUtilization averageUtilization)
+		public void CalculateDirective(IMtopCalc directive, AverageUtilization averageUtilization)
 		{
 			double hours = 0, cycles = 0, days = 0;
 			double hoursPhase = -1, cyclesPhase = -1, daysPhase = -1;
 
-			directive.PhaseThresh = new Lifelength(0,0,0);
+			directive.PhaseThresh = new Lifelength(0, 0, 0);
 
 			var thresh = !directive.Threshold.FirstPerformanceSinceNew.IsNullOrZero() ? directive.Threshold.FirstPerformanceSinceNew : directive.Threshold.FirstPerformanceSinceEffectiveDate;
 
 			var threshHours = thresh.Hours;
 			if (directive.APUCalc && threshHours.HasValue)
 			{
-				var aircraft = _aircraftsCore.GetAircraftById(directive.ParentBaseComponent.ParentAircraftId);
+				var aircraft = _aircraftsCore.GetAircraftById(directive.ParentAircraftId);
 				threshHours = (int?)(thresh.Hours / aircraft.APUFH);
 			}
 
@@ -485,7 +484,7 @@ namespace SmartCore.Calculations.MTOP
 			{
 				hours = (double)(thresh.Days * averageUtilization.Hours);
 				cycles = hours / averageUtilization.Cycles;
-				days = (double) thresh.Days;
+				days = (double)thresh.Days;
 			}
 			else if (threshHours.HasValue)
 			{
@@ -493,9 +492,9 @@ namespace SmartCore.Calculations.MTOP
 				cycles = hours / averageUtilization.Cycles;
 				days = (double)(threshHours / averageUtilization.HoursPerDay);
 			}
-			else if(thresh.Cycles.HasValue)
+			else if (thresh.Cycles.HasValue)
 			{
-				cycles = (double) thresh.Cycles;
+				cycles = (double)thresh.Cycles;
 				days = (double)(thresh.Cycles / (averageUtilization.Hours / averageUtilization.CyclesPerDay));
 				hours = days * averageUtilization.Hours;
 			}
@@ -507,7 +506,7 @@ namespace SmartCore.Calculations.MTOP
 
 				if (cycleDays > days)
 				{
-					daysPhase = (int) (threshHours / averageUtilization.HoursPerDay);
+					daysPhase = (int)(threshHours / averageUtilization.HoursPerDay);
 					cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
 					hoursPhase = daysPhase * averageUtilization.Hours;
 				}
@@ -525,7 +524,7 @@ namespace SmartCore.Calculations.MTOP
 					}
 				}
 			}
-			else if (cycles> thresh.Cycles)
+			else if (cycles > thresh.Cycles)
 			{
 				daysPhase = (int)(thresh.Cycles / (averageUtilization.Hours / averageUtilization.CyclesPerDay));
 				cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
@@ -556,7 +555,7 @@ namespace SmartCore.Calculations.MTOP
 			directive.PhaseThresh.Cycles = (int)Math.Round(cyclesPhase > -1 ? cyclesPhase : cycles);
 			directive.PhaseThresh.Days = (int)Math.Round(daysPhase > -1 ? daysPhase : days);
 
-			
+
 
 			var repeat = directive.Threshold.RepeatInterval;
 			directive.PhaseRepeat = new Lifelength(0, 0, 0);
@@ -568,7 +567,7 @@ namespace SmartCore.Calculations.MTOP
 
 				if (directive.APUCalc && repeatHours.HasValue)
 				{
-					var aircraft = _aircraftsCore.GetAircraftById(directive.ParentBaseComponent.ParentAircraftId);
+					var aircraft = _aircraftsCore.GetAircraftById(directive.ParentAircraftId);
 					//directive.PhaseRepeat = new Lifelength(repeat);
 					repeatHours = (int?)(repeatHours / aircraft.APUFH);
 				}
@@ -581,7 +580,7 @@ namespace SmartCore.Calculations.MTOP
 				{
 					hours = (double)(repeat.Days * averageUtilization.Hours);
 					cycles = hours / averageUtilization.Cycles;
-					days = (double) repeat.Days;
+					days = (double)repeat.Days;
 				}
 				else if (repeatHours.HasValue)
 				{
@@ -591,7 +590,7 @@ namespace SmartCore.Calculations.MTOP
 				}
 				else if (repeat.Cycles.HasValue)
 				{
-					cycles = (double) repeat.Cycles;
+					cycles = (double)repeat.Cycles;
 					days = (double)(repeat.Cycles / (averageUtilization.Hours / averageUtilization.CyclesPerDay));
 					hours = days * averageUtilization.Hours;
 				}
@@ -599,7 +598,7 @@ namespace SmartCore.Calculations.MTOP
 
 				if (cycles > repeat.Cycles && hours > repeatHours)
 				{
-					var cycleDays = (int) (cycles / (averageUtilization.Hours / averageUtilization.CyclesPerDay));
+					var cycleDays = (int)(cycles / (averageUtilization.Hours / averageUtilization.CyclesPerDay));
 
 					if (cycleDays > days)
 					{
@@ -655,13 +654,13 @@ namespace SmartCore.Calculations.MTOP
 
 		}
 
-		public void CalculatePhase(CommonCollection<MaintenanceDirective> directives, List<MTOPCheck> checks, AverageUtilization averageUtilization, bool isZeroPhase = false)
+		public void CalculatePhase(IEnumerable<IMtopCalc> directives, List<MTOPCheck> checks, AverageUtilization averageUtilization, bool isZeroPhase = false)
 		{
 			foreach (var directive in directives)
 				calculatePhase(directive, checks, averageUtilization, isZeroPhase);
 		}
 
-		public void CalculatePhaseWithPerformance(CommonCollection<MaintenanceDirective> directives, List<MTOPCheck> checks, AverageUtilization averageUtilization, DateTime from, DateTime to, bool isZeroPhase = false)
+		public void CalculatePhaseWithPerformance(IEnumerable<IMtopCalc> directives, List<MTOPCheck> checks, AverageUtilization averageUtilization, DateTime from, DateTime to, bool isZeroPhase = false)
 		{
 			foreach (var directive in directives)
 			{
@@ -937,13 +936,13 @@ namespace SmartCore.Calculations.MTOP
 						// whichever first
 
 						// состояние директивы - просрочена или нормально
-						np.Condition = computeConditionState(directive, np.LimitNotify, np.LimitOverdue, np.Remains, current, notify, x => x.IsOverdue(), x => x.IsLessByAnyParameter(notify));
+						np.Condition = computeConditionState(directive, np.LimitNotify, np.LimitOverdue, np.Remains, current, notify, x => x.IsOverdue(), x => x.IsLessByAnyParameter(notify), conditionType);
 
 					}
 					else // whichever later
 					{
 						// директива просрочена только в том случае, когда она просрочена по всем параметрам
-						np.Condition = computeConditionState(directive, np.LimitNotify, np.LimitOverdue, np.Remains, current, notify, x => x.IsAllOverdue(), x => x.IsLess(notify));
+						np.Condition = computeConditionState(directive, np.LimitNotify, np.LimitOverdue, np.Remains, current, notify, x => x.IsAllOverdue(), x => x.IsLess(notify), conditionType);
 					}
 
 
@@ -970,7 +969,7 @@ namespace SmartCore.Calculations.MTOP
 			}
 		}
 
-		private void calculatePhase(MaintenanceDirective directive, List<MTOPCheck> checks, AverageUtilization averageUtilization, bool isZeroPhase = false)
+		private void calculatePhase(IMtopCalc directive, List<MTOPCheck> checks, AverageUtilization averageUtilization, bool isZeroPhase = false)
 		{
 			CalculateDirective(directive, averageUtilization);
 
@@ -1034,7 +1033,9 @@ namespace SmartCore.Calculations.MTOP
 		}
 
 
-		private ConditionState computeConditionState(IDirective directive, Lifelength limitNotify, Lifelength limitOverdue, Lifelength remains,		Lifelength current, Lifelength notify, Func<Lifelength, bool> getIsOverdueFunc, Func<Lifelength, bool> getIsLessFunc)
+		private ConditionState computeConditionState(IDirective directive, Lifelength limitNotify, Lifelength limitOverdue, Lifelength remains,	
+			Lifelength current, Lifelength notify, Func<Lifelength, bool> getIsOverdueFunc,
+			Func<Lifelength, bool> getIsLessFunc, ThresholdConditionType whicheverFirst)
 		{
 			if (notify != null && !notify.IsNullOrZero())
 			{
@@ -1048,12 +1049,30 @@ namespace SmartCore.Calculations.MTOP
 				}
 
 
-				if (current.IsGreaterByAnyParameter(limitOverdue))
-					return ConditionState.Overdue;
+				var optimizedCurrent = new Lifelength(current);
+				optimizedCurrent.Resemble(limitOverdue);
 
+				var optimizedCurrentNotify = new Lifelength(notify);
+				optimizedCurrentNotify.Resemble(remains);
 
-				if (limitOverdue.IsGreaterByAnyParameter(current) && current.IsGreaterByAnyParameter(limitNotify))
-					return ConditionState.Notify;
+				if (whicheverFirst == ThresholdConditionType.WhicheverFirst)
+				{
+					if (optimizedCurrent.IsGreaterByAnyParameter(limitOverdue))
+						return ConditionState.Overdue;
+
+					if (remains.IsLessByAnyParameter(optimizedCurrentNotify))
+						return ConditionState.Notify;
+				}
+				else
+				{
+
+					if (optimizedCurrent.IsGreaterNew(limitOverdue))
+						return ConditionState.Overdue;
+
+					if (remains.IsLessNew(optimizedCurrentNotify))
+						return ConditionState.Notify;
+				}
+
 
 				return ConditionState.Satisfactory;
 

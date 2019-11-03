@@ -419,6 +419,7 @@
     <Compile Include="Calculations\Maintenance\MaintenanceCheckRecordGroup.cs" />
     <Compile Include="Calculations\Maintenance\MaintenanceCheckTypeGroup.cs" />
     <Compile Include="Calculations\MTOP\IMTOPCalculator.cs" />
+    <Compile Include="Calculations\MTOP\Interfaces\IMtopCalc.cs" />
     <Compile Include="Calculations\MTOP\MTOPCalculator.cs" />
     <Compile Include="Calculations\NextPerformance.cs" />
     <Compile Include="Calculations\PerformanceCalculator\IPerformanceCalculator.cs" />
