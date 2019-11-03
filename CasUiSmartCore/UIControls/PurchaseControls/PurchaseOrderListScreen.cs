@@ -362,7 +362,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 				var setting = GlobalObjects.CasEnvironment.NewLoader.GetObject<SettingDTO, Settings>();
 				var sendMail = new MailSender(setting.GlobalSetting.MailSettings);
-				sendMail.SendEmail(records, "evgenii.babak@gmail.com", personnel, stream);
+				sendMail.SendPurchaseEmail(records, "", personnel, stream);
 			}
 			
 		}

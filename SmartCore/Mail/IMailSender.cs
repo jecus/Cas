@@ -4,7 +4,6 @@ using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Windows.Forms;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Personnel;
 using SmartCore.Entities.General.Setting;
@@ -14,7 +13,9 @@ namespace SmartCore.Mail
 {
 	public interface IMailSender
 	{
-		void SendEmail(List<PurchaseRequestRecord> @from, string to, Specialist personnel, Stream stream = null);
+		bool CheckForInternetConnection();
+		void SendPurchaseEmail(List<PurchaseRequestRecord> records, string to, Specialist personnel, Stream stream = null);
+		void SendQuotationEmail(List<RequestForQuotationRecord> records, string to, Specialist personnel);
 	}
 
 
@@ -29,12 +30,19 @@ namespace SmartCore.Mail
 		
 		#region Implementation of IMailSender
 
-		public void SendEmail(List<PurchaseRequestRecord> orderRecords, string to, Specialist personnel,
-			Stream stream = null)
+		public void SendPurchaseEmail(List<PurchaseRequestRecord> records, string to, Specialist personnel, Stream stream = null)
+		{
+			sendMessage(to, "", "", stream);
+		}
+
+		public void SendQuotationEmail(List<RequestForQuotationRecord> records, string to, Specialist personnel)
+		{
+			sendMessage(to, GenerateQuotationTemplate(records, personnel), "");
+		}
+
+		private void sendMessage(string toMail, string body , string subject, Stream stream = null)
 		{
 			var client = new SmtpClient();
-			client.SendCompleted += Client_SendCompleted;
-
 			try
 			{
 				var mail = new MailMessage
@@ -42,12 +50,11 @@ namespace SmartCore.Mail
 					From = new MailAddress(_settings.Mail),
 					To =
 					{
-						new MailAddress(to)
+						new MailAddress("avalon-company@mail.ru")
 					},
-					Subject = "",
+					Subject = subject,
 					IsBodyHtml = true,
-					Body = GeneratePurchaseTemplate(orderRecords, personnel)
-
+					Body = body
 				};
 
 				if (stream != null)
@@ -59,7 +66,6 @@ namespace SmartCore.Mail
 				client.Credentials = new NetworkCredential(_settings.Mail, _settings.Password);
 				client.DeliveryMethod = SmtpDeliveryMethod.Network;
 				client.Send(mail);
-				mail.Dispose();
 			}
 			catch (Exception e)
 			{
@@ -67,14 +73,23 @@ namespace SmartCore.Mail
 			}
 		}
 
-		private void Client_SendCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+		public bool CheckForInternetConnection()
 		{
-			MessageBox.Show("Mail sent successful!");
+			try
+			{
+				using (var client = new WebClient())
+				using (client.OpenRead("http://google.com/generate_204"))
+					return true;
+			}
+			catch
+			{
+				return false;
+			}
 		}
 
 		#endregion
 
-		private string GeneratePurchaseTemplate(List<PurchaseRequestRecord> orderRecords, Specialist specialist)
+		private string GenerateQuotationTemplate(List<RequestForQuotationRecord> orderRecords, Specialist specialist)
 		{
 			var data = "";
 			foreach (var record in orderRecords)
@@ -86,18 +101,29 @@ namespace SmartCore.Mail
 				data += $@"<tr><td> {destination}</td>
 					<td>{record.Product.Name}</td>
 					<td>{record.Product.PartNumber}</td>
-					<td>{record.Quantity.ToString("F1")}</td> 
-					<td>{record.ParentInitialRecord.Priority}</td>
+					<td>{record.Quantity:F1}</td> 
+					<td>{record.ParentInitialRecord.Priority}</td>т
 					</tr>";
 			}
 
 			var personnel = specialist.FirstName + " " + specialist.LastName;
 			var specialization = specialist.Specialization.ToString();
+			
+			var placeholders = new Dictionary<string,string>
+			{
+				["{Data}"] = data,
+				["{Personnel}"] = personnel,
+				["{Specialization}"] = specialization,
+			};
 
-			return _purchaseTemplate.Replace("{Data}", data).Replace("{Personnel}", personnel).Replace("{Specialization}", specialization);
+			var res = "";
+			foreach (var placeholder in placeholders)
+				res = _quotationTemplate.Replace(placeholder.Key, placeholder.Value);
+
+			return res;
 		}
 
-		private static string _purchaseTemplate => @"
+		private static string _quotationTemplate => @"
 			<p><em>Dear Colleagues,</em></p>
 				<p>&nbsp;</p>
 			<p><em>Please quote:</em></p>				

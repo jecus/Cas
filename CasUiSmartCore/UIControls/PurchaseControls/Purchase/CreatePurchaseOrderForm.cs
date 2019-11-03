@@ -12,7 +12,10 @@ using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
+using SmartCore.Entities.General.Personnel;
+using SmartCore.Entities.General.Setting;
 using SmartCore.Filters;
+using SmartCore.Mail;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls.Purchase
@@ -435,7 +438,15 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		private void ButtonOk_Click(object sender, EventArgs e)
 		{
-			if (textBoxTitle.Text == "")
+			var personnel = GlobalObjects.CasEnvironment.Loader.GetObject<Specialist>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, _order.PublishedById));
+
+			if (personnel == null)
+			{
+				MessageBox.Show($"Please attach personnel for user ({_order.PublishedByUser})",
+					"Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+			}
+
+			else if (textBoxTitle.Text == "")
 			{
 				MessageBox.Show("Please, enter a Title", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
@@ -470,6 +481,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 						record.ParentPackageId = copy.ItemId;
 						GlobalObjects.CasEnvironment.NewKeeper.Save(record);
 					}
+
+					//рассылаем письма
+					var setting = GlobalObjects.CasEnvironment.NewLoader.GetObject<SettingDTO, Settings>();
+					var sendMail = new MailSender(setting.GlobalSetting.MailSettings);
+					sendMail.SendPurchaseEmail(g.ToList(), "", personnel);
 				}
 
 				DialogResult = DialogResult.OK;
