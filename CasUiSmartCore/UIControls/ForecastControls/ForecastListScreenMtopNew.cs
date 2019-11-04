@@ -15,11 +15,11 @@ using CASTerms;
 using EntityCore.DTO.General;
 using EntityCore.Filter;
 using SmartCore.Calculations;
+using SmartCore.Calculations.MTOP.Interfaces;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.MTOP;
@@ -293,8 +293,8 @@ namespace CAS.UI.UIControls.ForecastControls
         #region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
         protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
         {
-	        var initialZeroMaintenanceDirectives = new CommonCollection<MaintenanceDirective>();
-	        var initialMaintenanceDirectives = new CommonCollection<MaintenanceDirective>();
+	        var zeroMtopDirectives = new List<IMtopCalc>();
+	        var mtopDirectives = new List<IMtopCalc>();
 	        _groupLifelengths.Clear();
 	        _groupLifelengthsForZeroCheck.Clear();
 
@@ -317,111 +317,8 @@ namespace CAS.UI.UIControls.ForecastControls
 					        return;
 				        }
 
-				        //AnimatedThreadWorker.ReportProgress(0, "calculation of Maintenance checks");
-				        //GlobalObjects.AnalystCore.GetMaintenanceCheck(_currentForecast);
-				        //directives.AddRange(_currentForecast.MaintenanceChecks.ToArray());
 
-				        //if (AnimatedThreadWorker.CancellationPending)
-				        //{
-					       // e.Cancel = true;
-					       // return;
-				        //}
-
-				        AnimatedThreadWorker.ReportProgress(0, "calculation of Base details");
-				        GlobalObjects.AnalystCore.GetBaseComponentsAndComponentDirectives(_currentForecast);
-				        directives.AddRange(_currentForecast.BaseComponents.ToArray());
-				        directives.AddRange(_currentForecast.BaseComponentDirectives.ToArray());
-
-				        if (AnimatedThreadWorker.CancellationPending)
-				        {
-					        e.Cancel = true;
-					        return;
-				        }
-
-				        AnimatedThreadWorker.ReportProgress(18, "calculation of Components");
-				        GlobalObjects.AnalystCore.GetComponentsAndComponentDirectives(_currentForecast);
-				        directives.AddRange(_currentForecast.Components.ToArray());
-				        directives.AddRange(_currentForecast.ComponentDirectives.ToArray());
-
-				        if (AnimatedThreadWorker.CancellationPending)
-				        {
-					        e.Cancel = true;
-					        return;
-				        }
-
-				        AnimatedThreadWorker.ReportProgress(27, "calculation of Airworthiness directives");
-				        GlobalObjects.AnalystCore.GetDirectives(_currentForecast, DirectiveType.AirworthenessDirectives);
-				        directives.AddRange(_currentForecast.AdStatus.ToArray());
-
-				        if (AnimatedThreadWorker.CancellationPending)
-				        {
-					        e.Cancel = true;
-					        return;
-				        }
-
-				        AnimatedThreadWorker.ReportProgress(36, "calculation of Damages");
-				        GlobalObjects.AnalystCore.GetDirectives(_currentForecast, DirectiveType.DamagesRequiring);
-				        directives.AddRange(_currentForecast.Damages.ToArray());
-
-				        if (AnimatedThreadWorker.CancellationPending)
-				        {
-					        e.Cancel = true;
-					        return;
-				        }
-
-				        AnimatedThreadWorker.ReportProgress(45, "calculation of Deffereds");
-				        GlobalObjects.AnalystCore.GetDirectives(_currentForecast, DirectiveType.DeferredItems);
-				        directives.AddRange(_currentForecast.DefferedItems.ToArray());
-
-				        if (AnimatedThreadWorker.CancellationPending)
-				        {
-					        e.Cancel = true;
-					        return;
-				        }
-
-				        AnimatedThreadWorker.ReportProgress(54, "calculation of Engineering orders");
-				        GlobalObjects.AnalystCore.GetEngineeringOrders(_currentForecast);
-				        //directives.AddRange(_currentForecast.EngineeringOrders.ToArray());
-				        foreach (Directive engineeringOrder in _currentForecast.EngineeringOrders
-					        .Where(engineeringOrder =>
-						        directives.FirstOrDefault(d => d is Directive && d.ItemId == engineeringOrder.ItemId) == null))
-				        {
-					        directives.Add(engineeringOrder);
-				        }
-
-				        if (AnimatedThreadWorker.CancellationPending)
-				        {
-					        e.Cancel = true;
-					        return;
-				        }
-
-				        AnimatedThreadWorker.ReportProgress(63, "calculation of Service bulletins");
-				        GlobalObjects.AnalystCore.GetServiceBulletins(_currentForecast);
-				        //directives.AddRange(_currentForecast.ServiceBulletins.ToArray());
-				        foreach (Directive serviceBulletin in _currentForecast.ServiceBulletins
-					        .Where(serviceBulletin =>
-						        directives.FirstOrDefault(d => d is Directive && d.ItemId == serviceBulletin.ItemId) == null))
-				        {
-					        directives.Add(serviceBulletin);
-				        }
-
-				        if (AnimatedThreadWorker.CancellationPending)
-				        {
-					        e.Cancel = true;
-					        return;
-				        }
-
-				        AnimatedThreadWorker.ReportProgress(72, "calculation of Out of phase");
-				        GlobalObjects.AnalystCore.GetDirectives(_currentForecast, DirectiveType.OutOfPhase);
-				        directives.AddRange(_currentForecast.OutOfPhaseItems.ToArray());
-
-				        if (AnimatedThreadWorker.CancellationPending)
-				        {
-					        e.Cancel = true;
-					        return;
-				        }
-
-				        AnimatedThreadWorker.ReportProgress(81, "calculation of Maintenance Directives");
+				        AnimatedThreadWorker.ReportProgress(81, "calculation of MtopDirectives");
 
 						////////////////////////////////////////////////////////////////
 
@@ -441,20 +338,29 @@ namespace CAS.UI.UIControls.ForecastControls
 
 						AnimatedThreadWorker.ReportProgress(10, "load MPDs");
 
-						initialMaintenanceDirectives.AddRange(GlobalObjects.MaintenanceCore.GetMaintenanceDirectives(CurrentAircraft));
+						var baseComponents = GlobalObjects.ComponentCore.GetAicraftBaseComponents(CurrentAircraft.ItemId);
+						var components = GlobalObjects.ComponentCore.GetComponents(baseComponents.ToList());
+						var componentDirectives = components.SelectMany(i => i.ComponentDirectives);
+
+
+						mtopDirectives.AddRange(GlobalObjects.MaintenanceCore.GetMaintenanceDirectives(CurrentAircraft));
+						mtopDirectives.AddRange(GlobalObjects.DirectiveCore.GetDirectives(CurrentAircraft, DirectiveType.All));
+						mtopDirectives.AddRange(componentDirectives);
 
 				        foreach (var id in _reCalculateIds)
 				        {
-					        var mpd = initialMaintenanceDirectives.FirstOrDefault(i => i.ItemId == id);
+					        var mpd = mtopDirectives.FirstOrDefault(i => i.ItemId == id);
 					        if (mpd != null)
 						        mpd.RecalculateTenPercent = true;
 				        }
 
 
 						var bindedItemsDict = GlobalObjects.BindedItemsCore.GetBindedItemsFor(CurrentAircraft.ItemId,
-							initialMaintenanceDirectives.Where(m => m.WorkItemsRelationType == WorkItemsRelationType.CalculationDepend));
+							mtopDirectives.Where(m => m is MaintenanceDirective)
+								.Cast<MaintenanceDirective>()
+								.Where(m => m.WorkItemsRelationType == WorkItemsRelationType.CalculationDepend));
 
-						CalculateMaintenanceDirectives(initialMaintenanceDirectives.ToList(), bindedItemsDict);
+						CalculateMaintenanceDirectives(mtopDirectives.ToList(), bindedItemsDict);
 
 						if (AnimatedThreadWorker.CancellationPending)
 						{
@@ -488,7 +394,7 @@ namespace CAS.UI.UIControls.ForecastControls
 								GlobalObjects.MTOPCalculator.CalculateNextPerformance(checks.Where(i => !i.IsZeroPhase).ToList(),
 									frame.StartDate, _groupLifelengths, CurrentAircraft, avg, lastCompliance, true);
 
-								GlobalObjects.MTOPCalculator.CalculatePhaseWithPerformance(initialMaintenanceDirectives, checks.Where(i => !i.Thresh.IsNullOrZero() && !i.IsZeroPhase).ToList(), avg, _currentForecast.ForecastDatas[0].LowerLimit, _currentForecast.ForecastDatas[0].ForecastDate);
+								GlobalObjects.MTOPCalculator.CalculatePhaseWithPerformance(mtopDirectives, checks.Where(i => !i.Thresh.IsNullOrZero() && !i.IsZeroPhase).ToList(), avg, _currentForecast.ForecastDatas[0].LowerLimit, _currentForecast.ForecastDatas[0].ForecastDate);
 
 
 								var maintenanceZeroChecks = checks.Where(i => i.IsZeroPhase).ToList();
@@ -508,15 +414,15 @@ namespace CAS.UI.UIControls.ForecastControls
 									GlobalObjects.MTOPCalculator.CalculateNextPerformance(maintenanceZeroChecks, frame.StartDate,
 										_groupLifelengthsForZeroCheck, CurrentAircraft, avg, lastCompliance, true);
 
-									initialZeroMaintenanceDirectives.AddRange(initialMaintenanceDirectives
+									zeroMtopDirectives.AddRange(mtopDirectives
 										.Where(i => i.MTOPPhase?.FirstPhase == 0).ToArray());
 
-									GlobalObjects.MTOPCalculator.CalculatePhaseWithPerformance(initialZeroMaintenanceDirectives, maintenanceZeroChecks, avg, _currentForecast.ForecastDatas[0].LowerLimit, _currentForecast.ForecastDatas[0].ForecastDate, true);
+									GlobalObjects.MTOPCalculator.CalculatePhaseWithPerformance(zeroMtopDirectives, maintenanceZeroChecks, avg, _currentForecast.ForecastDatas[0].LowerLimit, _currentForecast.ForecastDatas[0].ForecastDate, true);
 
 								}
 
-								foreach (var d in initialZeroMaintenanceDirectives)
-									initialMaintenanceDirectives.Remove(d);
+								foreach (var d in zeroMtopDirectives)
+									mtopDirectives.Remove(d);
 							}
 							else
 							{
@@ -535,7 +441,7 @@ namespace CAS.UI.UIControls.ForecastControls
 									GlobalObjects.MTOPCalculator.CalculateNextPerformance(maintenanceZeroChecks, frame.StartDate,
 										_groupLifelengthsForZeroCheck, CurrentAircraft, avg, lastCompliance,true);
 
-									GlobalObjects.MTOPCalculator.CalculatePhaseWithPerformance(initialMaintenanceDirectives, maintenanceZeroChecks, avg, _currentForecast.ForecastDatas[0].LowerLimit, _currentForecast.ForecastDatas[0].ForecastDate, true);
+									GlobalObjects.MTOPCalculator.CalculatePhaseWithPerformance(mtopDirectives, maintenanceZeroChecks, avg, _currentForecast.ForecastDatas[0].LowerLimit, _currentForecast.ForecastDatas[0].ForecastDate, true);
 								}
 							}
 
@@ -543,8 +449,8 @@ namespace CAS.UI.UIControls.ForecastControls
 
 						////////////////////////////////////////////////////////////////
 
-						directives.AddRange(initialMaintenanceDirectives);
-						directives.AddRange(initialZeroMaintenanceDirectives);
+						directives.AddRange(mtopDirectives);
+						directives.AddRange(zeroMtopDirectives);
 
 				        if (AnimatedThreadWorker.CancellationPending)
 				        {
@@ -583,51 +489,6 @@ namespace CAS.UI.UIControls.ForecastControls
 
 				foreach (IDirective dir in directives)
 		        {
-			        //if (dir is MaintenanceCheck)
-			        //{
-				       // MaintenanceCheck mc = (MaintenanceCheck) dir;
-				       // if (mc.Grouping)
-				       // {
-					      //  //определение первого выполнения в котором данный чек
-					      //  //является главным
-					      //  _initialDirectiveArray.Add(mc.GetPergormanceGroupWhereCheckIsSenior().First());
-
-					      //  //Проход по всем след. выполнениям чека и записям в рабочих пакетах
-					      //  //для поиска перекрывающихся выполнений
-					      //  List<MaintenanceNextPerformance> performances = mc.GetPergormanceGroupWhereCheckIsSenior();
-					      //  foreach (MaintenanceNextPerformance mnp in performances)
-					      //  {
-						     //   //поиск записи в рабочих пакетах по данному чеку
-						     //   //чей номер группы выполнения (по записи) совпадает с расчитанным
-						     //   WorkPackageRecord wpr =
-							    //    openWPRecords.FirstOrDefault(r => r.PerformanceNumFromStart == mnp.PerformanceGroupNum &&
-							    //                                      r.WorkPackageItemType == mc.SmartCoreObjectType.ItemId &&
-							    //                                      r.DirectiveId == mc.ItemId);
-						     //   if (wpr != null)
-							    //    mnp.BlockedByPackage = _openPubWorkPackages.GetItemById(wpr.WorkPakageId);
-					      //  }
-				       // }
-				       // else
-				       // {
-					      //  //определение первого выполнения в котором данный чек
-					      //  //является главным
-					      //  _initialDirectiveArray.Add(mc.NextPerformances.First());
-					      //  //Проход по всем след. выполнениям чека и записям в рабочих пакетах
-					      //  //для поиска перекрывающихся выполнений
-					      //  List<NextPerformance> performances = dir.NextPerformances;
-					      //  foreach (NextPerformance np in performances)
-					      //  {
-						     //   //поиск записи в рабочих пакетах по данному чеку
-						     //   //чей номер группы выполнения (по записи) совпадает с расчитанным
-						     //   WorkPackageRecord wpr =
-							    //    openWPRecords.FirstOrDefault(r => r.PerformanceNumFromStart == np.PerformanceNum &&
-							    //                                      r.WorkPackageItemType == mc.SmartCoreObjectType.ItemId &&
-							    //                                      r.DirectiveId == mc.ItemId);
-						     //   if (wpr != null)
-							    //    np.BlockedByPackage = _openPubWorkPackages.GetItemById(wpr.WorkPakageId);
-					      //  }
-				       // }
-			        //}
 			        if (dir is Component)
 			        {
 				        if (dir.NextPerformances.Count <= 0)
@@ -651,9 +512,9 @@ namespace CAS.UI.UIControls.ForecastControls
 						        np.BlockedByPackage = _openPubWorkPackages.GetItemById(wpr.WorkPakageId);
 				        }
 			        }
-			        else if(dir is MaintenanceDirective)
+			        else if (dir is IMtopCalc)
 			        {
-				        MaintenanceDirective directive = (MaintenanceDirective)dir;
+				        IMtopCalc directive = (IMtopCalc)dir;
 
 				        if (directive.MtopNextPerformances.Count <= 0)
 					        continue;
@@ -674,9 +535,9 @@ namespace CAS.UI.UIControls.ForecastControls
 
 					        if (wpr != null)
 						        np.BlockedByPackage = _openPubWorkPackages.GetItemById(wpr.WorkPakageId);
-						}
-					}
-			        else
+				        }
+			        }
+					else
 			        {
 				        if (dir.NextPerformances.Count <= 0)
 					        continue;
@@ -1512,38 +1373,39 @@ namespace CAS.UI.UIControls.ForecastControls
 
 		#region private void CalculateMaintenanceDirectives(List<MaintenanceDirective> maintenanceDirectives, Dictionary<IBindedItem, List<IDirective>> bindedItemsDict)
 
-	    private void CalculateMaintenanceDirectives(List<MaintenanceDirective> maintenanceDirectives, Dictionary<IBindedItem, List<IDirective>> bindedItemsDict)
+	    private void CalculateMaintenanceDirectives(List<IMtopCalc> directives, Dictionary<IBindedItem, List<IDirective>> bindedItemsDict)
 	    {
-		    foreach (var mpd in maintenanceDirectives)
+		    foreach (var directive in directives)
 		    {
+			    GlobalObjects.PerformanceCalculator.GetNextPerformance(directive);
 
-			    GlobalObjects.PerformanceCalculator.GetNextPerformance(mpd);
-
-			    if (bindedItemsDict.ContainsKey(mpd))
+			    if (directive is MaintenanceDirective)
 			    {
-				    var bindedItems = bindedItemsDict[mpd];
-				    foreach (var bindedItem in bindedItems)
+				    var mpd = directive as MaintenanceDirective;
+				    if (bindedItemsDict.ContainsKey(mpd))
 				    {
-					    if (bindedItem is ComponentDirective)
+					    var bindedItems = bindedItemsDict[mpd];
+					    foreach (var bindedItem in bindedItems)
 					    {
-						    GlobalObjects.PerformanceCalculator.GetNextPerformance(bindedItem);
+						    if (bindedItem is ComponentDirective)
+						    {
+							    GlobalObjects.PerformanceCalculator.GetNextPerformance(bindedItem);
 
-						    var firstNextPerformance =
-							    bindedItemsDict[mpd].SelectMany(t => t.NextPerformances).OrderBy(n => n.NextPerformanceDate).FirstOrDefault();
+							    var firstNextPerformance =
+								    bindedItemsDict[mpd].SelectMany(t => t.NextPerformances).OrderBy(n => n.NextPerformanceDate).FirstOrDefault();
 
-						    if (firstNextPerformance == null)
-							    continue;
-						    mpd.BindedItemNextPerformance = firstNextPerformance;
-						    mpd.BindedItemNextPerformanceSource = firstNextPerformance.NextPerformanceSource ?? Lifelength.Null;
-						    mpd.BindedItemRemains = firstNextPerformance.Remains ?? Lifelength.Null;
-						    mpd.BindedItemNextPerformanceDate = firstNextPerformance.NextPerformanceDate;
-						    mpd.BindedItemCondition = firstNextPerformance.Condition ?? ConditionState.NotEstimated;
+							    if (firstNextPerformance == null)
+								    continue;
+							    mpd.BindedItemNextPerformance = firstNextPerformance;
+							    mpd.BindedItemNextPerformanceSource = firstNextPerformance.NextPerformanceSource ?? Lifelength.Null;
+							    mpd.BindedItemRemains = firstNextPerformance.Remains ?? Lifelength.Null;
+							    mpd.BindedItemNextPerformanceDate = firstNextPerformance.NextPerformanceDate;
+							    mpd.BindedItemCondition = firstNextPerformance.Condition ?? ConditionState.NotEstimated;
+						    }
 					    }
 				    }
-			    }
+				}
 		    }
-
-
 	    }
 
 	    #endregion

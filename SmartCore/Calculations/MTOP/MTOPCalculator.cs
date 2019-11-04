@@ -5,6 +5,7 @@ using SmartCore.Aircrafts;
 using SmartCore.Calculations.MTOP.Interfaces;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MTOP;
 
@@ -948,24 +949,22 @@ namespace SmartCore.Calculations.MTOP
 
 					np.Group = record?.Group ?? -1;
 
+					//if (np.PerformanceDate >= from && np.PerformanceDate <= to)
+					//	directive.MtopNextPerformances.Add(np);
+					//else break;
 
-					if (np.PerformanceDate >= from &&np.PerformanceDate <= to)
+					if (np.PerformanceDate <= to)
 						directive.MtopNextPerformances.Add(np);
-					else break;
+					else
+					{
+						directive.MtopNextPerformances.RemoveAll(i => i.PerformanceDate > from);
+						break;
+					}
 
 					if (directive.PhaseRepeat != null && !directive.PhaseRepeat.IsNullOrZero())
 						tempHours += directive.PhaseRepeat;
 					else tempHours += directive.PhaseThresh;
 				}
-
-				//if (directive.MtopNextPerformances.Count > 0)
-				//{
-				//	directive.MTOPPhase.FirstPhase = directive.MtopNextPerformances[0].Group;
-
-				//	if (directive.MtopNextPerformances.Count > 1)
-				//		directive.MTOPPhase.SecondPhase = directive.MtopNextPerformances[1].Group;
-				//	else directive.MTOPPhase.SecondPhase = directive.MTOPPhase.FirstPhase * 2;
-				//}
 			}
 		}
 
