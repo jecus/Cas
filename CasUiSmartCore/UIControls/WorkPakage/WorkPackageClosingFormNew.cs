@@ -195,11 +195,11 @@ namespace CAS.UI.UIControls.WorkPakage
 			//    ? _workPackage.MaxClosingDate.Value
 			//    : DateTimeExtend.GetCASMinDateTime();
 			dateTimePickerClosingDate.MinDate = DateTimeExtend.GetCASMinDateTime();
-			dateTimePickerClosingDate.Value = DateTime.Today;
+			
 
 			dateTimePickerClosingDate.ValueChanged += DateTimePickerClosingDateValueChanged;
-
-            checkBoxSelectAll.CheckedChanged += CheckBoxSelectAllCheckedChanged;
+			dateTimePickerClosingDate.Value = DateTime.Today;
+			checkBoxSelectAll.CheckedChanged += CheckBoxSelectAllCheckedChanged;
 
             foreach (var control in DocumentControls)
 	            control.Added += DocumentControl1_Added;
@@ -838,9 +838,6 @@ namespace CAS.UI.UIControls.WorkPakage
                     row.Cells[ColumnHours.Index].Value = performanceSource.Hours != null ? performanceSource.ToHoursMinutesFormat("") : "n/a";
                     row.Cells[ColumnCycles.Index].Value = performanceSource.Cycles != null ? performanceSource.Cycles.ToString() : "n/a";
                     row.Cells[ColumnDays.Index].Value = performanceSource.Days != null ? performanceSource.Days.ToString() : "n/a";
-
-
-	                lifelengthViewer1.Lifelength = performanceSource;
                 }
             }
             #endregion
@@ -875,7 +872,7 @@ namespace CAS.UI.UIControls.WorkPakage
 	        checkedListBox1.Items.Clear();
 	        checkedListBox1.Items.AddRange(flights.ToArray());
 
-
+	        lifelengthViewer1.Lifelength = GlobalObjects.CasEnvironment.Calculator.GetFlightLifelengthOnStartOfDay(_workPackage.Aircraft, dateTimePickerClosingDate.Value);
 		}
         #endregion
 
