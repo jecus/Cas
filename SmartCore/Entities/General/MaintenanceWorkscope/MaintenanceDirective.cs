@@ -6,7 +6,6 @@ using EntityCore.DTO.General;
 using SmartCore.Auxiliary;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Calculations;
-using SmartCore.Calculations.MTOP.Interfaces;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
@@ -28,7 +27,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 	[Condition("IsDeleted", "0")]
 	[Serializable]
 	public class MaintenanceDirective : BaseEntityObject, IEngineeringDirective, IKitRequired,
-		IComparable<MaintenanceDirective>, IEquatable<MaintenanceDirective>, IFileContainer, IBindedItem, IWorkPackageItemFilterParams, IMaintenanceDirectiveFilterParams, IMtopCalc
+		IComparable<MaintenanceDirective>, IEquatable<MaintenanceDirective>, IFileContainer, IBindedItem, IWorkPackageItemFilterParams, IMaintenanceDirectiveFilterParams
 	{
 		private static Type _thisType;
 		/*
@@ -896,6 +895,8 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 
 		#endregion
 
+		public List<NextPerformance> MtopNextPerformances { get; set; }
+
 		#region public NextPerformance NextPerformance { get; }
 
 		/// <summary>
@@ -1344,16 +1345,11 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 
 		#endregion
 
-		#region Implement of IMtopCalc
-
 		public Lifelength PhaseThresh { get; set; }
 		public Lifelength PhaseRepeat { get; set; }
-		public int ParentAircraftId => ParentBaseComponent?.ParentAircraftId ?? -1;
-		public List<NextPerformance> MtopNextPerformances { get; set; }
+
 		public Phase MTOPPhase { get; set; }
 		public bool RecalculateTenPercent { get; set; }
-		#endregion
-
 
 		public string CompnentPN { get; set; }
 		public string CompnentSN { get; set; }
