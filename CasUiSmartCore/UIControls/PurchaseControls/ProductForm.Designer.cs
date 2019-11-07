@@ -70,6 +70,10 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.labelIsEffectivity = new System.Windows.Forms.Label();
 			this.textBoxIsEffectivity = new System.Windows.Forms.TextBox();
 			this.checkBoxIsForbidden = new System.Windows.Forms.CheckBox();
+			this.labelEngineRef = new System.Windows.Forms.Label();
+			this.textBoxEngineRef = new System.Windows.Forms.TextBox();
+			this.documentControl2 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
+			this.label5 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// comboBoxDetailClass
@@ -229,12 +233,12 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// 
 			this.labelStandard.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelStandard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelStandard.Location = new System.Drawing.Point(7, 5);
+			this.labelStandard.Location = new System.Drawing.Point(5, 5);
 			this.labelStandard.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.labelStandard.Name = "labelStandard";
-			this.labelStandard.Size = new System.Drawing.Size(69, 25);
+			this.labelStandard.Size = new System.Drawing.Size(99, 25);
 			this.labelStandard.TabIndex = 88;
-			this.labelStandard.Text = "Standard:";
+			this.labelStandard.Text = "Specification:";
 			this.labelStandard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// comboBoxAccessoryStandard
@@ -314,7 +318,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.labelImage.AutoSize = true;
 			this.labelImage.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelImage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelImage.Location = new System.Drawing.Point(432, 239);
+			this.labelImage.Location = new System.Drawing.Point(432, 269);
 			this.labelImage.Name = "labelImage";
 			this.labelImage.Size = new System.Drawing.Size(52, 14);
 			this.labelImage.TabIndex = 112;
@@ -330,7 +334,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.fileControlImage.Filter = null;
 			this.fileControlImage.Icon = global::CAS.UI.Properties.Resources.ImageIcon_Small;
 			this.fileControlImage.IconNotEnabled = global::CAS.UI.Properties.Resources.ImageIcon_Small_Gray;
-			this.fileControlImage.Location = new System.Drawing.Point(557, 239);
+			this.fileControlImage.Location = new System.Drawing.Point(557, 269);
 			this.fileControlImage.MaximumSize = new System.Drawing.Size(350, 100);
 			this.fileControlImage.Name = "fileControlImage";
 			this.fileControlImage.ShowLinkLabelBrowse = true;
@@ -377,7 +381,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// 
 			this.label2.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.label2.Location = new System.Drawing.Point(432, 140);
+			this.label2.Location = new System.Drawing.Point(432, 170);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(89, 36);
 			this.label2.TabIndex = 146;
@@ -389,7 +393,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxDescRus.BackColor = System.Drawing.Color.White;
 			this.textBoxDescRus.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.textBoxDescRus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxDescRus.Location = new System.Drawing.Point(557, 143);
+			this.textBoxDescRus.Location = new System.Drawing.Point(557, 173);
 			this.textBoxDescRus.Multiline = true;
 			this.textBoxDescRus.Name = "textBoxDescRus";
 			this.textBoxDescRus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -400,7 +404,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// 
 			this.label3.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.label3.Location = new System.Drawing.Point(432, 113);
+			this.label3.Location = new System.Drawing.Point(432, 143);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(100, 25);
 			this.label3.TabIndex = 148;
@@ -412,7 +416,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxHTS.BackColor = System.Drawing.Color.White;
 			this.textBoxHTS.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.textBoxHTS.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxHTS.Location = new System.Drawing.Point(557, 116);
+			this.textBoxHTS.Location = new System.Drawing.Point(557, 146);
 			this.textBoxHTS.MaxLength = 128;
 			this.textBoxHTS.Name = "textBoxHTS";
 			this.textBoxHTS.Size = new System.Drawing.Size(294, 22);
@@ -445,11 +449,11 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.labelDoc.AutoSize = true;
 			this.labelDoc.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelDoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelDoc.Location = new System.Drawing.Point(432, 323);
+			this.labelDoc.Location = new System.Drawing.Point(432, 328);
 			this.labelDoc.Name = "labelDoc";
-			this.labelDoc.Size = new System.Drawing.Size(35, 14);
+			this.labelDoc.Size = new System.Drawing.Size(41, 14);
 			this.labelDoc.TabIndex = 152;
-			this.labelDoc.Text = "Doc:";
+			this.labelDoc.Text = "CMM:";
 			this.labelDoc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.panelMain.Controls.Add(this.label3);
 			this.panelMain.Controls.Add(this.textBoxHTS);
@@ -489,6 +493,10 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.panelMain.Controls.Add(this.textBoxIsEffectivity);
 			this.panelMain.Controls.Add(this.labelIsEffectivity);
 			this.panelMain.Controls.Add(this.checkBoxIsForbidden);
+			this.panelMain.Controls.Add(this.labelEngineRef);
+			this.panelMain.Controls.Add(this.textBoxEngineRef);
+			this.panelMain.Controls.Add(this.label5);
+			this.panelMain.Controls.Add(this.documentControl2);
 			// 
 			// label4
 			// 
@@ -515,7 +523,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// documentControl1
 			// 
 			this.documentControl1.CurrentDocument = null;
-			this.documentControl1.Location = new System.Drawing.Point(537, 323);
+			this.documentControl1.Location = new System.Drawing.Point(537, 328);
 			this.documentControl1.Name = "documentControl1";
 			this.documentControl1.Size = new System.Drawing.Size(314, 41);
 			this.documentControl1.TabIndex = 161;
@@ -555,6 +563,48 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.checkBoxIsForbidden.Size = new System.Drawing.Size(102, 18);
 			this.checkBoxIsForbidden.TabIndex = 164;
 			this.checkBoxIsForbidden.Text = "Is Forbidden";
+			// 
+			// labelEngineRef
+			// 
+			this.labelEngineRef.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelEngineRef.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelEngineRef.Location = new System.Drawing.Point(432, 115);
+			this.labelEngineRef.Name = "labelEngineRef";
+			this.labelEngineRef.Size = new System.Drawing.Size(100, 25);
+			this.labelEngineRef.TabIndex = 166;
+			this.labelEngineRef.Text = "Engine Ref.:";
+			this.labelEngineRef.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// textBoxEngineRef
+			// 
+			this.textBoxEngineRef.BackColor = System.Drawing.Color.White;
+			this.textBoxEngineRef.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.textBoxEngineRef.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxEngineRef.Location = new System.Drawing.Point(557, 118);
+			this.textBoxEngineRef.MaxLength = 128;
+			this.textBoxEngineRef.Name = "textBoxEngineRef";
+			this.textBoxEngineRef.Size = new System.Drawing.Size(294, 22);
+			this.textBoxEngineRef.TabIndex = 165;
+			// 
+			// documentControl2
+			// 
+			this.documentControl2.CurrentDocument = null;
+			this.documentControl2.Location = new System.Drawing.Point(537, 375);
+			this.documentControl2.Name = "documentControl2";
+			this.documentControl2.Size = new System.Drawing.Size(314, 41);
+			this.documentControl2.TabIndex = 168;
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.label5.Location = new System.Drawing.Point(432, 375);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(58, 14);
+			this.label5.TabIndex = 167;
+			this.label5.Text = "IPC Ref:";
+			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// ProductForm
 			// 
@@ -612,5 +662,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private System.Windows.Forms.Label labelIsEffectivity;
 		private System.Windows.Forms.TextBox textBoxIsEffectivity;
 		private System.Windows.Forms.CheckBox checkBoxIsForbidden;
+		private System.Windows.Forms.Label labelEngineRef;
+		private System.Windows.Forms.TextBox textBoxEngineRef;
+		private DocumentationControls.DocumentControl documentControl2;
+		private System.Windows.Forms.Label label5;
 	}
 }
