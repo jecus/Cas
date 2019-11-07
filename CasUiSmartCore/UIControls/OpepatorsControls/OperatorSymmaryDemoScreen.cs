@@ -222,6 +222,16 @@ namespace CAS.UI.UIControls.OpepatorsControls
 
 		#endregion
 
+		#region private void LinkPurchaseOrderDisplayerRequested(object sender, ReferenceEventArgs e)
+
+		private void LinkRequestOffersDisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			e.DisplayerText = "Request Offers";
+			e.RequestedEntity = new RequestOffersListScreen(_currentOperator);
+		}
+
+		#endregion
+
 		#region private void LinkPersonnelDisplayerRequested(object sender, ReferenceEventArgs e)
 
 		private void LinkPersonnelDisplayerRequested(object sender, ReferenceEventArgs e)
