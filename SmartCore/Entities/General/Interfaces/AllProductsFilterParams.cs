@@ -12,7 +12,7 @@ namespace SmartCore.Entities.General.Interfaces
 		[Filter("Alt Part Number:", Order = 2)]
 		string AltPartNumber { get; }
 
-		[Filter("Standard:")]
+		[Filter("Specification:")]
 		GoodStandart Standart { get; }
 
 		[Filter("Description:", Order = 3)]
@@ -41,5 +41,8 @@ namespace SmartCore.Entities.General.Interfaces
 
 		[Filter("Remarks:", Order = 6)]
 		string Remarks { get; }
+
+		[Filter("Engine Ref:")]
+		string EngineRef { get; }
 	}
 }

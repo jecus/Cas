@@ -157,3 +157,17 @@ if not exists ( select  *
 	alter table dbo.RequestsForQuotation
 	add AdditionalInformationJSON nvarchar(MAX)
 GO
+
+-----------------------------------------------------------------------
+
+if not exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('Dictionaries.AccessoryDescriptions')
+					and c.name = 'EngineRef' ) 
+
+	alter table Dictionaries.AccessoryDescriptions
+	add EngineRef nvarchar (MAX)
+GO
+
+  insert into [ScatDBTest].[Dictionaries].[DocumentSubType](DocumentTypeId, Name, Corrector)
+  values (10, 'IPC Ref', 1)

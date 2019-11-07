@@ -29,6 +29,7 @@ namespace SmartCore.Entities.General.Accessory
 	public class Product : BaseEntityObject, ISupplied, IEquatable<Product>, IFileContainer, IAllProductsFilterParams
 	{
 		public Document Document { get; set; }
+		public Document DocumentIpcRef { get; set; }
 		public ProductType ProductType { get; set; } 
 
 		private static Type _thisType;
@@ -87,9 +88,9 @@ namespace SmartCore.Entities.General.Accessory
 		/// <summary>
 		/// Стандарт(ГОСТ)
 		/// </summary>
-		[TableColumn("Standart"), ListViewData(0.12f, "Standard", 11)]
-		[FormControl(200, "Standard:", Order = 3)]
-		[Filter("Standard:",Order = 14)]
+		[TableColumn("Standart"), ListViewData(0.15f, "Specification", 11)]
+		[FormControl(200, "Specification:", Order = 3)]
+		[Filter("Specification:", Order = 14)]
 		[Child(false)]
 		public GoodStandart Standart
 		{
@@ -406,6 +407,11 @@ namespace SmartCore.Entities.General.Accessory
 			}
 		}
 		#endregion
+
+		[TableColumn("EngineRef")]
+		[ListViewData(0.12f, "Engine Ref", 3)]
+		[Filter("Engine Ref:")]
+		public string EngineRef { get; set; }
 
 		[TableColumn("IsEffectivity")]
 		[ListViewData(0.12f, "Effectivity")]
