@@ -665,6 +665,9 @@ namespace SmartCore.Calculations.MTOP
 		{
 			foreach (var directive in directives)
 			{
+				if(directive.ItemId == 58186)
+					Console.WriteLine();
+
 				calculatePhase(directive, checks, averageUtilization, isZeroPhase);
 
 				directive.MtopNextPerformances = new List<NextPerformance>();
@@ -674,10 +677,23 @@ namespace SmartCore.Calculations.MTOP
 
 				var tempHours = Lifelength.Null;
 
-				if (directive.PhaseThresh != null)
-					tempHours = directive.PhaseThresh;
-				else if (directive.PhaseRepeat != null)
-					tempHours = directive.PhaseRepeat;
+				if (directive.LastPerformance != null)
+				{
+					tempHours.Add(directive.LastPerformance.OnLifelength);
+					if (directive.PhaseRepeat != null)
+						tempHours.Add(directive.PhaseRepeat);
+					else if (directive.PhaseThresh != null)
+						tempHours.Add(directive.PhaseThresh);
+				}
+				else
+				{
+					if (directive.PhaseThresh != null)
+						tempHours.Add(directive.PhaseThresh);
+					else if (directive.PhaseRepeat != null)
+						tempHours.Add(directive.PhaseRepeat);
+				}
+
+				
 
 				//directive.MTOPPhase = new Phase();
 				//directive.MTOPPhase.IsZeroPhase = isZeroPhase;
@@ -697,11 +713,8 @@ namespace SmartCore.Calculations.MTOP
 				var last = Lifelength.Null;
 
 				var startGroup = directive.MTOPPhase.FirstPhase;
-				if (directive.LastPerformance != null)
-				{
-					tempHours.Add(directive.LastPerformance.OnLifelength);
-				}
-				else if (check.PerformanceRecords.Count > 0)
+				
+				if (check.PerformanceRecords.Count > 0)
 				{
 					if (isZeroPhase)
 					{
@@ -712,12 +725,7 @@ namespace SmartCore.Calculations.MTOP
 					}
 				}
 
-				
-
-				bool firstPhase = true;
-				var secondPhase = 0;
-
-				var group = 0;
+				var group = checksForPeriod.Any(i => i.Group == directive.MTOPPhase.FirstPhase) ? directive.MTOPPhase.FirstPhase:directive.MTOPPhase.SecondPhase;
 
 				for (; ;)
 				{
@@ -738,30 +746,25 @@ namespace SmartCore.Calculations.MTOP
 					}
 					else
 					{
-						record = checksForPeriod.FirstOrDefault(i => i.Group > group && i.Group % directive.MTOPPhase.Difference == 0);
-						if (record == null) break;
+						record = checksForPeriod.FirstOrDefault(i => i.Group == group);
 
-						while (record.PerformanceSource.Days.Value > tempHours.Days)
+						if (record == null)
 						{
-							if (directive.PhaseRepeat != null && !directive.PhaseRepeat.IsNullOrZero())
-								tempHours += directive.PhaseRepeat;
-							else tempHours += directive.PhaseThresh;
+							record = checksForPeriod.FirstOrDefault(i => i.Group > group && i.Group % directive.MTOPPhase.Difference == 0);
+							//record = checksForPeriod.FirstOrDefault(i => i.PerformanceSource.Days.Value >= tempHours.Days);
+							if (record == null) break;
 						}
+
+						//while (record.PerformanceSource.Days.Value > tempHours.Days)
+						//{
+						//	if (directive.PhaseRepeat != null && !directive.PhaseRepeat.IsNullOrZero())
+						//		tempHours += directive.PhaseRepeat;
+						//	else tempHours += directive.PhaseThresh;
+						//}
 					}
 
 					
 					group = record.Group;
-					
-					//var record = checksForPeriod.FirstOrDefault(i => i.PerformanceSource.Days.Value <= tempHours.Days);
-
-					//if (record == null)
-					//{
-					//	if (directive.PhaseRepeat != null && !directive.PhaseRepeat.IsNullOrZero())
-					//		tempHours += directive.PhaseRepeat;
-					//	else tempHours += directive.PhaseThresh;
-
-					//	record = check.NextPerformances.LastOrDefault(i => i.PerformanceSource.Days.Value <= tempHours.Days);
-					//}
 
 					if (directive.MtopNextPerformances.Count == 0)
 					{
@@ -961,6 +964,8 @@ namespace SmartCore.Calculations.MTOP
 						break;
 					}
 
+					group += directive.MTOPPhase.Difference;
+
 					if (directive.PhaseRepeat != null && !directive.PhaseRepeat.IsNullOrZero())
 						tempHours += directive.PhaseRepeat;
 					else tempHours += directive.PhaseThresh;
@@ -979,15 +984,26 @@ namespace SmartCore.Calculations.MTOP
 
 			var tempHours = Lifelength.Null;
 
-			if (directive.PhaseThresh != null)
-				tempHours = directive.PhaseThresh;
-			else if (directive.PhaseRepeat != null)
-				tempHours = directive.PhaseRepeat;
+			if (directive.LastPerformance != null)
+			{
+				tempHours.Add(directive.LastPerformance.OnLifelength);
+				if (directive.PhaseRepeat != null)
+					tempHours.Add(directive.PhaseRepeat);
+				else if (directive.PhaseThresh != null)
+					tempHours.Add(directive.PhaseThresh);
+			}
+			else
+			{
+				if (directive.PhaseThresh != null)
+					tempHours.Add(directive.PhaseThresh);
+				else if (directive.PhaseRepeat != null)
+					tempHours.Add(directive.PhaseRepeat);
+			}
 
 			directive.MTOPPhase = new Phase();
 			directive.MTOPPhase.IsZeroPhase = isZeroPhase;
 
-			var check = checks.LastOrDefault(i => i.PhaseThresh.Hours <= tempHours.Hours);
+			var check = checks.LastOrDefault(i => i.PhaseThresh.Days <= tempHours.Days);
 			if(check?.NextPerformancesWithIgnorLast == null) return;
 
 			foreach (var n in check.NextPerformancesWithIgnorLast)
@@ -996,7 +1012,7 @@ namespace SmartCore.Calculations.MTOP
 					break;
 
 				if (directive.MTOPPhase.FirstPhase == 0)
-					directive.MTOPPhase.FirstPhase = check.NextPerformancesWithIgnorLast.LastOrDefault(i => i.PerformanceSource.Hours.Value <= tempHours.Hours)?.Group ?? 0;
+					directive.MTOPPhase.FirstPhase = check.NextPerformancesWithIgnorLast.LastOrDefault(i => i.PerformanceSource.Days.Value <= tempHours.Days)?.Group ?? 0;
 				else if (directive.MTOPPhase.SecondPhase == 0 || directive.MTOPPhase.FirstPhase == directive.MTOPPhase.SecondPhase)
 				{
 
@@ -1006,9 +1022,9 @@ namespace SmartCore.Calculations.MTOP
 					}
 					else
 					{
-						if (check.NextPerformancesWithIgnorLast.LastOrDefault().PerformanceSource.Hours >= tempHours.Hours)
+						if (check.NextPerformancesWithIgnorLast.LastOrDefault().PerformanceSource.Days >= tempHours.Days)
 							directive.MTOPPhase.SecondPhase = check.NextPerformancesWithIgnorLast
-								.LastOrDefault(i => i.PerformanceSource.Hours.Value <= tempHours.Hours).Group;
+								.LastOrDefault(i => i.PerformanceSource.Days.Value <= tempHours.Days).Group;
 						else
 							directive.MTOPPhase.SecondPhase = directive.MTOPPhase.FirstPhase * 2;
 					}
