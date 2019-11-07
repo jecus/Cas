@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using EntityCore.DTO.General;
 using Newtonsoft.Json;
+using SmartCore.Auxiliary;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
@@ -247,7 +249,50 @@ namespace SmartCore.Purchase
 	[JsonObject]
 	public class PurchaseSettings
 	{
+		private DateTime _arrivalDate;
+		private DateTime _receiptDate;
+
 		public string QualificationNumber { get; set; }
-		
+
+		public string PickupLocation { get; set; }
+
+		public DateTime ArrivalDate
+		{
+			get => _arrivalDate < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : _arrivalDate;
+			set => _arrivalDate = value;
+		}
+		public double ArrivalTime { get; set; }
+
+		public DateTime ReceiptDate
+		{
+			get => _receiptDate < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : _receiptDate;
+			set => _receiptDate = value;
+		}
+		public double ReceiptTime { get; set; }
+
+		public double FreightPrice { get; set; }
+
+		[DefaultValue(-1)]
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+		public int StatusOfDeliveryId { get; set; }
+
+		[JsonIgnore]
+		public StatusOfDelivery StatusOfDelivery
+		{
+			get => StatusOfDelivery.GetItemById(StatusOfDeliveryId);
+			set => StatusOfDeliveryId = value.ItemId;
+		}
+
+		[DefaultValue(-1)]
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+		public int ÑurrencyFreightId { get; set; }
+
+		[JsonIgnore]
+		public Ñurrency ÑurrencyFreight
+		{
+			get => Ñurrency.GetItemById(ÑurrencyFreightId);
+			set => ÑurrencyFreightId = value.ItemId;
+		}
+
 	}
 }

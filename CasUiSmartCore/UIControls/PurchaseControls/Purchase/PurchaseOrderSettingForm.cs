@@ -79,16 +79,30 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 			comboBoxStation.Items.Clear();
 			comboBoxStation.Items.AddRange(_airportsCodes.ToArray());
+
+			comboBoxFreightPrice.Items.Clear();
+			comboBoxFreightPrice.Items.AddRange(Сurrency.Items.ToArray());
+
+			comboBoxStatusOfDelivery.Items.Clear();
+			comboBoxStatusOfDelivery.Items.AddRange(StatusOfDelivery.Items.OrderBy(i => i.ItemId).ToArray());
 			
 			comboBoxIncoTerm.SelectedItem = _order.IncoTerm;
 			comboBoxDesignation.SelectedItem = _order.Designation;
 			comboBoxPayTerm.SelectedItem = _order.PayTerm;
+			comboBoxFreightPrice.SelectedItem = _order.AdditionalInformation.СurrencyFreight;
+			comboBoxStatusOfDelivery.SelectedItem = _order.AdditionalInformation.StatusOfDelivery;
 			textBoxBruttoWeight.Text = _order.BruttoWeight;
 			textBoxCargoVolume.Text = _order.CargoVolume;
 			textBoxNettoWeight.Text = _order.NettoWeight;
 			numericUpDownNet.Value = (decimal) _order.Net;
+			numericUpDownReceiptTime.Value = (decimal) _order.AdditionalInformation.ReceiptTime;
+			numericUpDownArrivalTime.Value = (decimal) _order.AdditionalInformation.ArrivalTime;
+			numericUpDownFreightPrice.Value = (decimal) _order.AdditionalInformation.FreightPrice;
 			metroTextBoxIncoTermRef.Text = _order.IncoTermRef;
 			metroTextBoxTrackingNo.Text = _order.TrackingNo;
+			metroTextBoxPickupLocation.Text = _order.AdditionalInformation.PickupLocation;
+			dateTimePickerArrivalDate.Value = _order.AdditionalInformation.ArrivalDate;
+			dateTimePickerReceiptDate.Value = _order.AdditionalInformation.ReceiptDate;
 			comboBoxShipTo.SelectedItem = _supplierShipper.FirstOrDefault(i => i.ItemId == _order.ShipToId) ?? Supplier.Unknown;
 			comboBoxShipComp.SelectedItem = _supplierShipper.FirstOrDefault(i => i.ItemId == _order.ShipCompanyId) ?? Supplier.Unknown;
 			comboBoxStation.SelectedItem = _airportsCodes.FirstOrDefault(i => i.ItemId == _order.StationId) ?? AirportsCodes.Unknown;
@@ -106,17 +120,25 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 			_order.IncoTerm = (IncoTerm)comboBoxIncoTerm.SelectedItem;
 			_order.Designation = (Designation)comboBoxDesignation.SelectedItem;
+			_order.AdditionalInformation.StatusOfDelivery = (StatusOfDelivery)comboBoxStatusOfDelivery.SelectedItem;
+			_order.AdditionalInformation.СurrencyFreight = (Сurrency)comboBoxFreightPrice.SelectedItem;
 			_order.PayTerm = (PayTerm)comboBoxPayTerm.SelectedItem;
 			_order.BruttoWeight = textBoxBruttoWeight.Text;
 			_order.CargoVolume = textBoxCargoVolume.Text;
 			_order.NettoWeight = textBoxNettoWeight.Text;
+			_order.AdditionalInformation.PickupLocation = metroTextBoxPickupLocation.Text;
 			_order.ShipCompanyId = ((Supplier)comboBoxShipComp.SelectedItem).ItemId;
 			_order.ShipCompany = (Supplier)comboBoxShipComp.SelectedItem;
 			_order.ShipToId = ((Supplier)comboBoxShipTo.SelectedItem).ItemId;
 			_order.Net = (float) numericUpDownNet.Value;
+			_order.AdditionalInformation.ReceiptTime = (float) numericUpDownReceiptTime.Value;
+			_order.AdditionalInformation.ArrivalTime = (float) numericUpDownArrivalTime.Value;
+			_order.AdditionalInformation.FreightPrice = (float) numericUpDownFreightPrice.Value;
 			_order.IncoTermRef = metroTextBoxIncoTermRef.Text;
 			_order.StationId = ((AirportsCodes)comboBoxStation.SelectedItem).ItemId;
 			_order.TrackingNo = metroTextBoxTrackingNo.Text;
+			_order.AdditionalInformation.ArrivalDate = dateTimePickerArrivalDate.Value;
+			_order.AdditionalInformation.ReceiptDate = dateTimePickerReceiptDate.Value;
 
 			if (_order.ItemId <= 0)
 				_order.Author = GlobalObjects.CasEnvironment.IdentityUser.ToString();
