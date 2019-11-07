@@ -527,6 +527,38 @@ namespace SmartCore.Purchase
 		[JsonProperty]
 		public decimal CostRepair { get; set; }
 
+		//[ListViewData(80, "CostNew",)]
+		[JsonProperty]
+		public decimal CostNewEx { get; set; }
+
+		//[ListViewData(80, "CostServ",)]
+		[JsonProperty]
+		public decimal CostServiceableEx { get; set; }
+
+		//[ListViewData(80, "CostOH",)]
+		[JsonProperty]
+		public decimal CostOverhaulEx { get; set; }
+
+		//[ListViewData(80, "CostRepair",)]
+		[JsonProperty]
+		public decimal CostRepairEx { get; set; }
+
+		//[ListViewData(80, "CostNew",)]
+		[JsonProperty]
+		public decimal CostNewReadiness { get; set; }
+
+		//[ListViewData(80, "CostServ",)]
+		[JsonProperty]
+		public decimal CostServiceableReadiness { get; set; }
+
+		//[ListViewData(80, "CostOH",)]
+		[JsonProperty]
+		public decimal CostOverhaulReadiness { get; set; }
+
+		//[ListViewData(80, "CostRepair",)]
+		[JsonProperty]
+		public decimal CostRepairReadiness { get; set; }
+
 		[DefaultValue(-1)]
 		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
 		public int ÑurrencyNewId { get; set; }
