@@ -20,7 +20,8 @@ namespace SmartCore.Calculations.PerformanceCalculator
 		private readonly IAverageUtilizationCore _averageUtilizationCore;
 		private readonly IMTOPCalculator _mtopCalculator;
 
-		public PerformanceCalculator(ICalculator calculator, IAverageUtilizationCore averageUtilizationCore, IMTOPCalculator mtopCalculator)
+		public PerformanceCalculator(ICalculator calculator, IAverageUtilizationCore averageUtilizationCore,
+			IMTOPCalculator mtopCalculator)
 		{
 			_calculator = calculator;
 			_averageUtilizationCore = averageUtilizationCore;
@@ -28,6 +29,7 @@ namespace SmartCore.Calculations.PerformanceCalculator
 		}
 
 		#region public void GetNextPerformance(Document directive)
+
 		/// <summary>
 		/// Расчитывает следующее выполнение Document вместе с дополнительными параметрами
 		/// </summary>
@@ -53,9 +55,11 @@ namespace SmartCore.Calculations.PerformanceCalculator
 					directive.Remains = new Lifelength(t.Days, null, null);
 
 					issueNotify = directive.IssueNotify > 0
-								  ? new Lifelength(directive.IssueNotify, null, null)
-								  : null;
-					performanceSource = new Lifelength(directive.Remains);//TODO:(Evgenii Babak) выяснить почему у performanceSource такое же значение, что и у Remains
+						? new Lifelength(directive.IssueNotify, null, null)
+						: null;
+					performanceSource =
+						new Lifelength(directive
+							.Remains); //TODO:(Evgenii Babak) выяснить почему у performanceSource такое же значение, что и у Remains
 				}
 
 				if (directive.RevisionValidTo)
@@ -64,9 +68,11 @@ namespace SmartCore.Calculations.PerformanceCalculator
 					directive.RevisionRemains = new Lifelength(t.Days, null, null);
 
 					revisionNotify = directive.RevisionNotify > 0
-								  ? new Lifelength(directive.RevisionNotify, null, null)
-								  : null;
-					performanceSource = new Lifelength(directive.RevisionRemains);//TODO:(Evgenii Babak) выяснить почему у performanceSource такое же значение, что и у RevisionRemains
+						? new Lifelength(directive.RevisionNotify, null, null)
+						: null;
+					performanceSource =
+						new Lifelength(directive
+							.RevisionRemains); //TODO:(Evgenii Babak) выяснить почему у performanceSource такое же значение, что и у RevisionRemains
 				}
 
 				if (directive.Remains != null && directive.RevisionRemains != null)
@@ -78,18 +84,21 @@ namespace SmartCore.Calculations.PerformanceCalculator
 					//}
 					//else
 					//{
-						directive.Condition = computeConditionState(performanceSource, directive.RevisionRemains, null, revisionNotify, x => x.IsOverdue());
-						directive.NextPerformanceDate = directive.RevisionDateValidTo;
+					directive.Condition = computeConditionState(performanceSource, directive.RevisionRemains, null,
+						revisionNotify, x => x.IsOverdue());
+					directive.NextPerformanceDate = directive.RevisionDateValidTo;
 					//}
 				}
 				else if (directive.Remains != null)
 				{
-					directive.Condition = computeConditionState(performanceSource, directive.Remains, null, issueNotify, x => x.IsOverdue());
+					directive.Condition = computeConditionState(performanceSource, directive.Remains, null, issueNotify,
+						x => x.IsOverdue());
 					directive.NextPerformanceDate = directive.IssueDateValidTo;
 				}
 				else
 				{
-					directive.Condition = computeConditionState(performanceSource, directive.RevisionRemains, null, revisionNotify, x => x.IsOverdue());
+					directive.Condition = computeConditionState(performanceSource, directive.RevisionRemains, null,
+						revisionNotify, x => x.IsOverdue());
 					directive.NextPerformanceDate = directive.RevisionDateValidTo;
 				}
 			}
@@ -114,8 +123,8 @@ namespace SmartCore.Calculations.PerformanceCalculator
 				directive.ResetMathData();
 
 			IThreshold threshold;
-			if (directive is MaintenanceDirective && ((MaintenanceDirective)directive).MaintenanceCheck != null)
-				threshold = ((MaintenanceDirective)directive).MaintenanceCheck.Threshold;
+			if (directive is MaintenanceDirective && ((MaintenanceDirective) directive).MaintenanceCheck != null)
+				threshold = ((MaintenanceDirective) directive).MaintenanceCheck.Threshold;
 			else threshold = directive.Threshold;
 			AbstractPerformanceRecord pr = null;
 
@@ -130,7 +139,7 @@ namespace SmartCore.Calculations.PerformanceCalculator
 			if (directive.LastPerformance == null)
 			{
 				if (threshold.FirstPerformanceSinceNew.IsNullOrZero() &&
-					threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+				    threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
 				{
 					//небыло ни одного выполнения, 
 					//и не заданы ресурсы первого выполнения
@@ -138,12 +147,13 @@ namespace SmartCore.Calculations.PerformanceCalculator
 					return false;
 				}
 
-				np = new NextPerformance { Parent = directive, PerformanceNum = performanceNum };
+				np = new NextPerformance {Parent = directive, PerformanceNum = performanceNum};
 				Lifelength sinceEffDate = Lifelength.Null;
 				if (threshold.FirstPerformanceSinceEffectiveDate != null &&
-					!threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+				    !threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
 				{
-					sinceEffDate = _calculator.GetFlightLifelengthOnEndOfDay(directive.LifeLengthParent, threshold.EffectiveDate);
+					sinceEffDate =
+						_calculator.GetFlightLifelengthOnEndOfDay(directive.LifeLengthParent, threshold.EffectiveDate);
 					sinceEffDate.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
 					sinceEffDate.Add(threshold.FirstPerformanceSinceEffectiveDate);
 				}
@@ -151,10 +161,11 @@ namespace SmartCore.Calculations.PerformanceCalculator
 				// с момента производства
 				Lifelength sinceNew = Lifelength.Null;
 				if (threshold.FirstPerformanceSinceNew != null &&
-					!threshold.FirstPerformanceSinceNew.IsNullOrZero())
+				    !threshold.FirstPerformanceSinceNew.IsNullOrZero())
 				{
 					sinceNew = threshold.FirstPerformanceSinceNew;
 				}
+
 				np.PerformanceSource = new Lifelength(sinceNew);
 				if (threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst)
 					np.PerformanceSource.SetMin(sinceEffDate);
@@ -169,6 +180,7 @@ namespace SmartCore.Calculations.PerformanceCalculator
 						//т.е. расчитать ресурс и дату выполнения нельзя
 						return false;
 					}
+
 					//расчет добавочного ресурса
 					var rep = new Lifelength(threshold.RepeatInterval);
 					rep *= (performanceNum - 1);
@@ -202,9 +214,9 @@ namespace SmartCore.Calculations.PerformanceCalculator
 				//List<AbstractPerformanceRecord> pl = directive.PerformanceRecords.Cast<AbstractPerformanceRecord>().
 				//    OrderByDescending(rec => rec.RecordDate).ToList();
 				//pr = pl.FirstOrDefault(record => record.PerformanceNum <= performanceNum);
-				pr = directive.PerformanceRecords.Cast<AbstractPerformanceRecord>().
-					 OrderByDescending(rec => rec.RecordDate).
-					 FirstOrDefault(record => record.PerformanceNum <= performanceNum);
+				pr = directive.PerformanceRecords.Cast<AbstractPerformanceRecord>()
+					.OrderByDescending(rec => rec.RecordDate)
+					.FirstOrDefault(record => record.PerformanceNum <= performanceNum);
 
 				if (pr != null)
 				{
@@ -218,7 +230,8 @@ namespace SmartCore.Calculations.PerformanceCalculator
 							Parent = directive,
 							PerformanceDate = pr.RecordDate,
 							//TODO:(EvgeniiBabak) Выяснить почему расчитываем , а не берем OnLifeLenght
-							PerformanceSource = _calculator.GetFlightLifelengthOnEndOfDay(directive.LifeLengthParent, directive.LastPerformance.RecordDate),
+							PerformanceSource = _calculator.GetFlightLifelengthOnEndOfDay(directive.LifeLengthParent,
+								directive.LastPerformance.RecordDate),
 							PerformanceNum = performanceNum,
 						};
 					}
@@ -229,7 +242,8 @@ namespace SmartCore.Calculations.PerformanceCalculator
 						{
 							Parent = directive,
 							PerformanceDate = pr.RecordDate,
-							PerformanceSource = _calculator.GetFlightLifelengthOnEndOfDay(directive.LifeLengthParent, directive.LastPerformance.RecordDate),
+							PerformanceSource = _calculator.GetFlightLifelengthOnEndOfDay(directive.LifeLengthParent,
+								directive.LastPerformance.RecordDate),
 							PerformanceNum = performanceNum,
 						};
 
@@ -242,15 +256,15 @@ namespace SmartCore.Calculations.PerformanceCalculator
 						np.PerformanceSource.Resemble(threshold.RepeatInterval);
 					}
 
-					var prevPr = directive.PerformanceRecords.Cast<AbstractPerformanceRecord>().
-						OrderByDescending(rec => rec.RecordDate).
-						FirstOrDefault(record => record.PerformanceNum < performanceNum
-											  && record.OnLifelength.IsLessIgnoreNulls(np.PerformanceSource));
+					var prevPr = directive.PerformanceRecords.Cast<AbstractPerformanceRecord>()
+						.OrderByDescending(rec => rec.RecordDate).FirstOrDefault(record =>
+							record.PerformanceNum < performanceNum
+							&& record.OnLifelength.IsLessIgnoreNulls(np.PerformanceSource));
 
-					var nextPr = directive.PerformanceRecords.Cast<AbstractPerformanceRecord>().
-						OrderByDescending(rec => rec.RecordDate).
-						FirstOrDefault(record => record.PerformanceNum > performanceNum
-											  && record.OnLifelength.IsGratherIgnoreNulls(np.PerformanceSource));
+					var nextPr = directive.PerformanceRecords.Cast<AbstractPerformanceRecord>()
+						.OrderByDescending(rec => rec.RecordDate).FirstOrDefault(record =>
+							record.PerformanceNum > performanceNum
+							&& record.OnLifelength.IsGratherIgnoreNulls(np.PerformanceSource));
 
 
 					if (prevPr != null)
@@ -279,7 +293,7 @@ namespace SmartCore.Calculations.PerformanceCalculator
 				{
 					//ситуация 4.
 					if (threshold.FirstPerformanceSinceNew.IsNullOrZero() &&
-					threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+					    threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
 					{
 						//небыло ни одного выполнения, 
 						//и не заданы ресурсы первого выполнения
@@ -287,12 +301,14 @@ namespace SmartCore.Calculations.PerformanceCalculator
 						return false;
 					}
 
-					np = new NextPerformance { Parent = directive, PerformanceNum = performanceNum };
+					np = new NextPerformance {Parent = directive, PerformanceNum = performanceNum};
 					var sinceEffDate = Lifelength.Null;
 					if (threshold.FirstPerformanceSinceEffectiveDate != null &&
-						!threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+					    !threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
 					{
-						sinceEffDate = _calculator.GetFlightLifelengthOnEndOfDay(directive.LifeLengthParent, threshold.EffectiveDate);
+						sinceEffDate =
+							_calculator.GetFlightLifelengthOnEndOfDay(directive.LifeLengthParent,
+								threshold.EffectiveDate);
 						sinceEffDate.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
 						sinceEffDate.Add(threshold.FirstPerformanceSinceEffectiveDate);
 					}
@@ -300,10 +316,11 @@ namespace SmartCore.Calculations.PerformanceCalculator
 					// с момента производства
 					var sinceNew = Lifelength.Null;
 					if (threshold.FirstPerformanceSinceNew != null &&
-						!threshold.FirstPerformanceSinceNew.IsNullOrZero())
+					    !threshold.FirstPerformanceSinceNew.IsNullOrZero())
 					{
 						sinceNew = threshold.FirstPerformanceSinceNew;
 					}
+
 					np.PerformanceSource = new Lifelength(sinceNew);
 					if (threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst)
 						np.PerformanceSource.SetMin(sinceEffDate);
@@ -318,6 +335,7 @@ namespace SmartCore.Calculations.PerformanceCalculator
 							//т.е. расчитать ресурс и дату выполнения нельзя
 							return false;
 						}
+
 						//расчет добавочного ресурса
 						Lifelength rep = new Lifelength(threshold.RepeatInterval);
 						rep *= (performanceNum - 1);
@@ -329,12 +347,15 @@ namespace SmartCore.Calculations.PerformanceCalculator
 						prevDifference = np.PerformanceSource - threshold.RepeatInterval;
 						nextDifference = np.PerformanceSource + threshold.RepeatInterval;
 					}
+
 					difference = np.PerformanceSource;
 				}
+
 				#endregion
 			}
 
 			#region Определение остатка ресурса (Remain), ресурса предупреждения(Notify),
+
 			//условия(ThresholdConditionType) и 
 			//приблизительной даты (approximate date) следующего выполнения
 
@@ -350,15 +371,15 @@ namespace SmartCore.Calculations.PerformanceCalculator
 			{
 				conditionType = threshold.FirstPerformanceConditionType;
 				notify = threshold.FirstNotification != null
-							 ? new Lifelength(threshold.FirstNotification)
-							 : null;
+					? new Lifelength(threshold.FirstNotification)
+					: null;
 			}
 			else if (threshold.RepeatInterval != null && !threshold.RepeatInterval.IsNullOrZero())
 			{
 				conditionType = directive.Threshold.RepeatPerformanceConditionType;
 				notify = directive.Threshold.RepeatNotification != null
-							 ? new Lifelength(directive.Threshold.RepeatNotification)
-							 : null;
+					? new Lifelength(directive.Threshold.RepeatNotification)
+					: null;
 			}
 			else
 			{
@@ -374,12 +395,14 @@ namespace SmartCore.Calculations.PerformanceCalculator
 					: _calculator.GetManufactureDate(directive.LifeLengthParent);
 
 				if ((np.Remains.IsAllOverdue() && conditionType == ThresholdConditionType.WhicheverLater) ||
-					(np.Remains.IsOverdue() && conditionType == ThresholdConditionType.WhicheverFirst))
+				    (np.Remains.IsOverdue() && conditionType == ThresholdConditionType.WhicheverFirst))
 				{
 					//к дате пред. выполнения добавляется количество дней
 					//за которое будет израсходован повторяющийся интервал директивы
 					//с учетом заданной средней утилизации
-					np.PerformanceDate = start.AddDays(Convert.ToDouble(AnalystHelper.GetApproximateDays(difference, au, conditionType)));
+					np.PerformanceDate =
+						start.AddDays(
+							Convert.ToDouble(AnalystHelper.GetApproximateDays(difference, au, conditionType)));
 				}
 				else
 				{
@@ -387,18 +410,23 @@ namespace SmartCore.Calculations.PerformanceCalculator
 				}
 
 				if (!prevDifference.IsNullOrZero())
-					np.PrevPerformanceDate = start.AddDays(Convert.ToDouble(AnalystHelper.GetApproximateDays(prevDifference, au, conditionType)));
+					np.PrevPerformanceDate =
+						start.AddDays(
+							Convert.ToDouble(AnalystHelper.GetApproximateDays(prevDifference, au, conditionType)));
 				if (!nextDifference.IsNullOrZero())
 				{
 					np.NextPerformanceSource = np.PerformanceSource + nextDifference;
 					if (nextDifference.Days != null)
-						np.NextPerformanceDate = start.AddDays(Convert.ToDouble(AnalystHelper.GetApproximateDays(nextDifference, au, conditionType)));
+						np.NextPerformanceDate =
+							start.AddDays(
+								Convert.ToDouble(AnalystHelper.GetApproximateDays(nextDifference, au, conditionType)));
 				}
 			}
 			else
 			{
 				np.PerformanceDate = null;
 			}
+
 			#endregion
 
 			#region Расчет текущего состояния задачи в зависимости от условий выполнения
@@ -409,12 +437,14 @@ namespace SmartCore.Calculations.PerformanceCalculator
 				// whichever first
 
 				// состояние директивы - просрочена или нормально
-				np.Condition = computeConditionState(np.PerformanceSource, np.Remains, current, notify, x => x.IsOverdue());
+				np.Condition = computeConditionState(np.PerformanceSource, np.Remains, current, notify,
+					x => x.IsOverdue());
 			}
 			else // whichever later
 			{
 				// директива просрочена только в том случае, когда она просрочена по всем параметрам
-				np.Condition = computeConditionState(np.PerformanceSource, np.Remains, current, notify, x => x.IsAllOverdue());
+				np.Condition = computeConditionState(np.PerformanceSource, np.Remains, current, notify,
+					x => x.IsAllOverdue());
 			}
 
 			#endregion
@@ -459,19 +489,16 @@ namespace SmartCore.Calculations.PerformanceCalculator
 			//  Н: сделано 10 записей, 8 запись удалена, искомая 8-я
 			//4.NULL если все записи, сделанные раньше искомой, удалены
 
-			AbstractPerformanceRecord pr = component.TransferRecords.
-				OrderByDescending(rec => rec.RecordDate).
-				FirstOrDefault(record => record.PerformanceNum <= performanceNum);
+			AbstractPerformanceRecord pr = component.TransferRecords.OrderByDescending(rec => rec.RecordDate)
+				.FirstOrDefault(record => record.PerformanceNum <= performanceNum);
 
 			if (pr != null)
 			{
-				TransferRecord prevTr = component.TransferRecords.
-					OrderByDescending(rec => rec.RecordDate).
-					FirstOrDefault(record => record.PerformanceNum < performanceNum);
+				TransferRecord prevTr = component.TransferRecords.OrderByDescending(rec => rec.RecordDate)
+					.FirstOrDefault(record => record.PerformanceNum < performanceNum);
 
-				TransferRecord nextTr = component.TransferRecords.
-					OrderByDescending(rec => rec.RecordDate).
-					FirstOrDefault(record => record.PerformanceNum > performanceNum);
+				TransferRecord nextTr = component.TransferRecords.OrderByDescending(rec => rec.RecordDate)
+					.FirstOrDefault(record => record.PerformanceNum > performanceNum);
 
 				if (pr.PerformanceNum == performanceNum)
 				{
@@ -495,6 +522,7 @@ namespace SmartCore.Calculations.PerformanceCalculator
 						PerformanceNum = performanceNum,
 					};
 				}
+
 				if (prevTr != null)
 				{
 					np.PrevPerformanceDate = prevTr.RecordDate;
@@ -519,12 +547,11 @@ namespace SmartCore.Calculations.PerformanceCalculator
 			else
 			{
 				//ситуация 4.
-				TransferRecord nextTr = component.TransferRecords.
-					OrderByDescending(rec => rec.RecordDate).
-					FirstOrDefault(record => record.PerformanceNum > performanceNum);
+				TransferRecord nextTr = component.TransferRecords.OrderByDescending(rec => rec.RecordDate)
+					.FirstOrDefault(record => record.PerformanceNum > performanceNum);
 
 				if (threshold.FirstPerformanceSinceNew.IsNullOrZero() &&
-					threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+				    threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
 				{
 					//небыло ни одного выполнения, 
 					//и не заданы ресурсы первого выполнения
@@ -542,17 +569,22 @@ namespace SmartCore.Calculations.PerformanceCalculator
 				if (nextTr != null)
 				{
 					np.NextPerformanceDate = nextTr.RecordDate;
-					np.NextPerformanceSource = _calculator.GetFlightLifelengthOnEndOfDay(component.LifeLengthParent, nextTr.RecordDate);//TODO:(Evgenii Babak) вызов одного и того же метода с одинаковыми параметрами.
-					np.PerformanceSource = _calculator.GetFlightLifelengthOnEndOfDay(component.LifeLengthParent, nextTr.RecordDate);
+					np.NextPerformanceSource =
+						_calculator.GetFlightLifelengthOnEndOfDay(component.LifeLengthParent,
+							nextTr.RecordDate); //TODO:(Evgenii Babak) вызов одного и того же метода с одинаковыми параметрами.
+					np.PerformanceSource =
+						_calculator.GetFlightLifelengthOnEndOfDay(component.LifeLengthParent, nextTr.RecordDate);
 				}
 				else
 				{
 					np.PerformanceSource = component.LifeLimit;
 				}
 			}
+
 			#endregion
 
 			#region Определение остатка ресурса (Remain), ресурса предупреждения(Notify),
+
 			//условия(ThresholdConditionType) и 
 			//приблизительной даты (approximate date) следующего выполнения
 
@@ -565,19 +597,20 @@ namespace SmartCore.Calculations.PerformanceCalculator
 			Lifelength notifyRemains;
 			ThresholdConditionType conditionType = threshold.FirstPerformanceConditionType;
 			Lifelength notify = threshold.FirstNotification != null
-									? new Lifelength(threshold.FirstNotification)
-									: null;
+				? new Lifelength(threshold.FirstNotification)
+				: null;
 
 			//расчет approximate date - для этого нам нужен AverageUtilization
 			if (au != null)
 			{
 				if ((np.Remains.IsAllOverdue() && conditionType == ThresholdConditionType.WhicheverLater) ||
-					(np.Remains.IsOverdue() && conditionType == ThresholdConditionType.WhicheverFirst))
+				    (np.Remains.IsOverdue() && conditionType == ThresholdConditionType.WhicheverFirst))
 				{
 					//к дате пред. выполнения добавляется количество дней
 					//за которое будет израсходован повторяющийся интервал директивы
 					//с учетом заданной средней утилизации
-					np.PerformanceDate = component.ManufactureDate.AddDays(Convert.ToDouble(AnalystHelper.GetApproximateDays(component.LifeLimit, au, conditionType)));
+					np.PerformanceDate = component.ManufactureDate.AddDays(
+						Convert.ToDouble(AnalystHelper.GetApproximateDays(component.LifeLimit, au, conditionType)));
 				}
 				else
 				{
@@ -588,6 +621,7 @@ namespace SmartCore.Calculations.PerformanceCalculator
 			{
 				np.PerformanceDate = null;
 			}
+
 			#endregion
 
 			#region Расчет текущего состояния задачи в зависимости от условий выполнения
@@ -598,12 +632,14 @@ namespace SmartCore.Calculations.PerformanceCalculator
 				// whichever first
 
 				// состояние директивы - просрочена или нормально
-				np.Condition = computeConditionState(np.PerformanceSource, np.Remains, current, notify, x => x.IsOverdue());
+				np.Condition = computeConditionState(np.PerformanceSource, np.Remains, current, notify,
+					x => x.IsOverdue());
 			}
 			else // whichever later
 			{
 				// директива просрочена только в том случае, когда она просрочена по всем параметрам
-				np.Condition = computeConditionState(np.PerformanceSource, np.Remains, current, notify, x => x.IsAllOverdue());
+				np.Condition = computeConditionState(np.PerformanceSource, np.Remains, current, notify,
+					x => x.IsAllOverdue());
 			}
 
 			#endregion
@@ -616,6 +652,7 @@ namespace SmartCore.Calculations.PerformanceCalculator
 		#endregion
 
 		#region public void GetPerformance(MaintenanceCheckCollection groupChecks, int performanceNum)
+
 		/// <summary>
 		/// Поиск выполнения директивы с заданным номером
 		/// </summary>
@@ -682,8 +719,8 @@ namespace SmartCore.Calculations.PerformanceCalculator
 				return;
 
 			IThreshold threshold;
-			if (directive is MaintenanceDirective && ((MaintenanceDirective)directive).MaintenanceCheck != null)
-				threshold = ((MaintenanceDirective)directive).MaintenanceCheck.Threshold;
+			if (directive is MaintenanceDirective && ((MaintenanceDirective) directive).MaintenanceCheck != null)
+				threshold = ((MaintenanceDirective) directive).MaintenanceCheck.Threshold;
 			else threshold = directive.Threshold;
 
 			var last = Lifelength.Null;
@@ -706,28 +743,30 @@ namespace SmartCore.Calculations.PerformanceCalculator
 						// Расчитываем условие первого выполнения 
 						// получаем ресурс агрегата при котором директива должна будет выполнена с момента вступления директивы в действие
 						if ((threshold.FirstPerformanceSinceEffectiveDate != null &&
-							 !threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
-							||
-							(threshold.FirstPerformanceSinceNew != null &&
-							 !threshold.FirstPerformanceSinceNew.IsNullOrZero()))
+						     !threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+						    ||
+						    (threshold.FirstPerformanceSinceNew != null &&
+						     !threshold.FirstPerformanceSinceNew.IsNullOrZero()))
 						{
-							np = new NextPerformance { Parent = directive };
+							np = new NextPerformance {Parent = directive};
 
 							Lifelength sinceEffDate = Lifelength.Null;
 							if (threshold.FirstPerformanceSinceEffectiveDate != null &&
-								!threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+							    !threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
 							{
-								sinceEffDate = _calculator.GetFlightLifelengthOnStartOfDay(directive.LifeLengthParent, threshold.EffectiveDate);
+								sinceEffDate = _calculator.GetFlightLifelengthOnStartOfDay(directive.LifeLengthParent,
+									threshold.EffectiveDate);
 								sinceEffDate.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
 								if (threshold.RepeatInterval.CalendarValue != null)
-									sinceEffDate.Add(threshold.EffectiveDate, threshold.FirstPerformanceSinceEffectiveDate);
+									sinceEffDate.Add(threshold.EffectiveDate,
+										threshold.FirstPerformanceSinceEffectiveDate);
 								else sinceEffDate.Add(threshold.FirstPerformanceSinceEffectiveDate);
 							}
 
 							// с момента производства
 							Lifelength sinceNew = Lifelength.Null;
 							if (threshold.FirstPerformanceSinceNew != null &&
-								!threshold.FirstPerformanceSinceNew.IsNullOrZero())
+							    !threshold.FirstPerformanceSinceNew.IsNullOrZero())
 							{
 								sinceNew = threshold.FirstPerformanceSinceNew;
 
@@ -742,14 +781,15 @@ namespace SmartCore.Calculations.PerformanceCalculator
 
 							if (directive is Entities.General.Accessory.Component)
 							{
-								TransferRecord lastTr = ((Entities.General.Accessory.Component)directive).TransferRecords.GetLast();
+								TransferRecord lastTr = ((Entities.General.Accessory.Component) directive)
+									.TransferRecords.GetLast();
 								if (lastTr != null)
 									np.PerformanceNum = 1 + (lastTr.PerformanceNum <= 0 ? 1 : lastTr.PerformanceNum);
 								else np.PerformanceNum = 1;
 							}
 							else np.PerformanceNum = directive.NextPerformances.Count + 1;
 
-							
+
 							np.PerformanceSource = new Lifelength(sinceNew);
 							if (threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst)
 								np.PerformanceSource.SetMin(sinceEffDate);
@@ -761,9 +801,9 @@ namespace SmartCore.Calculations.PerformanceCalculator
 						// Расчитываем условие следующего выполнения
 						// Следующее выполнение = ресурс базового агрегата на момент прошлого выполнения директивы + repeat interval
 						if (threshold.PerformRepeatedly && threshold.RepeatInterval != null &&
-							!threshold.RepeatInterval.IsNullOrZero())
+						    !threshold.RepeatInterval.IsNullOrZero())
 						{
-							np = new NextPerformance { Parent = directive };
+							np = new NextPerformance {Parent = directive};
 
 							last = directive.LastPerformance.OnLifelength;
 
@@ -773,11 +813,14 @@ namespace SmartCore.Calculations.PerformanceCalculator
 								var d = directive as MaintenanceDirective;
 
 								_mtopCalculator.CalculateDirective(d, au);
-								int lastPerfNum = directive.LastPerformance.PerformanceNum <= 0 ? 1 : directive.LastPerformance.PerformanceNum;
+								int lastPerfNum = directive.LastPerformance.PerformanceNum <= 0
+									? 1
+									: directive.LastPerformance.PerformanceNum;
 								np.PerformanceNum = lastPerfNum + directive.NextPerformances.Count + 1;
 								np.PerformanceSource = new Lifelength(last);
 								if (d.PhaseRepeat != null && !d.PhaseRepeat.IsNullOrZero())
-									np.PerformanceSource.Add(Convert.ToDateTime(directive.LastPerformance.RecordDate), d.PhaseRepeat);
+									np.PerformanceSource.Add(Convert.ToDateTime(directive.LastPerformance.RecordDate),
+										d.PhaseRepeat);
 								else np.PerformanceSource.Add(d.PhaseThresh);
 								// Убираем не нужные параметры
 
@@ -787,11 +830,14 @@ namespace SmartCore.Calculations.PerformanceCalculator
 							}
 							else
 							{
-								int lastPerfNum = directive.LastPerformance.PerformanceNum <= 0 ? 1 : directive.LastPerformance.PerformanceNum;
+								int lastPerfNum = directive.LastPerformance.PerformanceNum <= 0
+									? 1
+									: directive.LastPerformance.PerformanceNum;
 								np.PerformanceNum = lastPerfNum + directive.NextPerformances.Count + 1;
 								np.PerformanceSource = new Lifelength(last);
 								if (threshold.RepeatInterval.CalendarValue != null)
-									np.PerformanceSource.Add(Convert.ToDateTime(directive.LastPerformance.RecordDate), threshold.RepeatInterval);
+									np.PerformanceSource.Add(Convert.ToDateTime(directive.LastPerformance.RecordDate),
+										threshold.RepeatInterval);
 								else np.PerformanceSource.Add(threshold.RepeatInterval);
 								// Убираем не нужные параметры
 								np.PerformanceSource.Resemble(threshold.RepeatInterval);
@@ -804,9 +850,9 @@ namespace SmartCore.Calculations.PerformanceCalculator
 					// Расчитываем условие следующего выполнения
 					// Следующее выполнение = ресурс базового агрегата на момент прошлого выполнения директивы + repeat interval
 					if (threshold.PerformRepeatedly && threshold.RepeatInterval != null &&
-						!threshold.RepeatInterval.IsNullOrZero())
+					    !threshold.RepeatInterval.IsNullOrZero())
 					{
-						np = new NextPerformance { Parent = directive };
+						np = new NextPerformance {Parent = directive};
 
 						lastNp = directive.NextPerformances.Last();
 						last = lastNp.PerformanceSource;
@@ -832,7 +878,8 @@ namespace SmartCore.Calculations.PerformanceCalculator
 							np.PerformanceNum = lastNp.PerformanceNum + 1;
 							np.PerformanceSource = new Lifelength(last);
 							if (lastNp.PerformanceDate != null && threshold.RepeatInterval.CalendarValue != null)
-								np.PerformanceSource.Add(Convert.ToDateTime(lastNp.PerformanceDate), threshold.RepeatInterval);
+								np.PerformanceSource.Add(Convert.ToDateTime(lastNp.PerformanceDate),
+									threshold.RepeatInterval);
 							else np.PerformanceSource.Add(threshold.RepeatInterval);
 							// Убираем не нужные параметры
 							np.PerformanceSource.Resemble(threshold.RepeatInterval);
@@ -848,20 +895,33 @@ namespace SmartCore.Calculations.PerformanceCalculator
 				}
 
 				#region Определение остатка ресурса (Remain), ресурса предупреждения(Notify),
+
 				//условия(ThresholdConditionType) и 
 				//приблизительной даты (approximate date) следующего выполнения
 
 
-				if (directive is Entities.General.Accessory.Component && ((Entities.General.Accessory.Component)directive).LLPMark && ((Entities.General.Accessory.Component)directive).LLPCategories)
+				if (directive is Entities.General.Accessory.Component &&
+				    ((Entities.General.Accessory.Component) directive).LLPMark &&
+				    ((Entities.General.Accessory.Component) directive).LLPCategories)
 				{
-					np.Remains = ((Entities.General.Accessory.Component)directive).LLPRemains;
+					np.Remains = ((Entities.General.Accessory.Component) directive).LLPRemains;
 				}
 				else
 				{
 					if (directive.LastPerformance != null)
 					{
-						np.LimitOverdue = new Lifelength(directive.Threshold.RepeatInterval);
-						np.LimitNotify = new Lifelength(directive.Threshold.RepeatInterval);
+						if (directive is MaintenanceDirective)
+						{
+							var d = directive as MaintenanceDirective;
+							np.LimitOverdue = new Lifelength(d.PhaseRepeat);
+							np.LimitNotify = new Lifelength(d.PhaseRepeat);
+						}
+						else
+						{
+							np.LimitOverdue = new Lifelength(directive.Threshold.RepeatInterval);
+							np.LimitNotify = new Lifelength(directive.Threshold.RepeatInterval);
+						}
+
 						np.LimitNotify.Substract(directive.Threshold.FirstNotification);
 
 						np.LimitOverdue.Add(directive.LastPerformance.OnLifelength);
@@ -872,7 +932,8 @@ namespace SmartCore.Calculations.PerformanceCalculator
 					}
 					else
 					{
-						if (directive.Threshold.FirstPerformanceSinceEffectiveDate != null && !directive.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+						if (directive.Threshold.FirstPerformanceSinceEffectiveDate != null &&
+						    !directive.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
 						{
 							np.LimitOverdue = new Lifelength(np.PerformanceSource);
 							np.LimitNotify = new Lifelength(np.PerformanceSource);
@@ -895,14 +956,15 @@ namespace SmartCore.Calculations.PerformanceCalculator
 
 					if (directive is Entities.General.Accessory.Component)
 					{
-						np.WarrantlyRemains = new Lifelength(((Entities.General.Accessory.Component)directive).Warranty);
+						np.WarrantlyRemains =
+							new Lifelength(((Entities.General.Accessory.Component) directive).Warranty);
 						np.WarrantlyRemains.Substract(current); // remains = next - current
 
 						np.WarrantlyRemains.Resemble(np.LimitOverdue);
 					}
 					else if (directive is ComponentDirective)
 					{
-						np.WarrantlyRemains = new Lifelength(((ComponentDirective)directive).Threshold.Warranty);
+						np.WarrantlyRemains = new Lifelength(((ComponentDirective) directive).Threshold.Warranty);
 						np.WarrantlyRemains.Substract(current); // remains = next - current
 
 						np.WarrantlyRemains.Resemble(np.LimitOverdue);
@@ -912,13 +974,13 @@ namespace SmartCore.Calculations.PerformanceCalculator
 					np.Remains = new Lifelength(np.PerformanceSource);
 					np.Remains.Substract(current); // remains = next - current
 
-					
+
 					np.Remains.Resemble(np.LimitOverdue);
 				}
 
-				if(np.Remains == null)
+				if (np.Remains == null)
 					np.Remains = Lifelength.Null;
-				
+
 
 				// Condition State и Approximate Date расчитывается по разному в зависимости от Whichever First и Whichever Later 
 				// Whichever First и Whichever Later - разные для первого выполнения и повтороного выполнения
@@ -928,15 +990,15 @@ namespace SmartCore.Calculations.PerformanceCalculator
 				{
 					conditionType = threshold.FirstPerformanceConditionType;
 					notify = threshold.FirstNotification != null
-								 ? new Lifelength(threshold.FirstNotification)
-								 : null;
+						? new Lifelength(threshold.FirstNotification)
+						: null;
 				}
 				else if (threshold.RepeatInterval != null && !threshold.RepeatInterval.IsNullOrZero())
 				{
 					conditionType = directive.Threshold.RepeatPerformanceConditionType;
 					notify = directive.Threshold.RepeatNotification != null
-								 ? new Lifelength(directive.Threshold.RepeatNotification)
-								 : null;
+						? new Lifelength(directive.Threshold.RepeatNotification)
+						: null;
 				}
 				else
 				{
@@ -946,93 +1008,101 @@ namespace SmartCore.Calculations.PerformanceCalculator
 				//расчет approximate date - для этого нам нужен AverageUtilization
 				if (au != null)
 				{
-						//DateTime? dt = GetApproximateDate(directive.LifeLengthParent, np.PerformanceSource, conditionType);
-						//if (dt != null)
-						//{
+					//DateTime? dt = GetApproximateDate(directive.LifeLengthParent, np.PerformanceSource, conditionType);
+					//if (dt != null)
+					//{
 
-						//}
-						if (directive.NextPerformances.Count > 0 &&
-							directive.NextPerformances.Last().PerformanceDate != null)
+					//}
+					if (directive.NextPerformances.Count > 0 &&
+					    directive.NextPerformances.Last().PerformanceDate != null)
+					{
+						//к дате пред. выполнения добавляется количество дней
+						//за которое будет израсходован повторяющийся интервал директивы
+						//с учетом заданной средней утилизации
+						double? days;
+						if (directive is MaintenanceDirective)
 						{
-							//к дате пред. выполнения добавляется количество дней
-							//за которое будет израсходован повторяющийся интервал директивы
-							//с учетом заданной средней утилизации
-							double? days;
-							if (directive is MaintenanceDirective)
-							{
-								var d = directive as MaintenanceDirective;
-								days =
-									AnalystHelper.GetApproximateDays(Convert.ToDateTime(directive.NextPerformances.Last().PerformanceDate),
-										d.PhaseRepeat, au, conditionType);
-							}
-							else
-							{
-								days =
-									AnalystHelper.GetApproximateDays(Convert.ToDateTime(directive.NextPerformances.Last().PerformanceDate),
-										threshold.RepeatInterval, au, conditionType);
-							}
-
-							
-							if (days != null)
-								np.PerformanceDate = directive.NextPerformances.Last().PerformanceDate.Value.AddDays(Convert.ToDouble(days));
-							else np.PerformanceDate = null;
-						}
-						else if (directive.LastPerformance != null)
-						{
-							double? days;
-							if (directive is MaintenanceDirective)
-							{
-								var d = directive as MaintenanceDirective;
-								days =
-									AnalystHelper.GetApproximateDays(directive.LastPerformance.RecordDate,
-										d.PhaseRepeat, au, conditionType);
-							}
-							else
-							{
-								days =
-									AnalystHelper.GetApproximateDays(directive.LastPerformance.RecordDate,
-										threshold.RepeatInterval, au, conditionType);
-							}
-
-
-							
-							if (days != null)
-								np.PerformanceDate = directive.LastPerformance.RecordDate.AddDays(Convert.ToDouble(days));
-							else np.PerformanceDate = null;
+							var d = directive as MaintenanceDirective;
+							days =
+								AnalystHelper.GetApproximateDays(
+									Convert.ToDateTime(directive.NextPerformances.Last().PerformanceDate),
+									d.PhaseRepeat, au, conditionType);
 						}
 						else
 						{
-							double? days = AnalystHelper.GetApproximateDays(np.PerformanceSource, au, conditionType);
-							if (days != null)
-							{
-								if (directive is MaintenanceDirective && np.PerformanceSource.Days.HasValue)
-								{
-									np.PerformanceDate = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(np.PerformanceSource.Days.Value);
-								}
-								else
-								{
-									if (days <= current.Days)
-										np.PerformanceDate = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(Convert.ToDouble(days));
-									else np.PerformanceDate = AnalystHelper.GetApproximateDate(np.Remains, au, conditionType);
-								}
-								
-							}
-							else np.PerformanceDate = null;
+							days =
+								AnalystHelper.GetApproximateDays(
+									Convert.ToDateTime(directive.NextPerformances.Last().PerformanceDate),
+									threshold.RepeatInterval, au, conditionType);
 						}
+
+
+						if (days != null)
+							np.PerformanceDate = directive.NextPerformances.Last().PerformanceDate.Value
+								.AddDays(Convert.ToDouble(days));
+						else np.PerformanceDate = null;
+					}
+					else if (directive.LastPerformance != null)
+					{
+						double? days;
+						if (directive is MaintenanceDirective)
+						{
+							var d = directive as MaintenanceDirective;
+							days =
+								AnalystHelper.GetApproximateDays(directive.LastPerformance.RecordDate,
+									d.PhaseRepeat, au, conditionType);
+						}
+						else
+						{
+							days =
+								AnalystHelper.GetApproximateDays(directive.LastPerformance.RecordDate,
+									threshold.RepeatInterval, au, conditionType);
+						}
+
+
+
+						if (days != null)
+							np.PerformanceDate = directive.LastPerformance.RecordDate.AddDays(Convert.ToDouble(days));
+						else np.PerformanceDate = null;
+					}
+					else
+					{
+						double? days = AnalystHelper.GetApproximateDays(np.PerformanceSource, au, conditionType);
+						if (days != null)
+						{
+							if (directive is MaintenanceDirective && np.PerformanceSource.Days.HasValue)
+							{
+								np.PerformanceDate = _calculator.GetManufactureDate(directive.LifeLengthParent)
+									.AddDays(np.PerformanceSource.Days.Value);
+							}
+							else
+							{
+								if (days <= current.Days)
+									np.PerformanceDate = _calculator.GetManufactureDate(directive.LifeLengthParent)
+										.AddDays(Convert.ToDouble(days));
+								else
+									np.PerformanceDate =
+										AnalystHelper.GetApproximateDate(np.Remains, au, conditionType);
+							}
+
+						}
+						else np.PerformanceDate = null;
+					}
 				}
 				else
 				{
 					np.PerformanceDate = null;
 
 					if (directive.NextPerformances.Count > 0 &&
-						directive.NextPerformances.Last().PerformanceDate != null)
+					    directive.NextPerformances.Last().PerformanceDate != null)
 					{
 						//к дате пред. выполнения добавляется количество дней
 						//за которое будет израсходован повторяющийся интервал директивы
 						//с учетом заданной средней утилизации
 						double? days = threshold.RepeatInterval.Days;
 						if (days != null)
-							np.PerformanceDate = directive.NextPerformances.Last().PerformanceDate.Value.AddDays(Convert.ToDouble(days));
+							np.PerformanceDate = directive.NextPerformances.Last().PerformanceDate.Value
+								.AddDays(Convert.ToDouble(days));
 						else np.PerformanceDate = null;
 					}
 					else if (directive.LastPerformance != null)
@@ -1047,11 +1117,13 @@ namespace SmartCore.Calculations.PerformanceCalculator
 						double? days = np.PerformanceSource.Days;
 						if (days != null)
 						{
-							np.PerformanceDate = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(Convert.ToDouble(days));
+							np.PerformanceDate = _calculator.GetManufactureDate(directive.LifeLengthParent)
+								.AddDays(Convert.ToDouble(days));
 						}
 						else np.PerformanceDate = null;
 					}
 				}
+
 				#endregion
 
 				directive.NextPerformances.Add(np);
@@ -1064,13 +1136,17 @@ namespace SmartCore.Calculations.PerformanceCalculator
 					// whichever first
 
 					// состояние директивы - просрочена или нормально
-					np.Condition = computeConditionState(directive, np.LimitNotify, np.LimitOverdue, np.Remains, current, notify, x =>x.IsOverdue(), x => x.IsLessByAnyParameter(notify), ThresholdConditionType.WhicheverFirst);
-					
+					np.Condition = computeConditionState(directive, np.LimitNotify, np.LimitOverdue, np.Remains,
+						current, notify, x => x.IsOverdue(), x => x.IsLessByAnyParameter(notify),
+						ThresholdConditionType.WhicheverFirst);
+
 				}
 				else // whichever later
 				{
 					// директива просрочена только в том случае, когда она просрочена по всем параметрам
-					np.Condition = computeConditionState(directive, np.LimitNotify, np.LimitOverdue, np.Remains, current, notify, x => x.IsAllOverdue(), x => x.IsLess(notify), ThresholdConditionType.WhicheverLater);
+					np.Condition = computeConditionState(directive, np.LimitNotify, np.LimitOverdue, np.Remains,
+						current, notify, x => x.IsAllOverdue(), x => x.IsLess(notify),
+						ThresholdConditionType.WhicheverLater);
 				}
 
 				#endregion
@@ -1079,7 +1155,8 @@ namespace SmartCore.Calculations.PerformanceCalculator
 
 				if (forecast == null) break;
 
-				directive.ForecastLifelength = _calculator.GetCurrentFlightLifelength(directive.LifeLengthParent, forecast);
+				directive.ForecastLifelength =
+					_calculator.GetCurrentFlightLifelength(directive.LifeLengthParent, forecast);
 				np.BeforeForecastResourceRemain = new Lifelength(directive.ForecastLifelength);
 
 				//Производится расчет ресурса директивы, который проидет от
@@ -1092,7 +1169,7 @@ namespace SmartCore.Calculations.PerformanceCalculator
 
 					//определение положения текущей точки (сегодняшней даты и наработки на сегодня)
 					if (directive.Threshold.FirstPerformanceSinceNew.IsNullOrZero() &&
-						!directive.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+					    !directive.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
 					{
 						if (DateTime.Today < directive.Threshold.EffectiveDate)
 						{
@@ -1106,8 +1183,8 @@ namespace SmartCore.Calculations.PerformanceCalculator
 							effDateLifeLenght.Add(current);
 							//и добавляется прогнозируемый ресурс = средняя утилизация * кол-во дней
 							effDateLifeLenght.Add(AnalystHelper.GetUtilization(forecast.AverageUtilization,
-																		 (directive.Threshold.EffectiveDate -
-																		  DateTime.Today).Days));
+								(directive.Threshold.EffectiveDate -
+								 DateTime.Today).Days));
 							//расчет ресурса между начальной точкой и точкой прогноза
 							np.BeforeForecastResourceRemain.NullSubstract(effDateLifeLenght);
 						}
@@ -1116,7 +1193,9 @@ namespace SmartCore.Calculations.PerformanceCalculator
 							//эффективная дата ниже сегодняшней 
 
 							//Наработка на эффективную дату
-							Lifelength effDateLifeLenght = _calculator.GetFlightLifelengthOnEndOfDay(directive.LifeLengthParent, directive.Threshold.EffectiveDate);
+							Lifelength effDateLifeLenght =
+								_calculator.GetFlightLifelengthOnEndOfDay(directive.LifeLengthParent,
+									directive.Threshold.EffectiveDate);
 							//эффективная дата ниже сегодняшней 
 							np.BeforeForecastResourceRemain.NullSubstract(effDateLifeLenght);
 						}
@@ -1143,7 +1222,7 @@ namespace SmartCore.Calculations.PerformanceCalculator
 				{
 					//выполнение происходит по принципу "что первее"
 					if (np.PerformanceSource.IsLessOrEqualByAnyParameter(directive.ForecastLifelength) &&
-						directive.Threshold.RepeatInterval.IsNullOrZero())
+					    directive.Threshold.RepeatInterval.IsNullOrZero())
 					{
 						//точка следующего выполнения меньше точки прогноза
 						//и повторяющегося инервала нет
@@ -1154,7 +1233,7 @@ namespace SmartCore.Calculations.PerformanceCalculator
 					}
 
 					if (np.PerformanceSource.IsGreaterNullable(directive.ForecastLifelength) ||
-						directive.Threshold.RepeatInterval.IsNullOrZero())
+					    directive.Threshold.RepeatInterval.IsNullOrZero())
 					{
 						//точка следующего выполнения больше точки прогноза
 						//или повторяющегося инервала нет
@@ -1169,7 +1248,7 @@ namespace SmartCore.Calculations.PerformanceCalculator
 				{
 					// директива просрочена только в том случае, когда она просрочена по всем параметрам
 					if (np.PerformanceSource.IsLessByAnyParameterNullable(directive.ForecastLifelength) &&
-						directive.Threshold.RepeatInterval.IsNullOrZero())
+					    directive.Threshold.RepeatInterval.IsNullOrZero())
 					{
 						//ресурс между точкой прогноза и точкой следующего выполнения отсутствует
 						directive.AfterForecastResourceRemain = Lifelength.Null;
@@ -1178,7 +1257,7 @@ namespace SmartCore.Calculations.PerformanceCalculator
 					}
 
 					if (np.PerformanceSource.IsGreaterByAnyParameter(directive.ForecastLifelength) ||
-						directive.Threshold.RepeatInterval.IsNullOrZero())
+					    directive.Threshold.RepeatInterval.IsNullOrZero())
 					{
 						directive.AfterForecastResourceRemain = new Lifelength(np.PerformanceSource);
 						directive.AfterForecastResourceRemain.NullSubstract(directive.ForecastLifelength);
@@ -1188,7 +1267,8 @@ namespace SmartCore.Calculations.PerformanceCalculator
 				}
 
 				// расчет остатка в процентах
-				if (directive.AfterForecastResourceRemain != null && !directive.AfterForecastResourceRemain.IsNullOrZero())
+				if (directive.AfterForecastResourceRemain != null &&
+				    !directive.AfterForecastResourceRemain.IsNullOrZero())
 				{
 					Lifelength full = new Lifelength(np.BeforeForecastResourceRemain);
 					full.Add(directive.AfterForecastResourceRemain);
@@ -1236,15 +1316,15 @@ namespace SmartCore.Calculations.PerformanceCalculator
 				cond = GetConditionState(componentDirective);
 
 				if (cond == ConditionState.NotEstimated &&
-					componentStatus == ConditionState.NotEstimated)
+				    componentStatus == ConditionState.NotEstimated)
 					componentStatus = ConditionState.NotEstimated;
 
 				if (cond == ConditionState.Satisfactory &&
-					componentStatus != ConditionState.Notify)
+				    componentStatus != ConditionState.Notify)
 					componentStatus = ConditionState.Satisfactory;
 
 				if (cond == ConditionState.Notify &&
-					componentStatus != ConditionState.Overdue)
+				    componentStatus != ConditionState.Overdue)
 					componentStatus = ConditionState.Notify;
 
 				if (cond == ConditionState.Overdue)
@@ -1255,6 +1335,7 @@ namespace SmartCore.Calculations.PerformanceCalculator
 
 			return componentStatus;
 		}
+
 		#endregion
 
 		#region public ConditionState GetConditionState(ComponentDirective componentDirective)
@@ -1266,12 +1347,15 @@ namespace SmartCore.Calculations.PerformanceCalculator
 		/// <returns></returns>
 		public ConditionState GetConditionState(ComponentDirective componentDirective)
 		{
-			GetNextPerformance(componentDirective);//TODO:(Evgenii Babak) Пересмотреть подход , метод возвращает Condition а мы считаем весь NextPerformance
+			GetNextPerformance(
+				componentDirective); //TODO:(Evgenii Babak) Пересмотреть подход , метод возвращает Condition а мы считаем весь NextPerformance
 			return componentDirective.Condition;
 		}
+
 		#endregion
 
 		#region public ConditionState GetConditionState(Directive directive)
+
 		/// <summary>
 		/// Расчитывает состояние компонента и его директив(открыта, просрочена или близкое ожидание)
 		/// </summary>
@@ -1279,12 +1363,15 @@ namespace SmartCore.Calculations.PerformanceCalculator
 		/// <returns></returns>
 		public ConditionState GetConditionState(Directive directive)
 		{
-			GetNextPerformance(directive);//TODO:(Evgenii Babak) Пересмотреть подход , метод возвращает Condition а мы считаем весь NextPerformance
+			GetNextPerformance(
+				directive); //TODO:(Evgenii Babak) Пересмотреть подход , метод возвращает Condition а мы считаем весь NextPerformance
 			return directive.Condition;
 		}
+
 		#endregion
 
 		#region public ConditionState GetConditionState(IDirective directive)
+
 		/// <summary>
 		/// Расчитывает состояние компонента и его директив(открыта, просрочена или близкое ожидание)
 		/// </summary>
@@ -1292,15 +1379,18 @@ namespace SmartCore.Calculations.PerformanceCalculator
 		/// <returns></returns>
 		public ConditionState GetConditionState(IDirective directive)
 		{
-			GetNextPerformance(directive);//TODO:(Evgenii Babak) Пересмотреть подход , метод возвращает Condition а мы считаем весь NextPerformance
+			GetNextPerformance(
+				directive); //TODO:(Evgenii Babak) Пересмотреть подход , метод возвращает Condition а мы считаем весь NextPerformance
 			return directive.Condition;
 		}
+
 		#endregion
 
 
 		// Вспомогательные методы
 
-		private ConditionState computeConditionState(Lifelength performanceSource, Lifelength remains, Lifelength current, Lifelength notify, Func<Lifelength, bool> getIsOverdueFunc)
+		private ConditionState computeConditionState(Lifelength performanceSource, Lifelength remains,
+			Lifelength current, Lifelength notify, Func<Lifelength, bool> getIsOverdueFunc)
 		{
 			if (notify != null && !notify.IsNullOrZero())
 			{
@@ -1328,28 +1418,60 @@ namespace SmartCore.Calculations.PerformanceCalculator
 		{
 			if (notify != null && !notify.IsNullOrZero())
 			{
-				if (directive is Entities.General.Accessory.Component && ((Entities.General.Accessory.Component) directive).LLPMark && ((Entities.General.Accessory.Component) directive).LLPCategories)
+				if (directive is Entities.General.Accessory.Component &&
+				    ((Entities.General.Accessory.Component) directive).LLPMark &&
+				    ((Entities.General.Accessory.Component) directive).LLPCategories)
 				{
 					return getIsOverdueFunc(remains)
-									? ConditionState.Overdue
-									: (getIsLessFunc(notify)
-											? ConditionState.Notify
-											: ConditionState.Satisfactory);
+						? ConditionState.Overdue
+						: (getIsLessFunc(notify)
+							? ConditionState.Notify
+							: ConditionState.Satisfactory);
+				}
+
+				var optimizedCurrent = new Lifelength(current);
+				optimizedCurrent.Resemble(limitOverdue);
+
+				//var optimizedCurrentNotify = new Lifelength(current);
+				//optimizedCurrentNotify.Resemble(limitNotify);
+
+				var optimizedCurrentNotify = new Lifelength(notify);
+				optimizedCurrentNotify.Resemble(remains);
+
+				if (whicheverFirst == ThresholdConditionType.WhicheverFirst)
+				{
+					if (optimizedCurrent.IsGreaterByAnyParameter(limitOverdue))
+						return ConditionState.Overdue;
+
+					//if (optimizedCurrentNotify.IsLessByAnyParameter(limitNotify))
+					//	return ConditionState.Notify;
+
+					if (remains.IsLessByAnyParameter(optimizedCurrentNotify))
+						return ConditionState.Notify;
+				}
+				else
+				{
+
+					if (optimizedCurrent.IsGreaterNew(limitOverdue))
+						return ConditionState.Overdue;
+
+					//if (limitNotify.IsLessNew(current))
+					//	return ConditionState.Notify;
+
+					if (remains.IsLessNew(optimizedCurrentNotify))
+						return ConditionState.Notify;
 				}
 
 
-					if (current.IsGreaterByAnyParameter(limitOverdue))
-						return ConditionState.Overdue;
-
-					if (limitOverdue.IsGreaterByAnyParameter(current) && current.IsGreaterByAnyParameter(limitNotify))
-						return ConditionState.Notify;
-
 				return ConditionState.Satisfactory;
-				
+
 			}
 
 			return getIsOverdueFunc(remains) ? ConditionState.Overdue : ConditionState.Satisfactory;
 		}
 
+
 	}
+
+
 }
