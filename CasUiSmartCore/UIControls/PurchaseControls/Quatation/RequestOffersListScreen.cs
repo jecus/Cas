@@ -16,7 +16,9 @@ using EntityCore.DTO.General;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
+using SmartCore.Entities.General.Setting;
 using SmartCore.Filters;
 using SmartCore.Purchase;
 using Filter = EntityCore.Filter.Filter;
@@ -31,11 +33,13 @@ namespace CAS.UI.UIControls.PurchaseControls
 		#region Fields
 		private CommonFilterCollection _filter = new CommonFilterCollection(typeof(ILogistic));
 		private ICommonCollection<RequestForQuotation> _quotatioArray = new CommonCollection<RequestForQuotation>();
-		private ICommonCollection<RequestForQuotation> _resultArray = new CommonCollection<RequestForQuotation>();
+		private ICommonCollection<RequestForQuotationRecord> _resultArray = new CommonCollection<RequestForQuotationRecord>();
+		private IList<RequestForQuotationRecord> _addedQuatationOrderRecords = new List<RequestForQuotationRecord>();
 
 		private readonly BaseEntityObject _parent;
-		private RequestForQuotationListView _directivesViewer;
+		private RequestOffersListView _directivesViewer;
 		
+
 		#endregion
 
 		#region Constructors
@@ -87,7 +91,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				labelTitle.Text = "Date as of: " + SmartCore.Auxiliary.Convert.GetDateFormat(DateTime.Today);
 			}
 			
-			_directivesViewer.SetItemsArray(_quotatioArray.ToArray());
+			_directivesViewer.SetItemsArray(_addedQuatationOrderRecords.ToArray());
 			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 
 			_directivesViewer.Focus();
@@ -100,12 +104,49 @@ namespace CAS.UI.UIControls.PurchaseControls
 			if (_parent == null) return;
 			_quotatioArray.Clear();
 			_resultArray.Clear();
+			_addedQuatationOrderRecords.Clear();
 
 			AnimatedThreadWorker.ReportProgress(0, "load Quotations");
 
 			try
 			{
 				_quotatioArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>(new Filter("Status", WorkPackageStatus.Opened)));
+				var quotaIds = _quotatioArray.Select(i => i.ItemId);
+
+				var _quotationCosts = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<QuotationCostDTO, QuotationCost>(new Filter("QuotationId",EntityCore.Attributte.FilterType.In, quotaIds));
+				_addedQuatationOrderRecords = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationRecordDTO, RequestForQuotationRecord>(new Filter("ParentPackageId", EntityCore.Attributte.FilterType.In, quotaIds));
+				var ids = _addedQuatationOrderRecords.Select(i => i.PackageItemId);
+				var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), true);
+				var supplierId = _addedQuatationOrderRecords.SelectMany(i => i.SupplierPrice).Select(i => i.SupplierId);
+				var suppliers = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<SupplierDTO, Supplier>(new Filter("ItemId", supplierId));
+
+				if (ids.Count() > 0)
+				{
+					foreach (var addedInitialOrderRecord in _addedQuatationOrderRecords)
+					{
+						var product = products.FirstOrDefault(i => i.ItemId == addedInitialOrderRecord.PackageItemId);
+
+						foreach (var relation in product.SupplierRelations)
+						{
+							var findCost = _quotationCosts.FirstOrDefault(i => i.ProductId == product.ItemId && i.SupplierId == relation.Supplier.ItemId);
+							if (findCost != null)
+							{
+								findCost.SupplierName = relation.Supplier.Name;
+								product.QuatationCosts.Add(findCost);
+							}
+						}
+
+						addedInitialOrderRecord.Product = product;
+
+						foreach (var price in addedInitialOrderRecord.SupplierPrice)
+						{
+							price.Parent = addedInitialOrderRecord;
+							price.Supplier = suppliers.FirstOrDefault(i => i.ItemId == price.SupplierId);
+						}
+					}
+				}
+
+
 			}
 			catch (Exception ex)
 			{
@@ -137,8 +178,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private void InitListView()
 		{
-			_directivesViewer = new RequestForQuotationListView
-									{
+			_directivesViewer = new RequestOffersListView
+			{
 										TabIndex = 2,
 										Location = new Point(panel1.Left, panel1.Top),
 										Dock = DockStyle.Fill
@@ -177,13 +218,13 @@ namespace CAS.UI.UIControls.PurchaseControls
 			DialogResult confirmResult =
 				MessageBox.Show(
 					_directivesViewer.SelectedItem != null
-						? "Do you really want to delete Request for quotation " + _directivesViewer.SelectedItem.Title + "?"
+						? "Do you really want to delete Request for quotation record" + _directivesViewer.SelectedItem.ParentPackage.Title + "?"
 						: "Do you really want to delete Request for quotations? ", "Confirm delete operation",
 					MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
 
 			if (confirmResult == DialogResult.Yes)
 			{
-				List<RequestForQuotation> selectedItems = new List<RequestForQuotation>();
+				List<RequestForQuotationRecord> selectedItems = new List<RequestForQuotationRecord>();
 				selectedItems.AddRange(_directivesViewer.SelectedItems.ToArray());
 				GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
 				AnimatedThreadWorker.RunWorkerAsync();
@@ -261,7 +302,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			#region Фильтрация директив
 			AnimatedThreadWorker.ReportProgress(50, "filter directives");
 
-			FilterItems(_quotatioArray, _resultArray);
+			//FilterItems(_quotatioArray, _resultArray);
 
 			if (AnimatedThreadWorker.CancellationPending)
 			{

@@ -12,7 +12,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 	///<summary>
 	/// список для отображения ордеров запроса
 	///</summary>
-	public partial class RequestOffersListView : BaseGridViewControl<RequestForQuotation>
+	public partial class RequestOffersListView : BaseGridViewControl<RequestForQuotationRecord>
 	{
 		#region public RequestOffersListView()
 		///<summary>
@@ -39,7 +39,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		#region protected override ListViewItem.ListViewSubItem[] GetItemsString(RequestForQuotation item)
 
-		protected override List<CustomCell> GetListViewSubItems(RequestForQuotation item)
+		protected override List<CustomCell> GetListViewSubItems(RequestForQuotationRecord item)
 		{
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var status = "1.Opened";
@@ -68,17 +68,17 @@ namespace CAS.UI.UIControls.PurchaseControls
 		#region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
 		protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
 		{
-			if (SelectedItem != null)
-			{
+			//if (SelectedItem != null)
+			//{
 
-				var editForm = new QuatationOrderFormNew(SelectedItem);
-				if (editForm.ShowDialog() == DialogResult.OK)
-				{
-					var subs = GetListViewSubItems(SelectedItem);
-					for (int i = 0; i < subs.Count; i++)
-						radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
-				}
-			}
+			//	var editForm = new QuatationOrderFormNew(SelectedItem);
+			//	if (editForm.ShowDialog() == DialogResult.OK)
+			//	{
+			//		var subs = GetListViewSubItems(SelectedItem);
+			//		for (int i = 0; i < subs.Count; i++)
+			//			radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
+			//	}
+			//}
 		}
 		#endregion
 
