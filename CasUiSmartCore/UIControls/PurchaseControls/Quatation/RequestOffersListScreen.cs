@@ -35,6 +35,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private ICommonCollection<RequestForQuotation> _quotatioArray = new CommonCollection<RequestForQuotation>();
 		private ICommonCollection<RequestForQuotationRecord> _resultArray = new CommonCollection<RequestForQuotationRecord>();
 		private IList<RequestForQuotationRecord> _addedQuatationOrderRecords = new List<RequestForQuotationRecord>();
+		private IList<SupplierPriceCustom> _data = new List<SupplierPriceCustom>();
 
 		private readonly BaseEntityObject _parent;
 		private RequestOffersListView _directivesViewer;
@@ -91,7 +92,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				labelTitle.Text = "Date as of: " + SmartCore.Auxiliary.Convert.GetDateFormat(DateTime.Today);
 			}
 			
-			_directivesViewer.SetItemsArray(_addedQuatationOrderRecords.ToArray());
+			_directivesViewer.SetItemsArray(_data.ToArray());
 			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 
 			_directivesViewer.Focus();
@@ -105,6 +106,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_quotatioArray.Clear();
 			_resultArray.Clear();
 			_addedQuatationOrderRecords.Clear();
+			_data.Clear();
 
 			AnimatedThreadWorker.ReportProgress(0, "load Quotations");
 
@@ -113,35 +115,63 @@ namespace CAS.UI.UIControls.PurchaseControls
 				_quotatioArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>(new Filter("Status", WorkPackageStatus.Opened)));
 				var quotaIds = _quotatioArray.Select(i => i.ItemId);
 
-				var _quotationCosts = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<QuotationCostDTO, QuotationCost>(new Filter("QuotationId",EntityCore.Attributte.FilterType.In, quotaIds));
-				_addedQuatationOrderRecords = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationRecordDTO, RequestForQuotationRecord>(new Filter("ParentPackageId", EntityCore.Attributte.FilterType.In, quotaIds));
+				var _quotationCosts = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<QuotationCostDTO, QuotationCost>(new Filter("QuotationId", quotaIds));
+				_addedQuatationOrderRecords = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationRecordDTO, RequestForQuotationRecord>(new Filter("ParentPackageId",  quotaIds), true);
 				var ids = _addedQuatationOrderRecords.Select(i => i.PackageItemId);
-				var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), true);
-				var supplierId = _addedQuatationOrderRecords.SelectMany(i => i.SupplierPrice).Select(i => i.SupplierId);
-				var suppliers = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<SupplierDTO, Supplier>(new Filter("ItemId", supplierId));
+
 
 				if (ids.Count() > 0)
 				{
-					foreach (var addedInitialOrderRecord in _addedQuatationOrderRecords)
+					var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(
+						new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), true);
+					var supplierId = _addedQuatationOrderRecords.SelectMany(i => i.SupplierPrice)
+						.Select(i => i.SupplierId);
+					var suppliers =
+						GlobalObjects.CasEnvironment.NewLoader.GetObjectList<SupplierDTO, Supplier>(new Filter("ItemId",
+							supplierId));
+
+					foreach (var record in _addedQuatationOrderRecords.GroupBy(i => i.ParentPackageId))
 					{
-						var product = products.FirstOrDefault(i => i.ItemId == addedInitialOrderRecord.PackageItemId);
 
-						foreach (var relation in product.SupplierRelations)
+						var parentInitialId = (int)GlobalObjects.CasEnvironment.Execute(
+								$@"select i.ItemId from RequestsForQuotation q
+			left join InitialOrders i on i.ItemID = q.ParentID where q.ItemId = {record.Key}").Tables[0]
+							.Rows[0][0];
+						var initialOrderRecords =
+							GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(
+								new Filter("ParentPackageId", parentInitialId));
+
+
+						foreach (var addedInitialOrderRecord in record)
 						{
-							var findCost = _quotationCosts.FirstOrDefault(i => i.ProductId == product.ItemId && i.SupplierId == relation.Supplier.ItemId);
-							if (findCost != null)
+							addedInitialOrderRecord.ParentInitialRecord = initialOrderRecords.FirstOrDefault(i => i.ProductId == addedInitialOrderRecord.PackageItemId);
+							addedInitialOrderRecord.ParentPackage = _quotatioArray.FirstOrDefault(i => i.ItemId == addedInitialOrderRecord.ParentPackageId);
+							var product = products.FirstOrDefault(i => i.ItemId == addedInitialOrderRecord.PackageItemId);
+							foreach (var relation in product.SupplierRelations)
 							{
-								findCost.SupplierName = relation.Supplier.Name;
-								product.QuatationCosts.Add(findCost);
+								var findCost = _quotationCosts.FirstOrDefault(i =>
+									i.ProductId == product.ItemId && i.SupplierId == relation.Supplier.ItemId);
+								if (findCost != null)
+								{
+									findCost.SupplierName = relation.Supplier.Name;
+									product.QuatationCosts.Add(findCost);
+								}
 							}
-						}
 
-						addedInitialOrderRecord.Product = product;
+							addedInitialOrderRecord.Product = product;
 
-						foreach (var price in addedInitialOrderRecord.SupplierPrice)
-						{
-							price.Parent = addedInitialOrderRecord;
-							price.Supplier = suppliers.FirstOrDefault(i => i.ItemId == price.SupplierId);
+							foreach (var price in addedInitialOrderRecord.SupplierPrice)
+							{
+								price.Parent = addedInitialOrderRecord;
+								price.Supplier = suppliers.FirstOrDefault(i => i.ItemId == price.SupplierId);
+
+
+								_data.Add(new SupplierPriceCustom
+								{
+									Record = addedInitialOrderRecord,
+									Price = price,
+								});
+							}
 						}
 					}
 				}
@@ -215,25 +245,25 @@ namespace CAS.UI.UIControls.PurchaseControls
 		{
 			if (_directivesViewer.SelectedItems == null) return;
 
-			DialogResult confirmResult =
-				MessageBox.Show(
-					_directivesViewer.SelectedItem != null
-						? "Do you really want to delete Request for quotation record" + _directivesViewer.SelectedItem.ParentPackage.Title + "?"
-						: "Do you really want to delete Request for quotations? ", "Confirm delete operation",
-					MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+			//DialogResult confirmResult =
+			//	MessageBox.Show(
+			//		_directivesViewer.SelectedItem != null
+			//			? "Do you really want to delete Request for quotation record" + _directivesViewer.SelectedItem.ParentPackage.Title + "?"
+			//			: "Do you really want to delete Request for quotations? ", "Confirm delete operation",
+			//		MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
 
-			if (confirmResult == DialogResult.Yes)
-			{
-				List<RequestForQuotationRecord> selectedItems = new List<RequestForQuotationRecord>();
-				selectedItems.AddRange(_directivesViewer.SelectedItems.ToArray());
-				GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
-				AnimatedThreadWorker.RunWorkerAsync();
-			}
-			else
-			{
-				MessageBox.Show("Failed to delete directive: Parent container is invalid", "Operation failed",
-								MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
+			//if (confirmResult == DialogResult.Yes)
+			//{
+			//	List<RequestForQuotationRecord> selectedItems = new List<RequestForQuotationRecord>();
+			//	selectedItems.AddRange(_directivesViewer.SelectedItems.ToArray());
+			//	GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
+			//	AnimatedThreadWorker.RunWorkerAsync();
+			//}
+			//else
+			//{
+			//	MessageBox.Show("Failed to delete directive: Parent container is invalid", "Operation failed",
+			//					MessageBoxButtons.OK, MessageBoxIcon.Error);
+			//}
 		}
 		#endregion
 
