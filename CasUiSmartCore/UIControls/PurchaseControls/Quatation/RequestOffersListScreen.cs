@@ -228,43 +228,14 @@ namespace CAS.UI.UIControls.PurchaseControls
 		{
 			if (_directivesViewer.SelectedItems.Count > 0)
 			{
-				buttonDeleteSelected.Enabled = true;
 				headerControl.EditButtonEnabled = true;
 			}
 			else
 			{
 				headerControl.EditButtonEnabled = false;
-				buttonDeleteSelected.Enabled = false;
 			}
 		}
 
-		#endregion
-
-		#region private void ButtonDeleteClick(object sender, EventArgs e)
-		private void ButtonDeleteClick(object sender, EventArgs e)
-		{
-			if (_directivesViewer.SelectedItems == null) return;
-
-			//DialogResult confirmResult =
-			//	MessageBox.Show(
-			//		_directivesViewer.SelectedItem != null
-			//			? "Do you really want to delete Request for quotation record" + _directivesViewer.SelectedItem.ParentPackage.Title + "?"
-			//			: "Do you really want to delete Request for quotations? ", "Confirm delete operation",
-			//		MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-
-			//if (confirmResult == DialogResult.Yes)
-			//{
-			//	List<RequestForQuotationRecord> selectedItems = new List<RequestForQuotationRecord>();
-			//	selectedItems.AddRange(_directivesViewer.SelectedItems.ToArray());
-			//	GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
-			//	AnimatedThreadWorker.RunWorkerAsync();
-			//}
-			//else
-			//{
-			//	MessageBox.Show("Failed to delete directive: Parent container is invalid", "Operation failed",
-			//					MessageBoxButtons.OK, MessageBoxIcon.Error);
-			//}
-		}
 		#endregion
 
 		#region private void ButtonAddNewClick(object sender, EventArgs e)
