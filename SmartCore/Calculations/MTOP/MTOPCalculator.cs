@@ -665,7 +665,7 @@ namespace SmartCore.Calculations.MTOP
 		{
 			foreach (var directive in directives)
 			{
-				if(directive.ItemId == 58186)
+				if(directive.ItemId == 57907)
 					Console.WriteLine();
 
 				calculatePhase(directive, checks, averageUtilization, isZeroPhase);
