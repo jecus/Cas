@@ -31,7 +31,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		protected override void GroupingItems()
 		{
-			Grouping("Status");
+			Grouping("Product");
 		}
 
 
@@ -42,25 +42,31 @@ namespace CAS.UI.UIControls.PurchaseControls
 		protected override List<CustomCell> GetListViewSubItems(RequestForQuotationRecord item)
 		{
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
-			var status = "1.Opened";
-			if (item.Status == WorkPackageStatus.Published)
-				status = "2.Published";
-			else if (item.Status == WorkPackageStatus.Closed)
-				status = "3.Closed";
-			return new List<CustomCell>
+			var destiantion = "";
+			if (item?.ParentInitialRecord?.DestinationObjectType == SmartCoreType.Aircraft)
+				destiantion = GlobalObjects.AircraftsCore.GetAircraftById(item?.ParentInitialRecord?.DestinationObjectId ?? -1)?.ToString();
+			else destiantion = GlobalObjects.StoreCore.GetStoreById(item?.ParentInitialRecord?.DestinationObjectId ?? -1)?.ToString();
+			var temp = $"{item?.Product?.PartNumber}";
+			if (item?.ParentInitialRecord != null)
+				temp += $"| Name: {item.Product?.Name} | Destination: {destiantion} | Priority: {item?.ParentInitialRecord?.Priority} | Requseted By: {((InitialOrder)item?.ParentInitialRecord?.ParentPackage)?.Author} | №:{item.ParentPackage.Title} | {item.ParentPackage.OpeningDate}";
+			var res = new List<CustomCell>();
+			foreach (var price in item.SupplierPrice)
 			{
-				CreateRow(status, item.Status),
-				CreateRow(item.Number, item.Number),
-				CreateRow(item.Title, item.Title),
-				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.OpeningDate), item.OpeningDate),
-				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.PublishingDate), item.PublishingDate),
-				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.ClosingDate), item.ClosingDate),
-				CreateRow(item.Author, item.Author),
-				CreateRow(item.PublishedByUser, item.PublishedByUser),
-				CreateRow(item.CloseByUser, item.CloseByUser),
-				CreateRow(item.Remarks, item.Remarks),
-				CreateRow(author, author),
-			};
+				res.AddRange(new List<CustomCell>
+				{
+					CreateRow(price.SupplierName, price.SupplierName),
+					CreateRow(item.Quantity.ToString(), item.Quantity),
+					CreateRow(item.Measure.ToString(), item.Measure),
+					CreateRow(price.GetNewPriceString(), price),
+					CreateRow(price.GetServPriceString(), price),
+					CreateRow(price.GetOHPriceString(), price),
+					CreateRow(price.GetRepairPriceString(), price),
+					CreateRow(temp, temp),
+					CreateRow(author, author),
+				});
+			}
+
+			return res;
 		}
 
 		#endregion
@@ -86,16 +92,14 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		protected override void SetHeaders()
 		{
-			AddColumn("Status", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Order No", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Title", (int)(radGridView1.Width * 0.3f));
-			AddDateColumn("Opening date", (int)(radGridView1.Width * 0.2f));
-			AddDateColumn("Publishing date", (int)(radGridView1.Width * 0.2f));
-			AddDateColumn("Closing date", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Author", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Published By", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Closed By", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Remark", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Supplier", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Q-ty", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Measure", (int)(radGridView1.Width * 0.2f));
+			AddColumn("New", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Serv", (int)(radGridView1.Width * 0.2f));
+			AddColumn("OH", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Repair", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Product", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 
 		}

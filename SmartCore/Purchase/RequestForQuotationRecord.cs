@@ -606,6 +606,30 @@ namespace SmartCore.Purchase
 			get => Ñurrency.GetItemById(ÑurrencyRepairId);
 			set => ÑurrencyRepairId = value.ItemId;
 		}
+
+		#region Methods
+
+		public string GetNewPriceString()
+		{
+			return $"{CostNew}/{CostNewEx}/{ÑurrencyNew}/{CostNewReadiness}";
+		}
+
+		public string GetServPriceString()
+		{
+			return $"{CostServiceable}/{CostServiceableEx}/{ÑurrencyServ}/{CostServiceableReadiness}";
+		}
+
+		public string GetOHPriceString()
+		{
+			return $"{CostOverhaul}/{CostOverhaul}/{ÑurrencyOH}/{CostOverhaulReadiness}";
+		}
+
+		public string GetRepairPriceString()
+		{
+			return $"{CostRepair}/{CostRepairEx}/{ÑurrencyRepair}/{CostRepairReadiness}";
+		}
+
+		#endregion
 	}
 
 }
