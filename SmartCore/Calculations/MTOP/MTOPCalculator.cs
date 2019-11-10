@@ -755,15 +755,19 @@ namespace SmartCore.Calculations.MTOP
 							if (record == null) break;
 						}
 
-						//while (record.PerformanceSource.Days.Value > tempHours.Days)
-						//{
-						//	if (directive.PhaseRepeat != null && !directive.PhaseRepeat.IsNullOrZero())
-						//		tempHours += directive.PhaseRepeat;
-						//	else tempHours += directive.PhaseThresh;
-						//}
+						while (record.PerformanceSource.Days.Value > tempHours.Days)
+						{
+							if (directive.PhaseRepeat != null && !directive.PhaseRepeat.IsNullOrZero())
+								tempHours += directive.PhaseRepeat;
+							else tempHours += directive.PhaseThresh;
+						}
+
+						record = checksForPeriod.FirstOrDefault(i => i.PerformanceSource.Days.Value >= tempHours.Days);
+						if(record == null)
+							break;
 					}
 
-					
+
 					group = record.Group;
 
 					if (directive.MtopNextPerformances.Count == 0)
@@ -833,10 +837,6 @@ namespace SmartCore.Calculations.MTOP
 							int lastPerfNum = directive.LastPerformance.PerformanceNum <= 0 ? 1 : directive.LastPerformance.PerformanceNum;
 							np.PerformanceNum = lastPerfNum + directive.MtopNextPerformances.Count + 1;
 							np.PerformanceSource = new Lifelength(tempHours);
-
-							//if (directive.PhaseRepeat != null && !directive.PhaseRepeat.IsNullOrZero())
-							//	np.PerformanceSource.Add(directive.PhaseRepeat);
-							//else np.PerformanceSource.Add(directive.PhaseThresh);
 
 							// Убираем не нужные параметры
 							if (directive.PhaseRepeat != null && !directive.PhaseRepeat.IsNullOrZero())

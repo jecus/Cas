@@ -52,7 +52,8 @@ namespace CAS.UI.UIControls.ForecastControls
 			AddColumn("Check", (int)(radGridView1.Width * 0.2f));
 			AddDateColumn("Next", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Fst.Perf", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Rpt. Intv.", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Thresh", (int)(radGridView1.Width * 0.2f));
+			AddColumn("ThreshRepeat", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Overdue/Remain", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Last", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Kit", (int)(radGridView1.Width * 0.2f));
@@ -201,7 +202,7 @@ namespace CAS.UI.UIControls.ForecastControls
 
 			var temp = "";
 			if (item.Parent is IMtopCalc)
-				temp = $"Check: {item.Group}-{item.ParentCheck.Name} ";
+				temp = $"Check: {item.Group}-{item.ParentCheck.Name} {item.ParentCheck.NextPerformances.FirstOrDefault(i => i.Group == item.Group)?.PerformanceSource}";
 			else temp = $"{ListViewGroupHelper.GetGroupString(item)} | Date: {item.PerformanceDate?.ToString(new GlobalTermsProvider()["DateFormat"].ToString())}";
 
 				subItems.Add(CreateRow(temp, temp ));
@@ -220,11 +221,13 @@ namespace CAS.UI.UIControls.ForecastControls
 			{
 				var d = item.Parent as IMtopCalc;
 				d.PhaseRepeat?.Resemble(item.Parent.Threshold.RepeatInterval);
+				subItems.Add(CreateRow(d.PhaseThresh?.ToString(), d.PhaseThresh));
 				subItems.Add(CreateRow(d.PhaseRepeat?.ToString(), d.PhaseRepeat ));
+				
 			}
 			else subItems.Add(CreateRow(item.Parent.Threshold.RepeatInterval.ToString(), item.Parent.Threshold.RepeatInterval ));
 			subItems.Add(CreateRow(item.Remains.ToString(), item.Remains ));
-			subItems.Add(CreateRow(item.Parent.LastPerformance?.ToString(), item.Parent.LastPerformance));
+			subItems.Add(CreateRow(item.Parent.LastPerformance?.OnLifelength.ToString(), item.Parent.LastPerformance));
 
 			subItems.Add(CreateRow(item.KitsToString, item.Kits?.Count ));
 			subItems.Add(CreateRow(manHours.ToString(), manHours ));
