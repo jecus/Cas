@@ -762,7 +762,7 @@ namespace SmartCore.Calculations.MTOP
 							else tempHours += directive.PhaseThresh;
 						}
 
-						record = checksForPeriod.FirstOrDefault(i => i.PerformanceSource.Days.Value >= tempHours.Days);
+						record = checksForPeriod.LastOrDefault(i => i.PerformanceSource.Days.Value <= tempHours.Days);
 						if(record == null)
 							break;
 					}
