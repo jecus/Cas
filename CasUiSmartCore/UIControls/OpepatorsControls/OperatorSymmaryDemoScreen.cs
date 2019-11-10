@@ -232,6 +232,16 @@ namespace CAS.UI.UIControls.OpepatorsControls
 
 		#endregion
 
+		#region private void LinkLinkPurchaseStatusDisplayerRequested(object sender, ReferenceEventArgs e)
+
+		private void LinkLinkPurchaseStatusDisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			e.DisplayerText = "Purchase Status";
+			e.RequestedEntity = new PurchaseStatusListScreen(_currentOperator);
+		}
+
+		#endregion
+
 		#region private void LinkPersonnelDisplayerRequested(object sender, ReferenceEventArgs e)
 
 		private void LinkPersonnelDisplayerRequested(object sender, ReferenceEventArgs e)

@@ -1423,6 +1423,18 @@
     <Compile Include="UIControls\PurchaseControls\Purchase\QuatationSupplierPriceListView.Designer.cs">
       <DependentUpon>QuatationSupplierPriceListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\PurchaseControls\Purchase\PurchaseStatusListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Purchase\PurchaseStatusListScreen.Designer.cs">
+      <DependentUpon>PurchaseStatusListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Purchase\PurchaseStatusListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Purchase\PurchaseStatusListView.Designer.cs">
+      <DependentUpon>PurchaseStatusListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\PurchaseControls\Quatation\QualificationNumberForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -4288,6 +4300,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PurchaseControls\Purchase\PurchaseOrderSettingForm.resx">
       <DependentUpon>PurchaseOrderSettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\PurchaseControls\Purchase\PurchaseStatusListScreen.resx">
+      <DependentUpon>PurchaseStatusListScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PurchaseControls\Quatation\QualificationNumberForm.resx">
       <DependentUpon>QualificationNumberForm.cs</DependentUpon>

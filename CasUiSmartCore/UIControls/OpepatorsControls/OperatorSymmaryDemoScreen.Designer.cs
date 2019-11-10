@@ -89,6 +89,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.LinkOrders = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkPurchaseOrders = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkRequestOffers = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+			this.LinkPurchaseStatus = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkDocumentPurchase = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkInvoice = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkQuotationOrders = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -2251,6 +2252,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this._purchaseReferenceContainer.ReferenceLink03 = this.LinkQuotationOrders;
 			this._purchaseReferenceContainer.ReferenceLink02 = this.LinkPurchaseOrders;
 			this._purchaseReferenceContainer.ReferenceLink08 = this.LinkRequestOffers;
+			this._purchaseReferenceContainer.ReferenceLink09 = this.LinkPurchaseStatus;
 			this._purchaseReferenceContainer.ReferenceLink06 = this.LinkDocumentPurchase;
 			this._purchaseReferenceContainer.ReferenceLink07 = this.LinkInvoice;
 			this._purchaseReferenceContainer.ReferenceLink04 = this.LinkSuppliers;
@@ -2267,7 +2269,6 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this._purchaseReferenceContainer.Name = "_purchaseReferenceContainer";
 			
 			
-			this._purchaseReferenceContainer.ReferenceLink09 = null;
 			this._purchaseReferenceContainer.ReferenceLink10 = null;
 			this._purchaseReferenceContainer.ReferenceLink11 = null;
 			this._purchaseReferenceContainer.ReferenceLink12 = null;
@@ -2378,6 +2379,31 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.LinkRequestOffers.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkRequestOffers.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.LinkRequestOffers.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkRequestOffersDisplayerRequested);
+			// 
+			// LinkPurchaseStatus
+			// 
+			this.LinkPurchaseStatus.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkPurchaseStatus.Displayer = null;
+			this.LinkPurchaseStatus.DisplayerText = null;
+			this.LinkPurchaseStatus.Entity = null;
+			this.LinkPurchaseStatus.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.LinkPurchaseStatus.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkPurchaseStatus.ImageBackColor = System.Drawing.Color.Transparent;
+			this.LinkPurchaseStatus.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.LinkPurchaseStatus.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkPurchaseStatus.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.LinkPurchaseStatus.Location = new System.Drawing.Point(270, 0);
+			this.LinkPurchaseStatus.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.LinkPurchaseStatus.MaximumSize = new System.Drawing.Size(250, 20);
+			this.LinkPurchaseStatus.Name = "LinkPurchaseStatus";
+			this.LinkPurchaseStatus.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.LinkPurchaseStatus.Size = new System.Drawing.Size(250, 20);
+			this.LinkPurchaseStatus.Status = AvControls.Statuses.Satisfactory;
+			this.LinkPurchaseStatus.TabIndex = 53;
+			this.LinkPurchaseStatus.Text = "Purchase Status";
+			this.LinkPurchaseStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.LinkPurchaseStatus.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.LinkPurchaseStatus.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkLinkPurchaseStatusDisplayerRequested);
 			// 
 			// LinkQuotationOrders
 			// 
@@ -2643,6 +2669,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkInvoice;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkPurchaseOrders;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkRequestOffers;
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkPurchaseStatus;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkQuotationOrders;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkSuppliers;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkSupplierComponents;
