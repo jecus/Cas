@@ -78,20 +78,18 @@
 			this.metroLabelPickupLocation = new MetroFramework.Controls.MetroLabel();
 			this.metroLabelArrivaldate = new MetroFramework.Controls.MetroLabel();
 			this.dateTimePickerArrivalDate = new System.Windows.Forms.DateTimePicker();
-			this.numericUpDownArrivalTime = new System.Windows.Forms.NumericUpDown();
 			this.metroLabelArrivalTime = new MetroFramework.Controls.MetroLabel();
 			this.comboBoxStatusOfDelivery = new System.Windows.Forms.ComboBox();
 			this.metroLabelStatusOfDelivery = new MetroFramework.Controls.MetroLabel();
-			this.numericUpDownReceiptTime = new System.Windows.Forms.NumericUpDown();
 			this.metroLabelReceiptTime = new MetroFramework.Controls.MetroLabel();
 			this.metroLabelReceiptDate = new MetroFramework.Controls.MetroLabel();
 			this.dateTimePickerReceiptDate = new System.Windows.Forms.DateTimePicker();
 			this.numericUpDownFreightPrice = new System.Windows.Forms.NumericUpDown();
 			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
 			this.comboBoxFreightPrice = new System.Windows.Forms.ComboBox();
+			this.dateTimePickerArrivalTime = new System.Windows.Forms.DateTimePicker();
+			this.dateTimePickerReceiptTime = new System.Windows.Forms.DateTimePicker();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNet)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownArrivalTime)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownReceiptTime)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownFreightPrice)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -854,13 +852,6 @@
 			this.dateTimePickerArrivalDate.Size = new System.Drawing.Size(179, 22);
 			this.dateTimePickerArrivalDate.TabIndex = 372;
 			// 
-			// numericUpDownArrivalTime
-			// 
-			this.numericUpDownArrivalTime.Location = new System.Drawing.Point(800, 183);
-			this.numericUpDownArrivalTime.Name = "numericUpDownArrivalTime";
-			this.numericUpDownArrivalTime.Size = new System.Drawing.Size(179, 20);
-			this.numericUpDownArrivalTime.TabIndex = 375;
-			// 
 			// metroLabelArrivalTime
 			// 
 			this.metroLabelArrivalTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
@@ -890,13 +881,6 @@
 			this.metroLabelStatusOfDelivery.TabIndex = 376;
 			this.metroLabelStatusOfDelivery.Text = "Status of delivery:";
 			this.metroLabelStatusOfDelivery.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// numericUpDownReceiptTime
-			// 
-			this.numericUpDownReceiptTime.Location = new System.Drawing.Point(800, 268);
-			this.numericUpDownReceiptTime.Name = "numericUpDownReceiptTime";
-			this.numericUpDownReceiptTime.Size = new System.Drawing.Size(179, 20);
-			this.numericUpDownReceiptTime.TabIndex = 381;
 			// 
 			// metroLabelReceiptTime
 			// 
@@ -953,21 +937,43 @@
 			this.comboBoxFreightPrice.Size = new System.Drawing.Size(68, 20);
 			this.comboBoxFreightPrice.TabIndex = 384;
 			// 
+			// dateTimePickerArrivalTime
+			// 
+			this.dateTimePickerArrivalTime.CustomFormat = "HH:mm";
+			this.dateTimePickerArrivalTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.dateTimePickerArrivalTime.Location = new System.Drawing.Point(800, 183);
+			this.dateTimePickerArrivalTime.Margin = new System.Windows.Forms.Padding(2);
+			this.dateTimePickerArrivalTime.Name = "dateTimePickerArrivalTime";
+			this.dateTimePickerArrivalTime.ShowUpDown = true;
+			this.dateTimePickerArrivalTime.Size = new System.Drawing.Size(179, 20);
+			this.dateTimePickerArrivalTime.TabIndex = 385;
+			// 
+			// dateTimePickerReceiptTime
+			// 
+			this.dateTimePickerReceiptTime.CustomFormat = "HH:mm";
+			this.dateTimePickerReceiptTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.dateTimePickerReceiptTime.Location = new System.Drawing.Point(800, 267);
+			this.dateTimePickerReceiptTime.Margin = new System.Windows.Forms.Padding(2);
+			this.dateTimePickerReceiptTime.Name = "dateTimePickerReceiptTime";
+			this.dateTimePickerReceiptTime.ShowUpDown = true;
+			this.dateTimePickerReceiptTime.Size = new System.Drawing.Size(179, 20);
+			this.dateTimePickerReceiptTime.TabIndex = 386;
+			// 
 			// PurchaseOrderSettingForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(985, 507);
+			this.Controls.Add(this.dateTimePickerReceiptTime);
+			this.Controls.Add(this.dateTimePickerArrivalTime);
 			this.Controls.Add(this.comboBoxFreightPrice);
 			this.Controls.Add(this.numericUpDownFreightPrice);
 			this.Controls.Add(this.metroLabel1);
-			this.Controls.Add(this.numericUpDownReceiptTime);
 			this.Controls.Add(this.metroLabelReceiptTime);
 			this.Controls.Add(this.metroLabelReceiptDate);
 			this.Controls.Add(this.dateTimePickerReceiptDate);
 			this.Controls.Add(this.comboBoxStatusOfDelivery);
 			this.Controls.Add(this.metroLabelStatusOfDelivery);
-			this.Controls.Add(this.numericUpDownArrivalTime);
 			this.Controls.Add(this.metroLabelArrivalTime);
 			this.Controls.Add(this.metroLabelArrivaldate);
 			this.Controls.Add(this.dateTimePickerArrivalDate);
@@ -1023,8 +1029,6 @@
 			this.Resizable = false;
 			this.Text = "Purchase Order Setting  Form";
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNet)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownArrivalTime)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownReceiptTime)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownFreightPrice)).EndInit();
 			this.ResumeLayout(false);
 
@@ -1082,16 +1086,16 @@
 		private MetroFramework.Controls.MetroLabel metroLabelPickupLocation;
 		private MetroFramework.Controls.MetroLabel metroLabelArrivaldate;
 		private System.Windows.Forms.DateTimePicker dateTimePickerArrivalDate;
-		private System.Windows.Forms.NumericUpDown numericUpDownArrivalTime;
 		private MetroFramework.Controls.MetroLabel metroLabelArrivalTime;
 		private System.Windows.Forms.ComboBox comboBoxStatusOfDelivery;
 		private MetroFramework.Controls.MetroLabel metroLabelStatusOfDelivery;
-		private System.Windows.Forms.NumericUpDown numericUpDownReceiptTime;
 		private MetroFramework.Controls.MetroLabel metroLabelReceiptTime;
 		private MetroFramework.Controls.MetroLabel metroLabelReceiptDate;
 		private System.Windows.Forms.DateTimePicker dateTimePickerReceiptDate;
 		private System.Windows.Forms.NumericUpDown numericUpDownFreightPrice;
 		private MetroFramework.Controls.MetroLabel metroLabel1;
 		private System.Windows.Forms.ComboBox comboBoxFreightPrice;
+		private System.Windows.Forms.DateTimePicker dateTimePickerArrivalTime;
+		private System.Windows.Forms.DateTimePicker dateTimePickerReceiptTime;
 	}
 }

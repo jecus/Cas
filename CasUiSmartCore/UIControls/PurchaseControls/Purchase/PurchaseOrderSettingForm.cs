@@ -95,8 +95,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			textBoxCargoVolume.Text = _order.CargoVolume;
 			textBoxNettoWeight.Text = _order.NettoWeight;
 			numericUpDownNet.Value = (decimal) _order.Net;
-			numericUpDownReceiptTime.Value = (decimal) _order.AdditionalInformation.ReceiptTime;
-			numericUpDownArrivalTime.Value = (decimal) _order.AdditionalInformation.ArrivalTime;
+			dateTimePickerReceiptTime.Value = _order.AdditionalInformation.ReceiptTime;
+			dateTimePickerArrivalTime.Value = _order.AdditionalInformation.ArrivalTime;
 			numericUpDownFreightPrice.Value = (decimal) _order.AdditionalInformation.FreightPrice;
 			metroTextBoxIncoTermRef.Text = _order.IncoTermRef;
 			metroTextBoxTrackingNo.Text = _order.TrackingNo;
@@ -131,8 +131,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			_order.ShipCompany = (Supplier)comboBoxShipComp.SelectedItem;
 			_order.ShipToId = ((Supplier)comboBoxShipTo.SelectedItem).ItemId;
 			_order.Net = (float) numericUpDownNet.Value;
-			_order.AdditionalInformation.ReceiptTime = (float) numericUpDownReceiptTime.Value;
-			_order.AdditionalInformation.ArrivalTime = (float) numericUpDownArrivalTime.Value;
+			_order.AdditionalInformation.ReceiptTime = dateTimePickerReceiptTime.Value;
+			_order.AdditionalInformation.ArrivalTime = dateTimePickerArrivalTime.Value;
 			_order.AdditionalInformation.FreightPrice = (float) numericUpDownFreightPrice.Value;
 			_order.IncoTermRef = metroTextBoxIncoTermRef.Text;
 			_order.StationId = ((AirportsCodes)comboBoxStation.SelectedItem).ItemId;

@@ -251,6 +251,8 @@ namespace SmartCore.Purchase
 	{
 		private DateTime _arrivalDate;
 		private DateTime _receiptDate;
+		private DateTime _receiptTime;
+		private DateTime _arrivalTime;
 
 		public string QualificationNumber { get; set; }
 
@@ -261,14 +263,24 @@ namespace SmartCore.Purchase
 			get => _arrivalDate < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : _arrivalDate;
 			set => _arrivalDate = value;
 		}
-		public double ArrivalTime { get; set; }
+
+		public DateTime ArrivalTime
+		{
+			get => _arrivalTime < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : _arrivalTime;
+			set => _arrivalTime = value;
+		}
 
 		public DateTime ReceiptDate
 		{
 			get => _receiptDate < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : _receiptDate;
 			set => _receiptDate = value;
 		}
-		public double ReceiptTime { get; set; }
+
+		public DateTime ReceiptTime
+		{
+			get => _receiptTime < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : _receiptTime;
+			set => _receiptTime = value;
+		}
 
 		public double FreightPrice { get; set; }
 
