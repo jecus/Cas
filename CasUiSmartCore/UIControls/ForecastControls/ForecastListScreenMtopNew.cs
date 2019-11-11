@@ -344,8 +344,8 @@ namespace CAS.UI.UIControls.ForecastControls
 
 
 						mtopDirectives.AddRange(GlobalObjects.MaintenanceCore.GetMaintenanceDirectives(CurrentAircraft));
-						//mtopDirectives.AddRange(GlobalObjects.DirectiveCore.GetDirectives(CurrentAircraft, DirectiveType.All));
-						//mtopDirectives.AddRange(componentDirectives);
+						mtopDirectives.AddRange(GlobalObjects.DirectiveCore.GetDirectives(CurrentAircraft, DirectiveType.All));
+						mtopDirectives.AddRange(componentDirectives);
 
 				        foreach (var id in _reCalculateIds)
 				        {
