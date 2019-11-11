@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using CASReports.Datasets;
 using CASReports.ReportTemplates;
-using SmartCore.Auxiliary;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Personnel;

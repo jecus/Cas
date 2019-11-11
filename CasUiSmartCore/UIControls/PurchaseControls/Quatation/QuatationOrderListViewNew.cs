@@ -3,7 +3,6 @@ using System.Drawing;
 using Auxiliary;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Purchase;
 using Telerik.WinControls.UI;

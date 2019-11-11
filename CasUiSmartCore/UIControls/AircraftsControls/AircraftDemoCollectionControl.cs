@@ -9,8 +9,6 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AircraftTechnicalLogBookControls;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.ComponentControls;
-using CAS.UI.UIControls.DirectivesControls;
 using CAS.UI.UIControls.Fleet;
 using CAS.UI.UIControls.ForecastControls;
 using CAS.UI.UIControls.MonthlyUtilizationsControls;
@@ -22,7 +20,6 @@ using CASTerms;
 using Microsoft.VisualBasic.Devices;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
-using SmartCore.Filters;
 
 namespace CAS.UI.UIControls.AircraftsControls
 {

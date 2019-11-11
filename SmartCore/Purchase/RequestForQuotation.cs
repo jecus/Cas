@@ -11,7 +11,6 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.Setting;
 using SmartCore.Files;
 using SmartCore.Packages;
 

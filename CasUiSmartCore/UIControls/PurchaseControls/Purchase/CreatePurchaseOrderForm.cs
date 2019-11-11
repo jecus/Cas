@@ -13,7 +13,6 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Personnel;
-using SmartCore.Entities.General.Setting;
 using SmartCore.Filters;
 using SmartCore.Mail;
 using SmartCore.Purchase;

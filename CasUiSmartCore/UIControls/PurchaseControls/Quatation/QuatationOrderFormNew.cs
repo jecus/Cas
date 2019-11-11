@@ -14,7 +14,6 @@ using EntityCore.DTO.General;
 using EntityCore.Filter;
 using MetroFramework.Forms;
 using SmartCore.Auxiliary;
-using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -22,7 +21,6 @@ using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Setting;
 using SmartCore.Filters;
 using SmartCore.Purchase;
-using SmartCore.Queries;
 
 namespace CAS.UI.UIControls.PurchaseControls.Initial
 {

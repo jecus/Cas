@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
-using System.Net;
-using System.Net.Mail;
 using System.Windows.Forms;
 using CAS.UI.ExcelExport;
 using CAS.UI.Interfaces;

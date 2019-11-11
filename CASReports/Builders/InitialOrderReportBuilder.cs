@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using CASReports.Datasets;
 using CASReports.ReportTemplates;

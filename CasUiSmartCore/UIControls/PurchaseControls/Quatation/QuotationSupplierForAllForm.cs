@@ -4,9 +4,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CASTerms;
 using EntityCore.DTO.General;
-using EntityCore.Filter;
 using MetroFramework.Forms;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Setting;
 using SmartCore.Purchase;
 
