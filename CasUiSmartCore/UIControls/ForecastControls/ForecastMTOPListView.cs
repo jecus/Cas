@@ -202,7 +202,7 @@ namespace CAS.UI.UIControls.ForecastControls
 
 			var temp = "";
 			if (item.Parent is IMtopCalc)
-				temp = $"Check: {item.Group}-{item.ParentCheck.Name} {item.ParentCheck.NextPerformances.FirstOrDefault(i => i.Group == item.Group)?.PerformanceSource}";
+				temp = $"Check: {item.Group}-{item.ParentCheck.Name} ({item.ParentCheck.NextPerformances.FirstOrDefault(i => i.Group == item.Group)?.PerformanceSource})";
 			else temp = $"{ListViewGroupHelper.GetGroupString(item)} | Date: {item.PerformanceDate?.ToString(new GlobalTermsProvider()["DateFormat"].ToString())}";
 
 				subItems.Add(CreateRow(temp, temp ));
