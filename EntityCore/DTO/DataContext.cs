@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using EntityCore.DTO.CustomModel;
 using EntityCore.DTO.Dictionaries;
 using EntityCore.DTO.General;
 using Microsoft.EntityFrameworkCore;
