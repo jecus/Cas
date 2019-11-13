@@ -112,6 +112,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				_order.ClosingDocument.Clear();
 				_order.ClosingDocument.AddRange(documents);
 			}
+			else
+			{
+				_order.Number = GlobalObjects.CasEnvironment.ApiProvider.GetInitialSequence().ToString();
+			}
 
 			_defferedCategories.Clear();
 			_defferedCategories.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DefferedCategorieDTO, DeferredCategory>(loadChild: true));
