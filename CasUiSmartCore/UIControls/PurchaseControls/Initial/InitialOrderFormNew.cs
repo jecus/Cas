@@ -221,10 +221,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			comboBoxStatus.DataSource = Enum.GetValues(typeof(WorkPackageStatus));
 			comboBoxStatus.SelectedItem = _order.Status;
 
+			metroTextBoxNumber.Text = _order.Number;
+
 			if (_order.ItemId > 0)
 			{
 				textBoxTitle.Text = _order.Title;
-				metroTextBoxNumber.Text = _order.Number;
+				
 				dateTimePickerOpeningDate.Value = _order.OpeningDate;
 				dateTimePickerClosingDate.Value = _order.ClosingDate;
 				dateTimePickerPublishDate.Value = _order.PublishingDate;
