@@ -171,3 +171,10 @@ GO
 
   insert into [ScatDBTest].[Dictionaries].[DocumentSubType](DocumentTypeId, Name, Corrector)
   values (10, 'IPC Ref', 1)
+
+
+  ----------------------------------------------------------------------
+GO  
+	CREATE SEQUENCE InitialOrderSequence  
+		START WITH 10000  INCREMENT BY 1 ;  
+GO  

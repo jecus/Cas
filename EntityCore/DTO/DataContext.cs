@@ -1,4 +1,8 @@
-﻿using EntityCore.DTO.Dictionaries;
+﻿using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using EntityCore.DTO.CustomModel;
+using EntityCore.DTO.Dictionaries;
 using EntityCore.DTO.General;
 using Microsoft.EntityFrameworkCore;
 
@@ -147,7 +151,44 @@ namespace EntityCore.DTO
 		public DbSet<SettingDTO> SettingDtos { get; set; }
 
 		#endregion
-		
+
+		//на всякий случай вдруг надо будет генерить много!!!!!
+		private Queue<long> GenerateKeys(long sequenceKeysRequested)
+		{
+			if (sequenceKeysRequested > 0)
+			{
+				var paramSequenceObject = new SqlParameter("@sequencename", SqlDbType.VarChar) { Value = "InitialOrderSequence" };
+				var paramRangeSize = new SqlParameter("@rangesize", SqlDbType.Int) { Value = sequenceKeysRequested };
+				var paramRangeFirstValue = new SqlParameter("@rangefirstvalue", SqlDbType.Variant) { Direction = ParameterDirection.Output };
+				var paramRangeLastValue = new SqlParameter("@rangelastvalue", SqlDbType.Variant) { Direction = ParameterDirection.Output };
+				var paramSequenceIncrement = new SqlParameter("@sequenceincrement", SqlDbType.Variant) { Direction = ParameterDirection.Output };
+
+				Database.ExecuteSqlCommand(
+					"EXEC sys.sp_sequence_get_range " +
+					"@sequence_name = @sequencename, " +
+					"@range_size = @rangesize, " +
+					"@range_first_value = @rangefirstvalue OUTPUT, " +
+					"@range_last_value = @rangelastvalue OUTPUT, " +
+					"@sequence_increment = @sequenceincrement OUTPUT",
+					paramSequenceObject, paramRangeSize, paramRangeFirstValue, paramRangeLastValue, paramSequenceIncrement
+				);
+
+				var sequences = new Queue<long>((int)sequenceKeysRequested);
+				for (long i = (long)paramRangeFirstValue.Value; i <= (long)paramRangeLastValue.Value; i += (long)paramSequenceIncrement.Value)
+					sequences.Enqueue(i);
+
+				return sequences;
+			}
+
+			return new Queue<long>();
+			
+		}
+
+		public long ObtainId()
+		{
+			return GenerateKeys(1).Dequeue();
+		}
+
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<ComponentDTO>()
