@@ -139,6 +139,7 @@
 			this.metroTextBoxNumber.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
 			this.metroTextBoxNumber.CustomButton.UseSelectable = true;
 			this.metroTextBoxNumber.CustomButton.Visible = false;
+			this.metroTextBoxNumber.Enabled = false;
 			this.metroTextBoxNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.metroTextBoxNumber.Lines = new string[0];
 			this.metroTextBoxNumber.Location = new System.Drawing.Point(122, 62);
