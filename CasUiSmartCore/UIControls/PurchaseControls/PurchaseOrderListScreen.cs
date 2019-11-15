@@ -263,9 +263,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private void ToolStripMenuItemSendMailClick(object sender, EventArgs e)
 		{
 			PrepareOrder(true);
-
-			
-			
 		}
 
 		#endregion
@@ -274,7 +271,11 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private void _toolStripMenuItemReport_Click(object sender, EventArgs e)
 		{
-			PrepareOrder();
+			var res = MessageBox.Show("Do you really want sent Mail?", "Information", MessageBoxButtons.YesNo,
+				MessageBoxIcon.Information);
+
+			if(res == DialogResult.Yes)
+				PrepareOrder();
 		}
 
 		#endregion

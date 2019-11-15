@@ -438,19 +438,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		private void ButtonOk_Click(object sender, EventArgs e)
 		{
-			var personnel = GlobalObjects.CasEnvironment.Loader.GetObject<Specialist>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, GlobalObjects.CasEnvironment.IdentityUser.PersonnelId));
-			var destinations = new List<BaseEntityObject>();
-			destinations.AddRange(GlobalObjects.AircraftsCore.GetAllAircrafts().ToArray());
-			destinations.AddRange(GlobalObjects.CasEnvironment.Stores.GetValidEntries());
-			destinations.AddRange(GlobalObjects.CasEnvironment.Hangars.GetValidEntries());
-
-			if (personnel == null)
-			{
-				MessageBox.Show($"Please attach personnel for user ({GlobalObjects.CasEnvironment.IdentityUser.ItemId})",
-					"Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-			}
-
-			else if (textBoxTitle.Text == "")
+			if (textBoxTitle.Text == "")
 			{
 				MessageBox.Show("Please, enter a Title", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
@@ -484,22 +472,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 					{
 						record.ParentPackageId = copy.ItemId;
 						GlobalObjects.CasEnvironment.NewKeeper.Save(record);
-
-						record.ParentInitialRecord = _initialRecords.FirstOrDefault(i => i.ProductId == record.PackageItemId);
-						if (record.ParentInitialRecord != null)
-							record.ParentInitialRecord.DestinationObject = destinations.FirstOrDefault(i =>
-								i.ItemId == record.ParentInitialRecord.DestinationObjectId &&
-								record.ParentInitialRecord.DestinationObjectType.ItemId == i.SmartCoreObjectType.ItemId);
 					}
-
-					//рассылаем письма
-					var sendMail = new MailSender(GlobalObjects.CasEnvironment.NewLoader);
-					sendMail.SendQuotationEmail(g.ToList(), "", personnel);
 				}
 
 				DialogResult = DialogResult.OK;
 			}
-			
 		}
 
 		#endregion
