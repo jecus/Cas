@@ -53,7 +53,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			else
 			{
 				var record = item as SupplierPrice;
-				subItems.Add(CreateRow("",""));
+				var order = ((RequestForQuotation) record.Parent.ParentPackage);
+				var qualification = order.AdditionalInformation.QualificationNumbers.ContainsKey(record.SupplierId) ? order.AdditionalInformation.QualificationNumbers[record.SupplierId] : null;
+				subItems.Add(CreateRow(string.IsNullOrEmpty(qualification) ? "" : $"             QO №:{qualification}",""));
 				subItems.Add(CreateRow(record.Supplier.ToString(), record.Supplier));
 				subItems.Add(CreateRow($"New:{record.CostNew} {record.СurrencyNew}".ToString(), record.CostNew));
 				subItems.Add(CreateRow($"OH:{record.CostOverhaul} {record.СurrencyOH}".ToString(), record.CostOverhaul));

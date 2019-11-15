@@ -112,62 +112,76 @@ namespace CAS.UI.UIControls.PurchaseControls
 				_quotatioArray.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationDTO, RequestForQuotation>(new Filter("Status", WorkPackageStatus.Opened)));
 				var quotaIds = _quotatioArray.Select(i => i.ItemId);
 
-				var _quotationCosts = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<QuotationCostDTO, QuotationCost>(new Filter("QuotationId", quotaIds));
-				_addedQuatationOrderRecords = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<RequestForQuotationRecordDTO, RequestForQuotationRecord>(new Filter("ParentPackageId",  quotaIds), true);
-				var ids = _addedQuatationOrderRecords.Select(i => i.PackageItemId);
-
-
-				if (ids.Count() > 0)
+				if (quotaIds.Count() > 0)
 				{
-					var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(
-						new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), true);
-					var supplierId = _addedQuatationOrderRecords.SelectMany(i => i.SupplierPrice)
-						.Select(i => i.SupplierId);
-					var suppliers =
-						GlobalObjects.CasEnvironment.NewLoader.GetObjectList<SupplierDTO, Supplier>(new Filter("ItemId",
-							supplierId));
+					var _quotationCosts =
+						GlobalObjects.CasEnvironment.NewLoader.GetObjectList<QuotationCostDTO, QuotationCost>(
+							new Filter("QuotationId", quotaIds));
+					_addedQuatationOrderRecords =
+						GlobalObjects.CasEnvironment.NewLoader
+							.GetObjectList<RequestForQuotationRecordDTO, RequestForQuotationRecord>(
+								new Filter("ParentPackageId", quotaIds), true);
+					var ids = _addedQuatationOrderRecords.Select(i => i.PackageItemId);
 
-					foreach (var record in _addedQuatationOrderRecords.GroupBy(i => i.ParentPackageId))
+
+					if (ids.Count() > 0)
 					{
+						var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(
+							new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()), true);
+						var supplierId = _addedQuatationOrderRecords.SelectMany(i => i.SupplierPrice)
+							.Select(i => i.SupplierId);
+						var suppliers =
+							GlobalObjects.CasEnvironment.NewLoader.GetObjectList<SupplierDTO, Supplier>(new Filter(
+								"ItemId",
+								supplierId));
 
-						var parentInitialId = (int)GlobalObjects.CasEnvironment.Execute(
-								$@"select i.ItemId from RequestsForQuotation q
-			left join InitialOrders i on i.ItemID = q.ParentID where q.ItemId = {record.Key}").Tables[0]
-							.Rows[0][0];
-						var initialOrderRecords =
-							GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(
-								new Filter("ParentPackageId", parentInitialId));
-
-
-						foreach (var addedInitialOrderRecord in record)
+						foreach (var record in _addedQuatationOrderRecords.GroupBy(i => i.ParentPackageId))
 						{
-							addedInitialOrderRecord.ParentInitialRecord = initialOrderRecords.FirstOrDefault(i => i.ProductId == addedInitialOrderRecord.PackageItemId);
-							addedInitialOrderRecord.ParentPackage = _quotatioArray.FirstOrDefault(i => i.ItemId == addedInitialOrderRecord.ParentPackageId);
-							var product = products.FirstOrDefault(i => i.ItemId == addedInitialOrderRecord.PackageItemId);
-							foreach (var relation in product.SupplierRelations)
+
+							var parentInitialId = (int) GlobalObjects.CasEnvironment.Execute(
+									$@"select i.ItemId from RequestsForQuotation q
+			left join InitialOrders i on i.ItemID = q.ParentID where q.ItemId = {record.Key}").Tables[0]
+								.Rows[0][0];
+							var initialOrderRecords =
+								GlobalObjects.CasEnvironment.NewLoader
+									.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(
+										new Filter("ParentPackageId", parentInitialId));
+
+
+							foreach (var addedInitialOrderRecord in record)
 							{
-								var findCost = _quotationCosts.FirstOrDefault(i =>
-									i.ProductId == product.ItemId && i.SupplierId == relation.Supplier.ItemId);
-								if (findCost != null)
+								addedInitialOrderRecord.ParentInitialRecord =
+									initialOrderRecords.FirstOrDefault(i =>
+										i.ProductId == addedInitialOrderRecord.PackageItemId);
+								addedInitialOrderRecord.ParentPackage = _quotatioArray.FirstOrDefault(i =>
+									i.ItemId == addedInitialOrderRecord.ParentPackageId);
+								var product = products.FirstOrDefault(i =>
+									i.ItemId == addedInitialOrderRecord.PackageItemId);
+								foreach (var relation in product.SupplierRelations)
 								{
-									findCost.SupplierName = relation.Supplier.Name;
-									product.QuatationCosts.Add(findCost);
+									var findCost = _quotationCosts.FirstOrDefault(i =>
+										i.ProductId == product.ItemId && i.SupplierId == relation.Supplier.ItemId);
+									if (findCost != null)
+									{
+										findCost.SupplierName = relation.Supplier.Name;
+										product.QuatationCosts.Add(findCost);
+									}
 								}
-							}
 
-							addedInitialOrderRecord.Product = product;
+								addedInitialOrderRecord.Product = product;
 
-							foreach (var price in addedInitialOrderRecord.SupplierPrice)
-							{
-								price.Parent = addedInitialOrderRecord;
-								price.Supplier = suppliers.FirstOrDefault(i => i.ItemId == price.SupplierId);
-
-
-								_data.Add(new SupplierPriceCustom
+								foreach (var price in addedInitialOrderRecord.SupplierPrice)
 								{
-									Record = addedInitialOrderRecord,
-									Price = price,
-								});
+									price.Parent = addedInitialOrderRecord;
+									price.Supplier = suppliers.FirstOrDefault(i => i.ItemId == price.SupplierId);
+
+
+									_data.Add(new SupplierPriceCustom
+									{
+										Record = addedInitialOrderRecord,
+										Price = price,
+									});
+								}
 							}
 						}
 					}

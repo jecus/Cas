@@ -127,6 +127,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				{
 					foreach (var addedInitialOrderRecord in _addedQuatationOrderRecords)
 					{
+						addedInitialOrderRecord.ParentPackage = _order;
 						var product = products.FirstOrDefault(i => i.ItemId == addedInitialOrderRecord.PackageItemId);
 
 						foreach (var relation in product.SupplierRelations)
@@ -694,7 +695,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				.Cast<RequestForQuotationRecord>().SelectMany(i => i.SupplierPrice.Select(p => p.Supplier)).Distinct();
 
 			   var form = new QualificationNumberForm(_order,suppliers);
-			form.ShowDialog();
+			   if (form.ShowDialog() == DialogResult.OK)
+				   listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
 		}
+	
 	}
 }
