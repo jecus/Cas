@@ -50,9 +50,19 @@ namespace CAS.UI.UIControls.PurchaseControls
 				CreateRow(status, item.Status),
 				CreateRow(item.Number, item.Number),
 				CreateRow(item.Title, item.Title),
-				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.OpeningDate), item.OpeningDate),
-				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.PublishingDate), item.PublishingDate),
-				CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.ClosingDate), item.ClosingDate),
+				CreateRow(item.OpeningDate == new DateTime(1852, 01, 01)
+					? ""
+					: SmartCore.Auxiliary.Convert.GetDateFormat(item.OpeningDate), item.OpeningDate),
+				CreateRow(item.Status != WorkPackageStatus.Opened
+					? item.PublishingDate == new DateTime(1852, 01, 01)
+						? ""
+						: SmartCore.Auxiliary.Convert.GetDateFormat(item.PublishingDate)
+					: "", item.PublishingDate),
+				CreateRow(item.Status == WorkPackageStatus.Closed
+					? item.ClosingDate == new DateTime(1852, 01, 01)
+						? ""
+						: SmartCore.Auxiliary.Convert.GetDateFormat(item.ClosingDate)
+					: "", item.ClosingDate),
 				CreateRow(item.Author, item.Author),
 				CreateRow(item.PublishedByUser, item.PublishedByUser),
 				CreateRow(item.CloseByUser, item.CloseByUser),
@@ -91,9 +101,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 			AddColumn("Status", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Order No", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Title", (int)(radGridView1.Width * 0.3f));
-			AddDateColumn("Opening date", (int)(radGridView1.Width * 0.2f));
-			AddDateColumn("Publishing date", (int)(radGridView1.Width * 0.2f));
-			AddDateColumn("Closing date", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Opening date", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Publishing date", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Closing date", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Author", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Published By", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Closed By", (int)(radGridView1.Width * 0.2f));
