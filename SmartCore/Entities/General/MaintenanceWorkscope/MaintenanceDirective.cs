@@ -1411,7 +1411,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return TaskNumberCheck + " " + TaskCardNumber + " " + Description;
+			return TaskNumberCheck + " " + TaskCardNumber + " ";
 		}
 
 		#endregion

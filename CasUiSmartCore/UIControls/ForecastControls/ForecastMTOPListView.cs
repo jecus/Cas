@@ -45,6 +45,7 @@ namespace CAS.UI.UIControls.ForecastControls
 		{
 			AddColumn("Check", (int)(radGridView1.Width * 0.10f));
 			AddColumn("ATA", (int)(radGridView1.Width * 0.10f));
+			AddColumn("Type", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Title", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Times", (int)(radGridView1.Width * 0.2f));
@@ -207,6 +208,7 @@ namespace CAS.UI.UIControls.ForecastControls
 
 				subItems.Add(CreateRow(temp, temp ));
 			subItems.Add(CreateRow(item.ATAChapter?.ToString(), item.ATAChapter ));
+			subItems.Add(CreateRow(item.Parent.SmartCoreObjectType.ToString(), item.Parent.SmartCoreObjectType));
 			subItems.Add(CreateRow(title, title, tcnColor));
 			subItems.Add(CreateRow(item.Description, item.Description ));
 			subItems.Add(CreateRow(timesString, times ));

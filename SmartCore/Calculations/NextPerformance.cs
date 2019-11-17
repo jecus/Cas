@@ -453,7 +453,7 @@ namespace SmartCore.Calculations
                     Directive d = _parent as Directive;
 
                     _ataChapter = d.ATAChapter;
-                    _title = d.Title;
+                    _title = d.Title + " | " + d.EngineeringOrders;
                     _description = d.Description + (string.IsNullOrEmpty(d.Paragraph) ? "" : " " + d.Paragraph);
                     _workType = d.WorkType.ToString();
                     _type = d.DirectiveType.ShortName;
