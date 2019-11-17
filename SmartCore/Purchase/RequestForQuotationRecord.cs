@@ -471,6 +471,83 @@ namespace SmartCore.Purchase
 			ÑurrencyRepair = Ñurrency.USD;
 		}
 
+		
+		[ListViewData(200, "Product", 1)]
+		public string ProductName => Parent?.Product?.PartNumber;
+
+		[JsonProperty]
+		public int SupplierId { get; set; }
+
+		[JsonProperty]
+		public decimal CostNew { get; set; }
+
+		[JsonProperty]
+		public decimal CostServiceable { get; set; }
+
+		[JsonProperty]
+		public decimal CostOverhaul { get; set; }
+
+		[JsonProperty]
+		public decimal CostRepair { get; set; }
+
+		[JsonProperty]
+		public decimal CostNewEx { get; set; }
+
+		[JsonProperty]
+		public decimal CostServiceableEx { get; set; }
+
+		[JsonProperty]
+		public decimal CostOverhaulEx { get; set; }
+
+		[JsonProperty]
+		public decimal CostRepairEx { get; set; }
+
+		[JsonProperty]
+		public decimal CostNewReadiness { get; set; }
+
+		[JsonProperty]
+		public decimal CostServiceableReadiness { get; set; }
+
+		[JsonProperty]
+		public decimal CostOverhaulReadiness { get; set; }
+
+		[JsonProperty]
+		public decimal CostRepairReadiness { get; set; }
+
+		[DefaultValue(-1)]
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+		public int ÑurrencyNewId { get; set; }
+		
+		[DefaultValue(-1)]
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+		public int ÑurrencyServId { get; set; }
+
+		[DefaultValue(-1)]
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+		public int ÑurrencyOHId { get; set; }
+
+		[DefaultValue(-1)]
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+		public int ÑurrencyRepairId { get; set; }
+		
+		#region Ignore
+
+		[JsonIgnore]
+		[ListViewData(80, "New", 3)]
+		public string CostNewString => GetNewPriceString();
+
+		[JsonIgnore]
+		[ListViewData(80, "Serv", 5)]
+		public string CostServString => GetServPriceString();
+
+		[JsonIgnore]
+		[ListViewData(80, "OH", 7)]
+		public string CostOHString => GetOHPriceString();
+
+		[JsonIgnore]
+		[ListViewData(80, "Repair", 9)]
+		public string CostRepairString => GetRepairPriceString();
+
 		[JsonIgnore]
 		public bool IsLowestCostNew { get; set; }
 		[JsonIgnore]
@@ -488,94 +565,23 @@ namespace SmartCore.Purchase
 		[JsonIgnore]
 		public bool IsHighestCostRepair { get; set; }
 
-
 		[JsonIgnore]
 		public Supplier Supplier { get; set; }
 
 		[JsonIgnore]
 		public RequestForQuotationRecord Parent { get; set; }
 
-		[ListViewData(200, "Product", 1)]
-		public string ProductName
-		{
-			get => Parent?.Product?.PartNumber;
-		}
+		[JsonIgnore]
+		[ListViewData(200, "Supplier", 2)]
+		public string SupplierName => Supplier?.Name ?? Supplier.Unknown.Name;
 
 		[JsonIgnore]
-		[ListViewData(200, "Supplier",2)]
-		public string SupplierName
-		{
-			get => Supplier?.Name ?? Supplier.Unknown.Name;
-		}
-
-		[JsonProperty]
-		public int SupplierId { get; set; }
-
-		[ListViewData(80,"CostNew", 3)]
-		[JsonProperty]
-		public decimal CostNew { get; set; }
-
-		[ListViewData(80, "CostServ",5)]
-		[JsonProperty]
-		public decimal CostServiceable { get; set; }
-
-		[ListViewData(80, "CostOH",7)]
-		[JsonProperty]
-		public decimal CostOverhaul { get; set; }
-
-		[ListViewData(80, "CostRepair",9)]
-		[JsonProperty]
-		public decimal CostRepair { get; set; }
-
-		//[ListViewData(80, "CostNew",)]
-		[JsonProperty]
-		public decimal CostNewEx { get; set; }
-
-		//[ListViewData(80, "CostServ",)]
-		[JsonProperty]
-		public decimal CostServiceableEx { get; set; }
-
-		//[ListViewData(80, "CostOH",)]
-		[JsonProperty]
-		public decimal CostOverhaulEx { get; set; }
-
-		//[ListViewData(80, "CostRepair",)]
-		[JsonProperty]
-		public decimal CostRepairEx { get; set; }
-
-		//[ListViewData(80, "CostNew",)]
-		[JsonProperty]
-		public decimal CostNewReadiness { get; set; }
-
-		//[ListViewData(80, "CostServ",)]
-		[JsonProperty]
-		public decimal CostServiceableReadiness { get; set; }
-
-		//[ListViewData(80, "CostOH",)]
-		[JsonProperty]
-		public decimal CostOverhaulReadiness { get; set; }
-
-		//[ListViewData(80, "CostRepair",)]
-		[JsonProperty]
-		public decimal CostRepairReadiness { get; set; }
-
-		[DefaultValue(-1)]
-		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-		public int ÑurrencyNewId { get; set; }
-
-		[JsonIgnore]
-		[ListViewData(80, "Currency",4)]
 		public Ñurrency ÑurrencyNew
 		{
 			get => Ñurrency.GetItemById(ÑurrencyNewId);
 			set => ÑurrencyNewId = value.ItemId;
 		}
 
-		[DefaultValue(-1)]
-		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-		public int ÑurrencyServId { get; set; }
-
-		[ListViewData(80, "Currency",6)]
 		[JsonIgnore]
 		public Ñurrency ÑurrencyServ
 		{
@@ -583,48 +589,40 @@ namespace SmartCore.Purchase
 			set => ÑurrencyServId = value.ItemId;
 		}
 
-		[DefaultValue(-1)]
-		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-		public int ÑurrencyOHId { get; set; }
-
 		[JsonIgnore]
-		[ListViewData(80, "Currency",8)]
 		public Ñurrency ÑurrencyOH
 		{
 			get => Ñurrency.GetItemById(ÑurrencyOHId);
 			set => ÑurrencyOHId = value.ItemId;
 		}
 
-		[DefaultValue(-1)]
-		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-		public int ÑurrencyRepairId { get; set; }
-
 		[JsonIgnore]
-		[ListViewData(80, "Currency",10)]
 		public Ñurrency ÑurrencyRepair
 		{
 			get => Ñurrency.GetItemById(ÑurrencyRepairId);
 			set => ÑurrencyRepairId = value.ItemId;
 		}
 
+		#endregion
+
 		#region Methods
 
-		public string GetNewPriceString()
+		private string GetNewPriceString()
 		{
 			return $"{CostNew}/{CostNewEx}/{ÑurrencyNew}/{CostNewReadiness}";
 		}
 
-		public string GetServPriceString()
+		private string GetServPriceString()
 		{
 			return $"{CostServiceable}/{CostServiceableEx}/{ÑurrencyServ}/{CostServiceableReadiness}";
 		}
 
-		public string GetOHPriceString()
+		private string GetOHPriceString()
 		{
 			return $"{CostOverhaul}/{CostOverhaul}/{ÑurrencyOH}/{CostOverhaulReadiness}";
 		}
 
-		public string GetRepairPriceString()
+		private string GetRepairPriceString()
 		{
 			return $"{CostRepair}/{CostRepairEx}/{ÑurrencyRepair}/{CostRepairReadiness}";
 		}

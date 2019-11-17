@@ -46,6 +46,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 			_order = new PurchaseOrder()
 			{
+				AdditionalInformation =
+				{
+					СurrencyFreight = Сurrency.USD,
+					ArrivalDate = DateTime.Now,
+					ReceiptDate = DateTime.Now
+				},
 				Parent = _quotation,
 				ParentType = _quotation.SmartCoreObjectType,
 				Title = _quotation.Title,
