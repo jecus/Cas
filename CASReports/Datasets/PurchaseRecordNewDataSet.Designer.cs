@@ -791,6 +791,8 @@ namespace CASReports.Datasets {
             
             private global::System.Data.DataColumn columnQualification;
             
+            private global::System.Data.DataColumn columnTitle;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public PurchaseOrderDataTable() {
@@ -906,6 +908,14 @@ namespace CASReports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn TitleColumn {
+                get {
+                    return this.columnTitle;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -941,7 +951,7 @@ namespace CASReports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public PurchaseOrderRow AddPurchaseOrderRow(string Designation, string IncoTerm, string IncoTermRef, string ShipTo, string PODate, string ShippingCompany, string PayTerm, string CurrentYear, string TotalCost, string Qualification) {
+            public PurchaseOrderRow AddPurchaseOrderRow(string Designation, string IncoTerm, string IncoTermRef, string ShipTo, string PODate, string ShippingCompany, string PayTerm, string CurrentYear, string TotalCost, string Qualification, string Title) {
                 PurchaseOrderRow rowPurchaseOrderRow = ((PurchaseOrderRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Designation,
@@ -953,7 +963,8 @@ namespace CASReports.Datasets {
                         PayTerm,
                         CurrentYear,
                         TotalCost,
-                        Qualification};
+                        Qualification,
+                        Title};
                 rowPurchaseOrderRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPurchaseOrderRow);
                 return rowPurchaseOrderRow;
@@ -986,6 +997,7 @@ namespace CASReports.Datasets {
                 this.columnCurrentYear = base.Columns["CurrentYear"];
                 this.columnTotalCost = base.Columns["TotalCost"];
                 this.columnQualification = base.Columns["Qualification"];
+                this.columnTitle = base.Columns["Title"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1011,6 +1023,8 @@ namespace CASReports.Datasets {
                 base.Columns.Add(this.columnTotalCost);
                 this.columnQualification = new global::System.Data.DataColumn("Qualification", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnQualification);
+                this.columnTitle = new global::System.Data.DataColumn("Title", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTitle);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2792,6 +2806,22 @@ namespace CASReports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Title {
+                get {
+                    try {
+                        return ((string)(this[this.tablePurchaseOrder.TitleColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Title\' in table \'PurchaseOrder\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePurchaseOrder.TitleColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsDesignationNull() {
                 return this.IsNull(this.tablePurchaseOrder.DesignationColumn);
             }
@@ -2908,6 +2938,18 @@ namespace CASReports.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetQualificationNull() {
                 this[this.tablePurchaseOrder.QualificationColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsTitleNull() {
+                return this.IsNull(this.tablePurchaseOrder.TitleColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetTitleNull() {
+                this[this.tablePurchaseOrder.TitleColumn] = global::System.Convert.DBNull;
             }
         }
         

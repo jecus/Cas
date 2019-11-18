@@ -126,7 +126,7 @@ namespace CASReports.Builders
 			var total = _orderRecords.Sum(i => i.Cost * i.Quantity);
 				dataSet.PurchaseOrder.AddPurchaseOrderRow(designation, _order.IncoTerm.ToString(), 
 					_order.IncoTermRef, _order.ShipTo.Name, _order.PublishingDate.ToString("dd/MM/yyyy"), _order.ShipCompany.Name, 
-					_order.PayTerm.ToString(), _order.OpeningDate.Year.ToString().Substring(2), total.ToString("F1"), qualification);
+					_order.PayTerm.ToString(), _order.OpeningDate.Year.ToString().Substring(2), total.ToString("F1"), qualification, _order.Number);
 		}
 
 		private void AddDepartmentToDataSet(PurchaseRecordNewDataSet dataSet)
