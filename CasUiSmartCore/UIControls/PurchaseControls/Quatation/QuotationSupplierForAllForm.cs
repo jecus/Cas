@@ -76,7 +76,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 				MessageBoxButtons.OK,
 				MessageBoxIcon.Exclamation);
 
-			supplierListView1.SetItemsArray(_prices.ToArray());
+			supplierListView1.SetItemsArray(_prices.Select(i => i.Supplier).ToArray());
 		}
 
 		private void ButtonDelete_Click(object sender, System.EventArgs e)
@@ -84,9 +84,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			if (supplierListView1.SelectedItems.Count == 0) return;
 
 			foreach (var item in supplierListView1.SelectedItems.ToArray())
-				_prices.Remove(item);
+				_prices.RemoveAll(i => i.SupplierId == item.ItemId);
 
-			supplierListView1.SetItemsArray(_prices.ToArray());
+			supplierListView1.SetItemsArray(_prices.Select(i => i.Supplier).ToArray());
 		}
 
 		private void Button1_Click(object sender, System.EventArgs e)
@@ -140,9 +140,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 				.Where(i => ids.Contains(i.ItemId))
 				.Select(supplier => new SupplierPrice {SupplierId = supplier.ItemId, Supplier = supplier})
 				.ToArray();
-			supplierListView1.SetItemsArray(price);
 			_prices.Clear();
 			_prices.AddRange(price);
+			supplierListView1.SetItemsArray(_prices.Select(i => i.Supplier).ToArray());
 		}
 
 		private void button2_Click(object sender, System.EventArgs e)

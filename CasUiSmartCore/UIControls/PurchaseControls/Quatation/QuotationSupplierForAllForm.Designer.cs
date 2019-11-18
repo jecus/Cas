@@ -38,6 +38,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.buttonOk = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.button3 = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
 			this.textBox1 = new MetroFramework.Controls.MetroTextBox();
 			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
@@ -46,9 +47,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.button1 = new System.Windows.Forms.Button();
 			this.labelSearchName = new MetroFramework.Controls.MetroLabel();
 			this.textBoxSearchName = new MetroFramework.Controls.MetroTextBox();
-			this.supplierListView1 = new CAS.UI.UIControls.SupplierControls.SupplierPriceListView();
 			this.supplierListView = new CAS.UI.UIControls.SupplierControls.SupplierListView();
-			this.button3 = new System.Windows.Forms.Button();
+			this.supplierListView1 = new CAS.UI.UIControls.SupplierControls.SupplierListView();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -150,6 +150,19 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.groupBox1.Size = new System.Drawing.Size(301, 120);
 			this.groupBox1.TabIndex = 296;
 			this.groupBox1.TabStop = false;
+			// 
+			// button3
+			// 
+			this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.button3.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.button3.Location = new System.Drawing.Point(58, 74);
+			this.button3.Name = "button3";
+			this.button3.Size = new System.Drawing.Size(75, 33);
+			this.button3.TabIndex = 303;
+			this.button3.Text = "Add";
+			this.button3.Click += new System.EventHandler(this.button3_Click);
 			// 
 			// button2
 			// 
@@ -283,21 +296,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.textBoxSearchName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			this.textBoxSearchName.TextChanged += new System.EventHandler(this.textBoxSearchPartNumber_TextChanged);
 			// 
-			// supplierListView1
-			// 
-			this.supplierListView1.Displayer = null;
-			this.supplierListView1.DisplayerText = null;
-			this.supplierListView1.Entity = null;
-			this.supplierListView1.IgnoreEnterPress = false;
-			this.supplierListView1.Location = new System.Drawing.Point(23, 370);
-			this.supplierListView1.MenuOpeningAction = null;
-			this.supplierListView1.Name = "supplierListView1";
-			this.supplierListView1.OldColumnIndex = 0;
-			this.supplierListView1.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.supplierListView1.Size = new System.Drawing.Size(657, 246);
-			this.supplierListView1.SortMultiplier = 0;
-			this.supplierListView1.TabIndex = 70;
-			// 
 			// supplierListView
 			// 
 			this.supplierListView.Displayer = null;
@@ -313,24 +311,27 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.supplierListView.SortMultiplier = 0;
 			this.supplierListView.TabIndex = 69;
 			// 
-			// button3
+			// supplierListView1
 			// 
-			this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.button3.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button3.Location = new System.Drawing.Point(58, 74);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(75, 33);
-			this.button3.TabIndex = 303;
-			this.button3.Text = "Add";
-			this.button3.Click += new System.EventHandler(this.button3_Click);
+			this.supplierListView1.Displayer = null;
+			this.supplierListView1.DisplayerText = null;
+			this.supplierListView1.Entity = null;
+			this.supplierListView1.IgnoreEnterPress = false;
+			this.supplierListView1.Location = new System.Drawing.Point(23, 370);
+			this.supplierListView1.MenuOpeningAction = null;
+			this.supplierListView1.Name = "supplierListView1";
+			this.supplierListView1.OldColumnIndex = 0;
+			this.supplierListView1.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.supplierListView1.Size = new System.Drawing.Size(657, 237);
+			this.supplierListView1.SortMultiplier = 0;
+			this.supplierListView1.TabIndex = 299;
 			// 
 			// QuotationSupplierForAllForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(992, 664);
+			this.Controls.Add(this.supplierListView1);
 			this.Controls.Add(this.labelSearchName);
 			this.Controls.Add(this.textBoxSearchName);
 			this.Controls.Add(this.groupBox1);
@@ -338,7 +339,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.Controls.Add(this.buttonCancel);
 			this.Controls.Add(this.ButtonAdd);
 			this.Controls.Add(this.ButtonDelete);
-			this.Controls.Add(this.supplierListView1);
 			this.Controls.Add(this.supplierListView);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
@@ -354,7 +354,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		#endregion
 
 		private CAS.UI.UIControls.SupplierControls.SupplierListView supplierListView;
-		private CAS.UI.UIControls.SupplierControls.SupplierPriceListView supplierListView1;
 		private AvControls.AvButtonT.AvButtonT ButtonAdd;
 		private AvControls.AvButtonT.AvButtonT ButtonDelete;
 		private System.Windows.Forms.Button buttonOk;
@@ -369,5 +368,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		private MetroFramework.Controls.MetroTextBox textBox1;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button3;
+		private SupplierControls.SupplierListView supplierListView1;
 	}
 }
