@@ -465,6 +465,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				foreach (var g in _addedRecord.GroupBy(i => i.Supplier))
 				{
 					var copy = _order.GetCopyUnsaved();
+					copy.Supplier = g.Key;
 					var name = !string.IsNullOrEmpty(g.Key.ShortName) ? g.Key.ShortName : g.Key.Name;
 					copy.Title += $" {name}";
 
