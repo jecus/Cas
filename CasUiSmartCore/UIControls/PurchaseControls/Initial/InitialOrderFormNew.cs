@@ -146,9 +146,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			comboBoxPriority.Items.Clear();
 			comboBoxPriority.Items.AddRange(Priority.Items.ToArray());
 
-			comboBoxReason.Items.Clear();
-			comboBoxReason.Items.AddRange(InitialReason.Items.ToArray());
-
 			comboBoxStation.Items.Clear();
 			comboBoxStation.Items.AddRange(_airportsCodes.ToArray());
 
@@ -399,7 +396,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			var product = listViewInitialItems.SelectedItem.Product;
 
 			comboBoxMeasure.SelectedItem = product.Measure;
-			comboBoxReason.SelectedItem = listViewInitialItems.SelectedItem.InitialReason;
 			numericUpDownQuantity.Value = (decimal)listViewInitialItems.SelectedItem.Quantity;
 			checkBoxNew.Checked = (listViewInitialItems.SelectedItem.CostCondition & ComponentStatus.New) != 0;
 			checkBoxOverhaul.Checked = (listViewInitialItems.SelectedItem.CostCondition & ComponentStatus.Overhaul) != 0;
@@ -456,8 +452,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				listViewInitialItems.SelectedItem.DestinationObjectType = SmartCoreType.Unknown;
 				listViewInitialItems.SelectedItem.DestinationObjectId = -1;
 			}
-			listViewInitialItems.SelectedItem.InitialReason = comboBoxReason.SelectedItem as InitialReason ?? InitialReason.Unknown;
-
+			
 			listViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
 
 			listViewInitialItems.radGridView1.ClearSelection();
@@ -472,7 +467,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		{
 			button1.Enabled = false;
 			comboBoxMeasure.SelectedItem = null;
-			comboBoxReason.SelectedItem = null;
 			metroTextBox1.Text = "";
 			numericUpDownQuantity.Value = 0;
 			checkBoxNew.Checked = false;

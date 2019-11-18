@@ -241,22 +241,7 @@ namespace SmartCore.Purchase
 		[TableColumn("DestinationObjectType")]
 		public SmartCoreType DestinationObjectType { get; set; }
 
-		#region public InitionalReason InitialReason { get; set; }
-
-		private InitialReason _initialReason;
-		/// <summary>
-		/// 
-		/// </summary>
-		[TableColumn("InitialReason")]
-		public InitialReason InitialReason
-		{
-			get { return _initialReason ?? (_initialReason = InitialReason.Unknown); }
-			set { _initialReason = value; }
-		}
-
-		#endregion
-
-
+		
 		#region public DeferredCategory DeferredCategory { get; set; }
 
 		private DeferredCategory _deferredCategory;

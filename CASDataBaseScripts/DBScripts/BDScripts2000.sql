@@ -178,3 +178,25 @@ GO
 	CREATE SEQUENCE InitialOrderSequence  
 		START WITH 10000  INCREMENT BY 1 ;  
 GO  
+
+-------------------------------------------------------------------------
+
+if exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('dbo.InitionalOrderRecords')
+					and c.name = 'InitialReason' ) 
+
+	alter table dbo.InitionalOrderRecords
+	drop column InitialReason 
+GO
+
+if exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('dbo.RequestForQuotationRecords')
+					and c.name = 'InitialReason' ) 
+	alter table dbo.RequestForQuotationRecords 
+	drop constraint DF__RequestFo__Initi__5E6BA490
+
+	alter table dbo.RequestForQuotationRecords
+	drop COLUMN  InitialReason
+GO

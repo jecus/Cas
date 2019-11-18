@@ -229,8 +229,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			comboBoxPriority.Items.Clear();
 			comboBoxPriority.Items.AddRange(Priority.Items.ToArray());
 
-			comboBoxReason.Items.Clear();
-			comboBoxReason.Items.AddRange(InitialReason.Items.ToArray());
 		}
 
 		#endregion
@@ -667,7 +665,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			dictionaryComboProduct.SelectedItem = product;
 			comboBoxMeasure.SelectedItem = product.Measure;
-			comboBoxReason.SelectedItem = listViewInitialItems.SelectedItem.InitialReason;
 			textBoxPartNumber.Text = product.PartNumber;
 			textBoxProductDesc.Text = product.Description;
 			numericUpDownQuantity.Value = (decimal)listViewInitialItems.SelectedItem.Quantity;
@@ -726,7 +723,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 					listViewInitialItems.SelectedItem.DestinationObjectType = SmartCoreType.Unknown;
 					listViewInitialItems.SelectedItem.DestinationObjectId = -1;
 				}
-				listViewInitialItems.SelectedItem.InitialReason = comboBoxReason.SelectedItem as InitialReason ?? InitialReason.Unknown;
 				listViewInitialItems.SelectedItem.LifeLimit = lifelengthViewerLifeLimit.Lifelength;
 				listViewInitialItems.SelectedItem.LifeLimitNotify = lifelengthViewerNotify.Lifelength;
 
@@ -772,7 +768,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 					listViewQuatationItems.SelectedItem.DestinationObjectType = SmartCoreType.Unknown;
 					listViewQuatationItems.SelectedItem.DestinationObjectId = -1;
 				}
-				listViewQuatationItems.SelectedItem.InitialReason = comboBoxReason.SelectedItem as InitialReason ?? InitialReason.Unknown;
 				//listViewQuatationItems.SelectedItem.LifeLimit = lifelengthViewerLifeLimit.Lifelength;
 				//listViewQuatationItems.SelectedItem.LifeLimitNotify = lifelengthViewerNotify.Lifelength;
 
@@ -807,7 +802,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		{
 			dictionaryComboProduct.SelectedItem = null;
 			comboBoxMeasure.SelectedItem = null;
-			comboBoxReason.SelectedItem = null;
 			textBoxPartNumber.Text = "";
 			textBoxProductDesc.Text = "";
 			numericUpDownQuantity.Value = 0;
@@ -903,7 +897,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			dictionaryComboProduct.SelectedItem = product;
 			comboBoxMeasure.SelectedItem = product.Measure;
-			comboBoxReason.SelectedItem = listViewQuatationItems.SelectedItem.InitialReason;
 			textBoxPartNumber.Text = product.PartNumber;
 			textBoxProductDesc.Text = product.Description;
 			numericUpDownQuantity.Value = (decimal)listViewQuatationItems.SelectedItem.Quantity;

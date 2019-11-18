@@ -118,10 +118,7 @@ namespace CAS.UI.UIControls.PurchaseControls
             comboBoxDestination.Items.Clear();
             comboBoxDestination.Items.AddRange(destinations.ToArray());
 
-            comboBoxReason.Items.Clear();
-            comboBoxReason.Items.AddRange(InitialReason.Items.ToArray());
-
-            //comboBoxDefferedCategory.Items.Clear();
+           //comboBoxDefferedCategory.Items.Clear();
             //comboBoxDefferedCategory.Items.AddRange(defferedCategories.ToArray());
             //comboBoxDefferedCategory.SelectedItem = _currentKit.DeferredCategory;
 
@@ -132,7 +129,6 @@ namespace CAS.UI.UIControls.PurchaseControls
             comboBoxDetailClass.SelectedItem = product.GoodsClass;
             dictionaryComboProduct.SelectedItem = product;
             comboBoxMeasure.SelectedItem = product.Measure;
-            comboBoxReason.SelectedItem = _currentItem.InitialReason;
             dictionaryComboStandard.SelectedItem = product.Standart;
             textBoxPartNumber.Text = product.PartNumber;
             textBoxDescription.Text = product.Description;
@@ -284,7 +280,6 @@ namespace CAS.UI.UIControls.PurchaseControls
                 || comboBoxMeasure.SelectedItem != _currentItem.Measure
                 || comboBoxDefferedCategory.SelectedItem != _currentItem.DeferredCategory
                 || comboBoxDestination.SelectedItem != _currentItem.DestinationObject
-                || comboBoxReason.SelectedItem != _currentItem.InitialReason
                 || !lifelengthViewerLifeLimit.Lifelength.Equals(_currentItem.LifeLimit)
                 || !lifelengthViewerNotify.Lifelength.Equals(_currentItem.LifeLimitNotify)
                 || dictionaryComboStandard.SelectedItem != product.Standart
@@ -416,7 +411,6 @@ namespace CAS.UI.UIControls.PurchaseControls
                 _currentItem.DestinationObjectType = SmartCoreType.Unknown;
                 _currentItem.DestinationObjectId = -1;
             }
-            _currentItem.InitialReason = comboBoxReason.SelectedItem as InitialReason ?? InitialReason.Unknown;
             _currentItem.LifeLimit = lifelengthViewerLifeLimit.Lifelength;
             _currentItem.LifeLimitNotify = lifelengthViewerNotify.Lifelength;
             _currentItem.EffectiveDate = dateTimePickerEffDate.Value;
