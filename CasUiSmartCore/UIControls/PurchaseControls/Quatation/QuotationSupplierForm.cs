@@ -77,7 +77,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			if (supplierListView1.SelectedItems.Count == 0) return;
 
 			foreach (var item in supplierListView1.SelectedItems.ToArray())
-				_prices.Remove(_prices.FirstOrDefault(i => i.SupplierId == item.ItemId));
+			{
+				_prices.RemoveAll(f => f.SupplierId == item.ItemId);
+			}
 
 			supplierListView1.SetItemsArray(_prices.Select(i => i.Supplier).ToArray());
 		}
