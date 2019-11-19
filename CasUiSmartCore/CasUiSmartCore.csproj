@@ -2934,12 +2934,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="UIControls\AircraftsControls\AircraftGeneralDataControls\OtherControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UIControls\AircraftsControls\AircraftGeneralDataControls\OtherControl.Designer.cs">
-      <DependentUpon>OtherControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="UIControls\AircraftTechnicalLogBookControls\ApuFailureDataControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -3651,12 +3645,6 @@
     </Compile>
     <Compile Include="UIControls\ComponentControls\BaseComponentControl.cs">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UIControls\AircraftsControls\AbstractAircraftCollectionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UIControls\AircraftsControls\AbstractAircraftCollectionControl.Designer.cs">
-      <DependentUpon>AbstractAircraftCollectionControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UIControls\Auxiliary\AbstractAircraftStateItem.cs">
       <SubType>UserControl</SubType>
@@ -4802,14 +4790,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Screen.resx">
       <DependentUpon>Screen.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\AircraftsControls\AbstractAircraftCollectionControl.resx">
-      <DependentUpon>AbstractAircraftCollectionControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\AircraftsControls\AircraftGeneralDataControls\OtherControl.resx">
-      <DependentUpon>OtherControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\AircraftTechnicalLogBookControls\ApuFailureDataControl.resx">

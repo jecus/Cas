@@ -47,18 +47,6 @@ namespace CAS.UI.UIControls.AircraftsControls
 			InitializeComponent();
 		}
 
-		///<summary>
-		/// Cоздается графический элемент на основе данной коллекции
-		///</summary>
-		///<param name="aircraftCollection">Данная бизнес коллекция</param>
-		public AircraftDemoCollectionControl(CommonCollection<Aircraft> aircraftCollection)
-		{
-
-			waitForm = StaticWaitFormProvider.WaitForm;
-			extendableRichContainer.Caption = aircraftCollection.Count + " Aircraft";
-			_itemsCollection = aircraftCollection;
-			FillUiElementsFromCollection();
-		}
 		#endregion
 
 		#region Properties
