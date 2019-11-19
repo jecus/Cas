@@ -47,7 +47,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemPublish;
 		private RadMenuItem _toolStripMenuItemMoveTo;
-		private RadMenuItem _toolStripMenuItemEdit;
 		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuItem _toolStripMenuItemReport;
 		private RadMenuSeparatorItem _toolStripSeparator1;
@@ -122,7 +121,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_purchaseArray = null;
 
 			if (_toolStripMenuItemMoveTo != null) _toolStripMenuItemMoveTo.Dispose();
-			if (_toolStripMenuItemEdit != null) _toolStripMenuItemEdit.Dispose();
 			if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
 			if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
 			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
@@ -213,16 +211,12 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripMenuItemReport = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
-			_toolStripMenuItemEdit = new RadMenuItem();
 			_toolStripMenuItemSendMail = new RadMenuItem();
 			// 
 			// contextMenuStrip
 			// 
 			_contextMenuStrip.Name = "_contextMenuStrip";
 			_contextMenuStrip.Size = new Size(179, 176);
-
-			_toolStripMenuItemEdit.Text = "Edit";
-			_toolStripMenuItemEdit.Click += ToolStripMenuItemEditClick;
 
 			_toolStripMenuItemPublish.Text = "Publish";
 			_toolStripMenuItemPublish.Click += ToolStripMenuItemPublishClick;
@@ -254,7 +248,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 													_toolStripMenuItemSendMail,
 													new RadMenuSeparatorItem(),
 													_toolStripSeparator1,
-													_toolStripMenuItemEdit,
 													_toolStripMenuItemDelete
 
 												});
@@ -452,21 +445,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 				throw;
 			}
 			AnimatedThreadWorker.RunWorkerAsync();
-		}
-
-		#endregion
-
-		#region private void ToolStripMenuItemEditClick(object sender, EventArgs e)
-
-		private void ToolStripMenuItemEditClick(object sender, EventArgs e)
-		{
-			if (_directivesViewer.SelectedItems.Count == 1)
-			{
-				GlobalObjects.PurchaseCore.LoadPurchaseOrderItems(_directivesViewer.SelectedItem);
-				PurchaseRequestForm editForm = new PurchaseRequestForm(_directivesViewer.SelectedItems[0]);
-				if(editForm.ShowDialog() == DialogResult.OK)
-					AnimatedThreadWorker.RunWorkerAsync();
-			}   
 		}
 
 		#endregion
