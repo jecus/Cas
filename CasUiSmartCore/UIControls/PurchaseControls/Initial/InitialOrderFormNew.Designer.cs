@@ -82,7 +82,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.labelQOTitle = new MetroFramework.Controls.MetroLabel();
 			this.buttonOk = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
-			this.listViewInitialItems = new CAS.UI.UIControls.PurchaseControls.Initial.InitialOrderListView();
+			this._formListViewInitialItems = new CAS.UI.UIControls.PurchaseControls.Initial.InitialOrderFormListView();
 			this.listViewKits = new CAS.UI.UIControls.PurchaseControls.Quatation.RequestProductListView();
 			this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
 			this.button2 = new System.Windows.Forms.Button();
@@ -894,21 +894,21 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.buttonCancel.Text = "Cancel";
 			this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
 			// 
-			// listViewInitialItems
+			// _formListViewInitialItems
 			// 
-			this.listViewInitialItems.Displayer = null;
-			this.listViewInitialItems.DisplayerText = null;
-			this.listViewInitialItems.Entity = null;
-			this.listViewInitialItems.IgnoreEnterPress = false;
-			this.listViewInitialItems.Location = new System.Drawing.Point(23, 443);
-			this.listViewInitialItems.MenuOpeningAction = null;
-			this.listViewInitialItems.Name = "listViewInitialItems";
-			this.listViewInitialItems.OldColumnIndex = 0;
-			this.listViewInitialItems.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewInitialItems.Size = new System.Drawing.Size(687, 304);
-			this.listViewInitialItems.SortMultiplier = 0;
-			this.listViewInitialItems.TabIndex = 294;
-			this.listViewInitialItems.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.listViewInitialItems_SelectedItemsChanged);
+			this._formListViewInitialItems.Displayer = null;
+			this._formListViewInitialItems.DisplayerText = null;
+			this._formListViewInitialItems.Entity = null;
+			this._formListViewInitialItems.IgnoreEnterPress = false;
+			this._formListViewInitialItems.Location = new System.Drawing.Point(23, 443);
+			this._formListViewInitialItems.MenuOpeningAction = null;
+			this._formListViewInitialItems.Name = "_formListViewInitialItems";
+			this._formListViewInitialItems.OldColumnIndex = 0;
+			this._formListViewInitialItems.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this._formListViewInitialItems.Size = new System.Drawing.Size(687, 304);
+			this._formListViewInitialItems.SortMultiplier = 0;
+			this._formListViewInitialItems.TabIndex = 294;
+			this._formListViewInitialItems.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.listViewInitialItems_SelectedItemsChanged);
 			// 
 			// listViewKits
 			// 
@@ -1059,7 +1059,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.buttonAddProd);
 			this.Controls.Add(this.metroProgressSpinner1);
-			this.Controls.Add(this.listViewInitialItems);
+			this.Controls.Add(this._formListViewInitialItems);
 			this.Controls.Add(this.buttonOk);
 			this.Controls.Add(this.buttonCancel);
 			this.Controls.Add(this.groupBox2);
@@ -1123,7 +1123,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private MetroLabel labelRemarks;
 		private System.Windows.Forms.Button buttonOk;
 		private System.Windows.Forms.Button buttonCancel;
-		private InitialOrderListView listViewInitialItems;
+		private InitialOrderFormListView _formListViewInitialItems;
 		private System.Windows.Forms.ComboBox comboBoxStatus;
 		private MetroTextBox metroTextBox1;
 		private MetroLabel metroLabel2;

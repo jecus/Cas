@@ -1363,11 +1363,11 @@
     <Compile Include="UIControls\PurchaseControls\Initial\InitialOrderFormNew.Designer.cs">
       <DependentUpon>InitialOrderFormNew.cs</DependentUpon>
     </Compile>
-    <Compile Include="UIControls\PurchaseControls\Initial\InitialOrderListView.cs">
+    <Compile Include="UIControls\PurchaseControls\Initial\InitialOrderFormListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\PurchaseControls\Initial\InitialOrderListView.Designer.cs">
-      <DependentUpon>InitialOrderListView.cs</DependentUpon>
+    <Compile Include="UIControls\PurchaseControls\Initial\InitialOrderFormListView.Designer.cs">
+      <DependentUpon>InitialOrderFormListView.cs</DependentUpon>
     </Compile>
     <Compile Include="UIControls\PurchaseControls\ModelForm.cs">
       <SubType>Form</SubType>
@@ -1392,6 +1392,18 @@
     </Compile>
     <Compile Include="UIControls\PurchaseControls\ProductListView.Designer.cs">
       <DependentUpon>ProductListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\RequestOffersFreightListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\RequestOffersFreightListScreen.Designer.cs">
+      <DependentUpon>RequestOffersFreightListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\RequestOffersFreightListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\RequestOffersFreightListView.Designer.cs">
+      <DependentUpon>RequestOffersFreightListView.cs</DependentUpon>
     </Compile>
     <Compile Include="UIControls\PurchaseControls\Purchase\PurchaseOrderForm.cs">
       <SubType>Form</SubType>
@@ -2377,16 +2389,16 @@
     <Compile Include="UIControls\PurchaseControls\InitialOrderRecordForm.Designer.cs">
       <DependentUpon>InitialOrderRecordForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UIControls\PurchaseControls\InitialOrderListScreen.cs">
+    <Compile Include="UIControls\PurchaseControls\Initial\InitialOrderListScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\PurchaseControls\InitialOrderListScreen.Designer.cs">
+    <Compile Include="UIControls\PurchaseControls\Initial\InitialOrderListScreen.Designer.cs">
       <DependentUpon>InitialOrderListScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="UIControls\PurchaseControls\InitialOrderListView.cs">
+    <Compile Include="UIControls\PurchaseControls\Initial\InitialOrderListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\PurchaseControls\InitialOrderListView.Designer.cs">
+    <Compile Include="UIControls\PurchaseControls\Initial\InitialOrderListView.Designer.cs">
       <DependentUpon>InitialOrderListView.cs</DependentUpon>
     </Compile>
     <Compile Include="UIControls\PurchaseControls\Initial\OrderAddForm.cs">
@@ -4248,6 +4260,10 @@
     <EmbeddedResource Include="UIControls\PurchaseControls\ProductListScreen.resx">
       <DependentUpon>ProductListScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\PurchaseControls\RequestOffersFreightListScreen.resx">
+      <DependentUpon>RequestOffersFreightListScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PurchaseControls\Purchase\PurchaseOrderForm.resx">
       <DependentUpon>PurchaseOrderForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -4671,7 +4687,7 @@
     <EmbeddedResource Include="UIControls\PurchaseControls\InitialOrderRecordForm.resx">
       <DependentUpon>InitialOrderRecordForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\PurchaseControls\InitialOrderListScreen.resx">
+    <EmbeddedResource Include="UIControls\PurchaseControls\Initial\InitialOrderListScreen.resx">
       <DependentUpon>InitialOrderListScreen.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

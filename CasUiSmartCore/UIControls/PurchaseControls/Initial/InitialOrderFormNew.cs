@@ -87,7 +87,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			UpdateControls();
 			UpdateInitialControls();
 
-			listViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
+			_formListViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
 		}
 
 		#endregion
@@ -264,7 +264,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 					MessageBoxIcon.Exclamation);
 			}
 
-			else if (listViewInitialItems.ItemsCount <= 0)
+			else if (_formListViewInitialItems.ItemsCount <= 0)
 			{
 				MessageBox.Show("Please select a kits for initional order", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
@@ -361,7 +361,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				_addedInitialOrderRecords.Add(newRequest);
 			}
 
-			listViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
+			_formListViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
 		}
 
 		#endregion
@@ -370,9 +370,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void ButtonDelete_Click(object sender, EventArgs e)
 		{
-			if(listViewInitialItems.SelectedItems.Count == 0) return;
+			if(_formListViewInitialItems.SelectedItems.Count == 0) return;
 
-			foreach (var item in listViewInitialItems.SelectedItems.ToArray())
+			foreach (var item in _formListViewInitialItems.SelectedItems.ToArray())
 			{
 				if (item.ItemId > 0)
 					_deleteExistInitialOrderRecords.Add(item);
@@ -380,7 +380,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				_addedInitialOrderRecords.Remove(item);
 			}
 
-			listViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
+			_formListViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
 		}
 
 
@@ -390,28 +390,28 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void listViewInitialItems_SelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
 		{
-			button1.Enabled = listViewInitialItems.SelectedItem != null;
-			if (listViewInitialItems.SelectedItem == null) return;
+			button1.Enabled = _formListViewInitialItems.SelectedItem != null;
+			if (_formListViewInitialItems.SelectedItem == null) return;
 
-			var product = listViewInitialItems.SelectedItem.Product;
+			var product = _formListViewInitialItems.SelectedItem.Product;
 
 			comboBoxMeasure.SelectedItem = product.Measure;
-			numericUpDownQuantity.Value = (decimal)listViewInitialItems.SelectedItem.Quantity;
-			checkBoxNew.Checked = (listViewInitialItems.SelectedItem.CostCondition & ComponentStatus.New) != 0;
-			checkBoxOverhaul.Checked = (listViewInitialItems.SelectedItem.CostCondition & ComponentStatus.Overhaul) != 0;
-			checkBoxRepair.Checked = (listViewInitialItems.SelectedItem.CostCondition & ComponentStatus.Repair) != 0;
-			checkBoxServiceable.Checked = (listViewInitialItems.SelectedItem.CostCondition & ComponentStatus.Serviceable) != 0;
+			numericUpDownQuantity.Value = (decimal)_formListViewInitialItems.SelectedItem.Quantity;
+			checkBoxNew.Checked = (_formListViewInitialItems.SelectedItem.CostCondition & ComponentStatus.New) != 0;
+			checkBoxOverhaul.Checked = (_formListViewInitialItems.SelectedItem.CostCondition & ComponentStatus.Overhaul) != 0;
+			checkBoxRepair.Checked = (_formListViewInitialItems.SelectedItem.CostCondition & ComponentStatus.Repair) != 0;
+			checkBoxServiceable.Checked = (_formListViewInitialItems.SelectedItem.CostCondition & ComponentStatus.Serviceable) != 0;
 
 			var destination =
-				destinations.FirstOrDefault(d => d.SmartCoreObjectType == listViewInitialItems.SelectedItem.DestinationObjectType
-												 && d.ItemId == listViewInitialItems.SelectedItem.DestinationObjectId);
+				destinations.FirstOrDefault(d => d.SmartCoreObjectType == _formListViewInitialItems.SelectedItem.DestinationObjectType
+												 && d.ItemId == _formListViewInitialItems.SelectedItem.DestinationObjectId);
 
 			comboBoxDestination.SelectedItem = destination;
-			comboBoxPriority.SelectedItem = listViewInitialItems.SelectedItem.Priority;
-			metroTextBox1.Text = listViewInitialItems.SelectedItem.Remarks;
+			comboBoxPriority.SelectedItem = _formListViewInitialItems.SelectedItem.Priority;
+			metroTextBox1.Text = _formListViewInitialItems.SelectedItem.Remarks;
 			comboBoxStation.SelectedItem =
-				_airportsCodes.FirstOrDefault(i => listViewInitialItems.SelectedItem.AirportCodeId == i.ItemId);
-			metroTextBoxReference.Text = listViewInitialItems.SelectedItem.Reference;
+				_airportsCodes.FirstOrDefault(i => _formListViewInitialItems.SelectedItem.AirportCodeId == i.ItemId);
+			metroTextBoxReference.Text = _formListViewInitialItems.SelectedItem.Reference;
 		}
 
 		#endregion
@@ -420,14 +420,14 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			if (listViewInitialItems.SelectedItem == null) return;
+			if (_formListViewInitialItems.SelectedItem == null) return;
 
-			listViewInitialItems.SelectedItem.Priority = comboBoxPriority.SelectedItem as Priority ?? Priority.UNK;
-			listViewInitialItems.SelectedItem.Measure = comboBoxMeasure.SelectedItem as Measure ?? Measure.Unknown;
-			listViewInitialItems.SelectedItem.Quantity = (double)numericUpDownQuantity.Value;
-			listViewInitialItems.SelectedItem.Remarks = metroTextBox1.Text;
-			listViewInitialItems.SelectedItem.AirportCodeId = ((AirportsCodes)comboBoxStation.SelectedItem).ItemId;
-			listViewInitialItems.SelectedItem.Reference = metroTextBoxReference.Text;
+			_formListViewInitialItems.SelectedItem.Priority = comboBoxPriority.SelectedItem as Priority ?? Priority.UNK;
+			_formListViewInitialItems.SelectedItem.Measure = comboBoxMeasure.SelectedItem as Measure ?? Measure.Unknown;
+			_formListViewInitialItems.SelectedItem.Quantity = (double)numericUpDownQuantity.Value;
+			_formListViewInitialItems.SelectedItem.Remarks = metroTextBox1.Text;
+			_formListViewInitialItems.SelectedItem.AirportCodeId = ((AirportsCodes)comboBoxStation.SelectedItem).ItemId;
+			_formListViewInitialItems.SelectedItem.Reference = metroTextBoxReference.Text;
 
 			ComponentStatus costCondition = ComponentStatus.Unknown;
 			if (checkBoxNew.Checked)
@@ -439,23 +439,23 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			if (checkBoxRepair.Checked)
 				costCondition = costCondition | ComponentStatus.Repair;
 
-			listViewInitialItems.SelectedItem.CostCondition = costCondition;
+			_formListViewInitialItems.SelectedItem.CostCondition = costCondition;
 
 			var destination = comboBoxDestination.SelectedItem as BaseEntityObject;
 			if (destination != null)
 			{
-				listViewInitialItems.SelectedItem.DestinationObjectType = destination.SmartCoreObjectType;
-				listViewInitialItems.SelectedItem.DestinationObjectId = destination.ItemId;
+				_formListViewInitialItems.SelectedItem.DestinationObjectType = destination.SmartCoreObjectType;
+				_formListViewInitialItems.SelectedItem.DestinationObjectId = destination.ItemId;
 			}
 			else
 			{
-				listViewInitialItems.SelectedItem.DestinationObjectType = SmartCoreType.Unknown;
-				listViewInitialItems.SelectedItem.DestinationObjectId = -1;
+				_formListViewInitialItems.SelectedItem.DestinationObjectType = SmartCoreType.Unknown;
+				_formListViewInitialItems.SelectedItem.DestinationObjectId = -1;
 			}
 			
-			listViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
+			_formListViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
 
-			listViewInitialItems.radGridView1.ClearSelection();
+			_formListViewInitialItems.radGridView1.ClearSelection();
 			Reset();
 		}
 

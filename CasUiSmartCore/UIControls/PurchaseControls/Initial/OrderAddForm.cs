@@ -124,7 +124,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			_addedInitial = rfq;
 			_formType = OrderFormType.Initial;
 			this.Text = "Initional Order";
-			listViewInitialItems.Visible = true;
+			_formListViewInitialItems.Visible = true;
 			dataGridViewControlSuppliers.Visible = true;
 
 			_collectionFilter.Filters.Add(_partNumberFilter);
@@ -151,7 +151,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			if (_formType == OrderFormType.Initial)
 			{
 				this.Text = "Initional Order";
-				listViewInitialItems.Visible = true;
+				_formListViewInitialItems.Visible = true;
 				dataGridViewControlSuppliers.Visible = true;
 				_addedInitial = new InitialOrder { ParentId = parent.ItemId, ParentType = parent.SmartCoreObjectType };
 			}
@@ -189,7 +189,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			listViewKits.SetItemsArray(filteredCollection.ToArray());
 
 			if(_formType == OrderFormType.Initial)
-				listViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
+				_formListViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
 			else listViewQuatationItems.SetItemsArray(_addedQuatationRecords.ToArray());
 
 			UpdateInitialRecordsControls();
@@ -459,7 +459,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			if (_formType == OrderFormType.Initial)
 			{
 
-				if (listViewInitialItems.ItemsCount <= 0)
+				if (_formListViewInitialItems.ItemsCount <= 0)
 				{
 					MessageBox.Show("Please select a kits for initional order", (string)new GlobalTermsProvider()["SystemName"],
 						MessageBoxButtons.OK,
@@ -573,7 +573,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 					_addedInitialOrderRecords.Add(newRequest);
 				}
 
-				listViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
+				_formListViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
 			}
 			else
 			{
@@ -594,9 +594,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		{
 			if (_formType == OrderFormType.Initial)
 			{
-				if (listViewInitialItems.SelectedItems.Count == 0) return;
+				if (_formListViewInitialItems.SelectedItems.Count == 0) return;
 
-				foreach (var item in listViewInitialItems.SelectedItems.ToArray())
+				foreach (var item in _formListViewInitialItems.SelectedItems.ToArray())
 				{
 					if (item.ItemId > 0)
 						_deleteExistInitialOrderRecords.Add(item);
@@ -604,7 +604,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 					_addedInitialOrderRecords.Remove(item);
 				}
 
-				listViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
+				_formListViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
 			}
 
 			else
@@ -659,31 +659,31 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void listViewAddedItems_SelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
 		{
-			if (listViewInitialItems.SelectedItem == null) return;
+			if (_formListViewInitialItems.SelectedItem == null) return;
 
-			var product = listViewInitialItems.SelectedItem.Product;
+			var product = _formListViewInitialItems.SelectedItem.Product;
 
 			dictionaryComboProduct.SelectedItem = product;
 			comboBoxMeasure.SelectedItem = product.Measure;
 			textBoxPartNumber.Text = product.PartNumber;
 			textBoxProductDesc.Text = product.Description;
-			numericUpDownQuantity.Value = (decimal)listViewInitialItems.SelectedItem.Quantity;
+			numericUpDownQuantity.Value = (decimal)_formListViewInitialItems.SelectedItem.Quantity;
 			textBoxProductRemarks.Text = product.Remarks;
 			dataGridViewControlSuppliers.SetItemsArray((ICommonCollection)product.SupplierRelations);
-			checkBoxNew.Checked = (listViewInitialItems.SelectedItem.CostCondition & ComponentStatus.New) != 0;
-			checkBoxOverhaul.Checked = (listViewInitialItems.SelectedItem.CostCondition & ComponentStatus.Overhaul) != 0;
-			checkBoxRepair.Checked = (listViewInitialItems.SelectedItem.CostCondition & ComponentStatus.Repair) != 0;
-			checkBoxServiceable.Checked = (listViewInitialItems.SelectedItem.CostCondition & ComponentStatus.Serviceable) != 0;
+			checkBoxNew.Checked = (_formListViewInitialItems.SelectedItem.CostCondition & ComponentStatus.New) != 0;
+			checkBoxOverhaul.Checked = (_formListViewInitialItems.SelectedItem.CostCondition & ComponentStatus.Overhaul) != 0;
+			checkBoxRepair.Checked = (_formListViewInitialItems.SelectedItem.CostCondition & ComponentStatus.Repair) != 0;
+			checkBoxServiceable.Checked = (_formListViewInitialItems.SelectedItem.CostCondition & ComponentStatus.Serviceable) != 0;
 
 			var destination =
-				destinations.FirstOrDefault(d => d.SmartCoreObjectType == listViewInitialItems.SelectedItem.DestinationObjectType
-												 && d.ItemId == listViewInitialItems.SelectedItem.DestinationObjectId);
+				destinations.FirstOrDefault(d => d.SmartCoreObjectType == _formListViewInitialItems.SelectedItem.DestinationObjectType
+												 && d.ItemId == _formListViewInitialItems.SelectedItem.DestinationObjectId);
 
 			comboBoxDestination.SelectedItem = destination;
-			comboBoxPriority.SelectedItem = listViewInitialItems.SelectedItem.Priority;
+			comboBoxPriority.SelectedItem = _formListViewInitialItems.SelectedItem.Priority;
 
-			lifelengthViewerLifeLimit.Lifelength = new Lifelength(listViewInitialItems.SelectedItem.LifeLimit);
-			lifelengthViewerNotify.Lifelength = new Lifelength(listViewInitialItems.SelectedItem.LifeLimitNotify);
+			lifelengthViewerLifeLimit.Lifelength = new Lifelength(_formListViewInitialItems.SelectedItem.LifeLimit);
+			lifelengthViewerNotify.Lifelength = new Lifelength(_formListViewInitialItems.SelectedItem.LifeLimitNotify);
 		}
 
 		#endregion
@@ -692,13 +692,13 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		{
 			if (_formType == OrderFormType.Initial)
 			{
-				if (listViewInitialItems.SelectedItem == null) return;
+				if (_formListViewInitialItems.SelectedItem == null) return;
 
-				listViewInitialItems.SelectedItem.Priority = comboBoxPriority.SelectedItem as Priority;
-				listViewInitialItems.SelectedItem.Product = dictionaryComboProduct.SelectedItem as Product;
-				listViewInitialItems.SelectedItem.Measure = comboBoxMeasure.SelectedItem as Measure ?? Measure.Unknown;
-				listViewInitialItems.SelectedItem.Quantity = (double)numericUpDownQuantity.Value;
-				listViewInitialItems.SelectedItem.DeferredCategory = comboBoxDefferedCategory.SelectedItem as DeferredCategory ?? DeferredCategory.Unknown;
+				_formListViewInitialItems.SelectedItem.Priority = comboBoxPriority.SelectedItem as Priority;
+				_formListViewInitialItems.SelectedItem.Product = dictionaryComboProduct.SelectedItem as Product;
+				_formListViewInitialItems.SelectedItem.Measure = comboBoxMeasure.SelectedItem as Measure ?? Measure.Unknown;
+				_formListViewInitialItems.SelectedItem.Quantity = (double)numericUpDownQuantity.Value;
+				_formListViewInitialItems.SelectedItem.DeferredCategory = comboBoxDefferedCategory.SelectedItem as DeferredCategory ?? DeferredCategory.Unknown;
 
 				ComponentStatus costCondition = ComponentStatus.Unknown;
 				if (checkBoxNew.Checked)
@@ -710,30 +710,30 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				if (checkBoxRepair.Checked)
 					costCondition = costCondition | ComponentStatus.Repair;
 
-				listViewInitialItems.SelectedItem.CostCondition = costCondition;
+				_formListViewInitialItems.SelectedItem.CostCondition = costCondition;
 
 				var destination = comboBoxDestination.SelectedItem as BaseEntityObject;
 				if (destination != null)
 				{
-					listViewInitialItems.SelectedItem.DestinationObjectType = destination.SmartCoreObjectType;
-					listViewInitialItems.SelectedItem.DestinationObjectId = destination.ItemId;
+					_formListViewInitialItems.SelectedItem.DestinationObjectType = destination.SmartCoreObjectType;
+					_formListViewInitialItems.SelectedItem.DestinationObjectId = destination.ItemId;
 				}
 				else
 				{
-					listViewInitialItems.SelectedItem.DestinationObjectType = SmartCoreType.Unknown;
-					listViewInitialItems.SelectedItem.DestinationObjectId = -1;
+					_formListViewInitialItems.SelectedItem.DestinationObjectType = SmartCoreType.Unknown;
+					_formListViewInitialItems.SelectedItem.DestinationObjectId = -1;
 				}
-				listViewInitialItems.SelectedItem.LifeLimit = lifelengthViewerLifeLimit.Lifelength;
-				listViewInitialItems.SelectedItem.LifeLimitNotify = lifelengthViewerNotify.Lifelength;
+				_formListViewInitialItems.SelectedItem.LifeLimit = lifelengthViewerLifeLimit.Lifelength;
+				_formListViewInitialItems.SelectedItem.LifeLimitNotify = lifelengthViewerNotify.Lifelength;
 
-				if (listViewInitialItems.SelectedItem.Product != null)
+				if (_formListViewInitialItems.SelectedItem.Product != null)
 				{
 					dataGridViewControlSuppliers.ApplyChanges();
-					listViewInitialItems.SelectedItem.Product.SupplierRelations.Clear();
-					listViewInitialItems.SelectedItem.Product.SupplierRelations.AddRange(dataGridViewControlSuppliers.GetItemsArray());
+					_formListViewInitialItems.SelectedItem.Product.SupplierRelations.Clear();
+					_formListViewInitialItems.SelectedItem.Product.SupplierRelations.AddRange(dataGridViewControlSuppliers.GetItemsArray());
 				}
 
-				listViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
+				_formListViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
 			}
 			else
 			{
@@ -839,7 +839,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 					DeferredCategory selected;
 
 					if(_formType == OrderFormType.Initial)
-						selected = categories.FirstOrDefault(c => c.Equals(listViewInitialItems.SelectedItem.DeferredCategory));
+						selected = categories.FirstOrDefault(c => c.Equals(_formListViewInitialItems.SelectedItem.DeferredCategory));
 					else selected = categories.FirstOrDefault(c => c.Equals(listViewQuatationItems.SelectedItem.DeferredCategory));
 
 					comboBoxDefferedCategory.Items.AddRange(categories.ToArray());
