@@ -155,10 +155,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 						highest.IsHighestCostServ = true;
 				}
 			}
-
-		
-
-		_prices.AddRange(records.SelectMany(i => i.SupplierPrice));
+			
+			_prices.AddRange(records.SelectMany(i => i.SupplierPrice));
 	}
 
 	#endregion
