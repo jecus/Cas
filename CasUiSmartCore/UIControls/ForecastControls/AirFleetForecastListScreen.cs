@@ -471,7 +471,7 @@ namespace CAS.UI.UIControls.ForecastControls
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            PurchaseManager.ComposeQuotationOrder(wpItems.OfType<IBaseCoreObject>().ToArray(), pa[0], this);
+            //PurchaseManager.ComposeQuotationOrder(wpItems.OfType<IBaseCoreObject>().ToArray(), pa[0], this);
 
             pa.Clear();
         }
@@ -974,7 +974,7 @@ namespace CAS.UI.UIControls.ForecastControls
                 }
             }
 
-            PurchaseManager.AddToQuotationOrder(wp, wpItems.OfType<IBaseCoreObject>().ToArray(), this);
+            //PurchaseManager.AddToQuotationOrder(wp, wpItems.OfType<IBaseCoreObject>().ToArray(), this);
 
             pa.Clear();
         }

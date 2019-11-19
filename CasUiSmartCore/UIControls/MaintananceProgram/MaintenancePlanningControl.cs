@@ -1094,7 +1094,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
         /// <param name="e"></param>
         private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
         {
-            PurchaseManager.ComposeQuotationOrder(directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), _currentAircraft, this);   
+            //PurchaseManager.ComposeQuotationOrder(directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), _currentAircraft, this);   
         }
 
         #endregion
@@ -1107,7 +1107,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
             RequestForQuotation wp = (RequestForQuotation)((ToolStripMenuItem)sender).Tag;
 
-            PurchaseManager.AddToQuotationOrder(wp, directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
+            //PurchaseManager.AddToQuotationOrder(wp, directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
         }
 
         #endregion

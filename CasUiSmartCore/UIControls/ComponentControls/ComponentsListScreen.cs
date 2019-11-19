@@ -1557,7 +1557,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		/// <param name="e"></param>
 		private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
 		{
-			PurchaseManager.ComposeQuotationOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
+			//PurchaseManager.ComposeQuotationOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
 		}
 
 		#endregion
@@ -1573,7 +1573,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			//DeferredCategory dc = ((ToolStripMenuItem)sender).Tag as DeferredCategory ?? DeferredCategory.Unknown;
 
 			//PurchaseManager.ComposeInitialOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, dc, this);
-			PurchaseManager.ComposeInitialOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
+			//PurchaseManager.ComposeInitialOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
 		}
 
 		#endregion
@@ -1602,7 +1602,7 @@ namespace CAS.UI.UIControls.ComponentControls
 
 			RequestForQuotation wp = (RequestForQuotation)((RadMenuItem)sender).Tag;
 
-			PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
+			//PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
 		}
 
 		#endregion

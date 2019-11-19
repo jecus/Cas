@@ -500,7 +500,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		/// <param name="e"></param>
 		private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
 		{
-			PurchaseManager.ComposeQuotationOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
+			//PurchaseManager.ComposeQuotationOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
 		}
 
 		#endregion
@@ -513,7 +513,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 			RequestForQuotation wp = (RequestForQuotation)((RadMenuItem)sender).Tag;
 
-			PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
+			//PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
 		}
 
 		#endregion

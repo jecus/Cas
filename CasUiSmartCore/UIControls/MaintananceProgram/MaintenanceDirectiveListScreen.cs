@@ -734,7 +734,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
 		{
 			//Список комплектующих закупочного акта
-			PurchaseManager.ComposeQuotationOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
+			//PurchaseManager.ComposeQuotationOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
 		}
 
 		#endregion
@@ -747,7 +747,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
 			RequestForQuotation wp = (RequestForQuotation)((RadMenuItem)sender).Tag;
 
-			PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
+			//PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
 		}
 
 		#endregion

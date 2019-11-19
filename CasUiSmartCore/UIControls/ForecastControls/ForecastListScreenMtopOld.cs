@@ -964,7 +964,7 @@ namespace CAS.UI.UIControls.ForecastControls
 		/// <param name="e"></param>
 		private void ToolStripMenuItemComposeInitialClick(object sender, EventArgs e)
 		{
-			PurchaseManager.ComposeInitialOrder(_directivesViewer.SelectedItems.ToArray(), CurrentParent, this);
+			//PurchaseManager.ComposeInitialOrder(_directivesViewer.SelectedItems.ToArray(), CurrentParent, this);
 		}
 
 		#endregion
@@ -977,7 +977,7 @@ namespace CAS.UI.UIControls.ForecastControls
 		/// <param name="e"></param>
 		private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
 		{
-			PurchaseManager.ComposeQuotationOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
+			//PurchaseManager.ComposeQuotationOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
 		}
 
 		#endregion
@@ -990,7 +990,7 @@ namespace CAS.UI.UIControls.ForecastControls
 
 			RequestForQuotation wp = (RequestForQuotation)((ToolStripMenuItem)sender).Tag;
 
-			PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
+			//PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
 		}
 
 		#endregion

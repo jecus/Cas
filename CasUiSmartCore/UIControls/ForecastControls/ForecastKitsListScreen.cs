@@ -395,7 +395,7 @@ namespace CAS.UI.UIControls.ForecastControls
 
         private void CreateQuotationOrder()
         {
-            PurchaseManager.ComposeQuotationOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
+           // PurchaseManager.ComposeQuotationOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
         }
         #endregion
 
@@ -420,7 +420,7 @@ namespace CAS.UI.UIControls.ForecastControls
 
             RequestForQuotation wp = (RequestForQuotation)((RadMenuItem)sender).Tag;
 
-            PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
+            //PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
         }
 
 		#endregion

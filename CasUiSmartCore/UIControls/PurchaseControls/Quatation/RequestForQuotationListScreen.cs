@@ -510,19 +510,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private void ButtonAddNewClick(object sender, EventArgs e)
 		{
-			var  form = new QuatationOrderFormNew(new RequestForQuotation());
-			if (form.ShowDialog() == DialogResult.OK)
-			{
-				AnimatedThreadWorker.RunWorkerAsync();
 
-				var refe = new ReferenceEventArgs
-											  {
-												  DisplayerText = form.AddedInitial.Title,
-												  TypeOfReflection = ReflectionTypes.DisplayInNew,
-												  RequestedEntity = new RequestForQuotationScreen(form.AddedInitial)
-											  };
-				InvokeDisplayerRequested(refe);    
-			}
 		}
 		#endregion
 

@@ -607,7 +607,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private void CreateQuotationOrder()
 		{
-			PurchaseManager.ComposeQuotationOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
+			//PurchaseManager.ComposeQuotationOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
 		}
 		#endregion
 
@@ -619,7 +619,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 			RequestForQuotation wp = (RequestForQuotation)((ToolStripMenuItem)sender).Tag;
 
-			PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
+			//PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
 		}
 
 		#endregion
