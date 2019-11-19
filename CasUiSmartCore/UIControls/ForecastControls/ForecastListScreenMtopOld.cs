@@ -74,11 +74,8 @@ namespace CAS.UI.UIControls.ForecastControls
 		private ContextMenuStrip _contextMenuStrip;
 		private ToolStripSeparator _toolStripSeparator1;
 		private ToolStripMenuItem _createWorkPakageToolStripMenuItem;
-		private ToolStripMenuItem _createInitialOrderStripMenuItem;
-		private ToolStripMenuItem _createQuotationOrderStripMenuItem;
 		private ToolStripMenuItem _toolStripMenuItemHighlight;
 		private ToolStripMenuItem _toolStripMenuItemsWorkPackages;
-		private ToolStripMenuItem _toolStripMenuItemQuotations;
 		private ToolStripMenuItem _toolStripMenuItemShowTaskCard;
 		private ToolStripMenuItem _toolStripMenuItemTenPercent;
 		private ToolStripMenuItem _toolStripMenuItemCloseDirectives;
@@ -177,8 +174,6 @@ namespace CAS.UI.UIControls.ForecastControls
 				_currentForecast = null;
 			}
 
-			if (_createInitialOrderStripMenuItem != null) _createInitialOrderStripMenuItem.Dispose();
-			if (_createQuotationOrderStripMenuItem != null) _createQuotationOrderStripMenuItem.Dispose();
 			if (_createWorkPakageToolStripMenuItem != null) _createWorkPakageToolStripMenuItem.Dispose();
 			if (_toolStripMenuItemsWorkPackages != null) _toolStripMenuItemsWorkPackages.Dispose();
 			if (_toolStripMenuItemHighlight != null)
@@ -192,15 +187,7 @@ namespace CAS.UI.UIControls.ForecastControls
 			}
 			if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
 			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
-			if (_toolStripMenuItemQuotations != null)
-			{
-				foreach (ToolStripMenuItem item in _toolStripMenuItemQuotations.DropDownItems)
-				{
-					item.Click -= AddToQuotationOrderItemClick;
-				}
-				_toolStripMenuItemQuotations.DropDownItems.Clear();
-				_toolStripMenuItemQuotations.Dispose();
-			}
+			
 			if (_toolStripMenuItemsWorkPackages != null)
 			{
 				foreach (ToolStripMenuItem item in _toolStripMenuItemsWorkPackages.DropDownItems)
@@ -246,25 +233,7 @@ namespace CAS.UI.UIControls.ForecastControls
 					" To: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.ForecastDate) +
 					"\nAvg. utlz: " + main.AverageUtilization.CustomToString();
 			}
-
-
-			if (_toolStripMenuItemQuotations != null)
-			{
-				foreach (ToolStripMenuItem item in _toolStripMenuItemQuotations.DropDownItems)
-				{
-					item.Click -= AddToQuotationOrderItemClick;
-				}
-
-				_toolStripMenuItemQuotations.DropDownItems.Clear();
-
-				foreach (RequestForQuotation quotation in _openPubQuotations)
-				{
-					ToolStripMenuItem item = new ToolStripMenuItem(quotation.Title);
-					item.Click += AddToQuotationOrderItemClick;
-					item.Tag = quotation;
-					_toolStripMenuItemQuotations.DropDownItems.Add(item);
-				}
-			}
+			
 			if (_toolStripMenuItemsWorkPackages != null)
 			{
 				foreach (ToolStripMenuItem item in _toolStripMenuItemsWorkPackages.DropDownItems)
@@ -776,11 +745,8 @@ namespace CAS.UI.UIControls.ForecastControls
 		{
 			_contextMenuStrip = new ContextMenuStrip();
 			_createWorkPakageToolStripMenuItem = new ToolStripMenuItem();
-			_createInitialOrderStripMenuItem = new ToolStripMenuItem();
-			_createQuotationOrderStripMenuItem = new ToolStripMenuItem();
 			_contextMenuStrip = new ContextMenuStrip();
 			_toolStripMenuItemsWorkPackages = new ToolStripMenuItem();
-			_toolStripMenuItemQuotations = new ToolStripMenuItem();
 			_toolStripMenuItemShowTaskCard = new ToolStripMenuItem();
 			_toolStripMenuItemTenPercent = new ToolStripMenuItem();
 			_toolStripMenuItemCloseDirectives = new ToolStripMenuItem();
@@ -803,20 +769,6 @@ namespace CAS.UI.UIControls.ForecastControls
 			//
 			_toolStripMenuItemsWorkPackages.Text = "Add to work package";
 			// 
-			// createInitialOrderStripMenuItem
-			// 
-			_createInitialOrderStripMenuItem.Text = "Compose new Initial Order";
-			_createInitialOrderStripMenuItem.Click += ToolStripMenuItemComposeInitialClick;
-			// 
-			// toolStripMenuItemView
-			// 
-			_createQuotationOrderStripMenuItem.Text = "Compose Quotation";
-			_createQuotationOrderStripMenuItem.Click += ToolStripMenuItemComposeQuotationClick;
-			//
-			// toolStripMenuItemComposeWorkPackage
-			//
-			_toolStripMenuItemQuotations.Text = "Add to Quotation Order";
-			// 
 			// _toolStripMenuItemShowTaskCard
 			// 
 			_toolStripMenuItemShowTaskCard.Text = "Show Task Card";
@@ -835,7 +787,6 @@ namespace CAS.UI.UIControls.ForecastControls
 
 			_contextMenuStrip.Items.Clear();
 			_toolStripMenuItemsWorkPackages.DropDownItems.Clear();
-			_toolStripMenuItemQuotations.DropDownItems.Clear();
 			_toolStripMenuItemHighlight.DropDownItems.Clear();
 
 			foreach (Highlight highlight in Highlight.HighlightList)
@@ -861,10 +812,7 @@ namespace CAS.UI.UIControls.ForecastControls
 													new ToolStripSeparator(),
 													_createWorkPakageToolStripMenuItem,
 													_toolStripMenuItemsWorkPackages,
-													_toolStripSeparator1,
-													_createInitialOrderStripMenuItem,
-													_createQuotationOrderStripMenuItem,
-													_toolStripMenuItemQuotations,
+													_toolStripSeparator1
 												});
 		}
 
@@ -950,47 +898,6 @@ namespace CAS.UI.UIControls.ForecastControls
 					_toolStripMenuItemTenPercent.Enabled = !mpd.RecalculateTenPercent;
 				}
 			}
-			_createInitialOrderStripMenuItem.Enabled = true;
-			_createQuotationOrderStripMenuItem.Enabled = true;
-		}
-
-		#endregion
-
-		#region private void ToolStripMenuItemComposeInitialClick(object sender, EventArgs e)
-		/// <summary>
-		/// Публикует рабочий пакет
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void ToolStripMenuItemComposeInitialClick(object sender, EventArgs e)
-		{
-			//PurchaseManager.ComposeInitialOrder(_directivesViewer.SelectedItems.ToArray(), CurrentParent, this);
-		}
-
-		#endregion
-
-		#region private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
-		/// <summary>
-		/// Публикует рабочий пакет
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
-		{
-			//PurchaseManager.ComposeQuotationOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
-		}
-
-		#endregion
-
-		#region private void AddToQuotationOrderItemClick(object sender, EventArgs e)
-
-		private void AddToQuotationOrderItemClick(object sender, EventArgs e)
-		{
-			if (_directivesViewer.SelectedItems.Count <= 0) return;
-
-			RequestForQuotation wp = (RequestForQuotation)((ToolStripMenuItem)sender).Tag;
-
-			//PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
 		}
 
 		#endregion

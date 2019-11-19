@@ -72,7 +72,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemOpen;
 		private RadMenuItem _toolStripMenuItemComposeWorkPackage;
-		private RadMenuItem _toolStripMenuItemComposeQuotationOrder;
 		private RadMenuItem _toolStripMenuItemCopy;
 		private RadMenuItem _toolStripMenuItemPaste;
 		private RadMenuItem _toolStripMenuItemDelete;
@@ -84,7 +83,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 		private RadMenuSeparatorItem _toolStripSeparator2;
 		private RadMenuSeparatorItem _toolStripSeparator4;
 		private RadMenuItem _toolStripMenuItemsWorkPackages;
-		private RadMenuItem _toolStripMenuItemQuotations;
 		private AnimatedThreadWorker _worker;
 		private ExcelExportProvider _exportProvider;
 		private RadMenuItem _toolStripMenuItemChangeToAd;
@@ -343,7 +341,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			if (_toolStripMenuItemShowEOFile != null) _toolStripMenuItemShowEOFile.Dispose();
 			if (_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
 			if (_toolStripMenuItemComposeWorkPackage != null) _toolStripMenuItemComposeWorkPackage.Dispose();
-			if (_toolStripMenuItemComposeQuotationOrder != null) _toolStripMenuItemComposeQuotationOrder.Dispose();
 			if (_toolStripMenuItemCopy != null) _toolStripMenuItemCopy.Dispose();
 			if (_toolStripMenuItemPaste != null) _toolStripMenuItemPaste.Dispose();
 			if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
@@ -360,15 +357,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			if (_toolStripSeparator2 != null) _toolStripSeparator2.Dispose();
 			if (_toolStripSeparator4 != null) _toolStripSeparator4.Dispose();
 			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
-			if (_toolStripMenuItemQuotations != null)
-			{
-				foreach (RadMenuItem item in _toolStripMenuItemQuotations.Items)
-				{
-					item.Click -= AddToQuotationOrderItemClick;
-				}
-				_toolStripMenuItemQuotations.Items.Clear();
-				_toolStripMenuItemQuotations.Dispose();
-			}
+			
 			if (_toolStripMenuItemsWorkPackages != null)
 			{
 				foreach (RadMenuItem item in _toolStripMenuItemsWorkPackages.Items)
@@ -405,23 +394,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			{
 				labelTitle.Text = "";
 				labelTitle.Status = Statuses.NotActive;
-			}
-			if (_toolStripMenuItemQuotations != null)
-			{
-				foreach (RadMenuItem item in _toolStripMenuItemQuotations.Items)
-				{
-					item.Click -= AddToQuotationOrderItemClick;
-				}
-
-				_toolStripMenuItemQuotations.Items.Clear();
-
-				foreach (RequestForQuotation quotation in _openPubQuotations)
-				{
-					RadMenuItem item = new RadMenuItem(quotation.Title);
-					item.Click += AddToQuotationOrderItemClick;
-					item.Tag = quotation;
-					_toolStripMenuItemQuotations.Items.Add(item);
-				}
 			}
 			if (_toolStripMenuItemsWorkPackages != null)
 			{
@@ -651,8 +623,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			_toolStripMenuItemOpen = new RadMenuItem();
 			_toolStripMenuItemComposeWorkPackage = new RadMenuItem();
 			_toolStripMenuItemsWorkPackages = new RadMenuItem();
-			_toolStripMenuItemComposeQuotationOrder = new RadMenuItem();
-			_toolStripMenuItemQuotations = new RadMenuItem();
 			_toolStripMenuItemCopy = new RadMenuItem();
 			_toolStripMenuItemPaste = new RadMenuItem();
 			_toolStripMenuItemDelete = new RadMenuItem();
@@ -706,15 +676,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// _toolStripMenuItemsWorkPackages
 			//
 			_toolStripMenuItemsWorkPackages.Text = "Add to Work package";
-			//
-			// toolStripMenuItemComposeWorkPackage
-			//
-			_toolStripMenuItemComposeQuotationOrder.Text = "Compose quotation order";
-			_toolStripMenuItemComposeQuotationOrder.Click += ToolStripMenuItemComposeQuotationClick;
-			//
-			// toolStripMenuItemComposeWorkPackage
-			//
-			_toolStripMenuItemQuotations.Text = "Add to Quotation Order";
 			// 
 			// toolStripMenuItemDelete
 			// 
@@ -764,8 +725,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 				_toolStripMenuItemComposeWorkPackage,
 				_toolStripMenuItemsWorkPackages,
 				_toolStripSeparator1,
-				_toolStripMenuItemComposeQuotationOrder,
-				_toolStripMenuItemQuotations,
 				_toolStripSeparator4,
 				_toolStripMenuItemCopy,
 				_toolStripMenuItemPaste,
@@ -938,32 +897,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 		#endregion
 
-		#region private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
-		/// <summary>
-		/// Создает закупочный ордер
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
-		{
-			//PurchaseManager.ComposeQuotationOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
-		}
-
-		#endregion
-
-		#region private void AddToQuotationOrderItemClick(object sender, EventArgs e)
-
-		private void AddToQuotationOrderItemClick(object sender, EventArgs e)
-		{
-			if (_directivesViewer.SelectedItems.Count <= 0) return;
-
-			RequestForQuotation wp = (RequestForQuotation)((RadMenuItem)sender).Tag;
-
-			//PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
-		}
-
-		#endregion
-
 		#region private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
 
 		private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
@@ -1095,8 +1028,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 					_toolStripMenuItemHighlight.Enabled = false;
 					_toolStripMenuItemComposeWorkPackage.Enabled = false;
 					_toolStripMenuItemsWorkPackages.Enabled = false;
-					_toolStripMenuItemComposeQuotationOrder.Enabled = false;
-					_toolStripMenuItemQuotations.Enabled = false;
 					_toolStripMenuItemDelete.Enabled = false;
 
 				}
@@ -1140,8 +1071,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 					_toolStripMenuItemHighlight.Enabled = true;
 					_toolStripMenuItemComposeWorkPackage.Enabled = true;
 					_toolStripMenuItemsWorkPackages.Enabled = true;
-					_toolStripMenuItemComposeQuotationOrder.Enabled = true;
-					_toolStripMenuItemQuotations.Enabled = true;
 					_toolStripMenuItemDelete.Enabled = true;
 				}
 			};

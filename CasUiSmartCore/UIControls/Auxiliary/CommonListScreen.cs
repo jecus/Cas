@@ -58,8 +58,6 @@ namespace CAS.UI.UIControls.Auxiliary
 		private RadMenuSeparatorItem _toolStripSeparatorOpenOperation;
 		private RadMenuItem _toolStripMenuItemHighlight;
 		private RadMenuSeparatorItem _toolStripSeparatorHighlightOperation;
-		private RadMenuItem _createQuotationOrderStripMenuItem;
-		private RadMenuItem _toolStripMenuItemQuotations;
 		private RadMenuSeparatorItem _toolStripSeparatorQuotationtOperation;
 		private RadMenuItem _toolStripMenuItemComposeWorkPackage;
 		private RadMenuItem _toolStripMenuItemsWorkPackages;
@@ -182,17 +180,8 @@ namespace CAS.UI.UIControls.Auxiliary
 			_openPubQuotations = null;
 
 
-			if (_createQuotationOrderStripMenuItem != null) _createQuotationOrderStripMenuItem.Dispose();
 			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
-			if (_toolStripMenuItemQuotations != null)
-			{
-				foreach (var item in _toolStripMenuItemQuotations.Items)
-				{
-					item.Click -= AddToQuotationOrderItemClick;
-				}
-				_toolStripMenuItemQuotations.Items.Clear();
-				_toolStripMenuItemQuotations.Dispose();
-			}
+			
 			if (_toolStripMenuItemsWorkPackages != null)
 			{
 				foreach (var item in _toolStripMenuItemsWorkPackages.Items)
@@ -247,23 +236,6 @@ namespace CAS.UI.UIControls.Auxiliary
 				buttonDeleteSelected.Enabled = false;
 			}
 
-			if (_toolStripMenuItemQuotations != null)
-			{
-				foreach (var item in _toolStripMenuItemQuotations.Items)
-				{
-					item.Click -= AddToQuotationOrderItemClick;
-				}
-
-				_toolStripMenuItemQuotations.Items.Clear();
-
-				foreach (RequestForQuotation quotation in _openPubQuotations)
-				{
-					var item = new RadMenuItem(quotation.Title);
-					item.Click += AddToQuotationOrderItemClick;
-					item.Tag = quotation;
-					_toolStripMenuItemQuotations.Items.Add(item);
-				}
-			}
 			if (_toolStripMenuItemsWorkPackages != null)
 			{
 				foreach (var item in _toolStripMenuItemsWorkPackages.Items)
@@ -477,31 +449,6 @@ namespace CAS.UI.UIControls.Auxiliary
 
 			#endregion
 
-			#region QuotationOperation
-
-			if (_showQuotationOperationContextMenu)
-			{
-				_createQuotationOrderStripMenuItem = new RadMenuItem();
-				_toolStripMenuItemQuotations = new RadMenuItem();
-				_toolStripSeparatorQuotationtOperation = new RadMenuSeparatorItem();
-
-				// 
-				// toolStripMenuItemView
-				// 
-				_createQuotationOrderStripMenuItem.Text = "Compose Quotation";
-				_createQuotationOrderStripMenuItem.Click += ToolStripMenuItemComposeQuotationClick;
-				//
-				// toolStripMenuItemComposeWorkPackage
-				//
-				_toolStripMenuItemQuotations.Text = "Add to Quotation Order";
-
-				_contextMenuStrip.Items.Add(_createQuotationOrderStripMenuItem);
-				_contextMenuStrip.Items.Add(_toolStripMenuItemQuotations);
-				_contextMenuStrip.Items.Add(_toolStripSeparatorQuotationtOperation);
-			}
-
-			#endregion
-
 			#region WorkPackageOperation
 
 			if (_showWorkPackageOperationContextMenu)
@@ -619,33 +566,7 @@ namespace CAS.UI.UIControls.Auxiliary
 		}
 
 		#endregion
-
-		#region private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
-		/// <summary>
-		/// Публикует рабочий пакет
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
-		{
-			//PurchaseManager.ComposeQuotationOrder(DirectivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentOperator, this);
-		}
-
-		#endregion
-
-		#region private void AddToQuotationOrderItemClick(object sender, EventArgs e)
-
-		private void AddToQuotationOrderItemClick(object sender, EventArgs e)
-		{
-			if (DirectivesViewer.SelectedItems.Count <= 0) return;
-
-			RequestForQuotation wp = (RequestForQuotation)((RadMenuItem)sender).Tag;
-
-			//PurchaseManager.AddToQuotationOrder(wp, DirectivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
-		}
-
-		#endregion
-
+		
 		#region private void ButtonCreateWorkPakageClick(object sender, EventArgs e)
 
 		private void ButtonCreateWorkPakageClick(object sender, EventArgs e)
@@ -718,9 +639,7 @@ namespace CAS.UI.UIControls.Auxiliary
 					if (DirectivesViewer.SelectedItems.Count == 1)
 						_toolStripMenuItemComposeWorkPackage.Enabled = true;
 				}
-				if (_showQuotationOperationContextMenu)
-					_createQuotationOrderStripMenuItem.Enabled = true;
-
+				
 				if (_showOpenOperationContextMenu && DirectivesViewer.SelectedItem is NonRoutineJob)
 				{
 					var nrj = DirectivesViewer.SelectedItem as NonRoutineJob;
