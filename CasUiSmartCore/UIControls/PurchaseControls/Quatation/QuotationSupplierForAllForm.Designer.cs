@@ -42,14 +42,16 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.button2 = new System.Windows.Forms.Button();
 			this.textBox1 = new MetroFramework.Controls.MetroTextBox();
 			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
 			this.button1 = new System.Windows.Forms.Button();
 			this.labelSearchName = new MetroFramework.Controls.MetroLabel();
 			this.textBoxSearchName = new MetroFramework.Controls.MetroTextBox();
-			this.supplierListView = new CAS.UI.UIControls.SupplierControls.SupplierListView();
+			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.listBox1 = new System.Windows.Forms.ListBox();
 			this.supplierListView1 = new CAS.UI.UIControls.SupplierControls.SupplierListView();
+			this.supplierListView = new CAS.UI.UIControls.SupplierControls.SupplierListView();
 			this.groupBox1.SuspendLayout();
+			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// ButtonAdd
@@ -139,15 +141,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			// groupBox1
 			// 
 			this.groupBox1.Controls.Add(this.button3);
-			this.groupBox1.Controls.Add(this.button2);
 			this.groupBox1.Controls.Add(this.textBox1);
-			this.groupBox1.Controls.Add(this.metroLabel2);
-			this.groupBox1.Controls.Add(this.comboBox1);
 			this.groupBox1.Controls.Add(this.metroLabel1);
-			this.groupBox1.Controls.Add(this.button1);
 			this.groupBox1.Location = new System.Drawing.Point(686, 89);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(301, 120);
+			this.groupBox1.Size = new System.Drawing.Size(301, 86);
 			this.groupBox1.TabIndex = 296;
 			this.groupBox1.TabStop = false;
 			// 
@@ -157,7 +155,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button3.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button3.Location = new System.Drawing.Point(58, 74);
+			this.button3.Location = new System.Drawing.Point(220, 47);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(75, 33);
 			this.button3.TabIndex = 303;
@@ -170,7 +168,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button2.Location = new System.Drawing.Point(220, 74);
+			this.button2.Location = new System.Drawing.Point(220, 382);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(75, 33);
 			this.button2.TabIndex = 302;
@@ -212,23 +210,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			// 
 			this.metroLabel2.AutoSize = true;
 			this.metroLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabel2.Location = new System.Drawing.Point(6, 42);
+			this.metroLabel2.Location = new System.Drawing.Point(6, 20);
 			this.metroLabel2.Name = "metroLabel2";
 			this.metroLabel2.Size = new System.Drawing.Size(57, 19);
 			this.metroLabel2.TabIndex = 300;
 			this.metroLabel2.Text = "Settings:";
 			this.metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// comboBox1
-			// 
-			this.comboBox1.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.comboBox1.FormattingEnabled = true;
-			this.comboBox1.ItemHeight = 12;
-			this.comboBox1.Location = new System.Drawing.Point(77, 41);
-			this.comboBox1.Name = "comboBox1";
-			this.comboBox1.Size = new System.Drawing.Size(218, 20);
-			this.comboBox1.TabIndex = 299;
-			this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
 			// 
 			// metroLabel1
 			// 
@@ -247,7 +234,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button1.Location = new System.Drawing.Point(139, 74);
+			this.button1.Location = new System.Drawing.Point(139, 382);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(75, 33);
 			this.button1.TabIndex = 249;
@@ -296,20 +283,26 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.textBoxSearchName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
 			this.textBoxSearchName.TextChanged += new System.EventHandler(this.textBoxSearchPartNumber_TextChanged);
 			// 
-			// supplierListView
+			// groupBox2
 			// 
-			this.supplierListView.Displayer = null;
-			this.supplierListView.DisplayerText = null;
-			this.supplierListView.Entity = null;
-			this.supplierListView.IgnoreEnterPress = false;
-			this.supplierListView.Location = new System.Drawing.Point(23, 89);
-			this.supplierListView.MenuOpeningAction = null;
-			this.supplierListView.Name = "supplierListView";
-			this.supplierListView.OldColumnIndex = 0;
-			this.supplierListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.supplierListView.Size = new System.Drawing.Size(657, 237);
-			this.supplierListView.SortMultiplier = 0;
-			this.supplierListView.TabIndex = 69;
+			this.groupBox2.Controls.Add(this.listBox1);
+			this.groupBox2.Controls.Add(this.button2);
+			this.groupBox2.Controls.Add(this.metroLabel2);
+			this.groupBox2.Controls.Add(this.button1);
+			this.groupBox2.Location = new System.Drawing.Point(686, 181);
+			this.groupBox2.Name = "groupBox2";
+			this.groupBox2.Size = new System.Drawing.Size(301, 421);
+			this.groupBox2.TabIndex = 304;
+			this.groupBox2.TabStop = false;
+			// 
+			// listBox1
+			// 
+			this.listBox1.FormattingEnabled = true;
+			this.listBox1.Location = new System.Drawing.Point(69, 19);
+			this.listBox1.Name = "listBox1";
+			this.listBox1.Size = new System.Drawing.Size(226, 355);
+			this.listBox1.TabIndex = 303;
+			this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
 			// 
 			// supplierListView1
 			// 
@@ -326,11 +319,27 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.supplierListView1.SortMultiplier = 0;
 			this.supplierListView1.TabIndex = 299;
 			// 
+			// supplierListView
+			// 
+			this.supplierListView.Displayer = null;
+			this.supplierListView.DisplayerText = null;
+			this.supplierListView.Entity = null;
+			this.supplierListView.IgnoreEnterPress = false;
+			this.supplierListView.Location = new System.Drawing.Point(23, 89);
+			this.supplierListView.MenuOpeningAction = null;
+			this.supplierListView.Name = "supplierListView";
+			this.supplierListView.OldColumnIndex = 0;
+			this.supplierListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.supplierListView.Size = new System.Drawing.Size(657, 237);
+			this.supplierListView.SortMultiplier = 0;
+			this.supplierListView.TabIndex = 69;
+			// 
 			// QuotationSupplierForAllForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(992, 664);
+			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.supplierListView1);
 			this.Controls.Add(this.labelSearchName);
 			this.Controls.Add(this.textBoxSearchName);
@@ -347,6 +356,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.Text = "Quotation Supplier Form";
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
+			this.groupBox2.ResumeLayout(false);
+			this.groupBox2.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -363,11 +374,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		private System.Windows.Forms.Button button1;
 		private MetroFramework.Controls.MetroLabel labelSearchName;
 		private MetroFramework.Controls.MetroTextBox textBoxSearchName;
-		private System.Windows.Forms.ComboBox comboBox1;
 		private MetroFramework.Controls.MetroLabel metroLabel2;
 		private MetroFramework.Controls.MetroTextBox textBox1;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button3;
 		private SupplierControls.SupplierListView supplierListView1;
+		private System.Windows.Forms.GroupBox groupBox2;
+		private System.Windows.Forms.ListBox listBox1;
 	}
 }
