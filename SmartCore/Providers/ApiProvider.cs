@@ -109,7 +109,8 @@ namespace CAS.UI.Helpers
 
 		public DataSet Execute(string sql)
 		{
-			var res = _httpClient.SendXMLAsync<QueryParams, DataSet>(HttpMethod.Post, "executor/query", new QueryParams(){Query = sql});
+			var res = _httpClient.SendJsonAsync<QueryParams, DataSet>(HttpMethod.Post, "executor/query",
+				new QueryParams() {Query = sql});
 			return res?.Data ?? new DataSet() { Tables = { new DataTable() } }; ;
 		}
 
@@ -130,7 +131,8 @@ namespace CAS.UI.Helpers
 				}
 			}
 
-			var res = _httpClient.SendXMLAsync<QueryParams, DataSet>(HttpMethod.Post, "executor/queryparams", new QueryParams() { Query = query, SqlParams = xml });
+			var res = _httpClient.SendJsonAsync<QueryParams, DataSet>(HttpMethod.Post, "executor/query",
+				new QueryParams() { Query = query, SqlParams = xml });
 			return res?.Data ?? new DataSet(){Tables = { new DataTable()}};
 		}
 

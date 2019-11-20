@@ -11,6 +11,7 @@ using EntityCore.Interfaces.ExecutorServices.Arcitecture;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace CasAPI.Controllers
 {
@@ -32,18 +33,7 @@ namespace CasAPI.Controllers
 		{
 			try
 			{
-				var s = new XmlSerializer(typeof(DataSet));
-				string xml;
-
-				using (var sww = new StringWriter())
-				{
-					using (var writer = XmlWriter.Create(sww))
-					{
-						s.Serialize(writer, _executor.Execute(p.Query));
-						xml = sww.ToString(); 
-					}
-				}
-				return Ok(xml);
+				return Ok(JsonConvert.SerializeObject(_executor.Execute(p.Query)));
 			}
 			catch (Exception e)
 			{
@@ -62,18 +52,7 @@ namespace CasAPI.Controllers
 				using (TextReader reader = new StringReader(p.SqlParams))
 					param.AddRange((IEnumerable<SerializedSqlParam>) serializer.Deserialize(reader));
 
-				var s = new XmlSerializer(typeof(DataSet));
-				string xml;
-
-				using (var sww = new StringWriter())
-				{
-					using (var writer = XmlWriter.Create(sww))
-					{
-						s.Serialize(writer, _executor.Execute(p.Query, param.Select(i => i.GetSqlParameter(i)).ToArray()));
-						xml = sww.ToString();
-					}
-				}
-				return Ok(xml);
+				return Ok(JsonConvert.SerializeObject(_executor.Execute(p.Query, param.Select(i => i.GetSqlParameter(i)).ToArray())));
 			}
 			catch (Exception e)
 			{
