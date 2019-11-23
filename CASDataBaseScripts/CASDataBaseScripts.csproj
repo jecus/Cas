@@ -57,6 +57,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DBScripts\BDScripts2020.sql" />
+    <Content Include="DBScripts\BDScripts2010.sql" />
     <Content Include="DBScripts\BDScripts2000.sql" />
     <Content Include="DBScripts\BDScripts1900.sql" />
     <Content Include="DBScripts\BDScripts1800.sql" />
