@@ -79,6 +79,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		private RadMenuItem _toolStripMenuItemShowADFile;
 		private RadMenuItem _toolStripMenuItemShowSBFile;
 		private RadMenuItem _toolStripMenuItemShowEOFile;
+		private RadMenuItem _toolStripMenuItemsWShowWP;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 		private RadMenuSeparatorItem _toolStripSeparator2;
 		private RadMenuSeparatorItem _toolStripSeparator4;
@@ -342,6 +343,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			if (_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
 			if (_toolStripMenuItemComposeWorkPackage != null) _toolStripMenuItemComposeWorkPackage.Dispose();
 			if (_toolStripMenuItemCopy != null) _toolStripMenuItemCopy.Dispose();
+			if (_toolStripMenuItemsWShowWP != null) _toolStripMenuItemsWShowWP.Dispose();
 			if (_toolStripMenuItemPaste != null) _toolStripMenuItemPaste.Dispose();
 			if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
 			if (_toolStripMenuItemHighlight != null)
@@ -624,6 +626,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			_toolStripMenuItemComposeWorkPackage = new RadMenuItem();
 			_toolStripMenuItemsWorkPackages = new RadMenuItem();
 			_toolStripMenuItemCopy = new RadMenuItem();
+			_toolStripMenuItemsWShowWP = new RadMenuItem();
 			_toolStripMenuItemPaste = new RadMenuItem();
 			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripMenuItemHighlight = new RadMenuItem();
@@ -686,7 +689,11 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			_toolStripMenuItemCopy.Text = "Copy";
 			_toolStripMenuItemCopy.Click += CopyItemsClick;
-
+			//
+			// _toolStripMenuItemsWShowWP
+			//
+			_toolStripMenuItemsWShowWP.Text = "Show a work package Title";
+			_toolStripMenuItemsWShowWP.Click += _toolStripMenuItemsWShowWP_Click; ;
 			// 
 			// toolStripMenuItemPaste
 			// 
@@ -724,6 +731,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 				_toolStripSeparator2,
 				_toolStripMenuItemComposeWorkPackage,
 				_toolStripMenuItemsWorkPackages,
+				_toolStripMenuItemsWShowWP,
 				_toolStripSeparator1,
 				_toolStripSeparator4,
 				_toolStripMenuItemCopy,
@@ -743,6 +751,19 @@ namespace CAS.UI.UIControls.DirectivesControls
 			
 			GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate<Directive, DirectiveDTO>(_directivesViewer.SelectedItems.Cast<BaseEntityObject>().ToList());
 			AnimatedThreadWorker.RunWorkerAsync();
+		}
+
+		#endregion
+
+		#region private void _toolStripMenuItemsWShowWP_Click(object sender, EventArgs e)
+
+		private void _toolStripMenuItemsWShowWP_Click(object sender, EventArgs e)
+		{
+			if (_directivesViewer.SelectedItems.Count <= 0) return;
+
+			var res = $"{_directivesViewer.SelectedItem.NextPerformance.BlockedByPackage.Title} {_directivesViewer.SelectedItem.NextPerformance.BlockedByPackage.Number}";
+			MessageBox.Show(res, "",
+				MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
 		#endregion
@@ -1018,6 +1039,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{
+				_toolStripMenuItemsWShowWP.Enabled = false;
 				if (_directivesViewer.SelectedItems.Count <= 0)
 				{
 					_toolStripMenuItemChangeToAd.Enabled = false;
@@ -1029,6 +1051,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 					_toolStripMenuItemComposeWorkPackage.Enabled = false;
 					_toolStripMenuItemsWorkPackages.Enabled = false;
 					_toolStripMenuItemDelete.Enabled = false;
+					_toolStripMenuItemsWShowWP.Enabled = false;
 
 				}
 
@@ -1062,6 +1085,8 @@ namespace CAS.UI.UIControls.DirectivesControls
 						_toolStripMenuItemShowEOFile.Enabled = dir.EngineeringOrderFile != null;
 						_toolStripMenuItemShowSBFile.Enabled = dir.ServiceBulletinFile != null;
 						_toolStripMenuItemShowADFile.Enabled = dir.ADNoFile != null;
+						if (dir.NextPerformanceIsBlocked)
+							_toolStripMenuItemsWShowWP.Enabled = true;
 					}
 				}
 
