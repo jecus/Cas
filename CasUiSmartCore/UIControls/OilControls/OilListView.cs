@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Windows;
 using Auxiliary;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;

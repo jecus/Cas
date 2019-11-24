@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using EntityCore.DTO.General;
 using Newtonsoft.Json;
 using SmartCore.Calculations;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
-using SmartCore.Purchase;
 
 namespace SmartCore.Entities.General.Setting
 {

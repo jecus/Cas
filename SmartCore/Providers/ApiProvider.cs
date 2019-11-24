@@ -26,6 +26,17 @@ namespace CAS.UI.Helpers
 			_httpClient = new HttpClient() {BaseAddress = new Uri(serverName)};
 		}
 
+		#region Seuence
+
+		public long GetInitialSequence()
+		{
+			var param = HttpUtility.ParseQueryString(string.Empty);
+			var res = _httpClient.GetSequenceAsync($"initialequence");
+			return res.Data;
+		}
+
+		#endregion
+
 		#region User
 
 		public void CheckAPIConnection()

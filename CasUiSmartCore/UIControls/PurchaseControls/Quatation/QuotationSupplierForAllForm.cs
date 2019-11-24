@@ -4,9 +4,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CASTerms;
 using EntityCore.DTO.General;
-using EntityCore.Filter;
 using MetroFramework.Forms;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Setting;
 using SmartCore.Purchase;
 
@@ -52,10 +50,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 		private void UpdateControls()
 		{
-			comboBox1.Items.Clear();
-			comboBox1.Items.AddRange(_settings.GlobalSetting.QuotationSupplierSetting.Parameters.Select(i => i.Key).ToArray());
-			comboBox1.SelectedItem = null;
-			comboBox1.Text = "";
+			listBox1.Items.Clear();
+			listBox1.Items.AddRange(_settings.GlobalSetting.QuotationSupplierSetting.Parameters.Select(i => i.Key).ToArray());
+			listBox1.SelectedItem = null;
+			listBox1.Text = "";
 		}
 
 		private void ButtonAdd_Click(object sender, System.EventArgs e)
@@ -78,7 +76,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 				MessageBoxButtons.OK,
 				MessageBoxIcon.Exclamation);
 
-			supplierListView1.SetItemsArray(_prices.ToArray());
+			supplierListView1.SetItemsArray(_prices.Select(i => i.Supplier).ToArray());
 		}
 
 		private void ButtonDelete_Click(object sender, System.EventArgs e)
@@ -86,9 +84,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			if (supplierListView1.SelectedItems.Count == 0) return;
 
 			foreach (var item in supplierListView1.SelectedItems.ToArray())
-				_prices.Remove(item);
+				_prices.RemoveAll(i => i.SupplierId == item.ItemId);
 
-			supplierListView1.SetItemsArray(_prices.ToArray());
+			supplierListView1.SetItemsArray(_prices.Select(i => i.Supplier).ToArray());
 		}
 
 		private void Button1_Click(object sender, System.EventArgs e)
@@ -129,30 +127,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			supplierListView.SetItemsArray(_suppliers.Where(i => i.Name.ToLower().Contains(textBoxSearchName.Text.ToLower())).ToArray());
 		}
 
-		private void comboBox1_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboBox1.SelectedItem == null)
-				return;
-
-			textBox1.Text = comboBox1.SelectedItem.ToString();
-			supplierListView1.radGridView1.Rows.Clear();
-
-			var ids = _settings.GlobalSetting.QuotationSupplierSetting.Parameters[comboBox1.SelectedItem.ToString()];
-			var price = _suppliers
-				.Where(i => ids.Contains(i.ItemId))
-				.Select(supplier => new SupplierPrice {SupplierId = supplier.ItemId, Supplier = supplier})
-				.ToArray();
-			supplierListView1.SetItemsArray(price);
-			_prices.Clear();
-			_prices.AddRange(price);
-		}
-
 		private void button2_Click(object sender, System.EventArgs e)
 		{
-			if (comboBox1.SelectedItem == null)
+			if (listBox1.SelectedItem == null)
 				return;
 
-			_settings.GlobalSetting.QuotationSupplierSetting.Parameters.Remove(comboBox1.SelectedItem.ToString());
+			_settings.GlobalSetting.QuotationSupplierSetting.Parameters.Remove(listBox1.SelectedItem.ToString());
 			UpdateControls();
 			supplierListView1.radGridView1.Rows.Clear();
 
@@ -178,8 +158,26 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 			_settings.GlobalSetting.QuotationSupplierSetting.Parameters.Add(textBox1.Text, new List<int>());
 			UpdateControls();
-			comboBox1.SelectedItem = textBox1.Text;
+			listBox1.SelectedItem = textBox1.Text;
 			
+		}
+
+		private void listBox1_SelectedIndexChanged(object sender, System.EventArgs e)
+		{
+			if (listBox1.SelectedItem == null)
+				return;
+
+			//textBox1.Text = listBox1.SelectedItem.ToString();
+			supplierListView1.radGridView1.Rows.Clear();
+
+			var ids = _settings.GlobalSetting.QuotationSupplierSetting.Parameters[listBox1.SelectedItem.ToString()];
+			var price = _suppliers
+				.Where(i => ids.Contains(i.ItemId))
+				.Select(supplier => new SupplierPrice { SupplierId = supplier.ItemId, Supplier = supplier })
+				.ToArray();
+			_prices.Clear();
+			_prices.AddRange(price);
+			supplierListView1.SetItemsArray(_prices.Select(i => i.Supplier).ToArray());
 		}
 	}
 }

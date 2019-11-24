@@ -3,7 +3,6 @@ using System.Drawing;
 using Auxiliary;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Purchase;
 using Telerik.WinControls.UI;
@@ -54,12 +53,14 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			else
 			{
 				var record = item as SupplierPrice;
-				subItems.Add(CreateRow("",""));
+				var order = ((RequestForQuotation) record.Parent.ParentPackage);
+				var qualification = order.AdditionalInformation.QualificationNumbers.ContainsKey(record.SupplierId) ? order.AdditionalInformation.QualificationNumbers[record.SupplierId] : null;
+				subItems.Add(CreateRow(string.IsNullOrEmpty(qualification) ? "" : $"             QO №:{qualification}",""));
 				subItems.Add(CreateRow(record.Supplier.ToString(), record.Supplier));
-				subItems.Add(CreateRow($"New:{record.CostNew} {record.СurrencyNew}".ToString(), record.CostNew));
-				subItems.Add(CreateRow($"OH:{record.CostOverhaul} {record.СurrencyOH}".ToString(), record.CostOverhaul));
-				subItems.Add(CreateRow($"Serv:{record.CostServiceable} {record.СurrencyServ}".ToString(), record.CostServiceable));
-				subItems.Add(CreateRow($"Rep:{record.CostRepair} {record.СurrencyRepair}", record.CostRepair));
+				subItems.Add(CreateRow($"New:{record.CostNewString}".ToString(), record.CostNewString));
+				subItems.Add(CreateRow($"OH:{record.CostOHString}".ToString(), record.CostOHString));
+				subItems.Add(CreateRow($"Serv:{record.CostServString}".ToString(), record.CostServString));
+				subItems.Add(CreateRow($"Rep:{record.CostRepairString}", record.CostRepairString));
 				subItems.Add(CreateRow("", ""));
 				subItems.Add(CreateRow("", ""));
 			}

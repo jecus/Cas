@@ -58,7 +58,13 @@ namespace CAS.UI.UIControls.PurchaseControls
 				new Filter("ParentTypeId",_currentModel.SmartCoreObjectType.ItemId)
 			}, true);
 
-			_currentModel.Document = links.FirstOrDefault();
+			var cmm = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("CMM") as DocumentSubType;
+			if (cmm != null)
+				_currentModel.Document = links.FirstOrDefault(i => i.DocumentSubType.ItemId == cmm.ItemId);
+
+			var ipc = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("IPC Ref") as DocumentSubType;
+			if (ipc != null)
+				_currentModel.DocumentIpcRef = links.FirstOrDefault(i => i.DocumentSubType.ItemId == ipc.ItemId);
 		}
 		#region private void UpdateInformation()
 
@@ -116,6 +122,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 			documentControl1.CurrentDocument = _currentModel.Document;
 			documentControl1.Added += DocumentControl1_Added;
+			documentControl2.CurrentDocument = _currentModel.DocumentIpcRef;
+			documentControl2.Added += DocumentControl2_Added;
 		}
 
 		#endregion
@@ -147,6 +155,39 @@ namespace CAS.UI.UIControls.PurchaseControls
 			{
 				_currentModel.Document = newDocument;
 				documentControl1.CurrentDocument = newDocument;
+
+			}
+		}
+
+		#endregion
+
+		#region private void DocumentControl1_Added(object sender, EventArgs e)
+
+		private void DocumentControl2_Added(object sender, EventArgs e)
+		{
+			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("IPC Ref") as DocumentSubType;
+			var dep = GlobalObjects.CasEnvironment.GetDictionary<Department>().GetByFullName("Planning") as Department;
+			var spec = GlobalObjects.CasEnvironment.GetDictionary<Specialization>().GetByFullName("Maintenance Data Librarian") as Specialization;
+			var nomen = GlobalObjects.CasEnvironment.GetDictionary<Nomenclatures>().GetByFullName("e-library") as Nomenclatures;
+			var location = GlobalObjects.CasEnvironment.GetDictionary<Locations>().GetByFullName("e-Server CIT") as Locations;
+			var newDocument = new Document
+			{
+				Parent = _currentModel,
+				ParentId = _currentModel.ItemId,
+				ParentTypeId = _currentModel.SmartCoreObjectType.ItemId,
+				DocType = DocumentType.TechnicalPublication,
+				DocumentSubType = docSubType,
+				Department = dep,
+				ResponsibleOccupation = spec,
+				Nomenсlature = nomen,
+				Location = location
+			};
+
+			var form = new DocumentForm(newDocument, false);
+			if (form.ShowDialog() == DialogResult.OK)
+			{
+				_currentModel.Document = newDocument;
+				documentControl2.CurrentDocument = newDocument;
 
 			}
 		}
