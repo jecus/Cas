@@ -9,20 +9,6 @@ namespace CAS.UI.Helpers
 {
 	public static class APIExtensions
 	{
-		public static ApiResult<long> GetSequenceAsync(this HttpClient client, string requestUri)
-		{
-			var res = client.GetAsync(requestUri).Result;
-			var content = res.Content.ReadAsStringAsync().Result;
-
-			return new ApiResult<long>
-			{
-				IsSuccessful = res.IsSuccessStatusCode,
-				StatusCode = res.StatusCode,
-				Data = res.IsSuccessStatusCode ? long.Parse(content) : -666,
-				Error = res.IsSuccessStatusCode ? null : (content ?? res.ReasonPhrase)
-			};
-		}
-
 		public static ApiResult<TResult> GetJsonAsync<TResult>(this HttpClient client, string requestUri)
 		{
 			var res =  client.GetAsync(requestUri).Result;

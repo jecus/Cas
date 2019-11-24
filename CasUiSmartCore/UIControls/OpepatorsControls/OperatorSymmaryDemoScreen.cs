@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Windows.Forms;
 using CAS.UI.ExcelExport;
 using CAS.UI.Interfaces;
@@ -216,26 +218,6 @@ namespace CAS.UI.UIControls.OpepatorsControls
 		{
 			e.DisplayerText = "Purchase Orders";
 			e.RequestedEntity = new PurchaseOrderListScreen(_currentOperator);
-		}
-
-		#endregion
-
-		#region private void LinkPurchaseOrderDisplayerRequested(object sender, ReferenceEventArgs e)
-
-		private void LinkRequestOffersDisplayerRequested(object sender, ReferenceEventArgs e)
-		{
-			e.DisplayerText = "Request Offers";
-			e.RequestedEntity = new RequestOffersListScreen(_currentOperator);
-		}
-
-		#endregion
-
-		#region private void LinkLinkPurchaseStatusDisplayerRequested(object sender, ReferenceEventArgs e)
-
-		private void LinkLinkPurchaseStatusDisplayerRequested(object sender, ReferenceEventArgs e)
-		{
-			e.DisplayerText = "Purchase Status";
-			e.RequestedEntity = new PurchaseStatusListScreen(_currentOperator);
 		}
 
 		#endregion

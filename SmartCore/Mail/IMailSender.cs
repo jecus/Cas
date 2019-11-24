@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Windows.Forms;
 using EntityCore.DTO.General;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Personnel;
@@ -17,7 +18,7 @@ namespace SmartCore.Mail
 	{
 		bool CheckForInternetConnection();
 		void SendPurchaseEmail(List<PurchaseRequestRecord> records, string to, Specialist personnel, Stream stream = null);
-		void SendQuotationEmail(List<RequestForQuotationRecord> records, string to, Specialist personnel);
+		void SendQuotationEmail(List<PurchaseRequestRecord> records, string to, Specialist personnel);
 	}
 
 
@@ -37,7 +38,7 @@ namespace SmartCore.Mail
 			sendMessage(to, "", "", stream);
 		}
 
-		public void SendQuotationEmail(List<RequestForQuotationRecord> records, string to, Specialist personnel)
+		public void SendQuotationEmail(List<PurchaseRequestRecord> records, string to, Specialist personnel)
 		{
 			sendMessage(to, GenerateQuotationTemplate(records, personnel), "");
 		}
@@ -91,7 +92,7 @@ namespace SmartCore.Mail
 
 		#endregion
 
-		private string GenerateQuotationTemplate(List<RequestForQuotationRecord> orderRecords, Specialist specialist)
+		private string GenerateQuotationTemplate(List<PurchaseRequestRecord> orderRecords, Specialist specialist)
 		{
 			var data = "";
 			foreach (var record in orderRecords)

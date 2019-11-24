@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using CASTerms;
 using EntityCore.DTO.General;
 using MetroFramework.Forms;
+using SmartCore.Entities.General;
 using SmartCore.Entities.General.Setting;
 
 

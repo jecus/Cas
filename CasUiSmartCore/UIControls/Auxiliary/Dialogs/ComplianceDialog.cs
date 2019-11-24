@@ -1,4 +1,5 @@
-﻿using MetroFramework.Forms;
+﻿using System.Windows.Forms;
+using MetroFramework.Forms;
 
 namespace CAS.UI.UIControls.Auxiliary.Dialogs
 {

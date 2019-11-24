@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
 using EntityCore.Interfaces;
@@ -41,7 +39,7 @@ namespace CasAPI.Controllers
 				{
 					using (var writer = XmlWriter.Create(sww))
 					{
-						s.Serialize(writer, NormalizeDate(_executor.Execute(p.Query)));
+						s.Serialize(writer, _executor.Execute(p.Query));
 						xml = sww.ToString(); 
 					}
 				}
@@ -71,7 +69,7 @@ namespace CasAPI.Controllers
 				{
 					using (var writer = XmlWriter.Create(sww))
 					{
-						s.Serialize(writer, NormalizeDate(_executor.Execute(p.Query, param.Select(i => i.GetSqlParameter(i)).ToArray())));
+						s.Serialize(writer, _executor.Execute(p.Query, param.Select(i => i.GetSqlParameter(i)).ToArray()));
 						xml = sww.ToString();
 					}
 				}
@@ -83,22 +81,5 @@ namespace CasAPI.Controllers
 				return BadRequest();
 			}
 		}
-
-
-		private DataSet NormalizeDate(DataSet data)
-		{
-			foreach (DataTable table in data.Tables)
-			{
-				foreach (DataColumn item in table.Columns)
-				{
-					// Switching from UnspecifiedLocal to Unspecified is allowed even after the DataSet has rows.
-					if (item.DataType == typeof(DateTime) && item.DateTimeMode == DataSetDateTime.UnspecifiedLocal)
-						item.DateTimeMode = DataSetDateTime.Unspecified;
-				}
-			}
-
-			return data;
-		}
 	}
-
 }

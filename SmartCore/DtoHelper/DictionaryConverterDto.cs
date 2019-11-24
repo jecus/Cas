@@ -246,7 +246,6 @@ namespace SmartCore.DtoHelper
 				HTS = componentModel.HTS,
 				ComponentClass = (short?) componentModel.GoodsClass?.ItemId,
 				IsDangerous = componentModel.IsDangerous,
-				EngineRef = componentModel.EngineRef,
 				SupplierRelations = componentModel.SupplierRelations?.Select(i => i.Convert()) as ICollection<KitSuppliersRelationDTO>,
 			};
 		}
@@ -283,7 +282,6 @@ namespace SmartCore.DtoHelper
 				IsForbidden = componentModelDto.IsForbidden,
 				DescRus = componentModelDto.DescRus,
 				HTS = componentModelDto.HTS,
-				EngineRef = componentModelDto.EngineRef
 			};
 
 			if (componentModelDto.SupplierRelations != null)
@@ -322,7 +320,6 @@ namespace SmartCore.DtoHelper
 				Reference = product.Reference,
 				IsEffectivity = product.IsEffectivity,
 				IsForbidden = product.IsForbidden,
-				EngineRef = product.EngineRef,
 				SupplierRelations = product.SupplierRelations?.Select(i => i.Convert()) as ICollection<KitSuppliersRelationDTO>,
 			};
 		}
@@ -355,7 +352,6 @@ namespace SmartCore.DtoHelper
 				Reference = productDto.Reference,
 				IsEffectivity = productDto.IsEffectivity,
 				IsForbidden = productDto.IsForbidden,
-				EngineRef = productDto.EngineRef,
 				ProductType = productDto.ModelingObjectTypeId == -1 ? ProductType.EquipmentandMaterial: ProductType.ComponentModel
 			};
 

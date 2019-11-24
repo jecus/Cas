@@ -4,6 +4,7 @@ using System.Linq;
 using EntityCore.DTO.Dictionaries;
 using EntityCore.DTO.General;
 using EntityCore.Filter;
+using EntityCore.Filter;
 using SmartCore.Calculations.Maintenance;
 using SmartCore.Calculations.PerformanceCalculator;
 using SmartCore.Entities;

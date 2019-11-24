@@ -12,6 +12,11 @@ namespace EntityCore.DTO.General
 	[Condition("IsDeleted", 0)]
 	public class InitialOrderRecordDTO : BaseEntity
 	{
+		
+		[Column("InitialReason")]
+		public int? InitialReason { get; set; }
+
+		
 		[Column("Priority")]
 		public int? Priority { get; set; }
 

@@ -10,6 +10,7 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.ComponentControls;
 using CAS.UI.UIControls.FiltersControls;
 using CASTerms;
 using SmartCore.Entities.Collections;

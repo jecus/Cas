@@ -74,23 +74,7 @@
 			this.numericUpDownNet = new System.Windows.Forms.NumericUpDown();
 			this.metroTextBoxIncoTermRef = new MetroFramework.Controls.MetroTextBox();
 			this.metroLabelIncoTermRef = new MetroFramework.Controls.MetroLabel();
-			this.metroTextBoxPickupLocation = new MetroFramework.Controls.MetroTextBox();
-			this.metroLabelPickupLocation = new MetroFramework.Controls.MetroLabel();
-			this.metroLabelArrivaldate = new MetroFramework.Controls.MetroLabel();
-			this.dateTimePickerArrivalDate = new System.Windows.Forms.DateTimePicker();
-			this.metroLabelArrivalTime = new MetroFramework.Controls.MetroLabel();
-			this.comboBoxStatusOfDelivery = new System.Windows.Forms.ComboBox();
-			this.metroLabelStatusOfDelivery = new MetroFramework.Controls.MetroLabel();
-			this.metroLabelReceiptTime = new MetroFramework.Controls.MetroLabel();
-			this.metroLabelReceiptDate = new MetroFramework.Controls.MetroLabel();
-			this.dateTimePickerReceiptDate = new System.Windows.Forms.DateTimePicker();
-			this.numericUpDownFreightPrice = new System.Windows.Forms.NumericUpDown();
-			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-			this.comboBoxFreightPrice = new System.Windows.Forms.ComboBox();
-			this.dateTimePickerArrivalTime = new System.Windows.Forms.DateTimePicker();
-			this.dateTimePickerReceiptTime = new System.Windows.Forms.DateTimePicker();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNet)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownFreightPrice)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// textBoxClosingBy
@@ -139,7 +123,6 @@
 			this.metroTextBoxNumber.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
 			this.metroTextBoxNumber.CustomButton.UseSelectable = true;
 			this.metroTextBoxNumber.CustomButton.Visible = false;
-			this.metroTextBoxNumber.Enabled = false;
 			this.metroTextBoxNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.metroTextBoxNumber.Lines = new string[0];
 			this.metroTextBoxNumber.Location = new System.Drawing.Point(122, 62);
@@ -195,9 +178,9 @@
 			// 
 			// 
 			this.textBoxRemarks.CustomButton.Image = null;
-			this.textBoxRemarks.CustomButton.Location = new System.Drawing.Point(80, 2);
+			this.textBoxRemarks.CustomButton.Location = new System.Drawing.Point(88, 1);
 			this.textBoxRemarks.CustomButton.Name = "";
-			this.textBoxRemarks.CustomButton.Size = new System.Drawing.Size(97, 97);
+			this.textBoxRemarks.CustomButton.Size = new System.Drawing.Size(91, 91);
 			this.textBoxRemarks.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
 			this.textBoxRemarks.CustomButton.TabIndex = 1;
 			this.textBoxRemarks.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -215,7 +198,7 @@
 			this.textBoxRemarks.SelectionLength = 0;
 			this.textBoxRemarks.SelectionStart = 0;
 			this.textBoxRemarks.ShortcutsEnabled = true;
-			this.textBoxRemarks.Size = new System.Drawing.Size(180, 102);
+			this.textBoxRemarks.Size = new System.Drawing.Size(180, 93);
 			this.textBoxRemarks.TabIndex = 337;
 			this.textBoxRemarks.UseSelectable = true;
 			this.textBoxRemarks.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -417,7 +400,7 @@
 			// metroLabelShipTo
 			// 
 			this.metroLabelShipTo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabelShipTo.Location = new System.Drawing.Point(672, 60);
+			this.metroLabelShipTo.Location = new System.Drawing.Point(334, 336);
 			this.metroLabelShipTo.Name = "metroLabelShipTo";
 			this.metroLabelShipTo.Size = new System.Drawing.Size(120, 27);
 			this.metroLabelShipTo.TabIndex = 352;
@@ -429,7 +412,7 @@
 			this.comboBoxShipComp.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.comboBoxShipComp.FormattingEnabled = true;
 			this.comboBoxShipComp.ItemHeight = 17;
-			this.comboBoxShipComp.Location = new System.Drawing.Point(462, 378);
+			this.comboBoxShipComp.Location = new System.Drawing.Point(462, 307);
 			this.comboBoxShipComp.Name = "comboBoxShipComp";
 			this.comboBoxShipComp.Size = new System.Drawing.Size(179, 25);
 			this.comboBoxShipComp.TabIndex = 350;
@@ -447,7 +430,7 @@
 			// metroLabelShippingCompany
 			// 
 			this.metroLabelShippingCompany.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabelShippingCompany.Location = new System.Drawing.Point(334, 380);
+			this.metroLabelShippingCompany.Location = new System.Drawing.Point(334, 309);
 			this.metroLabelShippingCompany.Name = "metroLabelShippingCompany";
 			this.metroLabelShippingCompany.Size = new System.Drawing.Size(131, 23);
 			this.metroLabelShippingCompany.TabIndex = 349;
@@ -642,7 +625,7 @@
 			this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonCancel.Location = new System.Drawing.Point(891, 451);
+			this.buttonCancel.Location = new System.Drawing.Point(566, 451);
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.Size = new System.Drawing.Size(75, 33);
 			this.buttonCancel.TabIndex = 359;
@@ -656,7 +639,7 @@
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(810, 451);
+			this.buttonOk.Location = new System.Drawing.Point(485, 451);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 360;
@@ -669,7 +652,7 @@
 			this.comboBoxShipTo.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.comboBoxShipTo.FormattingEnabled = true;
 			this.comboBoxShipTo.ItemHeight = 17;
-			this.comboBoxShipTo.Location = new System.Drawing.Point(800, 62);
+			this.comboBoxShipTo.Location = new System.Drawing.Point(462, 338);
 			this.comboBoxShipTo.Name = "comboBoxShipTo";
 			this.comboBoxShipTo.Size = new System.Drawing.Size(179, 25);
 			this.comboBoxShipTo.TabIndex = 361;
@@ -679,7 +662,7 @@
 			this.comboBoxStation.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.comboBoxStation.FormattingEnabled = true;
 			this.comboBoxStation.ItemHeight = 17;
-			this.comboBoxStation.Location = new System.Drawing.Point(800, 124);
+			this.comboBoxStation.Location = new System.Drawing.Point(462, 369);
 			this.comboBoxStation.Name = "comboBoxStation";
 			this.comboBoxStation.Size = new System.Drawing.Size(179, 25);
 			this.comboBoxStation.TabIndex = 363;
@@ -687,7 +670,7 @@
 			// metroLabelStation
 			// 
 			this.metroLabelStation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabelStation.Location = new System.Drawing.Point(672, 122);
+			this.metroLabelStation.Location = new System.Drawing.Point(334, 367);
 			this.metroLabelStation.Name = "metroLabelStation";
 			this.metroLabelStation.Size = new System.Drawing.Size(120, 27);
 			this.metroLabelStation.TabIndex = 362;
@@ -710,7 +693,7 @@
 			this.metroTextBoxTrackingNo.CustomButton.Visible = false;
 			this.metroTextBoxTrackingNo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.metroTextBoxTrackingNo.Lines = new string[0];
-			this.metroTextBoxTrackingNo.Location = new System.Drawing.Point(800, 93);
+			this.metroTextBoxTrackingNo.Location = new System.Drawing.Point(462, 400);
 			this.metroTextBoxTrackingNo.MaxLength = 32767;
 			this.metroTextBoxTrackingNo.Name = "metroTextBoxTrackingNo";
 			this.metroTextBoxTrackingNo.PasswordChar = '\0';
@@ -728,7 +711,7 @@
 			// metroLabelTrackingNo
 			// 
 			this.metroLabelTrackingNo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabelTrackingNo.Location = new System.Drawing.Point(672, 91);
+			this.metroLabelTrackingNo.Location = new System.Drawing.Point(334, 398);
 			this.metroLabelTrackingNo.Name = "metroLabelTrackingNo";
 			this.metroLabelTrackingNo.Size = new System.Drawing.Size(120, 27);
 			this.metroLabelTrackingNo.TabIndex = 365;
@@ -793,193 +776,11 @@
 			this.metroLabelIncoTermRef.Text = "Inco Term Ref:";
 			this.metroLabelIncoTermRef.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// metroTextBoxPickupLocation
-			// 
-			// 
-			// 
-			// 
-			this.metroTextBoxPickupLocation.CustomButton.Image = null;
-			this.metroTextBoxPickupLocation.CustomButton.Location = new System.Drawing.Point(116, 1);
-			this.metroTextBoxPickupLocation.CustomButton.Name = "";
-			this.metroTextBoxPickupLocation.CustomButton.Size = new System.Drawing.Size(63, 63);
-			this.metroTextBoxPickupLocation.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.metroTextBoxPickupLocation.CustomButton.TabIndex = 1;
-			this.metroTextBoxPickupLocation.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.metroTextBoxPickupLocation.CustomButton.UseSelectable = true;
-			this.metroTextBoxPickupLocation.CustomButton.Visible = false;
-			this.metroTextBoxPickupLocation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroTextBoxPickupLocation.Lines = new string[0];
-			this.metroTextBoxPickupLocation.Location = new System.Drawing.Point(462, 307);
-			this.metroTextBoxPickupLocation.MaxLength = 32767;
-			this.metroTextBoxPickupLocation.Multiline = true;
-			this.metroTextBoxPickupLocation.Name = "metroTextBoxPickupLocation";
-			this.metroTextBoxPickupLocation.PasswordChar = '\0';
-			this.metroTextBoxPickupLocation.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.metroTextBoxPickupLocation.SelectedText = "";
-			this.metroTextBoxPickupLocation.SelectionLength = 0;
-			this.metroTextBoxPickupLocation.SelectionStart = 0;
-			this.metroTextBoxPickupLocation.ShortcutsEnabled = true;
-			this.metroTextBoxPickupLocation.Size = new System.Drawing.Size(180, 65);
-			this.metroTextBoxPickupLocation.TabIndex = 371;
-			this.metroTextBoxPickupLocation.UseSelectable = true;
-			this.metroTextBoxPickupLocation.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.metroTextBoxPickupLocation.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			// 
-			// metroLabelPickupLocation
-			// 
-			this.metroLabelPickupLocation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabelPickupLocation.Location = new System.Drawing.Point(334, 303);
-			this.metroLabelPickupLocation.Name = "metroLabelPickupLocation";
-			this.metroLabelPickupLocation.Size = new System.Drawing.Size(117, 23);
-			this.metroLabelPickupLocation.TabIndex = 370;
-			this.metroLabelPickupLocation.Text = "Pickup Location:";
-			this.metroLabelPickupLocation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// metroLabelArrivaldate
-			// 
-			this.metroLabelArrivaldate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabelArrivaldate.Location = new System.Drawing.Point(672, 154);
-			this.metroLabelArrivaldate.Name = "metroLabelArrivaldate";
-			this.metroLabelArrivaldate.Size = new System.Drawing.Size(94, 23);
-			this.metroLabelArrivaldate.TabIndex = 373;
-			this.metroLabelArrivaldate.Text = "Arrival date:";
-			this.metroLabelArrivaldate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// dateTimePickerArrivalDate
-			// 
-			this.dateTimePickerArrivalDate.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.dateTimePickerArrivalDate.Location = new System.Drawing.Point(800, 155);
-			this.dateTimePickerArrivalDate.Name = "dateTimePickerArrivalDate";
-			this.dateTimePickerArrivalDate.Size = new System.Drawing.Size(179, 22);
-			this.dateTimePickerArrivalDate.TabIndex = 372;
-			// 
-			// metroLabelArrivalTime
-			// 
-			this.metroLabelArrivalTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabelArrivalTime.Location = new System.Drawing.Point(672, 180);
-			this.metroLabelArrivalTime.Name = "metroLabelArrivalTime";
-			this.metroLabelArrivalTime.Size = new System.Drawing.Size(120, 23);
-			this.metroLabelArrivalTime.TabIndex = 374;
-			this.metroLabelArrivalTime.Text = "Arrival time:";
-			this.metroLabelArrivalTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// comboBoxStatusOfDelivery
-			// 
-			this.comboBoxStatusOfDelivery.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
-			this.comboBoxStatusOfDelivery.FormattingEnabled = true;
-			this.comboBoxStatusOfDelivery.ItemHeight = 17;
-			this.comboBoxStatusOfDelivery.Location = new System.Drawing.Point(800, 209);
-			this.comboBoxStatusOfDelivery.Name = "comboBoxStatusOfDelivery";
-			this.comboBoxStatusOfDelivery.Size = new System.Drawing.Size(179, 25);
-			this.comboBoxStatusOfDelivery.TabIndex = 377;
-			// 
-			// metroLabelStatusOfDelivery
-			// 
-			this.metroLabelStatusOfDelivery.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabelStatusOfDelivery.Location = new System.Drawing.Point(672, 207);
-			this.metroLabelStatusOfDelivery.Name = "metroLabelStatusOfDelivery";
-			this.metroLabelStatusOfDelivery.Size = new System.Drawing.Size(120, 27);
-			this.metroLabelStatusOfDelivery.TabIndex = 376;
-			this.metroLabelStatusOfDelivery.Text = "Status of delivery:";
-			this.metroLabelStatusOfDelivery.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// metroLabelReceiptTime
-			// 
-			this.metroLabelReceiptTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabelReceiptTime.Location = new System.Drawing.Point(672, 265);
-			this.metroLabelReceiptTime.Name = "metroLabelReceiptTime";
-			this.metroLabelReceiptTime.Size = new System.Drawing.Size(120, 23);
-			this.metroLabelReceiptTime.TabIndex = 380;
-			this.metroLabelReceiptTime.Text = "Receipt time:";
-			this.metroLabelReceiptTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// metroLabelReceiptDate
-			// 
-			this.metroLabelReceiptDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabelReceiptDate.Location = new System.Drawing.Point(672, 239);
-			this.metroLabelReceiptDate.Name = "metroLabelReceiptDate";
-			this.metroLabelReceiptDate.Size = new System.Drawing.Size(94, 23);
-			this.metroLabelReceiptDate.TabIndex = 379;
-			this.metroLabelReceiptDate.Text = "Receipt date:";
-			this.metroLabelReceiptDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// dateTimePickerReceiptDate
-			// 
-			this.dateTimePickerReceiptDate.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.dateTimePickerReceiptDate.Location = new System.Drawing.Point(800, 240);
-			this.dateTimePickerReceiptDate.Name = "dateTimePickerReceiptDate";
-			this.dateTimePickerReceiptDate.Size = new System.Drawing.Size(179, 22);
-			this.dateTimePickerReceiptDate.TabIndex = 378;
-			// 
-			// numericUpDownFreightPrice
-			// 
-			this.numericUpDownFreightPrice.Location = new System.Drawing.Point(462, 414);
-			this.numericUpDownFreightPrice.Name = "numericUpDownFreightPrice";
-			this.numericUpDownFreightPrice.Size = new System.Drawing.Size(97, 20);
-			this.numericUpDownFreightPrice.TabIndex = 383;
-			// 
-			// metroLabel1
-			// 
-			this.metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabel1.Location = new System.Drawing.Point(334, 411);
-			this.metroLabel1.Name = "metroLabel1";
-			this.metroLabel1.Size = new System.Drawing.Size(120, 23);
-			this.metroLabel1.TabIndex = 382;
-			this.metroLabel1.Text = "Freight price:";
-			this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// comboBoxFreightPrice
-			// 
-			this.comboBoxFreightPrice.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.comboBoxFreightPrice.FormattingEnabled = true;
-			this.comboBoxFreightPrice.ItemHeight = 12;
-			this.comboBoxFreightPrice.Location = new System.Drawing.Point(573, 414);
-			this.comboBoxFreightPrice.Name = "comboBoxFreightPrice";
-			this.comboBoxFreightPrice.Size = new System.Drawing.Size(68, 20);
-			this.comboBoxFreightPrice.TabIndex = 384;
-			// 
-			// dateTimePickerArrivalTime
-			// 
-			this.dateTimePickerArrivalTime.CustomFormat = "HH:mm";
-			this.dateTimePickerArrivalTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.dateTimePickerArrivalTime.Location = new System.Drawing.Point(800, 183);
-			this.dateTimePickerArrivalTime.Margin = new System.Windows.Forms.Padding(2);
-			this.dateTimePickerArrivalTime.Name = "dateTimePickerArrivalTime";
-			this.dateTimePickerArrivalTime.ShowUpDown = true;
-			this.dateTimePickerArrivalTime.Size = new System.Drawing.Size(179, 20);
-			this.dateTimePickerArrivalTime.TabIndex = 385;
-			// 
-			// dateTimePickerReceiptTime
-			// 
-			this.dateTimePickerReceiptTime.CustomFormat = "HH:mm";
-			this.dateTimePickerReceiptTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.dateTimePickerReceiptTime.Location = new System.Drawing.Point(800, 267);
-			this.dateTimePickerReceiptTime.Margin = new System.Windows.Forms.Padding(2);
-			this.dateTimePickerReceiptTime.Name = "dateTimePickerReceiptTime";
-			this.dateTimePickerReceiptTime.ShowUpDown = true;
-			this.dateTimePickerReceiptTime.Size = new System.Drawing.Size(179, 20);
-			this.dateTimePickerReceiptTime.TabIndex = 386;
-			// 
 			// PurchaseOrderSettingForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(985, 507);
-			this.Controls.Add(this.dateTimePickerReceiptTime);
-			this.Controls.Add(this.dateTimePickerArrivalTime);
-			this.Controls.Add(this.comboBoxFreightPrice);
-			this.Controls.Add(this.numericUpDownFreightPrice);
-			this.Controls.Add(this.metroLabel1);
-			this.Controls.Add(this.metroLabelReceiptTime);
-			this.Controls.Add(this.metroLabelReceiptDate);
-			this.Controls.Add(this.dateTimePickerReceiptDate);
-			this.Controls.Add(this.comboBoxStatusOfDelivery);
-			this.Controls.Add(this.metroLabelStatusOfDelivery);
-			this.Controls.Add(this.metroLabelArrivalTime);
-			this.Controls.Add(this.metroLabelArrivaldate);
-			this.Controls.Add(this.dateTimePickerArrivalDate);
-			this.Controls.Add(this.metroTextBoxPickupLocation);
-			this.Controls.Add(this.metroLabelPickupLocation);
+			this.ClientSize = new System.Drawing.Size(660, 507);
 			this.Controls.Add(this.metroTextBoxIncoTermRef);
 			this.Controls.Add(this.metroLabelIncoTermRef);
 			this.Controls.Add(this.numericUpDownNet);
@@ -1030,7 +831,6 @@
 			this.Resizable = false;
 			this.Text = "Purchase Order Setting  Form";
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownNet)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownFreightPrice)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -1083,20 +883,5 @@
 		private System.Windows.Forms.NumericUpDown numericUpDownNet;
 		private MetroFramework.Controls.MetroTextBox metroTextBoxIncoTermRef;
 		private MetroFramework.Controls.MetroLabel metroLabelIncoTermRef;
-		private MetroFramework.Controls.MetroTextBox metroTextBoxPickupLocation;
-		private MetroFramework.Controls.MetroLabel metroLabelPickupLocation;
-		private MetroFramework.Controls.MetroLabel metroLabelArrivaldate;
-		private System.Windows.Forms.DateTimePicker dateTimePickerArrivalDate;
-		private MetroFramework.Controls.MetroLabel metroLabelArrivalTime;
-		private System.Windows.Forms.ComboBox comboBoxStatusOfDelivery;
-		private MetroFramework.Controls.MetroLabel metroLabelStatusOfDelivery;
-		private MetroFramework.Controls.MetroLabel metroLabelReceiptTime;
-		private MetroFramework.Controls.MetroLabel metroLabelReceiptDate;
-		private System.Windows.Forms.DateTimePicker dateTimePickerReceiptDate;
-		private System.Windows.Forms.NumericUpDown numericUpDownFreightPrice;
-		private MetroFramework.Controls.MetroLabel metroLabel1;
-		private System.Windows.Forms.ComboBox comboBoxFreightPrice;
-		private System.Windows.Forms.DateTimePicker dateTimePickerArrivalTime;
-		private System.Windows.Forms.DateTimePicker dateTimePickerReceiptTime;
 	}
 }

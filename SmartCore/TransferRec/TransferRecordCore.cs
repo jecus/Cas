@@ -8,6 +8,7 @@ using SmartCore.Aircrafts;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Calculations;
 using SmartCore.Component;
+using SmartCore.DtoHelper;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;

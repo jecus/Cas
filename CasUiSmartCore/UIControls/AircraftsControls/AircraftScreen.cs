@@ -28,6 +28,7 @@ using CAS.UI.UIControls.WorkPakage;
 using CASTerms;
 using EntityCore.DTO.General;
 using EntityCore.Filter;
+using EntityCore.Attributte;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;

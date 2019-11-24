@@ -55,10 +55,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 			AddColumn("Name", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Part Number", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Alt Part Number", (int)(radGridView1.Width * 0.20f));
-			AddColumn("Specification", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Standart", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Reference", (int)(radGridView1.Width * 0.20f));
-			AddColumn("Engine Ref", (int)(radGridView1.Width * 0.20f));
 			AddColumn("Suppliers", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Code", (int)(radGridView1.Width * 0.20f));
 			AddColumn("ATA", (int)(radGridView1.Width * 0.24f));
@@ -81,7 +80,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			subItems.Add(CreateRow(item.Standart?.ToString(), item.Standart));
 			subItems.Add(CreateRow(item.Description, item.Description));
 			subItems.Add(CreateRow(item.Reference, item.Reference));
-			subItems.Add(CreateRow(item.EngineRef, item.EngineRef));
 			subItems.Add(CreateRow(item.Suppliers?.ToString(), item.Suppliers));
 			subItems.Add(CreateRow(item.Code, item.Code));
 			subItems.Add(CreateRow(item.ATAChapter?.ToString(), item.ATAChapter));
