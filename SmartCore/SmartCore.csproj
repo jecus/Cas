@@ -419,7 +419,6 @@
     <Compile Include="Calculations\Maintenance\MaintenanceCheckRecordGroup.cs" />
     <Compile Include="Calculations\Maintenance\MaintenanceCheckTypeGroup.cs" />
     <Compile Include="Calculations\MTOP\IMTOPCalculator.cs" />
-    <Compile Include="Calculations\MTOP\Interfaces\IMtopCalc.cs" />
     <Compile Include="Calculations\MTOP\MTOPCalculator.cs" />
     <Compile Include="Calculations\NextPerformance.cs" />
     <Compile Include="Calculations\PerformanceCalculator\IPerformanceCalculator.cs" />
@@ -604,6 +603,7 @@
     <Compile Include="Entities\Dictionaries\Specialization.cs" />
     <Compile Include="Entities\Dictionaries\StaticDictionary.cs" />
     <Compile Include="Entities\Dictionaries\StaticTreeDictionary.cs" />
+    <Compile Include="Entities\Dictionaries\StatusOfDelivery.cs" />
     <Compile Include="Entities\Dictionaries\SupplierClass.cs" />
     <Compile Include="Entities\Dictionaries\TrainingType.cs" />
     <Compile Include="Entities\Dictionaries\TripName.cs" />

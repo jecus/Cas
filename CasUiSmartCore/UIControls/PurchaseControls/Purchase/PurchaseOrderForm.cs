@@ -41,7 +41,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		public PurchaseOrderForm(PurchaseOrder order):this()
 		{
 			_order = order;
-
+			buttonSettings.Enabled = false;
 			DocumentControls.AddRange(new[] { documentControl1, documentControl2, documentControl3, documentControl4, documentControl5, documentControl6, documentControl7, documentControl8, documentControl9 });
 
 			Task.Run(() => DoWork())
@@ -56,6 +56,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		{
 			UpdateControls();
 			purchaseRecordListView1.SetItemsArray(_addedRecord.ToArray());
+			buttonSettings.Enabled = true;
 		}
 
 		#endregion

@@ -512,7 +512,6 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 					newquatationRecord.CostCondition = record.CostCondition;
 					newquatationRecord.DestinationObjectType = record.DestinationObjectType;
 					newquatationRecord.DestinationObjectId = record.DestinationObjectId;
-					newquatationRecord.InitialReason = record.InitialReason;
 					newquatationRecord.Remarks = record.Remarks;
 					newquatationRecord.LifeLimit = new Lifelength(record.LifeLimit);
 					newquatationRecord.LifeLimitNotify = new Lifelength(record.LifeLimitNotify);

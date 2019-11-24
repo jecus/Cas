@@ -63,7 +63,6 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemOpen;
 		private RadMenuItem _toolStripMenuItemComposeWorkPackage;
-		private RadMenuItem _toolStripMenuItemComposeQuotationOrder;
 		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuItem _toolStripMenuItemHighlight;
 		private RadMenuItem _toolStripMenuItemShowTaskCard;
@@ -71,7 +70,6 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 		private RadMenuSeparatorItem _toolStripSeparator2;
 		private RadMenuSeparatorItem _toolStripSeparator4;
 		private RadMenuItem _toolStripMenuItemsWorkPackages;
-		private RadMenuItem _toolStripMenuItemQuotations;
 
 		#endregion
 
@@ -180,7 +178,6 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 
 			if (_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
 			if (_toolStripMenuItemComposeWorkPackage != null) _toolStripMenuItemComposeWorkPackage.Dispose();
-			if (_toolStripMenuItemComposeQuotationOrder != null) _toolStripMenuItemComposeQuotationOrder.Dispose();
 			if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
 			if (_toolStripMenuItemHighlight != null)
 			{
@@ -196,15 +193,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 			if (_toolStripSeparator2 != null) _toolStripSeparator2.Dispose();
 			if (_toolStripSeparator4 != null) _toolStripSeparator4.Dispose();
 			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
-			if (_toolStripMenuItemQuotations != null)
-			{
-				foreach (var item in _toolStripMenuItemQuotations.Items)
-				{
-					item.Click -= AddToQuotationOrderItemClick;
-				}
-				_toolStripMenuItemQuotations.Items.Clear();
-				_toolStripMenuItemQuotations.Dispose();
-			}
+			
 			if (_toolStripMenuItemsWorkPackages != null)
 			{
 				foreach (var item in _toolStripMenuItemsWorkPackages.Items)
@@ -239,23 +228,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 				labelTitle.Text = "";
 				labelTitle.Status = Statuses.NotActive;
 			}
-			if (_toolStripMenuItemQuotations != null)
-			{
-				foreach (var item in _toolStripMenuItemQuotations.Items)
-				{
-					item.Click -= AddToQuotationOrderItemClick;
-				}
-
-				_toolStripMenuItemQuotations.Items.Clear();
-
-				foreach (RequestForQuotation quotation in _openPubQuotations)
-				{
-					var item = new RadMenuItem(quotation.Title);
-					item.Click += AddToQuotationOrderItemClick;
-					item.Tag = quotation;
-					_toolStripMenuItemQuotations.Items.Add(item);
-				}
-			}
+			
 			if (_toolStripMenuItemsWorkPackages != null)
 			{
 				foreach (var item in _toolStripMenuItemsWorkPackages.Items)
@@ -568,8 +541,6 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 			_toolStripMenuItemOpen = new RadMenuItem();
 			_toolStripMenuItemComposeWorkPackage = new RadMenuItem();
 			_toolStripMenuItemsWorkPackages = new RadMenuItem();
-			_toolStripMenuItemComposeQuotationOrder = new RadMenuItem();
-			_toolStripMenuItemQuotations = new RadMenuItem();
 			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripMenuItemHighlight = new RadMenuItem();
 			_toolStripMenuItemShowTaskCard = new RadMenuItem();
@@ -599,15 +570,6 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 			// _toolStripMenuItemsWorkPackages
 			//
 			_toolStripMenuItemsWorkPackages.Text = "Add to Audit";
-			//
-			// toolStripMenuItemComposeWorkPackage
-			//
-			_toolStripMenuItemComposeQuotationOrder.Text = "Compose quotation order";
-			_toolStripMenuItemComposeQuotationOrder.Click += ToolStripMenuItemComposeQuotationClick;
-			//
-			// toolStripMenuItemComposeWorkPackage
-			//
-			_toolStripMenuItemQuotations.Text = "Add to Quotation Order";
 			// 
 			// toolStripMenuItemDelete
 			// 
@@ -616,7 +578,6 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 
 			_contextMenuStrip.Items.Clear();
 			_toolStripMenuItemsWorkPackages.Items.Clear();
-			_toolStripMenuItemQuotations.Items.Clear();
 			_toolStripMenuItemHighlight.Items.Clear();
 
 			// 
@@ -642,8 +603,6 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 													_toolStripMenuItemComposeWorkPackage,
 													_toolStripMenuItemsWorkPackages,
 													_toolStripSeparator1,
-													_toolStripMenuItemComposeQuotationOrder,
-													_toolStripMenuItemQuotations,
 													_toolStripSeparator4, 
 													_toolStripMenuItemDelete);
 		}
@@ -770,32 +729,6 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 
 		#endregion
 
-		#region private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
-		/// <summary>
-		/// Создает закупочный ордер
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
-		{
-			PurchaseManager.ComposeQuotationOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
-		}
-
-		#endregion
-
-		#region private void AddToQuotationOrderItemClick(object sender, EventArgs e)
-
-		private void AddToQuotationOrderItemClick(object sender, EventArgs e)
-		{
-			if (_directivesViewer.SelectedItems.Count <= 0) return;
-
-			RequestForQuotation wp = (RequestForQuotation)((RadMenuItem)sender).Tag;
-
-			PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
-		}
-
-		#endregion
-
 		#region private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
 
 		private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
@@ -916,7 +849,6 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 						_toolStripMenuItemShowTaskCard.Enabled = true;
 					else _toolStripMenuItemShowTaskCard.Enabled = false;
 				}
-				_toolStripMenuItemComposeQuotationOrder.Enabled = true;
 			};
 
 			panel1.Controls.Add(_directivesViewer);

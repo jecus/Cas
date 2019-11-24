@@ -317,7 +317,6 @@ namespace CAS.UI.UIControls.WorkPakage
 
 		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(BaseSmartCoreObject item)
 
-
 		protected override List<CustomCell> GetListViewSubItems(BaseEntityObject item)
 		{
 			var temp = ListViewGroupHelper.GetGroupString(item);
@@ -429,7 +428,7 @@ namespace CAS.UI.UIControls.WorkPakage
 					subItem.Text = "s/n: " + directive.Threshold.FirstPerformanceSinceNew;
 					subItem.Tag = directive.Threshold.FirstPerformanceSinceNew;
 				}
-				if (directive.Threshold.FirstPerformanceSinceEffectiveDate != null &&
+				else if (directive.Threshold.FirstPerformanceSinceEffectiveDate != null &&
 					!directive.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
 				{
 					if (subItem.Text != "") subItem.Text += " or ";
@@ -439,6 +438,11 @@ namespace CAS.UI.UIControls.WorkPakage
 						subItem.Tag = directive.Threshold.FirstPerformanceSinceEffectiveDate;
 					}
 					subItem.Text += "s/e.d: " + directive.Threshold.FirstPerformanceSinceEffectiveDate;
+				}
+				else
+				{
+					subItem.Text = "";
+					subItem.Tag = Lifelength.Null;
 				}
 
 				subItems.Add(subItem);

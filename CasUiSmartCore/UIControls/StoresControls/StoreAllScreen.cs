@@ -70,9 +70,6 @@ namespace CAS.UI.UIControls.StoresControls
 		private StoreComponentsAllListView _directivesViewer;
 
 		private RadDropDownMenu _contextMenuStrip;
-		private RadMenuItem _toolStripMenuItemComposeInitialOrder;
-		private RadMenuItem _toolStripMenuItemComposeQuotationOrder;
-		private RadMenuItem _toolStripMenuItemQuotations;
 		private RadMenuItem _toolStripMenuItemMoveTo;
 		private RadMenuItem _toolStripMenuItemOpen;
 		private RadMenuItem _toolStripMenuItemDelete;
@@ -201,8 +198,6 @@ namespace CAS.UI.UIControls.StoresControls
 			if (_currentForecast != null) _currentForecast.Clear();
 			_currentForecast = null;
 
-			if (_toolStripMenuItemComposeInitialOrder != null) _toolStripMenuItemComposeInitialOrder.Dispose();
-			if (_toolStripMenuItemComposeQuotationOrder != null) _toolStripMenuItemComposeQuotationOrder.Dispose();
 			if (_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
 			if (_toolStripMenuItemMoveTo != null) _toolStripMenuItemMoveTo.Dispose();
 			if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
@@ -220,15 +215,6 @@ namespace CAS.UI.UIControls.StoresControls
 			if (_toolStripSeparator3 != null) _toolStripSeparator3.Dispose();
 			if (_toolStripSeparator4 != null) _toolStripSeparator4.Dispose();
 			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
-			if (_toolStripMenuItemQuotations != null)
-			{
-				foreach (RadMenuItem item in _toolStripMenuItemQuotations.Items)
-				{
-					item.Click -= AddToQuotationOrderItemClick;
-				}
-				_toolStripMenuItemQuotations.Items.Clear();
-				_toolStripMenuItemQuotations.Dispose();
-			}
 			if (_toolStripMenuItemHighlight != null)
 			{
 				foreach (RadMenuItem item in _toolStripMenuItemHighlight.Items) item.Dispose();
@@ -325,24 +311,6 @@ namespace CAS.UI.UIControls.StoresControls
 			if (_firstLoad == false)
 				TransferedDetailFormShow();
 			_firstLoad = true;
-
-			if (_toolStripMenuItemQuotations != null)
-			{
-				foreach (RadMenuItem item in _toolStripMenuItemQuotations.Items)
-				{
-					item.Click -= AddToQuotationOrderItemClick;
-				}
-
-				_toolStripMenuItemQuotations.Items.Clear();
-
-				foreach (var quotation in _openPubQuotations)
-				{
-					var item = new RadMenuItem(quotation.Title);
-					item.Click += AddToQuotationOrderItemClick;
-					item.Tag = quotation;
-					_toolStripMenuItemQuotations.Items.Add(item);
-				}
-			}
 
 			headerControl.PrintButtonEnabled = _directivesViewer.radGridView1.RowCount != 0;
 
@@ -726,9 +694,6 @@ namespace CAS.UI.UIControls.StoresControls
 		private void InitToolStripMenuItems()
 		{
 			_contextMenuStrip = new RadDropDownMenu();
-			_toolStripMenuItemComposeInitialOrder = new RadMenuItem();
-			_toolStripMenuItemComposeQuotationOrder = new RadMenuItem();
-			_toolStripMenuItemQuotations = new RadMenuItem();
 			_toolStripMenuItemOpen = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			_toolStripMenuItemDelete = new RadMenuItem();
@@ -762,16 +727,6 @@ namespace CAS.UI.UIControls.StoresControls
 				item.Click += ToolStripMenuItemHighlightClick;
 				_toolStripMenuItemHighlight.Items.Add(item);
 			}
-			//
-			// toolStripMenuItemComposeWorkPackage
-			//
-			_toolStripMenuItemComposeQuotationOrder.Text = "Compose quotation order";
-			_toolStripMenuItemComposeQuotationOrder.Click += ToolStripMenuItemComposeQuotationClick;
-			//
-			// _toolStripMenuItemComposeInitialOrder
-			//
-			_toolStripMenuItemComposeInitialOrder.Text = "Compose Initial order";
-			_toolStripMenuItemComposeInitialOrder.Click += ToolStripMenuItemComposeInitialClick;
 			// 
 			// toolStripMenuItemTitle
 			// 
@@ -904,10 +859,6 @@ namespace CAS.UI.UIControls.StoresControls
 			_toolStripMenuItemLogBook.Size = new Size(178, 22);
 			_toolStripMenuItemLogBook.Text = "Log Book";
 			_toolStripMenuItemLogBook.Click += toolStripMenuItemLogBook_Click;
-			//
-			// toolStripMenuItemComposeWorkPackage
-			//
-			_toolStripMenuItemQuotations.Text = "Add to Quotation Order";
 			// 
 			// contextMenuStrip
 			// 
@@ -915,9 +866,6 @@ namespace CAS.UI.UIControls.StoresControls
 													 _toolStripSeparator1,
 													 _toolStripMenuItemHighlight,
 													 _toolStripSeparator2,
-													 _toolStripMenuItemComposeInitialOrder,
-													 _toolStripMenuItemComposeQuotationOrder,
-													 _toolStripMenuItemQuotations,
 													 _toolStripMenuItemMoveTo,
 													 _toolStripMenuItemShouldBeOnStock,
 													 new RadMenuSeparatorItem(), 
@@ -1780,45 +1728,6 @@ namespace CAS.UI.UIControls.StoresControls
 			args.RequestedEntity = new DispatcheredBaseDetailLogBookScreen(baseDetail);
 			OnDisplayerRequested(args);
 */
-		}
-
-		#endregion
-
-		#region private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
-		/// <summary>
-		/// Создает закупочный ордер
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
-		{
-			PurchaseManager.ComposeQuotationOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
-		}
-
-		#endregion
-
-		#region private void AddToQuotationOrderItemClick(object sender, EventArgs e)
-
-		private void AddToQuotationOrderItemClick(object sender, EventArgs e)
-		{
-			if (_directivesViewer.SelectedItems.Count <= 0) return;
-
-			var wp = (RequestForQuotation)((RadMenuItem)sender).Tag;
-
-			PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
-		}
-
-		#endregion
-
-		#region private void ToolStripMenuItemComposeInitialClick(object sender, EventArgs e)
-		/// <summary>
-		/// Создает Первоначальный ордер
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void ToolStripMenuItemComposeInitialClick(object sender, EventArgs e)
-		{
-			PurchaseManager.ComposeInitialOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
 		}
 
 		#endregion

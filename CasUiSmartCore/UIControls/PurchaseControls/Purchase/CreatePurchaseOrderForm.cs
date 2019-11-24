@@ -13,7 +13,6 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Personnel;
-using SmartCore.Entities.General.Setting;
 using SmartCore.Filters;
 using SmartCore.Mail;
 using SmartCore.Purchase;
@@ -47,6 +46,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 			_order = new PurchaseOrder()
 			{
+				AdditionalInformation =
+				{
+					СurrencyFreight = Сurrency.USD,
+					ArrivalDate = DateTime.Now,
+					ReceiptDate = DateTime.Now
+				},
 				Parent = _quotation,
 				ParentType = _quotation.SmartCoreObjectType,
 				Title = _quotation.Title,
@@ -99,9 +104,13 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(
 					new Filter("ParentPackageId", parentInitialId));
 
+			var initial = GlobalObjects.CasEnvironment.NewLoader.GetObject<InitialOrderDTO, InitialOrder>(new Filter("ItemId", parentInitialId));
+
 			foreach (var record in records)
 			{
 				record.ParentInitialRecord = _initialRecords.FirstOrDefault(i => i.ProductId == record.PackageItemId);
+				if (record.ParentInitialRecord != null)
+					record.ParentInitialRecord.ParentPackage = initial;
 				record.Product = products.FirstOrDefault(i => i.ItemId == record.PackageItemId);
 				foreach (var price in record.SupplierPrice)
 				{
@@ -150,10 +159,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 						highest.IsHighestCostServ = true;
 				}
 			}
-
-		
-
-		_prices.AddRange(records.SelectMany(i => i.SupplierPrice));
+			
+			_prices.AddRange(records.SelectMany(i => i.SupplierPrice));
 	}
 
 	#endregion
@@ -439,19 +446,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		private void ButtonOk_Click(object sender, EventArgs e)
 		{
-			var personnel = GlobalObjects.CasEnvironment.Loader.GetObject<Specialist>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, GlobalObjects.CasEnvironment.IdentityUser.PersonnelId));
-			var destinations = new List<BaseEntityObject>();
-			destinations.AddRange(GlobalObjects.AircraftsCore.GetAllAircrafts().ToArray());
-			destinations.AddRange(GlobalObjects.CasEnvironment.Stores.GetValidEntries());
-			destinations.AddRange(GlobalObjects.CasEnvironment.Hangars.GetValidEntries());
-
-			if (personnel == null)
-			{
-				MessageBox.Show($"Please attach personnel for user ({GlobalObjects.CasEnvironment.IdentityUser.ItemId})",
-					"Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-			}
-
-			else if (textBoxTitle.Text == "")
+			if (textBoxTitle.Text == "")
 			{
 				MessageBox.Show("Please, enter a Title", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
@@ -472,7 +467,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				foreach (var g in _addedRecord.GroupBy(i => i.Supplier))
 				{
 					var copy = _order.GetCopyUnsaved();
-					copy.Title += $" {g.Key}";
+					copy.Supplier = g.Key;
+					var name = !string.IsNullOrEmpty(g.Key.ShortName) ? g.Key.ShortName : g.Key.Name;
+					copy.Title += $" {name}";
 
 					if (_quotation.AdditionalInformation.QualificationNumbers.ContainsKey(g.Key.ItemId))
 						copy.AdditionalInformation.QualificationNumber =
@@ -485,22 +482,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 					{
 						record.ParentPackageId = copy.ItemId;
 						GlobalObjects.CasEnvironment.NewKeeper.Save(record);
-
-						record.ParentInitialRecord = _initialRecords.FirstOrDefault(i => i.ProductId == record.PackageItemId);
-						if (record.ParentInitialRecord != null)
-							record.ParentInitialRecord.DestinationObject = destinations.FirstOrDefault(i =>
-								i.ItemId == record.ParentInitialRecord.DestinationObjectId &&
-								record.ParentInitialRecord.DestinationObjectType.ItemId == i.SmartCoreObjectType.ItemId);
 					}
-
-					//рассылаем письма
-					var sendMail = new MailSender(GlobalObjects.CasEnvironment.NewLoader);
-					sendMail.SendQuotationEmail(g.ToList(), "", personnel);
 				}
 
 				DialogResult = DialogResult.OK;
 			}
-			
 		}
 
 		#endregion

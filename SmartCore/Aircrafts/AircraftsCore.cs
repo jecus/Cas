@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using EntityCore.DTO.General;
-using EntityCore.Filter;
 using SmartCore.Calculations;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
