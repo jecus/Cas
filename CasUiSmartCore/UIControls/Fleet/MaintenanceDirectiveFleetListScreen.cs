@@ -12,6 +12,7 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
+using CAS.UI.UIControls.MaintananceProgram;
 using CAS.UI.UIControls.PurchaseControls;
 using CASTerms;
 using SmartCore.Calculations;

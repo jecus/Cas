@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CASReports.Datasets;
 using CASReports.ReportTemplates;
+using SmartCore.Auxiliary;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Personnel;
@@ -126,7 +127,7 @@ namespace CASReports.Builders
 			var total = _orderRecords.Sum(i => i.Cost * i.Quantity);
 				dataSet.PurchaseOrder.AddPurchaseOrderRow(designation, _order.IncoTerm.ToString(), 
 					_order.IncoTermRef, _order.ShipTo.Name, _order.PublishingDate.ToString("dd/MM/yyyy"), _order.ShipCompany.Name, 
-					_order.PayTerm.ToString(), _order.OpeningDate.Year.ToString().Substring(2), total.ToString("F1"), qualification, _order.Number);
+					_order.PayTerm.ToString(), _order.OpeningDate.Year.ToString().Substring(2), total.ToString("F1"), qualification);
 		}
 
 		private void AddDepartmentToDataSet(PurchaseRecordNewDataSet dataSet)

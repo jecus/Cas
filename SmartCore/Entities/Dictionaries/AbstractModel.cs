@@ -14,7 +14,105 @@ namespace SmartCore.Entities.Dictionaries
     {
 		private static Type _thisType;
 
-		
+		#region Implement of Dictionary
+
+		//#region public string FullName { get; set; }
+
+		//private string _fullName;
+		///// <summary>
+		///// Полное название серии модели самолета Н:Boeing 737
+		///// </summary>
+		//[TableColumn("FullName")]
+		//[FormControl(150, "Full Name", 1, Order = 3)]
+		//[ListViewData(0.2f, "Full Name", 3)]
+		//[NotNull]
+		//public override string FullName
+		//{
+		//    get { return _fullName; }
+		//    set
+		//    {
+		//        if (_fullName != value)
+		//        {
+		//            _fullName = value;
+		//            OnPropertyChanged("FullName");
+		//        }
+		//    }
+		//}
+
+		//#endregion
+
+		//#region public string ShortName { get; set; }
+
+		//private string _shortName;
+		///// <summary>
+		///// Сокращенное название модели самолета
+		///// </summary>
+		//[TableColumn("ShortName")]
+		//[FormControl(150, "Short Name", Order = 4)]
+		//[ListViewData(0.08f, "Short Name", 4)]
+		//[NotNull]
+		//public override string ShortName
+		//{
+		//    get { return _shortName; }
+		//    set
+		//    {
+		//        if (_shortName != value)
+		//        {
+		//            _shortName = value;
+		//            OnPropertyChanged("ShortName");
+		//        }
+		//    }
+		//}
+
+		//#endregion
+
+		//#region public override string CommonName
+		//private string _model;
+		///// <summary>
+		///// Полное название серии модели самолета Н:Boeing 737
+		///// </summary>
+		//[TableColumn("Model")]
+		//[FormControl(150, "Model", 1, Order = 1)]
+		//[ListViewData(0.12f, "Model", 1)]
+		//[NotNull]
+		//public override string CommonName
+		//{
+		//    get { return _model; }
+		//    set
+		//    {
+		//        if (_model != value)
+		//        {
+		//            _model = value;
+		//            OnPropertyChanged("Model");
+		//        }
+		//    }
+		//}
+		//#endregion
+
+		//#region public override string Category
+		//private string _series;
+		///// <summary>
+		///// название модели в серии самолета Н:500
+		///// </summary>
+		//[TableColumn("SubModel")]
+		//[FormControl(150, "Series", 1, Order = 2)]
+		//[ListViewData(0.08f, "Series", 2)]
+		//public override string Category
+		//{
+		//    get { return _series; }
+		//    set
+		//    {
+		//        if (_series != value)
+		//        {
+		//            _series = value;
+		//            OnPropertyChanged("Category");
+		//        }
+		//    }
+		//}
+		//#endregion
+
+		#endregion
+
 		#region Implement of Dictionary
 
 		#region public string FullName { get; set; }
@@ -72,14 +170,37 @@ namespace SmartCore.Entities.Dictionaries
 
         #endregion
 
-       #region public string Category
+        #region public string CommonName
+        //private string _name;
+        ///// <summary>
+        ///// Полное название серии модели самолета Н:Boeing 737
+        ///// </summary>
+        //[TableColumn("Model")]
+        //[FormControl(150, "Name", 1, Order = 1)]
+        //[ListViewData(0.12f, "Name", 1)]
+        //[NotNull]
+        //public string Model
+        //{
+        //    get { return _name; }
+        //    set
+        //    {
+        //        if (_name != value)
+        //        {
+        //            _name = value;
+        //            OnPropertyChanged("Model");
+        //        }
+        //    }
+        //}
+        #endregion
+
+        #region public string Category
         private string _series;
         /// <summary>
         /// название модели в серии самолета Н:500
         /// </summary>
         [TableColumn("SubModel")]
         [FormControl(150, "Series", 1, Order = 2)]
-        [ListViewData(0.08f, "Series", 4)]
+        [ListViewData(0.08f, "Series", 3)]
         public string Series
         {
             get { return _series; }
@@ -121,7 +242,31 @@ namespace SmartCore.Entities.Dictionaries
 
         #endregion
 
-        
+        #region  public string Manufacturer { get; set; }
+
+        //private string _manufacturer;
+        ///// <summary>
+        ///// Производитель самолета
+        ///// </summary>
+        //[TableColumn("Manufacturer")]
+        //[FormControl(150, "Manufacturer", 3)]
+        //[ListViewData(0.15f, "Manufacturer")]
+        //[NotNull]
+        //public string Manufacturer
+        //{
+        //    get { return _manufacturer; }
+        //    set
+        //    {
+        //        if (_manufacturer != value)
+        //        {
+        //            _manufacturer = value;
+        //            OnPropertyChanged("Manufacturer");
+        //        }
+        //    }
+        //}
+
+        #endregion
+
         #region public SmartCoreType ModelingObjectType
 
         /// <summary>
@@ -156,7 +301,36 @@ namespace SmartCore.Entities.Dictionaries
 
 
 
-       #region public override string ToString()
+        /*
+         * Свойства 
+         */
+
+        /*
+         * Методы
+         */
+
+        //#region public override void SetProperties(AbstractDictionary dictionary)
+        //public override void SetProperties(AbstractDictionary dictionary)
+        //{
+        //    if (dictionary is AbstractModel) 
+        //        SetProperties((AbstractModel)dictionary);
+        //}
+        //#endregion
+
+        //#region public void SetProperties(AbstractModel dictionary)
+        //public void SetProperties(AbstractModel dictionary)
+        //{
+        //    FullName = dictionary.FullName;
+        //    ShortName = dictionary.ShortName;
+        //    Model = dictionary.Model;
+        //    Series = dictionary.Series;
+        //    Designer = dictionary.Designer;
+        //    Manufacturer = dictionary.Manufacturer;
+        //    ManufactureReg = dictionary.ManufactureReg;
+        //}
+        //#endregion
+
+        #region public override string ToString()
         /// <summary>
         /// Переводит тип директивы в строку
         /// </summary>

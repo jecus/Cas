@@ -57,7 +57,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DBScripts\Offset.sql" />
     <Content Include="DBScripts\BDScripts2000.sql" />
     <Content Include="DBScripts\BDScripts1900.sql" />
     <Content Include="DBScripts\BDScripts1800.sql" />

@@ -71,16 +71,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			numericUpDownCostRepair.Value = supplierListView1.SelectedItem.CostRepair;
 			numericUpDownCostServ.Value = supplierListView1.SelectedItem.CostServiceable;
 
-			numericUpDownExNew.Value = supplierListView1.SelectedItem.CostNewEx;
-			numericUpDownExOH.Value = supplierListView1.SelectedItem.CostOverhaulEx;
-			numericUpDownExRepair.Value = supplierListView1.SelectedItem.CostRepairEx;
-			numericUpDownExServ.Value = supplierListView1.SelectedItem.CostServiceableEx;
-
-			numericUpDownReadinessNew.Value = supplierListView1.SelectedItem.CostNewReadiness;
-			numericUpDownReadinessOH.Value = supplierListView1.SelectedItem.CostOverhaulReadiness;
-			numericUpDownReadinessRepair.Value = supplierListView1.SelectedItem.CostRepairReadiness;
-			numericUpDownReadinessServ.Value = supplierListView1.SelectedItem.CostServiceableReadiness;
-
 			comboBoxCostNew.SelectedItem = supplierListView1.SelectedItem.СurrencyNew;
 			comboBoxCostOH.SelectedItem = supplierListView1.SelectedItem.СurrencyOH;
 			comboBoxCostRepair.SelectedItem = supplierListView1.SelectedItem.СurrencyRepair;
@@ -96,16 +86,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			supplierListView1.SelectedItem.CostOverhaul = numericUpDownCostOH.Value;
 			supplierListView1.SelectedItem.CostRepair = numericUpDownCostRepair.Value;
 			supplierListView1.SelectedItem.CostServiceable = numericUpDownCostServ.Value;
-
-			supplierListView1.SelectedItem.CostNewEx = numericUpDownExNew.Value;
-			supplierListView1.SelectedItem.CostOverhaulEx = numericUpDownExOH.Value;
-			supplierListView1.SelectedItem.CostRepairEx = numericUpDownExRepair.Value;
-			supplierListView1.SelectedItem.CostServiceableEx = numericUpDownExServ.Value;
-
-			supplierListView1.SelectedItem.CostNewReadiness = numericUpDownReadinessNew.Value;
-			supplierListView1.SelectedItem.CostOverhaulReadiness = numericUpDownReadinessOH.Value;
-			supplierListView1.SelectedItem.CostRepairReadiness = numericUpDownReadinessRepair.Value;
-			supplierListView1.SelectedItem.CostServiceableReadiness = numericUpDownReadinessServ.Value;
 
 			supplierListView1.SelectedItem.СurrencyNew = (Сurrency) comboBoxCostNew.SelectedItem;
 			supplierListView1.SelectedItem.СurrencyOH = (Сurrency)comboBoxCostOH.SelectedItem;
@@ -123,17 +103,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			numericUpDownCostOH.Value = 0;
 			numericUpDownCostRepair.Value = 0;
 			numericUpDownCostServ.Value = 0;
-
-			numericUpDownExNew.Value = 0;
-			numericUpDownExOH.Value = 0;
-			numericUpDownExRepair.Value = 0;
-			numericUpDownExServ.Value = 0;
-
-			numericUpDownReadinessNew.Value = 0;
-			numericUpDownReadinessOH.Value = 0;
-			numericUpDownReadinessRepair.Value = 0;
-			numericUpDownReadinessServ.Value = 0;
-
 			comboBoxCostNew.SelectedItem = Сurrency.USD;
 			comboBoxCostOH.SelectedItem = Сurrency.USD;
 			comboBoxCostRepair.SelectedItem = Сurrency.USD;

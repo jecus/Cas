@@ -1,4 +1,5 @@
-﻿using MetroFramework.Forms;
+﻿using System.Windows.Forms;
+using MetroFramework.Forms;
 using SmartCore.Auxiliary;
 using SmartCore.Entities.General.Accessory;
 

@@ -60,6 +60,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemOpen;
+		private RadMenuItem _toolStripMenuItemComposeQuotationOrder;
 		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuItem _toolStripMenuItemHighlight;
 		private RadMenuItem _toolStripMenuItemShowADFile;
@@ -156,6 +157,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			if (_toolStripMenuItemShowSBFile != null) _toolStripMenuItemShowSBFile.Dispose();
 			if (_toolStripMenuItemShowEOFile != null) _toolStripMenuItemShowEOFile.Dispose();
 			if (_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
+			if (_toolStripMenuItemComposeQuotationOrder != null) _toolStripMenuItemComposeQuotationOrder.Dispose();
 			if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
 			if (_toolStripMenuItemHighlight != null)
 			{
@@ -367,6 +369,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		{
 			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemOpen = new RadMenuItem();
+			_toolStripMenuItemComposeQuotationOrder = new RadMenuItem();
 			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripMenuItemHighlight = new RadMenuItem();
 			_toolStripMenuItemShowADFile = new RadMenuItem();
@@ -404,6 +407,11 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			_toolStripMenuItemShowEOFile.Text = "Show EO File";
 			_toolStripMenuItemShowEOFile.Click += ToolStripMenuItemShowTaskCardClick;
+			//
+			// toolStripMenuItemComposeWorkPackage
+			//
+			_toolStripMenuItemComposeQuotationOrder.Text = "Compose quotation order";
+			_toolStripMenuItemComposeQuotationOrder.Click += ToolStripMenuItemComposeQuotationClick;
 			// 
 			// toolStripMenuItemDelete
 			// 
@@ -430,6 +438,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 													_toolStripMenuItemHighlight,
 													_toolStripSeparator2,
 													_toolStripSeparator1,
+													_toolStripMenuItemComposeQuotationOrder,
 													_toolStripSeparator4,
 													_toolStripMenuItemDelete
 												);
@@ -479,6 +488,32 @@ namespace CAS.UI.UIControls.DirectivesControls
 					cell.Style.BackColor = Color.FromArgb(highLight.Color);
 				}
 			}
+		}
+
+		#endregion
+
+		#region private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
+		/// <summary>
+		/// Создает закупочный ордер
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
+		{
+			PurchaseManager.ComposeQuotationOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
+		}
+
+		#endregion
+
+		#region private void AddToQuotationOrderItemClick(object sender, EventArgs e)
+
+		private void AddToQuotationOrderItemClick(object sender, EventArgs e)
+		{
+			if (_directivesViewer.SelectedItems.Count <= 0) return;
+
+			RequestForQuotation wp = (RequestForQuotation)((RadMenuItem)sender).Tag;
+
+			PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
 		}
 
 		#endregion
@@ -593,6 +628,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 					_toolStripMenuItemShowSBFile.Enabled = false;
 					_toolStripMenuItemShowEOFile.Enabled = false;
 					_toolStripMenuItemHighlight.Enabled = false;
+					_toolStripMenuItemComposeQuotationOrder.Enabled = false;
 					_toolStripMenuItemDelete.Enabled = false;
 
 				}
@@ -631,6 +667,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 				{
 					_toolStripMenuItemOpen.Enabled = true;
 					_toolStripMenuItemHighlight.Enabled = true;
+					_toolStripMenuItemComposeQuotationOrder.Enabled = true;
 					_toolStripMenuItemDelete.Enabled = true;
 				}
 			};

@@ -11,6 +11,7 @@ using EntityCore.DTO.General;
 using EntityCore.Filter;
 using MetroFramework.Forms;
 using SmartCore.Auxiliary;
+using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -87,7 +88,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			UpdateControls();
 			UpdateInitialControls();
 
-			_formListViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
+			listViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
 		}
 
 		#endregion
@@ -111,10 +112,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				var documents = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DocumentDTO, Document>(new Filter("ParentID", _order.ItemId), true);
 				_order.ClosingDocument.Clear();
 				_order.ClosingDocument.AddRange(documents);
-			}
-			else
-			{
-				_order.Number = GlobalObjects.CasEnvironment.ApiProvider.GetInitialSequence().ToString();
 			}
 
 			_defferedCategories.Clear();
@@ -145,6 +142,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			comboBoxPriority.Items.Clear();
 			comboBoxPriority.Items.AddRange(Priority.Items.ToArray());
+
+			comboBoxReason.Items.Clear();
+			comboBoxReason.Items.AddRange(InitialReason.Items.ToArray());
 
 			comboBoxStation.Items.Clear();
 			comboBoxStation.Items.AddRange(_airportsCodes.ToArray());
@@ -218,12 +218,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			comboBoxStatus.DataSource = Enum.GetValues(typeof(WorkPackageStatus));
 			comboBoxStatus.SelectedItem = _order.Status;
 
-			metroTextBoxNumber.Text = _order.Number;
-
 			if (_order.ItemId > 0)
 			{
 				textBoxTitle.Text = _order.Title;
-				
+				metroTextBoxNumber.Text = _order.Number;
 				dateTimePickerOpeningDate.Value = _order.OpeningDate;
 				dateTimePickerClosingDate.Value = _order.ClosingDate;
 				dateTimePickerPublishDate.Value = _order.PublishingDate;
@@ -264,7 +262,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 					MessageBoxIcon.Exclamation);
 			}
 
-			else if (_formListViewInitialItems.ItemsCount <= 0)
+			else if (listViewInitialItems.ItemsCount <= 0)
 			{
 				MessageBox.Show("Please select a kits for initional order", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
@@ -361,7 +359,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				_addedInitialOrderRecords.Add(newRequest);
 			}
 
-			_formListViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
+			listViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
 		}
 
 		#endregion
@@ -370,9 +368,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void ButtonDelete_Click(object sender, EventArgs e)
 		{
-			if(_formListViewInitialItems.SelectedItems.Count == 0) return;
+			if(listViewInitialItems.SelectedItems.Count == 0) return;
 
-			foreach (var item in _formListViewInitialItems.SelectedItems.ToArray())
+			foreach (var item in listViewInitialItems.SelectedItems.ToArray())
 			{
 				if (item.ItemId > 0)
 					_deleteExistInitialOrderRecords.Add(item);
@@ -380,7 +378,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				_addedInitialOrderRecords.Remove(item);
 			}
 
-			_formListViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
+			listViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
 		}
 
 
@@ -390,28 +388,29 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void listViewInitialItems_SelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
 		{
-			button1.Enabled = _formListViewInitialItems.SelectedItem != null;
-			if (_formListViewInitialItems.SelectedItem == null) return;
+			button1.Enabled = listViewInitialItems.SelectedItem != null;
+			if (listViewInitialItems.SelectedItem == null) return;
 
-			var product = _formListViewInitialItems.SelectedItem.Product;
+			var product = listViewInitialItems.SelectedItem.Product;
 
 			comboBoxMeasure.SelectedItem = product.Measure;
-			numericUpDownQuantity.Value = (decimal)_formListViewInitialItems.SelectedItem.Quantity;
-			checkBoxNew.Checked = (_formListViewInitialItems.SelectedItem.CostCondition & ComponentStatus.New) != 0;
-			checkBoxOverhaul.Checked = (_formListViewInitialItems.SelectedItem.CostCondition & ComponentStatus.Overhaul) != 0;
-			checkBoxRepair.Checked = (_formListViewInitialItems.SelectedItem.CostCondition & ComponentStatus.Repair) != 0;
-			checkBoxServiceable.Checked = (_formListViewInitialItems.SelectedItem.CostCondition & ComponentStatus.Serviceable) != 0;
+			comboBoxReason.SelectedItem = listViewInitialItems.SelectedItem.InitialReason;
+			numericUpDownQuantity.Value = (decimal)listViewInitialItems.SelectedItem.Quantity;
+			checkBoxNew.Checked = (listViewInitialItems.SelectedItem.CostCondition & ComponentStatus.New) != 0;
+			checkBoxOverhaul.Checked = (listViewInitialItems.SelectedItem.CostCondition & ComponentStatus.Overhaul) != 0;
+			checkBoxRepair.Checked = (listViewInitialItems.SelectedItem.CostCondition & ComponentStatus.Repair) != 0;
+			checkBoxServiceable.Checked = (listViewInitialItems.SelectedItem.CostCondition & ComponentStatus.Serviceable) != 0;
 
 			var destination =
-				destinations.FirstOrDefault(d => d.SmartCoreObjectType == _formListViewInitialItems.SelectedItem.DestinationObjectType
-												 && d.ItemId == _formListViewInitialItems.SelectedItem.DestinationObjectId);
+				destinations.FirstOrDefault(d => d.SmartCoreObjectType == listViewInitialItems.SelectedItem.DestinationObjectType
+												 && d.ItemId == listViewInitialItems.SelectedItem.DestinationObjectId);
 
 			comboBoxDestination.SelectedItem = destination;
-			comboBoxPriority.SelectedItem = _formListViewInitialItems.SelectedItem.Priority;
-			metroTextBox1.Text = _formListViewInitialItems.SelectedItem.Remarks;
+			comboBoxPriority.SelectedItem = listViewInitialItems.SelectedItem.Priority;
+			metroTextBox1.Text = listViewInitialItems.SelectedItem.Remarks;
 			comboBoxStation.SelectedItem =
-				_airportsCodes.FirstOrDefault(i => _formListViewInitialItems.SelectedItem.AirportCodeId == i.ItemId);
-			metroTextBoxReference.Text = _formListViewInitialItems.SelectedItem.Reference;
+				_airportsCodes.FirstOrDefault(i => listViewInitialItems.SelectedItem.AirportCodeId == i.ItemId);
+			metroTextBoxReference.Text = listViewInitialItems.SelectedItem.Reference;
 		}
 
 		#endregion
@@ -420,14 +419,14 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			if (_formListViewInitialItems.SelectedItem == null) return;
+			if (listViewInitialItems.SelectedItem == null) return;
 
-			_formListViewInitialItems.SelectedItem.Priority = comboBoxPriority.SelectedItem as Priority ?? Priority.UNK;
-			_formListViewInitialItems.SelectedItem.Measure = comboBoxMeasure.SelectedItem as Measure ?? Measure.Unknown;
-			_formListViewInitialItems.SelectedItem.Quantity = (double)numericUpDownQuantity.Value;
-			_formListViewInitialItems.SelectedItem.Remarks = metroTextBox1.Text;
-			_formListViewInitialItems.SelectedItem.AirportCodeId = ((AirportsCodes)comboBoxStation.SelectedItem).ItemId;
-			_formListViewInitialItems.SelectedItem.Reference = metroTextBoxReference.Text;
+			listViewInitialItems.SelectedItem.Priority = comboBoxPriority.SelectedItem as Priority ?? Priority.UNK;
+			listViewInitialItems.SelectedItem.Measure = comboBoxMeasure.SelectedItem as Measure ?? Measure.Unknown;
+			listViewInitialItems.SelectedItem.Quantity = (double)numericUpDownQuantity.Value;
+			listViewInitialItems.SelectedItem.Remarks = metroTextBox1.Text;
+			listViewInitialItems.SelectedItem.AirportCodeId = ((AirportsCodes)comboBoxStation.SelectedItem).ItemId;
+			listViewInitialItems.SelectedItem.Reference = metroTextBoxReference.Text;
 
 			ComponentStatus costCondition = ComponentStatus.Unknown;
 			if (checkBoxNew.Checked)
@@ -439,23 +438,24 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			if (checkBoxRepair.Checked)
 				costCondition = costCondition | ComponentStatus.Repair;
 
-			_formListViewInitialItems.SelectedItem.CostCondition = costCondition;
+			listViewInitialItems.SelectedItem.CostCondition = costCondition;
 
 			var destination = comboBoxDestination.SelectedItem as BaseEntityObject;
 			if (destination != null)
 			{
-				_formListViewInitialItems.SelectedItem.DestinationObjectType = destination.SmartCoreObjectType;
-				_formListViewInitialItems.SelectedItem.DestinationObjectId = destination.ItemId;
+				listViewInitialItems.SelectedItem.DestinationObjectType = destination.SmartCoreObjectType;
+				listViewInitialItems.SelectedItem.DestinationObjectId = destination.ItemId;
 			}
 			else
 			{
-				_formListViewInitialItems.SelectedItem.DestinationObjectType = SmartCoreType.Unknown;
-				_formListViewInitialItems.SelectedItem.DestinationObjectId = -1;
+				listViewInitialItems.SelectedItem.DestinationObjectType = SmartCoreType.Unknown;
+				listViewInitialItems.SelectedItem.DestinationObjectId = -1;
 			}
-			
-			_formListViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
+			listViewInitialItems.SelectedItem.InitialReason = comboBoxReason.SelectedItem as InitialReason ?? InitialReason.Unknown;
 
-			_formListViewInitialItems.radGridView1.ClearSelection();
+			listViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
+
+			listViewInitialItems.radGridView1.ClearSelection();
 			Reset();
 		}
 
@@ -467,6 +467,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		{
 			button1.Enabled = false;
 			comboBoxMeasure.SelectedItem = null;
+			comboBoxReason.SelectedItem = null;
 			metroTextBox1.Text = "";
 			numericUpDownQuantity.Value = 0;
 			checkBoxNew.Checked = false;

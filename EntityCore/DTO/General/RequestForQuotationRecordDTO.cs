@@ -72,6 +72,10 @@ namespace EntityCore.DTO.General
 		public int DestinationObjectType { get; set; }
 
 		
+		[Column("InitialReason")]
+		public int InitialReason { get; set; }
+
+		
 		[Column("Remarks")]
 		public string Remarks { get; set; }
 

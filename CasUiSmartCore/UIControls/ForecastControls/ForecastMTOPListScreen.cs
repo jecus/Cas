@@ -29,34 +29,37 @@ using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.ForecastControls
 {
-	///<summary>
-	///</summary>
-	[ToolboxItem(false)]
-	public partial class ForecastMTOPListScreen : ScreenControl
-	{
+    ///<summary>
+    ///</summary>
+    [ToolboxItem(false)]
+    public partial class ForecastMTOPListScreen : ScreenControl
+    {
 		#region Fields
 
-		private Aircraft _currentAircraft;
-		private bool _isFirstLoad;
+	    private Aircraft _currentAircraft;
+	    private bool _isFirstLoad;
 
-		private Dictionary<int, Lifelength> _groupLifelengths = new Dictionary<int, Lifelength>();
-		private Dictionary<int, Lifelength> _groupLifelengthsForZeroCheck = new Dictionary<int, Lifelength>();
+	    private Dictionary<int, Lifelength> _groupLifelengths = new Dictionary<int, Lifelength>();
+	    private Dictionary<int, Lifelength> _groupLifelengthsForZeroCheck = new Dictionary<int, Lifelength>();
 
-		private CommonCollection<NextPerformance> _initial = new CommonCollection<NextPerformance>();
-		private CommonCollection<NextPerformance> _result  = new CommonCollection<NextPerformance>();
+	    private CommonCollection<NextPerformance> _initial = new CommonCollection<NextPerformance>();
+	    private CommonCollection<NextPerformance> _result  = new CommonCollection<NextPerformance>();
 
-		private CommonFilterCollection _filter = new CommonFilterCollection(typeof(IForecastMtopFilterParams));
+	    private CommonFilterCollection _filter = new CommonFilterCollection(typeof(IForecastMtopFilterParams));
 		private Forecast _currentForecast;
 		private ForecastMTOPListView _directivesViewer;
 
-		private RadDropDownMenu _contextMenuStrip;
-		private RadMenuSeparatorItem _toolStripSeparator1;
-		private RadMenuItem _createWorkPakageToolStripMenuItem;
-		private RadMenuItem _toolStripMenuItemHighlight;
-		private RadMenuItem _toolStripMenuItemsWorkPackages;
+	    private RadDropDownMenu _contextMenuStrip;
+	    private RadMenuSeparatorItem _toolStripSeparator1;
+	    private RadMenuItem _createWorkPakageToolStripMenuItem;
+	    private RadMenuItem _createInitialOrderStripMenuItem;
+	    private RadMenuItem _createQuotationOrderStripMenuItem;
+	    private RadMenuItem _toolStripMenuItemHighlight;
+	    private RadMenuItem _toolStripMenuItemsWorkPackages;
+	    private RadMenuItem _toolStripMenuItemQuotations;
 
-		private CommonCollection<WorkPackage> _openPubWorkPackages = new CommonCollection<WorkPackage>();
-		private CommonCollection<RequestForQuotation> _openPubQuotations = new CommonCollection<RequestForQuotation>();
+	    private CommonCollection<WorkPackage> _openPubWorkPackages = new CommonCollection<WorkPackage>();
+	    private CommonCollection<RequestForQuotation> _openPubQuotations = new CommonCollection<RequestForQuotation>();
 		#endregion
 
 
@@ -67,18 +70,18 @@ namespace CAS.UI.UIControls.ForecastControls
 		/// Конструктор по умолчанию
 		///</summary>
 		public ForecastMTOPListScreen()
-		{
-			InitializeComponent();
-		}
+        {
+            InitializeComponent();
+        }
 		#endregion
 
 		#region public ForecastMTOPListScreen(Aircraft currentAircraft)
 
-		/// <summary>
-		///  Создаёт экземпляр элемента управления, отображающего список директив
-		/// </summary>
-		public ForecastMTOPListScreen(Aircraft currentAircraft)
-			: this()
+	    /// <summary>
+	    ///  Создаёт экземпляр элемента управления, отображающего список директив
+	    /// </summary>
+	    public ForecastMTOPListScreen(Aircraft currentAircraft)
+            : this()
 		{
 			if (currentAircraft == null)
 				throw new ArgumentNullException("currentAircraft");
@@ -93,39 +96,39 @@ namespace CAS.UI.UIControls.ForecastControls
 			InitToolStripMenuItems();
 			InitListView();
 			UpdateInformation();
-		}
-		#endregion
+        }
+        #endregion
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
-		#region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-		{
-			if (_currentAircraft != null)
-			{
-				labelTitle.Text = "Date as of: " +
-								  SmartCore.Auxiliary.Convert.GetDateFormat(DateTime.Today) + " Aircraft TSN/CSN: " +
-								  GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(CurrentAircraft);
-			}
+        #region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+	        if (_currentAircraft != null)
+	        {
+		        labelTitle.Text = "Date as of: " +
+		                          SmartCore.Auxiliary.Convert.GetDateFormat(DateTime.Today) + " Aircraft TSN/CSN: " +
+		                          GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(CurrentAircraft);
+	        }
 
 			if (_isFirstLoad)
-			{
-				_isFirstLoad = false;
+	        {
+		        _isFirstLoad = false;
 				var form = new ForecastCustomsMTOP(CurrentAircraft, _currentForecast);
 
-				if (form.ShowDialog() == DialogResult.OK)
+		        if (form.ShowDialog() == DialogResult.OK)
 					AnimatedThreadWorker.RunWorkerAsync();
 			}
 
-			if (_currentForecast.ForecastDatas.Count > 0)
-			{
-				var main = _currentForecast.ForecastDatas[0];
-				labelDateAsOf.Text =
-					"Forecast Period From: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.LowerLimit) +
-					" To: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.ForecastDate) +
-					"\nAvg. utlz: " + main.AverageUtilization;
+	        if (_currentForecast.ForecastDatas.Count > 0)
+	        {
+		        var main = _currentForecast.ForecastDatas[0];
+		        labelDateAsOf.Text =
+			        "Forecast Period From: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.LowerLimit) +
+			        " To: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.ForecastDate) +
+			        "\nAvg. utlz: " + main.AverageUtilization;
 			}
 
 			if (_toolStripMenuItemsWorkPackages != null)
@@ -146,11 +149,30 @@ namespace CAS.UI.UIControls.ForecastControls
 				}
 			}
 
+	        if (_toolStripMenuItemQuotations != null)
+	        {
+		        foreach (RadMenuItem item in _toolStripMenuItemQuotations.Items)
+		        {
+			        item.Click -= AddToQuotationOrderItemClick;
+		        }
+
+		        _toolStripMenuItemQuotations.Items.Clear();
+
+		        foreach (RequestForQuotation quotation in _openPubQuotations)
+		        {
+			        var item = new RadMenuItem(quotation.Title);
+			        item.Click += AddToQuotationOrderItemClick;
+			        item.Tag = quotation;
+			        _toolStripMenuItemQuotations.Items.Add(item);
+		        }
+	        }
+
+
 			_directivesViewer.SetItemsArray(_result.OrderBy(i => i.PerformanceDate).ToArray());
 		}
 
-		private void AddToWorkPackageItemClick(object sender, EventArgs e)
-		{
+	    private void AddToWorkPackageItemClick(object sender, EventArgs e)
+	    {
 			if (_directivesViewer.SelectedItems.Count <= 0) return;
 
 			WorkPackage wp = (WorkPackage)((RadMenuItem)sender).Tag;
@@ -266,126 +288,126 @@ namespace CAS.UI.UIControls.ForecastControls
 			}
 		}
 
-		#endregion
+	    #endregion
 
-		#region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
-		protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
-		{
-			var initialZeroMaintenanceDirectives = new CommonCollection<MaintenanceDirective>();
-			var initialMaintenanceDirectives = new CommonCollection<MaintenanceDirective>();
-			_result.Clear();
-			_initial.Clear();
-			_groupLifelengths.Clear();
-			_groupLifelengthsForZeroCheck.Clear();
+        #region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
+        protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
+        {
+	        var initialZeroMaintenanceDirectives = new CommonCollection<MaintenanceDirective>();
+	        var initialMaintenanceDirectives = new CommonCollection<MaintenanceDirective>();
+	        _result.Clear();
+	        _initial.Clear();
+	        _groupLifelengths.Clear();
+	        _groupLifelengthsForZeroCheck.Clear();
 
 			if (!_isFirstLoad)
-			{
+	        {
 				AnimatedThreadWorker.ReportProgress(0, "load checks");
 
-			   var checks = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<MTOPCheckDTO, MTOPCheck>(new Filter("ParentAircraftId", CurrentAircraft.ItemId), true).ToList();
+		       var checks = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<MTOPCheckDTO, MTOPCheck>(new Filter("ParentAircraftId", CurrentAircraft.ItemId), true).ToList();
 				
 				foreach (var check in checks)
-				{
-					foreach (var record in check.PerformanceRecords)
-						record.Parent = check;
-				}
+		        {
+			        foreach (var record in check.PerformanceRecords)
+				        record.Parent = check;
+		        }
 
 				if (AnimatedThreadWorker.CancellationPending)
-				{
-					e.Cancel = true;
-					return;
-				}
+		        {
+			        e.Cancel = true;
+			        return;
+		        }
 
-				AnimatedThreadWorker.ReportProgress(10, "load MPDs");
+		        AnimatedThreadWorker.ReportProgress(10, "load MPDs");
 
-				initialMaintenanceDirectives.AddRange(GlobalObjects.MaintenanceCore.GetMaintenanceDirectives(CurrentAircraft));
+		        initialMaintenanceDirectives.AddRange(GlobalObjects.MaintenanceCore.GetMaintenanceDirectives(CurrentAircraft));
 
 				var bindedItemsDict = GlobalObjects.BindedItemsCore.GetBindedItemsFor(CurrentAircraft.ItemId,
 					initialMaintenanceDirectives.Where(m => m.WorkItemsRelationType == WorkItemsRelationType.CalculationDepend));
 
-				CalculateMaintenanceDirectives(initialMaintenanceDirectives.ToList(), bindedItemsDict);
+		        CalculateMaintenanceDirectives(initialMaintenanceDirectives.ToList(), bindedItemsDict);
 
-				if (AnimatedThreadWorker.CancellationPending)
-				{
-					e.Cancel = true;
-					return;
-				}
-
-
-				AnimatedThreadWorker.ReportProgress(50, "calculation");
+		        if (AnimatedThreadWorker.CancellationPending)
+		        {
+			        e.Cancel = true;
+			        return;
+		        }
 
 
-				if (checks.Count > 0)
-				{
-					//Берем утилизацию с Frame
-					var frame = GlobalObjects.CasEnvironment.BaseComponents.FirstOrDefault(i =>
-						i.ParentAircraftId == CurrentAircraft.ItemId && Equals(i.BaseComponentType, BaseComponentType.Frame));
-					var avg = _currentForecast.ForecastDatas[0].AverageUtilization;
+		        AnimatedThreadWorker.ReportProgress(50, "calculation");
 
-					var lastCompliance = checks.SelectMany(i => i.PerformanceRecords).OrderByDescending(i => i.RecordDate)
-						.FirstOrDefault();
 
-					GlobalObjects.MTOPCalculator.CalculateMtopChecks(checks, avg);
+		        if (checks.Count > 0)
+		        {
+			        //Берем утилизацию с Frame
+			        var frame = GlobalObjects.CasEnvironment.BaseComponents.FirstOrDefault(i =>
+				        i.ParentAircraftId == CurrentAircraft.ItemId && Equals(i.BaseComponentType, BaseComponentType.Frame));
+			        var avg = _currentForecast.ForecastDatas[0].AverageUtilization;
 
-					_groupLifelengths = GlobalObjects.MTOPCalculator.CalculateGroupNew(checks.Where(i => !i.Thresh.IsNullOrZero() && !i.IsZeroPhase).ToList());
+			        var lastCompliance = checks.SelectMany(i => i.PerformanceRecords).OrderByDescending(i => i.RecordDate)
+				        .FirstOrDefault();
 
-					GlobalObjects.MTOPCalculator.CalculateNextPerformance(checks.Where(i => !i.IsZeroPhase).ToList(),
-						frame.StartDate, _groupLifelengths, CurrentAircraft, avg, lastCompliance);
+			        GlobalObjects.MTOPCalculator.CalculateMtopChecks(checks, avg);
 
-					GlobalObjects.MTOPCalculator.CalculatePhaseWithPerformance(initialMaintenanceDirectives, checks.Where(i => !i.Thresh.IsNullOrZero() && !i.IsZeroPhase).ToList(), avg, _currentForecast.ForecastDatas[0].LowerLimit, _currentForecast.ForecastDatas[0].ForecastDate);
+			        _groupLifelengths = GlobalObjects.MTOPCalculator.CalculateGroupNew(checks.Where(i => !i.Thresh.IsNullOrZero() && !i.IsZeroPhase).ToList());
+
+			        GlobalObjects.MTOPCalculator.CalculateNextPerformance(checks.Where(i => !i.IsZeroPhase).ToList(),
+				        frame.StartDate, _groupLifelengths, CurrentAircraft, avg, lastCompliance);
+
+			        GlobalObjects.MTOPCalculator.CalculatePhaseWithPerformance(initialMaintenanceDirectives, checks.Where(i => !i.Thresh.IsNullOrZero() && !i.IsZeroPhase).ToList(), avg, _currentForecast.ForecastDatas[0].LowerLimit, _currentForecast.ForecastDatas[0].ForecastDate);
 
 	
-					var maintenanceZeroChecks = checks.Where(i => i.IsZeroPhase).ToList();
+			        var maintenanceZeroChecks = checks.Where(i => i.IsZeroPhase).ToList();
 
-					var lowerZeroCheck = maintenanceZeroChecks.Where(i => !i.Thresh.IsNullOrZero()).OrderBy(i => i.Thresh)
-						.FirstOrDefault();
-					if (lowerZeroCheck != null)
-					{
-						GlobalObjects.MTOPCalculator.CalculateMtopChecks(maintenanceZeroChecks, avg);
+			        var lowerZeroCheck = maintenanceZeroChecks.Where(i => !i.Thresh.IsNullOrZero()).OrderBy(i => i.Thresh)
+				        .FirstOrDefault();
+			        if (lowerZeroCheck != null)
+			        {
+				        GlobalObjects.MTOPCalculator.CalculateMtopChecks(maintenanceZeroChecks, avg);
 
-						_groupLifelengthsForZeroCheck = GlobalObjects.MTOPCalculator.CalculateGroupNew(checks.Where(i => !i.Thresh.IsNullOrZero() && i.IsZeroPhase).ToList());
+				        _groupLifelengthsForZeroCheck = GlobalObjects.MTOPCalculator.CalculateGroupNew(checks.Where(i => !i.Thresh.IsNullOrZero() && i.IsZeroPhase).ToList());
 
-						GlobalObjects.MTOPCalculator.CalculateNextPerformance(maintenanceZeroChecks, frame.StartDate,
-							_groupLifelengthsForZeroCheck, CurrentAircraft, avg, lastCompliance);
+				        GlobalObjects.MTOPCalculator.CalculateNextPerformance(maintenanceZeroChecks, frame.StartDate,
+					        _groupLifelengthsForZeroCheck, CurrentAircraft, avg, lastCompliance);
 
 						initialZeroMaintenanceDirectives.AddRange(initialMaintenanceDirectives
 							.Where(i => i.MTOPPhase?.FirstPhase == 0).ToArray());
 
-						GlobalObjects.MTOPCalculator.CalculatePhaseWithPerformance(initialZeroMaintenanceDirectives, maintenanceZeroChecks, avg, _currentForecast.ForecastDatas[0].LowerLimit , _currentForecast.ForecastDatas[0].ForecastDate, true);
+				        GlobalObjects.MTOPCalculator.CalculatePhaseWithPerformance(initialZeroMaintenanceDirectives, maintenanceZeroChecks, avg, _currentForecast.ForecastDatas[0].LowerLimit , _currentForecast.ForecastDatas[0].ForecastDate, true);
 
-					}
+			        }
 
-					foreach (var d in initialZeroMaintenanceDirectives)
-						initialMaintenanceDirectives.Remove(d);
+			        foreach (var d in initialZeroMaintenanceDirectives)
+				        initialMaintenanceDirectives.Remove(d);
 
 
-					_initial.AddRange(initialMaintenanceDirectives.SelectMany(i => i.MtopNextPerformances));
-					_initial.AddRange(initialZeroMaintenanceDirectives.SelectMany(i => i.MtopNextPerformances));
+			        _initial.AddRange(initialMaintenanceDirectives.SelectMany(i => i.MtopNextPerformances));
+			        _initial.AddRange(initialZeroMaintenanceDirectives.SelectMany(i => i.MtopNextPerformances));
 
 				}
 
-				#region Фильтрация директив
+		        #region Фильтрация директив
 
-				AnimatedThreadWorker.ReportProgress(75, "filter directives");
+		        AnimatedThreadWorker.ReportProgress(75, "filter directives");
 
-				FilterItems(_initial, _result);
+		        FilterItems(_initial, _result);
 
-				if (AnimatedThreadWorker.CancellationPending)
-				{
-					e.Cancel = true;
-					return;
-				}
+		        if (AnimatedThreadWorker.CancellationPending)
+		        {
+			        e.Cancel = true;
+			        return;
+		        }
 				#endregion
 
 				#region Load WP
 
-				AnimatedThreadWorker.ReportProgress(75, "filter Work Packages");
+		        AnimatedThreadWorker.ReportProgress(75, "filter Work Packages");
 
-				if (AnimatedThreadWorker.CancellationPending)
-				{
-					e.Cancel = true;
-					return;
-				}
+		        if (AnimatedThreadWorker.CancellationPending)
+		        {
+			        e.Cancel = true;
+			        return;
+		        }
 
 				if (_openPubWorkPackages == null)
 					_openPubWorkPackages = new CommonCollection<WorkPackage>();
@@ -400,73 +422,73 @@ namespace CAS.UI.UIControls.ForecastControls
 
 				#endregion
 
-				#region Загрузка Котировочных ордеров
+		        #region Загрузка Котировочных ордеров
 
-				AnimatedThreadWorker.ReportProgress(95, "Load Quotations");
+		        AnimatedThreadWorker.ReportProgress(95, "Load Quotations");
 
-				//загрузка рабочих пакетов для определения 
-				//перекрытых ими выполнений задач
-				if (_openPubQuotations == null) _openPubQuotations = new CommonCollection<RequestForQuotation>();
+		        //загрузка рабочих пакетов для определения 
+		        //перекрытых ими выполнений задач
+		        if (_openPubQuotations == null) _openPubQuotations = new CommonCollection<RequestForQuotation>();
 
-				BaseEntityObject parent = CurrentAircraft ?? (BaseEntityObject)CurrentOperator;
-				_openPubQuotations.Clear();
-				_openPubQuotations.AddRange(GlobalObjects.PurchaseCore.GetRequestForQuotation(parent, new[] { WorkPackageStatus.Opened, WorkPackageStatus.Published }));
+		        BaseEntityObject parent = CurrentAircraft ?? (BaseEntityObject)CurrentOperator;
+		        _openPubQuotations.Clear();
+		        _openPubQuotations.AddRange(GlobalObjects.PurchaseCore.GetRequestForQuotation(parent, new[] { WorkPackageStatus.Opened, WorkPackageStatus.Published }));
 
-				if (AnimatedThreadWorker.CancellationPending)
-				{
-					e.Cancel = true;
-					return;
-				}
-				#endregion
+		        if (AnimatedThreadWorker.CancellationPending)
+		        {
+			        e.Cancel = true;
+			        return;
+		        }
+		        #endregion
 
 				AnimatedThreadWorker.ReportProgress(100, "Completed");
 			}
 		}
-		#endregion
+        #endregion
 
-		#region protected override void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
-		private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
-		{
-			_result.Clear();
+        #region protected override void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
+        private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
+        {
+	        _result.Clear();
 
-			#region Фильтрация директив
+	        #region Фильтрация директив
 
-			AnimatedThreadWorker.ReportProgress(50, "filter directives");
+	        AnimatedThreadWorker.ReportProgress(50, "filter directives");
 
-			FilterItems(_initial, _result);
+	        FilterItems(_initial, _result);
 
-			if (AnimatedThreadWorker.CancellationPending)
-			{
-				e.Cancel = true;
-				return;
-			}
-			#endregion
+	        if (AnimatedThreadWorker.CancellationPending)
+	        {
+		        e.Cancel = true;
+		        return;
+	        }
+	        #endregion
 
-			AnimatedThreadWorker.ReportProgress(100, "Complete");
+	        AnimatedThreadWorker.ReportProgress(100, "Complete");
 		}
-		#endregion
+        #endregion
 
-		#region private void UpdateInformation()
-		/// <summary>
-		/// Происзодит обновление отображения элементов
-		/// </summary>
-		private void UpdateInformation()
-		{
-			AnimatedThreadWorker.RunWorkerAsync();
+        #region private void UpdateInformation()
+        /// <summary>
+        /// Происзодит обновление отображения элементов
+        /// </summary>
+        private void UpdateInformation()
+        {
+		    AnimatedThreadWorker.RunWorkerAsync();
 		}
 		#endregion
 
 		#region private void InitListView()
 
-		private void InitListView()
-		{
-			_directivesViewer = new ForecastMTOPListView
-			{
-				CustomMenu = _contextMenuStrip,
+	    private void InitListView()
+	    {
+		    _directivesViewer = new ForecastMTOPListView
+		    {
+			    CustomMenu = _contextMenuStrip,
 				TabIndex = 2,
-				Location = new Point(panel1.Left, panel1.Top),
-				Dock = DockStyle.Fill
-			};
+			    Location = new Point(panel1.Left, panel1.Top),
+			    Dock = DockStyle.Fill
+		    };
 			//события 
 
 			_directivesViewer.MenuOpeningAction = () =>
@@ -475,10 +497,13 @@ namespace CAS.UI.UIControls.ForecastControls
 					return;
 				if (_directivesViewer.SelectedItems.Count == 1)
 					_createWorkPakageToolStripMenuItem.Enabled = true;
+
+				_createInitialOrderStripMenuItem.Enabled = true;
+				_createQuotationOrderStripMenuItem.Enabled = true;
 			};
 
 			panel1.Controls.Add(_directivesViewer);
-		}
+	    }
 
 		#endregion
 
@@ -488,7 +513,10 @@ namespace CAS.UI.UIControls.ForecastControls
 		{
 			_contextMenuStrip = new RadDropDownMenu();
 			_createWorkPakageToolStripMenuItem = new RadMenuItem();
+			_createInitialOrderStripMenuItem = new RadMenuItem();
+			_createQuotationOrderStripMenuItem = new RadMenuItem();
 			_toolStripMenuItemsWorkPackages = new RadMenuItem();
+			_toolStripMenuItemQuotations = new RadMenuItem();
 			_toolStripMenuItemHighlight = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			// 
@@ -507,9 +535,24 @@ namespace CAS.UI.UIControls.ForecastControls
 			// _toolStripMenuItemsWorkPackages
 			//
 			_toolStripMenuItemsWorkPackages.Text = "Add to work package";
-			
+			// 
+			// createInitialOrderStripMenuItem
+			// 
+			_createInitialOrderStripMenuItem.Text = "Compose new Initial Order";
+			_createInitialOrderStripMenuItem.Click += ToolStripMenuItemComposeInitialClick;
+			// 
+			// toolStripMenuItemView
+			// 
+			_createQuotationOrderStripMenuItem.Text = "Compose Quotation";
+			_createQuotationOrderStripMenuItem.Click += ToolStripMenuItemComposeQuotationClick;
+			//
+			// toolStripMenuItemComposeWorkPackage
+			//
+			_toolStripMenuItemQuotations.Text = "Add to Quotation Order";
+
 			_contextMenuStrip.Items.Clear();
 			_toolStripMenuItemsWorkPackages.Items.Clear();
+			_toolStripMenuItemQuotations.Items.Clear();
 			_toolStripMenuItemHighlight.Items.Clear();
 
 			foreach (Highlight highlight in Highlight.HighlightList)
@@ -526,7 +569,10 @@ namespace CAS.UI.UIControls.ForecastControls
 													new RadMenuSeparatorItem(), 
 													_createWorkPakageToolStripMenuItem,
 													_toolStripMenuItemsWorkPackages,
-													_toolStripSeparator1
+													_toolStripSeparator1,
+													_createInitialOrderStripMenuItem,
+													_createQuotationOrderStripMenuItem,
+													_toolStripMenuItemQuotations
 												);
 		}
 
@@ -535,277 +581,296 @@ namespace CAS.UI.UIControls.ForecastControls
 		#region private void HighlightItemClick(object sender, EventArgs e)
 
 		private void HighlightItemClick(object sender, EventArgs e)
-		{
-			var highLight = (Highlight)((RadMenuItem)sender).Tag;
-			for (int i = 0; i < _directivesViewer.SelectedItems.Count; i++)
-				
-			foreach (GridViewCellInfo cell in _directivesViewer.radGridView1.SelectedRows[i].Cells)
-			{
-				cell.Style.CustomizeFill = true;
-				cell.Style.BackColor = Color.FromArgb(highLight.Color);
-			}
+	    {
+		    var highLight = (Highlight)((RadMenuItem)sender).Tag;
+		    for (int i = 0; i < _directivesViewer.SelectedItems.Count; i++)
+			    
+		    foreach (GridViewCellInfo cell in _directivesViewer.radGridView1.SelectedRows[i].Cells)
+		    {
+			    cell.Style.CustomizeFill = true;
+			    cell.Style.BackColor = Color.FromArgb(highLight.Color);
+		    }
 		}
 
-		#endregion
+	    #endregion
+
+	    private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
+	    {
+			PurchaseManager.ComposeQuotationOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
+		}
+
+	    private void ToolStripMenuItemComposeInitialClick(object sender, EventArgs e)
+	    {
+		    PurchaseManager.ComposeInitialOrder(_directivesViewer.SelectedItems.ToArray(), CurrentParent, this);
+		}
+
+	    private void AddToQuotationOrderItemClick(object sender, EventArgs e)
+	    {
+		    if (_directivesViewer.SelectedItems.Count <= 0) return;
+
+		    RequestForQuotation wp = (RequestForQuotation)((RadMenuItem)sender).Tag;
+
+		    PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
+	    }
 
 		#region private void ButtonCreateWorkPakageClick(object sender, EventArgs e)
 
 		private void ButtonCreateWorkPakageClick(object sender, EventArgs e)
-		{
-			if (_directivesViewer.SelectedItems.Count <= 0) return;
+	    {
+		    if (_directivesViewer.SelectedItems.Count <= 0) return;
 
-			if (MessageBox.Show("Create and save a Work Package?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-			{
-				List<NextPerformance> wpItems = _directivesViewer.SelectedItems.ToList();
-				List<NextPerformance> bindedDirectivesPerformances = new List<NextPerformance>();
-				foreach (NextPerformance wpItem in wpItems)
-				{
-					if (wpItem is MaintenanceNextPerformance)
-					{
-						MaintenanceNextPerformance mnp = wpItem as MaintenanceNextPerformance;
-						if (mnp.PerformanceGroup.Checks.Count > 0)
-						{
-							foreach (MaintenanceCheck mc in mnp.PerformanceGroup.Checks)
-							{
-								foreach (MaintenanceDirective mpd in _currentForecast.MaintenanceDirectives
-									.Where(mpd => mpd.MaintenanceCheck != null &&
-												  mpd.MaintenanceCheck.ItemId == mc.ItemId))
-								{
-									NextPerformance performance =
-										mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
-																				 p.PerformanceDate.Value.Date == wpItem.PerformanceDate.Value.Date) ??
-										mpd.NextPerformances.LastOrDefault(p => p.PerformanceDate != null &&
-																				p.PerformanceDate < wpItem.PerformanceDate) ??
-										mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
-																				 p.PerformanceDate > wpItem.PerformanceDate);
+		    if (MessageBox.Show("Create and save a Work Package?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+		    {
+			    List<NextPerformance> wpItems = _directivesViewer.SelectedItems.ToList();
+			    List<NextPerformance> bindedDirectivesPerformances = new List<NextPerformance>();
+			    foreach (NextPerformance wpItem in wpItems)
+			    {
+				    if (wpItem is MaintenanceNextPerformance)
+				    {
+					    MaintenanceNextPerformance mnp = wpItem as MaintenanceNextPerformance;
+					    if (mnp.PerformanceGroup.Checks.Count > 0)
+					    {
+						    foreach (MaintenanceCheck mc in mnp.PerformanceGroup.Checks)
+						    {
+							    foreach (MaintenanceDirective mpd in _currentForecast.MaintenanceDirectives
+								    .Where(mpd => mpd.MaintenanceCheck != null &&
+								                  mpd.MaintenanceCheck.ItemId == mc.ItemId))
+							    {
+								    NextPerformance performance =
+									    mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
+									                                             p.PerformanceDate.Value.Date == wpItem.PerformanceDate.Value.Date) ??
+									    mpd.NextPerformances.LastOrDefault(p => p.PerformanceDate != null &&
+									                                            p.PerformanceDate < wpItem.PerformanceDate) ??
+									    mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
+									                                             p.PerformanceDate > wpItem.PerformanceDate);
 
-									if (performance == null) continue;
-									if (wpItems.Count(wpi => wpi.Parent != null && wpi.Parent == mpd) == 0)
-										bindedDirectivesPerformances.Add(performance);
-								}
-							}
-						}
-						else if (wpItem.Parent is MaintenanceCheck)
-						{
-							MaintenanceCheck mc = wpItem.Parent as MaintenanceCheck;
-							foreach (MaintenanceDirective mpd in _currentForecast.MaintenanceDirectives
-								.Where(mpd => mpd.MaintenanceCheck != null &&
-											  mpd.MaintenanceCheck.ItemId == mc.ItemId))
-							{
-								NextPerformance performance =
-									mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
-																			 p.PerformanceDate.Value.Date == wpItem.PerformanceDate.Value.Date) ??
-									mpd.NextPerformances.LastOrDefault(p => p.PerformanceDate != null &&
-																			p.PerformanceDate < wpItem.PerformanceDate) ??
-									mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
-																			 p.PerformanceDate > wpItem.PerformanceDate);
+								    if (performance == null) continue;
+								    if (wpItems.Count(wpi => wpi.Parent != null && wpi.Parent == mpd) == 0)
+									    bindedDirectivesPerformances.Add(performance);
+							    }
+						    }
+					    }
+					    else if (wpItem.Parent is MaintenanceCheck)
+					    {
+						    MaintenanceCheck mc = wpItem.Parent as MaintenanceCheck;
+						    foreach (MaintenanceDirective mpd in _currentForecast.MaintenanceDirectives
+							    .Where(mpd => mpd.MaintenanceCheck != null &&
+							                  mpd.MaintenanceCheck.ItemId == mc.ItemId))
+						    {
+							    NextPerformance performance =
+								    mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
+								                                             p.PerformanceDate.Value.Date == wpItem.PerformanceDate.Value.Date) ??
+								    mpd.NextPerformances.LastOrDefault(p => p.PerformanceDate != null &&
+								                                            p.PerformanceDate < wpItem.PerformanceDate) ??
+								    mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
+								                                             p.PerformanceDate > wpItem.PerformanceDate);
 
-								if (performance == null) continue;
-								if (wpItems.Count(wpi => wpi.Parent != null && wpi.Parent == mpd) == 0)
-									bindedDirectivesPerformances.Add(performance);
-							}
-						}
-					}
-					else if (wpItem.Parent is MaintenanceCheck)
-					{
-						MaintenanceCheck mc = wpItem.Parent as MaintenanceCheck;
-						foreach (MaintenanceDirective mpd in _currentForecast.MaintenanceDirectives
-							.Where(mpd => mpd.MaintenanceCheck != null &&
-										  mpd.MaintenanceCheck.ItemId == mc.ItemId))
-						{
-							NextPerformance performance =
-								mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
-																		 p.PerformanceDate.Value.Date == wpItem.PerformanceDate.Value.Date) ??
-								mpd.NextPerformances.LastOrDefault(p => p.PerformanceDate != null &&
-																		p.PerformanceDate < wpItem.PerformanceDate) ??
-								mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
-																		 p.PerformanceDate > wpItem.PerformanceDate);
+							    if (performance == null) continue;
+							    if (wpItems.Count(wpi => wpi.Parent != null && wpi.Parent == mpd) == 0)
+								    bindedDirectivesPerformances.Add(performance);
+						    }
+					    }
+				    }
+				    else if (wpItem.Parent is MaintenanceCheck)
+				    {
+					    MaintenanceCheck mc = wpItem.Parent as MaintenanceCheck;
+					    foreach (MaintenanceDirective mpd in _currentForecast.MaintenanceDirectives
+						    .Where(mpd => mpd.MaintenanceCheck != null &&
+						                  mpd.MaintenanceCheck.ItemId == mc.ItemId))
+					    {
+						    NextPerformance performance =
+							    mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
+							                                             p.PerformanceDate.Value.Date == wpItem.PerformanceDate.Value.Date) ??
+							    mpd.NextPerformances.LastOrDefault(p => p.PerformanceDate != null &&
+							                                            p.PerformanceDate < wpItem.PerformanceDate) ??
+							    mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
+							                                             p.PerformanceDate > wpItem.PerformanceDate);
 
-							if (performance == null) continue;
-							if (wpItems.Count(wpi => wpi.Parent != null && wpi.Parent == mpd) == 0)
-								bindedDirectivesPerformances.Add(performance);
-						}
-					}
-				}
-				wpItems.AddRange(bindedDirectivesPerformances);
+						    if (performance == null) continue;
+						    if (wpItems.Count(wpi => wpi.Parent != null && wpi.Parent == mpd) == 0)
+							    bindedDirectivesPerformances.Add(performance);
+					    }
+				    }
+			    }
+			    wpItems.AddRange(bindedDirectivesPerformances);
 
-				try
-				{
-					string message;
-					WorkPackage wp =
-						GlobalObjects.WorkPackageCore.AddWorkPakage(wpItems, _currentAircraft, out message);
-					if (wp == null)
-					{
-						MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
-							MessageBoxButtons.OK, MessageBoxIcon.Error);
-						return;
-					}
-					//Добавление нового рабочего пакета в коллекцию открытых рабочих пакетов
-					_openPubWorkPackages.Add(wp);
-					//Создание пункта в меню открытых рабочих пакетов
-					var item = new RadMenuItem(wp.Title);
-					item.Click += AddToWorkPackageItemClick;
-					item.Tag = wp;
-					_toolStripMenuItemsWorkPackages.Items.Add(item);
+			    try
+			    {
+				    string message;
+				    WorkPackage wp =
+					    GlobalObjects.WorkPackageCore.AddWorkPakage(wpItems, _currentAircraft, out message);
+				    if (wp == null)
+				    {
+					    MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
+						    MessageBoxButtons.OK, MessageBoxIcon.Error);
+					    return;
+				    }
+				    //Добавление нового рабочего пакета в коллекцию открытых рабочих пакетов
+				    _openPubWorkPackages.Add(wp);
+				    //Создание пункта в меню открытых рабочих пакетов
+				    var item = new RadMenuItem(wp.Title);
+				    item.Click += AddToWorkPackageItemClick;
+				    item.Tag = wp;
+				    _toolStripMenuItemsWorkPackages.Items.Add(item);
 
-					foreach (NextPerformance nextPerformance in wpItems)
-					{
-						nextPerformance.BlockedByPackage = wp;
-						_directivesViewer.UpdateItemColor();
-					}
-					ReferenceEventArgs refArgs = new ReferenceEventArgs();
-					refArgs.TypeOfReflection = ReflectionTypes.DisplayInNew;
-					refArgs.DisplayerText = CurrentAircraft != null ? CurrentAircraft.RegistrationNumber + "." + wp.Title : wp.Title;
-					refArgs.RequestedEntity = new WorkPackageScreen(wp);
-					InvokeDisplayerRequested(refArgs);
-				}
-				catch (Exception ex)
-				{
-					Program.Provider.Logger.Log("error while create Work Package", ex);
-				}
-			}
-		}
+				    foreach (NextPerformance nextPerformance in wpItems)
+				    {
+					    nextPerformance.BlockedByPackage = wp;
+					    _directivesViewer.UpdateItemColor();
+				    }
+				    ReferenceEventArgs refArgs = new ReferenceEventArgs();
+				    refArgs.TypeOfReflection = ReflectionTypes.DisplayInNew;
+				    refArgs.DisplayerText = CurrentAircraft != null ? CurrentAircraft.RegistrationNumber + "." + wp.Title : wp.Title;
+				    refArgs.RequestedEntity = new WorkPackageScreen(wp);
+				    InvokeDisplayerRequested(refArgs);
+			    }
+			    catch (Exception ex)
+			    {
+				    Program.Provider.Logger.Log("error while create Work Package", ex);
+			    }
+		    }
+	    }
 
-		#endregion
+	    #endregion
 
 		#region private void ButtonApplyFilterClick(object sender, EventArgs e)
 
 		private void ButtonApplyFilterClick(object sender, EventArgs e)
-		{
+        {
 			var form = new CommonFilterForm(_filter, _initial) { Text = "Forecast Filter Form" };
 
-			if (form.ShowDialog(this) == DialogResult.OK)
-			{
-				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
-				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
-				AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoFilteringWork;
+	        if (form.ShowDialog(this) == DialogResult.OK)
+	        {
+		        AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+		        AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+		        AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoFilteringWork;
 
-				AnimatedThreadWorker.RunWorkerAsync();
-			}
+		        AnimatedThreadWorker.RunWorkerAsync();
+	        }
 		}
 
-		#endregion
+        #endregion
 
-		#region private void HeaderControlButtonReloadClick(object sender, EventArgs e)
+        #region private void HeaderControlButtonReloadClick(object sender, EventArgs e)
 
-		private void HeaderControlButtonReloadClick(object sender, EventArgs e)
-		{
-			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
-			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
-			AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
+        private void HeaderControlButtonReloadClick(object sender, EventArgs e)
+        {
+            AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+            AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+            AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
 
-			if(!AnimatedThreadWorker.IsBusy)
-				AnimatedThreadWorker.RunWorkerAsync();
-		}
-		#endregion
+            if(!AnimatedThreadWorker.IsBusy)
+                AnimatedThreadWorker.RunWorkerAsync();
+        }
+        #endregion
 
 		#region private void ButtonShowEquipmentAndMaterialsDisplayerRequested(object sender, ReferenceEventArgs e)
 
 		private void ButtonShowEquipmentAndMaterialsDisplayerRequested(object sender, ReferenceEventArgs e)
-		{
-			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-			e.DisplayerText =
-				$"{CurrentAircraft.RegistrationNumber} .Equipment and Materials";
-			e.RequestedEntity = new AccessoryRequiredListScreen(CurrentAircraft);
-		}
+	    {
+		    e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+		    e.DisplayerText =
+			    $"{CurrentAircraft.RegistrationNumber} .Equipment and Materials";
+		    e.RequestedEntity = new AccessoryRequiredListScreen(CurrentAircraft);
+	    }
 
 		#endregion
 
-		#region private void FilterItems(IEnumerable<NextPerformance> initialCollection, ICommonCollection<NextPerformance> resultCollection)
-		///<summary>
-		///</summary>
-		///<param name="initialCollection"></param>
-		///<param name="resultCollection"></param>
-		private void FilterItems(IEnumerable<NextPerformance> initialCollection, ICommonCollection<NextPerformance> resultCollection)
-		{
+	    #region private void FilterItems(IEnumerable<NextPerformance> initialCollection, ICommonCollection<NextPerformance> resultCollection)
+	    ///<summary>
+	    ///</summary>
+	    ///<param name="initialCollection"></param>
+	    ///<param name="resultCollection"></param>
+	    private void FilterItems(IEnumerable<NextPerformance> initialCollection, ICommonCollection<NextPerformance> resultCollection)
+	    {
 			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
-				resultCollection.Clear();
-				resultCollection.AddRange(initialCollection);
-				return;
-			}
+			    resultCollection.Clear();
+			    resultCollection.AddRange(initialCollection);
+			    return;
+		    }
 
-			resultCollection.Clear();
+		    resultCollection.Clear();
 
-			foreach (NextPerformance pd in initialCollection)
-			{
-				//if (pd.Parent != null && pd.Parent is MaintenanceCheck && ((MaintenanceCheck)pd.Parent).Name == "C02")
-				//{
-				//    pd.ToString();
-				//}
-				if (_filter.FilterTypeAnd)
-				{
-					bool acceptable = true;
-					foreach (ICommonFilter filter in _filter)
-					{
-						acceptable = filter.Acceptable(pd); if (!acceptable) break;
-					}
-					if (acceptable) resultCollection.Add(pd);
-				}
-				else
-				{
-					bool acceptable = true;
-					foreach (ICommonFilter filter in _filter)
-					{
-						if (filter.Values == null || filter.Values.Length == 0)
-							continue;
-						acceptable = filter.Acceptable(pd); if (acceptable) break;
-					}
-					if (acceptable) resultCollection.Add(pd);
-				}
-			}
-		}
+		    foreach (NextPerformance pd in initialCollection)
+		    {
+			    //if (pd.Parent != null && pd.Parent is MaintenanceCheck && ((MaintenanceCheck)pd.Parent).Name == "C02")
+			    //{
+			    //    pd.ToString();
+			    //}
+			    if (_filter.FilterTypeAnd)
+			    {
+				    bool acceptable = true;
+				    foreach (ICommonFilter filter in _filter)
+				    {
+					    acceptable = filter.Acceptable(pd); if (!acceptable) break;
+				    }
+				    if (acceptable) resultCollection.Add(pd);
+			    }
+			    else
+			    {
+				    bool acceptable = true;
+				    foreach (ICommonFilter filter in _filter)
+				    {
+					    if (filter.Values == null || filter.Values.Length == 0)
+						    continue;
+					    acceptable = filter.Acceptable(pd); if (acceptable) break;
+				    }
+				    if (acceptable) resultCollection.Add(pd);
+			    }
+		    }
+	    }
 		#endregion
 
 		#region private void CalculateMaintenanceDirectives(List<MaintenanceDirective> maintenanceDirectives, Dictionary<IBindedItem, List<IDirective>> bindedItemsDict)
 
 		private void CalculateMaintenanceDirectives(List<MaintenanceDirective> maintenanceDirectives, Dictionary<IBindedItem, List<IDirective>> bindedItemsDict)
-		{
-			foreach (var mpd in maintenanceDirectives)
-			{
+	    {
+		    foreach (var mpd in maintenanceDirectives)
+		    {
 
-				GlobalObjects.PerformanceCalculator.GetNextPerformance(mpd);
+			    GlobalObjects.PerformanceCalculator.GetNextPerformance(mpd);
 
-				if (bindedItemsDict.ContainsKey(mpd))
-				{
-					var bindedItems = bindedItemsDict[mpd];
-					foreach (var bindedItem in bindedItems)
-					{
-						if (bindedItem is ComponentDirective)
-						{
-							GlobalObjects.PerformanceCalculator.GetNextPerformance(bindedItem);
+			    if (bindedItemsDict.ContainsKey(mpd))
+			    {
+				    var bindedItems = bindedItemsDict[mpd];
+				    foreach (var bindedItem in bindedItems)
+				    {
+					    if (bindedItem is ComponentDirective)
+					    {
+						    GlobalObjects.PerformanceCalculator.GetNextPerformance(bindedItem);
 
-							var firstNextPerformance =
-								bindedItemsDict[mpd].SelectMany(t => t.NextPerformances).OrderBy(n => n.NextPerformanceDate).FirstOrDefault();
+						    var firstNextPerformance =
+							    bindedItemsDict[mpd].SelectMany(t => t.NextPerformances).OrderBy(n => n.NextPerformanceDate).FirstOrDefault();
 
-							if (firstNextPerformance == null)
-								continue;
-							mpd.BindedItemNextPerformance = firstNextPerformance;
-							mpd.BindedItemNextPerformanceSource = firstNextPerformance.NextPerformanceSource ?? Lifelength.Null;
-							mpd.BindedItemRemains = firstNextPerformance.Remains ?? Lifelength.Null;
-							mpd.BindedItemNextPerformanceDate = firstNextPerformance.NextPerformanceDate;
-							mpd.BindedItemCondition = firstNextPerformance.Condition ?? ConditionState.NotEstimated;
-						}
-					}
-				}
-			}
+						    if (firstNextPerformance == null)
+							    continue;
+						    mpd.BindedItemNextPerformance = firstNextPerformance;
+						    mpd.BindedItemNextPerformanceSource = firstNextPerformance.NextPerformanceSource ?? Lifelength.Null;
+						    mpd.BindedItemRemains = firstNextPerformance.Remains ?? Lifelength.Null;
+						    mpd.BindedItemNextPerformanceDate = firstNextPerformance.NextPerformanceDate;
+						    mpd.BindedItemCondition = firstNextPerformance.Condition ?? ConditionState.NotEstimated;
+					    }
+				    }
+			    }
+		    }
 
 
-		}
+	    }
 
 		#endregion
 
 		#region private void ForecastContextMenuClick(object sender, EventArgs e)
 
 		private void ForecastContextMenuClick(object sender, EventArgs e)
-		{
-			var form = new ForecastCustomsMTOP(CurrentAircraft, _currentForecast);
+	    {
+		    var form = new ForecastCustomsMTOP(CurrentAircraft, _currentForecast);
 
-			if (form.ShowDialog() == DialogResult.OK)
-				AnimatedThreadWorker.RunWorkerAsync();
-		}
+		    if (form.ShowDialog() == DialogResult.OK)
+			    AnimatedThreadWorker.RunWorkerAsync();
+	    }
 
-		#endregion
+	    #endregion
 
 		#endregion
 	}

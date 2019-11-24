@@ -1,4 +1,6 @@
-﻿namespace SmartCore.Queries
+﻿using EntityCore.DTO;
+
+namespace SmartCore.Queries
 {
 	public static class OrdersQueries
 	{

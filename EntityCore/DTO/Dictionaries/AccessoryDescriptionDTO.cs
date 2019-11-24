@@ -127,9 +127,6 @@ namespace EntityCore.DTO.Dictionaries
 		[Column("IsForbidden")]
 		public bool IsForbidden { get; set; }
 
-		[Column("EngineRef")]
-		public string EngineRef { get; set; }
-
 
 		[Include]
 		public ATAChapterDTO ATAChapter { get; set; }

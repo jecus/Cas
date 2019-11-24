@@ -260,15 +260,6 @@ namespace CAS.UI.UIControls.WorkPakage
                     continue;
 
                 string message;
-
-                if (row.ClosingItem.IsClosed)
-                {
-	                message = $"Cant close workpackage with alredy closer directive:  {row.ClosingItem}";
-	                MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
-		                MessageBoxButtons.OK, MessageBoxIcon.Error);
-					return false;
-                }
-
                 if (row.ClosingItem is Component)
                 {
                     TransferRecord tr = row.Record as TransferRecord;

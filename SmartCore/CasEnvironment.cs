@@ -13,6 +13,7 @@ using System.Threading;
 using CAS.UI.Helpers;
 using EntityCore.DTO.General;
 using EntityCore.DTO.Dictionaries;
+using EntityCore.Filter;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Hangar;
 using SmartCore.Entities.General.Store;

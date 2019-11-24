@@ -15,6 +15,7 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Filters;
+using Telerik.WinControls;
 using Telerik.WinControls.UI;
 using Filter = EntityCore.Filter.Filter;
 

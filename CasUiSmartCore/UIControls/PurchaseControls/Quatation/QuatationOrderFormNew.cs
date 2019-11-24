@@ -14,6 +14,7 @@ using EntityCore.DTO.General;
 using EntityCore.Filter;
 using MetroFramework.Forms;
 using SmartCore.Auxiliary;
+using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -21,6 +22,7 @@ using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Setting;
 using SmartCore.Filters;
 using SmartCore.Purchase;
+using SmartCore.Queries;
 
 namespace CAS.UI.UIControls.PurchaseControls.Initial
 {
@@ -127,7 +129,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				{
 					foreach (var addedInitialOrderRecord in _addedQuatationOrderRecords)
 					{
-						addedInitialOrderRecord.ParentPackage = _order;
 						var product = products.FirstOrDefault(i => i.ItemId == addedInitialOrderRecord.PackageItemId);
 
 						foreach (var relation in product.SupplierRelations)
@@ -184,6 +185,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			comboBoxPriority.Items.Clear();
 			comboBoxPriority.Items.AddRange(Priority.Items.ToArray());
+
+			comboBoxReason.Items.Clear();
+			comboBoxReason.Items.AddRange(InitialReason.Items.ToArray());
 
 			foreach (var control in DocumentControls)
 				control.Added += DocumentControl1_Added;
@@ -421,6 +425,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			var product = record.Product;
 
 			comboBoxMeasure.SelectedItem = product.Measure;
+			comboBoxReason.SelectedItem = record.InitialReason;
 			numericUpDownQuantity.Value = (decimal)record.Quantity;
 			checkBoxNew.Checked = (record.CostCondition & ComponentStatus.New) != 0;
 			checkBoxOverhaul.Checked = (record.CostCondition & ComponentStatus.Overhaul) != 0;
@@ -477,7 +482,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				record.DestinationObjectType = SmartCoreType.Unknown;
 				record.DestinationObjectId = -1;
 			}
-			
+			record.InitialReason = comboBoxReason.SelectedItem as InitialReason ?? InitialReason.Unknown;
+
 			listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
 
 			listViewInitialItems.radGridView1.ClearSelection();
@@ -492,6 +498,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		{
 			button1.Enabled = button2.Enabled = false;
 			comboBoxMeasure.SelectedItem = null;
+			comboBoxReason.SelectedItem = null;
 			metroTextBox1.Text = "";
 			numericUpDownQuantity.Value = 0;
 			checkBoxNew.Checked = false;
@@ -689,9 +696,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				.Cast<RequestForQuotationRecord>().SelectMany(i => i.SupplierPrice.Select(p => p.Supplier)).Distinct();
 
 			   var form = new QualificationNumberForm(_order,suppliers);
-			   if (form.ShowDialog() == DialogResult.OK)
-				   listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
+			form.ShowDialog();
 		}
-	
 	}
 }
