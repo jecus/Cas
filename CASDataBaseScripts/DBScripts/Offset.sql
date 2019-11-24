@@ -33,6 +33,7 @@ begin
 		exec('Update '+@table+' set '+@column+' = Convert(datetime2(0), '+@column+') '+@cmd+'')
 	Else exec (@cmd)
 	
+
 	fetch from cols into @table, @column, @type, @default
 end
 close cols
