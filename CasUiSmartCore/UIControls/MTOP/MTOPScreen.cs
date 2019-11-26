@@ -10,6 +10,7 @@ using CASTerms;
 using EntityCore.DTO.General;
 using EntityCore.Filter;
 using SmartCore.Calculations;
+using SmartCore.Calculations.MTOP.Interfaces;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -29,16 +30,18 @@ namespace CAS.UI.UIControls.MTOP
 		private List<MTOPCheck> _maintenanceChecks = new List<MTOPCheck>();
 		private List<MTOPCheck> _maintenanceChecksDeleted = new List<MTOPCheck>();
 		private List<MTOPCheck> _maintenanceZeroChecks = new List<MTOPCheck>();
-		private CommonCollection<MaintenanceDirective> _initialMaintenanceDirectives = new CommonCollection<MaintenanceDirective>();
-		private CommonCollection<MaintenanceDirective> _initialZeroMaintenanceDirectives = new CommonCollection<MaintenanceDirective>();
-		private CommonCollection<MaintenanceDirective> _resultMaintenanceDirectives = new CommonCollection<MaintenanceDirective>();
-		private CommonCollection<MaintenanceDirective> _resultZeroMaintenanceDirectives = new CommonCollection<MaintenanceDirective>();
+		private CommonCollection<IMtopCalc> _initialMaintenanceDirectives = new CommonCollection<IMtopCalc>();
+		private CommonCollection<IMtopCalc> _initialZeroMaintenanceDirectives = new CommonCollection<IMtopCalc>();
+		private CommonCollection<IMtopCalc> _resultMaintenanceDirectives = new CommonCollection<IMtopCalc>();
+		private CommonCollection<IMtopCalc> _resultZeroMaintenanceDirectives = new CommonCollection<IMtopCalc>();
 		private Dictionary<int, Lifelength> _groupLifelengths = new Dictionary<int, Lifelength>();
 		private Dictionary<int, Lifelength> _groupLifelengthsForZeroCheck = new Dictionary<int, Lifelength>();
 		private AverageUtilization _averageUtilization;
 
 		private CommonFilterCollection _filter = new CommonFilterCollection(typeof(IMaintenanceDirectiveFilterParams));
-		private CommonFilterCollection _filterZero = new CommonFilterCollection(typeof(IMaintenanceDirectiveFilterParams));
+
+		private CommonFilterCollection _filterZero =
+			new CommonFilterCollection(typeof(IMaintenanceDirectiveFilterParams));
 
 		#endregion
 
@@ -80,9 +83,12 @@ namespace CAS.UI.UIControls.MTOP
 
 			mtopSummary1.UpdateControl(_maintenanceChecks, _groupLifelengths, _groupLifelengthsForZeroCheck);
 			mtopGeneralControl.UpdateControl(CurrentAircraft, _maintenanceChecks, AnimatedThreadWorker);
-			mtopPerformanceControl1.UpdateControl(_groupLifelengths, _resultMaintenanceDirectives, _maintenanceChecks.Where(i => !i.IsZeroPhase).ToList());
-			mtopZeroPhasePerformanceControl.UpdateControl(_groupLifelengthsForZeroCheck, _resultZeroMaintenanceDirectives, _maintenanceZeroChecks);
-			mtopCompliance1.UpdateControl(_maintenanceChecks, _maintenanceChecksDeleted, CurrentAircraft, _averageUtilization);
+			mtopPerformanceControl1.UpdateControl(_groupLifelengths, _resultMaintenanceDirectives,
+				_maintenanceChecks.Where(i => !i.IsZeroPhase).ToList());
+			mtopZeroPhasePerformanceControl.UpdateControl(_groupLifelengthsForZeroCheck,
+				_resultZeroMaintenanceDirectives, _maintenanceZeroChecks);
+			mtopCompliance1.UpdateControl(_maintenanceChecks, _maintenanceChecksDeleted, CurrentAircraft,
+				_averageUtilization);
 		}
 
 		protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
@@ -100,15 +106,24 @@ namespace CAS.UI.UIControls.MTOP
 
 			try
 			{
-				var checks = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<MTOPCheckDTO, MTOPCheck>(new Filter("ParentAircraftId", CurrentAircraft.ItemId), true, true);
+				var checks =
+					GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<MTOPCheckDTO, MTOPCheck>(
+						new Filter("ParentAircraftId", CurrentAircraft.ItemId), true, true);
 
 				_maintenanceChecks.AddRange(checks.Where(i => !i.IsDeleted));
 				_maintenanceChecksDeleted.AddRange(checks.Where(i => i.IsDeleted));
 
 				_initialMaintenanceDirectives.AddRange(GlobalObjects.MaintenanceCore.GetMaintenanceDirectives(CurrentAircraft));
+				_initialMaintenanceDirectives.AddRange(GlobalObjects.DirectiveCore.GetDirectives(CurrentAircraft, DirectiveType.All).ToList());
+
+				var baseComponents = GlobalObjects.ComponentCore.GetAicraftBaseComponents(CurrentAircraft.ItemId);
+				var components = GlobalObjects.ComponentCore.GetComponents(baseComponents.ToList());
+				_initialMaintenanceDirectives.AddRange(components.SelectMany(i => i.ComponentDirectives));
 
 				var bindedItemsDict = GlobalObjects.BindedItemsCore.GetBindedItemsFor(CurrentAircraft.ItemId,
-					_initialMaintenanceDirectives.Where(m => m.WorkItemsRelationType == WorkItemsRelationType.CalculationDepend));
+					_initialMaintenanceDirectives.Where(m => m is MaintenanceDirective)
+						.Cast<MaintenanceDirective>().Where(m =>
+							m.WorkItemsRelationType == WorkItemsRelationType.CalculationDepend));
 
 				CalculateMaintenanceDirectives(_initialMaintenanceDirectives, bindedItemsDict);
 
@@ -146,38 +161,55 @@ namespace CAS.UI.UIControls.MTOP
 			{
 				//Берем утилизацию с Frame
 				var frame = GlobalObjects.CasEnvironment.BaseComponents.FirstOrDefault(i =>
-					i.ParentAircraftId == CurrentAircraft.ItemId && Equals(i.BaseComponentType, BaseComponentType.Frame));
+					i.ParentAircraftId == CurrentAircraft.ItemId &&
+					Equals(i.BaseComponentType, BaseComponentType.Frame));
 				_averageUtilization = frame.AverageUtilization;
 
-				var lastCompliance = _maintenanceChecks.Where(i => !i.IsZeroPhase).SelectMany(i => i.PerformanceRecords).OrderByDescending(i => i.RecordDate).FirstOrDefault();
+				var lastCompliance = _maintenanceChecks.Where(i => !i.IsZeroPhase).SelectMany(i => i.PerformanceRecords)
+					.OrderByDescending(i => i.RecordDate).FirstOrDefault();
 
 				GlobalObjects.MTOPCalculator.CalculateMtopChecks(_maintenanceChecks, _averageUtilization);
 
-				_groupLifelengths = GlobalObjects.MTOPCalculator.CalculateGroupNew(_maintenanceChecks.Where(i => !i.Thresh.IsNullOrZero() && !i.IsZeroPhase).ToList());
+				_groupLifelengths = GlobalObjects.MTOPCalculator.CalculateGroupNew(_maintenanceChecks
+					.Where(i => !i.Thresh.IsNullOrZero() && !i.IsZeroPhase).ToList());
 
-				GlobalObjects.MTOPCalculator.CalculateNextPerformance(_maintenanceChecks.Where(i => !i.IsZeroPhase).ToList(), frame.StartDate, _groupLifelengths, CurrentAircraft, _averageUtilization, lastCompliance);
-				GlobalObjects.MTOPCalculator.CalculateNextPerformance(_maintenanceChecks.Where(i => !i.IsZeroPhase).ToList(), frame.StartDate, _groupLifelengths, CurrentAircraft, _averageUtilization, lastCompliance,true);
-				GlobalObjects.MTOPCalculator.CalculatePhase(_initialMaintenanceDirectives, _maintenanceChecks.Where(i => !i.Thresh.IsNullOrZero() && !i.IsZeroPhase).ToList(), _averageUtilization);
-			
+				GlobalObjects.MTOPCalculator.CalculateNextPerformance(
+					_maintenanceChecks.Where(i => !i.IsZeroPhase).ToList(), frame.StartDate, _groupLifelengths,
+					CurrentAircraft, _averageUtilization, lastCompliance);
+				GlobalObjects.MTOPCalculator.CalculateNextPerformance(
+					_maintenanceChecks.Where(i => !i.IsZeroPhase).ToList(), frame.StartDate, _groupLifelengths,
+					CurrentAircraft, _averageUtilization, lastCompliance, true);
+				GlobalObjects.MTOPCalculator.CalculatePhase(_initialMaintenanceDirectives,
+					_maintenanceChecks.Where(i => !i.Thresh.IsNullOrZero() && !i.IsZeroPhase).ToList(),
+					_averageUtilization);
+
 
 
 				_maintenanceZeroChecks = _maintenanceChecks.Where(i => i.IsZeroPhase).ToList();
 
-				var lowerZeroCheck = _maintenanceZeroChecks.Where(i => !i.Thresh.IsNullOrZero()).OrderBy(i => i.Thresh).FirstOrDefault();
+				var lowerZeroCheck = _maintenanceZeroChecks.Where(i => !i.Thresh.IsNullOrZero()).OrderBy(i => i.Thresh)
+					.FirstOrDefault();
 				if (lowerZeroCheck != null)
 				{
-					lastCompliance = _maintenanceChecks.Where(i => i.IsZeroPhase).SelectMany(i => i.PerformanceRecords).OrderByDescending(i => i.RecordDate).FirstOrDefault();
+					lastCompliance = _maintenanceChecks.Where(i => i.IsZeroPhase).SelectMany(i => i.PerformanceRecords)
+						.OrderByDescending(i => i.RecordDate).FirstOrDefault();
 
 					GlobalObjects.MTOPCalculator.CalculateMtopChecks(_maintenanceZeroChecks, _averageUtilization);
 
-					_groupLifelengthsForZeroCheck = GlobalObjects.MTOPCalculator.CalculateGroupNew(_maintenanceZeroChecks);
+					_groupLifelengthsForZeroCheck =
+						GlobalObjects.MTOPCalculator.CalculateGroupNew(_maintenanceZeroChecks);
 
-					GlobalObjects.MTOPCalculator.CalculateNextPerformance(_maintenanceZeroChecks, frame.StartDate, _groupLifelengthsForZeroCheck, CurrentAircraft, _averageUtilization, lastCompliance);
-					GlobalObjects.MTOPCalculator.CalculateNextPerformance(_maintenanceZeroChecks, frame.StartDate, _groupLifelengthsForZeroCheck, CurrentAircraft, _averageUtilization, lastCompliance,true);
+					GlobalObjects.MTOPCalculator.CalculateNextPerformance(_maintenanceZeroChecks, frame.StartDate,
+						_groupLifelengthsForZeroCheck, CurrentAircraft, _averageUtilization, lastCompliance);
+					GlobalObjects.MTOPCalculator.CalculateNextPerformance(_maintenanceZeroChecks, frame.StartDate,
+						_groupLifelengthsForZeroCheck, CurrentAircraft, _averageUtilization, lastCompliance, true);
 
-					_initialZeroMaintenanceDirectives.AddRange(_initialMaintenanceDirectives.Where(i => i.MTOPPhase?.FirstPhase == 0).ToArray());
+					_initialZeroMaintenanceDirectives.AddRange(_initialMaintenanceDirectives
+						.Where(i => i.MTOPPhase?.FirstPhase == 0).ToArray());
 
-					GlobalObjects.MTOPCalculator.CalculatePhase(_initialZeroMaintenanceDirectives, _maintenanceChecks.Where(i => !i.Thresh.IsNullOrZero() && i.IsZeroPhase).ToList(), _averageUtilization, true);
+					GlobalObjects.MTOPCalculator.CalculatePhase(_initialZeroMaintenanceDirectives,
+						_maintenanceChecks.Where(i => !i.Thresh.IsNullOrZero() && i.IsZeroPhase).ToList(),
+						_averageUtilization, true);
 				}
 
 				foreach (var d in _initialZeroMaintenanceDirectives)
@@ -200,7 +232,7 @@ namespace CAS.UI.UIControls.MTOP
 				//		performance.Group = group++;
 				//	}
 
-					
+
 				//	value = performance.PerformanceSource;
 				//}
 
@@ -370,6 +402,7 @@ namespace CAS.UI.UIControls.MTOP
 				e.Cancel = true;
 				return;
 			}
+
 			#endregion
 
 			AnimatedThreadWorker.ReportProgress(100, "Complete");
@@ -383,7 +416,8 @@ namespace CAS.UI.UIControls.MTOP
 		///</summary>
 		///<param name="initialCollection"></param>
 		///<param name="resultCollection"></param>
-		private void FilterItems(IEnumerable<MaintenanceDirective> initialCollection, ICommonCollection<MaintenanceDirective> resultCollection)
+		private void FilterItems(IEnumerable<IMtopCalc> initialCollection,
+			ICommonCollection<IMtopCalc> resultCollection)
 		{
 			if (_filter == null || _filter.All(i => i.Values.Length == 0))
 			{
@@ -401,8 +435,10 @@ namespace CAS.UI.UIControls.MTOP
 					bool acceptable = true;
 					foreach (ICommonFilter filter in _filter)
 					{
-						acceptable = filter.Acceptable(pd); if (!acceptable) break;
+						acceptable = filter.Acceptable((BaseEntityObject) pd);
+						if (!acceptable) break;
 					}
+
 					if (acceptable) resultCollection.Add(pd);
 				}
 				else
@@ -412,12 +448,15 @@ namespace CAS.UI.UIControls.MTOP
 					{
 						if (filter.Values == null || filter.Values.Length == 0)
 							continue;
-						acceptable = filter.Acceptable(pd); if (acceptable) break;
+						acceptable = filter.Acceptable((BaseEntityObject) pd);
+						if (acceptable) break;
 					}
+
 					if (acceptable) resultCollection.Add(pd);
 				}
 			}
 		}
+
 		#endregion
 
 		#region private void FilterItems(IEnumerable<FlightTripRecord> initialCollection, ICommonCollection<FlightTripRecord> resultCollection)
@@ -426,7 +465,8 @@ namespace CAS.UI.UIControls.MTOP
 		///</summary>
 		///<param name="initialCollection"></param>
 		///<param name="resultCollection"></param>
-		private void FilterZeroItems(IEnumerable<MaintenanceDirective> initialCollection, ICommonCollection<MaintenanceDirective> resultCollection)
+		private void FilterZeroItems(IEnumerable<IMtopCalc> initialCollection,
+			ICommonCollection<IMtopCalc> resultCollection)
 		{
 			if (_filterZero == null || _filterZero.All(i => i.Values.Length == 0))
 			{
@@ -444,8 +484,10 @@ namespace CAS.UI.UIControls.MTOP
 					bool acceptable = true;
 					foreach (ICommonFilter filter in _filterZero)
 					{
-						acceptable = filter.Acceptable(pd); if (!acceptable) break;
+						acceptable = filter.Acceptable((BaseEntityObject) pd);
+						if (!acceptable) break;
 					}
+
 					if (acceptable) resultCollection.Add(pd);
 				}
 				else
@@ -455,50 +497,59 @@ namespace CAS.UI.UIControls.MTOP
 					{
 						if (filter.Values == null || filter.Values.Length == 0)
 							continue;
-						acceptable = filter.Acceptable(pd); if (acceptable) break;
+						acceptable = filter.Acceptable((BaseEntityObject) pd);
+						if (acceptable) break;
 					}
+
 					if (acceptable) resultCollection.Add(pd);
 				}
 			}
 		}
+
 		#endregion
 
 		#region public void CalculateMaintenanceDirectives(CommonCollection<MaintenanceDirective> maintenanceDirectives, Dictionary<IBindedItem, List<IDirective>> bindedItemsDict)
 
-		public void CalculateMaintenanceDirectives(CommonCollection<MaintenanceDirective> maintenanceDirectives, Dictionary<IBindedItem, List<IDirective>> bindedItemsDict)
+		private void CalculateMaintenanceDirectives(IEnumerable<IMtopCalc> directives,
+			Dictionary<IBindedItem, List<IDirective>> bindedItemsDict)
 		{
-			foreach (var mpd in maintenanceDirectives)
+			foreach (var directive in directives)
 			{
-				
-				GlobalObjects.PerformanceCalculator.GetNextPerformance(mpd);
+				GlobalObjects.PerformanceCalculator.GetNextPerformance(directive);
 
-				if (bindedItemsDict.ContainsKey(mpd))
+				if (directive is MaintenanceDirective)
 				{
-					var bindedItems = bindedItemsDict[mpd];
-					foreach (var bindedItem in bindedItems)
+					var mpd = directive as MaintenanceDirective;
+					if (bindedItemsDict.ContainsKey(mpd))
 					{
-						if (bindedItem is ComponentDirective)
+						var bindedItems = bindedItemsDict[mpd];
+						foreach (var bindedItem in bindedItems)
 						{
-							GlobalObjects.PerformanceCalculator.GetNextPerformance(bindedItem);
+							if (bindedItem is ComponentDirective)
+							{
+								GlobalObjects.PerformanceCalculator.GetNextPerformance(bindedItem);
 
-							var firstNextPerformance =
-								bindedItemsDict[mpd].SelectMany(t => t.NextPerformances).OrderBy(n => n.NextPerformanceDate).FirstOrDefault();
+								var firstNextPerformance =
+									bindedItemsDict[mpd].SelectMany(t => t.NextPerformances)
+										.OrderBy(n => n.NextPerformanceDate).FirstOrDefault();
 
-							if (firstNextPerformance == null)
-								continue;
-							mpd.BindedItemNextPerformance = firstNextPerformance;
-							mpd.BindedItemNextPerformanceSource = firstNextPerformance.NextPerformanceSource ?? Lifelength.Null;
-							mpd.BindedItemRemains = firstNextPerformance.Remains ?? Lifelength.Null;
-							mpd.BindedItemNextPerformanceDate = firstNextPerformance.NextPerformanceDate;
-							mpd.BindedItemCondition = firstNextPerformance.Condition ?? ConditionState.NotEstimated;
+								if (firstNextPerformance == null)
+									continue;
+								mpd.BindedItemNextPerformance = firstNextPerformance;
+								mpd.BindedItemNextPerformanceSource =
+									firstNextPerformance.NextPerformanceSource ?? Lifelength.Null;
+								mpd.BindedItemRemains = firstNextPerformance.Remains ?? Lifelength.Null;
+								mpd.BindedItemNextPerformanceDate = firstNextPerformance.NextPerformanceDate;
+								mpd.BindedItemCondition = firstNextPerformance.Condition ?? ConditionState.NotEstimated;
+							}
 						}
 					}
 				}
 			}
-
-
 		}
 
-		#endregion
+
 	}
+
+	#endregion
 }

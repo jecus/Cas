@@ -5,12 +5,16 @@ using CAS.UI.Management;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Calculations;
+using SmartCore.Calculations.MTOP.Interfaces;
+using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General.Accessory;
+using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.MTOP;
 
 namespace CAS.UI.UIControls.MTOP
 {
-	public partial class MTOPDirectiveListView : BaseGridViewControl<MaintenanceDirective>
+	public partial class MTOPDirectiveListView : BaseGridViewControl<IMtopCalc>
 	{
 		private Dictionary<int, Lifelength> _groupLifelengths;
 		private readonly List<MTOPCheck> _maintenanceChecks;
@@ -27,7 +31,7 @@ namespace CAS.UI.UIControls.MTOP
 		public MTOPDirectiveListView(Dictionary<int, Lifelength> groupLifelengths, List<MTOPCheck> maintenanceChecks)
 		{
 			InitializeComponent();
-
+			
 			_groupLifelengths = groupLifelengths;
 			_maintenanceChecks = maintenanceChecks;
 			_isZeroPhase = maintenanceChecks.All(i => i.IsZeroPhase);
@@ -47,12 +51,22 @@ namespace CAS.UI.UIControls.MTOP
 
 		#endregion
 
+		#region protected override SetGroupsToItems(int columnIndex)
+
+		protected override void GroupingItems()
+		{
+			Grouping("Type");
+		}
+
+		#endregion
+
 		#region protected override void SetHeaders()
 
 		protected override void SetHeaders()
 		{
 			if (_groupLifelengths == null )
 				return;
+			AddColumn("Type", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Task Card №", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Thresh", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Repeat", (int)(radGridView1.Width * 0.16f));
@@ -95,7 +109,7 @@ namespace CAS.UI.UIControls.MTOP
 
 		#region protected override ListViewItem.ListViewSubItem[] GetListViewSubItems(MTOPCheck item)
 
-		protected override List<CustomCell> GetListViewSubItems(MaintenanceDirective item)
+		protected override List<CustomCell> GetListViewSubItems(IMtopCalc item)
 		{
 			var subItems = new List<CustomCell>();
 
@@ -104,13 +118,29 @@ namespace CAS.UI.UIControls.MTOP
 				phaseString = item.MTOPPhase.ToString();
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
-			subItems.Add(CreateRow(item.TaskCardNumber, item.TaskCardNumber));
+			var title = "";
+			if (item is MaintenanceDirective)
+			{
+				title = (item as MaintenanceDirective).Title;
+			}
+			if (item is Directive)
+			{
+				var d = (item as Directive);
+				if(d.DirectiveType == DirectiveType.AirworthenessDirectives)
+					title = d.Title;
+				else if (d.DirectiveType == DirectiveType.SB)
+					title = d.ServiceBulletinNo;
+				else if (d.DirectiveType == DirectiveType.EngineeringOrders)
+					title = d.EngineeringOrders;
+			}
+			if (item is ComponentDirective)
+			{
+				title = (item as ComponentDirective).Title;
+			}
 
+			subItems.Add(CreateRow(item.SmartCoreObjectType.ToString(), item.SmartCoreObjectType));
+			subItems.Add(CreateRow(title, title));
 			subItems.Add(CreateRow(item.Threshold.FirstPerformanceSinceNew.ToRepeatIntervalsFormat(), item.Threshold.FirstPerformanceSinceNew ));
-			
-			//subItem = new ListViewItem.ListViewSubItem { Text = item.PhaseThresh.ToRepeatIntervalsFormat(), Tag = item.PhaseThresh };
-			//subItems.Add(subItem);
-
 			subItems.Add(CreateRow(item.Threshold.RepeatInterval.ToRepeatIntervalsFormat(), item.Threshold.RepeatInterval ));
 			subItems.Add(CreateRow(phaseString, item.MTOPPhase ));
 			
@@ -126,18 +156,6 @@ namespace CAS.UI.UIControls.MTOP
 
 				if (item.MTOPPhase != null)
 				{
-					//if (lifelength.Key == item.MTOPPhase.FirstPhase)
-					//	subItem = new ListViewItem.ListViewSubItem {Text = "x", Tag = ""};
-					//else if (lifelength.Key == item.MTOPPhase.SecondPhase)
-					//{
-					//	temp = item.MTOPPhase.SecondPhase + item.MTOPPhase.Difference;
-					//	subItem = new ListViewItem.ListViewSubItem { Text = "x", Tag = "" };
-					//}
-					//else if (lifelength.Key == temp)
-					//{
-					//	temp += item.MTOPPhase.Difference;
-					//	subItem = new ListViewItem.ListViewSubItem { Text = "x", Tag = "" };
-					//}
 					if (item.MTOPPhase.Difference > 0 && lifelength.Key % item.MTOPPhase.Difference == 0)
 						subItems.Add(CreateRow("x", ""));
 					else subItems.Add(CreateRow("", "" ));
@@ -151,28 +169,6 @@ namespace CAS.UI.UIControls.MTOP
 		}
 
 		#endregion
-
-		//protected override void SetGroupsToItems(int columnIndex)
-		//{
-		//	itemsListView.Groups.Clear();
-
-		//	if (columnIndex == 3)
-		//	{
-		//		foreach (ListViewItem item in ListViewItemList.OrderBy(i => ((MaintenanceDirective)i.Tag).MTOPPhase?.FirstPhase ?? int.MaxValue))
-		//		{
-		//			string temp;
-
-		//			if (item.Tag is MaintenanceDirective)
-		//			{
-		//				var directive = item.Tag as MaintenanceDirective;
-
-		//				temp = directive.MTOPPhase?.ToString() ?? "1-0-0";
-		//				itemsListView.Groups.Add(temp, temp);
-		//				item.Group = itemsListView.Groups[temp];
-		//			}
-		//		}
-		//	}
-		//}
 
 		#region protected override void SortItems(int columnIndex)
 
@@ -205,8 +201,22 @@ namespace CAS.UI.UIControls.MTOP
 		{
 			if (SelectedItem != null)
 			{
-				var dp = ScreenAndFormManager.GetMaintenanceDirectiveScreen(SelectedItem);
-				e.SetParameters(dp);
+				if (SelectedItem is MaintenanceDirective)
+				{
+					var dp = ScreenAndFormManager.GetMaintenanceDirectiveScreen(SelectedItem as MaintenanceDirective);
+					e.SetParameters(dp);
+				}
+				if (SelectedItem is Directive)
+				{
+					var dp = ScreenAndFormManager.GetDirectiveScreen(SelectedItem as Directive);
+					e.SetParameters(dp);
+				}
+				if (SelectedItem is ComponentDirective)
+				{
+					var dp = ScreenAndFormManager.GetComponentDirectiveScreen(SelectedItem as ComponentDirective);
+					e.SetParameters(dp);
+				}
+				else  e.Cancel = true;
 			}
 		}
 
