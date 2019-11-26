@@ -110,10 +110,11 @@ namespace SmartCore.Entities.Collections
         /// Добавляет массив агрегатов в коллекцию
         /// </summary>
         /// <param name="objects"></param>
-        public void AddRange(IEnumerable<T> objects)
+        public void AddRange(IEnumerable<T> objects, bool ignoreSort = false)
         {
             Items.AddRange(objects);
-            Items.Sort();
+			if(!ignoreSort)
+				Items.Sort();
 
             foreach (T o in objects)
                 o.PropertyChanged += OnItemPropertyChanged;

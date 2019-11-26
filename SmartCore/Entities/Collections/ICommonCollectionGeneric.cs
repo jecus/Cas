@@ -43,7 +43,7 @@ namespace SmartCore.Entities.Collections
         /// Добавляет массив агрегатов в коллекцию
         /// </summary>
         /// <param name="objects"></param>
-        void AddRange(IEnumerable<T> objects);
+        void AddRange(IEnumerable<T> objects, bool ignoreSort = false);
         #endregion
 
         #region bool CompareAndAdd(T addedObject)
