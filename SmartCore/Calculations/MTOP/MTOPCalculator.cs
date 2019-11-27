@@ -732,20 +732,7 @@ namespace SmartCore.Calculations.MTOP
 					if(directive.MTOPPhase.Difference == 0)
 						break;
 					NextPerformance record;
-					if (isZeroPhase)
-					{
-						//record = checksForPeriod.FirstOrDefault(i => i.PerformanceSource.Days.Value >= tempHours.Days);
-						record = checksForPeriod.LastOrDefault(i => i.PerformanceSource.Days.Value <= tempHours.Days);
-						//if (record == null) break;
-						if (record == null)
-						{
-							if (checksForPeriod.All(i => i.PerformanceSource.Days > tempHours.Days))
-								record = checksForPeriod.FirstOrDefault();
-							else break;
-						}
-					}
-					else
-					{
+
 						record = checksForPeriod.FirstOrDefault(i => i.Group == group);
 
 						if (record == null)
@@ -765,7 +752,7 @@ namespace SmartCore.Calculations.MTOP
 						record = checksForPeriod.LastOrDefault(i => i.PerformanceSource.Days.Value <= tempHours.Days);
 						if(record == null)
 							break;
-					}
+					
 
 
 					group = record.Group;
