@@ -610,6 +610,14 @@ namespace SmartCore.Calculations
                 stringBuilder.AppendLine(PerformanceSource.ToHoursMinutesAndCyclesStrings("FH", "FC"));
             return stringBuilder.ToString();
         }
-        #endregion  
-    }
+		#endregion
+
+		#region public override int CompareTo(object y)
+		public override int CompareTo(object y)
+		{
+			if (y is NextPerformance) return (Parent.ItemId.CompareTo(((NextPerformance)y).Parent.ItemId) & Parent.SmartCoreObjectType.ItemId.CompareTo(((NextPerformance)y).SmartCoreObjectType.ItemId));
+			return 0;
+		}
+		#endregion
+	}
 }
