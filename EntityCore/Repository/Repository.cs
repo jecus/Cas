@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
-using EFCore.BulkExtensions;
+//using EFCore.BulkExtensions;
 using EntityCore.Attributte;
 using EntityCore.DTO;
 using EntityCore.DTO.General;
@@ -144,7 +144,8 @@ namespace EntityCore.Repository
 			if (!batchSize.HasValue)
 				batchSize = 250;
 
-			await _context.BulkInsertAsync(entity.ToList(), config => { config.BatchSize = batchSize.Value; });
+			await _context.BulkInsertAsync(entity.ToList(), config => { config.BatchSize = batchSize.Value;
+			});
 		}
 
 		public async Task BulkUpdateAsync(IEnumerable<T> entity, int? batchSize = null)
