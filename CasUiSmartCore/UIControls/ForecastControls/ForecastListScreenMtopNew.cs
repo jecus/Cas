@@ -72,7 +72,6 @@ namespace CAS.UI.UIControls.ForecastControls
 		private ToolStripMenuItem itemPrintReportEquipmentAndMaterials;
 		private ToolStripMenuItem _itemPrintComponents;
 
-		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 		private RadMenuItem _createWorkPakageToolStripMenuItem;
 		private RadMenuItem _toolStripMenuItemHighlight;
@@ -187,7 +186,6 @@ namespace CAS.UI.UIControls.ForecastControls
 				_toolStripMenuItemHighlight.Dispose();
 			}
 			if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
-			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
 			
 			if (_toolStripMenuItemsWorkPackages != null)
 			{
@@ -745,7 +743,6 @@ namespace CAS.UI.UIControls.ForecastControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
 			_createWorkPakageToolStripMenuItem = new RadMenuItem();
 			_toolStripMenuItemsWorkPackages = new RadMenuItem();
 			_toolStripMenuItemShowTaskCard = new RadMenuItem();
@@ -753,11 +750,6 @@ namespace CAS.UI.UIControls.ForecastControls
 			_toolStripMenuItemCloseDirectives = new RadMenuItem();
 			_toolStripMenuItemHighlight = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
 			// 
 			// toolStripMenuItemHighlight
 			// 
@@ -784,9 +776,7 @@ namespace CAS.UI.UIControls.ForecastControls
 			// 
 			_toolStripMenuItemCloseDirectives.Text = "Close Directives";
 			_toolStripMenuItemCloseDirectives.Click += ToolStripMenuItemCloseDirectives;
-
-
-			_contextMenuStrip.Items.Clear();
+			
 			_toolStripMenuItemsWorkPackages.Items.Clear();
 			_toolStripMenuItemHighlight.Items.Clear();
 
@@ -799,19 +789,6 @@ namespace CAS.UI.UIControls.ForecastControls
 				item.Tag = highlight;
 				_toolStripMenuItemHighlight.Items.Add(item);
 			}
-
-			_contextMenuStrip.Items.AddRange(_toolStripMenuItemShowTaskCard,
-													new RadMenuSeparatorItem(),
-													_toolStripMenuItemHighlight,
-													new RadMenuSeparatorItem(),
-													_toolStripMenuItemTenPercent,
-													new RadMenuSeparatorItem(),
-													_toolStripMenuItemCloseDirectives,
-													new RadMenuSeparatorItem(),
-													_createWorkPakageToolStripMenuItem,
-													_toolStripMenuItemsWorkPackages,
-													_toolStripSeparator1
-												);
 		}
 
 		#endregion
@@ -881,13 +858,23 @@ namespace CAS.UI.UIControls.ForecastControls
 		{
 			_directivesViewer = new ForecastMTOPListView
 			{
-										CustomMenu = _contextMenuStrip,
-										TabIndex = 2,
-										Location = new Point(panel1.Left, panel1.Top),
-										Dock = DockStyle.Fill
-									};
+				TabIndex = 2,
+				Location = new Point(panel1.Left, panel1.Top),
+				Dock = DockStyle.Fill
+			};
 			//события 
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+
+			_directivesViewer.AddMenuItems(_toolStripMenuItemShowTaskCard,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemHighlight,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemTenPercent,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemCloseDirectives,
+				new RadMenuSeparatorItem(),
+				_createWorkPakageToolStripMenuItem,
+				_toolStripMenuItemsWorkPackages);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{

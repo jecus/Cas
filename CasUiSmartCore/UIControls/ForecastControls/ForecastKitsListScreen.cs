@@ -50,7 +50,6 @@ namespace CAS.UI.UIControls.ForecastControls
 		private ToolStripMenuItem itemPrintReportSchedule;
 		private ToolStripMenuItem itemPrintReportMaintenancePlan;
 
-		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemOpen;
 		private RadMenuItem _toolStripMenuShowTaskCard;
 		private RadMenuItem _toolStripMenuShowKits;
@@ -127,8 +126,6 @@ namespace CAS.UI.UIControls.ForecastControls
 
 			if (_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
 			
-			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
-
 			if (_directivesViewer != null) _directivesViewer.Dispose();
 
 			Dispose(true);
@@ -314,16 +311,10 @@ namespace CAS.UI.UIControls.ForecastControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemOpen = new RadMenuItem();
 			_toolStripMenuShowTaskCard = new RadMenuItem();
 			_toolStripMenuShowKits = new RadMenuItem();
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
-
+			
 			_toolStripMenuItemOpen.Text = "Open Kit Task";
 			_toolStripMenuItemOpen.Click += ToolStripMenuItemOpenClick;
 			// 
@@ -336,15 +327,6 @@ namespace CAS.UI.UIControls.ForecastControls
 			// 
 			_toolStripMenuShowKits.Text = "Show Kits";
 			_toolStripMenuShowKits.Click += ToolStripMenuShowKits_Click;
-			
-			_contextMenuStrip.Items.Clear();
-			
-			_contextMenuStrip.Items.AddRange(
-				_toolStripMenuShowTaskCard,
-				_toolStripMenuShowKits,
-				new RadMenuSeparatorItem(),
-				_toolStripMenuItemOpen
-			);
 		}
 
 		#endregion
@@ -436,13 +418,17 @@ namespace CAS.UI.UIControls.ForecastControls
 		{
 			_directivesViewer = new ForecastKitsListView
 									{
-										CustomMenu = _contextMenuStrip,
 										TabIndex = 2,
 										Location = new Point(panel1.Left, panel1.Top),
 										Dock = DockStyle.Fill
 									};
 			//события 
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+
+			_directivesViewer.AddMenuItems(_toolStripMenuShowTaskCard,
+				_toolStripMenuShowKits,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemOpen);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{

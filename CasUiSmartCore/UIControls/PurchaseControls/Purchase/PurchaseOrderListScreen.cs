@@ -44,10 +44,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private PurchaseOrderListView _directivesViewer;
 
-		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemPublish;
 		private RadMenuItem _toolStripMenuItemMoveTo;
-		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuItem _toolStripMenuItemReport;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 		private Filter filter;
@@ -121,9 +119,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_purchaseArray = null;
 
 			if (_toolStripMenuItemMoveTo != null) _toolStripMenuItemMoveTo.Dispose();
-			if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
 			if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
-			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
 			if (_directivesViewer != null) _directivesViewer.Dispose();
 
 			Dispose(true);
@@ -205,19 +201,12 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemPublish = new RadMenuItem();
 			_toolStripMenuItemMoveTo = new RadMenuItem();
-			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripMenuItemReport = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			_toolStripMenuItemSendMail = new RadMenuItem();
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
-
+			
 			_toolStripMenuItemPublish.Text = "Publish";
 			_toolStripMenuItemPublish.Click += ToolStripMenuItemPublishClick;
 
@@ -228,29 +217,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// 
 			_toolStripMenuItemMoveTo.Text = "Move to Store";
 			_toolStripMenuItemMoveTo.Click += ToolStripMenuItemMoveToClick;
-			// 
-			// toolStripMenuItemDelete
-			// 
-			_toolStripMenuItemDelete.Text = "Delete";
-			_toolStripMenuItemDelete.Click += ToolStripMenuItemDeleteClick;
-
+			
 			_toolStripMenuItemReport.Text = "Show Report";
 			_toolStripMenuItemReport.Click += _toolStripMenuItemReport_Click; 
-
-			_contextMenuStrip.Items.Clear();
-			_contextMenuStrip.Items.AddRange(new RadItem[]
-												{
-													_toolStripMenuItemMoveTo,
-													new RadMenuSeparatorItem(),
-													_toolStripMenuItemPublish,
-													_toolStripSeparator1,
-													_toolStripMenuItemReport,
-													_toolStripMenuItemSendMail,
-													new RadMenuSeparatorItem(),
-													_toolStripSeparator1,
-													_toolStripMenuItemDelete
-
-												});
 		}
 
 		private void ToolStripMenuItemSendMailClick(object sender, EventArgs e)
@@ -394,26 +363,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		#endregion
 
-		#region private void ToolStripMenuItemDeleteClick(object sender, EventArgs e)
-		//Удаляет рабочий пакет
-		private void ToolStripMenuItemDeleteClick(object sender, EventArgs e)
-		{
-			if (_directivesViewer.SelectedItems.Count == 1)
-			{
-				GlobalObjects.CasEnvironment.Manipulator.Delete(_directivesViewer.SelectedItem);
-			}
-			else
-			{
-				foreach (PurchaseOrder rfq in _directivesViewer.SelectedItems)
-				{
-					GlobalObjects.CasEnvironment.Manipulator.Delete(rfq);
-				}
-			}
-			AnimatedThreadWorker.RunWorkerAsync();
-		}
-
-		#endregion
-
 		#region private void ToolStripMenuItemCloseClick(object sender, EventArgs e)
 
 		private void ToolStripMenuItemCloseClick(object sender, EventArgs e)
@@ -455,18 +404,25 @@ namespace CAS.UI.UIControls.PurchaseControls
 		{
 			_directivesViewer = new PurchaseOrderListView
 									{
-										CustomMenu = _contextMenuStrip,
 										TabIndex = 2,
 										Location = new Point(panel1.Left, panel1.Top),
 										Dock = DockStyle.Fill
 									};
 			//события 
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+			
+			_directivesViewer.AddMenuItems(_toolStripMenuItemMoveTo,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemPublish,
+				_toolStripSeparator1,
+				_toolStripMenuItemReport,
+				_toolStripMenuItemSendMail);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{
 				if (_directivesViewer.SelectedItems.Count <= 0)
 				   return;
+
 				else if (_directivesViewer.SelectedItems.Count == 1)
 				{
 					PurchaseOrder po = _directivesViewer.SelectedItem;

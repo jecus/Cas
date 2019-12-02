@@ -80,10 +80,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		private ToolStripMenuItem itemPrintMPSSIP;
 		private ToolStripMenuItem itemPrintLitAvia;
 
-		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemOpen;
 		private RadMenuItem _toolStripMenuItemComposeWorkPackage;
-		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuItem _toolStripMenuItemHighlight;
 		private RadMenuItem _toolStripMenuItemShowTaskCard;
 		private RadMenuSeparatorItem _toolStripSeparator1;
@@ -91,8 +89,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		private RadMenuSeparatorItem _toolStripSeparator4;
 		private RadMenuItem _toolStripMenuItemsWorkPackages;
 		private RadMenuItem _toolStripMenuItemsWShowWP;
-		private RadMenuItem _toolStripMenuItemCopy;
-		private RadMenuItem _toolStripMenuItemPaste;
 		private AnimatedThreadWorker _worker;
 		private ExcelExportProvider _exportProvider;
 
@@ -215,7 +211,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
 			if (_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
 			if (_toolStripMenuItemComposeWorkPackage != null) _toolStripMenuItemComposeWorkPackage.Dispose();
-			if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
 			if (_toolStripMenuItemHighlight != null)
 			{
 				foreach (RadMenuItem ttmi in _toolStripMenuItemHighlight.Items)
@@ -229,7 +224,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
 			if (_toolStripSeparator2 != null) _toolStripSeparator2.Dispose();
 			if (_toolStripSeparator4 != null) _toolStripSeparator4.Dispose();
-			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
 			if (_toolStripMenuItemsWorkPackages != null)
 			{
 				foreach (RadMenuItem item in _toolStripMenuItemsWorkPackages.Items)
@@ -459,24 +453,15 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemOpen = new RadMenuItem();
 			_toolStripMenuItemComposeWorkPackage = new RadMenuItem();
 			_toolStripMenuItemsWorkPackages = new RadMenuItem();
 			_toolStripMenuItemsWShowWP = new RadMenuItem();
-			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripMenuItemHighlight = new RadMenuItem();
 			_toolStripMenuItemShowTaskCard = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			_toolStripSeparator2 = new RadMenuSeparatorItem();
 			_toolStripSeparator4 = new RadMenuSeparatorItem();
-			_toolStripMenuItemCopy=new RadMenuItem();
-			_toolStripMenuItemPaste=new RadMenuItem();
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
 			// 
 			// toolStripMenuItemView
 			// 
@@ -500,13 +485,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			// _toolStripMenuItemsWorkPackages
 			//
 			_toolStripMenuItemsWorkPackages.Text = "Add to Work package";
-			// 
-			// toolStripMenuItemDelete
-			// 
-			_toolStripMenuItemDelete.Text = "Delete";
-			_toolStripMenuItemDelete.Click += ButtonDeleteClick;
-
-			_contextMenuStrip.Items.Clear();
+			
 			_toolStripMenuItemsWorkPackages.Items.Clear();
 			_toolStripMenuItemHighlight.Items.Clear();
 
@@ -515,18 +494,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			// 
 			_toolStripMenuItemShowTaskCard.Text = "Show Task Card";
 			_toolStripMenuItemShowTaskCard.Click += ToolStripMenuItemShowTaskCardClick;
-			// 
-			// toolStripMenuItemCopy
-			// 
-			_toolStripMenuItemCopy.Text = "Copy";
-			_toolStripMenuItemCopy.Click += CopyItemsClick;
-
-			// 
-			// toolStripMenuItemPaste
-			// 
-			_toolStripMenuItemPaste.Text = "Paste";
-			_toolStripMenuItemPaste.Click += PasteItemsClick;
-
+			
 			foreach (Highlight highlight in Highlight.HighlightList)
 			{
 				if (highlight == Highlight.Blue || highlight == Highlight.Yellow || highlight == Highlight.Red)
@@ -536,20 +504,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 				item.Tag = highlight;
 				_toolStripMenuItemHighlight.Items.Add(item);
 			}
-			_contextMenuStrip.Items.AddRange(_toolStripMenuItemOpen,
-													_toolStripMenuItemShowTaskCard,
-													new RadMenuSeparatorItem(),
-													_toolStripMenuItemHighlight,
-													_toolStripSeparator2,
-													_toolStripMenuItemComposeWorkPackage,
-													_toolStripMenuItemsWorkPackages,
-													_toolStripMenuItemsWShowWP,
-													_toolStripSeparator1,
-													_toolStripSeparator4, 
-													_toolStripMenuItemCopy,
-													_toolStripMenuItemPaste,
-													_toolStripMenuItemDelete
-												);
 		}
 		#endregion
 
@@ -783,13 +737,21 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		{
 			_directivesViewer = new MaintenanceDirectiveListView();
 			_directivesViewer.TabIndex = 2;
-			_directivesViewer.CustomMenu = _contextMenuStrip;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 			Controls.Add(_directivesViewer);
 			//события 
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+
+			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen,
+				_toolStripMenuItemShowTaskCard,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemHighlight,
+				_toolStripSeparator2,
+				_toolStripMenuItemComposeWorkPackage,
+				_toolStripMenuItemsWorkPackages,
+				_toolStripMenuItemsWShowWP);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{
@@ -802,7 +764,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 					_toolStripMenuItemComposeWorkPackage.Enabled = false;
 					_toolStripMenuItemsWorkPackages.Enabled = false;
 					_toolStripMenuItemsWShowWP.Enabled = false;
-					_toolStripMenuItemDelete.Enabled = false;
 				}
 				if (_directivesViewer.SelectedItems.Count == 1)
 				{
@@ -814,8 +775,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 					else _toolStripMenuItemShowTaskCard.Enabled = false;
 					if (mpd.NextPerformanceIsBlocked)
 						_toolStripMenuItemsWShowWP.Enabled = true;
-
-
 				}
 
 				if (_directivesViewer.SelectedItems.Count > 0)
@@ -825,7 +784,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 					_toolStripMenuItemHighlight.Enabled = true;
 					_toolStripMenuItemComposeWorkPackage.Enabled = true;
 					_toolStripMenuItemsWorkPackages.Enabled = true;
-					_toolStripMenuItemDelete.Enabled = true;
 				}
 			};
 			
@@ -1401,124 +1359,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		}
 		#endregion
 
-		#region private void PasteItemsClick(object sender, EventArgs e)
-
-		private void PasteItemsClick(object sender, EventArgs e)
-		{
-			GetFromClipboard();
-		}
-
-		#endregion
-
-		#region private void CopyItemsClick(object sender, EventArgs e)
-
-		private void CopyItemsClick(object sender, EventArgs e)
-		{
-			CopyToClipboard();
-		}
-
-		#endregion
-
-		#region private void CopyToClipboard()
-		private void CopyToClipboard()
-		{
-			// регистрация формата данных либо получаем его, если он уже зарегистрирован
-			try
-			{
-				DataFormats.Format format = DataFormats.GetFormat(typeof(MaintenanceDirective[]).FullName);
-
-				if (_directivesViewer.SelectedItems == null || _directivesViewer.SelectedItems.Count == 0)
-					return;
-
-				List<MaintenanceDirective> pds = new List<MaintenanceDirective>();
-				foreach (MaintenanceDirective maintenanceDirective in _directivesViewer.SelectedItems)
-				{
-					pds.Add(maintenanceDirective.GetCopyUnsaved());
-				}
-
-				if (pds.Count <= 0)
-					return;
-
-				//todo:(EvgeniiBabak) Нужен другой способ проверки сереализуемости объекта
-				using (MemoryStream mem = new MemoryStream())
-				{
-					BinaryFormatter bin = new BinaryFormatter();
-					try
-					{
-						bin.Serialize(mem, pds);
-					}
-					catch (Exception ex)
-					{
-						MessageBox.Show("Объект не может быть сериализован. \n" + ex);
-						return;
-					}
-				}
-				// копирование в буфер обмена
-				IDataObject dataObj = new DataObject();
-				dataObj.SetData(format.Name, false, pds.ToArray());
-				Clipboard.SetDataObject(dataObj, false);
-
-				pds.Clear();
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Error while copying new object(s). \n" + ex);
-				Program.Provider.Logger.Log(ex);
-			}
-		}
-		#endregion
-
-		#region private void GetFromClipboard()
-
-		private void GetFromClipboard()
-		{
-			try
-			{
-				string format = typeof(MaintenanceDirective[]).FullName;
-
-				if (string.IsNullOrEmpty(format))
-					return;
-				if (!Clipboard.ContainsData(format))
-					return;
-				var pds = (MaintenanceDirective[])Clipboard.GetData(format);
-				if (pds == null)
-					return;
-
-				var objectsToPaste = new List<MaintenanceDirective>();
-				var bd = CurrentParent is BaseComponent ? (BaseComponent)CurrentParent : GlobalObjects.ComponentCore.GetBaseComponentById(((Aircraft)CurrentParent).AircraftFrameId);
-				foreach (MaintenanceDirective md in pds)
-				{
-					md.ParentBaseComponent = bd;
-
-					GlobalObjects.PerformanceCalculator.GetNextPerformance(md);
-					_initialDirectiveArray.Add(md);
-					_resultDirectiveArray.Add(md);
-
-					md.TaskNumberCheck += " Copy";
-					objectsToPaste.Add(md);
-				}
-
-				if (objectsToPaste.Count > 0)
-				{
-					_directivesViewer.InsertItems(objectsToPaste.ToArray());
-
-					headerControl.ShowSaveButton = true;
-				}
-
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Error while inserting new object(s). \n" + ex);
-				headerControl.ShowSaveButton = false;
-				Program.Provider.Logger.Log(ex);
-			}
-			finally
-			{
-				Clipboard.Clear();
-			}
-		}
-		#endregion
-
 		public void CalculateMaintenanceDirectives(IList<MaintenanceDirective> maintenanceDirectives, Dictionary<IBindedItem, List<IDirective>> bindedItemsDict)
 		{
 			foreach (var mpd in maintenanceDirectives)
@@ -1589,8 +1429,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
 			_exportProvider.Dispose();
 		}
-
-		
 
 		#endregion
 

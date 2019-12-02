@@ -30,10 +30,7 @@ namespace CAS.UI.UIControls.MailControls
 
 		private readonly MailChats _mailChat;
 
-		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemReply;
-		private RadMenuItem _toolStripMenuItemAdd;
-		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuItem _toolStripMenuItemPublish;
 		private RadMenuItem _toolStripMenuItemClose;
 
@@ -140,23 +137,24 @@ namespace CAS.UI.UIControls.MailControls
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
-			_directivesViewer.CustomMenu = _contextMenuStrip;
 			Controls.Add(_directivesViewer);
+
+			_directivesViewer.AddMenuItems(_toolStripMenuItemReply,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemPublish,
+				_toolStripMenuItemClose);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{
 				if (_directivesViewer.SelectedItem == null)
 				{
 					_toolStripMenuItemReply.Enabled = false;
-					_toolStripMenuItemDelete.Enabled = _directivesViewer.SelectedItems.Count > 0;
 					_toolStripMenuItemPublish.Enabled = false;
 					_toolStripMenuItemClose.Enabled = false;
 				}
 				else
 				{
 					_toolStripMenuItemReply.Enabled = _mailChat.ItemId > 0;
-					_toolStripMenuItemDelete.Enabled = true;
-
 					_toolStripMenuItemPublish.Enabled = _directivesViewer.SelectedItem.Status != MailStatus.Published;
 					_toolStripMenuItemClose.Enabled = _directivesViewer.SelectedItem.Status != MailStatus.Closed;
 
@@ -172,25 +170,16 @@ namespace CAS.UI.UIControls.MailControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemReply = new RadMenuItem();
-			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripMenuItemPublish = new RadMenuItem();
 			_toolStripMenuItemClose = new RadMenuItem();
 
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
 			// 
 			// toolStripMenuItemPaste
 			// 
 			_toolStripMenuItemReply.Text = "Reply";
 			_toolStripMenuItemReply.Click += _toolStripMenuItemReply_Click;
 
-			_toolStripMenuItemDelete.Text = "Delete";
-			_toolStripMenuItemDelete.Click += _toolStripMenuItemDelete_Click;
 			// 
 			// toolStripMenuItemView
 			// 
@@ -201,16 +190,6 @@ namespace CAS.UI.UIControls.MailControls
 			// 
 			_toolStripMenuItemClose.Text = "Close";
 			_toolStripMenuItemClose.Click += ToolStripMenuItemCloseClick;
-
-
-			_contextMenuStrip.Items.AddRange(
-				_toolStripMenuItemReply,
-				new RadMenuSeparatorItem(), 
-				_toolStripMenuItemPublish,
-				_toolStripMenuItemClose,
-				new RadMenuSeparatorItem(),
-				_toolStripMenuItemDelete
-			);
 		}
 
 		#endregion
@@ -294,15 +273,6 @@ namespace CAS.UI.UIControls.MailControls
 				AnimatedThreadWorker.RunWorkerAsync();
 			}
 
-		}
-
-		#endregion
-
-		#region private void _toolStripMenuItemDelete_Click(object sender, EventArgs e)
-
-		private void _toolStripMenuItemDelete_Click(object sender, EventArgs e)
-		{
-			DeleteMail();
 		}
 
 		#endregion

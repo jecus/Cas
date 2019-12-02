@@ -98,18 +98,14 @@ namespace CAS.UI.UIControls.ComponentControls
 		private ToolStripMenuItem itemPrintReportMPLLP;
 		private ToolStripMenuItem itemPrintLitAvia;
 
-		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemOpen;
 		private RadMenuItem _toolStripMenuItemMoveToStore;
 		private RadMenuItem _toolStripMenuItemComposeWorkPackage;
-		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuItem _toolStripMenuItemHighlight;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 		private RadMenuSeparatorItem _toolStripSeparator2;
 		private RadMenuSeparatorItem _toolStripSeparator4;
 		private RadMenuItem _toolStripMenuItemsWorkPackages;
-		private RadMenuItem _toolStripMenuItemCopy;
-		private RadMenuItem _toolStripMenuItemPaste;
 		private RadMenuItem _toolStripMenuItemPrint;
 		private RadMenuItem _toolStripMenuItemPrintCalibrationTag;
 		private AnimatedThreadWorker _worker;
@@ -354,7 +350,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			if(_toolStripMenuItemMoveToStore != null) _toolStripMenuItemMoveToStore.Dispose();
 			if(_toolStripMenuItemComposeWorkPackage != null) _toolStripMenuItemComposeWorkPackage.Dispose();
 			
-			if(_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
 			if(_toolStripMenuItemHighlight != null)
 			{
 				foreach (var ttmi in _toolStripMenuItemHighlight.Items)
@@ -367,7 +362,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			if(_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
 			if(_toolStripSeparator2 != null) _toolStripSeparator2.Dispose();
 			if(_toolStripSeparator4 != null) _toolStripSeparator4.Dispose();
-			if(_contextMenuStrip != null) _contextMenuStrip.Dispose();
 			
 			if(_toolStripMenuItemsWorkPackages != null)
 			{
@@ -1153,25 +1147,16 @@ namespace CAS.UI.UIControls.ComponentControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemOpen = new RadMenuItem();
 			_toolStripMenuItemMoveToStore = new RadMenuItem();
 			_toolStripMenuItemComposeWorkPackage = new RadMenuItem();
 			_toolStripMenuItemsWorkPackages = new RadMenuItem();
-			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripMenuItemHighlight = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			_toolStripSeparator2 = new RadMenuSeparatorItem();
 			_toolStripSeparator4 = new RadMenuSeparatorItem();
-			_toolStripMenuItemCopy=new RadMenuItem();
-			_toolStripMenuItemPaste=new RadMenuItem();
 			_toolStripMenuItemPrint = new RadMenuItem();
 			_toolStripMenuItemPrintCalibrationTag = new RadMenuItem();
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
 			// 
 			// toolStripMenuItemView
 			// 
@@ -1196,23 +1181,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			//
 			_toolStripMenuItemsWorkPackages.Text = "Add to Work package";
 			// 
-			// toolStripMenuItemDelete
-			// 
-			_toolStripMenuItemDelete.Text = "Delete";
-			_toolStripMenuItemDelete.Click += ButtonDeleteClick;
-
-			// 
-			// toolStripMenuItemCopy
-			// 
-			_toolStripMenuItemCopy.Text = "Copy";
-			_toolStripMenuItemCopy.Click += CopyItemsClick;
-
-			// 
-			// toolStripMenuItemPaste
-			// 
-			_toolStripMenuItemPaste.Text = "Paste";
-			_toolStripMenuItemPaste.Click += PasteItemsClick;
-			// 
 			// _toolStripMenuItemPrintInspectionTag
 			// 
 			_toolStripMenuItemPrintCalibrationTag.Text = "Calibration Tag";
@@ -1223,7 +1191,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			_toolStripMenuItemPrint.Text = "Print";
 			_toolStripMenuItemPrint.Items.AddRange( _toolStripMenuItemPrintCalibrationTag);
 
-			_contextMenuStrip.Items.Clear();
 			_toolStripMenuItemsWorkPackages.Items.Clear();
 			_toolStripMenuItemHighlight.Items.Clear();
 
@@ -1236,23 +1203,6 @@ namespace CAS.UI.UIControls.ComponentControls
 				item.Tag = highlight;
 				_toolStripMenuItemHighlight.Items.Add(item);
 			}
-
-			_contextMenuStrip.Items.AddRange(_toolStripMenuItemOpen,
-				new RadMenuSeparatorItem(),
-				_toolStripMenuItemHighlight,
-				_toolStripSeparator2,
-				_toolStripMenuItemMoveToStore,
-				new RadMenuSeparatorItem(),
-				_toolStripMenuItemPrint,
-				new RadMenuSeparatorItem(),
-				_toolStripMenuItemComposeWorkPackage,
-				_toolStripMenuItemsWorkPackages,
-				_toolStripSeparator1,
-				_toolStripSeparator4, 
-				_toolStripMenuItemCopy,
-				_toolStripMenuItemPaste,
-				_toolStripMenuItemDelete);
-
 		}
 
 		#endregion
@@ -1596,13 +1546,25 @@ namespace CAS.UI.UIControls.ComponentControls
 				? new ComponentsListView(_currentBaseComponent, !_llpMark) 
 				: new ComponentsListView(_currentAircraft != null ? GlobalObjects.ComponentCore.GetBaseComponentById(_currentAircraft.AircraftFrameId) : null, !_llpMark);
 			_directivesViewer.TabIndex = 2;
-			_directivesViewer.CustomMenu = _contextMenuStrip;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 			Controls.Add(_directivesViewer);
 			//события 
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+
+			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemHighlight,
+				_toolStripSeparator2,
+				_toolStripMenuItemMoveToStore,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemPrint,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemComposeWorkPackage,
+				_toolStripMenuItemsWorkPackages,
+				_toolStripSeparator1,
+				_toolStripSeparator4);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{
@@ -1613,7 +1575,6 @@ namespace CAS.UI.UIControls.ComponentControls
 					_toolStripMenuItemMoveToStore.Enabled = false;
 					_toolStripMenuItemComposeWorkPackage.Enabled = false;
 					_toolStripMenuItemsWorkPackages.Enabled = false;
-					_toolStripMenuItemDelete.Enabled = false;
 				}
 
 				if (_directivesViewer.SelectedItems.Count == 1)
@@ -1637,13 +1598,11 @@ namespace CAS.UI.UIControls.ComponentControls
 
 				if (_directivesViewer.SelectedItems.Count > 0)
 				{
-					_toolStripMenuItemCopy.Enabled = _directivesViewer.SelectedItems.Any(selecteItem => selecteItem is Component && ((Component)selecteItem).IsBaseComponent == false);
 					_toolStripMenuItemOpen.Enabled = true;
 					_toolStripMenuItemHighlight.Enabled = true;
 					_toolStripMenuItemMoveToStore.Enabled = true;
 					_toolStripMenuItemComposeWorkPackage.Enabled = true;
 					_toolStripMenuItemsWorkPackages.Enabled = true;
-					_toolStripMenuItemDelete.Enabled = true;
 				}
 
 			};
@@ -2575,176 +2534,6 @@ namespace CAS.UI.UIControls.ComponentControls
 					if (acceptable) resultCollection.Add(pd);
 				}
 			}  
-		}
-		#endregion
-
-		#region  private void PasteItemsClick(object sender, EventArgs e)
-
-		private void PasteItemsClick(object sender, EventArgs e)
-		{
-			GetFromClipboard();
-		}
-
-		#endregion
-
-		#region private void CopyItemsClick(object sender, EventArgs e
-
-		private void CopyItemsClick(object sender, EventArgs e)
-		{
-			CopyToClipboard();
-		}
-
-		#endregion
-
-		#region private void CopyToClipboard()
-		private void CopyToClipboard()
-		{
-			// регистрация формата данных либо получаем его, если он уже зарегистрирован
-			try
-			{
-
-				bool _showMsg = false;
-				DataFormats.Format format = DataFormats.GetFormat(typeof(Component[]).FullName);
-
-				if (_directivesViewer.SelectedItems == null || _directivesViewer.SelectedItems.Count == 0)
-					return;
-
-				List<Component> pds = new List<Component>();
-				int detailId = -1;
-				foreach (var selecteditem in _directivesViewer.SelectedItems)
-				{
-					if (!(selecteditem is Component))
-						continue;
-
-					if ((selecteditem as Component).IsBaseComponent)
-					{
-						_showMsg = true;
-						continue;
-					}
-
-					pds.Add(((Component)selecteditem).GetCopyUnsaved(detailId));
-					detailId--;
-				}
-
-				if (_showMsg)
-					MessageBox.Show("Engines, LandGear's Frame, APU, Propeller's couldn't be copied", "Warning", MessageBoxButtons.OK);
-
-				if (pds.Count <= 0)
-					return;
-
-				//todo:(EvgeniiBabak) Нужен другой способ проверки сереализуемости объекта
-				using (MemoryStream mem = new MemoryStream())
-				{
-					BinaryFormatter bin = new BinaryFormatter();
-					try
-					{
-						bin.Serialize(mem, pds);
-					}
-					catch (Exception ex)
-					{
-						MessageBox.Show("Объект не может быть сериализован. \n" + ex);
-						return;
-					}
-				}
-				// копирование в буфер обмена
-				IDataObject dataObj = new DataObject();
-				dataObj.SetData(format.Name, false, pds.ToArray());
-				Clipboard.SetDataObject(dataObj, false);
-
-				pds.Clear();
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Error while copying new object(s). \n" + ex);
-				Program.Provider.Logger.Log(ex);
-			}
-		}
-		#endregion
-
-		#region private void GetFromClipboard()
-
-		private void GetFromClipboard()
-		{
-			try
-			{
-				string format = typeof(Component[]).FullName;
-
-				if (string.IsNullOrEmpty(format))
-					return;
-				if (!Clipboard.ContainsData(format))
-					return;
-				var pds = (Component[])Clipboard.GetData(format);
-				if (pds == null)
-					return;
-
-				var objectsToPaste = new List<BaseEntityObject>();
-				var bd = DirectiveSource is BaseComponent ? (BaseComponent)DirectiveSource : GlobalObjects.ComponentCore.GetBaseComponentById(((Aircraft)DirectiveSource).AircraftFrameId);
-				foreach (var component in pds)
-				{
-					component.ParentBaseComponent = bd;
-					component.ParentAircraftId = CurrentAircraft.ItemId;
-
-					var tr = component.TransferRecords.Last();
-					tr.DestinationObject = bd;
-					tr.DestinationObjectId = bd.ItemId;
-					tr.DestinationObjectType = bd.SmartCoreObjectType;
-
-					if (!component.LLPMark && !component.LLPCategories)
-						GlobalObjects.PerformanceCalculator.GetNextPerformance(component);
-
-					if (component.LLPCategories)
-					{
-						component.ChangeLLPCategoryRecords.Clear();
-
-						foreach (var llp in component.LLPData)
-						{
-							llp.LLPTemp = null;
-							llp.LLPCurrent = null;
-							llp.Remain = null;
-						}
-
-					}
-
-
-					_initialDirectiveArray.Add(component);
-					_resultDirectiveArray.Add(component);
-
-					component.PartNumber += " Copy";
-					objectsToPaste.Add(component);
-
-					foreach (ComponentDirective componentDirective in component.ComponentDirectives)
-					{
-						componentDirective.PerformanceRecords.Clear();
-						GlobalObjects.PerformanceCalculator.GetNextPerformance(componentDirective);
-						_resultDirectiveArray.Add(componentDirective);
-						objectsToPaste.Add(componentDirective);
-					}
-
-					if (component.TransferRecords.Count > 0)
-					{
-						var first = component.TransferRecords.OrderBy(i => i.TransferDate).First(i => i.DestinationObjectType == SmartCoreType.BaseComponent);
-						component.TransferRecords.Clear();
-						component.TransferRecords.Add(first);
-					}
-				}
-
-				if (objectsToPaste.Count > 0)
-				{
-					_directivesViewer.InsertItems(objectsToPaste.ToArray());
-					headerControl.ShowSaveButton = true;
-				}
-
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Error while inserting new object(s). \n" + ex);
-				headerControl.ShowSaveButton = false;
-				Program.Provider.Logger.Log(ex);
-			}
-			finally
-			{
-				Clipboard.Clear();
-			}
 		}
 		#endregion
 

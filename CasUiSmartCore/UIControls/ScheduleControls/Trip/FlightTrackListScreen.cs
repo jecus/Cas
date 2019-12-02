@@ -31,7 +31,6 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 		private FlightTrackListView _directivesViewer;
 		private CommonFilterCollection _filter;
 
-		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemCopyTrip;
 
 		#endregion
@@ -152,22 +151,12 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemCopyTrip = new RadMenuItem();
-
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
 			// 
 			// toolStripMenuItemView
 			// 
 			_toolStripMenuItemCopyTrip.Text = "Edit Trip";
 			_toolStripMenuItemCopyTrip.Click += ToolStripMenuItemCopyTripClick;
-
-			_contextMenuStrip.Items.Clear();
-			_contextMenuStrip.Items.AddRange(_toolStripMenuItemCopyTrip);
 		}
 
 		#endregion
@@ -190,11 +179,12 @@ namespace CAS.UI.UIControls.ScheduleControls.Trip
 
 		private void InitListView()
 		{
-			_directivesViewer = new FlightTrackListView(_screenType);
-			_directivesViewer.TabIndex = 2;
-			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
-			_directivesViewer.CustomMenu = _contextMenuStrip;
-			_directivesViewer.Dock = DockStyle.Fill;
+			_directivesViewer = new FlightTrackListView(_screenType)
+			{
+				TabIndex = 2, Location = new Point(panel1.Left, panel1.Top), Dock = DockStyle.Fill
+			};
+
+			_directivesViewer.AddMenuItems(_toolStripMenuItemCopyTrip);
 
 			panel1.Controls.Add(_directivesViewer);
 		}

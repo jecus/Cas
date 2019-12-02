@@ -1465,6 +1465,8 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 			maintenanceDirective.ItemId = -1;
 			maintenanceDirective.UnSetEvents();
 
+			maintenanceDirective.TaskNumberCheck += " Copy";
+
 			maintenanceDirective.ForComponentId = -1;
 			maintenanceDirective.ParentBaseComponent = null;
 

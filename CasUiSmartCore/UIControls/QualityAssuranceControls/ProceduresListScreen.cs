@@ -10,7 +10,6 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.ForecastControls;
-using CAS.UI.UIControls.PurchaseControls;
 using CASReports.Builders;
 using CASTerms;
 using SmartCore.Calculations;
@@ -18,7 +17,6 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.Quality;
 using SmartCore.Filters;
 using SmartCore.Purchase;
@@ -60,10 +58,8 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 		private ToolStripMenuItem itemPrintReportAMP;
 		private ToolStripMenuItem itemPrintWorkscope;
 
-		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemOpen;
 		private RadMenuItem _toolStripMenuItemComposeWorkPackage;
-		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuItem _toolStripMenuItemHighlight;
 		private RadMenuItem _toolStripMenuItemShowTaskCard;
 		private RadMenuSeparatorItem _toolStripSeparator1;
@@ -178,7 +174,6 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 
 			if (_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
 			if (_toolStripMenuItemComposeWorkPackage != null) _toolStripMenuItemComposeWorkPackage.Dispose();
-			if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
 			if (_toolStripMenuItemHighlight != null)
 			{
 				foreach (var ttmi in _toolStripMenuItemHighlight.Items)
@@ -192,7 +187,6 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 			if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
 			if (_toolStripSeparator2 != null) _toolStripSeparator2.Dispose();
 			if (_toolStripSeparator4 != null) _toolStripSeparator4.Dispose();
-			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
 			
 			if (_toolStripMenuItemsWorkPackages != null)
 			{
@@ -537,21 +531,14 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemOpen = new RadMenuItem();
 			_toolStripMenuItemComposeWorkPackage = new RadMenuItem();
 			_toolStripMenuItemsWorkPackages = new RadMenuItem();
-			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripMenuItemHighlight = new RadMenuItem();
 			_toolStripMenuItemShowTaskCard = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			_toolStripSeparator2 = new RadMenuSeparatorItem();
 			_toolStripSeparator4 = new RadMenuSeparatorItem();
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
 			// 
 			// toolStripMenuItemView
 			// 
@@ -570,13 +557,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 			// _toolStripMenuItemsWorkPackages
 			//
 			_toolStripMenuItemsWorkPackages.Text = "Add to Audit";
-			// 
-			// toolStripMenuItemDelete
-			// 
-			_toolStripMenuItemDelete.Text = "Delete";
-			_toolStripMenuItemDelete.Click += ButtonDeleteClick;
-
-			_contextMenuStrip.Items.Clear();
+			
 			_toolStripMenuItemsWorkPackages.Items.Clear();
 			_toolStripMenuItemHighlight.Items.Clear();
 
@@ -595,16 +576,6 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 				item.Tag = highlight;
 				_toolStripMenuItemHighlight.Items.Add(item);
 			}
-			_contextMenuStrip.Items.AddRange(_toolStripMenuItemOpen,
-													_toolStripMenuItemShowTaskCard,
-													new RadMenuSeparatorItem(),
-													_toolStripMenuItemHighlight,
-													_toolStripSeparator2,
-													_toolStripMenuItemComposeWorkPackage,
-													_toolStripMenuItemsWorkPackages,
-													_toolStripSeparator1,
-													_toolStripSeparator4, 
-													_toolStripMenuItemDelete);
 		}
 		#endregion
 
@@ -828,7 +799,6 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 		{
 			_directivesViewer = new ProceduresListView();
 			_directivesViewer.TabIndex = 2;
-			_directivesViewer.CustomMenu = _contextMenuStrip;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
@@ -836,6 +806,14 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 			//события 
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 			
+			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen,
+				_toolStripMenuItemShowTaskCard,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemHighlight,
+				_toolStripSeparator2,
+				_toolStripMenuItemComposeWorkPackage,
+				_toolStripMenuItemsWorkPackages);
+
 			_directivesViewer.MenuOpeningAction = () =>
 			{
 				if (_directivesViewer.SelectedItems.Count <= 0)

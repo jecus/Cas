@@ -39,11 +39,10 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 		private readonly BaseEntityObject _parent;
 		
 		private AllOrderListView _directivesViewer;
-		private RadDropDownMenu _contextMenuStrip;
+		
 		private RadMenuItem _toolStripMenuItemPublish;
 		private RadMenuItem _toolStripMenuItemCreateQuatation;
 		private RadMenuItem _toolStripMenuItemClose;
-		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 		private RadMenuItem _toolStripMenuItemEdit;
 		private RadMenuItem _toolStripMenuItemCreatePurchase;
@@ -245,13 +244,17 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 		{
 			_directivesViewer = new AllOrderListView()
 									{
-										CustomMenu = _contextMenuStrip,
 										TabIndex = 2,
 										Location = new Point(panel1.Left, panel1.Top),
 										Dock = DockStyle.Fill
 									};
 			//события 
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+
+			_directivesViewer.AddMenuItems(_toolStripMenuItemPublish,
+				_toolStripMenuItemClose,
+				_toolStripSeparator1,
+				_toolStripMenuItemEdit);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{
@@ -313,20 +316,13 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemPublish = new RadMenuItem();
 			_toolStripMenuItemCreateQuatation = new RadMenuItem();
 			_toolStripMenuItemCreatePurchase = new RadMenuItem();
 			_toolStripMenuItemClose = new RadMenuItem();
-			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			_toolStripMenuItemEdit = new RadMenuItem();
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
-
+			
 			_toolStripMenuItemEdit.Text = "Edit";
 			_toolStripMenuItemEdit.Click += _toolStripMenuItemEdit_Click;
 			// 
@@ -349,21 +345,6 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			// 
 			_toolStripMenuItemClose.Text = "Close";
 			_toolStripMenuItemClose.Click += _toolStripMenuItemClose_Click;
-			// 
-			// toolStripMenuItemDelete
-			// 
-			_toolStripMenuItemDelete.Text = "Delete";
-			_toolStripMenuItemDelete.Click += _toolStripMenuItemDelete_Click;
-
-			_contextMenuStrip.Items.Clear();
-
-			
-			_contextMenuStrip.Items.AddRange(_toolStripMenuItemPublish,
-													_toolStripMenuItemClose,
-													_toolStripSeparator1,
-													_toolStripMenuItemEdit,
-													_toolStripSeparator1,
-													_toolStripMenuItemDelete);
 		}
 
 		#endregion
@@ -382,26 +363,6 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 		private void _contextMenuStrip_Opening(object sender, CancelEventArgs e)
 		{
 			
-		}
-
-		#endregion
-
-		#region private void _toolStripMenuItemDelete_Click(object sender, EventArgs e)
-
-		private void _toolStripMenuItemDelete_Click(object sender, EventArgs e)
-		{
-			if (_directivesViewer.SelectedItems.Count == 1)
-			{
-				GlobalObjects.CasEnvironment.Manipulator.Delete(_directivesViewer.SelectedItem as BaseEntityObject);
-			}
-			else
-			{
-				foreach (var rfq in _directivesViewer.SelectedItems)
-				{
-					GlobalObjects.CasEnvironment.Manipulator.Delete(rfq as BaseEntityObject);
-				}
-			}
-			AnimatedThreadWorker.RunWorkerAsync();
 		}
 
 		#endregion

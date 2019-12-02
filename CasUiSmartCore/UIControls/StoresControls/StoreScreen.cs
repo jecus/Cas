@@ -70,12 +70,10 @@ namespace CAS.UI.UIControls.StoresControls
 
 		private StoreComponentsListView _directivesViewer;
 
-		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemBarCode;
 		private RadMenuItem _toolStripMenuItemMoveTo;
 		private RadMenuItem _toolStripMenuItemOpen;
 		private RadMenuItem _toolStripMenuItemAdd;
-		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuItem _toolStripMenuItemLlpDiskSheetStatus;
 		private RadMenuItem _toolStripMenuItemEngineeringOrders;
 		private RadMenuItem _toolStripMenuItemSbStatus;
@@ -84,8 +82,6 @@ namespace CAS.UI.UIControls.StoresControls
 		private RadMenuItem _toolStripMenuItemLogBook;
 		private RadMenuItem _toolStripMenuItemHighlight;
 		private RadMenuItem _toolStripMenuItemShouldBeOnStock;
-		private RadMenuItem _toolStripMenuItemCopy;
-		private RadMenuItem _toolStripMenuItemPaste;
 		private RadMenuItem _toolStripMenuItemPrint;
 		private RadMenuItem _toolStripMenuItemPrintServisibleTag;
 		private RadMenuItem _toolStripMenuItemPrintUnServisibleTag;
@@ -212,7 +208,6 @@ namespace CAS.UI.UIControls.StoresControls
 			if (_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
 			if (_toolStripMenuItemAdd != null) _toolStripMenuItemAdd.Dispose();
 			if (_toolStripMenuItemMoveTo != null) _toolStripMenuItemMoveTo.Dispose();
-			if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
 			if (_toolStripMenuItemHighlight != null) _toolStripMenuItemHighlight.Dispose();
 			if (_toolStripMenuItemPrint != null) _toolStripMenuItemPrint.Dispose();
 			if (_toolStripMenuItemShouldBeOnStock != null) _toolStripMenuItemShouldBeOnStock.Dispose();
@@ -226,7 +221,6 @@ namespace CAS.UI.UIControls.StoresControls
 			if (_toolStripSeparator2 != null) _toolStripSeparator2.Dispose();
 			if (_toolStripSeparator3 != null) _toolStripSeparator3.Dispose();
 			if (_toolStripSeparator4 != null) _toolStripSeparator4.Dispose();
-			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
 			if (_toolStripMenuItemHighlight != null)
 			{
 				foreach (var item in _toolStripMenuItemHighlight.Items) item.Dispose();
@@ -737,12 +731,10 @@ namespace CAS.UI.UIControls.StoresControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemBarCode = new RadMenuItem();
 			_toolStripMenuItemOpen = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			_toolStripMenuItemAdd = new RadMenuItem();
-			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripSeparator3 = new RadMenuSeparatorItem();
 			_toolStripSeparator4 = new RadMenuSeparatorItem();
 			_toolStripMenuItemMoveTo = new RadMenuItem();
@@ -763,9 +755,7 @@ namespace CAS.UI.UIControls.StoresControls
 			_toolStripMenuItemPrintCalibrationTag = new RadMenuItem();
 			_toolStripMenuItemPrintCondemnedTag = new RadMenuItem();
 			_toolStripMenuItemShouldBeOnStock = new RadMenuItem();
-			_toolStripMenuItemCopy = new RadMenuItem();
-			_toolStripMenuItemPaste = new RadMenuItem();
-
+			
 			_toolStripMenuItemHighlight.Items.Clear();
 			foreach (var highlight in Highlight.HighlightList)
 			{
@@ -840,17 +830,6 @@ namespace CAS.UI.UIControls.StoresControls
 			_toolStripMenuItemShouldBeOnStock.Text = "Should be on Stock";
 			_toolStripMenuItemShouldBeOnStock.Click += _toolStripMenuItemShouldBeOnStock_Click;
 			// 
-			// toolStripMenuItemCopy
-			// 
-			_toolStripMenuItemCopy.Text = "Copy";
-			_toolStripMenuItemCopy.Click += CopyItemsClick;
-
-			// 
-			// toolStripMenuItemPaste
-			// 
-			_toolStripMenuItemPaste.Text = "Paste";
-			_toolStripMenuItemPaste.Click += PasteItemsClick;
-			// 
 			// toolStripSeparator1
 			// 
 			_toolStripSeparator1.Size = new Size(175, 6);
@@ -860,12 +839,6 @@ namespace CAS.UI.UIControls.StoresControls
 			_toolStripMenuItemAdd.Size = new Size(178, 22);
 			_toolStripMenuItemAdd.Text = "Add Component";
 			_toolStripMenuItemAdd.Click += ToolStripMenuItemAddClick;
-			// 
-			// toolStripMenuItemDelete
-			// 
-			_toolStripMenuItemDelete.Size = new Size(178, 22);
-			_toolStripMenuItemDelete.Text = "Delete";
-			_toolStripMenuItemDelete.Click += ToolStripMenuItemDeleteClick;
 			// 
 			// toolStripSeparator2
 			// 
@@ -917,31 +890,6 @@ namespace CAS.UI.UIControls.StoresControls
 			_toolStripMenuItemLogBook.Size = new Size(178, 22);
 			_toolStripMenuItemLogBook.Text = "Log Book";
 			_toolStripMenuItemLogBook.Click += toolStripMenuItemLogBook_Click;
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Items.AddRange(
-											_toolStripMenuItemBarCode,
-											new RadMenuSeparatorItem(),
-											_toolStripMenuItemOpen,
-												_toolStripSeparator1,
-												_toolStripMenuItemHighlight,
-												_toolStripSeparator2,
-												_toolStripMenuItemMoveTo,
-												_toolStripMenuItemShouldBeOnStock,
-												new RadMenuSeparatorItem(), 
-												_toolStripMenuItemPrint,
-												_toolStripSeparator4,
-												_toolStripMenuItemAdd,
-												_toolStripMenuItemDelete,
-												new RadMenuSeparatorItem(),
-												_toolStripMenuItemCopy,
-												_toolStripMenuItemPaste
-												 );
-
-			_contextMenuStrip.Size = new Size(179, 176);
-		   
-
 		}
 
 		#endregion
@@ -1091,25 +1039,6 @@ namespace CAS.UI.UIControls.StoresControls
 
 		#endregion
 
-		#region  private void PasteItemsClick(object sender, EventArgs e)
-
-		private void PasteItemsClick(object sender, EventArgs e)
-		{
-			GetFromClipboard();
-		}
-
-		#endregion
-
-		#region private void CopyItemsClick(object sender, EventArgs e)
-
-		private void CopyItemsClick(object sender, EventArgs e)
-		{
-			CopyToClipboard();
-
-		}
-
-		#endregion
-
 		#region private void _toolStripMenuItemShouldBeOnStock_Click(object sender, EventArgs e)
 
 		private void _toolStripMenuItemShouldBeOnStock_Click(object sender, EventArgs e)
@@ -1167,7 +1096,6 @@ namespace CAS.UI.UIControls.StoresControls
 			{
 				_directivesViewer = new StoreComponentsListView
 									{
-										CustomMenu = _contextMenuStrip,
 										TabIndex = 2,
 										Location = new Point(panel1.Left, panel1.Top),
 										Dock = DockStyle.Fill,
@@ -1247,6 +1175,19 @@ namespace CAS.UI.UIControls.StoresControls
 			};
 
 			//события 
+
+			_directivesViewer.AddMenuItems(_toolStripMenuItemBarCode,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemOpen,
+				_toolStripSeparator1,
+				_toolStripMenuItemHighlight,
+				_toolStripSeparator2,
+				_toolStripMenuItemMoveTo,
+				_toolStripMenuItemShouldBeOnStock,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemPrint,
+				_toolStripSeparator4,
+				_toolStripMenuItemAdd);
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 			panel1.Controls.Add(_directivesViewer);
 
@@ -2033,15 +1974,6 @@ namespace CAS.UI.UIControls.StoresControls
 
 		#endregion
 
-		#region private void ToolStripMenuItemDeleteClick(object sender, EventArgs e)
-
-		private void ToolStripMenuItemDeleteClick(object sender, EventArgs e)
-		{
-			DeleteCommand();
-		}
-
-		#endregion
-
 		#region private void ToolStripMenuItemInstallToAnAircraftClick(object sender, EventArgs e)
 
 		private void ToolStripMenuItemInstallToAnAircraftClick(object sender, EventArgs e)
@@ -2219,124 +2151,6 @@ namespace CAS.UI.UIControls.StoresControls
 			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 		}
 
-		#endregion
-
-		#region private void CopyToClipboard()
-		private void CopyToClipboard()
-		{
-			// регистрация формата данных либо получаем его, если он уже зарегистрирован
-			try
-			{
-
-				var _showMsg = false;
-				var format = DataFormats.GetFormat(typeof(Component[]).FullName);
-
-				if (_directivesViewer.SelectedItems == null || _directivesViewer.SelectedItems.Count == 0)
-					return;
-
-				var pds = new List<Component>();
-				foreach (var selecteditem in _directivesViewer.SelectedItems)
-				{
-					if (!(selecteditem is Component))
-						continue;
-
-					if ((selecteditem as Component).IsBaseComponent)
-					{
-						_showMsg = true;
-						continue;
-					}
-
-					pds.Add(((Component)selecteditem).GetCopyUnsaved());
-				}
-
-				if (_showMsg)
-					MessageBox.Show("Engines, LandGear's Frame, APU, Propeller's couldn't be copied", "Warning", MessageBoxButtons.OK);
-
-				if (pds.Count <= 0)
-					return;
-
-				//todo:(EvgeniiBabak) Нужен другой способ проверки сереализуемости объекта
-				using (var mem = new MemoryStream())
-				{
-					var bin = new BinaryFormatter();
-					try
-					{
-						bin.Serialize(mem, pds);
-					}
-					catch (Exception ex)
-					{
-						MessageBox.Show("Объект не может быть сериализован. \n" + ex);
-						return;
-					}
-				}
-				// копирование в буфер обмена
-				IDataObject dataObj = new DataObject();
-				dataObj.SetData(format.Name, false, pds.ToArray());
-				Clipboard.SetDataObject(dataObj, false);
-
-				pds.Clear();
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Error while copying new object(s). \n" + ex);
-				Program.Provider.Logger.Log(ex);
-			}
-		}
-		#endregion
-
-		#region private void GetFromClipboard()
-
-		private void GetFromClipboard()
-		{
-			try
-			{
-				var format = typeof(Component[]).FullName;
-
-				if (string.IsNullOrEmpty(format))
-					return;
-				if (!Clipboard.ContainsData(format))
-					return;
-				var pds = (Component[])Clipboard.GetData(format);
-				if (pds == null)
-					return;
-
-				var objectsToPaste = new List<BaseEntityObject>();
-				foreach (var component in pds)
-				{
-					component.ParentStoreId = CurrentStore.ItemId;
-
-					GlobalObjects.PerformanceCalculator.GetNextPerformance(component);
-					_preResultDirectiveArray.Add(component);
-					_resultDirectiveArray.Add(component);
-
-					component.PartNumber += " Copy";
-					objectsToPaste.Add(component);
-
-					foreach (var componentDirective in component.ComponentDirectives)
-					{
-						_resultDirectiveArray.Add(componentDirective);
-						objectsToPaste.Add(componentDirective);
-					}
-				}
-
-				if (objectsToPaste.Count > 0)
-				{
-					_directivesViewer.InsertItems(objectsToPaste.ToArray());
-					headerControl.ShowSaveButton = true;
-				}
-
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Error while inserting new object(s). \n" + ex);
-				headerControl.ShowSaveButton = false;
-				Program.Provider.Logger.Log(ex);
-			}
-			finally
-			{
-				Clipboard.Clear();
-			}
-		}
 		#endregion
 
 		#region Для скрытия формы
