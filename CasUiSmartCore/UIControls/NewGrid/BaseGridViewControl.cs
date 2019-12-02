@@ -220,7 +220,10 @@ namespace CAS.UI.UIControls.NewGrid
 			{
 				radGridView1.BeginUpdate();
 				var deletedItems = SelectedItems.OfType<BaseEntityObject>().ToList();
-				GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(deletedItems);
+				foreach (var item in deletedItems)
+					item.IsDeleted = true;
+				
+				GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(deletedItems);
 				foreach (var item in deletedItems)
 					radGridView1.Rows.Remove(radGridView1.Rows.FirstOrDefault(i => (i.Tag as BaseEntityObject).ItemId == item.ItemId));
 
