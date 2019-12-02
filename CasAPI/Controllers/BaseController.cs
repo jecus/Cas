@@ -137,7 +137,10 @@ namespace CasAPI.Controllers
 			catch (Exception e)
 			{
 				_logger.LogError(e.Message);
-				return BadRequest();
+				foreach (var baseEntity in entity)
+					await _repository.SaveAsync(baseEntity);
+
+				return Ok();
 			}
 		}
 
@@ -152,7 +155,10 @@ namespace CasAPI.Controllers
 			catch (Exception e)
 			{
 				_logger.LogError(e.Message);
-				return BadRequest();
+				foreach (var baseEntity in entity)
+					await _repository.SaveAsync(baseEntity);
+
+				return Ok();
 			}
 		}
 
@@ -167,7 +173,10 @@ namespace CasAPI.Controllers
 			catch (Exception e)
 			{
 				_logger.LogError(e.Message);
-				return BadRequest();
+				foreach (var baseEntity in entity)
+					await _repository.DeleteAsync(baseEntity);
+
+				return Ok();
 			}
 		}
 	}
