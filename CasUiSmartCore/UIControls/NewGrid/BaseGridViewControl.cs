@@ -10,7 +10,9 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using Microsoft.VisualBasic.Devices;
+using Newtonsoft.Json;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
 using Telerik.WinControls.Data;
@@ -28,7 +30,12 @@ namespace CAS.UI.UIControls.NewGrid
 		//коллекция выделенных элементов
 		private readonly List<T> _selectedItemsList = new List<T>();
 		protected readonly List<T> _items = new List<T>();
+
+
 		private RadDropDownMenu _customMenu;
+		private RadMenuItem _toolStripMenuItemCopy;
+		private RadMenuItem _toolStripMenuItemPaste;
+		private RadMenuItem _toolStripMenuItemDelete;
 
 		#endregion
 
@@ -140,7 +147,85 @@ namespace CAS.UI.UIControls.NewGrid
 		{
 			InitializeComponent();
 			SetupGridView();
+			InitListView();
 			FirstLoad();
+		}
+
+		#endregion
+
+		#region private void InitListView()
+
+		public void AddMenuItems(params RadMenuItemBase[] items)
+		{
+			_customMenu.Items.Clear();
+			_customMenu.Items.AddRange(items);
+			_customMenu.Items.AddRange(_toolStripMenuItemDelete,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemCopy,
+				_toolStripMenuItemPaste
+			);
+		}
+
+		private void InitListView()
+		{
+			_customMenu = new RadDropDownMenu();
+			_toolStripMenuItemDelete = new RadMenuItem();
+			_toolStripMenuItemCopy = new RadMenuItem();
+			_toolStripMenuItemPaste = new RadMenuItem();
+
+			// 
+			// toolStripMenuItemDelete
+			// 
+			_toolStripMenuItemDelete.Text = "Delete";
+			_toolStripMenuItemDelete.Click += ButtonDeleteClick;
+
+			// 
+			// toolStripMenuItemCopy
+			// 
+			_toolStripMenuItemCopy.Text = "Copy";
+			_toolStripMenuItemCopy.Click += CopyItemsClick;
+
+			// 
+			// toolStripMenuItemPaste
+			// 
+			_toolStripMenuItemPaste.Text = "Paste";
+			_toolStripMenuItemPaste.Click += PasteItemsClick;
+
+			_customMenu.Items.AddRange(new RadMenuSeparatorItem(),
+				_toolStripMenuItemDelete,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemCopy,
+				_toolStripMenuItemPaste
+			);
+		}
+
+		public virtual void PasteItemsClick(object sender, EventArgs e)
+		{
+			GetFromClipboard();
+		}
+
+		public virtual void CopyItemsClick(object sender, EventArgs e)
+		{
+			CopyToClipboard();
+		}
+
+		public virtual void ButtonDeleteClick(object sender, EventArgs e)
+		{
+			if (this.SelectedItems == null) return;
+
+			var confirmResult = MessageBox.Show($"Do you really want to delete  {SelectedItems.Count} item(s)?", "Confirm delete operation",
+														MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+
+			if (confirmResult == DialogResult.Yes)
+			{
+				radGridView1.BeginUpdate();
+				var deletedItems = SelectedItems.OfType<BaseEntityObject>().ToList();
+				GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(deletedItems);
+				foreach (var item in deletedItems)
+					radGridView1.Rows.Remove(radGridView1.Rows.FirstOrDefault(i => (i.Tag as BaseEntityObject).ItemId == item.ItemId));
+
+				radGridView1.EndUpdate();
+			}
 		}
 
 		#endregion
@@ -329,7 +414,7 @@ namespace CAS.UI.UIControls.NewGrid
 			if (itemsArray.Length == 0)
 				return;
 
-			_items.AddRange(itemsArray);
+			_items.InsertRange(0,itemsArray);
 
 			var temp = new List<GridViewDataRowInfo>();
 			foreach (var item in itemsArray)
@@ -362,6 +447,7 @@ namespace CAS.UI.UIControls.NewGrid
 			radGridView1.Rows.AddRange(temp.ToArray());
 			radGridView1.EndUpdate();
 
+			SortingItems();//надо ли?
 			UpdateItemColor();
 			SetTotalText();
 		}
@@ -630,7 +716,22 @@ namespace CAS.UI.UIControls.NewGrid
 			if (cellElement == null || cellElement.RowInfo is GridViewFilteringRowInfo || cellElement.RowInfo is GridViewTableHeaderRowInfo)
 				return;
 
+			if (SelectedItems.Count <= 0)
+			{
+				_toolStripMenuItemPaste.Enabled = false;
+				_toolStripMenuItemCopy.Enabled = false;
+				_toolStripMenuItemDelete.Enabled = false;
+			}
+			else
+			{
+				_toolStripMenuItemPaste.Enabled = true;
+				_toolStripMenuItemCopy.Enabled = true;
+				_toolStripMenuItemDelete.Enabled = true;
+			}
+
 			MenuOpeningAction?.Invoke();
+
+
 			e.ContextMenu = _customMenu;
 		}
 
@@ -784,6 +885,80 @@ namespace CAS.UI.UIControls.NewGrid
 			e.CellStyleInfo.BottomBorder = Color.Black;
 			e.CellStyleInfo.TopBorder = Color.Black;
 		}
+
+		#endregion
+
+		#region Copy/Paste
+
+		private void CopyToClipboard()
+		{
+			// регистрация формата данных либо получаем его, если он уже зарегистрирован
+			try
+			{
+				if (SelectedItems == null || SelectedItems.Count == 0)
+					return;
+
+				var list = new List<T>();
+				foreach (var obj in SelectedItems)
+				{
+					obj.ItemId = -1;
+					var method = typeof(T).GetMethods().FirstOrDefault(i => i.Name == "GetCopyUnsaved");
+					list.Add((bool)!method?.IsVirtual ? (T)method.Invoke(obj, null) : obj);
+				}
+
+				var pds = JsonConvert.SerializeObject(list, new JsonSerializerSettings(){ReferenceLoopHandling = ReferenceLoopHandling.Ignore});
+
+				if (string.IsNullOrEmpty(pds))
+					return;
+
+				// копирование в буфер обмена
+				IDataObject dataObj = new DataObject();
+				dataObj.SetData(nameof(T), false, pds);
+				Clipboard.SetDataObject(dataObj, false);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Error while copying new object(s). \n" + ex);
+				Program.Provider.Logger.Log(ex);
+			}
+		}
+
+		#region private void GetFromClipboard()
+
+		private void GetFromClipboard()
+		{
+			try
+			{
+				if (string.IsNullOrEmpty(nameof(T)))
+					return;
+				if (!Clipboard.ContainsData(nameof(T)))
+					return;
+				var pds = (string)Clipboard.GetData(nameof(T));
+				if (pds == null)
+					return;
+
+				var objectsToPaste = JsonConvert.DeserializeObject<List<T>>(pds);
+
+				if (objectsToPaste.Count > 0)
+				{
+					GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(objectsToPaste.Cast<BaseEntityObject>().ToList());
+					InsertItems(objectsToPaste.ToArray());
+				}
+				
+
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Error while inserting new object(s). \n" + ex);
+				Program.Provider.Logger.Log(ex);
+			}
+			finally
+			{
+				Clipboard.Clear();
+			}
+		}
+		#endregion
+
 
 		#endregion
 	}
