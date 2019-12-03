@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using Microsoft.VisualBasic.Devices;
-using Newtonsoft.Json;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
@@ -18,6 +19,7 @@ using SmartCore.Entities.General.Interfaces;
 using Telerik.WinControls.Data;
 using Telerik.WinControls.Export;
 using Telerik.WinControls.UI;
+using Component = SmartCore.Entities.General.Accessory.Component;
 
 namespace CAS.UI.UIControls.NewGrid
 {
@@ -44,6 +46,12 @@ namespace CAS.UI.UIControls.NewGrid
 		#region public Action MenuOpeningAction { get; set; }
 
 		public Action MenuOpeningAction { get; set; }
+
+		#endregion
+
+		#region public Action PasteComplete { get; set; }
+
+		public Action<List<T>> PasteComplete { get; set; }
 
 		#endregion
 
@@ -907,6 +915,21 @@ namespace CAS.UI.UIControls.NewGrid
 					list.Add((T)method.Invoke(obj, null));
 				}
 
+				//todo:(EvgeniiBabak) Нужен другой способ проверки сереализуемости объекта
+				using (MemoryStream mem = new MemoryStream())
+				{
+					BinaryFormatter bin = new BinaryFormatter();
+					try
+					{
+						bin.Serialize(mem, list);
+					}
+					catch (Exception ex)
+					{
+						MessageBox.Show("Объект не может быть сериализован. \n" + ex);
+						return;
+					}
+				}
+
 
 				if (list.Count == 0)
 					return;
@@ -922,8 +945,6 @@ namespace CAS.UI.UIControls.NewGrid
 				Program.Provider.Logger.Log(ex);
 			}
 		}
-
-		#region private void GetFromClipboard()
 
 		private void GetFromClipboard()
 		{
@@ -942,8 +963,24 @@ namespace CAS.UI.UIControls.NewGrid
 					GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(pds.Cast<BaseEntityObject>().ToList());
 					InsertItems(pds.ToArray());
 				}
-				
 
+				PasteComplete?.Invoke(pds.Cast<T>().ToList());
+
+				//TODO:Вообще лучше так не делать а выносить в PasteComplete такие штуки но пока в качестве универсальной запоатки пойдет
+				foreach (var pd in pds)
+				{
+					if(pd is IDirective directive)
+						GlobalObjects.PerformanceCalculator.GetNextPerformance(directive);
+
+					if (pd is Component component)
+					{
+						foreach (var cd in component.ComponentDirectives)
+							cd.ComponentId = component.ItemId;
+
+
+						GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(component.ComponentDirectives.Cast<BaseEntityObject>().ToList());
+					}
+				}
 			}
 			catch (Exception ex)
 			{
@@ -955,8 +992,6 @@ namespace CAS.UI.UIControls.NewGrid
 				Clipboard.Clear();
 			}
 		}
-		#endregion
-
 
 		#endregion
 	}
