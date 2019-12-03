@@ -218,7 +218,6 @@ namespace CAS.UI.UIControls.NewGrid
 
 			if (confirmResult == DialogResult.Yes)
 			{
-				radGridView1.BeginUpdate();
 				var deletedItems = SelectedItems.OfType<BaseEntityObject>().ToList();
 				foreach (var item in deletedItems)
 					item.IsDeleted = true;
@@ -226,8 +225,6 @@ namespace CAS.UI.UIControls.NewGrid
 				GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(deletedItems);
 				foreach (var item in deletedItems)
 					radGridView1.Rows.Remove(radGridView1.Rows.FirstOrDefault(i => (i.Tag as BaseEntityObject).ItemId == item.ItemId));
-
-				radGridView1.EndUpdate();
 			}
 		}
 
@@ -444,14 +441,16 @@ namespace CAS.UI.UIControls.NewGrid
 					i++;
 				}
 				temp.Add(rowInfo);
+
+				SetItemColor(rowInfo, (T)rowInfo.Tag);
+				radGridView1.Rows.Insert(0, rowInfo);
 			}
 
-			radGridView1.BeginUpdate();
-			radGridView1.Rows.AddRange(temp.ToArray());
-			radGridView1.EndUpdate();
+			//radGridView1.BeginUpdate();
+			//radGridView1.Rows.AddRange(temp.ToArray());
+			//radGridView1.EndUpdate();
 
-			SortingItems();//надо ли?
-			UpdateItemColor();
+			//UpdateItemColor();
 			SetTotalText();
 		}
 
@@ -518,9 +517,9 @@ namespace CAS.UI.UIControls.NewGrid
 					temp.Add(rowInfo);
 				}
 
-				radGridView1.BeginUpdate();
+				//radGridView1.BeginUpdate();
 				radGridView1.Rows.AddRange(temp.ToArray());
-				radGridView1.EndUpdate();
+				//radGridView1.EndUpdate();
 			}
 			catch (Exception ex)
 			{
@@ -904,19 +903,17 @@ namespace CAS.UI.UIControls.NewGrid
 				var list = new List<T>();
 				foreach (var obj in SelectedItems)
 				{
-					obj.ItemId = -1;
 					var method = typeof(T).GetMethods().FirstOrDefault(i => i.Name == "GetCopyUnsaved");
-					list.Add((bool)!method?.IsVirtual ? (T)method.Invoke(obj, null) : obj);
+					list.Add((T)method.Invoke(obj, null));
 				}
 
-				var pds = JsonConvert.SerializeObject(list, new JsonSerializerSettings(){ReferenceLoopHandling = ReferenceLoopHandling.Ignore});
 
-				if (string.IsNullOrEmpty(pds))
+				if (list.Count == 0)
 					return;
 
 				// копирование в буфер обмена
 				IDataObject dataObj = new DataObject();
-				dataObj.SetData(nameof(T), false, pds);
+				dataObj.SetData(nameof(T), false, list);
 				Clipboard.SetDataObject(dataObj, false);
 			}
 			catch (Exception ex)
@@ -936,16 +933,14 @@ namespace CAS.UI.UIControls.NewGrid
 					return;
 				if (!Clipboard.ContainsData(nameof(T)))
 					return;
-				var pds = (string)Clipboard.GetData(nameof(T));
+				var pds = (List<T>)Clipboard.GetData(nameof(T));
 				if (pds == null)
 					return;
 
-				var objectsToPaste = JsonConvert.DeserializeObject<List<T>>(pds);
-
-				if (objectsToPaste.Count > 0)
+				if (pds.Count > 0)
 				{
-					GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(objectsToPaste.Cast<BaseEntityObject>().ToList());
-					InsertItems(objectsToPaste.ToArray());
+					GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(pds.Cast<BaseEntityObject>().ToList());
+					InsertItems(pds.ToArray());
 				}
 				
 

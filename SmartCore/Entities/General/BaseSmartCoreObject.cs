@@ -117,14 +117,13 @@ namespace SmartCore.Entities.General
         /// <br/>с ItemId равным -1
         /// </summary>
         /// <returns></returns>
-        public virtual BaseEntityObject GetCopyUnsaved()
+        public new virtual BaseEntityObject GetCopyUnsaved()
         {
-            return new BaseEntityObject
-                       {
-                           IsDeleted = IsDeleted,
-                           ItemId = -1,
-                           SmartCoreObjectType = SmartCoreObjectType
-                       };
+			var clone = (BaseEntityObject)MemberwiseClone();
+			clone.ItemId = -1;
+			clone.UnSetEvents();
+
+			return clone;
         }
         #endregion
 
