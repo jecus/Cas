@@ -13,10 +13,11 @@ using SmartCore.Entities.General.Attributes;
 
 namespace CAS.UI.UIControls.Auxiliary
 {
-    ///<summary>
-    /// ЭУ для предствления дерева объектов определенного типа, унаследованных от <see cref="BaseEntityObject"/>
-    ///</summary>
-    public partial class BaseTreeViewControl<T> : UserControl, IReference where T : BaseEntityObject
+	///<summary>
+	/// ЭУ для предствления дерева объектов определенного типа, унаследованных от <see cref="BaseEntityObject"/>
+	///</summary>
+	[Serializable]
+	public partial class BaseTreeViewControl<T> : UserControl, IReference where T : BaseEntityObject
     {
         #region Fields
         //коллекция специальных элементов, отображаемых в списке

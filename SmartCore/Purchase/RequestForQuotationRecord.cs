@@ -445,6 +445,7 @@ namespace SmartCore.Purchase
 
 	}
 
+	[Serializable]
 	[JsonObject]
 	public class SupplierPrice : BaseEntityObject
 	{

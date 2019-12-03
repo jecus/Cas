@@ -7,104 +7,105 @@ using SmartCore.Entities.General.Attributes;
 namespace SmartCore.Entities.General.Schedule
 {
 
-    /// <summary>
-    ///  ласс, описывает расписание рейса на определенный день
-    /// </summary>
-    [Table("FlightNumberPeriod s", "dbo", "ItemId")]
-    [Dto(typeof(FlightNumberPeriodDTO))]
+	/// <summary>
+	///  ласс, описывает расписание рейса на определенный день
+	/// </summary>
+	[Table("FlightNumberPeriod s", "dbo", "ItemId")]
+	[Dto(typeof(FlightNumberPeriodDTO))]
 	[Condition("IsDeleted", "0")]
-    public class FlightNumberPeriodDaySchedule : BaseEntityObject
-    {
-        private static Type _thisType;
-        /*
-        *  —войства
-        */
+	[Serializable]
+	public class FlightNumberPeriodDaySchedule : BaseEntityObject
+	{
+		private static Type _thisType;
+		/*
+		*  —войства
+		*/
 
-        #region public Int32 FlightNumberId { get; set; }
-        /// <summary>
+		#region public Int32 FlightNumberId { get; set; }
+		/// <summary>
 		/// »дентификатор рейса
 		/// </summary>
-        [TableColumnAttribute("FlightNumberId")]
-        [ParentAttribute]
-        public FlightNumber FlightNumber { get; set; }
+		[TableColumnAttribute("FlightNumberId")]
+		[ParentAttribute]
+		public FlightNumber FlightNumber { get; set; }
 
-        public static PropertyInfo FlightNumberIdProperty
-        {
-            get { return GetCurrentType().GetProperty("FlightNumber"); }
-        }
+		public static PropertyInfo FlightNumberIdProperty
+		{
+			get { return GetCurrentType().GetProperty("FlightNumber"); }
+		}
 
 		#endregion
 
-        #region public Int32 FlightNumberPeriodId { get; set; }
-        /// <summary>
-        /// описывает период, которому принадлежит день расписани€ рейса
-        /// </summary>
-        [TableColumnAttribute("FlightNumberPeriodId")]
-        [ParentAttribute]
-        public FlightNumberPeriod FlightNumberPeriod { get; set; }
+		#region public Int32 FlightNumberPeriodId { get; set; }
+		/// <summary>
+		/// описывает период, которому принадлежит день расписани€ рейса
+		/// </summary>
+		[TableColumnAttribute("FlightNumberPeriodId")]
+		[ParentAttribute]
+		public FlightNumberPeriod FlightNumberPeriod { get; set; }
 
-        public static PropertyInfo FlightNumberPeriodProperty
-        {
-            get { return GetCurrentType().GetProperty("FlightNumberPeriod"); }
-        }
+		public static PropertyInfo FlightNumberPeriodProperty
+		{
+			get { return GetCurrentType().GetProperty("FlightNumberPeriod"); }
+		}
 
-        #endregion
+		#endregion
 
-        #region public DateTime PeriodFrom { get; set; }
-        /// <summary>
-        /// ƒата начала периода рейса 
-        /// </summary>
-        [TableColumnAttribute("PeriodFrom")]
-        [FormControl("PeriodFrom")]
-        [ListViewData(200f, "PeriodFrom")]
-        [NotNull]
-        public DateTime PeriodFrom { get; set; }
-        #endregion
+		#region public DateTime PeriodFrom { get; set; }
+		/// <summary>
+		/// ƒата начала периода рейса 
+		/// </summary>
+		[TableColumnAttribute("PeriodFrom")]
+		[FormControl("PeriodFrom")]
+		[ListViewData(200f, "PeriodFrom")]
+		[NotNull]
+		public DateTime PeriodFrom { get; set; }
+		#endregion
 
-        #region public DateTime PeriodTo { get; set; }
-        /// <summary>
-        /// ƒата окончани€ периода рейса 
-        /// </summary>
-        [TableColumnAttribute("PeriodTo")]
-        [FormControl("PeriodTo")]
-        [ListViewData(200f, "PeriodTo")]
-        [NotNull]
-        public DateTime PeriodTo { get; set; }
-        #endregion
+		#region public DateTime PeriodTo { get; set; }
+		/// <summary>
+		/// ƒата окончани€ периода рейса 
+		/// </summary>
+		[TableColumnAttribute("PeriodTo")]
+		[FormControl("PeriodTo")]
+		[ListViewData(200f, "PeriodTo")]
+		[NotNull]
+		public DateTime PeriodTo { get; set; }
+		#endregion
 
-        /*
+		/*
 		*  ћетоды 
 		*/
 
-        #region public FlightNumberPeriodDaySchedule()
-        /// <summary>
-        /// —оздает "пустую" запись о периоде действи€ планируемого рейса
-        /// </summary>
-        public FlightNumberPeriodDaySchedule()
-        {
-            ItemId = -1;
-            SmartCoreObjectType = SmartCoreType.FlightNumberPeriodDaySchedule;
-            PeriodFrom = DateTime.Today;
-            PeriodTo = DateTime.Today.AddDays(1);
-        }
-        #endregion
+		#region public FlightNumberPeriodDaySchedule()
+		/// <summary>
+		/// —оздает "пустую" запись о периоде действи€ планируемого рейса
+		/// </summary>
+		public FlightNumberPeriodDaySchedule()
+		{
+			ItemId = -1;
+			SmartCoreObjectType = SmartCoreType.FlightNumberPeriodDaySchedule;
+			PeriodFrom = DateTime.Today;
+			PeriodTo = DateTime.Today.AddDays(1);
+		}
+		#endregion
 
-        #region public override string ToString()
-        /// <summary>
-        /// ѕерегружаем дл€ отладки
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return "";
-        }
-        #endregion   
+		#region public override string ToString()
+		/// <summary>
+		/// ѕерегружаем дл€ отладки
+		/// </summary>
+		/// <returns></returns>
+		public override string ToString()
+		{
+			return "";
+		}
+		#endregion   
 
-        #region private static Type GetCurrentType()
-        private static Type GetCurrentType()
-        {
-            return _thisType ?? (_thisType = typeof(FlightNumberPeriod));
-        }
-        #endregion
-    }
+		#region private static Type GetCurrentType()
+		private static Type GetCurrentType()
+		{
+			return _thisType ?? (_thisType = typeof(FlightNumberPeriod));
+		}
+		#endregion
+	}
 }

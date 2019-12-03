@@ -3,6 +3,7 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
+	[Serializable]
 	public class InterruptionType : StaticDictionary
 	{
 		private string _code;
@@ -30,8 +31,8 @@ namespace SmartCore.Entities.Dictionaries
 		public static InterruptionType Aircraft12 = new InterruptionType(12, "Aircraft Damage", "Aircraft Damage", "53", "Damage by previous statio or place / source of occurrence unknown ");
 
 		/*
-         * Методы
-         */
+		 * Методы
+		 */
 
 		#region public static InterruptionType GetItemById(Int32 maintenanceTypeId)
 		/// <summary>
@@ -82,8 +83,8 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Реализация
-         */
+		 * Реализация
+		 */
 		#region public InterruptionType()
 		/// <summary>
 		/// Конструктор создает объект повреждения

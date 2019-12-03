@@ -3,6 +3,7 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
+	[Serializable]
 	public class StatusOfDelivery : StaticDictionary
 	{
 		#region private static List<StatusOfDelivery> _Items = new List<StatusOfDelivery>();

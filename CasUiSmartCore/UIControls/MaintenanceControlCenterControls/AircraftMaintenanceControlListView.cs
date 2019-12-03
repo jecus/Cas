@@ -21,6 +21,7 @@ namespace CAS.UI.UIControls.MaintenanceControlCenterControls
 	///<summary>
 	/// список для отображения ордеров запроса
 	///</summary>
+	[Serializable]
 	public partial class AircraftMaintenanceControlListView : BaseGridViewControl<BaseEntityObject>
 	{
 		#region Fields

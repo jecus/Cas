@@ -8,13 +8,14 @@ namespace SmartCore.DataAccesses.AttachedFiles
 {
 	[Table("ItemsFilesLinks", "dbo", "ItemId")]
 	[Dto(typeof(AttachedFileDTO))]
+	[Serializable]
 	public class ItemFileLinkDTO : BaseEntityObject
 	{
-        public ItemFileLinkDTO()
-        {
-            ItemId = -1;
-            SmartCoreObjectType = SmartCoreType.ItemFileLinkDTO;
-        }
+		public ItemFileLinkDTO()
+		{
+			ItemId = -1;
+			SmartCoreObjectType = SmartCoreType.ItemFileLinkDTO;
+		}
 
 		private static Type _thisType;
 

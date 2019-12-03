@@ -3,8 +3,9 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
-    public class ComponentRecordType : StaticDictionary
-    {
+	[Serializable]
+	public class ComponentRecordType : StaticDictionary
+	{
 		#region public static CommonDictionaryCollection<ComponentRecordType> _Items = new CommonDictionaryCollection<ComponentRecordType>();
 		/// <summary>
 		/// Содержит все элементы
@@ -12,8 +13,8 @@ namespace SmartCore.Entities.Dictionaries
 		private static CommonDictionaryCollection<ComponentRecordType> _Items = new CommonDictionaryCollection<ComponentRecordType>();
 		#endregion
 		/*
-         * Предопределенные типы
-         */
+		 * Предопределенные типы
+		 */
 
 		#region public static ComponentRecordType Overhaul = new ComponentRecordType(1, "OH", "Overhaul", "");
 		/// <summary>
@@ -291,30 +292,30 @@ namespace SmartCore.Entities.Dictionaries
 
 		public static ComponentRecordType Task = new ComponentRecordType(56, "Task", "Task", "");
 
-        #endregion
+		#endregion
 
-        #region public static ComponentRecordType InspectionTest = new ComponentRecordType(57, "Inspection Test", "Inspection Test", "");
+		#region public static ComponentRecordType InspectionTest = new ComponentRecordType(57, "Inspection Test", "Inspection Test", "");
 
-        public static ComponentRecordType InspectionTest = new ComponentRecordType(57, "Inspection Test", "Inspection Test", "");
+		public static ComponentRecordType InspectionTest = new ComponentRecordType(57, "Inspection Test", "Inspection Test", "");
 
-        #endregion
+		#endregion
 
-        #region public static ComponentRecordType OperationalCheck = new ComponentRecordType(58, "Operational Check", "Operational Check", "");
+		#region public static ComponentRecordType OperationalCheck = new ComponentRecordType(58, "Operational Check", "Operational Check", "");
 
-        public static ComponentRecordType OperationalCheck = new ComponentRecordType(58, "Operational Check", "Operational Check", "");
+		public static ComponentRecordType OperationalCheck = new ComponentRecordType(58, "Operational Check", "Operational Check", "");
 
-        #endregion
+		#endregion
 
-        #region public static ComponentRecordType Unknown = new ComponentRecordType(-1, "Unknown", "Unknown", "Unknown");
-        /// <summary> 
-        /// Неизвестный объект
-        /// </summary>
-        public static ComponentRecordType Unknown = new ComponentRecordType(-1, "Unknown", "Unknown", "Unknown");
+		#region public static ComponentRecordType Unknown = new ComponentRecordType(-1, "Unknown", "Unknown", "Unknown");
+		/// <summary> 
+		/// Неизвестный объект
+		/// </summary>
+		public static ComponentRecordType Unknown = new ComponentRecordType(-1, "Unknown", "Unknown", "Unknown");
 		#endregion
 
 		/*
-         * Методы
-         */
+		 * Методы
+		 */
 
 		#region public static ComponentRecordType GetItemById(Int32 DirectiveTypeId)
 		/// <summary>
@@ -323,13 +324,13 @@ namespace SmartCore.Entities.Dictionaries
 		/// <param name="directiveTypeId"></param>
 		/// <returns></returns>
 		public static ComponentRecordType GetItemById(int directiveTypeId)
-        {
-            foreach (ComponentRecordType t in _Items)
-                if (t.ItemId == directiveTypeId)
-                    return t;
-            //
-            return Unknown;
-        }
+		{
+			foreach (ComponentRecordType t in _Items)
+				if (t.ItemId == directiveTypeId)
+					return t;
+			//
+			return Unknown;
+		}
 
 		#endregion
 
@@ -338,39 +339,39 @@ namespace SmartCore.Entities.Dictionaries
 		/// Возвращает список  элементов коллекции
 		/// </summary>
 		public static CommonDictionaryCollection<ComponentRecordType> Items
-        {
-            get
-            {
-                return _Items;
-            }
-        }
-        #endregion
+		{
+			get
+			{
+				return _Items;
+			}
+		}
+		#endregion
 
-        #region public override string ToString()
-        /// <summary>
-        /// Переводит тип директивы в строку
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return FullName;
-        }
+		#region public override string ToString()
+		/// <summary>
+		/// Переводит тип директивы в строку
+		/// </summary>
+		/// <returns></returns>
+		public override string ToString()
+		{
+			return FullName;
+		}
 		#endregion
 
 		/*
-        * Свойства
-        */
+		* Свойства
+		*/
 
 		/*
-         * Реализация
-         */
+		 * Реализация
+		 */
 		#region public ComponentRecordType()
 		/// <summary>
 		/// Конструктор создает объект типа директивы
 		/// </summary>
 		public ComponentRecordType()
-        {
-        }
+		{
+		}
 		#endregion
 
 		#region public ComponentRecordType(Int32 ItemId, String shortName, String fullName, String commonName)
@@ -382,15 +383,15 @@ namespace SmartCore.Entities.Dictionaries
 		/// <param name="fullName"></param>
 		/// <param name="commonName"></param>
 		public ComponentRecordType(Int32 itemID, String shortName, String fullName, String commonName)
-        {
-            ItemId = itemID;
-            ShortName = shortName;
-            FullName = fullName;
-            CommonName = commonName;
+		{
+			ItemId = itemID;
+			ShortName = shortName;
+			FullName = fullName;
+			CommonName = commonName;
 
-            //if (_Items == null) _Items = new List<DetailType>();
-            _Items.Add(this);
-        }
-        #endregion
-    }
+			//if (_Items == null) _Items = new List<DetailType>();
+			_Items.Add(this);
+		}
+		#endregion
+	}
 }

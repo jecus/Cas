@@ -3,6 +3,7 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
+	[Serializable]
 	public class LicenseRights :  StaticDictionary
 	{
 		#region private static CommonDictionaryCollection<LicenseRights> _Items = new CommonDictionaryCollection<LicenseRights>();
@@ -99,8 +100,8 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Реализация
-         */
+		 * Реализация
+		 */
 		#region public LicenseRights()
 		/// <summary>
 		/// Конструктор создает объект повреждения

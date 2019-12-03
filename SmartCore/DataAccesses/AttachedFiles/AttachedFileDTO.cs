@@ -1,4 +1,5 @@
-﻿using SmartCore.Entities.Dictionaries;
+﻿using System;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
 
@@ -6,11 +7,12 @@ namespace SmartCore.DataAccesses.AttachedFiles
 {
 	[Table("Files", "dbo", "ItemId")]
 	[Dto(typeof(AttachedFileDTO))]
+	[Serializable]
 	public class AttachedFileDTO : BaseEntityObject
 	{
 		/*
-        *  Свойства
-        */
+		*  Свойства
+		*/
 		[TableColumn("FileName")]
 		public string FileName { get; set; }
 
@@ -31,7 +33,7 @@ namespace SmartCore.DataAccesses.AttachedFiles
 		{
 			ItemId = -1;
 			IsDeleted = false;
-            SmartCoreObjectType = SmartCoreType.AttachedFileDTO;
+			SmartCoreObjectType = SmartCoreType.AttachedFileDTO;
 		}
 	}
 }

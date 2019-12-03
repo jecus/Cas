@@ -6,10 +6,11 @@ using SmartCore.Entities.General;
 
 namespace CAS.UI.UIControls.Auxiliary
 {
-    /// <summary>
-    /// Это контейнер для всех скринов
-    /// </summary>
-    public partial class GenericTreeScreenControl<T> : UserControl, IReference, IDisplayingEntity where T : BaseEntityObject
+	/// <summary>
+	/// Это контейнер для всех скринов
+	/// </summary>
+	[Serializable]
+	public partial class GenericTreeScreenControl<T> : UserControl, IReference, IDisplayingEntity where T : BaseEntityObject
     {
         #region Implementation of IReference
 

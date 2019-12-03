@@ -3,6 +3,7 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
+	[Serializable]
 	public class ShipBy : StaticDictionary
 	{
 		#region private static CommonDictionaryCollection<ShipBy> _Items = new CommonDictionaryCollection<ShipBy>();
@@ -23,8 +24,8 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Методы
-         */
+		 * Методы
+		 */
 
 		#region public static ShipBy GetItemById(Int32 maintenanceTypeId)
 		/// <summary>
@@ -68,8 +69,8 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Реализация
-         */
+		 * Реализация
+		 */
 		#region public ShipBy()
 		/// <summary>
 		/// Конструктор создает объект повреждения

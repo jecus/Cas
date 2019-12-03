@@ -11,6 +11,7 @@ namespace SmartCore.Entities.General.Personnel
 	[Table("SpecialistsLicense", "dbo", "ItemId")]
 	[Dto(typeof(SpecialistLicenseDTO))]
 	[Condition("IsDeleted", "0")]
+	[Serializable]
 	public class SpecialistLicense : BaseEntityObject
 	{
 		
@@ -149,8 +150,8 @@ namespace SmartCore.Entities.General.Personnel
 		#endregion
 
 		public SpecialistLicense()
-        {
-            ItemId = -1;
+		{
+			ItemId = -1;
 			EmployeeLicenceType = EmployeeLicenceType.UNK;
 			SmartCoreObjectType = SmartCoreType.SpecialistLicense;
 			IssueDate = DateTime.Today;

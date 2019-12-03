@@ -3,10 +3,11 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
-    /// <summary>
-    /// Ущерб репутации
-    /// </summary>
-    public class ReputationDamage : StaticDictionary
+	/// <summary>
+	/// Ущерб репутации
+	/// </summary>
+	[Serializable]
+	public class ReputationDamage : StaticDictionary
     {
         private int _weight;
 

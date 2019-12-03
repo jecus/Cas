@@ -1,4 +1,5 @@
-﻿using EntityCore.DTO.Dictionaries;
+﻿using System;
+using EntityCore.DTO.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
 
@@ -7,17 +8,18 @@ namespace SmartCore.Entities.Dictionaries
 	[Table("Restriction", "Dictionaries", "ItemId")]
 	[Dto(typeof(RestrictionDTO))]
 	[Condition("IsDeleted", "0")]
+	[Serializable]
 	public class LicenseRestriction : AbstractDictionary
 	{
-        #region public LicenseRestriction()
+		#region public LicenseRestriction()
 
-        public LicenseRestriction()
-        {
-            ItemId = -1;
-            SmartCoreObjectType = SmartCoreType.LicenseRestriction;
-        }
+		public LicenseRestriction()
+		{
+			ItemId = -1;
+			SmartCoreObjectType = SmartCoreType.LicenseRestriction;
+		}
 
-        #endregion
+		#endregion
 
 		#region Implement of Dictionary
 
