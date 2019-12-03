@@ -223,10 +223,12 @@ namespace CAS.UI.Helpers
 				$"{typeof(T).Name.Replace("DTO", "").ToLower()}/bulkupdate", entity);
 		}
 
-		public void BulkInsert<T>(IEnumerable<T> entity, int? batchSize = null) where T : BaseEntity
+		public Dictionary<string, int> BulkInsert<T>(IEnumerable<T> entity, int? batchSize = null) where T : BaseEntity
 		{
-			_httpClient.SendJsonAsync<IEnumerable<T>>(HttpMethod.Post,
+			var res =_httpClient.SendJsonAsync<IEnumerable<T>, Dictionary<string,int>>(HttpMethod.Post,
 				$"{typeof(T).Name.Replace("DTO", "").ToLower()}/bulkinsert", entity);
+
+			return res?.Data ?? new Dictionary<string, int>();
 		}
 
 		#endregion

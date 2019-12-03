@@ -92,6 +92,9 @@ namespace SmartCore.Entities.General
         }
         #endregion
 
+		//Нужно исключительно для BulkInsert
+		public string Guid { get; set; }
+
         #region public override string ToString()
         public override string ToString()
         {
