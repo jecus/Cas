@@ -911,9 +911,18 @@ namespace CAS.UI.UIControls.NewGrid
 				var list = new List<T>();
 				foreach (var obj in SelectedItems)
 				{
-					var method = typeof(T).GetMethods().FirstOrDefault(i => i.Name == "GetCopyUnsaved");
-					list.Add((T)method.Invoke(obj, null));
+					if (obj is Component newComponent)
+					{
+						list.Add(newComponent.GetCopyUnsaved() as T);
+					}
+					else
+					{
+						var method = typeof(T).GetMethods().FirstOrDefault(i => i.Name == "GetCopyUnsaved");
+						list.Add((T)method.Invoke(obj, null));
+					}
 				}
+
+					
 
 				//todo:(EvgeniiBabak) Нужен другой способ проверки сереализуемости объекта
 				using (MemoryStream mem = new MemoryStream())
@@ -958,10 +967,12 @@ namespace CAS.UI.UIControls.NewGrid
 				if (pds == null)
 					return;
 
+
+				var objectToPaste = new List<T>();
 				if (pds.Count > 0)
 				{
 					GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(pds.Cast<BaseEntityObject>().ToList());
-					InsertItems(pds.ToArray());
+					objectToPaste.AddRange(pds);
 				}
 
 				PasteComplete?.Invoke(pds.Cast<T>().ToList());
@@ -971,16 +982,22 @@ namespace CAS.UI.UIControls.NewGrid
 				{
 					if(pd is IDirective directive)
 						GlobalObjects.PerformanceCalculator.GetNextPerformance(directive);
-
 					if (pd is Component component)
 					{
+						objectToPaste.Remove(pd);
+
 						foreach (var cd in component.ComponentDirectives)
 							cd.ComponentId = component.ItemId;
 
-
 						GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(component.ComponentDirectives.Cast<BaseEntityObject>().ToList());
+
+						objectToPaste.AddRange(component.ComponentDirectives.Cast<T>());
+						objectToPaste.Add(component as T);
 					}
 				}
+
+
+				InsertItems(objectToPaste.ToArray());
 			}
 			catch (Exception ex)
 			{

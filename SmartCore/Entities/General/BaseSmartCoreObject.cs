@@ -120,7 +120,7 @@ namespace SmartCore.Entities.General
         /// <br/>с ItemId равным -1
         /// </summary>
         /// <returns></returns>
-        public new virtual BaseEntityObject GetCopyUnsaved()
+        public virtual BaseEntityObject GetCopyUnsaved()
         {
 			var clone = (BaseEntityObject)MemberwiseClone();
 			clone.ItemId = -1;
