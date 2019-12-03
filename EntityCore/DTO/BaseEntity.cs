@@ -23,5 +23,8 @@ namespace EntityCore.DTO
 
 		[Column("Updated")]
 		public DateTime Updated { get; set; }
+
+		[NotMapped]
+		public string Guid { get; set; }
 	}
 }

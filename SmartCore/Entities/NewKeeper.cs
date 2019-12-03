@@ -98,9 +98,16 @@ namespace SmartCore.Entities
 
 			var res = new List<TOut>();
 			foreach (var value in values)
-				res.Add(InvokeConverter<T, TOut>((T)value, method));
+			{
+				var obj = InvokeConverter<T, TOut>((T) value, method);
+				obj.Guid = value.Guid = Guid.NewGuid().ToString();
+				res.Add(obj);
+			}
 
-			_apiProvider.BulkInsert(res, batchSize);
+			var dict = _apiProvider.BulkInsert(res, batchSize);
+
+			foreach (var value in values)
+				value.ItemId = dict[value.Guid];
 
 		}
 		public void BulkInsert(List<BaseEntityObject> value, int? batchSize = null)

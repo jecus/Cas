@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
 using Telerik.WinControls.Export;
@@ -28,9 +32,13 @@ namespace CAS.UI.UIControls.NewGrid
 		protected readonly List<GridViewDataColumn> ColumnHeaderList = new List<GridViewDataColumn>();
 		//коллекция выделенных элементов
 		private readonly List<BaseEntityObject> _items = new List<BaseEntityObject>();
-		private RadDropDownMenu _customMenu;
 
 		protected ICommonCollection _selectedItemsList;
+
+		private RadDropDownMenu _customMenu;
+		private RadMenuItem _toolStripMenuItemCopy;
+		private RadMenuItem _toolStripMenuItemPaste;
+		private RadMenuItem _toolStripMenuItemDelete;
 
 		#endregion
 
@@ -185,8 +193,86 @@ namespace CAS.UI.UIControls.NewGrid
 		{
 			InitializeComponent();
 			SetupGridView();
+			InitListView();
 		}
 
+
+		#endregion
+
+		#region private void InitListView()
+
+		public void AddMenuItems(params RadMenuItemBase[] items)
+		{
+			_customMenu.Items.Clear();
+			_customMenu.Items.AddRange(items);
+			_customMenu.Items.AddRange(_toolStripMenuItemDelete,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemCopy,
+				_toolStripMenuItemPaste
+			);
+		}
+
+		private void InitListView()
+		{
+			_customMenu = new RadDropDownMenu();
+			_toolStripMenuItemDelete = new RadMenuItem();
+			_toolStripMenuItemCopy = new RadMenuItem();
+			_toolStripMenuItemPaste = new RadMenuItem();
+
+			// 
+			// toolStripMenuItemDelete
+			// 
+			_toolStripMenuItemDelete.Text = "Delete";
+			_toolStripMenuItemDelete.Click += ButtonDeleteClick;
+
+			// 
+			// toolStripMenuItemCopy
+			// 
+			_toolStripMenuItemCopy.Text = "Copy";
+			_toolStripMenuItemCopy.Click += CopyItemsClick;
+
+			// 
+			// toolStripMenuItemPaste
+			// 
+			_toolStripMenuItemPaste.Text = "Paste";
+			_toolStripMenuItemPaste.Click += PasteItemsClick;
+
+			_customMenu.Items.AddRange(new RadMenuSeparatorItem(),
+				_toolStripMenuItemDelete,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemCopy,
+				_toolStripMenuItemPaste
+			);
+		}
+
+		public virtual void PasteItemsClick(object sender, EventArgs e)
+		{
+			GetFromClipboard();
+		}
+
+		public virtual void CopyItemsClick(object sender, EventArgs e)
+		{
+			CopyToClipboard();
+		}
+
+		public virtual void ButtonDeleteClick(object sender, EventArgs e)
+		{
+			if (this.SelectedItems == null) return;
+
+			var confirmResult = MessageBox.Show($"Do you really want to delete  {SelectedItems.Count} item(s)?", "Confirm delete operation",
+														MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+
+			if (confirmResult == DialogResult.Yes)
+			{
+				var deletedItems = SelectedItems.OfType<BaseEntityObject>().ToList();
+				foreach (var item in deletedItems)
+					item.IsDeleted = true;
+
+				GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(deletedItems);
+				foreach (var item in deletedItems)
+					radGridView1.Rows.Remove(radGridView1.Rows.FirstOrDefault(i => (i.Tag as BaseEntityObject).ItemId == item.ItemId));
+			}
+		}
 
 		#endregion
 
@@ -355,13 +441,14 @@ namespace CAS.UI.UIControls.NewGrid
 					i++;
 				}
 				temp.Add(rowInfo);
+
+				SetItemColor(rowInfo, (BaseEntityObject)rowInfo.Tag);
+				radGridView1.Rows.Insert(0, rowInfo);
 			}
 
-			radGridView1.BeginUpdate();
-			radGridView1.Rows.AddRange(temp.ToArray());
-			radGridView1.EndUpdate();
+			//radGridView1.Rows.AddRange(temp.ToArray());
 
-			SetItemsColor();
+			//SetItemsColor();
 			SetTotalText();
 		}
 
@@ -444,9 +531,7 @@ namespace CAS.UI.UIControls.NewGrid
 					temp.Add(rowInfo);
 				}
 
-				radGridView1.BeginUpdate();
 				radGridView1.Rows.AddRange(temp.ToArray());
-				radGridView1.EndUpdate();
 			}
 			catch (Exception ex)
 			{
@@ -726,6 +811,101 @@ namespace CAS.UI.UIControls.NewGrid
 			e.CellStyleInfo.RightBorder = Color.Black;
 			e.CellStyleInfo.BottomBorder = Color.Black;
 			e.CellStyleInfo.TopBorder = Color.Black;
+		}
+
+		#endregion
+
+		#region Copy/Paste
+
+		private void CopyToClipboard()
+		{
+			// регистрация формата данных либо получаем его, если он уже зарегистрирован
+			try
+			{
+				if (SelectedItems == null || SelectedItems.Count == 0)
+					return;
+
+				var list = new List<BaseEntityObject>();
+				foreach (var obj in SelectedItems)
+				{
+					var method = typeof(BaseEntityObject).GetMethods().FirstOrDefault(i => i.Name == "GetCopyUnsaved");
+					list.Add((BaseEntityObject)method.Invoke(obj, null));
+				}
+
+				//todo:(EvgeniiBabak) Нужен другой способ проверки сереализуемости объекта
+				using (MemoryStream mem = new MemoryStream())
+				{
+					BinaryFormatter bin = new BinaryFormatter();
+					try
+					{
+						bin.Serialize(mem, list);
+					}
+					catch (Exception ex)
+					{
+						MessageBox.Show("Объект не может быть сериализован. \n" + ex);
+						return;
+					}
+				}
+
+
+				if (list.Count == 0)
+					return;
+
+				// копирование в буфер обмена
+				IDataObject dataObj = new DataObject();
+				dataObj.SetData(nameof(BaseEntityObject), false, list);
+				Clipboard.SetDataObject(dataObj, false);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Error while copying new object(s). \n" + ex);
+				Program.Provider.Logger.Log(ex);
+			}
+		}
+
+		private void GetFromClipboard()
+		{
+			try
+			{
+				if (string.IsNullOrEmpty(nameof(BaseEntityObject)))
+					return;
+				if (!Clipboard.ContainsData(nameof(BaseEntityObject)))
+					return;
+				var pds = (List<BaseEntityObject>)Clipboard.GetData(nameof(BaseEntityObject));
+				if (pds == null)
+					return;
+
+				if (pds.Count > 0)
+				{
+					GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(pds.Cast<BaseEntityObject>().ToList());
+					InsertItems(pds.ToList());
+				}
+
+				//TODO:Вообще лучше так не делать а выносить в PasteComplete такие штуки но пока в качестве универсальной запоатки пойдет
+				foreach (var pd in pds)
+				{
+					if (pd is IDirective directive)
+						GlobalObjects.PerformanceCalculator.GetNextPerformance(directive);
+
+					if (pd is Component component)
+					{
+						foreach (var cd in component.ComponentDirectives)
+							cd.ComponentId = component.ItemId;
+
+
+						GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(component.ComponentDirectives.Cast<BaseEntityObject>().ToList());
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Error while inserting new object(s). \n" + ex);
+				Program.Provider.Logger.Log(ex);
+			}
+			finally
+			{
+				Clipboard.Clear();
+			}
 		}
 
 		#endregion
