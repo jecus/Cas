@@ -23,7 +23,6 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 	///<summary>
 	/// список для отображения ордеров запроса
 	///</summary>
-	[Serializable]
 	public partial class AuditView : BaseGridViewControl<BaseEntityObject>
 	{
 		#region Fields
