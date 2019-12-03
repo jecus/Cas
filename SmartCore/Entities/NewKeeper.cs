@@ -99,8 +99,8 @@ namespace SmartCore.Entities
 			var res = new List<TOut>();
 			foreach (var value in values)
 			{
-				value.Guid = Guid.NewGuid().ToString();
 				var obj = InvokeConverter<T, TOut>((T) value, method);
+				obj.Guid = value.Guid = Guid.NewGuid().ToString();
 				res.Add(obj);
 			}
 
