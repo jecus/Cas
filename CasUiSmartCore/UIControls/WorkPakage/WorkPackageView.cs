@@ -24,7 +24,6 @@ namespace CAS.UI.UIControls.WorkPakage
 	///<summary>
 	/// список для отображения ордеров запроса
 	///</summary>
-	[Serializable]
 	public partial class WorkPackageView : BaseGridViewControl<BaseEntityObject>
 	{
 		#region Fields

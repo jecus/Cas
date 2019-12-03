@@ -23,7 +23,6 @@ namespace CAS.UI.UIControls.ComponentControls
 	///<summary>
 	/// список для отображения ордеров запроса
 	///</summary>
-	[Serializable]
 	public partial class ComponentsListView : BaseGridViewControl<BaseEntityObject>
 	{
 		#region Fields

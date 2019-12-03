@@ -8,7 +8,6 @@ using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls
 {
-	[Serializable]
 	public class SupplierPriceCustom : BaseEntityObject
 	{
 		public SupplierPrice Price { get; set; }

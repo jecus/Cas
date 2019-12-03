@@ -24,7 +24,6 @@ namespace CAS.UI.UIControls.Fleet
 	///<summary>
 	/// список для отображения ордеров запроса
 	///</summary>
-	[Serializable]
 	public partial class ComponentsFleetListView : BaseGridViewControl<BaseEntityObject>
 	{
 
