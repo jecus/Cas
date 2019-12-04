@@ -438,12 +438,11 @@ namespace CAS.UI.UIControls.ComponentControls
 
 			_directivesViewer.SetItemsArray(res.ToArray());
 
-
-			if (_llpMark)
-			{
+			var column = _llpMark ? 7 : 2;
+			
 				var resultList = new List<BaseEntityObject>();
 				var list = _directivesViewer.radGridView1.Rows.Select(i => i).ToList();
-				list.Sort(new GridViewDataRowInfoComparer(7, 1));
+				list.Sort(new GridViewDataRowInfoComparer(column, 1));
 				//добавление остальных подзадач
 				foreach (GridViewRowInfo item in list)
 				{
@@ -451,11 +450,11 @@ namespace CAS.UI.UIControls.ComponentControls
 					{
 						resultList.Add(item.Tag as BaseEntityObject);
 
-						Component component = (Component)item.Tag;
+						Component component = (Component) item.Tag;
 						var items = list
 							.Where(lvi =>
 								lvi.Tag is ComponentDirective &&
-								((ComponentDirective)lvi.Tag).ComponentId == component.ItemId).Select(i => i.Tag);
+								((ComponentDirective) lvi.Tag).ComponentId == component.ItemId).Select(i => i.Tag);
 						resultList.AddRange(items.OfType<BaseEntityObject>());
 					}
 					else if (item.Tag is ComponentDirective)
@@ -467,16 +466,17 @@ namespace CAS.UI.UIControls.ComponentControls
 						else
 						{
 							var lvi =
-								list.FirstOrDefault(lv => lv.Tag is Component && ((Component)lv.Tag).ItemId == d.ItemId);
+								list.FirstOrDefault(
+									lv => lv.Tag is Component && ((Component) lv.Tag).ItemId == d.ItemId);
 							if (lvi == null)
 								resultList.Add(item.Tag as BaseEntityObject);
 						}
 					}
-				}
-				_directivesViewer.SetItemsArray(resultList.ToArray());
-			}
 
-			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
+					_directivesViewer.SetItemsArray(resultList.ToArray());
+				}
+
+				headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 			_directivesViewer.Focus();
 
 			if (_removedComponents.Count > 0
@@ -1562,9 +1562,7 @@ namespace CAS.UI.UIControls.ComponentControls
 				_toolStripMenuItemPrint,
 				new RadMenuSeparatorItem(),
 				_toolStripMenuItemComposeWorkPackage,
-				_toolStripMenuItemsWorkPackages,
-				_toolStripSeparator1,
-				_toolStripSeparator4);
+				_toolStripMenuItemsWorkPackages);
 
 
 			_directivesViewer.ConfigurePaste = list =>

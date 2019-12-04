@@ -974,9 +974,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 				_toolStripSeparator2,
 				_toolStripMenuItemComposeWorkPackage,
 				_toolStripMenuItemsWorkPackages,
-				_toolStripMenuItemsWShowWP,
-				_toolStripSeparator1,
-				_toolStripSeparator4);
+				_toolStripMenuItemsWShowWP);
 
 
 			_directivesViewer.ConfigurePaste = list =>
