@@ -1945,7 +1945,7 @@ namespace SmartCore.Entities.General.Accessory
 			component.Warranty = new Lifelength(Warranty);
 			component.WarrantyNotify = new Lifelength(WarrantyNotify);
 
-			component.ParentBaseComponent = null;
+			//component.ParentBaseComponent = null;
 
 			component._componentLLPDataCollection = new ComponentLLPDataCollection();
 			foreach (var componentLLPCategoryData in LLPData)

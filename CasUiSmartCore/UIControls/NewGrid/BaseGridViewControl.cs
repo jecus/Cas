@@ -14,6 +14,7 @@ using CASTerms;
 using Microsoft.VisualBasic.Devices;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
 using Telerik.WinControls.Data;
@@ -738,6 +739,9 @@ namespace CAS.UI.UIControls.NewGrid
 				_toolStripMenuItemCopy.Enabled = true;
 				_toolStripMenuItemDelete.Enabled = true;
 			}
+
+			if (SelectedItem is ComponentDirective)
+				_toolStripMenuItemCopy.Enabled = _toolStripMenuItemPaste.Enabled = false;
 
 			MenuOpeningAction?.Invoke();
 

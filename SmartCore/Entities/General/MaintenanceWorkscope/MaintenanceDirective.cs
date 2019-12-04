@@ -1467,9 +1467,6 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 
 			maintenanceDirective.TaskNumberCheck += " Copy";
 
-			maintenanceDirective.ForComponentId = -1;
-			maintenanceDirective.ParentBaseComponent = null;
-
 			if (JobCard != null)
 			{
 				maintenanceDirective.JobCard = JobCard.GetCopyUnsaved();
