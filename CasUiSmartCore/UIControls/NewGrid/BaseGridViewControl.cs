@@ -52,6 +52,7 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#region public Action PasteComplete { get; set; }
 
+		public Action<List<T>> ConfigurePaste{ get; set; }
 		public Action<List<T>> PasteComplete { get; set; }
 
 		#endregion
@@ -971,6 +972,7 @@ namespace CAS.UI.UIControls.NewGrid
 				if (pds == null)
 					return;
 
+				ConfigurePaste?.Invoke(pds.Cast<T>().ToList());
 
 				var objectToPaste = new List<T>();
 				if (pds.Count > 0)

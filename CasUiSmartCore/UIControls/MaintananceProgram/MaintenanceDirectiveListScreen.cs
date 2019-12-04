@@ -753,6 +753,15 @@ namespace CAS.UI.UIControls.MaintananceProgram
 				_toolStripMenuItemsWorkPackages,
 				_toolStripMenuItemsWShowWP);
 
+			_directivesViewer.ConfigurePaste = list =>
+			{
+				foreach (var directive in list)
+				{
+					directive.ParentAircraft = CurrentAircraft;
+					directive.ParentBaseComponent = CurrentParent is BaseComponent ? (BaseComponent)CurrentParent : GlobalObjects.ComponentCore.GetBaseComponentById(((Aircraft)CurrentParent).AircraftFrameId);
+				}
+			};
+
 			_directivesViewer.MenuOpeningAction = () =>
 			{
 				_toolStripMenuItemsWShowWP.Enabled = false;

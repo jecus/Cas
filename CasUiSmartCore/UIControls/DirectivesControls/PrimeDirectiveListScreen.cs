@@ -978,6 +978,15 @@ namespace CAS.UI.UIControls.DirectivesControls
 				_toolStripSeparator1,
 				_toolStripSeparator4);
 
+
+			_directivesViewer.ConfigurePaste = list =>
+			{
+				foreach (var directive in list)
+				{
+					directive.ParentBaseComponent =  DirectiveSource is BaseComponent ? (BaseComponent)DirectiveSource : GlobalObjects.ComponentCore.GetBaseComponentById(((Aircraft)DirectiveSource).AircraftFrameId);
+				}
+			};
+
 			_directivesViewer.MenuOpeningAction = () =>
 			{
 				_toolStripMenuItemsWShowWP.Enabled = false;

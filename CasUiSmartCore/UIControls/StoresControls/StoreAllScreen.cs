@@ -1023,6 +1023,38 @@ namespace CAS.UI.UIControls.StoresControls
 				new RadMenuSeparatorItem(),
 				_toolStripMenuItemPrint);
 
+			_directivesViewer.ConfigurePaste = list =>
+			{
+				foreach (var component in list)
+				{
+					if (component is Component c)
+					{
+						c.ParentStoreId = CurrentStore.ItemId;
+					}
+				}
+			};
+
+			_directivesViewer.PasteComplete = list =>
+			{
+				foreach (var component in list)
+				{
+					if (component is Component c)
+					{
+						if (c.TransferRecords.Count > 0)
+						{
+							var first = c.TransferRecords.OrderBy(i => i.TransferDate).First(i => i.DestinationObjectType.ItemId == SmartCoreType.Store.ItemId);
+							first.ParentComponent = c;
+							first.ParentId = c.ItemId;
+							c.TransferRecords.Clear();
+							c.TransferRecords.Add(first);
+						}
+
+						GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(c.TransferRecords.Cast<BaseEntityObject>().ToList());
+
+					}
+				}
+			};
+
 			_directivesViewer.MenuOpeningAction = () =>
 			{
 				if (_directivesViewer.SelectedItems.Count <= 0)
