@@ -231,8 +231,20 @@ namespace CAS.UI.UIControls.NewGrid
 				var deletedItems = SelectedItems.OfType<BaseEntityObject>().ToList();
 				foreach (var item in deletedItems)
 					item.IsDeleted = true;
+
+				if (deletedItems.Any(i => i is Component))
+				{
+					var components = deletedItems.Where(i => i is Component).Cast<Component>();
+					var deleteCD = deletedItems.Where(i => i is Component).Cast<Component>().SelectMany(i => i.ComponentDirectives);
+
+					GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(components.Cast<BaseEntityObject>().ToList());
+					GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(deleteCD.Cast<BaseEntityObject>().ToList());
+				}
+				else
+				{
+					GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(deletedItems);
+				}
 				
-				GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(deletedItems);
 				foreach (var item in deletedItems)
 					radGridView1.Rows.Remove(radGridView1.Rows.FirstOrDefault(i => (i.Tag as BaseEntityObject).ItemId == item.ItemId));
 			}
