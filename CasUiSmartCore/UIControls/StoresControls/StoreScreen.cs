@@ -1139,10 +1139,9 @@ namespace CAS.UI.UIControls.StoresControls
 							first.ParentId = c.ItemId;
 							c.TransferRecords.Clear();
 							c.TransferRecords.Add(first);
+
+							GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(c.TransferRecords.Cast<BaseEntityObject>().ToList());
 						}
-
-						GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(c.TransferRecords.Cast<BaseEntityObject>().ToList());
-
 					}
 				}
 			};

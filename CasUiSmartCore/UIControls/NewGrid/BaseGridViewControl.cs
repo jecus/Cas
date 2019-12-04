@@ -995,9 +995,13 @@ namespace CAS.UI.UIControls.NewGrid
 						foreach (var cd in component.ComponentDirectives)
 							cd.ComponentId = component.ItemId;
 
-						GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(component.ComponentDirectives.Cast<BaseEntityObject>().ToList());
 
-						objectToPaste.AddRange(component.ComponentDirectives.Cast<T>());
+						if (component.ComponentDirectives.Count > 0)
+						{
+							GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(component.ComponentDirectives.Cast<BaseEntityObject>().ToList());
+							objectToPaste.AddRange(component.ComponentDirectives.Cast<T>());
+						}
+						
 						objectToPaste.Add(component as T);
 					}
 				}
