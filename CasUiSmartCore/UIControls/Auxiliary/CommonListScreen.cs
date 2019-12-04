@@ -52,19 +52,15 @@ namespace CAS.UI.UIControls.Auxiliary
 		private readonly Store _currentStore;
 		private CommonFilterCollection _filter;
 
-		protected RadDropDownMenu _contextMenuStrip;
-		private RadMenuItem _toolStripMenuItemOpen;
-		private RadMenuItem _toolStripMenuItemShowTaskCard;
-		private RadMenuSeparatorItem _toolStripSeparatorOpenOperation;
-		private RadMenuItem _toolStripMenuItemHighlight;
-		private RadMenuSeparatorItem _toolStripSeparatorHighlightOperation;
-		private RadMenuSeparatorItem _toolStripSeparatorQuotationtOperation;
-		private RadMenuItem _toolStripMenuItemComposeWorkPackage;
-		private RadMenuItem _toolStripMenuItemsWorkPackages;
-		private RadMenuSeparatorItem _toolStripSeparatorWorkPackageOperation;
-		private RadMenuItem _toolStripMenuItemCopy;
-		private RadMenuItem _toolStripMenuItemPaste;
-		private RadMenuItem _toolStripMenuItemDelete;
+		protected RadMenuItem _toolStripMenuItemOpen;
+		protected RadMenuItem _toolStripMenuItemShowTaskCard;
+		protected RadMenuSeparatorItem _toolStripSeparatorOpenOperation;
+		protected RadMenuItem _toolStripMenuItemHighlight;
+		protected RadMenuSeparatorItem _toolStripSeparatorHighlightOperation;
+		protected RadMenuSeparatorItem _toolStripSeparatorQuotationtOperation;
+		protected RadMenuItem _toolStripMenuItemComposeWorkPackage;
+		protected RadMenuItem _toolStripMenuItemsWorkPackages;
+		protected RadMenuSeparatorItem _toolStripSeparatorWorkPackageOperation;
 
 		private bool _showOpenOperationContextMenu = true;
 		private bool _showHighlightOperationContextMenu = true;
@@ -178,9 +174,6 @@ namespace CAS.UI.UIControls.Auxiliary
 
 			_openPubQuotations.Clear();
 			_openPubQuotations = null;
-
-
-			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
 			
 			if (_toolStripMenuItemsWorkPackages != null)
 			{
@@ -392,10 +385,6 @@ namespace CAS.UI.UIControls.Auxiliary
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
-
 			#region OpenOperation
 
 			if (_showOpenOperationContextMenu)
@@ -414,10 +403,6 @@ namespace CAS.UI.UIControls.Auxiliary
 				// 
 				_toolStripMenuItemShowTaskCard.Text = "Show Task Card";
 				_toolStripMenuItemShowTaskCard.Click += ToolStripMenuItemShowTaskCardClick;
-
-				_contextMenuStrip.Items.Add(_toolStripMenuItemOpen);
-				_contextMenuStrip.Items.Add(_toolStripMenuItemShowTaskCard);
-				_contextMenuStrip.Items.Add(_toolStripSeparatorOpenOperation);
 			}
 
 			#endregion
@@ -443,8 +428,7 @@ namespace CAS.UI.UIControls.Auxiliary
 					_toolStripMenuItemHighlight.Items.Add(item);
 				}
 
-				_contextMenuStrip.Items.Add(_toolStripMenuItemHighlight);
-				_contextMenuStrip.Items.Add(_toolStripSeparatorHighlightOperation);
+				
 			}
 
 			#endregion
@@ -466,43 +450,6 @@ namespace CAS.UI.UIControls.Auxiliary
 				// _toolStripMenuItemsWorkPackages
 				//
 				_toolStripMenuItemsWorkPackages.Text = "Add to Work package";
-
-				_contextMenuStrip.Items.Add(_toolStripMenuItemComposeWorkPackage);
-				_contextMenuStrip.Items.Add(_toolStripMenuItemsWorkPackages);
-				_contextMenuStrip.Items.Add(_toolStripSeparatorWorkPackageOperation);
-			}
-
-			#endregion
-
-			#region OperationContex
-
-			if (_showEditOperationContextMenu)
-			{
-				_toolStripMenuItemCopy = new RadMenuItem();
-				_toolStripMenuItemPaste = new RadMenuItem();
-				_toolStripMenuItemDelete = new RadMenuItem();
-
-				// 
-				// toolStripMenuItemCopy
-				// 
-				_toolStripMenuItemCopy.Text = "Copy";
-				_toolStripMenuItemCopy.Click += CopyItemsClick;
-
-				// 
-				// toolStripMenuItemPaste
-				// 
-				_toolStripMenuItemPaste.Text = "Paste";
-				_toolStripMenuItemPaste.Click += PasteItemsClick;
-
-				// 
-				// toolStripMenuItemDelete
-				// 
-				_toolStripMenuItemDelete.Text = "Delete";
-				_toolStripMenuItemDelete.Click += ButtonDeleteClick;
-
-				_contextMenuStrip.Items.Add(_toolStripMenuItemCopy);
-				_contextMenuStrip.Items.Add(_toolStripMenuItemPaste);
-				_contextMenuStrip.Items.Add(_toolStripMenuItemDelete);
 			}
 
 			#endregion
@@ -628,8 +575,7 @@ namespace CAS.UI.UIControls.Auxiliary
 										Location = new Point(panel1.Left, panel1.Top),
 										Dock = DockStyle.Fill
 									};
-
-			DirectivesViewer.CustomMenu = _contextMenuStrip;
+			
 			DirectivesViewer.MenuOpeningAction = () =>
 			{
 				if (DirectivesViewer.SelectedItems.Count <= 0)
@@ -648,6 +594,15 @@ namespace CAS.UI.UIControls.Auxiliary
 					else _toolStripMenuItemShowTaskCard.Enabled = true;
 				}
 			};
+
+			DirectivesViewer.AddMenuItems(_toolStripMenuItemOpen,
+				_toolStripMenuItemShowTaskCard,
+				_toolStripSeparatorOpenOperation,
+				_toolStripMenuItemHighlight,
+				_toolStripSeparatorHighlightOperation,
+				_toolStripMenuItemComposeWorkPackage,
+				_toolStripMenuItemsWorkPackages);
+
 			DirectivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 			panel1.Controls.Add(DirectivesViewer);
 		}
@@ -1130,136 +1085,6 @@ namespace CAS.UI.UIControls.Auxiliary
 				}
 			}
 		}
-		#endregion
-
-		#region private void PasteItemsClick(object sender, EventArgs e)
-
-		private void PasteItemsClick(object sender, EventArgs e)
-		{
-			GetFromClipboard();
-		}
-
-		#endregion
-
-		#region  private void CopyItemsClick(object sender, EventArgs e)
-
-		private void CopyItemsClick(object sender, EventArgs e)
-		{
-			CopyToClipboard();
-		}
-
-		#endregion
-
-		#region  private void CopyToClipboard()
-
-		private void CopyToClipboard()
-		{
-			try
-			{
-				if (DirectivesViewer.SelectedItems == null || DirectivesViewer.SelectedItems.Count == 0)
-					return;
-
-				// регистрация формата данных либо получаем его, если он уже зарегистрирован
-				DataFormats.Format format = DataFormats.GetFormat(ViewedType.MakeArrayType().FullName);
-
-				var selecteditems = DirectivesViewer.SelectedItems.ToArray();
-				var array = Array.CreateInstance(ViewedType, DirectivesViewer.SelectedItems.Count);
-
-				for (int i = 0; i < selecteditems.Length; i++)
-				{
-					//TODO:Временное решение(Создать ComponentModelListScreen)
-					if (selecteditems[i] is ComponentModel)
-					{
-						var cm = selecteditems[i] as ComponentModel;
-						array.SetValue(cm.GetCopyUnsaved(), i);
-					}
-					else if (selecteditems[i] is AircraftModel)
-					{
-						var am = selecteditems[i] as AircraftModel;
-						array.SetValue(am.GetCopyUnsaved(), i);
-					}
-					else
-						array.SetValue(selecteditems[i].GetCopyUnsaved(), i);
-				}
-				//todo:(EvgeniiBabak) Нужен другой способ проверки сереализуемости объекта
-				using (MemoryStream mem = new MemoryStream())
-				{
-					BinaryFormatter bin = new BinaryFormatter();
-					try
-					{
-						bin.Serialize(mem, array);
-					}
-					catch (Exception ex)
-					{
-						MessageBox.Show("Объект не может быть сериализован. \n" + ex);
-						return;
-					}
-				}
-
-				// копирование в буфер обмена
-				IDataObject dataObj = new DataObject();
-				dataObj.SetData(format.Name, false, array);
-				Clipboard.SetDataObject(dataObj, false);
-			}
-			catch (Exception ex)
-			{
-				Program.Provider.Logger.Log("Error while copying object.", ex);
-			}
-		}
-
-		#endregion
-
-		#region  private void GetFromClipboard()
-
-		private void GetFromClipboard()
-		{
-			try
-			{
-				Type genericType = typeof (CommonCollection<>);
-				Type genericList = genericType.MakeGenericType(ViewedType);
-
-				string format = ViewedType.MakeArrayType().FullName;
-
-				if (string.IsNullOrEmpty(format))
-					return;
-				if (!Clipboard.ContainsData(format))
-					return;
-
-
-				var pds = (Array) Clipboard.GetData(format);
-				if (pds == null)
-					return;
-
-
-				var itemsforInsert = (ICommonCollection) Activator.CreateInstance(genericList);
-
-				for (int i = 0; i < pds.Length; i++)
-				{
-					InitialDirectiveArray.Add((IBaseEntityObject) pds.GetValue(i));
-					ResultDirectiveArray.Add((IBaseEntityObject) pds.GetValue(i));
-					itemsforInsert.Add((IBaseEntityObject) pds.GetValue(i));
-				}
-
-
-				if (itemsforInsert.Count > 0)
-				{
-					DirectivesViewer.InsertItems(itemsforInsert.OfType<BaseEntityObject>().ToList());
-					headerControl.ShowSaveButton = true;
-				}
-
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Объект не может быть сериализован. \n" + ex);
-
-				headerControl.ShowSaveButton = false;
-			}
-			finally
-			{
-				Clipboard.Clear();
-			}
-		}
-
 		#endregion
 
 		#endregion
