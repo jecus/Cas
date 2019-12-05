@@ -202,6 +202,10 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#region private void InitListView()
 
+		public void DisableContectMenu()
+		{
+			this.radGridView1.ContextMenuOpening -= RadGridView1_ContextMenuOpening;
+		}
 		public void AddMenuItems(params RadMenuItemBase[] items)
 		{
 			_customMenu.Items.Clear();

@@ -178,6 +178,11 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#region private void InitListView()
 
+		public void DisableContectMenu()
+		{
+			this.radGridView1.ContextMenuOpening -= RadGridView1_ContextMenuOpening;
+		}
+
 		public void AddMenuItems(params RadMenuItemBase[] items)
 		{
 			_customMenu.Items.Clear();
@@ -776,7 +781,6 @@ namespace CAS.UI.UIControls.NewGrid
 				_toolStripMenuItemCopy.Enabled = _toolStripMenuItemPaste.Enabled = false;
 
 			MenuOpeningAction?.Invoke();
-
 
 			e.ContextMenu = _customMenu;
 		}
