@@ -33,6 +33,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		public MaintenanceDirectiveListView()
 		{
 			InitializeComponent();
+			OldColumnIndex = 1;
 		}
 		#endregion
 

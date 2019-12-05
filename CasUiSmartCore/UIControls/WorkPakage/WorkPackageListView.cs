@@ -8,40 +8,41 @@ using SmartCore.Entities.General.WorkPackage;
 
 namespace CAS.UI.UIControls.WorkPakage
 {
-    ///<summary>
-    /// список для отображения ордеров запроса
-    ///</summary>
-    public partial class WorkPackageListView : BaseGridViewControl<WorkPackage>
-    {
-        #region Fields
+	///<summary>
+	/// список для отображения ордеров запроса
+	///</summary>
+	public partial class WorkPackageListView : BaseGridViewControl<WorkPackage>
+	{
+		#region Fields
 
-        #endregion
+		#endregion
 
-        #region Constructors
+		#region Constructors
 
-        #region public WorkPackageListView()
-        ///<summary>
-        ///</summary>
-        public WorkPackageListView()
-        {
-            InitializeComponent();
-            SortMultiplier = 1;
-        }
-        #endregion
+		#region public WorkPackageListView()
+		///<summary>
+		///</summary>
+		public WorkPackageListView()
+		{
+			InitializeComponent();
+			SortMultiplier = 1;
+			OldColumnIndex = 1;
+		}
+		#endregion
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region protected override List<PropertyInfo> GetTypeProperties()
-        protected override List<PropertyInfo> GetTypeProperties()
-        {
-            var props = base.GetTypeProperties();
-            var prop = props.FirstOrDefault(p => p.Name.ToLower() == "aircraft");
-            props.Remove(prop);
+		#region protected override List<PropertyInfo> GetTypeProperties()
+		protected override List<PropertyInfo> GetTypeProperties()
+		{
+			var props = base.GetTypeProperties();
+			var prop = props.FirstOrDefault(p => p.Name.ToLower() == "aircraft");
+			props.Remove(prop);
 
-            return props;
-        }
+			return props;
+		}
 		#endregion
 
 		#region protected override SetGroupsToItems(int columnIndex)
@@ -52,20 +53,20 @@ namespace CAS.UI.UIControls.WorkPakage
 		}
 		#endregion
 
-        #region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		#region protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
 
-        protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
-        {
-            if (SelectedItem != null)
-            {
-                var item = SelectedItem;
-                e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-                e.DisplayerText = item.Aircraft != null ? item.Aircraft.RegistrationNumber + "." + item.Title : item.Title;
-                e.RequestedEntity = new WorkPackageScreen(item);
-            }
-        }
-        #endregion
+		protected override void FillDisplayerRequestedParams(ReferenceEventArgs e)
+		{
+			if (SelectedItem != null)
+			{
+				var item = SelectedItem;
+				e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+				e.DisplayerText = item.Aircraft != null ? item.Aircraft.RegistrationNumber + "." + item.Title : item.Title;
+				e.RequestedEntity = new WorkPackageScreen(item);
+			}
+		}
+		#endregion
 
-        #endregion
-    }
+		#endregion
+	}
 }

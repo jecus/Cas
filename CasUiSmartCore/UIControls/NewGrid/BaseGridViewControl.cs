@@ -249,17 +249,28 @@ namespace CAS.UI.UIControls.NewGrid
 				{
 					var components = deletedItems.Where(i => i is Component).Cast<Component>();
 					var deleteCD = deletedItems.Where(i => i is Component).Cast<Component>().SelectMany(i => i.ComponentDirectives);
+					if (components.Any())
+					{
+						GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(components.Cast<BaseEntityObject>().ToList());
+						foreach (var item in components)
+							radGridView1.Rows.Remove(radGridView1.Rows.FirstOrDefault(i => (i.Tag as BaseEntityObject).ItemId == item.ItemId));
+					}
 
-					GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(components.Cast<BaseEntityObject>().ToList());
-					GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(deleteCD.Cast<BaseEntityObject>().ToList());
+					if (deleteCD.Any())
+					{
+						GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(deleteCD.Cast<BaseEntityObject>().ToList()); 
+						foreach (var item in deleteCD)
+							radGridView1.Rows.Remove(radGridView1.Rows.FirstOrDefault(i => (i.Tag as BaseEntityObject).ItemId == item.ItemId));
+					}
 				}
 				else
 				{
 					GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(deletedItems);
+					foreach (var item in deletedItems)
+						radGridView1.Rows.Remove(radGridView1.Rows.FirstOrDefault(i => (i.Tag as BaseEntityObject).ItemId == item.ItemId));
 				}
 				
-				foreach (var item in deletedItems)
-					radGridView1.Rows.Remove(radGridView1.Rows.FirstOrDefault(i => (i.Tag as BaseEntityObject).ItemId == item.ItemId));
+				
 			}
 		}
 

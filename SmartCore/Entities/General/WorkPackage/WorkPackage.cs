@@ -1056,9 +1056,24 @@ namespace SmartCore.Entities.General.WorkPackage
 		}
 		#endregion
 
+		#region public override BaseEntityObject GetCopyUnsaved()
+
+		public override BaseEntityObject GetCopyUnsaved()
+		{
+			var wp = (WorkPackage)MemberwiseClone();
+			wp.ItemId = -1;
+			wp.Number += " Copy";
+			wp.UnSetEvents();
+
+			return wp;
+		}
+
+		#endregion
+
 	}
 
 	[JsonObject]
+	[Serializable]
 	public class PerformAfter
 	{
 		#region Fields

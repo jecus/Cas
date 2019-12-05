@@ -382,19 +382,21 @@ namespace CAS.UI.UIControls.ComponentControls
 		#endregion
 
 		#region protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+
 		protected override void AnimatedThreadWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
 			if (_currentAircraft != null)
 			{
 				labelTitle.Text = "Date as of: " +
-					SmartCore.Auxiliary.Convert.GetDateFormat(DateTime.Today) + " Aircraft TSN/CSN: " +
-					GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(_currentAircraft);
+				                  SmartCore.Auxiliary.Convert.GetDateFormat(DateTime.Today) + " Aircraft TSN/CSN: " +
+				                  GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(_currentAircraft);
 			}
 			else if (_currentBaseComponent != null)
 			{
 				labelTitle.Text = "Date as of: " +
-					SmartCore.Auxiliary.Convert.GetDateFormat(DateTime.Today) + " Component TSN/CSN: " +
-					GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(_currentBaseComponent);
+				                  SmartCore.Auxiliary.Convert.GetDateFormat(DateTime.Today) + " Component TSN/CSN: " +
+				                  GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(
+					                  _currentBaseComponent);
 			}
 			else
 			{
@@ -408,7 +410,7 @@ namespace CAS.UI.UIControls.ComponentControls
 				{
 					item.Click -= AddToWorkPackageItemClick;
 				}
-				
+
 				_toolStripMenuItemsWorkPackages.Items.Clear();
 
 				foreach (WorkPackage workPackage in _openPubWorkPackages)
@@ -419,7 +421,7 @@ namespace CAS.UI.UIControls.ComponentControls
 					_toolStripMenuItemsWorkPackages.Items.Add(item);
 				}
 			}
-			
+
 			var res = new List<BaseEntityObject>();
 			foreach (var item in _resultDirectiveArray)
 			{
@@ -430,7 +432,7 @@ namespace CAS.UI.UIControls.ComponentControls
 					var component = item as Component;
 					var items = _resultDirectiveArray.Where(lvi =>
 						lvi is ComponentDirective &&
-						((ComponentDirective)lvi).ComponentId == component.ItemId);
+						((ComponentDirective) lvi).ComponentId == component.ItemId);
 					res.AddRange(items);
 				}
 			}
@@ -439,58 +441,60 @@ namespace CAS.UI.UIControls.ComponentControls
 			_directivesViewer.SetItemsArray(res.ToArray());
 
 			var column = _llpMark ? 7 : 2;
-			
-				var resultList = new List<BaseEntityObject>();
-				var list = _directivesViewer.radGridView1.Rows.Select(i => i).ToList();
-				list.Sort(new GridViewDataRowInfoComparer(column, 1));
-				//добавление остальных подзадач
-				foreach (GridViewRowInfo item in list)
+
+			var resultList = new List<BaseEntityObject>();
+			var list = _directivesViewer.radGridView1.Rows.Select(i => i).ToList();
+			list.Sort(new GridViewDataRowInfoComparer(column, 1));
+			//добавление остальных подзадач
+			foreach (GridViewRowInfo item in list)
+			{
+				if (item.Tag is Component)
 				{
-					if (item.Tag is Component)
-					{
-						resultList.Add(item.Tag as BaseEntityObject);
+					resultList.Add(item.Tag as BaseEntityObject);
 
-						Component component = (Component) item.Tag;
-						var items = list
-							.Where(lvi =>
-								lvi.Tag is ComponentDirective &&
-								((ComponentDirective) lvi.Tag).ComponentId == component.ItemId).Select(i => i.Tag);
-						resultList.AddRange(items.OfType<BaseEntityObject>());
-					}
-					else if (item.Tag is ComponentDirective)
-					{
-						ComponentDirective dd = item.Tag as ComponentDirective;
-						Component d = dd.ParentComponent;
-						if (d == null)
-							resultList.Add(item.Tag as BaseEntityObject);
-						else
-						{
-							var lvi =
-								list.FirstOrDefault(
-									lv => lv.Tag is Component && ((Component) lv.Tag).ItemId == d.ItemId);
-							if (lvi == null)
-								resultList.Add(item.Tag as BaseEntityObject);
-						}
-					}
-
-					_directivesViewer.SetItemsArray(resultList.ToArray());
+					Component component = (Component) item.Tag;
+					var items = list
+						.Where(lvi =>
+							lvi.Tag is ComponentDirective &&
+							((ComponentDirective) lvi.Tag).ComponentId == component.ItemId).Select(i => i.Tag);
+					resultList.AddRange(items.OfType<BaseEntityObject>());
 				}
+				else if (item.Tag is ComponentDirective)
+				{
+					ComponentDirective dd = item.Tag as ComponentDirective;
+					Component d = dd.ParentComponent;
+					if (d == null)
+						resultList.Add(item.Tag as BaseEntityObject);
+					else
+					{
+						var lvi =
+							list.FirstOrDefault(
+								lv => lv.Tag is Component && ((Component) lv.Tag).ItemId == d.ItemId);
+						if (lvi == null)
+							resultList.Add(item.Tag as BaseEntityObject);
+					}
+				}
+			}
 
-				headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
+			_directivesViewer.SetItemsArray(resultList.ToArray());
+
+
+			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 			_directivesViewer.Focus();
 
 			if (_removedComponents.Count > 0
-				|| _waitRemoveConfirmComponents.Count > 0
-				|| _installedComponents.Count > 0)
+			    || _waitRemoveConfirmComponents.Count > 0
+			    || _installedComponents.Count > 0)
 				buttonTransferDetails.Enabled = true;
 			else buttonTransferDetails.Enabled = false;
-			
+
 			//так делается для того, чот бы форма перемещенных деталей
 			//отобразилась сама только при первом открытии экрана
 			if (_firstLoad == false)
 				TransferedDetailFormShow();
 			_firstLoad = true;
 		}
+
 		#endregion
 
 		#region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
