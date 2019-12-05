@@ -39,6 +39,7 @@ namespace CAS.UI.UIControls.NewGrid
 		private RadMenuItem _toolStripMenuItemCopy;
 		private RadMenuItem _toolStripMenuItemPaste;
 		private RadMenuItem _toolStripMenuItemDelete;
+		private bool _clickHeader;
 
 		#endregion
 
@@ -726,9 +727,30 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#region private void RadGridView1_DoubleClick(object sender, System.EventArgs e)
 
+		protected void RadGridView1_DoubleClickBase(object sender, EventArgs e)
+		{
+			if (!_clickHeader)
+				RadGridView1_DoubleClick(sender, e);
+		}
+
 		protected  virtual void RadGridView1_DoubleClick(object sender, EventArgs e)
 		{
 			OnDisplayerRequested();
+		}
+
+		#endregion
+
+		#region private void RadGridView1_CellClick(object sender, GridViewCellEventArgs e)
+
+		private void RadGridView1_CellClick(object sender, GridViewCellEventArgs e)
+		{
+			if (e.ColumnIndex > -1 && e.RowIndex == -1 && sender is GridHeaderCellElement &&
+			    ((GridHeaderCellElement)sender).ZIndex != 0)
+			{
+				_clickHeader = true;
+			}
+			else _clickHeader = false;
+
 		}
 
 		#endregion

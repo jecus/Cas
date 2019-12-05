@@ -41,6 +41,7 @@ namespace CAS.UI.UIControls.NewGrid
 		private RadMenuItem _toolStripMenuItemCopy;
 		private RadMenuItem _toolStripMenuItemPaste;
 		private RadMenuItem _toolStripMenuItemDelete;
+		private bool _clickHeader;
 
 		#endregion
 
@@ -678,8 +679,7 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#endregion
 
-
-		#region Sortin
+		#region Sorting
 
 		private void SortingItems(List<GridViewDataRowInfo> temp)
 		{
@@ -819,6 +819,12 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#region private void RadGridView1_DoubleClick(object sender, System.EventArgs e)
 
+		protected void RadGridView1_DoubleClickBase(object sender, EventArgs e)
+		{
+			if(!_clickHeader)
+				RadGridView1_DoubleClick(sender, e);
+		}
+
 		protected  virtual void RadGridView1_DoubleClick(object sender, EventArgs e)
 		{
 			OnDisplayerRequested();
@@ -891,6 +897,7 @@ namespace CAS.UI.UIControls.NewGrid
 			if (e.ColumnIndex > -1 && e.RowIndex == -1 && sender is GridHeaderCellElement &&
 			    ((GridHeaderCellElement) sender).ZIndex != 0)
 			{
+				_clickHeader = true;
 				if (!EnableCustomSorting)
 				{
 					OldColumnIndex = e.ColumnIndex;
@@ -908,7 +915,8 @@ namespace CAS.UI.UIControls.NewGrid
 					OldColumnIndex = e.ColumnIndex;
 				}
 			}
-			
+			else _clickHeader = false;
+
 		}
 
 		#endregion
