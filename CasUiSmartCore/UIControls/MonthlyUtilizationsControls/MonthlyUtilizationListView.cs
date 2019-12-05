@@ -419,32 +419,6 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 
 		#endregion
 
-		#region Overrides of BaseListViewControl<AircraftFlight>
-
-
-		protected override void CustomSort(int ColumnIndex)
-		{
-			if (OldColumnIndex != ColumnIndex)
-				SortMultiplier = -1;
-			if (SortMultiplier == 1)
-				SortMultiplier = -1;
-			else
-				SortMultiplier = 1;
-
-			OldColumnIndex = ColumnIndex;
-			var resultList = new List<AircraftFlight>();
-			var list = radGridView1.Rows.Select(i => i).ToList();
-			list.Sort(new GridViewDataRowInfoComparer(ColumnIndex, SortMultiplier));
-
-			resultList.AddRange(list.Select(i => i.Tag as AircraftFlight));
-
-			SetItemsArray(resultList.ToArray());
-
-
-		}
-
-		#endregion
-
 		#endregion
 	}
 }

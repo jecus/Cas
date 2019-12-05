@@ -38,6 +38,7 @@ namespace CAS.UI.UIControls.ScheduleControls
 		public FlightNumberListView(FlightNumberScreenType screenType) : this()
 		{
 			_screenType = screenType;
+			EnableCustomSorting = false;
 		}
 		#endregion
 
@@ -205,11 +206,6 @@ namespace CAS.UI.UIControls.ScheduleControls
 
 
 		#region Overrides of BaseGridViewControl<IFlightNumberParams>
-
-		protected override void Sorting(string colName = null)
-		{
-			
-		}
 
 		protected override void CustomSort(int ColumnIndex)
 		{

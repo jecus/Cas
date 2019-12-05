@@ -65,6 +65,7 @@
 			this.radGridView1.DoubleClick += RadGridView1_DoubleClick;
 			this.radGridView1.KeyDown += RadGridView1_KeyDown;
 			this.radGridView1.ContextMenuOpening += RadGridView1_ContextMenuOpening;
+			this.radGridView1.CustomSorting += RadGridView1_CustomSorting;
 			this.radGridView1.SelectionChanged += RadGridView1_SelectionChanged;
 			this.radGridView1.CellClick += RadGridView1_CellClick;
 			this.radGridView1.GroupSummaryEvaluate += RadGridView1_GroupSummaryEvaluate;

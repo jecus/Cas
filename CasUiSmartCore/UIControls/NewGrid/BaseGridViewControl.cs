@@ -10,12 +10,14 @@ using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.Auxiliary.Comparers;
 using CASTerms;
 using Microsoft.VisualBasic.Devices;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
+using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;
 using Telerik.WinControls.Data;
 using Telerik.WinControls.Export;
@@ -43,6 +45,16 @@ namespace CAS.UI.UIControls.NewGrid
 		#endregion
 
 		#region Properties
+
+		#region public bool EnableCustomSorting
+
+		public bool EnableCustomSorting
+		{
+			get => radGridView1.EnableCustomSorting;
+			set => radGridView1.EnableCustomSorting = value;
+		}
+
+		#endregion
 
 		#region public Action MenuOpeningAction { get; set; }
 
@@ -264,6 +276,7 @@ namespace CAS.UI.UIControls.NewGrid
 			radGridView1.MasterTemplate.ShowFilteringRow = false;
 
 			this.radGridView1.AllowSearchRow = true;
+			EnableCustomSorting = true;
 		}
 
 		#endregion
@@ -384,7 +397,6 @@ namespace CAS.UI.UIControls.NewGrid
 				UpdateItemColor();
 				SetTotalText();
 				GroupingItems();
-				SortingItems();
 
 				radGridView1.MasterTemplate.ExpandAllGroups();
 
@@ -539,9 +551,12 @@ namespace CAS.UI.UIControls.NewGrid
 					temp.Add(rowInfo);
 				}
 
-				//radGridView1.BeginUpdate();
+
+				if(EnableCustomSorting)
+					SortingItems(temp);
+
 				radGridView1.Rows.AddRange(temp.ToArray());
-				//radGridView1.EndUpdate();
+
 			}
 			catch (Exception ex)
 			{
@@ -663,32 +678,25 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#endregion
 
-		#region protected virtual void SortingItems()
 
-		private void SortingItems()
+		#region Sortin
+
+		private void SortingItems(List<GridViewDataRowInfo> temp)
 		{
-			Sorting();
+			SortMultiplier = SortMultiplier == 0 ? 1 : -1;
+			temp.Sort(new GridViewDataRowInfoComparer(OldColumnIndex, SortMultiplier));
 		}
 
-		#endregion
-
-		#region public void Sorting(string colName = null)
-
-		protected virtual void Sorting(string colName = null)
-		{
-			var radSortOrder = SortMultiplier == 0 ? RadSortOrder.Ascending : RadSortOrder.Descending;
-			if (!string.IsNullOrEmpty(colName))
-				radGridView1.Columns[colName].SortOrder = radSortOrder;
-			radGridView1.Columns[OldColumnIndex].SortOrder = radSortOrder;
-		}
-
-		#endregion
-
-		#region protected virtual void CustomSort(int ColumnIndex)
 
 		protected virtual void CustomSort(int ColumnIndex)
 		{
 
+		}
+
+
+		private void RadGridView1_CustomSorting(object sender, Telerik.WinControls.UI.GridViewCustomSortingEventArgs e)
+		{
+			e.SortResult = new GridViewDataRowInfoComparer(OldColumnIndex, SortMultiplier).Compare(e.Row1, e.Row2);
 		}
 
 		#endregion
@@ -880,8 +888,26 @@ namespace CAS.UI.UIControls.NewGrid
 
 		private void RadGridView1_CellClick(object sender, GridViewCellEventArgs e)
 		{
-			if (e.ColumnIndex > -1 && e.RowIndex == -1 &&  sender is GridHeaderCellElement && ((GridHeaderCellElement)sender).ZIndex != 0)
-				CustomSort(e.ColumnIndex);
+			if (e.ColumnIndex > -1 && e.RowIndex == -1 && sender is GridHeaderCellElement &&
+			    ((GridHeaderCellElement) sender).ZIndex != 0)
+			{
+				if (!EnableCustomSorting)
+				{
+					OldColumnIndex = e.ColumnIndex;
+					CustomSort(e.ColumnIndex);
+				}
+				else
+				{
+					if (OldColumnIndex != e.ColumnIndex)
+						SortMultiplier = -1;
+					if (SortMultiplier == 1)
+						SortMultiplier = -1;
+					else
+						SortMultiplier = 1;
+
+					OldColumnIndex = e.ColumnIndex;
+				}
+			}
 			
 		}
 

@@ -52,6 +52,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			OldColumnIndex = 0;
 			_parentBaseComponent = parentBaseComponent;
 			ShowGroup = showgroups;
+			EnableCustomSorting = false;
 
 			ColumnHeaderList.Clear();
 			SetHeaders();
@@ -326,11 +327,6 @@ namespace CAS.UI.UIControls.ComponentControls
 		#endregion
 
 		#region protected override void CustomSort(int ColumnIndex)
-
-		protected override void Sorting(string colName = null)
-		{
-			
-		}
 
 		protected override void CustomSort(int ColumnIndex)
 		{

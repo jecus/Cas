@@ -91,14 +91,5 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			}
 		}
 		#endregion
-
-		#region Overrides of BaseGridViewControl<BaseCoreObject>
-
-		protected override void Sorting(string colName = null)
-		{
-			
-		}
-
-		#endregion
 	}
 }
