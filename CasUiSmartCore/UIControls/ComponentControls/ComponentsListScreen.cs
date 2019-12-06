@@ -1596,6 +1596,9 @@ namespace CAS.UI.UIControls.ComponentControls
 							var first = c.TransferRecords.OrderBy(i => i.TransferDate).First(i => i.DestinationObjectType.ItemId == SmartCoreType.BaseComponent.ItemId);
 							first.ParentComponent = c;
 							first.ParentId = c.ItemId;
+							first.DestinationObjectId = DirectiveSource is BaseComponent
+								? ((BaseComponent)DirectiveSource).ItemId
+								: ((Aircraft)DirectiveSource).AircraftFrameId;
 							c.TransferRecords.Clear();
 							c.TransferRecords.Add(first);
 

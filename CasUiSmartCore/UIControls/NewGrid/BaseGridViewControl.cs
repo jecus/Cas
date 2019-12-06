@@ -191,12 +191,13 @@ namespace CAS.UI.UIControls.NewGrid
 
 		public void AddMenuItems(params RadMenuItemBase[] items)
 		{
+			_customMenu.Items.Clear();
 			_customMenu.Items.AddRange(items);
 
 			if (!_addBaseMenu)
 				return;
 
-			_customMenu.Items.Clear();
+			
 			_customMenu.Items.AddRange(_toolStripMenuItemDelete,
 				new RadMenuSeparatorItem(),
 				_toolStripMenuItemCopy,
@@ -263,8 +264,8 @@ namespace CAS.UI.UIControls.NewGrid
 
 				if (deletedItems.Any(i => i is Component))
 				{
-					var components = deletedItems.Where(i => i is Component).Cast<Component>();
-					var deleteCD = deletedItems.Where(i => i is Component).Cast<Component>().SelectMany(i => i.ComponentDirectives);
+					var components = deletedItems.Where(i => i is Component && !(i is BaseComponent)).Cast<Component>();
+					var deleteCD = components.SelectMany(i => i.ComponentDirectives);
 					if (components.Any())
 					{
 						GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(components.Cast<BaseEntityObject>().ToList());
@@ -1053,8 +1054,22 @@ namespace CAS.UI.UIControls.NewGrid
 				var objectToPaste = new List<T>();
 				if (pds.Count > 0)
 				{
-					GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(pds.Cast<BaseEntityObject>().ToList());
-					objectToPaste.AddRange(pds);
+					if (pds.Any(i => i is Component))
+					{
+						var components = pds.Where(i => i is Component && !(i is BaseComponent)).Cast<BaseEntityObject>().ToList();
+
+						if(components.Count == 0)
+							return;
+
+						GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(components);
+						objectToPaste.AddRange(components.Cast<T>());
+					}
+					else
+					{
+						GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(pds.Cast<BaseEntityObject>().ToList());
+						objectToPaste.AddRange(pds);
+					}
+					
 				}
 
 				PasteComplete?.Invoke(pds.Cast<T>().ToList());
@@ -1073,14 +1088,14 @@ namespace CAS.UI.UIControls.NewGrid
 
 
 						if (component.ComponentDirectives.Count > 0)
-						{
-							GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(component.ComponentDirectives.Cast<BaseEntityObject>().ToList());
 							objectToPaste.AddRange(component.ComponentDirectives.Cast<T>());
-						}
-						
+
 						objectToPaste.Add(component as T);
 					}
 				}
+
+				if (objectToPaste.Any(i => i is ComponentDirective))
+					GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(pds.Where(i => i is ComponentDirective).Cast<BaseEntityObject>().ToList());
 
 
 				InsertItems(objectToPaste.ToArray());

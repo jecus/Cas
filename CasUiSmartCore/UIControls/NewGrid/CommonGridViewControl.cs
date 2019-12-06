@@ -213,12 +213,13 @@ namespace CAS.UI.UIControls.NewGrid
 
 		public void AddMenuItems(params RadMenuItemBase[] items)
 		{
+			_customMenu.Items.Clear();
 			_customMenu.Items.AddRange(items);
 
 			if (!_addBaseMenu)
 				return;
 
-			_customMenu.Items.Clear();
+			
 			_customMenu.Items.AddRange(_toolStripMenuItemDelete,
 				new RadMenuSeparatorItem(),
 				_toolStripMenuItemCopy,
