@@ -4,35 +4,35 @@ using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.SupplierControls
 {
-    ///<summary>
-    /// список для отображения ордеров запроса
-    ///</summary>
-    public partial class SupplierPriceListView : BaseGridViewControl<SupplierPrice>
-    {
-        public bool GroupBySupplie { get; set; }
+	///<summary>
+	/// список для отображения ордеров запроса
+	///</summary>
+	public partial class SupplierPriceListView : BaseGridViewControl<SupplierPrice>
+	{
+		public bool GroupBySupplie { get; set; }
 
-        #region Constructors
+		#region Constructors
 
-        #region public SupplierListViewNew()
-        ///<summary>
-        ///</summary>
-        public SupplierPriceListView()
-        {
-            InitializeComponent();
-
-            SortMultiplier = 0;
-        }
+		#region public SupplierListViewNew()
+		///<summary>
+		///</summary>
+		public SupplierPriceListView()
+		{
+			InitializeComponent();
+			DisableContectMenu();
+			SortMultiplier = 0;
+		}
 		#endregion
 
 		#endregion
 
 		#region Methods
 
-        #region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
-        protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
+		#region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
+		protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
 		{
-            
-        }
+			
+		}
 
 		#endregion
 

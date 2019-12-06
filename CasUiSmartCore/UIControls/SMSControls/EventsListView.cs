@@ -16,6 +16,7 @@ namespace CAS.UI.UIControls.SMSControls
 		public EventsListView() : base()
 		{
 			InitializeComponent();
+			DisableContectMenu();
 		}
 		#endregion
 

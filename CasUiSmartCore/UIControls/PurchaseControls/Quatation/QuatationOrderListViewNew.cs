@@ -14,6 +14,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		public QuatationOrderListViewNew()
 		{
 			InitializeComponent();
+			DisableContectMenu();
 		}
 
 

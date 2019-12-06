@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -39,9 +38,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private readonly ProductCollectionFilter _collectionFilter = new ProductCollectionFilter();
 		private readonly ProductStandartFilter _standartFilter = new ProductStandartFilter();
 		private List<Product> _currentAircraftKits = new List<Product>();
-		private ContextMenuStrip _contextMenuStrip;
-		private ToolStripMenuItem _toolStripMenuItemAddSuppliers;
-		private ToolStripMenuItem _toolStripMenuItemAddSuppliersAll;
 		private List<Supplier> _suppliers = new List<Supplier>();
 		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
 		private Settings _setting;
@@ -85,8 +81,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			Task.Run(() => DoWork())
 				.ContinueWith(task => Completed(), TaskScheduler.FromCurrentSynchronizationContext());
-
-			InitToolStripMenuItems();
 		}
 
 		#endregion
@@ -547,84 +541,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		}
 
 		#endregion
-
-		#region private void InitToolStripMenuItems()
-
-		private void InitToolStripMenuItems()
-		{
-			_contextMenuStrip = new ContextMenuStrip();
-			_toolStripMenuItemAddSuppliers = new ToolStripMenuItem();
-			_toolStripMenuItemAddSuppliersAll = new ToolStripMenuItem();
-			
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
-
-			// 
-			// toolStripMenuItemCopy
-			// 
-			_toolStripMenuItemAddSuppliers.Text = "Edit Suppliers";
-			_toolStripMenuItemAddSuppliers.Click += _toolStripMenuItemAddSuppliers_Click;
-
-			// 
-			// toolStripMenuItemPaste
-			// 
-			_toolStripMenuItemAddSuppliersAll.Text = "Add Suppliers for all";
-			_toolStripMenuItemAddSuppliersAll.Click += _toolStripMenuItemAddSuppliersAll_Click;
-			
-
-			_contextMenuStrip.Items.AddRange(new ToolStripItem[]
-			{
-
-				new ToolStripSeparator(),
-				_toolStripMenuItemAddSuppliers,
-				_toolStripMenuItemAddSuppliersAll,
-				
-
-			});
-
-			listViewInitialItems.ContextMenuStrip = _contextMenuStrip;
-			_contextMenuStrip.Opening += _contextMenuStrip_Opening; 
-		}
-
-		#endregion
-
-		#region private void _contextMenuStrip_Opening(object sender, CancelEventArgs e)
-
-		private void _contextMenuStrip_Opening(object sender, CancelEventArgs e)
-		{
-			if (listViewInitialItems.SelectedItems.Count <= 0)
-			{
-				_toolStripMenuItemAddSuppliers.Enabled = false;
-				_toolStripMenuItemAddSuppliersAll.Enabled = false;
-			}
-			else
-			{
-				_toolStripMenuItemAddSuppliers.Enabled = true;
-				_toolStripMenuItemAddSuppliersAll.Enabled = true;
-			}
-		}
-
-		#endregion
-
-		private void _toolStripMenuItemAddSuppliersAll_Click(object sender, EventArgs e)
-		{
-			var form = new QuotationSupplierForm(_suppliers, listViewInitialItems.SelectedItems.Where(i => i is RequestForQuotationRecord).Cast<RequestForQuotationRecord>().ToList());
-			if (form.ShowDialog() == DialogResult.OK)
-				listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
-		}
-
-		private void _toolStripMenuItemAddSuppliers_Click(object sender, EventArgs e)
-		{
-			if (!(listViewInitialItems.SelectedItem is RequestForQuotationRecord))
-				return;
-
-			var form = new QuotationSupplierForm(_suppliers, listViewInitialItems.SelectedItem as RequestForQuotationRecord);
-			if (form.ShowDialog() == DialogResult.OK)
-				listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
-		}
 
 		private void Button2_Click(object sender, EventArgs e)
 		{

@@ -25,6 +25,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		public RequestOffersListView()
 		{
 			InitializeComponent();
+			DisableContectMenu();
 			SortMultiplier = 0;
 		}
 		#endregion

@@ -14,6 +14,7 @@ namespace CAS.UI.UIControls.MTOP
 		public MTOPCheckListView()
 		{
 			InitializeComponent();
+			DisableContectMenu();
 		}
 
 		#endregion

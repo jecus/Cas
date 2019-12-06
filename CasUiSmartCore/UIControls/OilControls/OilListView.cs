@@ -44,6 +44,7 @@ namespace CAS.UI.UIControls.OilControls
 		private OilListView()
 		{
 			InitializeComponent();
+			DisableContectMenu();
 		}
 		#endregion
 

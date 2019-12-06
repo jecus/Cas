@@ -10,6 +10,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		public InitialOrderFormListView()
 		{
 			InitializeComponent();
+			DisableContectMenu();
 		}
 
 		#region protected override void SetHeaders()

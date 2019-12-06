@@ -19,6 +19,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		public PurchaseStatusListView()
 		{
 			InitializeComponent();
+			DisableContectMenu();
 			SortMultiplier = 0;
 		}
 		#endregion
