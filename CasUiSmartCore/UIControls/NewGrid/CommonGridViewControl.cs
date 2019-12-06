@@ -40,6 +40,7 @@ namespace CAS.UI.UIControls.NewGrid
 		private RadMenuItem _toolStripMenuItemPaste;
 		private RadMenuItem _toolStripMenuItemDelete;
 		private bool _clickHeader;
+		private bool _addBaseMenu = true;
 
 		#endregion
 
@@ -207,11 +208,17 @@ namespace CAS.UI.UIControls.NewGrid
 			_customMenu.Items.Remove(_toolStripMenuItemCopy);
 			_customMenu.Items.Remove(_toolStripMenuItemDelete);
 			_customMenu.Items.Remove(_toolStripMenuItemPaste);
+			_addBaseMenu = false;
 		}
+
 		public void AddMenuItems(params RadMenuItemBase[] items)
 		{
-			_customMenu.Items.Clear();
 			_customMenu.Items.AddRange(items);
+
+			if (!_addBaseMenu)
+				return;
+
+			_customMenu.Items.Clear();
 			_customMenu.Items.AddRange(_toolStripMenuItemDelete,
 				new RadMenuSeparatorItem(),
 				_toolStripMenuItemCopy,
@@ -679,6 +686,9 @@ namespace CAS.UI.UIControls.NewGrid
 			var cellElement = e.ContextMenuProvider as GridCellElement;
 			if (cellElement == null || cellElement.RowInfo is GridViewFilteringRowInfo || cellElement.RowInfo is GridViewTableHeaderRowInfo)
 				return;
+
+			if (!_customMenu.Items.Any())
+				e.Cancel = true;
 
 			MenuOpeningAction?.Invoke();
 			e.ContextMenu = _customMenu;

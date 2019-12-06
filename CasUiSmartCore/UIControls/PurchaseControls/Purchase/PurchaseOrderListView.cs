@@ -19,6 +19,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		public PurchaseOrderListView()
 		{
 			InitializeComponent();
+			DisableContectMenu();
 		}
 		#endregion
 
