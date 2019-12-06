@@ -21,6 +21,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		{
 			InitializeComponent();
 			SortMultiplier = 0;
+			DisableContectMenu();
 		}
 		#endregion
 

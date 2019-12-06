@@ -41,7 +41,9 @@ namespace CAS.UI.UIControls.NewGrid
 		private RadMenuItem _toolStripMenuItemCopy;
 		private RadMenuItem _toolStripMenuItemPaste;
 		private RadMenuItem _toolStripMenuItemDelete;
+		private RadMenuSeparatorItem _separator;
 		private bool _clickHeader;
+		private bool _addBaseMenu = true;
 
 		#endregion
 
@@ -183,12 +185,18 @@ namespace CAS.UI.UIControls.NewGrid
 			_customMenu.Items.Remove(_toolStripMenuItemCopy);
 			_customMenu.Items.Remove(_toolStripMenuItemDelete);
 			_customMenu.Items.Remove(_toolStripMenuItemPaste);
+			_customMenu.Items.Remove(_separator);
+			_addBaseMenu = false;
 		}
 
 		public void AddMenuItems(params RadMenuItemBase[] items)
 		{
-			_customMenu.Items.Clear();
 			_customMenu.Items.AddRange(items);
+
+			if (!_addBaseMenu)
+				return;
+
+			_customMenu.Items.Clear();
 			_customMenu.Items.AddRange(_toolStripMenuItemDelete,
 				new RadMenuSeparatorItem(),
 				_toolStripMenuItemCopy,
@@ -200,6 +208,7 @@ namespace CAS.UI.UIControls.NewGrid
 		{
 			_customMenu = new RadDropDownMenu();
 			_toolStripMenuItemDelete = new RadMenuItem();
+			_separator = new RadMenuSeparatorItem();
 			_toolStripMenuItemCopy = new RadMenuItem();
 			_toolStripMenuItemPaste = new RadMenuItem();
 
@@ -223,7 +232,7 @@ namespace CAS.UI.UIControls.NewGrid
 
 			_customMenu.Items.AddRange(new RadMenuSeparatorItem(),
 				_toolStripMenuItemDelete,
-				new RadMenuSeparatorItem(),
+				_separator,
 				_toolStripMenuItemCopy,
 				_toolStripMenuItemPaste
 			);
