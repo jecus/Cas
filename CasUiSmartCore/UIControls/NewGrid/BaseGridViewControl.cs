@@ -766,6 +766,10 @@ namespace CAS.UI.UIControls.NewGrid
 			if (cellElement == null || cellElement.RowInfo is GridViewFilteringRowInfo || cellElement.RowInfo is GridViewTableHeaderRowInfo)
 				return;
 
+			if(!_customMenu.Items.Any())
+				e.Cancel = true;
+
+
 			if (SelectedItems.Count <= 0)
 			{
 				_toolStripMenuItemPaste.Enabled = false;

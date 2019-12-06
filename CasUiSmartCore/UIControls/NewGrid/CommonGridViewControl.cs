@@ -680,6 +680,9 @@ namespace CAS.UI.UIControls.NewGrid
 			if (cellElement == null || cellElement.RowInfo is GridViewFilteringRowInfo || cellElement.RowInfo is GridViewTableHeaderRowInfo)
 				return;
 
+			if (!_customMenu.Items.Any())
+				e.Cancel = true;
+
 			MenuOpeningAction?.Invoke();
 			e.ContextMenu = _customMenu;
 		}
