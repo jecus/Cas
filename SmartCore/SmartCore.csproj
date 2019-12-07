@@ -511,6 +511,7 @@
     <Compile Include="Entities\Dictionaries\DirectiveAffects.cs" />
     <Compile Include="Entities\Dictionaries\DirectiveReason.cs" />
     <Compile Include="Entities\Dictionaries\DirectiveOrder.cs" />
+    <Compile Include="Entities\Dictionaries\QuotationCostType.cs" />
     <Compile Include="Entities\Dictionaries\IncoTerm.cs" />
     <Compile Include="Entities\Dictionaries\OccurrenceType.cs" />
     <Compile Include="Entities\Dictionaries\CriticalSystemList.cs" />

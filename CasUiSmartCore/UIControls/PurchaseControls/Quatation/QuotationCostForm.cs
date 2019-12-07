@@ -51,94 +51,62 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		{
 			comboBoxCostNew.Items.Clear();
 			comboBoxCostNew.Items.AddRange(Сurrency.Items.ToArray());
-			
-			comboBoxCostOH.Items.Clear();
-			comboBoxCostOH.Items.AddRange(Сurrency.Items.ToArray());
 
-			comboBoxCostRepair.Items.Clear();
-			comboBoxCostRepair.Items.AddRange(Сurrency.Items.ToArray());
+			comboBoxCostType.Items.Clear();
+			comboBoxCostType.Items.AddRange(QuotationCostType.Items.ToArray());
+			comboBoxCostType.SelectedItem = QuotationCostType.New;
 
-			comboBoxCostServ.Items.Clear();
-			comboBoxCostServ.Items.AddRange(Сurrency.Items.ToArray());
+			comboBoxCostType.Enabled = numericUpDownCostNew.Enabled = numericUpDownExNew.Enabled =
+				numericUpDownReadinessNew.Enabled = comboBoxCostNew.Enabled = supplierListView1.SelectedItem != null;
 		}
 
 		private void SupplierListView1_SelectedItemsChanged(object sender, Auxiliary.SelectedItemsChangeEventArgs e)
 		{
+			comboBoxCostType.Enabled = numericUpDownCostNew.Enabled = numericUpDownExNew.Enabled =
+				numericUpDownReadinessNew.Enabled = comboBoxCostNew.Enabled = supplierListView1.SelectedItem != null;
 			if (supplierListView1.SelectedItem == null) return;
-
-			numericUpDownCostNew.Value = supplierListView1.SelectedItem.CostNew;
-			numericUpDownCostOH.Value = supplierListView1.SelectedItem.CostOverhaul;
-			numericUpDownCostRepair.Value = supplierListView1.SelectedItem.CostRepair;
-			numericUpDownCostServ.Value = supplierListView1.SelectedItem.CostServiceable;
-
-			numericUpDownExNew.Value = supplierListView1.SelectedItem.CostNewEx;
-			numericUpDownExOH.Value = supplierListView1.SelectedItem.CostOverhaulEx;
-			numericUpDownExRepair.Value = supplierListView1.SelectedItem.CostRepairEx;
-			numericUpDownExServ.Value = supplierListView1.SelectedItem.CostServiceableEx;
-
-			numericUpDownReadinessNew.Value = supplierListView1.SelectedItem.CostNewReadiness;
-			numericUpDownReadinessOH.Value = supplierListView1.SelectedItem.CostOverhaulReadiness;
-			numericUpDownReadinessRepair.Value = supplierListView1.SelectedItem.CostRepairReadiness;
-			numericUpDownReadinessServ.Value = supplierListView1.SelectedItem.CostServiceableReadiness;
-
-			comboBoxCostNew.SelectedItem = supplierListView1.SelectedItem.СurrencyNew;
-			comboBoxCostOH.SelectedItem = supplierListView1.SelectedItem.СurrencyOH;
-			comboBoxCostRepair.SelectedItem = supplierListView1.SelectedItem.СurrencyRepair;
-			comboBoxCostServ.SelectedItem = supplierListView1.SelectedItem.СurrencyServ;
-
+			comboBoxCostType.SelectedItem = null;
+			comboBoxCostType.SelectedItem = QuotationCostType.New;
 		}
 
 		private void Button1_Click(object sender, System.EventArgs e)
 		{
 			if (supplierListView1.SelectedItem == null) return;
 
-			supplierListView1.SelectedItem.CostNew = numericUpDownCostNew.Value;
-			supplierListView1.SelectedItem.CostOverhaul = numericUpDownCostOH.Value;
-			supplierListView1.SelectedItem.CostRepair = numericUpDownCostRepair.Value;
-			supplierListView1.SelectedItem.CostServiceable = numericUpDownCostServ.Value;
+			var type = comboBoxCostType.SelectedItem as QuotationCostType;
 
-			supplierListView1.SelectedItem.CostNewEx = numericUpDownExNew.Value;
-			supplierListView1.SelectedItem.CostOverhaulEx = numericUpDownExOH.Value;
-			supplierListView1.SelectedItem.CostRepairEx = numericUpDownExRepair.Value;
-			supplierListView1.SelectedItem.CostServiceableEx = numericUpDownExServ.Value;
-
-			supplierListView1.SelectedItem.CostNewReadiness = numericUpDownReadinessNew.Value;
-			supplierListView1.SelectedItem.CostOverhaulReadiness = numericUpDownReadinessOH.Value;
-			supplierListView1.SelectedItem.CostRepairReadiness = numericUpDownReadinessRepair.Value;
-			supplierListView1.SelectedItem.CostServiceableReadiness = numericUpDownReadinessServ.Value;
-
-			supplierListView1.SelectedItem.СurrencyNew = (Сurrency) comboBoxCostNew.SelectedItem;
-			supplierListView1.SelectedItem.СurrencyOH = (Сurrency)comboBoxCostOH.SelectedItem;
-			supplierListView1.SelectedItem.СurrencyRepair = (Сurrency)comboBoxCostRepair.SelectedItem;
-			supplierListView1.SelectedItem.СurrencyServ = (Сurrency)comboBoxCostServ.SelectedItem;
+			if (type == QuotationCostType.New)
+			{
+				supplierListView1.SelectedItem.CostNew = numericUpDownCostNew.Value;
+				supplierListView1.SelectedItem.CostNewEx = numericUpDownExNew.Value;
+				supplierListView1.SelectedItem.CostNewReadiness = numericUpDownReadinessNew.Value;
+				supplierListView1.SelectedItem.СurrencyNew = (Сurrency)comboBoxCostNew.SelectedItem;
+			}
+			else if (type == QuotationCostType.OH)
+			{
+				supplierListView1.SelectedItem.CostOverhaul = numericUpDownCostNew.Value;
+				supplierListView1.SelectedItem.CostOverhaulEx = numericUpDownExNew.Value;
+				supplierListView1.SelectedItem.CostOverhaulReadiness = numericUpDownReadinessNew.Value;
+				supplierListView1.SelectedItem.СurrencyOH = (Сurrency)comboBoxCostNew.SelectedItem;
+			}
+			else if (type == QuotationCostType.Repair)
+			{
+				supplierListView1.SelectedItem.CostRepair = numericUpDownCostNew.Value;
+				supplierListView1.SelectedItem.CostRepairEx = numericUpDownExNew.Value;
+				supplierListView1.SelectedItem.CostRepairReadiness = numericUpDownReadinessNew.Value;
+				supplierListView1.SelectedItem.СurrencyRepair = (Сurrency)comboBoxCostNew.SelectedItem;
+			}
+			else if (type == QuotationCostType.Serv)
+			{
+				supplierListView1.SelectedItem.CostServiceable = numericUpDownCostNew.Value;
+				supplierListView1.SelectedItem.CostServiceableEx = numericUpDownExNew.Value;
+				supplierListView1.SelectedItem.CostServiceableReadiness = numericUpDownReadinessNew.Value;
+				supplierListView1.SelectedItem.СurrencyServ = (Сurrency)comboBoxCostNew.SelectedItem;
+			}
 
 			supplierListView1.SetItemsArray(_prices.ToArray());
-
-			Reset();
 		}
 
-		private void Reset()
-		{
-			numericUpDownCostNew.Value = 0;
-			numericUpDownCostOH.Value = 0;
-			numericUpDownCostRepair.Value = 0;
-			numericUpDownCostServ.Value = 0;
-
-			numericUpDownExNew.Value = 0;
-			numericUpDownExOH.Value = 0;
-			numericUpDownExRepair.Value = 0;
-			numericUpDownExServ.Value = 0;
-
-			numericUpDownReadinessNew.Value = 0;
-			numericUpDownReadinessOH.Value = 0;
-			numericUpDownReadinessRepair.Value = 0;
-			numericUpDownReadinessServ.Value = 0;
-
-			comboBoxCostNew.SelectedItem = Сurrency.USD;
-			comboBoxCostOH.SelectedItem = Сurrency.USD;
-			comboBoxCostRepair.SelectedItem = Сurrency.USD;
-			comboBoxCostServ.SelectedItem = Сurrency.USD;
-		}
 
 		private void ButtonCancel_Click(object sender, System.EventArgs e)
 		{
@@ -172,6 +140,41 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			//}
 
 			
+		}
+
+		private void comboBoxCostType_SelectedIndexChanged(object sender, System.EventArgs e)
+		{
+			if (supplierListView1.SelectedItem == null) return;
+			var type = comboBoxCostType.SelectedItem as QuotationCostType;
+
+			if (type == QuotationCostType.New)
+			{
+				numericUpDownCostNew.Value = supplierListView1.SelectedItem.CostNew;
+				numericUpDownExNew.Value = supplierListView1.SelectedItem.CostNewEx;
+				numericUpDownReadinessNew.Value = supplierListView1.SelectedItem.CostNewReadiness;
+				comboBoxCostNew.SelectedItem= supplierListView1.SelectedItem.СurrencyNew;
+			}
+			else if (type == QuotationCostType.OH)
+			{
+				numericUpDownCostNew.Value = supplierListView1.SelectedItem.CostOverhaul;
+				numericUpDownExNew.Value = supplierListView1.SelectedItem.CostOverhaulEx;
+				numericUpDownReadinessNew.Value = supplierListView1.SelectedItem.CostOverhaulReadiness;
+				comboBoxCostNew.SelectedItem = supplierListView1.SelectedItem.СurrencyOH;
+			}
+			else if (type == QuotationCostType.Repair)
+			{
+				numericUpDownCostNew.Value = supplierListView1.SelectedItem.CostRepair;
+				numericUpDownExNew.Value = supplierListView1.SelectedItem.CostRepairEx;
+				numericUpDownReadinessNew.Value = supplierListView1.SelectedItem.CostRepairReadiness;
+				comboBoxCostNew.SelectedItem = supplierListView1.SelectedItem.СurrencyRepair;
+			}
+			else if (type == QuotationCostType.Serv)
+			{
+				numericUpDownCostNew.Value = supplierListView1.SelectedItem.CostServiceable;
+				numericUpDownExNew.Value = supplierListView1.SelectedItem.CostServiceableEx;
+				numericUpDownReadinessNew.Value = supplierListView1.SelectedItem.CostServiceableReadiness;
+				comboBoxCostNew.SelectedItem = supplierListView1.SelectedItem.СurrencyServ;
+			}
 		}
 	}
 }
