@@ -711,7 +711,7 @@ namespace CAS.UI.UIControls.NewGrid
 
 		private void SortingItems(List<GridViewDataRowInfo> temp)
 		{
-			SortMultiplier = SortMultiplier == 0 ? -1 : 1;
+			SortMultiplier = SortMultiplier == 0 ? -1 : SortMultiplier;
 			temp.Sort(new GridViewDataRowInfoComparer(OldColumnIndex, SortMultiplier));
 		}
 
