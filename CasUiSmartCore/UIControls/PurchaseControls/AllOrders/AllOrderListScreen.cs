@@ -429,6 +429,9 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 
 		private void _toolStripMenuItemPublish_Click(object sender, EventArgs e)
 		{
+			if(_directivesViewer.SelectedItems.Count == 0)
+				return;
+
 			if (_directivesViewer.SelectedItems[0] is RequestForQuotation)
 			{
 				var editForm = new CreatePurchaseOrderForm(_directivesViewer.SelectedItems[0] as RequestForQuotation);
