@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
+using EntityCore.DTO.General;
 using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General.Setting;
 using SmartCore.Filters;
 using SmartCore.Purchase;
 
@@ -20,6 +22,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		private PurchaseOrder _order;
 		private List<Supplier> _supplierShipper = new List<Supplier>();
+		private Settings _setting;
 
 		#endregion
 
@@ -60,6 +63,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			_supplierShipper.AddRange(GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[] { new CommonFilter<int>(Supplier.SupplierClassProperty, SupplierClass.Shipper.ItemId) }));
 			_order.ShipCompany = _supplierShipper.FirstOrDefault(i => i.ItemId == _order.ShipCompanyId) ?? Supplier.Unknown;
 
+			_setting = GlobalObjects.CasEnvironment.NewLoader.GetObject<SettingDTO, Settings>();
+
+			if (_setting == null)
+				_setting = new Settings();
 
 			foreach (var record in _order.AdditionalInformation.PurchaseShippers)
 			{
@@ -77,6 +84,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		private void UpdateControls()
 		{
+			comboBox1.Items.Clear();
+			comboBox1.Items.AddRange(_setting.GlobalSetting.QuotationSupplierSetting.Parameters.Select(i => i.Key).ToArray());
+
 			comboBoxStatus.Items.Clear();
 			comboBoxStatus.DataSource = Enum.GetValues(typeof(WorkPackageStatus));
 			comboBoxStatus.SelectedItem = _order.Status;
@@ -131,18 +141,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			}
 			else
 			{
-				//сохранение запросного ордера
-				//GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
-
-				foreach (var record in _addedRecord)
-				{
-					GlobalObjects.CasEnvironment.NewKeeper.Save(record);
-				}
-
+				_order.AdditionalInformation.PurchaseShippers.Clear();
+				_order.AdditionalInformation.PurchaseShippers.AddRange(_addedRecord);
+				GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
 				DialogResult = DialogResult.OK;
-
 			}
-			
 		}
 
 		#endregion
@@ -200,5 +203,53 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		}
 
 		#endregion
+
+		private void buttonAddSupplierForAll_Click(object sender, EventArgs e)
+		{
+			if (comboBox1.SelectedItem == null)
+				return;
+
+			var ids = _setting.GlobalSetting.QuotationSupplierSetting.Parameters[comboBox1.SelectedItem.ToString()];
+			var shippers = _supplierShipper.Where(i => ids.Contains(i.ItemId));
+
+			foreach (var shipper in shippers)
+			{
+				if(_addedRecord.Any(i => i.ShipperId == shipper.ItemId))
+					continue;
+
+				var record = new PurchaseShipper
+				{
+					PONumber = _order.Number,
+					Currency = Сurrency.USD,
+					CurrencyId = Сurrency.USD.ItemId,
+					CorrectorId = GlobalObjects.CasEnvironment.IdentityUser.ItemId,
+					Shipper = shipper,
+					ShipperId = shipper.ItemId,
+				};
+				_addedRecord.Add(record);
+			}
+
+			purchaseRecordListView1.SetItemsArray(_addedRecord.ToArray());
+		}
+
+		private void button3_Click(object sender, EventArgs e)
+		{
+			if(purchaseRecordListView1.SelectedItem == null)
+				return;
+			var dialog = MessageBox.Show($"Do you really want apply shipper({purchaseRecordListView1.SelectedItem.Shipper}) for purchase order({_order.Title})?", (string)new GlobalTermsProvider()["SystemName"],
+				MessageBoxButtons.YesNo,
+				MessageBoxIcon.Question);
+			
+		
+			if(dialog == DialogResult.No)
+				return;
+
+			_order.AdditionalInformation.FreightPrice = purchaseRecordListView1.SelectedItem.Cost;
+			_order.AdditionalInformation.СurrencyFreight = purchaseRecordListView1.SelectedItem.Currency;
+			_order.AdditionalInformation.СurrencyFreightId = purchaseRecordListView1.SelectedItem.CurrencyId;
+			_order.ShipCompanyId = purchaseRecordListView1.SelectedItem.ShipperId;
+			_order.ShipCompany = purchaseRecordListView1.SelectedItem.Shipper;
+			GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
+		}
 	}
 }

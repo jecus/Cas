@@ -413,6 +413,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.button3.Size = new System.Drawing.Size(125, 33);
 			this.button3.TabIndex = 269;
 			this.button3.Text = "Apply for PO";
+			this.button3.Click += new System.EventHandler(this.button3_Click);
 			// 
 			// metroTextBox1
 			// 
@@ -536,7 +537,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.buttonAddSupplierForAll.Name = "buttonAddSupplierForAll";
 			this.buttonAddSupplierForAll.Size = new System.Drawing.Size(160, 33);
 			this.buttonAddSupplierForAll.TabIndex = 330;
-			this.buttonAddSupplierForAll.Text = "Add Supplier For All";
+			this.buttonAddSupplierForAll.Text = "Add Shipper";
+			this.buttonAddSupplierForAll.Click += new System.EventHandler(this.buttonAddSupplierForAll_Click);
 			// 
 			// comboBox1
 			// 

@@ -326,7 +326,11 @@ namespace SmartCore.Purchase
 		[JsonIgnore]
 		public Supplier Shipper { get; set; }
 		[JsonIgnore]
-		public Ñurrency Currency { get; set; }
+		public Ñurrency Currency
+		{
+			get => Ñurrency.GetItemById(CurrencyId);
+			set => CurrencyId = value.ItemId;
+		}
 		[JsonIgnore]
 		public string PONumber { get; set; }
 	}
