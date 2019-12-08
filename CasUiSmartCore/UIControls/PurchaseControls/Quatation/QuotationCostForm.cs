@@ -104,6 +104,30 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 				supplierListView1.SelectedItem.СurrencyServ = (Сurrency)comboBoxCostNew.SelectedItem;
 			}
 
+			else if (type == QuotationCostType.Test)
+			{
+				supplierListView1.SelectedItem.CostTest = numericUpDownCostNew.Value;
+				supplierListView1.SelectedItem.CostTestEx = numericUpDownExNew.Value;
+				supplierListView1.SelectedItem.CostTestReadiness = numericUpDownReadinessNew.Value;
+				supplierListView1.SelectedItem.СurrencyTest = (Сurrency)comboBoxCostNew.SelectedItem;
+			}
+
+			else if (type == QuotationCostType.Inspect)
+			{
+				supplierListView1.SelectedItem.CostInspect = numericUpDownCostNew.Value;
+				supplierListView1.SelectedItem.CostInspectEx = numericUpDownExNew.Value;
+				supplierListView1.SelectedItem.CostInspectReadiness = numericUpDownReadinessNew.Value;
+				supplierListView1.SelectedItem.СurrencyInspect = (Сurrency)comboBoxCostNew.SelectedItem;
+			}
+
+			else if (type == QuotationCostType.Modification)
+			{
+				supplierListView1.SelectedItem.CostModification = numericUpDownCostNew.Value;
+				supplierListView1.SelectedItem.CostModificationEx = numericUpDownExNew.Value;
+				supplierListView1.SelectedItem.CostModificationReadiness = numericUpDownReadinessNew.Value;
+				supplierListView1.SelectedItem.СurrencyModification = (Сurrency)comboBoxCostNew.SelectedItem;
+			}
+
 			supplierListView1.SetItemsArray(_prices.ToArray());
 		}
 
@@ -174,6 +198,30 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 				numericUpDownExNew.Value = supplierListView1.SelectedItem.CostServiceableEx;
 				numericUpDownReadinessNew.Value = supplierListView1.SelectedItem.CostServiceableReadiness;
 				comboBoxCostNew.SelectedItem = supplierListView1.SelectedItem.СurrencyServ;
+			}
+
+			else if (type == QuotationCostType.Test)
+			{
+				numericUpDownCostNew.Value = supplierListView1.SelectedItem.CostTest;
+				numericUpDownExNew.Value = supplierListView1.SelectedItem.CostTestEx;
+				numericUpDownReadinessNew.Value = supplierListView1.SelectedItem.CostTestReadiness;
+				comboBoxCostNew.SelectedItem = supplierListView1.SelectedItem.СurrencyTest;
+			}
+
+			else if (type == QuotationCostType.Inspect)
+			{
+				numericUpDownCostNew.Value = supplierListView1.SelectedItem.CostInspect;
+				numericUpDownExNew.Value = supplierListView1.SelectedItem.CostInspectEx;
+				numericUpDownReadinessNew.Value = supplierListView1.SelectedItem.CostInspectReadiness;
+				comboBoxCostNew.SelectedItem = supplierListView1.SelectedItem.СurrencyInspect;
+			}
+
+			else if (type == QuotationCostType.Modification)
+			{
+				numericUpDownCostNew.Value = supplierListView1.SelectedItem.CostModification;
+				numericUpDownExNew.Value = supplierListView1.SelectedItem.CostModificationEx;
+				numericUpDownReadinessNew.Value = supplierListView1.SelectedItem.CostModificationReadiness;
+				comboBoxCostNew.SelectedItem = supplierListView1.SelectedItem.СurrencyModification;
 			}
 		}
 	}
