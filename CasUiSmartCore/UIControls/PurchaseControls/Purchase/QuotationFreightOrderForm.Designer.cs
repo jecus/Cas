@@ -177,18 +177,20 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// 
 			// 
 			this.textBoxRemarks.CustomButton.Image = null;
-			this.textBoxRemarks.CustomButton.Location = new System.Drawing.Point(147, 2);
+			this.textBoxRemarks.CustomButton.Location = new System.Drawing.Point(57, 2);
 			this.textBoxRemarks.CustomButton.Name = "";
-			this.textBoxRemarks.CustomButton.Size = new System.Drawing.Size(17, 17);
+			this.textBoxRemarks.CustomButton.Size = new System.Drawing.Size(107, 107);
 			this.textBoxRemarks.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
 			this.textBoxRemarks.CustomButton.TabIndex = 1;
 			this.textBoxRemarks.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
 			this.textBoxRemarks.CustomButton.UseSelectable = true;
 			this.textBoxRemarks.CustomButton.Visible = false;
+			this.textBoxRemarks.Enabled = false;
 			this.textBoxRemarks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.textBoxRemarks.Lines = new string[0];
-			this.textBoxRemarks.Location = new System.Drawing.Point(117, 159);
+			this.textBoxRemarks.Location = new System.Drawing.Point(118, 159);
 			this.textBoxRemarks.MaxLength = 32767;
+			this.textBoxRemarks.Multiline = true;
 			this.textBoxRemarks.Name = "textBoxRemarks";
 			this.textBoxRemarks.PasswordChar = '\0';
 			this.textBoxRemarks.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -196,7 +198,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.textBoxRemarks.SelectionLength = 0;
 			this.textBoxRemarks.SelectionStart = 0;
 			this.textBoxRemarks.ShortcutsEnabled = true;
-			this.textBoxRemarks.Size = new System.Drawing.Size(167, 22);
+			this.textBoxRemarks.Size = new System.Drawing.Size(167, 112);
 			this.textBoxRemarks.TabIndex = 264;
 			this.textBoxRemarks.UseSelectable = true;
 			this.textBoxRemarks.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -297,6 +299,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.textBoxTitle.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
 			this.textBoxTitle.CustomButton.UseSelectable = true;
 			this.textBoxTitle.CustomButton.Visible = false;
+			this.textBoxTitle.Enabled = false;
 			this.textBoxTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.textBoxTitle.Lines = new string[0];
 			this.textBoxTitle.Location = new System.Drawing.Point(118, 47);
@@ -355,7 +358,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.groupBox1.Controls.Add(this.button1);
 			this.groupBox1.Location = new System.Drawing.Point(777, 397);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(294, 237);
+			this.groupBox1.Size = new System.Drawing.Size(294, 240);
 			this.groupBox1.TabIndex = 325;
 			this.groupBox1.TabStop = false;
 			// 
@@ -364,7 +367,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.comboBoxCurrency.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.comboBoxCurrency.FormattingEnabled = true;
 			this.comboBoxCurrency.ItemHeight = 13;
-			this.comboBoxCurrency.Location = new System.Drawing.Point(120, 140);
+			this.comboBoxCurrency.Location = new System.Drawing.Point(116, 45);
 			this.comboBoxCurrency.Name = "comboBoxCurrency";
 			this.comboBoxCurrency.Size = new System.Drawing.Size(168, 21);
 			this.comboBoxCurrency.TabIndex = 315;
@@ -372,7 +375,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// numericUpDownCost
 			// 
 			this.numericUpDownCost.DecimalPlaces = 2;
-			this.numericUpDownCost.Location = new System.Drawing.Point(120, 114);
+			this.numericUpDownCost.Location = new System.Drawing.Point(116, 19);
 			this.numericUpDownCost.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -385,7 +388,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// metroLabel3
 			// 
 			this.metroLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabel3.Location = new System.Drawing.Point(23, 140);
+			this.metroLabel3.Location = new System.Drawing.Point(20, 45);
 			this.metroLabel3.Name = "metroLabel3";
 			this.metroLabel3.Size = new System.Drawing.Size(69, 23);
 			this.metroLabel3.TabIndex = 271;
@@ -395,7 +398,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// metroLabel1
 			// 
 			this.metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabel1.Location = new System.Drawing.Point(23, 114);
+			this.metroLabel1.Location = new System.Drawing.Point(20, 19);
 			this.metroLabel1.Name = "metroLabel1";
 			this.metroLabel1.Size = new System.Drawing.Size(69, 23);
 			this.metroLabel1.TabIndex = 270;
@@ -408,7 +411,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button3.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button3.Location = new System.Drawing.Point(62, 189);
+			this.button3.Location = new System.Drawing.Point(62, 192);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(125, 33);
 			this.button3.TabIndex = 269;
@@ -421,9 +424,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// 
 			// 
 			this.metroTextBox1.CustomButton.Image = null;
-			this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(80, 1);
+			this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(59, 1);
 			this.metroTextBox1.CustomButton.Name = "";
-			this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(87, 87);
+			this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(109, 109);
 			this.metroTextBox1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
 			this.metroTextBox1.CustomButton.TabIndex = 1;
 			this.metroTextBox1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -431,7 +434,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.metroTextBox1.CustomButton.Visible = false;
 			this.metroTextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.metroTextBox1.Lines = new string[0];
-			this.metroTextBox1.Location = new System.Drawing.Point(120, 19);
+			this.metroTextBox1.Location = new System.Drawing.Point(116, 72);
 			this.metroTextBox1.MaxLength = 32767;
 			this.metroTextBox1.Multiline = true;
 			this.metroTextBox1.Name = "metroTextBox1";
@@ -441,7 +444,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.metroTextBox1.SelectionLength = 0;
 			this.metroTextBox1.SelectionStart = 0;
 			this.metroTextBox1.ShortcutsEnabled = true;
-			this.metroTextBox1.Size = new System.Drawing.Size(168, 89);
+			this.metroTextBox1.Size = new System.Drawing.Size(169, 111);
 			this.metroTextBox1.TabIndex = 267;
 			this.metroTextBox1.UseSelectable = true;
 			this.metroTextBox1.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -450,7 +453,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// metroLabel2
 			// 
 			this.metroLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabel2.Location = new System.Drawing.Point(23, 18);
+			this.metroLabel2.Location = new System.Drawing.Point(20, 72);
 			this.metroLabel2.Name = "metroLabel2";
 			this.metroLabel2.Size = new System.Drawing.Size(69, 23);
 			this.metroLabel2.TabIndex = 266;
@@ -464,7 +467,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button1.Location = new System.Drawing.Point(193, 189);
+			this.button1.Location = new System.Drawing.Point(193, 192);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(95, 33);
 			this.button1.TabIndex = 249;
