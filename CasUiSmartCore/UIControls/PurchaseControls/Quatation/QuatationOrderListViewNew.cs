@@ -1,8 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using Auxiliary;
+using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
+using SmartCore.Entities.General;
+using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Purchase;
 using Telerik.WinControls.UI;
@@ -68,6 +72,37 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 			return subItems;
 		}
+
+		#region protected override void CustomSort(int ColumnIndex)
+
+		protected override void CustomSort(int ColumnIndex)
+		{
+			if (OldColumnIndex != ColumnIndex)
+				SortMultiplier = -1;
+			if (SortMultiplier == 1)
+				SortMultiplier = -1;
+			else
+				SortMultiplier = 1;
+
+			var resultList = new List<IBaseEntityObject>();
+			var list = radGridView1.Rows.Where(i => i.Tag is RequestForQuotationRecord).Select(i => i).ToList();
+			list.Sort(new GridViewDataRowInfoComparer(ColumnIndex, SortMultiplier));
+			//добавление остальных подзадач
+			foreach (GridViewRowInfo item in list)
+			{
+				if (item.Tag is RequestForQuotationRecord rec)
+				{
+					resultList.Add(rec);
+					resultList.AddRange(rec.SupplierPrice);
+				}
+
+			}
+
+			SetItemsArray(resultList.ToArray());
+
+		}
+
+		#endregion
 
 		#region protected override void SetItemColor(ListViewItem listViewItem, BaseSmartCoreObject item)
 		protected override void SetItemColor(GridViewRowInfo listViewItem, IBaseEntityObject item)
