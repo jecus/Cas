@@ -46,6 +46,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 		private RadMenuSeparatorItem _toolStripSeparator1;
 		private RadMenuItem _toolStripMenuItemEdit;
 		private RadMenuItem _toolStripMenuItemCreatePurchase;
+		private RadMenuItem _toolStripMenuItemFreightQ;
 
 		private Filter initialfilter = null;
 		private Filter quotationfilter = null;
@@ -253,6 +254,8 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 
 			_directivesViewer.AddMenuItems(_toolStripMenuItemPublish,
 				_toolStripMenuItemClose,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemFreightQ,
 				_toolStripSeparator1,
 				_toolStripMenuItemEdit);
 
@@ -296,6 +299,8 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 						_toolStripMenuItemCreatePurchase.Enabled = false;
 						_toolStripMenuItemCreateQuatation.Enabled = false;
 					}
+
+					_toolStripMenuItemFreightQ.Enabled = wp is PurchaseOrder && wp.Status == WorkPackageStatus.Opened;
 				}
 
 				else
@@ -304,6 +309,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 					_toolStripMenuItemClose.Enabled = true;
 					_toolStripMenuItemPublish.Enabled = true;
 					_toolStripMenuItemCreatePurchase.Enabled = false;
+					_toolStripMenuItemFreightQ.Enabled = false;
 				}
 			};
 
@@ -322,6 +328,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			_toolStripMenuItemClose = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			_toolStripMenuItemEdit = new RadMenuItem();
+			_toolStripMenuItemFreightQ = new RadMenuItem();
 			
 			_toolStripMenuItemEdit.Text = "Edit";
 			_toolStripMenuItemEdit.Click += _toolStripMenuItemEdit_Click;
@@ -341,10 +348,20 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			_toolStripMenuItemCreateQuatation.Text = "Create Quatation Order";
 			_toolStripMenuItemCreateQuatation.Click += _toolStripMenuItemCreateQuatation_Click;
 			// 
+			// toolStripMenuItemFreightQ
+			// 
+			_toolStripMenuItemFreightQ.Text = "Freight Q";
+			_toolStripMenuItemFreightQ.Click += _toolStripMenuItemFreightQ_Click;
+			// 
 			// toolStripMenuItemClose
 			// 
 			_toolStripMenuItemClose.Text = "Close";
 			_toolStripMenuItemClose.Click += _toolStripMenuItemClose_Click;
+		}
+
+		private void _toolStripMenuItemFreightQ_Click(object sender, EventArgs e)
+		{
+			new QuotationFreightOrderForm(_directivesViewer.SelectedItem as PurchaseOrder).ShowDialog();
 		}
 
 		#endregion
