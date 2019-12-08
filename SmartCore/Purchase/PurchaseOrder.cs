@@ -253,6 +253,7 @@ namespace SmartCore.Purchase
 		private DateTime _receiptDate;
 		private DateTime _receiptTime;
 		private DateTime _arrivalTime;
+		private List<PurchaseShipper> _purchaseShippers;
 
 		public string QualificationNumber { get; set; }
 
@@ -306,5 +307,28 @@ namespace SmartCore.Purchase
 			set => ÑurrencyFreightId = value.ItemId;
 		}
 
+		public List<PurchaseShipper> PurchaseShippers
+		{
+			get => _purchaseShippers ?? (_purchaseShippers = new List<PurchaseShipper>());
+			set => _purchaseShippers = value;
+		}
 	}
+
+	[JsonObject]
+	[Serializable]
+	public class PurchaseShipper : BaseEntityObject
+	{
+		public int ShipperId { get; set; }
+		public double Cost { get; set; }
+		public int CurrencyId { get; set; }
+		public string Remark { get; set; }
+
+		[JsonIgnore]
+		public Supplier Shipper { get; set; }
+		[JsonIgnore]
+		public Ñurrency Currency { get; set; }
+		[JsonIgnore]
+		public string PONumber { get; set; }
+	}
+
 }

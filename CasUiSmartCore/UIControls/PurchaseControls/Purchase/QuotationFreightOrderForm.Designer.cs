@@ -39,17 +39,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.metroTextBoxNumber = new MetroFramework.Controls.MetroTextBox();
 			this.metroLabelNumber = new MetroFramework.Controls.MetroLabel();
-			this.textBoxClosingBy = new MetroFramework.Controls.MetroTextBox();
-			this.textBoxPublishedBy = new MetroFramework.Controls.MetroTextBox();
 			this.comboBoxStatus = new System.Windows.Forms.ComboBox();
 			this.textBoxRemarks = new MetroFramework.Controls.MetroTextBox();
 			this.labelRemarks = new MetroFramework.Controls.MetroLabel();
-			this.labelClosedBy = new MetroFramework.Controls.MetroLabel();
-			this.labelClosingDate = new MetroFramework.Controls.MetroLabel();
-			this.dateTimePickerClosingDate = new System.Windows.Forms.DateTimePicker();
-			this.labelPublishDate = new MetroFramework.Controls.MetroLabel();
-			this.dateTimePickerPublishDate = new System.Windows.Forms.DateTimePicker();
-			this.label5 = new MetroFramework.Controls.MetroLabel();
 			this.dateTimePickerOpeningDate = new System.Windows.Forms.DateTimePicker();
 			this.labelOpeningDate = new MetroFramework.Controls.MetroLabel();
 			this.labelStatus = new MetroFramework.Controls.MetroLabel();
@@ -59,22 +51,22 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.labelQOTitle = new MetroFramework.Controls.MetroLabel();
 			this.purchaseRecordListView1 = new CAS.UI.UIControls.PurchaseControls.Purchase.QuatationFreightListView();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.comboBoxCurrency = new System.Windows.Forms.ComboBox();
+			this.numericUpDownCost = new System.Windows.Forms.NumericUpDown();
+			this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
 			this.button3 = new System.Windows.Forms.Button();
 			this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
 			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
 			this.button1 = new System.Windows.Forms.Button();
-			this.listViewKits = new CAS.UI.UIControls.PurchaseControls.Quatation.RequestProductListView();
 			this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
 			this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
 			this.buttonAddSupplierForAll = new System.Windows.Forms.Button();
 			this.comboBox1 = new System.Windows.Forms.ComboBox();
-			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-			this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-			this.comboBoxCostType = new System.Windows.Forms.ComboBox();
-			this.numericUpDownCostNew = new System.Windows.Forms.NumericUpDown();
+			this.supplierListView = new CAS.UI.UIControls.SupplierControls.SupplierListView();
 			this.groupBox2.SuspendLayout();
 			this.groupBox1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostNew)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCost)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// buttonOk
@@ -109,17 +101,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// 
 			this.groupBox2.Controls.Add(this.metroTextBoxNumber);
 			this.groupBox2.Controls.Add(this.metroLabelNumber);
-			this.groupBox2.Controls.Add(this.textBoxClosingBy);
-			this.groupBox2.Controls.Add(this.textBoxPublishedBy);
 			this.groupBox2.Controls.Add(this.comboBoxStatus);
 			this.groupBox2.Controls.Add(this.textBoxRemarks);
 			this.groupBox2.Controls.Add(this.labelRemarks);
-			this.groupBox2.Controls.Add(this.labelClosedBy);
-			this.groupBox2.Controls.Add(this.labelClosingDate);
-			this.groupBox2.Controls.Add(this.dateTimePickerClosingDate);
-			this.groupBox2.Controls.Add(this.labelPublishDate);
-			this.groupBox2.Controls.Add(this.dateTimePickerPublishDate);
-			this.groupBox2.Controls.Add(this.label5);
 			this.groupBox2.Controls.Add(this.dateTimePickerOpeningDate);
 			this.groupBox2.Controls.Add(this.labelOpeningDate);
 			this.groupBox2.Controls.Add(this.labelStatus);
@@ -129,7 +113,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.groupBox2.Controls.Add(this.labelQOTitle);
 			this.groupBox2.Location = new System.Drawing.Point(777, 63);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(293, 304);
+			this.groupBox2.Size = new System.Drawing.Size(293, 287);
 			this.groupBox2.TabIndex = 324;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Purchase";
@@ -176,70 +160,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.metroLabelNumber.Text = "№:";
 			this.metroLabelNumber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// textBoxClosingBy
-			// 
-			// 
-			// 
-			// 
-			this.textBoxClosingBy.CustomButton.Image = null;
-			this.textBoxClosingBy.CustomButton.Location = new System.Drawing.Point(147, 2);
-			this.textBoxClosingBy.CustomButton.Name = "";
-			this.textBoxClosingBy.CustomButton.Size = new System.Drawing.Size(17, 17);
-			this.textBoxClosingBy.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.textBoxClosingBy.CustomButton.TabIndex = 1;
-			this.textBoxClosingBy.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.textBoxClosingBy.CustomButton.UseSelectable = true;
-			this.textBoxClosingBy.CustomButton.Visible = false;
-			this.textBoxClosingBy.Enabled = false;
-			this.textBoxClosingBy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxClosingBy.Lines = new string[0];
-			this.textBoxClosingBy.Location = new System.Drawing.Point(118, 242);
-			this.textBoxClosingBy.MaxLength = 32767;
-			this.textBoxClosingBy.Name = "textBoxClosingBy";
-			this.textBoxClosingBy.PasswordChar = '\0';
-			this.textBoxClosingBy.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.textBoxClosingBy.SelectedText = "";
-			this.textBoxClosingBy.SelectionLength = 0;
-			this.textBoxClosingBy.SelectionStart = 0;
-			this.textBoxClosingBy.ShortcutsEnabled = true;
-			this.textBoxClosingBy.Size = new System.Drawing.Size(167, 22);
-			this.textBoxClosingBy.TabIndex = 267;
-			this.textBoxClosingBy.UseSelectable = true;
-			this.textBoxClosingBy.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.textBoxClosingBy.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			// 
-			// textBoxPublishedBy
-			// 
-			// 
-			// 
-			// 
-			this.textBoxPublishedBy.CustomButton.Image = null;
-			this.textBoxPublishedBy.CustomButton.Location = new System.Drawing.Point(147, 2);
-			this.textBoxPublishedBy.CustomButton.Name = "";
-			this.textBoxPublishedBy.CustomButton.Size = new System.Drawing.Size(17, 17);
-			this.textBoxPublishedBy.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-			this.textBoxPublishedBy.CustomButton.TabIndex = 1;
-			this.textBoxPublishedBy.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-			this.textBoxPublishedBy.CustomButton.UseSelectable = true;
-			this.textBoxPublishedBy.CustomButton.Visible = false;
-			this.textBoxPublishedBy.Enabled = false;
-			this.textBoxPublishedBy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxPublishedBy.Lines = new string[0];
-			this.textBoxPublishedBy.Location = new System.Drawing.Point(118, 187);
-			this.textBoxPublishedBy.MaxLength = 32767;
-			this.textBoxPublishedBy.Name = "textBoxPublishedBy";
-			this.textBoxPublishedBy.PasswordChar = '\0';
-			this.textBoxPublishedBy.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.textBoxPublishedBy.SelectedText = "";
-			this.textBoxPublishedBy.SelectionLength = 0;
-			this.textBoxPublishedBy.SelectionStart = 0;
-			this.textBoxPublishedBy.ShortcutsEnabled = true;
-			this.textBoxPublishedBy.Size = new System.Drawing.Size(167, 22);
-			this.textBoxPublishedBy.TabIndex = 266;
-			this.textBoxPublishedBy.UseSelectable = true;
-			this.textBoxPublishedBy.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-			this.textBoxPublishedBy.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-			// 
 			// comboBoxStatus
 			// 
 			this.comboBoxStatus.Enabled = false;
@@ -267,7 +187,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.textBoxRemarks.CustomButton.Visible = false;
 			this.textBoxRemarks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.textBoxRemarks.Lines = new string[0];
-			this.textBoxRemarks.Location = new System.Drawing.Point(118, 273);
+			this.textBoxRemarks.Location = new System.Drawing.Point(117, 159);
 			this.textBoxRemarks.MaxLength = 32767;
 			this.textBoxRemarks.Name = "textBoxRemarks";
 			this.textBoxRemarks.PasswordChar = '\0';
@@ -285,70 +205,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			// labelRemarks
 			// 
 			this.labelRemarks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelRemarks.Location = new System.Drawing.Point(21, 273);
+			this.labelRemarks.Location = new System.Drawing.Point(20, 159);
 			this.labelRemarks.Name = "labelRemarks";
 			this.labelRemarks.Size = new System.Drawing.Size(69, 23);
 			this.labelRemarks.TabIndex = 263;
 			this.labelRemarks.Text = "Remarks:";
 			this.labelRemarks.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// labelClosedBy
-			// 
-			this.labelClosedBy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelClosedBy.Location = new System.Drawing.Point(20, 240);
-			this.labelClosedBy.Name = "labelClosedBy";
-			this.labelClosedBy.Size = new System.Drawing.Size(94, 23);
-			this.labelClosedBy.TabIndex = 261;
-			this.labelClosedBy.Text = "Closing By:";
-			this.labelClosedBy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// labelClosingDate
-			// 
-			this.labelClosingDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelClosingDate.Location = new System.Drawing.Point(20, 213);
-			this.labelClosingDate.Name = "labelClosingDate";
-			this.labelClosingDate.Size = new System.Drawing.Size(94, 23);
-			this.labelClosingDate.TabIndex = 260;
-			this.labelClosingDate.Text = "Closing date:";
-			this.labelClosingDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// dateTimePickerClosingDate
-			// 
-			this.dateTimePickerClosingDate.Enabled = false;
-			this.dateTimePickerClosingDate.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.dateTimePickerClosingDate.Location = new System.Drawing.Point(118, 214);
-			this.dateTimePickerClosingDate.Name = "dateTimePickerClosingDate";
-			this.dateTimePickerClosingDate.Size = new System.Drawing.Size(166, 22);
-			this.dateTimePickerClosingDate.TabIndex = 259;
-			// 
-			// labelPublishDate
-			// 
-			this.labelPublishDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelPublishDate.Location = new System.Drawing.Point(20, 158);
-			this.labelPublishDate.Name = "labelPublishDate";
-			this.labelPublishDate.Size = new System.Drawing.Size(94, 23);
-			this.labelPublishDate.TabIndex = 258;
-			this.labelPublishDate.Text = "Publish. date:";
-			this.labelPublishDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// dateTimePickerPublishDate
-			// 
-			this.dateTimePickerPublishDate.Enabled = false;
-			this.dateTimePickerPublishDate.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.dateTimePickerPublishDate.Location = new System.Drawing.Point(118, 159);
-			this.dateTimePickerPublishDate.Name = "dateTimePickerPublishDate";
-			this.dateTimePickerPublishDate.Size = new System.Drawing.Size(166, 22);
-			this.dateTimePickerPublishDate.TabIndex = 257;
-			// 
-			// label5
-			// 
-			this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.label5.Location = new System.Drawing.Point(20, 185);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(101, 23);
-			this.label5.TabIndex = 255;
-			this.label5.Text = "Publishing By:";
-			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// dateTimePickerOpeningDate
 			// 
@@ -470,21 +332,21 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.purchaseRecordListView1.EnableCustomSorting = true;
 			this.purchaseRecordListView1.Entity = null;
 			this.purchaseRecordListView1.IgnoreEnterPress = false;
-			this.purchaseRecordListView1.Location = new System.Drawing.Point(23, 397);
+			this.purchaseRecordListView1.Location = new System.Drawing.Point(11, 397);
 			this.purchaseRecordListView1.MenuOpeningAction = null;
 			this.purchaseRecordListView1.Name = "purchaseRecordListView1";
 			this.purchaseRecordListView1.OldColumnIndex = 2;
 			this.purchaseRecordListView1.PasteComplete = null;
 			this.purchaseRecordListView1.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.purchaseRecordListView1.Size = new System.Drawing.Size(740, 303);
+			this.purchaseRecordListView1.Size = new System.Drawing.Size(752, 303);
 			this.purchaseRecordListView1.SortMultiplier = 1;
 			this.purchaseRecordListView1.TabIndex = 296;
 			this.purchaseRecordListView1.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.PurchaseRecordListView1_SelectedItemsChanged);
 			// 
 			// groupBox1
 			// 
-			this.groupBox1.Controls.Add(this.comboBoxCostType);
-			this.groupBox1.Controls.Add(this.numericUpDownCostNew);
+			this.groupBox1.Controls.Add(this.comboBoxCurrency);
+			this.groupBox1.Controls.Add(this.numericUpDownCost);
 			this.groupBox1.Controls.Add(this.metroLabel3);
 			this.groupBox1.Controls.Add(this.metroLabel1);
 			this.groupBox1.Controls.Add(this.button3);
@@ -496,6 +358,49 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.groupBox1.Size = new System.Drawing.Size(294, 237);
 			this.groupBox1.TabIndex = 325;
 			this.groupBox1.TabStop = false;
+			// 
+			// comboBoxCurrency
+			// 
+			this.comboBoxCurrency.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.comboBoxCurrency.FormattingEnabled = true;
+			this.comboBoxCurrency.ItemHeight = 13;
+			this.comboBoxCurrency.Location = new System.Drawing.Point(120, 140);
+			this.comboBoxCurrency.Name = "comboBoxCurrency";
+			this.comboBoxCurrency.Size = new System.Drawing.Size(168, 21);
+			this.comboBoxCurrency.TabIndex = 315;
+			// 
+			// numericUpDownCost
+			// 
+			this.numericUpDownCost.DecimalPlaces = 2;
+			this.numericUpDownCost.Location = new System.Drawing.Point(120, 114);
+			this.numericUpDownCost.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+			this.numericUpDownCost.Name = "numericUpDownCost";
+			this.numericUpDownCost.Size = new System.Drawing.Size(168, 20);
+			this.numericUpDownCost.TabIndex = 314;
+			// 
+			// metroLabel3
+			// 
+			this.metroLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.metroLabel3.Location = new System.Drawing.Point(23, 140);
+			this.metroLabel3.Name = "metroLabel3";
+			this.metroLabel3.Size = new System.Drawing.Size(69, 23);
+			this.metroLabel3.TabIndex = 271;
+			this.metroLabel3.Text = "Currency:";
+			this.metroLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// metroLabel1
+			// 
+			this.metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.metroLabel1.Location = new System.Drawing.Point(23, 114);
+			this.metroLabel1.Name = "metroLabel1";
+			this.metroLabel1.Size = new System.Drawing.Size(69, 23);
+			this.metroLabel1.TabIndex = 270;
+			this.metroLabel1.Text = "Cost:";
+			this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// button3
 			// 
@@ -563,24 +468,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.button1.Size = new System.Drawing.Size(95, 33);
 			this.button1.TabIndex = 249;
 			this.button1.Text = "Apply";
-			// 
-			// listViewKits
-			// 
-			this.listViewKits.ConfigurePaste = null;
-			this.listViewKits.Displayer = null;
-			this.listViewKits.DisplayerText = null;
-			this.listViewKits.EnableCustomSorting = true;
-			this.listViewKits.Entity = null;
-			this.listViewKits.IgnoreEnterPress = false;
-			this.listViewKits.Location = new System.Drawing.Point(23, 63);
-			this.listViewKits.MenuOpeningAction = null;
-			this.listViewKits.Name = "listViewKits";
-			this.listViewKits.OldColumnIndex = 2;
-			this.listViewKits.PasteComplete = null;
-			this.listViewKits.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewKits.Size = new System.Drawing.Size(740, 290);
-			this.listViewKits.SortMultiplier = 1;
-			this.listViewKits.TabIndex = 326;
+			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
 			// ButtonAdd
 			// 
@@ -608,6 +496,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.ButtonAdd.TextMain = "Add Selected";
 			this.ButtonAdd.TextSecondary = "";
 			this.ButtonAdd.ToolTipText = "";
+			this.ButtonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
 			// 
 			// ButtonDelete
 			// 
@@ -635,6 +524,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.ButtonDelete.TextMain = "Delete Selected";
 			this.ButtonDelete.TextSecondary = "";
 			this.ButtonDelete.ToolTipText = "";
+			this.ButtonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
 			// 
 			// buttonAddSupplierForAll
 			// 
@@ -658,59 +548,34 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.comboBox1.Size = new System.Drawing.Size(233, 25);
 			this.comboBox1.TabIndex = 329;
 			// 
-			// metroLabel1
+			// supplierListView
 			// 
-			this.metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabel1.Location = new System.Drawing.Point(23, 114);
-			this.metroLabel1.Name = "metroLabel1";
-			this.metroLabel1.Size = new System.Drawing.Size(69, 23);
-			this.metroLabel1.TabIndex = 270;
-			this.metroLabel1.Text = "Cost:";
-			this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// metroLabel3
-			// 
-			this.metroLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabel3.Location = new System.Drawing.Point(23, 140);
-			this.metroLabel3.Name = "metroLabel3";
-			this.metroLabel3.Size = new System.Drawing.Size(69, 23);
-			this.metroLabel3.TabIndex = 271;
-			this.metroLabel3.Text = "Currency:";
-			this.metroLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// comboBoxCostType
-			// 
-			this.comboBoxCostType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.comboBoxCostType.FormattingEnabled = true;
-			this.comboBoxCostType.ItemHeight = 13;
-			this.comboBoxCostType.Location = new System.Drawing.Point(120, 140);
-			this.comboBoxCostType.Name = "comboBoxCostType";
-			this.comboBoxCostType.Size = new System.Drawing.Size(168, 21);
-			this.comboBoxCostType.TabIndex = 315;
-			// 
-			// numericUpDownCostNew
-			// 
-			this.numericUpDownCostNew.DecimalPlaces = 2;
-			this.numericUpDownCostNew.Location = new System.Drawing.Point(120, 114);
-			this.numericUpDownCostNew.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-			this.numericUpDownCostNew.Name = "numericUpDownCostNew";
-			this.numericUpDownCostNew.Size = new System.Drawing.Size(168, 20);
-			this.numericUpDownCostNew.TabIndex = 314;
+			this.supplierListView.ConfigurePaste = null;
+			this.supplierListView.Displayer = null;
+			this.supplierListView.DisplayerText = null;
+			this.supplierListView.EnableCustomSorting = true;
+			this.supplierListView.Entity = null;
+			this.supplierListView.IgnoreEnterPress = false;
+			this.supplierListView.Location = new System.Drawing.Point(11, 63);
+			this.supplierListView.MenuOpeningAction = null;
+			this.supplierListView.Name = "supplierListView";
+			this.supplierListView.OldColumnIndex = 0;
+			this.supplierListView.PasteComplete = null;
+			this.supplierListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.supplierListView.Size = new System.Drawing.Size(752, 287);
+			this.supplierListView.SortMultiplier = 0;
+			this.supplierListView.TabIndex = 331;
 			// 
 			// QuotationFreightOrderForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1075, 760);
+			this.Controls.Add(this.supplierListView);
 			this.Controls.Add(this.buttonAddSupplierForAll);
 			this.Controls.Add(this.comboBox1);
 			this.Controls.Add(this.ButtonAdd);
 			this.Controls.Add(this.ButtonDelete);
-			this.Controls.Add(this.listViewKits);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.purchaseRecordListView1);
@@ -723,7 +588,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.Text = "Quotation Freight Form";
 			this.groupBox2.ResumeLayout(false);
 			this.groupBox1.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostNew)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCost)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -735,17 +600,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private GroupBox groupBox2;
 		private MetroTextBox metroTextBoxNumber;
 		private MetroLabel metroLabelNumber;
-		private MetroTextBox textBoxClosingBy;
-		private MetroTextBox textBoxPublishedBy;
 		private ComboBox comboBoxStatus;
 		private MetroTextBox textBoxRemarks;
 		private MetroLabel labelRemarks;
-		private MetroLabel labelClosedBy;
-		private MetroLabel labelClosingDate;
-		private DateTimePicker dateTimePickerClosingDate;
-		private MetroLabel labelPublishDate;
-		private DateTimePicker dateTimePickerPublishDate;
-		private MetroLabel label5;
 		private DateTimePicker dateTimePickerOpeningDate;
 		private MetroLabel labelOpeningDate;
 		private MetroLabel labelStatus;
@@ -758,14 +615,14 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private MetroTextBox metroTextBox1;
 		private MetroLabel metroLabel2;
 		private Button button1;
-		private Quatation.RequestProductListView listViewKits;
 		private AvControls.AvButtonT.AvButtonT ButtonAdd;
 		private AvControls.AvButtonT.AvButtonT ButtonDelete;
 		private MetroLabel metroLabel3;
 		private MetroLabel metroLabel1;
 		private Button buttonAddSupplierForAll;
 		private ComboBox comboBox1;
-		private ComboBox comboBoxCostType;
-		private NumericUpDown numericUpDownCostNew;
+		private ComboBox comboBoxCurrency;
+		private NumericUpDown numericUpDownCost;
+		private SupplierControls.SupplierListView supplierListView;
 	}
 }

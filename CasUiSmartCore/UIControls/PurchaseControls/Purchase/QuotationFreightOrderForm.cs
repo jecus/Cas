@@ -4,15 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
-using EntityCore.DTO.Dictionaries;
-using EntityCore.DTO.General;
-using EntityCore.Filter;
 using MetroFramework.Forms;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
 using SmartCore.Filters;
 using SmartCore.Purchase;
 
@@ -22,11 +16,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 	{
 		#region Fields
 
-		private List<PurchaseRequestRecord> _addedRecord = new List<PurchaseRequestRecord>();
+		private List<PurchaseShipper> _addedRecord = new List<PurchaseShipper>();
 
 		private PurchaseOrder _order;
 		private List<Supplier> _supplierShipper = new List<Supplier>();
-		private List<AirportsCodes> _airportsCodes = new List<AirportsCodes>();
 
 		#endregion
 
@@ -52,6 +45,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private void Completed()
 		{
 			UpdateControls();
+			supplierListView.SetItemsArray(_supplierShipper.ToArray());
 			purchaseRecordListView1.SetItemsArray(_addedRecord.ToArray());
 		}
 
@@ -61,40 +55,20 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		private void DoWork()
 		{
-
-			var records = GlobalObjects.CasEnvironment.Loader.GetObjectList<PurchaseRequestRecord>(new ICommonFilter[]{new CommonFilter<int>(PurchaseRequestRecord.ParentPackageIdProperty, _order.ItemId) });
-			var ids = records.Select(s => s.SupplierId).Distinct().ToArray();
-			var productIds = records.Select(s => s.PackageItemId).Distinct().ToArray();
-			var suppliers = GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[]{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, ids), });
-			var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new ICommonFilter[]{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, productIds), });
-
+			_addedRecord.Clear();
 			_supplierShipper.Clear();
 			_supplierShipper.AddRange(GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[] { new CommonFilter<int>(Supplier.SupplierClassProperty, SupplierClass.Shipper.ItemId) }));
 			_order.ShipCompany = _supplierShipper.FirstOrDefault(i => i.ItemId == _order.ShipCompanyId) ?? Supplier.Unknown;
 
-			_airportsCodes.Clear();
-			_airportsCodes.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<AirportCodeDTO, AirportsCodes>().OrderBy(i => i.ShortName));
-			_airportsCodes.Add(AirportsCodes.Unknown);
 
-			var parentInitialId = (int)GlobalObjects.CasEnvironment.Execute($@"select i.ItemId from PurchaseOrders p
-			left join RequestsForQuotation q on q.ItemID = p.ParentID
-			left join InitialOrders i on i.ItemID = q.ParentID where p.ItemId = {_order.ItemId}").Tables[0].Rows[0][0];
-			var initialRecords = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(new Filter("ParentPackageId", parentInitialId));
-			var initial = GlobalObjects.CasEnvironment.NewLoader.GetObject<InitialOrderDTO, InitialOrder>(new Filter("ItemId", parentInitialId));
-
-			foreach (var record in records)
+			foreach (var record in _order.AdditionalInformation.PurchaseShippers)
 			{
-				record.ParentInitialRecord = initialRecords.FirstOrDefault(i => i.ProductId == record.PackageItemId);
-				if(record.ParentInitialRecord != null)
-					record.ParentInitialRecord.ParentPackage = initial;
-				record.Product = products.FirstOrDefault(i => i.ItemId == record.PackageItemId);
-				record.Supplier = suppliers.FirstOrDefault(i => i.ItemId == record.SupplierId);
+				record.Shipper = _supplierShipper.FirstOrDefault(i => i.ItemId == record.ShipperId) ?? Supplier.Unknown;
+				record.Currency = Сurrency.GetItemById(record.CurrencyId);
+				record.PONumber = _order.Number;
 			}
-			var documents = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DocumentDTO, Document>(new Filter("ParentID", _order.ItemId), true);
-			_order.ClosingDocument.Clear();
-			_order.ClosingDocument.AddRange(documents);
 
-			_addedRecord.AddRange(records);
+			_addedRecord.AddRange(_order.AdditionalInformation.PurchaseShippers);
 		}
 
 		#endregion
@@ -112,13 +86,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				textBoxTitle.Text = _order.Title;
 				metroTextBoxNumber.Text = _order.Number;
 				dateTimePickerOpeningDate.Value = _order.OpeningDate;
-				dateTimePickerClosingDate.Value = _order.ClosingDate;
-				dateTimePickerPublishDate.Value = _order.PublishingDate;
-				textBoxClosingBy.Text = _order.CloseByUser;
-				textBoxPublishedBy.Text = _order.PublishedByUser;
 				textBoxAuthor.Text = _order.Author;
 				textBoxRemarks.Text = _order.Remarks;
 			}
+
+			comboBoxCurrency.Items.Clear();
+			comboBoxCurrency.Items.AddRange(Сurrency.Items.ToArray());
 		}
 
 		#endregion
@@ -139,7 +112,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		{
 			button1.Enabled = purchaseRecordListView1.SelectedItem != null;
 			if (purchaseRecordListView1.SelectedItem == null) return;
-			
+
+			comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Currency;
+			numericUpDownCost.Value = (decimal) purchaseRecordListView1.SelectedItem.Cost;
+			metroTextBox1.Text = purchaseRecordListView1.SelectedItem.Remark;
 		}
 		#endregion
 
@@ -171,9 +147,58 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		#endregion
 
+		#region private void ButtonAdd_Click(object sender, EventArgs e)
+
+		private void ButtonAdd_Click(object sender, EventArgs e)
+		{
+			foreach (var supplier in supplierListView.SelectedItems.ToArray())
+			{
+				var record = new PurchaseShipper
+				{
+					PONumber = _order.Number,
+					Currency = Сurrency.USD,
+					CurrencyId = Сurrency.USD.ItemId,
+					CorrectorId = GlobalObjects.CasEnvironment.IdentityUser.ItemId,
+					Shipper = supplier,
+					ShipperId = supplier.ItemId,
+				};
+				_addedRecord.Add(record);
+			}
+
+			purchaseRecordListView1.SetItemsArray(_addedRecord.ToArray());
+		}
+
+		#endregion
+
+		#region private void ButtonDelete_Click(object sender, EventArgs e)
+
 		private void ButtonDelete_Click(object sender, EventArgs e)
 		{
+			if (purchaseRecordListView1.SelectedItems.Count == 0) return;
 
+			foreach (var item in purchaseRecordListView1.SelectedItems.ToArray())
+			{
+				_order.AdditionalInformation.PurchaseShippers.Remove(item);
+				_addedRecord.Remove(item);
+			}
+
+			purchaseRecordListView1.SetItemsArray(_addedRecord.ToArray());
 		}
+
+
+		#endregion
+
+		#region private void button1_Click(object sender, EventArgs e)
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			purchaseRecordListView1.SelectedItem.Currency = (Сurrency) comboBoxCurrency.SelectedItem;
+			purchaseRecordListView1.SelectedItem.Cost = (double) numericUpDownCost.Value;
+			purchaseRecordListView1.SelectedItem.Remark = metroTextBox1.Text;
+
+			purchaseRecordListView1.SetItemsArray(_addedRecord.ToArray());
+		}
+
+		#endregion
 	}
 }
