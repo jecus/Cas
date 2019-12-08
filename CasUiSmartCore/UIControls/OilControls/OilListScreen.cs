@@ -179,7 +179,8 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 
 			_directivesViewer.WorkParams = _workParams;
 			_directivesViewer.OilConditions = _oilConditions;
-			_directivesViewer.SetItemsArray(_resultDirectiveArray.OrderBy(i => i.TakeOffTime).ToArray());
+
+;			_directivesViewer.SetItemsArray(_resultDirectiveArray.OrderBy(i => i.FlightDate).ThenByDescending(i => i.TakeOffTime).ToArray());
 			headerControl.PrintButtonEnabled = _directivesViewer.ItemsCount != 0;
 			_directivesViewer.Focus();
 		}
@@ -398,29 +399,10 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 		/// </summary>
 		private void UpdateInformation()
 		{
-			if (CurrentAircraft != null)
-			{
-				var f = GlobalObjects.AircraftFlightsCore.GetLastAircraftFlight(CurrentAircraft.ItemId);
-				if (f != null)
-				{
-					dateTimePickerDateFrom.Value = f.FlightDate.Month == 1
-						? new DateTime(f.FlightDate.Year - 1, 12, 1)
-						: new DateTime(f.FlightDate.Year, f.FlightDate.Month - 1, 1); 
-				}
-				else
-				{
-					dateTimePickerDateFrom.Value = DateTime.Now.Month == 1
-						? new DateTime(DateTime.Now.Year - 1, 12, 1)
-						: new DateTime(DateTime.Now.Year, DateTime.Now.Month - 1, 1);    
-				}
-			}
-			else
-			{
-				dateTimePickerDateFrom.Value = DateTime.Now.Month == 1
-					? new DateTime(DateTime.Now.Year - 1, 12, 1)
-					: new DateTime(DateTime.Now.Year, DateTime.Now.Month - 1, 1);
-			}
-			
+			dateTimePickerDateFrom.Value = DateTime.Now.AddDays(-30);
+			dateTimePickerDateTo.Value = DateTime.Now;
+
+
 			AnimatedThreadWorker.RunWorkerAsync();
 		}
 		#endregion
@@ -635,7 +617,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 
 		private void buttonGraphClick(object sender, EventArgs e)
 		{
-			new OilGraphForm(_graph).ShowDialog();
+			new OilGraphForm(_graph, dateTimePickerDateFrom.Value, dateTimePickerDateTo.Value).ShowDialog();
 		}
 
 		#endregion
