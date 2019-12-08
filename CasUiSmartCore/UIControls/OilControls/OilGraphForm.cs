@@ -30,8 +30,8 @@ namespace CAS.UI.UIControls.OilControls
 			_graph = graph;
 			FillData();
 
-			label1.Text += $" {from.Date.ToString("dd.MM.yyyy")}  - {to.Date.ToString("dd.MM.yyyy")}";
-			label2.Text += $"{(to - from).TotalDays}";
+			this.Text += $" (Period: {@from.Date:dd.MM.yyyy}  - {to.Date:dd.MM.yyyy})";
+			label2.Text += $" {(to - from).TotalDays} days";
 		}
 
 		#endregion

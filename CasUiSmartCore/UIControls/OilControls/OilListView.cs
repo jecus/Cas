@@ -273,7 +273,7 @@ namespace CAS.UI.UIControls.OilControls
 								.ToString()));
 
 
-							if (item.AtlbRecordType == AtlbRecordType.Flight)
+							if (item.AtlbRecordType == AtlbRecordType.Flight && oilAdded > 0)
 							{
 
 								if (!_graph.Limits.ContainsKey(baseComponent))

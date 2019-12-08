@@ -19,6 +19,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		{
 			InitializeComponent();
 			DisableContectMenu();
+			EnableCustomSorting = false;
 		}
 
 
