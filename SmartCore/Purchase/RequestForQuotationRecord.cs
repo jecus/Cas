@@ -452,9 +452,12 @@ namespace SmartCore.Purchase
 		public SupplierPrice()
 		{
 			ÑurrencyNew = Ñurrency.USD;
+			ÑurrencyTest = Ñurrency.USD;
+			ÑurrencyInspect = Ñurrency.USD;
 			ÑurrencyServ = Ñurrency.USD;
 			ÑurrencyOH = Ñurrency.USD;
 			ÑurrencyRepair = Ñurrency.USD;
+			ÑurrencyModification = Ñurrency.USD;
 		}
 
 		
@@ -468,6 +471,12 @@ namespace SmartCore.Purchase
 		public decimal CostNew { get; set; }
 
 		[JsonProperty]
+		public decimal CostTest { get; set; }
+
+		[JsonProperty]
+		public decimal CostInspect { get; set; }
+
+		[JsonProperty]
 		public decimal CostServiceable { get; set; }
 
 		[JsonProperty]
@@ -477,7 +486,16 @@ namespace SmartCore.Purchase
 		public decimal CostRepair { get; set; }
 
 		[JsonProperty]
+		public decimal CostModification { get; set; }
+
+		[JsonProperty]
 		public decimal CostNewEx { get; set; }
+
+		[JsonProperty]
+		public decimal CostTestEx { get; set; }
+
+		[JsonProperty]
+		public decimal CostInspectEx { get; set; }
 
 		[JsonProperty]
 		public decimal CostServiceableEx { get; set; }
@@ -489,7 +507,16 @@ namespace SmartCore.Purchase
 		public decimal CostRepairEx { get; set; }
 
 		[JsonProperty]
+		public decimal CostModificationEx { get; set; }
+
+		[JsonProperty]
 		public decimal CostNewReadiness { get; set; }
+
+		[JsonProperty]
+		public decimal CostTestReadiness { get; set; }
+
+		[JsonProperty]
+		public decimal CostInspectReadiness { get; set; }
 
 		[JsonProperty]
 		public decimal CostServiceableReadiness { get; set; }
@@ -500,10 +527,21 @@ namespace SmartCore.Purchase
 		[JsonProperty]
 		public decimal CostRepairReadiness { get; set; }
 
+		[JsonProperty]
+		public decimal CostModificationReadiness { get; set; }
+
 		[DefaultValue(-1)]
 		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
 		public int ÑurrencyNewId { get; set; }
-		
+
+		[DefaultValue(-1)]
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+		public int ÑurrencyTestId { get; set; }
+
+		[DefaultValue(-1)]
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+		public int ÑurrencyInspectId { get; set; }
+
 		[DefaultValue(-1)]
 		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
 		public int ÑurrencyServId { get; set; }
@@ -515,24 +553,40 @@ namespace SmartCore.Purchase
 		[DefaultValue(-1)]
 		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
 		public int ÑurrencyRepairId { get; set; }
-		
+
+		[DefaultValue(-1)]
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+		public int ÑurrencyModificationId { get; set; }
+
 		#region Ignore
 
 		[JsonIgnore]
-		[ListViewData(80, "New", 3)]
+		[ListViewData(100, "New", 3)]
 		public string CostNewString => GetNewPriceString();
 
 		[JsonIgnore]
-		[ListViewData(80, "Serv", 5)]
+		[ListViewData(100, "Test", 7)]
+		public string CostTestString => GetTestPriceString();
+
+		[JsonIgnore]
+		[ListViewData(100, "Inspect", 9)]
+		public string CostInspectString => GetInspectPriceString();
+
+		[JsonIgnore]
+		[ListViewData(100, "Serv", 5)]
 		public string CostServString => GetServPriceString();
 
 		[JsonIgnore]
-		[ListViewData(80, "OH", 7)]
+		[ListViewData(100, "OH", 11)]
 		public string CostOHString => GetOHPriceString();
 
 		[JsonIgnore]
-		[ListViewData(80, "Repair", 9)]
+		[ListViewData(100, "Repair", 13)]
 		public string CostRepairString => GetRepairPriceString();
+
+		[JsonIgnore]
+		[ListViewData(100, "Modification", 15)]
+		public string CostModificationString => GetModificationPriceString();
 
 		[JsonIgnore]
 		public bool IsLowestCostNew { get; set; }
@@ -569,6 +623,20 @@ namespace SmartCore.Purchase
 		}
 
 		[JsonIgnore]
+		public Ñurrency ÑurrencyTest
+		{
+			get => Ñurrency.GetItemById(ÑurrencyTestId);
+			set => ÑurrencyTestId = value.ItemId;
+		}
+
+		[JsonIgnore]
+		public Ñurrency ÑurrencyInspect
+		{
+			get => Ñurrency.GetItemById(ÑurrencyInspectId);
+			set => ÑurrencyInspectId = value.ItemId;
+		}
+
+		[JsonIgnore]
 		public Ñurrency ÑurrencyServ
 		{
 			get => Ñurrency.GetItemById(ÑurrencyServId);
@@ -589,6 +657,13 @@ namespace SmartCore.Purchase
 			set => ÑurrencyRepairId = value.ItemId;
 		}
 
+		[JsonIgnore]
+		public Ñurrency ÑurrencyModification
+		{
+			get => Ñurrency.GetItemById(ÑurrencyModificationId);
+			set => ÑurrencyModificationId = value.ItemId;
+		}
+
 		#endregion
 
 		#region Methods
@@ -596,6 +671,16 @@ namespace SmartCore.Purchase
 		private string GetNewPriceString()
 		{
 			return $"{CostNew}/{CostNewEx}/{ÑurrencyNew}/{CostNewReadiness}";
+		}
+
+		private string GetTestPriceString()
+		{
+			return $"{CostTest}/{CostTestEx}/{ÑurrencyTest}/{CostTestReadiness}";
+		}
+
+		private string GetInspectPriceString()
+		{
+			return $"{CostInspect}/{CostInspectEx}/{ÑurrencyInspect}/{CostInspectReadiness}";
 		}
 
 		private string GetServPriceString()
@@ -611,6 +696,11 @@ namespace SmartCore.Purchase
 		private string GetRepairPriceString()
 		{
 			return $"{CostRepair}/{CostRepairEx}/{ÑurrencyRepair}/{CostRepairReadiness}";
+		}
+
+		private string GetModificationPriceString()
+		{
+			return $"{CostModification}/{CostModificationEx}/{ÑurrencyModification}/{CostModificationReadiness}";
 		}
 
 		#endregion

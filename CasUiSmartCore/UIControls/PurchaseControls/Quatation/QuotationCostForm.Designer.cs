@@ -59,7 +59,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(1029, 346);
+			this.buttonOk.Location = new System.Drawing.Point(859, 454);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 295;
@@ -73,7 +73,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonCancel.Location = new System.Drawing.Point(1110, 346);
+			this.buttonCancel.Location = new System.Drawing.Point(940, 454);
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.Size = new System.Drawing.Size(75, 33);
 			this.buttonCancel.TabIndex = 294;
@@ -91,21 +91,21 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.groupBox1.Controls.Add(this.numericUpDownCostNew);
 			this.groupBox1.Controls.Add(this.metroLabel1);
 			this.groupBox1.Controls.Add(this.button1);
-			this.groupBox1.Location = new System.Drawing.Point(686, 89);
+			this.groupBox1.Location = new System.Drawing.Point(3, 390);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(499, 108);
+			this.groupBox1.Size = new System.Drawing.Size(499, 103);
 			this.groupBox1.TabIndex = 296;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Cost";
 			// 
 			// comboBoxCostType
 			// 
-			this.comboBoxCostType.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.comboBoxCostType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.comboBoxCostType.FormattingEnabled = true;
-			this.comboBoxCostType.ItemHeight = 12;
-			this.comboBoxCostType.Location = new System.Drawing.Point(41, 35);
+			this.comboBoxCostType.ItemHeight = 13;
+			this.comboBoxCostType.Location = new System.Drawing.Point(41, 34);
 			this.comboBoxCostType.Name = "comboBoxCostType";
-			this.comboBoxCostType.Size = new System.Drawing.Size(99, 20);
+			this.comboBoxCostType.Size = new System.Drawing.Size(99, 21);
 			this.comboBoxCostType.TabIndex = 313;
 			this.comboBoxCostType.SelectedIndexChanged += new System.EventHandler(this.comboBoxCostType_SelectedIndexChanged);
 			// 
@@ -141,7 +141,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			// 
 			// numericUpDownReadinessNew
 			// 
-			this.numericUpDownReadinessNew.DecimalPlaces = 2;
 			this.numericUpDownReadinessNew.Location = new System.Drawing.Point(390, 34);
 			this.numericUpDownReadinessNew.Maximum = new decimal(new int[] {
             1000000,
@@ -195,7 +194,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button1.Location = new System.Drawing.Point(418, 62);
+			this.button1.Location = new System.Drawing.Point(418, 64);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(75, 33);
 			this.button1.TabIndex = 249;
@@ -217,7 +216,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.supplierListView1.OldColumnIndex = 0;
 			this.supplierListView1.PasteComplete = null;
 			this.supplierListView1.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.supplierListView1.Size = new System.Drawing.Size(677, 321);
+			this.supplierListView1.Size = new System.Drawing.Size(1012, 321);
 			this.supplierListView1.SortMultiplier = 0;
 			this.supplierListView1.TabIndex = 70;
 			this.supplierListView1.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.SupplierListView1_SelectedItemsChanged);
@@ -226,7 +225,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1189, 402);
+			this.ClientSize = new System.Drawing.Size(1019, 499);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.buttonOk);
 			this.Controls.Add(this.buttonCancel);
