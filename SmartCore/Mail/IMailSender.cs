@@ -18,6 +18,7 @@ namespace SmartCore.Mail
 		bool CheckForInternetConnection();
 		void SendPurchaseEmail(List<PurchaseRequestRecord> records, string to, Specialist personnel, Stream stream = null);
 		void SendQuotationEmail(List<RequestForQuotationRecord> records, string to, Specialist personnel);
+		void SendPurchaseToShipper(string to, Supplier shipper, Specialist personnel, string station, Stream stream = null);
 	}
 
 
@@ -40,6 +41,11 @@ namespace SmartCore.Mail
 		public void SendQuotationEmail(List<RequestForQuotationRecord> records, string to, Specialist personnel)
 		{
 			sendMessage(to, GenerateQuotationTemplate(records, personnel), "");
+		}
+
+		public void SendPurchaseToShipper(string to, Supplier shipper, Specialist personnel, string station, Stream stream = null)
+		{
+			sendMessage(to, GenerateShipperTemlpate(shipper, personnel, station),"", stream);
 		}
 
 		private void sendMessage(string toMail, string body , string subject, Stream stream = null)
@@ -94,6 +100,7 @@ namespace SmartCore.Mail
 		private string GenerateQuotationTemplate(List<RequestForQuotationRecord> orderRecords, Specialist specialist)
 		{
 			var data = "";
+			
 			foreach (var record in orderRecords)
 			{
 				var destination = record.ParentInitialRecord.DestinationObject is Aircraft
@@ -110,6 +117,7 @@ namespace SmartCore.Mail
 
 			var personnel = specialist.FirstName + " " + specialist.LastName;
 			var specialization = specialist.Specialization.ToString();
+
 			
 			var placeholders = new Dictionary<string,string>
 			{
@@ -119,6 +127,22 @@ namespace SmartCore.Mail
 			};
 
 			return placeholders.Aggregate(_quotationTemplate, (current, placeholder) => current.Replace(placeholder.Key, placeholder.Value));
+		}
+
+		private string GenerateShipperTemlpate(Supplier shipper, Specialist personnel, string station)
+		{
+			var pers = personnel.FirstName + " " + personnel.LastName;
+			var specialization = personnel.Specialization.ToString();
+			
+			var placeholders = new Dictionary<string, string>
+			{
+				["{Personnel}"] = pers,
+				["{Specialization}"] = specialization,
+				["{Shipper}"] = shipper.ShortName,
+				["{Station}"] = station
+			};
+
+			return placeholders.Aggregate(_shipperTemplate, (current, placeholder) => current.Replace(placeholder.Key, placeholder.Value));
 		}
 
 		private static string _quotationTemplate => @"
@@ -137,6 +161,22 @@ namespace SmartCore.Mail
 		{Data}
 		</tbody>
 		</table>
+			<p>&nbsp;</p>
+		<p><em>Best regards,</em></p>
+		<p><em>{Personnel}</em></p>
+			<p>&nbsp;</p>
+		<p><em>{Specialization}</em></p>";
+
+		private static string _shipperTemplate => @"
+			<p>Добрый день,</p>
+				<p>&nbsp;</p>
+			<p>Спасибо за Ваше предложение.</p>				
+			<p>Прошу подтвердить наш заказ в приложении и передать его нашим коллегам из {Shipper}.</p>
+			<p>****************************************************************************************</p>
+			<p>Коллеги {Shipper},</p>
+			<p>Прошу данный заказ отправить нашим ближайшим рейсом в {Station},</p>
+			<p>Спасибо</p>
+		
 			<p>&nbsp;</p>
 		<p><em>Best regards,</em></p>
 		<p><em>{Personnel}</em></p>
