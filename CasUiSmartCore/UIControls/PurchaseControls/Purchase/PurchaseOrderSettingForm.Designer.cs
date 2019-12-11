@@ -914,6 +914,11 @@
 			// numericUpDownFreightPrice
 			// 
 			this.numericUpDownFreightPrice.Location = new System.Drawing.Point(462, 414);
+			this.numericUpDownFreightPrice.Maximum = new decimal(new int[] {
+            -727379968,
+            232,
+            0,
+            0});
 			this.numericUpDownFreightPrice.Name = "numericUpDownFreightPrice";
 			this.numericUpDownFreightPrice.Size = new System.Drawing.Size(97, 20);
 			this.numericUpDownFreightPrice.TabIndex = 383;
