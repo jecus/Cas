@@ -14,152 +14,158 @@ using SmartCore.Entities.General.WorkPackage;
 
 namespace CAS.UI.UIControls.NonRoutineJobsControls
 {
-    ///<summary>
-    ///</summary>
-    [ToolboxItem(false)]
-    public partial class NonRoutineJobsStatusListScreen : CommonListScreen
-    {
-        #region Fields
+	///<summary>
+	///</summary>
+	[ToolboxItem(false)]
+	public partial class NonRoutineJobsStatusListScreen : CommonListScreen
+	{
+		#region Fields
 
-        #endregion
-        
-        #region Constructors
+		#endregion
+		
+		#region Constructors
 
-        #region public NonRoutineJobsListScreenNew()
-        ///<summary>
-        /// Конструктор по умолчанию
-        ///</summary>
-        public NonRoutineJobsStatusListScreen()
-        {
-            InitializeComponent();
-        }
-        #endregion
+		#region public NonRoutineJobsListScreenNew()
+		///<summary>
+		/// Конструктор по умолчанию
+		///</summary>
+		public NonRoutineJobsStatusListScreen()
+		{
+			InitializeComponent();
+		}
+		#endregion
 
-        #region public NonRoutineJobsListScreenNew(Aircraft currentAircraft) : this()
+		#region public NonRoutineJobsListScreenNew(Aircraft currentAircraft) : this()
 
-        ///<summary>
-        /// Создаёт экземпляр элемента управления, отображающего список нерутинных работ
-        ///</summary>
-        ///<param name="currentAircraft">ВС, которому принадлежат события</param>
-        ///<param name="beginGroup">Описывает своиство класса Event, по которому нужно сделать первичную группировку</param>
-        public NonRoutineJobsStatusListScreen(Aircraft currentAircraft, PropertyInfo beginGroup = null) 
-            : base(typeof(NonRoutineJob), beginGroup)
-        {
-            if (currentAircraft == null)
-                throw new ArgumentNullException("currentAircraft");
-            CurrentAircraft = currentAircraft;
-            StatusTitle = "Non-routine jobs";
+		///<summary>
+		/// Создаёт экземпляр элемента управления, отображающего список нерутинных работ
+		///</summary>
+		///<param name="currentAircraft">ВС, которому принадлежат события</param>
+		///<param name="beginGroup">Описывает своиство класса Event, по которому нужно сделать первичную группировку</param>
+		public NonRoutineJobsStatusListScreen(Aircraft currentAircraft, PropertyInfo beginGroup = null) 
+			: base(typeof(NonRoutineJob), beginGroup)
+		{
+			if (currentAircraft == null)
+				throw new ArgumentNullException("currentAircraft");
+			CurrentAircraft = currentAircraft;
+			StatusTitle = "Non-routine jobs";
 
 			buttonAddNew.Visible = false;
 			buttonDeleteSelected.Visible = false;
 		}
 
-        #endregion
+		#endregion
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
-        protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
-        {
-            #region Загрузка элементов
+		#region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
+		protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
+		{
+			#region Загрузка элементов
 
-            if (InitialDirectiveArray == null) 
-                InitialDirectiveArray = new CommonCollection<NonRoutineJob>();
-            InitialDirectiveArray.Clear();
+			if (InitialDirectiveArray == null) 
+				InitialDirectiveArray = new CommonCollection<NonRoutineJob>();
+			InitialDirectiveArray.Clear();
 
-            AnimatedThreadWorker.ReportProgress(0, "load non-routine jobs");
+			AnimatedThreadWorker.ReportProgress(0, "load non-routine jobs");
 
-            try
-            {
-                InitialDirectiveArray.AddRange(GlobalObjects.NonRoutineJobCore.GetNonRoutineJobsStatus(CurrentAircraft));
-            }
-            catch (Exception exception)
-            {
-                Program.Provider.Logger.Log("Error while load non-routine jobs", exception);
-            }
+			try
+			{
+				InitialDirectiveArray.AddRange(GlobalObjects.NonRoutineJobCore.GetNonRoutineJobsStatus(CurrentAircraft));
+			}
+			catch (Exception exception)
+			{
+				Program.Provider.Logger.Log("Error while load non-routine jobs", exception);
+			}
 
-            AnimatedThreadWorker.ReportProgress(40, "load non-routine jobs");
+			AnimatedThreadWorker.ReportProgress(40, "load non-routine jobs");
 
-            #region Фильтрация директив
-            
-            AnimatedThreadWorker.ReportProgress(70, "filter non-routine jobs");
+			#region Фильтрация директив
+			
+			AnimatedThreadWorker.ReportProgress(70, "filter non-routine jobs");
 
-            FilterItems(InitialDirectiveArray, ResultDirectiveArray);
+			FilterItems(InitialDirectiveArray, ResultDirectiveArray);
 
-            if (AnimatedThreadWorker.CancellationPending)
-            {
-                e.Cancel = true;
-                return;
-            }
-            #endregion
+			if (AnimatedThreadWorker.CancellationPending)
+			{
+				e.Cancel = true;
+				return;
+			}
+			#endregion
 
-            AnimatedThreadWorker.ReportProgress(100, "Complete");
+			AnimatedThreadWorker.ReportProgress(100, "Complete");
 
-            #endregion
+			#endregion
 
-        }
-        #endregion
+		}
+		#endregion
 
-        #region protected override void InitListView(PropertyInfo beginGroup = null)
+		#region protected override void InitListView(PropertyInfo beginGroup = null)
 
-        protected override void InitListView(PropertyInfo beginGroup = null)
-        {
-            DirectivesViewer = new NonRoutineJobStatusListView();
-            DirectivesViewer.TabIndex = 2;
-            DirectivesViewer.Location = new Point(panel1.Left, panel1.Top);
-            DirectivesViewer.Dock = DockStyle.Fill;
-            DirectivesViewer.ViewedType = typeof(NonRoutineJob);
-	        DirectivesViewer.CustomMenu = _contextMenuStrip;
+		protected override void InitListView(PropertyInfo beginGroup = null)
+		{
+			DirectivesViewer = new NonRoutineJobStatusListView();
+			DirectivesViewer.TabIndex = 2;
+			DirectivesViewer.Location = new Point(panel1.Left, panel1.Top);
+			DirectivesViewer.Dock = DockStyle.Fill;
+			DirectivesViewer.ViewedType = typeof(NonRoutineJob);
+			DirectivesViewer.AddMenuItems(_toolStripMenuItemOpen,
+				_toolStripMenuItemShowTaskCard,
+				_toolStripSeparatorOpenOperation,
+				_toolStripMenuItemHighlight,
+				_toolStripSeparatorHighlightOperation,
+				_toolStripMenuItemComposeWorkPackage,
+				_toolStripMenuItemsWorkPackages);
 
-            DirectivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+			DirectivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 
-            panel1.Controls.Add(DirectivesViewer);
-        }
+			panel1.Controls.Add(DirectivesViewer);
+		}
 
-        #endregion
+		#endregion
 
-        #region protected override void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
+		#region protected override void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
 
-        protected override void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
-        {
-            NonRoutineJobForm form = new NonRoutineJobForm(new NonRoutineJob());
+		protected override void ButtonAddDisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			NonRoutineJobForm form = new NonRoutineJobForm(new NonRoutineJob());
 
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
-                AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
-                AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
+			if (form.ShowDialog() == DialogResult.OK)
+			{
+				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+				AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
 
-                AnimatedThreadWorker.RunWorkerAsync();
-            }
-        }
-        #endregion
+				AnimatedThreadWorker.RunWorkerAsync();
+			}
+		}
+		#endregion
 
-        #region protected override void HeaderControlButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
-        protected override void HeaderControlButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
-        {
-            //throw new System.NotImplementedException();
-        }
+		#region protected override void HeaderControlButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
+		protected override void HeaderControlButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			//throw new System.NotImplementedException();
+		}
 		#endregion
 
 		#region protected override void OpenItem()
 
 		protected override void OpenItem()
-	    {
-		    var selected = new CommonCollection<NonRoutineJob>();
-		    foreach (NonRoutineJob o in DirectivesViewer.SelectedItems)
-			    selected.CompareAndAdd(o);
+		{
+			var selected = new CommonCollection<NonRoutineJob>();
+			foreach (NonRoutineJob o in DirectivesViewer.SelectedItems)
+				selected.CompareAndAdd(o);
 
-		    foreach (var t in selected)
-		    {
-			    var form = ScreenAndFormManager.GetEditForm(t);
-			    form.Show();
-		    }
+			foreach (var t in selected)
+			{
+				var form = ScreenAndFormManager.GetEditForm(t);
+				form.Show();
+			}
 
-		    selected.Clear();
-	    }
+			selected.Clear();
+		}
 
 		#endregion
 
@@ -201,12 +207,12 @@ namespace CAS.UI.UIControls.NonRoutineJobsControls
 
 		protected override void PreInitToolStripMenuItems()
 		{
-		    ShowEditOperationContextMenu = false;
-		    ShowWorkPackageOperationContextMenu = false;
-	    }
+			ShowEditOperationContextMenu = false;
+			ShowWorkPackageOperationContextMenu = false;
+		}
 
 		#endregion
 
-	    #endregion
+		#endregion
 	}
 }

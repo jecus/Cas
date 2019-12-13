@@ -47,6 +47,7 @@ namespace CAS.UI.UIControls.Fleet
 		///</summary>
 		public DirectiveFleetListView(DirectiveType primaryDirectiveType) : this()
 		{
+			EnableCustomSorting = false;
 			CurrentPrimatyDirectiveType = primaryDirectiveType;
 			ColumnHeaderList.Clear();
 			SetHeaders();
@@ -307,11 +308,6 @@ namespace CAS.UI.UIControls.Fleet
 		#endregion
 
 		#region Overrides of BaseGridViewControl<Directive>
-		protected override void Sorting(string colName = null)
-		{
-
-		}
-
 		protected override void CustomSort(int ColumnIndex)
 		{
 			if (OldColumnIndex != ColumnIndex)

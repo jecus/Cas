@@ -35,6 +35,7 @@ namespace CAS.UI.UIControls.StoresControls
 			InitializeComponent();
 			OldColumnIndex = 17;
 			SortMultiplier = 1;
+			EnableCustomSorting = false;
 		}
 		#endregion
 
@@ -413,14 +414,7 @@ namespace CAS.UI.UIControls.StoresControls
 		#endregion
 
 		#region protected override void CustomSort(int ColumnIndex)
-		protected override void Sorting(string colName = null)
-		{
-			//if (!first)
-			//{
-			//	base.Sorting("Inst. date");
-			//	first = true;
-			//}
-		}
+
 		protected override void CustomSort(int ColumnIndex)
 		{
 			if (OldColumnIndex != ColumnIndex)

@@ -3,6 +3,7 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
+	[Serializable]
 	public class DeffectConfirm : StaticDictionary
 	{
 		#region private static CommonDictionaryCollection<DeffectConfirm> _Items = new CommonDictionaryCollection<DeffectConfirm>();
@@ -24,8 +25,8 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Методы
-         */
+		 * Методы
+		 */
 
 		#region public static DeffectConfirm GetItemById(Int32 maintenanceTypeId)
 		/// <summary>
@@ -69,8 +70,8 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Реализация
-         */
+		 * Реализация
+		 */
 		#region public DeffectConfirm()
 		/// <summary>
 		/// Конструктор создает объект повреждения

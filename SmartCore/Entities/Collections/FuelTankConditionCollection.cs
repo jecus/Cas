@@ -8,6 +8,7 @@ namespace SmartCore.Entities.Collections
     /// <summary>
     /// Содержит состояние всех топливных баков воздушного судна
     /// </summary>
+    [Serializable]
     public class FuelTankConditionCollection// : StringConvertibleCollection
     {
 

@@ -43,9 +43,7 @@ namespace CAS.UI.UIControls.Reliability
 		private WorkscopeReportBuilder _workscopeReportBuilder = new WorkscopeReportBuilder();
 #endif
 
-		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemOpen;
-		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuSeparatorItem _toolStripSeparator2;
 		private RadMenuItem _toolStripMenuItemHighlight;
 
@@ -94,24 +92,10 @@ namespace CAS.UI.UIControls.Reliability
 			_initialDirectiveArray.Clear();
 			_initialDirectiveArray = null;
 
-			//if (_toolStripMenuItemsWorkPackages != null)
-			//{
-			//    foreach (ToolStripMenuItem item in _toolStripMenuItemsWorkPackages)
-			//        item.Dispose();
-			//}
-
 			if (_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
 			if (_toolStripMenuItemHighlight != null) _toolStripMenuItemHighlight.Dispose();
-			//if (_toolStripMenuItemPublish != null) _toolStripMenuItemPublish.Dispose();
-			if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
-			//if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
 			if (_toolStripSeparator2 != null) _toolStripSeparator2.Dispose();
-			//if (_toolStripMenuItemEdit != null) _toolStripMenuItemEdit.Dispose();
-			//if (_toolStripMenuItemClose != null) _toolStripMenuItemClose.Dispose();
-			//if (_toolStripMenuItemPrintWP != null) _toolStripMenuItemPrintWP.Dispose();
-			//if (_toolStripMenuItemPrintWorkscope != null) _toolStripMenuItemPrintWorkscope.Dispose();
-			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
-
+			
 			if (_directivesViewer != null) _directivesViewer.Dispose();
 
 			Dispose(true);
@@ -184,65 +168,19 @@ namespace CAS.UI.UIControls.Reliability
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
-			//_toolStripMenuItemPublish = new ToolStripMenuItem();
-			//_toolStripMenuItemClose = new ToolStripMenuItem();
-			//_toolStripMenuItemsWorkPackages = new List<ToolStripMenuItem>();
-			//_toolStripMenuItemEdit = new ToolStripMenuItem();
-			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripMenuItemHighlight = new RadMenuItem();
-			//_toolStripSeparator1 = new ToolStripSeparator();
 			_toolStripSeparator2 = new RadMenuSeparatorItem();
-			//_toolStripMenuItemPrintWP = new ToolStripMenuItem();
-			//_toolStripMenuItemPrintWorkscope = new ToolStripMenuItem();
 			_toolStripMenuItemOpen = new RadMenuItem();
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
 			// 
 			// toolStripMenuItemView
 			// 
 			_toolStripMenuItemOpen.Text = "Open";
 			_toolStripMenuItemOpen.Click += ToolStripMenuItemOpenClick;
 			// 
-			// toolStripMenuItemView
-			// 
-			//_toolStripMenuItemEdit.Text = "Edit";
-			//_toolStripMenuItemEdit.Click += ToolStripMenuItemEditClick;
-			// 
-			// toolStripMenuItemView
-			// 
-			//_toolStripMenuItemPublish.Text = "Publish";
-			//_toolStripMenuItemPublish.Click += ToolStripMenuItemPublishClick;
-			// 
-			// toolStripMenuItemClose
-			// 
-			//_toolStripMenuItemClose.Text = "Close";
-			//_toolStripMenuItemClose.Click += ToolStripMenuItemCloseClick;
-			// 
-			// toolStripMenuItemDelete
-			// 
-			_toolStripMenuItemDelete.Text = "Delete";
-			_toolStripMenuItemDelete.Click += ToolStripMenuItemDeleteClick;
-			// 
 			// toolStripMenuItemHighlight
 			// 
 			_toolStripMenuItemHighlight.Text = "Highlight";
-			// 
-			// toolStripMenuItemPrintWP
-			// 
-			//_toolStripMenuItemPrintWP.Text = "Print Work package";
-			//_toolStripMenuItemPrintWP.Click += ToolStripMenuItemDeletePrintWP;
-			// 
-			// toolStripMenuItemPrintWorkscope
-			// 
-			//_toolStripMenuItemPrintWorkscope.Text = "Print Work scope";
-			//_toolStripMenuItemPrintWorkscope.Click += ToolStripMenuItemDeletePrintWorkscope;
-
-			_contextMenuStrip.Items.Clear();
-			//_toolStripMenuItemsWorkPackages.Clear();
+			
 			_toolStripMenuItemHighlight.Items.Clear();
 
 			foreach (Highlight highlight in Highlight.HighlightList)
@@ -254,11 +192,6 @@ namespace CAS.UI.UIControls.Reliability
 				item.Tag = highlight;
 				_toolStripMenuItemHighlight.Items.Add(item);
 			}
-			_contextMenuStrip.Items.AddRange(
-													_toolStripMenuItemOpen,
-													_toolStripMenuItemDelete,
-													_toolStripSeparator2,
-													_toolStripMenuItemHighlight);
 		}
 		#endregion
 
@@ -301,164 +234,6 @@ namespace CAS.UI.UIControls.Reliability
 
 		#endregion
 
-		#region private void ToolStripMenuItemEditClick(object sender, EventArgs e)
-
-		private void ToolStripMenuItemEditClick(object sender, EventArgs e)
-		{
-			if (_directivesViewer.SelectedItems.Count == 1)
-			{
-				CommonEditorForm form = new CommonEditorForm(_directivesViewer.SelectedItem);
-				if (form.ShowDialog() == DialogResult.OK)
-				{
-					AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
-					AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
-					AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
-
-					AnimatedThreadWorker.RunWorkerAsync();
-				}
-			}
-		}
-
-		#endregion
-
-		#region private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
-		/// <summary>
-		/// Публикует рабочий пакет
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		//private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
-		//{
-		//    foreach (Discrepancy item in _directivesViewer.SelectedItems)
-		//    {
-		//        Discrepancy wp = item;
-		//        if (wp.Status != WorkPackageStatus.Closed)
-		//            GlobalObjects.CasEnvironment.Manipulator.Publish(item, DateTime.Now, "");
-		//        else
-		//        {
-		//            switch (MessageBox.Show(@"This work package is already closed," +
-		//                                     "\nif you want to republish it," +
-		//                                     "\nrecordings created during its execution will be erased." + "\n\n Republish " + wp.Title + " work package?", (string)new GlobalTermsProvider()["SystemName"],
-		//                                MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation,
-		//                                MessageBoxDefaultButton.Button2))
-		//            {
-		//                case DialogResult.Yes:
-		//                    GlobalObjects.CasEnvironment.Manipulator.Publish(item, DateTime.Now, "");
-		//                    break;
-		//                case DialogResult.No:
-		//                    //arguments.Cancel = true;
-		//                    break;
-		//            }
-		//        }
-		//    }
-
-		//    AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
-		//    AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
-		//    AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
-
-		//    AnimatedThreadWorker.RunWorkerAsync();
-		//}
-
-		#endregion
-
-		#region private void toolStripMenuItemDelete_Click(object sender, EventArgs e)
-		//Удаляет рабочий пакет
-		private void ToolStripMenuItemDeleteClick(object sender, EventArgs e)
-		{
-			DeleteWorkPackage(); 
-		}
-
-		#endregion
-
-		#region private void ToolStripMenuItemDeletePrintWP(object sender, EventArgs e)
-		/// <summary>
-		/// Запрашивает распечатку рабочего пакета
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void ToolStripMenuItemDeletePrintWP(object sender, EventArgs e)
-		{
-			//if (_directivesViewer.SelectedItem == null) return;
-
-			//WorkPackage wp = _directivesViewer.SelectedItem;
-			//if (wp.WorkPackageItemsLoaded == false)
-			//    GlobalObjects.CasEnvironment.Manipulator.GetWorkPackageItemsWithCalculate(wp);
-
-			//SelectWPPrintTasksForm form = new SelectWPPrintTasksForm(wp);
-			//form.ShowDialog();
-		}
-
-		#endregion
-
-		#region private void ToolStripMenuItemCloseClick(object sender, EventArgs e)
-
-		//private void ToolStripMenuItemCloseClick(object sender, EventArgs e)
-		//{
-		//    DialogResult dlgResult = DialogResult.No;
-
-		//    foreach (WorkPackage item in _directivesViewer.SelectedItems)
-		//    {
-		//        if (item.Status == WorkPackageStatus.Closed)
-		//        {
-		//            MessageBox.Show("Work package " + item.Title + " is already closed.",
-		//                            (string)new GlobalTermsProvider()["SystemName"], MessageBoxButtons.OK,
-		//                            MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-		//            continue;
-		//        }
-
-		//        if (item.WorkPackageItemsLoaded == false)
-		//            GlobalObjects.CasEnvironment.Manipulator.GetWorkPackageItemsWithCalculate(item);
-
-		//        IEnumerable<WorkPackageRecord> blockedRecords =
-		//        item.WorkPakageRecords
-		//        .Where(rec => rec.Task != null &&
-		//                      rec.Task.NextPerformances != null &&
-		//                      rec.Task.NextPerformances.Count > 0 &&
-		//                      rec.Task.NextPerformances.Where(np => np.BlockedByWP != null &&
-		//                                                            np.BlockedByWP.ItemId != item.ItemId).Count() > 0);
-		//        if (item.CanClose == false || blockedRecords.Count() > 0)
-		//        {
-		//            string message = "This work package can not be closed";
-		//            foreach (WorkPackageRecord blockedRecord in blockedRecords)
-		//            {
-		//                NextPerformance np = blockedRecord.Task.NextPerformances.First(n => n.BlockedByWP != null);
-		//                message += string.Format("\nTask: {0} blocked by work package {1}",
-		//                                            blockedRecord.Task,
-		//                                            np.BlockedByWP);
-		//            }
-		//            if (item.MaxClosingDate < item.MinClosingDate)
-		//            {
-		//                message += string.Format("\nMin Closing Date: {0} better than Max Closing Date: {1}",
-		//                                            item.MinClosingDate,
-		//                                            item.MaxClosingDate);
-		//            }
-		//            MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
-		//                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-		//            continue;
-		//        }
-
-		//        WorkPackageClosingFormNew form = new WorkPackageClosingFormNew(item);
-		//        form.ShowDialog();
-		//        if (form.DialogResult == DialogResult.OK)
-		//        {
-		//            dlgResult = DialogResult.OK;
-		//        } 
-		//    }
-
-		//    //Если хотя бы одно окно возвратило DialogResult.OK
-		//    //производится перезагрузка элементов
-		//    if (dlgResult == DialogResult.OK)
-		//    {
-		//        AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
-		//        AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
-		//        AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
-
-		//        AnimatedThreadWorker.RunWorkerAsync();
-		//    } 
-		//}
-
-		#endregion
-
 		#region private void ButtonDeleteClick(object sender, EventArgs e)
 		private void ButtonDeleteClick(object sender, EventArgs e)
 		{
@@ -473,7 +248,6 @@ namespace CAS.UI.UIControls.Reliability
 		{
 			_directivesViewer = new OccurrencesListView();
 			_directivesViewer.TabIndex = 2;
-			_directivesViewer.CustomMenu = _contextMenuStrip;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
@@ -481,6 +255,10 @@ namespace CAS.UI.UIControls.Reliability
 			//события 
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 			
+			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen,
+				_toolStripSeparator2,
+				_toolStripMenuItemHighlight);
+
 			_directivesViewer.MenuOpeningAction = () =>
 			{
 				if (_directivesViewer.SelectedItems.Count <= 0)
@@ -621,24 +399,6 @@ namespace CAS.UI.UIControls.Reliability
 		{
 			e.Cancel = true;
 		}
-		#endregion
-
-		#region private void ButtonReleaseToService(object sender, EventArgs e)
-
-		////private void ButtonReleaseToService(object sender, EventArgs e)
-		////{
-		////    if (_directivesViewer.SelectedItem == null) return;
-
-		////    Discrepancy wp = _directivesViewer.SelectedItem;
-		////    GlobalObjects.CasEnvironment.Loader.LoadWorkPackageItems(wp);
-
-		////    //ConcatenatePdfDocuments(wp);
-
-		////    SelectWPPrintTasksForm form = new SelectWPPrintTasksForm(wp);
-		////    form.ShowDialog();
-		////    //e.Cancel = true;
-		////}
-
 		#endregion
 
 		#region private void ForecastMenuClick(object sender, EventArgs e)

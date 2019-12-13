@@ -72,7 +72,6 @@ namespace CAS.UI.UIControls.ForecastControls
         private ToolStripMenuItem itemPrintReportEquipmentAndMaterials;
 		private ToolStripMenuItem _itemPrintComponents;
 
-		private RadDropDownMenu _contextMenuStrip;
         private RadMenuSeparatorItem _toolStripSeparator1;
         private RadMenuItem _createWorkPakageToolStripMenuItem;
         private RadMenuItem _createInitialOrderStripMenuItem;
@@ -192,7 +191,6 @@ namespace CAS.UI.UIControls.ForecastControls
                 _toolStripMenuItemHighlight.Dispose();
             }
             if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
-            if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
             if (_toolStripMenuItemQuotations != null)
             {
                 foreach (RadMenuItem item in _toolStripMenuItemQuotations.Items)
@@ -636,7 +634,6 @@ namespace CAS.UI.UIControls.ForecastControls
 
         private void InitToolStripMenuItems()
         {
-            _contextMenuStrip = new RadDropDownMenu();
             _createWorkPakageToolStripMenuItem = new RadMenuItem();
             _createInitialOrderStripMenuItem = new RadMenuItem();
             _createQuotationOrderStripMenuItem = new RadMenuItem();
@@ -648,11 +645,11 @@ namespace CAS.UI.UIControls.ForecastControls
             _toolStripMenuItemHighlight = new RadMenuItem();
             _toolStripSeparator1 = new RadMenuSeparatorItem();
             // 
-            // contextMenuStrip
-            // 
-            _contextMenuStrip.Name = "_contextMenuStrip";
-            _contextMenuStrip.Size = new Size(179, 176);
-            // 
+			// contextMenuStrip
+			// 
+			_contextMenuStrip.Name = "_contextMenuStrip";
+			_contextMenuStrip.Size = new Size(179, 176);
+			// 
             // toolStripMenuItemHighlight
             // 
             _toolStripMenuItemHighlight.Text = "Highlight";
@@ -692,9 +689,7 @@ namespace CAS.UI.UIControls.ForecastControls
 			// 
 	        _toolStripMenuItemCloseDirectives.Text = "Close Directives";
 	        _toolStripMenuItemCloseDirectives.Click += ToolStripMenuItemCloseDirectives;
-
-
-			_contextMenuStrip.Items.Clear();
+			
             _toolStripMenuItemsWorkPackages.Items.Clear();
             _toolStripMenuItemQuotations.Items.Clear();
             _toolStripMenuItemHighlight.Items.Clear();
@@ -709,15 +704,14 @@ namespace CAS.UI.UIControls.ForecastControls
                 _toolStripMenuItemHighlight.Items.Add(item);
             }
 
-            _contextMenuStrip.Items.AddRange(_toolStripMenuItemShowTaskCard,
-	                                                new RadMenuSeparatorItem(),
-													_toolStripMenuItemHighlight,
+
+			_contextMenuStrip.Items.AddRange(_toolStripMenuItemShowTaskCard,
+													new RadMenuSeparatorItem(),
                                                     new RadMenuSeparatorItem(),
 	                                                _toolStripMenuItemTenPercent,
 	                                                new RadMenuSeparatorItem(),
 	                                                _toolStripMenuItemCloseDirectives,
 	                                                new RadMenuSeparatorItem(),
-													_createWorkPakageToolStripMenuItem,
                                                     _toolStripMenuItemsWorkPackages,
                                                     _toolStripSeparator1,
                                                     _createInitialOrderStripMenuItem,
@@ -832,13 +826,23 @@ namespace CAS.UI.UIControls.ForecastControls
         {
             _directivesViewer = new ForecastMTOPListView
 			{
-                                        CustomMenu = _contextMenuStrip,
-                                        TabIndex = 2,
-                                        Location = new Point(panel1.Left, panel1.Top),
-                                        Dock = DockStyle.Fill
-                                    };
+										TabIndex = 2,
+										Location = new Point(panel1.Left, panel1.Top),
+										Dock = DockStyle.Fill
+									};
             //события 
             _directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+
+			_directivesViewer.AddMenuItems(_toolStripMenuItemShowTaskCard,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemHighlight,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemTenPercent,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemCloseDirectives,
+				new RadMenuSeparatorItem(),
+				_createWorkPakageToolStripMenuItem,
+				_toolStripMenuItemsWorkPackages);
 
             _directivesViewer.MenuOpeningAction = () =>
             {

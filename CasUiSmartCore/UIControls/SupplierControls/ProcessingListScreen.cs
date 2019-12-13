@@ -41,9 +41,7 @@ namespace CAS.UI.UIControls.SupplierControls
 		private TransferRecordCollection _removedTransfers = new TransferRecordCollection();
 		private TransferRecordCollection _installedTransfers = new TransferRecordCollection();
 		private TransferRecordCollection _waitRemoveConfirmTransfers = new TransferRecordCollection();
-
-
-		private RadDropDownMenu _contextMenuStrip;
+		
 		private RadMenuItem _toolStripMenuItemMoveTo;
 
 		#endregion
@@ -87,8 +85,7 @@ namespace CAS.UI.UIControls.SupplierControls
 			{
 				TabIndex = 2,
 				Location = new Point(panel1.Left, panel1.Top),
-				Dock = DockStyle.Fill,
-				CustomMenu = _contextMenuStrip
+				Dock = DockStyle.Fill
 			};
 			
 			_directivesViewer.MenuOpeningAction = () =>
@@ -96,6 +93,8 @@ namespace CAS.UI.UIControls.SupplierControls
 				if (_directivesViewer.SelectedItems.Count <= 0)
 					return;
 			};
+
+			_directivesViewer.AddMenuItems(_toolStripMenuItemMoveTo);
 
 			panel1.Controls.Add(_directivesViewer);
 		}
@@ -106,21 +105,13 @@ namespace CAS.UI.UIControls.SupplierControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemMoveTo = new RadMenuItem();
-
 			// 
 			// toolStripMenuItemInstallToAnAircraft
 			// 
 			_toolStripMenuItemMoveTo.Size = new Size(178, 22);
 			_toolStripMenuItemMoveTo.Text = "Move To...";
 			_toolStripMenuItemMoveTo.Click += ToolStripMenuItemInstallToAnAircraftClick;
-
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Items.AddRange(_toolStripMenuItemMoveTo);
-			_contextMenuStrip.Size = new Size(179, 176);
 		}
 
 		#endregion

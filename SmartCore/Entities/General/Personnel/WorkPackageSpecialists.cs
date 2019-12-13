@@ -9,6 +9,7 @@ namespace SmartCore.Entities.General.Personnel
 	[Table("WorkPackageSpecialists", "dbo", "ItemId")]
 	[Dto(typeof(WorkPackageSpecialistsDTO))]
 	[Condition("IsDeleted", "0")]
+	[Serializable]
 	public class WorkPackageSpecialists : BaseEntityObject
 	{
 		private static Type _thisType;
@@ -36,7 +37,7 @@ namespace SmartCore.Entities.General.Personnel
 		}
 
 		#endregion
-        
+		
 		#region private static Type GetCurrentType()
 		private static Type GetCurrentType()
 		{
@@ -44,10 +45,10 @@ namespace SmartCore.Entities.General.Personnel
 		}
 		#endregion
 
-        public WorkPackageSpecialists()
-        {
-            ItemId = -1;
-            SmartCoreObjectType = SmartCoreType.WorkPackageSpecialists;
-        }
+		public WorkPackageSpecialists()
+		{
+			ItemId = -1;
+			SmartCoreObjectType = SmartCoreType.WorkPackageSpecialists;
+		}
 	}
 }

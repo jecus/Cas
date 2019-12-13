@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Forms;
 using CAS.UI.UIControls.OilControls.Model;
 using MetroFramework.Controls;
 using MetroFramework.Forms;
+using SmartCore.Auxiliary;
 using SmartCore.Entities.General.Accessory;
 using Telerik.Charting;
 using Telerik.WinControls.UI;
-using Telerik.WinControls.UI.RangeSelector.InterfacesAndEnum;
+using DateTimeExtensions = System.DateTimeExtensions;
 
 namespace CAS.UI.UIControls.OilControls
 {
@@ -25,12 +23,15 @@ namespace CAS.UI.UIControls.OilControls
 
 		#region Constructor
 
-		public OilGraphForm(OilGraphicModel graph)
+		public OilGraphForm(OilGraphicModel graph, DateTime from, DateTime to)
 		{
 			InitializeComponent();
 
 			_graph = graph;
 			FillData();
+
+			this.Text += $" (Period: {@from.Date:dd.MM.yyyy}  - {to.Date:dd.MM.yyyy})";
+			label2.Text += $" {(to - from).TotalDays} days";
 		}
 
 		#endregion

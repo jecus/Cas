@@ -17,8 +17,11 @@ using EntityCore.DTO.General;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
+using SmartCore.Entities.General.Personnel;
 using SmartCore.Filters;
+using SmartCore.Mail;
 using SmartCore.Purchase;
 using SmartCore.Queries;
 using Telerik.WinControls;
@@ -39,11 +42,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private readonly BaseEntityObject _parent;
 		private RequestForQuotationListView _directivesViewer;
-		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemEdit;
 		private RadMenuItem _toolStripMenuItemCreatePurchase;
 		private RadMenuItem _toolStripMenuItemClose;
-		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 
 		private Filter filter = null;
@@ -118,9 +119,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			if (_toolStripMenuItemCreatePurchase != null) _toolStripMenuItemCreatePurchase.Dispose();
 			if (_toolStripMenuItemEdit != null) _toolStripMenuItemEdit.Dispose();
 			if (_toolStripMenuItemClose != null) _toolStripMenuItemClose.Dispose();
-			if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
 			if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
-			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
 			if (_directivesViewer != null) _directivesViewer.Dispose();
 
 			Dispose(true);
@@ -194,18 +193,11 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemClose = new RadMenuItem();
-			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			_toolStripMenuItemEdit = new RadMenuItem();
 			_toolStripMenuItemCreatePurchase = new RadMenuItem();
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
-
+			
 			_toolStripMenuItemCreatePurchase.Text = "Publish";
 			_toolStripMenuItemCreatePurchase.Click += _toolStripMenuItemCreatePurchase_Click; ;
 
@@ -217,44 +209,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// 
 			_toolStripMenuItemClose.Text = "Close";
 			_toolStripMenuItemClose.Click += ToolStripMenuItemCloseClick;
-			// 
-			// toolStripMenuItemDelete
-			// 
-			_toolStripMenuItemDelete.Text = "Delete";
-			_toolStripMenuItemDelete.Click += ToolStripMenuItemDeleteClick;
-
-			_contextMenuStrip.Items.Clear();
-
-			_contextMenuStrip.Items.AddRange(new RadItem[]
-												{
-													_toolStripMenuItemCreatePurchase,
-													_toolStripMenuItemClose,
-													_toolStripSeparator1,
-													_toolStripMenuItemEdit,
-													_toolStripSeparator1,
-													_toolStripMenuItemDelete
-
-												});
-		}
-
-		#endregion
-
-		#region private void ToolStripMenuItemDeleteClick(object sender, EventArgs e)
-		//Удаляет рабочий пакет
-		private void ToolStripMenuItemDeleteClick(object sender, EventArgs e)
-		{
-			if (_directivesViewer.SelectedItems.Count == 1)
-			{
-				GlobalObjects.CasEnvironment.Manipulator.Delete(_directivesViewer.SelectedItem);
-			}
-			else
-			{
-				foreach (RequestForQuotation rfq in _directivesViewer.SelectedItems)
-				{
-					GlobalObjects.CasEnvironment.Manipulator.Delete(rfq);
-				}
-			}
-			AnimatedThreadWorker.RunWorkerAsync();
+			
 		}
 
 		#endregion
@@ -337,13 +292,17 @@ namespace CAS.UI.UIControls.PurchaseControls
 		{
 			_directivesViewer = new RequestForQuotationListView
 									{
-										CustomMenu = _contextMenuStrip,
 										TabIndex = 2,
 										Location = new Point(panel1.Left, panel1.Top),
 										Dock = DockStyle.Fill
 									};
 			//события 
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+
+			_directivesViewer.AddMenuItems(_toolStripMenuItemCreatePurchase,
+				_toolStripMenuItemClose,
+				_toolStripSeparator1,
+				_toolStripMenuItemEdit);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{
@@ -427,19 +386,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private void ButtonAddNewClick(object sender, EventArgs e)
 		{
-			var  form = new QuatationOrderFormNew(new RequestForQuotation());
-			if (form.ShowDialog() == DialogResult.OK)
-			{
-				AnimatedThreadWorker.RunWorkerAsync();
 
-				var refe = new ReferenceEventArgs
-											  {
-												  DisplayerText = form.AddedInitial.Title,
-												  TypeOfReflection = ReflectionTypes.DisplayInNew,
-												  RequestedEntity = new RequestForQuotationScreen(form.AddedInitial)
-											  };
-				InvokeDisplayerRequested(refe);    
-			}
 		}
 		#endregion
 

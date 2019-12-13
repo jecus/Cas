@@ -41,15 +41,9 @@ namespace CAS.UI.UIControls.Fleet
 		private MaintenanceDirectiveFleetListView _directivesViewer;
 
 		private CommonFilterCollection _additionalFilter = new CommonFilterCollection(typeof(MaintenanceDirective));
-
-
-		private RadDropDownMenu _contextMenuStrip;
+		
 		private RadMenuItem _toolStripMenuItemOpen;
-		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuItem _toolStripMenuItemShowTaskCard;
-		private RadMenuSeparatorItem _toolStripSeparator1;
-		private RadMenuSeparatorItem _toolStripSeparator2;
-		private RadMenuSeparatorItem _toolStripSeparator4;
 		private AnimatedThreadWorker _worker;
 		private ExcelExportProvider _exportProvider;
 
@@ -121,12 +115,7 @@ namespace CAS.UI.UIControls.Fleet
 			}
 
 			if (_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
-			if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
 			if (_toolStripMenuItemShowTaskCard != null) _toolStripMenuItemShowTaskCard.Dispose();
-			if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
-			if (_toolStripSeparator2 != null) _toolStripSeparator2.Dispose();
-			if (_toolStripSeparator4 != null) _toolStripSeparator4.Dispose();
-			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
 			if (_directivesViewer != null) _directivesViewer.Dispose();
 
 			Dispose(true);
@@ -267,41 +256,18 @@ namespace CAS.UI.UIControls.Fleet
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemOpen = new RadMenuItem();
-			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripMenuItemShowTaskCard = new RadMenuItem();
-			_toolStripSeparator1 = new RadMenuSeparatorItem();
-			_toolStripSeparator2 = new RadMenuSeparatorItem();
-			_toolStripSeparator4 = new RadMenuSeparatorItem();
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
 			// 
 			// toolStripMenuItemView
 			// 
 			_toolStripMenuItemOpen.Text = "Open";
 			_toolStripMenuItemOpen.Click += ToolStripMenuItemOpenClick;
 			// 
-			// toolStripMenuItemDelete
-			// 
-			_toolStripMenuItemDelete.Text = "Delete";
-			_toolStripMenuItemDelete.Click += ButtonDeleteClick;
-
-			_contextMenuStrip.Items.Clear();
-			// 
 			// _toolStripMenuItemShowTaskCard
 			// 
 			_toolStripMenuItemShowTaskCard.Text = "Show Task Card";
 			_toolStripMenuItemShowTaskCard.Click += ToolStripMenuItemShowTaskCardClick;
-			
-			_contextMenuStrip.Items.AddRange(_toolStripMenuItemOpen,
-													_toolStripMenuItemShowTaskCard,
-													new RadMenuSeparatorItem(),
-													_toolStripMenuItemDelete
-												);
 		}
 		#endregion
 
@@ -399,7 +365,6 @@ namespace CAS.UI.UIControls.Fleet
 		{
 			_directivesViewer = new MaintenanceDirectiveFleetListView();
 			_directivesViewer.TabIndex = 2;
-			_directivesViewer.CustomMenu = _contextMenuStrip;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
@@ -407,13 +372,15 @@ namespace CAS.UI.UIControls.Fleet
 			//события 
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 
+			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen,
+				_toolStripMenuItemShowTaskCard);
+
 			_directivesViewer.MenuOpeningAction = () =>
 			{
 				if (_directivesViewer.SelectedItems.Count <= 0)
 				{
 					_toolStripMenuItemOpen.Enabled = false;
 					_toolStripMenuItemShowTaskCard.Enabled = false;
-					_toolStripMenuItemDelete.Enabled = false;
 				}
 				if (_directivesViewer.SelectedItems.Count == 1)
 				{
@@ -429,7 +396,6 @@ namespace CAS.UI.UIControls.Fleet
 				{
 					_toolStripMenuItemOpen.Enabled = true;
 					_toolStripMenuItemShowTaskCard.Enabled = true;
-					_toolStripMenuItemDelete.Enabled = true;
 				}
 			};
 			

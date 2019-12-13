@@ -1,4 +1,5 @@
-﻿using EntityCore.DTO.General;
+﻿using System;
+using EntityCore.DTO.General;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
@@ -6,6 +7,7 @@ using SmartCore.Entities.General.Personnel;
 
 namespace SmartCore.Entities
 {
+	[Serializable]
 	public class User : BaseEntityObject
 	{
 		[Filter("Name:")]

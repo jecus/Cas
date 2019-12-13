@@ -3,6 +3,7 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
+	[Serializable]
 	public class TrainingType : StaticDictionary
 	{
 		#region private static CommonDictionaryCollection<TrainingType> _Items = new CommonDictionaryCollection<TrainingType>();
@@ -75,8 +76,8 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Реализация
-         */
+		 * Реализация
+		 */
 
 		#region public TrainingType()
 		/// <summary>

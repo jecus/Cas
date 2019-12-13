@@ -3,6 +3,7 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
+	[Serializable]
 	public class FamilyStatus : StaticDictionary
 	{
 		#region private static List<FamilyStatus> _Items = new List<FamilyStatus>();
@@ -27,8 +28,8 @@ namespace SmartCore.Entities.Dictionaries
 		public static FamilyStatus SingleChildren = new FamilyStatus(6, "Single, children", "Single, children");
 
 		/*
-         * Методы
-         */
+		 * Методы
+		 */
 		#region public static FamilyStatus GetItemById(Int32 maintenanceTypeId)
 		/// <summary>
 		/// Возвращает тип диерктивы по его Id
@@ -71,8 +72,8 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Реализация
-         */
+		 * Реализация
+		 */
 		#region public FamilyStatus()
 		/// <summary>
 		/// Конструктор создает объект типа директивы

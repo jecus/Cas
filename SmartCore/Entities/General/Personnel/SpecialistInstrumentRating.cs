@@ -8,6 +8,7 @@ namespace SmartCore.Entities.General.Personnel
 	[Table("SpecialistsInstrumentRating", "dbo", "ItemId")]
 	[Dto(typeof(SpecialistInstrumentRatingDTO))]
 	[Condition("IsDeleted", "0")]
+	[Serializable]
 	public class SpecialistInstrumentRating : BaseEntityObject
 	{
 		#region public DateTime IssueDate { get; set; } 
@@ -62,8 +63,8 @@ namespace SmartCore.Entities.General.Personnel
 		#endregion
 
 		public SpecialistInstrumentRating()
-        {
-            ItemId = -1;
+		{
+			ItemId = -1;
 			IssueDate = DateTime.Now;
 			SmartCoreObjectType = SmartCoreType.SpecialistInstrumentRating;
 		}

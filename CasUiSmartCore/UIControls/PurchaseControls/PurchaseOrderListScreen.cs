@@ -4,13 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Net.Mail;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
-using CAS.UI.UIControls.StoresControls;
 using CASReports.Builders;
 using CASReports.ReportTemplates;
 using CASTerms;
@@ -23,7 +21,6 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.Personnel;
-using SmartCore.Entities.General.Setting;
 using SmartCore.Filters;
 using SmartCore.Mail;
 using SmartCore.Purchase;
@@ -47,15 +44,11 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private PurchaseOrderListView _directivesViewer;
 
-		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemPublish;
 		private RadMenuItem _toolStripMenuItemMoveTo;
-		private RadMenuItem _toolStripMenuItemEdit;
-		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuItem _toolStripMenuItemReport;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 		private Filter filter;
-		private RadMenuItem _toolStripMenuItemSendMail;
 
 		#endregion
 
@@ -125,10 +118,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_purchaseArray = null;
 
 			if (_toolStripMenuItemMoveTo != null) _toolStripMenuItemMoveTo.Dispose();
-			if (_toolStripMenuItemEdit != null) _toolStripMenuItemEdit.Dispose();
-			if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
 			if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
-			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
 			if (_directivesViewer != null) _directivesViewer.Dispose();
 
 			Dispose(true);
@@ -210,65 +200,21 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemPublish = new RadMenuItem();
 			_toolStripMenuItemMoveTo = new RadMenuItem();
-			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripMenuItemReport = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
-			_toolStripMenuItemEdit = new RadMenuItem();
-			_toolStripMenuItemSendMail = new RadMenuItem();
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
-
-			_toolStripMenuItemEdit.Text = "Edit";
-			_toolStripMenuItemEdit.Click += ToolStripMenuItemEditClick;
 
 			_toolStripMenuItemPublish.Text = "Publish";
 			_toolStripMenuItemPublish.Click += ToolStripMenuItemPublishClick;
-
-			_toolStripMenuItemSendMail.Text = "Send Mail";
-			_toolStripMenuItemSendMail.Click += ToolStripMenuItemSendMailClick;
 			// 
 			// toolStripMenuItemView
 			// 
 			_toolStripMenuItemMoveTo.Text = "Move to Store";
 			_toolStripMenuItemMoveTo.Click += ToolStripMenuItemMoveToClick;
-			// 
-			// toolStripMenuItemDelete
-			// 
-			_toolStripMenuItemDelete.Text = "Delete";
-			_toolStripMenuItemDelete.Click += ToolStripMenuItemDeleteClick;
-
+			
 			_toolStripMenuItemReport.Text = "Show Report";
 			_toolStripMenuItemReport.Click += _toolStripMenuItemReport_Click; 
-
-			_contextMenuStrip.Items.Clear();
-			_contextMenuStrip.Items.AddRange(new RadItem[]
-												{
-													_toolStripMenuItemMoveTo,
-													new RadMenuSeparatorItem(),
-													_toolStripMenuItemPublish,
-													_toolStripSeparator1,
-													_toolStripMenuItemReport,
-													_toolStripMenuItemSendMail,
-													new RadMenuSeparatorItem(),
-													_toolStripSeparator1,
-													_toolStripMenuItemEdit,
-													_toolStripMenuItemDelete
-
-												});
-		}
-
-		private void ToolStripMenuItemSendMailClick(object sender, EventArgs e)
-		{
-			PrepareOrder(true);
-
-			
-			
 		}
 
 		#endregion
@@ -277,34 +223,47 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private void _toolStripMenuItemReport_Click(object sender, EventArgs e)
 		{
-			PrepareOrder();
+				PrepareOrder();
 		}
 
 		#endregion
 
-		private void PrepareOrder(bool isMailSend = false)
+		private void PrepareOrder()
 		{
 			if (_directivesViewer.SelectedItem == null)
-				return; ;
+				return;
+			;
 
 			var _order = _directivesViewer.SelectedItem;
-			var records = GlobalObjects.CasEnvironment.Loader.GetObjectList<PurchaseRequestRecord>(new ICommonFilter[] { new CommonFilter<int>(PurchaseRequestRecord.ParentPackageIdProperty, _order.ItemId) });
+			var records = GlobalObjects.CasEnvironment.Loader.GetObjectList<PurchaseRequestRecord>(new ICommonFilter[]
+				{new CommonFilter<int>(PurchaseRequestRecord.ParentPackageIdProperty, _order.ItemId)});
 			var ids = records.Select(s => s.SupplierId).Distinct().ToArray();
 			var productIds = records.Select(s => s.PackageItemId).Distinct().ToArray();
-			var suppliers = GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[] { new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids), });
-			var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new ICommonFilter[] { new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, productIds), });
+			var suppliers = GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[]
+				{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids),});
+			var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new ICommonFilter[]
+				{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, productIds),});
 
-			var department = GlobalObjects.CasEnvironment.NewLoader.GetObject<DepartmentDTO, Department>(new Filter("FullName", "Logistics & Stores Department "));
+			var department =
+				GlobalObjects.CasEnvironment.NewLoader.GetObject<DepartmentDTO, Department>(new Filter("FullName",
+					"Logistics & Stores Department "));
 
-			var parentInitialId = (int)GlobalObjects.CasEnvironment.Execute($@"select i.ItemId from PurchaseOrders p
+			var parentInitialId = (int) GlobalObjects.CasEnvironment.Execute($@"select i.ItemId from PurchaseOrders p
 			left join RequestsForQuotation q on q.ItemID = p.ParentID
 			left join InitialOrders i on i.ItemID = q.ParentID where p.ItemId = {_order.ItemId}").Tables[0].Rows[0][0];
-			var initialRecords = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(new Filter("ParentPackageId", parentInitialId));
-			var initial = GlobalObjects.CasEnvironment.NewLoader.GetObject<InitialOrderDTO, InitialOrder>(new Filter("ItemId", parentInitialId));
+			var initialRecords =
+				GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(
+					new Filter("ParentPackageId", parentInitialId));
+			var initial =
+				GlobalObjects.CasEnvironment.NewLoader.GetObject<InitialOrderDTO, InitialOrder>(new Filter("ItemId",
+					parentInitialId));
 
-			var publisherId = GlobalObjects.CasEnvironment.ApiProvider.GetByIdAsync(_directivesViewer.SelectedItem.PublishedById)?.PersonnelId ?? -1;
+			var publisherId = GlobalObjects.CasEnvironment.ApiProvider
+				                  .GetByIdAsync(_directivesViewer.SelectedItem.PublishedById)?.PersonnelId ?? -1;
 
-			var personnel = GlobalObjects.CasEnvironment.Loader.GetObject<Specialist>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, publisherId));
+			var personnel =
+				GlobalObjects.CasEnvironment.Loader.GetObject<Specialist>(
+					new CommonFilter<int>(BaseEntityObject.ItemIdProperty, publisherId));
 
 			var destinations = new List<BaseEntityObject>();
 			destinations.AddRange(GlobalObjects.AircraftsCore.GetAllAircrafts().ToArray());
@@ -333,37 +292,17 @@ namespace CAS.UI.UIControls.PurchaseControls
 				return;
 			}
 
-			var builder = new PurchaseOrderReportNewBuilder(GlobalObjects.CasEnvironment.Operators[0], records, _order, department, personnel);
+			var builder = new PurchaseOrderReportNewBuilder(GlobalObjects.CasEnvironment.Operators[0], records, _order,
+				department, personnel);
 
-			PdfRtfWordFormatOptions CrFormatTypeOptions = new PdfRtfWordFormatOptions();
-			if (!isMailSend)
-			{
-				var refArgs = new ReferenceEventArgs();
-				refArgs.TypeOfReflection = ReflectionTypes.DisplayInNew;
-				refArgs.DisplayerText = $"iPurchaseOrderReport {_directivesViewer.SelectedItem.Title}";
-				refArgs.RequestedEntity = new ReportScreen(builder);
-				Program.MainDispatcher.DisplayerRequest(refArgs);
-				refArgs.Cancel = false;
-			}
-			else
-			{
-				var doc = (PurchaseOrderReportNew)builder.GenerateReport();
-				ExportOptions CrExportOptions;
-				var CrDiskFileDestinationOptions = new DiskFileDestinationOptions();
-				CrDiskFileDestinationOptions.DiskFileName = "C:\\SampleReport.pdf";
-				CrExportOptions = doc.ExportOptions;
-				{
-					CrExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
-					CrExportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
-					CrExportOptions.DestinationOptions = CrDiskFileDestinationOptions;
-					CrExportOptions.FormatOptions = CrFormatTypeOptions;
-				}
-				var stream = doc.ExportToStream(ExportFormatType.PortableDocFormat);
+			var refArgs = new ReferenceEventArgs();
+			refArgs.TypeOfReflection = ReflectionTypes.DisplayInNew;
+			refArgs.DisplayerText = $"iPurchaseOrderReport {_directivesViewer.SelectedItem.Title}";
+			refArgs.RequestedEntity = new ReportScreen(builder);
+			Program.MainDispatcher.DisplayerRequest(refArgs);
+			refArgs.Cancel = false;
 
-				var sendMail = new MailSender(GlobalObjects.CasEnvironment.NewLoader);
-				sendMail.SendPurchaseEmail(records, "", personnel, stream);
-			}
-			
+
 		}
 
 		private void ToolStripMenuItemPublishClick(object sender, EventArgs e)
@@ -403,26 +342,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		#endregion
 
-		#region private void ToolStripMenuItemDeleteClick(object sender, EventArgs e)
-		//Удаляет рабочий пакет
-		private void ToolStripMenuItemDeleteClick(object sender, EventArgs e)
-		{
-			if (_directivesViewer.SelectedItems.Count == 1)
-			{
-				GlobalObjects.CasEnvironment.Manipulator.Delete(_directivesViewer.SelectedItem);
-			}
-			else
-			{
-				foreach (PurchaseOrder rfq in _directivesViewer.SelectedItems)
-				{
-					GlobalObjects.CasEnvironment.Manipulator.Delete(rfq);
-				}
-			}
-			AnimatedThreadWorker.RunWorkerAsync();
-		}
-
-		#endregion
-
 		#region private void ToolStripMenuItemCloseClick(object sender, EventArgs e)
 
 		private void ToolStripMenuItemCloseClick(object sender, EventArgs e)
@@ -458,39 +377,30 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		#endregion
 
-		#region private void ToolStripMenuItemEditClick(object sender, EventArgs e)
-
-		private void ToolStripMenuItemEditClick(object sender, EventArgs e)
-		{
-			if (_directivesViewer.SelectedItems.Count == 1)
-			{
-				GlobalObjects.PurchaseCore.LoadPurchaseOrderItems(_directivesViewer.SelectedItem);
-				PurchaseRequestForm editForm = new PurchaseRequestForm(_directivesViewer.SelectedItems[0]);
-				if(editForm.ShowDialog() == DialogResult.OK)
-					AnimatedThreadWorker.RunWorkerAsync();
-			}   
-		}
-
-		#endregion
-
 		#region private void InitListView()
 
 		private void InitListView()
 		{
 			_directivesViewer = new PurchaseOrderListView
 									{
-										CustomMenu = _contextMenuStrip,
 										TabIndex = 2,
 										Location = new Point(panel1.Left, panel1.Top),
 										Dock = DockStyle.Fill
 									};
 			//события 
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+			
+			_directivesViewer.AddMenuItems(_toolStripMenuItemMoveTo,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemPublish,
+				_toolStripSeparator1,
+				_toolStripMenuItemReport);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{
 				if (_directivesViewer.SelectedItems.Count <= 0)
 				   return;
+
 				else if (_directivesViewer.SelectedItems.Count == 1)
 				{
 					PurchaseOrder po = _directivesViewer.SelectedItem;

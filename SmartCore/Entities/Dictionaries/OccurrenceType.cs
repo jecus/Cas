@@ -3,6 +3,7 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
+	[Serializable]
 	public class OccurrenceType : StaticDictionary
 	{
 		#region private static CommonDictionaryCollection<ConsequenceType> _Items = new CommonDictionaryCollection<ConsequenceType>();
@@ -20,8 +21,8 @@ namespace SmartCore.Entities.Dictionaries
 
 
 		/*
-         * Методы
-         */
+		 * Методы
+		 */
 
 		#region public static ConsequenceType GetItemById(Int32 maintenanceTypeId)
 		/// <summary>
@@ -65,8 +66,8 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Реализация
-         */
+		 * Реализация
+		 */
 		#region public ConsequenceType()
 		/// <summary>
 		/// Конструктор создает объект повреждения

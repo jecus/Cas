@@ -169,23 +169,13 @@ namespace CAS.UI.UIControls.ComponentControls
                 threshold = _currentComponentDirective.Threshold;
                 if (threshold.RepeatInterval != null && !threshold.RepeatInterval.IsNullOrZero())
                 {
-                    //дата Следующего исполнения
-                    //если в наработке на первом выполнении заданы дни
-                    //то выводится точная дата следующего выполнения
-                    if (threshold.RepeatInterval.Days != null)
-                    {
-                        labelDateNext.Text =
-                           SmartCore.Auxiliary.Convert.GetDateFormat(
-                              _currentComponentDirective.LastPerformance.RecordDate.AddDays(
-                                   (double) threshold.RepeatInterval.Days));
-                    }//иначе, точную дату выполнения расчитать нельзя
-
-
-                    //наработка компонента на следующее исполнение
+	                //наработка компонента на следующее исполнение
                     var nextComponentTsnCsn = new Lifelength(_currentComponentDirective.LastPerformance.OnLifelength);
                     nextComponentTsnCsn.Add(threshold.RepeatInterval);
                     nextComponentTsnCsn.Resemble(threshold.RepeatInterval);
                     labelCompntTCSNNext.Text = nextComponentTsnCsn.ToString();
+					if(_currentComponentDirective.NextPerformanceDate.HasValue)
+						labelDateNext.Text = SmartCore.Auxiliary.Convert.GetDateFormat(_currentComponentDirective.NextPerformanceDate.Value);
 
                     //наработка самолета на следующее исполнение
 
@@ -195,20 +185,20 @@ namespace CAS.UI.UIControls.ComponentControls
                     //при которой был установлен агрегат
 
                     var asr = _currentComponentDirective.ParentComponent.ActualStateRecords.GetFirst();
-                    if (asr != null && tempAircraft != null &&
-                        threshold.FirstPerformanceSinceNew.IsGreaterNullable(_currentComponentDirective.ParentComponent.ActualStateRecords.GetFirst().OnLifelength))
-                    {
+                    //if (asr != null && tempAircraft != null &&
+                    //    threshold.FirstPerformanceSinceNew.IsGreaterNullable(_currentComponentDirective.ParentComponent.ActualStateRecords.GetFirst().OnLifelength))
+                    //{
                         //наработка на след выполнение больше той, что была при установке агрегата 
                         temp = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(tempAircraft);
                         //temp.Add(remains);
                         temp.Add(_currentComponentDirective.Remains);
                         temp.Resemble(threshold.RepeatInterval);
                         labelAircraftTCSNNext.Text = temp.ToString();
-                    }
-                    else
-                    {
-                        labelAircraftTCSNNext.Text = "";    
-                    }
+                    //}
+                    //else
+                    //{
+                    //    labelAircraftTCSNNext.Text = "";    
+                    //}
                 }
             }
             else
@@ -221,21 +211,10 @@ namespace CAS.UI.UIControls.ComponentControls
                 tempComponent = _currentComponentDirective.ParentComponent;
                 if (threshold.FirstPerformanceSinceNew != null && !threshold.FirstPerformanceSinceNew.IsNullOrZero())
                 {
-                    //дата Следующего исполнения
-                    if (threshold.FirstPerformanceSinceNew.Days != null)
-                    {
-                        //если в первом выполнении заданы дни
-                        //то выводится точная дата следующего выполнения
-
-                        //дата = дата_производства + первое_исполнение.дни
-                        labelDateNext.Text =
-                           SmartCore.Auxiliary.Convert.GetDateFormat(
-                              tempComponent.ManufactureDate.AddDays((double)threshold.FirstPerformanceSinceNew.Days));
-                    }//иначе, точную дату выполнения расчитать нельзя
-
-
-                    //наработка компонента на следующее исполнение
-                    labelCompntTCSNNext.Text = threshold.FirstPerformanceSinceNew.ToString();
+	                if (_currentComponentDirective.NextPerformanceDate.HasValue)
+	                    labelDateNext.Text = SmartCore.Auxiliary.Convert.GetDateFormat(_currentComponentDirective.NextPerformanceDate.Value);
+					//наработка компонента на следующее исполнение
+					labelCompntTCSNNext.Text = threshold.FirstPerformanceSinceNew.ToString();
 
                     //наработка самолета на следующее исполнение
                     //наработка = наработка самолета на сегодня + остаток до первого исполнения
@@ -286,18 +265,18 @@ namespace CAS.UI.UIControls.ComponentControls
                     //наработка самолета на следующее исполнение
                     //наработка = наработка самолета на сегодня + остаток до первого исполнения
                     ActualStateRecord asr = _currentComponentDirective.ParentComponent.ActualStateRecords.GetFirst();
-                    if (asr != null && tempAircraft != null &&
-                        threshold.FirstPerformanceSinceEffectiveDate.IsGreaterNullable(asr.OnLifelength))
-                    {
+                    //if (asr != null && tempAircraft != null &&
+                    //    threshold.FirstPerformanceSinceEffectiveDate.IsGreaterNullable(asr.OnLifelength))
+                    //{
                         //наработка на след выполнение больше той, что была при установке агрегата  
                         temp = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(tempAircraft);
                         //temp.Add(remains);
                         temp.Add(_currentComponentDirective.Remains);
                         temp.Resemble(threshold.FirstPerformanceSinceNew);
                         labelAircraftTCSNNext.Text = temp.ToString();
-                    }
-                    else
-                        labelAircraftTCSNNext.Text = "";
+                    //}
+                    //else
+                    //    labelAircraftTCSNNext.Text = "";
                 }
 
             }

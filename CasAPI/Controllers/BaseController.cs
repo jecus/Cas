@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using EntityCore.DTO;
 using EntityCore.Filter;
@@ -127,17 +128,20 @@ namespace CasAPI.Controllers
 		}
 
 		[HttpPost("bulkinsert")]
-		public virtual async Task<ActionResult> BulkInsert(IEnumerable<T> entity, int? batchSize = null)
+		public virtual async Task<ActionResult<Dictionary<string, int>>> BulkInsert(IEnumerable<T> entity, int? batchSize = null)
 		{
 			try
 			{
 				await _repository.BulkInsertASync(entity, batchSize);
-				return Ok();
+				return Ok(entity.ToDictionary(i => i.Guid, i => i.ItemId));
 			}
 			catch (Exception e)
 			{
 				_logger.LogError(e.Message);
-				return BadRequest();
+				foreach (var baseEntity in entity)
+					await _repository.SaveAsync(baseEntity);
+
+				return Ok(entity.ToDictionary(i => i.Guid, i => i.ItemId));
 			}
 		}
 
@@ -152,7 +156,10 @@ namespace CasAPI.Controllers
 			catch (Exception e)
 			{
 				_logger.LogError(e.Message);
-				return BadRequest();
+				foreach (var baseEntity in entity)
+					await _repository.SaveAsync(baseEntity);
+
+				return Ok();
 			}
 		}
 
@@ -167,7 +174,10 @@ namespace CasAPI.Controllers
 			catch (Exception e)
 			{
 				_logger.LogError(e.Message);
-				return BadRequest();
+				foreach (var baseEntity in entity)
+					await _repository.DeleteAsync(baseEntity);
+
+				return Ok();
 			}
 		}
 	}

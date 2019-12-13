@@ -12,6 +12,7 @@ namespace SmartCore.Packages
 	/// <summary>
 	/// Класс, Описывающий объект содержащий в себе задачи
 	/// </summary>
+	[Serializable]
 	public abstract class AbstractPackage<T> : BaseEntityObject, IPackage where T : BasePackageRecord
 	{
 		private static Type _thisType;

@@ -12,6 +12,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		public RequestProductListView()
 		{
 			InitializeComponent();
+			DisableContectMenu();
 			OldColumnIndex = 2;
 			SortMultiplier = 1;
 		}

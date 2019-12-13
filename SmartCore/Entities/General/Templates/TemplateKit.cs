@@ -5,7 +5,8 @@ using SmartCore.Entities.General.Attributes;
 namespace SmartCore.Entities.General.Templates
 {
     [Table("Kits", "Template", "ItemId")]
-    public class TemplateKit : BaseEntityObject
+    [Serializable]
+	public class TemplateKit : BaseEntityObject
     {
         #region public Int32 TemplateId { get; set; }
         /// <summary>

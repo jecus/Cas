@@ -9,9 +9,10 @@ using SmartCore.Files;
 
 namespace SmartCore.Entities.Dictionaries
 {
-    [Table("DamageCharts","dictionaries","ItemId")]
+	[Table("DamageCharts","dictionaries","ItemId")]
 	[Dto(typeof(DamageChartDTO))]
-    public class DamageChart : BaseEntityObject, IFileContainer
+	[Serializable]
+	public class DamageChart : BaseEntityObject, IFileContainer
 	{
 		private static Type _thisType;
 
@@ -20,16 +21,16 @@ namespace SmartCore.Entities.Dictionaries
 		/// Общее имя 
 		/// </summary>
 		[TableColumnAttribute("ChartName")]
-        public String ChartName { get; set; }
-        #endregion
+		public String ChartName { get; set; }
+		#endregion
 
-        #region public AircraftModel AircraftModel { get; set; }
-        /// <summary>
-        /// Короткое имя
-        /// </summary>
-        [TableColumnAttribute("AircraftModelId")]
-        [Child(false)]
-        public AircraftModel AircraftModel { get; set; }
+		#region public AircraftModel AircraftModel { get; set; }
+		/// <summary>
+		/// Короткое имя
+		/// </summary>
+		[TableColumnAttribute("AircraftModelId")]
+		[Child(false)]
+		public AircraftModel AircraftModel { get; set; }
 
 
 		public static PropertyInfo AircraftModelId
@@ -49,7 +50,7 @@ namespace SmartCore.Entities.Dictionaries
 		/// Файл листа повреждений
 		/// </summary>
 		public AttachedFile AttachedFile
-	    {
+		{
 			get
 			{
 				return _attachedFile ?? (Files.GetFileByFileLinkType(FileLinkType.DamageChartAttachedFile));
@@ -61,14 +62,14 @@ namespace SmartCore.Entities.Dictionaries
 			}
 		}
 
-	    #endregion
+		#endregion
 
 
 		#region public CommonCollection<ItemFileLink> Files { get; set; }
 
 		private CommonCollection<ItemFileLink> _files;
 
-	    [Child(RelationType.OneToMany, "ParentId", "ParentTypeId", 1180)]
+		[Child(RelationType.OneToMany, "ParentId", "ParentTypeId", 1180)]
 		public CommonCollection<ItemFileLink> Files
 		{
 			get { return _files ?? (_files = new CommonCollection<ItemFileLink>()); }
@@ -92,41 +93,41 @@ namespace SmartCore.Entities.Dictionaries
 		/// </summary>
 		/// <returns></returns>
 		public override string ToString()
-        {
-            return ChartName;
-        }
-        #endregion
+		{
+			return ChartName;
+		}
+		#endregion
 
-        #region public DamageChart()
-        /// <summary>
-        /// Конструктор создает объект с параметрами по умолчанию
-        /// </summary>
-        public DamageChart()
-        {
-            IsDeleted = false;
-            ItemId = -1;
+		#region public DamageChart()
+		/// <summary>
+		/// Конструктор создает объект с параметрами по умолчанию
+		/// </summary>
+		public DamageChart()
+		{
+			IsDeleted = false;
+			ItemId = -1;
 			SmartCoreObjectType = SmartCoreType.DamageChart;
-            ChartName = "";
-            AircraftModel = null;
-            AttachedFile = null;
-        }
-        #endregion
+			ChartName = "";
+			AircraftModel = null;
+			AttachedFile = null;
+		}
+		#endregion
 
-        #region public DamageChart(Int32 itemId, String chartName, AircraftModel aircraftModel, int fileId)
-        /// <summary>
-        /// Конструктор создает объект типа директивы
-        /// </summary>
-        /// <param name="itemId"></param>
-        /// <param name="chartName"></param>
-        /// <param name="aircraftModel"></param>
-        /// <param name="fileId"></param>
-        public DamageChart(Int32 itemId, String chartName, AircraftModel aircraftModel)
-        {
-            IsDeleted = false;
-            ItemId = itemId;
-            ChartName = chartName;
-            AircraftModel = aircraftModel;
-        }
+		#region public DamageChart(Int32 itemId, String chartName, AircraftModel aircraftModel, int fileId)
+		/// <summary>
+		/// Конструктор создает объект типа директивы
+		/// </summary>
+		/// <param name="itemId"></param>
+		/// <param name="chartName"></param>
+		/// <param name="aircraftModel"></param>
+		/// <param name="fileId"></param>
+		public DamageChart(Int32 itemId, String chartName, AircraftModel aircraftModel)
+		{
+			IsDeleted = false;
+			ItemId = itemId;
+			ChartName = chartName;
+			AircraftModel = aircraftModel;
+		}
 		#endregion
 
 		#region private static Type GetCurrentType()

@@ -22,6 +22,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 		public DocumentationListView()
 		{
 			InitializeComponent();
+			OldColumnIndex = 2;
 		}
 		#endregion
 

@@ -3,6 +3,7 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
+	[Serializable]
 	public class DeffeсtCategory : StaticDictionary
 	{
 		#region private static CommonDictionaryCollection<DeffeсtCategory> _Items = new CommonDictionaryCollection<DeffeсtCategory>();
@@ -24,8 +25,8 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Методы
-         */
+		 * Методы
+		 */
 
 		#region public static DeffeсtCategory GetItemById(Int32 maintenanceTypeId)
 		/// <summary>
@@ -69,8 +70,8 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Реализация
-         */
+		 * Реализация
+		 */
 		#region public DeffeсtCategory()
 		/// <summary>
 		/// Конструктор создает объект повреждения

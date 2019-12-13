@@ -32,6 +32,7 @@ namespace CAS.UI.UIControls.ForecastControls
 		public ForecastMTOPListView()
 		{
 			InitializeComponent();
+			DisableContectMenu();
 		}
 		#endregion
 

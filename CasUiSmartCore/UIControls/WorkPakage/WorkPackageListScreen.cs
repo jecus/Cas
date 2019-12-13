@@ -42,13 +42,11 @@ namespace CAS.UI.UIControls.WorkPakage
 		private MaintenanceReportBuilder _maintenanceReportBuilder = new MaintenanceReportBuilder();
 #endif
 
-		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemOpen;
 		private RadMenuItem _toolStripMenuItemPublish;
 		private RadMenuItem _toolStripMenuItemEdit;
 		private RadMenuItem _toolStripMenuItemEditProvider;
 		private RadMenuItem _toolStripMenuItemClose;
-		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 		private RadMenuItem _toolStripMenuItemPrintWP;
 		private RadMenuItem _toolStripMenuItemPrintWorkscope;
@@ -114,15 +112,12 @@ namespace CAS.UI.UIControls.WorkPakage
 			if (_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
 			if (_toolStripMenuItemHighlight != null) _toolStripMenuItemHighlight.Dispose();
 			if (_toolStripMenuItemPublish != null) _toolStripMenuItemPublish.Dispose();
-			if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
 			if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
 			if (_toolStripSeparator2 != null) _toolStripSeparator2.Dispose();
 			if (_toolStripMenuItemEdit != null) _toolStripMenuItemEdit.Dispose();
 			if (_toolStripMenuItemClose != null) _toolStripMenuItemClose.Dispose();
 			if (_toolStripMenuItemPrintWP != null) _toolStripMenuItemPrintWP.Dispose();
 			if (_toolStripMenuItemPrintWorkscope != null) _toolStripMenuItemPrintWorkscope.Dispose();
-			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
-
 			if (_directivesViewer != null) _directivesViewer.Dispose();
 
 			Dispose(true);
@@ -205,13 +200,11 @@ namespace CAS.UI.UIControls.WorkPakage
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemPublish = new RadMenuItem();
 			_toolStripMenuItemClose = new RadMenuItem();
 			_toolStripMenuItemsWorkPackages = new List<RadMenuItem>();
 			_toolStripMenuItemEdit = new RadMenuItem();
 			_toolStripMenuItemEditProvider = new RadMenuItem();
-			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripMenuItemHighlight = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			_toolStripSeparator2 = new RadMenuSeparatorItem();
@@ -219,11 +212,6 @@ namespace CAS.UI.UIControls.WorkPakage
 			_toolStripMenuItemPrintWorkscope = new RadMenuItem();
 			_toolStripMenuItemPrintMaintenanceReport = new RadMenuItem();
 			_toolStripMenuItemOpen = new RadMenuItem();
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
 			// 
 			// toolStripMenuItemView
 			// 
@@ -250,11 +238,6 @@ namespace CAS.UI.UIControls.WorkPakage
 			_toolStripMenuItemClose.Text = "Close";
 			_toolStripMenuItemClose.Click += ToolStripMenuItemCloseClick;
 			// 
-			// toolStripMenuItemDelete
-			// 
-			_toolStripMenuItemDelete.Text = "Delete";
-			_toolStripMenuItemDelete.Click += ToolStripMenuItemDeleteClick;
-			// 
 			// toolStripMenuItemHighlight
 			// 
 			_toolStripMenuItemHighlight.Text = "Highlight";
@@ -273,9 +256,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			// 
 			_toolStripMenuItemPrintMaintenanceReport.Text = "Overview the maintenance report";
 			_toolStripMenuItemPrintMaintenanceReport.Click += _toolStripMenuItemPrintMaintenanceReport_Click;
-			;
-
-			_contextMenuStrip.Items.Clear();
+			
 			_toolStripMenuItemsWorkPackages.Clear();
 			_toolStripMenuItemHighlight.Items.Clear();
 
@@ -288,23 +269,6 @@ namespace CAS.UI.UIControls.WorkPakage
 				item.Tag = highlight;
 				_toolStripMenuItemHighlight.Items.Add(item);
 			}
-
-			_contextMenuStrip.Items.AddRange(new RadItem[]
-			{
-				_toolStripMenuItemPublish,
-				_toolStripMenuItemClose,
-				_toolStripSeparator1,
-				_toolStripMenuItemEdit,
-				_toolStripMenuItemEditProvider,
-				_toolStripMenuItemOpen,
-				_toolStripMenuItemDelete,
-				_toolStripSeparator1,
-				_toolStripMenuItemPrintWP,
-				_toolStripMenuItemPrintWorkscope,
-				_toolStripMenuItemPrintMaintenanceReport,
-				_toolStripSeparator2,
-				_toolStripMenuItemHighlight
-			});
 		}
 
 		private void ToolStripMenuItemEditProviderClick(object sender, EventArgs e)
@@ -451,15 +415,6 @@ namespace CAS.UI.UIControls.WorkPakage
 
 		#endregion
 
-		#region private void toolStripMenuItemDelete_Click(object sender, EventArgs e)
-		//Удаляет рабочий пакет
-		private void ToolStripMenuItemDeleteClick(object sender, EventArgs e)
-		{
-			DeleteWorkPackage();
-		}
-
-		#endregion
-
 		#region private void ToolStripMenuItemDeletePrintWP(object sender, EventArgs e)
 		/// <summary>
 		/// Запрашивает распечатку рабочего пакета
@@ -588,15 +543,27 @@ namespace CAS.UI.UIControls.WorkPakage
 
 		private void InitListView()
 		{
-			_directivesViewer = new WorkPackageListView();
-			_directivesViewer.TabIndex = 2;
-			_directivesViewer.CustomMenu = _contextMenuStrip;
-			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
-			_directivesViewer.Dock = DockStyle.Fill;
+			_directivesViewer = new WorkPackageListView
+			{
+				TabIndex = 2, Location = new Point(panel1.Left, panel1.Top), Dock = DockStyle.Fill
+			};
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 			Controls.Add(_directivesViewer);
 			//события 
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+
+			_directivesViewer.AddMenuItems(_toolStripMenuItemPublish,
+				_toolStripMenuItemClose,
+				_toolStripSeparator1,
+				_toolStripMenuItemEdit,
+				_toolStripMenuItemEditProvider,
+				_toolStripMenuItemOpen,
+				_toolStripSeparator1,
+				_toolStripMenuItemPrintWP,
+				_toolStripMenuItemPrintWorkscope,
+				_toolStripMenuItemPrintMaintenanceReport,
+				_toolStripSeparator2,
+				_toolStripMenuItemHighlight);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{

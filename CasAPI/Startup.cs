@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
+using Z.EntityFramework.Extensions;
 
 namespace CasAPI
 {
@@ -48,6 +49,13 @@ namespace CasAPI
 					//options.EnableSensitiveDataLogging(false);
 					//options.EnableDetailedErrors();
 				});
+
+			EntityFrameworkManager.ContextFactory = context =>
+			{
+				var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
+				optionsBuilder.UseSqlServer(Configuration.GetConnectionString("CORE_CONNECTION_STRING"));
+				return new DataContext(optionsBuilder.Options);
+			};
 
 			services.AddResponseCompression(options =>
 			{

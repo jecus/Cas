@@ -3,6 +3,7 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
+	[Serializable]
 	public class EmployeeLicenceType : StaticDictionary
 	{
 		private PersonnelCategory _category;
@@ -113,8 +114,8 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Реализация
-         */
+		 * Реализация
+		 */
 		#region public PersonnelCategory()
 		/// <summary>
 		/// Конструктор создает объект повреждения

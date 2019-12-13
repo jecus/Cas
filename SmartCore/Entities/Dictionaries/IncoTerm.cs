@@ -3,6 +3,7 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
+	[Serializable]
 	public class IncoTerm : StaticDictionary
 	{
 		#region private static CommonDictionaryCollection<IncoTerm> _Items = new CommonDictionaryCollection<IncoTerm>();
@@ -31,8 +32,8 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Методы
-         */
+		 * Методы
+		 */
 
 		#region public static IncoTerm GetItemById(Int32 maintenanceTypeId)
 		/// <summary>
@@ -76,8 +77,8 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Реализация
-         */
+		 * Реализация
+		 */
 		#region public IncoTerm()
 		/// <summary>
 		/// Конструктор создает объект повреждения

@@ -36,6 +36,7 @@ namespace CAS.UI.UIControls.Fleet
 		{
 			InitializeComponent();
 			OldColumnIndex = 0;
+			EnableCustomSorting = false;
 
 			ColumnHeaderList.Clear();
 			SetHeaders();
@@ -293,10 +294,6 @@ namespace CAS.UI.UIControls.Fleet
 
 		#region protected override void CustomSort(int ColumnIndex)
 
-		protected override void Sorting(string colName = null)
-		{
-			
-		}
 
 		protected override void CustomSort(int ColumnIndex)
 		{

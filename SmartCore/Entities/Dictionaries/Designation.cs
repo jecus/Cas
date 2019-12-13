@@ -3,6 +3,7 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
+	[Serializable]
 	public class Designation : StaticDictionary
 	{
 		#region private static CommonDictionaryCollection<Designation> _Items = new CommonDictionaryCollection<Designation>();
@@ -30,8 +31,8 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Методы
-         */
+		 * Методы
+		 */
 
 		#region public static Designation GetItemById(Int32 maintenanceTypeId)
 		/// <summary>
@@ -75,8 +76,8 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Реализация
-         */
+		 * Реализация
+		 */
 		#region public Designation()
 		/// <summary>
 		/// Конструктор создает объект повреждения

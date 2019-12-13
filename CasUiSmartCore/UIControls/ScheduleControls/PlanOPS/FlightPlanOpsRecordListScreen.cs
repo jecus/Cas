@@ -35,7 +35,6 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 
 		private CommonFilterCollection _filter;
 
-		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemAddAircraft;
 		private RadMenuItem _toolStripMenuItemOpenFlight;
 
@@ -140,12 +139,11 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 
 		private void InitListView()
 		{
-			_directivesViewer = new FlightPlanOpsRecordListView(_calculated, AnimatedThreadWorker);
-			_directivesViewer.TabIndex = 2;
-			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
-			_directivesViewer.Dock = DockStyle.Fill;
-			_directivesViewer.CustomMenu = _contextMenuStrip;
-
+			_directivesViewer = new FlightPlanOpsRecordListView(_calculated, AnimatedThreadWorker)
+			{
+				TabIndex = 2, Location = new Point(panel1.Left, panel1.Top), Dock = DockStyle.Fill
+			};
+			
 			_directivesViewer.MenuOpeningAction = () =>
 			{
 				if (_directivesViewer.SelectedItems.Count <= 0)
@@ -157,6 +155,10 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 
 				_toolStripMenuItemAddAircraft.Enabled = _directivesViewer.SelectedItems.Count > 0;
 			};
+
+			_directivesViewer.AddMenuItems(_toolStripMenuItemOpenFlight,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemAddAircraft);
 
 			panel1.Controls.Add(_directivesViewer);
 		}
@@ -277,16 +279,8 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemAddAircraft = new RadMenuItem();
 			_toolStripMenuItemOpenFlight = new RadMenuItem();
-
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
-
 			// 
 			// toolStripMenuItemCopy
 			// 
@@ -297,13 +291,6 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 			// 
 			_toolStripMenuItemOpenFlight.Text = "Open Flight";
 			_toolStripMenuItemOpenFlight.Click += _toolStripMenuItemOpenFlight_Click;
-
-			_contextMenuStrip.Items.Clear();
-			_contextMenuStrip.Items.AddRange(
-				_toolStripMenuItemOpenFlight,
-				new RadMenuSeparatorItem(), 
-				_toolStripMenuItemAddAircraft
-			);
 		}
 
 		private void _toolStripMenuItemOpenFlight_Click(object sender, EventArgs e)
