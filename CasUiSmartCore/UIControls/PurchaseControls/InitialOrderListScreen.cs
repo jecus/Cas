@@ -28,7 +28,6 @@ using SmartCore.Entities.General.Personnel;
 using SmartCore.Filters;
 using SmartCore.Purchase;
 using SmartCore.Queries;
-using Telerik.WinControls;
 using Telerik.WinControls.UI;
 using Filter = EntityCore.Filter.Filter;
 
@@ -47,11 +46,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 		
 		private InitialOrderListView _directivesViewer;
 
-		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemEdit;
 		private RadMenuItem _toolStripMenuItemReport;
 		private RadMenuItem _toolStripMenuItemClose;
-		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuItem _toolStripMenuItemCreateQuatation;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 		
@@ -127,9 +124,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			if (_toolStripMenuItemCreateQuatation != null) _toolStripMenuItemCreateQuatation.Dispose();
 			if (_toolStripMenuItemEdit != null) _toolStripMenuItemEdit.Dispose();
 			if (_toolStripMenuItemClose != null) _toolStripMenuItemClose.Dispose();
-			if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
 			if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
-			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
 			if (_directivesViewer != null) _directivesViewer.Dispose();
 
 			Dispose(true);
@@ -203,19 +198,12 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemCreateQuatation = new RadMenuItem();
 			_toolStripMenuItemClose = new RadMenuItem();
-			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();			
 			_toolStripMenuItemEdit = new RadMenuItem();
 			_toolStripMenuItemReport = new RadMenuItem();
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
-
+			
 			_toolStripMenuItemEdit.Text = "Edit";
 			_toolStripMenuItemEdit.Click += ToolStripMenuItemEditClick;
 
@@ -230,29 +218,10 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// 
 			_toolStripMenuItemClose.Text = "Close";
 			_toolStripMenuItemClose.Click += ToolStripMenuItemCloseClick;
-			// 
-			// toolStripMenuItemDelete
-			// 
-			_toolStripMenuItemDelete.Text = "Delete";
-			_toolStripMenuItemDelete.Click += ToolStripMenuItemDeleteClick;
-
-			_contextMenuStrip.Items.Clear();
-			_contextMenuStrip.Items.AddRange(new RadItem[]
-												{
-													_toolStripMenuItemCreateQuatation,
-													_toolStripMenuItemClose,
-													_toolStripSeparator1,
-													_toolStripMenuItemReport,
-													new RadMenuSeparatorItem(),
-													_toolStripMenuItemEdit,
-													_toolStripMenuItemDelete
-
-												});
 		}
 
 
 		#endregion
-
 
 		#region private void _toolStripMenuItemReport_Click(object sender, EventArgs e)
 
@@ -389,26 +358,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		#endregion
 
-		#region private void ToolStripMenuItemDeleteClick(object sender, EventArgs e)
-		//Удаляет рабочий пакет
-		private void ToolStripMenuItemDeleteClick(object sender, EventArgs e)
-		{
-			if (_directivesViewer.SelectedItems.Count == 1)
-			{
-				GlobalObjects.CasEnvironment.Manipulator.Delete(_directivesViewer.SelectedItem);
-			}
-			else
-			{
-				foreach (InitialOrder rfq in _directivesViewer.SelectedItems)
-				{
-					GlobalObjects.CasEnvironment.Manipulator.Delete(rfq);
-				}
-			}
-			AnimatedThreadWorker.RunWorkerAsync();
-		}
-
-		#endregion
-
 		#region private void ToolStripMenuItemCloseClick(object sender, EventArgs e)
 
 		private void ToolStripMenuItemCloseClick(object sender, EventArgs e)
@@ -510,13 +459,19 @@ namespace CAS.UI.UIControls.PurchaseControls
 		{
 			_directivesViewer = new InitialOrderListView()
 									{
-										CustomMenu = _contextMenuStrip,
 										TabIndex = 2,
 										Location = new Point(panel1.Left, panel1.Top),
 										Dock = DockStyle.Fill
 									};
 			//события 
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+
+			_directivesViewer.AddMenuItems(_toolStripMenuItemCreateQuatation,
+				_toolStripMenuItemClose,
+				_toolStripSeparator1,
+				_toolStripMenuItemReport,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemEdit);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{

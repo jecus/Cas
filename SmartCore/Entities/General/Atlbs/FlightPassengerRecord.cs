@@ -10,6 +10,7 @@ namespace SmartCore.Entities.General.Atlbs
     /// Класс описывает запуск двигателя или ВСУ
     /// </summary>
     [Table("FlightPassengerRecords", "dbo", "ItemId")]
+    [Serializable]
     public class FlightPassengerRecord : AbstractRecord
     {
         private static Type _thisType;

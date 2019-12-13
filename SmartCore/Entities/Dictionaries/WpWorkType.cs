@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SmartCore.Entities.Dictionaries
 {
+	[Serializable]
 	public class WpWorkType : StaticDictionary
 	{
 		#region private static List<WpWorkType> _Items = new List<WpWorkType>();
@@ -22,8 +24,8 @@ namespace SmartCore.Entities.Dictionaries
 		public static WpWorkType Unknown = new WpWorkType(-1, "Unknown", "Unknown");
 		#endregion
 		/*
-         * Методы
-         */
+		 * Методы
+		 */
 
 		#region public static WpWorkType GetComponentTypeById(int componentTypeId)
 		/// <summary>
@@ -64,12 +66,12 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Свойства
-         */
+		 * Свойства
+		 */
 
 		/*
-         * Реализация
-         */
+		 * Реализация
+		 */
 
 		#region public WpWorkType()
 		/// <summary>

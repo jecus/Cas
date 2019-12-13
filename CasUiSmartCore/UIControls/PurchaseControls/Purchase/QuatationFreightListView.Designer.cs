@@ -1,6 +1,6 @@
-﻿namespace CAS.UI.UIControls.PurchaseControls.Initial
+﻿namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {
-	partial class InitialOrderListView
+	partial class QuatationFreightListView
 	{
 		/// <summary> 
 		/// Required designer variable.

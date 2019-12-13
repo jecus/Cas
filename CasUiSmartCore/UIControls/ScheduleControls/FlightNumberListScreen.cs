@@ -48,11 +48,7 @@ namespace CAS.UI.UIControls.ScheduleControls
 
 		private FlightNumberScreenType _screenType;
 
-		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemCreateTrip;
-		private RadMenuItem _toolStripMenuItemCopy;
-		private RadMenuItem _toolStripMenuItemPaste;
-		private RadMenuSeparatorItem _toolStripSeparator1;
 
 		#endregion
 
@@ -232,20 +228,12 @@ namespace CAS.UI.UIControls.ScheduleControls
 
 		private void InitListView()
 		{
-			_directivesViewer = new FlightNumberListView(_screenType);
-			_directivesViewer.TabIndex = 2;
-			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
-			_directivesViewer.Dock = DockStyle.Fill;
-			_directivesViewer.CustomMenu = _contextMenuStrip;
-
-			//_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
-			
-			_directivesViewer.MenuOpeningAction = () =>
+			_directivesViewer = new FlightNumberListView(_screenType)
 			{
-				if (_directivesViewer.SelectedItems.All(i => i is FlightNumber))
-					_toolStripMenuItemCopy.Enabled = true;
-				else _toolStripMenuItemCopy.Enabled = false;
+				TabIndex = 2, Location = new Point(panel1.Left, panel1.Top), Dock = DockStyle.Fill
 			};
+
+			_directivesViewer.AddMenuItems(_toolStripMenuItemCreateTrip);
 
 			panel1.Controls.Add(_directivesViewer);
 		}
@@ -266,42 +254,12 @@ namespace CAS.UI.UIControls.ScheduleControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemCreateTrip = new RadMenuItem();
-			_toolStripMenuItemCopy = new RadMenuItem();
-			_toolStripMenuItemPaste = new RadMenuItem();
-			_toolStripSeparator1 = new RadMenuSeparatorItem();
-
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
 			// 
 			// toolStripMenuItemView
 			// 
 			_toolStripMenuItemCreateTrip.Text = "Create Trip";
 			_toolStripMenuItemCreateTrip.Click += ToolStripMenuItemCreateTripClick;
-
-			// 
-			// toolStripMenuItemCopy
-			// 
-			_toolStripMenuItemCopy.Text = "Copy";
-			_toolStripMenuItemCopy.Click += CopyItemsClick;
-
-			// 
-			// toolStripMenuItemPaste
-			// 
-			_toolStripMenuItemPaste.Text = "Paste";
-			_toolStripMenuItemPaste.Click += PasteItemsClick;
-
-			_contextMenuStrip.Items.Clear();
-			_contextMenuStrip.Items.AddRange(
-				_toolStripMenuItemCreateTrip,
-				_toolStripSeparator1,
-				_toolStripMenuItemCopy,
-				_toolStripMenuItemPaste
-			);
 		}
 
 		#endregion
@@ -576,127 +534,7 @@ namespace CAS.UI.UIControls.ScheduleControls
 		}
 
 		#endregion
-
-		#region private void CopyItemsClick(object sender, EventArgs e)
-
-		private void CopyItemsClick(object sender, EventArgs e)
-		{
-			CopyToClipboard();
-		}
-
-		#endregion
-
-		#region private void PasteItemsClick(object sender, EventArgs e)
-
-		private void PasteItemsClick(object sender, EventArgs e)
-		{
-			GetFromClipboard();
-		}
-
-		#endregion
-
-		/*
-		 *  Копировать - Вставить - Вырезать
-		 */
-
-		#region private void CopyToClipboard()
-		private void CopyToClipboard()
-		{
-			// регистрация формата данных либо получаем его, если он уже зарегистрирован
-			DataFormats.Format format = DataFormats.GetFormat(typeof(FlightNumber[]).FullName);
-
-			if (_directivesViewer.SelectedItems == null || _directivesViewer.SelectedItems.Count == 0)
-				return;
-
-			//List<Directive> pds = _directivesViewer.SelectedItems;
-			List<FlightNumber> pds = new List<FlightNumber>();
-			var selectedItems = _directivesViewer.SelectedItems.ToArray();
-			foreach (FlightNumber directive in selectedItems)
-			{
-				pds.Add(directive.GetCopyUnsaved());
-			}
-
-			if (pds.Count <= 0)
-				return;
-
-			//todo:(EvgeniiBabak) Нужен другой способ проверки сереализуемости объекта
-			using (System.IO.MemoryStream mem = new System.IO.MemoryStream())
-			{
-				BinaryFormatter bin = new BinaryFormatter();
-				try
-				{
-					bin.Serialize(mem, pds);
-				}
-				catch (Exception ex)
-				{
-					MessageBox.Show("Объект не может быть сериализован. \n" + ex);
-					return;
-				}
-			}
-			// копирование в буфер обмена
-			IDataObject dataObj = new DataObject();
-			dataObj.SetData(format.Name, false, pds.ToArray());
-			Clipboard.SetDataObject(dataObj, false);
-
-			pds.Clear();
-		}
-		#endregion
-
-		#region private void GetFromClipboard()
-
-		private void GetFromClipboard()
-		{
-			try
-			{
-				var format = typeof(FlightNumber[]).FullName;
-
-				if (string.IsNullOrEmpty(format))
-					return;
-				if (!Clipboard.ContainsData(format))
-					return;
-				var flightNumbers = (FlightNumber[])Clipboard.GetData(format);
-				if (flightNumbers == null)
-					return;
-
-				var objectsToPaste = new List<IFlightNumberParams>();
-				foreach (var flightNumber in flightNumbers)
-				{
-					flightNumber.FlightNo.FullName += " Copy";
-					flightNumber.Description += " Copy";
-					_result.Add(flightNumber);
-
-					foreach (var period in flightNumber.FlightNumberPeriod)
-					{
-						period.FlightNum = flightNumber;
-						_result.Add(period);
-					}
-					
-					objectsToPaste.AddRange(flightNumber.FlightNumberPeriod.ToArray());
-					objectsToPaste.Add(flightNumber);
-				}
-
-				if (objectsToPaste.Count > 0)
-				{
-					_directivesViewer.InsertItems(objectsToPaste.ToArray());
-
-					headerControl.ShowSaveButton = true;
-				}
-
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Error while inserting new object(s). \n" + ex);
-				headerControl.ShowSaveButton = false;
-				Program.Provider.Logger.Log(ex);
-			}
-			finally
-			{
-				Clipboard.Clear();
-			}
-		}
-		#endregion
-
-
+		
 		#endregion
 
 	}

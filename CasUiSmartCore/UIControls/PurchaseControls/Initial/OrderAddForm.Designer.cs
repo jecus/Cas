@@ -119,7 +119,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.label17 = new MetroFramework.Controls.MetroLabel();
 			this.textBoxDIMS = new MetroFramework.Controls.MetroTextBox();
 			this.label18 = new MetroFramework.Controls.MetroLabel();
-			this.listViewInitialItems = new CAS.UI.UIControls.PurchaseControls.Initial.InitialOrderListView();
+			this.listViewInitialItems = new InitialOrderListView();
 			this.listViewKits = new CAS.UI.UIControls.PurchaseControls.Quatation.RequestProductListView();
 			this.comboBoxCountry = new System.Windows.Forms.ComboBox();
 			this.listViewQuatationItems = new CAS.UI.UIControls.PurchaseControls.Quatation.QuatationOrderListView();
@@ -1692,7 +1692,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private Quatation.RequestProductListView listViewKits;
 		private System.Windows.Forms.Button buttonOk;
 		private System.Windows.Forms.Button buttonCancel;
-		private Initial.InitialOrderListView listViewInitialItems;
+		private InitialOrderListView listViewInitialItems;
 		private System.Windows.Forms.GroupBox groupBox1;
 		private MetroLabel label1;
 		private MetroTextBox textBoxProductDesc;

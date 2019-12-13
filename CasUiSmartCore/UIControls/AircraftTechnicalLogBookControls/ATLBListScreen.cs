@@ -27,10 +27,8 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
 		private ATLBListView _directivesViewer;
 
-		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemTitle;
 		private RadMenuItem _toolStripMenuItemAdd;
-		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuItem _toolStripMenuItemProperties;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 		private RadMenuSeparatorItem _toolStripSeparator2;
@@ -85,13 +83,11 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			_itemsArray = null;
 
 			if (_toolStripMenuItemAdd != null) _toolStripMenuItemAdd.Dispose();
-			if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
 			if (_toolStripMenuItemTitle != null) _toolStripMenuItemTitle.Dispose();
 			if (_toolStripMenuItemProperties != null) _toolStripMenuItemProperties.Dispose();
 			if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
 			if (_toolStripSeparator2 != null) _toolStripSeparator2.Dispose();
-			if(_contextMenuStrip != null) _contextMenuStrip.Dispose();
-
+			
 			if (_directivesViewer != null) _directivesViewer.Dispose();
 
 			Dispose(true);
@@ -185,20 +181,12 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemTitle = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			_toolStripMenuItemAdd = new RadMenuItem();
-			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripSeparator2 = new RadMenuSeparatorItem();
 			_toolStripMenuItemProperties = new RadMenuItem();
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
 			// toolStripMenuItemTitle
-
 			_toolStripMenuItemTitle.Text = "Edit";
 			_toolStripMenuItemTitle.Click += ToolStripMenuItemEditClick;
 			// 
@@ -207,25 +195,10 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			_toolStripMenuItemAdd.Text = "Add ATLB";
 			_toolStripMenuItemAdd.Click += ToolStripMenuItemAddClick;
 			// 
-			// toolStripMenuItemDelete
-			// 
-			_toolStripMenuItemDelete.Text = "Delete";
-			_toolStripMenuItemDelete.Click += ToolStripMenuItemDeleteClick;
-			// 
 			// toolStripMenuItemProperties
 			// 
 			_toolStripMenuItemProperties.Text = "Properties";
 			_toolStripMenuItemProperties.Click += ToolStripMenuItemPropertiesClick;
-
-			_contextMenuStrip.Items.AddRange(
-				_toolStripMenuItemTitle,
-				_toolStripSeparator1,
-				_toolStripMenuItemAdd,
-				_toolStripMenuItemDelete,
-				_toolStripSeparator2,
-				_toolStripMenuItemProperties
-				);
-			
 		}
 		#endregion
 		
@@ -252,15 +225,6 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 		private void ToolStripMenuItemAddClick(object sender, EventArgs e)
 		{
 			AddNew();
-		}
-
-		#endregion
-
-		#region private void ToolStripMenuItemDeleteClick(object sender, EventArgs e)
-
-		private void ToolStripMenuItemDeleteClick(object sender, EventArgs e)
-		{
-			DeleteSelected();
 		}
 
 		#endregion
@@ -292,22 +256,25 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
 		private void InitListView()
 		{
-			_directivesViewer = new ATLBListView(CurrentAircraft);
-			_directivesViewer.TabIndex = 2;
-			_directivesViewer.CustomMenu = _contextMenuStrip;
-			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
-			_directivesViewer.Dock = DockStyle.Fill;
+			_directivesViewer = new ATLBListView(CurrentAircraft)
+			{
+				TabIndex = 2, Location = new Point(panel1.Left, panel1.Top), Dock = DockStyle.Fill
+			};
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 			Controls.Add(_directivesViewer);
 			panel1.Controls.Add(_directivesViewer);
 
+			_directivesViewer.AddMenuItems(_toolStripMenuItemTitle,
+				_toolStripSeparator1,
+				_toolStripMenuItemAdd,
+				_toolStripSeparator2,
+				_toolStripMenuItemProperties);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{
 				if (_directivesViewer.ItemsCount <= 0)
 					return;
 				_toolStripMenuItemTitle.Enabled = _directivesViewer.ItemsCount > 0;
-				_toolStripMenuItemDelete.Enabled = _directivesViewer.ItemsCount > 0;
 				_toolStripMenuItemProperties.Enabled = _directivesViewer.ItemsCount > 0;
 			};
 		}

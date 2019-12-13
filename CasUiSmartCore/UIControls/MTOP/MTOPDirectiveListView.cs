@@ -31,6 +31,7 @@ namespace CAS.UI.UIControls.MTOP
 		public MTOPDirectiveListView(Dictionary<int, Lifelength> groupLifelengths, List<MTOPCheck> maintenanceChecks)
 		{
 			InitializeComponent();
+			DisableContectMenu();
 			
 			_groupLifelengths = groupLifelengths;
 			_maintenanceChecks = maintenanceChecks;
@@ -141,6 +142,10 @@ namespace CAS.UI.UIControls.MTOP
 			subItems.Add(CreateRow(item.SmartCoreObjectType.ToString(), item.SmartCoreObjectType));
 			subItems.Add(CreateRow(title, title));
 			subItems.Add(CreateRow(item.Threshold.FirstPerformanceSinceNew.ToRepeatIntervalsFormat(), item.Threshold.FirstPerformanceSinceNew ));
+			
+			//subItem = new ListViewItem.ListViewSubItem { Text = item.PhaseThresh.ToRepeatIntervalsFormat(), Tag = item.PhaseThresh };
+			//subItems.Add(subItem);
+
 			subItems.Add(CreateRow(item.Threshold.RepeatInterval.ToRepeatIntervalsFormat(), item.Threshold.RepeatInterval ));
 			subItems.Add(CreateRow(phaseString, item.MTOPPhase ));
 			

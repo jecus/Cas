@@ -16,6 +16,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		{
 			_orderBySupplies = orderBySupplies;
 			InitializeComponent();
+			DisableContectMenu();
 			OldColumnIndex = 2;
 			SortMultiplier = 1;
 		}

@@ -512,6 +512,7 @@
     <Compile Include="Entities\Dictionaries\DirectiveAffects.cs" />
     <Compile Include="Entities\Dictionaries\DirectiveReason.cs" />
     <Compile Include="Entities\Dictionaries\DirectiveOrder.cs" />
+    <Compile Include="Entities\Dictionaries\QuotationCostType.cs" />
     <Compile Include="Entities\Dictionaries\IncoTerm.cs" />
     <Compile Include="Entities\Dictionaries\OccurrenceType.cs" />
     <Compile Include="Entities\Dictionaries\CriticalSystemList.cs" />
@@ -604,6 +605,7 @@
     <Compile Include="Entities\Dictionaries\Specialization.cs" />
     <Compile Include="Entities\Dictionaries\StaticDictionary.cs" />
     <Compile Include="Entities\Dictionaries\StaticTreeDictionary.cs" />
+    <Compile Include="Entities\Dictionaries\StatusOfDelivery.cs" />
     <Compile Include="Entities\Dictionaries\SupplierClass.cs" />
     <Compile Include="Entities\Dictionaries\TrainingType.cs" />
     <Compile Include="Entities\Dictionaries\TripName.cs" />
@@ -779,6 +781,7 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\XlsReader.cs" />
     <Compile Include="Mail\IMailSender.cs" />
+    <Compile Include="Mail\MailSender.cs" />
     <Compile Include="Providers\APIExtensions.cs" />
     <Compile Include="Files\FilesDataAccess.cs" />
     <Compile Include="Files\FilesSmartCore.cs" />

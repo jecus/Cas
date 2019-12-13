@@ -5,11 +5,12 @@ using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls.Initial
 {
-	public partial class InitialOrderListView :  BaseGridViewControl<InitialOrderRecord>
+	public partial class InitialOrderFormListView :  BaseGridViewControl<InitialOrderRecord>
 	{
-		public InitialOrderListView()
+		public InitialOrderFormListView()
 		{
 			InitializeComponent();
+			DisableContectMenu();
 		}
 
 		#region protected override void SetHeaders()

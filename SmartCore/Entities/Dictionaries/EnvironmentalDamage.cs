@@ -3,10 +3,11 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
-    /// <summary>
-    /// Ущерб окружающей среде
-    /// </summary>
-    public class EnvironmentalDamage : StaticDictionary
+	/// <summary>
+	/// Ущерб окружающей среде
+	/// </summary>
+	[Serializable]
+	public class EnvironmentalDamage : StaticDictionary
     {
         private int _weight;
 

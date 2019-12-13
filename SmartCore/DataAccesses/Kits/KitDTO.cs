@@ -10,6 +10,7 @@ namespace SmartCore.DataAccesses.Kits
 	[Table("Kits", "dbo", "ItemId")]
 	[Dto(typeof(KitDTO))]
 	[Condition("IsDeleted", "0")]
+	[Serializable]
 	public class KitDTO : BaseEntityObject
 	{
 		private static Type _thisType;

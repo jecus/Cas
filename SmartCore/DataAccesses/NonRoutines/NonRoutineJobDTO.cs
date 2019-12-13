@@ -1,4 +1,5 @@
-﻿using SmartCore.DataAccesses.AttachedFiles;
+﻿using System;
+using SmartCore.DataAccesses.AttachedFiles;
 using SmartCore.DataAccesses.Kits;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -11,11 +12,12 @@ namespace SmartCore.DataAccesses.NonRoutines
 	[Table("NonRoutineJobs", "Dictionaries", "ItemId")]
 	[Dto(typeof(NonRoutineJobDTO))]
 	[Condition("IsDeleted", "0")]
+	[Serializable]
 	public class NonRoutineJobDTO : BaseEntityObject, IFileDTOContainer
 	{
 		/*
-        *  Свойства
-        */
+		*  Свойства
+		*/
 
 		/// <summary>
 		/// Часть воздушного судна, где требуется провести работу
@@ -90,8 +92,8 @@ namespace SmartCore.DataAccesses.NonRoutines
 		/// Создает нерутинную работу без дополнительной информации
 		/// </summary>
 		public NonRoutineJobDTO()
-        {
-            ItemId = -1;
+		{
+			ItemId = -1;
 			SmartCoreObjectType = SmartCoreType.NonRoutineJob;
 		}
 	}

@@ -3,7 +3,8 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
-    public class ProcedureRating : StaticDictionary
+	[Serializable]
+	public class ProcedureRating : StaticDictionary
     {
 
         #region private static CommonDictionaryCollection<ProcedureRating> _Items = new CommonDictionaryCollection<ProcedureRating>();

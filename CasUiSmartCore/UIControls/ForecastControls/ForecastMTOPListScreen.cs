@@ -49,8 +49,6 @@ namespace CAS.UI.UIControls.ForecastControls
 		private Forecast _currentForecast;
 		private ForecastMTOPListView _directivesViewer;
 
-	    private RadDropDownMenu _contextMenuStrip;
-	    private RadMenuSeparatorItem _toolStripSeparator1;
 	    private RadMenuItem _createWorkPakageToolStripMenuItem;
 	    private RadMenuItem _createInitialOrderStripMenuItem;
 	    private RadMenuItem _createQuotationOrderStripMenuItem;
@@ -484,12 +482,16 @@ namespace CAS.UI.UIControls.ForecastControls
 	    {
 		    _directivesViewer = new ForecastMTOPListView
 		    {
-			    CustomMenu = _contextMenuStrip,
 				TabIndex = 2,
 			    Location = new Point(panel1.Left, panel1.Top),
 			    Dock = DockStyle.Fill
 		    };
 			//события 
+
+			_directivesViewer.AddMenuItems(_toolStripMenuItemHighlight,
+				new RadMenuSeparatorItem(),
+				_createWorkPakageToolStripMenuItem,
+				_toolStripMenuItemsWorkPackages);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{
@@ -511,19 +513,12 @@ namespace CAS.UI.UIControls.ForecastControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
 			_createWorkPakageToolStripMenuItem = new RadMenuItem();
 			_createInitialOrderStripMenuItem = new RadMenuItem();
 			_createQuotationOrderStripMenuItem = new RadMenuItem();
 			_toolStripMenuItemsWorkPackages = new RadMenuItem();
 			_toolStripMenuItemQuotations = new RadMenuItem();
 			_toolStripMenuItemHighlight = new RadMenuItem();
-			_toolStripSeparator1 = new RadMenuSeparatorItem();
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
 			// 
 			// toolStripMenuItemHighlight
 			// 
@@ -550,7 +545,6 @@ namespace CAS.UI.UIControls.ForecastControls
 			//
 			_toolStripMenuItemQuotations.Text = "Add to Quotation Order";
 
-			_contextMenuStrip.Items.Clear();
 			_toolStripMenuItemsWorkPackages.Items.Clear();
 			_toolStripMenuItemQuotations.Items.Clear();
 			_toolStripMenuItemHighlight.Items.Clear();
@@ -564,16 +558,6 @@ namespace CAS.UI.UIControls.ForecastControls
 				item.Tag = highlight;
 				_toolStripMenuItemHighlight.Items.Add(item);
 			}
-
-			_contextMenuStrip.Items.AddRange(_toolStripMenuItemHighlight,
-													new RadMenuSeparatorItem(), 
-													_createWorkPakageToolStripMenuItem,
-													_toolStripMenuItemsWorkPackages,
-													_toolStripSeparator1,
-													_createInitialOrderStripMenuItem,
-													_createQuotationOrderStripMenuItem,
-													_toolStripMenuItemQuotations
-												);
 		}
 
 		#endregion

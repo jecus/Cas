@@ -5,7 +5,8 @@ using SmartCore.Entities.General.Attributes;
 namespace SmartCore.Entities.General.Templates
 {
     [Table("LLPLifeLimitCategory", "Template", "ItemId")]
-    public class TemplateLLPLifeLimitCategory : BaseEntityObject
+    [Serializable]
+	public class TemplateLLPLifeLimitCategory : BaseEntityObject
     {
         #region public Int32 TemplateId { get; set; }
         /// <summary>

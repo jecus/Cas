@@ -33,46 +33,24 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.supplierListView1 = new CAS.UI.UIControls.SupplierControls.SupplierPriceListView();
 			this.buttonOk = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.comboBoxCostRepair = new System.Windows.Forms.ComboBox();
-			this.comboBoxCostOH = new System.Windows.Forms.ComboBox();
-			this.comboBoxCostServ = new System.Windows.Forms.ComboBox();
+			this.comboBoxCostType = new System.Windows.Forms.ComboBox();
+			this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
+			this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
 			this.comboBoxCostNew = new System.Windows.Forms.ComboBox();
-			this.numericUpDownCostRepair = new System.Windows.Forms.NumericUpDown();
-			this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-			this.numericUpDownCostOH = new System.Windows.Forms.NumericUpDown();
-			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+			this.numericUpDownReadinessNew = new System.Windows.Forms.NumericUpDown();
+			this.numericUpDownExNew = new System.Windows.Forms.NumericUpDown();
 			this.numericUpDownCostNew = new System.Windows.Forms.NumericUpDown();
 			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
 			this.button1 = new System.Windows.Forms.Button();
-			this.numericUpDownCostServ = new System.Windows.Forms.NumericUpDown();
-			this.labelQuantity = new MetroFramework.Controls.MetroLabel();
+			this.supplierListView1 = new CAS.UI.UIControls.SupplierControls.SupplierPriceListView();
 			this.groupBox1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostRepair)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostOH)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownReadinessNew)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownExNew)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostNew)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostServ)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// supplierListView1
-			// 
-			this.supplierListView1.GroupBySupplie = true;
-			this.supplierListView1.Displayer = null;
-			this.supplierListView1.DisplayerText = null;
-			this.supplierListView1.Entity = null;
-			this.supplierListView1.IgnoreEnterPress = false;
-			this.supplierListView1.Location = new System.Drawing.Point(3, 63);
-			this.supplierListView1.MenuOpeningAction = null;
-			this.supplierListView1.Name = "supplierListView1";
-			this.supplierListView1.OldColumnIndex = 0;
-			this.supplierListView1.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.supplierListView1.Size = new System.Drawing.Size(677, 321);
-			this.supplierListView1.SortMultiplier = 0;
-			this.supplierListView1.TabIndex = 70;
-			this.supplierListView1.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.SupplierListView1_SelectedItemsChanged);
 			// 
 			// buttonOk
 			// 
@@ -81,7 +59,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(813, 346);
+			this.buttonOk.Location = new System.Drawing.Point(859, 454);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 295;
@@ -95,7 +73,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonCancel.Location = new System.Drawing.Point(894, 346);
+			this.buttonCancel.Location = new System.Drawing.Point(940, 454);
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.Size = new System.Drawing.Size(75, 33);
 			this.buttonCancel.TabIndex = 294;
@@ -104,118 +82,92 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			// 
 			// groupBox1
 			// 
-			this.groupBox1.Controls.Add(this.comboBoxCostRepair);
-			this.groupBox1.Controls.Add(this.comboBoxCostOH);
-			this.groupBox1.Controls.Add(this.comboBoxCostServ);
+			this.groupBox1.Controls.Add(this.comboBoxCostType);
+			this.groupBox1.Controls.Add(this.metroLabel5);
+			this.groupBox1.Controls.Add(this.metroLabel4);
 			this.groupBox1.Controls.Add(this.comboBoxCostNew);
-			this.groupBox1.Controls.Add(this.numericUpDownCostRepair);
-			this.groupBox1.Controls.Add(this.metroLabel3);
-			this.groupBox1.Controls.Add(this.numericUpDownCostOH);
-			this.groupBox1.Controls.Add(this.metroLabel2);
+			this.groupBox1.Controls.Add(this.numericUpDownReadinessNew);
+			this.groupBox1.Controls.Add(this.numericUpDownExNew);
 			this.groupBox1.Controls.Add(this.numericUpDownCostNew);
 			this.groupBox1.Controls.Add(this.metroLabel1);
 			this.groupBox1.Controls.Add(this.button1);
-			this.groupBox1.Controls.Add(this.numericUpDownCostServ);
-			this.groupBox1.Controls.Add(this.labelQuantity);
-			this.groupBox1.Location = new System.Drawing.Point(686, 89);
+			this.groupBox1.Location = new System.Drawing.Point(3, 390);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(301, 173);
+			this.groupBox1.Size = new System.Drawing.Size(499, 103);
 			this.groupBox1.TabIndex = 296;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Cost";
 			// 
-			// comboBoxCostRepair
+			// comboBoxCostType
 			// 
-			this.comboBoxCostRepair.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.comboBoxCostRepair.FormattingEnabled = true;
-			this.comboBoxCostRepair.ItemHeight = 12;
-			this.comboBoxCostRepair.Location = new System.Drawing.Point(196, 93);
-			this.comboBoxCostRepair.Name = "comboBoxCostRepair";
-			this.comboBoxCostRepair.Size = new System.Drawing.Size(99, 20);
-			this.comboBoxCostRepair.TabIndex = 302;
+			this.comboBoxCostType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.comboBoxCostType.FormattingEnabled = true;
+			this.comboBoxCostType.ItemHeight = 13;
+			this.comboBoxCostType.Location = new System.Drawing.Point(41, 34);
+			this.comboBoxCostType.Name = "comboBoxCostType";
+			this.comboBoxCostType.Size = new System.Drawing.Size(99, 21);
+			this.comboBoxCostType.TabIndex = 313;
+			this.comboBoxCostType.SelectedIndexChanged += new System.EventHandler(this.comboBoxCostType_SelectedIndexChanged);
 			// 
-			// comboBoxCostOH
+			// metroLabel5
 			// 
-			this.comboBoxCostOH.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.comboBoxCostOH.FormattingEnabled = true;
-			this.comboBoxCostOH.ItemHeight = 12;
-			this.comboBoxCostOH.Location = new System.Drawing.Point(196, 67);
-			this.comboBoxCostOH.Name = "comboBoxCostOH";
-			this.comboBoxCostOH.Size = new System.Drawing.Size(99, 20);
-			this.comboBoxCostOH.TabIndex = 301;
+			this.metroLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.metroLabel5.Location = new System.Drawing.Point(390, 12);
+			this.metroLabel5.Name = "metroLabel5";
+			this.metroLabel5.Size = new System.Drawing.Size(87, 19);
+			this.metroLabel5.TabIndex = 312;
+			this.metroLabel5.Text = "Readiness";
+			this.metroLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// comboBoxCostServ
+			// metroLabel4
 			// 
-			this.comboBoxCostServ.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.comboBoxCostServ.FormattingEnabled = true;
-			this.comboBoxCostServ.ItemHeight = 12;
-			this.comboBoxCostServ.Location = new System.Drawing.Point(196, 41);
-			this.comboBoxCostServ.Name = "comboBoxCostServ";
-			this.comboBoxCostServ.Size = new System.Drawing.Size(99, 20);
-			this.comboBoxCostServ.TabIndex = 300;
+			this.metroLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.metroLabel4.Location = new System.Drawing.Point(239, 12);
+			this.metroLabel4.Name = "metroLabel4";
+			this.metroLabel4.Size = new System.Drawing.Size(87, 19);
+			this.metroLabel4.TabIndex = 311;
+			this.metroLabel4.Text = "Exchange";
+			this.metroLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// comboBoxCostNew
 			// 
 			this.comboBoxCostNew.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.comboBoxCostNew.FormattingEnabled = true;
 			this.comboBoxCostNew.ItemHeight = 12;
-			this.comboBoxCostNew.Location = new System.Drawing.Point(196, 16);
+			this.comboBoxCostNew.Location = new System.Drawing.Point(332, 34);
 			this.comboBoxCostNew.Name = "comboBoxCostNew";
-			this.comboBoxCostNew.Size = new System.Drawing.Size(99, 20);
+			this.comboBoxCostNew.Size = new System.Drawing.Size(52, 20);
 			this.comboBoxCostNew.TabIndex = 299;
 			// 
-			// numericUpDownCostRepair
+			// numericUpDownReadinessNew
 			// 
-			this.numericUpDownCostRepair.DecimalPlaces = 2;
-			this.numericUpDownCostRepair.Location = new System.Drawing.Point(102, 93);
-			this.numericUpDownCostRepair.Maximum = new decimal(new int[] {
+			this.numericUpDownReadinessNew.Location = new System.Drawing.Point(390, 34);
+			this.numericUpDownReadinessNew.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-			this.numericUpDownCostRepair.Name = "numericUpDownCostRepair";
-			this.numericUpDownCostRepair.Size = new System.Drawing.Size(88, 20);
-			this.numericUpDownCostRepair.TabIndex = 254;
+			this.numericUpDownReadinessNew.Name = "numericUpDownReadinessNew";
+			this.numericUpDownReadinessNew.Size = new System.Drawing.Size(87, 20);
+			this.numericUpDownReadinessNew.TabIndex = 308;
 			// 
-			// metroLabel3
+			// numericUpDownExNew
 			// 
-			this.metroLabel3.AutoSize = true;
-			this.metroLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabel3.Location = new System.Drawing.Point(5, 94);
-			this.metroLabel3.Name = "metroLabel3";
-			this.metroLabel3.Size = new System.Drawing.Size(78, 19);
-			this.metroLabel3.TabIndex = 255;
-			this.metroLabel3.Text = "Cost repair:";
-			this.metroLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// numericUpDownCostOH
-			// 
-			this.numericUpDownCostOH.DecimalPlaces = 2;
-			this.numericUpDownCostOH.Location = new System.Drawing.Point(102, 67);
-			this.numericUpDownCostOH.Maximum = new decimal(new int[] {
+			this.numericUpDownExNew.DecimalPlaces = 2;
+			this.numericUpDownExNew.Location = new System.Drawing.Point(239, 34);
+			this.numericUpDownExNew.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-			this.numericUpDownCostOH.Name = "numericUpDownCostOH";
-			this.numericUpDownCostOH.Size = new System.Drawing.Size(88, 20);
-			this.numericUpDownCostOH.TabIndex = 252;
-			// 
-			// metroLabel2
-			// 
-			this.metroLabel2.AutoSize = true;
-			this.metroLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabel2.Location = new System.Drawing.Point(5, 68);
-			this.metroLabel2.Name = "metroLabel2";
-			this.metroLabel2.Size = new System.Drawing.Size(62, 19);
-			this.metroLabel2.TabIndex = 253;
-			this.metroLabel2.Text = "Cost OH:";
-			this.metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.numericUpDownExNew.Name = "numericUpDownExNew";
+			this.numericUpDownExNew.Size = new System.Drawing.Size(87, 20);
+			this.numericUpDownExNew.TabIndex = 304;
 			// 
 			// numericUpDownCostNew
 			// 
 			this.numericUpDownCostNew.DecimalPlaces = 2;
-			this.numericUpDownCostNew.Location = new System.Drawing.Point(103, 15);
+			this.numericUpDownCostNew.Location = new System.Drawing.Point(146, 34);
 			this.numericUpDownCostNew.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -229,11 +181,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			// 
 			this.metroLabel1.AutoSize = true;
 			this.metroLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabel1.Location = new System.Drawing.Point(6, 16);
+			this.metroLabel1.Location = new System.Drawing.Point(6, 35);
 			this.metroLabel1.Name = "metroLabel1";
-			this.metroLabel1.Size = new System.Drawing.Size(65, 19);
+			this.metroLabel1.Size = new System.Drawing.Size(38, 19);
 			this.metroLabel1.TabIndex = 251;
-			this.metroLabel1.Text = "Cost new:";
+			this.metroLabel1.Text = "Cost:";
 			this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// button1
@@ -242,42 +194,38 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button1.Location = new System.Drawing.Point(220, 127);
+			this.button1.Location = new System.Drawing.Point(418, 64);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(75, 33);
 			this.button1.TabIndex = 249;
 			this.button1.Text = "Apply";
 			this.button1.Click += new System.EventHandler(this.Button1_Click);
 			// 
-			// numericUpDownCostServ
+			// supplierListView1
 			// 
-			this.numericUpDownCostServ.DecimalPlaces = 2;
-			this.numericUpDownCostServ.Location = new System.Drawing.Point(102, 41);
-			this.numericUpDownCostServ.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-			this.numericUpDownCostServ.Name = "numericUpDownCostServ";
-			this.numericUpDownCostServ.Size = new System.Drawing.Size(88, 20);
-			this.numericUpDownCostServ.TabIndex = 142;
-			// 
-			// labelQuantity
-			// 
-			this.labelQuantity.AutoSize = true;
-			this.labelQuantity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelQuantity.Location = new System.Drawing.Point(5, 42);
-			this.labelQuantity.Name = "labelQuantity";
-			this.labelQuantity.Size = new System.Drawing.Size(66, 19);
-			this.labelQuantity.TabIndex = 158;
-			this.labelQuantity.Text = "Cost serv:";
-			this.labelQuantity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.supplierListView1.ConfigurePaste = null;
+			this.supplierListView1.Displayer = null;
+			this.supplierListView1.DisplayerText = null;
+			this.supplierListView1.EnableCustomSorting = true;
+			this.supplierListView1.Entity = null;
+			this.supplierListView1.GroupBySupplie = true;
+			this.supplierListView1.IgnoreEnterPress = false;
+			this.supplierListView1.Location = new System.Drawing.Point(3, 63);
+			this.supplierListView1.MenuOpeningAction = null;
+			this.supplierListView1.Name = "supplierListView1";
+			this.supplierListView1.OldColumnIndex = 0;
+			this.supplierListView1.PasteComplete = null;
+			this.supplierListView1.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.supplierListView1.Size = new System.Drawing.Size(1012, 321);
+			this.supplierListView1.SortMultiplier = 0;
+			this.supplierListView1.TabIndex = 70;
+			this.supplierListView1.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.SupplierListView1_SelectedItemsChanged);
 			// 
 			// QuotationCostForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(992, 402);
+			this.ClientSize = new System.Drawing.Size(1019, 499);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.buttonOk);
 			this.Controls.Add(this.buttonCancel);
@@ -289,10 +237,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.Text = "Quotation Cost Form";
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostRepair)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostOH)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownReadinessNew)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownExNew)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostNew)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCostServ)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -302,18 +249,14 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		private System.Windows.Forms.Button buttonOk;
 		private System.Windows.Forms.Button buttonCancel;
 		private System.Windows.Forms.GroupBox groupBox1;
-		private System.Windows.Forms.NumericUpDown numericUpDownCostRepair;
-		private MetroFramework.Controls.MetroLabel metroLabel3;
-		private System.Windows.Forms.NumericUpDown numericUpDownCostOH;
-		private MetroFramework.Controls.MetroLabel metroLabel2;
 		private System.Windows.Forms.NumericUpDown numericUpDownCostNew;
 		private MetroFramework.Controls.MetroLabel metroLabel1;
 		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.NumericUpDown numericUpDownCostServ;
-		private MetroFramework.Controls.MetroLabel labelQuantity;
-		private System.Windows.Forms.ComboBox comboBoxCostRepair;
-		private System.Windows.Forms.ComboBox comboBoxCostOH;
-		private System.Windows.Forms.ComboBox comboBoxCostServ;
 		private System.Windows.Forms.ComboBox comboBoxCostNew;
+		private MetroFramework.Controls.MetroLabel metroLabel5;
+		private MetroFramework.Controls.MetroLabel metroLabel4;
+		private System.Windows.Forms.NumericUpDown numericUpDownReadinessNew;
+		private System.Windows.Forms.NumericUpDown numericUpDownExNew;
+		private System.Windows.Forms.ComboBox comboBoxCostType;
 	}
 }

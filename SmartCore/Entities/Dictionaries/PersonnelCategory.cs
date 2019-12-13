@@ -3,6 +3,7 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
+	[Serializable]
 	public class PersonnelCategory : StaticDictionary
 	{
 		#region private static CommonDictionaryCollection<PersonnelCategory> _Items = new CommonDictionaryCollection<PersonnelCategory>();
@@ -71,8 +72,8 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Реализация
-         */
+		 * Реализация
+		 */
 		#region public PersonnelCategory()
 		/// <summary>
 		/// Конструктор создает объект повреждения

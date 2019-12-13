@@ -37,11 +37,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private CommonFilterCollection _filter;
 
-		private RadDropDownMenu _contextMenuStrip;
-		private RadMenuItem _toolStripMenuItemCopy;
-		private RadMenuItem _toolStripMenuItemPaste;
 		private RadMenuItem _toolStripMenuItemShowImages;
-		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuItem _toolStripMenuItemComposeInitial;
 		private RadMenuItem _toolStripMenuItemAddInitial;
 		private RadMenuItem _toolStripMenuItemComposeQuotation;
@@ -180,7 +176,11 @@ namespace CAS.UI.UIControls.PurchaseControls
 				Dock = DockStyle.Fill
 			};
 
-			_directivesViewer.CustomMenu = _contextMenuStrip;
+			_directivesViewer.AddMenuItems(_toolStripMenuItemComposeInitial,
+				_toolStripMenuItemAddInitial,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemComposeQuotation,
+				_toolStripMenuItemAddQuotation);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{
@@ -205,38 +205,12 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
-			_toolStripMenuItemCopy = new RadMenuItem();
-			_toolStripMenuItemPaste = new RadMenuItem();
-			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripMenuItemShowImages = new RadMenuItem();
 			_toolStripMenuItemComposeInitial = new RadMenuItem();
 			_toolStripMenuItemAddInitial = new RadMenuItem();
 			_toolStripMenuItemComposeQuotation = new RadMenuItem();
 			_toolStripMenuItemAddQuotation = new RadMenuItem();
 
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
-
-			// 
-			// toolStripMenuItemCopy
-			// 
-			_toolStripMenuItemCopy.Text = "Copy";
-			_toolStripMenuItemCopy.Click += CopyItemsClick;
-
-			// 
-			// toolStripMenuItemPaste
-			// 
-			_toolStripMenuItemPaste.Text = "Paste";
-			_toolStripMenuItemPaste.Click += PasteItemsClick;
-			// 
-			// toolStripMenuItemPaste
-			// 
-			_toolStripMenuItemDelete.Text = "Delete";
-			_toolStripMenuItemDelete.Click += DeleteItemsClick;
 			// 
 			// toolStripMenuItemShowTaskCard
 			// 
@@ -261,24 +235,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// toolStripMenuItemAddtoQuotationOrder
 			// 
 			_toolStripMenuItemAddQuotation.Text = "Add to Quotation Order";
-			
-
-			_contextMenuStrip.Items.AddRange(
-				_toolStripMenuItemComposeInitial,
-				_toolStripMenuItemAddInitial,
-				new RadMenuSeparatorItem(),
-				_toolStripMenuItemComposeQuotation,
-				_toolStripMenuItemAddQuotation,
-				new RadMenuSeparatorItem(),
-				_toolStripMenuItemCopy,
-				_toolStripMenuItemPaste,
-				_toolStripMenuItemDelete
-				);
 		}
-
 		
-
-
 		#endregion
 
 		#region private void _toolStripMenuItemComposeInitial_Click1(object sender, EventArgs e)
@@ -325,15 +283,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 				string errorDescriptionSctring = $"Error while Open Attached File for {product}, id {product.ItemId}. \nFileId {product.ImageFile.ItemId}";
 				Program.Provider.Logger.Log(errorDescriptionSctring, ex);
 			}
-		}
-
-		#endregion
-
-		#region private void DeleteItemsClick(object sender, EventArgs e)
-
-		private void DeleteItemsClick(object sender, EventArgs e)
-		{
-			Delete();
 		}
 
 		#endregion
@@ -515,109 +464,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			}
 		}
 		#endregion
-
-		#region private void PasteItemsClick(object sender, EventArgs e)
-
-		private void PasteItemsClick(object sender, EventArgs e)
-		{
-			GetFromClipboard();
-		}
-
-		#endregion
-
-		#region private void CopyItemsClick(object sender, EventArgs e)
-
-		private void CopyItemsClick(object sender, EventArgs e)
-		{
-			CopyToClipboard();
-		}
-
-		#endregion
-
-		#region private void CopyToClipboard()
-		private void CopyToClipboard()
-		{
-			// регистрация формата данных либо получаем его, если он уже зарегистрирован
-			var format = DataFormats.GetFormat(typeof(Product[]).FullName);
-
-			if (_directivesViewer.SelectedItems == null || _directivesViewer.SelectedItems.Count == 0)
-				return;
-
-			var pds = new List<Product>();
-			var selectedItems = _directivesViewer.SelectedItems.ToArray();
-			foreach (var product in selectedItems)
-			{
-				pds.Add(product.GetCopyUnsaved());
-			}
-
-			if (pds.Count <= 0)
-				return;
-
-			//todo:(EvgeniiBabak) Нужен другой способ проверки сереализуемости объекта
-			using (var mem = new System.IO.MemoryStream())
-			{
-				var bin = new BinaryFormatter();
-				try
-				{
-					bin.Serialize(mem, pds);
-				}
-				catch (Exception ex)
-				{
-					MessageBox.Show("Объект не может быть сериализован. \n" + ex);
-					return;
-				}
-			}
-			// копирование в буфер обмена
-			IDataObject dataObj = new DataObject();
-			dataObj.SetData(format.Name, false, pds.ToArray());
-			Clipboard.SetDataObject(dataObj, false);
-
-			pds.Clear();
-		}
-		#endregion
-
-		#region private void GetFromClipboard()
-
-		private void GetFromClipboard()
-		{
-			try
-			{
-				var format = typeof(Product[]).FullName;
-
-				if (string.IsNullOrEmpty(format))
-					return;
-				if (!Clipboard.ContainsData(format))
-					return;
-				var documents = (Product[])Clipboard.GetData(format);
-				if (documents == null)
-					return;
-
-				var objectsToPaste = new List<Product>();
-				foreach (var product in documents)
-				{
-					_initialProductArray.Add(product);
-					objectsToPaste.Add(product);
-				}
-
-				if (objectsToPaste.Count > 0)
-				{
-					_directivesViewer.InsertItems(objectsToPaste.ToArray());
-
-					headerControl.ShowSaveButton = true;
-				}
-
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Error while inserting new object(s). \n" + ex);
-				headerControl.ShowSaveButton = false;
-				Program.Provider.Logger.Log(ex);
-			}
-			finally
-			{
-				Clipboard.Clear();
-			}
-		}
-		#endregion
+		
 	}
 }

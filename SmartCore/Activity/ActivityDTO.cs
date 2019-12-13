@@ -7,6 +7,7 @@ using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.Activity
 {
+	[Serializable]
 	public class ActivityDTO : BaseEntityObject
 	{
 		private Aircraft _aircraft;

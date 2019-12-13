@@ -19,6 +19,7 @@ namespace CAS.UI.UIControls.ForecastControls
 		public ForecastKitsListView()
 		{
 			InitializeComponent();
+			DisableContectMenu();
 		}
 		#endregion
 

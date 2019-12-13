@@ -14,6 +14,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		public QuatationSupplierPriceListView()
 		{
 			InitializeComponent();
+			DisableContectMenu();
 			OldColumnIndex = 2;
 			SortMultiplier = 1;
 		}

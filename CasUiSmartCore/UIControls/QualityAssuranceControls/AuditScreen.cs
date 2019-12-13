@@ -14,7 +14,6 @@ using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.Quality;
 using Telerik.WinControls.UI;
@@ -43,10 +42,8 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 		private WorkscopeReportBuilder _workscopeReportBuilder = new WorkscopeReportBuilder();
 #endif
 
-		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemOpen;
 		private RadMenuItem _toolStripMenuItemClose;
-		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuItem _toolStripMenuItemHighlight;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 		private List<RadMenuItem> _toolStripMenuItemsWorkPackages;
@@ -110,11 +107,9 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 
 			if (_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
 			if (_toolStripMenuItemHighlight != null) _toolStripMenuItemHighlight.Dispose();
-			if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
 			if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
 			if (_toolStripMenuItemClose != null) _toolStripMenuItemClose.Dispose();
-			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
-
+			
 			if (_directivesViewer != null) _directivesViewer.Dispose();
 
 			Dispose(true);
@@ -328,19 +323,11 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 
 		private void InitToolStripMenuItems()
 		{
-
-			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemClose = new RadMenuItem();
 			_toolStripMenuItemsWorkPackages = new List<RadMenuItem>();
-			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripMenuItemHighlight = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			_toolStripMenuItemOpen = new RadMenuItem();
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
 			// 
 			// toolStripMenuItemView
 			// 
@@ -352,16 +339,10 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 			_toolStripMenuItemClose.Text = "Close";
 			_toolStripMenuItemClose.Click += ToolStripMenuItemCloseClick;
 			// 
-			// toolStripMenuItemDelete
-			// 
-			_toolStripMenuItemDelete.Text = "Delete from Work package";
-			_toolStripMenuItemDelete.Click += ToolStripMenuItemDeleteClick;
-			// 
 			// toolStripMenuItemHighlight
 			// 
 			_toolStripMenuItemHighlight.Text = "Highlight";
 
-			_contextMenuStrip.Items.Clear();
 			_toolStripMenuItemsWorkPackages.Clear();
 			_toolStripMenuItemHighlight.Items.Clear();
 
@@ -374,13 +355,6 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 				item.Tag = highlight;
 				_toolStripMenuItemHighlight.Items.Add(item);
 			}
-			_contextMenuStrip.Items.AddRange(_toolStripMenuItemClose,
-													_toolStripMenuItemOpen,
-													_toolStripMenuItemDelete,
-													_toolStripSeparator1,
-													_toolStripMenuItemHighlight
-													);
-			
 		}
 		#endregion
 
@@ -418,15 +392,6 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 					InvokeDisplayerRequested(refE);
 				}
 			}
-		}
-
-		#endregion
-
-		#region private void toolStripMenuItemDelete_Click(object sender, EventArgs e)
-		//Удаляет рабочий пакет
-		private void ToolStripMenuItemDeleteClick(object sender, EventArgs e)
-		{
-		   ButtonDeleteClick();
 		}
 
 		#endregion
@@ -508,71 +473,6 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 
 		#endregion
 
-		#region private void ButtonDeleteClick()
-		private void ButtonDeleteClick()
-		{
-			if (_directivesViewer.SelectedItems == null) return;
-
-			List<IBaseEntityObject> selectedItems = new List<IBaseEntityObject>();
-			foreach (BaseEntityObject o in _directivesViewer.SelectedItems)
-			{
-				if (o is MaintenanceNextPerformance)
-				{
-					MaintenanceNextPerformance mnp = (MaintenanceNextPerformance) o;
-					selectedItems.AddRange(mnp.PerformanceGroup.Checks.ToArray());
-					continue;
-				}
-				if (o is NextPerformance)
-				{
-					selectedItems.Add(((NextPerformance)o).Parent); 
-					continue;
-				}
-
-				IBaseEntityObject parent;
-				if (o is AbstractPerformanceRecord)
-				{
-					parent = ((AbstractPerformanceRecord) o).Parent;
-				}
-				else parent = o;
-				
-				if (parent is Procedure)
-				{
-					Procedure d = (Procedure)parent;
-					List<DirectiveRecord> records = new List<DirectiveRecord>(d.PerformanceRecords.ToArray());
-					if (records.Any(r => r.DirectivePackageId == _currentDirective.ItemId))
-					{
-						MessageBox.Show("Can not delete directive " + d.ProcedureType + " from Audit" +
-										"\nthis directive is already closed by this Audit", "Error", MessageBoxButtons.OK);
-					}
-					else selectedItems.Add(parent);
-				}
-			}
-
-			if (selectedItems.Count == 0) return;
-
-			DialogResult confirmResult =
-				MessageBox.Show(
-					selectedItems.Count == 1
-						? "Do you really want to delete Item ?"
-						: "Do you really want to delete selected Items? ", "Confirm delete operation",
-					MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-
-			if (confirmResult == DialogResult.Yes)
-			{
-				_directivesViewer.radGridView1.BeginUpdate();
-				GlobalObjects.CasEnvironment.NewKeeper.Delete(selectedItems.OfType<BaseEntityObject>().ToList(), true);
-				_directivesViewer.radGridView1.EndUpdate();
-				AnimatedThreadWorker.RunWorkerAsync();
-			}
-			else
-			{
-				MessageBox.Show("Failed to delete directive: Parent container is invalid", "Operation failed",
-								MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		}
-
-		#endregion
-
 		#region private void ButtonEditClick(object sender, EventArgs e)
 
 		private void ButtonEditClick(object sender, EventArgs e)
@@ -589,12 +489,16 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 		{
 			_directivesViewer = new AuditView(_currentDirective);
 			_directivesViewer.TabIndex = 2;
-			_directivesViewer.CustomMenu = _contextMenuStrip;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
 			Controls.Add(_directivesViewer);
 			//события 
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+
+			_directivesViewer.AddMenuItems(_toolStripMenuItemClose,
+				_toolStripMenuItemOpen,
+				_toolStripSeparator1,
+				_toolStripMenuItemHighlight);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{

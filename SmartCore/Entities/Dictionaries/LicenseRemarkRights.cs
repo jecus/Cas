@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 using EntityCore.DTO.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
@@ -8,17 +8,18 @@ namespace SmartCore.Entities.Dictionaries
 	[Table("LicenseRemarkRights", "Dictionaries", "ItemId")]
 	[Dto(typeof(LicenseRemarkRightDTO))]
 	[Condition("IsDeleted", "0")]
+	[Serializable]
 	public class LicenseRemarkRights : AbstractDictionary
 	{
-        #region public LicenseRemarkRights()
+		#region public LicenseRemarkRights()
 
-        public LicenseRemarkRights()
-        {
-            ItemId = -1;
-            SmartCoreObjectType = SmartCoreType.LicenseRemarkRights;
-        }
+		public LicenseRemarkRights()
+		{
+			ItemId = -1;
+			SmartCoreObjectType = SmartCoreType.LicenseRemarkRights;
+		}
 
-        #endregion
+		#endregion
 
 		#region Implement of Dictionary
 

@@ -10,6 +10,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		public QuatationOrderListView()
 		{
 			InitializeComponent();
+			DisableContectMenu();
 		}
 
 

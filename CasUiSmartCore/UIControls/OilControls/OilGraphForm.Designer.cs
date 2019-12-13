@@ -28,8 +28,9 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			Telerik.WinControls.UI.CartesianArea cartesianArea1 = new Telerik.WinControls.UI.CartesianArea();
+			Telerik.WinControls.UI.CartesianArea cartesianArea2 = new Telerik.WinControls.UI.CartesianArea();
 			this.radChartView1 = new Telerik.WinControls.UI.RadChartView();
+			this.label2 = new System.Windows.Forms.Label();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.radRangeSelector1 = new Telerik.WinControls.UI.RadRangeSelector();
@@ -45,7 +46,8 @@
 			// 
 			// radChartView1
 			// 
-			this.radChartView1.AreaDesign = cartesianArea1;
+			this.radChartView1.AreaDesign = cartesianArea2;
+			this.radChartView1.Controls.Add(this.label2);
 			this.radChartView1.Controls.Add(this.flowLayoutPanel1);
 			this.radChartView1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.radChartView1.Location = new System.Drawing.Point(0, 0);
@@ -55,6 +57,16 @@
 			this.radChartView1.Size = new System.Drawing.Size(1111, 476);
 			this.radChartView1.TabIndex = 0;
 			this.radChartView1.ThemeName = "TelerikMetro";
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Font = new System.Drawing.Font("Segoe UI", 11F);
+			this.label2.Location = new System.Drawing.Point(3, 456);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(105, 20);
+			this.label2.TabIndex = 4;
+			this.label2.Text = "Rolle Average:";
 			// 
 			// flowLayoutPanel1
 			// 
@@ -101,6 +113,7 @@
 			this.Text = "Oil Chart";
 			((System.ComponentModel.ISupportInitialize)(this.radChartView1)).EndInit();
 			this.radChartView1.ResumeLayout(false);
+			this.radChartView1.PerformLayout();
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -117,5 +130,6 @@
 		private Telerik.WinControls.UI.RadRangeSelector radRangeSelector1;
 		private Telerik.WinControls.Themes.TelerikMetroTheme telerikMetroTheme1;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+		private System.Windows.Forms.Label label2;
 	}
 }

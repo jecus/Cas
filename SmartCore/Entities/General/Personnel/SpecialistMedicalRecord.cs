@@ -10,6 +10,7 @@ namespace SmartCore.Entities.General.Personnel
 	[Table("EmployeeMedicalRecors", "dbo", "ItemId")]
 	[Dto(typeof(SpecialistMedicalRecordDTO))]
 	[Condition("IsDeleted", "0")]
+	[Serializable]
 	public class SpecialistMedicalRecord : BaseEntityObject
 	{
 		private static Type _thisType;
@@ -67,8 +68,8 @@ namespace SmartCore.Entities.General.Personnel
 
 
 		public SpecialistMedicalRecord()
-        {
-            ItemId = -1;
+		{
+			ItemId = -1;
 			IssueDate = DateTime.Today;
 			SmartCoreObjectType = SmartCoreType.SpecialistMedicalRecord;
 		}
