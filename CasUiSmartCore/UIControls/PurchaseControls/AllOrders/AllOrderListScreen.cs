@@ -744,10 +744,12 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 
 			var records = GlobalObjects.CasEnvironment.Loader.GetObjectList<PurchaseRequestRecord>(new ICommonFilter[]
 				{new CommonFilter<int>(BasePackageRecord.ParentPackageIdProperty, _order.ItemId)});
-			var ids = records.Select(s => s.SupplierId).Distinct().ToArray();
+			var ids = records.Select(s => s.SupplierId).Distinct().ToList();
+			ids.Add(_order.ShipToId);
+			ids.Add(_order.ShipCompanyId);
 			var productIds = records.Select(s => s.PackageItemId).Distinct().ToArray();
 			var suppliers = GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[]
-				{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids),});
+				{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids.ToArray()),});
 			var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new ICommonFilter[]
 				{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, productIds),});
 
@@ -792,7 +794,8 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			}
 
 			_order.Supplier = records.FirstOrDefault(i => i.Supplier != null).Supplier;
-			_order.ShipCompany = GlobalObjects.CasEnvironment.NewLoader.GetObjectById<SupplierDTO, Supplier>(_order.ShipCompanyId);
+			_order.ShipCompany = suppliers.FirstOrDefault(i => i.ItemId == _order.ShipCompanyId);
+			_order.ShipTo = suppliers.FirstOrDefault(i => i.ItemId == _order.ShipToId);
 			var airportCode = GlobalObjects.CasEnvironment.NewLoader.GetObjectById<AirportCodeDTO, AirportsCodes>(_order.StationId);
 
 			if (personnel == null)
@@ -805,23 +808,19 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			var builder = new PurchaseOrderReportNewBuilder(GlobalObjects.CasEnvironment.Operators[0], records, _order,
 				department, personnel);
 
+			var doc = (PurchaseOrderReportNew)builder.GenerateReport();
 			var CrFormatTypeOptions = new PdfRtfWordFormatOptions();
-			var doc = (PurchaseOrderReportNew) builder.GenerateReport();
-			ExportOptions CrExportOptions;
-			var CrDiskFileDestinationOptions = new DiskFileDestinationOptions();
-			CrDiskFileDestinationOptions.DiskFileName = "C:\\SampleReport.pdf";
-			CrExportOptions = doc.ExportOptions;
+			var CrDiskFileDestinationOptions = new DiskFileDestinationOptions {DiskFileName = "C:\\SampleReport.pdf"};
+			var CrExportOptions = doc.ExportOptions;
 			{
 				CrExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
 				CrExportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
 				CrExportOptions.DestinationOptions = CrDiskFileDestinationOptions;
 				CrExportOptions.FormatOptions = CrFormatTypeOptions;
 			}
-			var stream = doc.ExportToStream(ExportFormatType.PortableDocFormat);
-
 			var sendMail = new MailSender(GlobalObjects.CasEnvironment.NewLoader);
-			sendMail.SendPurchaseEmail(records, "", personnel, stream);
-			sendMail.SendPurchaseToShipper("", _order.ShipCompany , personnel, airportCode.ShortName, stream);
+			sendMail.SendPurchaseEmail(records, "", personnel, doc.ExportToStream(ExportFormatType.PortableDocFormat));
+			sendMail.SendPurchaseToShipper("", _order.ShipCompany , personnel, airportCode.ShortName, doc.ExportToStream(ExportFormatType.PortableDocFormat));
 
 
 		}
