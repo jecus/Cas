@@ -46,7 +46,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private RadMenuItem _toolStripMenuItemCreatePurchase;
 		private RadMenuItem _toolStripMenuItemClose;
 		private RadMenuSeparatorItem _toolStripSeparator1;
-		private RadMenuItem _toolStripMenuItemSendMail;
 
 		private Filter filter = null;
 
@@ -195,7 +194,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private void InitToolStripMenuItems()
 		{
 			_toolStripMenuItemClose = new RadMenuItem();
-			_toolStripMenuItemSendMail = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			_toolStripMenuItemEdit = new RadMenuItem();
 			_toolStripMenuItemCreatePurchase = new RadMenuItem();
@@ -212,81 +210,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_toolStripMenuItemClose.Text = "Close";
 			_toolStripMenuItemClose.Click += ToolStripMenuItemCloseClick;
 			
-			_toolStripMenuItemSendMail.Text = "Send Mail";
-			_toolStripMenuItemSendMail.Click += ToolStripMenuItemSendMailClick;
 		}
 
 		#endregion
-
-		private void ToolStripMenuItemSendMailClick(object sender, EventArgs e)
-		{
-			if (_directivesViewer.SelectedItem == null)
-				return; ;
-			var personnel = GlobalObjects.CasEnvironment.Loader.GetObject<Specialist>(new CommonFilter<int>(BaseEntityObject.ItemIdProperty, GlobalObjects.CasEnvironment.IdentityUser.PersonnelId));
-
-			if (personnel == null)
-			{
-				MessageBox.Show($"Please attach personnel for user ({GlobalObjects.CasEnvironment.IdentityUser.ItemId})",
-					"Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-				return;
-			}
-
-			var res = MessageBox.Show("Do you really want sent Mail?", "Information", MessageBoxButtons.YesNo,
-				MessageBoxIcon.Information);
-
-			if (res == DialogResult.Yes)
-			{
-
-				var _quotation = _directivesViewer.SelectedItem;
-				var destinations = new List<BaseEntityObject>();
-				destinations.AddRange(GlobalObjects.AircraftsCore.GetAllAircrafts().ToArray());
-				destinations.AddRange(GlobalObjects.CasEnvironment.Stores.GetValidEntries());
-				destinations.AddRange(GlobalObjects.CasEnvironment.Hangars.GetValidEntries());
-
-				var records =
-					GlobalObjects.CasEnvironment.NewLoader
-						.GetObjectList<RequestForQuotationRecordDTO, RequestForQuotationRecord>(
-							new Filter("ParentPackageId", _quotation.ItemId));
-				var ids = records.SelectMany(i => i.SupplierPrice).Select(s => s.SupplierId).Distinct().ToArray();
-				var productIds = records.Select(s => s.PackageItemId).Distinct().ToArray();
-				var suppliers = GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[]
-					{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, ids),});
-				var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new ICommonFilter[]
-					{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, productIds),});
-
-
-				var parentInitialId = (int)GlobalObjects.CasEnvironment.Execute(
-						$@"select i.ItemId from RequestsForQuotation q
-			left join InitialOrders i on i.ItemID = q.ParentID where q.ItemId = {_quotation.ItemId}").Tables[0]
-					.Rows[0][0];
-				var _initialRecords =
-					GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(
-						new Filter("ParentPackageId", parentInitialId));
-
-				foreach (var record in records)
-				{
-					record.ParentInitialRecord = _initialRecords.FirstOrDefault(i => i.ProductId == record.PackageItemId);
-					if (record.ParentInitialRecord != null)
-						record.ParentInitialRecord.DestinationObject = destinations.FirstOrDefault(i =>
-							i.ItemId == record.ParentInitialRecord.DestinationObjectId &&
-							record.ParentInitialRecord.DestinationObjectType.ItemId == i.SmartCoreObjectType.ItemId);
-					record.Product = products.FirstOrDefault(i => i.ItemId == record.PackageItemId);
-					foreach (var price in record.SupplierPrice)
-					{
-						price.Supplier = suppliers.FirstOrDefault(i => i.ItemId == price.SupplierId);
-						price.Parent = record;
-					}
-				}
-
-				foreach (var g in records.SelectMany(i => i.SupplierPrice).GroupBy(i => i.Supplier))
-				{
-					var sendMail = new MailSender(GlobalObjects.CasEnvironment.NewLoader);
-					sendMail.SendQuotationEmail(g.Select(i => i.Parent).ToList(), "", personnel);
-				}
-
-					
-			}
-		}
 
 		#region private void ToolStripMenuItemCloseClick(object sender, EventArgs e)
 
@@ -376,9 +302,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_directivesViewer.AddMenuItems(_toolStripMenuItemCreatePurchase,
 				_toolStripMenuItemClose,
 				_toolStripSeparator1,
-				_toolStripMenuItemEdit,
-				new RadMenuSeparatorItem(),
-				_toolStripMenuItemSendMail);
+				_toolStripMenuItemEdit);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{
@@ -390,17 +314,14 @@ namespace CAS.UI.UIControls.PurchaseControls
 					if (wp.Status == WorkPackageStatus.Closed || wp.Status == WorkPackageStatus.Opened)
 					{
 						_toolStripMenuItemClose.Enabled = false;
-						_toolStripMenuItemSendMail.Enabled = true;
 					}
 					else if (wp.Status == WorkPackageStatus.Published)
 					{
 						_toolStripMenuItemClose.Enabled = true;
-						_toolStripMenuItemSendMail.Enabled = false;
 					}
 					else
 					{
 						_toolStripMenuItemClose.Enabled = true;
-						_toolStripMenuItemSendMail.Enabled = false;
 					}
 
 					_toolStripMenuItemCreatePurchase.Enabled = wp.Status == WorkPackageStatus.Opened;

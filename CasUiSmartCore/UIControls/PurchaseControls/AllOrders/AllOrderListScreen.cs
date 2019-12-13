@@ -6,11 +6,15 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
+using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.PurchaseControls.Initial;
 using CAS.UI.UIControls.PurchaseControls.Purchase;
+using CASReports.Builders;
+using CASReports.ReportTemplates;
 using CASTerms;
+using CrystalDecisions.Shared;
 using EntityCore.DTO.Dictionaries;
 using EntityCore.DTO.General;
 using SmartCore.Calculations;
@@ -19,7 +23,10 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
+using SmartCore.Entities.General.Personnel;
 using SmartCore.Filters;
+using SmartCore.Mail;
+using SmartCore.Packages;
 using SmartCore.Purchase;
 using SmartCore.Queries;
 using Telerik.WinControls.UI;
@@ -41,11 +48,9 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 		private AllOrderListView _directivesViewer;
 		
 		private RadMenuItem _toolStripMenuItemPublish;
-		private RadMenuItem _toolStripMenuItemCreateQuatation;
 		private RadMenuItem _toolStripMenuItemClose;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 		private RadMenuItem _toolStripMenuItemEdit;
-		private RadMenuItem _toolStripMenuItemCreatePurchase;
 		private RadMenuItem _toolStripMenuItemFreightQ;
 
 		private Filter initialfilter = null;
@@ -281,34 +286,13 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 						_toolStripMenuItemClose.Enabled = true;
 						_toolStripMenuItemPublish.Enabled = true;
 					}
-
-					_toolStripMenuItemCreateQuatation.Enabled = true;
-
-					if (wp is InitialOrder)
-					{
-						_toolStripMenuItemCreatePurchase.Enabled = false;
-						_toolStripMenuItemCreateQuatation.Enabled = true;
-					}
-					else if (wp is RequestForQuotation)
-					{
-						_toolStripMenuItemCreatePurchase.Enabled = true;
-						_toolStripMenuItemCreateQuatation.Enabled = false;
-					}
-					else
-					{
-						_toolStripMenuItemCreatePurchase.Enabled = false;
-						_toolStripMenuItemCreateQuatation.Enabled = false;
-					}
-
 					_toolStripMenuItemFreightQ.Enabled = wp is PurchaseOrder && wp.Status == WorkPackageStatus.Opened;
 				}
 
 				else
 				{
-					_toolStripMenuItemCreateQuatation.Enabled = false;
 					_toolStripMenuItemClose.Enabled = true;
 					_toolStripMenuItemPublish.Enabled = true;
-					_toolStripMenuItemCreatePurchase.Enabled = false;
 					_toolStripMenuItemFreightQ.Enabled = false;
 				}
 			};
@@ -323,8 +307,6 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 		private void InitToolStripMenuItems()
 		{
 			_toolStripMenuItemPublish = new RadMenuItem();
-			_toolStripMenuItemCreateQuatation = new RadMenuItem();
-			_toolStripMenuItemCreatePurchase = new RadMenuItem();
 			_toolStripMenuItemClose = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			_toolStripMenuItemEdit = new RadMenuItem();
@@ -337,16 +319,6 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			// 
 			_toolStripMenuItemPublish.Text = "Publish";
 			_toolStripMenuItemPublish.Click += _toolStripMenuItemPublish_Click;
-			// 
-			// toolStripMenuItemCreatePurchas
-			//
-			_toolStripMenuItemCreatePurchase.Text = "Create Purchase Order";
-			_toolStripMenuItemCreatePurchase.Click += _toolStripMenuItemCreatePurchase_Click; ;
-			// 
-			// toolStripMenuItemCreateQuatation
-			//
-			_toolStripMenuItemCreateQuatation.Text = "Create Quatation Order";
-			_toolStripMenuItemCreateQuatation.Click += _toolStripMenuItemCreateQuatation_Click;
 			// 
 			// toolStripMenuItemFreightQ
 			// 
@@ -362,15 +334,6 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 		private void _toolStripMenuItemFreightQ_Click(object sender, EventArgs e)
 		{
 			new QuotationFreightOrderForm(_directivesViewer.SelectedItem as PurchaseOrder).ShowDialog();
-		}
-
-		#endregion
-
-		#region private void _toolStripMenuItemCreatePurchase_Click(object sender, EventArgs e)
-
-		private void _toolStripMenuItemCreatePurchase_Click(object sender, EventArgs e)
-		{
-			
 		}
 
 		#endregion
@@ -420,11 +383,6 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 
 		#endregion
 
-		private void _toolStripMenuItemCreateQuatation_Click(object sender, EventArgs e)
-		{
-
-		}
-
 		#region private void _toolStripMenuItemPublish_Click(object sender, EventArgs e)
 
 		private void _toolStripMenuItemPublish_Click(object sender, EventArgs e)
@@ -455,6 +413,8 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 						rfq.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
 						rfq.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
 						GlobalObjects.CasEnvironment.NewKeeper.Save(rfq as BaseEntityObject);
+
+						SendQuotationOrder(rfq as RequestForQuotation);
 					}
 				}
 				AnimatedThreadWorker.RunWorkerAsync();
@@ -525,6 +485,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 					purch.PublishedByUser = GlobalObjects.CasEnvironment.IdentityUser.ToString();
 					purch.PublishedById = GlobalObjects.CasEnvironment.IdentityUser.ItemId;
 					GlobalObjects.CasEnvironment.NewKeeper.Save(purch);
+					SendPurchaseOrder(purch);
 				//}
 				AnimatedThreadWorker.RunWorkerAsync();
 			}
@@ -728,7 +689,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 		}
 		#endregion
 
-		#endregion
+		#region private void ButtonFilterClick(object sender, EventArgs e)
 
 		private void ButtonFilterClick(object sender, EventArgs e)
 		{
@@ -762,10 +723,174 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			AnimatedThreadWorker.RunWorkerAsync();
 		}
 
-		private void CheckBoxAll_CheckedChanged(object sender, System.EventArgs e)
+		#endregion
+
+		#region private void CheckBoxAll_CheckedChanged(object sender, System.EventArgs e)
+
+		private void CheckBoxAll_CheckedChanged(object sender, EventArgs e)
 		{
 			checkBoxAll.Enabled = false;
 			AnimatedThreadWorker.RunWorkerAsync();
 		}
+
+		#endregion
+
+		#region Mails
+
+		private void SendPurchaseOrder(PurchaseOrder _order)
+		{
+			//var res = MessageBox.Show("Do you really want sent Mail?", "Information", MessageBoxButtons.YesNo,
+			//	MessageBoxIcon.Information);
+
+			var records = GlobalObjects.CasEnvironment.Loader.GetObjectList<PurchaseRequestRecord>(new ICommonFilter[]
+				{new CommonFilter<int>(BasePackageRecord.ParentPackageIdProperty, _order.ItemId)});
+			var ids = records.Select(s => s.SupplierId).Distinct().ToArray();
+			var productIds = records.Select(s => s.PackageItemId).Distinct().ToArray();
+			var suppliers = GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[]
+				{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, FilterType.In, ids),});
+			var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new ICommonFilter[]
+				{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, productIds),});
+
+			var department =
+				GlobalObjects.CasEnvironment.NewLoader.GetObject<DepartmentDTO, Department>(new Filter("FullName",
+					"Logistics & Stores Department "));
+
+			var parentInitialId = (int) GlobalObjects.CasEnvironment.Execute($@"select i.ItemId from PurchaseOrders p
+			left join RequestsForQuotation q on q.ItemID = p.ParentID
+			left join InitialOrders i on i.ItemID = q.ParentID where p.ItemId = {_order.ItemId}").Tables[0].Rows[0][0];
+			var initialRecords =
+				GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(
+					new Filter("ParentPackageId", parentInitialId));
+			var initial =
+				GlobalObjects.CasEnvironment.NewLoader.GetObject<InitialOrderDTO, InitialOrder>(new Filter("ItemId",
+					parentInitialId));
+
+			var publisherId = GlobalObjects.CasEnvironment.ApiProvider
+				                  .GetByIdAsync(_directivesViewer.SelectedItem.PublishedById)?.PersonnelId ?? -1;
+
+			var personnel =
+				GlobalObjects.CasEnvironment.Loader.GetObject<Specialist>(
+					new CommonFilter<int>(BaseEntityObject.ItemIdProperty, publisherId));
+
+			var destinations = new List<BaseEntityObject>();
+			destinations.AddRange(GlobalObjects.AircraftsCore.GetAllAircrafts().ToArray());
+			destinations.AddRange(GlobalObjects.CasEnvironment.Stores.GetValidEntries());
+			destinations.AddRange(GlobalObjects.CasEnvironment.Hangars.GetValidEntries());
+
+			foreach (var record in records)
+			{
+				record.ParentInitialRecord = initialRecords.FirstOrDefault(i => i.ProductId == record.PackageItemId);
+				if (record.ParentInitialRecord != null)
+					record.ParentInitialRecord.ParentPackage = initial;
+				record.Product = products.FirstOrDefault(i => i.ItemId == record.PackageItemId);
+				record.Supplier = suppliers.FirstOrDefault(i => i.ItemId == record.SupplierId);
+
+				if (record.ParentInitialRecord != null)
+					record.ParentInitialRecord.DestinationObject = destinations.FirstOrDefault(i =>
+						i.ItemId == record.ParentInitialRecord.DestinationObjectId &&
+						record.ParentInitialRecord.DestinationObjectType.ItemId == i.SmartCoreObjectType.ItemId);
+			}
+
+			_order.Supplier = records.FirstOrDefault(i => i.Supplier != null).Supplier;
+			_order.ShipCompany = GlobalObjects.CasEnvironment.NewLoader.GetObjectById<SupplierDTO, Supplier>(_order.ShipCompanyId);
+			var airportCode = GlobalObjects.CasEnvironment.NewLoader.GetObjectById<AirportCodeDTO, AirportsCodes>(_order.StationId);
+
+			if (personnel == null)
+			{
+				MessageBox.Show($"Please attach personnel for user ({_directivesViewer.SelectedItem.PublishedByUser})",
+					"Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+				return;
+			}
+
+			var builder = new PurchaseOrderReportNewBuilder(GlobalObjects.CasEnvironment.Operators[0], records, _order,
+				department, personnel);
+
+			var CrFormatTypeOptions = new PdfRtfWordFormatOptions();
+			var doc = (PurchaseOrderReportNew) builder.GenerateReport();
+			ExportOptions CrExportOptions;
+			var CrDiskFileDestinationOptions = new DiskFileDestinationOptions();
+			CrDiskFileDestinationOptions.DiskFileName = "C:\\SampleReport.pdf";
+			CrExportOptions = doc.ExportOptions;
+			{
+				CrExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
+				CrExportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
+				CrExportOptions.DestinationOptions = CrDiskFileDestinationOptions;
+				CrExportOptions.FormatOptions = CrFormatTypeOptions;
+			}
+			var stream = doc.ExportToStream(ExportFormatType.PortableDocFormat);
+
+			var sendMail = new MailSender(GlobalObjects.CasEnvironment.NewLoader);
+			sendMail.SendPurchaseEmail(records, "", personnel, stream);
+			sendMail.SendPurchaseToShipper("", _order.ShipCompany , personnel, airportCode.ShortName, stream);
+
+
+		}
+
+		private void SendQuotationOrder(RequestForQuotation _quotation)
+		{
+			var personnel = GlobalObjects.CasEnvironment.Loader.GetObject<Specialist>(
+				new CommonFilter<int>(BaseEntityObject.ItemIdProperty,
+					GlobalObjects.CasEnvironment.IdentityUser.PersonnelId));
+
+			if (personnel == null)
+			{
+				MessageBox.Show(
+					$"Please attach personnel for user ({GlobalObjects.CasEnvironment.IdentityUser.ItemId})",
+					"Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+				return;
+			}
+
+			var destinations = new List<BaseEntityObject>();
+			destinations.AddRange(GlobalObjects.AircraftsCore.GetAllAircrafts().ToArray());
+			destinations.AddRange(GlobalObjects.CasEnvironment.Stores.GetValidEntries());
+			destinations.AddRange(GlobalObjects.CasEnvironment.Hangars.GetValidEntries());
+
+			var records =
+				GlobalObjects.CasEnvironment.NewLoader
+					.GetObjectList<RequestForQuotationRecordDTO, RequestForQuotationRecord>(
+						new Filter("ParentPackageId", _quotation.ItemId));
+			var ids = records.SelectMany(i => i.SupplierPrice).Select(s => s.SupplierId).Distinct().ToArray();
+			var productIds = records.Select(s => s.PackageItemId).Distinct().ToArray();
+			var suppliers = GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[]
+				{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, ids),});
+			var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new ICommonFilter[]
+				{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, productIds),});
+
+
+			var parentInitialId = (int) GlobalObjects.CasEnvironment.Execute(
+					$@"select i.ItemId from RequestsForQuotation q
+			left join InitialOrders i on i.ItemID = q.ParentID where q.ItemId = {_quotation.ItemId}").Tables[0]
+				.Rows[0][0];
+			var _initialRecords =
+				GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(
+					new Filter("ParentPackageId", parentInitialId));
+
+			foreach (var record in records)
+			{
+				record.ParentInitialRecord = _initialRecords.FirstOrDefault(i => i.ProductId == record.PackageItemId);
+				if (record.ParentInitialRecord != null)
+					record.ParentInitialRecord.DestinationObject = destinations.FirstOrDefault(i =>
+						i.ItemId == record.ParentInitialRecord.DestinationObjectId &&
+						record.ParentInitialRecord.DestinationObjectType.ItemId == i.SmartCoreObjectType.ItemId);
+				record.Product = products.FirstOrDefault(i => i.ItemId == record.PackageItemId);
+				foreach (var price in record.SupplierPrice)
+				{
+					price.Supplier = suppliers.FirstOrDefault(i => i.ItemId == price.SupplierId);
+					price.Parent = record;
+				}
+			}
+
+			foreach (var g in records.SelectMany(i => i.SupplierPrice).GroupBy(i => i.Supplier))
+			{
+				var sendMail = new MailSender(GlobalObjects.CasEnvironment.NewLoader);
+				sendMail.SendQuotationEmail(g.Select(i => i.Parent).ToList(), "", personnel);
+			}
+
+		}
+
+		#endregion
+
+
+		#endregion
 	}
 }
