@@ -367,7 +367,14 @@ namespace CAS.UI.UIControls.ForecastControls
 			// toolStripMenuItemComposeWorkPackage
 			//
 			_toolStripMenuItemQuotations.Text = "Add to Quotation Order";
-
+			
+			_contextMenuStrip.Items.Clear();
+			
+			_contextMenuStrip.Items.AddRange(
+                _toolStripMenuItemComposeQuotation,
+                _toolStripMenuItemQuotations,
+                _toolStripMenuItemOpen
+            );
         }
 
 	    #endregion
