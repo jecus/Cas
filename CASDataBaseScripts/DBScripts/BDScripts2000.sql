@@ -432,3 +432,14 @@ if exists ( select  *
 begin
 	drop table Proxy.Aircrafts
 end
+
+-------------------------------------------------------------------------------
+
+if not exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('dbo.PurchaseRequestsRecords')
+					and c.name = 'AdditionalInformationJSON' ) 
+
+	alter table dbo.PurchaseRequestsRecords
+	add AdditionalInformationJSON nvarchar(MAX)
+GO

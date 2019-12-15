@@ -54,6 +54,8 @@ namespace EntityCore.DTO.General
 		[Column("Processed")]
 		public bool? Processed { get; set; }
 
+		[Column("AdditionalInformationJSON")]
+		public string AdditionalInformationJSON { get; set; }
 
 		[Child(FilterType.Equal, "ParentTypeId", 1860)]
 		public ICollection<ItemFileLinkDTO> Files { get; set; }

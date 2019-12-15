@@ -4523,6 +4523,7 @@ namespace SmartCore.DtoHelper
 				Cost = purchaserec.Cost,
 				CostCondition = (short?)purchaserec.CostCondition,
 				Processed = purchaserec.Processed,
+				AdditionalInformationJSON = purchaserec.AdditionalInformationJSON,
 				Files = purchaserec.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>
 			};
 		}
@@ -4546,6 +4547,7 @@ namespace SmartCore.DtoHelper
 				Cost = purchaserecdto.Cost ?? default(double),
 				CostCondition = purchaserecdto.CostCondition.HasValue ? (ComponentStatus)purchaserecdto.CostCondition.Value : ComponentStatus.Unknown,
 				Processed = purchaserecdto.Processed ?? default(bool),
+				AdditionalInformationJSON = purchaserecdto.AdditionalInformationJSON
 			};
 
 			if (purchaserecdto.Files != null)
