@@ -49,7 +49,7 @@ namespace SmartCore.Mail
 					From = new MailAddress(_settings.Mail),
 					To =
 					{
-						new MailAddress("evgenii.babak@gmail.com")
+						new MailAddress("mgladilov@mail.ru")
 					},
 					Subject = subject,
 					IsBodyHtml = true,
@@ -133,7 +133,7 @@ namespace SmartCore.Mail
 			{
 				["{Personnel}"] = pers,
 				["{Specialization}"] = specialization,
-				["{Shipper}"] = shipper.ShortName,
+				["{Shipper}"] = string.IsNullOrEmpty(shipper.ShortName) ? shipper.Name : shipper.ShortName,
 				["{Station}"] = station
 			};
 

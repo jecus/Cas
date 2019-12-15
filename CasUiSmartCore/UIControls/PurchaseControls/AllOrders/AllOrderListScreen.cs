@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
@@ -56,6 +57,9 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 		private Filter initialfilter = null;
 		private Filter quotationfilter = null;
 		private Filter purchasefilter = null;
+
+		string pattern = @"^(?("")(""[^""]+?""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+		                 @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9]{2,17}))$";
 
 		#endregion
 
@@ -889,6 +893,10 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 
 		#endregion
 
+		private bool CheckEmail(string email)
+		{
+			return Regex.IsMatch(email, pattern, RegexOptions.IgnoreCase);
+		}
 
 		#endregion
 	}
