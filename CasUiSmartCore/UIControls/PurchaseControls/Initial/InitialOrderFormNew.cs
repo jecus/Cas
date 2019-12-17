@@ -27,16 +27,13 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private List<InitialOrderRecord> _addedInitialOrderRecords = new List<InitialOrderRecord>();
 		private List<InitialOrderRecord> _deleteExistInitialOrderRecords = new List<InitialOrderRecord>();
-
 		private readonly InitialOrder _order;
 		private List<BaseEntityObject> destinations = new List<BaseEntityObject>();
 		private DefferedCategoriesCollection _defferedCategories = new DefferedCategoriesCollection();
-
 		private readonly ProductPartNumberFilter _partNumberFilter = new ProductPartNumberFilter();
 		private readonly ProductCollectionFilter _collectionFilter = new ProductCollectionFilter();
 		private readonly ProductStandartFilter _standartFilter = new ProductStandartFilter();
 		private List<Product> _currentAircraftKits = new List<Product>();
-		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
 		private List<AirportsCodes> _airportsCodes = new List<AirportsCodes>();
 
 		#endregion
@@ -73,7 +70,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			_collectionFilter.Filters.Add(_partNumberFilter);
 			_collectionFilter.Filters.Add(_standartFilter);
-			DocumentControls.AddRange(new[] { documentControl1, documentControl2, documentControl3, documentControl4, documentControl5, documentControl6, documentControl7, documentControl8, documentControl9, documentControl10 });
+			
 			Task.Run(() => DoWork())
 				.ContinueWith(task => Completed(), TaskScheduler.FromCurrentSynchronizationContext());
 		}
@@ -148,46 +145,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			comboBoxStation.Items.Clear();
 			comboBoxStation.Items.AddRange(_airportsCodes.ToArray());
-
-			foreach (var control in DocumentControls)
-				control.Added += DocumentControl1_Added;
-
-			for (int i = 0; i < _order.ClosingDocument.Count; i++)
-			{
-				var control = DocumentControls[i];
-				control.CurrentDocument = _order.ClosingDocument[i];
-			}
-
-		}
-
-		#endregion
-
-		#region private void DocumentControl1_Added(object sender, EventArgs e)
-
-		private void DocumentControl1_Added(object sender, EventArgs e)
-		{
-			var control = sender as DocumentControl;
-			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Work package") as DocumentSubType;
-			var newDocument = new Document
-			{
-				Parent = _order,
-				ParentId = _order.ItemId,
-				ParentTypeId = _order.SmartCoreObjectType.ItemId,
-				DocType = DocumentType.TechnicalRecords,
-				DocumentSubType = docSubType,
-				IsClosed = true,
-				ContractNumber = $"{_order.Number}",
-				Description = _order.Title,
-				ParentAircraftId = _order.ParentId
-			};
-
-			var form = new DocumentForm(newDocument, false);
-			if (form.ShowDialog() == DialogResult.OK)
-			{
-				_order.ClosingDocument.Add(newDocument);
-				control.CurrentDocument = newDocument;
-
-			}
 		}
 
 		#endregion

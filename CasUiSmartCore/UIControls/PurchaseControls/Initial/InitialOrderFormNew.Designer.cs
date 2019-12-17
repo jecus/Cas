@@ -87,16 +87,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
 			this.button2 = new System.Windows.Forms.Button();
 			this.buttonAddProd = new System.Windows.Forms.Button();
-			this.documentControl2 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl1 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl3 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl4 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl5 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl6 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl7 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl8 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl9 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl10 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.groupBox2.SuspendLayout();
@@ -222,7 +212,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.groupBox1.Controls.Add(this.checkBoxOverhaul);
 			this.groupBox1.Controls.Add(this.checkBoxServiceable);
 			this.groupBox1.Controls.Add(this.checkBoxNew);
-			this.groupBox1.Location = new System.Drawing.Point(717, 76);
+			this.groupBox1.Location = new System.Drawing.Point(982, 69);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(293, 337);
 			this.groupBox1.TabIndex = 290;
@@ -529,7 +519,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.groupBox2.Controls.Add(this.labelAuthor);
 			this.groupBox2.Controls.Add(this.textBoxTitle);
 			this.groupBox2.Controls.Add(this.labelQOTitle);
-			this.groupBox2.Location = new System.Drawing.Point(717, 419);
+			this.groupBox2.Location = new System.Drawing.Point(982, 412);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(293, 319);
 			this.groupBox2.TabIndex = 291;
@@ -896,32 +886,38 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// _formListViewInitialItems
 			// 
+			this._formListViewInitialItems.ConfigurePaste = null;
 			this._formListViewInitialItems.Displayer = null;
 			this._formListViewInitialItems.DisplayerText = null;
+			this._formListViewInitialItems.EnableCustomSorting = true;
 			this._formListViewInitialItems.Entity = null;
 			this._formListViewInitialItems.IgnoreEnterPress = false;
 			this._formListViewInitialItems.Location = new System.Drawing.Point(23, 443);
 			this._formListViewInitialItems.MenuOpeningAction = null;
 			this._formListViewInitialItems.Name = "_formListViewInitialItems";
 			this._formListViewInitialItems.OldColumnIndex = 0;
+			this._formListViewInitialItems.PasteComplete = null;
 			this._formListViewInitialItems.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this._formListViewInitialItems.Size = new System.Drawing.Size(687, 304);
+			this._formListViewInitialItems.Size = new System.Drawing.Size(942, 304);
 			this._formListViewInitialItems.SortMultiplier = 0;
 			this._formListViewInitialItems.TabIndex = 294;
 			this._formListViewInitialItems.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.listViewInitialItems_SelectedItemsChanged);
 			// 
 			// listViewKits
 			// 
+			this.listViewKits.ConfigurePaste = null;
 			this.listViewKits.Displayer = null;
 			this.listViewKits.DisplayerText = null;
+			this.listViewKits.EnableCustomSorting = true;
 			this.listViewKits.Entity = null;
 			this.listViewKits.IgnoreEnterPress = false;
 			this.listViewKits.Location = new System.Drawing.Point(23, 91);
 			this.listViewKits.MenuOpeningAction = null;
 			this.listViewKits.Name = "listViewKits";
 			this.listViewKits.OldColumnIndex = 2;
+			this.listViewKits.PasteComplete = null;
 			this.listViewKits.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewKits.Size = new System.Drawing.Size(687, 315);
+			this.listViewKits.Size = new System.Drawing.Size(942, 315);
 			this.listViewKits.SortMultiplier = 1;
 			this.listViewKits.TabIndex = 68;
 			// 
@@ -942,7 +938,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button2.Location = new System.Drawing.Point(635, 52);
+			this.button2.Location = new System.Drawing.Point(890, 53);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(75, 33);
 			this.button2.TabIndex = 303;
@@ -961,101 +957,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.buttonAddProd.Text = "Add New Product";
 			this.buttonAddProd.Click += new System.EventHandler(this.ButtonAddProduct_Click);
 			// 
-			// documentControl2
-			// 
-			this.documentControl2.CurrentDocument = null;
-			this.documentControl2.Location = new System.Drawing.Point(1016, 76);
-			this.documentControl2.Name = "documentControl2";
-			this.documentControl2.Size = new System.Drawing.Size(268, 41);
-			this.documentControl2.TabIndex = 306;
-			// 
-			// documentControl1
-			// 
-			this.documentControl1.CurrentDocument = null;
-			this.documentControl1.Location = new System.Drawing.Point(1016, 29);
-			this.documentControl1.Name = "documentControl1";
-			this.documentControl1.Size = new System.Drawing.Size(268, 41);
-			this.documentControl1.TabIndex = 305;
-			// 
-			// documentControl3
-			// 
-			this.documentControl3.CurrentDocument = null;
-			this.documentControl3.Location = new System.Drawing.Point(1016, 123);
-			this.documentControl3.Name = "documentControl3";
-			this.documentControl3.Size = new System.Drawing.Size(268, 41);
-			this.documentControl3.TabIndex = 307;
-			// 
-			// documentControl4
-			// 
-			this.documentControl4.CurrentDocument = null;
-			this.documentControl4.Location = new System.Drawing.Point(1016, 170);
-			this.documentControl4.Name = "documentControl4";
-			this.documentControl4.Size = new System.Drawing.Size(268, 41);
-			this.documentControl4.TabIndex = 308;
-			// 
-			// documentControl5
-			// 
-			this.documentControl5.CurrentDocument = null;
-			this.documentControl5.Location = new System.Drawing.Point(1016, 217);
-			this.documentControl5.Name = "documentControl5";
-			this.documentControl5.Size = new System.Drawing.Size(268, 41);
-			this.documentControl5.TabIndex = 309;
-			// 
-			// documentControl6
-			// 
-			this.documentControl6.CurrentDocument = null;
-			this.documentControl6.Location = new System.Drawing.Point(1016, 264);
-			this.documentControl6.Name = "documentControl6";
-			this.documentControl6.Size = new System.Drawing.Size(268, 41);
-			this.documentControl6.TabIndex = 310;
-			// 
-			// documentControl7
-			// 
-			this.documentControl7.CurrentDocument = null;
-			this.documentControl7.Location = new System.Drawing.Point(1016, 311);
-			this.documentControl7.Name = "documentControl7";
-			this.documentControl7.Size = new System.Drawing.Size(268, 41);
-			this.documentControl7.TabIndex = 311;
-			// 
-			// documentControl8
-			// 
-			this.documentControl8.CurrentDocument = null;
-			this.documentControl8.Location = new System.Drawing.Point(1016, 358);
-			this.documentControl8.Name = "documentControl8";
-			this.documentControl8.Size = new System.Drawing.Size(268, 41);
-			this.documentControl8.TabIndex = 312;
-			// 
-			// documentControl9
-			// 
-			this.documentControl9.CurrentDocument = null;
-			this.documentControl9.Location = new System.Drawing.Point(1016, 405);
-			this.documentControl9.Name = "documentControl9";
-			this.documentControl9.Size = new System.Drawing.Size(268, 41);
-			this.documentControl9.TabIndex = 313;
-			// 
-			// documentControl10
-			// 
-			this.documentControl10.CurrentDocument = null;
-			this.documentControl10.Location = new System.Drawing.Point(1016, 452);
-			this.documentControl10.Name = "documentControl10";
-			this.documentControl10.Size = new System.Drawing.Size(268, 41);
-			this.documentControl10.TabIndex = 314;
-			// 
 			// InitialOrderFormNew
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1288, 792);
-			this.Controls.Add(this.documentControl10);
-			this.Controls.Add(this.documentControl9);
-			this.Controls.Add(this.documentControl8);
-			this.Controls.Add(this.documentControl7);
-			this.Controls.Add(this.documentControl6);
-			this.Controls.Add(this.documentControl5);
-			this.Controls.Add(this.documentControl4);
-			this.Controls.Add(this.documentControl3);
-			this.Controls.Add(this.documentControl1);
-			this.Controls.Add(this.documentControl2);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.buttonAddProd);
 			this.Controls.Add(this.metroProgressSpinner1);
@@ -1135,16 +1041,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private MetroProgressSpinner metroProgressSpinner1;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button buttonAddProd;
-		private DocumentationControls.DocumentControl documentControl2;
-		private DocumentationControls.DocumentControl documentControl1;
-		private DocumentationControls.DocumentControl documentControl3;
-		private DocumentationControls.DocumentControl documentControl4;
-		private DocumentationControls.DocumentControl documentControl5;
-		private DocumentationControls.DocumentControl documentControl6;
-		private DocumentationControls.DocumentControl documentControl7;
-		private DocumentationControls.DocumentControl documentControl8;
-		private DocumentationControls.DocumentControl documentControl9;
-		private DocumentationControls.DocumentControl documentControl10;
 		private MetroLabel metroLabelStation;
 		private System.Windows.Forms.ComboBox comboBoxStation;
 		private MetroTextBox metroTextBoxReference;
