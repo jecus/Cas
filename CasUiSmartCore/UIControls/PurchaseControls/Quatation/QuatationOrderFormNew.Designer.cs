@@ -89,7 +89,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.buttonAddQualificationNumber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonAddQualificationNumber.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonAddQualificationNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonAddQualificationNumber.Location = new System.Drawing.Point(537, 733);
+			this.buttonAddQualificationNumber.Location = new System.Drawing.Point(537, 732);
 			this.buttonAddQualificationNumber.Name = "buttonAddQualificationNumber";
 			this.buttonAddQualificationNumber.Size = new System.Drawing.Size(95, 33);
 			this.buttonAddQualificationNumber.TabIndex = 318;
@@ -102,7 +102,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button3.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button3.Location = new System.Drawing.Point(638, 733);
+			this.button3.Location = new System.Drawing.Point(638, 732);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(125, 33);
 			this.button3.TabIndex = 269;

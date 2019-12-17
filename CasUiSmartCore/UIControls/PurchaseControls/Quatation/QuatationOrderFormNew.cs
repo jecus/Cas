@@ -324,7 +324,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private void listViewInitialItems_SelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
 		{
 			if (listViewInitialItems.SelectedItem == null) return;
-
+			button2.Enabled = listViewInitialItems.SelectedItem is RequestForQuotationRecord;
 			if (!(listViewInitialItems.SelectedItem is RequestForQuotationRecord))
 				return;
 		}

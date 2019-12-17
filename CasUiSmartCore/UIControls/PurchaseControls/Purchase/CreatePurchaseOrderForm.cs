@@ -146,7 +146,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 					var highest = record.SupplierPrice.OrderBy(i => i.CostRepair).LastOrDefault();
 					if (highest != null)
 						highest.IsHighestCostRepair = true;
-
 				}
 
 				if (record.SupplierPrice.Any(i => i.CostServiceable != record?.SupplierPrice?.FirstOrDefault()?.CostServiceable))
@@ -157,6 +156,36 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 					var highest = record.SupplierPrice.OrderBy(i => i.CostServiceable).LastOrDefault();
 					if (highest != null)
 						highest.IsHighestCostServ = true;
+				}
+
+				if (record.SupplierPrice.Any(i => i.CostTest != record?.SupplierPrice?.FirstOrDefault()?.CostTest))
+				{
+					var lowest = record.SupplierPrice.OrderBy(i => i.CostTest).FirstOrDefault();
+					if (lowest != null)
+						lowest.IsLowestCostTest = true;
+					var highest = record.SupplierPrice.OrderBy(i => i.CostTest).LastOrDefault();
+					if (highest != null)
+						highest.IsHighestCostTest = true;
+				}
+
+				if (record.SupplierPrice.Any(i => i.CostInspect != record?.SupplierPrice?.FirstOrDefault()?.CostInspect))
+				{
+					var lowest = record.SupplierPrice.OrderBy(i => i.CostInspect).FirstOrDefault();
+					if (lowest != null)
+						lowest.IsLowestCostInspect = true;
+					var highest = record.SupplierPrice.OrderBy(i => i.CostInspect).LastOrDefault();
+					if (highest != null)
+						highest.IsHighestCostInspect = true;
+				}
+
+				if (record.SupplierPrice.Any(i => i.CostModification != record?.SupplierPrice?.FirstOrDefault()?.CostModification))
+				{
+					var lowest = record.SupplierPrice.OrderBy(i => i.CostModification).FirstOrDefault();
+					if (lowest != null)
+						lowest.IsLowestCostMod = true;
+					var highest = record.SupplierPrice.OrderBy(i => i.CostModification).LastOrDefault();
+					if (highest != null)
+						highest.IsHighestCostMod = true;
 				}
 			}
 			
