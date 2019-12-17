@@ -239,7 +239,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			foreach (var price in quatationSupplierPriceListView1.SelectedItems.ToArray())
 			{
 				var newRequest = new PurchaseRequestRecord(-1, price.Parent.Product, 1);
-				newRequest.CostCondition = price.Parent.CostCondition;
+				newRequest.CostCondition = (ComponentStatus)comboBoxCondition.SelectedItem;
 				newRequest.Product = price.Parent.Product;
 				newRequest.Supplier = price.Supplier;
 				newRequest.Quantity = 1;
@@ -249,8 +249,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				newRequest.Currency = price.СurrencyNew;
 
 
-				if (_addedRecord.Any(i =>
-					i.Product.ItemId == price.Parent.Product.ItemId && i.SupplierId == price.SupplierId))
+				if (_addedRecord.Any(i => i.Product.ItemId == price.Parent.Product.ItemId 
+				                          && i.CostCondition == (ComponentStatus)comboBoxCondition.SelectedItem
+										   && i.SupplierId == price.SupplierId))
 				{
 					MessageBox.Show("Supplier price for product alredy added!", (string)new GlobalTermsProvider()["SystemName"],
 						MessageBoxButtons.OK,
@@ -416,7 +417,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			if (purchaseRecordListView1.SelectedItem == null) return;
 
 			var res = _addedRecord.Where(i =>
-				i.Product.ItemId == purchaseRecordListView1.SelectedItem.Product.ItemId && i.Price != purchaseRecordListView1.SelectedItem.Price).Select(i => i.Quantity).Sum();
+				i.Product.ItemId == purchaseRecordListView1.SelectedItem.Product.ItemId && i.Price != purchaseRecordListView1.SelectedItem.Price)
+				.Select(i => i.Quantity)
+				.Sum();
 
 			if (purchaseRecordListView1.SelectedItem.Price.Parent.Quantity < (double) numericUpDownQuantity.Value + res)
 			{
