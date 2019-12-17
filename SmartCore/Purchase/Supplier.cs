@@ -33,6 +33,38 @@ namespace SmartCore.Purchase
 		public String Name { get; set; }
 		#endregion
 
+		#region public override GoodsClass GoodsClass { get; set; }
+
+		private SupplierClass _supplierClass;
+
+		[TableColumn("SupplierClassId")]
+		[ListViewData(80, "SupplierType")]
+		[Filter("SupplierType:")]
+		[FormControl(250, "Class:",
+			TreeDictRootNodes = new[]
+			{
+				"Customer", "Vendor","Manufacturer"
+			})]
+		public SupplierClass SupplierClass
+		{
+			get { return _supplierClass ?? (_supplierClass = SupplierClass.Unknown); }
+			set
+			{
+				if (_supplierClass != value)
+				{
+					_supplierClass = value;
+					OnPropertyChanged("SupplierClass");
+				}
+			}
+		}
+
+		public static PropertyInfo SupplierClassProperty
+		{
+			get { return GetCurrentType().GetProperty("SupplierClass"); }
+		}
+
+		#endregion
+
 		[TableColumn("AirCode")]
 		[ListViewData(150, "AirCode")]
 		public String AirCode { get; set; }
@@ -116,39 +148,6 @@ namespace SmartCore.Purchase
 		[Filter("Products:")]
 		public String Products { get; set; }
 		#endregion
-
-		#region public override GoodsClass GoodsClass { get; set; }
-
-		private SupplierClass _supplierClass;
-
-		[TableColumn("SupplierClassId")]
-		[ListViewData(80, "SupplierType")]
-		[Filter("SupplierType:")]
-		[FormControl(250, "Class:",
-					 TreeDictRootNodes = new[]
-					 {
-						"Customer", "Vendor","Manufacturer"
-					 })]
-		public SupplierClass SupplierClass
-		{
-			get { return _supplierClass ?? (_supplierClass = SupplierClass.Unknown); }
-			set
-			{
-				if (_supplierClass != value)
-				{
-					_supplierClass = value;
-					OnPropertyChanged("SupplierClass");
-				}
-			}
-		}
-
-		public static PropertyInfo SupplierClassProperty
-		{
-			get { return GetCurrentType().GetProperty("SupplierClass"); }
-		}
-
-		#endregion
-
 
 		#region public bool Approved { get; set; }
 		/// <summary>

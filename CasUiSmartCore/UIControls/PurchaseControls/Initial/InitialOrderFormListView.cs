@@ -18,7 +18,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		protected override void SetHeaders()
 		{
 			AddColumn("P/N", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Standart", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Specification", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Name", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Class", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Measure", (int)(radGridView1.Width * 0.2f));
@@ -42,8 +42,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				CreateRow( author,  author),
 			};
 		}
-
-
+		
 		#region Overrides of BaseGridViewControl<InitialOrderRecord>
 
 		protected override void GroupingItems()

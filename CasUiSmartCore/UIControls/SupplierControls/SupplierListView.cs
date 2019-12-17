@@ -22,8 +22,9 @@ namespace CAS.UI.UIControls.SupplierControls
 		public SupplierListView()
 		{
 			InitializeComponent();
-			SortMultiplier = 0;
+			SortMultiplier = 1;
 			OldColumnIndex = 0;
+			EnableCustomSorting = true;
 		}
 		#endregion
 

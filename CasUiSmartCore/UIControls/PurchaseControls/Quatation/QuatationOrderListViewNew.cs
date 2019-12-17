@@ -30,11 +30,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			AddColumn("P/N", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Suppliers", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Name", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Measure", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Quantity", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Specification", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Class", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Measure", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Quantity", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Specification", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Class", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.16f));
+			AddColumn(" ", (int)(radGridView1.Width * 0.16f));
 		}
 
 		#endregion
@@ -55,6 +56,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 				subItems.Add(CreateRow(record.Product?.Standart?.ToString(), record.Product?.Standart?.ToString()));
 				subItems.Add(CreateRow(record.Product?.GoodsClass?.ToString() ?? "Another accessory", record.Product?.GoodsClass?.ToString()));
 				subItems.Add(CreateRow(author, author));
+				subItems.Add(CreateRow("", ""));
 			}
 			else
 			{
@@ -64,11 +66,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 				subItems.Add(CreateRow(string.IsNullOrEmpty(qualification) ? "" : $"             QO №:{qualification}",""));
 				subItems.Add(CreateRow(record.Supplier.ToString(), record.Supplier));
 				subItems.Add(CreateRow($"New:{record.CostNewString}".ToString(), record.CostNewString));
-				subItems.Add(CreateRow($"OH:{record.CostOHString}".ToString(), record.CostOHString));
 				subItems.Add(CreateRow($"Serv:{record.CostServString}".ToString(), record.CostServString));
+				subItems.Add(CreateRow($"Test:{record.CostTestString}".ToString(), record.CostTestString));
+				subItems.Add(CreateRow($"Inspect:{record.CostInspectString}".ToString(), record.CostInspectString));
+				subItems.Add(CreateRow($"OH:{record.CostOHString}".ToString(), record.CostOHString));
 				subItems.Add(CreateRow($"Rep:{record.CostRepairString}", record.CostRepairString));
-				subItems.Add(CreateRow("", ""));
-				subItems.Add(CreateRow("", ""));
+				subItems.Add(CreateRow($"Mod:{record.CostModificationString}", record.CostModificationString));
 			}
 
 			return subItems;

@@ -54,7 +54,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			else destiantion = GlobalObjects.StoreCore.GetStoreById(item?.Record.ParentInitialRecord?.DestinationObjectId ?? -1)?.ToString();
 			var temp = $"{item.Record?.Product?.PartNumber}";
 			if (item.Record?.ParentInitialRecord != null)
-				temp += $"| Name: {item.Record.Product?.Name} | Destination: {destiantion} | Priority: {item.Record?.ParentInitialRecord?.Priority} | №:{((RequestForQuotation)item.Record.ParentPackage).Number} | {SmartCore.Auxiliary.Convert.GetDateFormat(item.Record.ParentPackage.OpeningDate)}";
+				temp += $"| {item.Record?.Product?.Standart} | {item.Record.Product?.Name} | {destiantion} | {item.Record?.ParentInitialRecord?.Priority} | №:{((RequestForQuotation)item.Record.ParentPackage).Number} | {SmartCore.Auxiliary.Convert.GetDateFormat(item.Record.ParentPackage.OpeningDate)}";
 
 
 			return new List<CustomCell>
@@ -64,8 +64,11 @@ namespace CAS.UI.UIControls.PurchaseControls
 				CreateRow(item.Record.Measure.ToString(), item.Record.Measure),
 				CreateRow(item.Price.CostNewString, item.Price.CostNewString),
 				CreateRow(item.Price.CostServString, item.Price.CostServString),
+				CreateRow(item.Price.CostTestString, item.Price.CostTestString),
+				CreateRow(item.Price.CostInspectString, item.Price.CostInspectString),
 				CreateRow(item.Price.CostOHString, item.Price.CostOHString),
 				CreateRow(item.Price.CostRepairString, item.Price.CostRepairString),
+				CreateRow(item.Price.CostModificationString, item.Price.CostModificationString),
 				CreateRow(temp, temp),
 				CreateRow(author, author),
 			}; 
@@ -96,11 +99,14 @@ namespace CAS.UI.UIControls.PurchaseControls
 		{
 			AddColumn("Supplier", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Q-ty", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Measure", (int)(radGridView1.Width * 0.2f));
+			AddColumn("UOM", (int)(radGridView1.Width * 0.1f));
 			AddColumn("New", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Serv", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Test", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Inspect", (int)(radGridView1.Width * 0.2f));
 			AddColumn("OH", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Repair", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Mod", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Product", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 

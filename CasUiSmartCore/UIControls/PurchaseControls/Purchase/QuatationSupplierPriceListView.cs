@@ -28,9 +28,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		{
 			AddColumn("Suppliers", (int)(radGridView1.Width * 0.2f));
 			AddColumn("New", (int)(radGridView1.Width * 0.15f));
-			AddColumn("Overhaul", (int)(radGridView1.Width * 0.15f));
-			AddColumn("Serviceable", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Serv", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Test", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Inspect", (int)(radGridView1.Width * 0.15f));
+			AddColumn("OH", (int)(radGridView1.Width * 0.15f));
 			AddColumn("Repair", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Modification", (int)(radGridView1.Width * 0.15f));
 			AddColumn("Product", (int)(radGridView1.Width * 0.2f));
 		}
 
@@ -53,6 +56,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			Color? colorOH = null;
 			Color? colorServ = null;
 			Color? colorRep = null;
+			Color? colorTest = null;
+			Color? colorInsp = null;
+			Color? colorMod = null;
 
 			if(item.IsHighestCostNew)
 				colorNew = Color.Red;
@@ -74,14 +80,32 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			if (item.IsLowestCostRepair)
 				colorRep = Color.Green;
 
+			if (item.IsHighestCostTest)
+				colorTest = Color.Red;
+			if (item.IsHighestCostTest)
+				colorTest = Color.Green;
+
+			if (item.IsHighestCostInspect)
+				colorInsp = Color.Red;
+			if (item.IsHighestCostInspect)
+				colorInsp = Color.Green;
+
+			if (item.IsHighestCostMod)
+				colorMod = Color.Red;
+			if (item.IsHighestCostMod)
+				colorMod = Color.Green;
+
 
 			return new List<CustomCell>()
 			{
 				CreateRow(item.Supplier.ToString(),item.Supplier),
-				CreateRow(item.CostNew.ToString(),item.CostNew, colorNew),
-				CreateRow(item.CostOverhaul.ToString(),item.CostOverhaul, colorOH),
-				CreateRow(item.CostServiceable.ToString(),item.CostServiceable, colorServ),
-				CreateRow(item.CostRepair.ToString(),item.CostRepair, colorRep),
+				CreateRow(item.CostNewString, item.CostNewString, colorNew),
+				CreateRow(item.CostServString, item.CostServString, colorServ),
+				CreateRow(item.CostTestString, item.CostTestString, colorTest),
+				CreateRow(item.CostInspectString, item.CostInspectString, colorInsp),
+				CreateRow(item.CostOHString, item.CostOHString, colorOH),
+				CreateRow(item.CostRepairString, item.CostRepairString, colorRep),
+				CreateRow(item.CostModificationString, item.CostModificationString, colorMod),
 				CreateRow(temp,temp),
 			};
 		}

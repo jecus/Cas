@@ -52,10 +52,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.supplierListView.Location = new System.Drawing.Point(23, 89);
 			this.supplierListView.MenuOpeningAction = null;
 			this.supplierListView.Name = "supplierListView";
-			this.supplierListView.OldColumnIndex = 0;
 			this.supplierListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.supplierListView.Size = new System.Drawing.Size(946, 237);
-			this.supplierListView.SortMultiplier = 0;
 			this.supplierListView.TabIndex = 69;
 			// 
 			// ButtonAdd

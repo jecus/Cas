@@ -92,7 +92,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
 
 			UpdateControls();
-			UpdateInitialControls();
 		}
 
 		#endregion
@@ -169,16 +168,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			comboBox1.Items.Clear();
 			comboBox1.Items.AddRange(_setting.GlobalSetting.QuotationSupplierSetting.Parameters.Select(i => i.Key).ToArray());
 
-			comboBoxMeasure.Items.Clear();
-			//comboBoxMeasure.Items.AddRange(Measure.GetByCategories(new[] { MeasureCategory.Mass, MeasureCategory.EconomicEntity }));
-			comboBoxMeasure.Items.AddRange(Measure.Items.ToArray());
-
-			comboBoxDestination.Items.Clear();
-			comboBoxDestination.Items.AddRange(destinations.ToArray());
-
-			comboBoxPriority.Items.Clear();
-			comboBoxPriority.Items.AddRange(Priority.Items.ToArray());
-
 			foreach (var control in DocumentControls)
 				control.Added += DocumentControl1_Added;
 
@@ -238,37 +227,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		#endregion
 
-		#region private void UpdateInitialControls()
-
-		private void UpdateInitialControls()
-		{
-			comboBoxStatus.Items.Clear();
-			comboBoxStatus.DataSource = Enum.GetValues(typeof(WorkPackageStatus));
-			comboBoxStatus.SelectedItem = _order.Status;
-
-			if (_order.ItemId > 0)
-			{
-				textBoxTitle.Text = _order.Title;
-				metroTextBoxNumber.Text = _order.Number;
-				dateTimePickerOpeningDate.Value = _order.OpeningDate;
-				dateTimePickerClosingDate.Value = _order.ClosingDate;
-				dateTimePickerPublishDate.Value = _order.PublishingDate;
-				textBoxClosingBy.Text = _order.CloseByUser;
-				textBoxPublishedBy.Text = _order.PublishedByUser;
-				textBoxAuthor.Text = _order.Author;
-				textBoxRemarks.Text = _order.Remarks;
-			}
-			else
-			{
-				dateTimePickerClosingDate.Enabled = false;
-				dateTimePickerPublishDate.Enabled = false;
-
-				textBoxAuthor.Text = GlobalObjects.CasEnvironment.IdentityUser.ToString();
-			}
-		}
-
-		#endregion
-
 		#region private void buttonCancel_Click(object sender, EventArgs e)
 
 		private void buttonCancel_Click(object sender, EventArgs e)
@@ -283,14 +241,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void buttonOk_Click(object sender, EventArgs e)
 		{
-			if (textBoxTitle.Text == "")
-			{
-				MessageBox.Show("Please, enter a Title", (string)new GlobalTermsProvider()["SystemName"],
-					MessageBoxButtons.OK,
-					MessageBoxIcon.Exclamation);
-			}
-
-			else if (listViewInitialItems.ItemsCount <= 0)
+			if (listViewInitialItems.ItemsCount <= 0)
 			{
 				MessageBox.Show("Please select a kits for initional order", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
@@ -298,10 +249,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			}
 			else
 			{
-				//запись новой информации в запросный ордер
-				ApplyInitialData();
-				//сохранение запросного ордера
-				GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
+				if (_order.ItemId < 0)
+					GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
 
 				foreach (var record in _addedQuatationOrderRecords)
 				{
@@ -341,37 +290,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		#endregion
 
-		#region private void ApplyOrderData()
-		private void ApplyInitialData()
-		{
-			_order.Title = textBoxTitle.Text;
-			_order.Number = metroTextBoxNumber.Text;
-			_order.Status = (WorkPackageStatus)comboBoxStatus.SelectedItem;
-			_order.Remarks = textBoxRemarks.Text;
-
-			if (_order.ItemId <= 0)
-				_order.Author = GlobalObjects.CasEnvironment.IdentityUser.ToString();
-
-			if (_order.Status == WorkPackageStatus.All)
-			{
-				_order.OpeningDate = dateTimePickerOpeningDate.Value;
-				_order.ClosingDate = dateTimePickerClosingDate.Value;
-				_order.PublishingDate = dateTimePickerPublishDate.Value;
-			}
-			else if (_order.Status == WorkPackageStatus.Opened)
-			{
-				_order.OpeningDate = dateTimePickerOpeningDate.Value;
-			}
-			else if (_order.Status == WorkPackageStatus.Closed)
-			{
-				_order.ClosingDate = dateTimePickerClosingDate.Value;
-			}
-			else if (_order.Status == WorkPackageStatus.Published)
-			{
-				_order.PublishingDate = dateTimePickerPublishDate.Value;
-			}
-		}
-		#endregion
+		
 
 		#region private void ButtonDelete_Click(object sender, EventArgs e)
 
@@ -404,140 +323,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		private void listViewInitialItems_SelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
 		{
-			button1.Enabled = button2.Enabled = listViewInitialItems.SelectedItem != null;
 			if (listViewInitialItems.SelectedItem == null) return;
 
 			if (!(listViewInitialItems.SelectedItem is RequestForQuotationRecord))
 				return;
-
-			var record = listViewInitialItems.SelectedItem as RequestForQuotationRecord;
-
-			var product = record.Product;
-
-			comboBoxMeasure.SelectedItem = product.Measure;
-			numericUpDownQuantity.Value = (decimal)record.Quantity;
-			checkBoxNew.Checked = (record.CostCondition & ComponentStatus.New) != 0;
-			checkBoxOverhaul.Checked = (record.CostCondition & ComponentStatus.Overhaul) != 0;
-			checkBoxRepair.Checked = (record.CostCondition & ComponentStatus.Repair) != 0;
-			checkBoxServiceable.Checked = (record.CostCondition & ComponentStatus.Serviceable) != 0;
-
-			var destination =
-				destinations.FirstOrDefault(d => d.SmartCoreObjectType == record.DestinationObjectType
-												 && d.ItemId == record.DestinationObjectId);
-
-			comboBoxDestination.SelectedItem = destination;
-			comboBoxPriority.SelectedItem = record.Priority;
-			metroTextBox1.Text = record.Remarks;
-
-		}
-
-		#endregion
-
-		#region private void button1_Click(object sender, EventArgs e)
-
-		private void button1_Click(object sender, EventArgs e)
-		{
-			if (listViewInitialItems.SelectedItem == null) return;
-			if (!(listViewInitialItems.SelectedItem is RequestForQuotationRecord))
-				return;
-
-			var record = listViewInitialItems.SelectedItem as RequestForQuotationRecord;
-
-			record.Priority = comboBoxPriority.SelectedItem as Priority ?? Priority.UNK;
-			record.Measure = comboBoxMeasure.SelectedItem as Measure ?? Measure.Unknown;
-			record.Quantity = (double)numericUpDownQuantity.Value;
-			record.Remarks = metroTextBox1.Text;
-
-			ComponentStatus costCondition = ComponentStatus.Unknown;
-			if (checkBoxNew.Checked)
-				costCondition = costCondition | ComponentStatus.New;
-			if (checkBoxServiceable.Checked)
-				costCondition = costCondition | ComponentStatus.Serviceable;
-			if (checkBoxOverhaul.Checked)
-				costCondition = costCondition | ComponentStatus.Overhaul;
-			if (checkBoxRepair.Checked)
-				costCondition = costCondition | ComponentStatus.Repair;
-
-			record.CostCondition = costCondition;
-
-			var destination = comboBoxDestination.SelectedItem as BaseEntityObject;
-			if (destination != null)
-			{
-				record.DestinationObjectType = destination.SmartCoreObjectType;
-				record.DestinationObjectId = destination.ItemId;
-			}
-			else
-			{
-				record.DestinationObjectType = SmartCoreType.Unknown;
-				record.DestinationObjectId = -1;
-			}
-			
-			listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
-
-			listViewInitialItems.radGridView1.ClearSelection();
-			Reset();
-		}
-
-		#endregion
-
-		#region private void Reset()
-
-		private void Reset()
-		{
-			button1.Enabled = button2.Enabled = false;
-			comboBoxMeasure.SelectedItem = null;
-			metroTextBox1.Text = "";
-			numericUpDownQuantity.Value = 0;
-			checkBoxNew.Checked = false;
-			checkBoxOverhaul.Checked = false;
-			checkBoxRepair.Checked = false;
-			checkBoxServiceable.Checked = false;
-			comboBoxDestination.SelectedItem = null;
-		}
-
-		#endregion
-
-		#region private void dateTimePickerOpeningDate_ValueChanged(object sender, EventArgs e)
-
-		private void dateTimePickerOpeningDate_ValueChanged(object sender, EventArgs e)
-		{
-			if (dateTimePickerOpeningDate.Value < DateTimeExtend.GetCASMinDateTime())
-				dateTimePickerOpeningDate.Value = DateTimeExtend.GetCASMinDateTime();
-			if (dateTimePickerOpeningDate.Value > DateTime.Now)
-				dateTimePickerOpeningDate.Value = DateTime.Now;
-		}
-
-		#endregion
-
-		#region private void comboBoxStatus_SelectedIndexChanged(object sender, EventArgs e)
-
-		private void comboBoxStatus_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			var status = (WorkPackageStatus)comboBoxStatus.SelectedItem;
-			if (status == WorkPackageStatus.Opened)
-			{
-				dateTimePickerOpeningDate.Enabled = true;
-				dateTimePickerPublishDate.Enabled = false;
-				dateTimePickerClosingDate.Enabled = false;
-			}
-			else if (status == WorkPackageStatus.Published)
-			{
-				dateTimePickerOpeningDate.Enabled = false;
-				dateTimePickerPublishDate.Enabled = true;
-				dateTimePickerClosingDate.Enabled = false;
-			}
-			else if (status == WorkPackageStatus.Closed)
-			{
-				dateTimePickerOpeningDate.Enabled = false;
-				dateTimePickerPublishDate.Enabled = false;
-				dateTimePickerClosingDate.Enabled = true;
-			}
-			else
-			{
-				dateTimePickerOpeningDate.Enabled = true;
-				dateTimePickerPublishDate.Enabled = true;
-				dateTimePickerClosingDate.Enabled = true;
-			}
 		}
 
 		#endregion
@@ -608,6 +397,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			   if (form.ShowDialog() == DialogResult.OK)
 				   listViewInitialItems.SetItemsArray(UpdateLW(_addedQuatationOrderRecords).ToArray());
 		}
-	
+
+		private void buttonExtended_Click(object sender, EventArgs e)
+		{
+			new QuotationSettingForm(_order).ShowDialog();
+		}
 	}
 }
