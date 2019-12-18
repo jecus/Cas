@@ -64,7 +64,8 @@ namespace SmartCore.Discrepancies
 					new CommonFilter<DateTime>(AircraftFlight.FlightDateProperty, FilterType.LessOrEqual, new []{to.Value.Date}),
 				});
 
-				filters.Add(new CommonFilter<int>(Discrepancy.FlightIdProperty, FilterType.In, flights.Select(i => i.ItemId).ToArray()));
+				if(flights.Count > 0) 
+					filters.Add(new CommonFilter<int>(Discrepancy.FlightIdProperty, FilterType.In, flights.Select(i => i.ItemId).ToArray()));
 			}
 
 			if (aircraft != null)
@@ -79,7 +80,11 @@ namespace SmartCore.Discrepancies
 				//что значения ключевого поля таблицы должны быть
 				//среди идентификаторов родительских задач КИТов
 			}
-			else preResultList.AddRange(_loader.GetObjectListAll<Discrepancy>(filters.ToArray(), loadChild:true));
+			else
+			{
+				if(filters.Count> 0)
+					preResultList.AddRange(_loader.GetObjectListAll<Discrepancy>(filters.ToArray(), loadChild:true));
+			}
 
 
 			#region//заполнение Discrepancies CorrectiveAction в Discrepancies нового полета//
@@ -110,16 +115,19 @@ namespace SmartCore.Discrepancies
 			}
 			else
 			{
-				var flights = _newLoader.GetObjectList<AircraftFlightDTO, AircraftFlight>(new Filter("ItemId", flightIds));
-
-
-				foreach (var id in flightIds)
+				if (flightIds.Length > 0)
 				{
-					var fl = flights.FirstOrDefault(i => i.ItemId == id);
-					if (fl != null)
+					var flights = _newLoader.GetObjectList<AircraftFlightDTO, AircraftFlight>(new Filter("ItemId", flightIds));
+
+
+					foreach (var id in flightIds)
 					{
-						parentFlights.Add(fl);
-						resultList.Add(preResultList.FirstOrDefault(i => i.FlightId == id));
+						var fl = flights.FirstOrDefault(i => i.ItemId == id);
+						if (fl != null)
+						{
+							parentFlights.Add(fl);
+							resultList.Add(preResultList.FirstOrDefault(i => i.FlightId == id));
+						}
 					}
 				}
 			}
