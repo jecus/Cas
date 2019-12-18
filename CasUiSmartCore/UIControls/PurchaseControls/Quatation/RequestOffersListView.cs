@@ -52,7 +52,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			if (item.Record?.ParentInitialRecord?.DestinationObjectType == SmartCoreType.Aircraft)
 				destiantion = GlobalObjects.AircraftsCore.GetAircraftById(item.Record?.ParentInitialRecord?.DestinationObjectId ?? -1)?.ToString();
 			else destiantion = GlobalObjects.StoreCore.GetStoreById(item?.Record.ParentInitialRecord?.DestinationObjectId ?? -1)?.ToString();
-			var temp = $"{item.Record?.Product?.PartNumber}";
+			var temp = $"P/N: {item.Record?.Product?.PartNumber}";
 			if (item.Record?.ParentInitialRecord != null)
 				temp += $"| {item.Record?.Product?.Standart} | {item.Record.Product?.Name} | {destiantion} | {item.Record?.ParentInitialRecord?.Priority} | №:{((RequestForQuotation)item.Record.ParentPackage).Number} | {SmartCore.Auxiliary.Convert.GetDateFormat(item.Record.ParentPackage.OpeningDate)}";
 
