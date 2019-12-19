@@ -1060,7 +1060,8 @@ namespace SmartCore.AircraftFlights
 			//(не имеющие статус Closed, не имеющие записей о выполнении
 			//  или дата последнего выполения которых >= дате текущего полета при наличии статуса Closed)
 			List<DbQuery> qrs = DeferredItemQueries.GetLastSelectQuery(parentAircraftId, existFlight, loadChild: true);
-			deffereds.AddRange(_loader.GetObjectListAll<DeferredItem>(qrs, true).ToArray());
+			//TODO: страшно тупим
+			//deffereds.AddRange(_loader.GetObjectListAll<DeferredItem>(qrs, true).ToArray());
 
 			int[] directivesId = deffereds
 					.Where(i => i.Threshold != null
