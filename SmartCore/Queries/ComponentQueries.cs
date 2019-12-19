@@ -90,7 +90,13 @@ namespace SmartCore.Queries
             }
             s += ")";
 
-            return
+            var res = $@"Components.ItemId in (select ParentID from TransferRecords 
+            where DestinationObjectID in {s}
+            and DestinationObjectType = {SmartCoreType.BaseComponent.ItemId} 
+            and ParentType = {SmartCoreType.Component.ItemId}
+            and IsDeleted = 0 )";
+
+            return new CommonFilter<string>(res);
                 new CommonFilter<string>(string.Format(@"((select top 1 destinationobjectId from dbo.TransferRecords where 
                                  dbo.Components.ItemId=Parentid and isdeleted=0 
 								 and parenttype = 5 and destinationobjecttype = 6 

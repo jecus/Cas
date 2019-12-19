@@ -87,7 +87,9 @@
     <Content Include="DBScripts\BDScripts0040.sql" />
     <Content Include="DBScripts\BDScripts0030.sql" />
     <Content Include="DBScripts\BDScripts.sql" />
+    <Content Include="Optimization\BDScripts001.sql" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
