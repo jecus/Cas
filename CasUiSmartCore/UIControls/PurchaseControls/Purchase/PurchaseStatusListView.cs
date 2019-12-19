@@ -48,7 +48,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			else destiantion = GlobalObjects.StoreCore.GetStoreById(item?.ParentInitialRecord?.DestinationObjectId ?? -1)?.ToString();
 			var temp = $"P/N: {item.Product?.PartNumber}";
 			if (item.ParentInitialRecord != null)
-				temp += $"| {item.Product?.Standart} | {item.Product?.Name} | {destiantion} | {item.ParentInitialRecord?.Priority} | №:{((PurchaseOrder)item.ParentPackage).Number} | {SmartCore.Auxiliary.Convert.GetDateFormat(item.ParentPackage.OpeningDate)}";
+				temp += $"| {item.Product?.Standart} | {item.Product?.Name} | {destiantion} | {item.ParentInitialRecord?.Priority} | №:{((PurchaseOrder)item.ParentPackage).Number} | {SmartCore.Auxiliary.Convert.GetDateFormat(item.ParentPackage.OpeningDate)} | {((InitialOrder)item?.ParentInitialRecord.ParentPackage)?.Author}";
 			double total = item.Quantity * item.Cost;
 			var order = item.ParentPackage as PurchaseOrder;
 

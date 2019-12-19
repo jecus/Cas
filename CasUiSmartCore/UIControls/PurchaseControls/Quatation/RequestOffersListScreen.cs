@@ -146,6 +146,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 								GlobalObjects.CasEnvironment.NewLoader
 									.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(
 										new Filter("ParentPackageId", parentInitialId));
+							var initial = GlobalObjects.CasEnvironment.NewLoader.GetObject<InitialOrderDTO, InitialOrder>(new Filter("ItemId", parentInitialId));
 
 
 							foreach (var addedInitialOrderRecord in record)
@@ -155,6 +156,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 										i.ProductId == addedInitialOrderRecord.PackageItemId);
 								addedInitialOrderRecord.ParentPackage = _quotatioArray.FirstOrDefault(i =>
 									i.ItemId == addedInitialOrderRecord.ParentPackageId);
+								if (addedInitialOrderRecord.ParentInitialRecord != null)
+									addedInitialOrderRecord.ParentInitialRecord.ParentPackage = initial;
 								var product = products.FirstOrDefault(i =>
 									i.ItemId == addedInitialOrderRecord.PackageItemId);
 								foreach (var relation in product.SupplierRelations)

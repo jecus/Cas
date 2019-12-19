@@ -54,7 +54,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			else destiantion = GlobalObjects.StoreCore.GetStoreById(item?.Record.ParentInitialRecord?.DestinationObjectId ?? -1)?.ToString();
 			var temp = $"P/N: {item.Record?.Product?.PartNumber}";
 			if (item.Record?.ParentInitialRecord != null)
-				temp += $"| {item.Record?.Product?.Standart} | {item.Record.Product?.Name} | {destiantion} | {item.Record?.ParentInitialRecord?.Priority} | №:{((RequestForQuotation)item.Record.ParentPackage).Number} | {SmartCore.Auxiliary.Convert.GetDateFormat(item.Record.ParentPackage.OpeningDate)}";
+				temp += $"| {item.Record?.Product?.Standart} | {item.Record.Product?.Name} | {destiantion} | {item.Record?.ParentInitialRecord?.Priority} | №:{((RequestForQuotation)item.Record.ParentPackage).Number} | {SmartCore.Auxiliary.Convert.GetDateFormat(item.Record.ParentPackage.OpeningDate)} | {((InitialOrder)item?.Record.ParentInitialRecord.ParentPackage)?.Author}";
 
 
 			return new List<CustomCell>
