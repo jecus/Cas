@@ -93,7 +93,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			var suppliers = GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[]
 				{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, ids),});
 			var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new ICommonFilter[]
-				{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, productIds),});
+				{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, productIds),}, true);
 
 
 			var parentInitialId = (int) GlobalObjects.CasEnvironment.Execute(
@@ -247,7 +247,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				newRequest.Price = price;
 				newRequest.Cost = (double) price.CostNew;
 				newRequest.Currency = price.СurrencyNew;
-
+				newRequest.ParentInitialRecord = price.Parent.ParentInitialRecord;
 
 				if (_addedRecord.Any(i => i.Product.ItemId == price.Parent.Product.ItemId 
 				                          && i.CostCondition == (ComponentStatus)comboBoxCondition.SelectedItem

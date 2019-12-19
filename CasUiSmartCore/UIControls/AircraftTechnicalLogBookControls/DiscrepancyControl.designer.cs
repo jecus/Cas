@@ -1250,6 +1250,11 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			this.numericUpDownDelay.Location = new System.Drawing.Point(997, 207);
 			this.numericUpDownDelay.Margin = new System.Windows.Forms.Padding(2);
 			this.numericUpDownDelay.Name = "numericUpDownDelay";
+			this.numericUpDownDelay.Maximum = new decimal(new int[] {
+				999999,
+				0,
+				0,
+				0});
 			this.numericUpDownDelay.Size = new System.Drawing.Size(80, 20);
 			this.numericUpDownDelay.TabIndex = 233;
 			this.numericUpDownDelay.Visible = false;
