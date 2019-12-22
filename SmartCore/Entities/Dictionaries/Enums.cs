@@ -161,7 +161,12 @@ namespace SmartCore.Entities.Dictionaries
 
         Overhaul = 16,
 
-        Repair = 64
+        Repair = 64,
+        Test = 65,
+        Inspect = 66,
+        Modification = 67
+
+
     }
 
     #endregion

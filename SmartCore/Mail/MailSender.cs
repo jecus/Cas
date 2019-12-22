@@ -49,7 +49,7 @@ namespace SmartCore.Mail
 					From = new MailAddress(_settings.Mail),
 					To =
 					{
-						new MailAddress("mgladilov@mail.ru")
+						new MailAddress("avalon-company@mail.ru")
 					},
 					Subject = subject,
 					IsBodyHtml = true,

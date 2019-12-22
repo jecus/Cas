@@ -158,9 +158,9 @@ namespace SmartCore.Management
                 return ((IBaseEntityObject)o).ItemId;
 		    if (o is DateTime)
 		    {
-			    return ((DateTime) o).ToSqlDate();
-			    //return (((DateTime)o).Day + "." + ((DateTime)o).Month + "." + ((DateTime)o).Year + " " +
-			    //      ((DateTime)o).TimeOfDay.Hours + ":" + ((DateTime)o).TimeOfDay.Minutes + ":" + ((DateTime)o).TimeOfDay.Seconds);
+			    //return ((DateTime) o).ToSqlDate();
+			    return (((DateTime)o).Day + "." + ((DateTime)o).Month + "." + ((DateTime)o).Year + " " +
+			          ((DateTime)o).TimeOfDay.Hours + ":" + ((DateTime)o).TimeOfDay.Minutes + ":" + ((DateTime)o).TimeOfDay.Seconds);
 
 		    }
             if (o is TimeSpan) return TimeToInt((TimeSpan) o);

@@ -223,8 +223,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			//comboBoxMeasure.Items.AddRange(Measure.GetByCategories(new[] { MeasureCategory.Mass, MeasureCategory.EconomicEntity }));
 			comboBoxMeasure.Items.AddRange(Measure.Items.ToArray());
 
+
+			var statuses = Enum.GetValues(typeof(ComponentStatus)).OfType<ComponentStatus>().ToList();
+			statuses.RemoveAt(0);
 			comboBoxCondition.Items.Clear();
-			comboBoxCondition.DataSource = Enum.GetValues(typeof(ComponentStatus));
+			comboBoxCondition.DataSource = statuses;
 
 			comboBoxCurrency.Items.Clear();
 			comboBoxCurrency.Items.AddRange(Сurrency.Items.ToArray());
@@ -367,6 +370,21 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostServiceable;
 				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyServ;
 			}
+			else if (selected == ComponentStatus.Test)
+			{
+				numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostTest;
+				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyTest;
+			}
+			else if (selected == ComponentStatus.Inspect)
+			{
+				numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostInspect;
+				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyInspect;
+			}
+			else if (selected == ComponentStatus.Modification)
+			{
+				numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostModification;
+				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyModification;
+			}
 
 		}
 
@@ -404,6 +422,21 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			{
 				numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostServiceable;
 				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyServ;
+			}
+			else if (selected == ComponentStatus.Test)
+			{
+				numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostTest;
+				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyTest;
+			}
+			else if (selected == ComponentStatus.Inspect)
+			{
+				numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostInspect;
+				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyInspect;
+			}
+			else if (selected == ComponentStatus.Modification)
+			{
+				numericUpDown1.Value = purchaseRecordListView1.SelectedItem.Price.CostModification;
+				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyModification;
 			}
 
 			SetForMeasure();
