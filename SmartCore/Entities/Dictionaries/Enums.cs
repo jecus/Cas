@@ -169,6 +169,12 @@ namespace SmartCore.Entities.Dictionaries
 
     }
 
+	public enum PriceType : short
+	{
+        New = 1,
+        Exchange = 2
+	}
+
     #endregion
 
     #region public enum DetectionPhase : short
