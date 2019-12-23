@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
 using EntityCore.DTO.Dictionaries;
 using EntityCore.DTO.General;
