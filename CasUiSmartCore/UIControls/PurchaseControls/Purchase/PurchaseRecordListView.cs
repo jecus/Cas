@@ -32,6 +32,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			AddColumn("Cost", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Total Cost", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Condition", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Type", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Measure", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Product", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
@@ -61,6 +62,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				CreateRow($"{item.Cost} {item.Currency}",item.Cost),
 				CreateRow($"{total:0.##} {item.Currency}", total),
 				CreateRow(item.CostCondition.ToString(),item.CostCondition),
+				CreateRow(item.CostType.ToString(),item.CostType),
 				CreateRow(item.Measure.ToString(),item.Measure),
 				CreateRow(temp,temp),
 				CreateRow(author,author),
