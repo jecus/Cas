@@ -95,6 +95,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				record.Supplier = suppliers.FirstOrDefault(i => i.ItemId == record.SupplierId);
 
 				record.ItemCost = record.Quantity * record.Cost;
+			}
+
+			foreach (var record in records)
+			{
 				record.TotalCost = records.Sum(i => i.ItemCost);
 			}
 
