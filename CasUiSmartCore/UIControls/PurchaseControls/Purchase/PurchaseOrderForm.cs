@@ -97,7 +97,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				record.ItemCost = record.Quantity * record.Cost;
 			}
 
-			foreach (var record in records.GroupBy(i => i.SupplierId))
+			foreach (var record in records.GroupBy(i => i.PackageItemId))
 			{
 				var total = record.Sum(i => i.Cost);
 				foreach (var requestRecord in record)
