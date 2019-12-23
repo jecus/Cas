@@ -50,7 +50,9 @@ namespace EntityCore.DTO.General
 		[Column("CostCondition")]
 		public short? CostCondition { get; set; }
 
-		
+		[Column("CostType")]
+		public short CostType { get; set; }
+
 		[Column("Processed")]
 		public bool? Processed { get; set; }
 
