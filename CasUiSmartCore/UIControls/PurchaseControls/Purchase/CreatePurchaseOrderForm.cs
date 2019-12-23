@@ -244,20 +244,23 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		{
 			foreach (var price in quatationSupplierPriceListView1.SelectedItems.ToArray())
 			{
-				var newRequest = new PurchaseRequestRecord(-1, price.Parent.Product, 1);
-				newRequest.CostCondition = (ComponentStatus)comboBoxCondition.SelectedItem;
-				newRequest.CostType = (CostType)comboBoxType.SelectedItem;
-				newRequest.Product = price.Parent.Product;
-				newRequest.Supplier = price.Supplier;
-				newRequest.Quantity = 1;
-				newRequest.SupplierId = price.Supplier.ItemId;
-				newRequest.Price = price;
-				newRequest.Cost = (double) price.CostNew;
-				newRequest.Currency = price.СurrencyNew;
-				newRequest.ParentInitialRecord = price.Parent.ParentInitialRecord;
+				var newRequest = new PurchaseRequestRecord(-1, price.Parent.Product, 1)
+				{
+					CostCondition = (ComponentStatus) comboBoxCondition.SelectedItem,
+					CostType = (CostType) comboBoxType.SelectedItem,
+					Product = price.Parent.Product,
+					Supplier = price.Supplier,
+					Quantity = 1,
+					SupplierId = price.Supplier.ItemId,
+					Price = price,
+					Cost = (double) price.CostNew,
+					Currency = price.СurrencyNew,
+					ParentInitialRecord = price.Parent.ParentInitialRecord
+				};
 
 				if (_addedRecord.Any(i => i.Product.ItemId == price.Parent.Product.ItemId 
 				                          && i.CostCondition == (ComponentStatus)comboBoxCondition.SelectedItem
+				                          && i.CostType == (CostType)comboBoxType.SelectedItem
 										   && i.SupplierId == price.SupplierId))
 				{
 					MessageBox.Show("Supplier price for product alredy added!", (string)new GlobalTermsProvider()["SystemName"],
@@ -357,44 +360,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			if(comboBoxCondition.SelectedItem == null) return;
 			if (purchaseRecordListView1.SelectedItem == null) return;
 
-			var selected = (ComponentStatus)comboBoxCondition.SelectedItem;
-			var priceType = ((CostType)comboBoxType.SelectedItem);
-
-			if (selected == ComponentStatus.New)
-			{
-				numericUpDown1.Value = priceType == CostType.New ? purchaseRecordListView1.SelectedItem.Price.CostNew : purchaseRecordListView1.SelectedItem.Price.CostNewEx;
-				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyNew;
-			}
-			else if (selected == ComponentStatus.Overhaul)
-			{
-				numericUpDown1.Value = priceType == CostType.New ? purchaseRecordListView1.SelectedItem.Price.CostOverhaul : purchaseRecordListView1.SelectedItem.Price.CostOverhaulEx;
-				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyOH;
-			}
-			else if (selected == ComponentStatus.Repair)
-			{
-				numericUpDown1.Value = priceType == CostType.New ? purchaseRecordListView1.SelectedItem.Price.CostRepair : purchaseRecordListView1.SelectedItem.Price.CostRepairEx;
-				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyRepair;
-			}
-			else if (selected == ComponentStatus.Serviceable)
-			{
-				numericUpDown1.Value = priceType == CostType.New ? purchaseRecordListView1.SelectedItem.Price.CostServiceable : purchaseRecordListView1.SelectedItem.Price.CostServiceableEx;
-				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyServ;
-			}
-			else if (selected == ComponentStatus.Test)
-			{
-				numericUpDown1.Value = priceType == CostType.New ? purchaseRecordListView1.SelectedItem.Price.CostTest : purchaseRecordListView1.SelectedItem.Price.CostTestEx;
-				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyTest;
-			}
-			else if (selected == ComponentStatus.Inspect)
-			{
-				numericUpDown1.Value = priceType == CostType.New ? purchaseRecordListView1.SelectedItem.Price.CostInspect : purchaseRecordListView1.SelectedItem.Price.CostInspectEx;
-				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyInspect;
-			}
-			else if (selected == ComponentStatus.Modification)
-			{
-				numericUpDown1.Value = priceType == CostType.New ? purchaseRecordListView1.SelectedItem.Price.CostModification : purchaseRecordListView1.SelectedItem.Price.CostModificationEx;
-				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyModification;
-			}
+			UpdatePriceControls();
 			SetForMeasure();
 		}
 
@@ -411,48 +377,67 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			comboBoxMeasure.SelectedItem = purchaseRecordListView1.SelectedItem.Measure;
 			numericUpDownQuantity.Value = (decimal)purchaseRecordListView1.SelectedItem.Quantity;
 
+			UpdatePriceControls();
+			SetForMeasure();
+		}
+
+		#endregion
+
+		private void UpdatePriceControls()
+		{
 			var selected = (ComponentStatus)comboBoxCondition.SelectedItem;
 			var priceType = ((CostType)comboBoxType.SelectedItem);
 
 			if (selected == ComponentStatus.New)
 			{
-				numericUpDown1.Value = priceType == CostType.New ? purchaseRecordListView1.SelectedItem.Price.CostNew : purchaseRecordListView1.SelectedItem.Price.CostNewEx;
+				numericUpDown1.Value = priceType == CostType.New
+					? purchaseRecordListView1.SelectedItem.Price.CostNew
+					: purchaseRecordListView1.SelectedItem.Price.CostNewEx;
 				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyNew;
 			}
 			else if (selected == ComponentStatus.Overhaul)
 			{
-				numericUpDown1.Value = priceType == CostType.New ? purchaseRecordListView1.SelectedItem.Price.CostOverhaul : purchaseRecordListView1.SelectedItem.Price.CostOverhaulEx;
+				numericUpDown1.Value = priceType == CostType.New
+					? purchaseRecordListView1.SelectedItem.Price.CostOverhaul
+					: purchaseRecordListView1.SelectedItem.Price.CostOverhaulEx;
 				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyOH;
 			}
 			else if (selected == ComponentStatus.Repair)
 			{
-				numericUpDown1.Value = priceType == CostType.New ? purchaseRecordListView1.SelectedItem.Price.CostRepair : purchaseRecordListView1.SelectedItem.Price.CostRepairEx;
+				numericUpDown1.Value = priceType == CostType.New
+					? purchaseRecordListView1.SelectedItem.Price.CostRepair
+					: purchaseRecordListView1.SelectedItem.Price.CostRepairEx;
 				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyRepair;
 			}
 			else if (selected == ComponentStatus.Serviceable)
 			{
-				numericUpDown1.Value = priceType == CostType.New ? purchaseRecordListView1.SelectedItem.Price.CostServiceable : purchaseRecordListView1.SelectedItem.Price.CostServiceableEx;
+				numericUpDown1.Value = priceType == CostType.New
+					? purchaseRecordListView1.SelectedItem.Price.CostServiceable
+					: purchaseRecordListView1.SelectedItem.Price.CostServiceableEx;
 				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyServ;
 			}
 			else if (selected == ComponentStatus.Test)
 			{
-				numericUpDown1.Value = priceType == CostType.New ? purchaseRecordListView1.SelectedItem.Price.CostTest : purchaseRecordListView1.SelectedItem.Price.CostTestEx;
+				numericUpDown1.Value = priceType == CostType.New
+					? purchaseRecordListView1.SelectedItem.Price.CostTest
+					: purchaseRecordListView1.SelectedItem.Price.CostTestEx;
 				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyTest;
 			}
 			else if (selected == ComponentStatus.Inspect)
 			{
-				numericUpDown1.Value = priceType == CostType.New ? purchaseRecordListView1.SelectedItem.Price.CostInspect : purchaseRecordListView1.SelectedItem.Price.CostInspectEx;
+				numericUpDown1.Value = priceType == CostType.New
+					? purchaseRecordListView1.SelectedItem.Price.CostInspect
+					: purchaseRecordListView1.SelectedItem.Price.CostInspectEx;
 				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyInspect;
 			}
 			else if (selected == ComponentStatus.Modification)
 			{
-				numericUpDown1.Value = priceType == CostType.New ? purchaseRecordListView1.SelectedItem.Price.CostModification : purchaseRecordListView1.SelectedItem.Price.CostModificationEx;
+				numericUpDown1.Value = priceType == CostType.New
+					? purchaseRecordListView1.SelectedItem.Price.CostModification
+					: purchaseRecordListView1.SelectedItem.Price.CostModificationEx;
 				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyModification;
 			}
-
-			SetForMeasure();
 		}
-		#endregion
 
 		#region private void Button1_Click(object sender, EventArgs e)
 

@@ -4522,7 +4522,7 @@ namespace SmartCore.DtoHelper
 				Measure = purchaserec.Measure?.ItemId,
 				Cost = purchaserec.Cost,
 				CostCondition = (short?)purchaserec.CostCondition,
-				CostType = (short?)purchaserec.CostType,
+				CostType = (short)purchaserec.CostType,
 				Processed = purchaserec.Processed,
 				AdditionalInformationJSON = purchaserec.AdditionalInformationJSON,
 				Files = purchaserec.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>
