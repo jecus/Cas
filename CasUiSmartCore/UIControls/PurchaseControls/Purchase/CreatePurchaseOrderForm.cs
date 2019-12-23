@@ -242,48 +242,60 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		private void ButtonAdd_Click(object sender, EventArgs e)
 		{
-			foreach (var price in quatationSupplierPriceListView1.SelectedItems.ToArray())
+			var price = quatationSupplierPriceListView1.SelectedItem;
+
+			var newRequest = new PurchaseRequestRecord(-1, price.Parent.Product, 1)
 			{
-				var newRequest = new PurchaseRequestRecord(-1, price.Parent.Product, 1)
-				{
-					CostCondition = (ComponentStatus) comboBoxCondition.SelectedItem,
-					CostType = (CostType) comboBoxType.SelectedItem,
-					Product = price.Parent.Product,
-					Supplier = price.Supplier,
-					Quantity = 1,
-					SupplierId = price.Supplier.ItemId,
-					Price = price,
-					Cost = (double) price.CostNew,
-					Currency = price.СurrencyNew,
-					ParentInitialRecord = price.Parent.ParentInitialRecord
-				};
+				CostCondition = (ComponentStatus) comboBoxCondition.SelectedItem,
+				CostType = (CostType) comboBoxType.SelectedItem,
+				Product = price.Parent.Product,
+				Supplier = price.Supplier,
+				Quantity = (double) numericUpDownQuantity.Value,
+				SupplierId = price.Supplier.ItemId,
+				Price = price,
+				Cost = (double) GetCostCreate(),
+				Currency = GetCurrencyСreate(),
+				ParentInitialRecord = price.Parent.ParentInitialRecord
+			};
 
-				if (_addedRecord.Any(i => i.Product.ItemId == price.Parent.Product.ItemId 
-				                          && i.CostCondition == (ComponentStatus)comboBoxCondition.SelectedItem
-				                          && i.CostType == (CostType)comboBoxType.SelectedItem
-										   && i.SupplierId == price.SupplierId))
-				{
-					MessageBox.Show("Supplier price for product alredy added!", (string)new GlobalTermsProvider()["SystemName"],
-						MessageBoxButtons.OK,
-						MessageBoxIcon.Exclamation);
-					return;
-				}
-
-				var res = purchaseRecordListView1.GetItemsArray().Where(i =>
-					i.Product.ItemId == price.Parent.Product.ItemId).ToArray().Select(i => i.Quantity).Sum();
-
-				if (newRequest.Price.Parent.Quantity < newRequest.Quantity + res)
-				{
-					MessageBox.Show($"Q-ty is greathe then need for this product!", (string)new GlobalTermsProvider()["SystemName"],
-						MessageBoxButtons.OK,
-						MessageBoxIcon.Exclamation);
-					return;
-				}
-
-				_addedRecord.Add(newRequest);
+			if (newRequest.Cost == 0)
+			{
+				MessageBox.Show("Supplier price for product less than zero!",
+					(string) new GlobalTermsProvider()["SystemName"],
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Exclamation);
+				return;
 			}
 
+			if (_addedRecord.Any(i => i.Product.ItemId == price.Parent.Product.ItemId
+			                          && i.CostCondition == (ComponentStatus) comboBoxCondition.SelectedItem
+			                          && i.CostType == (CostType) comboBoxType.SelectedItem
+			                          && i.SupplierId == price.SupplierId))
+			{
+				MessageBox.Show("Supplier price for product alredy added!",
+					(string) new GlobalTermsProvider()["SystemName"],
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Exclamation);
+				return;
+			}
+
+			var res = purchaseRecordListView1.GetItemsArray().Where(i =>
+				i.Product.ItemId == price.Parent.Product.ItemId).ToArray().Select(i => i.Quantity).Sum();
+
+			if (newRequest.Price.Parent.Quantity < newRequest.Quantity + res)
+			{
+				MessageBox.Show($"Q-ty is greathe then need for this product!",
+					(string) new GlobalTermsProvider()["SystemName"],
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Exclamation);
+				return;
+			}
+
+			_addedRecord.Add(newRequest);
+
+
 			purchaseRecordListView1.SetItemsArray(_addedRecord.ToArray());
+			numericUpDownQuantity.Value = 1;
 		}
 
 		#endregion
@@ -385,58 +397,180 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		private void UpdatePriceControls()
 		{
+			numericUpDown1.Value = GetCost();
+			comboBoxCurrency.SelectedItem = GetCurrency();
+		}
+
+		private Сurrency GetCurrency()
+		{
+			var selected = (ComponentStatus)comboBoxCondition.SelectedItem;
+			var priceType = ((CostType)comboBoxType.SelectedItem);
+
+			if (selected == ComponentStatus.New)
+				return purchaseRecordListView1.SelectedItem.Price.СurrencyNew;
+
+			if (selected == ComponentStatus.Overhaul)
+				return purchaseRecordListView1.SelectedItem.Price.СurrencyOH;
+
+			if (selected == ComponentStatus.Repair)
+				return purchaseRecordListView1.SelectedItem.Price.СurrencyRepair;
+
+			if (selected == ComponentStatus.Serviceable)
+				return purchaseRecordListView1.SelectedItem.Price.СurrencyServ;
+
+			if (selected == ComponentStatus.Test)
+				return purchaseRecordListView1.SelectedItem.Price.СurrencyTest;
+
+			if (selected == ComponentStatus.Inspect)
+				return purchaseRecordListView1.SelectedItem.Price.СurrencyInspect;
+
+			if (selected == ComponentStatus.Modification)
+				return purchaseRecordListView1.SelectedItem.Price.СurrencyModification;
+
+			return Сurrency.USD;
+		}
+
+		private decimal GetCost()
+		{
 			var selected = (ComponentStatus)comboBoxCondition.SelectedItem;
 			var priceType = ((CostType)comboBoxType.SelectedItem);
 
 			if (selected == ComponentStatus.New)
 			{
-				numericUpDown1.Value = priceType == CostType.New
+				return priceType == CostType.New
 					? purchaseRecordListView1.SelectedItem.Price.CostNew
 					: purchaseRecordListView1.SelectedItem.Price.CostNewEx;
-				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyNew;
 			}
-			else if (selected == ComponentStatus.Overhaul)
+
+			if (selected == ComponentStatus.Overhaul)
 			{
-				numericUpDown1.Value = priceType == CostType.New
+				return priceType == CostType.New
 					? purchaseRecordListView1.SelectedItem.Price.CostOverhaul
 					: purchaseRecordListView1.SelectedItem.Price.CostOverhaulEx;
-				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyOH;
 			}
-			else if (selected == ComponentStatus.Repair)
+
+			if (selected == ComponentStatus.Repair)
 			{
-				numericUpDown1.Value = priceType == CostType.New
+				return priceType == CostType.New
 					? purchaseRecordListView1.SelectedItem.Price.CostRepair
 					: purchaseRecordListView1.SelectedItem.Price.CostRepairEx;
-				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyRepair;
 			}
-			else if (selected == ComponentStatus.Serviceable)
+
+			if (selected == ComponentStatus.Serviceable)
 			{
-				numericUpDown1.Value = priceType == CostType.New
+				return priceType == CostType.New
 					? purchaseRecordListView1.SelectedItem.Price.CostServiceable
 					: purchaseRecordListView1.SelectedItem.Price.CostServiceableEx;
-				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyServ;
 			}
-			else if (selected == ComponentStatus.Test)
+
+			if (selected == ComponentStatus.Test)
 			{
-				numericUpDown1.Value = priceType == CostType.New
+				return priceType == CostType.New
 					? purchaseRecordListView1.SelectedItem.Price.CostTest
 					: purchaseRecordListView1.SelectedItem.Price.CostTestEx;
-				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyTest;
 			}
-			else if (selected == ComponentStatus.Inspect)
+
+			if (selected == ComponentStatus.Inspect)
 			{
-				numericUpDown1.Value = priceType == CostType.New
+				return priceType == CostType.New
 					? purchaseRecordListView1.SelectedItem.Price.CostInspect
 					: purchaseRecordListView1.SelectedItem.Price.CostInspectEx;
-				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyInspect;
 			}
-			else if (selected == ComponentStatus.Modification)
+
+			if (selected == ComponentStatus.Modification)
 			{
-				numericUpDown1.Value = priceType == CostType.New
+				return priceType == CostType.New
 					? purchaseRecordListView1.SelectedItem.Price.CostModification
 					: purchaseRecordListView1.SelectedItem.Price.CostModificationEx;
-				comboBoxCurrency.SelectedItem = purchaseRecordListView1.SelectedItem.Price.СurrencyModification;
 			}
+
+			return 0;
+		}
+
+		private Сurrency GetCurrencyСreate()
+		{
+			var selected = (ComponentStatus)comboBoxCondition.SelectedItem;
+			var priceType = ((CostType)comboBoxType.SelectedItem);
+
+			if (selected == ComponentStatus.New)
+				return quatationSupplierPriceListView1.SelectedItem.СurrencyNew;
+
+			if (selected == ComponentStatus.Overhaul)
+				return quatationSupplierPriceListView1.SelectedItem.СurrencyOH;
+
+			if (selected == ComponentStatus.Repair)
+				return quatationSupplierPriceListView1.SelectedItem.СurrencyRepair;
+
+			if (selected == ComponentStatus.Serviceable)
+				return quatationSupplierPriceListView1.SelectedItem.СurrencyServ;
+
+			if (selected == ComponentStatus.Test)
+				return quatationSupplierPriceListView1.SelectedItem.СurrencyTest;
+
+			if (selected == ComponentStatus.Inspect)
+				return quatationSupplierPriceListView1.SelectedItem.СurrencyInspect;
+
+			if (selected == ComponentStatus.Modification)
+				return quatationSupplierPriceListView1.SelectedItem.СurrencyModification;
+
+			return Сurrency.USD;
+		}
+
+		private decimal GetCostCreate()
+		{
+			var selected = (ComponentStatus)comboBoxCondition.SelectedItem;
+			var priceType = ((CostType)comboBoxType.SelectedItem);
+
+			if (selected == ComponentStatus.New)
+			{
+				return priceType == CostType.New
+					? quatationSupplierPriceListView1.SelectedItem.CostNew
+					: quatationSupplierPriceListView1.SelectedItem.CostNewEx;
+			}
+
+			if (selected == ComponentStatus.Overhaul)
+			{
+				return priceType == CostType.New
+					? quatationSupplierPriceListView1.SelectedItem.CostOverhaul
+					: quatationSupplierPriceListView1.SelectedItem.CostOverhaulEx;
+			}
+
+			if (selected == ComponentStatus.Repair)
+			{
+				return priceType == CostType.New
+					? quatationSupplierPriceListView1.SelectedItem.CostRepair
+					: quatationSupplierPriceListView1.SelectedItem.CostRepairEx;
+			}
+
+			if (selected == ComponentStatus.Serviceable)
+			{
+				return priceType == CostType.New
+					? quatationSupplierPriceListView1.SelectedItem.CostServiceable
+					: quatationSupplierPriceListView1.SelectedItem.CostServiceableEx;
+			}
+
+			if (selected == ComponentStatus.Test)
+			{
+				return priceType == CostType.New
+					? quatationSupplierPriceListView1.SelectedItem.CostTest
+					: quatationSupplierPriceListView1.SelectedItem.CostTestEx;
+			}
+
+			if (selected == ComponentStatus.Inspect)
+			{
+				return priceType == CostType.New
+					? quatationSupplierPriceListView1.SelectedItem.CostInspect
+					: quatationSupplierPriceListView1.SelectedItem.CostInspectEx;
+			}
+
+			if (selected == ComponentStatus.Modification)
+			{
+				return priceType == CostType.New
+					? quatationSupplierPriceListView1.SelectedItem.CostModification
+					: quatationSupplierPriceListView1.SelectedItem.CostModificationEx;
+			}
+
+			return 0;
 		}
 
 		#region private void Button1_Click(object sender, EventArgs e)
