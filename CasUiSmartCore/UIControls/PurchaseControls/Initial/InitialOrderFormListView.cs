@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Purchase;
@@ -28,6 +30,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 		#endregion
 
+		#region protected override List<CustomCell> GetListViewSubItems(InitialOrderRecord item)
+
 		protected override List<CustomCell> GetListViewSubItems(InitialOrderRecord item)
 		{
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
@@ -42,7 +46,25 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 				CreateRow( author,  author),
 			};
 		}
-		
+
+		#endregion
+
+		#region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
+		protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
+		{
+			if (SelectedItem != null)
+			{
+				var editForm = new ProductForm(SelectedItem.Product);
+				if (editForm.ShowDialog() == DialogResult.OK)
+				{
+					var subs = GetListViewSubItems(SelectedItem);
+					for (int i = 0; i < subs.Count; i++)
+						radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
+				}
+			}
+		}
+		#endregion
+
 		#region Overrides of BaseGridViewControl<InitialOrderRecord>
 
 		protected override void GroupingItems()
@@ -51,7 +73,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		}
 
 		#endregion
-
 
 	}
 }

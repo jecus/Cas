@@ -50,7 +50,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 			var temp = $"P/N: {item?.Parent?.Product?.PartNumber}";
 			if (item?.Parent?.ParentInitialRecord != null)
-				temp += $"| {item.Parent?.Product?.Standart}  | Name: {item?.Parent?.Product?.Name} | {destiantion} | {item?.Parent?.ParentInitialRecord?.Priority} | Requsted By: {((InitialOrder)item?.Parent?.ParentInitialRecord?.ParentPackage)?.Author}";
+				temp += $"| {item.Parent?.Product?.Standart}  | Name: {item?.Parent?.Product?.Name} | {destiantion} | {item?.Parent?.ParentInitialRecord?.Priority} | Requested By: {((InitialOrder)item?.Parent?.ParentInitialRecord?.ParentPackage)?.Author}";
 
 			Color? colorNew = null;
 			Color? colorOH = null;

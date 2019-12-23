@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Entities.Dictionaries;
@@ -28,13 +30,13 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		protected override void SetHeaders()
 		{
 			AddColumn("Supplier", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Q-ty", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Unit Cost", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Item Cost", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Total Cost", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Condition", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Type", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Measure", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Q-ty", (int)(radGridView1.Width * 0.1f));
+			AddColumn("Unit Cost", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Item Cost", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Total Cost", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Condition", (int)(radGridView1.Width * 0.14f));
+			AddColumn("Type", (int)(radGridView1.Width * 0.16f));
+			AddColumn("UOM", (int)(radGridView1.Width * 0.1f));
 			AddColumn("Product", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.1f));
 		}
@@ -52,7 +54,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			else destiantion = GlobalObjects.StoreCore.GetStoreById(item?.ParentInitialRecord?.DestinationObjectId ?? -1)?.ToString();
 			var temp = $"P/N: {item?.Product?.PartNumber}";
 			if (item?.ParentInitialRecord != null)
-				temp += $"| {item.Product?.Standart} | Name: {item?.Product?.Name} | {destiantion} | {item?.ParentInitialRecord?.Priority} | Requsted By: {((InitialOrder)item?.ParentInitialRecord?.ParentPackage)?.Author}";
+				temp += $"| {item.Product?.Standart} | Name: {item?.Product?.Name} | {destiantion} | {item?.ParentInitialRecord?.Priority} | Requested By: {((InitialOrder)item?.ParentInitialRecord?.ParentPackage)?.Author}";
 
 			return new List<CustomCell>()
 			{
@@ -78,6 +80,22 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			Grouping("Product");
 		}
 
+		#endregion
+
+		#region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
+		protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
+		{
+			if (SelectedItem != null)
+			{
+				var editForm = new ProductForm(SelectedItem.Product);
+				if (editForm.ShowDialog() == DialogResult.OK)
+				{
+					var subs = GetListViewSubItems(SelectedItem);
+					for (int i = 0; i < subs.Count; i++)
+						radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
+				}
+			}
+		}
 		#endregion
 	}
 }

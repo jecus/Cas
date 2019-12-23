@@ -10,6 +10,7 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.PurchaseControls.Initial;
 using CASTerms;
+using EntityCore.DTO.Dictionaries;
 using EntityCore.DTO.General;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -134,8 +135,14 @@ namespace CAS.UI.UIControls.PurchaseControls
 						new ICommonFilter[]
 							{new CommonFilter<int>(Supplier.SupplierClassProperty, SupplierClass.Shipper.ItemId)});
 
+					var stationIds = _purchaseArray.Select(i => i.StationId);
+					var station =
+						GlobalObjects.CasEnvironment.NewLoader.GetObjectList<AirportCodeDTO, AirportsCodes>(
+							new Filter("ItemId", stationIds));
+
 					foreach (var purchase in _purchaseArray)
 					{
+						purchase.Station = station.FirstOrDefault(i => i.ItemId == purchase.StationId);
 						purchase.ShipCompany =
 							_supplierShipper.FirstOrDefault(i => i.ItemId == purchase.ShipCompanyId) ??
 							Supplier.Unknown;

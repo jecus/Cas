@@ -61,6 +61,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				CreateRow(item.CostCondition.ToString(),item.CostCondition),
 				CreateRow(item.Measure.ToString(),item.Measure),
 				CreateRow($"{SmartCore.Auxiliary.Convert.GetDateFormat(order.AdditionalInformation.ArrivalDate)} {order.AdditionalInformation.ArrivalTime:HH:mm}", order),
+				CreateRow(order.Station?.ToString(), order.Station),
 				CreateRow($"{SmartCore.Auxiliary.Convert.GetDateFormat(order.AdditionalInformation.ReceiptDate)} {order.AdditionalInformation.ReceiptTime:HH:mm}", order),
 				CreateRow(order.AdditionalInformation.StatusOfDelivery.ToString(), order.AdditionalInformation.StatusOfDelivery),
 				CreateRow(temp, temp),
@@ -93,11 +94,12 @@ namespace CAS.UI.UIControls.PurchaseControls
 		{
 			AddColumn("Supplier", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Q-ty", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Cost", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Unit Cost", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Total Cost", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Condition", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Measure", (int)(radGridView1.Width * 0.2f));
+			AddColumn("UOM", (int)(radGridView1.Width * 0.1f));
 			AddColumn("Arrival", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Station", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Receipt", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Status of delivery", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Product", (int)(radGridView1.Width * 0.3f));
