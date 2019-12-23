@@ -95,14 +95,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				record.Supplier = suppliers.FirstOrDefault(i => i.ItemId == record.SupplierId);
 
 				record.ItemCost = record.Quantity * record.Cost;
+				record.TotalCost = records.Sum(i => i.Cost);
 			}
 
-			foreach (var record in records.GroupBy(i => i.PackageItemId))
-			{
-				var total = record.Sum(i => i.Cost);
-				foreach (var requestRecord in record)
-					requestRecord.TotalCost = total;
-			}
 
 
 			var documents = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DocumentDTO, Document>(new Filter("ParentID", _order.ItemId), true);
