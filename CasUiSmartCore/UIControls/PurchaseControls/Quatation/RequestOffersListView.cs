@@ -97,9 +97,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		protected override void SetHeaders()
 		{
-			AddColumn("Supplier", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Q-ty", (int)(radGridView1.Width * 0.2f));
-			AddColumn("UOM", (int)(radGridView1.Width * 0.1f));
+			AddColumn("Supplier", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Q-ty", (int)(radGridView1.Width * 0.08f));
+			AddColumn("UOM", (int)(radGridView1.Width * 0.08f));
 			AddColumn("New", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Serv", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Test", (int)(radGridView1.Width * 0.2f));
@@ -113,6 +113,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		}
 
 		#endregion
+
 		#endregion
 	}
 }

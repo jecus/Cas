@@ -95,7 +95,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// labelSearchPartNumber
 			// 
 			this.labelSearchPartNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.labelSearchPartNumber.Location = new System.Drawing.Point(23, 63);
+			this.labelSearchPartNumber.Location = new System.Drawing.Point(18, 63);
 			this.labelSearchPartNumber.Name = "labelSearchPartNumber";
 			this.labelSearchPartNumber.Size = new System.Drawing.Size(59, 23);
 			this.labelSearchPartNumber.TabIndex = 284;
@@ -118,7 +118,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.textBoxSearchPartNumber.CustomButton.Visible = false;
 			this.textBoxSearchPartNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.textBoxSearchPartNumber.Lines = new string[0];
-			this.textBoxSearchPartNumber.Location = new System.Drawing.Point(88, 63);
+			this.textBoxSearchPartNumber.Location = new System.Drawing.Point(83, 63);
 			this.textBoxSearchPartNumber.MaxLength = 32767;
 			this.textBoxSearchPartNumber.Name = "textBoxSearchPartNumber";
 			this.textBoxSearchPartNumber.PasswordChar = '\0';
@@ -145,7 +145,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.ButtonAdd.Icon = global::CAS.UI.Properties.Resources.AddIconSmall;
 			this.ButtonAdd.IconLayout = System.Windows.Forms.ImageLayout.Center;
 			this.ButtonAdd.IconNotEnabled = null;
-			this.ButtonAdd.Location = new System.Drawing.Point(594, 413);
+			this.ButtonAdd.Location = new System.Drawing.Point(844, 371);
 			this.ButtonAdd.Margin = new System.Windows.Forms.Padding(4);
 			this.ButtonAdd.Name = "ButtonAdd";
 			this.ButtonAdd.NormalBackgroundImage = null;
@@ -173,7 +173,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.ButtonDelete.Icon = global::CAS.UI.Properties.Resources.DeleteIconSmall;
 			this.ButtonDelete.IconLayout = System.Windows.Forms.ImageLayout.Center;
 			this.ButtonDelete.IconNotEnabled = null;
-			this.ButtonDelete.Location = new System.Drawing.Point(588, 754);
+			this.ButtonDelete.Location = new System.Drawing.Point(838, 690);
 			this.ButtonDelete.Margin = new System.Windows.Forms.Padding(4);
 			this.ButtonDelete.Name = "ButtonDelete";
 			this.ButtonDelete.NormalBackgroundImage = null;
@@ -212,7 +212,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.groupBox1.Controls.Add(this.checkBoxOverhaul);
 			this.groupBox1.Controls.Add(this.checkBoxServiceable);
 			this.groupBox1.Controls.Add(this.checkBoxNew);
-			this.groupBox1.Location = new System.Drawing.Point(982, 69);
+			this.groupBox1.Location = new System.Drawing.Point(972, 11);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(293, 337);
 			this.groupBox1.TabIndex = 290;
@@ -519,7 +519,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.groupBox2.Controls.Add(this.labelAuthor);
 			this.groupBox2.Controls.Add(this.textBoxTitle);
 			this.groupBox2.Controls.Add(this.labelQOTitle);
-			this.groupBox2.Location = new System.Drawing.Point(982, 412);
+			this.groupBox2.Location = new System.Drawing.Point(972, 350);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(293, 319);
 			this.groupBox2.TabIndex = 291;
@@ -863,7 +863,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(1128, 743);
+			this.buttonOk.Location = new System.Drawing.Point(1115, 679);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 293;
@@ -877,7 +877,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonCancel.Location = new System.Drawing.Point(1209, 743);
+			this.buttonCancel.Location = new System.Drawing.Point(1196, 679);
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.Size = new System.Drawing.Size(75, 33);
 			this.buttonCancel.TabIndex = 292;
@@ -892,13 +892,13 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this._formListViewInitialItems.EnableCustomSorting = true;
 			this._formListViewInitialItems.Entity = null;
 			this._formListViewInitialItems.IgnoreEnterPress = false;
-			this._formListViewInitialItems.Location = new System.Drawing.Point(23, 443);
+			this._formListViewInitialItems.Location = new System.Drawing.Point(18, 403);
 			this._formListViewInitialItems.MenuOpeningAction = null;
 			this._formListViewInitialItems.Name = "_formListViewInitialItems";
 			this._formListViewInitialItems.OldColumnIndex = 0;
 			this._formListViewInitialItems.PasteComplete = null;
 			this._formListViewInitialItems.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this._formListViewInitialItems.Size = new System.Drawing.Size(942, 304);
+			this._formListViewInitialItems.Size = new System.Drawing.Size(942, 280);
 			this._formListViewInitialItems.SortMultiplier = 0;
 			this._formListViewInitialItems.TabIndex = 294;
 			this._formListViewInitialItems.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.listViewInitialItems_SelectedItemsChanged);
@@ -911,19 +911,19 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.listViewKits.EnableCustomSorting = true;
 			this.listViewKits.Entity = null;
 			this.listViewKits.IgnoreEnterPress = false;
-			this.listViewKits.Location = new System.Drawing.Point(23, 91);
+			this.listViewKits.Location = new System.Drawing.Point(18, 91);
 			this.listViewKits.MenuOpeningAction = null;
 			this.listViewKits.Name = "listViewKits";
 			this.listViewKits.OldColumnIndex = 2;
 			this.listViewKits.PasteComplete = null;
 			this.listViewKits.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewKits.Size = new System.Drawing.Size(942, 315);
+			this.listViewKits.Size = new System.Drawing.Size(942, 280);
 			this.listViewKits.SortMultiplier = 1;
 			this.listViewKits.TabIndex = 68;
 			// 
 			// metroProgressSpinner1
 			// 
-			this.metroProgressSpinner1.Location = new System.Drawing.Point(256, 147);
+			this.metroProgressSpinner1.Location = new System.Drawing.Point(393, 162);
 			this.metroProgressSpinner1.Maximum = 100;
 			this.metroProgressSpinner1.Name = "metroProgressSpinner1";
 			this.metroProgressSpinner1.Size = new System.Drawing.Size(180, 156);
@@ -938,7 +938,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button2.Location = new System.Drawing.Point(890, 53);
+			this.button2.Location = new System.Drawing.Point(885, 52);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(75, 33);
 			this.button2.TabIndex = 303;
@@ -950,9 +950,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.buttonAddProd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonAddProd.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonAddProd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonAddProd.Location = new System.Drawing.Point(971, 743);
+			this.buttonAddProd.Location = new System.Drawing.Point(966, 679);
 			this.buttonAddProd.Name = "buttonAddProd";
-			this.buttonAddProd.Size = new System.Drawing.Size(151, 33);
+			this.buttonAddProd.Size = new System.Drawing.Size(143, 33);
 			this.buttonAddProd.TabIndex = 304;
 			this.buttonAddProd.Text = "Add New Product";
 			this.buttonAddProd.Click += new System.EventHandler(this.ButtonAddProduct_Click);
@@ -961,7 +961,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1288, 792);
+			this.ClientSize = new System.Drawing.Size(1280, 720);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.buttonAddProd);
 			this.Controls.Add(this.metroProgressSpinner1);

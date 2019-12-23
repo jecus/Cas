@@ -29,13 +29,13 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		{
 			AddColumn("Supplier", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Q-ty", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Cost", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Total Cost", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Unit Cost", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Item Cost", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Condition", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Type", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Measure", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Product", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.1f));
 		}
 
 		#endregion
@@ -51,10 +51,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			else destiantion = GlobalObjects.StoreCore.GetStoreById(item?.ParentInitialRecord?.DestinationObjectId ?? -1)?.ToString();
 			var temp = $"P/N: {item?.Product?.PartNumber}";
 			if (item?.ParentInitialRecord != null)
-				temp += $"| {item.Product?.Standart} | Name: {item?.Product?.Name} | {destiantion} | {item?.ParentInitialRecord?.Priority} | Requseted By: {((InitialOrder)item?.ParentInitialRecord?.ParentPackage)?.Author}";
+				temp += $"| {item.Product?.Standart} | Name: {item?.Product?.Name} | {destiantion} | {item?.ParentInitialRecord?.Priority} | Requsted By: {((InitialOrder)item?.ParentInitialRecord?.ParentPackage)?.Author}";
 
 			double total = item.Quantity * item.Cost;
 
+			
 			return new List<CustomCell>()
 			{
 				CreateRow(item.Supplier.ToString(),item.Supplier),
@@ -79,6 +80,5 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		}
 
 		#endregion
-
 	}
 }

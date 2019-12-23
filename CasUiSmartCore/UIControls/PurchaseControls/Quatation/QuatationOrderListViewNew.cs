@@ -29,10 +29,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		{
 			AddColumn("P/N", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Suppliers", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Name", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Measure", (int)(radGridView1.Width * 0.16f));
-			AddColumn("Quantity", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Specification", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Name", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Quantity", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Measure", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Class", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.16f));
 			AddColumn(" ", (int)(radGridView1.Width * 0.16f));
@@ -50,10 +50,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 				subItems.Add(CreateRow(record.Product?.PartNumber, record.Product?.PartNumber));
 				subItems.Add(CreateRow(record.Suppliers?.ToString(), record.Suppliers?.ToString()));
-				subItems.Add(CreateRow(record.Product?.Name, record.Product?.Name));
-				subItems.Add(CreateRow(record.Measure.ToString(), record.Measure.ToString()));
-				subItems.Add(CreateRow(record.Quantity.ToString(), record.Quantity.ToString()));
 				subItems.Add(CreateRow(record.Product?.Standart?.ToString(), record.Product?.Standart?.ToString()));
+				subItems.Add(CreateRow(record.Product?.Name, record.Product?.Name));
+				subItems.Add(CreateRow(record.Quantity.ToString(), record.Quantity.ToString()));
+				subItems.Add(CreateRow(record.Measure.ToString(), record.Measure.ToString()));
 				subItems.Add(CreateRow(record.Product?.GoodsClass?.ToString() ?? "Another accessory", record.Product?.GoodsClass?.ToString()));
 				subItems.Add(CreateRow(author, author));
 				subItems.Add(CreateRow("", ""));
