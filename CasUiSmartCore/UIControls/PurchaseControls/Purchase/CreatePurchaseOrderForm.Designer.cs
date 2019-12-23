@@ -767,6 +767,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.comboBoxType.Name = "comboBoxType";
 			this.comboBoxType.Size = new System.Drawing.Size(166, 25);
 			this.comboBoxType.TabIndex = 254;
+			this.comboBoxType.SelectedIndexChanged += new System.EventHandler(this.ComboBoxCondition_SelectedIndexChanged);
 			// 
 			// CreatePurchaseOrderForm
 			// 

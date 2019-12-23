@@ -127,6 +127,14 @@ namespace SmartCore.Purchase
 		public ComponentStatus CostCondition { get; set; }
 		#endregion
 
+		#region public KitCostCondition CostCondition { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		[TableColumn("CostType")]
+		public CostType CostType { get; set; }
+		#endregion
+
 		#region public Boolean Processed { get; set; }
 		/// <summary>
 		/// 

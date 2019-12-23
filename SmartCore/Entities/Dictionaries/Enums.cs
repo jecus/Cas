@@ -169,7 +169,7 @@ namespace SmartCore.Entities.Dictionaries
 
     }
 
-	public enum PriceType : short
+	public enum CostType : short
 	{
         New = 1,
         Exchange = 2
