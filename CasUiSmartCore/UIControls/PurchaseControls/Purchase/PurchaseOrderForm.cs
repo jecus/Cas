@@ -93,7 +93,18 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 					record.ParentInitialRecord.ParentPackage = initial;
 				record.Product = products.FirstOrDefault(i => i.ItemId == record.PackageItemId);
 				record.Supplier = suppliers.FirstOrDefault(i => i.ItemId == record.SupplierId);
+
+				record.ItemCost = record.Quantity * record.Cost;
 			}
+
+			foreach (var record in records.GroupBy(i => i.SupplierId))
+			{
+				var total = record.Sum(i => i.Cost);
+				foreach (var requestRecord in record)
+					requestRecord.TotalCost = total;
+			}
+
+
 			var documents = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DocumentDTO, Document>(new Filter("ParentID", _order.ItemId), true);
 			_order.ClosingDocument.Clear();
 			_order.ClosingDocument.AddRange(documents);

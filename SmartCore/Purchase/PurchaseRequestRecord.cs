@@ -210,6 +210,9 @@ namespace SmartCore.Purchase
 			set => _additionalInformation = value;
 		}
 
+		public double ItemCost { get; set; }
+		public double TotalCost { get; set; }
+
 		/*
 		*  Ìועמהû 
 		*/
