@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using CAS.UI.UIControls.NewGrid;
+using CAS.UI.UIControls.PurchaseControls.Purchase;
 using CASTerms;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Purchase;
@@ -74,17 +76,16 @@ namespace CAS.UI.UIControls.PurchaseControls
 		#region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
 		protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
 		{
-			//if (SelectedItem != null)
-			//{
-
-			//	var editForm = new QuatationOrderFormNew(SelectedItem);
-			//	if (editForm.ShowDialog() == DialogResult.OK)
-			//	{
-			//		var subs = GetListViewSubItems(SelectedItem);
-			//		for (int i = 0; i < subs.Count; i++)
-			//			radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
-			//	}
-			//}
+			if (SelectedItem != null)
+			{
+				var editForm = new PurchaseOrderForm((PurchaseOrder) SelectedItem.ParentPackage);
+				if (editForm.ShowDialog() == DialogResult.OK)
+				{
+					var subs = GetListViewSubItems(SelectedItem);
+					for (int i = 0; i < subs.Count; i++)
+						radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
+				}
+			}
 		}
 		#endregion
 

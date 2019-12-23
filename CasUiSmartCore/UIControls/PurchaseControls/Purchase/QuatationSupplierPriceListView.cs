@@ -48,7 +48,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 				destiantion = GlobalObjects.AircraftsCore.GetAircraftById(item.Parent?.ParentInitialRecord?.DestinationObjectId ?? -1)?.ToString();
 			else destiantion = GlobalObjects.StoreCore.GetStoreById(item.Parent?.ParentInitialRecord?.DestinationObjectId ?? -1)?.ToString();
 
-			var temp = $"P/N: {item?.Parent?.Product?.PartNumber}";
+			var temp = $"P/N: {item?.Parent?.Product?.PartNumber} | Q-ty:{item.Parent.Quantity} ";
 			if (item?.Parent?.ParentInitialRecord != null)
 				temp += $"| {item.Parent?.Product?.Standart}  | Name: {item?.Parent?.Product?.Name} | {destiantion} | {item?.Parent?.ParentInitialRecord?.Priority} | Requested By: {((InitialOrder)item?.Parent?.ParentInitialRecord?.ParentPackage)?.Author}";
 
