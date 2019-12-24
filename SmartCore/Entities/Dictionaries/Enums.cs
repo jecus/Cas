@@ -169,10 +169,10 @@ namespace SmartCore.Entities.Dictionaries
 
     }
 
-	public enum CostType : short
+	public enum Exchange : short
 	{
-        New = 1,
-        Exchange = 2
+        No = 1,
+        Yes = 2
 	}
 
     #endregion

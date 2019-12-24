@@ -230,7 +230,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			comboBoxCondition.DataSource = statuses;
 
 			comboBoxType.Items.Clear();
-			comboBoxType.DataSource = Enum.GetValues(typeof(CostType));
+			comboBoxType.DataSource = Enum.GetValues(typeof(Exchange));
 
 			comboBoxCurrency.Items.Clear();
 			comboBoxCurrency.Items.AddRange(Сurrency.Items.ToArray());
@@ -247,7 +247,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			var newRequest = new PurchaseRequestRecord(-1, price.Parent.Product, 1)
 			{
 				CostCondition = (ComponentStatus) comboBoxCondition.SelectedItem,
-				CostType = (CostType) comboBoxType.SelectedItem,
+				Exchange = (Exchange) comboBoxType.SelectedItem,
 				Product = price.Parent.Product,
 				Supplier = price.Supplier,
 				Quantity = (double) numericUpDownQuantity.Value,
@@ -269,7 +269,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 			if (_addedRecord.Any(i => i.Product.ItemId == price.Parent.Product.ItemId
 			                          && i.CostCondition == (ComponentStatus) comboBoxCondition.SelectedItem
-			                          && i.CostType == (CostType) comboBoxType.SelectedItem
+			                          && i.Exchange == (Exchange) comboBoxType.SelectedItem
 			                          && i.SupplierId == price.SupplierId))
 			{
 				MessageBox.Show("Supplier price for product alredy added!",
@@ -404,7 +404,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private Сurrency GetCurrency()
 		{
 			var selected = (ComponentStatus)comboBoxCondition.SelectedItem;
-			var priceType = ((CostType)comboBoxType.SelectedItem);
+			var priceType = ((Exchange)comboBoxType.SelectedItem);
 
 			if (selected == ComponentStatus.New)
 				return purchaseRecordListView1.SelectedItem.Price.СurrencyNew;
@@ -433,53 +433,53 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private decimal GetCost()
 		{
 			var selected = (ComponentStatus)comboBoxCondition.SelectedItem;
-			var priceType = ((CostType)comboBoxType.SelectedItem);
+			var priceType = ((Exchange)comboBoxType.SelectedItem);
 
 			if (selected == ComponentStatus.New)
 			{
-				return priceType == CostType.New
+				return priceType == Exchange.No
 					? purchaseRecordListView1.SelectedItem.Price.CostNew
 					: purchaseRecordListView1.SelectedItem.Price.CostNewEx;
 			}
 
 			if (selected == ComponentStatus.Overhaul)
 			{
-				return priceType == CostType.New
+				return priceType == Exchange.No
 					? purchaseRecordListView1.SelectedItem.Price.CostOverhaul
 					: purchaseRecordListView1.SelectedItem.Price.CostOverhaulEx;
 			}
 
 			if (selected == ComponentStatus.Repair)
 			{
-				return priceType == CostType.New
+				return priceType == Exchange.No
 					? purchaseRecordListView1.SelectedItem.Price.CostRepair
 					: purchaseRecordListView1.SelectedItem.Price.CostRepairEx;
 			}
 
 			if (selected == ComponentStatus.Serviceable)
 			{
-				return priceType == CostType.New
+				return priceType == Exchange.No
 					? purchaseRecordListView1.SelectedItem.Price.CostServiceable
 					: purchaseRecordListView1.SelectedItem.Price.CostServiceableEx;
 			}
 
 			if (selected == ComponentStatus.Test)
 			{
-				return priceType == CostType.New
+				return priceType == Exchange.No
 					? purchaseRecordListView1.SelectedItem.Price.CostTest
 					: purchaseRecordListView1.SelectedItem.Price.CostTestEx;
 			}
 
 			if (selected == ComponentStatus.Inspect)
 			{
-				return priceType == CostType.New
+				return priceType == Exchange.No
 					? purchaseRecordListView1.SelectedItem.Price.CostInspect
 					: purchaseRecordListView1.SelectedItem.Price.CostInspectEx;
 			}
 
 			if (selected == ComponentStatus.Modification)
 			{
-				return priceType == CostType.New
+				return priceType == Exchange.No
 					? purchaseRecordListView1.SelectedItem.Price.CostModification
 					: purchaseRecordListView1.SelectedItem.Price.CostModificationEx;
 			}
@@ -490,7 +490,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private Сurrency GetCurrencyСreate()
 		{
 			var selected = (ComponentStatus)comboBoxCondition.SelectedItem;
-			var priceType = ((CostType)comboBoxType.SelectedItem);
+			var priceType = ((Exchange)comboBoxType.SelectedItem);
 
 			if (selected == ComponentStatus.New)
 				return quatationSupplierPriceListView1.SelectedItem.СurrencyNew;
@@ -519,53 +519,53 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private decimal GetCostCreate()
 		{
 			var selected = (ComponentStatus)comboBoxCondition.SelectedItem;
-			var priceType = ((CostType)comboBoxType.SelectedItem);
+			var priceType = ((Exchange)comboBoxType.SelectedItem);
 
 			if (selected == ComponentStatus.New)
 			{
-				return priceType == CostType.New
+				return priceType == Exchange.No
 					? quatationSupplierPriceListView1.SelectedItem.CostNew
 					: quatationSupplierPriceListView1.SelectedItem.CostNewEx;
 			}
 
 			if (selected == ComponentStatus.Overhaul)
 			{
-				return priceType == CostType.New
+				return priceType == Exchange.No
 					? quatationSupplierPriceListView1.SelectedItem.CostOverhaul
 					: quatationSupplierPriceListView1.SelectedItem.CostOverhaulEx;
 			}
 
 			if (selected == ComponentStatus.Repair)
 			{
-				return priceType == CostType.New
+				return priceType == Exchange.No
 					? quatationSupplierPriceListView1.SelectedItem.CostRepair
 					: quatationSupplierPriceListView1.SelectedItem.CostRepairEx;
 			}
 
 			if (selected == ComponentStatus.Serviceable)
 			{
-				return priceType == CostType.New
+				return priceType == Exchange.No
 					? quatationSupplierPriceListView1.SelectedItem.CostServiceable
 					: quatationSupplierPriceListView1.SelectedItem.CostServiceableEx;
 			}
 
 			if (selected == ComponentStatus.Test)
 			{
-				return priceType == CostType.New
+				return priceType == Exchange.No
 					? quatationSupplierPriceListView1.SelectedItem.CostTest
 					: quatationSupplierPriceListView1.SelectedItem.CostTestEx;
 			}
 
 			if (selected == ComponentStatus.Inspect)
 			{
-				return priceType == CostType.New
+				return priceType == Exchange.No
 					? quatationSupplierPriceListView1.SelectedItem.CostInspect
 					: quatationSupplierPriceListView1.SelectedItem.CostInspectEx;
 			}
 
 			if (selected == ComponentStatus.Modification)
 			{
-				return priceType == CostType.New
+				return priceType == Exchange.No
 					? quatationSupplierPriceListView1.SelectedItem.CostModification
 					: quatationSupplierPriceListView1.SelectedItem.CostModificationEx;
 			}

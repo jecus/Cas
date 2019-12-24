@@ -131,8 +131,8 @@ namespace SmartCore.Purchase
 		/// <summary>
 		/// 
 		/// </summary>
-		[TableColumn("CostType")]
-		public CostType CostType { get; set; }
+		[TableColumn("Exchange")]
+		public Exchange Exchange { get; set; }
 		#endregion
 
 		#region public Boolean Processed { get; set; }

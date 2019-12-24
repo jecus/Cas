@@ -4522,7 +4522,7 @@ namespace SmartCore.DtoHelper
 				Measure = purchaserec.Measure?.ItemId,
 				Cost = purchaserec.Cost,
 				CostCondition = (short?)purchaserec.CostCondition,
-				CostType = (short)purchaserec.CostType,
+				CostType = (short)purchaserec.Exchange,
 				Processed = purchaserec.Processed,
 				AdditionalInformationJSON = purchaserec.AdditionalInformationJSON,
 				Files = purchaserec.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>
@@ -4547,7 +4547,7 @@ namespace SmartCore.DtoHelper
 				Measure = purchaserecdto.Measure.HasValue ? Measure.Items.GetItemById(purchaserecdto.Measure.Value) : Measure.Unknown,
 				Cost = purchaserecdto.Cost ?? default(double),
 				CostCondition = purchaserecdto.CostCondition.HasValue ? (ComponentStatus)purchaserecdto.CostCondition.Value : ComponentStatus.Unknown,
-				CostType = (CostType)purchaserecdto.CostType,
+				Exchange = (Exchange)purchaserecdto.CostType,
 				Processed = purchaserecdto.Processed ?? default(bool),
 				AdditionalInformationJSON = purchaserecdto.AdditionalInformationJSON
 			};
