@@ -302,7 +302,17 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			purchaseRecordListView1.SelectedItem.Quantity = (double) numericUpDownQuantity.Value;
 			purchaseRecordListView1.SelectedItem.Cost = (double)numericUpDownCost.Value;
 			purchaseRecordListView1.SelectedItem.Currency = (Сurrency) comboBoxCurrency.SelectedItem;
-			
+
+			foreach (var record in _addedRecord)
+			{
+				record.ItemCost = record.Quantity * record.Cost;
+			}
+
+			foreach (var record in _addedRecord)
+			{
+				record.TotalCost = _addedRecord.Sum(i => i.ItemCost);
+			}
+
 			purchaseRecordListView1.SetItemsArray(_addedRecord.ToArray());
 		}
 
