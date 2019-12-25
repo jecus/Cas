@@ -330,7 +330,7 @@ namespace CAS.UI.UIControls.ComponentControls
             this.labelCompntTCSNLast.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.labelCompntTCSNLast.Location = new System.Drawing.Point(676, 97);
             this.labelCompntTCSNLast.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
-            this.labelCompntTCSNLast.MaximumSize = new System.Drawing.Size(233, 369);
+            this.labelCompntTCSNLast.MaximumSize = new System.Drawing.Size(350, 369);
             this.labelCompntTCSNLast.MinimumSize = new System.Drawing.Size(27, 25);
             this.labelCompntTCSNLast.Name = "labelCompntTCSNLast";
             this.labelCompntTCSNLast.Size = new System.Drawing.Size(27, 25);
@@ -346,7 +346,7 @@ namespace CAS.UI.UIControls.ComponentControls
             this.labelCompntTCSNNext.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.labelCompntTCSNNext.Location = new System.Drawing.Point(676, 53);
             this.labelCompntTCSNNext.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelCompntTCSNNext.MaximumSize = new System.Drawing.Size(227, 369);
+            this.labelCompntTCSNNext.MaximumSize = new System.Drawing.Size(350, 369);
             this.labelCompntTCSNNext.MinimumSize = new System.Drawing.Size(27, 25);
             this.labelCompntTCSNNext.Name = "labelCompntTCSNNext";
             this.labelCompntTCSNNext.Size = new System.Drawing.Size(27, 25);
@@ -361,7 +361,7 @@ namespace CAS.UI.UIControls.ComponentControls
             this.labelAircraftTCSNLast.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.labelAircraftTCSNLast.Location = new System.Drawing.Point(1174, 95);
             this.labelAircraftTCSNLast.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelAircraftTCSNLast.MaximumSize = new System.Drawing.Size(228, 369);
+            this.labelAircraftTCSNLast.MaximumSize = new System.Drawing.Size(350, 369);
             this.labelAircraftTCSNLast.MinimumSize = new System.Drawing.Size(27, 25);
             this.labelAircraftTCSNLast.Name = "labelAircraftTCSNLast";
             this.labelAircraftTCSNLast.Size = new System.Drawing.Size(27, 25);
@@ -376,7 +376,7 @@ namespace CAS.UI.UIControls.ComponentControls
             this.labelAircraftTCSNNext.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.labelAircraftTCSNNext.Location = new System.Drawing.Point(1174, 53);
             this.labelAircraftTCSNNext.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelAircraftTCSNNext.MaximumSize = new System.Drawing.Size(233, 369);
+            this.labelAircraftTCSNNext.MaximumSize = new System.Drawing.Size(350, 369);
             this.labelAircraftTCSNNext.MinimumSize = new System.Drawing.Size(27, 25);
             this.labelAircraftTCSNNext.Name = "labelAircraftTCSNNext";
             this.labelAircraftTCSNNext.Size = new System.Drawing.Size(27, 25);
@@ -405,7 +405,7 @@ namespace CAS.UI.UIControls.ComponentControls
             this.labelCompntRemains.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.labelCompntRemains.Location = new System.Drawing.Point(676, 181);
             this.labelCompntRemains.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
-            this.labelCompntRemains.MaximumSize = new System.Drawing.Size(227, 369);
+            this.labelCompntRemains.MaximumSize = new System.Drawing.Size(350, 369);
             this.labelCompntRemains.MinimumSize = new System.Drawing.Size(27, 25);
             this.labelCompntRemains.Name = "labelCompntRemains";
             this.labelCompntRemains.Size = new System.Drawing.Size(27, 25);
@@ -604,7 +604,7 @@ namespace CAS.UI.UIControls.ComponentControls
             this.labelCompntSince.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.labelCompntSince.Location = new System.Drawing.Point(676, 139);
             this.labelCompntSince.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
-            this.labelCompntSince.MaximumSize = new System.Drawing.Size(227, 369);
+            this.labelCompntSince.MaximumSize = new System.Drawing.Size(350, 369);
             this.labelCompntSince.MinimumSize = new System.Drawing.Size(27, 25);
             this.labelCompntSince.Name = "labelCompntSince";
             this.labelCompntSince.Size = new System.Drawing.Size(27, 25);
