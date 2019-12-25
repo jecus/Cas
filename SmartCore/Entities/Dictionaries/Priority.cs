@@ -3,6 +3,7 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
+	[Serializable]
 	public class Priority : StaticDictionary
 	{
 
@@ -26,8 +27,8 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Методы
-         */
+		 * Методы
+		 */
 
 		#region public static Priority GetItemById(Int32 maintenanceTypeId)
 		/// <summary>
@@ -71,8 +72,8 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Реализация
-         */
+		 * Реализация
+		 */
 		#region public Priority()
 		/// <summary>
 		/// Конструктор создает объект повреждения

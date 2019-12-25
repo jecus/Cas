@@ -15,7 +15,6 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Filters;
-using Telerik.WinControls;
 using Telerik.WinControls.UI;
 using Filter = EntityCore.Filter.Filter;
 
@@ -35,9 +34,6 @@ namespace CAS.UI.UIControls.DocumentationControls
 		private readonly BaseEntityObject _parent;
 		private DocumentationListView _directivesViewer;
 
-		private RadDropDownMenu _contextMenuStrip;
-		private RadMenuItem _toolStripMenuItemCopy;
-		private RadMenuItem _toolStripMenuItemPaste;
 		private RadMenuItem _toolStripMenuItemShowTaskCard;
 		private RadMenuItem _toolStripMenuItemSaveAsTaskCard;
 		private RadMenuSeparatorItem _toolStripSeparator1;
@@ -206,7 +202,8 @@ namespace CAS.UI.UIControls.DocumentationControls
 				Dock = DockStyle.Fill
 			};
 
-			_directivesViewer.CustomMenu = _contextMenuStrip;
+			_directivesViewer.AddMenuItems(_toolStripMenuItemSaveAsTaskCard,
+				_toolStripMenuItemShowTaskCard);
 
 			_directivesViewer.MenuOpeningAction = () => {
 				if (_directivesViewer.SelectedItems.Count <= 0)
@@ -248,31 +245,10 @@ namespace CAS.UI.UIControls.DocumentationControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
-			_toolStripMenuItemCopy = new RadMenuItem();
-			_toolStripMenuItemPaste = new RadMenuItem();
 			_toolStripMenuItemShowTaskCard = new RadMenuItem();
 			_toolStripMenuItemSaveAsTaskCard = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
-
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
-
-			// 
-			// toolStripMenuItemCopy
-			// 
-			_toolStripMenuItemCopy.Text = "Copy";
-			_toolStripMenuItemCopy.Click += CopyItemsClick;
-
-			// 
-			// toolStripMenuItemPaste
-			// 
-			_toolStripMenuItemPaste.Text = "Paste";
-			_toolStripMenuItemPaste.Click += PasteItemsClick;
-
+			
 			// 
 			// toolStripMenuItemShowTaskCard
 			// 
@@ -284,37 +260,10 @@ namespace CAS.UI.UIControls.DocumentationControls
 			// 
 			_toolStripMenuItemSaveAsTaskCard.Text = "Save as document file";
 			_toolStripMenuItemSaveAsTaskCard.Click += _toolStripMenuItemSaveAsTaskCard_Click;
-
-			_contextMenuStrip.Items.AddRange(_toolStripMenuItemSaveAsTaskCard,
-				_toolStripMenuItemShowTaskCard,
-				_toolStripSeparator1,
-				_toolStripMenuItemCopy,
-				_toolStripMenuItemPaste);
-			
-			
 		}
 
 		#endregion
-
-		#region  private void PasteItemsClick(object sender, EventArgs e)
-
-		private void PasteItemsClick(object sender, EventArgs e)
-		{
-			GetFromClipboard();
-		}
-
-		#endregion
-
-		#region private void CopyItemsClick(object sender, EventArgs e)
-
-		private void CopyItemsClick(object sender, EventArgs e)
-		{
-			CopyToClipboard();
-
-		}
-
-		#endregion
-
+		
 		#region private void ShowDocumentFileItemsClick(object sender, EventArgs e)
 
 		private void ShowDocumentFileItemsClick(object sender, EventArgs e)
@@ -502,95 +451,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 		}
 
 		#endregion
-
-		#region private void CopyToClipboard()
-		private void CopyToClipboard()
-		{
-			// регистрация формата данных либо получаем его, если он уже зарегистрирован
-			var format = DataFormats.GetFormat(typeof(Document[]).FullName);
-
-			if (_directivesViewer.SelectedItems == null || _directivesViewer.SelectedItems.Count == 0)
-				return;
-
-			var pds = new List<Document>();
-			foreach (var document in _directivesViewer.SelectedItems)
-			{
-				pds.Add(document.GetCopyUnsaved());
-			}
-
-			if (pds.Count <= 0)
-				return;
-
-			//todo:(EvgeniiBabak) Нужен другой способ проверки сереализуемости объекта
-			using (var mem = new System.IO.MemoryStream())
-			{
-				var bin = new BinaryFormatter();
-				try
-				{
-					bin.Serialize(mem, pds);
-				}
-				catch (Exception ex)
-				{
-					MessageBox.Show("Объект не может быть сериализован. \n" + ex);
-					return;
-				}
-			}
-			// копирование в буфер обмена
-			IDataObject dataObj = new DataObject();
-			dataObj.SetData(format.Name, false, pds.ToArray());
-			Clipboard.SetDataObject(dataObj, false);
-
-			pds.Clear();
-		}
-		#endregion
-
-		#region private void GetFromClipboard()
-
-		private void GetFromClipboard()
-		{
-			try
-			{
-				var format = typeof(Document[]).FullName;
-
-				if (string.IsNullOrEmpty(format))
-					return;
-				if (!Clipboard.ContainsData(format))
-					return;
-				var documents = (Document[]) Clipboard.GetData(format);
-				if (documents == null)
-					return;
-
-				var objectsToPaste = new List<Document>();
-				foreach (var document in documents)
-				{
-					document.Parent = _parent;
-					document.ParentId = _parent.ItemId;
-					_initialDocumentArray.Add(document);
-					document.ContractNumber += " Copy";
-					objectsToPaste.Add(document);
-				}
-
-				if (objectsToPaste.Count > 0)
-				{
-					_directivesViewer.InsertItems(objectsToPaste.ToArray());
-
-					headerControl.ShowSaveButton = true;
-				}
-
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Error while inserting new object(s). \n" + ex);
-				headerControl.ShowSaveButton = false;
-				Program.Provider.Logger.Log(ex);
-			}
-			finally
-			{
-				Clipboard.Clear();
-			}
-		}
-		#endregion
-
+		
 		#region private void ButtonApplyFilterClick(object sender, EventArgs e)
 
 		private void ButtonApplyFilterClick(object sender, EventArgs e)

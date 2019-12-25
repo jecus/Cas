@@ -33,6 +33,7 @@ namespace CAS.UI.UIControls.StoresControls
 		{
 			InitializeComponent();
 			OldColumnIndex = 1;
+			EnableCustomSorting = false;
 		}
 		#endregion
 
@@ -479,12 +480,6 @@ namespace CAS.UI.UIControls.StoresControls
 		#endregion
 
 		#region protected override void CustomSort(int ColumnIndex)
-
-
-		protected override void Sorting(string colName = null)
-		{
-			
-		}
 
 		protected override void CustomSort(int ColumnIndex)
 		{

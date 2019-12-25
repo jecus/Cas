@@ -50,10 +50,14 @@ namespace EntityCore.DTO.General
 		[Column("CostCondition")]
 		public short? CostCondition { get; set; }
 
-		
+		[Column("CostType")]
+		public short CostType { get; set; }
+
 		[Column("Processed")]
 		public bool? Processed { get; set; }
 
+		[Column("AdditionalInformationJSON")]
+		public string AdditionalInformationJSON { get; set; }
 
 		[Child(FilterType.Equal, "ParentTypeId", 1860)]
 		public ICollection<ItemFileLinkDTO> Files { get; set; }

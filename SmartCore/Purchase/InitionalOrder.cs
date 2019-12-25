@@ -17,44 +17,44 @@ using SmartCore.Packages;
 namespace SmartCore.Purchase
 {
 
-    /// <summary>
-    /// Класс описывает котировочный акт
-    /// </summary>
-    [Table("InitialOrders", "dbo", "ItemId")]
-    [Dto(typeof(InitialOrderDTO))]
+	/// <summary>
+	/// Класс описывает котировочный акт
+	/// </summary>
+	[Table("InitialOrders", "dbo", "ItemId")]
+	[Dto(typeof(InitialOrderDTO))]
 	[Condition("IsDeleted", "0")]
-    public class InitialOrder : AbstractPackage<InitialOrderRecord>, IComparable<InitialOrder>, IFileContainer, ILogistic
+	public class InitialOrder : AbstractPackage<InitialOrderRecord>, IComparable<InitialOrder>, IFileContainer, ILogistic
 	{
 		/*
 		*  Свойства
 		*/
-        /// <summary>
-        /// Запрашиваемые комплектующие
-        /// </summary>
-        public List<Product> Products { get; set; }
+		/// <summary>
+		/// Запрашиваемые комплектующие
+		/// </summary>
+		public List<Product> Products { get; set; }
 
-        #region public override CommonCollection<InitionalOrderRecord> PackageRecords
+		#region public override CommonCollection<InitionalOrderRecord> PackageRecords
 
-        private CommonCollection<InitialOrderRecord> _packageRecords;
-        /// <summary>
-        /// Содержит массив элементов для привязки директив к рабочему пакету
-        /// </summary>
-        [Child(RelationType.OneToMany, "ParentPackageId")]
-        public override CommonCollection<InitialOrderRecord> PackageRecords
-        {
-            get { return _packageRecords ?? (_packageRecords = new CommonCollection<InitialOrderRecord>()); }
-            internal set
-            {
-                if (_packageRecords == value) 
-                    return;
-                if (_packageRecords != null)
-                    _packageRecords.Clear();
-                if (value != null)
-                    _packageRecords = value;
+		private CommonCollection<InitialOrderRecord> _packageRecords;
+		/// <summary>
+		/// Содержит массив элементов для привязки директив к рабочему пакету
+		/// </summary>
+		[Child(RelationType.OneToMany, "ParentPackageId")]
+		public override CommonCollection<InitialOrderRecord> PackageRecords
+		{
+			get { return _packageRecords ?? (_packageRecords = new CommonCollection<InitialOrderRecord>()); }
+			internal set
+			{
+				if (_packageRecords == value) 
+					return;
+				if (_packageRecords != null)
+					_packageRecords.Clear();
+				if (value != null)
+					_packageRecords = value;
 
-                OnPropertyChanged("PackageRecords");
-            }
-        }
+				OnPropertyChanged("PackageRecords");
+			}
+		}
 
 		#endregion
 
@@ -118,6 +118,12 @@ namespace SmartCore.Purchase
 		[TableColumn("Number")]
 		public string Number { get; set; }
 
+		[TableColumn("AuthorId")]
+		public int AuthorId { get; set; }
+
+		[TableColumn("AdditionalInformationJSON")]
+		public string AdditionalInformationJSON { get; set; }
+
 		/*
 		*  Методы 
 		*/
@@ -127,35 +133,35 @@ namespace SmartCore.Purchase
 		/// Создает начальный акт без дополнительной информации
 		/// </summary>
 		public InitialOrder()
-        {
-            ItemId = -1;
+		{
+			ItemId = -1;
 			SmartCoreObjectType = SmartCoreType.InitialOrder;
-            Remarks = "";
-            Status = WorkPackageStatus.Opened;
-            OpeningDate = DateTime.Today;
-            PublishingDate = DateTimeExtend.GetCASMinDateTime();
-            ClosingDate = DateTimeExtend.GetCASMinDateTime();
-            Products = new List<Product>();
-        }
-        #endregion
-      
-        #region public override string ToString()
-        /// <summary>
-        /// Перегружаем для отладки
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return "";
-        }
-        #endregion   
+			Remarks = "";
+			Status = WorkPackageStatus.Opened;
+			OpeningDate = DateTime.Today;
+			PublishingDate = DateTimeExtend.GetCASMinDateTime();
+			ClosingDate = DateTimeExtend.GetCASMinDateTime();
+			Products = new List<Product>();
+		}
+		#endregion
+	  
+		#region public override string ToString()
+		/// <summary>
+		/// Перегружаем для отладки
+		/// </summary>
+		/// <returns></returns>
+		public override string ToString()
+		{
+			return "";
+		}
+		#endregion   
 
-        #region public int CompareTo(InitialOrder y)
+		#region public int CompareTo(InitialOrder y)
 
-        public int CompareTo(InitialOrder y)
-        {
-            return ItemId.CompareTo(y.ItemId);
-        }
+		public int CompareTo(InitialOrder y)
+		{
+			return ItemId.CompareTo(y.ItemId);
+		}
 
 		#endregion
 

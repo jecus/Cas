@@ -89,7 +89,13 @@ namespace CAS.UI.UIControls.PurchaseControls
 				new Filter("ParentTypeId",_currentItem.SmartCoreObjectType.ItemId)
 			}, true);
 
-			_currentItem.Document = links.FirstOrDefault();
+			var cmm = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("CMM") as DocumentSubType;
+			if(cmm != null)
+				_currentItem.Document = links.FirstOrDefault(i => i.DocumentSubType.ItemId == cmm.ItemId);
+
+			var ipc = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("IPC Ref") as DocumentSubType;
+			if(ipc != null)
+				_currentItem.DocumentIpcRef = links.FirstOrDefault(i => i.DocumentSubType.ItemId == ipc.ItemId);
 		}
 
 		#region private void UpdateInformation()
@@ -154,6 +160,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			textBoxRemarks.Text = _currentItem.Remarks;
 			textBoxIsEffectivity.Text = _currentItem.IsEffectivity;
 			textBoxReference.Text = _currentItem.Reference;
+			textBoxEngineRef.Text = _currentItem.EngineRef;
 			dataGridViewControlSuppliers.SetItemsArray((ICommonCollection) _currentItem.SupplierRelations);
 
 			GoodStandart goodStandart;
@@ -198,6 +205,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 			documentControl1.CurrentDocument = _currentItem.Document;
 			documentControl1.Added += DocumentControl1_Added;
+			documentControl2.CurrentDocument = _currentItem.DocumentIpcRef;
+			documentControl2.Added += DocumentControl2_Added;
 
 
 			comboBoxAccessoryStandard.SelectedIndexChanged += DictComboStandardSelectedIndexChanged;
@@ -239,6 +248,39 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		#endregion
 
+		#region private void DocumentControl2_Added(object sender, EventArgs e)
+
+		private void DocumentControl2_Added(object sender, EventArgs e)
+		{
+			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("IPC Ref") as DocumentSubType;
+			var dep = GlobalObjects.CasEnvironment.GetDictionary<Department>().GetByFullName("Planning") as Department;
+			var spec = GlobalObjects.CasEnvironment.GetDictionary<Specialization>().GetByFullName("Maintenance Data Librarian") as Specialization;
+			var nomen = GlobalObjects.CasEnvironment.GetDictionary<Nomenclatures>().GetByFullName("e-library") as Nomenclatures;
+			var location = GlobalObjects.CasEnvironment.GetDictionary<Locations>().GetByFullName("e-Server CIT") as Locations;
+			var newDocument = new Document
+			{
+				Parent = _currentItem,
+				ParentId = _currentItem.ItemId,
+				ParentTypeId = _currentItem.SmartCoreObjectType.ItemId,
+				DocType = DocumentType.TechnicalPublication,
+				DocumentSubType = docSubType,
+				Department = dep,
+				ResponsibleOccupation = spec,
+				Nomenсlature = nomen,
+				Location = location
+			};
+
+			var form = new DocumentForm(newDocument, false);
+			if (form.ShowDialog() == DialogResult.OK)
+			{
+				_currentItem.Document = newDocument;
+				documentControl2.CurrentDocument = newDocument;
+
+			}
+		}
+
+		#endregion
+
 		#region protected override void SetFormControls()
 		protected override void SetFormControls()
 		{
@@ -265,6 +307,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 				|| textBoxIsEffectivity.Text != _currentItem.IsEffectivity
 				|| textBoxName.Text != _currentItem.Name
 				|| textBoxReference.Text != _currentItem.Reference
+				|| textBoxEngineRef.Text != _currentItem.EngineRef
 				|| comboBoxAtaChapter.ATAChapter != _currentItem.ATAChapter
 				|| (comboBoxDetailClass.SelectedItem != _currentItem.GoodsClass)
 				|| (checkBoxDangerous.Checked != _currentItem.IsDangerous)
@@ -417,6 +460,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 					_currentItem.Standart = standart;
 					_currentItem.Name = textBoxName.Text;
 					_currentItem.Reference = textBoxReference.Text;
+					_currentItem.EngineRef = textBoxEngineRef.Text;
 					_currentItem.Remarks = textBoxRemarks.Text;
 					_currentItem.IsEffectivity = textBoxIsEffectivity.Text;
 					_currentItem.Measure = comboBoxMeasure.SelectedItem as Measure;

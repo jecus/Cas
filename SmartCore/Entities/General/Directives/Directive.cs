@@ -1070,6 +1070,12 @@ namespace SmartCore.Entities.General.Directives
 			directive.ItemId = -1;
 			directive.UnSetEvents();
 
+			if (directive.Title != "N/A")
+				directive.Title += " Copy";
+			else if (!string.IsNullOrEmpty(directive.ServiceBulletinNo))
+				directive.ServiceBulletinNo += " Copy";
+			else directive.EngineeringOrders += " Copy";
+
 			directive.Threshold = new DirectiveThreshold(Threshold.ToBinary(),ThrldTypeCond);
 			directive.ForecastLifelength = new Lifelength(ForecastLifelength);
 			directive.AfterForecastResourceRemain = new Lifelength(AfterForecastResourceRemain);

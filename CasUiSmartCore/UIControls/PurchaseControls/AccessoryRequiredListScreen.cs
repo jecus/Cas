@@ -55,9 +55,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private ToolStripMenuItem itemPrintReportSchedule;
 		private ToolStripMenuItem itemPrintReportMaintenancePlan;
 
-		private RadDropDownMenu _contextMenuStrip;
-		private RadMenuItem _toolStripMenuItemComposeQuotation;
-		private RadMenuItem _toolStripMenuItemQuotations;
 		private RadMenuItem _toolStripMenuItemOpen;
 		private RadMenuItem _toolStripMenuShowTaskCard;
 		private RadMenuItem _toolStripMenuShowKits;
@@ -219,19 +216,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_openPubQuotations.Clear();
 			_openPubQuotations = null;
 
-			if (_toolStripMenuItemComposeQuotation != null) _toolStripMenuItemComposeQuotation.Dispose();
 			if (_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
-			if (_toolStripMenuItemQuotations != null)
-			{
-				foreach (var item in _toolStripMenuItemQuotations.Items)
-				{
-					item.Click -= AddToQuotationOrderItemClick;
-				}
-				_toolStripMenuItemQuotations.Items.Clear();
-				_toolStripMenuItemQuotations.Dispose();
-			}
-			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
-
+			
 			if (_directivesViewer != null) _directivesViewer.Dispose();
 
 			Dispose(true);
@@ -255,24 +241,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 			{
 				labelTitle.Text = "";
 				labelTitle.Status = Statuses.NotActive;
-			}
-
-			if (_toolStripMenuItemQuotations != null)
-			{
-				foreach (var item in _toolStripMenuItemQuotations.Items)
-				{
-					item.Click -= AddToQuotationOrderItemClick;
-				}
-
-				_toolStripMenuItemQuotations.Items.Clear();
-
-				foreach (RequestForQuotation quotation in _openPubQuotations)
-				{
-					var item = new RadMenuItem(quotation.Title);
-					item.Click += AddToQuotationOrderItemClick;
-					item.Tag = quotation;
-					_toolStripMenuItemQuotations.Items.Add(item);
-				}
 			}
 
 			_directivesViewer.SetItemsArray(_resultDirectiveArray.ToArray());
@@ -505,18 +473,10 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
-			_toolStripMenuItemComposeQuotation = new RadMenuItem();
-			_toolStripMenuItemQuotations = new RadMenuItem();
 			_toolStripMenuItemOpen = new RadMenuItem();
 			_toolStripMenuShowTaskCard = new RadMenuItem();
 			_toolStripMenuShowKits = new RadMenuItem();
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
-
+			
 			_toolStripMenuItemOpen.Text = "Open Kit Task";
 			_toolStripMenuItemOpen.Click += ToolStripMenuItemOpenClick;
 			// 
@@ -527,25 +487,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// 
 			// toolStripMenuItemView
 			// 
-			_toolStripMenuItemComposeQuotation.Text = "Compose Quotation";
-			_toolStripMenuItemComposeQuotation.Click += ToolStripMenuItemComposeQuotationClick;
-			// 
-			// toolStripMenuItemView
-			// 
 			_toolStripMenuShowTaskCard.Text = "Show Task Card";
 			_toolStripMenuShowTaskCard.Click += ToolStripMenuShowTaskCard_Click;
-			//
-			// toolStripMenuItemComposeWorkPackage
-			//
-			_toolStripMenuItemQuotations.Text = "Add to Quotation Order";
-
-			_contextMenuStrip.Items.Clear();
-			
-			_contextMenuStrip.Items.AddRange(_toolStripMenuItemComposeQuotation,
-													_toolStripMenuItemQuotations,
-													_toolStripMenuItemOpen,
-													_toolStripMenuShowTaskCard,
-													_toolStripMenuShowKits);
 		}
 
 	   
@@ -603,40 +546,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		#endregion
 
-		#region private void CreateQuotationOrder()
-
-		private void CreateQuotationOrder()
-		{
-			PurchaseManager.ComposeQuotationOrder(_directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), CurrentParent, this);
-		}
-		#endregion
-
-		#region private void AddToQuotationOrderItemClick(object sender, EventArgs e)
-
-		private void AddToQuotationOrderItemClick(object sender, EventArgs e)
-		{
-			if (_directivesViewer.SelectedItems.Count <= 0) return;
-
-			RequestForQuotation wp = (RequestForQuotation)((ToolStripMenuItem)sender).Tag;
-
-			PurchaseManager.AddToQuotationOrder(wp, _directivesViewer.SelectedItems.OfType<IBaseCoreObject>().ToArray(), this);
-		}
-
-		#endregion
-
-		#region private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
-		/// <summary>
-		/// Публикует рабочий пакет
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void ToolStripMenuItemComposeQuotationClick(object sender, EventArgs e)
-		{
-			CreateQuotationOrder();
-		}
-
-		#endregion
-
 		#region private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
 
 		private void ToolStripMenuItemOpenClick(object sender, EventArgs e)
@@ -674,21 +583,23 @@ namespace CAS.UI.UIControls.PurchaseControls
 			var kitForm = new KitForm(o);
 			kitForm.ShowDialog();
 		}
-
-
+		
 		#region private void InitListView()
 
 		private void InitListView()
 		{
 			_directivesViewer = new AccessoryRequiredListView
 			{
-				CustomMenu = _contextMenuStrip,
 				TabIndex = 2,
 				Location = new Point(panel1.Left, panel1.Top),
 				Dock = DockStyle.Fill
 			};
 			//события 
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+
+			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen,
+				_toolStripMenuShowTaskCard,
+				_toolStripMenuShowKits);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{
@@ -702,8 +613,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 					_toolStripMenuShowTaskCard.Enabled = GetItemEnabled(o);
 				}
-
-				_toolStripMenuItemComposeQuotation.Enabled = true;
 			};
 
 				panel1.Controls.Add(_directivesViewer);
@@ -717,13 +626,11 @@ namespace CAS.UI.UIControls.PurchaseControls
 		{
 			if (_directivesViewer.SelectedItems.Count > 0)
 			{
-				buttonComposeQuotation.Enabled = true;
 				headerControl.EditButtonEnabled = true;
 			}
 			else
 			{
 				headerControl.EditButtonEnabled = false;
-				buttonComposeQuotation.Enabled = false;
 			}
 		}
 
@@ -772,14 +679,6 @@ namespace CAS.UI.UIControls.PurchaseControls
 					if (acceptable) resultCollection.Add(pd);
 				}
 			}
-		}
-		#endregion
-
-		#region private void ButtonComposeQuotationClick(object sender, EventArgs e)
-
-		private void ButtonComposeQuotationClick(object sender, EventArgs e)
-		{
-			CreateQuotationOrder();
 		}
 		#endregion
 

@@ -1,6 +1,4 @@
-﻿using EntityCore.DTO;
-
-namespace SmartCore.Queries
+﻿namespace SmartCore.Queries
 {
 	public static class OrdersQueries
 	{

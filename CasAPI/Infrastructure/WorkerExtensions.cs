@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using EntityCore.Attributte;
 using EntityCore.Filter;
 using Microsoft.Extensions.DependencyInjection;
 

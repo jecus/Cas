@@ -57,6 +57,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DBScripts\Offset.sql" />
+    <Content Include="DBScripts\BDScripts2000.sql" />
     <Content Include="DBScripts\BDScripts1900.sql" />
     <Content Include="DBScripts\BDScripts1800.sql" />
     <Content Include="DBScripts\BDScripts1700.sql" />
@@ -85,7 +87,9 @@
     <Content Include="DBScripts\BDScripts0040.sql" />
     <Content Include="DBScripts\BDScripts0030.sql" />
     <Content Include="DBScripts\BDScripts.sql" />
+    <Content Include="Optimization\BDScripts001.sql" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

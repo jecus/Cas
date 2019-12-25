@@ -24,9 +24,7 @@ namespace CAS.UI.UIControls.MailControls
 		private ICommonCollection<MailChats> _resultDocumentArray = new CommonCollection<MailChats>();
 		private CommonFilterCollection _filter;
 
-		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemEdit;
-		private RadMenuItem _toolStripMenuItemDelete;
 
 		#endregion
 
@@ -106,18 +104,17 @@ namespace CAS.UI.UIControls.MailControls
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
-			_directivesViewer.CustomMenu = _contextMenuStrip;
+			
+			_directivesViewer.AddMenuItems(_toolStripMenuItemEdit);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{
 				if (_directivesViewer.SelectedItem == null)
 				{
 					_toolStripMenuItemEdit.Enabled = false;
-					_toolStripMenuItemDelete.Enabled = _directivesViewer.SelectedItems.Count > 0;
 				}
 				else
 				{
-					_toolStripMenuItemDelete.Enabled = true;
 					_toolStripMenuItemEdit.Enabled = true;
 				}
 			};
@@ -131,31 +128,13 @@ namespace CAS.UI.UIControls.MailControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemEdit = new RadMenuItem();
-			_toolStripMenuItemDelete = new RadMenuItem();
-
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
-			// 
-			// _toolStripMenuItemDelete
-			// 
-			_toolStripMenuItemDelete.Text = "Delete";
-			_toolStripMenuItemDelete.Click += _toolStripMenuItemDelete_Click;
+			
 			// 
 			// _toolStripMenuItemEdit
 			// 
 			_toolStripMenuItemEdit.Text = "Edit";
 			_toolStripMenuItemEdit.Click += _toolStripMenuItemEdit_Click;
-
-			_contextMenuStrip.Items.AddRange(
-				_toolStripMenuItemEdit,
-				new RadMenuSeparatorItem(), 
-				_toolStripMenuItemDelete
-			);
 		}
 
 		#endregion
@@ -173,15 +152,6 @@ namespace CAS.UI.UIControls.MailControls
 
 				AnimatedThreadWorker.RunWorkerAsync();
 			}
-		}
-
-		#endregion
-
-		#region private void _toolStripMenuItemDelete_Click(object sender, EventArgs e)
-
-		private void _toolStripMenuItemDelete_Click(object sender, EventArgs e)
-		{
-			Delete();
 		}
 
 		#endregion

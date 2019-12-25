@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using Auxiliary;
+using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Purchase;
 using Telerik.WinControls.UI;
@@ -15,6 +18,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		public QuatationOrderListViewNew()
 		{
 			InitializeComponent();
+			DisableContectMenu();
+			EnableCustomSorting = false;
 		}
 
 
@@ -24,11 +29,13 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 		{
 			AddColumn("P/N", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Suppliers", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Specification", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Name", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Measure", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Quantity", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Specification", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Quantity", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Measure", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Class", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.16f));
+			AddColumn(" ", (int)(radGridView1.Width * 0.16f));
 		}
 
 		#endregion
@@ -43,26 +50,63 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 				subItems.Add(CreateRow(record.Product?.PartNumber, record.Product?.PartNumber));
 				subItems.Add(CreateRow(record.Suppliers?.ToString(), record.Suppliers?.ToString()));
-				subItems.Add(CreateRow(record.Product?.Name, record.Product?.Name));
-				subItems.Add(CreateRow(record.Measure.ToString(), record.Measure.ToString()));
-				subItems.Add(CreateRow(record.Quantity.ToString(), record.Quantity.ToString()));
 				subItems.Add(CreateRow(record.Product?.Standart?.ToString(), record.Product?.Standart?.ToString()));
+				subItems.Add(CreateRow(record.Product?.Name, record.Product?.Name));
+				subItems.Add(CreateRow(record.Quantity.ToString(), record.Quantity.ToString()));
+				subItems.Add(CreateRow(record.Measure.ToString(), record.Measure.ToString()));
+				subItems.Add(CreateRow(record.Product?.GoodsClass?.ToString() ?? "Another accessory", record.Product?.GoodsClass?.ToString()));
 				subItems.Add(CreateRow(author, author));
+				subItems.Add(CreateRow("", ""));
 			}
 			else
 			{
 				var record = item as SupplierPrice;
-				subItems.Add(CreateRow("",""));
+				var order = ((RequestForQuotation) record.Parent.ParentPackage);
+				var qualification = order.AdditionalInformation.QualificationNumbers.ContainsKey(record.SupplierId) ? order.AdditionalInformation.QualificationNumbers[record.SupplierId] : null;
+				subItems.Add(CreateRow(string.IsNullOrEmpty(qualification) ? "" : $"             QO №:{qualification}",""));
 				subItems.Add(CreateRow(record.Supplier.ToString(), record.Supplier));
-				subItems.Add(CreateRow($"New:{record.CostNew} {record.СurrencyNew}".ToString(), record.CostNew));
-				subItems.Add(CreateRow($"OH:{record.CostOverhaul} {record.СurrencyOH}".ToString(), record.CostOverhaul));
-				subItems.Add(CreateRow($"Serv:{record.CostServiceable} {record.СurrencyServ}".ToString(), record.CostServiceable));
-				subItems.Add(CreateRow("", ""));
-				subItems.Add(CreateRow($"Rep:{record.CostRepair} {record.СurrencyRepair}", record.CostRepair));
+				subItems.Add(CreateRow($"New:{record.CostNewString}".ToString(), record.CostNewString));
+				subItems.Add(CreateRow($"Serv:{record.CostServString}".ToString(), record.CostServString));
+				subItems.Add(CreateRow($"Test:{record.CostTestString}".ToString(), record.CostTestString));
+				subItems.Add(CreateRow($"Inspect:{record.CostInspectString}".ToString(), record.CostInspectString));
+				subItems.Add(CreateRow($"OH:{record.CostOHString}".ToString(), record.CostOHString));
+				subItems.Add(CreateRow($"Rep:{record.CostRepairString}", record.CostRepairString));
+				subItems.Add(CreateRow($"Mod:{record.CostModificationString}", record.CostModificationString));
 			}
 
 			return subItems;
 		}
+
+		#region protected override void CustomSort(int ColumnIndex)
+
+		protected override void CustomSort(int ColumnIndex)
+		{
+			if (OldColumnIndex != ColumnIndex)
+				SortMultiplier = -1;
+			if (SortMultiplier == 1)
+				SortMultiplier = -1;
+			else
+				SortMultiplier = 1;
+
+			var resultList = new List<IBaseEntityObject>();
+			var list = radGridView1.Rows.Where(i => i.Tag is RequestForQuotationRecord).Select(i => i).ToList();
+			list.Sort(new GridViewDataRowInfoComparer(ColumnIndex, SortMultiplier));
+			//добавление остальных подзадач
+			foreach (GridViewRowInfo item in list)
+			{
+				if (item.Tag is RequestForQuotationRecord rec)
+				{
+					resultList.Add(rec);
+					resultList.AddRange(rec.SupplierPrice);
+				}
+
+			}
+
+			SetItemsArray(resultList.ToArray());
+
+		}
+
+		#endregion
 
 		#region protected override void SetItemColor(ListViewItem listViewItem, BaseSmartCoreObject item)
 		protected override void SetItemColor(GridViewRowInfo listViewItem, IBaseEntityObject item)
@@ -86,15 +130,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 				}
 			}
 		}
-		#endregion
-
-		#region Overrides of BaseGridViewControl<BaseCoreObject>
-
-		protected override void Sorting(string colName = null)
-		{
-			
-		}
-
 		#endregion
 	}
 }

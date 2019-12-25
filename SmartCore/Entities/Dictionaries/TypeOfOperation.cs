@@ -3,6 +3,7 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
+	[Serializable]
 	public class TypeOfOperation : StaticDictionary
 	{
 		#region private static CommonDictionaryCollection<TypeOfOperation> _Items = new CommonDictionaryCollection<TypeOfOperation>();
@@ -73,8 +74,8 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Реализация
-         */
+		 * Реализация
+		 */
 		#region public TypeOfOperation()
 		/// <summary>
 		/// Конструктор создает объект повреждения

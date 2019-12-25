@@ -10,6 +10,7 @@ namespace SmartCore.Entities.General.Personnel
 	[Table("SpecialistsCAA", "dbo", "ItemId")]
 	[Dto(typeof(SpecialistCAADTO))]
 	[Condition("IsDeleted", "0")]
+	[Serializable]
 	public class SpecialistCAA : BaseEntityObject
 	{
 
@@ -76,8 +77,8 @@ namespace SmartCore.Entities.General.Personnel
 		#endregion
 
 		public SpecialistCAA()
-        {
-            ItemId = -1;
+		{
+			ItemId = -1;
 			ValidToDate = DateTime.Today;
 			IssueDate = DateTime.Today;
 			SmartCoreObjectType = SmartCoreType.SpecialistCAA;

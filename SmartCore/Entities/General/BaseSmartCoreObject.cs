@@ -92,6 +92,9 @@ namespace SmartCore.Entities.General
         }
         #endregion
 
+		//Нужно исключительно для BulkInsert
+		public string Guid { get; set; }
+
         #region public override string ToString()
         public override string ToString()
         {
@@ -119,12 +122,11 @@ namespace SmartCore.Entities.General
         /// <returns></returns>
         public virtual BaseEntityObject GetCopyUnsaved()
         {
-            return new BaseEntityObject
-                       {
-                           IsDeleted = IsDeleted,
-                           ItemId = -1,
-                           SmartCoreObjectType = SmartCoreObjectType
-                       };
+			var clone = (BaseEntityObject)MemberwiseClone();
+			clone.ItemId = -1;
+			clone.UnSetEvents();
+
+			return clone;
         }
         #endregion
 

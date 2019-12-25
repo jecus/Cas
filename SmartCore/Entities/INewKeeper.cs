@@ -23,6 +23,7 @@ namespace SmartCore.Entities
 		void SaveAttachedFile(IFileContainer container);
 		void BulkInsert(List<BaseEntityObject> value, int? batchSize = null);
 		void BulkDelete(List<BaseEntityObject> value, int? batchSize = null);
+		void BulkUpdate(List<BaseEntityObject> value, int? batchSize = null);
 		void Delete(List<BaseEntityObject> value, bool isDeletedOnly = false);
 
 

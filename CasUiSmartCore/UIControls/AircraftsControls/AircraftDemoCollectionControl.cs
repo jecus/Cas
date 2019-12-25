@@ -9,8 +9,6 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AircraftTechnicalLogBookControls;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.ComponentControls;
-using CAS.UI.UIControls.DirectivesControls;
 using CAS.UI.UIControls.Fleet;
 using CAS.UI.UIControls.ForecastControls;
 using CAS.UI.UIControls.MonthlyUtilizationsControls;
@@ -22,7 +20,6 @@ using CASTerms;
 using Microsoft.VisualBasic.Devices;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
-using SmartCore.Filters;
 
 namespace CAS.UI.UIControls.AircraftsControls
 {
@@ -50,18 +47,6 @@ namespace CAS.UI.UIControls.AircraftsControls
 			InitializeComponent();
 		}
 
-		///<summary>
-		/// Cоздается графический элемент на основе данной коллекции
-		///</summary>
-		///<param name="aircraftCollection">Данная бизнес коллекция</param>
-		public AircraftDemoCollectionControl(CommonCollection<Aircraft> aircraftCollection)
-		{
-
-			waitForm = StaticWaitFormProvider.WaitForm;
-			extendableRichContainer.Caption = aircraftCollection.Count + " Aircraft";
-			_itemsCollection = aircraftCollection;
-			FillUiElementsFromCollection();
-		}
 		#endregion
 
 		#region Properties

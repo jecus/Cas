@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Entities.Dictionaries;
@@ -16,6 +18,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		{
 			_orderBySupplies = orderBySupplies;
 			InitializeComponent();
+			DisableContectMenu();
 			OldColumnIndex = 2;
 			SortMultiplier = 1;
 		}
@@ -27,13 +30,14 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		protected override void SetHeaders()
 		{
 			AddColumn("Supplier", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Q-ty", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Cost", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Total Cost", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Condition", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Measure", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Q-ty", (int)(radGridView1.Width * 0.1f));
+			AddColumn("Unit Cost", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Item Cost", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Total Cost", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Condition", (int)(radGridView1.Width * 0.14f));
+			AddColumn("Type", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Product", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.1f));
 		}
 
 		#endregion
@@ -47,20 +51,19 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			if (item?.ParentInitialRecord?.DestinationObjectType == SmartCoreType.Aircraft)
 				destiantion = GlobalObjects.AircraftsCore.GetAircraftById(item?.ParentInitialRecord?.DestinationObjectId ?? -1)?.ToString();
 			else destiantion = GlobalObjects.StoreCore.GetStoreById(item?.ParentInitialRecord?.DestinationObjectId ?? -1)?.ToString();
-			var temp = $"{item?.Product?.PartNumber}";
+			var temp = $"P/N: {item?.Product?.PartNumber}";
 			if (item?.ParentInitialRecord != null)
-			 temp += $" | Q-ty:{item?.ParentInitialRecord?.Quantity} | Reason: {item?.ParentInitialRecord?.InitialReason} | Destination: {destiantion} | Priority: {item?.ParentInitialRecord?.Priority}";
-
-			double total = item.Quantity * item.Cost;
+				temp += $"| {item.Product?.Standart} | Name: {item?.Product?.Name} | {destiantion} | {item?.ParentInitialRecord?.Priority} | Requested By: {((InitialOrder)item?.ParentInitialRecord?.ParentPackage)?.Author}";
 
 			return new List<CustomCell>()
 			{
 				CreateRow(item.Supplier.ToString(),item.Supplier),
-				CreateRow(item.Quantity.ToString(),item.Quantity),
+				CreateRow($"{item.Quantity.ToString()} {item.Measure}",item.Quantity),
 				CreateRow($"{item.Cost} {item.Currency}",item.Cost),
-				CreateRow($"{total:0.##} {item.Currency}", total),
+				CreateRow($"{item.ItemCost:0.##} {item.Currency}", item.ItemCost),
+				CreateRow($"{item.TotalCost:0.##} {item.Currency}", item.TotalCost),
 				CreateRow(item.CostCondition.ToString(),item.CostCondition),
-				CreateRow(item.Measure.ToString(),item.Measure),
+				CreateRow(item.Exchange.ToString(),item.Exchange),
 				CreateRow(temp,temp),
 				CreateRow(author,author),
 			};
@@ -77,5 +80,20 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		#endregion
 
+		#region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
+		protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
+		{
+			if (SelectedItem != null)
+			{
+				var editForm = new ProductForm(SelectedItem.Product);
+				if (editForm.ShowDialog() == DialogResult.OK)
+				{
+					var subs = GetListViewSubItems(SelectedItem);
+					for (int i = 0; i < subs.Count; i++)
+						radGridView1.SelectedRows[0].Cells[i].Value = subs[i].Text;
+				}
+			}
+		}
+		#endregion
 	}
 }

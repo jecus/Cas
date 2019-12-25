@@ -3,10 +3,11 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
-    /// <summary>
-    /// Регулярность
-    /// </summary>
-    public class PropertyDamage : StaticDictionary
+	/// <summary>
+	/// Регулярность
+	/// </summary>
+	[Serializable]
+	public class PropertyDamage : StaticDictionary
     {
         private int _weight;
 

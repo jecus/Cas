@@ -50,9 +50,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 		private ToolStripMenuItem itemPrintReportMonthlyUtilization;
 		private ToolStripMenuItem itemPrintReportOperationTime;
 
-		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemOpen;
-		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 		private RadMenuItem _toolStripMenuItemHighlight;
 		private RadMenuSeparatorItem _toolStripSeparator2;
@@ -118,12 +116,10 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 			_initialDirectiveArray = null;
 
 			if (_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
-			if (_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
 			if (_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
 			if (_toolStripSeparator2 != null) _toolStripSeparator2.Dispose();
 			if (_toolStripMenuItemHighlight != null) _toolStripMenuItemHighlight.Dispose();
-			if (_contextMenuStrip != null) _contextMenuStrip.Dispose();
-
+			
 			if (_directivesViewer != null) _directivesViewer.Dispose();
 
 			Dispose(true);
@@ -235,9 +231,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemOpen = new RadMenuItem();
-			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			_toolStripMenuItemHighlight = new RadMenuItem();
 			_toolStripSeparator2 = new RadMenuSeparatorItem();
@@ -248,20 +242,10 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 			_toolStripMenuItemOpen.Click += ToolStripMenuItemOpenClick;
 			_toolStripMenuItemOpen.Enabled = false;
 			// 
-			// toolStripMenuItemDelete
-			// 
-			_toolStripMenuItemDelete.Text = "Delete";
-			_toolStripMenuItemDelete.Click += ButtonDeleteClick;
-			// 
 			// toolStripMenuItemHighlight
 			// 
 			_toolStripMenuItemHighlight.Text = "Highlight";
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
-			_contextMenuStrip.Items.Clear();
+			
 			_toolStripMenuItemHighlight.Items.Clear();
 			foreach (Highlight highlight in Highlight.HighlightList)
 			{
@@ -270,17 +254,6 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 				item.Tag = highlight;
 				_toolStripMenuItemHighlight.Items.Add(item);
 			}
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Items.AddRange(new RadItem[]
-												{
-													_toolStripMenuItemOpen,
-													_toolStripMenuItemDelete,
-													_toolStripSeparator1,
-													_toolStripMenuItemHighlight,
-													_toolStripSeparator2,
-												});
 		}
 		#endregion
 
@@ -360,11 +333,14 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 			var col = new CommonCollection<ATLB>(GlobalObjects.AircraftFlightsCore.GetATLBsByAircraftId(CurrentAircraft.ItemId));
 			_directivesViewer = new MouthlyUtilizationListView(CurrentAircraft, col);
 			_directivesViewer.TabIndex = 2;
-			_directivesViewer.CustomMenu = _contextMenuStrip;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 			Controls.Add(_directivesViewer);
+
+			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen,
+				_toolStripSeparator1,
+				_toolStripMenuItemHighlight);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{

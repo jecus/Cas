@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Auxiliary;
-using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary.Comparers;
@@ -13,7 +12,6 @@ using CASTerms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
-using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
 using Telerik.WinControls.UI;
@@ -48,6 +46,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		///</summary>
 		public PrimeDirectiveListView(DirectiveType primaryDirectiveType) : this()
 		{
+			EnableCustomSorting = false;
 			CurrentPrimatyDirectiveType = primaryDirectiveType;
 			ColumnHeaderList.Clear();
 			SetHeaders();
@@ -303,11 +302,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 		#endregion
 
 		#region Overrides of BaseGridViewControl<Directive>
-		protected override void Sorting(string colName = null)
-		{
-
-		}
-
 		protected override void CustomSort(int ColumnIndex)
 		{
 			if (OldColumnIndex != ColumnIndex)

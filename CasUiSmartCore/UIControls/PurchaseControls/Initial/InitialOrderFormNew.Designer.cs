@@ -38,6 +38,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.ButtonAdd = new AvControls.AvButtonT.AvButtonT();
 			this.ButtonDelete = new AvControls.AvButtonT.AvButtonT();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.metroTextBoxReference = new MetroFramework.Controls.MetroTextBox();
+			this.metroLabelReference = new MetroFramework.Controls.MetroLabel();
+			this.metroLabelStation = new MetroFramework.Controls.MetroLabel();
+			this.comboBoxStation = new System.Windows.Forms.ComboBox();
 			this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
 			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
 			this.comboBoxDIR = new System.Windows.Forms.ComboBox();
@@ -49,8 +53,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxMeasure = new System.Windows.Forms.ComboBox();
 			this.labelMeasure = new MetroFramework.Controls.MetroLabel();
 			this.labelDefferedCategory = new MetroFramework.Controls.MetroLabel();
-			this.labelReason = new MetroFramework.Controls.MetroLabel();
-			this.comboBoxReason = new System.Windows.Forms.ComboBox();
 			this.labelDestination = new MetroFramework.Controls.MetroLabel();
 			this.comboBoxDestination = new System.Windows.Forms.ComboBox();
 			this.checkBoxRepair = new MetroFramework.Controls.MetroCheckBox();
@@ -80,21 +82,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.labelQOTitle = new MetroFramework.Controls.MetroLabel();
 			this.buttonOk = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
-			this.listViewInitialItems = new CAS.UI.UIControls.PurchaseControls.Initial.InitialOrderListView();
+			this._formListViewInitialItems = new CAS.UI.UIControls.PurchaseControls.Initial.InitialOrderFormListView();
 			this.listViewKits = new CAS.UI.UIControls.PurchaseControls.Quatation.RequestProductListView();
 			this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
 			this.button2 = new System.Windows.Forms.Button();
 			this.buttonAddProd = new System.Windows.Forms.Button();
-			this.documentControl2 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl1 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl3 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl4 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl5 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl6 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl7 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl8 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl9 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
-			this.documentControl10 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.groupBox2.SuspendLayout();
@@ -103,7 +95,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// labelSearchPartNumber
 			// 
 			this.labelSearchPartNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.labelSearchPartNumber.Location = new System.Drawing.Point(23, 63);
+			this.labelSearchPartNumber.Location = new System.Drawing.Point(18, 63);
 			this.labelSearchPartNumber.Name = "labelSearchPartNumber";
 			this.labelSearchPartNumber.Size = new System.Drawing.Size(59, 23);
 			this.labelSearchPartNumber.TabIndex = 284;
@@ -126,7 +118,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.textBoxSearchPartNumber.CustomButton.Visible = false;
 			this.textBoxSearchPartNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.textBoxSearchPartNumber.Lines = new string[0];
-			this.textBoxSearchPartNumber.Location = new System.Drawing.Point(88, 63);
+			this.textBoxSearchPartNumber.Location = new System.Drawing.Point(83, 63);
 			this.textBoxSearchPartNumber.MaxLength = 32767;
 			this.textBoxSearchPartNumber.Name = "textBoxSearchPartNumber";
 			this.textBoxSearchPartNumber.PasswordChar = '\0';
@@ -153,7 +145,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.ButtonAdd.Icon = global::CAS.UI.Properties.Resources.AddIconSmall;
 			this.ButtonAdd.IconLayout = System.Windows.Forms.ImageLayout.Center;
 			this.ButtonAdd.IconNotEnabled = null;
-			this.ButtonAdd.Location = new System.Drawing.Point(594, 413);
+			this.ButtonAdd.Location = new System.Drawing.Point(844, 371);
 			this.ButtonAdd.Margin = new System.Windows.Forms.Padding(4);
 			this.ButtonAdd.Name = "ButtonAdd";
 			this.ButtonAdd.NormalBackgroundImage = null;
@@ -181,7 +173,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.ButtonDelete.Icon = global::CAS.UI.Properties.Resources.DeleteIconSmall;
 			this.ButtonDelete.IconLayout = System.Windows.Forms.ImageLayout.Center;
 			this.ButtonDelete.IconNotEnabled = null;
-			this.ButtonDelete.Location = new System.Drawing.Point(588, 754);
+			this.ButtonDelete.Location = new System.Drawing.Point(838, 690);
 			this.ButtonDelete.Margin = new System.Windows.Forms.Padding(4);
 			this.ButtonDelete.Name = "ButtonDelete";
 			this.ButtonDelete.NormalBackgroundImage = null;
@@ -199,6 +191,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.metroTextBoxReference);
+			this.groupBox1.Controls.Add(this.metroLabelReference);
+			this.groupBox1.Controls.Add(this.metroLabelStation);
+			this.groupBox1.Controls.Add(this.comboBoxStation);
 			this.groupBox1.Controls.Add(this.metroTextBox1);
 			this.groupBox1.Controls.Add(this.metroLabel2);
 			this.groupBox1.Controls.Add(this.comboBoxDIR);
@@ -210,20 +206,80 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.groupBox1.Controls.Add(this.comboBoxMeasure);
 			this.groupBox1.Controls.Add(this.labelMeasure);
 			this.groupBox1.Controls.Add(this.labelDefferedCategory);
-			this.groupBox1.Controls.Add(this.labelReason);
-			this.groupBox1.Controls.Add(this.comboBoxReason);
 			this.groupBox1.Controls.Add(this.labelDestination);
 			this.groupBox1.Controls.Add(this.comboBoxDestination);
 			this.groupBox1.Controls.Add(this.checkBoxRepair);
 			this.groupBox1.Controls.Add(this.checkBoxOverhaul);
 			this.groupBox1.Controls.Add(this.checkBoxServiceable);
 			this.groupBox1.Controls.Add(this.checkBoxNew);
-			this.groupBox1.Location = new System.Drawing.Point(717, 50);
+			this.groupBox1.Location = new System.Drawing.Point(972, 11);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(293, 363);
+			this.groupBox1.Size = new System.Drawing.Size(293, 337);
 			this.groupBox1.TabIndex = 290;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Selected Product";
+			// 
+			// metroTextBoxReference
+			// 
+			// 
+			// 
+			// 
+			this.metroTextBoxReference.CustomButton.Image = null;
+			this.metroTextBoxReference.CustomButton.Location = new System.Drawing.Point(129, 2);
+			this.metroTextBoxReference.CustomButton.Name = "";
+			this.metroTextBoxReference.CustomButton.Size = new System.Drawing.Size(39, 39);
+			this.metroTextBoxReference.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.metroTextBoxReference.CustomButton.TabIndex = 1;
+			this.metroTextBoxReference.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.metroTextBoxReference.CustomButton.UseSelectable = true;
+			this.metroTextBoxReference.CustomButton.Visible = false;
+			this.metroTextBoxReference.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.metroTextBoxReference.Lines = new string[0];
+			this.metroTextBoxReference.Location = new System.Drawing.Point(118, 248);
+			this.metroTextBoxReference.MaxLength = 32767;
+			this.metroTextBoxReference.Multiline = true;
+			this.metroTextBoxReference.Name = "metroTextBoxReference";
+			this.metroTextBoxReference.PasswordChar = '\0';
+			this.metroTextBoxReference.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.metroTextBoxReference.SelectedText = "";
+			this.metroTextBoxReference.SelectionLength = 0;
+			this.metroTextBoxReference.SelectionStart = 0;
+			this.metroTextBoxReference.ShortcutsEnabled = true;
+			this.metroTextBoxReference.Size = new System.Drawing.Size(171, 44);
+			this.metroTextBoxReference.TabIndex = 271;
+			this.metroTextBoxReference.UseSelectable = true;
+			this.metroTextBoxReference.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.metroTextBoxReference.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+			// 
+			// metroLabelReference
+			// 
+			this.metroLabelReference.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.metroLabelReference.Location = new System.Drawing.Point(21, 247);
+			this.metroLabelReference.Name = "metroLabelReference";
+			this.metroLabelReference.Size = new System.Drawing.Size(75, 23);
+			this.metroLabelReference.TabIndex = 270;
+			this.metroLabelReference.Text = "Reference:";
+			this.metroLabelReference.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// metroLabelStation
+			// 
+			this.metroLabelStation.AutoSize = true;
+			this.metroLabelStation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.metroLabelStation.Location = new System.Drawing.Point(20, 52);
+			this.metroLabelStation.Name = "metroLabelStation";
+			this.metroLabelStation.Size = new System.Drawing.Size(52, 19);
+			this.metroLabelStation.TabIndex = 269;
+			this.metroLabelStation.Text = "Station:";
+			// 
+			// comboBoxStation
+			// 
+			this.comboBoxStation.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.comboBoxStation.FormattingEnabled = true;
+			this.comboBoxStation.ItemHeight = 17;
+			this.comboBoxStation.Location = new System.Drawing.Point(118, 50);
+			this.comboBoxStation.Name = "comboBoxStation";
+			this.comboBoxStation.Size = new System.Drawing.Size(170, 25);
+			this.comboBoxStation.TabIndex = 268;
 			// 
 			// metroTextBox1
 			// 
@@ -231,7 +287,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			// 
 			this.metroTextBox1.CustomButton.Image = null;
-			this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(150, 2);
+			this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(151, 2);
 			this.metroTextBox1.CustomButton.Name = "";
 			this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(17, 17);
 			this.metroTextBox1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -241,7 +297,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.metroTextBox1.CustomButton.Visible = false;
 			this.metroTextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.metroTextBox1.Lines = new string[0];
-			this.metroTextBox1.Location = new System.Drawing.Point(118, 217);
+			this.metroTextBox1.Location = new System.Drawing.Point(118, 220);
 			this.metroTextBox1.MaxLength = 32767;
 			this.metroTextBox1.Name = "metroTextBox1";
 			this.metroTextBox1.PasswordChar = '\0';
@@ -250,7 +306,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.metroTextBox1.SelectionLength = 0;
 			this.metroTextBox1.SelectionStart = 0;
 			this.metroTextBox1.ShortcutsEnabled = true;
-			this.metroTextBox1.Size = new System.Drawing.Size(170, 22);
+			this.metroTextBox1.Size = new System.Drawing.Size(171, 22);
 			this.metroTextBox1.TabIndex = 267;
 			this.metroTextBox1.UseSelectable = true;
 			this.metroTextBox1.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -259,7 +315,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// metroLabel2
 			// 
 			this.metroLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.metroLabel2.Location = new System.Drawing.Point(21, 216);
+			this.metroLabel2.Location = new System.Drawing.Point(21, 219);
 			this.metroLabel2.Name = "metroLabel2";
 			this.metroLabel2.Size = new System.Drawing.Size(69, 23);
 			this.metroLabel2.TabIndex = 266;
@@ -272,7 +328,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxDIR.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.comboBoxDIR.FormattingEnabled = true;
 			this.comboBoxDIR.ItemHeight = 17;
-			this.comboBoxDIR.Location = new System.Drawing.Point(118, 78);
+			this.comboBoxDIR.Location = new System.Drawing.Point(118, 81);
 			this.comboBoxDIR.Name = "comboBoxDIR";
 			this.comboBoxDIR.Size = new System.Drawing.Size(170, 25);
 			this.comboBoxDIR.TabIndex = 252;
@@ -282,7 +338,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxPriority.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.comboBoxPriority.FormattingEnabled = true;
 			this.comboBoxPriority.ItemHeight = 17;
-			this.comboBoxPriority.Location = new System.Drawing.Point(118, 109);
+			this.comboBoxPriority.Location = new System.Drawing.Point(118, 112);
 			this.comboBoxPriority.Name = "comboBoxPriority";
 			this.comboBoxPriority.Size = new System.Drawing.Size(170, 25);
 			this.comboBoxPriority.TabIndex = 250;
@@ -291,7 +347,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			this.label19.AutoSize = true;
 			this.label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.label19.Location = new System.Drawing.Point(20, 111);
+			this.label19.Location = new System.Drawing.Point(20, 114);
 			this.label19.Name = "label19";
 			this.label19.Size = new System.Drawing.Size(54, 19);
 			this.label19.TabIndex = 251;
@@ -304,7 +360,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button1.Location = new System.Drawing.Point(212, 326);
+			this.button1.Location = new System.Drawing.Point(212, 300);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(75, 33);
 			this.button1.TabIndex = 249;
@@ -314,12 +370,12 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// numericUpDownQuantity
 			// 
 			this.numericUpDownQuantity.DecimalPlaces = 2;
-			this.numericUpDownQuantity.Location = new System.Drawing.Point(118, 192);
+			this.numericUpDownQuantity.Location = new System.Drawing.Point(118, 195);
 			this.numericUpDownQuantity.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownQuantity.Name = "numericUpDownQuantity";
 			this.numericUpDownQuantity.Size = new System.Drawing.Size(170, 20);
 			this.numericUpDownQuantity.TabIndex = 142;
@@ -329,21 +385,21 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			this.labelQuantity.AutoSize = true;
 			this.labelQuantity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelQuantity.Location = new System.Drawing.Point(20, 193);
+			this.labelQuantity.Location = new System.Drawing.Point(20, 196);
 			this.labelQuantity.Name = "labelQuantity";
-			this.labelQuantity.Size = new System.Drawing.Size(170, 19);
+			this.labelQuantity.Size = new System.Drawing.Size(61, 19);
 			this.labelQuantity.TabIndex = 158;
 			this.labelQuantity.Text = "Quantity:";
 			this.labelQuantity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// comboBoxMeasure
 			// 
+			this.comboBoxMeasure.Enabled = false;
 			this.comboBoxMeasure.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.comboBoxMeasure.FormattingEnabled = true;
 			this.comboBoxMeasure.ItemHeight = 17;
-			this.comboBoxMeasure.Location = new System.Drawing.Point(118, 161);
+			this.comboBoxMeasure.Location = new System.Drawing.Point(118, 164);
 			this.comboBoxMeasure.Name = "comboBoxMeasure";
-			this.comboBoxMeasure.Enabled = false;
 			this.comboBoxMeasure.Size = new System.Drawing.Size(170, 25);
 			this.comboBoxMeasure.TabIndex = 141;
 			this.comboBoxMeasure.SelectedIndexChanged += new System.EventHandler(this.comboBoxMeasure_SelectedIndexChanged);
@@ -352,7 +408,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			this.labelMeasure.AutoSize = true;
 			this.labelMeasure.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelMeasure.Location = new System.Drawing.Point(20, 163);
+			this.labelMeasure.Location = new System.Drawing.Point(20, 166);
 			this.labelMeasure.Name = "labelMeasure";
 			this.labelMeasure.Size = new System.Drawing.Size(62, 19);
 			this.labelMeasure.TabIndex = 165;
@@ -363,37 +419,17 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			// 
 			this.labelDefferedCategory.AutoSize = true;
 			this.labelDefferedCategory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelDefferedCategory.Location = new System.Drawing.Point(20, 78);
+			this.labelDefferedCategory.Location = new System.Drawing.Point(20, 81);
 			this.labelDefferedCategory.Name = "labelDefferedCategory";
 			this.labelDefferedCategory.Size = new System.Drawing.Size(32, 19);
 			this.labelDefferedCategory.TabIndex = 161;
 			this.labelDefferedCategory.Text = "DIR:";
 			// 
-			// labelReason
-			// 
-			this.labelReason.AutoSize = true;
-			this.labelReason.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelReason.Location = new System.Drawing.Point(20, 19);
-			this.labelReason.Name = "labelReason";
-			this.labelReason.Size = new System.Drawing.Size(54, 19);
-			this.labelReason.TabIndex = 170;
-			this.labelReason.Text = "Reason:";
-			// 
-			// comboBoxReason
-			// 
-			this.comboBoxReason.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
-			this.comboBoxReason.FormattingEnabled = true;
-			this.comboBoxReason.ItemHeight = 17;
-			this.comboBoxReason.Location = new System.Drawing.Point(118, 16);
-			this.comboBoxReason.Name = "comboBoxReason";
-			this.comboBoxReason.Size = new System.Drawing.Size(170, 25);
-			this.comboBoxReason.TabIndex = 169;
-			// 
 			// labelDestination
 			// 
 			this.labelDestination.AutoSize = true;
 			this.labelDestination.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelDestination.Location = new System.Drawing.Point(20, 49);
+			this.labelDestination.Location = new System.Drawing.Point(20, 21);
 			this.labelDestination.Name = "labelDestination";
 			this.labelDestination.Size = new System.Drawing.Size(76, 19);
 			this.labelDestination.TabIndex = 172;
@@ -404,7 +440,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.comboBoxDestination.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.comboBoxDestination.FormattingEnabled = true;
 			this.comboBoxDestination.ItemHeight = 17;
-			this.comboBoxDestination.Location = new System.Drawing.Point(118, 47);
+			this.comboBoxDestination.Location = new System.Drawing.Point(118, 19);
 			this.comboBoxDestination.Name = "comboBoxDestination";
 			this.comboBoxDestination.Size = new System.Drawing.Size(170, 25);
 			this.comboBoxDestination.TabIndex = 171;
@@ -414,7 +450,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.checkBoxRepair.AutoSize = true;
 			this.checkBoxRepair.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
 			this.checkBoxRepair.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.checkBoxRepair.Location = new System.Drawing.Point(232, 138);
+			this.checkBoxRepair.Location = new System.Drawing.Point(232, 169);
 			this.checkBoxRepair.Margin = new System.Windows.Forms.Padding(2);
 			this.checkBoxRepair.Name = "checkBoxRepair";
 			this.checkBoxRepair.Size = new System.Drawing.Size(56, 15);
@@ -427,7 +463,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.checkBoxOverhaul.AutoSize = true;
 			this.checkBoxOverhaul.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
 			this.checkBoxOverhaul.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.checkBoxOverhaul.Location = new System.Drawing.Point(187, 139);
+			this.checkBoxOverhaul.Location = new System.Drawing.Point(187, 142);
 			this.checkBoxOverhaul.Margin = new System.Windows.Forms.Padding(2);
 			this.checkBoxOverhaul.Name = "checkBoxOverhaul";
 			this.checkBoxOverhaul.Size = new System.Drawing.Size(41, 15);
@@ -440,7 +476,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.checkBoxServiceable.AutoSize = true;
 			this.checkBoxServiceable.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
 			this.checkBoxServiceable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.checkBoxServiceable.Location = new System.Drawing.Point(135, 139);
+			this.checkBoxServiceable.Location = new System.Drawing.Point(135, 142);
 			this.checkBoxServiceable.Margin = new System.Windows.Forms.Padding(2);
 			this.checkBoxServiceable.Name = "checkBoxServiceable";
 			this.checkBoxServiceable.Size = new System.Drawing.Size(48, 15);
@@ -453,7 +489,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.checkBoxNew.AutoSize = true;
 			this.checkBoxNew.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
 			this.checkBoxNew.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.checkBoxNew.Location = new System.Drawing.Point(84, 139);
+			this.checkBoxNew.Location = new System.Drawing.Point(84, 142);
 			this.checkBoxNew.Margin = new System.Windows.Forms.Padding(2);
 			this.checkBoxNew.Name = "checkBoxNew";
 			this.checkBoxNew.Size = new System.Drawing.Size(47, 15);
@@ -483,7 +519,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.groupBox2.Controls.Add(this.labelAuthor);
 			this.groupBox2.Controls.Add(this.textBoxTitle);
 			this.groupBox2.Controls.Add(this.labelQOTitle);
-			this.groupBox2.Location = new System.Drawing.Point(717, 419);
+			this.groupBox2.Location = new System.Drawing.Point(972, 350);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(293, 319);
 			this.groupBox2.TabIndex = 291;
@@ -504,6 +540,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.metroTextBoxNumber.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
 			this.metroTextBoxNumber.CustomButton.UseSelectable = true;
 			this.metroTextBoxNumber.CustomButton.Visible = false;
+			this.metroTextBoxNumber.Enabled = false;
 			this.metroTextBoxNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.metroTextBoxNumber.Lines = new string[0];
 			this.metroTextBoxNumber.Location = new System.Drawing.Point(118, 19);
@@ -826,7 +863,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonOk.Location = new System.Drawing.Point(1128, 743);
+			this.buttonOk.Location = new System.Drawing.Point(1115, 679);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(75, 33);
 			this.buttonOk.TabIndex = 293;
@@ -840,47 +877,53 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonCancel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonCancel.Location = new System.Drawing.Point(1209, 743);
+			this.buttonCancel.Location = new System.Drawing.Point(1196, 679);
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.Size = new System.Drawing.Size(75, 33);
 			this.buttonCancel.TabIndex = 292;
 			this.buttonCancel.Text = "Cancel";
 			this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
 			// 
-			// listViewInitialItems
+			// _formListViewInitialItems
 			// 
-			this.listViewInitialItems.Displayer = null;
-			this.listViewInitialItems.DisplayerText = null;
-			this.listViewInitialItems.Entity = null;
-			this.listViewInitialItems.IgnoreEnterPress = false;
-			this.listViewInitialItems.Location = new System.Drawing.Point(23, 443);
-			this.listViewInitialItems.MenuOpeningAction = null;
-			this.listViewInitialItems.Name = "listViewInitialItems";
-			this.listViewInitialItems.OldColumnIndex = 0;
-			this.listViewInitialItems.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewInitialItems.Size = new System.Drawing.Size(687, 304);
-			this.listViewInitialItems.SortMultiplier = 0;
-			this.listViewInitialItems.TabIndex = 294;
-			this.listViewInitialItems.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.listViewInitialItems_SelectedItemsChanged);
+			this._formListViewInitialItems.ConfigurePaste = null;
+			this._formListViewInitialItems.Displayer = null;
+			this._formListViewInitialItems.DisplayerText = null;
+			this._formListViewInitialItems.EnableCustomSorting = true;
+			this._formListViewInitialItems.Entity = null;
+			this._formListViewInitialItems.IgnoreEnterPress = false;
+			this._formListViewInitialItems.Location = new System.Drawing.Point(18, 403);
+			this._formListViewInitialItems.MenuOpeningAction = null;
+			this._formListViewInitialItems.Name = "_formListViewInitialItems";
+			this._formListViewInitialItems.OldColumnIndex = 0;
+			this._formListViewInitialItems.PasteComplete = null;
+			this._formListViewInitialItems.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this._formListViewInitialItems.Size = new System.Drawing.Size(942, 280);
+			this._formListViewInitialItems.SortMultiplier = 0;
+			this._formListViewInitialItems.TabIndex = 294;
+			this._formListViewInitialItems.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.listViewInitialItems_SelectedItemsChanged);
 			// 
 			// listViewKits
 			// 
+			this.listViewKits.ConfigurePaste = null;
 			this.listViewKits.Displayer = null;
 			this.listViewKits.DisplayerText = null;
+			this.listViewKits.EnableCustomSorting = true;
 			this.listViewKits.Entity = null;
 			this.listViewKits.IgnoreEnterPress = false;
-			this.listViewKits.Location = new System.Drawing.Point(23, 91);
+			this.listViewKits.Location = new System.Drawing.Point(18, 91);
 			this.listViewKits.MenuOpeningAction = null;
 			this.listViewKits.Name = "listViewKits";
 			this.listViewKits.OldColumnIndex = 2;
+			this.listViewKits.PasteComplete = null;
 			this.listViewKits.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewKits.Size = new System.Drawing.Size(687, 315);
+			this.listViewKits.Size = new System.Drawing.Size(942, 280);
 			this.listViewKits.SortMultiplier = 1;
 			this.listViewKits.TabIndex = 68;
 			// 
 			// metroProgressSpinner1
 			// 
-			this.metroProgressSpinner1.Location = new System.Drawing.Point(256, 147);
+			this.metroProgressSpinner1.Location = new System.Drawing.Point(393, 162);
 			this.metroProgressSpinner1.Maximum = 100;
 			this.metroProgressSpinner1.Name = "metroProgressSpinner1";
 			this.metroProgressSpinner1.Size = new System.Drawing.Size(180, 156);
@@ -895,7 +938,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.button2.Location = new System.Drawing.Point(635, 52);
+			this.button2.Location = new System.Drawing.Point(885, 52);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(75, 33);
 			this.button2.TabIndex = 303;
@@ -907,112 +950,22 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.buttonAddProd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonAddProd.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonAddProd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonAddProd.Location = new System.Drawing.Point(971, 743);
+			this.buttonAddProd.Location = new System.Drawing.Point(966, 679);
 			this.buttonAddProd.Name = "buttonAddProd";
-			this.buttonAddProd.Size = new System.Drawing.Size(151, 33);
+			this.buttonAddProd.Size = new System.Drawing.Size(143, 33);
 			this.buttonAddProd.TabIndex = 304;
 			this.buttonAddProd.Text = "Add New Product";
 			this.buttonAddProd.Click += new System.EventHandler(this.ButtonAddProduct_Click);
-			// 
-			// documentControl2
-			// 
-			this.documentControl2.CurrentDocument = null;
-			this.documentControl2.Location = new System.Drawing.Point(1016, 76);
-			this.documentControl2.Name = "documentControl2";
-			this.documentControl2.Size = new System.Drawing.Size(268, 41);
-			this.documentControl2.TabIndex = 306;
-			// 
-			// documentControl1
-			// 
-			this.documentControl1.CurrentDocument = null;
-			this.documentControl1.Location = new System.Drawing.Point(1016, 29);
-			this.documentControl1.Name = "documentControl1";
-			this.documentControl1.Size = new System.Drawing.Size(268, 41);
-			this.documentControl1.TabIndex = 305;
-			// 
-			// documentControl3
-			// 
-			this.documentControl3.CurrentDocument = null;
-			this.documentControl3.Location = new System.Drawing.Point(1016, 123);
-			this.documentControl3.Name = "documentControl3";
-			this.documentControl3.Size = new System.Drawing.Size(268, 41);
-			this.documentControl3.TabIndex = 307;
-			// 
-			// documentControl4
-			// 
-			this.documentControl4.CurrentDocument = null;
-			this.documentControl4.Location = new System.Drawing.Point(1016, 170);
-			this.documentControl4.Name = "documentControl4";
-			this.documentControl4.Size = new System.Drawing.Size(268, 41);
-			this.documentControl4.TabIndex = 308;
-			// 
-			// documentControl5
-			// 
-			this.documentControl5.CurrentDocument = null;
-			this.documentControl5.Location = new System.Drawing.Point(1016, 217);
-			this.documentControl5.Name = "documentControl5";
-			this.documentControl5.Size = new System.Drawing.Size(268, 41);
-			this.documentControl5.TabIndex = 309;
-			// 
-			// documentControl6
-			// 
-			this.documentControl6.CurrentDocument = null;
-			this.documentControl6.Location = new System.Drawing.Point(1016, 264);
-			this.documentControl6.Name = "documentControl6";
-			this.documentControl6.Size = new System.Drawing.Size(268, 41);
-			this.documentControl6.TabIndex = 310;
-			// 
-			// documentControl7
-			// 
-			this.documentControl7.CurrentDocument = null;
-			this.documentControl7.Location = new System.Drawing.Point(1016, 311);
-			this.documentControl7.Name = "documentControl7";
-			this.documentControl7.Size = new System.Drawing.Size(268, 41);
-			this.documentControl7.TabIndex = 311;
-			// 
-			// documentControl8
-			// 
-			this.documentControl8.CurrentDocument = null;
-			this.documentControl8.Location = new System.Drawing.Point(1016, 358);
-			this.documentControl8.Name = "documentControl8";
-			this.documentControl8.Size = new System.Drawing.Size(268, 41);
-			this.documentControl8.TabIndex = 312;
-			// 
-			// documentControl9
-			// 
-			this.documentControl9.CurrentDocument = null;
-			this.documentControl9.Location = new System.Drawing.Point(1016, 405);
-			this.documentControl9.Name = "documentControl9";
-			this.documentControl9.Size = new System.Drawing.Size(268, 41);
-			this.documentControl9.TabIndex = 313;
-			// 
-			// documentControl10
-			// 
-			this.documentControl10.CurrentDocument = null;
-			this.documentControl10.Location = new System.Drawing.Point(1016, 452);
-			this.documentControl10.Name = "documentControl10";
-			this.documentControl10.Size = new System.Drawing.Size(268, 41);
-			this.documentControl10.TabIndex = 314;
 			// 
 			// InitialOrderFormNew
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1288, 792);
-			this.Controls.Add(this.documentControl10);
-			this.Controls.Add(this.documentControl9);
-			this.Controls.Add(this.documentControl8);
-			this.Controls.Add(this.documentControl7);
-			this.Controls.Add(this.documentControl6);
-			this.Controls.Add(this.documentControl5);
-			this.Controls.Add(this.documentControl4);
-			this.Controls.Add(this.documentControl3);
-			this.Controls.Add(this.documentControl1);
-			this.Controls.Add(this.documentControl2);
+			this.ClientSize = new System.Drawing.Size(1280, 720);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.buttonAddProd);
 			this.Controls.Add(this.metroProgressSpinner1);
-			this.Controls.Add(this.listViewInitialItems);
+			this.Controls.Add(this._formListViewInitialItems);
 			this.Controls.Add(this.buttonOk);
 			this.Controls.Add(this.buttonCancel);
 			this.Controls.Add(this.groupBox2);
@@ -1052,8 +1005,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private System.Windows.Forms.ComboBox comboBoxMeasure;
 		private MetroLabel labelMeasure;
 		private MetroLabel labelDefferedCategory;
-		private MetroLabel labelReason;
-		private System.Windows.Forms.ComboBox comboBoxReason;
 		private MetroLabel labelDestination;
 		private System.Windows.Forms.ComboBox comboBoxDestination;
 		private MetroCheckBox checkBoxRepair;
@@ -1078,7 +1029,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private MetroLabel labelRemarks;
 		private System.Windows.Forms.Button buttonOk;
 		private System.Windows.Forms.Button buttonCancel;
-		private InitialOrderListView listViewInitialItems;
+		private InitialOrderFormListView _formListViewInitialItems;
 		private System.Windows.Forms.ComboBox comboBoxStatus;
 		private MetroTextBox metroTextBox1;
 		private MetroLabel metroLabel2;
@@ -1090,15 +1041,9 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private MetroProgressSpinner metroProgressSpinner1;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button buttonAddProd;
-		private DocumentationControls.DocumentControl documentControl2;
-		private DocumentationControls.DocumentControl documentControl1;
-		private DocumentationControls.DocumentControl documentControl3;
-		private DocumentationControls.DocumentControl documentControl4;
-		private DocumentationControls.DocumentControl documentControl5;
-		private DocumentationControls.DocumentControl documentControl6;
-		private DocumentationControls.DocumentControl documentControl7;
-		private DocumentationControls.DocumentControl documentControl8;
-		private DocumentationControls.DocumentControl documentControl9;
-		private DocumentationControls.DocumentControl documentControl10;
+		private MetroLabel metroLabelStation;
+		private System.Windows.Forms.ComboBox comboBoxStation;
+		private MetroTextBox metroTextBoxReference;
+		private MetroLabel metroLabelReference;
 	}
 }

@@ -3,10 +3,11 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
-    /// <summary>
-    /// Тип груза
-    /// </summary>
-    public class CargoCategory : StaticDictionary
+	/// <summary>
+	/// Тип груза
+	/// </summary>
+	[Serializable]
+	public class CargoCategory : StaticDictionary
     {
 
         #region private static List<CargoType> _Items = new List<CargoType>();

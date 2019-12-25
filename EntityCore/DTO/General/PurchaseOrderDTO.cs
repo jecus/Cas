@@ -91,9 +91,6 @@ namespace EntityCore.DTO.General
 		[Column("ShipCompanyId")]
 		public int ShipCompanyId { get; set; }
 
-		[Column("ShipTo")]
-		public string ShipTo { get; set; }
-
 		[Column("CargoVolume")]
 		public string CargoVolume { get; set; }
 
@@ -102,6 +99,24 @@ namespace EntityCore.DTO.General
 
 		[Column("NettoWeight")]
 		public string NettoWeight { get; set; }
+
+		[Column("ShipToId")]
+		public int ShipToId { get; set; }
+
+		[Column("Net")]
+		public double Net { get; set; }
+
+		[Column("IncoTermRef")]
+		public string IncoTermRef { get; set; }
+
+		[Column("StationId")]
+		public int StationId { get; set; }
+
+		[Column("TrackingNo")]
+		public string TrackingNo { get; set; }
+
+		[Column("AdditionalInformationJSON")]
+		public string AdditionalInformationJSON { get; set; }
 
 		[Child(FilterType.Equal, "ParentTypeId", 1860)]
 		public ICollection<ItemFileLinkDTO> Files { get; set; }

@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using EntityCore.DTO.General;
+using Newtonsoft.Json;
+using SmartCore.Auxiliary;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
@@ -54,9 +57,6 @@ namespace SmartCore.Purchase
 		[TableColumn("ShipCompanyId")]
 		public int ShipCompanyId { get; set; }
 
-		[TableColumn("ShipTo")]
-		public string ShipTo { get; set; }
-
 		[TableColumn("CargoVolume")]
 		public string CargoVolume { get; set; }
 
@@ -65,6 +65,35 @@ namespace SmartCore.Purchase
 
 		[TableColumn("NettoWeight")]
 		public string NettoWeight { get; set; }
+
+		[TableColumn("ShipToId")]
+		public int ShipToId { get; set; }
+
+		[TableColumn("Net")]
+		public double Net { get; set; }
+
+		[TableColumn("IncoTermRef")]
+		public string IncoTermRef { get; set; }
+
+		[TableColumn("StationId")]
+		public int StationId { get; set; }
+
+		[TableColumn("TrackingNo")]
+		public string TrackingNo { get; set; }
+
+		[TableColumn("AdditionalInformationJSON")]
+		public string AdditionalInformationJSON
+		{
+			get => JsonConvert.SerializeObject(AdditionalInformation, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+			set => AdditionalInformation = JsonConvert.DeserializeObject<PurchaseSettings>(value ?? "", new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+		}
+
+		private PurchaseSettings _additionalInformation;
+		public PurchaseSettings AdditionalInformation
+		{
+			get => _additionalInformation ?? (_additionalInformation = new PurchaseSettings());
+			set => _additionalInformation = value;
+		}
 
 		/// <summary>
 		/// 
@@ -163,6 +192,8 @@ namespace SmartCore.Purchase
 		}
 
 		public Supplier ShipCompany { get; set; }
+		public Supplier ShipTo{ get; set; }
+		public AirportsCodes Station { get; set; }
 
 		#endregion
 
@@ -215,4 +246,94 @@ namespace SmartCore.Purchase
 			return clone;
 		}
 	}
+
+	[JsonObject]
+	public class PurchaseSettings
+	{
+		private DateTime _arrivalDate;
+		private DateTime _receiptDate;
+		private DateTime _receiptTime;
+		private DateTime _arrivalTime;
+		private List<PurchaseShipper> _purchaseShippers;
+
+		public string QualificationNumber { get; set; }
+
+		public string PickupLocation { get; set; }
+
+		public DateTime ArrivalDate
+		{
+			get => _arrivalDate < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : _arrivalDate;
+			set => _arrivalDate = value;
+		}
+
+		public DateTime ArrivalTime
+		{
+			get => _arrivalTime < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : _arrivalTime;
+			set => _arrivalTime = value;
+		}
+
+		public DateTime ReceiptDate
+		{
+			get => _receiptDate < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : _receiptDate;
+			set => _receiptDate = value;
+		}
+
+		public DateTime ReceiptTime
+		{
+			get => _receiptTime < DateTimeExtend.GetCASMinDateTime() ? DateTimeExtend.GetCASMinDateTime() : _receiptTime;
+			set => _receiptTime = value;
+		}
+
+		public double FreightPrice { get; set; }
+
+		[DefaultValue(-1)]
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+		public int StatusOfDeliveryId { get; set; }
+
+		[JsonIgnore]
+		public StatusOfDelivery StatusOfDelivery
+		{
+			get => StatusOfDelivery.GetItemById(StatusOfDeliveryId);
+			set => StatusOfDeliveryId = value.ItemId;
+		}
+
+		[DefaultValue(-1)]
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+		public int ÑurrencyFreightId { get; set; }
+
+		[JsonIgnore]
+		public Ñurrency ÑurrencyFreight
+		{
+			get => Ñurrency.GetItemById(ÑurrencyFreightId);
+			set => ÑurrencyFreightId = value.ItemId;
+		}
+
+		public List<PurchaseShipper> PurchaseShippers
+		{
+			get => _purchaseShippers ?? (_purchaseShippers = new List<PurchaseShipper>());
+			set => _purchaseShippers = value;
+		}
+	}
+
+	[JsonObject]
+	[Serializable]
+	public class PurchaseShipper : BaseEntityObject
+	{
+		public int ShipperId { get; set; }
+		public double Cost { get; set; }
+		public int CurrencyId { get; set; }
+		public string Remark { get; set; }
+
+		[JsonIgnore]
+		public Supplier Shipper { get; set; }
+		[JsonIgnore]
+		public Ñurrency Currency
+		{
+			get => Ñurrency.GetItemById(CurrencyId);
+			set => CurrencyId = value.ItemId;
+		}
+		[JsonIgnore]
+		public string PONumber { get; set; }
+	}
+
 }

@@ -17,6 +17,7 @@ namespace CAS.UI.UIControls.MTOP
 		public MTOPListView()
 		{
 			InitializeComponent();
+			DisableContectMenu();
 		}
 
 		public MTOPListView(Dictionary<int, Lifelength> groupLifelengths) : this()

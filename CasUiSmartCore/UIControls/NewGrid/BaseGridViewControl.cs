@@ -2,20 +2,27 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.Auxiliary.Comparers;
 using CASTerms;
 using Microsoft.VisualBasic.Devices;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General;
+using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
+using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;
 using Telerik.WinControls.Data;
 using Telerik.WinControls.Export;
 using Telerik.WinControls.UI;
+using Component = SmartCore.Entities.General.Accessory.Component;
 
 namespace CAS.UI.UIControls.NewGrid
 {
@@ -28,15 +35,40 @@ namespace CAS.UI.UIControls.NewGrid
 		//коллекция выделенных элементов
 		private readonly List<T> _selectedItemsList = new List<T>();
 		protected readonly List<T> _items = new List<T>();
+
+
 		private RadDropDownMenu _customMenu;
+		private RadMenuItem _toolStripMenuItemCopy;
+		private RadMenuItem _toolStripMenuItemPaste;
+		private RadMenuItem _toolStripMenuItemDelete;
+		private RadMenuSeparatorItem _separator;
+		private bool _clickHeader;
+		private bool _addBaseMenu = true;
 
 		#endregion
 
 		#region Properties
 
+		#region public bool EnableCustomSorting
+
+		public bool EnableCustomSorting
+		{
+			get => radGridView1.EnableCustomSorting;
+			set => radGridView1.EnableCustomSorting = value;
+		}
+
+		#endregion
+
 		#region public Action MenuOpeningAction { get; set; }
 
 		public Action MenuOpeningAction { get; set; }
+
+		#endregion
+
+		#region public Action PasteComplete { get; set; }
+
+		public Action<List<T>> ConfigurePaste{ get; set; }
+		public Action<List<T>> PasteComplete { get; set; }
 
 		#endregion
 
@@ -140,7 +172,123 @@ namespace CAS.UI.UIControls.NewGrid
 		{
 			InitializeComponent();
 			SetupGridView();
+			InitListView();
 			FirstLoad();
+		}
+
+		#endregion
+
+		#region private void InitListView()
+
+		public void DisableContectMenu()
+		{
+			_customMenu.Items.Remove(_toolStripMenuItemCopy);
+			_customMenu.Items.Remove(_toolStripMenuItemDelete);
+			_customMenu.Items.Remove(_toolStripMenuItemPaste);
+			_customMenu.Items.Remove(_separator);
+			_addBaseMenu = false;
+		}
+
+		public void AddMenuItems(params RadMenuItemBase[] items)
+		{
+			_customMenu.Items.Clear();
+			_customMenu.Items.AddRange(items);
+
+			if (!_addBaseMenu)
+				return;
+
+			
+			_customMenu.Items.AddRange(_toolStripMenuItemDelete,
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemCopy,
+				_toolStripMenuItemPaste
+			);
+		}
+
+		private void InitListView()
+		{
+			_customMenu = new RadDropDownMenu();
+			_toolStripMenuItemDelete = new RadMenuItem();
+			_separator = new RadMenuSeparatorItem();
+			_toolStripMenuItemCopy = new RadMenuItem();
+			_toolStripMenuItemPaste = new RadMenuItem();
+
+			// 
+			// toolStripMenuItemDelete
+			// 
+			_toolStripMenuItemDelete.Text = "Delete";
+			_toolStripMenuItemDelete.Click += ButtonDeleteClick;
+
+			// 
+			// toolStripMenuItemCopy
+			// 
+			_toolStripMenuItemCopy.Text = "Copy";
+			_toolStripMenuItemCopy.Click += CopyItemsClick;
+
+			// 
+			// toolStripMenuItemPaste
+			// 
+			_toolStripMenuItemPaste.Text = "Paste";
+			_toolStripMenuItemPaste.Click += PasteItemsClick;
+
+			_customMenu.Items.AddRange(new RadMenuSeparatorItem(),
+				_toolStripMenuItemDelete,
+				_separator,
+				_toolStripMenuItemCopy,
+				_toolStripMenuItemPaste
+			);
+		}
+
+		public virtual void PasteItemsClick(object sender, EventArgs e)
+		{
+			GetFromClipboard();
+		}
+
+		public virtual void CopyItemsClick(object sender, EventArgs e)
+		{
+			CopyToClipboard();
+		}
+
+		public virtual void ButtonDeleteClick(object sender, EventArgs e)
+		{
+			if (this.SelectedItems == null) return;
+
+			var confirmResult = MessageBox.Show($"Do you really want to delete  {SelectedItems.Count} item(s)?", "Confirm delete operation",
+														MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+
+			if (confirmResult == DialogResult.Yes)
+			{
+				var deletedItems = SelectedItems.OfType<BaseEntityObject>().ToList();
+				foreach (var item in deletedItems)
+					item.IsDeleted = true;
+
+				if (deletedItems.Any(i => i is Component))
+				{
+					var components = deletedItems.Where(i => i is Component && !(i is BaseComponent)).Cast<Component>();
+					var deleteCD = components.SelectMany(i => i.ComponentDirectives);
+					if (components.Any())
+					{
+						GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(components.Cast<BaseEntityObject>().ToList());
+						foreach (var item in components)
+							radGridView1.Rows.Remove(radGridView1.Rows.FirstOrDefault(i => (i.Tag as BaseEntityObject).ItemId == item.ItemId));
+					}
+
+					if (deleteCD.Any())
+					{
+						GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(deleteCD.Cast<BaseEntityObject>().ToList()); 
+						foreach (var item in deleteCD)
+							radGridView1.Rows.Remove(radGridView1.Rows.FirstOrDefault(i => (i.Tag as BaseEntityObject).ItemId == item.ItemId));
+					}
+				}
+				else
+				{
+					GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(deletedItems);
+					foreach (var item in deletedItems)
+						radGridView1.Rows.Remove(radGridView1.Rows.FirstOrDefault(i => (i.Tag as BaseEntityObject).ItemId == item.ItemId));
+				}
+				
+				
+			}
 		}
 
 		#endregion
@@ -157,6 +305,7 @@ namespace CAS.UI.UIControls.NewGrid
 			radGridView1.MasterTemplate.ShowFilteringRow = false;
 
 			this.radGridView1.AllowSearchRow = true;
+			EnableCustomSorting = true;
 		}
 
 		#endregion
@@ -277,7 +426,6 @@ namespace CAS.UI.UIControls.NewGrid
 				UpdateItemColor();
 				SetTotalText();
 				GroupingItems();
-				SortingItems();
 
 				radGridView1.MasterTemplate.ExpandAllGroups();
 
@@ -329,7 +477,7 @@ namespace CAS.UI.UIControls.NewGrid
 			if (itemsArray.Length == 0)
 				return;
 
-			_items.AddRange(itemsArray);
+			_items.InsertRange(0,itemsArray);
 
 			var temp = new List<GridViewDataRowInfo>();
 			foreach (var item in itemsArray)
@@ -356,13 +504,16 @@ namespace CAS.UI.UIControls.NewGrid
 					i++;
 				}
 				temp.Add(rowInfo);
+
+				SetItemColor(rowInfo, (T)rowInfo.Tag);
+				radGridView1.Rows.Insert(0, rowInfo);
 			}
 
-			radGridView1.BeginUpdate();
-			radGridView1.Rows.AddRange(temp.ToArray());
-			radGridView1.EndUpdate();
+			//radGridView1.BeginUpdate();
+			//radGridView1.Rows.AddRange(temp.ToArray());
+			//radGridView1.EndUpdate();
 
-			UpdateItemColor();
+			//UpdateItemColor();
 			SetTotalText();
 		}
 
@@ -429,9 +580,12 @@ namespace CAS.UI.UIControls.NewGrid
 					temp.Add(rowInfo);
 				}
 
-				radGridView1.BeginUpdate();
+
+				if(EnableCustomSorting)
+					SortingItems(temp);
+
 				radGridView1.Rows.AddRange(temp.ToArray());
-				radGridView1.EndUpdate();
+
 			}
 			catch (Exception ex)
 			{
@@ -553,32 +707,24 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#endregion
 
-		#region protected virtual void SortingItems()
+		#region Sorting
 
-		private void SortingItems()
+		private void SortingItems(List<GridViewDataRowInfo> temp)
 		{
-			Sorting();
+			SortMultiplier = SortMultiplier == 0 ? -1 : SortMultiplier;
+			temp.Sort(new GridViewDataRowInfoComparer(OldColumnIndex, SortMultiplier));
 		}
 
-		#endregion
-
-		#region public void Sorting(string colName = null)
-
-		protected virtual void Sorting(string colName = null)
-		{
-			var radSortOrder = SortMultiplier == 0 ? RadSortOrder.Ascending : RadSortOrder.Descending;
-			if (!string.IsNullOrEmpty(colName))
-				radGridView1.Columns[colName].SortOrder = radSortOrder;
-			radGridView1.Columns[OldColumnIndex].SortOrder = radSortOrder;
-		}
-
-		#endregion
-
-		#region protected virtual void CustomSort(int ColumnIndex)
 
 		protected virtual void CustomSort(int ColumnIndex)
 		{
 
+		}
+
+
+		private void RadGridView1_CustomSorting(object sender, Telerik.WinControls.UI.GridViewCustomSortingEventArgs e)
+		{
+			e.SortResult = new GridViewDataRowInfoComparer(OldColumnIndex, SortMultiplier).Compare(e.Row1, e.Row2);
 		}
 
 		#endregion
@@ -630,7 +776,28 @@ namespace CAS.UI.UIControls.NewGrid
 			if (cellElement == null || cellElement.RowInfo is GridViewFilteringRowInfo || cellElement.RowInfo is GridViewTableHeaderRowInfo)
 				return;
 
+			if(!_customMenu.Items.Any())
+				e.Cancel = true;
+
+
+			if (SelectedItems.Count <= 0)
+			{
+				_toolStripMenuItemPaste.Enabled = false;
+				_toolStripMenuItemCopy.Enabled = false;
+				_toolStripMenuItemDelete.Enabled = false;
+			}
+			else
+			{
+				_toolStripMenuItemPaste.Enabled = true;
+				_toolStripMenuItemCopy.Enabled = true;
+				_toolStripMenuItemDelete.Enabled = true;
+			}
+
+			if (SelectedItem is ComponentDirective)
+				_toolStripMenuItemCopy.Enabled = _toolStripMenuItemPaste.Enabled = false;
+
 			MenuOpeningAction?.Invoke();
+
 			e.ContextMenu = _customMenu;
 		}
 
@@ -682,6 +849,12 @@ namespace CAS.UI.UIControls.NewGrid
 		#endregion
 
 		#region private void RadGridView1_DoubleClick(object sender, System.EventArgs e)
+
+		protected void RadGridView1_DoubleClickBase(object sender, EventArgs e)
+		{
+			if(!_clickHeader)
+				RadGridView1_DoubleClick(sender, e);
+		}
 
 		protected  virtual void RadGridView1_DoubleClick(object sender, EventArgs e)
 		{
@@ -752,9 +925,29 @@ namespace CAS.UI.UIControls.NewGrid
 
 		private void RadGridView1_CellClick(object sender, GridViewCellEventArgs e)
 		{
-			if (e.ColumnIndex > -1 && e.RowIndex == -1 &&  sender is GridHeaderCellElement && ((GridHeaderCellElement)sender).ZIndex != 0)
-				CustomSort(e.ColumnIndex);
-			
+			if (e.ColumnIndex > -1 && e.RowIndex == -1 && sender is GridHeaderCellElement &&
+			    ((GridHeaderCellElement) sender).ZIndex != 0)
+			{
+				_clickHeader = true;
+				if (!EnableCustomSorting)
+				{
+					OldColumnIndex = e.ColumnIndex;
+					CustomSort(e.ColumnIndex);
+				}
+				else
+				{
+					if (OldColumnIndex != e.ColumnIndex)
+						SortMultiplier = -1;
+					if (SortMultiplier == 1)
+						SortMultiplier = -1;
+					else
+						SortMultiplier = 1;
+
+					OldColumnIndex = e.ColumnIndex;
+				}
+			}
+			else _clickHeader = false;
+
 		}
 
 		#endregion
@@ -783,6 +976,139 @@ namespace CAS.UI.UIControls.NewGrid
 			e.CellStyleInfo.RightBorder = Color.Black;
 			e.CellStyleInfo.BottomBorder = Color.Black;
 			e.CellStyleInfo.TopBorder = Color.Black;
+		}
+
+		#endregion
+
+		#region Copy/Paste
+
+		private void CopyToClipboard()
+		{
+			// регистрация формата данных либо получаем его, если он уже зарегистрирован
+			try
+			{
+				if (SelectedItems == null || SelectedItems.Count == 0)
+					return;
+
+				var list = new List<T>();
+				foreach (var obj in SelectedItems)
+				{
+					if (obj is Component newComponent)
+					{
+						list.Add(newComponent.GetCopyUnsaved() as T);
+					}
+					else
+					{
+						var method = typeof(T).GetMethods().FirstOrDefault(i => i.Name == "GetCopyUnsaved");
+						list.Add((T)method.Invoke(obj, null));
+					}
+				}
+
+					
+
+				//todo:(EvgeniiBabak) Нужен другой способ проверки сереализуемости объекта
+				using (MemoryStream mem = new MemoryStream())
+				{
+					BinaryFormatter bin = new BinaryFormatter();
+					try
+					{
+						bin.Serialize(mem, list);
+					}
+					catch (Exception ex)
+					{
+						MessageBox.Show("Объект не может быть сериализован. \n" + ex);
+						return;
+					}
+				}
+
+
+				if (list.Count == 0)
+					return;
+
+				// копирование в буфер обмена
+				IDataObject dataObj = new DataObject();
+				dataObj.SetData(nameof(T), false, list);
+				Clipboard.SetDataObject(dataObj, false);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Error while copying new object(s). \n" + ex);
+				Program.Provider.Logger.Log(ex);
+			}
+		}
+
+		private void GetFromClipboard()
+		{
+			try
+			{
+				if (string.IsNullOrEmpty(nameof(T)))
+					return;
+				if (!Clipboard.ContainsData(nameof(T)))
+					return;
+				var pds = (List<T>)Clipboard.GetData(nameof(T));
+				if (pds == null)
+					return;
+
+				ConfigurePaste?.Invoke(pds.Cast<T>().ToList());
+
+				var objectToPaste = new List<T>();
+				if (pds.Count > 0)
+				{
+					if (pds.Any(i => i is Component))
+					{
+						var components = pds.Where(i => i is Component && !(i is BaseComponent)).Cast<BaseEntityObject>().ToList();
+
+						if(components.Count == 0)
+							return;
+
+						GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(components);
+						objectToPaste.AddRange(components.Cast<T>());
+					}
+					else
+					{
+						GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(pds.Cast<BaseEntityObject>().ToList());
+						objectToPaste.AddRange(pds);
+					}
+					
+				}
+
+				PasteComplete?.Invoke(pds.Cast<T>().ToList());
+
+				//TODO:Вообще лучше так не делать а выносить в PasteComplete такие штуки но пока в качестве универсальной запоатки пойдет
+				foreach (var pd in pds)
+				{
+					if(pd is IDirective directive)
+						GlobalObjects.PerformanceCalculator.GetNextPerformance(directive);
+					if (pd is Component component)
+					{
+						objectToPaste.Remove(pd);
+
+						foreach (var cd in component.ComponentDirectives)
+							cd.ComponentId = component.ItemId;
+
+
+						if (component.ComponentDirectives.Count > 0)
+							objectToPaste.AddRange(component.ComponentDirectives.Cast<T>());
+
+						objectToPaste.Add(component as T);
+					}
+				}
+
+				if (objectToPaste.Any(i => i is ComponentDirective))
+					GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(pds.Where(i => i is ComponentDirective).Cast<BaseEntityObject>().ToList());
+
+
+				InsertItems(objectToPaste.ToArray());
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Error while inserting new object(s). \n" + ex);
+				Program.Provider.Logger.Log(ex);
+			}
+			finally
+			{
+				Clipboard.Clear();
+			}
 		}
 
 		#endregion

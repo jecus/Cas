@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
+using EntityCore.DTO.Dictionaries;
 using EntityCore.DTO.General;
 using EntityCore.Filter;
 using MetroFramework.Forms;
@@ -26,6 +27,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private PurchaseOrder _order;
 		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
 		private List<Supplier> _supplierShipper = new List<Supplier>();
+		private List<AirportsCodes> _airportsCodes = new List<AirportsCodes>();
 
 		#endregion
 
@@ -39,7 +41,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		public PurchaseOrderForm(PurchaseOrder order):this()
 		{
 			_order = order;
-
+			buttonSettings.Enabled = false;
 			DocumentControls.AddRange(new[] { documentControl1, documentControl2, documentControl3, documentControl4, documentControl5, documentControl6, documentControl7, documentControl8, documentControl9 });
 
 			Task.Run(() => DoWork())
@@ -53,8 +55,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private void Completed()
 		{
 			UpdateControls();
-			UpdateInitialControls();
 			purchaseRecordListView1.SetItemsArray(_addedRecord.ToArray());
+			buttonSettings.Enabled = true;
 		}
 
 		#endregion
@@ -68,23 +70,40 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			var ids = records.Select(s => s.SupplierId).Distinct().ToArray();
 			var productIds = records.Select(s => s.PackageItemId).Distinct().ToArray();
 			var suppliers = GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[]{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, ids), });
-			var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new ICommonFilter[]{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, productIds), });
+			var products = GlobalObjects.CasEnvironment.Loader.GetObjectList<Product>(new ICommonFilter[]{new CommonFilter<int>(BaseEntityObject.ItemIdProperty, SmartCore.Filters.FilterType.In, productIds), },true);
 
 			_supplierShipper.Clear();
 			_supplierShipper.AddRange(GlobalObjects.CasEnvironment.Loader.GetObjectList<Supplier>(new ICommonFilter[] { new CommonFilter<int>(Supplier.SupplierClassProperty, SupplierClass.Shipper.ItemId) }));
 			_order.ShipCompany = _supplierShipper.FirstOrDefault(i => i.ItemId == _order.ShipCompanyId) ?? Supplier.Unknown;
 
+			_airportsCodes.Clear();
+			_airportsCodes.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<AirportCodeDTO, AirportsCodes>().OrderBy(i => i.ShortName));
+			_airportsCodes.Add(AirportsCodes.Unknown);
+
 			var parentInitialId = (int)GlobalObjects.CasEnvironment.Execute($@"select i.ItemId from PurchaseOrders p
 			left join RequestsForQuotation q on q.ItemID = p.ParentID
 			left join InitialOrders i on i.ItemID = q.ParentID where p.ItemId = {_order.ItemId}").Tables[0].Rows[0][0];
 			var initialRecords = GlobalObjects.CasEnvironment.NewLoader.GetObjectList<InitialOrderRecordDTO, InitialOrderRecord>(new Filter("ParentPackageId", parentInitialId));
+			var initial = GlobalObjects.CasEnvironment.NewLoader.GetObject<InitialOrderDTO, InitialOrder>(new Filter("ItemId", parentInitialId));
 
 			foreach (var record in records)
 			{
 				record.ParentInitialRecord = initialRecords.FirstOrDefault(i => i.ProductId == record.PackageItemId);
+				if(record.ParentInitialRecord != null)
+					record.ParentInitialRecord.ParentPackage = initial;
 				record.Product = products.FirstOrDefault(i => i.ItemId == record.PackageItemId);
 				record.Supplier = suppliers.FirstOrDefault(i => i.ItemId == record.SupplierId);
+
+				record.ItemCost = record.Quantity * record.Cost;
 			}
+
+			foreach (var record in records)
+			{
+				record.TotalCost = records.Sum(i => i.ItemCost);
+			}
+
+
+
 			var documents = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<DocumentDTO, Document>(new Filter("ParentID", _order.ItemId), true);
 			_order.ClosingDocument.Clear();
 			_order.ClosingDocument.AddRange(documents);
@@ -93,28 +112,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		}
 
 		#endregion
-
-		#region private void UpdateInitialControls()
-
-		private void UpdateInitialControls()
-		{
-			comboBoxStatus.Items.Clear();
-			comboBoxStatus.DataSource = Enum.GetValues(typeof(WorkPackageStatus));
-			comboBoxStatus.SelectedItem = _order.Status;
-
-			textBoxTitle.Text = _order.Title;
-			metroTextBoxNumber.Text = _order.Number;
-			dateTimePickerOpeningDate.Value = _order.OpeningDate;
-			dateTimePickerClosingDate.Value = _order.ClosingDate;
-			dateTimePickerPublishDate.Value = _order.PublishingDate;
-			textBoxClosingBy.Text = _order.CloseByUser;
-			textBoxPublishedBy.Text = _order.PublishedByUser;
-			textBoxAuthor.Text = GlobalObjects.CasEnvironment.IdentityUser.ToString();
-			textBoxRemarks.Text = _order.Remarks;
-		}
-
-		#endregion
-
+		
 		#region private void UpdateControls()
 
 		private void UpdateControls()
@@ -122,19 +120,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			comboBoxMeasure.Items.Clear();
 			//comboBoxMeasure.Items.AddRange(Measure.GetByCategories(new[] { MeasureCategory.Mass, MeasureCategory.EconomicEntity }));
 			comboBoxMeasure.Items.AddRange(Measure.Items.ToArray());
-
-			comboBoxDesignation.Items.Clear();
-			comboBoxDesignation.Items.AddRange(Designation.Items.ToArray());
-
-			comboBoxIncoTerm.Items.Clear();
-			comboBoxIncoTerm.Items.AddRange(IncoTerm.Items.ToArray());
-
-			comboBoxShipComp.Items.Clear();
-			comboBoxShipComp.Items.AddRange(_supplierShipper.ToArray());
-			comboBoxShipComp.Items.Add(Supplier.Unknown);
-
-			comboBoxPayTerm.Items.Clear();
-			comboBoxPayTerm.DataSource = Enum.GetValues(typeof(PayTerm));
 
 			comboBoxCondition.Items.Clear();
 			comboBoxCondition.DataSource = Enum.GetValues(typeof(ComponentStatus));
@@ -150,15 +135,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				var control = DocumentControls[i];
 				control.CurrentDocument = _order.ClosingDocument[i];
 			}
-
-			comboBoxIncoTerm.SelectedItem = _order.IncoTerm;
-			comboBoxDesignation.SelectedItem = _order.Designation;
-			comboBoxPayTerm.SelectedItem = _order.PayTerm;
-			textBoxBruttoWeight.Text = _order.BruttoWeight;
-			textBoxCargoVolume.Text = _order.CargoVolume;
-			textBoxNettoWeight.Text = _order.NettoWeight;
-			textBoxShipTo.Text = _order.ShipTo;
-			comboBoxShipComp.SelectedItem = _supplierShipper.FirstOrDefault(i => i.ItemId == _order.ShipCompanyId) ?? Supplier.Unknown;
 		}
 
 		#endregion
@@ -326,7 +302,17 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			purchaseRecordListView1.SelectedItem.Quantity = (double) numericUpDownQuantity.Value;
 			purchaseRecordListView1.SelectedItem.Cost = (double)numericUpDownCost.Value;
 			purchaseRecordListView1.SelectedItem.Currency = (Сurrency) comboBoxCurrency.SelectedItem;
-			
+
+			foreach (var record in _addedRecord)
+			{
+				record.ItemCost = record.Quantity * record.Cost;
+			}
+
+			foreach (var record in _addedRecord)
+			{
+				record.TotalCost = _addedRecord.Sum(i => i.ItemCost);
+			}
+
 			purchaseRecordListView1.SetItemsArray(_addedRecord.ToArray());
 		}
 
@@ -349,14 +335,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		private void ButtonOk_Click(object sender, EventArgs e)
 		{
-			if (textBoxTitle.Text == "")
-			{
-				MessageBox.Show("Please, enter a Title", (string)new GlobalTermsProvider()["SystemName"],
-					MessageBoxButtons.OK,
-					MessageBoxIcon.Exclamation);
-			}
-
-			else if (purchaseRecordListView1.ItemsCount <= 0)
+			if (purchaseRecordListView1.ItemsCount <= 0)
 			{
 				MessageBox.Show("Please select a price for purchase order", (string)new GlobalTermsProvider()["SystemName"],
 					MessageBoxButtons.OK,
@@ -364,10 +343,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			}
 			else
 			{
-				//запись новой информации в запросный ордер
-				ApplyPurchaseData();
 				//сохранение запросного ордера
-				GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
+				//GlobalObjects.CasEnvironment.NewKeeper.Save(_order);
 
 				foreach (var record in _addedRecord)
 				{
@@ -381,54 +358,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		}
 
 		#endregion
-
-		#region private void ApplyOrderData()
-		private void ApplyPurchaseData()
+		
+		private void buttonSettings_Click(object sender, EventArgs e)
 		{
-			_order.Title = textBoxTitle.Text;
-			_order.Number = metroTextBoxNumber.Text;
-			_order.Status = (WorkPackageStatus)comboBoxStatus.SelectedItem;
-			_order.Remarks = textBoxRemarks.Text;
-
-			_order.IncoTerm = (IncoTerm)comboBoxIncoTerm.SelectedItem;
-			_order.Designation = (Designation)comboBoxDesignation.SelectedItem;
-			_order.PayTerm = (PayTerm)comboBoxPayTerm.SelectedItem;
-			_order.BruttoWeight = textBoxBruttoWeight.Text;
-			_order.CargoVolume = textBoxCargoVolume.Text;
-			_order.NettoWeight = textBoxNettoWeight.Text;
-			_order.ShipCompanyId = ((Supplier)comboBoxShipComp.SelectedItem).ItemId;
-			_order.ShipCompany = (Supplier)comboBoxShipComp.SelectedItem;
-			_order.ShipTo = textBoxShipTo.Text;
-
-			if (_order.ItemId <= 0)
-				_order.Author = GlobalObjects.CasEnvironment.IdentityUser.ToString();
-
-			if (_order.Status == WorkPackageStatus.All)
-			{
-				_order.OpeningDate = dateTimePickerOpeningDate.Value;
-				_order.ClosingDate = dateTimePickerClosingDate.Value;
-				_order.PublishingDate = dateTimePickerPublishDate.Value;
-			}
-			else if (_order.Status == WorkPackageStatus.Opened)
-			{
-				_order.OpeningDate = dateTimePickerOpeningDate.Value;
-			}
-			else if (_order.Status == WorkPackageStatus.Closed)
-			{
-				_order.ClosingDate = dateTimePickerClosingDate.Value;
-			}
-			else if (_order.Status == WorkPackageStatus.Published)
-			{
-				_order.PublishingDate = dateTimePickerPublishDate.Value;
-			}
-		}
-		#endregion
-
-		private void button2_Click(object sender, EventArgs e)
-		{
-			if (purchaseRecordListView1.SelectedItem == null) return;
-
-			
+			var form = new PurchaseOrderSettingForm(_order, _supplierShipper, _airportsCodes);
+			form.ShowDialog();
 		}
 	}
 }

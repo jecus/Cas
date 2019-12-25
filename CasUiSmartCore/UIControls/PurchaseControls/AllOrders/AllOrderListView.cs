@@ -27,6 +27,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			IgnoreEnterPress = true;
 
 			InitializeComponent();
+			DisableContectMenu();
 		}
 		#endregion
 

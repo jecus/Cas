@@ -246,6 +246,7 @@ namespace SmartCore.DtoHelper
 				HTS = componentModel.HTS,
 				ComponentClass = (short?) componentModel.GoodsClass?.ItemId,
 				IsDangerous = componentModel.IsDangerous,
+				EngineRef = componentModel.EngineRef,
 				SupplierRelations = componentModel.SupplierRelations?.Select(i => i.Convert()) as ICollection<KitSuppliersRelationDTO>,
 			};
 		}
@@ -282,6 +283,7 @@ namespace SmartCore.DtoHelper
 				IsForbidden = componentModelDto.IsForbidden,
 				DescRus = componentModelDto.DescRus,
 				HTS = componentModelDto.HTS,
+				EngineRef = componentModelDto.EngineRef
 			};
 
 			if (componentModelDto.SupplierRelations != null)
@@ -320,6 +322,7 @@ namespace SmartCore.DtoHelper
 				Reference = product.Reference,
 				IsEffectivity = product.IsEffectivity,
 				IsForbidden = product.IsForbidden,
+				EngineRef = product.EngineRef,
 				SupplierRelations = product.SupplierRelations?.Select(i => i.Convert()) as ICollection<KitSuppliersRelationDTO>,
 			};
 		}
@@ -352,6 +355,7 @@ namespace SmartCore.DtoHelper
 				Reference = productDto.Reference,
 				IsEffectivity = productDto.IsEffectivity,
 				IsForbidden = productDto.IsForbidden,
+				EngineRef = productDto.EngineRef,
 				ProductType = productDto.ModelingObjectTypeId == -1 ? ProductType.EquipmentandMaterial: ProductType.ComponentModel
 			};
 
@@ -522,7 +526,12 @@ namespace SmartCore.DtoHelper
 				Updated = department.Updated,
 				CorrectorId = department.CorrectorId,
 				Name = department.ShortName,
-				FullName = department.FullName
+				FullName = department.FullName,
+				Address = department.Address,
+				Phone = department.Phone,
+				Fax = department.Fax,
+				Email = department.Email,
+				Website = department.Website
 			};
 		}
 
@@ -535,7 +544,12 @@ namespace SmartCore.DtoHelper
 				Updated = departmentDto.Updated,
 				CorrectorId = departmentDto.CorrectorId,
 				ShortName = departmentDto.Name,
-				FullName = departmentDto.FullName
+				FullName = departmentDto.FullName,
+				Address = departmentDto.Address,
+				Phone = departmentDto.Phone,
+				Fax = departmentDto.Fax,
+				Email = departmentDto.Email,
+				Website = departmentDto.Website
 			};
 		}
 

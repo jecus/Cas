@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using EntityCore.DTO.General;
 using Newtonsoft.Json;
 using SmartCore.Calculations;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
-using SmartCore.Purchase;
 
 namespace SmartCore.Entities.General.Setting
 {
@@ -37,6 +35,7 @@ namespace SmartCore.Entities.General.Setting
 	{
 		private PurchaseSetting _purchaseSettings;
 		private QuotationSupplierSetting _quotationSupplierSetting;
+		private MailSettings _mailSettings ;
 
 		public GlobalSetting()
 		{
@@ -53,6 +52,12 @@ namespace SmartCore.Entities.General.Setting
 		{
 			get => _quotationSupplierSetting ?? (_quotationSupplierSetting = new QuotationSupplierSetting());
 			set => _quotationSupplierSetting = value;
+		}
+
+		public MailSettings MailSettings
+		{
+			get => _mailSettings ?? (_mailSettings = new MailSettings());
+			set => _mailSettings  = value;
 		}
 	}
 
@@ -83,5 +88,21 @@ namespace SmartCore.Entities.General.Setting
 		}
 
 		public Dictionary<string, List<Lifelength>> Parameters { get; set; }
+	}
+
+	[JsonObject]
+	public class OperatorSettings
+	{
+		public MailSettings MailSettings { get; set; }
+	}
+
+	[JsonObject]
+	public class MailSettings
+	{
+		public string Host { get; set; }
+		public string Mail { get; set; }
+		public string Password { get; set; }
+		public int Port { get; set; }
+		public bool SSl { get; set; }
 	}
 }

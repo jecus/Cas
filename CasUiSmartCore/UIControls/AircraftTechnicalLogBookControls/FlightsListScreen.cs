@@ -33,10 +33,8 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
 		private FlightsListView _directivesViewer;
 
-		private RadDropDownMenu _contextMenuStrip;
 		private RadMenuItem _toolStripMenuItemOpen;
 		private RadMenuItem _toolStripMenuItemOpenLight;
-		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuItem _toolStripMenuItemHighlight;
 		private RadMenuSeparatorItem _toolStripSeparator1;
 		private RadMenuSeparatorItem _toolStripSeparator2;
@@ -108,13 +106,11 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			_itemsArray = null;
 
 			if(_toolStripMenuItemOpen != null) _toolStripMenuItemOpen.Dispose();
-			if(_toolStripMenuItemDelete != null) _toolStripMenuItemDelete.Dispose();
 			if(_toolStripMenuItemHighlight != null) _toolStripMenuItemHighlight.Dispose();
 			if(_toolStripSeparator1 != null) _toolStripSeparator1.Dispose();
 			if(_toolStripSeparator2 != null) _toolStripSeparator2.Dispose();
 			if(_toolStripSeparator4 != null) _toolStripSeparator4.Dispose();
-			if(_contextMenuStrip != null) _contextMenuStrip.Dispose();
-
+			
 			if (_directivesViewer != null) _directivesViewer.Dispose();
 
 			Dispose(true);
@@ -172,19 +168,12 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
 		private void InitToolStripMenuItems()
 		{
-			_contextMenuStrip = new RadDropDownMenu();
 			_toolStripMenuItemOpen = new RadMenuItem();
 			_toolStripMenuItemOpenLight = new RadMenuItem();
-			_toolStripMenuItemDelete = new RadMenuItem();
 			_toolStripMenuItemHighlight = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			_toolStripSeparator2 = new RadMenuSeparatorItem();
 			_toolStripSeparator4 = new RadMenuSeparatorItem();
-			// 
-			// contextMenuStrip
-			// 
-			_contextMenuStrip.Name = "_contextMenuStrip";
-			_contextMenuStrip.Size = new Size(179, 176);
 			// 
 			// toolStripMenuItemView
 			// 
@@ -199,13 +188,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			// toolStripMenuItemHighlight
 			// 
 			_toolStripMenuItemHighlight.Text = "Highlight";
-			// 
-			// toolStripMenuItemDelete
-			// 
-			_toolStripMenuItemDelete.Text = "Delete";
-			_toolStripMenuItemDelete.Click += ButtonDeleteClick;
-
-			_contextMenuStrip.Items.Clear();
+			
 			_toolStripMenuItemHighlight.Items.Clear();
 
 			foreach (var highlight in Highlight.HighlightList)
@@ -217,16 +200,6 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 				item.Tag = highlight;
 				_toolStripMenuItemHighlight.Items.Add(item);
 			}
-
-			_contextMenuStrip.Items.AddRange(new RadItem[]
-			{
-				_toolStripMenuItemOpen,
-				_toolStripMenuItemOpenLight,
-				_toolStripSeparator1,
-				_toolStripMenuItemHighlight,
-				_toolStripSeparator2,
-				_toolStripMenuItemDelete
-			});
 		}
 		#endregion
 
@@ -323,10 +296,14 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 		{
 			_directivesViewer = new FlightsListView(CurrentAircraft, _allView);
 			_directivesViewer.TabIndex = 2;
-			_directivesViewer.CustomMenu = _contextMenuStrip;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
+
+			_directivesViewer.AddMenuItems(_toolStripMenuItemOpen,
+				_toolStripMenuItemOpenLight,
+				_toolStripSeparator1,
+				_toolStripMenuItemHighlight);
 
 			_directivesViewer.MenuOpeningAction = () =>
 			{

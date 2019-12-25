@@ -27,6 +27,7 @@ namespace CAS.UI.UIControls.MTOP
 		public MTOPDirectiveListView(Dictionary<int, Lifelength> groupLifelengths, List<MTOPCheck> maintenanceChecks)
 		{
 			InitializeComponent();
+			DisableContectMenu();
 
 			_groupLifelengths = groupLifelengths;
 			_maintenanceChecks = maintenanceChecks;

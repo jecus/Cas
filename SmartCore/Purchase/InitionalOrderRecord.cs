@@ -28,21 +28,6 @@ namespace SmartCore.Purchase
         *  Свойства
         */
 
-        #region public InitionalReason InitialReason { get; set; }
-
-        private InitialReason _initialReason;
-        /// <summary>
-        /// 
-        /// </summary>
-        [TableColumn("InitialReason")]
-        public InitialReason InitialReason
-        {
-            get { return _initialReason ?? (_initialReason = InitialReason.Unknown); }
-            set { _initialReason = value; }
-        }
-
-        #endregion
-
         #region public Int32 DestinationObjectId { get; set; }
         /// <summary>
         /// 
@@ -734,15 +719,23 @@ namespace SmartCore.Purchase
 		[TableColumn("Remarks")]
 		public string Remarks { get; set; }
 
-        /*
+		[TableColumn("AirportCodeId")]
+		public int AirportCodeId { get; set; }
+
+		[TableColumn("Reference")]
+		public string Reference { get; set; }
+
+		public AirportsCodes AirportCode { get; set; }
+
+		/*
 		*  Методы 
 		*/
 
-        #region public InitionalOrderRecord()
-        /// <summary>
-        /// Создает воздушное судно без дополнительной информации
-        /// </summary>
-        public InitialOrderRecord()
+		#region public InitionalOrderRecord()
+		/// <summary>
+		/// Создает воздушное судно без дополнительной информации
+		/// </summary>
+		public InitialOrderRecord()
         {
             ItemId = -1;
             ParentPackageId = -1;

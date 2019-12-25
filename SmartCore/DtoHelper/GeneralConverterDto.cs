@@ -3744,6 +3744,8 @@ namespace SmartCore.DtoHelper
 				PublishedByUser = initorder.PublishedByUser,
 				CloseByUser = initorder.CloseByUser,
 				Number = initorder.Number,
+				AuthorId = initorder.AuthorId,
+				AdditionalInformationJSON = initorder.AdditionalInformationJSON,
 				Files = initorder.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
 				PackageRecords = initorder.PackageRecords?.Select(i => i.Convert()) as ICollection<InitialOrderRecordDTO>
 			};
@@ -3773,6 +3775,8 @@ namespace SmartCore.DtoHelper
 				PublishedByUser = initorderdto.PublishedByUser,
 				CloseByUser = initorderdto.CloseByUser,
 				Number = initorderdto.Number,
+				AuthorId = initorderdto.AuthorId,
+				AdditionalInformationJSON = initorderdto.AdditionalInformationJSON
 			};
 
 			if (initorderdto.Files != null)
@@ -3794,7 +3798,6 @@ namespace SmartCore.DtoHelper
 				IsDeleted = orderrec.IsDeleted,
 				Updated = orderrec.Updated,
 				CorrectorId = orderrec.CorrectorId,
-				InitialReason = orderrec.InitialReason?.ItemId,
 				Priority = orderrec.Priority.ItemId,
 				DestinationObjectID = orderrec.DestinationObjectId,
 				DestinationObjectType = orderrec.DestinationObjectType?.ItemId,
@@ -3816,7 +3819,9 @@ namespace SmartCore.DtoHelper
 				FromRecordId = orderrec.FromRecordId,
 				IsClosed = orderrec.IsClosed,
 				IsSchedule = orderrec.IsSchedule,
-				Remarks = orderrec.Remarks
+				Remarks = orderrec.Remarks,
+				AirportCodeId = orderrec.AirportCodeId,
+				Reference = orderrec.Reference
 			};
 		}
 
@@ -3830,7 +3835,6 @@ namespace SmartCore.DtoHelper
 				Updated = orderrecdto.Updated,
 				CorrectorId = orderrecdto.CorrectorId,
 				Priority = orderrecdto.Priority.HasValue ? Priority.GetItemById(orderrecdto.Priority.Value) : Priority.UNK,
-				InitialReason = orderrecdto.InitialReason.HasValue ? InitialReason.Items.GetItemById(orderrecdto.InitialReason.Value) : InitialReason.Unknown,
 				DestinationObjectId = orderrecdto.DestinationObjectID ?? default(int),
 				DestinationObjectType = orderrecdto.DestinationObjectType.HasValue ? SmartCoreType.Items.GetItemById(orderrecdto.DestinationObjectType.Value) : SmartCoreType.Unknown,
 				Measure = orderrecdto.Measure.HasValue ? Measure.Items.GetItemById(orderrecdto.Measure.Value) : Measure.Unknown,
@@ -3851,7 +3855,9 @@ namespace SmartCore.DtoHelper
 				Remarks = orderrecdto.Remarks,
 				FromRecordId = orderrecdto.FromRecordId ?? default(int),
 				IsClosed = orderrecdto.IsClosed ?? default(bool),
-				IsSchedule = orderrecdto.IsSchedule ?? default(bool)
+				IsSchedule = orderrecdto.IsSchedule ?? default(bool),
+				AirportCodeId = orderrecdto.AirportCodeId,
+				Reference = orderrecdto.Reference
 			};
 		}
 
@@ -4440,10 +4446,15 @@ namespace SmartCore.DtoHelper
 				PayTermId = (int)purchase.PayTerm,
 				IncoTermId = purchase.IncoTerm?.ItemId ?? -1,
 				ShipCompanyId = purchase.ShipCompanyId,
-				ShipTo = purchase.ShipTo,
+				ShipToId = purchase.ShipToId,
+				Net = purchase.Net,
+				IncoTermRef = purchase.IncoTermRef,
+				StationId = purchase.StationId,
+				TrackingNo = purchase.TrackingNo,
 				CargoVolume = purchase.CargoVolume,
 				BruttoWeight = purchase.BruttoWeight,
 				NettoWeight = purchase.NettoWeight,
+				AdditionalInformationJSON = purchase.AdditionalInformationJSON,
 				Files = purchase.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>
 			};
 		}
@@ -4476,10 +4487,15 @@ namespace SmartCore.DtoHelper
 				PayTerm = (PayTerm)purchasedto.PayTermId,
 				IncoTerm = IncoTerm.GetItemById(purchasedto.IncoTermId),
 				ShipCompanyId = purchasedto.ShipCompanyId,
-				ShipTo = purchasedto.ShipTo,
+				ShipToId = purchasedto.ShipToId,
+				Net = purchasedto.Net,
+				IncoTermRef = purchasedto.IncoTermRef,
+				StationId = purchasedto.StationId,
+				TrackingNo = purchasedto.TrackingNo,
 				CargoVolume = purchasedto.CargoVolume,
 				BruttoWeight = purchasedto.BruttoWeight,
-				NettoWeight = purchasedto.NettoWeight
+				NettoWeight = purchasedto.NettoWeight,
+				AdditionalInformationJSON = purchasedto.AdditionalInformationJSON
 			};
 
 			if (purchasedto.Files != null)
@@ -4506,7 +4522,9 @@ namespace SmartCore.DtoHelper
 				Measure = purchaserec.Measure?.ItemId,
 				Cost = purchaserec.Cost,
 				CostCondition = (short?)purchaserec.CostCondition,
+				CostType = (short)purchaserec.Exchange,
 				Processed = purchaserec.Processed,
+				AdditionalInformationJSON = purchaserec.AdditionalInformationJSON,
 				Files = purchaserec.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>
 			};
 		}
@@ -4529,7 +4547,9 @@ namespace SmartCore.DtoHelper
 				Measure = purchaserecdto.Measure.HasValue ? Measure.Items.GetItemById(purchaserecdto.Measure.Value) : Measure.Unknown,
 				Cost = purchaserecdto.Cost ?? default(double),
 				CostCondition = purchaserecdto.CostCondition.HasValue ? (ComponentStatus)purchaserecdto.CostCondition.Value : ComponentStatus.Unknown,
+				Exchange = (Exchange)purchaserecdto.CostType,
 				Processed = purchaserecdto.Processed ?? default(bool),
+				AdditionalInformationJSON = purchaserecdto.AdditionalInformationJSON
 			};
 
 			if (purchaserecdto.Files != null)
@@ -4647,6 +4667,7 @@ namespace SmartCore.DtoHelper
 				CloseByUser = reqquotation.CloseByUser,
 				ParentTypeId = reqquotation.ParentType?.ItemId,
 				Number = reqquotation.Number,
+				AdditionalInformationJSON = reqquotation.AdditionalInformationJSON,
 				Files = reqquotation.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
 				PackageRecords = reqquotation.PackageRecords?.Select(i => i.Convert()) as ICollection<RequestForQuotationRecordDTO>
 			};
@@ -4674,6 +4695,7 @@ namespace SmartCore.DtoHelper
 				PublishedByUser = reqquotationdto.PublishedByUser,
 				CloseByUser = reqquotationdto.CloseByUser,
 				Number = reqquotationdto.Number,
+				AdditionalInformationJSON = reqquotationdto.AdditionalInformationJSON,
 				ParentType = reqquotationdto.ParentTypeId.HasValue ? SmartCoreType.Items.GetItemById(reqquotationdto.ParentTypeId.Value) : SmartCoreType.Unknown,
 			};
 
@@ -4708,7 +4730,6 @@ namespace SmartCore.DtoHelper
 				Priority = quotationrecord.Priority.ItemId,
 				DestinationObjectId = quotationrecord.DestinationObjectId,
 				DefferedCategoryId = quotationrecord.DeferredCategory.ItemId,
-				InitialReason = quotationrecord.InitialReason.ItemId,
 				DestinationObjectType = quotationrecord.DestinationObjectType?.ItemId ?? -1,
 				LifeLimit = quotationrecord.LifeLimit?.ConvertToByteArray(),
 				LifeLimitNotify = quotationrecord.LifeLimitNotify?.ConvertToByteArray(),
@@ -4738,7 +4759,6 @@ namespace SmartCore.DtoHelper
 				Priority = Priority.GetItemById(quotationrecorddto.Priority),
 				DestinationObjectId = quotationrecorddto.DestinationObjectId,
 				DeferredCategory = quotationrecorddto.DefferedCategory?.Convert(),
-				InitialReason = InitialReason.GetItemById(quotationrecorddto.InitialReason),
 				DestinationObjectType = SmartCoreType.GetSmartCoreTypeById(quotationrecorddto.DestinationObjectType),
 				LifeLimit = Lifelength.ConvertFromByteArray(quotationrecorddto.LifeLimit),
 				LifeLimitNotify = Lifelength.ConvertFromByteArray(quotationrecorddto.LifeLimitNotify),

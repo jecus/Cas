@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityCore.Attributte;
-using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {

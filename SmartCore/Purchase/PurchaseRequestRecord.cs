@@ -1,5 +1,6 @@
 using System;
 using EntityCore.DTO.General;
+using Newtonsoft.Json;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
@@ -126,6 +127,14 @@ namespace SmartCore.Purchase
 		public ComponentStatus CostCondition { get; set; }
 		#endregion
 
+		#region public KitCostCondition CostCondition { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		[TableColumn("CostType")]
+		public Exchange Exchange { get; set; }
+		#endregion
+
 		#region public Boolean Processed { get; set; }
 		/// <summary>
 		/// 
@@ -184,8 +193,25 @@ namespace SmartCore.Purchase
 
 		public SupplierPrice Price { get; set; }
 		public InitialOrderRecord ParentInitialRecord { get; set; }
-		
+
 		#endregion
+
+		[TableColumn("AdditionalInformationJSON")]
+		public string AdditionalInformationJSON
+		{
+			get => JsonConvert.SerializeObject(AdditionalInformation, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+			set => AdditionalInformation = JsonConvert.DeserializeObject<Additional>(value ?? "", new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+		}
+
+		private Additional _additionalInformation;
+		public Additional AdditionalInformation
+		{
+			get => _additionalInformation ?? (_additionalInformation = new Additional());
+			set => _additionalInformation = value;
+		}
+
+		public double ItemCost { get; set; }
+		public double TotalCost { get; set; }
 
 		/*
 		*  Ìועמהû 
@@ -252,6 +278,12 @@ namespace SmartCore.Purchase
 		}
 
 		#endregion
+
+	}
+
+	[JsonObject]
+	public class Additional
+	{
 
 	}
 

@@ -8,6 +8,7 @@ namespace SmartCore.Entities.General.Personnel
 	[Table("SpecialistsLicenseRemark", "dbo", "ItemId")]
 	[Dto(typeof(SpecialistLicenseRemarkDTO))]
 	[Condition("IsDeleted", "0")]
+	[Serializable]
 	public class SpecialistLicenseRemark : BaseEntityObject
 	{
 		#region public DateTime IssueDate { get; set; } 
@@ -55,8 +56,8 @@ namespace SmartCore.Entities.General.Personnel
 		#endregion
 
 		public SpecialistLicenseRemark()
-        {
-            ItemId = -1;
+		{
+			ItemId = -1;
 			IssueDate = DateTime.Today;
 			SmartCoreObjectType = SmartCoreType.SpecialistLicenseRemark;
 		}

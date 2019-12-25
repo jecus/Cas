@@ -535,18 +535,24 @@ namespace SmartCore.Queries
 						if (filterField.Trim() == "") continue;
 
 						object value = DbTypes.DbObject(successFilters[i].Values[0]);
-						object valueString = (value is string || value is bool)
+
+						object valueString = null;
+						if (successFilters[i].Values[0] is DateTime)
+							valueString = value;
+						else
+							valueString = (value is string || value is bool) 
 												 ? "'" + value + "'"
 												 : value;
+
 						switch (successFilters[i].FilterType)
 						{
 							case FilterType.Less:
-								filterSubString += string.Format("({0} is null or {0} < {1})",
+								filterSubString += string.Format("{0} < {1}",
 																 filterField,
 																 valueString);
 								break;
 							case FilterType.LessOrEqual:
-								filterSubString += string.Format("({0} is null or {0} <= {1})",
+								filterSubString += string.Format("{0} <= {1}",
 																 filterField,
 																 valueString);
 								break;
@@ -560,7 +566,7 @@ namespace SmartCore.Queries
 								filterSubString += filterField + " > " + valueString;
 								break;
 							case FilterType.NotEqual:
-								filterSubString += string.Format("({0} is null or {0} != {1})",
+								filterSubString += string.Format("{0} is null or {0} != {1}",
 																 filterField,
 																 valueString);
 								break;
@@ -589,7 +595,7 @@ namespace SmartCore.Queries
 
 					if (filterSubString.Trim() == "") continue;
 
-					if (i > 0) filterString += "\nand ";
+					if (i > 0) filterString += " and ";
 					filterString += filterSubString;
 				}
 			}

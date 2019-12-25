@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
-using EntityCore.DTO;
 using EntityCore.DTO.General;
 using MetroFramework.Forms;
 using SmartCore.Entities;

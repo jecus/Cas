@@ -3,6 +3,7 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
+	[Serializable]
 	public class Citizenship : StaticDictionary
 	{
 		#region private static List<Education> _Items = new List<Education>();
@@ -172,8 +173,8 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Методы
-         */
+		 * Методы
+		 */
 		#region public static Citizenship GetItemById(Int32 maintenanceTypeId)
 		/// <summary>
 		/// Возвращает тип диерктивы по его Id
@@ -215,8 +216,8 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Реализация
-         */
+		 * Реализация
+		 */
 		#region public Citizenship()
 		/// <summary>
 		/// Конструктор создает объект типа директивы

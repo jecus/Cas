@@ -6,7 +6,8 @@ using SmartCore.Entities.General.Attributes;
 namespace SmartCore.Entities.General.Templates
 {
     [Table("DefferedCategories", "Template", "ItemId")]
-    public class TemplateDefferedCategory : BaseEntityObject
+    [Serializable]
+	public class TemplateDefferedCategory : BaseEntityObject
     {
         #region public Int32 TemplateId { get; set; }
         /// <summary>

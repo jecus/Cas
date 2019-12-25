@@ -1435,6 +1435,9 @@ namespace SmartCore.Calculations.PerformanceCalculator
 				//var optimizedCurrentNotify = new Lifelength(current);
 				//optimizedCurrentNotify.Resemble(limitNotify);
 
+				//var optimizedCurrentNotify = new Lifelength(current);
+				//optimizedCurrentNotify.Resemble(limitNotify);
+
 				var optimizedCurrentNotify = new Lifelength(notify);
 				optimizedCurrentNotify.Resemble(remains);
 
@@ -1451,7 +1454,7 @@ namespace SmartCore.Calculations.PerformanceCalculator
 				}
 				else
 				{
-
+					
 					if (optimizedCurrent.IsGreaterNew(limitOverdue))
 						return ConditionState.Overdue;
 
@@ -1461,7 +1464,6 @@ namespace SmartCore.Calculations.PerformanceCalculator
 					if (remains.IsLessNew(optimizedCurrentNotify))
 						return ConditionState.Notify;
 				}
-
 
 				return ConditionState.Satisfactory;
 

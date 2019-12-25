@@ -3,10 +3,11 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
-    /// <summary>
-    /// Статус события системы безопасности полетов
-    /// </summary>
-    public class SmsEventStatus : StaticDictionary
+	/// <summary>
+	/// Статус события системы безопасности полетов
+	/// </summary>
+	[Serializable]
+	public class SmsEventStatus : StaticDictionary
     {
         #region private static CommonDictionaryCollection<SmsEventStatus> _Items = new CommonDictionaryCollection<SmsEventStatus>();
         /// <summary>

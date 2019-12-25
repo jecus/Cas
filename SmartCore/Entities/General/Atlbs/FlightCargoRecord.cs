@@ -10,6 +10,7 @@ namespace SmartCore.Entities.General.Atlbs
     /// Класс описывает груз на борту во время определенного полета
     /// </summary>
     [Table("FlightCargoRecords", "dbo", "ItemId")]
+    [Serializable]
     public class FlightCargoRecord : AbstractRecord
     {
         private static Type _thisType;

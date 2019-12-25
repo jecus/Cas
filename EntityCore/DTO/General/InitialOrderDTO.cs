@@ -71,6 +71,12 @@ namespace EntityCore.DTO.General
 		[Column("Number"), MaxLength(128)]
 		public string Number { get; set; }
 
+		[Column("AuthorId")]
+		public int AuthorId { get; set; }
+
+		[Column("AdditionalInformationJSON")]
+		public string AdditionalInformationJSON { get; set; }
+
 
 		//
 		//[Include]
@@ -81,7 +87,7 @@ namespace EntityCore.DTO.General
 		//public SpecialistDTO ClosedBy { get; set; }
 
 
-		
+
 		[Child(FilterType.Equal, "ParentTypeId", 1560)]
 		public ICollection<ItemFileLinkDTO> Files { get; set; }
 		

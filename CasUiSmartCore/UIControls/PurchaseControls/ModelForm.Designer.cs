@@ -75,6 +75,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.labelIsEffectivity = new System.Windows.Forms.Label();
 			this.textBoxIsEffectivity = new System.Windows.Forms.TextBox();
 			this.checkBoxIsForbidden = new System.Windows.Forms.CheckBox();
+			this.label4 = new System.Windows.Forms.Label();
+			this.documentControl2 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.SuspendLayout();
 			// 
 			// labelName
@@ -118,9 +120,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.labelStandard.Location = new System.Drawing.Point(9, 34);
 			this.labelStandard.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.labelStandard.Name = "labelStandard";
-			this.labelStandard.Size = new System.Drawing.Size(79, 25);
+			this.labelStandard.Size = new System.Drawing.Size(109, 25);
 			this.labelStandard.TabIndex = 90;
-			this.labelStandard.Text = "Standard:";
+			this.labelStandard.Text = "Specification:";
 			this.labelStandard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// labelSeries
@@ -518,9 +520,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.labelDoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.labelDoc.Location = new System.Drawing.Point(449, 432);
 			this.labelDoc.Name = "labelDoc";
-			this.labelDoc.Size = new System.Drawing.Size(35, 14);
+			this.labelDoc.Size = new System.Drawing.Size(41, 14);
 			this.labelDoc.TabIndex = 159;
-			this.labelDoc.Text = "Doc:";
+			this.labelDoc.Text = "CMM:";
 			this.labelDoc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// documentControl1
@@ -574,6 +576,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.panelMain.Controls.Add(textBoxIsEffectivity);
 			this.panelMain.Controls.Add(labelIsEffectivity);
 			this.panelMain.Controls.Add(checkBoxIsForbidden);
+			this.panelMain.Controls.Add(label4);
+			this.panelMain.Controls.Add(documentControl2);
 			// 
 			// label3
 			// 
@@ -634,6 +638,26 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.checkBoxIsForbidden.Size = new System.Drawing.Size(102, 18);
 			this.checkBoxIsForbidden.TabIndex = 165;
 			this.checkBoxIsForbidden.Text = "Is Forbidden";
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.label4.Location = new System.Drawing.Point(20, 432);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(58, 14);
+			this.label4.TabIndex = 166;
+			this.label4.Text = "IPC Ref:";
+			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// documentControl2
+			// 
+			this.documentControl2.CurrentDocument = null;
+			this.documentControl2.Location = new System.Drawing.Point(123, 421);
+			this.documentControl2.Name = "documentControl2";
+			this.documentControl2.Size = new System.Drawing.Size(314, 41);
+			this.documentControl2.TabIndex = 167;
 			// 
 			// ModelForm
 			// 
@@ -696,5 +720,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private System.Windows.Forms.Label labelIsEffectivity;
 		private System.Windows.Forms.TextBox textBoxIsEffectivity;
 		private System.Windows.Forms.CheckBox checkBoxIsForbidden;
+		private System.Windows.Forms.Label label4;
+		private DocumentationControls.DocumentControl documentControl2;
 	}
 }

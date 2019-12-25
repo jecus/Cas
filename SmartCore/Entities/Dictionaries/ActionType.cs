@@ -3,6 +3,7 @@ using SmartCore.Entities.Collections;
 
 namespace SmartCore.Entities.Dictionaries
 {
+	[Serializable]
 	public class ActionType : StaticDictionary
 	{
 		#region private static CommonDictionaryCollection<ActinType> _Items = new CommonDictionaryCollection<ActinType>();
@@ -36,8 +37,8 @@ namespace SmartCore.Entities.Dictionaries
 		public static ActionType Service = new ActionType(7, "SVC", "Service");
 
 		/*
-         * Методы
-         */
+		 * Методы
+		 */
 
 		#region public static ActinType GetItemById(Int32 maintenanceTypeId)
 		/// <summary>
@@ -81,8 +82,8 @@ namespace SmartCore.Entities.Dictionaries
 		#endregion
 
 		/*
-         * Реализация
-         */
+		 * Реализация
+		 */
 		#region public ActinType()
 		/// <summary>
 		/// Конструктор создает объект повреждения

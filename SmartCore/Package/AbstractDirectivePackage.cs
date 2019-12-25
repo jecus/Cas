@@ -8,10 +8,11 @@ using SmartCore.Entities.General.Attributes;
 
 namespace SmartCore.Packages
 {
-    /// <summary>
-    /// Класс, Описывающий объект содержащий в себе задачи
-    /// </summary>
-    public abstract class AbstractDirectivePackage<T> : BaseEntityObject, IDirectivePackage where T : BaseDirectivePackageRecord
+	/// <summary>
+	/// Класс, Описывающий объект содержащий в себе задачи
+	/// </summary>
+	[Serializable]
+	public abstract class AbstractDirectivePackage<T> : BaseEntityObject, IDirectivePackage where T : BaseDirectivePackageRecord
     {
         private static Type _thisType;
 

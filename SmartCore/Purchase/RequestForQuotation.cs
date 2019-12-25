@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using EntityCore.DTO.General;
+using Newtonsoft.Json;
 using SmartCore.Auxiliary;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Entities;
@@ -16,13 +17,13 @@ using SmartCore.Packages;
 namespace SmartCore.Purchase
 {
 
-    /// <summary>
-    /// Класс описывает котировочный акт
-    /// </summary>
-    [Table("RequestsForQuotation", "dbo", "ItemId")]
-    [Dto(typeof(RequestForQuotationDTO))]
+	/// <summary>
+	/// Класс описывает котировочный акт
+	/// </summary>
+	[Table("RequestsForQuotation", "dbo", "ItemId")]
+	[Dto(typeof(RequestForQuotationDTO))]
 	[Condition("IsDeleted", "0")]
-    public class RequestForQuotation : AbstractPackage<RequestForQuotationRecord>, IComparable<RequestForQuotation>, IFileContainer, ILogistic
+	public class RequestForQuotation : AbstractPackage<RequestForQuotationRecord>, IComparable<RequestForQuotation>, IFileContainer, ILogistic
 	{
 
 		/*
@@ -54,31 +55,31 @@ namespace SmartCore.Purchase
 		/// Запрашиваемые комплектующие
 		/// </summary>
 		public List<Product> Products { get; set; }
-        #endregion
+		#endregion
 
-        #region public override CommonCollection<RequestForQuotationRecord> PackageRecords
+		#region public override CommonCollection<RequestForQuotationRecord> PackageRecords
 
-        private CommonCollection<RequestForQuotationRecord> _packageRecords;
-        /// <summary>
-        /// Содержит массив элементов для привязки директив к рабочему пакету
-        /// </summary>
-        [Child(RelationType.OneToMany, "ParentPackageId")]
-        public override CommonCollection<RequestForQuotationRecord> PackageRecords
-        {
-            get { return _packageRecords ?? (_packageRecords = new CommonCollection<RequestForQuotationRecord>()); }
-            internal set
-            {
-                if (_packageRecords != value)
-                {
-                    if (_packageRecords != null)
-                        _packageRecords.Clear();
-                    if (value != null)
-                        _packageRecords = value;
+		private CommonCollection<RequestForQuotationRecord> _packageRecords;
+		/// <summary>
+		/// Содержит массив элементов для привязки директив к рабочему пакету
+		/// </summary>
+		[Child(RelationType.OneToMany, "ParentPackageId")]
+		public override CommonCollection<RequestForQuotationRecord> PackageRecords
+		{
+			get { return _packageRecords ?? (_packageRecords = new CommonCollection<RequestForQuotationRecord>()); }
+			internal set
+			{
+				if (_packageRecords != value)
+				{
+					if (_packageRecords != null)
+						_packageRecords.Clear();
+					if (value != null)
+						_packageRecords = value;
 
-                    OnPropertyChanged("PackageRecords");
-                }
-            }
-        }
+					OnPropertyChanged("PackageRecords");
+				}
+			}
+		}
 
 		#endregion
 
@@ -141,6 +142,20 @@ namespace SmartCore.Purchase
 		[TableColumn("Number")]
 		public string Number { get; set; }
 
+		[TableColumn("AdditionalInformationJSON")]
+		public string AdditionalInformationJSON
+		{
+			get => JsonConvert.SerializeObject(AdditionalInformation, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+			set => AdditionalInformation = JsonConvert.DeserializeObject<QuatationSettings>(value ?? "", new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+		}
+
+		private QuatationSettings _additionalInformation;
+		public QuatationSettings AdditionalInformation
+		{
+			get => _additionalInformation ?? (_additionalInformation = new QuatationSettings());
+			set => _additionalInformation = value;
+		}
+
 
 		/*
 		*  Методы 
@@ -151,31 +166,43 @@ namespace SmartCore.Purchase
 		/// Создает воздушное судно без дополнительной информации
 		/// </summary>
 		public RequestForQuotation()
-        {
-            ItemId = -1;
+		{
+			ItemId = -1;
 			SmartCoreObjectType = SmartCoreType.RequestForQuotation;
-            Remarks = "";
-            Status = WorkPackageStatus.Opened;
-            OpeningDate = DateTime.Today;
-            PublishingDate = DateTimeExtend.GetCASMinDateTime();
-            ClosingDate = DateTimeExtend.GetCASMinDateTime();
-            Products = new List<Product>();
-        }
-        #endregion
-      
-        /// <summary>
-        /// Перегружаем для отладки
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return "";
-        }
+			Remarks = "";
+			Status = WorkPackageStatus.Opened;
+			OpeningDate = DateTime.Today;
+			PublishingDate = DateTimeExtend.GetCASMinDateTime();
+			ClosingDate = DateTimeExtend.GetCASMinDateTime();
+			Products = new List<Product>();
+		}
+		#endregion
+	  
+		/// <summary>
+		/// Перегружаем для отладки
+		/// </summary>
+		/// <returns></returns>
+		public override string ToString()
+		{
+			return "";
+		}
 
-        public int CompareTo(RequestForQuotation y)
-        {
-            return ItemId.CompareTo(y.ItemId);
-        }
+		public int CompareTo(RequestForQuotation y)
+		{
+			return ItemId.CompareTo(y.ItemId);
+		}
 
+	}
+
+	[JsonObject]
+	public class QuatationSettings
+	{
+		private Dictionary<int, string> _qualificationNumbers;
+
+		public Dictionary<int, string> QualificationNumbers
+		{
+			get => _qualificationNumbers ?? (_qualificationNumbers = new Dictionary<int, string>());
+			set => _qualificationNumbers = value;
+		}
 	}
 }
