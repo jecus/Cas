@@ -154,17 +154,22 @@ namespace CAS.UI.UIControls.ComponentControls
                     }
                 }
 
-                //наработка самолета на последнем исполнении
-                temp = tempAircraft != null && 
+
+                temp = tempAircraft != null &&
                       _currentComponentDirective.ParentComponent.TransferRecords.GetLast().TransferDate < _currentComponentDirective.LastPerformance.RecordDate
-				? _currentComponentDirective.LastPerformance.OnLifelength
-				: Lifelength.Null;
+    ? _currentComponentDirective.LastPerformance.OnLifelength
+    : Lifelength.Null;
 
-                if (temp != Lifelength.Null)
-                    labelAircraftTCSNLast.Text = temp.ToString();
 
-                
-                
+                //            if (temp != Lifelength.Null)
+                //                labelAircraftTCSNLast.Text = temp.ToString();
+
+                //наработка самолета на последнем исполнении
+                labelAircraftTCSNLast.Text = GlobalObjects.CasEnvironment.Calculator.GetFlightLifelengthOnEndOfDay(tempAircraft,
+	                    _currentComponentDirective.LastPerformance.RecordDate).ToString();
+
+
+
                 //Заполнение Next-ов
                 threshold = _currentComponentDirective.Threshold;
                 if (threshold.RepeatInterval != null && !threshold.RepeatInterval.IsNullOrZero())
