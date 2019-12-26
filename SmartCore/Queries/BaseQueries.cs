@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
+using SmartCore.DtoHelper;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -538,7 +539,7 @@ namespace SmartCore.Queries
 
 						object valueString = null;
 						if (successFilters[i].Values[0] is DateTime)
-							valueString = value;
+							valueString = ((DateTime)successFilters[i].Values[0]).ToSqlDate();
 						else
 							valueString = (value is string || value is bool) 
 												 ? "'" + value + "'"
