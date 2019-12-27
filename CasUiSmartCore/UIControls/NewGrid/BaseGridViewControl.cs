@@ -1095,7 +1095,7 @@ namespace CAS.UI.UIControls.NewGrid
 				}
 
 				if (objectToPaste.Any(i => i is ComponentDirective))
-					GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(pds.Where(i => i is ComponentDirective).Cast<BaseEntityObject>().ToList());
+					GlobalObjects.CasEnvironment.NewKeeper.BulkInsert(objectToPaste.Where(i => i is ComponentDirective).Cast<BaseEntityObject>().ToList());
 
 
 				InsertItems(objectToPaste.ToArray());
