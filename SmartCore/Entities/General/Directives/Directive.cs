@@ -5,11 +5,13 @@ using System.Reflection;
 using EntityCore.DTO.General;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Calculations;
+using SmartCore.Calculations.MTOP;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General.MTOP;
 using SmartCore.Entities.General.Templates;
 using SmartCore.Files;
 using SmartCore.Relation;
@@ -23,7 +25,7 @@ namespace SmartCore.Entities.General.Directives
 	[Dto(typeof(DirectiveDTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
-	public class Directive : BaseEntityObject, IEngineeringDirective, IKitRequired, IComparable<Directive>, IFileContainer, IBindedItem, IWorkPackageItemFilterParams
+	public class Directive : BaseEntityObject, IEngineeringDirective, IKitRequired, IComparable<Directive>, IFileContainer, IBindedItem, IWorkPackageItemFilterParams, IMtopCalc
 	{
 		private static Type _thisType;
 
@@ -1055,6 +1057,18 @@ namespace SmartCore.Entities.General.Directives
 		public bool HasNDT { get { return NDTType != NDTType.UNK; } }
 
 		#endregion
+
+		#endregion
+
+		#region Implementation of IMtopCalc
+
+		public Lifelength PhaseThresh { get; set; }
+		public Lifelength PhaseRepeat { get; set; }
+		public Phase MTOPPhase { get; set; }
+		public bool RecalculateTenPercent { get; set; }
+		public bool APUCalc { get; set; }
+		public int ParentAircraftId => ParentBaseComponent?.ParentAircraftId ?? -1;
+		public List<NextPerformance> MtopNextPerformances { get; set; }
 
 		#endregion
 

@@ -5,11 +5,13 @@ using System.Reflection;
 using EntityCore.DTO.General;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Calculations;
+using SmartCore.Calculations.MTOP;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.General.MaintenanceWorkscope;
+using SmartCore.Entities.General.MTOP;
 using SmartCore.Entities.General.Templates;
 using SmartCore.Files;
 using SmartCore.Purchase;
@@ -25,7 +27,8 @@ namespace SmartCore.Entities.General.Accessory
 	[Table("ComponentDirectives", "dbo", "ItemId")]
 	[Dto(typeof(ComponentDirectiveDTO))]
 	[Condition("IsDeleted", "0")]
-	public class ComponentDirective: BaseEntityObject, IKitRequired, IEngineeringDirective, IComponentFilterParams, IStoreFilterParam, IComparable<ComponentDirective>, IFileContainer, IBindedItem, IWorkPackageItemFilterParams, IAtaSorted
+	public class ComponentDirective: BaseEntityObject, IKitRequired, IEngineeringDirective, IComponentFilterParams, IStoreFilterParam, 
+		IComparable<ComponentDirective>, IFileContainer, IBindedItem, IWorkPackageItemFilterParams, IAtaSorted, IMtopCalc
 	{
 
 		private static Type _thisType;
@@ -1181,6 +1184,19 @@ namespace SmartCore.Entities.General.Accessory
 		{
 			get => ParentComponent.Model != null ? ParentComponent.Model.ATAChapter : ParentComponent.ATAChapter;
 		}
+
+		#endregion
+
+		#region Implementation of IMtopCalc
+
+		public Lifelength PhaseThresh { get; set; }
+		public Lifelength PhaseRepeat { get; set; }
+		public Phase MTOPPhase { get; set; }
+		public bool RecalculateTenPercent { get; set; }
+		public bool APUCalc { get; set; }
+
+		public int ParentAircraftId => ParentComponent?.ParentAircraftId ?? (ParentBaseComponent?.ParentAircraftId ?? -1);
+		public List<NextPerformance> MtopNextPerformances { get; set; }
 
 		#endregion
 	}
