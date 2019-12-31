@@ -727,6 +727,8 @@ namespace CAS.UI.UIControls.NewGrid
 					}
 					break;
 				case Keys.Escape: radGridView1.FilterDescriptors.Clear(); break;
+				case Keys.E: radGridView1.MasterTemplate.ExpandAllGroups(); break;
+				case Keys.C: radGridView1.MasterTemplate.CollapseAllGroups(); break;
 				default:
 					break;
 			}
