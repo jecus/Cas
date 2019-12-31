@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Windows;
 using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
@@ -35,6 +36,7 @@ namespace CAS.UI.UIControls.ForecastControls
 			InitializeComponent();
 			DisableContectMenu();
 			EnableCustomSorting = false;
+			this.radGridView1.MasterTemplate.GroupComparer = new GroupComparer();
 		}
 		#endregion
 
@@ -284,4 +286,42 @@ namespace CAS.UI.UIControls.ForecastControls
 
 		#endregion
 	}
+
+
+	public class GroupComparer : IComparer<Group<GridViewRowInfo>>
+	{
+		public int Compare(Group<GridViewRowInfo> x, Group<GridViewRowInfo> y)
+		{
+			int parsedX;
+			int parsedY;
+			var first = ((object[]) x.Key).First().ToString().Trim();
+			var second = ((object[]) y.Key).First().ToString().Trim();
+
+			if (first.Contains('/') && second.Contains('/'))
+			{
+				first = first.Remove(0, first.LastIndexOf('/')+1);
+				second = second.Remove(0, second.LastIndexOf('/')+1);
+				if (first.Contains("d") && second.Contains("d"))
+				{
+					first = first.Remove(first.Length-2);
+					second = second.Remove(second.Length-2);
+				}
+			}
+			
+
+			if (int.TryParse(first, out parsedX) &&
+			    int.TryParse(second, out parsedY))
+			{
+				int result = parsedX.CompareTo(parsedY);
+				DataGroup xGroup = x as DataGroup;
+				if (xGroup != null && ((DataGroup)x).GroupDescriptor.GroupNames.First().Direction == ListSortDirection.Descending)
+				{
+					result *= -1;
+				}
+				return result;
+			}
+			return ((object[])x.Key)[0].ToString().CompareTo(((object[])y.Key)[0].ToString());
+		}
+	}
+
 }
