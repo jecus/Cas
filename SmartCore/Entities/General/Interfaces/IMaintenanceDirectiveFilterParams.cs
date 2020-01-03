@@ -5,7 +5,7 @@ using SmartCore.Entities.General.MTOP;
 
 namespace SmartCore.Entities.General.Interfaces
 {
-	public interface IMaintenanceDirectiveFilterParams : IWorkPackageItemFilterParams
+	public interface IMTOPFilterParams : IWorkPackageItemFilterParams
 	{
 		[Filter("MPD Item:", Order = 1)]
 		string TaskNumberCheck { get; }

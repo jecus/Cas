@@ -49,17 +49,18 @@ namespace CAS.UI.UIControls.ForecastControls
 		protected override void SetHeaders()
 		{
 			AddColumn("Check", (int)(radGridView1.Width * 0.10f));
-			AddColumn("ATA", (int)(radGridView1.Width * 0.10f));
-			AddColumn("Type", (int)(radGridView1.Width * 0.10f));
-			AddColumn("Title", (int)(radGridView1.Width * 0.2f));
+			
+			AddColumn("Type", (int)(radGridView1.Width * 0.07f));
+			AddColumn("Item №", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Item Card №", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Times", (int)(radGridView1.Width * 0.2f));
+			
 			AddColumn("Work Type", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Check", (int)(radGridView1.Width * 0.2f));
+			
 			AddDateColumn("Next", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Fst.Perf", (int)(radGridView1.Width * 0.2f));
+			AddColumn("DUE", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Thresh", (int)(radGridView1.Width * 0.2f));
-			AddColumn("ThreshRepeat", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Repeat", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Overdue/Remain", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Last", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Kit", (int)(radGridView1.Width * 0.2f));
@@ -67,9 +68,9 @@ namespace CAS.UI.UIControls.ForecastControls
 			AddColumn("Cost", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Total MH", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Total Cost", (int)(radGridView1.Width * 0.2f));
-			AddColumn("X1", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Forecast Data", (int)(radGridView1.Width * 0.2f));
-			AddColumn("X2", (int)(radGridView1.Width * 0.2f));
+			AddColumn("ATA", (int)(radGridView1.Width * 0.10f));
+			AddColumn("Times", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Check", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
@@ -188,6 +189,7 @@ namespace CAS.UI.UIControls.ForecastControls
 			double cost = item.Parent is IEngineeringDirective ? ((IEngineeringDirective)item.Parent).Cost : 0;
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var title = item.Title;
+			var card = "";
 			if (item.Parent is Directive)
 			{
 				var directive = item.Parent as Directive;
@@ -203,7 +205,7 @@ namespace CAS.UI.UIControls.ForecastControls
 				var d = item.Parent as MaintenanceDirective;
 				if (d.TaskCardNumberFile == null)
 					tcnColor = Color.MediumVioletRed;
-
+				card = d.TaskCardNumber;
 			}
 
 			var temp = "";
@@ -212,13 +214,14 @@ namespace CAS.UI.UIControls.ForecastControls
 			else temp = $"{ListViewGroupHelper.GetGroupString(item)} | Date: {item.PerformanceDate?.ToString(new GlobalTermsProvider()["DateFormat"].ToString())}";
 
 			subItems.Add(CreateRow(temp, item.ParentCheck.NextPerformances.FirstOrDefault(i => i.Group == item.Group)?.PerformanceSource));
-			subItems.Add(CreateRow(item.ATAChapter?.ToString(), item.ATAChapter));
+			
 			subItems.Add(CreateRow(item.Parent.SmartCoreObjectType.ToString(), item.Parent.SmartCoreObjectType));
 			subItems.Add(CreateRow(title, title, tcnColor));
+			subItems.Add(CreateRow(card, card, tcnColor));
 			subItems.Add(CreateRow(item.Description, item.Description));
-			subItems.Add(CreateRow(timesString, times));
+			
 			subItems.Add(CreateRow(item.WorkType, item.WorkType));
-			subItems.Add(CreateRow(item.MaintenanceCheck != null ? item.MaintenanceCheck.ToString() : "", item.MaintenanceCheck));
+			
 			subItems.Add(CreateRow(item.PerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)item.PerformanceDate), item.PerformanceDate));
 
 			//item.PerformanceSource?.Resemble(item.Parent.Threshold.FirstPerformanceSinceNew);
@@ -241,9 +244,9 @@ namespace CAS.UI.UIControls.ForecastControls
 			subItems.Add(CreateRow(cost.ToString(), cost));
 			subItems.Add(CreateRow("", ""));
 			subItems.Add(CreateRow("", ""));
-			subItems.Add(CreateRow(item.BeforeForecastResourceRemain != null ? item.BeforeForecastResourceRemain?.ToString() : "", item.BeforeForecastResourceRemain));
-			subItems.Add(CreateRow(item.Parent?.ForecastLifelength?.ToString(), item.Parent?.ForecastLifelength));
-			subItems.Add(CreateRow(item.Parent.AfterForecastResourceRemain != null ? item.Parent.AfterForecastResourceRemain?.ToString() : "", item.Parent.AfterForecastResourceRemain));
+			subItems.Add(CreateRow(item.ATAChapter?.ToString(), item.ATAChapter));
+			subItems.Add(CreateRow(timesString, times));
+			subItems.Add(CreateRow(item.MaintenanceCheck != null ? item.MaintenanceCheck.ToString() : "", item.MaintenanceCheck));
 			subItems.Add(CreateRow(author, author));
 
 			return subItems;

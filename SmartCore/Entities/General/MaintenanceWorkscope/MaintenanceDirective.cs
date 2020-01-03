@@ -28,7 +28,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 	[Condition("IsDeleted", "0")]
 	[Serializable]
 	public class MaintenanceDirective : BaseEntityObject, IEngineeringDirective, IKitRequired,
-		IComparable<MaintenanceDirective>, IEquatable<MaintenanceDirective>, IFileContainer, IBindedItem, IWorkPackageItemFilterParams, IMaintenanceDirectiveFilterParams, IMtopCalc
+		IComparable<MaintenanceDirective>, IEquatable<MaintenanceDirective>, IFileContainer, IBindedItem, IWorkPackageItemFilterParams, IMTOPFilterParams, IMtopCalc
 	{
 		private static Type _thisType;
 		/*

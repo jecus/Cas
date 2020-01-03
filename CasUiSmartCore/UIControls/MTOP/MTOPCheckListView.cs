@@ -25,14 +25,14 @@ namespace CAS.UI.UIControls.MTOP
 		{
 			AddColumn("CheckType", (int)(radGridView1.Width * 0.2f));
 			AddColumn(" ", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Thresh", (int)(radGridView1.Width * 0.30f));
-			AddColumn("Repeat", (int)(radGridView1.Width * 0.30f));
-			AddColumn("Notify", (int)(radGridView1.Width * 0.30f));
-			AddColumn("Estimated Thresh", (int)(radGridView1.Width * 0.36f));
-			AddColumn("Estimated Thresh Limit", (int)(radGridView1.Width * 0.4f));
-			AddColumn("Estimated Repeat", (int)(radGridView1.Width * 0.36f));
-			AddColumn("Estimated Repeat Limit", (int)(radGridView1.Width * 0.4f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Thresh", (int)(radGridView1.Width * 0.18f));
+			AddColumn("Repeat", (int)(radGridView1.Width * 0.18f));
+			AddColumn("Notify", (int)(radGridView1.Width * 0.18f));
+			AddColumn("Estimated Thresh", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Estimated Thresh Limit", (int)(radGridView1.Width * 0.22f));
+			AddColumn("Estimated Repeat", (int)(radGridView1.Width * 0.22f));
+			AddColumn("Estimated Repeat Limit", (int)(radGridView1.Width * 0.22f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.2f));
 		}
 
 		#endregion

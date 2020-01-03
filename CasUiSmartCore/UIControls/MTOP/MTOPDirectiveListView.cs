@@ -63,7 +63,8 @@ namespace CAS.UI.UIControls.MTOP
 			if (_groupLifelengths == null)
 				return;
 			AddColumn("Type", (int)(radGridView1.Width * 0.10f));
-			AddColumn("Task Card №", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Item №", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Item Card №", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Thresh", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Repeat", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Phase", (int)(radGridView1.Width * 0.10f));
@@ -115,9 +116,11 @@ namespace CAS.UI.UIControls.MTOP
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
 			var title = "";
+			var card = "";
 			if (item is MaintenanceDirective)
 			{
 				title = (item as MaintenanceDirective).Title;
+				card = (item as MaintenanceDirective).TaskCardNumber;
 			}
 			if (item is Directive)
 			{
@@ -134,8 +137,10 @@ namespace CAS.UI.UIControls.MTOP
 				title = (item as ComponentDirective).Title;
 			}
 
+
 			subItems.Add(CreateRow(item.SmartCoreObjectType.ToString(), item.SmartCoreObjectType));
 			subItems.Add(CreateRow(title, title));
+			subItems.Add(CreateRow(card, card));
 			subItems.Add(CreateRow(item.Threshold.FirstPerformanceSinceNew.ToRepeatIntervalsFormat(), item.Threshold.FirstPerformanceSinceNew));
 
 			//subItem = new ListViewItem.ListViewSubItem { Text = item.PhaseThresh.ToRepeatIntervalsFormat(), Tag = item.PhaseThresh };

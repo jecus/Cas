@@ -38,10 +38,10 @@ namespace CAS.UI.UIControls.MTOP
 		private Dictionary<int, Lifelength> _groupLifelengthsForZeroCheck = new Dictionary<int, Lifelength>();
 		private AverageUtilization _averageUtilization;
 
-		private CommonFilterCollection _filter = new CommonFilterCollection(typeof(IMaintenanceDirectiveFilterParams));
+		private CommonFilterCollection _filter = new CommonFilterCollection(typeof(IMTOPFilterParams));
 
 		private CommonFilterCollection _filterZero =
-			new CommonFilterCollection(typeof(IMaintenanceDirectiveFilterParams));
+			new CommonFilterCollection(typeof(IMTOPFilterParams));
 
 		#endregion
 
