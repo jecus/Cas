@@ -453,7 +453,10 @@ namespace SmartCore.Calculations
                     Directive d = _parent as Directive;
 
                     _ataChapter = d.ATAChapter;
-                    _title = d.Title;
+                    _title = $"{d.Title}";
+                    if (!string.IsNullOrEmpty(d.EngineeringOrders))
+	                    _title += $" | {d.EngineeringOrders}";
+
                     _description = d.Description + (string.IsNullOrEmpty(d.Paragraph) ? "" : " " + d.Paragraph);
                     _workType = d.WorkType.ToString();
                     _type = d.DirectiveType.ShortName;
@@ -514,7 +517,8 @@ namespace SmartCore.Calculations
                 {
                     MaintenanceDirective md = _parent as MaintenanceDirective;
                     _ataChapter = md.ATAChapter;
-                    _title = md.ToString();
+                    //_title = md.ToString();
+                    _title = md.TaskNumberCheck;
                     _description = md.Description;
                     _workType = md.WorkType.ToString();
                     _type = md.MaintenanceCheck != null ? md.MaintenanceCheck.Name : "MPD";
