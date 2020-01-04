@@ -28,7 +28,7 @@ namespace SmartCore.Entities.General.Accessory
 	[Dto(typeof(ComponentDirectiveDTO))]
 	[Condition("IsDeleted", "0")]
 	public class ComponentDirective: BaseEntityObject, IKitRequired, IEngineeringDirective, IComponentFilterParams, IStoreFilterParam, 
-		IComparable<ComponentDirective>, IFileContainer, IBindedItem, IWorkPackageItemFilterParams, IAtaSorted, IMtopCalc
+		IComparable<ComponentDirective>, IFileContainer, IBindedItem, IWorkPackageItemFilterParams, IAtaSorted, IMtopCalc, IMtopFilterParams
 	{
 
 		private static Type _thisType;

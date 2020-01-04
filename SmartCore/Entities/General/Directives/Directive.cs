@@ -25,7 +25,7 @@ namespace SmartCore.Entities.General.Directives
 	[Dto(typeof(DirectiveDTO))]
 	[Condition("IsDeleted", "0")]
 	[Serializable]
-	public class Directive : BaseEntityObject, IEngineeringDirective, IKitRequired, IComparable<Directive>, IFileContainer, IBindedItem, IWorkPackageItemFilterParams, IMtopCalc
+	public class Directive : BaseEntityObject, IEngineeringDirective, IKitRequired, IComparable<Directive>, IFileContainer, IBindedItem, IWorkPackageItemFilterParams, IMtopCalc, IMtopFilterParams
 	{
 		private static Type _thisType;
 
