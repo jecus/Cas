@@ -141,7 +141,7 @@ namespace CAS.UI.UIControls.MTOP
 			this.mtopCheckListView1.OldColumnIndex = 0;
 			this.mtopCheckListView1.PasteComplete = null;
 			this.mtopCheckListView1.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.mtopCheckListView1.Size = new System.Drawing.Size(1079, 303);
+			this.mtopCheckListView1.Size = new System.Drawing.Size(1101, 303);
 			this.mtopCheckListView1.SortMultiplier = 0;
 			this.mtopCheckListView1.TabIndex = 9;
 			this.mtopCheckListView1.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.mtopCheckListView1_SelectedItemsChanged_1);
@@ -150,7 +150,7 @@ namespace CAS.UI.UIControls.MTOP
 			// 
 			this.averageUtilizationItemControl1.Location = new System.Drawing.Point(6, 19);
 			this.averageUtilizationItemControl1.Name = "averageUtilizationItemControl1";
-			this.averageUtilizationItemControl1.Size = new System.Drawing.Size(196, 128);
+			this.averageUtilizationItemControl1.Size = new System.Drawing.Size(164, 128);
 			this.averageUtilizationItemControl1.TabIndex = 10;
 			this.averageUtilizationItemControl1.ShowRadioButtons = false;
 			this.averageUtilizationItemControl1.ShowCycDay = true;
@@ -162,9 +162,9 @@ namespace CAS.UI.UIControls.MTOP
 			this.groupBox1.Controls.Add(this.averageUtilizationItemControl1);
 			this.groupBox1.Font = new System.Drawing.Font("Verdana", 9F);
 			this.groupBox1.ForeColor = System.Drawing.Color.DimGray;
-			this.groupBox1.Location = new System.Drawing.Point(1088, 53);
+			this.groupBox1.Location = new System.Drawing.Point(1110, 53);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(191, 156);
+			this.groupBox1.Size = new System.Drawing.Size(172, 156);
 			this.groupBox1.TabIndex = 11;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "AverageUtilization";

@@ -71,7 +71,7 @@ namespace SmartCore.Entities.Dictionaries
 		/// <summary>
 		/// 
 		/// </summary>
-		public static SmartCoreType ComponentDirective = new SmartCoreType(2, "CDR", "CDR", typeof(ComponentDirective));
+		public static SmartCoreType ComponentDirective = new SmartCoreType(2, "Component Task", "COM", typeof(ComponentDirective));
         #endregion
 
         #region public static SmartCoreType MaintenanceCheck = new SmartCoreType(3, "MC", "Maintenance Check", "");

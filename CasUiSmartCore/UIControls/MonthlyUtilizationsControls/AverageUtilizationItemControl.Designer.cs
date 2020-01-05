@@ -59,7 +59,7 @@
             0,
             0});
 			this.numericUpDownCycles.Name = "numericUpDownCycles";
-			this.numericUpDownCycles.Size = new System.Drawing.Size(55, 22);
+			this.numericUpDownCycles.Size = new System.Drawing.Size(39, 22);
 			this.numericUpDownCycles.TabIndex = 48;
 			this.numericUpDownCycles.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numericUpDownCycles.Value = new decimal(new int[] {
@@ -86,7 +86,7 @@
             0,
             0});
 			this.numericUpDownHours.Name = "numericUpDownHours";
-			this.numericUpDownHours.Size = new System.Drawing.Size(55, 22);
+			this.numericUpDownHours.Size = new System.Drawing.Size(39, 22);
 			this.numericUpDownHours.TabIndex = 47;
 			this.numericUpDownHours.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numericUpDownHours.Value = new decimal(new int[] {
@@ -101,7 +101,7 @@
 			this.radioButtonMonthly.AutoSize = true;
 			this.radioButtonMonthly.Font = new System.Drawing.Font("Verdana", 11.25F);
 			this.radioButtonMonthly.ForeColor = System.Drawing.Color.DimGray;
-			this.radioButtonMonthly.Location = new System.Drawing.Point(139, 68);
+			this.radioButtonMonthly.Location = new System.Drawing.Point(123, 66);
 			this.radioButtonMonthly.Name = "radioButtonMonthly";
 			this.radioButtonMonthly.Size = new System.Drawing.Size(85, 22);
 			this.radioButtonMonthly.TabIndex = 46;
@@ -114,7 +114,7 @@
 			this.radioButtonDayly.AutoSize = true;
 			this.radioButtonDayly.Font = new System.Drawing.Font("Verdana", 11.25F);
 			this.radioButtonDayly.ForeColor = System.Drawing.Color.DimGray;
-			this.radioButtonDayly.Location = new System.Drawing.Point(139, 41);
+			this.radioButtonDayly.Location = new System.Drawing.Point(123, 39);
 			this.radioButtonDayly.Name = "radioButtonDayly";
 			this.radioButtonDayly.Size = new System.Drawing.Size(61, 22);
 			this.radioButtonDayly.TabIndex = 45;
@@ -175,7 +175,7 @@
             0,
             0});
 			this.numericUpDown1.Name = "numericUpDown1";
-			this.numericUpDown1.Size = new System.Drawing.Size(55, 22);
+			this.numericUpDown1.Size = new System.Drawing.Size(39, 22);
 			this.numericUpDown1.TabIndex = 51;
 			this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numericUpDown1.Value = new decimal(new int[] {
@@ -209,7 +209,7 @@
 			this.Controls.Add(this.labelHours);
 			this.Controls.Add(this.labelCycles);
 			this.Name = "AverageUtilizationItemControl";
-			this.Size = new System.Drawing.Size(229, 126);
+			this.Size = new System.Drawing.Size(206, 126);
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCycles)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownHours)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();

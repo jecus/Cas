@@ -113,12 +113,26 @@ namespace CAS.UI.UIControls.MTOP
 				_maintenanceChecks.AddRange(checks.Where(i => !i.IsDeleted));
 				_maintenanceChecksDeleted.AddRange(checks.Where(i => i.IsDeleted));
 
-				_initialMaintenanceDirectives.AddRange(GlobalObjects.MaintenanceCore.GetMaintenanceDirectives(CurrentAircraft));
-				_initialMaintenanceDirectives.AddRange(GlobalObjects.DirectiveCore.GetDirectives(CurrentAircraft, DirectiveType.All).ToList());
-
 				var baseComponents = GlobalObjects.ComponentCore.GetAicraftBaseComponents(CurrentAircraft.ItemId);
 				var components = GlobalObjects.ComponentCore.GetComponents(baseComponents.ToList());
-				_initialMaintenanceDirectives.AddRange(components.SelectMany(i => i.ComponentDirectives));
+				var componentDirectives = components.SelectMany(i => i.ComponentDirectives);
+
+				var mpds = GlobalObjects.MaintenanceCore.GetMaintenanceDirectives(CurrentAircraft);
+				foreach (var componentDirective in componentDirectives)
+				{
+					foreach (var items in componentDirective.ItemRelations.Where(i =>
+						i.FirtsItemTypeId == SmartCoreType.MaintenanceDirective.ItemId ||
+						i.SecondItemTypeId == SmartCoreType.MaintenanceDirective.ItemId))
+					{
+						var id = componentDirective.IsFirst == true ? items.SecondItemId : items.FirstItemId;
+						componentDirective.MaintenanceDirective = mpds.FirstOrDefault(i => i.ItemId == id);
+					}
+				}
+
+				_initialMaintenanceDirectives.AddRange(mpds);
+				_initialMaintenanceDirectives.AddRange(GlobalObjects.DirectiveCore.GetDirectives(CurrentAircraft, DirectiveType.All).ToList());
+				_initialMaintenanceDirectives.AddRange(componentDirectives);
+
 
 				var bindedItemsDict = GlobalObjects.BindedItemsCore.GetBindedItemsFor(CurrentAircraft.ItemId,
 					_initialMaintenanceDirectives.Where(m => m is MaintenanceDirective)
