@@ -141,11 +141,15 @@ namespace CAS.UI.UIControls.MTOP
 			subItems.Add(CreateRow(item.SmartCoreObjectType.ToString(), item.SmartCoreObjectType));
 			subItems.Add(CreateRow(title, title));
 			subItems.Add(CreateRow(card, card));
-			subItems.Add(CreateRow(item.Threshold.FirstPerformanceSinceNew.ToRepeatIntervalsFormat(), item.Threshold.FirstPerformanceSinceNew));
+
+			var thresh = !item.Threshold.FirstPerformanceSinceNew.IsNullOrZero()
+				? item.Threshold.FirstPerformanceSinceNew
+				: item.Threshold.FirstPerformanceSinceEffectiveDate;
+			subItems.Add(CreateRow(thresh.ToRepeatIntervalsFormat(), thresh));
 
 			//subItem = new ListViewItem.ListViewSubItem { Text = item.PhaseThresh.ToRepeatIntervalsFormat(), Tag = item.PhaseThresh };
 			//subItems.Add(subItem);
-
+			
 			subItems.Add(CreateRow(item.Threshold.RepeatInterval.ToRepeatIntervalsFormat(), item.Threshold.RepeatInterval));
 			subItems.Add(CreateRow(phaseString, item.MTOPPhase));
 
