@@ -50,21 +50,21 @@ namespace CAS.UI.UIControls.ForecastControls
 		protected override void SetHeaders()
 		{
 			AddColumn("Check", (int)(radGridView1.Width * 0.10f));
-			AddColumn("Item №", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Task Card №", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Item №", (int)(radGridView1.Width * 0.14f));
+			AddColumn("Task Card №", (int)(radGridView1.Width * 0.14f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Work Type", (int)(radGridView1.Width * 0.2f));
-			AddDateColumn("Next", (int)(radGridView1.Width * 0.2f));
+			AddDateColumn("Next", (int)(radGridView1.Width * 0.1f));
 			AddColumn("DUE", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Thresh", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Repeat", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Overdue/Remain", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Last", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Kit", (int)(radGridView1.Width * 0.2f));
-			AddColumn("MH", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Cost", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Total MH", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Total Cost", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Kit", (int)(radGridView1.Width * 0.08f));
+			AddColumn("MH", (int)(radGridView1.Width * 0.08f));
+			AddColumn("Cost", (int)(radGridView1.Width * 0.08f));
+			AddColumn("Total MH", (int)(radGridView1.Width * 0.12f));
+			AddColumn("Total Cost", (int)(radGridView1.Width * 0.12f));
 			AddColumn("Type", (int)(radGridView1.Width * 0.07f));
 			AddColumn("ATA", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Times", (int)(radGridView1.Width * 0.2f));
