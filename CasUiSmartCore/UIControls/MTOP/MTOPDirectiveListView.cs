@@ -202,10 +202,18 @@ namespace CAS.UI.UIControls.MTOP
 					var dp = ScreenAndFormManager.GetDirectiveScreen(SelectedItem as Directive);
 					e.SetParameters(dp);
 				}
-				if (SelectedItem is ComponentDirective)
+				if (SelectedItem is ComponentDirective c)
 				{
-					var dp = ScreenAndFormManager.GetComponentDirectiveScreen(SelectedItem as ComponentDirective);
-					e.SetParameters(dp);
+					if (c.MaintenanceDirective != null)
+					{
+						var dp = ScreenAndFormManager.GetComponentDirectiveScreen(SelectedItem as ComponentDirective);
+						e.SetParameters(dp);
+					}
+					else
+					{
+						var dp = ScreenAndFormManager.GetMaintenanceDirectiveScreen(c.MaintenanceDirective);
+						e.SetParameters(dp);
+					}
 				}
 				else e.Cancel = true;
 			}

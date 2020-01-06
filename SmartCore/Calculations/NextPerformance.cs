@@ -470,7 +470,8 @@ namespace SmartCore.Calculations
                         if (dd.MaintenanceDirective != null)
                         {
                             _ataChapter = dd.MaintenanceDirective.ATAChapter;
-                            _title = dd.MaintenanceDirective.TaskNumberCheck + " for " + dd.ParentComponent;
+                            //_title = dd.MaintenanceDirective.TaskNumberCheck + " for " + dd.ParentComponent;
+                            _title = dd.ParentComponent.ToString();
                             _description = dd.MaintenanceDirective.Description;
                             _workType = dd.MaintenanceDirective.WorkType.ToString();
                             _taskRemarks = dd.MaintenanceDirective.Remarks;

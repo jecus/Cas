@@ -1239,7 +1239,8 @@ namespace SmartCore.Entities.General.Accessory
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return string.Format("P/N:{0} Pos:{1} S/N:{2} {3} {4}",PartNumber, Position, SerialNumber, Description, MaintenanceControlProcess.ShortName) 
+			return
+				$"P/N:{PartNumber} Pos:{Position} S/N:{SerialNumber} WorkType:{WorkType} {Description} {MaintenanceControlProcess.ShortName}"
 				+ (IsDeleted ? " is deleted" : "");
 		}
 		#endregion
