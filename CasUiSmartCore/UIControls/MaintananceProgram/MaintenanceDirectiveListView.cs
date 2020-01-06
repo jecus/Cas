@@ -58,9 +58,11 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			AddColumn("APU Hour", (int)(radGridView1.Width * 0.16f));
 			AddColumn("1st. Perf.", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Rpt. Intv.", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Next", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Next", (int)(radGridView1.Width * 0.05f));
+			AddColumn("Next Data", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Remain/Overdue", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Last", (int)(radGridView1.Width * 0.10f));
+			AddColumn("Last", (int)(radGridView1.Width * 0.05f));
+			AddColumn("Last Data", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Zone", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Work Area", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Access", (int)(radGridView1.Width * 0.16f));
@@ -159,12 +161,15 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			if (lastComplianceDate <= defaultDateTime)
 				lastPerformanceString = "N/A";
 			else
-				lastPerformanceString = SmartCore.Auxiliary.Convert.GetDateFormat(lastComplianceDate) + " " +
-										lastComplianceLifeLength;
-			string nextComplianceString = ((nextComplianceDate <= defaultDateTime)
-											   ? ""
-											   : SmartCore.Auxiliary.Convert.GetDateFormat(nextComplianceDate) + " ") +
-										  item.NextPerformanceSource;
+				lastPerformanceString = lastComplianceLifeLength.ToString();
+
+			var lastDate = (lastComplianceDate <= defaultDateTime)
+				? ""
+				: SmartCore.Auxiliary.Convert.GetDateFormat(lastComplianceDate);
+			var nextDate = (nextComplianceDate <= defaultDateTime)
+				? ""
+				: SmartCore.Auxiliary.Convert.GetDateFormat(nextComplianceDate);
+			string nextComplianceString = item.NextPerformanceSource.ToString();
 			string nextRemainString = item.Remains != null && !item.Remains.IsNullOrZero()
 										  ? item.Remains.ToString()
 										  : "N/A";
@@ -202,8 +207,10 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			subItems.Add(CreateRow(item.APUCalc ? "Yes" : "No", item.APUCalc));
 			subItems.Add(CreateRow(firstPerformanceString, firstPerformanceString));
 			subItems.Add(CreateRow(repeat, item.Threshold.RepeatInterval));
+			subItems.Add(CreateRow(nextDate, nextComplianceDate));
 			subItems.Add(CreateRow(nextComplianceString, nextComplianceDate));
 			subItems.Add(CreateRow(nextRemainString, nextRemainString));
+			subItems.Add(CreateRow(lastDate, lastComplianceDate));
 			subItems.Add(CreateRow(lastPerformanceString, lastComplianceDate));
 			subItems.Add(CreateRow(item.Zone, item.Zone));
 			subItems.Add(CreateRow(item.Workarea, item.Workarea));
