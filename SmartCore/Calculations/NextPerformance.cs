@@ -454,9 +454,6 @@ namespace SmartCore.Calculations
 
                     _ataChapter = d.ATAChapter;
                     _title = $"{d.Title}";
-                    if (!string.IsNullOrEmpty(d.EngineeringOrders))
-	                    _title += $" | {d.EngineeringOrders}";
-
                     _description = d.Description + (string.IsNullOrEmpty(d.Paragraph) ? "" : " " + d.Paragraph);
                     _workType = d.WorkType.ToString();
                     _type = d.DirectiveType.ShortName;

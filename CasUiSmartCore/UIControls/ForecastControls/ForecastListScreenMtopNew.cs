@@ -309,8 +309,19 @@ namespace CAS.UI.UIControls.ForecastControls
                         var components = GlobalObjects.ComponentCore.GetComponents(baseComponents.ToList());
                         var componentDirectives = components.SelectMany(i => i.ComponentDirectives);
 
+                        var mpds = GlobalObjects.MaintenanceCore.GetMaintenanceDirectives(CurrentAircraft);
+                        foreach (var componentDirective in componentDirectives)
+                        {
+	                        foreach (var items in componentDirective.ItemRelations.Where(i =>
+		                        i.FirtsItemTypeId == SmartCoreType.MaintenanceDirective.ItemId ||
+		                        i.SecondItemTypeId == SmartCoreType.MaintenanceDirective.ItemId))
+	                        {
+		                        var id = componentDirective.IsFirst == true ? items.SecondItemId : items.FirstItemId;
+		                        componentDirective.MaintenanceDirective = mpds.FirstOrDefault(i => i.ItemId == id);
+	                        }
+                        }
 
-                        mtopDirectives.AddRange(GlobalObjects.MaintenanceCore.GetMaintenanceDirectives(CurrentAircraft));
+                        mtopDirectives.AddRange(mpds);
                         mtopDirectives.AddRange(GlobalObjects.DirectiveCore.GetDirectives(CurrentAircraft, DirectiveType.All));
                         mtopDirectives.AddRange(componentDirectives);
 

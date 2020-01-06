@@ -13,6 +13,7 @@ using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Calculations.MTOP;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
@@ -49,14 +50,10 @@ namespace CAS.UI.UIControls.ForecastControls
 		protected override void SetHeaders()
 		{
 			AddColumn("Check", (int)(radGridView1.Width * 0.10f));
-			
-			AddColumn("Type", (int)(radGridView1.Width * 0.07f));
 			AddColumn("Item №", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Item Card №", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Task Card №", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.2f));
-			
 			AddColumn("Work Type", (int)(radGridView1.Width * 0.2f));
-			
 			AddDateColumn("Next", (int)(radGridView1.Width * 0.2f));
 			AddColumn("DUE", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Thresh", (int)(radGridView1.Width * 0.2f));
@@ -68,6 +65,7 @@ namespace CAS.UI.UIControls.ForecastControls
 			AddColumn("Cost", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Total MH", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Total Cost", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Type", (int)(radGridView1.Width * 0.07f));
 			AddColumn("ATA", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Times", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Check", (int)(radGridView1.Width * 0.2f));
@@ -190,22 +188,26 @@ namespace CAS.UI.UIControls.ForecastControls
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var title = item.Title;
 			var card = "";
-			if (item.Parent is Directive)
+			var description = item.Description;
+			if (item.Parent is Directive directive)
 			{
-				var directive = item.Parent as Directive;
-
 				if (directive.DirectiveType == DirectiveType.SB)
 					title = directive.ServiceBulletinNo;
 				else if (directive.DirectiveType == DirectiveType.EngineeringOrders)
 					title = directive.EngineeringOrders;
+				card = directive.EngineeringOrders;
 			}
-
-			if (item.Parent is MaintenanceDirective)
+			else if (item.Parent is MaintenanceDirective d)
 			{
-				var d = item.Parent as MaintenanceDirective;
 				if (d.TaskCardNumberFile == null)
 					tcnColor = Color.MediumVioletRed;
 				card = d.TaskCardNumber;
+			}
+			else if (item.Parent is ComponentDirective c)
+			{
+				description = item.Title;
+				title = c.MaintenanceDirective?.TaskNumberCheck ?? "";
+				card = c.MaintenanceDirective?.TaskCardNumber ?? "";
 			}
 
 			var temp = "";
@@ -214,14 +216,10 @@ namespace CAS.UI.UIControls.ForecastControls
 			else temp = $"{ListViewGroupHelper.GetGroupString(item)} | Date: {item.PerformanceDate?.ToString(new GlobalTermsProvider()["DateFormat"].ToString())}";
 
 			subItems.Add(CreateRow(temp, item.ParentCheck.NextPerformances.FirstOrDefault(i => i.Group == item.Group)?.PerformanceSource));
-			
-			subItems.Add(CreateRow(item.Parent.SmartCoreObjectType.ToString(), item.Parent.SmartCoreObjectType));
 			subItems.Add(CreateRow(title, title, tcnColor));
 			subItems.Add(CreateRow(card, card, tcnColor));
-			subItems.Add(CreateRow(item.Description, item.Description));
-			
+			subItems.Add(CreateRow(description, description));
 			subItems.Add(CreateRow(item.WorkType, item.WorkType));
-			
 			subItems.Add(CreateRow(item.PerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)item.PerformanceDate), item.PerformanceDate));
 
 			//item.PerformanceSource?.Resemble(item.Parent.Threshold.FirstPerformanceSinceNew);
@@ -238,12 +236,12 @@ namespace CAS.UI.UIControls.ForecastControls
 			else subItems.Add(CreateRow(item.Parent.Threshold.RepeatInterval.ToString(), item.Parent.Threshold.RepeatInterval));
 			subItems.Add(CreateRow(item.Remains.ToString(), item.Remains));
 			subItems.Add(CreateRow(item.Parent.LastPerformance?.OnLifelength.ToString(), item.Parent.LastPerformance));
-
 			subItems.Add(CreateRow(item.KitsToString, item.Kits?.Count));
 			subItems.Add(CreateRow(manHours.ToString(), manHours));
 			subItems.Add(CreateRow(cost.ToString(), cost));
 			subItems.Add(CreateRow("", ""));
 			subItems.Add(CreateRow("", ""));
+			subItems.Add(CreateRow(item.Parent.SmartCoreObjectType.ToString(), item.Parent.SmartCoreObjectType));
 			subItems.Add(CreateRow(item.ATAChapter?.ToString(), item.ATAChapter));
 			subItems.Add(CreateRow(timesString, times));
 			subItems.Add(CreateRow(item.MaintenanceCheck != null ? item.MaintenanceCheck.ToString() : "", item.MaintenanceCheck));

@@ -64,7 +64,8 @@ namespace CAS.UI.UIControls.MTOP
 				return;
 			AddColumn("Type", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Item №", (int)(radGridView1.Width * 0.16f));
-			AddColumn("Item Card №", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Task Card №", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Description", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Thresh", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Repeat", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Phase", (int)(radGridView1.Width * 0.10f));
@@ -117,31 +118,37 @@ namespace CAS.UI.UIControls.MTOP
 
 			var title = "";
 			var card = "";
-			if (item is MaintenanceDirective)
+			var description = "";
+			if (item is MaintenanceDirective mpd)
 			{
-				title = (item as MaintenanceDirective).Title;
-				card = (item as MaintenanceDirective).TaskCardNumber;
+				title = mpd.Title;
+				card = mpd.TaskCardNumber;
+				description = mpd.Description;
 			}
-			if (item is Directive)
+			else if (item is Directive d)
 			{
-				var d = (item as Directive);
 				if (d.DirectiveType == DirectiveType.AirworthenessDirectives)
 					title = d.Title;
 				else if (d.DirectiveType == DirectiveType.SB)
 					title = d.ServiceBulletinNo;
 				else if (d.DirectiveType == DirectiveType.EngineeringOrders)
 					title = d.EngineeringOrders;
+				card = d.EngineeringOrders;
+				description = d.Description;
 			}
-			if (item is ComponentDirective)
+			else if(item is ComponentDirective c)
 			{
-				title = (item as ComponentDirective).Title;
+				description = c.ParentComponent.ToString();
+				title = c.MaintenanceDirective?.TaskNumberCheck ?? "";
+				card = c.MaintenanceDirective?.TaskCardNumber ?? "";
 			}
+
 
 
 			subItems.Add(CreateRow(item.SmartCoreObjectType.ToString(), item.SmartCoreObjectType));
 			subItems.Add(CreateRow(title, title));
 			subItems.Add(CreateRow(card, card));
-
+			subItems.Add(CreateRow(description, description));
 			var thresh = !item.Threshold.FirstPerformanceSinceNew.IsNullOrZero()
 				? item.Threshold.FirstPerformanceSinceNew
 				: item.Threshold.FirstPerformanceSinceEffectiveDate;
