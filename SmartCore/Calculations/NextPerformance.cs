@@ -24,11 +24,8 @@ namespace SmartCore.Calculations
         #region New MTOP
 
         #region Fields
-
-        private Lifelength _estimatedNext;
         private Lifelength _nextLimit;
         private Lifelength _remainLimit;
-        private Lifelength _estimatedRemain;
 
         #endregion
 
@@ -44,20 +41,7 @@ namespace SmartCore.Calculations
 	        set => _remainLimit = value;
         } 
         
-        public Lifelength EstimatedNext
-        {
-	        get => _estimatedNext ?? Lifelength.Zero;
-	        set => _estimatedNext = value;
-        } 
-        
-        public Lifelength EstimatedRemain
-        {
-	        get => _estimatedRemain ?? Lifelength.Zero;
-	        set => _estimatedRemain = value;
-        }
-
         public DateTime? NextPerformanceDateNew { get; set; }
-        public DateTime? EstimatedDateNew { get; set; }
 
         #endregion
 

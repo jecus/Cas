@@ -94,13 +94,28 @@ namespace SmartCore.Calculations.MTOP
 			//Рассчитываем Remain
 			np.RemainLimit = new Lifelength(np.NextLimit);
 			np.RemainLimit.Substract(current);
-			np.RemainLimit.Resemble(threshold.RepeatInterval);
-			np.NextLimit.Resemble(threshold.RepeatInterval);
+
+			if (!threshold.RepeatInterval.IsNullOrZero())
+			{
+				np.RemainLimit.Resemble(threshold.RepeatInterval);
+				np.NextLimit.Resemble(threshold.RepeatInterval);
+			}
+			else if (!threshold.FirstPerformanceSinceNew.IsNullOrZero())
+			{
+				np.RemainLimit.Resemble(threshold.FirstPerformanceSinceNew);
+				np.NextLimit.Resemble(threshold.FirstPerformanceSinceNew);
+			}
+			else if (!threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+			{
+				np.RemainLimit.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
+				np.NextLimit.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
+			}
 
 
-			np.EstimatedRemain = new Lifelength(CalculateWithUtilization(np.RemainLimit, au));
-			np.EstimatedNext = new Lifelength(np.EstimatedRemain);
-			np.EstimatedNext.Add(current);
+
+			np.Remains = new Lifelength(CalculateWithUtilization(np.RemainLimit, au));
+			np.PerformanceSource = new Lifelength(np.Remains);
+			np.PerformanceSource.Add(current);
 
 			#region Расчет текущего состояния задачи в зависимости от условий выполнения
 
@@ -141,12 +156,12 @@ namespace SmartCore.Calculations.MTOP
 				}
 			}
 
-			days = np.EstimatedNext.Days;
+			days = np.PerformanceSource.Days;
 			if (days != null)
 			{
 				if (days <= current.Days)
-					np.EstimatedDateNew = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(Convert.ToDouble(days));
-				else np.EstimatedDateNew = AnalystHelper.GetApproximateDate(np.RemainLimit, au, conditionType);
+					np.PerformanceDate = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(Convert.ToDouble(days));
+				else np.PerformanceDate = AnalystHelper.GetApproximateDate(np.RemainLimit, au, conditionType);
 			}
 
 			#endregion}

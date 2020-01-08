@@ -485,10 +485,13 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 			AnimatedThreadWorker.ReportProgress(60, "calculation of directives");
 
+			//foreach (Directive pd in _initialDirectiveArray)
+			//{
+			//	GlobalObjects.PerformanceCalculator.GetNextPerformance(pd);
+			//}
+
 			foreach (Directive pd in _initialDirectiveArray)
-			{
-				GlobalObjects.PerformanceCalculator.GetNextPerformance(pd);
-			}
+				GlobalObjects.MTOPCalculator.CalculateDirectiveNew(pd);
 
 			AnimatedThreadWorker.ReportProgress(70, "filter directives");
 

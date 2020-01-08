@@ -94,10 +94,16 @@ namespace CAS.UI.UIControls.DirectivesControls
 						: "", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Applicabilty", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Next", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Last", (int)(radGridView1.Width * 0.10f));
+			AddColumn("1st. Perf.", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Rpt. Intv.", (int)(radGridView1.Width * 0.20f));
-			AddColumn("Remain/Overdue", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Next(E)", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Next Estimated Data", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Remain(E)", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Next(L)", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Next Limit Data", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Remain(L)", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Last", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Last Data", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Status", (int)(radGridView1.Width * 0.14f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Effective date", (int)(radGridView1.Width * 0.16f));
@@ -151,10 +157,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			//         Определение последнего выполнения директивы и KitRequiered               //
 			//////////////////////////////////////////////////////////////////////////////////////
 			var lastComplianceDate = DateTimeExtend.GetCASMinDateTime();
-			var nextComplianceDate = DateTimeExtend.GetCASMinDateTime();
 			var lastComplianceLifeLength = Lifelength.Zero;
-			var nextComplianceLifeLength = Lifelength.Null;
-			var nextComplianceRemain = Lifelength.Null;
 
 			string lastPerformanceString, firstPerformanceString = "N/A";
 
@@ -192,28 +195,15 @@ namespace CAS.UI.UIControls.DirectivesControls
 			}
 			var repeatInterval = item.Threshold.RepeatInterval;
 
-			if (nextComplianceLifeLength == null || nextComplianceLifeLength.IsNullOrZero())
-				nextComplianceLifeLength = item.NextPerformanceSource;
-			if (item.NextPerformanceSource != null && !item.NextPerformanceSource.IsNullOrZero() &&
-				item.NextPerformanceSource.IsLessOrEqualByAnyParameter(nextComplianceLifeLength))
-			{
-				nextComplianceLifeLength = item.NextPerformanceSource;
-				if (item.NextPerformanceDate != null) nextComplianceDate = (DateTime)item.NextPerformanceDate;
-				if (item.Remains != null) nextComplianceRemain = item.Remains;
-			}
 			if (lastComplianceDate <= DateTimeExtend.GetCASMinDateTime())
 				lastPerformanceString = "N/A";
-			else
-				lastPerformanceString = SmartCore.Auxiliary.Convert.GetDateFormat(lastComplianceDate) + " " +
-										lastComplianceLifeLength;
+			else lastPerformanceString = lastComplianceLifeLength.ToString();
 
-			var nextComplianceString = ((nextComplianceDate <= DateTimeExtend.GetCASMinDateTime())
-											   ? ""
-											   : SmartCore.Auxiliary.Convert.GetDateFormat(nextComplianceDate)) + " " +
-										  nextComplianceLifeLength;
-			var nextRemainString = nextComplianceRemain != null && !nextComplianceRemain.IsNullOrZero()
-										  ? nextComplianceRemain.ToString()
-										  : "N/A";
+			var lastDate = (lastComplianceDate <= DateTimeExtend.GetCASMinDateTime())
+				? ""
+				: SmartCore.Auxiliary.Convert.GetDateFormat(lastComplianceDate);
+
+
 			effDate = item.Threshold.EffectiveDate;
 			var descriptionString = item.Description;
 			var applicabilityString = item.IsApplicability ? $"APL  {item.Applicability}" : $"N/A  {item.Applicability}";
@@ -271,10 +261,17 @@ namespace CAS.UI.UIControls.DirectivesControls
 			subItems.Add(CreateRow(s3, s3, c3));
 			subItems.Add(CreateRow(applicabilityString, applicabilityString));
 			subItems.Add(CreateRow(descriptionString, descriptionString));
-			subItems.Add(CreateRow(nextComplianceString, nextComplianceDate));
-			subItems.Add(CreateRow(lastPerformanceString, lastComplianceDate));
+			subItems.Add(CreateRow(firstPerformanceString, firstPerformanceString));
 			subItems.Add(CreateRow(repeatInterval.ToString(), repeatInterval));
-			subItems.Add(CreateRow(nextRemainString, nextRemainString));
+			subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.NextPerformance?.PerformanceDate), item.NextPerformance?.PerformanceDate));
+			subItems.Add(CreateRow(item.NextPerformance?.PerformanceSource.ToString(), item.NextPerformance?.PerformanceSource));
+			subItems.Add(CreateRow(item.NextPerformance?.Remains.ToString(), item.NextPerformance?.Remains));
+			subItems.Add(CreateRow(item.NextPerformance?.NextLimit.Days != null ? SmartCore.Auxiliary.Convert.GetDateFormat(item.NextPerformance?.NextPerformanceDateNew) : "", item.NextPerformance?.NextPerformanceDateNew));
+			subItems.Add(CreateRow(item.NextPerformance?.NextLimit.ToString(), item.NextPerformance?.NextLimit.ToString()));
+			subItems.Add(CreateRow(item.NextPerformance?.RemainLimit.ToString(), item.NextPerformance?.RemainLimit.ToString()));
+			subItems.Add(CreateRow(lastDate, lastComplianceDate));
+			subItems.Add(CreateRow(lastPerformanceString, lastComplianceDate));
+
 			subItems.Add(CreateRow(status.ToString(), status));
 			subItems.Add(CreateRow(remarksString, remarksString));
 			subItems.Add(CreateRow(effDate > DateTimeExtend.GetCASMinDateTime()

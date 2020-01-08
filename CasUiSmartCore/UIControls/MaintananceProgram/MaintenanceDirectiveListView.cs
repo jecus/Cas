@@ -94,8 +94,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
 		protected override void SetItemColor(GridViewRowInfo listViewItem, MaintenanceDirective item)
 		{
-			Color itemBackColor = UsefulMethods.GetColor(item);
-			Color itemForeColor = Color.Black;
+			var itemBackColor = UsefulMethods.GetColor(item);
+			var itemForeColor = Color.Black;
 
 			foreach (GridViewCellInfo cell in listViewItem.Cells)
 			{
@@ -122,17 +122,17 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			//////////////////////////////////////////////////////////////////////////////////////
 			//         Определение последнего выполнения директивы и KitRequiered               //
 			//////////////////////////////////////////////////////////////////////////////////////
-			DateTime defaultDateTime = DateTimeExtend.GetCASMinDateTime();
-			DateTime lastComplianceDate = defaultDateTime;
-			DateTime nextComplianceDate = defaultDateTime;
-			Lifelength lastComplianceLifeLength = Lifelength.Zero;
+			var defaultDateTime = DateTimeExtend.GetCASMinDateTime();
+			var lastComplianceDate = defaultDateTime;
+			var nextComplianceDate = defaultDateTime;
+			var lastComplianceLifeLength = Lifelength.Zero;
 			//Lifelength nextComplianceLifelength = Lifelength.Null;
 
 			string lastPerformanceString, firstPerformanceString = "N/A";
 
-			Color tcnColor = radGridView1.ForeColor;
-			Color kitColor = radGridView1.BackColor;
-			AtaChapter ata = item.ATAChapter;
+			var tcnColor = radGridView1.ForeColor;
+			var kitColor = radGridView1.BackColor;
+			var ata = item.ATAChapter;
 			if(item.LastPerformance != null)
 			{
 				lastComplianceDate = item.LastPerformance.RecordDate;
@@ -154,12 +154,12 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			  nextComplianceDate = Convert.ToDateTime(item.NextPerformanceDate);
 
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
-			string kitRequieredString = item.KitsApplicable ? item.Kits.Count + " EA" : "N/A";
-			string ndtString = item.NDTType.ShortName;
-			string skillString = item.Skill.ShortName;
-			string categoryString = item.Category.ShortName;
-			string remarksString = item.Remarks;
-			string hiddenRemarksString = item.HiddenRemarks;
+			var kitRequieredString = item.KitsApplicable ? item.Kits.Count + " EA" : "N/A";
+			var ndtString = item.NDTType.ShortName;
+			var skillString = item.Skill.ShortName;
+			var categoryString = item.Category.ShortName;
+			var remarksString = item.Remarks;
+			var hiddenRemarksString = item.HiddenRemarks;
 
 			if (lastComplianceDate <= defaultDateTime)
 				lastPerformanceString = "N/A";
@@ -177,14 +177,14 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			}
 
 			//////////////////////////////////////////////////////////////////////////////////////
-			string description = item.Description != "" ? item.Description : "N/A";
-			string app = item.IsApplicability ? $"APL {item.Applicability}" : $"N/A {item.Applicability}";
-			string taskNumber = item.MPDTaskNumber != "" ? item.MPDTaskNumber : "N/A";
-			string taskCheck = item.TaskNumberCheck != "" ? item.TaskNumberCheck : "N/A";
-			string maintManual = item.MaintenanceManual != "" ? item.MaintenanceManual : "N/A";
-			string mrb = item.MRB != "" ? item.MRB : "N/A";
-			string check = item.MaintenanceCheck != null ? item.MaintenanceCheck.Name : "N/A";
-			DirectiveStatus status = item.Status;
+			var description = item.Description != "" ? item.Description : "N/A";
+			var app = item.IsApplicability ? $"APL {item.Applicability}" : $"N/A {item.Applicability}";
+			var taskNumber = item.MPDTaskNumber != "" ? item.MPDTaskNumber : "N/A";
+			var taskCheck = item.TaskNumberCheck != "" ? item.TaskNumberCheck : "N/A";
+			var maintManual = item.MaintenanceManual != "" ? item.MaintenanceManual : "N/A";
+			var mrb = item.MRB != "" ? item.MRB : "N/A";
+			var check = item.MaintenanceCheck != null ? item.MaintenanceCheck.Name : "N/A";
+			var status = item.Status;
 
 			if (item.TaskCardNumberFile == null)
 				tcnColor = Color.MediumVioletRed;
@@ -203,9 +203,9 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			subItems.Add(CreateRow(item.APUCalc ? "Yes" : "No", item.APUCalc));
 			subItems.Add(CreateRow(firstPerformanceString, firstPerformanceString));
 			subItems.Add(CreateRow(repeat, item.Threshold.RepeatInterval));
-			subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.NextPerformance?.EstimatedDateNew), item.NextPerformance?.EstimatedDateNew));
-			subItems.Add(CreateRow(item.NextPerformance?.EstimatedNext.ToString(), item.NextPerformance?.EstimatedNext));
-			subItems.Add(CreateRow(item.NextPerformance?.EstimatedRemain.ToString(), item.NextPerformance?.EstimatedRemain));
+			subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.NextPerformance?.PerformanceDate), item.NextPerformance?.PerformanceDate));
+			subItems.Add(CreateRow(item.NextPerformance?.PerformanceSource.ToString(), item.NextPerformance?.PerformanceSource));
+			subItems.Add(CreateRow(item.NextPerformance?.Remains.ToString(), item.NextPerformance?.Remains));
 			subItems.Add(CreateRow(item.NextPerformance?.NextLimit.Days != null ? SmartCore.Auxiliary.Convert.GetDateFormat(item.NextPerformance?.NextPerformanceDateNew) : "", item.NextPerformance?.NextPerformanceDateNew));
 			subItems.Add(CreateRow(item.NextPerformance?.NextLimit.ToString(), item.NextPerformance?.NextLimit.ToString()));
 			subItems.Add(CreateRow(item.NextPerformance?.RemainLimit.ToString(), item.NextPerformance?.RemainLimit.ToString()));
