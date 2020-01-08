@@ -33,7 +33,7 @@ namespace CasAPI.Controllers
 			catch (Exception e)
 			{
 				_logger.LogError(e.Message);
-				return BadRequest();
+				return BadRequest(new {Error = e.Message});
 			}
 		}
 
@@ -48,7 +48,7 @@ namespace CasAPI.Controllers
 			catch (Exception e)
 			{
 				_logger.LogError(e.Message);
-				return BadRequest();
+				return BadRequest(new { Error = e.Message, InnerError = e.InnerException?.Message });
 			}
 		}
 
@@ -63,7 +63,7 @@ namespace CasAPI.Controllers
 			catch (Exception e)
 			{
 				_logger.LogError(e.Message);
-				return BadRequest();
+				return BadRequest(new { Error = e.Message, InnerError = e.InnerException?.Message });
 			}
 		}
 
@@ -78,7 +78,7 @@ namespace CasAPI.Controllers
 			catch (Exception e)
 			{
 				_logger.LogError(e.Message);
-				return BadRequest();
+				return BadRequest(new { Error = e.Message, InnerError = e.InnerException?.Message });
 			}
 		}
 
@@ -93,7 +93,7 @@ namespace CasAPI.Controllers
 			catch (Exception e)
 			{
 				_logger.LogError(e.Message);
-				return BadRequest();
+				return BadRequest(new { Error = e.Message, InnerError = e.InnerException?.Message });
 			}
 		}
 
@@ -108,7 +108,7 @@ namespace CasAPI.Controllers
 			catch (Exception e)
 			{
 				_logger.LogError(e.Message);
-				return BadRequest();
+				return BadRequest(new { Error = e.Message, InnerError = e.InnerException?.Message });
 			}
 		}
 
@@ -123,7 +123,7 @@ namespace CasAPI.Controllers
 			catch (Exception e)
 			{
 				_logger.LogError(e.Message);
-				return BadRequest();
+				return BadRequest(new { Error = e.Message, InnerError = e.InnerException?.Message });
 			}
 		}
 
