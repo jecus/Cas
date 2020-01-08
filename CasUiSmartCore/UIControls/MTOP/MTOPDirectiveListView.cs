@@ -197,12 +197,12 @@ namespace CAS.UI.UIControls.MTOP
 					var dp = ScreenAndFormManager.GetMaintenanceDirectiveScreen(SelectedItem as MaintenanceDirective);
 					e.SetParameters(dp);
 				}
-				if (SelectedItem is Directive)
+				else if (SelectedItem is Directive)
 				{
 					var dp = ScreenAndFormManager.GetDirectiveScreen(SelectedItem as Directive);
 					e.SetParameters(dp);
 				}
-				if (SelectedItem is ComponentDirective c)
+				else if (SelectedItem is ComponentDirective c)
 				{
 					if (c.MaintenanceDirective != null)
 					{

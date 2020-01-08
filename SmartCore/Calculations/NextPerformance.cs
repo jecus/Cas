@@ -21,6 +21,47 @@ namespace SmartCore.Calculations
     [Serializable]
     public class NextPerformance : BaseEntityObject, IWorkPackageItemFilterParams, IForecastMtopFilterParams
 	{
+        #region New MTOP
+
+        #region Fields
+
+        private Lifelength _estimatedNext;
+        private Lifelength _nextLimit;
+        private Lifelength _remainLimit;
+        private Lifelength _estimatedRemain;
+
+        #endregion
+
+        public Lifelength NextLimit
+        {
+	        get => _nextLimit ?? Lifelength.Zero;
+	        set => _nextLimit = value;
+        }
+
+        public Lifelength RemainLimit
+        {
+	        get => _remainLimit ?? Lifelength.Zero;
+	        set => _remainLimit = value;
+        } 
+        
+        public Lifelength EstimatedNext
+        {
+	        get => _estimatedNext ?? Lifelength.Zero;
+	        set => _estimatedNext = value;
+        } 
+        
+        public Lifelength EstimatedRemain
+        {
+	        get => _estimatedRemain ?? Lifelength.Zero;
+	        set => _estimatedRemain = value;
+        }
+
+        public DateTime? NextPerformanceDateNew { get; set; }
+        public DateTime? EstimatedDateNew { get; set; }
+
+        #endregion
+
+
         #region public DateTime? PrevPerformanceDate { get; set; }
         /// <summary>
         /// Приблизительная дата предыдущего выполнения
@@ -403,6 +444,7 @@ namespace SmartCore.Calculations
         #region public MaintenanceCheck MaintenanceCheck { get; }
 
         private MaintenanceCheck _check;
+
         /// <summary>
         /// Чек программы обслуживания, к которому привязана задача
         /// </summary>

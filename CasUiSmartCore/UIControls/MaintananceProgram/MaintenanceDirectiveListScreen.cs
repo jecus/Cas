@@ -319,25 +319,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			}
 			#endregion
 
-			#region Калькуляция состояния директив
-
-			//AnimatedThreadWorker.ReportProgress(40, "calculation of directives");
-
-			//foreach (MaintenanceDirective pd in maintenanceDirectives)
-			//{
-			//    GlobalObjects.CasEnvironment.Calculator.GetNextPerformance(pd);
-			//    foreach (DetailDirective detailDirective in pd.BindDetailDirectives)
-			//        GlobalObjects.CasEnvironment.Calculator.GetNextPerformance(detailDirective);
-			//    _initialDirectiveArray.Add(pd);
-			//}
-
-			//if (AnimatedThreadWorker.CancellationPending)
-			//{
-			//    e.Cancel = true;
-			//    return;
-			//}
-			#endregion
-
 			#region Фильтрация директив
 			AnimatedThreadWorker.ReportProgress(70, "filter directives");
 
@@ -1372,12 +1353,11 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		{
 			foreach (var mpd in maintenanceDirectives)
 			{
-				if (mpd.ItemId == 63278)
-					MessageBox.Show("qwe");
-
-
-				if(_currentForecast == null)
-					GlobalObjects.PerformanceCalculator.GetNextPerformance(mpd);
+				if (_currentForecast == null)
+				{
+					//GlobalObjects.PerformanceCalculator.GetNextPerformance(mpd);
+					GlobalObjects.MTOPCalculator.CalculateDirectiveNew(mpd);
+				}
 
 				if (bindedItemsDict.ContainsKey(mpd))
 				{

@@ -9,6 +9,9 @@ namespace SmartCore.Calculations.MTOP
 {
 	public interface IMTOPCalculator
 	{
+		void CalculateDirectiveNew(List<IMtopCalc> directives);
+		void CalculateDirectiveNew(IMtopCalc directive);
+
 		void CalculateMtopChecks(List<MTOPCheck> checks, AverageUtilization averageUtilization);
 
 		void CalculateNextPerformance(List<MTOPCheck> checks, DateTime frameStartDate,

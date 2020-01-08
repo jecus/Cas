@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using SmartCore.Aircrafts;
-using SmartCore.Calculations.MTOP;
+using SmartCore.Analyst;
+using SmartCore.AverageUtilizations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;
+using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.MTOP;
 
 namespace SmartCore.Calculations.MTOP
@@ -16,16 +16,254 @@ namespace SmartCore.Calculations.MTOP
 	{
 		private readonly ICalculator _calculator;
 		private readonly IAircraftsCore _aircraftsCore;
+		private readonly IAverageUtilizationCore _averageUtilizationCore;
 
 		#region Constructor
 
-		public MTOPCalculator(ICalculator calculator, IAircraftsCore aircraftsCore)
+		public MTOPCalculator(ICalculator calculator, IAircraftsCore aircraftsCore, IAverageUtilizationCore averageUtilizationCore)
 		{
 			_calculator = calculator;
 			_aircraftsCore = aircraftsCore;
+			_averageUtilizationCore = averageUtilizationCore;
 		}
 
 		#endregion
+
+		#region New
+
+		public void CalculateDirectiveNew(List<IMtopCalc> directives)
+		{
+			foreach (var directive in directives)
+				CalculateDirectiveNew(directive);
+		}
+
+		public void CalculateDirectiveNew(IMtopCalc directive)
+		{
+			if (directive == null)
+				return;
+
+			if (directive.IsClosed || directive.Threshold == null)
+				return;
+
+			var np = new NextPerformance{Parent = directive};
+
+			ThresholdConditionType conditionType;
+			Lifelength notify;
+
+			var threshold = directive.Threshold;
+			var current = _calculator.GetFlightLifelengthOnEndOfDay(directive.LifeLengthParent, DateTime.Today);
+			var au = _averageUtilizationCore.GetAverageUtillization(directive);
+
+			//Если деректива не выполнялась
+			if (directive.LastPerformance == null)
+			{
+				conditionType = threshold.FirstPerformanceConditionType;
+				notify = threshold.FirstNotification != null
+					? new Lifelength(threshold.FirstNotification)
+					: null;
+
+				if (!threshold.FirstPerformanceSinceNew.IsNullOrZero())
+					np.NextLimit = new Lifelength(threshold.FirstPerformanceSinceNew);
+				else if (!threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+				{
+					var sinceEffDate = _calculator.GetFlightLifelengthOnStartOfDay(directive.LifeLengthParent, threshold.EffectiveDate);
+					sinceEffDate.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
+					if (threshold.RepeatInterval.CalendarValue != null)
+						sinceEffDate.Add(threshold.EffectiveDate, threshold.FirstPerformanceSinceEffectiveDate);
+					else sinceEffDate.Add(threshold.FirstPerformanceSinceEffectiveDate);
+
+					np.NextLimit = new Lifelength(sinceEffDate);
+				}
+				else return;
+			}
+			else
+			{
+				conditionType = threshold.FirstPerformanceConditionType;
+				notify = directive.Threshold.RepeatNotification != null
+					? new Lifelength(directive.Threshold.RepeatNotification)
+					: null;
+
+				np.NextLimit = new Lifelength(directive.LastPerformance.OnLifelength);
+
+				if (!threshold.RepeatInterval.IsNullOrZero())
+				{
+					np.NextLimit.Add(threshold.RepeatInterval);
+				}
+				else return;
+			}
+
+			//Рассчитываем Remain
+			np.RemainLimit = new Lifelength(np.NextLimit);
+			np.RemainLimit.Substract(current);
+			np.RemainLimit.Resemble(threshold.RepeatInterval);
+
+
+			np.EstimatedRemain = new Lifelength(CalculateWithUtilization(np.RemainLimit, au));
+			np.EstimatedNext = new Lifelength(np.EstimatedRemain);
+			np.EstimatedNext.Add(current);
+
+			#region Расчет текущего состояния задачи в зависимости от условий выполнения
+
+			if (conditionType == ThresholdConditionType.WhicheverFirst)
+			{
+				// задано только одно условие выполнения - считаем по whichever first
+				// whichever first
+
+				// состояние директивы - просрочена или нормально
+				np.Condition = computeConditionState(np.NextLimit, np.RemainLimit, current, notify, x => x.IsOverdue());
+			}
+			else // whichever later
+			{
+				// директива просрочена только в том случае, когда она просрочена по всем параметрам
+				np.Condition = computeConditionState(np.NextLimit, np.RemainLimit, current, notify, x => x.IsAllOverdue());
+			}
+
+			#endregion
+
+			#region Расчет даты
+
+
+			double? days;
+			if (directive.LastPerformance != null)
+			{
+				days = AnalystHelper.GetApproximateDays(directive.LastPerformance.RecordDate, threshold.RepeatInterval, au, conditionType);
+				if (days != null)
+					np.NextPerformanceDateNew = directive.LastPerformance.RecordDate.AddDays(Convert.ToDouble(days));
+			}
+			else
+			{
+				days = AnalystHelper.GetApproximateDays(np.NextLimit, au, conditionType);
+				if (days != null)
+				{
+					if (days <= current.Days)
+						np.NextPerformanceDateNew = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(Convert.ToDouble(days));
+					else np.NextPerformanceDateNew = AnalystHelper.GetApproximateDate(np.RemainLimit, au, conditionType);
+				}
+			}
+
+			days = np.EstimatedNext.Days;
+			if (days != null)
+			{
+				if (days <= current.Days)
+					np.EstimatedDateNew = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(Convert.ToDouble(days));
+				else np.EstimatedDateNew = AnalystHelper.GetApproximateDate(np.RemainLimit, au, conditionType);
+			}
+
+			#endregion}
+
+			directive.NextPerformances.Add(np);
+		}
+
+		public Lifelength CalculateWithUtilization(Lifelength thresh, AverageUtilization averageUtilization)
+		{
+			double hours = 0, cycles = 0, days = 0;
+			double hoursPhase = -1, cyclesPhase = -1, daysPhase = -1;
+
+			var res = new Lifelength(0, 0, 0);
+
+			var threshHours = thresh.Hours;
+			if (thresh.Days.HasValue)
+			{
+				hours = (double)(thresh.Days * averageUtilization.Hours);
+				cycles = hours / averageUtilization.Cycles;
+				days = (double)thresh.Days;
+			}
+			else if (threshHours.HasValue)
+			{
+				hours = (double)threshHours;
+				cycles = hours / averageUtilization.Cycles;
+				days = (double)(threshHours / averageUtilization.HoursPerDay);
+			}
+			else if (thresh.Cycles.HasValue)
+			{
+				cycles = (double)thresh.Cycles;
+				days = (double)(thresh.Cycles / (averageUtilization.Hours / averageUtilization.CyclesPerDay));
+				hours = days * averageUtilization.Hours;
+			}
+
+
+			if (cycles > thresh.Cycles && hours > threshHours)
+			{
+				var cycleDays = (int)(cycles / (averageUtilization.Hours / averageUtilization.CyclesPerDay));
+
+				if (cycleDays > days)
+				{
+					daysPhase = (int)(threshHours / averageUtilization.HoursPerDay);
+					cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
+					hoursPhase = daysPhase * averageUtilization.Hours;
+				}
+				else
+				{
+					daysPhase = (int)(thresh.Cycles / (averageUtilization.Hours / averageUtilization.CyclesPerDay));
+					cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
+					hoursPhase = daysPhase * averageUtilization.Hours;
+
+					if (hoursPhase > threshHours)
+					{
+						daysPhase = (int)(threshHours / averageUtilization.HoursPerDay);
+						cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
+						hoursPhase = daysPhase * averageUtilization.Hours;
+					}
+				}
+			}
+			else if (cycles > thresh.Cycles)
+			{
+				daysPhase = (int)(thresh.Cycles / (averageUtilization.Hours / averageUtilization.CyclesPerDay));
+				cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
+				hoursPhase = daysPhase * averageUtilization.Hours;
+
+				if (hoursPhase > threshHours)
+				{
+					daysPhase = (int)(threshHours / averageUtilization.HoursPerDay);
+					cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
+					hoursPhase = daysPhase * averageUtilization.Hours;
+				}
+			}
+			else if (hours > threshHours)
+			{
+				daysPhase = (int)(threshHours / averageUtilization.HoursPerDay);
+				cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
+				hoursPhase = daysPhase * averageUtilization.Hours;
+
+				if (cyclesPhase > thresh.Cycles)
+				{
+					daysPhase = (int)(thresh.Cycles / (averageUtilization.Hours / averageUtilization.CyclesPerDay));
+					hoursPhase = daysPhase * averageUtilization.Hours;
+					cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
+				}
+			}
+
+			res.Hours = (int)Math.Round(hoursPhase > -1 ? hoursPhase : hours);
+			res.Cycles = (int)Math.Round(cyclesPhase > -1 ? cyclesPhase : cycles);
+			res.Days = (int)Math.Round(daysPhase > -1 ? daysPhase : days);
+
+			return res;
+		}
+
+		private ConditionState computeConditionState(Lifelength performanceSource, Lifelength remains, Lifelength current, Lifelength notify, Func<Lifelength, bool> getIsOverdueFunc)
+		{
+			if (notify != null && !notify.IsNullOrZero())
+			{
+				if (getIsOverdueFunc(remains))
+					return ConditionState.Overdue;
+
+				var notifyRemains = new Lifelength(performanceSource);
+				notifyRemains.Substract(notify);
+
+				if (current != null && !current.IsNullOrZero())
+					notifyRemains.Substract(current);
+
+				notifyRemains.Resemble(notify);
+				return getIsOverdueFunc(notifyRemains) ? ConditionState.Notify : ConditionState.Satisfactory;
+			}
+
+			return getIsOverdueFunc(remains) ? ConditionState.Overdue : ConditionState.Satisfactory;
+		}
+
+		#endregion
+
+
+		#region Old
 
 		public void CalculateMtopChecks(List<MTOPCheck> checks, AverageUtilization averageUtilization)
 		{
@@ -274,7 +512,7 @@ namespace SmartCore.Calculations.MTOP
 						{
 
 							if ((q + check.PhaseRepeat).Days >= lastCompliance.CalculatedPerformanceSource.Days.Value ||
-								(q + check.PhaseRepeat).Days >= lastCompliance.CalculatedPerformanceSource.Days.Value)
+							    (q + check.PhaseRepeat).Days >= lastCompliance.CalculatedPerformanceSource.Days.Value)
 								break;
 
 							if (check.PhaseRepeat != null && !check.PhaseRepeat.IsNullOrZero())
@@ -666,9 +904,6 @@ namespace SmartCore.Calculations.MTOP
 		{
 			foreach (var directive in directives)
 			{
-				if (directive.ItemId == 58542)
-					Console.WriteLine();
-
 				calculatePhase(directive, checks, averageUtilization, isZeroPhase);
 
 				directive.MtopNextPerformances = new List<NextPerformance>();
@@ -703,7 +938,7 @@ namespace SmartCore.Calculations.MTOP
 				if (check == null) continue;
 
 				var checksForPeriod = check.NextPerformances.Where(i => i.PerformanceDate >= from &&
-																		i.PerformanceDate <= to);
+				                                                        i.PerformanceDate <= to);
 
 				if (checksForPeriod.Count() == 0)
 					continue;
@@ -763,14 +998,14 @@ namespace SmartCore.Calculations.MTOP
 						if (directive.LastPerformance == null) // директива ни разу не выполнялась
 						{
 							if ((directive.Threshold.FirstPerformanceSinceEffectiveDate != null &&
-								!directive.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
-							||
-							(directive.Threshold.FirstPerformanceSinceNew != null &&
-								!directive.Threshold.FirstPerformanceSinceNew.IsNullOrZero()))
+							     !directive.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+							    ||
+							    (directive.Threshold.FirstPerformanceSinceNew != null &&
+							     !directive.Threshold.FirstPerformanceSinceNew.IsNullOrZero()))
 							{
 								Lifelength sinceEffDate = Lifelength.Null;
 								if (directive.Threshold.FirstPerformanceSinceEffectiveDate != null &&
-									!directive.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+								    !directive.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
 								{
 									sinceEffDate = _calculator.GetFlightLifelengthOnStartOfDay(directive.LifeLengthParent, directive.Threshold.EffectiveDate);
 									//sinceEffDate.Resemble(directive.Threshold.FirstPerformanceSinceEffectiveDate);
@@ -782,7 +1017,7 @@ namespace SmartCore.Calculations.MTOP
 								// с момента производства
 								Lifelength sinceNew = Lifelength.Null;
 								if (directive.Threshold.FirstPerformanceSinceNew != null &&
-									!directive.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
+								    !directive.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
 								{
 									sinceNew = directive.PhaseThresh;
 								}
@@ -928,13 +1163,13 @@ namespace SmartCore.Calculations.MTOP
 						// whichever first
 
 						// состояние директивы - просрочена или нормально
-						np.Condition = computeConditionState(directive, np.LimitNotify, np.LimitOverdue, np.Remains, current, notify, x => x.IsOverdue(), x => x.IsLessByAnyParameter(notify), conditionType);
+						np.Condition = computeConditionState(directive, np.LimitOverdue, np.Remains, current, notify, x => x.IsOverdue(), x => x.IsLessByAnyParameter(notify), conditionType);
 
 					}
 					else // whichever later
 					{
 						// директива просрочена только в том случае, когда она просрочена по всем параметрам
-						np.Condition = computeConditionState(directive, np.LimitNotify, np.LimitOverdue, np.Remains, current, notify, x => x.IsAllOverdue(), x => x.IsLess(notify), conditionType);
+						np.Condition = computeConditionState(directive, np.LimitOverdue, np.Remains, current, notify, x => x.IsAllOverdue(), x => x.IsLess(notify), conditionType);
 					}
 
 
@@ -1018,7 +1253,7 @@ namespace SmartCore.Calculations.MTOP
 		}
 
 
-		private ConditionState computeConditionState(IDirective directive, Lifelength limitNotify, Lifelength limitOverdue, Lifelength remains,
+		private ConditionState computeConditionState(IDirective directive, Lifelength limitOverdue, Lifelength remains,
 			Lifelength current, Lifelength notify, Func<Lifelength, bool> getIsOverdueFunc,
 			Func<Lifelength, bool> getIsLessFunc, ThresholdConditionType whicheverFirst)
 		{
@@ -1065,5 +1300,7 @@ namespace SmartCore.Calculations.MTOP
 
 			return getIsOverdueFunc(remains) ? ConditionState.Overdue : ConditionState.Satisfactory;
 		}
+
+		#endregion
 	}
 }

@@ -45,7 +45,7 @@ namespace SmartCore.Auxiliary
         /// <param name="date"></param>
         /// <param name="separator"></param>
         /// <returns></returns>
-        public static String GetDateFormat(DateTime date, string separator = "-")
+        public static string GetDateFormat(DateTime date, string separator = "-")
         {
             
             String[] mount = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
@@ -54,6 +54,17 @@ namespace SmartCore.Auxiliary
 
         }
         #endregion
+
+        public static string GetDateFormat(DateTime? date, string separator = "-")
+        {
+	        if (!date.HasValue)
+		        return "";
+
+	        string[] mount = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+	        return (date.Value.Day + separator + mount[date.Value.Month - 1] + separator + date.Value.Year);
+
+
+        }
 
         #region public static string DatePeriodToString(DateTime date1, DateTime date2)
 
