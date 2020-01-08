@@ -206,7 +206,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.NextPerformance?.EstimatedDateNew), item.NextPerformance?.EstimatedDateNew));
 			subItems.Add(CreateRow(item.NextPerformance?.EstimatedNext.ToString(), item.NextPerformance?.EstimatedNext));
 			subItems.Add(CreateRow(item.NextPerformance?.EstimatedRemain.ToString(), item.NextPerformance?.EstimatedRemain));
-			subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.NextPerformance?.NextPerformanceDateNew), item.NextPerformance?.NextPerformanceDateNew));
+			subItems.Add(CreateRow(item.NextPerformance?.NextLimit.Days != null ? SmartCore.Auxiliary.Convert.GetDateFormat(item.NextPerformance?.NextPerformanceDateNew) : "", item.NextPerformance?.NextPerformanceDateNew));
 			subItems.Add(CreateRow(item.NextPerformance?.NextLimit.ToString(), item.NextPerformance?.NextLimit.ToString()));
 			subItems.Add(CreateRow(item.NextPerformance?.RemainLimit.ToString(), item.NextPerformance?.RemainLimit.ToString()));
 			subItems.Add(CreateRow(lastDate, lastComplianceDate));
