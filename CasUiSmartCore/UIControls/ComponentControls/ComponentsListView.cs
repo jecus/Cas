@@ -91,11 +91,16 @@ namespace CAS.UI.UIControls.ComponentControls
 			AddColumn("Inst. date", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Life limit/1st. Perf", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Rpt. int.", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Next", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Remain/Overdue", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Next(E)", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Next Estimated Data", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Remain(E)", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Next(L)", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Next Limit Data", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Remain(L)", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Last", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Last Data", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Expiry Date", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Expiry Remain", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Last", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Warranty", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Class", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Kit", (int)(radGridView1.Width * 0.2f));
@@ -158,9 +163,16 @@ namespace CAS.UI.UIControls.ComponentControls
 			AtaChapter ata;
 			MaintenanceControlProcess maintenanceType;
 			DateTime transferDate;
+			DateTime? lastPerformanceDate = null;
+			DateTime? nextEstimated = null;
+			DateTime? nextLimit = null;
 			Lifelength firstPerformance = Lifelength.Null, 
 					   lastPerformance = Lifelength.Null,
 					   expiryRemain = Lifelength.Null,
+					   nextEstimatedData = Lifelength.Null,
+					   remainEstimated = Lifelength.Null,
+					   nextLimitData = Lifelength.Null,
+					   remainLimit = Lifelength.Null,
 					   warranty, repeatInterval = Lifelength.Null;
 			string partNumber,
 				   description,
@@ -231,12 +243,12 @@ namespace CAS.UI.UIControls.ComponentControls
 				{
 					firstPerformance = dd.Threshold.FirstPerformanceSinceNew;
 				}
+
 				if (dd.LastPerformance != null)
 				{
-					lastPerformanceString =
-						SmartCore.Auxiliary.Convert.GetDateFormat(dd.LastPerformance.RecordDate) + " " +
-						dd.LastPerformance.OnLifelength;
+					lastPerformanceString = SmartCore.Auxiliary.Convert.GetDateFormat(dd.LastPerformance.RecordDate);
 					lastPerformance = dd.LastPerformance.OnLifelength;
+					lastPerformanceDate = dd.LastPerformance.RecordDate;
 				}
 				if (dd.Threshold.RepeatInterval != null && !dd.Threshold.RepeatInterval.IsNullOrZero())
 				{
@@ -247,6 +259,16 @@ namespace CAS.UI.UIControls.ComponentControls
 				approx = dd.NextPerformanceDate;
 				next = dd.NextPerformanceSource;
 				remains = dd.Remains;
+
+
+				nextEstimated = dd.NextPerformance?.PerformanceDate;
+				nextEstimatedData = dd.NextPerformance?.PerformanceSource;
+				remainEstimated = dd.NextPerformance?.Remains;
+
+				nextLimit = dd.NextPerformance?.NextPerformanceDateNew;
+				nextLimitData = dd.NextPerformance?.NextLimit;
+				remainLimit = dd.NextPerformance?.RemainLimit;
+
 				ata = dd.ParentComponent.Model != null ? dd.ParentComponent.Model.ATAChapter : dd.ParentComponent.ATAChapter;
 				partNumber = "    " + dd.PartNumber;
 				var desc = dd.ParentComponent.Model != null
@@ -302,13 +324,19 @@ namespace CAS.UI.UIControls.ComponentControls
 				? SmartCore.Auxiliary.Convert.GetDateFormat(transferDate) : "", transferDate));
 			subItems.Add(CreateRow(firstPerformance?.ToString(), firstPerformance));
 			subItems.Add(CreateRow(repeatInterval.ToString(), repeatInterval));
-			subItems.Add(CreateRow(approx == null ? "" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)approx) + " " + next, 
-				approx == null ? DateTimeExtend.GetCASMinDateTime() : (DateTime)approx));
-			subItems.Add(CreateRow(remains != null && !remains.IsNullOrZero() ? remains.ToString() : "",
-				remains ?? Lifelength.Null));
+
+
+			subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(nextEstimated), nextEstimated));
+			subItems.Add(CreateRow(nextEstimatedData?.ToString(), nextEstimatedData));
+			subItems.Add(CreateRow(remainEstimated?.ToString(), remainEstimated));
+			subItems.Add(CreateRow(nextLimitData?.Days != null ? SmartCore.Auxiliary.Convert.GetDateFormat(nextLimit) : "", nextLimit));
+			subItems.Add(CreateRow(nextLimitData?.ToString(), nextLimitData));
+			subItems.Add(CreateRow(remainLimit?.ToString(), remainLimit));
+			subItems.Add(CreateRow(lastPerformanceString, lastPerformanceDate));
+			subItems.Add(CreateRow(lastPerformance?.ToString(), lastPerformance));
+
 			subItems.Add(CreateRow(expiryDate, expiryDate));
 			subItems.Add(CreateRow(!expiryRemain.IsNullOrZero() ? $"{expiryRemain?.Days}d" : "", expiryRemain));
-			subItems.Add(CreateRow(lastPerformanceString, lastPerformance));
 			subItems.Add(CreateRow(warranty.ToString(), warranty));
 			subItems.Add(CreateRow(classString, classString));
 			subItems.Add(CreateRow(kitRequieredString, kitRequieredString));

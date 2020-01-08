@@ -1011,7 +1011,8 @@ namespace CAS.UI.UIControls.ComponentControls
 
 				foreach (ComponentDirective detailDirective in detail.ComponentDirectives)
 				{
-					GlobalObjects.PerformanceCalculator.GetNextPerformance(detailDirective);
+					//GlobalObjects.PerformanceCalculator.GetNextPerformance(detailDirective);
+					GlobalObjects.MTOPCalculator.CalculateDirectiveNew(detailDirective);
 					_preResultDirectiveArray.Add(detailDirective);   
 				}
 			}
