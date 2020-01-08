@@ -86,9 +86,8 @@ namespace SmartCore.Calculations.MTOP
 				np.NextLimit = new Lifelength(directive.LastPerformance.OnLifelength);
 
 				if (!threshold.RepeatInterval.IsNullOrZero())
-				{
 					np.NextLimit.Add(threshold.RepeatInterval);
-				}
+				
 				else return;
 			}
 
@@ -96,6 +95,7 @@ namespace SmartCore.Calculations.MTOP
 			np.RemainLimit = new Lifelength(np.NextLimit);
 			np.RemainLimit.Substract(current);
 			np.RemainLimit.Resemble(threshold.RepeatInterval);
+			np.NextLimit.Resemble(threshold.RepeatInterval);
 
 
 			np.EstimatedRemain = new Lifelength(CalculateWithUtilization(np.RemainLimit, au));
