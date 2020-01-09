@@ -84,13 +84,13 @@ namespace CAS.UI.UIControls.Auxiliary
         {
             message = "";
 
-            if (dateTimePicker1.Value > DateTime.Now)
+            if (dateTimePicker1.Value.Date > DateTime.Now.Date)
             {
                 if (message != "") message += "\n ";
                 message += "Performance date must be less than current date.";
                 return false;
             }
-            if (dateTimePicker1.Value < _currentComponent.ManufactureDate)
+            if (dateTimePicker1.Value.Date < _currentComponent.ManufactureDate.Date)
             {
                 if (message != "") message += "\n ";
                 message += "Performance date must be grather than manufacture date.";
@@ -125,67 +125,7 @@ namespace CAS.UI.UIControls.Auxiliary
                     return false;
                 }
             }
-            //else
-            //{
-            //    ActualStateRecord acr = _currentDetail.ActualStateRecords[dateTimePicker1.Value];
-            //    if (acr != null)
-            //    {
-            //        if (acr.ItemId != _currentActualStateRecord.ItemId)
-            //        {
-            //            //Актуальное состояние на заданную дату есть
-            //            message = string.Format("On a given date {0} have a saved record",
-            //                                     SmartCore.Auxiliary.Convert.GetDateFormat(dateTimePicker1.Value));
-            //            return false;   
-            //        }
-            //        ActualStateRecord lastKnownRecord = _currentDetail.ActualStateRecords.GetLastKnownRecord(dateTimePicker1.Value);
-            //        if (lastKnownRecord != null && perfLifeLength.IsLessByAnyParameter(acr.OnLifelength))
-            //        {
-            //            message = "Performance source must be grather than " + perfLifeLength;
-            //            return false;
-            //        }
-            //        ActualStateRecord firstKnownRecord = _currentDetail.ActualStateRecords.GetFirstKnownRecord(dateTimePicker1.Value);
-            //        if (firstKnownRecord != null && perfLifeLength.IsGreaterByAnyParameter(acr.OnLifelength))
-            //        {
-            //            message = "Performance source must be less than " + perfLifeLength;
-            //            return false;
-            //        }
-            //    }
-            //    acr = _currentDetail.ActualStateRecords.GetLastKnownRecord(dateTimePicker1.Value);
-            //    if (acr != null && perfLifeLength.IsLessByAnyParameter(acr.OnLifelength))
-            //    {
-            //        if (acr.ItemId == _currentActualStateRecord.ItemId)
-            //        {
-            //            ActualStateRecord lastKnownRecord = _currentDetail.ActualStateRecords.GetLastKnownRecord(acr.RecordDate);
-            //            if (lastKnownRecord != null && perfLifeLength.IsLessByAnyParameter(acr.OnLifelength))
-            //            {
-            //                message = "Performance source must be grather than " + perfLifeLength;
-            //                return false;
-            //            }
-            //            ActualStateRecord firstKnownRecord = _currentDetail.ActualStateRecords.GetFirstKnownRecord(acr.RecordDate);
-            //            if (firstKnownRecord != null && perfLifeLength.IsGreaterByAnyParameter(acr.OnLifelength))
-            //            {
-            //                message = "Performance source must be less than " + perfLifeLength;
-            //                return false;
-            //            }
-            //        }
-            //        else
-            //        {
-            //            if (perfLifeLength.IsLessByAnyParameter(acr.OnLifelength))
-            //            {
-            //                message = "Performance source must be grather than " + perfLifeLength;
-            //                return false;
-            //            }
-            //            ActualStateRecord firstKnownRecord = _currentDetail.ActualStateRecords.GetFirstKnownRecord(acr.RecordDate);
-            //            if (firstKnownRecord != null && perfLifeLength.IsGreaterByAnyParameter(acr.OnLifelength))
-            //            {
-            //                message = "Performance source must be less than " + perfLifeLength;
-            //                return false;
-            //            }
-            //        }
-            //        message = "Performance source must be grather than " + perfLifeLength;
-            //        return false;
-            //    }
-            //}
+            
 
             if(_prevPerfLifelength != null && perfLifeLength.IsLessByAnyParameter(_prevPerfLifelength))
             {
@@ -391,7 +331,7 @@ namespace CAS.UI.UIControls.Auxiliary
             else if (dateTimePicker1.Value > DateTime.Now)
                 dateTimePicker1.Value = DateTime.Now;
 
-            Lifelength lifelength = lifelengthViewer_LastCompliance.Lifelength;
+            var lifelength = GlobalObjects.CasEnvironment.Calculator.GetFlightLifelengthOnStartOfDay(_currentComponent, dateTimePicker1.Value);
             lifelengthViewer_LastCompliance.Lifelength = new Lifelength
             {
                 TotalMinutes = lifelength.TotalMinutes,
