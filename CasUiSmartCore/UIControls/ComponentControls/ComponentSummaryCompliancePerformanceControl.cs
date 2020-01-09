@@ -89,7 +89,7 @@ namespace CAS.UI.UIControls.ComponentControls
             labelHiddenRemarksValue.Text = _currentComponentDirective.HiddenRemarks;
             labelWarrantyRemains.Text = _currentComponentDirective.Threshold.Warranty.ToString();
 
-            //GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentComponentDirective);
+            GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentComponentDirective);
 
             Lifelength temp;
             ComponentDirectiveThreshold threshold;
@@ -175,11 +175,10 @@ namespace CAS.UI.UIControls.ComponentControls
                 if (threshold.RepeatInterval != null && !threshold.RepeatInterval.IsNullOrZero())
                 {
 	                //наработка компонента на следующее исполнение
-                    //var nextComponentTsnCsn = new Lifelength(_currentComponentDirective.LastPerformance.OnLifelength);
-                    //nextComponentTsnCsn.Add(threshold.RepeatInterval);
-                    //nextComponentTsnCsn.Resemble(threshold.RepeatInterval);
-                    //labelCompntTCSNNext.Text = nextComponentTsnCsn.ToString();
-                    labelCompntTCSNNext.Text = _currentComponentDirective.NextPerformance.PerformanceSource.ToString();
+                    var nextComponentTsnCsn = new Lifelength(_currentComponentDirective.LastPerformance.OnLifelength);
+                    nextComponentTsnCsn.Add(threshold.RepeatInterval);
+                    nextComponentTsnCsn.Resemble(threshold.RepeatInterval);
+                    labelCompntTCSNNext.Text = nextComponentTsnCsn.ToString();
 					if(_currentComponentDirective.NextPerformanceDate.HasValue)
 						labelDateNext.Text = SmartCore.Auxiliary.Convert.GetDateFormat(_currentComponentDirective.NextPerformanceDate.Value);
 
@@ -220,8 +219,7 @@ namespace CAS.UI.UIControls.ComponentControls
 	                if (_currentComponentDirective.NextPerformanceDate.HasValue)
 	                    labelDateNext.Text = SmartCore.Auxiliary.Convert.GetDateFormat(_currentComponentDirective.NextPerformanceDate.Value);
 					//наработка компонента на следующее исполнение
-					//labelCompntTCSNNext.Text = threshold.FirstPerformanceSinceNew.ToString();
-					labelCompntTCSNNext.Text = _currentComponentDirective.NextPerformance.PerformanceSource.ToString();
+					labelCompntTCSNNext.Text = threshold.FirstPerformanceSinceNew.ToString();
 
                     //наработка самолета на следующее исполнение
                     //наработка = наработка самолета на сегодня + остаток до первого исполнения

@@ -293,11 +293,7 @@ namespace CAS.UI.UIControls.ComponentControls
 
             AnimatedThreadWorker.ReportProgress(40, "calculation of component");
 
-            var conditionState = GlobalObjects.PerformanceCalculator.GetConditionState(_currentComponent);
-
-            foreach (var directive in _currentComponent.ComponentDirectives)
-	            GlobalObjects.MTOPCalculator.CalculateDirectiveNew(directive);
-
+            ConditionState conditionState = GlobalObjects.PerformanceCalculator.GetConditionState(_currentComponent);
             Invoke(new Action<ConditionState>(cs => statusControl.ConditionState = cs), conditionState);
 
             if (AnimatedThreadWorker.CancellationPending)
