@@ -251,12 +251,12 @@ namespace CAS.UI.UIControls.Auxiliary
                 message += "Performance source must be grather than " + _prevPerfLifelength;
                 return false;   
             }
-            if (_nextPerfLifelength != null && perfLifeLength.IsGreaterByAnyParameter(_nextPerfLifelength))
-            {
-                if (message != "") message += "\n ";
-                message += "Performance source must be less than " + _nextPerfLifelength;
-                return false;
-            }
+            //if (_nextPerfLifelength != null && perfLifeLength.IsGreaterByAnyParameter(_nextPerfLifelength))
+            //{
+            //    if (message != "") message += "\n ";
+            //    message += "Performance source must be less than " + _nextPerfLifelength;
+            //    return false;
+            //}
 
             return true;
         }
