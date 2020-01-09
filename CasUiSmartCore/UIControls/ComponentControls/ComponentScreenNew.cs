@@ -206,7 +206,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		                    e.Cancel = true;
 		                    return;
 	                    }
-						_currentComponent = GlobalObjects.ComponentCore.GetBaseComponentById(_currentComponent.ItemId);
+						_currentComponent = GlobalObjects.ComponentCore.GetFullBaseComponent(_currentComponent.ItemId);
 
 	                    var types = new[] {SmartCoreType.BaseComponent.ItemId, SmartCoreType.ComponentDirective.ItemId};
 	                    if (AnimatedThreadWorker.CancellationPending)
