@@ -105,7 +105,7 @@ namespace SmartCore.Entities.General.Atlbs
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return string.Format("TP1: {0}, TP2: {1}",TirePressure1,TirePressure2);
+			return $"TP1: {TirePressure1}, TP2: {TirePressure2}";
 		}
 		#endregion   
 

@@ -208,12 +208,14 @@ namespace CAS.UI.UIControls.WorkPakage
                         }
                         else if (!string.IsNullOrEmpty(checkMpd.TaskCardNumber) && checkMpd.TaskCardNumberFile == null)
                         {
-                            checkMpdTaskCardCellValue = string.Format("Not set Task Card file. (Task Card No {0}.)", checkMpd.TaskCardNumber);
+                            checkMpdTaskCardCellValue =
+	                            $"Not set Task Card file. (Task Card No {checkMpd.TaskCardNumber}.)";
                             checkMpdTaskCardCellBackColor = Color.Red;
                         }
                         else if (string.IsNullOrEmpty(checkMpd.TaskCardNumber) && checkMpd.TaskCardNumberFile != null)
                         {
-                            checkMpdTaskCardCellValue = string.Format("Not set Task Card name. (File name {0}.)", checkMpd.TaskCardNumberFile.FileName);
+                            checkMpdTaskCardCellValue =
+	                            $"Not set Task Card name. (File name {checkMpd.TaskCardNumberFile.FileName}.)";
                             checkMpdTaskCardCellBackColor = Color.Red;
                         }
                         else checkMpdTaskCardCellValue = checkMpd.TaskCardNumber;
@@ -276,12 +278,12 @@ namespace CAS.UI.UIControls.WorkPakage
                     }
                     else if (!string.IsNullOrEmpty(item.TaskCardNumber) && item.TaskCardNumberFile == null)
                     {
-                        taskCardCellValue = string.Format("Not set Task Card file. (Task Card No {0}.)", item.TaskCardNumber);
+                        taskCardCellValue = $"Not set Task Card file. (Task Card No {item.TaskCardNumber}.)";
                         taskCardCellBackColor = Color.Red;
                     }
                     else if (string.IsNullOrEmpty(item.TaskCardNumber) && item.TaskCardNumberFile != null)
                     {
-                        taskCardCellValue = string.Format("Not set Task Card name. (File name {0}.)", item.TaskCardNumberFile.FileName);
+                        taskCardCellValue = $"Not set Task Card name. (File name {item.TaskCardNumberFile.FileName}.)";
                         taskCardCellBackColor = Color.Red;
                     }
                     else taskCardCellValue = item.TaskCardNumber;
@@ -306,7 +308,8 @@ namespace CAS.UI.UIControls.WorkPakage
             }
             catch (Exception ex)
             {
-                string info = string.Format("Error while load WP Maintenance Checks. WPid: {0}; WPTitle: {1}", _workPackage.ItemId, _workPackage.Title);
+                string info =
+	                $"Error while load WP Maintenance Checks. WPid: {_workPackage.ItemId}; WPTitle: {_workPackage.Title}";
                 Program.Provider.Logger.Log(info, ex);
             }
 
@@ -329,12 +332,14 @@ namespace CAS.UI.UIControls.WorkPakage
                     }
                     else if (!string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile == null)
                     {
-                        taskCardCellValue = string.Format("Not set Engineering Order File. (Engineering Order No {0}.)", item.EngineeringOrders);
+                        taskCardCellValue =
+	                        $"Not set Engineering Order File. (Engineering Order No {item.EngineeringOrders}.)";
                         taskCardCellBackColor = Color.Red;
                     }
                     else if (string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile != null)
                     {
-                        taskCardCellValue = string.Format("Not set Engineering Order name. (File name {0}.)", item.EngineeringOrderFile.FileName);
+                        taskCardCellValue =
+	                        $"Not set Engineering Order name. (File name {item.EngineeringOrderFile.FileName}.)";
                         taskCardCellBackColor = Color.Red;
                     }
                     else taskCardCellValue = item.EngineeringOrders;
@@ -362,7 +367,8 @@ namespace CAS.UI.UIControls.WorkPakage
             }
             catch (Exception ex)
             {
-                string info = string.Format("Error while load WP AD Directives. WPid: {0}; WPTitle: {1}", _workPackage.ItemId, _workPackage.Title);
+                string info =
+	                $"Error while load WP AD Directives. WPid: {_workPackage.ItemId}; WPTitle: {_workPackage.Title}";
                 Program.Provider.Logger.Log(info, ex);
             }
 
@@ -384,12 +390,14 @@ namespace CAS.UI.UIControls.WorkPakage
 			        }
 			        else if (!string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile == null)
 			        {
-				        taskCardCellValue = string.Format("Not set Engineering Order File. (Engineering Order No {0}.)", item.EngineeringOrders);
+				        taskCardCellValue =
+					        $"Not set Engineering Order File. (Engineering Order No {item.EngineeringOrders}.)";
 				        taskCardCellBackColor = Color.Red;
 			        }
 			        else if (string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile != null)
 			        {
-				        taskCardCellValue = string.Format("Not set Engineering Order name. (File name {0}.)", item.EngineeringOrderFile.FileName);
+				        taskCardCellValue =
+					        $"Not set Engineering Order name. (File name {item.EngineeringOrderFile.FileName}.)";
 				        taskCardCellBackColor = Color.Red;
 			        }
 			        else taskCardCellValue = item.EngineeringOrders;
@@ -439,12 +447,14 @@ namespace CAS.UI.UIControls.WorkPakage
 			        }
 			        else if (!string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile == null)
 			        {
-				        taskCardCellValue = string.Format("Not set Engineering Order File. (Engineering Order No {0}.)", item.EngineeringOrders);
+				        taskCardCellValue =
+					        $"Not set Engineering Order File. (Engineering Order No {item.EngineeringOrders}.)";
 				        taskCardCellBackColor = Color.Red;
 			        }
 			        else if (string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile != null)
 			        {
-				        taskCardCellValue = string.Format("Not set Engineering Order name. (File name {0}.)", item.EngineeringOrderFile.FileName);
+				        taskCardCellValue =
+					        $"Not set Engineering Order name. (File name {item.EngineeringOrderFile.FileName}.)";
 				        taskCardCellBackColor = Color.Red;
 			        }
 			        else taskCardCellValue = item.EngineeringOrders;
@@ -494,12 +504,14 @@ namespace CAS.UI.UIControls.WorkPakage
                     }
                     else if (!string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile == null)
                     {
-                        taskCardCellValue = string.Format("Not set Engineering Order File. (Engineering Order No {0}.)", item.EngineeringOrders);
+                        taskCardCellValue =
+	                        $"Not set Engineering Order File. (Engineering Order No {item.EngineeringOrders}.)";
                         taskCardCellBackColor = Color.Red;
                     }
                     else if (string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile != null)
                     {
-                        taskCardCellValue = string.Format("Not set Engineering Order name. (File name {0}.)", item.EngineeringOrderFile.FileName);
+                        taskCardCellValue =
+	                        $"Not set Engineering Order name. (File name {item.EngineeringOrderFile.FileName}.)";
                         taskCardCellBackColor = Color.Red;
                     }
                     else taskCardCellValue = item.EngineeringOrders;
@@ -527,7 +539,8 @@ namespace CAS.UI.UIControls.WorkPakage
             }
             catch (Exception ex)
             {
-                string info = string.Format("Error while load WP Damages. WPid: {0}; WPTitle: {1}", _workPackage.ItemId, _workPackage.Title);
+                string info =
+	                $"Error while load WP Damages. WPid: {_workPackage.ItemId}; WPTitle: {_workPackage.Title}";
                 Program.Provider.Logger.Log(info, ex);
             }
 
@@ -550,12 +563,14 @@ namespace CAS.UI.UIControls.WorkPakage
                     }
                     else if (!string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile == null)
                     {
-                        taskCardCellValue = string.Format("Not set Engineering Order File. (Engineering Order No {0}.)", item.EngineeringOrders);
+                        taskCardCellValue =
+	                        $"Not set Engineering Order File. (Engineering Order No {item.EngineeringOrders}.)";
                         taskCardCellBackColor = Color.Red;
                     }
                     else if (string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile != null)
                     {
-                        taskCardCellValue = string.Format("Not set Engineering Order name. (File name {0}.)", item.EngineeringOrderFile.FileName);
+                        taskCardCellValue =
+	                        $"Not set Engineering Order name. (File name {item.EngineeringOrderFile.FileName}.)";
                         taskCardCellBackColor = Color.Red;
                     }
                     else taskCardCellValue = item.EngineeringOrders;
@@ -583,7 +598,8 @@ namespace CAS.UI.UIControls.WorkPakage
             }
             catch (Exception ex)
             {
-                string info = string.Format("Error while load WP Out of Phases. WPid: {0}; WPTitle: {1}", _workPackage.ItemId, _workPackage.Title);
+                string info =
+	                $"Error while load WP Out of Phases. WPid: {_workPackage.ItemId}; WPTitle: {_workPackage.Title}";
                 Program.Provider.Logger.Log(info, ex);
             }
 
@@ -605,12 +621,14 @@ namespace CAS.UI.UIControls.WorkPakage
                     }
                     else if (!string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile == null)
                     {
-                        taskCardCellValue = string.Format("Not set Engineering Order File. (Engineering Order No {0}.)", item.EngineeringOrders);
+                        taskCardCellValue =
+	                        $"Not set Engineering Order File. (Engineering Order No {item.EngineeringOrders}.)";
                         taskCardCellBackColor = Color.Red;
                     }
                     else if (string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile != null)
                     {
-                        taskCardCellValue = string.Format("Not set Engineering Order name. (File name {0}.)", item.EngineeringOrderFile.FileName);
+                        taskCardCellValue =
+	                        $"Not set Engineering Order name. (File name {item.EngineeringOrderFile.FileName}.)";
                         taskCardCellBackColor = Color.Red;
                     }
                     else taskCardCellValue = item.EngineeringOrders;
@@ -638,7 +656,8 @@ namespace CAS.UI.UIControls.WorkPakage
             }
             catch (Exception ex)
             {
-                string info = string.Format("Error while load WP Deferreds. WPid: {0}; WPTitle: {1}", _workPackage.ItemId, _workPackage.Title);
+                string info =
+	                $"Error while load WP Deferreds. WPid: {_workPackage.ItemId}; WPTitle: {_workPackage.Title}";
                 Program.Provider.Logger.Log(info, ex);
             }
 
@@ -748,7 +767,8 @@ namespace CAS.UI.UIControls.WorkPakage
             }
             catch (Exception ex)
             {
-                string info = string.Format("Error while load WP Detail Directives. WPid: {0}; WPTitle: {1}", _workPackage.ItemId, _workPackage.Title);
+                string info =
+	                $"Error while load WP Detail Directives. WPid: {_workPackage.ItemId}; WPTitle: {_workPackage.Title}";
                 Program.Provider.Logger.Log(info, ex);
             }
 
@@ -778,7 +798,8 @@ namespace CAS.UI.UIControls.WorkPakage
             }
             catch (Exception ex)
             {
-                string info = string.Format("Error while load WP Non-Routines. WPid: {0}; WPTitle: {1}", _workPackage.ItemId, _workPackage.Title);
+                string info =
+	                $"Error while load WP Non-Routines. WPid: {_workPackage.ItemId}; WPTitle: {_workPackage.Title}";
                 Program.Provider.Logger.Log(info, ex);
             }
             #endregion
@@ -826,7 +847,8 @@ namespace CAS.UI.UIControls.WorkPakage
             if (_outputDocument != null && _outputDocument.PageCount >= 1)
             {
 	            var timeofDay = DateTime.Now.TimeOfDay;
-				string fileNameString = string.Format("{0}{1}{2}{3}.pdf", Path.GetTempPath() + "tempWpPreviewFile", timeofDay.Hours, timeofDay.Minutes, timeofDay.Seconds);
+				string fileNameString =
+					$"{Path.GetTempPath() + "tempWpPreviewFile"}{timeofDay.Hours}{timeofDay.Minutes}{timeofDay.Seconds}.pdf";
                 _outputDocument.Save(fileNameString);
 				_outputDocument.Close();
 				_outputDocument = null;
@@ -2148,7 +2170,7 @@ if (!_isWorkOrder)
             }
             catch (PdfReaderException ex)
             {
-                MessageBox.Show(string.Format("Error while opening PDF Document : {0}", file.FileName) +
+                MessageBox.Show($"Error while opening PDF Document : {file.FileName}" +
 								"\nComponents:" +
                                 "\n" + ex.Message,
                     (string) new GlobalTermsProvider()["SystemName"],

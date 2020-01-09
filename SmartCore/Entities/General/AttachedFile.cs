@@ -168,7 +168,7 @@ namespace SmartCore.Entities.General
         /// <returns></returns>
         public override string ToString()
         {
-            return FileSize != null ? string.Format("Size: {0} bytes", FileSize) : "File is null";
+            return FileSize != null ? $"Size: {FileSize} bytes" : "File is null";
         }
         #endregion
     }

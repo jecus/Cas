@@ -1680,7 +1680,7 @@ namespace SmartCore.Entities.General.Accessory
 		{
 			get
 			{
-				return string.Format("Compnt.:{0} {1}", this, Description);
+				return $"Compnt.:{this} {Description}";
 			}
 		}
 		#endregion

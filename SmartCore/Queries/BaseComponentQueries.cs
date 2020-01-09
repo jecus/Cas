@@ -91,17 +91,16 @@ namespace SmartCore.Queries
             s += ")";
 
             return
-                new CommonFilter<string>(string.Format(@"((select top 1 destinationobjectId from dbo.TransferRecords where 
+                new CommonFilter<string>($@"((select top 1 destinationobjectId from dbo.TransferRecords where 
                                  dbo.Components.ItemId=Parentid and isdeleted=0 
 								 and parenttype = 5 and destinationobjecttype = 6 
-							     order by transferDate desc ) in {0}
+							     order by transferDate desc ) in {s}
 
-						and  {1} in (select top 1 destinationobjecttype 
+						and  {SmartCoreType.BaseComponent.ItemId} in (select top 1 destinationobjecttype 
                                         from dbo.TransferRecords 
                                         where dbo.Components.ItemId=Parentid and isdeleted=0 and 
-                                        parenttype = {2}
-                                        order by transferDate desc ))",
-                    s, SmartCoreType.BaseComponent.ItemId, SmartCoreType.Component.ItemId));
+                                        parenttype = {SmartCoreType.Component.ItemId}
+                                        order by transferDate desc ))");
         }
 
         #endregion
@@ -186,13 +185,12 @@ namespace SmartCore.Queries
 		/// <returns></returns>
 		public static ICommonFilter GetWhereStatement(int aircraftId)
         {
-            return new CommonFilter<string>(String.Format(@"( Select top 1 DestinationObjectId 
+            return new CommonFilter<string>($@"( Select top 1 DestinationObjectId 
                                         from dbo.TransferRecords 
-                                        Where ParentType = {0} and 
+                                        Where ParentType = {SmartCoreType.BaseComponent.ItemId} and 
                                               ParentId = [dbo].Components.ItemId and 
                                               IsDeleted = 0
-					                    order by dbo.TransferRecords.TransferDate Desc) = {1}",
-                                        SmartCoreType.BaseComponent.ItemId, aircraftId));
+					                    order by dbo.TransferRecords.TransferDate Desc) = {aircraftId}");
         }
         #endregion
 
@@ -328,14 +326,12 @@ namespace SmartCore.Queries
             if (aircraft == null)
                 throw new ArgumentNullException("aircraft", "must be not null");
             return BaseQueries.GetSelectQueryColumnOnly<BaseComponent>(BaseEntityObject.ItemIdProperty) +
-                   string.Format(
-					   @" and ( Select top 1 DestinationObjectId 
+                   $@" and ( Select top 1 DestinationObjectId 
                                            from dbo.TransferRecords 
-                                           Where ParentType = {0}
-                                           and DestinationObjectType = {1} 
+                                           Where ParentType = {SmartCoreType.BaseComponent.ItemId}
+                                           and DestinationObjectType = {aircraft.SmartCoreObjectType.ItemId} 
 				                           and ParentId = dbo.Components.ItemId 
-					                       and IsDeleted = 0) = {2}",
-                   SmartCoreType.BaseComponent.ItemId, aircraft.SmartCoreObjectType.ItemId, aircraft.ItemId);
+					                       and IsDeleted = 0) = {aircraft.ItemId}";
         }
 
         #endregion

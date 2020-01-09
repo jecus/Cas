@@ -300,7 +300,7 @@ namespace SmartCore.Management
                         {
                             //CasDataTable dt = new CasDataTable(query.ElementType, query.Branch, query.Branch);
 							var dt = new DataTable();
-                            query.QueryString = String.Format("USE [{0}];\r\n{1}", Database.Name, query.QueryString);
+                            query.QueryString = $"USE [{Database.Name}];\r\n{query.QueryString}";
                          //   SqlCommand com = new SqlCommand(query.QueryString, ServerConnection.SqlConnectionObject);
 	                        //com.CommandTimeout = 60;
                          //   SqlDataAdapter sda = new SqlDataAdapter(com);
@@ -376,7 +376,7 @@ namespace SmartCore.Management
                 }
 
                 // формируем команду и выполняем ее
-                query = String.Format("USE [{0}];\r\n{1}", database.Name, query);
+                query = $"USE [{database.Name}];\r\n{query}";
                 SqlCommand com = new SqlCommand(query, _serverConnection.SqlConnectionObject);
                 com.Parameters.AddRange(parameters);
                 SqlDataAdapter sda = new SqlDataAdapter(com);
@@ -385,8 +385,7 @@ namespace SmartCore.Management
 
                 // Возвращаем результат
                 if (Debug)
-                    Logger.Write(String.Format("Results: {0} \r\n\r\n",
-                                               ds.Tables.Count > 0 ? ds.Tables[0].Rows.Count + " rows" : ""));
+                    Logger.Write($"Results: {(ds.Tables.Count > 0 ? ds.Tables[0].Rows.Count + " rows" : "")} \r\n\r\n");
                 return ds;
             }
         }
@@ -812,7 +811,8 @@ namespace SmartCore.Management
         /// <returns></returns>
         private string GetTrustedConnectionString(string serverName, string databaseName)
         {
-            return string.Format("Server={0};{1}Trusted_Connection=True;", serverName, databaseName == "" ? "" : "Database=" + databaseName + ";");
+            return
+	            $"Server={serverName};{(databaseName == "" ? "" : "Database=" + databaseName + ";")}Trusted_Connection=True;";
             //return string.Format("Data Source={0};{1}Integrated Security=SSPI;", serverName, databaseName == "" ? "" : "Initial Catalog=" + databaseName + ";");
         }
         #endregion

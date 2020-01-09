@@ -196,7 +196,7 @@ namespace CAS.UI.UIControls.NonRoutineJobsControls
 			catch (Exception ex)
 			{
 				string errorDescriptionSctring =
-					string.Format("Error while Open Attached File for {0}, id {1}. \nFileId {2}", nrj, nrj.ItemId, nrj.AttachedFile.ItemId);
+					$"Error while Open Attached File for {nrj}, id {nrj.ItemId}. \nFileId {nrj.AttachedFile.ItemId}";
 				Program.Provider.Logger.Log(errorDescriptionSctring, ex);
 			}
 		}

@@ -86,30 +86,15 @@ namespace SmartCore.Auxiliary
                     if(dateMin.DayOfYear == new DateTime(dateMin.Year, dateMin.Month, 1).DayOfYear &&
                        dateMax.DayOfYear == new DateTime(dateMin.Year, dateMin.Month, 1).AddMonths(1).AddDays(-1).DayOfYear)
                     {
-                        return string.Format("{0}, {1}",
-                                             mount[dateMin.Month - 1],
-                                             dateMin.Year);    
+                        return $"{mount[dateMin.Month - 1]}, {dateMin.Year}";    
                     }
-                    return string.Format("{0} - {1} {2}, {3}",
-                                         dateMin.Day,
-                                         dateMax.Day,
-                                         mount[dateMin.Month - 1],
-                                         dateMin.Year);
+                    return $"{dateMin.Day} - {dateMax.Day} {mount[dateMin.Month - 1]}, {dateMin.Year}";
                 }
-                return string.Format("{0} {1} - {2} {3}, {4}",
-                                      dateMin.Day,
-                                      mount[dateMin.Month - 1],
-                                      dateMax.Day,
-                                      mount[dateMax.Month - 1],
-                                      dateMax.Year);
+                return
+	                $"{dateMin.Day} {mount[dateMin.Month - 1]} - {dateMax.Day} {mount[dateMax.Month - 1]}, {dateMax.Year}";
             }
-            return string.Format("{0} {1}  {2} - {3} {4}  {5}",
-                                 dateMin.Day,
-                                 mount[dateMin.Month - 1],
-                                 dateMin.Year,
-                                 dateMax.Day,
-                                 mount[dateMax.Month - 1],
-                                 dateMax.Year);
+            return
+	            $"{dateMin.Day} {mount[dateMin.Month - 1]}  {dateMin.Year} - {dateMax.Day} {mount[dateMax.Month - 1]}  {dateMax.Year}";
         }
 
         #endregion

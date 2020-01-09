@@ -36,7 +36,7 @@ namespace SmartCore.Queries
         /// </summary>
         public static String GetSelectQuery(String statement)
         {
-            return GetSelectQuery() + string.Format(@"where IsDeleted = 0 and {0}", statement);
+            return GetSelectQuery() + $@"where IsDeleted = 0 and {statement}";
         }
         #endregion
 

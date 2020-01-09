@@ -188,7 +188,8 @@ namespace CAS.UI.UIControls.Auxiliary
             {
 
                 ImageSourceConverter converter = new ImageSourceConverter();
-                string path = string.Format(@"{0}\{1}", (System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)), dci.ImagePath);
+                string path =
+	                $@"{(System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location))}\{dci.ImagePath}";
                 ImageSource imageSource = (ImageSource)converter.ConvertFromString(path);
 
                 this.Width = imageSource.Width;

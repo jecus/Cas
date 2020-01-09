@@ -137,7 +137,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public override string ToString()
 		public override string ToString()
 		{
-			return string.Format("Check:id {0} desc:{1} ",CheckId, Task != null ? Task.ToString() : "");
+			return $"Check:id {CheckId} desc:{(Task != null ? Task.ToString() : "")} ";
 		}
 		#endregion
 

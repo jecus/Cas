@@ -310,7 +310,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
                     listViewItem.ForeColor = Color.Gray;
                     if (listViewItem.ToolTipText.Trim() != "")
                         listViewItem.ToolTipText += "\n";
-                    listViewItem.ToolTipText += string.Format("This {0} is deleted", nextPerformance.Parent.SmartCoreObjectType);
+                    listViewItem.ToolTipText += $"This {nextPerformance.Parent.SmartCoreObjectType} is deleted";
                 }
             }
             else if (item is AbstractPerformanceRecord)
@@ -324,7 +324,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
                     listViewItem.ForeColor = Color.Gray;
                     if (listViewItem.ToolTipText.Trim() != "")
                         listViewItem.ToolTipText += "\n";
-                    listViewItem.ToolTipText += string.Format("This {0} is deleted", apr.Parent.SmartCoreObjectType);
+                    listViewItem.ToolTipText += $"This {apr.Parent.SmartCoreObjectType} is deleted";
                 }
             }
             else
@@ -352,7 +352,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
                     listViewItem.ForeColor = Color.Gray;
                     if (listViewItem.ToolTipText.Trim() != "")
                         listViewItem.ToolTipText += "\n";
-                    listViewItem.ToolTipText += string.Format("This {0} is deleted", item.SmartCoreObjectType);
+                    listViewItem.ToolTipText += $"This {item.SmartCoreObjectType} is deleted";
                 }
             }
         }
@@ -663,7 +663,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = job.ManHours.ToString(), Tag = job.ManHours });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = job.Cost.ToString(), Tag = job.Cost });
             }
-            else throw new ArgumentOutOfRangeException(String.Format("1135: Takes an argument has no known type {0}", item.GetType()));
+            else throw new ArgumentOutOfRangeException($"1135: Takes an argument has no known type {item.GetType()}");
 
             return subItems.ToArray();
         }

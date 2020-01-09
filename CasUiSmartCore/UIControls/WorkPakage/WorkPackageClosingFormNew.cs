@@ -275,10 +275,7 @@ namespace CAS.UI.UIControls.WorkPakage
                     if (tr == null)
                     {
                         message =
-                        string.Format("Performance for:" +
-                                      "\n{0} " +
-                                      "\nin not transfer record",
-                                      row.ClosingItem);
+	                        "Performance for:" + $"\n{row.ClosingItem} " + "\nin not transfer record";
                         message += "\nAbort operation";
                         MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
                                         MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1018,12 +1015,14 @@ namespace CAS.UI.UIControls.WorkPakage
                 }
                 else if (!string.IsNullOrEmpty(directive.EngineeringOrders) && directive.EngineeringOrderFile == null)
                 {
-                    taskCardCellValue = string.Format("Not set Engineering Order File. (Engineering Order No {0}.)", directive.EngineeringOrders);
+                    taskCardCellValue =
+	                    $"Not set Engineering Order File. (Engineering Order No {directive.EngineeringOrders}.)";
                     taskCardCellBackColor = Color.Red;
                 }
                 else if (string.IsNullOrEmpty(directive.EngineeringOrders) && directive.EngineeringOrderFile != null)
                 {
-                    taskCardCellValue = string.Format("Not set Engineering Order name. (File name {0}.)", directive.EngineeringOrderFile.FileName);
+                    taskCardCellValue =
+	                    $"Not set Engineering Order name. (File name {directive.EngineeringOrderFile.FileName}.)";
                     taskCardCellBackColor = Color.Red;
                 }
                 else taskCardCellValue = directive.EngineeringOrders;
@@ -1076,12 +1075,13 @@ namespace CAS.UI.UIControls.WorkPakage
                 }
                 else if (!string.IsNullOrEmpty(checkMpd.TaskCardNumber) && checkMpd.TaskCardNumberFile == null)
                 {
-                    checkMpdTaskCardCellValue = string.Format("Not set Task Card file. (Task Card No {0}.)", checkMpd.TaskCardNumber);
+                    checkMpdTaskCardCellValue = $"Not set Task Card file. (Task Card No {checkMpd.TaskCardNumber}.)";
                     checkMpdTaskCardCellBackColor = Color.Red;
                 }
                 else if (string.IsNullOrEmpty(checkMpd.TaskCardNumber) && checkMpd.TaskCardNumberFile != null)
                 {
-                    checkMpdTaskCardCellValue = string.Format("Not set Task Card name. (File name {0}.)", checkMpd.TaskCardNumberFile.FileName);
+                    checkMpdTaskCardCellValue =
+	                    $"Not set Task Card name. (File name {checkMpd.TaskCardNumberFile.FileName}.)";
                     checkMpdTaskCardCellBackColor = Color.Red;
                 }
                 else checkMpdTaskCardCellValue = checkMpd.TaskCardNumber;

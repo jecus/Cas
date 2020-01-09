@@ -303,9 +303,8 @@ namespace CASReports.Builders
                 }
                 else
                 {
-                    forecastDate = string.Format("{0}. {1}",
-                        _forecastData.CheckName,
-                        SmartCore.Auxiliary.Convert.GetDateFormat(Convert.ToDateTime(_forecastData.NextPerformance.PerformanceDate)));
+                    forecastDate =
+	                    $"{_forecastData.CheckName}. {SmartCore.Auxiliary.Convert.GetDateFormat(Convert.ToDateTime(_forecastData.NextPerformance.PerformanceDate))}";
                 }
             }
 

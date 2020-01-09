@@ -97,21 +97,18 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
             //поиск минимального значения даты-времени среди значений
             //даты установки или даты начала отсчета наработки
             DateTime checkedDate = dateTimePickerInstallation.Value;
-            message = string.Format(@"Installation Date:{0}",dateTimePickerInstallation.Value);
+            message = $@"Installation Date:{dateTimePickerInstallation.Value}";
             if (dateTimePickerStart.Value < checkedDate)
             {
                 checkedDate = dateTimePickerStart.Value;
-                message = string.Format(@"the date of the origin of use:{0}", dateTimePickerStart.Value);
+                message = $@"the date of the origin of use:{dateTimePickerStart.Value}";
             }
             #endregion
 
             if (dateTimePickerManufactureDate.Value > checkedDate)
             {
-                message = string.Format(@"For Component {0} 
-                                         \nManufacture date {1} must be less than {2}",
-                                        _currentBaseComponent, 
-                                        dateTimePickerManufactureDate.Value, 
-                                        message);
+                message = $@"For Component {_currentBaseComponent} 
+                                         \nManufacture date {dateTimePickerManufactureDate.Value} must be less than {message}";
                 dateTimePickerManufactureDate.Focus();
                 return false;
             }
@@ -128,11 +125,8 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
                     // Ограничением будет дата начала перемещения
                     if (dateTimePickerInstallation.Value < record.StartTransferDate)
                     {
-                        message = string.Format(@"For Component {0} 
-                                                \nInstallation date {1} must be grather than {2}",
-                                                _currentBaseComponent,
-                                                dateTimePickerInstallation.Value,
-                                                message);
+                        message = $@"For Component {_currentBaseComponent} 
+                                                \nInstallation date {dateTimePickerInstallation.Value} must be grather than {message}";
                         dateTimePickerInstallation.Focus();
                         dateTimePickerInstallation.ForeColor = Color.Blue;
                         return false;

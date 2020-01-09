@@ -127,7 +127,8 @@
             }
             catch (Exception exception)
             {
-                Auxiliary.WriteLog(string.Format("Exception while receiving file \"{0}\"\r\nDestination: {1}\r\n{2}", request.Request, (info != null) ? info.FullName : "FileInfo is null", exception.ToString()));
+                Auxiliary.WriteLog(
+	                $"Exception while receiving file \"{request.Request}\"\r\nDestination: {((info != null) ? info.FullName : "FileInfo is null")}\r\n{exception.ToString()}");
             }
         }
 
@@ -152,7 +153,8 @@
             this._DestinationDirectory = (tempDirectory != "") ? new DirectoryInfo(tempDirectory) : this._SourceDirectory;
             this._filesUpdated = 0;
             client.ResponseReceived += new ClientProtocol.ResponseReceivedEventHandler(this.ClientResponseReceived);
-            Auxiliary.WriteLog(string.Format("ClientSideUpdateProtocol::\r\nSourceDirectory: {0}\r\nDestinationDirectory: {1}", this._SourceDirectory.FullName, this._DestinationDirectory.FullName));
+            Auxiliary.WriteLog(
+	            $"ClientSideUpdateProtocol::\r\nSourceDirectory: {this._SourceDirectory.FullName}\r\nDestinationDirectory: {this._DestinationDirectory.FullName}");
             firstRequest.Request = "UPDATE " + this._Product;
         }
 

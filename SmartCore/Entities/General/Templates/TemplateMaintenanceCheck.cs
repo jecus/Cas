@@ -238,7 +238,7 @@ namespace SmartCore.Entities.General.Templates
 		{
 			get
 			{
-				return string.Format("Templ.Maint.Check:{0} {1}", Name, Schedule ? "Schedule" : "Store");
+				return $"Templ.Maint.Check:{Name} {(Schedule ? "Schedule" : "Store")}";
 			}
 		}
 		#endregion

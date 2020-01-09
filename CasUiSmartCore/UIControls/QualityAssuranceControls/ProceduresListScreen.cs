@@ -756,7 +756,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 			catch (Exception ex)
 			{
 				string errorDescriptionSctring =
-					string.Format("Error while Open Attached File for {0}, id {1}. \nFileId {2}", mpd, mpd.ItemId, mpd.ProcedureFile.ItemId);
+					$"Error while Open Attached File for {mpd}, id {mpd.ItemId}. \nFileId {mpd.ProcedureFile.ItemId}";
 				Program.Provider.Logger.Log(errorDescriptionSctring, ex);
 			}
 		}
@@ -1125,9 +1125,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 								else
 								{
 									labelDateAsOf.Text =
-										string.Format("Forecast: {0}. {1}",
-													   main.CheckName,
-													   main.NextPerformance);
+										$"Forecast: {main.CheckName}. {main.NextPerformance}";
 								}
 							}
 						}

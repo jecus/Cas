@@ -458,7 +458,7 @@ namespace CAS.UI.UIControls.Auxiliary.Importing
                         if (message != "") message += "\n ";
                         ExcelImportAttribute fca = (ExcelImportAttribute)
                             propertyInfo.GetCustomAttributes(typeof (ExcelImportAttribute), false).First();
-                        message += string.Format("'{0}' should not be empty", fca.Title);
+                        message += $"'{fca.Title}' should not be empty";
                         return false;
                     }
                 }
@@ -479,7 +479,7 @@ namespace CAS.UI.UIControls.Auxiliary.Importing
                         if (message != "") message += "\n ";
                         ExcelImportAttribute fca = (ExcelImportAttribute)
                             propertyInfo.GetCustomAttributes(typeof(ExcelImportAttribute), false).First();
-                        message += string.Format("'{0}' should not be empty", fca.Title);
+                        message += $"'{fca.Title}' should not be empty";
                         return false;
                     }
                 }
@@ -938,7 +938,7 @@ namespace CAS.UI.UIControls.Auxiliary.Importing
 
         private void CommonExcelImportForm_Load(object sender, EventArgs e)
         {
-            Text = string.Format("{0} Import Form", _typeToImport.Name);
+            Text = $"{_typeToImport.Name} Import Form";
 
             flowLayoutPanel1.Controls.Clear();
 

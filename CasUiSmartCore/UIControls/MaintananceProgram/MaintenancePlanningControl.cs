@@ -1129,11 +1129,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			catch (Exception ex)
 			{
 				string errorDescriptionSctring =
-				   string.Format("Error while Open Attached File for {0}, \nid {1} \nType {2}. \nFileId {3}", 
-								  parent, 
-								  parent.ItemId, 
-								  parent.SmartCoreObjectType, 
-								  file.ItemId);
+					$"Error while Open Attached File for {parent}, \nid {parent.ItemId} \nType {parent.SmartCoreObjectType}. \nFileId {file.ItemId}";
 
 				Program.Provider.Logger.Log("Error while Open Attached File", ex);
 			}

@@ -268,9 +268,9 @@ namespace SmartCore.Queries
             else if (directiveType == DirectiveType.EngineeringOrders)
             {
                 state = 
-                    new CommonFilter<string>(string.Format(@" (directives.EngineeringOrders <> '' 
+                    new CommonFilter<string>($@" (directives.EngineeringOrders <> '' 
                                       or directives.EngineeringOrderFileID > 0 
-                                      or directives.DirectiveType = {0})", directiveType.ItemId));
+                                      or directives.DirectiveType = {directiveType.ItemId})");
             }
             else if (directiveType == DirectiveType.ModificationStatus)
             {
@@ -283,16 +283,16 @@ namespace SmartCore.Queries
 				//                                           or directives.ServiceBulletinFileID > 0 )
 				//                                           and directives.DirectiveType = {0})", directiveType.ItemId));
 				//TODO: Было так но потом захотели sb в ad перемещать
-				state = new CommonFilter<string>(string.Format(@"(directives.ServiceBulletinNo <> '' 
+				state = new CommonFilter<string>($@"(directives.ServiceBulletinNo <> '' 
 				                                           or directives.ServiceBulletinFileID > 0 
-				                                           or directives.DirectiveType = {0})", directiveType.ItemId));
+				                                           or directives.DirectiveType = {directiveType.ItemId})");
 			}
 			else
             {
 				//state = new CommonFilter<DirectiveType>(Directive.DirectiveTypeProperty, directiveType);
 				state =
-					new CommonFilter<string>(string.Format(@"(directives.Title != 'N/A'
-                                                           and directives.DirectiveType = {0})", directiveType.ItemId));
+					new CommonFilter<string>($@"(directives.Title != 'N/A'
+                                                           and directives.DirectiveType = {directiveType.ItemId})");
 			}
             return state;
         }

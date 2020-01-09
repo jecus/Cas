@@ -130,7 +130,8 @@ namespace CAS.UI.UIControls.Auxiliary
         /// </summary>
         protected virtual void SetFormControls()
         {
-            Text = string.Format("{0} {1} Form", _typeName, _currentObject != null ? _currentObject.ItemId <= 0 ? "Adding" : "Editing" : "");
+            Text =
+	            $"{_typeName} {(_currentObject != null ? _currentObject.ItemId <= 0 ? "Adding" : "Editing" : "")} Form";
 
             panelMain.Controls.Clear();
 
@@ -173,7 +174,7 @@ namespace CAS.UI.UIControls.Auxiliary
                     catch (Exception ex)
                     {
                         if (errorMessage != "") errorMessage += "\n ";
-                        errorMessage += string.Format("Pair property '{0}' raise error {1}", attr.PairControlPropertyName, ex.Message);
+                        errorMessage += $"Pair property '{attr.PairControlPropertyName}' raise error {ex.Message}";
                     }
                     if (c is ThresholdControl) columnCount = 2;
                     pairControls.Add(t, c);
@@ -189,7 +190,7 @@ namespace CAS.UI.UIControls.Auxiliary
                 catch (Exception ex)
                 {
                     if (errorMessage != "") errorMessage += "\n ";
-                    errorMessage += string.Format("'{0}' raise error {1}", attr.Title, ex.Message);
+                    errorMessage += $"'{attr.Title}' raise error {ex.Message}";
                 }
                 if (c is LifelengthViewer) ((LifelengthViewer)c).LeftHeader = attr.Title;
                 if (c is ThresholdControl || c is CommonDataGridViewControl) columnCount = 2;
@@ -1181,7 +1182,7 @@ namespace CAS.UI.UIControls.Auxiliary
                         if (message != "") message += "\n ";
                         FormControlAttribute fca = (FormControlAttribute)
                             propertyInfo.GetCustomAttributes(typeof (FormControlAttribute), false).First();
-                        message += string.Format("'{0}' should not be empty", fca.Title);
+                        message += $"'{fca.Title}' should not be empty";
                         return false;
                     }
                 }
@@ -1202,7 +1203,7 @@ namespace CAS.UI.UIControls.Auxiliary
                         if (message != "") message += "\n ";
                         FormControlAttribute fca = (FormControlAttribute)
                             propertyInfo.GetCustomAttributes(typeof(FormControlAttribute), false).First();
-                        message += string.Format("'{0}' should not be empty", fca.Title);
+                        message += $"'{fca.Title}' should not be empty";
                         return false;
                     }
                 }

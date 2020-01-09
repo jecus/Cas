@@ -170,31 +170,18 @@ namespace SmartCore.Entities.General.Directives
             {
                 if (DamageType == DamageType.Damage || DamageType == DamageType.Repair)
                 {
-                    return string.Format("{0}x{1} limit({2}x{3}) {4}",
-                                      DamageLenght,
-                                      DamageWidth,
-                                      DamageLenghtLimit,
-                                      DamageWidthLimit,
-                                      DamageMeasure);
+                    return
+	                    $"{DamageLenght}x{DamageWidth} limit({DamageLenghtLimit}x{DamageWidthLimit}) {DamageMeasure}";
                 }
                 if (DamageType == DamageType.Dent)
                 {
-                    return string.Format("{0}x{1} limit({2}x{3}) {4} A/Y={5}",
-                                      DamageWidth,
-                                      DamageDepth,
-                                      DamageWidthLimit,
-                                      DamageDepthLimit,
-                                      DamageMeasure,
-                                      (DamageWidth / DamageDepth));
+                    return
+	                    $"{DamageWidth}x{DamageDepth} limit({DamageWidthLimit}x{DamageDepthLimit}) {DamageMeasure} A/Y={(DamageWidth / DamageDepth)}";
                 }
                 if (DamageType == DamageType.Scratch)
                 {
-                    return string.Format("{0}x{1} limit({2}x{3}) {4}",
-                                      DamageLenght,
-                                      DamageDepth,
-                                      DamageLenghtLimit,
-                                      DamageDepthLimit,
-                                      DamageMeasure);
+                    return
+	                    $"{DamageLenght}x{DamageDepth} limit({DamageLenghtLimit}x{DamageDepthLimit}) {DamageMeasure}";
                 }
 
                 return "";

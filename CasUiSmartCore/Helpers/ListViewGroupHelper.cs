@@ -241,12 +241,8 @@ namespace CAS.UI.Helpers
 
 			if (componentDirective.ParentComponent != null)
 			{
-				var title = string.Format("P/N:{0} {1} Pos:{2} S/N:{3} {4}",
-					componentDirective.ParentComponent.PartNumber,
-					componentDirective.ParentComponent.Description,
-					componentDirective.ParentComponent.Position,
-					componentDirective.ParentComponent.SerialNumber,
-					componentDirective.ParentComponent.MaintenanceControlProcess.ShortName);
+				var title =
+					$"P/N:{componentDirective.ParentComponent.PartNumber} {componentDirective.ParentComponent.Description} Pos:{componentDirective.ParentComponent.Position} S/N:{componentDirective.ParentComponent.SerialNumber} {componentDirective.ParentComponent.MaintenanceControlProcess.ShortName}";
 
 				var parentStore = GlobalObjects.StoreCore.GetStoreById(componentDirective.ParentComponent.ParentStoreId);
 

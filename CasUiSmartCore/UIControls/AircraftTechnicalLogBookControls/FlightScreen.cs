@@ -163,7 +163,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
 			labelDateAsOf.Text = "Current ATLB: " + _lastAtlbString +
 								 " Previous Page No: " + _lastFlightString +
-								 string.Format(" flights on page {0}/{1}", _flightsOnPage, _flightsOnPageMax);
+								 $" flights on page {_flightsOnPage}/{_flightsOnPageMax}";
 
 			if (_currentFlight.ItemId > 0) buttonAddAtlb.Enabled = false;
 

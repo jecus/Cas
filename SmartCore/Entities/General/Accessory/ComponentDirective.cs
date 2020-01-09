@@ -643,12 +643,9 @@ namespace SmartCore.Entities.General.Accessory
 			{
 				if (ParentComponent != null)
 				{
-					return string.Format("Compnt. dir.:{0} {1}:{2}",
-									  ParentComponent,
-									  ParentComponent.Description,
-									  DirectiveType);
+					return $"Compnt. dir.:{ParentComponent} {ParentComponent.Description}:{DirectiveType}";
 				}
-				return string.Format("Compnt. dir.:{0}", DirectiveType);
+				return $"Compnt. dir.:{DirectiveType}";
 			}
 		}
 		#endregion

@@ -684,7 +684,7 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(CreateRow(job.Cost.ToString(), job.Cost ));
 				subItems.Add(CreateRow(author, author));
 			}
-			else throw new ArgumentOutOfRangeException(String.Format("1135: Takes an argument has no known type {0}", item.GetType()));
+			else throw new ArgumentOutOfRangeException($"1135: Takes an argument has no known type {item.GetType()}");
 
 			return subItems;
 		}

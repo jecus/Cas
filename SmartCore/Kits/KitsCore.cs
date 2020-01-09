@@ -144,14 +144,8 @@ namespace SmartCore.Kits
 			//TODO:(Evgenii Babak) выделить в отдельный класс и не использовать рукописные запросы
 			//TODO:(Evgenii Babak) нужно реализовать TablePrefix в методе BaseComponentQueries.GetSelectQueryPrimaryColumnOnly
 
-			var bdFilter = String.Format("Select ComponentsItemId from ({0}) directiveSelect ",
-						BaseQueries.GetSelectQueryWithWhere<BaseComponent>() +
-						String.Format(@" and (Select top 1 DestinationObjectId from dbo.TransferRecords Where 
-            					ParentType = {0} 
-            					and ParentId = dbo.Components.ItemId  
-            					and IsDeleted = 0
-            					order by dbo.TransferRecords.TransferDate Desc) = {1}",
-								SmartCoreType.BaseComponent.ItemId, aircraftId));
+			var bdFilter =
+				$"Select ComponentsItemId from ({BaseQueries.GetSelectQueryWithWhere<BaseComponent>() + $" and (Select top 1 DestinationObjectId from dbo.TransferRecords Where \r\n            \t\t\t\t\tParentType = {SmartCoreType.BaseComponent.ItemId} \r\n            \t\t\t\t\tand ParentId = dbo.Components.ItemId  \r\n            \t\t\t\t\tand IsDeleted = 0\r\n            \t\t\t\t\torder by dbo.TransferRecords.TransferDate Desc) = {aircraftId}"}) directiveSelect ";
 
 			var preResult = _loader.GetObjectListAll<AccessoryRequired>(new ICommonFilter[]
 			{

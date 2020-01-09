@@ -323,7 +323,7 @@ namespace CAS.UI.UIControls.Fleet
 			catch (Exception ex)
 			{
 				string errorDescriptionSctring =
-					string.Format("Error while Open Attached File for {0}, id {1}. \nFileId {2}", mpd, mpd.ItemId, mpd.TaskCardNumberFile.ItemId);
+					$"Error while Open Attached File for {mpd}, id {mpd.ItemId}. \nFileId {mpd.TaskCardNumberFile.ItemId}";
 				Program.Provider.Logger.Log(errorDescriptionSctring, ex);
 			}
 		}

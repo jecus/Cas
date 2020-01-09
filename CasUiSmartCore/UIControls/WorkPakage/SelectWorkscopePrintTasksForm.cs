@@ -188,19 +188,23 @@ namespace CAS.UI.UIControls.WorkPakage
                     }
                     else if (!string.IsNullOrEmpty(checkMpd.TaskCardNumber) && checkMpd.TaskCardNumberFile == null)
                     {
-                        checkMpdTaskCardCellValue = string.Format("Not set Task Card file. (Task Card No {0}.)", checkMpd.TaskCardNumber);
+                        checkMpdTaskCardCellValue =
+	                        $"Not set Task Card file. (Task Card No {checkMpd.TaskCardNumber}.)";
                         checkMpdTaskCardCellBackColor = Color.Red;
                     }
                     else if (string.IsNullOrEmpty(checkMpd.TaskCardNumber) && checkMpd.TaskCardNumberFile != null)
                     {
-                        checkMpdTaskCardCellValue = string.Format("Not set Task Card name. (File name {0}.)", checkMpd.TaskCardNumberFile.FileName);
+                        checkMpdTaskCardCellValue =
+	                        $"Not set Task Card name. (File name {checkMpd.TaskCardNumberFile.FileName}.)";
                         checkMpdTaskCardCellBackColor = Color.Red;
                     }
                     else checkMpdTaskCardCellValue = checkMpd.TaskCardNumber;
 
                     if (checkMpd.ItemRelations.Count > 0)
                     {
-                        checkMpdDiscCell = new DataGridViewTextBoxCell { Value = string.Format("{0}--{1} for {2} components", maintenanceCheck.Name, checkMpd.TaskNumberCheck, checkMpd.ItemRelations.Count) };
+                        checkMpdDiscCell = new DataGridViewTextBoxCell { Value =
+	                        $"{maintenanceCheck.Name}--{checkMpd.TaskNumberCheck} for {checkMpd.ItemRelations.Count} components"
+                        };
                         checkMpdTaskCardCell = new DataGridViewTextBoxCell
                                                    {
                                                        Value = checkMpdTaskCardCellValue,
@@ -250,12 +254,12 @@ namespace CAS.UI.UIControls.WorkPakage
                 }
                 else if (!string.IsNullOrEmpty(item.TaskCardNumber) && item.TaskCardNumberFile == null)
                 {
-                    taskCardCellValue = string.Format("Not set Task Card file. (Task Card No {0}.)", item.TaskCardNumber);
+                    taskCardCellValue = $"Not set Task Card file. (Task Card No {item.TaskCardNumber}.)";
                     taskCardCellBackColor = Color.Red;
                 }
                 else if (string.IsNullOrEmpty(item.TaskCardNumber) && item.TaskCardNumberFile != null)
                 {
-                    taskCardCellValue = string.Format("Not set Task Card name. (File name {0}.)", item.TaskCardNumberFile.FileName);
+                    taskCardCellValue = $"Not set Task Card name. (File name {item.TaskCardNumberFile.FileName}.)";
                     taskCardCellBackColor = Color.Red;
                 }
                 else taskCardCellValue = item.TaskCardNumber;
@@ -292,12 +296,14 @@ namespace CAS.UI.UIControls.WorkPakage
                 }
                 else if (!string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile == null)
                 {
-                    taskCardCellValue = string.Format("Not set Engineering Order File. (Engineering Order No {0}.)", item.EngineeringOrders);
+                    taskCardCellValue =
+	                    $"Not set Engineering Order File. (Engineering Order No {item.EngineeringOrders}.)";
                     taskCardCellBackColor = Color.Red;
                 }
                 else if (string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile != null)
                 {
-                    taskCardCellValue = string.Format("Not set Engineering Order name. (File name {0}.)", item.EngineeringOrderFile.FileName);
+                    taskCardCellValue =
+	                    $"Not set Engineering Order name. (File name {item.EngineeringOrderFile.FileName}.)";
                     taskCardCellBackColor = Color.Red;
                 }
                 else taskCardCellValue = item.EngineeringOrders;
@@ -336,12 +342,14 @@ namespace CAS.UI.UIControls.WorkPakage
 		        }
 		        else if (!string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile == null)
 		        {
-			        taskCardCellValue = string.Format("Not set Engineering Order File. (Engineering Order No {0}.)", item.EngineeringOrders);
+			        taskCardCellValue =
+				        $"Not set Engineering Order File. (Engineering Order No {item.EngineeringOrders}.)";
 			        taskCardCellBackColor = Color.Red;
 		        }
 		        else if (string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile != null)
 		        {
-			        taskCardCellValue = string.Format("Not set Engineering Order name. (File name {0}.)", item.EngineeringOrderFile.FileName);
+			        taskCardCellValue =
+				        $"Not set Engineering Order name. (File name {item.EngineeringOrderFile.FileName}.)";
 			        taskCardCellBackColor = Color.Red;
 		        }
 		        else taskCardCellValue = item.EngineeringOrders;
@@ -381,12 +389,14 @@ namespace CAS.UI.UIControls.WorkPakage
 		        }
 		        else if (!string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile == null)
 		        {
-			        taskCardCellValue = string.Format("Not set Engineering Order File. (Engineering Order No {0}.)", item.EngineeringOrders);
+			        taskCardCellValue =
+				        $"Not set Engineering Order File. (Engineering Order No {item.EngineeringOrders}.)";
 			        taskCardCellBackColor = Color.Red;
 		        }
 		        else if (string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile != null)
 		        {
-			        taskCardCellValue = string.Format("Not set Engineering Order name. (File name {0}.)", item.EngineeringOrderFile.FileName);
+			        taskCardCellValue =
+				        $"Not set Engineering Order name. (File name {item.EngineeringOrderFile.FileName}.)";
 			        taskCardCellBackColor = Color.Red;
 		        }
 		        else taskCardCellValue = item.EngineeringOrders;
@@ -426,12 +436,14 @@ namespace CAS.UI.UIControls.WorkPakage
                 }
                 else if (!string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile == null)
                 {
-                    taskCardCellValue = string.Format("Not set Engineering Order File. (Engineering Order No {0}.)", item.EngineeringOrders);
+                    taskCardCellValue =
+	                    $"Not set Engineering Order File. (Engineering Order No {item.EngineeringOrders}.)";
                     taskCardCellBackColor = Color.Red;
                 }
                 else if (string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile != null)
                 {
-                    taskCardCellValue = string.Format("Not set Engineering Order name. (File name {0}.)", item.EngineeringOrderFile.FileName);
+                    taskCardCellValue =
+	                    $"Not set Engineering Order name. (File name {item.EngineeringOrderFile.FileName}.)";
                     taskCardCellBackColor = Color.Red;
                 }
                 else taskCardCellValue = item.EngineeringOrders;
@@ -470,12 +482,14 @@ namespace CAS.UI.UIControls.WorkPakage
                 }
                 else if (!string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile == null)
                 {
-                    taskCardCellValue = string.Format("Not set Engineering Order File. (Engineering Order No {0}.)", item.EngineeringOrders);
+                    taskCardCellValue =
+	                    $"Not set Engineering Order File. (Engineering Order No {item.EngineeringOrders}.)";
                     taskCardCellBackColor = Color.Red;
                 }
                 else if (string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile != null)
                 {
-                    taskCardCellValue = string.Format("Not set Engineering Order name. (File name {0}.)", item.EngineeringOrderFile.FileName);
+                    taskCardCellValue =
+	                    $"Not set Engineering Order name. (File name {item.EngineeringOrderFile.FileName}.)";
                     taskCardCellBackColor = Color.Red;
                 }
                 else taskCardCellValue = item.EngineeringOrders;
@@ -514,12 +528,14 @@ namespace CAS.UI.UIControls.WorkPakage
                 }
                 else if (!string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile == null)
                 {
-                    taskCardCellValue = string.Format("Not set Engineering Order File. (Engineering Order No {0}.)", item.EngineeringOrders);
+                    taskCardCellValue =
+	                    $"Not set Engineering Order File. (Engineering Order No {item.EngineeringOrders}.)";
                     taskCardCellBackColor = Color.Red;
                 }
                 else if (string.IsNullOrEmpty(item.EngineeringOrders) && item.EngineeringOrderFile != null)
                 {
-                    taskCardCellValue = string.Format("Not set Engineering Order name. (File name {0}.)", item.EngineeringOrderFile.FileName);
+                    taskCardCellValue =
+	                    $"Not set Engineering Order name. (File name {item.EngineeringOrderFile.FileName}.)";
                     taskCardCellBackColor = Color.Red;
                 }
                 else taskCardCellValue = item.EngineeringOrders;

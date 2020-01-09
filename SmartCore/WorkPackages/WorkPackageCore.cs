@@ -1119,7 +1119,7 @@ namespace SmartCore.WorkPackages
 				if (o.BlockedByPackage != null)
 				{
 					//Выбранное выполнение блокировано другим рабочим рабочим пакетом
-					errorTaskDescription = string.Format("{0} {1}", o.Title, o.WorkType);
+					errorTaskDescription = $"{o.Title} {o.WorkType}";
 					blockingWorkPackage = o.BlockedByPackage.Title;
 					blockedBy = true;
 					break;
@@ -1139,7 +1139,7 @@ namespace SmartCore.WorkPackages
 					if (det.NextPerformances.IndexOf(o) > 0)
 					{
 						//если взято не ПЕРВОЕ выполнение по замене детали  
-						errorTaskDescription = string.Format("{0} {1} {2}", o.Title, o.Description, o.WorkType);
+						errorTaskDescription = $"{o.Title} {o.Description} {o.WorkType}";
 						invalidComponentExcange = true;
 						break;
 					}
@@ -1150,7 +1150,7 @@ namespace SmartCore.WorkPackages
 					if (detDir.DirectiveTypeId == ComponentRecordType.Overhaul.ItemId && detDir.NextPerformances.IndexOf(o) > 0)
 					{
 						//если взято не ПЕРВОЕ выполнение по замене детали 
-						errorTaskDescription = string.Format("{0} {1}", o.Title, o.WorkType);
+						errorTaskDescription = $"{o.Title} {o.WorkType}";
 						invalidComponentExcange = true;
 						break;
 					}
@@ -1208,15 +1208,12 @@ namespace SmartCore.WorkPackages
 					//а в выбранных элементах списка имеется выполнение Т1 н:6+
 					//при этом задача 2 (Т2) в рабочем пакете имеет порядковый номер выполнения н:5
 					//а в выбранных элементах списка имеется выполнение Т2 н:5-
-					errorTaskDescription = string.Format(@"2 or more tasks for selected performances are in the work package:
-                                                           \n{0} 
-                                                           \nthe task {1} has the number of performance:{2}, 
-                                                           \nbut in the selected items has performance:{3}.
-                                                           \nthe task {4} has the number of performance:{5}, 
-                                                           \nbut in the selected items has performance:{6}.",
-														   workPackage.Title,
-														   leftTask, leftPerfNum1, leftPerfNum2,
-														   rigthTask, rightPerfNum1, rightPerfNum2);
+					errorTaskDescription = $@"2 or more tasks for selected performances are in the work package:
+                                                           \n{workPackage.Title} 
+                                                           \nthe task {leftTask} has the number of performance:{leftPerfNum1}, 
+                                                           \nbut in the selected items has performance:{leftPerfNum2}.
+                                                           \nthe task {rigthTask} has the number of performance:{rightPerfNum1}, 
+                                                           \nbut in the selected items has performance:{rightPerfNum2}.";
 					crossPerformances = true;
 					break;
 				}
@@ -1739,7 +1736,7 @@ namespace SmartCore.WorkPackages
 				if (o.BlockedByPackage != null)
 				{
 					//Выбранное выполнение блокировано другим рабочим рабочим пакетом
-					errorTaskDescription = string.Format("{0} {1}", o.Title, o.WorkType);
+					errorTaskDescription = $"{o.Title} {o.WorkType}";
 					blockingWorkPackage = o.BlockedByPackage.Title;
 					blockedBy = true;
 					break;
@@ -1763,7 +1760,7 @@ namespace SmartCore.WorkPackages
 					if (det.NextPerformances.IndexOf(o) > 0)
 					{
 						//если взято не ПЕРВОЕ выполнение по замене детали  
-						errorTaskDescription = string.Format("{0} {1} {2}", o.Title, o.Description, o.WorkType);
+						errorTaskDescription = $"{o.Title} {o.Description} {o.WorkType}";
 						invalidComponentExcange = true;
 						break;
 					}
@@ -1774,7 +1771,7 @@ namespace SmartCore.WorkPackages
 					if (detDir.DirectiveTypeId == ComponentRecordType.Overhaul.ItemId && detDir.NextPerformances.IndexOf(o) > 0)
 					{
 						//если взято не ПЕРВОЕ выполнение по замене детали 
-						errorTaskDescription = string.Format("{0} {1}", o.Title, o.WorkType);
+						errorTaskDescription = $"{o.Title} {o.WorkType}";
 						invalidComponentExcange = true;
 						break;
 					}
@@ -1810,14 +1807,14 @@ namespace SmartCore.WorkPackages
 					if (wpr.PerformanceNumFromStart > perfNum)
 					{
 						left = true;
-						leftTask = string.Format("{0} {1}", np.Title, np.WorkType);
+						leftTask = $"{np.Title} {np.WorkType}";
 						leftPerfNum1 = wpr.PerformanceNumFromStart;
 						leftPerfNum2 = np.PerformanceNum;
 					}
 					if (wpr.PerformanceNumFromStart < perfNum)
 					{
 						rigth = true;
-						rigthTask = string.Format("{0} {1}", np.Title, np.WorkType);
+						rigthTask = $"{np.Title} {np.WorkType}";
 						rightPerfNum1 = wpr.PerformanceNumFromStart;
 						rightPerfNum2 = np.PerformanceNum;
 					}
@@ -1830,15 +1827,12 @@ namespace SmartCore.WorkPackages
 					//а в выбранных элементах списка имеется выполнение Т1 н:6+
 					//при этом задача 2 (Т2) в рабочем пакете имеет порядковый номер выполнения н:5
 					//а в выбранных элементах списка имеется выполнение Т2 н:5-
-					errorTaskDescription = string.Format("2 or more tasks for selected performances are in the work package:" +
-														 "\n{0}" +
-														 "\nthe task {1} has the number of performance:{2}," +
-														 "\nbut in the selected items has performance:{3}." +
-														 "\nthe task {4} has the number of performance:{5}," +
-														 "\nbut in the selected items has performance:{6}.",
-														   workPackage.Title,
-														   leftTask, leftPerfNum1, leftPerfNum2,
-														   rigthTask, rightPerfNum1, rightPerfNum2);
+					errorTaskDescription = "2 or more tasks for selected performances are in the work package:" +
+					                       $"\n{workPackage.Title}" +
+					                       $"\nthe task {leftTask} has the number of performance:{leftPerfNum1}," +
+					                       $"\nbut in the selected items has performance:{leftPerfNum2}." +
+					                       $"\nthe task {rigthTask} has the number of performance:{rightPerfNum1}," +
+					                       $"\nbut in the selected items has performance:{rightPerfNum2}.";
 					crossPerformances = true;
 					break;
 				}

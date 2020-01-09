@@ -374,7 +374,7 @@ namespace SmartCore.Entities.General.Templates
         {
             get
             {
-                return string.Format("Templ. Base Compnt.:{0} {1}", this, Description);
+                return $"Templ. Base Compnt.:{this} {Description}";
             }
         }
         #endregion

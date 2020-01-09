@@ -535,7 +535,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			catch (Exception ex)
 			{
 				string errorDescriptionSctring =
-					string.Format("Error while Open Attached File for {0}, id {1}. \nFileId {2}", dir, dir.ItemId, attachedFile.ItemId);
+					$"Error while Open Attached File for {dir}, id {dir.ItemId}. \nFileId {attachedFile.ItemId}";
 				Program.Provider.Logger.Log(errorDescriptionSctring, ex);
 			}
 		}

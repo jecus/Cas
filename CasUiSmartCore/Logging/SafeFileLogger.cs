@@ -28,7 +28,7 @@ namespace CAS.UI.Logging
             base.Log(message, ex);
             String tehnicalInfo = "";
             if (ex != null && !String.IsNullOrEmpty(ex.Message))
-                tehnicalInfo = String.Format("\r\n\r\nTechnical information:\r\n{0}", ex.Message);
+                tehnicalInfo = $"\r\n\r\nTechnical information:\r\n{ex.Message}";
 
             //String data = String.Format("{0}{1}", message, tehnicalInfo);
             String[] messageLines = message.Split(new[] { tehnicalInfo, Environment.NewLine }, StringSplitOptions.None);
@@ -36,7 +36,7 @@ namespace CAS.UI.Logging
             if (messageLines[0].Length < 90)
                 messageLines[0] = messageLines[0].PadRight(width);
             message = String.Join(Environment.NewLine, messageLines);
-            String data = String.Format("{0}", message);
+            String data = $"{message}";
             MessageBox.Show(data, new GlobalTermsProvider()["SystemName"].ToString(), MessageBoxButtons.OK,
                             MessageBoxIcon.Exclamation);
         }

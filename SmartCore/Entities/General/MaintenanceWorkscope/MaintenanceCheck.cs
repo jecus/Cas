@@ -695,9 +695,9 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
                 if (Times > 1)
                 {
                     if (countWhereSenior > 0)
-                        res += string.Format("All: {0} times (in {1} is senior)", Times, countWhereSenior);
+                        res += $"All: {Times} times (in {countWhereSenior} is senior)";
                     else
-                        res += string.Format("{0} times", Times);
+                        res += $"{Times} times";
                 }
                 return res;
             }
@@ -810,7 +810,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
         {
             get
             {
-                return string.Format("Maint.Check:{0} {1}", Name, Schedule ? "Schedule" : "Store");
+                return $"Maint.Check:{Name} {(Schedule ? "Schedule" : "Store")}";
             }
         }
         #endregion

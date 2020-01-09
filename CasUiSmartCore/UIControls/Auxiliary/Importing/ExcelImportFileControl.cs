@@ -319,7 +319,7 @@ namespace CAS.UI.UIControls.Auxiliary.Importing
                         if (message != "") message += "\n ";
                         ExcelImportAttribute fca = (ExcelImportAttribute)
                             propertyInfo.GetCustomAttributes(typeof(ExcelImportAttribute), false).First();
-                        message += string.Format("'{0}' should not be empty", fca.Title);
+                        message += $"'{fca.Title}' should not be empty";
                         return false;
                     }
                 }
@@ -379,7 +379,7 @@ namespace CAS.UI.UIControls.Auxiliary.Importing
         /// </summary>
         protected void UpdateControl()
         {
-            Text = string.Format("{0} Import Form", _typeToImport.Name);
+            Text = $"{_typeToImport.Name} Import Form";
 
             panelControls.Controls.Clear();
 
@@ -422,7 +422,7 @@ namespace CAS.UI.UIControls.Auxiliary.Importing
                     catch (Exception ex)
                     {
                         if (errorMessage != "") errorMessage += "\n ";
-                        errorMessage += string.Format("Pair property '{0}' raise error {1}", attr.PairControlPropertyName, ex.Message);
+                        errorMessage += $"Pair property '{attr.PairControlPropertyName}' raise error {ex.Message}";
                     }
                     if (c is ThresholdControl) columnCount = 2;
                     pairControls.Add(t, c);
@@ -439,7 +439,7 @@ namespace CAS.UI.UIControls.Auxiliary.Importing
                 {
                     if (errorMessage != "") 
                         errorMessage += "\n ";
-                    errorMessage += string.Format("'{0}' raise error {1}", attr.Title, ex.Message);
+                    errorMessage += $"'{attr.Title}' raise error {ex.Message}";
                 }
                 if (c is LifelengthViewer) ((LifelengthViewer)c).LeftHeader = attr.Title;
                 if (c is ThresholdControl) columnCount = 2;

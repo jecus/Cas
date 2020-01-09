@@ -539,7 +539,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			catch (Exception ex)
 			{
 				string errorDescriptionSctring =
-					string.Format("Error while Open Attached File for {0}, id {1}. \nFileId {2}", o, o.ItemId, attachedFile.ItemId);
+					$"Error while Open Attached File for {o}, id {o.ItemId}. \nFileId {attachedFile.ItemId}";
 				Program.Provider.Logger.Log(errorDescriptionSctring, ex);
 			}
 		}
@@ -924,9 +924,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 								else
 								{
 									labelDateAsOf.Text =
-										string.Format("Forecast: {0}. {1}",
-													   main.CheckName,
-													   main.NextPerformance);
+										$"Forecast: {main.CheckName}. {main.NextPerformance}";
 								}
 							}
 						}

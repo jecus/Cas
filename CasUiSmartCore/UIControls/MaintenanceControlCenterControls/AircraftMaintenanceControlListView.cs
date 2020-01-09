@@ -387,7 +387,7 @@ namespace CAS.UI.UIControls.MaintenanceControlCenterControls
 				subItems.Add(CreateRow(job.ManHours.ToString(), job.ManHours ));
 				//subItems.Add(new ListViewItem.ListViewSubItem { Text = job.Cost.ToString(), Tag = job.Cost });
 			}
-			else throw new ArgumentOutOfRangeException(String.Format("1135: Takes an argument has no known type {0}", item.GetType()));
+			else throw new ArgumentOutOfRangeException($"1135: Takes an argument has no known type {item.GetType()}");
 
 			return subItems;
 		}

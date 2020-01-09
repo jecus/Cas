@@ -529,7 +529,7 @@ namespace CAS.UI.UIControls.FiltersControls
             string errorMessage = "";
 
             if(string.IsNullOrEmpty(Text))
-                Text = string.Format("{0} Filtered Form", _filters.FilteredType.Name);
+                Text = $"{_filters.FilteredType.Name} Filtered Form";
 
             if (!_filters.Select(f => f.FilterProperty).Any()) return;
             foreach (ICommonFilter t in _filters)
@@ -573,7 +573,7 @@ namespace CAS.UI.UIControls.FiltersControls
                 catch (Exception ex)
                 {
                     if (errorMessage != "") errorMessage += "\n ";
-                    errorMessage += string.Format("'{0}' raise error {1}", attr.Title, ex.Message);
+                    errorMessage += $"'{attr.Title}' raise error {ex.Message}";
                 }
                 if (c is LifelengthViewer) ((LifelengthViewer)c).LeftHeader = attr.Title;
                 if (c is ThresholdControl) columnCount = 2;

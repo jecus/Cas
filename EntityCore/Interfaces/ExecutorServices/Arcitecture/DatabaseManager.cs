@@ -164,7 +164,7 @@ namespace EntityCore.Interfaces.ExecutorServices.Arcitecture
 			lock (database)
 			{
 				// формируем команду и выполняем ее
-				query = String.Format("USE [{0}];\r\n{1}", database.Name, query);
+				query = $"USE [{database.Name}];\r\n{query}";
 				SqlCommand com = new SqlCommand(query, _serverConnection.SqlConnectionObject);
 				com.Parameters.AddRange(parameters);
 				SqlDataAdapter sda = new SqlDataAdapter(com);

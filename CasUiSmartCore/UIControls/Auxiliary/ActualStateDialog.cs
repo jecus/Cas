@@ -106,8 +106,8 @@ namespace CAS.UI.UIControls.Auxiliary
                 if (acr != null)
                 {
                     //Актуальное состояние на заданную дату есть
-                    message = string.Format("On a given date {0} have a saved record", 
-                                             SmartCore.Auxiliary.Convert.GetDateFormat(dateTimePicker1.Value));
+                    message =
+	                    $"On a given date {SmartCore.Auxiliary.Convert.GetDateFormat(dateTimePicker1.Value)} have a saved record";
                     return false;
                 }
 

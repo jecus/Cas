@@ -699,7 +699,7 @@ namespace CAS.UI.UIControls.StoresControls
 				quantity = _consumablePart.Quantity;
 	        else quantity = (double)numericUpDownQuantity.Value;
 
-			textBoxTotal.Text = String.Format("{0:0.##}", quantity) + (measure != null ? " " + measure + "(s)" : "");
+			textBoxTotal.Text = $"{quantity:0.##}" + (measure != null ? " " + measure + "(s)" : "");
 		}
         #endregion
 

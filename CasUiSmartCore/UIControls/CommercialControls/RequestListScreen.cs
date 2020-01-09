@@ -441,15 +441,12 @@ namespace CAS.UI.UIControls.CommercialControls
 					foreach (RequestRecord blockedRecord in blockedRecords)
 					{
 						NextPerformance np = blockedRecord.Task.NextPerformances.First(n => n.BlockedByPackage != null);
-						message += string.Format("\nTask: {0} blocked by request {1}",
-													blockedRecord.Task,
-													np.BlockedByPackage);
+						message += $"\nTask: {blockedRecord.Task} blocked by request {np.BlockedByPackage}";
 					}
 					if (item.MaxClosingDate < item.MinClosingDate)
 					{
-						message += string.Format("\nMin Closing Date: {0} better than Max Closing Date: {1}",
-													item.MinClosingDate,
-													item.MaxClosingDate);
+						message +=
+							$"\nMin Closing Date: {item.MinClosingDate} better than Max Closing Date: {item.MaxClosingDate}";
 					}
 					MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
 									MessageBoxButtons.OK, MessageBoxIcon.Error);

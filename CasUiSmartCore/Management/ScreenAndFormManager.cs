@@ -46,7 +46,7 @@ namespace CAS.UI.Management
 
 			var form = GetEditFormInternal(forObject);
 			if (form == null)
-				throw new NotSupportedException(string.Format("Form not found for {0}", forObject));
+				throw new NotSupportedException($"Form not found for {forObject}");
 			return form;
 	    }
 
@@ -108,7 +108,7 @@ namespace CAS.UI.Management
 
 			var screen = GetEditScreenInternal(forObject);
 			if (screen == null)
-				throw new NotSupportedException(string.Format("Page is not found for {0}",forObject));
+				throw new NotSupportedException($"Page is not found for {forObject}");
 			return screen;
 
 	    }
@@ -168,7 +168,7 @@ namespace CAS.UI.Management
 			if (form != null)
 				return DisplayerParams.CreateFormParams(form);
 
-			throw new NotSupportedException(string.Format("Page of Form not found for {0}",forObject));
+			throw new NotSupportedException($"Page of Form not found for {forObject}");
 	    }
 
 		#endregion

@@ -61,7 +61,8 @@ namespace SmartCore.Queries
 		/// </summary>
 		public static String GetUpdateQuery() 
 		{
- 				return "Set dateformat dmy; Update [dbo].UsersPermissions Set PermissionId = @PermissionId, UserId = @UserId, OperatorId = @OperatorId  "+ String.Format("Where {0} = @{1}", ItemIdName, ItemIdName); 
+ 				return "Set dateformat dmy; Update [dbo].UsersPermissions Set PermissionId = @PermissionId, UserId = @UserId, OperatorId = @OperatorId  "+
+                       $"Where {ItemIdName} = @{ItemIdName}"; 
 		}
 		
 		#endregion

@@ -487,15 +487,12 @@ namespace CAS.UI.UIControls.WorkPakage
 				foreach (WorkPackageRecord blockedRecord in blockedRecords)
 				{
 					NextPerformance np = blockedRecord.Task.NextPerformances.First(n => n.BlockedByPackage != null);
-					message += string.Format("\nTask: {0} blocked by work package {1}",
-												blockedRecord.Task,
-												np.BlockedByPackage);
+					message += $"\nTask: {blockedRecord.Task} blocked by work package {np.BlockedByPackage}";
 				}
 				if(_currentWorkPackage.MaxClosingDate < _currentWorkPackage.MinClosingDate)
 				{
-					message += string.Format("\nMin Closing Date: {0} better than Max Closing Date: {1}",
-												_currentWorkPackage.MinClosingDate,
-												_currentWorkPackage.MaxClosingDate); 
+					message +=
+						$"\nMin Closing Date: {_currentWorkPackage.MinClosingDate} better than Max Closing Date: {_currentWorkPackage.MaxClosingDate}"; 
 				}
 				MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
 								MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -688,7 +685,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			catch (Exception ex)
 			{
 				string errorDescriptionSctring =
-					string.Format("Error while Open Attached File for {0}, id {1}. \nFileId {2}", selectedItem, selectedItem.ItemId, attachedFile.ItemId);
+					$"Error while Open Attached File for {selectedItem}, id {selectedItem.ItemId}. \nFileId {attachedFile.ItemId}";
 				Program.Provider.Logger.Log(errorDescriptionSctring, ex);
 			}
 		}

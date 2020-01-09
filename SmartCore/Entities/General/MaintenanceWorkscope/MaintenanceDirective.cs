@@ -1137,7 +1137,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		public string KitParentString
 		{
 			//get { return string.Format("MPD.:{0}:{1}:{2}", TaskNumberCheck, MPDTaskNumber, Description); }
-			get { return string.Format("MPD.:{0}", TaskCardNumber); }
+			get { return $"MPD.:{TaskCardNumber}"; }
 		}
 
 		#endregion

@@ -1774,9 +1774,7 @@ namespace CAS.UI.UIControls.StoresControls
 								else
 								{
 									labelDateAsOf.Text =
-										string.Format("Forecast: {0}. {1}",
-													   main.CheckName,
-													   main.NextPerformance);
+										$"Forecast: {main.CheckName}. {main.NextPerformance}";
 								}
 							}
 						}

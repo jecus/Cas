@@ -862,7 +862,7 @@ namespace SmartCore.Entities.General.Directives
 		/// </summary>
 		public string KitParentString
 		{
-			get { return string.Format("Dir.:{0}:{1}", Title, WorkType); }
+			get { return $"Dir.:{Title}:{WorkType}"; }
 		}
 		#endregion
 

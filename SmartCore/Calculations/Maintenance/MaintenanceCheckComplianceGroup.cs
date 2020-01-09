@@ -160,8 +160,8 @@ namespace SmartCore.Calculations.Maintenance
                 return "0";
             }
 
-            return string.Format("Type:{0}  Count:{1}  IsHasParent:{2}  CheckCycle:{3}",
-                Checks[0].CheckType.FullName, Checks.Count, ParentGroup != null, CheckCycle);
+            return
+	            $"Type:{Checks[0].CheckType.FullName}  Count:{Checks.Count}  IsHasParent:{ParentGroup != null}  CheckCycle:{CheckCycle}";
         }
 
         public string ToStringCheckNames()

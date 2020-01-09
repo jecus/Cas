@@ -408,9 +408,8 @@ namespace CASReports.Builders
                 }
                 else
                 {
-                    forecastDate = string.Format("{0}. {1}",
-                        fd.CheckName,
-                        SmartCore.Auxiliary.Convert.GetDateFormat(Convert.ToDateTime(fd.NextPerformance.PerformanceDate)));    
+                    forecastDate =
+	                    $"{fd.CheckName}. {SmartCore.Auxiliary.Convert.GetDateFormat(Convert.ToDateTime(fd.NextPerformance.PerformanceDate))}";    
                 }
             }
             destinationDataSet.ForecastTable.AddForecastTableRow(avgUtilizationCycles,

@@ -200,7 +200,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return string.Format("{0}, {1} {2}", _recordDate, _performance, _remarks);
+			return $"{_recordDate}, {_performance} {_remarks}";
 		}
 		#endregion
 

@@ -233,7 +233,7 @@ namespace CAS.UI.UIControls.ComponentControls
                         temp.Add(_currentComponentDirective.Remains);
                         temp.Resemble(threshold.FirstPerformanceSinceNew);
                         labelAircraftTCSNNext.Text = temp.ToString();
-                    //}
+                    
                     //else
                     //    labelAircraftTCSNNext.Text = "";
                 }
