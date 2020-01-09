@@ -133,6 +133,8 @@ namespace CAS.UI.UIControls.Auxiliary
                         ? UsefulMethods.NormalizeDate((DateTime)np.PerformanceDate) 
                         : "N/A",
                     np.PerformanceSource.ToString(),
+                    np?.NextLimit.Days != null ? SmartCore.Auxiliary.Convert.GetDateFormat(np?.NextPerformanceDateNew) : "",
+                    np.NextLimit.ToString(),
                     "",
                 };
 

@@ -509,6 +509,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
                         ? UsefulMethods.NormalizeDate((DateTime)np.PerformanceDate) 
                         : "N/A",
                     np.PerformanceSource.ToString(),
+                    np?.NextLimit.Days != null ? SmartCore.Auxiliary.Convert.GetDateFormat(np?.NextPerformanceDateNew) : "",
+                    np.NextLimit.ToString(),
                     "",
                 };
 
@@ -538,6 +540,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
                                                directiveRecord.OnLifelength != null
                                                    ? directiveRecord.OnLifelength.ToString()
                                                    : "",
+                                               "",
+                                               "",
                                                directiveRecord.Remarks,
                                            };
 

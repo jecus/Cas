@@ -357,6 +357,8 @@ namespace CAS.UI.UIControls.DirectivesControls
                             ? UsefulMethods.NormalizeDate((DateTime)np.PerformanceDate) 
                             : "N/A",
                         np.PerformanceSource.ToString(),
+                        np?.NextLimit.Days != null ? SmartCore.Auxiliary.Convert.GetDateFormat(np?.NextPerformanceDateNew) : "",
+                        np.NextLimit.ToString(),
                             "",
                     };
 
@@ -387,6 +389,8 @@ namespace CAS.UI.UIControls.DirectivesControls
                                        directiveRecord.OnLifelength != null
                                            ? directiveRecord.OnLifelength.ToString()
                                            : "",
+                                       "",
+                                       "",
                                        directiveRecord.Remarks,
                                    };
             ListViewItem newItem = new ListViewItem(subs)
