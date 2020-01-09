@@ -223,19 +223,19 @@ namespace CAS.UI.UIControls.ComponentControls
 
                     //наработка самолета на следующее исполнение
                     //наработка = наработка самолета на сегодня + остаток до первого исполнения
-                    ActualStateRecord asr = _currentComponentDirective.ParentComponent.ActualStateRecords.GetFirst();
-                    if (asr != null && tempAircraft != null &&  
-                        threshold.FirstPerformanceSinceNew.IsGreaterNullable(_currentComponentDirective.ParentComponent.ActualStateRecords.GetFirst().OnLifelength))
-                    {
+                    //ActualStateRecord asr = _currentComponentDirective.ParentComponent.ActualStateRecords.GetFirst();
+                    //if (asr != null && tempAircraft != null &&  
+                    //    threshold.FirstPerformanceSinceNew.IsGreaterNullable(_currentComponentDirective.ParentComponent.ActualStateRecords.GetFirst().OnLifelength))
+                    //{
                         //наработка на след выполнение больше той, что была при установке агрегата  
                         temp = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(tempAircraft);
                         //temp.Add(remains);
                         temp.Add(_currentComponentDirective.Remains);
                         temp.Resemble(threshold.FirstPerformanceSinceNew);
                         labelAircraftTCSNNext.Text = temp.ToString();
-                    }
-                    else
-                        labelAircraftTCSNNext.Text = "";
+                    //}
+                    //else
+                    //    labelAircraftTCSNNext.Text = "";
                 }
                 else if (threshold.FirstPerformanceSinceEffectiveDate != null && 
                         !threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
