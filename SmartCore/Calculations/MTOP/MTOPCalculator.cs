@@ -45,6 +45,8 @@ namespace SmartCore.Calculations.MTOP
 			if (directive.IsClosed || directive.Threshold == null)
 				return;
 
+
+			directive.NextPerformances.Clear();
 			var np = new NextPerformance{Parent = directive};
 
 			ThresholdConditionType conditionType;
