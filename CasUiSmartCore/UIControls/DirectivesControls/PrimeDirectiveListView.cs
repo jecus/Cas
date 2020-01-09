@@ -114,7 +114,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			AddColumn("Access", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Work Type", (int)(radGridView1.Width * 0.16f));
 			AddColumn("STC No", (int)(radGridView1.Width * 0.16f));
-			AddColumn("1st. Perf.", (int)(radGridView1.Width * 0.24f));
 			AddColumn("ATA Chapter", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Base Detail", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Kit", (int)(radGridView1.Width * 0.10f));
@@ -283,7 +282,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			subItems.Add(CreateRow(access, access));
 			subItems.Add(CreateRow(workType.ToString(), workType));
 			subItems.Add(CreateRow(stcno, stcno, stcColor));
-			subItems.Add(CreateRow(firstPerformanceString, firstPerformanceString));
 			subItems.Add(CreateRow(ata.ToString(), ata));
 			subItems.Add(CreateRow(baseDetail, baseDetail));
 			subItems.Add(CreateRow(kitRequieredString, kitRequieredString));
