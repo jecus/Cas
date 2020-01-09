@@ -139,7 +139,7 @@ namespace SmartCore.AircraftFlights
 							flight.PageNo = tempLast.PageNo;
 						else
 						{
-							if (tempLast.PageNo != "")
+							if (!string.IsNullOrEmpty(tempLast.PageNo))
 							{
 								int lastPageNum;
 								//проверка на правильность формата введения номера страницы
