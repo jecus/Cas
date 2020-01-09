@@ -105,7 +105,7 @@ namespace CAS.UI.UIControls.DirectivesControls
             //расчет след. выполнений директивы.
             //если известен ресурс прогноза, то будут расчитаны все просрочнные выполнения
             //если неизвестне, то только первое
-            GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDirective, forecastData);
+            //GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDirective, forecastData);
             nextPerformances.AddRange(_currentDirective.NextPerformances);
             lastRecords.AddRange(_currentDirective.PerformanceRecords.ToArray());
 

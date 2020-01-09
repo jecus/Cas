@@ -240,7 +240,8 @@ namespace CAS.UI.UIControls.DirectivesControls
 
             if (_needReload)
             {
-                GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDirective);
+               // GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDirective);
+                GlobalObjects.MTOPCalculator.CalculateDirectiveNew(_currentDirective);
             }
 
             if (AnimatedThreadWorker.CancellationPending)

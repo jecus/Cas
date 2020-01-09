@@ -1380,7 +1380,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			_effDate = _currentDirective.Threshold.EffectiveDate;
 
 			textBoxParagraph.Text = _currentDirective.Paragraph;
-			GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDirective);
+			//GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDirective);
 
 			imageLinkLabelStatus.Text = "Work type";
 			if (_currentDirective.Condition == ConditionState.NotEstimated)
