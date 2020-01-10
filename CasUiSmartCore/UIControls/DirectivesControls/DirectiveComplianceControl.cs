@@ -354,7 +354,7 @@ namespace CAS.UI.UIControls.DirectivesControls
                     {
                         np.WorkType + (d == null ? "" : " §:" + d.Paragraph),
                         np.PerformanceDate != null 
-                            ? UsefulMethods.NormalizeDate((DateTime)np.PerformanceDate) 
+                            ? SmartCore.Auxiliary.Convert.GetDateFormat(np.PerformanceDate)
                             : "N/A",
                         np.PerformanceSource.ToString(),
                         np?.NextLimit.Days != null ? SmartCore.Auxiliary.Convert.GetDateFormat(np?.NextPerformanceDateNew) : "",
