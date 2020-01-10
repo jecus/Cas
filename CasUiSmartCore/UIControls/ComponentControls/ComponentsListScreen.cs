@@ -1006,7 +1006,7 @@ namespace CAS.UI.UIControls.ComponentControls
 				detail.ChangeLLPCategoryRecords.Clear();
 				detail.ChangeLLPCategoryRecords.AddRange(llpchangeRec.Where(i => i.ParentId == detail.ItemId));
 
-				GlobalObjects.PerformanceCalculator.GetNextPerformance(detail);
+				GlobalObjects.MTOPCalculator.CalculateDirectiveNew(detail);
 				_preResultDirectiveArray.Add(detail);
 
 				foreach (ComponentDirective detailDirective in detail.ComponentDirectives)

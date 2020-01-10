@@ -215,6 +215,18 @@ namespace CAS.UI.UIControls.ComponentControls
 					
 				}
 
+
+				if (componentItem.LLPCategories)
+				{
+					nextEstimated = componentItem.NextPerformance?.PerformanceDate;
+					nextEstimatedData = componentItem.NextPerformance?.PerformanceSource;
+					remainEstimated = componentItem.NextPerformance?.Remains;
+
+					nextLimit = componentItem.NextPerformance?.NextPerformanceDateNew;
+					nextLimitData = componentItem.NextPerformance?.NextLimit;
+					remainLimit = componentItem.NextPerformance?.RemainLimit;
+				}
+
 				
 				ata = componentItem.Model != null ? componentItem.Model.ATAChapter : componentItem.ATAChapter;
 				partNumber = componentItem.PartNumber;
