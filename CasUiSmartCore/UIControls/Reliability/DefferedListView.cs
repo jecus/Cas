@@ -49,11 +49,19 @@ namespace CAS.UI.UIControls.Reliability
 			AddColumn("Category", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Status", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Effective date", (int)(radGridView1.Width * 0.24f));
+
 			AddColumn("1st. Perf.", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Rpt. Intv.", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Next", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Remain/Overdue", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Last", (int)(radGridView1.Width * 0.10f));
+			AddColumn("Rpt. Intv.", (int)(radGridView1.Width * 0.20f));
+			AddColumn("Next(E)", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Next Estimated Data", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Remain(E)", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Next(L)", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Next Limit Data", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Remain(L)", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Last", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Last Data", (int)(radGridView1.Width * 0.2f));
+
+
 			AddColumn("ATA Chapter", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Kit", (int)(radGridView1.Width * 0.10f));
 			AddColumn("NDT", (int)(radGridView1.Width * 0.10f));
@@ -135,17 +143,13 @@ namespace CAS.UI.UIControls.Reliability
 
 			if (lastComplianceDate <= DateTimeExtend.GetCASMinDateTime())
 				lastPerformanceString = "N/A";
-			else
-				lastPerformanceString = SmartCore.Auxiliary.Convert.GetDateFormat(lastComplianceDate) + " " +
-										lastComplianceLifeLength;
+			else lastPerformanceString = lastComplianceLifeLength.ToString();
 
-			var nextComplianceString = ((nextComplianceDate <= DateTimeExtend.GetCASMinDateTime())
-											   ? ""
-											   : SmartCore.Auxiliary.Convert.GetDateFormat(nextComplianceDate)) + " " +
-										  nextComplianceLifeLength;
-			var nextRemainString = nextComplianceRemain != null && !nextComplianceRemain.IsNullOrZero()
-										  ? nextComplianceRemain.ToString()
-										  : "N/A";
+			var lastDate = (lastComplianceDate <= DateTimeExtend.GetCASMinDateTime())
+				? ""
+				: SmartCore.Auxiliary.Convert.GetDateFormat(lastComplianceDate);
+
+
 			var titleString = pd.Title != "" ? pd.Title + par : "N/A";
 			var sbString = pd.ServiceBulletinNo != "" ? pd.ServiceBulletinNo : "N/A";
 			var eoString = pd.EngineeringOrders != "" ? pd.EngineeringOrders : "N/A";
@@ -173,11 +177,17 @@ namespace CAS.UI.UIControls.Reliability
 			subItems.Add(CreateRow(status.ToString(), status));
 			subItems.Add(CreateRow(effDate > DateTimeExtend.GetCASMinDateTime()
 				? SmartCore.Auxiliary.Convert.GetDateFormat(effDate) : "", effDate));
-			subItems.Add(CreateRow(firstPerformanceString, firstPerformanceString));
-			subItems.Add(CreateRow(repeatInterval.ToString(), repeatInterval));
-			subItems.Add(CreateRow(nextComplianceString, nextComplianceDate));
-			subItems.Add(CreateRow(nextRemainString, nextRemainString));
+
+			subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.NextPerformance?.PerformanceDate), item.NextPerformance?.PerformanceDate));
+			subItems.Add(CreateRow(item.NextPerformance?.PerformanceSource.ToString(), item.NextPerformance?.PerformanceSource));
+			subItems.Add(CreateRow(item.NextPerformance?.Remains.ToString(), item.NextPerformance?.Remains));
+			subItems.Add(CreateRow(item.NextPerformance?.NextLimit.Days != null ? SmartCore.Auxiliary.Convert.GetDateFormat(item.NextPerformance?.NextPerformanceDateNew) : "", item.NextPerformance?.NextPerformanceDateNew));
+			subItems.Add(CreateRow(item.NextPerformance?.NextLimit.ToString(), item.NextPerformance?.NextLimit.ToString()));
+			subItems.Add(CreateRow(item.NextPerformance?.RemainLimit.ToString(), item.NextPerformance?.RemainLimit.ToString()));
+			subItems.Add(CreateRow(lastDate, lastComplianceDate));
 			subItems.Add(CreateRow(lastPerformanceString, lastComplianceDate));
+
+
 			subItems.Add(CreateRow(ata.ToString(), ata));
 			subItems.Add(CreateRow(kitRequieredString, kitRequieredString));
 			subItems.Add(CreateRow(ndtString, ndtString));

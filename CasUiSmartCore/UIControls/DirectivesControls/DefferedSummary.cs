@@ -128,7 +128,7 @@ namespace CAS.UI.UIControls.DirectivesControls
                 return;
 
             var aircraft = GlobalObjects.AircraftsCore.GetParentAircraft(_currentDefferedItem);
-            GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDefferedItem);
+            //GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDefferedItem);
             var ata = _currentDefferedItem.ATAChapter;
 
             labelDirectiveValue.Text = _currentDefferedItem.Title + " for";

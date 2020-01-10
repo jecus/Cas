@@ -236,7 +236,8 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 			foreach (Directive pd in _initialDirectiveArray)
 			{
-				GlobalObjects.PerformanceCalculator.GetNextPerformance(pd);
+				//GlobalObjects.PerformanceCalculator.GetNextPerformance(pd);
+				GlobalObjects.MTOPCalculator.CalculateDirectiveNew(pd);
 			}
 
 			AnimatedThreadWorker.ReportProgress(70, "filter directives");
