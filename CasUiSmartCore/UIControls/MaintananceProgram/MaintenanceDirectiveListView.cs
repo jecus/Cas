@@ -185,7 +185,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			var mrb = item.MRB != "" ? item.MRB : "N/A";
 			var check = item.MaintenanceCheck != null ? item.MaintenanceCheck.Name : "N/A";
 			var status = item.Status;
-			var condition = string.IsNullOrEmpty(firstPerformanceString) ? (item.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst
+			var condition = !string.IsNullOrEmpty(firstPerformanceString) ? (item.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst
 				? "/WF"
 				: "/WL") : "";
 

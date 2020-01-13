@@ -146,7 +146,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			var corrective = item is DamageItem ? ((DamageItem)item).CorrectiveAction : "";
 			var temporaryString = item is DamageItem ? (((DamageItem)item).IsTemporary ? "Yes" : "No") : "";
 			var ata = item.ATAChapter;
-			var condition = string.IsNullOrEmpty(firstPerformanceString) ? (item.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst
+			var condition = !string.IsNullOrEmpty(firstPerformanceString) ? (item.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst
 				? "/WF"
 				: "/WL") : "";
 

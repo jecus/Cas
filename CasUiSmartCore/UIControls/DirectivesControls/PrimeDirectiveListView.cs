@@ -223,7 +223,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			var zone = item.DirectiveZone;
 			var workarea = item.Workarea;
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
-			var condition = string.IsNullOrEmpty(firstPerformanceString) ? (item.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst
+			var condition = !string.IsNullOrEmpty(firstPerformanceString) ? (item.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst
 				? "/WF"
 				: "/WL") : "";
 
