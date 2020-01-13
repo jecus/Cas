@@ -112,7 +112,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
             // 
             this.NextEstimatedData.Text = "Next Estimated Data";
             this.NextEstimatedData.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NextEstimatedData.Width = 120;
+            this.NextEstimatedData.Width = 150;
             // 
             // NextLimit
             // 
