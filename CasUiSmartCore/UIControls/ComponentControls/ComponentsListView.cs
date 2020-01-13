@@ -248,10 +248,9 @@ namespace CAS.UI.UIControls.ComponentControls
 				hiddenRemarks = componentItem.HiddenRemarks;
 				expiryDate = " ";
 				expiryRemain = Lifelength.Null;
-				condition = componentItem.Threshold.FirstPerformanceConditionType ==
-				            ThresholdConditionType.WhicheverFirst
-					? "WF"
-					: "WL";
+				condition = !firstPerformance.IsNullOrZero() ? (componentItem.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst
+					? "/WF"
+					: "/WL") : "";
 			}
 			else
 			{
@@ -308,10 +307,9 @@ namespace CAS.UI.UIControls.ComponentControls
 				hiddenRemarks = dd.HiddenRemarks;
 				workType = dd.DirectiveType.ToString();
 				ndtString = dd.NDTType.ShortName;
-				condition = dd.Threshold.FirstPerformanceConditionType ==
-				            ThresholdConditionType.WhicheverFirst
-					? "WF"
-					: "WL";
+				condition = !firstPerformance.IsNullOrZero() ? (dd.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst
+					? "/WF"
+					: "/WL") : "";
 
 
 
@@ -342,7 +340,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			subItems.Add(CreateRow(access, access));
 			subItems.Add(CreateRow(transferDate > DateTimeExtend.GetCASMinDateTime()
 				? SmartCore.Auxiliary.Convert.GetDateFormat(transferDate) : "", transferDate));
-			subItems.Add(CreateRow($"{firstPerformance} /{condition}", firstPerformance));
+			subItems.Add(CreateRow($"{firstPerformance} {condition}", firstPerformance));
 			subItems.Add(CreateRow(repeatInterval.ToString(), repeatInterval));
 
 

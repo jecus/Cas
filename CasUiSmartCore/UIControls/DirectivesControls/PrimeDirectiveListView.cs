@@ -223,10 +223,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 			var zone = item.DirectiveZone;
 			var workarea = item.Workarea;
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
-			var condition = item.Threshold.FirstPerformanceConditionType ==
-			                ThresholdConditionType.WhicheverFirst
-				? "WF"
-				: "WL";
+			var condition = string.IsNullOrEmpty(firstPerformanceString) ? (item.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst
+				? "/WF"
+				: "/WL") : "";
 
 			if (item.ADNoFile == null)
 				adColor = Color.MediumVioletRed;
@@ -264,7 +263,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			subItems.Add(CreateRow(s3, s3, c3));
 			subItems.Add(CreateRow(applicabilityString, applicabilityString));
 			subItems.Add(CreateRow(descriptionString, descriptionString));
-			subItems.Add(CreateRow($"{firstPerformanceString} /{condition}", firstPerformanceString));
+			subItems.Add(CreateRow($"{firstPerformanceString} {condition}", firstPerformanceString));
 			subItems.Add(CreateRow(repeatInterval.ToString(), repeatInterval));
 			subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.NextPerformance?.PerformanceDate), item.NextPerformance?.PerformanceDate));
 			subItems.Add(CreateRow(item.NextPerformance?.PerformanceSource.ToString(), item.NextPerformance?.PerformanceSource));
