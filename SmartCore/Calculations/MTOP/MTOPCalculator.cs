@@ -139,13 +139,15 @@ namespace SmartCore.Calculations.MTOP
 
 			#region Расчет даты
 
-
 			double? days;
 			if (directive.LastPerformance != null)
 			{
 				days = AnalystHelper.GetApproximateDays(directive.LastPerformance.RecordDate, threshold.RepeatInterval, au, conditionType);
 				if (days != null)
+				{
 					np.NextPerformanceDateNew = directive.LastPerformance.RecordDate.AddDays(Convert.ToDouble(days));
+					np.PerformanceDate = directive.LastPerformance.RecordDate.AddDays(Convert.ToDouble(days));
+				}
 			}
 			else
 			{
@@ -156,15 +158,17 @@ namespace SmartCore.Calculations.MTOP
 						np.NextPerformanceDateNew = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(Convert.ToDouble(days));
 					else np.NextPerformanceDateNew = AnalystHelper.GetApproximateDate(np.RemainLimit, au, conditionType);
 				}
+
+				days = np.PerformanceSource.Days;
+				if (days != null)
+				{
+					if (days <= current.Days)
+						np.PerformanceDate = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(Convert.ToDouble(days));
+					else np.PerformanceDate = AnalystHelper.GetApproximateDate(np.RemainLimit, au, conditionType);
+				}
 			}
 
-			days = np.PerformanceSource.Days;
-			if (days != null)
-			{
-				if (days <= current.Days)
-					np.PerformanceDate = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(Convert.ToDouble(days));
-				else np.PerformanceDate = AnalystHelper.GetApproximateDate(np.RemainLimit, au, conditionType);
-			}
+			
 
 			#endregion}
 
