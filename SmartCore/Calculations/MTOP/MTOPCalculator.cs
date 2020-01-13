@@ -42,7 +42,7 @@ namespace SmartCore.Calculations.MTOP
 			if (directive == null)
 				return;
 
-			if (directive.IsClosed || directive.Threshold == null)
+			if (directive.IsClosed || directive.Threshold == null || directive.Threshold.RepeatInterval.IsNullOrZero())
 				return;
 
 
