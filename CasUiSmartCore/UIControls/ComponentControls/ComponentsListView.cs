@@ -190,6 +190,7 @@ namespace CAS.UI.UIControls.ComponentControls
 				   zone = "",
 				   access = "",
 				   expiryDate = "",
+				   condition = "",
 				   ndtString = "";
 			double manHours,
 				   cost,
@@ -247,6 +248,10 @@ namespace CAS.UI.UIControls.ComponentControls
 				hiddenRemarks = componentItem.HiddenRemarks;
 				expiryDate = " ";
 				expiryRemain = Lifelength.Null;
+				condition = componentItem.Threshold.FirstPerformanceConditionType ==
+				            ThresholdConditionType.WhicheverFirst
+					? "WF"
+					: "WL";
 			}
 			else
 			{
@@ -303,9 +308,12 @@ namespace CAS.UI.UIControls.ComponentControls
 				hiddenRemarks = dd.HiddenRemarks;
 				workType = dd.DirectiveType.ToString();
 				ndtString = dd.NDTType.ShortName;
-				
+				condition = dd.Threshold.FirstPerformanceConditionType ==
+				            ThresholdConditionType.WhicheverFirst
+					? "WF"
+					: "WL";
 
-				
+
 
 				if (dd.IsExpiry)
 				{
@@ -334,7 +342,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			subItems.Add(CreateRow(access, access));
 			subItems.Add(CreateRow(transferDate > DateTimeExtend.GetCASMinDateTime()
 				? SmartCore.Auxiliary.Convert.GetDateFormat(transferDate) : "", transferDate));
-			subItems.Add(CreateRow(firstPerformance?.ToString(), firstPerformance));
+			subItems.Add(CreateRow($"{firstPerformance} /{condition}", firstPerformance));
 			subItems.Add(CreateRow(repeatInterval.ToString(), repeatInterval));
 
 

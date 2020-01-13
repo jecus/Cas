@@ -146,6 +146,10 @@ namespace CAS.UI.UIControls.DirectivesControls
 			var corrective = item is DamageItem ? ((DamageItem)item).CorrectiveAction : "";
 			var temporaryString = item is DamageItem ? (((DamageItem)item).IsTemporary ? "Yes" : "No") : "";
 			var ata = item.ATAChapter;
+			var condition = item.Threshold.FirstPerformanceConditionType ==
+			                ThresholdConditionType.WhicheverFirst
+				? "WF"
+				: "WL";
 
 			subItems.Add(CreateRow(titleString, titleString));
 			subItems.Add(CreateRow(sbString, sbString));
@@ -162,7 +166,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			subItems.Add(CreateRow(status.ToString(), status));
 			subItems.Add(CreateRow(effDate > DateTimeExtend.GetCASMinDateTime()
 				? SmartCore.Auxiliary.Convert.GetDateFormat(effDate) : "", effDate));
-			subItems.Add(CreateRow(firstPerformanceString, firstPerformanceString));
+			subItems.Add(CreateRow($"{firstPerformanceString} /{condition}", firstPerformanceString));
 			subItems.Add(CreateRow(repeatInterval.ToString(), repeatInterval));
 
 			subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.NextPerformance?.PerformanceDate), item.NextPerformance?.PerformanceDate));
