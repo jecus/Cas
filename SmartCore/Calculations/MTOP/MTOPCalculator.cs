@@ -65,7 +65,7 @@ namespace SmartCore.Calculations.MTOP
 					: null;
 
 				if (!threshold.FirstPerformanceSinceNew.IsNullOrZero())
-					np.NextLimit = new Lifelength(threshold.FirstPerformanceSinceNew);
+					np.NextLimit = new Lifelength(CalculateWithUtilization(threshold.FirstPerformanceSinceNew, au, conditionType));
 				else if (!threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
 				{
 					var sinceEffDate = _calculator.GetFlightLifelengthOnStartOfDay(directive.LifeLengthParent, threshold.EffectiveDate);
@@ -74,7 +74,7 @@ namespace SmartCore.Calculations.MTOP
 						sinceEffDate.Add(threshold.EffectiveDate, threshold.FirstPerformanceSinceEffectiveDate);
 					else sinceEffDate.Add(threshold.FirstPerformanceSinceEffectiveDate);
 
-					np.NextLimit = new Lifelength(sinceEffDate);
+					np.NextLimit = new Lifelength(CalculateWithUtilization(sinceEffDate, au, conditionType));
 				}
 				else return;
 			}
@@ -85,7 +85,7 @@ namespace SmartCore.Calculations.MTOP
 					? new Lifelength(directive.Threshold.RepeatNotification)
 					: null;
 
-				np.NextLimit = new Lifelength(directive.LastPerformance.OnLifelength);
+				np.NextLimit = new Lifelength(CalculateWithUtilization(directive.LastPerformance.OnLifelength, au, conditionType));
 
 				if (!threshold.RepeatInterval.IsNullOrZero())
 					np.NextLimit.Add(threshold.RepeatInterval);
@@ -173,6 +173,37 @@ namespace SmartCore.Calculations.MTOP
 			#endregion}
 
 			directive.NextPerformances.Add(np);
+		}
+
+		public Lifelength CalculateWithUtilization(Lifelength thresh, AverageUtilization averageUtilization, ThresholdConditionType conditionType)
+		{
+			if(thresh.IsNullOrZero())
+				return Lifelength.Null;
+
+			var dict = new Dictionary<string, double>();
+
+			if (thresh.Days != null)
+				dict.Add("Days", thresh.Days.Value);
+
+			if (thresh.Hours != null)
+				dict.Add("Hours", thresh.Hours.Value / averageUtilization.Hours);
+
+			if (thresh.Cycles != null)
+				dict.Add("Cycles", thresh.Cycles.Value / (averageUtilization.Hours / averageUtilization.Cycles));
+
+			var res = Lifelength.Null;
+			if (conditionType == ThresholdConditionType.WhicheverFirst)
+			{
+				var min = dict.OrderBy(i => i.Value).FirstOrDefault();
+				res.Days = (int?)Math.Round(min.Value);
+			}
+			else
+			{
+				var min = dict.OrderByDescending(i => i.Value).FirstOrDefault();
+				res.Days = (int?)Math.Round(min.Value);
+			}
+
+			return CalculateWithUtilization(res, averageUtilization);
 		}
 
 		public Lifelength CalculateWithUtilization(Lifelength thresh, AverageUtilization averageUtilization)

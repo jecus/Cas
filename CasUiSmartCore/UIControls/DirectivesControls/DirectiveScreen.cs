@@ -238,12 +238,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 
             AnimatedThreadWorker.ReportProgress(40, "calculation of directives");
 
-            if (_needReload)
-            {
-               // GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDirective);
-                GlobalObjects.MTOPCalculator.CalculateDirectiveNew(_currentDirective);
-            }
 
+	        GlobalObjects.MTOPCalculator.CalculateDirectiveNew(_currentDirective);
+	        
             if (AnimatedThreadWorker.CancellationPending)
             {
                 e.Cancel = true;
