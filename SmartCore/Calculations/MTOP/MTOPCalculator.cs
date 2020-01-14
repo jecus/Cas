@@ -97,12 +97,7 @@ namespace SmartCore.Calculations.MTOP
 			np.RemainLimit = new Lifelength(np.NextLimit);
 			np.RemainLimit.Substract(current);
 
-			if (!threshold.RepeatInterval.IsNullOrZero())
-			{
-				np.RemainLimit.Resemble(threshold.RepeatInterval);
-				np.NextLimit.Resemble(threshold.RepeatInterval);
-			}
-			else if (!threshold.FirstPerformanceSinceNew.IsNullOrZero())
+			if (!threshold.FirstPerformanceSinceNew.IsNullOrZero())
 			{
 				np.RemainLimit.Resemble(threshold.FirstPerformanceSinceNew);
 				np.NextLimit.Resemble(threshold.FirstPerformanceSinceNew);
@@ -112,7 +107,6 @@ namespace SmartCore.Calculations.MTOP
 				np.RemainLimit.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
 				np.NextLimit.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
 			}
-
 
 
 			np.Remains = new Lifelength(CalculateWithUtilization(np.RemainLimit, au));
