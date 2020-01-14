@@ -83,7 +83,7 @@ namespace SmartCore.Calculations.MTOP
 			}
 			else
 			{
-				conditionType = threshold.FirstPerformanceConditionType;
+				conditionType = threshold.RepeatPerformanceConditionType;
 				notify = directive.Threshold.RepeatNotification != null
 					? new Lifelength(directive.Threshold.RepeatNotification)
 					: null;

@@ -188,6 +188,9 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			var condition = !string.IsNullOrEmpty(firstPerformanceString) ? (item.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst
 				? "/WF"
 				: "/WL") : "";
+			var conditionRepeat = !item.Threshold.RepeatInterval.IsNullOrZero() ? (item.Threshold.RepeatPerformanceConditionType == ThresholdConditionType.WhicheverFirst
+				? "/WF"
+				: "/WL") : "";
 
 			if (item.TaskCardNumberFile == null)
 				tcnColor = Color.MediumVioletRed;
@@ -205,7 +208,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			subItems.Add(CreateRow(check, check));
 			subItems.Add(CreateRow(item.APUCalc ? "Yes" : "No", item.APUCalc));
 			subItems.Add(CreateRow($"{firstPerformanceString} {condition}", firstPerformanceString));
-			subItems.Add(CreateRow(repeat, item.Threshold.RepeatInterval));
+			subItems.Add(CreateRow($"{repeat} {conditionRepeat}", item.Threshold.RepeatInterval));
 			subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.NextPerformance?.PerformanceDate), item.NextPerformance?.PerformanceDate));
 			subItems.Add(CreateRow(item.NextPerformance?.PerformanceSource.ToString(), item.NextPerformance?.PerformanceSource));
 			subItems.Add(CreateRow(item.NextPerformance?.Remains.ToString(), item.NextPerformance?.Remains));

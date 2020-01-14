@@ -191,6 +191,7 @@ namespace CAS.UI.UIControls.ComponentControls
 				   access = "",
 				   expiryDate = "",
 				   condition = "",
+				   conditionRepeat = "",
 				   ndtString = "";
 			double manHours,
 				   cost,
@@ -249,6 +250,9 @@ namespace CAS.UI.UIControls.ComponentControls
 				expiryDate = " ";
 				expiryRemain = Lifelength.Null;
 				condition = !firstPerformance.IsNullOrZero() ? (componentItem.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst
+					? "/WF"
+					: "/WL") : "";
+				conditionRepeat = !componentItem.Threshold.RepeatInterval.IsNullOrZero() ? (componentItem.Threshold.RepeatPerformanceConditionType == ThresholdConditionType.WhicheverFirst
 					? "/WF"
 					: "/WL") : "";
 			}
@@ -310,6 +314,9 @@ namespace CAS.UI.UIControls.ComponentControls
 				condition = !firstPerformance.IsNullOrZero() ? (dd.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst
 					? "/WF"
 					: "/WL") : "";
+				conditionRepeat = !dd.Threshold.RepeatInterval.IsNullOrZero() ? (dd.Threshold.RepeatPerformanceConditionType == ThresholdConditionType.WhicheverFirst
+					? "/WF"
+					: "/WL") : "";
 
 
 
@@ -341,7 +348,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			subItems.Add(CreateRow(transferDate > DateTimeExtend.GetCASMinDateTime()
 				? SmartCore.Auxiliary.Convert.GetDateFormat(transferDate) : "", transferDate));
 			subItems.Add(CreateRow($"{firstPerformance} {condition}", firstPerformance));
-			subItems.Add(CreateRow(repeatInterval.ToString(), repeatInterval));
+			subItems.Add(CreateRow($"{repeatInterval} {repeatInterval}", repeatInterval));
 
 
 			subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(nextEstimated), nextEstimated));

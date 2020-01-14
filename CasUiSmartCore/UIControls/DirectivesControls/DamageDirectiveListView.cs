@@ -149,6 +149,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 			var condition = !string.IsNullOrEmpty(firstPerformanceString) ? (item.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst
 				? "/WF"
 				: "/WL") : "";
+			var conditionRepeat = !item.Threshold.RepeatInterval.IsNullOrZero() ? (item.Threshold.RepeatPerformanceConditionType == ThresholdConditionType.WhicheverFirst
+				? "/WF"
+				: "/WL") : "";
 
 			subItems.Add(CreateRow(titleString, titleString));
 			subItems.Add(CreateRow(sbString, sbString));
@@ -166,7 +169,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			subItems.Add(CreateRow(effDate > DateTimeExtend.GetCASMinDateTime()
 				? SmartCore.Auxiliary.Convert.GetDateFormat(effDate) : "", effDate));
 			subItems.Add(CreateRow($"{firstPerformanceString} {condition}", firstPerformanceString));
-			subItems.Add(CreateRow(repeatInterval.ToString(), repeatInterval));
+			subItems.Add(CreateRow($"{repeatInterval} {conditionRepeat}", repeatInterval));
 
 			subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.NextPerformance?.PerformanceDate), item.NextPerformance?.PerformanceDate));
 			subItems.Add(CreateRow(item.NextPerformance?.PerformanceSource.ToString(), item.NextPerformance?.PerformanceSource));
