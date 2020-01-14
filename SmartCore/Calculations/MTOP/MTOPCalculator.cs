@@ -51,6 +51,7 @@ namespace SmartCore.Calculations.MTOP
 
 			ThresholdConditionType conditionType;
 			Lifelength notify;
+			Lifelength temp;
 
 			var threshold = directive.Threshold;
 			var current = _calculator.GetFlightLifelengthOnEndOfDay(directive.LifeLengthParent, DateTime.Today);
@@ -77,6 +78,8 @@ namespace SmartCore.Calculations.MTOP
 					np.NextLimit = new Lifelength(sinceEffDate);
 				}
 				else return;
+
+				temp = new Lifelength(np.NextLimit);
 			}
 			else
 			{
@@ -87,8 +90,12 @@ namespace SmartCore.Calculations.MTOP
 
 				np.NextLimit = new Lifelength(directive.LastPerformance.OnLifelength);
 
+
 				if (!threshold.RepeatInterval.IsNullOrZero())
+				{
 					np.NextLimit.Add(threshold.RepeatInterval);
+					temp = new Lifelength(threshold.RepeatInterval);
+				}
 				
 				else return;
 			}
@@ -108,9 +115,15 @@ namespace SmartCore.Calculations.MTOP
 				np.NextLimit.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
 			}
 
+			if(directive.LastPerformance == null)
+				np.PerformanceSource = new Lifelength(CalculateWithUtilization(temp, au, conditionType));
+			else
+			{
+				var res = CalculateWithUtilization(temp, au, conditionType);
+				res.Add(directive.LastPerformance.OnLifelength);
+				np.PerformanceSource = new Lifelength(res);
+			}
 
-			
-			np.PerformanceSource = new Lifelength(CalculateWithUtilization(np.NextLimit, au, conditionType));
 			np.Remains = new Lifelength(np.PerformanceSource);
 			np.Remains.Substract(current);
 
