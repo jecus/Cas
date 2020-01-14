@@ -65,7 +65,7 @@ namespace SmartCore.Calculations.MTOP
 					: null;
 
 				if (!threshold.FirstPerformanceSinceNew.IsNullOrZero())
-					np.NextLimit = new Lifelength(CalculateWithUtilization(threshold.FirstPerformanceSinceNew, au, conditionType));
+					np.NextLimit = new Lifelength(threshold.FirstPerformanceSinceNew);
 				else if (!threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
 				{
 					var sinceEffDate = _calculator.GetFlightLifelengthOnStartOfDay(directive.LifeLengthParent, threshold.EffectiveDate);
@@ -74,7 +74,7 @@ namespace SmartCore.Calculations.MTOP
 						sinceEffDate.Add(threshold.EffectiveDate, threshold.FirstPerformanceSinceEffectiveDate);
 					else sinceEffDate.Add(threshold.FirstPerformanceSinceEffectiveDate);
 
-					np.NextLimit = new Lifelength(CalculateWithUtilization(sinceEffDate, au, conditionType));
+					np.NextLimit = new Lifelength(sinceEffDate);
 				}
 				else return;
 			}
@@ -85,7 +85,7 @@ namespace SmartCore.Calculations.MTOP
 					? new Lifelength(directive.Threshold.RepeatNotification)
 					: null;
 
-				np.NextLimit = new Lifelength(CalculateWithUtilization(directive.LastPerformance.OnLifelength, au, conditionType));
+				np.NextLimit = new Lifelength(directive.LastPerformance.OnLifelength);
 
 				if (!threshold.RepeatInterval.IsNullOrZero())
 					np.NextLimit.Add(threshold.RepeatInterval);
@@ -109,9 +109,10 @@ namespace SmartCore.Calculations.MTOP
 			}
 
 
-			np.Remains = new Lifelength(CalculateWithUtilization(np.RemainLimit, au));
-			np.PerformanceSource = new Lifelength(np.Remains);
-			np.PerformanceSource.Add(current);
+			
+			np.PerformanceSource = new Lifelength(CalculateWithUtilization(np.NextLimit, au, conditionType));
+			np.Remains = new Lifelength(np.PerformanceSource);
+			np.Remains.Substract(current);
 
 			#region Расчет текущего состояния задачи в зависимости от условий выполнения
 
@@ -189,12 +190,12 @@ namespace SmartCore.Calculations.MTOP
 			if (conditionType == ThresholdConditionType.WhicheverFirst)
 			{
 				var min = dict.OrderBy(i => i.Value).FirstOrDefault();
-				res.Days = (int?)Math.Round(min.Value);
+				res.Days = (int?)(min.Value);
 			}
 			else
 			{
 				var min = dict.OrderByDescending(i => i.Value).FirstOrDefault();
-				res.Days = (int?)Math.Round(min.Value);
+				res.Days = (int?)(min.Value);
 			}
 
 			return CalculateWithUtilization(res, averageUtilization);
@@ -279,9 +280,13 @@ namespace SmartCore.Calculations.MTOP
 				}
 			}
 
-			res.Hours = (int)Math.Round(hoursPhase > -1 ? hoursPhase : hours);
-			res.Cycles = (int)Math.Round(cyclesPhase > -1 ? cyclesPhase : cycles);
-			res.Days = (int)Math.Round(daysPhase > -1 ? daysPhase : days);
+			//res.Hours = (int)Math.Round(hoursPhase > -1 ? hoursPhase : hours);
+			//res.Cycles = (int)Math.Round(cyclesPhase > -1 ? cyclesPhase : cycles);
+			//res.Days = (int)Math.Round(daysPhase > -1 ? daysPhase : days);
+
+			res.Hours = (int)(hoursPhase > -1 ? hoursPhase : hours);
+			res.Cycles = (int)(cyclesPhase > -1 ? cyclesPhase : cycles);
+			res.Days = (int)(daysPhase > -1 ? daysPhase : days);
 
 			return res;
 		}
