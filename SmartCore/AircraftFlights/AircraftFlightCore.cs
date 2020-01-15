@@ -999,7 +999,10 @@ namespace SmartCore.AircraftFlights
 
 		private AircraftFlight getLastAircraftFlight(int aircraftId, int atlbId)
 		{
-			return _flights.ContainsKey(aircraftId) ? _flights[aircraftId].Where(i => i.ATLBId == atlbId).OrderBy(i => i.ItemId).LastOrDefault() ?? getLastAircraftFlight(aircraftId) : null;
+			return _flights.ContainsKey(aircraftId) ? _flights[aircraftId]
+				                                          .Where(i => i.ATLBId == atlbId && i.AtlbRecordType == AtlbRecordType.Flight)
+				                                          .OrderBy(i => i.FlightDate).LastOrDefault() 
+			                                          ?? getLastAircraftFlight(aircraftId) : null;
 		}
 
 		#region private AircraftFlight loadFullAircraftFlightById(int flightId, Aircraft parentAircraft)
