@@ -226,6 +226,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 			var condition = !string.IsNullOrEmpty(firstPerformanceString) ? (item.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst
 				? "/WF"
 				: "/WL") : "";
+			var conditionRepeat = !item.Threshold.RepeatInterval.IsNullOrZero() ? (item.Threshold.RepeatPerformanceConditionType == ThresholdConditionType.WhicheverFirst
+				? "/WF"
+				: "/WL") : "";
 
 			if (item.ADNoFile == null)
 				adColor = Color.MediumVioletRed;
@@ -264,7 +267,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			subItems.Add(CreateRow(applicabilityString, applicabilityString));
 			subItems.Add(CreateRow(descriptionString, descriptionString));
 			subItems.Add(CreateRow($"{firstPerformanceString} {condition}", firstPerformanceString));
-			subItems.Add(CreateRow(repeatInterval.ToString(), repeatInterval));
+			subItems.Add(CreateRow($"{repeatInterval} {conditionRepeat}", repeatInterval));
 			subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.NextPerformance?.PerformanceDate), item.NextPerformance?.PerformanceDate));
 			subItems.Add(CreateRow(item.NextPerformance?.PerformanceSource.ToString(), item.NextPerformance?.PerformanceSource));
 			subItems.Add(CreateRow(item.NextPerformance?.Remains.ToString(), item.NextPerformance?.Remains));
