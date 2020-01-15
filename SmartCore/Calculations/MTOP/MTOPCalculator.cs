@@ -52,6 +52,7 @@ namespace SmartCore.Calculations.MTOP
 			ThresholdConditionType conditionType;
 			Lifelength notify;
 			Lifelength temp;
+			bool alredyCalculate = false;
 
 			var threshold = directive.Threshold;
 			var current = _calculator.GetFlightLifelengthOnEndOfDay(directive.LifeLengthParent, DateTime.Today);
@@ -65,15 +66,67 @@ namespace SmartCore.Calculations.MTOP
 					? new Lifelength(threshold.FirstNotification)
 					: null;
 
-				if (!threshold.FirstPerformanceSinceNew.IsNullOrZero())
+				if (!threshold.FirstPerformanceSinceNew.IsNullOrZero() && !threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+				{
+					alredyCalculate = true;
+
+					var sn = new Lifelength(threshold.FirstPerformanceSinceNew);
+
+					var sed = _calculator.GetFlightLifelengthOnStartOfDay(directive.LifeLengthParent, threshold.EffectiveDate);
+					sed.Add(threshold.FirstPerformanceSinceEffectiveDate);
+					sed.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
+
+					var remainSn = new Lifelength(sn);
+					remainSn.Substract(current);
+
+					var remainSed = new Lifelength(sed);
+					remainSed.Substract(current);
+
+					remainSn.Resemble(threshold.FirstPerformanceSinceNew);
+					remainSed.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
+
+					var snCalc = CalculateWithUtilization(remainSn, au, conditionType);
+					var sedCalc = CalculateWithUtilization(remainSed, au, conditionType);
+
+
+					if (conditionType == ThresholdConditionType.WhicheverFirst)
+					{
+						if (snCalc.IsLessByAnyParameter(sedCalc))
+						{
+							np.NextLimit = new Lifelength(sn);
+							np.RemainLimit = new Lifelength(remainSn);
+							np.Remains = new Lifelength(snCalc);
+						}
+						else
+						{
+							np.NextLimit = new Lifelength(sed);
+							np.RemainLimit = new Lifelength(remainSed);
+							np.Remains = new Lifelength(sedCalc);
+						}
+					}
+					else
+					{
+						if (snCalc.IsGreaterByAnyParameter(sedCalc))
+						{
+							np.NextLimit = new Lifelength(sn);
+							np.RemainLimit = new Lifelength(remainSn);
+							np.Remains = new Lifelength(snCalc);
+						}
+						else
+						{
+							np.NextLimit = new Lifelength(sed);
+							np.RemainLimit = new Lifelength(remainSed);
+							np.Remains = new Lifelength(sedCalc);
+						}
+					}
+				}
+				else if (!threshold.FirstPerformanceSinceNew.IsNullOrZero())
 					np.NextLimit = new Lifelength(threshold.FirstPerformanceSinceNew);
 				else if (!threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
 				{
 					var sinceEffDate = _calculator.GetFlightLifelengthOnStartOfDay(directive.LifeLengthParent, threshold.EffectiveDate);
+					sinceEffDate.Add(threshold.FirstPerformanceSinceEffectiveDate);
 					sinceEffDate.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
-					if (threshold.RepeatInterval.CalendarValue != null)
-						sinceEffDate.Add(threshold.EffectiveDate, threshold.FirstPerformanceSinceEffectiveDate);
-					else sinceEffDate.Add(threshold.FirstPerformanceSinceEffectiveDate);
 
 					np.NextLimit = new Lifelength(sinceEffDate);
 				}
@@ -94,24 +147,29 @@ namespace SmartCore.Calculations.MTOP
 				else return;
 			}
 
-			//Рассчитываем Remain
-			np.RemainLimit = new Lifelength(np.NextLimit);
-			np.RemainLimit.Substract(current);
-
-			if (!threshold.FirstPerformanceSinceNew.IsNullOrZero())
+			//Ситуация когда есть sn и sed уже все посчитанно нет смысла гонять второй раз
+			if (!alredyCalculate)
 			{
-				np.RemainLimit.Resemble(threshold.FirstPerformanceSinceNew);
-				np.NextLimit.Resemble(threshold.FirstPerformanceSinceNew);
-			}
-			else if (!threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
-			{
-				np.RemainLimit.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
-				np.NextLimit.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
-			}
+				//Рассчитываем Remain
+				np.RemainLimit = new Lifelength(np.NextLimit);
+				np.RemainLimit.Substract(current);
 
-			np.Remains = new Lifelength(CalculateWithUtilization(np.RemainLimit, au, conditionType));
-			np.PerformanceSource = new Lifelength(np.Remains);
-			np.PerformanceSource.Add(current);
+				if (!threshold.FirstPerformanceSinceNew.IsNullOrZero())
+				{
+					np.RemainLimit.Resemble(threshold.FirstPerformanceSinceNew);
+					np.NextLimit.Resemble(threshold.FirstPerformanceSinceNew);
+				}
+				else if (!threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+				{
+					np.RemainLimit.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
+					np.NextLimit.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
+				}
+
+				np.Remains = new Lifelength(CalculateWithUtilization(np.RemainLimit, au, conditionType));
+			}
+			
+			np.PerformanceSource = new Lifelength(current); 
+			np.PerformanceSource.Substract(np.Remains);
 
 			#region Расчет текущего состояния задачи в зависимости от условий выполнения
 
@@ -158,7 +216,7 @@ namespace SmartCore.Calculations.MTOP
 				{
 					if (days <= current.Days)
 						np.PerformanceDate = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(Convert.ToDouble(days));
-					else np.PerformanceDate = AnalystHelper.GetApproximateDate(np.RemainLimit, au, conditionType);
+					else np.PerformanceDate = AnalystHelper.GetApproximateDate(np.Remains, au, conditionType);
 				}
 			}
 
