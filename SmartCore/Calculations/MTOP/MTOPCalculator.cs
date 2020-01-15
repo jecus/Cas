@@ -206,17 +206,17 @@ namespace SmartCore.Calculations.MTOP
 				days = AnalystHelper.GetApproximateDays(np.NextLimit, au, conditionType);
 				if (days != null)
 				{
-					if (days <= current.Days)
+					//if (days <= current.Days)
 						np.NextPerformanceDateNew = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(Convert.ToDouble(days));
-					else np.NextPerformanceDateNew = AnalystHelper.GetApproximateDate(np.RemainLimit, au, conditionType);
+					//else np.NextPerformanceDateNew = AnalystHelper.GetApproximateDate(np.RemainLimit, au, conditionType);
 				}
 
 				days = np.PerformanceSource.Days;
 				if (days != null)
 				{
-					if (days <= current.Days)
+					//if (days <= current.Days)
 						np.PerformanceDate = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(Convert.ToDouble(days));
-					else np.PerformanceDate = AnalystHelper.GetApproximateDate(np.Remains, au, conditionType);
+					//else np.PerformanceDate = AnalystHelper.GetApproximateDate(np.Remains, au, conditionType);
 				}
 			}
 
