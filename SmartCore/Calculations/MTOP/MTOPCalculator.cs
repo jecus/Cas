@@ -78,8 +78,6 @@ namespace SmartCore.Calculations.MTOP
 					np.NextLimit = new Lifelength(sinceEffDate);
 				}
 				else return;
-
-				temp = new Lifelength(np.NextLimit);
 			}
 			else
 			{
@@ -90,13 +88,9 @@ namespace SmartCore.Calculations.MTOP
 
 				np.NextLimit = new Lifelength(directive.LastPerformance.OnLifelength);
 
-
 				if (!threshold.RepeatInterval.IsNullOrZero())
-				{
 					np.NextLimit.Add(threshold.RepeatInterval);
-					temp = new Lifelength(threshold.RepeatInterval);
-				}
-				
+
 				else return;
 			}
 
@@ -115,17 +109,9 @@ namespace SmartCore.Calculations.MTOP
 				np.NextLimit.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
 			}
 
-			if(directive.LastPerformance == null)
-				np.PerformanceSource = new Lifelength(CalculateWithUtilization(temp, au, conditionType));
-			else
-			{
-				var res = CalculateWithUtilization(temp, au, conditionType);
-				res.Add(directive.LastPerformance.OnLifelength);
-				np.PerformanceSource = new Lifelength(res);
-			}
-
-			np.Remains = new Lifelength(np.PerformanceSource);
-			np.Remains.Substract(current);
+			np.Remains = new Lifelength(CalculateWithUtilization(np.RemainLimit, au, conditionType));
+			np.PerformanceSource = new Lifelength(np.Remains);
+			np.PerformanceSource.Add(current);
 
 			#region Расчет текущего состояния задачи в зависимости от условий выполнения
 
