@@ -64,9 +64,9 @@ namespace SmartCore.Entities.Collections
             int flightPageNum;
 
             if(atlbId > 0)
-                return Items.Where(aircraftFlight => aircraftFlight.PageNo.Equals(pageNum)
+                return Items.Where(i => !string.IsNullOrEmpty(i.PageNo)).Where(aircraftFlight => aircraftFlight.PageNo.Equals(pageNum)
                                                   && aircraftFlight.ATLBId == atlbId).ToList();
-            return Items.Where(aircraftFlight => int.TryParse(aircraftFlight.PageNo, out flightPageNum) && aircraftFlight.PageNo.Equals(pageNum)).ToList();
+            return Items.Where(i => !string.IsNullOrEmpty(i.PageNo)).Where(aircraftFlight => int.TryParse(aircraftFlight.PageNo, out flightPageNum) && aircraftFlight.PageNo.Equals(pageNum)).ToList();
         }
 
         #endregion
