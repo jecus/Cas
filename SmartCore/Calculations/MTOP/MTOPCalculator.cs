@@ -51,7 +51,6 @@ namespace SmartCore.Calculations.MTOP
 
 			ThresholdConditionType conditionType;
 			Lifelength notify;
-			Lifelength temp;
 			bool alredyCalculate = false;
 
 			var threshold = directive.Threshold;
@@ -73,6 +72,21 @@ namespace SmartCore.Calculations.MTOP
 					var sn = new Lifelength(threshold.FirstPerformanceSinceNew);
 
 					var sed = _calculator.GetFlightLifelengthOnStartOfDay(directive.LifeLengthParent, threshold.EffectiveDate);
+					//Ситуация когда нет наработки
+					if (sed.Hours == 0 && sed.Cycles == 0)
+					{
+						return;
+					}
+					//ситуация когда наработки нет в будующем(прогнозируем)
+					if (current.Hours == sed.Hours && current.Cycles == sed.Cycles &&
+					    current.Days < sed.Days)
+					{
+						var temp = Lifelength.Zero;
+						temp.Days = sed.Days - current.Days;
+						sed = new Lifelength(CalculateWithUtilization(temp, au));
+						sed.Add(current);
+					}
+
 					sed.Add(threshold.FirstPerformanceSinceEffectiveDate);
 					sed.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
 
@@ -125,6 +139,22 @@ namespace SmartCore.Calculations.MTOP
 				else if (!threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
 				{
 					var sinceEffDate = _calculator.GetFlightLifelengthOnStartOfDay(directive.LifeLengthParent, threshold.EffectiveDate);
+
+					//Ситуация когда нет наработки
+					if (sinceEffDate.Hours == 0 && sinceEffDate.Cycles == 0)
+					{
+						return;
+					}
+					//ситуация когда наработки нет в будующем(прогнозируем)
+					if (current.Hours == sinceEffDate.Hours && current.Cycles == sinceEffDate.Cycles &&
+					    current.Days < sinceEffDate.Days)
+					{
+						var temp = Lifelength.Zero;
+						temp.Days = sinceEffDate.Days - current.Days;
+						sinceEffDate = new Lifelength(CalculateWithUtilization(temp, au));
+						sinceEffDate.Add(current);
+					}
+
 					sinceEffDate.Add(threshold.FirstPerformanceSinceEffectiveDate);
 					sinceEffDate.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
 
