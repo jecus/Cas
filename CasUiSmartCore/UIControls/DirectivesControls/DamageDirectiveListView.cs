@@ -162,6 +162,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			subItems.Add(CreateRow(firstPerformanceString, firstPerformanceString));
 			subItems.Add(CreateRow(repeatInterval.ToString(), repeatInterval));
 			subItems.Add(CreateRow(nextComplianceString, nextComplianceDate));
+			subItems.Add(CreateRow(nextRemainString, nextComplianceRemain));
 			subItems.Add(CreateRow(lastPerformanceString, lastComplianceDate));
 			subItems.Add(CreateRow(ata.ToString(), ata));
 			subItems.Add(CreateRow(temporaryString, temporaryString));
