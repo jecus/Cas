@@ -5556,6 +5556,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Appearance\" />
+    <Folder Include="UIControls\LDND\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
