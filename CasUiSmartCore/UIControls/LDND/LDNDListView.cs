@@ -67,6 +67,10 @@ namespace CAS.UI.UIControls.LDND
 			AddColumn("Last Data", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Kit", (int)(radGridView1.Width * 0.08f));
 			AddColumn("MH", (int)(radGridView1.Width * 0.08f));
+
+			AddColumn("Zone", (int)(radGridView1.Width * 0.08f));
+			AddColumn("Work Area", (int)(radGridView1.Width * 0.08f));
+			AddColumn("Access", (int)(radGridView1.Width * 0.08f));
 			
 			AddColumn("Type", (int)(radGridView1.Width * 0.07f));
 			AddColumn("ATA", (int)(radGridView1.Width * 0.10f));
@@ -194,6 +198,9 @@ namespace CAS.UI.UIControls.LDND
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var title = item.Title;
 			var card = "";
+			var access = "";
+			var workArea = "";
+			var zone = "";
 			var description = item.Description;
 			if (item.Parent is Directive directive)
 			{
@@ -202,6 +209,10 @@ namespace CAS.UI.UIControls.LDND
 				else if (directive.DirectiveType == DirectiveType.EngineeringOrders)
 					title = directive.EngineeringOrders;
 				card = directive.EngineeringOrders;
+
+				access = directive.DirectiveAccess;
+				workArea = directive.Workarea;
+				zone = directive.DirectiveZone;
 			}
 			else if (item.Parent is MaintenanceDirective d)
 			{
@@ -275,6 +286,10 @@ namespace CAS.UI.UIControls.LDND
 			subItems.Add(CreateRow(lastPerformanceString, lastComplianceDate));
 			subItems.Add(CreateRow(item.KitsToString, item.Kits?.Count));
 			subItems.Add(CreateRow(manHours.ToString(), manHours));
+
+			subItems.Add(CreateRow(zone, zone));
+			subItems.Add(CreateRow(workArea, workArea));
+			subItems.Add(CreateRow(access, access));
 			
 			subItems.Add(CreateRow(item.Parent.SmartCoreObjectType.ToString(), item.Parent.SmartCoreObjectType));
 			subItems.Add(CreateRow(item.ATAChapter?.ToString(), item.ATAChapter));
