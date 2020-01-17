@@ -61,15 +61,15 @@ namespace CAS.UI.UIControls.LDND
 			AddColumn("Remain(E)", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Next(L)", (int)(radGridView1.Width * 0.15f));
 			AddColumn("Next Limit Data", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Remain(L)", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Remain(L)", (int)(radGridView1.Width * 0.18f));
 			AddColumn("Last", (int)(radGridView1.Width * 0.15f));
 			AddColumn("Last Data", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Kit", (int)(radGridView1.Width * 0.08f));
 			AddColumn("MH", (int)(radGridView1.Width * 0.08f));
 
-			AddColumn("Zone", (int)(radGridView1.Width * 0.08f));
-			AddColumn("Work Area", (int)(radGridView1.Width * 0.08f));
-			AddColumn("Access", (int)(radGridView1.Width * 0.08f));
+			AddColumn("Zone", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Work Area", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Access", (int)(radGridView1.Width * 0.16f));
 			
 			AddColumn("Type", (int)(radGridView1.Width * 0.07f));
 			AddColumn("ATA", (int)(radGridView1.Width * 0.10f));
