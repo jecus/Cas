@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.ForecastControls;
 using CASTerms;
 using SmartCore.Calculations;
@@ -12,6 +13,7 @@ using SmartCore.Calculations.MTOP;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Filters;
 
 namespace CAS.UI.UIControls.LDND
 {
@@ -27,6 +29,7 @@ namespace CAS.UI.UIControls.LDND
 		private CommonCollection<NextPerformance> _initial = new CommonCollection<NextPerformance>();
 		private CommonCollection<NextPerformance> _result  = new CommonCollection<NextPerformance>();
 
+		private CommonFilterCollection _filter = new CommonFilterCollection(typeof(NextPerformance));
 		private Forecast _currentForecast;
 		private LDNDListView _directivesViewer;
 
@@ -142,6 +145,8 @@ namespace CAS.UI.UIControls.LDND
 			_initial.AddRange(mtopDirectives.SelectMany(i => i.NextPerformances));
 			_result.AddRange(_initial.ToList());
 
+			FilterItems(_initial, _result);
+
 			if (AnimatedThreadWorker.CancellationPending)
 			{
 				e.Cancel = true;
@@ -150,6 +155,28 @@ namespace CAS.UI.UIControls.LDND
 			AnimatedThreadWorker.ReportProgress(100, "Completed");
 		}
 
+		#endregion
+
+		#region protected override void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
+		private void AnimatedThreadWorkerDoFilteringWork(object sender, DoWorkEventArgs e)
+		{
+			_result.Clear();
+
+			#region Фильтрация директив
+
+			AnimatedThreadWorker.ReportProgress(50, "filter directives");
+
+			FilterItems(_initial, _result);
+
+			if (AnimatedThreadWorker.CancellationPending)
+			{
+				e.Cancel = true;
+				return;
+			}
+			#endregion
+
+			AnimatedThreadWorker.ReportProgress(100, "Complete");
+		}
 		#endregion
 
 		#region private void UpdateInformation()
@@ -183,18 +210,64 @@ namespace CAS.UI.UIControls.LDND
 
 		private void ButtonApplyFilterClick(object sender, EventArgs e)
 		{
-			//var form = new CommonFilterForm(_filter, _initial) { Text = "Forecast Filter Form" };
+			var form = new CommonFilterForm(_filter, _initial) { Text = "LDND Filter Form" };
 
-			//if (form.ShowDialog(this) == DialogResult.OK)
-			//{
-			//	AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
-			//	AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
-			//	AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoFilteringWork;
+			if (form.ShowDialog(this) == DialogResult.OK)
+			{
+				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
+				AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+				AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoFilteringWork;
 
-			//	AnimatedThreadWorker.RunWorkerAsync();
-			//}
+				AnimatedThreadWorker.RunWorkerAsync();
+			}
 		}
 
+		#endregion
+
+		#region private void FilterItems(IEnumerable<NextPerformance> initialCollection, ICommonCollection<NextPerformance> resultCollection)
+		///<summary>
+		///</summary>
+		///<param name="initialCollection"></param>
+		///<param name="resultCollection"></param>
+		private void FilterItems(IEnumerable<NextPerformance> initialCollection, ICommonCollection<NextPerformance> resultCollection)
+		{
+			if (_filter == null || _filter.All(i => i.Values.Length == 0))
+			{
+				resultCollection.Clear();
+				resultCollection.AddRange(initialCollection);
+				return;
+			}
+
+			resultCollection.Clear();
+
+			foreach (NextPerformance pd in initialCollection)
+			{
+				//if (pd.Parent != null && pd.Parent is MaintenanceCheck && ((MaintenanceCheck)pd.Parent).Name == "C02")
+				//{
+				//    pd.ToString();
+				//}
+				if (_filter.FilterTypeAnd)
+				{
+					bool acceptable = true;
+					foreach (ICommonFilter filter in _filter)
+					{
+						acceptable = filter.Acceptable(pd); if (!acceptable) break;
+					}
+					if (acceptable) resultCollection.Add(pd);
+				}
+				else
+				{
+					bool acceptable = true;
+					foreach (ICommonFilter filter in _filter)
+					{
+						if (filter.Values == null || filter.Values.Length == 0)
+							continue;
+						acceptable = filter.Acceptable(pd); if (acceptable) break;
+					}
+					if (acceptable) resultCollection.Add(pd);
+				}
+			}
+		}
 		#endregion
 
 		#region private void HeaderControlButtonReloadClick(object sender, EventArgs e)
@@ -202,7 +275,7 @@ namespace CAS.UI.UIControls.LDND
 		private void HeaderControlButtonReloadClick(object sender, EventArgs e)
 		{
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoWork;
-			//AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
+			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
 			AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
 
 			if(!AnimatedThreadWorker.IsBusy)

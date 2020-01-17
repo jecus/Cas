@@ -46,6 +46,7 @@ namespace CAS.UI.UIControls.LDND
 			// 
 			this.headerControl.Margin = new System.Windows.Forms.Padding(5);
 			this.headerControl.ShowForecastButton = true;
+			this.headerControl.ShowPrintButton = true;
 			this.headerControl.ShowNoForecastMenuItem = false;
 			this.headerControl.Size = new System.Drawing.Size(1450, 58);
 			this.headerControl.ForecastContextMenuClick += new System.EventHandler(this.ForecastContextMenuClick);
@@ -67,9 +68,7 @@ namespace CAS.UI.UIControls.LDND
 			// 
 			this.flowLayoutPanel1.AutoSize = true;
 			this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.flowLayoutPanel1.Controls.Add(this._buttonComposeWorkPackage);
-			this.flowLayoutPanel1.Controls.Add(this.pictureBox3);
-			this.flowLayoutPanel1.Controls.Add(this.pictureBox2);
+			
 			this.flowLayoutPanel1.Controls.Add(this.buttonApplyFilter);
 			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
@@ -79,6 +78,11 @@ namespace CAS.UI.UIControls.LDND
 			this.flowLayoutPanel1.Size = new System.Drawing.Size(182, 62);
 			this.flowLayoutPanel1.TabIndex = 3;
 			this.flowLayoutPanel1.WrapContents = false;
+			//
+			// panelTopContainer
+			//
+			this.panelTopContainer.Controls.Add(this.labelTitle);
+			this.panelTopContainer.Controls.Add(this.flowLayoutPanel1);
 			// 
 			// _buttonComposeWorkPackage
 			// 
@@ -186,13 +190,13 @@ namespace CAS.UI.UIControls.LDND
 			this.labelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.labelTitle.TextFont = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			// 
-			// ForecastMTOPListScreen
+			// LDNDListScreen
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ChildClickable = true;
 			this.Margin = new System.Windows.Forms.Padding(4);
-			this.Name = "ForecastMTOPListScreen";
+			this.Name = "LDNDListScreen";
 			this.OperatorClickable = true;
 			this.ShowAircraftStatusPanel = false;
 			this.Size = new System.Drawing.Size(1454, 584);
