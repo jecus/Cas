@@ -853,6 +853,12 @@
     <Compile Include="UIControls\ForecastControls\ForecastMTOPListViewOld.Designer.cs">
       <DependentUpon>ForecastMTOPListViewOld.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\LDND\LDNDListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\LDND\LDNDListScreen.Designer.cs">
+      <DependentUpon>LDNDListScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\MailControls\MailSettingFrom.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3934,6 +3940,10 @@
       <DependentUpon>ForecastListScreenMtopOld.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\LDND\LDNDListScreen.resx">
+      <DependentUpon>LDNDListScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIControls\MailControls\MailSettingFrom.resx">
       <DependentUpon>MailSettingFrom.cs</DependentUpon>
     </EmbeddedResource>
@@ -5556,7 +5566,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Appearance\" />
-    <Folder Include="UIControls\LDND\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
