@@ -218,12 +218,20 @@ namespace CAS.UI.UIControls.LDND
 				if (d.TaskCardNumberFile == null)
 					tcnColor = Color.MediumVioletRed;
 				card = d.TaskCardNumber;
+
+				access = d.Access;
+				workArea = d.Workarea;
+				zone = d.Zone;
 			}
 			else if (item.Parent is ComponentDirective c)
 			{
 				description = item.Title;
 				title = c.MaintenanceDirective?.TaskNumberCheck ?? "";
 				card = c.MaintenanceDirective?.TaskCardNumber ?? "";
+
+				access = c.Access;
+				workArea = "";
+				zone = c.Zone;
 			}
 			//Последнее выполнение
 			if (item.Parent.LastPerformance != null &&
