@@ -143,7 +143,6 @@ namespace CAS.UI.UIControls.LDND
 			GlobalObjects.MTOPCalculator.CalculateDirectiveNew(mtopDirectives);
 
 			_initial.AddRange(mtopDirectives.SelectMany(i => i.NextPerformances));
-			_result.AddRange(_initial.ToList());
 
 			FilterItems(_initial, _result);
 
