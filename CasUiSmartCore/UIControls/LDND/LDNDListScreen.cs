@@ -4,31 +4,16 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using CAS.UI.Interfaces;
-using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
-using CAS.UI.UIControls.FiltersControls;
-using CAS.UI.UIControls.PurchaseControls;
-using CAS.UI.UIControls.WorkPakage;
+using CAS.UI.UIControls.ForecastControls;
 using CASTerms;
-using EntityCore.DTO.General;
-using EntityCore.Filter;
 using SmartCore.Calculations;
 using SmartCore.Calculations.MTOP;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
-using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.MaintenanceWorkscope;
-using SmartCore.Entities.General.MTOP;
-using SmartCore.Entities.General.WorkPackage;
-using SmartCore.Filters;
-using SmartCore.Purchase;
-using SmartCore.Relation;
-using Telerik.WinControls.UI;
 
-namespace CAS.UI.UIControls.ForecastControls
+namespace CAS.UI.UIControls.LDND
 {
 	///<summary>
 	///</summary>

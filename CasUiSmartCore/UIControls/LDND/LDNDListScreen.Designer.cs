@@ -1,34 +1,34 @@
 ﻿
-namespace CAS.UI.UIControls.ForecastControls
+namespace CAS.UI.UIControls.LDND
 {
-    partial class LDNDListScreen
+	partial class LDNDListScreen
 	{
-        /// <summary> 
-        /// Требуется переменная конструктора.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+		/// <summary> 
+		/// Требуется переменная конструктора.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Освободить все используемые ресурсы.
-        /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary> 
+		/// Освободить все используемые ресурсы.
+		/// </summary>
+		/// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Код, автоматически созданный конструктором компонентов
+		#region Код, автоматически созданный конструктором компонентов
 
-        /// <summary> 
-        /// Обязательный метод для поддержки конструктора - не изменяйте 
-        /// содержимое данного метода при помощи редактора кода.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary> 
+		/// Обязательный метод для поддержки конструктора - не изменяйте 
+		/// содержимое данного метода при помощи редактора кода.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this._buttonComposeWorkPackage = new AvControls.AvButtonT.AvButtonT();
 			this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -204,16 +204,16 @@ namespace CAS.UI.UIControls.ForecastControls
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private AvControls.StatusImageLink.StatusImageLinkLabel labelTitle;
-        private System.Windows.Forms.Label labelDateAsOf;
-        private AvControls.AvButtonT.AvButtonT _buttonComposeWorkPackage;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private AvControls.AvButtonT.AvButtonT buttonApplyFilter;
+		private AvControls.StatusImageLink.StatusImageLinkLabel labelTitle;
+		private System.Windows.Forms.Label labelDateAsOf;
+		private AvControls.AvButtonT.AvButtonT _buttonComposeWorkPackage;
+		private System.Windows.Forms.PictureBox pictureBox2;
+		private System.Windows.Forms.PictureBox pictureBox3;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+		private AvControls.AvButtonT.AvButtonT buttonApplyFilter;
 	}
 }

@@ -70,6 +70,7 @@ namespace CAS.UI.UIControls.AircraftsControls
 			this.ContainerMP = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
 			this.LinkMaintenanceProgram = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkMTOP = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+			this.LinkLDND = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkMaintenanceTasks = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkNonRoutineJobsCategories = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkNonRoutineJobs = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
@@ -854,6 +855,7 @@ namespace CAS.UI.UIControls.AircraftsControls
 			this.ContainerMP.Name = "ContainerMP";
 			this.ContainerMP.ReferenceLink = this.LinkMaintenanceProgram;
 			this.ContainerMP.ReferenceLink02 = this.LinkMTOP;
+			this.ContainerMP.ReferenceLink02 = this.LinkLDND;
 			this.ContainerMP.ReferenceLink03 = this.LinkMaintenanceTasks;
 			this.ContainerMP.ReferenceLink04 = this.LinkNonRoutineJobsCategories;
 			this.ContainerMP.ReferenceLink05 = this.LinkNonRoutineJobs;
@@ -919,6 +921,30 @@ namespace CAS.UI.UIControls.AircraftsControls
 			this.LinkMTOP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkMTOP.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.LinkMTOP.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkLinkMTOPDisplayerRequested);
+			// 
+			// LinkMTOP
+			// 
+			this.LinkLDND.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkLDND.Displayer = null;
+			this.LinkLDND.DisplayerText = null;
+			this.LinkLDND.Entity = null;
+			this.LinkLDND.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.LinkLDND.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(163)))), ((int)(((byte)(255)))));
+			this.LinkLDND.ImageBackColor = System.Drawing.Color.Transparent;
+			this.LinkLDND.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.LinkLDND.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkLDND.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.LinkLDND.Location = new System.Drawing.Point(10, 0);
+			this.LinkLDND.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.LinkLDND.Name = "LinkLDND";
+			this.LinkLDND.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.LinkLDND.Size = new System.Drawing.Size(188, 20);
+			this.LinkLDND.Status = AvControls.Statuses.Satisfactory;
+			this.LinkLDND.TabIndex = 8;
+			this.LinkLDND.Text = "LDND";
+			this.LinkLDND.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.LinkLDND.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.LinkLDND.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkLinkLDNDDisplayerRequested);
 			// 
 			// LinkMaintenanceTasks
 			// 
@@ -1635,6 +1661,7 @@ namespace CAS.UI.UIControls.AircraftsControls
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkLLPCategories;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkMaintenanceProgram;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkMTOP;
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkLDND;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkMaintenanceTasks;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkNonRoutineJobsCategories;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkNonRoutineJobs;
