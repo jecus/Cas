@@ -108,7 +108,7 @@ namespace SmartCore.Component
 		void LoadBaseComponentsTransferRecords();
 
 
-
+		void ReloadActualStateRecordForBaseComponents(int aircraftId);
 		BaseComponent[] GetAicraftBaseComponents(int aircraftId, int? baseComponentTypeId = null);
 
 		BaseComponent[] GetAicraftBaseComponents(int aircraftId, IEnumerable<int> baseComponentTypeIds);

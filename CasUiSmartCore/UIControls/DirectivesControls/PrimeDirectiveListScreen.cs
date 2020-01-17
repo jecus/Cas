@@ -441,6 +441,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 					if (DirectiveSource is BaseComponent)
 					{
 						BaseComponent bd = (BaseComponent) DirectiveSource;
+
+						GlobalObjects.ComponentCore.ReloadActualStateRecordForBaseComponents(bd.ParentAircraftId);
+
 						if (_currentPrimaryDirectiveType == DirectiveType.DamagesRequiring)
 							_initialDirectiveArray = GlobalObjects.DirectiveCore.GetDamageItems(bd);
 						else if (_currentPrimaryDirectiveType == DirectiveType.DeferredItems)
@@ -450,6 +453,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 					else
 					{
 						Aircraft a = (Aircraft) DirectiveSource;
+
+						GlobalObjects.ComponentCore.ReloadActualStateRecordForBaseComponents(a.ItemId);
+
 						if (_currentPrimaryDirectiveType == DirectiveType.DamagesRequiring)
 							_initialDirectiveArray = GlobalObjects.DirectiveCore.GetDamageItems(null, a);
 						else if (_currentPrimaryDirectiveType == DirectiveType.DeferredItems)

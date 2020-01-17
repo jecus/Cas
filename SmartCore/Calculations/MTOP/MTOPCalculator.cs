@@ -199,7 +199,7 @@ namespace SmartCore.Calculations.MTOP
 			}
 			
 			np.PerformanceSource = new Lifelength(current); 
-			np.PerformanceSource.Substract(np.Remains);
+			np.PerformanceSource.Add(np.Remains);
 
 			#region Расчет текущего состояния задачи в зависимости от условий выполнения
 
@@ -314,62 +314,6 @@ namespace SmartCore.Calculations.MTOP
 				days = (double)(thresh.Cycles / (averageUtilization.Hours / averageUtilization.CyclesPerDay));
 				hours = days * averageUtilization.Hours;
 			}
-
-
-			if (cycles > thresh.Cycles && hours > threshHours)
-			{
-				var cycleDays = (int)(cycles / (averageUtilization.Hours / averageUtilization.CyclesPerDay));
-
-				if (cycleDays > days)
-				{
-					daysPhase = (int)(threshHours / averageUtilization.HoursPerDay);
-					cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
-					hoursPhase = daysPhase * averageUtilization.Hours;
-				}
-				else
-				{
-					daysPhase = (int)(thresh.Cycles / (averageUtilization.Hours / averageUtilization.CyclesPerDay));
-					cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
-					hoursPhase = daysPhase * averageUtilization.Hours;
-
-					if (hoursPhase > threshHours)
-					{
-						daysPhase = (int)(threshHours / averageUtilization.HoursPerDay);
-						cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
-						hoursPhase = daysPhase * averageUtilization.Hours;
-					}
-				}
-			}
-			else if (cycles > thresh.Cycles)
-			{
-				daysPhase = (int)(thresh.Cycles / (averageUtilization.Hours / averageUtilization.CyclesPerDay));
-				cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
-				hoursPhase = daysPhase * averageUtilization.Hours;
-
-				if (hoursPhase > threshHours)
-				{
-					daysPhase = (int)(threshHours / averageUtilization.HoursPerDay);
-					cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
-					hoursPhase = daysPhase * averageUtilization.Hours;
-				}
-			}
-			else if (hours > threshHours)
-			{
-				daysPhase = (int)(threshHours / averageUtilization.HoursPerDay);
-				cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
-				hoursPhase = daysPhase * averageUtilization.Hours;
-
-				if (cyclesPhase > thresh.Cycles)
-				{
-					daysPhase = (int)(thresh.Cycles / (averageUtilization.Hours / averageUtilization.CyclesPerDay));
-					hoursPhase = daysPhase * averageUtilization.Hours;
-					cyclesPhase = daysPhase * (averageUtilization.Hours / averageUtilization.CyclesPerDay);
-				}
-			}
-
-			//res.Hours = (int)Math.Round(hoursPhase > -1 ? hoursPhase : hours);
-			//res.Cycles = (int)Math.Round(cyclesPhase > -1 ? cyclesPhase : cycles);
-			//res.Days = (int)Math.Round(daysPhase > -1 ? daysPhase : days);
 
 			res.Hours = (int)(hoursPhase > -1 ? hoursPhase : hours);
 			res.Cycles = (int)(cyclesPhase > -1 ? cyclesPhase : cycles);

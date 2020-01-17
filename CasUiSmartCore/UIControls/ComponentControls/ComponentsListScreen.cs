@@ -524,6 +524,8 @@ namespace CAS.UI.UIControls.ComponentControls
 
 				if (DirectiveSource is BaseComponent)
 				{
+					GlobalObjects.ComponentCore.ReloadActualStateRecordForBaseComponents(((BaseComponent)DirectiveSource).ParentAircraftId);
+
 					if (((BaseComponent)DirectiveSource).BaseComponentType == BaseComponentType.Engine && _llpMark)
 						componentCollection.AddRange(GlobalObjects.ComponentCore.GetComponents((BaseComponent)DirectiveSource, _llpMark).ToArray());
 					else componentCollection.AddRange(GlobalObjects.ComponentCore.GetComponents((BaseComponent)DirectiveSource).ToArray());
@@ -634,6 +636,8 @@ namespace CAS.UI.UIControls.ComponentControls
 
 				if (DirectiveSource is Aircraft)
 				{
+					GlobalObjects.ComponentCore.ReloadActualStateRecordForBaseComponents(((Aircraft)DirectiveSource).ItemId);
+
 					List<BaseComponentType> baseDetailTypes = new List<BaseComponentType>(_baseComponentTypes);
 					//для начала нужно извлечь все базовые агрегаты самолета
 					//они хранятся в ядре и загружаютя при первом старте программы

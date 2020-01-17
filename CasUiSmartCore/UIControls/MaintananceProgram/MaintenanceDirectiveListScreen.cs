@@ -282,6 +282,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		#region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
 		protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
 		{
+			GlobalObjects.ComponentCore.ReloadActualStateRecordForBaseComponents(CurrentAircraft.ItemId);
+
 			_initialDirectiveArray.Clear();
 			_resultDirectiveArray.Clear();
 

@@ -2181,6 +2181,19 @@ namespace SmartCore.Component
 
 		#endregion
 
+		public void ReloadActualStateRecordForBaseComponents(int aircraftId)
+		{
+			var bs = _casEnvironment.BaseComponents.Where(candidate => candidate.ParentAircraftId == aircraftId).ToList();
+			var ids = bs.Select(i => i.ItemId);
+			var actuals = _newLoader.GetObjectListAll<ActualStateRecordDTO, ActualStateRecord>(new Filter("ComponentId", ids));
+
+			foreach (var component in bs)
+			{
+				component.ActualStateRecords.Clear();
+				component.ActualStateRecords.AddRange(actuals.Where(i => i.ComponentId == component.ItemId));
+			}
+		}
+
 		#region public BaseComponent[] GetAicraftBaseComponents(int aircraftId, IEnumerable<int> baseComponentTypeIds)
 
 		public BaseComponent[] GetAicraftBaseComponents(int aircraftId, IEnumerable<int> baseComponentTypeIds)

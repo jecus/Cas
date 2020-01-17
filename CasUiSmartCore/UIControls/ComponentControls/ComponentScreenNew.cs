@@ -192,6 +192,8 @@ namespace CAS.UI.UIControls.ComponentControls
         #region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
         protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
         {
+	        GlobalObjects.ComponentCore.ReloadActualStateRecordForBaseComponents(_currentComponent.ParentAircraftId);
+
             #region Загрузка элементов
 
             AnimatedThreadWorker.ReportProgress(0, "load component");

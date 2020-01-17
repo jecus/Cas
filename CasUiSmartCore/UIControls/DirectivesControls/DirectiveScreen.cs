@@ -211,6 +211,8 @@ namespace CAS.UI.UIControls.DirectivesControls
         #region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
         protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
         {
+	        GlobalObjects.ComponentCore.ReloadActualStateRecordForBaseComponents(_currentDirective.ParentAircraftId);
+
             #region Загрузка элементов
 
             AnimatedThreadWorker.ReportProgress(0, "load directives");
