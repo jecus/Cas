@@ -58,6 +58,10 @@ namespace CAS.UI.UIControls.LDND
 			this.panel1.Location = new System.Drawing.Point(0, 130);
 			this.panel1.Margin = new System.Windows.Forms.Padding(4);
 			this.panel1.Size = new System.Drawing.Size(1454, 406);
+			//
+			// panelTopContainer
+			//
+			this.panelTopContainer.Controls.Add(this.labelTitle);
 			// 
 			// aircraftHeaderControl1
 			// 
