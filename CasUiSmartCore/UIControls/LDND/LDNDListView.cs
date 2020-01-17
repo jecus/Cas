@@ -8,6 +8,7 @@ using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
 using CAS.UI.UIControls.Auxiliary.Comparers;
+using CAS.UI.UIControls.ForecastControls;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Auxiliary;
@@ -38,7 +39,6 @@ namespace CAS.UI.UIControls.LDND
 			InitializeComponent();
 			DisableContectMenu();
 			EnableCustomSorting = false;
-			this.radGridView1.MasterTemplate.GroupComparer = new GroupComparer();
 		}
 		#endregion
 
@@ -50,7 +50,6 @@ namespace CAS.UI.UIControls.LDND
 		/// </summary>
 		protected override void SetHeaders()
 		{
-			AddColumn("Check", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Item №", (int)(radGridView1.Width * 0.14f));
 			AddColumn("Task Card №", (int)(radGridView1.Width * 0.14f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.2f));
@@ -80,7 +79,7 @@ namespace CAS.UI.UIControls.LDND
 
 		protected override void GroupingItems()
 		{
-			Grouping("Check");
+			//Grouping("Check");
 		}
 
 		#endregion
@@ -253,12 +252,6 @@ namespace CAS.UI.UIControls.LDND
 				: "/WL") : "";
 			
 
-			var temp = "";
-			if (item.Parent is IMtopCalc)
-				temp = $"Check: {item.Group}-{item.ParentCheck?.Name} ({item.ParentCheck?.NextPerformances.FirstOrDefault(i => i.Group == item.Group)?.PerformanceSource})";
-			else temp = $"{ListViewGroupHelper.GetGroupString(item)} | Date: {item.PerformanceDate?.ToString(new GlobalTermsProvider()["DateFormat"].ToString())}";
-			
-			subItems.Add(CreateRow(temp, item.ParentCheck?.NextPerformances.FirstOrDefault(i => i.Group == item.Group)?.PerformanceSource));
 			subItems.Add(CreateRow(title, title, tcnColor));
 			subItems.Add(CreateRow(card, card, tcnColor));
 			subItems.Add(CreateRow(description, description));
@@ -321,43 +314,6 @@ namespace CAS.UI.UIControls.LDND
 		}
 
 		#endregion
-	}
-
-
-	public class GroupComparer : IComparer<Group<GridViewRowInfo>>
-	{
-		public int Compare(Group<GridViewRowInfo> x, Group<GridViewRowInfo> y)
-		{
-			int parsedX;
-			int parsedY;
-			var first = ((object[]) x.Key).First().ToString().Trim();
-			var second = ((object[]) y.Key).First().ToString().Trim();
-
-			if (first.Contains('/') && second.Contains('/'))
-			{
-				first = first.Remove(0, first.LastIndexOf('/')+1);
-				second = second.Remove(0, second.LastIndexOf('/')+1);
-				if (first.Contains("d") && second.Contains("d"))
-				{
-					first = first.Remove(first.Length-2);
-					second = second.Remove(second.Length-2);
-				}
-			}
-			
-
-			if (int.TryParse(first, out parsedX) &&
-			    int.TryParse(second, out parsedY))
-			{
-				int result = parsedX.CompareTo(parsedY);
-				DataGroup xGroup = x as DataGroup;
-				if (xGroup != null && ((DataGroup)x).GroupDescriptor.GroupNames.First().Direction == ListSortDirection.Descending)
-				{
-					result *= -1;
-				}
-				return result;
-			}
-			return ((object[])x.Key)[0].ToString().CompareTo(((object[])y.Key)[0].ToString());
-		}
 	}
 
 }
