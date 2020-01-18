@@ -390,6 +390,7 @@
     <Compile Include="Builders\AirFleetBuilder.cs" />
     <Compile Include="Builders\ComponentAMReportBuilder.cs" />
     <Compile Include="Builders\ComponentTaskReportBuilderNew.cs" />
+    <Compile Include="Builders\MaintenanceDirectivesFullReportBuilderLitAViaLDND.cs" />
     <Compile Include="Builders\PurchaseOrderReportNewBuilder.cs" />
     <Compile Include="Builders\StoreBarCodeReportBuilder.cs" />
     <Compile Include="Builders\DirectivesReportBuilderLitAVIAEng.cs" />
@@ -402,7 +403,7 @@
     <Compile Include="Builders\DirectivesAMReportBuilder.cs" />
     <Compile Include="Builders\MaintenanceDirectivesAMSupplimentalReportBuilder.cs" />
     <Compile Include="Builders\MaintenanceDirectivesAMReportBuilder.cs" />
-    <Compile Include="Builders\MaintenanceDirectivesFullReportBuilderLitAVia - Copy.cs" />
+    <Compile Include="Builders\MaintenanceDirectivesFullReportBuilderLitAVia.cs" />
     <Compile Include="Builders\MaintenanceDirectivesComponentFullReportBuilderLitAVia.cs" />
     <Compile Include="Builders\MaintenanceReportBuilder.cs" />
     <Compile Include="Builders\RegisterOfDocumentReportBuilder.cs" />
@@ -1078,6 +1079,12 @@
     </Compile>
     <Compile Include="ReportTemplates\CalibrationTagReport.cs">
       <DependentUpon>CalibrationTagReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportTemplates\MaintenanceDirectiveReportLitAviaLDND.cs">
+      <DependentUpon>MaintenanceDirectiveReportLitAviaLDND.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
@@ -2358,6 +2365,10 @@
     <EmbeddedResource Include="ReportTemplates\CalibrationTagReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CalibrationTagReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTemplates\MaintenanceDirectiveReportLitAviaLDND.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MaintenanceDirectiveReportLitAviaLDND.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportTemplates\PurchaseOrderReportNew.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
