@@ -50,6 +50,7 @@ namespace CAS.UI.UIControls.LDND
 			this.headerControl.ShowNoForecastMenuItem = false;
 			this.headerControl.Size = new System.Drawing.Size(1450, 58);
 			this.headerControl.ForecastContextMenuClick += new System.EventHandler(this.ForecastContextMenuClick);
+			this.headerControl.PrintButtonDisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.HeaderControlButtonPrintDisplayerRequested);
 			this.headerControl.ReloadButtonClick += new System.EventHandler(this.HeaderControlButtonReloadClick);
 			this.headerControl.Controls.SetChildIndex(this.aircraftHeaderControl1, 0);
 			// 

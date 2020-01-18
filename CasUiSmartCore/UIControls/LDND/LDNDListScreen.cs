@@ -4,15 +4,19 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using CAS.UI.Interfaces;
+using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.ForecastControls;
+using CASReports.Builders;
 using CASTerms;
 using SmartCore.Calculations;
 using SmartCore.Calculations.MTOP;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Filters;
 
 namespace CAS.UI.UIControls.LDND
@@ -32,6 +36,11 @@ namespace CAS.UI.UIControls.LDND
 		private CommonFilterCollection _filter = new CommonFilterCollection(typeof(NextPerformance));
 		private Forecast _currentForecast;
 		private LDNDListView _directivesViewer;
+
+		private MaintenanceDirectivesFullReportBuilderLitAViaLDND _maintenanceDirectiveReportBuilderLitAVia;
+
+		private ContextMenuStrip buttonPrintMenuStrip;
+		private ToolStripMenuItem itemPrintReportMPLimit;
 
 		#endregion
 
@@ -62,6 +71,18 @@ namespace CAS.UI.UIControls.LDND
 			CurrentAircraft = currentAircraft;
 
 			_currentForecast = new Forecast { Aircraft = CurrentAircraft };
+
+			#region ButtonPrintContextMenu
+
+			buttonPrintMenuStrip = new ContextMenuStrip();
+			itemPrintReportMPLimit = new ToolStripMenuItem { Text = "MP Limit" };
+
+
+			buttonPrintMenuStrip.Items.AddRange(new ToolStripItem[] { itemPrintReportMPLimit });
+
+			ButtonPrintMenuStrip = buttonPrintMenuStrip;
+
+			#endregion
 
 			InitListView();
 			UpdateInformation();
@@ -279,6 +300,36 @@ namespace CAS.UI.UIControls.LDND
 
 			if(!AnimatedThreadWorker.IsBusy)
 				AnimatedThreadWorker.RunWorkerAsync();
+		}
+		#endregion
+
+		#region private void HeaderControlButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
+		private void HeaderControlButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			if (CurrentAircraft != null)
+				e.DisplayerText = CurrentAircraft.RegistrationNumber + ". " + ReportText + " Report";
+			else
+			{
+				e.DisplayerText = ReportText + " Report";
+				e.Cancel = true;
+				return;
+			}
+			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+
+			if (sender == itemPrintReportMPLimit)
+			{
+				_maintenanceDirectiveReportBuilderLitAVia = new MaintenanceDirectivesFullReportBuilderLitAViaLDND(true);
+				_maintenanceDirectiveReportBuilderLitAVia.DateAsOf = DateTime.Today.ToString(new GlobalTermsProvider()["DateFormat"].ToString());
+				_maintenanceDirectiveReportBuilderLitAVia.ReportedAircraft = CurrentAircraft;
+				_maintenanceDirectiveReportBuilderLitAVia.AddDirectives(_result);
+				e.DisplayerText = CurrentAircraft.RegistrationNumber + "." + "MP Limit";
+				e.RequestedEntity = new ReportScreen(_maintenanceDirectiveReportBuilderLitAVia);
+				GlobalObjects.AuditRepository.WriteReportAsync(GlobalObjects.CasEnvironment.IdentityUser, "MaintenanceDirectiveListScreen (MP Limit)");
+			}
+			else
+			{
+				e.Cancel = true;
+			}
 		}
 		#endregion
 
