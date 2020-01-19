@@ -9,6 +9,8 @@ using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.ForecastControls;
+using CAS.UI.UIControls.PurchaseControls;
+using CAS.UI.UIControls.WorkPakage;
 using CASReports.Builders;
 using CASTerms;
 using SmartCore.Calculations;
@@ -16,8 +18,11 @@ using SmartCore.Calculations.MTOP;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.MaintenanceWorkscope;
+using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.LDND
 {
@@ -32,6 +37,7 @@ namespace CAS.UI.UIControls.LDND
 
 		private CommonCollection<NextPerformance> _initial = new CommonCollection<NextPerformance>();
 		private CommonCollection<NextPerformance> _result  = new CommonCollection<NextPerformance>();
+		private CommonCollection<WorkPackage> _openPubWorkPackages = new CommonCollection<WorkPackage>();
 
 		private CommonFilterCollection _filter = new CommonFilterCollection(typeof(NextPerformance));
 		private Forecast _currentForecast;
@@ -41,6 +47,11 @@ namespace CAS.UI.UIControls.LDND
 
 		private ContextMenuStrip buttonPrintMenuStrip;
 		private ToolStripMenuItem itemPrintReportMPLimit;
+
+		private RadMenuSeparatorItem _toolStripSeparator1;
+		private RadMenuItem _createWorkPakageToolStripMenuItem;
+		private RadMenuItem _toolStripMenuItemsWorkPackages;
+		private RadMenuItem _toolStripMenuItemShowTaskCard;
 
 		#endregion
 
@@ -84,6 +95,7 @@ namespace CAS.UI.UIControls.LDND
 
 			#endregion
 
+			InitToolStripMenuItems();
 			InitListView();
 			UpdateInformation();
 		}
@@ -110,6 +122,24 @@ namespace CAS.UI.UIControls.LDND
 					"Forecast Period From: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.LowerLimit) +
 					" To: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.ForecastDate) +
 					"\nAvg. utlz: " + main.AverageUtilization;
+			}
+
+			if (_toolStripMenuItemsWorkPackages != null)
+			{
+				foreach (RadMenuItem item in _toolStripMenuItemsWorkPackages.Items)
+				{
+					item.Click -= AddToWorkPackageItemClick;
+				}
+
+				_toolStripMenuItemsWorkPackages.Items.Clear();
+
+				foreach (WorkPackage workPackage in _openPubWorkPackages)
+				{
+					var item = new RadMenuItem($"{workPackage.Number} {workPackage.Title}");
+					item.Click += AddToWorkPackageItemClick;
+					item.Tag = workPackage;
+					_toolStripMenuItemsWorkPackages.Items.Add(item);
+				}
 			}
 
 			_directivesViewer.SetItemsArray(_result.OrderBy(i => i.PerformanceDate).ToArray());
@@ -199,6 +229,24 @@ namespace CAS.UI.UIControls.LDND
 		}
 		#endregion
 
+		#region private void DirectivesViewerSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
+
+		private void DirectivesViewerSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
+		{
+			if (_directivesViewer.SelectedItems.Count > 0)
+			{
+				_buttonComposeWorkPackage.Enabled = true;
+				headerControl.EditButtonEnabled = true;
+			}
+			else
+			{
+				headerControl.EditButtonEnabled = false;
+				_buttonComposeWorkPackage.Enabled = false;
+			}
+		}
+
+		#endregion
+
 		#region private void UpdateInformation()
 		/// <summary>
 		/// Происзодит обновление отображения элементов
@@ -220,8 +268,41 @@ namespace CAS.UI.UIControls.LDND
 				Dock = DockStyle.Fill
 			};
 			//события 
+			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 
+			_directivesViewer.AddMenuItems(_toolStripMenuItemShowTaskCard,
+				new RadMenuSeparatorItem(),
+				_createWorkPakageToolStripMenuItem,
+				_toolStripMenuItemsWorkPackages);
+			
 			panel1.Controls.Add(_directivesViewer);
+		}
+
+		#endregion
+
+		#region private void InitToolStripMenuItems(Aircraft aircraft)
+
+		private void InitToolStripMenuItems()
+		{
+			_createWorkPakageToolStripMenuItem = new RadMenuItem();
+			_toolStripMenuItemsWorkPackages = new RadMenuItem();
+			_toolStripMenuItemShowTaskCard = new RadMenuItem();
+			_toolStripSeparator1 = new RadMenuSeparatorItem();
+			
+			_createWorkPakageToolStripMenuItem.Text = "Create work package";
+			_createWorkPakageToolStripMenuItem.Click += ButtonCreateWorkPakageClick;
+			//
+			// _toolStripMenuItemsWorkPackages
+			//
+			_toolStripMenuItemsWorkPackages.Text = "Add to work package";
+			// 
+			// _toolStripMenuItemShowTaskCard
+			// 
+			_toolStripMenuItemShowTaskCard.Text = "Show Task Card";
+			_toolStripMenuItemShowTaskCard.Click += ToolStripMenuItemShowTaskCardClick;
+			
+			_toolStripMenuItemsWorkPackages.Items.Clear();
+			
 		}
 
 		#endregion
@@ -239,6 +320,317 @@ namespace CAS.UI.UIControls.LDND
 				AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoFilteringWork;
 
 				AnimatedThreadWorker.RunWorkerAsync();
+			}
+		}
+
+		#endregion
+
+		#region private void AddToWorkPackageItemClick(object sender, EventArgs e)
+
+		private void AddToWorkPackageItemClick(object sender, EventArgs e)
+		{
+			if (_directivesViewer.SelectedItems.Count <= 0) return;
+
+			WorkPackage wp = (WorkPackage)((RadMenuItem)sender).Tag;
+
+			if (MessageBox.Show("Add item to Work Package: " + wp.Title + "?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) ==
+				DialogResult.Yes)
+			{
+				List<NextPerformance> wpItems = _directivesViewer.SelectedItems.ToList();
+				List<NextPerformance> bindedDirectivesPerformances = new List<NextPerformance>();
+				foreach (NextPerformance wpItem in wpItems)
+				{
+					if (wpItem is MaintenanceNextPerformance)
+					{
+						MaintenanceNextPerformance mnp = wpItem as MaintenanceNextPerformance;
+						if (mnp.PerformanceGroup.Checks.Count > 0)
+						{
+							foreach (MaintenanceCheck mc in mnp.PerformanceGroup.Checks)
+							{
+								foreach (MaintenanceDirective mpd in _currentForecast.MaintenanceDirectives
+																.Where(mpd => mpd.MaintenanceCheck != null &&
+																			  mpd.MaintenanceCheck.ItemId == mc.ItemId))
+								{
+									NextPerformance performance =
+										mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
+																				 p.PerformanceDate.Value.Date == wpItem.PerformanceDate.Value.Date) ??
+										mpd.NextPerformances.LastOrDefault(p => p.PerformanceDate != null &&
+																				p.PerformanceDate < wpItem.PerformanceDate) ??
+										mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
+																				 p.PerformanceDate > wpItem.PerformanceDate);
+
+									if (performance == null) continue;
+									if (wpItems.Count(wpi => wpi.Parent != null && wpi.Parent == mpd) == 0)
+										bindedDirectivesPerformances.Add(performance);
+								}
+							}
+						}
+						else if (wpItem.Parent is MaintenanceCheck)
+						{
+							MaintenanceCheck mc = wpItem.Parent as MaintenanceCheck;
+							foreach (MaintenanceDirective mpd in _currentForecast.MaintenanceDirectives
+																	.Where(mpd => mpd.MaintenanceCheck != null &&
+																				  mpd.MaintenanceCheck.ItemId == mc.ItemId))
+							{
+								NextPerformance performance =
+									mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
+																			 p.PerformanceDate.Value.Date == wpItem.PerformanceDate.Value.Date) ??
+									mpd.NextPerformances.LastOrDefault(p => p.PerformanceDate != null &&
+																			p.PerformanceDate < wpItem.PerformanceDate) ??
+									mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
+																			 p.PerformanceDate > wpItem.PerformanceDate);
+
+								if (performance == null) continue;
+								if (wpItems.Count(wpi => wpi.Parent != null && wpi.Parent == mpd) == 0)
+									bindedDirectivesPerformances.Add(performance);
+							}
+						}
+					}
+					else if (wpItem.Parent is MaintenanceCheck)
+					{
+						MaintenanceCheck mc = wpItem.Parent as MaintenanceCheck;
+						foreach (MaintenanceDirective mpd in _currentForecast.MaintenanceDirectives
+																.Where(mpd => mpd.MaintenanceCheck != null &&
+																			  mpd.MaintenanceCheck.ItemId == mc.ItemId))
+						{
+							NextPerformance performance =
+								mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
+																		 p.PerformanceDate.Value.Date == wpItem.PerformanceDate.Value.Date) ??
+								mpd.NextPerformances.LastOrDefault(p => p.PerformanceDate != null &&
+																		p.PerformanceDate < wpItem.PerformanceDate) ??
+								mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
+																		 p.PerformanceDate > wpItem.PerformanceDate);
+
+							if (performance == null) continue;
+							if (wpItems.Count(wpi => wpi.Parent != null && wpi.Parent == mpd) == 0)
+								bindedDirectivesPerformances.Add(performance);
+						}
+					}
+				}
+				wpItems.AddRange(bindedDirectivesPerformances);
+
+				try
+				{
+					string message;
+
+					if (!GlobalObjects.WorkPackageCore.AddToWorkPakage(wpItems, wp.ItemId, CurrentAircraft, out message))
+					{
+						MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
+										MessageBoxButtons.OK, MessageBoxIcon.Error);
+						return;
+					}
+
+					foreach (NextPerformance nextPerformance in wpItems)
+					{
+						nextPerformance.BlockedByPackage = wp;
+						_directivesViewer.UpdateItemColor();
+					}
+
+					if (MessageBox.Show("Items added successfully. Open work package?", (string)new GlobalTermsProvider()["SystemName"],
+										 MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2)
+										== DialogResult.Yes)
+					{
+						ReferenceEventArgs refArgs = new ReferenceEventArgs();
+						refArgs.TypeOfReflection = ReflectionTypes.DisplayInNew;
+						refArgs.DisplayerText = CurrentAircraft != null ? CurrentAircraft.RegistrationNumber + "." + wp.Title : wp.Title;
+						refArgs.RequestedEntity = new WorkPackageScreen(wp);
+						InvokeDisplayerRequested(refArgs);
+					}
+				}
+				catch (Exception ex)
+				{
+					Program.Provider.Logger.Log("error while create Work Package", ex);
+				}
+			}
+		}
+
+		#endregion
+
+		#region private void ButtonCreateWorkPakageClick(object sender, EventArgs e)
+
+		private void ButtonCreateWorkPakageClick(object sender, EventArgs e)
+		{
+			if (_directivesViewer.SelectedItems.Count <= 0) return;
+
+			if (MessageBox.Show("Create and save a Work Package?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+			{
+				List<NextPerformance> wpItems = _directivesViewer.SelectedItems.ToList();
+				List<NextPerformance> bindedDirectivesPerformances = new List<NextPerformance>();
+				foreach (NextPerformance wpItem in wpItems)
+				{
+					if (wpItem is MaintenanceNextPerformance)
+					{
+						MaintenanceNextPerformance mnp = wpItem as MaintenanceNextPerformance;
+						if (mnp.PerformanceGroup.Checks.Count > 0)
+						{
+							foreach (MaintenanceCheck mc in mnp.PerformanceGroup.Checks)
+							{
+								foreach (MaintenanceDirective mpd in _currentForecast.MaintenanceDirectives
+																.Where(mpd => mpd.MaintenanceCheck != null &&
+																			  mpd.MaintenanceCheck.ItemId == mc.ItemId))
+								{
+									NextPerformance performance =
+										mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
+																				 p.PerformanceDate.Value.Date == wpItem.PerformanceDate.Value.Date) ??
+										mpd.NextPerformances.LastOrDefault(p => p.PerformanceDate != null &&
+																				p.PerformanceDate < wpItem.PerformanceDate) ??
+										mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
+																				 p.PerformanceDate > wpItem.PerformanceDate);
+
+									if (performance == null) continue;
+									if (wpItems.Count(wpi => wpi.Parent != null && wpi.Parent == mpd) == 0)
+										bindedDirectivesPerformances.Add(performance);
+								}
+							}
+						}
+						else if (wpItem.Parent is MaintenanceCheck)
+						{
+							MaintenanceCheck mc = wpItem.Parent as MaintenanceCheck;
+							foreach (MaintenanceDirective mpd in _currentForecast.MaintenanceDirectives
+																	.Where(mpd => mpd.MaintenanceCheck != null &&
+																				  mpd.MaintenanceCheck.ItemId == mc.ItemId))
+							{
+								NextPerformance performance =
+									mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
+																			 p.PerformanceDate.Value.Date == wpItem.PerformanceDate.Value.Date) ??
+									mpd.NextPerformances.LastOrDefault(p => p.PerformanceDate != null &&
+																			p.PerformanceDate < wpItem.PerformanceDate) ??
+									mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
+																			 p.PerformanceDate > wpItem.PerformanceDate);
+
+								if (performance == null) continue;
+								if (wpItems.Count(wpi => wpi.Parent != null && wpi.Parent == mpd) == 0)
+									bindedDirectivesPerformances.Add(performance);
+							}
+						}
+					}
+					else if (wpItem.Parent is MaintenanceCheck)
+					{
+						MaintenanceCheck mc = wpItem.Parent as MaintenanceCheck;
+						foreach (MaintenanceDirective mpd in _currentForecast.MaintenanceDirectives
+																.Where(mpd => mpd.MaintenanceCheck != null &&
+																			  mpd.MaintenanceCheck.ItemId == mc.ItemId))
+						{
+							NextPerformance performance =
+								mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
+																		 p.PerformanceDate.Value.Date == wpItem.PerformanceDate.Value.Date) ??
+								mpd.NextPerformances.LastOrDefault(p => p.PerformanceDate != null &&
+																		p.PerformanceDate < wpItem.PerformanceDate) ??
+								mpd.NextPerformances.FirstOrDefault(p => p.PerformanceDate != null &&
+																		 p.PerformanceDate > wpItem.PerformanceDate);
+
+							if (performance == null) continue;
+							if (wpItems.Count(wpi => wpi.Parent != null && wpi.Parent == mpd) == 0)
+								bindedDirectivesPerformances.Add(performance);
+						}
+					}
+				}
+				wpItems.AddRange(bindedDirectivesPerformances);
+
+				try
+				{
+					string message;
+					WorkPackage wp =
+						GlobalObjects.WorkPackageCore.AddWorkPakage(wpItems, _currentAircraft, out message);
+					if (wp == null)
+					{
+						MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
+										MessageBoxButtons.OK, MessageBoxIcon.Error);
+						return;
+					}
+					//Добавление нового рабочего пакета в коллекцию открытых рабочих пакетов
+					_openPubWorkPackages.Add(wp);
+					//Создание пункта в меню открытых рабочих пакетов
+					var item = new RadMenuItem($"{wp.Title} {wp.Number}");
+					item.Click += AddToWorkPackageItemClick;
+					item.Tag = wp;
+					_toolStripMenuItemsWorkPackages.Items.Add(item);
+
+					foreach (NextPerformance nextPerformance in wpItems)
+					{
+						nextPerformance.BlockedByPackage = wp;
+						_directivesViewer.UpdateItemColor();
+					}
+					ReferenceEventArgs refArgs = new ReferenceEventArgs();
+					refArgs.TypeOfReflection = ReflectionTypes.DisplayInNew;
+					refArgs.DisplayerText = CurrentAircraft != null ? CurrentAircraft.RegistrationNumber + "." + wp.Title : wp.Title;
+					refArgs.RequestedEntity = new WorkPackageScreen(wp);
+					InvokeDisplayerRequested(refArgs);
+				}
+				catch (Exception ex)
+				{
+					Program.Provider.Logger.Log("error while create Work Package", ex);
+				}
+			}
+		}
+		#endregion
+
+		#region private void ToolStripMenuItemShowTaskCardClick(object sender, EventArgs e)
+
+		private void ToolStripMenuItemShowTaskCardClick(object sender, EventArgs e)
+		{
+			if (_directivesViewer.SelectedItems == null ||
+			    _directivesViewer.SelectedItems.Count == 0) return;
+
+			if (_directivesViewer.SelectedItems[0].Parent is MaintenanceDirective)
+			{
+				var mpd = _directivesViewer.SelectedItems[0].Parent as MaintenanceDirective;
+				if (mpd == null || mpd.TaskCardNumberFile == null)
+				{
+					MessageBox.Show("Not set Task Card File", (string)new GlobalTermsProvider()["SystemName"],
+						MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+						MessageBoxDefaultButton.Button1);
+					return;
+				}
+
+				try
+				{
+					string message;
+					GlobalObjects.CasEnvironment.OpenFile(mpd.TaskCardNumberFile, out message);
+					if (message != "")
+					{
+						MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
+							MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+							MessageBoxDefaultButton.Button1);
+					}
+				}
+				catch (Exception ex)
+				{
+					string errorDescriptionSctring =
+						$"Error while Open Attached File for {mpd}, id {mpd.ItemId}. \nFileId {mpd.TaskCardNumberFile.ItemId}";
+					Program.Provider.Logger.Log(errorDescriptionSctring, ex);
+				}
+			}
+			else if (_directivesViewer.SelectedItems[0].Parent is ComponentDirective cd)
+			{
+				if (cd.MaintenanceDirective == null)
+					return;
+				var mpd = cd.MaintenanceDirective;
+				if (mpd == null || mpd.TaskCardNumberFile == null)
+				{
+					MessageBox.Show("Not set Task Card File", (string)new GlobalTermsProvider()["SystemName"],
+						MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+						MessageBoxDefaultButton.Button1);
+					return;
+				}
+
+				try
+				{
+					string message;
+					GlobalObjects.CasEnvironment.OpenFile(mpd.TaskCardNumberFile, out message);
+					if (message != "")
+					{
+						MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
+							MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+							MessageBoxDefaultButton.Button1);
+					}
+				}
+				catch (Exception ex)
+				{
+					string errorDescriptionSctring =
+						$"Error while Open Attached File for {mpd}, id {mpd.ItemId}. \nFileId {mpd.TaskCardNumberFile.ItemId}";
+					Program.Provider.Logger.Log(errorDescriptionSctring, ex);
+				}
 			}
 		}
 
@@ -331,6 +723,18 @@ namespace CAS.UI.UIControls.LDND
 				e.Cancel = true;
 			}
 		}
+		#endregion
+
+		#region private void ButtonShowEquipmentAndMaterialsDisplayerRequested(object sender, ReferenceEventArgs e)
+
+		private void ButtonShowEquipmentAndMaterialsDisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+			e.DisplayerText =
+				$"{CurrentAircraft.RegistrationNumber} .Equipment and Materials";
+			e.RequestedEntity = new AccessoryRequiredListScreen(CurrentAircraft);
+		}
+
 		#endregion
 
 		#region private void ForecastContextMenuClick(object sender, EventArgs e)
