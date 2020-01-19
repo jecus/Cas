@@ -730,8 +730,7 @@ namespace CAS.UI.UIControls.LDND
 		private void ButtonShowEquipmentAndMaterialsDisplayerRequested(object sender, ReferenceEventArgs e)
 		{
 			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
-			e.DisplayerText =
-				$"{CurrentAircraft.RegistrationNumber} .Equipment and Materials";
+			e.DisplayerText = $"{CurrentAircraft.RegistrationNumber} .Equipment and Materials";
 			e.RequestedEntity = new AccessoryRequiredListScreen(CurrentAircraft);
 		}
 
