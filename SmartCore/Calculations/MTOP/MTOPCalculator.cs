@@ -122,15 +122,15 @@ namespace SmartCore.Calculations.MTOP
 					{
 						if (snCalc.IsGreaterByAnyParameter(sedCalc))
 						{
-							np.NextLimit = new Lifelength(sn);
-							np.RemainLimit = new Lifelength(remainSn);
-							np.Remains = new Lifelength(snCalc);
-						}
-						else
-						{
 							np.NextLimit = new Lifelength(sed);
 							np.RemainLimit = new Lifelength(remainSed);
 							np.Remains = new Lifelength(sedCalc);
+						}
+						else
+						{
+							np.NextLimit = new Lifelength(sn);
+							np.RemainLimit = new Lifelength(remainSn);
+							np.Remains = new Lifelength(snCalc);
 						}
 					}
 				}
