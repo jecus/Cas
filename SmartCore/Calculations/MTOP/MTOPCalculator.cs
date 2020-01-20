@@ -222,17 +222,17 @@ namespace SmartCore.Calculations.MTOP
 			#region Расчет даты
 
 			double? days;
-			if (directive.LastPerformance != null)
-			{
-				days = AnalystHelper.GetApproximateDays(directive.LastPerformance.RecordDate, threshold.RepeatInterval, au, conditionType);
-				if (days != null)
-				{
-					np.NextPerformanceDateNew = directive.LastPerformance.RecordDate.AddDays(Convert.ToDouble(days));
-					np.PerformanceDate = directive.LastPerformance.RecordDate.AddDays(Convert.ToDouble(days));
-				}
-			}
-			else
-			{
+			//if (directive.LastPerformance != null)
+			//{
+			//	days = AnalystHelper.GetApproximateDays(directive.LastPerformance.RecordDate, threshold.RepeatInterval, au, conditionType);
+			//	if (days != null)
+			//	{
+			//		np.NextPerformanceDateNew = directive.LastPerformance.RecordDate.AddDays(Convert.ToDouble(days));
+			//		np.PerformanceDate = directive.LastPerformance.RecordDate.AddDays(Convert.ToDouble(days));
+			//	}
+			//}
+			//else
+			//{
 				days = AnalystHelper.GetApproximateDays(np.NextLimit, au, conditionType);
 				if (days != null)
 				{
@@ -248,7 +248,7 @@ namespace SmartCore.Calculations.MTOP
 						np.PerformanceDate = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(Convert.ToDouble(days));
 					//else np.PerformanceDate = AnalystHelper.GetApproximateDate(np.Remains, au, conditionType);
 				}
-			}
+			//}
 
 			
 
