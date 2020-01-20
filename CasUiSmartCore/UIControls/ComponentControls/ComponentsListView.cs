@@ -348,7 +348,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			subItems.Add(CreateRow(transferDate > DateTimeExtend.GetCASMinDateTime()
 				? SmartCore.Auxiliary.Convert.GetDateFormat(transferDate) : "", transferDate));
 			subItems.Add(CreateRow($"{firstPerformance} {condition}", firstPerformance));
-			subItems.Add(CreateRow($"{repeatInterval} {repeatInterval}", repeatInterval));
+			subItems.Add(CreateRow($"{repeatInterval} {conditionRepeat}", repeatInterval));
 
 
 			subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(nextEstimated), nextEstimated));
