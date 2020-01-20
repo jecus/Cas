@@ -832,6 +832,7 @@
     <Compile Include="Personnel\PersonnelCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApiProvider.cs" />
+    <Compile Include="Providers\CalcProvider.cs" />
     <Compile Include="Purchase\InitionalOrder.cs" />
     <Compile Include="Purchase\InitionalOrderRecord.cs" />
     <Compile Include="Purchase\IORQORRelation.cs" />
