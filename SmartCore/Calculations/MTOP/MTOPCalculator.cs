@@ -6,6 +6,8 @@ using SmartCore.Analyst;
 using SmartCore.AverageUtilizations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
+using SmartCore.Entities.General.Accessory;
+using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.MTOP;
@@ -54,6 +56,23 @@ namespace SmartCore.Calculations.MTOP
 			bool alredyCalculate = false;
 
 			var threshold = directive.Threshold;
+
+			var aircraftId = -1;
+			if (directive is Directive d)
+				aircraftId = d.ParentAircraftId;
+			else if (directive is ComponentDirective cd)
+				aircraftId = cd.ParentAircraftId;
+			else if (directive is Entities.General.Accessory.Component c)
+				aircraftId = c.ParentAircraftId;
+			else if (directive is MaintenanceDirective mpd)
+				aircraftId = mpd.ParentAircraftId;
+			else return;
+
+			var aircraft = _aircraftsCore.GetAircraftById(aircraftId);
+			if(aircraft == null)
+				return;
+
+
 			var current = _calculator.GetFlightLifelengthOnEndOfDay(directive.LifeLengthParent, DateTime.Today);
 			var au = _averageUtilizationCore.GetAverageUtillization(directive);
 
