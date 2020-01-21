@@ -29,13 +29,24 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			_records = new List<TransferInformation>();
 			foreach (var record in _addedRecord)
 			{
-				for (int i = 0; i < record.Quantity; i++)
+				var count = record.Quantity - record.TransferInformation.Count;
+
+				foreach (var tr in record.TransferInformation)
+					tr.Product = record.Product;
+
+				_records.AddRange(record.TransferInformation);
+
+				if (count > 0)
 				{
-					_records.Add(new TransferInformation
+					for (int i = 0; i < count; i++)
 					{
-						Number = (byte) (i+1),
-						Product = record.Product
-					});
+						_records.Add(new TransferInformation
+						{
+							Number = (byte) (i + 1),
+							Product = record.Product,
+							ProductId = record.Product.ItemId,
+						});
+					}
 				}
 			}
 

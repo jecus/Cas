@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using EntityCore.DTO;
 using EntityCore.DTO.General;
 using Newtonsoft.Json;
@@ -10,6 +11,7 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
+using SmartCore.Entities.General.Interfaces;
 using SmartCore.Files;
 using SmartCore.Packages;
 
@@ -317,6 +319,8 @@ namespace SmartCore.Purchase
 		public byte Number { get; set; }
 		public string PartNumber { get; set; }
 		public string SerialNumber { get; set; }
+		public int ProductId { get; set; }
+
 		[JsonIgnore]
 		public Product Product { get; set; }
 	}
