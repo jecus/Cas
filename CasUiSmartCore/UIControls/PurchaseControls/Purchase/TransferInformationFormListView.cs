@@ -26,8 +26,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		{
 			AddColumn("Product", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Number", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Part Number", (int)(radGridView1.Width * 0.25f));
-			AddColumn("Serial Number", (int) (radGridView1.Width * 0.25f));
+			AddColumn("Part Number", (int)(radGridView1.Width * 0.23f));
+			AddColumn("Serial Number", (int) (radGridView1.Width * 0.23f));
 		}
 
 		#endregion

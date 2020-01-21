@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using CAS.UI.UIControls.Auxiliary;
+using CASTerms;
 using MetroFramework.Forms;
 using SmartCore.Entities.General;
 using SmartCore.Purchase;
@@ -36,6 +38,8 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 					});
 				}
 			}
+
+			
 			_formListViewTransferInformation.SetItemsArray(_records.ToArray());
 		}
 
@@ -43,8 +47,13 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		private void buttonOk_Click(object sender, EventArgs e)
 		{
+			foreach (var record in _addedRecord)
+			{
+				record.TransferInformation.AddRange(_records);
+				GlobalObjects.CasEnvironment.NewKeeper.Save(record);
+			}
+
 			DialogResult = DialogResult.OK;
-			Close();
 		}
 
 		#region private void ButtonCancel_Click(object sender, EventArgs e)
@@ -59,9 +68,17 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		private void buttonApply_Click(object sender, EventArgs e)
 		{
-			
-		}
+			_formListViewTransferInformation.SelectedItem.PartNumber = textBoxPartNumber.Text;
+			_formListViewTransferInformation.SelectedItem.SerialNumber = textBoxSerialNumber.Text;
 
+			_formListViewTransferInformation.SetItemsArray(_records.ToArray());
+		}
 		
+		private void listViewTransferInformation_SelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
+		{
+			textBoxNumber.SelectedText = _formListViewTransferInformation.SelectedItem.Number.ToString();
+			textBoxPartNumber.Text = _formListViewTransferInformation.SelectedItem.PartNumber;
+			textBoxSerialNumber.Text = _formListViewTransferInformation.SelectedItem.SerialNumber;
+		}
 	}
 }

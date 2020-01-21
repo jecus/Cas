@@ -142,6 +142,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this._formListViewTransferInformation.Size = new System.Drawing.Size(580, 280);
 			this._formListViewTransferInformation.SortMultiplier = 0;
 			this._formListViewTransferInformation.TabIndex = 299;
+			this._formListViewTransferInformation.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.listViewTransferInformation_SelectedItemsChanged);
 			// 
 			// textBoxPartNumber
 			// 
