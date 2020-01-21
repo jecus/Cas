@@ -317,6 +317,7 @@ namespace SmartCore.Purchase
 		public byte Number { get; set; }
 		public string PartNumber { get; set; }
 		public string SerialNumber { get; set; }
+		[JsonIgnore]
 		public Product Product { get; set; }
 	}
 
