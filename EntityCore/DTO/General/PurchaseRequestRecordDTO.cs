@@ -59,6 +59,9 @@ namespace EntityCore.DTO.General
 		[Column("AdditionalInformationJSON")]
 		public string AdditionalInformationJSON { get; set; }
 
+		[Column("TransferInformationJSON")]
+		public string TransferInformationJSON { get; set; }
+
 		[Child(FilterType.Equal, "ParentTypeId", 1860)]
 		public ICollection<ItemFileLinkDTO> Files { get; set; }
 	}

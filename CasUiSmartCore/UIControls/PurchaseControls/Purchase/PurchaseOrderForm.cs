@@ -364,5 +364,11 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			var form = new PurchaseOrderSettingForm(_order, _supplierShipper, _airportsCodes);
 			form.ShowDialog();
 		}
+
+		private void buttonTransferInformation_Click(object sender, EventArgs e)
+		{
+			var form = new TransferInformationForm(_addedRecord);
+			form.ShowDialog();
+		}
 	}
 }

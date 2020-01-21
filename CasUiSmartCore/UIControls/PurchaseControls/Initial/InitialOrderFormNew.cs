@@ -382,7 +382,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			_formListViewInitialItems.SelectedItem.Measure = comboBoxMeasure.SelectedItem as Measure ?? Measure.Unknown;
 			_formListViewInitialItems.SelectedItem.Quantity = (double)numericUpDownQuantity.Value;
 			_formListViewInitialItems.SelectedItem.Remarks = metroTextBox1.Text;
-			_formListViewInitialItems.SelectedItem.AirportCodeId = ((AirportsCodes)comboBoxStation.SelectedItem).ItemId;
+			_formListViewInitialItems.SelectedItem.AirportCodeId = ((AirportsCodes)comboBoxStation.SelectedItem)?.ItemId ?? -1;
 			_formListViewInitialItems.SelectedItem.Reference = metroTextBoxReference.Text;
 
 			ComponentStatus costCondition = ComponentStatus.Unknown;
@@ -397,16 +397,19 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 
 			_formListViewInitialItems.SelectedItem.CostCondition = costCondition;
 
-			var destination = comboBoxDestination.SelectedItem as BaseEntityObject;
-			if (destination != null)
+			if (comboBoxDestination.SelectedItem != null)
 			{
-				_formListViewInitialItems.SelectedItem.DestinationObjectType = destination.SmartCoreObjectType;
-				_formListViewInitialItems.SelectedItem.DestinationObjectId = destination.ItemId;
-			}
-			else
-			{
-				_formListViewInitialItems.SelectedItem.DestinationObjectType = SmartCoreType.Unknown;
-				_formListViewInitialItems.SelectedItem.DestinationObjectId = -1;
+				var destination = comboBoxDestination.SelectedItem as BaseEntityObject;
+				if (destination != null)
+				{
+					_formListViewInitialItems.SelectedItem.DestinationObjectType = destination.SmartCoreObjectType;
+					_formListViewInitialItems.SelectedItem.DestinationObjectId = destination.ItemId;
+				}
+				else
+				{
+					_formListViewInitialItems.SelectedItem.DestinationObjectType = SmartCoreType.Unknown;
+					_formListViewInitialItems.SelectedItem.DestinationObjectId = -1;
+				}
 			}
 			
 			_formListViewInitialItems.SetItemsArray(_addedInitialOrderRecords.ToArray());
