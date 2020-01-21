@@ -188,7 +188,9 @@ namespace SmartCore.Calculations.MTOP
 					? new Lifelength(directive.Threshold.RepeatNotification)
 					: null;
 
-				np.NextLimit = new Lifelength(directive.LastPerformance.OnLifelength);
+				np.LDNDAircraft = new Lifelength(_calculator.GetFlightLifelengthOnStartOfDay(aircraft, directive.LastPerformance.RecordDate));
+				//np.NextLimit = new Lifelength(directive.LastPerformance.OnLifelength);
+				np.NextLimit = new Lifelength(np.LDNDAircraft);
 
 				if (!threshold.RepeatInterval.IsNullOrZero())
 					np.NextLimit.Add(threshold.RepeatInterval);

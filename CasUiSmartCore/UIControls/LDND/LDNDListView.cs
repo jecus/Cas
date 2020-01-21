@@ -63,7 +63,7 @@ namespace CAS.UI.UIControls.LDND
 			AddColumn("Next Limit Data", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Remain(L)", (int)(radGridView1.Width * 0.18f));
 			AddColumn("Last", (int)(radGridView1.Width * 0.15f));
-			AddColumn("Last Data", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Last Data", (int)(radGridView1.Width * 0.2f));	
 			AddColumn("Kit", (int)(radGridView1.Width * 0.08f));
 			AddColumn("MH", (int)(radGridView1.Width * 0.08f));
 
@@ -284,7 +284,7 @@ namespace CAS.UI.UIControls.LDND
 			subItems.Add(CreateRow(item.NextLimit.ToString(), item.NextLimit.ToString()));
 			subItems.Add(CreateRow(item.RemainLimit.ToString(), item.RemainLimit.ToString()));
 			subItems.Add(CreateRow(lastDate, lastComplianceDate));
-			subItems.Add(CreateRow(lastPerformanceString, lastComplianceDate));
+			subItems.Add(CreateRow(item.LDNDAircraft.IsNullOrZero() ? "" : item.LDNDAircraft.ToString(), item.LDNDAircraft));
 			subItems.Add(CreateRow(item.KitsToString, item.Kits?.Count));
 			subItems.Add(CreateRow(manHours.ToString(), manHours));
 

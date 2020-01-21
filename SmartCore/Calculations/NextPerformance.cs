@@ -26,8 +26,15 @@ namespace SmartCore.Calculations
 		#region Fields
 		private Lifelength _nextLimit;
 		private Lifelength _remainLimit;
+		private Lifelength _lDNDAircraft;
 
 		#endregion
+
+		public Lifelength LDNDAircraft
+		{
+			get => _lDNDAircraft ?? Lifelength.Zero;
+			set => _lDNDAircraft = value;
+		}
 
 		public Lifelength NextLimit
 		{
