@@ -10,16 +10,33 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {
 	public partial class TransferInformationForm : MetroForm
 	{
-		public TransferInformationForm()
+		private readonly List<PurchaseRequestRecord> _addedRecord;
+		private List<TransferInformation> _records;
+
+		public TransferInformationForm(List<PurchaseRequestRecord> addedRecord)
 		{
+			_addedRecord = addedRecord;
 			InitializeComponent();
+			UpdateInformation();
 		}
 
 		#region private void UpdateInformation()
 
 		private void UpdateInformation()
 		{
-			
+			_records = new List<TransferInformation>();
+			foreach (var record in _addedRecord)
+			{
+				for (int i = 0; i < record.Quantity; i++)
+				{
+					_records.Add(new TransferInformation
+					{
+						Number = (byte) (i+1),
+						Product = record.Product
+					});
+				}
+			}
+			_formListViewTransferInformation.SetItemsArray(_records.ToArray());
 		}
 
 		#endregion

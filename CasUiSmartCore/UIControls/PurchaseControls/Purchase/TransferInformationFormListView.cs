@@ -24,10 +24,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		protected override void SetHeaders()
 		{
+			AddColumn("Product", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Number", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Part Number", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Serial Number", (int)(radGridView1.Width * 0.2f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.1f));
+			AddColumn("Part Number", (int)(radGridView1.Width * 0.25f));
+			AddColumn("Serial Number", (int) (radGridView1.Width * 0.25f));
 		}
 
 		#endregion
@@ -36,16 +36,22 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 		protected override List<CustomCell> GetListViewSubItems(TransferInformation item)
 		{
-			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
-			
 			return new List<CustomCell>()
 			{
+				CreateRow(item.Product.ToString(),item.Product),
 				CreateRow(item.Number.ToString(),item.Number),
 				CreateRow(item.PartNumber, item.PartNumber),
-				CreateRow(item.SerialNumber, item.SerialNumber),
-				
-				CreateRow(author,author),
+				CreateRow(item.SerialNumber, item.SerialNumber)
 			};
+		}
+
+		#endregion
+
+		#region protected override void GroupingItems()
+
+		protected override void GroupingItems()
+		{
+			Grouping("Product");
 		}
 
 		#endregion
