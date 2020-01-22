@@ -57,15 +57,34 @@ namespace SmartCore.Calculations.MTOP
 
 			var threshold = directive.Threshold;
 
-			var aircraftId = -1;
+			int aircraftId;
+			Entities.General.Accessory.Component component;
+			BaseComponent basecomponent;
+
 			if (directive is Directive d)
+			{
 				aircraftId = d.ParentAircraftId;
+				basecomponent = d.ParentBaseComponent;
+			}
 			else if (directive is ComponentDirective cd)
+			{
 				aircraftId = cd.ParentAircraftId;
+				if (cd.ParentComponent != null)
+					basecomponent = cd.ParentBaseComponent;
+				else component = cd.ParentComponent;
+			}
 			else if (directive is Entities.General.Accessory.Component c)
+			{
 				aircraftId = c.ParentAircraftId;
+				if (c is BaseComponent baseComponent)
+					basecomponent = baseComponent;
+				else component = c;
+			}
 			else if (directive is MaintenanceDirective mpd)
+			{
 				aircraftId = mpd.ParentAircraftId;
+				basecomponent = mpd.ParentBaseComponent;
+			}
 			else return;
 
 			var aircraft = _aircraftsCore.GetAircraftById(aircraftId);
