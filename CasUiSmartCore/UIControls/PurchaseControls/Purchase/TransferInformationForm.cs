@@ -7,6 +7,7 @@ using CASTerms;
 using MetroFramework.Forms;
 using SmartCore.Entities.General;
 using SmartCore.Purchase;
+using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {
@@ -50,7 +51,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 				}
 			}
 
-			
+
 			_formListViewTransferInformation.SetItemsArray(_records.ToArray());
 		}
 
@@ -84,12 +85,22 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 
 			_formListViewTransferInformation.SetItemsArray(_records.ToArray());
 		}
-		
+
 		private void listViewTransferInformation_SelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
 		{
 			textBoxNumber.SelectedText = _formListViewTransferInformation.SelectedItem.Number.ToString();
 			textBoxPartNumber.Text = _formListViewTransferInformation.SelectedItem.PartNumber;
 			textBoxSerialNumber.Text = _formListViewTransferInformation.SelectedItem.SerialNumber;
+		}
+
+		private void buttonForAll_Click(object sender, EventArgs e)
+		{
+			foreach (var record in _records)
+			{
+				record.PartNumber = textBoxPartNumber.Text;
+				record.SerialNumber = textBoxSerialNumber.Text;
+			}
+			_formListViewTransferInformation.SetItemsArray(_records.ToArray());
 		}
 	}
 }
