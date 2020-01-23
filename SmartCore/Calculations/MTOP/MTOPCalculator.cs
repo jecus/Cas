@@ -48,7 +48,7 @@ namespace SmartCore.Calculations.MTOP
 				return;
 
 			ThresholdConditionType conditionType;
-			Lifelength notify, iddc = Lifelength.Null, idd = Lifelength.Null, currentC = Lifelength.Null;
+			Lifelength notify, iddc = Lifelength.Null, idd = Lifelength.Null;
 			bool alredyCalculate = false;
 			var isComponent = directive is Entities.General.Accessory.Component || directive is ComponentDirective;
 
@@ -92,6 +92,9 @@ namespace SmartCore.Calculations.MTOP
 			if(aircraft == null)
 				return;
 
+			var current = _calculator.GetFlightLifelengthOnEndOfDay(aircraft, DateTime.Today);
+			var au = _averageUtilizationCore.GetAverageUtillization(directive);
+
 			if (isComponent)
 			{
 				if (component != null)
@@ -99,14 +102,14 @@ namespace SmartCore.Calculations.MTOP
 					var lastTransferRecord = component.TransferRecords.GetLast();
 					iddc = component.ActualStateRecords.GetLastKnownRecord(lastTransferRecord.RecordDate)?.OnLifelength ?? Lifelength.Null;
 					idd = _calculator.GetFlightLifelengthOnStartOfDay(aircraft, lastTransferRecord.RecordDate);
-					currentC = _calculator.GetFlightLifelengthOnStartOfDay(component, DateTime.Today);
+					current = _calculator.GetFlightLifelengthOnEndOfDay(component, DateTime.Today);
 				}
 				else if (basecomponent != null)
 				{
 					var lastTransferRecord = basecomponent.TransferRecords.GetLast();
 					iddc = basecomponent.ActualStateRecords.GetLastKnownRecord(lastTransferRecord.RecordDate)?.OnLifelength ?? Lifelength.Null;
 					idd = _calculator.GetFlightLifelengthOnStartOfDay(aircraft, lastTransferRecord.RecordDate);
-					currentC = _calculator.GetFlightLifelengthOnStartOfDay(basecomponent, DateTime.Today);
+					current = _calculator.GetFlightLifelengthOnEndOfDay(basecomponent, DateTime.Today);
 				}
 				else return;
 			}
@@ -114,8 +117,7 @@ namespace SmartCore.Calculations.MTOP
 			np.IDD = idd;
 			np.IDDC = iddc;
 
-			var current = _calculator.GetFlightLifelengthOnEndOfDay(aircraft, DateTime.Today);
-			var au = _averageUtilizationCore.GetAverageUtillization(directive);
+			
 
 			//Если деректива не выполнялась
 			if (directive.LastPerformance == null)
