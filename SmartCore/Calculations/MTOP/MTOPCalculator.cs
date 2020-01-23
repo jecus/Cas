@@ -47,20 +47,21 @@ namespace SmartCore.Calculations.MTOP
 			if (directive.IsClosed || directive.Threshold == null)
 				return;
 
-
-			directive.NextPerformances.Clear();
-			var np = new NextPerformance{Parent = directive};
-
 			ThresholdConditionType conditionType;
-			Lifelength notify;
+			Lifelength notify, iddc = Lifelength.Null, idd = Lifelength.Null, currentC = Lifelength.Null;
 			bool alredyCalculate = false;
-
-			var threshold = directive.Threshold;
+			var isComponent = directive is Entities.General.Accessory.Component || directive is ComponentDirective;
 
 			int aircraftId;
-			Entities.General.Accessory.Component component;
-			BaseComponent basecomponent;
+			Entities.General.Accessory.Component component = null;
+			BaseComponent basecomponent = null;
 
+			directive.NextPerformances.Clear();
+			var np = new NextPerformance { Parent = directive };
+			var threshold = directive.Threshold;
+
+			//ищем компонент и ВС
+			//для поиска наработки
 			if (directive is Directive d)
 			{
 				aircraftId = d.ParentAircraftId;
@@ -70,8 +71,8 @@ namespace SmartCore.Calculations.MTOP
 			{
 				aircraftId = cd.ParentAircraftId;
 				if (cd.ParentComponent != null)
-					basecomponent = cd.ParentBaseComponent;
-				else component = cd.ParentComponent;
+					component = cd.ParentComponent;
+				else basecomponent = cd.ParentBaseComponent;
 			}
 			else if (directive is Entities.General.Accessory.Component c)
 			{
@@ -91,8 +92,29 @@ namespace SmartCore.Calculations.MTOP
 			if(aircraft == null)
 				return;
 
+			if (isComponent)
+			{
+				if (component != null)
+				{
+					var lastTransferRecord = component.TransferRecords.GetLast();
+					iddc = component.ActualStateRecords.GetLastKnownRecord(lastTransferRecord.RecordDate)?.OnLifelength ?? Lifelength.Null;
+					idd = _calculator.GetFlightLifelengthOnStartOfDay(aircraft, lastTransferRecord.RecordDate);
+					currentC = _calculator.GetFlightLifelengthOnStartOfDay(component, DateTime.Today);
+				}
+				else if (basecomponent != null)
+				{
+					var lastTransferRecord = basecomponent.TransferRecords.GetLast();
+					iddc = basecomponent.ActualStateRecords.GetLastKnownRecord(lastTransferRecord.RecordDate)?.OnLifelength ?? Lifelength.Null;
+					idd = _calculator.GetFlightLifelengthOnStartOfDay(aircraft, lastTransferRecord.RecordDate);
+					currentC = _calculator.GetFlightLifelengthOnStartOfDay(basecomponent, DateTime.Today);
+				}
+				else return;
+			}
 
-			var current = _calculator.GetFlightLifelengthOnEndOfDay(directive.LifeLengthParent, DateTime.Today);
+			np.IDD = idd;
+			np.IDDC = iddc;
+
+			var current = _calculator.GetFlightLifelengthOnEndOfDay(aircraft, DateTime.Today);
 			var au = _averageUtilizationCore.GetAverageUtillization(directive);
 
 			//Если деректива не выполнялась
@@ -173,7 +195,21 @@ namespace SmartCore.Calculations.MTOP
 					}
 				}
 				else if (!threshold.FirstPerformanceSinceNew.IsNullOrZero())
-					np.NextLimit = new Lifelength(threshold.FirstPerformanceSinceNew);
+				{
+					if (isComponent)
+					{
+						np.NextLimit = new Lifelength(threshold.FirstPerformanceSinceNew);
+						np.NextLimit.Add(idd);
+						np.NextLimit.Substract(iddc);
+
+						np.NextLimitC = new Lifelength(threshold.FirstPerformanceSinceNew);
+						np.NextLimitC.Substract(iddc);
+					}
+					else
+					{
+						np.NextLimit = new Lifelength(threshold.FirstPerformanceSinceNew);
+					}
+				}
 				else if (!threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
 				{
 					var sinceEffDate = _calculator.GetFlightLifelengthOnStartOfDay(directive.LifeLengthParent, threshold.EffectiveDate);
@@ -202,6 +238,9 @@ namespace SmartCore.Calculations.MTOP
 			}
 			else
 			{
+				if(isComponent)
+					return;
+
 				conditionType = threshold.RepeatPerformanceConditionType;
 				notify = directive.Threshold.RepeatNotification != null
 					? new Lifelength(directive.Threshold.RepeatNotification)
@@ -224,6 +263,32 @@ namespace SmartCore.Calculations.MTOP
 				np.RemainLimit = new Lifelength(np.NextLimit);
 				np.RemainLimit.Substract(current);
 
+				if (isComponent)
+				{
+					np.RemainLimitC = new Lifelength(np.NextLimitC);
+					np.RemainLimitC.Substract(current);
+					np.RemainLimitC.Add(idd);
+
+					if (!threshold.FirstPerformanceSinceNew.IsNullOrZero())
+					{
+						np.RemainLimitC.Resemble(threshold.FirstPerformanceSinceNew);
+						np.NextLimitC.Resemble(threshold.FirstPerformanceSinceNew);
+					}
+					else if (!threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+					{
+						np.RemainLimitC.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
+						np.NextLimitC.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
+					}
+
+					np.RemainsC = new Lifelength(CalculateWithUtilization(np.RemainLimitC, au, conditionType));
+
+
+					np.PerformanceSourceC = new Lifelength(current);
+					np.PerformanceSourceC.Add(iddc);
+					np.PerformanceSourceC.Add(np.RemainsC);
+					np.PerformanceSourceC.Substract(idd);
+				}
+				
 				if (!threshold.FirstPerformanceSinceNew.IsNullOrZero())
 				{
 					np.RemainLimit.Resemble(threshold.FirstPerformanceSinceNew);

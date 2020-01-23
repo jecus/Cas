@@ -24,31 +24,62 @@ namespace SmartCore.Calculations
 		#region New MTOP
 
 		#region Fields
+		private Lifelength _nextLimitC;
 		private Lifelength _nextLimit;
 		private Lifelength _remainLimit;
+		private Lifelength _remainLimitC;
+		private Lifelength _remainsC;
+		private Lifelength _performanceSourceC;
 		private Lifelength _lDNDAircraft;
 
 		#endregion
 
 		public Lifelength LDNDAircraft
 		{
-			get => _lDNDAircraft ?? Lifelength.Zero;
+			get => _lDNDAircraft ?? Lifelength.Null;
 			set => _lDNDAircraft = value;
 		}
 
 		public Lifelength NextLimit
 		{
-			get => _nextLimit ?? Lifelength.Zero;
+			get => _nextLimit ?? Lifelength.Null;
 			set => _nextLimit = value;
+		}
+
+		public Lifelength NextLimitC
+		{
+			get => _nextLimitC ?? Lifelength.Null;
+			set => _nextLimitC = value;
 		}
 
 		public Lifelength RemainLimit
 		{
-			get => _remainLimit ?? Lifelength.Zero;
+			get => _remainLimit ?? Lifelength.Null;
 			set => _remainLimit = value;
-		} 
-		
+		}
+
+		public Lifelength RemainLimitC
+		{
+			get => _remainLimitC ?? Lifelength.Null;
+			set => _remainLimitC = value;
+		}
+
+		public Lifelength RemainsC
+		{
+			get => _remainsC ?? Lifelength.Null;
+			set => _remainsC = value;
+		}
+
+		public Lifelength PerformanceSourceC
+		{
+			get => _performanceSourceC ?? Lifelength.Null;
+			set => _performanceSourceC = value;
+		}
+
 		public DateTime? NextPerformanceDateNew { get; set; }
+
+		public Lifelength IDDC;
+		public Lifelength IDD;
 
 		#endregion
 
