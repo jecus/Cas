@@ -284,7 +284,7 @@ namespace CAS.UI.UIControls.LDND
 			subItems.Add(CreateRow(item.NextLimit.ToString(), item.NextLimit.ToString()));
 			subItems.Add(CreateRow(item.RemainLimit.ToString(), item.RemainLimit.ToString()));
 			subItems.Add(CreateRow(lastDate, lastComplianceDate));
-			subItems.Add(CreateRow(item.LDNDAircraft.IsNullOrZero() ? "" : item.LDNDAircraft.ToString(), item.LDNDAircraft));
+			subItems.Add(CreateRow(lastPerformanceString, lastComplianceLifeLength));
 			subItems.Add(CreateRow(item.KitsToString, item.Kits?.Count));
 			subItems.Add(CreateRow(manHours.ToString(), manHours));
 

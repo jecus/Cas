@@ -48,7 +48,7 @@ namespace SmartCore.Calculations.MTOP
 				return;
 
 			ThresholdConditionType conditionType;
-			Lifelength notify, iddc = Lifelength.Null, idd = Lifelength.Null;
+			Lifelength notify, iddc = Lifelength.Null, idd = Lifelength.Null, currentC = Lifelength.Null;
 			bool alredyCalculate = false;
 			var isComponent = directive is Entities.General.Accessory.Component || directive is ComponentDirective;
 
@@ -102,14 +102,14 @@ namespace SmartCore.Calculations.MTOP
 					var lastTransferRecord = component.TransferRecords.GetLast();
 					iddc = component.ActualStateRecords.GetLastKnownRecord(lastTransferRecord.RecordDate)?.OnLifelength ?? Lifelength.Null;
 					idd = _calculator.GetFlightLifelengthOnStartOfDay(aircraft, lastTransferRecord.RecordDate);
-					current = _calculator.GetFlightLifelengthOnEndOfDay(component, DateTime.Today);
+					currentC = _calculator.GetFlightLifelengthOnEndOfDay(component, DateTime.Today);
 				}
 				else if (basecomponent != null)
 				{
 					var lastTransferRecord = basecomponent.TransferRecords.GetLast();
 					iddc = basecomponent.ActualStateRecords.GetLastKnownRecord(lastTransferRecord.RecordDate)?.OnLifelength ?? Lifelength.Null;
 					idd = _calculator.GetFlightLifelengthOnStartOfDay(aircraft, lastTransferRecord.RecordDate);
-					current = _calculator.GetFlightLifelengthOnEndOfDay(basecomponent, DateTime.Today);
+					currentC = _calculator.GetFlightLifelengthOnEndOfDay(basecomponent, DateTime.Today);
 				}
 				else return;
 			}
@@ -240,21 +240,26 @@ namespace SmartCore.Calculations.MTOP
 			}
 			else
 			{
-				if(isComponent)
-					return;
 
+				return;
+				
 				conditionType = threshold.RepeatPerformanceConditionType;
 				notify = directive.Threshold.RepeatNotification != null
 					? new Lifelength(directive.Threshold.RepeatNotification)
 					: null;
 
-				np.LDNDAircraft = new Lifelength(_calculator.GetFlightLifelengthOnStartOfDay(aircraft, directive.LastPerformance.RecordDate));
-				//np.NextLimit = new Lifelength(directive.LastPerformance.OnLifelength);
-				np.NextLimit = new Lifelength(np.LDNDAircraft);
+				np.NextLimit = new Lifelength(directive.LastPerformance.OnLifelength);
+
+				if (isComponent)
+				{
+					np.NextLimitC = new Lifelength(directive.LastPerformance.OnLifelength);
+					if (!threshold.RepeatInterval.IsNullOrZero())
+						np.NextLimitC.Add(threshold.RepeatInterval);
+					else return;
+				}
 
 				if (!threshold.RepeatInterval.IsNullOrZero())
 					np.NextLimit.Add(threshold.RepeatInterval);
-
 				else return;
 			}
 
@@ -264,6 +269,19 @@ namespace SmartCore.Calculations.MTOP
 				//Рассчитываем Remain
 				np.RemainLimit = new Lifelength(np.NextLimit);
 				np.RemainLimit.Substract(current);
+
+				if (!threshold.FirstPerformanceSinceNew.IsNullOrZero())
+				{
+					np.RemainLimit.Resemble(threshold.FirstPerformanceSinceNew);
+					np.NextLimit.Resemble(threshold.FirstPerformanceSinceNew);
+				}
+				else if (!threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+				{
+					np.RemainLimit.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
+					np.NextLimit.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
+				}
+
+				np.Remains = new Lifelength(CalculateWithUtilization(np.RemainLimit, au, conditionType));
 
 				if (isComponent)
 				{
@@ -286,23 +304,11 @@ namespace SmartCore.Calculations.MTOP
 
 
 					np.PerformanceSourceC = new Lifelength(current);
-					np.PerformanceSourceC.Add(iddc);
-					np.PerformanceSourceC.Add(np.RemainsC);
+					np.PerformanceSourceC.Add(np.Remains);
 					np.PerformanceSourceC.Substract(idd);
 				}
 				
-				if (!threshold.FirstPerformanceSinceNew.IsNullOrZero())
-				{
-					np.RemainLimit.Resemble(threshold.FirstPerformanceSinceNew);
-					np.NextLimit.Resemble(threshold.FirstPerformanceSinceNew);
-				}
-				else if (!threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
-				{
-					np.RemainLimit.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
-					np.NextLimit.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
-				}
-
-				np.Remains = new Lifelength(CalculateWithUtilization(np.RemainLimit, au, conditionType));
+				
 			}
 			
 			np.PerformanceSource = new Lifelength(current); 
@@ -343,17 +349,17 @@ namespace SmartCore.Calculations.MTOP
 				days = AnalystHelper.GetApproximateDays(np.NextLimit, au, conditionType);
 				if (days != null)
 				{
-					//if (days <= current.Days)
+					if (days <= current.Days)
 						np.NextPerformanceDateNew = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(Convert.ToDouble(days));
-					//else np.NextPerformanceDateNew = AnalystHelper.GetApproximateDate(np.RemainLimit, au, conditionType);
+					else np.NextPerformanceDateNew = AnalystHelper.GetApproximateDate(np.RemainLimit, au, conditionType);
 				}
 
 				days = np.PerformanceSource.Days;
 				if (days != null)
 				{
-					//if (days <= current.Days)
+					if (days <= current.Days)
 						np.PerformanceDate = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(Convert.ToDouble(days));
-					//else np.PerformanceDate = AnalystHelper.GetApproximateDate(np.Remains, au, conditionType);
+					else np.PerformanceDate = AnalystHelper.GetApproximateDate(np.Remains, au, conditionType);
 				}
 			//}
 
