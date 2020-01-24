@@ -40,6 +40,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.labelPartNumber = new MetroFramework.Controls.MetroLabel();
 			this.textBoxSerialNumber = new MetroFramework.Controls.MetroTextBox();
 			this.labelSerialNumber = new MetroFramework.Controls.MetroLabel();
+			this.buttonForAll = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// buttonOk
@@ -226,11 +227,25 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.labelSerialNumber.Text = "Serial Number:";
 			this.labelSerialNumber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// buttonForAll
+			// 
+			this.buttonForAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonForAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonForAll.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonForAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.buttonForAll.Location = new System.Drawing.Point(740, 156);
+			this.buttonForAll.Name = "buttonForAll";
+			this.buttonForAll.Size = new System.Drawing.Size(101, 33);
+			this.buttonForAll.TabIndex = 304;
+			this.buttonForAll.Text = "Apply for all";
+			this.buttonForAll.Click += new System.EventHandler(this.buttonForAll_Click);
+			// 
 			// TransferInformationForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(926, 366);
+			this.Controls.Add(this.buttonForAll);
 			this.Controls.Add(this.textBoxSerialNumber);
 			this.Controls.Add(this.labelSerialNumber);
 			this.Controls.Add(this.textBoxPartNumber);
@@ -262,5 +277,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private MetroFramework.Controls.MetroLabel labelPartNumber;
 		private MetroFramework.Controls.MetroTextBox textBoxSerialNumber;
 		private MetroFramework.Controls.MetroLabel labelSerialNumber;
+		private Button buttonForAll;
 	}
 }
