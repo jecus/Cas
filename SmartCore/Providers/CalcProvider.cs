@@ -110,9 +110,9 @@ namespace SmartCore.Providers
 			return res?.Data ?? Lifelength.Null;
 		}
 
-		public Lifelength GetFlightLifelengthBaseComponent(int FlightId, int baseComponentId)
+		public Lifelength GetFlightLifelengthBaseComponent(int flightId, int baseComponentId)
 		{
-			var res = _httpClient.SendJsonAsync<object, Lifelength>(HttpMethod.Post, $"basecomponent/flight", new { FlightId = FlightId, BaseComponentId = baseComponentId });
+			var res = _httpClient.SendJsonAsync<object, Lifelength>(HttpMethod.Post, $"basecomponent/flight", new { FlightId = flightId, BaseComponentId = baseComponentId });
 			return res?.Data ?? Lifelength.Null;
 		}
 
