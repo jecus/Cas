@@ -421,6 +421,7 @@
     <Compile Include="Calculations\MTOP\IMtopCalc.cs" />
     <Compile Include="Calculations\MTOP\IMTOPCalculator.cs" />
     <Compile Include="Calculations\MTOP\MTOPCalculator.cs" />
+    <Compile Include="Calculations\NewCalculator\NewCalculator.cs" />
     <Compile Include="Calculations\NextPerformance.cs" />
     <Compile Include="Calculations\PerformanceCalculator\IPerformanceCalculator.cs" />
     <Compile Include="Calculations\PerformanceCalculator\PerformanceCalculator.cs" />
