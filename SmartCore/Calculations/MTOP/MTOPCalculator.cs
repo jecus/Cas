@@ -239,8 +239,8 @@ namespace SmartCore.Calculations.MTOP
 			}
 			else
 			{
-
-				return;
+				if(isComponent)
+					return;
 				
 				conditionType = threshold.RepeatPerformanceConditionType;
 				notify = directive.Threshold.RepeatNotification != null
@@ -248,14 +248,6 @@ namespace SmartCore.Calculations.MTOP
 					: null;
 
 				np.NextLimit = new Lifelength(directive.LastPerformance.OnLifelength);
-
-				if (isComponent)
-				{
-					np.NextLimitC = new Lifelength(directive.LastPerformance.OnLifelength);
-					if (!threshold.RepeatInterval.IsNullOrZero())
-						np.NextLimitC.Add(threshold.RepeatInterval);
-					else return;
-				}
 
 				if (!threshold.RepeatInterval.IsNullOrZero())
 					np.NextLimit.Add(threshold.RepeatInterval);

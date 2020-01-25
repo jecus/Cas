@@ -424,7 +424,11 @@ namespace SmartCore.Directives
 			var dt = ds.Tables[0];
 
 			foreach (DataRow dr in dt.Rows)
-				res.Add((int) dr[0], dr[1].ToString());
+			{
+				var id = (int)dr[0];
+				if(!res.ContainsKey(id))
+					res.Add(id, dr[1].ToString());
+			}
 
 			return res;
 		}
