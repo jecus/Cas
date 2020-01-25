@@ -239,16 +239,26 @@ namespace SmartCore.Calculations.MTOP
 			}
 			else
 			{
-				if(isComponent)
-					return;
-				
 				conditionType = threshold.RepeatPerformanceConditionType;
 				notify = directive.Threshold.RepeatNotification != null
 					? new Lifelength(directive.Threshold.RepeatNotification)
 					: null;
 
-				np.NextLimit = new Lifelength(directive.LastPerformance.OnLifelength);
+				if (isComponent)
+				{
+					np.NextLimitC = new Lifelength(directive.LastPerformance.OnLifelength);
+					np.NextLimit = new Lifelength(component != null ?_calculator.GetFlightLifelengthOnStartOfDay(component, directive.LastPerformance.RecordDate):
+						_calculator.GetFlightLifelengthOnStartOfDay(basecomponent, directive.LastPerformance.RecordDate));
 
+					if (!threshold.RepeatInterval.IsNullOrZero())
+						np.NextLimitC.Add(threshold.RepeatInterval);
+					else return;
+				}
+				else
+				{
+					np.NextLimit = new Lifelength(directive.LastPerformance.OnLifelength);
+				}
+				
 				if (!threshold.RepeatInterval.IsNullOrZero())
 					np.NextLimit.Add(threshold.RepeatInterval);
 				else return;
@@ -278,8 +288,11 @@ namespace SmartCore.Calculations.MTOP
 				{
 					np.RemainLimitC = new Lifelength(np.NextLimitC);
 					np.RemainLimitC.Substract(current);
-					np.RemainLimitC.Substract(iddc);
 					np.RemainLimitC.Add(idd);
+
+					if (directive.LastPerformance != null)
+						np.RemainLimitC.Substract(iddc);
+					else np.RemainLimitC.Add(threshold.RepeatInterval);
 
 					if (!threshold.FirstPerformanceSinceNew.IsNullOrZero())
 					{
@@ -296,9 +309,11 @@ namespace SmartCore.Calculations.MTOP
 
 
 					np.PerformanceSourceC = new Lifelength(current);
-					np.PerformanceSourceC.Add(np.Remains);
-					np.PerformanceSourceC.Add(iddc);
 					np.PerformanceSourceC.Substract(idd);
+					np.PerformanceSourceC.Add(np.Remains);
+
+					if (directive.LastPerformance == null)
+						np.PerformanceSourceC.Add(iddc);
 				}
 				
 				
