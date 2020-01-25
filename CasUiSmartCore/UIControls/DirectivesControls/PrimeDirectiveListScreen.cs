@@ -1663,5 +1663,10 @@ namespace CAS.UI.UIControls.DirectivesControls
 		#endregion
 		
 		#endregion
+
+		private void CheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }
