@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using EntityCore.DTO;
 using EntityCore.Filter;
 using SmartCore.Entities.Collections;
@@ -8,11 +10,16 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Deprecated;
+using SmartCore.Management;
+using SmartCore.Queries;
 
 namespace SmartCore.Entities.NewLoader
 {
 	public interface INewLoader
 	{
+		DataSet Execute(string sql);
+		DataSet Execute(IEnumerable<DbQuery> dbQueries, out List<ExecutionResultArgs> results);
+		DataSet Execute(string query, SqlParameter[] parameters);
 
 		IList<int> GetSelectColumnOnly<T>(IEnumerable<Filter> filters, string selectProperty)
 			where T : BaseEntity;

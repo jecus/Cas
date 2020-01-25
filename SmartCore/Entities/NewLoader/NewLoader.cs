@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
 using CAS.UI.Helpers;
@@ -19,6 +20,7 @@ using SmartCore.Entities.General.Deprecated;
 using SmartCore.Entities.General.Hangar;
 using SmartCore.Entities.General.Store;
 using SmartCore.Entities.General.WorkShop;
+using SmartCore.Management;
 using SmartCore.Queries;
 
 namespace SmartCore.Entities.NewLoader
@@ -38,6 +40,48 @@ namespace SmartCore.Entities.NewLoader
 		{
 			_casEnvironment = casEnvironment;
 			_provider = _casEnvironment.ApiProvider;
+		}
+
+		#endregion
+
+		#region SQL
+
+		public DataSet Execute(string sql)
+		{
+			return _provider.Execute(sql);
+		}
+
+		public DataSet Execute(IEnumerable<DbQuery> dbQueries, out List<ExecutionResultArgs> results)
+		{
+			results = new List<ExecutionResultArgs>();
+
+			int counter = 0;
+
+			var dataset = new DataSet();
+
+			foreach (var query in dbQueries)
+			{
+				var dt = _provider.Execute(query.QueryString).Tables[0];
+
+				var casTable = new CasDataTable(query.ElementType, query.Branch, query.Branch);
+
+				foreach (DataColumn row in dt.Columns)
+					casTable.Columns.Add(new DataColumn(row.ColumnName, row.DataType));
+
+				foreach (DataRow row in dt.Rows)
+					casTable.ImportRow(row);
+
+				dataset.Tables.Add(casTable);
+
+				counter++;
+			}
+
+			return dataset;
+		}
+
+		public DataSet Execute(string query, SqlParameter[] parameters)
+		{
+			return _provider.Execute(query, parameters);
 		}
 
 		#endregion

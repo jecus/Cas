@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using EntityCore.DTO.General;
 using EntityCore.Filter;
@@ -406,6 +407,26 @@ namespace SmartCore.Directives
 		{
 			directive.IsDeleted = true;
 			_newKeeper.Save(directive);
+		}
+
+		public Dictionary<int, string> GetFilesName(IEnumerable<int> ids, FileLinkType type)
+		{
+			var res = new Dictionary<int, string>();
+
+			if (ids.Count() == 0)
+				return res;
+
+			var query = $"select i.ParentId, f.FileName from Files f inner join ItemsFilesLinks i on f.ItemID = i.FileId  " +
+			            $"where  f.ItemId in (select FileId from ItemsFilesLinks where LinkType = 3 and  ParentTypeId = 1 and ParentId in ({string.Join(",",ids)}))";
+
+			var ds = _newLoader.Execute(query);
+
+			var dt = ds.Tables[0];
+
+			foreach (DataRow dr in dt.Rows)
+				res.Add((int) dr[0], dr[1].ToString());
+
+			return res;
 		}
 
 		#endregion

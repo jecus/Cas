@@ -20,6 +20,7 @@ using CASReports.Builders;
 using CASTerms;
 using EntityCore.DTO.General;
 using SmartCore.Calculations;
+using SmartCore.Entities;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -472,6 +473,17 @@ namespace CAS.UI.UIControls.DirectivesControls
 					foreach (Directive directive in dirC)
 						_initialDirectiveArray.Add(directive);
 				}
+
+
+				var ids = _initialDirectiveArray.Select(i => i.ItemId);
+				var sbFiles = GlobalObjects.DirectiveCore.GetFilesName(ids, FileLinkType.EOFile);
+				foreach (var file in sbFiles)
+				{
+					var find = _initialDirectiveArray.FirstOrDefault(i => i.ItemId == file.Key);
+					if (find != null)
+						find.EOFileName = file.Value;
+				}
+
 			}
 			catch (Exception ex)
 			{

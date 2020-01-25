@@ -1069,6 +1069,7 @@ namespace SmartCore.Entities.General.Directives
 		public bool APUCalc { get; set; }
 		public int ParentAircraftId => ParentBaseComponent?.ParentAircraftId ?? -1;
 		public List<NextPerformance> MtopNextPerformances { get; set; }
+		public string EOFileName { get; set; }
 
 		#endregion
 
