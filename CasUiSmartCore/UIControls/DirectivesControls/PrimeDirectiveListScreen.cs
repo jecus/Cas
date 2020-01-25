@@ -409,6 +409,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			}
 
 			_directivesViewer.SetItemsArray(_resultDirectiveArray.ToArray());
+			_directivesViewer.radGridView1.Columns["EOFile №"].IsVisible = false;
 
 			var resultList = new List<Directive>();
 			var list = _directivesViewer.radGridView1.Rows.Select(i => i).ToList();
@@ -1666,7 +1667,15 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 		private void CheckBox_CheckedChanged(object sender, EventArgs e)
 		{
-			throw new NotImplementedException();
+			var a = new[] {"AD No", "EO No", "EOFile №"};
+			var b= new[] {"EOFile №"};
+			foreach (var column in _directivesViewer.radGridView1.Columns)
+			{
+				if(checkBoxAll.Checked)
+					column.IsVisible = a.Contains(column.Name);
+				else
+					column.IsVisible = !b.Contains(column.Name) ;
+			}
 		}
 	}
 }

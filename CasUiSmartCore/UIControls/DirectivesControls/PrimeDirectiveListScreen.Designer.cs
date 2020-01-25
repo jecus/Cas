@@ -255,10 +255,10 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.checkBoxAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.checkBoxAll.Location = new System.Drawing.Point(41, 35);
 			this.checkBoxAll.Name = "checkBoxAll";
-			this.checkBoxAll.Size = new System.Drawing.Size(89, 25);
+			this.checkBoxAll.Size = new System.Drawing.Size(89, 75);
 			this.checkBoxAll.TabIndex = 55;
-			this.checkBoxAll.Text = "All";
-			this.checkBoxAll.Enabled = false;
+			this.checkBoxAll.Text = "Compact EOFile №";
+			this.checkBoxAll.Enabled = true;
 			this.checkBoxAll.CheckedChanged += CheckBox_CheckedChanged;
 			// 
 			// labelDateAsOf
