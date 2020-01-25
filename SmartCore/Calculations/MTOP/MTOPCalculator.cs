@@ -205,7 +205,6 @@ namespace SmartCore.Calculations.MTOP
 						np.NextLimit.Substract(iddc);
 
 						np.NextLimitC = new Lifelength(threshold.FirstPerformanceSinceNew);
-						np.NextLimitC.Substract(iddc);
 					}
 					else
 					{
@@ -287,6 +286,7 @@ namespace SmartCore.Calculations.MTOP
 				{
 					np.RemainLimitC = new Lifelength(np.NextLimitC);
 					np.RemainLimitC.Substract(current);
+					np.RemainLimitC.Substract(iddc);
 					np.RemainLimitC.Add(idd);
 
 					if (!threshold.FirstPerformanceSinceNew.IsNullOrZero())
@@ -305,6 +305,7 @@ namespace SmartCore.Calculations.MTOP
 
 					np.PerformanceSourceC = new Lifelength(current);
 					np.PerformanceSourceC.Add(np.Remains);
+					np.PerformanceSourceC.Add(iddc);
 					np.PerformanceSourceC.Substract(idd);
 				}
 				
