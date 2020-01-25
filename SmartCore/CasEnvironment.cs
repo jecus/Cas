@@ -221,40 +221,17 @@ namespace SmartCore
 
 		public DataSet Execute(string sql)
 	    {
-		    return _apiProvider.Execute(sql);
+		    return _newLoader.Execute(sql);
 	    }
 
 	    public DataSet Execute(IEnumerable<DbQuery> dbQueries, out List<ExecutionResultArgs> results)
 	    {
-		    results = new List<ExecutionResultArgs>();
-
-			int counter = 0;
-
-			var dataset = new DataSet();
-
-			foreach (var query in dbQueries)
-			{
-				var dt = _apiProvider.Execute(query.QueryString).Tables[0];
-
-				var casTable = new CasDataTable(query.ElementType, query.Branch, query.Branch);
-
-				foreach (DataColumn row in dt.Columns)
-					casTable.Columns.Add(new DataColumn(row.ColumnName, row.DataType));
-
-				foreach (DataRow row in dt.Rows)
-					casTable.ImportRow(row);
-
-				dataset.Tables.Add(casTable);
-
-				counter++;
-			}
-
-			return dataset;
+		    return _newLoader.Execute(dbQueries, out results);
 	    }
 
 	    public DataSet Execute(string query, SqlParameter[] parameters)
 	    {
-		    return _apiProvider.Execute(query, parameters);
+		    return _newLoader.Execute(query, parameters);
 	    }
 
 	    /*
