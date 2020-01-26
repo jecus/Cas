@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using SmartCore.Auxiliary;
 using SmartCore.Entities;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -32,17 +34,52 @@ namespace SmartCore.Calculations.NewCalculator
 
 		public DateTime GetMaxDate(DateTime dateTime1, DateTime dateTime2)
 		{
-			throw new NotImplementedException();
+			return new[] {dateTime1, dateTime2}.Max();
 		}
 
 		public DateTime GetManufactureDate(BaseEntityObject source)
 		{
-			throw new NotImplementedException();
+			return getManufactureDate(source);
+		}
+
+		private DateTime getManufactureDate(BaseEntityObject source)
+		{
+			if (source == null) return DateTimeExtend.GetCASMinDateTime();
+			if (source is Aircraft) return ((Aircraft)source).ManufactureDate;
+			if (source is BaseComponent) return ((BaseComponent)source).ManufactureDate;
+			if (source is Entities.General.Accessory.Component) return ((Entities.General.Accessory.Component)source).ManufactureDate;
+			return DateTimeExtend.GetCASMinDateTime();
 		}
 
 		public DateTime GetStartDate(IDirective directive)
 		{
-			throw new NotImplementedException();
+			if (directive == null || directive.Threshold == null) return DateTimeExtend.GetCASMinDateTime();
+
+			DateTime? sinceNew = null;
+			DateTime? sinceEffDate = null;
+
+			if (directive.Threshold.FirstPerformanceSinceEffectiveDate != null &&
+			    !directive.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+			{
+				sinceEffDate = directive.Threshold.EffectiveDate;
+			}
+			if (directive.Threshold.FirstPerformanceSinceNew != null &&
+			    !directive.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
+			{
+				sinceNew = getManufactureDate(directive.LifeLengthParent);
+			}
+
+			if (sinceNew != null && sinceEffDate != null)
+			{
+				if (directive.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst)
+				{
+					return sinceNew < sinceEffDate ? sinceNew.Value : sinceEffDate.Value;
+				}
+				return sinceNew > sinceEffDate ? sinceNew.Value : sinceEffDate.Value;
+			}
+			if (sinceNew != null) return sinceNew.Value;
+			if (sinceEffDate != null) return sinceEffDate.Value;
+			return DateTimeExtend.GetCASMinDateTime();
 		}
 
 		public Lifelength GetCurrentFlightLifelength(BaseEntityObject source, ForecastData forecastData = null)
