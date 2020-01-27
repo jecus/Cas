@@ -104,6 +104,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			AddColumn("Remain(L)(С)", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Last", (int)(radGridView1.Width * 0.15f));
 			AddColumn("Last Data", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Last Data(C)", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Expiry Date", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Expiry Remain", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Warranty", (int)(radGridView1.Width * 0.2f));
@@ -173,6 +174,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			DateTime? nextLimit = null;
 			Lifelength firstPerformance = Lifelength.Null, 
 					   lastPerformance = Lifelength.Null,
+					   lastPerformanceC = Lifelength.Null,
 					   expiryRemain = Lifelength.Null,
 					   nextEstimatedData = Lifelength.Null,
 					   nextEstimatedDataC = Lifelength.Null,
@@ -284,6 +286,7 @@ namespace CAS.UI.UIControls.ComponentControls
 				{
 					lastPerformanceString = SmartCore.Auxiliary.Convert.GetDateFormat(dd.LastPerformance.RecordDate);
 					lastPerformance = dd.LastPerformance.OnLifelength;
+					lastPerformanceC = dd.NextPerformance.LastDataC;
 					lastPerformanceDate = dd.LastPerformance.RecordDate;
 				}
 				if (dd.Threshold.RepeatInterval != null && !dd.Threshold.RepeatInterval.IsNullOrZero())
@@ -387,6 +390,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			subItems.Add(CreateRow(remainLimitC?.ToString(), remainLimitC));
 			subItems.Add(CreateRow(lastPerformanceString, lastPerformanceDate));
 			subItems.Add(CreateRow(lastPerformance?.ToString(), lastPerformance));
+			subItems.Add(CreateRow(lastPerformanceC?.ToString(), lastPerformanceC));
 
 			subItems.Add(CreateRow(expiryDate, expiryDate));
 			subItems.Add(CreateRow(!expiryRemain.IsNullOrZero() ? $"{expiryRemain?.Days}d" : "", expiryRemain));

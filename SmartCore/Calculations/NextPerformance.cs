@@ -31,6 +31,7 @@ namespace SmartCore.Calculations
 		private Lifelength _remainsC;
 		private Lifelength _performanceSourceC;
 		private Lifelength _lDNDAircraft;
+		private Lifelength _lastDataC;
 
 		#endregion
 
@@ -74,6 +75,12 @@ namespace SmartCore.Calculations
 		{
 			get => _performanceSourceC ?? Lifelength.Null;
 			set => _performanceSourceC = value;
+		}
+		
+		public Lifelength LastDataC
+		{
+			get => _lastDataC ?? Lifelength.Null;
+			set => _lastDataC = value;
 		}
 
 		public DateTime? NextPerformanceDateNew { get; set; }

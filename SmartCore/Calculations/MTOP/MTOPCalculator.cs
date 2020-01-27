@@ -102,14 +102,14 @@ namespace SmartCore.Calculations.MTOP
 					var lastTransferRecord = component.TransferRecords.GetLast();
 					iddc = component.ActualStateRecords.GetLastKnownRecord(lastTransferRecord.RecordDate)?.OnLifelength ?? Lifelength.Null;
 					idd = _calculator.GetFlightLifelengthOnStartOfDay(aircraft, lastTransferRecord.RecordDate);
-					currentC = _calculator.GetFlightLifelengthOnEndOfDay(component, DateTime.Today);
+					//currentC = _calculator.GetFlightLifelengthOnEndOfDay(component, DateTime.Today);
 				}
 				else if (basecomponent != null)
 				{
 					var lastTransferRecord = basecomponent.TransferRecords.GetLast();
 					iddc = basecomponent.ActualStateRecords.GetLastKnownRecord(lastTransferRecord.RecordDate)?.OnLifelength ?? Lifelength.Null;
 					idd = _calculator.GetFlightLifelengthOnStartOfDay(aircraft, lastTransferRecord.RecordDate);
-					currentC = _calculator.GetFlightLifelengthOnEndOfDay(basecomponent, DateTime.Today);
+					//currentC = _calculator.GetFlightLifelengthOnEndOfDay(basecomponent, DateTime.Today);
 				}
 				else return;
 			}
@@ -202,7 +202,7 @@ namespace SmartCore.Calculations.MTOP
 					{
 						np.NextLimit = new Lifelength(threshold.FirstPerformanceSinceNew);
 						np.NextLimit.Add(idd);
-						np.NextLimit.Substract(iddc);
+						//np.NextLimit.Substract(iddc);
 
 						np.NextLimitC = new Lifelength(threshold.FirstPerformanceSinceNew);
 					}
@@ -247,8 +247,11 @@ namespace SmartCore.Calculations.MTOP
 				if (isComponent)
 				{
 					np.NextLimitC = new Lifelength(directive.LastPerformance.OnLifelength);
-					np.NextLimit = new Lifelength(component != null ?_calculator.GetFlightLifelengthOnStartOfDay(component, directive.LastPerformance.RecordDate):
+
+					np.LastDataC = new Lifelength(component != null ? _calculator.GetFlightLifelengthOnStartOfDay(component, directive.LastPerformance.RecordDate) :
 						_calculator.GetFlightLifelengthOnStartOfDay(basecomponent, directive.LastPerformance.RecordDate));
+
+					np.NextLimit = new Lifelength(np.LastDataC);
 
 					if (!threshold.RepeatInterval.IsNullOrZero())
 						np.NextLimitC.Add(threshold.RepeatInterval);
@@ -311,6 +314,7 @@ namespace SmartCore.Calculations.MTOP
 					np.PerformanceSourceC = new Lifelength(current);
 					np.PerformanceSourceC.Substract(idd);
 					np.PerformanceSourceC.Add(np.Remains);
+					np.PerformanceSourceC.Add(iddc);
 
 					if (directive.LastPerformance == null)
 						np.PerformanceSourceC.Add(iddc);
