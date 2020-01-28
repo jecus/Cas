@@ -179,7 +179,8 @@ namespace CAS.UI.UIControls.ComponentControls
                     //nextComponentTsnCsn.Add(threshold.RepeatInterval);
                     //nextComponentTsnCsn.Resemble(threshold.RepeatInterval);
                     //labelCompntTCSNNext.Text = nextComponentTsnCsn.ToString();
-                    labelCompntTCSNNext.Text = _currentComponentDirective.NextPerformance.PerformanceSource.ToString();
+                    labelCompntTCSNNext.Text = _currentComponentDirective.NextPerformance.PerformanceSourceC.ToString();
+                    labelAircraftTCSNNext.Text = _currentComponentDirective.NextPerformance.PerformanceSource.ToString();
 					if(_currentComponentDirective.NextPerformanceDate.HasValue)
 						labelDateNext.Text = SmartCore.Auxiliary.Convert.GetDateFormat(_currentComponentDirective.NextPerformanceDate.Value);
 
@@ -195,11 +196,11 @@ namespace CAS.UI.UIControls.ComponentControls
                     //    threshold.FirstPerformanceSinceNew.IsGreaterNullable(_currentComponentDirective.ParentComponent.ActualStateRecords.GetFirst().OnLifelength))
                     //{
                         //наработка на след выполнение больше той, что была при установке агрегата 
-                        temp = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(tempAircraft);
-                        //temp.Add(remains);
-                        temp.Add(_currentComponentDirective.Remains);
-                        temp.Resemble(threshold.RepeatInterval);
-                        labelAircraftTCSNNext.Text = temp.ToString();
+                        //temp = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(tempAircraft);
+                        ////temp.Add(remains);
+                        //temp.Add(_currentComponentDirective.Remains);
+                        //temp.Resemble(threshold.RepeatInterval);
+                        //labelAircraftTCSNNext.Text = temp.ToString();
                     //}
                     //else
                     //{
@@ -221,7 +222,8 @@ namespace CAS.UI.UIControls.ComponentControls
 	                    labelDateNext.Text = SmartCore.Auxiliary.Convert.GetDateFormat(_currentComponentDirective.NextPerformanceDate.Value);
 					//наработка компонента на следующее исполнение
 					//labelCompntTCSNNext.Text = threshold.FirstPerformanceSinceNew.ToString();
-					labelCompntTCSNNext.Text = _currentComponentDirective.NextPerformance.PerformanceSource.ToString();
+					labelCompntTCSNNext.Text = _currentComponentDirective.NextPerformance.PerformanceSourceC.ToString();
+					labelAircraftTCSNNext.Text = _currentComponentDirective.NextPerformance.PerformanceSource.ToString();
 
                     //наработка самолета на следующее исполнение
                     //наработка = наработка самолета на сегодня + остаток до первого исполнения
@@ -230,11 +232,11 @@ namespace CAS.UI.UIControls.ComponentControls
                     //    threshold.FirstPerformanceSinceNew.IsGreaterNullable(_currentComponentDirective.ParentComponent.ActualStateRecords.GetFirst().OnLifelength))
                     //{
                         //наработка на след выполнение больше той, что была при установке агрегата  
-                        temp = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(tempAircraft);
-                        //temp.Add(remains);
-                        temp.Add(_currentComponentDirective.Remains);
-                        temp.Resemble(threshold.FirstPerformanceSinceNew);
-                        labelAircraftTCSNNext.Text = temp.ToString();
+                        //temp = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(tempAircraft);
+                        ////temp.Add(remains);
+                        //temp.Add(_currentComponentDirective.Remains);
+                        //temp.Resemble(threshold.FirstPerformanceSinceNew);
+                        //labelAircraftTCSNNext.Text = temp.ToString();
                     
                     //else
                     //    labelAircraftTCSNNext.Text = "";
