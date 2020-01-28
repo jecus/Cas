@@ -389,8 +389,9 @@ namespace CAS.UI.UIControls.ComponentControls
 			subItems.Add(CreateRow(remainLimit?.ToString(), remainLimit));
 			subItems.Add(CreateRow(remainLimitC?.ToString(), remainLimitC));
 			subItems.Add(CreateRow(lastPerformanceString, lastPerformanceDate));
-			subItems.Add(CreateRow(lastPerformance?.ToString(), lastPerformance));
 			subItems.Add(CreateRow(lastPerformanceC?.ToString(), lastPerformanceC));
+			subItems.Add(CreateRow(lastPerformance?.ToString(), lastPerformance));
+			
 
 			subItems.Add(CreateRow(expiryDate, expiryDate));
 			subItems.Add(CreateRow(!expiryRemain.IsNullOrZero() ? $"{expiryRemain?.Days}d" : "", expiryRemain));
