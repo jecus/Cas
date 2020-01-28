@@ -53,7 +53,9 @@ namespace CAS.UI.UIControls.ComponentControls
             this.NextEstimated = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.NextLimit = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.NextEstimatedData = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.NextEstimatedDataC = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.NextLimitData = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.NextLimitDataC = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnWorkType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnRemarks = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panelContainer.SuspendLayout();
@@ -65,8 +67,10 @@ namespace CAS.UI.UIControls.ComponentControls
             this.columnWorkType,
             this.NextEstimated,
             this.NextEstimatedData,
+            this.NextEstimatedDataC,
             this.NextLimit,
             this.NextLimitData,
+            this.NextLimitDataC,
             this.columnRemarks});
             this.listViewCompliance.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             listViewGroup1.Header = "Need New Compliance";
@@ -124,6 +128,12 @@ namespace CAS.UI.UIControls.ComponentControls
             this.NextEstimatedData.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NextEstimatedData.Width = 150;
             // 
+            // NextEstimatedDataC
+            // 
+            this.NextEstimatedDataC.Text = "Next Estimated Data(C)";
+            this.NextEstimatedDataC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NextEstimatedDataC.Width = 150;
+            // 
             // NextLimit
             // 
             this.NextLimit.Text = "Next(L)";
@@ -135,6 +145,12 @@ namespace CAS.UI.UIControls.ComponentControls
             this.NextLimitData.Text = "Next Limit Data";
             this.NextLimitData.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NextLimitData.Width = 120;
+            // 
+            // NextEstimatedDataC
+            // 
+            this.NextLimitDataC.Text = "Next Limit Data(C)";
+            this.NextLimitDataC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NextLimitDataC.Width = 120;
             // 
             // columnWorkType
             // 
@@ -166,8 +182,10 @@ namespace CAS.UI.UIControls.ComponentControls
 
         private System.Windows.Forms.ColumnHeader NextEstimated;
         private System.Windows.Forms.ColumnHeader NextEstimatedData;
+        private System.Windows.Forms.ColumnHeader NextEstimatedDataC;
         private System.Windows.Forms.ColumnHeader NextLimit;
         private System.Windows.Forms.ColumnHeader NextLimitData;
+        private System.Windows.Forms.ColumnHeader NextLimitDataC;
         private System.Windows.Forms.ColumnHeader columnWorkType;
         private System.Windows.Forms.ColumnHeader columnRemarks;
 
