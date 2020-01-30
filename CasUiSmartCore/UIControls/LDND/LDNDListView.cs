@@ -238,7 +238,9 @@ namespace CAS.UI.UIControls.LDND
 			    item.Parent.LastPerformance.RecordDate > lastComplianceDate)
 			{
 				lastComplianceDate = item.Parent.LastPerformance.RecordDate;
-				lastComplianceLifeLength = item.Parent.LastPerformance.OnLifelength;
+				if (item.Parent is ComponentDirective)
+					lastComplianceLifeLength = item.Parent.NextPerformance.LastDataC;
+				else lastComplianceLifeLength = item.Parent.LastPerformance.OnLifelength;
 			}
 
 			//Следующее выполнение
