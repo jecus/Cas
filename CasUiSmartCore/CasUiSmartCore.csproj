@@ -853,6 +853,12 @@
     <Compile Include="UIControls\ForecastControls\ForecastMTOPListViewOld.Designer.cs">
       <DependentUpon>ForecastMTOPListViewOld.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\LDND\LDNDForecastForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\LDND\LDNDForecastForm.Designer.cs">
+      <DependentUpon>LDNDForecastForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\LDND\LDNDListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -3956,6 +3962,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ForecastControls\ForecastListScreenMtopOld.resx">
       <DependentUpon>ForecastListScreenMtopOld.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\LDND\LDNDForecastForm.resx">
+      <DependentUpon>LDNDForecastForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\LDND\LDNDListScreen.resx">

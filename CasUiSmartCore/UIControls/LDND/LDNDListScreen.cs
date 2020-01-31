@@ -740,7 +740,7 @@ namespace CAS.UI.UIControls.LDND
 
 		private void ForecastContextMenuClick(object sender, EventArgs e)
 		{
-			var form = new ForecastCustomsMTOP(CurrentAircraft, _currentForecast);
+			var form = new LDNDForecastForm(CurrentAircraft);
 
 			if (form.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();
