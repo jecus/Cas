@@ -51,6 +51,7 @@ namespace CAS.UI.UIControls.LDND
 
 		private void UpdateInformation()
 		{
+			dateTimePicker1.Enabled = checkBox1.Checked;
 			var frame = GlobalObjects.CasEnvironment.BaseComponents.FirstOrDefault(i =>
 				i.ParentAircraftId == _aircraft.ItemId && Equals(i.BaseComponentType, BaseComponentType.Frame));
 			_averageUtilization = frame.AverageUtilization;
@@ -121,29 +122,40 @@ namespace CAS.UI.UIControls.LDND
 		}
 		#endregion
 
+		#region private void checkBox1_CheckedChanged(object sender, EventArgs e)
+
 		private void checkBox1_CheckedChanged(object sender, EventArgs e)
 		{
-			
+			dateTimePicker1.Enabled = !checkBox1.Checked;
+			numericUpDownHours.Enabled = numericUpDownCycles.Enabled = checkBox1.Checked;
+
+			if (checkBox1.Checked)
+			{
+				var current = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(_aircraft);
+				_averageUtilization.HoursPerDay = (double)current.Hours / (double)current.Days;
+				_averageUtilization.CyclesPerDay = (double)current.Hours / (double)current.Cycles;
+			}
+			else
+			{
+				
+			}
 		}
+
+		#endregion
 
 		private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
 		{
 
 		}
 
-		private void numericUpDownHours_ValueChanged(object sender, EventArgs e)
-		{
+		#region private void numericUpDown_ValueChanged(object sender, EventArgs e)
 
+		private void numericUpDown_ValueChanged(object sender, EventArgs e)
+		{
+			numericUpDown1.Value = numericUpDownHours.Value / numericUpDownCycles.Value;
 		}
 
-		private void numericUpDownCycles_ValueChanged(object sender, EventArgs e)
-		{
+		#endregion
 
-		}
-
-		private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-		{
-
-		}
 	}
 }

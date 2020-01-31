@@ -113,7 +113,7 @@ namespace CAS.UI.UIControls.LDND
             0,
             0,
             0});
-			this.numericUpDownHours.ValueChanged += new System.EventHandler(this.numericUpDownHours_ValueChanged);
+			this.numericUpDownHours.ValueChanged += new System.EventHandler(this.numericUpDown_ValueChanged);
 			// 
 			// numericUpDownCycles
 			// 
@@ -140,7 +140,7 @@ namespace CAS.UI.UIControls.LDND
             0,
             0,
             0});
-			this.numericUpDownCycles.ValueChanged += new System.EventHandler(this.numericUpDownCycles_ValueChanged);
+			this.numericUpDownCycles.ValueChanged += new System.EventHandler(this.numericUpDown_ValueChanged);
 			// 
 			// labelCycles
 			// 
@@ -188,7 +188,6 @@ namespace CAS.UI.UIControls.LDND
             0,
             0,
             0});
-			this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
 			// 
 			// checkBox1
 			// 
