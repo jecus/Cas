@@ -73,8 +73,6 @@ namespace CAS.UI.UIControls.ComponentControls
                 _isStore = GlobalObjects.StoreCore.GetStoreById(value.ParentStoreId) != null || value.ParentSupplierId > 0 || value.ParentSpecialistId > 0;
                 Task.Run(() => DoWork())
 	                .ContinueWith(task => Complete(), TaskScheduler.FromCurrentSynchronizationContext());
-				UpdateControl();
-                UpdateInformation();
             }
         }
         #endregion
@@ -640,7 +638,10 @@ namespace CAS.UI.UIControls.ComponentControls
 			comboBoxReceived.Items.AddRange(_specialists.ToArray());
 			comboBoxReceived.Items.Add(Specialist.Unknown);
 			comboBoxReceived.SelectedItem = _currentComponent.Received;
-		}
+
+			UpdateControl();
+			UpdateInformation();
+        }
 
 		private void DoWork()
 		{
