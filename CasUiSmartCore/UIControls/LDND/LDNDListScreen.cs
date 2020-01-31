@@ -160,7 +160,8 @@ namespace CAS.UI.UIControls.LDND
 
 			var baseComponents = GlobalObjects.ComponentCore.GetAicraftBaseComponents(CurrentAircraft.ItemId);
 			var components = GlobalObjects.ComponentCore.GetComponents(baseComponents.ToList());
-			var componentDirectives = components.SelectMany(i => i.ComponentDirectives);
+			var componentDirectives = components.SelectMany(i => i.ComponentDirectives).ToList();
+			componentDirectives.AddRange(baseComponents.SelectMany(i => i.ComponentDirectives));
 
 			var mpds = GlobalObjects.MaintenanceCore.GetMaintenanceDirectives(CurrentAircraft);
 			foreach (var componentDirective in componentDirectives)
