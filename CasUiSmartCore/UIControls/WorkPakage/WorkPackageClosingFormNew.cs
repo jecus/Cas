@@ -256,7 +256,7 @@ namespace CAS.UI.UIControls.WorkPakage
         {
             foreach (WorkPackageClosingDataGridViewRow row in dataGridViewItems.Rows.OfType<WorkPackageClosingDataGridViewRow>())
             {
-                if (row.Cells[ColumnClosed.Index].Value ! = null && (bool)row.Cells[ColumnClosed.Index].Value == false)
+                if (row.Cells[ColumnClosed.Index].Value != null && (bool)row.Cells[ColumnClosed.Index].Value == false)
                     continue;
 
                 string message;
