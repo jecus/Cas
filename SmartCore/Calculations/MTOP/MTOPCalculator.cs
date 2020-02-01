@@ -33,13 +33,13 @@ namespace SmartCore.Calculations.MTOP
 
 		#region New
 
-		public void CalculateDirectiveNew(List<IMtopCalc> directives)
+		public void CalculateDirectiveNew(List<IMtopCalc> directives, AverageUtilization averageUtilization = null)
 		{
 			foreach (var directive in directives)
-				CalculateDirectiveNew(directive);
+				CalculateDirectiveNew(directive, averageUtilization);
 		}
 
-		public void CalculateDirectiveNew(IMtopCalc directive)
+		public void CalculateDirectiveNew(IMtopCalc directive, AverageUtilization averageUtilization = null)
 		{
 			if (directive == null)
 				return;
@@ -93,7 +93,9 @@ namespace SmartCore.Calculations.MTOP
 				return;
 
 			var current = _calculator.GetFlightLifelengthOnEndOfDay(aircraft, DateTime.Today);
-			var au = _averageUtilizationCore.GetAverageUtillization(directive);
+
+			if(averageUtilization == null)
+				averageUtilization = _averageUtilizationCore.GetAverageUtillization(directive);
 
 			if (isComponent)
 			{
@@ -145,7 +147,7 @@ namespace SmartCore.Calculations.MTOP
 					{
 						var temp = Lifelength.Zero;
 						temp.Days = sed.Days - current.Days;
-						sed = new Lifelength(CalculateWithUtilization(temp, au));
+						sed = new Lifelength(CalculateWithUtilization(temp, averageUtilization));
 						sed.Add(current);
 					}
 
@@ -161,8 +163,8 @@ namespace SmartCore.Calculations.MTOP
 					remainSn.Resemble(threshold.FirstPerformanceSinceNew);
 					remainSed.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
 
-					var snCalc = CalculateWithUtilization(remainSn, au, conditionType);
-					var sedCalc = CalculateWithUtilization(remainSed, au, conditionType);
+					var snCalc = CalculateWithUtilization(remainSn, averageUtilization, conditionType);
+					var sedCalc = CalculateWithUtilization(remainSed, averageUtilization, conditionType);
 
 
 					if (conditionType == ThresholdConditionType.WhicheverFirst)
@@ -227,7 +229,7 @@ namespace SmartCore.Calculations.MTOP
 					{
 						var temp = Lifelength.Zero;
 						temp.Days = sinceEffDate.Days - current.Days;
-						sinceEffDate = new Lifelength(CalculateWithUtilization(temp, au));
+						sinceEffDate = new Lifelength(CalculateWithUtilization(temp, averageUtilization));
 						sinceEffDate.Add(current);
 					}
 
@@ -288,7 +290,7 @@ namespace SmartCore.Calculations.MTOP
 					np.NextLimit.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
 				}
 
-				np.Remains = new Lifelength(CalculateWithUtilization(np.RemainLimit, au, conditionType));
+				np.Remains = new Lifelength(CalculateWithUtilization(np.RemainLimit, averageUtilization, conditionType));
 
 				if (isComponent)
 				{
@@ -321,7 +323,7 @@ namespace SmartCore.Calculations.MTOP
 						np.NextLimitC.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
 					}
 
-					np.RemainsC = new Lifelength(CalculateWithUtilization(np.RemainLimitC, au, conditionType));
+					np.RemainsC = new Lifelength(CalculateWithUtilization(np.RemainLimitC, averageUtilization, conditionType));
 
 
 					np.PerformanceSourceC = new Lifelength(current);
@@ -371,7 +373,7 @@ namespace SmartCore.Calculations.MTOP
 			//}
 			//else
 			//{
-				days = AnalystHelper.GetApproximateDays(np.NextLimit, au, conditionType);
+				days = AnalystHelper.GetApproximateDays(np.NextLimit, averageUtilization, conditionType);
 				if (days != null)
 				{
 					if (days <= current.Days)
@@ -381,7 +383,7 @@ namespace SmartCore.Calculations.MTOP
 						else np.PerformanceDate = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(Convert.ToDouble(days));
 					}
 					else
-						np.NextPerformanceDateNew = AnalystHelper.GetApproximateDate(np.RemainLimit, au, conditionType);
+						np.NextPerformanceDateNew = AnalystHelper.GetApproximateDate(np.RemainLimit, averageUtilization, conditionType);
 				}
 
 				days = np.PerformanceSource.Days;
@@ -393,7 +395,7 @@ namespace SmartCore.Calculations.MTOP
 							np.PerformanceDate = _calculator.GetManufactureDate(aircraft).AddDays(Convert.ToDouble(days));
 						else np.PerformanceDate = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(Convert.ToDouble(days));
 					}
-					else np.PerformanceDate = AnalystHelper.GetApproximateDate(np.Remains, au, conditionType);
+					else np.PerformanceDate = AnalystHelper.GetApproximateDate(np.Remains, averageUtilization, conditionType);
 				}
 			//}
 
