@@ -1,8 +1,6 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
-using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CASTerms;
 using MetroFramework.Forms;
 using SmartCore.Calculations;
@@ -114,23 +112,11 @@ namespace CAS.UI.UIControls.LDND
 		}
 		#endregion
 
-		#region private void ButtonCancelClick(object sender, EventArgs e)
-		private void ButtonCancelClick(object sender, EventArgs e)
-		{
-			
-		}
-		#endregion
-
 		private void checkBox1_CheckedChanged(object sender, EventArgs e)
 		{
 			
 		}
-
-		private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-		{
-
-		}
-
+		
 		private void numericUpDownHours_ValueChanged(object sender, EventArgs e)
 		{
 
