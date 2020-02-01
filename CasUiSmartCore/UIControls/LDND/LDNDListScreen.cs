@@ -19,6 +19,7 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
+using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;
@@ -298,6 +299,23 @@ namespace CAS.UI.UIControls.LDND
 					{
 						var mpd = (ComponentDirective) _directivesViewer.SelectedItems[0].Parent;
 						_toolStripMenuItemShowTaskCard.Enabled = mpd?.MaintenanceDirective?.TaskCardNumberFile != null;
+					}
+				}
+
+				if (_directivesViewer.SelectedItems[0].Parent is Directive)
+				{
+					if (_directivesViewer.SelectedItems.Count == 1)
+					{
+						var directive = (Directive)_directivesViewer.SelectedItems[0].Parent;
+
+						AttachedFile file;
+						if (directive.DirectiveType == DirectiveType.SB)
+							file = directive.ServiceBulletinFile;
+						else if (directive.DirectiveType == DirectiveType.EngineeringOrders)
+							file = directive.EngineeringOrderFile;
+						else file = directive.ADNoFile;
+
+						_toolStripMenuItemShowTaskCard.Enabled = file!= null;
 					}
 				}
 			};
