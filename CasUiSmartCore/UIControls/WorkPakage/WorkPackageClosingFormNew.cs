@@ -256,7 +256,7 @@ namespace CAS.UI.UIControls.WorkPakage
         {
             foreach (WorkPackageClosingDataGridViewRow row in dataGridViewItems.Rows.OfType<WorkPackageClosingDataGridViewRow>())
             {
-                if ((bool)row.Cells[ColumnClosed.Index].Value == false)
+                if (row.Cells[ColumnClosed.Index].Value ! = null && (bool)row.Cells[ColumnClosed.Index].Value == false)
                     continue;
 
                 string message;
@@ -1189,7 +1189,7 @@ namespace CAS.UI.UIControls.WorkPakage
                 row.ClosingItem = apr.Parent;
 
             if (row.ClosingItem == null || apr == null) return;
-
+            row.Cells[ColumnClosed.Index].Value = true;
             SetLabelsAndText(row);
 
             if (apr is DirectiveRecord || apr is MaintenanceCheckRecord)
@@ -1278,6 +1278,8 @@ namespace CAS.UI.UIControls.WorkPakage
                 row.WorkPackage = wp;
                 row.ClosingItem = workPackageRecord.Task;
             }
+
+            row.Cells[ColumnClosed.Index].Value = true;
 
             GetRecordInstance(row, wp, workPackageRecord:workPackageRecord);
             SetLabelsAndText(row);
