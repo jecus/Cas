@@ -275,8 +275,31 @@ namespace CAS.UI.UIControls.LDND
 				new RadMenuSeparatorItem(),
 				_createWorkPakageToolStripMenuItem,
 				_toolStripMenuItemsWorkPackages);
-			
-			panel1.Controls.Add(_directivesViewer);
+
+			_directivesViewer.MenuOpeningAction = () =>
+			{
+				_toolStripMenuItemShowTaskCard.Enabled = false;
+				if (_directivesViewer.SelectedItems[0].Parent is MaintenanceDirective)
+				{
+					if (_directivesViewer.SelectedItems.Count == 1)
+					{
+						var mpd = (MaintenanceDirective) _directivesViewer.SelectedItems[0].Parent;
+						_toolStripMenuItemShowTaskCard.Enabled = mpd?.TaskCardNumberFile != null;
+					}
+				}
+
+				if (_directivesViewer.SelectedItems[0].Parent is ComponentDirective)
+				{
+					if (_directivesViewer.SelectedItems.Count == 1)
+					{
+						var mpd = (ComponentDirective) _directivesViewer.SelectedItems[0].Parent;
+						_toolStripMenuItemShowTaskCard.Enabled = mpd?.MaintenanceDirective?.TaskCardNumberFile != null;
+					}
+				}
+			};
+
+
+				panel1.Controls.Add(_directivesViewer);
 		}
 
 		#endregion
