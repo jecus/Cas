@@ -195,17 +195,17 @@ namespace CAS.UI.UIControls.LDND
 		{
 			Lifelength baseDetailLifeLenght = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(_frame);
 
-			//if (dateTimePickerForecastDate.Value <= DateTime.Today)
-			//{
-			//	//если дата прогноза меньше сегодняшней, то выводиться зписанная наработка на эту дату
-			//	lifelengthViewer_ForecastResource.Lifelength =
-			//		GlobalObjects.CasEnvironment.Calculator.GetFlightLifelengthOnEndOfDay(_frame, dateTimePickerForecastDate.Value);
-			//	Lifelength different = new Lifelength(lifelengthViewer_ForecastResource.Lifelength);
-			//	different.Substract(baseDetailLifeLenght);
-			//	lifelengthViewerDifferentSource.Lifelength = different;
-			//}
-			//else
-			//{
+			if (dateTimePickerForecastDate.Value <= DateTime.Today)
+			{
+				//если дата прогноза меньше сегодняшней, то выводиться зписанная наработка на эту дату
+				lifelengthViewer_ForecastResource.Lifelength =
+					GlobalObjects.CasEnvironment.Calculator.GetFlightLifelengthOnEndOfDay(_frame, dateTimePickerForecastDate.Value);
+				Lifelength different = new Lifelength(lifelengthViewer_ForecastResource.Lifelength);
+				different.Substract(baseDetailLifeLenght);
+				lifelengthViewerDifferentSource.Lifelength = different;
+			}
+			else
+			{
 				//если дата прогноза выше сегодняшней, то сначала вычисляется
 				//наработка на сегодняшний день, а к ней добавляется среднепрогнозируемая наработка
 				//между сегодняшним днем и днем прогноза
@@ -215,13 +215,13 @@ namespace CAS.UI.UIControls.LDND
 				if (au == null) return;
 
 				Lifelength average;
-				if (dateTimePickerForecastDate.Value == DateTime.Today)
-					 average = AnalystHelper.GetUtilization(au, Calculator.GetDays(DateTime.Today, dateTimePickerForecastDate.Value));
+				if (dateTimePickerForecastDate.Value.Date == DateTime.Today.Date)
+					average = AnalystHelper.GetUtilization(au, Calculator.GetDays(DateTime.Today, dateTimePickerForecastDate.Value));
 				else average = AnalystHelper.GetUtilizationNew(au, Calculator.GetDays(DateTime.Today, dateTimePickerForecastDate.Value));
 				lifelengthViewerDifferentSource.Lifelength = average;
 				baseDetailLifeLenght.Add(average);
 				lifelengthViewer_ForecastResource.Lifelength = baseDetailLifeLenght;
-			//}
+			}
 		}
 
 		#endregion

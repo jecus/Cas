@@ -152,14 +152,13 @@ namespace SmartCore.Analyst
 				res.Cycles = (int)(days * average.CyclesPerMonth / 30);
 				res.TotalMinutes = ((int)average.HoursPerDay * 60);
 
-
 				var decimalParts = average.HoursPerDay.ToString("F").Split('.');
 				string decimalPart = decimalParts[1];
 				if (decimalPart.StartsWith("0"))
 					decimalPart = decimalPart.Substring(1);
 				res.TotalMinutes += int.Parse(decimalPart);
 
-
+				res.TotalMinutes *= days;
 			}
 
 			res.Days = days;
