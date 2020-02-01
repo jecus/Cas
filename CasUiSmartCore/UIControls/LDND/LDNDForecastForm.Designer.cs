@@ -216,6 +216,7 @@ namespace CAS.UI.UIControls.LDND
 			this.dateTimePickerForecastDate.Name = "dateTimePickerForecastDate";
 			this.dateTimePickerForecastDate.Size = new System.Drawing.Size(347, 24);
 			this.dateTimePickerForecastDate.TabIndex = 64;
+			this.dateTimePickerForecastDate.ValueChanged += DateTimePickerForecastDate_ValueChanged; ;
 			// 
 			// metroLabel1
 			// 
@@ -292,6 +293,7 @@ namespace CAS.UI.UIControls.LDND
 			// radioButtonCurrentUtil
 			// 
 			this.radioButtonCurrentUtil.AutoSize = true;
+			this.radioButtonCurrentUtil.Checked = true;
 			this.radioButtonCurrentUtil.Location = new System.Drawing.Point(300, 234);
 			this.radioButtonCurrentUtil.Name = "radioButtonCurrentUtil";
 			this.radioButtonCurrentUtil.Size = new System.Drawing.Size(126, 17);
@@ -299,28 +301,32 @@ namespace CAS.UI.UIControls.LDND
 			this.radioButtonCurrentUtil.TabStop = true;
 			this.radioButtonCurrentUtil.Text = "Use current utilization";
 			this.radioButtonCurrentUtil.UseVisualStyleBackColor = true;
+			this.radioButtonCurrentUtil.CheckedChanged += RadioButton_CheckedChanged;
 			// 
 			// radioButtonLast7Days
 			// 
 			this.radioButtonLast7Days.AutoSize = true;
 			this.radioButtonLast7Days.Location = new System.Drawing.Point(300, 260);
 			this.radioButtonLast7Days.Name = "radioButtonLast7Days";
-			this.radioButtonLast7Days.Size = new System.Drawing.Size(93, 17);
+			this.radioButtonLast7Days.Size = new System.Drawing.Size(60, 17);
 			this.radioButtonLast7Days.TabIndex = 70;
 			this.radioButtonLast7Days.TabStop = true;
 			this.radioButtonLast7Days.Text = "For last 7 days";
 			this.radioButtonLast7Days.UseVisualStyleBackColor = true;
+			this.radioButtonLast7Days.CheckedChanged += RadioButton_CheckedChanged;
 			// 
 			// radioButtonCustom
 			// 
 			this.radioButtonCustom.AutoSize = true;
+			this.radioButtonCustom.Visible = false;
 			this.radioButtonCustom.Location = new System.Drawing.Point(300, 286);
 			this.radioButtonCustom.Name = "radioButtonCustom";
-			this.radioButtonCustom.Size = new System.Drawing.Size(60, 17);
+			this.radioButtonCustom.Size = new System.Drawing.Size(93, 17);
 			this.radioButtonCustom.TabIndex = 71;
 			this.radioButtonCustom.TabStop = true;
 			this.radioButtonCustom.Text = "Custom";
 			this.radioButtonCustom.UseVisualStyleBackColor = true;
+			this.radioButtonLast7Days.CheckedChanged += RadioButton_CheckedChanged;
 			// 
 			// LDNDForecastForm
 			// 
