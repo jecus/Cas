@@ -208,6 +208,51 @@ namespace CAS.UI.UIControls.LDND
 				e.Cancel = true;
 				return;
 			}
+
+
+
+			#region Сравнение с рабочими пакетами
+
+			AnimatedThreadWorker.ReportProgress(90, "comparison with the Work Packages");
+
+			//загрузка рабочих пакетов для определения 
+			//перекрытых ими выполнений задач
+			if (_openPubWorkPackages == null)
+				_openPubWorkPackages = new CommonCollection<WorkPackage>();
+			_openPubWorkPackages.Clear();
+			_openPubWorkPackages.AddRange(GlobalObjects.WorkPackageCore.GetWorkPackagesLite(CurrentAircraft, WorkPackageStatus.Opened));
+			_openPubWorkPackages.AddRange(GlobalObjects.WorkPackageCore.GetWorkPackagesLite(CurrentAircraft, WorkPackageStatus.Published));
+			//сбор всех записей рабочих пакетов для удобства фильтрации
+			var openWPRecords = new List<WorkPackageRecord>();
+			foreach (var openWorkPackage in _openPubWorkPackages)
+				openWPRecords.AddRange(openWorkPackage.WorkPakageRecords);
+
+			foreach (var task in mtopDirectives)
+			{
+				if (task.NextPerformances.Count <= 0)
+					continue;
+				//Проход по всем след. выполнениям чека и записям в рабочих пакетах
+				//для поиска перекрывающихся выполнений
+				var performances = task.NextPerformances;
+				foreach (NextPerformance np in performances)
+				{
+					//поиск записи в рабочих пакетах по данному чеку
+					//чей номер группы выполнения (по записи) совпадает с расчитанным
+					var wpr =
+						openWPRecords.FirstOrDefault(r => r.PerformanceNumFromStart == np.PerformanceNum &&
+						                                  r.WorkPackageItemType == task.SmartCoreObjectType.ItemId &&
+						                                  r.DirectiveId == task.ItemId);
+					if (wpr != null)
+						np.BlockedByPackage = _openPubWorkPackages.GetItemById(wpr.WorkPakageId);
+				}
+			}
+
+			if (AnimatedThreadWorker.CancellationPending)
+			{
+				e.Cancel = true;
+				return;
+			}
+			#endregion
 			AnimatedThreadWorker.ReportProgress(100, "Completed");
 		}
 
