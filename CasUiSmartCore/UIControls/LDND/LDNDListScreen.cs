@@ -52,6 +52,7 @@ namespace CAS.UI.UIControls.LDND
 		private RadMenuItem _createWorkPakageToolStripMenuItem;
 		private RadMenuItem _toolStripMenuItemsWorkPackages;
 		private RadMenuItem _toolStripMenuItemShowTaskCard;
+		private AverageUtilization _averageUtilization;
 
 		#endregion
 
@@ -115,13 +116,10 @@ namespace CAS.UI.UIControls.LDND
 								  GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(CurrentAircraft);
 			}
 
-			if (_currentForecast.ForecastDatas.Count > 0)
+			if (_averageUtilization != null)
 			{
-				var main = _currentForecast.ForecastDatas[0];
 				labelDateAsOf.Text =
-					"Forecast Period From: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.LowerLimit) +
-					" To: " + SmartCore.Auxiliary.Convert.GetDateFormat(main.ForecastDate) +
-					"\nAvg. utlz: " + main.AverageUtilization;
+					"\nAvg. utlz: " + _averageUtilization;
 			}
 
 			if (_toolStripMenuItemsWorkPackages != null)
@@ -192,7 +190,8 @@ namespace CAS.UI.UIControls.LDND
 
 			AnimatedThreadWorker.ReportProgress(50, "Calculation");
 
-			GlobalObjects.MTOPCalculator.CalculateDirectiveNew(mtopDirectives);
+			
+			GlobalObjects.MTOPCalculator.CalculateDirectiveNew(mtopDirectives, _averageUtilization);
 
 			_initial.AddRange(mtopDirectives.SelectMany(i => i.NextPerformances));
 
@@ -741,7 +740,7 @@ namespace CAS.UI.UIControls.LDND
 
 		private void ForecastContextMenuClick(object sender, EventArgs e)
 		{
-			var form = new LDNDForecastForm(CurrentAircraft);
+			var form = new LDNDForecastForm(CurrentAircraft, _averageUtilization);
 
 			if (form.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();

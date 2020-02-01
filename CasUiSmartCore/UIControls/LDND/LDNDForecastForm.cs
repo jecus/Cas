@@ -39,9 +39,10 @@ namespace CAS.UI.UIControls.LDND
 
 		/// <summary>
 		/// </summary>
-		public LDNDForecastForm(Aircraft aircraft) : this()
+		public LDNDForecastForm(Aircraft aircraft, AverageUtilization averageUtilization) : this()
 		{
 			_aircraft = aircraft;
+			_averageUtilization = averageUtilization;
 
 			UpdateInformation();
 		}
@@ -127,7 +128,7 @@ namespace CAS.UI.UIControls.LDND
 
 		private void ButtonOkClick(object sender, EventArgs e)
 		{
-
+			_averageUtilization = GetAverageUtilization();
 		}
 
 		#endregion
