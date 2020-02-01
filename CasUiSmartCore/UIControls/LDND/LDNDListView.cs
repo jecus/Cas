@@ -110,7 +110,8 @@ namespace CAS.UI.UIControls.LDND
 					{
 						cell.Style.CustomizeFill = true;
 						cell.Style.BackColor = Color.FromArgb(Highlight.PurpleLight.Color);
-						cell.Style.ForeColor = itemForeColor;
+						if (cell.Style.ForeColor != Color.MediumVioletRed)
+							cell.Style.ForeColor = itemForeColor;
 					}
 				}
 			}
@@ -127,8 +128,8 @@ namespace CAS.UI.UIControls.LDND
 						cell.Style.BackColor = Color.FromArgb(Highlight.Red.Color);
 					if (imd.Percents != null && imd.Percents > 0)
 						cell.Style.BackColor = Color.FromArgb(Highlight.Green.Color);
-
-					cell.Style.ForeColor = imd.NextPerformances.IndexOf(item) == 0
+					if (cell.Style.ForeColor != Color.MediumVioletRed)
+						cell.Style.ForeColor = imd.NextPerformances.IndexOf(item) == 0
 						? Color.Black
 						: Color.Gray; ;
 				}
@@ -140,7 +141,8 @@ namespace CAS.UI.UIControls.LDND
 				{
 					cell.Style.CustomizeFill = true;
 					cell.Style.BackColor = Color.FromArgb(Highlight.Grey.Color);
-					cell.Style.ForeColor = itemForeColor;
+					if (cell.Style.ForeColor != Color.MediumVioletRed)
+						cell.Style.ForeColor = itemForeColor;
 				}
 			}
 
@@ -167,7 +169,7 @@ namespace CAS.UI.UIControls.LDND
 		protected override List<CustomCell> GetListViewSubItems(NextPerformance item)
 		{
 			var subItems = new List<CustomCell>();
-			Color tcnColor = radGridView1.ForeColor;
+			var tcnColor = radGridView1.ForeColor;
 			int index;
 			var lastComplianceDate = DateTimeExtend.GetCASMinDateTime();
 			var lastComplianceLifeLength = Lifelength.Zero;
@@ -225,10 +227,12 @@ namespace CAS.UI.UIControls.LDND
 			}
 			else if (item.Parent is ComponentDirective c)
 			{
+				if (c.MaintenanceDirective?.TaskCardNumberFile == null)
+					tcnColor = Color.MediumVioletRed;
 				description = item.Title;
 				title = c.MaintenanceDirective?.TaskNumberCheck ?? "";
 				card = c.MaintenanceDirective?.TaskCardNumber ?? "";
-
+				
 				access = c.Access;
 				workArea = "";
 				zone = c.Zone;
@@ -273,7 +277,7 @@ namespace CAS.UI.UIControls.LDND
 				: "/WL") : "";
 			
 
-			subItems.Add(CreateRow(title, title, tcnColor));
+			subItems.Add(CreateRow(title, title));
 			subItems.Add(CreateRow(card, card, tcnColor));
 			subItems.Add(CreateRow(description, description));
 			subItems.Add(CreateRow(item.WorkType, item.WorkType));

@@ -877,6 +877,18 @@
     <Compile Include="UIControls\MailControls\MailSettingFrom.Designer.cs">
       <DependentUpon>MailSettingFrom.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\MaintananceProgram\CheckNew\LDNDCheckFormNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\MaintananceProgram\CheckNew\LDNDCheckFormNew.designer.cs">
+      <DependentUpon>LDNDCheckFormNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\MaintananceProgram\CheckNew\MaintenanceCheckEditNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\MaintananceProgram\CheckNew\MaintenanceCheckEditNew.Designer.cs">
+      <DependentUpon>MaintenanceCheckEditNew.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\OilControls\Model\OilGraphicModel.cs" />
     <Compile Include="UIControls\OilControls\OilGraphForm.cs">
       <SubType>Form</SubType>
@@ -3974,6 +3986,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\MailControls\MailSettingFrom.resx">
       <DependentUpon>MailSettingFrom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\MaintananceProgram\CheckNew\LDNDCheckFormNew.resx">
+      <DependentUpon>LDNDCheckFormNew.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\MaintananceProgram\CheckNew\MaintenanceCheckEditNew.resx">
+      <DependentUpon>MaintenanceCheckEditNew.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\OilControls\OilGraphForm.resx">
       <DependentUpon>OilGraphForm.cs</DependentUpon>
