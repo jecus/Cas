@@ -118,8 +118,13 @@ namespace CAS.UI.UIControls.LDND
 
 			if (_averageUtilization != null)
 			{
-				labelDateAsOf.Text =
-					"\nAvg. utlz: " + _averageUtilization;
+				labelDateAsOf.Text = "Avg. utlz: " + _averageUtilization;
+			}
+			else
+			{
+				var _frame = GlobalObjects.CasEnvironment.BaseComponents.FirstOrDefault(i =>
+					i.ParentAircraftId == _currentAircraft.ItemId && Equals(i.BaseComponentType, BaseComponentType.Frame));
+				labelDateAsOf.Text = "Avg. utlz: " + _frame.AverageUtilization;
 			}
 
 			if (_toolStripMenuItemsWorkPackages != null)

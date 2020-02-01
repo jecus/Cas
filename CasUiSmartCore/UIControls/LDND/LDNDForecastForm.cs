@@ -128,7 +128,9 @@ namespace CAS.UI.UIControls.LDND
 
 		private void ButtonOkClick(object sender, EventArgs e)
 		{
+			DialogResult = DialogResult.OK;
 			_averageUtilization = GetAverageUtilization();
+			this.Close();
 		}
 
 		#endregion

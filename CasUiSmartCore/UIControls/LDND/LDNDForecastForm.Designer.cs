@@ -306,9 +306,10 @@ namespace CAS.UI.UIControls.LDND
 			// radioButtonLast7Days
 			// 
 			this.radioButtonLast7Days.AutoSize = true;
-			this.radioButtonLast7Days.Location = new System.Drawing.Point(300, 260);
+			this.radioButtonLast7Days.Visible = false;
+			this.radioButtonLast7Days.Location = new System.Drawing.Point(300, 286);
 			this.radioButtonLast7Days.Name = "radioButtonLast7Days";
-			this.radioButtonLast7Days.Size = new System.Drawing.Size(60, 17);
+			this.radioButtonLast7Days.Size = new System.Drawing.Size(93, 17);
 			this.radioButtonLast7Days.TabIndex = 70;
 			this.radioButtonLast7Days.TabStop = true;
 			this.radioButtonLast7Days.Text = "For last 7 days";
@@ -318,10 +319,10 @@ namespace CAS.UI.UIControls.LDND
 			// radioButtonCustom
 			// 
 			this.radioButtonCustom.AutoSize = true;
-			this.radioButtonCustom.Visible = false;
-			this.radioButtonCustom.Location = new System.Drawing.Point(300, 286);
+			
+			this.radioButtonCustom.Location = new System.Drawing.Point(300, 260);
 			this.radioButtonCustom.Name = "radioButtonCustom";
-			this.radioButtonCustom.Size = new System.Drawing.Size(93, 17);
+			this.radioButtonCustom.Size =  new System.Drawing.Size(60, 17);
 			this.radioButtonCustom.TabIndex = 71;
 			this.radioButtonCustom.TabStop = true;
 			this.radioButtonCustom.Text = "Custom";
