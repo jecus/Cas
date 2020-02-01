@@ -43,7 +43,6 @@ namespace CAS.UI.UIControls.LDND
 			this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
 			this.lifelengthViewerCurrent = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.dateTimePickerForecastDate = new System.Windows.Forms.DateTimePicker();
-			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
 			this.lifelengthViewerDifferentSource = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.lifelengthViewer_ForecastResource = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.radioButtonCurrentUtil = new System.Windows.Forms.RadioButton();
@@ -84,25 +83,25 @@ namespace CAS.UI.UIControls.LDND
 			this.numericUpDownHours.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.numericUpDownHours.ForeColor = System.Drawing.Color.DimGray;
 			this.numericUpDownHours.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
+			1,
+			0,
+			0,
+			131072});
 			this.numericUpDownHours.Location = new System.Drawing.Point(85, 234);
 			this.numericUpDownHours.Maximum = new decimal(new int[] {
-            744,
-            0,
-            0,
-            0});
+			744,
+			0,
+			0,
+			0});
 			this.numericUpDownHours.Name = "numericUpDownHours";
 			this.numericUpDownHours.Size = new System.Drawing.Size(202, 22);
 			this.numericUpDownHours.TabIndex = 48;
 			this.numericUpDownHours.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numericUpDownHours.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+			1,
+			0,
+			0,
+			0});
 			this.numericUpDownHours.ValueChanged += new System.EventHandler(this.numericUpDown_ValueChanged);
 			// 
 			// numericUpDownCycles
@@ -111,25 +110,25 @@ namespace CAS.UI.UIControls.LDND
 			this.numericUpDownCycles.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.numericUpDownCycles.ForeColor = System.Drawing.Color.DimGray;
 			this.numericUpDownCycles.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
+			1,
+			0,
+			0,
+			131072});
 			this.numericUpDownCycles.Location = new System.Drawing.Point(85, 259);
 			this.numericUpDownCycles.Maximum = new decimal(new int[] {
-            900,
-            0,
-            0,
-            0});
+			900,
+			0,
+			0,
+			0});
 			this.numericUpDownCycles.Name = "numericUpDownCycles";
 			this.numericUpDownCycles.Size = new System.Drawing.Size(202, 22);
 			this.numericUpDownCycles.TabIndex = 49;
 			this.numericUpDownCycles.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numericUpDownCycles.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+			1,
+			0,
+			0,
+			0});
 			this.numericUpDownCycles.ValueChanged += new System.EventHandler(this.numericUpDown_ValueChanged);
 			// 
 			// labelCycles
@@ -159,25 +158,25 @@ namespace CAS.UI.UIControls.LDND
 			this.numericUpDown1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.numericUpDown1.ForeColor = System.Drawing.Color.DimGray;
 			this.numericUpDown1.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
+			1,
+			0,
+			0,
+			131072});
 			this.numericUpDown1.Location = new System.Drawing.Point(85, 284);
 			this.numericUpDown1.Maximum = new decimal(new int[] {
-            900,
-            0,
-            0,
-            0});
+			900,
+			0,
+			0,
+			0});
 			this.numericUpDown1.Name = "numericUpDown1";
 			this.numericUpDown1.Size = new System.Drawing.Size(202, 22);
 			this.numericUpDown1.TabIndex = 51;
 			this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.numericUpDown1.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+			1,
+			0,
+			0,
+			0});
 			// 
 			// lifelengthViewerCurrent
 			// 
@@ -216,17 +215,7 @@ namespace CAS.UI.UIControls.LDND
 			this.dateTimePickerForecastDate.Name = "dateTimePickerForecastDate";
 			this.dateTimePickerForecastDate.Size = new System.Drawing.Size(347, 24);
 			this.dateTimePickerForecastDate.TabIndex = 64;
-			this.dateTimePickerForecastDate.ValueChanged += DateTimePickerForecastDate_ValueChanged; ;
-			// 
-			// metroLabel1
-			// 
-			this.metroLabel1.AutoSize = true;
-			this.metroLabel1.ForeColor = System.Drawing.Color.DimGray;
-			this.metroLabel1.Location = new System.Drawing.Point(11, 197);
-			this.metroLabel1.Name = "metroLabel1";
-			this.metroLabel1.Size = new System.Drawing.Size(72, 19);
-			this.metroLabel1.TabIndex = 65;
-			this.metroLabel1.Text = "Date as of:";
+			this.dateTimePickerForecastDate.ValueChanged += DateTimePickerForecastDate_ValueChanged;
 			// 
 			// lifelengthViewerDifferentSource
 			// 
@@ -245,8 +234,8 @@ namespace CAS.UI.UIControls.LDND
 			this.lifelengthViewerDifferentSource.HeaderFormattedCalendar = "Calendar";
 			this.lifelengthViewerDifferentSource.HeaderHours = "Hours";
 			this.lifelengthViewerDifferentSource.HoursApplicable = false;
-			this.lifelengthViewerDifferentSource.LeftHeader = "Different";
-			this.lifelengthViewerDifferentSource.Location = new System.Drawing.Point(10, 118);
+			this.lifelengthViewerDifferentSource.LeftHeader = "Difference";
+			this.lifelengthViewerDifferentSource.Location = new System.Drawing.Point(1, 118);
 			this.lifelengthViewerDifferentSource.Margin = new System.Windows.Forms.Padding(2);
 			this.lifelengthViewerDifferentSource.Modified = false;
 			this.lifelengthViewerDifferentSource.Name = "lifelengthViewerDifferentSource";
@@ -255,7 +244,7 @@ namespace CAS.UI.UIControls.LDND
 			this.lifelengthViewerDifferentSource.ShowFormattedCalendar = false;
 			this.lifelengthViewerDifferentSource.ShowHeaders = false;
 			this.lifelengthViewerDifferentSource.ShowMinutes = true;
-			this.lifelengthViewerDifferentSource.Size = new System.Drawing.Size(427, 35);
+			this.lifelengthViewerDifferentSource.Size = new System.Drawing.Size(436, 35);
 			this.lifelengthViewerDifferentSource.SystemCalculated = true;
 			this.lifelengthViewerDifferentSource.TabIndex = 67;
 			// 
@@ -276,8 +265,8 @@ namespace CAS.UI.UIControls.LDND
 			this.lifelengthViewer_ForecastResource.HeaderFormattedCalendar = "Calendar";
 			this.lifelengthViewer_ForecastResource.HeaderHours = "Hours";
 			this.lifelengthViewer_ForecastResource.HoursApplicable = false;
-			this.lifelengthViewer_ForecastResource.LeftHeader = "Forecast";
-			this.lifelengthViewer_ForecastResource.Location = new System.Drawing.Point(11, 157);
+			this.lifelengthViewer_ForecastResource.LeftHeader = "Next";
+			this.lifelengthViewer_ForecastResource.Location = new System.Drawing.Point(38, 157);
 			this.lifelengthViewer_ForecastResource.Margin = new System.Windows.Forms.Padding(2);
 			this.lifelengthViewer_ForecastResource.Modified = false;
 			this.lifelengthViewer_ForecastResource.Name = "lifelengthViewer_ForecastResource";
@@ -286,7 +275,7 @@ namespace CAS.UI.UIControls.LDND
 			this.lifelengthViewer_ForecastResource.ShowFormattedCalendar = false;
 			this.lifelengthViewer_ForecastResource.ShowHeaders = false;
 			this.lifelengthViewer_ForecastResource.ShowMinutes = true;
-			this.lifelengthViewer_ForecastResource.Size = new System.Drawing.Size(426, 35);
+			this.lifelengthViewer_ForecastResource.Size = new System.Drawing.Size(399, 35);
 			this.lifelengthViewer_ForecastResource.SystemCalculated = true;
 			this.lifelengthViewer_ForecastResource.TabIndex = 66;
 			// 
@@ -296,17 +285,16 @@ namespace CAS.UI.UIControls.LDND
 			this.radioButtonCurrentUtil.Checked = true;
 			this.radioButtonCurrentUtil.Location = new System.Drawing.Point(300, 234);
 			this.radioButtonCurrentUtil.Name = "radioButtonCurrentUtil";
-			this.radioButtonCurrentUtil.Size = new System.Drawing.Size(126, 17);
+			this.radioButtonCurrentUtil.Size = new System.Drawing.Size(132, 17);
 			this.radioButtonCurrentUtil.TabIndex = 69;
 			this.radioButtonCurrentUtil.TabStop = true;
-			this.radioButtonCurrentUtil.Text = "Use current utilization";
+			this.radioButtonCurrentUtil.Text = "Use average utilization";
 			this.radioButtonCurrentUtil.UseVisualStyleBackColor = true;
 			this.radioButtonCurrentUtil.CheckedChanged += RadioButton_CheckedChanged;
 			// 
 			// radioButtonLast7Days
 			// 
 			this.radioButtonLast7Days.AutoSize = true;
-			this.radioButtonLast7Days.Visible = false;
 			this.radioButtonLast7Days.Location = new System.Drawing.Point(300, 286);
 			this.radioButtonLast7Days.Name = "radioButtonLast7Days";
 			this.radioButtonLast7Days.Size = new System.Drawing.Size(93, 17);
@@ -314,15 +302,15 @@ namespace CAS.UI.UIControls.LDND
 			this.radioButtonLast7Days.TabStop = true;
 			this.radioButtonLast7Days.Text = "For last 7 days";
 			this.radioButtonLast7Days.UseVisualStyleBackColor = true;
+			this.radioButtonLast7Days.Visible = false;
 			this.radioButtonLast7Days.CheckedChanged += RadioButton_CheckedChanged;
 			// 
 			// radioButtonCustom
 			// 
 			this.radioButtonCustom.AutoSize = true;
-			
 			this.radioButtonCustom.Location = new System.Drawing.Point(300, 260);
 			this.radioButtonCustom.Name = "radioButtonCustom";
-			this.radioButtonCustom.Size =  new System.Drawing.Size(60, 17);
+			this.radioButtonCustom.Size = new System.Drawing.Size(60, 17);
 			this.radioButtonCustom.TabIndex = 71;
 			this.radioButtonCustom.TabStop = true;
 			this.radioButtonCustom.Text = "Custom";
@@ -339,7 +327,6 @@ namespace CAS.UI.UIControls.LDND
 			this.Controls.Add(this.radioButtonCurrentUtil);
 			this.Controls.Add(this.lifelengthViewerCurrent);
 			this.Controls.Add(this.dateTimePickerForecastDate);
-			this.Controls.Add(this.metroLabel1);
 			this.Controls.Add(this.lifelengthViewerDifferentSource);
 			this.Controls.Add(this.lifelengthViewer_ForecastResource);
 			this.Controls.Add(this.label1);
@@ -372,7 +359,6 @@ namespace CAS.UI.UIControls.LDND
 		private System.Windows.Forms.NumericUpDown numericUpDown1;
 		public Auxiliary.LifelengthViewer lifelengthViewerCurrent;
 		private System.Windows.Forms.DateTimePicker dateTimePickerForecastDate;
-		private MetroLabel metroLabel1;
 		public Auxiliary.LifelengthViewer lifelengthViewerDifferentSource;
 		public Auxiliary.LifelengthViewer lifelengthViewer_ForecastResource;
 		private System.Windows.Forms.RadioButton radioButtonCurrentUtil;
