@@ -748,7 +748,10 @@ namespace CAS.UI.UIControls.LDND
 			var form = new LDNDForecastForm(CurrentAircraft, _averageUtilization);
 
 			if (form.ShowDialog() == DialogResult.OK)
+			{
+				_averageUtilization = form.AverageUtilization;
 				AnimatedThreadWorker.RunWorkerAsync();
+			}
 		}
 
 		#endregion

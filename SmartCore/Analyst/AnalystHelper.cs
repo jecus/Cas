@@ -141,6 +141,31 @@ namespace SmartCore.Analyst
 			return res;
 		}
 
+
+
+		public static Lifelength GetUtilizationNew(AverageUtilization average, int days)
+		{
+			var res = Lifelength.Zero;
+
+			if (average != null && average.CyclesPerMonth != 0 && average.HoursPerMonth != 0)
+			{
+				res.Cycles = (int)(days * average.CyclesPerMonth / 30);
+				res.TotalMinutes = ((int)average.HoursPerDay * 60);
+
+
+				var decimalParts = average.HoursPerDay.ToString("F").Split('.');
+				string decimalPart = decimalParts[1];
+				if (decimalPart.StartsWith("0"))
+					decimalPart = decimalPart.Substring(1);
+				res.TotalMinutes += int.Parse(decimalPart);
+
+
+			}
+
+			res.Days = days;
+			return res;
+		}
+
 		#endregion
 	}
 }

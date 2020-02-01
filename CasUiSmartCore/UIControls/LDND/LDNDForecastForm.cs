@@ -22,6 +22,11 @@ namespace CAS.UI.UIControls.LDND
 		private Aircraft _aircraft;
 		private BaseComponent _frame;
 
+		public AverageUtilization AverageUtilization
+		{
+			get { return _averageUtilization; }
+		}
+
 		#region Constructors
 
 		#region public ForecastCustomsWriteData()
@@ -58,7 +63,6 @@ namespace CAS.UI.UIControls.LDND
 		{
 			_frame = GlobalObjects.CasEnvironment.BaseComponents.FirstOrDefault(i =>
 				i.ParentAircraftId == _aircraft.ItemId && Equals(i.BaseComponentType, BaseComponentType.Frame));
-			_averageUtilization = _frame.AverageUtilization;
 
 			lifelengthViewerCurrent.Lifelength = GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(_aircraft);
 			if (radioButtonCurrentUtil.Checked)
@@ -85,7 +89,7 @@ namespace CAS.UI.UIControls.LDND
 		{
 			double eps = 0.00000001;
 			double hours = (double) numericUpDownHours.Value;
-			double cycles = (double) numericUpDownCycles.Value;
+			double cycles = (double) numericUpDown1.Value;
 
 			if (numericUpDownHours.Value >= 24)
 			{
@@ -210,7 +214,10 @@ namespace CAS.UI.UIControls.LDND
 				AverageUtilization au = GetAverageUtilization();
 				if (au == null) return;
 
-				Lifelength average = AnalystHelper.GetUtilization(au, Calculator.GetDays(DateTime.Today, dateTimePickerForecastDate.Value));
+				Lifelength average;
+				if (dateTimePickerForecastDate.Value == DateTime.Today)
+					 average = AnalystHelper.GetUtilization(au, Calculator.GetDays(DateTime.Today, dateTimePickerForecastDate.Value));
+				else average = AnalystHelper.GetUtilizationNew(au, Calculator.GetDays(DateTime.Today, dateTimePickerForecastDate.Value));
 				lifelengthViewerDifferentSource.Lifelength = average;
 				baseDetailLifeLenght.Add(average);
 				lifelengthViewer_ForecastResource.Lifelength = baseDetailLifeLenght;
