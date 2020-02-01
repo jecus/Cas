@@ -64,6 +64,7 @@ namespace CAS.UI.UIControls.LDND
 			// panelTopContainer
 			//
 			this.panelTopContainer.Controls.Add(this.labelTitle);
+			this.panelTopContainer.Controls.Add(this.labelDateAsOf);
 			// 
 			// aircraftHeaderControl1
 			// 
