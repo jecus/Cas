@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using CAS.UI.UIControls.KitControls;
 using CASTerms;
+using EntityCore.DTO.General;
 using MetroFramework.Forms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
@@ -16,7 +19,8 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
     {
         #region Fields
         private MaintenanceCheck _maintenanceLiminationItem;
-        private MaintenanceCheckCollection _allMaintenanceChecks = new MaintenanceCheckCollection();
+        private List<MaintenanceCheckType> _checks;
+
         #endregion
 
         #region Constructor
@@ -32,12 +36,23 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
         public MaintenanceCheckEditNew(MaintenanceCheck maintenanceLiminationItem) : this()
         {
             _maintenanceLiminationItem = maintenanceLiminationItem;
-            UpdateInformation();
+
+            Task.Run(() => DoWork())
+	            .ContinueWith(task => UpdateInformation(), TaskScheduler.FromCurrentSynchronizationContext());
         }
+
+
 
         #endregion
 
         #region Methods
+
+        private void DoWork()
+        {
+	        _checks = new List<MaintenanceCheckType>();
+            _checks.Clear();
+            _checks.AddRange(GlobalObjects.CasEnvironment.NewLoader.GetObjectList<MaintenanceCheckTypeDTO, MaintenanceCheckType>());
+        }
 
         #region private void UpdateInformation()
 
@@ -47,14 +62,10 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
             {
                 _textBoxName.Text = _maintenanceLiminationItem.Name;
                 _lifelengthViewerInterval.Lifelength = _maintenanceLiminationItem.Interval;
+                comboBoxCheckType.Items.Clear();
+                comboBoxCheckType.Items.AddRange(_checks.ToArray());
+                comboBoxCheckType.Items.Add(MaintenanceCheckType.Unknown);
             }
-        }
-        #endregion
-
-        #region private void FillCheckType()
-        private void FillCheckType()
-        {
-
         }
         #endregion
 
@@ -82,7 +93,6 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
         {
             _maintenanceLiminationItem.Name = _textBoxName.Text;
             _maintenanceLiminationItem.CheckType = comboBoxCheckType.SelectedItem as MaintenanceCheckType ?? MaintenanceCheckType.Unknown;
-            
             _maintenanceLiminationItem.Interval = _lifelengthViewerInterval.Lifelength;
             
             GlobalObjects.CasEnvironment.NewKeeper.Save(_maintenanceLiminationItem);
