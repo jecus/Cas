@@ -15,6 +15,7 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.ForecastControls;
+using CAS.UI.UIControls.MaintananceProgram.CheckNew;
 using CAS.UI.UIControls.PurchaseControls;
 using CAS.UI.UIControls.WorkPakage;
 using CASReports.Builders;
@@ -1425,6 +1426,13 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		{
 			var form = new MaintenanceDirectiveAPUCalculationForm(_initialDirectiveArray.ToList());
 			if(form.ShowDialog() == DialogResult.OK)
+				AnimatedThreadWorker.RunWorkerAsync();
+		}
+
+		private void buttonMaintCheck_Click(object sender, EventArgs e)
+		{
+			var form = new MaintenanceCheckFormNew(CurrentAircraft, _initialDirectiveArray);
+			if (form.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();
 		}
 	}

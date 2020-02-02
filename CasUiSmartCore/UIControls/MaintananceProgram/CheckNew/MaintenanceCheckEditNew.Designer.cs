@@ -150,6 +150,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.Controls.Add(label4);
 			this.Controls.Add(this._textBoxName);
 			this.Name = "MaintenanceCheckEditNew";
+			this.Resizable = false;
 			this.ShowIcon = false;
 			this.Text = "Maintenance Check Edit New";
 			this.ResumeLayout(false);

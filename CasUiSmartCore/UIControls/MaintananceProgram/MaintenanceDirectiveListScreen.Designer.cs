@@ -39,9 +39,11 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.buttonAddNew = new CAS.UI.Management.Dispatchering.RichReferenceButton();
 			this.buttonExport = new CAS.UI.Management.Dispatchering.RichReferenceButton();
 			this.buttonAPUCalc = new CAS.UI.Management.Dispatchering.RichReferenceButton();
+			this.buttonMaintCheck = new CAS.UI.Management.Dispatchering.RichReferenceButton();
 			this.pictureBoxSeperatorBAN = new System.Windows.Forms.PictureBox();
 			this.pictureBoxSeperato = new System.Windows.Forms.PictureBox();
 			this.pictureBoxSeperator = new System.Windows.Forms.PictureBox();
+			this.pictureBoxSeperatorM = new System.Windows.Forms.PictureBox();
 			this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
 			this.labelDateAsOf = new System.Windows.Forms.Label();
 			this.labelTitle = new AvControls.StatusImageLink.StatusImageLinkLabel();
@@ -53,6 +55,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSeperatorBAN)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSeperato)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSeperator)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSeperatorM)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// headerControl
@@ -99,6 +102,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.flowLayoutPanel1.Controls.Add(this.buttonApplyFilter);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBoxSeperator);
 			this.flowLayoutPanel1.Controls.Add(this.buttonAPUCalc);
+			this.flowLayoutPanel1.Controls.Add(this.pictureBoxSeperatorM);
+			this.flowLayoutPanel1.Controls.Add(this.buttonMaintCheck);
 			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
 			this.flowLayoutPanel1.Location = new System.Drawing.Point(552, 0);
@@ -259,6 +264,17 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.pictureBoxSeperator.TabIndex = 25;
 			this.pictureBoxSeperator.TabStop = false;
 			// 
+			// pictureBoxSeperatorM
+			// 
+			this.pictureBoxSeperatorM.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
+			this.pictureBoxSeperatorM.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.pictureBoxSeperatorM.Location = new System.Drawing.Point(58, 3);
+			this.pictureBoxSeperatorM.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+			this.pictureBoxSeperatorM.Name = "pictureBoxSeperatorM";
+			this.pictureBoxSeperatorM.Size = new System.Drawing.Size(5, 57);
+			this.pictureBoxSeperatorM.TabIndex = 25;
+			this.pictureBoxSeperatorM.TabStop = false;
+			// 
 			// buttonApplyFilter
 			// 
 			this.buttonApplyFilter.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
@@ -316,6 +332,35 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.buttonAPUCalc.TextSecondary = "";
 			this.buttonAPUCalc.ToolTipText = "APUCalc";
 			this.buttonAPUCalc.Click += new System.EventHandler(this.ButtonAPUCalc_Click);
+			// 
+			// buttonMaintCheck
+			// 
+			this.buttonMaintCheck.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+			this.buttonMaintCheck.ActiveBackgroundImage = null;
+			this.buttonMaintCheck.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonMaintCheck.Dock = System.Windows.Forms.DockStyle.Right;
+			this.buttonMaintCheck.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonMaintCheck.FontSecondary = new System.Drawing.Font("Verdana", 9.75F);
+			this.buttonMaintCheck.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
+			this.buttonMaintCheck.ForeColorSecondary = System.Drawing.SystemColors.ControlText;
+			this.buttonMaintCheck.Icon = global::CAS.UI.Properties.Resources.Check_List_Service_Maintenance;
+			this.buttonMaintCheck.IconLayout = System.Windows.Forms.ImageLayout.Center;
+			this.buttonMaintCheck.IconNotEnabled = null;
+			this.buttonMaintCheck.Location = new System.Drawing.Point(0, 0);
+			this.buttonMaintCheck.Margin = new System.Windows.Forms.Padding(0);
+			this.buttonMaintCheck.Name = "buttonMaintCheck";
+			this.buttonMaintCheck.NormalBackgroundImage = null;
+			this.buttonMaintCheck.PaddingMain = new System.Windows.Forms.Padding(0);
+			this.buttonMaintCheck.PaddingSecondary = new System.Windows.Forms.Padding(0);
+			this.buttonMaintCheck.ShowToolTip = true;
+			this.buttonMaintCheck.Size = new System.Drawing.Size(55, 63);
+			this.buttonMaintCheck.TabIndex = 18;
+			this.buttonMaintCheck.TextAlignMain = System.Drawing.ContentAlignment.MiddleLeft;
+			this.buttonMaintCheck.TextAlignSecondary = System.Drawing.ContentAlignment.MiddleLeft;
+			this.buttonMaintCheck.TextMain = "";
+			this.buttonMaintCheck.TextSecondary = "";
+			this.buttonMaintCheck.ToolTipText = "Maintenance Check";
+			this.buttonMaintCheck.Click += new System.EventHandler(this.buttonMaintCheck_Click);
 			//
 			// labelDateAsOf
 			// 
@@ -397,6 +442,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSeperatorBAN)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSeperato)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSeperator)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSeperatorM)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -409,6 +455,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		private CAS.UI.Management.Dispatchering.RichReferenceButton buttonAddNew;
 		private CAS.UI.Management.Dispatchering.RichReferenceButton buttonExport;
 		private CAS.UI.Management.Dispatchering.RichReferenceButton buttonAPUCalc;
+		private CAS.UI.Management.Dispatchering.RichReferenceButton buttonMaintCheck;
 		private AvControls.AvButtonT.AvButtonT buttonDeleteSelected;
 		private AvControls.AvButtonT.AvButtonT buttonApplyFilter;
 		private System.Windows.Forms.Label labelDateAsOf;
@@ -417,6 +464,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		private System.Windows.Forms.PictureBox pictureBoxSeperatorBAN;
 		private System.Windows.Forms.PictureBox pictureBoxSeperato;
 		private System.Windows.Forms.PictureBox pictureBoxSeperator;
+		private System.Windows.Forms.PictureBox pictureBoxSeperatorM;
 		private CAS.UI.Management.Dispatchering.RichReferenceButton buttonAddShowEquipmentAndMaterials;
 	}
 }

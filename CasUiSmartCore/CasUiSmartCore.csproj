@@ -5442,6 +5442,7 @@
     <Content Include="Resources\B737500RearLeft.bmp" />
     <Content Include="Resources\B737500Side.bmp" />
     <Content Include="Resources\B737500Top.bmp" />
+    <None Include="Resources\Check_List_Service-Maintenance.png" />
     <Content Include="Resources\ExcelImport.png" />
     <Resource Include="Resources\ImageIcon_Small.png" />
     <Resource Include="Resources\ImageIcon_Small_Gray.png" />
