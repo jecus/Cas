@@ -272,6 +272,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			// 
 			this.buttonApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonApply.Enabled = true;
+			this.buttonApply.DialogResult = DialogResult.None;
 			this.buttonApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonApply.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonApply.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));

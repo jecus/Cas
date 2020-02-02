@@ -58,13 +58,16 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 
         private void UpdateInformation()
         {
+	        comboBoxCheckType.Items.Clear();
+	        comboBoxCheckType.Items.AddRange(_checks.ToArray());
+	        comboBoxCheckType.Items.Add(MaintenanceCheckType.Unknown);
+
             if (_maintenanceLiminationItem.ItemId > 0)
             {
                 _textBoxName.Text = _maintenanceLiminationItem.Name;
                 _lifelengthViewerInterval.Lifelength = _maintenanceLiminationItem.Interval;
-                comboBoxCheckType.Items.Clear();
-                comboBoxCheckType.Items.AddRange(_checks.ToArray());
-                comboBoxCheckType.Items.Add(MaintenanceCheckType.Unknown);
+                comboBoxCheckType.SelectedItem = _maintenanceLiminationItem.CheckType;
+
             }
         }
         #endregion
