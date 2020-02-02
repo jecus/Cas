@@ -1,4 +1,5 @@
-﻿using MetroFramework.Controls;
+﻿using System.Windows.Forms;
+using MetroFramework.Controls;
 using CAS.UI.Helpers;
 
 namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
@@ -119,6 +120,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			// 
 			this._buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this._buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this._buttonOk.DialogResult = DialogResult.OK;
 			this._buttonOk.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this._buttonOk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
 			this._buttonOk.Location = new System.Drawing.Point(315, 182);
