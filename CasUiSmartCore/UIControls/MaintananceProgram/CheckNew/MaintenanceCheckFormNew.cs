@@ -341,7 +341,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		{
 			buttonApply.Enabled = 
 				deleteButton.Enabled = 
-					addButton.Enabled = 
+					//addButton.Enabled = 
 						editButton.Enabled = comboBox1.SelectedItem != null;
 		}
 
