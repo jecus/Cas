@@ -3,7 +3,7 @@ using MetroFramework.Controls;
 
 namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 {
-	partial class LDNDCheckFormNew
+	partial class MaintenanceCheckFormNew
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -34,8 +34,8 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.buttonAdd = new System.Windows.Forms.Button();
 			this.buttonClose = new System.Windows.Forms.Button();
 			this.splitContainerMain = new System.Windows.Forms.SplitContainer();
-			this.listViewTasksForSelect = new CAS.UI.UIControls.MaintananceProgram.MaintenanceCheckBindTaskListView();
-			this.listViewBindedTasks = new CAS.UI.UIControls.MaintananceProgram.MaintenanceCheckBindTaskListView();
+			this.listViewTasksForSelect = new CAS.UI.UIControls.MaintananceProgram.MaintenanceDirectiveLightListView();
+			this.listViewBindedTasks = new CAS.UI.UIControls.MaintananceProgram.MaintenanceDirectiveLightListView();
 			this.buttonDelete = new System.Windows.Forms.Button();
 			this.labelInterval = new MetroFramework.Controls.MetroLabel();
 			this.checkBoxSelectAll = new MetroFramework.Controls.MetroCheckBox();
@@ -109,7 +109,6 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.listViewTasksForSelect.Margin = new System.Windows.Forms.Padding(4);
 			this.listViewTasksForSelect.Name = "listViewTasksForSelect";
 			this.listViewTasksForSelect.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewTasksForSelect.ShowGroups = true;
 			this.listViewTasksForSelect.Size = new System.Drawing.Size(979, 344);
 			this.listViewTasksForSelect.TabIndex = 1; 
 			// 
@@ -123,7 +122,6 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.listViewBindedTasks.Margin = new System.Windows.Forms.Padding(4);
 			this.listViewBindedTasks.Name = "listViewBindedTasks";
 			this.listViewBindedTasks.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewBindedTasks.ShowGroups = true;
 			this.listViewBindedTasks.Size = new System.Drawing.Size(979, 202);
 			this.listViewBindedTasks.TabIndex = 2;
 			// 
@@ -322,8 +320,8 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		private Button buttonAdd;
 		private Button buttonClose;
 		private Button buttonDelete;
-		private MaintenanceCheckBindTaskListView listViewTasksForSelect;
-		private MaintenanceCheckBindTaskListView listViewBindedTasks;
+		private MaintenanceDirectiveLightListView listViewTasksForSelect;
+		private MaintenanceDirectiveLightListView listViewBindedTasks;
 		private MetroLabel labelInterval;
 		private MetroCheckBox checkBoxSelectAll;
 		private CheckedListBox checkedListBoxItems;

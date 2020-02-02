@@ -58,7 +58,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 
         private void UpdateInformation()
         {
-            if (_maintenanceLiminationItem.ParentAircraft.ItemId > 0)
+            if (_maintenanceLiminationItem.ItemId > 0)
             {
                 _textBoxName.Text = _maintenanceLiminationItem.Name;
                 _lifelengthViewerInterval.Lifelength = _maintenanceLiminationItem.Interval;

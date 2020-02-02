@@ -17,13 +17,13 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 	/// <summary>
 	/// Форма для переноса шаблона ВС в рабочую базу данных
 	/// </summary>
-	public partial class LDNDCheckFormNew : MetroForm
+	public partial class MaintenanceCheckFormNew : MetroForm
 	{
 
 		#region Fields
 
-		private CommonCollection<MaintenanceDirective> _bindedDirectives = new CommonCollection<MaintenanceDirective>();
-		private IEnumerable<MaintenanceDirective> _mpdForSelect;
+		private List<MaintenanceDirective> _bindedDirectives = new List<MaintenanceDirective>();
+		private List<MaintenanceDirective> _mpdForSelect;
 		private IEnumerable<MaintenanceDirective> _allDirectives;
 		private Aircraft _currentAircraft;
 		private List<Lifelength> _maintenanceDirectivesIntervals = new List<Lifelength>();
@@ -40,7 +40,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		/// <summary>
 		/// Создает форму для создания жесткой связи между чеками программы обслуживания и задачами программы обслуживания
 		/// </summary>
-		private LDNDCheckFormNew()
+		private MaintenanceCheckFormNew()
 		{
 			InitializeComponent();
 		}
@@ -52,7 +52,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		/// <summary>
 		/// Создает форму для привязки задач к выполнению чека программы обслуживания
 		/// </summary>
-		public LDNDCheckFormNew(Aircraft aircraft,IEnumerable<MaintenanceDirective> allDirectives)
+		public MaintenanceCheckFormNew(Aircraft aircraft,IEnumerable<MaintenanceDirective> allDirectives)
 			: this()
 		{
 			if (allDirectives == null)
@@ -89,7 +89,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			checkedListBoxItems.SelectedIndexChanged += CheckedListBoxItemsSelectedIndexChanged;
 
 			listViewTasksForSelect.SetItemsArray(_mpdForSelect.ToArray());
-			listViewBindedTasks.SetItemsArray((IEnumerable<BaseEntityObject>) _bindedDirectives);
+			listViewBindedTasks.SetItemsArray(_bindedDirectives.ToArray());
 		}
 		#endregion
 
@@ -103,7 +103,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			}
 
 			if (_bindedDirectives == null)
-				_bindedDirectives = new CommonCollection<MaintenanceDirective>();
+				_bindedDirectives = new List<MaintenanceDirective>();
 			_bindedDirectives.Clear();
 
 
@@ -113,7 +113,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			_animatedThreadWorker.ReportProgress(0, "load binded tasks");
 
 			//_mpdForSelect = _allDirectives.Where(mpd => mpd.MaintenanceCheck == null);
-			_mpdForSelect = _allDirectives.Where(mpd => mpd.MaintenanceCheck == null);
+			_mpdForSelect = _allDirectives.ToList();
 
 			if (_animatedThreadWorker.CancellationPending)
 			{
@@ -144,13 +144,16 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 
 			foreach (var selectedItem in listViewTasksForSelect.SelectedItems)
 			{
-				var dir = selectedItem as MaintenanceDirective;
-				if (dir == null)
+				if (!(selectedItem is MaintenanceDirective dir))
 					continue;
 
-				listViewBindedTasks.AddItem(dir);
-				listViewTasksForSelect.RemoveItem(dir);
+				_mpdForSelect.Remove(dir);
+				_bindedDirectives.Add(dir);
 			}
+
+			listViewBindedTasks.SetItemsArray(_bindedDirectives.ToArray());
+			//listViewTasksForSelect.SetItemsArray(_mpdForSelect.ToArray());
+			Sort();
 		}
 		#endregion
 
@@ -163,13 +166,16 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 
 			foreach (var selectedItem in listViewBindedTasks.SelectedItems)
 			{
-				var dir = selectedItem as MaintenanceDirective;
-				if (dir == null)
+				if (!(selectedItem is MaintenanceDirective dir))
 					continue;
 
-				listViewBindedTasks.RemoveItem(dir);
-				listViewTasksForSelect.AddItem(dir);
+				_mpdForSelect.Add(dir);
+				_bindedDirectives.Remove(dir);
 			}
+
+			listViewBindedTasks.SetItemsArray(_bindedDirectives.ToArray());
+			//listViewTasksForSelect.SetItemsArray(_mpdForSelect.ToArray());
+			Sort();
 		}
 		#endregion
 
@@ -272,18 +278,18 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		#region private void CheckedListBoxItemsSelectedIndexChanged(object sender, EventArgs e)
 		private void CheckedListBoxItemsSelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (checkedListBoxItems.CheckedItems.Count == 0)
-			{
-				listViewTasksForSelect.ItemListView.Items.Clear();
-			}
+			Sort();
+		}
 
+		private void Sort()
+		{
 			var intervals =
 				checkedListBoxItems.CheckedItems.OfType<Lifelength>();
 			var mpdWithInterval = new List<MaintenanceDirective>();
 			mpdWithInterval
 				.AddRange(_mpdForSelect
-							  .Where(mpd => intervals.Any(interval => mpd.Threshold.FirstPerformanceSinceNew != null 
-																   && mpd.Threshold.FirstPerformanceSinceNew.Equals(interval))));
+					.Where(mpd => intervals.Any(interval => mpd.Threshold.FirstPerformanceSinceNew != null
+					                                        && mpd.Threshold.FirstPerformanceSinceNew.Equals(interval))));
 			listViewTasksForSelect.SetItemsArray(mpdWithInterval.ToArray());
 		}
 		#endregion
@@ -305,12 +311,18 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			{
 				var check = comboBox1.SelectedItem as MaintenanceCheck;
 
-				foreach (var selectedItem in listViewBindedTasks.SelectedItems)
+				foreach (var item in _bindedDirectives)
 				{
-					var dir = selectedItem as MaintenanceDirective;
+					var dir = item;
 					dir.MaintenanceCheck = check;
 				}
-				GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(listViewBindedTasks.SelectedItems);
+				GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(_bindedDirectives.Cast<BaseEntityObject>().ToList());
+
+				_mpdForSelect.AddRange(_bindedDirectives);
+				_bindedDirectives.Clear();
+				listViewBindedTasks.SetItemsArray(_bindedDirectives.ToArray());
+				//listViewTasksForSelect.SetItemsArray(_mpdForSelect.ToArray());
+				Sort();
 
 				_animatedThreadWorker.RunWorkerAsync();
 			}
@@ -335,7 +347,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		private void EditButton_Click(object sender, EventArgs e)
 		{
 			var form = new MaintenanceCheckEditNew(comboBox1.SelectedItem as MaintenanceCheck);
-			if (form.DialogResult == DialogResult.OK)
+			if (form.ShowDialog() == DialogResult.OK)
 				_animatedThreadWorker.RunWorkerAsync();
 		}
 
@@ -346,7 +358,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		private void AddButton_Click(object sender, EventArgs e)
 		{
 			var form = new MaintenanceCheckEditNew(new MaintenanceCheck(){ParentAircraft = _currentAircraft, ParentAircraftId = _currentAircraft.ItemId});
-			if(form.DialogResult == DialogResult.OK)
+			if(form.ShowDialog() == DialogResult.OK)
 				_animatedThreadWorker.RunWorkerAsync();
 		}
 

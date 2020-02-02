@@ -877,17 +877,23 @@
     <Compile Include="UIControls\MailControls\MailSettingFrom.Designer.cs">
       <DependentUpon>MailSettingFrom.cs</DependentUpon>
     </Compile>
-    <Compile Include="UIControls\MaintananceProgram\CheckNew\LDNDCheckFormNew.cs">
+    <Compile Include="UIControls\MaintananceProgram\CheckNew\MaintenanceCheckFormNew.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UIControls\MaintananceProgram\CheckNew\LDNDCheckFormNew.designer.cs">
-      <DependentUpon>LDNDCheckFormNew.cs</DependentUpon>
+    <Compile Include="UIControls\MaintananceProgram\CheckNew\MaintenanceCheckFormNew.designer.cs">
+      <DependentUpon>MaintenanceCheckFormNew.cs</DependentUpon>
     </Compile>
     <Compile Include="UIControls\MaintananceProgram\CheckNew\MaintenanceCheckEditNew.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UIControls\MaintananceProgram\CheckNew\MaintenanceCheckEditNew.Designer.cs">
       <DependentUpon>MaintenanceCheckEditNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\MaintananceProgram\CheckNew\MaintenanceDirectiveLightListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\MaintananceProgram\CheckNew\MaintenanceDirectiveLightListView.Designer.cs">
+      <DependentUpon>MaintenanceDirectiveLightListView.cs</DependentUpon>
     </Compile>
     <Compile Include="UIControls\OilControls\Model\OilGraphicModel.cs" />
     <Compile Include="UIControls\OilControls\OilGraphForm.cs">
@@ -3987,8 +3993,8 @@
     <EmbeddedResource Include="UIControls\MailControls\MailSettingFrom.resx">
       <DependentUpon>MailSettingFrom.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\MaintananceProgram\CheckNew\LDNDCheckFormNew.resx">
-      <DependentUpon>LDNDCheckFormNew.cs</DependentUpon>
+    <EmbeddedResource Include="UIControls\MaintananceProgram\CheckNew\MaintenanceCheckFormNew.resx">
+      <DependentUpon>MaintenanceCheckFormNew.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\MaintananceProgram\CheckNew\MaintenanceCheckEditNew.resx">
