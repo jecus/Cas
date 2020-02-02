@@ -32,6 +32,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
         public MaintenanceCheckEditNew(MaintenanceCheck maintenanceLiminationItem) : this()
         {
             _maintenanceLiminationItem = maintenanceLiminationItem;
+            UpdateInformation();
         }
 
         #endregion
@@ -45,8 +46,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
             if (_maintenanceLiminationItem.ParentAircraft.ItemId > 0)
             {
                 _textBoxName.Text = _maintenanceLiminationItem.Name;
-
-               _lifelengthViewerInterval.Lifelength = _maintenanceLiminationItem.Interval;
+                _lifelengthViewerInterval.Lifelength = _maintenanceLiminationItem.Interval;
             }
         }
         #endregion

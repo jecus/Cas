@@ -25,11 +25,11 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		private CommonCollection<MaintenanceDirective> _bindedDirectives = new CommonCollection<MaintenanceDirective>();
 		private IEnumerable<MaintenanceDirective> _mpdForSelect;
 		private IEnumerable<MaintenanceDirective> _allDirectives;
-		private readonly MaintenanceCheck _maintenanceCheck;
 		private Aircraft _currentAircraft;
 		private List<Lifelength> _maintenanceDirectivesIntervals = new List<Lifelength>();
 
 		private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
+		private List<MaintenanceCheck> _checks;
 
 		#endregion
 
@@ -52,16 +52,13 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		/// <summary>
 		/// Создает форму для привязки задач к выполнению чека программы обслуживания
 		/// </summary>
-		public LDNDCheckFormNew(MaintenanceCheck maintenanceCheck, IEnumerable<MaintenanceDirective> allDirectives)
+		public LDNDCheckFormNew(Aircraft aircraft,IEnumerable<MaintenanceDirective> allDirectives)
 			: this()
 		{
-			if (maintenanceCheck == null)
-				throw new ArgumentNullException("maintenanceCheck", "must be not null");
 			if (allDirectives == null)
 				throw new ArgumentNullException("allDirectives", "must be not null");
 
-			_maintenanceCheck = maintenanceCheck;
-			_currentAircraft = maintenanceCheck.ParentAircraft;
+			_currentAircraft = aircraft;
 			_allDirectives = allDirectives;
 
 			_animatedThreadWorker.DoWork += AnimatedThreadWorkerDoLoad;
@@ -84,6 +81,9 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			checkedListBoxItems.SelectedIndexChanged -= CheckedListBoxItemsSelectedIndexChanged;
 			checkedListBoxItems.Items.Clear();
 
+			comboBox1.Items.Clear();
+			comboBox1.Items.AddRange(_checks.ToArray());
+
 			GetMaintenanceDirectivesIntervals();
 
 			checkedListBoxItems.SelectedIndexChanged += CheckedListBoxItemsSelectedIndexChanged;
@@ -96,7 +96,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		#region private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
 		private void AnimatedThreadWorkerDoLoad(object sender, DoWorkEventArgs e)
 		{
-			if (_maintenanceCheck == null || _currentAircraft == null)
+			if (_currentAircraft == null)
 			{
 				e.Cancel = true;
 				return;
@@ -106,9 +106,13 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 				_bindedDirectives = new CommonCollection<MaintenanceDirective>();
 			_bindedDirectives.Clear();
 
+
+			_checks = new List<MaintenanceCheck>();
+			_checks.AddRange(GlobalObjects.MaintenanceCore.GetMaintenanceCheck(_currentAircraft));
+
 			_animatedThreadWorker.ReportProgress(0, "load binded tasks");
 
-			_bindedDirectives.AddRange(_maintenanceCheck.BindMpds.ToArray());
+			//_mpdForSelect = _allDirectives.Where(mpd => mpd.MaintenanceCheck == null);
 			_mpdForSelect = _allDirectives.Where(mpd => mpd.MaintenanceCheck == null);
 
 			if (_animatedThreadWorker.CancellationPending)
@@ -138,27 +142,15 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			if(listViewTasksForSelect.SelectedItems.Count == 0)
 				return;
 
-			foreach (BaseEntityObject selectedItem in listViewTasksForSelect.SelectedItems)
+			foreach (var selectedItem in listViewTasksForSelect.SelectedItems)
 			{
-				MaintenanceDirective dir = selectedItem as MaintenanceDirective;
+				var dir = selectedItem as MaintenanceDirective;
 				if (dir == null)
 					continue;
 
-				try
-				{
-					dir.MaintenanceCheck = _maintenanceCheck;
-
-					GlobalObjects.CasEnvironment.NewKeeper.Save(dir, false);
-				   
-					_maintenanceCheck.BindMpds.Add(dir);
-				}
-				catch (Exception ex)
-				{
-					Program.Provider.Logger.Log("Error while save bind task record", ex);
-				}
+				listViewBindedTasks.AddItem(dir);
+				listViewTasksForSelect.RemoveItem(dir);
 			}
-
-			_animatedThreadWorker.RunWorkerAsync();
 		}
 		#endregion
 
@@ -169,43 +161,15 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			if (listViewBindedTasks.SelectedItems.Count == 0)
 				return;
 
-			foreach (BaseEntityObject selectedItem in listViewBindedTasks.SelectedItems)
+			foreach (var selectedItem in listViewBindedTasks.SelectedItems)
 			{
-				MaintenanceDirective dir = selectedItem as MaintenanceDirective;
+				var dir = selectedItem as MaintenanceDirective;
 				if (dir == null)
 					continue;
 
-				try
-				{
-					dir.MaintenanceCheck = null;
-
-					GlobalObjects.CasEnvironment.NewKeeper.Save(dir, false);
-
-					_maintenanceCheck.BindMpds.RemoveById(dir.ItemId);
-				}
-				catch (Exception ex)
-				{
-					Program.Provider.Logger.Log("Error while delete bind task record", ex);
-				}
+				listViewBindedTasks.RemoveItem(dir);
+				listViewTasksForSelect.AddItem(dir);
 			}
-
-			_animatedThreadWorker.RunWorkerAsync();
-		}
-		#endregion
-
-		#region private void TemplateAircraftAddToDataBaseForm_Deactivate(object sender, EventArgs e)
-
-		private void TemplateAircraftAddToDataBaseForm_Deactivate(object sender, EventArgs e)
-		{
-			StaticWaitFormProvider.WaitForm.Visible = false;
-		}
-		#endregion
-
-		#region private void TemplateAircraftAddToDataBaseForm_Activated(object sender, EventArgs e)
-		private void TemplateAircraftAddToDataBaseForm_Activated(object sender, EventArgs e)
-		{
-			if (StaticWaitFormProvider.IsActive)
-				StaticWaitFormProvider.WaitForm.Visible = true;
 		}
 		#endregion
 
@@ -213,26 +177,6 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		private void LDNDCheckFormNewLoad(object sender, EventArgs e)
 		{
 			_animatedThreadWorker.RunWorkerAsync();
-		}
-		#endregion
-
-		#region private void ListViewSelectedTasksSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
-		
-		private void ListViewSelectedTasksSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
-		{
-			//buttonAdd.Enabled = listViewTasksForSelect.SelectedItems.Count > 0;
-			//avButtonViewJobCard.Enabled = listViewBindedTasks.SelectedItems.Count > 0 ||
-			//							  listViewTasksForSelect.SelectedItems.Count > 0;
-		}
-		#endregion
-
-		#region private void ListViewBindedTasksSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
-
-		private void ListViewBindedTasksSelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
-		{
-			//buttonDelete.Enabled = listViewBindedTasks.SelectedItems.Count > 0;
-			//avButtonViewJobCard.Enabled = listViewBindedTasks.SelectedItems.Count > 0 ||
-			//							  listViewTasksForSelect.SelectedItems.Count > 0;
 		}
 		#endregion
 
@@ -252,37 +196,37 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 					.OrderBy(l => l)
 					.ToList();
 			//Интервалы, содержащие только часы
-			IEnumerable<Lifelength> intervalsGroupHours =
+			var intervalsGroupHours =
 				tempIntervals.Where(i => i.Hours != null
 									  && i.Cycles == null
 									  && i.Days == null);
 			//Интервалы, содержащие только циклы
-			IEnumerable<Lifelength> intervalsGroupCycles =
+			var intervalsGroupCycles =
 				tempIntervals.Where(i => i.Hours == null
 									  && i.Cycles != null
 									  && i.Days == null);
 			//Интервалы, содержащие только дни
-			IEnumerable<Lifelength> intervalsGroupDays =
+			var intervalsGroupDays =
 				tempIntervals.Where(i => i.Hours == null
 									  && i.Cycles == null
 									  && i.Days != null);
 			//Интервалы, содержащие часы/циклы
-			IEnumerable<Lifelength> intervalsGroupHoursCycles =
+			var intervalsGroupHoursCycles =
 				tempIntervals.Where(i => i.Hours != null
 									  && i.Cycles != null
 									  && i.Days == null);
 			//Интервалы, содержащие часы/дни
-			IEnumerable<Lifelength> intervalsGroupHoursDays =
+			var intervalsGroupHoursDays =
 				tempIntervals.Where(i => i.Hours != null
 									  && i.Cycles == null
 									  && i.Days != null);
 			//Интервалы, содержащие только циклы/дни
-			IEnumerable<Lifelength> intervalsGroupCyclesDays =
+			var intervalsGroupCyclesDays =
 				tempIntervals.Where(i => i.Hours == null
 									  && i.Cycles != null
 									  && i.Days != null);
 			//Интервалы, содержащие часы/циклы/дни
-			IEnumerable<Lifelength> intervalsGroupAll =
+			var intervalsGroupAll =
 				tempIntervals.Where(i => i.Hours != null
 									  && i.Cycles != null
 									  && i.Days != null);
@@ -296,7 +240,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			_maintenanceDirectivesIntervals.AddRange(intervalsGroupCyclesDays);
 			_maintenanceDirectivesIntervals.AddRange(intervalsGroupAll);
 
-			foreach (Lifelength firstPerformance in _maintenanceDirectivesIntervals)
+			foreach (var firstPerformance in _maintenanceDirectivesIntervals)
 			{
 				Action<Lifelength> addLast = s => checkedListBoxItems.Items.Add(s, true);
 				if (InvokeRequired)
@@ -309,58 +253,12 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		}
 		#endregion
 
-		#region private void ViewJobCard(AttachedFile file)
-		private void ViewJobCard(MaintenanceDirective selectedMpd, AttachedFile attachedFile)
-		{
-			if (attachedFile == null)
-			{
-				MessageBox.Show("Not set Job Card File", (string)new GlobalTermsProvider()["SystemName"],
-					MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
-					MessageBoxDefaultButton.Button1);
-				return;
-			}
-				
-			try
-			{
-				string message;
-				GlobalObjects.CasEnvironment.OpenFile(attachedFile, out message);
-				if (message != "")
-				{
-					MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
-									MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
-									MessageBoxDefaultButton.Button1);
-				}
-			}
-			catch (Exception ex)
-			{
-				var errorDescriptionSctring = $"Error while Open Attached File for {selectedMpd}, id {selectedMpd.ItemId}. \nFileId {attachedFile.ItemId}";
-				Program.Provider.Logger.Log(errorDescriptionSctring, ex);
-			}
-		}
-		#endregion
-
-		#region private void AvButtonViewJobCardClick(object sender, EventArgs e)
-		private void AvButtonViewJobCardClick(object sender, EventArgs e)
-		{
-			if (listViewTasksForSelect.SelectedItems.OfType<MaintenanceDirective>().Count() != 0)
-			{
-				var mpd = listViewTasksForSelect.SelectedItems.OfType<MaintenanceDirective>().First();
-				ViewJobCard(mpd, mpd.TaskCardNumberFile);
-			}
-			else if (listViewBindedTasks.SelectedItems.OfType<MaintenanceDirective>().Count() != 0)
-			{
-				var mpd = listViewBindedTasks.SelectedItems.OfType<MaintenanceDirective>().First();
-				ViewJobCard(mpd, mpd.TaskCardNumberFile);
-			}
-		}
-		#endregion
-
 		#region private void CheckBoxSelectAllCheckedChanged(object sender, EventArgs e)
 		private void CheckBoxSelectAllCheckedChanged(object sender, EventArgs e)
 		{
 			checkedListBoxItems.SelectedIndexChanged -= CheckedListBoxItemsSelectedIndexChanged;
 
-			for (int i = 0; i < checkedListBoxItems.Items.Count; i++)
+			for (var i = 0; i < checkedListBoxItems.Items.Count; i++)
 			{
 				checkedListBoxItems.SetItemChecked(i, checkBoxSelectAll.Checked);
 			}
@@ -379,9 +277,9 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 				listViewTasksForSelect.ItemListView.Items.Clear();
 			}
 
-			IEnumerable<Lifelength> intervals =
+			var intervals =
 				checkedListBoxItems.CheckedItems.OfType<Lifelength>();
-			List<MaintenanceDirective> mpdWithInterval = new List<MaintenanceDirective>();
+			var mpdWithInterval = new List<MaintenanceDirective>();
 			mpdWithInterval
 				.AddRange(_mpdForSelect
 							  .Where(mpd => intervals.Any(interval => mpd.Threshold.FirstPerformanceSinceNew != null 
@@ -392,10 +290,84 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 
 		#endregion
 
+		#region private void buttonApply_Click(object sender, EventArgs e)
+
 		private void buttonApply_Click(object sender, EventArgs e)
 		{
 
+			if (comboBox1.SelectedItem == null)
+			{
+				MessageBox.Show(@"Please select check!",
+					(string) new GlobalTermsProvider()["SystemName"],
+					MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+			}
+			else
+			{
+				var check = comboBox1.SelectedItem as MaintenanceCheck;
+
+				foreach (var selectedItem in listViewBindedTasks.SelectedItems)
+				{
+					var dir = selectedItem as MaintenanceDirective;
+					dir.MaintenanceCheck = check;
+				}
+				GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(listViewBindedTasks.SelectedItems);
+
+				_animatedThreadWorker.RunWorkerAsync();
+			}
 		}
+
+		#endregion
+
+		#region private void ComboBox1_SelectedIndexChanged(object sender, System.EventArgs e)
+
+		private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			buttonApply.Enabled = 
+				deleteButton.Enabled = 
+					addButton.Enabled = 
+						editButton.Enabled = comboBox1.SelectedItem != null;
+		}
+
+		#endregion
+
+		#region private void EditButton_Click(object sender, System.EventArgs e)
+
+		private void EditButton_Click(object sender, EventArgs e)
+		{
+			var form = new MaintenanceCheckEditNew(comboBox1.SelectedItem as MaintenanceCheck);
+			if (form.DialogResult == DialogResult.OK)
+				_animatedThreadWorker.RunWorkerAsync();
+		}
+
+		#endregion
+
+		#region private void AddButton_Click(object sender, System.EventArgs e)
+
+		private void AddButton_Click(object sender, EventArgs e)
+		{
+			var form = new MaintenanceCheckEditNew(new MaintenanceCheck(){ParentAircraft = _currentAircraft, ParentAircraftId = _currentAircraft.ItemId});
+			if(form.DialogResult == DialogResult.OK)
+				_animatedThreadWorker.RunWorkerAsync();
+		}
+
+		#endregion
+
+		#region private void DeleteButton_Click(object sender, System.EventArgs e)
+
+		private void DeleteButton_Click(object sender, EventArgs e)
+		{
+			var res = MessageBox.Show($@"Do you really wand delete {(comboBox1.SelectedItem as MaintenanceCheck)} check?",
+				(string)new GlobalTermsProvider()["SystemName"],
+				MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+			if (res == DialogResult.OK)
+			{
+				GlobalObjects.CasEnvironment.NewKeeper.Delete(comboBox1.SelectedItem as MaintenanceCheck);
+				_animatedThreadWorker.RunWorkerAsync();
+			}
+		}
+
+		#endregion
 	}
 
 }

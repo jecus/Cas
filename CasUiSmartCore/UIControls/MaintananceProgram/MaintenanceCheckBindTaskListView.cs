@@ -106,6 +106,9 @@ namespace CAS.UI.UIControls.MaintananceProgram
             columnHeader = new ColumnHeader { Width = 80, Text = "Overdue/Remain" };
             ColumnHeaderList.Add(columnHeader);
 
+            columnHeader = new ColumnHeader { Width = 80, Text = "Check" };
+            ColumnHeaderList.Add(columnHeader);
+
             columnHeader = new ColumnHeader { Width = 80, Text = "Work Type" };
             ColumnHeaderList.Add(columnHeader);
 
@@ -641,6 +644,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 subItems.Add(subItem);
                 #endregion
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = md.Remains.ToString(), Tag = md.Remains });
+                subItems.Add(new ListViewItem.ListViewSubItem { Text = md.MaintenanceCheck?.ToString(), Tag = md.MaintenanceCheck });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = md.WorkType.ToString(), Tag = md.WorkType });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = md.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)md.NextPerformanceDate), Tag = md.NextPerformanceDate });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = md.ManHours.ToString(), Tag = md.ManHours });

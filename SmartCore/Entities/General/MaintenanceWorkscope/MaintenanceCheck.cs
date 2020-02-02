@@ -1097,7 +1097,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
         /// <returns></returns>
         public override string ToString()
         {
-            return Name;
+            return $"{Name} | {Interval?.ToRepeatIntervalsFormat()}";
         }
         #endregion
 

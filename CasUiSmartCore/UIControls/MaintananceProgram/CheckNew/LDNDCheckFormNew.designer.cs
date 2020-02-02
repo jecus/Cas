@@ -111,8 +111,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.listViewTasksForSelect.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.listViewTasksForSelect.ShowGroups = true;
 			this.listViewTasksForSelect.Size = new System.Drawing.Size(979, 344);
-			this.listViewTasksForSelect.TabIndex = 1;
-			this.listViewTasksForSelect.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.ListViewSelectedTasksSelectedItemsChanged);
+			this.listViewTasksForSelect.TabIndex = 1; 
 			// 
 			// listViewBindedTasks
 			// 
@@ -127,7 +126,6 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.listViewBindedTasks.ShowGroups = true;
 			this.listViewBindedTasks.Size = new System.Drawing.Size(979, 202);
 			this.listViewBindedTasks.TabIndex = 2;
-			this.listViewBindedTasks.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.ListViewBindedTasksSelectedItemsChanged);
 			// 
 			// buttonDelete
 			// 
@@ -204,6 +202,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.deleteButton.TextMain = "";
 			this.deleteButton.TextSecondary = "";
 			this.deleteButton.ToolTipText = "";
+			this.deleteButton.Click += DeleteButton_Click;
 			// 
 			// addButton
 			// 
@@ -231,6 +230,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.addButton.TextMain = "";
 			this.addButton.TextSecondary = "";
 			this.addButton.ToolTipText = "";
+			this.addButton.Click += AddButton_Click;
 			// 
 			// editButton
 			// 
@@ -259,6 +259,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.editButton.TextMain = "";
 			this.editButton.TextSecondary = "";
 			this.editButton.ToolTipText = "";
+			this.editButton.Click += EditButton_Click;
 			// 
 			// comboBox1
 			// 
@@ -267,11 +268,12 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.comboBox1.Name = "comboBox1";
 			this.comboBox1.Size = new System.Drawing.Size(164, 21);
 			this.comboBox1.TabIndex = 28;
+			this.comboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;
 			// 
 			// buttonApply
 			// 
 			this.buttonApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonApply.Enabled = false;
+			this.buttonApply.Enabled = true;
 			this.buttonApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonApply.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonApply.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
@@ -304,8 +306,6 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.Resizable = false;
 			this.ShowIcon = false;
 			this.Text = "Maintenance Check Bind Task Form";
-			this.Activated += new System.EventHandler(this.TemplateAircraftAddToDataBaseForm_Activated);
-			this.Deactivate += new System.EventHandler(this.TemplateAircraftAddToDataBaseForm_Deactivate);
 			this.Load += new System.EventHandler(this.LDNDCheckFormNewLoad);
 			this.splitContainerMain.Panel1.ResumeLayout(false);
 			this.splitContainerMain.Panel2.ResumeLayout(false);
@@ -315,6 +315,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.PerformLayout();
 
 		}
+
 		#endregion
 
 		private SplitContainer splitContainerMain;
