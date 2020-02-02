@@ -205,24 +205,28 @@ namespace CAS.UI.UIControls.LDND
 			var description = item.Description;
 			if (item.Parent is Directive directive)
 			{
-				if (directive.DirectiveType == DirectiveType.SB)
-				{
-					title = directive.ServiceBulletinNo;
-					if (directive.ServiceBulletinFile == null)
-						tcnColor = Color.MediumVioletRed;
-				}
-				else if (directive.DirectiveType == DirectiveType.EngineeringOrders)
-				{
-					title = directive.EngineeringOrders;
-					if (directive.EngineeringOrderFile == null)
-						tcnColor = Color.MediumVioletRed;
-				}
-				else
-				{
-					card = directive.Title;
-					if (directive.ADNoFile == null)
-						tcnColor = Color.MediumVioletRed;
-				}
+				//if (directive.DirectiveType == DirectiveType.SB)
+				//{
+				//	title = directive.ServiceBulletinNo;
+				//	if (directive.ServiceBulletinFile == null)
+				//		tcnColor = Color.MediumVioletRed;
+				//}
+				//else if (directive.DirectiveType == DirectiveType.EngineeringOrders)
+				//{
+				//	title = directive.EngineeringOrders;
+				//	if (directive.EngineeringOrderFile == null)
+				//		tcnColor = Color.MediumVioletRed;
+				//}
+				//else
+				//{
+				//	card = directive.Title;
+				//	if (directive.ADNoFile == null)
+				//		tcnColor = Color.MediumVioletRed;
+				//}
+
+				title = directive.EngineeringOrders;
+				if (directive.EngineeringOrderFile == null)
+					tcnColor = Color.MediumVioletRed;
 
 				access = directive.DirectiveAccess;
 				workArea = directive.Workarea;

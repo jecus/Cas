@@ -354,11 +354,11 @@ namespace CAS.UI.UIControls.LDND
 						var directive = (Directive)_directivesViewer.SelectedItems[0].Parent;
 
 						AttachedFile file;
-						if (directive.DirectiveType == DirectiveType.SB)
+						//if (directive.DirectiveType == DirectiveType.SB)
 							file = directive.ServiceBulletinFile;
-						else if (directive.DirectiveType == DirectiveType.EngineeringOrders)
-							file = directive.EngineeringOrderFile;
-						else file = directive.ADNoFile;
+						//else if (directive.DirectiveType == DirectiveType.EngineeringOrders)
+						//	file = directive.EngineeringOrderFile;
+						//else file = directive.ADNoFile;
 
 						_toolStripMenuItemShowTaskCard.Enabled = file!= null;
 					}
