@@ -31,9 +31,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.buttonAdd = new System.Windows.Forms.Button();
 			this.buttonClose = new System.Windows.Forms.Button();
-			this.buttonDelete = new System.Windows.Forms.Button();
 			this.labelInterval = new MetroFramework.Controls.MetroLabel();
 			this.checkBoxSelectAll = new MetroFramework.Controls.MetroCheckBox();
 			this.checkedListBoxItems = new System.Windows.Forms.CheckedListBox();
@@ -44,19 +42,6 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.buttonApply = new System.Windows.Forms.Button();
 			this.listViewTasksForSelect = new CAS.UI.UIControls.MaintananceProgram.MaintenanceDirectiveLightListView();
 			this.SuspendLayout();
-			// 
-			// buttonAdd
-			// 
-			this.buttonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonAdd.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.buttonAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonAdd.Location = new System.Drawing.Point(713, 557);
-			this.buttonAdd.Name = "buttonAdd";
-			this.buttonAdd.Size = new System.Drawing.Size(126, 33);
-			this.buttonAdd.TabIndex = 12;
-			this.buttonAdd.Text = "Add to Check";
-			this.buttonAdd.Click += new System.EventHandler(this.ButtonAddClick);
 			// 
 			// buttonClose
 			// 
@@ -71,19 +56,6 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.buttonClose.TabIndex = 13;
 			this.buttonClose.Text = "Close";
 			this.buttonClose.Click += new System.EventHandler(this.ButtonCloseClick);
-			// 
-			// buttonDelete
-			// 
-			this.buttonDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonDelete.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.buttonDelete.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonDelete.Location = new System.Drawing.Point(622, 557);
-			this.buttonDelete.Name = "buttonDelete";
-			this.buttonDelete.Size = new System.Drawing.Size(85, 33);
-			this.buttonDelete.TabIndex = 15;
-			this.buttonDelete.Text = "Delete";
-			this.buttonDelete.Click += new System.EventHandler(this.ButtonDeleteClick);
 			// 
 			// labelInterval
 			// 
@@ -214,6 +186,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			// buttonApply
 			// 
 			this.buttonApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonApply.DialogResult = DialogResult.None;
 			this.buttonApply.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonApply.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
 			this.buttonApply.Location = new System.Drawing.Point(515, 153);
@@ -255,8 +228,6 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.Controls.Add(this.checkBoxSelectAll);
 			this.Controls.Add(this.labelInterval);
 			this.Controls.Add(this.checkedListBoxItems);
-			this.Controls.Add(this.buttonDelete);
-			this.Controls.Add(this.buttonAdd);
 			this.Controls.Add(this.buttonClose);
 			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(600, 500);
@@ -271,9 +242,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		}
 
 		#endregion
-		private Button buttonAdd;
 		private Button buttonClose;
-		private Button buttonDelete;
 		private MetroLabel labelInterval;
 		private MetroCheckBox checkBoxSelectAll;
 		private CheckedListBox checkedListBoxItems;

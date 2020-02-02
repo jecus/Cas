@@ -22,7 +22,6 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 
 		#region Fields
 
-		private List<MaintenanceDirective> _bindedDirectives = new List<MaintenanceDirective>();
 		private List<MaintenanceDirective> _mpdForSelect;
 		private IEnumerable<MaintenanceDirective> _allDirectives;
 		private Aircraft _currentAircraft;
@@ -30,6 +29,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 
 		private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
 		private List<MaintenanceCheck> _checks;
+		private List<MaintenanceDirective> _mpdWithInterval;
 
 		#endregion
 
@@ -89,7 +89,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			checkedListBoxItems.SelectedIndexChanged += CheckedListBoxItemsSelectedIndexChanged;
 
 			listViewTasksForSelect.SetItemsArray(_mpdForSelect.ToArray());
-			listViewBindedTasks.SetItemsArray(_bindedDirectives.ToArray());
+			Focus();
 		}
 		#endregion
 
@@ -101,12 +101,6 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 				e.Cancel = true;
 				return;
 			}
-
-			if (_bindedDirectives == null)
-				_bindedDirectives = new List<MaintenanceDirective>();
-			_bindedDirectives.Clear();
-
-
 			_checks = new List<MaintenanceCheck>();
 			_checks.AddRange(GlobalObjects.MaintenanceCore.GetMaintenanceCheck(_currentAircraft));
 
@@ -133,50 +127,6 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			Close();
 		}
 
-		#endregion
-
-		#region private void ButtonAddClick(object sender, EventArgs e)
-
-		private void ButtonAddClick(object sender, EventArgs e)
-		{
-			if(listViewTasksForSelect.SelectedItems.Count == 0)
-				return;
-
-			foreach (var selectedItem in listViewTasksForSelect.SelectedItems)
-			{
-				if (!(selectedItem is MaintenanceDirective dir))
-					continue;
-
-				_mpdForSelect.Remove(dir);
-				_bindedDirectives.Add(dir);
-			}
-
-			listViewBindedTasks.SetItemsArray(_bindedDirectives.ToArray());
-			//listViewTasksForSelect.SetItemsArray(_mpdForSelect.ToArray());
-			Sort();
-		}
-		#endregion
-
-		#region private void ButtonDeleteClick(object sender, EventArgs e)
-
-		private void ButtonDeleteClick(object sender, EventArgs e)
-		{
-			if (listViewBindedTasks.SelectedItems.Count == 0)
-				return;
-
-			foreach (var selectedItem in listViewBindedTasks.SelectedItems)
-			{
-				if (!(selectedItem is MaintenanceDirective dir))
-					continue;
-
-				_mpdForSelect.Add(dir);
-				_bindedDirectives.Remove(dir);
-			}
-
-			listViewBindedTasks.SetItemsArray(_bindedDirectives.ToArray());
-			//listViewTasksForSelect.SetItemsArray(_mpdForSelect.ToArray());
-			Sort();
-		}
 		#endregion
 
 		#region private void LDNDCheckFormNewLoad(object sender, EventArgs e)
@@ -285,12 +235,12 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		{
 			var intervals =
 				checkedListBoxItems.CheckedItems.OfType<Lifelength>();
-			var mpdWithInterval = new List<MaintenanceDirective>();
-			mpdWithInterval
+			_mpdWithInterval = new List<MaintenanceDirective>();
+			_mpdWithInterval
 				.AddRange(_mpdForSelect
 					.Where(mpd => intervals.Any(interval => mpd.Threshold.FirstPerformanceSinceNew != null
 					                                        && mpd.Threshold.FirstPerformanceSinceNew.Equals(interval))));
-			listViewTasksForSelect.SetItemsArray(mpdWithInterval.ToArray());
+			listViewTasksForSelect.SetItemsArray(_mpdWithInterval.ToArray());
 		}
 		#endregion
 
@@ -300,12 +250,6 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 
 		private void buttonApply_Click(object sender, EventArgs e)
 		{
-			if (_bindedDirectives.Count == 0)
-			{
-				MessageBox.Show(@"Please select mpd!",
-					(string)new GlobalTermsProvider()["SystemName"],
-					MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-			}
 			if (comboBox1.SelectedItem == null)
 			{
 				MessageBox.Show(@"Please select check!",
@@ -316,20 +260,15 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			{
 				var check = comboBox1.SelectedItem as MaintenanceCheck;
 
-				foreach (var item in _bindedDirectives)
+				foreach (var item in _mpdWithInterval)
 				{
 					var dir = item;
 					dir.MaintenanceCheck = check;
 				}
-				GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(_bindedDirectives.Cast<BaseEntityObject>().ToList());
-
-				_mpdForSelect.AddRange(_bindedDirectives);
-				_bindedDirectives.Clear();
-				listViewBindedTasks.SetItemsArray(_bindedDirectives.ToArray());
-				//listViewTasksForSelect.SetItemsArray(_mpdForSelect.ToArray());
+				GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(_mpdWithInterval.Cast<BaseEntityObject>().ToList());
 				Sort();
 
-				_animatedThreadWorker.RunWorkerAsync();
+				//_animatedThreadWorker.RunWorkerAsync();
 			}
 		}
 
