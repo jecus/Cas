@@ -552,6 +552,28 @@ namespace SmartCore.WorkPackages
 
 		#endregion
 
+		public void GetWorkPackageItemsWithCalculateNew(WorkPackage workPackage)
+		{
+			loadWorkPackageItems(workPackage);
+
+			workPackage.MaxClosingDate = DateTime.Today;
+			workPackage.MinClosingDate = workPackage.Aircraft != null ? workPackage.Aircraft.ManufactureDate : DateTimeExtend.GetCASMinDateTime();
+
+			if (workPackage.Status == WorkPackageStatus.Opened)
+			{
+				var directives = new List<IMtopCalc>();
+				directives.AddRange(workPackage.AdStatus.ToList());
+				directives.AddRange(workPackage.SbStatus.ToList());
+				directives.AddRange(workPackage.EoStatus.ToList());
+				directives.AddRange(workPackage.Components.ToList());
+				directives.AddRange(workPackage.BaseComponents.ToList());
+				directives.AddRange(workPackage.ComponentDirectives.ToList());
+				directives.AddRange(workPackage.MaintenanceDirectives.ToList());
+
+				_mtopCalculator.CalculateDirectiveNew(directives);
+			}
+		}
+
 		#region public void GetWorkPackageItemsWithCalculate(WorkPackage workPackage)
 		/// <summary>
 		/// загружает элементы рабочего пакета, и производит их калькуляцмю.

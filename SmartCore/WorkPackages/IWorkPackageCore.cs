@@ -23,6 +23,7 @@ namespace SmartCore.WorkPackages
 
 		void LoadWorkPackageItems(WorkPackage workPackage);
 
+		void GetWorkPackageItemsWithCalculateNew(WorkPackage workPackage);
 		void GetWorkPackageItemsWithCalculate(WorkPackage workPackage);
 
 		void Publish(WorkPackage wp, DateTime date, string remarks);
