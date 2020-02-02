@@ -372,7 +372,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 				(string)new GlobalTermsProvider()["SystemName"],
 				MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-			if (res == DialogResult.OK)
+			if (res == DialogResult.Yes)
 			{
 				GlobalObjects.CasEnvironment.NewKeeper.Delete(comboBox1.SelectedItem as MaintenanceCheck);
 				_animatedThreadWorker.RunWorkerAsync();
