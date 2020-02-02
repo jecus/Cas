@@ -6,3 +6,5 @@ if not exists ( select  *
 	alter table dbo.PurchaseRequestsRecords
 	add TransferInformationJSON nvarchar(MAX)
 GO
+
+delete FROM dbo.Cas3MaintenanceCheck;

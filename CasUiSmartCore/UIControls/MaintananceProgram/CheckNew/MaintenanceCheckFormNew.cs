@@ -300,7 +300,12 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 
 		private void buttonApply_Click(object sender, EventArgs e)
 		{
-
+			if (_bindedDirectives.Count == 0)
+			{
+				MessageBox.Show(@"Please select mpd!",
+					(string)new GlobalTermsProvider()["SystemName"],
+					MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+			}
 			if (comboBox1.SelectedItem == null)
 			{
 				MessageBox.Show(@"Please select check!",
