@@ -66,14 +66,11 @@ namespace CAS.UI.UIControls.LDND
 			AddColumn("Last Data", (int)(radGridView1.Width * 0.2f));	
 			AddColumn("Kit", (int)(radGridView1.Width * 0.08f));
 			AddColumn("MH", (int)(radGridView1.Width * 0.08f));
-
 			AddColumn("Zone", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Work Area", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Access", (int)(radGridView1.Width * 0.16f));
-			
 			AddColumn("Type", (int)(radGridView1.Width * 0.07f));
 			AddColumn("ATA", (int)(radGridView1.Width * 0.10f));
-			AddColumn("Times", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Check", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
@@ -170,31 +167,9 @@ namespace CAS.UI.UIControls.LDND
 		{
 			var subItems = new List<CustomCell>();
 			var tcnColor = radGridView1.ForeColor;
-			int index;
 			var lastComplianceDate = DateTimeExtend.GetCASMinDateTime();
 			var lastComplianceLifeLength = Lifelength.Zero;
 			string lastPerformanceString, firstPerformanceString = "N/A";
-
-			if (item is MaintenanceNextPerformance)
-			{
-				MaintenanceCheck mc = item.Parent as MaintenanceCheck;
-				if (mc != null && mc.GetPergormanceGroupWhereCheckIsSenior().FirstOrDefault() != null)
-				{
-					index = mc.GetPergormanceGroupWhereCheckIsSenior().First() == item
-						? 0
-						: item.Parent.NextPerformances.IndexOf(item);
-				}
-				else
-				{
-					index = item.Parent.NextPerformances.IndexOf(item);
-				}
-			}
-			else
-			{
-				index = item.Parent.NextPerformances.IndexOf(item);
-			}
-			string timesString = index == 0 ? item.Parent.TimesToString : "#" + (index + 1);
-			int times = index == 0 ? item.Parent.Times : index + 1;
 			double manHours = item.Parent is IEngineeringDirective ? ((IEngineeringDirective)item.Parent).ManHours : 0;
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var title = item.Title;
@@ -310,14 +285,11 @@ namespace CAS.UI.UIControls.LDND
 			subItems.Add(CreateRow(lastPerformanceString, lastComplianceLifeLength));
 			subItems.Add(CreateRow(item.KitsToString, item.Kits?.Count));
 			subItems.Add(CreateRow(manHours.ToString(), manHours));
-
 			subItems.Add(CreateRow(zone, zone));
 			subItems.Add(CreateRow(workArea, workArea));
 			subItems.Add(CreateRow(access, access));
-			
 			subItems.Add(CreateRow(item.Parent.SmartCoreObjectType.ToString(), item.Parent.SmartCoreObjectType));
 			subItems.Add(CreateRow(item.ATAChapter?.ToString(), item.ATAChapter));
-			subItems.Add(CreateRow(timesString, times));
 			subItems.Add(CreateRow(item.MaintenanceCheck != null ? item.MaintenanceCheck.ToString() : "", item.MaintenanceCheck));
 			subItems.Add(CreateRow(author, author));
 
