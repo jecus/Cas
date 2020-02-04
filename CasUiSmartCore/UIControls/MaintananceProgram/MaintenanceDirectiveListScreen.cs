@@ -1432,7 +1432,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		private void buttonMaintCheck_Click(object sender, EventArgs e)
 		{
 			var form = new MaintenanceCheckFormNew(CurrentAircraft, _initialDirectiveArray);
-			if (form.ShowDialog() == DialogResult.OK)
+			form.ShowDialog();
 				AnimatedThreadWorker.RunWorkerAsync();
 		}
 	}
