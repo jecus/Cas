@@ -254,7 +254,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			AnimatedThreadWorker.ReportProgress(0, "load Work Package");
 			
 			//GlobalObjects.CasEnvironment.Loader.LoadWorkPackageItems(_currentWorkPackage);
-			GlobalObjects.WorkPackageCore.GetWorkPackageItemsWithCalculate(_currentWorkPackage);
+			GlobalObjects.WorkPackageCore.GetWorkPackageItemsWithCalculateNew(_currentWorkPackage);
 			if (_currentWorkPackage.MaxClosingDate < _currentWorkPackage.MinClosingDate)
 				_currentWorkPackage.CanClose = false;
 			var wpItems = new List<BaseEntityObject>();
