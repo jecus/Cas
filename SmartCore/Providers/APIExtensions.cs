@@ -11,8 +11,8 @@ namespace CAS.UI.Helpers
 	{
 		public static ApiResult<long> GetSequenceAsync(this HttpClient client, string requestUri)
 		{
-			var res = client.GetAsync(requestUri).Result;
-			var content = res.Content.ReadAsStringAsync().Result;
+			var res = client.GetAsync(requestUri).ConfigureAwait(false).GetAwaiter().GetResult();
+			var content = res.Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult();
 
 			return new ApiResult<long>
 			{
@@ -25,8 +25,8 @@ namespace CAS.UI.Helpers
 
 		public static ApiResult<TResult> GetJsonAsync<TResult>(this HttpClient client, string requestUri)
 		{
-			var res =  client.GetAsync(requestUri).Result;
-			var content = res.Content.ReadAsStringAsync().Result;
+			var res =  client.GetAsync(requestUri).ConfigureAwait(false).GetAwaiter().GetResult();
+			var content = res.Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult();
 
 			return new ApiResult<TResult>
 			{
@@ -46,8 +46,10 @@ namespace CAS.UI.Helpers
 			{
 				Content = new StringContent(json, Encoding.UTF8, "application/json")
 			};
-			var res = client.SendAsync(message).Result;
-			var content = res.Content.ReadAsStringAsync().Result;
+
+
+			var res = client.SendAsync(message, HttpCompletionOption.ResponseContentRead).ConfigureAwait(false).GetAwaiter().GetResult();
+			var content = res.Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult();
 
 			return new ApiResult<TResult>
 			{
@@ -69,8 +71,8 @@ namespace CAS.UI.Helpers
 			{
 				Content = new StringContent(json, Encoding.UTF8, "application/json")
 			};
-			var res = client.SendAsync(message).Result;
-			var content = res.Content.ReadAsStringAsync().Result;
+			var res = client.SendAsync(message).ConfigureAwait(false).GetAwaiter().GetResult();
+			var content = res.Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult();
 
 			return new ApiResult
 			{
@@ -87,8 +89,8 @@ namespace CAS.UI.Helpers
 			{
 				Content = new StringContent(json, Encoding.UTF8, "application/json")
 			};
-			var res = client.SendAsync(message).Result;
-			var content = res.Content.ReadAsStringAsync().Result;
+			var res = client.SendAsync(message).ConfigureAwait(false).GetAwaiter().GetResult();
+			var content = res.Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult();
 
 			return new ApiResult
 			{
@@ -101,8 +103,8 @@ namespace CAS.UI.Helpers
 
 		public static ApiResult<TResult> GetXMLAsync<TResult>(this HttpClient client, string requestUri)
 		{
-			var res = client.GetAsync(requestUri).Result;
-			var content = res.Content.ReadAsStringAsync().Result;
+			var res = client.GetAsync(requestUri).ConfigureAwait(false).GetAwaiter().GetResult();
+			var content = res.Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult();
 
 			object data = null;
 			if (!string.IsNullOrWhiteSpace(content))
@@ -129,8 +131,8 @@ namespace CAS.UI.Helpers
 			{
 				Content = new StringContent(json, Encoding.UTF8, "application/json")
 			};
-			var res = client.SendAsync(message).Result;
-			var content = res.Content.ReadAsStringAsync().Result;
+			var res = client.SendAsync(message).ConfigureAwait(false).GetAwaiter().GetResult();
+			var content = res.Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult();
 
 			object data = null;
 			if (!string.IsNullOrWhiteSpace(content))
