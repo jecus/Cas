@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management;
+using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using EntityCore.DTO.Dictionaries;
@@ -50,6 +51,9 @@ namespace CAS.UI.UIControls.WorkPakage
 		public WorkPackageView(WorkPackage currentWorkPackage) : this ()
 		{
 			_currentWorkPackage = currentWorkPackage;
+			EnableCustomSorting = true;
+			SortMultiplier = -1;
+			OldColumnIndex = 6;
 		}
 		#endregion
 
@@ -1114,6 +1118,25 @@ namespace CAS.UI.UIControls.WorkPakage
 			}
 		}
 		#endregion
+
+		protected override void CustomSort(int ColumnIndex)
+		{
+			if (OldColumnIndex != ColumnIndex)
+				SortMultiplier = -1;
+			if (SortMultiplier == 1)
+				SortMultiplier = -1;
+			else
+				SortMultiplier = 1;
+
+			OldColumnIndex = ColumnIndex;
+			var resultList = new List<NextPerformance>();
+			var list = radGridView1.Rows.Select(i => i).ToList();
+			list.Sort(new GridViewDataRowInfoComparer(ColumnIndex, SortMultiplier));
+
+			resultList.AddRange(list.Select(i => i.Tag as NextPerformance));
+
+			SetItemsArray(resultList.ToArray());
+		}
 
 		#endregion
 	}
