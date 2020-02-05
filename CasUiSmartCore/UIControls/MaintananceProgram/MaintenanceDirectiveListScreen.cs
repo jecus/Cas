@@ -1431,9 +1431,9 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
 		private void buttonMaintCheck_Click(object sender, EventArgs e)
 		{
-			var form = new MaintenanceCheckFormNew(CurrentAircraft, _initialDirectiveArray);
+			var form = new MaintenanceCheckFormNew(CurrentAircraft, _resultDirectiveArray);
 			form.ShowDialog();
-				AnimatedThreadWorker.RunWorkerAsync();
+			_directivesViewer.SetItemsArray(_resultDirectiveArray.ToArray());
 		}
 	}
 }
