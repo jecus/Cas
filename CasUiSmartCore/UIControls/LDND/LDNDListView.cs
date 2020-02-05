@@ -199,7 +199,8 @@ namespace CAS.UI.UIControls.LDND
 				//		tcnColor = Color.MediumVioletRed;
 				//}
 
-				title = directive.EngineeringOrders;
+				title = directive.Title;
+				card = directive.EngineeringOrders;
 				if (directive.EngineeringOrderFile == null)
 					tcnColor = Color.MediumVioletRed;
 

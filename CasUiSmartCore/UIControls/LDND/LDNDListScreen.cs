@@ -355,9 +355,9 @@ namespace CAS.UI.UIControls.LDND
 
 						AttachedFile file;
 						//if (directive.DirectiveType == DirectiveType.SB)
-							file = directive.ServiceBulletinFile;
+						//file = directive.ServiceBulletinFile;
 						//else if (directive.DirectiveType == DirectiveType.EngineeringOrders)
-						//	file = directive.EngineeringOrderFile;
+						file = directive.EngineeringOrderFile;
 						//else file = directive.ADNoFile;
 
 						_toolStripMenuItemShowTaskCard.Enabled = file!= null;
@@ -663,7 +663,38 @@ namespace CAS.UI.UIControls.LDND
 			if (_directivesViewer.SelectedItems == null ||
 			    _directivesViewer.SelectedItems.Count == 0) return;
 
-			if (_directivesViewer.SelectedItems[0].Parent is MaintenanceDirective)
+			if (_directivesViewer.SelectedItems[0].Parent is Directive)
+			{
+				var mpd = (Directive) _directivesViewer.SelectedItems[0].Parent;
+				
+				if (mpd == null)
+				{
+					MessageBox.Show("Not set Task Card File", (string)new GlobalTermsProvider()["SystemName"],
+						MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+						MessageBoxDefaultButton.Button1);
+					return;
+				}
+
+				try
+				{
+					string message;
+					GlobalObjects.CasEnvironment.OpenFile(mpd.EngineeringOrderFile, out message);
+					if (message != "")
+					{
+						MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
+							MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
+							MessageBoxDefaultButton.Button1);
+					}
+				}
+				catch (Exception ex)
+				{
+					string errorDescriptionSctring =
+						$"Error while Open Attached File for {mpd}, id {mpd.ItemId}. \nFileId {mpd.EngineeringOrderFile.ItemId}";
+					Program.Provider.Logger.Log(errorDescriptionSctring, ex);
+				}
+			}
+
+			else if (_directivesViewer.SelectedItems[0].Parent is MaintenanceDirective)
 			{
 				var mpd = _directivesViewer.SelectedItems[0].Parent as MaintenanceDirective;
 				if (mpd == null || mpd.TaskCardNumberFile == null)
