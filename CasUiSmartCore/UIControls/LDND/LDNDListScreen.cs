@@ -53,6 +53,7 @@ namespace CAS.UI.UIControls.LDND
 		private RadMenuItem _createWorkPakageToolStripMenuItem;
 		private RadMenuItem _toolStripMenuItemsWorkPackages;
 		private RadMenuItem _toolStripMenuItemShowTaskCard;
+		private RadMenuItem _toolStripMenuItemsWShowWP;
 		private AverageUtilization _averageUtilization;
 
 		#endregion
@@ -322,6 +323,7 @@ namespace CAS.UI.UIControls.LDND
 			_directivesViewer.SelectedItemsChanged += DirectivesViewerSelectedItemsChanged;
 
 			_directivesViewer.AddMenuItems(_toolStripMenuItemShowTaskCard,
+				_toolStripMenuItemsWShowWP,
 				new RadMenuSeparatorItem(),
 				_createWorkPakageToolStripMenuItem,
 				_toolStripMenuItemsWorkPackages);
@@ -329,12 +331,15 @@ namespace CAS.UI.UIControls.LDND
 			_directivesViewer.MenuOpeningAction = () =>
 			{
 				_toolStripMenuItemShowTaskCard.Enabled = false;
+				_toolStripMenuItemsWShowWP.Enabled = false;
 				if (_directivesViewer.SelectedItems[0].Parent is MaintenanceDirective)
 				{
 					if (_directivesViewer.SelectedItems.Count == 1)
 					{
 						var mpd = (MaintenanceDirective) _directivesViewer.SelectedItems[0].Parent;
 						_toolStripMenuItemShowTaskCard.Enabled = mpd?.TaskCardNumberFile != null;
+						if (mpd.NextPerformanceIsBlocked)
+							_toolStripMenuItemsWShowWP.Enabled = true;
 					}
 				}
 
@@ -344,6 +349,8 @@ namespace CAS.UI.UIControls.LDND
 					{
 						var mpd = (ComponentDirective) _directivesViewer.SelectedItems[0].Parent;
 						_toolStripMenuItemShowTaskCard.Enabled = mpd?.MaintenanceDirective?.TaskCardNumberFile != null;
+						if (mpd.NextPerformanceIsBlocked)
+							_toolStripMenuItemsWShowWP.Enabled = true;
 					}
 				}
 
@@ -352,7 +359,8 @@ namespace CAS.UI.UIControls.LDND
 					if (_directivesViewer.SelectedItems.Count == 1)
 					{
 						var directive = (Directive)_directivesViewer.SelectedItems[0].Parent;
-
+						if (directive.NextPerformanceIsBlocked)
+							_toolStripMenuItemsWShowWP.Enabled = true;
 						AttachedFile file;
 						//if (directive.DirectiveType == DirectiveType.SB)
 						//file = directive.ServiceBulletinFile;
@@ -377,6 +385,7 @@ namespace CAS.UI.UIControls.LDND
 		{
 			_createWorkPakageToolStripMenuItem = new RadMenuItem();
 			_toolStripMenuItemsWorkPackages = new RadMenuItem();
+			_toolStripMenuItemsWShowWP = new RadMenuItem();
 			_toolStripMenuItemShowTaskCard = new RadMenuItem();
 			_toolStripSeparator1 = new RadMenuSeparatorItem();
 			
@@ -386,6 +395,11 @@ namespace CAS.UI.UIControls.LDND
 			// _toolStripMenuItemsWorkPackages
 			//
 			_toolStripMenuItemsWorkPackages.Text = "Add to work package";
+			//
+			// _toolStripMenuItemsWShowWP
+			//
+			_toolStripMenuItemsWShowWP.Text = "Show a work package Title";
+			_toolStripMenuItemsWShowWP.Click += _toolStripMenuItemsWShowWP_Click;
 			// 
 			// _toolStripMenuItemShowTaskCard
 			// 
@@ -655,6 +669,15 @@ namespace CAS.UI.UIControls.LDND
 			}
 		}
 		#endregion
+
+		private void _toolStripMenuItemsWShowWP_Click(object sender, EventArgs e)
+		{
+			if (_directivesViewer.SelectedItems.Count <= 0) return;
+
+			var res = $"{_directivesViewer.SelectedItem.BlockedByPackage.Title} {_directivesViewer.SelectedItem.BlockedByPackage.Number}";
+			MessageBox.Show(res, "",
+				MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
 
 		#region private void ToolStripMenuItemShowTaskCardClick(object sender, EventArgs e)
 

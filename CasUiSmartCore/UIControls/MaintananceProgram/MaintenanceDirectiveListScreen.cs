@@ -464,7 +464,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			// _toolStripMenuItemsWShowWP
 			//
 			_toolStripMenuItemsWShowWP.Text = "Show a work package Title";
-			_toolStripMenuItemsWShowWP.Click += _toolStripMenuItemsWShowWP_Click; ;
+			_toolStripMenuItemsWShowWP.Click += _toolStripMenuItemsWShowWP_Click;
 			//
 			// _toolStripMenuItemsWorkPackages
 			//
