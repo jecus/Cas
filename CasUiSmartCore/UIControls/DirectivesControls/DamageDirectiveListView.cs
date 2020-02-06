@@ -201,11 +201,11 @@ namespace CAS.UI.UIControls.DirectivesControls
 		//protected override void SortItems(int columnIndex)
 		//{
 		//    if (OldColumnIndex != columnIndex)
-		//        SortMultiplier = -1;
-		//    if (SortMultiplier == 1)
-		//        SortMultiplier = -1;
+		//        SortDirection = -1;
+		//    if (SortDirection == 1)
+		//        SortDirection = -1;
 		//    else
-		//        SortMultiplier = 1;
+		//        SortDirection = 1;
 		//    itemsListView.Items.Clear();
 
 		//    List<ListViewItem> resultList = new List<ListViewItem>();
@@ -214,7 +214,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		//    {
 		//        SetGroupsToItems(columnIndex);
 
-		//        ListViewItemList.Sort(new CPCPDirectiveListViewComparer(columnIndex, SortMultiplier));
+		//        ListViewItemList.Sort(new CPCPDirectiveListViewComparer(columnIndex, SortDirection));
 		//        //добавление остальных подзадач
 		//        foreach (ListViewItem item in ListViewItemList)
 		//        {
@@ -228,7 +228,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		//            resultList.Add(item);
 		//        }
 
-		//        resultList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
+		//        resultList.Sort(new BaseListViewComparer(columnIndex, SortDirection));
 
 		//        itemsListView.Groups.Clear();
 		//        foreach (var item in resultList)
@@ -246,7 +246,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		//        {
 		//            resultList.Add(item);
 		//        }
-		//        resultList.Sort(new CPCPDirectiveListViewComparer(columnIndex, SortMultiplier));
+		//        resultList.Sort(new CPCPDirectiveListViewComparer(columnIndex, SortDirection));
 		//    }
 		//    itemsListView.Items.AddRange(resultList.ToArray());
 		//    OldColumnIndex = columnIndex;

@@ -225,14 +225,14 @@ namespace CAS.UI.UIControls.HangarControls
         //protected override void SortItems(int columnIndex)
         //{
         //    if (OldColumnIndex != columnIndex)
-        //        SortMultiplier = -1;
-        //    if (SortMultiplier == 1)
-        //        SortMultiplier = -1;
+        //        SortDirection = -1;
+        //    if (SortDirection == 1)
+        //        SortDirection = -1;
         //    else
-        //        SortMultiplier = 1;
+        //        SortDirection = 1;
         //    dataGridView.Rows.Clear();
         //    SetGroupsToItems();
-        //    PreResultRowList.Sort(new BaseDataGridViewRowComparer(columnIndex, SortMultiplier));
+        //    PreResultRowList.Sort(new BaseDataGridViewRowComparer(columnIndex, SortDirection));
 
         //    for (int i = 0; i < PreResultRowList.Count; i++)
         //    {

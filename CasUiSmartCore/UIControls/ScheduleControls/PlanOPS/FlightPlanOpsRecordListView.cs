@@ -388,11 +388,11 @@ namespace CAS.UI.UIControls.ScheduleControls.PlanOPS
 		//protected override void SortItems(int columnIndex)
 		//{
 		//	if (OldColumnIndex != columnIndex)
-		//		SortMultiplier = -1;
-		//	if (SortMultiplier == 1)
-		//		SortMultiplier = -1;
+		//		SortDirection = -1;
+		//	if (SortDirection == 1)
+		//		SortDirection = -1;
 		//	else
-		//		SortMultiplier = 1;
+		//		SortDirection = 1;
 		//	itemsListView.Items.Clear();
 
 		//	SetGroupsToItems(columnIndex);

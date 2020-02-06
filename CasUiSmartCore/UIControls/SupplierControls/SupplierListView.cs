@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 using CAS.UI.UIControls.NewGrid;
 using SmartCore.Purchase;
@@ -22,7 +23,7 @@ namespace CAS.UI.UIControls.SupplierControls
 		public SupplierListView()
 		{
 			InitializeComponent();
-			SortMultiplier = 1;
+			SortDirection = SortDirection.Desc;
 			OldColumnIndex = 0;
 			EnableCustomSorting = true;
 		}

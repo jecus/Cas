@@ -49,7 +49,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 		public MouthlyUtilizationListView(Aircraft parentAircraft, ICommonCollection<ATLB> atlbCollection)
 			: this()
 		{
-			SortMultiplier = 0;
+			SortDirection = SortDirection.Asc;
 			OldColumnIndex = 1;
 			_parentAircraft = parentAircraft;
 			_atbs = atlbCollection;

@@ -1,4 +1,5 @@
-﻿using CASTerms;
+﻿using CAS.UI.UIControls.NewGrid;
+using CASTerms;
 using EntityCore.DTO.General;
 
 namespace CAS.UI.UIControls.MTOP
@@ -142,7 +143,7 @@ namespace CAS.UI.UIControls.MTOP
 			this.mtopCheckListView1.PasteComplete = null;
 			this.mtopCheckListView1.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.mtopCheckListView1.Size = new System.Drawing.Size(1101, 303);
-			this.mtopCheckListView1.SortMultiplier = 0;
+			this.mtopCheckListView1.SortDirection = SortDirection.Asc;
 			this.mtopCheckListView1.TabIndex = 9;
 			this.mtopCheckListView1.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.mtopCheckListView1_SelectedItemsChanged_1);
 			// 

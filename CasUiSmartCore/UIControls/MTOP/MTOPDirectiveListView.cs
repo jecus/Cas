@@ -31,7 +31,7 @@ namespace CAS.UI.UIControls.MTOP
 			_groupLifelengths = groupLifelengths;
 			_maintenanceChecks = maintenanceChecks;
 			_isZeroPhase = maintenanceChecks.All(i => i.IsZeroPhase);
-			SortMultiplier = 0;
+			SortDirection = SortDirection.Asc;
 
 			foreach (var check in _maintenanceChecks)
 			{

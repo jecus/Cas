@@ -1,4 +1,5 @@
 using System.Windows.Forms;
+using CAS.UI.UIControls.NewGrid;
 using MetroFramework.Controls;
 
 namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
@@ -213,7 +214,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.listViewTasksForSelect.PasteComplete = null;
 			this.listViewTasksForSelect.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.listViewTasksForSelect.Size = new System.Drawing.Size(908, 344);
-			this.listViewTasksForSelect.SortMultiplier = 0;
+			this.listViewTasksForSelect.SortDirection = SortDirection.Asc;
 			this.listViewTasksForSelect.TabIndex = 1;
 			// 
 			// MaintenanceCheckFormNew

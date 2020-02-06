@@ -26,7 +26,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 		public PersonnelListView()
 		{
 			InitializeComponent();
-			SortMultiplier = 0;
+			SortDirection = SortDirection.Asc;
 			OldColumnIndex = 6;
 		}
 		#endregion

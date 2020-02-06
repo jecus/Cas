@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -17,6 +18,7 @@ using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
 using Telerik.WinControls.UI;
 using TempUIExtentions;
+using Convert = System.Convert;
 
 namespace CAS.UI.UIControls.Fleet
 {
@@ -311,15 +313,15 @@ namespace CAS.UI.UIControls.Fleet
 		protected override void CustomSort(int ColumnIndex)
 		{
 			if (OldColumnIndex != ColumnIndex)
-				SortMultiplier = -1;
-			if (SortMultiplier == 1)
-				SortMultiplier = -1;
+				SortDirection = SortDirection.Asc;
+			if (SortDirection == SortDirection.Desc)
+				SortDirection = SortDirection.Asc;
 			else
-				SortMultiplier = 1;
+				SortDirection = SortDirection.Desc;
 
 			var resultList = new List<Directive>();
 			var list = radGridView1.Rows.Select(i => i).ToList();
-			list.Sort(new DirectiveGridViewDataRowInfoComparer(ColumnIndex, SortMultiplier));
+			list.Sort(new DirectiveGridViewDataRowInfoComparer(ColumnIndex, Convert.ToInt32(SortDirection)));
 
 			foreach (var item in list)
 				resultList.Add(item.Tag as Directive);

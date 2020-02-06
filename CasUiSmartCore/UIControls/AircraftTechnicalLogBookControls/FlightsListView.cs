@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Auxiliary;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
@@ -41,7 +42,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			: this()
 		{
 			OldColumnIndex = 0;
-			SortMultiplier = 1;
+			SortDirection = SortDirection.Desc;
 			_parentAircraft = parentAircraft;
 			_allView = allView;
 		}

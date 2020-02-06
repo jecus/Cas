@@ -269,16 +269,16 @@ namespace CAS.UI.UIControls.ForecastControls
 		protected override void CustomSort(int ColumnIndex)
 		{
 			if (OldColumnIndex != ColumnIndex)
-				SortMultiplier = -1;
-			if (SortMultiplier == 1)
-				SortMultiplier = -1;
+				SortDirection = SortDirection.Asc;
+			if (SortDirection == SortDirection.Desc)
+				SortDirection = SortDirection.Asc;
 			else
-				SortMultiplier = 1;
+				SortDirection = SortDirection.Desc;
 
 			OldColumnIndex = ColumnIndex;
 			var resultList = new List<NextPerformance>();
 			var list = radGridView1.Rows.Select(i => i).ToList();
-			list.Sort(new GridViewDataRowInfoComparer(ColumnIndex, SortMultiplier));
+			list.Sort(new GridViewDataRowInfoComparer(ColumnIndex, Convert.ToInt32(SortDirection)));
 
 			resultList.AddRange(list.Select(i => i.Tag as NextPerformance));
 

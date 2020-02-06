@@ -2,6 +2,7 @@
 using CASTerms;
 using EntityCore.DTO.General;
 using CAS.UI.Helpers;
+using CAS.UI.UIControls.NewGrid;
 
 namespace CAS.UI.UIControls.PurchaseControls.Initial
 {
@@ -281,7 +282,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.listViewInitialItems.PasteComplete = null;
 			this.listViewInitialItems.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.listViewInitialItems.Size = new System.Drawing.Size(976, 588);
-			this.listViewInitialItems.SortMultiplier = 0;
+			this.listViewInitialItems.SortDirection = SortDirection.Asc;
 			this.listViewInitialItems.TabIndex = 294;
 			this.listViewInitialItems.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.listViewInitialItems_SelectedItemsChanged);
 			// 

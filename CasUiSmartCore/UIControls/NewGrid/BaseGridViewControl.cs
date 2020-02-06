@@ -26,6 +26,11 @@ using Component = SmartCore.Entities.General.Accessory.Component;
 
 namespace CAS.UI.UIControls.NewGrid
 {
+	public enum SortDirection
+	{
+		Asc = -1,
+		Desc = 1
+	}
 	public partial class BaseGridViewControl<T> : UserControl, IReference where T : class, IBaseCoreObject, IBaseEntityObject
 	{
 		#region Fields
@@ -160,7 +165,7 @@ namespace CAS.UI.UIControls.NewGrid
 
 		public bool IgnoreEnterPress { get; set; }
 
-		public int SortMultiplier { get; set; }
+		public SortDirection SortDirection { get; set; }
 
 		public int OldColumnIndex { get; set; }
 
@@ -711,8 +716,7 @@ namespace CAS.UI.UIControls.NewGrid
 
 		private void SortingItems(List<GridViewDataRowInfo> temp)
 		{
-			SortMultiplier = SortMultiplier == 0 ? -1 : SortMultiplier;
-			temp.Sort(new GridViewDataRowInfoComparer(OldColumnIndex, SortMultiplier));
+			temp.Sort(new GridViewDataRowInfoComparer(OldColumnIndex, Convert.ToInt32(SortDirection)));
 		}
 
 
@@ -724,7 +728,7 @@ namespace CAS.UI.UIControls.NewGrid
 
 		private void RadGridView1_CustomSorting(object sender, Telerik.WinControls.UI.GridViewCustomSortingEventArgs e)
 		{
-			e.SortResult = new GridViewDataRowInfoComparer(OldColumnIndex, SortMultiplier).Compare(e.Row1, e.Row2);
+			e.SortResult = new GridViewDataRowInfoComparer(OldColumnIndex, Convert.ToInt32(SortDirection)).Compare(e.Row1, e.Row2);
 		}
 
 		#endregion
@@ -745,7 +749,7 @@ namespace CAS.UI.UIControls.NewGrid
 			if (string.IsNullOrEmpty(colName))
 				return;
 
-			var radSortOrder = SortMultiplier == 0 ? ListSortDirection.Ascending : ListSortDirection.Descending;
+			var radSortOrder = SortDirection == 0 ? ListSortDirection.Ascending : ListSortDirection.Descending;
 
 			var descriptor = new GroupDescriptor();
 			descriptor.GroupNames.Add(colName, radSortOrder);
@@ -939,11 +943,11 @@ namespace CAS.UI.UIControls.NewGrid
 				else
 				{
 					if (OldColumnIndex != e.ColumnIndex)
-						SortMultiplier = -1;
-					if (SortMultiplier == 1)
-						SortMultiplier = -1;
+						SortDirection = SortDirection.Asc;
+					if (SortDirection == SortDirection.Desc)
+						SortDirection = SortDirection.Asc;
 					else
-						SortMultiplier = 1;
+						SortDirection = SortDirection.Desc;
 
 					OldColumnIndex = e.ColumnIndex;
 				}

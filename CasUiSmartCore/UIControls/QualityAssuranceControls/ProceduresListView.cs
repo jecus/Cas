@@ -189,11 +189,11 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 	 //   protected override void SortItems(int columnIndex)
 	 //   {
 	 //       if (OldColumnIndex != columnIndex)
-	 //           SortMultiplier = -1;
-	 //       if (SortMultiplier == 1)
-	 //           SortMultiplier = -1;
+	 //           SortDirection = -1;
+	 //       if (SortDirection == 1)
+	 //           SortDirection = -1;
 	 //       else
-	 //           SortMultiplier = 1;
+	 //           SortDirection = 1;
 	 //       itemsListView.Items.Clear();
 	 //       SetGroupsToItems(columnIndex);
 
@@ -203,7 +203,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 	 //       {
 	 //           resultList.AddRange(ListViewItemList.Where(item => item.Tag is Procedure));
 
-	 //           resultList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
+	 //           resultList.Sort(new BaseListViewComparer(columnIndex, SortDirection));
 
 	 //           itemsListView.Groups.Clear();
 	 //           foreach (var item in resultList)
@@ -219,7 +219,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 	 //           itemsListView.Groups.Clear();
 	 //           //добавление остальных подзадач
 	 //           resultList.AddRange(ListViewItemList.Where(item => item.Tag is Procedure));
-	 //           resultList.Sort(new DirectiveListViewComparer(columnIndex, SortMultiplier));
+	 //           resultList.Sort(new DirectiveListViewComparer(columnIndex, SortDirection));
 	 //       }
 	 //       itemsListView.Items.AddRange(resultList.ToArray());
 	 //       OldColumnIndex = columnIndex;

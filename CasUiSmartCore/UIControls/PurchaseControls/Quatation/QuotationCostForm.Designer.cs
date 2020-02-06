@@ -2,6 +2,7 @@
 using CASTerms;
 using EntityCore.DTO.General;
 using CAS.UI.Helpers;
+using CAS.UI.UIControls.NewGrid;
 
 namespace CAS.UI.UIControls.PurchaseControls.Quatation
 {
@@ -143,10 +144,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			// 
 			this.numericUpDownReadinessNew.Location = new System.Drawing.Point(390, 34);
 			this.numericUpDownReadinessNew.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownReadinessNew.Name = "numericUpDownReadinessNew";
 			this.numericUpDownReadinessNew.Size = new System.Drawing.Size(87, 20);
 			this.numericUpDownReadinessNew.TabIndex = 308;
@@ -156,10 +157,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.numericUpDownExNew.DecimalPlaces = 2;
 			this.numericUpDownExNew.Location = new System.Drawing.Point(239, 34);
 			this.numericUpDownExNew.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownExNew.Name = "numericUpDownExNew";
 			this.numericUpDownExNew.Size = new System.Drawing.Size(87, 20);
 			this.numericUpDownExNew.TabIndex = 304;
@@ -169,10 +170,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.numericUpDownCostNew.DecimalPlaces = 2;
 			this.numericUpDownCostNew.Location = new System.Drawing.Point(146, 34);
 			this.numericUpDownCostNew.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownCostNew.Name = "numericUpDownCostNew";
 			this.numericUpDownCostNew.Size = new System.Drawing.Size(87, 20);
 			this.numericUpDownCostNew.TabIndex = 250;
@@ -217,7 +218,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.supplierListView1.PasteComplete = null;
 			this.supplierListView1.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.supplierListView1.Size = new System.Drawing.Size(1012, 321);
-			this.supplierListView1.SortMultiplier = 0;
+			this.supplierListView1.SortDirection = SortDirection.Asc;
 			this.supplierListView1.TabIndex = 70;
 			this.supplierListView1.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.SupplierListView1_SelectedItemsChanged);
 			// 

@@ -1,7 +1,9 @@
-﻿using MetroFramework.Controls;
+﻿using System.ComponentModel;
+using MetroFramework.Controls;
 using CASTerms;
 using EntityCore.DTO.General;
 using CAS.UI.Helpers;
+using CAS.UI.UIControls.NewGrid;
 
 namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {
@@ -767,7 +769,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.quatationSupplierPriceListView1.PasteComplete = null;
 			this.quatationSupplierPriceListView1.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.quatationSupplierPriceListView1.Size = new System.Drawing.Size(865, 266);
-			this.quatationSupplierPriceListView1.SortMultiplier = 1;
+			this.quatationSupplierPriceListView1.SortDirection = SortDirection.Desc;
 			this.quatationSupplierPriceListView1.TabIndex = 295;
 			// 
 			this.comboBoxType.SelectedIndexChanged += new System.EventHandler(this.ComboBoxCondition_SelectedIndexChanged);

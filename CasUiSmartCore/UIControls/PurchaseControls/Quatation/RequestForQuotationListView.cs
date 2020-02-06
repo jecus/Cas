@@ -20,7 +20,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		public RequestForQuotationListView()
 		{
 			InitializeComponent();
-			SortMultiplier = 0;
+			SortDirection = SortDirection.Asc;
 		}
 		#endregion
 

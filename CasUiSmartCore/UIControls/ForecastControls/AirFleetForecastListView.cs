@@ -115,11 +115,11 @@
       //  protected override void SortItems(int columnIndex)
       //  {
       //      if (OldColumnIndex != columnIndex)
-      //          SortMultiplier = -1;
-      //      if (SortMultiplier == 1)
-      //          SortMultiplier = -1;
+      //          SortDirection = -1;
+      //      if (SortDirection == 1)
+      //          SortDirection = -1;
       //      else
-      //          SortMultiplier = 1;
+      //          SortDirection = 1;
       //      itemsListView.Items.Clear();
       //      OldColumnIndex = columnIndex;
 
@@ -129,7 +129,7 @@
       //      {
       //          SetGroupsToItems(columnIndex);
 
-      //          ListViewItemList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
+      //          ListViewItemList.Sort(new BaseListViewComparer(columnIndex, SortDirection));
       //          //добавление остальных подзадач
       //          foreach (ListViewItem item in ListViewItemList)
       //          {
@@ -202,7 +202,7 @@
       //              }
       //          }
 
-      //          resultList.Sort(new DirectiveListViewComparer(columnIndex, SortMultiplier));
+      //          resultList.Sort(new DirectiveListViewComparer(columnIndex, SortDirection));
       //          itemsListView.Groups.Clear();
 
       //          //Группировка элементов по датам выполнения

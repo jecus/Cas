@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -20,6 +21,8 @@ using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.WorkPackage;
 using Telerik.WinControls.UI;
+using Component = SmartCore.Entities.General.Accessory.Component;
+using Convert = System.Convert;
 
 namespace CAS.UI.UIControls.WorkPakage
 {
@@ -52,7 +55,7 @@ namespace CAS.UI.UIControls.WorkPakage
 		{
 			_currentWorkPackage = currentWorkPackage;
 			EnableCustomSorting = true;
-			SortMultiplier = -1;
+			SortDirection = SortDirection.Asc;
 			OldColumnIndex = 6;
 		}
 		#endregion
@@ -1122,16 +1125,16 @@ namespace CAS.UI.UIControls.WorkPakage
 		protected override void CustomSort(int ColumnIndex)
 		{
 			if (OldColumnIndex != ColumnIndex)
-				SortMultiplier = -1;
-			if (SortMultiplier == 1)
-				SortMultiplier = -1;
+				SortDirection = SortDirection.Asc;
+			if (SortDirection == SortDirection.Desc)
+				SortDirection = SortDirection.Asc;
 			else
-				SortMultiplier = 1;
+				SortDirection = SortDirection.Desc;
 
 			OldColumnIndex = ColumnIndex;
 			var resultList = new List<NextPerformance>();
 			var list = radGridView1.Rows.Select(i => i).ToList();
-			list.Sort(new GridViewDataRowInfoComparer(ColumnIndex, SortMultiplier));
+			list.Sort(new GridViewDataRowInfoComparer(ColumnIndex, Convert.ToInt32(SortDirection)));
 
 			resultList.AddRange(list.Select(i => i.Tag as NextPerformance));
 

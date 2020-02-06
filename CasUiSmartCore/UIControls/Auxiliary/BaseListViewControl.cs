@@ -329,7 +329,7 @@ namespace CAS.UI.UIControls.Auxiliary
             
             var listViewItems = itemsArray.Select(GetItem).ToList();
             
-            //SortItems(SortMultiplier, listViewItems);
+            //SortItems(SortDirection, listViewItems);
                 
             for (var i = listViewItems.Count - 1; i >= 0; i--)
             {

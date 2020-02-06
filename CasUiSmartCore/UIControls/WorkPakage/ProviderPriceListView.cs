@@ -1,42 +1,43 @@
 ﻿using System;
+using System.ComponentModel;
 using CAS.UI.UIControls.NewGrid;
 using SmartCore.Entities.General.WorkPackage;
 
 namespace CAS.UI.UIControls.WorkPakage
 {
-    ///<summary>
-    /// список для отображения ордеров запроса
-    ///</summary>
-    public partial class ProviderPriceListView : BaseGridViewControl<ProviderPrice>
-    {
-        #region Fields
+	///<summary>
+	/// список для отображения ордеров запроса
+	///</summary>
+	public partial class ProviderPriceListView : BaseGridViewControl<ProviderPrice>
+	{
+		#region Fields
 
-        #endregion
+		#endregion
 
-        #region Constructors
+		#region Constructors
 
-        #region public SupplierListViewNew()
-        ///<summary>
-        ///</summary>
-        public ProviderPriceListView()
-        {
-            InitializeComponent();
+		#region public SupplierListViewNew()
+		///<summary>
+		///</summary>
+		public ProviderPriceListView()
+		{
+			InitializeComponent();
 
-            SortMultiplier = 1;
-        }
+			SortDirection = SortDirection.Desc;
+		}
 		#endregion
 
 		#endregion
 
 		#region Methods
 
-        #region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
-        protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
+		#region protected override void ItemsListViewMouseDoubleClick(object sender, MouseEventArgs e)
+		protected override void RadGridView1_DoubleClick(object sender, EventArgs e)
 		{
-            
-        }
-        #endregion
+			
+		}
+		#endregion
 
-        #endregion
-    }
+		#endregion
+	}
 }

@@ -1,8 +1,10 @@
-﻿using System.Windows.Forms;
+﻿using System.ComponentModel;
+using System.Windows.Forms;
 using MetroFramework.Controls;
 using CASTerms;
 using EntityCore.DTO.General;
 using CAS.UI.Helpers;
+using CAS.UI.UIControls.NewGrid;
 
 namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {
@@ -83,7 +85,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.purchaseRecordListView1.PasteComplete = null;
 			this.purchaseRecordListView1.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.purchaseRecordListView1.Size = new System.Drawing.Size(984, 396);
-			this.purchaseRecordListView1.SortMultiplier = 1;
+			this.purchaseRecordListView1.SortDirection = SortDirection.Desc;
 			this.purchaseRecordListView1.TabIndex = 296;
 			this.purchaseRecordListView1.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.PurchaseRecordListView1_SelectedItemsChanged);
 			// 
@@ -184,10 +186,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.numericUpDownCost.Enabled = false;
 			this.numericUpDownCost.Location = new System.Drawing.Point(104, 131);
 			this.numericUpDownCost.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownCost.Name = "numericUpDownCost";
 			this.numericUpDownCost.Size = new System.Drawing.Size(165, 20);
 			this.numericUpDownCost.TabIndex = 250;
@@ -221,10 +223,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.numericUpDownQuantity.DecimalPlaces = 2;
 			this.numericUpDownQuantity.Location = new System.Drawing.Point(104, 105);
 			this.numericUpDownQuantity.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownQuantity.Name = "numericUpDownQuantity";
 			this.numericUpDownQuantity.Size = new System.Drawing.Size(165, 20);
 			this.numericUpDownQuantity.TabIndex = 142;

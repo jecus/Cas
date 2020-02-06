@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
 using SmartCore.Purchase;
@@ -15,7 +16,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			InitializeComponent();
 			DisableContectMenu();
 			OldColumnIndex = 2;
-			SortMultiplier = 1;
+			SortDirection = SortDirection.Desc;
 		}
 
 		#endregion

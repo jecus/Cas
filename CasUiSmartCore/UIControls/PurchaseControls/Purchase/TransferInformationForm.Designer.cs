@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using CAS.UI.UIControls.NewGrid;
 
 namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {
@@ -141,7 +142,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this._formListViewTransferInformation.PasteComplete = null;
 			this._formListViewTransferInformation.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this._formListViewTransferInformation.Size = new System.Drawing.Size(580, 280);
-			this._formListViewTransferInformation.SortMultiplier = 0;
+			this._formListViewTransferInformation.SortDirection = SortDirection.Asc;
 			this._formListViewTransferInformation.TabIndex = 299;
 			this._formListViewTransferInformation.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.listViewTransferInformation_SelectedItemsChanged);
 			// 
