@@ -123,11 +123,11 @@ namespace CAS.UI.UIControls.AircraftsControls
 			GlobalObjects.AircraftFlightsCore.LoadAircraftFlights(CurrentAircraft.ItemId);
 			GlobalObjects.CasEnvironment.Calculator.ResetMath(CurrentAircraft);
 
-			if (AnimatedThreadWorker.CancellationPending)
-			{
-				e.Cancel = true;
-				return;
-			}
+			//if (AnimatedThreadWorker.CancellationPending)
+			//{
+			//	e.Cancel = true;
+			//	return;
+			//}
 			//TODO:(Evgenii Babak) Переименовать Detail в Component
 			AnimatedThreadWorker.ReportProgress(6, "Check Base Details");
 			GetBaseComponents(AnimatedThreadWorker);

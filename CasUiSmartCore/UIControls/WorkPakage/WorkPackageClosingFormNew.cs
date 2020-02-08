@@ -512,17 +512,17 @@ namespace CAS.UI.UIControls.WorkPakage
                         }
                         //дату начала перемещения разрешено менять независимо от 
                         //подтверждений на стороне отправителя и получателя
-                        tr.StartTransferDate = performDate;
-                        tr.Remarks = "WorkPackage " + _workPackage.Title + " Transfer component";
-                        tr.DirectivePackageId = _workPackage.ItemId;
-                        try
-                        {
-                            GlobalObjects.PerformanceCore.RegisterPerformance(component, tr, _workPackage);
-                        }
-                        catch (Exception ex)
-                        {
-                            Program.Provider.Logger.Log("Error on save transfer record", ex);
-                        }
+                        //tr.StartTransferDate = performDate;
+                        //tr.Remarks = "WorkPackage " + _workPackage.Title + " Transfer component";
+                        //tr.DirectivePackageId = _workPackage.ItemId;
+                        //try
+                        //{
+                        //    GlobalObjects.PerformanceCore.RegisterPerformance(component, tr, _workPackage);
+                        //}
+                        //catch (Exception ex)
+                        //{
+                        //    Program.Provider.Logger.Log("Error on save transfer record", ex);
+                        //}
                     }
 
                 }
@@ -581,8 +581,12 @@ namespace CAS.UI.UIControls.WorkPakage
                 _workPackage.PublishingDate = _workPackage.OpeningDate;
             try
             {
-                GlobalObjects.CasEnvironment.NewKeeper.Save(_workPackage);
+                
                 SaveData();
+
+                if(dataGridViewItems.Rows.OfType<WorkPackageClosingDataGridViewRow>().All(i => (bool)i.Cells[ColumnClosed.Index].Value == false))
+	                GlobalObjects.CasEnvironment.NewKeeper.Save(_workPackage);
+
             }
             catch (Exception ex)
             {
