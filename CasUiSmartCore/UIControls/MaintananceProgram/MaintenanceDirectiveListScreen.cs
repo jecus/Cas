@@ -1367,7 +1367,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 					{
 						if (bindedItem is ComponentDirective)
 						{
-							GlobalObjects.PerformanceCalculator.GetNextPerformance(bindedItem);
+							GlobalObjects.MTOPCalculator.CalculateDirectiveNew(bindedItem as ComponentDirective);
 
 							var firstNextPerformance =
 								bindedItemsDict[mpd].SelectMany(t => t.NextPerformances).OrderBy(n => n.NextPerformanceDate).FirstOrDefault();

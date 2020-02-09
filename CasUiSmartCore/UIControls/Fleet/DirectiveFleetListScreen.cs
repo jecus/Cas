@@ -168,7 +168,7 @@ namespace CAS.UI.UIControls.Fleet
 
 					if (aircrraft != null)
 					{
-						GlobalObjects.PerformanceCalculator.GetNextPerformance(pd);
+						GlobalObjects.MTOPCalculator.CalculateDirectiveNew(pd);
 						_initialDirectiveArray.Add(pd);
 					}
 				}

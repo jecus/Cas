@@ -534,12 +534,7 @@ namespace CAS.UI.UIControls.Fleet
 		{
 			foreach (var mpd in maintenanceDirectives)
 			{
-				if (mpd.ItemId == 63278)
-					MessageBox.Show("qwe");
-
-
-				
-				GlobalObjects.PerformanceCalculator.GetNextPerformance(mpd);
+				GlobalObjects.MTOPCalculator.CalculateDirectiveNew(mpd);
 
 				if (bindedItemsDict.ContainsKey(mpd))
 				{
@@ -548,7 +543,7 @@ namespace CAS.UI.UIControls.Fleet
 					{
 						if (bindedItem is ComponentDirective)
 						{
-							GlobalObjects.PerformanceCalculator.GetNextPerformance(bindedItem);
+							GlobalObjects.MTOPCalculator.CalculateDirectiveNew(bindedItem as ComponentDirective);
 
 							var firstNextPerformance =
 								bindedItemsDict[mpd].SelectMany(t => t.NextPerformances).OrderBy(n => n.NextPerformanceDate).FirstOrDefault();

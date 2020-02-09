@@ -273,12 +273,12 @@ namespace CAS.UI.UIControls.Fleet
 					detail.ChangeLLPCategoryRecords.Clear();
 					detail.ChangeLLPCategoryRecords.AddRange(llpchangeRec.Where(i => i.ParentId == detail.ItemId));
 
-					GlobalObjects.PerformanceCalculator.GetNextPerformance(detail);
+					GlobalObjects.MTOPCalculator.CalculateDirectiveNew(detail);
 					_preResultDirectiveArray.Add(detail);
 
 					foreach (ComponentDirective detailDirective in detail.ComponentDirectives)
 					{
-						GlobalObjects.PerformanceCalculator.GetNextPerformance(detailDirective);
+						GlobalObjects.MTOPCalculator.CalculateDirectiveNew(detailDirective);
 						_preResultDirectiveArray.Add(detailDirective);
 					}
 				}
