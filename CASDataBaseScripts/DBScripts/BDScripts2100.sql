@@ -8,3 +8,11 @@ if not exists ( select  *
 GO
 
 delete FROM dbo.Cas3MaintenanceCheck;
+
+-------------------------------------------------------------------------------------
+
+delete  FROM dbo.WorkPackages where IsDeleted = 1;
+
+delete  FROM dbo.Aircrafts where IsDeleted = 1;
+
+delete  FROM dbo.WorkPackages where ParentId not in (SELECT ItemId FROM dbo.Aircrafts);
