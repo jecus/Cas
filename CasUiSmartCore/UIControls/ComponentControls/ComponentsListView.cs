@@ -288,9 +288,9 @@ namespace CAS.UI.UIControls.ComponentControls
 				if (dd.LastPerformance != null)
 				{
 					lastPerformanceString = SmartCore.Auxiliary.Convert.GetDateFormat(dd.LastPerformance.RecordDate);
-					lastPerformance = dd.LastPerformance.OnLifelength;
-					lastPerformanceC = dd.NextPerformance.LastDataC;
-					lastPerformanceDate = dd.LastPerformance.RecordDate;
+					lastPerformance = dd.LastPerformance?.OnLifelength;
+					lastPerformanceC = dd.NextPerformance?.LastDataC;
+					lastPerformanceDate = dd.LastPerformance?.RecordDate;
 				}
 				if (dd.Threshold.RepeatInterval != null && !dd.Threshold.RepeatInterval.IsNullOrZero())
 				{
