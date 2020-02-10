@@ -44,5 +44,8 @@ namespace EntityCore.DTO.General
 		
 		[Column("JobCardNumber"), MaxLength(256)]
 		public string JobCardNumber { get; set; }
+
+		[Column("IsClosed")]
+		public bool IsClosed { get; set; }
 	}
 }

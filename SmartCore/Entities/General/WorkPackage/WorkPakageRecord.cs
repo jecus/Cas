@@ -93,6 +93,9 @@ namespace SmartCore.Entities.General.WorkPackage
 		[TableColumnAttribute("ParentCheckId")]
 		public Int32 ParentCheckId { get; set; }
 
+		[TableColumn("IsClosed")]
+		public bool IsClosed { get; set; }
+
 		#region public string JobCardNumber { get; set; }
 		/// <summary>
 		/// Названия карты нарадя. (Применяется только для NonRoutineJob)

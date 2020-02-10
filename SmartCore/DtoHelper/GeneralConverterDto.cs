@@ -5342,7 +5342,8 @@ namespace SmartCore.DtoHelper
 				FromRecordId = workpackrec.FromRecordId,
 				Group = workpackrec.Group,
 				ParentCheckId = workpackrec.ParentCheckId,
-				JobCardNumber = workpackrec.JobCardNumber
+				JobCardNumber = workpackrec.JobCardNumber,
+				IsClosed = workpackrec.IsClosed
 			};
 		}
 
@@ -5362,7 +5363,8 @@ namespace SmartCore.DtoHelper
 				FromRecordId = workpackrecdto.FromRecordId ?? default(int),
 				ParentCheckId = workpackrecdto.ParentCheckId ?? default(int),
 				Group = workpackrecdto.Group ?? default(int),
-				JobCardNumber = workpackrecdto.JobCardNumber
+				JobCardNumber = workpackrecdto.JobCardNumber,
+				IsClosed = workpackrecdto.IsClosed
 			};
 		}
 

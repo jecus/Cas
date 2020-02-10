@@ -36,3 +36,12 @@ if not exists ( select  *
 	alter table dbo.MaintenanceDirectives
 	add Extension float not null default 0
 GO
+
+if not exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('dbo.Cas3WorkPakageRecord')
+					and c.name = 'IsClosed' ) 
+
+	alter table dbo.Cas3WorkPakageRecord
+	add IsClosed bit default 0
+GO
