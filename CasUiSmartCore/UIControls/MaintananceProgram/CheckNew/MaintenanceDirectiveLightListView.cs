@@ -53,6 +53,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			AddColumn("APU Hour", (int)(radGridView1.Width * 0.16f));
 			AddColumn("1st. Perf.", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Rpt. Intv.", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Extension", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
@@ -140,6 +141,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			subItems.Add(CreateRow(item.APUCalc ? "Yes" : "No", item.APUCalc));
 			subItems.Add(CreateRow($"{firstPerformanceString} {condition}", firstPerformanceString));
 			subItems.Add(CreateRow($"{repeat} {conditionRepeat}", item.Threshold.RepeatInterval));
+			subItems.Add(CreateRow(item.Extension.ToString("F"), item.Extension));
 			subItems.Add(CreateRow(author, author));
 
 			return subItems;

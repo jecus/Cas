@@ -580,6 +580,11 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 
 		#endregion
 
+		[TableColumn("IsExtension")]
+		public bool IsExtension { get; set; }
+		[TableColumn("Extension")]
+		public double Extension { get; set; }
+
 		#region public CommonCollection<ItemFileLink> Files { get; set; }
 
 		private CommonCollection<ItemFileLink> _files;

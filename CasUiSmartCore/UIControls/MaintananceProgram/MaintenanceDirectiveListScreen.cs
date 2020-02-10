@@ -1435,5 +1435,12 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			form.ShowDialog();
 			_directivesViewer.SetItemsArray(_resultDirectiveArray.ToArray());
 		}
+
+		private void buttonExtension_Click(object sender, EventArgs e)
+		{
+			var form = new MaintenanceCheckExtensionForm(CurrentAircraft, _resultDirectiveArray);
+			form.ShowDialog();
+			_directivesViewer.SetItemsArray(_resultDirectiveArray.ToArray());
+		}
 	}
 }

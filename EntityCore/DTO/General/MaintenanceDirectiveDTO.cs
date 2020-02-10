@@ -192,35 +192,33 @@ namespace EntityCore.DTO.General
 		[Column("APUCalc")]
 		public bool APUCalc { get; set; }
 
+		[Column("IsExtension")]
+		public bool IsExtension { get; set; }
+
+		[Column("Extension")]
+		public double Extension { get; set; }
+
 
 		[Include]
 		public ATAChapterDTO ATAChapter { get; set; }
 
-		
 		[Include]
 		public ComponentDTO BaseComponent { get; set; }
 
-
-		
 		[Child]
 		public MaintenanceCheckDTO MaintenanceCheck { get; set; }
 
-		
 		[Child]
 		public JobCardDTO JobCard { get; set; }
-
 		
 		[Child(FilterType.Equal, "ParentTypeId", 14)]
 		public ICollection<ItemFileLinkDTO> Files { get; set; }
-
 		
 		[Child(FilterType.Equal, "ParentTypeId", 14)]
 		public ICollection<DirectiveRecordDTO> PerformanceRecords { get; set; }
-
 		
 		[Child(FilterType.Equal, "ParentTypeId", 14)]
 		public ICollection<CategoryRecordDTO> CategoriesRecords { get; set; }
-
 		
 		[Child(FilterType.Equal, "ParentTypeId", 14)]
 		public ICollection<AccessoryRequiredDTO> Kits { get; set; }
