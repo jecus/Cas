@@ -29,6 +29,7 @@ using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;
+using SmartCore.Relation;
 using Telerik.WinControls.UI;
 using Component = SmartCore.Entities.General.Accessory.Component;
 
@@ -453,7 +454,43 @@ namespace CAS.UI.UIControls.WorkPakage
 			var discrepancy = GlobalObjects.CasEnvironment.NewLoader.GetObject<DiscrepancyDTO,Discrepancy>(new Filter("WorkPackageId", _currentWorkPackage.ItemId));
 			if (discrepancy != null)
 				_aircraftFlight = GlobalObjects.AircraftFlightsCore.GetAircraftFlightById(CurrentAircraft.ItemId, discrepancy.FlightId);
-			
+
+
+
+			var componentDirectives = _currentWorkPackage.WorkPakageRecords
+				.Where(i => i is ComponentDirective)
+				.Cast<ComponentDirective>().ToList();
+
+			var mpdsIds = new List<int>();
+
+			foreach (var componentDirective in componentDirectives)
+			{
+				foreach (var items in componentDirective.ItemRelations.Where(i =>
+					i.FirtsItemTypeId == SmartCoreType.MaintenanceDirective.ItemId ||
+					i.SecondItemTypeId == SmartCoreType.MaintenanceDirective.ItemId))
+				{
+					var id = componentDirective.IsFirst == true ? items.SecondItemId : items.FirstItemId;
+					mpdsIds.Add(id);
+				}
+			}
+
+			if (mpdsIds.Count > 0)
+			{
+				var mpds = GlobalObjects.CasEnvironment.NewLoader
+					.GetObjectList<MaintenanceDirectiveDTO, MaintenanceDirective>(new Filter("ItemId", mpdsIds));
+
+				foreach (var componentDirective in componentDirectives)
+				{
+					foreach (var items in componentDirective.ItemRelations.Where(i =>
+						i.FirtsItemTypeId == SmartCoreType.MaintenanceDirective.ItemId ||
+						i.SecondItemTypeId == SmartCoreType.MaintenanceDirective.ItemId))
+					{
+						var id = componentDirective.IsFirst == true ? items.SecondItemId : items.FirstItemId;
+						componentDirective.MaintenanceDirective = mpds.FirstOrDefault(i => i.ItemId == id);
+					}
+				}
+			}
+
 			#region Фильтрация директив
 
 			AnimatedThreadWorker.ReportProgress(95, "filter directives");

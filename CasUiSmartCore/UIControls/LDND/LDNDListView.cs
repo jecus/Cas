@@ -145,11 +145,11 @@ namespace CAS.UI.UIControls.LDND
 			}
 
 
-			Color itemBacBlackolor = listViewItem.Cells[0].Style.BackColor;
+			var itemBacBlackolor = listViewItem.Cells[0].Style.BackColor;
 			if (item.Parent is MaintenanceDirective)
 			{
 				var mpd = item.Parent as MaintenanceDirective;
-				if (mpd.RecalculateTenPercent)
+				if (mpd.IsExtension )
 				{
 					itemBacBlackolor = Color.DodgerBlue;
 					foreach (GridViewCellInfo cell in listViewItem.Cells)
@@ -269,7 +269,14 @@ namespace CAS.UI.UIControls.LDND
 			var conditionRepeat = !item.Parent.Threshold.RepeatInterval.IsNullOrZero() ? (item.Parent.Threshold.RepeatPerformanceConditionType == ThresholdConditionType.WhicheverFirst
 				? "/WF"
 				: "/WL") : "";
-			
+
+
+			var type = item.Parent.SmartCoreObjectType;
+			if (item.Parent is ComponentDirective cd)
+			{
+				if(cd.FromBaseComponent)
+					type = SmartCoreType.BaseComponent;
+			}
 
 			subItems.Add(CreateRow(title, title));
 			subItems.Add(CreateRow(card, card, tcnColor));
@@ -290,7 +297,7 @@ namespace CAS.UI.UIControls.LDND
 			subItems.Add(CreateRow(zone, zone));
 			subItems.Add(CreateRow(workArea, workArea));
 			subItems.Add(CreateRow(access, access));
-			subItems.Add(CreateRow(item.Parent.SmartCoreObjectType.ToString(), item.Parent.SmartCoreObjectType));
+			subItems.Add(CreateRow(type.ToString(), type.SmartCoreObjectType));
 			subItems.Add(CreateRow(item.ATAChapter?.ToString(), item.ATAChapter));
 			subItems.Add(CreateRow(item.MaintenanceCheck != null ? item.MaintenanceCheck.ToString() : "", item.MaintenanceCheck));
 			subItems.Add(CreateRow(author, author));
