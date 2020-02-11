@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
+using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using MetroFramework.Forms;
 using SmartCore.Calculations;
@@ -239,6 +240,14 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		}
 		#endregion
 
+		#region private void listViewTasksForSelect_SelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
+
+		private void listViewTasksForSelect_SelectedItemsChanged(object sender, SelectedItemsChangeEventArgs e)
+		{
+			if (listViewTasksForSelect.SelectedItem == null) return;
+			numericUpDownExtension.Value = (decimal)listViewTasksForSelect.SelectedItem.Extension;
+		}
+
 		#endregion
 
 		#region private void buttonApply_Click(object sender, EventArgs e)
@@ -256,7 +265,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 				foreach (var item in _mpdWithInterval)
 				{
 					var dir = item;
-					dir.Extension = (double) numericUpDownExtension.Value;
+					dir.Extension = (double)numericUpDownExtension.Value;
 					dir.IsExtension = true;
 				}
 				GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(_mpdWithInterval.Cast<BaseEntityObject>().ToList());
@@ -267,7 +276,18 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		}
 
 		#endregion
-		
+
+		#region private void buttonReset_Click(object sender, EventArgs e)
+
+		private void buttonReset_Click(object sender, EventArgs e)
+		{
+			numericUpDownExtension.Value = 0;
+		}
+
+		#endregion
+
+		#endregion
+
 	}
 
 }

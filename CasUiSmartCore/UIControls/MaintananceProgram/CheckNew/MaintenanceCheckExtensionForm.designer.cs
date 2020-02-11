@@ -39,6 +39,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.listViewTasksForSelect = new CAS.UI.UIControls.MaintananceProgram.MaintenanceDirectiveLightListView();
 			this.numericUpDownExtension = new System.Windows.Forms.NumericUpDown();
 			this.labelExtension = new MetroFramework.Controls.MetroLabel();
+			this.buttonReset = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownExtension)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -121,6 +122,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.listViewTasksForSelect.Size = new System.Drawing.Size(908, 344);
 			this.listViewTasksForSelect.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Asc;
 			this.listViewTasksForSelect.TabIndex = 1;
+			this.listViewTasksForSelect.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.listViewTasksForSelect_SelectedItemsChanged);
 			// 
 			// numericUpDownExtension
 			// 
@@ -146,10 +148,23 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.labelExtension.Text = "Extensions % :";
 			this.labelExtension.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// buttonReset
+			// 
+			this.buttonReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonReset.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonReset.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.buttonReset.Location = new System.Drawing.Point(511, 147);
+			this.buttonReset.Name = "buttonReset";
+			this.buttonReset.Size = new System.Drawing.Size(75, 33);
+			this.buttonReset.TabIndex = 253;
+			this.buttonReset.Text = "Reset";
+			this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
+			// 
 			// MaintenanceCheckExtensionForm
 			// 
 			this.CancelButton = this.buttonClose;
 			this.ClientSize = new System.Drawing.Size(932, 596);
+			this.Controls.Add(this.buttonReset);
 			this.Controls.Add(this.numericUpDownExtension);
 			this.Controls.Add(this.labelExtension);
 			this.Controls.Add(this.listViewTasksForSelect);
@@ -180,5 +195,6 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		private MaintenanceDirectiveLightListView listViewTasksForSelect;
 		private NumericUpDown numericUpDownExtension;
 		private MetroLabel labelExtension;
+		private Button buttonReset;
 	}
 }
