@@ -25,7 +25,7 @@ if not exists ( select  *
 					and c.name = 'IsExtension' ) 
 
 	alter table dbo.MaintenanceDirectives
-	add IsExtension bit default 0
+	add IsExtension bit not null default 0
 GO
 
 if not exists ( select  *
@@ -43,5 +43,5 @@ if not exists ( select  *
 					and c.name = 'IsClosed' ) 
 
 	alter table dbo.Cas3WorkPakageRecord
-	add IsClosed bit default 0
+	add IsClosed bit not null default 0
 GO
