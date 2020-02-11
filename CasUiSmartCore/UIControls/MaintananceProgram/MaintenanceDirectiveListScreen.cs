@@ -20,6 +20,7 @@ using CAS.UI.UIControls.PurchaseControls;
 using CAS.UI.UIControls.WorkPakage;
 using CASReports.Builders;
 using CASTerms;
+using CrystalDecisions.Windows.Forms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -1433,14 +1434,23 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		{
 			var form = new MaintenanceCheckFormNew(CurrentAircraft, _resultDirectiveArray);
 			form.ShowDialog();
-			_directivesViewer.SetItemsArray(_resultDirectiveArray.ToArray());
+
+			foreach (var row in _directivesViewer.radGridView1.Rows)
+			{
+				var mpd = row.Tag as MaintenanceDirective;
+				row.Cells["Check"].Value = _resultDirectiveArray.FirstOrDefault(i => i.ItemId == mpd?.ItemId)?.MaintenanceCheck?.Name ?? "N/A";
+			}
 		}
 
 		private void buttonExtension_Click(object sender, EventArgs e)
 		{
 			var form = new MaintenanceCheckExtensionForm(CurrentAircraft, _resultDirectiveArray);
 			form.ShowDialog();
-			_directivesViewer.SetItemsArray(_resultDirectiveArray.ToArray());
+			foreach (var row in _directivesViewer.radGridView1.Rows)
+			{
+				var mpd = row.Tag as MaintenanceDirective;
+				row.Cells["Extension"].Value = _resultDirectiveArray.FirstOrDefault(i => i.ItemId == mpd?.ItemId)?.Extension.ToString("F") ?? "0";
+			}
 		}
 	}
 }

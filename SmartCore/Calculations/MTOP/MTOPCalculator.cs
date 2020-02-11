@@ -136,6 +136,13 @@ namespace SmartCore.Calculations.MTOP
 					var sn = new Lifelength(threshold.FirstPerformanceSinceNew);
 
 					var sed = _calculator.GetFlightLifelengthOnStartOfDay(directive.LifeLengthParent, threshold.EffectiveDate);
+
+					if (directive.IsExtension)
+					{
+						sn.AddPersent(directive.Extension);
+						sed.AddPersent(directive.Extension);
+					}
+
 					//Ситуация когда нет наработки
 					if (sed.Hours == 0 && sed.Cycles == 0)
 					{
@@ -202,16 +209,22 @@ namespace SmartCore.Calculations.MTOP
 				{
 					if (isComponent)
 					{
+						np.NextLimitC = new Lifelength(threshold.FirstPerformanceSinceNew);
 						np.NextLimit = new Lifelength(threshold.FirstPerformanceSinceNew);
+						if (directive.IsExtension)
+						{
+							np.NextLimitC.AddPersent(directive.Extension);
+							np.NextLimit.AddPersent(directive.Extension);
+						}
+
 						np.NextLimit.Add(idd);
 						np.NextLimit.Substract(iddc);
-						
-
-						np.NextLimitC = new Lifelength(threshold.FirstPerformanceSinceNew);
 					}
 					else
 					{
 						np.NextLimit = new Lifelength(threshold.FirstPerformanceSinceNew);
+						if (directive.IsExtension)
+							np.NextLimit.AddPersent(directive.Extension);
 					}
 				}
 				else if (!threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
@@ -237,6 +250,8 @@ namespace SmartCore.Calculations.MTOP
 					sinceEffDate.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
 
 					np.NextLimit = new Lifelength(sinceEffDate);
+					if (directive.IsExtension)
+						np.NextLimit.AddPersent(directive.Extension);
 				}
 				else return;
 			}
