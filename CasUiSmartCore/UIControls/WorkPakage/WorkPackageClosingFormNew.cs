@@ -13,6 +13,7 @@ using EntityCore.Filter;
 using MetroFramework.Forms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
+using SmartCore.Calculations.MTOP;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
@@ -1152,8 +1153,10 @@ namespace CAS.UI.UIControls.WorkPakage
             row.MaxPerfSource = nextPerformance.NextPerformanceSource.IsNullOrZero()
                                     ? GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(row.ClosingItem.LifeLengthParent)
                                     : nextPerformance.NextPerformanceSource;
-            
-            row.Cells[ColumnClosed.Index].Value = (row.Tag as WorkPackageRecord).IsClosed;
+
+            var wpr = (row.Tag as WorkPackageRecord);
+            row.Cells[ColumnClosed.Index].Value = wpr.IsClosed;
+            row.Cells[ColumnClosed.Index].ReadOnly = wpr.IsClosed;
 
             if (nextPerformance.PerformanceDate != null)
                 row.Cells[ColumnDate.Index].Value = (DateTime)nextPerformance.PerformanceDate;
@@ -1196,6 +1199,7 @@ namespace CAS.UI.UIControls.WorkPakage
 
             if (row.ClosingItem == null || apr == null) return;
             row.Cells[ColumnClosed.Index].Value = true;
+            row.Cells[ColumnClosed.Index].ReadOnly = true;
             SetLabelsAndText(row);
 
             if (apr is DirectiveRecord || apr is MaintenanceCheckRecord)
