@@ -269,7 +269,8 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 					dir.Extension = (double)numericUpDownExtension.Value;
 					dir.IsExtension = true;
 				}
-				GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(_mpdWithInterval.Cast<BaseEntityObject>().ToList());
+				if(_mpdForSelect.Count > 0)
+					GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(_mpdWithInterval.Cast<BaseEntityObject>().ToList());
 				Sort();
 				numericUpDownExtension.Value = 0;
 				//_animatedThreadWorker.RunWorkerAsync();
@@ -283,13 +284,16 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		private void buttonReset_Click(object sender, EventArgs e)
 		{
 			numericUpDownExtension.Value = 0;
-			foreach (var item in _mpdWithInterval)
+			var list = new List<MaintenanceDirective>();
+			foreach (var item in _mpdWithInterval.Where(i => i.Extension > 0))
 			{
 				var dir = item;
 				dir.Extension = (double)numericUpDownExtension.Value;
 				dir.IsExtension = false;
+				list.Add(item);
 			}
-			GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(_mpdWithInterval.Cast<BaseEntityObject>().ToList());
+			if(list.Count > 0)
+				GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(list.Cast<BaseEntityObject>().ToList());
 			Sort();
 		}
 

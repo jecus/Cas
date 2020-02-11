@@ -266,7 +266,9 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 					var dir = item;
 					dir.MaintenanceCheck = check;
 				}
-				GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(_mpdWithInterval.Cast<BaseEntityObject>().ToList());
+
+				if(_mpdForSelect.Count > 0)
+					GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(_mpdWithInterval.Cast<BaseEntityObject>().ToList());
 				Sort();
 
 				//_animatedThreadWorker.RunWorkerAsync();
