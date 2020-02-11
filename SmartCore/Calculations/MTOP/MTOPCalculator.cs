@@ -274,16 +274,32 @@ namespace SmartCore.Calculations.MTOP
 					np.NextLimit = new Lifelength(np.LastDataC);
 
 					if (!threshold.RepeatInterval.IsNullOrZero())
-						np.NextLimitC.Add(threshold.RepeatInterval);
+					{
+						if (directive.IsExtension)
+						{
+							var repeat = new Lifelength(threshold.RepeatInterval);
+							repeat.AddPersent(directive.Extension);
+							np.NextLimitC.Add(repeat);
+						}
+						else np.NextLimitC.Add(threshold.RepeatInterval);
+					}
 					else return;
 				}
 				else
 				{
 					np.NextLimit = new Lifelength(directive.LastPerformance.OnLifelength);
 				}
-				
+
 				if (!threshold.RepeatInterval.IsNullOrZero())
-					np.NextLimit.Add(threshold.RepeatInterval);
+				{
+					if (directive.IsExtension)
+					{
+						var repeat = new Lifelength(threshold.RepeatInterval);
+						repeat.AddPersent(directive.Extension);
+						np.NextLimit.Add(repeat);
+					}
+					else np.NextLimit.Add(threshold.RepeatInterval);
+				}
 				else return;
 			}
 
