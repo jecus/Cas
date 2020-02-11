@@ -149,7 +149,7 @@ namespace CAS.UI.UIControls.LDND
 			if (item.Parent is MaintenanceDirective)
 			{
 				var mpd = item.Parent as MaintenanceDirective;
-				if (mpd.IsExtension )
+				if (mpd.IsExtension)
 				{
 					itemBacBlackolor = Color.DodgerBlue;
 					foreach (GridViewCellInfo cell in listViewItem.Cells)

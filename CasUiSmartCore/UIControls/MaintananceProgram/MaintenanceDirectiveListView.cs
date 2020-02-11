@@ -102,7 +102,10 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			{
 				cell.Style.DrawFill = true;
 				cell.Style.CustomizeFill = true;
-				cell.Style.BackColor = UsefulMethods.GetColor(item);
+
+				if(item.IsExtension)
+					cell.Style.BackColor = Color.DodgerBlue;
+				else cell.Style.BackColor = UsefulMethods.GetColor(item);
 
 				var listViewForeColor = cell.Style.ForeColor;
 
