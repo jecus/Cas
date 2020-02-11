@@ -29,7 +29,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 
 		private AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
 		private List<MaintenanceCheck> _checks;
-		private List<MaintenanceDirective> _mpdWithInterval;
+		private List<MaintenanceDirective> _mpdWithInterval = new List<MaintenanceDirective>();
 
 		#endregion
 
@@ -89,6 +89,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			checkedListBoxItems.SelectedIndexChanged += CheckedListBoxItemsSelectedIndexChanged;
 
 			listViewTasksForSelect.SetItemsArray(_mpdForSelect.ToArray());
+			_mpdWithInterval.AddRange(_mpdForSelect);
 			Focus();
 		}
 		#endregion
