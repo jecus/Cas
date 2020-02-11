@@ -270,7 +270,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 				}
 				GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(_mpdWithInterval.Cast<BaseEntityObject>().ToList());
 				Sort();
-
+				numericUpDownExtension.Value = 0;
 				//_animatedThreadWorker.RunWorkerAsync();
 			}
 		}
