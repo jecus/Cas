@@ -1444,7 +1444,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
 		private void buttonExtension_Click(object sender, EventArgs e)
 		{
-			var form = new MaintenanceCheckExtensionForm(CurrentAircraft, _resultDirectiveArray);
+			var form = new MaintenanceCheckExtensionForm(CurrentAircraft, _resultDirectiveArray.Where(i => i.Status == DirectiveStatus.Open));
 			form.ShowDialog();
 			foreach (var row in _directivesViewer.radGridView1.Rows)
 			{
