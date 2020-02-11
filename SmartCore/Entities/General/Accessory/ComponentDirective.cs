@@ -1192,10 +1192,16 @@ namespace SmartCore.Entities.General.Accessory
 		public bool RecalculateTenPercent { get; set; }
 		public bool APUCalc { get; set; }
 
+		public bool IsExtension { get; set; }
+		public double Extension { get; set; }
+
 		public int ParentAircraftId => ParentComponent?.ParentAircraftId ?? (ParentBaseComponent?.ParentAircraftId ?? -1);
 		public List<NextPerformance> MtopNextPerformances { get; set; }
 
+
 		#endregion
+
+		public bool FromBaseComponent { get; set; }
 	}
 
 }

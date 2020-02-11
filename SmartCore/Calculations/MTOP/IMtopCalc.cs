@@ -15,6 +15,11 @@ namespace SmartCore.Calculations.MTOP
 		bool APUCalc { get; set; } //MPD-Only
 		int ParentAircraftId { get; }
 
+		//Для пересчета
+		bool IsExtension { get; set; } 
+		double Extension { get; set; }
+
+
 		List<NextPerformance> MtopNextPerformances { get; set; }
 	}
 }

@@ -1071,6 +1071,9 @@ namespace SmartCore.Entities.General.Directives
 		public List<NextPerformance> MtopNextPerformances { get; set; }
 		public string EOFileName { get; set; }
 
+		public bool IsExtension { get; set; }
+		public double Extension { get; set; }
+
 		#endregion
 
 		#region public new Directive GetCopyUnsaved()

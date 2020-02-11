@@ -362,7 +362,14 @@ namespace SmartCore.Calculations
 
         #endregion
 
-		public MTOPCheck ParentCheck { get; set; }
+        public void  AddPersent(double b)
+        {
+	        if (TotalMinutes != null) TotalMinutes += Convert.ToInt32(Convert.ToInt32(TotalMinutes) * (b/100));
+	        if (Cycles != null) Cycles += Convert.ToInt32(Convert.ToInt32(Cycles) * (b / 100));
+	        if (CalendarValue != null) CalendarValue += Convert.ToInt32(Convert.ToInt32(CalendarValue) * (b / 100));
+        }
+
+        public MTOPCheck ParentCheck { get; set; }
 
         /*
          * Арифметика 

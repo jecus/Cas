@@ -996,6 +996,9 @@ namespace SmartCore.Entities.General.Accessory
 		public bool RecalculateTenPercent { get; set; }
 		public bool APUCalc { get; set; }
 
+		public bool IsExtension { get; set; }
+		public double Extension { get; set; }
+
 		#endregion
 
 		/*
