@@ -282,6 +282,14 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		private void buttonReset_Click(object sender, EventArgs e)
 		{
 			numericUpDownExtension.Value = 0;
+			foreach (var item in _mpdWithInterval)
+			{
+				var dir = item;
+				dir.Extension = (double)numericUpDownExtension.Value;
+				dir.IsExtension = false;
+			}
+			GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(_mpdWithInterval.Cast<BaseEntityObject>().ToList());
+			Sort();
 		}
 
 		#endregion
