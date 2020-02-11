@@ -137,6 +137,8 @@ namespace CAS.UI.UIControls.WorkPakage
 
                         WorkPackageClosingDataGridViewRow r = (WorkPackageClosingDataGridViewRow)
                             dataGridViewItems.Rows[dataGridViewItems.Rows.Add(new WorkPackageClosingDataGridViewRow())];
+                        r.Tag = item;
+
                         if (item.Task is MaintenanceCheck && 
                             item.Task.NextPerformances.OfType<MaintenanceNextPerformance>().Any())
                         {
@@ -166,6 +168,7 @@ namespace CAS.UI.UIControls.WorkPakage
                         WorkPackageClosingDataGridViewRow r = (WorkPackageClosingDataGridViewRow)
                             dataGridViewItems.Rows[dataGridViewItems.Rows.Add(new WorkPackageClosingDataGridViewRow())];
 
+                        r.Tag = item;
                         Component component = (Component)item.Task;
                         if (component.NextPerformances.Count > 0)
                         {
@@ -328,7 +331,8 @@ namespace CAS.UI.UIControls.WorkPakage
         {
             foreach (WorkPackageClosingDataGridViewRow row in dataGridViewItems.Rows.OfType<WorkPackageClosingDataGridViewRow>())
             {
-                if ((bool)row.Cells[ColumnClosed.Index].Value == false)
+	            var wpr = row.Tag as WorkPackageRecord;
+                if ((bool)row.Cells[ColumnClosed.Index].Value == false || wpr.IsClosed)
                     continue;
                 try
                 {
@@ -524,6 +528,10 @@ namespace CAS.UI.UIControls.WorkPakage
                         //    Program.Provider.Logger.Log("Error on save transfer record", ex);
                         //}
                     }
+
+
+                    wpr.IsClosed = true;
+                    GlobalObjects.CasEnvironment.NewKeeper.Save(wpr);
 
                 }
                 catch (Exception ex)
@@ -1145,14 +1153,8 @@ namespace CAS.UI.UIControls.WorkPakage
                                     ? GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(row.ClosingItem.LifeLengthParent)
                                     : nextPerformance.NextPerformanceSource;
             
-            row.Cells[ColumnClosed.Index].Value = true;
-            //if(!(row.ClosingItem is Detail))
-            //{
-            //    Lifelength performanceSource = nextPerformance.PerformanceSource;
-            //    row.Cells[ColumnHours.Index].Value = performanceSource.Hours != null ? performanceSource.Hours.ToString() : "n/a";
-            //    row.Cells[ColumnCycles.Index].Value = performanceSource.Cycles != null ? performanceSource.Cycles.ToString() : "n/a";
-            //    row.Cells[ColumnDays.Index].Value = performanceSource.Days != null ? performanceSource.Days.ToString() : "n/a";    
-            //}
+            row.Cells[ColumnClosed.Index].Value = (row.Tag as WorkPackageRecord).IsClosed;
+
             if (nextPerformance.PerformanceDate != null)
                 row.Cells[ColumnDate.Index].Value = (DateTime)nextPerformance.PerformanceDate;
 			else row.Cells[ColumnDate.Index].Value = DateTime.Now;
@@ -1283,7 +1285,9 @@ namespace CAS.UI.UIControls.WorkPakage
                 row.ClosingItem = workPackageRecord.Task;
             }
 
-            row.Cells[ColumnClosed.Index].Value = true;
+            var wpr = (row.Tag as WorkPackageRecord);
+            row.Cells[ColumnClosed.Index].Value = wpr.IsClosed;
+            row.Cells[ColumnClosed.Index].ReadOnly = wpr.IsClosed;
 
             GetRecordInstance(row, wp, workPackageRecord:workPackageRecord);
             SetLabelsAndText(row);
