@@ -83,6 +83,7 @@ namespace SmartCore.Entities.Dictionaries
 
 	    public static Highlight DarkGreen = new Highlight(8, "DarkGreen", "DarkGreen", System.Drawing.Color.MediumSeaGreen.ToArgb(), -16777216);
 	    public static Highlight Orange = new Highlight(9, "Orange", "Orange", System.Drawing.Color.Orange.ToArgb(), -16777216);
+	    public static Highlight LightBlue = new Highlight(10, "LightBlue", "LightBlue", System.Drawing.Color.DodgerBlue.ToArgb(), -16777216);
 
 
 		/*

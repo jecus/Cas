@@ -133,18 +133,7 @@ namespace CAS.UI.UIControls.LDND
 				}
 			}
 
-			if (item.BlockedByPackage != null)
-			{
-				foreach (GridViewCellInfo cell in listViewItem.Cells)
-				{
-					cell.Style.CustomizeFill = true;
-					cell.Style.BackColor = Color.FromArgb(Highlight.Grey.Color);
-					if (cell.Style.ForeColor != Color.MediumVioletRed)
-						cell.Style.ForeColor = itemForeColor;
-				}
-			}
-
-
+			
 			var itemBacBlackolor = listViewItem.Cells[0].Style.BackColor;
 			if (item.Parent is MaintenanceDirective)
 			{
@@ -157,6 +146,17 @@ namespace CAS.UI.UIControls.LDND
 						cell.Style.CustomizeFill = true;
 						cell.Style.BackColor = itemBacBlackolor;
 					}
+				}
+			}
+
+			if (item.BlockedByPackage != null)
+			{
+				foreach (GridViewCellInfo cell in listViewItem.Cells)
+				{
+					cell.Style.CustomizeFill = true;
+					cell.Style.BackColor = Color.FromArgb(Highlight.Grey.Color);
+					if (cell.Style.ForeColor != Color.MediumVioletRed)
+						cell.Style.ForeColor = itemForeColor;
 				}
 			}
 		}

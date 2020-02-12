@@ -102,16 +102,12 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			{
 				cell.Style.DrawFill = true;
 				cell.Style.CustomizeFill = true;
-
-
 				var listViewForeColor = cell.Style.ForeColor;
 
 				if (listViewForeColor != Color.MediumVioletRed)
-					cell.Style.ForeColor = itemForeColor;
-
-				if (item.IsExtension)
-					cell.Style.BackColor = Color.DodgerBlue;
-				else cell.Style.BackColor = itemBackColor;
+					cell.Style.ForeColor = itemForeColor; 
+				
+				cell.Style.BackColor = itemBackColor;
 			}
 		}
 
