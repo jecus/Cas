@@ -375,7 +375,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.buttonMaintCheck.TextAlignSecondary = System.Drawing.ContentAlignment.MiddleLeft;
 			this.buttonMaintCheck.TextMain = "";
 			this.buttonMaintCheck.TextSecondary = "";
-			this.buttonMaintCheck.ToolTipText = "Maintenance Check";
+			this.buttonMaintCheck.ToolTipText = "Check Name";
 			this.buttonMaintCheck.Click += new System.EventHandler(this.buttonMaintCheck_Click);
 			// 
 			// buttonExtension
@@ -404,7 +404,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.buttonExtension.TextAlignSecondary = System.Drawing.ContentAlignment.MiddleLeft;
 			this.buttonExtension.TextMain = "";
 			this.buttonExtension.TextSecondary = "";
-			this.buttonExtension.ToolTipText = "Maintenance Check";
+			this.buttonExtension.ToolTipText = "Extension";
 			this.buttonExtension.Click += new System.EventHandler(this.buttonExtension_Click);
 			//
 			// labelDateAsOf

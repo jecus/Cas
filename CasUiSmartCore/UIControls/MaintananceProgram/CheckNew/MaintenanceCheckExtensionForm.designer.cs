@@ -126,7 +126,6 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			// 
 			// numericUpDownExtension
 			// 
-			this.numericUpDownExtension.DecimalPlaces = 2;
 			this.numericUpDownExtension.Location = new System.Drawing.Point(511, 82);
 			this.numericUpDownExtension.Maximum = new decimal(new int[] {
             1000000,
@@ -143,9 +142,9 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.labelExtension.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.labelExtension.Location = new System.Drawing.Point(415, 82);
 			this.labelExtension.Name = "labelExtension";
-			this.labelExtension.Size = new System.Drawing.Size(90, 19);
+			this.labelExtension.Size = new System.Drawing.Size(85, 19);
 			this.labelExtension.TabIndex = 252;
-			this.labelExtension.Text = "Extensions % :";
+			this.labelExtension.Text = "Extension % :";
 			this.labelExtension.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// buttonReset

@@ -45,6 +45,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			AddColumn("AMP", (int)(radGridView1.Width * 0.16f));
 			AddColumn("MPD Item", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Task Card №", (int)(radGridView1.Width * 0.16f));
+			AddColumn("Extension", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Check", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Program", (int)(radGridView1.Width * 0.16f));
@@ -53,7 +54,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			AddColumn("APU Hour", (int)(radGridView1.Width * 0.16f));
 			AddColumn("1st. Perf.", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Rpt. Intv.", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Extension", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
@@ -133,6 +133,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			subItems.Add(CreateRow(item.ScheduleItem, item.ScheduleItem));
 			subItems.Add(CreateRow(taskCheck, taskCheck));
 			subItems.Add(CreateRow(item.TaskCardNumber, item.TaskCardNumber, tcnColor));
+			subItems.Add(CreateRow(item.Extension.ToString("F0"), item.Extension));
 			subItems.Add(CreateRow(description, description));
 			subItems.Add(CreateRow(check, check));
 			subItems.Add(CreateRow(item.Program.ToString(), item.Program));
@@ -141,7 +142,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			subItems.Add(CreateRow(item.APUCalc ? "Yes" : "No", item.APUCalc));
 			subItems.Add(CreateRow($"{firstPerformanceString} {condition}", firstPerformanceString));
 			subItems.Add(CreateRow($"{repeat} {conditionRepeat}", item.Threshold.RepeatInterval));
-			subItems.Add(CreateRow(item.Extension.ToString("F"), item.Extension));
 			subItems.Add(CreateRow(author, author));
 
 			return subItems;

@@ -241,7 +241,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			subItems.Add(CreateRow(app, app));
 			subItems.Add(CreateRow(remarksString, remarksString));
 			subItems.Add(CreateRow(hiddenRemarksString, hiddenRemarksString));
-			subItems.Add(CreateRow(item.Extension.ToString("F"), item.Extension));
+			subItems.Add(CreateRow(item.Extension.ToString("F0"), item.Extension));
 			subItems.Add(CreateRow(author, author));
 
 			return subItems;

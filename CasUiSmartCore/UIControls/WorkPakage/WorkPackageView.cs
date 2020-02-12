@@ -534,9 +534,9 @@ namespace CAS.UI.UIControls.WorkPakage
 				var lastComplianceLifeLength = Lifelength.Zero;
 				string lastPerformanceString, firstPerformanceString = "N/A";
 				author = GlobalObjects.CasEnvironment.GetCorrector(dir);
-				var card = "";
+				var card = dir.EngineeringOrders;
 				var description = dir.Description;
-				var title = dir.EngineeringOrders;
+				var title = dir.Title;
 				var	access = dir.DirectiveAccess;
 				var	workArea = dir.Workarea;
 				var	zone = dir.DirectiveZone;

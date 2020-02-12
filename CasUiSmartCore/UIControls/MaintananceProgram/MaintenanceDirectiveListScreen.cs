@@ -1449,7 +1449,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			foreach (var row in _directivesViewer.radGridView1.Rows)
 			{
 				var mpd = row.Tag as MaintenanceDirective;
-				row.Cells["Extension"].Value = _resultDirectiveArray.FirstOrDefault(i => i.ItemId == mpd?.ItemId)?.Extension.ToString("F") ?? "0";
+				row.Cells["Extension"].Value = _resultDirectiveArray.FirstOrDefault(i => i.ItemId == mpd?.ItemId)?.Extension.ToString("F0") ?? "0";
 			}
 		}
 	}
