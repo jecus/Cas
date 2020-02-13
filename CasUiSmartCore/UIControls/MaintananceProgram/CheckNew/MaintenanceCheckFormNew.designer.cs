@@ -51,7 +51,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonClose.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonClose.Location = new System.Drawing.Point(845, 557);
+			this.buttonClose.Location = new System.Drawing.Point(1255, 548);
 			this.buttonClose.Name = "buttonClose";
 			this.buttonClose.Size = new System.Drawing.Size(75, 33);
 			this.buttonClose.TabIndex = 13;
@@ -119,7 +119,6 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.deleteButton.TextMain = "";
 			this.deleteButton.TextSecondary = "";
 			this.deleteButton.ToolTipText = "";
-			this.deleteButton.Click += DeleteButton_Click;
 			// 
 			// addButton
 			// 
@@ -146,7 +145,6 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.addButton.TextMain = "";
 			this.addButton.TextSecondary = "";
 			this.addButton.ToolTipText = "";
-			this.addButton.Click += AddButton_Click;
 			// 
 			// editButton
 			// 
@@ -174,7 +172,6 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.editButton.TextMain = "";
 			this.editButton.TextSecondary = "";
 			this.editButton.ToolTipText = "";
-			this.editButton.Click += EditButton_Click;
 			// 
 			// comboBox1
 			// 
@@ -183,12 +180,10 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.comboBox1.Name = "comboBox1";
 			this.comboBox1.Size = new System.Drawing.Size(164, 21);
 			this.comboBox1.TabIndex = 28;
-			this.comboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;
 			// 
 			// buttonApply
 			// 
 			this.buttonApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonApply.DialogResult = DialogResult.None;
 			this.buttonApply.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonApply.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
 			this.buttonApply.Location = new System.Drawing.Point(515, 153);
@@ -213,14 +208,14 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.listViewTasksForSelect.OldColumnIndex = 1;
 			this.listViewTasksForSelect.PasteComplete = null;
 			this.listViewTasksForSelect.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewTasksForSelect.Size = new System.Drawing.Size(908, 344);
-			this.listViewTasksForSelect.SortDirection = SortDirection.Asc;
+			this.listViewTasksForSelect.Size = new System.Drawing.Size(1316, 344);
+			this.listViewTasksForSelect.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Asc;
 			this.listViewTasksForSelect.TabIndex = 1;
 			// 
 			// MaintenanceCheckFormNew
 			// 
 			this.CancelButton = this.buttonClose;
-			this.ClientSize = new System.Drawing.Size(932, 596);
+			this.ClientSize = new System.Drawing.Size(1342, 590);
 			this.Controls.Add(this.listViewTasksForSelect);
 			this.Controls.Add(this.buttonApply);
 			this.Controls.Add(this.comboBox1);

@@ -50,7 +50,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonClose.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonClose.Location = new System.Drawing.Point(845, 557);
+			this.buttonClose.Location = new System.Drawing.Point(1255, 557);
 			this.buttonClose.Name = "buttonClose";
 			this.buttonClose.Size = new System.Drawing.Size(75, 33);
 			this.buttonClose.TabIndex = 13;
@@ -119,7 +119,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.listViewTasksForSelect.OldColumnIndex = 1;
 			this.listViewTasksForSelect.PasteComplete = null;
 			this.listViewTasksForSelect.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewTasksForSelect.Size = new System.Drawing.Size(908, 344);
+			this.listViewTasksForSelect.Size = new System.Drawing.Size(1316, 344);
 			this.listViewTasksForSelect.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Asc;
 			this.listViewTasksForSelect.TabIndex = 1;
 			this.listViewTasksForSelect.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.listViewTasksForSelect_SelectedItemsChanged);
@@ -162,7 +162,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			// MaintenanceCheckExtensionForm
 			// 
 			this.CancelButton = this.buttonClose;
-			this.ClientSize = new System.Drawing.Size(932, 596);
+			this.ClientSize = new System.Drawing.Size(1342, 596);
 			this.Controls.Add(this.buttonReset);
 			this.Controls.Add(this.numericUpDownExtension);
 			this.Controls.Add(this.labelExtension);

@@ -42,19 +42,18 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		/// </summary>
 		protected override void SetHeaders()
 		{
-			AddColumn("AMP", (int)(radGridView1.Width * 0.16f));
-			AddColumn("MPD Item", (int)(radGridView1.Width * 0.16f));
-			AddColumn("Task Card №", (int)(radGridView1.Width * 0.16f));
-			AddColumn("Extension", (int)(radGridView1.Width * 0.24f));
+			AddColumn("AMP", (int)(radGridView1.Width * 0.15f));
+			AddColumn("MPD Item", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Task Card №", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Extension", (int)(radGridView1.Width * 0.11f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Check", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Program", (int)(radGridView1.Width * 0.16f));
-			AddColumn("Program Indicator", (int)(radGridView1.Width * 0.16f));
-			AddColumn("Work Type", (int)(radGridView1.Width * 0.16f));
-			AddColumn("APU Hour", (int)(radGridView1.Width * 0.16f));
-			AddColumn("1st. Perf.", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Rpt. Intv.", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
+			AddColumn("Check", (int)(radGridView1.Width * 0.09f));
+			AddColumn("Program", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Work Type", (int)(radGridView1.Width * 0.15f));
+			AddColumn("APU Hour", (int)(radGridView1.Width * 0.12f));
+			AddColumn("1st. Perf.", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Rpt. Intv.", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Signer", (int)(radGridView1.Width * 0.14f));
 		}
 		#endregion
 
@@ -137,7 +136,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			subItems.Add(CreateRow(description, description));
 			subItems.Add(CreateRow(check, check));
 			subItems.Add(CreateRow(item.Program.ToString(), item.Program));
-			subItems.Add(CreateRow(item.ProgramIndicator.ShortName, item.ProgramIndicator));
 			subItems.Add(CreateRow(item.WorkType.ToString(), item.WorkType));
 			subItems.Add(CreateRow(item.APUCalc ? "Yes" : "No", item.APUCalc));
 			subItems.Add(CreateRow($"{firstPerformanceString} {condition}", firstPerformanceString));
