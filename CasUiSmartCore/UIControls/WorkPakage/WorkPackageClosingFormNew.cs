@@ -593,7 +593,7 @@ namespace CAS.UI.UIControls.WorkPakage
                 
                 SaveData();
 
-                if(dataGridViewItems.Rows.OfType<WorkPackageClosingDataGridViewRow>().All(i => (bool)i.Cells[ColumnClosed.Index].Value == true))
+                if(dataGridViewItems.Rows.OfType<WorkPackageClosingDataGridViewRow>().All(i => (bool)i.Cells[ColumnClosed.Index].Value))
 	                GlobalObjects.CasEnvironment.NewKeeper.Save(_workPackage);
 
             }

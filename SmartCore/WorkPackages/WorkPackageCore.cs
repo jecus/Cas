@@ -2038,6 +2038,34 @@ namespace SmartCore.WorkPackages
 
 			#endregion
 
+
+			bool flag = false;
+			var adPerformances = workPackageItems.Where(np => np.Parent != null && np.Parent is Directive);
+			if (adPerformances.Count() > 0 && !addToWP.Title.Contains("AD"))
+			{
+				flag = true;
+				addToWP.Title += " + AD ";
+			}
+
+			//Добавление в название присутствующих компонентов или задач по ним
+			var componentPerformances = workPackageItems.Where(np => np.Parent != null && (np.Parent is Entities.General.Accessory.Component || np.Parent is ComponentDirective));
+			if (componentPerformances.Count() > 0 && !addToWP.Title.Contains("Comp"))
+			{
+				flag = true;
+				addToWP.Title += " + Comp ";
+			}
+
+			//Добавление в название присутствующих MPD
+			var mpdPerformances = workPackageItems.Where(np => np.Parent != null && np.Parent is MaintenanceDirective);
+			if (mpdPerformances.Count() > 0 && !addToWP.Title.Contains("MPD"))
+			{
+				flag = true;
+				addToWP.Title += " + MPD ";
+			}
+
+			if(flag)
+				_newKeeper.Save(addToWP);
+
 			return true;
 		}
 		#endregion
