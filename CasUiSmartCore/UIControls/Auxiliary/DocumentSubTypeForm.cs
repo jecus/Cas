@@ -100,6 +100,7 @@ namespace CAS.UI.UIControls.Auxiliary
             textBoxName.Text = "";
 
             GlobalObjects.CasEnvironment.NewKeeper.Save(newSubType);
+            dst.Add(newSubType);
         }
         #endregion
 
