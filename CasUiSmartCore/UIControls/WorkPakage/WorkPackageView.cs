@@ -94,6 +94,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			AddColumn("Type", (int)(radGridView1.Width * 0.07f));
 			AddColumn("ATA", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Check", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Extension", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
@@ -353,14 +354,17 @@ namespace CAS.UI.UIControls.WorkPakage
 				var access = "";
 				var workArea = "";
 				var zone = "";
+				double extension = 0;
 				var description = np.Description;
 
 				if (np.Parent is Directive directive)
 				{
-					title = directive.EngineeringOrders;
+					title = directive.Title;
 					access = directive.DirectiveAccess;
 					workArea = directive.Workarea;
 					zone = directive.DirectiveZone;
+					card = directive.EngineeringOrders;
+					extension = directive.Extension;
 				}
 				else if (np.Parent is MaintenanceDirective d)
 				{
@@ -368,6 +372,7 @@ namespace CAS.UI.UIControls.WorkPakage
 					access = d.Access;
 					workArea = d.Workarea;
 					zone = d.Zone;
+					extension = d.Extension;
 				}
 				else if (np.Parent is ComponentDirective c)
 				{
@@ -377,6 +382,7 @@ namespace CAS.UI.UIControls.WorkPakage
 					access = c.Access;
 					workArea = "";
 					zone = c.Zone;
+					extension = c.Extension;
 				}
 
 				//Последнее выполнение
@@ -416,6 +422,13 @@ namespace CAS.UI.UIControls.WorkPakage
 					? "/WF"
 					: "/WL") : "";
 
+				var type = np.Parent.SmartCoreObjectType;
+				if (np.Parent is ComponentDirective cd)
+				{
+					if (cd.FromBaseComponent)
+						type = SmartCoreType.BaseComponent;
+				}
+
 				subItems.Add(CreateRow(title, title));
 				subItems.Add(CreateRow(card, card));
 				subItems.Add(CreateRow(description, description));
@@ -437,9 +450,10 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(CreateRow(zone, zone));
 				subItems.Add(CreateRow(workArea, workArea));
 				subItems.Add(CreateRow(access, access));
-				subItems.Add(CreateRow(np.Parent.SmartCoreObjectType.ToString(), np.Parent.SmartCoreObjectType));
+				subItems.Add(CreateRow(type.ToString(), type));
 				subItems.Add(CreateRow(np.ATAChapter?.ToString(), np.ATAChapter));
 				subItems.Add(CreateRow(np.MaintenanceCheck != null ? np.MaintenanceCheck.ToString() : "", np.MaintenanceCheck));
+				subItems.Add(CreateRow(extension.ToString("F0"), extension));
 				subItems.Add(CreateRow(author, author));
 			}
 
@@ -458,7 +472,36 @@ namespace CAS.UI.UIControls.WorkPakage
 				var access = "";
 				var workArea = "";
 				var zone = "";
+				double extension = 0;
 				var description = apr.Description;
+
+				if (apr.Parent is Directive directive)
+				{
+					title = directive.Title;
+					card = directive.EngineeringOrders;
+					access = directive.DirectiveAccess;
+					workArea = directive.Workarea;
+					zone = directive.DirectiveZone;
+					extension = directive.Extension;
+				}
+				else if (apr.Parent is MaintenanceDirective d)
+				{
+					card = d.TaskCardNumber;
+					access = d.Access;
+					workArea = d.Workarea;
+					zone = d.Zone;
+					extension = d.Extension;
+				}
+				else if (apr.Parent is ComponentDirective c)
+				{
+					description = c.ParentComponent.ToString();
+					title = c.MaintenanceDirective?.TaskNumberCheck ?? "";
+					card = c.MaintenanceDirective?.TaskCardNumber ?? "";
+					access = c.Access;
+					workArea = "";
+					extension = c.Extension;
+					zone = c.Zone;
+				}
 				
 				//Последнее выполнение
 				if (apr.Parent.LastPerformance != null &&
@@ -497,6 +540,13 @@ namespace CAS.UI.UIControls.WorkPakage
 					? "/WF"
 					: "/WL") : "";
 
+				var type = apr.Parent.SmartCoreObjectType;
+				if (apr.Parent is ComponentDirective cd)
+				{
+					if (cd.FromBaseComponent)
+						type = SmartCoreType.BaseComponent;
+				}
+
 				subItems.Add(CreateRow(title, title));
 				subItems.Add(CreateRow(card, card));
 				subItems.Add(CreateRow(description, description));
@@ -518,9 +568,10 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(CreateRow(zone, zone));
 				subItems.Add(CreateRow(workArea, workArea));
 				subItems.Add(CreateRow(access, access));
-				subItems.Add(CreateRow(apr.SmartCoreObjectType.ToString(), apr.SmartCoreObjectType));
+				subItems.Add(CreateRow(type.ToString(), type));
 				subItems.Add(CreateRow(apr.ATAChapter?.ToString(), apr.ATAChapter));
 				subItems.Add(CreateRow(apr.Parent?.NextPerformance?.MaintenanceCheck != null ? apr.Parent?.NextPerformance?.MaintenanceCheck.ToString() : "", apr.Parent?.NextPerformance?.MaintenanceCheck));
+				subItems.Add(CreateRow(extension.ToString("F0"), extension));
 				subItems.Add(CreateRow(author, author));
 			}
 
@@ -578,6 +629,8 @@ namespace CAS.UI.UIControls.WorkPakage
 					? "/WF"
 					: "/WL") : "";
 
+				var type = dir.SmartCoreObjectType;
+
 				subItems.Add(CreateRow(title, title));
 				subItems.Add(CreateRow(card, card));
 				subItems.Add(CreateRow(description, description));
@@ -599,9 +652,10 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(CreateRow(zone, zone));
 				subItems.Add(CreateRow(workArea, workArea));
 				subItems.Add(CreateRow(access, access));
-				subItems.Add(CreateRow(dir.SmartCoreObjectType.ToString(), dir.SmartCoreObjectType));
+				subItems.Add(CreateRow(type.ToString(), type));
 				subItems.Add(CreateRow(dir.ATAChapter?.ToString(), dir.ATAChapter));
 				subItems.Add(CreateRow(dir.NextPerformance?.MaintenanceCheck != null ? dir.NextPerformance?.MaintenanceCheck?.ToString() : "", dir.NextPerformance?.MaintenanceCheck));
+				subItems.Add(CreateRow(dir.Extension.ToString("F0"), dir.Extension));
 				subItems.Add(CreateRow(author, author));
 			}
 
@@ -659,6 +713,8 @@ namespace CAS.UI.UIControls.WorkPakage
 					? "/WF"
 					: "/WL") : "";
 
+				var type = bd.SmartCoreObjectType;
+
 				subItems.Add(CreateRow(title, title));
 				subItems.Add(CreateRow(card, card));
 				subItems.Add(CreateRow(description, description));
@@ -680,9 +736,10 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(CreateRow(zone, zone));
 				subItems.Add(CreateRow(workArea, workArea));
 				subItems.Add(CreateRow(access, access));
-				subItems.Add(CreateRow(bd.SmartCoreObjectType.ToString(), bd.SmartCoreObjectType));
+				subItems.Add(CreateRow(type.ToString(), type));
 				subItems.Add(CreateRow(bd.ATAChapter?.ToString(), bd.ATAChapter));
 				subItems.Add(CreateRow(bd.NextPerformance?.MaintenanceCheck != null ? bd.NextPerformance?.MaintenanceCheck?.ToString() : "", bd.NextPerformance?.MaintenanceCheck));
+				subItems.Add(CreateRow(bd.Extension.ToString("F0"), bd.Extension));
 				subItems.Add(CreateRow(author, author));
 			}
 
@@ -740,6 +797,8 @@ namespace CAS.UI.UIControls.WorkPakage
 					? "/WF"
 					: "/WL") : "";
 
+				var type = d.SmartCoreObjectType;
+
 				subItems.Add(CreateRow(title, title));
 				subItems.Add(CreateRow(card, card));
 				subItems.Add(CreateRow(description, description));
@@ -761,9 +820,10 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(CreateRow(zone, zone));
 				subItems.Add(CreateRow(workArea, workArea));
 				subItems.Add(CreateRow(access, access));
-				subItems.Add(CreateRow(d.SmartCoreObjectType.ToString(), d.SmartCoreObjectType));
+				subItems.Add(CreateRow(type.ToString(), type));
 				subItems.Add(CreateRow(d.ATAChapter?.ToString(), d.ATAChapter));
 				subItems.Add(CreateRow(d.NextPerformance?.MaintenanceCheck != null ? d.NextPerformance?.MaintenanceCheck?.ToString() : "", d.NextPerformance?.MaintenanceCheck));
+				subItems.Add(CreateRow(d.Extension.ToString("F0"), d.Extension));
 				subItems.Add(CreateRow(author, author));
 			}
 
@@ -782,7 +842,7 @@ namespace CAS.UI.UIControls.WorkPakage
 				var access = dd.Access;
 				var workArea = "";
 				var zone = dd.Zone;
-				var description = dd.Title;
+				var description = dd.ParentComponent.ToString();
 
 				//Последнее выполнение
 				if (dd.LastPerformance != null &&
@@ -821,6 +881,13 @@ namespace CAS.UI.UIControls.WorkPakage
 					? "/WF"
 					: "/WL") : "";
 
+				var type = dd.SmartCoreObjectType;
+				if (dd is ComponentDirective cd)
+				{
+					if (cd.FromBaseComponent)
+						type = SmartCoreType.BaseComponent;
+				}
+				
 				subItems.Add(CreateRow(title, title));
 				subItems.Add(CreateRow(card, card));
 				subItems.Add(CreateRow(description, description));
@@ -842,9 +909,10 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(CreateRow(zone, zone));
 				subItems.Add(CreateRow(workArea, workArea));
 				subItems.Add(CreateRow(access, access));
-				subItems.Add(CreateRow(dd.SmartCoreObjectType.ToString(), dd.SmartCoreObjectType));
+				subItems.Add(CreateRow(type.ToString(), type));
 				subItems.Add(CreateRow(dd.ATAChapter?.ToString(), dd.ATAChapter));
 				subItems.Add(CreateRow(dd.ParentComponent?.NextPerformance?.MaintenanceCheck != null ? dd.ParentComponent?.NextPerformance?.MaintenanceCheck?.ToString() : "", dd.ParentComponent?.NextPerformance?.MaintenanceCheck));
+				subItems.Add(CreateRow(dd.Extension.ToString("F0"), dd.Extension));
 				subItems.Add(CreateRow(author, author));
 			}
 
@@ -902,6 +970,8 @@ namespace CAS.UI.UIControls.WorkPakage
 					? "/WF"
 					: "/WL") : "";
 
+				var type = mcc.SmartCoreObjectType;
+
 				subItems.Add(CreateRow(title, title));
 				subItems.Add(CreateRow(card, card));
 				subItems.Add(CreateRow(description, description));
@@ -923,9 +993,10 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(CreateRow(zone, zone));
 				subItems.Add(CreateRow(workArea, workArea));
 				subItems.Add(CreateRow(access, access));
-				subItems.Add(CreateRow(mcc.SmartCoreObjectType.ToString(), mcc.SmartCoreObjectType));
+				subItems.Add(CreateRow(type.ToString(), type));
 				subItems.Add(CreateRow(mcc.ATAChapter?.ToString(), mcc.ATAChapter));
 				subItems.Add(CreateRow(mcc.NextPerformance?.MaintenanceCheck != null ? mcc.NextPerformance?.MaintenanceCheck?.ToString() : "", mcc.NextPerformance?.MaintenanceCheck));
+				subItems.Add(CreateRow("", ""));
 				subItems.Add(CreateRow(author, author));
 			}
 
@@ -983,6 +1054,8 @@ namespace CAS.UI.UIControls.WorkPakage
 					? "/WF"
 					: "/WL") : "";
 
+				var type = md.SmartCoreObjectType;
+
 				subItems.Add(CreateRow(title, title));
 				subItems.Add(CreateRow(card, card));
 				subItems.Add(CreateRow(description, description));
@@ -1004,9 +1077,10 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(CreateRow(zone, zone));
 				subItems.Add(CreateRow(workArea, workArea));
 				subItems.Add(CreateRow(access, access));
-				subItems.Add(CreateRow(md.SmartCoreObjectType.ToString(), md.SmartCoreObjectType));
+				subItems.Add(CreateRow(type.ToString(), type));
 				subItems.Add(CreateRow(md.ATAChapter?.ToString(), md.ATAChapter));
 				subItems.Add(CreateRow(md.MaintenanceCheck != null ? md.MaintenanceCheck.ToString() : "", md.MaintenanceCheck));
+				subItems.Add(CreateRow(md.Extension.ToString("F0"), md.Extension));
 				subItems.Add(CreateRow(author, author));
 			}
 
@@ -1026,7 +1100,7 @@ namespace CAS.UI.UIControls.WorkPakage
 				var workArea = "";
 				var zone = job.Zone;
 				var description = job.Description;
-
+				
 				//Последнее выполнение
 				if (job.NextPerformance?.Parent?.LastPerformance != null &&
 					job.NextPerformance?.Parent?.LastPerformance?.RecordDate > lastComplianceDate)
@@ -1059,7 +1133,9 @@ namespace CAS.UI.UIControls.WorkPakage
 				var condition = !string.IsNullOrEmpty(firstPerformanceString) ? (job.NextPerformance?.Parent?.Threshold?.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst
 					? "/WF"
 					: "/WL") : "";
-				
+
+				var type = job.SmartCoreObjectType;
+
 				subItems.Add(CreateRow(title, title));
 				subItems.Add(CreateRow(card, card));
 				subItems.Add(CreateRow(description, description));
@@ -1081,9 +1157,10 @@ namespace CAS.UI.UIControls.WorkPakage
 				subItems.Add(CreateRow(zone, zone));
 				subItems.Add(CreateRow(workArea, workArea));
 				subItems.Add(CreateRow(access, access));
-				subItems.Add(CreateRow(job.SmartCoreObjectType.ToString(), job.SmartCoreObjectType));
+				subItems.Add(CreateRow(type.ToString(), type));
 				subItems.Add(CreateRow(job.ATAChapter?.ToString(), job.ATAChapter));
 				subItems.Add(CreateRow(job.NextPerformance?.MaintenanceCheck != null ? job.NextPerformance?.MaintenanceCheck?.ToString() : "", job.NextPerformance?.MaintenanceCheck));
+				subItems.Add(CreateRow("", ""));
 				subItems.Add(CreateRow(author, author));
 			}
 
