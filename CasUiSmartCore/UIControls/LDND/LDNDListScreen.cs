@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
@@ -175,6 +176,8 @@ namespace CAS.UI.UIControls.LDND
 			componentDirectives.AddRange(bcDirective);
 
 			var mpds = GlobalObjects.MaintenanceCore.GetMaintenanceDirectives(CurrentAircraft);
+			var mpdToRemove = new List<MaintenanceDirective>();
+
 			foreach (var componentDirective in componentDirectives)
 			{
 				foreach (var items in componentDirective.ItemRelations.Where(i =>
@@ -182,9 +185,23 @@ namespace CAS.UI.UIControls.LDND
 					i.SecondItemTypeId == SmartCoreType.MaintenanceDirective.ItemId))
 				{
 					var id = componentDirective.IsFirst == true ? items.SecondItemId : items.FirstItemId;
-					componentDirective.MaintenanceDirective = mpds.FirstOrDefault(i => i.ItemId == id);
+					var mpd = mpds.FirstOrDefault(i => i.ItemId == id);
+
+					if(mpd != null)
+					{
+						componentDirective.MaintenanceDirective = mpd;
+
+						var bindedItemRelationType = ItemRelationHelper
+							.ConvertBLItemRelationToUIITem(componentDirective.WorkItemsRelationType,
+								componentDirective.IsFirst.HasValue && componentDirective.IsFirst.Value);
+						if (bindedItemRelationType == WorkItemsRelationTypeUI.ThisItemAffectOnAnother)
+							mpdToRemove.Add(mpd);
+					}
 				}
 			}
+
+			foreach (var directive in mpdToRemove)
+				mpds.Remove(directive);
 
 			var directives = GlobalObjects.DirectiveCore.GetDirectives(CurrentAircraft, DirectiveType.All);
 
