@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
 using MetroFramework.Forms;
 using SmartCore.Calculations;
@@ -301,6 +302,11 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 
 		#endregion
 
+		private void buttonAddDoc_Click(object sender, EventArgs e)
+		{
+			var form = new DocumentForm();
+			form.ShowDialog();
+		}
 	}
 
 }

@@ -40,6 +40,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.numericUpDownExtension = new System.Windows.Forms.NumericUpDown();
 			this.labelExtension = new MetroFramework.Controls.MetroLabel();
 			this.buttonReset = new System.Windows.Forms.Button();
+			this.buttonAddDoc = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownExtension)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -159,10 +160,23 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.buttonReset.Text = "Reset";
 			this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
 			// 
+			// buttonAddDoc
+			// 
+			this.buttonAddDoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonAddDoc.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonAddDoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.buttonAddDoc.Location = new System.Drawing.Point(415, 108);
+			this.buttonAddDoc.Name = "buttonAddDoc";
+			this.buttonAddDoc.Size = new System.Drawing.Size(90, 72);
+			this.buttonAddDoc.TabIndex = 254;
+			this.buttonAddDoc.Text = "Add Document";
+			this.buttonAddDoc.Click += new System.EventHandler(this.buttonAddDoc_Click);
+			// 
 			// MaintenanceCheckExtensionForm
 			// 
 			this.CancelButton = this.buttonClose;
 			this.ClientSize = new System.Drawing.Size(1342, 596);
+			this.Controls.Add(this.buttonAddDoc);
 			this.Controls.Add(this.buttonReset);
 			this.Controls.Add(this.numericUpDownExtension);
 			this.Controls.Add(this.labelExtension);
@@ -195,5 +209,6 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		private NumericUpDown numericUpDownExtension;
 		private MetroLabel labelExtension;
 		private Button buttonReset;
+		private Button buttonAddDoc;
 	}
 }
