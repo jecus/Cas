@@ -303,10 +303,13 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 
 		#endregion
 
-		private void AddDocument()
+		
+		#endregion
+
+		private void buttonAddDoc_Click(object sender, EventArgs e)
 		{
 			var _departmentPalanning = GlobalObjects.CasEnvironment.NewLoader.GetObject<DepartmentDTO, Department>(new Filter("FullName", "Planning"));
-			var spec = GlobalObjects.CasEnvironment.GetDictionary<Specialization>().GetByFullName("Records and Planing Manager") as Specialization;
+			var spec = GlobalObjects.CasEnvironment.GetDictionary<Specialization>().GetByFullName("Records and Planning Manager") as Specialization;
 			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("EXEMPTION") as DocumentSubType;
 			var newDocument = new Document
 			{
@@ -326,14 +329,6 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			var form = new DocumentForm(newDocument, false);
 			if (form.ShowDialog() == DialogResult.OK)
 				MessageBox.Show("Document created successfully!", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-		}
-
-		#endregion
-
-		private void buttonAddDoc_Click(object sender, EventArgs e)
-		{
-			var form = new DocumentForm();
-			form.ShowDialog();
 		}
 	}
 

@@ -1453,5 +1453,10 @@ namespace CAS.UI.UIControls.MaintananceProgram
 				row.Cells["Extension"].Value = _resultDirectiveArray.FirstOrDefault(i => i.ItemId == mpd?.ItemId)?.Extension.ToString("F0") ?? "0";
 			}
 		}
+
+		private void buttonDocument_Click(object sender, EventArgs e)
+		{
+			
+		}
 	}
 }
