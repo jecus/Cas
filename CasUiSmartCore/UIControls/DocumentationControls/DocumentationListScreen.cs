@@ -32,6 +32,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 		private ICommonCollection<Document> _initialDocumentArray = new CommonCollection<Document>();
 		private ICommonCollection<Document> _resultDocumentArray = new CommonCollection<Document>();
 		private readonly BaseEntityObject _parent;
+		private readonly DocumentType _docType;
 		private DocumentationListView _directivesViewer;
 
 		private RadMenuItem _toolStripMenuItemShowTaskCard;
@@ -71,11 +72,12 @@ namespace CAS.UI.UIControls.DocumentationControls
 		/// Создаёт экземпляр элемента управления, отображающего список директив
 		///</summary>
 		///<param name="currentAircraft">ВС, которому принадлежат директивы</param>
-		public DocumentationListScreen(Aircraft currentAircraft) : this()
+		public DocumentationListScreen(Aircraft currentAircraft, DocumentType docType = null) : this()
 		{
 			if (currentAircraft == null)
 				throw new ArgumentNullException("currentAircraft");
 			_parent = currentAircraft;
+			_docType = docType;
 			CurrentAircraft = currentAircraft;
 			StatusTitle = "Aircraft Documentation";
 
@@ -149,7 +151,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 				if (_filters == null)
 				{
 					if (_parent is Aircraft)
-						_initialDocumentArray.AddRange(GlobalObjects.DocumentCore.GetAircraftDocuments((Aircraft)_parent).ToArray());
+						_initialDocumentArray.AddRange(GlobalObjects.DocumentCore.GetAircraftDocuments((Aircraft)_parent, _docType).ToArray());
 					if (_parent is Operator)
 						_initialDocumentArray.AddRange(GlobalObjects.DocumentCore.GetOperatorDocuments((Operator)_parent).ToArray());
 				}

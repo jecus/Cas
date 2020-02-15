@@ -386,9 +386,11 @@ namespace SmartCore.Documents
 
 		#region public List<Document> GetAircraftDocuments(Aircraft parentAircraft)
 
-		public List<Document> GetAircraftDocuments(Aircraft parentAircraft)
+		public List<Document> GetAircraftDocuments(Aircraft parentAircraft, DocumentType type = null)
 		{
-			return GetDocuments(parentAircraft, DocumentType.Other);
+			if (type == null)
+				type = DocumentType.Other;
+			return GetDocuments(parentAircraft, type);
 		}
 		#endregion
 

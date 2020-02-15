@@ -1,4 +1,6 @@
-﻿using CASTerms;
+﻿using System;
+using CAS.UI.Interfaces;
+using CASTerms;
 using EntityCore.DTO.General;
 
 namespace CAS.UI.UIControls.MaintananceProgram
@@ -449,7 +451,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.buttonDocument.TextMain = "";
 			this.buttonDocument.TextSecondary = "";
 			this.buttonDocument.ToolTipText = "Document";
-			this.buttonDocument.Click += new System.EventHandler(this.buttonDocument_Click);
+			this.buttonDocument.DisplayerRequested += new EventHandler<ReferenceEventArgs>(this.buttonDocument_Click);
 			//
 			// labelDateAsOf
 			// 

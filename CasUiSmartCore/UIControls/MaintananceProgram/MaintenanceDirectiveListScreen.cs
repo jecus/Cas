@@ -13,6 +13,7 @@ using CAS.UI.Management;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.DocumentationControls;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.ForecastControls;
 using CAS.UI.UIControls.MaintananceProgram.CheckNew;
@@ -1454,9 +1455,11 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			}
 		}
 
-		private void buttonDocument_Click(object sender, EventArgs e)
+
+		private void buttonDocument_Click(object sender, ReferenceEventArgs e)
 		{
-			
+			e.DisplayerText = CurrentAircraft.RegistrationNumber + ". Documents";
+			e.RequestedEntity = new DocumentationListScreen(CurrentAircraft, DocumentType.Permission);
 		}
 	}
 }
