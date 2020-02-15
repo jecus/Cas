@@ -7,8 +7,11 @@ using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.DocumentationControls;
 using CASTerms;
+using EntityCore.DTO.Dictionaries;
+using EntityCore.Filter;
 using MetroFramework.Forms;
 using SmartCore.Calculations;
+using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 
@@ -299,6 +302,31 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		}
 
 		#endregion
+
+		private void AddDocument()
+		{
+			var _departmentPalanning = GlobalObjects.CasEnvironment.NewLoader.GetObject<DepartmentDTO, Department>(new Filter("FullName", "Planning"));
+			var spec = GlobalObjects.CasEnvironment.GetDictionary<Specialization>().GetByFullName("Records and Planing Manager") as Specialization;
+			var docSubType = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("EXEMPTION") as DocumentSubType;
+			var newDocument = new Document
+			{
+				Parent = _currentAircraft,
+				ParentId = _currentAircraft.ItemId,
+				ParentTypeId = _currentAircraft.SmartCoreObjectType.ItemId,
+				DocType = DocumentType.Permission,
+				DocumentSubType = docSubType,
+				IsClosed = true,
+				ContractNumber = $"",
+				Description = "",
+				ParentAircraftId = _currentAircraft.ItemId,
+				Department = _departmentPalanning,
+				ResponsibleOccupation = spec
+			};
+
+			var form = new DocumentForm(newDocument, false);
+			if (form.ShowDialog() == DialogResult.OK)
+				MessageBox.Show("Document created successfully!", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+		}
 
 		#endregion
 
