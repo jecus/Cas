@@ -27,7 +27,7 @@ namespace EntityCore.DTO.Dictionaries
 		public ICollection<ItemFileLinkDTO> Files { get; set; }
 
 		
-		[Child]
+		[Include]
 		public AccessoryDescriptionDTO AccessoryDescription { get; set; }
 
 	}
