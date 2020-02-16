@@ -409,7 +409,10 @@ namespace CAS.UI.UIControls.DirectivesControls
 			}
 
 			_directivesViewer.SetItemsArray(_resultDirectiveArray.ToArray());
-			_directivesViewer.radGridView1.Columns["EOFile №"].IsVisible = false;
+
+			var eoCol = _directivesViewer.radGridView1.Columns["EOFile №"];
+			if (eoCol != null)
+				eoCol.IsVisible = false;
 
 			var resultList = new List<Directive>();
 			var list = _directivesViewer.radGridView1.Rows.Select(i => i).ToList();
