@@ -470,8 +470,7 @@ namespace SmartCore.DtoHelper
 				Updated = damagechart.Updated,
 				CorrectorId = damagechart.CorrectorId,
 				ChartName = damagechart.ChartName,
-				AircraftModelId = damagechart.AircraftModel?.ItemId,
-				AccessoryDescription = damagechart.AircraftModel?.Convert()
+				AircraftModelId = damagechart.AircraftModel?.ItemId
 			};
 		}
 
