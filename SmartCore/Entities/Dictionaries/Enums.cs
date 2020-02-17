@@ -134,6 +134,7 @@ namespace SmartCore.Entities.Dictionaries
         Dent = 20,
         Repair = 30,
         Scratch = 40,
+        TemporaryRepair = 50
     }
 
 	#endregion
