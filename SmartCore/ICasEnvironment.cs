@@ -32,6 +32,7 @@ namespace SmartCore
 		CommonCollection<Store> Stores { get; }
 		CommonCollection<Hangar> Hangars { get; }
 		CommonCollection<WorkShop> WorkShops { get; }
+		CommonCollection<WorkStation> WorkStations { get; }
 		BaseComponentCollection BaseComponents { get; }
 		Dictionary<string, ICommonCollection> TempCollections { get; }
 		ReasonCollection Reasons { get; }

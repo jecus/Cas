@@ -117,6 +117,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 				new CommonCollection<Aircraft>(GlobalObjects.AircraftsCore.GetAllAircrafts());
 			_stores.Location =  new Point(_aircrafts.Location.X + 400, 4);
 			_stores.ItemsCollection = GlobalObjects.CasEnvironment.Stores;
+			workStationCollectionControl1.ItemsCollection = GlobalObjects.CasEnvironment.WorkStations;
 
 #if !KAC
 			_vehicles.VehiclesCollection =

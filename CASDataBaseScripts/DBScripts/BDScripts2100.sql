@@ -45,3 +45,23 @@ if not exists ( select  *
 	alter table dbo.Cas3WorkPakageRecord
 	add IsClosed bit not null default 0
 GO
+
+------------------------------------------------------------------------------------
+
+if object_id('dbo.WorkStations') is null
+
+    create table dbo.WorkStations (
+          ItemId int IDENTITY PRIMARY KEY not null 
+		, IsDeleted  bit not null DEFAULT 0
+        , StoreName varchar(256) null
+		, Location varchar(MAX) null
+		, OperatorId int null
+		, Adress varchar(MAX) null
+		, Phone varchar(256) null
+		, Email varchar(256) null
+		, Contact varchar(256) null
+		, Remarks varchar(MAX) null
+		, Corrector int NOT NULL
+		, Updated datetime2(7) NOT NULL
+	)
+go

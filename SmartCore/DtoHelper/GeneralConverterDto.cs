@@ -5751,5 +5751,43 @@ namespace SmartCore.DtoHelper
 				SettingsJSON = quot.SettingsJSON,
 			};
 		}
+
+		public static WorkStationsDTO Convert(this WorkStation workStation)
+		{
+			return new WorkStationsDTO
+			{
+				ItemId = workStation.ItemId,
+				IsDeleted = workStation.IsDeleted,
+				Updated = workStation.Updated,
+				CorrectorId = workStation.CorrectorId,
+				Name = workStation.Name,
+				Location = workStation.Location,
+				Email = workStation.Email,
+				Phone = workStation.Phone,
+				Remarks = workStation.Remarks,
+				Adress = workStation.Adress,
+				Contact = workStation.Contact,
+				OperatorId = workStation.OperatorId
+			};
+		}
+
+		public static WorkStation Convert(this WorkStationsDTO workStation)
+		{
+			return new WorkStation()
+			{
+				ItemId = workStation.ItemId,
+				IsDeleted = workStation.IsDeleted,
+				Updated = workStation.Updated,
+				CorrectorId = workStation.CorrectorId,
+				Name = workStation.Name,
+				Location = workStation.Location,
+				Email = workStation.Email,
+				Phone = workStation.Phone,
+				Remarks = workStation.Remarks,
+				Adress = workStation.Adress,
+				Contact = workStation.Contact,
+				OperatorId = workStation.OperatorId
+			};
+		}
 	}
 }

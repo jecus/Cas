@@ -212,7 +212,7 @@ namespace CAS.UI.UIControls.ComponentControls
         private void InitializeComponent()
         {
             splitContainer = new SplitContainer();
-            contentPanel = new BaseComponentLinksFlowLayoutPanel(_currentBaseComponent);
+            contentPanel = new BaseComponentLinksFlowLayoutPanel(_currentBaseComponent, true);
             contextMenuStrip1 = new ContextMenuStrip();
             titleToolStripMenuItem = new ToolStripMenuItem();
             registerToolStripMenuItem = new ToolStripMenuItem();
