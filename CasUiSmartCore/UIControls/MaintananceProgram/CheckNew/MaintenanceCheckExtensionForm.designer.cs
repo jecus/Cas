@@ -215,6 +215,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.textBoxSearch.UseSelectable = true;
 			this.textBoxSearch.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
 			this.textBoxSearch.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+			this.textBoxSearch.TextChanged += TextBoxSearch_TextChanged;
 			// 
 			// MaintenanceCheckExtensionForm
 			// 

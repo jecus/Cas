@@ -303,8 +303,27 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 
 		#endregion
 
-		
+
 		#endregion
+
+		private void TextBoxSearch_TextChanged(object sender, System.EventArgs e)
+		{
+			var search = textBoxSearch.Text.ToLower();
+			if(string.IsNullOrEmpty(search))
+				return;
+
+			var intervals =
+				checkedListBoxItems.CheckedItems.OfType<Lifelength>();
+			_mpdWithInterval = new List<MaintenanceDirective>();
+			_mpdWithInterval
+				.AddRange(_mpdForSelect
+					.Where(mpd => intervals.Any(interval => mpd.Threshold.FirstPerformanceSinceNew != null
+					                                        && mpd.Threshold.FirstPerformanceSinceNew.Equals(interval)))
+					.Where(i => i.TaskNumberCheck.ToLower().Contains(search) || i.TaskCardNumber.ToLower().Contains(search)));
+
+			listViewTasksForSelect.SetItemsArray(_mpdWithInterval
+				.ToArray());
+		}
 
 		private void buttonAddDoc_Click(object sender, EventArgs e)
 		{
