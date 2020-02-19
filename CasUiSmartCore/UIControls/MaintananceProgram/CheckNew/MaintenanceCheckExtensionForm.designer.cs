@@ -41,6 +41,8 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.labelExtension = new MetroFramework.Controls.MetroLabel();
 			this.buttonReset = new System.Windows.Forms.Button();
 			this.buttonAddDoc = new System.Windows.Forms.Button();
+			this.metroLabelSearch = new MetroFramework.Controls.MetroLabel();
+			this.textBoxSearch = new MetroFramework.Controls.MetroTextBox();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownExtension)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -62,7 +64,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			// 
 			this.labelInterval.AutoSize = true;
 			this.labelInterval.ForeColor = System.Drawing.Color.Black;
-			this.labelInterval.Location = new System.Drawing.Point(14, 57);
+			this.labelInterval.Location = new System.Drawing.Point(17, 89);
 			this.labelInterval.Name = "labelInterval";
 			this.labelInterval.Size = new System.Drawing.Size(52, 19);
 			this.labelInterval.TabIndex = 21;
@@ -73,7 +75,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.checkBoxSelectAll.AutoSize = true;
 			this.checkBoxSelectAll.Checked = true;
 			this.checkBoxSelectAll.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxSelectAll.Location = new System.Drawing.Point(84, 61);
+			this.checkBoxSelectAll.Location = new System.Drawing.Point(87, 93);
 			this.checkBoxSelectAll.Margin = new System.Windows.Forms.Padding(2);
 			this.checkBoxSelectAll.Name = "checkBoxSelectAll";
 			this.checkBoxSelectAll.Size = new System.Drawing.Size(69, 15);
@@ -86,7 +88,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			// 
 			this.checkedListBoxItems.CheckOnClick = true;
 			this.checkedListBoxItems.FormattingEnabled = true;
-			this.checkedListBoxItems.Location = new System.Drawing.Point(14, 82);
+			this.checkedListBoxItems.Location = new System.Drawing.Point(17, 114);
 			this.checkedListBoxItems.Margin = new System.Windows.Forms.Padding(2);
 			this.checkedListBoxItems.Name = "checkedListBoxItems";
 			this.checkedListBoxItems.Size = new System.Drawing.Size(396, 109);
@@ -98,7 +100,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.buttonApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonApply.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonApply.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonApply.Location = new System.Drawing.Point(511, 108);
+			this.buttonApply.Location = new System.Drawing.Point(514, 140);
 			this.buttonApply.Name = "buttonApply";
 			this.buttonApply.Size = new System.Drawing.Size(75, 33);
 			this.buttonApply.TabIndex = 250;
@@ -113,21 +115,21 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.listViewTasksForSelect.EnableCustomSorting = true;
 			this.listViewTasksForSelect.Entity = null;
 			this.listViewTasksForSelect.IgnoreEnterPress = false;
-			this.listViewTasksForSelect.Location = new System.Drawing.Point(14, 197);
+			this.listViewTasksForSelect.Location = new System.Drawing.Point(17, 229);
 			this.listViewTasksForSelect.Margin = new System.Windows.Forms.Padding(4);
 			this.listViewTasksForSelect.MenuOpeningAction = null;
 			this.listViewTasksForSelect.Name = "listViewTasksForSelect";
 			this.listViewTasksForSelect.OldColumnIndex = 1;
 			this.listViewTasksForSelect.PasteComplete = null;
 			this.listViewTasksForSelect.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.listViewTasksForSelect.Size = new System.Drawing.Size(1316, 344);
+			this.listViewTasksForSelect.Size = new System.Drawing.Size(1316, 312);
 			this.listViewTasksForSelect.SortDirection = CAS.UI.UIControls.NewGrid.SortDirection.Asc;
 			this.listViewTasksForSelect.TabIndex = 1;
 			this.listViewTasksForSelect.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.listViewTasksForSelect_SelectedItemsChanged);
 			// 
 			// numericUpDownExtension
 			// 
-			this.numericUpDownExtension.Location = new System.Drawing.Point(511, 82);
+			this.numericUpDownExtension.Location = new System.Drawing.Point(514, 114);
 			this.numericUpDownExtension.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -141,7 +143,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			// 
 			this.labelExtension.AutoSize = true;
 			this.labelExtension.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelExtension.Location = new System.Drawing.Point(415, 82);
+			this.labelExtension.Location = new System.Drawing.Point(418, 114);
 			this.labelExtension.Name = "labelExtension";
 			this.labelExtension.Size = new System.Drawing.Size(85, 19);
 			this.labelExtension.TabIndex = 252;
@@ -153,7 +155,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.buttonReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonReset.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonReset.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonReset.Location = new System.Drawing.Point(511, 147);
+			this.buttonReset.Location = new System.Drawing.Point(514, 179);
 			this.buttonReset.Name = "buttonReset";
 			this.buttonReset.Size = new System.Drawing.Size(75, 33);
 			this.buttonReset.TabIndex = 253;
@@ -165,17 +167,61 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.buttonAddDoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonAddDoc.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.buttonAddDoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.buttonAddDoc.Location = new System.Drawing.Point(415, 108);
+			this.buttonAddDoc.Location = new System.Drawing.Point(418, 140);
 			this.buttonAddDoc.Name = "buttonAddDoc";
 			this.buttonAddDoc.Size = new System.Drawing.Size(90, 72);
 			this.buttonAddDoc.TabIndex = 254;
 			this.buttonAddDoc.Text = "Add Document";
 			this.buttonAddDoc.Click += new System.EventHandler(this.buttonAddDoc_Click);
 			// 
+			// metroLabelSearch
+			// 
+			this.metroLabelSearch.AutoSize = true;
+			this.metroLabelSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.metroLabelSearch.Location = new System.Drawing.Point(17, 60);
+			this.metroLabelSearch.Name = "metroLabelSearch";
+			this.metroLabelSearch.Size = new System.Drawing.Size(55, 19);
+			this.metroLabelSearch.TabIndex = 255;
+			this.metroLabelSearch.Text = "Search :";
+			this.metroLabelSearch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// textBoxSearch
+			// 
+			// 
+			// 
+			// 
+			this.textBoxSearch.CustomButton.Image = null;
+			this.textBoxSearch.CustomButton.Location = new System.Drawing.Point(317, 2);
+			this.textBoxSearch.CustomButton.Name = "";
+			this.textBoxSearch.CustomButton.Size = new System.Drawing.Size(15, 15);
+			this.textBoxSearch.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+			this.textBoxSearch.CustomButton.TabIndex = 1;
+			this.textBoxSearch.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+			this.textBoxSearch.CustomButton.UseSelectable = true;
+			this.textBoxSearch.CustomButton.Visible = false;
+			this.textBoxSearch.ForeColor = System.Drawing.Color.DimGray;
+			this.textBoxSearch.Lines = new string[0];
+			this.textBoxSearch.Location = new System.Drawing.Point(78, 59);
+			this.textBoxSearch.MaxLength = 32767;
+			this.textBoxSearch.Name = "textBoxSearch";
+			this.textBoxSearch.PasswordChar = '\0';
+			this.textBoxSearch.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.textBoxSearch.SelectedText = "";
+			this.textBoxSearch.SelectionLength = 0;
+			this.textBoxSearch.SelectionStart = 0;
+			this.textBoxSearch.ShortcutsEnabled = true;
+			this.textBoxSearch.Size = new System.Drawing.Size(335, 20);
+			this.textBoxSearch.TabIndex = 256;
+			this.textBoxSearch.UseSelectable = true;
+			this.textBoxSearch.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+			this.textBoxSearch.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+			// 
 			// MaintenanceCheckExtensionForm
 			// 
 			this.CancelButton = this.buttonClose;
 			this.ClientSize = new System.Drawing.Size(1342, 596);
+			this.Controls.Add(this.textBoxSearch);
+			this.Controls.Add(this.metroLabelSearch);
 			this.Controls.Add(this.buttonAddDoc);
 			this.Controls.Add(this.buttonReset);
 			this.Controls.Add(this.numericUpDownExtension);
@@ -210,5 +256,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		private MetroLabel labelExtension;
 		private Button buttonReset;
 		private Button buttonAddDoc;
+		private MetroLabel metroLabelSearch;
+		private MetroTextBox textBoxSearch;
 	}
 }
