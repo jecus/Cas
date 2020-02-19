@@ -534,6 +534,16 @@ namespace CAS.UI.UIControls.WorkPakage
                     wpr.IsClosed = true;
                     GlobalObjects.CasEnvironment.NewKeeper.Save(wpr);
 
+                    if (wpr.Task is IMtopCalc mtop)
+                    {
+	                    if (mtop.Extension > 0)
+	                    {
+		                    mtop.Extension = 0;
+		                    mtop.IsExtension = false;
+		                    GlobalObjects.CasEnvironment.NewKeeper.Save(mtop as BaseEntityObject);
+                        }
+                    }
+
                 }
                 catch (Exception ex)
                 {
