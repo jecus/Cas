@@ -559,7 +559,7 @@ namespace SmartCore.WorkPackages
 			workPackage.MaxClosingDate = DateTime.Today;
 			workPackage.MinClosingDate = workPackage.Aircraft != null ? workPackage.Aircraft.ManufactureDate : DateTimeExtend.GetCASMinDateTime();
 
-			if (workPackage.Status == WorkPackageStatus.Opened)
+			if (workPackage.Status != WorkPackageStatus.Closed)
 			{
 				var directives = new List<IMtopCalc>();
 				directives.AddRange(workPackage.AdStatus.ToList());

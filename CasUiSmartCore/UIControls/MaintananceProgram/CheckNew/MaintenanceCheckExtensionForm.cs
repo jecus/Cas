@@ -327,7 +327,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 				ParentTypeId = _currentAircraft.SmartCoreObjectType.ItemId,
 				DocType = DocumentType.Permission,
 				DocumentSubType = docSubType,
-				IsClosed = true,
+				IsClosed = false,
 				ContractNumber = $"",
 				Description = "",
 				ParentAircraftId = _currentAircraft.ItemId,
