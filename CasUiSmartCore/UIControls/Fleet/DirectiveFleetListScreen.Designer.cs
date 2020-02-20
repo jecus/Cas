@@ -38,6 +38,7 @@ namespace CAS.UI.UIControls.Fleet
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.buttonImportExcel = new AvControls.AvButtonT.AvButtonT();
 			this.pictureBoxS3 = new System.Windows.Forms.PictureBox();
+			this.pictureBoxSeparatorAD = new System.Windows.Forms.PictureBox();
 			this.labelFilter = new System.Windows.Forms.Label();
 			this.labelFilterParagraph = new System.Windows.Forms.Label();
 			this.buttonApplyFilter = new AvControls.AvButtonT.AvButtonT();
@@ -46,10 +47,12 @@ namespace CAS.UI.UIControls.Fleet
 			this.TextBoxFilter = new System.Windows.Forms.TextBox();
 			this.TextBoxFilterParagraph = new System.Windows.Forms.TextBox();
 			this.buttonFilter = new System.Windows.Forms.Button();
+			this.buttonAddAD = new AvControls.AvButtonT.AvButtonT();
 			this.headerControl.SuspendLayout();
 			this.flowLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxS3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxS2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSeparatorAD)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -82,6 +85,8 @@ namespace CAS.UI.UIControls.Fleet
 			this.flowLayoutPanel1.Controls.Add(this.pictureBoxS2);
 			this.flowLayoutPanel1.Controls.Add(this.buttonImportExcel);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBox2);
+			this.flowLayoutPanel1.Controls.Add(this.buttonAddAD);
+			this.flowLayoutPanel1.Controls.Add(this.pictureBoxSeparatorAD);
 			this.flowLayoutPanel1.Controls.Add(this.buttonApplyFilter);
 			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
@@ -142,6 +147,17 @@ namespace CAS.UI.UIControls.Fleet
 			this.pictureBoxS2.TabIndex = 20;
 			this.pictureBoxS2.TabStop = false;
 			// 
+			// pictureBoxSeparatorAD
+			// 
+			this.pictureBoxSeparatorAD.BackgroundImage = global::CAS.UI.Properties.Resources.SeparatorLine1;
+			this.pictureBoxSeparatorAD.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.pictureBoxSeparatorAD.Location = new System.Drawing.Point(121, 3);
+			this.pictureBoxSeparatorAD.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+			this.pictureBoxSeparatorAD.Name = "pictureBoxSeparatorAD";
+			this.pictureBoxSeparatorAD.Size = new System.Drawing.Size(5, 57);
+			this.pictureBoxSeparatorAD.TabIndex = 24;
+			this.pictureBoxSeparatorAD.TabStop = false;
+			// 
 			// buttonImportExcel
 			// 
 			this.buttonImportExcel.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
@@ -169,6 +185,30 @@ namespace CAS.UI.UIControls.Fleet
 			this.buttonImportExcel.TextSecondary = "";
 			this.buttonImportExcel.ToolTipText = "Import From Excel";
 			this.buttonImportExcel.Click += new System.EventHandler(this.ButtonImportFromExcelClick);
+			// 
+			// buttonAddAD
+			// 
+			this.buttonAddAD.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+			this.buttonAddAD.ActiveBackgroundImage = null;
+			this.buttonAddAD.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonAddAD.FontMain = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonAddAD.FontSecondary = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonAddAD.ForeColorMain = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
+			this.buttonAddAD.ForeColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(82)))), ((int)(((byte)(128)))));
+			this.buttonAddAD.Icon = global::CAS.UI.Properties.Resources.AddIcon;
+			this.buttonAddAD.IconLayout = System.Windows.Forms.ImageLayout.Center;
+			this.buttonAddAD.IconNotEnabled = global::CAS.UI.Properties.Resources.AddIcon_gray;
+			this.buttonAddAD.Location = new System.Drawing.Point(66, 0);
+			this.buttonAddAD.Name = "buttonAddDocument";
+			this.buttonAddAD.NormalBackgroundImage = null;
+			this.buttonAddAD.ShowToolTip = true;
+			this.buttonAddAD.Size = new System.Drawing.Size(52, 57);
+			this.buttonAddAD.TabIndex = 0;
+			this.buttonAddAD.TextMain = "";
+			this.buttonAddAD.TextSecondary = "";
+			this.buttonAddAD.ToolTipText = "Add new";
+			this.buttonAddAD.Click += new System.EventHandler(this.ButtonAddADClick);
+			this.buttonAddAD.Enabled = !(userType == UsetType.ReadOnly);
 			// 
 			// pictureBoxS3
 			// 
@@ -316,6 +356,7 @@ namespace CAS.UI.UIControls.Fleet
 			this.headerControl.PerformLayout();
 			this.flowLayoutPanel1.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxS2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSeparatorAD)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -338,5 +379,7 @@ namespace CAS.UI.UIControls.Fleet
 		private System.Windows.Forms.Button buttonFilter;
 		private System.Windows.Forms.Label labelFilter;
 		private System.Windows.Forms.Label labelFilterParagraph;
+		private System.Windows.Forms.PictureBox pictureBoxSeparatorAD;
+		private AvControls.AvButtonT.AvButtonT buttonAddAD;
 	}
 }

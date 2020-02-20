@@ -12,6 +12,7 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.DirectivesControls;
 using CAS.UI.UIControls.FiltersControls;
+using CAS.UI.UIControls.Users;
 using CASTerms;
 using EntityCore.DTO.General;
 using SmartCore.Calculations;
@@ -643,7 +644,7 @@ namespace CAS.UI.UIControls.Fleet
 		}
 		#endregion
 
-		#endregion
+		#region private void ButtonFilterClick(object sender, EventArgs e)
 
 		private void ButtonFilterClick(object sender, EventArgs e)
 		{
@@ -651,6 +652,17 @@ namespace CAS.UI.UIControls.Fleet
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
 			AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
 			AnimatedThreadWorker.RunWorkerAsync();
+		}
+
+		#endregion
+
+		#endregion
+		
+
+		private void ButtonAddADClick(object sender, EventArgs e)
+		{
+			var form = new CopyADToAircraftForm();
+			form.ShowDialog();
 		}
 	}
 }

@@ -817,6 +817,12 @@
     <Compile Include="UIControls\Fleet\ComponentsFleetListView.Designer.cs">
       <DependentUpon>ComponentsFleetListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\Fleet\CopyADToAircraftForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\Fleet\CopyADToAircraftForm.Designer.cs">
+      <DependentUpon>CopyADToAircraftForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\Fleet\DirectiveFleetListScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -3976,6 +3982,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\Fleet\ComponentsFleetListView.resx">
       <DependentUpon>ComponentsFleetListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Fleet\CopyADToAircraftForm.resx">
+      <DependentUpon>CopyADToAircraftForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\Fleet\DirectiveFleetListScreen.resx">
       <DependentUpon>DirectiveFleetListScreen.cs</DependentUpon>
