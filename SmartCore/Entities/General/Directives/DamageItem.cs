@@ -257,6 +257,7 @@ namespace SmartCore.Entities.General.Directives
             DirectiveType = DirectiveType.DamagesRequiring;
             DamageMeasure = Measure.Millimeters;
             DamageType = DamageType.Damage;
+            DamageClass = DamageClass.Unknown;
         }
 
         #endregion
