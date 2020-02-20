@@ -234,13 +234,16 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 
 		private void Sort()
 		{
+			var search = textBoxSearch.Text.ToLower();
+
 			var intervals =
 				checkedListBoxItems.CheckedItems.OfType<Lifelength>();
 			_mpdWithInterval = new List<MaintenanceDirective>();
 			_mpdWithInterval
 				.AddRange(_mpdForSelect
 					.Where(mpd => intervals.Any(interval => mpd.Threshold.FirstPerformanceSinceNew != null
-					                                        && mpd.Threshold.FirstPerformanceSinceNew.Equals(interval))));
+					                                        && mpd.Threshold.FirstPerformanceSinceNew.Equals(interval)))
+					.Where(i => i.TaskNumberCheck.ToLower().Contains(search) || i.TaskCardNumber.ToLower().Contains(search)));
 			listViewTasksForSelect.SetItemsArray(_mpdWithInterval.ToArray());
 		}
 		#endregion
@@ -277,6 +280,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 					GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(_mpdWithInterval.Cast<BaseEntityObject>().ToList());
 				Sort();
 				numericUpDownExtension.Value = 0;
+				textBoxSearch.Text = "";
 				//_animatedThreadWorker.RunWorkerAsync();
 			}
 		}
@@ -308,21 +312,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 
 		private void TextBoxSearch_TextChanged(object sender, System.EventArgs e)
 		{
-			var search = textBoxSearch.Text.ToLower();
-			if(string.IsNullOrEmpty(search))
-				return;
-
-			var intervals =
-				checkedListBoxItems.CheckedItems.OfType<Lifelength>();
-			_mpdWithInterval = new List<MaintenanceDirective>();
-			_mpdWithInterval
-				.AddRange(_mpdForSelect
-					.Where(mpd => intervals.Any(interval => mpd.Threshold.FirstPerformanceSinceNew != null
-					                                        && mpd.Threshold.FirstPerformanceSinceNew.Equals(interval)))
-					.Where(i => i.TaskNumberCheck.ToLower().Contains(search) || i.TaskCardNumber.ToLower().Contains(search)));
-
-			listViewTasksForSelect.SetItemsArray(_mpdWithInterval
-				.ToArray());
+			Sort();
 		}
 
 		private void buttonAddDoc_Click(object sender, EventArgs e)
