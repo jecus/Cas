@@ -589,22 +589,25 @@ namespace CAS.UI.UIControls.WorkPakage
             {
                 return;
             }
-            _workPackage.Status = WorkPackageStatus.Closed;
-            _workPackage.ClosingDate = dateTimePickerClosingDate.Value;
-            _workPackage.ClosedBy = GlobalObjects.CasEnvironment.IdentityUser.Login;
-            _workPackage.ClosingRemarks = "";
-
-            if (_workPackage.PublishedBy == "")
-                _workPackage.PublishedBy = GlobalObjects.CasEnvironment.IdentityUser.Login;
-            if (_workPackage.PublishingDate <= _workPackage.OpeningDate)
-                _workPackage.PublishingDate = _workPackage.OpeningDate;
             try
             {
                 
                 SaveData();
 
-                if(dataGridViewItems.Rows.OfType<WorkPackageClosingDataGridViewRow>().All(i => (bool)i.Cells[ColumnClosed.Index].Value))
-	                GlobalObjects.CasEnvironment.NewKeeper.Save(_workPackage);
+                if (dataGridViewItems.Rows.OfType<WorkPackageClosingDataGridViewRow>()
+	                .All(i => (bool) i.Cells[ColumnClosed.Index].Value))
+                {
+	                _workPackage.Status = WorkPackageStatus.Closed;
+	                _workPackage.ClosingDate = dateTimePickerClosingDate.Value;
+	                _workPackage.ClosedBy = GlobalObjects.CasEnvironment.IdentityUser.Login;
+	                _workPackage.ClosingRemarks = "";
+
+	                if (_workPackage.PublishedBy == "")
+		                _workPackage.PublishedBy = GlobalObjects.CasEnvironment.IdentityUser.Login;
+	                if (_workPackage.PublishingDate <= _workPackage.OpeningDate)
+		                _workPackage.PublishingDate = _workPackage.OpeningDate;
+                    GlobalObjects.CasEnvironment.NewKeeper.Save(_workPackage);
+                }
 
             }
             catch (Exception ex)
