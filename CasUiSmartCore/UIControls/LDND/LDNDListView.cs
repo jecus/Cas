@@ -73,6 +73,7 @@ namespace CAS.UI.UIControls.LDND
 			AddColumn("Type", (int)(radGridView1.Width * 0.07f));
 			AddColumn("ATA", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Check", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Extension", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
 		#endregion
@@ -178,6 +179,7 @@ namespace CAS.UI.UIControls.LDND
 			var access = "";
 			var workArea = "";
 			var zone = "";
+			double extension = 0;
 			var description = item.Description;
 			if (item.Parent is Directive directive)
 			{
@@ -208,16 +210,17 @@ namespace CAS.UI.UIControls.LDND
 				access = directive.DirectiveAccess;
 				workArea = directive.Workarea;
 				zone = directive.DirectiveZone;
+				extension = directive.Extension;
 			}
 			else if (item.Parent is MaintenanceDirective d)
 			{
 				if (d.TaskCardNumberFile == null)
 					tcnColor = Color.MediumVioletRed;
 				card = d.TaskCardNumber;
-
 				access = d.Access;
 				workArea = d.Workarea;
 				zone = d.Zone;
+				extension = d.Extension;
 			}
 			else if (item.Parent is ComponentDirective c)
 			{
@@ -230,6 +233,7 @@ namespace CAS.UI.UIControls.LDND
 				access = c.Access;
 				workArea = "";
 				zone = c.Zone;
+				extension = c.Extension;
 			}
 			//Последнее выполнение
 			if (item.Parent.LastPerformance != null &&
@@ -300,6 +304,7 @@ namespace CAS.UI.UIControls.LDND
 			subItems.Add(CreateRow(type.ToString(), type.SmartCoreObjectType));
 			subItems.Add(CreateRow(item.ATAChapter?.ToString(), item.ATAChapter));
 			subItems.Add(CreateRow(item.MaintenanceCheck != null ? item.MaintenanceCheck.ToString() : "", item.MaintenanceCheck));
+			subItems.Add(CreateRow(extension.ToString("F0"), extension));
 			subItems.Add(CreateRow(author, author));
 
 			return subItems;
