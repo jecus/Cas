@@ -270,18 +270,43 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			}
 			else
 			{
-				foreach (var item in _mpdWithInterval)
+
+				var res =  MessageBox.Show(@"If you want save selected task press (Yes) then you save all task in table(No)!",
+					(string)new GlobalTermsProvider()["SystemName"],
+					MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+				if (res == DialogResult.Yes)
 				{
-					var dir = item;
-					dir.Extension = (double)numericUpDownExtension.Value;
-					dir.IsExtension = true;
+					foreach (var item in listViewTasksForSelect.SelectedItems)
+					{
+						var dir = _mpdWithInterval.FirstOrDefault(i => i.ItemId == item.ItemId);
+						dir.Extension = (double)numericUpDownExtension.Value;
+						dir.IsExtension = true;
+					}
+					if (_mpdForSelect.Count > 0)
+						GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(_mpdWithInterval.Cast<BaseEntityObject>().ToList());
 				}
-				if(_mpdForSelect.Count > 0)
-					GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(_mpdWithInterval.Cast<BaseEntityObject>().ToList());
+				else
+				{
+					foreach (var item in _mpdWithInterval)
+					{
+						var dir = item;
+						dir.Extension = (double)numericUpDownExtension.Value;
+						dir.IsExtension = true;
+					}
+					if (_mpdForSelect.Count > 0)
+						GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(_mpdWithInterval.Cast<BaseEntityObject>().ToList());
+				}
+
+				
 				Sort();
 				numericUpDownExtension.Value = 0;
 				textBoxSearch.Text = "";
 				//_animatedThreadWorker.RunWorkerAsync();
+
+				MessageBox.Show(@"Tasks saved successful!",
+					(string)new GlobalTermsProvider()["SystemName"],
+					MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 		}
 
@@ -303,6 +328,10 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			if(list.Count > 0)
 				GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(list.Cast<BaseEntityObject>().ToList());
 			Sort();
+
+			MessageBox.Show(@"Tasks reset successful!",
+				(string)new GlobalTermsProvider()["SystemName"],
+				MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
 		#endregion
