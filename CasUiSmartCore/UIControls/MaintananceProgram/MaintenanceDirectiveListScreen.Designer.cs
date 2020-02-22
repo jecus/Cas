@@ -113,8 +113,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.flowLayoutPanel1.Controls.Add(this.buttonMaintCheck);
 			this.flowLayoutPanel1.Controls.Add(this.pictureBoxSeperatorE);
 			this.flowLayoutPanel1.Controls.Add(this.buttonExtension);
-			this.flowLayoutPanel1.Controls.Add(this.pictureBoxSeperatorD);
 			this.flowLayoutPanel1.Controls.Add(this.buttonDocument);
+			this.flowLayoutPanel1.Controls.Add(this.pictureBoxSeperatorD);
 			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
 			this.flowLayoutPanel1.Location = new System.Drawing.Point(552, 0);
