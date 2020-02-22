@@ -661,8 +661,14 @@ namespace CAS.UI.UIControls.Fleet
 
 		private void ButtonAddADClick(object sender, EventArgs e)
 		{
-			var form = new CopyADToAircraftForm();
-			form.ShowDialog();
+			ReferenceEventArgs refE = new ReferenceEventArgs();
+			refE.TypeOfReflection = ReflectionTypes.DisplayInNew;
+			refE.DisplayerText = "Fleet Directive New";
+			refE.RequestedEntity = new DirectiveScreen(new Directive()
+			{
+				ParentBaseComponent = GlobalObjects.ComponentCore.GetAircraftFrame(GlobalObjects.AircraftsCore.GetAllAircrafts().FirstOrDefault().ItemId)
+			}, true);
+			InvokeDisplayerRequested(refE);
 		}
 	}
 }

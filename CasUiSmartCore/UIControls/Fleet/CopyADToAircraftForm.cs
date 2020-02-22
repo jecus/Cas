@@ -1,24 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
 using MetroFramework.Forms;
+using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General;
+using SmartCore.Entities.General.Directives;
 
 namespace CAS.UI.UIControls.Users
 {
 	public partial class CopyADToAircraftForm : MetroForm
 	{
+		private readonly Directive _directive;
+
 		#region Fields
 
 		
 		#endregion
 
+		public List<Directive> Directives { get; set; }
+		
+
 		#region Constructor
 
-		public CopyADToAircraftForm()
+		public CopyADToAircraftForm(Directive directive)
 		{
+			_directive = directive;
 			InitializeComponent();
 			UpdateInformation();
+			Directives = new List<Directive>();
 		}
 		
 		#endregion
@@ -41,7 +52,17 @@ namespace CAS.UI.UIControls.Users
 
 		private void ApplyChanges()
 		{
-			
+			var aircrafts = checkedListBoxAircraft.CheckedItems.Cast<Aircraft>();
+			var applicability = checkedListBoxApplicability.CheckedItems.Cast<Aircraft>();
+
+			foreach (var aircraft in aircrafts)
+			{
+				var a = aircraft;
+				var newDirective = _directive.GetCopyUnsaved();
+				newDirective.ParentBaseComponent = GlobalObjects.ComponentCore.GetAircraftFrame(a.ItemId);
+				newDirective.IsApplicability = applicability.FirstOrDefault(i => i.ItemId == a.ItemId) != null;
+				Directives.Add(newDirective);
+			}
 		}
 
 		#endregion

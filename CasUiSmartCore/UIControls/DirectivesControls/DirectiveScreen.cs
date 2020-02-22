@@ -6,6 +6,7 @@ using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Events;
+using CAS.UI.UIControls.Users;
 using CASReports.Builders;
 using CASTerms;
 using SmartCore.Entities.Dictionaries;
@@ -24,6 +25,7 @@ namespace CAS.UI.UIControls.DirectivesControls
         private bool _needReload;
 
         private Directive _currentDirective;
+        private readonly bool _isFleet;
         private BaseComponent _currentBaseComponent;
         private ContextMenuStrip buttonPrintMenuStrip;
         private ToolStripMenuItem itemPrintReportRecords;
@@ -71,16 +73,19 @@ namespace CAS.UI.UIControls.DirectivesControls
 
         #region public DirectiveScreen(Directive directive) : this ()
 
-        ///<summary>
-        /// Создает страницу для отображения информации об одной директиве
-        ///</summary>
-        /// <param name="directive">Директива</param>
-        public DirectiveScreen(Directive directive) : this ()
+        /// <summary>
+        ///  Создает страницу для отображения информации об одной директиве
+        /// </summary>
+        ///  <param name="directive">Директива</param>
+        /// <param name="isFleet"></param>
+        public DirectiveScreen(Directive directive, bool isFleet = false) : this ()
         {
+	        this.headerControl.ShowSaveButton = !isFleet;
             if (directive == null)
                 throw new ArgumentNullException("directive", "Argument cannot be null");
 
             _currentDirective = directive;
+            _isFleet = isFleet;
             _directiveType = directive.DirectiveType;
 
             Initialize();
@@ -362,6 +367,25 @@ namespace CAS.UI.UIControls.DirectivesControls
             return true;
         }
 
+
+        private bool SaveData(Directive dir)
+        {
+	        //Не менять функции местами - сбивается Threshold
+	        _performanceControl.ApplyChanges(dir);
+	        _directiveGeneralInformation.ApplyChanges(dir, false);
+
+	        try
+	        {
+		        GlobalObjects.DirectiveCore.Save(dir);
+	        }
+	        catch (Exception ex)
+	        {
+		        Program.Provider.Logger.Log("Error while saving data", ex);
+		        return false;
+	        }
+	        return true;
+        }
+
         #endregion
 
         #region private void ClearFields()
@@ -524,18 +548,20 @@ namespace CAS.UI.UIControls.DirectivesControls
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             if (GetChangeStatus())
             {
-                if (SaveData())
-                {
-                    MessageBox.Show("Saving was successful", "Message infomation", MessageBoxButtons.OK,
-                                     MessageBoxIcon.Information);
+	            if (SaveData())
+	            {
+		            MessageBox.Show("Saving was successful", "Message infomation", MessageBoxButtons.OK,
+			            MessageBoxIcon.Information);
 
-                    _needReload = false;
+		            _needReload = false;
 
-                    CancelAsync();
-                    AnimatedThreadWorker.RunWorkerAsync();
-                }
+		            CancelAsync();
+		            AnimatedThreadWorker.RunWorkerAsync();
+	            }
+
             }
             else
             {
@@ -557,10 +583,24 @@ namespace CAS.UI.UIControls.DirectivesControls
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (GetChangeStatus())
+
+            if (_isFleet)
             {
-                SaveData(false);
+	            var form = new CopyADToAircraftForm(_currentDirective);
+	            form.ShowDialog();
+	            foreach (var directive in form.Directives)
+	            {
+		            if (GetChangeStatus())
+			            SaveData(directive);
+                }
             }
+            else
+            {
+	            if (GetChangeStatus())
+		            SaveData(false);
+            }
+
+            
 
             if (MessageBox.Show("Directive added successfully" + "\nClear Fields before add new directive?",
                                        new GlobalTermsProvider()["SystemName"].ToString(),
