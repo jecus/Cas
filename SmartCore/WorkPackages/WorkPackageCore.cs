@@ -562,13 +562,11 @@ namespace SmartCore.WorkPackages
 			if (workPackage.Status != WorkPackageStatus.Closed)
 			{
 				var directives = new List<IMtopCalc>();
-				directives.AddRange(workPackage.AdStatus.ToList());
-				directives.AddRange(workPackage.SbStatus.ToList());
-				directives.AddRange(workPackage.EoStatus.ToList());
-				directives.AddRange(workPackage.Components.ToList());
-				directives.AddRange(workPackage.BaseComponents.ToList());
-				directives.AddRange(workPackage.ComponentDirectives.ToList());
-				directives.AddRange(workPackage.MaintenanceDirectives.ToList());
+				directives.AddRange(workPackage.WorkPakageRecords
+					.Where(i => !i.IsClosed && i.Task is IMtopCalc)
+					.Select(i => i.Task)
+					.Cast<IMtopCalc>()
+					.ToList());
 
 				_mtopCalculator.CalculateDirectiveNew(directives);
 			}
