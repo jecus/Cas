@@ -537,6 +537,7 @@ namespace SmartCore.Entities.Dictionaries
 	/// <summary>
 	/// Статус (состояние) рабочего пакета
 	/// </summary>
+	[Flags]
 	public enum WorkPackageStatus : short
     {
         /// <summary>

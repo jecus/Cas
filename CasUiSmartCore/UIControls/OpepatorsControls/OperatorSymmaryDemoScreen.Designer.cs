@@ -107,6 +107,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.LinkPlanningTechnicalLibrary = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkPlanningTechnicalRecords = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this.LinkPlanningWorkPackages = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
+			this.LinkPlanningWorkPackagesLS = new CAS.UI.Management.Dispatchering.ReferenceStatusImageLinkLabel();
 			this._vehicles = new CAS.UI.UIControls.AircraftsControls.VehicleCollectionControl();
 			this.flowLayoutPanelStores = new System.Windows.Forms.FlowLayoutPanel();
 			this._cabinInteriorReferenceContainer = new CAS.UI.UIControls.ReferenceControls.ReferenceLinkLabelCollectionContainer();
@@ -1590,7 +1591,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this._programPlanningAndControlReferenceContainer.ReferenceLink03 = this.LinkPlanningTechnicalLibrary;
 			this._programPlanningAndControlReferenceContainer.ReferenceLink04 = this.LinkPlanningTechnicalRecords;
 			this._programPlanningAndControlReferenceContainer.ReferenceLink05 = this.LinkPlanningWorkPackages;
-			this._programPlanningAndControlReferenceContainer.ReferenceLink06 = null;
+			this._programPlanningAndControlReferenceContainer.ReferenceLink06 = this.LinkPlanningWorkPackagesLS;
 			this._programPlanningAndControlReferenceContainer.ReferenceLink07 = null;
 			this._programPlanningAndControlReferenceContainer.ReferenceLink08 = null;
 			this._programPlanningAndControlReferenceContainer.ReferenceLink09 = null;
@@ -1722,7 +1723,30 @@ namespace CAS.UI.UIControls.OpepatorsControls
 			this.LinkPlanningWorkPackages.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkPlanningWorkPackages.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.LinkPlanningWorkPackages.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkAllWorkPackagesDisplayerRequested);
-
+			// 
+			// LinkPlanningWorkPackagesLS
+			// 
+			this.LinkPlanningWorkPackagesLS.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkPlanningWorkPackagesLS.Displayer = null;
+			this.LinkPlanningWorkPackagesLS.DisplayerText = null;
+			this.LinkPlanningWorkPackagesLS.Entity = null;
+			this.LinkPlanningWorkPackagesLS.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.LinkPlanningWorkPackagesLS.HoveredLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkPlanningWorkPackagesLS.ImageBackColor = System.Drawing.Color.Transparent;
+			this.LinkPlanningWorkPackagesLS.ImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.LinkPlanningWorkPackagesLS.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.LinkPlanningWorkPackagesLS.LinkMouseCapturedColor = System.Drawing.Color.Empty;
+			this.LinkPlanningWorkPackagesLS.Location = new System.Drawing.Point(802, 0);
+			this.LinkPlanningWorkPackagesLS.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.LinkPlanningWorkPackagesLS.Name = "LinkPlanningWorkPackagesLS";
+			this.LinkPlanningWorkPackagesLS.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.LinkPlanningWorkPackagesLS.Size = new System.Drawing.Size(188, 20);
+			this.LinkPlanningWorkPackagesLS.Status = AvControls.Statuses.Satisfactory;
+			this.LinkPlanningWorkPackagesLS.TabIndex = 32;
+			this.LinkPlanningWorkPackagesLS.Text = "Work Packages LS";
+			this.LinkPlanningWorkPackagesLS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.LinkPlanningWorkPackagesLS.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
+			this.LinkPlanningWorkPackagesLS.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkWorkPackageLSDisplayerRequested);
 			// 
 			// _vehicles
 			// 
@@ -2655,6 +2679,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkPlanningTechnicalLibrary;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkPlanningTechnicalRecords;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkPlanningWorkPackages;
+		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkPlanningWorkPackagesLS;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkGroundEquipment;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkPool;
 		private Management.Dispatchering.ReferenceStatusImageLinkLabel LinkITService;

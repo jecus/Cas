@@ -10,6 +10,8 @@ namespace CAS.UI.UIControls.WorkPakage
 	///</summary>
 	public partial class AirFleetWorkPackageListView : BaseGridViewControl<WorkPackage>
 	{
+		private bool _flag;
+
 		#region Fields
 
 		#endregion
@@ -22,6 +24,14 @@ namespace CAS.UI.UIControls.WorkPakage
 		public AirFleetWorkPackageListView()
 		{
 			InitializeComponent();
+		}
+
+		public AirFleetWorkPackageListView(bool flag)
+		{
+			InitializeComponent();
+			_flag = flag;
+			SortDirection = SortDirection.Desc;
+			OldColumnIndex = 6;
 		}
 		#endregion
 
@@ -63,7 +73,7 @@ namespace CAS.UI.UIControls.WorkPakage
 
 		protected override void GroupingItems()
 		{
-			Grouping("Aircraft");
+			Grouping(_flag ? "Station" : "Aircraft");
 		}
 		#endregion
 

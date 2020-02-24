@@ -58,7 +58,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		/// 
 		/// </summary>
 		[TableColumn("Number")]
-		[ListViewData(100f, "WP/WO №", 2)]
+		[ListViewData(100f, "WP/WO №", 3)]
 		[FilterAttribute("WP/WO №", Order = 1)]
 		public String Number { get; set; }
 		#endregion
@@ -69,7 +69,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		/// </summary>
 		[TableColumn("Title")]
 		[FormControl("Title:")]
-		[ListViewData(150f, "Title", 3)]
+		[ListViewData(150f, "Title", 4)]
 		[FilterAttribute("Title", Order = 2)]
 		public String Title { get; set; }
 		#endregion
@@ -80,7 +80,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		/// </summary>
 		[TableColumn("Description")]
 		[FormControl("Description:")]
-		[ListViewData(100, "Description", 4)]
+		[ListViewData(100, "Description", 5)]
 		[FilterAttribute("Description", Order = 3)]
 		public String Description { get; set; }
 		#endregion
@@ -170,7 +170,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		[TableColumn("Status")]
 		[FormControl("Status:", Enabled = false)]
 		[FilterAttribute("Status", Order = 20)]
-		[ListViewData(0.08f, "Status")]
+		[ListViewData(0.10f, "Status", 2)]
 		public WorkPackageStatus Status
 		{
 			get { return _status; }
@@ -208,7 +208,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		/// <summary>
 		/// Представление даты создания рабочего пакета для списка
 		/// </summary>
-		[ListViewData(0.1f, "Create Date", 5)]
+		[ListViewData(0.1f, "Create Date", 6)]
 		public DateTime? ListViewCreateDate
 		{
 			get
@@ -244,7 +244,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		/// <summary>
 		/// Представление даты открытия рабочего пакета для списка
 		/// </summary>
-		[ListViewData(0.1f, "Opening date", 6)]
+		[ListViewData(0.1f, "Opening date", 7)]
 		public DateTime? ListViewOpeningDate
 		{
 			get
@@ -280,7 +280,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		/// <summary>
 		/// Представление даты публикации рабочего пакета для списка
 		/// </summary>
-		[ListViewData(0.1f, "Publishing date", 7)]
+		[ListViewData(0.1f, "Publishing date", 8)]
 		public DateTime? ListViewPublishingDate
 		{
 			get
@@ -305,10 +305,10 @@ namespace SmartCore.Entities.General.WorkPackage
 			set => _perfAfter = value;
 		}
 
-		[ListViewData(0.1f, "Perform Date", 9)]
+		[ListViewData(0.1f, "Perform Date", 10)]
 		public string PerformDate => PerfAfter.PerformDate != DateTimeExtend.GetCASMinDateTime() ?  SmartCore.Auxiliary.Convert.GetDateFormat(PerfAfter.PerformDate) : "";
 
-		[ListViewData(0.1f, "Perform After", 8)]
+		[ListViewData(0.1f, "Perform After", 9)]
 		public string PerformAfterLW => PerfAfter.ToString();
 
 		[TableColumn("WpWorkType")]
@@ -380,7 +380,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		/// <summary>
 		/// Представление даты закрытия рабочего пакета для списка
 		/// </summary>
-		[ListViewData(0.1f, "Closing date", 10)]
+		[ListViewData(0.1f, "Closing date", 11)]
 		public DateTime? ListViewClosingDate
 		{
 			get
