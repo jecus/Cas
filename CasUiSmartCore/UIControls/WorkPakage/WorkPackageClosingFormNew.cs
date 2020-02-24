@@ -536,7 +536,7 @@ namespace CAS.UI.UIControls.WorkPakage
 
                     if (wpr.Task is IMtopCalc mtop)
                     {
-	                    if (mtop.Extension > 0)
+	                    if (mtop.IsExtension)
 	                    {
 		                    mtop.Extension = 0;
 		                    mtop.IsExtension = false;
