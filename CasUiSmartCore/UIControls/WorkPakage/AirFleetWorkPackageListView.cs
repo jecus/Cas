@@ -10,7 +10,7 @@ namespace CAS.UI.UIControls.WorkPakage
 	///</summary>
 	public partial class AirFleetWorkPackageListView : BaseGridViewControl<WorkPackage>
 	{
-		private bool _flag;
+		private readonly bool _flag;
 
 		#region Fields
 

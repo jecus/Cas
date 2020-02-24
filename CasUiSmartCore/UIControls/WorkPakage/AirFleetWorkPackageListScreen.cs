@@ -50,7 +50,7 @@ namespace CAS.UI.UIControls.WorkPakage
 		private RadMenuSeparatorItem _toolStripSeparator2;
 		private List<RadMenuItem> _toolStripMenuItemsWorkPackages;
 		private RadMenuItem _toolStripMenuItemHighlight;
-		private bool _flag;
+		private readonly bool _flag;
 
 		#endregion
 
