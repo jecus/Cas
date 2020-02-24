@@ -1448,11 +1448,12 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			var form = new MaintenanceCheckExtensionForm(CurrentAircraft, _resultDirectiveArray
 				.Where(i => i.Status == DirectiveStatus.Open || i.Status == DirectiveStatus.Repetative));
 			form.ShowDialog();
-			foreach (var row in _directivesViewer.radGridView1.Rows)
-			{
-				var mpd = row.Tag as MaintenanceDirective;
-				row.Cells["Extension"].Value = _resultDirectiveArray.FirstOrDefault(i => i.ItemId == mpd?.ItemId)?.Extension.ToString("F0") ?? "0";
-			}
+			AnimatedThreadWorker.RunWorkerAsync();
+			//foreach (var row in _directivesViewer.radGridView1.Rows)
+			//{
+			//	var mpd = row.Tag as MaintenanceDirective;
+			//	row.Cells["Extension"].Value = _resultDirectiveArray.FirstOrDefault(i => i.ItemId == mpd?.ItemId)?.Extension.ToString("F0") ?? "0";
+			//}
 		}
 
 
