@@ -43,7 +43,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		private RadioButton radio_RepeatWhicheverFirst;
 		private Label labelKitRequired;
 		private GroupBox groupBoxClose;
-		private CheckBox checkBoxClose;
+		public CheckBox checkBoxClose;
 		private Label labelParagraph;
 		private Label labelNDT;
 		private TextBox textBoxParagraph;

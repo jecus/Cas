@@ -61,6 +61,7 @@ namespace CAS.UI.UIControls.Users
 				var newDirective = _directive.GetCopyUnsaved();
 				newDirective.ParentBaseComponent = GlobalObjects.ComponentCore.GetAircraftFrame(a.ItemId);
 				newDirective.IsApplicability = applicability.FirstOrDefault(i => i.ItemId == a.ItemId) != null;
+				newDirective.IsClosed = !newDirective.IsApplicability;
 				Directives.Add(newDirective);
 			}
 		}

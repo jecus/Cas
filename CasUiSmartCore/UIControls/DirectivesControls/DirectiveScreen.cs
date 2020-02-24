@@ -370,8 +370,10 @@ namespace CAS.UI.UIControls.DirectivesControls
 
         private bool SaveData(Directive dir)
         {
-	        //Не менять функции местами - сбивается Threshold
-	        _performanceControl.ApplyChanges(dir);
+            //Не менять функции местами - сбивается Threshold
+            _performanceControl.checkBoxClose.Checked = dir.IsClosed;
+            _performanceControl.ApplyChanges(dir);
+	        _directiveGeneralInformation.checkBoxIsApplicability.Checked = dir.IsApplicability;
 	        _directiveGeneralInformation.ApplyChanges(dir, false);
 
 	        try
@@ -591,7 +593,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 	            foreach (var directive in form.Directives)
 	            {
 		            if (GetChangeStatus())
+		            {
 			            SaveData(directive);
+		            }
                 }
             }
             else
