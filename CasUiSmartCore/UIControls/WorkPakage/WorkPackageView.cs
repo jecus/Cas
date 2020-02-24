@@ -110,9 +110,12 @@ namespace CAS.UI.UIControls.WorkPakage
 		#region protected override void SetItemColor(ListViewItem listViewItem, BaseSmartCoreObject item)
 		protected override void SetItemColor(GridViewRowInfo listViewItem, BaseEntityObject item)
 		{
+			if (_currentWorkPackage.Status == WorkPackageStatus.Closed)
+				return;
+
 			//listViewItem.ToolTipText = GetToolTipString(item);
 
-			if (item is NextPerformance)
+				if (item is NextPerformance)
 			{
 				var nextPerformance = item as NextPerformance;
 
