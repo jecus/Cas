@@ -20,6 +20,7 @@ using SmartCore.Entities.General.Deprecated;
 using SmartCore.Entities.General.Hangar;
 using SmartCore.Entities.General.Store;
 using SmartCore.Entities.General.WorkShop;
+using SmartCore.Files;
 using SmartCore.Management;
 using SmartCore.Queries;
 
@@ -515,7 +516,21 @@ namespace SmartCore.Entities.NewLoader
 
 		public IList<DamageChart> GetDamageChartsByAircraftModel(AircraftModel aircraftModel)
 		{
-			return GetObjectListAll<DamageChartDTO,DamageChart>(new Filter("AircraftModelId", aircraftModel.ItemId),true);
+			var res =  GetObjectListAll<DamageChartDTO,DamageChart>(new Filter("AircraftModelId", aircraftModel.ItemId),true);
+			var ids = res.Select(i => i.ItemId);
+			var links = GetObjectListAll<ItemFileLinkDTO, ItemFileLink>(new List<Filter>()
+			{
+				new Filter("ParentId",ids),
+				new Filter("ParentTypeId",SmartCoreType.DamageChart.ItemId)
+			}, true);
+
+
+			foreach (var damageChart in res)
+			{
+				damageChart.Files.AddRange(links.Where(i => i.ParentId == damageChart.ItemId));
+			}
+
+			return res;
 		}
 		#endregion
 

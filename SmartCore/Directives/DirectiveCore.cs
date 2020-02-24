@@ -358,6 +358,13 @@ namespace SmartCore.Directives
 		{
 			// Дополняем необходимые свойства и сохраняем в базе данных
 			_newKeeper.Save(damageChart);
+			if (damageChart.Files.FirstOrDefault() != null)
+			{
+				var file = damageChart.Files.FirstOrDefault();
+				file.ParentId = damageChart.ItemId;
+				_newKeeper.Save(file);
+			}
+			
 		}
 		#endregion
 
