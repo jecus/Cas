@@ -359,6 +359,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 				IsClosed = false,
 				ContractNumber = $"",
 				Description = "",
+				ProlongationWay = ProlongationWay.Auto,
 				ParentAircraftId = _currentAircraft.ItemId,
 				Department = _departmentPalanning,
 				ResponsibleOccupation = spec
