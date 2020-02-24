@@ -109,7 +109,7 @@ namespace SmartCore.Queries
 
 		public static ICommonFilter GetWhereStatementForAll(string text)
 		{
-			ICommonFilter state = new CommonFilter<string>($"(MaintenanceDirectives.ScheduleItem like '%{text}%' or MaintenanceDirectives.TaskNumberCheck like '%{text}%' or MaintenanceDirectives.TaskCardNumber like '%{text}%' or MaintenanceDirectives.Description like '%{text}%')");
+			ICommonFilter state = new CommonFilter<string>($"(MaintenanceDirectives.TaskNumberCheck like '%{text}%' or MaintenanceDirectives.TaskCardNumber like '%{text}%')");
 			return state;
 		}
 
