@@ -318,7 +318,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		{
 			numericUpDownExtension.Value = 0;
 			var list = new List<MaintenanceDirective>();
-			foreach (var item in _mpdWithInterval.Where(i => i.Extension > 0))
+			foreach (var item in _mpdWithInterval.Where(i => i.Extension > 0 || i.IsExtension))
 			{
 				var dir = item;
 				dir.Extension = (double)numericUpDownExtension.Value;

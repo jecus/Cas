@@ -36,7 +36,7 @@ namespace CAS.UI.UIControls.Users
 
 		#region private void UpdateInformation()
 
-		private void UpdateInformation()
+		private void UpdateInformation()  
 		{
 			var aircraft = GlobalObjects.AircraftsCore.GetAllAircrafts();
 			

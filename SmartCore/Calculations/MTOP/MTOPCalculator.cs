@@ -454,16 +454,24 @@ namespace SmartCore.Calculations.MTOP
 				dict.Add("Cycles", thresh.Cycles.Value / (averageUtilization.Hours / averageUtilization.Cycles));
 
 			var res = Lifelength.Null;
-			if (conditionType == ThresholdConditionType.WhicheverFirst)
+			if (dict.Count == 1)
 			{
-				var min = dict.OrderBy(i => i.Value).FirstOrDefault();
-				res.Days = (int?)(min.Value);
+				res = new Lifelength(thresh);
 			}
 			else
 			{
-				var min = dict.OrderByDescending(i => i.Value).FirstOrDefault();
-				res.Days = (int?)(min.Value);
+				if (conditionType == ThresholdConditionType.WhicheverFirst)
+				{
+					var min = dict.OrderBy(i => i.Value).FirstOrDefault();
+					res.Days = (int?)(min.Value);
+				}
+				else
+				{
+					var min = dict.OrderByDescending(i => i.Value).FirstOrDefault();
+					res.Days = (int?)(min.Value);
+				}
 			}
+			
 
 			return CalculateWithUtilization(res, averageUtilization);
 		}
