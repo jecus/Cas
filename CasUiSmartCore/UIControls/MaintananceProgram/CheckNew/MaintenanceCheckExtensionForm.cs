@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows.Documents;
 using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
@@ -270,35 +271,18 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			}
 			else
 			{
-
-				var res =  MessageBox.Show(@"If you want save selected task press (Yes) then you save all task in table(No)!",
-					(string)new GlobalTermsProvider()["SystemName"],
-					MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-				if (res == DialogResult.Yes)
+				var q = new List<BaseEntityObject>();
+				foreach (var item in listViewTasksForSelect.radGridView1.ChildRows.Select(i => i.Tag).Cast<MaintenanceDirective>())
 				{
-					foreach (var item in listViewTasksForSelect.SelectedItems)
-					{
-						var dir = _mpdWithInterval.FirstOrDefault(i => i.ItemId == item.ItemId);
-						dir.Extension = (double)numericUpDownExtension.Value;
-						dir.IsExtension = true;
-					}
-					if (_mpdForSelect.Count > 0)
-						GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(_mpdWithInterval.Cast<BaseEntityObject>().ToList());
+					var dir = item;
+					dir.Extension = (double)numericUpDownExtension.Value;
+					dir.IsExtension = true;
+					q.Add(item);
 				}
-				else
-				{
-					foreach (var item in _mpdWithInterval)
-					{
-						var dir = item;
-						dir.Extension = (double)numericUpDownExtension.Value;
-						dir.IsExtension = true;
-					}
-					if (_mpdForSelect.Count > 0)
-						GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(_mpdWithInterval.Cast<BaseEntityObject>().ToList());
-				}
+				if (_mpdForSelect.Count > 0)
+					GlobalObjects.CasEnvironment.NewKeeper.BulkUpdate(q);
 
-				
+
 				Sort();
 				numericUpDownExtension.Value = 0;
 				textBoxSearch.Text = "";
@@ -318,7 +302,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 		{
 			numericUpDownExtension.Value = 0;
 			var list = new List<MaintenanceDirective>();
-			foreach (var item in _mpdWithInterval.Where(i => i.Extension > 0 || i.IsExtension))
+			foreach (var item in listViewTasksForSelect.radGridView1.ChildRows.Select(i => i.Tag).Cast<MaintenanceDirective>().Where(i => i.Extension > 0 || i.IsExtension))
 			{
 				var dir = item;
 				dir.Extension = (double)numericUpDownExtension.Value;
