@@ -149,7 +149,7 @@ namespace SmartCore.Entities.General.WorkPackage
 													Cas3WorkPakageRecord.WorkPackageItemType = 14 and 
 													Cas3WorkPakageRecord.WorkPakageId = WorkPackages.ItemId)) WPMH)"
 			)]
-		[ListViewData(85, "MH", 12)]
+		[ListViewData(85, "MH", 13)]
 		public double ManHours { get; set; }
 		#endregion
 
@@ -157,7 +157,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		/// <summary>
 		/// 
 		/// </summary>
-		[ListViewData(0.08f, "Persent", 18)]
+		[ListViewData(0.08f, "Persent", 19)]
 		public double Persent { get; set; }
 		#endregion
 
@@ -343,14 +343,14 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#region public string KMHLW => KMH.ToString("##.##");
 
-		[ListViewData(85, "K for MH", 13)]
+		[ListViewData(85, "K for MH", 14)]
 		public string KMHLW => KMH.ToString("##.##");
 
 		#endregion
 
 		#region public string KMLW => (KMH * ManHours).ToString("##.##");
 
-		[ListViewData(85, "K * MH", 14)]
+		[ListViewData(85, "K * MH", 15)]
 		public string KMLW => (KMH * ManHours).ToString("##.##");
 
 		#endregion
@@ -380,7 +380,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		/// <summary>
 		/// Представление даты закрытия рабочего пакета для списка
 		/// </summary>
-		[ListViewData(0.1f, "Closing date", 11)]
+		[ListViewData(0.1f, "Closing date", 12)]
 		public DateTime? ListViewClosingDate
 		{
 			get
@@ -396,7 +396,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		/// <summary>
 		/// Для закрытого рабочего пакета, возвращает временной интервал, затраченный на исполнение задач в виде строки
 		/// </summary>
-		[ListViewData(100, "Work time", 15)]
+		[ListViewData(100, "Work time", 16)]
 		public String WorkTimeString
 		{
 			get
@@ -454,7 +454,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		/// </summary>
 		[TableColumn("Remarks")]
 		[FormControl("Remarks:")]
-		[ListViewData(0.08f, "Remarks")]
+		[ListViewData(0.12f, "Remark", 11)]
 		public String Remarks { get; set; }
 		#endregion
 
@@ -517,7 +517,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		/// </summary>
 		[TableColumn("Station")]
 		[FormControl("Station:")]
-		[ListViewData(0.08f, "Station", 16)]
+		[ListViewData(0.08f, "Station", 17)]
 		[FilterAttribute("Station", Order = 4)]
 		public String Station { get; set; }
 		#endregion
@@ -534,7 +534,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		/// 
 		/// </summary>
 		[TableColumn("MaintenanceReportNo")]
-		[ListViewData(0.05f, "MRO", 17)]
+		[ListViewData(0.05f, "MRO", 18)]
 		[FormControl("MRO:")]
 		[FilterAttribute("MRO", Order = 10)]
 		public String MaintenanceRepairOrzanization { get; set; }
