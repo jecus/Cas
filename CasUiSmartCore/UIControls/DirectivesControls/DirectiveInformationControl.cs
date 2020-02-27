@@ -525,7 +525,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		/// </summary>
 		/// <param name="directive">Директива</param>
 		/// <param name="changePageName">Менять ли название вкладки</param>
-		public void ApplyChanges(Directive directive, bool changePageName)
+		public void ApplyChanges(Directive directive, bool changePageName, bool ignoreChangeStatus = false)
 		{
 			textboxTitle.Focus();
 			if (directive == null)
@@ -582,30 +582,55 @@ namespace CAS.UI.UIControls.DirectivesControls
 				directive.Applicability = directive.Applicability.Replace("APL", "").TrimStart(); 
 			else directive.Applicability = directive.Applicability.Replace("N/A", "").TrimStart();
 
-
-			if (fileControlSB.GetChangeStatus())
+			if (ignoreChangeStatus)
 			{
+
 				fileControlSB.ApplyChanges();
 				directive.ServiceBulletinFile = fileControlSB.AttachedFile;
-			}
 
-			if (attachedFileControlSTC.GetChangeStatus())
-			{
+
+
 				attachedFileControlSTC.ApplyChanges();
 				directive.STCFile = attachedFileControlSTC.AttachedFile;
-			}
 
-			if (fileControlEO.GetChangeStatus())
-			{
+
+
 				fileControlEO.ApplyChanges();
 				directive.EngineeringOrderFile = fileControlEO.AttachedFile;
-			}
 
-			if (fileControlADNo.GetChangeStatus())
-			{
+
+
 				fileControlADNo.ApplyChanges();
 				directive.ADNoFile = fileControlADNo.AttachedFile;
+
 			}
+			else
+			{
+				if (fileControlSB.GetChangeStatus())
+				{
+					fileControlSB.ApplyChanges();
+					directive.ServiceBulletinFile = fileControlSB.AttachedFile;
+				}
+
+				if (attachedFileControlSTC.GetChangeStatus())
+				{
+					attachedFileControlSTC.ApplyChanges();
+					directive.STCFile = attachedFileControlSTC.AttachedFile;
+				}
+
+				if (fileControlEO.GetChangeStatus())
+				{
+					fileControlEO.ApplyChanges();
+					directive.EngineeringOrderFile = fileControlEO.AttachedFile;
+				}
+
+				if (fileControlADNo.GetChangeStatus())
+				{
+					fileControlADNo.ApplyChanges();
+					directive.ADNoFile = fileControlADNo.AttachedFile;
+				}
+			}
+			
 		}
 		#endregion
 

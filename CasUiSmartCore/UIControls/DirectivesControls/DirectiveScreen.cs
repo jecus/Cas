@@ -374,7 +374,7 @@ namespace CAS.UI.UIControls.DirectivesControls
             _performanceControl.checkBoxClose.Checked = dir.IsClosed;
             _performanceControl.ApplyChanges(dir);
 	        _directiveGeneralInformation.checkBoxIsApplicability.Checked = dir.IsApplicability;
-	        _directiveGeneralInformation.ApplyChanges(dir, false);
+	        _directiveGeneralInformation.ApplyChanges(dir, false, true);
 
 	        try
 	        {
