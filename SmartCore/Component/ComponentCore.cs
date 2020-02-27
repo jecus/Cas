@@ -2065,9 +2065,7 @@ namespace SmartCore.Component
 			var directives = _newLoader.GetObjectList<ComponentDirectiveDTO, ComponentDirective>(new Filter("ComponentId", baseComponentId), true);
 			baseComponent.ComponentDirectives.Clear();
 			foreach (var componentDirective in directives)
-			{
 				componentDirective.ParentComponent = baseComponent;
-			}
 			baseComponent.ComponentDirectives.AddRange(directives);
 
 			// Выставляем обратные ссылки

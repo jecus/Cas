@@ -265,7 +265,7 @@ namespace SmartCore.Calculations.MTOP
 				if (isComponent)
 				{
 					//np.NextLimitC = new Lifelength(directive.LastPerformance.OnLifelength);
-					np.NextLimitC = new Lifelength(_calculator.GetFlightLifelengthOnStartOfDay(component, directive.LastPerformance.RecordDate));
+					np.NextLimitC = new Lifelength(_calculator.GetFlightLifelengthOnEndOfDay(component, directive.LastPerformance.RecordDate));
 
 					//np.LastDataC = new Lifelength(component != null ? _calculator.GetFlightLifelengthOnStartOfDay(component, directive.LastPerformance.RecordDate) :
 					//_calculator.GetFlightLifelengthOnStartOfDay(basecomponent, directive.LastPerformance.RecordDate));

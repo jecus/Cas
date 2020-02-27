@@ -479,10 +479,19 @@ namespace SmartCore.Entities.NewLoader
 			//TODO пересмотреть подход!!!!!!!!!!
 			var bc = GetObjectListAll<BaseComponentDTO, BaseComponent>();
 			var baseComponents = bc.Where(i => i.TransferRecords.OrderBy(t => t.TransferDate).Any(q => q.DestinationObjectId == aircraft.ItemId));
+
+			var baseComponentIds = baseComponents.Select(i => i.ItemId);
+			var directives = GetObjectList<ComponentDirectiveDTO, ComponentDirective>(new Filter("ComponentId", baseComponentIds), true);
 			
+
 			foreach (var baseComponent in baseComponents)
-				foreach (var directive in baseComponent.ComponentDirectives)
-					directive.ParentComponent = baseComponent;
+			{
+				baseComponent.ComponentDirectives.Clear();
+				baseComponent.ComponentDirectives.AddRange(directives.Where(i => i.ComponentId == baseComponent.ItemId));
+				foreach (var componentDirective in baseComponent.ComponentDirectives)
+					componentDirective.ParentComponent = baseComponent;
+				
+			}
 
 			#region Проверка на еквивалентность базовых агрегатов ВС содержащийхся в ядре
 
