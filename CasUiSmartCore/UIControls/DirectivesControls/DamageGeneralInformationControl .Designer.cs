@@ -731,7 +731,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.fileControlSB.BackColor = System.Drawing.Color.Transparent;
 			this.fileControlSB.Description1 = null;
 			this.fileControlSB.Description2 = null;
-			this.fileControlSB.Enabled = false;
 			this.fileControlSB.Filter = null;
 			this.fileControlSB.Icon = global::CAS.UI.Properties.Resources.PDFIconSmall;
 			this.fileControlSB.IconNotEnabled = global::CAS.UI.Properties.Resources.PDFIconSmall_gray;
