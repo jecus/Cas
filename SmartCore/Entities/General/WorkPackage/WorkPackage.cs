@@ -624,8 +624,8 @@ namespace SmartCore.Entities.General.WorkPackage
 
 				if (Aircraft != null)
 					res = Aircraft + " ";
-				if (AircraftCurrentLifelenght != null)
-					res += AircraftCurrentLifelenght.ToString();
+				//if (AircraftCurrentLifelenght != null)
+				//	res += AircraftCurrentLifelenght.ToString();
 				return res;
 			}
 		}
