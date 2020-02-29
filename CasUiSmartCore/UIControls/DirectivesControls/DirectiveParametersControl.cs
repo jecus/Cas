@@ -117,6 +117,16 @@ namespace CAS.UI.UIControls.DirectivesControls
 			
 		}
 
+		public void HideControls()
+		{
+			labelAffectedBy.Visible = false;
+			labelAffects.Visible = false;
+			labelReason.Visible = false;
+			comboBoxAffects.Visible = false;
+			comboBoxReason.Visible = false;
+			textBoxAffectedBy.Visible = false;
+		}
+
 		private void Completed()
 		{
 			comboBoxOrder.Items.Clear();

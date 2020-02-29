@@ -198,6 +198,9 @@ namespace CAS.UI.UIControls.DirectivesControls
                 headerControl.SaveButtonToolTipText = "Save";
             }
 
+            if (_directiveType == DirectiveType.DeferredItems)
+	            _performanceControl.HideControls();
+
             statusControl.ConditionState = _currentDirective.Condition;
 
             extendableRichContainerSummary.LabelCaption.Text = "Summary " + _currentDirective.Title
