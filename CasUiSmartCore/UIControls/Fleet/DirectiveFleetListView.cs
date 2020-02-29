@@ -96,7 +96,6 @@ namespace CAS.UI.UIControls.Fleet
 					  DirectiveType.EngineeringOrders
 						? "AD No"
 						: "", (int)(radGridView1.Width * 0.24f));
-			AddColumn("EOFile №", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Applicabilty", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.24f));
 			AddColumn("1st. Perf.", (int)(radGridView1.Width * 0.24f));
@@ -272,7 +271,6 @@ namespace CAS.UI.UIControls.Fleet
 			subItems.Add(CreateRow(s1, s1, c1));
 			subItems.Add(CreateRow(s2, s2, c2));
 			subItems.Add(CreateRow(s3, s3, c3));
-			subItems.Add(CreateRow(item.EOFileName, item.EOFileName));
 			subItems.Add(CreateRow(applicabilityString, applicabilityString));
 			subItems.Add(CreateRow(descriptionString, descriptionString));
 			subItems.Add(CreateRow($"{firstPerformanceString} {condition}", firstPerformanceString));
