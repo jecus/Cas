@@ -43,7 +43,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		private RadioButton radio_RepeatWhicheverFirst;
 		private Label labelKitRequired;
 		private GroupBox groupBoxClose;
-		private CheckBox checkBoxClose;
+		public CheckBox checkBoxClose;
 		private Label labelParagraph;
 		private Label labelNDT;
 		private TextBox textBoxParagraph;
@@ -115,6 +115,16 @@ namespace CAS.UI.UIControls.DirectivesControls
 			UpdateInformation();
 
 			
+		}
+
+		public void HideControls()
+		{
+			labelAffectedBy.Visible = false;
+			labelAffects.Visible = false;
+			labelReason.Visible = false;
+			comboBoxAffects.Visible = false;
+			comboBoxReason.Visible = false;
+			textBoxAffectedBy.Visible = false;
 		}
 
 		private void Completed()
@@ -1380,7 +1390,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			_effDate = _currentDirective.Threshold.EffectiveDate;
 
 			textBoxParagraph.Text = _currentDirective.Paragraph;
-			GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDirective);
+			//GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDirective);
 
 			imageLinkLabelStatus.Text = "Work type";
 			if (_currentDirective.Condition == ConditionState.NotEstimated)

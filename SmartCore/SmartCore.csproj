@@ -418,8 +418,10 @@
     <Compile Include="Calculations\Maintenance\MaintenanceCheckComplianceGroup.cs" />
     <Compile Include="Calculations\Maintenance\MaintenanceCheckRecordGroup.cs" />
     <Compile Include="Calculations\Maintenance\MaintenanceCheckTypeGroup.cs" />
+    <Compile Include="Calculations\MTOP\IMtopCalc.cs" />
     <Compile Include="Calculations\MTOP\IMTOPCalculator.cs" />
     <Compile Include="Calculations\MTOP\MTOPCalculator.cs" />
+    <Compile Include="Calculations\NewCalculator\NewCalculator.cs" />
     <Compile Include="Calculations\NextPerformance.cs" />
     <Compile Include="Calculations\PerformanceCalculator\IPerformanceCalculator.cs" />
     <Compile Include="Calculations\PerformanceCalculator\PerformanceCalculator.cs" />
@@ -831,6 +833,7 @@
     <Compile Include="Personnel\PersonnelCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApiProvider.cs" />
+    <Compile Include="Providers\CalcProvider.cs" />
     <Compile Include="Purchase\InitionalOrder.cs" />
     <Compile Include="Purchase\InitionalOrderRecord.cs" />
     <Compile Include="Purchase\IORQORRelation.cs" />

@@ -214,21 +214,48 @@ namespace CAS.UI.Helpers
 
 		public void BulkDelete<T>(IEnumerable<T> entity, int? batchSize = null) where T : BaseEntity
 		{
-			_httpClient.SendJsonAsync<IEnumerable<T>>(HttpMethod.Post, $"{typeof(T).Name.Replace("DTO", "").ToLower()}/bulkdelete", entity);
+			if (batchSize == null)
+				batchSize = 100;
+
+			for (int i = 0; i < entity.Count(); i = i + batchSize.Value)
+			{
+				var bulk = entity.Skip(i).Take(batchSize.Value).Select(q => q); //Не красиво но не хочу дублироваьб метод можно пока так
+				_httpClient.SendJsonAsync<IEnumerable<T>>(HttpMethod.Post, $"{typeof(T).Name.Replace("DTO", "").ToLower()}/bulkdelete", bulk);
+			}
 		}
 
 		public void BulkUpdate<T>(IEnumerable<T> entity, int? batchSize = null) where T : BaseEntity
 		{
-			_httpClient.SendJsonAsync<IEnumerable<T>>(HttpMethod.Post,
-				$"{typeof(T).Name.Replace("DTO", "").ToLower()}/bulkupdate", entity);
+			if (batchSize == null)
+				batchSize = 100;
+
+			for (int i = 0; i < entity.Count(); i = i + batchSize.Value)
+			{
+				var bulk = entity.Skip(i).Take(batchSize.Value).Select(q => q); //Не красиво но не хочу дублироваьб метод можно пока так
+				_httpClient.SendJsonAsync<IEnumerable<T>>(HttpMethod.Post,
+					$"{typeof(T).Name.Replace("DTO", "").ToLower()}/bulkupdate", bulk);
+			}
+
+			
 		}
 
 		public Dictionary<string, int> BulkInsert<T>(IEnumerable<T> entity, int? batchSize = null) where T : BaseEntity
 		{
-			var res =_httpClient.SendJsonAsync<IEnumerable<T>, Dictionary<string,int>>(HttpMethod.Post,
-				$"{typeof(T).Name.Replace("DTO", "").ToLower()}/bulkinsert", entity);
+			if (batchSize == null)
+				batchSize = 100;
+			var res = new Dictionary<string, int>();
 
-			return res?.Data ?? new Dictionary<string, int>();
+			for (int i = 0; i < entity.Count(); i = i + batchSize.Value)
+			{
+				var bulk = entity.Skip(i).Take(batchSize.Value)
+					.Select(q => q); //Не красиво но не хочу дублироваьб метод можно пока так
+				var r = _httpClient.SendJsonAsync<IEnumerable<T>, Dictionary<string, int>>(HttpMethod.Post,
+					$"{typeof(T).Name.Replace("DTO", "").ToLower()}/bulkinsert", bulk);
+
+				foreach (var inserted in r.Data)
+					res.Add(inserted.Key, inserted.Value);
+			}
+			return res;
 		}
 
 		#endregion

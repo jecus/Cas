@@ -71,7 +71,8 @@ namespace SmartCore.Queries
 		/// </summary>
 		public static String GetUpdateQuery() 
 		{
- 				return " Set dateformat dmy; Update [dbo].CorrectiveActions Set IsDeleted = @IsDeleted, DiscrepancyID = @DiscrepancyID, Description = @Description, ShortDescription = @ShortDescription, ADDNo = @ADDNo, IsClosed = @IsClosed, PartNumberOff = @PartNumberOff, SerialNumberOff = @SerialNumberOff, PartNumberOn = @PartNumberOn, SerialNumberOn = @SerialNumberOn, CRSID = @CRSID  "+ String.Format("Where {0} = @{1}", ItemIdName, ItemIdName); 
+ 				return " Set dateformat dmy; Update [dbo].CorrectiveActions Set IsDeleted = @IsDeleted, DiscrepancyID = @DiscrepancyID, Description = @Description, ShortDescription = @ShortDescription, ADDNo = @ADDNo, IsClosed = @IsClosed, PartNumberOff = @PartNumberOff, SerialNumberOff = @SerialNumberOff, PartNumberOn = @PartNumberOn, SerialNumberOn = @SerialNumberOn, CRSID = @CRSID  "+
+                       $"Where {ItemIdName} = @{ItemIdName}"; 
 		}
 		
 		#endregion

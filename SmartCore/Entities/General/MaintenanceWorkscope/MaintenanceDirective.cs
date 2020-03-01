@@ -6,6 +6,7 @@ using EntityCore.DTO.General;
 using SmartCore.Auxiliary;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Calculations;
+using SmartCore.Calculations.MTOP;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
@@ -27,7 +28,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 	[Condition("IsDeleted", "0")]
 	[Serializable]
 	public class MaintenanceDirective : BaseEntityObject, IEngineeringDirective, IKitRequired,
-		IComparable<MaintenanceDirective>, IEquatable<MaintenanceDirective>, IFileContainer, IBindedItem, IWorkPackageItemFilterParams, IMaintenanceDirectiveFilterParams
+		IComparable<MaintenanceDirective>, IEquatable<MaintenanceDirective>, IFileContainer, IBindedItem, IWorkPackageItemFilterParams, IMtopFilterParams, IMtopCalc
 	{
 		private static Type _thisType;
 		/*
@@ -579,6 +580,11 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 
 		#endregion
 
+		[TableColumn("IsExtension")]
+		public bool IsExtension { get; set; }
+		[TableColumn("Extension")]
+		public double Extension { get; set; }
+
 		#region public CommonCollection<ItemFileLink> Files { get; set; }
 
 		private CommonCollection<ItemFileLink> _files;
@@ -895,7 +901,6 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 
 		#endregion
 
-		public List<NextPerformance> MtopNextPerformances { get; set; }
 
 		#region public NextPerformance NextPerformance { get; }
 
@@ -1137,7 +1142,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		public string KitParentString
 		{
 			//get { return string.Format("MPD.:{0}:{1}:{2}", TaskNumberCheck, MPDTaskNumber, Description); }
-			get { return string.Format("MPD.:{0}", TaskCardNumber); }
+			get { return $"MPD.:{TaskCardNumber}"; }
 		}
 
 		#endregion
@@ -1345,11 +1350,16 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 
 		#endregion
 
+		#region Implement of IMtopCalc
+
 		public Lifelength PhaseThresh { get; set; }
 		public Lifelength PhaseRepeat { get; set; }
-
+		public int ParentAircraftId => ParentBaseComponent?.ParentAircraftId ?? -1;
+		public List<NextPerformance> MtopNextPerformances { get; set; }
 		public Phase MTOPPhase { get; set; }
 		public bool RecalculateTenPercent { get; set; }
+		#endregion
+
 
 		public string CompnentPN { get; set; }
 		public string CompnentSN { get; set; }

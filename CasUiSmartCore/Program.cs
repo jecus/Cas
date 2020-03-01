@@ -110,7 +110,7 @@ namespace CAS.UI
 			var aircraftFlightService = new AircraftFlightCore(environment, environment.Loader, environment.NewLoader, directiveService, environment.Manipulator, compontntService, environment.NewKeeper,aircraftService);
 			var flightTrackService = new FlightTrackCore(environment.NewLoader, environment.Loader, environment);
 			var calculator = new Calculator(environment,compontntService, aircraftFlightService, aircraftService);
-	        var mtopCalculator = new MTOPCalculator(calculator, aircraftService);
+	        var mtopCalculator = new MTOPCalculator(calculator, aircraftService, averageUtilizationService);
 			var planOpsCalculator = new PlanOpsCalculator(environment.NewLoader, environment.NewKeeper, aircraftService,flightTrackService);
 			var performanceCalculator = new PerformanceCalculator(calculator, averageUtilizationService, mtopCalculator);
 			var packageService = new PackagesCore(environment, environment.NewKeeper, environment.Loader, aircraftService, compontntService);

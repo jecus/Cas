@@ -20,6 +20,7 @@ using CASReports.Builders;
 using CASTerms;
 using EntityCore.DTO.General;
 using SmartCore.Calculations;
+using SmartCore.Entities;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -409,6 +410,10 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 			_directivesViewer.SetItemsArray(_resultDirectiveArray.ToArray());
 
+			var eoCol = _directivesViewer.radGridView1.Columns["EOFile №"];
+			if (eoCol != null)
+				eoCol.IsVisible = false;
+
 			var resultList = new List<Directive>();
 			var list = _directivesViewer.radGridView1.Rows.Select(i => i).ToList();
 			list.Sort(new DirectiveGridViewDataRowInfoComparer(0, -1));
@@ -441,6 +446,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 					if (DirectiveSource is BaseComponent)
 					{
 						BaseComponent bd = (BaseComponent) DirectiveSource;
+
+						GlobalObjects.ComponentCore.ReloadActualStateRecordForBaseComponents(bd.ParentAircraftId);
+
 						if (_currentPrimaryDirectiveType == DirectiveType.DamagesRequiring)
 							_initialDirectiveArray = GlobalObjects.DirectiveCore.GetDamageItems(bd);
 						else if (_currentPrimaryDirectiveType == DirectiveType.DeferredItems)
@@ -450,6 +458,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 					else
 					{
 						Aircraft a = (Aircraft) DirectiveSource;
+
+						GlobalObjects.ComponentCore.ReloadActualStateRecordForBaseComponents(a.ItemId);
+
 						if (_currentPrimaryDirectiveType == DirectiveType.DamagesRequiring)
 							_initialDirectiveArray = GlobalObjects.DirectiveCore.GetDamageItems(null, a);
 						else if (_currentPrimaryDirectiveType == DirectiveType.DeferredItems)
@@ -466,6 +477,17 @@ namespace CAS.UI.UIControls.DirectivesControls
 					foreach (Directive directive in dirC)
 						_initialDirectiveArray.Add(directive);
 				}
+
+
+				var ids = _initialDirectiveArray.Select(i => i.ItemId);
+				var sbFiles = GlobalObjects.DirectiveCore.GetFilesName(ids, FileLinkType.EOFile);
+				foreach (var file in sbFiles)
+				{
+					var find = _initialDirectiveArray.FirstOrDefault(i => i.ItemId == file.Key);
+					if (find != null)
+						find.EOFileName = file.Value;
+				}
+
 			}
 			catch (Exception ex)
 			{
@@ -485,10 +507,13 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 			AnimatedThreadWorker.ReportProgress(60, "calculation of directives");
 
+			//foreach (Directive pd in _initialDirectiveArray)
+			//{
+			//	GlobalObjects.PerformanceCalculator.GetNextPerformance(pd);
+			//}
+
 			foreach (Directive pd in _initialDirectiveArray)
-			{
-				GlobalObjects.PerformanceCalculator.GetNextPerformance(pd);
-			}
+				GlobalObjects.MTOPCalculator.CalculateDirectiveNew(pd);
 
 			AnimatedThreadWorker.ReportProgress(70, "filter directives");
 
@@ -940,7 +965,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			catch (Exception ex)
 			{
 				string errorDescriptionSctring =
-					string.Format("Error while Open Attached File for {0}, id {1}. \nFileId {2}", dir, dir.ItemId, attachedFile.ItemId);
+					$"Error while Open Attached File for {dir}, id {dir.ItemId}. \nFileId {attachedFile.ItemId}";
 				Program.Provider.Logger.Log(errorDescriptionSctring, ex);
 			}
 		}
@@ -1577,9 +1602,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 								else
 								{
 									labelDateAsOf.Text =
-										string.Format("Forecast: {0}. {1}",
-													   main.CheckName,
-													   main.NextPerformance);
+										$"Forecast: {main.CheckName}. {main.NextPerformance}";
 								}
 							}
 						}
@@ -1644,5 +1667,18 @@ namespace CAS.UI.UIControls.DirectivesControls
 		#endregion
 		
 		#endregion
+
+		private void CheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			var a = new[] {"AD No", "EO No", "EOFile №"};
+			var b= new[] {"EOFile №"};
+			foreach (var column in _directivesViewer.radGridView1.Columns)
+			{
+				if(checkBoxAll.Checked)
+					column.IsVisible = a.Contains(column.Name);
+				else
+					column.IsVisible = !b.Contains(column.Name) ;
+			}
+		}
 	}
 }

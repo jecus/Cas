@@ -18,6 +18,7 @@ using CAS.UI.UIControls.DirectivesControls;
 using CAS.UI.UIControls.Discrepancies;
 using CAS.UI.UIControls.DocumentationControls;
 using CAS.UI.UIControls.ForecastControls;
+using CAS.UI.UIControls.LDND;
 using CAS.UI.UIControls.MaintananceProgram;
 using CAS.UI.UIControls.MonthlyUtilizationsControls;
 using CAS.UI.UIControls.MTOP;
@@ -122,11 +123,11 @@ namespace CAS.UI.UIControls.AircraftsControls
 			GlobalObjects.AircraftFlightsCore.LoadAircraftFlights(CurrentAircraft.ItemId);
 			GlobalObjects.CasEnvironment.Calculator.ResetMath(CurrentAircraft);
 
-			if (AnimatedThreadWorker.CancellationPending)
-			{
-				e.Cancel = true;
-				return;
-			}
+			//if (AnimatedThreadWorker.CancellationPending)
+			//{
+			//	e.Cancel = true;
+			//	return;
+			//}
 			//TODO:(Evgenii Babak) Переименовать Detail в Component
 			AnimatedThreadWorker.ReportProgress(6, "Check Base Details");
 			GetBaseComponents(AnimatedThreadWorker);
@@ -1895,6 +1896,15 @@ namespace CAS.UI.UIControls.AircraftsControls
 			e.DisplayerText = CurrentAircraft.RegistrationNumber + ". MTOP";
 			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
 			e.RequestedEntity = new MTOPScreen(CurrentAircraft);
+		}
+
+		private void LinkLinkLDNDDisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			CancelAsync();
+
+			e.DisplayerText = CurrentAircraft.RegistrationNumber + ". LDND";
+			e.TypeOfReflection = ReflectionTypes.DisplayInNew;
+			e.RequestedEntity = new LDNDListScreen(CurrentAircraft);
 		}
 
 		#region private void LinkMaintenanceProgramDirectivesDisplayerRequested(object sender, Interfaces.ReferenceEventArgs e)

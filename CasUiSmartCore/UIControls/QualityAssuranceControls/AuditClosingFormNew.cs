@@ -200,10 +200,7 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 					if (tr == null)
 					{
 						message =
-						string.Format("Performance for:" +
-									  "\n{0} " +
-									  "\nin not transfer record",
-									  row.ClosingItem);
+							"Performance for:" + $"\n{row.ClosingItem} " + "\nin not transfer record";
 						message += "\nAbort operation";
 						MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
 										MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -767,12 +764,12 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 				}
 				else if (!string.IsNullOrEmpty(directive.CheckList) && directive.CheckListFile == null)
 				{
-					taskCardCellValue = string.Format("Not set Check List File. (Check List No {0}.)", directive.CheckList);
+					taskCardCellValue = $"Not set Check List File. (Check List No {directive.CheckList}.)";
 					taskCardCellBackColor = Color.Red;
 				}
 				else if (string.IsNullOrEmpty(directive.CheckList) && directive.CheckListFile != null)
 				{
-					taskCardCellValue = string.Format("Not set Check List name. (File name {0}.)", directive.CheckListFile.FileName);
+					taskCardCellValue = $"Not set Check List name. (File name {directive.CheckListFile.FileName}.)";
 					taskCardCellBackColor = Color.Red;
 				}
 				else taskCardCellValue = directive.CheckList;

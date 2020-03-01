@@ -105,12 +105,12 @@ namespace CAS.UI.UIControls.AnimatedBackgroundWorker
 
             if(_backgroundWorker.IsBusy)
             {
-                _backgroundWorker.CancelAsync();
-                _waitCancelForm = new WaitCancelForm(_backgroundWorker)
-                                      {
-                                          StartPosition = FormStartPosition.CenterScreen
-                                      };
-                _waitCancelForm.ShowDialog();
+	            _backgroundWorker.CancelAsync();
+                //_waitCancelForm = new WaitCancelForm(_backgroundWorker)
+                //                      {
+                //                          StartPosition = FormStartPosition.CenterScreen
+                //                      };
+                //_waitCancelForm.ShowDialog();
 
                 //while (_backgroundWorker.IsBusy)
                 //{

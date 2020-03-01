@@ -71,7 +71,7 @@ namespace SmartCore.Entities.Dictionaries
 		/// <summary>
 		/// 
 		/// </summary>
-		public static SmartCoreType ComponentDirective = new SmartCoreType(2, "DDR", "Component Task", typeof(ComponentDirective));
+		public static SmartCoreType ComponentDirective = new SmartCoreType(2, "Component Task", "COM", typeof(ComponentDirective));
         #endregion
 
         #region public static SmartCoreType MaintenanceCheck = new SmartCoreType(3, "MC", "Maintenance Check", "");
@@ -92,14 +92,14 @@ namespace SmartCore.Entities.Dictionaries
 		/// <summary>
 		/// 
 		/// </summary>
-		public static SmartCoreType Component = new SmartCoreType(5, "D", "Component", typeof(General.Accessory.Component));
+		public static SmartCoreType Component = new SmartCoreType(5, "C", "Component", typeof(General.Accessory.Component));
 		#endregion
 
 		#region public static SmartCoreType BaseComponent = new SmartCoreType(6, "BD", "Base Component", "");
 		/// <summary>
 		/// 
 		/// </summary>
-		public static SmartCoreType BaseComponent = new SmartCoreType(6, "BD", "Base Component", typeof(BaseComponent));
+		public static SmartCoreType BaseComponent = new SmartCoreType(6, "BC", "Base Component", typeof(BaseComponent));
         #endregion
 
         #region public static SmartCoreType Aircraft = new SmartCoreType(7, "AC", "Aircraft");

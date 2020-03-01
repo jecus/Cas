@@ -56,9 +56,18 @@ namespace SmartCore.Documents
 					filters.Add(new Filter("DocTypeId", docType.ItemId));
 
 				var result = _newLoader.GetObjectListAll<DocumentDTO,Document>(filters, true);
+				var resId = result.Select(r => r.ItemId);
+				var links = _newLoader.GetObjectListAll<ItemFileLinkDTO, ItemFileLink>(new List<Filter>()
+				{
+					new Filter("ParentTypeId",SmartCoreType.Document.ItemId),
+					new Filter("ParentId",resId)
+				});
 
 				foreach (Document doc in result)
+				{
 					doc.Parent = parent;
+					doc.HaveFile = links.FirstOrDefault(l => l.ParentId == doc.ItemId) != null;
+				}
 
 				return result.ToList();
 			}
@@ -386,9 +395,11 @@ namespace SmartCore.Documents
 
 		#region public List<Document> GetAircraftDocuments(Aircraft parentAircraft)
 
-		public List<Document> GetAircraftDocuments(Aircraft parentAircraft)
+		public List<Document> GetAircraftDocuments(Aircraft parentAircraft, DocumentType type = null)
 		{
-			return GetDocuments(parentAircraft, DocumentType.Other);
+			if (type == null)
+				type = DocumentType.Other;
+			return GetDocuments(parentAircraft, type);
 		}
 		#endregion
 

@@ -366,7 +366,7 @@ namespace SmartCore.Entities.General.Deprecated
         /// </summary>
         public string KitParentString
         {
-            get { return string.Format("Dir.:{0}:{1}", Title, Description); }
+            get { return $"Dir.:{Title}:{Description}"; }
         }
         #endregion
 

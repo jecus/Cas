@@ -106,7 +106,7 @@ namespace CAS.UI.UIControls.StoresControls
                 tempItem.Status = Statuses.Satisfactory;                                              
                 tempItem.Tag = _itemsollection[i];
                 tempItem.Text = _itemsollection[i].Name;
-                tempItem.DisplayerText = _itemsollection[i].Operator.Name + ". " + _itemsollection[i].Name;
+                tempItem.DisplayerText = _itemsollection[i].Operator?.Name + ". " + _itemsollection[i].Name;
                 tempItem.DisplayerRequested += TempButtonDisplayerRequested;
                                                                   //Font = new Font("Verdana", 14F, FontStyle.Regular, GraphicsUnit.Pixel),
                                                                 

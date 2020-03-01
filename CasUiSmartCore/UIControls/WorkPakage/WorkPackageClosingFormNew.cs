@@ -13,6 +13,7 @@ using EntityCore.Filter;
 using MetroFramework.Forms;
 using SmartCore.Auxiliary;
 using SmartCore.Calculations;
+using SmartCore.Calculations.MTOP;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
@@ -137,6 +138,8 @@ namespace CAS.UI.UIControls.WorkPakage
 
                         WorkPackageClosingDataGridViewRow r = (WorkPackageClosingDataGridViewRow)
                             dataGridViewItems.Rows[dataGridViewItems.Rows.Add(new WorkPackageClosingDataGridViewRow())];
+                        r.Tag = item;
+
                         if (item.Task is MaintenanceCheck && 
                             item.Task.NextPerformances.OfType<MaintenanceNextPerformance>().Any())
                         {
@@ -166,6 +169,7 @@ namespace CAS.UI.UIControls.WorkPakage
                         WorkPackageClosingDataGridViewRow r = (WorkPackageClosingDataGridViewRow)
                             dataGridViewItems.Rows[dataGridViewItems.Rows.Add(new WorkPackageClosingDataGridViewRow())];
 
+                        r.Tag = item;
                         Component component = (Component)item.Task;
                         if (component.NextPerformances.Count > 0)
                         {
@@ -256,7 +260,7 @@ namespace CAS.UI.UIControls.WorkPakage
         {
             foreach (WorkPackageClosingDataGridViewRow row in dataGridViewItems.Rows.OfType<WorkPackageClosingDataGridViewRow>())
             {
-                if ((bool)row.Cells[ColumnClosed.Index].Value == false)
+                if (row.Cells[ColumnClosed.Index].Value != null && (bool)row.Cells[ColumnClosed.Index].Value == false)
                     continue;
 
                 string message;
@@ -275,10 +279,7 @@ namespace CAS.UI.UIControls.WorkPakage
                     if (tr == null)
                     {
                         message =
-                        string.Format("Performance for:" +
-                                      "\n{0} " +
-                                      "\nin not transfer record",
-                                      row.ClosingItem);
+	                        "Performance for:" + $"\n{row.ClosingItem} " + "\nin not transfer record";
                         message += "\nAbort operation";
                         MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
                                         MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -331,7 +332,8 @@ namespace CAS.UI.UIControls.WorkPakage
         {
             foreach (WorkPackageClosingDataGridViewRow row in dataGridViewItems.Rows.OfType<WorkPackageClosingDataGridViewRow>())
             {
-                if ((bool)row.Cells[ColumnClosed.Index].Value == false)
+	            var wpr = row.Tag as WorkPackageRecord;
+                if ((bool)row.Cells[ColumnClosed.Index].Value == false || wpr.IsClosed)
                     continue;
                 try
                 {
@@ -515,16 +517,30 @@ namespace CAS.UI.UIControls.WorkPakage
                         }
                         //дату начала перемещения разрешено менять независимо от 
                         //подтверждений на стороне отправителя и получателя
-                        tr.StartTransferDate = performDate;
-                        tr.Remarks = "WorkPackage " + _workPackage.Title + " Transfer component";
-                        tr.DirectivePackageId = _workPackage.ItemId;
-                        try
-                        {
-                            GlobalObjects.PerformanceCore.RegisterPerformance(component, tr, _workPackage);
-                        }
-                        catch (Exception ex)
-                        {
-                            Program.Provider.Logger.Log("Error on save transfer record", ex);
+                        //tr.StartTransferDate = performDate;
+                        //tr.Remarks = "WorkPackage " + _workPackage.Title + " Transfer component";
+                        //tr.DirectivePackageId = _workPackage.ItemId;
+                        //try
+                        //{
+                        //    GlobalObjects.PerformanceCore.RegisterPerformance(component, tr, _workPackage);
+                        //}
+                        //catch (Exception ex)
+                        //{
+                        //    Program.Provider.Logger.Log("Error on save transfer record", ex);
+                        //}
+                    }
+
+
+                    wpr.IsClosed = true;
+                    GlobalObjects.CasEnvironment.NewKeeper.Save(wpr);
+
+                    if (wpr.Task is IMtopCalc mtop)
+                    {
+	                    if (mtop.IsExtension)
+	                    {
+		                    mtop.Extension = 0;
+		                    mtop.IsExtension = false;
+		                    GlobalObjects.CasEnvironment.NewKeeper.Save(mtop as BaseEntityObject);
                         }
                     }
 
@@ -573,19 +589,26 @@ namespace CAS.UI.UIControls.WorkPakage
             {
                 return;
             }
-            _workPackage.Status = WorkPackageStatus.Closed;
-            _workPackage.ClosingDate = dateTimePickerClosingDate.Value;
-            _workPackage.ClosedBy = GlobalObjects.CasEnvironment.IdentityUser.Login;
-            _workPackage.ClosingRemarks = "";
-
-            if (_workPackage.PublishedBy == "")
-                _workPackage.PublishedBy = GlobalObjects.CasEnvironment.IdentityUser.Login;
-            if (_workPackage.PublishingDate <= _workPackage.OpeningDate)
-                _workPackage.PublishingDate = _workPackage.OpeningDate;
             try
             {
-                GlobalObjects.CasEnvironment.NewKeeper.Save(_workPackage);
+                
                 SaveData();
+
+                if (dataGridViewItems.Rows.OfType<WorkPackageClosingDataGridViewRow>()
+	                .All(i => (bool) i.Cells[ColumnClosed.Index].Value))
+                {
+	                _workPackage.Status = WorkPackageStatus.Closed;
+	                _workPackage.ClosingDate = dateTimePickerClosingDate.Value;
+	                _workPackage.ClosedBy = GlobalObjects.CasEnvironment.IdentityUser.Login;
+	                _workPackage.ClosingRemarks = "";
+
+	                if (_workPackage.PublishedBy == "")
+		                _workPackage.PublishedBy = GlobalObjects.CasEnvironment.IdentityUser.Login;
+	                if (_workPackage.PublishingDate <= _workPackage.OpeningDate)
+		                _workPackage.PublishingDate = _workPackage.OpeningDate;
+                    GlobalObjects.CasEnvironment.NewKeeper.Save(_workPackage);
+                }
+
             }
             catch (Exception ex)
             {
@@ -1018,12 +1041,14 @@ namespace CAS.UI.UIControls.WorkPakage
                 }
                 else if (!string.IsNullOrEmpty(directive.EngineeringOrders) && directive.EngineeringOrderFile == null)
                 {
-                    taskCardCellValue = string.Format("Not set Engineering Order File. (Engineering Order No {0}.)", directive.EngineeringOrders);
+                    taskCardCellValue =
+	                    $"Not set Engineering Order File. (Engineering Order No {directive.EngineeringOrders}.)";
                     taskCardCellBackColor = Color.Red;
                 }
                 else if (string.IsNullOrEmpty(directive.EngineeringOrders) && directive.EngineeringOrderFile != null)
                 {
-                    taskCardCellValue = string.Format("Not set Engineering Order name. (File name {0}.)", directive.EngineeringOrderFile.FileName);
+                    taskCardCellValue =
+	                    $"Not set Engineering Order name. (File name {directive.EngineeringOrderFile.FileName}.)";
                     taskCardCellBackColor = Color.Red;
                 }
                 else taskCardCellValue = directive.EngineeringOrders;
@@ -1076,12 +1101,13 @@ namespace CAS.UI.UIControls.WorkPakage
                 }
                 else if (!string.IsNullOrEmpty(checkMpd.TaskCardNumber) && checkMpd.TaskCardNumberFile == null)
                 {
-                    checkMpdTaskCardCellValue = string.Format("Not set Task Card file. (Task Card No {0}.)", checkMpd.TaskCardNumber);
+                    checkMpdTaskCardCellValue = $"Not set Task Card file. (Task Card No {checkMpd.TaskCardNumber}.)";
                     checkMpdTaskCardCellBackColor = Color.Red;
                 }
                 else if (string.IsNullOrEmpty(checkMpd.TaskCardNumber) && checkMpd.TaskCardNumberFile != null)
                 {
-                    checkMpdTaskCardCellValue = string.Format("Not set Task Card name. (File name {0}.)", checkMpd.TaskCardNumberFile.FileName);
+                    checkMpdTaskCardCellValue =
+	                    $"Not set Task Card name. (File name {checkMpd.TaskCardNumberFile.FileName}.)";
                     checkMpdTaskCardCellBackColor = Color.Red;
                 }
                 else checkMpdTaskCardCellValue = checkMpd.TaskCardNumber;
@@ -1140,15 +1166,11 @@ namespace CAS.UI.UIControls.WorkPakage
             row.MaxPerfSource = nextPerformance.NextPerformanceSource.IsNullOrZero()
                                     ? GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(row.ClosingItem.LifeLengthParent)
                                     : nextPerformance.NextPerformanceSource;
-            
-            row.Cells[ColumnClosed.Index].Value = true;
-            //if(!(row.ClosingItem is Detail))
-            //{
-            //    Lifelength performanceSource = nextPerformance.PerformanceSource;
-            //    row.Cells[ColumnHours.Index].Value = performanceSource.Hours != null ? performanceSource.Hours.ToString() : "n/a";
-            //    row.Cells[ColumnCycles.Index].Value = performanceSource.Cycles != null ? performanceSource.Cycles.ToString() : "n/a";
-            //    row.Cells[ColumnDays.Index].Value = performanceSource.Days != null ? performanceSource.Days.ToString() : "n/a";    
-            //}
+
+            var wpr = (row.Tag as WorkPackageRecord);
+            row.Cells[ColumnClosed.Index].Value = wpr.IsClosed;
+            row.Cells[ColumnClosed.Index].ReadOnly = wpr.IsClosed;
+
             if (nextPerformance.PerformanceDate != null)
                 row.Cells[ColumnDate.Index].Value = (DateTime)nextPerformance.PerformanceDate;
 			else row.Cells[ColumnDate.Index].Value = DateTime.Now;
@@ -1189,7 +1211,8 @@ namespace CAS.UI.UIControls.WorkPakage
                 row.ClosingItem = apr.Parent;
 
             if (row.ClosingItem == null || apr == null) return;
-
+            row.Cells[ColumnClosed.Index].Value = true;
+            row.Cells[ColumnClosed.Index].ReadOnly = true;
             SetLabelsAndText(row);
 
             if (apr is DirectiveRecord || apr is MaintenanceCheckRecord)
@@ -1278,6 +1301,10 @@ namespace CAS.UI.UIControls.WorkPakage
                 row.WorkPackage = wp;
                 row.ClosingItem = workPackageRecord.Task;
             }
+
+            var wpr = (row.Tag as WorkPackageRecord);
+            row.Cells[ColumnClosed.Index].Value = wpr.IsClosed;
+            row.Cells[ColumnClosed.Index].ReadOnly = wpr.IsClosed;
 
             GetRecordInstance(row, wp, workPackageRecord:workPackageRecord);
             SetLabelsAndText(row);

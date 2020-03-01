@@ -123,7 +123,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		{
 			get
 			{
-				return string.Format("N-Rout. job:{0} {1}", ATAChapter, Title);
+				return $"N-Rout. job:{ATAChapter} {Title}";
 			}
 		}
 		#endregion

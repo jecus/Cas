@@ -36,3 +36,4 @@ packages/
 # Cake build
 /CasWcfService/tools
 /CasAPI/tools/Cake
+/.idea/.idea.CAS

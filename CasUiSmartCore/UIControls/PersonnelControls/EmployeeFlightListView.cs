@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Auxiliary;
 using CAS.UI.Interfaces;
@@ -31,7 +32,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 		public EmployeeFlightListView()
 		{
 			InitializeComponent();
-			SortMultiplier = 1;
+			SortDirection = SortDirection.Desc;
 			OldColumnIndex = 0;
 		}
 

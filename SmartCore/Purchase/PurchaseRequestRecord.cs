@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using EntityCore.DTO;
 using EntityCore.DTO.General;
 using Newtonsoft.Json;
 using SmartCore.Auxiliary.Extentions;
@@ -8,6 +11,7 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Attributes;
+using SmartCore.Entities.General.Interfaces;
 using SmartCore.Files;
 using SmartCore.Packages;
 
@@ -196,6 +200,8 @@ namespace SmartCore.Purchase
 
 		#endregion
 
+		#region public string AdditionalInformationJSON
+
 		[TableColumn("AdditionalInformationJSON")]
 		public string AdditionalInformationJSON
 		{
@@ -212,6 +218,26 @@ namespace SmartCore.Purchase
 
 		public double ItemCost { get; set; }
 		public double TotalCost { get; set; }
+
+		#endregion
+
+		#region public string TransferInformationJSON
+
+		[TableColumn("TransferInformationJSON")]
+		public string TransferInformationJSON
+		{
+			get => JsonConvert.SerializeObject(TransferInformation, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+			set => TransferInformation = JsonConvert.DeserializeObject<List<TransferInformation>>(value ?? "", new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+		}
+
+		private List<TransferInformation> _transferInformation;
+		public List<TransferInformation> TransferInformation
+		{
+			get => _transferInformation ?? (_transferInformation = new List<TransferInformation>());
+			set => _transferInformation = value;
+		}
+		
+		#endregion
 
 		/*
 		*  Ìועמהû 
@@ -285,6 +311,18 @@ namespace SmartCore.Purchase
 	public class Additional
 	{
 
+	}
+
+	[JsonObject]
+	public class TransferInformation : BaseEntityObject
+	{
+		public byte Number { get; set; }
+		public string PartNumber { get; set; }
+		public string SerialNumber { get; set; }
+		public int ProductId { get; set; }
+
+		[JsonIgnore]
+		public Product Product { get; set; }
 	}
 
 }

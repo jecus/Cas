@@ -42,7 +42,7 @@ namespace SmartCore.Entities.General.Commercial
         #region public override string ToString()
         public override string ToString()
         {
-            return string.Format("Dir:id {0} desc:{1} ",DirectiveId, Task != null ? Task.ToString() : "");
+            return $"Dir:id {DirectiveId} desc:{(Task != null ? Task.ToString() : "")} ";
         }
         #endregion
     }

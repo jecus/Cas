@@ -5,10 +5,12 @@ using EntityCore.DTO.General;
 using SmartCore.Auxiliary;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Calculations;
+using SmartCore.Calculations.MTOP;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.Collections;
+using SmartCore.Entities.General.MTOP;
 using SmartCore.Entities.General.Personnel;
 using SmartCore.Entities.General.Store;
 using SmartCore.Entities.General.Templates;
@@ -25,7 +27,9 @@ namespace SmartCore.Entities.General.Accessory
 	[Dto(typeof(ComponentDTO))]
 	[Condition("IsBaseComponent", "0")]
 	[Condition("IsDeleted", "0")]
-	public class Component : AbstractAccessory, IEngineeringDirective, IKitRequired, IStoreFilterParam, IComponentFilterParams, IComparable<Component>, IEquatable<Component>, IFileContainer, IWorkPackageItemFilterParams, IProcessingFilterParams, IComparer<Component>, IAtaSorted
+	public class Component : AbstractAccessory, IEngineeringDirective, IKitRequired, IStoreFilterParam, 
+		IComponentFilterParams, IComparable<Component>, IEquatable<Component>, IFileContainer,
+		IWorkPackageItemFilterParams, IProcessingFilterParams, IComparer<Component>, IAtaSorted, IMtopCalc
 	{
 		private static Type _thisType;
 
@@ -813,11 +817,14 @@ namespace SmartCore.Entities.General.Accessory
 		#endregion
 
 		#region public int ParentAircraftId
+
 		/// <summary>
 		/// ¬оздушное судно, где установлен агрегат - см. также ParentStore - одно из двух свойств ParentAircraft либо ParentStore == null
 		/// </summary>
 
 		public int ParentAircraftId { get; set; }
+
+		public List<NextPerformance> MtopNextPerformances { get; set; }
 
 		#endregion
 
@@ -979,6 +986,19 @@ namespace SmartCore.Entities.General.Accessory
 		}
 
 		public LocationsType Facility { get { return Location.LocationsType; } }
+		#endregion
+
+		#region Implement IMtopcalc
+
+		public Lifelength PhaseThresh { get; set; }
+		public Lifelength PhaseRepeat { get; set; }
+		public Phase MTOPPhase { get; set; }
+		public bool RecalculateTenPercent { get; set; }
+		public bool APUCalc { get; set; }
+
+		public bool IsExtension { get; set; }
+		public double Extension { get; set; }
+
 		#endregion
 
 		/*
@@ -1239,7 +1259,8 @@ namespace SmartCore.Entities.General.Accessory
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return string.Format("P/N:{0} Pos:{1} S/N:{2} {3} {4}",PartNumber, Position, SerialNumber, Description, MaintenanceControlProcess.ShortName) 
+			return
+				$"P/N:{PartNumber} Pos:{Position} S/N:{SerialNumber} WorkType:{WorkType} {Description} {MaintenanceControlProcess.ShortName}"
 				+ (IsDeleted ? " is deleted" : "");
 		}
 		#endregion
@@ -1679,7 +1700,7 @@ namespace SmartCore.Entities.General.Accessory
 		{
 			get
 			{
-				return string.Format("Compnt.:{0} {1}", this, Description);
+				return $"Compnt.:{this} {Description}";
 			}
 		}
 		#endregion

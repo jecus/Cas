@@ -1,4 +1,5 @@
 using System.Windows.Forms;
+using CAS.UI.UIControls.NewGrid;
 
 namespace CAS.UI.UIControls.MaintananceProgram
 {
@@ -73,8 +74,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			// splitContainerMain
 			// 
 			this.splitContainerMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Left) 
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.splitContainerMain.Location = new System.Drawing.Point(15, 63);
 			this.splitContainerMain.Name = "splitContainerMain";
 			this.splitContainerMain.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -104,7 +105,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.listViewMpdAll.OldColumnIndex = 0;
 			this.listViewMpdAll.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.listViewMpdAll.Size = new System.Drawing.Size(979, 356);
-			this.listViewMpdAll.SortMultiplier = 0;
+			this.listViewMpdAll.SortDirection = SortDirection.Asc;
 			this.listViewMpdAll.TabIndex = 1;
 			// 
 			// listViewMpdApu
@@ -120,7 +121,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.listViewMpdApu.OldColumnIndex = 0;
 			this.listViewMpdApu.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.listViewMpdApu.Size = new System.Drawing.Size(979, 245);
-			this.listViewMpdApu.SortMultiplier = 0;
+			this.listViewMpdApu.SortDirection = SortDirection.Asc;
 			this.listViewMpdApu.TabIndex = 2;
 			// 
 			// buttonDelete

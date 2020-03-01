@@ -29,6 +29,7 @@ using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;
+using SmartCore.Relation;
 using Telerik.WinControls.UI;
 using Component = SmartCore.Entities.General.Accessory.Component;
 
@@ -254,7 +255,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			AnimatedThreadWorker.ReportProgress(0, "load Work Package");
 			
 			//GlobalObjects.CasEnvironment.Loader.LoadWorkPackageItems(_currentWorkPackage);
-			GlobalObjects.WorkPackageCore.GetWorkPackageItemsWithCalculate(_currentWorkPackage);
+			GlobalObjects.WorkPackageCore.GetWorkPackageItemsWithCalculateNew(_currentWorkPackage);
 			if (_currentWorkPackage.MaxClosingDate < _currentWorkPackage.MinClosingDate)
 				_currentWorkPackage.CanClose = false;
 			var wpItems = new List<BaseEntityObject>();
@@ -453,7 +454,43 @@ namespace CAS.UI.UIControls.WorkPakage
 			var discrepancy = GlobalObjects.CasEnvironment.NewLoader.GetObject<DiscrepancyDTO,Discrepancy>(new Filter("WorkPackageId", _currentWorkPackage.ItemId));
 			if (discrepancy != null)
 				_aircraftFlight = GlobalObjects.AircraftFlightsCore.GetAircraftFlightById(CurrentAircraft.ItemId, discrepancy.FlightId);
-			
+
+
+
+			var componentDirectives = _currentWorkPackage.WorkPakageRecords
+				.Where(i => i is ComponentDirective)
+				.Cast<ComponentDirective>().ToList();
+
+			var mpdsIds = new List<int>();
+
+			foreach (var componentDirective in componentDirectives)
+			{
+				foreach (var items in componentDirective.ItemRelations.Where(i =>
+					i.FirtsItemTypeId == SmartCoreType.MaintenanceDirective.ItemId ||
+					i.SecondItemTypeId == SmartCoreType.MaintenanceDirective.ItemId))
+				{
+					var id = componentDirective.IsFirst == true ? items.SecondItemId : items.FirstItemId;
+					mpdsIds.Add(id);
+				}
+			}
+
+			if (mpdsIds.Count > 0)
+			{
+				var mpds = GlobalObjects.CasEnvironment.NewLoader
+					.GetObjectList<MaintenanceDirectiveDTO, MaintenanceDirective>(new Filter("ItemId", mpdsIds));
+
+				foreach (var componentDirective in componentDirectives)
+				{
+					foreach (var items in componentDirective.ItemRelations.Where(i =>
+						i.FirtsItemTypeId == SmartCoreType.MaintenanceDirective.ItemId ||
+						i.SecondItemTypeId == SmartCoreType.MaintenanceDirective.ItemId))
+					{
+						var id = componentDirective.IsFirst == true ? items.SecondItemId : items.FirstItemId;
+						componentDirective.MaintenanceDirective = mpds.FirstOrDefault(i => i.ItemId == id);
+					}
+				}
+			}
+
 			#region Фильтрация директив
 
 			AnimatedThreadWorker.ReportProgress(95, "filter directives");
@@ -487,15 +524,12 @@ namespace CAS.UI.UIControls.WorkPakage
 				foreach (WorkPackageRecord blockedRecord in blockedRecords)
 				{
 					NextPerformance np = blockedRecord.Task.NextPerformances.First(n => n.BlockedByPackage != null);
-					message += string.Format("\nTask: {0} blocked by work package {1}",
-												blockedRecord.Task,
-												np.BlockedByPackage);
+					message += $"\nTask: {blockedRecord.Task} blocked by work package {np.BlockedByPackage}";
 				}
 				if(_currentWorkPackage.MaxClosingDate < _currentWorkPackage.MinClosingDate)
 				{
-					message += string.Format("\nMin Closing Date: {0} better than Max Closing Date: {1}",
-												_currentWorkPackage.MinClosingDate,
-												_currentWorkPackage.MaxClosingDate); 
+					message +=
+						$"\nMin Closing Date: {_currentWorkPackage.MinClosingDate} better than Max Closing Date: {_currentWorkPackage.MaxClosingDate}"; 
 				}
 				MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
 								MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -688,7 +722,7 @@ namespace CAS.UI.UIControls.WorkPakage
 			catch (Exception ex)
 			{
 				string errorDescriptionSctring =
-					string.Format("Error while Open Attached File for {0}, id {1}. \nFileId {2}", selectedItem, selectedItem.ItemId, attachedFile.ItemId);
+					$"Error while Open Attached File for {selectedItem}, id {selectedItem.ItemId}. \nFileId {attachedFile.ItemId}";
 				Program.Provider.Logger.Log(errorDescriptionSctring, ex);
 			}
 		}

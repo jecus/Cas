@@ -11,7 +11,10 @@ namespace EntityCore.DTO.Dictionaries
 	
 	public class DamageChartDTO : BaseEntity, IFileDtoContainer, IBaseDictionary
 	{
-		
+		[Column("ItemID")]
+		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public override int ItemId { get; set; }
+
 		[Column("ChartName"), MaxLength(50)]
 		public string ChartName { get; set; }
 
@@ -24,7 +27,7 @@ namespace EntityCore.DTO.Dictionaries
 		public ICollection<ItemFileLinkDTO> Files { get; set; }
 
 		
-		[Child]
+		[Include]
 		public AccessoryDescriptionDTO AccessoryDescription { get; set; }
 
 	}

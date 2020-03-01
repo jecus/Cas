@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.NewGrid;
@@ -17,7 +18,7 @@ namespace CAS.UI.UIControls.Users
 		#region public UserListView()
 		public UserListView()
 		{
-			SortMultiplier = 1;
+			SortDirection = SortDirection.Desc;
 			InitializeComponent();
 		}
 

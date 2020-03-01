@@ -323,7 +323,7 @@ namespace CAS.UI.UIControls.Fleet
 			catch (Exception ex)
 			{
 				string errorDescriptionSctring =
-					string.Format("Error while Open Attached File for {0}, id {1}. \nFileId {2}", mpd, mpd.ItemId, mpd.TaskCardNumberFile.ItemId);
+					$"Error while Open Attached File for {mpd}, id {mpd.ItemId}. \nFileId {mpd.TaskCardNumberFile.ItemId}";
 				Program.Provider.Logger.Log(errorDescriptionSctring, ex);
 			}
 		}
@@ -534,12 +534,7 @@ namespace CAS.UI.UIControls.Fleet
 		{
 			foreach (var mpd in maintenanceDirectives)
 			{
-				if (mpd.ItemId == 63278)
-					MessageBox.Show("qwe");
-
-
-				
-				GlobalObjects.PerformanceCalculator.GetNextPerformance(mpd);
+				GlobalObjects.MTOPCalculator.CalculateDirectiveNew(mpd);
 
 				if (bindedItemsDict.ContainsKey(mpd))
 				{
@@ -548,7 +543,7 @@ namespace CAS.UI.UIControls.Fleet
 					{
 						if (bindedItem is ComponentDirective)
 						{
-							GlobalObjects.PerformanceCalculator.GetNextPerformance(bindedItem);
+							GlobalObjects.MTOPCalculator.CalculateDirectiveNew(bindedItem as ComponentDirective);
 
 							var firstNextPerformance =
 								bindedItemsDict[mpd].SelectMany(t => t.NextPerformances).OrderBy(n => n.NextPerformanceDate).FirstOrDefault();

@@ -197,9 +197,7 @@ namespace CAS.UI.UIControls.Auxiliary
                 //вводимая наработка на дату выполнения меньше, чем расчитанная калькулятором
                 if (message != "") message += "\n ";
                 message +=
-                    string.Format("Performance source on date: {0} \nmust be grather than {1}", 
-                                   dateTimePicker1.Value,
-                                   parentLifeLenght.ToHoursAndCyclesFormat());
+	                $"Performance source on date: {dateTimePicker1.Value} \nmust be grather than {parentLifeLenght.ToHoursAndCyclesFormat()}";
                 return false;  
             }
             //if (perfLifeLength.IsGreaterByAnyParameter(lifelengthTomorrow))

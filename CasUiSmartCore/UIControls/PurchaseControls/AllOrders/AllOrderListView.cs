@@ -22,7 +22,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 		public AllOrderListView()
 		{
 			OldColumnIndex = 0;
-			SortMultiplier = 0;
+			SortDirection = SortDirection.Asc;
 
 			IgnoreEnterPress = true;
 

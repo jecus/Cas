@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
@@ -29,7 +30,7 @@ namespace CAS.UI.UIControls.ComponentChangeReport
 		{
 			InitializeComponent();
 
-			SortMultiplier = 1;
+			SortDirection = SortDirection.Desc;
 		}
 		#endregion
 

@@ -692,7 +692,7 @@ namespace CAS.UI.UIControls.ComponentControls
             catch (ArgumentException argumentException)
             {
                 MessageBox.Show(
-                    String.Format("{0}", argumentException.Message),
+	                $"{argumentException.Message}",
                     new GlobalTermsProvider()["SystemName"].ToString(),
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);

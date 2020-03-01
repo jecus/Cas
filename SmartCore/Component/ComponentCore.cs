@@ -2061,6 +2061,13 @@ namespace SmartCore.Component
 				new Filter("ItemId",baseComponentId)
 			}, true);
 
+
+			var directives = _newLoader.GetObjectList<ComponentDirectiveDTO, ComponentDirective>(new Filter("ComponentId", baseComponentId), true);
+			baseComponent.ComponentDirectives.Clear();
+			foreach (var componentDirective in directives)
+				componentDirective.ParentComponent = baseComponent;
+			baseComponent.ComponentDirectives.AddRange(directives);
+
 			// Выставляем обратные ссылки
 			_newLoader.SetDestinations(baseComponent);
 
@@ -2180,6 +2187,19 @@ namespace SmartCore.Component
 		}
 
 		#endregion
+
+		public void ReloadActualStateRecordForBaseComponents(int aircraftId)
+		{
+			var bs = _casEnvironment.BaseComponents.Where(candidate => candidate.ParentAircraftId == aircraftId).ToList();
+			var ids = bs.Select(i => i.ItemId);
+			var actuals = _newLoader.GetObjectListAll<ActualStateRecordDTO, ActualStateRecord>(new Filter("ComponentId", ids));
+
+			foreach (var component in bs)
+			{
+				component.ActualStateRecords.Clear();
+				component.ActualStateRecords.AddRange(actuals.Where(i => i.ComponentId == component.ItemId));
+			}
+		}
 
 		#region public BaseComponent[] GetAicraftBaseComponents(int aircraftId, IEnumerable<int> baseComponentTypeIds)
 

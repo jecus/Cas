@@ -93,6 +93,9 @@ namespace SmartCore.Entities.General.WorkPackage
 		[TableColumnAttribute("ParentCheckId")]
 		public Int32 ParentCheckId { get; set; }
 
+		[TableColumn("IsClosed")]
+		public bool IsClosed { get; set; }
+
 		#region public string JobCardNumber { get; set; }
 		/// <summary>
 		/// Названия карты нарадя. (Применяется только для NonRoutineJob)
@@ -144,7 +147,7 @@ namespace SmartCore.Entities.General.WorkPackage
 		#region public override string ToString()
 		public override string ToString()
 		{
-			return string.Format("Dir:id {0} desc:{1} ",DirectiveId, Task != null ? Task.ToString() : "");
+			return $"Dir:id {DirectiveId} desc:{(Task != null ? Task.ToString() : "")} ";
 		}
 		#endregion
 

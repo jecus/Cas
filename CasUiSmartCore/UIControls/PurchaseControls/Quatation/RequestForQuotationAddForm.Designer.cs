@@ -1,7 +1,9 @@
-﻿using CASTerms;
+﻿using System.ComponentModel;
+using CASTerms;
 using EntityCore.DTO.General;
 using MetroFramework.Controls;
 using CAS.UI.Helpers;
+using CAS.UI.UIControls.NewGrid;
 
 namespace CAS.UI.UIControls.PurchaseControls.Quatation
 {
@@ -908,7 +910,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.listViewAddedItems.OldColumnIndex = 0;
 			this.listViewAddedItems.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.listViewAddedItems.Size = new System.Drawing.Size(724, 205);
-			this.listViewAddedItems.SortMultiplier = 0;
+			this.listViewAddedItems.SortDirection = SortDirection.Asc;
 			this.listViewAddedItems.TabIndex = 246;
 			this.listViewAddedItems.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.listViewAddedItems_SelectedItemsChanged_1);
 			// 
@@ -924,7 +926,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.listViewKits.OldColumnIndex = 2;
 			this.listViewKits.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.listViewKits.Size = new System.Drawing.Size(724, 190);
-			this.listViewKits.SortMultiplier = 1;
+			this.listViewKits.SortDirection = SortDirection.Desc;
 			this.listViewKits.TabIndex = 67;
 			// 
 			// RequestForQuotationAddForm

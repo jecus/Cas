@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using CAS.UI.Interfaces;
@@ -28,7 +29,7 @@ namespace CAS.UI.UIControls.Discrepancies
 		{
 			InitializeComponent();
 
-			SortMultiplier = 1;
+			SortDirection = SortDirection.Desc;
 			OldColumnIndex = 11;
 		}
 		#endregion

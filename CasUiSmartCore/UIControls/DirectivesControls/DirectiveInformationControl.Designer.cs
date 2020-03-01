@@ -525,7 +525,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		private AttachedFileControl attachedFileControlSTC;
 		private TextBox textBoxStc;
 		private Label label1;
-		private CheckBox checkBoxIsApplicability;
+		public CheckBox checkBoxIsApplicability;
 		private Label labelSBSubject;
 		private TextBox textBoxSBSubject;
 		private ATAChapterComboBox ComboBoxSbType;

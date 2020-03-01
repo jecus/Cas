@@ -45,7 +45,7 @@ namespace SmartCore.Auxiliary
         /// <param name="date"></param>
         /// <param name="separator"></param>
         /// <returns></returns>
-        public static String GetDateFormat(DateTime date, string separator = "-")
+        public static string GetDateFormat(DateTime date, string separator = "-")
         {
             
             String[] mount = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
@@ -54,6 +54,17 @@ namespace SmartCore.Auxiliary
 
         }
         #endregion
+
+        public static string GetDateFormat(DateTime? date, string separator = "-")
+        {
+	        if (!date.HasValue)
+		        return "";
+
+	        string[] mount = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+	        return (date.Value.Day + separator + mount[date.Value.Month - 1] + separator + date.Value.Year);
+
+
+        }
 
         #region public static string DatePeriodToString(DateTime date1, DateTime date2)
 
@@ -75,30 +86,15 @@ namespace SmartCore.Auxiliary
                     if(dateMin.DayOfYear == new DateTime(dateMin.Year, dateMin.Month, 1).DayOfYear &&
                        dateMax.DayOfYear == new DateTime(dateMin.Year, dateMin.Month, 1).AddMonths(1).AddDays(-1).DayOfYear)
                     {
-                        return string.Format("{0}, {1}",
-                                             mount[dateMin.Month - 1],
-                                             dateMin.Year);    
+                        return $"{mount[dateMin.Month - 1]}, {dateMin.Year}";    
                     }
-                    return string.Format("{0} - {1} {2}, {3}",
-                                         dateMin.Day,
-                                         dateMax.Day,
-                                         mount[dateMin.Month - 1],
-                                         dateMin.Year);
+                    return $"{dateMin.Day} - {dateMax.Day} {mount[dateMin.Month - 1]}, {dateMin.Year}";
                 }
-                return string.Format("{0} {1} - {2} {3}, {4}",
-                                      dateMin.Day,
-                                      mount[dateMin.Month - 1],
-                                      dateMax.Day,
-                                      mount[dateMax.Month - 1],
-                                      dateMax.Year);
+                return
+	                $"{dateMin.Day} {mount[dateMin.Month - 1]} - {dateMax.Day} {mount[dateMax.Month - 1]}, {dateMax.Year}";
             }
-            return string.Format("{0} {1}  {2} - {3} {4}  {5}",
-                                 dateMin.Day,
-                                 mount[dateMin.Month - 1],
-                                 dateMin.Year,
-                                 dateMax.Day,
-                                 mount[dateMax.Month - 1],
-                                 dateMax.Year);
+            return
+	            $"{dateMin.Day} {mount[dateMin.Month - 1]}  {dateMin.Year} - {dateMax.Day} {mount[dateMax.Month - 1]}  {dateMax.Year}";
         }
 
         #endregion

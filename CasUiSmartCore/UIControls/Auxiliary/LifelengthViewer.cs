@@ -1320,7 +1320,7 @@ namespace CAS.UI.UIControls.Auxiliary
             int minutes = data.Minutes;
             if (hours < 0) minutes = Math.Abs(minutes);
             if (showMinutes)
-                return string.Format("{0}:{1}", hours, minutes.ToString().PadLeft(2, '0'));
+                return $"{hours}:{minutes.ToString().PadLeft(2, '0')}";
             return hours.ToString();
         }
 

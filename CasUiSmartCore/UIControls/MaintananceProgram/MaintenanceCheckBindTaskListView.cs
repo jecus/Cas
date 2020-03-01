@@ -106,6 +106,9 @@ namespace CAS.UI.UIControls.MaintananceProgram
             columnHeader = new ColumnHeader { Width = 80, Text = "Overdue/Remain" };
             ColumnHeaderList.Add(columnHeader);
 
+            columnHeader = new ColumnHeader { Width = 80, Text = "Check" };
+            ColumnHeaderList.Add(columnHeader);
+
             columnHeader = new ColumnHeader { Width = 80, Text = "Work Type" };
             ColumnHeaderList.Add(columnHeader);
 
@@ -310,7 +313,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
                     listViewItem.ForeColor = Color.Gray;
                     if (listViewItem.ToolTipText.Trim() != "")
                         listViewItem.ToolTipText += "\n";
-                    listViewItem.ToolTipText += string.Format("This {0} is deleted", nextPerformance.Parent.SmartCoreObjectType);
+                    listViewItem.ToolTipText += $"This {nextPerformance.Parent.SmartCoreObjectType} is deleted";
                 }
             }
             else if (item is AbstractPerformanceRecord)
@@ -324,7 +327,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
                     listViewItem.ForeColor = Color.Gray;
                     if (listViewItem.ToolTipText.Trim() != "")
                         listViewItem.ToolTipText += "\n";
-                    listViewItem.ToolTipText += string.Format("This {0} is deleted", apr.Parent.SmartCoreObjectType);
+                    listViewItem.ToolTipText += $"This {apr.Parent.SmartCoreObjectType} is deleted";
                 }
             }
             else
@@ -352,7 +355,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
                     listViewItem.ForeColor = Color.Gray;
                     if (listViewItem.ToolTipText.Trim() != "")
                         listViewItem.ToolTipText += "\n";
-                    listViewItem.ToolTipText += string.Format("This {0} is deleted", item.SmartCoreObjectType);
+                    listViewItem.ToolTipText += $"This {item.SmartCoreObjectType} is deleted";
                 }
             }
         }
@@ -641,6 +644,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 subItems.Add(subItem);
                 #endregion
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = md.Remains.ToString(), Tag = md.Remains });
+                subItems.Add(new ListViewItem.ListViewSubItem { Text = md.MaintenanceCheck?.ToString(), Tag = md.MaintenanceCheck });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = md.WorkType.ToString(), Tag = md.WorkType });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = md.NextPerformanceDate == null ? "N/A" : SmartCore.Auxiliary.Convert.GetDateFormat((DateTime)md.NextPerformanceDate), Tag = md.NextPerformanceDate });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = md.ManHours.ToString(), Tag = md.ManHours });
@@ -663,7 +667,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = job.ManHours.ToString(), Tag = job.ManHours });
                 subItems.Add(new ListViewItem.ListViewSubItem { Text = job.Cost.ToString(), Tag = job.Cost });
             }
-            else throw new ArgumentOutOfRangeException(String.Format("1135: Takes an argument has no known type {0}", item.GetType()));
+            else throw new ArgumentOutOfRangeException($"1135: Takes an argument has no known type {item.GetType()}");
 
             return subItems.ToArray();
         }

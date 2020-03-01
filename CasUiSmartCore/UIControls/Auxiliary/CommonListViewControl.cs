@@ -390,9 +390,10 @@ namespace CAS.UI.UIControls.Auxiliary
 
                 SetGroupsToItems();
                 SetItemColor(listViewItem, item);
-                SetTotalText();
 
                 itemsListView.Items.Insert(ListViewItemList.IndexOf(listViewItem), listViewItem);
+
+                SetTotalText();
             }
             catch (Exception ex)
             {
@@ -578,6 +579,8 @@ namespace CAS.UI.UIControls.Auxiliary
                     ListViewItemList.Remove(listViewItem);
                     itemsListView.Items.Remove(listViewItem);    
                 }
+
+                SetTotalText();
             }
             catch (Exception ex)
             {

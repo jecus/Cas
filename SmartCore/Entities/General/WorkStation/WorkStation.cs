@@ -1,4 +1,5 @@
 using System;
+using EntityCore.DTO.General;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Attributes;
 
@@ -11,6 +12,7 @@ namespace SmartCore.Entities.General.WorkShop
     [Serializable]
     [Table("WorkStations", "dbo", "ItemId")]
 	[Condition("IsDeleted", "0")]
+    [Dto(typeof(WorkStationsDTO))]
     public class WorkStation: BaseEntityObject// IComparable<Store>
     {
 
@@ -26,7 +28,7 @@ namespace SmartCore.Entities.General.WorkShop
         [TableColumn("StoreName")]
         [FormControl(300,"Name")]
         [NotNull]
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         #endregion
 
@@ -38,7 +40,7 @@ namespace SmartCore.Entities.General.WorkShop
         [TableColumn("Location")]
         [FormControl(300, "Location")]
         [NotNull]
-        public String Location { get; set; }
+        public string Location { get; set; }
 
         #endregion
 
@@ -48,9 +50,25 @@ namespace SmartCore.Entities.General.WorkShop
         /// Оператор, которому принадлежит склад
         /// </summary>
         [TableColumn("OperatorId")] 
-        public Int32 OperatorId { get; set; }
+        public int OperatorId { get; set; }
 
         #endregion
+
+        [TableColumn("Adress")]
+        [FormControl(300, "Adress:", 3)]
+        public string Adress { get; set; }
+
+        [TableColumn("Phone")]
+        [FormControl(300, "Phone:")]
+        public string Phone { get; set; }
+
+        [TableColumn("Email")]
+        [FormControl(300, "Email:")]
+        public string Email { get; set; }
+
+        [TableColumn("Contact")]
+        [FormControl(300, "Contact:")]
+        public string Contact { get; set; }
 
         #region public String Remarks { get; set; }
         /// <summary>
@@ -58,10 +76,10 @@ namespace SmartCore.Entities.General.WorkShop
         /// </summary>
         [TableColumn("Remarks")] 
         [FormControl(200, "Remarks",5)]
-        public String Remarks { get; set; }
+        public string Remarks { get; set; }
 
         #endregion
-
+        
         /*
          * Дополнительные, вычисляемые поля
          */

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SmartCore.Entities;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
@@ -36,5 +37,6 @@ namespace SmartCore.Directives
 		void Save(Directive directive);
 
 		void Delete(Directive directive);
+		Dictionary<int,string> GetFilesName(IEnumerable<int> ids, FileLinkType type);
 	}
 }

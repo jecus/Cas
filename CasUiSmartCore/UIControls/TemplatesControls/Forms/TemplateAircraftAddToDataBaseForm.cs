@@ -498,7 +498,7 @@ namespace CAS.UI.UIControls.TemplatesControls.Forms
 						if (message != "") message += "\n ";
 						ListViewDataAttribute fca = (ListViewDataAttribute)
 							propertyInfo.GetCustomAttributes(typeof(ListViewDataAttribute), false).First();
-						message += string.Format("'{0}' should not be empty", fca.Title);
+						message += $"'{fca.Title}' should not be empty";
 						return false;
 					}
 				}
@@ -512,7 +512,8 @@ namespace CAS.UI.UIControls.TemplatesControls.Forms
 						if (message != "") message += "\n ";
 						ListViewDataAttribute fca = (ListViewDataAttribute)
 							propertyInfo.GetCustomAttributes(typeof(ListViewDataAttribute), false).First();
-						message += string.Format("'{0}' should be {1} or higher", fca.Title, SmartCore.Auxiliary.Convert.GetDateFormat(checkVal));
+						message +=
+							$"'{fca.Title}' should be {SmartCore.Auxiliary.Convert.GetDateFormat(checkVal)} or higher";
 						return false;
 					}
 				}

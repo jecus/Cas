@@ -117,6 +117,7 @@ namespace CAS.UI.UIControls.OpepatorsControls
 				new CommonCollection<Aircraft>(GlobalObjects.AircraftsCore.GetAllAircrafts());
 			_stores.Location =  new Point(_aircrafts.Location.X + 400, 4);
 			_stores.ItemsCollection = GlobalObjects.CasEnvironment.Stores;
+			workStationCollectionControl1.ItemsCollection = GlobalObjects.CasEnvironment.WorkStations;
 
 #if !KAC
 			_vehicles.VehiclesCollection =
@@ -449,6 +450,12 @@ namespace CAS.UI.UIControls.OpepatorsControls
 		}
 
 		#endregion
+
+		private void LinkWorkPackageLSDisplayerRequested(object sender, ReferenceEventArgs e)
+		{
+			e.DisplayerText = "Work packages LS";
+			e.RequestedEntity = new AirFleetWorkPackageListScreen(GlobalObjects.CasEnvironment.Operators[0], true);
+		}
 
 		#region private void LinkDepartmentsDisplayerRequested(object sender, ReferenceEventArgs e)
 

@@ -77,9 +77,7 @@ namespace CAS.UI.UIControls.AnimatedBackgroundWorker
 				if (_loadingState.CurrentStage <= _loadingState.Stages)
 				{
 					labelStage.Text =
-						string.Format("Stage: {0}/{1} :{2}", _loadingState.CurrentStage,
-							_loadingState.Stages,
-							_loadingState.CurrentStageDescription);
+						$"Stage: {_loadingState.CurrentStage}/{_loadingState.Stages} :{_loadingState.CurrentStageDescription}";
 					progressBarStage.Value = _loadingState.CurrentStage;
 				}
 			}
@@ -94,13 +92,12 @@ namespace CAS.UI.UIControls.AnimatedBackgroundWorker
 
 			if (_loadingState.MaxPersentage > 0)
 			{
-				persentageText += string.Format(": {0}/{1}", _loadingState.CurrentPersentage,
-					_loadingState.MaxPersentage);
+				persentageText += $": {_loadingState.CurrentPersentage}/{_loadingState.MaxPersentage}";
 			}
 			if (_loadingState.CurrentPersentageDescription != "")
 			{
 				persentageText +=
-					string.Format(" :{0}", _loadingState.CurrentPersentageDescription);
+					$" :{_loadingState.CurrentPersentageDescription}";
 			}
 			if (_loadingState.CurrentPersentage <= _loadingState.MaxPersentage)
 			{

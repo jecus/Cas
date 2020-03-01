@@ -2,8 +2,8 @@
 using System.Drawing;
 using System.Windows.Forms;
 using SmartCore.Calculations;
+using SmartCore.Calculations.MTOP;
 using SmartCore.Entities.Collections;
-using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.MTOP;
 
 namespace CAS.UI.UIControls.MTOP
@@ -19,7 +19,7 @@ namespace CAS.UI.UIControls.MTOP
 
 		#endregion
 
-		public void UpdateControl(Dictionary<int, Lifelength> groupLifelengths, CommonCollection<MaintenanceDirective> maintenanceDirectives, List<MTOPCheck> maintenanceChecks)
+		public void UpdateControl(Dictionary<int, Lifelength> groupLifelengths, CommonCollection<IMtopCalc> maintenanceDirectives, List<MTOPCheck> maintenanceChecks)
 		{
 			Controls.Clear();
 
@@ -30,6 +30,8 @@ namespace CAS.UI.UIControls.MTOP
 			};
 			Controls.Add(mtopDirectiveListView1);
 			mtopDirectiveListView1.SetItemsArray(maintenanceDirectives.ToArray());
+
+			mtopDirectiveListView1.radGridView1.MasterTemplate.CollapseAllGroups();
 		}
 	}
 }

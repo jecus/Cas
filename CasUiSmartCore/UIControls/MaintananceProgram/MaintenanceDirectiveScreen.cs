@@ -123,7 +123,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 headerControl.SaveButtonToolTipText = "Save";
             }
 
-            statusControl.ConditionState = GlobalObjects.PerformanceCalculator.GetConditionState(_currentDirective);
+            statusControl.ConditionState = _currentDirective.Condition;
 
             extendableRichContainerSummary.LabelCaption.Text = "Summary " + _currentDirective.TaskNumberCheck
                                                            + " Status: " + _currentDirective.Status;
@@ -144,6 +144,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
         #region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
         protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
         {
+	        GlobalObjects.ComponentCore.ReloadActualStateRecordForBaseComponents(CurrentAircraft.ItemId);
+
             #region Загрузка элементов
 
             AnimatedThreadWorker.ReportProgress(0, "load directives");
@@ -170,6 +172,11 @@ namespace CAS.UI.UIControls.MaintananceProgram
             #region Калькуляция состояния директив
 
             AnimatedThreadWorker.ReportProgress(40, "calculation of directives");
+            
+            
+            //GlobalObjects.PerformanceCalculator.GetConditionState(_currentDirective);
+            GlobalObjects.MTOPCalculator.CalculateDirectiveNew(_currentDirective);
+
 
             if (AnimatedThreadWorker.CancellationPending)
             {

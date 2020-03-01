@@ -137,7 +137,8 @@ namespace SmartCore.Queries
         /// </summary>
         public static String GetUpdateQuery()
         {
-            return "Set dateformat dmy; Update [dbo].Files Set IsDeleted = @IsDeleted, FileName = @FileName, FileData = @FileData, FilePath = @FilePath, StoreInDatabase = @StoreInDatabase  " + String.Format("Where {0} = @{1}", ItemIdName, ItemIdName);
+            return "Set dateformat dmy; Update [dbo].Files Set IsDeleted = @IsDeleted, FileName = @FileName, FileData = @FileData, FilePath = @FilePath, StoreInDatabase = @StoreInDatabase  " +
+                   $"Where {ItemIdName} = @{ItemIdName}";
         }
 
         #endregion
@@ -166,7 +167,7 @@ namespace SmartCore.Queries
         /// </summary>
         public static String GetSelectQueryById(int id)
         {
-            return string.Format(@"Select 
+            return $@"Select 
                         IsDeleted, 
                         ItemID, 
                         FileName,
@@ -174,7 +175,7 @@ namespace SmartCore.Queries
                         FileSize,
                         StoreInDataBase,
                         FilePath
-                        from [dbo].[Files] where ItemID='{0}'", id);
+                        from [dbo].[Files] where ItemID='{id}'";
         }
 		#endregion
 
@@ -188,7 +189,7 @@ namespace SmartCore.Queries
 	    /// <returns></returns>
 	    public static String GetSelectQueryByNameAndSize(string fileName , int fileSize)
 	    {
-		    return string.Format(@"Select ItemID from [dbo].[Files] where FileName='{0}' and FileSize='{1}'", fileName, fileSize);
+		    return $@"Select ItemID from [dbo].[Files] where FileName='{fileName}' and FileSize='{fileSize}'";
 	    }
 
 	    #endregion
@@ -199,14 +200,14 @@ namespace SmartCore.Queries
 			/// </summary>
 		public static String GetSelectQueryByIdLite(int id)
         {
-            return string.Format(@"Select 
+            return $@"Select 
                         IsDeleted, 
                         ItemID, 
                         FileName,
                         FileSize,
                         StoreInDataBase,
                         FilePath
-                        from [dbo].[Files] where ItemID='{0}'", id);
+                        from [dbo].[Files] where ItemID='{id}'";
         }
         #endregion
 
@@ -226,14 +227,14 @@ namespace SmartCore.Queries
                     s += ",";
                 s += id[i].ToString();
             }
-            return string.Format(@"Select 
+            return $@"Select 
                         IsDeleted, 
                         ItemID, 
                         FileName,
                         FileSize,
                         StoreInDataBase,
                         FilePath
-                        from [dbo].[Files] where ItemID in ({0})", s);
+                        from [dbo].[Files] where ItemID in ({s})";
         }
         #endregion
 

@@ -758,12 +758,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DLL\Telerik\Telerik.WinControls.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.WinControls.ChartView, Version=2019.1.115.20, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.WinControls.ChartView">
+      <HintPath>..\DLL\Telerik\Telerik.WinControls.ChartView.dll</HintPath>
+    </Reference>
     <Reference Include="Telerik.WinControls.GridView, Version=2019.1.115.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DLL\Telerik\Telerik.WinControls.GridView.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.WinControls.Themes.TelerikMetro, Version=2019.1.115.20, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.WinControls.Themes.TelerikMetro">
+      <HintPath>..\DLL\Telerik\Telerik.WinControls.Themes.TelerikMetro.dll</HintPath>
+    </Reference>
     <Reference Include="Telerik.WinControls.Themes.TelerikMetroBlue, Version=2019.1.115.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DLL\Telerik\Telerik.WinControls.Themes.TelerikMetroBlue.dll</HintPath>
@@ -813,6 +817,12 @@
     <Compile Include="UIControls\Fleet\ComponentsFleetListView.Designer.cs">
       <DependentUpon>ComponentsFleetListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\Fleet\CopyADToAircraftForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\Fleet\CopyADToAircraftForm.Designer.cs">
+      <DependentUpon>CopyADToAircraftForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\Fleet\DirectiveFleetListScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -849,11 +859,53 @@
     <Compile Include="UIControls\ForecastControls\ForecastMTOPListViewOld.Designer.cs">
       <DependentUpon>ForecastMTOPListViewOld.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\LDND\LDNDForecastForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\LDND\LDNDForecastForm.Designer.cs">
+      <DependentUpon>LDNDForecastForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\LDND\LDNDListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\LDND\LDNDListView.Designer.cs">
+      <DependentUpon>LDNDListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\LDND\LDNDListScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\LDND\LDNDListScreen.Designer.cs">
+      <DependentUpon>LDNDListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\MaintananceProgram\CheckNew\MaintenanceCheckExtensionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\MaintananceProgram\CheckNew\MaintenanceCheckExtensionForm.designer.cs">
+      <DependentUpon>MaintenanceCheckExtensionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\MailControls\MailSettingFrom.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UIControls\MailControls\MailSettingFrom.Designer.cs">
       <DependentUpon>MailSettingFrom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\MaintananceProgram\CheckNew\MaintenanceCheckFormNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\MaintananceProgram\CheckNew\MaintenanceCheckFormNew.designer.cs">
+      <DependentUpon>MaintenanceCheckFormNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\MaintananceProgram\CheckNew\MaintenanceCheckEditNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\MaintananceProgram\CheckNew\MaintenanceCheckEditNew.Designer.cs">
+      <DependentUpon>MaintenanceCheckEditNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\MaintananceProgram\CheckNew\MaintenanceDirectiveLightListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\MaintananceProgram\CheckNew\MaintenanceDirectiveLightListView.Designer.cs">
+      <DependentUpon>MaintenanceDirectiveLightListView.cs</DependentUpon>
     </Compile>
     <Compile Include="UIControls\OilControls\Model\OilGraphicModel.cs" />
     <Compile Include="UIControls\OilControls\OilGraphForm.cs">
@@ -1392,6 +1444,18 @@
     </Compile>
     <Compile Include="UIControls\PurchaseControls\ProductListView.Designer.cs">
       <DependentUpon>ProductListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Purchase\TransferInformationFormListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Purchase\TransferInformationFormListView.Designer.cs">
+      <DependentUpon>TransferInformationFormListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Purchase\TransferInformationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\PurchaseControls\Purchase\TransferInformationForm.Designer.cs">
+      <DependentUpon>TransferInformationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UIControls\PurchaseControls\Purchase\QuotationFreightOrderForm.cs">
       <SubType>Form</SubType>
@@ -3919,6 +3983,9 @@
     <EmbeddedResource Include="UIControls\Fleet\ComponentsFleetListView.resx">
       <DependentUpon>ComponentsFleetListView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Fleet\CopyADToAircraftForm.resx">
+      <DependentUpon>CopyADToAircraftForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIControls\Fleet\DirectiveFleetListScreen.resx">
       <DependentUpon>DirectiveFleetListScreen.cs</DependentUpon>
     </EmbeddedResource>
@@ -3930,8 +3997,28 @@
       <DependentUpon>ForecastListScreenMtopOld.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\LDND\LDNDForecastForm.resx">
+      <DependentUpon>LDNDForecastForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\LDND\LDNDListScreen.resx">
+      <DependentUpon>LDNDListScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\MaintananceProgram\CheckNew\MaintenanceCheckExtensionForm.resx">
+      <DependentUpon>MaintenanceCheckExtensionForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIControls\MailControls\MailSettingFrom.resx">
       <DependentUpon>MailSettingFrom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\MaintananceProgram\CheckNew\MaintenanceCheckFormNew.resx">
+      <DependentUpon>MaintenanceCheckFormNew.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\MaintananceProgram\CheckNew\MaintenanceCheckEditNew.resx">
+      <DependentUpon>MaintenanceCheckEditNew.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\OilControls\OilGraphForm.resx">
       <DependentUpon>OilGraphForm.cs</DependentUpon>
@@ -4165,6 +4252,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PurchaseControls\ProductListScreen.resx">
       <DependentUpon>ProductListScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\PurchaseControls\Purchase\TransferInformationForm.resx">
+      <DependentUpon>TransferInformationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\PurchaseControls\Purchase\QuotationFreightOrderForm.resx">
       <DependentUpon>QuotationFreightOrderForm.cs</DependentUpon>
@@ -5371,12 +5461,15 @@
     <Content Include="Resources\B737500RearLeft.bmp" />
     <Content Include="Resources\B737500Side.bmp" />
     <Content Include="Resources\B737500Top.bmp" />
+    <None Include="Resources\Check_List_Service-Maintenance.png" />
+    <None Include="Resources\DocumentGear.png" />
     <Content Include="Resources\ExcelImport.png" />
     <Resource Include="Resources\ImageIcon_Small.png" />
     <Resource Include="Resources\ImageIcon_Small_Gray.png" />
     <None Include="Resources\ImageIcon_Small1.png" />
     <None Include="Resources\ImageIcon_Small_Gray1.png" />
     <None Include="Resources\graph.png" />
+    <None Include="Resources\ExtensionIcon.png" />
     <Content Include="Resources\KitsIcon.png" />
     <Content Include="Resources\KitsIcon_gray.png" />
     <None Include="Resources\PreTransfer.png" />

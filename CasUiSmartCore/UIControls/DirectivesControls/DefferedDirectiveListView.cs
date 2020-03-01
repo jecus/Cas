@@ -49,9 +49,16 @@ namespace CAS.UI.UIControls.DirectivesControls
 			AddColumn("Effective date", (int)(radGridView1.Width * 0.24f));
 			AddColumn("1st. Perf.", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Rpt. Intv.", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Next", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Remain/Overdue", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Last", (int)(radGridView1.Width * 0.10f));
+
+			AddColumn("Next(E)", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Next Estimated Data", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Remain(E)", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Next(L)", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Next Limit Data", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Remain(L)", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Last", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Last Data", (int)(radGridView1.Width * 0.2f));
+
 			AddColumn("ATA Chapter", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Kit", (int)(radGridView1.Width * 0.10f));
 			AddColumn("NDT", (int)(radGridView1.Width * 0.10f));
@@ -133,17 +140,12 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 			if (lastComplianceDate <= DateTimeExtend.GetCASMinDateTime())
 				lastPerformanceString = "N/A";
-			else
-				lastPerformanceString = SmartCore.Auxiliary.Convert.GetDateFormat(lastComplianceDate) + " " +
-										lastComplianceLifeLength;
+			else lastPerformanceString = lastComplianceLifeLength.ToString();
 
-			var nextComplianceString = ((nextComplianceDate <= DateTimeExtend.GetCASMinDateTime())
-											   ? ""
-											   : SmartCore.Auxiliary.Convert.GetDateFormat(nextComplianceDate)) + " " +
-										  nextComplianceLifeLength;
-			var nextRemainString = nextComplianceRemain != null && !nextComplianceRemain.IsNullOrZero()
-										  ? nextComplianceRemain.ToString()
-										  : "N/A";
+			var lastDate = (lastComplianceDate <= DateTimeExtend.GetCASMinDateTime())
+				? ""
+				: SmartCore.Auxiliary.Convert.GetDateFormat(lastComplianceDate);
+
 			var titleString = pd.Title != "" ? pd.Title + par : "N/A";
 			var sbString = pd.ServiceBulletinNo != "" ? pd.ServiceBulletinNo : "N/A";
 			var eoString = pd.EngineeringOrders != "" ? pd.EngineeringOrders : "N/A";
@@ -163,9 +165,16 @@ namespace CAS.UI.UIControls.DirectivesControls
 				? SmartCore.Auxiliary.Convert.GetDateFormat(effDate) : "", effDate));
 			subItems.Add(CreateRow(firstPerformanceString, firstPerformanceString));
 			subItems.Add(CreateRow(repeatInterval.ToString(), repeatInterval));
-			subItems.Add(CreateRow(nextComplianceString, nextComplianceDate));
-			subItems.Add(CreateRow(nextRemainString, nextRemainString));
+
+			subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.NextPerformance?.PerformanceDate), item.NextPerformance?.PerformanceDate));
+			subItems.Add(CreateRow(item.NextPerformance?.PerformanceSource.ToString(), item.NextPerformance?.PerformanceSource));
+			subItems.Add(CreateRow(item.NextPerformance?.Remains.ToString(), item.NextPerformance?.Remains));
+			subItems.Add(CreateRow(item.NextPerformance?.NextLimit.Days != null ? SmartCore.Auxiliary.Convert.GetDateFormat(item.NextPerformance?.NextPerformanceDateNew) : "", item.NextPerformance?.NextPerformanceDateNew));
+			subItems.Add(CreateRow(item.NextPerformance?.NextLimit.ToString(), item.NextPerformance?.NextLimit.ToString()));
+			subItems.Add(CreateRow(item.NextPerformance?.RemainLimit.ToString(), item.NextPerformance?.RemainLimit.ToString()));
+			subItems.Add(CreateRow(lastDate, lastComplianceDate));
 			subItems.Add(CreateRow(lastPerformanceString, lastComplianceDate));
+
 			subItems.Add(CreateRow(ata.ToString(), ata));
 			subItems.Add(CreateRow(kitRequieredString, kitRequieredString));
 			subItems.Add(CreateRow(ndtString, ndtString));
@@ -185,11 +194,11 @@ namespace CAS.UI.UIControls.DirectivesControls
 	 //   protected override void SortItems(int columnIndex)
 	 //   {
 	 //       if (OldColumnIndex != columnIndex)
-	 //           SortMultiplier = -1;
-	 //       if (SortMultiplier == 1)
-	 //           SortMultiplier = -1;
+	 //           SortDirection = -1;
+	 //       if (SortDirection == 1)
+	 //           SortDirection = -1;
 	 //       else
-	 //           SortMultiplier = 1;
+	 //           SortDirection = 1;
 	 //       itemsListView.Items.Clear();
 
 	 //       List<ListViewItem> resultList = new List<ListViewItem>();
@@ -198,7 +207,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 	 //       {
 	 //           SetGroupsToItems(columnIndex);
 
-	 //           ListViewItemList.Sort(new CPCPDirectiveListViewComparer(columnIndex, SortMultiplier));
+	 //           ListViewItemList.Sort(new CPCPDirectiveListViewComparer(columnIndex, SortDirection));
 	 //           //добавление остальных подзадач
 	 //           foreach (ListViewItem item in ListViewItemList)
 	 //           {
@@ -212,7 +221,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 	 //               resultList.Add(item);
 	 //           }
 
-	 //           resultList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
+	 //           resultList.Sort(new BaseListViewComparer(columnIndex, SortDirection));
 
 	 //           itemsListView.Groups.Clear();
 	 //           foreach (var item in resultList)
@@ -231,7 +240,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 	 //           {
 	 //               resultList.Add(item);
 	 //           }
-	 //           resultList.Sort(new CPCPDirectiveListViewComparer(columnIndex, SortMultiplier));
+	 //           resultList.Sort(new CPCPDirectiveListViewComparer(columnIndex, SortDirection));
 	 //       }
 	 //       itemsListView.Items.AddRange(resultList.ToArray());
 	 //       OldColumnIndex = columnIndex;

@@ -103,7 +103,7 @@
 			this.extendableRichContainerGeneralData.AutoSize = true;
 			this.extendableRichContainerGeneralData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.extendableRichContainerGeneralData.BackColor = System.Drawing.Color.Transparent;
-			this.extendableRichContainerGeneralData.Caption = "Genearl Data";
+			this.extendableRichContainerGeneralData.Caption = "General Data";
 			this.extendableRichContainerGeneralData.CaptionFont = new System.Drawing.Font("Verdana", 27.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.extendableRichContainerGeneralData.Condition = null;
 			this.extendableRichContainerGeneralData.DescriptionTextColor = System.Drawing.Color.DimGray;
@@ -240,10 +240,8 @@
 			// 
 			this.mtopGeneralControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.mtopGeneralControl.Location = new System.Drawing.Point(3, 420);
-			this.mtopGeneralControl.MaximumSize = new System.Drawing.Size(1200, 555);
-			this.mtopGeneralControl.MinimumSize = new System.Drawing.Size(1200, 310);
 			this.mtopGeneralControl.Name = "mtopGeneralControl";
-			this.mtopGeneralControl.Size = new System.Drawing.Size(1200, 310);
+			this.mtopGeneralControl.Size = new System.Drawing.Size(1800, 375);
 			this.mtopGeneralControl.TabIndex = 2;
 			// 
 			// mtopPerformanceControl1

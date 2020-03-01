@@ -117,7 +117,8 @@
             catch (Exception exception)
             {
                 Request.Response = "EXCEPTION";
-                Auxiliary.WriteLog(string.Format("Exception while transfering file:\r\nRequested file: {0}\r\nSource: {1}\r\nException: {2}", Request.Request, (info != null) ? info.FullName : "FileInfo is null", exception.ToString()));
+                Auxiliary.WriteLog(
+	                $"Exception while transfering file:\r\nRequested file: {Request.Request}\r\nSource: {((info != null) ? info.FullName : "FileInfo is null")}\r\nException: {exception.ToString()}");
             }
         }
 

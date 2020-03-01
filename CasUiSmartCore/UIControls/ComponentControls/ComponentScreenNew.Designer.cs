@@ -253,7 +253,7 @@ namespace CAS.UI.UIControls.ComponentControls
             this._complianceControl.Name = "_complianceControl";
             this._complianceControl.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
             this._complianceControl.ShowContent = true;
-            this._complianceControl.Size = new System.Drawing.Size(851, 354);
+            this._complianceControl.Size = new System.Drawing.Size(1051, 354);
             this._complianceControl.TabIndex = 6;
             this._complianceControl.ComplianceAdded += new System.EventHandler(this.ComplianceControlComplianceAdded);
             // 

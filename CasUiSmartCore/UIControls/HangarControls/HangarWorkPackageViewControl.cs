@@ -225,14 +225,14 @@ namespace CAS.UI.UIControls.HangarControls
         //protected override void SortItems(int columnIndex)
         //{
         //    if (OldColumnIndex != columnIndex)
-        //        SortMultiplier = -1;
-        //    if (SortMultiplier == 1)
-        //        SortMultiplier = -1;
+        //        SortDirection = -1;
+        //    if (SortDirection == 1)
+        //        SortDirection = -1;
         //    else
-        //        SortMultiplier = 1;
+        //        SortDirection = 1;
         //    dataGridView.Rows.Clear();
         //    SetGroupsToItems();
-        //    PreResultRowList.Sort(new BaseDataGridViewRowComparer(columnIndex, SortMultiplier));
+        //    PreResultRowList.Sort(new BaseDataGridViewRowComparer(columnIndex, SortDirection));
 
         //    for (int i = 0; i < PreResultRowList.Count; i++)
         //    {
@@ -346,7 +346,8 @@ namespace CAS.UI.UIControls.HangarControls
                     dataGridViewRow.DefaultCellStyle.ForeColor = Color.Gray;
                     if (dataGridViewRow.Cells[0].ToolTipText.Trim() != "")
                         dataGridViewRow.Cells[0].ToolTipText += "\n";
-                    dataGridViewRow.Cells[0].ToolTipText += string.Format("This {0} is deleted", nextPerformance.Parent.SmartCoreObjectType);
+                    dataGridViewRow.Cells[0].ToolTipText +=
+	                    $"This {nextPerformance.Parent.SmartCoreObjectType} is deleted";
                 }
             }
             else if (item is AbstractPerformanceRecord)
@@ -360,7 +361,7 @@ namespace CAS.UI.UIControls.HangarControls
                     dataGridViewRow.DefaultCellStyle.ForeColor = Color.Gray;
                     if (dataGridViewRow.Cells[0].ToolTipText.Trim() != "")
                         dataGridViewRow.Cells[0].ToolTipText += "\n";
-                    dataGridViewRow.Cells[0].ToolTipText += string.Format("This {0} is deleted", apr.Parent.SmartCoreObjectType);
+                    dataGridViewRow.Cells[0].ToolTipText += $"This {apr.Parent.SmartCoreObjectType} is deleted";
                 }
             }
             else
@@ -384,7 +385,7 @@ namespace CAS.UI.UIControls.HangarControls
                     dataGridViewRow.DefaultCellStyle.ForeColor = Color.Gray;
                     if (dataGridViewRow.Cells[0].ToolTipText.Trim() != "")
                         dataGridViewRow.Cells[0].ToolTipText += "\n";
-                    dataGridViewRow.Cells[0].ToolTipText += string.Format("This {0} is deleted", item.SmartCoreObjectType);
+                    dataGridViewRow.Cells[0].ToolTipText += $"This {item.SmartCoreObjectType} is deleted";
                 }
             }
         }

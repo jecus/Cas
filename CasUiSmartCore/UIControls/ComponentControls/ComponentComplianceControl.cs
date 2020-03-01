@@ -123,7 +123,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			        //расчет след. выполнений директивы.
 			        //если известен ресурс прогноза, то будут расчитаны все просрочнные выполнения
 			        //если неизвестне, то только первое
-			        GlobalObjects.PerformanceCalculator.GetNextPerformance(directive, forecastData);
+			        //GlobalObjects.PerformanceCalculator.GetNextPerformance(directive, forecastData);
 			        nextPerformances.AddRange(directive.NextPerformances);
 			        lastRecords.AddRange(directive.PerformanceRecords.ToArray());
 
@@ -276,6 +276,8 @@ namespace CAS.UI.UIControls.ComponentControls
 								directiveRecord.OnLifelength != null
 									? directiveRecord.OnLifelength.ToString()
 									: "",
+									"",
+									"",
 								directiveRecord.Remarks
 							};
 				}
@@ -293,7 +295,9 @@ namespace CAS.UI.UIControls.ComponentControls
 									: "Transfered " + destinationObject + " to " + currentDestination,
 								UsefulMethods.NormalizeDate(transferRecord.TransferDate),
 								transferRecord.OnLifelength.ToString(),
-								transferRecord.Remarks,
+								"",
+								"",
+                                transferRecord.Remarks,
 							};
 					lastDestination = currentDestination;
 				}
@@ -306,7 +310,9 @@ namespace CAS.UI.UIControls.ComponentControls
 								"Changed to " + toCategory,
 								UsefulMethods.NormalizeDate(llpRecord.RecordDate),
 								llpRecord.OnLifelength.ToString(),
-								llpRecord.Remarks,
+								"",
+								"",
+                                llpRecord.Remarks,
 							};
 				}
 				else if (sortLastRecords[i] is ActualStateRecord)
@@ -319,7 +325,9 @@ namespace CAS.UI.UIControls.ComponentControls
 								actualStateRecord.OnLifelength != null
 									? actualStateRecord.OnLifelength.ToString()
 									: "",
-								actualStateRecord.Remarks,
+								"",
+								"",
+                                actualStateRecord.Remarks,
 							};
 				}
 				else
@@ -329,7 +337,9 @@ namespace CAS.UI.UIControls.ComponentControls
 								"Unknown record ",
 								UsefulMethods.NormalizeDate(sortLastRecords[i].RecordDate),
 								sortLastRecords[i].OnLifelength.ToString(),
-								sortLastRecords[i].Remarks,
+								"",
+								"",
+                                sortLastRecords[i].Remarks,
 							};
 				}
 				items.Add(new KeyValuePair<AbstractRecord, string[]>(sortLastRecords[i], subs));

@@ -203,7 +203,7 @@ namespace CAS.UI.UIControls.PurchaseControls.AllOrders
 			// 
 			// checkBoxAll
 			// 
-			this.buttonFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkBoxAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.checkBoxAll.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.checkBoxAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.checkBoxAll.Location = new System.Drawing.Point(10, 35);

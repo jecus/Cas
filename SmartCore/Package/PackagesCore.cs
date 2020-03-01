@@ -213,7 +213,7 @@ namespace SmartCore.Packages
                     foreach (KeyValuePair<int, string> sub in subs)
                     {
                         if (filterString != "") filterString += "\n or";
-                        filterString += string.Format("(PackageItemTypeId = {0} and PackageItemId in ({1}))", sub.Key, sub.Value);
+                        filterString += $"(PackageItemTypeId = {sub.Key} and PackageItemId in ({sub.Value}))";
                     }
 
                     //Строка запроса, выдающая идентификаторы пакетов задач
@@ -439,7 +439,7 @@ namespace SmartCore.Packages
                     foreach (KeyValuePair<int, string> sub in subs)
                     {
                         if (filterString != "") filterString += "\n or";
-                        filterString += string.Format("(PackageItemType = {0} and DirectivesId in ({1}))", sub.Key, sub.Value);
+                        filterString += $"(PackageItemType = {sub.Key} and DirectivesId in ({sub.Value}))";
                     }
 
                     //Строка запроса, выдающая идентификаторы пакетов задач

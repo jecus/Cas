@@ -800,8 +800,8 @@ namespace CAS.UI.UIControls.Auxiliary
                     {
                         //Если имеется атрибут NotNullAttribute то шрифт заголовка задается Жирным
                         columnHeader.HeaderCell.Style.Font = new Font(dataGridView.ColumnHeadersDefaultCellStyle.Font, FontStyle.Bold);
-                        columnHeader.HeaderCell.ToolTipText = 
-                            string.Format("The cells in column {0} should be filled", columnHeader.HeaderText);
+                        columnHeader.HeaderCell.ToolTipText =
+	                        $"The cells in column {columnHeader.HeaderText} should be filled";
                     }
                     ColumnHeaderList.Add(columnHeader);
                     columnsWidth += columnHeader.Width;
@@ -1325,7 +1325,7 @@ namespace CAS.UI.UIControls.Auxiliary
                         ListViewDataAttribute lvda = (ListViewDataAttribute)
                                                      propertyInfo.GetCustomAttributes(typeof (ListViewDataAttribute),
                                                                                       false).First();
-                        message += string.Format("cells in column '{0}' should not be empty", lvda.Title);
+                        message += $"cells in column '{lvda.Title}' should not be empty";
                         return false;
                     }
                 }

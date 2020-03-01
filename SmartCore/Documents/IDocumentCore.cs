@@ -10,7 +10,7 @@ namespace SmartCore.Documents
 
 		List<Document> GetDocumentsByParentType(BaseEntityObject parent, DocumentType docType);
 
-		List<Document> GetAircraftDocuments(Aircraft parentAircraft);
+		List<Document> GetAircraftDocuments(Aircraft parentAircraft, DocumentType type = null);
 
 		List<Document> GetOperatorDocuments(Operator parentOperator);
 

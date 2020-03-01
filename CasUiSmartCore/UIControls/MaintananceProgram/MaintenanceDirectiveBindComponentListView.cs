@@ -201,7 +201,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 listViewItem.ForeColor = Color.Gray;
                 if (listViewItem.ToolTipText.Trim() != "")
                     listViewItem.ToolTipText += "\n";
-                listViewItem.ToolTipText += string.Format("This {0} is deleted", item.SmartCoreObjectType);
+                listViewItem.ToolTipText += $"This {item.SmartCoreObjectType} is deleted";
             }
         }
         #endregion

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
@@ -14,6 +15,7 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
+using SmartCore.Files;
 
 namespace CAS.UI.UIControls.DirectivesControls
 {
@@ -97,7 +99,7 @@ namespace CAS.UI.UIControls.DirectivesControls
         /// </summary>
         private void Initialize()
         {
-            _needReload = false;
+            _needReload = true;
 
             #region ButtonPrintContextMenu
 
@@ -204,11 +206,14 @@ namespace CAS.UI.UIControls.DirectivesControls
             {
                 if (_currentDamage.ItemId > 0 && _needReload)
                 {
-					_currentDamage = GlobalObjects.CasEnvironment.NewLoader.GetObject<DirectiveDTO, DamageItem>(new List<Filter>()
-					{
-						new Filter("ItemId",_currentDamage.ItemId),
-						new Filter("DirectiveType", 12)
-					}, true);
+					_currentDamage = GlobalObjects.CasEnvironment.Loader.GetObject<DamageItem>(loadChild:true, itemId:_currentDamage.ItemId);
+
+                    var links = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<ItemFileLinkDTO, ItemFileLink>(new List<Filter>()
+                    {
+	                    new Filter("ParentId",_currentDamage.ItemId),
+	                    new Filter("ParentTypeId", 3053)
+                    }, true);
+                    _currentDamage.Files.AddRange(links);
                 }
             }
             catch (Exception ex)
@@ -229,7 +234,8 @@ namespace CAS.UI.UIControls.DirectivesControls
 
             if (_needReload)
             {
-                GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDamage);
+                //GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDamage);
+                GlobalObjects.MTOPCalculator.CalculateDirectiveNew(_currentDamage);
             }
 
             if (AnimatedThreadWorker.CancellationPending)

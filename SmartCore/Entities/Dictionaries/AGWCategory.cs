@@ -235,7 +235,7 @@ namespace SmartCore.Entities.Dictionaries
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return string.Format("{0} {1} {2}-{3} kg", _fullName, _gender, _weightSummer, _weightWinter);
+			return $"{_fullName} {_gender} {_weightSummer}-{_weightWinter} kg";
 		}
 		#endregion
 

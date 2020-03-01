@@ -34,10 +34,9 @@ namespace SmartCore.Queries
         {
             //string detailIn = 
             //    BaseQueries.GetSelectQueryColumnOnly<Detail>(BaseEntityObject.ItemIdProperty, new[] {DetailQueries.GetWhereStatement(aircraft)});
-            var componentIn = string.Format(@"(select ItemId 
+            var componentIn = $@"(select ItemId 
                                                from dbo.Components 
-                                               where dbo.Components.IsDeleted = 0 and {0})",
-                                              ComponentQueries.GetWhereStatement(aircraftId).Values[0]);
+                                               where dbo.Components.IsDeleted = 0 and {ComponentQueries.GetWhereStatement(aircraftId).Values[0]})";
             var allFilters = new List<ICommonFilter> { new CommonFilter<string>(ComponentDirective.ComponentIdProperty, FilterType.In, new[] { componentIn }) };
             if (filters != null && filters.Length > 0)
                 allFilters.AddRange(filters);

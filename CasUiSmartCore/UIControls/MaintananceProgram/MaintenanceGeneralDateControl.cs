@@ -369,10 +369,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
                 }
             }
 
-            string key = string.Format("{0}{1}{2}{3}", item.Schedule ? "1" : "2",
-                                                       ((int)item.Resource),
-                                                       item.Grouping ? "1" : "2",
-                                                       item.CheckType.Priority);
+            string key =
+	            $"{(item.Schedule ? "1" : "2")}{((int) item.Resource)}{(item.Grouping ? "1" : "2")}{item.CheckType.Priority}";
             ListViewGroup listViewGroup = new ListViewGroup(key, item.CheckType.FullName + type + resource + grouping); 
             listViewMaintenanceChecks.Groups.Add(listViewGroup);
             _listViewGroups.Add(listViewGroup);

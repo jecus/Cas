@@ -524,6 +524,8 @@ namespace CAS.UI.UIControls.ComponentControls
 
 				if (DirectiveSource is BaseComponent)
 				{
+					GlobalObjects.ComponentCore.ReloadActualStateRecordForBaseComponents(((BaseComponent)DirectiveSource).ParentAircraftId);
+
 					if (((BaseComponent)DirectiveSource).BaseComponentType == BaseComponentType.Engine && _llpMark)
 						componentCollection.AddRange(GlobalObjects.ComponentCore.GetComponents((BaseComponent)DirectiveSource, _llpMark).ToArray());
 					else componentCollection.AddRange(GlobalObjects.ComponentCore.GetComponents((BaseComponent)DirectiveSource).ToArray());
@@ -634,6 +636,8 @@ namespace CAS.UI.UIControls.ComponentControls
 
 				if (DirectiveSource is Aircraft)
 				{
+					GlobalObjects.ComponentCore.ReloadActualStateRecordForBaseComponents(((Aircraft)DirectiveSource).ItemId);
+
 					List<BaseComponentType> baseDetailTypes = new List<BaseComponentType>(_baseComponentTypes);
 					//для начала нужно извлечь все базовые агрегаты самолета
 					//они хранятся в ядре и загружаютя при первом старте программы
@@ -1006,12 +1010,13 @@ namespace CAS.UI.UIControls.ComponentControls
 				detail.ChangeLLPCategoryRecords.Clear();
 				detail.ChangeLLPCategoryRecords.AddRange(llpchangeRec.Where(i => i.ParentId == detail.ItemId));
 
-				GlobalObjects.PerformanceCalculator.GetNextPerformance(detail);
+				GlobalObjects.MTOPCalculator.CalculateDirectiveNew(detail);
 				_preResultDirectiveArray.Add(detail);
 
 				foreach (ComponentDirective detailDirective in detail.ComponentDirectives)
 				{
-					GlobalObjects.PerformanceCalculator.GetNextPerformance(detailDirective);
+					//GlobalObjects.PerformanceCalculator.GetNextPerformance(detailDirective);
+					GlobalObjects.MTOPCalculator.CalculateDirectiveNew(detailDirective);
 					_preResultDirectiveArray.Add(detailDirective);   
 				}
 			}
@@ -2466,9 +2471,7 @@ namespace CAS.UI.UIControls.ComponentControls
 								else
 								{
 									labelDateAsOf.Text =
-										string.Format("Forecast: {0}. {1}",
-													   main.CheckName,
-													   main.NextPerformance);
+										$"Forecast: {main.CheckName}. {main.NextPerformance}";
 								}
 							}
 						}

@@ -4545,6 +4545,7 @@ namespace SmartCore.DtoHelper
 				CostType = (short)purchaserec.Exchange,
 				Processed = purchaserec.Processed,
 				AdditionalInformationJSON = purchaserec.AdditionalInformationJSON,
+				TransferInformationJSON = purchaserec.TransferInformationJSON,
 				Files = purchaserec.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>
 			};
 		}
@@ -4569,7 +4570,8 @@ namespace SmartCore.DtoHelper
 				CostCondition = purchaserecdto.CostCondition.HasValue ? (ComponentStatus)purchaserecdto.CostCondition.Value : ComponentStatus.Unknown,
 				Exchange = (Exchange)purchaserecdto.CostType,
 				Processed = purchaserecdto.Processed ?? default(bool),
-				AdditionalInformationJSON = purchaserecdto.AdditionalInformationJSON
+				AdditionalInformationJSON = purchaserecdto.AdditionalInformationJSON,
+				TransferInformationJSON = purchaserecdto.TransferInformationJSON
 			};
 
 			if (purchaserecdto.Files != null)
@@ -5340,7 +5342,8 @@ namespace SmartCore.DtoHelper
 				FromRecordId = workpackrec.FromRecordId,
 				Group = workpackrec.Group,
 				ParentCheckId = workpackrec.ParentCheckId,
-				JobCardNumber = workpackrec.JobCardNumber
+				JobCardNumber = workpackrec.JobCardNumber,
+				IsClosed = workpackrec.IsClosed
 			};
 		}
 
@@ -5360,7 +5363,8 @@ namespace SmartCore.DtoHelper
 				FromRecordId = workpackrecdto.FromRecordId ?? default(int),
 				ParentCheckId = workpackrecdto.ParentCheckId ?? default(int),
 				Group = workpackrecdto.Group ?? default(int),
-				JobCardNumber = workpackrecdto.JobCardNumber
+				JobCardNumber = workpackrecdto.JobCardNumber,
+				IsClosed = workpackrecdto.IsClosed
 			};
 		}
 
@@ -5473,6 +5477,8 @@ namespace SmartCore.DtoHelper
 				APUCalc = maindirec.APUCalc,
 				ScheduleRevisionNum = maindirec.ScheduleRevisionNum,
 				ScheduleRevisionDate = maindirec.ScheduleRevisionDate,
+				IsExtension = maindirec.IsExtension,
+				Extension = maindirec.Extension,
 				Files = maindirec.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
 				PerformanceRecords = maindirec.PerformanceRecords?.Select(i => i.Convert()) as ICollection<DirectiveRecordDTO>,
 				CategoriesRecords = maindirec.CategoriesRecords?.Select(i => i.Convert()) as ICollection<CategoryRecordDTO>,
@@ -5532,6 +5538,8 @@ namespace SmartCore.DtoHelper
 				ScheduleRef = maindirecdto.ScheduleRef,
 				APUCalc = maindirecdto.APUCalc,
 				ScheduleRevisionNum = maindirecdto.ScheduleRevisionNum,
+				IsExtension = maindirecdto.IsExtension,
+				Extension = maindirecdto.Extension,
 				ScheduleRevisionDate = maindirecdto.ScheduleRevisionDate ?? DateTimeExtend.GetCASMinDateTime()
 			};
 
@@ -5741,6 +5749,44 @@ namespace SmartCore.DtoHelper
 				Updated = quot.Updated,
 				CorrectorId = quot.CorrectorId,
 				SettingsJSON = quot.SettingsJSON,
+			};
+		}
+
+		public static WorkStationsDTO Convert(this WorkStation workStation)
+		{
+			return new WorkStationsDTO
+			{
+				ItemId = workStation.ItemId,
+				IsDeleted = workStation.IsDeleted,
+				Updated = workStation.Updated,
+				CorrectorId = workStation.CorrectorId,
+				Name = workStation.Name,
+				Location = workStation.Location,
+				Email = workStation.Email,
+				Phone = workStation.Phone,
+				Remarks = workStation.Remarks,
+				Adress = workStation.Adress,
+				Contact = workStation.Contact,
+				OperatorId = workStation.OperatorId
+			};
+		}
+
+		public static WorkStation Convert(this WorkStationsDTO workStation)
+		{
+			return new WorkStation()
+			{
+				ItemId = workStation.ItemId,
+				IsDeleted = workStation.IsDeleted,
+				Updated = workStation.Updated,
+				CorrectorId = workStation.CorrectorId,
+				Name = workStation.Name,
+				Location = workStation.Location,
+				Email = workStation.Email,
+				Phone = workStation.Phone,
+				Remarks = workStation.Remarks,
+				Adress = workStation.Adress,
+				Contact = workStation.Contact,
+				OperatorId = workStation.OperatorId
 			};
 		}
 	}

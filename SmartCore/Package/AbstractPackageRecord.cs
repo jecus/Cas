@@ -153,7 +153,7 @@ namespace SmartCore.Packages
 		#region public override string ToString()
 		public override string ToString()
 		{
-			return string.Format("Dir:id {0} desc:{1} ", PackageItemId, PackageItem != null ? PackageItem.ToString() : "");
+			return $"Dir:id {PackageItemId} desc:{(PackageItem != null ? PackageItem.ToString() : "")} ";
 		}
 		#endregion
 

@@ -123,7 +123,7 @@ namespace CAS.UI.UIControls.DirectivesControls
             if ((_currentDirective == null) || _currentDirective.ParentBaseComponent == null)
                 return;
             
-            GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDirective);
+            //GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDirective);
             
             BaseComponent inspectedComponent = _currentDirective.ParentBaseComponent;
             labelDirectiveValue.Text = _currentDirective.Title + " for";

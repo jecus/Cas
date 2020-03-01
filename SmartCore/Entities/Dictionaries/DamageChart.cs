@@ -9,7 +9,7 @@ using SmartCore.Files;
 
 namespace SmartCore.Entities.Dictionaries
 {
-	[Table("DamageCharts","dictionaries","ItemId")]
+	[Table("DamageCharts","Dictionaries","ItemId")]
 	[Dto(typeof(DamageChartDTO))]
 	[Serializable]
 	public class DamageChart : BaseEntityObject, IFileContainer

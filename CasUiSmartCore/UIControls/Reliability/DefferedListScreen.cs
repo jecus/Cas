@@ -236,7 +236,8 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 			foreach (Directive pd in _initialDirectiveArray)
 			{
-				GlobalObjects.PerformanceCalculator.GetNextPerformance(pd);
+				//GlobalObjects.PerformanceCalculator.GetNextPerformance(pd);
+				GlobalObjects.MTOPCalculator.CalculateDirectiveNew(pd);
 			}
 
 			AnimatedThreadWorker.ReportProgress(70, "filter directives");
@@ -535,7 +536,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			catch (Exception ex)
 			{
 				string errorDescriptionSctring =
-					string.Format("Error while Open Attached File for {0}, id {1}. \nFileId {2}", dir, dir.ItemId, attachedFile.ItemId);
+					$"Error while Open Attached File for {dir}, id {dir.ItemId}. \nFileId {attachedFile.ItemId}";
 				Program.Provider.Logger.Log(errorDescriptionSctring, ex);
 			}
 		}

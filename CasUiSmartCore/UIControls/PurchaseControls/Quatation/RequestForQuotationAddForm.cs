@@ -376,7 +376,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 
 			decimal quantity = numericUpDownQuantity.Value;
 
-			textBoxTotal.Text = String.Format("{0:0.##}", quantity) + (measure != null ? " " + measure + "(s)" : "");
+			textBoxTotal.Text = $"{quantity:0.##}" + (measure != null ? " " + measure + "(s)" : "");
 		}
 		#endregion
 

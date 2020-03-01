@@ -50,8 +50,10 @@ namespace CAS.UI.UIControls.MaintananceProgram
         {
             System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Need new compliance:", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Last compliance", System.Windows.Forms.HorizontalAlignment.Left);
-            this.columnDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnTsnCsn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.NextEstimated = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.NextLimit = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.NextEstimatedData = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.NextLimitData = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnWorkType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnRemarks = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panelContainer.SuspendLayout();
@@ -61,8 +63,10 @@ namespace CAS.UI.UIControls.MaintananceProgram
             // 
             this.listViewCompliance.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnWorkType,
-            this.columnDate,
-            this.columnTsnCsn,
+            this.NextEstimated,
+            this.NextEstimatedData,
+            this.NextLimit,
+            this.NextLimitData,
             this.columnRemarks});
             this.listViewCompliance.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.listViewCompliance.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -98,16 +102,29 @@ namespace CAS.UI.UIControls.MaintananceProgram
             // 
             this.panelContainer.Size = new System.Drawing.Size(845, 301);
             // 
-            // columnDate
+            // NextEstimated
             // 
-            this.columnDate.Text = "Date";
-            this.columnDate.Width = 200;
+            this.NextEstimated.Text = "Next(E)";
+            this.NextEstimated.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NextEstimated.Width = 80;
             // 
-            // columnTsnCsn
+            // NextEstimatedData
             // 
-            this.columnTsnCsn.Text = "TSN/CSN";
-            this.columnTsnCsn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnTsnCsn.Width = 200;
+            this.NextEstimatedData.Text = "Next Estimated Data";
+            this.NextEstimatedData.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NextEstimatedData.Width = 150;
+            // 
+            // NextLimit
+            // 
+            this.NextLimit.Text = "Next(L)";
+            this.NextLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NextLimit.Width = 80;
+            // 
+            // NextEstimatedData
+            // 
+            this.NextLimitData.Text = "Next Limit Data";
+            this.NextLimitData.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NextLimitData.Width = 120;
             // 
             // columnWorkType
             // 
@@ -136,8 +153,10 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
         #endregion
 
-        private System.Windows.Forms.ColumnHeader columnDate;
-        private System.Windows.Forms.ColumnHeader columnTsnCsn;
+        private System.Windows.Forms.ColumnHeader NextEstimated;
+        private System.Windows.Forms.ColumnHeader NextEstimatedData;
+        private System.Windows.Forms.ColumnHeader NextLimit;
+        private System.Windows.Forms.ColumnHeader NextLimitData;
         private System.Windows.Forms.ColumnHeader columnWorkType;
         private System.Windows.Forms.ColumnHeader columnRemarks;
     }

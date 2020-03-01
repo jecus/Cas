@@ -105,7 +105,7 @@ namespace CAS.UI.UIControls.DirectivesControls
             //расчет след. выполнений директивы.
             //если известен ресурс прогноза, то будут расчитаны все просрочнные выполнения
             //если неизвестне, то только первое
-            GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDirective, forecastData);
+            //GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDirective, forecastData);
             nextPerformances.AddRange(_currentDirective.NextPerformances);
             lastRecords.AddRange(_currentDirective.PerformanceRecords.ToArray());
 
@@ -354,9 +354,11 @@ namespace CAS.UI.UIControls.DirectivesControls
                     {
                         np.WorkType + (d == null ? "" : " §:" + d.Paragraph),
                         np.PerformanceDate != null 
-                            ? UsefulMethods.NormalizeDate((DateTime)np.PerformanceDate) 
+                            ? SmartCore.Auxiliary.Convert.GetDateFormat(np.PerformanceDate)
                             : "N/A",
                         np.PerformanceSource.ToString(),
+                        np?.NextLimit.Days != null ? SmartCore.Auxiliary.Convert.GetDateFormat(np?.NextPerformanceDateNew) : "",
+                        np.NextLimit.ToString(),
                             "",
                     };
 
@@ -387,6 +389,8 @@ namespace CAS.UI.UIControls.DirectivesControls
                                        directiveRecord.OnLifelength != null
                                            ? directiveRecord.OnLifelength.ToString()
                                            : "",
+                                       "",
+                                       "",
                                        directiveRecord.Remarks,
                                    };
             ListViewItem newItem = new ListViewItem(subs)

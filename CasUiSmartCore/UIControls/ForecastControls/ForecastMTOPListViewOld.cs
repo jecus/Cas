@@ -315,7 +315,7 @@ namespace CAS.UI.UIControls.ForecastControls
 			{
 				//SetGroupsToItems(columnIndex);
 
-				//ListViewItemList.Sort(new BaseListViewComparer(columnIndex, SortMultiplier));
+				//ListViewItemList.Sort(new BaseListViewComparer(columnIndex, SortDirection));
 				//добавление остальных подзадач
 				foreach (ListViewItem item in ListViewItemList)
 				{

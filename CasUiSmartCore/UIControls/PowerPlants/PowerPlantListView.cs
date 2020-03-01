@@ -53,7 +53,7 @@ namespace CAS.UI.UIControls.PowerPlants
 
 			return new List<CustomCell>
 			{
-				CreateRow(aircraft.ToString(), aircraft ),
+				CreateRow(aircraft?.ToString(), aircraft ),
 				CreateRow(item.Description, item.Description ),
 				CreateRow(item.PositionNumber, item.PositionNumber ),
 				CreateRow(item.PartNumber, item.PartNumber ),

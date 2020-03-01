@@ -1,8 +1,10 @@
-﻿using System.Windows.Forms;
+﻿using System.ComponentModel;
+using System.Windows.Forms;
 using MetroFramework.Controls;
 using CASTerms;
 using EntityCore.DTO.General;
 using CAS.UI.Helpers;
+using CAS.UI.UIControls.NewGrid;
 
 namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {
@@ -62,6 +64,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.documentControl8 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.documentControl9 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.buttonTransferInformation = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownCost)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.groupBox3.SuspendLayout();
@@ -82,7 +85,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.purchaseRecordListView1.PasteComplete = null;
 			this.purchaseRecordListView1.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.purchaseRecordListView1.Size = new System.Drawing.Size(984, 396);
-			this.purchaseRecordListView1.SortMultiplier = 1;
+			this.purchaseRecordListView1.SortDirection = SortDirection.Desc;
 			this.purchaseRecordListView1.TabIndex = 296;
 			this.purchaseRecordListView1.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.PurchaseRecordListView1_SelectedItemsChanged);
 			// 
@@ -422,11 +425,25 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Product";
 			// 
+			// buttonTransferInformation
+			// 
+			this.buttonTransferInformation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonTransferInformation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonTransferInformation.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.buttonTransferInformation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.buttonTransferInformation.Location = new System.Drawing.Point(826, 658);
+			this.buttonTransferInformation.Name = "buttonTransferInformation";
+			this.buttonTransferInformation.Size = new System.Drawing.Size(196, 33);
+			this.buttonTransferInformation.TabIndex = 324;
+			this.buttonTransferInformation.Text = "Add Transfer Information";
+			this.buttonTransferInformation.Click += new System.EventHandler(this.buttonTransferInformation_Click);
+			// 
 			// PurchaseOrderForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1280, 700);
+			this.Controls.Add(this.buttonTransferInformation);
 			this.Controls.Add(this.buttonSettings);
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.documentControl9);
@@ -484,5 +501,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 		private DocumentationControls.DocumentControl documentControl9;
 		private GroupBox groupBox3;
 		private Button buttonSettings;
+		private Button buttonTransferInformation;
 	}
 }

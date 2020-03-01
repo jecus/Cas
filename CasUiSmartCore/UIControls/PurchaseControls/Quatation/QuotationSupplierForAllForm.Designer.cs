@@ -2,6 +2,7 @@
 using CASTerms;
 using EntityCore.DTO.General;
 using CAS.UI.Helpers;
+using CAS.UI.UIControls.NewGrid;
 
 namespace CAS.UI.UIControls.PurchaseControls.Quatation
 {
@@ -316,7 +317,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.supplierListView1.OldColumnIndex = 0;
 			this.supplierListView1.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.supplierListView1.Size = new System.Drawing.Size(657, 237);
-			this.supplierListView1.SortMultiplier = 0;
+			this.supplierListView1.SortDirection = SortDirection.Asc;
 			this.supplierListView1.TabIndex = 299;
 			// 
 			// supplierListView
@@ -331,7 +332,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Quatation
 			this.supplierListView.OldColumnIndex = 0;
 			this.supplierListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.supplierListView.Size = new System.Drawing.Size(657, 237);
-			this.supplierListView.SortMultiplier = 0;
+			this.supplierListView.SortDirection = SortDirection.Asc;
 			this.supplierListView.TabIndex = 69;
 			// 
 			// QuotationSupplierForAllForm

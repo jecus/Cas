@@ -9,6 +9,9 @@ namespace SmartCore.Calculations.MTOP
 {
 	public interface IMTOPCalculator
 	{
+		void CalculateDirectiveNew(List<IMtopCalc> directives, AverageUtilization averageUtilization = null);
+		void CalculateDirectiveNew(IMtopCalc directive, AverageUtilization averageUtilization = null);
+
 		void CalculateMtopChecks(List<MTOPCheck> checks, AverageUtilization averageUtilization);
 
 		void CalculateNextPerformance(List<MTOPCheck> checks, DateTime frameStartDate,
@@ -17,12 +20,12 @@ namespace SmartCore.Calculations.MTOP
 
 		Dictionary<int, Lifelength> CalculateGroupNew(List<MTOPCheck> checks);
 
-		void CalculateDirective(MaintenanceDirective directive, AverageUtilization averageUtilization);
+		void CalculateDirective(IMtopCalc directive, AverageUtilization averageUtilization);
 
-		void CalculatePhase(CommonCollection<MaintenanceDirective> directives, List<MTOPCheck> checks,
+		void CalculatePhase(IEnumerable<IMtopCalc> directives, List<MTOPCheck> checks,
 			AverageUtilization averageUtilization, bool isZeroPhase = false);
 
-		void CalculatePhaseWithPerformance(CommonCollection<MaintenanceDirective> directives, List<MTOPCheck> checks,
+		void CalculatePhaseWithPerformance(IEnumerable<IMtopCalc> directives, List<MTOPCheck> checks,
 			AverageUtilization averageUtilization, DateTime from, DateTime to, bool isZeroPhase = false);
 	}
 }

@@ -212,7 +212,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
 			_effDate = _currentDirective.Threshold.EffectiveDate;
 
-            GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDirective);
+            //GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDirective);
 
 			comboBoxNdt.Items.Clear();
 			comboBoxNdt.Items.AddRange(NDTType.Items.ToArray());

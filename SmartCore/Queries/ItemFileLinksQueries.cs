@@ -118,13 +118,14 @@ namespace SmartCore.Queries
 		/// </summary>
 		public static String GetSelectQueryById(int id)
 		{
-			return GetSelectQuery() +  string.Format(" where ItemID='{0}'", id);
+			return GetSelectQuery() + $" where ItemID='{id}'";
 		}
 		#endregion
 
 		public static String GetSelectQuery(int[] ids)
 		{
-			return string.Format("{0} where ItemId In ({1})",GetSelectQuery(), string.Join(", ", ids.Select(id => id.ToString(CultureInfo.InvariantCulture)).ToArray()));
+			return
+				$"{GetSelectQuery()} where ItemId In ({string.Join(", ", ids.Select(id => id.ToString(CultureInfo.InvariantCulture)).ToArray())})";
 		}
 
 		#region public static AttachedFile Fill(DataRow row)

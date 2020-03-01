@@ -111,7 +111,7 @@ namespace SmartCore.Entities.General.Templates
 		{
 			get
 			{
-				return string.Format("Templ.N-Rout. job:{0} {1}", AtaChapter, Title);
+				return $"Templ.N-Rout. job:{AtaChapter} {Title}";
 			}
 		}
 		#endregion

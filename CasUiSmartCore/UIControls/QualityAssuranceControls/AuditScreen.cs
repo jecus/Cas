@@ -295,15 +295,12 @@ namespace CAS.UI.UIControls.QualityAssuranceControls
 				foreach (AuditRecord blockedRecord in blockedRecords)
 				{
 					NextPerformance np = blockedRecord.Task.NextPerformances.First(n => n.BlockedByPackage != null);
-					message += string.Format("\nTask: {0} blocked by audit {1}",
-												blockedRecord.Task,
-												np.BlockedByPackage);
+					message += $"\nTask: {blockedRecord.Task} blocked by audit {np.BlockedByPackage}";
 				}
 				if(_currentDirective.MaxClosingDate < _currentDirective.MinClosingDate)
 				{
-					message += string.Format("\nMin Closing Date: {0} better than Max Closing Date: {1}",
-												_currentDirective.MinClosingDate,
-												_currentDirective.MaxClosingDate); 
+					message +=
+						$"\nMin Closing Date: {_currentDirective.MinClosingDate} better than Max Closing Date: {_currentDirective.MaxClosingDate}"; 
 				}
 				MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
 								MessageBoxButtons.OK, MessageBoxIcon.Error);

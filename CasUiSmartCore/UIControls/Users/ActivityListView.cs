@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using CAS.UI.UIControls.NewGrid;
 using SmartCore.Activity;
 
 namespace CAS.UI.UIControls.Users
 {
-    ///<summary>
-    /// список для отображения документов
-    ///</summary>
-    public partial class ActivityListView : BaseGridViewControl<ActivityDTO>
-    {
+	///<summary>
+	/// список для отображения документов
+	///</summary>
+	public partial class ActivityListView : BaseGridViewControl<ActivityDTO>
+	{
 		#region public UserListView()
 		public ActivityListView()
 		{
-			SortMultiplier = 1;
+			SortDirection = SortDirection.Desc;
 			InitializeComponent();
-        }
+		}
 		#endregion
 
 		#region Methods

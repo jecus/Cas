@@ -648,7 +648,7 @@ namespace SmartCore.Entities.General.Quality
 		{
 			get
 			{
-				return string.Format("MPD.:{0}:{1}", Title, Description);
+				return $"MPD.:{Title}:{Description}";
 			}
 		}
 		#endregion

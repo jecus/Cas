@@ -113,7 +113,7 @@ namespace CAS.UI.UIControls.DirectivesControls
                 return;
 
             var aircraft = GlobalObjects.AircraftsCore.GetParentAircraft(_currentDamageItem);
-            GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDamageItem);
+            //GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDamageItem);
 
             labelDirectiveValue.Text = _currentDamageItem.Title + " for";
             labelDescriptionValue.Text = _currentDamageItem.Description;

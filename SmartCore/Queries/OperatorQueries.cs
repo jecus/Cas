@@ -70,7 +70,8 @@ namespace SmartCore.Queries
 		/// </summary>
 		public static String GetUpdateQuery() 
 		{
-            return "Set dateformat dmy; Update [dbo].Operators Set IsDeleted = @IsDeleted, Name = @Name, LogoType = @LogoType, ICAOCode = @ICAOCode, Address = @Address, Phone = @Phone, Fax = @Fax, LogoTypeWhite = @LogoTypeWhite, LogotypeReportLarge = @LogotypeReportLarge, LogotypeReportVeryLarge = @LogotypeReportVeryLarge, Email = @Email  " + String.Format("Where {0} = @{1}", ItemIdName, ItemIdName); 
+            return "Set dateformat dmy; Update [dbo].Operators Set IsDeleted = @IsDeleted, Name = @Name, LogoType = @LogoType, ICAOCode = @ICAOCode, Address = @Address, Phone = @Phone, Fax = @Fax, LogoTypeWhite = @LogoTypeWhite, LogotypeReportLarge = @LogotypeReportLarge, LogotypeReportVeryLarge = @LogotypeReportVeryLarge, Email = @Email  " +
+                   $"Where {ItemIdName} = @{ItemIdName}"; 
 		}
 		
 		#endregion

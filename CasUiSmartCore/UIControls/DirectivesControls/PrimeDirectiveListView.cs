@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -16,6 +17,7 @@ using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
 using Telerik.WinControls.UI;
 using TempUIExtentions;
+using Convert = System.Convert;
 
 namespace CAS.UI.UIControls.DirectivesControls
 {
@@ -92,12 +94,19 @@ namespace CAS.UI.UIControls.DirectivesControls
 					  DirectiveType.EngineeringOrders
 						? "AD No"
 						: "", (int)(radGridView1.Width * 0.24f));
+			AddColumn("EOFile №", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Applicabilty", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Description", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Next", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Last", (int)(radGridView1.Width * 0.10f));
+			AddColumn("1st. Perf.", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Rpt. Intv.", (int)(radGridView1.Width * 0.20f));
-			AddColumn("Remain/Overdue", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Next(E)", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Next Estimated Data", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Remain(E)", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Next(L)", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Next Limit Data", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Remain(L)", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Last", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Last Data", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Status", (int)(radGridView1.Width * 0.14f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Effective date", (int)(radGridView1.Width * 0.16f));
@@ -108,7 +117,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			AddColumn("Access", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Work Type", (int)(radGridView1.Width * 0.16f));
 			AddColumn("STC No", (int)(radGridView1.Width * 0.16f));
-			AddColumn("1st. Perf.", (int)(radGridView1.Width * 0.24f));
 			AddColumn("ATA Chapter", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Base Detail", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Kit", (int)(radGridView1.Width * 0.10f));
@@ -151,10 +159,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			//         Определение последнего выполнения директивы и KitRequiered               //
 			//////////////////////////////////////////////////////////////////////////////////////
 			var lastComplianceDate = DateTimeExtend.GetCASMinDateTime();
-			var nextComplianceDate = DateTimeExtend.GetCASMinDateTime();
 			var lastComplianceLifeLength = Lifelength.Zero;
-			var nextComplianceLifeLength = Lifelength.Null;
-			var nextComplianceRemain = Lifelength.Null;
 
 			string lastPerformanceString, firstPerformanceString = "N/A";
 
@@ -192,28 +197,15 @@ namespace CAS.UI.UIControls.DirectivesControls
 			}
 			var repeatInterval = item.Threshold.RepeatInterval;
 
-			if (nextComplianceLifeLength == null || nextComplianceLifeLength.IsNullOrZero())
-				nextComplianceLifeLength = item.NextPerformanceSource;
-			if (item.NextPerformanceSource != null && !item.NextPerformanceSource.IsNullOrZero() &&
-				item.NextPerformanceSource.IsLessOrEqualByAnyParameter(nextComplianceLifeLength))
-			{
-				nextComplianceLifeLength = item.NextPerformanceSource;
-				if (item.NextPerformanceDate != null) nextComplianceDate = (DateTime)item.NextPerformanceDate;
-				if (item.Remains != null) nextComplianceRemain = item.Remains;
-			}
 			if (lastComplianceDate <= DateTimeExtend.GetCASMinDateTime())
 				lastPerformanceString = "N/A";
-			else
-				lastPerformanceString = SmartCore.Auxiliary.Convert.GetDateFormat(lastComplianceDate) + " " +
-										lastComplianceLifeLength;
+			else lastPerformanceString = lastComplianceLifeLength.ToString();
 
-			var nextComplianceString = ((nextComplianceDate <= DateTimeExtend.GetCASMinDateTime())
-											   ? ""
-											   : SmartCore.Auxiliary.Convert.GetDateFormat(nextComplianceDate)) + " " +
-										  nextComplianceLifeLength;
-			var nextRemainString = nextComplianceRemain != null && !nextComplianceRemain.IsNullOrZero()
-										  ? nextComplianceRemain.ToString()
-										  : "N/A";
+			var lastDate = (lastComplianceDate <= DateTimeExtend.GetCASMinDateTime())
+				? ""
+				: SmartCore.Auxiliary.Convert.GetDateFormat(lastComplianceDate);
+
+
 			effDate = item.Threshold.EffectiveDate;
 			var descriptionString = item.Description;
 			var applicabilityString = item.IsApplicability ? $"APL  {item.Applicability}" : $"N/A  {item.Applicability}";
@@ -234,6 +226,12 @@ namespace CAS.UI.UIControls.DirectivesControls
 			var zone = item.DirectiveZone;
 			var workarea = item.Workarea;
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
+			var condition = !string.IsNullOrEmpty(firstPerformanceString) ? (item.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst
+				? "/WF"
+				: "/WL") : "";
+			var conditionRepeat = !item.Threshold.RepeatInterval.IsNullOrZero() ? (item.Threshold.RepeatPerformanceConditionType == ThresholdConditionType.WhicheverFirst
+				? "/WF"
+				: "/WL") : "";
 
 			if (item.ADNoFile == null)
 				adColor = Color.MediumVioletRed;
@@ -269,12 +267,20 @@ namespace CAS.UI.UIControls.DirectivesControls
 			subItems.Add(CreateRow(s1, s1, c1));
 			subItems.Add(CreateRow(s2, s2, c2));
 			subItems.Add(CreateRow(s3, s3, c3));
+			subItems.Add(CreateRow(item.EOFileName, item.EOFileName));
 			subItems.Add(CreateRow(applicabilityString, applicabilityString));
 			subItems.Add(CreateRow(descriptionString, descriptionString));
-			subItems.Add(CreateRow(nextComplianceString, nextComplianceDate));
+			subItems.Add(CreateRow($"{firstPerformanceString} {condition}", firstPerformanceString));
+			subItems.Add(CreateRow($"{repeatInterval} {conditionRepeat}", repeatInterval));
+			subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.NextPerformance?.PerformanceDate), item.NextPerformance?.PerformanceDate));
+			subItems.Add(CreateRow(item.NextPerformance?.PerformanceSource.ToString(), item.NextPerformance?.PerformanceSource));
+			subItems.Add(CreateRow(item.NextPerformance?.Remains.ToString(), item.NextPerformance?.Remains));
+			subItems.Add(CreateRow(item.NextPerformance?.NextLimit.Days != null ? SmartCore.Auxiliary.Convert.GetDateFormat(item.NextPerformance?.NextPerformanceDateNew) : "", item.NextPerformance?.NextPerformanceDateNew));
+			subItems.Add(CreateRow(item.NextPerformance?.NextLimit.ToString(), item.NextPerformance?.NextLimit.ToString()));
+			subItems.Add(CreateRow(item.NextPerformance?.RemainLimit.ToString(), item.NextPerformance?.RemainLimit.ToString()));
+			subItems.Add(CreateRow(lastDate, lastComplianceDate));
 			subItems.Add(CreateRow(lastPerformanceString, lastComplianceDate));
-			subItems.Add(CreateRow(repeatInterval.ToString(), repeatInterval));
-			subItems.Add(CreateRow(nextRemainString, nextRemainString));
+
 			subItems.Add(CreateRow(status.ToString(), status));
 			subItems.Add(CreateRow(remarksString, remarksString));
 			subItems.Add(CreateRow(effDate > DateTimeExtend.GetCASMinDateTime()
@@ -286,7 +292,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			subItems.Add(CreateRow(access, access));
 			subItems.Add(CreateRow(workType.ToString(), workType));
 			subItems.Add(CreateRow(stcno, stcno, stcColor));
-			subItems.Add(CreateRow(firstPerformanceString, firstPerformanceString));
 			subItems.Add(CreateRow(ata.ToString(), ata));
 			subItems.Add(CreateRow(baseDetail, baseDetail));
 			subItems.Add(CreateRow(kitRequieredString, kitRequieredString));
@@ -305,15 +310,15 @@ namespace CAS.UI.UIControls.DirectivesControls
 		protected override void CustomSort(int ColumnIndex)
 		{
 			if (OldColumnIndex != ColumnIndex)
-				SortMultiplier = -1;
-			if (SortMultiplier == 1)
-				SortMultiplier = -1;
+				SortDirection = SortDirection.Asc;
+			if (SortDirection == SortDirection.Desc)
+				SortDirection = SortDirection.Asc;
 			else
-				SortMultiplier = 1;
+				SortDirection = SortDirection.Desc;
 
 			var resultList = new List<Directive>();
 			var list = radGridView1.Rows.Select(i => i).ToList();
-			list.Sort(new DirectiveGridViewDataRowInfoComparer(ColumnIndex, SortMultiplier));
+			list.Sort(new DirectiveGridViewDataRowInfoComparer(ColumnIndex, Convert.ToInt32(SortDirection)));
 
 			foreach (var item in list)
 				resultList.Add(item.Tag as Directive);

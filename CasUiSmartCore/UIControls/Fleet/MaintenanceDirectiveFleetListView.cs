@@ -58,9 +58,14 @@ namespace CAS.UI.UIControls.Fleet
 			AddColumn("APU Hour", (int)(radGridView1.Width * 0.16f));
 			AddColumn("1st. Perf.", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Rpt. Intv.", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Next", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Remain/Overdue", (int)(radGridView1.Width * 0.24f));
-			AddColumn("Last", (int)(radGridView1.Width * 0.10f));
+			AddColumn("Next(E)", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Next Estimated Data", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Remain(E)", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Next(L)", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Next Limit Data", (int)(radGridView1.Width * 0.2f));
+			AddColumn("Remain(L)", (int)(radGridView1.Width * 0.24f));
+			AddColumn("Last", (int)(radGridView1.Width * 0.15f));
+			AddColumn("Last Data", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Zone", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Work Area", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Access", (int)(radGridView1.Width * 0.16f));
@@ -117,21 +122,21 @@ namespace CAS.UI.UIControls.Fleet
 			//////////////////////////////////////////////////////////////////////////////////////
 			//         Определение последнего выполнения директивы и KitRequiered               //
 			//////////////////////////////////////////////////////////////////////////////////////
-			DateTime defaultDateTime = DateTimeExtend.GetCASMinDateTime();
-			DateTime lastComplianceDate = defaultDateTime;
-			DateTime nextComplianceDate = defaultDateTime;
-			Lifelength lastComplianceLifeLength = Lifelength.Zero;
+			var defaultDateTime = DateTimeExtend.GetCASMinDateTime();
+			var lastComplianceDate = defaultDateTime;
+			var nextComplianceDate = defaultDateTime;
+			var lastComplianceLifeLength = Lifelength.Zero;
 			//Lifelength nextComplianceLifelength = Lifelength.Null;
 
 			string lastPerformanceString, firstPerformanceString = "N/A";
 
-			Color tcnColor = radGridView1.ForeColor;
-			Color kitColor = radGridView1.BackColor;
-			AtaChapter ata = item.ATAChapter;
-			if(item.LastPerformance != null)
+			var tcnColor = radGridView1.ForeColor;
+			var kitColor = radGridView1.BackColor;
+			var ata = item.ATAChapter;
+			if (item.LastPerformance != null)
 			{
 				lastComplianceDate = item.LastPerformance.RecordDate;
-				lastComplianceLifeLength = item.LastPerformance.OnLifelength;    
+				lastComplianceLifeLength = item.LastPerformance.OnLifelength;
 			}
 			if (item.Threshold.FirstPerformanceSinceNew != null && !item.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
 			{
@@ -145,29 +150,25 @@ namespace CAS.UI.UIControls.Fleet
 				firstPerformanceString += "s/e.d: " + item.Threshold.FirstPerformanceSinceEffectiveDate;
 			}
 
-		   if (item.NextPerformanceDate != null && item.NextPerformanceDate > defaultDateTime)
-			  nextComplianceDate = Convert.ToDateTime(item.NextPerformanceDate);
+			if (item.NextPerformanceDate != null && item.NextPerformanceDate > defaultDateTime)
+				nextComplianceDate = Convert.ToDateTime(item.NextPerformanceDate);
 
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
-			string kitRequieredString = item.KitsApplicable ? item.Kits.Count + " EA" : "N/A";
-			string ndtString = item.NDTType.ShortName;
-			string skillString = item.Skill.ShortName;
-			string categoryString = item.Category.ShortName;
-			string remarksString = item.Remarks;
-			string hiddenRemarksString = item.HiddenRemarks;
+			var kitRequieredString = item.KitsApplicable ? item.Kits.Count + " EA" : "N/A";
+			var ndtString = item.NDTType.ShortName;
+			var skillString = item.Skill.ShortName;
+			var categoryString = item.Category.ShortName;
+			var remarksString = item.Remarks;
+			var hiddenRemarksString = item.HiddenRemarks;
 
 			if (lastComplianceDate <= defaultDateTime)
 				lastPerformanceString = "N/A";
-			else
-				lastPerformanceString = SmartCore.Auxiliary.Convert.GetDateFormat(lastComplianceDate) + " " +
-										lastComplianceLifeLength;
-			string nextComplianceString = ((nextComplianceDate <= defaultDateTime)
-											   ? ""
-											   : SmartCore.Auxiliary.Convert.GetDateFormat(nextComplianceDate) + " ") +
-										  item.NextPerformanceSource;
-			string nextRemainString = item.Remains != null && !item.Remains.IsNullOrZero()
-										  ? item.Remains.ToString()
-										  : "N/A";
+			else lastPerformanceString = lastComplianceLifeLength.ToString();
+
+			var lastDate = (lastComplianceDate <= defaultDateTime)
+				? ""
+				: SmartCore.Auxiliary.Convert.GetDateFormat(lastComplianceDate);
+
 			var repeat = item.Threshold.RepeatInterval.ToString();
 			if (item.APUCalc)
 			{
@@ -176,19 +177,25 @@ namespace CAS.UI.UIControls.Fleet
 			}
 
 			//////////////////////////////////////////////////////////////////////////////////////
-			string description = item.Description != "" ? item.Description : "N/A";
-			string app = item.IsApplicability ? $"APL {item.Applicability}" : $"N/A {item.Applicability}";
-			string taskNumber = item.MPDTaskNumber != "" ? item.MPDTaskNumber : "N/A";
-			string taskCheck = item.TaskNumberCheck != "" ? item.TaskNumberCheck : "N/A";
-			string maintManual = item.MaintenanceManual != "" ? item.MaintenanceManual : "N/A";
-			string mrb = item.MRB != "" ? item.MRB : "N/A";
-			string check = item.MaintenanceCheck != null ? item.MaintenanceCheck.Name : "N/A";
-			DirectiveStatus status = item.Status;
+			var description = item.Description != "" ? item.Description : "N/A";
+			var app = item.IsApplicability ? $"APL {item.Applicability}" : $"N/A {item.Applicability}";
+			var taskNumber = item.MPDTaskNumber != "" ? item.MPDTaskNumber : "N/A";
+			var taskCheck = item.TaskNumberCheck != "" ? item.TaskNumberCheck : "N/A";
+			var maintManual = item.MaintenanceManual != "" ? item.MaintenanceManual : "N/A";
+			var mrb = item.MRB != "" ? item.MRB : "N/A";
+			var check = item.MaintenanceCheck != null ? item.MaintenanceCheck.Name : "N/A";
+			var status = item.Status;
+			var condition = !string.IsNullOrEmpty(firstPerformanceString) ? (item.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst
+				? "/WF"
+				: "/WL") : "";
+			var conditionRepeat = !item.Threshold.RepeatInterval.IsNullOrZero() ? (item.Threshold.RepeatPerformanceConditionType == ThresholdConditionType.WhicheverFirst
+				? "/WF"
+				: "/WL") : "";
 
 			if (item.TaskCardNumberFile == null)
 				tcnColor = Color.MediumVioletRed;
 
-			if(item.KitsApplicable && item.Kits.Count == 0)
+			if (item.KitsApplicable && item.Kits.Count == 0)
 				kitColor = Color.FromArgb(Highlight.Red.Color);
 
 			subItems.Add(CreateRow(item.ParentAircraft?.ToString() ?? "", item.ParentAircraft));
@@ -201,10 +208,15 @@ namespace CAS.UI.UIControls.Fleet
 			subItems.Add(CreateRow(item.WorkType.ToString(), item.WorkType));
 			subItems.Add(CreateRow(check, check));
 			subItems.Add(CreateRow(item.APUCalc ? "Yes" : "No", item.APUCalc));
-			subItems.Add(CreateRow(firstPerformanceString, firstPerformanceString));
-			subItems.Add(CreateRow(repeat, item.Threshold.RepeatInterval));
-			subItems.Add(CreateRow(nextComplianceString, nextComplianceDate));
-			subItems.Add(CreateRow(nextRemainString, nextRemainString));
+			subItems.Add(CreateRow($"{firstPerformanceString} {condition}", firstPerformanceString));
+			subItems.Add(CreateRow($"{repeat} {conditionRepeat}", item.Threshold.RepeatInterval));
+			subItems.Add(CreateRow(SmartCore.Auxiliary.Convert.GetDateFormat(item.NextPerformance?.PerformanceDate), item.NextPerformance?.PerformanceDate));
+			subItems.Add(CreateRow(item.NextPerformance?.PerformanceSource.ToString(), item.NextPerformance?.PerformanceSource));
+			subItems.Add(CreateRow(item.NextPerformance?.Remains.ToString(), item.NextPerformance?.Remains));
+			subItems.Add(CreateRow(item.NextPerformance?.NextLimit.Days != null ? SmartCore.Auxiliary.Convert.GetDateFormat(item.NextPerformance?.NextPerformanceDateNew) : "", item.NextPerformance?.NextPerformanceDateNew));
+			subItems.Add(CreateRow(item.NextPerformance?.NextLimit.ToString(), item.NextPerformance?.NextLimit.ToString()));
+			subItems.Add(CreateRow(item.NextPerformance?.RemainLimit.ToString(), item.NextPerformance?.RemainLimit.ToString()));
+			subItems.Add(CreateRow(lastDate, lastComplianceDate));
 			subItems.Add(CreateRow(lastPerformanceString, lastComplianceDate));
 			subItems.Add(CreateRow(item.Zone, item.Zone));
 			subItems.Add(CreateRow(item.Workarea, item.Workarea));
@@ -233,7 +245,7 @@ namespace CAS.UI.UIControls.Fleet
 
 		#endregion
 
-		#region Overrides of BaseGridViewControl<ATLB>
+		#region protected override void GroupingItems()
 
 		protected override void GroupingItems()
 		{

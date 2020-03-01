@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using Auxiliary;
@@ -56,7 +57,7 @@ namespace CAS.UI.UIControls.OilControls
 		public OilListView(Aircraft parentAircraft, ICommonCollection<ATLB> atlbCollection, OilGraphicModel graph)
 			: this()
 		{
-			SortMultiplier = 1;
+			SortDirection = SortDirection.Desc;
 			OldColumnIndex = 1;
 			_parentAircraft = parentAircraft;
 			_atbs = atlbCollection;

@@ -156,7 +156,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
             {
                 #region Расчет при отсутствии привязанных задач
 
-                GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentDirective);
                 if (_currentDirective.Remains != null && _currentDirective.Condition != ConditionState.NotEstimated)
                 {
                     if (_currentDirective.Remains.IsOverdue() && _currentDirective.Condition == ConditionState.Overdue)

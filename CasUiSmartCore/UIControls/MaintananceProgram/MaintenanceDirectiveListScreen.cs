@@ -13,12 +13,15 @@ using CAS.UI.Management;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
 using CAS.UI.UIControls.Auxiliary;
+using CAS.UI.UIControls.DocumentationControls;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.ForecastControls;
+using CAS.UI.UIControls.MaintananceProgram.CheckNew;
 using CAS.UI.UIControls.PurchaseControls;
 using CAS.UI.UIControls.WorkPakage;
 using CASReports.Builders;
 using CASTerms;
+using CrystalDecisions.Windows.Forms;
 using SmartCore.Calculations;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
@@ -282,6 +285,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		#region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
 		protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
 		{
+			GlobalObjects.ComponentCore.ReloadActualStateRecordForBaseComponents(CurrentAircraft.ItemId);
+
 			_initialDirectiveArray.Clear();
 			_resultDirectiveArray.Clear();
 
@@ -317,25 +322,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 				e.Cancel = true;
 				return;
 			}
-			#endregion
-
-			#region Калькуляция состояния директив
-
-			//AnimatedThreadWorker.ReportProgress(40, "calculation of directives");
-
-			//foreach (MaintenanceDirective pd in maintenanceDirectives)
-			//{
-			//    GlobalObjects.CasEnvironment.Calculator.GetNextPerformance(pd);
-			//    foreach (DetailDirective detailDirective in pd.BindDetailDirectives)
-			//        GlobalObjects.CasEnvironment.Calculator.GetNextPerformance(detailDirective);
-			//    _initialDirectiveArray.Add(pd);
-			//}
-
-			//if (AnimatedThreadWorker.CancellationPending)
-			//{
-			//    e.Cancel = true;
-			//    return;
-			//}
 			#endregion
 
 			#region Фильтрация директив
@@ -480,7 +466,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			// _toolStripMenuItemsWShowWP
 			//
 			_toolStripMenuItemsWShowWP.Text = "Show a work package Title";
-			_toolStripMenuItemsWShowWP.Click += _toolStripMenuItemsWShowWP_Click; ;
+			_toolStripMenuItemsWShowWP.Click += _toolStripMenuItemsWShowWP_Click;
 			//
 			// _toolStripMenuItemsWorkPackages
 			//
@@ -689,7 +675,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			catch (Exception ex)
 			{
 				string errorDescriptionSctring =
-					string.Format("Error while Open Attached File for {0}, id {1}. \nFileId {2}", mpd, mpd.ItemId, mpd.TaskCardNumberFile.ItemId);
+					$"Error while Open Attached File for {mpd}, id {mpd.ItemId}. \nFileId {mpd.TaskCardNumberFile.ItemId}";
 				Program.Provider.Logger.Log(errorDescriptionSctring, ex);
 			}
 		}
@@ -1301,9 +1287,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 								else
 								{
 									labelDateAsOf.Text =
-										string.Format("Forecast: {0}. {1}",
-													   main.CheckName,
-													   main.NextPerformance);
+										$"Forecast: {main.CheckName}. {main.NextPerformance}";
 								}
 							}
 						}
@@ -1372,12 +1356,11 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		{
 			foreach (var mpd in maintenanceDirectives)
 			{
-				if (mpd.ItemId == 63278)
-					MessageBox.Show("qwe");
-
-
-				if(_currentForecast == null)
-					GlobalObjects.PerformanceCalculator.GetNextPerformance(mpd);
+				if (_currentForecast == null)
+				{
+					//GlobalObjects.PerformanceCalculator.GetNextPerformance(mpd);
+					GlobalObjects.MTOPCalculator.CalculateDirectiveNew(mpd);
+				}
 
 				if (bindedItemsDict.ContainsKey(mpd))
 				{
@@ -1386,7 +1369,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 					{
 						if (bindedItem is ComponentDirective)
 						{
-							GlobalObjects.PerformanceCalculator.GetNextPerformance(bindedItem);
+							GlobalObjects.MTOPCalculator.CalculateDirectiveNew(bindedItem as ComponentDirective);
 
 							var firstNextPerformance =
 								bindedItemsDict[mpd].SelectMany(t => t.NextPerformances).OrderBy(n => n.NextPerformanceDate).FirstOrDefault();
@@ -1446,6 +1429,38 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			var form = new MaintenanceDirectiveAPUCalculationForm(_initialDirectiveArray.ToList());
 			if(form.ShowDialog() == DialogResult.OK)
 				AnimatedThreadWorker.RunWorkerAsync();
+		}
+
+		private void buttonMaintCheck_Click(object sender, EventArgs e)
+		{
+			var form = new MaintenanceCheckFormNew(CurrentAircraft, _resultDirectiveArray);
+			form.ShowDialog();
+
+			foreach (var row in _directivesViewer.radGridView1.Rows)
+			{
+				var mpd = row.Tag as MaintenanceDirective;
+				row.Cells["Check"].Value = _resultDirectiveArray.FirstOrDefault(i => i.ItemId == mpd?.ItemId)?.MaintenanceCheck?.Name ?? "N/A";
+			}
+		}
+
+		private void buttonExtension_Click(object sender, EventArgs e)
+		{
+			var form = new MaintenanceCheckExtensionForm(CurrentAircraft, _resultDirectiveArray
+				.Where(i => i.Status == DirectiveStatus.Open || i.Status == DirectiveStatus.Repetative));
+			form.ShowDialog();
+			AnimatedThreadWorker.RunWorkerAsync();
+			//foreach (var row in _directivesViewer.radGridView1.Rows)
+			//{
+			//	var mpd = row.Tag as MaintenanceDirective;
+			//	row.Cells["Extension"].Value = _resultDirectiveArray.FirstOrDefault(i => i.ItemId == mpd?.ItemId)?.Extension.ToString("F0") ?? "0";
+			//}
+		}
+
+
+		private void buttonDocument_Click(object sender, ReferenceEventArgs e)
+		{
+			e.DisplayerText = CurrentAircraft.RegistrationNumber + ". Documents";
+			e.RequestedEntity = new DocumentationListScreen(CurrentAircraft, DocumentType.Permission);
 		}
 	}
 }

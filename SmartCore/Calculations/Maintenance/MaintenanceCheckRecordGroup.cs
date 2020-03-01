@@ -186,12 +186,8 @@ namespace SmartCore.Calculations.Maintenance
                 return "";
             }
 
-            return string.Format("{0}  Date:{1}", !string.IsNullOrEmpty(Records[0].ComplianceCheckName) 
-                                                    ? Records[0].ComplianceCheckName
-                                                    : GetMaxIntervalCheck() != null 
-                                                        ? GetMaxIntervalCheck().Name 
-                                                        : "", 
-                                                   Auxiliary.Convert.GetDateFormat(Records[0].RecordDate));
+            return
+	            $"{(!string.IsNullOrEmpty(Records[0].ComplianceCheckName) ? Records[0].ComplianceCheckName : GetMaxIntervalCheck() != null ? GetMaxIntervalCheck().Name : "")}  Date:{Auxiliary.Convert.GetDateFormat(Records[0].RecordDate)}";
         }
 
         public string ToStringCheckNames()

@@ -20,7 +20,7 @@ namespace CAS.UI.UIControls.SupplierControls
 		{
 			InitializeComponent();
 			DisableContectMenu();
-			SortMultiplier = 0;
+			SortDirection = SortDirection.Asc;
 		}
 		#endregion
 

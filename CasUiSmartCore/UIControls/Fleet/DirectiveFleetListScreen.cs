@@ -12,6 +12,7 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.DirectivesControls;
 using CAS.UI.UIControls.FiltersControls;
+using CAS.UI.UIControls.Users;
 using CASTerms;
 using EntityCore.DTO.General;
 using SmartCore.Calculations;
@@ -168,7 +169,7 @@ namespace CAS.UI.UIControls.Fleet
 
 					if (aircrraft != null)
 					{
-						GlobalObjects.PerformanceCalculator.GetNextPerformance(pd);
+						GlobalObjects.MTOPCalculator.CalculateDirectiveNew(pd);
 						_initialDirectiveArray.Add(pd);
 					}
 				}
@@ -364,7 +365,7 @@ namespace CAS.UI.UIControls.Fleet
 			catch (Exception ex)
 			{
 				string errorDescriptionSctring =
-					string.Format("Error while Open Attached File for {0}, id {1}. \nFileId {2}", dir, dir.ItemId, attachedFile.ItemId);
+					$"Error while Open Attached File for {dir}, id {dir.ItemId}. \nFileId {attachedFile.ItemId}";
 				Program.Provider.Logger.Log(errorDescriptionSctring, ex);
 			}
 		}
@@ -643,7 +644,7 @@ namespace CAS.UI.UIControls.Fleet
 		}
 		#endregion
 
-		#endregion
+		#region private void ButtonFilterClick(object sender, EventArgs e)
 
 		private void ButtonFilterClick(object sender, EventArgs e)
 		{
@@ -651,6 +652,23 @@ namespace CAS.UI.UIControls.Fleet
 			AnimatedThreadWorker.DoWork -= AnimatedThreadWorkerDoFilteringWork;
 			AnimatedThreadWorker.DoWork += AnimatedThreadWorkerDoWork;
 			AnimatedThreadWorker.RunWorkerAsync();
+		}
+
+		#endregion
+
+		#endregion
+		
+
+		private void ButtonAddADClick(object sender, EventArgs e)
+		{
+			ReferenceEventArgs refE = new ReferenceEventArgs();
+			refE.TypeOfReflection = ReflectionTypes.DisplayInNew;
+			refE.DisplayerText = "Fleet Directive New";
+			refE.RequestedEntity = new DirectiveScreen(new Directive()
+			{
+				ParentBaseComponent = GlobalObjects.ComponentCore.GetAircraftFrame(GlobalObjects.AircraftsCore.GetAllAircrafts().FirstOrDefault().ItemId)
+			}, true);
+			InvokeDisplayerRequested(refE);
 		}
 	}
 }

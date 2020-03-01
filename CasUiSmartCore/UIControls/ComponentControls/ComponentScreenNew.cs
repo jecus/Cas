@@ -192,6 +192,8 @@ namespace CAS.UI.UIControls.ComponentControls
         #region protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
         protected override void AnimatedThreadWorkerDoWork(object sender, DoWorkEventArgs e)
         {
+	        GlobalObjects.ComponentCore.ReloadActualStateRecordForBaseComponents(_currentComponent.ParentAircraftId);
+
             #region Загрузка элементов
 
             AnimatedThreadWorker.ReportProgress(0, "load component");
@@ -293,7 +295,11 @@ namespace CAS.UI.UIControls.ComponentControls
 
             AnimatedThreadWorker.ReportProgress(40, "calculation of component");
 
-            ConditionState conditionState = GlobalObjects.PerformanceCalculator.GetConditionState(_currentComponent);
+            var conditionState = GlobalObjects.PerformanceCalculator.GetConditionState(_currentComponent);
+
+            foreach (var directive in _currentComponent.ComponentDirectives)
+	            GlobalObjects.MTOPCalculator.CalculateDirectiveNew(directive);
+
             Invoke(new Action<ConditionState>(cs => statusControl.ConditionState = cs), conditionState);
 
             if (AnimatedThreadWorker.CancellationPending)

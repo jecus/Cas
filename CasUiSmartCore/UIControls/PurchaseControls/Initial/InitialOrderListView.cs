@@ -20,7 +20,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		public InitialOrderListView()
 		{
 			InitializeComponent();
-			SortMultiplier = 0;
+			SortDirection = SortDirection.Asc;
 			DisableContectMenu();
 		}
 		#endregion

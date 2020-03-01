@@ -170,7 +170,8 @@ namespace CAS.UI.UIControls.CommercialControls
                     treeDataGridViewRow.DefaultCellStyle.ForeColor = Color.Gray;
                     if (treeDataGridViewRow.Cells[0].ToolTipText.Trim() != "")
                         treeDataGridViewRow.Cells[0].ToolTipText += "\n";
-                    treeDataGridViewRow.Cells[0].ToolTipText += string.Format("This {0} is deleted", nextPerformance.Parent.SmartCoreObjectType);
+                    treeDataGridViewRow.Cells[0].ToolTipText +=
+	                    $"This {nextPerformance.Parent.SmartCoreObjectType} is deleted";
                 }
             }
             else if (item is AbstractPerformanceRecord)
@@ -184,7 +185,7 @@ namespace CAS.UI.UIControls.CommercialControls
                     treeDataGridViewRow.DefaultCellStyle.ForeColor = Color.Gray;
                     if (treeDataGridViewRow.Cells[0].ToolTipText.Trim() != "")
                         treeDataGridViewRow.Cells[0].ToolTipText += "\n";
-                    treeDataGridViewRow.Cells[0].ToolTipText += string.Format("This {0} is deleted", apr.Parent.SmartCoreObjectType);
+                    treeDataGridViewRow.Cells[0].ToolTipText += $"This {apr.Parent.SmartCoreObjectType} is deleted";
                 }    
             }
             else
@@ -208,7 +209,7 @@ namespace CAS.UI.UIControls.CommercialControls
                     treeDataGridViewRow.DefaultCellStyle.ForeColor = Color.Gray;
                     if (treeDataGridViewRow.Cells[0].ToolTipText.Trim() != "")
                         treeDataGridViewRow.Cells[0].ToolTipText += "\n";
-                    treeDataGridViewRow.Cells[0].ToolTipText += string.Format("This {0} is deleted", item.SmartCoreObjectType);
+                    treeDataGridViewRow.Cells[0].ToolTipText += $"This {item.SmartCoreObjectType} is deleted";
                 }
             }
         }

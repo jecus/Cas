@@ -1,7 +1,9 @@
-﻿using MetroFramework.Controls;
+﻿using System.ComponentModel;
+using MetroFramework.Controls;
 using CASTerms;
 using EntityCore.DTO.General;
 using CAS.UI.Helpers;
+using CAS.UI.UIControls.NewGrid;
 
 namespace CAS.UI.UIControls.PurchaseControls.Initial
 {
@@ -899,7 +901,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this._formListViewInitialItems.PasteComplete = null;
 			this._formListViewInitialItems.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this._formListViewInitialItems.Size = new System.Drawing.Size(942, 280);
-			this._formListViewInitialItems.SortMultiplier = 0;
+			this._formListViewInitialItems.SortDirection = SortDirection.Asc;
 			this._formListViewInitialItems.TabIndex = 294;
 			this._formListViewInitialItems.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.listViewInitialItems_SelectedItemsChanged);
 			// 
@@ -918,7 +920,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			this.listViewKits.PasteComplete = null;
 			this.listViewKits.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.listViewKits.Size = new System.Drawing.Size(942, 280);
-			this.listViewKits.SortMultiplier = 1;
+			this.listViewKits.SortDirection = SortDirection.Desc;
 			this.listViewKits.TabIndex = 68;
 			// 
 			// metroProgressSpinner1

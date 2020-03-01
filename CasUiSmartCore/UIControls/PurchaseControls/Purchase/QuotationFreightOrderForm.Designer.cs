@@ -1,8 +1,10 @@
-﻿using System.Windows.Forms;
+﻿using System.ComponentModel;
+using System.Windows.Forms;
 using MetroFramework.Controls;
 using CASTerms;
 using EntityCore.DTO.General;
 using CAS.UI.Helpers;
+using CAS.UI.UIControls.NewGrid;
 
 namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {
@@ -342,7 +344,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.purchaseRecordListView1.PasteComplete = null;
 			this.purchaseRecordListView1.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.purchaseRecordListView1.Size = new System.Drawing.Size(752, 303);
-			this.purchaseRecordListView1.SortMultiplier = 1;
+			this.purchaseRecordListView1.SortDirection = SortDirection.Desc;
 			this.purchaseRecordListView1.TabIndex = 296;
 			this.purchaseRecordListView1.SelectedItemsChanged += new System.EventHandler<CAS.UI.UIControls.Auxiliary.SelectedItemsChangeEventArgs>(this.PurchaseRecordListView1_SelectedItemsChanged);
 			// 
@@ -377,10 +379,10 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.numericUpDownCost.DecimalPlaces = 2;
 			this.numericUpDownCost.Location = new System.Drawing.Point(116, 19);
 			this.numericUpDownCost.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+			1000000,
+			0,
+			0,
+			0});
 			this.numericUpDownCost.Name = "numericUpDownCost";
 			this.numericUpDownCost.Size = new System.Drawing.Size(168, 20);
 			this.numericUpDownCost.TabIndex = 314;
@@ -568,7 +570,7 @@ namespace CAS.UI.UIControls.PurchaseControls.Purchase
 			this.supplierListView.PasteComplete = null;
 			this.supplierListView.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.supplierListView.Size = new System.Drawing.Size(752, 287);
-			this.supplierListView.SortMultiplier = 0;
+			this.supplierListView.SortDirection = SortDirection.Asc;
 			this.supplierListView.TabIndex = 331;
 			// 
 			// QuotationFreightOrderForm

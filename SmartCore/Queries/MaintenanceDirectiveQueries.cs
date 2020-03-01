@@ -28,15 +28,14 @@ namespace SmartCore.Queries
 		/// <returns></returns>
 		public static List<DbQuery> GetAircraftDirectivesSelectQuery(int aircraftId, IEnumerable<ICommonFilter> filters = null, bool loadChild = false, bool getDeleted = false)
         {
-            string componentIn = string.Format(@"(select ItemId 
+            string componentIn = $@"(select ItemId 
                                                from dbo.Components 
                                                where dbo.Components.IsDeleted = 0 and dbo.Components.IsBaseComponent = 1 and
 	                                                (Select top 1 DestinationObjectId from dbo.TransferRecords Where 
-					                                 ParentType = {0}
-                                                     and DestinationObjectType = {1} 
+					                                 ParentType = {SmartCoreType.BaseComponent.ItemId}
+                                                     and DestinationObjectType = {SmartCoreType.Aircraft.ItemId} 
 				                                     and ParentId = dbo.Components.ItemId 
-					                                 and IsDeleted = 0) = {2} )",
-                                              SmartCoreType.BaseComponent.ItemId, SmartCoreType.Aircraft.ItemId, aircraftId);
+					                                 and IsDeleted = 0) = {aircraftId} )";
             List<ICommonFilter> allFilters = 
                 new List<ICommonFilter>{ new CommonFilter<string>(MaintenanceDirective.ParentBaseComponentProperty, FilterType.In, new[] {componentIn})};
             if(filters != null && filters.Count() > 0)
@@ -110,7 +109,7 @@ namespace SmartCore.Queries
 
 		public static ICommonFilter GetWhereStatementForAll(string text)
 		{
-			ICommonFilter state = new CommonFilter<string>($"(MaintenanceDirectives.ScheduleItem like '%{text}%' or MaintenanceDirectives.TaskNumberCheck like '%{text}%' or MaintenanceDirectives.TaskCardNumber like '%{text}%' or MaintenanceDirectives.Description like '%{text}%')");
+			ICommonFilter state = new CommonFilter<string>($"(MaintenanceDirectives.TaskNumberCheck like '%{text}%' or MaintenanceDirectives.TaskCardNumber like '%{text}%')");
 			return state;
 		}
 

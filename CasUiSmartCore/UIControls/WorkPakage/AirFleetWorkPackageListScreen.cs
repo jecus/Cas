@@ -50,6 +50,7 @@ namespace CAS.UI.UIControls.WorkPakage
 		private RadMenuSeparatorItem _toolStripSeparator2;
 		private List<RadMenuItem> _toolStripMenuItemsWorkPackages;
 		private RadMenuItem _toolStripMenuItemHighlight;
+		private readonly bool _flag;
 
 		#endregion
 
@@ -78,6 +79,28 @@ namespace CAS.UI.UIControls.WorkPakage
 				throw new ArgumentNullException("op");
 			aircraftHeaderControl1.Operator = op;
 			StatusTitle = "Work packages";
+
+			InitToolStripMenuItems();
+			InitListView();
+		}
+
+		#endregion
+
+		#region public AirFleetWorkPackageListScreen(Operator op)
+
+		/// <summary>
+		///  Создаёт экземпляр элемента управления, отображающего список директив
+		/// </summary>
+		/// <param name="op">Оператор, которому пренадлежат ВС</param>
+		/// <param name="flag"></param>
+		public AirFleetWorkPackageListScreen(Operator op, bool flag)
+			: this()
+		{
+			if (op == null)
+				throw new ArgumentNullException("op");
+			aircraftHeaderControl1.Operator = op;
+			StatusTitle = "Work packages LS";
+			_flag = flag;
 
 			InitToolStripMenuItems();
 			InitListView();
@@ -140,8 +163,15 @@ namespace CAS.UI.UIControls.WorkPakage
 
 			AnimatedThreadWorker.ReportProgress(0, "load Work Packages");
 
-			_initialDirectiveArray.AddRange(GlobalObjects.WorkPackageCore.GetWorkPackages().ToArray());
+			if (_flag)
+			{
+				_initialDirectiveArray.AddRange(GlobalObjects.WorkPackageCore.GetWorkPackages(null, WorkPackageStatus.Opened).ToArray());
+				_initialDirectiveArray.AddRange(GlobalObjects.WorkPackageCore.GetWorkPackages(null, WorkPackageStatus.Published).ToArray());
+			}
+			else
+				_initialDirectiveArray.AddRange(GlobalObjects.WorkPackageCore.GetWorkPackages().ToArray());
 
+			
 			var airports = GlobalObjects.CasEnvironment.GetDictionary<AirportsCodes>();
 			var flightNum = GlobalObjects.CasEnvironment.GetDictionary<FlightNum>();
 			foreach (var wp in _initialDirectiveArray)
@@ -166,6 +196,7 @@ namespace CAS.UI.UIControls.WorkPakage
 				workPackage.AircraftCurrentLifelenght =
 					GlobalObjects.CasEnvironment.Calculator.GetCurrentFlightLifelength(workPackage.Aircraft);
 			}
+			
 
 			AnimatedThreadWorker.ReportProgress(70, "filter directives");
 
@@ -451,15 +482,12 @@ namespace CAS.UI.UIControls.WorkPakage
 					foreach (WorkPackageRecord blockedRecord in blockedRecords)
 					{
 						NextPerformance np = blockedRecord.Task.NextPerformances.First(n => n.BlockedByPackage != null);
-						message += string.Format("\nTask: {0} blocked by work package {1}",
-													blockedRecord.Task,
-													np.BlockedByPackage);
+						message += $"\nTask: {blockedRecord.Task} blocked by work package {np.BlockedByPackage}";
 					}
 					if (item.MaxClosingDate < item.MinClosingDate)
 					{
-						message += string.Format("\nMin Closing Date: {0} better than Max Closing Date: {1}",
-													item.MinClosingDate,
-													item.MaxClosingDate);
+						message +=
+							$"\nMin Closing Date: {item.MinClosingDate} better than Max Closing Date: {item.MaxClosingDate}";
 					}
 					MessageBox.Show(message, (string)new GlobalTermsProvider()["SystemName"],
 									MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -501,7 +529,10 @@ namespace CAS.UI.UIControls.WorkPakage
 
 		private void InitListView()
 		{
-			_directivesViewer = new AirFleetWorkPackageListView();
+			if (_flag)
+				_directivesViewer = new AirFleetWorkPackageListView(_flag);
+			else
+				_directivesViewer = new AirFleetWorkPackageListView();
 			_directivesViewer.TabIndex = 2;
 			_directivesViewer.Location = new Point(panel1.Left, panel1.Top);
 			_directivesViewer.Dock = DockStyle.Fill;

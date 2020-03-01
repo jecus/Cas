@@ -111,7 +111,7 @@ namespace CAS.UI.UIControls.SupplierControls
             }
             catch (Exception ex)
             {
-                string s = string.Format("Error while load Products For selection for supplier {0} id: {1}", _supplier, _supplier.ItemId);
+                string s = $"Error while load Products For selection for supplier {_supplier} id: {_supplier.ItemId}";
                 Program.Provider.Logger.Log(s, ex);
             }
 

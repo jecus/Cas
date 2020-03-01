@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Auxiliary;
 using CAS.UI.Interfaces;
@@ -210,15 +211,15 @@ namespace CAS.UI.UIControls.ScheduleControls
 		protected override void CustomSort(int ColumnIndex)
 		{
 			if (OldColumnIndex != ColumnIndex)
-				SortMultiplier = -1;
-			if (SortMultiplier == 1)
-				SortMultiplier = -1;
+				SortDirection = SortDirection.Asc;
+			if (SortDirection == SortDirection.Desc)
+				SortDirection = SortDirection.Asc;
 			else
-				SortMultiplier = 1;
+				SortDirection = SortDirection.Desc;
 
 			var resultList = new List<IFlightNumberParams>();
 			var list = radGridView1.Rows.Select(i => i).ToList();
-			list.Sort(new GridViewDataRowInfoComparer(ColumnIndex, SortMultiplier));
+			list.Sort(new GridViewDataRowInfoComparer(ColumnIndex, Convert.ToInt32(SortDirection)));
 			//добавление остальных подзадач
 			foreach (GridViewRowInfo item in list)
 			{

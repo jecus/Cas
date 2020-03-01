@@ -221,40 +221,17 @@ namespace SmartCore
 
 		public DataSet Execute(string sql)
 	    {
-		    return _apiProvider.Execute(sql);
+		    return _newLoader.Execute(sql);
 	    }
 
 	    public DataSet Execute(IEnumerable<DbQuery> dbQueries, out List<ExecutionResultArgs> results)
 	    {
-		    results = new List<ExecutionResultArgs>();
-
-			int counter = 0;
-
-			var dataset = new DataSet();
-
-			foreach (var query in dbQueries)
-			{
-				var dt = _apiProvider.Execute(query.QueryString).Tables[0];
-
-				var casTable = new CasDataTable(query.ElementType, query.Branch, query.Branch);
-
-				foreach (DataColumn row in dt.Columns)
-					casTable.Columns.Add(new DataColumn(row.ColumnName, row.DataType));
-
-				foreach (DataRow row in dt.Rows)
-					casTable.ImportRow(row);
-
-				dataset.Tables.Add(casTable);
-
-				counter++;
-			}
-
-			return dataset;
+		    return _newLoader.Execute(dbQueries, out results);
 	    }
 
 	    public DataSet Execute(string query, SqlParameter[] parameters)
 	    {
-		    return _apiProvider.Execute(query, parameters);
+		    return _newLoader.Execute(query, parameters);
 	    }
 
 	    /*
@@ -392,13 +369,39 @@ namespace SmartCore
                 _workShops = value;
             }
         }
-		#endregion
+        #endregion
 
-		#region public BaseComponentCollection BaseComponents { get; internal set; }
-		/// <summary>
-		/// Доступные базовые агрегаты
-		/// </summary>
-		private BaseComponentCollection _baseComponents;
+        #region public CommonCollection<WorkShop> WorkShops { get; internal set; }
+        /// <summary>
+        /// Доступные лаборатории компании
+        /// </summary>
+        private CommonCollection<WorkStation> _workStations;
+        /// <summary>
+        /// Доступные лаборатории компании
+        /// </summary>
+        public CommonCollection<WorkStation> WorkStations
+        {
+	        get
+	        {
+		        if (_operators.Count == 0 || _stores == null || _baseComponents == null)
+		        {
+			        NewLoader.FirstLoad();
+		        }
+		        //
+		        return _workStations ?? (_workStations = new CommonCollection<WorkStation>());
+	        }
+	        internal set
+	        {
+		        _workStations = value;
+	        }
+        }
+        #endregion
+
+        #region public BaseComponentCollection BaseComponents { get; internal set; }
+        /// <summary>
+        /// Доступные базовые агрегаты
+        /// </summary>
+        private BaseComponentCollection _baseComponents;
         /// <summary>
         /// Доступные базовые агрегаты
         /// </summary>
@@ -682,8 +685,19 @@ namespace SmartCore
             }
 #endif
 
+	        loadingState.CurrentPersentage = 9;
+	        loadingState.CurrentPersentageDescription = "Loading Work Stations";
+	        backgroundWorker.ReportProgress(1, loadingState);
+
+	        WorkStations = new CommonCollection<WorkStation>(_newLoader.GetObjectList<WorkStationsDTO, WorkStation>());
+
+	        if (backgroundWorker.CancellationPending)
+	        {
+		        return;
+	        }
+
             // Загрузка всех базовых агрегатов
-            loadingState.CurrentPersentage = 9;
+            loadingState.CurrentPersentage = 10;
             loadingState.CurrentPersentageDescription = "Loading Base Details";
             backgroundWorker.ReportProgress(1, loadingState);
 
@@ -695,7 +709,7 @@ namespace SmartCore
             }
 
             // Выставляем ссылки между объектами
-            loadingState.CurrentPersentage = 10;
+            loadingState.CurrentPersentage = 11;
             loadingState.CurrentPersentageDescription = "Set Links";
             backgroundWorker.ReportProgress(1, loadingState);
 

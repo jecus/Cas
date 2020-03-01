@@ -294,7 +294,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			comboBoxMpdTaskType.Items.AddRange(MaintenanceDirectiveTaskType.Items.ToArray());
 			comboBoxMpdTaskType.SelectedItem = _currentComponentDirective.MPDTaskType ?? MaintenanceDirectiveTaskType.Unknown;
 
-			GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentComponentDirective);
+			//GlobalObjects.PerformanceCalculator.GetNextPerformance(_currentComponentDirective);
 			if (_currentComponentDirective.Condition == ConditionState.Overdue)
 				imageLinkLabelStatus.Status = Statuses.NotSatisfactory;
 			if (_currentComponentDirective.Condition == ConditionState.Notify)

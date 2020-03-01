@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using EntityCore.Attributte;
 using Newtonsoft.Json;
 
 namespace EntityCore.DTO.General
 {
 	[Table("Cas3MaintenanceCheckType", Schema = "dbo")]
-	
+	[Condition("IsDeleted", 0)]
 	public class MaintenanceCheckTypeDTO : BaseEntity
 	{
 		

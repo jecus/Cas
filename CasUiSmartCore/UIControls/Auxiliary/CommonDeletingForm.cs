@@ -202,7 +202,7 @@ namespace CAS.UI.UIControls.Auxiliary
 		#region private void BackgroundWorkerRunWorkerLoadCompleted(object sender, RunWorkerCompletedEventArgs e)
 		private void BackgroundWorkerRunWorkerLoadCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
-			Text = string.Format("{0}s Deleting Form", _type.Name);
+			Text = $"{_type.Name}s Deleting Form";
 
 			listViewMain.Items.Clear();
 

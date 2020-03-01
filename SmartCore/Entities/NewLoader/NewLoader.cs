@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
 using CAS.UI.Helpers;
@@ -19,6 +20,8 @@ using SmartCore.Entities.General.Deprecated;
 using SmartCore.Entities.General.Hangar;
 using SmartCore.Entities.General.Store;
 using SmartCore.Entities.General.WorkShop;
+using SmartCore.Files;
+using SmartCore.Management;
 using SmartCore.Queries;
 
 namespace SmartCore.Entities.NewLoader
@@ -38,6 +41,48 @@ namespace SmartCore.Entities.NewLoader
 		{
 			_casEnvironment = casEnvironment;
 			_provider = _casEnvironment.ApiProvider;
+		}
+
+		#endregion
+
+		#region SQL
+
+		public DataSet Execute(string sql)
+		{
+			return _provider.Execute(sql);
+		}
+
+		public DataSet Execute(IEnumerable<DbQuery> dbQueries, out List<ExecutionResultArgs> results)
+		{
+			results = new List<ExecutionResultArgs>();
+
+			int counter = 0;
+
+			var dataset = new DataSet();
+
+			foreach (var query in dbQueries)
+			{
+				var dt = _provider.Execute(query.QueryString).Tables[0];
+
+				var casTable = new CasDataTable(query.ElementType, query.Branch, query.Branch);
+
+				foreach (DataColumn row in dt.Columns)
+					casTable.Columns.Add(new DataColumn(row.ColumnName, row.DataType));
+
+				foreach (DataRow row in dt.Rows)
+					casTable.ImportRow(row);
+
+				dataset.Tables.Add(casTable);
+
+				counter++;
+			}
+
+			return dataset;
+		}
+
+		public DataSet Execute(string query, SqlParameter[] parameters)
+		{
+			return _provider.Execute(query, parameters);
 		}
 
 		#endregion
@@ -434,10 +479,19 @@ namespace SmartCore.Entities.NewLoader
 			//TODO пересмотреть подход!!!!!!!!!!
 			var bc = GetObjectListAll<BaseComponentDTO, BaseComponent>();
 			var baseComponents = bc.Where(i => i.TransferRecords.OrderBy(t => t.TransferDate).Any(q => q.DestinationObjectId == aircraft.ItemId));
+
+			var baseComponentIds = baseComponents.Select(i => i.ItemId);
+			var directives = GetObjectList<ComponentDirectiveDTO, ComponentDirective>(new Filter("ComponentId", baseComponentIds), true);
 			
+
 			foreach (var baseComponent in baseComponents)
-				foreach (var directive in baseComponent.ComponentDirectives)
-					directive.ParentComponent = baseComponent;
+			{
+				baseComponent.ComponentDirectives.Clear();
+				baseComponent.ComponentDirectives.AddRange(directives.Where(i => i.ComponentId == baseComponent.ItemId));
+				foreach (var componentDirective in baseComponent.ComponentDirectives)
+					componentDirective.ParentComponent = baseComponent;
+				
+			}
 
 			#region Проверка на еквивалентность базовых агрегатов ВС содержащийхся в ядре
 
@@ -471,7 +525,21 @@ namespace SmartCore.Entities.NewLoader
 
 		public IList<DamageChart> GetDamageChartsByAircraftModel(AircraftModel aircraftModel)
 		{
-			return GetObjectListAll<DamageChartDTO,DamageChart>(new Filter("AircraftModelId", aircraftModel.ItemId),true);
+			var res =  GetObjectListAll<DamageChartDTO,DamageChart>(new Filter("AircraftModelId", aircraftModel.ItemId),true);
+			var ids = res.Select(i => i.ItemId);
+			var links = GetObjectListAll<ItemFileLinkDTO, ItemFileLink>(new List<Filter>()
+			{
+				new Filter("ParentId",ids),
+				new Filter("ParentTypeId",SmartCoreType.DamageChart.ItemId)
+			}, true);
+
+
+			foreach (var damageChart in res)
+			{
+				damageChart.Files.AddRange(links.Where(i => i.ParentId == damageChart.ItemId));
+			}
+
+			return res;
 		}
 		#endregion
 
