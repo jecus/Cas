@@ -165,7 +165,8 @@ namespace CAS.UI.UIControls.LDND
 
 
 			var baseComponents = GlobalObjects.ComponentCore.GetAicraftBaseComponents(CurrentAircraft.ItemId);
-			var components = GlobalObjects.ComponentCore.GetComponents(baseComponents.ToList());
+			var components = GlobalObjects.ComponentCore.GetComponents(baseComponents.ToList())
+				.Where(i => i.ParentBaseComponent.BaseComponentTypeId != BaseComponentType.LandingGear.ItemId);
 			var componentDirectives = components.SelectMany(i => i.ComponentDirectives).ToList();
 
 
