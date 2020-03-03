@@ -13,6 +13,7 @@ using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Atlbs;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.NewLoader;
+using SmartCore.Files;
 using SmartCore.Filters;
 using SmartCore.Queries;
 
@@ -165,6 +166,18 @@ namespace SmartCore.Directives
 
 			if (directives.Count == 0)
 				return directives;
+
+			
+			var links = _newLoader.GetObjectListAll<ItemFileLinkDTO, ItemFileLink>(new List<Filter>()
+			{
+				new Filter("ParentId",directives.Select(i => i.ItemId)),
+				new Filter("ParentTypeId", 3053)
+			}, true);
+
+			foreach (var directive in directives)
+			{
+				directive.Files.AddRange(links.Where(i => i.ParentId == directive.ItemId));
+			}
 
 			var directiveIds = directives.Select(d => d.ItemId).ToList();
 			var itemsRelations = _itemsRelationsDataAccess.GetRelations(directiveIds, SmartCoreType.Directive.ItemId);

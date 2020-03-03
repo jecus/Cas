@@ -279,7 +279,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// textBoxServiceBulletin
 			// 
 			this.textBoxServiceBulletin.BackColor = System.Drawing.Color.White;
-			this.textBoxServiceBulletin.Enabled = false;
+			this.textBoxServiceBulletin.Enabled = true;
 			this.textBoxServiceBulletin.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.textBoxServiceBulletin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.textBoxServiceBulletin.Location = new System.Drawing.Point(750, 55);

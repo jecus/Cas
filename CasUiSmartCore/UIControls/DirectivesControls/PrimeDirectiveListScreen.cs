@@ -1046,13 +1046,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 					}
 					else parent = o;
 
-					Directive dir = null;
-					if (parent is Directive)
-					{
-						dir = (Directive) parent;
-					}
-
-					if (dir != null)
+					if (parent is Directive dir)
 					{
 						_toolStripMenuItemShowEOFile.Enabled = dir.EngineeringOrderFile != null;
 						_toolStripMenuItemShowSBFile.Enabled = dir.ServiceBulletinFile != null;
@@ -1060,6 +1054,16 @@ namespace CAS.UI.UIControls.DirectivesControls
 						if (dir.NextPerformanceIsBlocked)
 							_toolStripMenuItemsWShowWP.Enabled = true;
 					}
+					if (parent is DamageItem dam)
+					{
+						_toolStripMenuItemShowEOFile.Enabled = dam.ServiceBulletinFile != null;
+						_toolStripMenuItemShowSBFile.Enabled = dam.ServiceBulletinFile != null;
+						_toolStripMenuItemShowADFile.Enabled = dam.ADNoFile != null;
+						if (dam.NextPerformanceIsBlocked)
+							_toolStripMenuItemsWShowWP.Enabled = true;
+					}
+
+
 				}
 
 				if (_directivesViewer.SelectedItems.Count > 0)
