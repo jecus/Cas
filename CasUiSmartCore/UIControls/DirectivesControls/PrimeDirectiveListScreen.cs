@@ -1056,7 +1056,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 					}
 					if (parent is DamageItem dam)
 					{
-						_toolStripMenuItemShowEOFile.Enabled = dam.ServiceBulletinFile != null;
+						_toolStripMenuItemShowEOFile.Enabled = dam.EngineeringOrderFile != null;
 						_toolStripMenuItemShowSBFile.Enabled = dam.ServiceBulletinFile != null;
 						_toolStripMenuItemShowADFile.Enabled = dam.ADNoFile != null;
 						if (dam.NextPerformanceIsBlocked)

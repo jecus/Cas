@@ -265,6 +265,8 @@ namespace SmartCore.Calculations.MTOP
 				if (isComponent)
 				{
 					//np.NextLimitC = new Lifelength(directive.LastPerformance.OnLifelength);
+
+
 					np.NextLimitC = new Lifelength(_calculator.GetFlightLifelengthOnStartOfDay(component, directive.LastPerformance.RecordDate));
 
 					//np.LastDataC = new Lifelength(component != null ? _calculator.GetFlightLifelengthOnStartOfDay(component, directive.LastPerformance.RecordDate) :
@@ -310,6 +312,11 @@ namespace SmartCore.Calculations.MTOP
 				np.RemainLimit = new Lifelength(np.NextLimit);
 				np.RemainLimit.Substract(current);
 
+				if (threshold.RepeatInterval != null && directive.LastPerformance != null)
+				{
+					np.RemainLimit.Resemble(threshold.RepeatInterval);
+					np.NextLimit.Resemble(threshold.RepeatInterval);
+				}
 				if (!threshold.FirstPerformanceSinceNew.IsNullOrZero())
 				{
 					np.RemainLimit.Resemble(threshold.FirstPerformanceSinceNew);
@@ -319,6 +326,13 @@ namespace SmartCore.Calculations.MTOP
 				{
 					np.RemainLimit.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
 					np.NextLimit.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
+				}
+
+
+				if (directive.APUCalc)
+				{
+					np.NextLimit /= aircraft.APUFH;
+					np.RemainLimit /= aircraft.APUFH;
 				}
 
 				np.Remains = new Lifelength(CalculateWithUtilization(directive, np.RemainLimit, averageUtilization, conditionType));
