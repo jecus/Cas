@@ -85,7 +85,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			comboBox1.Items.AddRange(_checks.ToArray());
 
 			GetMaintenanceDirectivesIntervals();
-
+			ComboBox1_SelectedIndexChanged(null, null);
 			checkedListBoxItems.SelectedIndexChanged += CheckedListBoxItemsSelectedIndexChanged;
 
 			listViewTasksForSelect.SetItemsArray(_mpdForSelect.ToArray());
@@ -281,10 +281,22 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 
 		private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			buttonApply.Enabled = 
-				deleteButton.Enabled = 
-					//addButton.Enabled = 
-						editButton.Enabled = comboBox1.SelectedItem != null;
+			if (comboBox1.SelectedItem != null)
+			{
+				buttonApply.Enabled = true;
+				deleteButton.Enabled = true;
+				editButton.Enabled = true;
+			}
+			else
+			{
+				buttonApply.Enabled = false;
+				deleteButton.Enabled = false;
+				editButton.Enabled = false;
+			}
+			//buttonApply.Enabled = 
+			//	deleteButton.Enabled = 
+			//		//addButton.Enabled = 
+			//			editButton.Enabled = comboBox1.SelectedItem != null;
 		}
 
 		#endregion

@@ -119,6 +119,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.deleteButton.TextMain = "";
 			this.deleteButton.TextSecondary = "";
 			this.deleteButton.ToolTipText = "";
+			this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
 			// 
 			// addButton
 			// 
@@ -145,6 +146,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.addButton.TextMain = "";
 			this.addButton.TextSecondary = "";
 			this.addButton.ToolTipText = "";
+			this.addButton.Click += new System.EventHandler(this.AddButton_Click);
 			// 
 			// editButton
 			// 
@@ -172,6 +174,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.editButton.TextMain = "";
 			this.editButton.TextSecondary = "";
 			this.editButton.ToolTipText = "";
+			this.editButton.Click += new System.EventHandler(this.EditButton_Click);
 			// 
 			// comboBox1
 			// 
@@ -180,6 +183,7 @@ namespace CAS.UI.UIControls.MaintananceProgram.CheckNew
 			this.comboBox1.Name = "comboBox1";
 			this.comboBox1.Size = new System.Drawing.Size(164, 21);
 			this.comboBox1.TabIndex = 28;
+			this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
 			// 
 			// buttonApply
 			// 
