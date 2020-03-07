@@ -70,9 +70,9 @@ namespace CAS.UI.UIControls.OilControls
 				//Spline = true, // закруглять углы
 			};
 
-			var lineSeriesMin = new ScatterLineSeries { BorderColor = Color.Green, LegendTitle = "Min", ShowLabels = false, PointSize = new SizeF(0,0)};
-			var lineSeriesNorm = new ScatterLineSeries { BorderColor = Color.Yellow, LegendTitle = "Normal", ShowLabels = false, PointSize = new SizeF(0, 0) };
-			var lineSeriesMax = new ScatterLineSeries { BorderColor = Color.Red, LegendTitle = "Max", ShowLabels = false, PointSize = new SizeF(0, 0) };
+			var lineSeriesMin = new ScatterLineSeries { BorderColor = Color.Green, LegendTitle = "Normal", ShowLabels = false, PointSize = new SizeF(0,0), BackColor = Color.Green };
+			var lineSeriesNorm = new ScatterLineSeries { BorderColor = Color.Yellow, LegendTitle = "Alert", ShowLabels = false, PointSize = new SizeF(0, 0), BackColor = Color.Yellow};
+			var lineSeriesMax = new ScatterLineSeries { BorderColor = Color.Red, LegendTitle = "Max", ShowLabels = false, PointSize = new SizeF(0, 0), BackColor = Color.Red };
 
 			radChartView1.Series.Clear();
 
