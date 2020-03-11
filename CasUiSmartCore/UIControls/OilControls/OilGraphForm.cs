@@ -79,24 +79,25 @@ namespace CAS.UI.UIControls.OilControls
 
 			foreach (var values in _graph.Graph[comp].OrderBy(i => i.Key.Hours))
 			{
-				lineSeries.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, values.Value));
-
-				if (_graph.Limits[comp].Min > 0)
-					lineSeriesMin.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, _graph.Limits[comp].Min));
-				if(_graph.Limits[comp].Normal > 0)
-					lineSeriesNorm.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, _graph.Limits[comp].Normal));
 				if (_graph.Limits[comp].Max > 0)
 					lineSeriesMax.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, _graph.Limits[comp].Max));
+				if (_graph.Limits[comp].Normal > 0)
+					lineSeriesNorm.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, _graph.Limits[comp].Normal));
+				if (_graph.Limits[comp].Min > 0)
+					lineSeriesMin.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, _graph.Limits[comp].Min));
+
+				lineSeries.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, values.Value));
 			}
 
 			radChartView1.Series.Clear();
-			radChartView1.Series.Add(lineSeries);
-			if (lineSeriesMin.DataPoints.Count > 0)
-				radChartView1.Series.Add(lineSeriesMin);
-			if (lineSeriesNorm.DataPoints.Count > 0)
-				radChartView1.Series.Add(lineSeriesNorm);
+
 			if (lineSeriesMax.DataPoints.Count > 0)
 				radChartView1.Series.Add(lineSeriesMax);
+			if (lineSeriesNorm.DataPoints.Count > 0)
+				radChartView1.Series.Add(lineSeriesNorm);
+			if (lineSeriesMin.DataPoints.Count > 0)
+				radChartView1.Series.Add(lineSeriesMin);
+			radChartView1.Series.Add(lineSeries);
 
 			LinearAxis horizontalAxis = radChartView1.Axes.Get<LinearAxis>(0);
 			//horizontalAxis.Minimum = (double)_graph.Graph[comp].OrderBy(i => i.Key.Hours).FirstOrDefault().Key.Hours;
