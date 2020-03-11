@@ -121,7 +121,7 @@ namespace CAS.UI.UIControls.ComponentControls
                     imageLinkLabelStatus.Status = Statuses.NotActive;
                 }
 
-                labelCompntRemains.Text = _currentComponentDirective.Remains.ToString();
+                labelCompntRemains.Text = _currentComponentDirective.NextPerformance?.RemainsC?.ToString();
             }
 
             labelDateLast.Text = "";
