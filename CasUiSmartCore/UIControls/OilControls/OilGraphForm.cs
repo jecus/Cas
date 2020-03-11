@@ -67,6 +67,7 @@ namespace CAS.UI.UIControls.OilControls
 				LegendTitle = "Consumption",
 				Name = "Consumption:",
 				LabelFormat = "{0:F}",
+				BorderWidth = 2
 				//Spline = true, // закруглять углы
 			};
 

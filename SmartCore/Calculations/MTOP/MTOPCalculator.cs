@@ -267,10 +267,10 @@ namespace SmartCore.Calculations.MTOP
 					//np.NextLimitC = new Lifelength(directive.LastPerformance.OnLifelength);
 
 
-						var actualState = component.ActualStateRecords.GetLast();
-						if(actualState != null && actualState.RecordDate > directive.LastPerformance.RecordDate)
+						//var actualState = component.ActualStateRecords.GetLast();
+						//if(actualState != null && actualState.RecordDate > directive.LastPerformance.RecordDate)
 							np.NextLimitC = new Lifelength(directive.LastPerformance.OnLifelength);
-						else np.NextLimitC = new Lifelength(_calculator.GetFlightLifelengthOnEndOfDay(component, directive.LastPerformance.RecordDate));
+						//else np.NextLimitC = new Lifelength(_calculator.GetFlightLifelengthOnEndOfDay(component, directive.LastPerformance.RecordDate));
 
 						
 						
@@ -380,7 +380,7 @@ namespace SmartCore.Calculations.MTOP
 
 					np.PerformanceSourceC = new Lifelength(current);
 					np.PerformanceSourceC.Substract(idd);
-					np.PerformanceSourceC.Add(np.Remains);
+					np.PerformanceSourceC.Add(np.RemainsC);
 					np.PerformanceSourceC.Add(iddc);
 
 					//if (directive.LastPerformance == null)
