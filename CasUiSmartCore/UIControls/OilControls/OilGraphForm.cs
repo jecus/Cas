@@ -30,8 +30,8 @@ namespace CAS.UI.UIControls.OilControls
 			_graph = graph;
 			FillData();
 
-			this.Text += $" (Period: {@from.Date:dd.MM.yyyy}  - {to.Date:dd.MM.yyyy})";
-			label2.Text += $" {(to - from).TotalDays} days";
+			this.Text += $@" (Period: {from.Date:dd.MM.yyyy}  - {to.Date:dd.MM.yyyy})";
+			label2.Text += $@" {(to - from).TotalDays:####} days";
 		}
 
 		#endregion
@@ -166,9 +166,9 @@ namespace CAS.UI.UIControls.OilControls
 			//e.Element.Font = font;
 			//e.Element.NumberOfColors = 1;
 			e.Element.BorderGradientStyle = Telerik.WinControls.GradientStyles.Solid;
-			ScatterDataPoint dataPoint = e.Points[0].DataPoint as ScatterDataPoint;
+			ScatterDataPoint dataPoint = e.Points[3].DataPoint as ScatterDataPoint;
 			
-			e.Text = $@"<html><color='gray'>HRS:{dataPoint.XValue} Oil:{dataPoint.YValue.Value:F}";
+			e.Text = $@"<html><color='gray'>HRS:{dataPoint.XValue} Consumption:{dataPoint.YValue.Value:F}";
 		}
 	}
 }
