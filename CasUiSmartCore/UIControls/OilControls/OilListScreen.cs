@@ -549,6 +549,7 @@ namespace CAS.UI.UIControls.MonthlyUtilizationsControls
 
 		private void ButtonOkClick(object sender, EventArgs e)
 		{
+			_directivesViewer.last.Clear();
 			AnimatedThreadWorker.RunWorkerAsync();
 		}
 
