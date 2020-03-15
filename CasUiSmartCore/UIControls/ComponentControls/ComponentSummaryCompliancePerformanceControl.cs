@@ -121,7 +121,7 @@ namespace CAS.UI.UIControls.ComponentControls
                     imageLinkLabelStatus.Status = Statuses.NotActive;
                 }
 
-                labelCompntRemains.Text = _currentComponentDirective.Remains.ToString();
+                labelCompntRemains.Text = _currentComponentDirective.NextPerformance?.RemainsC?.ToString();
             }
 
             labelDateLast.Text = "";
@@ -165,7 +165,7 @@ namespace CAS.UI.UIControls.ComponentControls
                 //                labelAircraftTCSNLast.Text = temp.ToString();
 
                 //наработка самолета на последнем исполнении
-                labelAircraftTCSNLast.Text = GlobalObjects.CasEnvironment.Calculator.GetFlightLifelengthOnEndOfDay(tempAircraft,
+                labelAircraftTCSNLast.Text = GlobalObjects.CasEnvironment.Calculator.GetFlightLifelengthOnStartOfDay(tempAircraft,
 	                    _currentComponentDirective.LastPerformance.RecordDate).ToString();
 
 

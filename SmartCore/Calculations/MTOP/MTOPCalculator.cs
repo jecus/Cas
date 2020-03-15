@@ -89,12 +89,12 @@ namespace SmartCore.Calculations.MTOP
 			else return;
 
 			var aircraft = _aircraftsCore.GetAircraftById(aircraftId);
-			if(aircraft == null)
+			if (aircraft == null)
 				return;
 
 			var current = _calculator.GetFlightLifelengthOnEndOfDay(aircraft, DateTime.Today);
 
-			if(averageUtilization == null)
+			if (averageUtilization == null)
 				averageUtilization = _averageUtilizationCore.GetAverageUtillization(directive);
 
 			if (isComponent)
@@ -119,7 +119,7 @@ namespace SmartCore.Calculations.MTOP
 			np.IDD = idd;
 			np.IDDC = iddc;
 
-			
+
 
 			//Если деректива не выполнялась
 			if (directive.LastPerformance == null)
@@ -150,11 +150,11 @@ namespace SmartCore.Calculations.MTOP
 					}
 					//ситуация когда наработки нет в будующем(прогнозируем)
 					if (current.Hours == sed.Hours && current.Cycles == sed.Cycles &&
-					    current.Days < sed.Days)
+						current.Days < sed.Days)
 					{
 						var temp = Lifelength.Zero;
 						temp.Days = sed.Days - current.Days;
-						sed = new Lifelength(CalculateWithUtilization(temp, averageUtilization));
+						sed = new Lifelength(CalculateWithUtilization(directive, temp, averageUtilization));
 						sed.Add(current);
 					}
 
@@ -170,8 +170,8 @@ namespace SmartCore.Calculations.MTOP
 					remainSn.Resemble(threshold.FirstPerformanceSinceNew);
 					remainSed.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
 
-					var snCalc = CalculateWithUtilization(remainSn, averageUtilization, conditionType);
-					var sedCalc = CalculateWithUtilization(remainSed, averageUtilization, conditionType);
+					var snCalc = CalculateWithUtilization(directive, remainSn, averageUtilization, conditionType);
+					var sedCalc = CalculateWithUtilization(directive, remainSed, averageUtilization, conditionType);
 
 
 					if (conditionType == ThresholdConditionType.WhicheverFirst)
@@ -238,11 +238,11 @@ namespace SmartCore.Calculations.MTOP
 					}
 					//ситуация когда наработки нет в будующем(прогнозируем)
 					if (current.Hours == sinceEffDate.Hours && current.Cycles == sinceEffDate.Cycles &&
-					    current.Days < sinceEffDate.Days)
+						current.Days < sinceEffDate.Days)
 					{
 						var temp = Lifelength.Zero;
 						temp.Days = sinceEffDate.Days - current.Days;
-						sinceEffDate = new Lifelength(CalculateWithUtilization(temp, averageUtilization));
+						sinceEffDate = new Lifelength(CalculateWithUtilization(directive, temp, averageUtilization));
 						sinceEffDate.Add(current);
 					}
 
@@ -265,7 +265,16 @@ namespace SmartCore.Calculations.MTOP
 				if (isComponent)
 				{
 					//np.NextLimitC = new Lifelength(directive.LastPerformance.OnLifelength);
-					np.NextLimitC = new Lifelength(_calculator.GetFlightLifelengthOnStartOfDay(component, directive.LastPerformance.RecordDate));
+
+
+						//var actualState = component.ActualStateRecords.GetLast();
+						//if(actualState != null && actualState.RecordDate > directive.LastPerformance.RecordDate)
+							np.NextLimitC = new Lifelength(directive.LastPerformance.OnLifelength);
+						//else np.NextLimitC = new Lifelength(_calculator.GetFlightLifelengthOnEndOfDay(component, directive.LastPerformance.RecordDate));
+
+						
+						
+					//np.NextLimitC = new Lifelength(_calculator.GetFlightLifelengthOnStartOfDay(component, directive.LastPerformance.RecordDate));
 
 					//np.LastDataC = new Lifelength(component != null ? _calculator.GetFlightLifelengthOnStartOfDay(component, directive.LastPerformance.RecordDate) :
 					//_calculator.GetFlightLifelengthOnStartOfDay(basecomponent, directive.LastPerformance.RecordDate));
@@ -310,6 +319,11 @@ namespace SmartCore.Calculations.MTOP
 				np.RemainLimit = new Lifelength(np.NextLimit);
 				np.RemainLimit.Substract(current);
 
+				if (threshold.RepeatInterval != null && directive.LastPerformance != null)
+				{
+					np.RemainLimit.Resemble(threshold.RepeatInterval);
+					np.NextLimit.Resemble(threshold.RepeatInterval);
+				}
 				if (!threshold.FirstPerformanceSinceNew.IsNullOrZero())
 				{
 					np.RemainLimit.Resemble(threshold.FirstPerformanceSinceNew);
@@ -321,7 +335,14 @@ namespace SmartCore.Calculations.MTOP
 					np.NextLimit.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
 				}
 
-				np.Remains = new Lifelength(CalculateWithUtilization(np.RemainLimit, averageUtilization, conditionType));
+
+				if (directive.APUCalc)
+				{
+					np.NextLimit /= aircraft.APUFH;
+					np.RemainLimit /= aircraft.APUFH;
+				}
+
+				np.Remains = new Lifelength(CalculateWithUtilization(directive, np.RemainLimit, averageUtilization, conditionType));
 
 				if (isComponent)
 				{
@@ -341,7 +362,7 @@ namespace SmartCore.Calculations.MTOP
 						np.RemainLimitC.Substract(current);
 					}
 
-					
+
 
 					if (!threshold.FirstPerformanceSinceNew.IsNullOrZero())
 					{
@@ -354,22 +375,22 @@ namespace SmartCore.Calculations.MTOP
 						np.NextLimitC.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
 					}
 
-					np.RemainsC = new Lifelength(CalculateWithUtilization(np.RemainLimitC, averageUtilization, conditionType));
+					np.RemainsC = new Lifelength(CalculateWithUtilization(directive, np.RemainLimitC, averageUtilization, conditionType));
 
 
 					np.PerformanceSourceC = new Lifelength(current);
 					np.PerformanceSourceC.Substract(idd);
-					np.PerformanceSourceC.Add(np.Remains);
+					np.PerformanceSourceC.Add(np.RemainsC);
 					np.PerformanceSourceC.Add(iddc);
 
 					//if (directive.LastPerformance == null)
 					//	np.PerformanceSourceC.Add(iddc);
 				}
-				
-				
+
+
 			}
-			
-			np.PerformanceSource = new Lifelength(current); 
+
+			np.PerformanceSource = new Lifelength(current);
 			np.PerformanceSource.Add(np.Remains);
 
 			#region Расчет текущего состояния задачи в зависимости от условий выполнения
@@ -404,42 +425,42 @@ namespace SmartCore.Calculations.MTOP
 			//}
 			//else
 			//{
-				days = AnalystHelper.GetApproximateDays(np.NextLimit, averageUtilization, conditionType);
-				if (days != null)
+			days = AnalystHelper.GetApproximateDays(np.NextLimit, averageUtilization, conditionType);
+			if (days != null)
+			{
+				if (days <= current.Days)
 				{
-					if (days <= current.Days)
-					{
-						if (isComponent)
-							np.PerformanceDate = _calculator.GetManufactureDate(aircraft).AddDays(Convert.ToDouble(days));
-						else np.PerformanceDate = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(Convert.ToDouble(days));
-					}
-					else
-						np.NextPerformanceDateNew = AnalystHelper.GetApproximateDate(np.RemainLimit, averageUtilization, conditionType);
+					if (isComponent)
+						np.PerformanceDate = _calculator.GetManufactureDate(aircraft).AddDays(Convert.ToDouble(days));
+					else np.PerformanceDate = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(Convert.ToDouble(days));
 				}
+				else
+					np.NextPerformanceDateNew = AnalystHelper.GetApproximateDate(np.RemainLimit, averageUtilization, conditionType);
+			}
 
-				days = np.PerformanceSource.Days;
-				if (days != null)
+			days = np.PerformanceSource.Days;
+			if (days != null)
+			{
+				if (days <= current.Days)
 				{
-					if (days <= current.Days)
-					{
-						if(isComponent)
-							np.PerformanceDate = _calculator.GetManufactureDate(aircraft).AddDays(Convert.ToDouble(days));
-						else np.PerformanceDate = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(Convert.ToDouble(days));
-					}
-					else np.PerformanceDate = AnalystHelper.GetApproximateDate(np.Remains, averageUtilization, conditionType);
+					if (isComponent)
+						np.PerformanceDate = _calculator.GetManufactureDate(aircraft).AddDays(Convert.ToDouble(days));
+					else np.PerformanceDate = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(Convert.ToDouble(days));
 				}
+				else np.PerformanceDate = AnalystHelper.GetApproximateDate(np.Remains, averageUtilization, conditionType);
+			}
 			//}
 
-			
+
 
 			#endregion}
 
 			directive.NextPerformances.Add(np);
 		}
 
-		public Lifelength CalculateWithUtilization(Lifelength thresh, AverageUtilization averageUtilization, ThresholdConditionType conditionType)
+		public Lifelength CalculateWithUtilization(IMtopCalc directive, Lifelength thresh, AverageUtilization averageUtilization, ThresholdConditionType conditionType)
 		{
-			if(thresh.IsNullOrZero())
+			if (thresh.IsNullOrZero())
 				return Lifelength.Null;
 
 			var dict = new Dictionary<string, double>();
@@ -471,12 +492,12 @@ namespace SmartCore.Calculations.MTOP
 					res.Days = (int?)(min.Value);
 				}
 			}
-			
 
-			return CalculateWithUtilization(res, averageUtilization);
+
+			return CalculateWithUtilization(directive, res, averageUtilization);
 		}
 
-		public Lifelength CalculateWithUtilization(Lifelength thresh, AverageUtilization averageUtilization)
+		public Lifelength CalculateWithUtilization(IMtopCalc directive, Lifelength thresh, AverageUtilization averageUtilization)
 		{
 			double hours = 0, cycles = 0, days = 0;
 			double hoursPhase = -1, cyclesPhase = -1, daysPhase = -1;
@@ -484,6 +505,14 @@ namespace SmartCore.Calculations.MTOP
 			var res = new Lifelength(0, 0, 0);
 
 			var threshHours = thresh.Hours;
+
+			if (directive.APUCalc && threshHours.HasValue)
+			{
+				var aircraft = _aircraftsCore.GetAircraftById(directive.ParentAircraftId);
+				threshHours = (int?)(thresh.Hours / aircraft.APUFH);
+			}
+
+
 			if (thresh.Days.HasValue)
 			{
 				hours = (double)(thresh.Days * averageUtilization.Hours);
@@ -782,7 +811,7 @@ namespace SmartCore.Calculations.MTOP
 						{
 
 							if ((q + check.PhaseRepeat).Days >= lastCompliance.CalculatedPerformanceSource.Days.Value ||
-							    (q + check.PhaseRepeat).Days >= lastCompliance.CalculatedPerformanceSource.Days.Value)
+								(q + check.PhaseRepeat).Days >= lastCompliance.CalculatedPerformanceSource.Days.Value)
 								break;
 
 							if (check.PhaseRepeat != null && !check.PhaseRepeat.IsNullOrZero())
@@ -1208,7 +1237,7 @@ namespace SmartCore.Calculations.MTOP
 				if (check == null) continue;
 
 				var checksForPeriod = check.NextPerformances.Where(i => i.PerformanceDate >= from &&
-				                                                        i.PerformanceDate <= to);
+																		i.PerformanceDate <= to);
 
 				if (checksForPeriod.Count() == 0)
 					continue;
@@ -1268,14 +1297,14 @@ namespace SmartCore.Calculations.MTOP
 						if (directive.LastPerformance == null) // директива ни разу не выполнялась
 						{
 							if ((directive.Threshold.FirstPerformanceSinceEffectiveDate != null &&
-							     !directive.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
-							    ||
-							    (directive.Threshold.FirstPerformanceSinceNew != null &&
-							     !directive.Threshold.FirstPerformanceSinceNew.IsNullOrZero()))
+								 !directive.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+								||
+								(directive.Threshold.FirstPerformanceSinceNew != null &&
+								 !directive.Threshold.FirstPerformanceSinceNew.IsNullOrZero()))
 							{
 								Lifelength sinceEffDate = Lifelength.Null;
 								if (directive.Threshold.FirstPerformanceSinceEffectiveDate != null &&
-								    !directive.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+									!directive.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
 								{
 									sinceEffDate = _calculator.GetFlightLifelengthOnStartOfDay(directive.LifeLengthParent, directive.Threshold.EffectiveDate);
 									//sinceEffDate.Resemble(directive.Threshold.FirstPerformanceSinceEffectiveDate);
@@ -1287,7 +1316,7 @@ namespace SmartCore.Calculations.MTOP
 								// с момента производства
 								Lifelength sinceNew = Lifelength.Null;
 								if (directive.Threshold.FirstPerformanceSinceNew != null &&
-								    !directive.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
+									!directive.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
 								{
 									sinceNew = directive.PhaseThresh;
 								}
@@ -1498,15 +1527,15 @@ namespace SmartCore.Calculations.MTOP
 			directive.MTOPPhase = new Phase();
 			directive.MTOPPhase.IsZeroPhase = isZeroPhase;
 
-	
+
 
 			var check = checks.LastOrDefault(i => i.PhaseThresh.Days <= tempHours.Days);
 			if (check?.NextPerformancesWithIgnorLast == null) return;
 
 
 			directive.MTOPPhase.FirstPhase = check.NextPerformancesWithIgnorLast
-				                                 .LastOrDefault(i => i.PerformanceSource.Days.Value <= tempHours.Days)
-				                                 ?.Group ?? 0;
+												 .LastOrDefault(i => i.PerformanceSource.Days.Value <= tempHours.Days)
+												 ?.Group ?? 0;
 
 			if (directive.PhaseRepeat != null && !directive.PhaseRepeat.IsNullOrZero())
 				tempHours += directive.PhaseRepeat;

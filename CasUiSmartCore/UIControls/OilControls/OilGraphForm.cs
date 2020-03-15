@@ -30,8 +30,8 @@ namespace CAS.UI.UIControls.OilControls
 			_graph = graph;
 			FillData();
 
-			this.Text += $" (Period: {@from.Date:dd.MM.yyyy}  - {to.Date:dd.MM.yyyy})";
-			label2.Text += $" {(to - from).TotalDays} days";
+			this.Text += $@" (Period: {from.Date:dd.MM.yyyy}  - {to.Date:dd.MM.yyyy})";
+			label2.Text += $@" {(to - from).TotalDays:####} days";
 		}
 
 		#endregion
@@ -67,35 +67,37 @@ namespace CAS.UI.UIControls.OilControls
 				LegendTitle = "Consumption",
 				Name = "Consumption:",
 				LabelFormat = "{0:F}",
+				BorderWidth = 2
 				//Spline = true, // закруглять углы
 			};
 
-			var lineSeriesMin = new ScatterLineSeries { BorderColor = Color.Green, LegendTitle = "Min", ShowLabels = false, PointSize = new SizeF(0,0)};
-			var lineSeriesNorm = new ScatterLineSeries { BorderColor = Color.Yellow, LegendTitle = "Normal", ShowLabels = false, PointSize = new SizeF(0, 0) };
-			var lineSeriesMax = new ScatterLineSeries { BorderColor = Color.Red, LegendTitle = "Max", ShowLabels = false, PointSize = new SizeF(0, 0) };
+			var lineSeriesMin = new ScatterLineSeries { BorderColor = Color.Green, LegendTitle = "Normal", ShowLabels = false, PointSize = new SizeF(0,0), BackColor = Color.Green };
+			var lineSeriesNorm = new ScatterLineSeries { BorderColor = Color.Yellow, LegendTitle = "Alert", ShowLabels = false, PointSize = new SizeF(0, 0), BackColor = Color.Yellow};
+			var lineSeriesMax = new ScatterLineSeries { BorderColor = Color.Red, LegendTitle = "Max", ShowLabels = false, PointSize = new SizeF(0, 0), BackColor = Color.Red };
 
 			radChartView1.Series.Clear();
 
 			foreach (var values in _graph.Graph[comp].OrderBy(i => i.Key.Hours))
 			{
-				lineSeries.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, values.Value));
-
-				if (_graph.Limits[comp].Min > 0)
-					lineSeriesMin.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, _graph.Limits[comp].Min));
-				if(_graph.Limits[comp].Normal > 0)
-					lineSeriesNorm.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, _graph.Limits[comp].Normal));
 				if (_graph.Limits[comp].Max > 0)
 					lineSeriesMax.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, _graph.Limits[comp].Max));
+				if (_graph.Limits[comp].Normal > 0)
+					lineSeriesNorm.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, _graph.Limits[comp].Normal));
+				if (_graph.Limits[comp].Min > 0)
+					lineSeriesMin.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, _graph.Limits[comp].Min));
+
+				lineSeries.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, values.Value));
 			}
 
 			radChartView1.Series.Clear();
-			radChartView1.Series.Add(lineSeries);
-			if (lineSeriesMin.DataPoints.Count > 0)
-				radChartView1.Series.Add(lineSeriesMin);
-			if (lineSeriesNorm.DataPoints.Count > 0)
-				radChartView1.Series.Add(lineSeriesNorm);
+
 			if (lineSeriesMax.DataPoints.Count > 0)
 				radChartView1.Series.Add(lineSeriesMax);
+			if (lineSeriesNorm.DataPoints.Count > 0)
+				radChartView1.Series.Add(lineSeriesNorm);
+			if (lineSeriesMin.DataPoints.Count > 0)
+				radChartView1.Series.Add(lineSeriesMin);
+			radChartView1.Series.Add(lineSeries);
 
 			LinearAxis horizontalAxis = radChartView1.Axes.Get<LinearAxis>(0);
 			//horizontalAxis.Minimum = (double)_graph.Graph[comp].OrderBy(i => i.Key.Hours).FirstOrDefault().Key.Hours;
@@ -164,9 +166,9 @@ namespace CAS.UI.UIControls.OilControls
 			//e.Element.Font = font;
 			//e.Element.NumberOfColors = 1;
 			e.Element.BorderGradientStyle = Telerik.WinControls.GradientStyles.Solid;
-			ScatterDataPoint dataPoint = e.Points[0].DataPoint as ScatterDataPoint;
+			ScatterDataPoint dataPoint = e.Points[3].DataPoint as ScatterDataPoint;
 			
-			e.Text = $@"<html><color='gray'>HRS:{dataPoint.XValue} Oil:{dataPoint.YValue.Value:F}";
+			e.Text = $@"<html><color='gray'>HRS:{dataPoint.XValue} Consumption:{dataPoint.YValue.Value:F}";
 		}
 	}
 }

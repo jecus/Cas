@@ -1738,6 +1738,15 @@ namespace SmartCore.Calculations
             if (lifelength.CalendarValue != null) lifelength.CalendarValue /= b.CalendarValue;
             return lifelength;
         }
+
+        public static Lifelength operator /(Lifelength a, double b)
+        {
+	        Lifelength lifelength = new Lifelength(a);
+	        if (lifelength.Hours != null) lifelength.TotalMinutes = Convert.ToInt32(Convert.ToInt32(lifelength.Hours) / b);
+	        if (lifelength.Cycles != null) lifelength.Cycles = Convert.ToInt32(Convert.ToInt32(lifelength.Cycles) / b);
+	        if (lifelength.Days != null) lifelength.CalendarValue = Convert.ToInt32(Convert.ToInt32(lifelength.Days) / b);
+	        return lifelength;
+        }
     }
 
     [Serializable]

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Windows;
 using Auxiliary;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
@@ -20,13 +21,16 @@ using SmartCore.Entities.General.Atlbs;
 
 namespace CAS.UI.UIControls.OilControls
 {
+
+	
+
 	///<summary>
 	/// список для отображения ордеров запроса
 	///</summary>
 	public partial class OilListView : BaseGridViewControl<AircraftFlight>
 	{
 		#region Fields
-
+		public Dictionary<int, List<AircraftFlight>> last = new Dictionary<int, List<AircraftFlight>>();
 		private readonly Aircraft _parentAircraft;
 		private  Dictionary<int,double> _sumOil;
 		private BaseComponentCollection _enginesAndAPU = new BaseComponentCollection();
@@ -77,6 +81,7 @@ namespace CAS.UI.UIControls.OilControls
 		/// <param name="itemsArray">Массив элементов</param>
 		public override void SetItemsArray(AircraftFlight[] itemsArray)
 		{
+			_flights = new AircraftFlightCollection();
 			_sumOil= new Dictionary<int, double>();
 			if (itemsArray == null)
 				throw new ArgumentNullException("itemsArray", "itemsArray can't be null");
@@ -116,8 +121,8 @@ namespace CAS.UI.UIControls.OilControls
 				{
 					AddColumn($"{baseComponent} (Flight)", (int)(radGridView1.Width * 0.1f));
 					AddColumn("UpLift", (int)(radGridView1.Width * 0.05f));
-					AddColumn("Alert", (int)(radGridView1.Width * 0.05f));
 					AddColumn("Norm", (int)(radGridView1.Width * 0.05f));
+					AddColumn("Alert", (int)(radGridView1.Width * 0.05f));
 					AddColumn("Max", (int)(radGridView1.Width * 0.05f));
 					AddColumn("Consumption", (int)(radGridView1.Width * 0.05f));
 					AddColumn("Engine Status", (int)(radGridView1.Width * 0.1f));
@@ -219,6 +224,10 @@ namespace CAS.UI.UIControls.OilControls
 					Color baseComponentTimeColor = Color.Black;
 					if (baseComponent.BaseComponentType == BaseComponentType.Engine)
 					{
+
+						if (!last.ContainsKey(baseComponent.ItemId))
+							last.Add(baseComponent.ItemId, new List<AircraftFlight>());
+
 						if (shouldFillSubItems)
 						{
 							subItems.Add(CreateListViewSubItem(baseComponentTimeColor, baseComponentFlightLifeLenght));
@@ -233,37 +242,53 @@ namespace CAS.UI.UIControls.OilControls
 							var oilAdded = cc?.OilAdded ?? 0;
 
 
+
+
 							var q = _flights
 								.Where(f => f.AtlbRecordType != AtlbRecordType.Maintenance &&
 								            f.FlightDate.Date.AddMinutes(f.TakeOffTime) <=
 								            item.FlightDate.Date.AddMinutes(item.TakeOffTime))
-								.OrderBy(i => i.FlightDate).ThenByDescending(i => i.TakeOffTime)
+								.OrderByDescending(i => i.FlightDate).ThenByDescending(i => i.TakeOffTime)
 								.ToList();
 
-							double spent = cc?.Spent ?? 0;
-							double counter = 0;
 
-							//if(item.ItemId == 218252)
-							//	Console.WriteLine();
+							double spent = cc?.Spent ?? 0;
+							double oilFlow = 0;
+
 
 							if (oilAdded > 0)
 							{
-								if (!_sumOil.ContainsKey(baseComponent.ItemId))
-									_sumOil.Add(baseComponent.ItemId, oilAdded);
-								else _sumOil[baseComponent.ItemId] += oilAdded;
+								if (last[baseComponent.ItemId].Any())
+								{
+									if (last[baseComponent.ItemId].Last().ItemId != item.ItemId)
+									{
+										var temp = new List<AircraftFlight>();
+										bool flag = false;
+										foreach (var aircraftFlight in q)
+										{
+											if (aircraftFlight.ItemId == last[baseComponent.ItemId].Last().ItemId)
+												flag = true;
+											if(flag)
+												temp.Add(aircraftFlight);
+										}
+
+										foreach (var aircraftFlight in temp)
+											q.Remove(aircraftFlight);
+									}
+								}
+
+								//if (!_sumOil.ContainsKey(baseComponent.ItemId))
+								//	_sumOil.Add(baseComponent.ItemId, oilAdded);
+								//else _sumOil[baseComponent.ItemId] += oilAdded;
 
 								var sumTime = q.Sum(i => i.FlightTime.TotalMinutes);
-								spent = _sumOil[baseComponent.ItemId] / sumTime;
+								spent = oilAdded / sumTime;
+								oilFlow = spent * 60.0;
+
+								if(!last[baseComponent.ItemId].Any(i => i.ItemId == item.ItemId))
+									last[baseComponent.ItemId].Add(item);
 							}
 							
-
-							var oilFlow = spent * 60.0;
-
-
-							var exceeding = oilFlow - oilFlowMax;
-							if (oilFlow <= oilFlowMax)
-								exceeding = 0;
-
 
 							subItems.Add(CreateListViewSubItem(oilAdded.ToString()));
 							subItems.Add(CreateListViewSubItem(oilFlowMin.ToString()));

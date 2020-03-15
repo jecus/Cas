@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using CAS.UI.Interfaces;
 using CAS.UI.Management.Dispatchering;
 using CAS.UI.UIControls.NewGrid;
@@ -153,9 +154,20 @@ namespace CAS.UI.UIControls.DirectivesControls
 				? "/WF"
 				: "/WL") : "";
 
-			subItems.Add(CreateRow(titleString, titleString));
-			subItems.Add(CreateRow(sbString, sbString));
-			subItems.Add(CreateRow(eoString, eoString));
+			var adColor = radGridView1.ForeColor;
+			var sbColor = radGridView1.ForeColor;
+			var eoColor = radGridView1.ForeColor;
+
+			if (item.ADNoFile == null)
+				adColor = Color.MediumVioletRed;
+			if (item.ServiceBulletinFile == null)
+				sbColor = Color.MediumVioletRed;
+			if (item.EngineeringOrderFile == null)
+				eoColor = Color.MediumVioletRed;
+
+			subItems.Add(CreateRow(titleString, titleString, adColor));
+			subItems.Add(CreateRow(sbString, sbString, sbColor));
+			subItems.Add(CreateRow(eoString, eoString, eoColor));
 			subItems.Add(CreateRow(descriptionString, descriptionString));
 			subItems.Add(CreateRow(corrective, corrective));
 			subItems.Add(CreateRow(numberString, numberString));
