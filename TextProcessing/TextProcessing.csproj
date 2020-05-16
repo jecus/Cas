@@ -571,7 +571,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Pattern.cs" />
-    <Compile Include="PatternTesting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

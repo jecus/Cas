@@ -37,29 +37,6 @@ namespace TextProcessing
 
         #region Constructors
 
-        #region public Pattern(string searchPattern)
-        /// <summary>
-        /// Creates new instance of Pattern
-        /// </summary>
-        /// <param name="searchPattern">Pattern to match</param>
-        public Pattern(string searchPattern) : this(searchPattern, false)
-        {
-        }
-        #endregion
-
-        #region public Pattern(string searchPattern, bool isGreedy)
-        /// <summary>
-        /// Creates new instance of Pattern
-        /// </summary>
-        /// <param name="searchPattern">Pattern to match</param>
-        /// <param name="isGreedy">Defines greediness of search</param>
-        public Pattern(string searchPattern, bool isGreedy)
-        {
-            _isGreedy = isGreedy;
-            _searchPattern = searchPattern;
-        }
-        #endregion
-
         #region public Pattern(string searchPattern, bool isGreedy, bool caseSensitive)
 
         /// <summary>

@@ -34,10 +34,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 		private List<BaseEntityObject> destinations = new List<BaseEntityObject>();
 		private DefferedCategoriesCollection _defferedCategories = new DefferedCategoriesCollection();
 		private List<QuotationCost> _quotationCosts = new List<QuotationCost>();
-		private readonly ProductPartNumberFilter _partNumberFilter = new ProductPartNumberFilter();
-		private readonly ProductCollectionFilter _collectionFilter = new ProductCollectionFilter();
-		private readonly ProductStandartFilter _standartFilter = new ProductStandartFilter();
-		private List<Product> _currentAircraftKits = new List<Product>();
 		private List<Supplier> _suppliers = new List<Supplier>();
 		private List<DocumentControl> DocumentControls = new List<DocumentControl>();
 		private Settings _setting;
@@ -75,9 +71,6 @@ namespace CAS.UI.UIControls.PurchaseControls.Initial
 			_order = order;
 
 			DocumentControls.AddRange(new[] { documentControl1, documentControl2, documentControl3, documentControl4, documentControl5, documentControl6, documentControl7, documentControl8, documentControl9, documentControl10 });
-
-			_collectionFilter.Filters.Add(_partNumberFilter);
-			_collectionFilter.Filters.Add(_standartFilter);
 
 			Task.Run(() => DoWork())
 				.ContinueWith(task => Completed(), TaskScheduler.FromCurrentSynchronizationContext());

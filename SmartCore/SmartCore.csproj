@@ -790,9 +790,6 @@
     <Compile Include="Files\ItemFileLink.cs" />
     <Compile Include="Filters\AccessoryCollectionFilter.cs" />
     <Compile Include="Filters\AccessoryFilter.cs" />
-    <Compile Include="Filters\AccessoryManufacturerFilter.cs" />
-    <Compile Include="Filters\AccessoryPartNumberFilter.cs" />
-    <Compile Include="Filters\AccessorySuppliersFilter.cs" />
     <Compile Include="Filters\CommonFilter.cs" />
     <Compile Include="Filters\CommonFilterCollection.cs" />
     <Compile Include="Filters\CommonFilterGroup.cs" />
