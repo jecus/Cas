@@ -21,17 +21,6 @@ namespace CAS.UI.UIControls.Auxiliary.GroupListView
         public ListViewItem[] Items { get; set; }
     }
 
-    class ListGroupEventArgs : System.EventArgs
-    {
-        public ListGroupEventArgs(ListGroup ListGroup)
-        {
-
-        }
-
-
-        public ListGroup ListGroup { get; set; }
-    }
-
     public class ListGroupColumnEventArgs : EventArgs
     {
         public ListGroupColumnEventArgs(int Columnindex)

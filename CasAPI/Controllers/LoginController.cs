@@ -123,14 +123,16 @@ namespace CasAPI.Controllers
 				}
 				else
 				{
-					var newUser = new UserDTO();
-					newUser.Login = user.Login;
-					newUser.Password = user.Password;
-					newUser.Name = user.Name;
-					newUser.Surname = user.Surname;
-					newUser.UserType = user.UserType;
-					newUser.UiType = user.UiType;
-					newUser.PersonnelId = user.PersonnelId;
+					var newUser = new UserDTO
+					{
+						Login = user.Login,
+						Password = user.Password,
+						Name = user.Name,
+						Surname = user.Surname,
+						UserType = user.UserType,
+						UiType = user.UiType,
+						PersonnelId = user.PersonnelId
+					};
 
 					_context.UserDtos.Add(newUser);
 

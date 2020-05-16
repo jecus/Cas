@@ -40,50 +40,6 @@ namespace CAS.UI.UIControls.DirectivesControls
         }
         #endregion
 
-        #region public DamageGeneralInformationControl(Aircraft currentAircraft)
-
-        ///<summary>
-        /// Создает объект для отображения информации о директиве
-        ///</summary>
-        public DamageGeneralInformationControl(Aircraft currentAircraft)
-        {
-            InitializeComponent();
-            ataChapterComboBox.UpdateInformation();
-        }
-        #endregion
-
-        #region public DamageGeneralInformationControl(DamageItem currentDirective)
-        ///<summary>
-        /// Создает экземпляр класса для отображения информации о директиве
-        ///</summary>
-        ///<param name="currentDirective"></param>
-        public DamageGeneralInformationControl(DamageItem currentDirective)
-        {
-            if (null == currentDirective)
-                throw new ArgumentNullException("currentDirective", "Argument cannot be null");
-            _currentDirective = currentDirective;
-            InitializeComponent();
-            ataChapterComboBox.UpdateInformation();
-
-            AttachedFile adNofile = null;
-            if (currentDirective.ADNoFile != null) adNofile = currentDirective.ADNoFile;
-            fileControlADNo.UpdateInfo(adNofile, "Adobe PDF Files|*.pdf",
-                                             "This record does not contain a file proving the AD No. Enclose PDF file to prove the compliance.",
-                                             "Attached file proves the AD No.");
-            AttachedFile sBfile = null;
-            if (currentDirective.ServiceBulletinFile != null) sBfile = currentDirective.ServiceBulletinFile;
-            fileControlSB.UpdateInfo(sBfile, "Adobe PDF Files|*.pdf",
-                                           "This record does not contain a file proving the Service bulletin. Enclose PDF file to prove the compliance.",
-                                           "Attached file proves the Service bulletin.");
-            AttachedFile eOfile = null;
-            if (currentDirective.EngineeringOrderFile != null) eOfile = currentDirective.EngineeringOrderFile;
-            fileControlEO.UpdateInfo(eOfile, "Adobe PDF Files|*.pdf",
-                                           "This record does not contain a file proving the Engineering order. Enclose PDF file to prove the compliance.",
-                                           "Attached file proves the Engineering order.");
-        }
-
-        #endregion
-
         #endregion
 
         #region Properties

@@ -24,10 +24,7 @@ namespace CAS.UI.UIControls.MailControls
 
 		private void DoWork()
 		{
-			_op = GlobalObjects.CasEnvironment.NewLoader.GetObject<SettingDTO, Settings>();
-
-			if(_op == null)
-				_op = new Settings();
+			_op = GlobalObjects.CasEnvironment.NewLoader.GetObject<SettingDTO, Settings>() ?? new Settings();
 		}
 
 		#endregion

@@ -3830,7 +3830,6 @@
     <Compile Include="UIControls\Auxiliary\LoginControl.Designer.cs">
       <DependentUpon>LoginControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\ExceptionManager.cs" />
     <Compile Include="Interfaces\IHelpRequester.cs" />
     <Compile Include="Management\Dispatchering\Dispatcher.cs" />
     <Compile Include="Management\Dispatchering\DispatcheredMultitabControl.cs">

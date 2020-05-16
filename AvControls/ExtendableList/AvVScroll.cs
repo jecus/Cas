@@ -20,18 +20,11 @@ namespace AvControls.ExtendableList
 
         public int ApproximateHeigth
         {
-            get { return approximateHeigth; }
+            get => approximateHeigth;
             set
             {
-                approximateHeigth = value;
-                if (value <= base.Height)
-                {
-                    base.Visible = false;
-                }
-                else
-                {
-                    base.Visible = true;
-                }
+	            approximateHeigth = value;
+	            base.Visible = value > base.Height;
             }
         }
 

@@ -399,7 +399,6 @@
     <Compile Include="Analyst\AnalystCore.cs" />
     <Compile Include="Analyst\AnalystHelper.cs" />
     <Compile Include="Calculations\AverageUtilization.cs" />
-    <Compile Include="Calculations\ByteConvertible.cs" />
     <Compile Include="Calculations\Calculator.cs" />
     <Compile Include="Calculations\DateTimeDiff.cs" />
     <Compile Include="Calculations\ComponentDirectiveThreshold.cs" />

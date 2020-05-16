@@ -33,14 +33,10 @@ namespace CAS.UI.UIControls.OpepatorsControls
                 ReflectionTypes reflection = reflectionType;
                 Keyboard k = new Keyboard();
                 if (k.ShiftKeyDown && reflection == ReflectionTypes.DisplayInCurrent) reflection = ReflectionTypes.DisplayInNew;
-                if (null != displayer)
-                {
-                    DisplayerRequested(this, new ReferenceEventArgs(entity, reflection, displayer, displayerText));
-                }
-                else
-                {
-                    DisplayerRequested(this, new ReferenceEventArgs(entity, reflection, displayerText));
-                }
+                DisplayerRequested(this,
+	                null != displayer
+		                ? new ReferenceEventArgs(entity, reflection, displayer, displayerText)
+		                : new ReferenceEventArgs(entity, reflection, displayerText));
             }
         }
         #endregion

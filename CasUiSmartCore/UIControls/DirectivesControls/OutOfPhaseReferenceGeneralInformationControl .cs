@@ -33,17 +33,6 @@ namespace CAS.UI.UIControls.DirectivesControls
         }
         #endregion
 
-        #region public OutOfPhaseReferenceGeneralInformationControl(Aircraft currentAircraft)
-
-        ///<summary>
-        /// Создает объект для отображения информации о директиве
-        ///</summary>
-        public OutOfPhaseReferenceGeneralInformationControl(Aircraft currentAircraft)
-        {
-            InitializeComponent();
-            ataChapterComboBox.UpdateInformation();
-        }
-        #endregion
 
         #endregion
 

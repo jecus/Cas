@@ -40,8 +40,8 @@ namespace SmartCore.AuditMongo.Repository
 					//Action = $"{objectName}{operation}",
 					Action = $"{operation}",
 					Date = DateTime.UtcNow,
-					ObjectId = target?.ItemId ?? -1,
-					ObjectTypeId = target?.SmartCoreObjectType.ItemId ?? -1,
+					ObjectId = (int) target?.ItemId,
+					ObjectTypeId = (int) target?.SmartCoreObjectType.ItemId,
 					UserId = user.ItemId,
 					AdditionalParameters = parameters
 				});
