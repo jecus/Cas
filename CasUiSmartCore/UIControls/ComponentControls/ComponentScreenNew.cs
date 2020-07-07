@@ -18,6 +18,7 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Filters;
+using SmartCore.Relation;
 using Component = SmartCore.Entities.General.Accessory.Component;
 using ComponentCollection = SmartCore.Entities.Collections.ComponentCollection;
 
@@ -288,7 +289,28 @@ namespace CAS.UI.UIControls.ComponentControls
 
 				                if (itemsRelations.Count > 0)
 				                {
-					                directive.ItemRelations.AddRange(itemsRelations.Where(i =>
+
+                                    //Сделан такой костыль для того что был когда то баг что записи не грузились и создавалось несколько связок и вылетало предупреждение
+					                if (itemsRelations.Count > 1)
+					                {
+						                var max = itemsRelations.Max(i => i.Updated);
+                                        var deleted = new List<ItemsRelation>();
+						                foreach (var relation in itemsRelations)
+						                {
+							                if (max.Equals(relation.Updated))
+								                continue;
+
+                                            GlobalObjects.CasEnvironment.NewKeeper.Delete(relation);
+                                            deleted.Add(relation);
+						                }
+
+						                foreach (var itemsRelation in deleted)
+							                itemsRelations.Remove(itemsRelation);
+
+					                }
+
+					                directive.ItemRelations.Clear();
+                                    directive.ItemRelations.AddRange(itemsRelations.Where(i =>
 						                i.FirstItemId == directive.ItemId ||
 						                i.SecondItemId ==
 						                directive.ItemId)); //TODO:(Evgenii Babak)не использовать Where 
