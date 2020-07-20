@@ -1742,7 +1742,7 @@ namespace SmartCore.Calculations
         public static Lifelength operator /(Lifelength a, double b)
         {
 	        Lifelength lifelength = new Lifelength(a);
-	        if (lifelength.Hours != null) lifelength.TotalMinutes = Convert.ToInt32(Convert.ToInt32(lifelength.Hours) / b);
+	        if (lifelength.Hours != null) lifelength.TotalMinutes = Convert.ToInt32(Convert.ToInt32(lifelength.TotalMinutes) / b);
 	        if (lifelength.Cycles != null) lifelength.Cycles = Convert.ToInt32(Convert.ToInt32(lifelength.Cycles) / b);
 	        if (lifelength.Days != null) lifelength.CalendarValue = Convert.ToInt32(Convert.ToInt32(lifelength.Days) / b);
 	        return lifelength;

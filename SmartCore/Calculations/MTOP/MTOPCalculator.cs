@@ -264,23 +264,27 @@ namespace SmartCore.Calculations.MTOP
 
 				if (isComponent)
 				{
-					//np.NextLimitC = new Lifelength(directive.LastPerformance.OnLifelength);
-
-
-						//var actualState = component.ActualStateRecords.GetLast();
-						//if(actualState != null && actualState.RecordDate > directive.LastPerformance.RecordDate)
-							np.NextLimitC = new Lifelength(directive.LastPerformance.OnLifelength);
-						//else np.NextLimitC = new Lifelength(_calculator.GetFlightLifelengthOnEndOfDay(component, directive.LastPerformance.RecordDate));
-
+					var actualState = component.ActualStateRecords.GetLast();
+					if (actualState != null && actualState.RecordDate.Date > directive.LastPerformance.RecordDate.Date)
+					{
+						var diff = new Lifelength(actualState.OnLifelength);
+						diff.Substract(directive.LastPerformance.OnLifelength);
+						np.NextLimitC = new Lifelength(actualState.OnLifelength);
 						
-						
-					//np.NextLimitC = new Lifelength(_calculator.GetFlightLifelengthOnStartOfDay(component, directive.LastPerformance.RecordDate));
+						np.LastDataC = new Lifelength(_calculator.GetFlightLifelengthOnStartOfDay(aircraft, actualState.RecordDate));
+						np.NextLimit = new Lifelength(np.LastDataC);
+						np.NextLimitC.Substract(diff);
+						np.NextLimit.Substract(diff);
+					}
+					else
+					{
+						np.NextLimitC = new Lifelength(directive.LastPerformance.OnLifelength);
+						np.LastDataC = new Lifelength(_calculator.GetFlightLifelengthOnStartOfDay(aircraft, directive.LastPerformance.RecordDate));
+						np.NextLimit = new Lifelength(np.LastDataC);
+					}
+					
 
-					//np.LastDataC = new Lifelength(component != null ? _calculator.GetFlightLifelengthOnStartOfDay(component, directive.LastPerformance.RecordDate) :
-					//_calculator.GetFlightLifelengthOnStartOfDay(basecomponent, directive.LastPerformance.RecordDate));
-
-					np.LastDataC = new Lifelength(_calculator.GetFlightLifelengthOnStartOfDay(aircraft, directive.LastPerformance.RecordDate));
-					np.NextLimit = new Lifelength(np.LastDataC);
+					
 
 					if (!threshold.RepeatInterval.IsNullOrZero())
 					{
