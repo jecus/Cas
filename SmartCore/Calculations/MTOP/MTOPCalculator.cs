@@ -222,7 +222,11 @@ namespace SmartCore.Calculations.MTOP
 					}
 					else
 					{
-						np.NextLimit = new Lifelength(threshold.FirstPerformanceSinceNew);
+						var first = new Lifelength(threshold.FirstPerformanceSinceNew);
+						if (directive.APUCalc)
+							first /= aircraft.APUFH;
+
+						np.NextLimit = new Lifelength(first);
 						if (directive.IsExtension)
 							np.NextLimit.AddPersent(directive.Extension);
 					}
@@ -288,13 +292,16 @@ namespace SmartCore.Calculations.MTOP
 
 					if (!threshold.RepeatInterval.IsNullOrZero())
 					{
+						var repeat = new Lifelength(threshold.RepeatInterval);
+						if (directive.APUCalc)
+							repeat /= aircraft.APUFH;
+
 						if (directive.IsExtension)
 						{
-							var repeat = new Lifelength(threshold.RepeatInterval);
 							repeat.AddPersent(directive.Extension);
 							np.NextLimitC.Add(repeat);
 						}
-						else np.NextLimitC.Add(threshold.RepeatInterval);
+						else np.NextLimitC.Add(repeat);
 					}
 					else return;
 				}
@@ -305,13 +312,16 @@ namespace SmartCore.Calculations.MTOP
 
 				if (!threshold.RepeatInterval.IsNullOrZero())
 				{
+					var repeat = new Lifelength(threshold.RepeatInterval);
+					if (directive.APUCalc)
+						repeat /= aircraft.APUFH;
+
 					if (directive.IsExtension)
 					{
-						var repeat = new Lifelength(threshold.RepeatInterval);
 						repeat.AddPersent(directive.Extension);
 						np.NextLimit.Add(repeat);
 					}
-					else np.NextLimit.Add(threshold.RepeatInterval);
+					else np.NextLimit.Add(repeat);
 				}
 				else return;
 			}
@@ -340,13 +350,14 @@ namespace SmartCore.Calculations.MTOP
 				}
 
 
+				//if (directive.APUCalc)
+				//{
+				//	np.NextLimit /= aircraft.APUFH;
+				//	np.RemainLimit /= aircraft.APUFH;
+				//}
 				if (directive.APUCalc)
-				{
-					np.NextLimit /= aircraft.APUFH;
-					np.RemainLimit /= aircraft.APUFH;
-				}
-
-				np.Remains = new Lifelength(CalculateWithUtilization(directive, np.RemainLimit, averageUtilization, conditionType));
+					np.Remains = new Lifelength(CalculateWithUtilization(directive, np.RemainLimit, averageUtilization, conditionType, true));
+				else np.Remains = new Lifelength(CalculateWithUtilization(directive, np.RemainLimit, averageUtilization, conditionType));
 
 				if (isComponent)
 				{
@@ -462,7 +473,7 @@ namespace SmartCore.Calculations.MTOP
 			directive.NextPerformances.Add(np);
 		}
 
-		public Lifelength CalculateWithUtilization(IMtopCalc directive, Lifelength thresh, AverageUtilization averageUtilization, ThresholdConditionType conditionType)
+		public Lifelength CalculateWithUtilization(IMtopCalc directive, Lifelength thresh, AverageUtilization averageUtilization, ThresholdConditionType conditionType, bool ignoreAPU = false)
 		{
 			if (thresh.IsNullOrZero())
 				return Lifelength.Null;
@@ -498,10 +509,10 @@ namespace SmartCore.Calculations.MTOP
 			}
 
 
-			return CalculateWithUtilization(directive, res, averageUtilization);
+			return CalculateWithUtilization(directive, res, averageUtilization, ignoreAPU);
 		}
 
-		public Lifelength CalculateWithUtilization(IMtopCalc directive, Lifelength thresh, AverageUtilization averageUtilization)
+		public Lifelength CalculateWithUtilization(IMtopCalc directive, Lifelength thresh, AverageUtilization averageUtilization, bool ignoreAPU = false)
 		{
 			double hours = 0, cycles = 0, days = 0;
 			double hoursPhase = -1, cyclesPhase = -1, daysPhase = -1;
@@ -510,7 +521,7 @@ namespace SmartCore.Calculations.MTOP
 
 			var threshHours = thresh.Hours;
 
-			if (directive.APUCalc && threshHours.HasValue)
+			if (directive.APUCalc && threshHours.HasValue && !ignoreAPU)
 			{
 				var aircraft = _aircraftsCore.GetAircraftById(directive.ParentAircraftId);
 				threshHours = (int?)(thresh.Hours / aircraft.APUFH);

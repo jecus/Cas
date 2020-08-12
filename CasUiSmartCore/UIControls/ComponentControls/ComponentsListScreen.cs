@@ -2039,7 +2039,8 @@ namespace CAS.UI.UIControls.ComponentControls
 								if (directive.MaintenanceDirective == null)
 									continue;
 
-								var mpd = directive.MaintenanceDirective.GetCopyUnsaved();
+								//var mpd = directive.MaintenanceDirective.GetCopyUnsaved();
+								var mpd = directive.MaintenanceDirective;
 
 								mpd.CompnentSN = component.SerialNumber;
 								mpd.CompnentPN = component.PartNumber;

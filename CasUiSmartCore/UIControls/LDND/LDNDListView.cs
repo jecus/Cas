@@ -257,7 +257,7 @@ namespace CAS.UI.UIControls.LDND
 				else firstPerformanceString = "";
 				firstPerformanceString += "s/e.d: " + item.Parent.Threshold.FirstPerformanceSinceEffectiveDate;
 			}
-			var repeatInterval = item.Parent.Threshold.RepeatInterval;
+			var repeatInterval = item.Parent.Threshold.RepeatInterval.ToString();
 
 			if (lastComplianceDate <= DateTimeExtend.GetCASMinDateTime())
 				lastPerformanceString = "N/A";
@@ -280,6 +280,14 @@ namespace CAS.UI.UIControls.LDND
 			{
 				if(cd.FromBaseComponent)
 					type = SmartCoreType.BaseComponent;
+			}
+			else if (item.Parent is MaintenanceDirective md)
+			{
+				if (md.APUCalc)
+				{
+					firstPerformanceString = firstPerformanceString.Replace("FH", "AH");
+					repeatInterval = repeatInterval.Replace("FH", "AH");
+				}
 			}
 
 			subItems.Add(CreateRow(title, title));

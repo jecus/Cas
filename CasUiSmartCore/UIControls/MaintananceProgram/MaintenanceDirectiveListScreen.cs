@@ -1356,6 +1356,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		{
 			foreach (var mpd in maintenanceDirectives)
 			{
+
 				if (_currentForecast == null)
 				{
 					//GlobalObjects.PerformanceCalculator.GetNextPerformance(mpd);

@@ -152,7 +152,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
             try
             {
-                if (_currentDirective.ItemId > 0 && _needReload)
+                //if (_currentDirective.ItemId > 0 && _needReload)
+                if (_currentDirective.ItemId > 0)
                 {
                     _currentDirective = GlobalObjects.MaintenanceCore.GetMaintenanceDirective(_currentDirective.ItemId);
                 }
