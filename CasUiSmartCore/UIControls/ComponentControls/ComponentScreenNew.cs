@@ -18,6 +18,7 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Directives;
 using SmartCore.Filters;
+using SmartCore.Relation;
 using Component = SmartCore.Entities.General.Accessory.Component;
 using ComponentCollection = SmartCore.Entities.Collections.ComponentCollection;
 
@@ -201,75 +202,124 @@ namespace CAS.UI.UIControls.ComponentControls
             {
                 if (_currentComponent.ItemId > 0)
                 {
-                    if (_currentComponent is BaseComponent)
-                    {
-	                    if (AnimatedThreadWorker.CancellationPending)
-	                    {
-		                    e.Cancel = true;
-		                    return;
-	                    }
-						_currentComponent = GlobalObjects.ComponentCore.GetFullBaseComponent(_currentComponent.ItemId);
+	                if (_currentComponent is BaseComponent)
+	                {
+		                if (AnimatedThreadWorker.CancellationPending)
+		                {
+			                e.Cancel = true;
+			                return;
+		                }
 
-	                    var types = new[] {SmartCoreType.BaseComponent.ItemId, SmartCoreType.ComponentDirective.ItemId};
-	                    if (AnimatedThreadWorker.CancellationPending)
-	                    {
-		                    e.Cancel = true;
-		                    return;
-	                    }
-						//Загрузка документов
-						var documents = GlobalObjects.CasEnvironment.Loader.GetObjectList<Document>(new ICommonFilter[]
-						{
-							new CommonFilter<int>(Document.ParentIdProperty, _currentComponent.ItemId),
-							new CommonFilter<int>(Document.ParentTypeIdProperty, FilterType.In, types)
-						});
+		                _currentComponent = GlobalObjects.ComponentCore.GetFullBaseComponent(_currentComponent.ItemId);
 
-						_currentComponent.ChangeLLPCategoryRecords.Clear();
-						_currentComponent.ChangeLLPCategoryRecords
-							.AddRange(GlobalObjects.CasEnvironment.NewLoader
-								.GetObjectList<ComponentLLPCategoryChangeRecordDTO, ComponentLLPCategoryChangeRecord>(new Filter("ParentId", _currentComponent.ItemId), true));
+		                var types = new[] {SmartCoreType.BaseComponent.ItemId, SmartCoreType.ComponentDirective.ItemId};
+		                if (AnimatedThreadWorker.CancellationPending)
+		                {
+			                e.Cancel = true;
+			                return;
+		                }
 
-						_workParams = GlobalObjects.CasEnvironment.NewLoader
-							.GetObjectList<ComponentWorkInRegimeParamDTO, ComponentWorkInRegimeParams>(new List<Filter>()
-							{
-								new Filter("ComponentId", _currentComponent.ItemId)
-							});
+		                //Загрузка документов
+		                var documents = GlobalObjects.CasEnvironment.Loader.GetObjectList<Document>(new ICommonFilter[]
+		                {
+			                new CommonFilter<int>(Document.ParentIdProperty, _currentComponent.ItemId),
+			                new CommonFilter<int>(Document.ParentTypeIdProperty, FilterType.In, types)
+		                });
+
+		                _currentComponent.ChangeLLPCategoryRecords.Clear();
+		                _currentComponent.ChangeLLPCategoryRecords
+			                .AddRange(GlobalObjects.CasEnvironment.NewLoader
+				                .GetObjectList<ComponentLLPCategoryChangeRecordDTO, ComponentLLPCategoryChangeRecord>(
+					                new Filter("ParentId", _currentComponent.ItemId), true));
+
+		                _workParams = GlobalObjects.CasEnvironment.NewLoader
+			                .GetObjectList<ComponentWorkInRegimeParamDTO, ComponentWorkInRegimeParams>(
+				                new List<Filter>()
+				                {
+					                new Filter("ComponentId", _currentComponent.ItemId)
+				                });
 
 
-						if (documents.Count > 0)
-	                    {
-		                    var crs = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Component CRS Form") as DocumentSubType;
-		                    var shipping = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>().GetByFullName("Shipping document") as DocumentSubType;
+		                if (documents.Count > 0)
+		                {
+			                var crs = GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>()
+				                .GetByFullName("Component CRS Form") as DocumentSubType;
+			                var shipping =
+				                GlobalObjects.CasEnvironment.GetDictionary<DocumentSubType>()
+					                .GetByFullName("Shipping document") as DocumentSubType;
 
-		                    var docShipping = documents.FirstOrDefault(d => d.ParentId == _currentComponent.ItemId && d.ParentTypeId == SmartCoreType.BaseComponent.ItemId && d.DocumentSubType.ItemId == shipping.ItemId);
-		                    if (docShipping != null)
-		                    {
-			                    _currentComponent.Document = docShipping;
-			                    _currentComponent.Document.Parent = _currentComponent;
-		                    }
+			                var docShipping = documents.FirstOrDefault(d =>
+				                d.ParentId == _currentComponent.ItemId &&
+				                d.ParentTypeId == SmartCoreType.BaseComponent.ItemId &&
+				                d.DocumentSubType.ItemId == shipping.ItemId);
+			                if (docShipping != null)
+			                {
+				                _currentComponent.Document = docShipping;
+				                _currentComponent.Document.Parent = _currentComponent;
+			                }
 
-		                    var docCrs = documents.FirstOrDefault(d => d.ParentId == _currentComponent.ItemId && d.ParentTypeId == SmartCoreType.BaseComponent.ItemId && d.DocumentSubType.ItemId == crs.ItemId);
-		                    if (docCrs != null)
-		                    {
-			                    _currentComponent.DocumentCRS = docCrs;
-			                    _currentComponent.DocumentCRS.Parent = _currentComponent;
-		                    }
+			                var docCrs = documents.FirstOrDefault(d =>
+				                d.ParentId == _currentComponent.ItemId &&
+				                d.ParentTypeId == SmartCoreType.BaseComponent.ItemId &&
+				                d.DocumentSubType.ItemId == crs.ItemId);
+			                if (docCrs != null)
+			                {
+				                _currentComponent.DocumentCRS = docCrs;
+				                _currentComponent.DocumentCRS.Parent = _currentComponent;
+			                }
+		                }
 
-		                    if (_currentComponent.ComponentDirectives.Count > 0)
-		                    {
+		                if (_currentComponent.ComponentDirectives.Count > 0)
+		                {
 
-			                    foreach (var directive in _currentComponent.ComponentDirectives)
-			                    {
-				                    var docCd = documents.FirstOrDefault(d => d.ParentId == directive.ItemId && d.ParentTypeId == SmartCoreType.ComponentDirective.ItemId);
-				                    if (docCd != null)
-				                    {
-					                    directive.Document = docCd;
-					                    directive.Document.Parent = directive;
-				                    }
-			                    }
-		                    }
-	                    }
-                    }
-                    else
+			                var directivesIds = _currentComponent.ComponentDirectives.Select(d => d.ItemId);
+			                var itemsRelations = GlobalObjects.ItemsRelationsDataAccess.GetRelations(directivesIds,
+				                SmartCoreType.ComponentDirective.ItemId);
+
+			                foreach (var directive in _currentComponent.ComponentDirectives)
+			                {
+				                var docCd = documents.FirstOrDefault(d =>
+					                d.ParentId == directive.ItemId &&
+					                d.ParentTypeId == SmartCoreType.ComponentDirective.ItemId);
+				                if (docCd != null)
+				                {
+					                directive.Document = docCd;
+					                directive.Document.Parent = directive;
+				                }
+
+				                if (itemsRelations.Count > 0)
+				                {
+
+                                    //Сделан такой костыль для того что был когда то баг что записи не грузились и создавалось несколько связок и вылетало предупреждение
+					                if (itemsRelations.Count > 1)
+					                {
+						                var max = itemsRelations.Max(i => i.Updated);
+                                        var deleted = new List<ItemsRelation>();
+						                foreach (var relation in itemsRelations)
+						                {
+							                if (max.Equals(relation.Updated))
+								                continue;
+
+                                            GlobalObjects.CasEnvironment.NewKeeper.Delete(relation);
+                                            deleted.Add(relation);
+						                }
+
+						                foreach (var itemsRelation in deleted)
+							                itemsRelations.Remove(itemsRelation);
+
+					                }
+
+					                directive.ItemRelations.Clear();
+                                    directive.ItemRelations.AddRange(itemsRelations.Where(i =>
+						                i.FirstItemId == directive.ItemId ||
+						                i.SecondItemId ==
+						                directive.ItemId)); //TODO:(Evgenii Babak)не использовать Where 
+				                }
+			                }
+		                }
+
+	                }
+	                else
                     {
 	                    if (AnimatedThreadWorker.CancellationPending)
 	                    {

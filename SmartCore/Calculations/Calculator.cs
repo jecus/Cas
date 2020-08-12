@@ -1493,13 +1493,16 @@ namespace SmartCore.Calculations
 							days -= (double)llp?.Days / (double)categoryData.LLPLifeLimit.Days;
 						}
 					}
+
+					//Раньше было без округлений scat так захотел
+
 					data.Remain = Lifelength.Null;
 					if (data.LLPLifeLimit?.Hours != null)
-						data.Remain.Hours = (int)(hours * (double)data.LLPLifeLimit.Hours);
+						data.Remain.Hours = (int)Math.Round(hours * (double)data.LLPLifeLimit.Hours);
 					if (data.LLPLifeLimit?.Cycles != null)
-						data.Remain.Cycles = (int)(cycles * (double)data.LLPLifeLimit.Cycles);
+						data.Remain.Cycles = (int)Math.Round(cycles * (double)data.LLPLifeLimit.Cycles);
 					if (data.LLPLifeLimit?.Days != null)
-						data.Remain.Days = (int)(days * (double)data.LLPLifeLimit.Days);
+						data.Remain.Days = (int)Math.Round(days * (double)data.LLPLifeLimit.Days);
 
 					if(data.LLPLifeLimit != null)
 						data.Remain.Resemble(data.LLPLifeLimit);
@@ -1731,7 +1734,7 @@ namespace SmartCore.Calculations
 
 				//if(!double.IsNaN(resultCycle))
 				if(calculatedData.Remain != null && calculatedData.LLPLifeLimit?.Cycles != null)
-					calculatedData.Remain.Cycles = (int)(resCycle * calculatedData.LLPLifeLimit.Cycles.GetValueOrDefault());
+					calculatedData.Remain.Cycles = (int)Math.Round(resCycle * calculatedData.LLPLifeLimit.Cycles.GetValueOrDefault());
 			}
 		}
 

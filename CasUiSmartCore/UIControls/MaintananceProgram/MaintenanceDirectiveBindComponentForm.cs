@@ -130,7 +130,27 @@ namespace CAS.UI.UIControls.MaintananceProgram
             try
             {
                 dc = GlobalObjects.ComponentCore.GetComponents(_currentAircraft.ItemId);
-                //Определение списка привязанных задач и компонентов
+				
+
+				var baseComp = GlobalObjects.ComponentCore.GetAicraftBaseComponents(_currentAircraft.ItemId);
+				var directivesIds = baseComp.SelectMany(i => i.ComponentDirectives).Select(d => d.ItemId);
+				var itemsRelations = GlobalObjects.ItemsRelationsDataAccess.GetRelations(directivesIds,
+					SmartCoreType.ComponentDirective.ItemId);
+
+				if (itemsRelations.Count > 0)
+				{
+					foreach (var directive in baseComp.SelectMany(i => i.ComponentDirectives))
+					{
+						directive.ItemRelations.Clear();
+						directive.ItemRelations.AddRange(itemsRelations.Where(i =>
+							i.FirstItemId == directive.ItemId ||
+							i.SecondItemId ==
+							directive.ItemId)); //TODO:(Evgenii Babak)не использовать Where 
+					}
+				}
+
+				dc.AddRange(baseComp);
+				//Определение списка привязанных задач и компонентов
 
 				List<ComponentDirective> bindedDirectives = 
                     dc.SelectMany(d => d.ComponentDirectives.Where(dd => dd.ItemRelations.IsAnyRelationWith(_maintenanceDirective)))

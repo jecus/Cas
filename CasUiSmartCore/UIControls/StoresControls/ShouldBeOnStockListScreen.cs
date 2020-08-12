@@ -26,6 +26,7 @@ namespace CAS.UI.UIControls.StoresControls
     {
 	    private readonly ComponentCollection _resultCollection;
 
+
 		#region Fields
 		private AnimatedThreadWorker _worker;
 		private ExcelExportProvider _exportProvider;

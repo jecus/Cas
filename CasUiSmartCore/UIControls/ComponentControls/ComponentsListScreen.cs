@@ -519,7 +519,7 @@ namespace CAS.UI.UIControls.ComponentControls
 				//извлечение и собрание всех компоннтов самолета
 				//(деталей и базовых деталей) в одну коллекцию
 				ComponentCollection componentCollection = new ComponentCollection();
-				BaseComponentCollection baseComponentCollection;
+				BaseComponentCollection baseComponentCollection = new BaseComponentCollection();
 				List<MaintenanceControlProcess> types = new List<MaintenanceControlProcess>(_maintenanceTypes);
 
 				if (DirectiveSource is BaseComponent)
@@ -595,6 +595,24 @@ namespace CAS.UI.UIControls.ComponentControls
 
 						}
 
+						var directivesIds = baseComponentCollection.SelectMany(i => i.ComponentDirectives).Select(d => d.ItemId);
+						var itemsRelations = GlobalObjects.ItemsRelationsDataAccess.GetRelations(directivesIds,
+							SmartCoreType.ComponentDirective.ItemId);
+
+						if (itemsRelations.Count > 0)
+						{
+							foreach (var directive in baseComponentCollection.SelectMany(i => i.ComponentDirectives))
+							{
+								directive.ItemRelations.Clear();
+								directive.ItemRelations.AddRange(itemsRelations.Where(i =>
+									i.FirstItemId == directive.ItemId ||
+									i.SecondItemId ==
+									directive.ItemId)); //TODO:(Evgenii Babak)не использовать Where 
+							}
+						}
+
+						
+
 
 						var lastInstalledBaseDetails = GlobalObjects.CasEnvironment.BaseComponents.GetLastInstalledComponentsOn(CurrentAircraft);
 						foreach (BaseComponent baseDetail in lastInstalledBaseDetails)
@@ -655,6 +673,24 @@ namespace CAS.UI.UIControls.ComponentControls
 						baseComponentCollection =
 						new BaseComponentCollection(GlobalObjects.ComponentCore.GetAicraftBaseComponents(((Aircraft)DirectiveSource).ItemId));
 					}
+
+
+					var directivesIds = baseComponentCollection.SelectMany(i => i.ComponentDirectives).Select(d => d.ItemId);
+					var itemsRelations = GlobalObjects.ItemsRelationsDataAccess.GetRelations(directivesIds,
+						SmartCoreType.ComponentDirective.ItemId);
+
+					if (itemsRelations.Count > 0)
+					{
+						foreach (var directive in baseComponentCollection.SelectMany(i => i.ComponentDirectives))
+						{
+							directive.ItemRelations.Clear();
+							directive.ItemRelations.AddRange(itemsRelations.Where(i =>
+								i.FirstItemId == directive.ItemId ||
+								i.SecondItemId ==
+								directive.ItemId)); //TODO:(Evgenii Babak)не использовать Where 
+						}
+					}
+
 					//////////////////////////////////////////////////////
 					//   проверка на установленные базовые компоненты   //
 					//////////////////////////////////////////////////////
@@ -892,6 +928,14 @@ namespace CAS.UI.UIControls.ComponentControls
 					}
 				}
 
+				foreach (var directive in baseComponentCollection?.SelectMany(i => i.ComponentDirectives))
+				{
+					foreach (var items in directive.ItemRelations.Where(i => i.FirtsItemTypeId == SmartCoreType.MaintenanceDirective.ItemId || i.SecondItemTypeId == SmartCoreType.MaintenanceDirective.ItemId))
+					{
+						ids.Add(directive.IsFirst == true ? items.SecondItemId : items.FirstItemId);
+					}
+				}
+
 
 				var mpd = GlobalObjects.MaintenanceCore.GetMaintenanceDirectiveList(ids, CurrentAircraft.ItemId);
 				foreach (var component in componentCollection)
@@ -903,6 +947,17 @@ namespace CAS.UI.UIControls.ComponentControls
 							var id = componentDirective.IsFirst == true ? items.SecondItemId : items.FirstItemId;
 							componentDirective.MaintenanceDirective = mpd.FirstOrDefault(i => i.ItemId == id);
 						}
+					}
+				}
+
+				foreach (var componentDirective in baseComponentCollection?.SelectMany(i => i.ComponentDirectives))
+				{
+					foreach (var items in componentDirective.ItemRelations.Where(i =>
+						i.FirtsItemTypeId == SmartCoreType.MaintenanceDirective.ItemId ||
+						i.SecondItemTypeId == SmartCoreType.MaintenanceDirective.ItemId))
+					{
+						var id = componentDirective.IsFirst == true ? items.SecondItemId : items.FirstItemId;
+						componentDirective.MaintenanceDirective = mpd.FirstOrDefault(i => i.ItemId == id);
 					}
 				}
 
@@ -1010,7 +1065,14 @@ namespace CAS.UI.UIControls.ComponentControls
 				detail.ChangeLLPCategoryRecords.Clear();
 				detail.ChangeLLPCategoryRecords.AddRange(llpchangeRec.Where(i => i.ParentId == detail.ItemId));
 
-				GlobalObjects.MTOPCalculator.CalculateDirectiveNew(detail);
+
+				if(detail.LLPMark)
+					GlobalObjects.PerformanceCalculator.GetNextPerformance(detail);
+				else GlobalObjects.MTOPCalculator.CalculateDirectiveNew(detail);
+
+				
+
+
 				_preResultDirectiveArray.Add(detail);
 
 				foreach (ComponentDirective detailDirective in detail.ComponentDirectives)
@@ -1977,7 +2039,8 @@ namespace CAS.UI.UIControls.ComponentControls
 								if (directive.MaintenanceDirective == null)
 									continue;
 
-								var mpd = directive.MaintenanceDirective.GetCopyUnsaved();
+								//var mpd = directive.MaintenanceDirective.GetCopyUnsaved();
+								var mpd = directive.MaintenanceDirective;
 
 								mpd.CompnentSN = component.SerialNumber;
 								mpd.CompnentPN = component.PartNumber;

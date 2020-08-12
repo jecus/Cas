@@ -499,7 +499,7 @@ namespace CASReports.Builders
                                                                reportedComponent.Remarks,
                                                                reportedComponent.DirectiveType.FullName,
                                                                reportedComponent.FirstPerformanceSinceNew?.Cycles.ToString(),
-                                                               reportedComponent.NextPerformance?.Remains?.Cycles?.ToString());
+                                                               reportedComponent.NextPerformance?.RemainLimitC?.Cycles?.ToString());
         }
 
         #endregion
