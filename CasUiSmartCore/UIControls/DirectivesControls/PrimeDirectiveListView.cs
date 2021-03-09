@@ -123,6 +123,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			AddColumn("NDT", (int)(radGridView1.Width * 0.10f));
 			AddColumn("M.H.", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Cost", (int)(radGridView1.Width * 0.10f));
+			AddColumn("Finding Control", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Hidden remarks", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
 		}
@@ -213,6 +214,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			var ndtString = item.NDTType.ShortName;
 			var manHours = item.ManHours;
 			var cost = item.Cost;
+			var findingControl = item.IsFindingControl;
 			var remarksString = item.Remarks;
 			var hiddenRemarksString = item.HiddenRemarks;
 			var adno = item.Title + "  §: " + item.Paragraph;
@@ -298,6 +300,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			subItems.Add(CreateRow(ndtString, ndtString));
 			subItems.Add(CreateRow(manHours == -1 ? "" : manHours.ToString(), manHours));
 			subItems.Add(CreateRow(cost == -1 ? "" : cost.ToString(), cost));
+			subItems.Add(CreateRow(findingControl ? "Yes" : "No", findingControl));
 			subItems.Add(CreateRow(hiddenRemarksString, hiddenRemarksString));
 			subItems.Add(CreateRow(author, author));
 			

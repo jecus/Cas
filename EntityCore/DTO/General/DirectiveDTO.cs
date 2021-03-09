@@ -76,6 +76,9 @@ namespace EntityCore.DTO.General
 		[Column("KitRequired"), MaxLength(256)]
 		public string KitRequired { get; set; }
 
+		[Column("IsFindingControl")]
+		public bool IsFindingControl { get; set; }
+
 		
 		[Column("HiddenRemarks")]
 		public string HiddenRemarks { get; set; }

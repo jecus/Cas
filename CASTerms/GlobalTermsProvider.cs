@@ -80,8 +80,8 @@ namespace CASTerms
             hash.Add("ReportFooterPrepared", @"Produced by CAS ");
             hash.Add("ReportFooterLink", @"Visit www.avalonkg.com/cas for more information.");
             hash.Add("JobCardFooterPrepared", @"This job card was prepared by Continuing Airworthiness System.");
-            hash.Add("Copyright", " 2006-2019 Avalon Worldgroup Inc. All rights reserved");
-            hash.Add("CopyrightMultiline", " 2006-2018\r\nAvalon  Worldgroup Inc.\r\nAll rights reserved");
+            hash.Add("Copyright", " 2006-2021 Avalon Worldgroup Inc. All rights reserved");
+            hash.Add("CopyrightMultiline", " 2006-2021\r\nAvalon  Worldgroup Inc.\r\nAll rights reserved");
             hash.Add("CompanyName", "Avalon Worldgroup Inc.");
             hash.Add("CompanyNameIO", "Avalon Worldgroup Inc");
             //hash.Add("RussianLanguage", "");

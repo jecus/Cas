@@ -82,6 +82,8 @@ namespace CAS.UI.UIControls.DirectivesControls
 		private Label labelAffects;
 		private ComboBox comboBoxReason;
 		private Label labelReason;
+		private Label labelFindingControl;
+		private CheckBox checkBoxFindingControl;
 		private DateTime _effDate = DateTimeExtend.GetCASMinDateTime();
 
 		#endregion
@@ -308,6 +310,8 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.labelAffects = new System.Windows.Forms.Label();
 			this.comboBoxReason = new System.Windows.Forms.ComboBox();
 			this.labelReason = new System.Windows.Forms.Label();
+			this.labelFindingControl = new System.Windows.Forms.Label();
+			this.checkBoxFindingControl = new System.Windows.Forms.CheckBox();
 			this.groupBoxClose.SuspendLayout();
 			this.groupBox_Repetative.SuspendLayout();
 			this.groupFirstPerformance.SuspendLayout();
@@ -364,7 +368,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			this.linkLabelEditKit.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.linkLabelEditKit.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.linkLabelEditKit.Location = new System.Drawing.Point(1057, 33);
+			this.linkLabelEditKit.Location = new System.Drawing.Point(1057, 55);
 			this.linkLabelEditKit.Name = "linkLabelEditKit";
 			this.linkLabelEditKit.Size = new System.Drawing.Size(37, 23);
 			this.linkLabelEditKit.TabIndex = 202;
@@ -396,7 +400,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.textBoxKitRequired.Enabled = false;
 			this.textBoxKitRequired.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.textBoxKitRequired.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxKitRequired.Location = new System.Drawing.Point(743, 35);
+			this.textBoxKitRequired.Location = new System.Drawing.Point(743, 57);
 			this.textBoxKitRequired.MaxLength = 50;
 			this.textBoxKitRequired.Name = "textBoxKitRequired";
 			this.textBoxKitRequired.Size = new System.Drawing.Size(308, 22);
@@ -457,7 +461,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			this.labelKitRequired.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelKitRequired.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelKitRequired.Location = new System.Drawing.Point(593, 38);
+			this.labelKitRequired.Location = new System.Drawing.Point(593, 60);
 			this.labelKitRequired.Name = "labelKitRequired";
 			this.labelKitRequired.Size = new System.Drawing.Size(150, 25);
 			this.labelKitRequired.TabIndex = 183;
@@ -542,7 +546,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.comboBoxWorkType.Name = "comboBoxWorkType";
 			this.comboBoxWorkType.Size = new System.Drawing.Size(210, 22);
 			this.comboBoxWorkType.TabIndex = 196;
-			this.comboBoxWorkType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// _textboxCost
 			// 
@@ -810,7 +813,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.comboBoxNdt.Name = "comboBoxNdt";
 			this.comboBoxNdt.Size = new System.Drawing.Size(210, 21);
 			this.comboBoxNdt.TabIndex = 205;
-			this.comboBoxNdt.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// lookupComboboxForCompnt
 			// 
@@ -825,24 +827,22 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.lookupComboboxForCompnt.Size = new System.Drawing.Size(350, 22);
 			this.lookupComboboxForCompnt.TabIndex = 204;
 			this.lookupComboboxForCompnt.Type = null;
-			this.lookupComboboxForCompnt.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxSupersedes
 			// 
 			this.comboBoxSupersedes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.comboBoxSupersedes.FormattingEnabled = true;
-			this.comboBoxSupersedes.Location = new System.Drawing.Point(743, 172);
+			this.comboBoxSupersedes.Location = new System.Drawing.Point(743, 194);
 			this.comboBoxSupersedes.Name = "comboBoxSupersedes";
 			this.comboBoxSupersedes.Size = new System.Drawing.Size(308, 21);
 			this.comboBoxSupersedes.TabIndex = 207;
 			this.comboBoxSupersedes.Visible = false;
-			this.comboBoxSupersedes.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelSupersedes
 			// 
 			this.labelSupersedes.Font = new System.Drawing.Font("Verdana", 9F);
 			this.labelSupersedes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelSupersedes.Location = new System.Drawing.Point(593, 169);
+			this.labelSupersedes.Location = new System.Drawing.Point(593, 191);
 			this.labelSupersedes.Name = "labelSupersedes";
 			this.labelSupersedes.Size = new System.Drawing.Size(121, 25);
 			this.labelSupersedes.TabIndex = 206;
@@ -855,18 +855,17 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.comboBoxSuperseded.Enabled = false;
 			this.comboBoxSuperseded.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.comboBoxSuperseded.FormattingEnabled = true;
-			this.comboBoxSuperseded.Location = new System.Drawing.Point(743, 199);
+			this.comboBoxSuperseded.Location = new System.Drawing.Point(743, 221);
 			this.comboBoxSuperseded.Name = "comboBoxSuperseded";
 			this.comboBoxSuperseded.Size = new System.Drawing.Size(308, 21);
 			this.comboBoxSuperseded.TabIndex = 209;
 			this.comboBoxSuperseded.Visible = false;
-			this.comboBoxSuperseded.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelSuperseded
 			// 
 			this.labelSuperseded.Font = new System.Drawing.Font("Verdana", 9F);
 			this.labelSuperseded.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelSuperseded.Location = new System.Drawing.Point(593, 196);
+			this.labelSuperseded.Location = new System.Drawing.Point(593, 218);
 			this.labelSuperseded.Name = "labelSuperseded";
 			this.labelSuperseded.Size = new System.Drawing.Size(121, 25);
 			this.labelSuperseded.TabIndex = 208;
@@ -878,17 +877,16 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			this.comboBoxOrder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.comboBoxOrder.FormattingEnabled = true;
-			this.comboBoxOrder.Location = new System.Drawing.Point(743, 145);
+			this.comboBoxOrder.Location = new System.Drawing.Point(743, 167);
 			this.comboBoxOrder.Name = "comboBoxOrder";
 			this.comboBoxOrder.Size = new System.Drawing.Size(308, 21);
 			this.comboBoxOrder.TabIndex = 211;
-			this.comboBoxOrder.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label3
 			// 
 			this.label3.Font = new System.Drawing.Font("Verdana", 9F);
 			this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.label3.Location = new System.Drawing.Point(593, 142);
+			this.label3.Location = new System.Drawing.Point(593, 164);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(121, 25);
 			this.label3.TabIndex = 210;
@@ -967,7 +965,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.labelAffectedBy.AutoSize = true;
 			this.labelAffectedBy.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelAffectedBy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelAffectedBy.Location = new System.Drawing.Point(593, 66);
+			this.labelAffectedBy.Location = new System.Drawing.Point(593, 88);
 			this.labelAffectedBy.Name = "labelAffectedBy";
 			this.labelAffectedBy.Size = new System.Drawing.Size(82, 14);
 			this.labelAffectedBy.TabIndex = 219;
@@ -978,7 +976,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.textBoxAffectedBy.BackColor = System.Drawing.Color.White;
 			this.textBoxAffectedBy.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.textBoxAffectedBy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxAffectedBy.Location = new System.Drawing.Point(743, 63);
+			this.textBoxAffectedBy.Location = new System.Drawing.Point(743, 85);
 			this.textBoxAffectedBy.MaxLength = 200;
 			this.textBoxAffectedBy.Name = "textBoxAffectedBy";
 			this.textBoxAffectedBy.Size = new System.Drawing.Size(308, 22);
@@ -988,17 +986,16 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			this.comboBoxAffects.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.comboBoxAffects.FormattingEnabled = true;
-			this.comboBoxAffects.Location = new System.Drawing.Point(743, 91);
+			this.comboBoxAffects.Location = new System.Drawing.Point(743, 113);
 			this.comboBoxAffects.Name = "comboBoxAffects";
 			this.comboBoxAffects.Size = new System.Drawing.Size(308, 21);
 			this.comboBoxAffects.TabIndex = 221;
-			this.comboBoxAffects.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelAffects
 			// 
 			this.labelAffects.Font = new System.Drawing.Font("Verdana", 9F);
 			this.labelAffects.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelAffects.Location = new System.Drawing.Point(593, 88);
+			this.labelAffects.Location = new System.Drawing.Point(593, 110);
 			this.labelAffects.Name = "labelAffects";
 			this.labelAffects.Size = new System.Drawing.Size(121, 25);
 			this.labelAffects.TabIndex = 220;
@@ -1009,22 +1006,42 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			this.comboBoxReason.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.comboBoxReason.FormattingEnabled = true;
-			this.comboBoxReason.Location = new System.Drawing.Point(743, 118);
+			this.comboBoxReason.Location = new System.Drawing.Point(743, 140);
 			this.comboBoxReason.Name = "comboBoxReason";
 			this.comboBoxReason.Size = new System.Drawing.Size(308, 21);
 			this.comboBoxReason.TabIndex = 223;
-			this.comboBoxReason.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelReason
 			// 
 			this.labelReason.Font = new System.Drawing.Font("Verdana", 9F);
 			this.labelReason.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelReason.Location = new System.Drawing.Point(593, 115);
+			this.labelReason.Location = new System.Drawing.Point(593, 137);
 			this.labelReason.Name = "labelReason";
 			this.labelReason.Size = new System.Drawing.Size(121, 25);
 			this.labelReason.TabIndex = 222;
 			this.labelReason.Text = "Reason:";
 			this.labelReason.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// labelFindingControl
+			// 
+			this.labelFindingControl.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelFindingControl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelFindingControl.Location = new System.Drawing.Point(593, 34);
+			this.labelFindingControl.Name = "labelFindingControl";
+			this.labelFindingControl.Size = new System.Drawing.Size(150, 25);
+			this.labelFindingControl.TabIndex = 224;
+			this.labelFindingControl.Text = "Finding Control:";
+			// 
+			// checkBoxFindingControl
+			// 
+			this.checkBoxFindingControl.AutoSize = true;
+			this.checkBoxFindingControl.Font = new System.Drawing.Font("Verdana", 11.25F);
+			this.checkBoxFindingControl.ForeColor = System.Drawing.Color.DimGray;
+			this.checkBoxFindingControl.Location = new System.Drawing.Point(743, 35);
+			this.checkBoxFindingControl.Name = "checkBoxFindingControl";
+			this.checkBoxFindingControl.Size = new System.Drawing.Size(15, 14);
+			this.checkBoxFindingControl.TabIndex = 225;
+			this.checkBoxFindingControl.UseVisualStyleBackColor = true;
 			// 
 			// DirectiveParametersControl
 			// 
@@ -1032,6 +1049,8 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this.Controls.Add(this.checkBoxFindingControl);
+			this.Controls.Add(this.labelFindingControl);
 			this.Controls.Add(this.comboBoxReason);
 			this.Controls.Add(this.labelReason);
 			this.Controls.Add(this.comboBoxAffects);
@@ -1272,6 +1291,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			if (_currentDirective != null && 
 				(_currentDirective.Threshold.ToString() != threshold.ToString() || 
 				 _currentDirective.IsClosed != isClosed ||
+				 _currentDirective.IsFindingControl != checkBoxFindingControl.Checked ||
 				 _currentDirective.WorkType.ItemId != ((DirectiveWorkType)comboBoxWorkType.SelectedItem).ItemId ||
 				 _currentDirective.Paragraph != textBoxParagraph.Text ||
 				 _currentDirective.AffectedBy != textBoxAffectedBy.Text ||
@@ -1375,6 +1395,8 @@ namespace CAS.UI.UIControls.DirectivesControls
 			textBoxAccess.Text = _currentDirective.DirectiveAccess;
 			textBoxWorkArea.Text = _currentDirective.Workarea;
 			textBoxAffectedBy.Text = _currentDirective.AffectedBy;
+
+			checkBoxFindingControl.Checked = _currentDirective.IsFindingControl;
 			
 			comboBoxWorkType.Items.Clear();
 			var directiveTypes = DirectiveWorkType.Items.OrderBy(x => x.FullName).ToList();
@@ -1472,6 +1494,8 @@ namespace CAS.UI.UIControls.DirectivesControls
 			destinationDirective.DirectiveAccess = textBoxAccess.Text;
 			destinationDirective.Workarea = textBoxWorkArea.Text;
 			destinationDirective.AffectedBy = textBoxAffectedBy.Text;
+
+			destinationDirective.IsFindingControl = checkBoxFindingControl.Checked;
 
 			if (comboBoxSupersedes.SelectedItem != null)
 				_currentDirective.SupersedesId = ((Directive) comboBoxSupersedes.SelectedItem).ItemId;

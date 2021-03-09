@@ -329,6 +329,14 @@ namespace SmartCore.Entities.General.Directives
 		public String KitRequired { get; set; }
 		#endregion
 
+		#region public bool IsFindingControl { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		[TableColumn("IsFindingControl")]
+		public bool IsFindingControl { get; set; }
+		#endregion
+
 		#region public String HiddenRemarks { get; set; }
 		/// <summary>
 		/// 
