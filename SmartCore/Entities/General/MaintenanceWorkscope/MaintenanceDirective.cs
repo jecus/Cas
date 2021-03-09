@@ -233,6 +233,13 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 
 		#endregion
 
+		#region public bool IsSBControl { get; set; }
+
+		[TableColumn("IsSBControl")]
+		public bool IsSBControl { get; set; }
+
+		#endregion
+
 		#region public String EngineeringOrders { get; set; }
 
 		/// <summary>

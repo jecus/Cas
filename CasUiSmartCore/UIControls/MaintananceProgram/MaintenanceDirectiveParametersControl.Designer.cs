@@ -94,6 +94,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.label5 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
 			this.checkBoxAPU = new System.Windows.Forms.CheckBox();
+			this.checkBoxSBControl = new System.Windows.Forms.CheckBox();
+			this.labelSBControl = new System.Windows.Forms.Label();
 			this.groupBox_Repetative.SuspendLayout();
 			this.groupFirstPerformance.SuspendLayout();
 			this.groupBoxClose.SuspendLayout();
@@ -734,9 +736,9 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.label4.Location = new System.Drawing.Point(7, 166);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(67, 14);
+			this.label4.Size = new System.Drawing.Size(75, 14);
 			this.label4.TabIndex = 199;
-			this.label4.Text = "Cross Ref";
+			this.label4.Text = "Related TC";
 			// 
 			// linkLabel3
 			// 
@@ -798,12 +800,36 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.checkBoxAPU.UseVisualStyleBackColor = true;
 			this.checkBoxAPU.CheckedChanged += new System.EventHandler(this.CheckBoxAPU_CheckedChanged);
 			// 
+			// checkBoxSBControl
+			// 
+			this.checkBoxSBControl.AutoSize = true;
+			this.checkBoxSBControl.Font = new System.Drawing.Font("Verdana", 11.25F);
+			this.checkBoxSBControl.ForeColor = System.Drawing.Color.DimGray;
+			this.checkBoxSBControl.Location = new System.Drawing.Point(848, 140);
+			this.checkBoxSBControl.Name = "checkBoxSBControl";
+			this.checkBoxSBControl.Size = new System.Drawing.Size(15, 14);
+			this.checkBoxSBControl.TabIndex = 208;
+			this.checkBoxSBControl.UseVisualStyleBackColor = true;
+			// 
+			// labelSBControl
+			// 
+			this.labelSBControl.AutoSize = true;
+			this.labelSBControl.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelSBControl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelSBControl.Location = new System.Drawing.Point(764, 140);
+			this.labelSBControl.Name = "labelSBControl";
+			this.labelSBControl.Size = new System.Drawing.Size(78, 14);
+			this.labelSBControl.TabIndex = 207;
+			this.labelSBControl.Text = "SB Control:";
+			// 
 			// MaintenanceDirectiveParametersControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this.Controls.Add(this.checkBoxSBControl);
+			this.Controls.Add(this.labelSBControl);
 			this.Controls.Add(this.checkBoxAPU);
 			this.Controls.Add(this.label6);
 			this.Controls.Add(this.linkLabel3);
@@ -908,5 +934,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.CheckBox checkBoxAPU;
+		private System.Windows.Forms.CheckBox checkBoxSBControl;
+		private System.Windows.Forms.Label labelSBControl;
 	}
 }

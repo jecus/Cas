@@ -85,6 +85,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			AddColumn("Cost", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Applicability", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.24f));
+			AddColumn("SB Control", (int)(radGridView1.Width * 0.14f));
 			AddColumn("Hidden remarks", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Extension", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
@@ -236,6 +237,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			subItems.Add(CreateRow(item.Cost <= 0 ? "" : item.Cost.ToString(), item.Cost));
 			subItems.Add(CreateRow(app, app));
 			subItems.Add(CreateRow(remarksString, remarksString));
+			subItems.Add(CreateRow(item.IsSBControl ? "Yes" : "No", item.IsSBControl));
 			subItems.Add(CreateRow(hiddenRemarksString, hiddenRemarksString));
 			subItems.Add(CreateRow(item.Extension.ToString("F0"), item.Extension));
 			subItems.Add(CreateRow(author, author));

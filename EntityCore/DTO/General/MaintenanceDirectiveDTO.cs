@@ -192,6 +192,9 @@ namespace EntityCore.DTO.General
 		[Column("APUCalc")]
 		public bool APUCalc { get; set; }
 
+		[Column("IsSBControl")]
+		public bool IsSBControl { get; set; }
+
 		[Column("IsExtension")]
 		public bool IsExtension { get; set; }
 
