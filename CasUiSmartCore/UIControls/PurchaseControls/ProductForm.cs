@@ -161,6 +161,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 			textBoxIsEffectivity.Text = _currentItem.IsEffectivity;
 			textBoxReference.Text = _currentItem.Reference;
 			textBoxEngineRef.Text = _currentItem.EngineRef;
+			textBoxLimitation.Text = _currentItem.Limitation;
+			textBoxReason.Text = _currentItem.Reason;
 			dataGridViewControlSuppliers.SetItemsArray((ICommonCollection) _currentItem.SupplierRelations);
 
 			GoodStandart goodStandart;
@@ -308,6 +310,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 				|| textBoxName.Text != _currentItem.Name
 				|| textBoxReference.Text != _currentItem.Reference
 				|| textBoxEngineRef.Text != _currentItem.EngineRef
+				|| textBoxLimitation.Text != _currentItem.Limitation
+				|| textBoxReason.Text != _currentItem.Reason
 				|| comboBoxAtaChapter.ATAChapter != _currentItem.ATAChapter
 				|| (comboBoxDetailClass.SelectedItem != _currentItem.GoodsClass)
 				|| (checkBoxDangerous.Checked != _currentItem.IsDangerous)
@@ -455,12 +459,15 @@ namespace CAS.UI.UIControls.PurchaseControls
 					_currentItem.PartNumber = textBoxPartNumber.Text;
 					_currentItem.AltPartNumber = textBoxAltPartNum.Text;
 					_currentItem.Description = textBoxDescription.Text;
+					_currentItem.DescRus = textBoxDescRus.Text;
 					_currentItem.Manufacturer = textBoxManufacturer.Text;
 					//_currentItem.Standart = goodStandart;
 					_currentItem.Standart = standart;
 					_currentItem.Name = textBoxName.Text;
 					_currentItem.Reference = textBoxReference.Text;
 					_currentItem.EngineRef = textBoxEngineRef.Text;
+					_currentItem.Limitation = textBoxLimitation.Text;
+					_currentItem.Reason = textBoxReason.Text;
 					_currentItem.Remarks = textBoxRemarks.Text;
 					_currentItem.IsEffectivity = textBoxIsEffectivity.Text;
 					_currentItem.Measure = comboBoxMeasure.SelectedItem as Measure;
@@ -592,7 +599,11 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		#endregion
 
-
 		#endregion
+
+		private void checkBoxIsForbidden_CheckedChanged(object sender, EventArgs e)
+		{
+			textBoxReason.Enabled = checkBoxIsForbidden.Checked;
+		}
 	}
 }

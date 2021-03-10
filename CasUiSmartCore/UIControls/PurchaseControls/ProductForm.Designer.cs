@@ -74,6 +74,10 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxEngineRef = new System.Windows.Forms.TextBox();
 			this.documentControl2 = new CAS.UI.UIControls.DocumentationControls.DocumentControl();
 			this.label5 = new System.Windows.Forms.Label();
+			this.labelLimitation = new System.Windows.Forms.Label();
+			this.textBoxLimitation = new System.Windows.Forms.TextBox();
+			this.textBoxReason = new System.Windows.Forms.TextBox();
+			this.labelReason = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// comboBoxDetailClass
@@ -133,7 +137,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.labelSuppliers.AutoSize = true;
 			this.labelSuppliers.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelSuppliers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelSuppliers.Location = new System.Drawing.Point(414, 441);
+			this.labelSuppliers.Location = new System.Drawing.Point(414, 528);
 			this.labelSuppliers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.labelSuppliers.Name = "labelSuppliers";
 			this.labelSuppliers.Size = new System.Drawing.Size(70, 14);
@@ -282,7 +286,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.dataGridViewControlSuppliers.Displayer = null;
 			this.dataGridViewControlSuppliers.DisplayerText = null;
 			this.dataGridViewControlSuppliers.Entity = null;
-			this.dataGridViewControlSuppliers.Location = new System.Drawing.Point(8, 458);
+			this.dataGridViewControlSuppliers.Location = new System.Drawing.Point(8, 545);
 			this.dataGridViewControlSuppliers.Name = "dataGridViewControlSuppliers";
 			this.dataGridViewControlSuppliers.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
 			this.dataGridViewControlSuppliers.RowHeadersVisible = false;
@@ -318,7 +322,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.labelImage.AutoSize = true;
 			this.labelImage.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelImage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelImage.Location = new System.Drawing.Point(432, 269);
+			this.labelImage.Location = new System.Drawing.Point(432, 365);
 			this.labelImage.Name = "labelImage";
 			this.labelImage.Size = new System.Drawing.Size(52, 14);
 			this.labelImage.TabIndex = 112;
@@ -334,7 +338,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.fileControlImage.Filter = null;
 			this.fileControlImage.Icon = global::CAS.UI.Properties.Resources.ImageIcon_Small;
 			this.fileControlImage.IconNotEnabled = global::CAS.UI.Properties.Resources.ImageIcon_Small_Gray;
-			this.fileControlImage.Location = new System.Drawing.Point(557, 269);
+			this.fileControlImage.Location = new System.Drawing.Point(557, 350);
 			this.fileControlImage.MaximumSize = new System.Drawing.Size(350, 100);
 			this.fileControlImage.Name = "fileControlImage";
 			this.fileControlImage.ShowLinkLabelBrowse = true;
@@ -349,7 +353,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.checkBoxDangerous.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.checkBoxDangerous.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.checkBoxDangerous.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.checkBoxDangerous.Location = new System.Drawing.Point(110, 422);
+			this.checkBoxDangerous.Location = new System.Drawing.Point(557, 243);
 			this.checkBoxDangerous.Name = "checkBoxDangerous";
 			this.checkBoxDangerous.Size = new System.Drawing.Size(108, 18);
 			this.checkBoxDangerous.TabIndex = 143;
@@ -381,9 +385,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// 
 			this.label2.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.label2.Location = new System.Drawing.Point(432, 170);
+			this.label2.Location = new System.Drawing.Point(5, 424);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(89, 36);
+			this.label2.Size = new System.Drawing.Size(99, 36);
 			this.label2.TabIndex = 146;
 			this.label2.Text = "Description    (Rus):";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -393,11 +397,11 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.textBoxDescRus.BackColor = System.Drawing.Color.White;
 			this.textBoxDescRus.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.textBoxDescRus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBoxDescRus.Location = new System.Drawing.Point(557, 173);
+			this.textBoxDescRus.Location = new System.Drawing.Point(110, 424);
 			this.textBoxDescRus.Multiline = true;
 			this.textBoxDescRus.Name = "textBoxDescRus";
 			this.textBoxDescRus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxDescRus.Size = new System.Drawing.Size(294, 90);
+			this.textBoxDescRus.Size = new System.Drawing.Size(313, 90);
 			this.textBoxDescRus.TabIndex = 145;
 			// 
 			// label3
@@ -449,7 +453,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.labelDoc.AutoSize = true;
 			this.labelDoc.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelDoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelDoc.Location = new System.Drawing.Point(432, 328);
+			this.labelDoc.Location = new System.Drawing.Point(432, 424);
 			this.labelDoc.Name = "labelDoc";
 			this.labelDoc.Size = new System.Drawing.Size(41, 14);
 			this.labelDoc.TabIndex = 152;
@@ -497,6 +501,10 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.panelMain.Controls.Add(this.textBoxEngineRef);
 			this.panelMain.Controls.Add(this.label5);
 			this.panelMain.Controls.Add(this.documentControl2);
+			this.panelMain.Controls.Add(this.labelLimitation);
+			this.panelMain.Controls.Add(this.textBoxLimitation);
+			this.panelMain.Controls.Add(this.textBoxReason);
+			this.panelMain.Controls.Add(this.labelReason);
 			// 
 			// label4
 			// 
@@ -523,7 +531,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// documentControl1
 			// 
 			this.documentControl1.CurrentDocument = null;
-			this.documentControl1.Location = new System.Drawing.Point(537, 328);
+			this.documentControl1.Location = new System.Drawing.Point(537, 424);
 			this.documentControl1.Name = "documentControl1";
 			this.documentControl1.Size = new System.Drawing.Size(314, 41);
 			this.documentControl1.TabIndex = 161;
@@ -558,11 +566,12 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.checkBoxIsForbidden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.checkBoxIsForbidden.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.checkBoxIsForbidden.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.checkBoxIsForbidden.Location = new System.Drawing.Point(315, 422);
+			this.checkBoxIsForbidden.Location = new System.Drawing.Point(749, 243);
 			this.checkBoxIsForbidden.Name = "checkBoxIsForbidden";
 			this.checkBoxIsForbidden.Size = new System.Drawing.Size(102, 18);
 			this.checkBoxIsForbidden.TabIndex = 164;
 			this.checkBoxIsForbidden.Text = "Is Forbidden";
+			this.checkBoxIsForbidden.CheckedChanged += new System.EventHandler(this.checkBoxIsForbidden_CheckedChanged);
 			// 
 			// labelEngineRef
 			// 
@@ -589,7 +598,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			// documentControl2
 			// 
 			this.documentControl2.CurrentDocument = null;
-			this.documentControl2.Location = new System.Drawing.Point(537, 375);
+			this.documentControl2.Location = new System.Drawing.Point(537, 471);
 			this.documentControl2.Name = "documentControl2";
 			this.documentControl2.Size = new System.Drawing.Size(314, 41);
 			this.documentControl2.TabIndex = 168;
@@ -599,20 +608,71 @@ namespace CAS.UI.UIControls.PurchaseControls
 			this.label5.AutoSize = true;
 			this.label5.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.label5.Location = new System.Drawing.Point(432, 375);
+			this.label5.Location = new System.Drawing.Point(432, 471);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(58, 14);
 			this.label5.TabIndex = 167;
 			this.label5.Text = "IPC Ref:";
 			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// labelLimitation
+			// 
+			this.labelLimitation.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelLimitation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelLimitation.Location = new System.Drawing.Point(432, 175);
+			this.labelLimitation.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.labelLimitation.Name = "labelLimitation";
+			this.labelLimitation.Size = new System.Drawing.Size(100, 25);
+			this.labelLimitation.TabIndex = 173;
+			this.labelLimitation.Text = "Limitation:";
+			this.labelLimitation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// textBoxLimitation
+			// 
+			this.textBoxLimitation.BackColor = System.Drawing.Color.White;
+			this.textBoxLimitation.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.textBoxLimitation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxLimitation.Location = new System.Drawing.Point(557, 175);
+			this.textBoxLimitation.Margin = new System.Windows.Forms.Padding(4);
+			this.textBoxLimitation.Multiline = true;
+			this.textBoxLimitation.Name = "textBoxLimitation";
+			this.textBoxLimitation.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.textBoxLimitation.Size = new System.Drawing.Size(294, 61);
+			this.textBoxLimitation.TabIndex = 172;
+			// 
+			// textBoxReason
+			// 
+			this.textBoxReason.BackColor = System.Drawing.Color.White;
+			this.textBoxReason.Enabled = false;
+			this.textBoxReason.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.textBoxReason.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxReason.Location = new System.Drawing.Point(557, 268);
+			this.textBoxReason.Margin = new System.Windows.Forms.Padding(4);
+			this.textBoxReason.Multiline = true;
+			this.textBoxReason.Name = "textBoxReason";
+			this.textBoxReason.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.textBoxReason.Size = new System.Drawing.Size(294, 61);
+			this.textBoxReason.TabIndex = 174;
+			// 
+			// labelReason
+			// 
+			this.labelReason.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelReason.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelReason.Location = new System.Drawing.Point(432, 268);
+			this.labelReason.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.labelReason.Name = "labelReason";
+			this.labelReason.Size = new System.Drawing.Size(100, 25);
+			this.labelReason.TabIndex = 175;
+			this.labelReason.Text = "Reason:";
+			this.labelReason.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
 			// ProductForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(883, 713);
+			this.ClientSize = new System.Drawing.Size(884, 800);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.MaximumSize = new System.Drawing.Size(1023, 766);
+			this.MaximumSize = new System.Drawing.Size(1023, 800);
 			this.MinimumSize = new System.Drawing.Size(284, 164);
 			this.Name = "ProductForm";
 			this.Resizable = false;
@@ -666,5 +726,9 @@ namespace CAS.UI.UIControls.PurchaseControls
 		private System.Windows.Forms.TextBox textBoxEngineRef;
 		private DocumentationControls.DocumentControl documentControl2;
 		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.Label labelLimitation;
+		private System.Windows.Forms.TextBox textBoxLimitation;
+		private System.Windows.Forms.TextBox textBoxReason;
+		private System.Windows.Forms.Label labelReason;
 	}
 }

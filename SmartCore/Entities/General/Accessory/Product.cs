@@ -419,17 +419,17 @@ namespace SmartCore.Entities.General.Accessory
 		public string IsEffectivity { get; set; }
 
 		[TableColumn("Limitation")]
-		[ListViewData(0.08f, "Limitation")]
+		[ListViewData(0.12f, "Limitation")]
 		public string Limitation { get; set; }
 
 		[TableColumn("IsForbidden")]
 		[Filter("IsForbidden:", Order = 9)]
 		public bool IsForbidden { get; set; }
-		[ListViewData(0.08f, "IsForbidden")]
+		[ListViewData(0.12f, "IsForbidden")]
 		public string IsForbiddenString => IsForbidden ? "Yes" : "No";
 
 		[TableColumn("Reason")]
-		[ListViewData(0.12f, "Reason for the prohibited")]
+		[ListViewData(0.20f, "Reason for the prohibited")]
 		public string Reason { get; set; }
 
 		#region public bool IsDangerous { get; set; }
@@ -438,7 +438,7 @@ namespace SmartCore.Entities.General.Accessory
 		[FormControl(250, "IsDangerous:", 8, Order = 25)]
 		[Filter("IsDangerous:", Order = 10)]
 		public bool IsDangerous { get; set; }
-		[ListViewData(0.08f, "IsDangerous")]
+		[ListViewData(0.12f, "IsDangerous")]
 		public string IsDangerousString => IsDangerous ? "Yes" : "No";
 		#endregion
 		
