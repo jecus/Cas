@@ -73,9 +73,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 			comboBoxAtaChapter.UpdateInformation();
 			comboBoxAtaChapter.ATAChapter = _currentModel.ATAChapter;
 
-			if(_currentModel.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.ProductionAuxiliaryEquipment))
-				comboBoxDetailClass.RootNodesNames = new[] { "ComponentsAndParts", "ProductionAuxiliaryEquipment" };
-			else comboBoxDetailClass.RootNodesNames = new[] { "ComponentsAndParts"};
+			comboBoxDetailClass.RootNodesNames = _currentModel.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.ProductionAuxiliaryEquipment) ? new[] { "ComponentsAndParts", "ProductionAuxiliaryEquipment" } : new[] { "ComponentsAndParts"};
 			comboBoxDetailClass.Type = typeof(GoodsClass);
 			comboBoxDetailClass.SelectedItem = _currentModel.GoodsClass;
 
@@ -116,6 +114,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 			textBoxManufacturer.Text = _currentModel.Manufacturer;
 			textBoxProductCode.Text = _currentModel.Code;
 			textBoxSeries.Text = _currentModel.Series;
+			textBoxLimitation.Text = _currentModel.Limitation;
+			textBoxReason.Text = _currentModel.Reason;
 
 			checkBoxDangerous.Checked = _currentModel.IsDangerous;
 			checkBoxIsForbidden.Checked = _currentModel.IsForbidden;
@@ -214,6 +214,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 				|| textBoxManufacturer.Text != _currentModel.Manufacturer
 				|| textBoxProductCode.Text != _currentModel.Code
 				|| textBoxSeries.Text != _currentModel.Series
+				|| textBoxLimitation.Text != _currentModel.Limitation
+				|| textBoxReason.Text != _currentModel.Reason
 				|| comboBoxManufRegion.SelectedItem != _currentModel.ManufactureReg
 				|| comboBoxAccessoryStandard.SelectedItem != _currentModel.Standart
 				|| comboBoxAtaChapter.ATAChapter != _currentModel.ATAChapter
@@ -317,6 +319,8 @@ namespace CAS.UI.UIControls.PurchaseControls
 			_currentModel.Manufacturer = textBoxManufacturer.Text;
 			_currentModel.Code = textBoxProductCode.Text;
 			_currentModel.Series = textBoxSeries.Text;
+			_currentModel.Limitation = textBoxLimitation.Text;
+			_currentModel.Reason = textBoxReason.Text;
 
 			dataGridViewControlSuppliers.ApplyChanges();
 
@@ -380,5 +384,10 @@ namespace CAS.UI.UIControls.PurchaseControls
 			}
 		}
 		#endregion
+
+		private void checkBoxIsForbidden_CheckedChanged(object sender, EventArgs e)
+		{
+			textBoxReason.Enabled = checkBoxIsForbidden.Checked;
+		}
 	}
 }

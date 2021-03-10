@@ -130,6 +130,12 @@ namespace EntityCore.DTO.Dictionaries
 		[Column("EngineRef")]
 		public string EngineRef { get; set; }
 
+		[Column("Limitation")]
+		public string Limitation { get; set; }
+
+		[Column("Reason")]
+		public string Reason { get; set; }
+
 
 		[Include]
 		public ATAChapterDTO ATAChapter { get; set; }

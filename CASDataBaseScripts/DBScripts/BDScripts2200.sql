@@ -15,3 +15,21 @@ if not exists ( select  *
 	alter table dbo.MaintenanceDirectives
 	add IsSBControl bit not null default 0
 GO
+
+if not exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('Dictionaries.AccessoryDescriptions')
+					and c.name = 'Limitation' ) 
+
+	alter table Dictionaries.AccessoryDescriptions
+	add Limitation nvarchar(MAX)
+GO
+
+if not exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('Dictionaries.AccessoryDescriptions')
+					and c.name = 'Reason' ) 
+
+	alter table Dictionaries.AccessoryDescriptions
+	add Reason nvarchar(MAX)
+GO

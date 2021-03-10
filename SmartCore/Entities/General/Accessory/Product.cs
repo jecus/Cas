@@ -418,19 +418,30 @@ namespace SmartCore.Entities.General.Accessory
 		[Filter("Effectivity:", Order = 8)]
 		public string IsEffectivity { get; set; }
 
+		[TableColumn("Limitation")]
+		[ListViewData(0.08f, "Limitation")]
+		public string Limitation { get; set; }
+
 		[TableColumn("IsForbidden")]
 		[Filter("IsForbidden:", Order = 9)]
 		public bool IsForbidden { get; set; }
-		[ListViewData(0.12f, "IsForbidden")]
+		[ListViewData(0.08f, "IsForbidden")]
 		public string IsForbiddenString => IsForbidden ? "Yes" : "No";
+
+		[TableColumn("Reason")]
+		[ListViewData(0.12f, "Reason for the prohibited")]
+		public string Reason { get; set; }
 
 		#region public bool IsDangerous { get; set; }
 
-		[TableColumn("IsDangerous"), ListViewData(0.12f, "IsDangerous")]
+		[TableColumn("IsDangerous")]
 		[FormControl(250, "IsDangerous:", 8, Order = 25)]
 		[Filter("IsDangerous:", Order = 10)]
 		public bool IsDangerous { get; set; }
+		[ListViewData(0.08f, "IsDangerous")]
+		public string IsDangerousString => IsDangerous ? "Yes" : "No";
 		#endregion
+		
 
 		#region public SupplierCollection Suppliers  { get; set; }
 
