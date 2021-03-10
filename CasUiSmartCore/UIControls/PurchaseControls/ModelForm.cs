@@ -298,7 +298,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 		///<returns></returns>
 		protected override void ApplyChanges()
 		{
-			_currentModel.GoodsClass = comboBoxDetailClass.SelectedItem as GoodsClass;
+			_currentModel.GoodsClass = comboBoxDetailClass.SelectedItem as GoodsClass ?? GoodsClass.Unknown; ;
 			_currentModel.Standart = comboBoxAccessoryStandard.SelectedItem as GoodStandart;
 			_currentModel.ATAChapter = comboBoxAtaChapter.ATAChapter;
 			_currentModel.IsDangerous = checkBoxDangerous.Checked;
