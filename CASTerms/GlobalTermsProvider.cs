@@ -86,8 +86,8 @@ namespace CASTerms
             hash.Add("CompanyNameIO", "Avalon Worldgroup Inc");
             //hash.Add("RussianLanguage", "");
             //hash.Add("EnglishLanguage", "English");
-            hash.Add("ProductVersion", "3.1");
-            hash.Add("ProductBuild", "4800");//<<$SvnVersion$>>
+            hash.Add("ProductVersion", "3.2");
+            hash.Add("ProductBuild", "1");//<<$SvnVersion$>>
             hash.Add("DateFormat","dd.MM.yyyy");
             hash.Add("DateFormatShort","dd.MM.yy");
             hash.Add("ReverseDateFormat","yyyy.MM.dd");
