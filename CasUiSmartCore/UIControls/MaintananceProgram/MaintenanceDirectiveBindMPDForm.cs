@@ -21,16 +21,16 @@ namespace CAS.UI.UIControls.MaintananceProgram
     /// <summary>
     /// Форма для переноса шаблона ВС в рабочую базу данных
     /// </summary>
-    public partial class MaintenanceDirectiveBindADForm : MetroForm
+    public partial class MaintenanceDirectiveBindMPDForm : MetroForm
     {
 
         #region Fields
 
-        private List<Directive> _bindedItems = new List<Directive>();
-        private List<Directive> _itemsForSelect = new List<Directive>();
+        private List<MaintenanceDirective> _bindedItems = new List<MaintenanceDirective>();
+        private List<MaintenanceDirective> _itemsForSelect = new List<MaintenanceDirective>();
 
-        private List<Directive> _bindedItemsToRemove = new List<Directive>();
-        private List<Directive> _newBindedItems = new List<Directive>();
+        private List<MaintenanceDirective> _bindedItemsToRemove = new List<MaintenanceDirective>();
+        private List<MaintenanceDirective> _newBindedItems = new List<MaintenanceDirective>();
 
 	    private WorkItemsRelationTypeUI _selectedRelationTypeUI;
 
@@ -43,24 +43,24 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
 		#region Constructors
 
-		#region private MaintenanceDirectiveBindADForm()
+		#region private MaintenanceDirectiveBindMPDForm()
 
 		/// <summary>
 		/// Создает форму для переноса шаблона ВС в рабочую базу данных
 		/// </summary>
-		private MaintenanceDirectiveBindADForm()
+		private MaintenanceDirectiveBindMPDForm()
         {
             InitializeComponent();
         }
 
 		#endregion
 
-		#region public MaintenanceDirectiveBindADForm(Directive directive) : this()
+		#region public MaintenanceDirectiveBindMPDForm(Directive directive) : this()
 
 		/// <summary>
 		/// Создает форму для привязки задач к выполнению чека программы обслуживания
 		/// </summary>
-		public MaintenanceDirectiveBindADForm(MaintenanceDirective directive)
+		public MaintenanceDirectiveBindMPDForm(MaintenanceDirective directive)
             : this()
         {
             if(directive == null)
@@ -110,23 +110,23 @@ namespace CAS.UI.UIControls.MaintananceProgram
             }
 
             if (_bindedItems == null)
-	            _bindedItems = new List<Directive>();
+	            _bindedItems = new List<MaintenanceDirective>();
             _bindedItems.Clear();
 
             if (_itemsForSelect == null)
-	            _itemsForSelect = new List<Directive>();
+	            _itemsForSelect = new List<MaintenanceDirective>();
             _itemsForSelect.Clear();
 
             _animatedThreadWorker.ReportProgress(0, "load binded tasks");
 
-            List<Directive> directives = new List<Directive>();
+            var directives = new List<MaintenanceDirective>();
             try
             {
-	            directives.AddRange(GlobalObjects.DirectiveCore.GetDirectives(_currentAircraft, DirectiveType.AirworthenessDirectives));
+	            directives.AddRange(GlobalObjects.MaintenanceCore.GetMaintenanceDirectives(_currentAircraft));
 
 	            var directivesIds = directives.Select(d => d.ItemId);
 				var itemsRelations = GlobalObjects.ItemsRelationsDataAccess.GetRelations(directivesIds,
-					SmartCoreType.Directive.ItemId);
+					SmartCoreType.MaintenanceDirective.ItemId);
 
 				if (itemsRelations.Count > 0)
 				{
@@ -134,7 +134,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 					{
 						directive.ItemRelations.Clear();
 						directive.ItemRelations.AddRange(itemsRelations.Where(i =>
-							i.FirstItemId == directive.ItemId ||
+							i.FirstItemId == directive.ItemId &&
 							i.SecondItemId ==
 							directive.ItemId)); //TODO:(Evgenii Babak)не использовать Where 
 					}
@@ -331,7 +331,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 
 		#region private ItemsRelation CreateItemRelation(DetailDirective mpd)
 
-		private ItemsRelation CreateItemRelation(Directive mpd, WorkItemsRelationTypeUI relationTypeUI)
+		private ItemsRelation CreateItemRelation(MaintenanceDirective mpd, WorkItemsRelationTypeUI relationTypeUI)
 	    {
 		    var itemRelation = new ItemsRelation();
 			var relationType = ItemRelationHelper.ConvertUIItemRelationToBLItem(relationTypeUI, _directive.IsFirst);

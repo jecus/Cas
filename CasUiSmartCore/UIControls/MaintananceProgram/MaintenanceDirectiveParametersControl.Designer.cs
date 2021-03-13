@@ -87,7 +87,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.textBoxAd = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
 			this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-			this.textBox2 = new System.Windows.Forms.TextBox();
+			this.textBoxMPD = new System.Windows.Forms.TextBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.linkLabel3 = new System.Windows.Forms.LinkLabel();
 			this.textBox3 = new System.Windows.Forms.TextBox();
@@ -701,7 +701,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			// 
 			// linkLabel2
 			// 
-			this.linkLabel2.Enabled = false;
 			this.linkLabel2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.linkLabel2.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
 			this.linkLabel2.Location = new System.Drawing.Point(440, 161);
@@ -712,18 +711,19 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.linkLabel2.TabStop = true;
 			this.linkLabel2.Text = "Edit";
 			this.linkLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
 			// 
-			// textBox2
+			// textBoxMPD
 			// 
-			this.textBox2.BackColor = System.Drawing.Color.White;
-			this.textBox2.Enabled = false;
-			this.textBox2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.textBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBox2.Location = new System.Drawing.Point(127, 163);
-			this.textBox2.Margin = new System.Windows.Forms.Padding(2);
-			this.textBox2.Name = "textBox2";
-			this.textBox2.Size = new System.Drawing.Size(309, 22);
-			this.textBox2.TabIndex = 201;
+			this.textBoxMPD.BackColor = System.Drawing.Color.White;
+			this.textBoxMPD.Enabled = false;
+			this.textBoxMPD.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.textBoxMPD.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBoxMPD.Location = new System.Drawing.Point(127, 163);
+			this.textBoxMPD.Margin = new System.Windows.Forms.Padding(2);
+			this.textBoxMPD.Name = "textBoxMPD";
+			this.textBoxMPD.Size = new System.Drawing.Size(309, 22);
+			this.textBoxMPD.TabIndex = 201;
 			// 
 			// label4
 			// 
@@ -832,7 +832,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.Controls.Add(this.textBox3);
 			this.Controls.Add(this.label5);
 			this.Controls.Add(this.linkLabel2);
-			this.Controls.Add(this.textBox2);
+			this.Controls.Add(this.textBoxMPD);
 			this.Controls.Add(this.label4);
 			this.Controls.Add(this.linkLabel1);
 			this.Controls.Add(this.textBoxAd);
@@ -923,7 +923,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		private System.Windows.Forms.TextBox textBoxAd;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.LinkLabel linkLabel2;
-		private System.Windows.Forms.TextBox textBox2;
+		private System.Windows.Forms.TextBox textBoxMPD;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.LinkLabel linkLabel3;
 		private System.Windows.Forms.TextBox textBox3;

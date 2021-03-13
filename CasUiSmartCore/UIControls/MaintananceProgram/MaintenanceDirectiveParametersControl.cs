@@ -107,6 +107,10 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		#region private void SetTextBoxComponentsString()
 		private void SetTextBoxComponentsString(IList<IDirective> bindedItems)
 		{
+			textBoxComponents.Text = "Select Items";
+			textBoxAd.Text = "Select Items";
+			textBoxMPD.Text = "Select Items";
+
 			if (_currentDirective.ItemRelations.IsAnyRelationWith(SmartCoreType.ComponentDirective))
 			{
 				var bindedDetailDirectives = bindedItems.Where(i => i is ComponentDirective).Cast<ComponentDirective>().ToList();
@@ -130,7 +134,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 					textBoxComponents.Text = sb.ToString();
 				}
 			}
-
 			if (_currentDirective.ItemRelations.IsAnyRelationWith(SmartCoreType.Directive))
 			{
 				var directives = bindedItems.Where(i => i is Directive).Cast<Directive>().ToList();
@@ -143,7 +146,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 					var sb = new StringBuilder();
 					foreach (var directive in directives)
 					{
-						sb.Append($"Title:{directive.Title} ");
+						sb.Append($"AD №:{directive.Title} ");
 					}
 
 					var nullComponentCount = directives.Count;
@@ -153,8 +156,31 @@ namespace CAS.UI.UIControls.MaintananceProgram
 					textBoxAd.Text = sb.ToString();
 				}
 			}
-			
-			
+			if (_currentDirective.ItemRelations.IsAnyRelationWith(SmartCoreType.MaintenanceDirective))
+			{
+				var directives = bindedItems.Where(i => i is MaintenanceDirective).Cast<MaintenanceDirective>().ToList();
+				if (directives.Count == 0)
+					textBoxMPD.Text = "Select Items";
+				else if (!directives.Any())
+					textBoxMPD.Text = directives.Count + " Items";
+				else
+				{
+					var sb = new StringBuilder();
+					foreach (var directive in directives)
+					{
+						sb.Append($"Mpd :{directive.Title} ");
+					}
+
+					var nullComponentCount = directives.Count;
+					if (nullComponentCount > 0)
+						sb.Append($"and more {nullComponentCount} Items");
+
+					textBoxMPD.Text = sb.ToString();
+				}
+			}
+
+
+
 		}
 		#endregion
 
@@ -528,6 +554,15 @@ namespace CAS.UI.UIControls.MaintananceProgram
 				InvokeDataWereChanged(null);
 		}
 
+		private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			var dlg = new MaintenanceDirectiveBindMPDForm(_currentDirective);
+			dlg.ShowDialog();
+
+			if (dlg.DialogResult == DialogResult.OK)
+				InvokeDataWereChanged(null);
+		}
+
 		#region private void SetControlsEnable(bool enable)
 
 		private void SetControlsEnable(bool enable)
@@ -613,8 +648,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			}
 			
 		}
-
-		
 	}
 
 	#region internal class MaintenanceDirectiveParametersControlDesigner : ControlDesigner

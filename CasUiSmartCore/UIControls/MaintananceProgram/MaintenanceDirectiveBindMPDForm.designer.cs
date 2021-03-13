@@ -4,7 +4,7 @@ using SmartCore.Entities.Dictionaries;
 
 namespace CAS.UI.UIControls.MaintananceProgram
 {
-	partial class MaintenanceDirectiveBindADForm
+	partial class MaintenanceDirectiveBindMPDForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -35,8 +35,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.buttonAdd = new System.Windows.Forms.Button();
 			this.buttonClose = new System.Windows.Forms.Button();
 			this.splitContainerMain = new System.Windows.Forms.SplitContainer();
-			this.listViewTasksForSelect = new PrimeDirectiveListView(DirectiveType.AirworthenessDirectives);
-			this.listViewBindedTasks = new PrimeDirectiveListView(DirectiveType.AirworthenessDirectives);
+			this.listViewTasksForSelect = new MaintenanceDirectiveListView();
+			this.listViewBindedTasks = new MaintenanceDirectiveListView();
 			this.comboBoxRelationType = new System.Windows.Forms.ComboBox();
 			this.buttonDelete = new System.Windows.Forms.Button();
 			this.buttonOk = new System.Windows.Forms.Button();
@@ -186,7 +186,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.MinimumSize = new System.Drawing.Size(860, 640);
 			this.Name = "DirectiveBindMPDForm";
 			this.ShowIcon = false;
-			this.Text = "Directive Bind Ad Form";
+			this.Text = "Directive Bind Mpds Form";
 			this.Activated += new System.EventHandler(this.TemplateAircraftAddToDataBaseForm_Activated);
 			this.Deactivate += new System.EventHandler(this.TemplateAircraftAddToDataBaseForm_Deactivate);
 			this.Load += new System.EventHandler(this.MaintenanceCheckBindTaskFormLoad);
@@ -203,8 +203,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		private Button buttonAdd;
 		private Button buttonClose;
 		private Button buttonDelete;
-		private PrimeDirectiveListView listViewTasksForSelect;
-		private PrimeDirectiveListView listViewBindedTasks;
+		private MaintenanceDirectiveListView listViewTasksForSelect;
+		private MaintenanceDirectiveListView listViewBindedTasks;
 		private ComboBox comboBoxRelationType;
 		private Button buttonOk;
 	}
