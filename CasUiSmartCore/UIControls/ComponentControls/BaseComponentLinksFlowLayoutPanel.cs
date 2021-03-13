@@ -147,7 +147,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			//
 			// linkDiscrepancies
 			//
-			_linkDiscrepancies.Text = isForecast ? "Forecast" : "Oil Statistics";
+			_linkDiscrepancies.Text = isForecast ? "Forecast" : "Oil Consumption";
 			_linkDiscrepancies.Margin = _imageLinkLabelMargin;
 			_linkDiscrepancies.Enabled = true;
 			_linkDiscrepancies.Margin = _itemPadding;

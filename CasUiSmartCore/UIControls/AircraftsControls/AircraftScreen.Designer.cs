@@ -1308,7 +1308,7 @@ namespace CAS.UI.UIControls.AircraftsControls
 			this.LinkOil.Size = new System.Drawing.Size(188, 20);
 			this.LinkOil.Status = AvControls.Statuses.Satisfactory;
 			this.LinkOil.TabIndex = 28;
-			this.LinkOil.Text = "Oil Statistics";
+			this.LinkOil.Text = "Oil Consumption";
 			this.LinkOil.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.LinkOil.TextFont = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(204)));
 			this.LinkOil.DisplayerRequested += new System.EventHandler<CAS.UI.Interfaces.ReferenceEventArgs>(this.LinkOilDisplayerRequested);

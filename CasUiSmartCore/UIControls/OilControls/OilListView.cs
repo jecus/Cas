@@ -121,9 +121,9 @@ namespace CAS.UI.UIControls.OilControls
 				{
 					AddColumn($"{baseComponent} (Flight)", (int)(radGridView1.Width * 0.1f));
 					AddColumn("UpLift", (int)(radGridView1.Width * 0.05f));
-					AddColumn("Norm", (int)(radGridView1.Width * 0.05f));
 					AddColumn("Alert", (int)(radGridView1.Width * 0.05f));
 					AddColumn("Max", (int)(radGridView1.Width * 0.05f));
+					AddColumn("AWL", (int)(radGridView1.Width * 0.05f));
 					AddColumn("Consumption", (int)(radGridView1.Width * 0.05f));
 					AddColumn("Engine Status", (int)(radGridView1.Width * 0.1f));
 				}
