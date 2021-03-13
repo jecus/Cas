@@ -40,6 +40,7 @@ namespace CAS.UI.UIControls.OilControls
 		public IList<ComponentWorkInRegimeParams> WorkParams { get; set; }
 		public IList<ComponentOilCondition> OilConditions { get; set; }
 
+		public Dictionary<int, List<dynamic>> _consumptionMeans = new Dictionary<int, List<dynamic>>();
 		#endregion
 
 
@@ -125,6 +126,7 @@ namespace CAS.UI.UIControls.OilControls
 					AddColumn("Alert", (int)(radGridView1.Width * 0.05f));
 					AddColumn("Max", (int)(radGridView1.Width * 0.05f));
 					AddColumn("Consumption", (int)(radGridView1.Width * 0.05f));
+					AddColumn("Consumption (mean)", (int)(radGridView1.Width * 0.05f));
 					AddColumn("Engine Status", (int)(radGridView1.Width * 0.1f));
 				}
 
@@ -192,7 +194,6 @@ namespace CAS.UI.UIControls.OilControls
 					bool shouldFillSubItems = false;
 
 					var baseComponentFlightLifeLenght = Lifelength.Null;
-					var baseComponentBlockLifeLenght = Lifelength.Null;
 
 					var lastKnownTransferRecBeforFlight =
 						baseComponent.TransferRecords.GetLastKnownRecord(item.FlightDate.Date);
@@ -217,8 +218,6 @@ namespace CAS.UI.UIControls.OilControls
 						baseComponentFlightLifeLenght =
 							GlobalObjects.CasEnvironment.Calculator.GetFlightLifelengthIncludingThisFlight(
 								baseComponent, item);
-						baseComponentBlockLifeLenght =
-							baseComponentFlightLifeLenght + (perDaysBlockForBd - perDaysFlightForBd);
 					}
 
 					Color baseComponentTimeColor = Color.Black;
@@ -252,8 +251,9 @@ namespace CAS.UI.UIControls.OilControls
 								.ToList();
 
 
-							double spent = cc?.Spent ?? 0;
-							double oilFlow = 0;
+							var spent = cc?.Spent ?? 0;
+							double consumption = 0;
+							double consumptionMean = 0;
 
 
 							if (oilAdded > 0)
@@ -277,25 +277,29 @@ namespace CAS.UI.UIControls.OilControls
 									}
 								}
 
-								//if (!_sumOil.ContainsKey(baseComponent.ItemId))
-								//	_sumOil.Add(baseComponent.ItemId, oilAdded);
-								//else _sumOil[baseComponent.ItemId] += oilAdded;
-
 								var sumTime = q.Sum(i => i.FlightTime.TotalMinutes);
 								spent = oilAdded / sumTime;
-								oilFlow = spent * 60.0;
+								consumption = spent * 60.0;
 
-								if(!last[baseComponent.ItemId].Any(i => i.ItemId == item.ItemId))
+								if (!last[baseComponent.ItemId].Any(i => i.ItemId == item.ItemId))
 									last[baseComponent.ItemId].Add(item);
 							}
-							
+
+
+							if (!_consumptionMeans.ContainsKey(baseComponent.ItemId))
+								_consumptionMeans.Add(baseComponent.ItemId, new List<dynamic>());
+
+							_consumptionMeans[baseComponent.ItemId].Add(new { UpLift = cc?.OilAdded * 60 ?? 0, FlightTime = item.FlightTime.TotalMinutes });
+							consumptionMean = _consumptionMeans[baseComponent.ItemId].Sum(i => (double)i.UpLift) /
+							                  _consumptionMeans[baseComponent.ItemId].Sum(i => (double)i.FlightTime);
 
 							subItems.Add(CreateListViewSubItem(oilAdded.ToString()));
 							subItems.Add(CreateListViewSubItem(oilFlowMin.ToString()));
 							subItems.Add(CreateListViewSubItem(oilFlowNorm.ToString()));
 							subItems.Add(CreateListViewSubItem(oilFlowMax.ToString()));
-							subItems.Add(CreateListViewSubItem(oilFlow.ToString("F")));
-							subItems.Add(CreateListViewSubItem(GetStatus(oilFlowMin, oilFlowNorm, oilFlowMax, oilFlow)
+							subItems.Add(CreateListViewSubItem(consumption.ToString("F")));
+							subItems.Add(CreateListViewSubItem(consumptionMean.ToString("F")));
+							subItems.Add(CreateListViewSubItem(GetStatus(oilFlowMin, oilFlowNorm, oilFlowMax, consumption)
 								.ToString()));
 
 
@@ -313,11 +317,11 @@ namespace CAS.UI.UIControls.OilControls
 								}
 
 								if (!_graph.Graph.ContainsKey(baseComponent))
-									_graph.Graph.Add(baseComponent, new Dictionary<Lifelength, double>());
+									_graph.Graph.Add(baseComponent, new Dictionary<Lifelength, dynamic>());
 
 
 								if (!_graph.Graph[baseComponent].ContainsKey(baseComponentFlightLifeLenght))
-									_graph.Graph[baseComponent].Add(baseComponentFlightLifeLenght, oilFlow);
+									_graph.Graph[baseComponent].Add(baseComponentFlightLifeLenght ,new { Consumption = consumption, ConsumptionMean = consumptionMean });
 								//else throw new Exception("Такая наработка уже есть!");
 							}
 						}
@@ -353,6 +357,7 @@ namespace CAS.UI.UIControls.OilControls
 				{
 					if (baseComponent.BaseComponentType == BaseComponentType.Engine)
 					{
+						subItems.Add(CreateRow("", ""));
 						subItems.Add(CreateRow("", ""));
 						subItems.Add(CreateRow("", ""));
 						subItems.Add(CreateRow("", ""));

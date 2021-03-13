@@ -8,11 +8,11 @@ namespace CAS.UI.UIControls.OilControls.Model
 	{
 		public OilGraphicModel()
 		{
-			Graph = new Dictionary<BaseComponent, Dictionary<Lifelength, double>>();
+			Graph = new Dictionary<BaseComponent, Dictionary<Lifelength, dynamic>>();
 			Limits = new Dictionary<BaseComponent, OilLimits>();
 		}
 
-		public Dictionary<BaseComponent, Dictionary<Lifelength, double>>  Graph { get; set; }
+		public Dictionary<BaseComponent, Dictionary<Lifelength, dynamic>>  Graph { get; set; }
 		public Dictionary<BaseComponent, OilLimits>  Limits { get; set; }
 
 	}

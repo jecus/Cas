@@ -70,6 +70,15 @@ namespace CAS.UI.UIControls.OilControls
 				BorderWidth = 2
 				//Spline = true, // закруглять углы
 			};
+			var lineSeriesMean = new ScatterLineSeries()
+			{
+				ShowLabels = true,
+				LegendTitle = "Consumption Mean",
+				Name = "Consumption Mean:",
+				LabelFormat = "{0:F}",
+				BorderWidth = 2
+				//Spline = true, // закруглять углы
+			};
 
 			var lineSeriesMin = new ScatterLineSeries { BorderColor = Color.Green, LegendTitle = "Normal", ShowLabels = false, PointSize = new SizeF(0,0), BackColor = Color.Green };
 			var lineSeriesNorm = new ScatterLineSeries { BorderColor = Color.Yellow, LegendTitle = "Alert", ShowLabels = false, PointSize = new SizeF(0, 0), BackColor = Color.Yellow};
@@ -86,7 +95,8 @@ namespace CAS.UI.UIControls.OilControls
 				if (_graph.Limits[comp].Min > 0)
 					lineSeriesMin.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, _graph.Limits[comp].Min));
 
-				lineSeries.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, values.Value));
+				lineSeries.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, (double)values.Value.Consumption));
+				lineSeriesMean.DataPoints.Add(new ScatterDataPoint(values.Key.Hours.Value, (double)values.Value.ConsumptionMean));
 			}
 
 			radChartView1.Series.Clear();
@@ -98,6 +108,7 @@ namespace CAS.UI.UIControls.OilControls
 			if (lineSeriesMin.DataPoints.Count > 0)
 				radChartView1.Series.Add(lineSeriesMin);
 			radChartView1.Series.Add(lineSeries);
+			radChartView1.Series.Add(lineSeriesMean);
 
 			LinearAxis horizontalAxis = radChartView1.Axes.Get<LinearAxis>(0);
 			//horizontalAxis.Minimum = (double)_graph.Graph[comp].OrderBy(i => i.Key.Hours).FirstOrDefault().Key.Hours;
