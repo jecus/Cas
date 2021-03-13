@@ -195,6 +195,12 @@ namespace EntityCore.DTO.General
 		[Column("IsSBControl")]
 		public bool IsSBControl { get; set; }
 
+		[Column("IsRVSM")]
+		public bool IsRVSM { get; set; }
+
+		[Column("IsETOPS")]
+		public bool IsETOPS { get; set; }
+
 		[Column("IsExtension")]
 		public bool IsExtension { get; set; }
 

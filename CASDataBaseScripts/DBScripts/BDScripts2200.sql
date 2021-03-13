@@ -33,3 +33,21 @@ if not exists ( select  *
 	alter table Dictionaries.AccessoryDescriptions
 	add Reason nvarchar(MAX)
 GO
+
+if not exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('dbo.MaintenanceDirectives')
+					and c.name = 'IsRVSM' ) 
+
+	alter table dbo.MaintenanceDirectives
+	add IsRVSM bit not null default 0
+GO
+
+if not exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('dbo.MaintenanceDirectives')
+					and c.name = 'IsETOPS' ) 
+
+	alter table dbo.MaintenanceDirectives
+	add IsETOPS bit not null default 0
+GO

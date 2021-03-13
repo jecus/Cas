@@ -103,6 +103,10 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.ataChapterComboBox = new CAS.UI.UIControls.Auxiliary.ATAChapterComboBox();
 			this.comboBoxProgramIndicator = new System.Windows.Forms.ComboBox();
 			this.label13 = new System.Windows.Forms.Label();
+			this.labelRVSM = new System.Windows.Forms.Label();
+			this.checkBoxRVSM = new System.Windows.Forms.CheckBox();
+			this.labelETOPS = new System.Windows.Forms.Label();
+			this.checkBoxETOPS = new System.Windows.Forms.CheckBox();
 			this.SuspendLayout();
 			// 
 			// labelATAChapter
@@ -463,7 +467,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.comboBoxProgram.Name = "comboBoxProgram";
 			this.comboBoxProgram.Size = new System.Drawing.Size(350, 22);
 			this.comboBoxProgram.TabIndex = 20;
-			this.comboBoxProgram.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxCriticalSystem
 			// 
@@ -474,7 +477,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.comboBoxCriticalSystem.Name = "comboBoxCriticalSystem";
 			this.comboBoxCriticalSystem.Size = new System.Drawing.Size(350, 22);
 			this.comboBoxCriticalSystem.TabIndex = 21;
-			this.comboBoxCriticalSystem.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBox1
 			// 
@@ -486,7 +488,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.comboBox1.Size = new System.Drawing.Size(350, 22);
 			this.comboBox1.TabIndex = 36;
 			this.comboBox1.Visible = false;
-			this.comboBox1.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label1
 			// 
@@ -615,7 +616,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.comboBoxCategory.Name = "comboBoxCategory";
 			this.comboBoxCategory.Size = new System.Drawing.Size(350, 22);
 			this.comboBoxCategory.TabIndex = 49;
-			this.comboBoxCategory.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label7
 			// 
@@ -757,7 +757,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.lookupComboboxJobCard.Size = new System.Drawing.Size(350, 22);
 			this.lookupComboboxJobCard.TabIndex = 38;
 			this.lookupComboboxJobCard.Type = null;
-			this.lookupComboboxJobCard.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// FileControlMRB
 			// 
@@ -856,7 +855,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.ataChapterComboBox.Name = "ataChapterComboBox";
 			this.ataChapterComboBox.Size = new System.Drawing.Size(350, 22);
 			this.ataChapterComboBox.TabIndex = 1;
-			this.ataChapterComboBox.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxProgramIndicator
 			// 
@@ -867,7 +865,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.comboBoxProgramIndicator.Name = "comboBoxProgramIndicator";
 			this.comboBoxProgramIndicator.Size = new System.Drawing.Size(350, 22);
 			this.comboBoxProgramIndicator.TabIndex = 62;
-			this.comboBoxProgramIndicator.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// label13
 			// 
@@ -880,10 +877,54 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.label13.TabIndex = 63;
 			this.label13.Text = "Program Indicator:";
 			// 
+			// labelRVSM
+			// 
+			this.labelRVSM.AutoSize = true;
+			this.labelRVSM.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelRVSM.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelRVSM.Location = new System.Drawing.Point(713, 154);
+			this.labelRVSM.Name = "labelRVSM";
+			this.labelRVSM.Size = new System.Drawing.Size(46, 14);
+			this.labelRVSM.TabIndex = 65;
+			this.labelRVSM.Text = "RVSM:";
+			// 
+			// checkBoxRVSM
+			// 
+			this.checkBoxRVSM.AutoSize = true;
+			this.checkBoxRVSM.Location = new System.Drawing.Point(765, 154);
+			this.checkBoxRVSM.Name = "checkBoxRVSM";
+			this.checkBoxRVSM.Size = new System.Drawing.Size(15, 14);
+			this.checkBoxRVSM.TabIndex = 64;
+			this.checkBoxRVSM.UseVisualStyleBackColor = true;
+			// 
+			// labelETOPS
+			// 
+			this.labelETOPS.AutoSize = true;
+			this.labelETOPS.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelETOPS.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelETOPS.Location = new System.Drawing.Point(822, 154);
+			this.labelETOPS.Name = "labelETOPS";
+			this.labelETOPS.Size = new System.Drawing.Size(53, 14);
+			this.labelETOPS.TabIndex = 67;
+			this.labelETOPS.Text = "ETOPS:";
+			// 
+			// checkBoxETOPS
+			// 
+			this.checkBoxETOPS.AutoSize = true;
+			this.checkBoxETOPS.Location = new System.Drawing.Point(881, 154);
+			this.checkBoxETOPS.Name = "checkBoxETOPS";
+			this.checkBoxETOPS.Size = new System.Drawing.Size(15, 14);
+			this.checkBoxETOPS.TabIndex = 66;
+			this.checkBoxETOPS.UseVisualStyleBackColor = true;
+			// 
 			// MaintenanceDirectiveInformationControl
 			// 
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this.Controls.Add(this.labelETOPS);
+			this.Controls.Add(this.checkBoxETOPS);
+			this.Controls.Add(this.labelRVSM);
+			this.Controls.Add(this.checkBoxRVSM);
 			this.Controls.Add(this.comboBoxProgramIndicator);
 			this.Controls.Add(this.label13);
 			this.Controls.Add(this.label12);
@@ -1025,5 +1066,9 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		private Label label12;
 		private ComboBox comboBoxProgramIndicator;
 		private Label label13;
+		private Label labelRVSM;
+		private CheckBox checkBoxRVSM;
+		private Label labelETOPS;
+		private CheckBox checkBoxETOPS;
 	}
 }

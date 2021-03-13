@@ -78,6 +78,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			AddColumn("ATA Chapter", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Kit", (int)(radGridView1.Width * 0.10f));
 			AddColumn("NDT", (int)(radGridView1.Width * 0.10f));
+			AddColumn("RVSM", (int)(radGridView1.Width * 0.10f));
+			AddColumn("ETOPS", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Skill", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Category", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Elapsed M.H.", (int)(radGridView1.Width * 0.16f));
@@ -230,6 +232,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			subItems.Add(CreateRow(ata.ToString(), ata));
 			subItems.Add(CreateRow(kitRequieredString, kitRequieredString, kitColor));
 			subItems.Add(CreateRow(ndtString, ndtString));
+			subItems.Add(CreateRow(item.IsRVSM ? "Yes" : "No", item.IsRVSM));
+			subItems.Add(CreateRow(item.IsETOPS ? "Yes" : "No", item.IsETOPS));
 			subItems.Add(CreateRow(skillString, skillString));
 			subItems.Add(CreateRow(categoryString, categoryString));
 			subItems.Add(CreateRow(item.Elapsed <= 0 ? "" : item.Elapsed.ToString(), item.Elapsed));

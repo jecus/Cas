@@ -52,7 +52,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		/// Тип директивы
 		/// </summary>
 		[TableColumnAttribute("DirectiveTypeId"), ListViewData("Directive Type")]
-		[Filter("Work Type:", Order = 16)]
+		[Filter("Work Type:", Order = 18)]
 		public MaintenanceDirectiveTaskType WorkType { get; set; }
 
 		#endregion
@@ -143,7 +143,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public bool IsApplicability { get; set; }
 
 		[TableColumn("IsApplicability")]
-		[Filter("IsApplicability:", Order = 11)]
+		[Filter("IsApplicability:", Order = 13)]
 		public bool IsApplicability { get; set; }
 
 		#endregion
@@ -151,7 +151,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public bool IsOperatorTask { get; set; }
 
 		[TableColumn("IsOperatorTask")]
-		[Filter("IsOperatorTask:", Order = 10)]
+		[Filter("IsOperatorTask:", Order = 11)]
 		public bool IsOperatorTask { get; set; }
 
 		#endregion
@@ -162,7 +162,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		/// ATA глава, к которой директива относится
 		/// </summary>
 		[TableColumnAttribute("ATAChapter"), ListViewData("ATA №")]
-		[Filter("ATA Chapter:", Order = 14)]
+		[Filter("ATA Chapter:", Order = 16)]
 		public AtaChapter ATAChapter { get; set; }
 
 		#endregion
@@ -228,7 +228,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public bool APUCalc { get; set; }
 
 		[TableColumn("APUCalc")]
-		[Filter("APUCalc:", Order = 13)]
+		[Filter("APUCalc:", Order = 15)]
 		public bool APUCalc { get; set; }
 
 		#endregion
@@ -237,6 +237,22 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 
 		[TableColumn("IsSBControl")]
 		public bool IsSBControl { get; set; }
+
+		#endregion
+
+		#region public bool IsRVSM { get; set; }
+
+		[TableColumn("IsRVSM")]
+		[Filter("RVSM:", Order = 12)]
+		public bool IsRVSM { get; set; }
+
+		#endregion
+
+		#region public bool IsETOPS { get; set; }
+
+		[TableColumn("IsETOPS")]
+		[Filter("ETOPS:", Order = 14)]
+		public bool IsETOPS { get; set; }
 
 		#endregion
 
@@ -392,7 +408,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		/// Программа (CPCP, Structure, System), к которой директива относится
 		/// </summary>
 		[TableColumnAttribute("Program"), ListViewData("Program")]
-		[Filter("Program:", Order = 15)]
+		[Filter("Program:", Order = 17)]
 		public MaintenanceDirectiveProgramType Program
 		{
 			get { return _program ?? MaintenanceDirectiveProgramType.Unknown; }
@@ -540,7 +556,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public int Category { get; set; }
 
 		[TableColumn("Category")]
-		[Filter("Category:", Order = 20)]
+		[Filter("Category:", Order = 22)]
 		public MpdCategory Category
 		{
 			get { return _category ?? MpdCategory.UNK; }
@@ -640,7 +656,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public Skill Skill { get; set; }
 
 		[TableColumn("Skill")]
-		[Filter("Skill:", Order = 18)]
+		[Filter("Skill:", Order = 20)]
 		public Skill Skill
 		{
 			get { return _skill ?? Skill.UNK; }
@@ -755,7 +771,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		/// <summary>
 		/// Статус директивы
 		/// </summary>
-		[Filter("Status:", Order = 17)]
+		[Filter("Status:", Order = 19)]
 		public DirectiveStatus Status
 		{
 			get
@@ -931,7 +947,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		/// <summary>
 		/// Возвращает состояние ближайшего выполнения задачи (если оно расчитано) или ConditionState.NotEstimated
 		/// </summary>
-		[Filter("Condition:", Order = 19)]
+		[Filter("Condition:", Order = 23)]
 		public ConditionState Condition
 		{
 			get
@@ -1350,7 +1366,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 
 		#region public bool HasKits { get; }
 
-		[Filter("HasKits:", Order = 12)]
+		[Filter("HasKits:", Order = 10)]
 		public bool HasKits { get { return Kits.Count > 0; } }
 
 		#endregion
