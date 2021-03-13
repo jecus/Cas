@@ -16,6 +16,7 @@ using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Directives;
 using CAS.UI.Helpers;
+using CAS.UI.UIControls.MaintananceProgram;
 
 namespace CAS.UI.UIControls.DirectivesControls
 {
@@ -84,6 +85,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 		private Label labelReason;
 		private Label labelFindingControl;
 		private CheckBox checkBoxFindingControl;
+		private LinkLabel linkLabel1;
+		private TextBox textBox1;
+		private Label label1;
 		private DateTime _effDate = DateTimeExtend.GetCASMinDateTime();
 
 		#endregion
@@ -312,6 +316,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.labelReason = new System.Windows.Forms.Label();
 			this.labelFindingControl = new System.Windows.Forms.Label();
 			this.checkBoxFindingControl = new System.Windows.Forms.CheckBox();
+			this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.label1 = new System.Windows.Forms.Label();
 			this.groupBoxClose.SuspendLayout();
 			this.groupBox_Repetative.SuspendLayout();
 			this.groupFirstPerformance.SuspendLayout();
@@ -323,7 +330,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.radio_FirstWhicheverLast.Font = new System.Drawing.Font("Verdana", 11.25F);
 			this.radio_FirstWhicheverLast.Location = new System.Drawing.Point(322, 176);
 			this.radio_FirstWhicheverLast.Name = "radio_FirstWhicheverLast";
-			this.radio_FirstWhicheverLast.Size = new System.Drawing.Size(146, 22);
+			this.radio_FirstWhicheverLast.Size = new System.Drawing.Size(166, 24);
 			this.radio_FirstWhicheverLast.TabIndex = 22;
 			this.radio_FirstWhicheverLast.Text = "Whichever Later";
 			this.radio_FirstWhicheverLast.UseVisualStyleBackColor = true;
@@ -335,7 +342,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.radio_FirstWhicheverFirst.Font = new System.Drawing.Font("Verdana", 11.25F);
 			this.radio_FirstWhicheverFirst.Location = new System.Drawing.Point(60, 176);
 			this.radio_FirstWhicheverFirst.Name = "radio_FirstWhicheverFirst";
-			this.radio_FirstWhicheverFirst.Size = new System.Drawing.Size(140, 22);
+			this.radio_FirstWhicheverFirst.Size = new System.Drawing.Size(161, 24);
 			this.radio_FirstWhicheverFirst.TabIndex = 21;
 			this.radio_FirstWhicheverFirst.TabStop = true;
 			this.radio_FirstWhicheverFirst.Text = "Whichever First";
@@ -348,7 +355,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.checkBoxRepeat.ForeColor = System.Drawing.Color.DimGray;
 			this.checkBoxRepeat.Location = new System.Drawing.Point(14, 21);
 			this.checkBoxRepeat.Name = "checkBoxRepeat";
-			this.checkBoxRepeat.Size = new System.Drawing.Size(106, 22);
+			this.checkBoxRepeat.Size = new System.Drawing.Size(120, 24);
 			this.checkBoxRepeat.TabIndex = 11;
 			this.checkBoxRepeat.Text = "Repetative";
 			this.checkBoxRepeat.UseVisualStyleBackColor = true;
@@ -358,7 +365,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			this.labelForComponent.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelForComponent.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelForComponent.Location = new System.Drawing.Point(3, 186);
+			this.labelForComponent.Location = new System.Drawing.Point(3, 212);
 			this.labelForComponent.Name = "labelForComponent";
 			this.labelForComponent.Size = new System.Drawing.Size(124, 22);
 			this.labelForComponent.TabIndex = 203;
@@ -403,7 +410,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.textBoxKitRequired.Location = new System.Drawing.Point(743, 57);
 			this.textBoxKitRequired.MaxLength = 50;
 			this.textBoxKitRequired.Name = "textBoxKitRequired";
-			this.textBoxKitRequired.Size = new System.Drawing.Size(308, 22);
+			this.textBoxKitRequired.Size = new System.Drawing.Size(308, 24);
 			this.textBoxKitRequired.TabIndex = 188;
 			// 
 			// labelChart
@@ -440,7 +447,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.textBoxChart.Location = new System.Drawing.Point(743, 2);
 			this.textBoxChart.MaxLength = 4;
 			this.textBoxChart.Name = "textBoxChart";
-			this.textBoxChart.Size = new System.Drawing.Size(308, 22);
+			this.textBoxChart.Size = new System.Drawing.Size(308, 24);
 			this.textBoxChart.TabIndex = 200;
 			this.textBoxChart.Visible = false;
 			// 
@@ -451,7 +458,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.radio_RepeatWhicheverFirst.Font = new System.Drawing.Font("Verdana", 11.25F);
 			this.radio_RepeatWhicheverFirst.Location = new System.Drawing.Point(73, 176);
 			this.radio_RepeatWhicheverFirst.Name = "radio_RepeatWhicheverFirst";
-			this.radio_RepeatWhicheverFirst.Size = new System.Drawing.Size(140, 22);
+			this.radio_RepeatWhicheverFirst.Size = new System.Drawing.Size(161, 24);
 			this.radio_RepeatWhicheverFirst.TabIndex = 23;
 			this.radio_RepeatWhicheverFirst.TabStop = true;
 			this.radio_RepeatWhicheverFirst.Text = "Whichever First";
@@ -485,7 +492,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.checkBoxClose.ForeColor = System.Drawing.Color.DimGray;
 			this.checkBoxClose.Location = new System.Drawing.Point(8, 21);
 			this.checkBoxClose.Name = "checkBoxClose";
-			this.checkBoxClose.Size = new System.Drawing.Size(68, 22);
+			this.checkBoxClose.Size = new System.Drawing.Size(74, 24);
 			this.checkBoxClose.TabIndex = 25;
 			this.checkBoxClose.Text = "Close";
 			this.checkBoxClose.UseVisualStyleBackColor = true;
@@ -506,7 +513,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			this.labelNDT.Font = new System.Drawing.Font("Verdana", 9F);
 			this.labelNDT.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelNDT.Location = new System.Drawing.Point(3, 208);
+			this.labelNDT.Location = new System.Drawing.Point(3, 234);
 			this.labelNDT.Name = "labelNDT";
 			this.labelNDT.Size = new System.Drawing.Size(106, 25);
 			this.labelNDT.TabIndex = 186;
@@ -521,7 +528,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.textBoxParagraph.Location = new System.Drawing.Point(405, 2);
 			this.textBoxParagraph.MaxLength = 50;
 			this.textBoxParagraph.Name = "textBoxParagraph";
-			this.textBoxParagraph.Size = new System.Drawing.Size(98, 22);
+			this.textBoxParagraph.Size = new System.Drawing.Size(98, 24);
 			this.textBoxParagraph.TabIndex = 198;
 			// 
 			// checkBoxIsTemporary
@@ -533,7 +540,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.checkBoxIsTemporary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
 			this.checkBoxIsTemporary.Location = new System.Drawing.Point(1053, 249);
 			this.checkBoxIsTemporary.Name = "checkBoxIsTemporary";
-			this.checkBoxIsTemporary.Size = new System.Drawing.Size(12, 11);
+			this.checkBoxIsTemporary.Size = new System.Drawing.Size(13, 12);
 			this.checkBoxIsTemporary.TabIndex = 190;
 			// 
 			// comboBoxWorkType
@@ -554,7 +561,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this._textboxCost.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this._textboxCost.Location = new System.Drawing.Point(153, 71);
 			this._textboxCost.Name = "_textboxCost";
-			this._textboxCost.Size = new System.Drawing.Size(350, 22);
+			this._textboxCost.Size = new System.Drawing.Size(350, 24);
 			this._textboxCost.TabIndex = 189;
 			// 
 			// _labelCost
@@ -584,7 +591,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this._textboxManHours.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this._textboxManHours.Location = new System.Drawing.Point(153, 35);
 			this._textboxManHours.Name = "_textboxManHours";
-			this._textboxManHours.Size = new System.Drawing.Size(350, 22);
+			this._textboxManHours.Size = new System.Drawing.Size(350, 24);
 			this._textboxManHours.TabIndex = 187;
 			// 
 			// groupBox_Repetative
@@ -598,7 +605,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.groupBox_Repetative.ForeColor = System.Drawing.Color.DimGray;
 			this.groupBox_Repetative.Location = new System.Drawing.Point(567, 275);
 			this.groupBox_Repetative.Name = "groupBox_Repetative";
-			this.groupBox_Repetative.Size = new System.Drawing.Size(486, 223);
+			this.groupBox_Repetative.Size = new System.Drawing.Size(506, 223);
 			this.groupBox_Repetative.TabIndex = 192;
 			this.groupBox_Repetative.TabStop = false;
 			this.groupBox_Repetative.Text = "REPEAT";
@@ -609,7 +616,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.radio_RepeatWhicheverLast.Font = new System.Drawing.Font("Verdana", 11.25F);
 			this.radio_RepeatWhicheverLast.Location = new System.Drawing.Point(334, 176);
 			this.radio_RepeatWhicheverLast.Name = "radio_RepeatWhicheverLast";
-			this.radio_RepeatWhicheverLast.Size = new System.Drawing.Size(146, 22);
+			this.radio_RepeatWhicheverLast.Size = new System.Drawing.Size(166, 24);
 			this.radio_RepeatWhicheverLast.TabIndex = 24;
 			this.radio_RepeatWhicheverLast.Text = "Whichever Later";
 			this.radio_RepeatWhicheverLast.UseVisualStyleBackColor = true;
@@ -633,7 +640,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.lifelengthViewer_RepeatNotify.HeaderHours = "Hours";
 			this.lifelengthViewer_RepeatNotify.HoursApplicable = false;
 			this.lifelengthViewer_RepeatNotify.LeftHeader = "Notify";
-			this.lifelengthViewer_RepeatNotify.Location = new System.Drawing.Point(72, 89);
+			this.lifelengthViewer_RepeatNotify.Location = new System.Drawing.Point(92, 89);
 			this.lifelengthViewer_RepeatNotify.Margin = new System.Windows.Forms.Padding(2);
 			this.lifelengthViewer_RepeatNotify.Modified = false;
 			this.lifelengthViewer_RepeatNotify.Name = "lifelengthViewer_RepeatNotify";
@@ -642,7 +649,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.lifelengthViewer_RepeatNotify.ShowFormattedCalendar = false;
 			this.lifelengthViewer_RepeatNotify.ShowHeaders = false;
 			this.lifelengthViewer_RepeatNotify.ShowMinutes = true;
-			this.lifelengthViewer_RepeatNotify.Size = new System.Drawing.Size(407, 35);
+			this.lifelengthViewer_RepeatNotify.Size = new System.Drawing.Size(407, 37);
 			this.lifelengthViewer_RepeatNotify.SystemCalculated = true;
 			this.lifelengthViewer_RepeatNotify.TabIndex = 13;
 			// 
@@ -665,7 +672,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.lifelengthViewer_Repeat.HeaderHours = "Hours";
 			this.lifelengthViewer_Repeat.HoursApplicable = false;
 			this.lifelengthViewer_Repeat.LeftHeader = "Repeat Interval";
-			this.lifelengthViewer_Repeat.Location = new System.Drawing.Point(7, 31);
+			this.lifelengthViewer_Repeat.Location = new System.Drawing.Point(27, 31);
 			this.lifelengthViewer_Repeat.Margin = new System.Windows.Forms.Padding(2);
 			this.lifelengthViewer_Repeat.Modified = false;
 			this.lifelengthViewer_Repeat.Name = "lifelengthViewer_Repeat";
@@ -673,7 +680,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.lifelengthViewer_Repeat.ShowCalendar = true;
 			this.lifelengthViewer_Repeat.ShowFormattedCalendar = false;
 			this.lifelengthViewer_Repeat.ShowMinutes = true;
-			this.lifelengthViewer_Repeat.Size = new System.Drawing.Size(473, 52);
+			this.lifelengthViewer_Repeat.Size = new System.Drawing.Size(473, 54);
 			this.lifelengthViewer_Repeat.SystemCalculated = true;
 			this.lifelengthViewer_Repeat.TabIndex = 12;
 			// 
@@ -730,7 +737,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.lifelengthViewer_SinceEffDate.ShowFormattedCalendar = false;
 			this.lifelengthViewer_SinceEffDate.ShowHeaders = false;
 			this.lifelengthViewer_SinceEffDate.ShowMinutes = true;
-			this.lifelengthViewer_SinceEffDate.Size = new System.Drawing.Size(469, 35);
+			this.lifelengthViewer_SinceEffDate.Size = new System.Drawing.Size(469, 37);
 			this.lifelengthViewer_SinceEffDate.SystemCalculated = true;
 			this.lifelengthViewer_SinceEffDate.TabIndex = 20;
 			// 
@@ -760,7 +767,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.lifelengthViewer_SinceNew.ShowCalendar = true;
 			this.lifelengthViewer_SinceNew.ShowFormattedCalendar = false;
 			this.lifelengthViewer_SinceNew.ShowMinutes = true;
-			this.lifelengthViewer_SinceNew.Size = new System.Drawing.Size(437, 52);
+			this.lifelengthViewer_SinceNew.Size = new System.Drawing.Size(437, 54);
 			this.lifelengthViewer_SinceNew.SystemCalculated = true;
 			this.lifelengthViewer_SinceNew.TabIndex = 7;
 			// 
@@ -791,7 +798,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.lifelengthViewer_FirstNotify.ShowFormattedCalendar = false;
 			this.lifelengthViewer_FirstNotify.ShowHeaders = false;
 			this.lifelengthViewer_FirstNotify.ShowMinutes = true;
-			this.lifelengthViewer_FirstNotify.Size = new System.Drawing.Size(407, 35);
+			this.lifelengthViewer_FirstNotify.Size = new System.Drawing.Size(407, 37);
 			this.lifelengthViewer_FirstNotify.SystemCalculated = true;
 			this.lifelengthViewer_FirstNotify.TabIndex = 8;
 			// 
@@ -809,7 +816,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// 
 			this.comboBoxNdt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.comboBoxNdt.FormattingEnabled = true;
-			this.comboBoxNdt.Location = new System.Drawing.Point(153, 211);
+			this.comboBoxNdt.Location = new System.Drawing.Point(153, 237);
 			this.comboBoxNdt.Name = "comboBoxNdt";
 			this.comboBoxNdt.Size = new System.Drawing.Size(210, 21);
 			this.comboBoxNdt.TabIndex = 205;
@@ -820,11 +827,11 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.lookupComboboxForCompnt.DisplayerText = null;
 			this.lookupComboboxForCompnt.Entity = null;
 			this.lookupComboboxForCompnt.Font = new System.Drawing.Font("Verdana", 9F);
-			this.lookupComboboxForCompnt.Location = new System.Drawing.Point(153, 183);
+			this.lookupComboboxForCompnt.Location = new System.Drawing.Point(153, 209);
 			this.lookupComboboxForCompnt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.lookupComboboxForCompnt.Name = "lookupComboboxForCompnt";
 			this.lookupComboboxForCompnt.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.lookupComboboxForCompnt.Size = new System.Drawing.Size(350, 22);
+			this.lookupComboboxForCompnt.Size = new System.Drawing.Size(350, 25);
 			this.lookupComboboxForCompnt.TabIndex = 204;
 			this.lookupComboboxForCompnt.Type = null;
 			// 
@@ -900,7 +907,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.label6.Location = new System.Drawing.Point(3, 102);
 			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(77, 14);
+			this.label6.Size = new System.Drawing.Size(86, 17);
 			this.label6.TabIndex = 217;
 			this.label6.Text = "Work area:";
 			// 
@@ -912,7 +919,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.textBoxWorkArea.Location = new System.Drawing.Point(153, 99);
 			this.textBoxWorkArea.MaxLength = 200;
 			this.textBoxWorkArea.Name = "textBoxWorkArea";
-			this.textBoxWorkArea.Size = new System.Drawing.Size(350, 22);
+			this.textBoxWorkArea.Size = new System.Drawing.Size(350, 24);
 			this.textBoxWorkArea.TabIndex = 216;
 			// 
 			// labelZone
@@ -922,7 +929,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.labelZone.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.labelZone.Location = new System.Drawing.Point(3, 130);
 			this.labelZone.Name = "labelZone";
-			this.labelZone.Size = new System.Drawing.Size(44, 14);
+			this.labelZone.Size = new System.Drawing.Size(50, 17);
 			this.labelZone.TabIndex = 215;
 			this.labelZone.Text = "Zone:";
 			// 
@@ -934,7 +941,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.textBoxZone.Location = new System.Drawing.Point(153, 127);
 			this.textBoxZone.MaxLength = 200;
 			this.textBoxZone.Name = "textBoxZone";
-			this.textBoxZone.Size = new System.Drawing.Size(350, 22);
+			this.textBoxZone.Size = new System.Drawing.Size(350, 24);
 			this.textBoxZone.TabIndex = 212;
 			// 
 			// labelAccess
@@ -944,7 +951,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.labelAccess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.labelAccess.Location = new System.Drawing.Point(3, 158);
 			this.labelAccess.Name = "labelAccess";
-			this.labelAccess.Size = new System.Drawing.Size(54, 14);
+			this.labelAccess.Size = new System.Drawing.Size(62, 17);
 			this.labelAccess.TabIndex = 214;
 			this.labelAccess.Text = "Access:";
 			// 
@@ -967,7 +974,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.labelAffectedBy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.labelAffectedBy.Location = new System.Drawing.Point(593, 88);
 			this.labelAffectedBy.Name = "labelAffectedBy";
-			this.labelAffectedBy.Size = new System.Drawing.Size(82, 14);
+			this.labelAffectedBy.Size = new System.Drawing.Size(94, 17);
 			this.labelAffectedBy.TabIndex = 219;
 			this.labelAffectedBy.Text = "Affected by:";
 			// 
@@ -979,7 +986,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.textBoxAffectedBy.Location = new System.Drawing.Point(743, 85);
 			this.textBoxAffectedBy.MaxLength = 200;
 			this.textBoxAffectedBy.Name = "textBoxAffectedBy";
-			this.textBoxAffectedBy.Size = new System.Drawing.Size(308, 22);
+			this.textBoxAffectedBy.Size = new System.Drawing.Size(308, 24);
 			this.textBoxAffectedBy.TabIndex = 218;
 			// 
 			// comboBoxAffects
@@ -1043,12 +1050,52 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.checkBoxFindingControl.TabIndex = 225;
 			this.checkBoxFindingControl.UseVisualStyleBackColor = true;
 			// 
+			// linkLabel1
+			// 
+			this.linkLabel1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.linkLabel1.Location = new System.Drawing.Point(466, 180);
+			this.linkLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.linkLabel1.Name = "linkLabel1";
+			this.linkLabel1.Size = new System.Drawing.Size(37, 23);
+			this.linkLabel1.TabIndex = 227;
+			this.linkLabel1.TabStop = true;
+			this.linkLabel1.Text = "Edit";
+			this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+			// 
+			// textBox1
+			// 
+			this.textBox1.BackColor = System.Drawing.Color.White;
+			this.textBox1.Enabled = false;
+			this.textBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.textBox1.Location = new System.Drawing.Point(153, 182);
+			this.textBox1.Margin = new System.Windows.Forms.Padding(2);
+			this.textBox1.Name = "textBox1";
+			this.textBox1.Size = new System.Drawing.Size(309, 22);
+			this.textBox1.TabIndex = 228;
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.label1.Location = new System.Drawing.Point(3, 185);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(66, 17);
+			this.label1.TabIndex = 226;
+			this.label1.Text = "For MPD";
+			// 
 			// DirectiveParametersControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this.Controls.Add(this.linkLabel1);
+			this.Controls.Add(this.textBox1);
+			this.Controls.Add(this.label1);
 			this.Controls.Add(this.checkBoxFindingControl);
 			this.Controls.Add(this.labelFindingControl);
 			this.Controls.Add(this.comboBoxReason);
@@ -1630,6 +1677,33 @@ namespace CAS.UI.UIControls.DirectivesControls
 				textBoxKitRequired.Text = _currentDirective.Kits.Count + " EA";
 		}
 		#endregion
+
+		#endregion
+
+		private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			var dlg = new DirectiveBindMPDForm(_currentDirective);
+			dlg.ShowDialog();
+
+			if (dlg.DialogResult == DialogResult.OK)
+				InvokeDataWereChanged(null);
+		}
+
+
+		#region Events
+
+		///<summary>
+		///</summary>
+		public event EventHandler DataWereChanged;
+
+		///<summary>
+		///</summary>
+		///<param name="e"></param>
+		public void InvokeDataWereChanged(EventArgs e)
+		{
+			EventHandler handler = DataWereChanged;
+			if (handler != null) handler(this, e);
+		}
 
 		#endregion
 	}

@@ -535,6 +535,23 @@ namespace CAS.UI.UIControls.NewGrid
 		}
 		#endregion
 
+		#region public virtual void RemoveItems(T[] items)
+		/// <summary>
+		/// Метод возвращает массив директив
+		/// </summary>
+		/// <returns>Массив директив</returns>
+		public virtual void RemoveItems(IEnumerable<T> items)
+		{
+			foreach (var item in items)
+			{
+				_items.Remove(item);
+				radGridView1.Rows.Remove(radGridView1.Rows.FirstOrDefault(i => i.Tag == item));
+			}
+			
+			SetTotalText();
+		}
+		#endregion
+
 		#region public CustomCell CreateRow(string text, object tag)
 
 		public CustomCell CreateRow(string text, object tag, Color? foreColor = null)

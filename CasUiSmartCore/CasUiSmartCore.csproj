@@ -805,6 +805,12 @@
     <Compile Include="ExcelExport\ExcelExportProvider.cs" />
     <Compile Include="Extentions.cs" />
     <Compile Include="Helpers\CmbScrollHelper.cs" />
+    <Compile Include="UIControls\DirectivesControls\DirectiveBindMPDForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\DirectivesControls\DirectiveBindMPDForm.designer.cs">
+      <DependentUpon>DirectiveBindMPDForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\Fleet\ComponentsFleetListScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -3970,6 +3976,10 @@
     <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="UIControls\DirectivesControls\DirectiveBindMPDForm.resx">
+      <DependentUpon>DirectiveBindMPDForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIControls\Fleet\ComponentsFleetListScreen.resx">
       <DependentUpon>ComponentsFleetListScreen.cs</DependentUpon>
     </EmbeddedResource>
