@@ -361,6 +361,7 @@ namespace CAS.UI.UIControls.DirectivesControls
             try
             {
                 GlobalObjects.DirectiveCore.Save(_currentDirective);
+                _performanceControl.SaveData();
             }
             catch (Exception ex)
             {
@@ -382,7 +383,8 @@ namespace CAS.UI.UIControls.DirectivesControls
 	        try
 	        {
 		        GlobalObjects.DirectiveCore.Save(dir);
-	        }
+		        _performanceControl.SaveData();
+            }
 	        catch (Exception ex)
 	        {
 		        Program.Provider.Logger.Log("Error while saving data", ex);

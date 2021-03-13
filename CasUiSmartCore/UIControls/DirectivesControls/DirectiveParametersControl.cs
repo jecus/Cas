@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
@@ -16,7 +17,12 @@ using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Directives;
 using CAS.UI.Helpers;
+using CAS.UI.Interfaces;
 using CAS.UI.UIControls.MaintananceProgram;
+using SmartCore.Auxiliary.Extentions;
+using SmartCore.Entities.General.MaintenanceWorkscope;
+using SmartCore.Relation;
+using TempUIExtentions;
 
 namespace CAS.UI.UIControls.DirectivesControls
 {
@@ -26,7 +32,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 	[Designer(typeof(DirectiveParametersControlDesigner))]
 	public class DirectiveParametersControl : UserControl
 	{
-		private LookupCombobox lookupComboboxForCompnt;
 		private RadioButton radio_FirstWhicheverLast;
 		private RadioButton radio_FirstWhicheverFirst;
 		private CheckBox checkBoxRepeat;
@@ -34,7 +39,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 		private LifelengthViewer lifelengthViewer_SinceNew;
 		private LifelengthViewer lifelengthViewer_Repeat;
 		private LifelengthViewer lifelengthViewer_FirstNotify;
-		private Label labelForComponent;
 		public LinkLabel linkLabelEditKit;
 		private AvControls.StatusImageLink.StatusImageLinkLabel imageLinkLabelStatus;
 		private TextBox textBoxKitRequired;
@@ -62,7 +66,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		private Label labelThreshold;
 
 		#region Fields
-
+		private IBindedItem _lastBindedMpd;
 		private Directive _currentDirective;
 		private ComboBox comboBoxNdt;
 		private ComboBox comboBoxSupersedes;
@@ -85,9 +89,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 		private Label labelReason;
 		private Label labelFindingControl;
 		private CheckBox checkBoxFindingControl;
-		private LinkLabel linkLabel1;
-		private TextBox textBox1;
-		private Label label1;
+		private ComboBox comboBoxRelationType;
+		private LookupCombobox lookupComboboxMaintenanceDirective;
+		private Label labelMPDItem;
 		private DateTime _effDate = DateTimeExtend.GetCASMinDateTime();
 
 		#endregion
@@ -264,7 +268,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.radio_FirstWhicheverLast = new System.Windows.Forms.RadioButton();
 			this.radio_FirstWhicheverFirst = new System.Windows.Forms.RadioButton();
 			this.checkBoxRepeat = new System.Windows.Forms.CheckBox();
-			this.labelForComponent = new System.Windows.Forms.Label();
 			this.linkLabelEditKit = new System.Windows.Forms.LinkLabel();
 			this.imageLinkLabelStatus = new AvControls.StatusImageLink.StatusImageLinkLabel();
 			this.textBoxKitRequired = new System.Windows.Forms.TextBox();
@@ -295,7 +298,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.lifelengthViewer_FirstNotify = new CAS.UI.UIControls.Auxiliary.LifelengthViewer();
 			this.labelThreshold = new System.Windows.Forms.Label();
 			this.comboBoxNdt = new System.Windows.Forms.ComboBox();
-			this.lookupComboboxForCompnt = new CAS.UI.UIControls.Auxiliary.LookupCombobox();
 			this.comboBoxSupersedes = new System.Windows.Forms.ComboBox();
 			this.labelSupersedes = new System.Windows.Forms.Label();
 			this.comboBoxSuperseded = new System.Windows.Forms.ComboBox();
@@ -316,9 +318,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.labelReason = new System.Windows.Forms.Label();
 			this.labelFindingControl = new System.Windows.Forms.Label();
 			this.checkBoxFindingControl = new System.Windows.Forms.CheckBox();
-			this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-			this.textBox1 = new System.Windows.Forms.TextBox();
-			this.label1 = new System.Windows.Forms.Label();
+			this.comboBoxRelationType = new System.Windows.Forms.ComboBox();
+			this.lookupComboboxMaintenanceDirective = new CAS.UI.UIControls.Auxiliary.LookupCombobox();
+			this.labelMPDItem = new System.Windows.Forms.Label();
 			this.groupBoxClose.SuspendLayout();
 			this.groupBox_Repetative.SuspendLayout();
 			this.groupFirstPerformance.SuspendLayout();
@@ -360,16 +362,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.checkBoxRepeat.Text = "Repetative";
 			this.checkBoxRepeat.UseVisualStyleBackColor = true;
 			this.checkBoxRepeat.CheckedChanged += new System.EventHandler(this.CheckBoxRepeatCheckedChanged);
-			// 
-			// labelForComponent
-			// 
-			this.labelForComponent.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelForComponent.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelForComponent.Location = new System.Drawing.Point(3, 212);
-			this.labelForComponent.Name = "labelForComponent";
-			this.labelForComponent.Size = new System.Drawing.Size(124, 22);
-			this.labelForComponent.TabIndex = 203;
-			this.labelForComponent.Text = "For Component";
 			// 
 			// linkLabelEditKit
 			// 
@@ -821,20 +813,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.comboBoxNdt.Size = new System.Drawing.Size(210, 21);
 			this.comboBoxNdt.TabIndex = 205;
 			// 
-			// lookupComboboxForCompnt
-			// 
-			this.lookupComboboxForCompnt.Displayer = null;
-			this.lookupComboboxForCompnt.DisplayerText = null;
-			this.lookupComboboxForCompnt.Entity = null;
-			this.lookupComboboxForCompnt.Font = new System.Drawing.Font("Verdana", 9F);
-			this.lookupComboboxForCompnt.Location = new System.Drawing.Point(153, 209);
-			this.lookupComboboxForCompnt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-			this.lookupComboboxForCompnt.Name = "lookupComboboxForCompnt";
-			this.lookupComboboxForCompnt.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
-			this.lookupComboboxForCompnt.Size = new System.Drawing.Size(350, 25);
-			this.lookupComboboxForCompnt.TabIndex = 204;
-			this.lookupComboboxForCompnt.Type = null;
-			// 
 			// comboBoxSupersedes
 			// 
 			this.comboBoxSupersedes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
@@ -1050,42 +1028,41 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.checkBoxFindingControl.TabIndex = 225;
 			this.checkBoxFindingControl.UseVisualStyleBackColor = true;
 			// 
-			// linkLabel1
+			// comboBoxRelationType
 			// 
-			this.linkLabel1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.linkLabel1.Location = new System.Drawing.Point(466, 180);
-			this.linkLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-			this.linkLabel1.Name = "linkLabel1";
-			this.linkLabel1.Size = new System.Drawing.Size(37, 23);
-			this.linkLabel1.TabIndex = 227;
-			this.linkLabel1.TabStop = true;
-			this.linkLabel1.Text = "Edit";
-			this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+			this.comboBoxRelationType.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.comboBoxRelationType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.comboBoxRelationType.FormattingEnabled = true;
+			this.comboBoxRelationType.Location = new System.Drawing.Point(153, 211);
+			this.comboBoxRelationType.Name = "comboBoxRelationType";
+			this.comboBoxRelationType.Size = new System.Drawing.Size(351, 22);
+			this.comboBoxRelationType.TabIndex = 228;
 			// 
-			// textBox1
+			// lookupComboboxMaintenanceDirective
 			// 
-			this.textBox1.BackColor = System.Drawing.Color.White;
-			this.textBox1.Enabled = false;
-			this.textBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.textBox1.Location = new System.Drawing.Point(153, 182);
-			this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(309, 22);
-			this.textBox1.TabIndex = 228;
+			this.lookupComboboxMaintenanceDirective.ButtonCreateVisible = false;
+			this.lookupComboboxMaintenanceDirective.Displayer = null;
+			this.lookupComboboxMaintenanceDirective.DisplayerText = null;
+			this.lookupComboboxMaintenanceDirective.Entity = null;
+			this.lookupComboboxMaintenanceDirective.Font = new System.Drawing.Font("Verdana", 9F);
+			this.lookupComboboxMaintenanceDirective.Location = new System.Drawing.Point(153, 183);
+			this.lookupComboboxMaintenanceDirective.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.lookupComboboxMaintenanceDirective.Name = "lookupComboboxMaintenanceDirective";
+			this.lookupComboboxMaintenanceDirective.ReflectionType = CAS.UI.Management.Dispatchering.ReflectionTypes.DisplayInCurrent;
+			this.lookupComboboxMaintenanceDirective.Size = new System.Drawing.Size(351, 25);
+			this.lookupComboboxMaintenanceDirective.TabIndex = 226;
+			this.lookupComboboxMaintenanceDirective.Type = null;
 			// 
-			// label1
+			// labelMPDItem
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.label1.Location = new System.Drawing.Point(3, 185);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(66, 17);
-			this.label1.TabIndex = 226;
-			this.label1.Text = "For MPD";
+			this.labelMPDItem.AutoSize = true;
+			this.labelMPDItem.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelMPDItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+			this.labelMPDItem.Location = new System.Drawing.Point(3, 186);
+			this.labelMPDItem.Name = "labelMPDItem";
+			this.labelMPDItem.Size = new System.Drawing.Size(72, 17);
+			this.labelMPDItem.TabIndex = 227;
+			this.labelMPDItem.Text = "For MPD:";
 			// 
 			// DirectiveParametersControl
 			// 
@@ -1093,9 +1070,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-			this.Controls.Add(this.linkLabel1);
-			this.Controls.Add(this.textBox1);
-			this.Controls.Add(this.label1);
+			this.Controls.Add(this.comboBoxRelationType);
+			this.Controls.Add(this.lookupComboboxMaintenanceDirective);
+			this.Controls.Add(this.labelMPDItem);
 			this.Controls.Add(this.checkBoxFindingControl);
 			this.Controls.Add(this.labelFindingControl);
 			this.Controls.Add(this.comboBoxReason);
@@ -1117,8 +1094,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.Controls.Add(this.comboBoxSupersedes);
 			this.Controls.Add(this.labelSupersedes);
 			this.Controls.Add(this.comboBoxNdt);
-			this.Controls.Add(this.lookupComboboxForCompnt);
-			this.Controls.Add(this.labelForComponent);
 			this.Controls.Add(this.linkLabelEditKit);
 			this.Controls.Add(this.imageLinkLabelStatus);
 			this.Controls.Add(this.textBoxKitRequired);
@@ -1282,26 +1257,35 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 		public bool ValidateData( out string message )
 		{
+			var sb = new StringBuilder();
 			message = "";
 			double manHours;
 			double cost;
 			if (!CheckManHours(out manHours))
-			{
-				message += "Man hours. Invalid value";
-			}
+				sb.AppendLine("Man hours. Invalid value") ;
 			if (!CheckCost(out cost))
-			{
-				message = "Cost. Invalid value";
-			}
-
+				sb.AppendLine("Cost. Invalid value");
 			if (comboBoxWorkType.SelectedItem == null)
+				sb.AppendLine("You must enter Work Type");
+			
+			var selectedMpd = (MaintenanceDirective)lookupComboboxMaintenanceDirective.SelectedItem;
+
+			if (selectedMpd != null)
 			{
-				message = "You must enter Work Type";
+				var selectedRelationTypeUI = (WorkItemsRelationTypeUI)comboBoxRelationType.SelectedValue;
+				var selectedRelationType = ItemRelationHelper.ConvertUIItemRelationToBLItem(selectedRelationTypeUI, !(selectedMpd.IsFirst.GetValueOrDefault(false)));
+
+				if (!selectedMpd.ItemRelations.IsAllRelationWith(_currentDirective) && selectedMpd.ItemRelations.Any(i => i.RelationTypeId != selectedRelationType))
+				{
+					sb.AppendLine($"You not able to bing this MPD with AD {selectedMpd.ItemId} as {selectedRelationType},");
+					sb.AppendLine($"because this MPD have link with other AD as {selectedMpd.WorkItemsRelationType}");
+				}
 			}
 
+			message = sb.ToString();
 			if (message != "")
 				return false;
-			return true;    
+			return true;
 		}
 		#endregion
 
@@ -1313,6 +1297,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		/// <returns></returns>
 		public bool GetChangeStatus()
 		{
+			
 			double eps = 0.00001;
 			double manHours;
 			double cost;
@@ -1333,11 +1318,24 @@ namespace CAS.UI.UIControls.DirectivesControls
 													  : ThresholdConditionType.WhicheverLater;
 			threshold.RepeatPerformanceConditionType = radio_RepeatWhicheverFirst.Checked
 													  ? ThresholdConditionType.WhicheverFirst
-													  : ThresholdConditionType.WhicheverLater; 
+													  : ThresholdConditionType.WhicheverLater;
+
+
+			var bindedItemId = -1;
+			var currentRelation = _currentDirective.ItemRelations.SingleOrDefault();
+			var bindedItemRelationType = ItemRelationHelper.ConvertBLItemRelationToUIITem(_currentDirective.WorkItemsRelationType, _currentDirective.IsFirst.HasValue && _currentDirective.IsFirst.Value);
+			if (currentRelation != null)
+			{
+				bindedItemId = _currentDirective.IsFirst == true
+					? currentRelation.SecondItemId
+					: currentRelation.FirstItemId;
+			}
 
 			if (_currentDirective != null && 
 				(_currentDirective.Threshold.ToString() != threshold.ToString() || 
 				 _currentDirective.IsClosed != isClosed ||
+				 lookupComboboxMaintenanceDirective.SelectedItemId != bindedItemId ||
+				 (WorkItemsRelationTypeUI)comboBoxRelationType.SelectedValue != bindedItemRelationType ||
 				 _currentDirective.IsFindingControl != checkBoxFindingControl.Checked ||
 				 _currentDirective.WorkType.ItemId != ((DirectiveWorkType)comboBoxWorkType.SelectedItem).ItemId ||
 				 _currentDirective.Paragraph != textBoxParagraph.Text ||
@@ -1361,10 +1359,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 		///</summary>
 		public void UpdateControl()
 		{
-			lookupComboboxForCompnt.DisplayerText = _currentDirective.ParentBaseComponent + ". Component Status";
-			lookupComboboxForCompnt.LoadObjectsFunc = GlobalObjects.DirectiveCore.GetDirectives;
-			lookupComboboxForCompnt.FilterParam1 = _currentDirective.ParentBaseComponent;
-			lookupComboboxForCompnt.FilterParam2 = DirectiveType.DeferredItems;
 			//lookupComboboxForCompnt.UpdateInformation();
 			if(_currentDirective is DeferredItem)
 			{
@@ -1403,8 +1397,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 				labelChart.Visible = true;
 				textBoxChart.Visible = true;
 				linkLabelEditChart.Visible = true;
-				lookupComboboxForCompnt.Visible = false;
-				labelForComponent.Visible = false;
 			}
 			else
 			{
@@ -1420,6 +1412,8 @@ namespace CAS.UI.UIControls.DirectivesControls
 		/// </summary>
 		private void UpdateInformation()
 		{
+			lookupComboboxMaintenanceDirective.SelectedIndexChanged -= LookupComboboxMaintenanceDirectiveSelectedIndexChanged;
+
 			UpdateControl();
 
 			comboBoxNdt.Items.Clear();
@@ -1506,6 +1500,62 @@ namespace CAS.UI.UIControls.DirectivesControls
 			bool permission = true;//currentDirective.HasPermission(Users.IdentityUser, DataEvent.Update);
 
 			textBoxKitRequired.ReadOnly = !permission;
+
+			#region ItemRelationCombobox
+
+			comboBoxRelationType.DisplayMember = "Key";
+			comboBoxRelationType.ValueMember = "Value";
+			comboBoxRelationType.DataSource = EnumHelper.GetDisplayValueMemberDict<WorkItemsRelationTypeUI>();
+
+			#endregion
+
+			#region MaintenanceDirective
+
+			var pareAircraft = GlobalObjects.AircraftsCore.GetAircraftById(_currentDirective.ParentAircraftId);//TODO:(Evgenii Babak) пересмотреть использование ParentAircrafId здесь
+			if (pareAircraft != null)
+			{
+				var maintenanceScreenDisplayerText = $"{_currentDirective.GetParentAircraftRegNumber()}. MPD";
+
+				lookupComboboxMaintenanceDirective.SetEditScreenControl<MaintenanceDirectiveScreen>
+					(maintenanceScreenDisplayerText);
+				lookupComboboxMaintenanceDirective.SetItemsScreenControl<MaintenanceDirectiveListScreen>
+					(new object[] { pareAircraft }, maintenanceScreenDisplayerText);
+				lookupComboboxMaintenanceDirective.LoadObjectsFunc = GlobalObjects.MaintenanceCore.GetMaintenanceDirectives;
+				lookupComboboxMaintenanceDirective.FilterParam1 = pareAircraft;
+			}
+
+			#endregion
+
+
+			try
+			{
+				var itemRelation = _currentDirective.ItemRelations.SingleOrDefault();
+				var mpdId = -1;
+				WorkItemsRelationTypeUI relationType;
+				if (itemRelation != null && (itemRelation.FirtsItemTypeId == SmartCoreType.MaintenanceDirective.ItemId ||
+				                             itemRelation.SecondItemTypeId == SmartCoreType.MaintenanceDirective.ItemId))
+				{
+					mpdId = _currentDirective.IsFirst == true ? itemRelation.SecondItemId : itemRelation.FirstItemId;
+					relationType = ItemRelationHelper.ConvertBLItemRelationToUIITem(_currentDirective.WorkItemsRelationType, _currentDirective.IsFirst.HasValue && _currentDirective.IsFirst.Value);
+				}
+				else relationType = WorkItemsRelationTypeUI.ThisItemAffectOnAnother;
+
+				lookupComboboxMaintenanceDirective.SelectedItemId = mpdId;
+				comboBoxRelationType.SelectedValue = relationType;
+
+			}
+			catch (InvalidOperationException)
+			{
+				ItemRelationHelper.ShowDialogIfItemLinksCountMoreThanOne($"Component {_currentDirective.Title}", _currentDirective.ItemRelations.Count);
+			}
+			catch (Exception ex)
+			{
+				Program.Provider.Logger.Log(ex);
+			}
+
+
+			lookupComboboxMaintenanceDirective.UpdateInformation();
+			lookupComboboxMaintenanceDirective.SelectedIndexChanged += LookupComboboxMaintenanceDirectiveSelectedIndexChanged;
 		}
 
 		#endregion
@@ -1567,6 +1617,45 @@ namespace CAS.UI.UIControls.DirectivesControls
 				((DamageItem) destinationDirective).IsTemporary = checkBoxIsTemporary.Checked;
 
 			return true;
+		}
+
+		#endregion
+
+
+		#region public bool SaveData()
+
+		/// <summary>
+		/// Сохраняет работу агрегата
+		/// </summary>
+		/// <returns></returns>
+		public void SaveData()
+		{
+			try
+			{
+				var currentRelatedItem = lookupComboboxMaintenanceDirective.SelectedItem as MaintenanceDirective;
+				var selectedRelationType = (WorkItemsRelationTypeUI)comboBoxRelationType.SelectedValue;
+				var itemsRelation = _currentDirective.ItemRelations.SingleOrDefault();
+
+				if (currentRelatedItem != null)
+				{
+					ChangeItemRelations(ref itemsRelation, currentRelatedItem, selectedRelationType);
+					if (itemsRelation != null)
+						GlobalObjects.CasEnvironment.NewKeeper.Save(itemsRelation);
+				}
+				else
+				{
+					if (itemsRelation != null && itemsRelation.ItemId > 0)
+						DeleteItemRelation(itemsRelation);
+				}
+			}
+			catch (InvalidOperationException)
+			{
+				ItemRelationHelper.ShowDialogIfItemLinksCountMoreThanOne($"Component {_currentDirective.Title}", _currentDirective.ItemRelations.Count);
+			}
+			catch (Exception ex)
+			{
+				Program.Provider.Logger.Log("Error while saving data", ex);
+			}
 		}
 
 		#endregion
@@ -1676,6 +1765,85 @@ namespace CAS.UI.UIControls.DirectivesControls
 			if(dlg.ShowDialog() == DialogResult.OK)
 				textBoxKitRequired.Text = _currentDirective.Kits.Count + " EA";
 		}
+		#endregion
+
+		#region private void LookupComboboxMaintenanceDirectiveSelectedIndexChanged(object sender, EventArgs e)
+		private void LookupComboboxMaintenanceDirectiveSelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (lookupComboboxMaintenanceDirective.SelectedItem != null)
+			{
+				var bindedItem = (MaintenanceDirective)lookupComboboxMaintenanceDirective.SelectedItem;
+				var itemRelations = GlobalObjects.ItemsRelationsDataAccess.GetRelations(bindedItem.ItemId, bindedItem.SmartCoreObjectType.ItemId);
+
+				if (_lastBindedMpd == null)
+					_lastBindedMpd = bindedItem;
+
+				bindedItem.ItemRelations.Clear();
+
+				if (itemRelations.Count > 0)
+				{
+					//TODO:(Evgenii Babak) фикс очень кривой нужно вычислять WorkItemsRelationType с помощью метода расширения для коллекции relation - ов
+					bindedItem.ItemRelations.AddRange(itemRelations);
+
+					if (bindedItem.ItemRelations.IsAllRelationWith(SmartCoreType.Directive))
+					{
+						comboBoxRelationType.SelectedValue = ItemRelationHelper.ConvertBLItemRelationToUIITem(bindedItem.WorkItemsRelationType, !(bindedItem.IsFirst.HasValue && bindedItem.IsFirst.Value));
+					}
+					else ItemRelationHelper.ShowDialogIfItemHaveLinkWithAnotherItem($"MPD {bindedItem.MPDNumber}", "AD", "MPD");
+				}
+			}
+		}
+		#endregion
+
+		#region private void ChangeItemRelations(ref ItemsRelation itemsRelation, MaintenanceDirective relatedItem, WorkItemsRelationTypeUI relationTypeUI)
+
+		private void ChangeItemRelations(ref ItemsRelation itemsRelation, MaintenanceDirective relatedItem, WorkItemsRelationTypeUI relationTypeUI)
+		{
+			if (relatedItem.ItemRelations.Count == 0 ||
+				relatedItem.ItemRelations.IsAllRelationWith(SmartCoreType.Directive))
+			{
+				if (itemsRelation == null)
+				{
+					itemsRelation = new ItemsRelation();
+					_currentDirective.ItemRelations.Add(itemsRelation);
+				}
+				else _lastBindedMpd.ItemRelations.Remove(itemsRelation);
+
+				itemsRelation.FillParameters(_currentDirective, relatedItem);
+				if (!RelateditemContainsLinkOnCurrentItem(_currentDirective, relatedItem))
+					relatedItem.ItemRelations.Add(itemsRelation);
+
+				itemsRelation.RelationTypeId = ItemRelationHelper.ConvertUIItemRelationToBLItem(relationTypeUI, _currentDirective.IsFirst);
+			}
+			else ItemRelationHelper.ShowDialogIfItemHaveLinkWithAnotherItem($"MPD {relatedItem.MPDNumber}", "AD", "MPD");
+		}
+
+		#endregion
+
+		#region private bool RelateditemContainsLinkOnCurrentItem(IBindedItem thisItem, IBindedItem anotherItem)
+
+		private bool RelateditemContainsLinkOnCurrentItem(IBindedItem thisItem, IBindedItem anotherItem)
+		{
+			return
+				anotherItem.ItemRelations.Any(
+					itemsRelation =>
+						itemsRelation.FirstItemId == anotherItem.ItemId &&
+						itemsRelation.FirtsItemTypeId == thisItem.SmartCoreObjectType.ItemId ||
+						itemsRelation.SecondItemId == anotherItem.ItemId &&
+						itemsRelation.SecondItemTypeId == thisItem.SmartCoreObjectType.ItemId);
+		}
+
+		#endregion
+
+		#region private void DeleteItemRelation(ItemsRelation itemsRelation)
+
+		private void DeleteItemRelation(ItemsRelation itemsRelation)
+		{
+			itemsRelation.IsDeleted = true;
+			if (_lastBindedMpd != null)
+				_lastBindedMpd.ItemRelations.Remove(itemsRelation);
+		}
+
 		#endregion
 
 		#endregion

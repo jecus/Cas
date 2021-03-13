@@ -343,6 +343,7 @@ namespace CAS.UI.UIControls.DirectivesControls
             try
             {
                 GlobalObjects.DirectiveCore.Save(_currentOutOfPhase);
+                _performanceControl.SaveData();
             }
             catch (Exception ex)
             {

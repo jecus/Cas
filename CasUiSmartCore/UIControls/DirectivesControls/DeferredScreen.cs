@@ -454,6 +454,7 @@ namespace CAS.UI.UIControls.DirectivesControls
             try
             {
                 GlobalObjects.DirectiveCore.Save(_defferedItem);
+                _performanceControl.SaveData();
             }
             catch (Exception ex)
             {
