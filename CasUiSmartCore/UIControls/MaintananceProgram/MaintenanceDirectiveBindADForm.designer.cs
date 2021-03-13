@@ -1,10 +1,10 @@
 using System.Windows.Forms;
-using CAS.UI.Helpers;
-using CAS.UI.UIControls.MaintananceProgram;
+using CAS.UI.UIControls.DirectivesControls;
+using SmartCore.Entities.Dictionaries;
 
-namespace CAS.UI.UIControls.DirectivesControls
+namespace CAS.UI.UIControls.MaintananceProgram
 {
-	partial class DirectiveBindMPDForm
+	partial class MaintenanceDirectiveBindADForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -35,8 +35,8 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.buttonAdd = new System.Windows.Forms.Button();
 			this.buttonClose = new System.Windows.Forms.Button();
 			this.splitContainerMain = new System.Windows.Forms.SplitContainer();
-			this.listViewTasksForSelect = new CAS.UI.UIControls.MaintananceProgram.MaintenanceDirectiveListView();
-			this.listViewBindedTasks = new CAS.UI.UIControls.MaintananceProgram.MaintenanceDirectiveListView();
+			this.listViewTasksForSelect = new PrimeDirectiveListView(DirectiveType.AirworthenessDirectives);
+			this.listViewBindedTasks = new PrimeDirectiveListView(DirectiveType.AirworthenessDirectives);
 			this.comboBoxRelationType = new System.Windows.Forms.ComboBox();
 			this.buttonDelete = new System.Windows.Forms.Button();
 			this.buttonOk = new System.Windows.Forms.Button();
@@ -203,8 +203,8 @@ namespace CAS.UI.UIControls.DirectivesControls
 		private Button buttonAdd;
 		private Button buttonClose;
 		private Button buttonDelete;
-		private MaintenanceDirectiveListView listViewTasksForSelect;
-		private MaintenanceDirectiveListView listViewBindedTasks;
+		private PrimeDirectiveListView listViewTasksForSelect;
+		private PrimeDirectiveListView listViewBindedTasks;
 		private ComboBox comboBoxRelationType;
 		private Button buttonOk;
 	}

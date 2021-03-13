@@ -1847,33 +1847,6 @@ namespace CAS.UI.UIControls.DirectivesControls
 		#endregion
 
 		#endregion
-
-		private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-		{
-			var dlg = new DirectiveBindMPDForm(_currentDirective);
-			dlg.ShowDialog();
-
-			if (dlg.DialogResult == DialogResult.OK)
-				InvokeDataWereChanged(null);
-		}
-
-
-		#region Events
-
-		///<summary>
-		///</summary>
-		public event EventHandler DataWereChanged;
-
-		///<summary>
-		///</summary>
-		///<param name="e"></param>
-		public void InvokeDataWereChanged(EventArgs e)
-		{
-			EventHandler handler = DataWereChanged;
-			if (handler != null) handler(this, e);
-		}
-
-		#endregion
 	}
 
 	#region internal class DirectiveParametersControlDesigner : ControlDesigner

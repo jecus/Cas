@@ -16,25 +16,25 @@ using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Relation;
 
-namespace CAS.UI.UIControls.DirectivesControls
+namespace CAS.UI.UIControls.MaintananceProgram
 {
     /// <summary>
     /// Форма для переноса шаблона ВС в рабочую базу данных
     /// </summary>
-    public partial class DirectiveBindMPDForm : MetroForm
+    public partial class MaintenanceDirectiveBindADForm : MetroForm
     {
 
         #region Fields
 
-        private List<MaintenanceDirective> _bindedItems = new List<MaintenanceDirective>();
-        private List<MaintenanceDirective> _itemsForSelect = new List<MaintenanceDirective>();
+        private List<Directive> _bindedItems = new List<Directive>();
+        private List<Directive> _itemsForSelect = new List<Directive>();
 
-        private List<MaintenanceDirective> _bindedItemsToRemove = new List<MaintenanceDirective>();
-        private List<MaintenanceDirective> _newBindedItems = new List<MaintenanceDirective>();
+        private List<Directive> _bindedItemsToRemove = new List<Directive>();
+        private List<Directive> _newBindedItems = new List<Directive>();
 
 	    private WorkItemsRelationTypeUI _selectedRelationTypeUI;
 
-        private readonly Directive _directive;
+        private readonly MaintenanceDirective _directive;
         private readonly Aircraft _currentAircraft;
 
         private readonly AnimatedThreadWorker _animatedThreadWorker = new AnimatedThreadWorker();
@@ -43,24 +43,24 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 		#region Constructors
 
-		#region private DirectiveBindMPDForm()
+		#region private MaintenanceDirectiveBindADForm()
 
 		/// <summary>
 		/// Создает форму для переноса шаблона ВС в рабочую базу данных
 		/// </summary>
-		private DirectiveBindMPDForm()
+		private MaintenanceDirectiveBindADForm()
         {
             InitializeComponent();
         }
 
 		#endregion
 
-		#region public DirectiveBindMPDForm(Directive directive) : this()
+		#region public MaintenanceDirectiveBindADForm(Directive directive) : this()
 
 		/// <summary>
 		/// Создает форму для привязки задач к выполнению чека программы обслуживания
 		/// </summary>
-		public DirectiveBindMPDForm(Directive directive)
+		public MaintenanceDirectiveBindADForm(MaintenanceDirective directive)
             : this()
         {
             if(directive == null)
@@ -110,19 +110,19 @@ namespace CAS.UI.UIControls.DirectivesControls
             }
 
             if (_bindedItems == null)
-	            _bindedItems = new List<MaintenanceDirective>();
+	            _bindedItems = new List<Directive>();
             _bindedItems.Clear();
 
             if (_itemsForSelect == null)
-	            _itemsForSelect = new List<MaintenanceDirective>();
+	            _itemsForSelect = new List<Directive>();
             _itemsForSelect.Clear();
 
             _animatedThreadWorker.ReportProgress(0, "load binded tasks");
 
-            List<MaintenanceDirective> directives = new List<MaintenanceDirective>();
+            List<Directive> directives = new List<Directive>();
             try
             {
-	            directives = GlobalObjects.MaintenanceCore.GetMaintenanceDirectives(_currentAircraft);
+	            directives.AddRange(GlobalObjects.DirectiveCore.GetDirectives(_currentAircraft, DirectiveType.AirworthenessDirectives));
 
 	            var directivesIds = directives.Select(d => d.ItemId);
 				var itemsRelations = GlobalObjects.ItemsRelationsDataAccess.GetRelations(directivesIds,
@@ -331,7 +331,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 		#region private ItemsRelation CreateItemRelation(DetailDirective mpd)
 
-		private ItemsRelation CreateItemRelation(MaintenanceDirective mpd, WorkItemsRelationTypeUI relationTypeUI)
+		private ItemsRelation CreateItemRelation(Directive mpd, WorkItemsRelationTypeUI relationTypeUI)
 	    {
 		    var itemRelation = new ItemsRelation();
 			var relationType = ItemRelationHelper.ConvertUIItemRelationToBLItem(relationTypeUI, _directive.IsFirst);

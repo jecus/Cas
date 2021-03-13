@@ -39,5 +39,10 @@ namespace SmartCore.Auxiliary.Extentions
 			                                    i.SecondItemTypeId == smartCoreType.ItemId);
 		}
 
+		public static bool IsAnyRelationWith(this IEnumerable<ItemsRelation> relationsCollection, SmartCoreType smartCoreType)
+		{
+			return relationsCollection.Any(i => i.FirtsItemTypeId == smartCoreType.ItemId ||
+			                                    i.SecondItemTypeId == smartCoreType.ItemId);
+		}
 	}
 }

@@ -414,17 +414,6 @@ namespace CAS.UI.UIControls.DirectivesControls
         }
         #endregion
 
-        #region private void PerformanceControlDataWereChanged(object sender, EventArgs e)
-
-        private void PerformanceControlDataWereChanged(object sender, EventArgs e)
-        {
-	        CancelAsync();
-
-	        AnimatedThreadWorker.RunWorkerAsync();
-        }
-
-        #endregion
-
         #region private void ButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)
 
         private void ButtonPrintDisplayerRequested(object sender, ReferenceEventArgs e)

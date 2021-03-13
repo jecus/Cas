@@ -199,7 +199,6 @@ namespace CAS.UI.UIControls.DirectivesControls
             this._performanceControl.Size = new System.Drawing.Size(1182, 425);
             this._performanceControl.TabIndex = 14;
             this._performanceControl.Visible = false;
-            this._performanceControl.DataWereChanged += new System.EventHandler(PerformanceControlDataWereChanged);
             // 
             // _complianceControl
             // 

@@ -10,6 +10,7 @@ using System.Windows.Forms.Design;
 using AvControls;
 using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
+using CAS.UI.UIControls.DirectivesControls;
 using CAS.UI.UIControls.KitControls;
 using CASTerms;
 using SmartCore.Auxiliary;
@@ -17,6 +18,7 @@ using SmartCore.Auxiliary.Extentions;
 using SmartCore.Calculations;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Accessory;
+using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using TempUIExtentions;
@@ -105,13 +107,13 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		#region private void SetTextBoxComponentsString()
 		private void SetTextBoxComponentsString(IList<IDirective> bindedItems)
 		{
-			if (_currentDirective.ItemRelations.IsAllRelationWith(SmartCoreType.ComponentDirective))
+			if (_currentDirective.ItemRelations.IsAnyRelationWith(SmartCoreType.ComponentDirective))
 			{
-				var bindedDetailDirectives = bindedItems.Cast<ComponentDirective>().ToList();
-				if (_currentDirective.ItemRelations.Count == 0)
+				var bindedDetailDirectives = bindedItems.Where(i => i is ComponentDirective).Cast<ComponentDirective>().ToList();
+				if (bindedDetailDirectives.Count == 0)
 					textBoxComponents.Text = "Select Items";
 				else if (bindedDetailDirectives.Count(dd => dd.ParentComponent != null) == 0)
-					textBoxComponents.Text = _currentDirective.ItemRelations.Count + " Items";
+					textBoxComponents.Text = bindedDetailDirectives.Count + " Items";
 				else
 				{
 					var sb = new StringBuilder();
@@ -128,10 +130,30 @@ namespace CAS.UI.UIControls.MaintananceProgram
 					textBoxComponents.Text = sb.ToString();
 				}
 			}
-			else
+
+			if (_currentDirective.ItemRelations.IsAnyRelationWith(SmartCoreType.Directive))
 			{
-				textBoxComponents.Text = " Incorrect";
+				var directives = bindedItems.Where(i => i is Directive).Cast<Directive>().ToList();
+				if (directives.Count == 0)
+					textBoxAd.Text = "Select Items";
+				else if (!directives.Any())
+					textBoxAd.Text = directives.Count + " Items";
+				else
+				{
+					var sb = new StringBuilder();
+					foreach (var directive in directives)
+					{
+						sb.Append($"Title:{directive.Title} ");
+					}
+
+					var nullComponentCount = directives.Count;
+					if (nullComponentCount > 0)
+						sb.Append($"and more {nullComponentCount} Items");
+
+					textBoxAd.Text = sb.ToString();
+				}
 			}
+			
 			
 		}
 		#endregion
@@ -497,6 +519,15 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		}
 		#endregion
 
+		private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			var dlg = new MaintenanceDirectiveBindADForm(_currentDirective);
+			dlg.ShowDialog();
+
+			if (dlg.DialogResult == DialogResult.OK)
+				InvokeDataWereChanged(null);
+		}
+
 		#region private void SetControlsEnable(bool enable)
 
 		private void SetControlsEnable(bool enable)
@@ -582,6 +613,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			}
 			
 		}
+
+		
 	}
 
 	#region internal class MaintenanceDirectiveParametersControlDesigner : ControlDesigner

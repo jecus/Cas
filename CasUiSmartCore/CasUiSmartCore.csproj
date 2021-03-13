@@ -805,11 +805,11 @@
     <Compile Include="ExcelExport\ExcelExportProvider.cs" />
     <Compile Include="Extentions.cs" />
     <Compile Include="Helpers\CmbScrollHelper.cs" />
-    <Compile Include="UIControls\DirectivesControls\DirectiveBindMPDForm.cs">
+    <Compile Include="UIControls\MaintananceProgram\MaintenanceDirectiveBindADForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UIControls\DirectivesControls\DirectiveBindMPDForm.designer.cs">
-      <DependentUpon>DirectiveBindMPDForm.cs</DependentUpon>
+    <Compile Include="UIControls\MaintananceProgram\MaintenanceDirectiveBindADForm.designer.cs">
+      <DependentUpon>MaintenanceDirectiveBindADForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UIControls\Fleet\ComponentsFleetListScreen.cs">
       <SubType>UserControl</SubType>
@@ -3976,8 +3976,8 @@
     <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="UIControls\DirectivesControls\DirectiveBindMPDForm.resx">
-      <DependentUpon>DirectiveBindMPDForm.cs</DependentUpon>
+    <EmbeddedResource Include="UIControls\MaintananceProgram\MaintenanceDirectiveBindADForm.resx">
+      <DependentUpon>MaintenanceDirectiveBindADForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\Fleet\ComponentsFleetListScreen.resx">
