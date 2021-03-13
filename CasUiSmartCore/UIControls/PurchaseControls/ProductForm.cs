@@ -603,6 +603,7 @@ namespace CAS.UI.UIControls.PurchaseControls
 
 		private void checkBoxIsForbidden_CheckedChanged(object sender, EventArgs e)
 		{
+			textBoxReason.Clear();
 			textBoxReason.Enabled = checkBoxIsForbidden.Checked;
 		}
 	}
