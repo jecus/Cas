@@ -282,7 +282,15 @@ namespace EntityCore.DTO.General
 		[Column("Packing")]
 		public string Packing { get; set; }
 
-		
+
+		[Column("IsRVSM")]
+		public bool IsRVSM { get; set; }
+
+
+		[Column("IsETOPS")]
+		public bool IsETOPS { get; set; }
+
+
 		[Column("FromSupplierReciveDate")]
 		public DateTime? FromSupplierReciveDate { get; set; }
 

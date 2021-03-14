@@ -150,11 +150,12 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.linkLabelEditComponents = new System.Windows.Forms.LinkLabel();
 			this.comboBoxReceived = new System.Windows.Forms.ComboBox();
 			this.labelReceived = new System.Windows.Forms.Label();
+			this.checkBoxRVSM = new System.Windows.Forms.CheckBox();
+			this.checkBoxETOPS = new System.Windows.Forms.CheckBox();
 			this.panelAvionicsInventory.SuspendLayout();
 			this.panelLandingGearMark.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.SuspendLayout();
-
 			// 
 			// lifelengthViewerStart
 			// 
@@ -280,7 +281,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.labelMPDItem.AutoSize = true;
 			this.labelMPDItem.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelMPDItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelMPDItem.Location = new System.Drawing.Point(401, 92);
+			this.labelMPDItem.Location = new System.Drawing.Point(400, 92);
 			this.labelMPDItem.Name = "labelMPDItem";
 			this.labelMPDItem.Size = new System.Drawing.Size(72, 14);
 			this.labelMPDItem.TabIndex = 2;
@@ -314,7 +315,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.labelManufactureDate.AutoSize = true;
 			this.labelManufactureDate.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelManufactureDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelManufactureDate.Location = new System.Drawing.Point(400, 180);
+			this.labelManufactureDate.Location = new System.Drawing.Point(400, 202);
 			this.labelManufactureDate.Name = "labelManufactureDate";
 			this.labelManufactureDate.Size = new System.Drawing.Size(87, 14);
 			this.labelManufactureDate.TabIndex = 8;
@@ -325,7 +326,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.labelInstallationDate.AutoSize = true;
 			this.labelInstallationDate.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelInstallationDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelInstallationDate.Location = new System.Drawing.Point(400, 236);
+			this.labelInstallationDate.Location = new System.Drawing.Point(400, 258);
 			this.labelInstallationDate.Name = "labelInstallationDate";
 			this.labelInstallationDate.RightToLeft = System.Windows.Forms.RightToLeft.No;
 			this.labelInstallationDate.Size = new System.Drawing.Size(89, 14);
@@ -337,7 +338,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.labelAtaChapter.AutoSize = true;
 			this.labelAtaChapter.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelAtaChapter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelAtaChapter.Location = new System.Drawing.Point(401, 120);
+			this.labelAtaChapter.Location = new System.Drawing.Point(400, 120);
 			this.labelAtaChapter.Name = "labelAtaChapter";
 			this.labelAtaChapter.Size = new System.Drawing.Size(33, 14);
 			this.labelAtaChapter.TabIndex = 3;
@@ -408,7 +409,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.checkBoxAvionicsInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.checkBoxAvionicsInventory.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.checkBoxAvionicsInventory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.checkBoxAvionicsInventory.Location = new System.Drawing.Point(403, 145);
+			this.checkBoxAvionicsInventory.Location = new System.Drawing.Point(402, 145);
 			this.checkBoxAvionicsInventory.Name = "checkBoxAvionicsInventory";
 			this.checkBoxAvionicsInventory.Size = new System.Drawing.Size(133, 18);
 			this.checkBoxAvionicsInventory.TabIndex = 14;
@@ -516,7 +517,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.dateTimePickerManufactureDate.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.dateTimePickerManufactureDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.dateTimePickerManufactureDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.dateTimePickerManufactureDate.Location = new System.Drawing.Point(539, 174);
+			this.dateTimePickerManufactureDate.Location = new System.Drawing.Point(537, 196);
 			this.dateTimePickerManufactureDate.Name = "dateTimePickerManufactureDate";
 			this.dateTimePickerManufactureDate.Size = new System.Drawing.Size(250, 22);
 			this.dateTimePickerManufactureDate.TabIndex = 18;
@@ -527,7 +528,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.dateTimePickerInstallationDate.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.dateTimePickerInstallationDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.dateTimePickerInstallationDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.dateTimePickerInstallationDate.Location = new System.Drawing.Point(539, 230);
+			this.dateTimePickerInstallationDate.Location = new System.Drawing.Point(537, 252);
 			this.dateTimePickerInstallationDate.Name = "dateTimePickerInstallationDate";
 			this.dateTimePickerInstallationDate.Size = new System.Drawing.Size(250, 22);
 			this.dateTimePickerInstallationDate.TabIndex = 20;
@@ -654,7 +655,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.labelDeliverDate.AutoSize = true;
 			this.labelDeliverDate.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelDeliverDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelDeliverDate.Location = new System.Drawing.Point(400, 208);
+			this.labelDeliverDate.Location = new System.Drawing.Point(400, 230);
 			this.labelDeliverDate.Name = "labelDeliverDate";
 			this.labelDeliverDate.Size = new System.Drawing.Size(96, 14);
 			this.labelDeliverDate.TabIndex = 63;
@@ -666,7 +667,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.dateTimePickerDeliveryDate.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.dateTimePickerDeliveryDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
 			this.dateTimePickerDeliveryDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.dateTimePickerDeliveryDate.Location = new System.Drawing.Point(539, 202);
+			this.dateTimePickerDeliveryDate.Location = new System.Drawing.Point(537, 224);
 			this.dateTimePickerDeliveryDate.Name = "dateTimePickerDeliveryDate";
 			this.dateTimePickerDeliveryDate.Size = new System.Drawing.Size(250, 22);
 			this.dateTimePickerDeliveryDate.TabIndex = 19;
@@ -693,7 +694,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxStorePosition.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxStorePosition.TabIndex = 7;
 			this.comboBoxStorePosition.Visible = false;
-			this.comboBoxStorePosition.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// checkBoxLLPMark
 			// 
@@ -701,7 +701,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.checkBoxLLPMark.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.checkBoxLLPMark.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.checkBoxLLPMark.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.checkBoxLLPMark.Location = new System.Drawing.Point(403, 253);
+			this.checkBoxLLPMark.Location = new System.Drawing.Point(402, 275);
 			this.checkBoxLLPMark.Name = "checkBoxLLPMark";
 			this.checkBoxLLPMark.Size = new System.Drawing.Size(93, 35);
 			this.checkBoxLLPMark.TabIndex = 21;
@@ -714,7 +714,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.checkBoxLLPCategories.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.checkBoxLLPCategories.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.checkBoxLLPCategories.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.checkBoxLLPCategories.Location = new System.Drawing.Point(539, 253);
+			this.checkBoxLLPCategories.Location = new System.Drawing.Point(537, 275);
 			this.checkBoxLLPCategories.Name = "checkBoxLLPCategories";
 			this.checkBoxLLPCategories.Size = new System.Drawing.Size(122, 35);
 			this.checkBoxLLPCategories.TabIndex = 22;
@@ -747,7 +747,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxMaintProc.Name = "comboBoxMaintProc";
 			this.comboBoxMaintProc.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxMaintProc.TabIndex = 24;
-			this.comboBoxMaintProc.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelComponentType
 			// 
@@ -926,7 +925,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxStatus.Name = "comboBoxStatus";
 			this.comboBoxStatus.Size = new System.Drawing.Size(249, 22);
 			this.comboBoxStatus.TabIndex = 96;
-			this.comboBoxStatus.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelDiscrepancy
 			// 
@@ -983,7 +981,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.labelImage.AutoSize = true;
 			this.labelImage.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelImage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelImage.Location = new System.Drawing.Point(403, 322);
+			this.labelImage.Location = new System.Drawing.Point(400, 344);
 			this.labelImage.Name = "labelImage";
 			this.labelImage.RightToLeft = System.Windows.Forms.RightToLeft.No;
 			this.labelImage.Size = new System.Drawing.Size(52, 14);
@@ -1013,7 +1011,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxSupplier.Size = new System.Drawing.Size(140, 22);
 			this.comboBoxSupplier.TabIndex = 148;
 			this.comboBoxSupplier.SelectedIndexChanged += new System.EventHandler(this.comboBoxSupplier_SelectedIndexChanged);
-			this.comboBoxSupplier.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// dateTimePickerReciveDate
 			// 
@@ -1145,7 +1142,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.radioButtonA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.radioButtonA.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.radioButtonA.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.radioButtonA.Location = new System.Drawing.Point(537, 287);
+			this.radioButtonA.Location = new System.Drawing.Point(535, 309);
 			this.radioButtonA.Name = "radioButtonA";
 			this.radioButtonA.Size = new System.Drawing.Size(32, 18);
 			this.radioButtonA.TabIndex = 3;
@@ -1160,7 +1157,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.radioButtonB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.radioButtonB.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.radioButtonB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.radioButtonB.Location = new System.Drawing.Point(575, 287);
+			this.radioButtonB.Location = new System.Drawing.Point(573, 309);
 			this.radioButtonB.Name = "radioButtonB";
 			this.radioButtonB.Size = new System.Drawing.Size(32, 18);
 			this.radioButtonB.TabIndex = 168;
@@ -1175,7 +1172,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.radioButtonC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.radioButtonC.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.radioButtonC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.radioButtonC.Location = new System.Drawing.Point(613, 287);
+			this.radioButtonC.Location = new System.Drawing.Point(611, 309);
 			this.radioButtonC.Name = "radioButtonC";
 			this.radioButtonC.Size = new System.Drawing.Size(33, 18);
 			this.radioButtonC.TabIndex = 169;
@@ -1190,7 +1187,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.radioButtonD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.radioButtonD.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.radioButtonD.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
-			this.radioButtonD.Location = new System.Drawing.Point(652, 287);
+			this.radioButtonD.Location = new System.Drawing.Point(650, 309);
 			this.radioButtonD.Name = "radioButtonD";
 			this.radioButtonD.Size = new System.Drawing.Size(33, 18);
 			this.radioButtonD.TabIndex = 170;
@@ -1203,7 +1200,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.labelCheck.AutoSize = true;
 			this.labelCheck.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.labelCheck.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-			this.labelCheck.Location = new System.Drawing.Point(401, 291);
+			this.labelCheck.Location = new System.Drawing.Point(400, 313);
 			this.labelCheck.Name = "labelCheck";
 			this.labelCheck.Size = new System.Drawing.Size(122, 14);
 			this.labelCheck.TabIndex = 171;
@@ -1531,7 +1528,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.fileControlImage.Filter = null;
 			this.fileControlImage.Icon = global::CAS.UI.Properties.Resources.ImageIcon_Small;
 			this.fileControlImage.IconNotEnabled = global::CAS.UI.Properties.Resources.ImageIcon_Small_Gray;
-			this.fileControlImage.Location = new System.Drawing.Point(539, 322);
+			this.fileControlImage.Location = new System.Drawing.Point(537, 336);
 			this.fileControlImage.MaximumSize = new System.Drawing.Size(350, 100);
 			this.fileControlImage.Name = "fileControlImage";
 			this.fileControlImage.ShowLinkLabelBrowse = true;
@@ -1567,7 +1564,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.dictionaryComboBoxLocation.Size = new System.Drawing.Size(249, 21);
 			this.dictionaryComboBoxLocation.TabIndex = 98;
 			this.dictionaryComboBoxLocation.Visible = false;
-			this.dictionaryComboBoxLocation.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxComponentType
 			// 
@@ -1585,7 +1581,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxComponentType.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxComponentType.TabIndex = 25;
 			this.comboBoxComponentType.SelectedIndexChanged += new System.EventHandler(this.ComboBoxComponentTypeSelectedIndexChanged);
-			this.comboBoxComponentType.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// comboBoxAtaChapter
 			// 
@@ -1597,7 +1592,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxAtaChapter.Name = "comboBoxAtaChapter";
 			this.comboBoxAtaChapter.Size = new System.Drawing.Size(250, 22);
 			this.comboBoxAtaChapter.TabIndex = 12;
-			this.comboBoxAtaChapter.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// lifelengthNotify
 			// 
@@ -1748,7 +1742,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.comboBoxReceived.Name = "comboBoxReceived";
 			this.comboBoxReceived.Size = new System.Drawing.Size(252, 22);
 			this.comboBoxReceived.TabIndex = 199;
-			this.comboBoxReceived.MouseWheel += CmbScrollHelper.ComboBoxScroll_MouseWheel;
 			// 
 			// labelReceived
 			// 
@@ -1762,12 +1755,40 @@ namespace CAS.UI.UIControls.ComponentControls
 			this.labelReceived.Text = "Received:";
 			this.labelReceived.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// checkBoxRVSM
+			// 
+			this.checkBoxRVSM.AutoSize = true;
+			this.checkBoxRVSM.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.checkBoxRVSM.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.checkBoxRVSM.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.checkBoxRVSM.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.checkBoxRVSM.Location = new System.Drawing.Point(402, 172);
+			this.checkBoxRVSM.Name = "checkBoxRVSM";
+			this.checkBoxRVSM.Size = new System.Drawing.Size(57, 18);
+			this.checkBoxRVSM.TabIndex = 200;
+			this.checkBoxRVSM.Text = "RVSM";
+			// 
+			// checkBoxETOPS
+			// 
+			this.checkBoxETOPS.AutoSize = true;
+			this.checkBoxETOPS.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.checkBoxETOPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.checkBoxETOPS.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.checkBoxETOPS.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(155)))), ((int)(((byte)(246)))));
+			this.checkBoxETOPS.Location = new System.Drawing.Point(539, 172);
+			this.checkBoxETOPS.Name = "checkBoxETOPS";
+			this.checkBoxETOPS.Size = new System.Drawing.Size(64, 18);
+			this.checkBoxETOPS.TabIndex = 201;
+			this.checkBoxETOPS.Text = "ETOPS";
+			// 
 			// ComponentGeneralInformationControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+			this.Controls.Add(this.checkBoxETOPS);
+			this.Controls.Add(this.checkBoxRVSM);
 			this.Controls.Add(this.comboBoxReceived);
 			this.Controls.Add(this.labelReceived);
 			this.Controls.Add(this.linkLabel2);
@@ -1996,5 +2017,7 @@ namespace CAS.UI.UIControls.ComponentControls
 		private System.Windows.Forms.LinkLabel linkLabelEditComponents;
 		private System.Windows.Forms.ComboBox comboBoxReceived;
 		private System.Windows.Forms.Label labelReceived;
+		private CheckBox checkBoxRVSM;
+		private CheckBox checkBoxETOPS;
 	}
 }

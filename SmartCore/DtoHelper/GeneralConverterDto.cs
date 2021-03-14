@@ -1647,6 +1647,8 @@ namespace SmartCore.DtoHelper
 				FromSupplierReciveDate = comp.FromSupplierReciveDate,
 				Received = comp.ReceivedId,
 				Packing = comp.Packing,
+				IsRVSM = comp.IsRVSM,
+				IsETOPS = comp.IsETOPS,
 				LLPData = comp.LLPData?.Select(i => i.Convert()) as ICollection<ComponentLLPCategoryDataDTO>,
 				CategoriesRecords = comp.CategoriesRecords?.Select(i => i.Convert()) as ICollection<CategoryRecordDTO>,
 				SupplierRelations = comp.SupplierRelations?.Select(i => i.Convert()) as ICollection<KitSuppliersRelationDTO>,
@@ -1720,7 +1722,9 @@ namespace SmartCore.DtoHelper
 				FromSupplier = compdto.FromSupplier?.Convert(),
 				FromSupplierReciveDate = compdto.FromSupplierReciveDate ?? DateTimeExtend.GetCASMinDateTime(),
 				ReceivedId = compdto.Received,
-				Packing = compdto.Packing
+				Packing = compdto.Packing,
+				IsRVSM = compdto.IsRVSM,
+				IsETOPS = compdto.IsETOPS
 			};
 
 			if (compdto.LLPData != null)
@@ -1869,6 +1873,8 @@ namespace SmartCore.DtoHelper
 				FromSupplierReciveDate = comp.FromSupplierReciveDate,
 				Received = comp.ReceivedId,
 				Packing = comp.Packing,
+				IsRVSM = comp.IsRVSM,
+				IsETOPS = comp.IsETOPS,
 				LLPData = comp.LLPData?.Select(i => i.Convert()) as ICollection<ComponentLLPCategoryDataDTO>,
 				CategoriesRecords = comp.CategoriesRecords?.Select(i => i.Convert()) as ICollection<CategoryRecordDTO>,
 				SupplierRelations = comp.SupplierRelations?.Select(i => i.Convert()) as ICollection<KitSuppliersRelationDTO>,
@@ -1947,7 +1953,9 @@ namespace SmartCore.DtoHelper
 				FromSupplier = compdto.FromSupplier?.Convert(),
 				FromSupplierReciveDate = compdto.FromSupplierReciveDate ?? DateTimeExtend.GetCASMinDateTime(),
 				ReceivedId = compdto.Received,
-				Packing = compdto.Packing
+				Packing = compdto.Packing,
+				IsRVSM = compdto.IsRVSM,
+				IsETOPS = compdto.IsETOPS
 			};
 
 			if (compdto.LLPData != null)

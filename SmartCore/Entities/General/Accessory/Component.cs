@@ -937,6 +937,20 @@ namespace SmartCore.Entities.General.Accessory
 		public string Packing { get; set; }
 		#endregion
 
+		#region public bool IsRVSM { get; set; }
+
+		[TableColumn("IsRVSM")]
+		public bool IsRVSM { get; set; }
+
+		#endregion
+
+		#region public bool IsETOPS { get; set; }
+
+		[TableColumn("IsETOPS")]
+		public bool IsETOPS { get; set; }
+
+		#endregion
+
 		public string Reference => Product?.Reference;
 		public string IsEffectivity => Product?.IsEffectivity;
 		public string Name => Product?.Name;

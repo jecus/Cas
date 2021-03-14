@@ -114,6 +114,8 @@ namespace CAS.UI.UIControls.ComponentControls
 			AddColumn("Class", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Kit", (int)(radGridView1.Width * 0.2f));
 			AddColumn("NDT", (int)(radGridView1.Width * 0.24f));
+			AddColumn("RVSM", (int)(radGridView1.Width * 0.14f));
+			AddColumn("ETOPS", (int)(radGridView1.Width * 0.14f));
 			AddColumn("M.H.", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Cost(new)", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Cost overhaul", (int)(radGridView1.Width * 0.2f));
@@ -212,6 +214,9 @@ namespace CAS.UI.UIControls.ComponentControls
 				   cost,
 				   costServiceable = 0,
 				   costOverhaul = 0;
+			bool isRVSM = false, 
+				isETOPS = false;
+
 			if (item is Component)
 			{
 				Component componentItem = (Component)item;
@@ -268,6 +273,8 @@ namespace CAS.UI.UIControls.ComponentControls
 				costServiceable = componentItem.CostServiceable;
 				remarks = componentItem.Remarks;
 				hiddenRemarks = componentItem.HiddenRemarks;
+				isRVSM = componentItem.IsRVSM;
+				isETOPS = componentItem.IsETOPS;
 				expiryDate = " ";
 				expiryRemain = Lifelength.Null;
 				condition = !firstPerformance.IsNullOrZero() ? (componentItem.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst
@@ -340,6 +347,8 @@ namespace CAS.UI.UIControls.ComponentControls
 				hiddenRemarks = dd.HiddenRemarks;
 				workType = dd.DirectiveType.ToString();
 				ndtString = dd.NDTType.ShortName;
+				isRVSM = dd.ParentComponent.IsRVSM;
+				isETOPS = dd.ParentComponent.IsETOPS;
 				condition = !firstPerformance.IsNullOrZero() ? (dd.Threshold.FirstPerformanceConditionType == ThresholdConditionType.WhicheverFirst
 					? "/WF"
 					: "/WL") : "";
@@ -402,6 +411,8 @@ namespace CAS.UI.UIControls.ComponentControls
 			subItems.Add(CreateRow(classString, classString));
 			subItems.Add(CreateRow(kitRequieredString, kitRequieredString));
 			subItems.Add(CreateRow(ndtString, ndtString));
+			subItems.Add(CreateRow(isRVSM ? "Yes" : "No", isRVSM));
+			subItems.Add(CreateRow(isETOPS ? "Yes" : "No", isETOPS));
 			subItems.Add(CreateRow(manHours.ToString(), manHours));
 			subItems.Add(CreateRow(cost.ToString(), cost));
 			subItems.Add(CreateRow(costOverhaul.ToString(), costOverhaul));

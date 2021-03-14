@@ -51,3 +51,21 @@ if not exists ( select  *
 	alter table dbo.MaintenanceDirectives
 	add IsETOPS bit not null default 0
 GO
+
+if not exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('dbo.Components')
+					and c.name = 'IsRVSM' ) 
+
+	alter table dbo.Components
+	add IsRVSM bit not null default 0
+GO
+
+if not exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('dbo.Components')
+					and c.name = 'IsETOPS' ) 
+
+	alter table dbo.Components
+	add IsETOPS bit not null default 0
+GO
