@@ -1650,9 +1650,9 @@ namespace CAS.UI.UIControls.DirectivesControls
 				{
 					if (itemsRelation != null && itemsRelation.ItemId > 0)
 					{
-						itemsRelation.AdditionalInformation.Ad = "";
-						itemsRelation.AdditionalInformation.Mpd = "";
+						itemsRelation.AdditionalInformation = null;
 						DeleteItemRelation(itemsRelation);
+						GlobalObjects.CasEnvironment.NewKeeper.Save(itemsRelation);
 					}
 				}
 			}
@@ -1803,6 +1803,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 					ItemRelationHelper.ShowDialogIfItemHaveLinkWithAnotherItem($"MPD {bindedItem.MPDNumber}", "AD", "MPD");
 				}
 			}
+
 		}
 		#endregion
 

@@ -565,7 +565,10 @@ namespace CAS.UI.UIControls.ComponentControls
 				else
 				{
 					if (itemsRelation != null && itemsRelation.ItemId > 0)
+					{
 						DeleteItemRelation(itemsRelation);
+						GlobalObjects.CasEnvironment.NewKeeper.Save(itemsRelation);
+					}
 				}
 			}
 			catch (InvalidOperationException)
@@ -599,7 +602,10 @@ namespace CAS.UI.UIControls.ComponentControls
 				else
 				{
 					if (itemsRelation != null && itemsRelation.ItemId > 0)
+					{
 						DeleteItemRelation(itemsRelation);
+						GlobalObjects.CasEnvironment.NewKeeper.Save(itemsRelation);
+					}
 				}
 			}
 			catch (Exception ex)
