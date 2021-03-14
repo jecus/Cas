@@ -565,7 +565,10 @@ namespace CAS.UI.UIControls.ComponentControls
 				else
 				{
 					if (itemsRelation != null && itemsRelation.ItemId > 0)
+					{
 						DeleteItemRelation(itemsRelation);
+						GlobalObjects.CasEnvironment.NewKeeper.Save(itemsRelation);
+					}
 				}
 			}
 			catch (InvalidOperationException)
@@ -599,7 +602,10 @@ namespace CAS.UI.UIControls.ComponentControls
 				else
 				{
 					if (itemsRelation != null && itemsRelation.ItemId > 0)
+					{
 						DeleteItemRelation(itemsRelation);
+						GlobalObjects.CasEnvironment.NewKeeper.Save(itemsRelation);
+					}
 				}
 			}
 			catch (Exception ex)
@@ -725,7 +731,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			if (lookupComboboxMaintenanceDirective.SelectedItem != null)
 			{
 				var bindedItem = (MaintenanceDirective)lookupComboboxMaintenanceDirective.SelectedItem;
-				var itemRelations = GlobalObjects.ItemsRelationsDataAccess.GetRelations(bindedItem.ItemId, bindedItem.SmartCoreObjectType.ItemId);
+				var itemRelations = GlobalObjects.ItemsRelationsDataAccess.CheckRelations(bindedItem, _currentComponentDirective);
 
 				if (_lastBindedMpd == null)
 					_lastBindedMpd = bindedItem;

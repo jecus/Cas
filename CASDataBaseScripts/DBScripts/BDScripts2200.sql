@@ -54,6 +54,15 @@ GO
 
 if not exists ( select  *
 			from    sys.columns c                        
+			where   c.object_id = object_id('dbo.ItemsRelations')
+					and c.name = 'AdditionalInformationJSON' ) 
+
+	alter table dbo.ItemsRelations
+	add AdditionalInformationJSON nvarchar(MAX)
+GO
+
+if not exists ( select  *
+			from    sys.columns c                        
 			where   c.object_id = object_id('dbo.Components')
 					and c.name = 'IsRVSM' ) 
 

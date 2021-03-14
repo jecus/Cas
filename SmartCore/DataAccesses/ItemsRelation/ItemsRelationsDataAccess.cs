@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using SmartCore.Entities.General;
 using SmartCore.Queries;
 
 namespace SmartCore.DataAccesses.ItemsRelation
@@ -18,7 +19,18 @@ namespace SmartCore.DataAccesses.ItemsRelation
 		{
 			//TODO:(Evgenii Babak) не использовать рукописные запросы
 			var qr = BaseQueries.GetSelectQuery<Relation.ItemsRelation>(true) +
-					 $" WHERE FirstItemId = {directiveId} AND FirtsItemTypeId = {typeId} OR SecondItemId = {directiveId} AND SecondItemTypeId = {typeId}";
+					 $" WHERE (FirstItemId = {directiveId} AND FirtsItemTypeId = {typeId} OR SecondItemId = {directiveId} AND SecondItemTypeId = {typeId}) AND IsDeleted = 0";
+
+			var ds = _casEnvironment.Execute(qr);
+			return BaseQueries.GetObjectList<Relation.ItemsRelation>(ds.Tables[0]);
+		}
+
+		public IList<Relation.ItemsRelation> CheckRelations(BaseEntityObject first, BaseEntityObject second)
+		{
+			var qr = BaseQueries.GetSelectQuery<Relation.ItemsRelation>(true) +
+			         $" WHERE (FirstItemId = {first.ItemId} AND FirtsItemTypeId = {first.SmartCoreObjectType.ItemId} AND SecondItemTypeId = {second.SmartCoreObjectType.ItemId}) " +
+			         $" OR (SecondItemId = {first.ItemId} AND SecondItemTypeId = {first.SmartCoreObjectType.ItemId} AND FirtsItemTypeId = {second.SmartCoreObjectType.ItemId}) " +
+			         $"AND (SecondItemTypeId != FirtsItemTypeId) AND IsDeleted = 0";
 
 			var ds = _casEnvironment.Execute(qr);
 			return BaseQueries.GetObjectList<Relation.ItemsRelation>(ds.Tables[0]);
@@ -30,7 +42,7 @@ namespace SmartCore.DataAccesses.ItemsRelation
 
 			//TODO:(Evgenii Babak) не использовать рукописные запросы
 			var qr = BaseQueries.GetSelectQuery<Relation.ItemsRelation>(true) +
-					 $" WHERE FirstItemId in ({idsString}) AND FirtsItemTypeId = {typeId} OR SecondItemId in ({idsString}) AND SecondItemTypeId = {typeId}";
+					 $" WHERE (FirstItemId in ({idsString}) AND FirtsItemTypeId = {typeId} OR SecondItemId in ({idsString}) AND SecondItemTypeId = {typeId}) AND IsDeleted = 0";
 
 			var ds = _casEnvironment.Execute(qr);
 			return BaseQueries.GetObjectList<Relation.ItemsRelation>(ds.Tables[0]);

@@ -124,25 +124,12 @@ namespace CAS.UI.UIControls.MaintananceProgram
             {
 	            directives.AddRange(GlobalObjects.DirectiveCore.GetDirectives(_currentAircraft, DirectiveType.AirworthenessDirectives));
 
-	            var directivesIds = directives.Select(d => d.ItemId);
-				var itemsRelations = GlobalObjects.ItemsRelationsDataAccess.GetRelations(directivesIds,
-					SmartCoreType.Directive.ItemId);
+				var directivesIds = _directive.ItemRelations.Select(d => d.RelationTypeId == WorkItemsRelationType.CalculationAffect ? d.FirstItemId : d.SecondItemId);
 
-				if (itemsRelations.Count > 0)
-				{
-					foreach (var directive in directives)
-					{
-						directive.ItemRelations.Clear();
-						directive.ItemRelations.AddRange(itemsRelations.Where(i =>
-							i.FirstItemId == directive.ItemId ||
-							i.SecondItemId ==
-							directive.ItemId)); //TODO:(Evgenii Babak)не использовать Where 
-					}
-				}
 
 				//Определение списка привязанных задач и компонентов
 				var bindedDirectives = 
-                    directives.Where(dd => dd.ItemRelations.IsAnyRelationWith(_directive))
+                    directives.Where(dd => directivesIds.Contains(dd.ItemId))
 					  .ToList();
 				_bindedItems.AddRange(bindedDirectives.ToArray());
 
@@ -206,6 +193,29 @@ namespace CAS.UI.UIControls.MaintananceProgram
 		{
 			if (listViewTasksForSelect.SelectedItems.Count == 0)
 				return;
+
+			if (listViewTasksForSelect.SelectedItems.Count > 1)
+			{
+				MessageBox.Show($"Please select one directive. Because you can only bind one directive.",
+					(string)new GlobalTermsProvider()["SystemName"],
+					MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+				return;
+			}
+
+			if (listViewBindedTasks.ItemsCount > 0)
+			{
+				MessageBox.Show($"Directive alredy binded for this MPD. If you want bind MPD please remove current binded directive.",
+					(string)new GlobalTermsProvider()["SystemName"],
+					MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+				return;
+			}
+
+			var itemRelations = GlobalObjects.ItemsRelationsDataAccess.CheckRelations(listViewTasksForSelect.SelectedItems.First(), _directive);
+			if (itemRelations.Count > 0)
+			{
+				ItemRelationHelper.ShowDialogIfItemHaveLinkWithAnotherItem($"AD {listViewTasksForSelect.SelectedItems.First().Title}","MPD","AD");
+				return;
+			}
 
 			if (_directive.IsFirst == null)
 			{
@@ -289,7 +299,9 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			foreach (var newItem in _newBindedItems)
 		    {
 			    var itemRelation = CreateItemRelation(newItem, selectedRelationType);
-			    GlobalObjects.CasEnvironment.NewKeeper.Save(itemRelation);
+			    itemRelation.AdditionalInformation.Ad = newItem.Title;
+			    itemRelation.AdditionalInformation.Mpd = _directive.Title;
+				GlobalObjects.CasEnvironment.NewKeeper.Save(itemRelation);
 		    }
 
 			//Удаление связанных задач
@@ -300,7 +312,9 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			    foreach (var itemsRelationToDelete in itemsRelationsToDelete)
 			    {
 				    itemsRelationToDelete.IsDeleted = true;
-				    GlobalObjects.CasEnvironment.NewKeeper.Delete(itemsRelationToDelete);
+				    itemsRelationToDelete.AdditionalInformation.Ad = "";
+				    itemsRelationToDelete.AdditionalInformation.Mpd = "";
+					GlobalObjects.CasEnvironment.NewKeeper.Delete(itemsRelationToDelete);
 
 				    _directive.ItemRelations.Remove(itemsRelationToDelete);
 				    detailDirective.ItemRelations.Remove(itemsRelationToDelete);

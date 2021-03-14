@@ -3910,7 +3910,8 @@ namespace SmartCore.DtoHelper
 				FirtsItemTypeId = itemsrel.FirtsItemTypeId,
 				SecondItemId = itemsrel.SecondItemId,
 				SecondItemTypeId = itemsrel.SecondItemTypeId,
-				RelationTypeId = (int)itemsrel.RelationTypeId
+				RelationTypeId = (int)itemsrel.RelationTypeId,
+				AdditionalInformationJSON = itemsrel.AdditionalInformationJSON
 			};
 		}
 
@@ -3926,7 +3927,8 @@ namespace SmartCore.DtoHelper
 				FirtsItemTypeId = itemsreldto.FirtsItemTypeId,
 				SecondItemId = itemsreldto.SecondItemId,
 				SecondItemTypeId = itemsreldto.SecondItemTypeId,
-				RelationTypeId = (WorkItemsRelationType)itemsreldto.RelationTypeId
+				RelationTypeId = (WorkItemsRelationType)itemsreldto.RelationTypeId,
+				AdditionalInformationJSON = itemsreldto.AdditionalInformationJSON
 			};
 		}
 

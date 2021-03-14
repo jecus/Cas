@@ -124,25 +124,10 @@ namespace CAS.UI.UIControls.MaintananceProgram
             {
 	            directives.AddRange(GlobalObjects.MaintenanceCore.GetMaintenanceDirectives(_currentAircraft));
 
-	            var directivesIds = directives.Select(d => d.ItemId);
-				var itemsRelations = GlobalObjects.ItemsRelationsDataAccess.GetRelations(directivesIds,
-					SmartCoreType.MaintenanceDirective.ItemId);
-
-				if (itemsRelations.Count > 0)
-				{
-					foreach (var directive in directives)
-					{
-						directive.ItemRelations.Clear();
-						directive.ItemRelations.AddRange(itemsRelations.Where(i =>
-							i.FirstItemId == directive.ItemId &&
-							i.SecondItemId ==
-							directive.ItemId)); //TODO:(Evgenii Babak)не использовать Where 
-					}
-				}
-
-				//Определение списка привязанных задач и компонентов
+	            var directivesIds = _directive.ItemRelations.Select(d => d.RelationTypeId == WorkItemsRelationType.CalculationAffect ? d.FirstItemId : d.SecondItemId);
+	            //Определение списка привязанных задач и компонентов
 				var bindedDirectives = 
-                    directives.Where(dd => dd.ItemRelations.IsAnyRelationWith(_directive))
+                    directives.Where(dd => directivesIds.Contains(dd.ItemId))
 					  .ToList();
 				_bindedItems.AddRange(bindedDirectives.ToArray());
 

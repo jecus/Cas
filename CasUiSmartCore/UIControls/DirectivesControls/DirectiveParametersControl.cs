@@ -1640,12 +1640,20 @@ namespace CAS.UI.UIControls.DirectivesControls
 				{
 					ChangeItemRelations(ref itemsRelation, currentRelatedItem, selectedRelationType);
 					if (itemsRelation != null)
+					{
+						itemsRelation.AdditionalInformation.Ad = _currentDirective.Title;
+						itemsRelation.AdditionalInformation.Mpd = currentRelatedItem.Title;
 						GlobalObjects.CasEnvironment.NewKeeper.Save(itemsRelation);
+					}
 				}
 				else
 				{
 					if (itemsRelation != null && itemsRelation.ItemId > 0)
+					{
+						itemsRelation.AdditionalInformation = null;
 						DeleteItemRelation(itemsRelation);
+						GlobalObjects.CasEnvironment.NewKeeper.Save(itemsRelation);
+					}
 				}
 			}
 			catch (InvalidOperationException)
@@ -1773,25 +1781,29 @@ namespace CAS.UI.UIControls.DirectivesControls
 			if (lookupComboboxMaintenanceDirective.SelectedItem != null)
 			{
 				var bindedItem = (MaintenanceDirective)lookupComboboxMaintenanceDirective.SelectedItem;
-				var itemRelations = GlobalObjects.ItemsRelationsDataAccess.GetRelations(bindedItem.ItemId, bindedItem.SmartCoreObjectType.ItemId);
+				var itemRelations = GlobalObjects.ItemsRelationsDataAccess.CheckRelations(bindedItem, _currentDirective);
 
 				if (_lastBindedMpd == null)
 					_lastBindedMpd = bindedItem;
 
 				bindedItem.ItemRelations.Clear();
 
-				if (itemRelations.Count > 0)
+				if (itemRelations.Count == 0)
 				{
 					//TODO:(Evgenii Babak) фикс очень кривой нужно вычислять WorkItemsRelationType с помощью метода расширения для коллекции relation - ов
 					bindedItem.ItemRelations.AddRange(itemRelations);
-
-					if (bindedItem.ItemRelations.IsAllRelationWith(SmartCoreType.Directive))
-					{
-						comboBoxRelationType.SelectedValue = ItemRelationHelper.ConvertBLItemRelationToUIITem(bindedItem.WorkItemsRelationType, !(bindedItem.IsFirst.HasValue && bindedItem.IsFirst.Value));
-					}
-					else ItemRelationHelper.ShowDialogIfItemHaveLinkWithAnotherItem($"MPD {bindedItem.MPDNumber}", "AD", "MPD");
+					comboBoxRelationType.SelectedValue = ItemRelationHelper.ConvertBLItemRelationToUIITem(
+						bindedItem.WorkItemsRelationType, !(bindedItem.IsFirst.HasValue && bindedItem.IsFirst.Value));
+				}
+				else if (!itemRelations.Any(i =>
+					i.FirstItemId == _currentDirective.ItemId || i.SecondItemId == _currentDirective.ItemId))
+				{
+					_lastBindedMpd = null;
+					lookupComboboxMaintenanceDirective.ResetSelected();
+					ItemRelationHelper.ShowDialogIfItemHaveLinkWithAnotherItem($"MPD {bindedItem.MPDNumber}", "AD", "MPD");
 				}
 			}
+
 		}
 		#endregion
 
