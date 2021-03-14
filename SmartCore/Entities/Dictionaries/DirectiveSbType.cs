@@ -17,6 +17,8 @@ namespace SmartCore.Entities.Dictionaries
 		public static DirectiveSbType Recommended = new DirectiveSbType(2, "Recommended", "Recommended");
 		public static DirectiveSbType Alert = new DirectiveSbType(3, "Alert", "Alert");
 		public static DirectiveSbType Optional = new DirectiveSbType(4, "Optional", "Optional");
+		public static DirectiveSbType Special = new DirectiveSbType(5, "Special", "Special");
+		public static DirectiveSbType Attention = new DirectiveSbType(6, "Attention", "Attention");
 		public static DirectiveSbType Unknown = new DirectiveSbType(-1, "N/A", "N/A");
 
 
