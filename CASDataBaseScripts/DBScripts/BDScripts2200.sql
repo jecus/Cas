@@ -51,3 +51,12 @@ if not exists ( select  *
 	alter table dbo.MaintenanceDirectives
 	add IsETOPS bit not null default 0
 GO
+
+if not exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('dbo.ItemsRelations')
+					and c.name = 'AdditionalInformationJSON' ) 
+
+	alter table dbo.ItemsRelations
+	add AdditionalInformationJSON nvarchar(MAX)
+GO

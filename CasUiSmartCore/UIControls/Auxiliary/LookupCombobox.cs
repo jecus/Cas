@@ -690,6 +690,11 @@ namespace CAS.UI.UIControls.Auxiliary
         }
         #endregion
 
+        public void ResetSelected()
+        {
+	        comboBoxReason.SelectedIndex = -1;
+        }
+
 
         #region private void BackgroundWorkerDoWork(object sender, DoWorkEventArgs e)
         private void BackgroundWorkerDoWork(object sender, DoWorkEventArgs e)

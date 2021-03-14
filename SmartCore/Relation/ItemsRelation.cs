@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using EntityCore.DTO.General;
+using Newtonsoft.Json;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
+using SmartCore.Entities.General.WorkPackage;
 
 namespace SmartCore.Relation
 {
@@ -70,6 +73,20 @@ namespace SmartCore.Relation
 
 		#endregion
 
+		[TableColumn("AdditionalInformationJSON")]
+		public string AdditionalInformationJSON
+		{
+			get => JsonConvert.SerializeObject(AdditionalInformation, Formatting.Indented, new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+			set => AdditionalInformation = JsonConvert.DeserializeObject<RelationInformation>(value ?? "", new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+		}
+
+		private RelationInformation _info;
+		public RelationInformation AdditionalInformation
+		{
+			get => _info ?? (_info = new RelationInformation());
+			set => _info = value;
+		}
+
 		#region public void FillParameters(IBaseEntityObject firstItem, IBaseEntityObject secondItem)
 
 		public void FillParameters(IBaseEntityObject firstItem, IBaseEntityObject secondItem)
@@ -114,5 +131,14 @@ namespace SmartCore.Relation
             SmartCoreObjectType=SmartCoreType.ItemsRelation;
         }
 
+	}
+
+	[JsonObject]
+	public class RelationInformation
+	{
+		[JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+		public string Mpd { get; set; }
+		[JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+		public string Ad { get; set; }
 	}
 }

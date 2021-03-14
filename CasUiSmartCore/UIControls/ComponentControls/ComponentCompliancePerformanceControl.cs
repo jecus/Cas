@@ -725,7 +725,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			if (lookupComboboxMaintenanceDirective.SelectedItem != null)
 			{
 				var bindedItem = (MaintenanceDirective)lookupComboboxMaintenanceDirective.SelectedItem;
-				var itemRelations = GlobalObjects.ItemsRelationsDataAccess.GetRelations(bindedItem.ItemId, bindedItem.SmartCoreObjectType.ItemId);
+				var itemRelations = GlobalObjects.ItemsRelationsDataAccess.CheckRelations(bindedItem, _currentComponentDirective);
 
 				if (_lastBindedMpd == null)
 					_lastBindedMpd = bindedItem;

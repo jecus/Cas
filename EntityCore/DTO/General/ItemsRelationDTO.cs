@@ -25,5 +25,8 @@ namespace EntityCore.DTO.General
 		
 		[Column("RelationTypeId")]
 		public int RelationTypeId { get; set; }
+
+		[Column("AdditionalInformationJSON")]
+		public string AdditionalInformationJSON { get; set; }
 	}
 }
