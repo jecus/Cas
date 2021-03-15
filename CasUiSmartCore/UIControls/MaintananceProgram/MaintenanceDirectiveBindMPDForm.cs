@@ -12,7 +12,6 @@ using MetroFramework.Forms;
 using SmartCore.Auxiliary.Extentions;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Directives;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Relation;
 

@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SmartCore.Aircrafts;
+﻿using SmartCore.Aircrafts;
 using SmartCore.Component;
 using SmartCore.DataAccesses.NonRoutines;
 using SmartCore.Kits;

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.MTOP;
 
 namespace SmartCore.Calculations.MTOP

@@ -1,7 +1,4 @@
-﻿using System.Diagnostics;
-using System.Linq;
-using EntityCore.DTO.General;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using EntityCore.DTO.General;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.Atlbs;
 using SmartCore.Management;

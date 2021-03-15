@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;

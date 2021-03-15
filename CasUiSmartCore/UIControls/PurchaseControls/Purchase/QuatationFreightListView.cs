@@ -1,13 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using Auxiliary;
-using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.NewGrid;
 using CASTerms;
-using SmartCore.Entities.General.Interfaces;
 using SmartCore.Purchase;
-using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {

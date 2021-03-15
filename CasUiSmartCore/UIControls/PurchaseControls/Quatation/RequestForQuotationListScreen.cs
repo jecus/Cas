@@ -17,14 +17,10 @@ using EntityCore.DTO.General;
 using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.Accessory;
 using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.Personnel;
 using SmartCore.Filters;
-using SmartCore.Mail;
 using SmartCore.Purchase;
 using SmartCore.Queries;
-using Telerik.WinControls;
 using Telerik.WinControls.UI;
 using Filter = EntityCore.Filter.Filter;
 

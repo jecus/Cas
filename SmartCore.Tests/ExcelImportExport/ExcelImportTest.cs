@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Data;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using EntityCore.DTO.Dictionaries;
-using Excel;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartCore.AircraftFlights;
 using SmartCore.Aircrafts;
 using SmartCore.Calculations;

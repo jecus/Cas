@@ -10,7 +10,6 @@ using System.Windows.Forms.Design;
 using AvControls;
 using CAS.UI.Helpers;
 using CAS.UI.Interfaces;
-using CAS.UI.UIControls.DirectivesControls;
 using CAS.UI.UIControls.KitControls;
 using CASTerms;
 using SmartCore.Auxiliary;

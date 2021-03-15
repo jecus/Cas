@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using AvControls;
 using AvControls.AvMultitabControl.Auxiliary;
@@ -17,7 +15,6 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.FiltersControls;
 using CAS.UI.UIControls.ForecastControls;
-using CAS.UI.UIControls.PurchaseControls;
 using CAS.UI.UIControls.StoresControls;
 using CAS.UI.UIControls.WorkPakage;
 using CASReports.Builders;

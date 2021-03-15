@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using CAS.UI.Helpers;
 using EntityCore.DTO.General;
 using EntityCore.Filter;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartCore.Aircrafts;
 using SmartCore.Component;
 using SmartCore.DataAccesses.ItemsRelation;

@@ -23,7 +23,6 @@ using SmartCore.Entities.General.Interfaces;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;
-using Telerik.WinControls;
 using Telerik.WinControls.UI;
 using Filter = EntityCore.Filter.Filter;
 

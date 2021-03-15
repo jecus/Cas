@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.ExcelExport;
@@ -12,7 +11,6 @@ using CAS.UI.UIControls.Auxiliary;
 using CAS.UI.UIControls.Auxiliary.Comparers;
 using CAS.UI.UIControls.DirectivesControls;
 using CAS.UI.UIControls.FiltersControls;
-using CAS.UI.UIControls.Users;
 using CASTerms;
 using EntityCore.DTO.General;
 using SmartCore.Calculations;

@@ -4,11 +4,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.AnimatedBackgroundWorker;
-using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using MetroFramework.Forms;
 using SmartCore.Calculations;
-using SmartCore.Entities.Collections;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 

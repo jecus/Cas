@@ -15,7 +15,6 @@ using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Atlbs;
-using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls

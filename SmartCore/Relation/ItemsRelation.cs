@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reflection;
 using EntityCore.DTO.General;
 using Newtonsoft.Json;
@@ -7,7 +6,6 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Attributes;
 using SmartCore.Entities.General.Interfaces;
-using SmartCore.Entities.General.WorkPackage;
 
 namespace SmartCore.Relation
 {

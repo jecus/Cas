@@ -16,7 +16,6 @@ using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;
-using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.WorkPakage

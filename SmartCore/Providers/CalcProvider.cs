@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using CAS.UI.Helpers;
-using EntityCore.Filter;
 using SmartCore.Calculations;
 
 namespace SmartCore.Providers

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows.Forms;
 using CAS.UI.UIControls.NewGrid;
 using SmartCore.Purchase;

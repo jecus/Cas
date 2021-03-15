@@ -19,7 +19,6 @@ using SmartCore.Entities.General;
 using SmartCore.Entities.General.WorkPackage;
 using SmartCore.Filters;
 using SmartCore.Purchase;
-using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.SupplierControls

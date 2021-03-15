@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using CAS.UI.UIControls.NewGrid;
-using CASTerms;
 using SmartCore.Purchase;
 
 namespace CAS.UI.UIControls.PurchaseControls.Purchase

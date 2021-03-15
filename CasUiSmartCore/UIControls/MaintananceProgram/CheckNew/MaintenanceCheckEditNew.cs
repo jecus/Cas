@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CAS.UI.UIControls.KitControls;
 using CASTerms;
 using EntityCore.DTO.General;
 using MetroFramework.Forms;
-using SmartCore.Calculations;
-using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 

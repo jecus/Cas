@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using CAS.UI.UIControls.Auxiliary;
 using CASTerms;
 using MetroFramework.Forms;
-using SmartCore.Entities.General;
 using SmartCore.Purchase;
-using Telerik.WinControls.UI;
 
 namespace CAS.UI.UIControls.PurchaseControls.Purchase
 {

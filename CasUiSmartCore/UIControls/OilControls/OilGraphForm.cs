@@ -5,11 +5,9 @@ using System.Windows.Forms;
 using CAS.UI.UIControls.OilControls.Model;
 using MetroFramework.Controls;
 using MetroFramework.Forms;
-using SmartCore.Auxiliary;
 using SmartCore.Entities.General.Accessory;
 using Telerik.Charting;
 using Telerik.WinControls.UI;
-using DateTimeExtensions = System.DateTimeExtensions;
 
 namespace CAS.UI.UIControls.OilControls
 {

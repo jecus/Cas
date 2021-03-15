@@ -1,13 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using Auxiliary;
 using EntityCore.DTO.General;
 using EntityCore.Filter;
-using Excel;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartCore.Aircrafts;
 using SmartCore.Component;
 using SmartCore.DataAccesses.ItemsRelation;

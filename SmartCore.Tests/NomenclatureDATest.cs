@@ -1,7 +1,6 @@
 ﻿
 using EntityCore.DTO.Dictionaries;
 using EntityCore.Filter;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartCore.Entities.Dictionaries;
 
 namespace SmartCore.Tests

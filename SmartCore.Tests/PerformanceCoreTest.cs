@@ -1,7 +1,6 @@
 ﻿
 using EntityCore.DTO.General;
 using EntityCore.Filter;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Management;

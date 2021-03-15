@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows.Forms;
 using CASTerms;
 using MetroFramework.Forms;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Directives;
 
