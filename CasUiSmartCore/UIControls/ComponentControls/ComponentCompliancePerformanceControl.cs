@@ -560,12 +560,17 @@ namespace CAS.UI.UIControls.ComponentControls
 				{
 					ChangeItemRelations(ref itemsRelation, currentRelatedItem, selectedRelationType);
 					if (itemsRelation != null)
+					{
+						itemsRelation.AdditionalInformation.Component = _currentComponentDirective.PartNumber;
+						itemsRelation.AdditionalInformation.Mpd = currentRelatedItem.TaskCardNumber;
 						GlobalObjects.CasEnvironment.NewKeeper.Save(itemsRelation);
+					}
 				}
 				else
 				{
 					if (itemsRelation != null && itemsRelation.ItemId > 0)
 					{
+						itemsRelation.AdditionalInformation = null;
 						DeleteItemRelation(itemsRelation);
 						GlobalObjects.CasEnvironment.NewKeeper.Save(itemsRelation);
 					}
@@ -598,11 +603,14 @@ namespace CAS.UI.UIControls.ComponentControls
 				if (currentRelatedItem != null)
 				{
 					ChangeItemRelations(ref itemsRelation, currentRelatedItem, selectedRelationType);
+					itemsRelation.AdditionalInformation.Component = _currentComponentDirective.PartNumber;
+					itemsRelation.AdditionalInformation.Mpd = currentRelatedItem.TaskCardNumber;
 				}
 				else
 				{
 					if (itemsRelation != null && itemsRelation.ItemId > 0)
 					{
+						itemsRelation.AdditionalInformation = null;
 						DeleteItemRelation(itemsRelation);
 						GlobalObjects.CasEnvironment.NewKeeper.Save(itemsRelation);
 					}

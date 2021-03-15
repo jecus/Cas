@@ -312,8 +312,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			    foreach (var itemsRelationToDelete in itemsRelationsToDelete)
 			    {
 				    itemsRelationToDelete.IsDeleted = true;
-				    itemsRelationToDelete.AdditionalInformation.Ad = "";
-				    itemsRelationToDelete.AdditionalInformation.Mpd = "";
+				    itemsRelationToDelete.AdditionalInformation = null;
 					GlobalObjects.CasEnvironment.NewKeeper.Delete(itemsRelationToDelete);
 
 				    _directive.ItemRelations.Remove(itemsRelationToDelete);

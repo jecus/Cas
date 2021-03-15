@@ -550,6 +550,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 				    }
 
 				    var itemRelation = CreateItemRelation(detailDirective, selectedRelationType);
+				    itemRelation.AdditionalInformation.Component = detailDirective.PartNumber;
+				    itemRelation.AdditionalInformation.Mpd = _maintenanceDirective.TaskCardNumber;
 					GlobalObjects.CasEnvironment.NewKeeper.Save(itemRelation);
 
 					_maintenanceDirective.ItemRelations.Add(itemRelation);
@@ -565,7 +567,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			    foreach (var itemsRelationToDelete in itemsRelationsToDelete)
 			    {
 				    itemsRelationToDelete.IsDeleted = true;
-				    GlobalObjects.CasEnvironment.NewKeeper.Delete(itemsRelationToDelete);
+				    itemsRelationToDelete.AdditionalInformation = null;
+					GlobalObjects.CasEnvironment.NewKeeper.Delete(itemsRelationToDelete);
 
 				    _maintenanceDirective.ItemRelations.Remove(itemsRelationToDelete);
 				    detailDirective.ItemRelations.Remove(itemsRelationToDelete);
