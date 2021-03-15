@@ -61,6 +61,23 @@ if not exists ( select  *
 	add AdditionalInformationJSON nvarchar(MAX)
 GO
 
+delete from dbo.ItemsRelations  where IsDeleted = 1
+update dbo.ItemsRelations set AdditionalInformationJSON = '{}' where FirtsItemTypeId = 2 or SecondItemTypeId = 2
+
+update  i set AdditionalInformationJSON = JSON_MODIFY(JSON_MODIFY(i.AdditionalInformationJSON, '$.Mpd', mpd.TaskCardNumber), '$.Component', c.PartNumber) 
+from dbo.ItemsRelations i
+inner join dbo.ComponentDirectives cd on cd.ItemId = i.FirstItemId 
+inner join dbo.Components c on c.ItemId = cd.ComponentId
+inner join dbo.MaintenanceDirectives mpd on mpd.ItemId = i.SecondItemId
+where i.FirtsItemTypeId = 2
+
+update  i set AdditionalInformationJSON = JSON_MODIFY(JSON_MODIFY(i.AdditionalInformationJSON, '$.Mpd', mpd.TaskCardNumber), '$.Component', c.PartNumber) 
+from dbo.ItemsRelations i
+inner join dbo.ComponentDirectives cd on cd.ItemId = i.SecondItemId 
+inner join dbo.Components c on c.ItemId = cd.ComponentId
+inner join dbo.MaintenanceDirectives mpd on mpd.ItemId = i.FirstItemId
+where i.SecondItemTypeId = 2
+
 if not exists ( select  *
 			from    sys.columns c                        
 			where   c.object_id = object_id('dbo.Components')

@@ -136,7 +136,11 @@ namespace SmartCore.Relation
 	{
 		[JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
 		public string Mpd { get; set; }
+
 		[JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
 		public string Ad { get; set; }
+
+		[JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+		public string Component { get; set; }
 	}
 }
