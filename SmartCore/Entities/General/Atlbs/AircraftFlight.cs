@@ -961,12 +961,16 @@ namespace SmartCore.Entities.General.Atlbs
 
 		#region public override BaseEntityObject GetCopyUnsaved()
 
-		public override BaseEntityObject GetCopyUnsaved()
+		public override BaseEntityObject GetCopyUnsaved(bool marked = true)
 		{
 			var aircraftFlight = (AircraftFlight)MemberwiseClone();
 			aircraftFlight.ItemId = -1;
-			aircraftFlight.PageNo += " Copy";
-			aircraftFlight.FlightNo += " Copy";
+			if (marked)
+			{
+				aircraftFlight.PageNo += " Copy";
+				aircraftFlight.FlightNo += " Copy";
+			}
+
 			aircraftFlight.UnSetEvents();
 
 			return aircraftFlight;

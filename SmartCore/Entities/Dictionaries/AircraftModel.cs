@@ -120,11 +120,14 @@ namespace SmartCore.Entities.Dictionaries
 		/*
          * Методы
          */
-		public new AircraftModel GetCopyUnsaved()
+		public new AircraftModel GetCopyUnsaved(bool marked = true)
 	    {
 		    var model = (AircraftModel)MemberwiseClone();
 		    model.ItemId = -1;
-		    model.Name += " Copy";
+
+			if(marked)
+				model.Name += " Copy";
+
 		    model.UnSetEvents();
 
 		    model.SupplierRelations = new CommonCollection<KitSuppliersRelation>();

@@ -1956,22 +1956,23 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public new Component GetCopyUnsaved()
 		//TODO(Evenii Babak):Âûÿñíèòü ïî÷åìó new âìåñòî override
-		public new Component GetCopyUnsaved()
+		public new Component GetCopyUnsaved(bool marked = true)
 		{
-			return GetCopyUnsaved(-1);
+			return GetCopyUnsaved(-1, marked);
 		}
 
 		#endregion
 
 		#region public Component GetCopyUnsaved(int componentId)
 
-		public Component GetCopyUnsaved(int componentId)
+		public Component GetCopyUnsaved(int componentId, bool marked = true)
 		{
 			var component = (Component)MemberwiseClone();
 			component.ItemId = componentId;
 			component.UnSetEvents();
 
-			component.PartNumber += " Copy";
+			if(marked)
+				component.PartNumber += " Copy";
 
 			component.Threshold = new ComponentThreshold(Threshold);
 
@@ -1985,7 +1986,7 @@ namespace SmartCore.Entities.General.Accessory
 			component._componentLLPDataCollection = new ComponentLLPDataCollection();
 			foreach (var componentLLPCategoryData in LLPData)
 			{
-				var newObject = componentLLPCategoryData.GetCopyUnsaved();
+				var newObject = componentLLPCategoryData.GetCopyUnsaved(marked);
 				newObject.ComponentId = componentLLPCategoryData.ItemId;
 				component._componentLLPDataCollection.Add(newObject);
 			}
@@ -1993,7 +1994,7 @@ namespace SmartCore.Entities.General.Accessory
 			component._supplierRelations = new CommonCollection<KitSuppliersRelation>();
 			foreach (var ksr in component.SupplierRelations)
 			{
-				var newObject = ksr.GetCopyUnsaved();
+				var newObject = ksr.GetCopyUnsaved(marked);
 				newObject.KitId = component.ItemId;
 				component._supplierRelations.Add(newObject);
 			}
@@ -2001,7 +2002,7 @@ namespace SmartCore.Entities.General.Accessory
 			component._kits = new CommonCollection<AccessoryRequired>();
 			foreach (var accessory in Kits)
 			{
-				var newObject = accessory.GetCopyUnsaved();
+				var newObject = accessory.GetCopyUnsaved(marked);
 				newObject.ParentId = component.ItemId;
 				component._kits.Add(newObject);
 
@@ -2010,7 +2011,7 @@ namespace SmartCore.Entities.General.Accessory
 			component._actualStates = new ActualStateRecordCollection();
 			foreach (var ast in ActualStateRecords)
 			{
-				var newObject = ast.GetCopyUnsaved();
+				var newObject = ast.GetCopyUnsaved(marked);
 				newObject.ComponentId = component.ItemId;
 				newObject.ParentComponent = component;
 				component._actualStates.Add(newObject);
@@ -2019,7 +2020,7 @@ namespace SmartCore.Entities.General.Accessory
 			component._transferRecords = new TransferRecordCollection();
 			foreach (var transferRecord in TransferRecords)
 			{
-				var newObject = transferRecord.GetCopyUnsaved();
+				var newObject = transferRecord.GetCopyUnsaved(marked);
 				newObject.ParentComponent = component;
 				component._transferRecords.Add(newObject);
 			}
@@ -2027,7 +2028,7 @@ namespace SmartCore.Entities.General.Accessory
 			component._componentDirectives = new CommonCollection<ComponentDirective>();
 			foreach (var componentDirective in ComponentDirectives)
 			{
-				var newObject = componentDirective.GetCopyUnsaved();
+				var newObject = componentDirective.GetCopyUnsaved(marked);
 				newObject.ComponentId = component.ItemId;
 				newObject.ParentComponent = component;
 				component._componentDirectives.Add(newObject);
@@ -2036,7 +2037,7 @@ namespace SmartCore.Entities.General.Accessory
 			component._ñhangeLLPCategoryRecords = new BaseRecordCollection<ComponentLLPCategoryChangeRecord>();
 			foreach (var componentLLPCategoryChangeRecord in ChangeLLPCategoryRecords)
 			{
-				var newObject = componentLLPCategoryChangeRecord.GetCopyUnsaved();
+				var newObject = componentLLPCategoryChangeRecord.GetCopyUnsaved(marked);
 				newObject.ParentComponent = component;
 				newObject.ParentId = component.ItemId;
 				component._ñhangeLLPCategoryRecords.Add(newObject);
@@ -2046,7 +2047,7 @@ namespace SmartCore.Entities.General.Accessory
 			component._files = new CommonCollection<ItemFileLink>();
 			foreach (var file in Files)
 			{
-				var newObject = file.GetCopyUnsaved();
+				var newObject = file.GetCopyUnsaved(marked);
 				component._files.Add(newObject);
 			}
 

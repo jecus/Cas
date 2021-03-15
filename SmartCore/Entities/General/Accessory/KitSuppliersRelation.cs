@@ -517,7 +517,7 @@ namespace SmartCore.Entities.General.Accessory
         }
         #endregion
 
-        public new KitSuppliersRelation GetCopyUnsaved()
+        public new KitSuppliersRelation GetCopyUnsaved(bool marked = true)
         {
             KitSuppliersRelation kitSuppliers = (KitSuppliersRelation)MemberwiseClone();
             kitSuppliers.ItemId = -1;

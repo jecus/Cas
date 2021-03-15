@@ -636,17 +636,18 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public override BaseEntityObject GetCopyUnsaved
 
-		public new Product GetCopyUnsaved()
+		public new Product GetCopyUnsaved(bool marked = true)
 		{
 			Product product = (Product) MemberwiseClone();
 			product.ItemId = -1;
-			product.Name += " Copy";
+			if(marked)
+				product.Name += " Copy";
 			product.UnSetEvents();
 
 			product.SupplierRelations = new CommonCollection<KitSuppliersRelation>();
 			foreach (KitSuppliersRelation kitSuppliers in SupplierRelations)
 			{
-				KitSuppliersRelation newObject = kitSuppliers.GetCopyUnsaved();
+				KitSuppliersRelation newObject = kitSuppliers.GetCopyUnsaved(marked);
 				product.SupplierRelations.Add(newObject);
 			}
 

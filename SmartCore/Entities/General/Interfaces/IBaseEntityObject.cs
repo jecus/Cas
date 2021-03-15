@@ -41,7 +41,7 @@ namespace SmartCore.Entities.General.Interfaces
 		/// <br/>с ItemId равным -1
 		/// </summary>
 		/// <returns></returns>
-		IBaseEntityObject GetCopyUnsaved();
+		IBaseEntityObject GetCopyUnsaved(bool marked = true);
         #endregion
     }
 }

@@ -185,11 +185,12 @@ namespace SmartCore.Entities.Dictionaries
 		//}
 		#endregion
 
-	    public new ComponentModel GetCopyUnsaved()
+	    public new ComponentModel GetCopyUnsaved(bool marked = true)
 	    {
 		    ComponentModel product = (ComponentModel)MemberwiseClone();
 		    product.ItemId = -1;
-		    product.Name += " Copy";
+			if(marked)
+				product.Name += " Copy";
 		    product.UnSetEvents();
 
 		    product.SupplierRelations = new CommonCollection<KitSuppliersRelation>();

@@ -1492,17 +1492,18 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 
 		#region public new MaintenanceDirective GetCopyUnsaved()
 
-		public new MaintenanceDirective GetCopyUnsaved()
+		public new MaintenanceDirective GetCopyUnsaved(bool marked = true)
 		{
 			var maintenanceDirective = (MaintenanceDirective) MemberwiseClone();
 			maintenanceDirective.ItemId = -1;
 			maintenanceDirective.UnSetEvents();
 
-			maintenanceDirective.TaskNumberCheck += " Copy";
+			if(marked)
+				maintenanceDirective.TaskNumberCheck += " Copy";
 
 			if (JobCard != null)
 			{
-				maintenanceDirective.JobCard = JobCard.GetCopyUnsaved();
+				maintenanceDirective.JobCard = JobCard.GetCopyUnsaved(marked);
 				JobCard.Parent = maintenanceDirective;
 			}
 
@@ -1511,7 +1512,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 			maintenanceDirective._performanceRecords = new BaseRecordCollection<DirectiveRecord>();
 			foreach (var directiveRecord in PerformanceRecords)
 			{
-				var newObject = directiveRecord.GetCopyUnsaved();
+				var newObject = directiveRecord.GetCopyUnsaved(marked);
 				newObject.Parent = maintenanceDirective;
 				maintenanceDirective._performanceRecords.Add(newObject);
 			}
@@ -1519,7 +1520,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 			maintenanceDirective.CategoriesRecords = new CommonCollection<CategoryRecord>();
 			foreach (var categoryRecord in CategoriesRecords)
 			{
-				var newObject = categoryRecord.GetCopyUnsaved();
+				var newObject = categoryRecord.GetCopyUnsaved(marked);
 				newObject.Parent = maintenanceDirective;
 				maintenanceDirective.CategoriesRecords.Add(newObject);
 			}
@@ -1527,14 +1528,14 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 			maintenanceDirective._files = new CommonCollection<ItemFileLink>();
 			foreach (var file in Files)
 			{
-				var newObject = file.GetCopyUnsaved();
+				var newObject = file.GetCopyUnsaved(marked);
 				maintenanceDirective._files.Add(newObject);
 			}
 
 			maintenanceDirective._kits = new CommonCollection<AccessoryRequired>();
 			foreach (var kit in Kits)
 			{
-				var newObject = kit.GetCopyUnsaved();
+				var newObject = kit.GetCopyUnsaved(marked);
 				maintenanceDirective._kits.Add(newObject);
 			}
 

@@ -518,7 +518,7 @@ namespace SmartCore.Entities.General
         /// <br/>с ItemId равным -1
         /// </summary>
         /// <returns></returns>
-        public new DirectiveRecord GetCopyUnsaved()
+        public new DirectiveRecord GetCopyUnsaved(bool marked = true)
         {
             DirectiveRecord directiveRecord = (DirectiveRecord)MemberwiseClone();
             

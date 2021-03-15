@@ -219,7 +219,7 @@ namespace SmartCore.Entities.General
         }
         #endregion
 
-        public new ActualStateRecord GetCopyUnsaved()
+        public new ActualStateRecord GetCopyUnsaved(bool marked = true)
         {
             ActualStateRecord asr = (ActualStateRecord) MemberwiseClone();
             asr.ItemId = -1;

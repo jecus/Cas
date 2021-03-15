@@ -237,7 +237,7 @@ namespace SmartCore.Purchase
 
 		#endregion
 
-		public new PurchaseOrder GetCopyUnsaved()
+		public new PurchaseOrder GetCopyUnsaved(bool marked = true)
 		{
 			var clone = (PurchaseOrder)MemberwiseClone();
 			clone.ItemId = -1;

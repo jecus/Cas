@@ -1090,17 +1090,20 @@ namespace SmartCore.Entities.General.Directives
 		/// <br/>с ItemId равным -1
 		/// </summary>
 		/// <returns></returns>
-		public new Directive GetCopyUnsaved()
+		public new Directive GetCopyUnsaved(bool marked = true)
 		{
 			var directive = (Directive)MemberwiseClone();
 			directive.ItemId = -1;
 			directive.UnSetEvents();
 
-			if (directive.Title != "N/A")
-				directive.Title += " Copy";
-			else if (!string.IsNullOrEmpty(directive.ServiceBulletinNo))
-				directive.ServiceBulletinNo += " Copy";
-			else directive.EngineeringOrders += " Copy";
+			if (marked)
+			{
+				if (directive.Title != "N/A")
+					directive.Title += " Copy";
+				else if (!string.IsNullOrEmpty(directive.ServiceBulletinNo))
+					directive.ServiceBulletinNo += " Copy";
+				else directive.EngineeringOrders += " Copy";
+			}
 
 			directive.Threshold = new DirectiveThreshold(Threshold.ToBinary(),ThrldTypeCond);
 			directive.ForecastLifelength = new Lifelength(ForecastLifelength);
@@ -1118,7 +1121,7 @@ namespace SmartCore.Entities.General.Directives
 			directive._aircraftWorkerCategories = new CommonCollection<CategoryRecord>();
 			foreach (var categoryRecord in CategoriesRecords)
 			{
-				var newObject = categoryRecord.GetCopyUnsaved();
+				var newObject = categoryRecord.GetCopyUnsaved(marked);
 				newObject.Parent = directive;
 				directive._aircraftWorkerCategories.Add(newObject);
 			}
@@ -1126,7 +1129,7 @@ namespace SmartCore.Entities.General.Directives
 			directive.NextPerformances = new List<NextPerformance>();
 			foreach (var nextPerformance in NextPerformances)
 			{
-				var newObject = nextPerformance.GetCopyUnsaved();
+				var newObject = nextPerformance.GetCopyUnsaved(marked);
 				newObject.Parent = directive;
 				directive.NextPerformances.Add(newObject);
 			}
@@ -1134,7 +1137,7 @@ namespace SmartCore.Entities.General.Directives
 			directive._kits = new CommonCollection<AccessoryRequired>();
 			foreach (var accessoryRequired in Kits)
 			{
-				var newObject = accessoryRequired.GetCopyUnsaved();
+				var newObject = accessoryRequired.GetCopyUnsaved(marked);
 				newObject.ParentObject = directive;
 				directive._kits.Add(newObject);
 			}
@@ -1142,7 +1145,7 @@ namespace SmartCore.Entities.General.Directives
 			directive._files = new CommonCollection<ItemFileLink>();
 			foreach (var file in Files)
 			{
-				var newObject = file.GetCopyUnsaved();
+				var newObject = file.GetCopyUnsaved(marked);
 				directive._files.Add(newObject);
 			}
 

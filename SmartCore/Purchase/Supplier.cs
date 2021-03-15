@@ -305,11 +305,12 @@ namespace SmartCore.Purchase
 
 		#region public override BaseEntityObject GetCopyUnsaved()
 
-		public override BaseEntityObject GetCopyUnsaved()
+		public override BaseEntityObject GetCopyUnsaved(bool marked = true)
 		{
 			var supplier = (Supplier)MemberwiseClone();
 			supplier.ItemId = -1;
-			supplier.Name += " Copy";
+			if (marked)
+				supplier.Name += " Copy";
 			supplier.UnSetEvents();
 
 			return supplier;

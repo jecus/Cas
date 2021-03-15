@@ -212,7 +212,7 @@ namespace SmartCore.Entities.General.Accessory
         }
         #endregion
 
-        public new ComponentLLPCategoryData GetCopyUnsaved()
+        public new ComponentLLPCategoryData GetCopyUnsaved(bool marked = true)
         {
             ComponentLLPCategoryData componentLLP = (ComponentLLPCategoryData) MemberwiseClone();
             componentLLP.ItemId = -1;

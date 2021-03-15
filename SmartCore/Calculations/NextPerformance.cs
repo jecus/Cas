@@ -641,7 +641,7 @@ namespace SmartCore.Calculations
 		/// <br/>с ItemId равным -1
 		/// </summary>
 		/// <returns></returns>
-		public new NextPerformance GetCopyUnsaved()
+		public new NextPerformance GetCopyUnsaved(bool marked = true)
 		{
 			NextPerformance newObject = (NextPerformance)MemberwiseClone();
 			newObject.ItemId = -1;

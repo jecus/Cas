@@ -44,6 +44,7 @@ namespace CAS.UI.UIControls.NewGrid
 
 		private RadDropDownMenu _customMenu;
 		private RadMenuItem _toolStripMenuItemCopy;
+		private RadMenuItem _toolStripMenuItemCopyWithoutMark;
 		private RadMenuItem _toolStripMenuItemPaste;
 		private RadMenuItem _toolStripMenuItemDelete;
 		private RadMenuSeparatorItem _separator;
@@ -188,6 +189,7 @@ namespace CAS.UI.UIControls.NewGrid
 		public void DisableContectMenu()
 		{
 			_customMenu.Items.Remove(_toolStripMenuItemCopy);
+			_customMenu.Items.Remove(_toolStripMenuItemCopyWithoutMark);
 			_customMenu.Items.Remove(_toolStripMenuItemDelete);
 			_customMenu.Items.Remove(_toolStripMenuItemPaste);
 			_customMenu.Items.Remove(_separator);
@@ -205,6 +207,8 @@ namespace CAS.UI.UIControls.NewGrid
 			
 			_customMenu.Items.AddRange(_toolStripMenuItemDelete,
 				new RadMenuSeparatorItem(),
+				new RadMenuSeparatorItem(),
+				_toolStripMenuItemCopyWithoutMark,
 				_toolStripMenuItemCopy,
 				_toolStripMenuItemPaste
 			);
@@ -216,6 +220,7 @@ namespace CAS.UI.UIControls.NewGrid
 			_toolStripMenuItemDelete = new RadMenuItem();
 			_separator = new RadMenuSeparatorItem();
 			_toolStripMenuItemCopy = new RadMenuItem();
+			_toolStripMenuItemCopyWithoutMark = new RadMenuItem();
 			_toolStripMenuItemPaste = new RadMenuItem();
 
 			// 
@@ -229,6 +234,11 @@ namespace CAS.UI.UIControls.NewGrid
 			// 
 			_toolStripMenuItemCopy.Text = "Copy";
 			_toolStripMenuItemCopy.Click += CopyItemsClick;
+			// 
+			// toolStripMenuItemCopy
+			// 
+			_toolStripMenuItemCopyWithoutMark.Text = "Copy without mark";
+			_toolStripMenuItemCopyWithoutMark.Click += CopyWithoutMarkItemsClick;
 
 			// 
 			// toolStripMenuItemPaste
@@ -239,6 +249,7 @@ namespace CAS.UI.UIControls.NewGrid
 			_customMenu.Items.AddRange(new RadMenuSeparatorItem(),
 				_toolStripMenuItemDelete,
 				_separator,
+				_toolStripMenuItemCopyWithoutMark,
 				_toolStripMenuItemCopy,
 				_toolStripMenuItemPaste
 			);
@@ -252,6 +263,11 @@ namespace CAS.UI.UIControls.NewGrid
 		public virtual void CopyItemsClick(object sender, EventArgs e)
 		{
 			CopyToClipboard();
+		}
+		
+		public virtual void CopyWithoutMarkItemsClick(object sender, EventArgs e)
+		{
+			CopyToClipboard(false);
 		}
 
 		public virtual void ButtonDeleteClick(object sender, EventArgs e)
@@ -1005,7 +1021,7 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#region Copy/Paste
 
-		private void CopyToClipboard()
+		private void CopyToClipboard(bool marked = true)
 		{
 			// регистрация формата данных либо получаем его, если он уже зарегистрирован
 			try
@@ -1018,17 +1034,16 @@ namespace CAS.UI.UIControls.NewGrid
 				{
 					if (obj is Component newComponent)
 					{
-						list.Add(newComponent.GetCopyUnsaved() as T);
+						list.Add(newComponent.GetCopyUnsaved(marked) as T);
 					}
 					else
 					{
 						var method = typeof(T).GetMethods().FirstOrDefault(i => i.Name == "GetCopyUnsaved");
-						list.Add((T)method.Invoke(obj, null));
+						list.Add((T)method.Invoke(obj, new object[]{marked}));
 					}
 				}
 
-					
-
+				
 				//todo:(EvgeniiBabak) Нужен другой способ проверки сереализуемости объекта
 				using (MemoryStream mem = new MemoryStream())
 				{

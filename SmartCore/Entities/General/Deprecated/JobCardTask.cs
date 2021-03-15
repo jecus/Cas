@@ -146,7 +146,7 @@ namespace SmartCore.Entities.General.Deprecated
 
         #region public new JobCardTask GetCopyUnsaved()
 
-        public new JobCardTask GetCopyUnsaved()
+        public new JobCardTask GetCopyUnsaved(bool marked = true)
         {
             JobCardTask jobCardTask = (JobCardTask) MemberwiseClone();
             jobCardTask.ItemId = -1;
@@ -155,7 +155,7 @@ namespace SmartCore.Entities.General.Deprecated
             jobCardTask.Tasks=new CommonCollection<JobCardTask>();
             foreach (JobCardTask jobCardT in Tasks)
             {
-                JobCardTask newObject = jobCardT.GetCopyUnsaved();
+                JobCardTask newObject = jobCardT.GetCopyUnsaved(marked);
                 jobCardTask.Tasks.Add(newObject);
             }
 

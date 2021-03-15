@@ -761,7 +761,7 @@ namespace SmartCore.Entities.General
 		}
 		#endregion
 
-		public new TransferRecord GetCopyUnsaved()
+		public new TransferRecord GetCopyUnsaved(bool marked = true)
 		{
 			TransferRecord transferRecord = (TransferRecord) MemberwiseClone();
 			transferRecord.ItemId = -1;

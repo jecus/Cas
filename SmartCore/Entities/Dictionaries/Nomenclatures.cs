@@ -145,11 +145,12 @@ namespace SmartCore.Entities.Dictionaries
 
 		#region public override BaseEntityObject GetCopyUnsaved()
 
-		public override BaseEntityObject GetCopyUnsaved()
+		public override BaseEntityObject GetCopyUnsaved(bool marked = true)
 		{
 			var nomenclatures = (Nomenclatures)MemberwiseClone();
 			nomenclatures.ItemId = -1;
-			nomenclatures.FullName += " Copy";
+			if(marked)
+				nomenclatures.FullName += " Copy";
 			nomenclatures.UnSetEvents();
 
 			return nomenclatures;

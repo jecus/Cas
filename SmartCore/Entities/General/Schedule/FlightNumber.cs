@@ -726,40 +726,43 @@ namespace SmartCore.Entities.General.Schedule
 
 		#region public FlightNumber GetCopyUnsaved()
 
-		public new FlightNumber GetCopyUnsaved()
+		public new FlightNumber GetCopyUnsaved(bool marked = true)
 		{
 			var flightNumber = (FlightNumber)MemberwiseClone();
 			flightNumber.ItemId = -1;
 			flightNumber.UnSetEvents();
 
-			flightNumber.FlightNo.FullName += " Copy";
-			flightNumber.Description += " Copy";
+			if (marked)
+			{
+				flightNumber.FlightNo.FullName += " Copy";
+				flightNumber.Description += " Copy";
+			}
 
 			flightNumber._flightNumberPeriod = new CommonCollection<FlightNumberPeriod>();
 			foreach (var period in FlightNumberPeriod)
 			{
-				var newObject = period.GetCopyUnsaved();
+				var newObject = period.GetCopyUnsaved(marked);
 				flightNumber._flightNumberPeriod.Add(newObject);
 			}
 
 			flightNumber._aircraftModels = new CommonCollection<FlightNumberAircraftModelRelation>();
 			foreach (var period in AircraftModels)
 			{
-				var newObject = period.GetCopyUnsaved();
+				var newObject = period.GetCopyUnsaved(marked);
 				flightNumber._aircraftModels.Add(newObject);
 			}
 
 			flightNumber._alternateAirports = new CommonCollection<FlightNumberAirportRelation>();
 			foreach (var period in AlternateAirports)
 			{
-				var newObject = period.GetCopyUnsaved();
+				var newObject = period.GetCopyUnsaved(marked);
 				flightNumber._alternateAirports.Add(newObject);
 			}
 
 			flightNumber._flightNumberCrewRecords = new CommonCollection<FlightNumberCrewRecord>();
 			foreach (var period in FlightNumberCrewRecords)
 			{
-				var newObject = period.GetCopyUnsaved();
+				var newObject = period.GetCopyUnsaved(marked);
 				flightNumber._flightNumberCrewRecords.Add(newObject);
 			}
 

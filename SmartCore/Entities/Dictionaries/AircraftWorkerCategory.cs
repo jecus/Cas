@@ -289,7 +289,7 @@ namespace SmartCore.Entities.Dictionaries
         /// <br/>с ItemId равным -1
         /// </summary>
         /// <returns></returns>
-        public new CategoryRecord GetCopyUnsaved()
+        public new CategoryRecord GetCopyUnsaved(bool marked = true)
         {
             CategoryRecord categoryRecord = (CategoryRecord)MemberwiseClone();
             categoryRecord.ItemId = -1;

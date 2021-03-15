@@ -87,7 +87,7 @@ namespace SmartCore.Files
 
 		#region public new ItemFileLink GetCopyUnsaved()
 
-		public new ItemFileLink GetCopyUnsaved()
+		public new ItemFileLink GetCopyUnsaved(bool marked = true)
 		{
 			var itemFileLink = (ItemFileLink) MemberwiseClone();
 			itemFileLink.ItemId = -1;

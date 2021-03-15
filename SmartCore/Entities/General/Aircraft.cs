@@ -441,11 +441,12 @@ namespace SmartCore.Entities.General
 	    }
 
 
-	    public new Aircraft GetCopyUnsaved()
+	    public new Aircraft GetCopyUnsaved(bool marked = true)
 	    {
 		    var aircraft = (Aircraft) MemberwiseClone();
 		    aircraft.ItemId = -1;
-		    aircraft.RegistrationNumber += " Copy";
+            if(marked)
+				aircraft.RegistrationNumber += " Copy";
 		    aircraft.UnSetEvents();
 
 		    return aircraft;

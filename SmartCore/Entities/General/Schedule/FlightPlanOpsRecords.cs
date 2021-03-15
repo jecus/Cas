@@ -211,7 +211,7 @@ namespace SmartCore.Entities.General.Schedule
 
 		#region public new FlightPlanOpsRecords GetCopyUnsaved()
 
-		public new FlightPlanOpsRecords GetCopyUnsaved()
+		public new FlightPlanOpsRecords GetCopyUnsaved(bool marked = true)
 		{
 			var newFlightPlanOpsRecords = (FlightPlanOpsRecords) MemberwiseClone();
 			newFlightPlanOpsRecords.ItemId = -1;

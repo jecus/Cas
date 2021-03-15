@@ -108,9 +108,9 @@ namespace SmartCore.Entities.General
         /// <br/>с ItemId равным -1
         /// </summary>
         /// <returns></returns>
-        IBaseEntityObject IBaseEntityObject.GetCopyUnsaved()
+        IBaseEntityObject IBaseEntityObject.GetCopyUnsaved(bool marked = true)
         {
-            return GetCopyUnsaved();
+            return GetCopyUnsaved(marked);
         }
         #endregion
 
@@ -120,7 +120,7 @@ namespace SmartCore.Entities.General
         /// <br/>с ItemId равным -1
         /// </summary>
         /// <returns></returns>
-        public virtual BaseEntityObject GetCopyUnsaved()
+        public virtual BaseEntityObject GetCopyUnsaved(bool marked = true)
         {
 			var clone = (BaseEntityObject)MemberwiseClone();
 			clone.ItemId = -1;

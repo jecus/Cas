@@ -377,7 +377,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public new ComponentLLPCategoryChangeRecord GetCopyUnsaved()
 
-		public new ComponentLLPCategoryChangeRecord GetCopyUnsaved()
+		public new ComponentLLPCategoryChangeRecord GetCopyUnsaved(bool marked = true)
         {
             var componentLLPCategory = (ComponentLLPCategoryChangeRecord) MemberwiseClone();
             componentLLPCategory.ItemId = -1;

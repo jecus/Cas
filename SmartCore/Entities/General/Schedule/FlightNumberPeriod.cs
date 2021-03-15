@@ -209,7 +209,7 @@ namespace SmartCore.Entities.General.Schedule
         }
 		#endregion
 
-		public FlightNumberPeriod GetCopyUnsaved()
+		public FlightNumberPeriod GetCopyUnsaved(bool marked = true)
 		{
 			var flightNumber = (FlightNumberPeriod)MemberwiseClone();
 			flightNumber.ItemId = -1;

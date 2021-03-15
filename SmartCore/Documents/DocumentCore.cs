@@ -252,9 +252,9 @@ namespace SmartCore.Documents
 								var cd = componentDirctivess.FirstOrDefault(e => e.ItemId == directive.ParentId);
 								if (cd != null)
 								{
-									if (cd.ParentComponent.ParentAircraftId > 0)
+									if (cd.ParentComponent?.ParentAircraftId > 0)
 										document.Parent = _aircraftsCore.GetAircraftById(cd.ParentComponent.ParentAircraftId);
-									else if (cd.ParentComponent.ParentStoreId > 0)
+									else if (cd.ParentComponent?.ParentStoreId > 0)
 										document.Parent = _casEnvironment.Stores.GetItemById(cd.ParentComponent.ParentStoreId);
 								}
 							}

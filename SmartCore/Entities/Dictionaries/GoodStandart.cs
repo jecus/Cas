@@ -507,11 +507,12 @@ namespace SmartCore.Entities.Dictionaries
 
         #region public override BaseEntityObject GetCopyUnsaved()
 
-        public override BaseEntityObject GetCopyUnsaved()
+        public override BaseEntityObject GetCopyUnsaved(bool marked = true)
         {
             GoodStandart good = (GoodStandart) MemberwiseClone();
             good.ItemId = -1;
-            good.FullName += " Copy";
+            if(marked)
+				good.FullName += " Copy";
             good.UnSetEvents();
 
             return good;

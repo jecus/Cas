@@ -108,7 +108,7 @@ namespace SmartCore.Entities.General.Schedule
 
 		#endregion
 
-		public FlightNumberAircraftModelRelation GetCopyUnsaved()
+		public FlightNumberAircraftModelRelation GetCopyUnsaved(bool marked = true)
 		{
 			var aircraftModelRelation = (FlightNumberAircraftModelRelation)MemberwiseClone();
 			aircraftModelRelation.ItemId = -1;

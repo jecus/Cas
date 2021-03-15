@@ -148,11 +148,12 @@ namespace SmartCore.Entities.Dictionaries
 
 		#region public override BaseEntityObject GetCopyUnsaved()
 
-		public override BaseEntityObject GetCopyUnsaved()
+		public override BaseEntityObject GetCopyUnsaved(bool marked = true)
 		{
 			var locations = (EmployeeSubject)MemberwiseClone();
 			locations.ItemId = -1;
-			locations.FullName += " Copy";
+			if(marked)
+				locations.FullName += " Copy";
 			locations.UnSetEvents();
 
 			return locations;

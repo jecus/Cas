@@ -559,13 +559,14 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#region public new NonRoutineJob GetCopyUnsaved()
 
-		public override BaseEntityObject GetCopyUnsaved()
+		public override BaseEntityObject GetCopyUnsaved(bool marked = true)
 		{
 			var nrj = (NonRoutineJob) MemberwiseClone();
 
 			nrj.ItemId = -1;
 
-			nrj.Title += " Copy";
+			if (marked)
+				nrj.Title += " Copy";
 
 			nrj.NextPerformanceSource = new Lifelength(NextPerformanceSource);
 			nrj.Remains = new Lifelength(Remains);
@@ -576,7 +577,7 @@ namespace SmartCore.Entities.General.WorkPackage
 			nrj._kits = new CommonCollection<AccessoryRequired>();
 			foreach (var accessory in Kits)
 			{
-				var newObject = accessory.GetCopyUnsaved();
+				var newObject = accessory.GetCopyUnsaved(marked);
 				newObject.ParentId = nrj.ItemId;
 				nrj._kits.Add(newObject);
 			}

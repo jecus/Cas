@@ -1103,7 +1103,7 @@ namespace SmartCore.Entities.General.Accessory
 
 		#region public new ComponentDirective GetCopyUnsaved()
 
-		public new ComponentDirective GetCopyUnsaved()
+		public new ComponentDirective GetCopyUnsaved(bool marked = true)
 		{
 			var componentDirective = (ComponentDirective) MemberwiseClone();
 			componentDirective.ItemId = -1;
@@ -1116,7 +1116,7 @@ namespace SmartCore.Entities.General.Accessory
 			componentDirective._performanceRecords = new BaseRecordCollection<DirectiveRecord>();
 			foreach (var directiveRecord in PerformanceRecords)
 			{
-				var newObject = directiveRecord.GetCopyUnsaved();
+				var newObject = directiveRecord.GetCopyUnsaved(marked);
 				newObject.Parent = componentDirective;
 				newObject.ParentId = componentDirective.ItemId;
 				componentDirective._performanceRecords.Add(newObject);
@@ -1125,7 +1125,7 @@ namespace SmartCore.Entities.General.Accessory
 			componentDirective._kits = new CommonCollection<AccessoryRequired>();
 			foreach (var accessoryRequired in Kits)
 			{
-				var newObject = accessoryRequired.GetCopyUnsaved();
+				var newObject = accessoryRequired.GetCopyUnsaved(marked);
 				newObject.ParentId = componentDirective.ItemId;
 				componentDirective._kits.Add(newObject);
 			}
@@ -1133,7 +1133,7 @@ namespace SmartCore.Entities.General.Accessory
 			componentDirective._aircraftWorkerCategories = new CommonCollection<CategoryRecord>();
 			foreach (var categoryRecord in CategoriesRecords)
 			{
-				var newObject = categoryRecord.GetCopyUnsaved();
+				var newObject = categoryRecord.GetCopyUnsaved(marked);
 				newObject.Parent = componentDirective;
 				componentDirective._aircraftWorkerCategories.Add(newObject);
 			}
@@ -1141,7 +1141,7 @@ namespace SmartCore.Entities.General.Accessory
 			componentDirective._files = new CommonCollection<ItemFileLink>();
 			foreach (var file in Files)
 			{
-				var newObject = file.GetCopyUnsaved();
+				var newObject = file.GetCopyUnsaved(marked);
 				componentDirective._files.Add(newObject);
 			}
 

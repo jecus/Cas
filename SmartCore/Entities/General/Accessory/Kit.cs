@@ -635,7 +635,7 @@ namespace SmartCore.Entities.General.Accessory
         /// <br/>с ItemId равным -1
         /// </summary>
         /// <returns></returns>
-        public new AccessoryRequired GetCopyUnsaved()
+        public new AccessoryRequired GetCopyUnsaved(bool marked = true)
         {
             AccessoryRequired accessoryRequired = (AccessoryRequired)MemberwiseClone();
             accessoryRequired.ItemId = -1;

@@ -800,18 +800,19 @@ namespace SmartCore.Entities.General
 
 		#region public new Document GetCopyUnsaved()
 
-		public new Document GetCopyUnsaved()
+		public new Document GetCopyUnsaved(bool marked = true)
 		{
 			var document = (Document) MemberwiseClone();
 			document.ItemId = -1;
 			document.UnSetEvents();
 
-			document.ContractNumber += " Copy";
+			if(marked)
+				document.ContractNumber += " Copy";
 
 			document._files = new CommonCollection<ItemFileLink>();
 			foreach (var file in Files)
 			{
-				var newObject = file.GetCopyUnsaved();
+				var newObject = file.GetCopyUnsaved(marked);
 				document._files.Add(newObject);
 			}
 

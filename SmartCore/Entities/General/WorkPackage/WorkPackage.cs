@@ -1058,11 +1058,12 @@ namespace SmartCore.Entities.General.WorkPackage
 
 		#region public override BaseEntityObject GetCopyUnsaved()
 
-		public override BaseEntityObject GetCopyUnsaved()
+		public override BaseEntityObject GetCopyUnsaved(bool marked = true)
 		{
 			var wp = (WorkPackage)MemberwiseClone();
 			wp.ItemId = -1;
-			wp.Number += " Copy";
+			if (marked)
+				wp.Number += " Copy";
 			wp.UnSetEvents();
 
 			return wp;

@@ -91,7 +91,7 @@ namespace SmartCore.Entities.General.Schedule
         }
 		#endregion
 
-		public FlightNumberCrewRecord GetCopyUnsaved()
+		public FlightNumberCrewRecord GetCopyUnsaved(bool marked = true)
 		{
 			var record = (FlightNumberCrewRecord)MemberwiseClone();
 			record.ItemId = -1;

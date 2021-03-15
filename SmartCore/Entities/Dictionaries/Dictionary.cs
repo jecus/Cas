@@ -57,13 +57,14 @@ namespace SmartCore.Entities.Dictionaries
         }
 		#endregion
 
-		public override BaseEntityObject GetCopyUnsaved()
+		public override BaseEntityObject GetCopyUnsaved(bool marked = true)
 		{
 			var abstractDictionary = (AbstractDictionary)MemberwiseClone();
 			abstractDictionary.ItemId = -1;
 			abstractDictionary.UnSetEvents();
 
-			abstractDictionary.FullName += " Copy";
+            if(marked)
+				abstractDictionary.FullName += " Copy";
 
 			return abstractDictionary;
 		}
