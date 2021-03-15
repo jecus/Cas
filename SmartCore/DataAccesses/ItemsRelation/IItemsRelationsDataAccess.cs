@@ -5,6 +5,7 @@ namespace SmartCore.DataAccesses.ItemsRelation
 {
 	public interface IItemsRelationsDataAccess
 	{
+		IList<Relation.ItemsRelation> GetCustomRelations(IEnumerable<int> directiveIds, params int[] type);
 		IList<Relation.ItemsRelation> GetRelations(int directiveId, int typeId);
 
 		IList<Relation.ItemsRelation> CheckRelations(BaseEntityObject first, BaseEntityObject second);

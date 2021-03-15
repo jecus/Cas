@@ -1081,8 +1081,8 @@ namespace SmartCore.Entities.General.Directives
 
 		public bool IsExtension { get; set; }
 		public double Extension { get; set; }
-
 		#endregion
+		public string LinkComp { get; set; }
 
 		#region public new Directive GetCopyUnsaved()
 		/// <summary>

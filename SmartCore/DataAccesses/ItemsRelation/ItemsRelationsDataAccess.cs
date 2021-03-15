@@ -15,6 +15,17 @@ namespace SmartCore.DataAccesses.ItemsRelation
 			_casEnvironment = casEnvironment;
 		}
 
+
+		public IList<Relation.ItemsRelation> GetCustomRelations(IEnumerable<int> directiveIds, params int[] type)
+		{
+			//TODO:(Evgenii Babak) не использовать рукописные запросы
+			var qr = BaseQueries.GetSelectQuery<Relation.ItemsRelation>(true) +
+			         $" WHERE (FirstItemId IN ({string.Join(",", directiveIds)}) or SecondItemId In ({string.Join(",", directiveIds)})) and (FirtsItemTypeId in ({string.Join(",", type)}) or SecondItemTypeId in ({string.Join(",", type)})) AND IsDeleted = 0";
+
+			var ds = _casEnvironment.Execute(qr);
+			return BaseQueries.GetObjectList<Relation.ItemsRelation>(ds.Tables[0]);
+		}
+
 		public IList<Relation.ItemsRelation> GetRelations(int directiveId, int typeId)
 		{
 			//TODO:(Evgenii Babak) не использовать рукописные запросы

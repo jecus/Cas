@@ -299,11 +299,27 @@ namespace SmartCore.Directives
 
 			var directiveIds = directives.Select(d => d.ItemId).ToList();
 			var itemsRelations = _itemsRelationsDataAccess.GetRelations(directiveIds, SmartCoreType.Directive.ItemId);
+			var mpdCompRelations = _itemsRelationsDataAccess.GetCustomRelations(itemsRelations.Select(i => i.FirstItemId).Concat(itemsRelations.Select(i => i.SecondItemId)), SmartCoreType.ComponentDirective.ItemId);
+
 
 			if (itemsRelations.Count > 0)
 			{
 				foreach (var directive in directives)
+				{
 					directive.ItemRelations.AddRange(itemsRelations.Where(i => i.FirstItemId == directive.ItemId || i.SecondItemId == directive.ItemId));
+
+					var mpdLink = directive.ItemRelations.FirstOrDefault(i =>
+						i.FirtsItemTypeId == SmartCoreType.MaintenanceDirective.ItemId ||
+						i.SecondItemTypeId == SmartCoreType.MaintenanceDirective.ItemId);
+					if (mpdLink != null)
+					{
+						var mpdId = mpdLink.FirtsItemTypeId == SmartCoreType.MaintenanceDirective.ItemId
+							? mpdLink.FirstItemId
+							: mpdLink.SecondItemId;
+						var mpdComLink = mpdCompRelations.FirstOrDefault(i => i.FirstItemId == mpdId || i.SecondItemId == mpdId);
+						directive.LinkComp = mpdComLink?.AdditionalInformation?.Component;
+					}
+				}
 			}
 
 			return directives;
