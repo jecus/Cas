@@ -18,6 +18,8 @@ namespace SmartCore.DataAccesses.ItemsRelation
 
 		public IList<Relation.ItemsRelation> GetCustomRelations(IEnumerable<int> directiveIds, params int[] type)
 		{
+			if(!directiveIds.Any())
+				return new List<Relation.ItemsRelation>();
 			//TODO:(Evgenii Babak) не использовать рукописные запросы
 			var qr = BaseQueries.GetSelectQuery<Relation.ItemsRelation>(true) +
 			         $" WHERE (FirstItemId IN ({string.Join(",", directiveIds)}) or SecondItemId In ({string.Join(",", directiveIds)})) and (FirtsItemTypeId in ({string.Join(",", type)}) or SecondItemTypeId in ({string.Join(",", type)})) AND IsDeleted = 0";
