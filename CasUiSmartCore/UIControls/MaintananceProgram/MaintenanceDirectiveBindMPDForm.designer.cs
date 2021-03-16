@@ -186,7 +186,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			this.MinimumSize = new System.Drawing.Size(860, 640);
 			this.Name = "DirectiveBindMPDForm";
 			this.ShowIcon = false;
-			this.Text = "Directive Bind Mpds Form";
+			this.Text = "Related Task Card Form";
 			this.Activated += new System.EventHandler(this.TemplateAircraftAddToDataBaseForm_Activated);
 			this.Deactivate += new System.EventHandler(this.TemplateAircraftAddToDataBaseForm_Deactivate);
 			this.Load += new System.EventHandler(this.MaintenanceCheckBindTaskFormLoad);

@@ -85,6 +85,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			AddColumn("M.H.", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Cost", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Applicability", (int)(radGridView1.Width * 0.10f));
+			AddColumn("AD", (int)(radGridView1.Width * 0.10f));
+			AddColumn("Component", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.24f));
 			AddColumn("SB Control", (int)(radGridView1.Width * 0.14f));
 			AddColumn("Hidden remarks", (int)(radGridView1.Width * 0.24f));
@@ -152,9 +154,6 @@ namespace CAS.UI.UIControls.MaintananceProgram
 				firstPerformanceString += "s/e.d: " + item.Threshold.FirstPerformanceSinceEffectiveDate;
 			}
 
-		   if (item.NextPerformanceDate != null && item.NextPerformanceDate > defaultDateTime)
-			  nextComplianceDate = Convert.ToDateTime(item.NextPerformanceDate);
-
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 			var kitRequieredString = item.KitsApplicable ? item.Kits.Count + " EA" : "N/A";
 			var ndtString = item.NDTType.ShortName;
@@ -193,6 +192,13 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			var conditionRepeat = !item.Threshold.RepeatInterval.IsNullOrZero() ? (item.Threshold.RepeatPerformanceConditionType == ThresholdConditionType.WhicheverFirst
 				? "/WF"
 				: "/WL") : "";
+
+			var ad = item.ItemRelations.FirstOrDefault(i =>
+				i.FirtsItemTypeId == SmartCoreType.Directive.ItemId ||
+				i.SecondItemTypeId == SmartCoreType.Directive.ItemId)?.AdditionalInformation?.Ad;
+			var component = item.ItemRelations.FirstOrDefault(i =>
+				i.FirtsItemTypeId == SmartCoreType.ComponentDirective.ItemId ||
+				i.SecondItemTypeId == SmartCoreType.ComponentDirective.ItemId)?.AdditionalInformation?.Component;
 
 			if (item.TaskCardNumberFile == null)
 				tcnColor = Color.MediumVioletRed;
@@ -239,6 +245,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			subItems.Add(CreateRow(item.ManHours <= 0 ? "" : item.ManHours.ToString(), item.ManHours));
 			subItems.Add(CreateRow(item.Cost <= 0 ? "" : item.Cost.ToString(), item.Cost));
 			subItems.Add(CreateRow(app, app));
+			subItems.Add(CreateRow(ad, ad));
+			subItems.Add(CreateRow(component, component));
 			subItems.Add(CreateRow(remarksString, remarksString));
 			subItems.Add(CreateRow(item.IsSBControl ? "Yes" : "No", item.IsSBControl));
 			subItems.Add(CreateRow(hiddenRemarksString, hiddenRemarksString));
