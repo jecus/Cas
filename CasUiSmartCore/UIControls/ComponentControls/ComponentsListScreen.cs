@@ -593,8 +593,8 @@ namespace CAS.UI.UIControls.ComponentControls
 						}
 
 						var directivesIds = baseComponentCollection.SelectMany(i => i.ComponentDirectives).Select(d => d.ItemId);
-						var itemsRelations = GlobalObjects.ItemsRelationsDataAccess.GetRelations(directivesIds,
-							SmartCoreType.ComponentDirective.ItemId);
+						var itemsRelations = GlobalObjects.ItemsRelationsDataAccess.GetRelations(directivesIds, SmartCoreType.ComponentDirective.ItemId);
+						var adRelations = GlobalObjects.ItemsRelationsDataAccess.GetCustomRelations(itemsRelations.Select(i => i.FirstItemId).Concat(itemsRelations.Select(i => i.SecondItemId)), SmartCoreType.Directive.ItemId);
 
 						if (itemsRelations.Count > 0)
 						{
@@ -605,6 +605,18 @@ namespace CAS.UI.UIControls.ComponentControls
 									i.FirstItemId == directive.ItemId ||
 									i.SecondItemId ==
 									directive.ItemId)); //TODO:(Evgenii Babak)не использовать Where 
+
+								var adLink = directive.ItemRelations.FirstOrDefault(i =>
+									i.FirtsItemTypeId == SmartCoreType.MaintenanceDirective.ItemId ||
+									i.SecondItemTypeId == SmartCoreType.MaintenanceDirective.ItemId);
+								if (adLink != null)
+								{
+									var adId = adLink.FirtsItemTypeId == SmartCoreType.MaintenanceDirective.ItemId
+										? adLink.FirstItemId
+										: adLink.SecondItemId;
+									var mpdComLink = adRelations.FirstOrDefault(i => i.FirstItemId == adId || i.SecondItemId == adId);
+									directive.LinkAd = mpdComLink?.AdditionalInformation?.Ad;
+								}
 							}
 						}
 
@@ -673,8 +685,8 @@ namespace CAS.UI.UIControls.ComponentControls
 
 
 					var directivesIds = baseComponentCollection.SelectMany(i => i.ComponentDirectives).Select(d => d.ItemId);
-					var itemsRelations = GlobalObjects.ItemsRelationsDataAccess.GetRelations(directivesIds,
-						SmartCoreType.ComponentDirective.ItemId);
+					var itemsRelations = GlobalObjects.ItemsRelationsDataAccess.GetRelations(directivesIds, SmartCoreType.ComponentDirective.ItemId);
+					var adRelations = GlobalObjects.ItemsRelationsDataAccess.GetCustomRelations(itemsRelations.Select(i => i.FirstItemId).Concat(itemsRelations.Select(i => i.SecondItemId)), SmartCoreType.Directive.ItemId);
 
 					if (itemsRelations.Count > 0)
 					{
@@ -685,7 +697,20 @@ namespace CAS.UI.UIControls.ComponentControls
 								i.FirstItemId == directive.ItemId ||
 								i.SecondItemId ==
 								directive.ItemId)); //TODO:(Evgenii Babak)не использовать Where 
+
+							var adLink = directive.ItemRelations.FirstOrDefault(i =>
+								i.FirtsItemTypeId == SmartCoreType.MaintenanceDirective.ItemId ||
+								i.SecondItemTypeId == SmartCoreType.MaintenanceDirective.ItemId);
+							if (adLink != null)
+							{
+								var adId = adLink.FirtsItemTypeId == SmartCoreType.MaintenanceDirective.ItemId
+									? adLink.FirstItemId
+									: adLink.SecondItemId;
+								var mpdComLink = adRelations.FirstOrDefault(i => i.FirstItemId == adId || i.SecondItemId == adId);
+								directive.LinkAd = mpdComLink?.AdditionalInformation?.Ad;
+							}
 						}
+
 					}
 
 					//////////////////////////////////////////////////////
@@ -829,30 +854,6 @@ namespace CAS.UI.UIControls.ComponentControls
 						baseComponentCollection.Remove(baseDetail);
 					}
 
-					//////////////////////////////////////////////////////
-					//     проверка на удаленные базовые компоненты     //
-					//////////////////////////////////////////////////////
-					//TransferRecord[] removedBaseDetailTransfers =
-					//    GlobalObjects.CasEnvironment.Loader.GetLastTransferRecordsFrom(CurrentStore,
-					//                                                                   SmartCoreType.BaseDetail).ToArray();
-					//foreach (TransferRecord record in removedBaseDetailTransfers)
-					//{
-					//    //загрузка и БД детали, которой пренадлежит данная запись о перемещении
-					//    BaseDetail bd = GlobalObjects.CasEnvironment.BaseDetails.GetItemById(record.ParentId);
-
-					//    if (record.DODR)
-					//    {
-					//        //если перемещение подтверждено, то деталь записывается в "перемещенные"
-					//        //окна "TransferedDetails"
-					//        if (_removedDetails.CompareAndAdd(bd)) _removedTransfers.Add(record);
-					//    }
-					//    else
-					//    {
-					//        //если перемещение не подтверждено, то деталь записывается в 
-					//        //"ожидабщие подтверждения" окна "TransferedDetails"
-					//        if (_waitRemoveConfirmDetails.CompareAndAdd(bd)) _waitRemoveConfirmTransfers.Add(record);
-					//    }
-					//}
 
 					//////////////////////////////////////////////////////
 					//     проверка на установленные компоненты         //
@@ -877,32 +878,6 @@ namespace CAS.UI.UIControls.ComponentControls
 					//        проверка на удаленные компоненты          //
 					//////////////////////////////////////////////////////
 
-					////извлечение из базы данных всех записей о перемещении
-					////компонентов с данного базового агрегата
-					//TransferRecord[] records =
-					//    GlobalObjects.CasEnvironment.Loader.GetLastTransferRecordsFrom(CurrentStore).ToArray();
-
-					//foreach (TransferRecord record in records)
-					//{
-					//    //загрузка и БД детали, которой пренадлежит данная запись о перемещении
-					//    Detail detail = GlobalObjects.CasEnvironment.Loader.GetDetailById(record.ParentId);
-
-					//    if (detail == null)
-					//        continue;
-
-					//    if (record.DODR)
-					//    {
-					//        //если перемещение подтверждено, то деталь записывается в "перемещенные"
-					//        //окна "TransferedDetails"
-					//        if (_removedDetails.CompareAndAdd(detail)) _removedTransfers.Add(record);
-					//    }
-					//    else
-					//    {
-					//        //если перемещение не подтверждено, то деталь записывается в 
-					//        //"ожидабщие подтверждения" окна "TransferedDetails"
-					//        if (_waitRemoveConfirmDetails.CompareAndAdd(detail)) _waitRemoveConfirmTransfers.Add(record);
-					//    }
-					//}
 
 					foreach (Component detail in componentCollection)
 					{

@@ -119,6 +119,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			AddColumn("Cost(new)", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Cost overhaul", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Cost serviceable", (int)(radGridView1.Width * 0.2f));
+			AddColumn("AD", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.2f));
 			AddColumn("Hidden Remarks", (int)(radGridView1.Width * 0.24f));
 			AddColumn("Signer", (int)(radGridView1.Width * 0.3f));
@@ -168,8 +169,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			var subItems = new List<CustomCell>();
 			var author = GlobalObjects.CasEnvironment.GetCorrector(item);
 
-			DateTime? approx;
-			Lifelength remains = Lifelength.Null, next;
 			AtaChapter ata;
 			MaintenanceControlProcess maintenanceType;
 			DateTime transferDate;
@@ -204,6 +203,7 @@ namespace CAS.UI.UIControls.ComponentControls
 				   hiddenRemarks,
 				   workType = "",
 				   zone = "",
+				   ad = "",
 				   access = "",
 				   expiryDate = "",
 				   condition = "",
@@ -219,23 +219,6 @@ namespace CAS.UI.UIControls.ComponentControls
 			if (item is Component)
 			{
 				Component componentItem = (Component)item;
-				approx = componentItem.NextPerformanceDate;
-				next = componentItem.NextPerformanceSource;
-
-				if (ShowGroup)
-				{
-					remains = componentItem.LLPCategories ? componentItem.LLPRemains : componentItem.Remains;
-				}
-				else
-				{
-					var selectedCategory = componentItem.ChangeLLPCategoryRecords.GetLast()?.ToCategory;
-					if (selectedCategory != null) {
-						var llp = componentItem.LLPData.GetItemByCatagory(selectedCategory);
-						remains = llp?.Remain;
-					}
-					
-				}
-
 
 				if (componentItem.LLPCategories)
 				{
@@ -302,13 +285,6 @@ namespace CAS.UI.UIControls.ComponentControls
 				{
 					repeatInterval = dd.Threshold.RepeatInterval;
 				}
-				//GlobalObjects.CasEnvironment.Calculator.GetNextPerformance(dd, out next, out remains, out approx, out cond);
-				//GlobalObjects.CasEnvironment.Calculator.GetNextPerformance(dd);
-				approx = dd.NextPerformanceDate;
-				next = dd.NextPerformanceSource;
-				remains = dd.Remains;
-
-
 				nextEstimated = dd.NextPerformance?.PerformanceDate;
 				nextEstimatedData = dd.NextPerformance?.PerformanceSource;
 				nextEstimatedDataC = dd.NextPerformance?.PerformanceSourceC;
@@ -355,7 +331,7 @@ namespace CAS.UI.UIControls.ComponentControls
 					? "/WF"
 					: "/WL") : "";
 
-
+				ad = dd.LinkAd;
 
 				if (dd.IsExpiry)
 				{
@@ -416,6 +392,7 @@ namespace CAS.UI.UIControls.ComponentControls
 			subItems.Add(CreateRow(cost.ToString(), cost));
 			subItems.Add(CreateRow(costOverhaul.ToString(), costOverhaul));
 			subItems.Add(CreateRow(costServiceable.ToString(), costServiceable));
+			subItems.Add(CreateRow(ad, ad));
 			subItems.Add(CreateRow(remarks, remarks));
 			subItems.Add(CreateRow(hiddenRemarks, hiddenRemarks));
 			subItems.Add(CreateRow(author, author));

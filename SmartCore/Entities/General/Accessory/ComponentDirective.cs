@@ -1202,6 +1202,7 @@ namespace SmartCore.Entities.General.Accessory
 		#endregion
 
 		public bool FromBaseComponent { get; set; }
+		public string LinkAd { get; set; }
 	}
 
 }
