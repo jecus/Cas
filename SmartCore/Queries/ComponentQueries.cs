@@ -323,14 +323,18 @@ namespace SmartCore.Queries
 		/// <param name="aircraftId"></param>
 		/// <returns></returns>
 		public static string GetSelectQueryPrimaryColumnOnly(int aircraftId)
-        {
-            return BaseQueries.GetSelectQueryColumnOnly<BaseComponent>(BaseEntityObject.ItemIdProperty) +
-                   $@" and ( Select top 1 DestinationObjectId 
-                                           from dbo.TransferRecords 
+		{
+			return $@"Select ItemId from [dbo].Components  Components
+CROSS APPLY 
+(
+	Select  DestinationObjectId from dbo.TransferRecords 
                                            Where ParentType = {SmartCoreType.BaseComponent.ItemId}
-                                           and DestinationObjectType = {SmartCoreType.Aircraft.ItemId} 
-				                           and ParentId = dbo.Components.ItemId 
-					                       and IsDeleted = 0) = {aircraftId}";
+                                           and DestinationObjectType = {SmartCoreType.Aircraft.ItemId}
+				                           and ParentId = Components.ItemId 
+					                       and IsDeleted = 0
+) TransferRecords
+where Components.IsBaseComponent = 1 and Components.IsDeleted = 0 and TransferRecords.DestinationObjectID =  {aircraftId}";
+
         }
 
         #endregion

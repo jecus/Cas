@@ -27,15 +27,18 @@ namespace SmartCore.Queries
 		/// <param name="getDeleted">«агружать недействительные записи</param>
 		/// <returns></returns>
 		public static List<DbQuery> GetAircraftDirectivesSelectQuery(int aircraftId, IEnumerable<ICommonFilter> filters = null, bool loadChild = false, bool getDeleted = false)
-        {
-            string componentIn = $@"(select ItemId 
-                                               from dbo.Components 
-                                               where dbo.Components.IsDeleted = 0 and dbo.Components.IsBaseComponent = 1 and
-	                                                (Select top 1 DestinationObjectId from dbo.TransferRecords Where 
-					                                 ParentType = {SmartCoreType.BaseComponent.ItemId}
-                                                     and DestinationObjectType = {SmartCoreType.Aircraft.ItemId} 
-				                                     and ParentId = dbo.Components.ItemId 
-					                                 and IsDeleted = 0) = {aircraftId} )";
+		{
+			string componentIn = $@"(Select ItemId from [dbo].Components Components
+			CROSS APPLY 
+			(
+				Select  DestinationObjectId from dbo.TransferRecords 
+			             Where ParentType = {SmartCoreType.BaseComponent.ItemId} 
+						 and DestinationObjectType = {SmartCoreType.Aircraft.ItemId} 
+						 and ParentId = Components.ItemId and IsDeleted = 0
+			) TransferRecords
+			where Components.IsBaseComponent = 1 and Components.IsDeleted = 0 and TransferRecords.DestinationObjectID = {aircraftId})";
+
+
             List<ICommonFilter> allFilters = 
                 new List<ICommonFilter>{ new CommonFilter<string>(MaintenanceDirective.ParentBaseComponentProperty, FilterType.In, new[] {componentIn})};
             if(filters != null && filters.Count() > 0)

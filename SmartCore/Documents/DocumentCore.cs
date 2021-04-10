@@ -125,16 +125,16 @@ namespace SmartCore.Documents
 
 				var result = _newLoader.GetObjectListAll<DocumentDTO, Document>(filters, true);
 
-				var empDocumentIds = result.Where(x => x.ParentTypeId == SmartCoreType.Employee.ItemId).Select(x => x.ParentId).ToArray();
+				var empDocumentIds = result.Where(x => x.ParentTypeId == SmartCoreType.Employee.ItemId).Select(x => x.ParentId).Distinct().ToArray();
 				if(empDocumentIds.Length > 0)
 					emp.AddRange(_newLoader.GetObjectListAll<SpecialistDTO,Specialist>(new Filter("ItemId", empDocumentIds)));
 
-				var directiveRecorIds = result.Where(x => x.ParentTypeId == SmartCoreType.DirectiveRecord.ItemId).Select(x => x.ParentId).ToArray();
+				var directiveRecorIds = result.Where(x => x.ParentTypeId == SmartCoreType.DirectiveRecord.ItemId).Select(x => x.ParentId).Distinct().ToArray();
 				if (directiveRecorIds.Length > 0)
 					directiveRecords.AddRange(_newLoader.GetObjectListAll<DirectiveRecordDTO,DirectiveRecord>(new Filter("ItemId", directiveRecorIds)));
 
 				//TODO:(Важно) Зря грузим компоненты и рабочие пакеты только для того что бы взять воздушное судно(подумать в сторону того чтобы Parent присваивать компнент либо раб пакет)
-				var compDocumentIds = result.Where(x => x.ParentTypeId == SmartCoreType.Component.ItemId).Select(x => x.ParentId).ToArray();
+				var compDocumentIds = result.Where(x => x.ParentTypeId == SmartCoreType.Component.ItemId).Select(x => x.ParentId).Distinct().ToArray();
 
 				var components = new List<Entities.General.Accessory.Component>();
 				if(compDocumentIds.Length > 0) 

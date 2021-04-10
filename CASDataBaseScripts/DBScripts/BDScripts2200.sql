@@ -95,3 +95,70 @@ if not exists ( select  *
 	alter table dbo.Components
 	add IsETOPS bit not null default 0
 GO
+
+
+
+-----------------------------------------------------------------------INDEX------------------------------------------------------------
+CREATE NONCLUSTERED INDEX [IX_IsBaseComp_Deleted] ON [dbo].[Components]
+(
+	[IsDeleted] ASC,
+	[IsBaseComponent] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+CREATE NONCLUSTERED INDEX [IX_ComponentId_Deleted] ON [dbo].[MaintenanceDirectives]
+(
+	[IsDeleted] ASC,
+	[ComponentId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+CREATE NONCLUSTERED INDEX [IX_ParentType] ON [dbo].[ItemsFilesLinks]  ( [ParentTypeId] ) 
+INCLUDE ( [IsDeleted],[ParentId],[LinkType],[FileId],[Corrector],[Updated] )
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+CREATE NONCLUSTERED INDEX [IX_Deleted_ParentId_ParentType_DestObjType] ON [dbo].[TransferRecords]
+(
+	[IsDeleted] ASC,
+	[ParentType] ASC,
+	[DestinationObjectType] ASC,
+	[DestinationObjectID] ASC,
+	[ParentID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+
+CREATE NONCLUSTERED INDEX [IX_ParentTypeId_ParentId_Deleted] ON [dbo].[Kits]
+(
+	[IsDeleted] ASC,
+	[ParentTypeId] ASC,
+	[ParentId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+CREATE NONCLUSTERED INDEX [IX_IsDeleted_ParentTypeId_AccessoryDescriptionId] ON [dbo].[Kits]  
+(   [IsDeleted],
+	[ParentTypeId],
+	[AccessoryDescriptionId] )
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+
+CREATE NONCLUSTERED INDEX [IX_DirectiveType_Deleted] ON [dbo].[Directives]  
+( [IsDeleted],[DirectiveType] , [Title] ) INCLUDE ( [ComponentId] )
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+
+
+CREATE NONCLUSTERED INDEX [IX_DirectiveType_Deleted(Title)] ON [dbo].[Directives]  
+( [IsDeleted],[DirectiveType],[ComponentId] ) INCLUDE ( [Title] )
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+
+CREATE NONCLUSTERED INDEX [IX_sBaseComp]
+ON [dbo].[Components]  ( [IsBaseComponent] )
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
