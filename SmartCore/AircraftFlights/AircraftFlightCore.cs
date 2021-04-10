@@ -798,15 +798,41 @@ namespace SmartCore.AircraftFlights
 			if (flights.Count == 0)
 				return;
 
-			var flightsIds = flights.Select(f => f.ItemId).Distinct().ToArray();
-			var runUps = _newLoader.GetObjectList<RunUpDTO, RunUp>(new Filter("FlightId", flightsIds));
+			var runUps = _loader.GetObjectList<RunUp>(new[]
+			{
+				new CommonFilter<string>(RunUp.FlightIdProperty, FilterType.In, new[]
+				{
+					$@"SELECT  ItemId FROM dbo.AircraftFlights 
+					WHERE AtlbId IN (SELECT ItemID FROM dbo.ATLBs WHERE IsDeleted = 0 AND AircraftID = {aircraftId}) AND IsDeleted = 0 "
+				})
+			});
 
-			var engimeInRegimeRecords = _newLoader.GetObjectList<EngineTimeInRegimeDTO, EngineTimeInRegime>(new Filter("FlightId", flightsIds));
+			var engimeInRegimeRecords = _loader.GetObjectList<EngineTimeInRegime>(new[]
+			{
+				new CommonFilter<string>(EngineTimeInRegime.FlightIdProperty, FilterType.In, new[]
+				{
+					$@"SELECT  ItemId FROM dbo.AircraftFlights 
+					WHERE AtlbId IN (SELECT ItemID FROM dbo.ATLBs WHERE IsDeleted = 0 AND AircraftID = {aircraftId}) AND IsDeleted = 0 "
+				})
+			});
 
-			var flightsCrsIds = flights.Select(f => f.CrsId).Distinct().ToArray();
-			var crs = _newLoader.GetObjectList<CertificateOfReleaseToServiceDTO, CertificateOfReleaseToService>(new Filter("ItemId", flightsCrsIds));
+			var crs = _loader.GetObjectList<CertificateOfReleaseToService>(new[]
+			{
+				new CommonFilter<string>(BaseEntityObject.ItemIdProperty, FilterType.In, new[]
+				{
+					$@"SELECT  CRSID FROM dbo.AircraftFlights 
+					WHERE AtlbId IN (SELECT ItemID FROM dbo.ATLBs WHERE IsDeleted = 0 AND AircraftID = {aircraftId}) AND IsDeleted = 0 "
+				})
+			});
 
-			var oilCondition = _newLoader.GetObjectList<ComponentOilConditionDTO, ComponentOilCondition>(new Filter("FlightId", flightsIds));
+			var oilCondition = _loader.GetObjectList<ComponentOilCondition>(new[]
+			{
+				new CommonFilter<string>(ComponentOilCondition.FlightIdProperty, FilterType.In, new[]
+				{
+					$@"SELECT  ItemId FROM dbo.AircraftFlights 
+					WHERE AtlbId IN (SELECT ItemID FROM dbo.ATLBs WHERE IsDeleted = 0 AND AircraftID = {aircraftId}) AND IsDeleted = 0 "
+				})
+			});
 			foreach (var oil in oilCondition)
 				oil.BaseComponent = _componentCore.GetBaseComponentById(oil.ComponentId);
 
