@@ -162,3 +162,33 @@ CREATE NONCLUSTERED INDEX [IX_sBaseComp]
 ON [dbo].[Components]  ( [IsBaseComponent] )
 WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
+
+
+CREATE NONCLUSTERED INDEX [IX_ComponentId_Deleted] 
+ON [dbo].[ComponentLLPCategoryData]  ( [IsDeleted],[ComponentId] ) 
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+CREATE NONCLUSTERED INDEX [IX_Deleted] 
+ON [dbo].[ComponentLLPCategoryData]  ( [IsDeleted] ) 
+INCLUDE ( [LLPCategoryId],[LLPLifeLength],[LLPLifeLimit],[Notify],[ComponentId],[LLPLifeLengthCurrent],[LLPLifeLengthForDate],[Date],[Corrector],[Updated] )
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+
+CREATE NONCLUSTERED INDEX [IX_AircraftId_Deleted] ON [dbo].[ATLBs]
+(
+	[IsDeleted] ASC,
+	[AircraftID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+
+CREATE NONCLUSTERED INDEX [IX_AtlbId_Deleted] ON [dbo].[AircraftFlights]
+(
+	[IsDeleted] ASC,
+	[ATLBID] ASC
+)
+INCLUDE([ItemId],[AircraftId],[FlightNo],[Remarks],[FlightDate],[StationFrom],[StationTo],[DelayTime],[DelayReasonId],[OutTime],[InTime],[TakeOffTime],[LDGTime],[NightTime],[CRSID],[FileID],[Tanks],[Fluids],[EnginesGeneralCondition],[Highlight],[Correct],[Reference],[Cycles],[PageNo],[FlightType],[Level],[Distance],[DistanceMeasure],[TakeOffWeight],[AlignmentBefore],[AlignmentAfter],[FlightCategory],[AtlbRecordType],[FlightAircraftCode],[CancelReasonId],[StationFromId],[StationToId],[FlightNumber],[Corrector],[Updated])
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
