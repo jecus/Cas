@@ -8,7 +8,8 @@ using EntityCore.Interfaces;
 namespace EntityCore.DTO.Dictionaries
 {
 	[Table("DamageCharts", Schema = "Dictionaries")]
-	
+	[Condition("IsDeleted", 0)]
+
 	public class DamageChartDTO : BaseEntity, IFileDtoContainer, IBaseDictionary
 	{
 		[Column("ItemID")]

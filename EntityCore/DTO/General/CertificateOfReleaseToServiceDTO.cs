@@ -6,7 +6,8 @@ using EntityCore.Attributte;
 namespace EntityCore.DTO.General
 {
 	[Table("CRSs", Schema = "dbo")]
-	
+	[Condition("IsDeleted", 0)]
+
 	public class CertificateOfReleaseToServiceDTO : BaseEntity
 	{
 		

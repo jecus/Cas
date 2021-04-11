@@ -1,13 +1,15 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using EntityCore.Attributte;
 using EntityCore.DTO.General;
 using Newtonsoft.Json;
 
 namespace EntityCore.DTO.Dictionaries
 {
 	[Table("ATAChapter", Schema = "Dictionaries")]
-	
+	[Condition("IsDeleted", 0)]
+
 	public class ATAChapterDTO : BaseEntity, IBaseDictionary
 	{
 		

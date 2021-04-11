@@ -5,7 +5,8 @@ using EntityCore.DTO.Dictionaries;
 namespace EntityCore.DTO.General
 {
 	[Table("Discrepancies", Schema = "dbo")]
-	
+	[Condition("IsDeleted", 0)]
+
 	public class DiscrepancyDTO : BaseEntity
 	{
 		
