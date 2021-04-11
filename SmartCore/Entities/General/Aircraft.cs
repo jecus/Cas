@@ -218,14 +218,17 @@ namespace SmartCore.Entities.General
         /// <summary>
         /// Id базового агрегата Frame самолета
         /// </summary>
-        [SubQueryAttribute("AircraftFrameId", @"(Select top 1 ItemID from dbo.Components
-                                                 where IsBaseComponent = 1 and BaseComponentTypeId=4 and IsDeleted=0 and
-	                                             (Select top 1 DestinationObjectId from dbo.TransferRecords Where 
-					                              ParentType = 6 
-                                                  and DestinationObjectType = 7
-					                              and ParentId = dbo.Components.ItemId 
-					                              and IsDeleted = 0
-					                              order by dbo.TransferRecords.TransferDate Desc) = dbo.Aircrafts.ItemId)")]
+        [SubQueryAttribute("AircraftFrameId", 
+	        @"(Select ItemID from dbo.Components comp
+					 CROSS APPLY
+					 (
+						Select DestinationObjectId from dbo.TransferRecords Where 
+										                              ParentType = 6 
+					                                                  and DestinationObjectType = 7
+										                              and ParentId = comp.ItemId 
+										                              and IsDeleted = 0
+					 ) T
+					 where comp.IsBaseComponent = 1 and comp.BaseComponentTypeId=4 and comp.IsDeleted=0 and T.DestinationObjectID = dbo.Aircrafts.ItemId)")]
         public Int32 AircraftFrameId { get; set; }
         /// <summary>
         /// Параметр AircraftAddress24Bit

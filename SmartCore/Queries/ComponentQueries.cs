@@ -205,6 +205,23 @@ namespace SmartCore.Queries
         }
 		#endregion
 
+
+		public static ICommonFilter GetWhereState(int aircraftid)
+		{
+			return new CommonFilter<string>($@" A.DestinationObjectID IN 
+			 (
+				Select bd.ItemId from dbo.Components bd 
+				CROSS APPLY 
+				(
+					Select DestinationObjectId from dbo.TransferRecords Where 
+								ParentType = {SmartCoreType.BaseComponent.ItemId}  
+								and ParentId = bd.ItemId
+								and IsDeleted = 0
+				)B 
+				where bd.IsBaseComponent = 1 and bd.IsDeleted = 0 and B.DestinationObjectId = {aircraftid}
+			 )");
+		}
+
 		#region public static string GetSelectQuery(int aircraftId, ICommonFilter[] filters = null, bool loadChild = false, bool getDeleted = false)
 
 		/// <summary>
@@ -223,8 +240,18 @@ namespace SmartCore.Queries
             List<ICommonFilter> allFilters = new List<ICommonFilter>();
             if (filters != null && filters.Length > 0)
                 allFilters.AddRange(filters);
-            allFilters.Add(GetWhereStatement(aircraftId));
+            allFilters.Add(GetWhereState(aircraftId));
             string qrs = BaseQueries.GetSelectQueryWithWhere<Entities.General.Accessory.Component>(allFilters.ToArray(), loadChild, getDeleted);
+
+
+            var search = "[dbo].Components";
+            var index = qrs.LastIndexOf(search) + search.Length;
+            qrs = qrs.Insert(index, $@" CROSS APPLY
+			(
+				Select DestinationObjectId from dbo.TransferRecords 
+				Where ParentType = {SmartCoreType.Component.ItemId}  and ParentId = Components.ItemId
+			) A ");
+
             return qrs;
 
         }

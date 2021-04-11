@@ -192,3 +192,25 @@ CREATE NONCLUSTERED INDEX [IX_AtlbId_Deleted] ON [dbo].[AircraftFlights]
 INCLUDE([ItemId],[AircraftId],[FlightNo],[Remarks],[FlightDate],[StationFrom],[StationTo],[DelayTime],[DelayReasonId],[OutTime],[InTime],[TakeOffTime],[LDGTime],[NightTime],[CRSID],[FileID],[Tanks],[Fluids],[EnginesGeneralCondition],[Highlight],[Correct],[Reference],[Cycles],[PageNo],[FlightType],[Level],[Distance],[DistanceMeasure],[TakeOffWeight],[AlignmentBefore],[AlignmentAfter],[FlightCategory],[AtlbRecordType],[FlightAircraftCode],[CancelReasonId],[StationFromId],[StationToId],[FlightNumber],[Corrector],[Updated])
 WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
+
+
+CREATE NONCLUSTERED INDEX [IX_CompId_Deleted] ON [dbo].[ComponentDirectives]
+(
+	[IsDeleted] ASC,
+	[ComponentId] ASC
+)
+INCLUDE([ItemID],[DirectiveType],[Threshold],[ManHours],[Remarks],[Cost],[Highlight],[KitRequired],[FaaFormFileID],[JobCardsID],[EOFileID],[HiddenRemarks],[IsClosed],[MPDTaskTypeId],[NDTType],[ZoneArea],[AccessDirective],[AAM],[CMM],[Corrector],[Updated],[ExpiryDate],[ExpiryRemainNotify],[IsExpiry]) 
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+
+
+CREATE NONCLUSTERED INDEX [IX_ParentTypeId_1] ON [dbo].[TransferRecords]  ( [ParentType] ) INCLUDE ( [ParentID],[DestinationObjectID] )
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+
+
+ CREATE NONCLUSTERED INDEX [IX_ParentTypeId_2] ON [dbo].[TransferRecords]  ( [ParentType],[DestinationObjectID] ) INCLUDE ( [ParentID] )
+ WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
