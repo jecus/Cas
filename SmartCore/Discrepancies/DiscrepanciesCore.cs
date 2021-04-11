@@ -72,7 +72,7 @@ namespace SmartCore.Discrepancies
 			{
 				preResultList.AddRange(_loader.GetObjectList<Discrepancy>(new[]
 				{
-					new CommonFilter<string>(Discrepancy.FlightIdProperty,FilterType.In, new []{$"(Select ItemId from AircraftFlights where AircraftId = {aircraft.ItemId})"}),
+					new CommonFilter<string>(Discrepancy.FlightIdProperty,FilterType.In, new []{$"(Select ItemId from AircraftFlights where AircraftId = {aircraft.ItemId} and IsDeleted = 0)"}),
 				}));
 
 				//Строка запроса, выдающая идентификаторы родительских задач КИТов

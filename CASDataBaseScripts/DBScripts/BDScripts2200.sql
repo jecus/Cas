@@ -264,3 +264,30 @@ GO
 CREATE NONCLUSTERED INDEX [IX_Deleted_FlightId] ON [dbo].[HydraulicConditions]  ( [IsDeleted],[FlightID] )
 WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
+
+
+CREATE NONCLUSTERED INDEX [IX_AircraftId_Deleted] ON [dbo].[AircraftFlights]  ( [IsDeleted],[AircraftId] )
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+CREATE NONCLUSTERED INDEX [IX_DiscrepancyID] ON [dbo].[CorrectiveActions]  ( [DiscrepancyID] ) INCLUDE ( [IsDeleted],[Description],[ShortDescription],[ADDNo],[IsClosed],[PartNumberOff],[SerialNumberOff],[PartNumberOn],[SerialNumberOn],[CRSID],[Corrector],[Updated] )
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+
+CREATE NONCLUSTERED INDEX [IX_ParentId_Deleted] ON [dbo].[WorkPackages]
+(
+	[IsDeleted] ASC,
+	[ParentId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+
+CREATE NONCLUSTERED INDEX [IX_WPId_WPRId_Deleted] ON [dbo].[Cas3WorkPakageRecord]
+(
+	[isDeleted] ASC,
+	[WorkPakageId] ASC,
+	[WorkPackageItemType] ASC
+)
+INCLUDE([ItemId],[DirectivesId],[PerfNumFromStart],[PerfNumFromRecord],[FromRecordId],[JobCardNumber],[ParentCheckId],[GroupNumber],[Corrector],[Updated],[IsClosed]) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO

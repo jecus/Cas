@@ -94,60 +94,86 @@ namespace SmartCore.Entities.General.WorkPackage
 			@"(select sum(manhours) 
 			from (SELECT manhours 
 				  FROM directives 
-				  where directives.itemId in (select DirectivesId 
-											  from Cas3WorkPakageRecord
+				  CROSS APPLY
+				  (
+					select DirectivesId  from Cas3WorkPakageRecord
 											  where Cas3WorkPakageRecord.IsDeleted = 0 and 
 													Cas3WorkPakageRecord.WorkPackageItemType = 1 and 
-													Cas3WorkPakageRecord.WorkPakageId = WorkPackages.ItemId)
+													Cas3WorkPakageRecord.WorkPakageId = WorkPackages.ItemId
+				  ) R
+				  where directives.itemId in (R.DirectivesId)
 				  UNION ALL
 				  SELECT manhours 
 				  FROM components 
-				  where components.itemId in (select DirectivesId 
-											  from Cas3WorkPakageRecord
+				  CROSS APPLY
+				  (
+					select DirectivesId from Cas3WorkPakageRecord
 											  where Cas3WorkPakageRecord.IsDeleted = 0 and 
 													Cas3WorkPakageRecord.WorkPackageItemType = 5 and 
-													Cas3WorkPakageRecord.WorkPakageId = WorkPackages.ItemId)
+													Cas3WorkPakageRecord.WorkPakageId = WorkPackages.ItemId
+				  )R
+				  where components.itemId in (R.DirectivesId)
 				  UNION ALL
 				  SELECT manhours 
 				  FROM components 
-				  where components.itemId in (select DirectivesId 
+				  CROSS APPLY
+				  (
+					select DirectivesId 
 											  from Cas3WorkPakageRecord
 											  where Cas3WorkPakageRecord.IsDeleted = 0 and 
 													Cas3WorkPakageRecord.WorkPackageItemType = 6 and 
-													Cas3WorkPakageRecord.WorkPakageId = WorkPackages.ItemId)
+													Cas3WorkPakageRecord.WorkPakageId = WorkPackages.ItemId
+				  )R
+				  where components.itemId in (R.DirectivesId)
 				  UNION ALL
 				  SELECT manhours 
 				  FROM componentdirectives 
-				  where componentdirectives.ItemId in (select DirectivesId 
+				  CROSS APPLY
+				  (
+					select DirectivesId 
 											  from Cas3WorkPakageRecord
 											  where Cas3WorkPakageRecord.IsDeleted = 0 and 
 													Cas3WorkPakageRecord.WorkPackageItemType = 2 and 
-													Cas3WorkPakageRecord.WorkPakageId = WorkPackages.ItemId)
+													Cas3WorkPakageRecord.WorkPakageId = WorkPackages.ItemId
+				  )R
+				  where componentdirectives.ItemId in (R.DirectivesId)
 				  UNION ALL
 				  SELECT manhours 
 				  FROM Cas3MaintenanceCheck 
-				  where Cas3MaintenanceCheck.itemId in (select DirectivesId 
+				  CROSS APPLY
+				  (
+					select DirectivesId 
 											  from Cas3WorkPakageRecord
 											  where Cas3WorkPakageRecord.IsDeleted = 0 and 
 													Cas3WorkPakageRecord.WorkPackageItemType = 3 and 
-													Cas3WorkPakageRecord.WorkPakageId = WorkPackages.ItemId)
+													Cas3WorkPakageRecord.WorkPakageId = WorkPackages.ItemId
+				  )R
+				  where Cas3MaintenanceCheck.itemId in (R.DirectivesId)
 				  UNION ALL
 				  SELECT manhours 
 				  FROM dictionaries.NonRoutineJobs 
-				  where dictionaries.NonRoutineJobs.itemId in (select DirectivesId 
+				  CROSS APPLY
+				  (
+					select DirectivesId 
 											  from Cas3WorkPakageRecord
 											  where Cas3WorkPakageRecord.IsDeleted = 0 and 
 													Cas3WorkPakageRecord.WorkPackageItemType = 4 and 
-													Cas3WorkPakageRecord.WorkPakageId = WorkPackages.ItemId)
+													Cas3WorkPakageRecord.WorkPakageId = WorkPackages.ItemId
+				  )R
+				  where dictionaries.NonRoutineJobs.itemId in (R.DirectivesId)
 
 				  UNION ALL
 				  SELECT manhours 
 				  FROM MaintenanceDirectives
-				  where MaintenanceDirectives.itemId in (select DirectivesId 
+				  CROSS APPLY
+				  (
+				  select DirectivesId 
 											  from Cas3WorkPakageRecord
 											  where Cas3WorkPakageRecord.IsDeleted = 0 and 
 													Cas3WorkPakageRecord.WorkPackageItemType = 14 and 
-													Cas3WorkPakageRecord.WorkPakageId = WorkPackages.ItemId)) WPMH)"
+													Cas3WorkPakageRecord.WorkPakageId = WorkPackages.ItemId
+				  )R
+				  where MaintenanceDirectives.itemId in (R.DirectivesId)) WPMH)"
 			)]
 		[ListViewData(85, "MH", 13)]
 		public double ManHours { get; set; }
