@@ -441,21 +441,24 @@ namespace CAS.UI.UIControls.AircraftsControls
 
 						#region Пересчет общего статуса по базовой детали
 
-						if (bdComponentStatus == Statuses.NotActive &&
-							baseComponentsStatuses[groupDetail.Key] == Statuses.NotActive)
-							baseComponentsStatuses[groupDetail.Key] = Statuses.NotActive;
+						if (groupDetail.Key != null && baseComponentsStatuses.ContainsKey(groupDetail.Key))
+						{
+							if (bdComponentStatus == Statuses.NotActive &&
+							    baseComponentsStatuses[groupDetail.Key] == Statuses.NotActive)
+								baseComponentsStatuses[groupDetail.Key] = Statuses.NotActive;
 
-						if (bdComponentStatus == Statuses.Satisfactory &&
-							baseComponentsStatuses[groupDetail.Key] != Statuses.Notify &&
-							baseComponentsStatuses[groupDetail.Key] != Statuses.NotSatisfactory)
-							baseComponentsStatuses[groupDetail.Key] = Statuses.Satisfactory;
+							if (bdComponentStatus == Statuses.Satisfactory &&
+							    baseComponentsStatuses[groupDetail.Key] != Statuses.Notify &&
+							    baseComponentsStatuses[groupDetail.Key] != Statuses.NotSatisfactory)
+								baseComponentsStatuses[groupDetail.Key] = Statuses.Satisfactory;
 
-						if (bdComponentStatus == Statuses.Notify &&
-							baseComponentsStatuses[groupDetail.Key] != Statuses.NotSatisfactory)
-							baseComponentsStatuses[groupDetail.Key] = Statuses.Notify;
+							if (bdComponentStatus == Statuses.Notify &&
+							    baseComponentsStatuses[groupDetail.Key] != Statuses.NotSatisfactory)
+								baseComponentsStatuses[groupDetail.Key] = Statuses.Notify;
 
-						if (bdComponentStatus == Statuses.NotSatisfactory)
-							baseComponentsStatuses[groupDetail.Key] = Statuses.NotSatisfactory;
+							if (bdComponentStatus == Statuses.NotSatisfactory)
+								baseComponentsStatuses[groupDetail.Key] = Statuses.NotSatisfactory;
+						}
 
 						#endregion
 

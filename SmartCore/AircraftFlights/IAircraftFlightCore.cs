@@ -23,7 +23,7 @@ namespace SmartCore.AircraftFlights
 
 		void LoadAllFlights();
 
-		void LoadAircraftFlights(int aircraftId);
+		void LoadAircraftFlights(int aircraftId, int? atlbId = null);
 
 		void LoadAircraftFlightsLight(int aircraftId);
 

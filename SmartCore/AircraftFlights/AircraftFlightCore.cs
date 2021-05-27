@@ -786,9 +786,12 @@ namespace SmartCore.AircraftFlights
 		/// <summary>
 		/// Загружает все полеты воздушного судна
 		/// </summary>
-		public void LoadAircraftFlights(int aircraftId)
+		public void LoadAircraftFlights(int aircraftId, int? atlbId = null)
 		{
-			var atldIds = _newLoader.GetSelectColumnOnly<ATLBDTO>(new []{ new Filter("AircraftID", aircraftId) }, "ItemId");
+			var atldIds = new List<int>();
+			if (atlbId.HasValue)
+				atldIds.Add(atlbId.Value);
+			else atldIds.AddRange(_newLoader.GetSelectColumnOnly<ATLBDTO>(new[] { new Filter("AircraftID", aircraftId) }, "ItemId"));
 
 			if(atldIds.Count == 0)
 				return;
@@ -853,7 +856,17 @@ namespace SmartCore.AircraftFlights
 
 			if (_flights.ContainsKey(aircraftId))
 			{
-				_flights[aircraftId].Clear();
+				if (atlbId.HasValue)
+				{
+					foreach (var fl in flights)
+					{
+						var find = _flights[aircraftId].FirstOrDefault(i => i.ItemId == fl.ItemId);
+						_flights[aircraftId].Remove(find);
+					}
+				}
+				else
+					_flights[aircraftId].Clear();
+
 				_flights[aircraftId].AddRange(flights);
 			}
 			else _flights.Add(aircraftId, new AircraftFlightCollection(flights.ToList()));

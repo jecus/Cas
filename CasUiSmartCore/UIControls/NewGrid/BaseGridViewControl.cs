@@ -206,7 +206,6 @@ namespace CAS.UI.UIControls.NewGrid
 			
 			_customMenu.Items.AddRange(_toolStripMenuItemDelete,
 				new RadMenuSeparatorItem(),
-				new RadMenuSeparatorItem(),
 				_toolStripMenuItemCopyWithoutMark,
 				_toolStripMenuItemCopy,
 				_toolStripMenuItemPaste

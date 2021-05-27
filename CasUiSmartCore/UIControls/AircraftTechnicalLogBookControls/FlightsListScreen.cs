@@ -134,7 +134,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
 			AnimatedThreadWorker.ReportProgress(0, "load Fligths");
 
-			GlobalObjects.AircraftFlightsCore.LoadAircraftFlights(CurrentAircraft.ItemId);
+			GlobalObjects.AircraftFlightsCore.LoadAircraftFlights(CurrentAircraft.ItemId, _currentATLB.ItemId);
 
 			_currentATLB.AircraftFlightsCollection = GlobalObjects.AircraftFlightsCore.GetFlightsByAtlb(CurrentAircraft.ItemId, _currentATLB.ItemId);
 			foreach (AircraftFlight flight in _currentATLB.AircraftFlightsCollection)

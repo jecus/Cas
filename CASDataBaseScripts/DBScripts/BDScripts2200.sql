@@ -291,3 +291,7 @@ CREATE NONCLUSTERED INDEX [IX_WPId_WPRId_Deleted] ON [dbo].[Cas3WorkPakageRecord
 )
 INCLUDE([ItemId],[DirectivesId],[PerfNumFromStart],[PerfNumFromRecord],[FromRecordId],[JobCardNumber],[ParentCheckId],[GroupNumber],[Corrector],[Updated],[IsClosed]) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
+
+
+CREATE NONCLUSTERED INDEX [IX_RunUp_FlightId] ON [dbo].[Runups]  ( [FlightId] ) INCLUDE ( [IsDeleted],[StartTime],[RunUpType],[RunUpPhase],[RunUpCondition],[EndTime],[EndPhase],[ShutDownReasonId],[ShutDownType],[LandTime],[AirTime],[RecordDate],[OnLifelength],[BaseComponentId],[Corrector],[Updated] )
+GO
