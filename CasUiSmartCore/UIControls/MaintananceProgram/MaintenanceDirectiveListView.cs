@@ -85,6 +85,9 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			AddColumn("M.H.", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Cost", (int)(radGridView1.Width * 0.16f));
 			AddColumn("Applicability", (int)(radGridView1.Width * 0.10f));
+			AddColumn("Source Task Reference", (int)(radGridView1.Width * 0.10f));
+			AddColumn("Reference", (int)(radGridView1.Width * 0.10f));
+			AddColumn("Applicability", (int)(radGridView1.Width * 0.10f));
 			AddColumn("AD", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Component", (int)(radGridView1.Width * 0.10f));
 			AddColumn("Remarks", (int)(radGridView1.Width * 0.24f));
@@ -245,6 +248,8 @@ namespace CAS.UI.UIControls.MaintananceProgram
 			subItems.Add(CreateRow(item.ManHours <= 0 ? "" : item.ManHours.ToString(), item.ManHours));
 			subItems.Add(CreateRow(item.Cost <= 0 ? "" : item.Cost.ToString(), item.Cost));
 			subItems.Add(CreateRow(app, app));
+			subItems.Add(CreateRow(item.SourceTaskReference, item.SourceTaskReference));
+			subItems.Add(CreateRow(item.Reference, item.Reference));
 			subItems.Add(CreateRow(ad, ad));
 			subItems.Add(CreateRow(component, component));
 			subItems.Add(CreateRow(remarksString, remarksString));

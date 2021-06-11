@@ -61,6 +61,24 @@ if not exists ( select  *
 	add AdditionalInformationJSON nvarchar(MAX)
 GO
 
+if not exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('dbo.MaintenanceDirectives')
+					and c.name = 'Reference' ) 
+
+	alter table dbo.MaintenanceDirectives
+	add Reference nvarchar(MAX)
+GO
+
+if not exists ( select  *
+			from    sys.columns c                        
+			where   c.object_id = object_id('dbo.MaintenanceDirectives')
+					and c.name = 'STReference' ) 
+
+	alter table dbo.MaintenanceDirectives
+	add STReference nvarchar(MAX)
+GO
+
 delete from dbo.ItemsRelations  where IsDeleted = 1
 update dbo.ItemsRelations set AdditionalInformationJSON = '{}' where FirtsItemTypeId = 2 or SecondItemTypeId = 2
 

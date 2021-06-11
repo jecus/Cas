@@ -5499,6 +5499,8 @@ namespace SmartCore.DtoHelper
 				ScheduleRevisionNum = maindirec.ScheduleRevisionNum,
 				ScheduleRevisionDate = maindirec.ScheduleRevisionDate,
 				IsExtension = maindirec.IsExtension,
+				Reference = maindirec.Reference,
+				SourceTaskReference = maindirec.SourceTaskReference,
 				Extension = maindirec.Extension,
 				Files = maindirec.Files?.Select(i => i.Convert()) as ICollection<ItemFileLinkDTO>,
 				PerformanceRecords = maindirec.PerformanceRecords?.Select(i => i.Convert()) as ICollection<DirectiveRecordDTO>,
@@ -5564,6 +5566,8 @@ namespace SmartCore.DtoHelper
 				ScheduleRevisionNum = maindirecdto.ScheduleRevisionNum,
 				IsExtension = maindirecdto.IsExtension,
 				Extension = maindirecdto.Extension,
+				Reference = maindirecdto.Reference,
+				SourceTaskReference = maindirecdto.SourceTaskReference,
 				ScheduleRevisionDate = maindirecdto.ScheduleRevisionDate ?? DateTimeExtend.GetCASMinDateTime()
 			};
 

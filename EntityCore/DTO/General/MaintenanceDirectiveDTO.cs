@@ -207,6 +207,13 @@ namespace EntityCore.DTO.General
 		[Column("Extension")]
 		public double Extension { get; set; }
 
+		[Column("Reference")]
+		public string Reference { get; set; }
+
+		[Column("STReference")]
+		public string SourceTaskReference { get; set; }
+
+
 
 		[Include]
 		public ATAChapterDTO ATAChapter { get; set; }
@@ -231,6 +238,9 @@ namespace EntityCore.DTO.General
 		
 		[Child(FilterType.Equal, "ParentTypeId", 14)]
 		public ICollection<AccessoryRequiredDTO> Kits { get; set; }
+
+		
+
 
 		#region Navigation Property
 

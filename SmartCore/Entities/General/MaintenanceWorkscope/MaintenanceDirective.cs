@@ -608,6 +608,11 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		[TableColumn("Extension")]
 		public double Extension { get; set; }
 
+		[TableColumn("Reference")]
+		public string Reference { get; set; }
+		[TableColumn("STReference")]
+		public string SourceTaskReference { get; set; }
+
 		#region public CommonCollection<ItemFileLink> Files { get; set; }
 
 		private CommonCollection<ItemFileLink> _files;
