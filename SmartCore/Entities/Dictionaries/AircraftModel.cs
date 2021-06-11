@@ -203,6 +203,7 @@ namespace SmartCore.Entities.Dictionaries
                                        });
             }
         }
-        #endregion
-    }
+		#endregion
+
+	}
 }

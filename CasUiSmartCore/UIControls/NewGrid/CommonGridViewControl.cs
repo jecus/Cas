@@ -869,7 +869,7 @@ namespace CAS.UI.UIControls.NewGrid
 				foreach (var obj in SelectedItems)
 				{
 					var method = typeof(BaseEntityObject).GetMethods().FirstOrDefault(i => i.Name == "GetCopyUnsaved");
-					list.Add((BaseEntityObject)method.Invoke(obj, null));
+					list.Add((BaseEntityObject)method.Invoke(obj,  new object[]{true}));
 				}
 
 				//todo:(EvgeniiBabak) Нужен другой способ проверки сереализуемости объекта

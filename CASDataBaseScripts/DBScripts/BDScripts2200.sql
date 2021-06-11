@@ -295,3 +295,10 @@ GO
 
 CREATE NONCLUSTERED INDEX [IX_RunUp_FlightId] ON [dbo].[Runups]  ( [FlightId] ) INCLUDE ( [IsDeleted],[StartTime],[RunUpType],[RunUpPhase],[RunUpCondition],[EndTime],[EndPhase],[ShutDownReasonId],[ShutDownType],[LandTime],[AirTime],[RecordDate],[OnLifelength],[BaseComponentId],[Corrector],[Updated] )
 GO
+
+CREATE NONCLUSTERED INDEX [IX_ComponentId_Deleted] ON [dbo].[ActualStateRecords]  ( [IsDeleted],[ComponentId] ) INCLUDE ( [FlightRegimeId],[Remarks],[OnLifelength],[RecordDate],[WorkRegimeTypeId],[Corrector],[Updated] )
+GO
+
+CREATE NONCLUSTERED INDEX [IX_ParentId_Deleted] ON [dbo].[TransferRecords]  
+( [IsDeleted],[ParentID] ) INCLUDE ( [ParentType],[FromAircraftID],[FromStoreID],[DestinationObjectID],[DestinationObjectType],[ConsumableId],[TransferDate],[DestConfirmTransferDate],[WorkPackageID],[PerformanceNum],[Remarks],[Reference],[PODR],[DODR],[Position],[FromBaseComponentID],[Description],[ReasonId],[State],[ReplaceComponentId],[IsReplaceComponentRemoved],[ReceivedSpecialistId],[ReleasedSpecialistId],[FromSupplierId],[SupplierReceiptDate],[SupplierNotify],[FromSpecialistId],[PreConfirmTransfer],[Corrector],[Updated] )
+GO

@@ -126,6 +126,15 @@ namespace SmartCore.Entities.General
 			clone.ItemId = -1;
 			clone.UnSetEvents();
 
+			if (marked)
+			{
+				if (clone is AircraftModel)
+					((AircraftModel) clone).Name += " Copy";
+
+			}
+                
+
+
 			return clone;
         }
         #endregion

@@ -79,7 +79,7 @@ namespace SmartCore.Entities.Dictionaries
         /// </summary>
         [TableColumn("SubModel")]
         [FormControl(150, "Series", 1, Order = 2)]
-        [ListViewData(0.08f, "Series", 4)]
+        [ListViewData(0.08f, "Series")]
         public string Series
         {
             get { return _series; }
