@@ -21,7 +21,7 @@ namespace SmartCore.AuditMongo.Repository
 		{
 			try
 			{
-				if(_context == null)
+				if (_context == null)
 					return;
 
 				if (target.IsDeleted)
@@ -29,7 +29,7 @@ namespace SmartCore.AuditMongo.Repository
 
 				if (target.SmartCoreObjectType.ItemId == -1)
 				{
-					if(parameters == null)
+					if (parameters == null)
 						parameters = new Dictionary<string, object>();
 
 					parameters.Add("ObjectType", typeof(TEntity).UnderlyingSystemType.Name);
@@ -46,8 +46,10 @@ namespace SmartCore.AuditMongo.Repository
 					AdditionalParameters = parameters
 				});
 			}
-			catch
-			{}
+			catch (Exception ex)
+			{
+
+			}
 		}
 
 		public async Task WriteReportAsync(IIdentityUser user, string reportName)
