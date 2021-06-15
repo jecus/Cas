@@ -33,15 +33,15 @@ using SmartCore.Queries;
 namespace SmartCore
 {
 	/// <summary>
-    /// Окружение системы CAS. Движок CAS
+    /// РћРєСЂСѓР¶РµРЅРёРµ СЃРёСЃС‚РµРјС‹ CAS. Р”РІРёР¶РѕРє CAS
     /// </summary>
     public class CasEnvironment:ICasEnvironment
     {
-        // Начало работы с окружением CAS
+        // РќР°С‡Р°Р»Рѕ СЂР°Р±РѕС‚С‹ СЃ РѕРєСЂСѓР¶РµРЅРёРµРј CAS
 
         #region public CasEnvironment()
         /// <summary>
-        /// Создает окружение системы CAS, необходимую для ее работы
+        /// РЎРѕР·РґР°РµС‚ РѕРєСЂСѓР¶РµРЅРёРµ СЃРёСЃС‚РµРјС‹ CAS, РЅРµРѕР±С…РѕРґРёРјСѓСЋ РґР»СЏ РµРµ СЂР°Р±РѕС‚С‹
         /// </summary>
         public CasEnvironment()
         {
@@ -115,7 +115,7 @@ namespace SmartCore
         #region public void Disconnect()
 
         /// <summary>
-        /// Производит отключение от базы данных
+        /// РџСЂРѕРёР·РІРѕРґРёС‚ РѕС‚РєР»СЋС‡РµРЅРёРµ РѕС‚ Р±Р°Р·С‹ РґР°РЅРЅС‹С…
         /// </summary>
         public void Disconnect()
         {
@@ -143,7 +143,7 @@ namespace SmartCore
 
         #region public void Connect(String serverName, String userName, String pass, String database)
         /// <summary>
-        /// Подключаемся к базе данных под указанной учетной записью и выбираем базу данных
+        /// РџРѕРґРєР»СЋС‡Р°РµРјСЃСЏ Рє Р±Р°Р·Рµ РґР°РЅРЅС‹С… РїРѕРґ СѓРєР°Р·Р°РЅРЅРѕР№ СѓС‡РµС‚РЅРѕР№ Р·Р°РїРёСЃСЊСЋ Рё РІС‹Р±РёСЂР°РµРј Р±Р°Р·Сѓ РґР°РЅРЅС‹С…
         /// </summary>
         /// <param name="serverName"></param>
         /// <param name="userName"></param>
@@ -189,7 +189,7 @@ namespace SmartCore
 
         #region public override string ToString()
         /// <summary>
-        /// Дает короткую информацию о загруженной базе данных и окружении
+        /// Р”Р°РµС‚ РєРѕСЂРѕС‚РєСѓСЋ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ Р·Р°РіСЂСѓР¶РµРЅРЅРѕР№ Р±Р°Р·Рµ РґР°РЅРЅС‹С… Рё РѕРєСЂСѓР¶РµРЅРёРё
         /// </summary>
         /// <returns></returns>
         public override string ToString()
@@ -216,7 +216,7 @@ namespace SmartCore
 		#endregion
 
 		/*
-		* Выполнение запросов
+		* Р’С‹РїРѕР»РЅРµРЅРёРµ Р·Р°РїСЂРѕСЃРѕРІ
 		*/
 
 		public DataSet Execute(string sql)
@@ -235,17 +235,17 @@ namespace SmartCore
 	    }
 
 	    /*
-         * Свойства, глобальные объекты
+         * РЎРІРѕР№СЃС‚РІР°, РіР»РѕР±Р°Р»СЊРЅС‹Рµ РѕР±СЉРµРєС‚С‹
          */
 
 		#region public OperatorCollection Operators { get; internal set; }
 
 		/// <summary>
-		/// Доступные операторы
+		/// Р”РѕСЃС‚СѓРїРЅС‹Рµ РѕРїРµСЂР°С‚РѕСЂС‹
 		/// </summary>
 		private OperatorCollection _operators;
         /// <summary>
-        /// Доступные операторы
+        /// Р”РѕСЃС‚СѓРїРЅС‹Рµ РѕРїРµСЂР°С‚РѕСЂС‹
         /// </summary>
         public OperatorCollection Operators
         {
@@ -264,11 +264,11 @@ namespace SmartCore
 
         #region public CommonCollection<Vehicle> Vehicles { get; internal set; }
         /// <summary>
-        /// Доступные транспортные средства
+        /// Р”РѕСЃС‚СѓРїРЅС‹Рµ С‚СЂР°РЅСЃРїРѕСЂС‚РЅС‹Рµ СЃСЂРµРґСЃС‚РІР°
         /// </summary>
         private CommonCollection<Vehicle> _vehicles;
         /// <summary>
-        /// Доступные транспортные средства
+        /// Р”РѕСЃС‚СѓРїРЅС‹Рµ С‚СЂР°РЅСЃРїРѕСЂС‚РЅС‹Рµ СЃСЂРµРґСЃС‚РІР°
         /// </summary>
         public CommonCollection<Vehicle> Vehicles
         {
@@ -290,11 +290,11 @@ namespace SmartCore
 
         #region public CommonCollection<Store> Stores { get; internal set; }
         /// <summary>
-        /// Доступные склады компании
+        /// Р”РѕСЃС‚СѓРїРЅС‹Рµ СЃРєР»Р°РґС‹ РєРѕРјРїР°РЅРёРё
         /// </summary>
         private CommonCollection<Store> _stores;
         /// <summary>
-        /// Доступные склады компании
+        /// Р”РѕСЃС‚СѓРїРЅС‹Рµ СЃРєР»Р°РґС‹ РєРѕРјРїР°РЅРёРё
         /// </summary>
         public CommonCollection<Store> Stores
         {
@@ -321,11 +321,11 @@ namespace SmartCore
 
 		#region public CommonCollection<Hangar> Hangars { get; internal set; }
 		/// <summary>
-		/// Доступные ангары компании
+		/// Р”РѕСЃС‚СѓРїРЅС‹Рµ Р°РЅРіР°СЂС‹ РєРѕРјРїР°РЅРёРё
 		/// </summary>
 		private CommonCollection<Hangar> _hangars;
         /// <summary>
-        /// Доступные ангары компании
+        /// Р”РѕСЃС‚СѓРїРЅС‹Рµ Р°РЅРіР°СЂС‹ РєРѕРјРїР°РЅРёРё
         /// </summary>
         public CommonCollection<Hangar> Hangars
         {
@@ -347,11 +347,11 @@ namespace SmartCore
 
         #region public CommonCollection<WorkShop> WorkShops { get; internal set; }
         /// <summary>
-        /// Доступные лаборатории компании
+        /// Р”РѕСЃС‚СѓРїРЅС‹Рµ Р»Р°Р±РѕСЂР°С‚РѕСЂРёРё РєРѕРјРїР°РЅРёРё
         /// </summary>
         private CommonCollection<WorkShop> _workShops;
         /// <summary>
-        /// Доступные лаборатории компании
+        /// Р”РѕСЃС‚СѓРїРЅС‹Рµ Р»Р°Р±РѕСЂР°С‚РѕСЂРёРё РєРѕРјРїР°РЅРёРё
         /// </summary>
         public CommonCollection<WorkShop> WorkShops
         {
@@ -373,11 +373,11 @@ namespace SmartCore
 
         #region public CommonCollection<WorkShop> WorkShops { get; internal set; }
         /// <summary>
-        /// Доступные лаборатории компании
+        /// Р”РѕСЃС‚СѓРїРЅС‹Рµ Р»Р°Р±РѕСЂР°С‚РѕСЂРёРё РєРѕРјРїР°РЅРёРё
         /// </summary>
         private CommonCollection<WorkStation> _workStations;
         /// <summary>
-        /// Доступные лаборатории компании
+        /// Р”РѕСЃС‚СѓРїРЅС‹Рµ Р»Р°Р±РѕСЂР°С‚РѕСЂРёРё РєРѕРјРїР°РЅРёРё
         /// </summary>
         public CommonCollection<WorkStation> WorkStations
         {
@@ -399,11 +399,11 @@ namespace SmartCore
 
         #region public BaseComponentCollection BaseComponents { get; internal set; }
         /// <summary>
-        /// Доступные базовые агрегаты
+        /// Р”РѕСЃС‚СѓРїРЅС‹Рµ Р±Р°Р·РѕРІС‹Рµ Р°РіСЂРµРіР°С‚С‹
         /// </summary>
         private BaseComponentCollection _baseComponents;
         /// <summary>
-        /// Доступные базовые агрегаты
+        /// Р”РѕСЃС‚СѓРїРЅС‹Рµ Р±Р°Р·РѕРІС‹Рµ Р°РіСЂРµРіР°С‚С‹
         /// </summary>
         public BaseComponentCollection BaseComponents
         {
@@ -452,7 +452,7 @@ namespace SmartCore
         #region public Dictionary<string, ICommonCollection> TempCollections
         private Dictionary<string, ICommonCollection> _tempCollections;
         /// <summary>
-        /// Временные коллекции (коллекции, используемые более чем в одном контроле)
+        /// Р’СЂРµРјРµРЅРЅС‹Рµ РєРѕР»Р»РµРєС†РёРё (РєРѕР»Р»РµРєС†РёРё, РёСЃРїРѕР»СЊР·СѓРµРјС‹Рµ Р±РѕР»РµРµ С‡РµРј РІ РѕРґРЅРѕРј РєРѕРЅС‚СЂРѕР»Рµ)
         /// </summary>
         public Dictionary<string, ICommonCollection> TempCollections
         {
@@ -463,11 +463,11 @@ namespace SmartCore
 
         #region public ReasonCollection Reasons { get; }
         /// <summary>
-        /// Причины сбоя
+        /// РџСЂРёС‡РёРЅС‹ СЃР±РѕСЏ
         /// </summary>
         private ReasonCollection _reasons;
         /// <summary>
-        /// Возвращает все Причины сбоя
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РІСЃРµ РџСЂРёС‡РёРЅС‹ СЃР±РѕСЏ
         /// </summary>
         public ReasonCollection Reasons
         {
@@ -475,7 +475,7 @@ namespace SmartCore
             {
                 if (_reasons == null)
                 {
-                    //Загрузки причин сбоя
+                    //Р—Р°РіСЂСѓР·РєРё РїСЂРёС‡РёРЅ СЃР±РѕСЏ
                     _reasons = new ReasonCollection(_newLoader.GetObjectList<ReasonDTO, Reason>().ToArray());
                 }
                 //
@@ -486,17 +486,17 @@ namespace SmartCore
 
 		#region public IIdentityUser IdentityUser { get; }
 		/// <summary>
-		/// Пользователь, подключенный к базе данных
+		/// РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ, РїРѕРґРєР»СЋС‡РµРЅРЅС‹Р№ Рє Р±Р°Р·Рµ РґР°РЅРЅС‹С…
 		/// </summary>
 		private IIdentityUser _currentUser;
         /// <summary>
-        /// Возвращает пользователя, подключенного к базе данных
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ, РїРѕРґРєР»СЋС‡РµРЅРЅРѕРіРѕ Рє Р±Р°Р·Рµ РґР°РЅРЅС‹С…
         /// </summary>
         public IIdentityUser IdentityUser
         {
             get
             {
-                // Возвращаем текущего пользователя 
+                // Р’РѕР·РІСЂР°С‰Р°РµРј С‚РµРєСѓС‰РµРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ 
                 if (_currentUser == null)
                     _currentUser = new UserDTO(){Name = "Error"};
                
@@ -507,16 +507,16 @@ namespace SmartCore
         #endregion
 
         /*
-         * Загрузка, Перезагрузка ядра
+         * Р—Р°РіСЂСѓР·РєР°, РџРµСЂРµР·Р°РіСЂСѓР·РєР° СЏРґСЂР°
          */
 
         #region public void Reset()
         /// <summary>
-        /// Сбрасывает все коллекции и загружает их заново - все старые ссылки на базовые агрегаты, воздушные суда и операторы становятся не актуальными 
+        /// РЎР±СЂР°СЃС‹РІР°РµС‚ РІСЃРµ РєРѕР»Р»РµРєС†РёРё Рё Р·Р°РіСЂСѓР¶Р°РµС‚ РёС… Р·Р°РЅРѕРІРѕ - РІСЃРµ СЃС‚Р°СЂС‹Рµ СЃСЃС‹Р»РєРё РЅР° Р±Р°Р·РѕРІС‹Рµ Р°РіСЂРµРіР°С‚С‹, РІРѕР·РґСѓС€РЅС‹Рµ СЃСѓРґР° Рё РѕРїРµСЂР°С‚РѕСЂС‹ СЃС‚Р°РЅРѕРІСЏС‚СЃСЏ РЅРµ Р°РєС‚СѓР°Р»СЊРЅС‹РјРё 
         /// </summary>
         public void Reset()
         {
-            //Временные коллекции
+            //Р’СЂРµРјРµРЅРЅС‹Рµ РєРѕР»Р»РµРєС†РёРё
             if(_tempCollections != null)
             {
                 foreach (KeyValuePair<string, ICommonCollection> pair in _tempCollections)
@@ -527,31 +527,31 @@ namespace SmartCore
             }
             _tempCollections = null;
 
-            //Словари
+            //РЎР»РѕРІР°СЂРё
             _dictionaries.Clear();
 
-            //Операторы
+            //РћРїРµСЂР°С‚РѕСЂС‹
             if(_operators != null)
                 _operators.Clear();
             _operators = null;
             
 
-            //Склады
+            //РЎРєР»Р°РґС‹
             if (_stores != null)
                 _stores.Clear();
             _stores = null;
 
-            //Базовые агрегаты
+            //Р‘Р°Р·РѕРІС‹Рµ Р°РіСЂРµРіР°С‚С‹
             if (_baseComponents != null)
                 _baseComponents.Clear();
             _baseComponents = null;
 
-            //Приничы сбоев
+            //РџСЂРёРЅРёС‡С‹ СЃР±РѕРµРІ
             if (_reasons != null)
                 _reasons.Clear();
             _reasons = null;
 
-            //Калькулятор
+            //РљР°Р»СЊРєСѓР»СЏС‚РѕСЂ
             if (_calculator != null) _calculator.Reset();
         }
         #endregion
@@ -560,7 +560,7 @@ namespace SmartCore
 
 		#region public void InitAsync(BackgroundWorker backgroundWorker, LoadingState loadingState)
 		/// <summary>
-		/// Загружает все данные из базы, необходимые для функционирования ядра
+		/// Р—Р°РіСЂСѓР¶Р°РµС‚ РІСЃРµ РґР°РЅРЅС‹Рµ РёР· Р±Р°Р·С‹, РЅРµРѕР±С…РѕРґРёРјС‹Рµ РґР»СЏ С„СѓРЅРєС†РёРѕРЅРёСЂРѕРІР°РЅРёСЏ СЏРґСЂР°
 		/// </summary>
 		public void InitAsync(BackgroundWorker backgroundWorker, LoadingState loadingState)
         {
@@ -570,7 +570,7 @@ namespace SmartCore
                  loadingState = new LoadingState();
             loadingState.MaxPersentage = 10;
 
-            //Загрузка всех пользователей
+            //Р—Р°РіСЂСѓР·РєР° РІСЃРµС… РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№
 			loadingState.CurrentPersentage = 0;
             loadingState.CurrentPersentageDescription = "Loading Users";
             backgroundWorker.ReportProgress(1, loadingState);
@@ -585,7 +585,7 @@ namespace SmartCore
 	            return;
             }
 
-			//Временные коллекции
+			//Р’СЂРµРјРµРЅРЅС‹Рµ РєРѕР»Р»РµРєС†РёРё
 			loadingState.CurrentPersentage = 1;
             loadingState.CurrentPersentageDescription = "Loading Temp Collection";
             backgroundWorker.ReportProgress(1, loadingState);
@@ -597,7 +597,7 @@ namespace SmartCore
                 return;
             }
 
-            //Загрузка всех словарей
+            //Р—Р°РіСЂСѓР·РєР° РІСЃРµС… СЃР»РѕРІР°СЂРµР№
             loadingState.CurrentPersentage = 2;
             loadingState.CurrentPersentageDescription = "Loading Dictionaries";
             backgroundWorker.ReportProgress(1, loadingState);
@@ -609,7 +609,7 @@ namespace SmartCore
                 return;
             }
 
-            // Загрузка всех операторов
+            // Р—Р°РіСЂСѓР·РєР° РІСЃРµС… РѕРїРµСЂР°С‚РѕСЂРѕРІ
             loadingState.CurrentPersentage = 3;
             loadingState.CurrentPersentageDescription = "Loading Operators";
             backgroundWorker.ReportProgress(1, loadingState);
@@ -621,7 +621,7 @@ namespace SmartCore
                 return;
             }
 
-            // Загрузка всех воздушных судов 
+            // Р—Р°РіСЂСѓР·РєР° РІСЃРµС… РІРѕР·РґСѓС€РЅС‹С… СЃСѓРґРѕРІ 
             loadingState.CurrentPersentage = 4;
             loadingState.CurrentPersentageDescription = "Loading Aircrafts";
             backgroundWorker.ReportProgress(1, loadingState);
@@ -634,7 +634,7 @@ namespace SmartCore
             }
 
 #if !KAC
-            //Загрузка всех ТС
+            //Р—Р°РіСЂСѓР·РєР° РІСЃРµС… РўРЎ
             loadingState.CurrentPersentage = 5;
             loadingState.CurrentPersentageDescription = "Loading Vehicles";
             backgroundWorker.ReportProgress(1, loadingState);
@@ -646,7 +646,7 @@ namespace SmartCore
                 return;
             }
 
-            //Загрузка всех ангаров
+            //Р—Р°РіСЂСѓР·РєР° РІСЃРµС… Р°РЅРіР°СЂРѕРІ
             loadingState.CurrentPersentage = 6;
             loadingState.CurrentPersentageDescription = "Loading Hangars";
             backgroundWorker.ReportProgress(1, loadingState);
@@ -659,7 +659,7 @@ namespace SmartCore
             }
 #endif
 
-            // Загрузка всех складов
+            // Р—Р°РіСЂСѓР·РєР° РІСЃРµС… СЃРєР»Р°РґРѕРІ
             loadingState.CurrentPersentage = 7;
             loadingState.CurrentPersentageDescription = "Loading Stores";
             backgroundWorker.ReportProgress(1, loadingState);
@@ -672,7 +672,7 @@ namespace SmartCore
             }
 
 #if !KAC
-            // Загрузка всех лабораторий
+            // Р—Р°РіСЂСѓР·РєР° РІСЃРµС… Р»Р°Р±РѕСЂР°С‚РѕСЂРёР№
             loadingState.CurrentPersentage = 8;
             loadingState.CurrentPersentageDescription = "Loading Work Shops";
             backgroundWorker.ReportProgress(1, loadingState);
@@ -696,7 +696,7 @@ namespace SmartCore
 		        return;
 	        }
 
-            // Загрузка всех базовых агрегатов
+            // Р—Р°РіСЂСѓР·РєР° РІСЃРµС… Р±Р°Р·РѕРІС‹С… Р°РіСЂРµРіР°С‚РѕРІ
             loadingState.CurrentPersentage = 10;
             loadingState.CurrentPersentageDescription = "Loading Base Details";
             backgroundWorker.ReportProgress(1, loadingState);
@@ -708,7 +708,7 @@ namespace SmartCore
                 return;
             }
 
-            // Выставляем ссылки между объектами
+            // Р’С‹СЃС‚Р°РІР»СЏРµРј СЃСЃС‹Р»РєРё РјРµР¶РґСѓ РѕР±СЉРµРєС‚Р°РјРё
             loadingState.CurrentPersentage = 11;
             loadingState.CurrentPersentageDescription = "Set Links";
             backgroundWorker.ReportProgress(1, loadingState);
@@ -731,18 +731,18 @@ namespace SmartCore
         #endregion
 
         /*
-         * Вспомогательные 
+         * Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Рµ 
          */
 
         /*
-         * Базовые агрегаты
+         * Р‘Р°Р·РѕРІС‹Рµ Р°РіСЂРµРіР°С‚С‹
          */
         /*
-         * Родительский объект для другого объекта
+         * Р РѕРґРёС‚РµР»СЊСЃРєРёР№ РѕР±СЉРµРєС‚ РґР»СЏ РґСЂСѓРіРѕРіРѕ РѕР±СЉРµРєС‚Р°
          */
 
         /*
-         * Работа с Файлами: Свойства, глобальные объекты
+         * Р Р°Р±РѕС‚Р° СЃ Р¤Р°Р№Р»Р°РјРё: РЎРІРѕР№СЃС‚РІР°, РіР»РѕР±Р°Р»СЊРЅС‹Рµ РѕР±СЉРµРєС‚С‹
          */
 
         private bool _exit;
@@ -752,9 +752,9 @@ namespace SmartCore
         #region public void OpenFile(AttachedFile attachedFile, out string message)
 
         /// <summary>
-        /// Копирует файл во временную папку. В зависимости от расширения файла открывает подходящий процесс
+        /// РљРѕРїРёСЂСѓРµС‚ С„Р°Р№Р» РІРѕ РІСЂРµРјРµРЅРЅСѓСЋ РїР°РїРєСѓ. Р’ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ СЂР°СЃС€РёСЂРµРЅРёСЏ С„Р°Р№Р»Р° РѕС‚РєСЂС‹РІР°РµС‚ РїРѕРґС…РѕРґСЏС‰РёР№ РїСЂРѕС†РµСЃСЃ
         /// </summary>
-        /// <param name="attachedFile">Файл для открытия</param>
+        /// <param name="attachedFile">Р¤Р°Р№Р» РґР»СЏ РѕС‚РєСЂС‹С‚РёСЏ</param>
         /// <param name="message"></param>
         /// <returns></returns>
         public void OpenFile(AttachedFile attachedFile, out string message)
@@ -787,11 +787,11 @@ namespace SmartCore
             if (File.Exists(fileNameToRemove))
             {
                 Process tempProcess = new Process();
-                //определение расширения файла
+                //РѕРїСЂРµРґРµР»РµРЅРёРµ СЂР°СЃС€РёСЂРµРЅРёСЏ С„Р°Р№Р»Р°
                 string pattern = @"\.\w+$";
                 Match m = Regex.Match(attachedFile.FileName, pattern);
                 string fileExtension = m.Groups[0].Value;
-                //определение,чем открыть фаил, в зависимости от расширения
+                //РѕРїСЂРµРґРµР»РµРЅРёРµ,С‡РµРј РѕС‚РєСЂС‹С‚СЊ С„Р°РёР», РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ СЂР°СЃС€РёСЂРµРЅРёСЏ
                 if (Regex.IsMatch(fileExtension, @"(\.[pP][dD][fF])"))
                     tempProcess.StartInfo.FileName = fileNameToRemove;
                 if (Regex.IsMatch(fileExtension, @"(\.[pP][nN][gG])") ||
@@ -850,7 +850,7 @@ namespace SmartCore
         #region private void TempFileDeleting()
 
         /// <summary>
-        /// Копирует файл во временную папку. В зависимости от расширения файла открывает его в подходящем процессе
+        /// РљРѕРїРёСЂСѓРµС‚ С„Р°Р№Р» РІРѕ РІСЂРµРјРµРЅРЅСѓСЋ РїР°РїРєСѓ. Р’ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ СЂР°СЃС€РёСЂРµРЅРёСЏ С„Р°Р№Р»Р° РѕС‚РєСЂС‹РІР°РµС‚ РµРіРѕ РІ РїРѕРґС…РѕРґСЏС‰РµРј РїСЂРѕС†РµСЃСЃРµ
         /// </summary>
         /// <returns></returns>
         private void TempFileDeleting()
@@ -901,16 +901,16 @@ namespace SmartCore
         #endregion
 
         /*
-         * Загрузка данных из базы 
+         * Р—Р°РіСЂСѓР·РєР° РґР°РЅРЅС‹С… РёР· Р±Р°Р·С‹ 
          */
 
         #region public Loader Loader { get; }
         /// <summary>
-        /// Загрузчик данных
+        /// Р—Р°РіСЂСѓР·С‡РёРє РґР°РЅРЅС‹С…
         /// </summary>
         private ILoader _loader;
         /// <summary>
-        /// Загрузчик данных - За загрузку объектов отвечает отдельный класс
+        /// Р—Р°РіСЂСѓР·С‡РёРє РґР°РЅРЅС‹С… - Р—Р° Р·Р°РіСЂСѓР·РєСѓ РѕР±СЉРµРєС‚РѕРІ РѕС‚РІРµС‡Р°РµС‚ РѕС‚РґРµР»СЊРЅС‹Р№ РєР»Р°СЃСЃ
         /// </summary>
         public ILoader Loader
         {
@@ -924,16 +924,16 @@ namespace SmartCore
 
 
 		/*
-         * Математичесский аппарат 
+         * РњР°С‚РµРјР°С‚РёС‡РµСЃСЃРєРёР№ Р°РїРїР°СЂР°С‚ 
          */
 
 		#region public Calculator Calculator { get; }
 		/// <summary>
-		/// Возвращает математический аппарат системы Cas
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РјР°С‚РµРјР°С‚РёС‡РµСЃРєРёР№ Р°РїРїР°СЂР°С‚ СЃРёСЃС‚РµРјС‹ Cas
 		/// </summary>
 		private Calculator _calculator;
         /// <summary>
-        /// Возвращает математический аппарат системы Cas
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РјР°С‚РµРјР°С‚РёС‡РµСЃРєРёР№ Р°РїРїР°СЂР°С‚ СЃРёСЃС‚РµРјС‹ Cas
         /// </summary>
         public Calculator Calculator
         {
@@ -946,16 +946,16 @@ namespace SmartCore
         #endregion
 
         /*
-         * Сохранение объектов
+         * РЎРѕС…СЂР°РЅРµРЅРёРµ РѕР±СЉРµРєС‚РѕРІ
          */
 
         #region public Keeper Keeper { get; }
         /// <summary>
-        /// Сохранение всех сущностей
+        /// РЎРѕС…СЂР°РЅРµРЅРёРµ РІСЃРµС… СЃСѓС‰РЅРѕСЃС‚РµР№
         /// </summary>
         private Keeper _keeper;
         /// <summary>
-        /// Сохранение всех сущностей
+        /// РЎРѕС…СЂР°РЅРµРЅРёРµ РІСЃРµС… СЃСѓС‰РЅРѕСЃС‚РµР№
         /// </summary>
         public Keeper Keeper
         {
@@ -969,16 +969,16 @@ namespace SmartCore
         #endregion
 
         /*
-         * Управление объектами
+         * РЈРїСЂР°РІР»РµРЅРёРµ РѕР±СЉРµРєС‚Р°РјРё
          */
 
         #region public Manipulator Manipulator { get; }
         /// <summary>
-        /// Управление объектами
+        /// РЈРїСЂР°РІР»РµРЅРёРµ РѕР±СЉРµРєС‚Р°РјРё
         /// </summary>
         private Manipulator _manipulator;
 	    /// <summary>
-        /// Управление объектами
+        /// РЈРїСЂР°РІР»РµРЅРёРµ РѕР±СЉРµРєС‚Р°РјРё
         /// </summary>
         public Manipulator Manipulator
         {
@@ -1006,11 +1006,11 @@ namespace SmartCore
 
 		#region public NewKeeper NewKeeper { get; }
 	    /// <summary>
-	    /// Загрузчик данных
+	    /// Р—Р°РіСЂСѓР·С‡РёРє РґР°РЅРЅС‹С…
 	    /// </summary>
 	    private INewKeeper _newKeeper;
 	    /// <summary>
-	    /// Загрузчик данных - За загрузку объектов отвечает отдельный класс
+	    /// Р—Р°РіСЂСѓР·С‡РёРє РґР°РЅРЅС‹С… - Р—Р° Р·Р°РіСЂСѓР·РєСѓ РѕР±СЉРµРєС‚РѕРІ РѕС‚РІРµС‡Р°РµС‚ РѕС‚РґРµР»СЊРЅС‹Р№ РєР»Р°СЃСЃ
 	    /// </summary>
 	    public INewKeeper NewKeeper
 	    {
@@ -1027,14 +1027,14 @@ namespace SmartCore
 	    private string _ipServer;
 	    private IAuditRepository _auditRepository;
 
-	    //TODO: врменный метод. IAircraftsCore должен передаваться через конструктор
+	    //TODO: РІСЂРјРµРЅРЅС‹Р№ РјРµС‚РѕРґ. IAircraftsCore РґРѕР»Р¶РµРЅ РїРµСЂРµРґР°РІР°С‚СЊСЃСЏ С‡РµСЂРµР· РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 		public void SetAircraftCore(IAircraftsCore aircraftsCore)
 	    {
 		    _aircraftsCore = aircraftsCore;
 	    }
 
 		/*
-		 * Реализация
+		 * Р РµР°Р»РёР·Р°С†РёСЏ
 		*/
 
 	    #region public  T CloneObject<T>(T source)

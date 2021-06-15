@@ -23,7 +23,7 @@ using HelpEventHandler = CAS.UI.Events.HelpEventHandler;
 namespace CAS.UI.UIControls.Auxiliary
 {
     /// <summary>
-    /// Элемент управления, предназначенный для подключения к SQL серверу
+    /// Р­Р»РµРјРµРЅС‚ СѓРїСЂР°РІР»РµРЅРёСЏ, РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅРЅС‹Р№ РґР»СЏ РїРѕРґРєР»СЋС‡РµРЅРёСЏ Рє SQL СЃРµСЂРІРµСЂСѓ
     /// </summary>
     internal partial class LoginControl : UserControl, IHelpRequester
     {
@@ -98,7 +98,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public event EventHandler Connected
         /// <summary>
-        /// Событие, возникающее когда подключение прошло успешно
+        /// РЎРѕР±С‹С‚РёРµ, РІРѕР·РЅРёРєР°СЋС‰РµРµ РєРѕРіРґР° РїРѕРґРєР»СЋС‡РµРЅРёРµ РїСЂРѕС€Р»Рѕ СѓСЃРїРµС€РЅРѕ
         /// </summary>
         public event EventHandler Connected;
         #endregion
@@ -122,7 +122,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public event EventHandler Connecting
         /// <summary>
-        /// Событие, возникающее при начале подключения
+        /// РЎРѕР±С‹С‚РёРµ, РІРѕР·РЅРёРєР°СЋС‰РµРµ РїСЂРё РЅР°С‡Р°Р»Рµ РїРѕРґРєР»СЋС‡РµРЅРёСЏ
         /// </summary>
         public event EventHandler Connecting;
         #endregion
@@ -141,7 +141,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public event EventHandler Disconnected
         /// <summary>
-        /// Событие, возникающее при отключении
+        /// РЎРѕР±С‹С‚РёРµ, РІРѕР·РЅРёРєР°СЋС‰РµРµ РїСЂРё РѕС‚РєР»СЋС‡РµРЅРёРё
         /// </summary>
         public event EventHandler Disconnected;
         #endregion
@@ -157,7 +157,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public event EventHandler ExitClicked
         /// <summary>
-        /// Событие, возникающее при выходе
+        /// РЎРѕР±С‹С‚РёРµ, РІРѕР·РЅРёРєР°СЋС‰РµРµ РїСЂРё РІС‹С…РѕРґРµ
         /// </summary>
         public event EventHandler ExitClicked;
         #endregion
@@ -173,7 +173,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public event EventHandler ConnectionFailed
         /// <summary>
-        /// Событие, возникающее при потере соединения с сервером
+        /// РЎРѕР±С‹С‚РёРµ, РІРѕР·РЅРёРєР°СЋС‰РµРµ РїСЂРё РїРѕС‚РµСЂРµ СЃРѕРµРґРёРЅРµРЅРёСЏ СЃ СЃРµСЂРІРµСЂРѕРј
         /// </summary>
         public event EventHandler ConnectionFailed;
         #endregion
@@ -196,7 +196,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public bool IsConnecting
         /// <summary>
-        /// Идет ли попытка подключения
+        /// РРґРµС‚ Р»Рё РїРѕРїС‹С‚РєР° РїРѕРґРєР»СЋС‡РµРЅРёСЏ
         /// </summary>
         public bool IsConnecting
         {
@@ -206,7 +206,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region public Button ButtonConnect
         /// <summary>
-        /// Возвращает кнопку подключения к серверу
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРЅРѕРїРєСѓ РїРѕРґРєР»СЋС‡РµРЅРёСЏ Рє СЃРµСЂРІРµСЂСѓ
         /// </summary>
         public Button ButtonConnect
         {
@@ -361,7 +361,7 @@ namespace CAS.UI.UIControls.Auxiliary
             textBoxPassword.ForeColor = Color.White;
             textBoxPassword.TabIndex = 2;
             textBoxPassword.BackColor = Color.FromArgb(52, 121, 191);
-            textBoxPassword.PasswordChar = '•';
+            textBoxPassword.PasswordChar = 'вЂў';
             textBoxPassword.BorderStyle = BorderStyle.None;
             textBoxPassword.PreviewKeyDown += EnterPressed;
             //
@@ -541,7 +541,7 @@ namespace CAS.UI.UIControls.Auxiliary
         void BackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             _loadForm.Hide();
-            //Разлокировка кнопки Exit
+            //Р Р°Р·Р»РѕРєРёСЂРѕРІРєР° РєРЅРѕРїРєРё Exit
             buttonExit.Enabled = true;
 
             OnConnectedAction();
@@ -560,7 +560,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region private void LoadSettings()
         /// <summary>
-        /// Создает новый элемент управления для подключения к базе данных
+        /// РЎРѕР·РґР°РµС‚ РЅРѕРІС‹Р№ СЌР»РµРјРµРЅС‚ СѓРїСЂР°РІР»РµРЅРёСЏ РґР»СЏ РїРѕРґРєР»СЋС‡РµРЅРёСЏ Рє Р±Р°Р·Рµ РґР°РЅРЅС‹С…
         /// </summary>
         private void LoadSettings()
         {
@@ -602,11 +602,11 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region private void SetEnabled(bool value, bool authentication)
         /// <summary>
-        /// Устанавливает свойство Enabled всем полям по заданному значению
+        /// РЈСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ СЃРІРѕР№СЃС‚РІРѕ Enabled РІСЃРµРј РїРѕР»СЏРј РїРѕ Р·Р°РґР°РЅРЅРѕРјСѓ Р·РЅР°С‡РµРЅРёСЋ
         /// </summary>
-        /// <param name="value">Новое значение свойства Enabled</param>
-        /// <param name="authentication">true - если Authentication="Simple", false - если Authentication="Windows"</param>
-        /// <remarks>Используется, когда необходимо произвести подключение</remarks>
+        /// <param name="value">РќРѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ СЃРІРѕР№СЃС‚РІР° Enabled</param>
+        /// <param name="authentication">true - РµСЃР»Рё Authentication="Simple", false - РµСЃР»Рё Authentication="Windows"</param>
+        /// <remarks>РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ, РєРѕРіРґР° РЅРµРѕР±С…РѕРґРёРјРѕ РїСЂРѕРёР·РІРµСЃС‚Рё РїРѕРґРєР»СЋС‡РµРЅРёРµ</remarks>
         private void SetEnabled(bool value, bool authentication)
         {
             //labelServerName.Enabled = value;
@@ -749,7 +749,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
 
 
-	            //нажатие клавиши Enter
+	            //РЅР°Р¶Р°С‚РёРµ РєР»Р°РІРёС€Рё Enter
 	            buttonExit.Enabled = false;
 
 	            _loadForm.Show();
@@ -925,7 +925,7 @@ namespace CAS.UI.UIControls.Auxiliary
         public new event HelpEventHandler HelpRequested;
 
         ///<summary>
-        /// Описание раздела помощи
+        /// РћРїРёСЃР°РЅРёРµ СЂР°Р·РґРµР»Р° РїРѕРјРѕС‰Рё
         ///</summary>
         public string TopicId
         {
@@ -934,7 +934,7 @@ namespace CAS.UI.UIControls.Auxiliary
         }
 
         /// <summary>
-        /// Вызывается событие HelpRequested
+        /// Р’С‹Р·С‹РІР°РµС‚СЃСЏ СЃРѕР±С‹С‚РёРµ HelpRequested
         /// </summary>
         public void RequestHelp()
         {
@@ -942,9 +942,9 @@ namespace CAS.UI.UIControls.Auxiliary
         }
 
         /// <summary>
-        /// Вызывается событие HelpRequested для отображения справки заданного раздела
+        /// Р’С‹Р·С‹РІР°РµС‚СЃСЏ СЃРѕР±С‹С‚РёРµ HelpRequested РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ СЃРїСЂР°РІРєРё Р·Р°РґР°РЅРЅРѕРіРѕ СЂР°Р·РґРµР»Р°
         /// </summary>
-        /// <param name="topicId">Описание раздела справки</param>
+        /// <param name="topicId">РћРїРёСЃР°РЅРёРµ СЂР°Р·РґРµР»Р° СЃРїСЂР°РІРєРё</param>
         public void RequestHelp(string topicId)
         {
             if (HelpRequested != null)
