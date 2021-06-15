@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
 using CAS.UI.Helpers;
+using EntityCore.Attributte;
 using EntityCore.DTO.General;
 using EntityCore.DTO;
 using EntityCore.DTO.Dictionaries;
@@ -570,6 +571,13 @@ namespace SmartCore.Entities.NewLoader
 		}
 
 		#endregion
+
+		public ICommonCollection<ComponentModel> GetComponentModels(params object[] type)
+		{
+			var ids = new List<int>() {GoodsClass.AircraftBaseComponents.ItemId};
+			var res =  new CommonCollection<ComponentModel>(GetObjectList<AccessoryDescriptionDTO, ComponentModel>(new Filter("ComponentClass", ids)));
+			return res;
+		}
 
 		#region public ICommonCollection<JobCard> GetJobCard(params object[] parametres)
 

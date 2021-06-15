@@ -20,7 +20,7 @@ using SmartCore.Entities.General.WorkPackage;
 namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 {
     /// <summary>
-    /// Класс отображает список 
+    /// РљР»Р°СЃСЃ РѕС‚РѕР±СЂР°Р¶Р°РµС‚ СЃРїРёСЃРѕРє 
     /// </summary>
     public partial class DiscrepancyControl : Interfaces.EditObjectControl
     {
@@ -30,11 +30,11 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 		private bool _showDeferredInfoPanel;
         private CommonCollection<Specialist> _specialists = new CommonCollection<Specialist>();
 	    /*
-         * Свойства 
+         * РЎРІРѕР№СЃС‚РІР° 
          */
         #region public Discrepancy Discrepancy
         /// <summary>
-        /// Отклонение, с которым связан контрол
+        /// РћС‚РєР»РѕРЅРµРЅРёРµ, СЃ РєРѕС‚РѕСЂС‹Рј СЃРІСЏР·Р°РЅ РєРѕРЅС‚СЂРѕР»
         /// </summary>
         public Discrepancy Discrepancy
         {
@@ -45,7 +45,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
         #region public bool EditEnabled
         ///<summary>
-        /// Возвращает или задает значение возможности редактирования
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ Р·РЅР°С‡РµРЅРёРµ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ
         ///</summary>
         public bool EditEnabled
         {
@@ -62,7 +62,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
         #region public bool EnableExtendedControl
         ///<summary>
-        /// Возвращает или задает значение видна ли панель расширения
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ Р·РЅР°С‡РµРЅРёРµ РІРёРґРЅР° Р»Рё РїР°РЅРµР»СЊ СЂР°СЃС€РёСЂРµРЅРёСЏ
         ///</summary>
         public bool EnableExtendedControl
         {
@@ -84,7 +84,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
         #region public bool Extended
         ///<summary>
-        /// Возвращает или задает значение Показывается ли елемент развернутым
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ Р·РЅР°С‡РµРЅРёРµ РџРѕРєР°Р·С‹РІР°РµС‚СЃСЏ Р»Рё РµР»РµРјРµРЅС‚ СЂР°Р·РІРµСЂРЅСѓС‚С‹Рј
         ///</summary>
         public bool Extended
         {
@@ -101,7 +101,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
         #region public bool FlightVisible
         ///<summary>
-        /// Возвращает или задает значение видимости ссылки на полет
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ Р·РЅР°С‡РµРЅРёРµ РІРёРґРёРјРѕСЃС‚Рё СЃСЃС‹Р»РєРё РЅР° РїРѕР»РµС‚
         ///</summary>
         public bool FlightVisible
         {
@@ -116,8 +116,8 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
         #region public bool IsNull
         /// <summary>
-        /// Свойство показывает, нужно ли сохранять отклонение или нет. 
-        /// Были ли введенны данные в элемент или нет
+        /// РЎРІРѕР№СЃС‚РІРѕ РїРѕРєР°Р·С‹РІР°РµС‚, РЅСѓР¶РЅРѕ Р»Рё СЃРѕС…СЂР°РЅСЏС‚СЊ РѕС‚РєР»РѕРЅРµРЅРёРµ РёР»Рё РЅРµС‚. 
+        /// Р‘С‹Р»Рё Р»Рё РІРІРµРґРµРЅРЅС‹ РґР°РЅРЅС‹Рµ РІ СЌР»РµРјРµРЅС‚ РёР»Рё РЅРµС‚
         /// </summary>
         public bool IsNull
         {
@@ -130,7 +130,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
         #region private int _index;
         /// <summary>
-        /// Номер элемента
+        /// РќРѕРјРµСЂ СЌР»РµРјРµРЅС‚Р°
         /// </summary>
         public int Index
         {
@@ -148,7 +148,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
         #region public DateTime RTSDate
         ///<summary>
-        /// Возвращает или задает дату выпуска в сервис
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ РґР°С‚Сѓ РІС‹РїСѓСЃРєР° РІ СЃРµСЂРІРёСЃ
         ///</summary>
         public DateTime RTSDate
         {
@@ -163,7 +163,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
         #region public DateTime Station
         ///<summary>
-        /// Возвращает или задает станцию выпуска в сервис
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ СЃС‚Р°РЅС†РёСЋ РІС‹РїСѓСЃРєР° РІ СЃРµСЂРІРёСЃ
         ///</summary>
         public string Station
         {
@@ -180,12 +180,12 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 		public bool ShowDeffects { get; set; }
 
 		/*
-         * Конструктор
+         * РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
          */
 
 		#region public DiscrepancyControl()
 		/// <summary>
-		/// Пустой конструктор
+		/// РџСѓСЃС‚РѕР№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 		/// </summary>
 		public DiscrepancyControl()
         {
@@ -195,7 +195,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
         #region public DiscrepancyControl(Discrepancy discrepancy) : this ()
         /// <summary>
-        /// Пустой конструктор
+        /// РџСѓСЃС‚РѕР№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
         /// </summary>
         public DiscrepancyControl(Discrepancy discrepancy, List<Discrepancy> discrepancies, List<WorkPackage> workPackages, List<TransferRecord> transferRecords, bool showDeffects = false) : this ()
         {
@@ -209,14 +209,14 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         #endregion
 
         /*
-         * Перегруженные методы 
+         * РџРµСЂРµРіСЂСѓР¶РµРЅРЅС‹Рµ РјРµС‚РѕРґС‹ 
          */
 
         #region public override void ApplyChanges()
         /// <summary>
-        /// Применить к объекту сделанные изменения на контроле. 
-        /// Если не все данные удовлетворяют формату ввода (например при вводе чисел), свойства объекта не изменяются, возвращается false
-        /// Вызов base.ApplyChanges() обязателен
+        /// РџСЂРёРјРµРЅРёС‚СЊ Рє РѕР±СЉРµРєС‚Сѓ СЃРґРµР»Р°РЅРЅС‹Рµ РёР·РјРµРЅРµРЅРёСЏ РЅР° РєРѕРЅС‚СЂРѕР»Рµ. 
+        /// Р•СЃР»Рё РЅРµ РІСЃРµ РґР°РЅРЅС‹Рµ СѓРґРѕРІР»РµС‚РІРѕСЂСЏСЋС‚ С„РѕСЂРјР°С‚Сѓ РІРІРѕРґР° (РЅР°РїСЂРёРјРµСЂ РїСЂРё РІРІРѕРґРµ С‡РёСЃРµР»), СЃРІРѕР№СЃС‚РІР° РѕР±СЉРµРєС‚Р° РЅРµ РёР·РјРµРЅСЏСЋС‚СЃСЏ, РІРѕР·РІСЂР°С‰Р°РµС‚СЃСЏ false
+        /// Р’С‹Р·РѕРІ base.ApplyChanges() РѕР±СЏР·Р°С‚РµР»РµРЅ
         /// </summary>
         /// <returns></returns>
         public override void ApplyChanges()
@@ -226,8 +226,8 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
 	            if (ShowDeffects)
 	            {
-		            Discrepancy.DeffeсtPhase = comboBoxPhase.SelectedItem as DeffeсtPhase;
-		            Discrepancy.DeffeсtCategory = comboBoxDeffectCat.SelectedItem as DeffeсtCategory;
+		            Discrepancy.DeffeСЃtPhase = comboBoxPhase.SelectedItem as DeffeСЃtPhase;
+		            Discrepancy.DeffeСЃtCategory = comboBoxDeffectCat.SelectedItem as DeffeСЃtCategory;
 		            Discrepancy.DeffectConfirm = comboBoxDeffectConfirm.SelectedItem as DeffectConfirm;
 		            Discrepancy.ActionType = comboBoxActinType.SelectedItem as ActionType;
 
@@ -302,7 +302,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
         #region public override void FillControls()
         /// <summary>
-        /// Обновляет значения полей
+        /// РћР±РЅРѕРІР»СЏРµС‚ Р·РЅР°С‡РµРЅРёСЏ РїРѕР»РµР№
         /// </summary>
         public override void FillControls()
         {
@@ -326,12 +326,12 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 			if (ShowDeffects)
 	        {
 				comboBoxPhase.Items.Clear();
-				comboBoxPhase.Items.AddRange(DeffeсtPhase.Items.ToArray());
-		        comboBoxPhase.SelectedItem = Discrepancy.DeffeсtPhase;
+				comboBoxPhase.Items.AddRange(DeffeСЃtPhase.Items.ToArray());
+		        comboBoxPhase.SelectedItem = Discrepancy.DeffeСЃtPhase;
 
 				comboBoxDeffectCat.Items.Clear();
-		        comboBoxDeffectCat.Items.AddRange(DeffeсtCategory.Items.ToArray());
-		        comboBoxDeffectCat.SelectedItem = Discrepancy.DeffeсtCategory;
+		        comboBoxDeffectCat.Items.AddRange(DeffeСЃtCategory.Items.ToArray());
+		        comboBoxDeffectCat.SelectedItem = Discrepancy.DeffeСЃtCategory;
 
 				comboBoxDeffectConfirm.Items.Clear();
 		        comboBoxDeffectConfirm.Items.AddRange(DeffectConfirm.Items.ToArray());
@@ -457,7 +457,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
                 }
                 if(parentAtlb != null)
                 {
-                    //Проверить на значение свойтсва ParentAircraft в parentAtlb
+                    //РџСЂРѕРІРµСЂРёС‚СЊ РЅР° Р·РЅР°С‡РµРЅРёРµ СЃРІРѕР№С‚СЃРІР° ParentAircraft РІ parentAtlb
                     lookupComboboxFlight.SetItemsScreenControl<FlightsListScreen>
                         (new object[] { parentAtlb },
 						 aircraft.RegistrationNumber + ". ATLB No " + parentAtlb.ATLBNo);
@@ -594,7 +594,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
                             comboSpecialist1.SelectedItem = selectedSpec;
                         else
                         {
-                            //Искомый специалист недействителен
+                            //РСЃРєРѕРјС‹Р№ СЃРїРµС†РёР°Р»РёСЃС‚ РЅРµРґРµР№СЃС‚РІРёС‚РµР»РµРЅ
                             comboSpecialist1.Items.Add(Discrepancy.CertificateOfReleaseToService.AuthorizationB1);
                             comboSpecialist1.SelectedItem = Discrepancy.CertificateOfReleaseToService.AuthorizationB1;
                         }
@@ -610,7 +610,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
                             comboSpecialist2.SelectedItem = selectedSpec;
                         else
                         {
-                            //Искомый специалист недействителен
+                            //РСЃРєРѕРјС‹Р№ СЃРїРµС†РёР°Р»РёСЃС‚ РЅРµРґРµР№СЃС‚РІРёС‚РµР»РµРЅ
                             comboSpecialist2.Items.Add(Discrepancy.CertificateOfReleaseToService.AuthorizationB2);
                             comboSpecialist2.SelectedItem = Discrepancy.CertificateOfReleaseToService.AuthorizationB2;
                         }
@@ -686,17 +686,17 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
 
 		#region public override bool CheckData()
 		/// <summary>
-		/// Проверяет введенные данные.
-		/// Если какое-либо поле не подходит по формату, следует сразу кидать MessageBox, ставить курсор в необходимое поле и возвращать false в качестве результата метода
+		/// РџСЂРѕРІРµСЂСЏРµС‚ РІРІРµРґРµРЅРЅС‹Рµ РґР°РЅРЅС‹Рµ.
+		/// Р•СЃР»Рё РєР°РєРѕРµ-Р»РёР±Рѕ РїРѕР»Рµ РЅРµ РїРѕРґС…РѕРґРёС‚ РїРѕ С„РѕСЂРјР°С‚Сѓ, СЃР»РµРґСѓРµС‚ СЃСЂР°Р·Сѓ РєРёРґР°С‚СЊ MessageBox, СЃС‚Р°РІРёС‚СЊ РєСѓСЂСЃРѕСЂ РІ РЅРµРѕР±С…РѕРґРёРјРѕРµ РїРѕР»Рµ Рё РІРѕР·РІСЂР°С‰Р°С‚СЊ false РІ РєР°С‡РµСЃС‚РІРµ СЂРµР·СѓР»СЊС‚Р°С‚Р° РјРµС‚РѕРґР°
 		/// </summary>
 		/// <returns></returns>
 		public override bool CheckData()
         {
 
-            // Существует ли введенная ATA глава
-            // Если ATA глава не задана то берется N/A
+            // РЎСѓС‰РµСЃС‚РІСѓРµС‚ Р»Рё РІРІРµРґРµРЅРЅР°СЏ ATA РіР»Р°РІР°
+            // Р•СЃР»Рё ATA РіР»Р°РІР° РЅРµ Р·Р°РґР°РЅР° С‚Рѕ Р±РµСЂРµС‚СЃСЏ N/A
 
-            // Выбраны ли поля Open / Close или Crew / Maintenance Staff
+            // Р’С‹Р±СЂР°РЅС‹ Р»Рё РїРѕР»СЏ Open / Close РёР»Рё Crew / Maintenance Staff
             if (!radioCrew.Checked && !radioMaintenanceStaff.Checked)
             {
                 MessageBox.Show ("Select one of the Crew or Maintenance Staff radio buttons.");
@@ -709,7 +709,7 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
                 return false;
             }
 
-            // Правильность ввода даты
+            // РџСЂР°РІРёР»СЊРЅРѕСЃС‚СЊ РІРІРѕРґР° РґР°С‚С‹
             if (!ValidateRTSDate()) return false;
 
             //
@@ -718,12 +718,12 @@ namespace CAS.UI.UIControls.AircraftTechnicalLogBookControls
         #endregion
 
         /*
-         * Реализация
+         * Р РµР°Р»РёР·Р°С†РёСЏ
          */
 
         #region private bool ValidateRTSDate()
         /// <summary>
-        /// Проверяем введенную дату
+        /// РџСЂРѕРІРµСЂСЏРµРј РІРІРµРґРµРЅРЅСѓСЋ РґР°С‚Сѓ
         /// </summary>
         /// <returns></returns>
         private bool ValidateRTSDate()

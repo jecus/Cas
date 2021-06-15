@@ -16,7 +16,7 @@ using SmartCore.Entities.General.WorkPackage;
 namespace CASReports.Builders
 {
 	/// <summary>
-	/// Построитель отчета Release To Service 
+	/// ??????????? ?????? Release To Service 
 	/// </summary>
 	public class OperationTimeReportBuilder : AbstractReportBuilder
 	{
@@ -24,13 +24,13 @@ namespace CASReports.Builders
 
 		private Aircraft _currentAircraft;
 		/// <summary>
-		/// Директивы включаемые в отчет
+		/// ????????? ?????????? ? ?????
 		/// </summary>
 		private List<MaintenanceCheckRecordGroup> _records;
 
 		private IEnumerable<BaseComponent> _aircraftBaseDetails;
 
-		private MaintenanceCheckRecord _lastCСheckRecord;
+		private MaintenanceCheckRecord _lastCheckRecord;
 
 		private IEnumerable<WorkPackage> _workPackages;
 
@@ -44,7 +44,7 @@ namespace CASReports.Builders
 
 		#region public Aircraft Aircrafte
 		/// <summary>
-		/// Возвращает ВС
+		/// ?????????? ??
 		/// </summary>
 		public Aircraft Aircraft
 		{
@@ -58,9 +58,9 @@ namespace CASReports.Builders
 		#region Constructor
 
 		/// <summary>
-		/// Создается построитель отчета Operation Time
+		/// ????????? ??????????? ?????? Operation Time
 		/// </summary>
-		/// <param name="aircraft">ВС</param>
+		/// <param name="aircraft">??</param>
 		/// <param name="items"></param>
 		/// <param name="aircraftBaseDetails"></param>
 		/// <param name="lastCCheckRecord"></param>
@@ -78,7 +78,7 @@ namespace CASReports.Builders
 			_currentAircraft = aircraft;
 			_records = items;
 			_aircraftBaseDetails = aircraftBaseDetails;
-			_lastCСheckRecord = lastCCheckRecord;
+			_lastCheckRecord = lastCCheckRecord;
 			_workPackages = workPackages;
 			_from = from;
 			_to = to;
@@ -91,9 +91,9 @@ namespace CASReports.Builders
 		#region public override object GenerateReport()
 
 		/// <summary>
-		/// Сгенерируовать отчет по данным, добавленным в текущий объект
+		/// ?????????????? ????? ?? ??????, ??????????? ? ??????? ??????
 		/// </summary>
-		/// <returns>Построенный отчет</returns>
+		/// <returns>??????????? ?????</returns>
 		public override object GenerateReport()
 		{
 			OperationTimeReport report = new OperationTimeReport();
@@ -119,9 +119,9 @@ namespace CASReports.Builders
 		#region private void AddItemsToDataSet(OperationTimeDataSet dataset)
 
 		/// <summary>
-		/// Добавление директив в таблицу данных
+		/// ?????????? ???????? ? ??????? ??????
 		/// </summary>
-		/// <param name="dataset">Таблица, в которую добавляются данные</param>
+		/// <param name="dataset">???????, ? ??????? ??????????? ??????</param>
 		private void AddItemsToDataSet(OperationTimeDataSet dataset)
 		{
 			foreach (MaintenanceCheckRecordGroup checkRecord in _records)
@@ -134,10 +134,10 @@ namespace CASReports.Builders
 
 		#region private void AddItemDataset(MaintenanceCheckRecordGroup checkRecord, OperationTimeDataSet destinationDataSet
 		/// <summary>
-		/// Добавляется элемент в таблицу данных
+		/// ??????????? ??????? ? ??????? ??????
 		/// </summary>
-		/// <param name="grouping">Добавлямая директива</param>
-		/// <param name="destinationDataSet">Таблица, в которую добавляется элемент</param>
+		/// <param name="grouping">?????????? ?????????</param>
+		/// <param name="destinationDataSet">???????, ? ??????? ??????????? ???????</param>
 		private void AddItemDataset(MaintenanceCheckRecordGroup grouping, OperationTimeDataSet destinationDataSet)
 		{
 			if(grouping == null)
@@ -193,14 +193,14 @@ namespace CASReports.Builders
 
 			var sinceLastCCheckHours = "--";
 			var sinceLastCCheckCycles = "--";
-			//TODO:пересмотреть расчет
-			//if(_lastCСheckRecord != null && 
+			//TODO:???????????? ??????
+			//if(_lastC?heckRecord != null && 
 			//   _aircraftBaseDetails != null && 
 			//   _aircraftBaseDetails.FirstOrDefault(bd => bd.BaseComponentType == BaseComponentType.Frame) != null)
 			//{
 			//    BaseComponent frame = _aircraftBaseDetails.First(bd => bd.BaseComponentType == BaseComponentType.Frame);
 			//    Lifelength current = GlobalObjects.CasEnvironment.Calculator.GetFlightLifelengthOnEndOfDay(frame, grouping.LastOrDefault() != null ? grouping.Last().RecordDate : DateTime.Today);
-			//    Lifelength sinceLast =  current - _lastCСheckRecord.OnLifelength;
+			//    Lifelength sinceLast =  current - _lastC?heckRecord.OnLifelength;
 			//    sinceLastCCheckHours = sinceLast.TotalMinutes != null ? sinceLast.ToHoursMinutesFormat("") : "";
 			//    sinceLastCCheckCycles = sinceLast.Cycles != null ? sinceLast.Cycles.ToString() : "";
 			//}
@@ -251,9 +251,9 @@ namespace CASReports.Builders
 		#region private void AddBaseDetailsToDataSet(OperationTimeDataSet dataset)
 
 		/// <summary>
-		/// Добавление директив в таблицу данных
+		/// ?????????? ???????? ? ??????? ??????
 		/// </summary>
-		/// <param name="dataset">Таблица, в которую добавляются данные</param>
+		/// <param name="dataset">???????, ? ??????? ??????????? ??????</param>
 		private void AddBaseDetailsToDataSet(OperationTimeDataSet dataset)
 		{
 			if (_aircraftBaseDetails == null)
@@ -277,8 +277,8 @@ namespace CASReports.Builders
 				var period = new Lifelength(total);
 				period.Substract(from);
 				//res.Substract(GetLifelength(baseDetail, fromDate));
-				var onCCheck = _lastCСheckRecord != null
-					? GlobalObjects.CasEnvironment.Calculator.GetFlightLifelengthOnStartOfDay(frame, _lastCСheckRecord.RecordDate)
+				var onCCheck = _lastCheckRecord!= null
+					? GlobalObjects.CasEnvironment.Calculator.GetFlightLifelengthOnStartOfDay(frame, _lastCheckRecord.RecordDate)
 					: Lifelength.Null;
 				var sinceLast = onCCheck != null ? total - onCCheck : Lifelength.Null;
 				dataset.BaseDetailsTable.AddBaseDetailsTableRow
@@ -304,8 +304,8 @@ namespace CASReports.Builders
 					var total = GlobalObjects.CasEnvironment.Calculator.GetFlightLifelengthOnEndOfDay(engine, _to);
 					var period = new Lifelength(total);
 					period.Substract(from);
-					var onCCheck = _lastCСheckRecord != null
-						? GlobalObjects.CasEnvironment.Calculator.GetFlightLifelengthOnStartOfDay(engine, _lastCСheckRecord.RecordDate)
+					var onCCheck = _lastCheckRecord != null
+						? GlobalObjects.CasEnvironment.Calculator.GetFlightLifelengthOnStartOfDay(engine, _lastCheckRecord.RecordDate)
 						: Lifelength.Null;
 					var sinceLast = onCCheck != null ? total - onCCheck : Lifelength.Null;
 					dataset.BaseDetailsTable.AddBaseDetailsTableRow
@@ -347,8 +347,8 @@ namespace CASReports.Builders
 					? period
 					: new Lifelength(period.Days, period.Cycles, Convert.ToInt32(period.Cycles * 60 * 1.3));
 				//Lifelength total = GlobalObjects.CasEnvironment.Calculator.GetLifelength(apu, _to);
-				var onCCheck = _lastCСheckRecord != null
-					? GlobalObjects.CasEnvironment.Calculator.GetFlightLifelengthOnStartOfDay(apu, _lastCСheckRecord.RecordDate)
+				var onCCheck = _lastCheckRecord != null
+					? GlobalObjects.CasEnvironment.Calculator.GetFlightLifelengthOnStartOfDay(apu, _lastCheckRecord.RecordDate)
 					: Lifelength.Null;
 				var sinceLast = onCCheck != null ? total - onCCheck : Lifelength.Null;
 				dataset.BaseDetailsTable.AddBaseDetailsTableRow
@@ -364,8 +364,8 @@ namespace CASReports.Builders
 #else
 				Lifelength period = GlobalObjects.CasEnvironment.Calculator.GetLifelength(apu, _from, _to);
 				Lifelength total = GlobalObjects.CasEnvironment.Calculator.GetLifelength(apu, _to);
-				Lifelength onCCheck = _lastCСheckRecord != null
-					? GlobalObjects.CasEnvironment.Calculator.GetLifelength(apu, _lastCСheckRecord.RecordDate)
+				Lifelength onCCheck = _lastC?heckRecord != null
+					? GlobalObjects.CasEnvironment.Calculator.GetLifelength(apu, _lastC?heckRecord.RecordDate)
 					: Lifelength.Null;
 				Lifelength sinceLast = onCCheck != null ? total - onCCheck : Lifelength.Null;
 				dataset.BaseDetailsTable.AddBaseDetailsTableRow

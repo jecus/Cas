@@ -80,7 +80,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
 
         #region public bool ValidateData(out string message)
         /// <summary>
-        /// Возвращает значение, показывающее является ли значение элемента управления допустимым
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°СЋС‰РµРµ СЏРІР»СЏРµС‚СЃСЏ Р»Рё Р·РЅР°С‡РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° СѓРїСЂР°РІР»РµРЅРёСЏ РґРѕРїСѓСЃС‚РёРјС‹Рј
         /// </summary>
         /// <returns></returns>
         public bool ValidateData(out string message)
@@ -93,9 +93,9 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
             if (dateTimePickerManufactureDate.Value > DateTime.Now)
                 dateTimePickerManufactureDate.Value = DateTime.Now;
 
-            #region Поиск проверочного значения даты-времени
-            //поиск минимального значения даты-времени среди значений
-            //даты установки или даты начала отсчета наработки
+            #region РџРѕРёСЃРє РїСЂРѕРІРµСЂРѕС‡РЅРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ РґР°С‚С‹-РІСЂРµРјРµРЅРё
+            //РїРѕРёСЃРє РјРёРЅРёРјР°Р»СЊРЅРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ РґР°С‚С‹-РІСЂРµРјРµРЅРё СЃСЂРµРґРё Р·РЅР°С‡РµРЅРёР№
+            //РґР°С‚С‹ СѓСЃС‚Р°РЅРѕРІРєРё РёР»Рё РґР°С‚С‹ РЅР°С‡Р°Р»Р° РѕС‚СЃС‡РµС‚Р° РЅР°СЂР°Р±РѕС‚РєРё
             DateTime checkedDate = dateTimePickerInstallation.Value;
             message = $@"Installation Date:{dateTimePickerInstallation.Value}";
             if (dateTimePickerStart.Value < checkedDate)
@@ -121,8 +121,8 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
                     record.FromBaseComponentId != 0 ||
                     record.FromStoreId != 0)
                 {
-                    // Деталь была перемещена откуда - то,
-                    // Ограничением будет дата начала перемещения
+                    // Р”РµС‚Р°Р»СЊ Р±С‹Р»Р° РїРµСЂРµРјРµС‰РµРЅР° РѕС‚РєСѓРґР° - С‚Рѕ,
+                    // РћРіСЂР°РЅРёС‡РµРЅРёРµРј Р±СѓРґРµС‚ РґР°С‚Р° РЅР°С‡Р°Р»Р° РїРµСЂРµРјРµС‰РµРЅРёСЏ
                     if (dateTimePickerInstallation.Value < record.StartTransferDate)
                     {
                         message = $@"For Component {_currentBaseComponent} 
@@ -142,7 +142,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
         #region public bool GetChangeStatus()
 
         /// <summary>
-        /// Возвращает значение, показывающее были ли изменения в данном элементе управления
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°СЋС‰РµРµ Р±С‹Р»Рё Р»Рё РёР·РјРµРЅРµРЅРёСЏ РІ РґР°РЅРЅРѕРј СЌР»РµРјРµРЅС‚Рµ СѓРїСЂР°РІР»РµРЅРёСЏ
         /// </summary>
         /// <returns></returns>
         public bool GetChangeStatus()
@@ -178,7 +178,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
         #region public void SaveData()
 
         /// <summary>
-        /// Сохранаяет данные текущего базового агрегата
+        /// РЎРѕС…СЂР°РЅР°СЏРµС‚ РґР°РЅРЅС‹Рµ С‚РµРєСѓС‰РµРіРѕ Р±Р°Р·РѕРІРѕРіРѕ Р°РіСЂРµРіР°С‚Р°
         /// </summary>
         public void SaveData()
         {
@@ -203,7 +203,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
 
             if(_currentBaseComponent.ItemId > 0)
             {
-                #region Актуальное состояние на стартовую дату
+                #region РђРєС‚СѓР°Р»СЊРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ РЅР° СЃС‚Р°СЂС‚РѕРІСѓСЋ РґР°С‚Сѓ
 
                 ActualStateRecord actualStateRecord = _currentBaseComponent.ActualStateRecords[_currentBaseComponent.StartDate];
                 if (actualStateRecord == null)
@@ -235,7 +235,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
                     {
                         if (record.TransferDate >= dateTimePickerInstallation.Value)
                         {
-                            //Дата установки изменена на более раннюю
+                            //Р”Р°С‚Р° СѓСЃС‚Р°РЅРѕРІРєРё РёР·РјРµРЅРµРЅР° РЅР° Р±РѕР»РµРµ СЂР°РЅРЅСЋСЋ
                             actual.OnLifelength = lifelengthViewerInstallation.Lifelength;
                             actual.RecordDate = dateTimePickerInstallation.Value;
                             GlobalObjects.CasEnvironment.NewKeeper.Save(actual);
@@ -291,12 +291,15 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
         #region private void UpdateControl()
 
         /// <summary>
-        /// Обновляет информацию о базовом агрегате текущего ВС
+        /// РћР±РЅРѕРІР»СЏРµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ Р±Р°Р·РѕРІРѕРј Р°РіСЂРµРіР°С‚Рµ С‚РµРєСѓС‰РµРіРѕ Р’РЎ
         /// </summary>
         private void UpdateControl()
         {
             if (_currentBaseComponent == null)
                 return;
+            
+            comboBoxEngineModel.LoadObjectsFunc = GlobalObjects.CasEnvironment.NewLoader.GetComponentModels;
+            comboBoxEngineModel.FilterParam1 = 6;
             comboBoxEngineModel.Type = typeof (ComponentModel);
             lifelengthViewerInstallation.MinLifelength = Lifelength.Zero;
             dateTimePickerInstallation.ValueChanged -= DateTimePickerManufactureDateValueChanged;
@@ -391,7 +394,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
                     return;
                 }
 
-                //todo : произвести необходимые проверки
+                //todo : РїСЂРѕРёР·РІРµСЃС‚Рё РЅРµРѕР±С…РѕРґРёРјС‹Рµ РїСЂРѕРІРµСЂРєРё
 
                 GlobalObjects.ComponentCore.DeleteBaseComponent(_currentBaseComponent);
             }
@@ -449,7 +452,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
 
         #region Events
         /// <summary>
-        /// Событие, сигнализирующее об удалении связной базовой детали
+        /// РЎРѕР±С‹С‚РёРµ, СЃРёРіРЅР°Р»РёР·РёСЂСѓСЋС‰РµРµ РѕР± СѓРґР°Р»РµРЅРёРё СЃРІСЏР·РЅРѕР№ Р±Р°Р·РѕРІРѕР№ РґРµС‚Р°Р»Рё
         /// </summary>
         public event EventHandler Deleted;
 

@@ -21,7 +21,7 @@ using SmartCore.Queries;
 namespace SmartCore.Purchase
 {
 	/// <summary>
-    /// Сурвис Закупок
+    /// РЎСѓСЂРІРёСЃ Р—Р°РєСѓРїРѕРє
     /// </summary>
     public class PurchaseCore : IPurchaseCore
     {
@@ -34,7 +34,7 @@ namespace SmartCore.Purchase
 
 		#region public PurchaseService(DatabaseManager databaseManager)
         /// <summary>
-        /// Создает Сурвис закупок
+        /// РЎРѕР·РґР°РµС‚ РЎСѓСЂРІРёСЃ Р·Р°РєСѓРїРѕРє
         /// </summary>
         public PurchaseCore(ICasEnvironment casEnvironment, INewLoader newLoader, ILoader loader, 
 							IPackageCore packageService, INewKeeper newKeeper, IPerformanceCalculator performanceCalculator)
@@ -50,7 +50,7 @@ namespace SmartCore.Purchase
 
         #region public void LoadPurchaseOrderItems(PurchaseOrder po)
         /// <summary>
-        /// Загружает все элементы рабочего пакета
+        /// Р—Р°РіСЂСѓР¶Р°РµС‚ РІСЃРµ СЌР»РµРјРµРЅС‚С‹ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
         /// </summary>
         /// <param name="po"></param>
         public void LoadPurchaseOrderItems(PurchaseOrder po)
@@ -80,10 +80,10 @@ namespace SmartCore.Purchase
         public List<Product> GetProducts(PurchaseOrder po)
         {
 
-            #region Поиск Продуктов
+            #region РџРѕРёСЃРє РџСЂРѕРґСѓРєС‚РѕРІ
 
-            //Строка запроса, производящая выборку идентификаторов Продуктов среди записей котировочных ордеров
-            //пренадлежащих переданному котировочному ордеру и указывающих на котировки КИТов
+            //РЎС‚СЂРѕРєР° Р·Р°РїСЂРѕСЃР°, РїСЂРѕРёР·РІРѕРґСЏС‰Р°СЏ РІС‹Р±РѕСЂРєСѓ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ РџСЂРѕРґСѓРєС‚РѕРІ СЃСЂРµРґРё Р·Р°РїРёСЃРµР№ РєРѕС‚РёСЂРѕРІРѕС‡РЅС‹С… РѕСЂРґРµСЂРѕРІ
+            //РїСЂРµРЅР°РґР»РµР¶Р°С‰РёС… РїРµСЂРµРґР°РЅРЅРѕРјСѓ РєРѕС‚РёСЂРѕРІРѕС‡РЅРѕРјСѓ РѕСЂРґРµСЂСѓ Рё СѓРєР°Р·С‹РІР°СЋС‰РёС… РЅР° РєРѕС‚РёСЂРѕРІРєРё РљРРўРѕРІ
             var accessoryParentId =
                 BaseQueries.GetSelectQueryColumnOnly<PurchaseRequestRecord>
                 (BasePackageRecord.PackageItemIdProperty,
@@ -92,22 +92,22 @@ namespace SmartCore.Purchase
                      new CommonFilter<int>(BasePackageRecord.ParentPackageIdProperty, po.ItemId),
                      new CommonFilter<int>(BasePackageRecord.PackageItemTypeProperty, SmartCoreType.Product.ItemId)
                  });
-            //Фильтр по ключевому полю таблицы обозначающий 
-            //что значения ключевого поля таблицы должны быть
-            //среди идентификаторов КИТов
+            //Р¤РёР»СЊС‚СЂ РїРѕ РєР»СЋС‡РµРІРѕРјСѓ РїРѕР»СЋ С‚Р°Р±Р»РёС†С‹ РѕР±РѕР·РЅР°С‡Р°СЋС‰РёР№ 
+            //С‡С‚Рѕ Р·РЅР°С‡РµРЅРёСЏ РєР»СЋС‡РµРІРѕРіРѕ РїРѕР»СЏ С‚Р°Р±Р»РёС†С‹ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ
+            //СЃСЂРµРґРё РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ РљРРўРѕРІ
             ICommonFilter idFilter = new CommonFilter<string>(BaseEntityObject.ItemIdProperty,
                                                               FilterType.In,
                                                               new[] { accessoryParentId });
-            //создаются запросы на выборку задач по компонентам с заданного ВС
-            //дополнительно фильтрую ключевое поле. значение ключевого поля
-            //задач по компонентам ВС должно быть среди идентификатор родительских задач КИТов
+            //СЃРѕР·РґР°СЋС‚СЃСЏ Р·Р°РїСЂРѕСЃС‹ РЅР° РІС‹Р±РѕСЂРєСѓ Р·Р°РґР°С‡ РїРѕ РєРѕРјРїРѕРЅРµРЅС‚Р°Рј СЃ Р·Р°РґР°РЅРЅРѕРіРѕ Р’РЎ
+            //РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕ С„РёР»СЊС‚СЂСѓСЋ РєР»СЋС‡РµРІРѕРµ РїРѕР»Рµ. Р·РЅР°С‡РµРЅРёРµ РєР»СЋС‡РµРІРѕРіРѕ РїРѕР»СЏ
+            //Р·Р°РґР°С‡ РїРѕ РєРѕРјРїРѕРЅРµРЅС‚Р°Рј Р’РЎ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ СЃСЂРµРґРё РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ СЂРѕРґРёС‚РµР»СЊСЃРєРёС… Р·Р°РґР°С‡ РљРРўРѕРІ
             var kits = _loader.GetObjectListAll<Product>(idFilter, true, true, true);
 
             #endregion
 
-            #region загрузка деталей
-            //Строка запроса, производящая выборку идентификаторов Продуктов среди записей котировочных ордеров
-            //пренадлежащих переданному котировочному ордеру и указывающих на котировки КИТов
+            #region Р·Р°РіСЂСѓР·РєР° РґРµС‚Р°Р»РµР№
+            //РЎС‚СЂРѕРєР° Р·Р°РїСЂРѕСЃР°, РїСЂРѕРёР·РІРѕРґСЏС‰Р°СЏ РІС‹Р±РѕСЂРєСѓ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ РџСЂРѕРґСѓРєС‚РѕРІ СЃСЂРµРґРё Р·Р°РїРёСЃРµР№ РєРѕС‚РёСЂРѕРІРѕС‡РЅС‹С… РѕСЂРґРµСЂРѕРІ
+            //РїСЂРµРЅР°РґР»РµР¶Р°С‰РёС… РїРµСЂРµРґР°РЅРЅРѕРјСѓ РєРѕС‚РёСЂРѕРІРѕС‡РЅРѕРјСѓ РѕСЂРґРµСЂСѓ Рё СѓРєР°Р·С‹РІР°СЋС‰РёС… РЅР° РєРѕС‚РёСЂРѕРІРєРё РљРРўРѕРІ
             accessoryParentId =
                 BaseQueries.GetSelectQueryColumnOnly<RequestForQuotationRecord>
                 (BasePackageRecord.PackageItemIdProperty,
@@ -116,15 +116,15 @@ namespace SmartCore.Purchase
                      new CommonFilter<int>(BasePackageRecord.ParentPackageIdProperty, po.ItemId),
                      new CommonFilter<int>(BasePackageRecord.PackageItemTypeProperty, SmartCoreType.Product.ItemId)
                  });
-            //Фильтр по ключевому полю таблицы обозначающий 
-            //что значения ключевого поля таблицы должны быть
-            //среди идентификаторов КИТов
+            //Р¤РёР»СЊС‚СЂ РїРѕ РєР»СЋС‡РµРІРѕРјСѓ РїРѕР»СЋ С‚Р°Р±Р»РёС†С‹ РѕР±РѕР·РЅР°С‡Р°СЋС‰РёР№ 
+            //С‡С‚Рѕ Р·РЅР°С‡РµРЅРёСЏ РєР»СЋС‡РµРІРѕРіРѕ РїРѕР»СЏ С‚Р°Р±Р»РёС†С‹ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ
+            //СЃСЂРµРґРё РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ РљРРўРѕРІ
             idFilter = new CommonFilter<string>(BaseEntityObject.ItemIdProperty,
                                                 FilterType.In,
                                                 new[] { accessoryParentId });
-            //создаются запросы на выборку задач по компонентам с заданного ВС
-            //дополнительно фильтрую ключевое поле. значение ключевого поля
-            //задач по компонентам ВС должно быть среди идентификатор родительских задач КИТов
+            //СЃРѕР·РґР°СЋС‚СЃСЏ Р·Р°РїСЂРѕСЃС‹ РЅР° РІС‹Р±РѕСЂРєСѓ Р·Р°РґР°С‡ РїРѕ РєРѕРјРїРѕРЅРµРЅС‚Р°Рј СЃ Р·Р°РґР°РЅРЅРѕРіРѕ Р’РЎ
+            //РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕ С„РёР»СЊС‚СЂСѓСЋ РєР»СЋС‡РµРІРѕРµ РїРѕР»Рµ. Р·РЅР°С‡РµРЅРёРµ РєР»СЋС‡РµРІРѕРіРѕ РїРѕР»СЏ
+            //Р·Р°РґР°С‡ РїРѕ РєРѕРјРїРѕРЅРµРЅС‚Р°Рј Р’РЎ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ СЃСЂРµРґРё РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ СЂРѕРґРёС‚РµР»СЊСЃРєРёС… Р·Р°РґР°С‡ РљРРўРѕРІ
             var componentModels = _loader.GetObjectListAll<ComponentModel>(idFilter, true, true);
             #endregion
 
@@ -141,10 +141,10 @@ namespace SmartCore.Purchase
         {
             var accessories = new List<Product>();
 
-            #region Поиск Продуктов
+            #region РџРѕРёСЃРє РџСЂРѕРґСѓРєС‚РѕРІ
 
-            //Строка запроса, выдающая отношения поставщиков с продуктами
-            //где идентификатор поставщика равен идентфикатору переданного поставщика
+            //РЎС‚СЂРѕРєР° Р·Р°РїСЂРѕСЃР°, РІС‹РґР°СЋС‰Р°СЏ РѕС‚РЅРѕС€РµРЅРёСЏ РїРѕСЃС‚Р°РІС‰РёРєРѕРІ СЃ РїСЂРѕРґСѓРєС‚Р°РјРё
+            //РіРґРµ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РїРѕСЃС‚Р°РІС‰РёРєР° СЂР°РІРµРЅ РёРґРµРЅС‚С„РёРєР°С‚РѕСЂСѓ РїРµСЂРµРґР°РЅРЅРѕРіРѕ РїРѕСЃС‚Р°РІС‰РёРєР°
             var accessoriesRelations = BaseQueries.GetSelectQueryColumnOnly<KitSuppliersRelation>
                 (KitSuppliersRelation.KitIdProperty,
                  new ICommonFilter[] 
@@ -153,15 +153,15 @@ namespace SmartCore.Purchase
                      new CommonFilter<int>(KitSuppliersRelation.ParentTypeIdProperty, SmartCoreType.Product.ItemId) 
                  }
                 );
-            //Фильтр по ключевому полю таблицы обозначающий 
-            //что значения ключевого поля таблицы должны быть
-            //среди идентификаторов родительских задач КИТов
+            //Р¤РёР»СЊС‚СЂ РїРѕ РєР»СЋС‡РµРІРѕРјСѓ РїРѕР»СЋ С‚Р°Р±Р»РёС†С‹ РѕР±РѕР·РЅР°С‡Р°СЋС‰РёР№ 
+            //С‡С‚Рѕ Р·РЅР°С‡РµРЅРёСЏ РєР»СЋС‡РµРІРѕРіРѕ РїРѕР»СЏ С‚Р°Р±Р»РёС†С‹ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ
+            //СЃСЂРµРґРё РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ СЂРѕРґРёС‚РµР»СЊСЃРєРёС… Р·Р°РґР°С‡ РљРРўРѕРІ
             ICommonFilter idFilter = new CommonFilter<string>(BaseEntityObject.ItemIdProperty,
                                                               FilterType.In,
                                                               new[] { accessoriesRelations });
-            //создаются запросы на выборку задач по компонентам с заданного ВС
-            //дополнительно фильтрую ключевое поле. значение ключевого поля
-            //задач по компонентам ВС должно быть среди идентификатор родительских задач КИТов
+            //СЃРѕР·РґР°СЋС‚СЃСЏ Р·Р°РїСЂРѕСЃС‹ РЅР° РІС‹Р±РѕСЂРєСѓ Р·Р°РґР°С‡ РїРѕ РєРѕРјРїРѕРЅРµРЅС‚Р°Рј СЃ Р·Р°РґР°РЅРЅРѕРіРѕ Р’РЎ
+            //РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕ С„РёР»СЊС‚СЂСѓСЋ РєР»СЋС‡РµРІРѕРµ РїРѕР»Рµ. Р·РЅР°С‡РµРЅРёРµ РєР»СЋС‡РµРІРѕРіРѕ РїРѕР»СЏ
+            //Р·Р°РґР°С‡ РїРѕ РєРѕРјРїРѕРЅРµРЅС‚Р°Рј Р’РЎ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ СЃСЂРµРґРё РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ СЂРѕРґРёС‚РµР»СЊСЃРєРёС… Р·Р°РґР°С‡ РљРРўРѕРІ
             accessories.AddRange(_loader.GetObjectListAll<Product>(idFilter, true, ignoreConditions: true).ToArray());
 
             #endregion
@@ -179,12 +179,12 @@ namespace SmartCore.Purchase
 		}
 
         /// <summary>
-        /// Возвращает Закупочные ордера воздушного судна
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ Р—Р°РєСѓРїРѕС‡РЅС‹Рµ РѕСЂРґРµСЂР° РІРѕР·РґСѓС€РЅРѕРіРѕ СЃСѓРґРЅР°
         /// </summary>
-        /// <param name="aircraft">Воздушное судно. При пережаче null вернет все Закупочные ордера</param>
-        /// <param name="status">Фильтр статуса Закупочные ордера. (По умолчанию = WorkPackageStatus.All)</param>
-        /// <param name="loadWorkPackageItems">Флаг загрузки элементов Закупочного ордера</param>
-        /// <param name="includedAccessory">Задачи, которые должны содержать ордера (при передаче пустои коллекции запрос вернет 0 Закупочного ордера)</param>
+        /// <param name="aircraft">Р’РѕР·РґСѓС€РЅРѕРµ СЃСѓРґРЅРѕ. РџСЂРё РїРµСЂРµР¶Р°С‡Рµ null РІРµСЂРЅРµС‚ РІСЃРµ Р—Р°РєСѓРїРѕС‡РЅС‹Рµ РѕСЂРґРµСЂР°</param>
+        /// <param name="status">Р¤РёР»СЊС‚СЂ СЃС‚Р°С‚СѓСЃР° Р—Р°РєСѓРїРѕС‡РЅС‹Рµ РѕСЂРґРµСЂР°. (РџРѕ СѓРјРѕР»С‡Р°РЅРёСЋ = WorkPackageStatus.All)</param>
+        /// <param name="loadWorkPackageItems">Р¤Р»Р°Рі Р·Р°РіСЂСѓР·РєРё СЌР»РµРјРµРЅС‚РѕРІ Р—Р°РєСѓРїРѕС‡РЅРѕРіРѕ РѕСЂРґРµСЂР°</param>
+        /// <param name="includedAccessory">Р—Р°РґР°С‡Рё, РєРѕС‚РѕСЂС‹Рµ РґРѕР»Р¶РЅС‹ СЃРѕРґРµСЂР¶Р°С‚СЊ РѕСЂРґРµСЂР° (РїСЂРё РїРµСЂРµРґР°С‡Рµ РїСѓСЃС‚РѕРё РєРѕР»Р»РµРєС†РёРё Р·Р°РїСЂРѕСЃ РІРµСЂРЅРµС‚ 0 Р—Р°РєСѓРїРѕС‡РЅРѕРіРѕ РѕСЂРґРµСЂР°)</param>
         /// <returns></returns>
         public IList<PurchaseOrder> GetPurchaseOrders(Aircraft aircraft,
                                                  WorkPackageStatus status = WorkPackageStatus.All,
@@ -240,9 +240,9 @@ namespace SmartCore.Purchase
 
 			foreach (var rfq in collection)
             {
-                //Обратная ссылка на родительский самолет
+                //РћР±СЂР°С‚РЅР°СЏ СЃСЃС‹Р»РєР° РЅР° СЂРѕРґРёС‚РµР»СЊСЃРєРёР№ СЃР°РјРѕР»РµС‚
                 _packageCore.SetParents(rfq);
-                //загрузка элементов котировочного ордера (если требуется)
+                //Р·Р°РіСЂСѓР·РєР° СЌР»РµРјРµРЅС‚РѕРІ РєРѕС‚РёСЂРѕРІРѕС‡РЅРѕРіРѕ РѕСЂРґРµСЂР° (РµСЃР»Рё С‚СЂРµР±СѓРµС‚СЃСЏ)
                 if (loadWorkPackageItems)
                     LoadPurchaseOrderItems(rfq);
             }
@@ -251,12 +251,12 @@ namespace SmartCore.Purchase
         }
 
         /// <summary>
-        /// Возвращает Котировочные ордера воздушного судна
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РљРѕС‚РёСЂРѕРІРѕС‡РЅС‹Рµ РѕСЂРґРµСЂР° РІРѕР·РґСѓС€РЅРѕРіРѕ СЃСѓРґРЅР°
         /// </summary>
-        /// <param name="parent">Владелец котировочного оредера. При пережаче null вернет все Котировочные ордера</param>
-        /// <param name="statuses">Фильтр статуса Котировочные ордера. (По умолчанию = WorkPackageStatus.All)</param>
-        /// <param name="loadWorkPackageItems">Флаг загрузки элементов Котировочного ордера</param>
-        /// <param name="includedAccessory">Задачи, которые должны содержать ордера (при передаче пустои коллекции запрос вернет 0 Котировочного ордера)</param>
+        /// <param name="parent">Р’Р»Р°РґРµР»РµС† РєРѕС‚РёСЂРѕРІРѕС‡РЅРѕРіРѕ РѕСЂРµРґРµСЂР°. РџСЂРё РїРµСЂРµР¶Р°С‡Рµ null РІРµСЂРЅРµС‚ РІСЃРµ РљРѕС‚РёСЂРѕРІРѕС‡РЅС‹Рµ РѕСЂРґРµСЂР°</param>
+        /// <param name="statuses">Р¤РёР»СЊС‚СЂ СЃС‚Р°С‚СѓСЃР° РљРѕС‚РёСЂРѕРІРѕС‡РЅС‹Рµ РѕСЂРґРµСЂР°. (РџРѕ СѓРјРѕР»С‡Р°РЅРёСЋ = WorkPackageStatus.All)</param>
+        /// <param name="loadWorkPackageItems">Р¤Р»Р°Рі Р·Р°РіСЂСѓР·РєРё СЌР»РµРјРµРЅС‚РѕРІ РљРѕС‚РёСЂРѕРІРѕС‡РЅРѕРіРѕ РѕСЂРґРµСЂР°</param>
+        /// <param name="includedAccessory">Р—Р°РґР°С‡Рё, РєРѕС‚РѕСЂС‹Рµ РґРѕР»Р¶РЅС‹ СЃРѕРґРµСЂР¶Р°С‚СЊ РѕСЂРґРµСЂР° (РїСЂРё РїРµСЂРµРґР°С‡Рµ РїСѓСЃС‚РѕРё РєРѕР»Р»РµРєС†РёРё Р·Р°РїСЂРѕСЃ РІРµСЂРЅРµС‚ 0 РљРѕС‚РёСЂРѕРІРѕС‡РЅРѕРіРѕ РѕСЂРґРµСЂР°)</param>
         /// <returns></returns>
         public IList<PurchaseOrder> GetPurchaseOrders(BaseEntityObject parent,
                                                  WorkPackageStatus[] statuses = null,
@@ -268,12 +268,12 @@ namespace SmartCore.Purchase
         }
 
         /// <summary>
-        /// Возвращает Котировочные ордера воздушного судна
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РљРѕС‚РёСЂРѕРІРѕС‡РЅС‹Рµ РѕСЂРґРµСЂР° РІРѕР·РґСѓС€РЅРѕРіРѕ СЃСѓРґРЅР°
         /// </summary>
-        /// <param name="parent">Владелец котировочного оредера. При пережаче null вернет все Котировочные ордера</param>
-        /// <param name="statuses">Фильтр статуса Котировочные ордера. (По умолчанию = WorkPackageStatus.All)</param>
-        /// <param name="loadWorkPackageItems">Флаг загрузки элементов Котировочного ордера</param>
-        /// <param name="includedAccessory">Задачи, которые должны содержать ордера (при передаче пустои коллекции запрос вернет 0 Котировочного ордера)</param>
+        /// <param name="parent">Р’Р»Р°РґРµР»РµС† РєРѕС‚РёСЂРѕРІРѕС‡РЅРѕРіРѕ РѕСЂРµРґРµСЂР°. РџСЂРё РїРµСЂРµР¶Р°С‡Рµ null РІРµСЂРЅРµС‚ РІСЃРµ РљРѕС‚РёСЂРѕРІРѕС‡РЅС‹Рµ РѕСЂРґРµСЂР°</param>
+        /// <param name="statuses">Р¤РёР»СЊС‚СЂ СЃС‚Р°С‚СѓСЃР° РљРѕС‚РёСЂРѕРІРѕС‡РЅС‹Рµ РѕСЂРґРµСЂР°. (РџРѕ СѓРјРѕР»С‡Р°РЅРёСЋ = WorkPackageStatus.All)</param>
+        /// <param name="loadWorkPackageItems">Р¤Р»Р°Рі Р·Р°РіСЂСѓР·РєРё СЌР»РµРјРµРЅС‚РѕРІ РљРѕС‚РёСЂРѕРІРѕС‡РЅРѕРіРѕ РѕСЂРґРµСЂР°</param>
+        /// <param name="includedAccessory">Р—Р°РґР°С‡Рё, РєРѕС‚РѕСЂС‹Рµ РґРѕР»Р¶РЅС‹ СЃРѕРґРµСЂР¶Р°С‚СЊ РѕСЂРґРµСЂР° (РїСЂРё РїРµСЂРµРґР°С‡Рµ РїСѓСЃС‚РѕРё РєРѕР»Р»РµРєС†РёРё Р·Р°РїСЂРѕСЃ РІРµСЂРЅРµС‚ 0 РљРѕС‚РёСЂРѕРІРѕС‡РЅРѕРіРѕ РѕСЂРґРµСЂР°)</param>
         /// <returns></returns>
         public IList<RequestForQuotation> GetRequestForQuotation(BaseEntityObject parent,
                                                             WorkPackageStatus[] statuses = null,
@@ -285,12 +285,12 @@ namespace SmartCore.Purchase
         }
 
         /// <summary>
-        /// Возвращает Котировочные ордера воздушного судна
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РљРѕС‚РёСЂРѕРІРѕС‡РЅС‹Рµ РѕСЂРґРµСЂР° РІРѕР·РґСѓС€РЅРѕРіРѕ СЃСѓРґРЅР°
         /// </summary>
-        /// <param name="parent">Владелец котировочного оредера. При пережаче null вернет все Котировочные ордера</param>
-        /// <param name="statuses">Фильтр статуса Котировочные ордера. (По умолчанию = WorkPackageStatus.All)</param>
-        /// <param name="loadWorkPackageItems">Флаг загрузки элементов Котировочного ордера</param>
-        /// <param name="includedAccessory">Задачи, которые должны содержать ордера (при передаче пустои коллекции запрос вернет 0 Котировочного ордера)</param>
+        /// <param name="parent">Р’Р»Р°РґРµР»РµС† РєРѕС‚РёСЂРѕРІРѕС‡РЅРѕРіРѕ РѕСЂРµРґРµСЂР°. РџСЂРё РїРµСЂРµР¶Р°С‡Рµ null РІРµСЂРЅРµС‚ РІСЃРµ РљРѕС‚РёСЂРѕРІРѕС‡РЅС‹Рµ РѕСЂРґРµСЂР°</param>
+        /// <param name="statuses">Р¤РёР»СЊС‚СЂ СЃС‚Р°С‚СѓСЃР° РљРѕС‚РёСЂРѕРІРѕС‡РЅС‹Рµ РѕСЂРґРµСЂР°. (РџРѕ СѓРјРѕР»С‡Р°РЅРёСЋ = WorkPackageStatus.All)</param>
+        /// <param name="loadWorkPackageItems">Р¤Р»Р°Рі Р·Р°РіСЂСѓР·РєРё СЌР»РµРјРµРЅС‚РѕРІ РљРѕС‚РёСЂРѕРІРѕС‡РЅРѕРіРѕ РѕСЂРґРµСЂР°</param>
+        /// <param name="includedAccessory">Р—Р°РґР°С‡Рё, РєРѕС‚РѕСЂС‹Рµ РґРѕР»Р¶РЅС‹ СЃРѕРґРµСЂР¶Р°С‚СЊ РѕСЂРґРµСЂР° (РїСЂРё РїРµСЂРµРґР°С‡Рµ РїСѓСЃС‚РѕРё РєРѕР»Р»РµРєС†РёРё Р·Р°РїСЂРѕСЃ РІРµСЂРЅРµС‚ 0 РљРѕС‚РёСЂРѕРІРѕС‡РЅРѕРіРѕ РѕСЂРґРµСЂР°)</param>
         /// <returns></returns>
         public IList<InitialOrder> GetInitialOrders(BaseEntityObject parent,
                                                WorkPackageStatus[] statuses = null,
@@ -307,15 +307,15 @@ namespace SmartCore.Purchase
 
 		#region private List<Product> GetProducts(RequestForQuotation rfq)
 		/// <summary>
-		/// Возвращает все комплектующие, находящиеся в определенном ордере запроса
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РІСЃРµ РєРѕРјРїР»РµРєС‚СѓСЋС‰РёРµ, РЅР°С…РѕРґСЏС‰РёРµСЃСЏ РІ РѕРїСЂРµРґРµР»РµРЅРЅРѕРј РѕСЂРґРµСЂРµ Р·Р°РїСЂРѕСЃР°
 		/// </summary>
 		/// <returns></returns>
 		private List<Product> GetProducts(RequestForQuotation rfq)
         {
-            #region Поиск Продуктов
+            #region РџРѕРёСЃРє РџСЂРѕРґСѓРєС‚РѕРІ
 
-            //Строка запроса, производящая выборку идентификаторов Продуктов среди записей котировочных ордеров
-            //пренадлежащих переданному котировочному ордеру и указывающих на котировки КИТов
+            //РЎС‚СЂРѕРєР° Р·Р°РїСЂРѕСЃР°, РїСЂРѕРёР·РІРѕРґСЏС‰Р°СЏ РІС‹Р±РѕСЂРєСѓ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ РџСЂРѕРґСѓРєС‚РѕРІ СЃСЂРµРґРё Р·Р°РїРёСЃРµР№ РєРѕС‚РёСЂРѕРІРѕС‡РЅС‹С… РѕСЂРґРµСЂРѕРІ
+            //РїСЂРµРЅР°РґР»РµР¶Р°С‰РёС… РїРµСЂРµРґР°РЅРЅРѕРјСѓ РєРѕС‚РёСЂРѕРІРѕС‡РЅРѕРјСѓ РѕСЂРґРµСЂСѓ Рё СѓРєР°Р·С‹РІР°СЋС‰РёС… РЅР° РєРѕС‚РёСЂРѕРІРєРё РљРРўРѕРІ
             var accessoryParentId =
                 BaseQueries.GetSelectQueryColumnOnly<RequestForQuotationRecord>
                 (BasePackageRecord.PackageItemIdProperty,
@@ -324,23 +324,23 @@ namespace SmartCore.Purchase
                      new CommonFilter<int>(BasePackageRecord.ParentPackageIdProperty, rfq.ItemId),
                      new CommonFilter<int>(BasePackageRecord.PackageItemTypeProperty, SmartCoreType.Product.ItemId)
                  });
-            //Фильтр по ключевому полю таблицы обозначающий 
-            //что значения ключевого поля таблицы должны быть
-            //среди идентификаторов КИТов
+            //Р¤РёР»СЊС‚СЂ РїРѕ РєР»СЋС‡РµРІРѕРјСѓ РїРѕР»СЋ С‚Р°Р±Р»РёС†С‹ РѕР±РѕР·РЅР°С‡Р°СЋС‰РёР№ 
+            //С‡С‚Рѕ Р·РЅР°С‡РµРЅРёСЏ РєР»СЋС‡РµРІРѕРіРѕ РїРѕР»СЏ С‚Р°Р±Р»РёС†С‹ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ
+            //СЃСЂРµРґРё РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ РљРРўРѕРІ
             ICommonFilter idFilter = new CommonFilter<string>(BaseEntityObject.ItemIdProperty,
                                                               FilterType.In,
                                                               new[] { accessoryParentId });
-            //создаются запросы на выборку задач по компонентам с заданного ВС
-            //дополнительно фильтрую ключевое поле. значение ключевого поля
-            //задач по компонентам ВС должно быть среди идентификатор родительских задач КИТов
+            //СЃРѕР·РґР°СЋС‚СЃСЏ Р·Р°РїСЂРѕСЃС‹ РЅР° РІС‹Р±РѕСЂРєСѓ Р·Р°РґР°С‡ РїРѕ РєРѕРјРїРѕРЅРµРЅС‚Р°Рј СЃ Р·Р°РґР°РЅРЅРѕРіРѕ Р’РЎ
+            //РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕ С„РёР»СЊС‚СЂСѓСЋ РєР»СЋС‡РµРІРѕРµ РїРѕР»Рµ. Р·РЅР°С‡РµРЅРёРµ РєР»СЋС‡РµРІРѕРіРѕ РїРѕР»СЏ
+            //Р·Р°РґР°С‡ РїРѕ РєРѕРјРїРѕРЅРµРЅС‚Р°Рј Р’РЎ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ СЃСЂРµРґРё РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ СЂРѕРґРёС‚РµР»СЊСЃРєРёС… Р·Р°РґР°С‡ РљРРўРѕРІ
             var kits = _loader.GetObjectListAll<Product>(idFilter, true, true, true);
 
             #endregion
 
-            #region загрузка деталей
+            #region Р·Р°РіСЂСѓР·РєР° РґРµС‚Р°Р»РµР№
 
-            //Строка запроса, производящая выборку идентификаторов Продуктов среди записей котировочных ордеров
-            //пренадлежащих переданному котировочному ордеру и указывающих на котировки КИТов
+            //РЎС‚СЂРѕРєР° Р·Р°РїСЂРѕСЃР°, РїСЂРѕРёР·РІРѕРґСЏС‰Р°СЏ РІС‹Р±РѕСЂРєСѓ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ РџСЂРѕРґСѓРєС‚РѕРІ СЃСЂРµРґРё Р·Р°РїРёСЃРµР№ РєРѕС‚РёСЂРѕРІРѕС‡РЅС‹С… РѕСЂРґРµСЂРѕРІ
+            //РїСЂРµРЅР°РґР»РµР¶Р°С‰РёС… РїРµСЂРµРґР°РЅРЅРѕРјСѓ РєРѕС‚РёСЂРѕРІРѕС‡РЅРѕРјСѓ РѕСЂРґРµСЂСѓ Рё СѓРєР°Р·С‹РІР°СЋС‰РёС… РЅР° РєРѕС‚РёСЂРѕРІРєРё РљРРўРѕРІ
             accessoryParentId =
                 BaseQueries.GetSelectQueryColumnOnly<RequestForQuotationRecord>
                 (BasePackageRecord.PackageItemIdProperty,
@@ -349,15 +349,15 @@ namespace SmartCore.Purchase
                      new CommonFilter<int>(BasePackageRecord.ParentPackageIdProperty, rfq.ItemId),
                      new CommonFilter<int>(BasePackageRecord.PackageItemTypeProperty, SmartCoreType.Product.ItemId)
                  });
-            //Фильтр по ключевому полю таблицы обозначающий 
-            //что значения ключевого поля таблицы должны быть
-            //среди идентификаторов КИТов
+            //Р¤РёР»СЊС‚СЂ РїРѕ РєР»СЋС‡РµРІРѕРјСѓ РїРѕР»СЋ С‚Р°Р±Р»РёС†С‹ РѕР±РѕР·РЅР°С‡Р°СЋС‰РёР№ 
+            //С‡С‚Рѕ Р·РЅР°С‡РµРЅРёСЏ РєР»СЋС‡РµРІРѕРіРѕ РїРѕР»СЏ С‚Р°Р±Р»РёС†С‹ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ
+            //СЃСЂРµРґРё РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ РљРРўРѕРІ
             idFilter = new CommonFilter<string>(BaseEntityObject.ItemIdProperty,
                                                 FilterType.In,
                                                 new[] { accessoryParentId });
-            //создаются запросы на выборку задач по компонентам с заданного ВС
-            //дополнительно фильтрую ключевое поле. значение ключевого поля
-            //задач по компонентам ВС должно быть среди идентификатор родительских задач КИТов
+            //СЃРѕР·РґР°СЋС‚СЃСЏ Р·Р°РїСЂРѕСЃС‹ РЅР° РІС‹Р±РѕСЂРєСѓ Р·Р°РґР°С‡ РїРѕ РєРѕРјРїРѕРЅРµРЅС‚Р°Рј СЃ Р·Р°РґР°РЅРЅРѕРіРѕ Р’РЎ
+            //РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕ С„РёР»СЊС‚СЂСѓСЋ РєР»СЋС‡РµРІРѕРµ РїРѕР»Рµ. Р·РЅР°С‡РµРЅРёРµ РєР»СЋС‡РµРІРѕРіРѕ РїРѕР»СЏ
+            //Р·Р°РґР°С‡ РїРѕ РєРѕРјРїРѕРЅРµРЅС‚Р°Рј Р’РЎ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ СЃСЂРµРґРё РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ СЂРѕРґРёС‚РµР»СЊСЃРєРёС… Р·Р°РґР°С‡ РљРРўРѕРІ
             var componentModels = _loader.GetObjectListAll<ComponentModel>(idFilter, true, true);
             #endregion
 
@@ -372,7 +372,7 @@ namespace SmartCore.Purchase
 
         #region public void LoadRequestForQuotationItems(RequestForQuotation rfq)
         /// <summary>
-        /// Загружает все элементы рабочего пакета
+        /// Р—Р°РіСЂСѓР¶Р°РµС‚ РІСЃРµ СЌР»РµРјРµРЅС‚С‹ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
         /// </summary>
         /// <param name="rfq"></param>
         public void LoadRequestForQuotationItems(RequestForQuotation rfq)
@@ -393,15 +393,15 @@ namespace SmartCore.Purchase
 
         #region public List<Product> GetProducts(InitialOrder rfq)
         /// <summary>
-        /// Возвращает все комплектующие, находящиеся в определенном ордере запроса
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РІСЃРµ РєРѕРјРїР»РµРєС‚СѓСЋС‰РёРµ, РЅР°С…РѕРґСЏС‰РёРµСЃСЏ РІ РѕРїСЂРµРґРµР»РµРЅРЅРѕРј РѕСЂРґРµСЂРµ Р·Р°РїСЂРѕСЃР°
         /// </summary>
         /// <returns></returns>
         private List<Product> GetProducts(InitialOrder rfq)
         {
-            #region Поиск Продуктов
+            #region РџРѕРёСЃРє РџСЂРѕРґСѓРєС‚РѕРІ
 
-            //Строка запроса, производящая выборку идентификаторов Продуктов среди записей котировочных ордеров
-            //пренадлежащих переданному котировочному ордеру и указывающих на котировки КИТов
+            //РЎС‚СЂРѕРєР° Р·Р°РїСЂРѕСЃР°, РїСЂРѕРёР·РІРѕРґСЏС‰Р°СЏ РІС‹Р±РѕСЂРєСѓ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ РџСЂРѕРґСѓРєС‚РѕРІ СЃСЂРµРґРё Р·Р°РїРёСЃРµР№ РєРѕС‚РёСЂРѕРІРѕС‡РЅС‹С… РѕСЂРґРµСЂРѕРІ
+            //РїСЂРµРЅР°РґР»РµР¶Р°С‰РёС… РїРµСЂРµРґР°РЅРЅРѕРјСѓ РєРѕС‚РёСЂРѕРІРѕС‡РЅРѕРјСѓ РѕСЂРґРµСЂСѓ Рё СѓРєР°Р·С‹РІР°СЋС‰РёС… РЅР° РєРѕС‚РёСЂРѕРІРєРё РљРРўРѕРІ
             var accessoryParentId =
                 BaseQueries.GetSelectQueryColumnOnly<InitialOrderRecord>
                 (InitialOrderRecord.ProductIdProperty,
@@ -410,23 +410,23 @@ namespace SmartCore.Purchase
                      new CommonFilter<int>(BasePackageRecord.ParentPackageIdProperty, rfq.ItemId),
                      new CommonFilter<int>(InitialOrderRecord.ProductTypeProperty, SmartCoreType.Product.ItemId)
                  });
-            //Фильтр по ключевому полю таблицы обозначающий 
-            //что значения ключевого поля таблицы должны быть
-            //среди идентификаторов КИТов
+            //Р¤РёР»СЊС‚СЂ РїРѕ РєР»СЋС‡РµРІРѕРјСѓ РїРѕР»СЋ С‚Р°Р±Р»РёС†С‹ РѕР±РѕР·РЅР°С‡Р°СЋС‰РёР№ 
+            //С‡С‚Рѕ Р·РЅР°С‡РµРЅРёСЏ РєР»СЋС‡РµРІРѕРіРѕ РїРѕР»СЏ С‚Р°Р±Р»РёС†С‹ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ
+            //СЃСЂРµРґРё РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ РљРРўРѕРІ
             ICommonFilter idFilter = new CommonFilter<string>(BaseEntityObject.ItemIdProperty,
                                                               FilterType.In,
                                                               new[] { accessoryParentId });
-            //создаются запросы на выборку задач по компонентам с заданного ВС
-            //дополнительно фильтрую ключевое поле. значение ключевого поля
-            //задач по компонентам ВС должно быть среди идентификатор родительских задач КИТов
+            //СЃРѕР·РґР°СЋС‚СЃСЏ Р·Р°РїСЂРѕСЃС‹ РЅР° РІС‹Р±РѕСЂРєСѓ Р·Р°РґР°С‡ РїРѕ РєРѕРјРїРѕРЅРµРЅС‚Р°Рј СЃ Р·Р°РґР°РЅРЅРѕРіРѕ Р’РЎ
+            //РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕ С„РёР»СЊС‚СЂСѓСЋ РєР»СЋС‡РµРІРѕРµ РїРѕР»Рµ. Р·РЅР°С‡РµРЅРёРµ РєР»СЋС‡РµРІРѕРіРѕ РїРѕР»СЏ
+            //Р·Р°РґР°С‡ РїРѕ РєРѕРјРїРѕРЅРµРЅС‚Р°Рј Р’РЎ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ СЃСЂРµРґРё РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ СЂРѕРґРёС‚РµР»СЊСЃРєРёС… Р·Р°РґР°С‡ РљРРўРѕРІ
             var kits = _loader.GetObjectListAll<Product>(idFilter, true, true);
 
             #endregion
 
-            #region загрузка деталей
+            #region Р·Р°РіСЂСѓР·РєР° РґРµС‚Р°Р»РµР№
 
-            //Строка запроса, производящая выборку идентификаторов Продуктов среди записей котировочных ордеров
-            //пренадлежащих переданному котировочному ордеру и указывающих на котировки КИТов
+            //РЎС‚СЂРѕРєР° Р·Р°РїСЂРѕСЃР°, РїСЂРѕРёР·РІРѕРґСЏС‰Р°СЏ РІС‹Р±РѕСЂРєСѓ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ РџСЂРѕРґСѓРєС‚РѕРІ СЃСЂРµРґРё Р·Р°РїРёСЃРµР№ РєРѕС‚РёСЂРѕРІРѕС‡РЅС‹С… РѕСЂРґРµСЂРѕРІ
+            //РїСЂРµРЅР°РґР»РµР¶Р°С‰РёС… РїРµСЂРµРґР°РЅРЅРѕРјСѓ РєРѕС‚РёСЂРѕРІРѕС‡РЅРѕРјСѓ РѕСЂРґРµСЂСѓ Рё СѓРєР°Р·С‹РІР°СЋС‰РёС… РЅР° РєРѕС‚РёСЂРѕРІРєРё РљРРўРѕРІ
             accessoryParentId =
                 BaseQueries.GetSelectQueryColumnOnly<InitialOrderRecord>
                 (InitialOrderRecord.ProductIdProperty,
@@ -435,15 +435,15 @@ namespace SmartCore.Purchase
                      new CommonFilter<int>(BasePackageRecord.ParentPackageIdProperty, rfq.ItemId),
                      new CommonFilter<int>(InitialOrderRecord.ProductTypeProperty, SmartCoreType.Product.ItemId)
                  });
-            //Фильтр по ключевому полю таблицы обозначающий 
-            //что значения ключевого поля таблицы должны быть
-            //среди идентификаторов КИТов
+            //Р¤РёР»СЊС‚СЂ РїРѕ РєР»СЋС‡РµРІРѕРјСѓ РїРѕР»СЋ С‚Р°Р±Р»РёС†С‹ РѕР±РѕР·РЅР°С‡Р°СЋС‰РёР№ 
+            //С‡С‚Рѕ Р·РЅР°С‡РµРЅРёСЏ РєР»СЋС‡РµРІРѕРіРѕ РїРѕР»СЏ С‚Р°Р±Р»РёС†С‹ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ
+            //СЃСЂРµРґРё РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ РљРРўРѕРІ
             idFilter = new CommonFilter<string>(BaseEntityObject.ItemIdProperty,
                                                 FilterType.In,
                                                 new[] { accessoryParentId });
-            //создаются запросы на выборку задач по компонентам с заданного ВС
-            //дополнительно фильтрую ключевое поле. значение ключевого поля
-            //задач по компонентам ВС должно быть среди идентификатор родительских задач КИТов
+            //СЃРѕР·РґР°СЋС‚СЃСЏ Р·Р°РїСЂРѕСЃС‹ РЅР° РІС‹Р±РѕСЂРєСѓ Р·Р°РґР°С‡ РїРѕ РєРѕРјРїРѕРЅРµРЅС‚Р°Рј СЃ Р·Р°РґР°РЅРЅРѕРіРѕ Р’РЎ
+            //РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕ С„РёР»СЊС‚СЂСѓСЋ РєР»СЋС‡РµРІРѕРµ РїРѕР»Рµ. Р·РЅР°С‡РµРЅРёРµ РєР»СЋС‡РµРІРѕРіРѕ РїРѕР»СЏ
+            //Р·Р°РґР°С‡ РїРѕ РєРѕРјРїРѕРЅРµРЅС‚Р°Рј Р’РЎ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ СЃСЂРµРґРё РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ СЂРѕРґРёС‚РµР»СЊСЃРєРёС… Р·Р°РґР°С‡ РљРРўРѕРІ
             var componentModels = _loader.GetObjectListAll<ComponentModel>(idFilter, true, true);
             #endregion
 
@@ -458,7 +458,7 @@ namespace SmartCore.Purchase
 
         #region public void LoadInitionalOrderItems(InitialOrder rfq)
         /// <summary>
-        /// Загружает все элементы рабочего пакета
+        /// Р—Р°РіСЂСѓР¶Р°РµС‚ РІСЃРµ СЌР»РµРјРµРЅС‚С‹ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
         /// </summary>
         /// <param name="rfq"></param>
         public void LoadInitionalOrderItems(InitialOrder rfq)
@@ -490,7 +490,7 @@ namespace SmartCore.Purchase
         }
 
         /// <summary>
-        /// Публикует закупочный акт
+        /// РџСѓР±Р»РёРєСѓРµС‚ Р·Р°РєСѓРїРѕС‡РЅС‹Р№ Р°РєС‚
         /// </summary>
         /// <param name="po"></param>
         /// <param name="date"></param>
@@ -511,7 +511,7 @@ namespace SmartCore.Purchase
 
 		#region public InitialOrder AddInitialOrder(List<KeyValuePair<Product, double>> quotationList, BaseEntityObject parent, DateTime effDate, out string message)
 		/// <summary>
-		/// Сохранение Первоначального акта ордера
+		/// РЎРѕС…СЂР°РЅРµРЅРёРµ РџРµСЂРІРѕРЅР°С‡Р°Р»СЊРЅРѕРіРѕ Р°РєС‚Р° РѕСЂРґРµСЂР°
 		/// </summary>
 		public InitialOrder AddInitialOrder(IEnumerable<KeyValuePair<Product, double>> quotationList,
 											BaseEntityObject parent,
@@ -555,7 +555,7 @@ namespace SmartCore.Purchase
 			};
 			_newKeeper.Save(rqst);
 
-			#region Формирование записей рабочего пакета
+			#region Р¤РѕСЂРјРёСЂРѕРІР°РЅРёРµ Р·Р°РїРёСЃРµР№ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
 			foreach (var item in quotationList)
 			{
 				Product product = item.Key;
@@ -583,7 +583,7 @@ namespace SmartCore.Purchase
 			}
 			#endregion
 
-			#region Сохранение рабочего пакета и его записей
+			#region РЎРѕС…СЂР°РЅРµРЅРёРµ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р° Рё РµРіРѕ Р·Р°РїРёСЃРµР№
 
 			foreach (var item in rqst.PackageRecords)
 			{
@@ -601,7 +601,7 @@ namespace SmartCore.Purchase
 
 		#region public InitialOrder AddInitialOrder(IEnumerable<InitialOrderRecord> initialList, BaseEntityObject parent, out string message)
 		/// <summary>
-		/// Сохранение Первоначального акта ордера
+		/// РЎРѕС…СЂР°РЅРµРЅРёРµ РџРµСЂРІРѕРЅР°С‡Р°Р»СЊРЅРѕРіРѕ Р°РєС‚Р° РѕСЂРґРµСЂР°
 		/// </summary>
 		public InitialOrder AddInitialOrder(IEnumerable<InitialOrderRecord> initialList,
 											BaseEntityObject parent,
@@ -643,12 +643,12 @@ namespace SmartCore.Purchase
 			};
 			_newKeeper.Save(rqst);
 
-			#region Формирование записей рабочего пакета
+			#region Р¤РѕСЂРјРёСЂРѕРІР°РЅРёРµ Р·Р°РїРёСЃРµР№ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
 			foreach (var item in initialList)
 				rqst.PackageRecords.Add(item);
 			#endregion
 
-			#region Сохранение рабочего пакета и его записей
+			#region РЎРѕС…СЂР°РЅРµРЅРёРµ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р° Рё РµРіРѕ Р·Р°РїРёСЃРµР№
 
 			foreach (var item in rqst.PackageRecords)
 			{
@@ -670,15 +670,15 @@ namespace SmartCore.Purchase
 
 		#region public void GetInitialOrderItemsWithCalculate(InitialOrder initialOrder)
 		/// <summary>
-		/// загружает элементы начального акта, и производит их калькуляцмю.
+		/// Р·Р°РіСЂСѓР¶Р°РµС‚ СЌР»РµРјРµРЅС‚С‹ РЅР°С‡Р°Р»СЊРЅРѕРіРѕ Р°РєС‚Р°, Рё РїСЂРѕРёР·РІРѕРґРёС‚ РёС… РєР°Р»СЊРєСѓР»СЏС†РјСЋ.
 		/// </summary>
 		/// <param name="initialOrder"></param>
 		public void GetInitialOrderItemsWithCalculate(InitialOrder initialOrder)
 		{
 			LoadInitionalOrderItems(initialOrder);
 
-			//записи по чекам обслуживания нужно сгруппировать по типу чеков (Schedule/Store)
-			//и номеру группы выполнения, после, для каждой группы расчитать ресурс и дату выполнения
+			//Р·Р°РїРёСЃРё РїРѕ С‡РµРєР°Рј РѕР±СЃР»СѓР¶РёРІР°РЅРёСЏ РЅСѓР¶РЅРѕ СЃРіСЂСѓРїРїРёСЂРѕРІР°С‚СЊ РїРѕ С‚РёРїСѓ С‡РµРєРѕРІ (Schedule/Store)
+			//Рё РЅРѕРјРµСЂСѓ РіСЂСѓРїРїС‹ РІС‹РїРѕР»РЅРµРЅРёСЏ, РїРѕСЃР»Рµ, РґР»СЏ РєР°Р¶РґРѕР№ РіСЂСѓРїРїС‹ СЂР°СЃС‡РёС‚Р°С‚СЊ СЂРµСЃСѓСЂСЃ Рё РґР°С‚Сѓ РІС‹РїРѕР»РЅРµРЅРёСЏ
 			var maintenanceChecksWprs =
 				initialOrder.PackageRecords.Where(w => w.IsSchedule
 													&& w.Task.SmartCoreObjectType == SmartCoreType.MaintenanceCheck
@@ -704,8 +704,8 @@ namespace SmartCore.Purchase
 				mc.ResetMathData();
 			}
 
-			#region Расчет выполнения для чеков не имеющих записи в рамках данного рабочего пакета
-			//группировка по типу (Schedule/Store)
+			#region Р Р°СЃС‡РµС‚ РІС‹РїРѕР»РЅРµРЅРёСЏ РґР»СЏ С‡РµРєРѕРІ РЅРµ РёРјРµСЋС‰РёС… Р·Р°РїРёСЃРё РІ СЂР°РјРєР°С… РґР°РЅРЅРѕРіРѕ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
+			//РіСЂСѓРїРїРёСЂРѕРІРєР° РїРѕ С‚РёРїСѓ (Schedule/Store)
 			var groupByMaintenanceType =
 				mcs.GroupBy(mc => mc.Schedule);
 			foreach (var maintenanceTypeGroup in groupByMaintenanceType)
@@ -717,7 +717,7 @@ namespace SmartCore.Purchase
 					var mcg = new MaintenanceCheckGroupByType(maintenanceComplianceGroup.First().Schedule);
 					foreach (var maintenanceCheck in maintenanceComplianceGroup)
 						mcg.Checks.Add(maintenanceCheck);
-					//чеки выполнения
+					//С‡РµРєРё РІС‹РїРѕР»РЅРµРЅРёСЏ
 					_performanceCalculator.GetPerformance(mcg, maintenanceComplianceGroup.Key);
 
 				}
@@ -757,7 +757,7 @@ namespace SmartCore.Purchase
 
 		#region public RequestForQuotation AddQuotationOrder(List<KeyValuePair<Product, double>> quotationList, BaseEntityObject parent, out string message)
 		/// <summary>
-		/// Сохранение Запросного ордера
+		/// РЎРѕС…СЂР°РЅРµРЅРёРµ Р—Р°РїСЂРѕСЃРЅРѕРіРѕ РѕСЂРґРµСЂР°
 		/// </summary>
 		public RequestForQuotation AddQuotationOrder(IEnumerable<KeyValuePair<Product, double>> quotationList, BaseEntityObject parent, out string message)
 		{
@@ -797,7 +797,7 @@ namespace SmartCore.Purchase
 			};
 			_newKeeper.Save(rqst);
 
-			#region Формирование записей рабочего пакета
+			#region Р¤РѕСЂРјРёСЂРѕРІР°РЅРёРµ Р·Р°РїРёСЃРµР№ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
 			foreach (var item in quotationList)
 			{
 				Product product = item.Key;
@@ -818,7 +818,7 @@ namespace SmartCore.Purchase
 			}
 			#endregion
 
-			#region Сохранение рабочего пакета и его записей
+			#region РЎРѕС…СЂР°РЅРµРЅРёРµ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р° Рё РµРіРѕ Р·Р°РїРёСЃРµР№
 
 			foreach (var item in rqst.PackageRecords)
 			{
@@ -836,7 +836,7 @@ namespace SmartCore.Purchase
 
 		#region public RequestForQuotation AddQuotationOrder(IEnumerable<RequestForQuotationRecord> quotationList, BaseEntityObject parent, out string message)
 		/// <summary>
-		/// Сохранение Запросного ордера
+		/// РЎРѕС…СЂР°РЅРµРЅРёРµ Р—Р°РїСЂРѕСЃРЅРѕРіРѕ РѕСЂРґРµСЂР°
 		/// </summary>
 		public RequestForQuotation AddQuotationOrder(IEnumerable<RequestForQuotationRecord> quotationList,
 													 Supplier toSupplier,
@@ -882,12 +882,12 @@ namespace SmartCore.Purchase
 			};
 			_newKeeper.Save(rqst);
 
-			#region Формирование записей рабочего пакета
+			#region Р¤РѕСЂРјРёСЂРѕРІР°РЅРёРµ Р·Р°РїРёСЃРµР№ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
 			foreach (var item in quotationList)
 				rqst.PackageRecords.Add(item);
 			#endregion
 
-			#region Сохранение рабочего пакета и его записей
+			#region РЎРѕС…СЂР°РЅРµРЅРёРµ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р° Рё РµРіРѕ Р·Р°РїРёСЃРµР№
 
 			foreach (var item in rqst.PackageRecords)
 			{
@@ -914,18 +914,18 @@ namespace SmartCore.Purchase
 		#region public bool AddToQuotationOrder(List<KeyValuePair<Product, double>> quotationItems, int quotationId, out string message)
 
 		/// <summary>
-		/// Добавление элементов в существующий открытый или опубликованный рабочий пакет
+		/// Р”РѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚РѕРІ РІ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёР№ РѕС‚РєСЂС‹С‚С‹Р№ РёР»Рё РѕРїСѓР±Р»РёРєРѕРІР°РЅРЅС‹Р№ СЂР°Р±РѕС‡РёР№ РїР°РєРµС‚
 		/// </summary>
-		/// <param name="quotationItems">Элементы, которые необходимо добавить</param>
-		/// <param name="quotationId">ID пакета, в который добавляютя элементы</param>
-		/// <param name="message">Сообщение о статусе добавления-корректно или описание ошибки при добавлении</param>
-		/// <return>true - если добавление прошло успешно или false в случае провала </return>
+		/// <param name="quotationItems">Р­Р»РµРјРµРЅС‚С‹, РєРѕС‚РѕСЂС‹Рµ РЅРµРѕР±С…РѕРґРёРјРѕ РґРѕР±Р°РІРёС‚СЊ</param>
+		/// <param name="quotationId">ID РїР°РєРµС‚Р°, РІ РєРѕС‚РѕСЂС‹Р№ РґРѕР±Р°РІР»СЏСЋС‚СЏ СЌР»РµРјРµРЅС‚С‹</param>
+		/// <param name="message">РЎРѕРѕР±С‰РµРЅРёРµ Рѕ СЃС‚Р°С‚СѓСЃРµ РґРѕР±Р°РІР»РµРЅРёСЏ-РєРѕСЂСЂРµРєС‚РЅРѕ РёР»Рё РѕРїРёСЃР°РЅРёРµ РѕС€РёР±РєРё РїСЂРё РґРѕР±Р°РІР»РµРЅРёРё</param>
+		/// <return>true - РµСЃР»Рё РґРѕР±Р°РІР»РµРЅРёРµ РїСЂРѕС€Р»Рѕ СѓСЃРїРµС€РЅРѕ РёР»Рё false РІ СЃР»СѓС‡Р°Рµ РїСЂРѕРІР°Р»Р° </return>
 		public bool AddToQuotationOrder(List<KeyValuePair<Product, double>> quotationItems, int quotationId, out string message)
 		{
 			if (quotationItems == null || /*parentAircraft == null ||*/ quotationId <= 0)
 				throw new NullReferenceException("1504: NullReferenceException");
 
-			#region Проверка состояния рабочего пакета
+			#region РџСЂРѕРІРµСЂРєР° СЃРѕСЃС‚РѕСЏРЅРёСЏ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
 
 			var addTo = _loader.GetObject<RequestForQuotation>(quotationId, true, loadDeleted: true);
 			if (addTo == null)
@@ -951,7 +951,7 @@ namespace SmartCore.Purchase
 
 			#endregion
 
-			#region Проверка Переданных элементов для формирования рабочего пакета)
+			#region РџСЂРѕРІРµСЂРєР° РџРµСЂРµРґР°РЅРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ РґР»СЏ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°)
 
 			if (!quotationItems.Any())
 			{
@@ -962,7 +962,7 @@ namespace SmartCore.Purchase
 
 			#endregion
 
-			#region Формирование записей рабочего пакета
+			#region Р¤РѕСЂРјРёСЂРѕРІР°РЅРёРµ Р·Р°РїРёСЃРµР№ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
 			foreach (var item in quotationItems)
 			{
 				Product product = item.Key;
@@ -983,7 +983,7 @@ namespace SmartCore.Purchase
 			}
 			#endregion
 
-			#region Сохранение рабочего пакета и его записей
+			#region РЎРѕС…СЂР°РЅРµРЅРёРµ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р° Рё РµРіРѕ Р·Р°РїРёСЃРµР№
 
 			foreach (var item in addTo.PackageRecords)
 			{
@@ -1001,7 +1001,7 @@ namespace SmartCore.Purchase
 
 		#region public void Publish(RequestForQuotation rfq, DateTime date)
 		/// <summary>
-		/// Публикует рабочий пакет - выдает рабочий пакет на перрон
+		/// РџСѓР±Р»РёРєСѓРµС‚ СЂР°Р±РѕС‡РёР№ РїР°РєРµС‚ - РІС‹РґР°РµС‚ СЂР°Р±РѕС‡РёР№ РїР°РєРµС‚ РЅР° РїРµСЂСЂРѕРЅ
 		/// </summary>
 		/// <param name="rfq"></param>
 		/// <param name="date"></param>
@@ -1027,7 +1027,7 @@ namespace SmartCore.Purchase
 		#region public void Close(RequestForQuotation rfq, DateTime date, string remarks)
 
 		/// <summary>
-		/// Регистрирует выполнение рабочего пакета
+		/// Р РµРіРёСЃС‚СЂРёСЂСѓРµС‚ РІС‹РїРѕР»РЅРµРЅРёРµ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
 		/// </summary>
 		/// <param name="rfq"></param>
 		/// <param name="date"></param>
@@ -1046,7 +1046,7 @@ namespace SmartCore.Purchase
 		#region public void Close(PurchaseOrder rfq, DateTime date, string remarks)
 
 		/// <summary>
-		/// Регистрирует выполнение рабочего пакета
+		/// Р РµРіРёСЃС‚СЂРёСЂСѓРµС‚ РІС‹РїРѕР»РЅРµРЅРёРµ СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
 		/// </summary>
 		/// <param name="rfq"></param>
 		/// <param name="date"></param>
@@ -1064,7 +1064,7 @@ namespace SmartCore.Purchase
 
 		#region public void DeleteFromRequestForQuotation(Product accessory, RequestForQuotation rfq)
 		/// <summary>
-		/// Удаляет запись из рабочего пакета
+		/// РЈРґР°Р»СЏРµС‚ Р·Р°РїРёСЃСЊ РёР· СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
 		/// </summary>
 		/// <param name="accessory"></param>
 		/// <param name="rfq"></param>

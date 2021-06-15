@@ -27,7 +27,7 @@ using TempUIExtentions;
 namespace CAS.UI.UIControls.DirectivesControls
 {
 	/// <summary>
-	/// Класс для отображения атрибутов и дополнительной информации о директиве
+	/// РљР»Р°СЃСЃ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ Р°С‚СЂРёР±СѓС‚РѕРІ Рё РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕР№ РёРЅС„РѕСЂРјР°С†РёРё Рѕ РґРёСЂРµРєС‚РёРІРµ
 	/// </summary>
 	[Designer(typeof(DirectiveParametersControlDesigner))]
 	public class DirectiveParametersControl : UserControl
@@ -101,7 +101,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		#region public DirectiveAttributesControl()
 
 		/// <summary>
-		/// Пустой конструктор
+		/// РџСѓСЃС‚РѕР№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 		/// </summary>
 		public DirectiveParametersControl()
 		{
@@ -113,7 +113,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		#region public DirectiveAttributesControl(Directive currentDirective) : this()
 
 		/// <summary>
-		/// Создает объект для отображения атрибутов и дополнительной информации о директиве
+		/// РЎРѕР·РґР°РµС‚ РѕР±СЉРµРєС‚ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ Р°С‚СЂРёР±СѓС‚РѕРІ Рё РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕР№ РёРЅС„РѕСЂРјР°С†РёРё Рѕ РґРёСЂРµРєС‚РёРІРµ
 		/// </summary>
 		/// <param name="currentDirective"></param>
 		public DirectiveParametersControl(Directive currentDirective) : this()
@@ -192,7 +192,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		#region public Directive CurrentDirective
 
 		/// <summary>
-		/// текущая  директива
+		/// С‚РµРєСѓС‰Р°СЏ  РґРёСЂРµРєС‚РёРІР°
 		/// </summary>
 		public Directive CurrentDirective
 		{
@@ -230,7 +230,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		#region public DirectiveThreshold Threshold { get; set; }
 
 		/// <summary>
-		/// Выполнение директивы
+		/// Р’С‹РїРѕР»РЅРµРЅРёРµ РґРёСЂРµРєС‚РёРІС‹
 		/// </summary>
 		public DirectiveThreshold Threshold
 		{
@@ -248,7 +248,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 		#region public DateTime EffectiveDate
 		/// <summary>
-		/// Дата начала использования текущей директивы
+		/// Р”Р°С‚Р° РЅР°С‡Р°Р»Р° РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ С‚РµРєСѓС‰РµР№ РґРёСЂРµРєС‚РёРІС‹
 		/// </summary>
 		public DateTime EffectiveDate
 		{
@@ -498,7 +498,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			this.labelParagraph.Name = "labelParagraph";
 			this.labelParagraph.Size = new System.Drawing.Size(30, 25);
 			this.labelParagraph.TabIndex = 197;
-			this.labelParagraph.Text = "§:";
+			this.labelParagraph.Text = "В§:";
 			this.labelParagraph.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// labelNDT
@@ -1132,7 +1132,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 		#region private DirectiveThreshold GetThreshold()
 		/// <summary>
-		/// Считывает все контролы и формирует один Threshold
+		/// РЎС‡РёС‚С‹РІР°РµС‚ РІСЃРµ РєРѕРЅС‚СЂРѕР»С‹ Рё С„РѕСЂРјРёСЂСѓРµС‚ РѕРґРёРЅ Threshold
 		/// </summary>
 		private DirectiveThreshold GetThreshold()
 		{
@@ -1157,7 +1157,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// Repeat interval
 			if (checkBoxRepeat.Checked)
 			{
-				// директива выполняется повторно
+				// РґРёСЂРµРєС‚РёРІР° РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ РїРѕРІС‚РѕСЂРЅРѕ
 				Lifelength rp = new Lifelength(lifelengthViewer_Repeat.Lifelength);
 				Lifelength nrp = new Lifelength(lifelengthViewer_RepeatNotify.Lifelength);
 
@@ -1175,7 +1175,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 		#region private void ApplyThreshold(DirectiveThreshold treshold)
 		/// <summary>
-		/// Заполняет все контролы в связи с заданным Threshold
+		/// Р—Р°РїРѕР»РЅСЏРµС‚ РІСЃРµ РєРѕРЅС‚СЂРѕР»С‹ РІ СЃРІСЏР·Рё СЃ Р·Р°РґР°РЅРЅС‹Рј Threshold
 		/// </summary>
 		private void ApplyThreshold(DirectiveThreshold threshold)
 		{
@@ -1201,7 +1201,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			// Repeat Interval
 			radio_RepeatWhicheverLast.Checked =
 				threshold.RepeatPerformanceConditionType != ThresholdConditionType.WhicheverFirst;
-			// Выбираем способ повторения директивы
+			// Р’С‹Р±РёСЂР°РµРј СЃРїРѕСЃРѕР± РїРѕРІС‚РѕСЂРµРЅРёСЏ РґРёСЂРµРєС‚РёРІС‹
 			checkBoxRepeat.Checked = threshold.PerformRepeatedly;
 
 			radio_RepeatWhicheverFirst.Enabled =  radio_RepeatWhicheverLast.Enabled = 
@@ -1292,7 +1292,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		#region public bool GetChangeStatus()
 
 		/// <summary>
-		/// Возвращает значение, показывающее были ли изменения в данном элементе управления
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°СЋС‰РµРµ Р±С‹Р»Рё Р»Рё РёР·РјРµРЅРµРЅРёСЏ РІ РґР°РЅРЅРѕРј СЌР»РµРјРµРЅС‚Рµ СѓРїСЂР°РІР»РµРЅРёСЏ
 		/// </summary>
 		/// <returns></returns>
 		public bool GetChangeStatus()
@@ -1408,7 +1408,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		#region public void UpdateInformation()
 
 		/// <summary>
-		/// 3аполняет поля для редактирования директивы
+		/// 3Р°РїРѕР»РЅСЏРµС‚ РїРѕР»СЏ РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ РґРёСЂРµРєС‚РёРІС‹
 		/// </summary>
 		private void UpdateInformation()
 		{
@@ -1511,7 +1511,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 			#region MaintenanceDirective
 
-			var pareAircraft = GlobalObjects.AircraftsCore.GetAircraftById(_currentDirective.ParentAircraftId);//TODO:(Evgenii Babak) пересмотреть использование ParentAircrafId здесь
+			var pareAircraft = GlobalObjects.AircraftsCore.GetAircraftById(_currentDirective.ParentAircraftId);//TODO:(Evgenii Babak) РїРµСЂРµСЃРјРѕС‚СЂРµС‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ ParentAircrafId Р·РґРµСЃСЊ
 			if (pareAircraft != null)
 			{
 				var maintenanceScreenDisplayerText = $"{_currentDirective.GetParentAircraftRegNumber()}. MPD";
@@ -1563,7 +1563,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		#region public bool ApplyChanges(Directive destinationDirective)
 
 		/// <summary>
-		/// Данные у директивы обновляются по введенным данным
+		/// Р”Р°РЅРЅС‹Рµ Сѓ РґРёСЂРµРєС‚РёРІС‹ РѕР±РЅРѕРІР»СЏСЋС‚СЃСЏ РїРѕ РІРІРµРґРµРЅРЅС‹Рј РґР°РЅРЅС‹Рј
 		/// </summary>
 		public bool ApplyChanges(Directive destinationDirective)
 		{
@@ -1625,7 +1625,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		#region public bool SaveData()
 
 		/// <summary>
-		/// Сохраняет работу агрегата
+		/// РЎРѕС…СЂР°РЅСЏРµС‚ СЂР°Р±РѕС‚Сѓ Р°РіСЂРµРіР°С‚Р°
 		/// </summary>
 		/// <returns></returns>
 		public void SaveData()
@@ -1671,7 +1671,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 		#region public void ClearFields()
 
 		/// <summary>
-		/// Очищает все поля
+		/// РћС‡РёС‰Р°РµС‚ РІСЃРµ РїРѕР»СЏ
 		/// </summary>
 		public void ClearFields()
 		{
@@ -1685,10 +1685,10 @@ namespace CAS.UI.UIControls.DirectivesControls
 		#region public bool CheckManHours(out double manHours)
 
 		/// <summary>
-		/// Проверяет значение ManHours
+		/// РџСЂРѕРІРµСЂСЏРµС‚ Р·РЅР°С‡РµРЅРёРµ ManHours
 		/// </summary>
-		/// <param name="manHours">Значение ManHours</param>
-		/// <returns>Возвращает true если значение можно преобразовать в тип double, иначе возвращает false</returns>
+		/// <param name="manHours">Р—РЅР°С‡РµРЅРёРµ ManHours</param>
+		/// <returns>Р’РѕР·РІСЂР°С‰Р°РµС‚ true РµСЃР»Рё Р·РЅР°С‡РµРЅРёРµ РјРѕР¶РЅРѕ РїСЂРµРѕР±СЂР°Р·РѕРІР°С‚СЊ РІ С‚РёРї double, РёРЅР°С‡Рµ РІРѕР·РІСЂР°С‰Р°РµС‚ false</returns>
 		public bool CheckManHours(out double manHours)
 		{
 			if (_textboxManHours.Text == "")
@@ -1708,10 +1708,10 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 		#region public bool CheckCost(out double cost)
 		/// <summary>
-		/// Проверяет значение Cost
+		/// РџСЂРѕРІРµСЂСЏРµС‚ Р·РЅР°С‡РµРЅРёРµ Cost
 		/// </summary>
-		/// <param name="cost">Значение Cost</param>
-		/// <returns>Возвращает true если значение можно преобразовать в тип double, иначе возвращает false</returns>
+		/// <param name="cost">Р—РЅР°С‡РµРЅРёРµ Cost</param>
+		/// <returns>Р’РѕР·РІСЂР°С‰Р°РµС‚ true РµСЃР»Рё Р·РЅР°С‡РµРЅРёРµ РјРѕР¶РЅРѕ РїСЂРµРѕР±СЂР°Р·РѕРІР°С‚СЊ РІ С‚РёРї double, РёРЅР°С‡Рµ РІРѕР·РІСЂР°С‰Р°РµС‚ false</returns>
 		public bool CheckCost(out double cost)
 		{
 			if (_textboxCost.Text == "")
@@ -1759,7 +1759,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 			//DamageChartFileDialog dlg = new DamageChartFileDialog(damageItem, _currentDirective.ParentBaseDetail.ParentAircraft);
 			//dlg.ShowDialog();
 
-			var dlg = new DamageChart2DForm(damageItem, GlobalObjects.AircraftsCore.GetAircraftById(_currentDirective.ParentBaseComponent.ParentAircraftId));//TODO:(Evgenii Babak) пересмотреть использование ParentAircrafId здесь
+			var dlg = new DamageChart2DForm(damageItem, GlobalObjects.AircraftsCore.GetAircraftById(_currentDirective.ParentBaseComponent.ParentAircraftId));//TODO:(Evgenii Babak) РїРµСЂРµСЃРјРѕС‚СЂРµС‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ ParentAircrafId Р·РґРµСЃСЊ
 			dlg.ShowDialog();
 
 			textBoxChart.Text = damageItem.DamageDocs.ToString();
@@ -1790,7 +1790,7 @@ namespace CAS.UI.UIControls.DirectivesControls
 
 				if (itemRelations.Count == 0)
 				{
-					//TODO:(Evgenii Babak) фикс очень кривой нужно вычислять WorkItemsRelationType с помощью метода расширения для коллекции relation - ов
+					//TODO:(Evgenii Babak) С„РёРєСЃ РѕС‡РµРЅСЊ РєСЂРёРІРѕР№ РЅСѓР¶РЅРѕ РІС‹С‡РёСЃР»СЏС‚СЊ WorkItemsRelationType СЃ РїРѕРјРѕС‰СЊСЋ РјРµС‚РѕРґР° СЂР°СЃС€РёСЂРµРЅРёСЏ РґР»СЏ РєРѕР»Р»РµРєС†РёРё relation - РѕРІ
 					bindedItem.ItemRelations.AddRange(itemRelations);
 					comboBoxRelationType.SelectedValue = ItemRelationHelper.ConvertBLItemRelationToUIITem(
 						bindedItem.WorkItemsRelationType, !(bindedItem.IsFirst.HasValue && bindedItem.IsFirst.Value));

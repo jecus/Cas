@@ -66,6 +66,7 @@ namespace SmartCore.Entities.NewLoader
 		AttachedFile GetAttachedFileById(int id);
 
 		ICommonCollection<EmployeeSubject> GetEmployeeSubject(params object[] parametres);
+		ICommonCollection<ComponentModel> GetComponentModels(params object[] type);
 
 		ICommonCollection<JobCard> GetJobCard(params object[] parametres);
 	}

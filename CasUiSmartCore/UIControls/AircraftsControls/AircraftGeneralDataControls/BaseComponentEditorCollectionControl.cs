@@ -45,7 +45,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
 
 		#region public void UpdateControl(Aircraft aircraft, BaseComponentType detailType)
 		/// <summary>
-		/// Обновляет информацию о ВС и типе отображаемых деталей
+		/// РћР±РЅРѕРІР»СЏРµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ Р’РЎ Рё С‚РёРїРµ РѕС‚РѕР±СЂР°Р¶Р°РµРјС‹С… РґРµС‚Р°Р»РµР№
 		/// </summary>
 		public void UpdateControl(Aircraft aircraft, BaseComponentType componentType)
 		{
@@ -66,7 +66,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
 
 		#region public bool ValidateData(out string message)
 		/// <summary>
-		/// Возвращает значение, показывающее является ли значение элемента управления допустимым
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°СЋС‰РµРµ СЏРІР»СЏРµС‚СЃСЏ Р»Рё Р·РЅР°С‡РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° СѓРїСЂР°РІР»РµРЅРёСЏ РґРѕРїСѓСЃС‚РёРјС‹Рј
 		/// </summary>
 		/// <returns></returns>
 		public bool ValidateData(out string message)
@@ -85,7 +85,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
 		#region public bool GetChangeStatus()
 
 		/// <summary>
-		/// Возвращает значение, показывающее были ли изменения в данном элементе управления
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°СЋС‰РµРµ Р±С‹Р»Рё Р»Рё РёР·РјРµРЅРµРЅРёСЏ РІ РґР°РЅРЅРѕРј СЌР»РµРјРµРЅС‚Рµ СѓРїСЂР°РІР»РµРЅРёСЏ
 		/// </summary>
 		/// <returns></returns>
 		public bool GetChangeStatus()
@@ -98,7 +98,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
 		#region public void SaveData()
 
 		/// <summary>
-		/// Сохранаяет данные двигателей текущего ВС
+		/// РЎРѕС…СЂР°РЅР°СЏРµС‚ РґР°РЅРЅС‹Рµ РґРІРёРіР°С‚РµР»РµР№ С‚РµРєСѓС‰РµРіРѕ Р’РЎ
 		/// </summary>
 		public void SaveData()
 		{
@@ -112,7 +112,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
 
 		#region private void UpdateControl()
 		/// <summary>
-		/// Обновляет информацию о двигателях текущего ВС
+		/// РћР±РЅРѕРІР»СЏРµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РґРІРёРіР°С‚РµР»СЏС… С‚РµРєСѓС‰РµРіРѕ Р’РЎ
 		/// </summary>
 		private void UpdateControl()
 		{
