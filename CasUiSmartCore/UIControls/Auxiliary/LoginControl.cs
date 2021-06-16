@@ -725,7 +725,7 @@ namespace CAS.UI.UIControls.Auxiliary
 	            {
 		            if (ex.InnerException != null)
 		            {
-			            SqlException sqlException = ex.InnerException as SqlException;
+			            var sqlException = ex.InnerException as SqlException;
 			            if (sqlException != null)
 				            MessageBox.Show(sqlException.Message, "Failed to connect server", MessageBoxButtons.OK,
 					            MessageBoxIcon.Error);
@@ -744,6 +744,9 @@ namespace CAS.UI.UIControls.Auxiliary
 	            catch (Exception ex)
 	            {
 		            MessageBox.Show(ex.Message, "Failed to connect server", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    SetEnabled(true, _isSimple);
+                    _connectionStatus = ConnectionState.Closed;
+                    buttonExit.Text = "Exit";
 		            return;
 	            }
 
