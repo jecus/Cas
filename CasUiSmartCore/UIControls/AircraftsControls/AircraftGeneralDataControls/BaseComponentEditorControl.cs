@@ -184,7 +184,7 @@ namespace CAS.UI.UIControls.AircraftsControls.AircraftGeneralDataControls
         {
             if (_currentBaseComponent == null)
                 return;
-	        if (comboBoxEngineModel.SelectedItem != _currentBaseComponent.Model)
+	        if ( comboBoxEngineModel.SelectedItem != null && comboBoxEngineModel.SelectedItem != _currentBaseComponent?.Model)
 	        {
 		        var d = comboBoxEngineModel.SelectedItem as ComponentModel;
 				_currentBaseComponent.Model = d;
