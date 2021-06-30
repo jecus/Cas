@@ -10,11 +10,13 @@ using CASTerms;
 using EntityCore.DTO.Dictionaries;
 using EntityCore.DTO.General;
 using EntityCore.Filter;
+using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
 using SmartCore.Entities.General.Atlbs;
 using SmartCore.Entities.General.Personnel;
 using SmartCore.Entities.General.WorkPackage;
+using SmartCore.Files;
 using SmartCore.Purchase;
 using Component = SmartCore.Entities.General.Accessory.Component;
 
@@ -177,13 +179,28 @@ namespace CAS.UI.UIControls.PersonnelControls
             try
             {
 				GlobalObjects.CasEnvironment.Loader.ReloadDictionary(typeof(Specialization), typeof(LocationsType));
-                if (_currentItem.ItemId > 0 && _needReload)
+                if (_currentItem.ItemId > 0)
+	                _currentItem = GlobalObjects.CasEnvironment.NewLoader.GetObjectById<SpecialistDTO,Specialist>(_currentItem.ItemId, true);
+
+                if (_currentItem.EmployeeDocuments.Any())
                 {
-                    _currentItem = GlobalObjects.CasEnvironment.NewLoader.GetObjectById<SpecialistDTO,Specialist>(_currentItem.ItemId, true);
+	                var docIds = _currentItem.EmployeeDocuments.Select(i => i.ItemId);
+	                
+	                var links = GlobalObjects.CasEnvironment.NewLoader.GetObjectListAll<ItemFileLinkDTO, ItemFileLink>(new List<Filter>()
+	                {
+		                new Filter("ParentId",docIds),
+		                new Filter("ParentTypeId",SmartCoreType.Document.ItemId)
+	                }, false);
+	                
+	                foreach (var document in _currentItem.EmployeeDocuments)
+	                {
+		                document.Parent = _currentItem;
+		                document.Files = new CommonCollection<ItemFileLink>(links.Where(i => i.ParentId == document.ItemId));
+	                }
                 }
+                
 
-
-				_currentItem.MedicalRecord = GlobalObjects.CasEnvironment.NewLoader.GetObject<SpecialistMedicalRecordDTO,SpecialistMedicalRecord>(new Filter("SpecialistId", _currentItem.ItemId));
+                _currentItem.MedicalRecord = GlobalObjects.CasEnvironment.NewLoader.GetObject<SpecialistMedicalRecordDTO,SpecialistMedicalRecord>(new Filter("SpecialistId", _currentItem.ItemId));
 
 	            var types = new[]
 	            {

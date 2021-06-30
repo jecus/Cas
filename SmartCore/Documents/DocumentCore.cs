@@ -66,7 +66,6 @@ namespace SmartCore.Documents
 				foreach (Document doc in result)
 				{
 					doc.Parent = parent;
-					doc.HaveFile = links.FirstOrDefault(l => l.ParentId == doc.ItemId) != null;
 				}
 
 				return result.ToList();
@@ -186,8 +185,6 @@ namespace SmartCore.Documents
 
 				foreach (Document document in result)
 				{
-					document.HaveFile = links.FirstOrDefault(l => l.ParentId == document.ItemId) != null;
-
 					if (document.ParentTypeId == SmartCoreType.Aircraft.ItemId)
 					{
 						var a = _aircraftsCore.GetAircraftById(document.ParentId);

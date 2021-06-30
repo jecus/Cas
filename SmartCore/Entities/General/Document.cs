@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using EntityCore.DTO.General;
 using SmartCore.Auxiliary;
@@ -16,7 +17,7 @@ using SmartCore.Purchase;
 namespace SmartCore.Entities.General
 {
 	/// <summary>
-	/// Класс описывает простой документ
+	/// РљР»Р°СЃСЃ РѕРїРёСЃС‹РІР°РµС‚ РїСЂРѕСЃС‚РѕР№ РґРѕРєСѓРјРµРЅС‚
 	/// </summary>
 	[Table("Documents", "dbo", "ItemId")]
 	[Dto(typeof(DocumentDTO))]
@@ -30,11 +31,11 @@ namespace SmartCore.Entities.General
 		private BaseEntityObject _parent;
 
 		/*
-		*  Свойства
+		*  РЎРІРѕР№СЃС‚РІР°
 		*/
 		#region public string Description { get; set; }
 		/// <summary>
-		/// Описание документа
+		/// РћРїРёСЃР°РЅРёРµ РґРѕРєСѓРјРµРЅС‚Р°
 		/// </summary>
 		[TableColumnAttribute("Description", 1024)]
 		[ListViewData(0.18f, "Description", 5)]
@@ -70,7 +71,7 @@ namespace SmartCore.Entities.General
 
 		#region public virtual Int32 ParentTypeId { get; set; }
 		/// <summary>
-		/// Тип родительского элемента 
+		/// РўРёРї СЂРѕРґРёС‚РµР»СЊСЃРєРѕРіРѕ СЌР»РµРјРµРЅС‚Р° 
 		/// </summary>
 		[TableColumnAttribute("ParentTypeId")]
 		public Int32 ParentTypeId { get; set; }
@@ -168,8 +169,8 @@ namespace SmartCore.Entities.General
 		#region public string ContractNumber { get; set; }
 
 		[TableColumnAttribute("ContractNumber")]
-		[ListViewData(0.12f, "№", 3)]
-		[Filter("№:", Order = 2)]
+		[ListViewData(0.12f, "в„–", 3)]
+		[Filter("в„–:", Order = 2)]
 		public string ContractNumber { get; set; }
 		#endregion
 
@@ -214,7 +215,7 @@ namespace SmartCore.Entities.General
 
 		#region public bool Revision { get; set; }
 		/// <summary>
-		/// Включает ли документ ревизию
+		/// Р’РєР»СЋС‡Р°РµС‚ Р»Рё РґРѕРєСѓРјРµРЅС‚ СЂРµРІРёР·РёСЋ
 		/// </summary>
 		[TableColumnAttribute("Revision")]
 		public bool Revision { get; set; }
@@ -222,17 +223,17 @@ namespace SmartCore.Entities.General
 
 		#region public string RevisionNumder { get; set; }
 		/// <summary>
-		/// номер ревизии документа
+		/// РЅРѕРјРµСЂ СЂРµРІРёР·РёРё РґРѕРєСѓРјРµРЅС‚Р°
 		/// </summary>
 		[TableColumnAttribute("RevNumber")]
-		[ListViewData(0.1f, "Rev.№", 11)]
+		[ListViewData(0.1f, "Rev.в„–", 11)]
 		public string RevisionNumder { get; set; }
 		#endregion
 
 		#region public DateTime RevisionDateFrom { get; set; }
 
 		/// <summary>
-		/// Дата ревизии
+		/// Р”Р°С‚Р° СЂРµРІРёР·РёРё
 		/// </summary>
 		private DateTime _revisionDate = DateTime.Today;
 		[TableColumnAttribute("RevisionDateFrom")]
@@ -261,7 +262,7 @@ namespace SmartCore.Entities.General
 
 		#region public BaseSmartCoreObject Parent { get; set; }
 		/// <summary>
-		/// родительский объект данного KIT-а (директива, деталь и т.д.)
+		/// СЂРѕРґРёС‚РµР»СЊСЃРєРёР№ РѕР±СЉРµРєС‚ РґР°РЅРЅРѕРіРѕ KIT-Р° (РґРёСЂРµРєС‚РёРІР°, РґРµС‚Р°Р»СЊ Рё С‚.Рґ.)
 		/// </summary>
 		[Filter("Parent:", Order = 15)]
 		public BaseEntityObject Parent
@@ -322,18 +323,18 @@ namespace SmartCore.Entities.General
 
 		#endregion
 
-		#region public Nomenclatures Nomenсlature { get; set; }
+		#region public Nomenclatures NomenСЃlature { get; set; }
 
-		private Nomenclatures _nomenсlature;
+		private Nomenclatures _nomenСЃlature;
 
-		[TableColumn("NomenсlatureId")]
+		[TableColumn("NomenСЃlatureId")]
 		[ListViewData(0.1f, "Location", 16)]
-		[Filter("Nomenсlature:", Order = 7)]
+		[Filter("NomenСЃlature:", Order = 7)]
 		[Child]
-		public Nomenclatures Nomenсlature
+		public Nomenclatures NomenСЃlature
 		{
-			get { return _nomenсlature ?? (_nomenсlature = Nomenclatures.Unknown); }
-			set { _nomenсlature = value; }
+			get { return _nomenСЃlature ?? (_nomenСЃlature = Nomenclatures.Unknown); }
+			set { _nomenСЃlature = value; }
 		}
 
 		#endregion
@@ -415,7 +416,7 @@ namespace SmartCore.Entities.General
 		#region public int IssueNumber { get; set; }
 
 		[TableColumn("IssueNumber")]
-		[ListViewData(0.1f, "Issue №", 7)]
+		[ListViewData(0.1f, "Issue в„–", 7)]
 		public string IssueNumber { get; set; }
 
 		#endregion
@@ -466,22 +467,22 @@ namespace SmartCore.Entities.General
 
 		#endregion
 
-		public bool HaveFile { get; set; }
+		public bool HaveFile => Files?.Any() ?? false;
 
 		#region public string IDNumber { get; set; }
-		[Filter("ID №:", Order = 4)]
+		[Filter("ID в„–:", Order = 4)]
 		[TableColumnAttribute("IdNumber")]
 		public string IdNumber { get; set; }
 		#endregion
 
 		#region Implement of IMathData
-		//Своиства интерфеися IMathData, они содержат вычисления мат аппарата для объектов
-		//у всех директив, деталей чеков и т.д. можно вычислить их текущее сотояние
-		// дату след. выполнения и наработку на которой это выполнение произоидет
+		//РЎРІРѕРёСЃС‚РІР° РёРЅС‚РµСЂС„РµРёСЃСЏ IMathData, РѕРЅРё СЃРѕРґРµСЂР¶Р°С‚ РІС‹С‡РёСЃР»РµРЅРёСЏ РјР°С‚ Р°РїРїР°СЂР°С‚Р° РґР»СЏ РѕР±СЉРµРєС‚РѕРІ
+		//Сѓ РІСЃРµС… РґРёСЂРµРєС‚РёРІ, РґРµС‚Р°Р»РµР№ С‡РµРєРѕРІ Рё С‚.Рґ. РјРѕР¶РЅРѕ РІС‹С‡РёСЃР»РёС‚СЊ РёС… С‚РµРєСѓС‰РµРµ СЃРѕС‚РѕСЏРЅРёРµ
+		// РґР°С‚Сѓ СЃР»РµРґ. РІС‹РїРѕР»РЅРµРЅРёСЏ Рё РЅР°СЂР°Р±РѕС‚РєСѓ РЅР° РєРѕС‚РѕСЂРѕР№ СЌС‚Рѕ РІС‹РїРѕР»РЅРµРЅРёРµ РїСЂРѕРёР·РѕРёРґРµС‚
 
 		#region BaseSmartCoreObject LifeLenghtParent { get; }
 		/// <summary>
-		/// Возвращает объект, для которого можно расчитать текущую наработку. Обычно Aircraft, BaseComponent или Component
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РѕР±СЉРµРєС‚, РґР»СЏ РєРѕС‚РѕСЂРѕРіРѕ РјРѕР¶РЅРѕ СЂР°СЃС‡РёС‚Р°С‚СЊ С‚РµРєСѓС‰СѓСЋ РЅР°СЂР°Р±РѕС‚РєСѓ. РћР±С‹С‡РЅРѕ Aircraft, BaseComponent РёР»Рё Component
 		/// </summary>
 		public BaseEntityObject LifeLengthParent
 		{
@@ -491,35 +492,35 @@ namespace SmartCore.Entities.General
 
 		#region IThreshold IDirective.Threshold { get; set; }
 		/// <summary>
-		/// порог первого и посделующего выполнений
+		/// РїРѕСЂРѕРі РїРµСЂРІРѕРіРѕ Рё РїРѕСЃРґРµР»СѓСЋС‰РµРіРѕ РІС‹РїРѕР»РЅРµРЅРёР№
 		/// </summary>
 		IThreshold IDirective.Threshold { get; set; }
 		#endregion
 
 		#region IRecordCollection IDirective.PerformanceRecords { get; }
 		/// <summary>
-		/// Коллекция содержит все записи о выполнении директивы
+		/// РљРѕР»Р»РµРєС†РёСЏ СЃРѕРґРµСЂР¶РёС‚ РІСЃРµ Р·Р°РїРёСЃРё Рѕ РІС‹РїРѕР»РЅРµРЅРёРё РґРёСЂРµРєС‚РёРІС‹
 		/// </summary>
 		IRecordCollection IDirective.PerformanceRecords{ get { return null; } }
 		#endregion
 
 		#region AbstractPerformanceRecord IDirective.LastPerformance { get; }
 		/// <summary>
-		/// Доступ к последней записи о выполнении задачи
+		/// Р”РѕСЃС‚СѓРї Рє РїРѕСЃР»РµРґРЅРµР№ Р·Р°РїРёСЃРё Рѕ РІС‹РїРѕР»РЅРµРЅРёРё Р·Р°РґР°С‡Рё
 		/// </summary>
 		AbstractPerformanceRecord IDirective.LastPerformance { get { return null; } }
 		#endregion
 
 		#region public List<NextPerformance> NextPerformances { get; set; }
 		/// <summary>
-		/// Список последующих выполнений задачи
+		/// РЎРїРёСЃРѕРє РїРѕСЃР»РµРґСѓСЋС‰РёС… РІС‹РїРѕР»РЅРµРЅРёР№ Р·Р°РґР°С‡Рё
 		/// </summary>
 		public List<NextPerformance> NextPerformances { get; set; }
 		#endregion
 
 		#region  public NextPerformance NextPerformance { get; }
 		/// <summary>
-		/// След. выполнение задачи
+		/// РЎР»РµРґ. РІС‹РїРѕР»РЅРµРЅРёРµ Р·Р°РґР°С‡Рё
 		/// </summary>
 		public NextPerformance NextPerformance
 		{
@@ -532,7 +533,7 @@ namespace SmartCore.Entities.General
 
 		#region public ConditionState Condition { get; set; }
 		/// <summary>
-		/// Текущее состояние
+		/// РўРµРєСѓС‰РµРµ СЃРѕСЃС‚РѕСЏРЅРёРµ
 		/// </summary>
 		[Filter("Condition:", Order = 13)]
 		public ConditionState Condition { get; set; }
@@ -540,7 +541,7 @@ namespace SmartCore.Entities.General
 
 		#region public DirectiveStatus Status { get; }
 		/// <summary>
-		/// Статус директивы
+		/// РЎС‚Р°С‚СѓСЃ РґРёСЂРµРєС‚РёРІС‹
 		/// </summary>       
 		[ListViewData(0.1f, "Status", 19)]
 		[Filter("Status:", Order = 11)]
@@ -548,7 +549,7 @@ namespace SmartCore.Entities.General
 		{
 			get
 			{
-				if (IsClosed) return DirectiveStatus.Closed; //директива принудительно закрыта пользователем
+				if (IsClosed) return DirectiveStatus.Closed; //РґРёСЂРµРєС‚РёРІР° РїСЂРёРЅСѓРґРёС‚РµР»СЊРЅРѕ Р·Р°РєСЂС‹С‚Р° РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј
 				return DirectiveStatus.Open;
 			}
 		}
@@ -556,7 +557,7 @@ namespace SmartCore.Entities.General
 
 		#region public Lifelength NextCompliance { get; set; }
 		/// <summary>
-		/// Наработка, при которой произоидет следующее выполнение
+		/// РќР°СЂР°Р±РѕС‚РєР°, РїСЂРё РєРѕС‚РѕСЂРѕР№ РїСЂРѕРёР·РѕРёРґРµС‚ СЃР»РµРґСѓСЋС‰РµРµ РІС‹РїРѕР»РЅРµРЅРёРµ
 		/// </summary>
 		public Lifelength NextPerformanceSource { get; set; }
 		#endregion
@@ -564,7 +565,7 @@ namespace SmartCore.Entities.General
 		#region public Lifelength Remains { get; set; }
 
 		/// <summary>
-		/// Остаток ресурса до следующего выполнения
+		/// РћСЃС‚Р°С‚РѕРє СЂРµСЃСѓСЂСЃР° РґРѕ СЃР»РµРґСѓСЋС‰РµРіРѕ РІС‹РїРѕР»РЅРµРЅРёСЏ
 		/// </summary>
 		private Lifelength _remains;
 
@@ -579,40 +580,40 @@ namespace SmartCore.Entities.General
 
 		#region public Lifelength BeforeForecastResourceRemain { get; set; }
 		/// <summary>
-		/// Остаток ресурса до прогноза (вычисляется только в прогнозе)
+		/// РћСЃС‚Р°С‚РѕРє СЂРµСЃСѓСЂСЃР° РґРѕ РїСЂРѕРіРЅРѕР·Р° (РІС‹С‡РёСЃР»СЏРµС‚СЃСЏ С‚РѕР»СЊРєРѕ РІ РїСЂРѕРіРЅРѕР·Рµ)
 		/// </summary>
 		public Lifelength BeforeForecastResourceRemain { get; set; }
 		#endregion
 
 		#region public Lifelength ForecastLifelength { get; set; }
-		//ресурс прогноза
+		//СЂРµСЃСѓСЂСЃ РїСЂРѕРіРЅРѕР·Р°
 		public Lifelength ForecastLifelength { get; set; }
 		#endregion
 
 		#region public Lifelength AfterForecastResourceRemain { get; set; }
 		/// <summary>
-		/// Остаток ресурса после прогноза (вычисляется только в прогнозе)
+		/// РћСЃС‚Р°С‚РѕРє СЂРµСЃСѓСЂСЃР° РїРѕСЃР»Рµ РїСЂРѕРіРЅРѕР·Р° (РІС‹С‡РёСЃР»СЏРµС‚СЃСЏ С‚РѕР»СЊРєРѕ РІ РїСЂРѕРіРЅРѕР·Рµ)
 		/// </summary>
 		public Lifelength AfterForecastResourceRemain { get; set; }
 		#endregion
 
 		#region public DateTime? NextComplianceDate{ get; set; }
 		/// <summary>
-		/// Дата следующего выполнения
+		/// Р”Р°С‚Р° СЃР»РµРґСѓСЋС‰РµРіРѕ РІС‹РїРѕР»РЅРµРЅРёСЏ
 		/// </summary>
 		public DateTime? NextPerformanceDate { get; set; }
 		#endregion
 
 		#region public double? Percents { get; set; }
 		/// <summary>
-		/// Насколько процентов NextCompliance превосходит точку прогноза
+		/// РќР°СЃРєРѕР»СЊРєРѕ РїСЂРѕС†РµРЅС‚РѕРІ NextCompliance РїСЂРµРІРѕСЃС…РѕРґРёС‚ С‚РѕС‡РєСѓ РїСЂРѕРіРЅРѕР·Р°
 		/// </summary>
 		public double? Percents { get; set; }
 		#endregion
 
 		#region public string TimesToString { get; }
 		/// <summary>
-		/// Возвращает строковое представление количества "след. выполнений"
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃС‚СЂРѕРєРѕРІРѕРµ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ РєРѕР»РёС‡РµСЃС‚РІР° "СЃР»РµРґ. РІС‹РїРѕР»РЅРµРЅРёР№"
 		/// </summary>
 		public string TimesToString
 		{
@@ -622,7 +623,7 @@ namespace SmartCore.Entities.General
 
 		#region public Int32 Times { get;}
 		/// <summary>
-		/// Сколько раз выполнится директива (применяетмя только в прогнозах)
+		/// РЎРєРѕР»СЊРєРѕ СЂР°Р· РІС‹РїРѕР»РЅРёС‚СЃСЏ РґРёСЂРµРєС‚РёРІР° (РїСЂРёРјРµРЅСЏРµС‚РјСЏ С‚РѕР»СЊРєРѕ РІ РїСЂРѕРіРЅРѕР·Р°С…)
 		/// </summary>
 		public Int32 Times
 		{
@@ -632,7 +633,7 @@ namespace SmartCore.Entities.General
 
 		#region public Boolean IsClosed { get; set; }
 		/// <summary>
-		/// Логический флаг, показывающий, закрыта ли директива
+		/// Р›РѕРіРёС‡РµСЃРєРёР№ С„Р»Р°Рі, РїРѕРєР°Р·С‹РІР°СЋС‰РёР№, Р·Р°РєСЂС‹С‚Р° Р»Рё РґРёСЂРµРєС‚РёРІР°
 		/// </summary>
 		[TableColumn("IsClosed")]
 		public Boolean IsClosed { get; set; }
@@ -640,7 +641,7 @@ namespace SmartCore.Entities.General
 
 		#region public Boolean NextPerformanceIsBlocked { get; }
 		///
-		/// Логический флаг, показывающий, заблокирована ли директивы рабочим пакетом
+		/// Р›РѕРіРёС‡РµСЃРєРёР№ С„Р»Р°Рі, РїРѕРєР°Р·С‹РІР°СЋС‰РёР№, Р·Р°Р±Р»РѕРєРёСЂРѕРІР°РЅР° Р»Рё РґРёСЂРµРєС‚РёРІС‹ СЂР°Р±РѕС‡РёРј РїР°РєРµС‚РѕРј
 		/// 
 		public Boolean NextPerformanceIsBlocked
 		{
@@ -670,21 +671,21 @@ namespace SmartCore.Entities.General
 
 		#region public bool PrintInWorkPackage { get; set; }
 		/// <summary>
-		/// Возвращает или задает значение, показвающее настройку печати элемента в Рабочем пакете
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·РІР°СЋС‰РµРµ РЅР°СЃС‚СЂРѕР№РєСѓ РїРµС‡Р°С‚Рё СЌР»РµРјРµРЅС‚Р° РІ Р Р°Р±РѕС‡РµРј РїР°РєРµС‚Рµ
 		/// </summary>
 		public bool PrintInWorkPackage { get; set; }
 		#endregion
 
 		#region public bool WorkPackageACCPrintTitle { get; set; }
 		/// <summary>
-		/// Возвращает или задает значение, показвающее печать НАЗВАНИЯ задачи в AccountabilitySheet рабочего пакета
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·РІР°СЋС‰РµРµ РїРµС‡Р°С‚СЊ РќРђР—Р’РђРќРРЇ Р·Р°РґР°С‡Рё РІ AccountabilitySheet СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
 		/// </summary>
 		public bool WorkPackageACCPrintTitle { get; set; }
 		#endregion
 
 		#region public bool WorkPackageACCPrintTaskCard { get; set; }
 		/// <summary>
-		/// Возвращает или задает значение, показвающее печать РАБОЧЕЙ КАРТЫ задачи в AccountabilitySheet рабочего пакета
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·РІР°СЋС‰РµРµ РїРµС‡Р°С‚СЊ Р РђР‘РћР§Р•Р™ РљРђР РўР« Р·Р°РґР°С‡Рё РІ AccountabilitySheet СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
 		/// </summary>
 		public bool WorkPackageACCPrintTaskCard { get; set; }
 
@@ -693,12 +694,12 @@ namespace SmartCore.Entities.General
 		#endregion
 
 		/*
-		*  Методы 
+		*  РњРµС‚РѕРґС‹ 
 		*/
 		
 		#region public Document()
 		/// <summary>
-		/// Создает простой документ без дополнительной информации
+		/// РЎРѕР·РґР°РµС‚ РїСЂРѕСЃС‚РѕР№ РґРѕРєСѓРјРµРЅС‚ Р±РµР· РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕР№ РёРЅС„РѕСЂРјР°С†РёРё
 		/// </summary>
 		public Document()
 		{
@@ -713,7 +714,7 @@ namespace SmartCore.Entities.General
 
 		#region public override string ToString()
 		/// <summary>
-		/// Перегружаем для отладки
+		/// РџРµСЂРµРіСЂСѓР¶Р°РµРј РґР»СЏ РѕС‚Р»Р°РґРєРё
 		/// </summary>
 		/// <returns></returns>
 		public override string ToString()
@@ -734,7 +735,7 @@ namespace SmartCore.Entities.General
 			DocumentSubType = doc.DocumentSubType;
 			Description = doc.Description;
 			Department = doc.Department;
-			Nomenсlature = doc.Nomenсlature;
+			NomenСЃlature = doc.NomenСЃlature;
 			IssueDateValidFrom = doc.IssueDateValidFrom;
 			IssueValidTo = doc.IssueValidTo;
 			IssueDateValidTo = doc.IssueDateValidTo;
