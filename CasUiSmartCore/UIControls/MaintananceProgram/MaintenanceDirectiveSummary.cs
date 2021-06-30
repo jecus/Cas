@@ -140,8 +140,16 @@ namespace CAS.UI.UIControls.MaintananceProgram
 	        labelCategory.Text = _currentDirective.Category.ToString();
             labelProgramValue.Text = _currentDirective.Program.ToString();
             labelCriticalSystemValue.Text = _currentDirective.CriticalSystem.ToString();
-            labelZoneValue.Text = _currentDirective.Zone;
-            labelAccessValue.Text = _currentDirective.Access;
+
+            
+            if(_currentDirective.Zone.Length > 10)
+                labelZoneValue.Text = _currentDirective.Zone.Replace(Environment.NewLine, " ").Substring(0, 10) + "....";
+            else  labelZoneValue.Text = _currentDirective.Zone.Replace(Environment.NewLine, " ");;
+            
+            if(_currentDirective.Access.Length > 10)
+                labelAccessValue.Text = _currentDirective.Access.Replace(Environment.NewLine, " ").Substring(0, 10) + "....";
+            else labelAccessValue.Text = _currentDirective.Access.Replace(Environment.NewLine, " ");
+            
             labelCheckValue.Text = _currentDirective.MaintenanceCheck != null
                     ? _currentDirective.MaintenanceCheck.Name
                     : "N/A";

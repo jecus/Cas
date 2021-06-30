@@ -19,7 +19,7 @@ using Convert = System.Convert;
 namespace CAS.UI.UIControls.Auxiliary
 {
     ///<summary>
-    /// Класс, описывающий отображение наработки
+    /// РљР»Р°СЃСЃ, РѕРїРёСЃС‹РІР°СЋС‰РёР№ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ РЅР°СЂР°Р±РѕС‚РєРё
     ///</summary>
     [Designer(typeof(LifelengthViewerDesigner))]
     public partial class LifelengthViewer : UserControl
@@ -51,7 +51,7 @@ namespace CAS.UI.UIControls.Auxiliary
 		#region public LifelengthViewer() : this(new Lifelength())
 
 		///<summary>
-		/// Создается объект для отображения пустой наработки
+		/// РЎРѕР·РґР°РµС‚СЃСЏ РѕР±СЉРµРєС‚ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РїСѓСЃС‚РѕР№ РЅР°СЂР°Р±РѕС‚РєРё
 		///</summary>
 		public LifelengthViewer()
             : this(new Lifelength())
@@ -63,9 +63,9 @@ namespace CAS.UI.UIControls.Auxiliary
 		#region public LifelengthViewer(Lifelength lifelength)
 
 		///<summary>
-		/// Создается объект для отображения заданной наработки
+		/// РЎРѕР·РґР°РµС‚СЃСЏ РѕР±СЉРµРєС‚ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ Р·Р°РґР°РЅРЅРѕР№ РЅР°СЂР°Р±РѕС‚РєРё
 		///</summary>
-		///<param name="lifelength">Отображаемая наработка</param>
+		///<param name="lifelength">РћС‚РѕР±СЂР°Р¶Р°РµРјР°СЏ РЅР°СЂР°Р±РѕС‚РєР°</param>
 		public LifelengthViewer(Lifelength lifelength)
         {
             InitializeComponent();
@@ -91,9 +91,9 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public bool ShowLeftHeader
 
         /// <summary>
-        /// Отображать ли левый заголовок
+        /// РћС‚РѕР±СЂР°Р¶Р°С‚СЊ Р»Рё Р»РµРІС‹Р№ Р·Р°РіРѕР»РѕРІРѕРє
         /// </summary>
-        [Category("Appearance"), Description("Отображать левый заголовок")]
+        [Category("Appearance"), Description("РћС‚РѕР±СЂР°Р¶Р°С‚СЊ Р»РµРІС‹Р№ Р·Р°РіРѕР»РѕРІРѕРє")]
         [DefaultValue(true)]
         public bool ShowLeftHeader
         {
@@ -106,7 +106,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public String LeftHeader
 
         /// <summary>
-        /// Текст левого заголовка
+        /// РўРµРєСЃС‚ Р»РµРІРѕРіРѕ Р·Р°РіРѕР»РѕРІРєР°
         /// </summary>
         public String LeftHeader
         {
@@ -119,7 +119,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public int LeftHeaderWidth
 
         /// <summary>
-        /// Размер левого заголовка
+        /// Р Р°Р·РјРµСЂ Р»РµРІРѕРіРѕ Р·Р°РіРѕР»РѕРІРєР°
         /// </summary>
         public int LeftHeaderWidth
         {
@@ -131,7 +131,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public int WidthWithoutLeftHeader
 
         /// <summary>
-        /// Размер контрола без левого заголовка
+        /// Р Р°Р·РјРµСЂ РєРѕРЅС‚СЂРѕР»Р° Р±РµР· Р»РµРІРѕРіРѕ Р·Р°РіРѕР»РѕРІРєР°
         /// </summary>
         public int WidthWithoutLeftHeader
         {
@@ -157,9 +157,9 @@ namespace CAS.UI.UIControls.Auxiliary
 	    #region public bool ShowHeaders
 
         /// <summary>
-        /// Отображать ли заголовки
+        /// РћС‚РѕР±СЂР°Р¶Р°С‚СЊ Р»Рё Р·Р°РіРѕР»РѕРІРєРё
         /// </summary>
-        [Category("Appearance"), Description("Отображать заголовки параметров")]
+        [Category("Appearance"), Description("РћС‚РѕР±СЂР°Р¶Р°С‚СЊ Р·Р°РіРѕР»РѕРІРєРё РїР°СЂР°РјРµС‚СЂРѕРІ")]
         [DefaultValue(true)]
         public bool ShowHeaders
         {
@@ -184,7 +184,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public string HeaderHours
 
         /// <summary>
-        /// Текст заголовка сверху поля наработки по часам
+        /// РўРµРєСЃС‚ Р·Р°РіРѕР»РѕРІРєР° СЃРІРµСЂС…Сѓ РїРѕР»СЏ РЅР°СЂР°Р±РѕС‚РєРё РїРѕ С‡Р°СЃР°Рј
         /// </summary>
         public string HeaderHours
         {
@@ -197,7 +197,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public string HeaderCycles
 
         /// <summary>
-        /// Текст заголовка сверху поля наработки по циклам
+        /// РўРµРєСЃС‚ Р·Р°РіРѕР»РѕРІРєР° СЃРІРµСЂС…Сѓ РїРѕР»СЏ РЅР°СЂР°Р±РѕС‚РєРё РїРѕ С†РёРєР»Р°Рј
         /// </summary>
         public string HeaderCycles
         {
@@ -210,7 +210,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public string HeaderCalendar
 
         /// <summary>
-        /// Текст заголовка сверху поля календарной наработки
+        /// РўРµРєСЃС‚ Р·Р°РіРѕР»РѕРІРєР° СЃРІРµСЂС…Сѓ РїРѕР»СЏ РєР°Р»РµРЅРґР°СЂРЅРѕР№ РЅР°СЂР°Р±РѕС‚РєРё
         /// </summary>
         public string HeaderCalendar
         {
@@ -222,7 +222,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
 		#region public string HeaderFormattedCalendar
 		/// <summary>
-		/// Текст заголовка сверху поля календарной наработки(отформатированной)
+		/// РўРµРєСЃС‚ Р·Р°РіРѕР»РѕРІРєР° СЃРІРµСЂС…Сѓ РїРѕР»СЏ РєР°Р»РµРЅРґР°СЂРЅРѕР№ РЅР°СЂР°Р±РѕС‚РєРё(РѕС‚С„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРЅРѕР№)
 		/// </summary>
 		public string HeaderFormattedCalendar
 	    {
@@ -235,7 +235,7 @@ namespace CAS.UI.UIControls.Auxiliary
 		#region public Color FieldsBackColor
 
 		/// <summary>
-		/// Фон полей в режиме
+		/// Р¤РѕРЅ РїРѕР»РµР№ РІ СЂРµР¶РёРјРµ
 		/// </summary>
 		public Color FieldsBackColor
         {
@@ -248,7 +248,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public Lifelength Lifelength
 
         /// <summary>
-        /// Отображаемая наработка
+        /// РћС‚РѕР±СЂР°Р¶Р°РµРјР°СЏ РЅР°СЂР°Р±РѕС‚РєР°
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         [DefaultValue(null)]
@@ -272,7 +272,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public Lifelength MinLifelength
 
         /// <summary>
-        /// Возвращает или задает минимальное значение наработки, которое может быть задано в элементе управления
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ РјРёРЅРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РЅР°СЂР°Р±РѕС‚РєРё, РєРѕС‚РѕСЂРѕРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ Р·Р°РґР°РЅРѕ РІ СЌР»РµРјРµРЅС‚Рµ СѓРїСЂР°РІР»РµРЅРёСЏ
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         [DefaultValue(null)]
@@ -292,7 +292,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public Lifelength MaxLifelength
 
         /// <summary>
-        /// Возвращает или задает масимальное значение наработки, которое может быть задано в элементе управления
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ РјР°СЃРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РЅР°СЂР°Р±РѕС‚РєРё, РєРѕС‚РѕСЂРѕРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ Р·Р°РґР°РЅРѕ РІ СЌР»РµРјРµРЅС‚Рµ СѓРїСЂР°РІР»РµРЅРёСЏ
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         [DefaultValue(null)]
@@ -312,7 +312,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public bool HoursApplicable
 
         /// <summary>
-        /// Ведется ли наработка по часам
+        /// Р’РµРґРµС‚СЃСЏ Р»Рё РЅР°СЂР°Р±РѕС‚РєР° РїРѕ С‡Р°СЃР°Рј
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public bool HoursApplicable
@@ -330,7 +330,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public bool CyclesApplicable
 
         /// <summary>
-        /// Ведется ли наработка по циклам
+        /// Р’РµРґРµС‚СЃСЏ Р»Рё РЅР°СЂР°Р±РѕС‚РєР° РїРѕ С†РёРєР»Р°Рј
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public bool CyclesApplicable
@@ -348,7 +348,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public bool CalendarApplicable
 
         /// <summary>
-        /// Ведется ли наработка по календарю
+        /// Р’РµРґРµС‚СЃСЏ Р»Рё РЅР°СЂР°Р±РѕС‚РєР° РїРѕ РєР°Р»РµРЅРґР°СЂСЋ
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public bool CalendarApplicable
@@ -366,7 +366,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public bool ReadOnly
 
         ///<summary>
-        /// Отображать наработку только для чтения
+        /// РћС‚РѕР±СЂР°Р¶Р°С‚СЊ РЅР°СЂР°Р±РѕС‚РєСѓ С‚РѕР»СЊРєРѕ РґР»СЏ С‡С‚РµРЅРёСЏ
         ///</summary>
         public bool ReadOnly
         {
@@ -404,7 +404,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public int? Cycles
 
         /// <summary>
-        /// Значение наработки по циклам
+        /// Р—РЅР°С‡РµРЅРёРµ РЅР°СЂР°Р±РѕС‚РєРё РїРѕ С†РёРєР»Р°Рј
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public int? Cycles
@@ -445,7 +445,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public int? Hours
 
         /// <summary>
-        /// Значение наработки по часам
+        /// Р—РЅР°С‡РµРЅРёРµ РЅР°СЂР°Р±РѕС‚РєРё РїРѕ С‡Р°СЃР°Рј
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public int? TotalMinutes
@@ -485,7 +485,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public int? CalendarValue
 
         /// <summary>
-        /// Значение наработки по дням
+        /// Р—РЅР°С‡РµРЅРёРµ РЅР°СЂР°Р±РѕС‚РєРё РїРѕ РґРЅСЏРј
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public int? CalendarValue
@@ -520,7 +520,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public TimeSpan Calendar
 
         /// <summary>
-        /// Значение наработки по часам
+        /// Р—РЅР°С‡РµРЅРёРµ РЅР°СЂР°Р±РѕС‚РєРё РїРѕ С‡Р°СЃР°Рј
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         private TimeSpan Calendar
@@ -543,7 +543,7 @@ namespace CAS.UI.UIControls.Auxiliary
 		#region public bool ShowCalendar
 
 		/// <summary>
-		/// Показывать ли поле календарь
+		/// РџРѕРєР°Р·С‹РІР°С‚СЊ Р»Рё РїРѕР»Рµ РєР°Р»РµРЅРґР°СЂСЊ
 		/// </summary>
 		public bool ShowCalendar
         {
@@ -584,7 +584,7 @@ namespace CAS.UI.UIControls.Auxiliary
 		#region private bool Modified
 
 		/// <summary>
-		/// Возвращает или устанавливает значение, показывающее были ли изменения в отображаемой наработке
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·С‹РІР°СЋС‰РµРµ Р±С‹Р»Рё Р»Рё РёР·РјРµРЅРµРЅРёСЏ РІ РѕС‚РѕР±СЂР°Р¶Р°РµРјРѕР№ РЅР°СЂР°Р±РѕС‚РєРµ
 		/// </summary>
 		public bool Modified { get; set; }
 
@@ -593,7 +593,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public ComboBox ComboBoxCalendarType
 
         /// <summary>
-        /// Возвращает ComboBox с типом календаря
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ ComboBox СЃ С‚РёРїРѕРј РєР°Р»РµРЅРґР°СЂСЏ
         /// </summary>
         public ComboBox ComboBoxCalendarType
         {
@@ -605,7 +605,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public TextBox TextBoxHours
 
         /// <summary>
-        /// Возвращает текстовое поле с количеством часов наработки
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ С‚РµРєСЃС‚РѕРІРѕРµ РїРѕР»Рµ СЃ РєРѕР»РёС‡РµСЃС‚РІРѕРј С‡Р°СЃРѕРІ РЅР°СЂР°Р±РѕС‚РєРё
         /// </summary>
         public TextBox TextBoxHours
         {
@@ -617,7 +617,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public bool ShowMinutes
 
         /// <summary>
-        /// Возвращает или устанавливает свойство, показывающее нужно ли отображать минуты в поле Hours
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ СЃРІРѕР№СЃС‚РІРѕ, РїРѕРєР°Р·С‹РІР°СЋС‰РµРµ РЅСѓР¶РЅРѕ Р»Рё РѕС‚РѕР±СЂР°Р¶Р°С‚СЊ РјРёРЅСѓС‚С‹ РІ РїРѕР»Рµ Hours
         /// </summary>
         public bool ShowMinutes
         {
@@ -670,7 +670,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public bool SystemCalculated
 
         /// <summary>
-        /// Если данные в Lifelenfgt калькулировала система тогда true, если пользователь false
+        /// Р•СЃР»Рё РґР°РЅРЅС‹Рµ РІ Lifelenfgt РєР°Р»СЊРєСѓР»РёСЂРѕРІР°Р»Р° СЃРёСЃС‚РµРјР° С‚РѕРіРґР° true, РµСЃР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ false
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public bool SystemCalculated { get; set; }
@@ -679,7 +679,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region EnabledCalendar
         ///<summary>
-        /// Флаг, показвающий, доступен ли календарь
+        /// Р¤Р»Р°Рі, РїРѕРєР°Р·РІР°СЋС‰РёР№, РґРѕСЃС‚СѓРїРµРЅ Р»Рё РєР°Р»РµРЅРґР°СЂСЊ
         ///</summary>
         public bool EnabledCalendar
         {
@@ -696,7 +696,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region EnabledCycle
         ///<summary>
-        /// Флаг, показвающий, доступны ли циклы
+        /// Р¤Р»Р°Рі, РїРѕРєР°Р·РІР°СЋС‰РёР№, РґРѕСЃС‚СѓРїРЅС‹ Р»Рё С†РёРєР»С‹
         ///</summary>
         public bool EnabledCycle
         {
@@ -711,7 +711,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region EnabledHours
         ///<summary>
-        /// Флаг, показвающий, доступны ли часы
+        /// Р¤Р»Р°Рі, РїРѕРєР°Р·РІР°СЋС‰РёР№, РґРѕСЃС‚СѓРїРЅС‹ Р»Рё С‡Р°СЃС‹
         ///</summary>
         public bool EnabledHours
         {
@@ -750,7 +750,7 @@ namespace CAS.UI.UIControls.Auxiliary
 
         #region private void UpdateData()
         ///<summary>
-        /// Обноыляет данные в контроле
+        /// РћР±РЅРѕС‹Р»СЏРµС‚ РґР°РЅРЅС‹Рµ РІ РєРѕРЅС‚СЂРѕР»Рµ
         ///</summary>
         public void UpdateData()
         {
@@ -959,7 +959,7 @@ namespace CAS.UI.UIControls.Auxiliary
                 //if (double.TryParse(textBoxCalendar.Text, out calendar))
                 //{
                 //    SetCalendarData(ParseCalendar(calendar, CalendarType), false);
-                //    //Код по новому принципу
+                //    //РљРѕРґ РїРѕ РЅРѕРІРѕРјСѓ РїСЂРёРЅС†РёРїСѓ
                 //    _lifelength.CalendarType = _calendarTypes;
                 //}
 
@@ -1081,7 +1081,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region public bool ValidateData()
 
         /// <summary>
-        /// Проверяется корректность введенных данных
+        /// РџСЂРѕРІРµСЂСЏРµС‚СЃСЏ РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚СЊ РІРІРµРґРµРЅРЅС‹С… РґР°РЅРЅС‹С…
         /// </summary>
         /// <returns></returns>
         public bool ValidateData()
@@ -1286,7 +1286,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region private static TimeSpan ParseHours(string text)
 
         /// <summary>
-        /// Преобразование данных из строки в <see cref="TimeSpan"/> согласно формату отображения часовой наработки
+        /// РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РґР°РЅРЅС‹С… РёР· СЃС‚СЂРѕРєРё РІ <see cref="TimeSpan"/> СЃРѕРіР»Р°СЃРЅРѕ С„РѕСЂРјР°С‚Сѓ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С‡Р°СЃРѕРІРѕР№ РЅР°СЂР°Р±РѕС‚РєРё
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
@@ -1309,11 +1309,11 @@ namespace CAS.UI.UIControls.Auxiliary
         #region private static string GetHoursString(TimeSpan data, bool showMinutes)
 
         /// <summary>
-        /// Преобразование часовой наработки в строковый формат
+        /// РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ С‡Р°СЃРѕРІРѕР№ РЅР°СЂР°Р±РѕС‚РєРё РІ СЃС‚СЂРѕРєРѕРІС‹Р№ С„РѕСЂРјР°С‚
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        /// <param name="showMinutes">Показывать ли минуты</param>
+        /// <param name="showMinutes">РџРѕРєР°Р·С‹РІР°С‚СЊ Р»Рё РјРёРЅСѓС‚С‹</param>
         private static string GetHoursString(TimeSpan data, bool showMinutes)
         {
             int hours = (int)data.TotalHours;
@@ -1331,7 +1331,7 @@ namespace CAS.UI.UIControls.Auxiliary
         #region Events
 
         /// <summary>
-        /// Событие изменения наработки
+        /// РЎРѕР±С‹С‚РёРµ РёР·РјРµРЅРµРЅРёСЏ РЅР°СЂР°Р±РѕС‚РєРё
         /// </summary>
         public event EventHandler LifelengthChanged;
 

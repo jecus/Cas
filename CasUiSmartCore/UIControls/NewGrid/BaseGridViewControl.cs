@@ -995,7 +995,7 @@ namespace CAS.UI.UIControls.NewGrid
 		{
 			var sfd = new SaveFileDialog();
 			sfd.Filter = ".xlsx Files (*.xlsx)|*.xlsx";
-
+			
 			if (sfd.ShowDialog() == DialogResult.OK)
 			{
 				var spreadStreamExport = new GridViewSpreadStreamExport(radGridView1);

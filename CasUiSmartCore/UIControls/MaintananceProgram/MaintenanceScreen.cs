@@ -22,7 +22,7 @@ namespace CAS.UI.UIControls.MaintananceProgram
     ///<summary>
     /// Экран для отображения полной информации о состоянии ВС
     ///</summary>
-    public partial class MaintenanceScreen : ScreenControl
+    public partial class  MaintenanceScreen : ScreenControl
     {
         #region Fields
 

@@ -21,7 +21,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 {
 
 	/// <summary>
-	/// Класс описывает директиву
+	/// РљР»Р°СЃСЃ РѕРїРёСЃС‹РІР°РµС‚ РґРёСЂРµРєС‚РёРІСѓ
 	/// </summary>
 	[Table("MaintenanceDirectives", "dbo", "ItemId")]
 	[Dto(typeof(MaintenanceDirectiveDTO))]
@@ -32,13 +32,13 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 	{
 		private static Type _thisType;
 		/*
-		*  Свойства
+		*  РЎРІРѕР№СЃС‚РІР°
 		*/
 
 		#region public String TaskNumberCheck { get; set; }
 
 		/// <summary>
-		/// Номер чека задачи
+		/// РќРѕРјРµСЂ С‡РµРєР° Р·Р°РґР°С‡Рё
 		/// </summary>
 		[TableColumnAttribute("TaskNumberCheck"), ListViewData("MPD Item")]
 		[Filter("MPD Item:", Order = 1)]
@@ -49,7 +49,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public MaintenanceDirectiveTaskType WorkType { get; set; }
 
 		/// <summary>
-		/// Тип директивы
+		/// РўРёРї РґРёСЂРµРєС‚РёРІС‹
 		/// </summary>
 		[TableColumnAttribute("DirectiveTypeId"), ListViewData("Directive Type")]
 		[Filter("Work Type:", Order = 18)]
@@ -60,7 +60,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public String MPDTaskNumber { get; set; }
 
 		/// <summary>
-		/// Номер задачи MPD
+		/// РќРѕРјРµСЂ Р·Р°РґР°С‡Рё MPD
 		/// </summary>
 		[TableColumnAttribute("MPDTaskNumber"), ListViewData("MPD Number")]
 		public String MPDTaskNumber { get; set; }
@@ -70,9 +70,9 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public String MPDNumber { get; set; }
 
 		/// <summary>
-		/// Номер MPD
+		/// РќРѕРјРµСЂ MPD
 		/// </summary>
-		[TableColumnAttribute("MPDNumber"), ListViewData("MPD №")]
+		[TableColumnAttribute("MPDNumber"), ListViewData("MPD в„–")]
 		public String MPDNumber { get; set; }
 
 		#endregion
@@ -80,7 +80,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public String MaintenanceManual { get; set; }
 
 		/// <summary>
-		/// Руководство к обслуживанию
+		/// Р СѓРєРѕРІРѕРґСЃС‚РІРѕ Рє РѕР±СЃР»СѓР¶РёРІР°РЅРёСЋ
 		/// </summary>
 		[TableColumnAttribute("MaintenanceManual", 512), ListViewData("Maint. Manual")]
 		public String MaintenanceManual { get; set; }
@@ -91,7 +91,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		[NonSerialized]
 		private AttachedFile _maintenanceManualFile;
 		/// <summary>
-		/// Файл карты задачи
+		/// Р¤Р°Р№Р» РєР°СЂС‚С‹ Р·Р°РґР°С‡Рё
 		/// </summary>
 		public AttachedFile MaintenanceManualFile
 		{
@@ -111,7 +111,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public String Zone { get; set; }
 
 		/// <summary>
-		/// Зона
+		/// Р—РѕРЅР°
 		/// </summary>
 		[TableColumnAttribute("Zone"), ListViewData("Zone")]
 		[Filter("Zone:", Order = 4)]
@@ -122,7 +122,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public String Access { get; set; }
 
 		/// <summary>
-		/// Доступ
+		/// Р”РѕСЃС‚СѓРї
 		/// </summary>
 		[TableColumnAttribute("Access"), ListViewData("Access")]
 		[Filter("Access:", Order = 5)]
@@ -133,7 +133,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public String Applicability { get; set; }
 
 		/// <summary>
-		/// Применимость
+		/// РџСЂРёРјРµРЅРёРјРѕСЃС‚СЊ
 		/// </summary>
 		[TableColumnAttribute("Applicability"), ListViewData("Applicability")]
 		public String Applicability { get; set; }
@@ -159,9 +159,9 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public AtaChapter ATAChapter { get; set; }
 
 		/// <summary>
-		/// ATA глава, к которой директива относится
+		/// ATA РіР»Р°РІР°, Рє РєРѕС‚РѕСЂРѕР№ РґРёСЂРµРєС‚РёРІР° РѕС‚РЅРѕСЃРёС‚СЃСЏ
 		/// </summary>
-		[TableColumnAttribute("ATAChapter"), ListViewData("ATA №")]
+		[TableColumnAttribute("ATAChapter"), ListViewData("ATA в„–")]
 		[Filter("ATA Chapter:", Order = 16)]
 		public AtaChapter ATAChapter { get; set; }
 
@@ -175,7 +175,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		private BaseComponent _parentBaseComponent;
 
 		/// <summary>
-		/// Обратная ссылка на базовый агрегат
+		/// РћР±СЂР°С‚РЅР°СЏ СЃСЃС‹Р»РєР° РЅР° Р±Р°Р·РѕРІС‹Р№ Р°РіСЂРµРіР°С‚
 		/// </summary>
 		[TableColumnAttribute("ComponentId")]
 		public BaseComponent ParentBaseComponent
@@ -194,8 +194,8 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public int ForComponentId { get; set; }
 
 		/// <summary>
-		/// Ид агрегата, для которого предназначена директива
-		/// <br/>(Обычно является одним из агрегатов родительского базового агрегата) 
+		/// РРґ Р°РіСЂРµРіР°С‚Р°, РґР»СЏ РєРѕС‚РѕСЂРѕРіРѕ РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅР° РґРёСЂРµРєС‚РёРІР°
+		/// <br/>(РћР±С‹С‡РЅРѕ СЏРІР»СЏРµС‚СЃСЏ РѕРґРЅРёРј РёР· Р°РіСЂРµРіР°С‚РѕРІ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРіРѕ Р±Р°Р·РѕРІРѕРіРѕ Р°РіСЂРµРіР°С‚Р°) 
 		/// </summary>
 		[TableColumnAttribute("ForComponentId")]
 		public int ForComponentId { get; set; }
@@ -210,7 +210,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public String Description { get; set; }
 
 		/// <summary>
-		/// Описание директивы
+		/// РћРїРёСЃР°РЅРёРµ РґРёСЂРµРєС‚РёРІС‹
 		/// </summary>
 		[TableColumnAttribute("Description", 3072), ListViewData("Description")]
 		[Filter("Description:", Order = 9)]
@@ -259,7 +259,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public String EngineeringOrders { get; set; }
 
 		/// <summary>
-		/// Параметр Engineering orders
+		/// РџР°СЂР°РјРµС‚СЂ Engineering orders
 		/// </summary>
 		[TableColumnAttribute("EngineeringOrders"), ListViewData("Engineering Orders")]
 		public String EngineeringOrders { get; set; }
@@ -270,7 +270,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		[NonSerialized]
 		private AttachedFile _engineeringOrderFile;
 		/// <summary>
-		/// Связь с файлом описания инженерного ордера
+		/// РЎРІСЏР·СЊ СЃ С„Р°Р№Р»РѕРј РѕРїРёСЃР°РЅРёСЏ РёРЅР¶РµРЅРµСЂРЅРѕРіРѕ РѕСЂРґРµСЂР°
 		/// </summary>
 		public AttachedFile EngineeringOrderFile
 		{
@@ -292,7 +292,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		/// <summary>
 		/// 
 		/// </summary>
-		[TableColumnAttribute("ServiceBulletinNo"), ListViewData("SB №")]
+		[TableColumnAttribute("ServiceBulletinNo"), ListViewData("SB в„–")]
 		public String ServiceBulletinNo { get; set; }
 
 		#endregion
@@ -301,7 +301,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		[NonSerialized]
 		private AttachedFile _serviceBulletinFile;
 		/// <summary>
-		/// Связь с файлом описания сервисного бюллетеня
+		/// РЎРІСЏР·СЊ СЃ С„Р°Р№Р»РѕРј РѕРїРёСЃР°РЅРёСЏ СЃРµСЂРІРёСЃРЅРѕРіРѕ Р±СЋР»Р»РµС‚РµРЅСЏ
 		/// </summary>
 		public AttachedFile ServiceBulletinFile
 		{
@@ -322,7 +322,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		[NonSerialized]
 		private AttachedFile _taskNumberCheckFile;
 		/// <summary>
-		/// Связь с файлом описания директивы летной годности
+		/// РЎРІСЏР·СЊ СЃ С„Р°Р№Р»РѕРј РѕРїРёСЃР°РЅРёСЏ РґРёСЂРµРєС‚РёРІС‹ Р»РµС‚РЅРѕР№ РіРѕРґРЅРѕСЃС‚Рё
 		/// </summary>
 		public AttachedFile TaskNumberCheckFile
 		{
@@ -353,7 +353,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		[NonSerialized]
 		private AttachedFile _mrbFile;
 		/// <summary>
-		/// Связь с файлом описания директивы летной годности
+		/// РЎРІСЏР·СЊ СЃ С„Р°Р№Р»РѕРј РѕРїРёСЃР°РЅРёСЏ РґРёСЂРµРєС‚РёРІС‹ Р»РµС‚РЅРѕР№ РіРѕРґРЅРѕСЃС‚Рё
 		/// </summary>
 		public AttachedFile MRBFile
 		{
@@ -373,10 +373,10 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public String TaskCardNumber { get; set; }
 
 		/// <summary>
-		/// Номер карты задачи
+		/// РќРѕРјРµСЂ РєР°СЂС‚С‹ Р·Р°РґР°С‡Рё
 		/// </summary>
-		[TableColumnAttribute("TaskCardNumber"), ListViewData("Task Card №")]
-		[Filter("Task Card №:", Order = 3)]
+		[TableColumnAttribute("TaskCardNumber"), ListViewData("Task Card в„–")]
+		[Filter("Task Card в„–:", Order = 3)]
 		public String TaskCardNumber { get; set; }
 
 		#endregion
@@ -385,7 +385,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		[NonSerialized]
 		private AttachedFile _taskCardNumberFile;
 		/// <summary>
-		/// Файл карты задачи
+		/// Р¤Р°Р№Р» РєР°СЂС‚С‹ Р·Р°РґР°С‡Рё
 		/// </summary>
 		public AttachedFile TaskCardNumberFile
 		{
@@ -405,7 +405,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public MaintenanceDirectiveProgramType Program { get; set; }
 		private MaintenanceDirectiveProgramType _program;
 		/// <summary>
-		/// Программа (CPCP, Structure, System), к которой директива относится
+		/// РџСЂРѕРіСЂР°РјРјР° (CPCP, Structure, System), Рє РєРѕС‚РѕСЂРѕР№ РґРёСЂРµРєС‚РёРІР° РѕС‚РЅРѕСЃРёС‚СЃСЏ
 		/// </summary>
 		[TableColumnAttribute("Program"), ListViewData("Program")]
 		[Filter("Program:", Order = 17)]
@@ -439,7 +439,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public CriticalSystemList CriticalSystem { get; set; }
 
 		/// <summary>
-		/// Критическая система, к которой может относится директива
+		/// РљСЂРёС‚РёС‡РµСЃРєР°СЏ СЃРёСЃС‚РµРјР°, Рє РєРѕС‚РѕСЂРѕР№ РјРѕР¶РµС‚ РѕС‚РЅРѕСЃРёС‚СЃСЏ РґРёСЂРµРєС‚РёРІР°
 		/// </summary>
 		[TableColumnAttribute("CriticalSystem"), ListViewData("Critical System")]
 		public CriticalSystemList CriticalSystem
@@ -454,7 +454,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		[NonSerialized]
 		private MaintenanceCheck _maintenanceCheck;
 		/// <summary>
-		/// Чек программы обслуживания, к которому может относится директива
+		/// Р§РµРє РїСЂРѕРіСЂР°РјРјС‹ РѕР±СЃР»СѓР¶РёРІР°РЅРёСЏ, Рє РєРѕС‚РѕСЂРѕРјСѓ РјРѕР¶РµС‚ РѕС‚РЅРѕСЃРёС‚СЃСЏ РґРёСЂРµРєС‚РёРІР°
 		/// </summary>
 		[TableColumnAttribute("MaintenanceCheck"), ListViewData("Maintenance Check")]
 		[Child(false)]
@@ -477,7 +477,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		private JobCard _jobCard;
 
 		/// <summary>
-		/// Рабочая карта данной директивы
+		/// Р Р°Р±РѕС‡Р°СЏ РєР°СЂС‚Р° РґР°РЅРЅРѕР№ РґРёСЂРµРєС‚РёРІС‹
 		/// </summary>
 		[TableColumnAttribute("JobCard"), ListViewData("Job Card")]
 		[Child(false)]
@@ -636,7 +636,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#endregion
 
 		/*
-		 * Дополнительные свойства
+		 * Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ СЃРІРѕР№СЃС‚РІР°
 		 */
 		#region public Highlight Highlight { get; set; }
 
@@ -650,7 +650,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public NDTType NDTType { get; set; }
 
 		/// <summary>
-		/// Тип производимого Non-Destructive-Test
+		/// РўРёРї РїСЂРѕРёР·РІРѕРґРёРјРѕРіРѕ Non-Destructive-Test
 		/// </summary>
 		[TableColumnAttribute("NDTType"), ListViewData("NDT")]
 		[Filter("NDT:")]
@@ -675,7 +675,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		private MaintenanceDirectiveThreshold _threshold;
 
 		/// <summary>
-		/// Условие выполнения директивы
+		/// РЈСЃР»РѕРІРёРµ РІС‹РїРѕР»РЅРµРЅРёСЏ РґРёСЂРµРєС‚РёРІС‹
 		/// </summary>
 		[TableColumnAttribute("Threshold"), ListViewData("Threshold")]
 		public MaintenanceDirectiveThreshold Threshold
@@ -689,7 +689,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public Lifelength FirstPerformanceSinceNew { get; }
 
 		/// <summary>
-		/// Условие первого выполнения с момента производства детали/ВС
+		/// РЈСЃР»РѕРІРёРµ РїРµСЂРІРѕРіРѕ РІС‹РїРѕР»РЅРµРЅРёСЏ СЃ РјРѕРјРµРЅС‚Р° РїСЂРѕРёР·РІРѕРґСЃС‚РІР° РґРµС‚Р°Р»Рё/Р’РЎ
 		/// </summary>
 		[Filter("1st. Perf:")]
 		public Lifelength FirstPerformanceSinceNew
@@ -702,7 +702,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public Lifelength RepeatInterval{ get; }
 
 		/// <summary>
-		/// Интервал выполнения директивы
+		/// РРЅС‚РµСЂРІР°Р» РІС‹РїРѕР»РЅРµРЅРёСЏ РґРёСЂРµРєС‚РёРІС‹
 		/// </summary>
 		[Filter("Rpt. Int:")]
 		public Lifelength RepeatInterval
@@ -715,7 +715,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public String Remarks { get; set; }
 
 		/// <summary>
-		/// Заметки по директиве
+		/// Р—Р°РјРµС‚РєРё РїРѕ РґРёСЂРµРєС‚РёРІРµ
 		/// </summary>
 		[TableColumnAttribute("Remarks", 512), ListViewData("Remarks")]
 		[Filter("Remarks:", Order = 6)]
@@ -726,7 +726,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public String HiddenRemarks { get; set; }
 
 		/// <summary>
-		/// Скрытые заметки
+		/// РЎРєСЂС‹С‚С‹Рµ Р·Р°РјРµС‚РєРё
 		/// </summary>
 		[TableColumnAttribute("HiddenRemarks", 512), ListViewData("HiddenRemarks")]
 		[Filter("Hidden Remarks:", Order = 7)]
@@ -737,7 +737,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public DirectiveRecord LastPerformance { get; }
 
 		/// <summary>
-		/// Последнее выполнение 
+		/// РџРѕСЃР»РµРґРЅРµРµ РІС‹РїРѕР»РЅРµРЅРёРµ 
 		/// </summary>
 		public DirectiveRecord LastPerformance
 		{
@@ -774,14 +774,14 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public DirectiveStatus Status { get; }
 
 		/// <summary>
-		/// Статус директивы
+		/// РЎС‚Р°С‚СѓСЃ РґРёСЂРµРєС‚РёРІС‹
 		/// </summary>
 		[Filter("Status:", Order = 19)]
 		public DirectiveStatus Status
 		{
 			get
 			{
-				if (IsClosed) return DirectiveStatus.Closed; //директива принудительно закрыта пользователем
+				if (IsClosed) return DirectiveStatus.Closed; //РґРёСЂРµРєС‚РёРІР° РїСЂРёРЅСѓРґРёС‚РµР»СЊРЅРѕ Р·Р°РєСЂС‹С‚Р° РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј
 				if (LastPerformance == null)
 				{
 					if (!_threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero() ||
@@ -801,14 +801,14 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 
 		#region Implement of IEngineeringDirective
 
-		//Своиства интерфеися IMathData, они содержат вычисления мат аппарата для объектов
-		//у всех директив, деталей чеков и т.д. можно вычислить их текущее сотояние
-		// дату след. выполнения и наработку на которой это выполнение произоидет
+		//РЎРІРѕРёСЃС‚РІР° РёРЅС‚РµСЂС„РµРёСЃСЏ IMathData, РѕРЅРё СЃРѕРґРµСЂР¶Р°С‚ РІС‹С‡РёСЃР»РµРЅРёСЏ РјР°С‚ Р°РїРїР°СЂР°С‚Р° РґР»СЏ РѕР±СЉРµРєС‚РѕРІ
+		//Сѓ РІСЃРµС… РґРёСЂРµРєС‚РёРІ, РґРµС‚Р°Р»РµР№ С‡РµРєРѕРІ Рё С‚.Рґ. РјРѕР¶РЅРѕ РІС‹С‡РёСЃР»РёС‚СЊ РёС… С‚РµРєСѓС‰РµРµ СЃРѕС‚РѕСЏРЅРёРµ
+		// РґР°С‚Сѓ СЃР»РµРґ. РІС‹РїРѕР»РЅРµРЅРёСЏ Рё РЅР°СЂР°Р±РѕС‚РєСѓ РЅР° РєРѕС‚РѕСЂРѕР№ СЌС‚Рѕ РІС‹РїРѕР»РЅРµРЅРёРµ РїСЂРѕРёР·РѕРёРґРµС‚
 
 		#region String Title { get; }
 
 		/// <summary>
-		/// Название директивы
+		/// РќР°Р·РІР°РЅРёРµ РґРёСЂРµРєС‚РёРІС‹
 		/// </summary>
 		public String Title
 		{
@@ -820,7 +820,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public StaticDictionary WorkType { get; }
 
 		/// <summary>
-		/// Тип/Вид Работ
+		/// РўРёРї/Р’РёРґ Р Р°Р±РѕС‚
 		/// </summary>
 		StaticDictionary IEngineeringDirective.WorkType
 		{
@@ -832,7 +832,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public String Phase { get; }
 
 		/// <summary>
-		/// Фаза
+		/// Р¤Р°Р·Р°
 		/// </summary>
 		public String Phase { get; set; }
 
@@ -869,7 +869,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region BaseEntityObject LifeLengthParent { get; }
 
 		/// <summary>
-		/// Возвращает объект, для которого можно расчитать текущую наработку. Обычно Aircraft, BaseComponent или Component
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РѕР±СЉРµРєС‚, РґР»СЏ РєРѕС‚РѕСЂРѕРіРѕ РјРѕР¶РЅРѕ СЂР°СЃС‡РёС‚Р°С‚СЊ С‚РµРєСѓС‰СѓСЋ РЅР°СЂР°Р±РѕС‚РєСѓ. РћР±С‹С‡РЅРѕ Aircraft, BaseComponent РёР»Рё Component
 		/// </summary>
 		public BaseEntityObject LifeLengthParent
 		{
@@ -881,7 +881,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region IThreshold IDirective.Threshold { get; set; }
 
 		/// <summary>
-		/// порог первого и посделующего выполнений
+		/// РїРѕСЂРѕРі РїРµСЂРІРѕРіРѕ Рё РїРѕСЃРґРµР»СѓСЋС‰РµРіРѕ РІС‹РїРѕР»РЅРµРЅРёР№
 		/// </summary>
 		IThreshold IDirective.Threshold
 		{
@@ -894,7 +894,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region IRecordCollection IDirective.PerformanceRecords { get; set; }
 
 		/// <summary>
-		/// Коллекция содержит все записи о выполнении директивы
+		/// РљРѕР»Р»РµРєС†РёСЏ СЃРѕРґРµСЂР¶РёС‚ РІСЃРµ Р·Р°РїРёСЃРё Рѕ РІС‹РїРѕР»РЅРµРЅРёРё РґРёСЂРµРєС‚РёРІС‹
 		/// </summary>
 		IRecordCollection IDirective.PerformanceRecords
 		{
@@ -906,7 +906,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region AbstractPerformanceRecord IDirective.LastPerformance { get; }
 
 		/// <summary>
-		/// Доступ к последней записи о выполнении задачи
+		/// Р”РѕСЃС‚СѓРї Рє РїРѕСЃР»РµРґРЅРµР№ Р·Р°РїРёСЃРё Рѕ РІС‹РїРѕР»РЅРµРЅРёРё Р·Р°РґР°С‡Рё
 		/// </summary>
 		AbstractPerformanceRecord IDirective.LastPerformance
 		{
@@ -920,7 +920,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		private List<NextPerformance> _nextPerformances;
 
 		/// <summary>
-		/// Список последующих выполнений задачи
+		/// РЎРїРёСЃРѕРє РїРѕСЃР»РµРґСѓСЋС‰РёС… РІС‹РїРѕР»РЅРµРЅРёР№ Р·Р°РґР°С‡Рё
 		/// </summary>
 		public List<NextPerformance> NextPerformances
 		{
@@ -933,7 +933,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public NextPerformance NextPerformance { get; }
 
 		/// <summary>
-		/// След. выполнение задачи
+		/// РЎР»РµРґ. РІС‹РїРѕР»РЅРµРЅРёРµ Р·Р°РґР°С‡Рё
 		/// </summary>
 		public NextPerformance NextPerformance
 		{
@@ -950,7 +950,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public ConditionState Condition { get; set; }
 
 		/// <summary>
-		/// Возвращает состояние ближайшего выполнения задачи (если оно расчитано) или ConditionState.NotEstimated
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃРѕСЃС‚РѕСЏРЅРёРµ Р±Р»РёР¶Р°Р№С€РµРіРѕ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РґР°С‡Рё (РµСЃР»Рё РѕРЅРѕ СЂР°СЃС‡РёС‚Р°РЅРѕ) РёР»Рё ConditionState.NotEstimated
 		/// </summary>
 		[Filter("Condition:", Order = 23)]
 		public ConditionState Condition
@@ -967,7 +967,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public Lifelength NextPerformanceSource { get; }
 
 		/// <summary>
-		/// Возвращает ресурс ближайшего выполнения задачи (если оно расчитано) или Lifelength.Null
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ СЂРµСЃСѓСЂСЃ Р±Р»РёР¶Р°Р№С€РµРіРѕ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РґР°С‡Рё (РµСЃР»Рё РѕРЅРѕ СЂР°СЃС‡РёС‚Р°РЅРѕ) РёР»Рё Lifelength.Null
 		/// </summary>
 		public Lifelength NextPerformanceSource
 		{
@@ -984,7 +984,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public Lifelength Remains { get; set; }
 
 		/// <summary>
-		/// Возвращает остаток ресурса до ближайшего выполнения задачи (если оно расчитано) или Lifelength.Null
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РѕСЃС‚Р°С‚РѕРє СЂРµСЃСѓСЂСЃР° РґРѕ Р±Р»РёР¶Р°Р№С€РµРіРѕ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РґР°С‡Рё (РµСЃР»Рё РѕРЅРѕ СЂР°СЃС‡РёС‚Р°РЅРѕ) РёР»Рё Lifelength.Null
 		/// </summary>
 		public Lifelength Remains
 		{
@@ -1000,7 +1000,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public Lifelength BeforeForecastResourceRemain { get; set; }
 
 		/// <summary>
-		/// Остаток ресурса до прогноза (вычисляется только в прогнозе)
+		/// РћСЃС‚Р°С‚РѕРє СЂРµСЃСѓСЂСЃР° РґРѕ РїСЂРѕРіРЅРѕР·Р° (РІС‹С‡РёСЃР»СЏРµС‚СЃСЏ С‚РѕР»СЊРєРѕ РІ РїСЂРѕРіРЅРѕР·Рµ)
 		/// </summary>
 		public Lifelength BeforeForecastResourceRemain
 		{
@@ -1015,7 +1015,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 
 		#region public Lifelength ForecastLifelength { get; set; }
 
-		//ресурс прогноза
+		//СЂРµСЃСѓСЂСЃ РїСЂРѕРіРЅРѕР·Р°
 		public Lifelength ForecastLifelength { get; set; }
 
 		#endregion
@@ -1023,7 +1023,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public Lifelength AfterForecastResourceRemain { get; set; }
 
 		/// <summary>
-		/// Остаток ресурса после прогноза (вычисляется только в прогнозе)
+		/// РћСЃС‚Р°С‚РѕРє СЂРµСЃСѓСЂСЃР° РїРѕСЃР»Рµ РїСЂРѕРіРЅРѕР·Р° (РІС‹С‡РёСЃР»СЏРµС‚СЃСЏ С‚РѕР»СЊРєРѕ РІ РїСЂРѕРіРЅРѕР·Рµ)
 		/// </summary>
 		public Lifelength AfterForecastResourceRemain { get; set; }
 
@@ -1032,7 +1032,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public DateTime? NextComplianceDate{ get; set; }
 
 		/// <summary>
-		/// Возвращает прблизительную дату ближайшего выполнения задачи (если оно расчитано) или null
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РїСЂР±Р»РёР·РёС‚РµР»СЊРЅСѓСЋ РґР°С‚Сѓ Р±Р»РёР¶Р°Р№С€РµРіРѕ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РґР°С‡Рё (РµСЃР»Рё РѕРЅРѕ СЂР°СЃС‡РёС‚Р°РЅРѕ) РёР»Рё null
 		/// </summary>
 		public DateTime? NextPerformanceDate
 		{
@@ -1057,7 +1057,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public string TimesToString { get; }
 
 		/// <summary>
-		/// Возвращает строковое представление количества "след. выполнений"
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃС‚СЂРѕРєРѕРІРѕРµ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ РєРѕР»РёС‡РµСЃС‚РІР° "СЃР»РµРґ. РІС‹РїРѕР»РЅРµРЅРёР№"
 		/// </summary>
 		public string TimesToString
 		{
@@ -1069,7 +1069,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public Int32 Times { get;}
 
 		/// <summary>
-		/// Сколько раз выполнится директива (применяется только в прогнозах)
+		/// РЎРєРѕР»СЊРєРѕ СЂР°Р· РІС‹РїРѕР»РЅРёС‚СЃСЏ РґРёСЂРµРєС‚РёРІР° (РїСЂРёРјРµРЅСЏРµС‚СЃСЏ С‚РѕР»СЊРєРѕ РІ РїСЂРѕРіРЅРѕР·Р°С…)
 		/// </summary>
 		public Int32 Times
 		{
@@ -1081,7 +1081,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public Boolean IsClosed { get; set; }
 
 		/// <summary>
-		/// Логический флаг, показывающий, закрыта ли директива
+		/// Р›РѕРіРёС‡РµСЃРєРёР№ С„Р»Р°Рі, РїРѕРєР°Р·С‹РІР°СЋС‰РёР№, Р·Р°РєСЂС‹С‚Р° Р»Рё РґРёСЂРµРєС‚РёРІР°
 		/// </summary>
 		[TableColumnAttribute("IsClosed")]
 		public Boolean IsClosed { get; set; }
@@ -1091,7 +1091,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public Boolean NextPerformanceIsBlocked { get; }
 
 		/// <summary>
-		/// Логический флаг, показывающий, заблокировано ли след. выполенение директивы рабочим пакетом
+		/// Р›РѕРіРёС‡РµСЃРєРёР№ С„Р»Р°Рі, РїРѕРєР°Р·С‹РІР°СЋС‰РёР№, Р·Р°Р±Р»РѕРєРёСЂРѕРІР°РЅРѕ Р»Рё СЃР»РµРґ. РІС‹РїРѕР»РµРЅРµРЅРёРµ РґРёСЂРµРєС‚РёРІС‹ СЂР°Р±РѕС‡РёРј РїР°РєРµС‚РѕРј
 		/// </summary>
 		public Boolean NextPerformanceIsBlocked
 		{
@@ -1107,7 +1107,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public Double ManHours { get; set; }
 
 		/// <summary>
-		/// Параметр чистых трудозатрат
+		/// РџР°СЂР°РјРµС‚СЂ С‡РёСЃС‚С‹С… С‚СЂСѓРґРѕР·Р°С‚СЂР°С‚
 		/// </summary>
 		[TableColumnAttribute("ManHours"), ListViewData("Man Hours"), MinMaxValue(0, 100000)]
 		public Double ManHours { get; set; }
@@ -1122,7 +1122,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public int Mans { get; set; }
 
 		/// <summary>
-		/// Количество сотрудников для выполнения задачи
+		/// РљРѕР»РёС‡РµСЃС‚РІРѕ СЃРѕС‚СЂСѓРґРЅРёРєРѕРІ РґР»СЏ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РґР°С‡Рё
 		/// </summary>
 		public int Mans { get; set; }
 
@@ -1131,7 +1131,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public Double Elapsed { get; set; }
 
 		/// <summary>
-		/// Параметр полных трудозатрат 
+		/// РџР°СЂР°РјРµС‚СЂ РїРѕР»РЅС‹С… С‚СЂСѓРґРѕР·Р°С‚СЂР°С‚ 
 		/// </summary>
 		[TableColumnAttribute("Elapsed"), ListViewData("Elapsed"), MinMaxValue(0, 100000)]
 		public Double Elapsed { get; set; }
@@ -1141,7 +1141,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public Double Cost { get; set; }
 
 		/// <summary>
-		/// Стоимость выполения
+		/// РЎС‚РѕРёРјРѕСЃС‚СЊ РІС‹РїРѕР»РµРЅРёСЏ
 		/// </summary>
 		[TableColumnAttribute("Cost"), ListViewData("Cost"), MinMaxValue(0, 1000000000)]
 		public Double Cost { get; set; }
@@ -1165,7 +1165,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public string KitParentString { get; }
 
 		/// <summary>
-		/// Возвращает строку для описания родителя КИТа
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃС‚СЂРѕРєСѓ РґР»СЏ РѕРїРёСЃР°РЅРёСЏ СЂРѕРґРёС‚РµР»СЏ РљРРўР°
 		/// </summary>
 		public string KitParentString
 		{
@@ -1316,8 +1316,8 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public int CountForPrint { get; set; }
 
 		/// <summary>
-		/// Количество копий карты данной задачи для печати при наличий связных задач по компонентам
-		/// <br/> Используется в Рабочих пакетах
+		/// РљРѕР»РёС‡РµСЃС‚РІРѕ РєРѕРїРёР№ РєР°СЂС‚С‹ РґР°РЅРЅРѕР№ Р·Р°РґР°С‡Рё РґР»СЏ РїРµС‡Р°С‚Рё РїСЂРё РЅР°Р»РёС‡РёР№ СЃРІСЏР·РЅС‹С… Р·Р°РґР°С‡ РїРѕ РєРѕРјРїРѕРЅРµРЅС‚Р°Рј
+		/// <br/> РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ Р Р°Р±РѕС‡РёС… РїР°РєРµС‚Р°С…
 		/// </summary>
 		public int CountForPrint { get; set; }
 
@@ -1328,7 +1328,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public bool PrintInWorkPackage { get; set; }
 
 		/// <summary>
-		/// Возвращает или задает значение, показвающее настройку печати элемента в Рабочем пакете
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·РІР°СЋС‰РµРµ РЅР°СЃС‚СЂРѕР№РєСѓ РїРµС‡Р°С‚Рё СЌР»РµРјРµРЅС‚Р° РІ Р Р°Р±РѕС‡РµРј РїР°РєРµС‚Рµ
 		/// </summary>
 		[TableColumnAttribute("PrintInWP")]
 		public bool PrintInWorkPackage { get; set; }
@@ -1338,7 +1338,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public bool WorkPackageACCPrintTitle { get; set; }
 
 		/// <summary>
-		/// Возвращает или задает значение, показвающее печать НАЗВАНИЯ задачи в AccountabilitySheet рабочего пакета
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·РІР°СЋС‰РµРµ РїРµС‡Р°С‚СЊ РќРђР—Р’РђРќРРЇ Р·Р°РґР°С‡Рё РІ AccountabilitySheet СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
 		/// </summary>
 		public bool WorkPackageACCPrintTitle { get; set; }
 
@@ -1347,7 +1347,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public bool WorkPackageACCPrintTaskCard { get; set; }
 
 		/// <summary>
-		/// Возвращает или задает значение, показвающее печать РАБОЧЕЙ КАРТЫ задачи в AccountabilitySheet рабочего пакета
+		/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР»Рё Р·Р°РґР°РµС‚ Р·РЅР°С‡РµРЅРёРµ, РїРѕРєР°Р·РІР°СЋС‰РµРµ РїРµС‡Р°С‚СЊ Р РђР‘РћР§Р•Р™ РљРђР РўР« Р·Р°РґР°С‡Рё РІ AccountabilitySheet СЂР°Р±РѕС‡РµРіРѕ РїР°РєРµС‚Р°
 		/// </summary>
 		public bool WorkPackageACCPrintTaskCard { get; set; }
 
@@ -1394,29 +1394,29 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 
 		public ComponentDirective ParentComponentDirective { get; set; }
 		/*
-		*  Методы 
+		*  РњРµС‚РѕРґС‹ 
 		*/
 
 
 		#region public MaintenanceDirective()
 
 		/// <summary>
-		/// Создает воздушное судно без дополнительной информации
+		/// РЎРѕР·РґР°РµС‚ РІРѕР·РґСѓС€РЅРѕРµ СЃСѓРґРЅРѕ Р±РµР· РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕР№ РёРЅС„РѕСЂРјР°С†РёРё
 		/// </summary>
 		public MaintenanceDirective()
 		{
 			SmartCoreObjectType = SmartCoreType.MaintenanceDirective;
-			//задаем все ID в -1
+			//Р·Р°РґР°РµРј РІСЃРµ ID РІ -1
 			ItemId = -1;
 
-			// Ad директива
+			// Ad РґРёСЂРµРєС‚РёРІР°
 			WorkType = MaintenanceDirectiveTaskType.Unknown;
 			Program = MaintenanceDirectiveProgramType.Unknown;
 			CriticalSystem = CriticalSystemList.Unknown;
 			NDTType = NDTType.UNK;
 			MpdRevisionDate = DateTime.Today;
 			ScheduleRevisionDate = DateTime.Today;
-			// Задаем все String
+			// Р—Р°РґР°РµРј РІСЃРµ String
 			TaskNumberCheck = MPDTaskNumber = Remarks = Description = EngineeringOrders = HiddenRemarks = "";
 
 			ForComponentId = -1;
@@ -1440,7 +1440,7 @@ namespace SmartCore.Entities.General.MaintenanceWorkscope
 		#region public override string ToString()
 
 		/// <summary>
-		/// Перегружаем для отладки
+		/// РџРµСЂРµРіСЂСѓР¶Р°РµРј РґР»СЏ РѕС‚Р»Р°РґРєРё
 		/// </summary>
 		/// <returns></returns>
 		public override string ToString()

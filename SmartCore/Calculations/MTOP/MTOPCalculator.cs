@@ -91,8 +91,7 @@ namespace SmartCore.Calculations.MTOP
 			var aircraft = _aircraftsCore.GetAircraftById(aircraftId);
 			if (aircraft == null)
 				return;
-
-			var current = _calculator.GetFlightLifelengthOnEndOfDay(aircraft, DateTime.Today);
+			
 
 			if (averageUtilization == null)
 				averageUtilization = _averageUtilizationCore.GetAverageUtillization(directive);
@@ -119,7 +118,7 @@ namespace SmartCore.Calculations.MTOP
 			np.IDD = idd;
 			np.IDDC = iddc;
 
-
+			var current = _calculator.GetFlightLifelengthOnEndOfDay(aircraft, DateTime.Today);
 
 			//Если деректива не выполнялась
 			if (directive.LastPerformance == null)
@@ -332,7 +331,7 @@ namespace SmartCore.Calculations.MTOP
 				//Рассчитываем Remain
 				np.RemainLimit = new Lifelength(np.NextLimit);
 				np.RemainLimit.Substract(current);
-
+				
 				if (threshold.RepeatInterval != null && directive.LastPerformance != null)
 				{
 					np.RemainLimit.Resemble(threshold.RepeatInterval);
@@ -343,7 +342,7 @@ namespace SmartCore.Calculations.MTOP
 					np.RemainLimit.Resemble(threshold.FirstPerformanceSinceNew);
 					np.NextLimit.Resemble(threshold.FirstPerformanceSinceNew);
 				}
-				else if (!threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+				if (!threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
 				{
 					np.RemainLimit.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
 					np.NextLimit.Resemble(threshold.FirstPerformanceSinceEffectiveDate);
@@ -446,8 +445,8 @@ namespace SmartCore.Calculations.MTOP
 				if (days <= current.Days)
 				{
 					if (isComponent)
-						np.PerformanceDate = _calculator.GetManufactureDate(aircraft).AddDays(Convert.ToDouble(days));
-					else np.PerformanceDate = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(Convert.ToDouble(days));
+						np.NextPerformanceDateNew = _calculator.GetManufactureDate(aircraft).AddDays(Convert.ToDouble(days));
+					else np.NextPerformanceDateNew = _calculator.GetManufactureDate(aircraft).AddDays(Convert.ToDouble(days));
 				}
 				else
 					np.NextPerformanceDateNew = AnalystHelper.GetApproximateDate(np.RemainLimit, averageUtilization, conditionType);
@@ -460,7 +459,7 @@ namespace SmartCore.Calculations.MTOP
 				{
 					if (isComponent)
 						np.PerformanceDate = _calculator.GetManufactureDate(aircraft).AddDays(Convert.ToDouble(days));
-					else np.PerformanceDate = _calculator.GetManufactureDate(directive.LifeLengthParent).AddDays(Convert.ToDouble(days));
+					else np.PerformanceDate = _calculator.GetManufactureDate(aircraft).AddDays(Convert.ToDouble(days));
 				}
 				else np.PerformanceDate = AnalystHelper.GetApproximateDate(np.Remains, averageUtilization, conditionType);
 			}

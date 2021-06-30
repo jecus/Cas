@@ -2,15 +2,20 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using CAS.UI.Helpers;
 using Excel;
 using SmartCore;
+using SmartCore.AircraftFlights;
 using SmartCore.Aircrafts;
+using SmartCore.Calculations;
 using SmartCore.Component;
 using SmartCore.DataAccesses.ItemsRelation;
+using SmartCore.Entities.Collections;
 using SmartCore.Entities.Dictionaries;
+using SmartCore.Entities.General;
 using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Maintenance;
 using SmartCore.Management;
@@ -28,33 +33,52 @@ namespace Exporter
 			var itemRelationCore = new ItemsRelationsDataAccess(env);
 			var componentCore = new ComponentCore(env, env.Loader, env.NewLoader, env.NewKeeper, aircraftCore, itemRelationCore);
 			var mpdCore = new MaintenanceCore(env, env.NewLoader, env.NewKeeper, itemRelationCore, aircraftCore);
+			var aircraftFlightCore = new AircraftFlightCore(env, env.Loader, env.NewLoader, null, null, componentCore, null, aircraftCore);
+			var calc = new Calculator(env, componentCore, aircraftFlightCore, aircraftCore);
+			
+			aircraftCore.LoadAllAircrafts();
+			var aircraft = aircraftCore.GetAircraftById(2316);
+			var mpds = mpdCore.GetMaintenanceDirectives(aircraft);
 
-			var frame = componentCore.GetAicraftBaseComponents(2316, BaseComponentType.Frame.ItemId).FirstOrDefault();
-
+			int q = 0;
 			var ds = ExcelToDataTableUsingExcelDataReader(@"D:\MPD.xlsx");
 			foreach (DataTable table in ds.Tables)
 			{
 				foreach (DataRow row in table.Rows)
 				{
-					var mpd = new MaintenanceDirective();
-					mpd.TaskNumberCheck = row[2].ToString();
-					mpd.SourceTaskReference = row[3].ToString();
-					mpd.Access = row[4].ToString();
-					mpd.Zone = row[6].ToString();
-					mpd.Description = row[7].ToString();
-					mpd.Reference = row[17].ToString();
-					//mpd.ManHours = double.Parse(row[19].ToString().Substring(0, 3).Replace('.',','));
-					//mpd.Skill = row[7].ToString(); ????
-					//mpd.WorkType = row[8].ToString(); ???
-					mpd.Applicability = row[22].ToString();
-					mpd.ParentBaseComponent = frame;
+					var mpd = mpds.FirstOrDefault(i => i.TaskNumberCheck == row[0].ToString());
+					if(mpd == null)
+						continue;
+					
+					var record = new DirectiveRecord
+					{
+						Parent = mpd,
+						ParentId = mpd.ItemId,                                                
+						OnLifelength = new Lifelength(),
+					};
+					
+					if(int.TryParse(row[2].ToString(), out var hour))
+						record.OnLifelength.Hours = hour;
+					if(int.TryParse(row[3].ToString(), out var cycle))
+						record.OnLifelength.Cycles = cycle;
+					if(DateTime.TryParse(row[4].ToString(), out var date))
+						record.RecordDate = date;
 
-					env.NewKeeper.Save(mpd);
+					var res = calc.GetFlightLifelengthOnStartOfDay(aircraft, date);
+					
+					if ((hour > 0 || cycle > 0) && date != DateTime.MinValue)
+					{
+						record.OnLifelength.Days = res.Days;
+						//Trace.WriteLine(row[0].ToString());
+						env.NewKeeper.Save(record);
+					}
+
+					
+					
+					
+					
 				}
 			}
-
-			Console.WriteLine();
-			
 		}
 
 

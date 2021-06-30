@@ -16,7 +16,7 @@ namespace SmartCore.Entities.General
 {
 
     /// <summary>
-    /// Класс описывает запись о выполнении задачи Directive или DetailDirective
+    /// РљР»Р°СЃСЃ РѕРїРёСЃС‹РІР°РµС‚ Р·Р°РїРёСЃСЊ Рѕ РІС‹РїРѕР»РЅРµРЅРёРё Р·Р°РґР°С‡Рё Directive РёР»Рё DetailDirective
     /// </summary>
     [Table("DirectivesRecords", "dbo", "ItemId")]
     [Dto(typeof(DirectiveRecordDTO))]
@@ -26,12 +26,12 @@ namespace SmartCore.Entities.General
 	{
         private static Type _thisType;
         /*
-        *  Свойства из базы данных
+        *  РЎРІРѕР№СЃС‚РІР° РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…
         */
 
         #region public Int32 RecordTypeId { get; set; }
         /// <summary>
-		/// Идентификатор типа производимой работы
+		/// РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ С‚РёРїР° РїСЂРѕРёР·РІРѕРґРёРјРѕР№ СЂР°Р±РѕС‚С‹
 		/// </summary>
         [TableColumnAttribute("RecordTypeId")]
         public Int32 RecordTypeId { get; set; }
@@ -43,7 +43,7 @@ namespace SmartCore.Entities.General
 
         private Int32 _parentId;
         /// <summary>
-        /// Идентификатор детали, к которой пренадлежит запись
+        /// РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РґРµС‚Р°Р»Рё, Рє РєРѕС‚РѕСЂРѕР№ РїСЂРµРЅР°РґР»РµР¶РёС‚ Р·Р°РїРёСЃСЊ
         /// </summary>
         [TableColumnAttribute("ParentId")]
         public override Int32 ParentId
@@ -70,7 +70,7 @@ namespace SmartCore.Entities.General
 
         private Int32 _performanceNum;
         /// <summary>
-        /// Номер записи о выполнении
+        /// РќРѕРјРµСЂ Р·Р°РїРёСЃРё Рѕ РІС‹РїРѕР»РЅРµРЅРёРё
         /// </summary>
         [TableColumn("NumGroup")]
         public override Int32 PerformanceNum
@@ -92,7 +92,7 @@ namespace SmartCore.Entities.General
         private SmartCoreType _parentType;
 
         /// <summary>
-        /// Тип родительской задачи
+        /// РўРёРї СЂРѕРґРёС‚РµР»СЊСЃРєРѕР№ Р·Р°РґР°С‡Рё
         /// </summary>
         [TableColumnAttribute("ParentTypeId")]
         public override SmartCoreType ParentType
@@ -112,7 +112,7 @@ namespace SmartCore.Entities.General
 
         private IDirective _parent;
         /// <summary>
-        /// Родительская задача
+        /// Р РѕРґРёС‚РµР»СЊСЃРєР°СЏ Р·Р°РґР°С‡Р°
         /// </summary>
         public override IDirective Parent
         {
@@ -130,7 +130,7 @@ namespace SmartCore.Entities.General
 
         private DateTime _recordDate;
         /// <summary>
-		/// Дата добавления записи
+		/// Р”Р°С‚Р° РґРѕР±Р°РІР»РµРЅРёСЏ Р·Р°РїРёСЃРё
 		/// </summary>
         [TableColumnAttribute("RecordDate")]
         public override DateTime RecordDate
@@ -151,7 +151,7 @@ namespace SmartCore.Entities.General
 
         private Lifelength _onLifelength;
         /// <summary>
-        /// наработка при которой была выполнена директива
+        /// РЅР°СЂР°Р±РѕС‚РєР° РїСЂРё РєРѕС‚РѕСЂРѕР№ Р±С‹Р»Р° РІС‹РїРѕР»РЅРµРЅР° РґРёСЂРµРєС‚РёРІР°
         /// </summary>
         [TableColumnAttribute("OnLifelength")]
          public override Lifelength OnLifelength
@@ -193,7 +193,7 @@ namespace SmartCore.Entities.General
 
         private Int32 _directivePackageId;
         /// <summary>
-        /// используется, только если запись создана workpackage - м
+        /// РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ, С‚РѕР»СЊРєРѕ РµСЃР»Рё Р·Р°РїРёСЃСЊ СЃРѕР·РґР°РЅР° workpackage - Рј
         /// </summary>
         [TableColumnAttribute("WorkPackageId")]
         public override Int32 DirectivePackageId
@@ -214,7 +214,7 @@ namespace SmartCore.Entities.General
 
         private IDirectivePackage _directivePackage;
         /// <summary>
-        /// используется, только если запись создана workpackage - м
+        /// РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ, С‚РѕР»СЊРєРѕ РµСЃР»Рё Р·Р°РїРёСЃСЊ СЃРѕР·РґР°РЅР° workpackage - Рј
         /// </summary>
         public override IDirectivePackage DirectivePackage
         {
@@ -234,7 +234,7 @@ namespace SmartCore.Entities.General
 
         private string _remarks;
         /// <summary>
-        /// Описание
+        /// РћРїРёСЃР°РЅРёРµ
         /// </summary>
         [TableColumnAttribute("Remarks")]
         public override string Remarks
@@ -253,9 +253,9 @@ namespace SmartCore.Entities.General
 
         #region public override Lifelength Unused { get; set; }
         /// <summary>
-        /// неизрасходованный ресурс 
-        /// ресурс, на котором надо выполнить директиву - ресурс, на котором она была выполнена
-        /// записываются только положительные значения, включая 0
+        /// РЅРµРёР·СЂР°СЃС…РѕРґРѕРІР°РЅРЅС‹Р№ СЂРµСЃСѓСЂСЃ 
+        /// СЂРµСЃСѓСЂСЃ, РЅР° РєРѕС‚РѕСЂРѕРј РЅР°РґРѕ РІС‹РїРѕР»РЅРёС‚СЊ РґРёСЂРµРєС‚РёРІСѓ - СЂРµСЃСѓСЂСЃ, РЅР° РєРѕС‚РѕСЂРѕРј РѕРЅР° Р±С‹Р»Р° РІС‹РїРѕР»РЅРµРЅР°
+        /// Р·Р°РїРёСЃС‹РІР°СЋС‚СЃСЏ С‚РѕР»СЊРєРѕ РїРѕР»РѕР¶РёС‚РµР»СЊРЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ, РІРєР»СЋС‡Р°СЏ 0
         /// </summary>
         //[Savable]
         public override Lifelength Unused { get; set; }
@@ -263,9 +263,9 @@ namespace SmartCore.Entities.General
 
         #region public override Lifelength Overused { get; set; }
         /// <summary>
-        /// перерасходованный ресурс 
-        /// ресурс, на котором она была выполнена - ресурс, на котором надо выполнить директиву 
-        /// записываются только положительные значения, включая 0
+        /// РїРµСЂРµСЂР°СЃС…РѕРґРѕРІР°РЅРЅС‹Р№ СЂРµСЃСѓСЂСЃ 
+        /// СЂРµСЃСѓСЂСЃ, РЅР° РєРѕС‚РѕСЂРѕРј РѕРЅР° Р±С‹Р»Р° РІС‹РїРѕР»РЅРµРЅР° - СЂРµСЃСѓСЂСЃ, РЅР° РєРѕС‚РѕСЂРѕРј РЅР°РґРѕ РІС‹РїРѕР»РЅРёС‚СЊ РґРёСЂРµРєС‚РёРІСѓ 
+        /// Р·Р°РїРёСЃС‹РІР°СЋС‚СЃСЏ С‚РѕР»СЊРєРѕ РїРѕР»РѕР¶РёС‚РµР»СЊРЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ, РІРєР»СЋС‡Р°СЏ 0
         /// </summary>
         //[Savable]
         public override Lifelength Overused { get; set; }
@@ -315,8 +315,8 @@ namespace SmartCore.Entities.General
 
         #region public Int32 MaintenanceDirectiveRecordId { get; set; }
         /// <summary>
-        /// ССылка на другую запись о выполнении Другой задачи, 
-        /// <br/> с которой может быть связано данное выполнение 
+        /// РЎРЎС‹Р»РєР° РЅР° РґСЂСѓРіСѓСЋ Р·Р°РїРёСЃСЊ Рѕ РІС‹РїРѕР»РЅРµРЅРёРё Р”СЂСѓРіРѕР№ Р·Р°РґР°С‡Рё, 
+        /// <br/> СЃ РєРѕС‚РѕСЂРѕР№ РјРѕР¶РµС‚ Р±С‹С‚СЊ СЃРІСЏР·Р°РЅРѕ РґР°РЅРЅРѕРµ РІС‹РїРѕР»РЅРµРЅРёРµ 
         /// </summary>
         [TableColumnAttribute("MaintenanceDirectiveRecordId")]
         public Int32 MaintenanceDirectiveRecordId { get; set; }
@@ -329,8 +329,8 @@ namespace SmartCore.Entities.General
 
         #region public Int32 MaintenanceCheckRecordId { get; set; }
         /// <summary>
-        /// ССылка на другую запись о выполнении Чека программы обслуживания, 
-        /// <br/> с которой может быть связано данное выполнение 
+        /// РЎРЎС‹Р»РєР° РЅР° РґСЂСѓРіСѓСЋ Р·Р°РїРёСЃСЊ Рѕ РІС‹РїРѕР»РЅРµРЅРёРё Р§РµРєР° РїСЂРѕРіСЂР°РјРјС‹ РѕР±СЃР»СѓР¶РёРІР°РЅРёСЏ, 
+        /// <br/> СЃ РєРѕС‚РѕСЂРѕР№ РјРѕР¶РµС‚ Р±С‹С‚СЊ СЃРІСЏР·Р°РЅРѕ РґР°РЅРЅРѕРµ РІС‹РїРѕР»РЅРµРЅРёРµ 
         /// </summary>
         [TableColumnAttribute("MaintenanceCheckRecordId")]
         public Int32 MaintenanceCheckRecordId { get; set; }
@@ -369,12 +369,12 @@ namespace SmartCore.Entities.General
 		#endregion
 
 		/*
-         * Вычисляемые свойства (дополнительные)
+         * Р’С‹С‡РёСЃР»СЏРµРјС‹Рµ СЃРІРѕР№СЃС‚РІР° (РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ)
          */
 
 		#region public DirectiveRecordType RecordType { get; set; }
 		/// <summary>
-		/// Тип записи о выполнении
+		/// РўРёРї Р·Р°РїРёСЃРё Рѕ РІС‹РїРѕР»РЅРµРЅРёРё
 		/// </summary>
 		public DirectiveRecordType RecordType
         {
@@ -399,12 +399,12 @@ namespace SmartCore.Entities.General
         #endregion
 
         /*
-		*  Методы 
+		*  РњРµС‚РѕРґС‹ 
 		*/
 		
 		#region public DirectiveRecord()
         /// <summary>
-        /// Создает запись о выполнении директивы без дополнительных параметров
+        /// РЎРѕР·РґР°РµС‚ Р·Р°РїРёСЃСЊ Рѕ РІС‹РїРѕР»РЅРµРЅРёРё РґРёСЂРµРєС‚РёРІС‹ Р±РµР· РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С… РїР°СЂР°РјРµС‚СЂРѕРІ
         /// </summary>
         public DirectiveRecord()
         {
@@ -418,7 +418,7 @@ namespace SmartCore.Entities.General
 
         #region public static DirectiveRecord CreateInstance(NextPerformance nextPerformance)
         /// <summary>
-        /// Создает новый зкземпляр записи о выполнении на основе след.выполнения
+        /// РЎРѕР·РґР°РµС‚ РЅРѕРІС‹Р№ Р·РєР·РµРјРїР»СЏСЂ Р·Р°РїРёСЃРё Рѕ РІС‹РїРѕР»РЅРµРЅРёРё РЅР° РѕСЃРЅРѕРІРµ СЃР»РµРґ.РІС‹РїРѕР»РЅРµРЅРёСЏ
         /// </summary>
         /// <param name="nextPerformance"></param>
         /// <returns></returns>
@@ -428,10 +428,10 @@ namespace SmartCore.Entities.General
 
             if (nextPerformance == null) return dr;
 
-            //дата выполнения
+            //РґР°С‚Р° РІС‹РїРѕР»РЅРµРЅРёСЏ
             if (nextPerformance.PerformanceDate.HasValue)
                 dr.RecordDate = nextPerformance.PerformanceDate.Value;
-            //номер выполнения
+            //РЅРѕРјРµСЂ РІС‹РїРѕР»РЅРµРЅРёСЏ
             dr.PerformanceNum = nextPerformance.PerformanceNum;
 
             return dr;
@@ -440,10 +440,10 @@ namespace SmartCore.Entities.General
 
         #region public DirectiveRecord(DirectiveRecord toClone) : this ()
         /// <summary>
-        /// Создает несохраненного клона (Itemid которого =-1) переданного элемента
+        /// РЎРѕР·РґР°РµС‚ РЅРµСЃРѕС…СЂР°РЅРµРЅРЅРѕРіРѕ РєР»РѕРЅР° (Itemid РєРѕС‚РѕСЂРѕРіРѕ =-1) РїРµСЂРµРґР°РЅРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р°
         /// </summary>
-        /// <param name="toCopy">Элемент для клонирования (иожет быть равен null)</param>
-        /// <returns>Склонированный элемент или элемент по умолчанию</returns>
+        /// <param name="toCopy">Р­Р»РµРјРµРЅС‚ РґР»СЏ РєР»РѕРЅРёСЂРѕРІР°РЅРёСЏ (РёРѕР¶РµС‚ Р±С‹С‚СЊ СЂР°РІРµРЅ null)</param>
+        /// <returns>РЎРєР»РѕРЅРёСЂРѕРІР°РЅРЅС‹Р№ СЌР»РµРјРµРЅС‚ РёР»Рё СЌР»РµРјРµРЅС‚ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ</returns>
         public DirectiveRecord(DirectiveRecord toCopy) : this ()
         {
             if (toCopy == null) return;
@@ -470,10 +470,10 @@ namespace SmartCore.Entities.General
 
         #region public DirectiveRecord(AbstractPerformanceRecord toClone) : this ()
         /// <summary>
-        /// Создает несохраненного клона (Itemid которого =-1) переданного элемента
+        /// РЎРѕР·РґР°РµС‚ РЅРµСЃРѕС…СЂР°РЅРµРЅРЅРѕРіРѕ РєР»РѕРЅР° (Itemid РєРѕС‚РѕСЂРѕРіРѕ =-1) РїРµСЂРµРґР°РЅРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р°
         /// </summary>
-        /// <param name="toCopy">Элемент для клонирования (иожет быть равен null)</param>
-        /// <returns>Склонированный элемент или элемент по умолчанию</returns>
+        /// <param name="toCopy">Р­Р»РµРјРµРЅС‚ РґР»СЏ РєР»РѕРЅРёСЂРѕРІР°РЅРёСЏ (РёРѕР¶РµС‚ Р±С‹С‚СЊ СЂР°РІРµРЅ null)</param>
+        /// <returns>РЎРєР»РѕРЅРёСЂРѕРІР°РЅРЅС‹Р№ СЌР»РµРјРµРЅС‚ РёР»Рё СЌР»РµРјРµРЅС‚ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ</returns>
         public DirectiveRecord(AbstractPerformanceRecord toCopy)
             : this()
         {
@@ -495,7 +495,7 @@ namespace SmartCore.Entities.General
 
         #region public override string ToString()
         /// <summary>
-        /// Перегружаем для отладки
+        /// РџРµСЂРµРіСЂСѓР¶Р°РµРј РґР»СЏ РѕС‚Р»Р°РґРєРё
         /// </summary>
         /// <returns></returns>
         public override string ToString()
@@ -514,8 +514,8 @@ namespace SmartCore.Entities.General
 
         #region public new DirectiveRecord GetCopyUnsaved()
         /// <summary>
-        /// Возвращает полную копию объекта (полностью копирую вложенные элементы и коллекции),
-        /// <br/>с ItemId равным -1
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РїРѕР»РЅСѓСЋ РєРѕРїРёСЋ РѕР±СЉРµРєС‚Р° (РїРѕР»РЅРѕСЃС‚СЊСЋ РєРѕРїРёСЂСѓСЋ РІР»РѕР¶РµРЅРЅС‹Рµ СЌР»РµРјРµРЅС‚С‹ Рё РєРѕР»Р»РµРєС†РёРё),
+        /// <br/>СЃ ItemId СЂР°РІРЅС‹Рј -1
         /// </summary>
         /// <returns></returns>
         public new DirectiveRecord GetCopyUnsaved(bool marked = true)

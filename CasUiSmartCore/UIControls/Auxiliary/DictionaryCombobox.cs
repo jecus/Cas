@@ -350,9 +350,9 @@ namespace CAS.UI.UIControls.Auxiliary
 
         private void DictionaryCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if (InvokeRequired) 
-                BeginInvoke(new Action(UpdateItems));
-            else UpdateItems();
+            // if (InvokeRequired) 
+            //     BeginInvoke(new Action(UpdateItems));
+            // else UpdateItems();
         }
         #endregion
 
