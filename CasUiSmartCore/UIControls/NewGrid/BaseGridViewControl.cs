@@ -1018,7 +1018,7 @@ namespace CAS.UI.UIControls.NewGrid
 		#endregion
 
 		#region Copy/Paste
-
+		
 		private void CopyToClipboard(bool marked = true)
 		{
 			// регистрация формата данных либо получаем его, если он уже зарегистрирован

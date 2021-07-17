@@ -55,6 +55,15 @@ namespace CAS.UI.UIControls.PersonnelControls
 			_filter = new CommonFilterCollection(typeof(Document));
 			InitToolStripMenuItems();
 			documentationListView.ContextMenuStrip = _contextMenuStrip;
+			documentationListView.ConfigurePaste = list =>
+			{
+				foreach (Document document in list)
+				{
+					document.Parent = _currentItem;
+					document.ParentId = _currentItem.ItemId;
+					document.ParentTypeId = _currentItem.SmartCoreObjectType.ItemId;
+				}
+			};
 		}
 
 		#endregion
@@ -577,7 +586,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 			}
 			finally
 			{
-				Clipboard.Clear();
+				 Clipboard.Clear();
 			}
 		}
 		#endregion
