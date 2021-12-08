@@ -8,7 +8,8 @@ namespace SmartCore.AuditMongo
 
 		public AuditContext(string connectionString) : base(connectionString)
 		{
-			AuditCollection = GetDatabase("Audit").GetCollection<AuditEntity>("Audit");
+            var dbName = MongoUrl.Create(connectionString).DatabaseName;
+			AuditCollection = GetDatabase(dbName).GetCollection<AuditEntity>("Audit");
 		}
 	}
 }
