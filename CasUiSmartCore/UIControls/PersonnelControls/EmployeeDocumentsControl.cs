@@ -35,6 +35,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 
 		private ContextMenuStrip _contextMenuStrip;
 		private ToolStripMenuItem _toolStripMenuItemCopy;
+		private ToolStripMenuItem _toolStripMenuItemCopyWithoutMark;
 		private ToolStripMenuItem _toolStripMenuItemPaste;
 		private ToolStripMenuItem _toolStripMenuItemShowTaskCard;
 		private ToolStripMenuItem _toolStripMenuItemSaveAsTaskCard;
@@ -211,6 +212,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 		{
 			_contextMenuStrip = new ContextMenuStrip();
 			_toolStripMenuItemCopy = new ToolStripMenuItem();
+            _toolStripMenuItemCopyWithoutMark = new ToolStripMenuItem();
 			_toolStripMenuItemPaste = new ToolStripMenuItem();
 			_toolStripMenuItemShowTaskCard = new ToolStripMenuItem();
 			_toolStripMenuItemSaveAsTaskCard = new ToolStripMenuItem();
@@ -221,6 +223,12 @@ namespace CAS.UI.UIControls.PersonnelControls
 			// 
 			_contextMenuStrip.Name = "_contextMenuStrip";
 			_contextMenuStrip.Size = new Size(179, 176);
+
+			// 
+			// toolStripMenuItemCopy
+			// 
+            _toolStripMenuItemCopyWithoutMark.Text = "Copy";
+            _toolStripMenuItemCopyWithoutMark.Click += CopyWithoutMarkItemsClick;
 
 			// 
 			// toolStripMenuItemCopy
@@ -251,6 +259,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 				_toolStripMenuItemSaveAsTaskCard,
 				_toolStripMenuItemShowTaskCard,
 				_toolStripSeparator1,
+                _toolStripMenuItemCopyWithoutMark,
 				_toolStripMenuItemCopy,
 				_toolStripMenuItemPaste
 			});
@@ -258,7 +267,14 @@ namespace CAS.UI.UIControls.PersonnelControls
             _contextMenuStrip.Opening += ContextMenuStripOpen;
 		}
 
+
 		#endregion
+
+		private void CopyWithoutMarkItemsClick(object sender, EventArgs e)
+        {
+            documentationListView.CopyToClipboard(false);
+        }
+
 
 		#region  private void PasteItemsClick(object sender, EventArgs e)
 
@@ -506,90 +522,6 @@ namespace CAS.UI.UIControls.PersonnelControls
 		}
 		#endregion
 
-		#region private void CopyToClipboard()
-		private void CopyToClipboard()
-		{
-			// регистрация формата данных либо получаем его, если он уже зарегистрирован
-			var format = DataFormats.GetFormat(typeof(Document[]).FullName);
-
-			if (documentationListView.SelectedItems == null || documentationListView.SelectedItems.Count == 0)
-				return;
-
-			var pds = new List<Document>();
-			foreach (var document in documentationListView.SelectedItems)
-			{
-				pds.Add(document.GetCopyUnsaved());
-			}
-
-			if (pds.Count <= 0)
-				return;
-
-			//todo:(EvgeniiBabak) Нужен другой способ проверки сереализуемости объекта
-			using (var mem = new System.IO.MemoryStream())
-			{
-				var bin = new BinaryFormatter();
-				try
-				{
-					bin.Serialize(mem, pds);
-				}
-				catch (Exception ex)
-				{
-					MessageBox.Show("Объект не может быть сериализован. \n" + ex);
-					return;
-				}
-			}
-			// копирование в буфер обмена
-			IDataObject dataObj = new DataObject();
-			dataObj.SetData(format.Name, false, pds.ToArray());
-			Clipboard.SetDataObject(dataObj, false);
-
-			pds.Clear();
-		}
-		#endregion
-
-		#region private void GetFromClipboard()
-
-		private void GetFromClipboard()
-		{
-			try
-			{
-				var format = typeof(Document[]).FullName;
-
-				if (string.IsNullOrEmpty(format))
-					return;
-				if (!Clipboard.ContainsData(format))
-					return;
-				var documents = (Document[])Clipboard.GetData(format);
-				if (documents == null)
-					return;
-
-				var objectsToPaste = new List<Document>();
-				foreach (var document in documents)
-				{
-					document.Parent = _currentItem;
-					document.ParentId = _currentItem.ItemId;
-					_initialDocumentArray.Add(document);
-					document.ContractNumber += " Copy";
-					objectsToPaste.Add(document);
-				}
-
-				if (objectsToPaste.Count > 0)
-				{
-					documentationListView.InsertItems(objectsToPaste.ToArray());
-				}
-
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Error while inserting new object(s). \n" + ex);
-				Program.Provider.Logger.Log(ex);
-			}
-			finally
-			{
-				 Clipboard.Clear();
-			}
-		}
-		#endregion
 
 		#endregion
 
