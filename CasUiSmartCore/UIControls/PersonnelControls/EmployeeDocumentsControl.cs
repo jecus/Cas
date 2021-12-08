@@ -255,7 +255,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 				_toolStripMenuItemPaste
 			});
 
-			_contextMenuStrip.Opening += ContextMenuStripOpen;
+            _contextMenuStrip.Opening += ContextMenuStripOpen;
 		}
 
 		#endregion
@@ -264,7 +264,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 
 		private void PasteItemsClick(object sender, EventArgs e)
 		{
-			GetFromClipboard();
+            documentationListView.GetFromClipboard();
 		}
 
 		#endregion
@@ -273,7 +273,7 @@ namespace CAS.UI.UIControls.PersonnelControls
 
 		private void CopyItemsClick(object sender, EventArgs e)
 		{
-			CopyToClipboard();
+            documentationListView.CopyToClipboard();
 
 		}
 

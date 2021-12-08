@@ -249,11 +249,13 @@ namespace CAS.UI.UIControls.NewGrid
 				_separator,
 				_toolStripMenuItemCopyWithoutMark,
 				_toolStripMenuItemCopy,
-				_toolStripMenuItemPaste
+				_toolStripMenuItemPaste 
 			);
-		}
 
-		public virtual void PasteItemsClick(object sender, EventArgs e)
+
+        }
+
+        public virtual void PasteItemsClick(object sender, EventArgs e)
 		{
 			GetFromClipboard();
 		}
@@ -733,7 +735,7 @@ namespace CAS.UI.UIControls.NewGrid
 				ColumnHeaderList.Clear();
 				SetHeaders();
 				radGridView1.Columns.AddRange(ColumnHeaderList.ToArray());
-			}
+            }
 			catch (Exception ex)
 			{
 				Program.Provider.Logger.Log("Error while building control", ex);
@@ -1019,7 +1021,7 @@ namespace CAS.UI.UIControls.NewGrid
 
 		#region Copy/Paste
 		
-		private void CopyToClipboard(bool marked = true)
+		public void CopyToClipboard(bool marked = true)
 		{
 			// регистрация формата данных либо получаем его, если он уже зарегистрирован
 			try
@@ -1073,7 +1075,7 @@ namespace CAS.UI.UIControls.NewGrid
 			}
 		}
 
-		private void GetFromClipboard()
+        public void GetFromClipboard()
 		{
 			try
 			{

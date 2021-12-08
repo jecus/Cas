@@ -148,6 +148,7 @@ namespace CAS.UI.UIControls.DocumentationControls
 				new Filter("ParentTypeId",_currentDocument.SmartCoreObjectType.ItemId)
 			}, true);
 
+            _currentDocument.Files.Clear();
 			_currentDocument.Files.AddRange(links);
 
 			_animatedThreadWorker.ReportProgress(80, "Loading Suppliers");
