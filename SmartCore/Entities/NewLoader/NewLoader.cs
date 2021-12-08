@@ -6,7 +6,6 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
 using CAS.UI.Helpers;
-using EntityCore.Attributte;
 using EntityCore.DTO.General;
 using EntityCore.DTO;
 using EntityCore.DTO.Dictionaries;

@@ -1,8 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using CAS.UI.Helpers;
@@ -13,10 +11,7 @@ using SmartCore.Aircrafts;
 using SmartCore.Calculations;
 using SmartCore.Component;
 using SmartCore.DataAccesses.ItemsRelation;
-using SmartCore.Entities.Collections;
-using SmartCore.Entities.Dictionaries;
 using SmartCore.Entities.General;
-using SmartCore.Entities.General.MaintenanceWorkscope;
 using SmartCore.Maintenance;
 using SmartCore.Management;
 

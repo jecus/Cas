@@ -77,7 +77,6 @@ namespace CAS.UI.UIControls.Auxiliary
         private PictureBox pictureBoxPasswordBorder;
         private PictureBox pictureBoxLoginBorder;
         private PictureBox pictureBoxServerNameBorder;
-        private PictureBox pictureBoxConnectionStatus;
 
         private Label labelServerName;
         private TextBox textBoxLogin;
@@ -162,7 +161,6 @@ namespace CAS.UI.UIControls.Auxiliary
         #region private void OnConnecting()
         private void OnConnecting()
         {
-            pictureBoxConnectionStatus.Image = Resources.runner;
             SetEnabled(false, _isSimple);
             buttonExit.Text = "Cancel";
             _connectionStatus = ConnectionState.Connecting;
@@ -290,11 +288,6 @@ namespace CAS.UI.UIControls.Auxiliary
             panelLoginPasswordContainer.Size = new Size(Width - 2 * PADDING, 160);
             panelLoginPasswordContainer.BackColor = Color.Transparent;
 
-            pictureBoxConnectionStatus = new PictureBox();
-            pictureBoxConnectionStatus.Dock = DockStyle.Bottom;
-            pictureBoxConnectionStatus.Height = 10;
-            pictureBoxConnectionStatus.BackColor = Color.Transparent;
-            panelLoginPasswordContainer.Controls.Add(pictureBoxConnectionStatus);
 
             //
             // panelConnectionSettingsContainer
@@ -757,7 +750,6 @@ namespace CAS.UI.UIControls.Auxiliary
         #region private void ConnectingFinished()
         private void ConnectingFinished()
         {
-            pictureBoxConnectionStatus.Image = null;
             SetEnabled(true, _isSimple);
             buttonExit.Text = "Exit";
         }
