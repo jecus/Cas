@@ -81,7 +81,6 @@ namespace CAS.UI.UIControls.Auxiliary
 
         private Label labelServerName;
         private TextBox textBoxLogin;
-        private Label labelAuthentication;
         private Label labelLogin;
         private Label labelPassword;
         private ComboBox comboBoxServerName;
@@ -89,7 +88,6 @@ namespace CAS.UI.UIControls.Auxiliary
         private Button buttonExit;
         private HelpRequestingLink linkHelp;
         private TextBox textBoxPassword;
-        private CheckBox checkBoxRememberLogin;
 
         private readonly Font labelFont = new Font("Verdana", 12F, FontStyle.Regular);
         private readonly Font textBoxFont = new Font("Verdana", 22F, FontStyle.Regular);
@@ -260,7 +258,6 @@ namespace CAS.UI.UIControls.Auxiliary
 
 
             labelServerName = new Label();
-            labelAuthentication = new Label();
             labelLogin = new Label();
             labelPassword = new Label();
             comboBoxServerName = new ComboBox();
@@ -269,7 +266,6 @@ namespace CAS.UI.UIControls.Auxiliary
             buttonConnect = new Button();
             buttonExit = new Button();
             linkHelp = new HelpRequestingLink();
-            checkBoxRememberLogin = new CheckBox();
             panelLoginPasswordContainer = new Panel();
             panelConnectionSettingsContainer = new Panel();
             labelTitle = new Label();
@@ -348,15 +344,6 @@ namespace CAS.UI.UIControls.Auxiliary
             labelServerName.ForeColor = Color.White;
             labelServerName.TextAlign = ContentAlignment.MiddleLeft;
             labelServerName.Text = "Server name:";
-            //
-            // labelAuthentication
-            //
-            labelAuthentication.AutoSize = true;
-            labelAuthentication.Location = new Point(0, 55);
-            labelAuthentication.Font = labelFont;
-            labelAuthentication.ForeColor = Color.White;
-            labelAuthentication.TextAlign = ContentAlignment.MiddleLeft;
-            labelAuthentication.Text = "Authentication:";
             //
             // textBoxLogin
             //
@@ -479,7 +466,6 @@ namespace CAS.UI.UIControls.Auxiliary
             panelLoginPasswordContainer.Controls.Add(linkLabelShowConnectionSettings);
 
             panelConnectionSettingsContainer.Controls.Add(labelServerName);
-            panelConnectionSettingsContainer.Controls.Add(labelAuthentication);
             panelConnectionSettingsContainer.Controls.Add(comboBoxServerName);
             panelConnectionSettingsContainer.Controls.Add(pictureBoxServerNameBorder);
 
@@ -584,7 +570,6 @@ namespace CAS.UI.UIControls.Auxiliary
             comboBoxServerName.Enabled = value;
             buttonConnect.Enabled = value && _casServerFound;
             //linkHelp.Enabled = value;
-            checkBoxRememberLogin.Enabled = value && authentication;
             textBoxLogin.Enabled = value && authentication;
             textBoxPassword.Enabled = value && authentication;
         }
